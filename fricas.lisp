@@ -22,7 +22,7 @@
     (let ((lsp-file (CONCAT (string-right-trim |$lisp_bin_filetype| f) "lsp")))
       (cond
         ((and (boundp 'load-type) (equal load-type "load-ondemand"))
-         (load lsp-file))
+         (load (if (probe-file f) f lsp-file)))
         ((and (boundp 'load-type) (equal load-type "compile-ondemand"))
          (load (if (probe-file f) f (compile-file lsp-file))))
         (t (load f))
