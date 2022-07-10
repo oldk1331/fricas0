@@ -3,8 +3,8 @@
 (in-package :boot)
 (defvar $spadroot ".")
 (defvar |$defaultMsgDatabaseName| "msgs/s2-us.msgs")
-(defvar |$build_version| "Common Lisp")
-(defvar |$build_date| "Fri Nov 3 16:25:22 CET 2017")
+(defvar |$build_version| "Common Lisp - 1.3.8")
+(defvar |$build_date| "Tue Jun 21 2022")
 
 
 #+:ABCL
@@ -28,7 +28,7 @@
         (t (load f))
         ))))
 
-;;; init      
+;;; init
 (|interpsysInitialization|)
 
 (setq |$has_category_hash| (make-hash-table :test #'equal))
