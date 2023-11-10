@@ -3,8 +3,8 @@
 (in-package :boot)
 (defvar $spadroot ".")
 (defvar |$defaultMsgDatabaseName| "msgs/s2-us.msgs")
-(defvar |$build_version| "Common Lisp - 1.3.8")
-(defvar |$build_date| "Tue Jun 21 2022")
+(defvar |$build_version| "Common Lisp - 1.3.9")
+(defvar |$build_date| "Sat Jul 8 2023")
 
 
 #+:ABCL
@@ -29,22 +29,22 @@
         ))))
 
 ;;; init
-(|interpsysInitialization|)
+(|interpsysInitialization| t)
 
 (setq |$has_category_hash| (make-hash-table :test #'equal))
 (setq |$operation_hash| (make-hash-table))
 
 
- (|compressOpen|)
- (|interpOpen|)
- (|categoryOpen|)
- (|operationOpen|)
- (|browseOpen|)
+ (|compressOpen| t)
+ (|interpOpen| t)
+ (|categoryOpen| t)
+ (|operationOpen| t)
+ (|browseOpen| t)
 
 
 (let ((*debugger-hook*
             (lambda (condition previous-handler)
-                (spad-system-error-handler condition))
+                (|spad_system_error_handler| condition))
        ))
-     (handler-bind ((error #'spad-system-error-handler))
+     (handler-bind ((error #'|spad_system_error_handler|))
        (|spad|)))
