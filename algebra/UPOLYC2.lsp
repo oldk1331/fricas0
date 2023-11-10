@@ -1,80 +1,80 @@
 
-(SDEFUN |UPOLYC2;map;MPRPS;1| ((|f| (|Mapping| S R)) (|p| (PR)) ($ (PS)))
+(SDEFUN |UPOLYC2;map;MPRPS;1| ((|f| (|Mapping| S R)) (|p| (PR)) (% (PS)))
         (SPROG ((|ans| (|RepPS|)) (|nc| (S)))
                (SEQ (LETT |ans| NIL)
                     (SEQ G190
                          (COND
                           ((NULL
                             (NULL
-                             (SPADCALL |p| (|spadConstant| $ 14)
-                                       (QREFELT $ 16))))
+                             (SPADCALL |p| (|spadConstant| % 14)
+                                       (QREFELT % 16))))
                            (GO G191)))
                          (SEQ
                           (LETT |nc|
-                                (SPADCALL (SPADCALL |p| (QREFELT $ 17)) |f|))
+                                (SPADCALL (SPADCALL |p| (QREFELT % 17)) |f|))
                           (COND
-                           ((SPADCALL |nc| (|spadConstant| $ 18)
-                                      (QREFELT $ 19))
+                           ((SPADCALL |nc| (|spadConstant| % 18)
+                                      (QREFELT % 19))
                             (LETT |ans|
                                   (CONS
-                                   (CONS (SPADCALL |p| (QREFELT $ 21)) |nc|)
+                                   (CONS (SPADCALL |p| (QREFELT % 21)) |nc|)
                                    |ans|))))
-                          (EXIT (LETT |p| (SPADCALL |p| (QREFELT $ 22)))))
+                          (EXIT (LETT |p| (SPADCALL |p| (QREFELT % 22)))))
                          NIL (GO G190) G191 (EXIT NIL))
                     (EXIT (NREVERSE |ans|))))) 
 
-(SDEFUN |UPOLYC2;map;MPRPS;2| ((|f| (|Mapping| S R)) (|p| (PR)) ($ (PS)))
+(SDEFUN |UPOLYC2;map;MPRPS;2| ((|f| (|Mapping| S R)) (|p| (PR)) (% (PS)))
         (SPROG ((|ans| (|RepPS|)) (|nc| (S)))
                (SEQ (LETT |ans| NIL)
                     (SEQ G190
                          (COND
                           ((NULL
                             (NULL
-                             (SPADCALL |p| (|spadConstant| $ 14)
-                                       (QREFELT $ 16))))
+                             (SPADCALL |p| (|spadConstant| % 14)
+                                       (QREFELT % 16))))
                            (GO G191)))
                          (SEQ
                           (LETT |nc|
-                                (SPADCALL (SPADCALL |p| (QREFELT $ 17)) |f|))
+                                (SPADCALL (SPADCALL |p| (QREFELT % 17)) |f|))
                           (COND
-                           ((SPADCALL |nc| (|spadConstant| $ 18)
-                                      (QREFELT $ 19))
+                           ((SPADCALL |nc| (|spadConstant| % 18)
+                                      (QREFELT % 19))
                             (LETT |ans|
                                   (CONS
-                                   (CONS (SPADCALL |p| (QREFELT $ 21)) |nc|)
+                                   (CONS (SPADCALL |p| (QREFELT % 21)) |nc|)
                                    |ans|))))
-                          (EXIT (LETT |p| (SPADCALL |p| (QREFELT $ 22)))))
+                          (EXIT (LETT |p| (SPADCALL |p| (QREFELT % 22)))))
                          NIL (GO G190) G191 (EXIT NIL))
                     (EXIT (NREVERSE |ans|))))) 
 
-(SDEFUN |UPOLYC2;map;MPRPS;3| ((|f| (|Mapping| S R)) (|p| (PR)) ($ (PS)))
+(SDEFUN |UPOLYC2;map;MPRPS;3| ((|f| (|Mapping| S R)) (|p| (PR)) (% (PS)))
         (SPROG ((|ans| (PS)))
-               (SEQ (LETT |ans| (|spadConstant| $ 25))
+               (SEQ (LETT |ans| (|spadConstant| % 25))
                     (SEQ G190
                          (COND
                           ((NULL
                             (NULL
-                             (SPADCALL |p| (|spadConstant| $ 14)
-                                       (QREFELT $ 16))))
+                             (SPADCALL |p| (|spadConstant| % 14)
+                                       (QREFELT % 16))))
                            (GO G191)))
                          (SEQ
                           (LETT |ans|
                                 (SPADCALL |ans|
                                           (SPADCALL
                                            (SPADCALL
-                                            (SPADCALL |p| (QREFELT $ 17)) |f|)
-                                           (SPADCALL |p| (QREFELT $ 21))
-                                           (QREFELT $ 26))
-                                          (QREFELT $ 27)))
-                          (EXIT (LETT |p| (SPADCALL |p| (QREFELT $ 22)))))
+                                            (SPADCALL |p| (QREFELT % 17)) |f|)
+                                           (SPADCALL |p| (QREFELT % 21))
+                                           (QREFELT % 26))
+                                          (QREFELT % 27)))
+                          (EXIT (LETT |p| (SPADCALL |p| (QREFELT % 22)))))
                          NIL (GO G190) G191 (EXIT NIL))
                     (EXIT |ans|)))) 
 
 (DECLAIM (NOTINLINE |UnivariatePolynomialCategoryFunctions2;|)) 
 
-(DEFUN |UnivariatePolynomialCategoryFunctions2| (&REST #1=#:G729)
+(DEFUN |UnivariatePolynomialCategoryFunctions2| (&REST #1=#:G472)
   (SPROG NIL
-         (PROG (#2=#:G730)
+         (PROG (#2=#:G473)
            (RETURN
             (COND
              ((LETT #2#
@@ -97,7 +97,7 @@
 
 (DEFUN |UnivariatePolynomialCategoryFunctions2;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -106,35 +106,35 @@
     (LETT DV$4 (|devaluate| |#4|))
     (LETT |dv$|
           (LIST '|UnivariatePolynomialCategoryFunctions2| DV$1 DV$2 DV$3 DV$4))
-    (LETT $ (GETREFV 28))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (LETT % (GETREFV 28))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|UnivariatePolynomialCategoryFunctions2|
-                (LIST DV$1 DV$2 DV$3 DV$4) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (SETF |pv$| (QREFELT $ 3))
-    (QSETREFV $ 10 (CAR (|devaluate| |#4|)))
-    (QSETREFV $ 11 (EQUAL (QREFELT $ 10) '|UnivariatePolynomial|))
+                (LIST DV$1 DV$2 DV$3 DV$4) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (SETF |pv$| (QREFELT % 3))
+    (QSETREFV % 10 (CAR (|devaluate| |#4|)))
+    (QSETREFV % 11 (EQUAL (QREFELT % 10) '|UnivariatePolynomial|))
     (COND
-     ((QREFELT $ 11)
+     ((QREFELT % 11)
       (PROGN
-       (QSETREFV $ 12 (|List| (|Record| (|:| |k| (|Integer|)) (|:| |c| |#3|))))
-       (QSETREFV $ 24 (CONS (|dispatchFunction| |UPOLYC2;map;MPRPS;1|) $))))
+       (QSETREFV % 12 (|List| (|Record| (|:| |k| (|Integer|)) (|:| |c| |#3|))))
+       (QSETREFV % 24 (CONS (|dispatchFunction| |UPOLYC2;map;MPRPS;1|) %))))
      ((|domainEqual| |#4| (|SparseUnivariatePolynomial| |#3|))
       (PROGN
-       (SETELT $ 12 (|List| (|Record| (|:| |k| (|Integer|)) (|:| |c| |#3|))))
-       (QSETREFV $ 24 (CONS (|dispatchFunction| |UPOLYC2;map;MPRPS;2|) $))))
-     ('T (QSETREFV $ 24 (CONS (|dispatchFunction| |UPOLYC2;map;MPRPS;3|) $))))
-    $))) 
+       (SETELT % 12 (|List| (|Record| (|:| |k| (|Integer|)) (|:| |c| |#3|))))
+       (QSETREFV % 24 (CONS (|dispatchFunction| |UPOLYC2;map;MPRPS;2|) %))))
+     ('T (QSETREFV % 24 (CONS (|dispatchFunction| |UPOLYC2;map;MPRPS;3|) %))))
+    %))) 
 
 (MAKEPROP '|UnivariatePolynomialCategoryFunctions2| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (|local| |#4|) '|op_of_PS| '#:G689 '|RepPS|
+              (|local| |#3|) (|local| |#4|) '|op_of_PS| '#:G448 '|RepPS|
               (0 . |Zero|) (4 . |Zero|) (|Boolean|) (8 . =)
               (14 . |leadingCoefficient|) (19 . |Zero|) (23 . ~=)
               (|NonNegativeInteger|) (29 . |degree|) (34 . |reductum|)

@@ -576,14 +576,14 @@
 ;   htInitPage('"Greek Names",nil)
 ;   null matches =>
 ;     htInitPage(['"Greek names matching search string {\em ",ss,'"}"],nil)
-;     htSay("\vspace{2}\centerline{Sorry, but no greek letters match your search string}\centerline{{\em ",ss,"}}\centerline{Click on the up-arrow to try again}")
+;     htSay('"\vspace{2}\centerline{Sorry, but no greek letters match your search string}\centerline{{\em ",ss,'"}}\centerline{Click on the up-arrow to try again}")
 ;     htShowPage()
 ;   htInitPage(['"Greek letters matching search string {\em ",ss,'"}"],nil)
 ;   if nonmatches
 ;     then htSayList([
 ;        '"The greek letters that {\em match} your search string {\em ",
 ;        ss, '"}:"])
-;     else htSay('"Your search string {\em ",ss,"} matches all of the greek letters:")
+;     else htSay('"Your search string {\em ",ss,'"} matches all of the greek letters:")
 ;   htSay('"{\em \table{")
 ;   for x in matches repeat htSayList(['"{", x, '"}"])
 ;   htSay('"}}\vspace{1}")
@@ -635,8 +635,8 @@
                   (LIST "Greek names matching search string {\\em " |ss| "}")
                   NIL)
                  (|htSay|
-                  '|\\vspace{2}\\centerline{Sorry, but no greek letters match your search string}\\centerline{{\\em |
-                  |ss| '|}}\\centerline{Click on the up-arrow to try again}|)
+                  "\\vspace{2}\\centerline{Sorry, but no greek letters match your search string}\\centerline{{\\em "
+                  |ss| "}}\\centerline{Click on the up-arrow to try again}")
                  (|htShowPage|)))
                (#1#
                 (PROGN
@@ -651,7 +651,7 @@
                      |ss| "}:")))
                   (#1#
                    (|htSay| "Your search string {\\em " |ss|
-                    '|} matches all of the greek letters:|)))
+                    "} matches all of the greek letters:")))
                  (|htSay| "{\\em \\table{")
                  ((LAMBDA (|bfVar#13| |x|)
                     (LOOP
@@ -697,14 +697,14 @@
 ;   htInitPage('"Text Matches",nil)
 ;   null matches =>
 ;     htInitPage(['"Lines matching search string {\em ",s,'"}"],nil)
-;     htSay("\vspace{2}\centerline{Sorry, but no lines match your search string}\centerline{{\em ",s,"}}\centerline{Click on the up-arrow to try again}")
+;     htSay('"\vspace{2}\centerline{Sorry, but no lines match your search string}\centerline{{\em ",s,'"}}\centerline{Click on the up-arrow to try again}")
 ;     htShowPage()
 ;   htInitPage(['"Lines matching search string {\em ",s,'"}"],nil)
 ;   if nonmatches
 ;     then htSayList([
 ;            '"The lines that {\em match} your search string {\em ",
 ;            s, '"}:"])
-;     else htSay('"Your search string {\em ",s,"} matches both lines:")
+;     else htSay('"Your search string {\em ",s,'"} matches both lines:")
 ;   htSay('"{\em \table{")
 ;   for x in matches repeat htSayList(['"{", x, '"}"])
 ;   htSay('"}}\vspace{1}")
@@ -755,8 +755,8 @@
                  (|htInitPage|
                   (LIST "Lines matching search string {\\em " |s| "}") NIL)
                  (|htSay|
-                  '|\\vspace{2}\\centerline{Sorry, but no lines match your search string}\\centerline{{\\em |
-                  |s| '|}}\\centerline{Click on the up-arrow to try again}|)
+                  "\\vspace{2}\\centerline{Sorry, but no lines match your search string}\\centerline{{\\em "
+                  |s| "}}\\centerline{Click on the up-arrow to try again}")
                  (|htShowPage|)))
                (#1#
                 (PROGN
@@ -770,7 +770,7 @@
                      |s| "}:")))
                   (#1#
                    (|htSay| "Your search string {\\em " |s|
-                    '|} matches both lines:|)))
+                    "} matches both lines:")))
                  (|htSay| "{\\em \\table{")
                  ((LAMBDA (|bfVar#16| |x|)
                     (LOOP

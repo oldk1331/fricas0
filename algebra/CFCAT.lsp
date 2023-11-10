@@ -10,13 +10,13 @@
                  (|CombinatorialFunctionCategory;|))))) 
 
 (DEFUN |CombinatorialFunctionCategory;| ()
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|Join|
                     (|mkCategory|
-                     '(((|binomial| ($ $ $)) T) ((|factorial| ($ $)) T)
-                       ((|permutation| ($ $ $)) T))
+                     '(((|binomial| (% % %)) T) ((|factorial| (% %)) T)
+                       ((|permutation| (% % %)) T))
                      NIL NIL NIL)))
            (SETELT #1# 0 '(|CombinatorialFunctionCategory|))))) 
 

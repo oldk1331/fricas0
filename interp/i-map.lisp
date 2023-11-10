@@ -1084,7 +1084,7 @@
 
 ; displayRule(op,rule) ==
 ;   null rule => nil
-;   mathprint ["CONCAT", "Definition:   ", outputMapTran(op, rule)]
+;   mathprint ['"CONCAT", '"Definition:   ", outputMapTran(op, rule)]
 ;   nil
 
 (DEFUN |displayRule| (|op| |rule|)
@@ -1094,7 +1094,7 @@
            ('T
             (PROGN
              (|mathprint|
-              (LIST 'CONCAT '|Definition:   | (|outputMapTran| |op| |rule|)))
+              (LIST "CONCAT" "Definition:   " (|outputMapTran| |op| |rule|)))
              NIL))))))
 
 ; outputFormat(x,m) ==

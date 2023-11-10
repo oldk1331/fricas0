@@ -13,7 +13,7 @@
 ;       ["+->", '" +-> "], ["SEGMENT", '".."], ["in", '" in "], _
 ;       ["~=", '"~="], ["JOIN", '" JOIN "], ["EQUATNUM", '"  "], _
 ;       ["=", '" = "], ["==", '" == "], [">=", '" >= "], [">", '" > "], _
-;       ["<=", '" <= "], ["<", '" < "], ["|", '" | "], ["+", " + "], _
+;       ["<=", '" <= "], ["<", '" < "], ["|", '" | "], ["+", '" + "], _
 ;       ["-", '" - "], ["WHERE", '" WHERE "], ["MAX", '" MAX "], _
 ;       ["MIN", '" MIN "]] repeat
 ;         MAKEPROP(first(sv), 'INFIXOP, first(rest(sv)))
@@ -160,9 +160,8 @@
              (LIST '|in| " in ") (LIST '~= "~=") (LIST 'JOIN " JOIN ")
              (LIST 'EQUATNUM "  ") (LIST '= " = ") (LIST '== " == ")
              (LIST '>= " >= ") (LIST '> " > ") (LIST '<= " <= ")
-             (LIST '< " < ") (LIST '|\|| " | ") (LIST '+ '| + |)
-             (LIST '- " - ") (LIST 'WHERE " WHERE ") (LIST 'MAX " MAX ")
-             (LIST 'MIN " MIN "))
+             (LIST '< " < ") (LIST '|\|| " | ") (LIST '+ " + ") (LIST '- " - ")
+             (LIST 'WHERE " WHERE ") (LIST 'MAX " MAX ") (LIST 'MIN " MIN "))
        NIL)
       ((LAMBDA (|bfVar#2| |sv|)
          (LOOP
@@ -430,6 +429,10 @@
     (|ttee| . 11) (|btee| . 12) (|rtee| . 13) (|ltee| . 14) (|ctee| . 15)
     (|bslash| . 16)))
 
+; DEFVAR($print_equatnum, true)
+
+(DEFVAR |$print_equatnum| T)
+
 ; $collectOutput := nil
 
 (EVAL-WHEN (EVAL LOAD) (SETQ |$collectOutput| NIL))
@@ -644,7 +647,7 @@
 ;   ioHook("startAlgebraOutput")
 ;   x:= outputTran2 x
 ;   maprin
-;     $IOindex => ['EQUATNUM,$IOindex,x]
+;     $IOindex and $print_equatnum => ['EQUATNUM,$IOindex,x]
 ;     x
 ;   ioHook("endOfAlgebraOutput")
 
@@ -654,7 +657,10 @@
      (PROGN
       (|ioHook| '|startAlgebraOutput|)
       (SETQ |x| (|outputTran2| |x|))
-      (|maprin| (COND (|$IOindex| (LIST 'EQUATNUM |$IOindex| |x|)) ('T |x|)))
+      (|maprin|
+       (COND
+        ((AND |$IOindex| |$print_equatnum|) (LIST 'EQUATNUM |$IOindex| |x|))
+        ('T |x|)))
       (|ioHook| '|endOfAlgebraOutput|)))))
 
 ; mathprint x ==
@@ -2070,9 +2076,6 @@
 
 ; getBindingPowerOf(key,x) ==
 ;   --binding powers can be found in file NEWAUX LISP
-;   x is ['REDUCE,:.] => (key='left => 130; key='right => 0)
-;   x is ["REPEAT",:.] => (key="left" => 130; key="right" => 0)
-;   x is ["COND",:.] => (key="left" => 130; key="right" => 0)
 ;   x is [op,:argl] =>
 ;     if op is [a,:.] then op:= a
 ;     op = 'SLASH => getBindingPowerOf(key,["/",:argl]) - 1
@@ -2084,7 +2087,6 @@
 ;     n>1 =>
 ;       key="left" and (m:= getOpBindingPower(op,"Led","left")) => m
 ;       key="right" and (m:= getOpBindingPower(op,"Led","right")) => m
-;       op="ELT" => 1002
 ;       1000
 ;     1000
 ;   1002
@@ -2093,12 +2095,6 @@
   (PROG (|op| |argl| |a| |n| |m|)
     (RETURN
      (COND
-      ((AND (CONSP |x|) (EQ (CAR |x|) 'REDUCE))
-       (COND ((EQ |key| '|left|) 130) ((EQ |key| '|right|) 0)))
-      ((AND (CONSP |x|) (EQ (CAR |x|) 'REPEAT))
-       (COND ((EQ |key| '|left|) 130) ((EQ |key| '|right|) 0)))
-      ((AND (CONSP |x|) (EQ (CAR |x|) 'COND))
-       (COND ((EQ |key| '|left|) 130) ((EQ |key| '|right|) 0)))
       ((AND (CONSP |x|)
             (PROGN (SETQ |op| (CAR |x|)) (SETQ |argl| (CDR |x|)) #1='T))
        (PROGN
@@ -2125,7 +2121,7 @@
            ((AND (EQ |key| '|right|)
                  (SETQ |m| (|getOpBindingPower| |op| '|Led| '|right|)))
             |m|)
-           ((EQ |op| 'ELT) 1002) (#1# 1000)))
+           (#1# 1000)))
          (#1# 1000))))
       (#1# 1002)))))
 
@@ -2310,7 +2306,7 @@
 ;         l + negative
 ;     k := INTEGER_-LENGTH(u)
 ;     k > MOST_-POSITIVE_-DOUBLE_-FLOAT =>
-;         SAY("Number too big")
+;         SAY('"Number too big")
 ;         THROW('outputFailure,'outputFailure)
 ;
 ;     if (k < 61) then
@@ -2363,7 +2359,7 @@
                 (COND
                  ((< MOST-POSITIVE-DOUBLE-FLOAT |k|)
                   (PROGN
-                   (SAY '|Number too big|)
+                   (SAY "Number too big")
                    (THROW '|outputFailure| '|outputFailure|)))
                  (#1#
                   (PROGN
@@ -3770,8 +3766,8 @@
 ;     if $htmlFormat    then htmlFormat x
 ;     if $formattedFormat then formattedFormat x
 ;   (FUNCTIONP(opOf domain)) and (not(SYMBOLP(opOf domain))) and
-;     (printfun := compiledLookup("<<",'(TextWriter TextWriter $), evalDomain domain))
-;        and (textwrit := compiledLookup("print", '($), TextWriter())) =>
+;     (printfun := compiledLookup("<<",'(TextWriter TextWriter %), evalDomain domain))
+;        and (textwrit := compiledLookup("print", '(%), TextWriter())) =>
 ;      sayMSGNT [:bright '"Aldor",'"output:   "]
 ;      SPADCALL(SPADCALL textwrit, expr, printfun)
 ;      sayMSGNT '%l
@@ -3817,9 +3813,9 @@
          (COND (|$formattedFormat| (|formattedFormat| |x|)))))
        ((AND (FUNCTIONP (|opOf| |domain|)) (NULL (SYMBOLP (|opOf| |domain|)))
              (SETQ |printfun|
-                     (|compiledLookup| '<< '(|TextWriter| |TextWriter| $)
+                     (|compiledLookup| '<< '(|TextWriter| |TextWriter| %)
                       (|evalDomain| |domain|)))
-             (SETQ |textwrit| (|compiledLookup| '|print| '($) (|TextWriter|))))
+             (SETQ |textwrit| (|compiledLookup| '|print| '(%) (|TextWriter|))))
         (PROGN
          (|sayMSGNT| (APPEND (|bright| "Aldor") (CONS "output:   " NIL)))
          (SPADCALL (SPADCALL |textwrit|) |expr| |printfun|)

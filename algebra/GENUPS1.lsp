@@ -1,86 +1,86 @@
 
 (SDEFUN |GENUPS1;genStream|
-        ((|f| (|Mapping| R (|Integer|))) (|n| (|Integer|)) ($ (|Stream| R)))
+        ((|f| (|Mapping| R (|Integer|))) (|n| (|Integer|)) (% (|Stream| R)))
         (SPROG NIL
-               (SPADCALL (CONS #'|GENUPS1;genStream!0| (VECTOR $ |f| |n|))
-                         (QREFELT $ 14)))) 
+               (SPADCALL (CONS #'|GENUPS1;genStream!0| (VECTOR % |f| |n|))
+                         (QREFELT % 14)))) 
 
 (SDEFUN |GENUPS1;genStream!0| (($$ NIL))
-        (PROG (|n| |f| $)
+        (PROG (|n| |f| %)
           (LETT |n| (QREFELT $$ 2))
           (LETT |f| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
+          (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
             (SPADCALL (SPADCALL |n| |f|)
                       (|GENUPS1;genStream| |f|
-                       (SPADCALL |n| (|spadConstant| $ 9) (QREFELT $ 10)) $)
-                      (QREFELT $ 12)))))) 
+                       (SPADCALL |n| (|spadConstant| % 9) (QREFELT % 10)) %)
+                      (QREFELT % 12)))))) 
 
 (SDEFUN |GENUPS1;genFiniteStream|
         ((|f| (|Mapping| R (|Integer|))) (|n| (|Integer|)) (|m| (|Integer|))
-         ($ (|Stream| R)))
-        (COND ((> |n| |m|) (SPADCALL (QREFELT $ 15)))
-              ('T (|GENUPS1;genFiniteStream0| |f| |n| |m| $)))) 
+         (% (|Stream| R)))
+        (COND ((> |n| |m|) (SPADCALL (QREFELT % 15)))
+              ('T (|GENUPS1;genFiniteStream0| |f| |n| |m| %)))) 
 
 (SDEFUN |GENUPS1;genFiniteStream0|
         ((|f| (|Mapping| R (|Integer|))) (|n| (|Integer|)) (|m| (|Integer|))
-         ($ (|Stream| R)))
+         (% (|Stream| R)))
         (SPROG NIL
                (SPADCALL
-                (CONS #'|GENUPS1;genFiniteStream0!0| (VECTOR |f| $ |m| |n|))
-                (QREFELT $ 14)))) 
+                (CONS #'|GENUPS1;genFiniteStream0!0| (VECTOR |f| % |m| |n|))
+                (QREFELT % 14)))) 
 
 (SDEFUN |GENUPS1;genFiniteStream0!0| (($$ NIL))
-        (PROG (|n| |m| $ |f|)
+        (PROG (|n| |m| % |f|)
           (LETT |n| (QREFELT $$ 3))
           (LETT |m| (QREFELT $$ 2))
-          (LETT $ (QREFELT $$ 1))
+          (LETT % (QREFELT $$ 1))
           (LETT |f| (QREFELT $$ 0))
           (RETURN
            (PROGN
             (COND
-             ((SPADCALL |n| |m| (QREFELT $ 17))
-              (SPADCALL (SPADCALL |n| |f|) (SPADCALL (QREFELT $ 15))
-                        (QREFELT $ 12)))
+             ((SPADCALL |n| |m| (QREFELT % 17))
+              (SPADCALL (SPADCALL |n| |f|) (SPADCALL (QREFELT % 15))
+                        (QREFELT % 12)))
              ('T
               (SPADCALL (SPADCALL |n| |f|)
                         (|GENUPS1;genFiniteStream0| |f|
-                         (SPADCALL |n| (|spadConstant| $ 9) (QREFELT $ 10)) |m|
-                         $)
-                        (QREFELT $ 12)))))))) 
+                         (SPADCALL |n| (|spadConstant| % 9) (QREFELT % 10)) |m|
+                         %)
+                        (QREFELT % 12)))))))) 
 
 (SDEFUN |GENUPS1;taylor;MSRA;4|
         ((|f| (|Mapping| R (|Integer|))) (|x| (|Symbol|)) (|a| (R))
-         ($ (|Any|)))
+         (% (|Any|)))
         (SPADCALL
-         (SPADCALL (|GENUPS1;genStream| |f| 0 $)
+         (SPADCALL (|GENUPS1;genStream| |f| 0 %)
                    (|compiledLookupCheck| '|series|
-                                          (LIST '$
+                                          (LIST '%
                                                 (LIST '|Stream|
-                                                      (|devaluate| (ELT $ 6))))
-                                          (|UnivariateTaylorSeries| (ELT $ 6)
+                                                      (|devaluate| (ELT % 6))))
+                                          (|UnivariateTaylorSeries| (ELT % 6)
                                                                     |x| |a|)))
          (|compiledLookupCheck| '|coerce|
                                 (LIST (LIST '|Any|)
                                       (LIST '|UnivariateTaylorSeries|
-                                            (|devaluate| (ELT $ 6)) |x| |a|))
+                                            (|devaluate| (ELT % 6)) |x| |a|))
                                 (|AnyFunctions1|
-                                 (|UnivariateTaylorSeries| (ELT $ 6) |x|
+                                 (|UnivariateTaylorSeries| (ELT % 6) |x|
                                                            |a|))))) 
 
 (SDEFUN |GENUPS1;taylor;MSRUsA;5|
         ((|f| (|Mapping| R (|Integer|))) (|x| (|Symbol|)) (|a| (R))
-         (|seg| (|UniversalSegment| (|NonNegativeInteger|))) ($ (|Any|)))
+         (|seg| (|UniversalSegment| (|NonNegativeInteger|))) (% (|Any|)))
         (SPROG
          ((|uts| (|UnivariateTaylorSeries| R |x| |a|))
           (|n0| #1=(|NonNegativeInteger|)) (|n1| #2=(|NonNegativeInteger|))
           (|#G19| #1#) (|#G18| #2#))
          (SEQ
           (COND
-           ((SPADCALL |seg| (QREFELT $ 23))
-            (SEQ (LETT |n0| (SPADCALL |seg| (QREFELT $ 25)))
-                 (LETT |n1| (SPADCALL |seg| (QREFELT $ 26)))
+           ((SPADCALL |seg| (QREFELT % 23))
+            (SEQ (LETT |n0| (SPADCALL |seg| (QREFELT % 25)))
+                 (LETT |n1| (SPADCALL |seg| (QREFELT % 26)))
                  (COND
                   ((< |n1| |n0|)
                    (PROGN
@@ -89,31 +89,31 @@
                     (LETT |n0| |#G18|)
                     (LETT |n1| |#G19|))))
                  (LETT |uts|
-                       (SPADCALL (|GENUPS1;genFiniteStream| |f| |n0| |n1| $)
+                       (SPADCALL (|GENUPS1;genFiniteStream| |f| |n0| |n1| %)
                                  (|compiledLookupCheck| '|series|
-                                                        (LIST '$
+                                                        (LIST '%
                                                               (LIST '|Stream|
                                                                     (|devaluate|
-                                                                     (ELT $
+                                                                     (ELT %
                                                                           6))))
                                                         (|UnivariateTaylorSeries|
-                                                         (ELT $ 6) |x| |a|))))
+                                                         (ELT % 6) |x| |a|))))
                  (LETT |uts|
                        (SPADCALL |uts|
-                                 (SPADCALL (|spadConstant| $ 7) |n0|
+                                 (SPADCALL (|spadConstant| % 7) |n0|
                                            (|compiledLookupCheck| '|monomial|
-                                                                  (LIST '$
+                                                                  (LIST '%
                                                                         (|devaluate|
-                                                                         (ELT $
+                                                                         (ELT %
                                                                               6))
                                                                         (LIST
                                                                          '|NonNegativeInteger|))
                                                                   (|UnivariateTaylorSeries|
-                                                                   (ELT $ 6)
+                                                                   (ELT % 6)
                                                                    |x| |a|)))
-                                 (|compiledLookupCheck| '* (LIST '$ '$ '$)
+                                 (|compiledLookupCheck| '* (LIST '% '% '%)
                                                         (|UnivariateTaylorSeries|
-                                                         (ELT $ 6) |x| |a|))))
+                                                         (ELT % 6) |x| |a|))))
                  (EXIT
                   (SPADCALL |uts|
                             (|compiledLookupCheck| '|coerce|
@@ -121,39 +121,39 @@
                                                          (LIST
                                                           '|UnivariateTaylorSeries|
                                                           (|devaluate|
-                                                           (ELT $ 6))
+                                                           (ELT % 6))
                                                           |x| |a|))
                                                    (|AnyFunctions1|
                                                     (|UnivariateTaylorSeries|
-                                                     (ELT $ 6) |x| |a|)))))))
+                                                     (ELT % 6) |x| |a|)))))))
            ('T
-            (SEQ (LETT |n0| (SPADCALL |seg| (QREFELT $ 25)))
+            (SEQ (LETT |n0| (SPADCALL |seg| (QREFELT % 25)))
                  (LETT |uts|
-                       (SPADCALL (|GENUPS1;genStream| |f| |n0| $)
+                       (SPADCALL (|GENUPS1;genStream| |f| |n0| %)
                                  (|compiledLookupCheck| '|series|
-                                                        (LIST '$
+                                                        (LIST '%
                                                               (LIST '|Stream|
                                                                     (|devaluate|
-                                                                     (ELT $
+                                                                     (ELT %
                                                                           6))))
                                                         (|UnivariateTaylorSeries|
-                                                         (ELT $ 6) |x| |a|))))
+                                                         (ELT % 6) |x| |a|))))
                  (LETT |uts|
                        (SPADCALL |uts|
-                                 (SPADCALL (|spadConstant| $ 7) |n0|
+                                 (SPADCALL (|spadConstant| % 7) |n0|
                                            (|compiledLookupCheck| '|monomial|
-                                                                  (LIST '$
+                                                                  (LIST '%
                                                                         (|devaluate|
-                                                                         (ELT $
+                                                                         (ELT %
                                                                               6))
                                                                         (LIST
                                                                          '|NonNegativeInteger|))
                                                                   (|UnivariateTaylorSeries|
-                                                                   (ELT $ 6)
+                                                                   (ELT % 6)
                                                                    |x| |a|)))
-                                 (|compiledLookupCheck| '* (LIST '$ '$ '$)
+                                 (|compiledLookupCheck| '* (LIST '% '% '%)
                                                         (|UnivariateTaylorSeries|
-                                                         (ELT $ 6) |x| |a|))))
+                                                         (ELT % 6) |x| |a|))))
                  (EXIT
                   (SPADCALL |uts|
                             (|compiledLookupCheck| '|coerce|
@@ -161,24 +161,24 @@
                                                          (LIST
                                                           '|UnivariateTaylorSeries|
                                                           (|devaluate|
-                                                           (ELT $ 6))
+                                                           (ELT % 6))
                                                           |x| |a|))
                                                    (|AnyFunctions1|
                                                     (|UnivariateTaylorSeries|
-                                                     (ELT $ 6) |x|
+                                                     (ELT % 6) |x|
                                                      |a|))))))))))) 
 
 (SDEFUN |GENUPS1;laurent;MSRUsA;6|
         ((|f| (|Mapping| R (|Integer|))) (|x| (|Symbol|)) (|a| (R))
-         (|seg| (|UniversalSegment| (|Integer|))) ($ (|Any|)))
+         (|seg| (|UniversalSegment| (|Integer|))) (% (|Any|)))
         (SPROG
          ((|uts| (|UnivariateTaylorSeries| R |x| |a|)) (|n0| #1=(|Integer|))
           (|n1| #2=(|Integer|)) (|#G26| #1#) (|#G25| #2#))
          (SEQ
           (COND
-           ((SPADCALL |seg| (QREFELT $ 29))
-            (SEQ (LETT |n0| (SPADCALL |seg| (QREFELT $ 30)))
-                 (LETT |n1| (SPADCALL |seg| (QREFELT $ 31)))
+           ((SPADCALL |seg| (QREFELT % 29))
+            (SEQ (LETT |n0| (SPADCALL |seg| (QREFELT % 30)))
+                 (LETT |n1| (SPADCALL |seg| (QREFELT % 31)))
                  (COND
                   ((< |n1| |n0|)
                    (PROGN
@@ -187,84 +187,84 @@
                     (LETT |n0| |#G25|)
                     (LETT |n1| |#G26|))))
                  (LETT |uts|
-                       (SPADCALL (|GENUPS1;genFiniteStream| |f| |n0| |n1| $)
+                       (SPADCALL (|GENUPS1;genFiniteStream| |f| |n0| |n1| %)
                                  (|compiledLookupCheck| '|series|
-                                                        (LIST '$
+                                                        (LIST '%
                                                               (LIST '|Stream|
                                                                     (|devaluate|
-                                                                     (ELT $
+                                                                     (ELT %
                                                                           6))))
                                                         (|UnivariateTaylorSeries|
-                                                         (ELT $ 6) |x| |a|))))
+                                                         (ELT % 6) |x| |a|))))
                  (EXIT
                   (SPADCALL
                    (SPADCALL |n0| |uts|
                              (|compiledLookupCheck| '|laurent|
-                                                    (LIST '$ (LIST '|Integer|)
+                                                    (LIST '% (LIST '|Integer|)
                                                           (LIST
                                                            '|UnivariateTaylorSeries|
                                                            (|devaluate|
-                                                            (ELT $ 6))
+                                                            (ELT % 6))
                                                            |x| |a|))
                                                     (|UnivariateLaurentSeries|
-                                                     (ELT $ 6) |x| |a|)))
+                                                     (ELT % 6) |x| |a|)))
                    (|compiledLookupCheck| '|coerce|
                                           (LIST (LIST '|Any|)
                                                 (LIST
                                                  '|UnivariateLaurentSeries|
-                                                 (|devaluate| (ELT $ 6)) |x|
+                                                 (|devaluate| (ELT % 6)) |x|
                                                  |a|))
                                           (|AnyFunctions1|
-                                           (|UnivariateLaurentSeries| (ELT $ 6)
+                                           (|UnivariateLaurentSeries| (ELT % 6)
                                                                       |x|
                                                                       |a|)))))))
            ('T
-            (SEQ (LETT |n0| (SPADCALL |seg| (QREFELT $ 30)))
+            (SEQ (LETT |n0| (SPADCALL |seg| (QREFELT % 30)))
                  (LETT |uts|
-                       (SPADCALL (|GENUPS1;genStream| |f| |n0| $)
+                       (SPADCALL (|GENUPS1;genStream| |f| |n0| %)
                                  (|compiledLookupCheck| '|series|
-                                                        (LIST '$
+                                                        (LIST '%
                                                               (LIST '|Stream|
                                                                     (|devaluate|
-                                                                     (ELT $
+                                                                     (ELT %
                                                                           6))))
                                                         (|UnivariateTaylorSeries|
-                                                         (ELT $ 6) |x| |a|))))
+                                                         (ELT % 6) |x| |a|))))
                  (EXIT
                   (SPADCALL
                    (SPADCALL |n0| |uts|
                              (|compiledLookupCheck| '|laurent|
-                                                    (LIST '$ (LIST '|Integer|)
+                                                    (LIST '% (LIST '|Integer|)
                                                           (LIST
                                                            '|UnivariateTaylorSeries|
                                                            (|devaluate|
-                                                            (ELT $ 6))
+                                                            (ELT % 6))
                                                            |x| |a|))
                                                     (|UnivariateLaurentSeries|
-                                                     (ELT $ 6) |x| |a|)))
+                                                     (ELT % 6) |x| |a|)))
                    (|compiledLookupCheck| '|coerce|
                                           (LIST (LIST '|Any|)
                                                 (LIST
                                                  '|UnivariateLaurentSeries|
-                                                 (|devaluate| (ELT $ 6)) |x|
+                                                 (|devaluate| (ELT % 6)) |x|
                                                  |a|))
                                           (|AnyFunctions1|
-                                           (|UnivariateLaurentSeries| (ELT $ 6)
+                                           (|UnivariateLaurentSeries| (ELT % 6)
                                                                       |x|
                                                                       |a|))))))))))) 
 
 (SDEFUN |GENUPS1;modifyFcn|
         ((|f| (|Mapping| R (|Fraction| (|Integer|)))) (|n0| (|Integer|))
-         (|nn| (|Integer|)) (|q| (|Integer|)) (|m| (|Integer|)) ($ (R)))
+         (|nn| (|Integer|)) (|q| (|Integer|)) (|m| (|Integer|)) (% (R)))
         (COND
          ((ZEROP (REM (- |m| |n0|) |nn|))
-          (SPADCALL (SPADCALL |m| |q| (QREFELT $ 34)) |f|))
-         ('T (|spadConstant| $ 35)))) 
+          (SPADCALL (SPADCALL |m| |q| (QREFELT % 34)) |f|))
+         ('T (|spadConstant| % 35)))) 
 
 (SDEFUN |GENUPS1;puiseux;MSRUsFA;8|
         ((|f| (|Mapping| R (|Fraction| (|Integer|)))) (|x| (|Symbol|))
          (|a| (R)) (|seg| (|UniversalSegment| (|Fraction| (|Integer|))))
-         (|r| (|Fraction| (|Integer|))) ($ (|Any|)))
+         (|r| (|Fraction| (|Integer|))) (% (|Any|)))
         (SPROG
          ((|uls| (|UnivariateLaurentSeries| R |x| |a|)) (|ulsUnion| (|Any|))
           (|nn| #1=(|Integer|)) (|n0| #1#) (|q| (|Integer|))
@@ -273,38 +273,38 @@
           (|r1| #5=(|Fraction| (|Integer|))) (|#G39| #4#) (|#G38| #5#))
          (SEQ
           (COND
-           ((NULL (SPADCALL |r| (QREFELT $ 36)))
+           ((NULL (SPADCALL |r| (QREFELT % 36)))
             (|error| "puiseux: last argument must be positive"))
            ('T
             (COND
-             ((SPADCALL |seg| (QREFELT $ 38))
-              (SEQ (LETT |r0| (SPADCALL |seg| (QREFELT $ 39)))
-                   (LETT |r1| (SPADCALL |seg| (QREFELT $ 40)))
+             ((SPADCALL |seg| (QREFELT % 38))
+              (SEQ (LETT |r0| (SPADCALL |seg| (QREFELT % 39)))
+                   (LETT |r1| (SPADCALL |seg| (QREFELT % 40)))
                    (COND
-                    ((SPADCALL |r1| |r0| (QREFELT $ 41))
+                    ((SPADCALL |r1| |r0| (QREFELT % 41))
                      (PROGN
                       (LETT |#G38| |r1|)
                       (LETT |#G39| |r0|)
                       (LETT |r0| |#G38|)
                       (LETT |r1| |#G39|))))
-                   (LETT |p0| (SPADCALL |r0| (QREFELT $ 42)))
-                   (LETT |q0| (SPADCALL |r0| (QREFELT $ 43)))
-                   (LETT |p1| (SPADCALL |r1| (QREFELT $ 42)))
-                   (LETT |q1| (SPADCALL |r1| (QREFELT $ 43)))
-                   (LETT |p2| (SPADCALL |r| (QREFELT $ 42)))
-                   (LETT |q2| (SPADCALL |r| (QREFELT $ 43)))
+                   (LETT |p0| (SPADCALL |r0| (QREFELT % 42)))
+                   (LETT |q0| (SPADCALL |r0| (QREFELT % 43)))
+                   (LETT |p1| (SPADCALL |r1| (QREFELT % 42)))
+                   (LETT |q1| (SPADCALL |r1| (QREFELT % 43)))
+                   (LETT |p2| (SPADCALL |r| (QREFELT % 42)))
+                   (LETT |q2| (SPADCALL |r| (QREFELT % 43)))
                    (LETT |q|
-                         (SPADCALL (SPADCALL |q0| |q1| (QREFELT $ 44)) |q2|
-                                   (QREFELT $ 44)))
+                         (SPADCALL (SPADCALL |q0| |q1| (QREFELT % 44)) |q2|
+                                   (QREFELT % 44)))
                    (LETT |n0| (* |p0| (QUOTIENT2 |q| |q0|)))
                    (LETT |n1| (* |p1| (QUOTIENT2 |q| |q1|)))
                    (LETT |nn| (* |p2| (QUOTIENT2 |q| |q2|)))
                    (LETT |ulsUnion|
                          (SPADCALL
                           (CONS #'|GENUPS1;puiseux;MSRUsFA;8!0|
-                                (VECTOR $ |q| |nn| |n0| |f|))
-                          |x| |a| (SPADCALL |n0| |n1| (QREFELT $ 45))
-                          (QREFELT $ 32)))
+                                (VECTOR % |q| |nn| |n0| |f|))
+                          |x| |a| (SPADCALL |n0| |n1| (QREFELT % 45))
+                          (QREFELT % 32)))
                    (LETT |uls|
                          (SPADCALL |ulsUnion|
                                    (|compiledLookupCheck| '|retract|
@@ -312,113 +312,113 @@
                                                            (LIST
                                                             '|UnivariateLaurentSeries|
                                                             (|devaluate|
-                                                             (ELT $ 6))
+                                                             (ELT % 6))
                                                             |x| |a|)
                                                            (LIST '|Any|))
                                                           (|AnyFunctions1|
                                                            (|UnivariateLaurentSeries|
-                                                            (ELT $ 6) |x|
+                                                            (ELT % 6) |x|
                                                             |a|)))))
                    (EXIT
                     (SPADCALL
-                     (SPADCALL (SPADCALL 1 |q| (QREFELT $ 34)) |uls|
+                     (SPADCALL (SPADCALL 1 |q| (QREFELT % 34)) |uls|
                                (|compiledLookupCheck| '|puiseux|
-                                                      (LIST '$
+                                                      (LIST '%
                                                             (LIST '|Fraction|
                                                                   (LIST
                                                                    '|Integer|))
                                                             (LIST
                                                              '|UnivariateLaurentSeries|
                                                              (|devaluate|
-                                                              (ELT $ 6))
+                                                              (ELT % 6))
                                                              |x| |a|))
                                                       (|UnivariatePuiseuxSeries|
-                                                       (ELT $ 6) |x| |a|)))
+                                                       (ELT % 6) |x| |a|)))
                      (|compiledLookupCheck| '|coerce|
                                             (LIST (LIST '|Any|)
                                                   (LIST
                                                    '|UnivariatePuiseuxSeries|
-                                                   (|devaluate| (ELT $ 6)) |x|
+                                                   (|devaluate| (ELT % 6)) |x|
                                                    |a|))
                                             (|AnyFunctions1|
                                              (|UnivariatePuiseuxSeries|
-                                              (ELT $ 6) |x| |a|)))))))
+                                              (ELT % 6) |x| |a|)))))))
              ('T
               (SEQ
                (LETT |p0|
-                     (SPADCALL (LETT |r0| (SPADCALL |seg| (QREFELT $ 39)))
-                               (QREFELT $ 42)))
-               (LETT |q0| (SPADCALL |r0| (QREFELT $ 43)))
-               (LETT |p2| (SPADCALL |r| (QREFELT $ 42)))
-               (LETT |q2| (SPADCALL |r| (QREFELT $ 43)))
-               (LETT |q| (SPADCALL |q0| |q2| (QREFELT $ 44)))
+                     (SPADCALL (LETT |r0| (SPADCALL |seg| (QREFELT % 39)))
+                               (QREFELT % 42)))
+               (LETT |q0| (SPADCALL |r0| (QREFELT % 43)))
+               (LETT |p2| (SPADCALL |r| (QREFELT % 42)))
+               (LETT |q2| (SPADCALL |r| (QREFELT % 43)))
+               (LETT |q| (SPADCALL |q0| |q2| (QREFELT % 44)))
                (LETT |n0| (* |p0| (QUOTIENT2 |q| |q0|)))
                (LETT |nn| (* |p2| (QUOTIENT2 |q| |q2|)))
                (LETT |ulsUnion|
                      (SPADCALL
                       (CONS #'|GENUPS1;puiseux;MSRUsFA;8!1|
-                            (VECTOR $ |q| |nn| |n0| |f|))
-                      |x| |a| (SPADCALL |n0| (QREFELT $ 47)) (QREFELT $ 32)))
+                            (VECTOR % |q| |nn| |n0| |f|))
+                      |x| |a| (SPADCALL |n0| (QREFELT % 47)) (QREFELT % 32)))
                (LETT |uls|
                      (SPADCALL |ulsUnion|
                                (|compiledLookupCheck| '|retract|
                                                       (LIST
                                                        (LIST
                                                         '|UnivariateLaurentSeries|
-                                                        (|devaluate| (ELT $ 6))
+                                                        (|devaluate| (ELT % 6))
                                                         |x| |a|)
                                                        (LIST '|Any|))
                                                       (|AnyFunctions1|
                                                        (|UnivariateLaurentSeries|
-                                                        (ELT $ 6) |x| |a|)))))
+                                                        (ELT % 6) |x| |a|)))))
                (EXIT
                 (SPADCALL
-                 (SPADCALL (SPADCALL 1 |q| (QREFELT $ 34)) |uls|
+                 (SPADCALL (SPADCALL 1 |q| (QREFELT % 34)) |uls|
                            (|compiledLookupCheck| '|puiseux|
-                                                  (LIST '$
+                                                  (LIST '%
                                                         (LIST '|Fraction|
                                                               (LIST
                                                                '|Integer|))
                                                         (LIST
                                                          '|UnivariateLaurentSeries|
                                                          (|devaluate|
-                                                          (ELT $ 6))
+                                                          (ELT % 6))
                                                          |x| |a|))
                                                   (|UnivariatePuiseuxSeries|
-                                                   (ELT $ 6) |x| |a|)))
+                                                   (ELT % 6) |x| |a|)))
                  (|compiledLookupCheck| '|coerce|
                                         (LIST (LIST '|Any|)
                                               (LIST '|UnivariatePuiseuxSeries|
-                                                    (|devaluate| (ELT $ 6)) |x|
+                                                    (|devaluate| (ELT % 6)) |x|
                                                     |a|))
                                         (|AnyFunctions1|
-                                         (|UnivariatePuiseuxSeries| (ELT $ 6)
+                                         (|UnivariatePuiseuxSeries| (ELT % 6)
                                                                     |x|
                                                                     |a|))))))))))))) 
 
 (SDEFUN |GENUPS1;puiseux;MSRUsFA;8!1| ((|i| NIL) ($$ NIL))
-        (PROG (|f| |n0| |nn| |q| $)
+        (PROG (|f| |n0| |nn| |q| %)
           (LETT |f| (QREFELT $$ 4))
           (LETT |n0| (QREFELT $$ 3))
           (LETT |nn| (QREFELT $$ 2))
           (LETT |q| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (|GENUPS1;modifyFcn| |f| |n0| |nn| |q| |i| $))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (|GENUPS1;modifyFcn| |f| |n0| |nn| |q| |i| %))))) 
 
 (SDEFUN |GENUPS1;puiseux;MSRUsFA;8!0| ((|i| NIL) ($$ NIL))
-        (PROG (|f| |n0| |nn| |q| $)
+        (PROG (|f| |n0| |nn| |q| %)
           (LETT |f| (QREFELT $$ 4))
           (LETT |n0| (QREFELT $$ 3))
           (LETT |nn| (QREFELT $$ 2))
           (LETT |q| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (|GENUPS1;modifyFcn| |f| |n0| |nn| |q| |i| $))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (|GENUPS1;modifyFcn| |f| |n0| |nn| |q| |i| %))))) 
 
 (DECLAIM (NOTINLINE |GenerateUnivariatePowerSeries1;|)) 
 
-(DEFUN |GenerateUnivariatePowerSeries1| (#1=#:G749)
+(DEFUN |GenerateUnivariatePowerSeries1| (#1=#:G492)
   (SPROG NIL
-         (PROG (#2=#:G750)
+         (PROG (#2=#:G493)
            (RETURN
             (COND
              ((LETT #2#
@@ -436,24 +436,24 @@
                         '|GenerateUnivariatePowerSeries1|)))))))))) 
 
 (DEFUN |GenerateUnivariatePowerSeries1;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|GenerateUnivariatePowerSeries1| DV$1))
-          (LETT $ (GETREFV 50))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 50))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|GenerateUnivariatePowerSeries1|
-                      (LIST DV$1) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|GenerateUnivariatePowerSeries1| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |One|) (|Integer|)
-              (4 . |One|) (8 . +) (|Stream| 6) (14 . |concat|) (|Mapping| $)
+              (4 . |One|) (8 . +) (|Stream| 6) (14 . |concat|) (|Mapping| %)
               (20 . |delay|) (25 . |empty|) (|Boolean|) (29 . =) (|Any|)
               (|Mapping| 6 8) (|Symbol|) |GENUPS1;taylor;MSRA;4|
               (|UniversalSegment| 24) (35 . |hasHi|) (|NonNegativeInteger|)

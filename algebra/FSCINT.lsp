@@ -1,40 +1,40 @@
 
 (SDEFUN |FSCINT;K2KG|
-        ((|k| (|Kernel| F)) ($ (|Kernel| (|Expression| (|Complex| R)))))
+        ((|k| (|Kernel| F)) (% (|Kernel| (|Expression| (|Complex| R)))))
         (SPADCALL
          (SPADCALL
-          (SPADCALL (|SPADfirst| (SPADCALL |k| (QREFELT $ 11))) (QREFELT $ 14))
-          (QREFELT $ 15))
-         (QREFELT $ 17))) 
+          (SPADCALL (|SPADfirst| (SPADCALL |k| (QREFELT % 11))) (QREFELT % 14))
+          (QREFELT % 15))
+         (QREFELT % 17))) 
 
-(SDEFUN |FSCINT;complexIntegrate;FSF;2| ((|f| (F)) (|x| (|Symbol|)) ($ (F)))
-        (SPADCALL (SPADCALL (SPADCALL |f| |x| (QREFELT $ 20)) (QREFELT $ 22))
-                  |x| (QREFELT $ 24))) 
+(SDEFUN |FSCINT;complexIntegrate;FSF;2| ((|f| (F)) (|x| (|Symbol|)) (% (F)))
+        (SPADCALL (SPADCALL (SPADCALL |f| |x| (QREFELT % 20)) (QREFELT % 22))
+                  |x| (QREFELT % 24))) 
 
 (SDEFUN |FSCINT;internalIntegrate0;FSIr;3|
-        ((|f| (F)) (|x| (|Symbol|)) ($ (|IntegrationResult| F)))
-        (SPADCALL |f| |x| (QREFELT $ 27))) 
+        ((|f| (F)) (|x| (|Symbol|)) (% (|IntegrationResult| F)))
+        (SPADCALL |f| |x| (QREFELT % 27))) 
 
 (SDEFUN |FSCINT;internalIntegrate;FSIr;4|
-        ((|f| (F)) (|x| (|Symbol|)) ($ (|IntegrationResult| F)))
+        ((|f| (F)) (|x| (|Symbol|)) (% (|IntegrationResult| F)))
         (SPROG
-         ((|g| (F)) (|h| (|Expression| (|Complex| R))) (#1=#:G725 NIL)
-          (|k| NIL) (#2=#:G724 NIL) (#3=#:G723 NIL) (#4=#:G722 NIL))
+         ((|g| (F)) (|h| (|Expression| (|Complex| R))) (#1=#:G471 NIL)
+          (|k| NIL) (#2=#:G470 NIL) (#3=#:G469 NIL) (#4=#:G468 NIL))
          (SEQ
           (LETT |f|
-                (SPADCALL |f| (SPADCALL |x| (QREFELT $ 29)) (QREFELT $ 30)))
+                (SPADCALL |f| (SPADCALL |x| (QREFELT % 29)) (QREFELT % 30)))
           (EXIT
            (COND
             ((SPADCALL
               (CONS #'|FSCINT;internalIntegrate;FSIr;4!0|
-                    (VECTOR (QREFELT $ 8) $))
+                    (VECTOR (QREFELT % 8) %))
               (PROGN
                (LETT #4# NIL)
                (SEQ (LETT |k| NIL)
                     (LETT #3#
                           (SPADCALL
-                           (LETT |g| (SPADCALL |f| |x| (QREFELT $ 36)))
-                           (QREFELT $ 38)))
+                           (LETT |g| (SPADCALL |f| |x| (QREFELT % 36)))
+                           (QREFELT % 38)))
                     G190
                     (COND
                      ((OR (ATOM #3#) (PROGN (LETT |k| (CAR #3#)) NIL))
@@ -43,19 +43,19 @@
                      (EXIT
                       (COND
                        ((SPADCALL |x|
-                                  (SPADCALL (SPADCALL |k| (QREFELT $ 39))
-                                            (QREFELT $ 41))
-                                  (QREFELT $ 42))
+                                  (SPADCALL (SPADCALL |k| (QREFELT % 39))
+                                            (QREFELT % 41))
+                                  (QREFELT % 42))
                         (LETT #4# (CONS |k| #4#))))))
                     (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT (NREVERSE #4#))))
-              (QREFELT $ 45))
+              (QREFELT % 45))
              (SEQ
               (LETT |h|
-                    (SPADCALL (SPADCALL |g| (QREFELT $ 14))
+                    (SPADCALL (SPADCALL |g| (QREFELT % 14))
                               (PROGN
                                (LETT #2# NIL)
                                (SEQ (LETT |k| NIL)
-                                    (LETT #1# (SPADCALL |f| (QREFELT $ 38)))
+                                    (LETT #1# (SPADCALL |f| (QREFELT % 38)))
                                     G190
                                     (COND
                                      ((OR (ATOM #1#)
@@ -65,50 +65,50 @@
                                      (EXIT
                                       (COND
                                        ((COND
-                                         ((SPADCALL |k| '|tan| (QREFELT $ 46))
+                                         ((SPADCALL |k| '|tan| (QREFELT % 46))
                                           'T)
                                          (#5='T
                                           (SPADCALL |k| '|cot|
-                                                    (QREFELT $ 46))))
+                                                    (QREFELT % 46))))
                                         (LETT #2#
-                                              (CONS (|FSCINT;K2KG| |k| $)
+                                              (CONS (|FSCINT;K2KG| |k| %)
                                                     #2#))))))
                                     (LETT #1# (CDR #1#)) (GO G190) G191
                                     (EXIT (NREVERSE #2#))))
-                              (QREFELT $ 48)))
+                              (QREFELT % 48)))
               (EXIT
                (COND
-                ((SPADCALL (LETT |g| (SPADCALL |h| (QREFELT $ 49)))
-                           (QREFELT $ 51))
-                 (SPADCALL (QVELT (SPADCALL |g| |x| (QREFELT $ 53)) 0) |x|
-                           (QREFELT $ 28)))
+                ((SPADCALL (LETT |g| (SPADCALL |h| (QREFELT % 49)))
+                           (QREFELT % 51))
+                 (SPADCALL (QVELT (SPADCALL |g| |x| (QREFELT % 53)) 0) |x|
+                           (QREFELT % 28)))
                 ((SPADCALL
                   (LETT |g|
                         (SPADCALL
-                         (LETT |h| (QVELT (SPADCALL |h| |x| (QREFELT $ 56)) 0))
-                         (QREFELT $ 49)))
-                  (QREFELT $ 51))
-                 (SPADCALL |g| |x| (QREFELT $ 28)))
+                         (LETT |h| (QVELT (SPADCALL |h| |x| (QREFELT % 56)) 0))
+                         (QREFELT % 49)))
+                  (QREFELT % 51))
+                 (SPADCALL |g| |x| (QREFELT % 28)))
                 (#5#
-                 (SPADCALL (ELT $ 49) (SPADCALL |h| |x| (QREFELT $ 59))
-                           (QREFELT $ 62)))))))
+                 (SPADCALL (ELT % 49) (SPADCALL |h| |x| (QREFELT % 59))
+                           (QREFELT % 62)))))))
             (#5#
-             (SPADCALL (QVELT (SPADCALL |g| |x| (QREFELT $ 53)) 0) |x|
-                       (QREFELT $ 28)))))))) 
+             (SPADCALL (QVELT (SPADCALL |g| |x| (QREFELT % 53)) 0) |x|
+                       (QREFELT % 28)))))))) 
 
 (SDEFUN |FSCINT;internalIntegrate;FSIr;4!0| ((|x1| NIL) ($$ NIL))
-        (PROG ($ RTRIG)
-          (LETT $ (QREFELT $$ 1))
+        (PROG (% RTRIG)
+          (LETT % (QREFELT $$ 1))
           (LETT RTRIG (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPADCALL (SPADCALL |x1| (QREFELT $ 32)) RTRIG (QREFELT $ 34)))))) 
+            (SPADCALL (SPADCALL |x1| (QREFELT % 32)) RTRIG (QREFELT % 34)))))) 
 
 (DECLAIM (NOTINLINE |FunctionSpaceComplexIntegration;|)) 
 
-(DEFUN |FunctionSpaceComplexIntegration| (&REST #1=#:G726)
+(DEFUN |FunctionSpaceComplexIntegration| (&REST #1=#:G472)
   (SPROG NIL
-         (PROG (#2=#:G727)
+         (PROG (#2=#:G473)
            (RETURN
             (COND
              ((LETT #2#
@@ -129,22 +129,22 @@
                         '|FunctionSpaceComplexIntegration|)))))))))) 
 
 (DEFUN |FunctionSpaceComplexIntegration;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|FunctionSpaceComplexIntegration| DV$1 DV$2))
-          (LETT $ (GETREFV 63))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 63))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|FunctionSpaceComplexIntegration|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 8 '|rtrig|)
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 8 '|rtrig|)
+          %))) 
 
 (MAKEPROP '|FunctionSpaceComplexIntegration| '|infovec|
           (LIST
@@ -152,7 +152,7 @@
               (|List| 7) (|Kernel| 7) (0 . |argument|)
               (|Expression| (|Complex| 6))
               (|InnerTrigonometricManipulations| 6 7 12) (5 . F2FG)
-              (10 . |tan|) (|Kernel| $) (15 . |retract|)
+              (10 . |tan|) (|Kernel| %) (15 . |retract|)
               (|IntegrationResult| 7) (|Symbol|)
               |FSCINT;internalIntegrate;FSIr;4|
               (|IntegrationResultToFunction| 6 7) (20 . |complexExpand|)

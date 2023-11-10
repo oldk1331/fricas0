@@ -1,25 +1,25 @@
 
-(SDEFUN |ELEMFUN-;^;3S;1| ((|x| (S)) (|y| (S)) ($ (S)))
-        (SPADCALL (SPADCALL |y| (SPADCALL |x| (QREFELT $ 7)) (QREFELT $ 8))
-                  (QREFELT $ 9))) 
+(SDEFUN |ELEMFUN-;^;3S;1| ((|x| (S)) (|y| (S)) (% (S)))
+        (SPADCALL (SPADCALL |y| (SPADCALL |x| (QREFELT % 7)) (QREFELT % 8))
+                  (QREFELT % 9))) 
 
 (DECLAIM (NOTINLINE |ElementaryFunctionCategory&;|)) 
 
 (DEFUN |ElementaryFunctionCategory&| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|ElementaryFunctionCategory&| DV$1))
-          (LETT $ (GETREFV 11))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
+          (LETT % (GETREFV 11))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
           (COND
            ((|HasCategory| |#1| '(|Monoid|))
-            (QSETREFV $ 10 (CONS (|dispatchFunction| |ELEMFUN-;^;3S;1|) $))))
-          $))) 
+            (QSETREFV % 10 (CONS (|dispatchFunction| |ELEMFUN-;^;3S;1|) %))))
+          %))) 
 
 (MAKEPROP '|ElementaryFunctionCategory&| '|infovec|
           (LIST

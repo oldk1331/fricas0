@@ -3,7 +3,7 @@
         ((|func| (|Mapping| F F)) (|a| (F)) (|b| (F)) (|epsrel| (F))
          (|epsabs| (F)) (|nmin| (|Integer|)) (|nmax| (|Integer|))
          (|nint| (|Integer|))
-         ($
+         (%
           (|Record| (|:| |value| F) (|:| |error| F)
                     (|:| |totalpts| (|Integer|)) (|:| |success| (|Boolean|)))))
         (SPROG
@@ -12,48 +12,48 @@
           (|ans|
            (|Record| (|:| |value| F) (|:| |error| F)
                      (|:| |totalpts| (|Integer|)) (|:| |success| (|Boolean|))))
-          (#1=#:G726 NIL) (|i| NIL) (|io| (|List| (|OutputForm|))) (|hh| (F)))
-         (SEQ (LETT |sum| (|spadConstant| $ 7))
-              (LETT |err| (|spadConstant| $ 7)) (LETT |pts| 1) (LETT |done| 'T)
+          (#1=#:G466 NIL) (|i| NIL) (|io| (|List| (|OutputForm|))) (|hh| (F)))
+         (SEQ (LETT |sum| (|spadConstant| % 7))
+              (LETT |err| (|spadConstant| % 7)) (LETT |pts| 1) (LETT |done| 'T)
               (LETT |hh|
-                    (SPADCALL (SPADCALL |b| |a| (QREFELT $ 8)) |nint|
-                              (QREFELT $ 10)))
-              (LETT |x1| |a|) (LETT |x2| (SPADCALL |a| |hh| (QREFELT $ 11)))
+                    (SPADCALL (SPADCALL |b| |a| (QREFELT % 8)) |nint|
+                              (QREFELT % 10)))
+              (LETT |x1| |a|) (LETT |x2| (SPADCALL |a| |hh| (QREFELT % 11)))
               (LETT |io|
-                    (LIST (SPADCALL |x1| (QREFELT $ 13))
-                          (SPADCALL |x2| (QREFELT $ 13))))
+                    (LIST (SPADCALL |x1| (QREFELT % 13))
+                          (SPADCALL |x2| (QREFELT % 13))))
               (SEQ (LETT |i| 1) (LETT #1# |nint|) G190
                    (COND ((|greater_SI| |i| #1#) (GO G191)))
                    (SEQ
                     (LETT |ans|
                           (SPADCALL |func| |x1| |x2| |epsrel| |epsabs| |nmin|
-                                    |nmax| (QREFELT $ 16)))
+                                    |nmax| (QREFELT % 16)))
                     (COND
                      ((NULL (QVELT |ans| 3))
                       (SEQ
-                       (SPADCALL |io| 1 (SPADCALL |x1| (QREFELT $ 13))
-                                 (QREFELT $ 19))
-                       (SPADCALL |io| 2 (SPADCALL |x2| (QREFELT $ 13))
-                                 (QREFELT $ 19))
+                       (SPADCALL |io| 1 (SPADCALL |x1| (QREFELT % 13))
+                                 (QREFELT % 19))
+                       (SPADCALL |io| 2 (SPADCALL |x2| (QREFELT % 13))
+                                 (QREFELT % 19))
                        (EXIT
                         (SPADCALL
                          (SPADCALL
                           (CONS
                            (SPADCALL "accuracy not reached in interval"
-                                     (QREFELT $ 21))
+                                     (QREFELT % 21))
                            |io|)
-                          (QREFELT $ 23))
-                         (QREFELT $ 25))))))
+                          (QREFELT % 23))
+                         (QREFELT % 25))))))
                     (LETT |sum|
-                          (SPADCALL |sum| (QVELT |ans| 0) (QREFELT $ 11)))
+                          (SPADCALL |sum| (QVELT |ans| 0) (QREFELT % 11)))
                     (LETT |err|
                           (SPADCALL |err|
-                                    (SPADCALL (QVELT |ans| 1) (QREFELT $ 26))
-                                    (QREFELT $ 11)))
+                                    (SPADCALL (QVELT |ans| 1) (QREFELT % 26))
+                                    (QREFELT % 11)))
                     (LETT |pts| (- (+ |pts| (QVELT |ans| 2)) 1))
                     (LETT |done| (COND (|done| (QVELT |ans| 3)) ('T NIL)))
                     (LETT |x1| |x2|)
-                    (EXIT (LETT |x2| (SPADCALL |x2| |hh| (QREFELT $ 11)))))
+                    (EXIT (LETT |x2| (SPADCALL |x2| |hh| (QREFELT % 11)))))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
               (EXIT (VECTOR |sum| |err| |pts| |done|))))) 
 
@@ -61,7 +61,7 @@
         ((|func| (|Mapping| F F)) (|a| (F)) (|b| (F)) (|epsrel| (F))
          (|epsabs| (F)) (|nmin| (|Integer|)) (|nmax| (|Integer|))
          (|nint| (|Integer|))
-         ($
+         (%
           (|Record| (|:| |value| F) (|:| |error| F)
                     (|:| |totalpts| (|Integer|)) (|:| |success| (|Boolean|)))))
         (SPROG
@@ -70,48 +70,48 @@
           (|ans|
            (|Record| (|:| |value| F) (|:| |error| F)
                      (|:| |totalpts| (|Integer|)) (|:| |success| (|Boolean|))))
-          (#1=#:G736 NIL) (|i| NIL) (|io| (|List| (|OutputForm|))) (|hh| (F)))
-         (SEQ (LETT |sum| (|spadConstant| $ 7))
-              (LETT |err| (|spadConstant| $ 7)) (LETT |pts| 1) (LETT |done| 'T)
+          (#1=#:G476 NIL) (|i| NIL) (|io| (|List| (|OutputForm|))) (|hh| (F)))
+         (SEQ (LETT |sum| (|spadConstant| % 7))
+              (LETT |err| (|spadConstant| % 7)) (LETT |pts| 1) (LETT |done| 'T)
               (LETT |hh|
-                    (SPADCALL (SPADCALL |b| |a| (QREFELT $ 8)) |nint|
-                              (QREFELT $ 10)))
-              (LETT |x1| |a|) (LETT |x2| (SPADCALL |a| |hh| (QREFELT $ 11)))
+                    (SPADCALL (SPADCALL |b| |a| (QREFELT % 8)) |nint|
+                              (QREFELT % 10)))
+              (LETT |x1| |a|) (LETT |x2| (SPADCALL |a| |hh| (QREFELT % 11)))
               (LETT |io|
-                    (LIST (SPADCALL |x1| (QREFELT $ 13))
-                          (SPADCALL |x2| (QREFELT $ 13))))
+                    (LIST (SPADCALL |x1| (QREFELT % 13))
+                          (SPADCALL |x2| (QREFELT % 13))))
               (SEQ (LETT |i| 1) (LETT #1# |nint|) G190
                    (COND ((|greater_SI| |i| #1#) (GO G191)))
                    (SEQ
                     (LETT |ans|
                           (SPADCALL |func| |x1| |x2| |epsrel| |epsabs| |nmin|
-                                    |nmax| (QREFELT $ 28)))
+                                    |nmax| (QREFELT % 28)))
                     (COND
                      ((NULL (QVELT |ans| 3))
                       (SEQ
-                       (SPADCALL |io| 1 (SPADCALL |x1| (QREFELT $ 13))
-                                 (QREFELT $ 19))
-                       (SPADCALL |io| 2 (SPADCALL |x2| (QREFELT $ 13))
-                                 (QREFELT $ 19))
+                       (SPADCALL |io| 1 (SPADCALL |x1| (QREFELT % 13))
+                                 (QREFELT % 19))
+                       (SPADCALL |io| 2 (SPADCALL |x2| (QREFELT % 13))
+                                 (QREFELT % 19))
                        (EXIT
                         (SPADCALL
                          (SPADCALL
                           (CONS
                            (SPADCALL "accuracy not reached in interval"
-                                     (QREFELT $ 21))
+                                     (QREFELT % 21))
                            |io|)
-                          (QREFELT $ 23))
-                         (QREFELT $ 25))))))
+                          (QREFELT % 23))
+                         (QREFELT % 25))))))
                     (LETT |sum|
-                          (SPADCALL |sum| (QVELT |ans| 0) (QREFELT $ 11)))
+                          (SPADCALL |sum| (QVELT |ans| 0) (QREFELT % 11)))
                     (LETT |err|
                           (SPADCALL |err|
-                                    (SPADCALL (QVELT |ans| 1) (QREFELT $ 26))
-                                    (QREFELT $ 11)))
+                                    (SPADCALL (QVELT |ans| 1) (QREFELT % 26))
+                                    (QREFELT % 11)))
                     (LETT |pts| (- (+ |pts| (QVELT |ans| 2)) 1))
                     (LETT |done| (COND (|done| (QVELT |ans| 3)) ('T NIL)))
                     (LETT |x1| |x2|)
-                    (EXIT (LETT |x2| (SPADCALL |x2| |hh| (QREFELT $ 11)))))
+                    (EXIT (LETT |x2| (SPADCALL |x2| |hh| (QREFELT % 11)))))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
               (EXIT (VECTOR |sum| |err| |pts| |done|))))) 
 
@@ -119,7 +119,7 @@
         ((|func| (|Mapping| F F)) (|a| (F)) (|b| (F)) (|epsrel| (F))
          (|epsabs| (F)) (|nmin| (|Integer|)) (|nmax| (|Integer|))
          (|nint| (|Integer|))
-         ($
+         (%
           (|Record| (|:| |value| F) (|:| |error| F)
                     (|:| |totalpts| (|Integer|)) (|:| |success| (|Boolean|)))))
         (SPROG
@@ -128,140 +128,140 @@
           (|ans|
            (|Record| (|:| |value| F) (|:| |error| F)
                      (|:| |totalpts| (|Integer|)) (|:| |success| (|Boolean|))))
-          (#1=#:G746 NIL) (|i| NIL) (|io| (|List| (|OutputForm|))) (|hh| (F)))
-         (SEQ (LETT |sum| (|spadConstant| $ 7))
-              (LETT |err| (|spadConstant| $ 7)) (LETT |pts| 1) (LETT |done| 'T)
+          (#1=#:G486 NIL) (|i| NIL) (|io| (|List| (|OutputForm|))) (|hh| (F)))
+         (SEQ (LETT |sum| (|spadConstant| % 7))
+              (LETT |err| (|spadConstant| % 7)) (LETT |pts| 1) (LETT |done| 'T)
               (LETT |hh|
-                    (SPADCALL (SPADCALL |b| |a| (QREFELT $ 8)) |nint|
-                              (QREFELT $ 10)))
-              (LETT |x1| |a|) (LETT |x2| (SPADCALL |a| |hh| (QREFELT $ 11)))
+                    (SPADCALL (SPADCALL |b| |a| (QREFELT % 8)) |nint|
+                              (QREFELT % 10)))
+              (LETT |x1| |a|) (LETT |x2| (SPADCALL |a| |hh| (QREFELT % 11)))
               (LETT |io|
-                    (LIST (SPADCALL |x1| (QREFELT $ 13))
-                          (SPADCALL |x2| (QREFELT $ 13))))
+                    (LIST (SPADCALL |x1| (QREFELT % 13))
+                          (SPADCALL |x2| (QREFELT % 13))))
               (SEQ (LETT |i| 1) (LETT #1# |nint|) G190
                    (COND ((|greater_SI| |i| #1#) (GO G191)))
                    (SEQ
                     (LETT |ans|
                           (SPADCALL |func| |x1| |x2| |epsrel| |epsabs| |nmin|
-                                    |nmax| (QREFELT $ 30)))
+                                    |nmax| (QREFELT % 30)))
                     (COND
                      ((NULL (QVELT |ans| 3))
                       (SEQ
-                       (SPADCALL |io| 1 (SPADCALL |x1| (QREFELT $ 13))
-                                 (QREFELT $ 19))
-                       (SPADCALL |io| 2 (SPADCALL |x2| (QREFELT $ 13))
-                                 (QREFELT $ 19))
+                       (SPADCALL |io| 1 (SPADCALL |x1| (QREFELT % 13))
+                                 (QREFELT % 19))
+                       (SPADCALL |io| 2 (SPADCALL |x2| (QREFELT % 13))
+                                 (QREFELT % 19))
                        (EXIT
                         (SPADCALL
                          (SPADCALL
                           (CONS
                            (SPADCALL "accuracy not reached in interval"
-                                     (QREFELT $ 21))
+                                     (QREFELT % 21))
                            |io|)
-                          (QREFELT $ 23))
-                         (QREFELT $ 25))))))
+                          (QREFELT % 23))
+                         (QREFELT % 25))))))
                     (LETT |sum|
-                          (SPADCALL |sum| (QVELT |ans| 0) (QREFELT $ 11)))
+                          (SPADCALL |sum| (QVELT |ans| 0) (QREFELT % 11)))
                     (LETT |err|
                           (SPADCALL |err|
-                                    (SPADCALL (QVELT |ans| 1) (QREFELT $ 26))
-                                    (QREFELT $ 11)))
+                                    (SPADCALL (QVELT |ans| 1) (QREFELT % 26))
+                                    (QREFELT % 11)))
                     (LETT |pts| (- (+ |pts| (QVELT |ans| 2)) 1))
                     (LETT |done| (COND (|done| (QVELT |ans| 3)) ('T NIL)))
                     (LETT |x1| |x2|)
-                    (EXIT (LETT |x2| (SPADCALL |x2| |hh| (QREFELT $ 11)))))
+                    (EXIT (LETT |x2| (SPADCALL |x2| |hh| (QREFELT % 11)))))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
               (EXIT (VECTOR |sum| |err| |pts| |done|))))) 
 
 (SDEFUN |NUMQUAD;romberg;M4F2IR;4|
         ((|func| (|Mapping| F F)) (|a| (F)) (|b| (F)) (|epsrel| (F))
          (|epsabs| (F)) (|nmin| (|Integer|)) (|nmax| (|Integer|))
-         ($
+         (%
           (|Record| (|:| |value| F) (|:| |error| F)
                     (|:| |totalpts| (|Integer|)) (|:| |success| (|Boolean|)))))
         (SPROG
          ((|qx1| (F)) (|pts| (|Integer|)) (|delta| (F)) (|oldsum| (F))
-          (#1=#:G768 NIL) (|change| (F)) (|four| (|PositiveInteger|))
-          (|i| (|Integer|)) (#2=#:G770 NIL) (|j| NIL) (|newest| (F))
-          (|newsum| (F)) (#3=#:G769 NIL) (|n| NIL) (|table| (|Vector| F))
-          (#4=#:G748 NIL) (|length| (F)))
+          (#1=#:G504 NIL) (|change| (F)) (|four| (|PositiveInteger|))
+          (|i| (|Integer|)) (#2=#:G506 NIL) (|j| NIL) (|newest| (F))
+          (|newsum| (F)) (#3=#:G505 NIL) (|n| NIL) (|table| (|Vector| F))
+          (#4=#:G488 NIL) (|length| (F)))
          (SEQ
           (EXIT
-           (SEQ (LETT |length| (SPADCALL |b| |a| (QREFELT $ 8)))
+           (SEQ (LETT |length| (SPADCALL |b| |a| (QREFELT % 8)))
                 (LETT |delta| |length|)
                 (LETT |newsum|
                       (SPADCALL
                        (SPADCALL |length|
                                  (SPADCALL (SPADCALL |a| |func|)
                                            (SPADCALL |b| |func|)
-                                           (QREFELT $ 11))
-                                 (QREFELT $ 32))
-                       2 (QREFELT $ 10)))
-                (LETT |newest| (|spadConstant| $ 7))
-                (LETT |oldsum| (|spadConstant| $ 7))
-                (LETT |change| (|spadConstant| $ 7)) (LETT |qx1| |newsum|)
+                                           (QREFELT % 11))
+                                 (QREFELT % 32))
+                       2 (QREFELT % 10)))
+                (LETT |newest| (|spadConstant| % 7))
+                (LETT |oldsum| (|spadConstant| % 7))
+                (LETT |change| (|spadConstant| % 7)) (LETT |qx1| |newsum|)
                 (LETT |table|
                       (MAKEARR1
                        (PROG1 (LETT #4# (+ |nmax| 1))
                          (|check_subtype2| (> #4# 0) '(|PositiveInteger|)
                                            '(|Integer|) #4#))
-                       (|spadConstant| $ 7)))
+                       (|spadConstant| % 7)))
                 (LETT |pts| 1)
                 (COND
                  ((< |nmin| 2)
                   (SEQ
                    (SPADCALL "romberg: nmin to small (nmin > 1) nmin = "
-                             (SPADCALL |nmin| (QREFELT $ 33)) (QREFELT $ 35))
+                             (SPADCALL |nmin| (QREFELT % 33)) (QREFELT % 35))
                    (EXIT
                     (PROGN
                      (LETT #1#
-                           (VECTOR (|spadConstant| $ 7) (|spadConstant| $ 7) 0
+                           (VECTOR (|spadConstant| % 7) (|spadConstant| % 7) 0
                                    NIL))
-                     (GO #5=#:G767))))))
+                     (GO #5=#:G503))))))
                 (COND
                  ((< |nmax| |nmin|)
                   (SEQ
                    (SPADCALL "romberg: nmax < nmin : nmax = "
-                             (SPADCALL |nmax| (QREFELT $ 33)) (QREFELT $ 35))
+                             (SPADCALL |nmax| (QREFELT % 33)) (QREFELT % 35))
                    (SPADCALL "                       nmin = "
-                             (SPADCALL |nmin| (QREFELT $ 33)) (QREFELT $ 35))
+                             (SPADCALL |nmin| (QREFELT % 33)) (QREFELT % 35))
                    (EXIT
                     (PROGN
                      (LETT #1#
-                           (VECTOR (|spadConstant| $ 7) (|spadConstant| $ 7) 0
+                           (VECTOR (|spadConstant| % 7) (|spadConstant| % 7) 0
                                    NIL))
                      (GO #5#))))))
                 (COND
-                 ((SPADCALL |a| |b| (QREFELT $ 37))
+                 ((SPADCALL |a| |b| (QREFELT % 37))
                   (SEQ
                    (SPADCALL "romberg: integration limits are equal  = "
-                             (SPADCALL |a| (QREFELT $ 13)) (QREFELT $ 35))
+                             (SPADCALL |a| (QREFELT % 13)) (QREFELT % 35))
                    (EXIT
                     (PROGN
                      (LETT #1#
-                           (VECTOR (|spadConstant| $ 7) (|spadConstant| $ 7) 1
+                           (VECTOR (|spadConstant| % 7) (|spadConstant| % 7) 1
                                    'T))
                      (GO #5#))))))
                 (COND
-                 ((SPADCALL |epsrel| (|spadConstant| $ 7) (QREFELT $ 38))
+                 ((SPADCALL |epsrel| (|spadConstant| % 7) (QREFELT % 38))
                   (SEQ
                    (SPADCALL "romberg: eps_r < 0.0            eps_r  = "
-                             (SPADCALL |epsrel| (QREFELT $ 13)) (QREFELT $ 35))
+                             (SPADCALL |epsrel| (QREFELT % 13)) (QREFELT % 35))
                    (EXIT
                     (PROGN
                      (LETT #1#
-                           (VECTOR (|spadConstant| $ 7) (|spadConstant| $ 7) 0
+                           (VECTOR (|spadConstant| % 7) (|spadConstant| % 7) 0
                                    NIL))
                      (GO #5#))))))
                 (COND
-                 ((SPADCALL |epsabs| (|spadConstant| $ 7) (QREFELT $ 38))
+                 ((SPADCALL |epsabs| (|spadConstant| % 7) (QREFELT % 38))
                   (SEQ
                    (SPADCALL "romberg: eps_a < 0.0            eps_a  = "
-                             (SPADCALL |epsabs| (QREFELT $ 13)) (QREFELT $ 35))
+                             (SPADCALL |epsabs| (QREFELT % 13)) (QREFELT % 35))
                    (EXIT
                     (PROGN
                      (LETT #1#
-                           (VECTOR (|spadConstant| $ 7) (|spadConstant| $ 7) 0
+                           (VECTOR (|spadConstant| % 7) (|spadConstant| % 7) 0
                                    NIL))
                      (GO #5#))))))
                 (SEQ (LETT |n| 1) (LETT #3# |nmax|) G190
@@ -269,14 +269,14 @@
                      (SEQ (LETT |oldsum| |newsum|)
                           (LETT |newsum|
                                 (|NUMQUAD;trapclosed| |func| |a| |delta|
-                                 |oldsum| |pts| $))
+                                 |oldsum| |pts| %))
                           (LETT |newest|
                                 (SPADCALL
-                                 (SPADCALL (SPADCALL 4 |newsum| (QREFELT $ 40))
-                                           |oldsum| (QREFELT $ 8))
-                                 3 (QREFELT $ 10)))
+                                 (SPADCALL (SPADCALL 4 |newsum| (QREFELT % 40))
+                                           |oldsum| (QREFELT % 8))
+                                 3 (QREFELT % 10)))
                           (LETT |four| 4)
-                          (SPADCALL |table| |n| |newest| (QREFELT $ 42))
+                          (SPADCALL |table| |n| |newest| (QREFELT % 42))
                           (SEQ (LETT |j| 2) (LETT #2# |n|) G190
                                (COND ((|greater_SI| |j| #2#) (GO G191)))
                                (SEQ (LETT |i| (- (+ |n| 1) |j|))
@@ -285,17 +285,17 @@
                                      (SPADCALL |table| |i|
                                                (SPADCALL
                                                 (SPADCALL |table| (+ |i| 1)
-                                                          (QREFELT $ 43))
+                                                          (QREFELT % 43))
                                                 (SPADCALL
                                                  (SPADCALL
                                                   (SPADCALL |table| (+ |i| 1)
-                                                            (QREFELT $ 43))
+                                                            (QREFELT % 43))
                                                   (SPADCALL |table| |i|
-                                                            (QREFELT $ 43))
-                                                  (QREFELT $ 8))
-                                                 (- |four| 1) (QREFELT $ 10))
-                                                (QREFELT $ 11))
-                                               (QREFELT $ 42))))
+                                                            (QREFELT % 43))
+                                                  (QREFELT % 8))
+                                                 (- |four| 1) (QREFELT % 10))
+                                                (QREFELT % 11))
+                                               (QREFELT % 42))))
                                (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                                (EXIT NIL))
                           (COND
@@ -304,119 +304,119 @@
                              (LETT |change|
                                    (SPADCALL
                                     (SPADCALL
-                                     (SPADCALL |table| 1 (QREFELT $ 43)) |qx1|
-                                     (QREFELT $ 8))
-                                    (QREFELT $ 26)))
+                                     (SPADCALL |table| 1 (QREFELT % 43)) |qx1|
+                                     (QREFELT % 8))
+                                    (QREFELT % 26)))
                              (EXIT
                               (COND
                                ((OR
                                  (SPADCALL |change|
                                            (SPADCALL
                                             (SPADCALL |epsrel| |qx1|
-                                                      (QREFELT $ 32))
-                                            (QREFELT $ 26))
-                                           (QREFELT $ 38))
-                                 (SPADCALL |change| |epsabs| (QREFELT $ 38)))
+                                                      (QREFELT % 32))
+                                            (QREFELT % 26))
+                                           (QREFELT % 38))
+                                 (SPADCALL |change| |epsabs| (QREFELT % 38)))
                                 (PROGN
                                  (LETT #1#
                                        (VECTOR
-                                        (SPADCALL |table| 1 (QREFELT $ 43))
+                                        (SPADCALL |table| 1 (QREFELT % 43))
                                         |change| (+ (* 2 |pts|) 1) 'T))
                                  (GO #5#))))))))
                           (LETT |oldsum| |newsum|)
-                          (LETT |delta| (SPADCALL |delta| 2 (QREFELT $ 10)))
+                          (LETT |delta| (SPADCALL |delta| 2 (QREFELT % 10)))
                           (LETT |pts| (* 2 |pts|))
                           (EXIT
-                           (LETT |qx1| (SPADCALL |table| 1 (QREFELT $ 43)))))
+                           (LETT |qx1| (SPADCALL |table| 1 (QREFELT % 43)))))
                      (LETT |n| (|inc_SI| |n|)) (GO G190) G191 (EXIT NIL))
                 (EXIT
-                 (VECTOR (SPADCALL |table| 1 (QREFELT $ 43))
-                         (SPADCALL (SPADCALL 5 4 (QREFELT $ 45)) |change|
-                                   (QREFELT $ 46))
+                 (VECTOR (SPADCALL |table| 1 (QREFELT % 43))
+                         (SPADCALL (SPADCALL 5 4 (QREFELT % 45)) |change|
+                                   (QREFELT % 46))
                          (+ |pts| 1) NIL))))
           #5# (EXIT #1#)))) 
 
 (SDEFUN |NUMQUAD;simpson;M4F2IR;5|
         ((|func| (|Mapping| F F)) (|a| (F)) (|b| (F)) (|epsrel| (F))
          (|epsabs| (F)) (|nmin| (|Integer|)) (|nmax| (|Integer|))
-         ($
+         (%
           (|Record| (|:| |value| F) (|:| |error| F)
                     (|:| |totalpts| (|Integer|)) (|:| |success| (|Boolean|)))))
         (SPROG
-         ((|pts| (|Integer|)) (|delta| (F)) (|oldsum| (F)) (#1=#:G784 NIL)
-          (|change| (F)) (|newest| (F)) (|newsum| (F)) (#2=#:G785 NIL)
+         ((|pts| (|Integer|)) (|delta| (F)) (|oldsum| (F)) (#1=#:G520 NIL)
+          (|change| (F)) (|newest| (F)) (|newsum| (F)) (#2=#:G521 NIL)
           (|n| NIL) (|oldest| (F)) (|length| (F)))
          (SEQ
           (EXIT
-           (SEQ (LETT |length| (SPADCALL |b| |a| (QREFELT $ 8)))
+           (SEQ (LETT |length| (SPADCALL |b| |a| (QREFELT % 8)))
                 (LETT |delta| |length|)
                 (LETT |newsum|
                       (SPADCALL
                        (SPADCALL |length|
                                  (SPADCALL (SPADCALL |a| |func|)
                                            (SPADCALL |b| |func|)
-                                           (QREFELT $ 11))
-                                 (QREFELT $ 32))
-                       2 (QREFELT $ 10)))
-                (LETT |newest| (|spadConstant| $ 7))
-                (LETT |oldsum| (|spadConstant| $ 7))
-                (LETT |oldest| (|spadConstant| $ 7))
-                (LETT |change| (|spadConstant| $ 7)) (LETT |pts| 1)
+                                           (QREFELT % 11))
+                                 (QREFELT % 32))
+                       2 (QREFELT % 10)))
+                (LETT |newest| (|spadConstant| % 7))
+                (LETT |oldsum| (|spadConstant| % 7))
+                (LETT |oldest| (|spadConstant| % 7))
+                (LETT |change| (|spadConstant| % 7)) (LETT |pts| 1)
                 (COND
                  ((< |nmin| 2)
                   (SEQ
                    (SPADCALL "simpson: nmin to small (nmin > 1) nmin = "
-                             (SPADCALL |nmin| (QREFELT $ 33)) (QREFELT $ 35))
+                             (SPADCALL |nmin| (QREFELT % 33)) (QREFELT % 35))
                    (EXIT
                     (PROGN
                      (LETT #1#
-                           (VECTOR (|spadConstant| $ 7) (|spadConstant| $ 7) 0
+                           (VECTOR (|spadConstant| % 7) (|spadConstant| % 7) 0
                                    NIL))
-                     (GO #3=#:G783))))))
+                     (GO #3=#:G519))))))
                 (COND
                  ((< |nmax| |nmin|)
                   (SEQ
                    (SPADCALL "simpson: nmax < nmin : nmax = "
-                             (SPADCALL |nmax| (QREFELT $ 33)) (QREFELT $ 35))
+                             (SPADCALL |nmax| (QREFELT % 33)) (QREFELT % 35))
                    (SPADCALL "                       nmin = "
-                             (SPADCALL |nmin| (QREFELT $ 33)) (QREFELT $ 35))
+                             (SPADCALL |nmin| (QREFELT % 33)) (QREFELT % 35))
                    (EXIT
                     (PROGN
                      (LETT #1#
-                           (VECTOR (|spadConstant| $ 7) (|spadConstant| $ 7) 0
+                           (VECTOR (|spadConstant| % 7) (|spadConstant| % 7) 0
                                    NIL))
                      (GO #3#))))))
                 (COND
-                 ((SPADCALL |a| |b| (QREFELT $ 37))
+                 ((SPADCALL |a| |b| (QREFELT % 37))
                   (SEQ
                    (SPADCALL "simpson: integration limits are equal  = "
-                             (SPADCALL |a| (QREFELT $ 13)) (QREFELT $ 35))
+                             (SPADCALL |a| (QREFELT % 13)) (QREFELT % 35))
                    (EXIT
                     (PROGN
                      (LETT #1#
-                           (VECTOR (|spadConstant| $ 7) (|spadConstant| $ 7) 1
+                           (VECTOR (|spadConstant| % 7) (|spadConstant| % 7) 1
                                    'T))
                      (GO #3#))))))
                 (COND
-                 ((SPADCALL |epsrel| (|spadConstant| $ 7) (QREFELT $ 38))
+                 ((SPADCALL |epsrel| (|spadConstant| % 7) (QREFELT % 38))
                   (SEQ
                    (SPADCALL "simpson: eps_r < 0.0 : eps_r = "
-                             (SPADCALL |epsrel| (QREFELT $ 13)) (QREFELT $ 35))
+                             (SPADCALL |epsrel| (QREFELT % 13)) (QREFELT % 35))
                    (EXIT
                     (PROGN
                      (LETT #1#
-                           (VECTOR (|spadConstant| $ 7) (|spadConstant| $ 7) 0
+                           (VECTOR (|spadConstant| % 7) (|spadConstant| % 7) 0
                                    NIL))
                      (GO #3#))))))
                 (COND
-                 ((SPADCALL |epsabs| (|spadConstant| $ 7) (QREFELT $ 38))
+                 ((SPADCALL |epsabs| (|spadConstant| % 7) (QREFELT % 38))
                   (SEQ
                    (SPADCALL "simpson: eps_a < 0.0 : eps_a = "
-                             (SPADCALL |epsabs| (QREFELT $ 13)) (QREFELT $ 35))
+                             (SPADCALL |epsabs| (QREFELT % 13)) (QREFELT % 35))
                    (EXIT
                     (PROGN
                      (LETT #1#
-                           (VECTOR (|spadConstant| $ 7) (|spadConstant| $ 7) 0
+                           (VECTOR (|spadConstant| % 7) (|spadConstant| % 7) 0
                                    NIL))
                      (GO #3#))))))
                 (SEQ (LETT |n| 1) (LETT #2# |nmax|) G190
@@ -424,126 +424,126 @@
                      (SEQ (LETT |oldsum| |newsum|)
                           (LETT |newsum|
                                 (|NUMQUAD;trapclosed| |func| |a| |delta|
-                                 |oldsum| |pts| $))
+                                 |oldsum| |pts| %))
                           (LETT |newest|
                                 (SPADCALL
-                                 (SPADCALL (SPADCALL 4 |newsum| (QREFELT $ 40))
-                                           |oldsum| (QREFELT $ 8))
-                                 3 (QREFELT $ 10)))
+                                 (SPADCALL (SPADCALL 4 |newsum| (QREFELT % 40))
+                                           |oldsum| (QREFELT % 8))
+                                 3 (QREFELT % 10)))
                           (COND
                            ((> |n| |nmin|)
                             (SEQ
                              (LETT |change|
                                    (SPADCALL
-                                    (SPADCALL |newest| |oldest| (QREFELT $ 8))
-                                    (QREFELT $ 26)))
+                                    (SPADCALL |newest| |oldest| (QREFELT % 8))
+                                    (QREFELT % 26)))
                              (EXIT
                               (COND
                                ((OR
                                  (SPADCALL |change|
                                            (SPADCALL
                                             (SPADCALL |epsrel| |oldest|
-                                                      (QREFELT $ 32))
-                                            (QREFELT $ 26))
-                                           (QREFELT $ 38))
-                                 (SPADCALL |change| |epsabs| (QREFELT $ 38)))
+                                                      (QREFELT % 32))
+                                            (QREFELT % 26))
+                                           (QREFELT % 38))
+                                 (SPADCALL |change| |epsabs| (QREFELT % 38)))
                                 (PROGN
                                  (LETT #1#
                                        (VECTOR |newest|
                                                (SPADCALL
-                                                (SPADCALL 5 4 (QREFELT $ 45))
-                                                |change| (QREFELT $ 46))
+                                                (SPADCALL 5 4 (QREFELT % 45))
+                                                |change| (QREFELT % 46))
                                                (+ (* 2 |pts|) 1) 'T))
                                  (GO #3#))))))))
                           (LETT |oldsum| |newsum|)
-                          (LETT |delta| (SPADCALL |delta| 2 (QREFELT $ 10)))
+                          (LETT |delta| (SPADCALL |delta| 2 (QREFELT % 10)))
                           (EXIT (LETT |pts| (* 2 |pts|))))
                      (LETT |n| (|inc_SI| |n|)) (GO G190) G191 (EXIT NIL))
                 (EXIT
                  (VECTOR |newest|
-                         (SPADCALL (SPADCALL 5 4 (QREFELT $ 45)) |change|
-                                   (QREFELT $ 46))
+                         (SPADCALL (SPADCALL 5 4 (QREFELT % 45)) |change|
+                                   (QREFELT % 46))
                          (+ |pts| 1) NIL))))
           #3# (EXIT #1#)))) 
 
 (SDEFUN |NUMQUAD;trapezoidal;M4F2IR;6|
         ((|func| (|Mapping| F F)) (|a| (F)) (|b| (F)) (|epsrel| (F))
          (|epsabs| (F)) (|nmin| (|Integer|)) (|nmax| (|Integer|))
-         ($
+         (%
           (|Record| (|:| |value| F) (|:| |error| F)
                     (|:| |totalpts| (|Integer|)) (|:| |success| (|Boolean|)))))
         (SPROG
-         ((|pts| (|Integer|)) (|delta| (F)) (#1=#:G799 NIL) (|change| (F))
-          (|newsum| (F)) (|oldsum| (F)) (#2=#:G800 NIL) (|n| NIL)
+         ((|pts| (|Integer|)) (|delta| (F)) (#1=#:G535 NIL) (|change| (F))
+          (|newsum| (F)) (|oldsum| (F)) (#2=#:G536 NIL) (|n| NIL)
           (|length| (F)))
          (SEQ
           (EXIT
-           (SEQ (LETT |length| (SPADCALL |b| |a| (QREFELT $ 8)))
+           (SEQ (LETT |length| (SPADCALL |b| |a| (QREFELT % 8)))
                 (LETT |delta| |length|)
                 (LETT |newsum|
                       (SPADCALL
                        (SPADCALL |length|
                                  (SPADCALL (SPADCALL |a| |func|)
                                            (SPADCALL |b| |func|)
-                                           (QREFELT $ 11))
-                                 (QREFELT $ 32))
-                       2 (QREFELT $ 10)))
-                (LETT |change| (|spadConstant| $ 7)) (LETT |pts| 1)
+                                           (QREFELT % 11))
+                                 (QREFELT % 32))
+                       2 (QREFELT % 10)))
+                (LETT |change| (|spadConstant| % 7)) (LETT |pts| 1)
                 (COND
                  ((< |nmin| 2)
                   (SEQ
                    (SPADCALL "trapezoidal: nmin to small (nmin > 1) nmin = "
-                             (SPADCALL |nmin| (QREFELT $ 33)) (QREFELT $ 35))
+                             (SPADCALL |nmin| (QREFELT % 33)) (QREFELT % 35))
                    (EXIT
                     (PROGN
                      (LETT #1#
-                           (VECTOR (|spadConstant| $ 7) (|spadConstant| $ 7) 0
+                           (VECTOR (|spadConstant| % 7) (|spadConstant| % 7) 0
                                    NIL))
-                     (GO #3=#:G798))))))
+                     (GO #3=#:G534))))))
                 (COND
                  ((< |nmax| |nmin|)
                   (SEQ
                    (SPADCALL "trapezoidal: nmax < nmin : nmax = "
-                             (SPADCALL |nmax| (QREFELT $ 33)) (QREFELT $ 35))
+                             (SPADCALL |nmax| (QREFELT % 33)) (QREFELT % 35))
                    (SPADCALL "                           nmin = "
-                             (SPADCALL |nmin| (QREFELT $ 33)) (QREFELT $ 35))
+                             (SPADCALL |nmin| (QREFELT % 33)) (QREFELT % 35))
                    (EXIT
                     (PROGN
                      (LETT #1#
-                           (VECTOR (|spadConstant| $ 7) (|spadConstant| $ 7) 0
+                           (VECTOR (|spadConstant| % 7) (|spadConstant| % 7) 0
                                    NIL))
                      (GO #3#))))))
                 (COND
-                 ((SPADCALL |a| |b| (QREFELT $ 37))
+                 ((SPADCALL |a| |b| (QREFELT % 37))
                   (SEQ
                    (SPADCALL "trapezoidal: integration limits are equal  = "
-                             (SPADCALL |a| (QREFELT $ 13)) (QREFELT $ 35))
+                             (SPADCALL |a| (QREFELT % 13)) (QREFELT % 35))
                    (EXIT
                     (PROGN
                      (LETT #1#
-                           (VECTOR (|spadConstant| $ 7) (|spadConstant| $ 7) 1
+                           (VECTOR (|spadConstant| % 7) (|spadConstant| % 7) 1
                                    'T))
                      (GO #3#))))))
                 (COND
-                 ((SPADCALL |epsrel| (|spadConstant| $ 7) (QREFELT $ 38))
+                 ((SPADCALL |epsrel| (|spadConstant| % 7) (QREFELT % 38))
                   (SEQ
                    (SPADCALL "trapezoidal: eps_r < 0.0 : eps_r = "
-                             (SPADCALL |epsrel| (QREFELT $ 13)) (QREFELT $ 35))
+                             (SPADCALL |epsrel| (QREFELT % 13)) (QREFELT % 35))
                    (EXIT
                     (PROGN
                      (LETT #1#
-                           (VECTOR (|spadConstant| $ 7) (|spadConstant| $ 7) 0
+                           (VECTOR (|spadConstant| % 7) (|spadConstant| % 7) 0
                                    NIL))
                      (GO #3#))))))
                 (COND
-                 ((SPADCALL |epsabs| (|spadConstant| $ 7) (QREFELT $ 38))
+                 ((SPADCALL |epsabs| (|spadConstant| % 7) (QREFELT % 38))
                   (SEQ
                    (SPADCALL "trapezoidal: eps_a < 0.0 : eps_a = "
-                             (SPADCALL |epsabs| (QREFELT $ 13)) (QREFELT $ 35))
+                             (SPADCALL |epsabs| (QREFELT % 13)) (QREFELT % 35))
                    (EXIT
                     (PROGN
                      (LETT #1#
-                           (VECTOR (|spadConstant| $ 7) (|spadConstant| $ 7) 0
+                           (VECTOR (|spadConstant| % 7) (|spadConstant| % 7) 0
                                    NIL))
                      (GO #3#))))))
                 (SEQ (LETT |n| 1) (LETT #2# |nmax|) G190
@@ -551,90 +551,90 @@
                      (SEQ (LETT |oldsum| |newsum|)
                           (LETT |newsum|
                                 (|NUMQUAD;trapclosed| |func| |a| |delta|
-                                 |oldsum| |pts| $))
+                                 |oldsum| |pts| %))
                           (COND
                            ((> |n| |nmin|)
                             (SEQ
                              (LETT |change|
                                    (SPADCALL
-                                    (SPADCALL |newsum| |oldsum| (QREFELT $ 8))
-                                    (QREFELT $ 26)))
+                                    (SPADCALL |newsum| |oldsum| (QREFELT % 8))
+                                    (QREFELT % 26)))
                              (EXIT
                               (COND
                                ((OR
                                  (SPADCALL |change|
                                            (SPADCALL
                                             (SPADCALL |epsrel| |oldsum|
-                                                      (QREFELT $ 32))
-                                            (QREFELT $ 26))
-                                           (QREFELT $ 38))
-                                 (SPADCALL |change| |epsabs| (QREFELT $ 38)))
+                                                      (QREFELT % 32))
+                                            (QREFELT % 26))
+                                           (QREFELT % 38))
+                                 (SPADCALL |change| |epsabs| (QREFELT % 38)))
                                 (PROGN
                                  (LETT #1#
                                        (VECTOR |newsum|
                                                (SPADCALL
-                                                (SPADCALL 5 4 (QREFELT $ 45))
-                                                |change| (QREFELT $ 46))
+                                                (SPADCALL 5 4 (QREFELT % 45))
+                                                |change| (QREFELT % 46))
                                                (+ (* 2 |pts|) 1) 'T))
                                  (GO #3#))))))))
-                          (LETT |delta| (SPADCALL |delta| 2 (QREFELT $ 10)))
+                          (LETT |delta| (SPADCALL |delta| 2 (QREFELT % 10)))
                           (EXIT (LETT |pts| (* 2 |pts|))))
                      (LETT |n| (|inc_SI| |n|)) (GO G190) G191 (EXIT NIL))
                 (EXIT
                  (VECTOR |newsum|
-                         (SPADCALL (SPADCALL 5 4 (QREFELT $ 45)) |change|
-                                   (QREFELT $ 46))
+                         (SPADCALL (SPADCALL 5 4 (QREFELT % 45)) |change|
+                                   (QREFELT % 46))
                          (+ |pts| 1) NIL))))
           #3# (EXIT #1#)))) 
 
 (SDEFUN |NUMQUAD;rombergo;M4F2IR;7|
         ((|func| (|Mapping| F F)) (|a| (F)) (|b| (F)) (|epsrel| (F))
          (|epsabs| (F)) (|nmin| (|Integer|)) (|nmax| (|Integer|))
-         ($
+         (%
           (|Record| (|:| |value| F) (|:| |error| F)
                     (|:| |totalpts| (|Integer|)) (|:| |success| (|Boolean|)))))
         (SPROG
          ((|qx1| (F)) (|pts| (|Integer|)) (|delta| (F)) (|oldsum| (F))
-          (#1=#:G813 NIL) (|change| (F)) (|nine| (|PositiveInteger|))
-          (|i| (|Integer|)) (#2=#:G815 NIL) (|j| NIL) (|newest| (F))
-          (|newsum| (F)) (#3=#:G814 NIL) (|n| NIL) (|table| (|Vector| F))
-          (#4=#:G802 NIL) (|length| (F)))
+          (#1=#:G549 NIL) (|change| (F)) (|nine| (|PositiveInteger|))
+          (|i| (|Integer|)) (#2=#:G551 NIL) (|j| NIL) (|newest| (F))
+          (|newsum| (F)) (#3=#:G550 NIL) (|n| NIL) (|table| (|Vector| F))
+          (#4=#:G538 NIL) (|length| (F)))
          (SEQ
           (EXIT
-           (SEQ (LETT |length| (SPADCALL |b| |a| (QREFELT $ 8)))
-                (LETT |delta| (SPADCALL |length| 3 (QREFELT $ 10)))
+           (SEQ (LETT |length| (SPADCALL |b| |a| (QREFELT % 8)))
+                (LETT |delta| (SPADCALL |length| 3 (QREFELT % 10)))
                 (LETT |newsum|
                       (SPADCALL |length|
                                 (SPADCALL
-                                 (SPADCALL (SPADCALL |a| |b| (QREFELT $ 11)) 2
-                                           (QREFELT $ 10))
+                                 (SPADCALL (SPADCALL |a| |b| (QREFELT % 11)) 2
+                                           (QREFELT % 10))
                                  |func|)
-                                (QREFELT $ 32)))
-                (LETT |newest| (|spadConstant| $ 7))
-                (LETT |oldsum| (|spadConstant| $ 7))
-                (LETT |change| (|spadConstant| $ 7)) (LETT |qx1| |newsum|)
+                                (QREFELT % 32)))
+                (LETT |newest| (|spadConstant| % 7))
+                (LETT |oldsum| (|spadConstant| % 7))
+                (LETT |change| (|spadConstant| % 7)) (LETT |qx1| |newsum|)
                 (LETT |table|
                       (MAKEARR1
                        (PROG1 (LETT #4# (+ |nmax| 1))
                          (|check_subtype2| (> #4# 0) '(|PositiveInteger|)
                                            '(|Integer|) #4#))
-                       (|spadConstant| $ 7)))
+                       (|spadConstant| % 7)))
                 (LETT |pts| 1)
                 (SEQ (LETT |n| 1) (LETT #3# |nmax|) G190
                      (COND ((|greater_SI| |n| #3#) (GO G191)))
                      (SEQ (LETT |oldsum| |newsum|)
                           (LETT |newsum|
                                 (|NUMQUAD;trapopen| |func| |a| |delta| |oldsum|
-                                 |pts| $))
+                                 |pts| %))
                           (LETT |newest|
                                 (SPADCALL
-                                 (SPADCALL (SPADCALL 9 |newsum| (QREFELT $ 40))
-                                           |oldsum| (QREFELT $ 8))
-                                 8 (QREFELT $ 10)))
-                          (SPADCALL |table| |n| |newest| (QREFELT $ 42))
+                                 (SPADCALL (SPADCALL 9 |newsum| (QREFELT % 40))
+                                           |oldsum| (QREFELT % 8))
+                                 8 (QREFELT % 10)))
+                          (SPADCALL |table| |n| |newest| (QREFELT % 42))
                           (LETT |nine| 9)
-                          (SPADCALL (SPADCALL |newest| (QREFELT $ 13))
-                                    (QREFELT $ 47))
+                          (SPADCALL (SPADCALL |newest| (QREFELT % 13))
+                                    (QREFELT % 47))
                           (SEQ (LETT |j| 2) (LETT #2# |n|) G190
                                (COND ((|greater_SI| |j| #2#) (GO G191)))
                                (SEQ (LETT |i| (- (+ |n| 1) |j|))
@@ -643,17 +643,17 @@
                                      (SPADCALL |table| |i|
                                                (SPADCALL
                                                 (SPADCALL |table| (+ |i| 1)
-                                                          (QREFELT $ 43))
+                                                          (QREFELT % 43))
                                                 (SPADCALL
                                                  (SPADCALL
                                                   (SPADCALL |table| (+ |i| 1)
-                                                            (QREFELT $ 43))
+                                                            (QREFELT % 43))
                                                   (SPADCALL |table| |i|
-                                                            (QREFELT $ 43))
-                                                  (QREFELT $ 8))
-                                                 (- |nine| 1) (QREFELT $ 10))
-                                                (QREFELT $ 11))
-                                               (QREFELT $ 42))))
+                                                            (QREFELT % 43))
+                                                  (QREFELT % 8))
+                                                 (- |nine| 1) (QREFELT % 10))
+                                                (QREFELT % 11))
+                                               (QREFELT % 42))))
                                (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                                (EXIT NIL))
                           (COND
@@ -662,236 +662,236 @@
                              (LETT |change|
                                    (SPADCALL
                                     (SPADCALL
-                                     (SPADCALL |table| 1 (QREFELT $ 43)) |qx1|
-                                     (QREFELT $ 8))
-                                    (QREFELT $ 26)))
+                                     (SPADCALL |table| 1 (QREFELT % 43)) |qx1|
+                                     (QREFELT % 8))
+                                    (QREFELT % 26)))
                              (EXIT
                               (COND
                                ((OR
                                  (SPADCALL |change|
                                            (SPADCALL
                                             (SPADCALL |epsrel| |qx1|
-                                                      (QREFELT $ 32))
-                                            (QREFELT $ 26))
-                                           (QREFELT $ 38))
-                                 (SPADCALL |change| |epsabs| (QREFELT $ 38)))
+                                                      (QREFELT % 32))
+                                            (QREFELT % 26))
+                                           (QREFELT % 38))
+                                 (SPADCALL |change| |epsabs| (QREFELT % 38)))
                                 (PROGN
                                  (LETT #1#
                                        (VECTOR
-                                        (SPADCALL |table| 1 (QREFELT $ 43))
-                                        (SPADCALL (SPADCALL 3 2 (QREFELT $ 45))
-                                                  |change| (QREFELT $ 46))
+                                        (SPADCALL |table| 1 (QREFELT % 43))
+                                        (SPADCALL (SPADCALL 3 2 (QREFELT % 45))
+                                                  |change| (QREFELT % 46))
                                         (* 3 |pts|) 'T))
-                                 (GO #5=#:G812))))))))
-                          (SPADCALL (SPADCALL |table| (QREFELT $ 48))
-                                    (QREFELT $ 47))
+                                 (GO #5=#:G548))))))))
+                          (SPADCALL (SPADCALL |table| (QREFELT % 48))
+                                    (QREFELT % 47))
                           (LETT |oldsum| |newsum|)
-                          (LETT |delta| (SPADCALL |delta| 3 (QREFELT $ 10)))
+                          (LETT |delta| (SPADCALL |delta| 3 (QREFELT % 10)))
                           (LETT |pts| (* 3 |pts|))
                           (EXIT
-                           (LETT |qx1| (SPADCALL |table| 1 (QREFELT $ 43)))))
+                           (LETT |qx1| (SPADCALL |table| 1 (QREFELT % 43)))))
                      (LETT |n| (|inc_SI| |n|)) (GO G190) G191 (EXIT NIL))
                 (EXIT
-                 (VECTOR (SPADCALL |table| 1 (QREFELT $ 43))
-                         (SPADCALL (SPADCALL 3 2 (QREFELT $ 45)) |change|
-                                   (QREFELT $ 46))
+                 (VECTOR (SPADCALL |table| 1 (QREFELT % 43))
+                         (SPADCALL (SPADCALL 3 2 (QREFELT % 45)) |change|
+                                   (QREFELT % 46))
                          |pts| NIL))))
           #5# (EXIT #1#)))) 
 
 (SDEFUN |NUMQUAD;simpsono;M4F2IR;8|
         ((|func| (|Mapping| F F)) (|a| (F)) (|b| (F)) (|epsrel| (F))
          (|epsabs| (F)) (|nmin| (|Integer|)) (|nmax| (|Integer|))
-         ($
+         (%
           (|Record| (|:| |value| F) (|:| |error| F)
                     (|:| |totalpts| (|Integer|)) (|:| |success| (|Boolean|)))))
         (SPROG
          ((|pts| (|Integer|)) (|delta| (F)) (|oldest| (F)) (|oldsum| (F))
-          (#1=#:G824 NIL) (|change| (F)) (|newest| (F)) (|newsum| (F))
-          (#2=#:G825 NIL) (|n| NIL) (|length| (F)))
+          (#1=#:G560 NIL) (|change| (F)) (|newest| (F)) (|newsum| (F))
+          (#2=#:G561 NIL) (|n| NIL) (|length| (F)))
          (SEQ
           (EXIT
-           (SEQ (LETT |length| (SPADCALL |b| |a| (QREFELT $ 8)))
-                (LETT |delta| (SPADCALL |length| 3 (QREFELT $ 10)))
+           (SEQ (LETT |length| (SPADCALL |b| |a| (QREFELT % 8)))
+                (LETT |delta| (SPADCALL |length| 3 (QREFELT % 10)))
                 (LETT |newsum|
                       (SPADCALL |length|
                                 (SPADCALL
-                                 (SPADCALL (SPADCALL |a| |b| (QREFELT $ 11)) 2
-                                           (QREFELT $ 10))
+                                 (SPADCALL (SPADCALL |a| |b| (QREFELT % 11)) 2
+                                           (QREFELT % 10))
                                  |func|)
-                                (QREFELT $ 32)))
-                (LETT |newest| (|spadConstant| $ 7))
-                (LETT |oldsum| (|spadConstant| $ 7))
-                (LETT |oldest| (|spadConstant| $ 7))
-                (LETT |change| (|spadConstant| $ 7)) (LETT |pts| 1)
+                                (QREFELT % 32)))
+                (LETT |newest| (|spadConstant| % 7))
+                (LETT |oldsum| (|spadConstant| % 7))
+                (LETT |oldest| (|spadConstant| % 7))
+                (LETT |change| (|spadConstant| % 7)) (LETT |pts| 1)
                 (SEQ (LETT |n| 1) (LETT #2# |nmax|) G190
                      (COND ((|greater_SI| |n| #2#) (GO G191)))
                      (SEQ (LETT |oldsum| |newsum|)
                           (LETT |newsum|
                                 (|NUMQUAD;trapopen| |func| |a| |delta| |oldsum|
-                                 |pts| $))
+                                 |pts| %))
                           (LETT |newest|
                                 (SPADCALL
-                                 (SPADCALL (SPADCALL 9 |newsum| (QREFELT $ 40))
-                                           |oldsum| (QREFELT $ 8))
-                                 8 (QREFELT $ 10)))
-                          (SPADCALL (SPADCALL |newest| (QREFELT $ 13))
-                                    (QREFELT $ 47))
+                                 (SPADCALL (SPADCALL 9 |newsum| (QREFELT % 40))
+                                           |oldsum| (QREFELT % 8))
+                                 8 (QREFELT % 10)))
+                          (SPADCALL (SPADCALL |newest| (QREFELT % 13))
+                                    (QREFELT % 47))
                           (COND
                            ((> |n| |nmin|)
                             (SEQ
                              (LETT |change|
                                    (SPADCALL
-                                    (SPADCALL |newest| |oldest| (QREFELT $ 8))
-                                    (QREFELT $ 26)))
+                                    (SPADCALL |newest| |oldest| (QREFELT % 8))
+                                    (QREFELT % 26)))
                              (EXIT
                               (COND
                                ((OR
                                  (SPADCALL |change|
                                            (SPADCALL
                                             (SPADCALL |epsrel| |oldest|
-                                                      (QREFELT $ 32))
-                                            (QREFELT $ 26))
-                                           (QREFELT $ 38))
-                                 (SPADCALL |change| |epsabs| (QREFELT $ 38)))
+                                                      (QREFELT % 32))
+                                            (QREFELT % 26))
+                                           (QREFELT % 38))
+                                 (SPADCALL |change| |epsabs| (QREFELT % 38)))
                                 (PROGN
                                  (LETT #1#
                                        (VECTOR |newest|
                                                (SPADCALL
-                                                (SPADCALL 3 2 (QREFELT $ 45))
-                                                |change| (QREFELT $ 46))
+                                                (SPADCALL 3 2 (QREFELT % 45))
+                                                |change| (QREFELT % 46))
                                                (* 3 |pts|) 'T))
-                                 (GO #3=#:G823))))))))
+                                 (GO #3=#:G559))))))))
                           (LETT |oldsum| |newsum|) (LETT |oldest| |newest|)
-                          (LETT |delta| (SPADCALL |delta| 3 (QREFELT $ 10)))
+                          (LETT |delta| (SPADCALL |delta| 3 (QREFELT % 10)))
                           (EXIT (LETT |pts| (* 3 |pts|))))
                      (LETT |n| (|inc_SI| |n|)) (GO G190) G191 (EXIT NIL))
                 (EXIT
                  (VECTOR |newest|
-                         (SPADCALL (SPADCALL 3 2 (QREFELT $ 45)) |change|
-                                   (QREFELT $ 46))
+                         (SPADCALL (SPADCALL 3 2 (QREFELT % 45)) |change|
+                                   (QREFELT % 46))
                          |pts| NIL))))
           #3# (EXIT #1#)))) 
 
 (SDEFUN |NUMQUAD;trapezoidalo;M4F2IR;9|
         ((|func| (|Mapping| F F)) (|a| (F)) (|b| (F)) (|epsrel| (F))
          (|epsabs| (F)) (|nmin| (|Integer|)) (|nmax| (|Integer|))
-         ($
+         (%
           (|Record| (|:| |value| F) (|:| |error| F)
                     (|:| |totalpts| (|Integer|)) (|:| |success| (|Boolean|)))))
         (SPROG
-         ((|pts| (|Integer|)) (|delta| (F)) (#1=#:G834 NIL) (|change| (F))
-          (|newsum| (F)) (|oldsum| (F)) (#2=#:G835 NIL) (|n| NIL)
+         ((|pts| (|Integer|)) (|delta| (F)) (#1=#:G570 NIL) (|change| (F))
+          (|newsum| (F)) (|oldsum| (F)) (#2=#:G571 NIL) (|n| NIL)
           (|length| (F)))
          (SEQ
           (EXIT
-           (SEQ (LETT |length| (SPADCALL |b| |a| (QREFELT $ 8)))
-                (LETT |delta| (SPADCALL |length| 3 (QREFELT $ 10)))
+           (SEQ (LETT |length| (SPADCALL |b| |a| (QREFELT % 8)))
+                (LETT |delta| (SPADCALL |length| 3 (QREFELT % 10)))
                 (LETT |newsum|
                       (SPADCALL |length|
                                 (SPADCALL
-                                 (SPADCALL (SPADCALL |a| |b| (QREFELT $ 11)) 2
-                                           (QREFELT $ 10))
+                                 (SPADCALL (SPADCALL |a| |b| (QREFELT % 11)) 2
+                                           (QREFELT % 10))
                                  |func|)
-                                (QREFELT $ 32)))
-                (LETT |change| (|spadConstant| $ 7)) (LETT |pts| 1)
+                                (QREFELT % 32)))
+                (LETT |change| (|spadConstant| % 7)) (LETT |pts| 1)
                 (SEQ (LETT |n| 1) (LETT #2# |nmax|) G190
                      (COND ((|greater_SI| |n| #2#) (GO G191)))
                      (SEQ (LETT |oldsum| |newsum|)
                           (LETT |newsum|
                                 (|NUMQUAD;trapopen| |func| |a| |delta| |oldsum|
-                                 |pts| $))
-                          (SPADCALL (SPADCALL |newsum| (QREFELT $ 13))
-                                    (QREFELT $ 47))
+                                 |pts| %))
+                          (SPADCALL (SPADCALL |newsum| (QREFELT % 13))
+                                    (QREFELT % 47))
                           (COND
                            ((> |n| |nmin|)
                             (SEQ
                              (LETT |change|
                                    (SPADCALL
-                                    (SPADCALL |newsum| |oldsum| (QREFELT $ 8))
-                                    (QREFELT $ 26)))
+                                    (SPADCALL |newsum| |oldsum| (QREFELT % 8))
+                                    (QREFELT % 26)))
                              (EXIT
                               (COND
                                ((OR
                                  (SPADCALL |change|
                                            (SPADCALL
                                             (SPADCALL |epsrel| |oldsum|
-                                                      (QREFELT $ 32))
-                                            (QREFELT $ 26))
-                                           (QREFELT $ 38))
-                                 (SPADCALL |change| |epsabs| (QREFELT $ 38)))
+                                                      (QREFELT % 32))
+                                            (QREFELT % 26))
+                                           (QREFELT % 38))
+                                 (SPADCALL |change| |epsabs| (QREFELT % 38)))
                                 (PROGN
                                  (LETT #1#
                                        (VECTOR |newsum|
                                                (SPADCALL
-                                                (SPADCALL 3 2 (QREFELT $ 45))
-                                                |change| (QREFELT $ 46))
+                                                (SPADCALL 3 2 (QREFELT % 45))
+                                                |change| (QREFELT % 46))
                                                (* 3 |pts|) 'T))
-                                 (GO #3=#:G833))))))))
-                          (LETT |delta| (SPADCALL |delta| 3 (QREFELT $ 10)))
+                                 (GO #3=#:G569))))))))
+                          (LETT |delta| (SPADCALL |delta| 3 (QREFELT % 10)))
                           (EXIT (LETT |pts| (* 3 |pts|))))
                      (LETT |n| (|inc_SI| |n|)) (GO G190) G191 (EXIT NIL))
                 (EXIT
                  (VECTOR |newsum|
-                         (SPADCALL (SPADCALL 3 2 (QREFELT $ 45)) |change|
-                                   (QREFELT $ 46))
+                         (SPADCALL (SPADCALL 3 2 (QREFELT % 45)) |change|
+                                   (QREFELT % 46))
                          |pts| NIL))))
           #3# (EXIT #1#)))) 
 
 (SDEFUN |NUMQUAD;trapclosed|
         ((|func| (|Mapping| F F)) (|start| (F)) (|h| (F)) (|oldsum| (F))
-         (|numpoints| (|Integer|)) ($ (F)))
-        (SPROG ((|x| (F)) (|sum| (F)) (#1=#:G841 NIL) (|i| NIL))
+         (|numpoints| (|Integer|)) (% (F)))
+        (SPROG ((|x| (F)) (|sum| (F)) (#1=#:G577 NIL) (|i| NIL))
                (SEQ
                 (LETT |x|
-                      (SPADCALL |start| (SPADCALL |h| 2 (QREFELT $ 10))
-                                (QREFELT $ 11)))
-                (LETT |sum| (|spadConstant| $ 7))
+                      (SPADCALL |start| (SPADCALL |h| 2 (QREFELT % 10))
+                                (QREFELT % 11)))
+                (LETT |sum| (|spadConstant| % 7))
                 (SEQ (LETT |i| 1) (LETT #1# |numpoints|) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
                      (SEQ
                       (LETT |sum|
                             (SPADCALL |sum| (SPADCALL |x| |func|)
-                                      (QREFELT $ 11)))
-                      (EXIT (LETT |x| (SPADCALL |x| |h| (QREFELT $ 11)))))
+                                      (QREFELT % 11)))
+                      (EXIT (LETT |x| (SPADCALL |x| |h| (QREFELT % 11)))))
                      (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                 (EXIT
                  (SPADCALL
-                  (SPADCALL |oldsum| (SPADCALL |sum| |h| (QREFELT $ 32))
-                            (QREFELT $ 11))
-                  2 (QREFELT $ 10)))))) 
+                  (SPADCALL |oldsum| (SPADCALL |sum| |h| (QREFELT % 32))
+                            (QREFELT % 11))
+                  2 (QREFELT % 10)))))) 
 
 (SDEFUN |NUMQUAD;trapopen|
         ((|func| (|Mapping| F F)) (|start| (F)) (|del| (F)) (|oldsum| (F))
-         (|numpoints| (|Integer|)) ($ (F)))
-        (SPROG ((|x| (F)) (|sum| (F)) (#1=#:G847 NIL) (|i| NIL) (|ddel| (F)))
-               (SEQ (LETT |ddel| (SPADCALL 2 |del| (QREFELT $ 40)))
+         (|numpoints| (|Integer|)) (% (F)))
+        (SPROG ((|x| (F)) (|sum| (F)) (#1=#:G583 NIL) (|i| NIL) (|ddel| (F)))
+               (SEQ (LETT |ddel| (SPADCALL 2 |del| (QREFELT % 40)))
                     (LETT |x|
-                          (SPADCALL |start| (SPADCALL |del| 2 (QREFELT $ 10))
-                                    (QREFELT $ 11)))
-                    (LETT |sum| (|spadConstant| $ 7))
+                          (SPADCALL |start| (SPADCALL |del| 2 (QREFELT % 10))
+                                    (QREFELT % 11)))
+                    (LETT |sum| (|spadConstant| % 7))
                     (SEQ (LETT |i| 1) (LETT #1# |numpoints|) G190
                          (COND ((|greater_SI| |i| #1#) (GO G191)))
                          (SEQ
                           (LETT |sum|
                                 (SPADCALL |sum| (SPADCALL |x| |func|)
-                                          (QREFELT $ 11)))
-                          (LETT |x| (SPADCALL |x| |ddel| (QREFELT $ 11)))
+                                          (QREFELT % 11)))
+                          (LETT |x| (SPADCALL |x| |ddel| (QREFELT % 11)))
                           (LETT |sum|
                                 (SPADCALL |sum| (SPADCALL |x| |func|)
-                                          (QREFELT $ 11)))
+                                          (QREFELT % 11)))
                           (EXIT
-                           (LETT |x| (SPADCALL |x| |del| (QREFELT $ 11)))))
+                           (LETT |x| (SPADCALL |x| |del| (QREFELT % 11)))))
                          (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                     (EXIT
-                     (SPADCALL (SPADCALL |oldsum| 3 (QREFELT $ 10))
-                               (SPADCALL |sum| |del| (QREFELT $ 32))
-                               (QREFELT $ 11)))))) 
+                     (SPADCALL (SPADCALL |oldsum| 3 (QREFELT % 10))
+                               (SPADCALL |sum| |del| (QREFELT % 32))
+                               (QREFELT % 11)))))) 
 
 (DECLAIM (NOTINLINE |NumericalQuadrature;|)) 
 
-(DEFUN |NumericalQuadrature| (#1=#:G848)
+(DEFUN |NumericalQuadrature| (#1=#:G584)
   (SPROG NIL
-         (PROG (#2=#:G849)
+         (PROG (#2=#:G585)
            (RETURN
             (COND
              ((LETT #2#
@@ -907,19 +907,19 @@
                   (HREM |$ConstructorCache| '|NumericalQuadrature|)))))))))) 
 
 (DEFUN |NumericalQuadrature;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|NumericalQuadrature| DV$1))
-          (LETT $ (GETREFV 52))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 52))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|NumericalQuadrature| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|NumericalQuadrature| '|infovec|
           (LIST
@@ -929,7 +929,7 @@
                         (|:| |success| 36))
               (|Mapping| 6 6) |NUMQUAD;romberg;M4F2IR;4| (27 . |One|)
               (|List| 12) (31 . |setelt!|) (|String|) (38 . |message|)
-              (|List| $) (43 . |blankSeparate|) (|Void|) (48 . |print|)
+              (|List| %) (43 . |blankSeparate|) (|Void|) (48 . |print|)
               (53 . |abs|) |NUMQUAD;aromberg;M4F3IR;1|
               |NUMQUAD;simpson;M4F2IR;5| |NUMQUAD;asimpson;M4F3IR;2|
               |NUMQUAD;trapezoidal;M4F2IR;6| |NUMQUAD;atrapezoidal;M4F3IR;3|

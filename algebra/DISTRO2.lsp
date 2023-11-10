@@ -1,41 +1,41 @@
 
 (SDEFUN |DISTRO2;mapall;MDD;1|
         ((|f| (|Mapping| R2 R1)) (|x| (|Distribution| R1))
-         ($ (|Distribution| R2)))
+         (% (|Distribution| R2)))
         (SPROG
          ((|bcum2| #1=(|Sequence| R2)) (|fcum2| #1#) (|cum2| #1#) (|mom2| #1#))
          (SEQ
           (LETT |mom2|
-                (SPADCALL |f| (SPADCALL |x| (QREFELT $ 10)) (QREFELT $ 14)))
+                (SPADCALL |f| (SPADCALL |x| (QREFELT % 10)) (QREFELT % 14)))
           (LETT |cum2|
-                (SPADCALL |f| (SPADCALL |x| (QREFELT $ 15)) (QREFELT $ 14)))
+                (SPADCALL |f| (SPADCALL |x| (QREFELT % 15)) (QREFELT % 14)))
           (LETT |fcum2|
-                (SPADCALL |f| (SPADCALL |x| (QREFELT $ 16)) (QREFELT $ 14)))
+                (SPADCALL |f| (SPADCALL |x| (QREFELT % 16)) (QREFELT % 14)))
           (LETT |bcum2|
-                (SPADCALL |f| (SPADCALL |x| (QREFELT $ 17)) (QREFELT $ 14)))
-          (EXIT (SPADCALL |mom2| |cum2| |fcum2| |bcum2| (QREFELT $ 19)))))) 
+                (SPADCALL |f| (SPADCALL |x| (QREFELT % 17)) (QREFELT % 14)))
+          (EXIT (SPADCALL |mom2| |cum2| |fcum2| |bcum2| (QREFELT % 19)))))) 
 
-(SDEFUN |DISTRO2;R1_to_R2_coercion;R1R2;2| ((|x| (R1)) ($ (R2)))
-        (SPADCALL |x| (QREFELT $ 21))) 
+(SDEFUN |DISTRO2;R1_to_R2_coercion;R1R2;2| ((|x| (R1)) (% (R2)))
+        (SPADCALL |x| (QREFELT % 21))) 
 
-(SDEFUN |DISTRO2;R1_to_R2_coercion;R1R2;3| ((|x| (R1)) ($ (R2)))
-        (SPADCALL |x| (QREFELT $ 23))) 
+(SDEFUN |DISTRO2;R1_to_R2_coercion;R1R2;3| ((|x| (R1)) (% (R2)))
+        (SPADCALL |x| (QREFELT % 23))) 
 
 (PUT '|DISTRO2;R1_to_R2_coercion;R1R2;4| '|SPADreplace|
      '(XLAM (|x|) (|error| "unimplemented"))) 
 
-(SDEFUN |DISTRO2;R1_to_R2_coercion;R1R2;4| ((|x| (R1)) ($ (R2)))
+(SDEFUN |DISTRO2;R1_to_R2_coercion;R1R2;4| ((|x| (R1)) (% (R2)))
         (|error| "unimplemented")) 
 
 (SDEFUN |DISTRO2;coerce;DD;5|
-        ((|x| (|Distribution| R1)) ($ (|Distribution| R2)))
-        (SPADCALL (ELT $ 22) |x| (QREFELT $ 20))) 
+        ((|x| (|Distribution| R1)) (% (|Distribution| R2)))
+        (SPADCALL (ELT % 22) |x| (QREFELT % 20))) 
 
 (DECLAIM (NOTINLINE |DistributionFunctions2;|)) 
 
-(DEFUN |DistributionFunctions2| (&REST #1=#:G700)
+(DEFUN |DistributionFunctions2| (&REST #1=#:G459)
   (SPROG NIL
-         (PROG (#2=#:G701)
+         (PROG (#2=#:G460)
            (RETURN
             (COND
              ((LETT #2#
@@ -53,43 +53,43 @@
                   (HREM |$ConstructorCache| '|DistributionFunctions2|)))))))))) 
 
 (DEFUN |DistributionFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|DistributionFunctions2| DV$1 DV$2))
-          (LETT $ (GETREFV 25))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 25))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|DistributionFunctions2|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
           (COND
            ((|HasSignature| |#2|
                             (LIST '|coerce|
                                   (LIST (|devaluate| |#2|)
                                         (|devaluate| |#1|))))
-            (QSETREFV $ 22
+            (QSETREFV % 22
                       (CONS
                        (|dispatchFunction| |DISTRO2;R1_to_R2_coercion;R1R2;2|)
-                       $)))
+                       %)))
            ((|HasSignature| |#1|
                             (LIST '|coerce|
                                   (LIST (|devaluate| |#2|)
                                         (|devaluate| |#1|))))
-            (QSETREFV $ 22
+            (QSETREFV % 22
                       (CONS
                        (|dispatchFunction| |DISTRO2;R1_to_R2_coercion;R1R2;3|)
-                       $)))
+                       %)))
            ('T
-            (QSETREFV $ 22
+            (QSETREFV % 22
                       (CONS
                        (|dispatchFunction| |DISTRO2;R1_to_R2_coercion;R1R2;4|)
-                       $))))
-          $))) 
+                       %))))
+          %))) 
 
 (MAKEPROP '|DistributionFunctions2| '|infovec|
           (LIST

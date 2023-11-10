@@ -1,23 +1,23 @@
 
 (SDEFUN |GCNAALG;eval|
-        ((|rf| (|Fraction| (|Polynomial| R))) (|a| ($))
-         ($ (|Fraction| (|Polynomial| R))))
+        ((|rf| (|Fraction| (|Polynomial| R))) (|a| (%))
+         (% (|Fraction| (|Polynomial| R))))
         (SPROG
          ((|bot| #1=(|Polynomial| R)) (|top| #1#)
-          (|lEq| (|List| (|Equation| (|Polynomial| R)))) (#2=#:G742 NIL)
-          (|i| NIL) (#3=#:G741 NIL) (|s| NIL) (#4=#:G740 NIL)
+          (|lEq| (|List| (|Equation| (|Polynomial| R)))) (#2=#:G468 NIL)
+          (|i| NIL) (#3=#:G467 NIL) (|s| NIL) (#4=#:G466 NIL)
           (|coefOfa| (|List| (|Polynomial| R))))
          (SEQ
           (LETT |coefOfa|
-                (SPADCALL (ELT $ 36)
-                          (SPADCALL (SPADCALL |a| (QREFELT $ 37))
-                                    (QREFELT $ 39))
-                          (QREFELT $ 43)))
-          (SETELT $ 8
+                (SPADCALL (ELT % 36)
+                          (SPADCALL (SPADCALL |a| (QREFELT % 37))
+                                    (QREFELT % 39))
+                          (QREFELT % 43)))
+          (SETELT % 8
                   (PROGN
                    (LETT #4# NIL)
                    (SEQ (LETT |s| NIL)
-                        (LETT #3# (SPADCALL (QREFELT $ 18) (QREFELT $ 44)))
+                        (LETT #3# (SPADCALL (QREFELT % 18) (QREFELT % 44)))
                         G190
                         (COND
                          ((OR (ATOM #3#) (PROGN (LETT |s| (CAR #3#)) NIL))
@@ -26,42 +26,42 @@
                          (EXIT
                           (LETT #4#
                                 (CONS
-                                 (SPADCALL (|spadConstant| $ 20) (LIST |s|)
-                                           (LIST 1) (QREFELT $ 26))
+                                 (SPADCALL (|spadConstant| % 20) (LIST |s|)
+                                           (LIST 1) (QREFELT % 26))
                                  #4#))))
                         (LETT #3# (CDR #3#)) (GO G190) G191
                         (EXIT (NREVERSE #4#)))))
           (LETT |lEq| NIL)
-          (SEQ (LETT |i| 1) (LETT #2# (LENGTH (QREFELT $ 8))) G190
+          (SEQ (LETT |i| 1) (LETT #2# (LENGTH (QREFELT % 8))) G190
                (COND ((|greater_SI| |i| #2#) (GO G191)))
                (SEQ
                 (EXIT
                  (LETT |lEq|
                        (CONS
-                        (SPADCALL (SPADCALL (QREFELT $ 8) |i| (QREFELT $ 45))
-                                  (SPADCALL |coefOfa| |i| (QREFELT $ 45))
-                                  (QREFELT $ 47))
+                        (SPADCALL (SPADCALL (QREFELT % 8) |i| (QREFELT % 45))
+                                  (SPADCALL |coefOfa| |i| (QREFELT % 45))
+                                  (QREFELT % 47))
                         |lEq|))))
                (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
           (LETT |top|
-                (SPADCALL (SPADCALL |rf| (QREFELT $ 36)) |lEq| (QREFELT $ 49)))
+                (SPADCALL (SPADCALL |rf| (QREFELT % 36)) |lEq| (QREFELT % 49)))
           (LETT |bot|
-                (SPADCALL (SPADCALL |rf| (QREFELT $ 36)) |lEq| (QREFELT $ 49)))
-          (EXIT (SPADCALL |top| |bot| (QREFELT $ 50)))))) 
+                (SPADCALL (SPADCALL |rf| (QREFELT % 36)) |lEq| (QREFELT % 49)))
+          (EXIT (SPADCALL |top| |bot| (QREFELT % 50)))))) 
 
-(SDEFUN |GCNAALG;genericLeftTraceForm;2$F;2|
-        ((|a| ($)) (|b| ($)) ($ (|Fraction| (|Polynomial| R))))
-        (SPADCALL (SPADCALL |a| |b| (QREFELT $ 51)) (QREFELT $ 52))) 
+(SDEFUN |GCNAALG;genericLeftTraceForm;2%F;2|
+        ((|a| (%)) (|b| (%)) (% (|Fraction| (|Polynomial| R))))
+        (SPADCALL (SPADCALL |a| |b| (QREFELT % 51)) (QREFELT % 52))) 
 
 (SDEFUN |GCNAALG;genericLeftDiscriminant;F;3|
-        (($ (|Fraction| (|Polynomial| R))))
+        ((% (|Fraction| (|Polynomial| R))))
         (SPROG
-         ((|m| (|Matrix| (|Fraction| (|Polynomial| R)))) (#1=#:G753 NIL)
-          (|a| NIL) (#2=#:G752 NIL) (#3=#:G751 NIL) (|b| NIL) (#4=#:G750 NIL)
-          (|listBasis| (|List| $)))
+         ((|m| (|Matrix| (|Fraction| (|Polynomial| R)))) (#1=#:G479 NIL)
+          (|a| NIL) (#2=#:G478 NIL) (#3=#:G477 NIL) (|b| NIL) (#4=#:G476 NIL)
+          (|listBasis| (|List| %)))
          (SEQ
           (LETT |listBasis|
-                (SPADCALL (SPADCALL (QREFELT $ 55)) (QREFELT $ 58)))
+                (SPADCALL (SPADCALL (QREFELT % 55)) (QREFELT % 58)))
           (LETT |m|
                 (SPADCALL
                  (PROGN
@@ -87,29 +87,29 @@
                                         (LETT #2#
                                               (CONS
                                                (SPADCALL |a| |b|
-                                                         (QREFELT $ 53))
+                                                         (QREFELT % 53))
                                                #2#))))
                                       (LETT #1# (CDR #1#)) (GO G190) G191
                                       (EXIT (NREVERSE #2#))))
                                 #4#))))
                        (LETT #3# (CDR #3#)) (GO G190) G191
                        (EXIT (NREVERSE #4#))))
-                 (QREFELT $ 61)))
-          (EXIT (SPADCALL |m| (QREFELT $ 62)))))) 
+                 (QREFELT % 61)))
+          (EXIT (SPADCALL |m| (QREFELT % 62)))))) 
 
-(SDEFUN |GCNAALG;genericRightTraceForm;2$F;4|
-        ((|a| ($)) (|b| ($)) ($ (|Fraction| (|Polynomial| R))))
-        (SPADCALL (SPADCALL |a| |b| (QREFELT $ 51)) (QREFELT $ 64))) 
+(SDEFUN |GCNAALG;genericRightTraceForm;2%F;4|
+        ((|a| (%)) (|b| (%)) (% (|Fraction| (|Polynomial| R))))
+        (SPADCALL (SPADCALL |a| |b| (QREFELT % 51)) (QREFELT % 64))) 
 
 (SDEFUN |GCNAALG;genericRightDiscriminant;F;5|
-        (($ (|Fraction| (|Polynomial| R))))
+        ((% (|Fraction| (|Polynomial| R))))
         (SPROG
-         ((|m| (|Matrix| (|Fraction| (|Polynomial| R)))) (#1=#:G764 NIL)
-          (|a| NIL) (#2=#:G763 NIL) (#3=#:G762 NIL) (|b| NIL) (#4=#:G761 NIL)
-          (|listBasis| (|List| $)))
+         ((|m| (|Matrix| (|Fraction| (|Polynomial| R)))) (#1=#:G490 NIL)
+          (|a| NIL) (#2=#:G489 NIL) (#3=#:G488 NIL) (|b| NIL) (#4=#:G487 NIL)
+          (|listBasis| (|List| %)))
          (SEQ
           (LETT |listBasis|
-                (SPADCALL (SPADCALL (QREFELT $ 55)) (QREFELT $ 58)))
+                (SPADCALL (SPADCALL (QREFELT % 55)) (QREFELT % 58)))
           (LETT |m|
                 (SPADCALL
                  (PROGN
@@ -135,186 +135,186 @@
                                         (LETT #2#
                                               (CONS
                                                (SPADCALL |a| |b|
-                                                         (QREFELT $ 65))
+                                                         (QREFELT % 65))
                                                #2#))))
                                       (LETT #1# (CDR #1#)) (GO G190) G191
                                       (EXIT (NREVERSE #2#))))
                                 #4#))))
                        (LETT #3# (CDR #3#)) (GO G190) G191
                        (EXIT (NREVERSE #4#))))
-                 (QREFELT $ 61)))
-          (EXIT (SPADCALL |m| (QREFELT $ 62)))))) 
+                 (QREFELT % 61)))
+          (EXIT (SPADCALL |m| (QREFELT % 62)))))) 
 
-(SDEFUN |GCNAALG;initializeLeft| (($ (|Void|)))
-        (SEQ (SETELT $ 70 NIL)
-             (SETELT $ 69 (SPADCALL (QREFELT $ 35) (QREFELT $ 71)))
-             (EXIT (SPADCALL (QREFELT $ 73))))) 
+(SDEFUN |GCNAALG;initializeLeft| ((% (|Void|)))
+        (SEQ (SETELT % 70 NIL)
+             (SETELT % 69 (SPADCALL (QREFELT % 35) (QREFELT % 71)))
+             (EXIT (SPADCALL (QREFELT % 73))))) 
 
-(SDEFUN |GCNAALG;initializeRight| (($ (|Void|)))
-        (SEQ (SETELT $ 75 NIL)
-             (SETELT $ 74 (SPADCALL (QREFELT $ 35) (QREFELT $ 76)))
-             (EXIT (SPADCALL (QREFELT $ 73))))) 
+(SDEFUN |GCNAALG;initializeRight| ((% (|Void|)))
+        (SEQ (SETELT % 75 NIL)
+             (SETELT % 74 (SPADCALL (QREFELT % 35) (QREFELT % 76)))
+             (EXIT (SPADCALL (QREFELT % 73))))) 
 
 (SDEFUN |GCNAALG;leftRankPolynomial;Sup;8|
-        (($ (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R)))))
-        (SEQ (COND ((QREFELT $ 70) (|GCNAALG;initializeLeft| $)))
-             (EXIT (QREFELT $ 69)))) 
+        ((% (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R)))))
+        (SEQ (COND ((QREFELT % 70) (|GCNAALG;initializeLeft| %)))
+             (EXIT (QREFELT % 69)))) 
 
 (SDEFUN |GCNAALG;rightRankPolynomial;Sup;9|
-        (($ (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R)))))
-        (SEQ (COND ((QREFELT $ 75) (|GCNAALG;initializeRight| $)))
-             (EXIT (QREFELT $ 74)))) 
+        ((% (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R)))))
+        (SEQ (COND ((QREFELT % 75) (|GCNAALG;initializeRight| %)))
+             (EXIT (QREFELT % 74)))) 
 
-(SDEFUN |GCNAALG;genericLeftMinimalPolynomial;$Sup;10|
-        ((|a| ($))
-         ($ (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R)))))
+(SDEFUN |GCNAALG;genericLeftMinimalPolynomial;%Sup;10|
+        ((|a| (%))
+         (% (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R)))))
         (SPROG NIL
-               (SEQ (COND ((QREFELT $ 70) (|GCNAALG;initializeLeft| $)))
+               (SEQ (COND ((QREFELT % 70) (|GCNAALG;initializeLeft| %)))
                     (EXIT
                      (SPADCALL
-                      (CONS #'|GCNAALG;genericLeftMinimalPolynomial;$Sup;10!0|
-                            (VECTOR $ |a|))
-                      (QREFELT $ 69) (QREFELT $ 80)))))) 
+                      (CONS #'|GCNAALG;genericLeftMinimalPolynomial;%Sup;10!0|
+                            (VECTOR % |a|))
+                      (QREFELT % 69) (QREFELT % 80)))))) 
 
-(SDEFUN |GCNAALG;genericLeftMinimalPolynomial;$Sup;10!0| ((|x| NIL) ($$ NIL))
-        (PROG (|a| $)
+(SDEFUN |GCNAALG;genericLeftMinimalPolynomial;%Sup;10!0| ((|x| NIL) ($$ NIL))
+        (PROG (|a| %)
           (LETT |a| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (|GCNAALG;eval| |x| |a| $))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (|GCNAALG;eval| |x| |a| %))))) 
 
-(SDEFUN |GCNAALG;genericRightMinimalPolynomial;$Sup;11|
-        ((|a| ($))
-         ($ (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R)))))
+(SDEFUN |GCNAALG;genericRightMinimalPolynomial;%Sup;11|
+        ((|a| (%))
+         (% (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R)))))
         (SPROG NIL
-               (SEQ (COND ((QREFELT $ 75) (|GCNAALG;initializeRight| $)))
+               (SEQ (COND ((QREFELT % 75) (|GCNAALG;initializeRight| %)))
                     (EXIT
                      (SPADCALL
-                      (CONS #'|GCNAALG;genericRightMinimalPolynomial;$Sup;11!0|
-                            (VECTOR $ |a|))
-                      (QREFELT $ 74) (QREFELT $ 80)))))) 
+                      (CONS #'|GCNAALG;genericRightMinimalPolynomial;%Sup;11!0|
+                            (VECTOR % |a|))
+                      (QREFELT % 74) (QREFELT % 80)))))) 
 
-(SDEFUN |GCNAALG;genericRightMinimalPolynomial;$Sup;11!0| ((|x| NIL) ($$ NIL))
-        (PROG (|a| $)
+(SDEFUN |GCNAALG;genericRightMinimalPolynomial;%Sup;11!0| ((|x| NIL) ($$ NIL))
+        (PROG (|a| %)
           (LETT |a| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (|GCNAALG;eval| |x| |a| $))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (|GCNAALG;eval| |x| |a| %))))) 
 
-(SDEFUN |GCNAALG;genericLeftTrace;$F;12|
-        ((|a| ($)) ($ (|Fraction| (|Polynomial| R))))
+(SDEFUN |GCNAALG;genericLeftTrace;%F;12|
+        ((|a| (%)) (% (|Fraction| (|Polynomial| R))))
         (SPROG
          ((|rf| (|Fraction| (|Polynomial| R))) (|d1| (|NonNegativeInteger|)))
-         (SEQ (COND ((QREFELT $ 70) (|GCNAALG;initializeLeft| $)))
+         (SEQ (COND ((QREFELT % 70) (|GCNAALG;initializeLeft| %)))
               (LETT |d1|
-                    (SPADCALL (SPADCALL (QREFELT $ 69) (QREFELT $ 84)) 1
-                              (QREFELT $ 85)))
-              (LETT |rf| (SPADCALL (QREFELT $ 69) |d1| (QREFELT $ 86)))
-              (LETT |rf| (|GCNAALG;eval| |rf| |a| $))
-              (EXIT (SPADCALL |rf| (QREFELT $ 87)))))) 
+                    (SPADCALL (SPADCALL (QREFELT % 69) (QREFELT % 84)) 1
+                              (QREFELT % 85)))
+              (LETT |rf| (SPADCALL (QREFELT % 69) |d1| (QREFELT % 86)))
+              (LETT |rf| (|GCNAALG;eval| |rf| |a| %))
+              (EXIT (SPADCALL |rf| (QREFELT % 87)))))) 
 
-(SDEFUN |GCNAALG;genericRightTrace;$F;13|
-        ((|a| ($)) ($ (|Fraction| (|Polynomial| R))))
+(SDEFUN |GCNAALG;genericRightTrace;%F;13|
+        ((|a| (%)) (% (|Fraction| (|Polynomial| R))))
         (SPROG
          ((|rf| (|Fraction| (|Polynomial| R))) (|d1| (|NonNegativeInteger|)))
-         (SEQ (COND ((QREFELT $ 75) (|GCNAALG;initializeRight| $)))
+         (SEQ (COND ((QREFELT % 75) (|GCNAALG;initializeRight| %)))
               (LETT |d1|
-                    (SPADCALL (SPADCALL (QREFELT $ 74) (QREFELT $ 84)) 1
-                              (QREFELT $ 85)))
-              (LETT |rf| (SPADCALL (QREFELT $ 74) |d1| (QREFELT $ 86)))
-              (LETT |rf| (|GCNAALG;eval| |rf| |a| $))
-              (EXIT (SPADCALL |rf| (QREFELT $ 87)))))) 
+                    (SPADCALL (SPADCALL (QREFELT % 74) (QREFELT % 84)) 1
+                              (QREFELT % 85)))
+              (LETT |rf| (SPADCALL (QREFELT % 74) |d1| (QREFELT % 86)))
+              (LETT |rf| (|GCNAALG;eval| |rf| |a| %))
+              (EXIT (SPADCALL |rf| (QREFELT % 87)))))) 
 
-(SDEFUN |GCNAALG;genericLeftNorm;$F;14|
-        ((|a| ($)) ($ (|Fraction| (|Polynomial| R))))
+(SDEFUN |GCNAALG;genericLeftNorm;%F;14|
+        ((|a| (%)) (% (|Fraction| (|Polynomial| R))))
         (SPROG ((|rf| (|Fraction| (|Polynomial| R))))
-               (SEQ (COND ((QREFELT $ 70) (|GCNAALG;initializeLeft| $)))
-                    (LETT |rf| (SPADCALL (QREFELT $ 69) 1 (QREFELT $ 86)))
+               (SEQ (COND ((QREFELT % 70) (|GCNAALG;initializeLeft| %)))
+                    (LETT |rf| (SPADCALL (QREFELT % 69) 1 (QREFELT % 86)))
                     (COND
-                     ((ODDP (SPADCALL (QREFELT $ 69) (QREFELT $ 84)))
-                      (LETT |rf| (SPADCALL |rf| (QREFELT $ 87)))))
+                     ((ODDP (SPADCALL (QREFELT % 69) (QREFELT % 84)))
+                      (LETT |rf| (SPADCALL |rf| (QREFELT % 87)))))
                     (EXIT |rf|)))) 
 
-(SDEFUN |GCNAALG;genericRightNorm;$F;15|
-        ((|a| ($)) ($ (|Fraction| (|Polynomial| R))))
+(SDEFUN |GCNAALG;genericRightNorm;%F;15|
+        ((|a| (%)) (% (|Fraction| (|Polynomial| R))))
         (SPROG ((|rf| (|Fraction| (|Polynomial| R))))
-               (SEQ (COND ((QREFELT $ 75) (|GCNAALG;initializeRight| $)))
-                    (LETT |rf| (SPADCALL (QREFELT $ 74) 1 (QREFELT $ 86)))
+               (SEQ (COND ((QREFELT % 75) (|GCNAALG;initializeRight| %)))
+                    (LETT |rf| (SPADCALL (QREFELT % 74) 1 (QREFELT % 86)))
                     (COND
-                     ((ODDP (SPADCALL (QREFELT $ 74) (QREFELT $ 84)))
-                      (LETT |rf| (SPADCALL |rf| (QREFELT $ 87)))))
+                     ((ODDP (SPADCALL (QREFELT % 74) (QREFELT % 84)))
+                      (LETT |rf| (SPADCALL |rf| (QREFELT % 87)))))
                     (EXIT |rf|)))) 
 
 (SDEFUN |GCNAALG;conditionsForIdempotents;VL;16|
-        ((|b| (|Vector| $)) ($ (|List| (|Polynomial| R))))
-        (SPROG ((|x| ($)))
-               (SEQ (LETT |x| (SPADCALL |b| (QREFELT $ 90)))
+        ((|b| (|Vector| %)) (% (|List| (|Polynomial| R))))
+        (SPROG ((|x| (%)))
+               (SEQ (LETT |x| (SPADCALL |b| (QREFELT % 90)))
                     (EXIT
-                     (SPADCALL (ELT $ 36)
+                     (SPADCALL (ELT % 36)
                                (SPADCALL
                                 (SPADCALL
-                                 (SPADCALL (SPADCALL |x| |x| (QREFELT $ 51))
-                                           |x| (QREFELT $ 91))
-                                 |b| (QREFELT $ 92))
-                                (QREFELT $ 39))
-                               (QREFELT $ 43)))))) 
+                                 (SPADCALL (SPADCALL |x| |x| (QREFELT % 51))
+                                           |x| (QREFELT % 91))
+                                 |b| (QREFELT % 92))
+                                (QREFELT % 39))
+                               (QREFELT % 43)))))) 
 
-(SDEFUN |GCNAALG;conditionsForIdempotents;L;17| (($ (|List| (|Polynomial| R))))
-        (SPROG ((|x| ($)))
-               (SEQ (LETT |x| (QREFELT $ 35))
+(SDEFUN |GCNAALG;conditionsForIdempotents;L;17| ((% (|List| (|Polynomial| R))))
+        (SPROG ((|x| (%)))
+               (SEQ (LETT |x| (QREFELT % 35))
                     (EXIT
-                     (SPADCALL (ELT $ 36)
+                     (SPADCALL (ELT % 36)
                                (SPADCALL
                                 (SPADCALL
-                                 (SPADCALL (SPADCALL |x| |x| (QREFELT $ 51))
-                                           |x| (QREFELT $ 91))
-                                 (QREFELT $ 37))
-                                (QREFELT $ 39))
-                               (QREFELT $ 43)))))) 
+                                 (SPADCALL (SPADCALL |x| |x| (QREFELT % 51))
+                                           |x| (QREFELT % 91))
+                                 (QREFELT % 37))
+                                (QREFELT % 39))
+                               (QREFELT % 43)))))) 
 
-(SDEFUN |GCNAALG;generic;$;18| (($ ($))) (QREFELT $ 35)) 
+(SDEFUN |GCNAALG;generic;%;18| ((% (%))) (QREFELT % 35)) 
 
-(SDEFUN |GCNAALG;generic;VV$;19|
-        ((|vs| (|Vector| (|Symbol|))) (|ve| (|Vector| $)) ($ ($)))
+(SDEFUN |GCNAALG;generic;VV%;19|
+        ((|vs| (|Vector| (|Symbol|))) (|ve| (|Vector| %)) (% (%)))
         (SPROG
-         ((|v| (|Vector| (|Polynomial| R))) (#1=#:G803 NIL) (#2=#:G805 NIL)
-          (|i| NIL) (#3=#:G804 NIL))
+         ((|v| (|Vector| (|Polynomial| R))) (#1=#:G528 NIL) (#2=#:G530 NIL)
+          (|i| NIL) (#3=#:G529 NIL))
          (SEQ
           (COND
-           ((> (QVSIZE |vs|) (SPADCALL |ve| (QREFELT $ 96)))
+           ((> (QVSIZE |vs|) (SPADCALL |ve| (QREFELT % 96)))
             (|error| "generic: too little symbols"))
            ('T
             (SEQ
              (LETT |v|
                    (PROGN
-                    (LETT #3# (GETREFV #4=(SPADCALL |ve| (QREFELT $ 96))))
+                    (LETT #3# (GETREFV #4=(SPADCALL |ve| (QREFELT % 96))))
                     (SEQ (LETT |i| 1) (LETT #2# #4#) (LETT #1# 0) G190
                          (COND ((|greater_SI| |i| #2#) (GO G191)))
                          (SEQ
                           (EXIT
                            (SETELT #3# #1#
-                                   (SPADCALL (|spadConstant| $ 20)
+                                   (SPADCALL (|spadConstant| % 20)
                                              (LIST
                                               (SPADCALL |vs| |i|
-                                                        (QREFELT $ 23)))
-                                             (LIST 1) (QREFELT $ 26)))))
+                                                        (QREFELT % 23)))
+                                             (LIST 1) (QREFELT % 26)))))
                          (LETT #1#
                                (PROG1 (|inc_SI| #1#)
                                  (LETT |i| (|inc_SI| |i|))))
                          (GO G190) G191 (EXIT NIL))
                     #3#))
              (EXIT
-              (SPADCALL (SPADCALL (ELT $ 28) |v| (QREFELT $ 33)) |ve|
-                        (QREFELT $ 97))))))))) 
+              (SPADCALL (SPADCALL (ELT % 28) |v| (QREFELT % 33)) |ve|
+                        (QREFELT % 97))))))))) 
 
-(SDEFUN |GCNAALG;generic;SV$;20| ((|s| (|Symbol|)) (|ve| (|Vector| $)) ($ ($)))
+(SDEFUN |GCNAALG;generic;SV%;20| ((|s| (|Symbol|)) (|ve| (|Vector| %)) (% (%)))
         (SPROG
-         ((|sFC| (|Vector| (|Symbol|))) (#1=#:G814 NIL) (#2=#:G816 NIL)
-          (|i| NIL) (#3=#:G815 NIL) (|lON| (|List| (|String|))) (#4=#:G813 NIL)
-          (|q| NIL) (#5=#:G812 NIL))
+         ((|sFC| (|Vector| (|Symbol|))) (#1=#:G539 NIL) (#2=#:G541 NIL)
+          (|i| NIL) (#3=#:G540 NIL) (|lON| (|List| (|String|))) (#4=#:G538 NIL)
+          (|q| NIL) (#5=#:G537 NIL))
          (SEQ
           (LETT |lON|
                 (PROGN
                  (LETT #5# NIL)
-                 (SEQ (LETT |q| 1) (LETT #4# (SPADCALL |ve| (QREFELT $ 96)))
+                 (SEQ (LETT |q| 1) (LETT #4# (SPADCALL |ve| (QREFELT % 96)))
                       G190 (COND ((|greater_SI| |q| #4#) (GO G191)))
                       (SEQ (EXIT (LETT #5# (CONS (STRINGIMAGE |q|) #5#))))
                       (LETT |q| (|inc_SI| |q|)) (GO G190) G191
@@ -329,24 +329,24 @@
                       (SEQ
                        (EXIT
                         (SETELT #3# #1#
-                                (SPADCALL (STRCONC |s| |i|) (QREFELT $ 17)))))
+                                (SPADCALL (STRCONC |s| |i|) (QREFELT % 17)))))
                       (LETT #1# (PROG1 (|inc_SI| #1#) (LETT #2# (CDR #2#))))
                       (GO G190) G191 (EXIT NIL))
                  #3#))
-          (EXIT (SPADCALL |sFC| |ve| (QREFELT $ 98)))))) 
+          (EXIT (SPADCALL |sFC| |ve| (QREFELT % 98)))))) 
 
-(SDEFUN |GCNAALG;generic;V$;21| ((|ve| (|Vector| $)) ($ ($)))
+(SDEFUN |GCNAALG;generic;V%;21| ((|ve| (|Vector| %)) (% (%)))
         (SPROG
-         ((|v| (|Vector| (|Polynomial| R))) (#1=#:G831 NIL) (#2=#:G833 NIL)
-          (|i| NIL) (#3=#:G832 NIL) (|sFC| (|Vector| (|Symbol|)))
-          (#4=#:G828 NIL) (#5=#:G830 NIL) (#6=#:G829 NIL)
-          (|lON| (|List| (|String|))) (#7=#:G827 NIL) (|q| NIL)
-          (#8=#:G826 NIL))
+         ((|v| (|Vector| (|Polynomial| R))) (#1=#:G556 NIL) (#2=#:G558 NIL)
+          (|i| NIL) (#3=#:G557 NIL) (|sFC| (|Vector| (|Symbol|)))
+          (#4=#:G553 NIL) (#5=#:G555 NIL) (#6=#:G554 NIL)
+          (|lON| (|List| (|String|))) (#7=#:G552 NIL) (|q| NIL)
+          (#8=#:G551 NIL))
          (SEQ
           (LETT |lON|
                 (PROGN
                  (LETT #8# NIL)
-                 (SEQ (LETT |q| 1) (LETT #7# (SPADCALL |ve| (QREFELT $ 96)))
+                 (SEQ (LETT |q| 1) (LETT #7# (SPADCALL |ve| (QREFELT % 96)))
                       G190 (COND ((|greater_SI| |q| #7#) (GO G191)))
                       (SEQ (EXIT (LETT #8# (CONS (STRINGIMAGE |q|) #8#))))
                       (LETT |q| (|inc_SI| |q|)) (GO G190) G191
@@ -362,41 +362,41 @@
                        (EXIT
                         (SETELT #6# #4#
                                 (SPADCALL (STRCONC "%" (STRCONC "x" |i|))
-                                          (QREFELT $ 17)))))
+                                          (QREFELT % 17)))))
                       (LETT #4# (PROG1 (|inc_SI| #4#) (LETT #5# (CDR #5#))))
                       (GO G190) G191 (EXIT NIL))
                  #6#))
           (LETT |v|
                 (PROGN
-                 (LETT #3# (GETREFV #9=(SPADCALL |ve| (QREFELT $ 96))))
+                 (LETT #3# (GETREFV #9=(SPADCALL |ve| (QREFELT % 96))))
                  (SEQ (LETT |i| 1) (LETT #2# #9#) (LETT #1# 0) G190
                       (COND ((|greater_SI| |i| #2#) (GO G191)))
                       (SEQ
                        (EXIT
                         (SETELT #3# #1#
-                                (SPADCALL (|spadConstant| $ 20)
+                                (SPADCALL (|spadConstant| % 20)
                                           (LIST
-                                           (SPADCALL |sFC| |i| (QREFELT $ 23)))
-                                          (LIST 1) (QREFELT $ 26)))))
+                                           (SPADCALL |sFC| |i| (QREFELT % 23)))
+                                          (LIST 1) (QREFELT % 26)))))
                       (LETT #1#
                             (PROG1 (|inc_SI| #1#) (LETT |i| (|inc_SI| |i|))))
                       (GO G190) G191 (EXIT NIL))
                  #3#))
           (EXIT
-           (SPADCALL (SPADCALL (ELT $ 28) |v| (QREFELT $ 33)) |ve|
-                     (QREFELT $ 97)))))) 
+           (SPADCALL (SPADCALL (ELT % 28) |v| (QREFELT % 33)) |ve|
+                     (QREFELT % 97)))))) 
 
-(SDEFUN |GCNAALG;generic;V$;22| ((|vs| (|Vector| (|Symbol|))) ($ ($)))
-        (SPADCALL |vs| (SPADCALL (QREFELT $ 55)) (QREFELT $ 98))) 
+(SDEFUN |GCNAALG;generic;V%;22| ((|vs| (|Vector| (|Symbol|))) (% (%)))
+        (SPADCALL |vs| (SPADCALL (QREFELT % 55)) (QREFELT % 98))) 
 
-(SDEFUN |GCNAALG;generic;S$;23| ((|s| (|Symbol|)) ($ ($)))
-        (SPADCALL |s| (SPADCALL (QREFELT $ 55)) (QREFELT $ 99))) 
+(SDEFUN |GCNAALG;generic;S%;23| ((|s| (|Symbol|)) (% (%)))
+        (SPADCALL |s| (SPADCALL (QREFELT % 55)) (QREFELT % 99))) 
 
 (DECLAIM (NOTINLINE |GenericNonAssociativeAlgebra;|)) 
 
-(DEFUN |GenericNonAssociativeAlgebra| (&REST #1=#:G851)
+(DEFUN |GenericNonAssociativeAlgebra| (&REST #1=#:G576)
   (SPROG NIL
-         (PROG (#2=#:G852)
+         (PROG (#2=#:G577)
            (RETURN
             (COND
              ((LETT #2#
@@ -417,9 +417,9 @@
 
 (DEFUN |GenericNonAssociativeAlgebra;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|v| NIL) (#1=#:G848 NIL) (#2=#:G850 NIL) (|i| NIL) (#3=#:G849 NIL)
-    (#4=#:G845 NIL) (#5=#:G847 NIL) (#6=#:G846 NIL) (#7=#:G844 NIL) (|q| NIL)
-    (#8=#:G843 NIL) (|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
+   ((|v| NIL) (#1=#:G573 NIL) (#2=#:G575 NIL) (|i| NIL) (#3=#:G574 NIL)
+    (#4=#:G570 NIL) (#5=#:G572 NIL) (#6=#:G571 NIL) (#7=#:G569 NIL) (|q| NIL)
+    (#8=#:G568 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
     (DV$2 NIL) (DV$1 NIL))
    (SEQ
     (PROGN
@@ -428,15 +428,18 @@
      (LETT DV$3 |#3|)
      (LETT DV$4 |#4|)
      (LETT |dv$| (LIST '|GenericNonAssociativeAlgebra| DV$1 DV$2 DV$3 DV$4))
-     (LETT $ (GETREFV 116))
-     (QSETREFV $ 0 |dv$|)
-     (QSETREFV $ 3
+     (LETT % (GETREFV 116))
+     (QSETREFV % 0 |dv$|)
+     (QSETREFV % 3
                (LETT |pv$|
                      (|buildPredVector| 0 0
                                         (LIST
                                          (|HasCategory|
                                           (|Fraction| (|Polynomial| |#1|))
                                           '(|IntegralDomain|))
+                                         (|HasCategory|
+                                          (|Fraction| (|Polynomial| |#1|))
+                                          '(|Hashable|))
                                          (|HasCategory|
                                           (|Fraction| (|Polynomial| |#1|))
                                           '(|Finite|))
@@ -446,14 +449,14 @@
                                          (|HasCategory| |#1|
                                                         '(|IntegralDomain|))))))
      (|haddProp| |$ConstructorCache| '|GenericNonAssociativeAlgebra|
-                 (LIST DV$1 DV$2 DV$3 DV$4) (CONS 1 $))
-     (|stuffDomainSlots| $)
-     (QSETREFV $ 6 |#1|)
-     (QSETREFV $ 7 |#2|)
-     (QSETREFV $ 8 |#3|)
-     (QSETREFV $ 9 |#4|)
-     (SETF |pv$| (QREFELT $ 3))
-     (QSETREFV $ 14
+                 (LIST DV$1 DV$2 DV$3 DV$4) (CONS 1 %))
+     (|stuffDomainSlots| %)
+     (QSETREFV % 6 |#1|)
+     (QSETREFV % 7 |#2|)
+     (QSETREFV % 8 |#3|)
+     (QSETREFV % 9 |#4|)
+     (SETF |pv$| (QREFELT % 3))
+     (QSETREFV % 14
                (PROGN
                 (LETT #8# NIL)
                 (SEQ (LETT |q| 1) (LETT #7# |#2|) G190
@@ -461,9 +464,9 @@
                      (SEQ (EXIT (LETT #8# (CONS (STRINGIMAGE |q|) #8#))))
                      (LETT |q| (|inc_SI| |q|)) (GO G190) G191
                      (EXIT (NREVERSE #8#)))))
-     (QSETREFV $ 18
+     (QSETREFV % 18
                (PROGN
-                (LETT #6# (GETREFV (SIZE #9=(QREFELT $ 14))))
+                (LETT #6# (GETREFV (SIZE #9=(QREFELT % 14))))
                 (SEQ (LETT |i| NIL) (LETT #5# #9#) (LETT #4# 0) G190
                      (COND
                       ((OR (ATOM #5#) (PROGN (LETT |i| (CAR #5#)) NIL))
@@ -472,11 +475,11 @@
                       (EXIT
                        (SETELT #6# #4#
                                (SPADCALL (STRCONC "%" (STRCONC "x" |i|))
-                                         (QREFELT $ 17)))))
+                                         (QREFELT % 17)))))
                      (LETT #4# (PROG1 (|inc_SI| #4#) (LETT #5# (CDR #5#))))
                      (GO G190) G191 (EXIT NIL))
                 #6#))
-     (QSETREFV $ 35
+     (QSETREFV % 35
                (SEQ
                 (LETT |v|
                       (PROGN
@@ -486,82 +489,82 @@
                             (SEQ
                              (EXIT
                               (SETELT #3# #1#
-                                      (SPADCALL (|spadConstant| $ 20)
+                                      (SPADCALL (|spadConstant| % 20)
                                                 (LIST
-                                                 (SPADCALL (QREFELT $ 18) |i|
-                                                           (QREFELT $ 23)))
-                                                (LIST 1) (QREFELT $ 26)))))
+                                                 (SPADCALL (QREFELT % 18) |i|
+                                                           (QREFELT % 23)))
+                                                (LIST 1) (QREFELT % 26)))))
                             (LETT #1#
                                   (PROG1 (|inc_SI| #1#)
                                     (LETT |i| (|inc_SI| |i|))))
                             (GO G190) G191 (EXIT NIL))
                        #3#))
                 (EXIT
-                 (SPADCALL (SPADCALL (ELT $ 28) |v| (QREFELT $ 33))
-                           (QREFELT $ 34)))))
+                 (SPADCALL (SPADCALL (ELT % 28) |v| (QREFELT % 33))
+                           (QREFELT % 34)))))
      (COND
-      ((|testBitVector| |pv$| 4)
+      ((|testBitVector| |pv$| 5)
        (PROGN
-        (QSETREFV $ 53
+        (QSETREFV % 53
                   (CONS
-                   (|dispatchFunction| |GCNAALG;genericLeftTraceForm;2$F;2|)
-                   $))
-        (QSETREFV $ 63
+                   (|dispatchFunction| |GCNAALG;genericLeftTraceForm;2%F;2|)
+                   %))
+        (QSETREFV % 63
                   (CONS
                    (|dispatchFunction| |GCNAALG;genericLeftDiscriminant;F;3|)
-                   $))
-        (QSETREFV $ 65
+                   %))
+        (QSETREFV % 65
                   (CONS
-                   (|dispatchFunction| |GCNAALG;genericRightTraceForm;2$F;4|)
-                   $))
-        (QSETREFV $ 66
+                   (|dispatchFunction| |GCNAALG;genericRightTraceForm;2%F;4|)
+                   %))
+        (QSETREFV % 66
                   (CONS
                    (|dispatchFunction| |GCNAALG;genericRightDiscriminant;F;5|)
-                   $))
-        (QSETREFV $ 69 (|spadConstant| $ 68))
-        (QSETREFV $ 70 'T)
+                   %))
+        (QSETREFV % 69 (|spadConstant| % 68))
+        (QSETREFV % 70 'T)
         NIL
-        (QSETREFV $ 74 (|spadConstant| $ 68))
-        (QSETREFV $ 75 'T)
+        (QSETREFV % 74 (|spadConstant| % 68))
+        (QSETREFV % 75 'T)
         NIL
-        (QSETREFV $ 77
+        (QSETREFV % 77
                   (CONS (|dispatchFunction| |GCNAALG;leftRankPolynomial;Sup;8|)
-                        $))
-        (QSETREFV $ 78
+                        %))
+        (QSETREFV % 78
                   (CONS
-                   (|dispatchFunction| |GCNAALG;rightRankPolynomial;Sup;9|) $))
-        (QSETREFV $ 81
-                  (CONS
-                   (|dispatchFunction|
-                    |GCNAALG;genericLeftMinimalPolynomial;$Sup;10|)
-                   $))
-        (QSETREFV $ 82
+                   (|dispatchFunction| |GCNAALG;rightRankPolynomial;Sup;9|) %))
+        (QSETREFV % 81
                   (CONS
                    (|dispatchFunction|
-                    |GCNAALG;genericRightMinimalPolynomial;$Sup;11|)
-                   $))
-        (QSETREFV $ 52
-                  (CONS (|dispatchFunction| |GCNAALG;genericLeftTrace;$F;12|)
-                        $))
-        (QSETREFV $ 64
-                  (CONS (|dispatchFunction| |GCNAALG;genericRightTrace;$F;13|)
-                        $))
-        (QSETREFV $ 88
-                  (CONS (|dispatchFunction| |GCNAALG;genericLeftNorm;$F;14|)
-                        $))
-        (QSETREFV $ 89
-                  (CONS (|dispatchFunction| |GCNAALG;genericRightNorm;$F;15|)
-                        $)))))
-     $)))) 
+                    |GCNAALG;genericLeftMinimalPolynomial;%Sup;10|)
+                   %))
+        (QSETREFV % 82
+                  (CONS
+                   (|dispatchFunction|
+                    |GCNAALG;genericRightMinimalPolynomial;%Sup;11|)
+                   %))
+        (QSETREFV % 52
+                  (CONS (|dispatchFunction| |GCNAALG;genericLeftTrace;%F;12|)
+                        %))
+        (QSETREFV % 64
+                  (CONS (|dispatchFunction| |GCNAALG;genericRightTrace;%F;13|)
+                        %))
+        (QSETREFV % 88
+                  (CONS (|dispatchFunction| |GCNAALG;genericLeftNorm;%F;14|)
+                        %))
+        (QSETREFV % 89
+                  (CONS (|dispatchFunction| |GCNAALG;genericRightNorm;%F;15|)
+                        %)))))
+     %)))) 
 
 (MAKEPROP '|GenericNonAssociativeAlgebra| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL
-              (|AlgebraGivenByStructuralConstants| 27 (NRTEVAL (QREFELT $ 7))
-                                                   (NRTEVAL (QREFELT $ 8))
+              (|AlgebraGivenByStructuralConstants| 27 (NRTEVAL (QREFELT % 7))
+                                                   (NRTEVAL (QREFELT % 8))
                                                    (NRTEVAL
-                                                    (SPADCALL (QREFELT $ 9)
-                                                              (QREFELT $ 13))))
+                                                    (SPADCALL (QREFELT % 9)
+                                                              (QREFELT % 13))))
               (|local| |#1|) (|local| |#2|) (|local| |#3|) (|local| |#4|)
               (|Vector| 60) (|Vector| (|Matrix| 6))
               (|CoerceVectorMatrixPackage| 6) (0 . |coerce|) '|listOfNumbers|
@@ -574,9 +577,9 @@
               (48 . |coordinates|) (|List| 27) (53 . |entries|) (|List| 19)
               (|Mapping| 19 27) (|ListFunctions2| 27 19) (58 . |map|)
               (64 . |entries|) (69 . |elt|) (|Equation| 19) (75 . |equation|)
-              (|List| (|Equation| $)) (81 . |eval|) (87 . /) (93 . *)
+              (|List| (|Equation| %)) (81 . |eval|) (87 . /) (93 . *)
               (99 . |genericLeftTrace|) (104 . |genericLeftTraceForm|)
-              (|Vector| $) (110 . |basis|) (|List| $$) (|Vector| $$)
+              (|Vector| %) (110 . |basis|) (|List| $$) (|Vector| $$)
               (114 . |entries|) (|List| 38) (|Matrix| 27) (119 . |matrix|)
               (124 . |determinant|) (129 . |genericLeftDiscriminant|)
               (133 . |genericRightTrace|) (138 . |genericRightTraceForm|)
@@ -590,41 +593,61 @@
               (185 . |genericRightMinimalPolynomial|) (|NonNegativeInteger|)
               (190 . |degree|) (195 . -) (201 . |coefficient|) (207 . -)
               (212 . |genericLeftNorm|) (217 . |genericRightNorm|)
-              |GCNAALG;generic;V$;21| (222 . -) (228 . |coordinates|)
+              |GCNAALG;generic;V%;21| (222 . -) (228 . |coordinates|)
               |GCNAALG;conditionsForIdempotents;VL;16|
-              |GCNAALG;conditionsForIdempotents;L;17| |GCNAALG;generic;$;18|
-              (234 . |maxIndex|) (239 . |represents|) |GCNAALG;generic;VV$;19|
-              |GCNAALG;generic;SV$;20| |GCNAALG;generic;V$;22|
-              |GCNAALG;generic;S$;23|
-              (|SparseUnivariatePolynomial| (|Polynomial| 27)) (|List| $)
-              (|PositiveInteger|) (|InputForm|) (|Boolean|)
-              (|Union| $ '"failed") (|List| 29)
-              (|Record| (|:| |particular| $) (|:| |basis| 103))
-              (|Union| 109 '"failed")
-              (|SquareMatrix| (NRTEVAL (QREFELT $ 7)) 27)
-              (|List| (|Polynomial| 27)) (|HashState|) (|OutputForm|)
-              (|SingleInteger|))
-           '#(|rightRankPolynomial| 245 |rightMinimalPolynomial| 249
-              |represents| 254 |leftRankPolynomial| 260 |leftMinimalPolynomial|
-              264 |genericRightTraceForm| 269 |genericRightTrace| 275
-              |genericRightNorm| 280 |genericRightMinimalPolynomial| 285
-              |genericRightDiscriminant| 290 |genericLeftTraceForm| 294
-              |genericLeftTrace| 300 |genericLeftNorm| 305
-              |genericLeftMinimalPolynomial| 310 |genericLeftDiscriminant| 315
-              |generic| 319 |coordinates| 350 |convert| 361
-              |conditionsForIdempotents| 366 |basis| 375 - 379 * 385)
+              |GCNAALG;conditionsForIdempotents;L;17| |GCNAALG;generic;%;18|
+              (234 . |maxIndex|) (239 . |represents|) |GCNAALG;generic;VV%;19|
+              |GCNAALG;generic;SV%;20| |GCNAALG;generic;V%;22|
+              |GCNAALG;generic;S%;23|
+              (|SparseUnivariatePolynomial| (|Polynomial| 27)) (|List| %)
+              (|PositiveInteger|) (|InputForm|) (|Boolean|) (|HashState|)
+              (|SingleInteger|) (|Union| % '"failed") (|List| 29)
+              (|Record| (|:| |particular| %) (|:| |basis| 103))
+              (|Union| 111 '"failed")
+              (|SquareMatrix| (NRTEVAL (QREFELT % 7)) 27)
+              (|List| (|Polynomial| 27)) (|OutputForm|))
+           '#(~= 245 |zero?| 251 |unit| 256 |subtractIfCan| 260
+              |structuralConstants| 266 |someBasis| 275 |smaller?| 279 |size|
+              285 |sample| 289 |rightUnits| 293 |rightUnit| 297
+              |rightTraceMatrix| 301 |rightTrace| 310
+              |rightRegularRepresentation| 315 |rightRecip| 326
+              |rightRankPolynomial| 331 |rightPower| 339 |rightNorm| 345
+              |rightMinimalPolynomial| 350 |rightDiscriminant| 355
+              |rightCharacteristicPolynomial| 364 |rightAlternative?| 369
+              |represents| 373 |recip| 384 |rank| 389 |random| 393
+              |powerAssociative?| 397 |plenaryPower| 401 |opposite?| 407
+              |noncommutativeJordanAlgebra?| 413 |lookup| 417 |lieAlgebra?| 422
+              |lieAdmissible?| 426 |leftUnits| 430 |leftUnit| 434
+              |leftTraceMatrix| 438 |leftTrace| 447 |leftRegularRepresentation|
+              452 |leftRecip| 463 |leftRankPolynomial| 468 |leftPower| 476
+              |leftNorm| 482 |leftMinimalPolynomial| 487 |leftDiscriminant| 492
+              |leftCharacteristicPolynomial| 501 |leftAlternative?| 506 |latex|
+              510 |jordanAlgebra?| 515 |jordanAdmissible?| 519
+              |jacobiIdentity?| 523 |index| 527 |hashUpdate!| 532 |hash| 538
+              |genericRightTraceForm| 543 |genericRightTrace| 549
+              |genericRightNorm| 554 |genericRightMinimalPolynomial| 559
+              |genericRightDiscriminant| 564 |genericLeftTraceForm| 568
+              |genericLeftTrace| 574 |genericLeftNorm| 579
+              |genericLeftMinimalPolynomial| 584 |genericLeftDiscriminant| 589
+              |generic| 593 |flexible?| 624 |enumerate| 628 |elt| 632
+              |coordinates| 638 |convert| 660 |conditionsForIdempotents| 675
+              |commutator| 693 |commutative?| 699 |coerce| 703 |basis| 713
+              |associatorDependence| 717 |associator| 721 |associative?| 728
+              |apply| 732 |antiCommutator| 738 |antiCommutative?| 744
+              |antiAssociative?| 748 |alternative?| 752 ^ 756 |Zero| 762 = 766
+              - 772 + 783 * 789)
            'NIL
            (CONS
-            (|makeByteWordVec2| 2
-                                '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 2 0 0 0 1
-                                  2))
+            (|makeByteWordVec2| 3
+                                '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 3 0 2 0 0 1
+                                  3))
             (CONS
              '#(|FramedNonAssociativeAlgebra&|
                 |FiniteRankNonAssociativeAlgebra&| |NonAssociativeAlgebra&|
                 |Module&| |FramedModule&| NIL |NonAssociativeRng&| NIL NIL NIL
                 |AbelianGroup&| NIL |NonAssociativeSemiRng&| |AbelianMonoid&|
                 |Finite&| |AbelianSemiGroup&| |Magma&| NIL |SetCategory&|
-                |BasicType&| NIL NIL NIL)
+                |Hashable&| |BasicType&| NIL NIL NIL)
              (CONS
               '#((|FramedNonAssociativeAlgebra| (|Fraction| (|Polynomial| 6)))
                  (|FiniteRankNonAssociativeAlgebra|
@@ -641,9 +664,9 @@
                  (|LeftModule| (|Fraction| (|Polynomial| 6))) (|AbelianGroup|)
                  (|CancellationAbelianMonoid|) (|NonAssociativeSemiRng|)
                  (|AbelianMonoid|) (|Finite|) (|AbelianSemiGroup|) (|Magma|)
-                 (|Comparable|) (|SetCategory|) (|BasicType|)
-                 (|CoercibleTo| 114) (|unitsKnown|) (|ConvertibleTo| 105))
-              (|makeByteWordVec2| 101
+                 (|Comparable|) (|SetCategory|) (|Hashable|) (|BasicType|)
+                 (|CoercibleTo| 115) (|unitsKnown|) (|ConvertibleTo| 105))
+              (|makeByteWordVec2| 115
                                   '(1 12 10 11 13 1 16 0 15 17 0 19 0 20 2 22
                                     16 0 21 23 3 19 0 0 24 25 26 1 27 0 19 28 2
                                     32 29 30 31 33 1 0 0 29 34 1 27 19 0 36 1 0
@@ -658,13 +681,37 @@
                                     82 1 67 83 0 84 2 83 0 0 0 85 2 67 27 0 83
                                     86 1 27 0 0 87 1 0 27 0 88 1 0 27 0 89 2 0
                                     0 0 0 91 2 0 29 0 54 92 1 57 21 0 96 2 0 0
-                                    29 54 97 0 4 67 78 1 1 67 0 76 2 0 0 29 54
-                                    97 0 4 67 77 1 1 67 0 71 2 4 27 0 0 65 1 4
-                                    27 0 64 1 4 27 0 89 1 4 67 0 82 0 4 27 66 2
-                                    4 27 0 0 53 1 4 27 0 52 1 4 27 0 88 1 4 67
-                                    0 81 0 4 27 63 2 0 0 22 54 98 1 0 0 54 90 2
-                                    0 0 16 54 99 1 0 0 16 101 1 0 0 22 100 0 0
-                                    0 95 1 0 29 0 37 2 0 29 0 54 92 1 0 0 29 34
-                                    0 4 40 94 1 4 40 54 93 0 0 54 55 2 0 0 0 0
-                                    91 2 0 0 0 0 51)))))
-           '|lookupIncomplete|)) 
+                                    29 54 97 2 0 106 0 0 1 1 0 106 0 1 0 1 109
+                                    1 2 0 109 0 0 1 0 0 10 1 1 0 10 54 1 0 0 54
+                                    1 2 3 106 0 0 1 0 3 83 1 0 0 0 1 0 0 112 1
+                                    0 1 109 1 0 0 60 1 1 0 60 54 1 1 0 27 0 1 1
+                                    0 60 0 1 2 0 60 0 54 1 1 1 109 0 1 0 4 102
+                                    1 0 5 67 78 2 0 0 0 104 1 1 0 27 0 1 1 1 67
+                                    0 76 0 0 27 1 1 0 27 54 1 1 0 67 0 1 0 0
+                                    106 1 1 0 0 29 1 2 0 0 29 54 97 1 1 109 0 1
+                                    0 0 104 1 0 3 0 1 0 0 106 1 2 0 0 0 104 1 2
+                                    0 106 0 0 1 0 0 106 1 1 3 104 0 1 0 0 106 1
+                                    0 0 106 1 0 0 112 1 0 1 109 1 0 0 60 1 1 0
+                                    60 54 1 1 0 27 0 1 1 0 60 0 1 2 0 60 0 54 1
+                                    1 1 109 0 1 0 4 102 1 0 5 67 77 2 0 0 0 104
+                                    1 1 0 27 0 1 1 1 67 0 71 0 0 27 1 1 0 27 54
+                                    1 1 0 67 0 1 0 0 106 1 1 0 15 0 1 0 0 106 1
+                                    0 0 106 1 0 0 106 1 1 3 0 104 1 2 2 107 107
+                                    0 1 1 2 108 0 1 2 5 27 0 0 65 1 5 27 0 64 1
+                                    5 27 0 89 1 5 67 0 82 0 5 27 66 2 5 27 0 0
+                                    53 1 5 27 0 52 1 5 27 0 88 1 5 67 0 81 0 5
+                                    27 63 2 0 0 22 54 98 1 0 0 54 90 2 0 0 16
+                                    54 99 1 0 0 16 101 1 0 0 22 100 0 0 0 95 0
+                                    0 106 1 0 3 103 1 2 0 27 0 21 1 1 0 29 0 37
+                                    1 0 60 54 1 2 0 60 54 54 1 2 0 29 0 54 92 1
+                                    3 105 0 1 1 0 0 29 34 1 0 29 0 1 0 5 40 94
+                                    1 5 40 54 93 0 0 114 1 1 0 114 54 1 2 0 0 0
+                                    0 1 0 0 106 1 1 0 0 29 1 1 0 115 0 1 0 0 54
+                                    55 0 1 110 1 3 0 0 0 0 0 1 0 0 106 1 2 0 0
+                                    60 0 1 2 0 0 0 0 1 0 0 106 1 0 0 106 1 0 0
+                                    106 1 2 0 0 0 104 1 0 0 0 1 2 0 106 0 0 1 2
+                                    0 0 0 0 91 1 0 0 0 1 2 0 0 0 0 1 2 0 0 113
+                                    0 1 2 0 0 27 0 1 2 0 0 0 27 1 2 0 0 83 0 1
+                                    2 0 0 21 0 1 2 0 0 0 0 51 2 0 0 104 0
+                                    1)))))
+           '|lookupComplete|)) 

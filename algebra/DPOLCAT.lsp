@@ -6,8 +6,8 @@
 (DEFPARAMETER |DifferentialPolynomialCategory;AL| 'NIL) 
 
 (DEFUN |DifferentialPolynomialCategory| (|t#1| |t#2| |t#3| |t#4|)
-  (LET (#1=#:G708
-        (#2=#:G709
+  (LET (#1=#:G467
+        (#2=#:G468
          (LIST (|devaluate| |t#1|) (|devaluate| |t#2|) (|devaluate| |t#3|)
                (|devaluate| |t#4|))))
     (COND
@@ -22,7 +22,7 @@
       #1#)))) 
 
 (DEFUN |DifferentialPolynomialCategory;| (|t#1| |t#2| |t#3| |t#4|)
-  (SPROG ((#1=#:G707 NIL))
+  (SPROG ((#1=#:G466 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3| |t#4|)
@@ -38,59 +38,59 @@
                                             (|RetractableTo| '|t#2|)
                                             (|mkCategory|
                                              '(((|makeVariable|
-                                                 ((|Mapping| $
+                                                 ((|Mapping| %
                                                              (|NonNegativeInteger|))
                                                   |t#2|))
                                                 T)
                                                ((|differentialVariables|
-                                                 ((|List| |t#2|) $))
+                                                 ((|List| |t#2|) %))
                                                 T)
                                                ((|order|
-                                                 ((|NonNegativeInteger|) $
+                                                 ((|NonNegativeInteger|) %
                                                   |t#2|))
                                                 T)
                                                ((|order|
-                                                 ((|NonNegativeInteger|) $))
+                                                 ((|NonNegativeInteger|) %))
                                                 T)
                                                ((|degree|
-                                                 ((|NonNegativeInteger|) $
+                                                 ((|NonNegativeInteger|) %
                                                   |t#2|))
                                                 T)
                                                ((|weights|
                                                  ((|List|
                                                    (|NonNegativeInteger|))
-                                                  $))
+                                                  %))
                                                 T)
                                                ((|weight|
-                                                 ((|NonNegativeInteger|) $))
+                                                 ((|NonNegativeInteger|) %))
                                                 T)
                                                ((|weights|
                                                  ((|List|
                                                    (|NonNegativeInteger|))
-                                                  $ |t#2|))
+                                                  % |t#2|))
                                                 T)
                                                ((|weight|
-                                                 ((|NonNegativeInteger|) $
+                                                 ((|NonNegativeInteger|) %
                                                   |t#2|))
                                                 T)
-                                               ((|isobaric?| ((|Boolean|) $))
+                                               ((|isobaric?| ((|Boolean|) %))
                                                 T)
-                                               ((|leader| (|t#3| $)) T)
-                                               ((|initial| ($ $)) T)
-                                               ((|separant| ($ $)) T)
+                                               ((|leader| (|t#3| %)) T)
+                                               ((|initial| (% %)) T)
+                                               ((|separant| (% %)) T)
                                                ((|makeVariable|
-                                                 ((|Mapping| $
+                                                 ((|Mapping| %
                                                              (|NonNegativeInteger|))
-                                                  $))
+                                                  %))
                                                 (|has| |t#1|
                                                        (|DifferentialRing|))))
                                              '(((|InnerEvalable| |t#2| |t#1|)
                                                 (|has| |t#1|
                                                        (|DifferentialRing|)))
-                                               ((|InnerEvalable| |t#2| $)
+                                               ((|InnerEvalable| |t#2| %)
                                                 (|has| |t#1|
                                                        (|DifferentialRing|)))
-                                               ((|Evalable| $)
+                                               ((|Evalable| %)
                                                 (|has| |t#1|
                                                        (|DifferentialRing|))))
                                              NIL NIL)))))))

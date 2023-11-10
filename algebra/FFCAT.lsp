@@ -6,8 +6,8 @@
 (DEFPARAMETER |FunctionFieldCategory;AL| 'NIL) 
 
 (DEFUN |FunctionFieldCategory| (|t#1| |t#2| |t#3|)
-  (LET (#1=#:G710
-        (#2=#:G711
+  (LET (#1=#:G465
+        (#2=#:G466
          (LIST (|devaluate| |t#1|) (|devaluate| |t#2|) (|devaluate| |t#3|))))
     (COND ((SETQ #1# (|assoc| #2# |FunctionFieldCategory;AL|)) (CDR #1#))
           (T
@@ -19,12 +19,12 @@
            #1#)))) 
 
 (DEFUN |FunctionFieldCategory;| (|t#1| |t#2| |t#3|)
-  (SPROG ((#1=#:G709 NIL))
+  (SPROG ((#1=#:G464 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3|)
                                    (LIST |t#1| |t#2| |t#3|)
-                                   (|subst_in_cat| '(#2=#:G708)
+                                   (|subst_in_cat| '(#2=#:G463)
                                                    (LIST '(|Fraction| |t#2|))
                                                    (COND
                                                     (|FunctionFieldCategory;CAT|)
@@ -82,32 +82,32 @@
                                                              |t#2|))
                                                            T)
                                                           ((|integralBasis|
-                                                            ((|Vector| $)))
+                                                            ((|Vector| %)))
                                                            T)
                                                           ((|integralBasisAtInfinity|
-                                                            ((|Vector| $)))
+                                                            ((|Vector| %)))
                                                            T)
                                                           ((|integralAtInfinity?|
-                                                            ((|Boolean|) $))
+                                                            ((|Boolean|) %))
                                                            T)
                                                           ((|special_order|
-                                                            ((|Integer|) $
+                                                            ((|Integer|) %
                                                              (|List| |t#2|)))
                                                            T)
                                                           ((|integral?|
-                                                            ((|Boolean|) $))
+                                                            ((|Boolean|) %))
                                                            T)
                                                           ((|complementaryBasis|
-                                                            ((|Vector| $)
-                                                             (|Vector| $)))
+                                                            ((|Vector| %)
+                                                             (|Vector| %)))
                                                            T)
                                                           ((|normalizeAtInfinity|
-                                                            ((|Vector| $)
-                                                             (|Vector| $)))
+                                                            ((|Vector| %)
+                                                             (|Vector| %)))
                                                            T)
                                                           ((|reduceBasisAtInfinity|
-                                                            ((|Vector| $)
-                                                             (|Vector| $)))
+                                                            ((|Vector| %)
+                                                             (|Vector| %)))
                                                            T)
                                                           ((|integralMatrix|
                                                             ((|Matrix|
@@ -136,7 +136,7 @@
                                                                     |t#2|))
                                                               (|:| |den|
                                                                    |t#2|))
-                                                             $))
+                                                             %))
                                                            T)
                                                           ((|integralCoordinates|
                                                             ((|Record|
@@ -145,10 +145,10 @@
                                                                     |t#2|))
                                                               (|:| |den|
                                                                    |t#2|))
-                                                             $))
+                                                             %))
                                                            T)
                                                           ((|integralRepresents|
-                                                            ($ (|Vector| |t#2|)
+                                                            (% (|Vector| |t#2|)
                                                              |t#2|))
                                                            T)
                                                           ((|integralDerivationMatrix|
@@ -162,27 +162,27 @@
                                                                         |t#2|)))
                                                            T)
                                                           ((|integral?|
-                                                            ((|Boolean|) $
+                                                            ((|Boolean|) %
                                                              |t#1|))
                                                            T)
                                                           ((|integral?|
-                                                            ((|Boolean|) $
+                                                            ((|Boolean|) %
                                                              |t#2|))
                                                            T)
                                                           ((|differentiate|
-                                                            ($ $
+                                                            (% %
                                                              (|Mapping| |t#2|
                                                                         |t#2|)))
                                                            T)
                                                           ((|represents|
-                                                            ($ (|Vector| |t#2|)
+                                                            (% (|Vector| |t#2|)
                                                              |t#2|))
                                                            T)
                                                           ((|primitivePart|
-                                                            ($ $))
+                                                            (% %))
                                                            T)
                                                           ((|elt|
-                                                            (|t#1| $ |t#1|
+                                                            (|t#1| % |t#1|
                                                              |t#1|))
                                                            T)
                                                           ((|elliptic|
@@ -195,12 +195,12 @@
                                                            T)
                                                           ((|algSplitSimple|
                                                             ((|Record|
-                                                              (|:| |num| $)
+                                                              (|:| |num| %)
                                                               (|:| |den| |t#2|)
                                                               (|:| |derivden|
                                                                    |t#2|)
                                                               (|:| |gd| |t#2|))
-                                                             $
+                                                             %
                                                              (|Mapping| |t#2|
                                                                         |t#2|)))
                                                            T)

@@ -1,44 +1,44 @@
 
 (SDEFUN |STREAM2;mapp|
-        ((|f| (|Mapping| B A)) (|x| (|Stream| A)) ($ (|Stream| B)))
+        ((|f| (|Mapping| B A)) (|x| (|Stream| A)) (% (|Stream| B)))
         (SPROG NIL
-               (SPADCALL (CONS #'|STREAM2;mapp!0| (VECTOR |f| $ |x|))
-                         (QREFELT $ 19)))) 
+               (SPADCALL (CONS #'|STREAM2;mapp!0| (VECTOR |f| % |x|))
+                         (QREFELT % 19)))) 
 
 (SDEFUN |STREAM2;mapp!0| (($$ NIL))
-        (PROG (|x| $ |f|)
+        (PROG (|x| % |f|)
           (LETT |x| (QREFELT $$ 2))
-          (LETT $ (QREFELT $$ 1))
+          (LETT % (QREFELT $$ 1))
           (LETT |f| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (COND ((SPADCALL |x| (QREFELT $ 10)) (SPADCALL (QREFELT $ 12)))
+            (COND ((SPADCALL |x| (QREFELT % 10)) (SPADCALL (QREFELT % 12)))
                   ('T
-                   (SPADCALL (SPADCALL (SPADCALL |x| (QREFELT $ 13)) |f|)
-                             (SPADCALL |f| (SPADCALL |x| (QREFELT $ 14))
-                                       (QREFELT $ 16))
-                             (QREFELT $ 17)))))))) 
+                   (SPADCALL (SPADCALL (SPADCALL |x| (QREFELT % 13)) |f|)
+                             (SPADCALL |f| (SPADCALL |x| (QREFELT % 14))
+                                       (QREFELT % 16))
+                             (QREFELT % 17)))))))) 
 
 (SDEFUN |STREAM2;map;MSS;2|
-        ((|f| (|Mapping| B A)) (|x| (|Stream| A)) ($ (|Stream| B)))
-        (COND ((SPADCALL |x| (QREFELT $ 20)) (SPADCALL (QREFELT $ 12)))
-              ((SPADCALL |x| (SPADCALL |x| (QREFELT $ 14)) (QREFELT $ 21))
-               (SPADCALL (LIST (SPADCALL (SPADCALL |x| (QREFELT $ 13)) |f|))
-                         (QREFELT $ 23)))
-              ('T (|STREAM2;mapp| |f| |x| $)))) 
+        ((|f| (|Mapping| B A)) (|x| (|Stream| A)) (% (|Stream| B)))
+        (COND ((SPADCALL |x| (QREFELT % 20)) (SPADCALL (QREFELT % 12)))
+              ((SPADCALL |x| (SPADCALL |x| (QREFELT % 14)) (QREFELT % 21))
+               (SPADCALL (LIST (SPADCALL (SPADCALL |x| (QREFELT % 13)) |f|))
+                         (QREFELT % 23)))
+              ('T (|STREAM2;mapp| |f| |x| %)))) 
 
 (SDEFUN |STREAM2;scan;BMSS;3|
-        ((|b| (B)) (|h| (|Mapping| B A B)) (|x| (|Stream| A)) ($ (|Stream| B)))
+        ((|b| (B)) (|h| (|Mapping| B A B)) (|x| (|Stream| A)) (% (|Stream| B)))
         (SPROG NIL
                (SEQ
                 (SPADCALL
-                 (CONS #'|STREAM2;scan;BMSS;3!0| (VECTOR |h| |b| $ |x|))
-                 (QREFELT $ 19))))) 
+                 (CONS #'|STREAM2;scan;BMSS;3!0| (VECTOR |h| |b| % |x|))
+                 (QREFELT % 19))))) 
 
 (SDEFUN |STREAM2;scan;BMSS;3!0| (($$ NIL))
-        (PROG (|x| $ |b| |h|)
+        (PROG (|x| % |b| |h|)
           (LETT |x| (QREFELT $$ 3))
-          (LETT $ (QREFELT $$ 2))
+          (LETT % (QREFELT $$ 2))
           (LETT |b| (QREFELT $$ 1))
           (LETT |h| (QREFELT $$ 0))
           (RETURN
@@ -46,30 +46,30 @@
             (SPROG ((|c| NIL))
                    (SEQ
                     (COND
-                     ((SPADCALL |x| (QREFELT $ 10)) (SPADCALL (QREFELT $ 12)))
+                     ((SPADCALL |x| (QREFELT % 10)) (SPADCALL (QREFELT % 12)))
                      ('T
                       (SEQ
                        (LETT |c|
-                             (SPADCALL (SPADCALL |x| (QREFELT $ 13)) |b| |h|))
+                             (SPADCALL (SPADCALL |x| (QREFELT % 13)) |b| |h|))
                        (EXIT
                         (SPADCALL |c|
                                   (SPADCALL |c| |h|
-                                            (SPADCALL |x| (QREFELT $ 14))
-                                            (QREFELT $ 25))
-                                  (QREFELT $ 17)))))))))))) 
+                                            (SPADCALL |x| (QREFELT % 14))
+                                            (QREFELT % 25))
+                                  (QREFELT % 17)))))))))))) 
 
 (SDEFUN |STREAM2;reduce;BMSB;4|
-        ((|b| (B)) (|h| (|Mapping| B A B)) (|x| (|Stream| A)) ($ (B)))
-        (COND ((SPADCALL |x| (QREFELT $ 10)) |b|)
+        ((|b| (B)) (|h| (|Mapping| B A B)) (|x| (|Stream| A)) (% (B)))
+        (COND ((SPADCALL |x| (QREFELT % 10)) |b|)
               ('T
-               (SPADCALL (SPADCALL (SPADCALL |x| (QREFELT $ 13)) |b| |h|) |h|
-                         (SPADCALL |x| (QREFELT $ 14)) (QREFELT $ 26))))) 
+               (SPADCALL (SPADCALL (SPADCALL |x| (QREFELT % 13)) |b| |h|) |h|
+                         (SPADCALL |x| (QREFELT % 14)) (QREFELT % 26))))) 
 
 (DECLAIM (NOTINLINE |StreamFunctions2;|)) 
 
-(DEFUN |StreamFunctions2| (&REST #1=#:G728)
+(DEFUN |StreamFunctions2| (&REST #1=#:G483)
   (SPROG NIL
-         (PROG (#2=#:G729)
+         (PROG (#2=#:G484)
            (RETURN
             (COND
              ((LETT #2#
@@ -87,28 +87,28 @@
                   (HREM |$ConstructorCache| '|StreamFunctions2|)))))))))) 
 
 (DEFUN |StreamFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|StreamFunctions2| DV$1 DV$2))
-          (LETT $ (GETREFV 27))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 27))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|StreamFunctions2| (LIST DV$1 DV$2)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|StreamFunctions2| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (|Boolean|)
               (|Stream| 6) (0 . |empty?|) (|Stream| 7) (5 . |empty|)
               (9 . |frst|) (14 . |rst|) (|Mapping| 7 6) |STREAM2;map;MSS;2|
-              (19 . |concat|) (|Mapping| $) (25 . |delay|)
+              (19 . |concat|) (|Mapping| %) (25 . |delay|)
               (30 . |explicitlyEmpty?|) (35 . |eq?|) (|List| 7)
               (41 . |repeating|) (|Mapping| 7 6 7) |STREAM2;scan;BMSS;3|
               |STREAM2;reduce;BMSB;4|)

@@ -1,19 +1,19 @@
 
-(SDEFUN |RATRET;rational;SF;1| ((|s| (S)) ($ (|Fraction| (|Integer|))))
-        (SPADCALL |s| (QREFELT $ 8))) 
+(SDEFUN |RATRET;rational;SF;1| ((|s| (S)) (% (|Fraction| (|Integer|))))
+        (SPADCALL |s| (QREFELT % 8))) 
 
-(SDEFUN |RATRET;rational?;SB;2| ((|s| (S)) ($ (|Boolean|)))
-        (QEQCAR (SPADCALL |s| (QREFELT $ 11)) 0)) 
+(SDEFUN |RATRET;rational?;SB;2| ((|s| (S)) (% (|Boolean|)))
+        (QEQCAR (SPADCALL |s| (QREFELT % 11)) 0)) 
 
 (SDEFUN |RATRET;rationalIfCan;SU;3|
-        ((|s| (S)) ($ (|Union| (|Fraction| (|Integer|)) "failed")))
-        (SPADCALL |s| (QREFELT $ 11))) 
+        ((|s| (S)) (% (|Union| (|Fraction| (|Integer|)) "failed")))
+        (SPADCALL |s| (QREFELT % 11))) 
 
 (DECLAIM (NOTINLINE |RationalRetractions;|)) 
 
-(DEFUN |RationalRetractions| (#1=#:G702)
+(DEFUN |RationalRetractions| (#1=#:G457)
   (SPROG NIL
-         (PROG (#2=#:G703)
+         (PROG (#2=#:G458)
            (RETURN
             (COND
              ((LETT #2#
@@ -29,19 +29,19 @@
                   (HREM |$ConstructorCache| '|RationalRetractions|)))))))))) 
 
 (DEFUN |RationalRetractions;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RationalRetractions| DV$1))
-          (LETT $ (GETREFV 15))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 15))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|RationalRetractions| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|RationalRetractions| '|infovec|
           (LIST

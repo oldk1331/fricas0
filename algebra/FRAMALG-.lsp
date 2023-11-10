@@ -1,71 +1,71 @@
 
-(SDEFUN |FRAMALG-;traceMatrix;M;1| (($ (|Matrix| R)))
-        (SPADCALL (SPADCALL (QREFELT $ 10)) (QREFELT $ 12))) 
+(SDEFUN |FRAMALG-;traceMatrix;M;1| ((% (|Matrix| R)))
+        (SPADCALL (SPADCALL (QREFELT % 10)) (QREFELT % 12))) 
 
-(SDEFUN |FRAMALG-;discriminant;R;2| (($ (R)))
-        (SPADCALL (SPADCALL (QREFELT $ 10)) (QREFELT $ 14))) 
+(SDEFUN |FRAMALG-;discriminant;R;2| ((% (R)))
+        (SPADCALL (SPADCALL (QREFELT % 10)) (QREFELT % 14))) 
 
-(SDEFUN |FRAMALG-;regularRepresentation;SM;3| ((|x| (S)) ($ (|Matrix| R)))
-        (SPADCALL |x| (SPADCALL (QREFELT $ 10)) (QREFELT $ 16))) 
+(SDEFUN |FRAMALG-;regularRepresentation;SM;3| ((|x| (S)) (% (|Matrix| R)))
+        (SPADCALL |x| (SPADCALL (QREFELT % 10)) (QREFELT % 16))) 
 
-(SDEFUN |FRAMALG-;coordinates;SV;4| ((|x| (S)) ($ (|Vector| R)))
-        (SPADCALL |x| (SPADCALL (QREFELT $ 10)) (QREFELT $ 19))) 
+(SDEFUN |FRAMALG-;coordinates;SV;4| ((|x| (S)) (% (|Vector| R)))
+        (SPADCALL |x| (SPADCALL (QREFELT % 10)) (QREFELT % 19))) 
 
-(SDEFUN |FRAMALG-;represents;VS;5| ((|x| (|Vector| R)) ($ (S)))
-        (SPADCALL |x| (SPADCALL (QREFELT $ 10)) (QREFELT $ 21))) 
+(SDEFUN |FRAMALG-;represents;VS;5| ((|x| (|Vector| R)) (% (S)))
+        (SPADCALL |x| (SPADCALL (QREFELT % 10)) (QREFELT % 21))) 
 
-(SDEFUN |FRAMALG-;regularRepresentation;SM;6| ((|x| (S)) ($ (|Matrix| R)))
+(SDEFUN |FRAMALG-;regularRepresentation;SM;6| ((|x| (S)) (% (|Matrix| R)))
         (SPROG
-         ((#1=#:G716 NIL) (|i| NIL) (|j| NIL) (|b| (|Vector| S))
+         ((#1=#:G464 NIL) (|i| NIL) (|j| NIL) (|b| (|Vector| S))
           (|m| (|Matrix| R)) (|n| (|NonNegativeInteger|)))
          (SEQ
           (LETT |m|
-                (MAKE_MATRIX1 (LETT |n| (SPADCALL (QREFELT $ 24))) |n|
-                              (|spadConstant| $ 25)))
-          (LETT |b| (SPADCALL (QREFELT $ 10)))
+                (MAKE_MATRIX1 (LETT |n| (SPADCALL (QREFELT % 24))) |n|
+                              (|spadConstant| % 25)))
+          (LETT |b| (SPADCALL (QREFELT % 10)))
           (SEQ (LETT |j| (PROGN |m| 1))
-               (LETT |i| (SPADCALL |b| (QREFELT $ 28))) (LETT #1# (QVSIZE |b|))
+               (LETT |i| (SPADCALL |b| (QREFELT % 28))) (LETT #1# (QVSIZE |b|))
                G190 (COND ((> |i| #1#) (GO G191)))
                (SEQ
                 (EXIT
                  (SPADCALL |m| |j|
                            (SPADCALL
-                            (SPADCALL |x| (QAREF1O |b| |i| 1) (QREFELT $ 29))
-                            (QREFELT $ 30))
-                           (QREFELT $ 31))))
+                            (SPADCALL |x| (QAREF1O |b| |i| 1) (QREFELT % 29))
+                            (QREFELT % 30))
+                           (QREFELT % 31))))
                (LETT |i| (PROG1 (+ |i| 1) (LETT |j| (+ |j| 1)))) (GO G190) G191
                (EXIT NIL))
-          (EXIT (SPADCALL |m| (QREFELT $ 32)))))) 
+          (EXIT (SPADCALL |m| (QREFELT % 32)))))) 
 
-(SDEFUN |FRAMALG-;characteristicPolynomial;SUP;7| ((|x| (S)) ($ (UP)))
+(SDEFUN |FRAMALG-;characteristicPolynomial;SUP;7| ((|x| (S)) (% (UP)))
         (SPROG
          ((|mat1| (|Matrix| UP)) (|mat0| (|Matrix| UP)) (|mat00| (|Matrix| R)))
-         (SEQ (LETT |mat00| (SPADCALL |x| (QREFELT $ 33)))
-              (LETT |mat0| (SPADCALL (ELT $ 34) |mat00| (QREFELT $ 38)))
+         (SEQ (LETT |mat00| (SPADCALL |x| (QREFELT % 33)))
+              (LETT |mat0| (SPADCALL (ELT % 34) |mat00| (QREFELT % 38)))
               (LETT |mat1|
-                    (SPADCALL (SPADCALL (QREFELT $ 24))
-                              (SPADCALL (|spadConstant| $ 40) 1 (QREFELT $ 42))
-                              (QREFELT $ 43)))
+                    (SPADCALL (SPADCALL (QREFELT % 24))
+                              (SPADCALL (|spadConstant| % 40) 1 (QREFELT % 42))
+                              (QREFELT % 43)))
               (EXIT
-               (SPADCALL (SPADCALL |mat1| |mat0| (QREFELT $ 44))
-                         (QREFELT $ 45)))))) 
+               (SPADCALL (SPADCALL |mat1| |mat0| (QREFELT % 44))
+                         (QREFELT % 45)))))) 
 
-(SDEFUN |FRAMALG-;minimalPolynomial;SUP;8| ((|x| (S)) ($ (UP)))
+(SDEFUN |FRAMALG-;minimalPolynomial;SUP;8| ((|x| (S)) (% (UP)))
         (SPROG
-         ((#1=#:G728 NIL) (#2=#:G727 (UP)) (#3=#:G729 (UP)) (#4=#:G733 NIL)
-          (|i| NIL) (|v| (|Vector| R)) (|y| (S)) (#5=#:G732 NIL)
+         ((#1=#:G471 NIL) (#2=#:G470 (UP)) (#3=#:G472 (UP)) (#4=#:G476 NIL)
+          (|i| NIL) (|v| (|Vector| R)) (|y| (S)) (#5=#:G475 NIL)
           (|m| (|Matrix| R)) (|n| (|PositiveInteger|)))
-         (SEQ (LETT |y| (|spadConstant| $ 39))
-              (LETT |n| (SPADCALL (QREFELT $ 24)))
-              (LETT |m| (SPADCALL |n| (+ |n| 1) (QREFELT $ 47)))
+         (SEQ (LETT |y| (|spadConstant| % 39))
+              (LETT |n| (SPADCALL (QREFELT % 24)))
+              (LETT |m| (SPADCALL |n| (+ |n| 1) (QREFELT % 47)))
               (SEQ (LETT |i| 1) (LETT #5# (+ |n| 1)) G190
                    (COND ((|greater_SI| |i| #5#) (GO G191)))
                    (SEQ
-                    (SPADCALL |m| |i| (SPADCALL |y| (QREFELT $ 30))
-                              (QREFELT $ 48))
-                    (EXIT (LETT |y| (SPADCALL |y| |x| (QREFELT $ 29)))))
+                    (SPADCALL |m| |i| (SPADCALL |y| (QREFELT % 30))
+                              (QREFELT % 48))
+                    (EXIT (LETT |y| (SPADCALL |y| |x| (QREFELT % 29)))))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
-              (LETT |v| (|SPADfirst| (SPADCALL |m| (QREFELT $ 50))))
+              (LETT |v| (|SPADfirst| (SPADCALL |m| (QREFELT % 50))))
               (EXIT
                (PROGN
                 (LETT #1# NIL)
@@ -75,51 +75,51 @@
                       (EXIT
                        (PROGN
                         (LETT #3#
-                              (SPADCALL (SPADCALL |v| (+ |i| 1) (QREFELT $ 51))
-                                        |i| (QREFELT $ 42)))
+                              (SPADCALL (SPADCALL |v| (+ |i| 1) (QREFELT % 51))
+                                        |i| (QREFELT % 42)))
                         (COND
-                         (#1# (LETT #2# (SPADCALL #2# #3# (QREFELT $ 52))))
+                         (#1# (LETT #2# (SPADCALL #2# #3# (QREFELT % 52))))
                          ('T (PROGN (LETT #2# #3#) (LETT #1# 'T)))))))
                      (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
-                (COND (#1# #2#) ('T (|spadConstant| $ 53)))))))) 
+                (COND (#1# #2#) ('T (|spadConstant| % 53)))))))) 
 
 (DECLAIM (NOTINLINE |FramedAlgebra&;|)) 
 
 (DEFUN |FramedAlgebra&| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT DV$3 (|devaluate| |#3|))
           (LETT |dv$| (LIST '|FramedAlgebra&| DV$1 DV$2 DV$3))
-          (LETT $ (GETREFV 55))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (QSETREFV $ 8 |#3|)
-          (SETF |pv$| (QREFELT $ 3))
+          (LETT % (GETREFV 55))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (QSETREFV % 8 |#3|)
+          (SETF |pv$| (QREFELT % 3))
           (COND
            ((|HasCategory| |#3| '(|CommutativeRing|))
-            (QSETREFV $ 46
+            (QSETREFV % 46
                       (CONS
                        (|dispatchFunction|
                         |FRAMALG-;characteristicPolynomial;SUP;7|)
-                       $))))
+                       %))))
           (COND
            ((|HasCategory| |#2| '(|Field|))
             (PROGN
-             (QSETREFV $ 54
+             (QSETREFV % 54
                        (CONS
                         (|dispatchFunction| |FRAMALG-;minimalPolynomial;SUP;8|)
-                        $)))))
-          $))) 
+                        %)))))
+          %))) 
 
 (MAKEPROP '|FramedAlgebra&| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (|Vector| $) (0 . |basis|) (|Matrix| 7)
+              (|local| |#3|) (|Vector| %) (0 . |basis|) (|Matrix| 7)
               (4 . |traceMatrix|) |FRAMALG-;traceMatrix;M;1|
               (9 . |discriminant|) |FRAMALG-;discriminant;R;2|
               (14 . |regularRepresentation|)

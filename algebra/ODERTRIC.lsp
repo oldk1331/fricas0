@@ -1,20 +1,20 @@
 
 (SDEFUN |ODERTRIC;UP2SUP|
-        ((|p| (UP)) ($ (|SparseUnivariatePolynomial| (|Polynomial| F))))
-        (SPADCALL (ELT $ 12) |p| (QREFELT $ 16))) 
+        ((|p| (UP)) (% (|SparseUnivariatePolynomial| (|Polynomial| F))))
+        (SPADCALL (ELT % 12) |p| (QREFELT % 16))) 
 
 (SDEFUN |ODERTRIC;logDerOnly|
         ((|l| (|LinearOrdinaryDifferentialOperator2| UP (|Fraction| UP)))
-         ($ (|List| (|Fraction| UP))))
-        (SPROG ((#1=#:G730 NIL) (|s| NIL) (#2=#:G729 NIL))
+         (% (|List| (|Fraction| UP))))
+        (SPROG ((#1=#:G464 NIL) (|s| NIL) (#2=#:G463 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
                  (SEQ (LETT |s| NIL)
                       (LETT #1#
                             (QCDR
-                             (SPADCALL |l| (|spadConstant| $ 20)
-                                       (QREFELT $ 25))))
+                             (SPADCALL |l| (|spadConstant| % 20)
+                                       (QREFELT % 25))))
                       G190
                       (COND
                        ((OR (ATOM #1#) (PROGN (LETT |s| (CAR #1#)) NIL))
@@ -23,101 +23,101 @@
                        (EXIT
                         (LETT #2#
                               (CONS
-                               (SPADCALL (SPADCALL |s| (QREFELT $ 26)) |s|
-                                         (QREFELT $ 27))
+                               (SPADCALL (SPADCALL |s| (QREFELT % 26)) |s|
+                                         (QREFELT % 27))
                                #2#))))
                       (LETT #1# (CDR #1#)) (GO G190) G191
                       (EXIT (NREVERSE #2#))))))) 
 
 (SDEFUN |ODERTRIC;ricDsolve;LodoML;3|
         ((|l| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP)))
-         (|zeros| (|Mapping| (|List| F) UP)) ($ (|List| (|Fraction| UP))))
-        (SPADCALL |l| |zeros| (ELT $ 29) (QREFELT $ 34))) 
+         (|zeros| (|Mapping| (|List| F) UP)) (% (|List| (|Fraction| UP))))
+        (SPADCALL |l| |zeros| (ELT % 29) (QREFELT % 34))) 
 
 (SDEFUN |ODERTRIC;ricDsolve;LodoML;4|
         ((|l| (|LinearOrdinaryDifferentialOperator2| UP (|Fraction| UP)))
-         (|zeros| (|Mapping| (|List| F) UP)) ($ (|List| (|Fraction| UP))))
-        (SPADCALL |l| |zeros| (ELT $ 29) (QREFELT $ 36))) 
+         (|zeros| (|Mapping| (|List| F) UP)) (% (|List| (|Fraction| UP))))
+        (SPADCALL |l| |zeros| (ELT % 29) (QREFELT % 36))) 
 
 (SDEFUN |ODERTRIC;singRicDE;LodoML;5|
         ((|l| (|LinearOrdinaryDifferentialOperator2| UP (|Fraction| UP)))
          (|ezfactor| (|Mapping| (|Factored| UP) UP))
-         ($
+         (%
           (|List|
            (|Record| (|:| |frac| (|Fraction| UP))
                      (|:| |eq|
                           (|LinearOrdinaryDifferentialOperator2| UP
                                                                  (|Fraction|
                                                                   UP)))))))
-        (SPADCALL |l| (CONS (|function| |ODERTRIC;solveModulo|) $) |ezfactor|
-                  (QREFELT $ 42))) 
+        (SPADCALL |l| (CONS (|function| |ODERTRIC;solveModulo|) %) |ezfactor|
+                  (QREFELT % 42))) 
 
 (SDEFUN |ODERTRIC;ricDsolve;LodoMML;6|
         ((|l| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP)))
          (|zeros| (|Mapping| (|List| F) UP))
          (|ezfactor| (|Mapping| (|Factored| UP) UP))
-         ($ (|List| (|Fraction| UP))))
-        (SPADCALL (QCAR (SPADCALL |l| NIL (QREFELT $ 46))) |zeros| |ezfactor|
-                  (QREFELT $ 36))) 
+         (% (|List| (|Fraction| UP))))
+        (SPADCALL (QCAR (SPADCALL |l| NIL (QREFELT % 46))) |zeros| |ezfactor|
+                  (QREFELT % 36))) 
 
 (SDEFUN |ODERTRIC;mapeval|
         ((|p| (|SparseUnivariatePolynomial| (|Polynomial| F)))
-         (|ls| (|List| (|Symbol|))) (|lv| (|List| F)) ($ (UP)))
+         (|ls| (|List| (|Symbol|))) (|lv| (|List| F)) (% (UP)))
         (SPROG NIL
-               (SPADCALL (CONS #'|ODERTRIC;mapeval!0| (VECTOR $ |lv| |ls|)) |p|
-                         (QREFELT $ 53)))) 
+               (SPADCALL (CONS #'|ODERTRIC;mapeval!0| (VECTOR % |lv| |ls|)) |p|
+                         (QREFELT % 53)))) 
 
 (SDEFUN |ODERTRIC;mapeval!0| ((|z| NIL) ($$ NIL))
-        (PROG (|ls| |lv| $)
+        (PROG (|ls| |lv| %)
           (LETT |ls| (QREFELT $$ 2))
           (LETT |lv| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
+          (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPADCALL (SPADCALL |z| |ls| |lv| (QREFELT $ 49))
-                      (QREFELT $ 50)))))) 
+            (SPADCALL (SPADCALL |z| |ls| |lv| (QREFELT % 49))
+                      (QREFELT % 50)))))) 
 
 (SDEFUN |ODERTRIC;FifCan|
-        ((|f| (|Fraction| (|Polynomial| F))) ($ (|Union| F #1="failed")))
-        (SPROG ((#2=#:G759 NIL) (|d| #3=(|Union| F "failed")) (|n| #3#))
+        ((|f| (|Fraction| (|Polynomial| F))) (% (|Union| F #1="failed")))
+        (SPROG ((#2=#:G483 NIL) (|d| #3=(|Union| F "failed")) (|n| #3#))
                (SEQ
                 (COND
                  ((QEQCAR
                    (LETT |n|
-                         (SPADCALL (SPADCALL |f| (QREFELT $ 55))
-                                   (QREFELT $ 57)))
+                         (SPADCALL (SPADCALL |f| (QREFELT % 55))
+                                   (QREFELT % 57)))
                    0)
                   (COND
                    ((QEQCAR
                      (LETT |d|
-                           (SPADCALL (SPADCALL |f| (QREFELT $ 58))
-                                     (QREFELT $ 57)))
+                           (SPADCALL (SPADCALL |f| (QREFELT % 58))
+                                     (QREFELT % 57)))
                      0)
                     (EXIT
                      (CONS 0
                            (SPADCALL
                             (PROG2 (LETT #2# |n|)
                                 (QCDR #2#)
-                              (|check_union2| (QEQCAR #2# 0) (QREFELT $ 6)
-                                              (|Union| (QREFELT $ 6) #1#) #2#))
+                              (|check_union2| (QEQCAR #2# 0) (QREFELT % 6)
+                                              (|Union| (QREFELT % 6) #1#) #2#))
                             (PROG2 (LETT #2# |d|)
                                 (QCDR #2#)
-                              (|check_union2| (QEQCAR #2# 0) (QREFELT $ 6)
-                                              (|Union| (QREFELT $ 6) #1#) #2#))
-                            (QREFELT $ 59))))))))
+                              (|check_union2| (QEQCAR #2# 0) (QREFELT % 6)
+                                              (|Union| (QREFELT % 6) #1#) #2#))
+                            (QREFELT % 59))))))))
                 (EXIT (CONS 1 "failed"))))) 
 
 (SDEFUN |ODERTRIC;genericPolynomial|
         ((|s| (|Symbol|)) (|n| (|Integer|))
-         ($
+         (%
           (|Record|
            (|:| |poly| (|SparseUnivariatePolynomial| (|Polynomial| F)))
            (|:| |vars| (|List| (|Symbol|))))))
         (SPROG
          ((|l| (|List| (|Symbol|)))
           (|ans| (|SparseUnivariatePolynomial| (|Polynomial| F)))
-          (|sy| (|Symbol|)) (#1=#:G772 NIL) (|i| NIL))
-         (SEQ (LETT |ans| (|spadConstant| $ 60)) (LETT |l| NIL)
+          (|sy| (|Symbol|)) (#1=#:G495 NIL) (|i| NIL))
+         (SEQ (LETT |ans| (|spadConstant| % 60)) (LETT |l| NIL)
               (SEQ (LETT |i| 0) (LETT #1# |n|) G190
                    (COND ((|greater_SI| |i| #1#) (GO G191)))
                    (SEQ
@@ -125,24 +125,24 @@
                           (SPADCALL |ans|
                                     (SPADCALL
                                      (SPADCALL
-                                      (LETT |sy| (SPADCALL |s| (QREFELT $ 61)))
-                                      (QREFELT $ 62))
-                                     |i| (QREFELT $ 64))
-                                    (QREFELT $ 65)))
+                                      (LETT |sy| (SPADCALL |s| (QREFELT % 61)))
+                                      (QREFELT % 62))
+                                     |i| (QREFELT % 64))
+                                    (QREFELT % 65)))
                     (EXIT (LETT |l| (CONS |sy| |l|))))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
               (EXIT (CONS |ans| (NREVERSE |l|)))))) 
 
 (SDEFUN |ODERTRIC;ratsln|
         ((|l| (|List| (|Equation| (|Fraction| (|Polynomial| F)))))
-         ($
+         (%
           (|Union|
            (|Record| (|:| |var| (|List| (|Symbol|))) (|:| |val| (|List| F)))
            "failed")))
         (SPROG
-         ((|ls| (|List| (|Symbol|))) (|lv| (|List| F)) (#1=#:G790 NIL)
-          (#2=#:G791 NIL) (|v| (|Union| (|Symbol|) "failed"))
-          (|u| (|Union| F "failed")) (#3=#:G792 NIL) (|eq| NIL))
+         ((|ls| (|List| (|Symbol|))) (|lv| (|List| F)) (#1=#:G513 NIL)
+          (#2=#:G514 NIL) (|v| (|Union| (|Symbol|) "failed"))
+          (|u| (|Union| F "failed")) (#3=#:G515 NIL) (|eq| NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |ls| NIL) (LETT |lv| NIL)
@@ -156,7 +156,7 @@
                         (SEQ
                          (LETT |u|
                                (|ODERTRIC;FifCan|
-                                (SPADCALL |eq| (QREFELT $ 67)) $))
+                                (SPADCALL |eq| (QREFELT % 67)) %))
                          (EXIT
                           (COND
                            ((QEQCAR |u| 1)
@@ -164,13 +164,13 @@
                              (LETT #1#
                                    (PROGN
                                     (LETT #2# (CONS 1 #4="failed"))
-                                    (GO #5=#:G789)))
-                             (GO #6=#:G786)))
+                                    (GO #5=#:G512)))
+                             (GO #6=#:G509)))
                            ('T
                             (SEQ
                              (LETT |v|
-                                   (SPADCALL (SPADCALL |eq| (QREFELT $ 68))
-                                             (QREFELT $ 70)))
+                                   (SPADCALL (SPADCALL |eq| (QREFELT % 68))
+                                             (QREFELT % 70)))
                              (EXIT
                               (COND
                                ((QEQCAR |v| 1)
@@ -189,7 +189,7 @@
 
 (SDEFUN |ODERTRIC;ratsol|
         ((|l| (|List| (|List| (|Equation| (|Fraction| (|Polynomial| F))))))
-         ($
+         (%
           (|List|
            (|Record| (|:| |var| (|List| (|Symbol|))) (|:| |val| (|List| F))))))
         (SPROG
@@ -200,13 +200,13 @@
            (|Union|
             (|Record| (|:| |var| (|List| (|Symbol|))) (|:| |val| (|List| F)))
             "failed"))
-          (#1=#:G802 NIL) (|sol| NIL))
+          (#1=#:G525 NIL) (|sol| NIL))
          (SEQ (LETT |ans| NIL)
               (SEQ (LETT |sol| NIL) (LETT #1# |l|) G190
                    (COND
                     ((OR (ATOM #1#) (PROGN (LETT |sol| (CAR #1#)) NIL))
                      (GO G191)))
-                   (SEQ (LETT |u| (|ODERTRIC;ratsln| |sol| $))
+                   (SEQ (LETT |u| (|ODERTRIC;ratsln| |sol| %))
                         (EXIT
                          (COND
                           ((QEQCAR |u| 0)
@@ -217,7 +217,7 @@
 (SDEFUN |ODERTRIC;polyRicDE;LodoML;12|
         ((|l| (|LinearOrdinaryDifferentialOperator2| UP (|Fraction| UP)))
          (|zeros| (|Mapping| (|List| F) UP))
-         ($
+         (%
           (|List|
            #1=(|Record| (|:| |poly| UP)
                         (|:| |eq|
@@ -225,14 +225,14 @@
                                                                     (|Fraction|
                                                                      UP)))))))
         (SPROG
-         ((|ans| (|List| #1#)) (|p| (UP)) (#2=#:G829 NIL) (|a| NIL)
-          (#3=#:G828 NIL) (|rec| NIL)
+         ((|ans| (|List| #1#)) (|p| (UP)) (#2=#:G552 NIL) (|a| NIL)
+          (#3=#:G551 NIL) (|rec| NIL)
           (|lc|
            (|List|
             (|Record| (|:| |deg| (|NonNegativeInteger|)) (|:| |eq| UP)))))
-         (SEQ (LETT |ans| (LIST (CONS (|spadConstant| $ 18) |l|)))
+         (SEQ (LETT |ans| (LIST (CONS (|spadConstant| % 18) |l|)))
               (EXIT
-               (COND ((NULL (LETT |lc| (SPADCALL |l| (QREFELT $ 73)))) |ans|)
+               (COND ((NULL (LETT |lc| (SPADCALL |l| (QREFELT % 73)))) |ans|)
                      ('T
                       (SEQ
                        (SEQ (LETT |rec| NIL) (LETT #3# (REVERSE |lc|)) G190
@@ -252,19 +252,19 @@
                                    (SEQ
                                     (EXIT
                                      (COND
-                                      ((SPADCALL |a| (|spadConstant| $ 17)
-                                                 (QREFELT $ 75))
+                                      ((SPADCALL |a| (|spadConstant| % 17)
+                                                 (QREFELT % 75))
                                        (COND
                                         ((SPADCALL
                                           (LETT |p|
                                                 (|ODERTRIC;newtonSolution| |l|
-                                                 |a| (QCAR |rec|) |zeros| $))
-                                          (|spadConstant| $ 18) (QREFELT $ 76))
+                                                 |a| (QCAR |rec|) |zeros| %))
+                                          (|spadConstant| % 18) (QREFELT % 76))
                                          (LETT |ans|
                                                (CONS
                                                 (CONS |p|
                                                       (SPADCALL |l| |p|
-                                                                (QREFELT $
+                                                                (QREFELT %
                                                                          77)))
                                                 |ans|))))))))
                                    (LETT #2# (CDR #2#)) (GO G190) G191
@@ -273,42 +273,42 @@
                        (EXIT |ans|)))))))) 
 
 (SDEFUN |ODERTRIC;reverseUP|
-        ((|p| (UP)) ($ (|UnivariateTaylorSeries| F |dummy| (|Zero|))))
+        ((|p| (UP)) (% (|UnivariateTaylorSeries| F |dummy| (|Zero|))))
         (SPROG
-         ((|ans| (|UnivariateTaylorSeries| F |dummy| (|Zero|))) (#1=#:G832 NIL)
+         ((|ans| (|UnivariateTaylorSeries| F |dummy| (|Zero|))) (#1=#:G554 NIL)
           (|n| (|Integer|)))
-         (SEQ (LETT |ans| (|spadConstant| $ 82))
-              (LETT |n| (SPADCALL |p| (QREFELT $ 83)))
+         (SEQ (LETT |ans| (|spadConstant| % 82))
+              (LETT |n| (SPADCALL |p| (QREFELT % 83)))
               (SEQ G190
                    (COND
-                    ((NULL (SPADCALL |p| (|spadConstant| $ 18) (QREFELT $ 76)))
+                    ((NULL (SPADCALL |p| (|spadConstant| % 18) (QREFELT % 76)))
                      (GO G191)))
                    (SEQ
                     (LETT |ans|
                           (SPADCALL |ans|
-                                    (SPADCALL (SPADCALL |p| (QREFELT $ 84))
+                                    (SPADCALL (SPADCALL |p| (QREFELT % 84))
                                               (PROG1
                                                   (LETT #1#
                                                         (- |n|
                                                            (SPADCALL |p|
-                                                                     (QREFELT $
+                                                                     (QREFELT %
                                                                               83))))
                                                 (|check_subtype2| (>= #1# 0)
                                                                   '(|NonNegativeInteger|)
                                                                   '(|Integer|)
                                                                   #1#))
-                                              (QREFELT $ 85))
-                                    (QREFELT $ 86)))
-                    (EXIT (LETT |p| (SPADCALL |p| (QREFELT $ 87)))))
+                                              (QREFELT % 85))
+                                    (QREFELT % 86)))
+                    (EXIT (LETT |p| (SPADCALL |p| (QREFELT % 87)))))
                    NIL (GO G190) G191 (EXIT NIL))
               (EXIT |ans|)))) 
 
 (SDEFUN |ODERTRIC;reverseUTS|
         ((|s| (|UnivariateTaylorSeries| F |dummy| (|Zero|)))
-         (|n| (|NonNegativeInteger|)) ($ (UP)))
+         (|n| (|NonNegativeInteger|)) (% (UP)))
         (SPROG
-         ((#1=#:G838 NIL) (#2=#:G837 (UP)) (#3=#:G839 (UP)) (#4=#:G840 NIL)
-          (#5=#:G842 NIL) (|i| NIL))
+         ((#1=#:G560 NIL) (#2=#:G559 (UP)) (#3=#:G561 (UP)) (#4=#:G562 NIL)
+          (#5=#:G564 NIL) (|i| NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -318,23 +318,23 @@
                  (EXIT
                   (PROGN
                    (LETT #3#
-                         (SPADCALL (SPADCALL |s| |i| (QREFELT $ 88))
+                         (SPADCALL (SPADCALL |s| |i| (QREFELT % 88))
                                    (PROG1 (LETT #4# (- |n| |i|))
                                      (|check_subtype2| (>= #4# 0)
                                                        '(|NonNegativeInteger|)
                                                        '(|Integer|) #4#))
-                                   (QREFELT $ 89)))
-                   (COND (#1# (LETT #2# (SPADCALL #2# #3# (QREFELT $ 90))))
+                                   (QREFELT % 89)))
+                   (COND (#1# (LETT #2# (SPADCALL #2# #3# (QREFELT % 90))))
                          ('T (PROGN (LETT #2# #3#) (LETT #1# 'T)))))))
                 (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
-           (COND (#1# #2#) ('T (|spadConstant| $ 18))))))) 
+           (COND (#1# #2#) ('T (|spadConstant| % 18))))))) 
 
 (SDEFUN |ODERTRIC;newtonSolution|
         ((|l| #1=(|LinearOrdinaryDifferentialOperator2| UP (|Fraction| UP)))
          (|a| (F)) (|n| (|NonNegativeInteger|))
-         (|zeros| (|Mapping| (|List| F) UP)) ($ (UP)))
+         (|zeros| (|Mapping| (|List| F) UP)) (% (UP)))
         (SPROG
-         ((|sols| (|List| UP)) (#2=#:G869 NIL) (|sol| NIL) (#3=#:G868 NIL)
+         ((|sols| (|List| UP)) (#2=#:G590 NIL) (|sol| NIL) (#3=#:G589 NIL)
           (|neq| (|LinearOrdinaryDifferentialOperator2| UP (|Fraction| UP)))
           (|atn| (UP))
           (|u|
@@ -342,62 +342,62 @@
           (|aeq|
            (|SparseUnivariatePolynomial|
             (|UnivariateTaylorSeries| F |dummy| (|Zero|))))
-          (|s| (|UnivariateTaylorSeries| F |dummy| (|Zero|))) (#4=#:G855 NIL)
+          (|s| (|UnivariateTaylorSeries| F |dummy| (|Zero|))) (#4=#:G576 NIL)
           (|d| (|NonNegativeInteger|)) (|c| (UP)) (|m| (|Integer|)) (|op| #1#)
           (|mu| (|NonNegativeInteger|)))
-         (SEQ (LETT |m| 0) (LETT |aeq| (|spadConstant| $ 92)) (LETT |op| |l|)
+         (SEQ (LETT |m| 0) (LETT |aeq| (|spadConstant| % 92)) (LETT |op| |l|)
               (SEQ G190
                    (COND
                     ((NULL
-                      (SPADCALL |op| (|spadConstant| $ 93) (QREFELT $ 94)))
+                      (SPADCALL |op| (|spadConstant| % 93) (QREFELT % 94)))
                      (GO G191)))
                    (SEQ
                     (LETT |mu|
-                          (+ (* (SPADCALL |op| (QREFELT $ 95)) |n|)
-                             (SPADCALL (SPADCALL |op| (QREFELT $ 96))
-                                       (QREFELT $ 83))))
-                    (LETT |op| (SPADCALL |op| (QREFELT $ 97)))
+                          (+ (* (SPADCALL |op| (QREFELT % 95)) |n|)
+                             (SPADCALL (SPADCALL |op| (QREFELT % 96))
+                                       (QREFELT % 83))))
+                    (LETT |op| (SPADCALL |op| (QREFELT % 97)))
                     (EXIT (COND ((> |mu| |m|) (LETT |m| |mu|)))))
                    NIL (GO G190) G191 (EXIT NIL))
               (SEQ G190
                    (COND
-                    ((NULL (SPADCALL |l| (|spadConstant| $ 93) (QREFELT $ 94)))
+                    ((NULL (SPADCALL |l| (|spadConstant| % 93) (QREFELT % 94)))
                      (GO G191)))
-                   (SEQ (LETT |c| (SPADCALL |l| (QREFELT $ 96)))
-                        (LETT |d| (SPADCALL |l| (QREFELT $ 95)))
+                   (SEQ (LETT |c| (SPADCALL |l| (QREFELT % 96)))
+                        (LETT |d| (SPADCALL |l| (QREFELT % 95)))
                         (LETT |s|
                               (SPADCALL
-                               (SPADCALL (|spadConstant| $ 98)
+                               (SPADCALL (|spadConstant| % 98)
                                          (PROG1
                                              (LETT #4#
                                                    (- (- |m| (* |d| |n|))
                                                       (SPADCALL |c|
-                                                                (QREFELT $
+                                                                (QREFELT %
                                                                          83))))
                                            (|check_subtype2| (>= #4# 0)
                                                              '(|NonNegativeInteger|)
                                                              '(|Integer|) #4#))
-                                         (QREFELT $ 85))
-                               (|ODERTRIC;reverseUP| |c| $) (QREFELT $ 100)))
+                                         (QREFELT % 85))
+                               (|ODERTRIC;reverseUP| |c| %) (QREFELT % 100)))
                         (LETT |aeq|
                               (SPADCALL |aeq|
-                                        (SPADCALL |s| |d| (QREFELT $ 101))
-                                        (QREFELT $ 102)))
-                        (EXIT (LETT |l| (SPADCALL |l| (QREFELT $ 97)))))
+                                        (SPADCALL |s| |d| (QREFELT % 101))
+                                        (QREFELT % 102)))
+                        (EXIT (LETT |l| (SPADCALL |l| (QREFELT % 97)))))
                    NIL (GO G190) G191 (EXIT NIL))
-              (LETT |u| (|ODERTRIC;newtonSolve| |aeq| |a| |n| $))
+              (LETT |u| (|ODERTRIC;newtonSolve| |aeq| |a| |n| %))
               (EXIT
-               (COND ((QEQCAR |u| 0) (|ODERTRIC;reverseUTS| (QCDR |u|) |n| $))
+               (COND ((QEQCAR |u| 0) (|ODERTRIC;reverseUTS| (QCDR |u|) |n| %))
                      (#5='T
-                      (SEQ (LETT |atn| (SPADCALL |a| |n| (QREFELT $ 89)))
-                           (LETT |neq| (SPADCALL |l| |atn| (QREFELT $ 77)))
+                      (SEQ (LETT |atn| (SPADCALL |a| |n| (QREFELT % 89)))
+                           (LETT |neq| (SPADCALL |l| |atn| (QREFELT % 77)))
                            (LETT |sols|
                                  (PROGN
                                   (LETT #3# NIL)
                                   (SEQ (LETT |sol| NIL)
                                        (LETT #2#
                                              (SPADCALL |neq| |zeros|
-                                                       (QREFELT $ 80)))
+                                                       (QREFELT % 80)))
                                        G190
                                        (COND
                                         ((OR (ATOM #2#)
@@ -410,7 +410,7 @@
                                          (COND
                                           ((<
                                             (SPADCALL (QCAR |sol|)
-                                                      (QREFELT $ 83))
+                                                      (QREFELT % 83))
                                             |n|)
                                            (LETT #3#
                                                  (CONS (QCAR |sol|) #3#))))))
@@ -420,42 +420,42 @@
                             (COND ((NULL |sols|) |atn|)
                                   (#5#
                                    (SPADCALL |atn| (|SPADfirst| |sols|)
-                                             (QREFELT $ 90)))))))))))) 
+                                             (QREFELT % 90)))))))))))) 
 
 (SDEFUN |ODERTRIC;newtonSolve|
         ((|eq|
           (|SparseUnivariatePolynomial|
            (|UnivariateTaylorSeries| F |dummy| (|Zero|))))
          (|a| (F)) (|n| (|NonNegativeInteger|))
-         ($ (|Union| (|UnivariateTaylorSeries| F |dummy| (|Zero|)) "failed")))
+         (% (|Union| (|UnivariateTaylorSeries| F |dummy| (|Zero|)) "failed")))
         (SPROG
-         ((|sol| (|UnivariateTaylorSeries| F |dummy| (|Zero|))) (#1=#:G878 NIL)
+         ((|sol| (|UnivariateTaylorSeries| F |dummy| (|Zero|))) (#1=#:G599 NIL)
           (|xquo|
            (|Union| (|UnivariateTaylorSeries| F |dummy| (|Zero|)) "failed"))
-          (#2=#:G879 NIL) (|i| NIL)
+          (#2=#:G600 NIL) (|i| NIL)
           (|deq|
            (|SparseUnivariatePolynomial|
             (|UnivariateTaylorSeries| F |dummy| (|Zero|)))))
          (SEQ
           (EXIT
-           (SEQ (LETT |deq| (SPADCALL |eq| (QREFELT $ 103)))
-                (LETT |sol| (SPADCALL |a| (QREFELT $ 104)))
+           (SEQ (LETT |deq| (SPADCALL |eq| (QREFELT % 103)))
+                (LETT |sol| (SPADCALL |a| (QREFELT % 104)))
                 (SEQ (LETT |i| 1) (LETT #2# |n|) G190
                      (COND ((|greater_SI| |i| #2#) (GO G191)))
                      (SEQ
                       (LETT |xquo|
-                            (SPADCALL (SPADCALL |eq| |sol| (QREFELT $ 105))
-                                      (SPADCALL |deq| |sol| (QREFELT $ 105))
-                                      (QREFELT $ 107)))
+                            (SPADCALL (SPADCALL |eq| |sol| (QREFELT % 105))
+                                      (SPADCALL |deq| |sol| (QREFELT % 105))
+                                      (QREFELT % 107)))
                       (EXIT
                        (COND
                         ((QEQCAR |xquo| 1)
-                         (PROGN (LETT #1# (CONS 1 "failed")) (GO #3=#:G877)))
+                         (PROGN (LETT #1# (CONS 1 "failed")) (GO #3=#:G598)))
                         ('T
                          (LETT |sol|
                                (SPADCALL
-                                (SPADCALL |sol| (QCDR |xquo|) (QREFELT $ 108))
-                                |i| (QREFELT $ 109)))))))
+                                (SPADCALL |sol| (QCDR |xquo|) (QREFELT % 108))
+                                |i| (QREFELT % 109)))))))
                      (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                 (EXIT (CONS 0 |sol|))))
           #3# (EXIT #1#)))) 
@@ -464,16 +464,16 @@
         ((|l| (|LinearOrdinaryDifferentialOperator2| UP (|Fraction| UP)))
          (|zeros| (|Mapping| (|List| F) UP))
          (|ezfactor| (|Mapping| (|Factored| UP) UP))
-         ($ (|List| (|Fraction| UP))))
+         (% (|List| (|Fraction| UP))))
         (SPROG
-         ((#1=#:G892 NIL) (#2=#:G893 NIL) (|ans| (|List| (|Fraction| UP)))
-          (#3=#:G896 NIL) (|f| NIL) (#4=#:G895 NIL) (#5=#:G894 NIL) (|rec| NIL)
+         ((#1=#:G613 NIL) (#2=#:G614 NIL) (|ans| (|List| (|Fraction| UP)))
+          (#3=#:G617 NIL) (|f| NIL) (#4=#:G616 NIL) (#5=#:G615 NIL) (|rec| NIL)
           (|n| (|NonNegativeInteger|)))
          (SEQ
           (EXIT
-           (SEQ (LETT |n| (SPADCALL |l| (QREFELT $ 95))) (LETT |ans| NIL)
+           (SEQ (LETT |n| (SPADCALL |l| (QREFELT % 95))) (LETT |ans| NIL)
                 (SEQ (LETT |rec| NIL)
-                     (LETT #5# (SPADCALL |l| |ezfactor| (QREFELT $ 43))) G190
+                     (LETT #5# (SPADCALL |l| |ezfactor| (QREFELT % 43))) G190
                      (COND
                       ((OR (ATOM #5#) (PROGN (LETT |rec| (CAR #5#)) NIL))
                        (GO G191)))
@@ -489,7 +489,7 @@
                                                (LETT #3#
                                                      (|ODERTRIC;nonSingSolve|
                                                       |n| (QCDR |rec|) |zeros|
-                                                      $))
+                                                      %))
                                                G190
                                                (COND
                                                 ((OR (ATOM #3#)
@@ -503,19 +503,19 @@
                                                        (CONS
                                                         (SPADCALL (QCAR |rec|)
                                                                   |f|
-                                                                  (QREFELT $
+                                                                  (QREFELT %
                                                                            110))
                                                         #4#))))
                                                (LETT #3# (CDR #3#)) (GO G190)
                                                G191 (EXIT (NREVERSE #4#))))
-                                         (QREFELT $ 111))
-                               (QREFELT $ 112)))
+                                         (QREFELT % 111))
+                               (QREFELT % 112)))
                         (EXIT
                          (COND
                           ((EQL (LENGTH |ans|) |n|)
                            (PROGN
-                            (LETT #1# (PROGN (LETT #2# |ans|) (GO #6=#:G891)))
-                            (GO #7=#:G888)))))))
+                            (LETT #1# (PROGN (LETT #2# |ans|) (GO #6=#:G612)))
+                            (GO #7=#:G609)))))))
                       #7# (EXIT #1#))
                      (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
                 (EXIT |ans|)))
@@ -524,15 +524,15 @@
 (SDEFUN |ODERTRIC;nonSingSolve|
         ((|n| (|NonNegativeInteger|))
          (|l| (|LinearOrdinaryDifferentialOperator2| UP (|Fraction| UP)))
-         (|zeros| (|Mapping| (|List| F) UP)) ($ (|List| (|Fraction| UP))))
+         (|zeros| (|Mapping| (|List| F) UP)) (% (|List| (|Fraction| UP))))
         (SPROG
-         ((#1=#:G908 NIL) (#2=#:G909 NIL) (|ans| (|List| (|Fraction| UP)))
-          (#3=#:G910 NIL) (|rec| NIL))
+         ((#1=#:G629 NIL) (#2=#:G630 NIL) (|ans| (|List| (|Fraction| UP)))
+          (#3=#:G631 NIL) (|rec| NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |ans| NIL)
                 (SEQ (LETT |rec| NIL)
-                     (LETT #3# (SPADCALL |l| |zeros| (QREFELT $ 80))) G190
+                     (LETT #3# (SPADCALL |l| |zeros| (QREFELT % 80))) G190
                      (COND
                       ((OR (ATOM #3#) (PROGN (LETT |rec| (CAR #3#)) NIL))
                        (GO G191)))
@@ -543,32 +543,32 @@
                               (SPADCALL
                                (SPADCALL |ans|
                                          (|ODERTRIC;nopoly| |n| (QCAR |rec|)
-                                          (QCDR |rec|) |zeros| $)
-                                         (QREFELT $ 111))
-                               (QREFELT $ 112)))
+                                          (QCDR |rec|) |zeros| %)
+                                         (QREFELT % 111))
+                               (QREFELT % 112)))
                         (EXIT
                          (COND
                           ((EQL (LENGTH |ans|) |n|)
                            (PROGN
-                            (LETT #1# (PROGN (LETT #2# |ans|) (GO #4=#:G907)))
-                            (GO #5=#:G904)))))))
+                            (LETT #1# (PROGN (LETT #2# |ans|) (GO #4=#:G628)))
+                            (GO #5=#:G625)))))))
                       #5# (EXIT #1#))
                      (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
                 (EXIT |ans|)))
           #4# (EXIT #2#)))) 
 
 (SDEFUN |ODERTRIC;constantRic|
-        ((|p| (UP)) (|zeros| (|Mapping| (|List| F) UP)) ($ (|List| F)))
-        (COND ((ZEROP (SPADCALL |p| (QREFELT $ 83))) NIL)
-              ('T (SPADCALL (SPADCALL |p| (QREFELT $ 113)) |zeros|)))) 
+        ((|p| (UP)) (|zeros| (|Mapping| (|List| F) UP)) (% (|List| F)))
+        (COND ((ZEROP (SPADCALL |p| (QREFELT % 83))) NIL)
+              ('T (SPADCALL (SPADCALL |p| (QREFELT % 113)) |zeros|)))) 
 
 (SDEFUN |ODERTRIC;nopoly|
         ((|n| (|NonNegativeInteger|)) (|p| (UP))
          (|l| (|LinearOrdinaryDifferentialOperator2| UP (|Fraction| UP)))
-         (|zeros| (|Mapping| (|List| F) UP)) ($ (|List| (|Fraction| UP))))
+         (|zeros| (|Mapping| (|List| F) UP)) (% (|List| (|Fraction| UP))))
         (SPROG
-         ((#1=#:G924 NIL) (#2=#:G925 NIL) (|ans| (|List| (|Fraction| UP)))
-          (#3=#:G928 NIL) (|f| NIL) (#4=#:G927 NIL) (#5=#:G926 NIL)
+         ((#1=#:G645 NIL) (#2=#:G646 NIL) (|ans| (|List| (|Fraction| UP)))
+          (#3=#:G649 NIL) (|f| NIL) (#4=#:G648 NIL) (#5=#:G647 NIL)
           (|rec| NIL))
          (SEQ
           (EXIT
@@ -577,8 +577,8 @@
                      (LETT #5#
                            (SPADCALL |l|
                                      (CONS #'|ODERTRIC;nopoly!0|
-                                           (VECTOR $ |zeros|))
-                                     (QREFELT $ 116)))
+                                           (VECTOR % |zeros|))
+                                     (QREFELT % 116)))
                      G190
                      (COND
                       ((OR (ATOM #5#) (PROGN (LETT |rec| (CAR #5#)) NIL))
@@ -594,7 +594,7 @@
                                           (SEQ (LETT |f| NIL)
                                                (LETT #3#
                                                      (|ODERTRIC;logDerOnly|
-                                                      (QCDR |rec|) $))
+                                                      (QCDR |rec|) %))
                                                G190
                                                (COND
                                                 ((OR (ATOM #3#)
@@ -611,36 +611,36 @@
                                                           (SPADCALL
                                                            (SPADCALL
                                                             (QCAR |rec|)
-                                                            (QREFELT $ 117))
-                                                           |p| (QREFELT $ 90))
-                                                          (QREFELT $ 118))
-                                                         |f| (QREFELT $ 110))
+                                                            (QREFELT % 117))
+                                                           |p| (QREFELT % 90))
+                                                          (QREFELT % 118))
+                                                         |f| (QREFELT % 110))
                                                         #4#))))
                                                (LETT #3# (CDR #3#)) (GO G190)
                                                G191 (EXIT (NREVERSE #4#))))
-                                         (QREFELT $ 111))
-                               (QREFELT $ 112)))
+                                         (QREFELT % 111))
+                               (QREFELT % 112)))
                         (EXIT
                          (COND
                           ((EQL (LENGTH |ans|) |n|)
                            (PROGN
-                            (LETT #1# (PROGN (LETT #2# |ans|) (GO #6=#:G923)))
-                            (GO #7=#:G920)))))))
+                            (LETT #1# (PROGN (LETT #2# |ans|) (GO #6=#:G644)))
+                            (GO #7=#:G641)))))))
                       #7# (EXIT #1#))
                      (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
                 (EXIT |ans|)))
           #6# (EXIT #2#)))) 
 
 (SDEFUN |ODERTRIC;nopoly!0| ((|z| NIL) ($$ NIL))
-        (PROG (|zeros| $)
+        (PROG (|zeros| %)
           (LETT |zeros| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (|ODERTRIC;constantRic| |z| |zeros| $))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (|ODERTRIC;constantRic| |z| |zeros| %))))) 
 
 (SDEFUN |ODERTRIC;solveModulo|
-        ((|c| (UP)) (|h| (|SparseUnivariatePolynomial| UP)) ($ (|List| UP)))
+        ((|c| (UP)) (|h| (|SparseUnivariatePolynomial| UP)) (% (|List| UP)))
         (SPROG
-         ((#1=#:G941 NIL) (|s| NIL) (#2=#:G940 NIL)
+         ((#1=#:G662 NIL) (|s| NIL) (#2=#:G661 NIL)
           (|sol|
            (|List|
             (|Record| (|:| |var| (|List| (|Symbol|))) (|:| |val| (|List| F)))))
@@ -651,33 +651,33 @@
             (|:| |vars| (|List| (|Symbol|))))))
          (SEQ
           (LETT |rec|
-                (|ODERTRIC;genericPolynomial| (QREFELT $ 10)
-                 (- (SPADCALL |c| (QREFELT $ 83)) 1) $))
-          (LETT |unk| (|spadConstant| $ 60))
+                (|ODERTRIC;genericPolynomial| (QREFELT % 10)
+                 (- (SPADCALL |c| (QREFELT % 83)) 1) %))
+          (LETT |unk| (|spadConstant| % 60))
           (SEQ G190
-               (COND ((NULL (NULL (SPADCALL |h| (QREFELT $ 120)))) (GO G191)))
+               (COND ((NULL (NULL (SPADCALL |h| (QREFELT % 120)))) (GO G191)))
                (SEQ
                 (LETT |unk|
                       (SPADCALL |unk|
                                 (SPADCALL
                                  (|ODERTRIC;UP2SUP|
-                                  (SPADCALL |h| (QREFELT $ 121)) $)
+                                  (SPADCALL |h| (QREFELT % 121)) %)
                                  (SPADCALL (QCAR |rec|)
-                                           (SPADCALL |h| (QREFELT $ 122))
-                                           (QREFELT $ 123))
-                                 (QREFELT $ 124))
-                                (QREFELT $ 65)))
-                (EXIT (LETT |h| (SPADCALL |h| (QREFELT $ 125)))))
+                                           (SPADCALL |h| (QREFELT % 122))
+                                           (QREFELT % 123))
+                                 (QREFELT % 124))
+                                (QREFELT % 65)))
+                (EXIT (LETT |h| (SPADCALL |h| (QREFELT % 125)))))
                NIL (GO G190) G191 (EXIT NIL))
           (LETT |sol|
                 (|ODERTRIC;ratsol|
                  (SPADCALL
                   (SPADCALL
                    (QCDR
-                    (SPADCALL |unk| (|ODERTRIC;UP2SUP| |c| $) (QREFELT $ 127)))
-                   (QREFELT $ 129))
-                  (QCDR |rec|) (QREFELT $ 132))
-                 $))
+                    (SPADCALL |unk| (|ODERTRIC;UP2SUP| |c| %) (QREFELT % 127)))
+                   (QREFELT % 129))
+                  (QCDR |rec|) (QREFELT % 132))
+                 %))
           (EXIT
            (PROGN
             (LETT #2# NIL)
@@ -689,55 +689,55 @@
                    (LETT #2#
                          (CONS
                           (|ODERTRIC;mapeval| (QCAR |rec|) (QCAR |s|)
-                           (QCDR |s|) $)
+                           (QCDR |s|) %)
                           #2#))))
                  (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT (NREVERSE #2#)))))))) 
 
 (SDEFUN |ODERTRIC;ricDsolve;LodoL;22|
         ((|l| (|LinearOrdinaryDifferentialOperator2| UP (|Fraction| UP)))
-         ($ (|List| (|Fraction| UP))))
-        (SPADCALL |l| (ELT $ 29) (QREFELT $ 133))) 
+         (% (|List| (|Fraction| UP))))
+        (SPADCALL |l| (ELT % 29) (QREFELT % 133))) 
 
 (SDEFUN |ODERTRIC;ricDsolve;LodoL;23|
         ((|l| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP)))
-         ($ (|List| (|Fraction| UP))))
-        (SPADCALL |l| (ELT $ 29) (QREFELT $ 135))) 
+         (% (|List| (|Fraction| UP))))
+        (SPADCALL |l| (ELT % 29) (QREFELT % 135))) 
 
 (SDEFUN |ODERTRIC;ricDsolve;LodoML;24|
         ((|l| (|LinearOrdinaryDifferentialOperator2| UP (|Fraction| UP)))
          (|ezfactor| (|Mapping| (|Factored| UP) UP))
-         ($ (|List| (|Fraction| UP))))
+         (% (|List| (|Fraction| UP))))
         (SPROG NIL
                (SPADCALL |l|
                          (CONS #'|ODERTRIC;ricDsolve;LodoML;24!0|
-                               (VECTOR $ |ezfactor|))
-                         |ezfactor| (QREFELT $ 36)))) 
+                               (VECTOR % |ezfactor|))
+                         |ezfactor| (QREFELT % 36)))) 
 
 (SDEFUN |ODERTRIC;ricDsolve;LodoML;24!0| ((|z| NIL) ($$ NIL))
-        (PROG (|ezfactor| $)
+        (PROG (|ezfactor| %)
           (LETT |ezfactor| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (|ODERTRIC;zro| |z| |ezfactor| $))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (|ODERTRIC;zro| |z| |ezfactor| %))))) 
 
 (SDEFUN |ODERTRIC;ricDsolve;LodoML;25|
         ((|l| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP)))
          (|ezfactor| (|Mapping| (|Factored| UP) UP))
-         ($ (|List| (|Fraction| UP))))
+         (% (|List| (|Fraction| UP))))
         (SPROG NIL
                (SPADCALL |l|
                          (CONS #'|ODERTRIC;ricDsolve;LodoML;25!0|
-                               (VECTOR $ |ezfactor|))
-                         |ezfactor| (QREFELT $ 34)))) 
+                               (VECTOR % |ezfactor|))
+                         |ezfactor| (QREFELT % 34)))) 
 
 (SDEFUN |ODERTRIC;ricDsolve;LodoML;25!0| ((|z| NIL) ($$ NIL))
-        (PROG (|ezfactor| $)
+        (PROG (|ezfactor| %)
           (LETT |ezfactor| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (|ODERTRIC;zro| |z| |ezfactor| $))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (|ODERTRIC;zro| |z| |ezfactor| %))))) 
 
 (SDEFUN |ODERTRIC;zro|
-        ((|p| (UP)) (|ezfactor| (|Mapping| (|Factored| UP) UP)) ($ (|List| F)))
-        (SPROG ((#1=#:G967 NIL) (|r| NIL) (#2=#:G966 NIL))
+        ((|p| (UP)) (|ezfactor| (|Mapping| (|Factored| UP) UP)) (% (|List| F)))
+        (SPROG ((#1=#:G680 NIL) (|r| NIL) (#2=#:G679 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -745,7 +745,7 @@
                   (SEQ (LETT |r| NIL)
                        (LETT #1#
                              (SPADCALL (SPADCALL |p| |ezfactor|)
-                                       (QREFELT $ 141)))
+                                       (QREFELT % 141)))
                        G190
                        (COND
                         ((OR (ATOM #1#) (PROGN (LETT |r| (CAR #1#)) NIL))
@@ -753,23 +753,23 @@
                        (SEQ
                         (EXIT
                          (LETT #2#
-                               (CONS (|ODERTRIC;zro1| (QVELT |r| 1) $) #2#))))
+                               (CONS (|ODERTRIC;zro1| (QVELT |r| 1) %) #2#))))
                        (LETT #1# (CDR #1#)) (GO G190) G191
                        (EXIT (NREVERSE #2#))))
-                 (QREFELT $ 143))))) 
+                 (QREFELT % 143))))) 
 
-(SDEFUN |ODERTRIC;zro1| ((|p| (UP)) ($ (|List| F)))
+(SDEFUN |ODERTRIC;zro1| ((|p| (UP)) (% (|List| F)))
         (LIST
-         (SPADCALL (SPADCALL (LIST #'|ODERTRIC;zro1!0|) |p| (QREFELT $ 147))
-                   (QREFELT $ 149)))) 
+         (SPADCALL (SPADCALL (LIST #'|ODERTRIC;zro1!0|) |p| (QREFELT % 147))
+                   (QREFELT % 149)))) 
 
 (SDEFUN |ODERTRIC;zro1!0| ((|z| NIL) ($$ NIL)) |z|) 
 
 (DECLAIM (NOTINLINE |RationalRicDE;|)) 
 
-(DEFUN |RationalRicDE| (&REST #1=#:G971)
+(DEFUN |RationalRicDE| (&REST #1=#:G684)
   (SPROG NIL
-         (PROG (#2=#:G972)
+         (PROG (#2=#:G685)
            (RETURN
             (COND
              ((LETT #2#
@@ -786,43 +786,43 @@
                  ((NOT #2#) (HREM |$ConstructorCache| '|RationalRicDE|)))))))))) 
 
 (DEFUN |RationalRicDE;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|RationalRicDE| DV$1 DV$2))
-          (LETT $ (GETREFV 150))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 150))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
                                               (|HasCategory| |#1|
                                                              '(|AlgebraicallyClosedField|))))))
           (|haddProp| |$ConstructorCache| '|RationalRicDE| (LIST DV$1 DV$2)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 10 (SPADCALL (QREFELT $ 9)))
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 10 (SPADCALL (QREFELT % 9)))
           (COND
            ((|testBitVector| |pv$| 1)
             (PROGN
-             (QSETREFV $ 134
+             (QSETREFV % 134
                        (CONS (|dispatchFunction| |ODERTRIC;ricDsolve;LodoL;22|)
-                             $))
-             (QSETREFV $ 136
+                             %))
+             (QSETREFV % 136
                        (CONS (|dispatchFunction| |ODERTRIC;ricDsolve;LodoL;23|)
-                             $))
-             (QSETREFV $ 133
+                             %))
+             (QSETREFV % 133
                        (CONS
-                        (|dispatchFunction| |ODERTRIC;ricDsolve;LodoML;24|) $))
-             (QSETREFV $ 135
+                        (|dispatchFunction| |ODERTRIC;ricDsolve;LodoML;24|) %))
+             (QSETREFV % 135
                        (CONS
                         (|dispatchFunction| |ODERTRIC;ricDsolve;LodoML;25|)
-                        $)))))
-          $))) 
+                        %)))))
+          %))) 
 
 (MAKEPROP '|RationalRicDE| '|infovec|
           (LIST
@@ -834,7 +834,7 @@
               (|Union| 19 '"failed")
               (|Record| (|:| |particular| 21) (|:| |basis| 30))
               (|LinearOrdinaryDifferentialOperator2| 7 19) (|RationalLODE| 6 7)
-              (27 . |ratDsolve|) (33 . |differentiate|) (38 . /) (|Factored| $)
+              (27 . |ratDsolve|) (33 . |differentiate|) (38 . /) (|Factored| %)
               (44 . |squareFree|) (|List| 19)
               (|LinearOrdinaryDifferentialOperator1| 19) (|Mapping| 48 7)
               (|Mapping| 140 7) |ODERTRIC;ricDsolve;LodoMML;6|
@@ -857,8 +857,8 @@
               (153 . ~=) (159 . |changeVar|)
               (|Record| (|:| |poly| 7) (|:| |eq| 23)) (|List| 78)
               |ODERTRIC;polyRicDE;LodoML;12|
-              (|UnivariateTaylorSeries| 6 (NRTEVAL (QREFELT $ 10))
-                                        (NRTEVAL (|spadConstant| $ 17)))
+              (|UnivariateTaylorSeries| 6 (NRTEVAL (QREFELT % 10))
+                                        (NRTEVAL (|spadConstant| % 17)))
               (165 . |Zero|) (169 . |degree|) (174 . |leadingCoefficient|)
               (179 . |monomial|) (185 . +) (191 . |reductum|)
               (196 . |coefficient|) (202 . |monomial|) (208 . +)
@@ -866,7 +866,7 @@
               (222 . ~=) (228 . |degree|) (233 . |leadingCoefficient|)
               (238 . |reductum|) (243 . |One|) (247 . |One|) (251 . *)
               (257 . |monomial|) (263 . +) (269 . |differentiate|)
-              (274 . |coerce|) (279 . |elt|) (|Union| $ '"failed")
+              (274 . |coerce|) (279 . |elt|) (|Union| % '"failed")
               (285 . |exquo|) (291 . -) (297 . |truncate|) (303 . +)
               (309 . |concat!|) (315 . |removeDuplicates!|)
               (320 . |squareFreePart|)
@@ -875,16 +875,16 @@
               (336 . |coerce|) (|SparseUnivariatePolynomial| 7) (341 . |zero?|)
               (346 . |leadingCoefficient|) (351 . |degree|) (356 . ^) (362 . *)
               (368 . |reductum|)
-              (|Record| (|:| |quotient| $) (|:| |remainder| $))
+              (|Record| (|:| |quotient| %) (|:| |remainder| %))
               (373 . |monicDivide|) (|List| 11) (379 . |coefficients|)
               (|List| (|List| 66)) (|NonLinearSolvePackage| 6) (384 . |solve|)
               (390 . |ricDsolve|) (396 . |ricDsolve|) (401 . |ricDsolve|)
               (407 . |ricDsolve|) (|Union| '"nil" '"sqfr" '"irred" '"prime")
               (|Record| (|:| |flag| 137) (|:| |factor| 7) (|:| |exponent| 63))
-              (|List| 138) (|Factored| 7) (412 . |factorList|) (|List| $)
+              (|List| 138) (|Factored| 7) (412 . |factorList|) (|List| %)
               (417 . |concat|) (|SparseUnivariatePolynomial| 6) (|Mapping| 6 6)
               (|UnivariatePolynomialCategoryFunctions2| 6 7 6 144)
-              (422 . |map|) (|SparseUnivariatePolynomial| $) (428 . |zeroOf|))
+              (422 . |map|) (|SparseUnivariatePolynomial| %) (428 . |zeroOf|))
            '#(|singRicDE| 433 |ricDsolve| 439 |polyRicDE| 487) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

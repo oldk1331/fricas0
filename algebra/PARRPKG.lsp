@@ -1,12 +1,12 @@
 
 (SDEFUN |PARRPKG;nextMotzkinRow|
         ((|vv| #1=(|List| R)) (|aa| (|Stream| R)) (|bb| (|Stream| R))
-         (|cc| (|Stream| R)) ($ (|List| R)))
+         (|cc| (|Stream| R)) (% (|List| R)))
         (SPROG
          ((|vvnew| (|List| R)) (|vva| (|List| R)) (|vi| (R)) (|vvc| (|List| R))
           (|vvb| #1#))
-         (SEQ (LETT |vvnew| NIL) (LETT |vva| (CONS (|spadConstant| $ 7) |vv|))
-              (LETT |aa| (SPADCALL (|spadConstant| $ 7) |aa| (QREFELT $ 9)))
+         (SEQ (LETT |vvnew| NIL) (LETT |vva| (CONS (|spadConstant| % 7) |vv|))
+              (LETT |aa| (SPADCALL (|spadConstant| % 7) |aa| (QREFELT % 9)))
               (LETT |vvb| |vv|) (LETT |vvc| (CDR |vv|))
               (SEQ G190 (COND ((NULL (NULL (NULL |vvc|))) (GO G191)))
                    (SEQ
@@ -14,45 +14,45 @@
                           (SPADCALL
                            (SPADCALL
                             (SPADCALL (|SPADfirst| |vva|)
-                                      (SPADCALL |aa| (QREFELT $ 10))
-                                      (QREFELT $ 11))
+                                      (SPADCALL |aa| (QREFELT % 10))
+                                      (QREFELT % 11))
                             (SPADCALL (|SPADfirst| |vvb|)
-                                      (SPADCALL |bb| (QREFELT $ 10))
-                                      (QREFELT $ 11))
-                            (QREFELT $ 12))
+                                      (SPADCALL |bb| (QREFELT % 10))
+                                      (QREFELT % 11))
+                            (QREFELT % 12))
                            (SPADCALL (|SPADfirst| |vvc|)
-                                     (SPADCALL |cc| (QREFELT $ 10))
-                                     (QREFELT $ 11))
-                           (QREFELT $ 12)))
+                                     (SPADCALL |cc| (QREFELT % 10))
+                                     (QREFELT % 11))
+                           (QREFELT % 12)))
                     (LETT |vvnew| (CONS |vi| |vvnew|)) (LETT |vva| (CDR |vva|))
                     (LETT |vvb| (CDR |vvb|)) (LETT |vvc| (CDR |vvc|))
-                    (LETT |aa| (SPADCALL |aa| (QREFELT $ 13)))
-                    (LETT |bb| (SPADCALL |bb| (QREFELT $ 13)))
-                    (EXIT (LETT |cc| (SPADCALL |cc| (QREFELT $ 13)))))
+                    (LETT |aa| (SPADCALL |aa| (QREFELT % 13)))
+                    (LETT |bb| (SPADCALL |bb| (QREFELT % 13)))
+                    (EXIT (LETT |cc| (SPADCALL |cc| (QREFELT % 13)))))
                    NIL (GO G190) G191 (EXIT NIL))
               (LETT |vi|
                     (SPADCALL
                      (SPADCALL (|SPADfirst| |vva|)
-                               (SPADCALL |aa| (QREFELT $ 10)) (QREFELT $ 11))
+                               (SPADCALL |aa| (QREFELT % 10)) (QREFELT % 11))
                      (SPADCALL (|SPADfirst| |vvb|)
-                               (SPADCALL |bb| (QREFELT $ 10)) (QREFELT $ 11))
-                     (QREFELT $ 12)))
+                               (SPADCALL |bb| (QREFELT % 10)) (QREFELT % 11))
+                     (QREFELT % 12)))
               (LETT |vvnew| (CONS |vi| |vvnew|)) (LETT |vva| (CDR |vva|))
-              (LETT |aa| (SPADCALL |aa| (QREFELT $ 13)))
+              (LETT |aa| (SPADCALL |aa| (QREFELT % 13)))
               (LETT |vvnew|
                     (CONS
                      (SPADCALL (|SPADfirst| |vva|)
-                               (SPADCALL |aa| (QREFELT $ 10)) (QREFELT $ 11))
+                               (SPADCALL |aa| (QREFELT % 10)) (QREFELT % 11))
                      |vvnew|))
               (EXIT (LETT |vvnew| (NREVERSE |vvnew|)))))) 
 
 (SDEFUN |PARRPKG;nextJacobiRow|
         ((|vv| #1=(|List| R)) (|bb| (|Stream| R)) (|cc| (|Stream| R))
-         ($ (|List| R)))
+         (% (|List| R)))
         (SPROG
          ((|vvnew| (|List| R)) (|vva| (|List| R)) (|vi| (R)) (|vvc| (|List| R))
           (|vvb| #1#))
-         (SEQ (LETT |vvnew| NIL) (LETT |vva| (CONS (|spadConstant| $ 7) |vv|))
+         (SEQ (LETT |vvnew| NIL) (LETT |vva| (CONS (|spadConstant| % 7) |vv|))
               (LETT |vvb| |vv|) (LETT |vvc| (CDR |vv|))
               (SEQ G190 (COND ((NULL (NULL (NULL |vvc|))) (GO G191)))
                    (SEQ
@@ -60,72 +60,72 @@
                           (SPADCALL
                            (SPADCALL (|SPADfirst| |vva|)
                                      (SPADCALL (|SPADfirst| |vvb|)
-                                               (SPADCALL |bb| (QREFELT $ 10))
-                                               (QREFELT $ 11))
-                                     (QREFELT $ 12))
+                                               (SPADCALL |bb| (QREFELT % 10))
+                                               (QREFELT % 11))
+                                     (QREFELT % 12))
                            (SPADCALL (|SPADfirst| |vvc|)
-                                     (SPADCALL |cc| (QREFELT $ 10))
-                                     (QREFELT $ 11))
-                           (QREFELT $ 12)))
+                                     (SPADCALL |cc| (QREFELT % 10))
+                                     (QREFELT % 11))
+                           (QREFELT % 12)))
                     (LETT |vvnew| (CONS |vi| |vvnew|)) (LETT |vva| (CDR |vva|))
                     (LETT |vvb| (CDR |vvb|)) (LETT |vvc| (CDR |vvc|))
-                    (LETT |bb| (SPADCALL |bb| (QREFELT $ 13)))
-                    (EXIT (LETT |cc| (SPADCALL |cc| (QREFELT $ 13)))))
+                    (LETT |bb| (SPADCALL |bb| (QREFELT % 13)))
+                    (EXIT (LETT |cc| (SPADCALL |cc| (QREFELT % 13)))))
                    NIL (GO G190) G191 (EXIT NIL))
               (LETT |vi|
                     (SPADCALL (|SPADfirst| |vva|)
                               (SPADCALL (|SPADfirst| |vvb|)
-                                        (SPADCALL |bb| (QREFELT $ 10))
-                                        (QREFELT $ 11))
-                              (QREFELT $ 12)))
+                                        (SPADCALL |bb| (QREFELT % 10))
+                                        (QREFELT % 11))
+                              (QREFELT % 12)))
               (LETT |vvnew| (CONS |vi| |vvnew|)) (LETT |vva| (CDR |vva|))
               (LETT |vvnew| (CONS (|SPADfirst| |vva|) |vvnew|))
               (EXIT (LETT |vvnew| (NREVERSE |vvnew|)))))) 
 
 (SDEFUN |PARRPKG;motzkinPathArray;3SS;3|
         ((|aa| (|Stream| R)) (|bb| (|Stream| R)) (|cc| (|Stream| R))
-         ($ (|Stream| (|List| R))))
+         (% (|Stream| (|List| R))))
         (SPROG ((|start| (|List| R)))
-               (SEQ (LETT |start| (LIST (|spadConstant| $ 14)))
+               (SEQ (LETT |start| (LIST (|spadConstant| % 14)))
                     (EXIT
                      (SPADCALL
                       (CONS #'|PARRPKG;motzkinPathArray;3SS;3!0|
-                            (VECTOR $ |cc| |bb| |aa|))
-                      |start| (QREFELT $ 18)))))) 
+                            (VECTOR % |cc| |bb| |aa|))
+                      |start| (QREFELT % 18)))))) 
 
 (SDEFUN |PARRPKG;motzkinPathArray;3SS;3!0| ((|vv| NIL) ($$ NIL))
-        (PROG (|aa| |bb| |cc| $)
+        (PROG (|aa| |bb| |cc| %)
           (LETT |aa| (QREFELT $$ 3))
           (LETT |bb| (QREFELT $$ 2))
           (LETT |cc| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (|PARRPKG;nextMotzkinRow| |vv| |aa| |bb| |cc| $))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (|PARRPKG;nextMotzkinRow| |vv| |aa| |bb| |cc| %))))) 
 
 (SDEFUN |PARRPKG;jacobiPathArray;2SS;4|
-        ((|bb| (|Stream| R)) (|cc| (|Stream| R)) ($ (|Stream| (|List| R))))
+        ((|bb| (|Stream| R)) (|cc| (|Stream| R)) (% (|Stream| (|List| R))))
         (SPROG ((|start| (|List| R)))
-               (SEQ (LETT |start| (LIST (|spadConstant| $ 14)))
+               (SEQ (LETT |start| (LIST (|spadConstant| % 14)))
                     (EXIT
                      (SPADCALL
                       (CONS #'|PARRPKG;jacobiPathArray;2SS;4!0|
-                            (VECTOR $ |cc| |bb|))
-                      |start| (QREFELT $ 18)))))) 
+                            (VECTOR % |cc| |bb|))
+                      |start| (QREFELT % 18)))))) 
 
 (SDEFUN |PARRPKG;jacobiPathArray;2SS;4!0| ((|vv| NIL) ($$ NIL))
-        (PROG (|bb| |cc| $)
+        (PROG (|bb| |cc| %)
           (LETT |bb| (QREFELT $$ 2))
           (LETT |cc| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (|PARRPKG;nextJacobiRow| |vv| |bb| |cc| $))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (|PARRPKG;nextJacobiRow| |vv| |bb| |cc| %))))) 
 
-(SDEFUN |PARRPKG;bottom;SS;5| ((|x| (|Stream| (|List| R))) ($ (|Stream| R)))
-        (SPADCALL (ELT $ 21) |x| (QREFELT $ 24))) 
+(SDEFUN |PARRPKG;bottom;SS;5| ((|x| (|Stream| (|List| R))) (% (|Stream| R)))
+        (SPADCALL (ELT % 21) |x| (QREFELT % 24))) 
 
 (DECLAIM (NOTINLINE |PathArrayPackage;|)) 
 
-(DEFUN |PathArrayPackage| (#1=#:G720)
+(DEFUN |PathArrayPackage| (#1=#:G470)
   (SPROG NIL
-         (PROG (#2=#:G721)
+         (PROG (#2=#:G471)
            (RETURN
             (COND
              ((LETT #2#
@@ -141,19 +141,19 @@
                   (HREM |$ConstructorCache| '|PathArrayPackage|)))))))))) 
 
 (DEFUN |PathArrayPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|PathArrayPackage| DV$1))
-          (LETT $ (GETREFV 26))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 26))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PathArrayPackage| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|PathArrayPackage| '|infovec|
           (LIST

@@ -1,12 +1,12 @@
 
-(SDEFUN |IPRNTPK;iprint;SV;1| ((|s| (|String|)) ($ (|Void|)))
-        (SEQ (PRINC (SPADCALL |s| (QREFELT $ 8))) (EXIT (FORCE-OUTPUT)))) 
+(SDEFUN |IPRNTPK;iprint;SV;1| ((|s| (|String|)) (% (|Void|)))
+        (SEQ (PRINC (SPADCALL |s| (QREFELT % 8))) (EXIT (FORCE-OUTPUT)))) 
 
 (DECLAIM (NOTINLINE |InternalPrintPackage;|)) 
 
 (DEFUN |InternalPrintPackage| ()
   (SPROG NIL
-         (PROG (#1=#:G706)
+         (PROG (#1=#:G451)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|InternalPrintPackage|))
@@ -24,17 +24,17 @@
                   (HREM |$ConstructorCache| '|InternalPrintPackage|)))))))))) 
 
 (DEFUN |InternalPrintPackage;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|InternalPrintPackage|))
-          (LETT $ (GETREFV 11))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 11))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|InternalPrintPackage| NIL
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|InternalPrintPackage| '|infovec|
           (LIST

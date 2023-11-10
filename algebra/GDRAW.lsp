@@ -2,25 +2,25 @@
 (SDEFUN |GDRAW;gnuDraw;ESbSLV;1|
         ((|f| (|Expression| (|Float|)))
          (|segbind| (|SegmentBinding| (|Float|))) (|filename| (|String|))
-         (|opts| (|List| (|DrawOption|))) ($ (|Void|)))
+         (|opts| (|List| (|DrawOption|))) (% (|Void|)))
         (SPROG
-         ((#1=#:G713 NIL) (|p| NIL) (#2=#:G712 NIL) (|p1| NIL)
+         ((#1=#:G456 NIL) (|p| NIL) (#2=#:G455 NIL) (|p1| NIL)
           (|p2| (|List| (|List| (|Point| (|DoubleFloat|)))))
           (|f1| (|TextFile|)))
          (SEQ
           (LETT |f1|
-                (SPADCALL (SPADCALL |filename| (QREFELT $ 8)) "output"
-                          (QREFELT $ 10)))
+                (SPADCALL (SPADCALL |filename| (QREFELT % 8)) "output"
+                          (QREFELT % 10)))
           (SPADCALL |f1|
                     (SPADCALL
-                     (LIST "set title \"" (SPADCALL |opts| "" (QREFELT $ 13))
+                     (LIST "set title \"" (SPADCALL |opts| "" (QREFELT % 13))
                            "\"")
-                     (QREFELT $ 15))
-                    (QREFELT $ 16))
-          (SPADCALL |f1| "plot '-' title '' lw 3 with lines" (QREFELT $ 16))
+                     (QREFELT % 15))
+                    (QREFELT % 16))
+          (SPADCALL |f1| "plot '-' title '' lw 3 with lines" (QREFELT % 16))
           (LETT |p2|
-                (SPADCALL (SPADCALL |f| |segbind| |opts| (QREFELT $ 21))
-                          (QREFELT $ 23)))
+                (SPADCALL (SPADCALL |f| |segbind| |opts| (QREFELT % 21))
+                          (QREFELT % 23)))
           (SEQ (LETT |p1| NIL) (LETT #2# |p2|) G190
                (COND
                 ((OR (ATOM #2#) (PROGN (LETT |p1| (CAR #2#)) NIL)) (GO G191)))
@@ -35,40 +35,40 @@
                                  (SPADCALL
                                   (LIST
                                    (SPADCALL
-                                    (SPADCALL (SPADCALL |p| 1 (QREFELT $ 30))
-                                              (QREFELT $ 31))
-                                    (QREFELT $ 32))
+                                    (SPADCALL (SPADCALL |p| 1 (QREFELT % 30))
+                                              (QREFELT % 31))
+                                    (QREFELT % 32))
                                    " "
                                    (SPADCALL
-                                    (SPADCALL (SPADCALL |p| 2 (QREFELT $ 30))
-                                              (QREFELT $ 31))
-                                    (QREFELT $ 32)))
-                                  (QREFELT $ 15))
-                                 (QREFELT $ 16))))
+                                    (SPADCALL (SPADCALL |p| 2 (QREFELT % 30))
+                                              (QREFELT % 31))
+                                    (QREFELT % 32)))
+                                  (QREFELT % 15))
+                                 (QREFELT % 16))))
                      (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
-                (EXIT (SPADCALL |f1| (QREFELT $ 33))))
+                (EXIT (SPADCALL |f1| (QREFELT % 33))))
                (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
-          (EXIT (SPADCALL |f1| (QREFELT $ 34)))))) 
+          (EXIT (SPADCALL |f1| (QREFELT % 34)))))) 
 
 (SDEFUN |GDRAW;gnuDraw;2LSLV;2|
         ((|l1| (|List| (|DoubleFloat|))) (|l2| (|List| (|DoubleFloat|)))
-         (|filename| (|String|)) (|opts| (|List| (|DrawOption|))) ($ (|Void|)))
+         (|filename| (|String|)) (|opts| (|List| (|DrawOption|))) (% (|Void|)))
         (SPROG
-         ((#1=#:G727 NIL) (|p| NIL) (#2=#:G726 NIL) (|p1| NIL)
+         ((#1=#:G470 NIL) (|p| NIL) (#2=#:G469 NIL) (|p1| NIL)
           (|p2| (|List| (|List| (|Point| (|DoubleFloat|)))))
-          (|lp| (|List| (|Point| (|DoubleFloat|)))) (#3=#:G724 NIL) (|x| NIL)
-          (#4=#:G725 NIL) (|y| NIL) (#5=#:G723 NIL) (|f1| (|TextFile|)))
+          (|lp| (|List| (|Point| (|DoubleFloat|)))) (#3=#:G467 NIL) (|x| NIL)
+          (#4=#:G468 NIL) (|y| NIL) (#5=#:G466 NIL) (|f1| (|TextFile|)))
          (SEQ
           (LETT |f1|
-                (SPADCALL (SPADCALL |filename| (QREFELT $ 8)) "output"
-                          (QREFELT $ 10)))
+                (SPADCALL (SPADCALL |filename| (QREFELT % 8)) "output"
+                          (QREFELT % 10)))
           (SPADCALL |f1|
                     (SPADCALL
-                     (LIST "set title \"" (SPADCALL |opts| "" (QREFELT $ 13))
+                     (LIST "set title \"" (SPADCALL |opts| "" (QREFELT % 13))
                            "\"")
-                     (QREFELT $ 15))
-                    (QREFELT $ 16))
-          (SPADCALL |f1| "plot '-' title '' lw 3 with lines" (QREFELT $ 16))
+                     (QREFELT % 15))
+                    (QREFELT % 16))
+          (SPADCALL |f1| "plot '-' title '' lw 3 with lines" (QREFELT % 16))
           (LETT |lp|
                 (PROGN
                  (LETT #5# NIL)
@@ -81,13 +81,13 @@
                       (SEQ
                        (EXIT
                         (LETT #5#
-                              (CONS (SPADCALL (LIST |x| |y|) (QREFELT $ 38))
+                              (CONS (SPADCALL (LIST |x| |y|) (QREFELT % 38))
                                     #5#))))
                       (LETT #3# (PROG1 (CDR #3#) (LETT #4# (CDR #4#))))
                       (GO G190) G191 (EXIT (NREVERSE #5#)))))
           (LETT |p2|
-                (SPADCALL (SPADCALL (LIST |lp|) (QREFELT $ 39))
-                          (QREFELT $ 23)))
+                (SPADCALL (SPADCALL (LIST |lp|) (QREFELT % 39))
+                          (QREFELT % 23)))
           (SEQ (LETT |p1| NIL) (LETT #2# |p2|) G190
                (COND
                 ((OR (ATOM #2#) (PROGN (LETT |p1| (CAR #2#)) NIL)) (GO G191)))
@@ -102,57 +102,57 @@
                                  (SPADCALL
                                   (LIST
                                    (SPADCALL
-                                    (SPADCALL (SPADCALL |p| 1 (QREFELT $ 30))
-                                              (QREFELT $ 40))
-                                    (QREFELT $ 32))
+                                    (SPADCALL (SPADCALL |p| 1 (QREFELT % 30))
+                                              (QREFELT % 40))
+                                    (QREFELT % 32))
                                    " "
                                    (SPADCALL
-                                    (SPADCALL (SPADCALL |p| 2 (QREFELT $ 30))
-                                              (QREFELT $ 40))
-                                    (QREFELT $ 32)))
-                                  (QREFELT $ 15))
-                                 (QREFELT $ 16))))
+                                    (SPADCALL (SPADCALL |p| 2 (QREFELT % 30))
+                                              (QREFELT % 40))
+                                    (QREFELT % 32)))
+                                  (QREFELT % 15))
+                                 (QREFELT % 16))))
                      (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
-                (EXIT (SPADCALL |f1| (QREFELT $ 33))))
+                (EXIT (SPADCALL |f1| (QREFELT % 33))))
                (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
-          (EXIT (SPADCALL |f1| (QREFELT $ 34)))))) 
+          (EXIT (SPADCALL |f1| (QREFELT % 34)))))) 
 
 (SDEFUN |GDRAW;gnuDraw;ESbSV;3|
         ((|f| (|Expression| (|Float|)))
          (|segbind| (|SegmentBinding| (|Float|))) (|filename| (|String|))
-         ($ (|Void|)))
-        (SPADCALL |f| |segbind| |filename| (LIST (SPADCALL "" (QREFELT $ 43)))
-                  (QREFELT $ 36))) 
+         (% (|Void|)))
+        (SPADCALL |f| |segbind| |filename| (LIST (SPADCALL "" (QREFELT % 43)))
+                  (QREFELT % 36))) 
 
 (SDEFUN |GDRAW;gnuDraw;2LSV;4|
         ((|l1| (|List| (|DoubleFloat|))) (|l2| (|List| (|DoubleFloat|)))
-         (|filename| (|String|)) ($ (|Void|)))
-        (SPADCALL |l1| |l2| |filename| (LIST (SPADCALL "" (QREFELT $ 43)))
-                  (QREFELT $ 41))) 
+         (|filename| (|String|)) (% (|Void|)))
+        (SPADCALL |l1| |l2| |filename| (LIST (SPADCALL "" (QREFELT % 43)))
+                  (QREFELT % 41))) 
 
 (SDEFUN |GDRAW;gnuDraw;E2SbSLV;5|
         ((|f| (|Expression| (|Float|)))
          (|segbind1| (|SegmentBinding| (|Float|)))
          (|segbind2| (|SegmentBinding| (|Float|))) (|filename| (|String|))
-         (|opts| (|List| (|DrawOption|))) ($ (|Void|)))
+         (|opts| (|List| (|DrawOption|))) (% (|Void|)))
         (SPROG
-         ((#1=#:G738 NIL) (|p| NIL) (#2=#:G737 NIL) (|p1| NIL)
+         ((#1=#:G481 NIL) (|p| NIL) (#2=#:G480 NIL) (|p1| NIL)
           (|p2| (|List| (|List| (|Point| (|DoubleFloat|)))))
           (|f1| (|TextFile|)))
          (SEQ
           (LETT |f1|
-                (SPADCALL (SPADCALL |filename| (QREFELT $ 8)) "output"
-                          (QREFELT $ 10)))
+                (SPADCALL (SPADCALL |filename| (QREFELT % 8)) "output"
+                          (QREFELT % 10)))
           (SPADCALL |f1|
                     (SPADCALL
-                     (LIST "set title \"" (SPADCALL |opts| "" (QREFELT $ 13))
+                     (LIST "set title \"" (SPADCALL |opts| "" (QREFELT % 13))
                            "\"")
-                     (QREFELT $ 15))
-                    (QREFELT $ 16))
-          (SPADCALL |f1| "splot '-' title '' with pm3d" (QREFELT $ 16))
+                     (QREFELT % 15))
+                    (QREFELT % 16))
+          (SPADCALL |f1| "splot '-' title '' with pm3d" (QREFELT % 16))
           (LETT |p2|
-                (SPADCALL (SPADCALL |f| |segbind1| |segbind2| (QREFELT $ 47))
-                          (QREFELT $ 48)))
+                (SPADCALL (SPADCALL |f| |segbind1| |segbind2| (QREFELT % 47))
+                          (QREFELT % 48)))
           (SEQ (LETT |p1| NIL) (LETT #2# |p2|) G190
                (COND
                 ((OR (ATOM #2#) (PROGN (LETT |p1| (CAR #2#)) NIL)) (GO G191)))
@@ -167,39 +167,39 @@
                                  (SPADCALL
                                   (LIST
                                    (SPADCALL
-                                    (SPADCALL (SPADCALL |p| 1 (QREFELT $ 30))
-                                              (QREFELT $ 31))
-                                    (QREFELT $ 32))
+                                    (SPADCALL (SPADCALL |p| 1 (QREFELT % 30))
+                                              (QREFELT % 31))
+                                    (QREFELT % 32))
                                    " "
                                    (SPADCALL
-                                    (SPADCALL (SPADCALL |p| 2 (QREFELT $ 30))
-                                              (QREFELT $ 31))
-                                    (QREFELT $ 32))
+                                    (SPADCALL (SPADCALL |p| 2 (QREFELT % 30))
+                                              (QREFELT % 31))
+                                    (QREFELT % 32))
                                    " "
                                    (SPADCALL
-                                    (SPADCALL (SPADCALL |p| 3 (QREFELT $ 30))
-                                              (QREFELT $ 31))
-                                    (QREFELT $ 32)))
-                                  (QREFELT $ 15))
-                                 (QREFELT $ 16))))
+                                    (SPADCALL (SPADCALL |p| 3 (QREFELT % 30))
+                                              (QREFELT % 31))
+                                    (QREFELT % 32)))
+                                  (QREFELT % 15))
+                                 (QREFELT % 16))))
                      (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
-                (EXIT (SPADCALL |f1| (QREFELT $ 33))))
+                (EXIT (SPADCALL |f1| (QREFELT % 33))))
                (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
-          (EXIT (SPADCALL |f1| (QREFELT $ 34)))))) 
+          (EXIT (SPADCALL |f1| (QREFELT % 34)))))) 
 
 (SDEFUN |GDRAW;gnuDraw;E2SbSV;6|
         ((|f| (|Expression| (|Float|)))
          (|segbind1| (|SegmentBinding| (|Float|)))
          (|segbind2| (|SegmentBinding| (|Float|))) (|filename| (|String|))
-         ($ (|Void|)))
+         (% (|Void|)))
         (SPADCALL |f| |segbind1| |segbind2| |filename|
-                  (LIST (SPADCALL "" (QREFELT $ 43))) (QREFELT $ 49))) 
+                  (LIST (SPADCALL "" (QREFELT % 43))) (QREFELT % 49))) 
 
 (DECLAIM (NOTINLINE |GnuDraw;|)) 
 
 (DEFUN |GnuDraw| ()
   (SPROG NIL
-         (PROG (#1=#:G741)
+         (PROG (#1=#:G484)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|GnuDraw|))
@@ -214,22 +214,22 @@
                 (COND ((NOT #1#) (HREM |$ConstructorCache| '|GnuDraw|)))))))))) 
 
 (DEFUN |GnuDraw;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|GnuDraw|))
-          (LETT $ (GETREFV 51))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|GnuDraw| NIL (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 51))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|GnuDraw| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|GnuDraw| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|String|) (|FileName|) (0 . |coerce|)
               (|TextFile|) (5 . |open|) (|List| 42) (|DrawOptionFunctions0|)
-              (11 . |title|) (|List| $) (17 . |concat|) (22 . |writeLine!|)
+              (11 . |title|) (|List| %) (17 . |concat|) (22 . |writeLine!|)
               (|GraphImage|) (|Expression| (|Float|))
               (|SegmentBinding| (|Float|)) (|TopLevelDrawFunctions| 18)
               (28 . |makeObject|) (|List| (|List| 29)) (35 . |pointLists|)

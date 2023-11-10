@@ -1,21 +1,21 @@
 
 (SDEFUN |FR2;map;MFF;1|
-        ((|fn| (|Mapping| S R)) (|u| (|Factored| R)) ($ (|Factored| S)))
+        ((|fn| (|Mapping| S R)) (|u| (|Factored| R)) (% (|Factored| S)))
         (SPROG
          ((|l|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| S)
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (#1=#:G721 NIL) (|f| NIL) (#2=#:G720 NIL))
+          (#1=#:G463 NIL) (|f| NIL) (#2=#:G462 NIL))
          (SEQ
           (LETT |l|
                 (CONS
                  (VECTOR (CONS 0 "nil")
-                         (SPADCALL (SPADCALL |u| (QREFELT $ 9)) |fn|) 1)
+                         (SPADCALL (SPADCALL |u| (QREFELT % 9)) |fn|) 1)
                  (PROGN
                   (LETT #2# NIL)
-                  (SEQ (LETT |f| NIL) (LETT #1# (SPADCALL |u| (QREFELT $ 13)))
+                  (SEQ (LETT |f| NIL) (LETT #1# (SPADCALL |u| (QREFELT % 13)))
                        G190
                        (COND
                         ((OR (ATOM #1#) (PROGN (LETT |f| (CAR #1#)) NIL))
@@ -30,23 +30,23 @@
                                 #2#))))
                        (LETT #1# (CDR #1#)) (GO G190) G191
                        (EXIT (NREVERSE #2#))))))
-          (EXIT (SPADCALL (|spadConstant| $ 15) |l| (QREFELT $ 19)))))) 
+          (EXIT (SPADCALL (|spadConstant| % 15) |l| (QREFELT % 19)))))) 
 
 (SDEFUN |FR2;map_preserving;MFF;2|
-        ((|fn| (|Mapping| S R)) (|u| (|Factored| R)) ($ (|Factored| S)))
+        ((|fn| (|Mapping| S R)) (|u| (|Factored| R)) (% (|Factored| S)))
         (SPROG
          ((|nl|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| S)
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (#1=#:G734 NIL) (|f| NIL) (#2=#:G733 NIL) (|nu| (S)))
-         (SEQ (LETT |nu| (SPADCALL (SPADCALL |u| (QREFELT $ 9)) |fn|))
+          (#1=#:G476 NIL) (|f| NIL) (#2=#:G475 NIL) (|nu| (S)))
+         (SEQ (LETT |nu| (SPADCALL (SPADCALL |u| (QREFELT % 9)) |fn|))
               (LETT |nl|
                     (PROGN
                      (LETT #2# NIL)
                      (SEQ (LETT |f| NIL)
-                          (LETT #1# (SPADCALL |u| (QREFELT $ 13))) G190
+                          (LETT #1# (SPADCALL |u| (QREFELT % 13))) G190
                           (COND
                            ((OR (ATOM #1#) (PROGN (LETT |f| (CAR #1#)) NIL))
                             (GO G191)))
@@ -60,13 +60,13 @@
                                    #2#))))
                           (LETT #1# (CDR #1#)) (GO G190) G191
                           (EXIT (NREVERSE #2#)))))
-              (EXIT (SPADCALL |nu| |nl| (QREFELT $ 19)))))) 
+              (EXIT (SPADCALL |nu| |nl| (QREFELT % 19)))))) 
 
 (DECLAIM (NOTINLINE |FactoredFunctions2;|)) 
 
-(DEFUN |FactoredFunctions2| (&REST #1=#:G735)
+(DEFUN |FactoredFunctions2| (&REST #1=#:G477)
   (SPROG NIL
-         (PROG (#2=#:G736)
+         (PROG (#2=#:G478)
            (RETURN
             (COND
              ((LETT #2#
@@ -84,21 +84,21 @@
                   (HREM |$ConstructorCache| '|FactoredFunctions2|)))))))))) 
 
 (DEFUN |FactoredFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|FactoredFunctions2| DV$1 DV$2))
-          (LETT $ (GETREFV 23))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 23))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|FactoredFunctions2|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|FactoredFunctions2| '|infovec|
           (LIST

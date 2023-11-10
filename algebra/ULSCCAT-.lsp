@@ -1,21 +1,21 @@
 
-(SDEFUN |ULSCCAT-;zero?;SB;1| ((|x| (S)) ($ (|Boolean|)))
-        (SPADCALL (SPADCALL |x| (QREFELT $ 9)) (QREFELT $ 11))) 
+(SDEFUN |ULSCCAT-;zero?;SB;1| ((|x| (S)) (% (|Boolean|)))
+        (SPADCALL (SPADCALL |x| (QREFELT % 9)) (QREFELT % 11))) 
 
-(SDEFUN |ULSCCAT-;retract;SUTS;2| ((|x| (S)) ($ (UTS)))
-        (SPADCALL |x| (QREFELT $ 13))) 
+(SDEFUN |ULSCCAT-;retract;SUTS;2| ((|x| (S)) (% (UTS)))
+        (SPADCALL |x| (QREFELT % 13))) 
 
-(SDEFUN |ULSCCAT-;retractIfCan;SU;3| ((|x| (S)) ($ (|Union| UTS "failed")))
-        (SPADCALL |x| (QREFELT $ 16))) 
+(SDEFUN |ULSCCAT-;retractIfCan;SU;3| ((|x| (S)) (% (|Union| UTS "failed")))
+        (SPADCALL |x| (QREFELT % 16))) 
 
 (SDEFUN |ULSCCAT-;laurent;ISS;4|
-        ((|n| (|Integer|)) (|st| (|Stream| |Coef|)) ($ (S)))
-        (SPADCALL |n| (SPADCALL |st| (QREFELT $ 19)) (QREFELT $ 21))) 
+        ((|n| (|Integer|)) (|st| (|Stream| |Coef|)) (% (S)))
+        (SPADCALL |n| (SPADCALL |st| (QREFELT % 19)) (QREFELT % 21))) 
 
 (DECLAIM (NOTINLINE |UnivariateLaurentSeriesConstructorCategory&;|)) 
 
 (DEFUN |UnivariateLaurentSeriesConstructorCategory&| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -23,20 +23,20 @@
           (LETT |dv$|
                 (LIST '|UnivariateLaurentSeriesConstructorCategory&| DV$1 DV$2
                       DV$3))
-          (LETT $ (GETREFV 28))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 28))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
                                               (|HasCategory| |#2|
                                                              '(|Field|))))))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (QSETREFV $ 8 |#3|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (QSETREFV % 8 |#3|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|UnivariateLaurentSeriesConstructorCategory&| '|infovec|
           (LIST

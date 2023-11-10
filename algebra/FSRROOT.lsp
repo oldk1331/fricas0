@@ -1,19 +1,19 @@
 
 (SDEFUN |FSRROOT;get_rational_roots;FKL;1|
         ((|eq1f| (F)) (|k1| (|Kernel| F))
-         ($ (|List| (|Fraction| (|Integer|)))))
+         (% (|List| (|Fraction| (|Integer|)))))
         (SPROG ((|eq2p| (|SparseUnivariatePolynomial| F)))
                (SEQ
                 (LETT |eq2p|
-                      (SPADCALL (SPADCALL |eq1f| |k1| (QREFELT $ 10))
-                                (QREFELT $ 13)))
-                (EXIT (SPADCALL |eq2p| (QREFELT $ 16)))))) 
+                      (SPADCALL (SPADCALL |eq1f| |k1| (QREFELT % 10))
+                                (QREFELT % 13)))
+                (EXIT (SPADCALL |eq2p| (QREFELT % 16)))))) 
 
 (DECLAIM (NOTINLINE |FunctionSpaceRationalRoots;|)) 
 
-(DEFUN |FunctionSpaceRationalRoots| (&REST #1=#:G700)
+(DEFUN |FunctionSpaceRationalRoots| (&REST #1=#:G450)
   (SPROG NIL
-         (PROG (#2=#:G701)
+         (PROG (#2=#:G451)
            (RETURN
             (COND
              ((LETT #2#
@@ -32,26 +32,26 @@
                         '|FunctionSpaceRationalRoots|)))))))))) 
 
 (DEFUN |FunctionSpaceRationalRoots;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|FunctionSpaceRationalRoots| DV$1 DV$2))
-          (LETT $ (GETREFV 19))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 19))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|FunctionSpaceRationalRoots|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|FunctionSpaceRationalRoots| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|Fraction| (|SparseUnivariatePolynomial| $)) (|Kernel| $)
+              (|Fraction| (|SparseUnivariatePolynomial| %)) (|Kernel| %)
               (0 . |univariate|) (|SparseUnivariatePolynomial| 7)
               (|Fraction| 11) (6 . |numer|) (|List| (|Fraction| (|Integer|)))
               (|PolynomialRationalRoots| 7 11) (11 . |get_rational_roots|)

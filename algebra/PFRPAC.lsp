@@ -1,35 +1,35 @@
 
 (SDEFUN |PFRPAC;partialFraction;FSA;1|
-        ((|rf| (|Fraction| (|Polynomial| R))) (|v| (|Symbol|)) ($ (|Any|)))
+        ((|rf| (|Fraction| (|Polynomial| R))) (|v| (|Symbol|)) (% (|Any|)))
         (SPROG ((|df| (|Factored| (|Polynomial| R))))
                (SEQ
                 (LETT |df|
-                      (SPADCALL (SPADCALL |rf| (QREFELT $ 9)) (QREFELT $ 12)))
+                      (SPADCALL (SPADCALL |rf| (QREFELT % 9)) (QREFELT % 12)))
                 (EXIT
-                 (SPADCALL (SPADCALL |rf| (QREFELT $ 13)) |df| |v|
-                           (QREFELT $ 16)))))) 
+                 (SPADCALL (SPADCALL |rf| (QREFELT % 13)) |df| |v|
+                           (QREFELT % 16)))))) 
 
 (SDEFUN |PFRPAC;makeSup|
         ((|p| (|Polynomial| R)) (|v| (|Symbol|))
-         ($ (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R)))))
+         (% (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R)))))
         (SPROG ((|up| (|SparseUnivariatePolynomial| (|Polynomial| R))))
-               (SEQ (LETT |up| (SPADCALL |p| |v| (QREFELT $ 19)))
-                    (EXIT (SPADCALL (ELT $ 20) |up| (QREFELT $ 25)))))) 
+               (SEQ (LETT |up| (SPADCALL |p| |v| (QREFELT % 19)))
+                    (EXIT (SPADCALL (ELT % 20) |up| (QREFELT % 25)))))) 
 
 (SDEFUN |PFRPAC;partialFraction;PFSA;3|
         ((|p| (|Polynomial| R)) (|facq| (|Factored| (|Polynomial| R)))
-         (|v| (|Symbol|)) ($ (|Any|)))
+         (|v| (|Symbol|)) (% (|Any|)))
         (SPROG
-         ((|pfup| (|PartialFraction| |up|)) (|nflist| (|fup|)) (#1=#:G722 NIL)
-          (#2=#:G721 (|fup|)) (#3=#:G723 (|fup|)) (#4=#:G731 NIL) (|u| NIL)
+         ((|pfup| (|PartialFraction| |up|)) (|nflist| (|fup|)) (#1=#:G454 NIL)
+          (#2=#:G453 (|fup|)) (#3=#:G455 (|fup|)) (#4=#:G458 NIL) (|u| NIL)
           (|fcont| (|up|))
           (|fup|
            (|Join| (|IntegralDomain|) (|DifferentialExtension| |up|)
                    (|Algebra| |up|) (|FullyEvalableOver| |up|)
                    (|FullyRetractableTo| |up|)
-                   (CATEGORY |domain| (SIGNATURE |expand| (|up| $))
+                   (CATEGORY |domain| (SIGNATURE |expand| (|up| %))
                     (SIGNATURE |makeFR|
-                     ($ |up|
+                     (% |up|
                       (|List|
                        (|Record|
                         (|:| |flag|
@@ -42,24 +42,24 @@
                        (|Record| (|:| |flag| (|Union| #5# #6# #7# #8#))
                                  (|:| |factor| |up|)
                                  (|:| |exponent| (|NonNegativeInteger|))))
-                      $))
-                    (SIGNATURE |nilFactor| ($ |up| (|NonNegativeInteger|)))
+                      %))
+                    (SIGNATURE |nilFactor| (% |up| (|NonNegativeInteger|)))
                     (SIGNATURE |factors|
                      ((|List|
                        (|Record| (|:| |factor| |up|)
                                  (|:| |exponent| (|NonNegativeInteger|))))
-                      $))
+                      %))
                     (SIGNATURE |irreducibleFactor|
-                     ($ |up| (|NonNegativeInteger|)))
-                    (SIGNATURE |numberOfFactors| ((|NonNegativeInteger|) $))
-                    (SIGNATURE |primeFactor| ($ |up| (|NonNegativeInteger|)))
-                    (SIGNATURE |sqfrFactor| ($ |up| (|NonNegativeInteger|)))
+                     (% |up| (|NonNegativeInteger|)))
+                    (SIGNATURE |numberOfFactors| ((|NonNegativeInteger|) %))
+                    (SIGNATURE |primeFactor| (% |up| (|NonNegativeInteger|)))
+                    (SIGNATURE |sqfrFactor| (% |up| (|NonNegativeInteger|)))
                     (SIGNATURE |flagFactor|
-                     ($ |up| (|NonNegativeInteger|) (|Union| #5# #6# #7# #8#)))
-                    (SIGNATURE |unit| (|up| $))
-                    (SIGNATURE |unitNormalize| ($ $))
-                    (SIGNATURE |map| ($ (|Mapping| |up| |up|) $))
-                    (SIGNATURE |mergeFactors| ($ $ $))
+                     (% |up| (|NonNegativeInteger|) (|Union| #5# #6# #7# #8#)))
+                    (SIGNATURE |unit| (|up| %))
+                    (SIGNATURE |unitNormalize| (% %))
+                    (SIGNATURE |map| (% (|Mapping| |up| |up|) %))
+                    (SIGNATURE |mergeFactors| (% % %))
                     (IF (|has| |up| (|GcdDomain|))
                         (ATTRIBUTE (|GcdDomain|))
                         |noBranch|)
@@ -74,38 +74,38 @@
                         |noBranch|)
                     (IF (|has| |up| (|IntegerNumberSystem|))
                         (PROGN
-                         (SIGNATURE |rational?| ((|Boolean|) $))
-                         (SIGNATURE |rational| ((|Fraction| (|Integer|)) $))
+                         (SIGNATURE |rational?| ((|Boolean|) %))
+                         (SIGNATURE |rational| ((|Fraction| (|Integer|)) %))
                          (SIGNATURE |rationalIfCan|
-                          ((|Union| (|Fraction| (|Integer|)) "failed") $)))
+                          ((|Union| (|Fraction| (|Integer|)) "failed") %)))
                         |noBranch|)
-                    (IF (|has| |up| (|Eltable| $ $))
-                        (ATTRIBUTE (|Eltable| $ $))
+                    (IF (|has| |up| (|Eltable| % %))
+                        (ATTRIBUTE (|Eltable| % %))
                         |noBranch|)
-                    (IF (|has| |up| (|Evalable| $))
-                        (ATTRIBUTE (|Evalable| $))
+                    (IF (|has| |up| (|Evalable| %))
+                        (ATTRIBUTE (|Evalable| %))
                         |noBranch|)
-                    (IF (|has| |up| (|InnerEvalable| (|Symbol|) $))
-                        (ATTRIBUTE (|InnerEvalable| (|Symbol|) $))
+                    (IF (|has| |up| (|InnerEvalable| (|Symbol|) %))
+                        (ATTRIBUTE (|InnerEvalable| (|Symbol|) %))
                         |noBranch|))))
           (|up|
            (|Join|
             (|UnivariatePolynomialCategory| (|Fraction| (|Polynomial| R)))
-            (CATEGORY |domain| (SIGNATURE |coerce| ($ (|Variable| |v|)))))))
+            (CATEGORY |domain| (SIGNATURE |coerce| (% (|Variable| |v|)))))))
          (SEQ
           (LETT |up|
                 (|UnivariatePolynomial| |v|
                                         (|Fraction|
-                                         (|Polynomial| (QREFELT $ 6)))))
+                                         (|Polynomial| (QREFELT % 6)))))
           (LETT |fup| (|Factored| |up|))
           (LETT |fcont|
-                (|PFRPAC;makeSup| (SPADCALL |facq| (QREFELT $ 26)) |v| $))
+                (|PFRPAC;makeSup| (SPADCALL |facq| (QREFELT % 26)) |v| %))
           (LETT |nflist|
                 (SPADCALL |fcont|
                           (PROGN
                            (LETT #1# NIL)
                            (SEQ (LETT |u| NIL)
-                                (LETT #4# (SPADCALL |facq| (QREFELT $ 30)))
+                                (LETT #4# (SPADCALL |facq| (QREFELT % 30)))
                                 G190
                                 (COND
                                  ((OR (ATOM #4#)
@@ -117,10 +117,10 @@
                                    (LETT #3#
                                          (SPADCALL
                                           (|PFRPAC;makeSup| (QVELT |u| 1) |v|
-                                           $)
+                                           %)
                                           (QVELT |u| 2)
                                           (|compiledLookupCheck| '|primeFactor|
-                                                                 (LIST '$
+                                                                 (LIST '%
                                                                        (|devaluate|
                                                                         |up|)
                                                                        (LIST
@@ -132,9 +132,9 @@
                                            (SPADCALL #2# #3#
                                                      (|compiledLookupCheck| '*
                                                                             (LIST
-                                                                             '$
-                                                                             '$
-                                                                             '$)
+                                                                             '%
+                                                                             '%
+                                                                             '%)
                                                                             |fup|))))
                                     ('T
                                      (PROGN (LETT #2# #3#) (LETT #1# 'T)))))))
@@ -142,16 +142,16 @@
                            (COND (#1# #2#)
                                  ('T
                                   (SPADCALL
-                                   (|compiledLookupCheck| '|One| (LIST '$)
+                                   (|compiledLookupCheck| '|One| (LIST '%)
                                                           |fup|)))))
                           (|compiledLookupCheck| '*
-                                                 (LIST '$ (|devaluate| |up|)
-                                                       '$)
+                                                 (LIST '% (|devaluate| |up|)
+                                                       '%)
                                                  |fup|)))
           (LETT |pfup|
-                (SPADCALL (|PFRPAC;makeSup| |p| |v| $) |nflist|
+                (SPADCALL (|PFRPAC;makeSup| |p| |v| %) |nflist|
                           (|compiledLookupCheck| '|partialFraction|
-                                                 (LIST '$ (|devaluate| |up|)
+                                                 (LIST '% (|devaluate| |up|)
                                                        (LIST '|Factored|
                                                              (|devaluate|
                                                               |up|)))
@@ -167,9 +167,9 @@
 
 (DECLAIM (NOTINLINE |PartialFractionPackage;|)) 
 
-(DEFUN |PartialFractionPackage| (#1=#:G732)
+(DEFUN |PartialFractionPackage| (#1=#:G459)
   (SPROG NIL
-         (PROG (#2=#:G733)
+         (PROG (#2=#:G460)
            (RETURN
             (COND
              ((LETT #2#
@@ -186,19 +186,19 @@
                   (HREM |$ConstructorCache| '|PartialFractionPackage|)))))))))) 
 
 (DEFUN |PartialFractionPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|PartialFractionPackage| DV$1))
-          (LETT $ (GETREFV 31))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 31))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PartialFractionPackage| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|PartialFractionPackage| '|infovec|
           (LIST
@@ -207,7 +207,7 @@
               (|MultivariateFactorize| 15 (|IndexedExponents| 15) 6 7)
               (5 . |factor|) (10 . |numer|) (|Any|) (|Symbol|)
               |PFRPAC;partialFraction;PFSA;3| |PFRPAC;partialFraction;FSA;1|
-              (|SparseUnivariatePolynomial| $) (15 . |univariate|)
+              (|SparseUnivariatePolynomial| %) (15 . |univariate|)
               (21 . |coerce|) (|SparseUnivariatePolynomial| 8) (|Mapping| 8 7)
               (|SparseUnivariatePolynomial| 7)
               (|UnivariatePolynomialCategoryFunctions2| 7 23 8 21) (26 . |map|)

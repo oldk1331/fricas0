@@ -1,49 +1,49 @@
 
-(SDEFUN |FPS-;float;2IS;1| ((|ma| (|Integer|)) (|ex| (|Integer|)) ($ (S)))
-        (SPADCALL |ma| |ex| (SPADCALL (QREFELT $ 8)) (QREFELT $ 10))) 
+(SDEFUN |FPS-;float;2IS;1| ((|ma| (|Integer|)) (|ex| (|Integer|)) (% (S)))
+        (SPADCALL |ma| |ex| (SPADCALL (QREFELT % 8)) (QREFELT % 10))) 
 
-(SDEFUN |FPS-;digits;Pi;2| (($ (|PositiveInteger|)))
-        (SPROG ((#1=#:G715 NIL))
+(SDEFUN |FPS-;digits;Pi;2| ((% (|PositiveInteger|)))
+        (SPROG ((#1=#:G463 NIL))
                (PROG1
                    (LETT #1#
                          (MAX 1
                               (QUOTIENT2
-                               (* 4004 (- (SPADCALL (QREFELT $ 13)) 1))
+                               (* 4004 (- (SPADCALL (QREFELT % 13)) 1))
                                13301)))
                  (|check_subtype2| (> #1# 0) '(|PositiveInteger|) '(|Integer|)
                                    #1#)))) 
 
-(SDEFUN |FPS-;toString;SS;3| ((|x| (S)) ($ (|String|)))
-        (SPADCALL |x| (QREFELT $ 17))) 
+(SDEFUN |FPS-;toString;SS;3| ((|x| (S)) (% (|String|)))
+        (SPADCALL |x| (QREFELT % 17))) 
 
 (SDEFUN |FPS-;toString;SNniS;4|
-        ((|x| (S)) (|n| (|NonNegativeInteger|)) ($ (|String|)))
+        ((|x| (S)) (|n| (|NonNegativeInteger|)) (% (|String|)))
         (SPROG
          ((|res| (|List| (|String|))) (|x2| (S)) (|tenn| (S)) (|x0| (S))
           (|x1| (S)))
-         (SEQ (LETT |x1| (SPADCALL |x| (QREFELT $ 19)))
+         (SEQ (LETT |x1| (SPADCALL |x| (QREFELT % 19)))
               (LETT |x0|
-                    (SPADCALL (SPADCALL |x| |x1| (QREFELT $ 20))
-                              (QREFELT $ 21)))
-              (LETT |tenn| (SPADCALL 1 |n| 10 (QREFELT $ 10)))
+                    (SPADCALL (SPADCALL |x| |x1| (QREFELT % 20))
+                              (QREFELT % 21)))
+              (LETT |tenn| (SPADCALL 1 |n| 10 (QREFELT % 10)))
               (LETT |x2|
-                    (SPADCALL (SPADCALL |tenn| |x0| (QREFELT $ 22))
-                              (QREFELT $ 19)))
+                    (SPADCALL (SPADCALL |tenn| |x0| (QREFELT % 22))
+                              (QREFELT % 19)))
               (LETT |res|
-                    (LIST (STRINGIMAGE (SPADCALL |x1| (QREFELT $ 23))) "."
-                          (STRINGIMAGE (SPADCALL |x2| (QREFELT $ 23)))))
-              (EXIT (SPADCALL |res| (QREFELT $ 25)))))) 
+                    (LIST (STRINGIMAGE (SPADCALL |x1| (QREFELT % 23))) "."
+                          (STRINGIMAGE (SPADCALL |x2| (QREFELT % 23)))))
+              (EXIT (SPADCALL |res| (QREFELT % 25)))))) 
 
 (DECLAIM (NOTINLINE |FloatingPointSystem&;|)) 
 
 (DEFUN |FloatingPointSystem&| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|FloatingPointSystem&| DV$1))
-          (LETT $ (GETREFV 28))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 28))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
@@ -51,10 +51,10 @@
                                                              '(|arbitraryExponent|))
                                               (|HasCategory| |#1|
                                                              '(|arbitraryPrecision|))))))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|FloatingPointSystem&| '|infovec|
           (LIST
@@ -62,7 +62,7 @@
               (0 . |base|) (|Integer|) (4 . |float|) |FPS-;float;2IS;1|
               (11 . |One|) (15 . |bits|) (19 . |max|) |FPS-;digits;Pi;2|
               (|String|) (23 . |convert|) |FPS-;toString;SS;3| (28 . |round|)
-              (33 . -) (39 . |abs|) (44 . *) (50 . |retract|) (|List| $)
+              (33 . -) (39 . |abs|) (44 . *) (50 . |retract|) (|List| %)
               (55 . |concat|) (|NonNegativeInteger|) |FPS-;toString;SNniS;4|)
            '#(|toString| 60 |float| 71 |digits| 77) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))

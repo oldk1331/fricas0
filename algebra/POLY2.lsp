@@ -1,21 +1,21 @@
 
 (SDEFUN |POLY2;map;MPP;1|
-        ((|f| (|Mapping| S R)) (|p| (|Polynomial| R)) ($ (|Polynomial| S)))
+        ((|f| (|Mapping| S R)) (|p| (|Polynomial| R)) (% (|Polynomial| S)))
         (SPROG NIL
-               (SPADCALL (ELT $ 10) (CONS #'|POLY2;map;MPP;1!0| (VECTOR $ |f|))
-                         |p| (QREFELT $ 16)))) 
+               (SPADCALL (ELT % 10) (CONS #'|POLY2;map;MPP;1!0| (VECTOR % |f|))
+                         |p| (QREFELT % 16)))) 
 
 (SDEFUN |POLY2;map;MPP;1!0| ((|x2| NIL) ($$ NIL))
-        (PROG (|f| $)
+        (PROG (|f| %)
           (LETT |f| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL (SPADCALL |x2| |f|) (QREFELT $ 11)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL (SPADCALL |x2| |f|) (QREFELT % 11)))))) 
 
 (DECLAIM (NOTINLINE |PolynomialFunctions2;|)) 
 
-(DEFUN |PolynomialFunctions2| (&REST #1=#:G695)
+(DEFUN |PolynomialFunctions2| (&REST #1=#:G451)
   (SPROG NIL
-         (PROG (#2=#:G696)
+         (PROG (#2=#:G452)
            (RETURN
             (COND
              ((LETT #2#
@@ -33,21 +33,21 @@
                   (HREM |$ConstructorCache| '|PolynomialFunctions2|)))))))))) 
 
 (DEFUN |PolynomialFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|PolynomialFunctions2| DV$1 DV$2))
-          (LETT $ (GETREFV 19))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 19))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PolynomialFunctions2|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|PolynomialFunctions2| '|infovec|
           (LIST

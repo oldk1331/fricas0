@@ -1,45 +1,45 @@
 
-(SDEFUN |GRALG-;Zero;S;1| (($ (S)))
-        (SPADCALL (|spadConstant| $ 9) (QREFELT $ 10))) 
+(SDEFUN |GRALG-;Zero;S;1| ((% (S)))
+        (SPADCALL (|spadConstant| % 9) (QREFELT % 10))) 
 
-(SDEFUN |GRALG-;One;S;2| (($ (S)))
-        (SPADCALL (|spadConstant| $ 12) (QREFELT $ 10))) 
+(SDEFUN |GRALG-;One;S;2| ((% (S)))
+        (SPADCALL (|spadConstant| % 12) (QREFELT % 10))) 
 
-(SDEFUN |GRALG-;*;R2S;3| ((|r| (R)) (|x| (S)) ($ (S)))
-        (SPADCALL (SPADCALL |r| (QREFELT $ 10)) |x| (QREFELT $ 14))) 
+(SDEFUN |GRALG-;*;R2S;3| ((|r| (R)) (|x| (S)) (% (S)))
+        (SPADCALL (SPADCALL |r| (QREFELT % 10)) |x| (QREFELT % 14))) 
 
-(SDEFUN |GRALG-;*;SRS;4| ((|x| (S)) (|r| (R)) ($ (S)))
-        (SPADCALL |x| (SPADCALL |r| (QREFELT $ 10)) (QREFELT $ 14))) 
+(SDEFUN |GRALG-;*;SRS;4| ((|x| (S)) (|r| (R)) (% (S)))
+        (SPADCALL |x| (SPADCALL |r| (QREFELT % 10)) (QREFELT % 14))) 
 
 (DECLAIM (NOTINLINE |GradedAlgebra&;|)) 
 
 (DEFUN |GradedAlgebra&| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT DV$3 (|devaluate| |#3|))
           (LETT |dv$| (LIST '|GradedAlgebra&| DV$1 DV$2 DV$3))
-          (LETT $ (GETREFV 17))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (QSETREFV $ 8 |#3|)
-          (SETF |pv$| (QREFELT $ 3))
+          (LETT % (GETREFV 17))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (QSETREFV % 8 |#3|)
+          (SETF |pv$| (QREFELT % 3))
           (COND ((|domainEqual| |#2| |#1|))
                 ('T
                  (PROGN
-                  (QSETREFV $ 11
-                            (CONS (|dispatchFunction| |GRALG-;Zero;S;1|) $))
-                  (QSETREFV $ 13
-                            (CONS (|dispatchFunction| |GRALG-;One;S;2|) $))
-                  (QSETREFV $ 15
-                            (CONS (|dispatchFunction| |GRALG-;*;R2S;3|) $))
-                  (QSETREFV $ 16
-                            (CONS (|dispatchFunction| |GRALG-;*;SRS;4|) $)))))
-          $))) 
+                  (QSETREFV % 11
+                            (CONS (|dispatchFunction| |GRALG-;Zero;S;1|) %))
+                  (QSETREFV % 13
+                            (CONS (|dispatchFunction| |GRALG-;One;S;2|) %))
+                  (QSETREFV % 15
+                            (CONS (|dispatchFunction| |GRALG-;*;R2S;3|) %))
+                  (QSETREFV % 16
+                            (CONS (|dispatchFunction| |GRALG-;*;SRS;4|) %)))))
+          %))) 
 
 (MAKEPROP '|GradedAlgebra&| '|infovec|
           (LIST

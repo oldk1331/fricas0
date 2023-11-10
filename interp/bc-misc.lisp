@@ -9,7 +9,7 @@
   (PROG () (RETURN (STRCONC "{}" |ind| "=" |a| "{}.." |b| "{}"))))
 
 ; bcIndefiniteIntegrate() ==
-;   htInitPage("Indefinite Integration Basic Command",nil)
+;   htInitPage('"Indefinite Integration Basic Command",nil)
 ;   htMakePage '(
 ;      (domainConditions
 ;        (isDomain EM $EmptyMode)
@@ -33,7 +33,7 @@
   (PROG ()
     (RETURN
      (PROGN
-      (|htInitPage| '|Indefinite Integration Basic Command| NIL)
+      (|htInitPage| "Indefinite Integration Basic Command" NIL)
       (|htMakePage|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| S (|String|)) (|isDomain| SY (|Symbol|)))
@@ -62,7 +62,7 @@
       (|bcGen| (STRCONC "integrate(" |integrand| "," |var| '|)|))))))
 
 ; bcDefiniteIntegrate() ==
-;   htInitPage("Definite Integration Basic Command",nil)
+;   htInitPage('"Definite Integration Basic Command",nil)
 ;   htMakePage '(
 ;      (domainConditions
 ;        (isDomain EM $EmptyMode)
@@ -104,7 +104,7 @@
   (PROG ()
     (RETURN
      (PROGN
-      (|htInitPage| '|Definite Integration Basic Command| NIL)
+      (|htInitPage| "Definite Integration Basic Command" NIL)
       (|htMakePage|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| S (|String|)) (|isDomain| SY (|Symbol|)))
@@ -170,7 +170,7 @@
       (|bcGen| (STRCONC "integrate(" |integrand| "," |varpart| ")"))))))
 
 ; bcSum() ==
-;   htInitPage("Sum Basic Command",nil)
+;   htInitPage('"Sum Basic Command",nil)
 ;   htMakePage '(
 ;     (domainConditions
 ;        (isDomain EM $EmptyMode)
@@ -203,7 +203,7 @@
   (PROG ()
     (RETURN
      (PROGN
-      (|htInitPage| '|Sum Basic Command| NIL)
+      (|htInitPage| "Sum Basic Command" NIL)
       (|htMakePage|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| S (|String|)) (|isDomain| SY (|Symbol|)))
@@ -241,7 +241,7 @@
        (STRCONC "sum(" |mand| "," |index| " = " CAR ".." |last| ")"))))))
 
 ; bcProduct() ==
-;   htInitPage("Product Basic Command",nil)
+;   htInitPage('"Product Basic Command",nil)
 ;   htMakePage '(
 ;     (domainConditions
 ;        (isDomain EM $EmptyMode)
@@ -262,7 +262,7 @@
   (PROG ()
     (RETURN
      (PROGN
-      (|htInitPage| '|Product Basic Command| NIL)
+      (|htInitPage| "Product Basic Command" NIL)
       (|htMakePage|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| S (|String|)) (|isDomain| SY (|Symbol|)))
@@ -297,7 +297,7 @@
        (STRCONC "product(" |mand| "," |index| "," CAR "," |last| ")"))))))
 
 ; bcDifferentiate() ==
-;   htInitPage("Differentiate Basic Command",nil)
+;   htInitPage('"Differentiate Basic Command",nil)
 ;   htMakePage '(
 ;     (domainConditions
 ;        (isDomain EM $EmptyMode)
@@ -327,7 +327,7 @@
   (PROG ()
     (RETURN
      (PROGN
-      (|htInitPage| '|Differentiate Basic Command| NIL)
+      (|htInitPage| "Differentiate Basic Command" NIL)
       (|htMakePage|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| S (|String|)) (|isDomain| SY (|Symbol|)))

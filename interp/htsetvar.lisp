@@ -253,7 +253,7 @@
 ;   bcHt '"Select one of the following: \newline\tab{3} "
 ;   links := [[STRCONC('"",STRINGIMAGE opt), '"\newline\tab{3}", functionToCall, opt] for opt in values]
 ;   htMakePage [['bcLispLinks, :links]]
-;   bcHt ["\indent{0}\newline\vspace{1} The current setting is: {\em ",
+;   bcHt ['"\indent{0}\newline\vspace{1} The current setting is: {\em ",
 ;         translateTrueFalse2YesNo EVAL variable, '"} "]
 ;   htShowPage()
 
@@ -284,7 +284,7 @@
                NIL |values| NIL))
       (|htMakePage| (LIST (CONS '|bcLispLinks| |links|)))
       (|bcHt|
-       (LIST '|\\indent{0}\\newline\\vspace{1} The current setting is: {\\em |
+       (LIST "\\indent{0}\\newline\\vspace{1} The current setting is: {\\em "
              (|translateTrueFalse2YesNo| (EVAL |variable|)) "} "))
       (|htShowPage|)))))
 
@@ -870,7 +870,7 @@
        |tree| NIL)))))
 
 ; htSetHistory htPage ==
-;   msg := "when the history facility is on (yes), results of computations are saved in memory"
+;   msg := '"when the history facility is on (yes), results of computations are saved in memory"
 ;   data := ['history,msg,'history,'LITERALS,'$HiFiAccess,'(on off yes no)]
 ;   htShowLiteralsPage(htPage,data)
 
@@ -879,7 +879,7 @@
     (RETURN
      (PROGN
       (SETQ |msg|
-              '|when the history facility is on (yes), results of computations are saved in memory|)
+              "when the history facility is on (yes), results of computations are saved in memory")
       (SETQ |data|
               (LIST '|history| |msg| '|history| 'LITERALS '|$HiFiAccess|
                     '(|on| |off| |yes| |no|)))
@@ -1067,7 +1067,7 @@
 ;   htInitPage('"Cache Summary",nil)
 ;   bcHt '"In general, interpreter functions "
 ;   bcHt
-;     $cacheCount = 0 => "will {\em not} be cached."
+;     $cacheCount = 0 => '"will {\em not} be cached."
 ;     bcHt '"cache "
 ;     htAllOrNum $cacheCount
 ;     '"} values."
@@ -1110,7 +1110,7 @@
       (|htInitPage| "Cache Summary" NIL)
       (|bcHt| "In general, interpreter functions ")
       (|bcHt|
-       (COND ((EQL |$cacheCount| 0) '|will {\\em not} be cached.|)
+       (COND ((EQL |$cacheCount| 0) "will {\\em not} be cached.")
              (#1#
               (PROGN
                (|bcHt| "cache ")

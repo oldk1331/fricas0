@@ -1,35 +1,35 @@
 
-(SDEFUN |OM-;OMwrite;SS;1| ((|x| (S)) ($ (|String|)))
-        (SPADCALL |x| 'T (QREFELT $ 9))) 
+(SDEFUN |OM-;OMwrite;SS;1| ((|x| (S)) (% (|String|)))
+        (SPADCALL |x| 'T (QREFELT % 9))) 
 
 (SDEFUN |OM-;OMwrite;OmdSV;2|
-        ((|dev| (|OpenMathDevice|)) (|x| (S)) ($ (|Void|)))
-        (SPADCALL |dev| |x| 'T (QREFELT $ 13))) 
+        ((|dev| (|OpenMathDevice|)) (|x| (S)) (% (|Void|)))
+        (SPADCALL |dev| |x| 'T (QREFELT % 13))) 
 
-(SDEFUN |OM-;OMwrite;SBS;3| ((|x| (S)) (|wholeObj| (|Boolean|)) ($ (|String|)))
+(SDEFUN |OM-;OMwrite;SBS;3| ((|x| (S)) (|wholeObj| (|Boolean|)) (% (|String|)))
         (SPROG ((|s| (|String|)) (|dev| (|OpenMathDevice|)) (|sp| (|None|)))
                (SEQ (LETT |s| "") (LETT |sp| (OM-STRINGTOSTRINGPTR |s|))
                     (LETT |dev|
-                          (SPADCALL |sp| (SPADCALL (QREFELT $ 16))
-                                    (QREFELT $ 17)))
-                    (SPADCALL |dev| |x| |wholeObj| (QREFELT $ 13))
-                    (SPADCALL |dev| (QREFELT $ 18))
+                          (SPADCALL |sp| (SPADCALL (QREFELT % 16))
+                                    (QREFELT % 17)))
+                    (SPADCALL |dev| |x| |wholeObj| (QREFELT % 13))
+                    (SPADCALL |dev| (QREFELT % 18))
                     (LETT |s| (OM-STRINGPTRTOSTRING |sp|)) (EXIT |s|)))) 
 
 (DECLAIM (NOTINLINE |OpenMath&;|)) 
 
 (DEFUN |OpenMath&| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|OpenMath&| DV$1))
-          (LETT $ (GETREFV 20))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 20))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|OpenMath&| '|infovec|
           (LIST

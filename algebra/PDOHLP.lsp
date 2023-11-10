@@ -1,21 +1,21 @@
 
-(SDEFUN |PDOHLP;id_map;VarA;1| ((|v| (|Var|)) ($ (|Automorphism| R)))
-        (|spadConstant| $ 9)) 
+(SDEFUN |PDOHLP;id_map;VarA;1| ((|v| (|Var|)) (% (|Automorphism| R)))
+        (|spadConstant| % 9)) 
 
-(SDEFUN |PDOHLP;diff_map;VarM;2| ((|v| (|Var|)) ($ (|Mapping| R R)))
-        (SPROG NIL (CONS #'|PDOHLP;diff_map;VarM;2!0| (VECTOR $ |v|)))) 
+(SDEFUN |PDOHLP;diff_map;VarM;2| ((|v| (|Var|)) (% (|Mapping| R R)))
+        (SPROG NIL (CONS #'|PDOHLP;diff_map;VarM;2!0| (VECTOR % |v|)))) 
 
 (SDEFUN |PDOHLP;diff_map;VarM;2!0| ((|x| NIL) ($$ NIL))
-        (PROG (|v| $)
+        (PROG (|v| %)
           (LETT |v| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |x| |v| (QREFELT $ 11)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |x| |v| (QREFELT % 11)))))) 
 
 (DECLAIM (NOTINLINE |PartialDifferentialOperatorHelper;|)) 
 
-(DEFUN |PartialDifferentialOperatorHelper| (&REST #1=#:G693)
+(DEFUN |PartialDifferentialOperatorHelper| (&REST #1=#:G452)
   (SPROG NIL
-         (PROG (#2=#:G694)
+         (PROG (#2=#:G453)
            (RETURN
             (COND
              ((LETT #2#
@@ -36,21 +36,21 @@
                         '|PartialDifferentialOperatorHelper|)))))))))) 
 
 (DEFUN |PartialDifferentialOperatorHelper;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|PartialDifferentialOperatorHelper| DV$1 DV$2))
-          (LETT $ (GETREFV 14))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 14))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PartialDifferentialOperatorHelper|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|PartialDifferentialOperatorHelper| '|infovec|
           (LIST

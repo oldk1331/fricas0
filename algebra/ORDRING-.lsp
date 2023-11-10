@@ -1,38 +1,38 @@
 
-(SDEFUN |ORDRING-;positive?;SB;1| ((|x| (S)) ($ (|Boolean|)))
-        (SPADCALL |x| (|spadConstant| $ 7) (QREFELT $ 9))) 
+(SDEFUN |ORDRING-;positive?;SB;1| ((|x| (S)) (% (|Boolean|)))
+        (SPADCALL |x| (|spadConstant| % 7) (QREFELT % 9))) 
 
-(SDEFUN |ORDRING-;negative?;SB;2| ((|x| (S)) ($ (|Boolean|)))
-        (SPADCALL |x| (|spadConstant| $ 7) (QREFELT $ 11))) 
+(SDEFUN |ORDRING-;negative?;SB;2| ((|x| (S)) (% (|Boolean|)))
+        (SPADCALL |x| (|spadConstant| % 7) (QREFELT % 11))) 
 
-(SDEFUN |ORDRING-;sign;SI;3| ((|x| (S)) ($ (|Integer|)))
-        (COND ((SPADCALL |x| (QREFELT $ 13)) 1)
-              ((SPADCALL |x| (QREFELT $ 14)) -1)
-              ((SPADCALL |x| (QREFELT $ 16)) 0)
+(SDEFUN |ORDRING-;sign;SI;3| ((|x| (S)) (% (|Integer|)))
+        (COND ((SPADCALL |x| (QREFELT % 13)) 1)
+              ((SPADCALL |x| (QREFELT % 14)) -1)
+              ((SPADCALL |x| (QREFELT % 16)) 0)
               ('T
                (|error| "x satisfies neither positive?, negative? or zero?")))) 
 
-(SDEFUN |ORDRING-;abs;2S;4| ((|x| (S)) ($ (S)))
-        (COND ((SPADCALL |x| (QREFELT $ 13)) |x|)
-              ((SPADCALL |x| (QREFELT $ 14)) (SPADCALL |x| (QREFELT $ 19)))
-              ((SPADCALL |x| (QREFELT $ 16)) (|spadConstant| $ 7))
+(SDEFUN |ORDRING-;abs;2S;4| ((|x| (S)) (% (S)))
+        (COND ((SPADCALL |x| (QREFELT % 13)) |x|)
+              ((SPADCALL |x| (QREFELT % 14)) (SPADCALL |x| (QREFELT % 19)))
+              ((SPADCALL |x| (QREFELT % 16)) (|spadConstant| % 7))
               ('T
                (|error| "x satisfies neither positive?, negative? or zero?")))) 
 
 (DECLAIM (NOTINLINE |OrderedRing&;|)) 
 
 (DEFUN |OrderedRing&| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|OrderedRing&| DV$1))
-          (LETT $ (GETREFV 21))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 21))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|OrderedRing&| '|infovec|
           (LIST

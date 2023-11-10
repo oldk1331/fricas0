@@ -164,7 +164,7 @@
              T (CDR |sig|) NIL (CDR |tableSig|) NIL))))))
 
 ; lazyCompareSigEqual(s,tslot,dollar,domain) ==
-;   tslot = '$ => s = tslot
+;   tslot = '% => s = tslot
 ;   INTEGERP tslot and PAIRP(lazyt:=domain.tslot) and PAIRP s =>
 ;       lazyt is [.,.,.,[.,item,.]] and
 ;         item is [., [functorName, :.]] and functorName = first s =>
@@ -176,7 +176,7 @@
   (PROG (|lazyt| |ISTMP#1| |ISTMP#2| |ISTMP#3| |ISTMP#4| |ISTMP#5| |item|
          |ISTMP#6| |functorName|)
     (RETURN
-     (COND ((EQ |tslot| '$) (EQUAL |s| |tslot|))
+     (COND ((EQ |tslot| '%) (EQUAL |s| |tslot|))
            ((AND (INTEGERP |tslot|)
                  (CONSP (SETQ |lazyt| (ELT |domain| |tslot|))) (CONSP |s|))
             (COND
@@ -225,16 +225,16 @@
 ;   EQUAL(s,t) => true
 ;   ATOM t =>
 ;     u :=
-;       EQ(t,'$) => dollar
+;       EQ(t, '%) => dollar
 ;       isSharpVar t =>
 ;         VECP domain => ELT(rest domain.0,POSN1(t,$FormalMapVariableList))
 ;         ELT(rest domain,POSN1(t,$FormalMapVariableList))
 ;       STRINGP t and IDENTP s => (s := PNAME s; t)
 ;       nil
-;     s = '$ => compareSigEqual(dollar,u,dollar,domain)
+;     s = '% => compareSigEqual(dollar, u, dollar, domain)
 ;     u => compareSigEqual(s,u,dollar,domain)
 ;     EQUAL(s,u)
-;   EQ(s,'$) => compareSigEqual(dollar,t,dollar,domain)
+;   EQ(s, '%) => compareSigEqual(dollar, t, dollar, domain)
 ;   ATOM s => nil
 ;   #s ~= #t => nil
 ;   match := true
@@ -249,7 +249,7 @@
            ((ATOM |t|)
             (PROGN
              (SETQ |u|
-                     (COND ((EQ |t| '$) |dollar|)
+                     (COND ((EQ |t| '%) |dollar|)
                            ((|isSharpVar| |t|)
                             (COND
                              ((VECP |domain|)
@@ -262,10 +262,10 @@
                             (PROGN (SETQ |s| (PNAME |s|)) |t|))
                            (#1# NIL)))
              (COND
-              ((EQ |s| '$) (|compareSigEqual| |dollar| |u| |dollar| |domain|))
+              ((EQ |s| '%) (|compareSigEqual| |dollar| |u| |dollar| |domain|))
               (|u| (|compareSigEqual| |s| |u| |dollar| |domain|))
               (#1# (EQUAL |s| |u|)))))
-           ((EQ |s| '$) (|compareSigEqual| |dollar| |t| |dollar| |domain|))
+           ((EQ |s| '%) (|compareSigEqual| |dollar| |t| |dollar| |domain|))
            ((ATOM |s|) NIL) ((NOT (EQL (LENGTH |s|) (LENGTH |t|))) NIL)
            (#1#
             (PROGN
@@ -438,11 +438,11 @@
 ;     (CONTAINED('throwMessage,mess) or
 ;       CONTAINED('throwKeyedMsg,mess)))]
 ;   integer := EVAL $Integer
-;   iequalSlot := compiledLookupCheck("=", '((Boolean) $ $), integer)
-;   lt_slot := compiledLookupCheck("<", '((Boolean) $ $), integer)
-;   le_slot := compiledLookupCheck("<=", '((Boolean) $ $), integer)
-;   gt_slot := compiledLookupCheck(">", '((Boolean) $ $), integer)
-;   ge_slot := compiledLookupCheck(">=", '((Boolean) $ $), integer)
+;   iequalSlot := compiledLookupCheck("=", '((Boolean) % %), integer)
+;   lt_slot := compiledLookupCheck("<", '((Boolean) % %), integer)
+;   le_slot := compiledLookupCheck("<=", '((Boolean) % %), integer)
+;   gt_slot := compiledLookupCheck(">", '((Boolean) % %), integer)
+;   ge_slot := compiledLookupCheck(">=", '((Boolean) % %), integer)
 ;   bf := '(Boolean)
 ;   bf_vec := EVAL bf
 ;   notpSlot := compiledLookupCheck("not", '((Boolean)(Boolean)), bf_vec)
@@ -496,7 +496,7 @@
 ;     return nil
 ;
 ;   --Check general term for references to just the k previous values
-;   diffCell := compiledLookupCheck("-", '($ $ $), integer)
+;   diffCell := compiledLookupCheck("-", '(% % %), integer)
 ;   --Check general term for references to just the k previous values
 ;   sharpPosition := PARSE_-INTEGER SUBSTRING(sharpArg,1,nil)
 ;   al:= mkDiffAssoc(op, generalTerm, k, sharpPosition, sharpArg,
@@ -546,15 +546,15 @@
                  NIL |pcl| NIL))
         (SETQ |integer| (EVAL |$Integer|))
         (SETQ |iequalSlot|
-                (|compiledLookupCheck| '= '((|Boolean|) $ $) |integer|))
+                (|compiledLookupCheck| '= '((|Boolean|) % %) |integer|))
         (SETQ |lt_slot|
-                (|compiledLookupCheck| '< '((|Boolean|) $ $) |integer|))
+                (|compiledLookupCheck| '< '((|Boolean|) % %) |integer|))
         (SETQ |le_slot|
-                (|compiledLookupCheck| '<= '((|Boolean|) $ $) |integer|))
+                (|compiledLookupCheck| '<= '((|Boolean|) % %) |integer|))
         (SETQ |gt_slot|
-                (|compiledLookupCheck| '> '((|Boolean|) $ $) |integer|))
+                (|compiledLookupCheck| '> '((|Boolean|) % %) |integer|))
         (SETQ |ge_slot|
-                (|compiledLookupCheck| '>= '((|Boolean|) $ $) |integer|))
+                (|compiledLookupCheck| '>= '((|Boolean|) % %) |integer|))
         (SETQ |bf| '(|Boolean|))
         (SETQ |bf_vec| (EVAL |bf|))
         (SETQ |notpSlot|
@@ -963,7 +963,7 @@
                   (#1#
                    (PROGN
                     (SETQ |diffCell|
-                            (|compiledLookupCheck| '- '($ $ $) |integer|))
+                            (|compiledLookupCheck| '- '(% % %) |integer|))
                     (SETQ |sharpPosition|
                             (PARSE-INTEGER (SUBSTRING |sharpArg| 1 NIL)))
                     (SETQ |al|

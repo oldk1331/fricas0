@@ -1,42 +1,42 @@
 
 (SDEFUN |GRAY;firstSubsetGray;PiV;1|
-        ((|n| (|PositiveInteger|)) ($ (|Vector| (|Vector| (|Integer|)))))
+        ((|n| (|PositiveInteger|)) (% (|Vector| (|Vector| (|Integer|)))))
         (SPROG
-         ((#1=#:G701 NIL) (|i| NIL) (|vv| (|Vector| (|Vector| (|Integer|)))))
+         ((#1=#:G453 NIL) (|i| NIL) (|vv| (|Vector| (|Vector| (|Integer|)))))
          (SEQ (LETT |vv| (MAKEARR1 2 #()))
-              (SPADCALL |vv| 1 (MAKEARR1 |n| 0) (QREFELT $ 9))
-              (SPADCALL |vv| 2 (MAKEARR1 (+ |n| 1) 1) (QREFELT $ 9))
+              (SPADCALL |vv| 1 (MAKEARR1 |n| 0) (QREFELT % 9))
+              (SPADCALL |vv| 2 (MAKEARR1 (+ |n| 1) 1) (QREFELT % 9))
               (SEQ (LETT |i| 1) (LETT #1# (+ |n| 1)) G190
                    (COND ((|greater_SI| |i| #1#) (GO G191)))
                    (SEQ
                     (EXIT
-                     (SPADCALL (SPADCALL |vv| 2 (QREFELT $ 10)) |i| |i|
-                               (QREFELT $ 11))))
+                     (SPADCALL (SPADCALL |vv| 2 (QREFELT % 10)) |i| |i|
+                               (QREFELT % 11))))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
               (EXIT |vv|)))) 
 
 (SDEFUN |GRAY;nextSubsetGray;VPiV;2|
         ((|vv| (|Vector| (|Vector| (|Integer|)))) (|n| (|PositiveInteger|))
-         ($ (|Vector| (|Vector| (|Integer|)))))
+         (% (|Vector| (|Vector| (|Integer|)))))
         (SPROG
          ((|c| (|Integer|)) (|lab| #1=(|Vector| (|Integer|))) (|subs| #1#))
-         (SEQ (LETT |subs| (SPADCALL |vv| 1 (QREFELT $ 10)))
-              (LETT |lab| (SPADCALL |vv| 2 (QREFELT $ 10)))
-              (LETT |c| (SPADCALL |lab| 1 (QREFELT $ 14)))
-              (SPADCALL |lab| 1 1 (QREFELT $ 11))
+         (SEQ (LETT |subs| (SPADCALL |vv| 1 (QREFELT % 10)))
+              (LETT |lab| (SPADCALL |vv| 2 (QREFELT % 10)))
+              (LETT |c| (SPADCALL |lab| 1 (QREFELT % 14)))
+              (SPADCALL |lab| 1 1 (QREFELT % 11))
               (COND
-               ((EQL (SPADCALL |subs| |c| (QREFELT $ 14)) 0)
-                (SPADCALL |subs| |c| 1 (QREFELT $ 11)))
-               ('T (SPADCALL |subs| |c| 0 (QREFELT $ 11))))
-              (SPADCALL |lab| |c| (SPADCALL |lab| (+ |c| 1) (QREFELT $ 14))
-                        (QREFELT $ 11))
-              (SPADCALL |lab| (+ |c| 1) (+ |c| 1) (QREFELT $ 11)) (EXIT |vv|)))) 
+               ((EQL (SPADCALL |subs| |c| (QREFELT % 14)) 0)
+                (SPADCALL |subs| |c| 1 (QREFELT % 11)))
+               ('T (SPADCALL |subs| |c| 0 (QREFELT % 11))))
+              (SPADCALL |lab| |c| (SPADCALL |lab| (+ |c| 1) (QREFELT % 14))
+                        (QREFELT % 11))
+              (SPADCALL |lab| (+ |c| 1) (+ |c| 1) (QREFELT % 11)) (EXIT |vv|)))) 
 
 (DECLAIM (NOTINLINE |GrayCode;|)) 
 
 (DEFUN |GrayCode| ()
   (SPROG NIL
-         (PROG (#1=#:G706)
+         (PROG (#1=#:G458)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|GrayCode|))
@@ -51,16 +51,16 @@
                 (COND ((NOT #1#) (HREM |$ConstructorCache| '|GrayCode|)))))))))) 
 
 (DEFUN |GrayCode;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|GrayCode|))
-          (LETT $ (GETREFV 16))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|GrayCode| NIL (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 16))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|GrayCode| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|GrayCode| '|infovec|
           (LIST

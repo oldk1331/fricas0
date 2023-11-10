@@ -56,6 +56,7 @@ at load time.
   #+:ecl "fas"
   #+:lispworks (pathname-type (compile-file-pathname "foo.lisp"))
   #+:poplog "lsp"
+  #+:abcl "abcl"
   )
 
 ;;; The relative directory list specifies a search path for files
@@ -101,7 +102,7 @@ where the [[${FRICAS}]] variable points to installed tree.
   (setq $library-directory-list
    (mapcar #'make-absolute-filename $relative-library-directory-list))
   (setq |$defaultMsgDatabaseName|
-        (pathname (make-absolute-filename "/share/msgs/s2-us.msgs")))
+        (make-absolute-filename "/share/msgs/s2-us.msgs"))
   )
 
 ;;; Sets up the system to use the {\bf FRICAS} shell variable if we can
@@ -150,31 +151,9 @@ where the [[${FRICAS}]] variable points to installed tree.
   nil)
 
 #|
-;############################################################################
-;# autoload dependencies
-;#
-;# if you are adding a file which is to be autoloaded the following step
-;# information is useful:
-;#  there are 2 cases:
-;#   1) adding files to currently autoloaded parts
-;#      (as of 2/92: browser old parser and old compiler)
-;#   2) adding new files
-;#   case 1:
-;#     a) you have to add the file to the list of files currently there
-;#        (e.g. see BROBJS above)
-;#     b) add an autolaod rule
-;#        (e.g. ${AUTO}/parsing.${O}: ${OUT}/parsing.${O})
-;#     c) edit util.lisp to add the 'external' function (those that
-;#        should trigger the autoload
-;#   case 2:
-;#     build-interpsys (in util.lisp) needs an extra argument for the
-;#     new autoload things and several functions in util.lisp need hacking.
-;############################################################################
-
 The {\bf build-interpsys} function takes a list of files to load
-into the image ({\bf load-files}). It also takes several lists of files,
-one for each subsystem which will be autoloaded. Autoloading is explained
-below. Next it takes a set of shell variables, the most important of
+into the image ({\bf load-files}).
+Next it takes a set of shell variables, the most important of
 which is the {\bf spad} variable. This is normally set to be the same
 as the final build location. This function is called in the
 src/interp/Makefile.
@@ -189,7 +168,7 @@ After this function is called the image is clean and can be saved.
   #-:ecl
   (progn
       (mapcar #'load load-files)
-      (interpsys-image-init spad))
+      (interpsys-image-init spad t))
   (if (and (boundp 'FRICAS-LISP::*building-fricassys*)
                 FRICAS-LISP::*building-fricassys*)
        (progn
@@ -232,12 +211,12 @@ After this function is called the image is clean and can be saved.
      (setf spad $spadroot)
      (format *standard-output* "spad = ~s~%" spad)
      (force-output  *standard-output*)
-     (interpsys-image-init spad)
+     (interpsys-image-init spad nil)
      (format *standard-output* "before fricas-restart~%")
      (force-output  *standard-output*)
 )
 
-(defun interpsys-image-init (spad)
+(defun interpsys-image-init (spad display_messages)
   (setf *package* (find-package "BOOT"))
   (initroot spad)
   #+:GCL
@@ -246,10 +225,11 @@ After this function is called the image is clean and can be saved.
                       :rpages 1000 :hole 2000)
   #+:GCL
   (setq compiler::*suppress-compiler-notes* t)
-  (|interpsysInitialization|)
-  (setq *load-verbose* nil)
-  (resethashtables) ; the databases into core, then close the streams
- )
+    (|interpsysInitialization| display_messages)
+    (setq *load-verbose* nil)
+    ; the databases into core, then close the streams
+    (resethashtables display_messages)
+)
 
 ;; the following are for conditional reading
 (setq |$opSysName| '"shell")
@@ -339,14 +319,14 @@ After this function is called the image is clean and can be saved.
   (setq |$texOutputStream| (|mkOutputConsoleStream|))
   (setq |$formattedOutputStream| (|mkOutputConsoleStream|))
   (fricas-init)
-  #+(or :GCL :poplog)
+  #+:poplog
   (|spad|)
-  #-(or :GCL :poplog)
+  #-:poplog
   (let ((*debugger-hook*
             (lambda (condition previous-handler)
-                (spad-system-error-handler condition))
+                (|spad_system_error_handler| condition))
        ))
-     (handler-bind ((error #'spad-system-error-handler))
+     (handler-bind ((error #'|spad_system_error_handler|))
        (|spad|)))
 )
 
@@ -381,8 +361,8 @@ After this function is called the image is clean and can be saved.
     (eval  x)
 )
 
-;;; For evaluating categories we need to bind $.
-(defun |c_eval|(u) (let (($ '$)) (declare (special $)) (|eval| u)))
+;;; For evaluating categories we need to bind %.
+(defun |c_eval|(u) (let ((% '%)) (declare (special %)) (|eval| u)))
 
 ;;; Accesed from HyperDoc
 (defun |setViewportProcess| ()

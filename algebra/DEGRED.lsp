@@ -1,34 +1,34 @@
 
 (SDEFUN |DEGRED;degrees|
-        ((|u| (|SparseUnivariatePolynomial| R1)) ($ (|List| (|Integer|))))
+        ((|u| (|SparseUnivariatePolynomial| R1)) (% (|List| (|Integer|))))
         (SPROG ((|l| (|List| (|Integer|))))
                (SEQ (LETT |l| NIL)
                     (SEQ G190
                          (COND
                           ((NULL
-                            (SPADCALL |u| (|spadConstant| $ 11)
-                                      (QREFELT $ 13)))
+                            (SPADCALL |u| (|spadConstant| % 11)
+                                      (QREFELT % 13)))
                            (GO G191)))
                          (SEQ
-                          (LETT |l| (CONS (SPADCALL |u| (QREFELT $ 15)) |l|))
-                          (EXIT (LETT |u| (SPADCALL |u| (QREFELT $ 16)))))
+                          (LETT |l| (CONS (SPADCALL |u| (QREFELT % 15)) |l|))
+                          (EXIT (LETT |u| (SPADCALL |u| (QREFELT % 16)))))
                          NIL (GO G190) G191 (EXIT NIL))
                     (EXIT |l|)))) 
 
 (SDEFUN |DEGRED;reduce;SupR;2|
         ((|u| (|SparseUnivariatePolynomial| R1))
-         ($
+         (%
           (|Record| (|:| |pol| (|SparseUnivariatePolynomial| R1))
                     (|:| |deg| (|PositiveInteger|)))))
         (SPROG
-         ((#1=#:G718 NIL) (#2=#:G715 NIL) (#3=#:G713 NIL) (|g| #4=(|Integer|))
-          (#5=#:G706 NIL) (#6=#:G705 #4#) (#7=#:G707 #4#) (#8=#:G722 NIL)
+         ((#1=#:G467 NIL) (#2=#:G464 NIL) (#3=#:G462 NIL) (|g| #4=(|Integer|))
+          (#5=#:G456 NIL) (#6=#:G455 #4#) (#7=#:G457 #4#) (#8=#:G471 NIL)
           (|d| NIL))
          (SEQ
           (LETT |g|
                 (PROGN
                  (LETT #5# NIL)
-                 (SEQ (LETT |d| NIL) (LETT #8# (|DEGRED;degrees| |u| $)) G190
+                 (SEQ (LETT |d| NIL) (LETT #8# (|DEGRED;degrees| |u| %)) G190
                       (COND
                        ((OR (ATOM #8#) (PROGN (LETT |d| (CAR #8#)) NIL))
                         (GO G191)))
@@ -48,12 +48,12 @@
                                       (|check_subtype2| (> #3# 0)
                                                         '(|PositiveInteger|)
                                                         '(|Integer|) #3#))
-                                    (QREFELT $ 18)))
+                                    (QREFELT % 18)))
                     (QCDR #2#)
                   (|check_union2| (QEQCAR #2# 0)
-                                  (|SparseUnivariatePolynomial| (QREFELT $ 6))
+                                  (|SparseUnivariatePolynomial| (QREFELT % 6))
                                   (|Union|
-                                   (|SparseUnivariatePolynomial| (QREFELT $ 6))
+                                   (|SparseUnivariatePolynomial| (QREFELT % 6))
                                    "failed")
                                   #2#)))
           (EXIT
@@ -63,30 +63,30 @@
                                      '(|Integer|) #1#))))))) 
 
 (SDEFUN |DEGRED;rootOfUnity|
-        ((|j| (|Integer|)) (|n| (|Integer|)) ($ (|Expression| R2)))
+        ((|j| (|Integer|)) (|n| (|Integer|)) (% (|Expression| R2)))
         (SPROG ((|arg| (|Expression| R2)))
                (SEQ
-                (COND ((EQL |j| 0) (|spadConstant| $ 22))
+                (COND ((EQL |j| 0) (|spadConstant| % 22))
                       ('T
                        (SEQ
                         (LETT |arg|
                               (SPADCALL
-                               (SPADCALL (* 2 |j|) (SPADCALL (QREFELT $ 23))
-                                         (QREFELT $ 25))
-                               (SPADCALL |n| (QREFELT $ 26)) (QREFELT $ 27)))
+                               (SPADCALL (* 2 |j|) (SPADCALL (QREFELT % 23))
+                                         (QREFELT % 25))
+                               (SPADCALL |n| (QREFELT % 26)) (QREFELT % 27)))
                         (EXIT
-                         (SPADCALL (SPADCALL |arg| (QREFELT $ 28))
+                         (SPADCALL (SPADCALL |arg| (QREFELT % 28))
                                    (SPADCALL
                                     (SPADCALL
-                                     (SPADCALL (|spadConstant| $ 22)
-                                               (QREFELT $ 35))
-                                     (SPADCALL 1 2 (QREFELT $ 34))
-                                     (QREFELT $ 38))
-                                    (SPADCALL |arg| (QREFELT $ 39))
-                                    (QREFELT $ 40))
-                                   (QREFELT $ 41))))))))) 
+                                     (SPADCALL (|spadConstant| % 22)
+                                               (QREFELT % 35))
+                                     (SPADCALL 1 2 (QREFELT % 34))
+                                     (QREFELT % 38))
+                                    (SPADCALL |arg| (QREFELT % 39))
+                                    (QREFELT % 40))
+                                   (QREFELT % 41))))))))) 
 
-(SDEFUN |DEGRED;even_part| ((|gp| (|PositiveInteger|)) ($ (|PositiveInteger|)))
+(SDEFUN |DEGRED;even_part| ((|gp| (|PositiveInteger|)) (% (|PositiveInteger|)))
         (SPROG ((|res| (|PositiveInteger|)) (|g| (|NonNegativeInteger|)))
                (SEQ (LETT |g| |gp|) (LETT |res| 1)
                     (SEQ G190 (COND ((NULL (EVENP |g|)) (GO G191)))
@@ -97,9 +97,9 @@
 
 (SDEFUN |DEGRED;expand;EPiL;5|
         ((|s| (|Expression| R2)) (|g| (|PositiveInteger|))
-         ($ (|List| (|Expression| R2))))
+         (% (|List| (|Expression| R2))))
         (SPROG
-         ((#1=#:G747 NIL) (|i| NIL) (#2=#:G746 NIL) (|sr| (|Expression| R2))
+         ((#1=#:G486 NIL) (|i| NIL) (#2=#:G485 NIL) (|sr| (|Expression| R2))
           (|g2| (|PositiveInteger|)))
          (SEQ
           (COND ((EQL |g| 1) (LIST |s|))
@@ -108,20 +108,20 @@
                   (LETT |sr|
                         (COND
                          ((SPADCALL |s|
-                                    (SPADCALL (|spadConstant| $ 22)
-                                              (QREFELT $ 35))
-                                    (QREFELT $ 42))
-                          (SEQ (LETT |g2| (|DEGRED;even_part| |g| $))
+                                    (SPADCALL (|spadConstant| % 22)
+                                              (QREFELT % 35))
+                                    (QREFELT % 42))
+                          (SEQ (LETT |g2| (|DEGRED;even_part| |g| %))
                                (EXIT
                                 (COND ((EQL |g2| 1) |s|)
                                       (#3#
                                        (SPADCALL |s|
                                                  (SPADCALL 1 |g2|
-                                                           (QREFELT $ 34))
-                                                 (QREFELT $ 38)))))))
+                                                           (QREFELT % 34))
+                                                 (QREFELT % 38)))))))
                          (#3#
-                          (SPADCALL |s| (SPADCALL 1 |g| (QREFELT $ 34))
-                                    (QREFELT $ 38)))))
+                          (SPADCALL |s| (SPADCALL 1 |g| (QREFELT % 34))
+                                    (QREFELT % 38)))))
                   (EXIT
                    (PROGN
                     (LETT #2# NIL)
@@ -131,15 +131,15 @@
                           (EXIT
                            (LETT #2#
                                  (CONS
-                                  (SPADCALL (|DEGRED;rootOfUnity| |i| |g| $)
-                                            |sr| (QREFELT $ 40))
+                                  (SPADCALL (|DEGRED;rootOfUnity| |i| |g| %)
+                                            |sr| (QREFELT % 40))
                                   #2#))))
                          (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                          (EXIT (NREVERSE #2#))))))))))) 
 
 (SDEFUN |DEGRED;cyclotomic_roots;PiL;6|
-        ((|n| (|PositiveInteger|)) ($ (|List| (|Expression| R2))))
-        (SPROG ((#1=#:G752 NIL) (|i| NIL) (#2=#:G751 NIL))
+        ((|n| (|PositiveInteger|)) (% (|List| (|Expression| R2))))
+        (SPROG ((#1=#:G491 NIL) (|i| NIL) (#2=#:G490 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -150,16 +150,16 @@
                         (COND
                          ((EQL (GCD |i| |n|) 1)
                           (LETT #2#
-                                (CONS (|DEGRED;rootOfUnity| |i| |n| $)
+                                (CONS (|DEGRED;rootOfUnity| |i| |n| %)
                                       #2#))))))
                       (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                       (EXIT (NREVERSE #2#))))))) 
 
 (DECLAIM (NOTINLINE |DegreeReductionPackage;|)) 
 
-(DEFUN |DegreeReductionPackage| (&REST #1=#:G753)
+(DEFUN |DegreeReductionPackage| (&REST #1=#:G492)
   (SPROG NIL
-         (PROG (#2=#:G754)
+         (PROG (#2=#:G493)
            (RETURN
             (COND
              ((LETT #2#
@@ -177,28 +177,28 @@
                   (HREM |$ConstructorCache| '|DegreeReductionPackage|)))))))))) 
 
 (DEFUN |DegreeReductionPackage;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|DegreeReductionPackage| DV$1 DV$2))
-          (LETT $ (GETREFV 47))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 47))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|DegreeReductionPackage|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|DegreeReductionPackage| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (0 . |Zero|) (4 . |Zero|) (|SparseUnivariatePolynomial| 6)
               (8 . |Zero|) (|Boolean|) (12 . ~=) (|NonNegativeInteger|)
-              (18 . |degree|) (23 . |reductum|) (|Union| $ '"failed")
+              (18 . |degree|) (23 . |reductum|) (|Union| % '"failed")
               (28 . |divideExponents|) (|Record| (|:| |pol| 10) (|:| |deg| 44))
               |DEGRED;reduce;SupR;2| (|Expression| 7) (34 . |One|) (38 . |pi|)
               (|Integer|) (42 . *) (48 . |coerce|) (53 . /) (59 . |cos|)

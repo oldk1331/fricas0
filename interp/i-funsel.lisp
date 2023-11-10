@@ -2354,13 +2354,13 @@
 ;     op = '_= =>
 ;         #args1 ~= 2 or args1.0 ~= dc or args1.1 ~= dc => NIL
 ;         tar and tar ~= '(Boolean) => NIL
-;         [[[dc, '(Boolean), dc, dc], ['(Boolean),'$,'$], [NIL, NIL]]]
+;         [[[dc, '(Boolean), dc, dc], ['(Boolean), '%, '%], [NIL, NIL]]]
 ;     op = 'coerce =>
 ;         dcName='Enumeration and (args1.0=$Symbol or tar=dc)=>
-;            [[[dc, dc, $Symbol], ['$,$Symbol], [NIL, NIL]]]
+;            [[[dc, dc, $Symbol], ['%, $Symbol], [NIL, NIL]]]
 ;         args1.0 ~= dc => NIL
 ;         tar and tar ~= $OutputForm => NIL
-;         [[[dc, $OutputForm, dc], [$OutputForm, '$], [NIL, NIL]]]
+;         [[[dc, $OutputForm, dc], [$OutputForm, '%], [NIL, NIL]]]
 ;     member(dcName,'(Record Union)) =>
 ;       findFunctionInCategory(op,dc,tar,args1,args2,$Coerce,$SubDom)
 ;     NIL
@@ -2413,21 +2413,21 @@
                   (#1#
                    (LIST
                     (LIST (LIST |dc| '(|Boolean|) |dc| |dc|)
-                          (LIST '(|Boolean|) '$ '$) (LIST NIL NIL))))))
+                          (LIST '(|Boolean|) '% '%) (LIST NIL NIL))))))
                 ((EQ |op| '|coerce|)
                  (COND
                   ((AND (EQ |dcName| '|Enumeration|)
                         (OR (EQUAL (ELT |args1| 0) |$Symbol|)
                             (EQUAL |tar| |dc|)))
                    (LIST
-                    (LIST (LIST |dc| |dc| |$Symbol|) (LIST '$ |$Symbol|)
+                    (LIST (LIST |dc| |dc| |$Symbol|) (LIST '% |$Symbol|)
                           (LIST NIL NIL))))
                   ((NOT (EQUAL (ELT |args1| 0) |dc|)) NIL)
                   ((AND |tar| (NOT (EQUAL |tar| |$OutputForm|))) NIL)
                   (#1#
                    (LIST
                     (LIST (LIST |dc| |$OutputForm| |dc|)
-                          (LIST |$OutputForm| '$) (LIST NIL NIL))))))
+                          (LIST |$OutputForm| '%) (LIST NIL NIL))))))
                 ((|member| |dcName| '(|Record| |Union|))
                  (|findFunctionInCategory| |op| |dc| |tar| |args1| |args2|
                   |$Coerce| |$SubDom|))
@@ -2505,7 +2505,7 @@
 ;   x := NIL
 ;   for mm in mms repeat
 ;     [sig,:.] := mm
-;     [res,:args] := MSUBSTQ(dc,"$",sig)
+;     [res, :args] := MSUBSTQ(dc, "%", sig)
 ;     args ~= args1 => nil
 ;     x := CONS(mm,x)
 ;   if x then x
@@ -2527,7 +2527,7 @@
                   (#1#
                    (PROGN
                     (SETQ |sig| (CAR |mm|))
-                    (SETQ |LETTMP#1| (MSUBSTQ |dc| '$ |sig|))
+                    (SETQ |LETTMP#1| (MSUBSTQ |dc| '% |sig|))
                     (SETQ |res| (CAR |LETTMP#1|))
                     (SETQ |args| (CDR |LETTMP#1|))
                     (COND ((NOT (EQUAL |args| |args1|)) NIL)
@@ -2566,15 +2566,15 @@
       (#1# NIL)))))
 
 ; findFunctionInDomain1(omm, tar, args1, args2, SL) ==
-;   dc := rest (dollarPair := ASSQ('$, SL))
-;   -- need to drop '$ from SL
+;   dc := rest (dollarPair := ASSQ('%, SL))
+;   -- need to drop '% from SL
 ;   mm:= subCopy(omm, SL)
 ;   -- tests whether modemap mm is appropriate for the function
 ;   -- defined by op, target type tar and argument types args
 ;
 ;   [sig,slot,cond,y] := mm
 ;   [osig,:.]  := omm
-;   osig := subCopy(osig, SUBSTQ(CONS('$,'$), dollarPair, SL))
+;   osig := subCopy(osig, SUBSTQ(CONS('%, '%), dollarPair, SL))
 ;   if CONTAINED('_#, sig) or CONTAINED('construct, sig) then
 ;     sig := [replaceSharpCalls t for t in sig]
 ;   rtcp := [[]]
@@ -2592,14 +2592,14 @@
   (PROG (|dollarPair| |dc| |mm| |sig| |slot| |cond| |y| |osig| |rtcp| RTC)
     (RETURN
      (PROGN
-      (SETQ |dc| (CDR (SETQ |dollarPair| (ASSQ '$ SL))))
+      (SETQ |dc| (CDR (SETQ |dollarPair| (ASSQ '% SL))))
       (SETQ |mm| (|subCopy| |omm| SL))
       (SETQ |sig| (CAR |mm|))
       (SETQ |slot| (CADR . #1=(|mm|)))
       (SETQ |cond| (CADDR . #1#))
       (SETQ |y| (CADDDR . #1#))
       (SETQ |osig| (CAR |omm|))
-      (SETQ |osig| (|subCopy| |osig| (SUBSTQ (CONS '$ '$) |dollarPair| SL)))
+      (SETQ |osig| (|subCopy| |osig| (SUBSTQ (CONS '% '%) |dollarPair| SL)))
       (COND
        ((OR (CONTAINED '|#| |sig|) (CONTAINED '|construct| |sig|))
         (SETQ |sig|
@@ -2637,7 +2637,7 @@
 ;  --  cat := constructorCategory dc
 ;   makeFunc := get_oplist_maker(dcName) or
 ;       systemErrorHere '"findFunctionInCategory"
-;   [funlist,.] := FUNCALL(makeFunc,"$",dc,$CategoryFrame)
+;   [funlist, .] := FUNCALL(makeFunc, "%", dc, $CategoryFrame)
 ;   -- get list of implementations and remove sharps
 ;   maxargs := -1
 ;   impls := nil
@@ -2678,7 +2678,7 @@
               (SETQ |makeFunc|
                       (OR (|get_oplist_maker| |dcName|)
                           (|systemErrorHere| "findFunctionInCategory")))
-              (SETQ |LETTMP#1| (FUNCALL |makeFunc| '$ |dc| |$CategoryFrame|))
+              (SETQ |LETTMP#1| (FUNCALL |makeFunc| '% |dc| |$CategoryFrame|))
               (SETQ |funlist| (CAR |LETTMP#1|))
               (SETQ |maxargs| (- 1))
               (SETQ |impls| NIL)
@@ -2982,7 +2982,7 @@
 ; constructSubst(d) ==
 ;   -- constructs a substitution which substitutes d for $
 ;   -- and the arguments of d for #1, #2 ..
-;   SL:= list CONS('$,d)
+;   SL := list(CONS('%, d))
 ;   for x in rest d for v in $FormalMapVariableList repeat
 ;     SL:= CONS(CONS(v,x),SL)
 ;   SL
@@ -2991,7 +2991,7 @@
   (PROG (SL)
     (RETURN
      (PROGN
-      (SETQ SL (LIST (CONS '$ |d|)))
+      (SETQ SL (LIST (CONS '% |d|)))
       ((LAMBDA (|bfVar#70| |x| |bfVar#71| |v|)
          (LOOP
           (COND
@@ -4847,14 +4847,14 @@
 
 ; domArg2(arg, SL1, SL2) ==
 ;   isSharpVar arg => subCopy(arg, SL1)
-;   arg = '_$ and $domPvar => $domPvar
+;   arg = '% and $domPvar => $domPvar
 ;   subCopy(arg, SL2)
 
 (DEFUN |domArg2| (|arg| SL1 SL2)
   (PROG ()
     (RETURN
      (COND ((|isSharpVar| |arg|) (|subCopy| |arg| SL1))
-           ((AND (EQ |arg| '$) |$domPvar|) |$domPvar|)
+           ((AND (EQ |arg| '%) |$domPvar|) |$domPvar|)
            ('T (|subCopy| |arg| SL2))))))
 
 ; hasCaty1(cond,SL) ==

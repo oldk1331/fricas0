@@ -1,18 +1,18 @@
 
-(SDEFUN |RESLATC;coerce;SV;1| ((|s| (S)) ($ (|Void|))) (SPADCALL (QREFELT $ 8))) 
+(SDEFUN |RESLATC;coerce;SV;1| ((|s| (S)) (% (|Void|))) (SPADCALL (QREFELT % 8))) 
 
 (PUT '|RESLATC;coerce;ES;2| '|SPADreplace|
      '(XLAM (|e|)
        (|error| "Bug: Should not be able to obtain value of type Exit"))) 
 
-(SDEFUN |RESLATC;coerce;ES;2| ((|e| (|Exit|)) ($ (S)))
+(SDEFUN |RESLATC;coerce;ES;2| ((|e| (|Exit|)) (% (S)))
         (|error| "Bug: Should not be able to obtain value of type Exit")) 
 
 (DECLAIM (NOTINLINE |ResolveLatticeCompletion;|)) 
 
-(DEFUN |ResolveLatticeCompletion| (#1=#:G691)
+(DEFUN |ResolveLatticeCompletion| (#1=#:G450)
   (SPROG NIL
-         (PROG (#2=#:G692)
+         (PROG (#2=#:G451)
            (RETURN
             (COND
              ((LETT #2#
@@ -30,19 +30,19 @@
                         '|ResolveLatticeCompletion|)))))))))) 
 
 (DEFUN |ResolveLatticeCompletion;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|ResolveLatticeCompletion| DV$1))
-          (LETT $ (GETREFV 12))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 12))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|ResolveLatticeCompletion|
-                      (LIST DV$1) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|ResolveLatticeCompletion| '|infovec|
           (LIST

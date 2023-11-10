@@ -1,52 +1,52 @@
 
 (SDEFUN |LSMP1;solve;MVR;1|
         ((|m| (|Matrix| F)) (|c| (|Vector| F))
-         ($
+         (%
           (|Record| (|:| |particular| (|Union| (|Vector| F) "failed"))
                     (|:| |basis| (|List| (|Vector| F))))))
-        (SPADCALL |m| |c| (QREFELT $ 12))) 
+        (SPADCALL |m| |c| (QREFELT % 12))) 
 
 (SDEFUN |LSMP1;solve;LVR;2|
         ((|ll| (|List| (|List| F))) (|c| (|Vector| F))
-         ($
+         (%
           (|Record| (|:| |particular| (|Union| (|Vector| F) "failed"))
                     (|:| |basis| (|List| (|Vector| F))))))
-        (SPADCALL (SPADCALL |ll| (QREFELT $ 15)) |c| (QREFELT $ 12))) 
+        (SPADCALL (SPADCALL |ll| (QREFELT % 15)) |c| (QREFELT % 12))) 
 
 (SDEFUN |LSMP1;solve;MLL;3|
         ((|m| (|Matrix| F)) (|l| (|List| (|Vector| F)))
-         ($
+         (%
           (|List|
            (|Record| (|:| |particular| (|Union| (|Vector| F) "failed"))
                      (|:| |basis| (|List| (|Vector| F)))))))
-        (SPADCALL |m| |l| (QREFELT $ 19))) 
+        (SPADCALL |m| |l| (QREFELT % 19))) 
 
 (SDEFUN |LSMP1;solve;LLL;4|
         ((|ll| (|List| (|List| F))) (|l| (|List| (|Vector| F)))
-         ($
+         (%
           (|List|
            (|Record| (|:| |particular| (|Union| (|Vector| F) "failed"))
                      (|:| |basis| (|List| (|Vector| F)))))))
-        (SPADCALL (SPADCALL |ll| (QREFELT $ 15)) |l| (QREFELT $ 19))) 
+        (SPADCALL (SPADCALL |ll| (QREFELT % 15)) |l| (QREFELT % 19))) 
 
 (SDEFUN |LSMP1;particularSolution;MVU;5|
         ((|m| (|Matrix| F)) (|c| (|Vector| F))
-         ($ (|Union| (|Vector| F) "failed")))
-        (SPADCALL |m| |c| (QREFELT $ 22))) 
+         (% (|Union| (|Vector| F) "failed")))
+        (SPADCALL |m| |c| (QREFELT % 22))) 
 
 (SDEFUN |LSMP1;hasSolution?;MVB;6|
-        ((|m| (|Matrix| F)) (|c| (|Vector| F)) ($ (|Boolean|)))
-        (SPADCALL |m| |c| (QREFELT $ 25))) 
+        ((|m| (|Matrix| F)) (|c| (|Vector| F)) (% (|Boolean|)))
+        (SPADCALL |m| |c| (QREFELT % 25))) 
 
 (SDEFUN |LSMP1;rank;MVNni;7|
-        ((|m| (|Matrix| F)) (|c| (|Vector| F)) ($ (|NonNegativeInteger|)))
-        (SPADCALL |m| |c| (QREFELT $ 28))) 
+        ((|m| (|Matrix| F)) (|c| (|Vector| F)) (% (|NonNegativeInteger|)))
+        (SPADCALL |m| |c| (QREFELT % 28))) 
 
 (DECLAIM (NOTINLINE |LinearSystemMatrixPackage1;|)) 
 
-(DEFUN |LinearSystemMatrixPackage1| (#1=#:G714)
+(DEFUN |LinearSystemMatrixPackage1| (#1=#:G462)
   (SPROG NIL
-         (PROG (#2=#:G715)
+         (PROG (#2=#:G463)
            (RETURN
             (COND
              ((LETT #2#
@@ -64,19 +64,19 @@
                         '|LinearSystemMatrixPackage1|)))))))))) 
 
 (DEFUN |LinearSystemMatrixPackage1;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|LinearSystemMatrixPackage1| DV$1))
-          (LETT $ (GETREFV 30))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 30))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|LinearSystemMatrixPackage1|
-                      (LIST DV$1) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|LinearSystemMatrixPackage1| '|infovec|
           (LIST

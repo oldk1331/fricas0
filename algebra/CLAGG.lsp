@@ -6,7 +6,7 @@
 (DEFPARAMETER |Collection;AL| 'NIL) 
 
 (DEFUN |Collection| (|t#1|)
-  (LET (#1=#:G690 (#2=#:G691 (|devaluate| |t#1|)))
+  (LET (#1=#:G449 (#2=#:G450 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |Collection;AL|)) (CDR #1#))
           (T
            (SETQ |Collection;AL|
@@ -15,7 +15,7 @@
            #1#)))) 
 
 (DEFUN |Collection;| (|t#1|)
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -27,63 +27,63 @@
                                                   '|t#1|)
                                                  (|mkCategory|
                                                   '(((|construct|
-                                                      ($ (|List| |t#1|)))
+                                                      (% (|List| |t#1|)))
                                                      T)
                                                     ((|find|
                                                       ((|Union| |t#1| "failed")
                                                        (|Mapping| (|Boolean|)
                                                                   |t#1|)
-                                                       $))
+                                                       %))
                                                      T)
                                                     ((|reduce|
                                                       (|t#1|
                                                        (|Mapping| |t#1| |t#1|
                                                                   |t#1|)
-                                                       $))
-                                                     (|has| $
+                                                       %))
+                                                     (|has| %
                                                             (|finiteAggregate|)))
                                                     ((|reduce|
                                                       (|t#1|
                                                        (|Mapping| |t#1| |t#1|
                                                                   |t#1|)
-                                                       $ |t#1|))
-                                                     (|has| $
+                                                       % |t#1|))
+                                                     (|has| %
                                                             (|finiteAggregate|)))
                                                     ((|remove|
-                                                      ($
+                                                      (%
                                                        (|Mapping| (|Boolean|)
                                                                   |t#1|)
-                                                       $))
-                                                     (|has| $
+                                                       %))
+                                                     (|has| %
                                                             (|finiteAggregate|)))
                                                     ((|select|
-                                                      ($
+                                                      (%
                                                        (|Mapping| (|Boolean|)
                                                                   |t#1|)
-                                                       $))
-                                                     (|has| $
+                                                       %))
+                                                     (|has| %
                                                             (|finiteAggregate|)))
                                                     ((|reduce|
                                                       (|t#1|
                                                        (|Mapping| |t#1| |t#1|
                                                                   |t#1|)
-                                                       $ |t#1| |t#1|))
+                                                       % |t#1| |t#1|))
                                                      (AND
                                                       (|has| |t#1|
                                                              (|BasicType|))
-                                                      (|has| $
+                                                      (|has| %
                                                              (|finiteAggregate|))))
-                                                    ((|remove| ($ |t#1| $))
+                                                    ((|remove| (% |t#1| %))
                                                      (AND
                                                       (|has| |t#1|
                                                              (|BasicType|))
-                                                      (|has| $
+                                                      (|has| %
                                                              (|finiteAggregate|))))
-                                                    ((|removeDuplicates| ($ $))
+                                                    ((|removeDuplicates| (% %))
                                                      (AND
                                                       (|has| |t#1|
                                                              (|BasicType|))
-                                                      (|has| $
+                                                      (|has| %
                                                              (|finiteAggregate|)))))
                                                   '(((|ConvertibleTo|
                                                       (|InputForm|))

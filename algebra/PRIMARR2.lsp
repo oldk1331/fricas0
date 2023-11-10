@@ -1,23 +1,23 @@
 
 (SDEFUN |PRIMARR2;map;MPaPa;1|
         ((|f| (|Mapping| B A)) (|v| (|PrimitiveArray| A))
-         ($ (|PrimitiveArray| B)))
-        (SPADCALL |f| |v| (QREFELT $ 12))) 
+         (% (|PrimitiveArray| B)))
+        (SPADCALL |f| |v| (QREFELT % 12))) 
 
 (SDEFUN |PRIMARR2;scan;MPaBPa;2|
         ((|f| (|Mapping| B A B)) (|v| (|PrimitiveArray| A)) (|b| (B))
-         ($ (|PrimitiveArray| B)))
-        (SPADCALL |f| |v| |b| (QREFELT $ 15))) 
+         (% (|PrimitiveArray| B)))
+        (SPADCALL |f| |v| |b| (QREFELT % 15))) 
 
 (SDEFUN |PRIMARR2;reduce;MPa2B;3|
-        ((|f| (|Mapping| B A B)) (|v| (|PrimitiveArray| A)) (|b| (B)) ($ (B)))
-        (SPADCALL |f| |v| |b| (QREFELT $ 17))) 
+        ((|f| (|Mapping| B A B)) (|v| (|PrimitiveArray| A)) (|b| (B)) (% (B)))
+        (SPADCALL |f| |v| |b| (QREFELT % 17))) 
 
 (DECLAIM (NOTINLINE |PrimitiveArrayFunctions2;|)) 
 
-(DEFUN |PrimitiveArrayFunctions2| (&REST #1=#:G697)
+(DEFUN |PrimitiveArrayFunctions2| (&REST #1=#:G456)
   (SPROG NIL
-         (PROG (#2=#:G698)
+         (PROG (#2=#:G457)
            (RETURN
             (COND
              ((LETT #2#
@@ -36,21 +36,21 @@
                         '|PrimitiveArrayFunctions2|)))))))))) 
 
 (DEFUN |PrimitiveArrayFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|PrimitiveArrayFunctions2| DV$1 DV$2))
-          (LETT $ (GETREFV 19))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 19))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PrimitiveArrayFunctions2|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|PrimitiveArrayFunctions2| '|infovec|
           (LIST

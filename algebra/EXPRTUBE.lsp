@@ -1,13 +1,13 @@
 
 (SDEFUN |EXPRTUBE;getVariable|
         ((|x| (|Expression| (|Integer|))) (|y| (|Expression| (|Integer|)))
-         (|z| (|Expression| (|Integer|))) ($ (|Symbol|)))
+         (|z| (|Expression| (|Integer|))) (% (|Symbol|)))
         (SPROG
          ((|t2| #1=(|Symbol|)) (|t1| #1#) (|varList3| #2=(|List| (|Symbol|)))
           (|varList2| #2#) (|varList1| #2#))
-         (SEQ (LETT |varList1| (SPADCALL |x| (QREFELT $ 8)))
-              (LETT |varList2| (SPADCALL |y| (QREFELT $ 8)))
-              (LETT |varList3| (SPADCALL |z| (QREFELT $ 8)))
+         (SEQ (LETT |varList1| (SPADCALL |x| (QREFELT % 8)))
+              (LETT |varList2| (SPADCALL |y| (QREFELT % 8)))
+              (LETT |varList3| (SPADCALL |z| (QREFELT % 8)))
               (COND
                ((<= (LENGTH |varList1|) 1)
                 (COND
@@ -74,7 +74,7 @@
          (|colorFcn| (|Mapping| (|DoubleFloat|) (|DoubleFloat|)))
          (|tRange| (|Segment| (|DoubleFloat|)))
          (|radFcn| (|Mapping| (|DoubleFloat|) (|DoubleFloat|)))
-         (|n| (|Integer|)) (|string| (|String|)) ($ (|TubePlot| (|Plot3D|))))
+         (|n| (|Integer|)) (|string| (|String|)) (% (|TubePlot| (|Plot3D|))))
         (SPROG
          ((|loopList| (|List| (|List| (|Point| (|DoubleFloat|)))))
           (|lps| (|List| (|Point| (|DoubleFloat|))))
@@ -104,64 +104,64 @@
                               (#8#
                                (|error|
                                 "tubePlot: last argument should be open or closed"))))
-                  (LETT |t| (|EXPRTUBE;getVariable| |x| |y| |z| $))
-                  (LETT |xFunc| (SPADCALL |x| |t| (QREFELT $ 13)))
-                  (LETT |yFunc| (SPADCALL |y| |t| (QREFELT $ 13)))
-                  (LETT |zFunc| (SPADCALL |z| |t| (QREFELT $ 13)))
-                  (LETT |xp| (SPADCALL |x| |t| (QREFELT $ 14)))
-                  (LETT |yp| (SPADCALL |y| |t| (QREFELT $ 14)))
-                  (LETT |zp| (SPADCALL |z| |t| (QREFELT $ 14)))
+                  (LETT |t| (|EXPRTUBE;getVariable| |x| |y| |z| %))
+                  (LETT |xFunc| (SPADCALL |x| |t| (QREFELT % 13)))
+                  (LETT |yFunc| (SPADCALL |y| |t| (QREFELT % 13)))
+                  (LETT |zFunc| (SPADCALL |z| |t| (QREFELT % 13)))
+                  (LETT |xp| (SPADCALL |x| |t| (QREFELT % 14)))
+                  (LETT |yp| (SPADCALL |y| |t| (QREFELT % 14)))
+                  (LETT |zp| (SPADCALL |z| |t| (QREFELT % 14)))
                   (LETT |sp|
                         (SPADCALL
                          (SPADCALL
-                          (SPADCALL (SPADCALL |xp| 2 (QREFELT $ 16))
-                                    (SPADCALL |yp| 2 (QREFELT $ 16))
-                                    (QREFELT $ 17))
-                          (SPADCALL |zp| 2 (QREFELT $ 16)) (QREFELT $ 17))
-                         (QREFELT $ 18)))
-                  (LETT |Tx| (SPADCALL |xp| |sp| (QREFELT $ 19)))
-                  (LETT |Ty| (SPADCALL |yp| |sp| (QREFELT $ 19)))
-                  (LETT |Tz| (SPADCALL |zp| |sp| (QREFELT $ 19)))
-                  (LETT |Txp| (SPADCALL |Tx| |t| (QREFELT $ 14)))
-                  (LETT |Typ| (SPADCALL |Ty| |t| (QREFELT $ 14)))
-                  (LETT |Tzp| (SPADCALL |Tz| |t| (QREFELT $ 14)))
+                          (SPADCALL (SPADCALL |xp| 2 (QREFELT % 16))
+                                    (SPADCALL |yp| 2 (QREFELT % 16))
+                                    (QREFELT % 17))
+                          (SPADCALL |zp| 2 (QREFELT % 16)) (QREFELT % 17))
+                         (QREFELT % 18)))
+                  (LETT |Tx| (SPADCALL |xp| |sp| (QREFELT % 19)))
+                  (LETT |Ty| (SPADCALL |yp| |sp| (QREFELT % 19)))
+                  (LETT |Tz| (SPADCALL |zp| |sp| (QREFELT % 19)))
+                  (LETT |Txp| (SPADCALL |Tx| |t| (QREFELT % 14)))
+                  (LETT |Typ| (SPADCALL |Ty| |t| (QREFELT % 14)))
+                  (LETT |Tzp| (SPADCALL |Tz| |t| (QREFELT % 14)))
                   (LETT K
                         (SPADCALL
                          (SPADCALL
-                          (SPADCALL (SPADCALL |Txp| 2 (QREFELT $ 16))
-                                    (SPADCALL |Typ| 2 (QREFELT $ 16))
-                                    (QREFELT $ 17))
-                          (SPADCALL |Tzp| 2 (QREFELT $ 16)) (QREFELT $ 17))
-                         (QREFELT $ 18)))
-                  (LETT |Nx| (SPADCALL |Txp| K (QREFELT $ 19)))
-                  (LETT |Ny| (SPADCALL |Typ| K (QREFELT $ 19)))
-                  (LETT |Nz| (SPADCALL |Tzp| K (QREFELT $ 19)))
-                  (LETT |NxFunc| (SPADCALL |Nx| |t| (QREFELT $ 13)))
-                  (LETT |NyFunc| (SPADCALL |Ny| |t| (QREFELT $ 13)))
-                  (LETT |NzFunc| (SPADCALL |Nz| |t| (QREFELT $ 13)))
+                          (SPADCALL (SPADCALL |Txp| 2 (QREFELT % 16))
+                                    (SPADCALL |Typ| 2 (QREFELT % 16))
+                                    (QREFELT % 17))
+                          (SPADCALL |Tzp| 2 (QREFELT % 16)) (QREFELT % 17))
+                         (QREFELT % 18)))
+                  (LETT |Nx| (SPADCALL |Txp| K (QREFELT % 19)))
+                  (LETT |Ny| (SPADCALL |Typ| K (QREFELT % 19)))
+                  (LETT |Nz| (SPADCALL |Tzp| K (QREFELT % 19)))
+                  (LETT |NxFunc| (SPADCALL |Nx| |t| (QREFELT % 13)))
+                  (LETT |NyFunc| (SPADCALL |Ny| |t| (QREFELT % 13)))
+                  (LETT |NzFunc| (SPADCALL |Nz| |t| (QREFELT % 13)))
                   (LETT |Bx|
-                        (SPADCALL (SPADCALL |Ty| |Nz| (QREFELT $ 20))
-                                  (SPADCALL |Tz| |Ny| (QREFELT $ 20))
-                                  (QREFELT $ 21)))
+                        (SPADCALL (SPADCALL |Ty| |Nz| (QREFELT % 20))
+                                  (SPADCALL |Tz| |Ny| (QREFELT % 20))
+                                  (QREFELT % 21)))
                   (LETT |By|
-                        (SPADCALL (SPADCALL |Tz| |Nx| (QREFELT $ 20))
-                                  (SPADCALL |Tx| |Nz| (QREFELT $ 20))
-                                  (QREFELT $ 21)))
+                        (SPADCALL (SPADCALL |Tz| |Nx| (QREFELT % 20))
+                                  (SPADCALL |Tx| |Nz| (QREFELT % 20))
+                                  (QREFELT % 21)))
                   (LETT |Bz|
-                        (SPADCALL (SPADCALL |Tx| |Ny| (QREFELT $ 20))
-                                  (SPADCALL |Ty| |Nx| (QREFELT $ 20))
-                                  (QREFELT $ 21)))
-                  (LETT |BxFunc| (SPADCALL |Bx| |t| (QREFELT $ 13)))
-                  (LETT |ByFunc| (SPADCALL |By| |t| (QREFELT $ 13)))
-                  (LETT |BzFunc| (SPADCALL |Bz| |t| (QREFELT $ 13)))
+                        (SPADCALL (SPADCALL |Tx| |Ny| (QREFELT % 20))
+                                  (SPADCALL |Ty| |Nx| (QREFELT % 20))
+                                  (QREFELT % 21)))
+                  (LETT |BxFunc| (SPADCALL |Bx| |t| (QREFELT % 13)))
+                  (LETT |ByFunc| (SPADCALL |By| |t| (QREFELT % 13)))
+                  (LETT |BzFunc| (SPADCALL |Bz| |t| (QREFELT % 13)))
                   (LETT |parPlot|
                         (SPADCALL |xFunc| |yFunc| |zFunc| |colorFcn| |tRange|
-                                  (QREFELT $ 24)))
+                                  (QREFELT % 24)))
                   (LETT |tvals|
-                        (|SPADfirst| (SPADCALL |parPlot| (QREFELT $ 26))))
+                        (|SPADfirst| (SPADCALL |parPlot| (QREFELT % 26))))
                   (LETT |curvePts|
-                        (|SPADfirst| (SPADCALL |parPlot| (QREFELT $ 28))))
-                  (LETT |cosSin| (SPADCALL |n| (QREFELT $ 31)))
+                        (|SPADfirst| (SPADCALL |parPlot| (QREFELT % 28))))
+                  (LETT |cosSin| (SPADCALL |n| (QREFELT % 31)))
                   (LETT |loopList| NIL)
                   (SEQ G190 (COND ((NULL (NULL (NULL |tvals|))) (GO G191)))
                        (SEQ (LETT |tval| (|SPADfirst| |tvals|))
@@ -174,23 +174,23 @@
                                         (SPADCALL |tval| |NzFunc|)
                                         (SPADCALL |tval| |colorFcn|)))
                             (LETT |pNorm|
-                                  (SPADCALL |pNormList| (QREFELT $ 34)))
+                                  (SPADCALL |pNormList| (QREFELT % 34)))
                             (LETT |bNormList|
                                   (LIST (SPADCALL |tval| |BxFunc|)
                                         (SPADCALL |tval| |ByFunc|)
                                         (SPADCALL |tval| |BzFunc|)
                                         (SPADCALL |tval| |colorFcn|)))
                             (LETT |bNorm|
-                                  (SPADCALL |bNormList| (QREFELT $ 34)))
+                                  (SPADCALL |bNormList| (QREFELT % 34)))
                             (LETT |lps|
                                   (SPADCALL |ctr| |pNorm| |bNorm|
                                             (SPADCALL |tval| |radFcn|) |cosSin|
-                                            (QREFELT $ 37)))
+                                            (QREFELT % 37)))
                             (EXIT (LETT |loopList| (CONS |lps| |loopList|))))
                        NIL (GO G190) G191 (EXIT NIL))
                   (EXIT
                    (SPADCALL |parPlot| (NREVERSE |loopList|) |flag|
-                             (QREFELT $ 40))))))))) 
+                             (QREFELT % 40))))))))) 
 
 (SDEFUN |EXPRTUBE;tubePlot;3EMSMITp;3|
         ((|x| (|Expression| (|Integer|))) (|y| (|Expression| (|Integer|)))
@@ -198,50 +198,50 @@
          (|colorFcn| (|Mapping| (|DoubleFloat|) (|DoubleFloat|)))
          (|tRange| (|Segment| (|DoubleFloat|)))
          (|radFcn| (|Mapping| (|DoubleFloat|) (|DoubleFloat|)))
-         (|n| (|Integer|)) ($ (|TubePlot| (|Plot3D|))))
+         (|n| (|Integer|)) (% (|TubePlot| (|Plot3D|))))
         (SPADCALL |x| |y| |z| |colorFcn| |tRange| |radFcn| |n| "open"
-                  (QREFELT $ 42))) 
+                  (QREFELT % 42))) 
 
 (PUT '|EXPRTUBE;project| '|SPADreplace| '(XLAM (|x| |y|) |x|)) 
 
 (SDEFUN |EXPRTUBE;project|
-        ((|x| (|DoubleFloat|)) (|y| (|DoubleFloat|)) ($ (|DoubleFloat|))) |x|) 
+        ((|x| (|DoubleFloat|)) (|y| (|DoubleFloat|)) (% (|DoubleFloat|))) |x|) 
 
 (SDEFUN |EXPRTUBE;constantToUnaryFunction;DfM;5|
-        ((|x| (|DoubleFloat|)) ($ (|Mapping| (|DoubleFloat|) (|DoubleFloat|))))
+        ((|x| (|DoubleFloat|)) (% (|Mapping| (|DoubleFloat|) (|DoubleFloat|))))
         (SPROG NIL
                (CONS #'|EXPRTUBE;constantToUnaryFunction;DfM;5!0|
-                     (VECTOR $ |x|)))) 
+                     (VECTOR % |x|)))) 
 
 (SDEFUN |EXPRTUBE;constantToUnaryFunction;DfM;5!0| ((|s| NIL) ($$ NIL))
-        (PROG (|x| $)
+        (PROG (|x| %)
           (LETT |x| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (|EXPRTUBE;project| |x| |s| $))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (|EXPRTUBE;project| |x| |s| %))))) 
 
 (SDEFUN |EXPRTUBE;tubePlot;3EMSDfISTp;6|
         ((|x| (|Expression| (|Integer|))) (|y| (|Expression| (|Integer|)))
          (|z| (|Expression| (|Integer|)))
          (|colorFcn| (|Mapping| (|DoubleFloat|) (|DoubleFloat|)))
          (|tRange| (|Segment| (|DoubleFloat|))) (|rad| (|DoubleFloat|))
-         (|n| (|Integer|)) (|s| (|String|)) ($ (|TubePlot| (|Plot3D|))))
+         (|n| (|Integer|)) (|s| (|String|)) (% (|TubePlot| (|Plot3D|))))
         (SPADCALL |x| |y| |z| |colorFcn| |tRange|
-                  (SPADCALL |rad| (QREFELT $ 44)) |n| |s| (QREFELT $ 42))) 
+                  (SPADCALL |rad| (QREFELT % 44)) |n| |s| (QREFELT % 42))) 
 
 (SDEFUN |EXPRTUBE;tubePlot;3EMSDfITp;7|
         ((|x| (|Expression| (|Integer|))) (|y| (|Expression| (|Integer|)))
          (|z| (|Expression| (|Integer|)))
          (|colorFcn| (|Mapping| (|DoubleFloat|) (|DoubleFloat|)))
          (|tRange| (|Segment| (|DoubleFloat|))) (|rad| (|DoubleFloat|))
-         (|n| (|Integer|)) ($ (|TubePlot| (|Plot3D|))))
+         (|n| (|Integer|)) (% (|TubePlot| (|Plot3D|))))
         (SPADCALL |x| |y| |z| |colorFcn| |tRange| |rad| |n| "open"
-                  (QREFELT $ 45))) 
+                  (QREFELT % 45))) 
 
 (DECLAIM (NOTINLINE |ExpressionTubePlot;|)) 
 
 (DEFUN |ExpressionTubePlot| ()
   (SPROG NIL
-         (PROG (#1=#:G763)
+         (PROG (#1=#:G502)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ExpressionTubePlot|))
@@ -259,16 +259,16 @@
                   (HREM |$ConstructorCache| '|ExpressionTubePlot|)))))))))) 
 
 (DEFUN |ExpressionTubePlot;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|ExpressionTubePlot|))
-          (LETT $ (GETREFV 47))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|ExpressionTubePlot| NIL (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 47))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|ExpressionTubePlot| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|ExpressionTubePlot| '|infovec|
           (LIST

@@ -1,28 +1,28 @@
 
-(SDEFUN |FMCF2;map;MM1M2;1| ((|f| (|Mapping| R2 R1)) (|x| (M1)) ($ (M2)))
+(SDEFUN |FMCF2;map;MM1M2;1| ((|f| (|Mapping| R2 R1)) (|x| (M1)) (% (M2)))
         (SPROG
          ((|ry| (|List| (|Record| (|:| |k| S) (|:| |c| R2))))
           (|rx| (|List| (|Record| (|:| |k| S) (|:| |c| R1)))))
-         (SEQ (LETT |rx| (SPADCALL |x| (QREFELT $ 13)))
+         (SEQ (LETT |rx| (SPADCALL |x| (QREFELT % 13)))
               (LETT |ry|
                     (SPADCALL (CONS #'|FMCF2;map;MM1M2;1!0| |f|) |rx|
-                              (QREFELT $ 18)))
+                              (QREFELT % 18)))
               (EXIT
                (SPADCALL
-                (SPADCALL (CONS #'|FMCF2;map;MM1M2;1!1| $) |ry| (QREFELT $ 22))
-                (QREFELT $ 23)))))) 
+                (SPADCALL (CONS #'|FMCF2;map;MM1M2;1!1| %) |ry| (QREFELT % 22))
+                (QREFELT % 23)))))) 
 
-(SDEFUN |FMCF2;map;MM1M2;1!1| ((|t| NIL) ($ NIL))
-        (NULL (SPADCALL (QCDR |t|) (QREFELT $ 20)))) 
+(SDEFUN |FMCF2;map;MM1M2;1!1| ((|t| NIL) (% NIL))
+        (NULL (SPADCALL (QCDR |t|) (QREFELT % 20)))) 
 
 (SDEFUN |FMCF2;map;MM1M2;1!0| ((|t| NIL) (|f| NIL))
         (CONS (QCAR |t|) (SPADCALL (QCDR |t|) |f|))) 
 
 (DECLAIM (NOTINLINE |FreeModuleCoefficientFunctions2;|)) 
 
-(DEFUN |FreeModuleCoefficientFunctions2| (&REST #1=#:G708)
+(DEFUN |FreeModuleCoefficientFunctions2| (&REST #1=#:G460)
   (SPROG NIL
-         (PROG (#2=#:G709)
+         (PROG (#2=#:G461)
            (RETURN
             (COND
              ((LETT #2#
@@ -44,7 +44,7 @@
 
 (DEFUN |FreeModuleCoefficientFunctions2;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -54,19 +54,19 @@
     (LETT DV$5 (|devaluate| |#5|))
     (LETT |dv$|
           (LIST '|FreeModuleCoefficientFunctions2| DV$1 DV$2 DV$3 DV$4 DV$5))
-    (LETT $ (GETREFV 26))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (LETT % (GETREFV 26))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|FreeModuleCoefficientFunctions2|
-                (LIST DV$1 DV$2 DV$3 DV$4 DV$5) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (QSETREFV $ 10 |#5|)
-    (SETF |pv$| (QREFELT $ 3))
-    $))) 
+                (LIST DV$1 DV$2 DV$3 DV$4 DV$5) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (QSETREFV % 10 |#5|)
+    (SETF |pv$| (QREFELT % 3))
+    %))) 
 
 (MAKEPROP '|FreeModuleCoefficientFunctions2| '|infovec|
           (LIST

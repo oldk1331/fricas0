@@ -9,12 +9,12 @@
          (SETQ |CancellationAbelianMonoid;AL| (|CancellationAbelianMonoid;|))))) 
 
 (DEFUN |CancellationAbelianMonoid;| ()
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|AbelianMonoid|)
                            (|mkCategory|
-                            '(((|subtractIfCan| ((|Union| $ "failed") $ $)) T))
+                            '(((|subtractIfCan| ((|Union| % "failed") % %)) T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|CancellationAbelianMonoid|))))) 
 

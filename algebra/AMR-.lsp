@@ -1,52 +1,52 @@
 
-(SDEFUN |AMR-;monomial?;SB;1| ((|x| (S)) ($ (|Boolean|)))
-        (COND ((SPADCALL |x| (QREFELT $ 10)) NIL)
-              ('T (SPADCALL (SPADCALL |x| (QREFELT $ 11)) (QREFELT $ 10))))) 
+(SDEFUN |AMR-;monomial?;SB;1| ((|x| (S)) (% (|Boolean|)))
+        (COND ((SPADCALL |x| (QREFELT % 10)) NIL)
+              ('T (SPADCALL (SPADCALL |x| (QREFELT % 11)) (QREFELT % 10))))) 
 
-(SDEFUN |AMR-;map;M2S;2| ((|fn| (|Mapping| R R)) (|x| (S)) ($ (S)))
+(SDEFUN |AMR-;map;M2S;2| ((|fn| (|Mapping| R R)) (|x| (S)) (% (S)))
         (SPROG ((|r| (R)))
                (SEQ
-                (COND ((SPADCALL |x| (QREFELT $ 10)) (|spadConstant| $ 13))
+                (COND ((SPADCALL |x| (QREFELT % 10)) (|spadConstant| % 13))
                       (#1='T
                        (SEQ
                         (LETT |r|
-                              (SPADCALL (SPADCALL |x| (QREFELT $ 14)) |fn|))
+                              (SPADCALL (SPADCALL |x| (QREFELT % 14)) |fn|))
                         (EXIT
                          (COND
-                          ((SPADCALL |r| (QREFELT $ 15))
-                           (SPADCALL |fn| (SPADCALL |x| (QREFELT $ 11))
-                                     (QREFELT $ 17)))
+                          ((SPADCALL |r| (QREFELT % 15))
+                           (SPADCALL |fn| (SPADCALL |x| (QREFELT % 11))
+                                     (QREFELT % 17)))
                           (#1#
                            (SPADCALL
-                            (SPADCALL |r| (SPADCALL |x| (QREFELT $ 18))
-                                      (QREFELT $ 19))
-                            (SPADCALL |fn| (SPADCALL |x| (QREFELT $ 11))
-                                      (QREFELT $ 17))
-                            (QREFELT $ 20))))))))))) 
+                            (SPADCALL |r| (SPADCALL |x| (QREFELT % 18))
+                                      (QREFELT % 19))
+                            (SPADCALL |fn| (SPADCALL |x| (QREFELT % 11))
+                                      (QREFELT % 17))
+                            (QREFELT % 20))))))))))) 
 
-(SDEFUN |AMR-;*;F2S;3| ((|q| (|Fraction| (|Integer|))) (|p| (S)) ($ (S)))
+(SDEFUN |AMR-;*;F2S;3| ((|q| (|Fraction| (|Integer|))) (|p| (S)) (% (S)))
         (SPROG NIL
-               (SPADCALL (CONS #'|AMR-;*;F2S;3!0| (VECTOR $ |q|)) |p|
-                         (QREFELT $ 17)))) 
+               (SPADCALL (CONS #'|AMR-;*;F2S;3!0| (VECTOR % |q|)) |p|
+                         (QREFELT % 17)))) 
 
 (SDEFUN |AMR-;*;F2S;3!0| ((|x1| NIL) ($$ NIL))
-        (PROG (|q| $)
+        (PROG (|q| %)
           (LETT |q| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |q| |x1| (QREFELT $ 23)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |q| |x1| (QREFELT % 23)))))) 
 
 (DECLAIM (NOTINLINE |AbelianMonoidRing&;|)) 
 
 (DEFUN |AbelianMonoidRing&| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT DV$3 (|devaluate| |#3|))
           (LETT |dv$| (LIST '|AbelianMonoidRing&| DV$1 DV$2 DV$3))
-          (LETT $ (GETREFV 28))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 28))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
@@ -68,15 +68,15 @@
                                               (|HasCategory| |#2| '(|Ring|))
                                               (|HasCategory| |#2|
                                                              '(|SemiRing|))))))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (QSETREFV $ 8 |#3|)
-          (SETF |pv$| (QREFELT $ 3))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (QSETREFV % 8 |#3|)
+          (SETF |pv$| (QREFELT % 3))
           (COND
            ((|testBitVector| |pv$| 1)
-            (QSETREFV $ 24 (CONS (|dispatchFunction| |AMR-;*;F2S;3|) $))))
-          $))) 
+            (QSETREFV % 24 (CONS (|dispatchFunction| |AMR-;*;F2S;3|) %))))
+          %))) 
 
 (MAKEPROP '|AbelianMonoidRing&| '|infovec|
           (LIST
@@ -95,9 +95,9 @@
                             (|mkCategory|
                              (LIST '((* (|#1| (|NonNegativeInteger|) |#1|)) T)
                                    '((* (|#1| (|Integer|) |#1|)) T)
-                                   '((* (|#1| |#1| (|Fraction| (|Integer|))))
-                                     T)
                                    '((* (|#1| (|Fraction| (|Integer|)) |#1|))
+                                     T)
+                                   '((* (|#1| |#1| (|Fraction| (|Integer|))))
                                      T)
                                    '((|map| (|#1| (|Mapping| |#2| |#2|) |#1|))
                                      T)

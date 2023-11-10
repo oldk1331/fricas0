@@ -6,7 +6,7 @@
 (DEFPARAMETER |LeftModule;AL| 'NIL) 
 
 (DEFUN |LeftModule| (|t#1|)
-  (LET (#1=#:G690 (#2=#:G691 (|devaluate| |t#1|)))
+  (LET (#1=#:G449 (#2=#:G450 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |LeftModule;AL|)) (CDR #1#))
           (T
            (SETQ |LeftModule;AL|
@@ -15,7 +15,7 @@
            #1#)))) 
 
 (DEFUN |LeftModule;| (|t#1|)
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -24,7 +24,7 @@
                                           (LETT |LeftModule;CAT|
                                                 (|Join| (|AbelianSemiGroup|)
                                                         (|mkCategory|
-                                                         '(((* ($ |t#1| $)) T))
+                                                         '(((* (% |t#1| %)) T))
                                                          '(((|AbelianMonoid|)
                                                             (|has| |t#1|
                                                                    (|AbelianMonoid|)))

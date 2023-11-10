@@ -1,14 +1,14 @@
 
 (PUT '|MSYSCMD;systemCommand;SV;1| '|SPADreplace| '|doSystemCommand|) 
 
-(SDEFUN |MSYSCMD;systemCommand;SV;1| ((|cmd| (|String|)) ($ (|Void|)))
+(SDEFUN |MSYSCMD;systemCommand;SV;1| ((|cmd| (|String|)) (% (|Void|)))
         (|doSystemCommand| |cmd|)) 
 
 (DECLAIM (NOTINLINE |MoreSystemCommands;|)) 
 
 (DEFUN |MoreSystemCommands| ()
   (SPROG NIL
-         (PROG (#1=#:G691)
+         (PROG (#1=#:G450)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|MoreSystemCommands|))
@@ -26,16 +26,16 @@
                   (HREM |$ConstructorCache| '|MoreSystemCommands|)))))))))) 
 
 (DEFUN |MoreSystemCommands;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|MoreSystemCommands|))
-          (LETT $ (GETREFV 9))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|MoreSystemCommands| NIL (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 9))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|MoreSystemCommands| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|MoreSystemCommands| '|infovec|
           (LIST

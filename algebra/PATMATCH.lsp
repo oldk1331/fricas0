@@ -1,37 +1,37 @@
 
 (SDEFUN |PATMATCH;ist|
         ((|s| (|Subject|)) (|p| (|Pat|))
-         ($ (|PatternMatchResult| |Base| |Subject|)))
-        (SPADCALL |s| (SPADCALL |p| (QREFELT $ 10)) (SPADCALL (QREFELT $ 12))
-                  (QREFELT $ 14))) 
+         (% (|PatternMatchResult| |Base| |Subject|)))
+        (SPADCALL |s| (SPADCALL |p| (QREFELT % 10)) (SPADCALL (QREFELT % 12))
+                  (QREFELT % 14))) 
 
 (SDEFUN |PATMATCH;is?;SubjectPatB;2|
-        ((|s| (|Subject|)) (|p| (|Pat|)) ($ (|Boolean|)))
-        (NULL (SPADCALL (|PATMATCH;ist| |s| |p| $) (QREFELT $ 16)))) 
+        ((|s| (|Subject|)) (|p| (|Pat|)) (% (|Boolean|)))
+        (NULL (SPADCALL (|PATMATCH;ist| |s| |p| %) (QREFELT % 16)))) 
 
 (SDEFUN |PATMATCH;is?;LPatB;3|
-        ((|s| (|List| |Subject|)) (|p| (|Pat|)) ($ (|Boolean|)))
-        (NULL (SPADCALL (SPADCALL |s| |p| (QREFELT $ 20)) (QREFELT $ 21)))) 
+        ((|s| (|List| |Subject|)) (|p| (|Pat|)) (% (|Boolean|)))
+        (NULL (SPADCALL (SPADCALL |s| |p| (QREFELT % 20)) (QREFELT % 21)))) 
 
 (SDEFUN |PATMATCH;Is;LPatPmlr;4|
         ((|s| (|List| |Subject|)) (|p| (|Pat|))
-         ($ (|PatternMatchListResult| |Base| |Subject| (|List| |Subject|))))
-        (SPADCALL |s| (SPADCALL |p| (QREFELT $ 10)) (SPADCALL (QREFELT $ 23))
-                  (QREFELT $ 25))) 
+         (% (|PatternMatchListResult| |Base| |Subject| (|List| |Subject|))))
+        (SPADCALL |s| (SPADCALL |p| (QREFELT % 10)) (SPADCALL (QREFELT % 23))
+                  (QREFELT % 25))) 
 
 (SDEFUN |PATMATCH;Is;SubjectPatL;5|
-        ((|s| (|Subject|)) (|p| (|Pat|)) ($ (|List| (|Equation| |Subject|))))
+        ((|s| (|Subject|)) (|p| (|Pat|)) (% (|List| (|Equation| |Subject|))))
         (SPROG
-         ((#1=#:G713 NIL) (|rec| NIL) (#2=#:G712 NIL)
+         ((#1=#:G464 NIL) (|rec| NIL) (#2=#:G463 NIL)
           (|r| (|PatternMatchResult| |Base| |Subject|)))
          (SEQ
           (COND
-           ((SPADCALL (LETT |r| (|PATMATCH;ist| |s| |p| $)) (QREFELT $ 16))
+           ((SPADCALL (LETT |r| (|PATMATCH;ist| |s| |p| %)) (QREFELT % 16))
             NIL)
            ('T
             (PROGN
              (LETT #2# NIL)
-             (SEQ (LETT |rec| NIL) (LETT #1# (SPADCALL |r| (QREFELT $ 28)))
+             (SEQ (LETT |rec| NIL) (LETT #1# (SPADCALL |r| (QREFELT % 28)))
                   G190
                   (COND
                    ((OR (ATOM #1#) (PROGN (LETT |rec| (CAR #1#)) NIL))
@@ -40,26 +40,26 @@
                    (EXIT
                     (LETT #2#
                           (CONS
-                           (SPADCALL (SPADCALL (QCAR |rec|) (QREFELT $ 30))
-                                     (QCDR |rec|) (QREFELT $ 32))
+                           (SPADCALL (SPADCALL (QCAR |rec|) (QREFELT % 30))
+                                     (QCDR |rec|) (QREFELT % 32))
                            #2#))))
                   (LETT #1# (CDR #1#)) (GO G190) G191
                   (EXIT (NREVERSE #2#))))))))) 
 
 (SDEFUN |PATMATCH;Is;SubjectPatL;6|
         ((|s| (|Subject|)) (|p| (|Pat|))
-         ($ (|List| (|Equation| (|Polynomial| |Subject|)))))
+         (% (|List| (|Equation| (|Polynomial| |Subject|)))))
         (SPROG
-         ((#1=#:G723 NIL) (|rec| NIL) (#2=#:G722 NIL)
+         ((#1=#:G471 NIL) (|rec| NIL) (#2=#:G470 NIL)
           (|r| (|PatternMatchResult| |Base| |Subject|)))
          (SEQ
           (COND
-           ((SPADCALL (LETT |r| (|PATMATCH;ist| |s| |p| $)) (QREFELT $ 16))
+           ((SPADCALL (LETT |r| (|PATMATCH;ist| |s| |p| %)) (QREFELT % 16))
             NIL)
            ('T
             (PROGN
              (LETT #2# NIL)
-             (SEQ (LETT |rec| NIL) (LETT #1# (SPADCALL |r| (QREFELT $ 28)))
+             (SEQ (LETT |rec| NIL) (LETT #1# (SPADCALL |r| (QREFELT % 28)))
                   G190
                   (COND
                    ((OR (ATOM #1#) (PROGN (LETT |rec| (CAR #1#)) NIL))
@@ -68,23 +68,23 @@
                    (EXIT
                     (LETT #2#
                           (CONS
-                           (SPADCALL (SPADCALL (QCAR |rec|) (QREFELT $ 36))
-                                     (SPADCALL (QCDR |rec|) (QREFELT $ 37))
-                                     (QREFELT $ 39))
+                           (SPADCALL (SPADCALL (QCAR |rec|) (QREFELT % 36))
+                                     (SPADCALL (QCDR |rec|) (QREFELT % 37))
+                                     (QREFELT % 39))
                            #2#))))
                   (LETT #1# (CDR #1#)) (GO G190) G191
                   (EXIT (NREVERSE #2#))))))))) 
 
 (SDEFUN |PATMATCH;Is;SubjectPatPmr;7|
         ((|s| (|Subject|)) (|p| (|Pat|))
-         ($ (|PatternMatchResult| |Base| |Subject|)))
-        (|PATMATCH;ist| |s| |p| $)) 
+         (% (|PatternMatchResult| |Base| |Subject|)))
+        (|PATMATCH;ist| |s| |p| %)) 
 
 (DECLAIM (NOTINLINE |PatternMatch;|)) 
 
-(DEFUN |PatternMatch| (&REST #1=#:G726)
+(DEFUN |PatternMatch| (&REST #1=#:G474)
   (SPROG NIL
-         (PROG (#2=#:G727)
+         (PROG (#2=#:G475)
            (RETURN
             (COND
              ((LETT #2#
@@ -101,16 +101,16 @@
 
 (DEFUN |PatternMatch;| (|#1| |#2| |#3|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G725 NIL) ($ NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL)
+   ((|pv$| NIL) (#1=#:G473 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
     (LETT DV$3 (|devaluate| |#3|))
     (LETT |dv$| (LIST '|PatternMatch| DV$1 DV$2 DV$3))
-    (LETT $ (GETREFV 43))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3
+    (LETT % (GETREFV 43))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3
               (LETT |pv$|
                     (|buildPredVector| 0 0
                                        (LIST
@@ -124,29 +124,29 @@
                                         (AND (|HasCategory| |#2| '(|Ring|))
                                              (|not| #1#))))))
     (|haddProp| |$ConstructorCache| '|PatternMatch| (LIST DV$1 DV$2 DV$3)
-                (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (SETF |pv$| (QREFELT $ 3))
+                (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (SETF |pv$| (QREFELT % 3))
     (COND
      ((|testBitVector| |pv$| 1)
-      (QSETREFV $ 34
-                (CONS (|dispatchFunction| |PATMATCH;Is;SubjectPatL;5|) $)))
+      (QSETREFV % 34
+                (CONS (|dispatchFunction| |PATMATCH;Is;SubjectPatL;5|) %)))
      ((|HasCategory| |#2| '(|Ring|))
-      (QSETREFV $ 41
-                (CONS (|dispatchFunction| |PATMATCH;Is;SubjectPatL;6|) $)))
+      (QSETREFV % 41
+                (CONS (|dispatchFunction| |PATMATCH;Is;SubjectPatL;6|) %)))
      ('T
-      (QSETREFV $ 42
-                (CONS (|dispatchFunction| |PATMATCH;Is;SubjectPatPmr;7|) $))))
-    $))) 
+      (QSETREFV % 42
+                (CONS (|dispatchFunction| |PATMATCH;Is;SubjectPatPmr;7|) %))))
+    %))) 
 
 (MAKEPROP '|PatternMatch| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|Pattern| 6) (0 . |convert|)
-              (|PatternMatchResult| 6 7) (5 . |new|) (|PatternMatchResult| 6 $)
+              (|PatternMatchResult| 6 7) (5 . |new|) (|PatternMatchResult| 6 %)
               (9 . |patternMatch|) (|Boolean|) (16 . |failed?|)
               |PATMATCH;is?;SubjectPatB;2| (|PatternMatchListResult| 6 7 19)
               (|List| 7) |PATMATCH;Is;LPatPmlr;4| (21 . |failed?|)

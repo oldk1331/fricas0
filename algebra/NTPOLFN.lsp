@@ -1,80 +1,80 @@
 
 (SDEFUN |NTPOLFN;cyclotomic;Nni2R;1|
-        ((|k| (|NonNegativeInteger|)) (|x| (R)) ($ (R)))
+        ((|k| (|NonNegativeInteger|)) (|x| (R)) (% (R)))
         (SPROG
          ((|r| (R)) (|p| (|SparseUnivariatePolynomial| (|Integer|)))
           (|c| (|Integer|)) (|d| (|NonNegativeInteger|)))
-         (SEQ (LETT |p| (SPADCALL |k| (QREFELT $ 10)))
-              (LETT |r| (|spadConstant| $ 11))
+         (SEQ (LETT |p| (SPADCALL |k| (QREFELT % 10)))
+              (LETT |r| (|spadConstant| % 11))
               (SEQ G190
                    (COND
-                    ((NULL (SPADCALL |p| (|spadConstant| $ 12) (QREFELT $ 14)))
+                    ((NULL (SPADCALL |p| (|spadConstant| % 12) (QREFELT % 14)))
                      (GO G191)))
-                   (SEQ (LETT |d| (SPADCALL |p| (QREFELT $ 16)))
-                        (LETT |c| (SPADCALL |p| (QREFELT $ 17)))
-                        (LETT |p| (SPADCALL |p| (QREFELT $ 18)))
+                   (SEQ (LETT |d| (SPADCALL |p| (QREFELT % 16)))
+                        (LETT |c| (SPADCALL |p| (QREFELT % 17)))
+                        (LETT |p| (SPADCALL |p| (QREFELT % 18)))
                         (EXIT
                          (LETT |r|
                                (SPADCALL
-                                (SPADCALL |c| (SPADCALL |x| |d| (QREFELT $ 19))
-                                          (QREFELT $ 20))
-                                |r| (QREFELT $ 21)))))
+                                (SPADCALL |c| (SPADCALL |x| |d| (QREFELT % 19))
+                                          (QREFELT % 20))
+                                |r| (QREFELT % 21)))))
                    NIL (GO G190) G191 (EXIT NIL))
               (EXIT |r|)))) 
 
 (SDEFUN |NTPOLFN;eulerE;Nni2R;2|
-        ((|k| (|NonNegativeInteger|)) (|x| (R)) ($ (R)))
+        ((|k| (|NonNegativeInteger|)) (|x| (R)) (% (R)))
         (SPROG
          ((|r| (R))
           (|p| (|SparseUnivariatePolynomial| (|Fraction| (|Integer|))))
           (|c| (|Fraction| (|Integer|))) (|d| (|NonNegativeInteger|)))
-         (SEQ (LETT |p| (SPADCALL |k| (QREFELT $ 24)))
-              (LETT |r| (|spadConstant| $ 11))
+         (SEQ (LETT |p| (SPADCALL |k| (QREFELT % 24)))
+              (LETT |r| (|spadConstant| % 11))
               (SEQ G190
                    (COND
-                    ((NULL (SPADCALL |p| (|spadConstant| $ 25) (QREFELT $ 26)))
+                    ((NULL (SPADCALL |p| (|spadConstant| % 25) (QREFELT % 26)))
                      (GO G191)))
-                   (SEQ (LETT |d| (SPADCALL |p| (QREFELT $ 27)))
-                        (LETT |c| (SPADCALL |p| (QREFELT $ 29)))
-                        (LETT |p| (SPADCALL |p| (QREFELT $ 30)))
+                   (SEQ (LETT |d| (SPADCALL |p| (QREFELT % 27)))
+                        (LETT |c| (SPADCALL |p| (QREFELT % 29)))
+                        (LETT |p| (SPADCALL |p| (QREFELT % 30)))
                         (EXIT
                          (LETT |r|
                                (SPADCALL
-                                (SPADCALL |c| (SPADCALL |x| |d| (QREFELT $ 19))
-                                          (QREFELT $ 31))
-                                |r| (QREFELT $ 21)))))
+                                (SPADCALL |c| (SPADCALL |x| |d| (QREFELT % 19))
+                                          (QREFELT % 31))
+                                |r| (QREFELT % 21)))))
                    NIL (GO G190) G191 (EXIT NIL))
               (EXIT |r|)))) 
 
 (SDEFUN |NTPOLFN;bernoulliB;Nni2R;3|
-        ((|k| (|NonNegativeInteger|)) (|x| (R)) ($ (R)))
+        ((|k| (|NonNegativeInteger|)) (|x| (R)) (% (R)))
         (SPROG
          ((|r| (R))
           (|p| (|SparseUnivariatePolynomial| (|Fraction| (|Integer|))))
           (|c| (|Fraction| (|Integer|))) (|d| (|NonNegativeInteger|)))
-         (SEQ (LETT |p| (SPADCALL |k| (QREFELT $ 33)))
-              (LETT |r| (|spadConstant| $ 11))
+         (SEQ (LETT |p| (SPADCALL |k| (QREFELT % 33)))
+              (LETT |r| (|spadConstant| % 11))
               (SEQ G190
                    (COND
-                    ((NULL (SPADCALL |p| (|spadConstant| $ 25) (QREFELT $ 26)))
+                    ((NULL (SPADCALL |p| (|spadConstant| % 25) (QREFELT % 26)))
                      (GO G191)))
-                   (SEQ (LETT |d| (SPADCALL |p| (QREFELT $ 27)))
-                        (LETT |c| (SPADCALL |p| (QREFELT $ 29)))
-                        (LETT |p| (SPADCALL |p| (QREFELT $ 30)))
+                   (SEQ (LETT |d| (SPADCALL |p| (QREFELT % 27)))
+                        (LETT |c| (SPADCALL |p| (QREFELT % 29)))
+                        (LETT |p| (SPADCALL |p| (QREFELT % 30)))
                         (EXIT
                          (LETT |r|
                                (SPADCALL
-                                (SPADCALL |c| (SPADCALL |x| |d| (QREFELT $ 19))
-                                          (QREFELT $ 31))
-                                |r| (QREFELT $ 21)))))
+                                (SPADCALL |c| (SPADCALL |x| |d| (QREFELT % 19))
+                                          (QREFELT % 31))
+                                |r| (QREFELT % 21)))))
                    NIL (GO G190) G191 (EXIT NIL))
               (EXIT |r|)))) 
 
 (DECLAIM (NOTINLINE |NumberTheoreticPolynomialFunctions;|)) 
 
-(DEFUN |NumberTheoreticPolynomialFunctions| (#1=#:G713)
+(DEFUN |NumberTheoreticPolynomialFunctions| (#1=#:G463)
   (SPROG NIL
-         (PROG (#2=#:G714)
+         (PROG (#2=#:G464)
            (RETURN
             (COND
              ((LETT #2#
@@ -93,13 +93,13 @@
                         '|NumberTheoreticPolynomialFunctions|)))))))))) 
 
 (DEFUN |NumberTheoreticPolynomialFunctions;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|NumberTheoreticPolynomialFunctions| DV$1))
-          (LETT $ (GETREFV 35))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 35))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
@@ -108,19 +108,19 @@
                                                                (|Fraction|
                                                                 (|Integer|))))))))
           (|haddProp| |$ConstructorCache| '|NumberTheoreticPolynomialFunctions|
-                      (LIST DV$1) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
           (COND
            ((|testBitVector| |pv$| 1)
             (PROGN
-             (QSETREFV $ 32
-                       (CONS (|dispatchFunction| |NTPOLFN;eulerE;Nni2R;2|) $))
-             (QSETREFV $ 34
+             (QSETREFV % 32
+                       (CONS (|dispatchFunction| |NTPOLFN;eulerE;Nni2R;2|) %))
+             (QSETREFV % 34
                        (CONS (|dispatchFunction| |NTPOLFN;bernoulliB;Nni2R;3|)
-                             $)))))
-          $))) 
+                             %)))))
+          %))) 
 
 (MAKEPROP '|NumberTheoreticPolynomialFunctions| '|infovec|
           (LIST

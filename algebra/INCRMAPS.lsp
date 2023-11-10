@@ -1,24 +1,24 @@
 
-(SDEFUN |INCRMAPS;increment;M;1| (($ (|Mapping| R R)))
-        (CONS #'|INCRMAPS;increment;M;1!0| $)) 
+(SDEFUN |INCRMAPS;increment;M;1| ((% (|Mapping| R R)))
+        (CONS #'|INCRMAPS;increment;M;1!0| %)) 
 
-(SDEFUN |INCRMAPS;increment;M;1!0| ((|x| NIL) ($ NIL))
-        (SPADCALL (|spadConstant| $ 7) |x| (QREFELT $ 8))) 
+(SDEFUN |INCRMAPS;increment;M;1!0| ((|x| NIL) (% NIL))
+        (SPADCALL (|spadConstant| % 7) |x| (QREFELT % 8))) 
 
-(SDEFUN |INCRMAPS;incrementBy;RM;2| ((|n| (R)) ($ (|Mapping| R R)))
-        (SPROG NIL (CONS #'|INCRMAPS;incrementBy;RM;2!0| (VECTOR $ |n|)))) 
+(SDEFUN |INCRMAPS;incrementBy;RM;2| ((|n| (R)) (% (|Mapping| R R)))
+        (SPROG NIL (CONS #'|INCRMAPS;incrementBy;RM;2!0| (VECTOR % |n|)))) 
 
 (SDEFUN |INCRMAPS;incrementBy;RM;2!0| ((|x| NIL) ($$ NIL))
-        (PROG (|n| $)
+        (PROG (|n| %)
           (LETT |n| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |n| |x| (QREFELT $ 8)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |n| |x| (QREFELT % 8)))))) 
 
 (DECLAIM (NOTINLINE |IncrementingMaps;|)) 
 
-(DEFUN |IncrementingMaps| (#1=#:G694)
+(DEFUN |IncrementingMaps| (#1=#:G453)
   (SPROG NIL
-         (PROG (#2=#:G695)
+         (PROG (#2=#:G454)
            (RETURN
             (COND
              ((LETT #2#
@@ -34,19 +34,19 @@
                   (HREM |$ConstructorCache| '|IncrementingMaps|)))))))))) 
 
 (DEFUN |IncrementingMaps;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|IncrementingMaps| DV$1))
-          (LETT $ (GETREFV 12))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 12))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|IncrementingMaps| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|IncrementingMaps| '|infovec|
           (LIST

@@ -1,21 +1,21 @@
 
 (SDEFUN |MTSCAT-;coefficient;SVarNniS;1|
-        ((|s| (S)) (|v| (|Var|)) (|n| (|NonNegativeInteger|)) ($ (S)))
-        (SPADCALL |s| (LIST |v|) (LIST |n|) (QREFELT $ 11))) 
+        ((|s| (S)) (|v| (|Var|)) (|n| (|NonNegativeInteger|)) (% (S)))
+        (SPADCALL |s| (LIST |v|) (LIST |n|) (QREFELT % 11))) 
 
 (DECLAIM (NOTINLINE |MultivariateTaylorSeriesCategory&;|)) 
 
 (DEFUN |MultivariateTaylorSeriesCategory&| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT DV$3 (|devaluate| |#3|))
           (LETT |dv$|
                 (LIST '|MultivariateTaylorSeriesCategory&| DV$1 DV$2 DV$3))
-          (LETT $ (GETREFV 15))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 15))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
@@ -23,12 +23,12 @@
                                                              '(|Algebra|
                                                                (|Fraction|
                                                                 (|Integer|))))))))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (QSETREFV $ 8 |#3|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (QSETREFV % 8 |#3|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|MultivariateTaylorSeriesCategory&| '|infovec|
           (LIST

@@ -6,7 +6,7 @@
 ; mkDevaluate a ==
 ;   null a => nil
 ;   a is ['QUOTE,a'] => (a' => a; nil)
-;   a='$ => MKQ '$
+;   a = '% => MKQ('%)
 ;   a is ['LIST] => nil
 ;   a is ['LIST,:.] => a
 ;   ['devaluate,a]
@@ -21,7 +21,7 @@
                   (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
                        (PROGN (SETQ |a'| (CAR |ISTMP#1|)) #1='T))))
             (COND (|a'| |a|) (#1# NIL)))
-           ((EQ |a| '$) (MKQ '$))
+           ((EQ |a| '%) (MKQ '%))
            ((AND (CONSP |a|) (EQ (CDR |a|) NIL) (EQ (CAR |a|) 'LIST)) NIL)
            ((AND (CONSP |a|) (EQ (CAR |a|) 'LIST)) |a|)
            (#1# (LIST '|devaluate| |a|))))))
@@ -780,9 +780,11 @@
 ;   code is ['LET,name,body,:.] =>
 ;                     --only keep the names that are useful
 ;     u:=member(name,$locals) =>
-;         CONTAINED('$, body) and isDomainForm(body, e) =>
+;         CONTAINED('%, body) and isDomainForm(body, e) =>
 ;           --instantiate domains which depend on $ after constants are set
-;           code:=[($QuickCode => 'QSETREFV; 'SETELT),[($QuickCode => 'QREFELT; 'ELT),'$,5],#$locals-#u,code]
+;           code := [($QuickCode => 'QSETREFV; 'SETELT),
+;                     [($QuickCode => 'QREFELT; 'ELT), '%, 5],
+;                       #$locals - #u, code]
 ;           $epilogue:=
 ;             TruthP flag => [code,:$epilogue]
 ;             [['COND, [ProcessCond(flag, e), code]], :$epilogue]
@@ -1015,12 +1017,12 @@
             (COND
              ((SETQ |u| (|member| |name| |$locals|))
               (COND
-               ((AND (CONTAINED '$ |body|) (|isDomainForm| |body| |e|))
+               ((AND (CONTAINED '% |body|) (|isDomainForm| |body| |e|))
                 (PROGN
                  (SETQ |code|
                          (LIST (COND (|$QuickCode| 'QSETREFV) (#1# 'SETELT))
                                (LIST (COND (|$QuickCode| 'QREFELT) (#1# 'ELT))
-                                     '$ 5)
+                                     '% 5)
                                (- (LENGTH |$locals|) (LENGTH |u|)) |code|))
                  (SETQ |$epilogue|
                          (COND ((|TruthP| |flag|) (CONS |code| |$epilogue|))
@@ -1119,7 +1121,7 @@
 
 ; SetFunctionSlots(sig, body, flag, kvec) ==
 ; --+
-;   v := '$
+;   v := '%
 ;   u := kvec
 ;   if true then
 ;     null body => return NIL
@@ -1130,7 +1132,7 @@
 ;           body:= [($QuickCode => 'QSETREFV; 'SETELT),v,index,body]
 ;           if REFVECP $SetFunctions and TruthP flag then u.index:= true
 ;                  --used by CheckVector to determine which ops are missing
-;           if v='$ then  -- i.e. we are looking at the principal view
+;           if v = '% then  -- i.e. we are looking at the principal view
 ;             not REFVECP $SetFunctions => nil
 ;                     --packages don't set it
 ;             $MissingFunctionInfo.index:= flag
@@ -1150,7 +1152,7 @@
   (PROG (|v| |u| |q| |ISTMP#1| |ISTMP#2| |index| |a| |b|)
     (RETURN
      (PROGN
-      (SETQ |v| '$)
+      (SETQ |v| '%)
       (SETQ |u| |kvec|)
       (COND
        (T
@@ -1202,7 +1204,7 @@
                         ((AND (REFVECP |$SetFunctions|) (|TruthP| |flag|))
                          (SETF (ELT |u| |index|) T)))
                        (COND
-                        ((EQ |v| '$)
+                        ((EQ |v| '%)
                          (COND ((NULL (REFVECP |$SetFunctions|)) NIL)
                                (#1#
                                 (PROGN
@@ -1234,7 +1236,7 @@
 ; LookUpSigSlots(sig,siglist) ==
 ; --+ must kill any implementations below of the form (ELT $ NIL)
 ;   if $insideCategoryPackageIfTrue then
-;            sig := substitute('$,CADR($functorForm),sig)
+;            sig := substitute('%, CADR($functorForm), sig)
 ;   siglist := $lisplibOperationAlist
 ;   REMDUP [implem for u in siglist | SigSlotsMatch(sig,first u,implem:=CADDR u)
 ;               and IFCAR(IFCDR(IFCDR(implem)))]
@@ -1245,7 +1247,7 @@
      (PROGN
       (COND
        (|$insideCategoryPackageIfTrue|
-        (SETQ |sig| (|substitute| '$ (CADR |$functorForm|) |sig|))))
+        (SETQ |sig| (|substitute| '% (CADR |$functorForm|) |sig|))))
       (SETQ |siglist| |$lisplibOperationAlist|)
       (REMDUP
        ((LAMBDA (|bfVar#47| |bfVar#46| |u|)
@@ -1265,9 +1267,9 @@
 ;   not (LENGTH CADR sig=LENGTH CADR pattern) => nil
 ;                        --CADR sig is the actual signature part
 ;   not (first sig=first pattern) => nil
-;   pat' :=SUBSTQ($definition,'$,CADR pattern)
-;   sig' :=SUBSTQ($definition,'$,CADR sig)
-;   sig'=pat' => true
+;   pat' := SUBSTQ($definition, '%, CADR(pattern))
+;   sig' := SUBSTQ($definition, '%, CADR(sig))
+;   sig' = pat' => true
 ;   --If we don't have this next test, then we'll recurse in SetFunctionSlots
 ;   SourceLevelSubsume(sig',pat') => true
 ;   nil
@@ -1280,8 +1282,8 @@
            ((NULL (EQUAL (CAR |sig|) (CAR |pattern|))) NIL)
            (#1='T
             (PROGN
-             (SETQ |pat'| (SUBSTQ |$definition| '$ (CADR |pattern|)))
-             (SETQ |sig'| (SUBSTQ |$definition| '$ (CADR |sig|)))
+             (SETQ |pat'| (SUBSTQ |$definition| '% (CADR |pattern|)))
+             (SETQ |sig'| (SUBSTQ |$definition| '% (CADR |sig|)))
              (COND ((EQUAL |sig'| |pat'|) T)
                    ((|SourceLevelSubsume| |sig'| |pat'|) T) (#1# NIL))))))))
 
@@ -2284,7 +2286,7 @@
 ;    [SetFunctionSlots(sig, SUBST('ELT,'CONST,implem), flag, kvec) repeat
 ;        for i in 6..MAXINDEX princview |
 ;          princview.i is [sig:=[op,types],:.] and
-;            LASSOC([base, :SUBST(base, '$, types)], get(op, 'modemap, e)) is
+;            LASSOC([base, :SUBST(base, '%, types)], get(op, 'modemap, e)) is
 ;                   [[pred,implem]]]
 
 (DEFUN |DescendCodeVarAdd| (|base| |flag| |kvec| |e|)
@@ -2314,7 +2316,7 @@
                         (PROGN (SETQ |sig| #2#) #1#)))
                   (PROGN
                    (SETQ |ISTMP#1|
-                           (LASSOC (CONS |base| (SUBST |base| '$ |types|))
+                           (LASSOC (CONS |base| (SUBST |base| '% |types|))
                             (|get| |op| '|modemap| |e|)))
                    (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
                         (PROGN

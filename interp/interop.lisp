@@ -32,7 +32,7 @@
 (EVAL-WHEN (EVAL LOAD) (SETQ |DNameOtherID| 3))
 
 ; DNameToSExpr1 dname ==
-;   NULL dname => error "unexpected domain name"
+;   NULL dname => error '"unexpected domain name"
 ;   first dname = DNameStringID =>
 ;     INTERN(CompStrToString rest dname)
 ;   name0 := DNameToSExpr1 first rest dname
@@ -53,7 +53,7 @@
 (DEFUN |DNameToSExpr1| (|dname|)
   (PROG (|name0| |args| |froms| |ret| |sxs|)
     (RETURN
-     (COND ((NULL |dname|) (|error| '|unexpected domain name|))
+     (COND ((NULL |dname|) (|error| "unexpected domain name"))
            ((EQUAL (CAR |dname|) |DNameStringID|)
             (INTERN (|CompStrToString| (CDR |dname|))))
            (#1='T
@@ -362,7 +362,7 @@
                   (LIST #'|oldAxiomPreCategoryBuild|) (LIST NIL))))
 
 ; oldAxiomPreCategoryParents(catform,dom) ==
-;   vars := ["$",:rest GETDATABASE(opOf catform, 'CONSTRUCTORFORM)]
+;   vars := ["%", :rest GETDATABASE(opOf(catform), 'CONSTRUCTORFORM)]
 ;   vals := [dom,:rest catform]
 ;   -- parents :=  GETDATABASE(opOf catform, 'PARENTS)
 ;   parents := parentsOf opOf catform
@@ -385,7 +385,7 @@
     (RETURN
      (PROGN
       (SETQ |vars|
-              (CONS '$
+              (CONS '%
                     (CDR (GETDATABASE (|opOf| |catform|) 'CONSTRUCTORFORM))))
       (SETQ |vals| (CONS |dom| (CDR |catform|)))
       (SETQ |parents| (|parentsOf| (|opOf| |catform|)))
@@ -680,7 +680,7 @@
 ;          EQL(op, $hashSeg) => op := 'SEGMENT
 ;      constant := nil
 ;      if hashCode? sig and self and EQL(sig, getDomainHash self) then
-;        sig := '($)
+;        sig := '(%)
 ;        constant := true
 ;      val :=
 ;        skipdefaults =>
@@ -707,7 +707,7 @@
       (SETQ |constant| NIL)
       (COND
        ((AND (|hashCode?| |sig|) |self| (EQL |sig| (|getDomainHash| |self|)))
-        (SETQ |sig| '($)) (SETQ |constant| T)))
+        (SETQ |sig| '(%)) (SETQ |constant| T)))
       (SETQ |val|
               (COND
                (|skipdefaults|
@@ -826,7 +826,7 @@
 ;      VECP dollar => hashType(dollar.0,0)
 ;      hashType(dollar,0)
 ;   box := [nil]
-;   not VECP(dispatch := first domain) => error "bad domain format"
+;   not VECP(dispatch := first domain) => error '"bad domain format"
 ;   lookupFun := dispatch.3
 ;   dispatch.0 = 0 =>  -- new compiler domain object
 ;        hashSig :=
@@ -858,7 +858,7 @@
 ;      EQL(op, $hashOpSet) => op := "setelt!"
 ;      EQL(op, $hashSeg) => op := 'SEGMENT
 ;   hashCode? sig and EQL(sig, hashPercent) =>
-;       SPADCALL first SPADCALL(rest dollar, dollar, op, '($), box,
+;       SPADCALL first SPADCALL(rest dollar, dollar, op, '(%), box,
 ;                               false, lookupFun)
 ;   first SPADCALL(rest dollar, dollar, op, sig, box, false, lookupFun)
 
@@ -884,7 +884,7 @@
          (SETQ |box| (LIST NIL))
          (COND
           ((NULL (VECP (SETQ |dispatch| (CAR |domain|))))
-           (|error| '|bad domain format|))
+           (|error| "bad domain format"))
           (#1#
            (PROGN
             (SETQ |lookupFun| (ELT |dispatch| 3))
@@ -933,7 +933,7 @@
                 ((AND (|hashCode?| |sig|) (EQL |sig| |hashPercent|))
                  (SPADCALL
                   (CAR
-                   (SPADCALL (CDR |dollar|) |dollar| |op| '($) |box| NIL
+                   (SPADCALL (CDR |dollar|) |dollar| |op| '(%) |box| NIL
                     |lookupFun|))))
                 (#1#
                  (CAR
@@ -942,7 +942,7 @@
 
 ; basicLookupCheckDefaults(op,sig,domain,dollar) ==
 ;   box := [nil]
-;   not VECP(dispatch := first dollar) => error "bad domain format"
+;   not VECP(dispatch := first dollar) => error '"bad domain format"
 ;   lookupFun := dispatch.3
 ;   dispatch.0 = 0  =>  -- new compiler domain object
 ;        hashPercent :=
@@ -966,7 +966,7 @@
       (SETQ |box| (LIST NIL))
       (COND
        ((NULL (VECP (SETQ |dispatch| (CAR |dollar|))))
-        (|error| '|bad domain format|))
+        (|error| "bad domain format"))
        (#1='T
         (PROGN
          (SETQ |lookupFun| (ELT |dispatch| 3))
@@ -1077,7 +1077,7 @@
       ('T (|newLookupInTable| |op| |sig| |dollar| |env| T))))))
 
 ; lazyMatchArg2(s,a,dollar,domain,typeFlag) ==
-;   if s = '$ then
+;   if s = '% then
 ; --  a = 0 => return true  --needed only if extra call in newGoGet to basicLookup
 ;     s := devaluate dollar -- calls from HasCategory can have $s
 ;   INTEGERP a =>
@@ -1093,7 +1093,7 @@
 ;         dhash =
 ;            (if hashCode? s then s else hashType(s, dhash))
 ;     lazyMatch(s,d,dollar,domain)                         --new style
-;   a = '$ => s = devaluate dollar
+;   a = '% => s = devaluate(dollar)
 ;   a = "$$" => s = devaluate domain
 ;   STRINGP a =>
 ;     STRINGP s => a = s
@@ -1109,7 +1109,7 @@
   (PROG (|d| |domainArg| |dhash| |ISTMP#1| |y| |op|)
     (RETURN
      (PROGN
-      (COND ((EQ |s| '$) (SETQ |s| (|devaluate| |dollar|))))
+      (COND ((EQ |s| '%) (SETQ |s| (|devaluate| |dollar|))))
       (COND
        ((INTEGERP |a|)
         (COND ((NULL |typeFlag|) (EQUAL |s| (ELT |domain| |a|)))
@@ -1134,7 +1134,7 @@
                        (COND ((|hashCode?| |s|) |s|)
                              (#1# (|hashType| |s| |dhash|))))))
               (#1# (|lazyMatch| |s| |d| |dollar| |domain|))))
-       ((EQ |a| '$) (EQUAL |s| (|devaluate| |dollar|)))
+       ((EQ |a| '%) (EQUAL |s| (|devaluate| |dollar|)))
        ((EQ |a| '$$) (EQUAL |s| (|devaluate| |domain|)))
        ((STRINGP |a|)
         (COND ((STRINGP |s|) (EQUAL |a| |s|))
@@ -1206,7 +1206,7 @@
 ;     VECP dollar => hashType(dollar.0,0)
 ;     hashType(dollar,0)
 ;   if hashCode? sig and EQL(sig, hashPercent) then
-;          sig := hashType('(Mapping $), hashPercent)
+;          sig := hashType('(Mapping %), hashPercent)
 ;   dollar = nil => systemError()
 ;   $lookupDefaults = true =>
 ;       -- lookup first in my cats
@@ -1216,7 +1216,7 @@
 ;   success := false
 ;   if $monitorNewWorld then
 ;     sayLooking(concat('"---->",form2String devaluate domain,
-;       '"----> searching op table for:","%l","  "),op,sig,dollar)
+;       '"----> searching op table for:","%l",'"  "),op,sig,dollar)
 ;   someMatch := false
 ;   numvec := getDomainByteVector domain
 ;   predvec := domain.3
@@ -1301,7 +1301,7 @@
                             (#1# (|hashType| |dollar| 0))))
               (COND
                ((AND (|hashCode?| |sig|) (EQL |sig| |hashPercent|))
-                (SETQ |sig| (|hashType| '(|Mapping| $) |hashPercent|))))
+                (SETQ |sig| (|hashType| '(|Mapping| %) |hashPercent|))))
               (COND ((NULL |dollar|) (|systemError|))
                     ((EQUAL |$lookupDefaults| T)
                      (OR
@@ -1316,7 +1316,7 @@
                         (|sayLooking|
                          (|concat| "---->"
                           (|form2String| (|devaluate| |domain|))
-                          "----> searching op table for:" '|%l| '|  |)
+                          "----> searching op table for:" '|%l| "  ")
                          |op| |sig| |dollar|)))
                       (SETQ |someMatch| NIL)
                       (SETQ |numvec| (|getDomainByteVector| |domain|))
@@ -1782,10 +1782,10 @@
 
 ; evalSlotDomain(u,dollar) ==
 ;   $returnNowhereFromGoGet: local := false
-;   $ : fluid := dollar
+;   % : fluid := dollar
 ;   $lookupDefaults : local := nil -- new world
 ;   isDomain u => u
-;   u = '$ => dollar
+;   u = '% => dollar
 ;   u = "$$" => dollar
 ;   FIXP u =>
 ;     VECP (y := dollar.u) => y
@@ -1809,25 +1809,19 @@
 ;   u is ['spadConstant,d,n] =>
 ;     dom := evalSlotDomain(d,dollar)
 ;     SPADCALL(dom . n)
-;   u is ['ELT,d,n] =>
-;     dom := evalSlotDomain(d,dollar)
-;     slot := dom . n
-;     slot is [=FUNCTION newGoGet,:env] =>
-;         replaceGoGetSlot env
-;     slot
 ;   u is [op,:argl] => APPLY(op,[evalSlotDomain(x,dollar) for x in argl])
 ;   systemErrorHere '"evalSlotDomain"
 
 (DEFUN |evalSlotDomain| (|u| |dollar|)
-  (PROG (|$lookupDefaults| $ |$returnNowhereFromGoGet| |op| |env| |slot| |n|
-         |d| |ISTMP#3| |dom| |ISTMP#2| |tag| |argl| |ISTMP#1| |v| |y|)
-    (DECLARE (SPECIAL |$lookupDefaults| $ |$returnNowhereFromGoGet|))
+  (PROG (|$lookupDefaults| % |$returnNowhereFromGoGet| |op| |n| |d| |ISTMP#3|
+         |dom| |ISTMP#2| |tag| |argl| |ISTMP#1| |v| |y|)
+    (DECLARE (SPECIAL |$lookupDefaults| % |$returnNowhereFromGoGet|))
     (RETURN
      (PROGN
       (SETQ |$returnNowhereFromGoGet| NIL)
-      (SETQ $ |dollar|)
+      (SETQ % |dollar|)
       (SETQ |$lookupDefaults| NIL)
-      (COND ((|isDomain| |u|) |u|) ((EQ |u| '$) |dollar|)
+      (COND ((|isDomain| |u|) |u|) ((EQ |u| '%) |dollar|)
             ((EQ |u| '$$) |dollar|)
             ((FIXP |u|)
              (COND ((VECP (SETQ |y| (ELT |dollar| |u|))) |y|)
@@ -1934,23 +1928,6 @@
              (PROGN
               (SETQ |dom| (|evalSlotDomain| |d| |dollar|))
               (SPADCALL (ELT |dom| |n|))))
-            ((AND (CONSP |u|) (EQ (CAR |u|) 'ELT)
-                  (PROGN
-                   (SETQ |ISTMP#1| (CDR |u|))
-                   (AND (CONSP |ISTMP#1|)
-                        (PROGN
-                         (SETQ |d| (CAR |ISTMP#1|))
-                         (SETQ |ISTMP#2| (CDR |ISTMP#1|))
-                         (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
-                              (PROGN (SETQ |n| (CAR |ISTMP#2|)) #1#))))))
-             (PROGN
-              (SETQ |dom| (|evalSlotDomain| |d| |dollar|))
-              (SETQ |slot| (ELT |dom| |n|))
-              (COND
-               ((AND (CONSP |slot|) (EQUAL (CAR |slot|) #'|newGoGet|)
-                     (PROGN (SETQ |env| (CDR |slot|)) #1#))
-                (|replaceGoGetSlot| |env|))
-               (#1# |slot|))))
             ((AND (CONSP |u|)
                   (PROGN (SETQ |op| (CAR |u|)) (SETQ |argl| (CDR |u|)) #1#))
              (APPLY |op|

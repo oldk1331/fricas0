@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |PAdicInteger;|)) 
 
-(DEFUN |PAdicInteger| (#1=#:G717)
+(DEFUN |PAdicInteger| (#1=#:G463)
   (SPROG NIL
-         (PROG (#2=#:G718)
+         (PROG (#2=#:G464)
            (RETURN
             (COND
              ((LETT #2#
@@ -18,54 +18,55 @@
                  ((NOT #2#) (HREM |$ConstructorCache| '|PAdicInteger|)))))))))) 
 
 (DEFUN |PAdicInteger;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT |dv$| (LIST '|PAdicInteger| DV$1))
-          (LETT $ (GETREFV 28))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 26))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PAdicInteger| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|PAdicInteger| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL
-              (|InnerPAdicInteger| (NRTEVAL (QREFELT $ 6)) (NRTEVAL 'T))
+              (|InnerPAdicInteger| (NRTEVAL (QREFELT % 6)) (NRTEVAL 'T))
               (|local| |#1|) (|Integer|) (|SparseUnivariatePolynomial| 7)
               (|Stream| 7) (|NonNegativeInteger|)
-              (|Record| (|:| |coef1| $) (|:| |coef2| $))
-              (|Union| 11 '#1="failed") (|Union| 14 '#1#) (|List| $)
-              (|Record| (|:| |coef1| $) (|:| |coef2| $) (|:| |generator| $))
-              (|Record| (|:| |quotient| $) (|:| |remainder| $)) (|Boolean|)
-              (|Record| (|:| |coef| 14) (|:| |generator| $))
-              (|SparseUnivariatePolynomial| $)
-              (|Record| (|:| |llcm_res| $) (|:| |coeff1| $) (|:| |coeff2| $))
-              (|Record| (|:| |unit| $) (|:| |canonical| $) (|:| |associate| $))
-              (|Union| $ '"failed") (|PositiveInteger|) (|String|)
-              (|SingleInteger|) (|HashState|) (|OutputForm|))
+              (|Record| (|:| |coef1| %) (|:| |coef2| %))
+              (|Union| 11 '#1="failed") (|Union| 14 '#1#) (|List| %)
+              (|Record| (|:| |coef1| %) (|:| |coef2| %) (|:| |generator| %))
+              (|Record| (|:| |quotient| %) (|:| |remainder| %)) (|Boolean|)
+              (|Record| (|:| |coef| 14) (|:| |generator| %))
+              (|SparseUnivariatePolynomial| %)
+              (|Record| (|:| |llcm_res| %) (|:| |coeff1| %) (|:| |coeff2| %))
+              (|Record| (|:| |unit| %) (|:| |canonical| %) (|:| |associate| %))
+              (|Union| % '"failed") (|PositiveInteger|) (|String|)
+              (|OutputForm|))
            '#() 'NIL
            (CONS
             (|makeByteWordVec2| 1
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0 0 0 0 0 0 0 0 0 0 0))
+                                  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
             (CONS
              '#(NIL |EuclideanDomain&| NIL |GcdDomain&| NIL NIL NIL NIL
-                |EntireRing&| |Algebra&| NIL |Rng&| NIL |Module&| NIL NIL
-                |NonAssociativeRing&| NIL |NonAssociativeRng&| NIL
-                |AbelianGroup&| NIL NIL NIL NIL |MagmaWithUnit&|
-                |NonAssociativeSemiRng&| |AbelianMonoid&| |Magma&|
-                |AbelianSemiGroup&| NIL |SetCategory&| NIL NIL NIL |BasicType&|
-                NIL)
+                |EntireRing&| |Algebra&| NIL |NonAssociativeAlgebra&| |Rng&|
+                NIL |Module&| NIL NIL |NonAssociativeRing&| NIL
+                |NonAssociativeRng&| NIL |AbelianGroup&| NIL NIL NIL NIL
+                |MagmaWithUnit&| |NonAssociativeSemiRng&| |AbelianMonoid&|
+                |Magma&| |AbelianSemiGroup&| NIL |SetCategory&| NIL NIL NIL
+                |BasicType&| NIL)
              (CONS
               '#((|PAdicIntegerCategory| 6) (|EuclideanDomain|)
                  (|PrincipalIdealDomain|) (|GcdDomain|) (|IntegralDomain|)
                  (|CommutativeRing|) (|LeftOreRing|) (|CharacteristicZero|)
-                 (|EntireRing|) (|Algebra| $$) (|Ring|) (|Rng|) (|SemiRing|)
+                 (|EntireRing|) (|Algebra| $$) (|Ring|)
+                 (|NonAssociativeAlgebra| $$) (|Rng|) (|SemiRing|)
                  (|Module| $$) (|SemiRng|) (|BiModule| $$ $$)
                  (|NonAssociativeRing|) (|LeftModule| $$) (|NonAssociativeRng|)
                  (|RightModule| $$) (|AbelianGroup|) (|Monoid|)
@@ -74,6 +75,6 @@
                  (|AbelianMonoid|) (|Magma|) (|AbelianSemiGroup|)
                  (|CommutativeStar|) (|SetCategory|) (|noZeroDivisors|)
                  (|TwoSidedRecip|) (|unitsKnown|) (|BasicType|)
-                 (|CoercibleTo| 27))
+                 (|CoercibleTo| 25))
               (|makeByteWordVec2| -999999 'NIL))))
            '|lookupIncomplete|)) 

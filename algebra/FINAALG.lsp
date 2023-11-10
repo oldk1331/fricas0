@@ -6,7 +6,7 @@
 (DEFPARAMETER |FiniteRankNonAssociativeAlgebra;AL| 'NIL) 
 
 (DEFUN |FiniteRankNonAssociativeAlgebra| (|t#1|)
-  (LET (#1=#:G711 (#2=#:G712 (|devaluate| |t#1|)))
+  (LET (#1=#:G470 (#2=#:G471 (|devaluate| |t#1|)))
     (COND
      ((SETQ #1# (|assoc| #2# |FiniteRankNonAssociativeAlgebra;AL|)) (CDR #1#))
      (T
@@ -17,7 +17,7 @@
       #1#)))) 
 
 (DEFUN |FiniteRankNonAssociativeAlgebra;| (|t#1|)
-  (SPROG ((#1=#:G710 NIL))
+  (SPROG ((#1=#:G469 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -28,7 +28,7 @@
                                       |FiniteRankNonAssociativeAlgebra;CAT|
                                       (|Join| (|NonAssociativeAlgebra| '|t#1|)
                                               (|mkCategory|
-                                               '(((|someBasis| ((|Vector| $)))
+                                               '(((|someBasis| ((|Vector| %)))
                                                   T)
                                                  ((|rank|
                                                    ((|PositiveInteger|)))
@@ -36,59 +36,59 @@
                                                  ((|conditionsForIdempotents|
                                                    ((|List|
                                                      (|Polynomial| |t#1|))
-                                                    (|Vector| $)))
+                                                    (|Vector| %)))
                                                   T)
                                                  ((|structuralConstants|
                                                    ((|Vector| (|Matrix| |t#1|))
-                                                    (|Vector| $)))
+                                                    (|Vector| %)))
                                                   T)
                                                  ((|leftRegularRepresentation|
-                                                   ((|Matrix| |t#1|) $
-                                                    (|Vector| $)))
+                                                   ((|Matrix| |t#1|) %
+                                                    (|Vector| %)))
                                                   T)
                                                  ((|rightRegularRepresentation|
-                                                   ((|Matrix| |t#1|) $
-                                                    (|Vector| $)))
+                                                   ((|Matrix| |t#1|) %
+                                                    (|Vector| %)))
                                                   T)
-                                                 ((|leftTrace| (|t#1| $)) T)
-                                                 ((|rightTrace| (|t#1| $)) T)
-                                                 ((|leftNorm| (|t#1| $)) T)
-                                                 ((|rightNorm| (|t#1| $)) T)
+                                                 ((|leftTrace| (|t#1| %)) T)
+                                                 ((|rightTrace| (|t#1| %)) T)
+                                                 ((|leftNorm| (|t#1| %)) T)
+                                                 ((|rightNorm| (|t#1| %)) T)
                                                  ((|coordinates|
-                                                   ((|Vector| |t#1|) $
-                                                    (|Vector| $)))
+                                                   ((|Vector| |t#1|) %
+                                                    (|Vector| %)))
                                                   T)
                                                  ((|coordinates|
                                                    ((|Matrix| |t#1|)
-                                                    (|Vector| $) (|Vector| $)))
+                                                    (|Vector| %) (|Vector| %)))
                                                   T)
                                                  ((|represents|
-                                                   ($ (|Vector| |t#1|)
-                                                    (|Vector| $)))
+                                                   (% (|Vector| |t#1|)
+                                                    (|Vector| %)))
                                                   T)
                                                  ((|leftDiscriminant|
-                                                   (|t#1| (|Vector| $)))
+                                                   (|t#1| (|Vector| %)))
                                                   T)
                                                  ((|rightDiscriminant|
-                                                   (|t#1| (|Vector| $)))
+                                                   (|t#1| (|Vector| %)))
                                                   T)
                                                  ((|leftTraceMatrix|
                                                    ((|Matrix| |t#1|)
-                                                    (|Vector| $)))
+                                                    (|Vector| %)))
                                                   T)
                                                  ((|rightTraceMatrix|
                                                    ((|Matrix| |t#1|)
-                                                    (|Vector| $)))
+                                                    (|Vector| %)))
                                                   T)
                                                  ((|leftCharacteristicPolynomial|
                                                    ((|SparseUnivariatePolynomial|
                                                      |t#1|)
-                                                    $))
+                                                    %))
                                                   T)
                                                  ((|rightCharacteristicPolynomial|
                                                    ((|SparseUnivariatePolynomial|
                                                      |t#1|)
-                                                    $))
+                                                    %))
                                                   T)
                                                  ((|commutative?|
                                                    ((|Boolean|)))
@@ -134,15 +134,15 @@
                                                  ((|lieAlgebra?| ((|Boolean|)))
                                                   T)
                                                  ((|recip|
-                                                   ((|Union| $ "failed") $))
+                                                   ((|Union| % "failed") %))
                                                   (|has| |t#1|
                                                          (|IntegralDomain|)))
                                                  ((|leftRecip|
-                                                   ((|Union| $ "failed") $))
+                                                   ((|Union| % "failed") %))
                                                   (|has| |t#1|
                                                          (|IntegralDomain|)))
                                                  ((|rightRecip|
-                                                   ((|Union| $ "failed") $))
+                                                   ((|Union| % "failed") %))
                                                   (|has| |t#1|
                                                          (|IntegralDomain|)))
                                                  ((|associatorDependence|
@@ -152,41 +152,41 @@
                                                  ((|leftMinimalPolynomial|
                                                    ((|SparseUnivariatePolynomial|
                                                      |t#1|)
-                                                    $))
+                                                    %))
                                                   (|has| |t#1|
                                                          (|IntegralDomain|)))
                                                  ((|rightMinimalPolynomial|
                                                    ((|SparseUnivariatePolynomial|
                                                      |t#1|)
-                                                    $))
+                                                    %))
                                                   (|has| |t#1|
                                                          (|IntegralDomain|)))
                                                  ((|leftUnits|
                                                    ((|Union|
                                                      (|Record|
-                                                      (|:| |particular| $)
-                                                      (|:| |basis| (|List| $)))
+                                                      (|:| |particular| %)
+                                                      (|:| |basis| (|List| %)))
                                                      "failed")))
                                                   (|has| |t#1|
                                                          (|IntegralDomain|)))
                                                  ((|rightUnits|
                                                    ((|Union|
                                                      (|Record|
-                                                      (|:| |particular| $)
-                                                      (|:| |basis| (|List| $)))
+                                                      (|:| |particular| %)
+                                                      (|:| |basis| (|List| %)))
                                                      "failed")))
                                                   (|has| |t#1|
                                                          (|IntegralDomain|)))
                                                  ((|leftUnit|
-                                                   ((|Union| $ "failed")))
+                                                   ((|Union| % "failed")))
                                                   (|has| |t#1|
                                                          (|IntegralDomain|)))
                                                  ((|rightUnit|
-                                                   ((|Union| $ "failed")))
+                                                   ((|Union| % "failed")))
                                                   (|has| |t#1|
                                                          (|IntegralDomain|)))
                                                  ((|unit|
-                                                   ((|Union| $ "failed")))
+                                                   ((|Union| % "failed")))
                                                   (|has| |t#1|
                                                          (|IntegralDomain|))))
                                                '(((|unitsKnown|)

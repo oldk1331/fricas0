@@ -1,26 +1,26 @@
 
 (SDEFUN |UNISEG2;map;MUsUs;1|
         ((|f| (|Mapping| S R)) (|u| (|UniversalSegment| R))
-         ($ (|UniversalSegment| S)))
+         (% (|UniversalSegment| S)))
         (SPROG ((|s| (S)))
-               (SEQ (LETT |s| (SPADCALL (SPADCALL |u| (QREFELT $ 9)) |f|))
+               (SEQ (LETT |s| (SPADCALL (SPADCALL |u| (QREFELT % 9)) |f|))
                     (EXIT
                      (COND
-                      ((SPADCALL |u| (QREFELT $ 11))
+                      ((SPADCALL |u| (QREFELT % 11))
                        (SPADCALL |s|
-                                 (SPADCALL (SPADCALL |u| (QREFELT $ 12)) |f|)
-                                 (QREFELT $ 14)))
-                      ('T (SPADCALL |s| (QREFELT $ 15)))))))) 
+                                 (SPADCALL (SPADCALL |u| (QREFELT % 12)) |f|)
+                                 (QREFELT % 14)))
+                      ('T (SPADCALL |s| (QREFELT % 15)))))))) 
 
 (SDEFUN |UNISEG2;map;MUsS;2|
-        ((|f| (|Mapping| S R)) (|u| (|UniversalSegment| R)) ($ (|Stream| S)))
-        (SPADCALL |f| (SPADCALL |u| (QREFELT $ 19)) (QREFELT $ 22))) 
+        ((|f| (|Mapping| S R)) (|u| (|UniversalSegment| R)) (% (|Stream| S)))
+        (SPADCALL |f| (SPADCALL |u| (QREFELT % 19)) (QREFELT % 22))) 
 
 (DECLAIM (NOTINLINE |UniversalSegmentFunctions2;|)) 
 
-(DEFUN |UniversalSegmentFunctions2| (&REST #1=#:G695)
+(DEFUN |UniversalSegmentFunctions2| (&REST #1=#:G454)
   (SPROG NIL
-         (PROG (#2=#:G696)
+         (PROG (#2=#:G455)
            (RETURN
             (COND
              ((LETT #2#
@@ -39,30 +39,30 @@
                         '|UniversalSegmentFunctions2|)))))))))) 
 
 (DEFUN |UniversalSegmentFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|UniversalSegmentFunctions2| DV$1 DV$2))
-          (LETT $ (GETREFV 24))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 24))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
                                               (|HasCategory| |#1|
                                                              '(|OrderedRing|))))))
           (|haddProp| |$ConstructorCache| '|UniversalSegmentFunctions2|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
           (COND
            ((|testBitVector| |pv$| 1)
-            (QSETREFV $ 23
-                      (CONS (|dispatchFunction| |UNISEG2;map;MUsS;2|) $))))
-          $))) 
+            (QSETREFV % 23
+                      (CONS (|dispatchFunction| |UNISEG2;map;MUsS;2|) %))))
+          %))) 
 
 (MAKEPROP '|UniversalSegmentFunctions2| '|infovec|
           (LIST

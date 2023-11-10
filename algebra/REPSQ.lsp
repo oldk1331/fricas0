@@ -1,29 +1,29 @@
 
-(SDEFUN |REPSQ;expt;SPiS;1| ((|x| (S)) (|n| (|PositiveInteger|)) ($ (S)))
+(SDEFUN |REPSQ;expt;SPiS;1| ((|x| (S)) (|n| (|PositiveInteger|)) (% (S)))
         (COND ((EQL |n| 1) |x|)
               ((ODDP |n|)
                (SPADCALL |x|
-                         (SPADCALL (SPADCALL |x| |x| (QREFELT $ 7))
-                                   (ASH |n| -1) (QREFELT $ 9))
-                         (QREFELT $ 7)))
+                         (SPADCALL (SPADCALL |x| |x| (QREFELT % 7))
+                                   (ASH |n| -1) (QREFELT % 9))
+                         (QREFELT % 7)))
               ('T
-               (SPADCALL (SPADCALL |x| |x| (QREFELT $ 7)) (ASH |n| -1)
-                         (QREFELT $ 9))))) 
+               (SPADCALL (SPADCALL |x| |x| (QREFELT % 7)) (ASH |n| -1)
+                         (QREFELT % 9))))) 
 
 (DECLAIM (NOTINLINE |RepeatedSquaring;|)) 
 
 (DEFUN |RepeatedSquaring| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RepeatedSquaring| DV$1))
-          (LETT $ (GETREFV 10))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 10))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|RepeatedSquaring| '|infovec|
           (LIST

@@ -1,27 +1,27 @@
 
 (SDEFUN |REDORDER;localbinom|
-        ((|j| (|Integer|)) (|i| (|Integer|)) ($ (|Integer|)))
-        (COND ((> |j| |i|) (SPADCALL |j| (+ |i| 1) (QREFELT $ 13))) ('T 0))) 
+        ((|j| (|Integer|)) (|i| (|Integer|)) (% (|Integer|)))
+        (COND ((> |j| |i|) (SPADCALL |j| (+ |i| 1) (QREFELT % 13))) ('T 0))) 
 
 (SDEFUN |REDORDER;locals|
         ((|s| (|PrimitiveArray| F)) (|j| (|Integer|)) (|i| (|Integer|))
-         ($ (F)))
+         (% (F)))
         (COND ((> |j| |i|) (QAREF1 |s| (- (- |j| |i|) 1)))
-              ('T (|spadConstant| $ 14)))) 
+              ('T (|spadConstant| % 14)))) 
 
 (SDEFUN |REDORDER;ReduceOrder;LLR;3|
         ((|l| (L)) (|sols| (|List| F))
-         ($ (|Record| (|:| |eq| L) (|:| |op| (|List| F)))))
+         (% (|Record| (|:| |eq| L) (|:| |op| (|List| F)))))
         (SPROG
-         ((|rec| (|Record| (|:| |eq| L) (|:| |op| (|List| F)))) (#1=#:G714 NIL)
-          (|s| NIL) (#2=#:G713 NIL) (|neweq| (L)) (|sol| (F)))
+         ((|rec| (|Record| (|:| |eq| L) (|:| |op| (|List| F)))) (#1=#:G458 NIL)
+          (|s| NIL) (#2=#:G457 NIL) (|neweq| (L)) (|sol| (F)))
          (SEQ
           (COND ((NULL |sols|) (CONS |l| NIL))
                 ('T
                  (SEQ
                   (LETT |neweq|
                         (SPADCALL |l| (LETT |sol| (|SPADfirst| |sols|))
-                                  (QREFELT $ 15)))
+                                  (QREFELT % 15)))
                   (LETT |rec|
                         (SPADCALL |neweq|
                                   (PROGN
@@ -36,56 +36,56 @@
                                          (EXIT
                                           (LETT #2#
                                                 (CONS
-                                                 (SPADCALL (QREFELT $ 9)
+                                                 (SPADCALL (QREFELT % 9)
                                                            (SPADCALL |s| |sol|
-                                                                     (QREFELT $
+                                                                     (QREFELT %
                                                                               16))
-                                                           (QREFELT $ 17))
+                                                           (QREFELT % 17))
                                                  #2#))))
                                         (LETT #1# (CDR #1#)) (GO G190) G191
                                         (EXIT (NREVERSE #2#))))
-                                  (QREFELT $ 20)))
+                                  (QREFELT % 20)))
                   (EXIT
                    (CONS (QCAR |rec|)
-                         (SPADCALL (QCDR |rec|) |sol| (QREFELT $ 21)))))))))) 
+                         (SPADCALL (QCDR |rec|) |sol| (QREFELT % 21)))))))))) 
 
 (SDEFUN |REDORDER;ithcoef|
-        ((|eq| (L)) (|i| (|Integer|)) (|s| (|PrimitiveArray| F)) ($ (F)))
+        ((|eq| (L)) (|i| (|Integer|)) (|s| (|PrimitiveArray| F)) (% (F)))
         (SPROG ((|ans| (F)) (|j| (|NonNegativeInteger|)))
-               (SEQ (LETT |ans| (|spadConstant| $ 14))
+               (SEQ (LETT |ans| (|spadConstant| % 14))
                     (SEQ G190
                          (COND
                           ((NULL
-                            (SPADCALL |eq| (|spadConstant| $ 22)
-                                      (QREFELT $ 24)))
+                            (SPADCALL |eq| (|spadConstant| % 22)
+                                      (QREFELT % 24)))
                            (GO G191)))
-                         (SEQ (LETT |j| (SPADCALL |eq| (QREFELT $ 26)))
+                         (SEQ (LETT |j| (SPADCALL |eq| (QREFELT % 26)))
                               (LETT |ans|
                                     (SPADCALL |ans|
                                               (SPADCALL
                                                (SPADCALL
                                                 (|REDORDER;localbinom| |j| |i|
-                                                 $)
+                                                 %)
                                                 (|REDORDER;locals| |s| |j| |i|
-                                                 $)
-                                                (QREFELT $ 27))
-                                               (SPADCALL |eq| (QREFELT $ 28))
-                                               (QREFELT $ 29))
-                                              (QREFELT $ 30)))
+                                                 %)
+                                                (QREFELT % 27))
+                                               (SPADCALL |eq| (QREFELT % 28))
+                                               (QREFELT % 29))
+                                              (QREFELT % 30)))
                               (EXIT
-                               (LETT |eq| (SPADCALL |eq| (QREFELT $ 31)))))
+                               (LETT |eq| (SPADCALL |eq| (QREFELT % 31)))))
                          NIL (GO G190) G191 (EXIT NIL))
                     (EXIT |ans|)))) 
 
-(SDEFUN |REDORDER;ReduceOrder;LFL;5| ((|eq| (L)) (|sol| (F)) ($ (L)))
+(SDEFUN |REDORDER;ReduceOrder;LFL;5| ((|eq| (L)) (|sol| (F)) (% (L)))
         (SPROG
-         ((|ans| (L)) (#1=#:G735 NIL) (#2=#:G730 NIL) (|i| NIL) (|si| (F))
-          (#3=#:G734 NIL) (#4=#:G726 NIL) (|s| (|PrimitiveArray| F))
+         ((|ans| (L)) (#1=#:G475 NIL) (#2=#:G470 NIL) (|i| NIL) (|si| (F))
+          (#3=#:G474 NIL) (#4=#:G466 NIL) (|s| (|PrimitiveArray| F))
           (|n| (|NonNegativeInteger|)))
          (SEQ
           (LETT |s|
-                (MAKEARR1 (LETT |n| (SPADCALL |eq| (QREFELT $ 26)))
-                          (|spadConstant| $ 14)))
+                (MAKEARR1 (LETT |n| (SPADCALL |eq| (QREFELT % 26)))
+                          (|spadConstant| % 14)))
           (LETT |si| |sol|) (QSETAREF1 |s| 0 |si|)
           (SEQ (LETT |i| 1)
                (LETT #3#
@@ -97,10 +97,10 @@
                 (EXIT
                  (QSETAREF1 |s| |i|
                             (LETT |si|
-                                  (SPADCALL (QREFELT $ 9) |si|
-                                            (QREFELT $ 17))))))
+                                  (SPADCALL (QREFELT % 9) |si|
+                                            (QREFELT % 17))))))
                (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
-          (LETT |ans| (|spadConstant| $ 22))
+          (LETT |ans| (|spadConstant| % 22))
           (SEQ (LETT |i| 0)
                (LETT #1#
                      (PROG1 (LETT #2# (- |n| 1))
@@ -111,17 +111,17 @@
                 (EXIT
                  (LETT |ans|
                        (SPADCALL |ans|
-                                 (SPADCALL (|REDORDER;ithcoef| |eq| |i| |s| $)
-                                           |i| (QREFELT $ 32))
-                                 (QREFELT $ 33)))))
+                                 (SPADCALL (|REDORDER;ithcoef| |eq| |i| |s| %)
+                                           |i| (QREFELT % 32))
+                                 (QREFELT % 33)))))
                (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
           (EXIT |ans|)))) 
 
 (DECLAIM (NOTINLINE |ReductionOfOrder;|)) 
 
-(DEFUN |ReductionOfOrder| (&REST #1=#:G736)
+(DEFUN |ReductionOfOrder| (&REST #1=#:G476)
   (SPROG NIL
-         (PROG (#2=#:G737)
+         (PROG (#2=#:G477)
            (RETURN
             (COND
              ((LETT #2#
@@ -139,22 +139,22 @@
                   (HREM |$ConstructorCache| '|ReductionOfOrder|)))))))))) 
 
 (DEFUN |ReductionOfOrder;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|ReductionOfOrder| DV$1 DV$2))
-          (LETT $ (GETREFV 34))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 34))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|ReductionOfOrder| (LIST DV$1 DV$2)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 9 (SPADCALL (QREFELT $ 8)))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 9 (SPADCALL (QREFELT % 8)))
+          %))) 
 
 (MAKEPROP '|ReductionOfOrder| '|infovec|
           (LIST

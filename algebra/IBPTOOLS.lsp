@@ -1,86 +1,86 @@
 
 (SDEFUN |IBPTOOLS;mapUnivariate;MSupR;1|
         ((|f| (|Mapping| K L)) (|poly| (|SparseUnivariatePolynomial| L))
-         ($ (R)))
+         (% (R)))
         (SPROG ((|ans| (R)))
-               (SEQ (LETT |ans| (|spadConstant| $ 10))
+               (SEQ (LETT |ans| (|spadConstant| % 10))
                     (SEQ G190
                          (COND
-                          ((NULL (NULL (SPADCALL |poly| (QREFELT $ 13))))
+                          ((NULL (NULL (SPADCALL |poly| (QREFELT % 13))))
                            (GO G191)))
                          (SEQ
                           (LETT |ans|
                                 (SPADCALL |ans|
                                           (SPADCALL
                                            (SPADCALL
-                                            (SPADCALL |poly| (QREFELT $ 14))
+                                            (SPADCALL |poly| (QREFELT % 14))
                                             |f|)
-                                           (SPADCALL |poly| (QREFELT $ 16))
-                                           (QREFELT $ 17))
-                                          (QREFELT $ 18)))
+                                           (SPADCALL |poly| (QREFELT % 16))
+                                           (QREFELT % 17))
+                                          (QREFELT % 18)))
                           (EXIT
-                           (LETT |poly| (SPADCALL |poly| (QREFELT $ 19)))))
+                           (LETT |poly| (SPADCALL |poly| (QREFELT % 19)))))
                          NIL (GO G190) G191 (EXIT NIL))
                     (EXIT |ans|)))) 
 
 (SDEFUN |IBPTOOLS;mapUnivariate;MRSup;2|
         ((|f| (|Mapping| L K)) (|poly| (R))
-         ($ (|SparseUnivariatePolynomial| L)))
+         (% (|SparseUnivariatePolynomial| L)))
         (SPROG ((|ans| (|SparseUnivariatePolynomial| L)))
-               (SEQ (LETT |ans| (|spadConstant| $ 22))
+               (SEQ (LETT |ans| (|spadConstant| % 22))
                     (SEQ G190
                          (COND
-                          ((NULL (NULL (SPADCALL |poly| (QREFELT $ 23))))
+                          ((NULL (NULL (SPADCALL |poly| (QREFELT % 23))))
                            (GO G191)))
                          (SEQ
                           (LETT |ans|
                                 (SPADCALL |ans|
                                           (SPADCALL
                                            (SPADCALL
-                                            (SPADCALL |poly| (QREFELT $ 24))
+                                            (SPADCALL |poly| (QREFELT % 24))
                                             |f|)
-                                           (SPADCALL |poly| (QREFELT $ 25))
-                                           (QREFELT $ 26))
-                                          (QREFELT $ 27)))
+                                           (SPADCALL |poly| (QREFELT % 25))
+                                           (QREFELT % 26))
+                                          (QREFELT % 27)))
                           (EXIT
-                           (LETT |poly| (SPADCALL |poly| (QREFELT $ 28)))))
+                           (LETT |poly| (SPADCALL |poly| (QREFELT % 28)))))
                          NIL (GO G190) G191 (EXIT NIL))
                     (EXIT |ans|)))) 
 
 (SDEFUN |IBPTOOLS;mapUnivariateIfCan;MSupU;3|
         ((|f| (|Mapping| #1=(|Union| K "failed") L))
-         (|poly| (|SparseUnivariatePolynomial| L)) ($ (|Union| R "failed")))
-        (SPROG ((|ans| (R)) (#2=#:G732 NIL) (|lc| #1#))
+         (|poly| (|SparseUnivariatePolynomial| L)) (% (|Union| R "failed")))
+        (SPROG ((|ans| (R)) (#2=#:G486 NIL) (|lc| #1#))
                (SEQ
                 (EXIT
-                 (SEQ (LETT |ans| (|spadConstant| $ 10))
+                 (SEQ (LETT |ans| (|spadConstant| % 10))
                       (SEQ G190
                            (COND
-                            ((NULL (NULL (SPADCALL |poly| (QREFELT $ 13))))
+                            ((NULL (NULL (SPADCALL |poly| (QREFELT % 13))))
                              (GO G191)))
                            (SEQ
                             (LETT |lc|
-                                  (SPADCALL (SPADCALL |poly| (QREFELT $ 14))
+                                  (SPADCALL (SPADCALL |poly| (QREFELT % 14))
                                             |f|))
                             (EXIT
                              (COND
                               ((QEQCAR |lc| 1)
                                (PROGN
                                 (LETT #2# (CONS 1 "failed"))
-                                (GO #3=#:G731)))
+                                (GO #3=#:G485)))
                               ('T
                                (SEQ
                                 (LETT |ans|
                                       (SPADCALL |ans|
                                                 (SPADCALL (QCDR |lc|)
                                                           (SPADCALL |poly|
-                                                                    (QREFELT $
+                                                                    (QREFELT %
                                                                              16))
-                                                          (QREFELT $ 17))
-                                                (QREFELT $ 18)))
+                                                          (QREFELT % 17))
+                                                (QREFELT % 18)))
                                 (EXIT
                                  (LETT |poly|
-                                       (SPADCALL |poly| (QREFELT $ 19)))))))))
+                                       (SPADCALL |poly| (QREFELT % 19)))))))))
                            NIL (GO G190) G191 (EXIT NIL))
                       (EXIT (CONS 0 |ans|))))
                 #3# (EXIT #2#)))) 
@@ -88,15 +88,15 @@
 (SDEFUN |IBPTOOLS;mapMatrixIfCan;MMU;4|
         ((|f| (|Mapping| (|Union| K "failed") L))
          (|mat| (|Matrix| (|SparseUnivariatePolynomial| L)))
-         ($ (|Union| (|Matrix| R) "failed")))
+         (% (|Union| (|Matrix| R) "failed")))
         (SPROG
-         ((#1=#:G756 NIL) (|poly| (|Union| R "failed")) (#2=#:G758 NIL)
-          (|j| NIL) (#3=#:G757 NIL) (|i| NIL) (|matOut| (|Matrix| R))
+         ((#1=#:G507 NIL) (|poly| (|Union| R "failed")) (#2=#:G509 NIL)
+          (|j| NIL) (#3=#:G508 NIL) (|i| NIL) (|matOut| (|Matrix| R))
           (|n| (|NonNegativeInteger|)) (|m| (|NonNegativeInteger|)))
          (SEQ
           (EXIT
            (SEQ (LETT |m| (ANROWS |mat|)) (LETT |n| (ANCOLS |mat|))
-                (LETT |matOut| (MAKE_MATRIX1 |m| |n| (|spadConstant| $ 10)))
+                (LETT |matOut| (MAKE_MATRIX1 |m| |n| (|spadConstant| % 10)))
                 (SEQ (LETT |i| 1) (LETT #3# |m|) G190
                      (COND ((|greater_SI| |i| #3#) (GO G191)))
                      (SEQ
@@ -106,13 +106,13 @@
                             (SEQ
                              (LETT |poly|
                                    (SPADCALL |f| (QAREF2O |mat| |i| |j| 1 1)
-                                             (QREFELT $ 34)))
+                                             (QREFELT % 34)))
                              (EXIT
                               (COND
                                ((QEQCAR |poly| 1)
                                 (PROGN
                                  (LETT #1# (CONS 1 "failed"))
-                                 (GO #4=#:G755)))
+                                 (GO #4=#:G506)))
                                ('T
                                 (QSETAREF2O |matOut| |i| |j| (QCDR |poly|) 1
                                             1)))))
@@ -124,33 +124,33 @@
 
 (SDEFUN |IBPTOOLS;mapBivariate;MUPSup;5|
         ((|f| (|Mapping| L K)) (|poly| (UP))
-         ($ (|SparseUnivariatePolynomial| (|SparseUnivariatePolynomial| L))))
+         (% (|SparseUnivariatePolynomial| (|SparseUnivariatePolynomial| L))))
         (SPROG
          ((|ans|
            (|SparseUnivariatePolynomial| (|SparseUnivariatePolynomial| L))))
-         (SEQ (LETT |ans| (|spadConstant| $ 40))
+         (SEQ (LETT |ans| (|spadConstant| % 40))
               (SEQ G190
                    (COND
-                    ((NULL (NULL (SPADCALL |poly| (QREFELT $ 41)))) (GO G191)))
+                    ((NULL (NULL (SPADCALL |poly| (QREFELT % 41)))) (GO G191)))
                    (SEQ
                     (LETT |ans|
                           (SPADCALL |ans|
                                     (SPADCALL
                                      (SPADCALL |f|
-                                               (SPADCALL |poly| (QREFELT $ 42))
-                                               (QREFELT $ 30))
-                                     (SPADCALL |poly| (QREFELT $ 43))
-                                     (QREFELT $ 44))
-                                    (QREFELT $ 45)))
-                    (EXIT (LETT |poly| (SPADCALL |poly| (QREFELT $ 46)))))
+                                               (SPADCALL |poly| (QREFELT % 42))
+                                               (QREFELT % 30))
+                                     (SPADCALL |poly| (QREFELT % 43))
+                                     (QREFELT % 44))
+                                    (QREFELT % 45)))
+                    (EXIT (LETT |poly| (SPADCALL |poly| (QREFELT % 46)))))
                    NIL (GO G190) G191 (EXIT NIL))
               (EXIT |ans|)))) 
 
 (DECLAIM (NOTINLINE |IntegralBasisPolynomialTools;|)) 
 
-(DEFUN |IntegralBasisPolynomialTools| (&REST #1=#:G766)
+(DEFUN |IntegralBasisPolynomialTools| (&REST #1=#:G517)
   (SPROG NIL
-         (PROG (#2=#:G767)
+         (PROG (#2=#:G518)
            (RETURN
             (COND
              ((LETT #2#
@@ -171,7 +171,7 @@
 
 (DEFUN |IntegralBasisPolynomialTools;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -179,18 +179,18 @@
     (LETT DV$3 (|devaluate| |#3|))
     (LETT DV$4 (|devaluate| |#4|))
     (LETT |dv$| (LIST '|IntegralBasisPolynomialTools| DV$1 DV$2 DV$3 DV$4))
-    (LETT $ (GETREFV 48))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (LETT % (GETREFV 48))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|IntegralBasisPolynomialTools|
-                (LIST DV$1 DV$2 DV$3 DV$4) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (SETF |pv$| (QREFELT $ 3))
-    $))) 
+                (LIST DV$1 DV$2 DV$3 DV$4) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (SETF |pv$| (QREFELT % 3))
+    %))) 
 
 (MAKEPROP '|IntegralBasisPolynomialTools| '|infovec|
           (LIST

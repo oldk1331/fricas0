@@ -1,38 +1,38 @@
 
-(SDEFUN |PTPACK;xCoord;PR;1| ((|p| (|Point| R)) ($ (R)))
-        (SPADCALL |p| 1 (QREFELT $ 10))) 
+(SDEFUN |PTPACK;xCoord;PR;1| ((|p| (|Point| R)) (% (R)))
+        (SPADCALL |p| 1 (QREFELT % 10))) 
 
-(SDEFUN |PTPACK;yCoord;PR;2| ((|p| (|Point| R)) ($ (R)))
-        (SPADCALL |p| 2 (QREFELT $ 10))) 
+(SDEFUN |PTPACK;yCoord;PR;2| ((|p| (|Point| R)) (% (R)))
+        (SPADCALL |p| 2 (QREFELT % 10))) 
 
-(SDEFUN |PTPACK;zCoord;PR;3| ((|p| (|Point| R)) ($ (R)))
-        (SPADCALL |p| 3 (QREFELT $ 10))) 
+(SDEFUN |PTPACK;zCoord;PR;3| ((|p| (|Point| R)) (% (R)))
+        (SPADCALL |p| 3 (QREFELT % 10))) 
 
-(SDEFUN |PTPACK;rCoord;PR;4| ((|p| (|Point| R)) ($ (R)))
-        (SPADCALL |p| 1 (QREFELT $ 10))) 
+(SDEFUN |PTPACK;rCoord;PR;4| ((|p| (|Point| R)) (% (R)))
+        (SPADCALL |p| 1 (QREFELT % 10))) 
 
-(SDEFUN |PTPACK;thetaCoord;PR;5| ((|p| (|Point| R)) ($ (R)))
-        (SPADCALL |p| 2 (QREFELT $ 10))) 
+(SDEFUN |PTPACK;thetaCoord;PR;5| ((|p| (|Point| R)) (% (R)))
+        (SPADCALL |p| 2 (QREFELT % 10))) 
 
-(SDEFUN |PTPACK;phiCoord;PR;6| ((|p| (|Point| R)) ($ (R)))
-        (SPADCALL |p| 3 (QREFELT $ 10))) 
+(SDEFUN |PTPACK;phiCoord;PR;6| ((|p| (|Point| R)) (% (R)))
+        (SPADCALL |p| 3 (QREFELT % 10))) 
 
-(SDEFUN |PTPACK;color;PR;7| ((|p| (|Point| R)) ($ (R)))
+(SDEFUN |PTPACK;color;PR;7| ((|p| (|Point| R)) (% (R)))
         (COND
-         ((> (SPADCALL |p| (QREFELT $ 18)) 3) (SPADCALL |p| 4 (QREFELT $ 10)))
-         ('T (SPADCALL |p| 3 (QREFELT $ 10))))) 
+         ((> (SPADCALL |p| (QREFELT % 18)) 3) (SPADCALL |p| 4 (QREFELT % 10)))
+         ('T (SPADCALL |p| 3 (QREFELT % 10))))) 
 
-(SDEFUN |PTPACK;hue;PR;8| ((|p| (|Point| R)) ($ (R)))
-        (SPADCALL |p| 3 (QREFELT $ 10))) 
+(SDEFUN |PTPACK;hue;PR;8| ((|p| (|Point| R)) (% (R)))
+        (SPADCALL |p| 3 (QREFELT % 10))) 
 
-(SDEFUN |PTPACK;shade;PR;9| ((|p| (|Point| R)) ($ (R)))
-        (SPADCALL |p| 4 (QREFELT $ 10))) 
+(SDEFUN |PTPACK;shade;PR;9| ((|p| (|Point| R)) (% (R)))
+        (SPADCALL |p| 4 (QREFELT % 10))) 
 
 (DECLAIM (NOTINLINE |PointPackage;|)) 
 
-(DEFUN |PointPackage| (#1=#:G705)
+(DEFUN |PointPackage| (#1=#:G459)
   (SPROG NIL
-         (PROG (#2=#:G706)
+         (PROG (#2=#:G460)
            (RETURN
             (COND
              ((LETT #2#
@@ -47,19 +47,19 @@
                  ((NOT #2#) (HREM |$ConstructorCache| '|PointPackage|)))))))))) 
 
 (DEFUN |PointPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|PointPackage| DV$1))
-          (LETT $ (GETREFV 22))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 22))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PointPackage| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|PointPackage| '|infovec|
           (LIST

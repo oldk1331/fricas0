@@ -33,19 +33,10 @@
 ;; this files contains basic routines for error handling
 (in-package "BOOT")
 
-#+:GCL
-(defun error-format (message args)
-  (let ((|$BreakMode| '|break|))
-    (declare (special |$BreakMode|))
-   (if (stringp message) (apply #'format nil message args) nil)))
-
-#-:GCL
-(defun error-format (c)
+(defun |error_format| (c)
   (let ((|$BreakMode| '|break|))
     (declare (special |$BreakMode|))
     (format nil "~a" c)))
-
-;;(defmacro |trappedSpadEval| (form) form) ;;nop for now
 
 #+:GCL
 (defun |resetStackLimits| () (system:reset-stack-limits))
@@ -55,31 +46,19 @@
 ;; failed union branch --  value returned for numeric failure
 (setq |$numericFailure| (cons 1 "failed"))
 
-(defvar |$oldBreakMode|)
-
 ;; following macro evaluates form returning Union(type-of form, "failed")
 
-#+:GCL
-(defmacro |trapNumericErrors| (form)
-  `(let ((|$oldBreakMode| |$BreakMode|)
-         (|$BreakMode| '|trapNumerics|)
-         (val))
-     (setq val (catch '|trapNumerics| ,form))
-     (if (eq val |$numericFailure|) val
-       (cons 0 val))))
-
-#-:GCL
 (defmacro |trapNumericErrors| (form)
     `(handler-case (cons 0 ,form)
          (arithmetic-error () |$numericFailure|)))
 
 (defmacro |trappedSpadEval| (form)
-  `(let ((|$BreakMode| '|trapSpadErrors|))
-       (catch '|trapSpadErrors| (cons 0 ,form))))
+    `(|trappedSpadEvalUnion| (cons 0 ,form)))
 
 (defmacro |trappedSpadEvalUnion| (form)
   `(let ((|$BreakMode| '|trapSpadErrors|))
-       (catch '|trapSpadErrors| ,form)))
+        (declare (special |$BreakMode|))
+        (CATCH '|trapSpadErrors| ,form)))
 
 #+:sbcl
 (progn
@@ -98,53 +77,3 @@
 #-:sbcl
 (defun |eval_with_timeout| (f ti) (|error| "unimplemented for this Lisp"))
 
-(defparameter |$inLispVM| nil)
-
-#-:GCL
-(defun spad-system-error-handler (c)
-  (block nil
-    (setq |$NeedToSignalSessionManager| T)
-    (if (and (boundp '|$inLispVM|) (boundp '|$BreakMode|))
-        (cond ((eq |$BreakMode| '|validate|)
-                   (|systemError| (error-format c)))
-               ((and (null |$inLispVM|)
-                     (memq |$BreakMode| '(|nobreak| |query| |resume| |quit|)))
-                   (let ((|$inLispVM| T)) ;; turn off handler
-                        (return (|systemError| (error-format c)))))
-               ((eq |$BreakMode| '|letPrint2|)
-                   (setq |$BreakMode| nil)
-                   (throw '|letPrint2| nil))))))
-
-
-
-;; the following form embeds around the akcl error handler
-#+:GCL
-(eval-when
- (load eval)
- (UNEMBED 'system:universal-error-handler)
- (EMBED 'system:universal-error-handler
-            '(lambda (type correctable? op
-                           continue-string error-string &rest args)
-               (block
-                nil
-                (setq |$NeedToSignalSessionManager| T)
-                (if (and (boundp '|$inLispVM|) (boundp '|$BreakMode|))
-                    (cond ((eq |$BreakMode| '|validate|)
-                           (|systemError| (error-format error-string args)))
-                          ((and (eq |$BreakMode| '|trapNumerics|)
-                                (eq type :ERROR))
-                           (setq |$BreakMode| nil)                         (throw '|trapNumerics| |$numericFailure|))
-                          ((and (eq |$BreakMode| '|trapNumerics|)
-                                (boundp '|$oldBreakMode|)
-                                (setq |$BreakMode| |$oldBreakMode|)
-                                nil)) ;; resets error handler
-                          ((and (null |$inLispVM|)
-                                (memq |$BreakMode| '(|nobreak| |query| |resume| |quit|)))
-                           (let ((|$inLispVM| T)) ;; turn off handler
-                             (return
-                              (|systemError| (error-format error-string args)))))
-                          ((eq |$BreakMode| '|letPrint2|)
-                           (setq |$BreakMode| nil)
-                           (throw '|letPrint2| nil))))
-                (apply system:universal-error-handler type correctable? op
-                       continue-string error-string args )))))

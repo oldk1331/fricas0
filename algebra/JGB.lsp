@@ -1,80 +1,80 @@
 
 (SDEFUN |JGB;convert1|
-        ((|p| (P)) ($ (|DistributedJetBundlePolynomial| R JB LJV E)))
+        ((|p| (P)) (% (|DistributedJetBundlePolynomial| R JB LJV E)))
         (SPROG
          ((|up| (|SparseUnivariatePolynomial| P))
           (|res| (|DistributedJetBundlePolynomial| R JB LJV E)) (|x| (JB))
           (|cc| (R)) (|xx| (|Union| JB "failed")))
-         (SEQ (LETT |xx| (SPADCALL |p| (QREFELT $ 12)))
+         (SEQ (LETT |xx| (SPADCALL |p| (QREFELT % 12)))
               (EXIT
                (COND
                 ((QEQCAR |xx| 1)
-                 (SEQ (LETT |cc| (SPADCALL |p| (QREFELT $ 13)))
-                      (EXIT (SPADCALL |cc| (QREFELT $ 15)))))
+                 (SEQ (LETT |cc| (SPADCALL |p| (QREFELT % 13)))
+                      (EXIT (SPADCALL |cc| (QREFELT % 15)))))
                 ('T
                  (SEQ (LETT |x| (QCDR |xx|))
                       (COND
-                       ((NULL (SPADCALL |x| (QREFELT $ 8) (QREFELT $ 18)))
+                       ((NULL (SPADCALL |x| (QREFELT % 8) (QREFELT % 18)))
                         (EXIT (|error| "illegal jet variable"))))
-                      (LETT |up| (SPADCALL |p| |x| (QREFELT $ 20)))
-                      (LETT |res| (|spadConstant| $ 21))
+                      (LETT |up| (SPADCALL |p| |x| (QREFELT % 20)))
+                      (LETT |res| (|spadConstant| % 21))
                       (SEQ G190
                            (COND
-                            ((NULL (NULL (SPADCALL |up| (QREFELT $ 23))))
+                            ((NULL (NULL (SPADCALL |up| (QREFELT % 23))))
                              (GO G191)))
                            (SEQ
                             (LETT |res|
                                   (SPADCALL |res|
                                             (SPADCALL
                                              (|JGB;convert1|
-                                              (SPADCALL |up| (QREFELT $ 24)) $)
-                                             |x| (SPADCALL |up| (QREFELT $ 26))
-                                             (QREFELT $ 27))
-                                            (QREFELT $ 28)))
-                            (EXIT (LETT |up| (SPADCALL |up| (QREFELT $ 29)))))
+                                              (SPADCALL |up| (QREFELT % 24)) %)
+                                             |x| (SPADCALL |up| (QREFELT % 26))
+                                             (QREFELT % 27))
+                                            (QREFELT % 28)))
+                            (EXIT (LETT |up| (SPADCALL |up| (QREFELT % 29)))))
                            NIL (GO G190) G191 (EXIT NIL))
                       (EXIT |res|)))))))) 
 
 (SDEFUN |JGB;convert2|
-        ((|p| (|DistributedJetBundlePolynomial| R JB LJV E)) ($ (P)))
+        ((|p| (|DistributedJetBundlePolynomial| R JB LJV E)) (% (P)))
         (SPROG
          ((|up|
            (|SparseUnivariatePolynomial|
             (|DistributedJetBundlePolynomial| R JB LJV E)))
           (|res| (P)) (|x| (JB)) (|cc| (R)) (|xx| (|Union| JB "failed")))
-         (SEQ (LETT |xx| (SPADCALL |p| (QREFELT $ 30)))
+         (SEQ (LETT |xx| (SPADCALL |p| (QREFELT % 30)))
               (EXIT
                (COND
                 ((QEQCAR |xx| 1)
-                 (SEQ (LETT |cc| (SPADCALL |p| (QREFELT $ 31)))
-                      (EXIT (SPADCALL |cc| (QREFELT $ 32)))))
+                 (SEQ (LETT |cc| (SPADCALL |p| (QREFELT % 31)))
+                      (EXIT (SPADCALL |cc| (QREFELT % 32)))))
                 ('T
                  (SEQ (LETT |x| (QCDR |xx|))
-                      (LETT |up| (SPADCALL |p| |x| (QREFELT $ 33)))
-                      (LETT |res| (|spadConstant| $ 34))
+                      (LETT |up| (SPADCALL |p| |x| (QREFELT % 33)))
+                      (LETT |res| (|spadConstant| % 34))
                       (SEQ G190
                            (COND
-                            ((NULL (NULL (SPADCALL |up| (QREFELT $ 36))))
+                            ((NULL (NULL (SPADCALL |up| (QREFELT % 36))))
                              (GO G191)))
                            (SEQ
                             (LETT |res|
                                   (SPADCALL |res|
                                             (SPADCALL
                                              (|JGB;convert2|
-                                              (SPADCALL |up| (QREFELT $ 37)) $)
-                                             |x| (SPADCALL |up| (QREFELT $ 38))
-                                             (QREFELT $ 39))
-                                            (QREFELT $ 40)))
-                            (EXIT (LETT |up| (SPADCALL |up| (QREFELT $ 41)))))
+                                              (SPADCALL |up| (QREFELT % 37)) %)
+                                             |x| (SPADCALL |up| (QREFELT % 38))
+                                             (QREFELT % 39))
+                                            (QREFELT % 40)))
+                            (EXIT (LETT |up| (SPADCALL |up| (QREFELT % 41)))))
                            NIL (GO G190) G191 (EXIT NIL))
                       (EXIT |res|)))))))) 
 
-(SDEFUN |JGB;groebner;2L;3| ((|lp| (|List| P)) ($ (|List| P)))
+(SDEFUN |JGB;groebner;2L;3| ((|lp| (|List| P)) (% (|List| P)))
         (SPROG
-         ((#1=#:G734 NIL) (|dp| NIL) (#2=#:G733 NIL)
+         ((#1=#:G483 NIL) (|dp| NIL) (#2=#:G482 NIL)
           (|gb| (|List| (|DistributedJetBundlePolynomial| R JB LJV E)))
           (|nlp| (|List| (|DistributedJetBundlePolynomial| R JB LJV E)))
-          (#3=#:G732 NIL) (|p| NIL) (#4=#:G731 NIL))
+          (#3=#:G481 NIL) (|p| NIL) (#4=#:G480 NIL))
          (SEQ
           (LETT |nlp|
                 (PROGN
@@ -83,10 +83,10 @@
                       (COND
                        ((OR (ATOM #3#) (PROGN (LETT |p| (CAR #3#)) NIL))
                         (GO G191)))
-                      (SEQ (EXIT (LETT #4# (CONS (|JGB;convert1| |p| $) #4#))))
+                      (SEQ (EXIT (LETT #4# (CONS (|JGB;convert1| |p| %) #4#))))
                       (LETT #3# (CDR #3#)) (GO G190) G191
                       (EXIT (NREVERSE #4#)))))
-          (LETT |gb| (SPADCALL |nlp| (QREFELT $ 43)))
+          (LETT |gb| (SPADCALL |nlp| (QREFELT % 43)))
           (EXIT
            (PROGN
             (LETT #2# NIL)
@@ -94,14 +94,14 @@
                  (COND
                   ((OR (ATOM #1#) (PROGN (LETT |dp| (CAR #1#)) NIL))
                    (GO G191)))
-                 (SEQ (EXIT (LETT #2# (CONS (|JGB;convert2| |dp| $) #2#))))
+                 (SEQ (EXIT (LETT #2# (CONS (|JGB;convert2| |dp| %) #2#))))
                  (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT (NREVERSE #2#)))))))) 
 
 (DECLAIM (NOTINLINE |JetGroebner;|)) 
 
-(DEFUN |JetGroebner| (&REST #1=#:G735)
+(DEFUN |JetGroebner| (&REST #1=#:G484)
   (SPROG NIL
-         (PROG (#2=#:G736)
+         (PROG (#2=#:G485)
            (RETURN
             (COND
              ((LETT #2#
@@ -118,7 +118,7 @@
 
 (DEFUN |JetGroebner;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -127,28 +127,28 @@
     (LETT DV$4 (|devaluate| |#4|))
     (LETT DV$5 (|devaluate| |#5|))
     (LETT |dv$| (LIST '|JetGroebner| DV$1 DV$2 DV$3 DV$4 DV$5))
-    (LETT $ (GETREFV 46))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (LETT % (GETREFV 46))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|JetGroebner|
-                (LIST DV$1 DV$2 DV$3 DV$4 DV$5) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (QSETREFV $ 10 |#5|)
-    (SETF |pv$| (QREFELT $ 3))
-    $))) 
+                (LIST DV$1 DV$2 DV$3 DV$4 DV$5) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (QSETREFV % 10 |#5|)
+    (SETF |pv$| (QREFELT % 3))
+    %))) 
 
 (MAKEPROP '|JetGroebner| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|local| |#4|) (|local| |#5|)
               (|Union| 7 '"failed") (0 . |mainVariable|) (5 . |retract|)
-              (|DistributedJetBundlePolynomial| 6 7 (NRTEVAL (QREFELT $ 8)) 10)
+              (|DistributedJetBundlePolynomial| 6 7 (NRTEVAL (QREFELT % 8)) 10)
               (10 . |coerce|) (|Boolean|) (|List| 7) (15 . |member?|)
-              (|SparseUnivariatePolynomial| $) (21 . |univariate|)
+              (|SparseUnivariatePolynomial| %) (21 . |univariate|)
               (27 . |Zero|) (|SparseUnivariatePolynomial| 9) (31 . |zero?|)
               (36 . |leadingCoefficient|) (|NonNegativeInteger|)
               (41 . |degree|) (46 . |monomial|) (53 . +) (59 . |reductum|)
@@ -156,7 +156,7 @@
               (79 . |univariate|) (85 . |Zero|)
               (|SparseUnivariatePolynomial| 14) (89 . |zero?|)
               (94 . |leadingCoefficient|) (99 . |degree|) (104 . |monomial|)
-              (111 . +) (117 . |reductum|) (|List| $) (122 . |groebner|)
+              (111 . +) (117 . |reductum|) (|List| %) (122 . |groebner|)
               (|List| 9) |JGB;groebner;2L;3|)
            '#(|groebner| 127) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))

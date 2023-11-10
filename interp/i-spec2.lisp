@@ -69,6 +69,38 @@
            (|putValue| |op| (|objNew| (|voidValue|) |$Void|))
            (|putModeSet| |op| (LIST |$Void|)))))))))))
 
+; up_tagged_union_dollar(op, t, t2, form) ==
+;     f1 := first(form)
+;     not(VECP(f1)) or not(f1.0 = 'construct) => nil
+;     c_arg := first(rest(form))
+;     c_arg is [op1, vtag, val] and is_OPTARG(op1) and (tag := is_tag(vtag)) =>
+;         up_tagged_construct1(op, tag, val, t)
+;     nil
+
+(DEFUN |up_tagged_union_dollar| (|op| |t| |t2| |form|)
+  (PROG (|f1| |c_arg| |op1| |ISTMP#1| |vtag| |ISTMP#2| |val| |tag|)
+    (RETURN
+     (PROGN
+      (SETQ |f1| (CAR |form|))
+      (COND ((OR (NULL (VECP |f1|)) (NULL (EQ (ELT |f1| 0) '|construct|))) NIL)
+            (#1='T
+             (PROGN
+              (SETQ |c_arg| (CAR (CDR |form|)))
+              (COND
+               ((AND (CONSP |c_arg|)
+                     (PROGN
+                      (SETQ |op1| (CAR |c_arg|))
+                      (SETQ |ISTMP#1| (CDR |c_arg|))
+                      (AND (CONSP |ISTMP#1|)
+                           (PROGN
+                            (SETQ |vtag| (CAR |ISTMP#1|))
+                            (SETQ |ISTMP#2| (CDR |ISTMP#1|))
+                            (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
+                                 (PROGN (SETQ |val| (CAR |ISTMP#2|)) #1#)))))
+                     (|is_OPTARG| |op1|) (SETQ |tag| (|is_tag| |vtag|)))
+                (|up_tagged_construct1| |op| |tag| |val| |t|))
+               (#1# NIL)))))))))
+
 ; upDollar t ==
 ;   -- Puts "dollar" property in atree node, and calls bottom up
 ;   t isnt [op,D,form] => nil
@@ -95,6 +127,9 @@
 ;     putModeSet(op,[t])
 ;
 ;   nargs := #rest form
+;
+;   nargs = 1 and f = 'construct and isTaggedUnion(t) and
+;       (ms := up_tagged_union_dollar(op, t, t2, form)) => ms
 ;
 ;   (ms := upDollarTuple(op, f, t, t2, rest form, nargs)) => ms
 ;
@@ -187,6 +222,12 @@
                      (PROGN
                       (SETQ |nargs| (LENGTH (CDR |form|)))
                       (COND
+                       ((AND (EQL |nargs| 1) (EQ |f| '|construct|)
+                             (|isTaggedUnion| |t|)
+                             (SETQ |ms|
+                                     (|up_tagged_union_dollar| |op| |t| |t2|
+                                      |form|)))
+                        |ms|)
                        ((SETQ |ms|
                                 (|upDollarTuple| |op| |f| |t| |t2| (CDR |form|)
                                  |nargs|))
@@ -476,7 +517,7 @@
 ;     isLocalVar(type) => ['unabbrev, type]
 ;     MKQ unabbrev type
 ;   catCode :=
-;     prop := unabbrev SUBST('$, '%, prop)
+;     prop := unabbrev(prop)
 ;     prop is [":", :.] => MKQ prop
 ;     ['evaluateType, MKQ prop]
 ;   code:=['newHasTest,['evaluateType, type], catCode]
@@ -507,7 +548,7 @@
                       (#1# (MKQ (|unabbrev| |type|)))))
         (SETQ |catCode|
                 (PROGN
-                 (SETQ |prop| (|unabbrev| (SUBST '$ '% |prop|)))
+                 (SETQ |prop| (|unabbrev| |prop|))
                  (COND
                   ((AND (CONSP |prop|) (EQ (CAR |prop|) '|:|)) (MKQ |prop|))
                   (#1# (LIST '|evaluateType| (MKQ |prop|))))))

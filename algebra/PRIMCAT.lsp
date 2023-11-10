@@ -9,13 +9,13 @@
          (SETQ |PrimitiveFunctionCategory;AL| (|PrimitiveFunctionCategory;|))))) 
 
 (DEFUN |PrimitiveFunctionCategory;| ()
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|Join|
                     (|mkCategory|
-                     '(((|integral| ($ $ (|Symbol|))) T)
-                       ((|integral| ($ $ (|SegmentBinding| $))) T))
+                     '(((|integral| (% % (|Symbol|))) T)
+                       ((|integral| (% % (|SegmentBinding| %))) T))
                      NIL NIL NIL)))
            (SETELT #1# 0 '(|PrimitiveFunctionCategory|))))) 
 

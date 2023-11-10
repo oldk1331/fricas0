@@ -1,19 +1,19 @@
 
 (SDEFUN |PMPRED;suchThat;SME;1|
         ((|p| (|Symbol|)) (|f| (|Mapping| (|Boolean|) D))
-         ($ (|Expression| (|Integer|))))
-        (SPADCALL (SPADCALL |p| (QREFELT $ 9)) |f| (QREFELT $ 12))) 
+         (% (|Expression| (|Integer|))))
+        (SPADCALL (SPADCALL |p| (QREFELT % 9)) |f| (QREFELT % 12))) 
 
 (SDEFUN |PMPRED;suchThat;SLE;2|
         ((|p| (|Symbol|)) (|l| (|List| (|Mapping| (|Boolean|) D)))
-         ($ (|Expression| (|Integer|))))
-        (SPADCALL (SPADCALL |p| (QREFELT $ 9)) |l| (QREFELT $ 15))) 
+         (% (|Expression| (|Integer|))))
+        (SPADCALL (SPADCALL |p| (QREFELT % 9)) |l| (QREFELT % 15))) 
 
 (DECLAIM (NOTINLINE |AttachPredicates;|)) 
 
-(DEFUN |AttachPredicates| (#1=#:G700)
+(DEFUN |AttachPredicates| (#1=#:G451)
   (SPROG NIL
-         (PROG (#2=#:G701)
+         (PROG (#2=#:G452)
            (RETURN
             (COND
              ((LETT #2#
@@ -29,19 +29,19 @@
                   (HREM |$ConstructorCache| '|AttachPredicates|)))))))))) 
 
 (DEFUN |AttachPredicates;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|AttachPredicates| DV$1))
-          (LETT $ (GETREFV 17))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 17))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|AttachPredicates| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|AttachPredicates| '|infovec|
           (LIST

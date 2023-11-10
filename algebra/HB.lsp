@@ -1,8 +1,8 @@
 
-(SDEFUN |HB;lfunc;3I;1| ((|d| (|Integer|)) (|n| (|Integer|)) ($ (|Integer|)))
+(SDEFUN |HB;lfunc;3I;1| ((|d| (|Integer|)) (|n| (|Integer|)) (% (|Integer|)))
         (SPROG
-         ((|res| (|Integer|)) (#1=#:G723 NIL) (|sum| (|Integer|))
-          (#2=#:G726 NIL) (|m| NIL))
+         ((|res| (|Integer|)) (#1=#:G476 NIL) (|sum| (|Integer|))
+          (#2=#:G479 NIL) (|m| NIL))
          (SEQ
           (COND ((< |n| 0) 0) ((EQL |n| 0) 1) ((EQL |n| 1) |d|)
                 ('T
@@ -17,7 +17,7 @@
                                      (+ |sum|
                                         (* |m|
                                            (SPADCALL |d| |m|
-                                                     (QREFELT $ 7)))))))))
+                                                     (QREFELT % 7)))))))))
                            (LETT |m| (|inc_SI| |m|)) (GO G190) G191 (EXIT NIL))
                       (EXIT
                        (LETT |res|
@@ -33,19 +33,19 @@
 
 (SDEFUN |HB;inHallBasis?;4IB;2|
         ((|n| (|Integer|)) (|i| (|Integer|)) (|j| (|Integer|))
-         (|l| (|Integer|)) ($ (|Boolean|)))
+         (|l| (|Integer|)) (% (|Boolean|)))
         (COND ((>= |i| |j|) NIL) ((OR (<= |j| |n|) (<= |l| |i|)) 'T) ('T NIL))) 
 
 (SDEFUN |HB;basis;2NniV;3|
         ((|n| (|NonNegativeInteger|)) (|c| (|NonNegativeInteger|))
-         ($ (|Vector| (|List| (|Integer|)))))
+         (% (|Vector| (|List| (|Integer|)))))
         (SPROG
          ((|numComms| #1=(|Integer|)) (|cW| (|Integer|))
           (|leftIndex| (|NonNegativeInteger|)) (|newNumComms| #1#)
-          (#2=#:G762 NIL) (|rightIndex| NIL) (|done| (|Boolean|))
+          (#2=#:G502 NIL) (|rightIndex| NIL) (|done| (|Boolean|))
           (|wt| (|Integer|)) (|firstindex| (|Vector| (|Integer|)))
-          (#3=#:G761 NIL) (|i| NIL) (|v| (|Vector| (|List| (|Integer|))))
-          (#4=#:G735 NIL) (|siz| (|Integer|)) (#5=#:G760 NIL)
+          (#3=#:G501 NIL) (|i| NIL) (|v| (|Vector| (|List| (|Integer|))))
+          (#4=#:G484 NIL) (|siz| (|Integer|)) (#5=#:G500 NIL)
           (|maxweight| (|NonNegativeInteger|)) (|gens| (|NonNegativeInteger|)))
          (SEQ (LETT |gens| |n|) (LETT |maxweight| |c|) (LETT |siz| 0)
               (SEQ (LETT |i| 1) (LETT #5# |maxweight|) G190
@@ -53,7 +53,7 @@
                    (SEQ
                     (EXIT
                      (LETT |siz|
-                           (+ |siz| (SPADCALL |gens| |i| (QREFELT $ 7))))))
+                           (+ |siz| (SPADCALL |gens| |i| (QREFELT % 7))))))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
               (LETT |v|
                     (MAKEARR1
@@ -64,10 +64,10 @@
               (SEQ (LETT |i| 1) (LETT #3# |gens|) G190
                    (COND ((|greater_SI| |i| #3#) (GO G191)))
                    (SEQ
-                    (EXIT (SPADCALL |v| |i| (LIST 0 1 |i|) (QREFELT $ 12))))
+                    (EXIT (SPADCALL |v| |i| (LIST 0 1 |i|) (QREFELT % 12))))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
               (LETT |firstindex| (MAKEARR1 |maxweight| 0)) (LETT |wt| 1)
-              (SPADCALL |firstindex| 1 1 (QREFELT $ 14))
+              (SPADCALL |firstindex| 1 1 (QREFELT % 14))
               (LETT |numComms| |gens|) (LETT |newNumComms| |numComms|)
               (LETT |done| NIL)
               (SEQ G190 (COND ((NULL (NULL |done|)) (GO G191)))
@@ -77,7 +77,7 @@
                                ('T
                                 (SEQ
                                  (SPADCALL |firstindex| |wt|
-                                           (+ |newNumComms| 1) (QREFELT $ 14))
+                                           (+ |newNumComms| 1) (QREFELT % 14))
                                  (LETT |leftIndex| 1) (LETT |cW| (- |wt| 1))
                                  (SEQ G190
                                       (COND
@@ -87,8 +87,8 @@
                                            (<=
                                             (SPADCALL
                                              (SPADCALL |v| |leftIndex|
-                                                       (QREFELT $ 15))
-                                             2 (QREFELT $ 16))
+                                                       (QREFELT % 15))
+                                             2 (QREFELT % 16))
                                             |cW|))
                                           ('T NIL)))
                                         (GO G191)))
@@ -96,12 +96,12 @@
                                        (SEQ
                                         (LETT |rightIndex|
                                               (SPADCALL |firstindex| |cW|
-                                                        (QREFELT $ 17)))
+                                                        (QREFELT % 17)))
                                         (LETT #2#
                                               (-
                                                (SPADCALL |firstindex|
                                                          (+ |cW| 1)
-                                                         (QREFELT $ 17))
+                                                         (QREFELT % 17))
                                                1))
                                         G190
                                         (COND ((> |rightIndex| #2#) (GO G191)))
@@ -113,10 +113,10 @@
                                                       (SPADCALL
                                                        (SPADCALL |v|
                                                                  |rightIndex|
-                                                                 (QREFELT $
+                                                                 (QREFELT %
                                                                           15))
-                                                       1 (QREFELT $ 16))
-                                                      (QREFELT $ 9))
+                                                       1 (QREFELT % 16))
+                                                      (QREFELT % 9))
                                             (SEQ
                                              (LETT |newNumComms|
                                                    (+ |newNumComms| 1))
@@ -124,7 +124,7 @@
                                               (SPADCALL |v| |newNumComms|
                                                         (LIST |leftIndex| |wt|
                                                               |rightIndex|)
-                                                        (QREFELT $ 12))))))))
+                                                        (QREFELT % 12))))))))
                                         (LETT |rightIndex| (+ |rightIndex| 1))
                                         (GO G190) G191 (EXIT NIL))
                                        (LETT |leftIndex| (+ |leftIndex| 1))
@@ -133,8 +133,8 @@
                                               (- |wt|
                                                  (SPADCALL
                                                   (SPADCALL |v| |leftIndex|
-                                                            (QREFELT $ 15))
-                                                  2 (QREFELT $ 16))))))
+                                                            (QREFELT % 15))
+                                                  2 (QREFELT % 16))))))
                                       NIL (GO G190) G191 (EXIT NIL))
                                  (EXIT (LETT |numComms| |newNumComms|)))))))
                    NIL (GO G190) G191 (EXIT NIL))
@@ -144,7 +144,7 @@
 
 (DEFUN |HallBasis| ()
   (SPROG NIL
-         (PROG (#1=#:G764)
+         (PROG (#1=#:G504)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|HallBasis|))
@@ -160,16 +160,16 @@
                  ((NOT #1#) (HREM |$ConstructorCache| '|HallBasis|)))))))))) 
 
 (DEFUN |HallBasis;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|HallBasis|))
-          (LETT $ (GETREFV 20))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|HallBasis| NIL (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 20))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|HallBasis| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|HallBasis| '|infovec|
           (LIST

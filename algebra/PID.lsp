@@ -8,18 +8,18 @@
         (T (SETQ |PrincipalIdealDomain;AL| (|PrincipalIdealDomain;|))))) 
 
 (DEFUN |PrincipalIdealDomain;| ()
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|GcdDomain|)
                            (|mkCategory|
                             '(((|principalIdeal|
-                                ((|Record| (|:| |coef| (|List| $))
-                                           (|:| |generator| $))
-                                 (|List| $)))
+                                ((|Record| (|:| |coef| (|List| %))
+                                           (|:| |generator| %))
+                                 (|List| %)))
                                T)
                               ((|expressIdealMember|
-                                ((|Union| (|List| $) "failed") (|List| $) $))
+                                ((|Union| (|List| %) "failed") (|List| %) %))
                                T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|PrincipalIdealDomain|))))) 

@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |GuessFinite;|)) 
 
-(DEFUN |GuessFinite| (#1=#:G715)
+(DEFUN |GuessFinite| (#1=#:G466)
   (SPROG NIL
-         (PROG (#2=#:G716)
+         (PROG (#2=#:G467)
            (RETURN
             (COND
              ((LETT #2#
@@ -18,13 +18,13 @@
                  ((NOT #2#) (HREM |$ConstructorCache| '|GuessFinite|)))))))))) 
 
 (DEFUN |GuessFinite;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|GuessFinite| DV$1))
-          (LETT $ (GETREFV 31))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 31))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
@@ -32,16 +32,16 @@
                                                              '(|RetractableTo|
                                                                (|Symbol|)))))))
           (|haddProp| |$ConstructorCache| '|GuessFinite| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|GuessFinite| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL
-              (|Guess| 6 6 7 (NRTEVAL (ELT $ 9)) (NRTEVAL (ELT $ 10)))
+              (|Guess| 6 6 7 (NRTEVAL (ELT % 9)) (NRTEVAL (ELT % 10)))
               (|local| |#1|) (|Expression| (|Integer|))
               (|GuessFiniteFunctions| 6) (0 . EXPRR2F) (5 . F2EXPRR)
               (|Mapping| 25 26 27) (|Symbol|)

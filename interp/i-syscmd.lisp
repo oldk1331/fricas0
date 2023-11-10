@@ -963,7 +963,9 @@
 ;
 ;     haveNew and haveOld => throwKeyedMsg("S2IZ0081", nil)
 ;
-;     af  := pathname args
+;     af  := first(args)
+;     if SYMBOLP(af) then af := SYMBOL_-NAME(af)
+;
 ;     aft := pathnameType af
 ;
 ;     haveNew or (aft = '"as")   =>
@@ -1038,7 +1040,8 @@
          (COND ((AND |haveNew| |haveOld|) (|throwKeyedMsg| 'S2IZ0081 NIL))
                (#1#
                 (PROGN
-                 (SETQ |af| (|pathname| |args|))
+                 (SETQ |af| (CAR |args|))
+                 (COND ((SYMBOLP |af|) (SETQ |af| (SYMBOL-NAME |af|))))
                  (SETQ |aft| (|pathnameType| |af|))
                  (COND
                   ((OR |haveNew| (EQUAL |aft| "as"))
@@ -1102,10 +1105,10 @@
 ;     -- Assume we entered from the "compile" function, so args ~= nil
 ;     -- and is a file with file extension .as or .ao
 ;
-;     path := pathname args
+;     path := first(args)
 ;     pathType := pathnameType path
 ;     (pathType ~= '"as") and (pathType ~= '"ao") => throwKeyedMsg("S2IZ0083", nil)
-;     not PROBE_-FILE path => throwKeyedMsg("S2IL0003",[namestring args])
+;     not(PROBE_-FILE(path)) => throwKeyedMsg("S2IL0003", [path])
 ;
 ;     $edit_file := path
 ;
@@ -1133,7 +1136,7 @@
 ;         fullopt := selectOptionLC(optname,optList,nil)
 ;
 ;         fullopt = 'new       => nil
-;         fullopt = 'old  => error "Internal error: compileAsharpCmd got )old"
+;         fullopt = 'old  => error '"Internal error: compileAsharpCmd got )old"
 ;         fullopt = 'quiet     => beQuiet := true
 ;         fullopt = 'noquiet   => beQuiet := false
 ;
@@ -1170,20 +1173,20 @@
 ;             s
 ;         tempArgs
 ;
-;     if not beQuiet then sayKeyedMsg("S2IZ0038A",[namestring args, asharpArgs])
+;     if not beQuiet then sayKeyedMsg("S2IZ0038A", [path, asharpArgs])
 ;
 ;     command :=
 ;        STRCONC(getEnv('"ALDOR_COMPILER"),_
-;                      '" ", asharpArgs, '" ", namestring args)
+;                      '" ", asharpArgs, '" ", path)
 ;     rc := OBEY command
 ;
 ;     if (rc = 0) and doCompileLisp then
-;         lsp := fnameMake('".", pathnameName args, '"lsp")
+;         lsp := fnameMake('".", pathnameName(path), '"lsp")
 ;         if fnameReadable?(lsp) then
-;             if not beQuiet then sayKeyedMsg("S2IZ0089", [namestring lsp])
+;             if not beQuiet then sayKeyedMsg("S2IZ0089", [NAMESTRING(lsp)])
 ;             compileFileQuietly(lsp)
 ;         else
-;             sayKeyedMsg("S2IL0003", [namestring lsp])
+;             sayKeyedMsg("S2IL0003", [NAMESTRING(lsp)])
 ;
 ;     if rc = 0 and doLibrary then
 ;         -- do we need to worry about where the compilation output went?
@@ -1200,13 +1203,12 @@
          |asharpArgs| |command| |rc| |lsp|)
     (RETURN
      (PROGN
-      (SETQ |path| (|pathname| |args|))
+      (SETQ |path| (CAR |args|))
       (SETQ |pathType| (|pathnameType| |path|))
       (COND
        ((AND (NOT (EQUAL |pathType| "as")) (NOT (EQUAL |pathType| "ao")))
         (|throwKeyedMsg| 'S2IZ0083 NIL))
-       ((NULL (PROBE-FILE |path|))
-        (|throwKeyedMsg| 'S2IL0003 (LIST (|namestring| |args|))))
+       ((NULL (PROBE-FILE |path|)) (|throwKeyedMsg| 'S2IL0003 (LIST |path|)))
        (#1='T
         (PROGN
          (SETQ |$edit_file| |path|)
@@ -1230,7 +1232,7 @@
                 (SETQ |fullopt| (|selectOptionLC| |optname| |optList| NIL))
                 (COND ((EQ |fullopt| '|new|) NIL)
                       ((EQ |fullopt| '|old|)
-                       (|error| '|Internal error: compileAsharpCmd got )old|))
+                       (|error| "Internal error: compileAsharpCmd got )old"))
                       ((EQ |fullopt| '|quiet|) (SETQ |beQuiet| T))
                       ((EQ |fullopt| '|noquiet|) (SETQ |beQuiet| NIL))
                       ((EQ |fullopt| '|nolispcompile|)
@@ -1289,22 +1291,21 @@
                   (#1# |tempArgs|)))
          (COND
           ((NULL |beQuiet|)
-           (|sayKeyedMsg| 'S2IZ0038A
-            (LIST (|namestring| |args|) |asharpArgs|))))
+           (|sayKeyedMsg| 'S2IZ0038A (LIST |path| |asharpArgs|))))
          (SETQ |command|
                  (STRCONC (|getEnv| "ALDOR_COMPILER") " " |asharpArgs| " "
-                  (|namestring| |args|)))
+                  |path|))
          (SETQ |rc| (OBEY |command|))
          (COND
           ((AND (EQL |rc| 0) |doCompileLisp|)
-           (SETQ |lsp| (|fnameMake| "." (|pathnameName| |args|) "lsp"))
+           (SETQ |lsp| (|fnameMake| "." (|pathnameName| |path|) "lsp"))
            (COND
             ((|fnameReadable?| |lsp|)
              (COND
               ((NULL |beQuiet|)
-               (|sayKeyedMsg| 'S2IZ0089 (LIST (|namestring| |lsp|)))))
+               (|sayKeyedMsg| 'S2IZ0089 (LIST (NAMESTRING |lsp|)))))
              (|compileFileQuietly| |lsp|))
-            (#1# (|sayKeyedMsg| 'S2IL0003 (LIST (|namestring| |lsp|)))))))
+            (#1# (|sayKeyedMsg| 'S2IL0003 (LIST (NAMESTRING |lsp|)))))))
          (COND
           ((AND (EQL |rc| 0) |doLibrary|)
            (COND
@@ -1319,9 +1320,9 @@
 ;     -- and is a file with file extension .al. We also assume that
 ;     -- the name is fully qualified.
 ;
-;     path := pathname args
-;     (FILE_-KIND namestring args) ~= 1 =>
-;           throwKeyedMsg("S2IL0003",[namestring args])
+;     path := first(args)
+;     FILE_-KIND(path) ~= 1 =>
+;           throwKeyedMsg("S2IL0003", [path])
 ;
 ;     -- here is the plan:
 ;     --   1. extract the file name and try to make a directory based
@@ -1335,12 +1336,12 @@
 ;     dir  := fnameMake('".", pathnameName path, '"axldir")
 ;     isDir := FILE_-KIND namestring dir
 ;     isDir = 0 =>
-;         throwKeyedMsg("S2IL0027",[namestring dir, namestring args])
+;         throwKeyedMsg("S2IL0027",[namestring dir, path])
 ;
 ;     if isDir ~= 1 then
 ;         cmd  := STRCONC('"mkdir ", namestring dir)
 ;         rc   := OBEY cmd
-;         rc ~= 0 => throwKeyedMsg("S2IL0027",[namestring dir, namestring args])
+;         rc ~= 0 => throwKeyedMsg("S2IL0027", [namestring dir, path])
 ;
 ;     curDir := GET_-CURRENT_-DIRECTORY()
 ;
@@ -1348,18 +1349,18 @@
 ;
 ;     cd [ namestring dir ]
 ;
-;     cmd := STRCONC( '"ar x ", namestring path )
+;     cmd := STRCONC( '"ar x ", path)
 ;     rc := OBEY cmd
 ;     rc ~= 0 =>
 ;         cd [ namestring curDir ]
-;         throwKeyedMsg("S2IL0028",[namestring dir, namestring args])
+;         throwKeyedMsg("S2IL0028",[namestring dir, path])
 ;
 ;     -- Look for .ao files
 ;
 ;     asos := DIRECTORY '"*.ao"
 ;     null asos =>
 ;         cd [ namestring curDir ]
-;         throwKeyedMsg("S2IL0029",[namestring dir, namestring args])
+;         throwKeyedMsg("S2IL0029",[namestring dir, path])
 ;
 ;     -- Compile the .ao files
 ;
@@ -1377,18 +1378,17 @@
   (PROG (|path| |dir| |isDir| |cmd| |rc| |curDir| |asos|)
     (RETURN
      (PROGN
-      (SETQ |path| (|pathname| |args|))
+      (SETQ |path| (CAR |args|))
       (COND
-       ((NOT (EQL (FILE-KIND (|namestring| |args|)) 1))
-        (|throwKeyedMsg| 'S2IL0003 (LIST (|namestring| |args|))))
+       ((NOT (EQL (FILE-KIND |path|) 1))
+        (|throwKeyedMsg| 'S2IL0003 (LIST |path|)))
        (#1='T
         (PROGN
          (SETQ |dir| (|fnameMake| "." (|pathnameName| |path|) "axldir"))
          (SETQ |isDir| (FILE-KIND (|namestring| |dir|)))
          (COND
           ((EQL |isDir| 0)
-           (|throwKeyedMsg| 'S2IL0027
-            (LIST (|namestring| |dir|) (|namestring| |args|))))
+           (|throwKeyedMsg| 'S2IL0027 (LIST (|namestring| |dir|) |path|)))
           (#1#
            (PROGN
             (COND
@@ -1398,17 +1398,16 @@
               (COND
                ((NOT (EQL |rc| 0))
                 (|throwKeyedMsg| 'S2IL0027
-                 (LIST (|namestring| |dir|) (|namestring| |args|)))))))
+                 (LIST (|namestring| |dir|) |path|))))))
             (SETQ |curDir| (GET-CURRENT-DIRECTORY))
             (|cd| (LIST (|namestring| |dir|)))
-            (SETQ |cmd| (STRCONC "ar x " (|namestring| |path|)))
+            (SETQ |cmd| (STRCONC "ar x " |path|))
             (SETQ |rc| (OBEY |cmd|))
             (COND
              ((NOT (EQL |rc| 0))
               (PROGN
                (|cd| (LIST (|namestring| |curDir|)))
-               (|throwKeyedMsg| 'S2IL0028
-                (LIST (|namestring| |dir|) (|namestring| |args|)))))
+               (|throwKeyedMsg| 'S2IL0028 (LIST (|namestring| |dir|) |path|))))
              (#1#
               (PROGN
                (SETQ |asos| (DIRECTORY "*.ao"))
@@ -1417,7 +1416,7 @@
                  (PROGN
                   (|cd| (LIST (|namestring| |curDir|)))
                   (|throwKeyedMsg| 'S2IL0029
-                   (LIST (|namestring| |dir|) (|namestring| |args|)))))
+                   (LIST (|namestring| |dir|) |path|))))
                 (#1#
                  (PROGN
                   ((LAMBDA (|bfVar#27| |aso|)
@@ -1437,8 +1436,8 @@
 ;     -- Assume we entered from the "compile" function, so args ~= nil
 ;     -- and is a file with file extension .lsp
 ;
-;     path := pathname args
-;     not PROBE_-FILE path => throwKeyedMsg("S2IL0003",[namestring args])
+;     path := first(args)
+;     not PROBE_-FILE(path) => throwKeyedMsg("S2IL0003", [path])
 ;
 ;     optList :=  '( _
 ;       quiet _
@@ -1483,10 +1482,9 @@
          |lsp|)
     (RETURN
      (PROGN
-      (SETQ |path| (|pathname| |args|))
+      (SETQ |path| (CAR |args|))
       (COND
-       ((NULL (PROBE-FILE |path|))
-        (|throwKeyedMsg| 'S2IL0003 (LIST (|namestring| |args|))))
+       ((NULL (PROBE-FILE |path|)) (|throwKeyedMsg| 'S2IL0003 (LIST |path|)))
        (#1='T
         (PROGN
          (SETQ |optList| '(|quiet| |noquiet| |library| |nolibrary|))
@@ -1537,8 +1535,8 @@
 ;
 ;     libname := first args
 ;     basename := PATHNAME_-NAME(libname)
-;     path := pathname fnameMake(libname, basename, '"lsp")
-;     not PROBE_-FILE path => throwKeyedMsg("S2IL0003",[namestring args])
+;     path := fnameMake(libname, basename, '"lsp")
+;     not(PROBE_-FILE(path)) => throwKeyedMsg("S2IL0003", [libname])
 ;
 ;     optList :=  '( _
 ;       quiet _
@@ -1585,10 +1583,10 @@
      (PROGN
       (SETQ |libname| (CAR |args|))
       (SETQ |basename| (PATHNAME-NAME |libname|))
-      (SETQ |path| (|pathname| (|fnameMake| |libname| |basename| "lsp")))
+      (SETQ |path| (|fnameMake| |libname| |basename| "lsp"))
       (COND
        ((NULL (PROBE-FILE |path|))
-        (|throwKeyedMsg| 'S2IL0003 (LIST (|namestring| |args|))))
+        (|throwKeyedMsg| 'S2IL0003 (LIST |libname|)))
        (#1='T
         (PROGN
          (SETQ |optList| '(|quiet| |noquiet| |library| |nolibrary|))
@@ -1810,7 +1808,7 @@
 ;             first := NIL
 ;         displayParserMacro macro
 ;     macro in imacs => 'iterate
-;     sayBrightly (["   ",'%b, macro, '%d, " is not a known FriCAS macro."])
+;     sayBrightly (['"   ",'%b, macro, '%d, '" is not a known FriCAS macro."])
 ;
 ;   -- now system ones
 ;
@@ -1856,8 +1854,8 @@
                      ((|member| |macro| |imacs|) '|iterate|)
                      (#1#
                       (|sayBrightly|
-                       (LIST '|   | '|%b| |macro| '|%d|
-                             '| is not a known FriCAS macro.|))))))
+                       (LIST "   " '|%b| |macro| '|%d|
+                             " is not a known FriCAS macro."))))))
                   (SETQ |bfVar#34| (CDR |bfVar#34|))))
                |macros| NIL)
               (SETQ CAR T)
@@ -1951,7 +1949,7 @@
 ;   sayMessage '"Names of User-Defined Objects in the Workspace:"
 ;   names := MSORT append(getWorkspaceNames(),pmacs)
 ;   if null names
-;     then sayBrightly "   * None *"
+;     then sayBrightly '"   * None *"
 ;     else sayAsManyPerLineAsPossible [object2String x for x in names]
 ;   imacs := SETDIFFERENCE(imacs,pmacs)
 ;   if imacs then
@@ -1966,7 +1964,7 @@
       (SETQ |pmacs| (|getParserMacroNames|))
       (|sayMessage| "Names of User-Defined Objects in the Workspace:")
       (SETQ |names| (MSORT (APPEND (|getWorkspaceNames|) |pmacs|)))
-      (COND ((NULL |names|) (|sayBrightly| '|   * None *|))
+      (COND ((NULL |names|) (|sayBrightly| "   * None *"))
             (#1='T
              (|sayAsManyPerLineAsPossible|
               ((LAMBDA (|bfVar#39| |bfVar#38| |x|)
@@ -2393,7 +2391,7 @@
 ;       [[local,:signature],fn,:.]:= mm
 ;       local='interpOnly => nil
 ;       varPart:= (giveVariableIfNil => nil; ['" of",:bright v])
-;       prefix:= ["   Compiled function type",:varPart,": "]
+;       prefix:= ['"   Compiled function type",:varPart,'": "]
 ;       sayBrightly concat(prefix,formatSignature signature)
 
 (DEFUN |displayModemap| (|v| |val| |giveVariableIfNil|)
@@ -2421,16 +2419,16 @@
                       (COND (|giveVariableIfNil| NIL)
                             (#1# (CONS " of" (|bright| |v|)))))
               (SETQ |prefix|
-                      (CONS '|   Compiled function type|
-                            (APPEND |varPart| (CONS '|: | NIL))))
+                      (CONS "   Compiled function type"
+                            (APPEND |varPart| (CONS ": " NIL))))
               (|sayBrightly|
                (|concat| |prefix| (|formatSignature| |signature|))))))))))
 
 ; displayMode(v,mode,giveVariableIfNil) ==
 ;   null mode => nil
-;   varPart:= (giveVariableIfNil => nil; [" of",:bright fixObjectForPrinting v])
-;   sayBrightly concat("   Declared type or mode",
-;     varPart,":   ",prefix2String mode)
+;   varPart:= (giveVariableIfNil => nil; ['" of",:bright fixObjectForPrinting v])
+;   sayBrightly concat('"   Declared type or mode",
+;     varPart,'":   ",prefix2String mode)
 
 (DEFUN |displayMode| (|v| |mode| |giveVariableIfNil|)
   (PROG (|varPart|)
@@ -2441,16 +2439,16 @@
              (SETQ |varPart|
                      (COND (|giveVariableIfNil| NIL)
                            (#1#
-                            (CONS '| of|
+                            (CONS " of"
                                   (|bright| (|fixObjectForPrinting| |v|))))))
              (|sayBrightly|
-              (|concat| '|   Declared type or mode| |varPart| '|:   |
+              (|concat| "   Declared type or mode" |varPart| ":   "
                (|prefix2String| |mode|)))))))))
 
 ; displayCondition(v,condition,giveVariableIfNil) ==
-;   varPart:= (giveVariableIfNil => nil; [" of",:bright v])
+;   varPart:= (giveVariableIfNil => nil; ['" of",:bright v])
 ;   condPart:= condition or 'true
-;   sayBrightly concat("   condition",varPart,":  ",pred2English condPart)
+;   sayBrightly concat('"   condition",varPart,'":  ",pred2English condPart)
 
 (DEFUN |displayCondition| (|v| |condition| |giveVariableIfNil|)
   (PROG (|varPart| |condPart|)
@@ -2458,22 +2456,22 @@
      (PROGN
       (SETQ |varPart|
               (COND (|giveVariableIfNil| NIL)
-                    ('T (CONS '| of| (|bright| |v|)))))
+                    ('T (CONS " of" (|bright| |v|)))))
       (SETQ |condPart| (OR |condition| '|true|))
       (|sayBrightly|
-       (|concat| '|   condition| |varPart| '|:  |
+       (|concat| "   condition" |varPart| ":  "
         (|pred2English| |condPart|)))))))
 
 ; getAndSay(v,prop) ==
-;   val:= getI(v,prop) => sayMSG ["    ",val,'%l]
-;   sayMSG ["    none",'%l]
+;   val:= getI(v,prop) => sayMSG ['"    ",val,'%l]
+;   sayMSG ['"    none",'%l]
 
 (DEFUN |getAndSay| (|v| |prop|)
   (PROG (|val|)
     (RETURN
      (COND
-      ((SETQ |val| (|getI| |v| |prop|)) (|sayMSG| (LIST '|    | |val| '|%l|)))
-      ('T (|sayMSG| (LIST '|    none| '|%l|)))))))
+      ((SETQ |val| (|getI| |v| |prop|)) (|sayMSG| (LIST "    " |val| '|%l|)))
+      ('T (|sayMSG| (LIST "    none" '|%l|)))))))
 
 ; displayType(op, u, omitVariableNameIfTrue) ==
 ;   null u =>
@@ -2505,7 +2503,7 @@
         NIL))))))
 
 ; displayValue(op, u, omitVariableNameIfTrue) ==
-;   null u => sayMSG ["   Value of ", fixObjectForPrinting PNAME op,
+;   null u => sayMSG ['"   Value of ", fixObjectForPrinting PNAME op,
 ;                     '":  (none)"]
 ;   expr := objValUnwrap(u)
 ;   expr is [op1, :.] and (op1 = 'SPADMAP) =>
@@ -2531,7 +2529,7 @@
      (COND
       ((NULL |u|)
        (|sayMSG|
-        (LIST '|   Value of | (|fixObjectForPrinting| (PNAME |op|))
+        (LIST "   Value of " (|fixObjectForPrinting| (PNAME |op|))
               ":  (none)")))
       (#1='T
        (PROGN
@@ -2578,7 +2576,6 @@
 ;   l:=
 ;     null l => $edit_file
 ;     first l
-;   l := pathname l
 ;   oldDir := pathnameDirectory l
 ;   fileTypes :=
 ;     pathnameType l => [pathnameType l]
@@ -2586,9 +2583,9 @@
 ;     $UserLevel = 'compiler    => '("input" "INPUT" "spad" "SPAD")
 ;     '("input" "INPUT" "spad" "SPAD" "boot" "BOOT" "lisp" "LISP")
 ;   ll :=
-;        oldDir = '"" => pathname find_file(pathnameName l, fileTypes)
+;        oldDir = '"" => find_file(pathnameName l, fileTypes)
 ;        l
-;   l := pathname ll
+;   l := ll
 ;   $edit_file := l
 ;   rc := editFile l
 ;   rc
@@ -2598,7 +2595,6 @@
     (RETURN
      (PROGN
       (SETQ |l| (COND ((NULL |l|) |$edit_file|) (#1='T (CAR |l|))))
-      (SETQ |l| (|pathname| |l|))
       (SETQ |oldDir| (|pathnameDirectory| |l|))
       (SETQ |fileTypes|
               (COND ((|pathnameType| |l|) (LIST (|pathnameType| |l|)))
@@ -2612,9 +2608,9 @@
       (SETQ |ll|
               (COND
                ((EQUAL |oldDir| "")
-                (|pathname| (|find_file| (|pathnameName| |l|) |fileTypes|)))
+                (|find_file| (|pathnameName| |l|) |fileTypes|))
                (#1# |l|)))
-      (SETQ |l| (|pathname| |ll|))
+      (SETQ |l| |ll|)
       (SETQ |$edit_file| |l|)
       (SETQ |rc| (|editFile| |l|))
       |rc|))))
@@ -2627,15 +2623,15 @@
 ;   -- try to use new stuff first
 ;   if newHelpSpad2Cmd(args) then return nil
 ;
-;   sayBrightly "Available help topics for system commands are:"
-;   sayBrightly ""
-;   sayBrightly " boot   cd     clear    close     compile   display"
-;   sayBrightly " edit   fin    frame    help      history   library"
-;   sayBrightly " lisp   load   ltrace   pquit     quit      read"
-;   sayBrightly " set    show   spool    synonym   system    trace"
-;   sayBrightly " undo   what"
-;   sayBrightly ""
-;   sayBrightly "Issue _")help help_" for more information about the help command."
+;   sayBrightly '"Available help topics for system commands are:"
+;   sayBrightly '""
+;   sayBrightly '" boot   cd     clear    close     compile   display"
+;   sayBrightly '" edit   fin    frame    help      history   library"
+;   sayBrightly '" lisp   load   ltrace   pquit     quit      read"
+;   sayBrightly '" set    show   spool    synonym   system    trace"
+;   sayBrightly '" undo   what"
+;   sayBrightly '""
+;   sayBrightly '"Issue _")help help_" for more information about the help command."
 ;
 ;   nil
 
@@ -2644,16 +2640,16 @@
     (RETURN
      (PROGN
       (COND ((|newHelpSpad2Cmd| |args|) (RETURN NIL)))
-      (|sayBrightly| '|Available help topics for system commands are:|)
-      (|sayBrightly| '||)
-      (|sayBrightly| '| boot   cd     clear    close     compile   display|)
-      (|sayBrightly| '| edit   fin    frame    help      history   library|)
-      (|sayBrightly| '| lisp   load   ltrace   pquit     quit      read|)
-      (|sayBrightly| '| set    show   spool    synonym   system    trace|)
-      (|sayBrightly| '| undo   what|)
-      (|sayBrightly| '||)
+      (|sayBrightly| "Available help topics for system commands are:")
+      (|sayBrightly| "")
+      (|sayBrightly| " boot   cd     clear    close     compile   display")
+      (|sayBrightly| " edit   fin    frame    help      history   library")
+      (|sayBrightly| " lisp   load   ltrace   pquit     quit      read")
+      (|sayBrightly| " set    show   spool    synonym   system    trace")
+      (|sayBrightly| " undo   what")
+      (|sayBrightly| "")
       (|sayBrightly|
-       '|Issue ")help help" for more information about the help command.|)
+       "Issue \")help help\" for more information about the help command.")
       NIL))))
 
 ; newHelpSpad2Cmd args ==
@@ -2858,7 +2854,7 @@
 ;   $interpreterFrameRing := CONS(emptyInterpreterFrame(name),
 ;     $interpreterFrameRing)
 ;   updateFromCurrentInterpreterFrame()
-;   erase_lib([histFileName()])
+;   erase_lib(histFileName())
 
 (DEFUN |addNewInterpreterFrame| (|name|)
   (PROG ()
@@ -2884,7 +2880,7 @@
                      (CONS (|emptyInterpreterFrame| |name|)
                            |$interpreterFrameRing|))
              (|updateFromCurrentInterpreterFrame|)
-             (|erase_lib| (LIST (|histFileName|)))))))))
+             (|erase_lib| (|histFileName|))))))))
 
 ; emptyInterpreterFrame(name) ==
 ;   LIST(name,                            -- frame name
@@ -2920,7 +2916,7 @@
 ;       found or (name ~= frameName(f)) => ifr := CONS(f,ifr)
 ;       found := true
 ;     not found => throwKeyedMsg("S2IZ0022",[name])
-;     erase_lib([makeHistFileName(name)])
+;     erase_lib(makeHistFileName(name))
 ;     $interpreterFrameRing := nreverse ifr
 ;   updateFromCurrentInterpreterFrame()
 
@@ -2954,7 +2950,7 @@
           (COND ((NULL |found|) (|throwKeyedMsg| 'S2IZ0022 (LIST |name|)))
                 (#1#
                  (PROGN
-                  (|erase_lib| (LIST (|makeHistFileName| |name|)))
+                  (|erase_lib| (|makeHistFileName| |name|))
                   (SETQ |$interpreterFrameRing| (NREVERSE |ifr|)))))))
         (|updateFromCurrentInterpreterFrame|)))))))
 
@@ -3335,10 +3331,10 @@
            ('T (|historySpad2Cmd|))))))
 
 ; makeHistFileName(fname) ==
-;   makePathname(fname,$historyFileType)
+;     make_filename0(fname, $historyFileType)
 
 (DEFUN |makeHistFileName| (|fname|)
-  (PROG () (RETURN (|makePathname| |fname| |$historyFileType|))))
+  (PROG () (RETURN (|make_filename0| |fname| |$historyFileType|))))
 
 ; oldHistFileName() ==
 ;   makeHistFileName($oldHistoryFileName)
@@ -3361,15 +3357,15 @@
            ('T (|makeHistFileName| |$interpreterFrameName|))))))
 
 ; histInputFileName(fn) ==
-;   null fn =>
-;     makePathname($interpreterFrameName,'INPUT)
-;   makePathname(fn,'INPUT)
+;     null fn =>
+;         make_filename0($interpreterFrameName, 'INPUT)
+;     make_filename0(fn, 'INPUT)
 
 (DEFUN |histInputFileName| (|fn|)
   (PROG ()
     (RETURN
-     (COND ((NULL |fn|) (|makePathname| |$interpreterFrameName| 'INPUT))
-           ('T (|makePathname| |fn| 'INPUT))))))
+     (COND ((NULL |fn|) (|make_filename0| |$interpreterFrameName| 'INPUT))
+           ('T (|make_filename0| |fn| 'INPUT))))))
 
 ; initHist() ==
 ;   $useInternalHistoryTable => initHistList()
@@ -3889,9 +3885,9 @@
       (COND (|$HiFiAccess| (|recordNewValue| |x| |prop| |val|)))
       (|putIntSymTab| |x| |prop| |val| |e|)))))
 
-; histFileErase(file) == erase_lib([file])
+; histFileErase(file) == erase_lib(file)
 
-(DEFUN |histFileErase| (|file|) (PROG () (RETURN (|erase_lib| (LIST |file|)))))
+(DEFUN |histFileErase| (|file|) (PROG () (RETURN (|erase_lib| |file|))))
 
 ; recordNewValue(x,prop,val) ==
 ;   startTimingProcess 'history
@@ -4146,6 +4142,7 @@
 ;           sayKeyedMsg("S2IH0022", nil)
 ;   null fn =>
 ;     throwKeyedMsg("S2IH0037", nil)
+;   fn := first(fn)
 ;   savefile := makeHistFileName(fn)
 ;   inputfile := histInputFileName(fn)
 ;   writeInputLines(fn,1)
@@ -4175,6 +4172,7 @@
             ((NULL |fn|) (|throwKeyedMsg| 'S2IH0037 NIL))
             (#1='T
              (PROGN
+              (SETQ |fn| (CAR |fn|))
               (SETQ |savefile| (|makeHistFileName| |fn|))
               (SETQ |inputfile| (|histInputFileName| |fn|))
               (|writeInputLines| |fn| 1)
@@ -4646,8 +4644,38 @@
        (CAAR |$InteractiveFrame|) NIL)
       NIL))))
 
+; $eof_marker := GENSYM()
+
+(EVAL-WHEN (EVAL LOAD) (SETQ |$eof_marker| (GENSYM)))
+
+; eof_marker?(x) == EQ(x, $eof_marker)
+
+(DEFUN |eof_marker?| (|x|) (PROG () (RETURN (EQ |x| |$eof_marker|))))
+
+; fri_read(stream) ==
+;     dewritify(READ(stream, nil, $eof_marker))
+
+(DEFUN |fri_read| (|stream|)
+  (PROG () (RETURN (|dewritify| (READ |stream| NIL |$eof_marker|)))))
+
+; fri_write(item, stream) ==
+;     val := safeWritify item
+;     val = 'writifyFailed =>
+;         throwKeyedMsg("The value cannot be saved to a file.", "nil")
+;     write_to_stream(val, stream)
+
+(DEFUN |fri_write| (|item| |stream|)
+  (PROG (|val|)
+    (RETURN
+     (PROGN
+      (SETQ |val| (|safeWritify| |item|))
+      (COND
+       ((EQ |val| '|writifyFailed|)
+        (|throwKeyedMsg| '|The value cannot be saved to a file.| '|nil|))
+       ('T (|write_to_stream| |val| |stream|)))))))
+
 ; SPADRREAD(vec, stream) ==
-;     dewritify rread(vec, stream)
+;     dewritify(rread(vec, stream))
 
 (DEFUN SPADRREAD (|vec| |stream|)
   (PROG () (RETURN (|dewritify| (|rread| |vec| |stream|)))))
@@ -4787,7 +4815,7 @@
 ;                             writifyInner keys,
 ;                               [writifyInner HGET(ob,k) for k in keys]])
 ;                 nob
-;             PLACEP ob =>
+;             eof_marker?(ob) =>
 ;                 nob := ['WRITIFIED_!_!, 'PLACE]
 ;                 HPUT($seen, ob,  nob)
 ;                 HPUT($seen, nob, nob)
@@ -4966,7 +4994,7 @@
                         (SETQ |bfVar#98| (CDR |bfVar#98|))))
                      NIL |keys| NIL)))
              |nob|))
-           ((PLACEP |ob|)
+           ((|eof_marker?| |ob|)
             (PROGN
              (SETQ |nob| (LIST 'WRITIFIED!! 'PLACE))
              (HPUT |$seen| |ob| |nob|)
@@ -4992,7 +5020,7 @@
 ;     -- other arrays are unwritable
 ;     ARRAYP(ob) => true
 ;     COMPILED_-FUNCTION_-P   ob or HASHTABLEP ob => true
-;     PLACEP ob or READTABLEP ob => true
+;     eof_marker?(ob) or READTABLEP ob => true
 ;     FLOATP ob => true
 ;     false
 
@@ -5006,7 +5034,7 @@
             NIL)
            ((ARRAYP |ob|) T)
            ((OR (COMPILED-FUNCTION-P |ob|) (HASHTABLEP |ob|)) T)
-           ((OR (PLACEP |ob|) (READTABLEP |ob|)) T) ((FLOATP |ob|) T)
+           ((OR (|eof_marker?| |ob|) (READTABLEP |ob|)) T) ((FLOATP |ob|) T)
            ('T NIL)))))
 
 ; $type_tags := [
@@ -5169,7 +5197,7 @@
 ;                     HPUT($seen, nob, nob)
 ;                     nob
 ;                 type = 'PLACE =>
-;                     nob := get_read_placeholder()
+;                     nob := $eof_marker
 ;                     HPUT($seen, ob, nob)
 ;                     HPUT($seen, nob, nob)
 ;                     nob
@@ -5316,7 +5344,7 @@
                         |nob|)))))
                    ((EQ |type| 'PLACE)
                     (PROGN
-                     (SETQ |nob| (|get_read_placeholder|))
+                     (SETQ |nob| |$eof_marker|)
                      (HPUT |$seen| |ob| |nob|)
                      (HPUT |$seen| |nob| |nob|)
                      |nob|))
@@ -5498,28 +5526,28 @@
   (PROG () (RETURN (PROGN (|sayKeyedMsg| 'S2IU0003 NIL) NIL))))
 
 ; reportCount () ==
-;   centerAndHighlight(" Current Count Settings ",$LINELENGTH,specialChar 'hbar)
-;   SAY " "
-;   sayBrightly [:bright " cache",fillerSpaces(30,'".")," ",$cacheCount]
+;   centerAndHighlight('" Current Count Settings ",$LINELENGTH,specialChar 'hbar)
+;   SAY '" "
+;   sayBrightly [:bright '" cache",fillerSpaces(30,'"."),'" ",$cacheCount]
 ;   if $cacheAlist then
 ;     for [a,:b] in $cacheAlist repeat
 ;       aPart:= linearFormatName a
 ;       n:= sayBrightlyLength aPart
-;       sayBrightly concat("     ",aPart," ",fillerSpaces(32-n,'".")," ",b)
-;   SAY " "
-;   sayBrightly [:bright " stream",fillerSpaces(29,'".")," ",$streamCount]
+;       sayBrightly concat('"     ",aPart,'" ",fillerSpaces(32-n,'"."),'" ",b)
+;   SAY '" "
+;   sayBrightly [:bright '" stream",fillerSpaces(29,'"."),'" ",$streamCount]
 
 (DEFUN |reportCount| ()
   (PROG (|n| |aPart| |b| |a|)
     (RETURN
      (PROGN
-      (|centerAndHighlight| '| Current Count Settings | $LINELENGTH
+      (|centerAndHighlight| " Current Count Settings " $LINELENGTH
        (|specialChar| '|hbar|))
-      (SAY '| |)
+      (SAY " ")
       (|sayBrightly|
-       (APPEND (|bright| '| cache|)
+       (APPEND (|bright| " cache")
                (CONS (|fillerSpaces| 30 ".")
-                     (CONS '| | (CONS |$cacheCount| NIL)))))
+                     (CONS " " (CONS |$cacheCount| NIL)))))
       (COND
        (|$cacheAlist|
         ((LAMBDA (|bfVar#109| |bfVar#108|)
@@ -5538,15 +5566,15 @@
                     (SETQ |aPart| (|linearFormatName| |a|))
                     (SETQ |n| (|sayBrightlyLength| |aPart|))
                     (|sayBrightly|
-                     (|concat| '|     | |aPart| '| |
-                      (|fillerSpaces| (- 32 |n|) ".") '| | |b|))))))
+                     (|concat| "     " |aPart| " "
+                      (|fillerSpaces| (- 32 |n|) ".") " " |b|))))))
             (SETQ |bfVar#109| (CDR |bfVar#109|))))
          |$cacheAlist| NIL)))
-      (SAY '| |)
+      (SAY " ")
       (|sayBrightly|
-       (APPEND (|bright| '| stream|)
+       (APPEND (|bright| " stream")
                (CONS (|fillerSpaces| 29 ".")
-                     (CONS '| | (CONS |$streamCount| NIL)))))))))
+                     (CONS " " (CONS |$streamCount| NIL)))))))))
 
 ; nopiles l == nopilesSpad2Cmd l
 
@@ -5555,18 +5583,18 @@
 ; nopilesSpad2Cmd l ==
 ;     null l => setNopiles ("{")
 ;     #l > 1 =>
-;        SAY "nopiles takes a single argument"
+;        SAY '"nopiles takes a single argument"
 ;     #l = 0 => setNopiles ("{")
 ;     l is [opt] =>
 ;        opt = 'brace => setNopiles ("{")
 ;        opt = 'parenthesis => setNopiles ("(")
-;        SAY "nopiles only takes 'brace' or 'parenthesis' as an argument"
+;        SAY '"nopiles only takes 'brace' or 'parenthesis' as an argument"
 
 (DEFUN |nopilesSpad2Cmd| (|l|)
   (PROG (|opt|)
     (RETURN
      (COND ((NULL |l|) (|setNopiles| '{))
-           ((< 1 (LENGTH |l|)) (SAY '|nopiles takes a single argument|))
+           ((< 1 (LENGTH |l|)) (SAY "nopiles takes a single argument"))
            ((EQL (LENGTH |l|) 0) (|setNopiles| '{))
            ((AND (CONSP |l|) (EQ (CDR |l|) NIL)
                  (PROGN (SETQ |opt| (CAR |l|)) #1='T))
@@ -5574,7 +5602,7 @@
                   ((EQ |opt| '|parenthesis|) (|setNopiles| '|(|))
                   (#1#
                    (SAY
-                    '|nopiles only takes 'brace' or 'parenthesis' as an argument|))))))))
+                    "nopiles only takes 'brace' or 'parenthesis' as an argument"))))))))
 
 ; pquit() == pquitSpad2Cmd()
 
@@ -5635,9 +5663,11 @@
 ;     fullopt = 'quiet   => quiet := true
 ;
 ;   if null(l) and (ef := $edit_file) and pathnameTypeId(ef) ~= 'SPAD then
-;       l := pathname(ef)
+;       l := ef
 ;   else
-;       l := pathname l
+;       l := first(l)
+;   if SYMBOLP(l) then l := SYMBOL_-NAME(l)
+;
 ;   devFTs := '("input" "INPUT" "boot" "BOOT" "lisp" "LISP")
 ;   fileTypes :=
 ;     $UserLevel = 'interpreter => '("input" "INPUT")
@@ -5646,8 +5676,7 @@
 ;   ll := find_file(l, fileTypes)
 ;   if null ll then
 ;     ifthere => return nil    -- be quiet about it
-;     throwKeyedMsg("S2IL0003",[namestring l])
-;   ll := pathname ll
+;     throwKeyedMsg("S2IL0003", [l])
 ;   ft := pathnameType ll
 ;   upft := UPCASE ft
 ;   null member(upft,fileTypes) =>
@@ -5684,8 +5713,9 @@
       (COND
        ((AND (NULL |l|) (SETQ |ef| |$edit_file|)
              (NOT (EQ (|pathnameTypeId| |ef|) 'SPAD)))
-        (SETQ |l| (|pathname| |ef|)))
-       (#1# (SETQ |l| (|pathname| |l|))))
+        (SETQ |l| |ef|))
+       (#1# (SETQ |l| (CAR |l|))))
+      (COND ((SYMBOLP |l|) (SETQ |l| (SYMBOL-NAME |l|))))
       (SETQ |devFTs| '("input" "INPUT" "boot" "BOOT" "lisp" "LISP"))
       (SETQ |fileTypes|
               (COND ((EQ |$UserLevel| '|interpreter|) '("input" "INPUT"))
@@ -5695,8 +5725,7 @@
       (COND
        ((NULL |ll|)
         (COND (|ifthere| (RETURN NIL))
-              (#1# (|throwKeyedMsg| 'S2IL0003 (LIST (|namestring| |l|)))))))
-      (SETQ |ll| (|pathname| |ll|))
+              (#1# (|throwKeyedMsg| 'S2IL0003 (LIST |l|))))))
       (SETQ |ft| (|pathnameType| |ll|))
       (SETQ |upft| (UPCASE |ft|))
       (COND
@@ -5840,7 +5869,7 @@
 ;   $resolve_level : local := 15
 ;   null u => nil
 ;   u = $quadSymbol =>
-;      sayBrightly ['"   mode denotes", :bright '"any", "type"]
+;      sayBrightly ['"   mode denotes", :bright '"any", '"type"]
 ;   u = "%" =>
 ;     sayKeyedMsg("S2IZ0063",NIL)
 ;     sayKeyedMsg("S2IZ0064",NIL)
@@ -5874,7 +5903,7 @@
             ((EQUAL |u| |$quadSymbol|)
              (|sayBrightly|
               (CONS "   mode denotes"
-                    (APPEND (|bright| "any") (CONS '|type| NIL)))))
+                    (APPEND (|bright| "any") (CONS "type" NIL)))))
             ((EQ |u| '%)
              (PROGN
               (|sayKeyedMsg| 'S2IZ0063 NIL)
@@ -5930,8 +5959,8 @@
            ('T (|reportOpsFromUnitDirectly| D))))))
 
 ; reportOpsFromUnitDirectly1 D ==
-;   showFile := pathname ['SHOW,'LISTING]
-;   erase_lib([showFile])
+;   showFile := '"SHOW.LISTING"
+;   erase_lib(showFile)
 ;   $sayBrightlyStream : fluid := MAKE_OUTSTREAM(showFile)
 ;   sayShowWarning()
 ;   reportOpsFromUnitDirectly D
@@ -5943,8 +5972,8 @@
     (DECLARE (SPECIAL |$sayBrightlyStream|))
     (RETURN
      (PROGN
-      (SETQ |showFile| (|pathname| (LIST 'SHOW 'LISTING)))
-      (|erase_lib| (LIST |showFile|))
+      (SETQ |showFile| "SHOW.LISTING")
+      (|erase_lib| |showFile|)
       (SETQ |$sayBrightlyStream| (MAKE_OUTSTREAM |showFile|))
       (|sayShowWarning|)
       (|reportOpsFromUnitDirectly| D)
@@ -5982,8 +6011,8 @@
            ('T (|reportOpsFromLisplib| |unitForm| |u|))))))
 
 ; reportOpsFromLisplib1(unitForm,u)  ==
-;   showFile := pathname ['SHOW,'LISTING]
-;   erase_lib([showFile])
+;   showFile := '"SHOW.LISTING"
+;   erase_lib(showFile)
 ;   $sayBrightlyStream : fluid := MAKE_OUTSTREAM(showFile)
 ;   sayShowWarning()
 ;   reportOpsFromLisplib(unitForm,u)
@@ -5995,8 +6024,8 @@
     (DECLARE (SPECIAL |$sayBrightlyStream|))
     (RETURN
      (PROGN
-      (SETQ |showFile| (|pathname| (LIST 'SHOW 'LISTING)))
-      (|erase_lib| (LIST |showFile|))
+      (SETQ |showFile| "SHOW.LISTING")
+      (|erase_lib| |showFile|)
       (SETQ |$sayBrightlyStream| (MAKE_OUTSTREAM |showFile|))
       (|sayShowWarning|)
       (|reportOpsFromLisplib| |unitForm| |u|)
@@ -6027,8 +6056,8 @@
 ;         then
 ;           constructorFunction := get_oplist_maker(top) or
 ;             systemErrorHere '"reportOpsFromUnitDirectly"
-;           [funlist,.]:= FUNCALL(constructorFunction,"$",unitForm,
-;             $CategoryFrame)
+;           [funlist, .] := FUNCALL(constructorFunction, "%", unitForm,
+;                                   $CategoryFrame)
 ;           sigList := REMDUP MSORT [[[a,b],true,[c,0,1]] for
 ;             [a,b,c] in funlist]
 ;         else
@@ -6114,7 +6143,7 @@
                                    (|systemErrorHere|
                                     "reportOpsFromUnitDirectly")))
                        (SETQ |LETTMP#1|
-                               (FUNCALL |constructorFunction| '$ |unitForm|
+                               (FUNCALL |constructorFunction| '% |unitForm|
                                         |$CategoryFrame|))
                        (SETQ |funlist| (CAR |LETTMP#1|))
                        (SETQ |sigList|
@@ -6782,7 +6811,7 @@
 
 ; reportUndo acc ==
 ;   for [name,:proplist] in acc repeat
-;     sayBrightly STRCONC("Properties of ",PNAME name,'" ::")
+;     sayBrightly STRCONC('"Properties of ",PNAME name,'" ::")
 ;     curproplist := LASSOC(name,CAAR $InteractiveFrame)
 ;     for [prop,:value] in proplist repeat
 ;       sayBrightlyNT ['"  ",prop,'" was: "]
@@ -6807,7 +6836,7 @@
                  #1#)
                 (PROGN
                  (|sayBrightly|
-                  (STRCONC '|Properties of | (PNAME |name|) " ::"))
+                  (STRCONC "Properties of " (PNAME |name|) " ::"))
                  (SETQ |curproplist|
                          (LASSOC |name| (CAAR |$InteractiveFrame|)))
                  ((LAMBDA (|bfVar#148| |bfVar#147|)
@@ -7402,7 +7431,7 @@
          NIL)))))))
 
 ; printSynonyms(patterns) ==
-;   centerAndHighlight("System Command Synonyms",$LINELENGTH,specialChar 'hbar)
+;   centerAndHighlight('"System Command Synonyms",$LINELENGTH,specialChar 'hbar)
 ;   ls := filterListOfStringsWithFn(patterns, [[STRINGIMAGE a,:b]
 ;     for [a,:b] in synonymsForUserLevel $CommandSynonymAlist],
 ;       function first)
@@ -7413,7 +7442,7 @@
   (PROG (|a| |b| |ls|)
     (RETURN
      (PROGN
-      (|centerAndHighlight| '|System Command Synonyms| $LINELENGTH
+      (|centerAndHighlight| "System Command Synonyms" $LINELENGTH
        (|specialChar| '|hbar|))
       (SETQ |ls|
               (|filterListOfStringsWithFn| |patterns|
@@ -7523,7 +7552,7 @@
         (|sayBrightly| "")))))))
 
 ; whatCommands(patterns) ==
-;   label := STRCONC("System Commands for User Level: ",
+;   label := STRCONC('"System Commands for User Level: ",
 ;     STRINGIMAGE $UserLevel)
 ;   centerAndHighlight(label,$LINELENGTH,specialChar 'hbar)
 ;   l := filterListOfStrings(patterns,
@@ -7536,7 +7565,7 @@
 ;       '%l,'"   ",'%b,:blankList patterns,'%d]
 ;   if l then
 ;     sayAsManyPerLineAsPossible l
-;     SAY " "
+;     SAY '" "
 ;   patterns => nil  -- don't be so verbose
 ;   sayKeyedMsg("S2IZ0046",NIL)
 ;   nil
@@ -7546,7 +7575,7 @@
     (RETURN
      (PROGN
       (SETQ |label|
-              (STRCONC '|System Commands for User Level: |
+              (STRCONC "System Commands for User Level: "
                (STRINGIMAGE |$UserLevel|)))
       (|centerAndHighlight| |label| $LINELENGTH (|specialChar| '|hbar|))
       (SETQ |l|
@@ -7580,7 +7609,7 @@
                              (CONS '|%b|
                                    (APPEND (|blankList| |patterns|)
                                            (CONS '|%d| NIL)))))))))))
-      (COND (|l| (|sayAsManyPerLineAsPossible| |l|) (SAY '| |)))
+      (COND (|l| (|sayAsManyPerLineAsPossible| |l|) (SAY " ")))
       (COND (|patterns| NIL)
             (#1# (PROGN (|sayKeyedMsg| 'S2IZ0046 NIL) NIL)))))))
 

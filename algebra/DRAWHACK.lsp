@@ -1,14 +1,14 @@
 
 (SDEFUN |DRAWHACK;coerce;SbSb;1|
         ((|s| (|SegmentBinding| (|Expression| R)))
-         ($ (|SegmentBinding| (|Float|))))
-        (SPADCALL (ELT $ 10) |s| (QREFELT $ 15))) 
+         (% (|SegmentBinding| (|Float|))))
+        (SPADCALL (ELT % 10) |s| (QREFELT % 15))) 
 
 (DECLAIM (NOTINLINE |DrawNumericHack;|)) 
 
-(DEFUN |DrawNumericHack| (#1=#:G693)
+(DEFUN |DrawNumericHack| (#1=#:G450)
   (SPROG NIL
-         (PROG (#2=#:G694)
+         (PROG (#2=#:G451)
            (RETURN
             (COND
              ((LETT #2#
@@ -24,19 +24,19 @@
                   (HREM |$ConstructorCache| '|DrawNumericHack|)))))))))) 
 
 (DEFUN |DrawNumericHack;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|DrawNumericHack| DV$1))
-          (LETT $ (GETREFV 17))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 17))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|DrawNumericHack| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|DrawNumericHack| '|infovec|
           (LIST

@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |FunctionSpaceToUnivariatePowerSeries;|)) 
 
-(DEFUN |FunctionSpaceToUnivariatePowerSeries| (&REST #1=#:G713)
+(DEFUN |FunctionSpaceToUnivariatePowerSeries| (&REST #1=#:G460)
   (SPROG NIL
-         (PROG (#2=#:G714)
+         (PROG (#2=#:G461)
            (RETURN
             (COND
              ((LETT #2#
@@ -28,7 +28,7 @@
 (DEFUN |FunctionSpaceToUnivariatePowerSeries;|
        (|#1| |#2| |#3| |#4| |#5| |#6| |#7| |#8|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$8 NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$8 NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL)
     (DV$4 NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -42,30 +42,30 @@
     (LETT |dv$|
           (LIST '|FunctionSpaceToUnivariatePowerSeries| DV$1 DV$2 DV$3 DV$4
                 DV$5 DV$6 DV$7 DV$8))
-    (LETT $ (GETREFV 20))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (LETT % (GETREFV 20))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|FunctionSpaceToUnivariatePowerSeries|
-                (LIST DV$1 DV$2 DV$3 DV$4 DV$5 DV$6 DV$7 DV$8) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (QSETREFV $ 10 |#5|)
-    (QSETREFV $ 11 |#6|)
-    (QSETREFV $ 12 |#7|)
-    (QSETREFV $ 13 |#8|)
-    (SETF |pv$| (QREFELT $ 3))
-    $))) 
+                (LIST DV$1 DV$2 DV$3 DV$4 DV$5 DV$6 DV$7 DV$8) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (QSETREFV % 10 |#5|)
+    (QSETREFV % 11 |#6|)
+    (QSETREFV % 12 |#7|)
+    (QSETREFV % 13 |#8|)
+    (SETF |pv$| (QREFELT % 3))
+    %))) 
 
 (MAKEPROP '|FunctionSpaceToUnivariatePowerSeries| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL
               (|FunctionSpaceToUnivariatePowerSeries2| 6 7 8 9 10 11 12
-                                                       (NRTEVAL (ELT $ 14))
+                                                       (NRTEVAL (ELT % 14))
                                                        (NRTEVAL
-                                                        (QREFELT $ 13)))
+                                                        (QREFELT % 13)))
               (|local| |#1|) (|local| |#2|) (|local| |#3|) (|local| |#4|)
               (|local| |#5|) (|local| |#6|) (|local| |#7|) (|local| |#8|)
               (0 . |coerce|)

@@ -658,8 +658,8 @@
 ; --  and generating $TriangleVariableList
 ;   for [op,:itemlist] in SUBLISLIS(rpvl, $FormalMapVariableList,opAlist) repeat
 ;     for [sig0, pred] in itemlist repeat
-;       sig := SUBST(dc,"$",sig0)
-;       pred:= SUBST(dc,"$",pred)
+;       sig := SUBST(dc, "%", sig0)
+;       pred := SUBST(dc, "%", pred)
 ;       sig := SUBLISLIS(rpvl, IFCDR oform, sig)
 ;       pred:= SUBLISLIS(rpvl, IFCDR oform, pred)
 ;       pred := pred or 'T
@@ -761,8 +761,8 @@
                              (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
                                   (PROGN (SETQ |pred| (CAR |ISTMP#1|)) #1#)))
                             (PROGN
-                             (SETQ |sig| (SUBST |dc| '$ |sig0|))
-                             (SETQ |pred| (SUBST |dc| '$ |pred|))
+                             (SETQ |sig| (SUBST |dc| '% |sig0|))
+                             (SETQ |pred| (SUBST |dc| '% |pred|))
                              (SETQ |sig|
                                      (SUBLISLIS |rpvl| (IFCDR |oform|) |sig|))
                              (SETQ |pred|
@@ -1133,7 +1133,7 @@
 ;   x is ['Apply,:r] => asyAncestorList r
 ;   x is [op,y,:.] and MEMQ(op, '(PretendTo RestrictTo)) => asyAncestors y
 ;   atom x =>
-;     x = '_% => '_$
+;     x = '_% => '_%
 ;     MEMQ(x, $niladics)       => [x]
 ;     GETDATABASE(x ,'NILADIC) => [x]
 ;     x
@@ -1154,7 +1154,7 @@
             (MEMQ |op| '(|PretendTo| |RestrictTo|)))
        (|asyAncestors| |y|))
       ((ATOM |x|)
-       (COND ((EQ |x| '%) '$) ((MEMQ |x| |$niladics|) (LIST |x|))
+       (COND ((EQ |x| '%) '%) ((MEMQ |x| |$niladics|) (LIST |x|))
              ((GETDATABASE |x| 'NILADIC) (LIST |x|)) (#1# |x|)))
       (#1# (|asyAncestorList| |x|))))))
 
@@ -1177,7 +1177,7 @@
 ; --    <sig pred origin         exposed? comments>
 ;   inStream := OPEN fn
 ;   sayBrightly ['"   Reading ",fn]
-;   u := VMREAD inStream
+;   u := READ(inStream)
 ;   $niladics := mkNiladics u
 ;   for x in $niladics repeat PUT(x,'NILADIC,true)
 ;   for d in u repeat
@@ -1197,7 +1197,7 @@
      (PROGN
       (SETQ |inStream| (OPEN |fn|))
       (|sayBrightly| (LIST "   Reading " |fn|))
-      (SETQ |u| (VMREAD |inStream|))
+      (SETQ |u| (READ |inStream|))
       (SETQ |$niladics| (|mkNiladics| |u|))
       ((LAMBDA (|bfVar#52| |x|)
          (LOOP
@@ -1571,7 +1571,7 @@
 ;     error '"DEFINE forms are not handled yet"
 ;   if form = '_% then $hasPerCent := true
 ;   IDENTP form =>
-;     form = "%" => "$"
+;     form = "%" => "%"
 ;     GETL(form,'NILADIC) => [form]
 ;     form
 ;   [asytranForm(x,levels,local?) for x in form]
@@ -1658,7 +1658,7 @@
         (COND ((EQ |form| '%) (SETQ |$hasPerCent| T)))
         (COND
          ((IDENTP |form|)
-          (COND ((EQ |form| '%) '$) ((GETL |form| 'NILADIC) (LIST |form|))
+          (COND ((EQ |form| '%) '%) ((GETL |form| 'NILADIC) (LIST |form|))
                 (#1# |form|)))
          (#1#
           ((LAMBDA (|bfVar#61| |bfVar#60| |x|)
@@ -2423,7 +2423,7 @@
 ;   --NOTE: sig has the form (-> source target) or simply (target)
 ;   $constructorArgs : local := IFCDR form
 ;   signature := asySignature(sig,false)
-;   formals := ['_$,:TAKE(#$constructorArgs,$FormalMapVariableList)]
+;   formals := ['_%, :TAKE(#$constructorArgs, $FormalMapVariableList)]
 ;   mm := [[[con,:$constructorArgs],:signature],['T,con]]
 ;   SUBLISLIS(formals,['_%,:$constructorArgs],mm)
 
@@ -2454,7 +2454,7 @@
         (SETQ |$constructorArgs| (IFCDR |form|))
         (SETQ |signature| (|asySignature| |sig| NIL))
         (SETQ |formals|
-                (CONS '$
+                (CONS '%
                       (TAKE (LENGTH |$constructorArgs|)
                        |$FormalMapVariableList|)))
         (SETQ |mm|
@@ -2557,10 +2557,10 @@
 ;     fn = '_-_> => asyMapping(r,name?)
 ;     fn = 'Declare and r is [name,typ,:.] =>
 ;         asySig1(typ, name?, target?)
-;     x is '(_%) => '(_$)
+;     x is '(_%) => '(_%)
 ;     [fn,:[asySig(x,name?) for x in r]]
 ; --x = 'Type => '(Type)
-;   x = '_% => '_$
+;   x = '_% => '_%
 ;   x
 
 (DEFUN |asySig1| (|u| |name?| |target?|)
@@ -2625,7 +2625,7 @@
                      (AND (CONSP |ISTMP#1|)
                           (PROGN (SETQ |typ| (CAR |ISTMP#1|)) #1#))))
                (|asySig1| |typ| |name?| |target?|))
-              ((EQUAL |x| '(%)) '($))
+              ((EQUAL |x| '(%)) '(%))
               (#1#
                (CONS |fn|
                      ((LAMBDA (|bfVar#88| |bfVar#87| |x|)
@@ -2639,7 +2639,7 @@
                                    (CONS (|asySig| |x| |name?|) |bfVar#88|))))
                          (SETQ |bfVar#87| (CDR |bfVar#87|))))
                       NIL |r| NIL)))))
-       ((EQ |x| '%) '$) (#1# |x|))))))
+       ((EQ |x| '%) '%) (#1# |x|))))))
 
 ; asyMapping([a,b],name?) ==
 ;   newa := asySig(a,name?)
@@ -2677,10 +2677,10 @@
 ;     fn = '_-_> => asyTypeMapping r
 ;     fn = 'Apply => r
 ; --  fn = 'Declare and r is [name,typ,:.] => typ
-;     x is '(_%) => '(_$)
+;     x is '(_%) => '(_%)
 ;     x
 ; --x = 'Type => '(Type)
-;   x = '_% => '_$
+;   x = '_% => '_%
 ;   x
 
 (DEFUN |asyType| (|x|)
@@ -2708,8 +2708,8 @@
                |u|))
              ((EQ |fn| '|With|) (|asyCATEGORY| |r|))
              ((EQ |fn| '->) (|asyTypeMapping| |r|)) ((EQ |fn| '|Apply|) |r|)
-             ((EQUAL |x| '(%)) '($)) (#1# |x|)))
-      ((EQ |x| '%) '$) (#1# |x|)))))
+             ((EQUAL |x| '(%)) '(%)) (#1# |x|)))
+      ((EQ |x| '%) '%) (#1# |x|)))))
 
 ; asyTypeJoin r ==
 ;   $conStack : local := nil
@@ -2915,11 +2915,11 @@
 ;     fn = '_-_> => asyTypeMapping r
 ;     fn = 'Apply => asyTypeUnitList r
 ;     fn = 'Declare and r is [name,typ,:.] => asyTypeUnitDeclare(name,typ)
-;     x is '(_%) => '(_$)
+;     x is '(_%) => '(_%)
 ;     [fn,:asyTypeUnitList r]
 ;   GETL(x,'NILADIC) => [x]
 ; --x = 'Type => '(Type)
-;   x = '_% => '_$
+;   x = '_% => '_%
 ;   x
 
 (DEFUN |asyTypeUnit| (|x|)
@@ -2956,9 +2956,9 @@
                     (AND (CONSP |ISTMP#1|)
                          (PROGN (SETQ |typ| (CAR |ISTMP#1|)) #1#))))
               (|asyTypeUnitDeclare| |name| |typ|))
-             ((EQUAL |x| '(%)) '($))
+             ((EQUAL |x| '(%)) '(%))
              (#1# (CONS |fn| (|asyTypeUnitList| |r|)))))
-      ((GETL |x| 'NILADIC) (LIST |x|)) ((EQ |x| '%) '$) (#1# |x|)))))
+      ((GETL |x| 'NILADIC) (LIST |x|)) ((EQ |x| '%) '%) (#1# |x|)))))
 
 ; asyTypeUnitList x == [asyTypeUnit y for y in x]
 
@@ -3502,7 +3502,7 @@
 
 ; asyTypeItem x ==
 ;   atom x =>
-;     x = '_%         => '_$
+;     x = '_%         => '_%
 ;     x
 ;   x is ['_-_>,a,b] =>
 ;       ['Mapping,b,:asyUnTuple a]
@@ -3525,7 +3525,7 @@
 (DEFUN |asyTypeItem| (|x|)
   (PROG (|ISTMP#1| |a| |ISTMP#2| |b| |r| |parts| |t| |args|)
     (RETURN
-     (COND ((ATOM |x|) (COND ((EQ |x| '%) '$) (#1='T |x|)))
+     (COND ((ATOM |x|) (COND ((EQ |x| '%) '%) (#1='T |x|)))
            ((AND (CONSP |x|) (EQ (CAR |x|) '->)
                  (PROGN
                   (SETQ |ISTMP#1| (CDR |x|))

@@ -2,11 +2,11 @@
 (SDEFUN |SCANUTIL;parse_integer2|
         ((|str| (|String|)) (|i0| (|SingleInteger|)) (|l| (|SingleInteger|))
          (|l2l| (|List| (|SingleInteger|))) (|tpl| (|List| (|Integer|)))
-         ($ (|Integer|)))
+         (% (|Integer|)))
         (SPROG
          ((|res| (|Integer|)) (|l2| #1=(|SingleInteger|)) (|tp| (|Integer|))
           (|l1| (|SingleInteger|)) (|s1| (|SingleInteger|)) (|dig_val| #1#)
-          (#2=#:G721 NIL) (|i| NIL) (#3=#:G720 NIL) (#4=#:G719 NIL)
+          (#2=#:G469 NIL) (|i| NIL) (#3=#:G468 NIL) (#4=#:G467 NIL)
           (|ten7| (|Integer|)) (|ten| #5=(|SingleInteger|)) (|b| #5#))
          (SEQ (LETT |b| 48) (LETT |ten| 10) (LETT |ten7| 10000000)
               (EXIT
@@ -55,8 +55,8 @@
                       (LETT |l2| (|sub_SI| |l| |l1|))
                       (LETT |res|
                             (|SCANUTIL;parse_integer2| |str|
-                             (|add_SI| |i0| (SPADCALL 7 |l2| (QREFELT $ 8)))
-                             |l1| |l2l| |tpl| $))
+                             (|add_SI| |i0| (SPADCALL 7 |l2| (QREFELT % 8)))
+                             |l1| |l2l| |tpl| %))
                       (SEQ G190
                            (COND
                             ((NULL (NULL (|less_SI| (|SPADfirst| |l2l|) |l2|)))
@@ -68,16 +68,16 @@
                        (+ |res|
                           (* |tp|
                              (|SCANUTIL;parse_integer2| |str| |i0| |l2| |l2l|
-                              |tpl| $))))))))))) 
+                              |tpl| %))))))))))) 
 
-(SDEFUN |SCANUTIL;parse_integer;SI;2| ((|str| (|String|)) ($ (|Integer|)))
+(SDEFUN |SCANUTIL;parse_integer;SI;2| ((|str| (|String|)) (% (|Integer|)))
         (SPROG
          ((|res| (|Integer|)) (|j| (|SingleInteger|))
           (|s1| #1=(|SingleInteger|)) (|dig_val| #2=(|SingleInteger|))
-          (#3=#:G741 NIL) (|i| NIL) (#4=#:G740 NIL) (|k| NIL)
+          (#3=#:G489 NIL) (|i| NIL) (#4=#:G488 NIL) (|k| NIL)
           (|ll| #5=(|SingleInteger|)) (|tpl| (|List| #6=(|Integer|)))
           (|l2l| (|List| #1#)) (|tp| #6#) (|ten7| #6#) (|l2| #2#) (|l20| #2#)
-          (#7=#:G739 NIL) (|ten| #5#) (|l1| (|SingleInteger|)) (|l| #5#)
+          (#7=#:G487 NIL) (|ten| #5#) (|l1| (|SingleInteger|)) (|l| #5#)
           (|b| #5#))
          (SEQ (LETT |b| 48) (LETT |l| (QCSIZE |str|))
               (LETT |l1| (|rem_SI| |l| 7)) (LETT |s1| 0) (LETT |ten| 10)
@@ -114,7 +114,7 @@
                                    (EXIT
                                     (+ (* |res| (EXPT 10 |l20|))
                                        (|SCANUTIL;parse_integer2| |str| |j|
-                                        |l2| |l2l| |tpl| $)))))
+                                        |l2| |l2l| |tpl| %)))))
                              (#8#
                               (SEQ
                                (SEQ (LETT |k| 1) (LETT #4# |l2|) G190
@@ -149,7 +149,7 @@
 
 (DEFUN |ScanningUtilities| ()
   (SPROG NIL
-         (PROG (#1=#:G743)
+         (PROG (#1=#:G491)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ScanningUtilities|))
@@ -167,16 +167,16 @@
                   (HREM |$ConstructorCache| '|ScanningUtilities|)))))))))) 
 
 (DEFUN |ScanningUtilities;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|ScanningUtilities|))
-          (LETT $ (GETREFV 11))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|ScanningUtilities| NIL (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 11))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|ScanningUtilities| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|ScanningUtilities| '|infovec|
           (LIST

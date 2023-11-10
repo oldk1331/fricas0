@@ -1,67 +1,67 @@
 
-(SDEFUN |ELAGG-;delete;AIA;1| ((|x| (A)) (|i| (|Integer|)) ($ (A)))
-        (SPADCALL (SPADCALL |x| (QREFELT $ 8)) |i| (QREFELT $ 10))) 
+(SDEFUN |ELAGG-;delete;AIA;1| ((|x| (A)) (|i| (|Integer|)) (% (A)))
+        (SPADCALL (SPADCALL |x| (QREFELT % 8)) |i| (QREFELT % 10))) 
 
 (SDEFUN |ELAGG-;delete;AUsA;2|
-        ((|x| (A)) (|i| (|UniversalSegment| (|Integer|))) ($ (A)))
-        (SPADCALL (SPADCALL |x| (QREFELT $ 8)) |i| (QREFELT $ 13))) 
+        ((|x| (A)) (|i| (|UniversalSegment| (|Integer|))) (% (A)))
+        (SPADCALL (SPADCALL |x| (QREFELT % 8)) |i| (QREFELT % 13))) 
 
 (SDEFUN |ELAGG-;remove;M2A;3|
-        ((|f| (|Mapping| (|Boolean|) S)) (|x| (A)) ($ (A)))
-        (SPADCALL |f| (SPADCALL |x| (QREFELT $ 8)) (QREFELT $ 16))) 
+        ((|f| (|Mapping| (|Boolean|) S)) (|x| (A)) (% (A)))
+        (SPADCALL |f| (SPADCALL |x| (QREFELT % 8)) (QREFELT % 16))) 
 
-(SDEFUN |ELAGG-;insert;SAIA;4| ((|s| (S)) (|x| (A)) (|i| (|Integer|)) ($ (A)))
-        (SPADCALL |s| (SPADCALL |x| (QREFELT $ 8)) |i| (QREFELT $ 18))) 
+(SDEFUN |ELAGG-;insert;SAIA;4| ((|s| (S)) (|x| (A)) (|i| (|Integer|)) (% (A)))
+        (SPADCALL |s| (SPADCALL |x| (QREFELT % 8)) |i| (QREFELT % 18))) 
 
-(SDEFUN |ELAGG-;insert;2AIA;5| ((|w| (A)) (|x| (A)) (|i| (|Integer|)) ($ (A)))
-        (SPADCALL (SPADCALL |w| (QREFELT $ 8)) (SPADCALL |x| (QREFELT $ 8)) |i|
-                  (QREFELT $ 20))) 
+(SDEFUN |ELAGG-;insert;2AIA;5| ((|w| (A)) (|x| (A)) (|i| (|Integer|)) (% (A)))
+        (SPADCALL (SPADCALL |w| (QREFELT % 8)) (SPADCALL |x| (QREFELT % 8)) |i|
+                  (QREFELT % 20))) 
 
 (SDEFUN |ELAGG-;select;M2A;6|
-        ((|f| (|Mapping| (|Boolean|) S)) (|x| (A)) ($ (A)))
-        (SPADCALL |f| (SPADCALL |x| (QREFELT $ 8)) (QREFELT $ 22))) 
+        ((|f| (|Mapping| (|Boolean|) S)) (|x| (A)) (% (A)))
+        (SPADCALL |f| (SPADCALL |x| (QREFELT % 8)) (QREFELT % 22))) 
 
-(SDEFUN |ELAGG-;concat;3A;7| ((|x| (A)) (|y| (A)) ($ (A)))
-        (SPADCALL (SPADCALL |x| (QREFELT $ 8)) |y| (QREFELT $ 24))) 
+(SDEFUN |ELAGG-;concat;3A;7| ((|x| (A)) (|y| (A)) (% (A)))
+        (SPADCALL (SPADCALL |x| (QREFELT % 8)) |y| (QREFELT % 24))) 
 
-(SDEFUN |ELAGG-;concat;ASA;8| ((|x| (A)) (|y| (S)) ($ (A)))
-        (SPADCALL (SPADCALL |x| (QREFELT $ 8)) (SPADCALL 1 |y| (QREFELT $ 27))
-                  (QREFELT $ 24))) 
+(SDEFUN |ELAGG-;concat;ASA;8| ((|x| (A)) (|y| (S)) (% (A)))
+        (SPADCALL (SPADCALL |x| (QREFELT % 8)) (SPADCALL 1 |y| (QREFELT % 27))
+                  (QREFELT % 24))) 
 
-(SDEFUN |ELAGG-;concat!;ASA;9| ((|x| (A)) (|y| (S)) ($ (A)))
-        (SPADCALL |x| (SPADCALL 1 |y| (QREFELT $ 27)) (QREFELT $ 24))) 
+(SDEFUN |ELAGG-;concat!;ASA;9| ((|x| (A)) (|y| (S)) (% (A)))
+        (SPADCALL |x| (SPADCALL 1 |y| (QREFELT % 27)) (QREFELT % 24))) 
 
-(SDEFUN |ELAGG-;remove;S2A;10| ((|s| (S)) (|x| (A)) ($ (A)))
-        (SPADCALL |s| (SPADCALL |x| (QREFELT $ 8)) (QREFELT $ 30))) 
+(SDEFUN |ELAGG-;remove;S2A;10| ((|s| (S)) (|x| (A)) (% (A)))
+        (SPADCALL |s| (SPADCALL |x| (QREFELT % 8)) (QREFELT % 30))) 
 
-(SDEFUN |ELAGG-;remove!;S2A;11| ((|s| (S)) (|x| (A)) ($ (A)))
+(SDEFUN |ELAGG-;remove!;S2A;11| ((|s| (S)) (|x| (A)) (% (A)))
         (SPROG NIL
-               (SPADCALL (CONS #'|ELAGG-;remove!;S2A;11!0| (VECTOR $ |s|)) |x|
-                         (QREFELT $ 16)))) 
+               (SPADCALL (CONS #'|ELAGG-;remove!;S2A;11!0| (VECTOR % |s|)) |x|
+                         (QREFELT % 16)))) 
 
 (SDEFUN |ELAGG-;remove!;S2A;11!0| ((|y| NIL) ($$ NIL))
-        (PROG (|s| $)
+        (PROG (|s| %)
           (LETT |s| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |y| |s| (QREFELT $ 33)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |y| |s| (QREFELT % 33)))))) 
 
-(SDEFUN |ELAGG-;removeDuplicates;2A;12| ((|x| (A)) ($ (A)))
-        (SPADCALL (SPADCALL |x| (QREFELT $ 8)) (QREFELT $ 35))) 
+(SDEFUN |ELAGG-;removeDuplicates;2A;12| ((|x| (A)) (% (A)))
+        (SPADCALL (SPADCALL |x| (QREFELT % 8)) (QREFELT % 35))) 
 
-(SDEFUN |ELAGG-;merge!;3A;13| ((|x| (A)) (|y| (A)) ($ (A)))
-        (SPADCALL (ELT $ 37) |x| |y| (QREFELT $ 39))) 
+(SDEFUN |ELAGG-;merge!;3A;13| ((|x| (A)) (|y| (A)) (% (A)))
+        (SPADCALL (ELT % 37) |x| |y| (QREFELT % 39))) 
 
 (DECLAIM (NOTINLINE |ExtensibleLinearAggregate&;|)) 
 
 (DEFUN |ExtensibleLinearAggregate&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|ExtensibleLinearAggregate&| DV$1 DV$2))
-          (LETT $ (GETREFV 42))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 42))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
@@ -69,26 +69,26 @@
                                                              '(|OrderedSet|))
                                               (|HasCategory| |#2|
                                                              '(|BasicType|))))))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
           (COND
            ((|testBitVector| |pv$| 2)
             (PROGN
-             (QSETREFV $ 31
-                       (CONS (|dispatchFunction| |ELAGG-;remove;S2A;10|) $))
-             (QSETREFV $ 34
-                       (CONS (|dispatchFunction| |ELAGG-;remove!;S2A;11|) $))
-             (QSETREFV $ 36
+             (QSETREFV % 31
+                       (CONS (|dispatchFunction| |ELAGG-;remove;S2A;10|) %))
+             (QSETREFV % 34
+                       (CONS (|dispatchFunction| |ELAGG-;remove!;S2A;11|) %))
+             (QSETREFV % 36
                        (CONS
                         (|dispatchFunction| |ELAGG-;removeDuplicates;2A;12|)
-                        $)))))
+                        %)))))
           (COND
            ((|testBitVector| |pv$| 1)
-            (QSETREFV $ 40
-                      (CONS (|dispatchFunction| |ELAGG-;merge!;3A;13|) $))))
-          $))) 
+            (QSETREFV % 40
+                      (CONS (|dispatchFunction| |ELAGG-;merge!;3A;13|) %))))
+          %))) 
 
 (MAKEPROP '|ExtensibleLinearAggregate&| '|infovec|
           (LIST
@@ -103,7 +103,7 @@
               (55 . |remove!|) (61 . |remove|) (|Boolean|) (67 . =)
               (73 . |remove!|) (79 . |removeDuplicates!|)
               (84 . |removeDuplicates|) (89 . <) (|Mapping| 32 7 7)
-              (95 . |merge!|) (102 . |merge!|) (|List| $))
+              (95 . |merge!|) (102 . |merge!|) (|List| %))
            '#(|select| 108 |removeDuplicates| 114 |remove!| 119 |remove| 125
               |merge!| 137 |insert| 143 |delete| 157 |concat!| 169 |concat|
               175)

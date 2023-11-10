@@ -1,19 +1,19 @@
 
 (SDEFUN |DROPT1;option;LSU;1|
         ((|l| (|List| (|DrawOption|))) (|s| (|Symbol|))
-         ($ (|Union| S "failed")))
+         (% (|Union| S "failed")))
         (SPROG ((|u| (|Union| (|Any|) "failed")))
-               (SEQ (LETT |u| (SPADCALL |l| |s| (QREFELT $ 11)))
+               (SEQ (LETT |u| (SPADCALL |l| |s| (QREFELT % 11)))
                     (EXIT
                      (COND ((QEQCAR |u| 1) (CONS 1 "failed"))
                            ('T
-                            (CONS 0 (SPADCALL (QCDR |u|) (QREFELT $ 14))))))))) 
+                            (CONS 0 (SPADCALL (QCDR |u|) (QREFELT % 14))))))))) 
 
 (DECLAIM (NOTINLINE |DrawOptionFunctions1;|)) 
 
-(DEFUN |DrawOptionFunctions1| (#1=#:G704)
+(DEFUN |DrawOptionFunctions1| (#1=#:G459)
   (SPROG NIL
-         (PROG (#2=#:G705)
+         (PROG (#2=#:G460)
            (RETURN
             (COND
              ((LETT #2#
@@ -30,24 +30,24 @@
                   (HREM |$ConstructorCache| '|DrawOptionFunctions1|)))))))))) 
 
 (DEFUN |DrawOptionFunctions1;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|DrawOptionFunctions1| DV$1))
-          (LETT $ (GETREFV 18))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 18))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|DrawOptionFunctions1| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|DrawOptionFunctions1| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|Union| 12 '"failed")
-              (|List| $) (|Symbol|) (|DrawOption|) (0 . |option|) (|Any|)
+              (|List| %) (|Symbol|) (|DrawOption|) (0 . |option|) (|Any|)
               (|AnyFunctions1| 6) (6 . |retract|) (|Union| 6 '#1="failed")
               (|List| 10) |DROPT1;option;LSU;1|)
            '#(|option| 11) 'NIL

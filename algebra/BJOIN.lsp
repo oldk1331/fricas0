@@ -8,11 +8,11 @@
         (T (SETQ |BoundedJoinSemilattice;AL| (|BoundedJoinSemilattice;|))))) 
 
 (DEFUN |BoundedJoinSemilattice;| ()
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|JoinSemilattice|)
-                           (|mkCategory| '(((|_\|_| ($) |constant|) T)) NIL NIL
+                           (|mkCategory| '(((|_\|_| (%) |constant|) T)) NIL NIL
                                          NIL)))
            (SETELT #1# 0 '(|BoundedJoinSemilattice|))))) 
 

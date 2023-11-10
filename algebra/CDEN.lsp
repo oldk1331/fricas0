@@ -1,76 +1,76 @@
 
-(SDEFUN |CDEN;clearDenominator;2A;1| ((|l| (A)) ($ (A)))
+(SDEFUN |CDEN;clearDenominator;2A;1| ((|l| (A)) (% (A)))
         (SPROG ((|d| (R)))
-               (SEQ (LETT |d| (SPADCALL |l| (QREFELT $ 9)))
+               (SEQ (LETT |d| (SPADCALL |l| (QREFELT % 9)))
                     (EXIT
                      (SPADCALL
-                      (CONS #'|CDEN;clearDenominator;2A;1!0| (VECTOR $ |d|))
-                      |l| (QREFELT $ 14)))))) 
+                      (CONS #'|CDEN;clearDenominator;2A;1!0| (VECTOR % |d|))
+                      |l| (QREFELT % 14)))))) 
 
 (SDEFUN |CDEN;clearDenominator;2A;1!0| ((|x| NIL) ($$ NIL))
-        (PROG (|d| $)
+        (PROG (|d| %)
           (LETT |d| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
+          (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
             (SPADCALL
-             (SPADCALL (SPADCALL |d| |x| (QREFELT $ 10)) (QREFELT $ 11))
-             (QREFELT $ 12)))))) 
+             (SPADCALL (SPADCALL |d| |x| (QREFELT % 10)) (QREFELT % 11))
+             (QREFELT % 12)))))) 
 
 (SDEFUN |CDEN;splitDenominator;AR;2|
-        ((|l| (A)) ($ (|Record| (|:| |num| A) (|:| |den| R))))
+        ((|l| (A)) (% (|Record| (|:| |num| A) (|:| |den| R))))
         (SPROG ((|d| (R)))
-               (SEQ (LETT |d| (SPADCALL |l| (QREFELT $ 9)))
+               (SEQ (LETT |d| (SPADCALL |l| (QREFELT % 9)))
                     (EXIT
                      (CONS
                       (SPADCALL
-                       (CONS #'|CDEN;splitDenominator;AR;2!0| (VECTOR $ |d|))
-                       |l| (QREFELT $ 14))
+                       (CONS #'|CDEN;splitDenominator;AR;2!0| (VECTOR % |d|))
+                       |l| (QREFELT % 14))
                       |d|))))) 
 
 (SDEFUN |CDEN;splitDenominator;AR;2!0| ((|x| NIL) ($$ NIL))
-        (PROG (|d| $)
+        (PROG (|d| %)
           (LETT |d| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
+          (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
             (SPADCALL
-             (SPADCALL (SPADCALL |d| |x| (QREFELT $ 10)) (QREFELT $ 11))
-             (QREFELT $ 12)))))) 
+             (SPADCALL (SPADCALL |d| |x| (QREFELT % 10)) (QREFELT % 11))
+             (QREFELT % 12)))))) 
 
-(SDEFUN |CDEN;qlcm| ((|a| (Q)) (|b| (Q)) ($ (Q)))
+(SDEFUN |CDEN;qlcm| ((|a| (Q)) (|b| (Q)) (% (Q)))
         (SPADCALL
-         (SPADCALL (SPADCALL |a| (QREFELT $ 11)) (SPADCALL |b| (QREFELT $ 11))
-                   (QREFELT $ 18))
-         (QREFELT $ 12))) 
+         (SPADCALL (SPADCALL |a| (QREFELT % 11)) (SPADCALL |b| (QREFELT % 11))
+                   (QREFELT % 18))
+         (QREFELT % 12))) 
 
-(SDEFUN |CDEN;commonDenominator;AR;4| ((|l| (A)) ($ (R)))
+(SDEFUN |CDEN;commonDenominator;AR;4| ((|l| (A)) (% (R)))
         (SPADCALL
-         (SPADCALL (CONS (|function| |CDEN;qlcm|) $)
-                   (SPADCALL (CONS #'|CDEN;commonDenominator;AR;4!0| $) |l|
-                             (QREFELT $ 14))
-                   (|spadConstant| $ 20) (QREFELT $ 22))
-         (QREFELT $ 11))) 
+         (SPADCALL (CONS (|function| |CDEN;qlcm|) %)
+                   (SPADCALL (CONS #'|CDEN;commonDenominator;AR;4!0| %) |l|
+                             (QREFELT % 14))
+                   (|spadConstant| % 20) (QREFELT % 22))
+         (QREFELT % 11))) 
 
-(SDEFUN |CDEN;commonDenominator;AR;4!0| ((|x| NIL) ($ NIL))
-        (SPADCALL (SPADCALL |x| (QREFELT $ 19)) (QREFELT $ 12))) 
+(SDEFUN |CDEN;commonDenominator;AR;4!0| ((|x| NIL) (% NIL))
+        (SPADCALL (SPADCALL |x| (QREFELT % 19)) (QREFELT % 12))) 
 
-(SDEFUN |CDEN;commonDenominator;AR;5| ((|l| (A)) ($ (R)))
+(SDEFUN |CDEN;commonDenominator;AR;5| ((|l| (A)) (% (R)))
         (SPADCALL
-         (SPADCALL (ELT $ 23)
-                   (SPADCALL (CONS #'|CDEN;commonDenominator;AR;5!0| $) |l|
-                             (QREFELT $ 14))
-                   (|spadConstant| $ 20) (QREFELT $ 22))
-         (QREFELT $ 11))) 
+         (SPADCALL (ELT % 23)
+                   (SPADCALL (CONS #'|CDEN;commonDenominator;AR;5!0| %) |l|
+                             (QREFELT % 14))
+                   (|spadConstant| % 20) (QREFELT % 22))
+         (QREFELT % 11))) 
 
-(SDEFUN |CDEN;commonDenominator;AR;5!0| ((|x| NIL) ($ NIL))
-        (SPADCALL (SPADCALL |x| (QREFELT $ 19)) (QREFELT $ 12))) 
+(SDEFUN |CDEN;commonDenominator;AR;5!0| ((|x| NIL) (% NIL))
+        (SPADCALL (SPADCALL |x| (QREFELT % 19)) (QREFELT % 12))) 
 
 (DECLAIM (NOTINLINE |CommonDenominator;|)) 
 
-(DEFUN |CommonDenominator| (&REST #1=#:G706)
+(DEFUN |CommonDenominator| (&REST #1=#:G465)
   (SPROG NIL
-         (PROG (#2=#:G707)
+         (PROG (#2=#:G466)
            (RETURN
             (COND
              ((LETT #2#
@@ -88,33 +88,33 @@
                   (HREM |$ConstructorCache| '|CommonDenominator|)))))))))) 
 
 (DEFUN |CommonDenominator;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT DV$3 (|devaluate| |#3|))
           (LETT |dv$| (LIST '|CommonDenominator| DV$1 DV$2 DV$3))
-          (LETT $ (GETREFV 24))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 24))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|CommonDenominator|
-                      (LIST DV$1 DV$2 DV$3) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (QSETREFV $ 8 |#3|)
-          (SETF |pv$| (QREFELT $ 3))
+                      (LIST DV$1 DV$2 DV$3) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (QSETREFV % 8 |#3|)
+          (SETF |pv$| (QREFELT % 3))
           (COND
            ((|HasCategory| |#1| '(|GcdDomain|))
             (PROGN
-             (QSETREFV $ 9
+             (QSETREFV % 9
                        (CONS (|dispatchFunction| |CDEN;commonDenominator;AR;4|)
-                             $))))
+                             %))))
            ('T
-            (QSETREFV $ 9
+            (QSETREFV % 9
                       (CONS (|dispatchFunction| |CDEN;commonDenominator;AR;5|)
-                            $))))
-          $))) 
+                            %))))
+          %))) 
 
 (MAKEPROP '|CommonDenominator| '|infovec|
           (LIST

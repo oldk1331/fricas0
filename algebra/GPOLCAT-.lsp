@@ -1,22 +1,22 @@
 
-(SDEFUN |GPOLCAT-;monomials;SL;1| ((|p| (S)) ($ (|List| S)))
+(SDEFUN |GPOLCAT-;monomials;SL;1| ((|p| (S)) (% (|List| S)))
         (SPROG ((|ml| (|List| S)))
                (SEQ (LETT |ml| NIL)
                     (SEQ G190
                          (COND
                           ((NULL
-                            (SPADCALL |p| (|spadConstant| $ 10)
-                                      (QREFELT $ 13)))
+                            (SPADCALL |p| (|spadConstant| % 10)
+                                      (QREFELT % 13)))
                            (GO G191)))
                          (SEQ
-                          (LETT |ml| (CONS (SPADCALL |p| (QREFELT $ 14)) |ml|))
-                          (EXIT (LETT |p| (SPADCALL |p| (QREFELT $ 15)))))
+                          (LETT |ml| (CONS (SPADCALL |p| (QREFELT % 14)) |ml|))
+                          (EXIT (LETT |p| (SPADCALL |p| (QREFELT % 15)))))
                          NIL (GO G190) G191 (EXIT NIL))
                     (EXIT (NREVERSE |ml|))))) 
 
 (SDEFUN |GPOLCAT-;monomial;SLLS;2|
         ((|p| (S)) (|lv| (|List| |VarSet|))
-         (|ln| (|List| (|NonNegativeInteger|))) ($ (S)))
+         (|ln| (|List| (|NonNegativeInteger|))) (% (S)))
         (COND
          ((NULL |lv|)
           (COND ((NULL |ln|) |p|)
@@ -24,29 +24,29 @@
          ((NULL |ln|) (|error| "mismatched lists in monomial"))
          (#1#
           (SPADCALL
-           (SPADCALL |p| (|SPADfirst| |lv|) (|SPADfirst| |ln|) (QREFELT $ 19))
-           (CDR |lv|) (CDR |ln|) (QREFELT $ 22))))) 
+           (SPADCALL |p| (|SPADfirst| |lv|) (|SPADfirst| |ln|) (QREFELT % 19))
+           (CDR |lv|) (CDR |ln|) (QREFELT % 22))))) 
 
-(SDEFUN |GPOLCAT-;mkPrim| ((|p| (S)) ($ (S)))
-        (SPADCALL (|spadConstant| $ 25) (SPADCALL |p| (QREFELT $ 26))
-                  (QREFELT $ 27))) 
+(SDEFUN |GPOLCAT-;mkPrim| ((|p| (S)) (% (S)))
+        (SPADCALL (|spadConstant| % 25) (SPADCALL |p| (QREFELT % 26))
+                  (QREFELT % 27))) 
 
-(SDEFUN |GPOLCAT-;primitiveMonomials;SL;4| ((|p| (S)) ($ (|List| S)))
+(SDEFUN |GPOLCAT-;primitiveMonomials;SL;4| ((|p| (S)) (% (|List| S)))
         (SPROG ((|ml| (|List| S)))
                (SEQ (LETT |ml| NIL)
                     (SEQ G190
                          (COND
                           ((NULL
-                            (SPADCALL |p| (|spadConstant| $ 10)
-                                      (QREFELT $ 13)))
+                            (SPADCALL |p| (|spadConstant| % 10)
+                                      (QREFELT % 13)))
                            (GO G191)))
                          (SEQ
                           (LETT |ml|
                                 (CONS
                                  (|GPOLCAT-;mkPrim|
-                                  (SPADCALL |p| (QREFELT $ 14)) $)
+                                  (SPADCALL |p| (QREFELT % 14)) %)
                                  |ml|))
-                          (EXIT (LETT |p| (SPADCALL |p| (QREFELT $ 15)))))
+                          (EXIT (LETT |p| (SPADCALL |p| (QREFELT % 15)))))
                          NIL (GO G190) G191 (EXIT NIL))
                     (EXIT (NREVERSE |ml|))))) 
 
@@ -54,7 +54,7 @@
 
 (DEFUN |MaybeSkewPolynomialCategory&| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -62,9 +62,9 @@
     (LETT DV$3 (|devaluate| |#3|))
     (LETT DV$4 (|devaluate| |#4|))
     (LETT |dv$| (LIST '|MaybeSkewPolynomialCategory&| DV$1 DV$2 DV$3 DV$4))
-    (LETT $ (GETREFV 29))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3
+    (LETT % (GETREFV 29))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3
               (LETT |pv$|
                     (|buildPredVector| 0 0
                                        (LIST
@@ -73,26 +73,26 @@
                                         (|HasCategory| |#2| '(|Comparable|))
                                         (|HasCategory| |#2| '(|SemiRing|))
                                         (|HasCategory| |#2| '(|Ring|))))))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (SETF |pv$| (QREFELT $ 3))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (SETF |pv$| (QREFELT % 3))
     (COND
      ((|testBitVector| |pv$| 3)
       (PROGN
-       (QSETREFV $ 28
+       (QSETREFV % 28
                  (CONS (|dispatchFunction| |GPOLCAT-;primitiveMonomials;SL;4|)
-                       $)))))
-    $))) 
+                       %)))))
+    %))) 
 
 (MAKEPROP '|MaybeSkewPolynomialCategory&| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|local| |#4|) (0 . |Zero|) (4 . |Zero|)
               (|Boolean|) (8 . ~=) (14 . |leadingMonomial|) (19 . |reductum|)
-              (|List| $) |GPOLCAT-;monomials;SL;1| (|NonNegativeInteger|)
+              (|List| %) |GPOLCAT-;monomials;SL;1| (|NonNegativeInteger|)
               (24 . |monomial|) (|List| 9) (|List| 18) (31 . |monomial|)
               |GPOLCAT-;monomial;SLLS;2| (38 . |One|) (42 . |One|)
               (46 . |degree|) (51 . |monomial|) (57 . |primitiveMonomials|))

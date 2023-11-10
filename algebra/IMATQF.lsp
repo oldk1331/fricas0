@@ -1,41 +1,41 @@
 
-(SDEFUN |IMATQF;qfMat| ((|m| (M)) ($ (M2)))
-        (SPADCALL (ELT $ 14) |m| (QREFELT $ 17))) 
+(SDEFUN |IMATQF;qfMat| ((|m| (M)) (% (M2)))
+        (SPADCALL (ELT % 14) |m| (QREFELT % 17))) 
 
-(SDEFUN |IMATQF;rowEchelon;MM2;2| ((|m| (M)) ($ (M2)))
-        (SPADCALL (|IMATQF;qfMat| |m| $) (QREFELT $ 19))) 
+(SDEFUN |IMATQF;rowEchelon;MM2;2| ((|m| (M)) (% (M2)))
+        (SPADCALL (|IMATQF;qfMat| |m| %) (QREFELT % 19))) 
 
-(SDEFUN |IMATQF;inverse;MU;3| ((|m| (M)) ($ (|Union| M2 "failed")))
+(SDEFUN |IMATQF;inverse;MU;3| ((|m| (M)) (% (|Union| M2 "failed")))
         (SPROG ((|inv| (|Union| M2 "failed")))
                (SEQ
-                (LETT |inv| (SPADCALL (|IMATQF;qfMat| |m| $) (QREFELT $ 22)))
+                (LETT |inv| (SPADCALL (|IMATQF;qfMat| |m| %) (QREFELT % 22)))
                 (EXIT
                  (COND ((QEQCAR |inv| 1) (CONS 1 "failed"))
                        ('T (CONS 0 (QCDR |inv|)))))))) 
 
-(SDEFUN |IMATQF;nullSpace;ML;4| ((|m| (M)) ($ (|List| |Col|)))
-        (SPROG ((#1=#:G704 NIL) (|v| NIL) (#2=#:G703 NIL))
+(SDEFUN |IMATQF;nullSpace;ML;4| ((|m| (M)) (% (|List| |Col|)))
+        (SPROG ((#1=#:G459 NIL) (|v| NIL) (#2=#:G458 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
                  (SEQ (LETT |v| NIL)
                       (LETT #1#
-                            (SPADCALL (|IMATQF;qfMat| |m| $) (QREFELT $ 25)))
+                            (SPADCALL (|IMATQF;qfMat| |m| %) (QREFELT % 25)))
                       G190
                       (COND
                        ((OR (ATOM #1#) (PROGN (LETT |v| (CAR #1#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2# (CONS (SPADCALL |v| (QREFELT $ 27)) #2#))))
+                        (LETT #2# (CONS (SPADCALL |v| (QREFELT % 27)) #2#))))
                       (LETT #1# (CDR #1#)) (GO G190) G191
                       (EXIT (NREVERSE #2#))))))) 
 
 (DECLAIM (NOTINLINE |InnerMatrixQuotientFieldFunctions;|)) 
 
-(DEFUN |InnerMatrixQuotientFieldFunctions| (&REST #1=#:G705)
+(DEFUN |InnerMatrixQuotientFieldFunctions| (&REST #1=#:G460)
   (SPROG NIL
-         (PROG (#2=#:G706)
+         (PROG (#2=#:G461)
            (RETURN
             (COND
              ((LETT #2#
@@ -58,7 +58,7 @@
 (DEFUN |InnerMatrixQuotientFieldFunctions;|
        (|#1| |#2| |#3| |#4| |#5| |#6| |#7| |#8|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$8 NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$8 NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL)
     (DV$4 NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -72,30 +72,30 @@
     (LETT |dv$|
           (LIST '|InnerMatrixQuotientFieldFunctions| DV$1 DV$2 DV$3 DV$4 DV$5
                 DV$6 DV$7 DV$8))
-    (LETT $ (GETREFV 30))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3
+    (LETT % (GETREFV 30))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3
               (LETT |pv$|
                     (|buildPredVector| 0 0
                                        (LIST
                                         (|HasCategory| |#7|
                                                        '(|shallowlyMutable|))))))
     (|haddProp| |$ConstructorCache| '|InnerMatrixQuotientFieldFunctions|
-                (LIST DV$1 DV$2 DV$3 DV$4 DV$5 DV$6 DV$7 DV$8) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (QSETREFV $ 10 |#5|)
-    (QSETREFV $ 11 |#6|)
-    (QSETREFV $ 12 |#7|)
-    (QSETREFV $ 13 |#8|)
-    (SETF |pv$| (QREFELT $ 3))
+                (LIST DV$1 DV$2 DV$3 DV$4 DV$5 DV$6 DV$7 DV$8) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (QSETREFV % 10 |#5|)
+    (QSETREFV % 11 |#6|)
+    (QSETREFV % 12 |#7|)
+    (QSETREFV % 13 |#8|)
+    (SETF |pv$| (QREFELT % 3))
     (COND
      ((|testBitVector| |pv$| 1)
-      (QSETREFV $ 29 (CONS (|dispatchFunction| |IMATQF;nullSpace;ML;4|) $))))
-    $))) 
+      (QSETREFV % 29 (CONS (|dispatchFunction| |IMATQF;nullSpace;ML;4|) %))))
+    %))) 
 
 (MAKEPROP '|InnerMatrixQuotientFieldFunctions| '|infovec|
           (LIST

@@ -1,38 +1,38 @@
 
 (SDEFUN |DRAWCURV;drawToScaleRanges|
         ((|xVals| (|Segment| (|Float|))) (|yVals| (|Segment| (|Float|)))
-         ($ (|List| (|Segment| (|Float|)))))
+         (% (|List| (|Segment| (|Float|)))))
         (SPROG
          ((|pad| (|Float|)) (|yDiff| #1=(|Float|)) (|xDiff| #1#)
           (|yLo| #2=(|Float|)) (|yHi| #3=(|Float|)) (|xLo| #2#) (|xHi| #3#))
-         (SEQ (LETT |xHi| (SPADCALL |xVals| (QREFELT $ 10)))
-              (LETT |xLo| (SPADCALL |xVals| (QREFELT $ 11)))
-              (LETT |yHi| (SPADCALL |yVals| (QREFELT $ 10)))
-              (LETT |yLo| (SPADCALL |yVals| (QREFELT $ 11)))
-              (LETT |xDiff| (SPADCALL |xHi| |xLo| (QREFELT $ 12)))
-              (LETT |yDiff| (SPADCALL |yHi| |yLo| (QREFELT $ 12)))
+         (SEQ (LETT |xHi| (SPADCALL |xVals| (QREFELT % 10)))
+              (LETT |xLo| (SPADCALL |xVals| (QREFELT % 11)))
+              (LETT |yHi| (SPADCALL |yVals| (QREFELT % 10)))
+              (LETT |yLo| (SPADCALL |yVals| (QREFELT % 11)))
+              (LETT |xDiff| (SPADCALL |xHi| |xLo| (QREFELT % 12)))
+              (LETT |yDiff| (SPADCALL |yHi| |yLo| (QREFELT % 12)))
               (LETT |pad|
                     (SPADCALL
-                     (SPADCALL (SPADCALL |yDiff| |xDiff| (QREFELT $ 12))
-                               (QREFELT $ 13))
-                     2 (QREFELT $ 15)))
+                     (SPADCALL (SPADCALL |yDiff| |xDiff| (QREFELT % 12))
+                               (QREFELT % 13))
+                     2 (QREFELT % 15)))
               (EXIT
                (COND
-                ((SPADCALL |yDiff| |xDiff| (QREFELT $ 17))
+                ((SPADCALL |yDiff| |xDiff| (QREFELT % 17))
                  (LIST
-                  (SPADCALL (SPADCALL |xLo| |pad| (QREFELT $ 12))
-                            (SPADCALL |xHi| |pad| (QREFELT $ 18))
-                            (QREFELT $ 19))
+                  (SPADCALL (SPADCALL |xLo| |pad| (QREFELT % 12))
+                            (SPADCALL |xHi| |pad| (QREFELT % 18))
+                            (QREFELT % 19))
                   |yVals|))
                 ('T
                  (LIST |xVals|
-                       (SPADCALL (SPADCALL |yLo| |pad| (QREFELT $ 12))
-                                 (SPADCALL |yHi| |pad| (QREFELT $ 18))
-                                 (QREFELT $ 19))))))))) 
+                       (SPADCALL (SPADCALL |yLo| |pad| (QREFELT % 12))
+                                 (SPADCALL |yHi| |pad| (QREFELT % 18))
+                                 (QREFELT % 19))))))))) 
 
-(SDEFUN |DRAWCURV;intConvert| ((|r| (R)) ($ (|Integer|)))
+(SDEFUN |DRAWCURV;intConvert| ((|r| (R)) (% (|Integer|)))
         (SPROG ((|nn| (|Union| (|Integer|) "failed")))
-               (SEQ (LETT |nn| (SPADCALL |r| (QREFELT $ 21)))
+               (SEQ (LETT |nn| (SPADCALL |r| (QREFELT % 21)))
                     (EXIT
                      (COND
                       ((QEQCAR |nn| 1)
@@ -41,15 +41,15 @@
                       ('T (QCDR |nn|))))))) 
 
 (SDEFUN |DRAWCURV;polyEquation|
-        ((|eq| (|Equation| |Ex|)) ($ (|Polynomial| (|Integer|))))
+        ((|eq| (|Equation| |Ex|)) (% (|Polynomial| (|Integer|))))
         (SPROG
          ((|rat| (|Fraction| (|Polynomial| R)))
           (|r| (|Union| (|Fraction| (|Polynomial| R)) "failed")) (|ff| (|Ex|)))
          (SEQ
           (LETT |ff|
-                (SPADCALL (SPADCALL |eq| (QREFELT $ 23))
-                          (SPADCALL |eq| (QREFELT $ 24)) (QREFELT $ 25)))
-          (LETT |r| (SPADCALL |ff| (QREFELT $ 27)))
+                (SPADCALL (SPADCALL |eq| (QREFELT % 23))
+                          (SPADCALL |eq| (QREFELT % 24)) (QREFELT % 25)))
+          (LETT |r| (SPADCALL |ff| (QREFELT % 27)))
           (EXIT
            (COND ((QEQCAR |r| 1) (|error| "draw: not a polynomial equation"))
                  (#1='T
@@ -57,18 +57,18 @@
                        (EXIT
                         (COND
                          ((QEQCAR
-                           (SPADCALL (SPADCALL |rat| (QREFELT $ 30))
-                                     (QREFELT $ 32))
+                           (SPADCALL (SPADCALL |rat| (QREFELT % 30))
+                                     (QREFELT % 32))
                            1)
                           (|error| "draw: non-constant denominator"))
                          (#1#
-                          (SPADCALL (CONS (|function| |DRAWCURV;intConvert|) $)
-                                    (SPADCALL |rat| (QREFELT $ 33))
-                                    (QREFELT $ 37)))))))))))) 
+                          (SPADCALL (CONS (|function| |DRAWCURV;intConvert|) %)
+                                    (SPADCALL |rat| (QREFELT % 33))
+                                    (QREFELT % 37)))))))))))) 
 
 (SDEFUN |DRAWCURV;makeObject;E2SLGi;4|
         ((|eq| (|Equation| |Ex|)) (|x| (|Symbol|)) (|y| (|Symbol|))
-         (|l| (|List| (|DrawOption|))) ($ (|GraphImage|)))
+         (|l| (|List| (|DrawOption|))) (% (|GraphImage|)))
         (SPROG
          ((|crCol| (|Palette|)) (|ptCol| (|Palette|))
           (|scaledRanges| (|List| (|Segment| (|Float|))))
@@ -77,11 +77,11 @@
           (|yRangeFloat| #1=(|Segment| (|Float|))) (|xRangeFloat| #1#)
           (|yRange| #2=(|Segment| (|Fraction| (|Integer|)))) (|xRange| #2#)
           (|ranges| (|List| (|Segment| (|Fraction| (|Integer|)))))
-          (#3=#:G729 NIL) (|ratRange| #4=(|Union| (|Any|) #5="failed"))
+          (#3=#:G470 NIL) (|ratRange| #4=(|Union| (|Any|) #5="failed"))
           (|floatRange| #4#) (|p| (|Polynomial| (|Integer|))))
-         (SEQ (LETT |p| (|DRAWCURV;polyEquation| |eq| $))
-              (LETT |floatRange| (SPADCALL |l| '|rangeFloat| (QREFELT $ 42)))
-              (LETT |ratRange| (SPADCALL |l| '|rangeRat| (QREFELT $ 42)))
+         (SEQ (LETT |p| (|DRAWCURV;polyEquation| |eq| %))
+              (LETT |floatRange| (SPADCALL |l| '|rangeFloat| (QREFELT % 42)))
+              (LETT |ratRange| (SPADCALL |l| '|rangeRat| (QREFELT % 42)))
               (COND
                ((QEQCAR |floatRange| 1)
                 (COND
@@ -91,17 +91,17 @@
                     "draw: you must specify ranges for an implicit plot"))))))
               (LETT |ranges| NIL) (LETT |floatRanges| NIL)
               (LETT |xRange|
-                    (SPADCALL (|spadConstant| $ 46) (|spadConstant| $ 46)
-                              (QREFELT $ 48)))
+                    (SPADCALL (|spadConstant| % 46) (|spadConstant| % 46)
+                              (QREFELT % 48)))
               (LETT |yRange|
-                    (SPADCALL (|spadConstant| $ 46) (|spadConstant| $ 46)
-                              (QREFELT $ 48)))
+                    (SPADCALL (|spadConstant| % 46) (|spadConstant| % 46)
+                              (QREFELT % 48)))
               (LETT |xRangeFloat|
-                    (SPADCALL (|spadConstant| $ 49) (|spadConstant| $ 49)
-                              (QREFELT $ 19)))
+                    (SPADCALL (|spadConstant| % 49) (|spadConstant| % 49)
+                              (QREFELT % 19)))
               (LETT |yRangeFloat|
-                    (SPADCALL (|spadConstant| $ 49) (|spadConstant| $ 49)
-                              (QREFELT $ 19)))
+                    (SPADCALL (|spadConstant| % 49) (|spadConstant| % 49)
+                              (QREFELT % 19)))
               (COND
                ((QEQCAR |ratRange| 1)
                 (SEQ
@@ -111,64 +111,64 @@
                             (QCDR #3#)
                           (|check_union2| (QEQCAR #3# 0) (|Any|)
                                           (|Union| (|Any|) #5#) #3#))
-                        (QREFELT $ 53)))
+                        (QREFELT % 53)))
                  (COND
-                  ((NULL (SPADCALL |floatRanges| 2 (QREFELT $ 55)))
+                  ((NULL (SPADCALL |floatRanges| 2 (QREFELT % 55)))
                    (EXIT (|error| "draw: you must specify two ranges"))))
                  (LETT |xRangeFloat| (|SPADfirst| |floatRanges|))
-                 (LETT |yRangeFloat| (SPADCALL |floatRanges| (QREFELT $ 56)))
+                 (LETT |yRangeFloat| (SPADCALL |floatRanges| (QREFELT % 56)))
                  (LETT |xRange|
-                       (SPADCALL (ELT $ 57) |xRangeFloat| (QREFELT $ 60)))
+                       (SPADCALL (ELT % 57) |xRangeFloat| (QREFELT % 60)))
                  (LETT |yRange|
-                       (SPADCALL (ELT $ 57) |yRangeFloat| (QREFELT $ 60)))
+                       (SPADCALL (ELT % 57) |yRangeFloat| (QREFELT % 60)))
                  (EXIT (LETT |ranges| (LIST |xRange| |yRange|)))))
                (#6='T
                 (SEQ
-                 (LETT |ranges| (SPADCALL (QCDR |ratRange|) (QREFELT $ 63)))
+                 (LETT |ranges| (SPADCALL (QCDR |ratRange|) (QREFELT % 63)))
                  (COND
-                  ((NULL (SPADCALL |ranges| 2 (QREFELT $ 64)))
+                  ((NULL (SPADCALL |ranges| 2 (QREFELT % 64)))
                    (EXIT (|error| "draw: you must specify two ranges"))))
                  (LETT |xRange| (|SPADfirst| |ranges|))
-                 (LETT |yRange| (SPADCALL |ranges| (QREFELT $ 65)))
+                 (LETT |yRange| (SPADCALL |ranges| (QREFELT % 65)))
                  (LETT |xRangeFloat|
-                       (SPADCALL (ELT $ 66) |xRange| (QREFELT $ 69)))
+                       (SPADCALL (ELT % 66) |xRange| (QREFELT % 69)))
                  (LETT |yRangeFloat|
-                       (SPADCALL (ELT $ 66) |yRange| (QREFELT $ 69)))
+                       (SPADCALL (ELT % 66) |yRange| (QREFELT % 69)))
                  (EXIT
                   (LETT |floatRanges| (LIST |xRangeFloat| |yRangeFloat|))))))
               (LETT |acplot|
-                    (SPADCALL |p| |x| |y| |xRange| |yRange| (QREFELT $ 71)))
+                    (SPADCALL |p| |x| |y| |xRange| |yRange| (QREFELT % 71)))
               (COND
-               ((SPADCALL |l| (SPADCALL (QREFELT $ 73)) (QREFELT $ 76))
+               ((SPADCALL |l| (SPADCALL (QREFELT % 73)) (QREFELT % 76))
                 (SEQ
                  (LETT |scaledRanges|
                        (|DRAWCURV;drawToScaleRanges| |xRangeFloat|
-                        |yRangeFloat| $))
+                        |yRangeFloat| %))
                  (EXIT
                   (LETT |l|
-                        (CONS (SPADCALL |scaledRanges| (QREFELT $ 77)) |l|)))))
+                        (CONS (SPADCALL |scaledRanges| (QREFELT % 77)) |l|)))))
                (#6#
-                (LETT |l| (CONS (SPADCALL |floatRanges| (QREFELT $ 77)) |l|))))
+                (LETT |l| (CONS (SPADCALL |floatRanges| (QREFELT % 77)) |l|))))
               (LETT |ptCol|
-                    (SPADCALL |l| (SPADCALL (QREFELT $ 80)) (QREFELT $ 81)))
+                    (SPADCALL |l| (SPADCALL (QREFELT % 80)) (QREFELT % 81)))
               (LETT |crCol|
-                    (SPADCALL |l| (SPADCALL (QREFELT $ 82)) (QREFELT $ 83)))
+                    (SPADCALL |l| (SPADCALL (QREFELT % 82)) (QREFELT % 83)))
               (EXIT
-               (SPADCALL (SPADCALL |acplot| (QREFELT $ 85)) |ptCol| |crCol|
-                         (SPADCALL (QREFELT $ 87)) |l| (QREFELT $ 90)))))) 
+               (SPADCALL (SPADCALL |acplot| (QREFELT % 85)) |ptCol| |crCol|
+                         (SPADCALL (QREFELT % 87)) |l| (QREFELT % 90)))))) 
 
 (SDEFUN |DRAWCURV;draw;E2SLTdv;5|
         ((|eq| (|Equation| |Ex|)) (|x| (|Symbol|)) (|y| (|Symbol|))
-         (|l| (|List| (|DrawOption|))) ($ (|TwoDimensionalViewport|)))
+         (|l| (|List| (|DrawOption|))) (% (|TwoDimensionalViewport|)))
         (SPROG ((|g| (|GraphImage|)))
-               (SEQ (LETT |g| (SPADCALL |eq| |x| |y| |l| (QREFELT $ 91)))
-                    (EXIT (SPADCALL |g| |l| (QREFELT $ 93)))))) 
+               (SEQ (LETT |g| (SPADCALL |eq| |x| |y| |l| (QREFELT % 91)))
+                    (EXIT (SPADCALL |g| |l| (QREFELT % 93)))))) 
 
 (DECLAIM (NOTINLINE |TopLevelDrawFunctionsForAlgebraicCurves;|)) 
 
-(DEFUN |TopLevelDrawFunctionsForAlgebraicCurves| (&REST #1=#:G745)
+(DEFUN |TopLevelDrawFunctionsForAlgebraicCurves| (&REST #1=#:G482)
   (SPROG NIL
-         (PROG (#2=#:G746)
+         (PROG (#2=#:G483)
            (RETURN
             (COND
              ((LETT #2#
@@ -190,23 +190,23 @@
                         '|TopLevelDrawFunctionsForAlgebraicCurves|)))))))))) 
 
 (DEFUN |TopLevelDrawFunctionsForAlgebraicCurves;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$|
                 (LIST '|TopLevelDrawFunctionsForAlgebraicCurves| DV$1 DV$2))
-          (LETT $ (GETREFV 95))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 95))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache|
                       '|TopLevelDrawFunctionsForAlgebraicCurves|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|TopLevelDrawFunctionsForAlgebraicCurves| '|infovec|
           (LIST
@@ -219,7 +219,7 @@
               (|Fraction| 28) (71 . |denom|) (|Union| 6 '"failed")
               (76 . |retractIfCan|) (81 . |numer|) (|Polynomial| 14)
               (|Mapping| 14 6) (|PolynomialFunctions2| 6 14) (86 . |map|)
-              (|Union| 51 '"failed") (|List| $) (|Symbol|) (|DrawOption|)
+              (|Union| 51 '"failed") (|List| %) (|Symbol|) (|DrawOption|)
               (92 . |option|) (98 . |Zero|) (102 . |Zero|) (|Fraction| 14)
               (106 . |Zero|) (|Segment| 45) (110 . |segment|) (116 . |Zero|)
               (|List| 9) (|Any|) (|AnyFunctions1| 50) (120 . |retract|)

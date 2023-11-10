@@ -6,7 +6,7 @@
 (DEFPARAMETER |FiniteAbelianMonoidRing;AL| 'NIL) 
 
 (DEFUN |FiniteAbelianMonoidRing| (|t#1| |t#2|)
-  (LET (#1=#:G699 (#2=#:G700 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
+  (LET (#1=#:G458 (#2=#:G459 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
     (COND ((SETQ #1# (|assoc| #2# |FiniteAbelianMonoidRing;AL|)) (CDR #1#))
           (T
            (SETQ |FiniteAbelianMonoidRing;AL|
@@ -17,7 +17,7 @@
            #1#)))) 
 
 (DEFUN |FiniteAbelianMonoidRing;| (|t#1| |t#2|)
-  (SPROG ((#1=#:G698 NIL))
+  (SPROG ((#1=#:G457 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2|) (LIST |t#1| |t#2|)
@@ -32,37 +32,37 @@
                                                  (|FullyRetractableTo| '|t#1|)
                                                  (|mkCategory|
                                                   '(((|ground?|
-                                                      ((|Boolean|) $))
+                                                      ((|Boolean|) %))
                                                      T)
-                                                    ((|ground| (|t#1| $)) T)
+                                                    ((|ground| (|t#1| %)) T)
                                                     ((|minimumDegree|
-                                                      (|t#2| $))
+                                                      (|t#2| %))
                                                      T)
                                                     ((|mapExponents|
-                                                      ($
+                                                      (%
                                                        (|Mapping| |t#2| |t#2|)
-                                                       $))
+                                                       %))
                                                      T)
                                                     ((|pomopo!|
-                                                      ($ $ |t#1| |t#2| $))
+                                                      (% % |t#1| |t#2| %))
                                                      T)
                                                     ((|fmecg|
-                                                      ($ $ |t#2| |t#1| $))
+                                                      (% % |t#2| |t#1| %))
                                                      (|has| |t#1| (|Ring|)))
                                                     ((|binomThmExpt|
-                                                      ($ $ $
+                                                      (% % %
                                                        (|NonNegativeInteger|)))
-                                                     (|has| $
+                                                     (|has| %
                                                             (|CommutativeRing|)))
                                                     ((|exquo|
-                                                      ((|Union| $ "failed") $
+                                                      ((|Union| % "failed") %
                                                        |t#1|))
                                                      (|has| |t#1|
                                                             (|EntireRing|)))
-                                                    ((|content| (|t#1| $))
+                                                    ((|content| (|t#1| %))
                                                      (|has| |t#1|
                                                             (|GcdDomain|)))
-                                                    ((|primitivePart| ($ $))
+                                                    ((|primitivePart| (% %))
                                                      (|has| |t#1|
                                                             (|GcdDomain|))))
                                                   '(((|EntireRing|)

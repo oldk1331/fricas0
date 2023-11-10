@@ -102,7 +102,6 @@
 ;     [op,:[mkEvalable x for x in argl]]
 ;   form=$EmptyMode => $Integer
 ;   IDENTP form and constructor?(form) => [form]
-;   FBPIP form => BREAK()
 ;   form
 
 (DEFUN |mkEvalable| (|form|)
@@ -172,7 +171,7 @@
                         NIL |argl| NIL))))))))
       ((EQUAL |form| |$EmptyMode|) |$Integer|)
       ((AND (IDENTP |form|) (|constructor?| |form|)) (LIST |form|))
-      ((FBPIP |form|) (BREAK)) (#1# |form|)))))
+      (#1# |form|)))))
 
 ; mkEvalableMapping form ==
 ;   [first form,:[mkEvalable d for d in rest form]]
@@ -273,7 +272,7 @@
 ;   form = $EmptyMode => form
 ;   form = "?"        => $EmptyMode
 ;   STRINGP form => form
-;   form = "$" => form
+;   form = "%" => form
 ;   form is ['typeOf,.] =>
 ;     form' := mkAtree form
 ;     bottomUp form'
@@ -303,7 +302,7 @@
     (RETURN
      (COND ((SETQ |domain| (|isDomainValuedVariable| |form|)) |domain|)
            ((EQUAL |form| |$EmptyMode|) |form|) ((EQ |form| '?) |$EmptyMode|)
-           ((STRINGP |form|) |form|) ((EQ |form| '$) |form|)
+           ((STRINGP |form|) |form|) ((EQ |form| '%) |form|)
            ((AND (CONSP |form|) (EQ (CAR |form|) '|typeOf|)
                  (PROGN
                   (SETQ |ISTMP#1| (CDR |form|))
@@ -484,7 +483,7 @@
 ;     for x in argl for m in ml for argnum in 1.. repeat
 ;       typeList := [v,:typeList] where v ==
 ;         categoryForm?(m) =>
-;           m := evaluateType MSUBSTQ(x,'_$,m)
+;           m := evaluateType(MSUBSTQ(x, '%, m))
 ;           evalCategory(x' := (evaluateType x), m) => x'
 ;           throwEvalTypeMsg("S2IE0004",[form])
 ;         m := evaluateType m
@@ -533,7 +532,7 @@
                               ((|categoryForm?| |m|)
                                (PROGN
                                 (SETQ |m|
-                                        (|evaluateType| (MSUBSTQ |x| '$ |m|)))
+                                        (|evaluateType| (MSUBSTQ |x| '% |m|)))
                                 (COND
                                  ((|evalCategory|
                                    (SETQ |x'| (|evaluateType| |x|)) |m|)
@@ -611,7 +610,7 @@
 ;   -- calls evaluateType on a signature
 ;   sig is [ ='SIGNATURE,fun,sigl] =>
 ;     ['SIGNATURE,fun,
-;       [(t = '_$ => t; evaluateType(t)) for t in sigl]]
+;       [(t = '% => t; evaluateType(t)) for t in sigl]]
 ;   sig
 
 (DEFUN |evaluateSignature| (|sig|)
@@ -637,7 +636,7 @@
                   (#1#
                    (SETQ |bfVar#34|
                            (CONS
-                            (COND ((EQ |t| '$) |t|) (#1# (|evaluateType| |t|)))
+                            (COND ((EQ |t| '%) |t|) (#1# (|evaluateType| |t|)))
                             |bfVar#34|))))
                  (SETQ |bfVar#33| (CDR |bfVar#33|))))
               NIL |sigl| NIL)))
@@ -707,7 +706,7 @@
 ;         if $NRTmonitorIfTrue = true then
 ;           sayBrightlyNT ['"Applying ",first fun0,'" to:"]
 ;           pp [devaluateDeeply x for x in form]
-;         _$:fluid := domain
+;         _% : fluid := domain
 ;         ['SPADCALL, :form, fun0]
 ;   not form => nil
 ; --  not form => throwKeyedMsg("S2IE0008",[opName])
@@ -717,10 +716,10 @@
 ;   evalFormMkValue(op,form,targetType)
 
 (DEFUN |evalForm| (|op| |opName| |argl| |mmS|)
-  (PROG ($ |targetType| |domain| |bpi| |fun0| |dcVector| |ISTMP#5| |len|
+  (PROG (% |targetType| |domain| |bpi| |fun0| |dcVector| |ISTMP#5| |len|
          |ISTMP#4| |ind| |ISTMP#3| |ISTMP#2| |rec| |xbody| |xargs| |ISTMP#1|
          |freeFun| |dc| |form| |cond| |fun| |sig|)
-    (DECLARE (SPECIAL $))
+    (DECLARE (SPECIAL %))
     (RETURN
      (PROGN
       ((LAMBDA (|bfVar#36| |mm| |bfVar#37|)
@@ -993,7 +992,7 @@
                                                 (SETQ |bfVar#45|
                                                         (CDR |bfVar#45|))))
                                              NIL |form| NIL))))
-                                         (SETQ $ |domain|)
+                                         (SETQ % |domain|)
                                          (CONS 'SPADCALL
                                                (APPEND |form|
                                                        (CONS |fun0|

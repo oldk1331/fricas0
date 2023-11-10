@@ -1,19 +1,19 @@
 
 (SDEFUN |DRAWPT;draw;LLTdv;1|
         ((|lp| (|List| (|Point| (|DoubleFloat|))))
-         (|l| (|List| (|DrawOption|))) ($ (|TwoDimensionalViewport|)))
-        (SPADCALL (SPADCALL (LIST |lp|) (QREFELT $ 8)) |l| (QREFELT $ 11))) 
+         (|l| (|List| (|DrawOption|))) (% (|TwoDimensionalViewport|)))
+        (SPADCALL (SPADCALL (LIST |lp|) (QREFELT % 8)) |l| (QREFELT % 11))) 
 
 (SDEFUN |DRAWPT;draw;LTdv;2|
         ((|lp| (|List| (|Point| (|DoubleFloat|))))
-         ($ (|TwoDimensionalViewport|)))
-        (SPADCALL |lp| NIL (QREFELT $ 13))) 
+         (% (|TwoDimensionalViewport|)))
+        (SPADCALL |lp| NIL (QREFELT % 13))) 
 
 (SDEFUN |DRAWPT;draw;2LLTdv;3|
         ((|lx| (|List| (|DoubleFloat|))) (|ly| (|List| (|DoubleFloat|)))
-         (|l| (|List| (|DrawOption|))) ($ (|TwoDimensionalViewport|)))
+         (|l| (|List| (|DrawOption|))) (% (|TwoDimensionalViewport|)))
         (SPROG
-         ((#1=#:G706 NIL) (|x| NIL) (#2=#:G707 NIL) (|y| NIL) (#3=#:G705 NIL))
+         ((#1=#:G458 NIL) (|x| NIL) (#2=#:G459 NIL) (|y| NIL) (#3=#:G457 NIL))
          (SEQ
           (SPADCALL
            (PROGN
@@ -27,25 +27,25 @@
                  (SEQ
                   (EXIT
                    (LETT #3#
-                         (CONS (SPADCALL (LIST |x| |y|) (QREFELT $ 17)) #3#))))
+                         (CONS (SPADCALL (LIST |x| |y|) (QREFELT % 17)) #3#))))
                  (LETT #1# (PROG1 (CDR #1#) (LETT #2# (CDR #2#)))) (GO G190)
                  G191 (EXIT (NREVERSE #3#))))
-           |l| (QREFELT $ 13))))) 
+           |l| (QREFELT % 13))))) 
 
 (SDEFUN |DRAWPT;draw;2LTdv;4|
         ((|lx| (|List| (|DoubleFloat|))) (|ly| (|List| (|DoubleFloat|)))
-         ($ (|TwoDimensionalViewport|)))
-        (SPADCALL |lx| |ly| NIL (QREFELT $ 18))) 
+         (% (|TwoDimensionalViewport|)))
+        (SPADCALL |lx| |ly| NIL (QREFELT % 18))) 
 
 (SDEFUN |DRAWPT;draw;3LTdv;5|
         ((|x| (|List| (|DoubleFloat|))) (|y| (|List| (|DoubleFloat|)))
-         (|z| (|List| (|DoubleFloat|))) ($ (|ThreeDimensionalViewport|)))
-        (SPADCALL |x| |y| |z| NIL (QREFELT $ 21))) 
+         (|z| (|List| (|DoubleFloat|))) (% (|ThreeDimensionalViewport|)))
+        (SPADCALL |x| |y| |z| NIL (QREFELT % 21))) 
 
 (SDEFUN |DRAWPT;draw;3LLTdv;6|
         ((|x| (|List| (|DoubleFloat|))) (|y| (|List| (|DoubleFloat|)))
          (|z| (|List| (|DoubleFloat|))) (|l| (|List| (|DrawOption|)))
-         ($ (|ThreeDimensionalViewport|)))
+         (% (|ThreeDimensionalViewport|)))
         (SPROG
          ((|points| (|List| (|List| (|Point| (|DoubleFloat|)))))
           (|row| (|List| (|Point| (|DoubleFloat|)))) (|zval| (|Integer|))
@@ -63,7 +63,7 @@
                                         (EXIT
                                          (COND
                                           ((SPADCALL |zLen| (* |m| |n|)
-                                                     (QREFELT $ 25))
+                                                     (QREFELT % 25))
                                            (COND
                                             ((> |zLen| (* |m| |n|))
                                              (|error|
@@ -99,28 +99,28 @@
                                                                            |x|
                                                                            |i|
                                                                            (QREFELT
-                                                                            $
+                                                                            %
                                                                             27))
                                                                           (SPADCALL
                                                                            |y|
                                                                            |j|
                                                                            (QREFELT
-                                                                            $
+                                                                            %
                                                                             27))
                                                                           (SPADCALL
                                                                            |z|
                                                                            |zval|
                                                                            (QREFELT
-                                                                            $
+                                                                            %
                                                                             27))
                                                                           (SPADCALL
                                                                            |z|
                                                                            |zval|
                                                                            (QREFELT
-                                                                            $
+                                                                            %
                                                                             27)))
                                                                          (QREFELT
-                                                                          $
+                                                                          %
                                                                           17))
                                                                         |row|))))
                                                                (LETT |i|
@@ -137,16 +137,16 @@
                                                 (EXIT
                                                  (SPADCALL
                                                   (SPADCALL |points|
-                                                            (QREFELT $ 29))
+                                                            (QREFELT % 29))
                                                   |l|
-                                                  (QREFELT $
+                                                  (QREFELT %
                                                            30)))))))))))))))))) 
 
 (DECLAIM (NOTINLINE |TopLevelDrawFunctionsForPoints;|)) 
 
 (DEFUN |TopLevelDrawFunctionsForPoints| ()
   (SPROG NIL
-         (PROG (#1=#:G742)
+         (PROG (#1=#:G475)
            (RETURN
             (COND
              ((LETT #1#
@@ -170,17 +170,17 @@
                         '|TopLevelDrawFunctionsForPoints|)))))))))) 
 
 (DEFUN |TopLevelDrawFunctionsForPoints;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|TopLevelDrawFunctionsForPoints|))
-          (LETT $ (GETREFV 31))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 31))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|TopLevelDrawFunctionsForPoints| NIL
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|TopLevelDrawFunctionsForPoints| '|infovec|
           (LIST

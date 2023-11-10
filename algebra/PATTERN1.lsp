@@ -1,65 +1,65 @@
 
 (SDEFUN |PATTERN1;st|
-        ((|p| (|Pattern| R)) (|l| (|List| (|Any|))) ($ (|Pattern| R)))
+        ((|p| (|Pattern| R)) (|l| (|List| (|Any|))) (% (|Pattern| R)))
         (SPADCALL |p|
-                  (SPADCALL (SPADCALL |p| (QREFELT $ 10)) |l| (QREFELT $ 11))
-                  (QREFELT $ 12))) 
+                  (SPADCALL (SPADCALL |p| (QREFELT % 10)) |l| (QREFELT % 11))
+                  (QREFELT % 12))) 
 
 (SDEFUN |PATTERN1;predicate;PM;2|
-        ((|p| (|Pattern| R)) ($ (|Mapping| (|Boolean|) D)))
-        (SPROG NIL (CONS #'|PATTERN1;predicate;PM;2!0| (VECTOR $ |p|)))) 
+        ((|p| (|Pattern| R)) (% (|Mapping| (|Boolean|) D)))
+        (SPROG NIL (CONS #'|PATTERN1;predicate;PM;2!0| (VECTOR % |p|)))) 
 
 (SDEFUN |PATTERN1;predicate;PM;2!0| ((|d1| NIL) ($$ NIL))
-        (PROG (|p| $)
+        (PROG (|p| %)
           (LETT |p| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
+          (LETT % (QREFELT $$ 0))
           (RETURN
-           (PROGN (|PATTERN1;applyAll| (SPADCALL |p| (QREFELT $ 10)) |d1| $))))) 
+           (PROGN (|PATTERN1;applyAll| (SPADCALL |p| (QREFELT % 10)) |d1| %))))) 
 
 (SDEFUN |PATTERN1;addBadValue;PDP;3|
-        ((|p| (|Pattern| R)) (|v| (D)) ($ (|Pattern| R)))
-        (SPADCALL |p| (SPADCALL |v| (QREFELT $ 17)) (QREFELT $ 18))) 
+        ((|p| (|Pattern| R)) (|v| (D)) (% (|Pattern| R)))
+        (SPADCALL |p| (SPADCALL |v| (QREFELT % 17)) (QREFELT % 18))) 
 
-(SDEFUN |PATTERN1;badValues;PL;4| ((|p| (|Pattern| R)) ($ (|List| D)))
-        (SPROG ((#1=#:G716 NIL) (|v| NIL) (#2=#:G715 NIL))
+(SDEFUN |PATTERN1;badValues;PL;4| ((|p| (|Pattern| R)) (% (|List| D)))
+        (SPROG ((#1=#:G459 NIL) (|v| NIL) (#2=#:G458 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
-                 (SEQ (LETT |v| NIL) (LETT #1# (SPADCALL |p| (QREFELT $ 20)))
+                 (SEQ (LETT |v| NIL) (LETT #1# (SPADCALL |p| (QREFELT % 20)))
                       G190
                       (COND
                        ((OR (ATOM #1#) (PROGN (LETT |v| (CAR #1#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2# (CONS (SPADCALL |v| (QREFELT $ 21)) #2#))))
+                        (LETT #2# (CONS (SPADCALL |v| (QREFELT % 21)) #2#))))
                       (LETT #1# (CDR #1#)) (GO G190) G191
                       (EXIT (NREVERSE #2#))))))) 
 
 (SDEFUN |PATTERN1;suchThat;PLMP;5|
         ((|p| (|Pattern| R)) (|l| (|List| (|Symbol|)))
-         (|f| (|Mapping| (|Boolean|) (|List| D))) ($ (|Pattern| R)))
-        (SPADCALL (SPADCALL |p| (QREFELT $ 24)) |l|
-                  (SPADCALL |f| (QREFELT $ 27)) (QREFELT $ 29))) 
+         (|f| (|Mapping| (|Boolean|) (|List| D))) (% (|Pattern| R)))
+        (SPADCALL (SPADCALL |p| (QREFELT % 24)) |l|
+                  (SPADCALL |f| (QREFELT % 27)) (QREFELT % 29))) 
 
 (SDEFUN |PATTERN1;suchThat;PMP;6|
-        ((|p| (|Pattern| R)) (|f| (|Mapping| (|Boolean|) D)) ($ (|Pattern| R)))
-        (|PATTERN1;st| |p| (LIST (SPADCALL |f| (QREFELT $ 32))) $)) 
+        ((|p| (|Pattern| R)) (|f| (|Mapping| (|Boolean|) D)) (% (|Pattern| R)))
+        (|PATTERN1;st| |p| (LIST (SPADCALL |f| (QREFELT % 32))) %)) 
 
 (SDEFUN |PATTERN1;satisfy?;DPB;7|
-        ((|d| (D)) (|p| (|Pattern| R)) ($ (|Boolean|)))
-        (|PATTERN1;applyAll| (SPADCALL |p| (QREFELT $ 10)) |d| $)) 
+        ((|d| (D)) (|p| (|Pattern| R)) (% (|Boolean|)))
+        (|PATTERN1;applyAll| (SPADCALL |p| (QREFELT % 10)) |d| %)) 
 
 (SDEFUN |PATTERN1;satisfy?;LPB;8|
-        ((|l| (|List| D)) (|p| (|Pattern| R)) ($ (|Boolean|)))
+        ((|l| (|List| D)) (|p| (|Pattern| R)) (% (|Boolean|)))
         (SPROG
          ((|rec|
            (|Record| (|:| |var| (|List| (|Symbol|))) (|:| |pred| (|Any|)))))
-         (COND ((NULL (QCAR (LETT |rec| (SPADCALL |p| (QREFELT $ 37))))) 'T)
-               ('T (SPADCALL |l| (SPADCALL (QCDR |rec|) (QREFELT $ 38))))))) 
+         (COND ((NULL (QCAR (LETT |rec| (SPADCALL |p| (QREFELT % 37))))) 'T)
+               ('T (SPADCALL |l| (SPADCALL (QCDR |rec|) (QREFELT % 38))))))) 
 
-(SDEFUN |PATTERN1;applyAll| ((|l| (|List| (|Any|))) (|d| (D)) ($ (|Boolean|)))
-        (SPROG ((#1=#:G732 NIL) (#2=#:G733 NIL) (#3=#:G734 NIL) (|f| NIL))
+(SDEFUN |PATTERN1;applyAll| ((|l| (|List| (|Any|))) (|d| (D)) (% (|Boolean|)))
+        (SPROG ((#1=#:G475 NIL) (#2=#:G476 NIL) (#3=#:G477 NIL) (|f| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -73,10 +73,10 @@
                           (EXIT
                            (COND
                             ((NULL
-                              (SPADCALL |d| (SPADCALL |f| (QREFELT $ 40))))
+                              (SPADCALL |d| (SPADCALL |f| (QREFELT % 40))))
                              (PROGN
-                              (LETT #1# (PROGN (LETT #2# NIL) (GO #4=#:G731)))
-                              (GO #5=#:G729))))))
+                              (LETT #1# (PROGN (LETT #2# NIL) (GO #4=#:G474)))
+                              (GO #5=#:G472))))))
                          (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
                    #5# (EXIT #1#))
                   (EXIT 'T)))
@@ -84,8 +84,8 @@
 
 (SDEFUN |PATTERN1;suchThat;PLP;10|
         ((|p| (|Pattern| R)) (|l| (|List| (|Mapping| (|Boolean|) D)))
-         ($ (|Pattern| R)))
-        (SPROG ((#1=#:G741 NIL) (|f| NIL) (#2=#:G740 NIL))
+         (% (|Pattern| R)))
+        (SPROG ((#1=#:G484 NIL) (|f| NIL) (#2=#:G483 NIL))
                (SEQ
                 (|PATTERN1;st| |p|
                  (PROGN
@@ -96,16 +96,16 @@
                          (GO G191)))
                        (SEQ
                         (EXIT
-                         (LETT #2# (CONS (SPADCALL |f| (QREFELT $ 32)) #2#))))
+                         (LETT #2# (CONS (SPADCALL |f| (QREFELT % 32)) #2#))))
                        (LETT #1# (CDR #1#)) (GO G190) G191
                        (EXIT (NREVERSE #2#))))
-                 $)))) 
+                 %)))) 
 
 (DECLAIM (NOTINLINE |PatternFunctions1;|)) 
 
-(DEFUN |PatternFunctions1| (&REST #1=#:G742)
+(DEFUN |PatternFunctions1| (&REST #1=#:G485)
   (SPROG NIL
-         (PROG (#2=#:G743)
+         (PROG (#2=#:G486)
            (RETURN
             (COND
              ((LETT #2#
@@ -123,21 +123,21 @@
                   (HREM |$ConstructorCache| '|PatternFunctions1|)))))))))) 
 
 (DEFUN |PatternFunctions1;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|PatternFunctions1| DV$1 DV$2))
-          (LETT $ (GETREFV 43))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 43))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PatternFunctions1| (LIST DV$1 DV$2)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|PatternFunctions1| '|infovec|
           (LIST

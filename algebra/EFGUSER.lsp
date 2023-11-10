@@ -1,25 +1,25 @@
 
 (SDEFUN |EFGUSER;apply_taylor1|
         ((|ft| (|Mapping| (|Stream| |Coef|) (|Stream| |Coef|))) (|x| (PS))
-         ($ (|Union| PS "failed")))
+         (% (|Union| PS "failed")))
         (SPROG
          ((|fxu| (|Union| (|Stream| |Coef|) "failed")) (|s1| (|Stream| |Coef|))
           (|c0| (|Coef|)))
-         (SEQ (LETT |x| (SPADCALL |x| (|spadConstant| $ 11) (QREFELT $ 12)))
+         (SEQ (LETT |x| (SPADCALL |x| (|spadConstant| % 11) (QREFELT % 12)))
               (EXIT
                (COND
-                ((SPADCALL (SPADCALL |x| (QREFELT $ 13)) (|spadConstant| $ 11)
-                           (QREFELT $ 15))
+                ((SPADCALL (SPADCALL |x| (QREFELT % 13)) (|spadConstant| % 11)
+                           (QREFELT % 15))
                  (CONS 1 "failed"))
                 (#1='T
                  (SEQ
                   (LETT |c0|
-                        (SPADCALL |x| (|spadConstant| $ 11) (QREFELT $ 16)))
+                        (SPADCALL |x| (|spadConstant| % 11) (QREFELT % 16)))
                   (LETT |s1|
-                        (SPADCALL (SPADCALL |c0| 0 (QREFELT $ 20))
-                                  (SPADCALL (|spadConstant| $ 21) 1
-                                            (QREFELT $ 20))
-                                  (QREFELT $ 23)))
+                        (SPADCALL (SPADCALL |c0| 0 (QREFELT % 20))
+                                  (SPADCALL (|spadConstant| % 21) 1
+                                            (QREFELT % 20))
+                                  (QREFELT % 23)))
                   (LETT |fxu| (|trappedSpadEval| (SPADCALL |s1| |ft|)))
                   (EXIT
                    (COND ((QEQCAR |fxu| 1) (CONS 1 "failed"))
@@ -28,404 +28,404 @@
                                 (SPADCALL (QCDR |fxu|)
                                           (SPADCALL |x|
                                                     (SPADCALL |c0|
-                                                              (|spadConstant| $
+                                                              (|spadConstant| %
                                                                               11)
-                                                              (QREFELT $ 24))
-                                                    (QREFELT $ 25))
-                                          (QREFELT $ 26))))))))))))) 
+                                                              (QREFELT % 24))
+                                                    (QREFELT % 25))
+                                          (QREFELT % 26))))))))))))) 
 
 (SDEFUN |EFGUSER;nthRootIfCan;PSNniU;2|
-        ((|x| (PS)) (|n| (|NonNegativeInteger|)) ($ (|Union| PS "failed")))
+        ((|x| (PS)) (|n| (|NonNegativeInteger|)) (% (|Union| PS "failed")))
         (SPROG
          ((|res1| (|Union| PS "failed")) (|x1| (PS)) (|c0| (|Coef|))
           (|ord| (|Expon|)) (|i| NIL))
          (SEQ
-          (COND ((EQL |n| 0) (CONS 0 (|spadConstant| $ 22)))
+          (COND ((EQL |n| 0) (CONS 0 (|spadConstant| % 22)))
                 ((EQL |n| 1) (CONS 0 |x|))
                 (#1='T
                  (SEQ
                   (LETT |x|
-                        (SPADCALL |x| (|spadConstant| $ 11) (QREFELT $ 12)))
-                  (LETT |ord| (SPADCALL |x| (QREFELT $ 13)))
+                        (SPADCALL |x| (|spadConstant| % 11) (QREFELT % 12)))
+                  (LETT |ord| (SPADCALL |x| (QREFELT % 13)))
                   (COND
-                   ((SPADCALL |ord| (|spadConstant| $ 11) (QREFELT $ 27))
+                   ((SPADCALL |ord| (|spadConstant| % 11) (QREFELT % 27))
                     (SEQ (LETT |i| 0) G190
                          (COND
                           ((OR (|greater_SI| |i| 50)
                                (NULL
-                                (SPADCALL (SPADCALL |x| |ord| (QREFELT $ 16))
-                                          (|spadConstant| $ 10)
-                                          (QREFELT $ 28))))
+                                (SPADCALL (SPADCALL |x| |ord| (QREFELT % 16))
+                                          (|spadConstant| % 10)
+                                          (QREFELT % 28))))
                            (GO G191)))
                          (SEQ
                           (LETT |x|
                                 (SPADCALL |x|
                                           (SPADCALL |ord|
                                                     (SPADCALL 10
-                                                              (|spadConstant| $
+                                                              (|spadConstant| %
                                                                               29)
-                                                              (QREFELT $ 31))
-                                                    (QREFELT $ 32))
-                                          (QREFELT $ 12)))
-                          (EXIT (LETT |ord| (SPADCALL |x| (QREFELT $ 13)))))
+                                                              (QREFELT % 31))
+                                                    (QREFELT % 32))
+                                          (QREFELT % 12)))
+                          (EXIT (LETT |ord| (SPADCALL |x| (QREFELT % 13)))))
                          (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))))
-                  (LETT |c0| (SPADCALL |x| |ord| (QREFELT $ 16)))
+                  (LETT |c0| (SPADCALL |x| |ord| (QREFELT % 16)))
                   (EXIT
                    (COND
-                    ((SPADCALL |c0| (|spadConstant| $ 10) (QREFELT $ 28))
+                    ((SPADCALL |c0| (|spadConstant| % 10) (QREFELT % 28))
                      (CONS 1 "failed"))
                     (#1#
                      (SEQ
                       (LETT |x1|
                             (SPADCALL
-                             (SPADCALL (|spadConstant| $ 21)
+                             (SPADCALL (|spadConstant| % 21)
                                        (SPADCALL
-                                        (SPADCALL (|spadConstant| $ 29)
-                                                  (QREFELT $ 37))
-                                        |ord| (QREFELT $ 38))
-                                       (QREFELT $ 24))
-                             |x| (QREFELT $ 39)))
+                                        (SPADCALL (|spadConstant| % 29)
+                                                  (QREFELT % 37))
+                                        |ord| (QREFELT % 38))
+                                       (QREFELT % 24))
+                             |x| (QREFELT % 39)))
                       (LETT |res1|
                             (|EFGUSER;apply_taylor1|
                              (CONS #'|EFGUSER;nthRootIfCan;PSNniU;2!0|
-                                   (VECTOR |n| $))
-                             |x1| $))
+                                   (VECTOR |n| %))
+                             |x1| %))
                       (EXIT
                        (COND ((QEQCAR |res1| 1) (CONS 1 "failed"))
                              (#1#
                               (CONS 0
                                     (SPADCALL
-                                     (SPADCALL (|spadConstant| $ 21)
+                                     (SPADCALL (|spadConstant| % 21)
                                                (SPADCALL
-                                                (SPADCALL 1 |n| (QREFELT $ 41))
-                                                |ord| (QREFELT $ 43))
-                                               (QREFELT $ 24))
-                                     (QCDR |res1|) (QREFELT $ 39)))))))))))))))) 
+                                                (SPADCALL 1 |n| (QREFELT % 41))
+                                                |ord| (QREFELT % 43))
+                                               (QREFELT % 24))
+                                     (QCDR |res1|) (QREFELT % 39)))))))))))))))) 
 
 (SDEFUN |EFGUSER;nthRootIfCan;PSNniU;2!0| ((|s| NIL) ($$ NIL))
-        (PROG ($ |n|)
-          (LETT $ (QREFELT $$ 1))
+        (PROG (% |n|)
+          (LETT % (QREFELT $$ 1))
           (LETT |n| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPADCALL (SPADCALL (|spadConstant| $ 40) |n| (QREFELT $ 41)) |s|
-                      (QREFELT $ 42)))))) 
+            (SPADCALL (SPADCALL (|spadConstant| % 40) |n| (QREFELT % 41)) |s|
+                      (QREFELT % 42)))))) 
 
-(SDEFUN |EFGUSER;expIfCan;PSU;3| ((|x| (PS)) ($ (|Union| PS "failed")))
+(SDEFUN |EFGUSER;expIfCan;PSU;3| ((|x| (PS)) (% (|Union| PS "failed")))
         (SPROG ((|c1| (|Coef|)) (|expx| (|Stream| |Coef|)))
                (SEQ
-                (LETT |x| (SPADCALL |x| (|spadConstant| $ 11) (QREFELT $ 12)))
+                (LETT |x| (SPADCALL |x| (|spadConstant| % 11) (QREFELT % 12)))
                 (EXIT
                  (COND
-                  ((SPADCALL (SPADCALL |x| (QREFELT $ 13))
-                             (|spadConstant| $ 11) (QREFELT $ 15))
+                  ((SPADCALL (SPADCALL |x| (QREFELT % 13))
+                             (|spadConstant| % 11) (QREFELT % 15))
                    (CONS 1 "failed"))
                   (#1='T
                    (SEQ
                     (LETT |expx|
                           (SPADCALL
-                           (SPADCALL (|spadConstant| $ 21) 1 (QREFELT $ 20))
-                           (QREFELT $ 48)))
+                           (SPADCALL (|spadConstant| % 21) 1 (QREFELT % 20))
+                           (QREFELT % 48)))
                     (LETT |c1|
-                          (SPADCALL |x| (|spadConstant| $ 11) (QREFELT $ 16)))
+                          (SPADCALL |x| (|spadConstant| % 11) (QREFELT % 16)))
                     (EXIT
                      (COND
-                      ((SPADCALL |c1| (|spadConstant| $ 10) (QREFELT $ 28))
-                       (CONS 0 (SPADCALL |expx| |x| (QREFELT $ 26))))
-                      ((QREFELT $ 9)
+                      ((SPADCALL |c1| (|spadConstant| % 10) (QREFELT % 28))
+                       (CONS 0 (SPADCALL |expx| |x| (QREFELT % 26))))
+                      ((QREFELT % 9)
                        (CONS 0
-                             (SPADCALL (SPADCALL |c1| (QREFELT $ 49))
+                             (SPADCALL (SPADCALL |c1| (QREFELT % 49))
                                        (SPADCALL |expx|
                                                  (SPADCALL |x|
                                                            (SPADCALL |c1|
                                                                      (|spadConstant|
-                                                                      $ 11)
-                                                                     (QREFELT $
+                                                                      % 11)
+                                                                     (QREFELT %
                                                                               24))
-                                                           (QREFELT $ 25))
-                                                 (QREFELT $ 26))
-                                       (QREFELT $ 50))))
+                                                           (QREFELT % 25))
+                                                 (QREFELT % 26))
+                                       (QREFELT % 50))))
                       (#1# (CONS 1 "failed"))))))))))) 
 
-(SDEFUN |EFGUSER;logIfCan;PSU;4| ((|x| (PS)) ($ (|Union| PS "failed")))
-        (|EFGUSER;apply_taylor1| (ELT $ 52) |x| $)) 
+(SDEFUN |EFGUSER;logIfCan;PSU;4| ((|x| (PS)) (% (|Union| PS "failed")))
+        (|EFGUSER;apply_taylor1| (ELT % 52) |x| %)) 
 
 (SDEFUN |EFGUSER;sincos|
         ((|x| (PS))
-         ($ (|Union| (|Record| (|:| |sin| PS) (|:| |cos| PS)) "failed")))
+         (% (|Union| (|Record| (|:| |sin| PS) (|:| |cos| PS)) "failed")))
         (SPROG
          ((|cc1| (|Coef|)) (|sc1| (|Coef|)) (|cx1| (PS)) (|sx1| (PS))
           (|x1| (PS)) (|c1| (|Coef|))
           (|scst|
            (|Record| (|:| |sin| (|Stream| |Coef|))
                      (|:| |cos| (|Stream| |Coef|)))))
-         (SEQ (LETT |x| (SPADCALL |x| (|spadConstant| $ 11) (QREFELT $ 12)))
+         (SEQ (LETT |x| (SPADCALL |x| (|spadConstant| % 11) (QREFELT % 12)))
               (EXIT
                (COND
-                ((SPADCALL (SPADCALL |x| (QREFELT $ 13)) (|spadConstant| $ 11)
-                           (QREFELT $ 15))
+                ((SPADCALL (SPADCALL |x| (QREFELT % 13)) (|spadConstant| % 11)
+                           (QREFELT % 15))
                  (CONS 1 "failed"))
                 (#1='T
                  (SEQ
                   (LETT |scst|
                         (SPADCALL
-                         (SPADCALL (|spadConstant| $ 21) 1 (QREFELT $ 20))
-                         (QREFELT $ 55)))
+                         (SPADCALL (|spadConstant| % 21) 1 (QREFELT % 20))
+                         (QREFELT % 55)))
                   (LETT |c1|
-                        (SPADCALL |x| (|spadConstant| $ 11) (QREFELT $ 16)))
+                        (SPADCALL |x| (|spadConstant| % 11) (QREFELT % 16)))
                   (EXIT
                    (COND
-                    ((SPADCALL |c1| (|spadConstant| $ 10) (QREFELT $ 28))
+                    ((SPADCALL |c1| (|spadConstant| % 10) (QREFELT % 28))
                      (CONS 0
-                           (CONS (SPADCALL (QCAR |scst|) |x| (QREFELT $ 26))
-                                 (SPADCALL (QCDR |scst|) |x| (QREFELT $ 26)))))
-                    ((QREFELT $ 9)
+                           (CONS (SPADCALL (QCAR |scst|) |x| (QREFELT % 26))
+                                 (SPADCALL (QCDR |scst|) |x| (QREFELT % 26)))))
+                    ((QREFELT % 9)
                      (SEQ
                       (LETT |x1|
                             (SPADCALL |x|
-                                      (SPADCALL |c1| (|spadConstant| $ 11)
-                                                (QREFELT $ 24))
-                                      (QREFELT $ 25)))
-                      (LETT |sx1| (SPADCALL (QCAR |scst|) |x1| (QREFELT $ 26)))
-                      (LETT |cx1| (SPADCALL (QCDR |scst|) |x1| (QREFELT $ 26)))
-                      (LETT |sc1| (SPADCALL |c1| (QREFELT $ 56)))
-                      (LETT |cc1| (SPADCALL |c1| (QREFELT $ 57)))
+                                      (SPADCALL |c1| (|spadConstant| % 11)
+                                                (QREFELT % 24))
+                                      (QREFELT % 25)))
+                      (LETT |sx1| (SPADCALL (QCAR |scst|) |x1| (QREFELT % 26)))
+                      (LETT |cx1| (SPADCALL (QCDR |scst|) |x1| (QREFELT % 26)))
+                      (LETT |sc1| (SPADCALL |c1| (QREFELT % 56)))
+                      (LETT |cc1| (SPADCALL |c1| (QREFELT % 57)))
                       (EXIT
                        (CONS 0
                              (CONS
-                              (SPADCALL (SPADCALL |sc1| |cx1| (QREFELT $ 50))
-                                        (SPADCALL |cc1| |sx1| (QREFELT $ 50))
-                                        (QREFELT $ 58))
-                              (SPADCALL (SPADCALL |cc1| |cx1| (QREFELT $ 50))
-                                        (SPADCALL |sc1| |sx1| (QREFELT $ 50))
-                                        (QREFELT $ 25)))))))
+                              (SPADCALL (SPADCALL |sc1| |cx1| (QREFELT % 50))
+                                        (SPADCALL |cc1| |sx1| (QREFELT % 50))
+                                        (QREFELT % 58))
+                              (SPADCALL (SPADCALL |cc1| |cx1| (QREFELT % 50))
+                                        (SPADCALL |sc1| |sx1| (QREFELT % 50))
+                                        (QREFELT % 25)))))))
                     (#1# (CONS 1 "failed"))))))))))) 
 
-(SDEFUN |EFGUSER;sinIfCan;PSU;6| ((|x| (PS)) ($ (|Union| PS "failed")))
+(SDEFUN |EFGUSER;sinIfCan;PSU;6| ((|x| (PS)) (% (|Union| PS "failed")))
         (SPROG
          ((|usc| (|Union| (|Record| (|:| |sin| PS) (|:| |cos| PS)) "failed")))
-         (SEQ (LETT |usc| (|EFGUSER;sincos| |x| $))
+         (SEQ (LETT |usc| (|EFGUSER;sincos| |x| %))
               (EXIT
                (COND ((QEQCAR |usc| 1) (CONS 1 "failed"))
                      ('T (CONS 0 (QCAR (QCDR |usc|))))))))) 
 
-(SDEFUN |EFGUSER;cosIfCan;PSU;7| ((|x| (PS)) ($ (|Union| PS "failed")))
+(SDEFUN |EFGUSER;cosIfCan;PSU;7| ((|x| (PS)) (% (|Union| PS "failed")))
         (SPROG
          ((|usc| (|Union| (|Record| (|:| |sin| PS) (|:| |cos| PS)) "failed")))
-         (SEQ (LETT |usc| (|EFGUSER;sincos| |x| $))
+         (SEQ (LETT |usc| (|EFGUSER;sincos| |x| %))
               (EXIT
                (COND ((QEQCAR |usc| 1) (CONS 1 "failed"))
                      ('T (CONS 0 (QCDR (QCDR |usc|))))))))) 
 
-(SDEFUN |EFGUSER;tanIfCan;PSU;8| ((|x| (PS)) ($ (|Union| PS "failed")))
+(SDEFUN |EFGUSER;tanIfCan;PSU;8| ((|x| (PS)) (% (|Union| PS "failed")))
         (SPROG
          ((|usc| (|Union| (|Record| (|:| |sin| PS) (|:| |cos| PS)) "failed")))
-         (SEQ (LETT |usc| (|EFGUSER;sincos| |x| $))
+         (SEQ (LETT |usc| (|EFGUSER;sincos| |x| %))
               (EXIT
                (COND ((QEQCAR |usc| 1) (CONS 1 "failed"))
                      ('T
                       (SPADCALL (QCAR (QCDR |usc|)) (QCDR (QCDR |usc|))
-                                (QREFELT $ 61)))))))) 
+                                (QREFELT % 61)))))))) 
 
-(SDEFUN |EFGUSER;cotIfCan;PSU;9| ((|x| (PS)) ($ (|Union| PS "failed")))
+(SDEFUN |EFGUSER;cotIfCan;PSU;9| ((|x| (PS)) (% (|Union| PS "failed")))
         (SPROG
          ((|usc| (|Union| (|Record| (|:| |sin| PS) (|:| |cos| PS)) "failed")))
-         (SEQ (LETT |usc| (|EFGUSER;sincos| |x| $))
+         (SEQ (LETT |usc| (|EFGUSER;sincos| |x| %))
               (EXIT
                (COND ((QEQCAR |usc| 1) (CONS 1 "failed"))
                      ('T
                       (SPADCALL (QCDR (QCDR |usc|)) (QCAR (QCDR |usc|))
-                                (QREFELT $ 61)))))))) 
+                                (QREFELT % 61)))))))) 
 
-(SDEFUN |EFGUSER;secIfCan;PSU;10| ((|x| (PS)) ($ (|Union| PS "failed")))
+(SDEFUN |EFGUSER;secIfCan;PSU;10| ((|x| (PS)) (% (|Union| PS "failed")))
         (SPROG
          ((|usc| (|Union| (|Record| (|:| |sin| PS) (|:| |cos| PS)) "failed")))
-         (SEQ (LETT |usc| (|EFGUSER;sincos| |x| $))
+         (SEQ (LETT |usc| (|EFGUSER;sincos| |x| %))
               (EXIT
                (COND ((QEQCAR |usc| 1) (CONS 1 "failed"))
                      ('T
-                      (SPADCALL (|spadConstant| $ 22) (QCDR (QCDR |usc|))
-                                (QREFELT $ 61)))))))) 
+                      (SPADCALL (|spadConstant| % 22) (QCDR (QCDR |usc|))
+                                (QREFELT % 61)))))))) 
 
-(SDEFUN |EFGUSER;cscIfCan;PSU;11| ((|x| (PS)) ($ (|Union| PS "failed")))
+(SDEFUN |EFGUSER;cscIfCan;PSU;11| ((|x| (PS)) (% (|Union| PS "failed")))
         (SPROG
          ((|usc| (|Union| (|Record| (|:| |sin| PS) (|:| |cos| PS)) "failed")))
-         (SEQ (LETT |usc| (|EFGUSER;sincos| |x| $))
+         (SEQ (LETT |usc| (|EFGUSER;sincos| |x| %))
               (EXIT
                (COND ((QEQCAR |usc| 1) (CONS 1 "failed"))
                      ('T
-                      (SPADCALL (|spadConstant| $ 22) (QCAR (QCDR |usc|))
-                                (QREFELT $ 61)))))))) 
+                      (SPADCALL (|spadConstant| % 22) (QCAR (QCDR |usc|))
+                                (QREFELT % 61)))))))) 
 
-(SDEFUN |EFGUSER;asinIfCan;PSU;12| ((|x| (PS)) ($ (|Union| PS "failed")))
-        (|EFGUSER;apply_taylor1| (ELT $ 66) |x| $)) 
+(SDEFUN |EFGUSER;asinIfCan;PSU;12| ((|x| (PS)) (% (|Union| PS "failed")))
+        (|EFGUSER;apply_taylor1| (ELT % 66) |x| %)) 
 
-(SDEFUN |EFGUSER;acosIfCan;PSU;13| ((|x| (PS)) ($ (|Union| PS "failed")))
-        (|EFGUSER;apply_taylor1| (ELT $ 68) |x| $)) 
+(SDEFUN |EFGUSER;acosIfCan;PSU;13| ((|x| (PS)) (% (|Union| PS "failed")))
+        (|EFGUSER;apply_taylor1| (ELT % 68) |x| %)) 
 
-(SDEFUN |EFGUSER;atanIfCan;PSU;14| ((|x| (PS)) ($ (|Union| PS "failed")))
-        (|EFGUSER;apply_taylor1| (ELT $ 70) |x| $)) 
+(SDEFUN |EFGUSER;atanIfCan;PSU;14| ((|x| (PS)) (% (|Union| PS "failed")))
+        (|EFGUSER;apply_taylor1| (ELT % 70) |x| %)) 
 
-(SDEFUN |EFGUSER;acotIfCan;PSU;15| ((|x| (PS)) ($ (|Union| PS "failed")))
-        (|EFGUSER;apply_taylor1| (ELT $ 72) |x| $)) 
+(SDEFUN |EFGUSER;acotIfCan;PSU;15| ((|x| (PS)) (% (|Union| PS "failed")))
+        (|EFGUSER;apply_taylor1| (ELT % 72) |x| %)) 
 
-(SDEFUN |EFGUSER;asecIfCan;PSU;16| ((|x| (PS)) ($ (|Union| PS "failed")))
-        (|EFGUSER;apply_taylor1| (ELT $ 74) |x| $)) 
+(SDEFUN |EFGUSER;asecIfCan;PSU;16| ((|x| (PS)) (% (|Union| PS "failed")))
+        (|EFGUSER;apply_taylor1| (ELT % 74) |x| %)) 
 
-(SDEFUN |EFGUSER;acscIfCan;PSU;17| ((|x| (PS)) ($ (|Union| PS "failed")))
-        (|EFGUSER;apply_taylor1| (ELT $ 76) |x| $)) 
+(SDEFUN |EFGUSER;acscIfCan;PSU;17| ((|x| (PS)) (% (|Union| PS "failed")))
+        (|EFGUSER;apply_taylor1| (ELT % 76) |x| %)) 
 
 (SDEFUN |EFGUSER;sinhcosh|
         ((|x| (PS))
-         ($ (|Union| (|Record| (|:| |sinh| PS) (|:| |cosh| PS)) "failed")))
+         (% (|Union| (|Record| (|:| |sinh| PS) (|:| |cosh| PS)) "failed")))
         (SPROG
          ((|cc1| (|Coef|)) (|sc1| (|Coef|)) (|cx1| (PS)) (|sx1| (PS))
           (|x1| (PS)) (|c1| (|Coef|))
           (|scst|
            (|Record| (|:| |sinh| (|Stream| |Coef|))
                      (|:| |cosh| (|Stream| |Coef|)))))
-         (SEQ (LETT |x| (SPADCALL |x| (|spadConstant| $ 11) (QREFELT $ 12)))
+         (SEQ (LETT |x| (SPADCALL |x| (|spadConstant| % 11) (QREFELT % 12)))
               (EXIT
                (COND
-                ((SPADCALL (SPADCALL |x| (QREFELT $ 13)) (|spadConstant| $ 11)
-                           (QREFELT $ 15))
+                ((SPADCALL (SPADCALL |x| (QREFELT % 13)) (|spadConstant| % 11)
+                           (QREFELT % 15))
                  (CONS 1 "failed"))
                 (#1='T
                  (SEQ
                   (LETT |scst|
                         (SPADCALL
-                         (SPADCALL (|spadConstant| $ 21) 1 (QREFELT $ 20))
-                         (QREFELT $ 79)))
+                         (SPADCALL (|spadConstant| % 21) 1 (QREFELT % 20))
+                         (QREFELT % 79)))
                   (LETT |c1|
-                        (SPADCALL |x| (|spadConstant| $ 11) (QREFELT $ 16)))
+                        (SPADCALL |x| (|spadConstant| % 11) (QREFELT % 16)))
                   (EXIT
                    (COND
-                    ((SPADCALL |c1| (|spadConstant| $ 10) (QREFELT $ 28))
+                    ((SPADCALL |c1| (|spadConstant| % 10) (QREFELT % 28))
                      (CONS 0
-                           (CONS (SPADCALL (QCAR |scst|) |x| (QREFELT $ 26))
-                                 (SPADCALL (QCDR |scst|) |x| (QREFELT $ 26)))))
-                    ((QREFELT $ 9)
+                           (CONS (SPADCALL (QCAR |scst|) |x| (QREFELT % 26))
+                                 (SPADCALL (QCDR |scst|) |x| (QREFELT % 26)))))
+                    ((QREFELT % 9)
                      (SEQ
                       (LETT |x1|
                             (SPADCALL |x|
-                                      (SPADCALL |c1| (|spadConstant| $ 11)
-                                                (QREFELT $ 24))
-                                      (QREFELT $ 25)))
-                      (LETT |sx1| (SPADCALL (QCAR |scst|) |x1| (QREFELT $ 26)))
-                      (LETT |cx1| (SPADCALL (QCDR |scst|) |x1| (QREFELT $ 26)))
-                      (LETT |sc1| (SPADCALL |c1| (QREFELT $ 80)))
-                      (LETT |cc1| (SPADCALL |c1| (QREFELT $ 81)))
+                                      (SPADCALL |c1| (|spadConstant| % 11)
+                                                (QREFELT % 24))
+                                      (QREFELT % 25)))
+                      (LETT |sx1| (SPADCALL (QCAR |scst|) |x1| (QREFELT % 26)))
+                      (LETT |cx1| (SPADCALL (QCDR |scst|) |x1| (QREFELT % 26)))
+                      (LETT |sc1| (SPADCALL |c1| (QREFELT % 80)))
+                      (LETT |cc1| (SPADCALL |c1| (QREFELT % 81)))
                       (EXIT
                        (CONS 0
                              (CONS
-                              (SPADCALL (SPADCALL |sc1| |cx1| (QREFELT $ 50))
-                                        (SPADCALL |cc1| |sx1| (QREFELT $ 50))
-                                        (QREFELT $ 58))
-                              (SPADCALL (SPADCALL |cc1| |cx1| (QREFELT $ 50))
-                                        (SPADCALL |sc1| |sx1| (QREFELT $ 50))
-                                        (QREFELT $ 58)))))))
+                              (SPADCALL (SPADCALL |sc1| |cx1| (QREFELT % 50))
+                                        (SPADCALL |cc1| |sx1| (QREFELT % 50))
+                                        (QREFELT % 58))
+                              (SPADCALL (SPADCALL |cc1| |cx1| (QREFELT % 50))
+                                        (SPADCALL |sc1| |sx1| (QREFELT % 50))
+                                        (QREFELT % 58)))))))
                     (#1# (CONS 1 "failed"))))))))))) 
 
-(SDEFUN |EFGUSER;sinhIfCan;PSU;19| ((|x| (PS)) ($ (|Union| PS "failed")))
+(SDEFUN |EFGUSER;sinhIfCan;PSU;19| ((|x| (PS)) (% (|Union| PS "failed")))
         (SPROG
          ((|usc|
            (|Union| (|Record| (|:| |sinh| PS) (|:| |cosh| PS)) "failed")))
-         (SEQ (LETT |usc| (|EFGUSER;sinhcosh| |x| $))
+         (SEQ (LETT |usc| (|EFGUSER;sinhcosh| |x| %))
               (EXIT
                (COND ((QEQCAR |usc| 1) (CONS 1 "failed"))
                      ('T (CONS 0 (QCAR (QCDR |usc|))))))))) 
 
-(SDEFUN |EFGUSER;coshIfCan;PSU;20| ((|x| (PS)) ($ (|Union| PS "failed")))
+(SDEFUN |EFGUSER;coshIfCan;PSU;20| ((|x| (PS)) (% (|Union| PS "failed")))
         (SPROG
          ((|usc|
            (|Union| (|Record| (|:| |sinh| PS) (|:| |cosh| PS)) "failed")))
-         (SEQ (LETT |usc| (|EFGUSER;sinhcosh| |x| $))
+         (SEQ (LETT |usc| (|EFGUSER;sinhcosh| |x| %))
               (EXIT
                (COND ((QEQCAR |usc| 1) (CONS 1 "failed"))
                      ('T (CONS 0 (QCDR (QCDR |usc|))))))))) 
 
-(SDEFUN |EFGUSER;tanhIfCan;PSU;21| ((|x| (PS)) ($ (|Union| PS "failed")))
+(SDEFUN |EFGUSER;tanhIfCan;PSU;21| ((|x| (PS)) (% (|Union| PS "failed")))
         (SPROG
          ((|usc|
            (|Union| (|Record| (|:| |sinh| PS) (|:| |cosh| PS)) "failed")))
-         (SEQ (LETT |usc| (|EFGUSER;sinhcosh| |x| $))
+         (SEQ (LETT |usc| (|EFGUSER;sinhcosh| |x| %))
               (EXIT
                (COND ((QEQCAR |usc| 1) (CONS 1 "failed"))
                      ('T
                       (SPADCALL (QCAR (QCDR |usc|)) (QCDR (QCDR |usc|))
-                                (QREFELT $ 61)))))))) 
+                                (QREFELT % 61)))))))) 
 
-(SDEFUN |EFGUSER;cothIfCan;PSU;22| ((|x| (PS)) ($ (|Union| PS "failed")))
+(SDEFUN |EFGUSER;cothIfCan;PSU;22| ((|x| (PS)) (% (|Union| PS "failed")))
         (SPROG
          ((|usc|
            (|Union| (|Record| (|:| |sinh| PS) (|:| |cosh| PS)) "failed")))
-         (SEQ (LETT |usc| (|EFGUSER;sinhcosh| |x| $))
+         (SEQ (LETT |usc| (|EFGUSER;sinhcosh| |x| %))
               (EXIT
                (COND ((QEQCAR |usc| 1) (CONS 1 "failed"))
                      ('T
                       (SPADCALL (QCDR (QCDR |usc|)) (QCAR (QCDR |usc|))
-                                (QREFELT $ 61)))))))) 
+                                (QREFELT % 61)))))))) 
 
-(SDEFUN |EFGUSER;sechIfCan;PSU;23| ((|x| (PS)) ($ (|Union| PS "failed")))
+(SDEFUN |EFGUSER;sechIfCan;PSU;23| ((|x| (PS)) (% (|Union| PS "failed")))
         (SPROG
          ((|usc|
            (|Union| (|Record| (|:| |sinh| PS) (|:| |cosh| PS)) "failed")))
-         (SEQ (LETT |usc| (|EFGUSER;sinhcosh| |x| $))
+         (SEQ (LETT |usc| (|EFGUSER;sinhcosh| |x| %))
               (EXIT
                (COND ((QEQCAR |usc| 1) (CONS 1 "failed"))
                      ('T
-                      (SPADCALL (|spadConstant| $ 22) (QCDR (QCDR |usc|))
-                                (QREFELT $ 61)))))))) 
+                      (SPADCALL (|spadConstant| % 22) (QCDR (QCDR |usc|))
+                                (QREFELT % 61)))))))) 
 
-(SDEFUN |EFGUSER;cschIfCan;PSU;24| ((|x| (PS)) ($ (|Union| PS "failed")))
+(SDEFUN |EFGUSER;cschIfCan;PSU;24| ((|x| (PS)) (% (|Union| PS "failed")))
         (SPROG
          ((|usc|
            (|Union| (|Record| (|:| |sinh| PS) (|:| |cosh| PS)) "failed")))
-         (SEQ (LETT |usc| (|EFGUSER;sinhcosh| |x| $))
+         (SEQ (LETT |usc| (|EFGUSER;sinhcosh| |x| %))
               (EXIT
                (COND ((QEQCAR |usc| 1) (CONS 1 "failed"))
                      ('T
-                      (SPADCALL (|spadConstant| $ 22) (QCAR (QCDR |usc|))
-                                (QREFELT $ 61)))))))) 
+                      (SPADCALL (|spadConstant| % 22) (QCAR (QCDR |usc|))
+                                (QREFELT % 61)))))))) 
 
-(SDEFUN |EFGUSER;asinhIfCan;PSU;25| ((|x| (PS)) ($ (|Union| PS "failed")))
-        (|EFGUSER;apply_taylor1| (ELT $ 88) |x| $)) 
+(SDEFUN |EFGUSER;asinhIfCan;PSU;25| ((|x| (PS)) (% (|Union| PS "failed")))
+        (|EFGUSER;apply_taylor1| (ELT % 88) |x| %)) 
 
-(SDEFUN |EFGUSER;acoshIfCan;PSU;26| ((|x| (PS)) ($ (|Union| PS "failed")))
-        (|EFGUSER;apply_taylor1| (ELT $ 90) |x| $)) 
+(SDEFUN |EFGUSER;acoshIfCan;PSU;26| ((|x| (PS)) (% (|Union| PS "failed")))
+        (|EFGUSER;apply_taylor1| (ELT % 90) |x| %)) 
 
-(SDEFUN |EFGUSER;atanhIfCan;PSU;27| ((|x| (PS)) ($ (|Union| PS "failed")))
-        (|EFGUSER;apply_taylor1| (ELT $ 92) |x| $)) 
+(SDEFUN |EFGUSER;atanhIfCan;PSU;27| ((|x| (PS)) (% (|Union| PS "failed")))
+        (|EFGUSER;apply_taylor1| (ELT % 92) |x| %)) 
 
-(SDEFUN |EFGUSER;acothIfCan;PSU;28| ((|x| (PS)) ($ (|Union| PS "failed")))
-        (|EFGUSER;apply_taylor1| (ELT $ 94) |x| $)) 
+(SDEFUN |EFGUSER;acothIfCan;PSU;28| ((|x| (PS)) (% (|Union| PS "failed")))
+        (|EFGUSER;apply_taylor1| (ELT % 94) |x| %)) 
 
-(SDEFUN |EFGUSER;asechIfCan;PSU;29| ((|x| (PS)) ($ (|Union| PS "failed")))
-        (|EFGUSER;apply_taylor1| (ELT $ 96) |x| $)) 
+(SDEFUN |EFGUSER;asechIfCan;PSU;29| ((|x| (PS)) (% (|Union| PS "failed")))
+        (|EFGUSER;apply_taylor1| (ELT % 96) |x| %)) 
 
-(SDEFUN |EFGUSER;acschIfCan;PSU;30| ((|x| (PS)) ($ (|Union| PS "failed")))
-        (|EFGUSER;apply_taylor1| (ELT $ 98) |x| $)) 
+(SDEFUN |EFGUSER;acschIfCan;PSU;30| ((|x| (PS)) (% (|Union| PS "failed")))
+        (|EFGUSER;apply_taylor1| (ELT % 98) |x| %)) 
 
 (SDEFUN |EFGUSER;do_quo;2PSU;31|
-        ((|x| (PS)) (|y| (PS)) ($ (|Union| PS "failed")))
-        (SPADCALL |x| |y| (QREFELT $ 101))) 
+        ((|x| (PS)) (|y| (PS)) (% (|Union| PS "failed")))
+        (SPADCALL |x| |y| (QREFELT % 101))) 
 
 (SDEFUN |EFGUSER;do_quo;2PSU;32|
-        ((|x| (PS)) (|y| (PS)) ($ (|Union| PS "failed")))
+        ((|x| (PS)) (|y| (PS)) (% (|Union| PS "failed")))
         (SPROG ((|yinv| (|Union| PS "failed")))
-               (SEQ (LETT |yinv| (SPADCALL |y| (QREFELT $ 102)))
+               (SEQ (LETT |yinv| (SPADCALL |y| (QREFELT % 102)))
                     (EXIT
                      (COND ((QEQCAR |yinv| 1) (CONS 1 "failed"))
                            ('T
                             (CONS 0
                                   (SPADCALL |x| (QCDR |yinv|)
-                                            (QREFELT $ 39))))))))) 
+                                            (QREFELT % 39))))))))) 
 
 (DECLAIM (NOTINLINE |ElementaryFunctionsGeneralizedUnivariatePowerSeries;|)) 
 
-(DEFUN |ElementaryFunctionsGeneralizedUnivariatePowerSeries| (&REST #1=#:G797)
+(DEFUN |ElementaryFunctionsGeneralizedUnivariatePowerSeries| (&REST #1=#:G545)
   (SPROG NIL
-         (PROG (#2=#:G798)
+         (PROG (#2=#:G546)
            (RETURN
             (COND
              ((LETT #2#
@@ -448,7 +448,7 @@
                         '|ElementaryFunctionsGeneralizedUnivariatePowerSeries|)))))))))) 
 
 (DEFUN |ElementaryFunctionsGeneralizedUnivariatePowerSeries;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -456,36 +456,36 @@
           (LETT |dv$|
                 (LIST '|ElementaryFunctionsGeneralizedUnivariatePowerSeries|
                       DV$1 DV$2 DV$3))
-          (LETT $ (GETREFV 103))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 103))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache|
                       '|ElementaryFunctionsGeneralizedUnivariatePowerSeries|
-                      (LIST DV$1 DV$2 DV$3) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (QSETREFV $ 8 |#3|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 9
+                      (LIST DV$1 DV$2 DV$3) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (QSETREFV % 8 |#3|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 9
                     (COND
                      ((|HasCategory| |#1| '(|TranscendentalFunctionCategory|))
                       (|HasCategory| |#1| '(|CommutativeRing|)))
                      ('T NIL)))
           (COND
            ((|HasCategory| |#2| '(|Algebra| (|Fraction| (|Integer|))))
-            (QSETREFV $ 46
+            (QSETREFV % 46
                       (CONS
                        (|dispatchFunction| |EFGUSER;nthRootIfCan;PSNniU;2|)
-                       $))))
+                       %))))
           (COND
            ((|HasCategory| |#1| '(|IntegralDomain|))
-            (QSETREFV $ 61
-                      (CONS (|dispatchFunction| |EFGUSER;do_quo;2PSU;31|) $)))
+            (QSETREFV % 61
+                      (CONS (|dispatchFunction| |EFGUSER;do_quo;2PSU;31|) %)))
            ('T
-            (QSETREFV $ 61
-                      (CONS (|dispatchFunction| |EFGUSER;do_quo;2PSU;32|) $))))
-          $))) 
+            (QSETREFV % 61
+                      (CONS (|dispatchFunction| |EFGUSER;do_quo;2PSU;32|) %))))
+          %))) 
 
 (MAKEPROP '|ElementaryFunctionsGeneralizedUnivariatePowerSeries| '|infovec|
           (LIST
@@ -524,7 +524,7 @@
               |EFGUSER;atanhIfCan;PSU;27| (264 . |acoth|)
               |EFGUSER;acothIfCan;PSU;28| (269 . |asech|)
               |EFGUSER;asechIfCan;PSU;29| (274 . |acsch|)
-              |EFGUSER;acschIfCan;PSU;30| (|Union| $ '"failed") (279 . |exquo|)
+              |EFGUSER;acschIfCan;PSU;30| (|Union| % '"failed") (279 . |exquo|)
               (285 . |recip|))
            '#(|tanhIfCan| 290 |tanIfCan| 295 |sinhIfCan| 300 |sinIfCan| 305
               |sechIfCan| 310 |secIfCan| 315 |nthRootIfCan| 320 |logIfCan| 326

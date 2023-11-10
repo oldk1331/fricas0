@@ -64,9 +64,9 @@
 ;   [op,:modemap] := item
 ;   [dcSig,[.,[kind,:.]]] := modemap
 ;   [dc,:sig] := dcSig
-;   sig := substitute('$,dc,substitute("$$",'$,sig))
+;   sig := substitute('%, dc, substitute("$$", '%,sig))
 ;   dcCode :=
-;     dc = '$ => 0
+;     dc = '% => 0
 ;     NRTassocIndex dc or keyedSystemError("S2NR0004",[dc])
 ;   formalSig:= SUBLISLIS($FormalMapVariableList,$formalArgList,sig)
 ;   kindFlag:= (kind = 'CONST => 'CONST; nil)
@@ -92,9 +92,9 @@
         (SETQ |kind| (CAR (CADADR |modemap|)))
         (SETQ |dc| (CAR |dcSig|))
         (SETQ |sig| (CDR |dcSig|))
-        (SETQ |sig| (|substitute| '$ |dc| (|substitute| '$$ '$ |sig|)))
+        (SETQ |sig| (|substitute| '% |dc| (|substitute| '$$ '% |sig|)))
         (SETQ |dcCode|
-                (COND ((EQ |dc| '$) 0)
+                (COND ((EQ |dc| '%) 0)
                       (#1#
                        (OR (|NRTassocIndex| |dc|)
                            (|keyedSystemError| 'S2NR0004 (LIST |dc|))))))
@@ -132,7 +132,7 @@
 ;       -- the operation name should be assigned a slot
 ;       not(firstTime) and (k := NRTassocIndex x) =>
 ;           not(domain) and INTEGERP(k) =>
-;               ['NRTEVAL, [($QuickCode => 'QREFELT; 'ELT), "$", k]]
+;               ['NRTEVAL, [($QuickCode => 'QREFELT; 'ELT), "%", k]]
 ;           k
 ;       VECP(x) => systemErrorHere '"NRTencode"
 ;       PAIRP(x) =>
@@ -151,8 +151,8 @@
 ;           v := $FormalMapVariableList.(POSN1(x, $formalArgList))
 ;           firstTime => ['local, v]
 ;           domain => v
-;           ['NRTEVAL, [($QuickCode => 'QREFELT; 'ELT), "$", v]]
-;       x = '$ => x
+;           ['NRTEVAL, [($QuickCode => 'QREFELT; 'ELT), "%", v]]
+;       x = '% => x
 ;       x = "$$" => x
 ;       ['QUOTE, x]
 
@@ -166,7 +166,7 @@
        (COND
         ((AND (NULL |domain|) (INTEGERP |k|))
          (LIST 'NRTEVAL
-               (LIST (COND (|$QuickCode| 'QREFELT) (#1='T 'ELT)) '$ |k|)))
+               (LIST (COND (|$QuickCode| 'QREFELT) (#1='T 'ELT)) '% |k|)))
         (#1# |k|)))
       ((VECP |x|) (|systemErrorHere| "NRTencode"))
       ((CONSP |x|)
@@ -278,13 +278,13 @@
         (COND (|firstTime| (LIST '|local| |v|)) (|domain| |v|)
               (#1#
                (LIST 'NRTEVAL
-                     (LIST (COND (|$QuickCode| 'QREFELT) (#1# 'ELT)) '$
+                     (LIST (COND (|$QuickCode| 'QREFELT) (#1# 'ELT)) '%
                            |v|))))))
-      ((EQ |x| '$) |x|) ((EQ |x| '$$) |x|) (#1# (LIST 'QUOTE |x|))))))
+      ((EQ |x| '%) |x|) ((EQ |x| '$$) |x|) (#1# (LIST 'QUOTE |x|))))))
 
 ; listOfBoundVars(form, e) ==
 ; -- Only called from the function genDeltaEntry below
-;   form = '$ => []
+;   form = '% => []
 ;   IDENTP form and (u := get(form, 'value, e)) =>
 ;     u:=u.expr
 ;     MEMQ(IFCAR u, '(Union Record)) => listOfBoundVars(u, e)
@@ -298,7 +298,7 @@
 (DEFUN |listOfBoundVars| (|form| |e|)
   (PROG (|u|)
     (RETURN
-     (COND ((EQ |form| '$) NIL)
+     (COND ((EQ |form| '%) NIL)
            ((AND (IDENTP |form|) (SETQ |u| (|get| |form| '|value| |e|)))
             (PROGN
              (SETQ |u| (CAR |u|))
@@ -326,7 +326,7 @@
 ;   $bootstrapDomains = true =>
 ;     nil
 ;   ndc :=
-;     dc = '$ => $functorForm
+;     dc = '% => $functorForm
 ;     atom dc and (dcval := get(dc, 'value, e)) => dcval.expr
 ;     dc
 ;   sig := substitute(ndc, dc, sig)
@@ -346,7 +346,7 @@
 ;        quoteSelector(x, e) ==
 ;          not(IDENTP x) => x
 ;          get(x, 'value, e) => x
-;          x='$ => x
+;          x = '% => x
 ;          MKQ x
 ;      fn := compiledLookup(op,nsig,dcval)
 ;      if null fn then return nil
@@ -366,7 +366,7 @@
 ;           if not STRINGP var and (n := countXLAM(var, rhs)) ~= 1 then
 ;               -- in current code base there are no cases like "f(x, y) == x"
 ;               -- so throw an error if such case emerges.
-;               stackAndThrow [op, " can not be properly inline optimized"]
+;               stackAndThrow [op, '" can not be properly inline optimized"]
 ;               return nil
 ;   spadreplace
 
@@ -378,7 +378,7 @@
            (#1='T
             (PROGN
              (SETQ |ndc|
-                     (COND ((EQ |dc| '$) |$functorForm|)
+                     (COND ((EQ |dc| '%) |$functorForm|)
                            ((AND (ATOM |dc|)
                                  (SETQ |dcval| (|get| |dc| '|value| |e|)))
                             (CAR |dcval|))
@@ -455,7 +455,7 @@
                                         1)))
                              (|stackAndThrow|
                               (LIST |op|
-                                    '| can not be properly inline optimized|))
+                                    " can not be properly inline optimized"))
                              (RETURN NIL)))))
                          (SETQ |bfVar#22| (CDR |bfVar#22|))))
                       |lhs| NIL)))
@@ -464,7 +464,7 @@
   (PROG ()
     (RETURN
      (COND ((NULL (IDENTP |x|)) |x|) ((|get| |x| '|value| |e|) |x|)
-           ((EQ |x| '$) |x|) ('T (MKQ |x|))))))
+           ((EQ |x| '%) |x|) ('T (MKQ |x|))))))
 
 ; countXLAM(var, rhs) ==
 ;     -- return how many times does var appear in rhs
@@ -484,8 +484,10 @@
 ;   [op,[dc,:sig],[.,cform:=[eltOrConst,.,nsig]]] := opMmPair
 ;   eltOrConst = 'XLAM => cform
 ;   if atom dc then
-;     dc = "$" => nsig := sig
-;     if NUMBERP nsig then nsig := substitute('$,dc,substitute("$$","$",sig))
+;     dc = "%" => nsig := sig
+;     if NUMBERP(nsig) then
+;         nsig := substitute('%, dc, substitute("$$", "%", sig))
+;
 ;     -- following hack needed to invert Rep to $ substitution
 ; --  if odc = 'Rep and cform is [.,.,osig] then sig:=osig
 ;   newimp := optDeltaEntry(op, nsig, dc, eltOrConst, e) => newimp
@@ -493,9 +495,9 @@
 ;     ['applyFun,['compiledLookupCheck,MKQ op,
 ;          mkList consSig(nsig, dc, e), consDomainForm(dc, nil, e)]]
 ;   odc := dc
-;   if null atom dc then dc := substitute("$$",'$,dc)
-;  --   sig := substitute('$,dc,sig)
-;  --   cform := substitute('$,dc,cform)
+;   if null atom dc then dc := substitute("$$", '%, dc)
+;  --   sig := substitute('%, dc, sig)
+;  --   cform := substitute('%, dc, cform)
 ;   opModemapPair :=
 ;     -- force pred to T
 ;     [op, [dc, :[genDeltaSig(x, e) for x in nsig]], ['T,cform]]
@@ -508,7 +510,7 @@
 ;       compEntry := (compOrCroak(odc, $EmptyMode, e)).expr
 ;       RPLACA(saveNRTdeltaListComp,compEntry)
 ;   u :=
-;     [eltOrConst,'$,$NRTbase+$NRTdeltaLength-index] where index ==
+;     [eltOrConst, '%, $NRTbase+$NRTdeltaLength-index] where index ==
 ;       (n:= POSN1(opModemapPair,$NRTdeltaList)) => n + 1
 ;         --n + 1 since $NRTdeltaLength is 1 too large
 ;       $NRTdeltaList:= [opModemapPair,:$NRTdeltaList]
@@ -536,13 +538,13 @@
              (PROGN
               (COND
                ((ATOM |dc|)
-                (COND ((EQ |dc| '$) (SETQ |nsig| |sig|))
+                (COND ((EQ |dc| '%) (SETQ |nsig| |sig|))
                       (#3#
                        (COND
                         ((NUMBERP |nsig|)
                          (SETQ |nsig|
-                                 (|substitute| '$ |dc|
-                                  (|substitute| '$$ '$ |sig|)))))))))
+                                 (|substitute| '% |dc|
+                                  (|substitute| '$$ '% |sig|)))))))))
               (COND
                ((SETQ |newimp|
                         (|optDeltaEntry| |op| |nsig| |dc| |eltOrConst| |e|))
@@ -557,7 +559,7 @@
                 (PROGN
                  (SETQ |odc| |dc|)
                  (COND
-                  ((NULL (ATOM |dc|)) (SETQ |dc| (|substitute| '$$ '$ |dc|))))
+                  ((NULL (ATOM |dc|)) (SETQ |dc| (|substitute| '$$ '% |dc|))))
                  (SETQ |opModemapPair|
                          (LIST |op|
                                (CONS |dc|
@@ -595,7 +597,7 @@
                            (CAR (|compOrCroak| |odc| |$EmptyMode| |e|)))
                    (RPLACA |saveNRTdeltaListComp| |compEntry|)))
                  (SETQ |u|
-                         (LIST |eltOrConst| '$
+                         (LIST |eltOrConst| '%
                                (- (+ |$NRTbase| |$NRTdeltaLength|)
                                   (COND
                                    ((SETQ |n|
@@ -652,12 +654,12 @@
 ; NRTgetLocalIndex(item, e) ==
 ;   k := NRTassocIndex item => k
 ;   item = $NRTaddForm => 5
-;   item = '$ => 0
+;   item = '% => 0
 ;   item = '_$_$ => 2
 ;   value:=
 ;     MEMQ(item,$formalArgList) => item
 ;     nil
-;   atom item and null MEMQ(item,'($ _$_$))
+;   atom item and null MEMQ(item,'(% _$_$))
 ;    and null value =>  --give slots to atoms
 ;     $NRTdeltaList := [['domain, NRTaddInner(item, e), :value], :$NRTdeltaList]
 ;     $NRTdeltaListComp:=[item,:$NRTdeltaListComp]
@@ -675,14 +677,14 @@
   (PROG (|k| |value| |saveNRTdeltaListComp| |saveIndex| |compEntry|)
     (RETURN
      (COND ((SETQ |k| (|NRTassocIndex| |item|)) |k|)
-           ((EQUAL |item| |$NRTaddForm|) 5) ((EQ |item| '$) 0)
+           ((EQUAL |item| |$NRTaddForm|) 5) ((EQ |item| '%) 0)
            ((EQ |item| '$$) 2)
            (#1='T
             (PROGN
              (SETQ |value|
                      (COND ((MEMQ |item| |$formalArgList|) |item|) (#1# NIL)))
              (COND
-              ((AND (ATOM |item|) (NULL (MEMQ |item| '($ $$))) (NULL |value|))
+              ((AND (ATOM |item|) (NULL (MEMQ |item| '(% $$))) (NULL |value|))
                (PROGN
                 (SETQ |$NRTdeltaList|
                         (CONS
@@ -730,7 +732,7 @@
 ;         for arg in args for tp in rest(cosig) while ok repeat
 ;             ok :=
 ;                 not(tp) => false
-;                 arg = '$ => true
+;                 arg = '% => true
 ;                 MEMBER(arg, $functorLocalParameters) => true
 ;                 cheap_comp_delta_entry(arg)
 ;         ok
@@ -757,7 +759,7 @@
                      (RETURN NIL))
                     (#1#
                      (SETQ |ok|
-                             (COND ((NULL |tp|) NIL) ((EQ |arg| '$) T)
+                             (COND ((NULL |tp|) NIL) ((EQ |arg| '%) T)
                                    ((MEMBER |arg| |$functorLocalParameters|) T)
                                    (#1# (|cheap_comp_delta_entry| |arg|))))))
                    (SETQ |bfVar#27| (CDR |bfVar#27|))
@@ -772,9 +774,9 @@
 ;   [., ., implementation] := NRTisExported?(opSig, base_shell) or return nil
 ;     --if opSig is not exported, it is local and need not be assigned
 ;   if $insideCategoryPackageIfTrue then
-;       sig := substitute('$,CADR($functorForm),sig)
+;       sig := substitute('%, CADR($functorForm), sig)
 ;   sig := [genDeltaSig(x, e) for x in sig]
-;   opModemapPair := [op,['_$,:sig],['T,implementation]]
+;   opModemapPair := [op, ['%, :sig], ['T,implementation]]
 ;   POSN1(opModemapPair,$NRTdeltaList) => nil   --already there
 ;   $NRTdeltaList:= [opModemapPair,:$NRTdeltaList]
 ;   $NRTdeltaListComp := [nil,:$NRTdeltaListComp]
@@ -790,7 +792,7 @@
       (SETQ |implementation| (CADDR |LETTMP#1|))
       (COND
        (|$insideCategoryPackageIfTrue|
-        (SETQ |sig| (|substitute| '$ (CADR |$functorForm|) |sig|))))
+        (SETQ |sig| (|substitute| '% (CADR |$functorForm|) |sig|))))
       (SETQ |sig|
               ((LAMBDA (|bfVar#30| |bfVar#29| |x|)
                  (LOOP
@@ -804,7 +806,7 @@
                   (SETQ |bfVar#29| (CDR |bfVar#29|))))
                NIL |sig| NIL))
       (SETQ |opModemapPair|
-              (LIST |op| (CONS '$ |sig|) (LIST 'T |implementation|)))
+              (LIST |op| (CONS '% |sig|) (LIST 'T |implementation|)))
       (COND ((POSN1 |opModemapPair| |$NRTdeltaList|) NIL)
             (#1#
              (PROGN
@@ -855,9 +857,9 @@
   (PROG () (RETURN (COND (|c| (|consDomainName| |y| |dc| |e|)) ('T |y|)))))
 
 ; consDomainName(x, dc, e) ==
-;   x = dc => ''$
-;   x = '$ => ''$
-;   x = "$$" => ['devaluate,'$]
+;   x = dc => ''%
+;   x = '% => ''%
+;   x = "$$" => ['devaluate, '%]
 ;   x is [op,:argl] =>
 ;     (op = 'Record) or (op = 'Union and argl is [[":",:.],:.])  =>
 ;        mkList [MKQ op,
@@ -870,11 +872,11 @@
 ;             mkList([MKQ op, :[maybe_cons_dn(y, dc, e, c) for y in argl
 ;                               for c in rest(cosig)]])
 ;         mkList [MKQ op, :[consDomainName(y, dc, e) for y in argl]]
-;     substitute('$,"$$",x)
+;     substitute('%, "$$", x)
 ;   x = [] => x
 ;   (y := LASSOC(x,$devaluateList)) => y
 ;   k:=NRTassocIndex x =>
-;     ['devaluate,['ELT,'$,k]]
+;       ['devaluate, ['ELT, '%, k]]
 ;   get(x, 'value, e) =>
 ;     isDomainForm(x, e) => ['devaluate, x]
 ;     x
@@ -883,8 +885,8 @@
 (DEFUN |consDomainName| (|x| |dc| |e|)
   (PROG (|op| |argl| |ISTMP#1| |tag| |ISTMP#2| |dom| |cosig| |y| |k|)
     (RETURN
-     (COND ((EQUAL |x| |dc|) ''$) ((EQ |x| '$) ''$)
-           ((EQ |x| '$$) (LIST '|devaluate| '$))
+     (COND ((EQUAL |x| |dc|) ''%) ((EQ |x| '%) ''%)
+           ((EQ |x| '$$) (LIST '|devaluate| '%))
            ((AND (CONSP |x|)
                  (PROGN (SETQ |op| (CAR |x|)) (SETQ |argl| (CDR |x|)) #1='T))
             (COND
@@ -959,31 +961,31 @@
                                            |bfVar#42|))))
                            (SETQ |bfVar#41| (CDR |bfVar#41|))))
                         NIL |argl| NIL))))))
-             (#1# (|substitute| '$ '$$ |x|))))
+             (#1# (|substitute| '% '$$ |x|))))
            ((NULL |x|) |x|) ((SETQ |y| (LASSOC |x| |$devaluateList|)) |y|)
            ((SETQ |k| (|NRTassocIndex| |x|))
-            (LIST '|devaluate| (LIST 'ELT '$ |k|)))
+            (LIST '|devaluate| (LIST 'ELT '% |k|)))
            ((|get| |x| '|value| |e|)
             (COND ((|isDomainForm| |x| |e|) (LIST '|devaluate| |x|))
                   (#1# |x|)))
            (#1# (MKQ |x|))))))
 
 ; consDomainForm(x, dc, e) ==
-;   x = '$ => '$
+;   x = '% => '%
 ;   x is [op,:argl] =>
 ;       op = ":" and argl is [tag, value] =>
 ;           [op, tag, consDomainForm(value, dc, e)]
 ;       [op, :[consDomainForm(y, dc, e) for y in argl]]
 ;   x = [] => x
 ;   (y := LASSOC(x,$devaluateList)) => y
-;   k:=NRTassocIndex x => ['ELT,'$,k]
+;   k := NRTassocIndex(x) => ['ELT, '%, k]
 ;   get(x, 'value, e) or get(x, 'mode, e) => x
 ;   MKQ x
 
 (DEFUN |consDomainForm| (|x| |dc| |e|)
   (PROG (|op| |argl| |tag| |ISTMP#1| |value| |y| |k|)
     (RETURN
-     (COND ((EQ |x| '$) '$)
+     (COND ((EQ |x| '%) '%)
            ((AND (CONSP |x|)
                  (PROGN (SETQ |op| (CAR |x|)) (SETQ |argl| (CDR |x|)) #1='T))
             (COND
@@ -1009,7 +1011,7 @@
                         (SETQ |bfVar#43| (CDR |bfVar#43|))))
                      NIL |argl| NIL)))))
            ((NULL |x|) |x|) ((SETQ |y| (LASSOC |x| |$devaluateList|)) |y|)
-           ((SETQ |k| (|NRTassocIndex| |x|)) (LIST 'ELT '$ |k|))
+           ((SETQ |k| (|NRTassocIndex| |x|)) (LIST 'ELT '% |k|))
            ((OR (|get| |x| '|value| |e|) (|get| |x| '|mode| |e|)) |x|)
            (#1# (MKQ |x|))))))
 
@@ -1017,7 +1019,7 @@
 ;     p is [op, :l] =>
 ;         MEMQ(op, '(AND and OR or NOT not)) => get_self_preds1(l, acc)
 ;         op is "HasCategory" =>
-;             first(l) = "$" => CONS(CADR(l), acc)
+;             first(l) = "%" => CONS(CADR(l), acc)
 ;             acc
 ;         acc
 ;     acc
@@ -1032,7 +1034,7 @@
         ((MEMQ |op| '(AND |and| OR |or| NOT |not|))
          (|get_self_preds1| |l| |acc|))
         ((EQ |op| '|HasCategory|)
-         (COND ((EQ (CAR |l|) '$) (CONS (CADR |l|) |acc|)) (#1# |acc|)))
+         (COND ((EQ (CAR |l|) '%) (CONS (CADR |l|) |acc|)) (#1# |acc|)))
         (#1# |acc|)))
       (#1# |acc|)))))
 
@@ -1216,10 +1218,10 @@
       ('T (|boolean_substitute1| |cond| |sub_data|))))))
 
 ; mk_has_dollar_quote(cat) ==
-;     ["HasCategory", "$", ["QUOTE", cat]]
+;     ["HasCategory", "%", ["QUOTE", cat]]
 
 (DEFUN |mk_has_dollar_quote| (|cat|)
-  (PROG () (RETURN (LIST '|HasCategory| '$ (LIST 'QUOTE |cat|)))))
+  (PROG () (RETURN (LIST '|HasCategory| '% (LIST 'QUOTE |cat|)))))
 
 ; boolean_subst(condCats, cats, sub_data1) ==
 ;     [boolean_subst1(cond, [FUNCTION boolean_substitute_cond,
@@ -1272,7 +1274,7 @@
 ;     sub_data1 := [false, good_preds]
 ;     condCats := boolean_subst(condCats, catvecListMaker, sub_data1)
 ;     if not(first(sub_data1)) then
-;         userError(["simplify_self_preds1: cannot simplify", $op, self_preds])
+;         userError(['"simplify_self_preds1: cannot simplify", $op, self_preds])
 ;     [condCats, first(sub_data1)]
 
 (DEFUN |simplify_self_preds1| (|catvecListMaker| |condCats|)
@@ -1406,7 +1408,7 @@
               (COND
                ((NULL (CAR |sub_data1|))
                 (|userError|
-                 (LIST '|simplify_self_preds1: cannot simplify| |$op|
+                 (LIST "simplify_self_preds1: cannot simplify" |$op|
                        |self_preds|))))
               (LIST |condCats| (CAR |sub_data1|)))))))))
 
@@ -1483,7 +1485,7 @@
 ;   $template := GETREFV (6 + $NRTdeltaLength)
 ;   $SetFunctions:= GETREFV SIZE domainShell
 ;   $MissingFunctionInfo:= GETREFV SIZE domainShell
-;   catNames := ['$, :[GENVAR() for u in rest catvecListMaker]]
+;   catNames := ['%, :[GENVAR() for u in rest(catvecListMaker)]]
 ;   domname:='dv_$
 ;
 ;   condCats := [simpBool(cc) for cc in condCats]
@@ -1503,13 +1505,13 @@
 ;   NRTdescendCodeTran(storeOperationCode,nil) --side effects storeOperationCode
 ;   codePart2:=
 ;       argStuffCode :=
-;         [['QSETREFV, '$, i, v] for i in 6.. for v in $FormalMapVariableList
+;         [['QSETREFV, '%, i, v] for i in 6.. for v in $FormalMapVariableList
 ;           for arg in rest definition]
 ;       if MEMQ($NRTaddForm,$locals) then
 ;          addargname := $FormalMapVariableList.(POSN1($NRTaddForm,$locals))
-;          argStuffCode := [['QSETREFV, '$, 5, addargname], :argStuffCode]
-;       [['stuffDomainSlots,'$],:argStuffCode,
-;          :predBitVectorCode2, ['SETF, 'pv_$, ['QREFELT, '$, 3]],
+;          argStuffCode := [['QSETREFV, '%, 5, addargname], :argStuffCode]
+;       [['stuffDomainSlots, '%], :argStuffCode,
+;          :predBitVectorCode2, ['SETF, 'pv_$, ['QREFELT, '%, 3]],
 ;             storeOperationCode]
 ;
 ;   $CheckVectorList := NRTcheckVector domainShell
@@ -1522,19 +1524,19 @@
 ;     createDomainCode:=
 ;         ['LET, domname, ['LIST, MKQ first definition,
 ;                          :ASSOCRIGHT $devaluateList]]
-;     createViewCode:= ['LET,'$,['GETREFV, 6+$NRTdeltaLength]]
-;     setVector0Code := ['QSETREFV, '$, 0, 'dv_$]
-;     slot3Code := ['QSETREFV,'$,3,['LET,'pv_$,predBitVectorCode1]]
+;     createViewCode := ['LET, '%, ['GETREFV, 6+$NRTdeltaLength]]
+;     setVector0Code := ['QSETREFV, '%, 0, 'dv_$]
+;     slot3Code := ['QSETREFV, '%, 3, ['LET, 'pv_$, predBitVectorCode1]]
 ;     slamCode:=
 ;         isCategoryPackageName(opOf(definition)) => nil
-;         [NRTaddToSlam(definition, '$)]
+;         [NRTaddToSlam(definition, '%)]
 ;
 ; --CODE: part 3
 ;   $ConstantAssignments :=
 ;       [NRTputInLocalReferences code for code in $ConstantAssignments]
 ;   codePart3:= [:$ConstantAssignments,:$epilogue]
 ;   ans :=
-;     ['PROGN,:optFunctorPROGN [:codePart1,:codePart2,:codePart3], '$]
+;     ['PROGN, :optFunctorPROGN([:codePart1, :codePart2, :codePart3]), '%]
 ;   ans:= minimalise ans
 ;   SAY ['"time taken in buildFunctor: ", get_run_time() - oldtime]
 ;   --sayBrightly '"------------------functor code: -------------------"
@@ -1614,7 +1616,7 @@
       (SETQ |$SetFunctions| (GETREFV (SIZE |domainShell|)))
       (SETQ |$MissingFunctionInfo| (GETREFV (SIZE |domainShell|)))
       (SETQ |catNames|
-              (CONS '$
+              (CONS '%
                     ((LAMBDA (|bfVar#68| |bfVar#67| |u|)
                        (LOOP
                         (COND
@@ -1668,7 +1670,7 @@
                              (RETURN (NREVERSE |bfVar#73|)))
                             (#1#
                              (SETQ |bfVar#73|
-                                     (CONS (LIST 'QSETREFV '$ |i| |v|)
+                                     (CONS (LIST 'QSETREFV '% |i| |v|)
                                            |bfVar#73|))))
                            (SETQ |i| (+ |i| 1))
                            (SETQ |bfVar#71| (CDR |bfVar#71|))
@@ -1681,13 +1683,13 @@
                          (ELT |$FormalMapVariableList|
                               (POSN1 |$NRTaddForm| |$locals|)))
                  (SETQ |argStuffCode|
-                         (CONS (LIST 'QSETREFV '$ 5 |addargname|)
+                         (CONS (LIST 'QSETREFV '% 5 |addargname|)
                                |argStuffCode|))))
-               (CONS (LIST '|stuffDomainSlots| '$)
+               (CONS (LIST '|stuffDomainSlots| '%)
                      (APPEND |argStuffCode|
                              (APPEND |predBitVectorCode2|
                                      (CONS
-                                      (LIST 'SETF '|pv$| (LIST 'QREFELT '$ 3))
+                                      (LIST 'SETF '|pv$| (LIST 'QREFELT '% 3))
                                       (CONS |storeOperationCode| NIL)))))))
       (SETQ |$CheckVectorList| (|NRTcheckVector| |domainShell|))
       (SETQ |devaluate_code|
@@ -1718,13 +1720,13 @@
                           (CONS (MKQ (CAR |definition|))
                                 (ASSOCRIGHT |$devaluateList|)))))
       (SETQ |createViewCode|
-              (LIST 'LET '$ (LIST 'GETREFV (+ 6 |$NRTdeltaLength|))))
-      (SETQ |setVector0Code| (LIST 'QSETREFV '$ 0 '|dv$|))
+              (LIST 'LET '% (LIST 'GETREFV (+ 6 |$NRTdeltaLength|))))
+      (SETQ |setVector0Code| (LIST 'QSETREFV '% 0 '|dv$|))
       (SETQ |slot3Code|
-              (LIST 'QSETREFV '$ 3 (LIST 'LET '|pv$| |predBitVectorCode1|)))
+              (LIST 'QSETREFV '% 3 (LIST 'LET '|pv$| |predBitVectorCode1|)))
       (SETQ |slamCode|
               (COND ((|isCategoryPackageName| (|opOf| |definition|)) NIL)
-                    (#1# (LIST (|NRTaddToSlam| |definition| '$)))))
+                    (#1# (LIST (|NRTaddToSlam| |definition| '%)))))
       (SETQ |codePart1|
               (APPEND |devaluate_code|
                       (CONS |createDomainCode|
@@ -1750,7 +1752,7 @@
                     (APPEND
                      (|optFunctorPROGN|
                       (APPEND |codePart1| (APPEND |codePart2| |codePart3|)))
-                     (CONS '$ NIL))))
+                     (CONS '% NIL))))
       (SETQ |ans| (|minimalise| |ans|))
       (SAY
        (LIST "time taken in buildFunctor: " (- (|get_run_time|) |oldtime|)))
@@ -1804,7 +1806,7 @@
 ;     cond_list := nil
 ;     for sig in reverse sigs for form in reverse forms
 ;            for cond in reverse conds repeat
-;         sig = '$ =>
+;         sig = '% =>
 ;             domainList :=
 ;                 [optimize COPY IFCAR comp(d, $EmptyMode, e) or
 ;                    d for d in base_shell.4.0]
@@ -1839,7 +1841,7 @@
             (RETURN NIL))
            (#1='T
             (COND
-             ((EQ |sig| '$)
+             ((EQ |sig| '%)
               (PROGN
                (SETQ |domainList|
                        ((LAMBDA (|bfVar#85| |bfVar#84| |d|)
@@ -1978,7 +1980,7 @@
 ;   pairlis :=
 ;     $insideCategoryPackageIfTrue = true =>
 ;       [:argl, dollarName] := rest(form)
-;       [[dollarName,:'_$],:mkSlot1sublis argl]
+;       [[dollarName, :'%], :mkSlot1sublis(argl)]
 ;     mkSlot1sublis(rest(form))
 ;   lisplibOpAlist := transformOperationAlist(SUBLIS(pairlis, base_shell.1))
 ;   opList :=
@@ -2000,7 +2002,7 @@
                  (SETQ |LETTMP#2| (REVERSE |LETTMP#1|))
                  (SETQ |dollarName| (CAR |LETTMP#2|))
                  (SETQ |argl| (NREVERSE (CDR |LETTMP#2|)))
-                 (CONS (CONS |dollarName| '$) (|mkSlot1sublis| |argl|))))
+                 (CONS (CONS |dollarName| '%) (|mkSlot1sublis| |argl|))))
                (#1='T (|mkSlot1sublis| (CDR |form|)))))
       (SETQ |lisplibOpAlist|
               (|transformOperationAlist|
@@ -2099,7 +2101,7 @@
 ;           $NRTslot1PredicateList := insert(pred,$NRTslot1PredicateList)
 ;         fnsel is [op,a,:.] and (op = 'ELT or op = 'CONST) =>
 ;           if $insideCategoryPackageIfTrue then
-;               opsig := substitute('$,CADR($functorForm),opsig)
+;               opsig := substitute('%, CADR($functorForm), opsig)
 ;           [opsig,pred,[op,a,vectorLocation(first opsig,CADR opsig)]]
 ;         [opsig,pred,fnsel]
 
@@ -2140,7 +2142,7 @@
         (PROGN
          (COND
           (|$insideCategoryPackageIfTrue|
-           (SETQ |opsig| (|substitute| '$ (CADR |$functorForm|) |opsig|))))
+           (SETQ |opsig| (|substitute| '% (CADR |$functorForm|) |opsig|))))
          (LIST |opsig| |pred|
                (LIST |op| |a|
                      (|vectorLocation| (CAR |opsig|) (CADR |opsig|))))))
@@ -2275,7 +2277,7 @@
 
 ; vectorLocation(op,sig) ==
 ;   u := or/[i for i in 1.. for u in $NRTdeltaList
-;         | u is [=op,[='$,: xsig],:.] and sig=NRTsubstDelta(xsig) ]
+;         | u is [=op, [='%, : xsig],:.] and sig = NRTsubstDelta(xsig) ]
 ;   u => $NRTdeltaLength - u + 6
 ;   nil    -- this signals that calls should be forwarded
 
@@ -2298,7 +2300,7 @@
                                (PROGN
                                 (SETQ |ISTMP#2| (CAR |ISTMP#1|))
                                 (AND (CONSP |ISTMP#2|)
-                                     (EQUAL (CAR |ISTMP#2|) '$)
+                                     (EQUAL (CAR |ISTMP#2|) '%)
                                      (PROGN
                                       (SETQ |xsig| (CDR |ISTMP#2|))
                                       #1#)))))
@@ -2316,12 +2318,12 @@
 ;      replaceSlotTypes(t) ==
 ;         atom t =>
 ;           not INTEGERP t => t
-;           t = 0 => '$
+;           t = 0 => '%
 ;           t = 2 => '_$_$
 ;           t = 5 => $NRTaddForm
 ;           u:= $NRTdeltaList.($NRTdeltaLength+5-t)
 ;           first u = 'domain => CADR u
-;           error "bad $NRTdeltaList entry"
+;           error '"bad $NRTdeltaList entry"
 ;         MEMQ(first t, '(Mapping Union Record _:)) =>
 ;            [first t, :[replaceSlotTypes(x) for x in rest t]]
 ;         t
@@ -2347,13 +2349,13 @@
     (RETURN
      (COND
       ((ATOM |t|)
-       (COND ((NULL (INTEGERP |t|)) |t|) ((EQL |t| 0) '$) ((EQL |t| 2) '$$)
+       (COND ((NULL (INTEGERP |t|)) |t|) ((EQL |t| 0) '%) ((EQL |t| 2) '$$)
              ((EQL |t| 5) |$NRTaddForm|)
              (#1='T
               (PROGN
                (SETQ |u| (ELT |$NRTdeltaList| (- (+ |$NRTdeltaLength| 5) |t|)))
                (COND ((EQ (CAR |u|) '|domain|) (CADR |u|))
-                     (#1# (|error| '|bad $NRTdeltaList entry|)))))))
+                     (#1# (|error| "bad $NRTdeltaList entry")))))))
       ((MEMQ (CAR |t|) '(|Mapping| |Union| |Record| |:|))
        (CONS (CAR |t|)
              ((LAMBDA (|bfVar#118| |bfVar#117| |x|)
@@ -2387,8 +2389,9 @@
 ;   bod is ['SPADCALL,:args,fn] =>
 ;     NRTputInTail rest bod --NOTE: args = COPY of rest bod
 ;     -- The following test allows function-returning expressions
-;     fn is [elt,dom,ind] and not (dom='$) and MEMQ(elt,'(ELT QREFELT CONST)) =>
-;       k:= NRTassocIndex dom => RPLACA(LASTNODE bod,[$elt,'_$,k])
+;     fn is [elt, dom, ind] and not (dom = '%) and
+;          MEMQ(elt,'(ELT QREFELT CONST)) =>
+;       k := NRTassocIndex dom => RPLACA(LASTNODE bod, [$elt, '%, k])
 ;       nil
 ;     NRTputInHead fn
 ;     bod
@@ -2430,10 +2433,10 @@
                            (SETQ |ISTMP#2| (CDR |ISTMP#1|))
                            (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
                                 (PROGN (SETQ |ind| (CAR |ISTMP#2|)) #1#)))))
-                    (NULL (EQ |dom| '$)) (MEMQ |elt| '(ELT QREFELT CONST)))
+                    (NULL (EQ |dom| '%)) (MEMQ |elt| '(ELT QREFELT CONST)))
                (COND
                 ((SETQ |k| (|NRTassocIndex| |dom|))
-                 (RPLACA (LASTNODE |bod|) (LIST |$elt| '$ |k|)))
+                 (RPLACA (LASTNODE |bod|) (LIST |$elt| '% |k|)))
                 (#1# NIL)))
               (#1# (PROGN (|NRTputInHead| |fn|) |bod|)))))
            ((AND (CONSP |bod|) (EQ (CAR |bod|) 'COND)
@@ -2470,9 +2473,9 @@
 ; NRTputInTail x ==
 ;   for y in tails x repeat
 ;     atom (u := first y) =>
-;       EQ(u,'$) or LASSOC(u,$devaluateList) => nil
+;       EQ(u, '%) or LASSOC(u, $devaluateList) => nil
 ;       k:= NRTassocIndex u =>
-;         atom u => RPLACA(y,[$elt,'_$,k])
+;         atom u => RPLACA(y, [$elt, '%, k])
 ;         -- u atomic means that the slot will always contain a vector
 ;         BREAK()
 ;       --this reference must check that slot is a vector
@@ -2490,9 +2493,9 @@
                 (#1='T
                  (COND
                   ((ATOM (SETQ |u| (CAR |y|)))
-                   (COND ((OR (EQ |u| '$) (LASSOC |u| |$devaluateList|)) NIL)
+                   (COND ((OR (EQ |u| '%) (LASSOC |u| |$devaluateList|)) NIL)
                          ((SETQ |k| (|NRTassocIndex| |u|))
-                          (COND ((ATOM |u|) (RPLACA |y| (LIST |$elt| '$ |k|)))
+                          (COND ((ATOM |u|) (RPLACA |y| (LIST |$elt| '% |k|)))
                                 (#1# (BREAK))))
                          (#1# NIL)))
                   (#1# (|NRTputInHead| |u|)))))
@@ -2513,8 +2516,8 @@
 ;                 fn = 'IDENTITY => a
 ;                 fn is ['dispatchFunction, fn'] => fn'
 ;                 fn
-;         a is ['CONS, 'IDENTITY, ['FUNCALL, fn, "$"]] =>
-;             na := [['FUNCTION, 'makeSpadConstant], ["LIST", fn, "$", i]]
+;         a is ['CONS, 'IDENTITY, ['FUNCALL, fn, "%"]] =>
+;             na := [['FUNCTION, 'makeSpadConstant], ["LIST", fn, "%", i]]
 ;             RPLACD(a, na)
 ;             nil
 ;         nil   --code for this will be generated by the instantiator
@@ -2588,11 +2591,11 @@
                                             (AND (CONSP |ISTMP#5|)
                                                  (EQ (CDR |ISTMP#5|) NIL)
                                                  (EQ (CAR |ISTMP#5|)
-                                                     '$))))))))))))
+                                                     '%))))))))))))
               (PROGN
                (SETQ |na|
                        (LIST (LIST 'FUNCTION '|makeSpadConstant|)
-                             (LIST 'LIST |fn| '$ |i|)))
+                             (LIST 'LIST |fn| '% |i|)))
                (RPLACD |a| |na|)
                NIL))
              (#1# NIL)))
@@ -2640,7 +2643,7 @@
 ;             NRTinnerGetLocalIndex(y, e)
 ;     x is ['SubDomain, y, :.] => NRTinnerGetLocalIndex(y, e)
 ;     getConstructorSignature x is [., :ml] =>
-;         for y in rest x for m in ml | not (y = '$) repeat
+;         for y in rest x for m in ml | not (y = '%) repeat
 ;             isCategoryForm(m) => NRTinnerGetLocalIndex(y, e)
 ;     keyedSystemError("S2NR0003", [x])
 ;   x
@@ -2712,7 +2715,7 @@
                        (PROGN (SETQ |m| (CAR |bfVar#127|)) NIL))
                    (RETURN NIL))
                   (#1#
-                   (AND (NULL (EQ |y| '$))
+                   (AND (NULL (EQ |y| '%))
                         (COND
                          ((|isCategoryForm| |m|)
                           (IDENTITY (|NRTinnerGetLocalIndex| |y| |e|)))))))

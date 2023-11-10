@@ -1,26 +1,26 @@
 
-(SDEFUN |RESULT;cleanUpDomainForm| ((|d| (|SExpression|)) ($ (|OutputForm|)))
-        (SPROG ((#1=#:G717 NIL) (|u| NIL) (#2=#:G716 NIL))
+(SDEFUN |RESULT;cleanUpDomainForm| ((|d| (|SExpression|)) (% (|OutputForm|)))
+        (SPROG ((#1=#:G462 NIL) (|u| NIL) (#2=#:G461 NIL))
                (SEQ
                 (COND
-                 ((NULL (SPADCALL |d| (QREFELT $ 15)))
-                  (SPADCALL |d| (QREFELT $ 16)))
+                 ((NULL (SPADCALL |d| (QREFELT % 15)))
+                  (SPADCALL |d| (QREFELT % 16)))
                  (#3='T
                   (COND
-                   ((EQL (SPADCALL |d| (QREFELT $ 18)) 1)
-                    (SPADCALL (SPADCALL |d| (QREFELT $ 19)) (QREFELT $ 16)))
+                   ((EQL (SPADCALL |d| (QREFELT % 18)) 1)
+                    (SPADCALL (SPADCALL |d| (QREFELT % 19)) (QREFELT % 16)))
                    ((NULL
-                     (SPADCALL (SPADCALL |d| (QREFELT $ 19)) (QREFELT $ 20)))
-                    (QREFELT $ 10))
+                     (SPADCALL (SPADCALL |d| (QREFELT % 19)) (QREFELT % 20)))
+                    (QREFELT % 10))
                    (#3#
                     (SPADCALL
-                     (SPADCALL (SPADCALL |d| (QREFELT $ 19)) (QREFELT $ 16))
+                     (SPADCALL (SPADCALL |d| (QREFELT % 19)) (QREFELT % 16))
                      (PROGN
                       (LETT #2# NIL)
                       (SEQ (LETT |u| NIL)
                            (LETT #1#
-                                 (SPADCALL (SPADCALL |d| (QREFELT $ 21))
-                                           (QREFELT $ 23)))
+                                 (SPADCALL (SPADCALL |d| (QREFELT % 21))
+                                           (QREFELT % 23)))
                            G190
                            (COND
                             ((OR (ATOM #1#) (PROGN (LETT |u| (CAR #1#)) NIL))
@@ -28,41 +28,41 @@
                            (SEQ
                             (EXIT
                              (LETT #2#
-                                   (CONS (|RESULT;cleanUpDomainForm| |u| $)
+                                   (CONS (|RESULT;cleanUpDomainForm| |u| %)
                                          #2#))))
                            (LETT #1# (CDR #1#)) (GO G190) G191
                            (EXIT (NREVERSE #2#))))
-                     (QREFELT $ 24))))))))) 
+                     (QREFELT % 24))))))))) 
 
 (SDEFUN |RESULT;display|
-        ((|v| (|Any|)) (|d| (|SExpression|)) ($ (|OutputForm|)))
+        ((|v| (|Any|)) (|d| (|SExpression|)) (% (|OutputForm|)))
         (COND
-         ((NULL (SPADCALL |d| (QREFELT $ 15)))
+         ((NULL (SPADCALL |d| (QREFELT % 15)))
           (|error| "Domain form is non-list"))
          ('T
           (COND
-           ((OR (EQL (SPADCALL |d| (QREFELT $ 18)) 1)
-                (SPADCALL (SPADCALL |d| (QREFELT $ 19))
-                          (SPADCALL '|Complex| (QREFELT $ 27)) (QREFELT $ 28)))
-            (COND ((QREFELT $ 11) (SPADCALL |v| (QREFELT $ 26)))
-                  (#1='T (|RESULT;cleanUpDomainForm| |d| $))))
-           ((QREFELT $ 12) (SPADCALL |v| (QREFELT $ 26)))
-           (#1# (|RESULT;cleanUpDomainForm| |d| $)))))) 
+           ((OR (EQL (SPADCALL |d| (QREFELT % 18)) 1)
+                (SPADCALL (SPADCALL |d| (QREFELT % 19))
+                          (SPADCALL '|Complex| (QREFELT % 27)) (QREFELT % 28)))
+            (COND ((QREFELT % 11) (SPADCALL |v| (QREFELT % 26)))
+                  (#1='T (|RESULT;cleanUpDomainForm| |d| %))))
+           ((QREFELT % 12) (SPADCALL |v| (QREFELT % 26)))
+           (#1# (|RESULT;cleanUpDomainForm| |d| %)))))) 
 
-(SDEFUN |RESULT;makeEntry| ((|k| (|Symbol|)) (|v| (|Any|)) ($ (|OutputForm|)))
+(SDEFUN |RESULT;makeEntry| ((|k| (|Symbol|)) (|v| (|Any|)) (% (|OutputForm|)))
         (SPADCALL
-         (LIST (SPADCALL |k| (QREFELT $ 8)) (QREFELT $ 9)
-               (|RESULT;display| |v| (SPADCALL |v| (QREFELT $ 29)) $))
-         (QREFELT $ 30))) 
+         (LIST (SPADCALL |k| (QREFELT % 8)) (QREFELT % 9)
+               (|RESULT;display| |v| (SPADCALL |v| (QREFELT % 29)) %))
+         (QREFELT % 30))) 
 
-(SDEFUN |RESULT;coerce;$Of;4| ((|r| ($)) ($ (|OutputForm|)))
-        (SPROG ((#1=#:G730 NIL) (|key| NIL) (#2=#:G729 NIL))
+(SDEFUN |RESULT;coerce;%Of;4| ((|r| (%)) (% (|OutputForm|)))
+        (SPROG ((#1=#:G472 NIL) (|key| NIL) (#2=#:G471 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
                   (LETT #2# NIL)
                   (SEQ (LETT |key| NIL)
-                       (LETT #1# (NREVERSE (SPADCALL |r| (QREFELT $ 32)))) G190
+                       (LETT #1# (NREVERSE (SPADCALL |r| (QREFELT % 32)))) G190
                        (COND
                         ((OR (ATOM #1#) (PROGN (LETT |key| (CAR #1#)) NIL))
                          (GO G191)))
@@ -71,23 +71,23 @@
                          (LETT #2#
                                (CONS
                                 (|RESULT;makeEntry| |key|
-                                 (SPADCALL |r| |key| (QREFELT $ 33)) $)
+                                 (SPADCALL |r| |key| (QREFELT % 33)) %)
                                 #2#))))
                        (LETT #1# (CDR #1#)) (GO G190) G191
                        (EXIT (NREVERSE #2#))))
-                 (QREFELT $ 34))))) 
+                 (QREFELT % 34))))) 
 
-(SDEFUN |RESULT;showArrayValues;2B;5| ((|b| (|Boolean|)) ($ (|Boolean|)))
-        (SETELT $ 12 |b|)) 
+(SDEFUN |RESULT;showArrayValues;2B;5| ((|b| (|Boolean|)) (% (|Boolean|)))
+        (SETELT % 12 |b|)) 
 
-(SDEFUN |RESULT;showScalarValues;2B;6| ((|b| (|Boolean|)) ($ (|Boolean|)))
-        (SETELT $ 11 |b|)) 
+(SDEFUN |RESULT;showScalarValues;2B;6| ((|b| (|Boolean|)) (% (|Boolean|)))
+        (SETELT % 11 |b|)) 
 
 (DECLAIM (NOTINLINE |Result;|)) 
 
 (DEFUN |Result| ()
   (SPROG NIL
-         (PROG (#1=#:G792)
+         (PROG (#1=#:G533)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Result|))
@@ -103,13 +103,13 @@
 
 (DEFUN |Result;| ()
   (SPROG
-   ((|dv$| NIL) ($ NIL) (#1=#:G788 NIL) (#2=#:G787 NIL) (|pv$| NIL)
-    (#3=#:G789 NIL) (#4=#:G790 NIL))
+   ((|dv$| NIL) (% NIL) (#1=#:G529 NIL) (#2=#:G528 NIL) (|pv$| NIL)
+    (#3=#:G530 NIL) (#4=#:G531 NIL))
    (PROGN
     (LETT |dv$| '(|Result|))
-    (LETT $ (GETREFV 61))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3
+    (LETT % (GETREFV 59))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3
               (LETT |pv$|
                     (|buildPredVector| 0 0
                                        (LIST
@@ -177,23 +177,23 @@
                                          #2#)
                                         (|HasCategory| (|Any|)
                                                        '(|OrderedSet|))))))
-    (|haddProp| |$ConstructorCache| '|Result| NIL (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (AND (LETT #3# (|HasCategory| $ '(|finiteAggregate|)))
-         (|augmentPredVector| $ 16384))
+    (|haddProp| |$ConstructorCache| '|Result| NIL (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (AND (LETT #3# (|HasCategory| % '(|finiteAggregate|)))
+         (|augmentPredVector| % 16384))
     (AND #3#
          (|HasCategory| (|Record| (|:| |key| (|Symbol|)) (|:| |entry| (|Any|)))
                         '(|OrderedSet|))
-         (|augmentPredVector| $ 32768))
+         (|augmentPredVector| % 32768))
     (AND #3#
          (|HasCategory| (|Record| (|:| |key| (|Symbol|)) (|:| |entry| (|Any|)))
                         '(|BasicType|))
-         (|augmentPredVector| $ 65536))
+         (|augmentPredVector| % 65536))
     (AND
      (LETT #4#
-           (AND (|HasCategory| $ '(|finiteAggregate|))
+           (AND (|HasCategory| % '(|finiteAggregate|))
                 (|HasCategory| (|Any|) '(|BasicType|))))
-     (|augmentPredVector| $ 131072))
+     (|augmentPredVector| % 131072))
     (AND
      (OR #4#
          (AND #3#
@@ -201,17 +201,17 @@
                (|Record| (|:| |key| (|Symbol|)) (|:| |entry| (|Any|)))
                '(|BasicType|)))
          #1# #2#)
-     (|augmentPredVector| $ 262144))
+     (|augmentPredVector| % 262144))
     (AND #3# (|HasCategory| (|Any|) '(|OrderedSet|))
-         (|augmentPredVector| $ 524288))
-    (AND (|HasCategory| $ '(|shallowlyMutable|))
-         (|augmentPredVector| $ 1048576))
-    (SETF |pv$| (QREFELT $ 3))
-    (QSETREFV $ 9 (SPADCALL '|: | (QREFELT $ 8)))
-    (QSETREFV $ 10 (SPADCALL '|...| (QREFELT $ 8)))
-    (QSETREFV $ 11 NIL)
-    (QSETREFV $ 12 NIL)
-    $))) 
+         (|augmentPredVector| % 524288))
+    (AND (|HasCategory| % '(|shallowlyMutable|))
+         (|augmentPredVector| % 1048576))
+    (SETF |pv$| (QREFELT % 3))
+    (QSETREFV % 9 (SPADCALL '|: | (QREFELT % 8)))
+    (QSETREFV % 10 (SPADCALL '|...| (QREFELT % 8)))
+    (QSETREFV % 11 NIL)
+    (QSETREFV % 12 NIL)
+    %))) 
 
 (MAKEPROP '|Result| '|infovec|
           (LIST
@@ -219,19 +219,18 @@
               (0 . |coerce|) '|colon| '|elide| '|showScalarValuesFlag|
               '|showArrayValuesFlag| (|Boolean|) (|SExpression|) (5 . |list?|)
               (10 . |coerce|) (|Integer|) (15 . |#|) (20 . |car|)
-              (25 . |atom?|) (30 . |cdr|) (|List| $) (35 . |destruct|)
+              (25 . |atom?|) (30 . |cdr|) (|List| %) (35 . |destruct|)
               (40 . |prefix|) (|Any|) (46 . |objectOf|) (51 . |convert|)
               (56 . =) (62 . |dom|) (67 . |hconcat|) (|List| 7) (72 . |keys|)
-              (77 . |elt|) (83 . |bracket|) |RESULT;coerce;$Of;4|
+              (77 . |elt|) (83 . |bracket|) |RESULT;coerce;%Of;4|
               |RESULT;showArrayValues;2B;5| |RESULT;showScalarValues;2B;6|
               (|List| 39) (|Equation| 25) (|List| 25)
               (|Record| (|:| |key| 7) (|:| |entry| 25)) (|List| 41)
               (|Equation| 41) (|List| 43) (|NonNegativeInteger|)
-              (|Mapping| 41 41 41) (|HashState|) (|String|) (|SingleInteger|)
-              (|InputForm|) (|Mapping| 13 25) (|Mapping| 13 25 25)
-              (|Mapping| 13 41) (|Mapping| 13 41 41) (|Mapping| 25 25) (|Void|)
-              (|Mapping| 41 41) (|Mapping| 25 25 25) (|Union| 25 '"failed")
-              (|Union| 41 '"failed"))
+              (|Mapping| 41 41 41) (|String|) (|InputForm|) (|Mapping| 13 25)
+              (|Mapping| 13 25 25) (|Mapping| 13 41) (|Mapping| 13 41 41)
+              (|Mapping| 25 25) (|Void|) (|Mapping| 41 41) (|Mapping| 25 25 25)
+              (|Union| 25 '"failed") (|Union| 41 '"failed"))
            '#(|showScalarValues| 88 |showArrayValues| 93 |keys| 98 |elt| 103
               |coerce| 109)
            'NIL
@@ -255,7 +254,7 @@
                  (|Aggregate|) (|Evalable| 41) (|Evalable| 25) (|SetCategory|)
                  (|finiteAggregate|) (|Eltable| 7 25) (|Type|)
                  (|shallowlyMutable|) (|InnerEvalable| 41 41)
-                 (|ConvertibleTo| 50) (|InnerEvalable| 25 25) (|BasicType|)
+                 (|ConvertibleTo| 48) (|InnerEvalable| 25 25) (|BasicType|)
                  (|CoercibleTo| 6))
               (|makeByteWordVec2| 37
                                   '(1 7 6 0 8 1 14 13 0 15 1 14 6 0 16 1 14 17

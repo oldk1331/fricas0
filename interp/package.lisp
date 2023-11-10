@@ -10,9 +10,9 @@
 (DEFUN |mkList| (|u|) (PROG () (RETURN (COND (|u| (CONS 'LIST |u|)) ('T NIL)))))
 
 ; mkOperatorEntry(opSig is [op,sig,:flag],pred,count) ==
-;   null flag => [opSig,pred,["ELT","$",count]]
-;   first flag="constant" => [[op,sig],pred,["CONST","$",count]]
-;   systemError ["unknown variable mode: ",flag]
+;   null(flag) => [opSig, pred, ["ELT", "%", count]]
+;   first(flag) = "constant" => [[op, sig], pred, ["CONST", "%", count]]
+;   systemError ['"unknown variable mode: ",flag]
 
 (DEFUN |mkOperatorEntry| (|opSig| |pred| |count|)
   (PROG (|op| |sig| |flag|)
@@ -21,14 +21,14 @@
       (SETQ |op| (CAR |opSig|))
       (SETQ |sig| (CADR . #1=(|opSig|)))
       (SETQ |flag| (CDDR . #1#))
-      (COND ((NULL |flag|) (LIST |opSig| |pred| (LIST 'ELT '$ |count|)))
+      (COND ((NULL |flag|) (LIST |opSig| |pred| (LIST 'ELT '% |count|)))
             ((EQ (CAR |flag|) '|constant|)
-             (LIST (LIST |op| |sig|) |pred| (LIST 'CONST '$ |count|)))
-            ('T (|systemError| (LIST '|unknown variable mode: | |flag|))))))))
+             (LIST (LIST |op| |sig|) |pred| (LIST 'CONST '% |count|)))
+            ('T (|systemError| (LIST "unknown variable mode: " |flag|))))))))
 
 ; encodeFunctionName(fun,package is [packageName,:arglist],signature,sep,count)
 ;    ==
-;     signature':= substitute("$",package,signature)
+;     signature' := substitute("%", package, signature)
 ;     reducedSig:= mkRepititionAssoc [:rest signature',first signature']
 ;     encodedSig:=
 ;       ("STRCONC"/[encodedPair for [n,:x] in reducedSig]) where
@@ -46,7 +46,7 @@
      (PROGN
       (SETQ |packageName| (CAR |package|))
       (SETQ |arglist| (CDR |package|))
-      (SETQ |signature'| (|substitute| '$ |package| |signature|))
+      (SETQ |signature'| (|substitute| '% |package| |signature|))
       (SETQ |reducedSig|
               (|mkRepititionAssoc|
                (APPEND (CDR |signature'|) (CONS (CAR |signature'|) NIL))))

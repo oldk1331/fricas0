@@ -3,7 +3,7 @@
 
 (DEFUN |GuessAlgebraicNumber| ()
   (SPROG NIL
-         (PROG (#1=#:G717)
+         (PROG (#1=#:G467)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|GuessAlgebraicNumber|))
@@ -21,12 +21,12 @@
                   (HREM |$ConstructorCache| '|GuessAlgebraicNumber|)))))))))) 
 
 (DEFUN |GuessAlgebraicNumber;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|GuessAlgebraicNumber|))
-          (LETT $ (GETREFV 30))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 30))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
@@ -35,15 +35,15 @@
                                                '(|RetractableTo|
                                                  (|Symbol|)))))))
           (|haddProp| |$ConstructorCache| '|GuessAlgebraicNumber| NIL
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|GuessAlgebraicNumber| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL
-              (|Guess| 6 6 7 (NRTEVAL (ELT $ 8)) (NRTEVAL (ELT $ 9)))
+              (|Guess| 6 6 7 (NRTEVAL (ELT % 8)) (NRTEVAL (ELT % 9)))
               (|AlgebraicNumber|) (|Expression| (|Integer|)) (0 . |retract|)
               (5 . |coerce|) (|Mapping| 24 25 26) (|Symbol|)
               (|Mapping| (|Stream| (|UnivariateFormalPowerSeries| 6))

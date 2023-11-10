@@ -8,11 +8,11 @@
         (T (SETQ |NonAssociativeSemiRng;AL| (|NonAssociativeSemiRng;|))))) 
 
 (DEFUN |NonAssociativeSemiRng;| ()
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|AbelianSemiGroup|) (|Magma|)
-                           (|mkCategory| '(((|antiCommutator| ($ $ $)) T)) NIL
+                           (|mkCategory| '(((|antiCommutator| (% % %)) T)) NIL
                                          NIL NIL)))
            (SETELT #1# 0 '(|NonAssociativeSemiRng|))))) 
 

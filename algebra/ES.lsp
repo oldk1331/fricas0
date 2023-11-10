@@ -8,88 +8,88 @@
         (T (SETQ |ExpressionSpace;AL| (|ExpressionSpace;|))))) 
 
 (DEFUN |ExpressionSpace;| ()
-  (SPROG ((#1=#:G709 NIL))
+  (SPROG ((#1=#:G468 NIL))
          (PROG1
              (LETT #1#
-                   (|subst_in_cat| '(#2=#:G707 #3=#:G708)
-                                   (LIST '(|Kernel| $) '(|Kernel| $))
+                   (|subst_in_cat| '(#2=#:G466 #3=#:G467)
+                                   (LIST '(|Kernel| %) '(|Kernel| %))
                                    (|Join| (|Comparable|)
                                            (|RetractableTo| '#2#)
-                                           (|InnerEvalable| '#3# '$)
-                                           (|Evalable| '$)
+                                           (|InnerEvalable| '#3# '%)
+                                           (|Evalable| '%)
                                            (|mkCategory|
-                                            '(((|elt| ($ (|BasicOperator|) $))
+                                            '(((|elt| (% (|BasicOperator|) %))
                                                T)
                                               ((|elt|
-                                                ($ (|BasicOperator|) $ $))
+                                                (% (|BasicOperator|) % %))
                                                T)
                                               ((|elt|
-                                                ($ (|BasicOperator|) $ $ $))
+                                                (% (|BasicOperator|) % % %))
                                                T)
                                               ((|elt|
-                                                ($ (|BasicOperator|) $ $ $ $))
+                                                (% (|BasicOperator|) % % % %))
                                                T)
                                               ((|elt|
-                                                ($ (|BasicOperator|) $ $ $ $
-                                                 $))
+                                                (% (|BasicOperator|) % % % %
+                                                 %))
                                                T)
                                               ((|elt|
-                                                ($ (|BasicOperator|) $ $ $ $ $
-                                                 $))
+                                                (% (|BasicOperator|) % % % % %
+                                                 %))
                                                T)
                                               ((|elt|
-                                                ($ (|BasicOperator|) $ $ $ $ $
-                                                 $ $))
+                                                (% (|BasicOperator|) % % % % %
+                                                 % %))
                                                T)
                                               ((|elt|
-                                                ($ (|BasicOperator|) $ $ $ $ $
-                                                 $ $ $))
+                                                (% (|BasicOperator|) % % % % %
+                                                 % % %))
                                                T)
                                               ((|elt|
-                                                ($ (|BasicOperator|) $ $ $ $ $
-                                                 $ $ $ $))
+                                                (% (|BasicOperator|) % % % % %
+                                                 % % % %))
                                                T)
                                               ((|elt|
-                                                ($ (|BasicOperator|)
-                                                 (|List| $)))
+                                                (% (|BasicOperator|)
+                                                 (|List| %)))
                                                T)
-                                              ((|subst| ($ $ (|Equation| $)))
+                                              ((|subst| (% % (|Equation| %)))
                                                T)
                                               ((|subst|
-                                                ($ $ (|List| (|Equation| $))))
+                                                (% % (|List| (|Equation| %))))
                                                T)
                                               ((|subst|
-                                                ($ $ (|List| (|Kernel| $))
-                                                 (|List| $)))
+                                                (% % (|List| (|Kernel| %))
+                                                 (|List| %)))
                                                T)
-                                              ((|box| ($ $)) T)
-                                              ((|paren| ($ $)) T)
-                                              ((|distribute| ($ $)) T)
-                                              ((|distribute| ($ $ $)) T)
+                                              ((|box| (% %)) T)
+                                              ((|paren| (% %)) T)
+                                              ((|distribute| (% %)) T)
+                                              ((|distribute| (% % %)) T)
                                               ((|height|
-                                                ((|NonNegativeInteger|) $))
+                                                ((|NonNegativeInteger|) %))
                                                T)
                                               ((|mainKernel|
-                                                ((|Union| (|Kernel| $)
+                                                ((|Union| (|Kernel| %)
                                                           "failed")
-                                                 $))
+                                                 %))
                                                T)
                                               ((|kernels|
-                                                ((|List| (|Kernel| $)) $))
+                                                ((|List| (|Kernel| %)) %))
                                                T)
                                               ((|kernels|
-                                                ((|List| (|Kernel| $))
-                                                 (|List| $)))
+                                                ((|List| (|Kernel| %))
+                                                 (|List| %)))
                                                T)
                                               ((|tower|
-                                                ((|List| (|Kernel| $)) $))
+                                                ((|List| (|Kernel| %)) %))
                                                T)
                                               ((|tower|
-                                                ((|List| (|Kernel| $))
-                                                 (|List| $)))
+                                                ((|List| (|Kernel| %))
+                                                 (|List| %)))
                                                T)
                                               ((|operators|
-                                                ((|List| (|BasicOperator|)) $))
+                                                ((|List| (|BasicOperator|)) %))
                                                T)
                                               ((|operator|
                                                 ((|BasicOperator|)
@@ -100,74 +100,74 @@
                                                  (|BasicOperator|)))
                                                T)
                                               ((|is?|
-                                                ((|Boolean|) $
+                                                ((|Boolean|) %
                                                  (|BasicOperator|)))
                                                T)
                                               ((|is?|
-                                                ((|Boolean|) $ (|Symbol|)))
+                                                ((|Boolean|) % (|Symbol|)))
                                                T)
                                               ((|kernel|
-                                                ($ (|BasicOperator|) $))
+                                                (% (|BasicOperator|) %))
                                                T)
                                               ((|kernel|
-                                                ($ (|BasicOperator|)
-                                                 (|List| $)))
+                                                (% (|BasicOperator|)
+                                                 (|List| %)))
                                                T)
                                               ((|map|
-                                                ($ (|Mapping| $ $)
-                                                 (|Kernel| $)))
+                                                (% (|Mapping| % %)
+                                                 (|Kernel| %)))
                                                T)
-                                              ((|freeOf?| ((|Boolean|) $ $)) T)
+                                              ((|freeOf?| ((|Boolean|) % %)) T)
                                               ((|freeOf?|
-                                                ((|Boolean|) $ (|Symbol|)))
+                                                ((|Boolean|) % (|Symbol|)))
                                                T)
                                               ((|eval|
-                                                ($ $ (|List| (|Symbol|))
-                                                 (|List| (|Mapping| $ $))))
+                                                (% % (|List| (|Symbol|))
+                                                 (|List| (|Mapping| % %))))
                                                T)
                                               ((|eval|
-                                                ($ $ (|List| (|Symbol|))
+                                                (% % (|List| (|Symbol|))
                                                  (|List|
-                                                  (|Mapping| $ (|List| $)))))
+                                                  (|Mapping| % (|List| %)))))
                                                T)
                                               ((|eval|
-                                                ($ $ (|Symbol|)
-                                                 (|Mapping| $ (|List| $))))
+                                                (% % (|Symbol|)
+                                                 (|Mapping| % (|List| %))))
                                                T)
                                               ((|eval|
-                                                ($ $ (|Symbol|)
-                                                 (|Mapping| $ $)))
+                                                (% % (|Symbol|)
+                                                 (|Mapping| % %)))
                                                T)
                                               ((|eval|
-                                                ($ $ (|List| (|BasicOperator|))
-                                                 (|List| (|Mapping| $ $))))
+                                                (% % (|List| (|BasicOperator|))
+                                                 (|List| (|Mapping| % %))))
                                                T)
                                               ((|eval|
-                                                ($ $ (|List| (|BasicOperator|))
+                                                (% % (|List| (|BasicOperator|))
                                                  (|List|
-                                                  (|Mapping| $ (|List| $)))))
+                                                  (|Mapping| % (|List| %)))))
                                                T)
                                               ((|eval|
-                                                ($ $ (|BasicOperator|)
-                                                 (|Mapping| $ (|List| $))))
+                                                (% % (|BasicOperator|)
+                                                 (|Mapping| % (|List| %))))
                                                T)
                                               ((|eval|
-                                                ($ $ (|BasicOperator|)
-                                                 (|Mapping| $ $)))
+                                                (% % (|BasicOperator|)
+                                                 (|Mapping| % %)))
                                                T)
                                               ((|minPoly|
                                                 ((|SparseUnivariatePolynomial|
-                                                  $)
-                                                 (|Kernel| $)))
-                                               (|has| $ (|Ring|)))
-                                              ((|definingPolynomial| ($ $))
-                                               (|has| $ (|Ring|)))
-                                              ((|even?| ((|Boolean|) $))
-                                               (|has| $
+                                                  %)
+                                                 (|Kernel| %)))
+                                               (|has| % (|Ring|)))
+                                              ((|definingPolynomial| (% %))
+                                               (|has| % (|Ring|)))
+                                              ((|even?| ((|Boolean|) %))
+                                               (|has| %
                                                       (|RetractableTo|
                                                        (|Integer|))))
-                                              ((|odd?| ((|Boolean|) $))
-                                               (|has| $
+                                              ((|odd?| ((|Boolean|) %))
+                                               (|has| %
                                                       (|RetractableTo|
                                                        (|Integer|)))))
                                             NIL NIL NIL))))

@@ -1,52 +1,52 @@
 
 (SDEFUN |DIFEXT-;differentiate;SMNniS;1|
         ((|x| (S)) (|derivation| (|Mapping| R R)) (|n| (|NonNegativeInteger|))
-         ($ (S)))
-        (SPROG ((#1=#:G711 NIL) (|i| NIL))
+         (% (S)))
+        (SPROG ((#1=#:G460 NIL) (|i| NIL))
                (SEQ
                 (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
                      (SEQ
                       (EXIT
-                       (LETT |x| (SPADCALL |x| |derivation| (QREFELT $ 9)))))
+                       (LETT |x| (SPADCALL |x| |derivation| (QREFELT % 9)))))
                      (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                 (EXIT |x|)))) 
 
-(SDEFUN |DIFEXT-;D;SMS;2| ((|x| (S)) (|derivation| (|Mapping| R R)) ($ (S)))
-        (SPADCALL |x| |derivation| (QREFELT $ 9))) 
+(SDEFUN |DIFEXT-;D;SMS;2| ((|x| (S)) (|derivation| (|Mapping| R R)) (% (S)))
+        (SPADCALL |x| |derivation| (QREFELT % 9))) 
 
 (SDEFUN |DIFEXT-;D;SMNniS;3|
         ((|x| (S)) (|derivation| (|Mapping| R R)) (|n| (|NonNegativeInteger|))
-         ($ (S)))
-        (SPADCALL |x| |derivation| |n| (QREFELT $ 13))) 
+         (% (S)))
+        (SPADCALL |x| |derivation| |n| (QREFELT % 13))) 
 
-(SDEFUN |DIFEXT-;differentiate;2S;4| ((|x| (S)) ($ (S)))
-        (SPADCALL |x| (ELT $ 15) (QREFELT $ 9))) 
+(SDEFUN |DIFEXT-;differentiate;2S;4| ((|x| (S)) (% (S)))
+        (SPADCALL |x| (ELT % 15) (QREFELT % 9))) 
 
-(SDEFUN |DIFEXT-;differentiate;SSS;5| ((|x| (S)) (|v| (|Symbol|)) ($ (S)))
+(SDEFUN |DIFEXT-;differentiate;SSS;5| ((|x| (S)) (|v| (|Symbol|)) (% (S)))
         (SPROG NIL
                (SPADCALL |x|
                          (CONS #'|DIFEXT-;differentiate;SSS;5!0|
-                               (VECTOR $ |v|))
-                         (QREFELT $ 9)))) 
+                               (VECTOR % |v|))
+                         (QREFELT % 9)))) 
 
 (SDEFUN |DIFEXT-;differentiate;SSS;5!0| ((|s| NIL) ($$ NIL))
-        (PROG (|v| $)
+        (PROG (|v| %)
           (LETT |v| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |s| |v| (QREFELT $ 18)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |s| |v| (QREFELT % 18)))))) 
 
 (DECLAIM (NOTINLINE |DifferentialExtension&;|)) 
 
 (DEFUN |DifferentialExtension&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|DifferentialExtension&| DV$1 DV$2))
-          (LETT $ (GETREFV 22))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 22))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
@@ -55,21 +55,21 @@
                                                                (|Symbol|)))
                                               (|HasCategory| |#2|
                                                              '(|DifferentialRing|))))))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
           (COND
            ((|testBitVector| |pv$| 2)
-            (QSETREFV $ 16
+            (QSETREFV % 16
                       (CONS (|dispatchFunction| |DIFEXT-;differentiate;2S;4|)
-                            $))))
+                            %))))
           (COND
            ((|testBitVector| |pv$| 1)
-            (QSETREFV $ 19
+            (QSETREFV % 19
                       (CONS (|dispatchFunction| |DIFEXT-;differentiate;SSS;5|)
-                            $))))
-          $))) 
+                            %))))
+          %))) 
 
 (MAKEPROP '|DifferentialExtension&| '|infovec|
           (LIST

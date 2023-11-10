@@ -57,13 +57,6 @@
 
 (define-function '|get_run_time| #'get-internal-run-time)
 
-; 9.4 Vectors and Bpis
-
-(defun FBPIP (item) (or (compiled-function-p item)
-                        (and (symbolp item) (fboundp item)
-                             (not (macro-function item))
-                             (compiled-function-p (symbol-function item)))))
-
 ; 9.5 Identifiers
 
 (defun gensymp (x) (and (symbolp x) (null (symbol-package x))))
@@ -625,7 +618,7 @@
  "fortran support"
  (cond
   ((null filespec) (error "MAKE_APPENDSTREAM: not handled yet"))
-  ('else (open (|make_filename| filespec) :direction :output
+  (t (open (|make_filename| filespec) :direction :output
           :if-exists :append :if-does-not-exist :create))))
 
 (defun |make_append_stream| (filespec)
@@ -646,34 +639,19 @@
 
 ; 99.0 Ancient Stuff We Decided To Keep
 
-(defvar *read-place-holder* (make-symbol "%.EOF")
-   "default value returned by read and read-line at end-of-file")
-
-(defun PLACEP (item) (eq item *read-place-holder*))
-(defun get_read_placeholder() *read-place-holder*)
-(defun VMREAD (st) (read st nil *read-place-holder*))
 (defun |read_line| (st) (read-line st nil nil))
 
-#+(OR IBCL KCL)
-(defun gcmsg (x)
+;;; GCMSG when called with argument eqal to NIL is supposed to
+;;; supress messages from garbage collector.  Empty body is
+;;; OK if garbage collector prints no messages.
+#+:gcl
+(defun GCMSG (x)
    (prog1 system:*gbc-message* (setq system:*gbc-message* x)))
 #+:cmu
-(defun gcmsg (x)
+(defun GCMSG (x)
    (prog1 ext:*gc-verbose* (setq ext:*gc-verbose* x)))
-#+:allegro
-(defun gcmsg (x))
-#+:sbcl
-(defun gcmsg (x))
-#+:openmcl
-(defun gcmsg (x))
-#+:clisp
-(defun gcmsg (x))
-#+:ecl
-(defun gcmsg (x))
-#+:poplog
-(defun gcmsg (x))
-#+:lispworks
-(defun gcmsg (x))
+#-(or :gcl :cmu)
+(defun GCMSG (x))
 
 #+abcl
 (defun reclaim () (ext::gc))
@@ -718,7 +696,7 @@
      (kernel::%function-name func))
     ('t func))))
 
-#+(or :sbcl :clisp :openmcl :ecl :lispworks :poplog)
+#+(or :sbcl :clisp :openmcl :ecl :lispworks :poplog :abcl)
 (defun BPINAME (func)
   (cond
       ((functionp func)
@@ -735,16 +713,22 @@
    (ext::run-program "sh" (list "-c" S) :input t :output t)))
 
 #+:GCL
-(defun OBEY (S) (LISP::SYSTEM S))
+(defun OBEY (S) (SI::SYSTEM S))
 
 #+:allegro
 (defun OBEY (S) (excl::run-shell-command s))
 
+(defvar *OBEY-STDOUT* nil "if T use *standard output*")
 #+:sbcl
 (defun OBEY (S)
-   #-:win32 (sb-ext::process-exit-code
-             (sb-ext::run-program "/bin/sh"
-                    (list "-c" S) :input t :output t :error t))
+   #-:win32 (if *OBEY-STDOUT*
+               (sb-ext::process-exit-code
+                (sb-ext::run-program "/bin/sh" (list "-c" S) :input t
+                     :output *standard-output* :error *standard-output*))
+
+               (sb-ext::process-exit-code
+                (sb-ext::run-program "/bin/sh"
+                    (list "-c" S) :input t :output t :error t)))
    #+:win32 (sb-ext::process-exit-code
              (sb-ext::run-program "sh"
                     (list "-c" S) :input t :output t :error t :search t)))
@@ -765,6 +749,9 @@
 (defun OBEY (S)
    (POP11:sysobey S))
 
+#+:abcl
+(defun OBEY (S)
+   (sys:run-program "sh" (list "-c" S) :input t :output t :error t))
 
 #+:lispworks
 (defun OBEY (S)
@@ -773,18 +760,6 @@
 ;;; moved from hash.lisp
 
 ;17.0 Operations on Hashtables
-
-;17.1 Creation
-
-(defun MAKE_HASHTABLE (id1)
-   (let ((test (case id1
-                     ((EQ ID) #'eq)
-                     (CVEC #'equal)
-                     (EQL #'eql)
-                     #+Lucid ((UEQUAL EQUALP) #'EQUALP)
-                     #-Lucid ((UEQUAL EQUAL) #'equal)
-                     (otherwise (error "bad arg to MAKE_HASHTABLE")))))
-      (make-hash-table :test test)))
 
 ;17.2 Accessing
 
@@ -797,13 +772,6 @@
 (define-function 'HASHTABLE_CLASS #'hash-table-test)
 
 (define-function 'HCOUNT #'hash-table-count)
-
-;17.4 Searching and Updating
-
-(defun HREMPROP (table key property)
-  (let ((plist (gethash key table)))
-    (if plist (setf (gethash key table)
-                    (delete property plist :test #'equal :key #'car)))))
 
 ;17.6 Miscellaneous
 
@@ -845,37 +813,3 @@
 
 ;;; end of moved fragment
 
-;;; moved from bits.lisp
-
-;;; The types "bit" and "bit vector" are implemented differently
-;;; in different variants of lisp.
-;;; These lisp macros/functions will have different implementations
-;;; on different lisp systems.
-
-;;; The operations which traverse entire vectors are given as functions
-;;; since the function calling overhead will be relatively small.
-;;; The operations which extract or set a single part of the vector are
-;;; provided as macros.
-
-;;; SMW Nov 88: Created
-
-(defun    |make_BVEC| (n x)
-    (make-array (list n) :element-type 'bit :initial-element x))
-
-(defun    |copy_BVEC|      (bv)      (copy-seq bv))
-(defun    |concat_BVEC|    (bv1 bv2) (concatenate '(vector bit) bv1 bv2))
-(defun    |equal_BVEC|     (bv1 bv2) (equal    bv1 bv2))
-(defun    |greater_BVEC|   (bv1 bv2)
-  (let ((pos (mismatch bv1 bv2)))
-    (cond ((or (null pos) (>= pos (length bv1))) nil)
-          ((< pos (length bv2)) (> (bit bv1 pos) (bit bv2 pos)))
-          ((find 1 bv1 :start pos) t)
-          (t nil))))
-(defun    |and_BVEC|       (bv1 bv2) (bit-and  bv1 bv2))
-(defun    |or_BVEC|        (bv1 bv2) (bit-ior  bv1 bv2))
-(defun    |xor_BVEC|       (bv1 bv2) (bit-xor  bv1 bv2))
-(defun    |nand_BVEC|      (bv1 bv2) (bit-nand bv1 bv2))
-(defun    |nor_BVEC|       (bv1 bv2) (bit-nor  bv1 bv2))
-(defun    |not_BVEC|       (bv)      (bit-not  bv))
-
-;;; end of moved fragment

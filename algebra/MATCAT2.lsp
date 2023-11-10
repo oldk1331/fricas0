@@ -1,31 +1,31 @@
 
-(SDEFUN |MATCAT2;map;MM1M2;1| ((|f| (|Mapping| R2 R1)) (|m| (M1)) ($ (M2)))
+(SDEFUN |MATCAT2;map;MM1M2;1| ((|f| (|Mapping| R2 R1)) (|m| (M1)) (% (M2)))
         (SPROG
-         ((#1=#:G704 NIL) (|j| NIL) (#2=#:G705 NIL) (|l| NIL) (#3=#:G702 NIL)
-          (|i| NIL) (#4=#:G703 NIL) (|k| NIL) (|ans| (M2)))
+         ((#1=#:G457 NIL) (|j| NIL) (#2=#:G458 NIL) (|l| NIL) (#3=#:G455 NIL)
+          (|i| NIL) (#4=#:G456 NIL) (|k| NIL) (|ans| (M2)))
          (SEQ
           (LETT |ans|
-                (SPADCALL (SPADCALL |m| (QREFELT $ 15))
-                          (SPADCALL |m| (QREFELT $ 16)) (|spadConstant| $ 17)
-                          (QREFELT $ 18)))
-          (SEQ (LETT |k| (SPADCALL |ans| (QREFELT $ 22)))
-               (LETT #4# (SPADCALL |ans| (QREFELT $ 23)))
-               (LETT |i| (SPADCALL |m| (QREFELT $ 20)))
-               (LETT #3# (SPADCALL |m| (QREFELT $ 21))) G190
+                (SPADCALL (SPADCALL |m| (QREFELT % 15))
+                          (SPADCALL |m| (QREFELT % 16)) (|spadConstant| % 17)
+                          (QREFELT % 18)))
+          (SEQ (LETT |k| (SPADCALL |ans| (QREFELT % 22)))
+               (LETT #4# (SPADCALL |ans| (QREFELT % 23)))
+               (LETT |i| (SPADCALL |m| (QREFELT % 20)))
+               (LETT #3# (SPADCALL |m| (QREFELT % 21))) G190
                (COND ((OR (> |i| #3#) (> |k| #4#)) (GO G191)))
                (SEQ
                 (EXIT
-                 (SEQ (LETT |l| (SPADCALL |ans| (QREFELT $ 26)))
-                      (LETT #2# (SPADCALL |ans| (QREFELT $ 27)))
-                      (LETT |j| (SPADCALL |m| (QREFELT $ 24)))
-                      (LETT #1# (SPADCALL |m| (QREFELT $ 25))) G190
+                 (SEQ (LETT |l| (SPADCALL |ans| (QREFELT % 26)))
+                      (LETT #2# (SPADCALL |ans| (QREFELT % 27)))
+                      (LETT |j| (SPADCALL |m| (QREFELT % 24)))
+                      (LETT #1# (SPADCALL |m| (QREFELT % 25))) G190
                       (COND ((OR (> |j| #1#) (> |l| #2#)) (GO G191)))
                       (SEQ
                        (EXIT
                         (SPADCALL |ans| |k| |l|
                                   (SPADCALL
-                                   (SPADCALL |m| |i| |j| (QREFELT $ 28)) |f|)
-                                  (QREFELT $ 29))))
+                                   (SPADCALL |m| |i| |j| (QREFELT % 28)) |f|)
+                                  (QREFELT % 29))))
                       (LETT |j| (PROG1 (+ |j| 1) (LETT |l| (+ |l| 1))))
                       (GO G190) G191 (EXIT NIL))))
                (LETT |i| (PROG1 (+ |i| 1) (LETT |k| (+ |k| 1)))) (GO G190) G191
@@ -34,50 +34,50 @@
 
 (SDEFUN |MATCAT2;map;MM1U;2|
         ((|f| (|Mapping| (|Union| R2 "failed") R1)) (|m| (M1))
-         ($ (|Union| M2 "failed")))
+         (% (|Union| M2 "failed")))
         (SPROG
-         ((#1=#:G712 NIL) (#2=#:G726 NIL) (|r| (|Union| R2 #3="failed"))
-          (#4=#:G729 NIL) (|j| NIL) (#5=#:G730 NIL) (|l| NIL) (#6=#:G727 NIL)
-          (|i| NIL) (#7=#:G728 NIL) (|k| NIL) (|ans| (M2)))
+         ((#1=#:G465 NIL) (#2=#:G479 NIL) (|r| (|Union| R2 #3="failed"))
+          (#4=#:G482 NIL) (|j| NIL) (#5=#:G483 NIL) (|l| NIL) (#6=#:G480 NIL)
+          (|i| NIL) (#7=#:G481 NIL) (|k| NIL) (|ans| (M2)))
          (SEQ
           (EXIT
            (SEQ
             (LETT |ans|
-                  (SPADCALL (SPADCALL |m| (QREFELT $ 15))
-                            (SPADCALL |m| (QREFELT $ 16)) (|spadConstant| $ 17)
-                            (QREFELT $ 18)))
-            (SEQ (LETT |k| (SPADCALL |ans| (QREFELT $ 22)))
-                 (LETT #7# (SPADCALL |ans| (QREFELT $ 23)))
-                 (LETT |i| (SPADCALL |m| (QREFELT $ 20)))
-                 (LETT #6# (SPADCALL |m| (QREFELT $ 21))) G190
+                  (SPADCALL (SPADCALL |m| (QREFELT % 15))
+                            (SPADCALL |m| (QREFELT % 16)) (|spadConstant| % 17)
+                            (QREFELT % 18)))
+            (SEQ (LETT |k| (SPADCALL |ans| (QREFELT % 22)))
+                 (LETT #7# (SPADCALL |ans| (QREFELT % 23)))
+                 (LETT |i| (SPADCALL |m| (QREFELT % 20)))
+                 (LETT #6# (SPADCALL |m| (QREFELT % 21))) G190
                  (COND ((OR (> |i| #6#) (> |k| #7#)) (GO G191)))
                  (SEQ
                   (EXIT
-                   (SEQ (LETT |l| (SPADCALL |ans| (QREFELT $ 26)))
-                        (LETT #5# (SPADCALL |ans| (QREFELT $ 27)))
-                        (LETT |j| (SPADCALL |m| (QREFELT $ 24)))
-                        (LETT #4# (SPADCALL |m| (QREFELT $ 25))) G190
+                   (SEQ (LETT |l| (SPADCALL |ans| (QREFELT % 26)))
+                        (LETT #5# (SPADCALL |ans| (QREFELT % 27)))
+                        (LETT |j| (SPADCALL |m| (QREFELT % 24)))
+                        (LETT #4# (SPADCALL |m| (QREFELT % 25))) G190
                         (COND ((OR (> |j| #4#) (> |l| #5#)) (GO G191)))
                         (SEQ
                          (LETT |r|
-                               (SPADCALL (SPADCALL |m| |i| |j| (QREFELT $ 28))
+                               (SPADCALL (SPADCALL |m| |i| |j| (QREFELT % 28))
                                          |f|))
                          (EXIT
                           (COND
-                           ((SPADCALL |r| (CONS 1 "failed") (QREFELT $ 34))
+                           ((SPADCALL |r| (CONS 1 "failed") (QREFELT % 34))
                             (PROGN
                              (LETT #2# (CONS 1 "failed"))
-                             (GO #8=#:G725)))
+                             (GO #8=#:G478)))
                            ('T
                             (SPADCALL |ans| |k| |l|
                                       (PROG2 (LETT #1# |r|)
                                           (QCDR #1#)
                                         (|check_union2| (QEQCAR #1# 0)
-                                                        (QREFELT $ 10)
-                                                        (|Union| (QREFELT $ 10)
+                                                        (QREFELT % 10)
+                                                        (|Union| (QREFELT % 10)
                                                                  #3#)
                                                         #1#))
-                                      (QREFELT $ 29))))))
+                                      (QREFELT % 29))))))
                         (LETT |j| (PROG1 (+ |j| 1) (LETT |l| (+ |l| 1))))
                         (GO G190) G191 (EXIT NIL))))
                  (LETT |i| (PROG1 (+ |i| 1) (LETT |k| (+ |k| 1)))) (GO G190)
@@ -86,22 +86,22 @@
           #8# (EXIT #2#)))) 
 
 (SDEFUN |MATCAT2;reduce;MM12R2;3|
-        ((|f| (|Mapping| R2 R1 R2)) (|m| (M1)) (|ident| (R2)) ($ (R2)))
-        (SPROG ((|s| (R2)) (#1=#:G739 NIL) (|j| NIL) (#2=#:G738 NIL) (|i| NIL))
+        ((|f| (|Mapping| R2 R1 R2)) (|m| (M1)) (|ident| (R2)) (% (R2)))
+        (SPROG ((|s| (R2)) (#1=#:G492 NIL) (|j| NIL) (#2=#:G491 NIL) (|i| NIL))
                (SEQ (LETT |s| |ident|)
-                    (SEQ (LETT |i| (SPADCALL |m| (QREFELT $ 20)))
-                         (LETT #2# (SPADCALL |m| (QREFELT $ 21))) G190
+                    (SEQ (LETT |i| (SPADCALL |m| (QREFELT % 20)))
+                         (LETT #2# (SPADCALL |m| (QREFELT % 21))) G190
                          (COND ((> |i| #2#) (GO G191)))
                          (SEQ
                           (EXIT
-                           (SEQ (LETT |j| (SPADCALL |m| (QREFELT $ 24)))
-                                (LETT #1# (SPADCALL |m| (QREFELT $ 25))) G190
+                           (SEQ (LETT |j| (SPADCALL |m| (QREFELT % 24)))
+                                (LETT #1# (SPADCALL |m| (QREFELT % 25))) G190
                                 (COND ((> |j| #1#) (GO G191)))
                                 (SEQ
                                  (EXIT
                                   (LETT |s|
                                         (SPADCALL
-                                         (SPADCALL |m| |i| |j| (QREFELT $ 28))
+                                         (SPADCALL |m| |i| |j| (QREFELT % 28))
                                          |s| |f|))))
                                 (LETT |j| (+ |j| 1)) (GO G190) G191
                                 (EXIT NIL))))
@@ -110,9 +110,9 @@
 
 (DECLAIM (NOTINLINE |MatrixCategoryFunctions2;|)) 
 
-(DEFUN |MatrixCategoryFunctions2| (&REST #1=#:G740)
+(DEFUN |MatrixCategoryFunctions2| (&REST #1=#:G493)
   (SPROG NIL
-         (PROG (#2=#:G741)
+         (PROG (#2=#:G494)
            (RETURN
             (COND
              ((LETT #2#
@@ -132,7 +132,7 @@
 
 (DEFUN |MatrixCategoryFunctions2;| (|#1| |#2| |#3| |#4| |#5| |#6| |#7| |#8|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$8 NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$8 NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL)
     (DV$4 NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -146,22 +146,22 @@
     (LETT |dv$|
           (LIST '|MatrixCategoryFunctions2| DV$1 DV$2 DV$3 DV$4 DV$5 DV$6 DV$7
                 DV$8))
-    (LETT $ (GETREFV 40))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (LETT % (GETREFV 40))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|MatrixCategoryFunctions2|
-                (LIST DV$1 DV$2 DV$3 DV$4 DV$5 DV$6 DV$7 DV$8) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (QSETREFV $ 10 |#5|)
-    (QSETREFV $ 11 |#6|)
-    (QSETREFV $ 12 |#7|)
-    (QSETREFV $ 13 |#8|)
-    (SETF |pv$| (QREFELT $ 3))
-    $))) 
+                (LIST DV$1 DV$2 DV$3 DV$4 DV$5 DV$6 DV$7 DV$8) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (QSETREFV % 10 |#5|)
+    (QSETREFV % 11 |#6|)
+    (QSETREFV % 12 |#7|)
+    (QSETREFV % 13 |#8|)
+    (SETF |pv$| (QREFELT % 3))
+    %))) 
 
 (MAKEPROP '|MatrixCategoryFunctions2| '|infovec|
           (LIST

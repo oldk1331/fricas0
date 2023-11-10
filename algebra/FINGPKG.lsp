@@ -1,13 +1,13 @@
 
 (SDEFUN |FINGPKG;permutationRepresentation;GP;1|
-        ((|x| (G)) ($ (|Permutation| (|Integer|))))
+        ((|x| (G)) (% (|Permutation| (|Integer|))))
         (SPROG
          ((|p| (|Permutation| (|Integer|))) (|imag| (|List| (|Integer|)))
-          (#1=#:G713 NIL) (|a| NIL) (#2=#:G712 NIL)
-          (|preimag| (|List| (|Integer|))) (#3=#:G711 NIL) (|k| NIL)
-          (#4=#:G710 NIL) (|xall| (|List| G)) (#5=#:G709 NIL) (#6=#:G708 NIL)
+          (#1=#:G461 NIL) (|a| NIL) (#2=#:G460 NIL)
+          (|preimag| (|List| (|Integer|))) (#3=#:G459 NIL) (|k| NIL)
+          (#4=#:G458 NIL) (|xall| (|List| G)) (#5=#:G457 NIL) (#6=#:G456 NIL)
           (|n| (|Integer|)) (|all| (|List| G)))
-         (SEQ (LETT |all| (SPADCALL (QREFELT $ 8))) (LETT |n| (LENGTH |all|))
+         (SEQ (LETT |all| (SPADCALL (QREFELT % 8))) (LETT |n| (LENGTH |all|))
               (LETT |xall|
                     (PROGN
                      (LETT #6# NIL)
@@ -18,7 +18,7 @@
                           (SEQ
                            (EXIT
                             (LETT #6#
-                                  (CONS (SPADCALL |x| |a| (QREFELT $ 9))
+                                  (CONS (SPADCALL |x| |a| (QREFELT % 9))
                                         #6#))))
                           (LETT #5# (CDR #5#)) (GO G190) G191
                           (EXIT (NREVERSE #6#)))))
@@ -40,26 +40,26 @@
                           (SEQ
                            (EXIT
                             (LETT #2#
-                                  (CONS (SPADCALL |a| |xall| (QREFELT $ 12))
+                                  (CONS (SPADCALL |a| |xall| (QREFELT % 12))
                                         #2#))))
                           (LETT #1# (CDR #1#)) (GO G190) G191
                           (EXIT (NREVERSE #2#)))))
               (EXIT
-               (LETT |p| (SPADCALL (LIST |preimag| |imag|) (QREFELT $ 15))))))) 
+               (LETT |p| (SPADCALL (LIST |preimag| |imag|) (QREFELT % 15))))))) 
 
 (SDEFUN |FINGPKG;regularRepresentation;GM;2|
-        ((|x| (G)) ($ (|Matrix| (|Integer|))))
+        ((|x| (G)) (% (|Matrix| (|Integer|))))
         (SPROG ((|n| (|Integer|)))
-               (SEQ (LETT |n| (SPADCALL (QREFELT $ 18)))
+               (SEQ (LETT |n| (SPADCALL (QREFELT % 18)))
                     (EXIT
-                     (SPADCALL (SPADCALL |x| (QREFELT $ 16)) |n|
-                               (QREFELT $ 21)))))) 
+                     (SPADCALL (SPADCALL |x| (QREFELT % 16)) |n|
+                               (QREFELT % 21)))))) 
 
 (DECLAIM (NOTINLINE |FiniteGroupPackage;|)) 
 
-(DEFUN |FiniteGroupPackage| (#1=#:G717)
+(DEFUN |FiniteGroupPackage| (#1=#:G464)
   (SPROG NIL
-         (PROG (#2=#:G718)
+         (PROG (#2=#:G465)
            (RETURN
             (COND
              ((LETT #2#
@@ -75,23 +75,23 @@
                   (HREM |$ConstructorCache| '|FiniteGroupPackage|)))))))))) 
 
 (DEFUN |FiniteGroupPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|FiniteGroupPackage| DV$1))
-          (LETT $ (GETREFV 23))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 23))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|FiniteGroupPackage| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|FiniteGroupPackage| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|List| $)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|List| %)
               (0 . |enumerate|) (4 . *) (|Integer|) (|List| 6)
               (10 . |position|) (|List| (|List| 10)) (|Permutation| 10)
               (16 . |coercePreimagesImages|)

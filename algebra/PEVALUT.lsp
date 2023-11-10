@@ -5,7 +5,7 @@
           (|Record| (|:| |prime| (|Integer|))
                     (|:| |eval1coeffbuf| (|U32Vector|))
                     (|:| |eval1expbuf| (|SortedExponentVector|))))
-         ($ (|Integer|)))
+         (% (|Integer|)))
         (SPROG
          ((|res| (|Integer|)) (|pk| #1=(|SingleInteger|)) (|ptk| (|Integer|))
           (|ki| #2=(|SingleInteger|)) (|j| NIL) (|i| #1#)
@@ -21,12 +21,12 @@
           (|ns| #2#) (|n| (|NonNegativeInteger|))
           (|exps| (|SortedExponentVector|)) (|nexps| (|SortedExponentVector|))
           (|coeffs| (|U32Vector|)) (|ncoeffs| (|U32Vector|))
-          (|nn| (|NonNegativeInteger|)) (#3=#:G725 NIL) (|t0| NIL)
+          (|nn| (|NonNegativeInteger|)) (#3=#:G470 NIL) (|t0| NIL)
           (|polu|
            #4=(|List|
                (|Record| (|:| |k| (|NonNegativeInteger|))
                          (|:| |c| (|Polynomial| (|Integer|))))))
-          (#5=#:G724 NIL)
+          (#5=#:G469 NIL)
           (|polr|
            (|Union| (|Integer|)
                     (|Record| (|:| |v| (|Symbol|)) (|:| |ts| #4#))))
@@ -37,7 +37,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |polr| 0)
-                   (PROGN (LETT #5# (QCDR |polr|)) (GO #6=#:G723)))
+                   (PROGN (LETT #5# (QCDR |polr|)) (GO #6=#:G468)))
                   ('T
                    (SEQ (LETT |polu| (QCDR (QCDR |polr|))) (LETT |i| 0)
                         (LETT |coeffs| (QVELT |pss| 1))
@@ -54,12 +54,12 @@
                                 (SEQ (LETT |nn| (* 2 |n|))
                                      (LETT |ncoeffs| (GETREFV_U32 |nn| 0))
                                      (SPADCALL |ncoeffs| |coeffs| |n|
-                                               (QREFELT $ 12))
+                                               (QREFELT % 12))
                                      (LETT |coeffs| |ncoeffs|)
                                      (QSETVELT |pss| 1 |coeffs|)
                                      (LETT |nexps| (GETREFV_U32 |nn| 0))
                                      (SPADCALL |nexps| |exps| |n|
-                                               (QREFELT $ 12))
+                                               (QREFELT % 12))
                                      (LETT |exps| |nexps|)
                                      (QSETVELT |pss| 2 |exps|) (LETT |n| |nn|)
                                      (EXIT (LETT |ns| |n|)))))
@@ -102,7 +102,7 @@
           (|Record| (|:| |prime| (|Integer|))
                     (|:| |eval1coeffbuf| (|U32Vector|))
                     (|:| |eval1expbuf| (|SortedExponentVector|))))
-         ($ (|Polynomial| (|Integer|))))
+         (% (|Polynomial| (|Integer|))))
         (SPROG
          ((|xr|
            (|Union| (|Integer|)
@@ -127,12 +127,12 @@
                                               (|:| |c|
                                                    (|Polynomial|
                                                     (|Integer|)))))))))
-          (#1=#:G751 NIL) (|t0| NIL)
+          (#1=#:G491 NIL) (|t0| NIL)
           (|xu|
            #2=(|List|
                (|Record| (|:| |k| (|NonNegativeInteger|))
                          (|:| |c| (|Polynomial| (|Integer|))))))
-          (#3=#:G750 NIL) (|vx| #4=(|Symbol|))
+          (#3=#:G490 NIL) (|vx| #4=(|Symbol|))
           (|polr|
            (|Union| (|Integer|) (|Record| (|:| |v| #4#) (|:| |ts| #2#)))))
          (SEQ
@@ -140,7 +140,7 @@
            (SEQ (LETT |polr| |pol|)
                 (EXIT
                  (COND
-                  ((QEQCAR |polr| 0) (PROGN (LETT #3# |pol|) (GO #5=#:G749)))
+                  ((QEQCAR |polr| 0) (PROGN (LETT #3# |pol|) (GO #5=#:G489)))
                   (#6='T
                    (SEQ (LETT |vx| (QCAR (QCDR |polr|)))
                         (EXIT
@@ -149,8 +149,8 @@
                            (PROGN
                             (LETT #3#
                                   (SPADCALL
-                                   (SPADCALL |pol| |pt| |pss| (QREFELT $ 15))
-                                   (QREFELT $ 16)))
+                                   (SPADCALL |pol| |pt| |pss| (QREFELT % 15))
+                                   (QREFELT % 16)))
                             (GO #5#)))
                           (#6#
                            (SEQ (LETT |xu| (QCDR (QCDR |polr|)))
@@ -174,13 +174,13 @@
                                               (LETT |c1|
                                                     (SPADCALL (QCDR |t0|) |vv|
                                                               |pt| |pss|
-                                                              (QREFELT $ 18)))
+                                                              (QREFELT % 18)))
                                               (EXIT
                                                (COND
                                                 ((SPADCALL |c1|
-                                                           (|spadConstant| $ 7)
-                                                           (QREFELT $ 20))
-                                                 (|spadConstant| $ 7))
+                                                           (|spadConstant| % 7)
+                                                           (QREFELT % 20))
+                                                 (|spadConstant| % 7))
                                                 ('T
                                                  (LETT |yu|
                                                        (CONS
@@ -190,7 +190,7 @@
                                      (EXIT NIL))
                                 (LETT |xr|
                                       (COND
-                                       ((SPADCALL |yu| NIL (QREFELT $ 23))
+                                       ((SPADCALL |yu| NIL (QREFELT % 23))
                                         (CONS 0 0))
                                        (#6#
                                         (CONS 1 (CONS |vx| (NREVERSE |yu|))))))
@@ -206,7 +206,7 @@
           (|Record| (|:| |prime| (|Integer|))
                     (|:| |eval1coeffbuf| (|U32Vector|))
                     (|:| |eval1expbuf| (|SortedExponentVector|))))
-         ($
+         (%
           (|Union|
            (|Record| (|:| |numer| (|Polynomial| (|Integer|)))
                      (|:| |denom| (|Polynomial| (|Integer|))))
@@ -214,21 +214,21 @@
         (SPROG ((|d| (|Polynomial| (|Integer|))))
                (SEQ
                 (LETT |d|
-                      (SPADCALL (QCDR |pol|) |vv| |pt| |pss| (QREFELT $ 18)))
+                      (SPADCALL (QCDR |pol|) |vv| |pt| |pss| (QREFELT % 18)))
                 (EXIT
                  (COND
-                  ((SPADCALL |d| (|spadConstant| $ 7) (QREFELT $ 20))
+                  ((SPADCALL |d| (|spadConstant| % 7) (QREFELT % 20))
                    (CONS 1 "failed"))
                   ('T
                    (CONS 0
                          (CONS
                           (SPADCALL (QCAR |pol|) |vv| |pt| |pss|
-                                    (QREFELT $ 18))
+                                    (QREFELT % 18))
                           |d|)))))))) 
 
 (SDEFUN |PEVALUT;modpreduction;PIP;4|
         ((|x| (|Polynomial| (|Integer|))) (|p| (|Integer|))
-         ($ (|Polynomial| (|Integer|))))
+         (% (|Polynomial| (|Integer|))))
         (SPROG
          ((|xr|
            (|Union| (|Integer|)
@@ -253,7 +253,7 @@
                                               (|:| |c|
                                                    (|Polynomial|
                                                     (|Integer|)))))))))
-          (#1=#:G782 NIL) (|t0| NIL)
+          (#1=#:G522 NIL) (|t0| NIL)
           (|xu|
            (|List|
             (|Record| (|:| |k| (|NonNegativeInteger|))
@@ -263,7 +263,7 @@
               (EXIT
                (COND
                 ((QEQCAR |xr| 0)
-                 (SEQ (LETT |c0| (SPADCALL (QCDR |xr|) |p| (QREFELT $ 27)))
+                 (SEQ (LETT |c0| (SPADCALL (QCDR |xr|) |p| (QREFELT % 27)))
                       (LETT |xr| (CONS 0 |c0|)) (EXIT |xr|)))
                 (#2='T
                  (SEQ (LETT |vx| (QCAR (QCDR |xr|)))
@@ -279,9 +279,9 @@
                                    (SEQ
                                     (LETT |c0|
                                           (SPADCALL (QCDR |t1|) |p|
-                                                    (QREFELT $ 27)))
+                                                    (QREFELT % 27)))
                                     (EXIT
-                                     (COND ((EQL |c0| 0) (|spadConstant| $ 7))
+                                     (COND ((EQL |c0| 0) (|spadConstant| % 7))
                                            ('T
                                             (SEQ (LETT |xr| (CONS 0 |c0|))
                                                  (EXIT
@@ -294,12 +294,12 @@
                                    (SEQ
                                     (LETT |c1|
                                           (SPADCALL (QCDR |t0|) |p|
-                                                    (QREFELT $ 28)))
+                                                    (QREFELT % 28)))
                                     (EXIT
                                      (COND
-                                      ((SPADCALL |c1| (|spadConstant| $ 7)
-                                                 (QREFELT $ 20))
-                                       (|spadConstant| $ 7))
+                                      ((SPADCALL |c1| (|spadConstant| % 7)
+                                                 (QREFELT % 20))
+                                       (|spadConstant| % 7))
                                       ('T
                                        (LETT |yu|
                                              (CONS (CONS (QCAR |t0|) |c1|)
@@ -307,13 +307,13 @@
                            (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
                       (LETT |xr|
                             (COND
-                             ((SPADCALL |yu| NIL (QREFELT $ 23)) (CONS 0 0))
+                             ((SPADCALL |yu| NIL (QREFELT % 23)) (CONS 0 0))
                              (#2# (CONS 1 (CONS |vx| (NREVERSE |yu|))))))
                       (EXIT |xr|)))))))) 
 
 (SDEFUN |PEVALUT;modpreduction;FIU;5|
         ((|x| (|Fraction| (|Polynomial| (|Integer|)))) (|p| (|Integer|))
-         ($
+         (%
           (|Union|
            (|Record| (|:| |numer| (|Polynomial| (|Integer|)))
                      (|:| |denom| (|Polynomial| (|Integer|))))
@@ -321,22 +321,22 @@
         (SPROG ((|d| (|Polynomial| (|Integer|))))
                (SEQ
                 (LETT |d|
-                      (SPADCALL (SPADCALL |x| (QREFELT $ 30)) |p|
-                                (QREFELT $ 28)))
+                      (SPADCALL (SPADCALL |x| (QREFELT % 30)) |p|
+                                (QREFELT % 28)))
                 (EXIT
                  (COND
-                  ((SPADCALL |d| (|spadConstant| $ 7) (QREFELT $ 20))
+                  ((SPADCALL |d| (|spadConstant| % 7) (QREFELT % 20))
                    (CONS 1 "failed"))
                   ('T
                    (CONS 0
                          (CONS
-                          (SPADCALL (SPADCALL |x| (QREFELT $ 32)) |p|
-                                    (QREFELT $ 28))
+                          (SPADCALL (SPADCALL |x| (QREFELT % 32)) |p|
+                                    (QREFELT % 28))
                           |d|)))))))) 
 
 (SDEFUN |PEVALUT;modpeval;PLL2I;6|
         ((|x| (|Polynomial| (|Integer|))) (|vars| (|List| (|Symbol|)))
-         (|pts| (|List| (|Integer|))) (|p| (|Integer|)) ($ (|Integer|)))
+         (|pts| (|List| (|Integer|))) (|p| (|Integer|)) (% (|Integer|)))
         (SPROG
          ((|res| #1=(|Integer|)) (|c0| (|Integer|)) (|kk| #1#)
           (|ptk| (|Integer|)) (|kk1| (|NonNegativeInteger|))
@@ -349,12 +349,12 @@
                                               (|:| |c|
                                                    (|Polynomial|
                                                     (|Integer|)))))))))
-          (#2=#:G810 NIL) (|t0| NIL)
+          (#2=#:G546 NIL) (|t0| NIL)
           (|xu|
            (|List|
             (|Record| (|:| |k| (|NonNegativeInteger|))
                       (|:| |c| (|Polynomial| (|Integer|))))))
-          (|vxval| (|Integer|)) (#3=#:G809 NIL) (|vx| (|Symbol|))
+          (|vxval| (|Integer|)) (#3=#:G545 NIL) (|vx| (|Symbol|))
           (|xr|
            (|Union| (|Integer|)
                     (|Record| (|:| |v| (|Symbol|))
@@ -371,17 +371,17 @@
                  (COND
                   ((QEQCAR |xr| 0)
                    (PROGN
-                    (LETT #3# (SPADCALL (QCDR |xr|) |p| (QREFELT $ 27)))
-                    (GO #4=#:G808)))
+                    (LETT #3# (SPADCALL (QCDR |xr|) |p| (QREFELT % 27)))
+                    (GO #4=#:G544)))
                   (#5='T
                    (SEQ (LETT |vx| (QCAR (QCDR |xr|)))
                         (EXIT
                          (COND
-                          ((SPADCALL |vx| (|SPADfirst| |vars|) (QREFELT $ 34))
+                          ((SPADCALL |vx| (|SPADfirst| |vars|) (QREFELT % 34))
                            (PROGN
                             (LETT #3#
                                   (SPADCALL |x| (CDR |vars|) (CDR |pts|) |p|
-                                            (QREFELT $ 37)))
+                                            (QREFELT % 37)))
                             (GO #4#)))
                           (#5#
                            (SEQ (LETT |vxval| (|SPADfirst| |pts|))
@@ -411,11 +411,11 @@
                                                 (COND
                                                  ((QEQCAR |t1| 0)
                                                   (SPADCALL (QCDR |t1|) |p|
-                                                            (QREFELT $ 27)))
+                                                            (QREFELT % 27)))
                                                  ('T
                                                   (SPADCALL (QCDR |t0|) |vars|
                                                             |pts| |p|
-                                                            (QREFELT $ 37)))))
+                                                            (QREFELT % 37)))))
                                           (EXIT
                                            (LETT |res|
                                                  (QSMULADDMOD64_32 |ptk| |c0|
@@ -430,7 +430,7 @@
 
 (DEFUN |PolynomialEvaluationUtilities| ()
   (SPROG NIL
-         (PROG (#1=#:G812)
+         (PROG (#1=#:G548)
            (RETURN
             (COND
              ((LETT #1#
@@ -454,17 +454,17 @@
                         '|PolynomialEvaluationUtilities|)))))))))) 
 
 (DEFUN |PolynomialEvaluationUtilities;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|PolynomialEvaluationUtilities|))
-          (LETT $ (GETREFV 38))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 38))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PolynomialEvaluationUtilities| NIL
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|PolynomialEvaluationUtilities| '|infovec|
           (LIST

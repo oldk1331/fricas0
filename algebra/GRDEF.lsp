@@ -1,40 +1,40 @@
 
-(SDEFUN |GRDEF;clipPointsDefault;B;1| (($ (|Boolean|))) (QREFELT $ 6)) 
+(SDEFUN |GRDEF;clipPointsDefault;B;1| ((% (|Boolean|))) (QREFELT % 6)) 
 
-(SDEFUN |GRDEF;drawToScale;B;2| (($ (|Boolean|))) (QREFELT $ 7)) 
+(SDEFUN |GRDEF;drawToScale;B;2| ((% (|Boolean|))) (QREFELT % 7)) 
 
-(SDEFUN |GRDEF;clipPointsDefault;2B;3| ((|b| (|Boolean|)) ($ (|Boolean|)))
-        (SETELT $ 6 |b|)) 
+(SDEFUN |GRDEF;clipPointsDefault;2B;3| ((|b| (|Boolean|)) (% (|Boolean|)))
+        (SETELT % 6 |b|)) 
 
-(SDEFUN |GRDEF;drawToScale;2B;4| ((|b| (|Boolean|)) ($ (|Boolean|)))
-        (SETELT $ 7 |b|)) 
+(SDEFUN |GRDEF;drawToScale;2B;4| ((|b| (|Boolean|)) (% (|Boolean|)))
+        (SETELT % 7 |b|)) 
 
-(SDEFUN |GRDEF;adaptive;B;5| (($ (|Boolean|))) (SPADCALL (QREFELT $ 14))) 
+(SDEFUN |GRDEF;adaptive;B;5| ((% (|Boolean|))) (SPADCALL (QREFELT % 14))) 
 
-(SDEFUN |GRDEF;minPoints;I;6| (($ (|Integer|))) (SPADCALL (QREFELT $ 17))) 
+(SDEFUN |GRDEF;minPoints;I;6| ((% (|Integer|))) (SPADCALL (QREFELT % 17))) 
 
-(SDEFUN |GRDEF;maxPoints;I;7| (($ (|Integer|))) (SPADCALL (QREFELT $ 19))) 
+(SDEFUN |GRDEF;maxPoints;I;7| ((% (|Integer|))) (SPADCALL (QREFELT % 19))) 
 
-(SDEFUN |GRDEF;screenResolution;I;8| (($ (|Integer|)))
-        (SPADCALL (QREFELT $ 21))) 
+(SDEFUN |GRDEF;screenResolution;I;8| ((% (|Integer|)))
+        (SPADCALL (QREFELT % 21))) 
 
-(SDEFUN |GRDEF;adaptive;2B;9| ((|b| (|Boolean|)) ($ (|Boolean|)))
-        (SPADCALL |b| (QREFELT $ 23))) 
+(SDEFUN |GRDEF;adaptive;2B;9| ((|b| (|Boolean|)) (% (|Boolean|)))
+        (SPADCALL |b| (QREFELT % 23))) 
 
-(SDEFUN |GRDEF;minPoints;2I;10| ((|n| (|Integer|)) ($ (|Integer|)))
-        (SPADCALL |n| (QREFELT $ 25))) 
+(SDEFUN |GRDEF;minPoints;2I;10| ((|n| (|Integer|)) (% (|Integer|)))
+        (SPADCALL |n| (QREFELT % 25))) 
 
-(SDEFUN |GRDEF;maxPoints;2I;11| ((|n| (|Integer|)) ($ (|Integer|)))
-        (SPADCALL |n| (QREFELT $ 27))) 
+(SDEFUN |GRDEF;maxPoints;2I;11| ((|n| (|Integer|)) (% (|Integer|)))
+        (SPADCALL |n| (QREFELT % 27))) 
 
-(SDEFUN |GRDEF;screenResolution;2I;12| ((|n| (|Integer|)) ($ (|Integer|)))
-        (SPADCALL |n| (QREFELT $ 29))) 
+(SDEFUN |GRDEF;screenResolution;2I;12| ((|n| (|Integer|)) (% (|Integer|)))
+        (SPADCALL |n| (QREFELT % 29))) 
 
 (DECLAIM (NOTINLINE |GraphicsDefaults;|)) 
 
 (DEFUN |GraphicsDefaults| ()
   (SPROG NIL
-         (PROG (#1=#:G705)
+         (PROG (#1=#:G461)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|GraphicsDefaults|))
@@ -51,18 +51,18 @@
                   (HREM |$ConstructorCache| '|GraphicsDefaults|)))))))))) 
 
 (DEFUN |GraphicsDefaults;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|GraphicsDefaults|))
-          (LETT $ (GETREFV 31))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|GraphicsDefaults| NIL (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 6 'T)
-          (QSETREFV $ 7 NIL)
-          $))) 
+          (LETT % (GETREFV 31))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|GraphicsDefaults| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 6 'T)
+          (QSETREFV % 7 NIL)
+          %))) 
 
 (MAKEPROP '|GraphicsDefaults| '|infovec|
           (LIST

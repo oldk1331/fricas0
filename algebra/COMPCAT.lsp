@@ -6,7 +6,7 @@
 (DEFPARAMETER |ComplexCategory;AL| 'NIL) 
 
 (DEFUN |ComplexCategory| (|t#1|)
-  (LET (#1=#:G733 (#2=#:G734 (|devaluate| |t#1|)))
+  (LET (#1=#:G491 (#2=#:G492 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |ComplexCategory;AL|)) (CDR #1#))
           (T
            (SETQ |ComplexCategory;AL|
@@ -15,11 +15,11 @@
            #1#)))) 
 
 (DEFUN |ComplexCategory;| (|t#1|)
-  (SPROG ((#1=#:G732 NIL))
+  (SPROG ((#1=#:G490 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
-                                   (|subst_in_cat| '(#2=#:G731)
+                                   (|subst_in_cat| '(#2=#:G489)
                                                    (LIST
                                                     '(|SparseUnivariatePolynomial|
                                                       |t#1|))
@@ -44,29 +44,29 @@
                                                         '|t#1|)
                                                        (|CommutativeRing|)
                                                        (|mkCategory|
-                                                        '(((|imaginary| ($)) T)
-                                                          ((|conjugate| ($ $))
+                                                        '(((|imaginary| (%)) T)
+                                                          ((|conjugate| (% %))
                                                            T)
                                                           ((|complex|
-                                                            ($ |t#1| |t#1|))
+                                                            (% |t#1| |t#1|))
                                                            T)
-                                                          ((|imag| (|t#1| $))
+                                                          ((|imag| (|t#1| %))
                                                            T)
-                                                          ((|real| (|t#1| $))
+                                                          ((|real| (|t#1| %))
                                                            T)
-                                                          ((|norm| (|t#1| $))
+                                                          ((|norm| (|t#1| %))
                                                            T)
                                                           ((|exquo|
-                                                            ((|Union| $
+                                                            ((|Union| %
                                                                       "failed")
-                                                             $ |t#1|))
+                                                             % |t#1|))
                                                            (|has| |t#1|
                                                                   (|IntegralDomain|)))
-                                                          ((|abs| ($ $))
+                                                          ((|abs| (% %))
                                                            (|has| |t#1|
                                                                   (|RealNumberSystem|)))
                                                           ((|argument|
-                                                            (|t#1| $))
+                                                            (|t#1| %))
                                                            (|has| |t#1|
                                                                   (|TranscendentalFunctionCategory|)))
                                                           ((|polarCoordinates|
@@ -74,20 +74,20 @@
                                                               (|:| |r| |t#1|)
                                                               (|:| |phi|
                                                                    |t#1|))
-                                                             $))
+                                                             %))
                                                            (AND
                                                             (|has| |t#1|
                                                                    (|RealNumberSystem|))
                                                             (|has| |t#1|
                                                                    (|TranscendentalFunctionCategory|))))
                                                           ((|rational?|
-                                                            ((|Boolean|) $))
+                                                            ((|Boolean|) %))
                                                            (|has| |t#1|
                                                                   (|IntegerNumberSystem|)))
                                                           ((|rational|
                                                             ((|Fraction|
                                                               (|Integer|))
-                                                             $))
+                                                             %))
                                                            (|has| |t#1|
                                                                   (|IntegerNumberSystem|)))
                                                           ((|rationalIfCan|
@@ -95,7 +95,7 @@
                                                               (|Fraction|
                                                                (|Integer|))
                                                               "failed")
-                                                             $))
+                                                             %))
                                                            (|has| |t#1|
                                                                   (|IntegerNumberSystem|))))
                                                         '(((|Comparable|)

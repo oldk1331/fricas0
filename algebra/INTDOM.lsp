@@ -8,7 +8,7 @@
         (T (SETQ |IntegralDomain;AL| (|IntegralDomain;|))))) 
 
 (DEFUN |IntegralDomain;| ()
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1 (LETT #1# (|Join| (|CommutativeRing|) (|EntireRing|)))
            (SETELT #1# 0 '(|IntegralDomain|))))) 
 

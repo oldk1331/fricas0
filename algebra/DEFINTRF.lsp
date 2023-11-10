@@ -2,39 +2,39 @@
 (SDEFUN |DEFINTRF;integrate;FSbU;1|
         ((|f| (|Fraction| (|Polynomial| R)))
          (|s| (|SegmentBinding| (|OrderedCompletion| (|Expression| R))))
-         ($
+         (%
           (|Union| (|:| |f1| (|OrderedCompletion| (|Expression| R)))
                    (|:| |f2| (|List| (|OrderedCompletion| (|Expression| R))))
                    (|:| |fail| "failed") (|:| |pole| "potentialPole"))))
-        (|DEFINTRF;int| |f| (SPADCALL |s| (QREFELT $ 9))
-         (SPADCALL (SPADCALL |s| (QREFELT $ 11)) (QREFELT $ 13))
-         (SPADCALL (SPADCALL |s| (QREFELT $ 11)) (QREFELT $ 14)) NIL $)) 
+        (|DEFINTRF;int| |f| (SPADCALL |s| (QREFELT % 9))
+         (SPADCALL (SPADCALL |s| (QREFELT % 11)) (QREFELT % 13))
+         (SPADCALL (SPADCALL |s| (QREFELT % 11)) (QREFELT % 14)) NIL %)) 
 
 (SDEFUN |DEFINTRF;nopole|
         ((|f| (|Fraction| (|Polynomial| R))) (|x| (|Symbol|))
          (|a| (|OrderedCompletion| (|Expression| R)))
          (|b| (|OrderedCompletion| (|Expression| R)))
-         ($
+         (%
           (|Union| (|:| |f1| (|OrderedCompletion| (|Expression| R)))
                    (|:| |f2| (|List| (|OrderedCompletion| (|Expression| R))))
                    (|:| |fail| #1="failed") (|:| |pole| "potentialPole"))))
         (SPROG
          ((|ans| (|List| (|OrderedCompletion| (|Expression| R))))
-          (#2=#:G731 NIL)
+          (#2=#:G474 NIL)
           (|v| (|Union| (|OrderedCompletion| (|Expression| R)) "failed"))
-          (#3=#:G732 NIL) (|g| NIL)
+          (#3=#:G475 NIL) (|g| NIL)
           (|u| (|Union| (|Expression| R) (|List| (|Expression| R))))
           (|k| (|Kernel| (|Expression| R))))
          (SEQ
           (EXIT
-           (SEQ (LETT |k| (SPADCALL |x| (QREFELT $ 19)))
-                (LETT |u| (SPADCALL |f| |x| (QREFELT $ 22)))
+           (SEQ (LETT |k| (SPADCALL |x| (QREFELT % 19)))
+                (LETT |u| (SPADCALL |f| |x| (QREFELT % 22)))
                 (EXIT
                  (COND
                   ((QEQCAR |u| 0)
                    (SEQ
                     (LETT |v|
-                          (SPADCALL |k| (QCDR |u|) |a| |b| 'T (QREFELT $ 27)))
+                          (SPADCALL |k| (QCDR |u|) |a| |b| 'T (QREFELT % 27)))
                     (EXIT
                      (COND ((QEQCAR |v| 1) (CONS 2 #1#))
                            (#4='T (CONS 0 (QCDR |v|)))))))
@@ -47,17 +47,17 @@
                              (SEQ
                               (LETT |v|
                                     (SPADCALL |k| |g| |a| |b| 'T
-                                              (QREFELT $ 27)))
+                                              (QREFELT % 27)))
                               (EXIT
                                (COND
                                 ((QEQCAR |v| 1)
                                  (PROGN
                                   (LETT #2# (CONS 2 #1#))
-                                  (GO #5=#:G730)))
+                                  (GO #5=#:G473)))
                                 ('T
                                  (LETT |ans|
                                        (SPADCALL |ans| (LIST (QCDR |v|))
-                                                 (QREFELT $ 29)))))))
+                                                 (QREFELT % 29)))))))
                              (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
                         (EXIT (CONS 1 |ans|))))))))
           #5# (EXIT #2#)))) 
@@ -67,18 +67,18 @@
          (|s|
           (|SegmentBinding|
            (|OrderedCompletion| (|Fraction| (|Polynomial| R)))))
-         ($
+         (%
           (|Union| (|:| |f1| (|OrderedCompletion| (|Expression| R)))
                    (|:| |f2| (|List| (|OrderedCompletion| (|Expression| R))))
                    (|:| |fail| "failed") (|:| |pole| "potentialPole"))))
-        (|DEFINTRF;int| |f| (SPADCALL |s| (QREFELT $ 31))
-         (SPADCALL (ELT $ 32)
-                   (SPADCALL (SPADCALL |s| (QREFELT $ 34)) (QREFELT $ 36))
-                   (QREFELT $ 39))
-         (SPADCALL (ELT $ 32)
-                   (SPADCALL (SPADCALL |s| (QREFELT $ 34)) (QREFELT $ 40))
-                   (QREFELT $ 39))
-         NIL $)) 
+        (|DEFINTRF;int| |f| (SPADCALL |s| (QREFELT % 31))
+         (SPADCALL (ELT % 32)
+                   (SPADCALL (SPADCALL |s| (QREFELT % 34)) (QREFELT % 36))
+                   (QREFELT % 39))
+         (SPADCALL (ELT % 32)
+                   (SPADCALL (SPADCALL |s| (QREFELT % 34)) (QREFELT % 40))
+                   (QREFELT % 39))
+         NIL %)) 
 
 (SDEFUN |DEFINTRF;integrate;FSbSU;4|
         ((|f| (|Fraction| (|Polynomial| R)))
@@ -86,64 +86,64 @@
           (|SegmentBinding|
            (|OrderedCompletion| (|Fraction| (|Polynomial| R)))))
          (|str| (|String|))
-         ($
+         (%
           (|Union| (|:| |f1| (|OrderedCompletion| (|Expression| R)))
                    (|:| |f2| (|List| (|OrderedCompletion| (|Expression| R))))
                    (|:| |fail| "failed") (|:| |pole| "potentialPole"))))
-        (|DEFINTRF;int| |f| (SPADCALL |s| (QREFELT $ 31))
-         (SPADCALL (ELT $ 32)
-                   (SPADCALL (SPADCALL |s| (QREFELT $ 34)) (QREFELT $ 36))
-                   (QREFELT $ 39))
-         (SPADCALL (ELT $ 32)
-                   (SPADCALL (SPADCALL |s| (QREFELT $ 34)) (QREFELT $ 40))
-                   (QREFELT $ 39))
-         (SPADCALL |str| (QREFELT $ 43)) $)) 
+        (|DEFINTRF;int| |f| (SPADCALL |s| (QREFELT % 31))
+         (SPADCALL (ELT % 32)
+                   (SPADCALL (SPADCALL |s| (QREFELT % 34)) (QREFELT % 36))
+                   (QREFELT % 39))
+         (SPADCALL (ELT % 32)
+                   (SPADCALL (SPADCALL |s| (QREFELT % 34)) (QREFELT % 40))
+                   (QREFELT % 39))
+         (SPADCALL |str| (QREFELT % 43)) %)) 
 
 (SDEFUN |DEFINTRF;integrate;FSbSU;5|
         ((|f| (|Fraction| (|Polynomial| R)))
          (|s| (|SegmentBinding| (|OrderedCompletion| (|Expression| R))))
          (|str| (|String|))
-         ($
+         (%
           (|Union| (|:| |f1| (|OrderedCompletion| (|Expression| R)))
                    (|:| |f2| (|List| (|OrderedCompletion| (|Expression| R))))
                    (|:| |fail| "failed") (|:| |pole| "potentialPole"))))
-        (|DEFINTRF;int| |f| (SPADCALL |s| (QREFELT $ 9))
-         (SPADCALL (SPADCALL |s| (QREFELT $ 11)) (QREFELT $ 13))
-         (SPADCALL (SPADCALL |s| (QREFELT $ 11)) (QREFELT $ 14))
-         (SPADCALL |str| (QREFELT $ 43)) $)) 
+        (|DEFINTRF;int| |f| (SPADCALL |s| (QREFELT % 9))
+         (SPADCALL (SPADCALL |s| (QREFELT % 11)) (QREFELT % 13))
+         (SPADCALL (SPADCALL |s| (QREFELT % 11)) (QREFELT % 14))
+         (SPADCALL |str| (QREFELT % 43)) %)) 
 
 (SDEFUN |DEFINTRF;int|
         ((|f| (|Fraction| (|Polynomial| R))) (|x| (|Symbol|))
          (|a| (|OrderedCompletion| (|Expression| R)))
          (|b| (|OrderedCompletion| (|Expression| R))) (|ignor?| (|Boolean|))
-         ($
+         (%
           (|Union| (|:| |f1| (|OrderedCompletion| (|Expression| R)))
                    (|:| |f2| (|List| (|OrderedCompletion| (|Expression| R))))
                    (|:| |fail| "failed") (|:| |pole| #1="potentialPole"))))
         (SPROG ((|z| (|Union| (|Boolean|) "failed")))
                (SEQ
                 (COND
-                 ((SPADCALL |a| |b| (QREFELT $ 46))
-                  (CONS 0 (SPADCALL (|spadConstant| $ 47) (QREFELT $ 48))))
+                 ((SPADCALL |a| |b| (QREFELT % 46))
+                  (CONS 0 (SPADCALL (|spadConstant| % 47) (QREFELT % 48))))
                  (#2='T
                   (SEQ
                    (LETT |z|
-                         (SPADCALL (SPADCALL |f| (QREFELT $ 50)) |x| |a| |b| 'T
-                                   (QREFELT $ 52)))
+                         (SPADCALL (SPADCALL |f| (QREFELT % 50)) |x| |a| |b| 'T
+                                   (QREFELT % 52)))
                    (EXIT
                     (COND
                      ((QEQCAR |z| 1)
-                      (COND (|ignor?| (|DEFINTRF;nopole| |f| |x| |a| |b| $))
+                      (COND (|ignor?| (|DEFINTRF;nopole| |f| |x| |a| |b| %))
                             (#2# (CONS 3 #1#))))
                      ((QCDR |z|)
                       (|error| "integrate: pole in path of integration"))
-                     (#2# (|DEFINTRF;nopole| |f| |x| |a| |b| $)))))))))) 
+                     (#2# (|DEFINTRF;nopole| |f| |x| |a| |b| %)))))))))) 
 
 (DECLAIM (NOTINLINE |RationalFunctionDefiniteIntegration;|)) 
 
-(DEFUN |RationalFunctionDefiniteIntegration| (#1=#:G757)
+(DEFUN |RationalFunctionDefiniteIntegration| (#1=#:G500)
   (SPROG NIL
-         (PROG (#2=#:G758)
+         (PROG (#2=#:G501)
            (RETURN
             (COND
              ((LETT #2#
@@ -162,20 +162,20 @@
                         '|RationalFunctionDefiniteIntegration|)))))))))) 
 
 (DEFUN |RationalFunctionDefiniteIntegration;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RationalFunctionDefiniteIntegration| DV$1))
-          (LETT $ (GETREFV 53))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 53))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache|
                       '|RationalFunctionDefiniteIntegration| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|RationalFunctionDefiniteIntegration| '|infovec|
           (LIST

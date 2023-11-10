@@ -1,23 +1,23 @@
 
-(SDEFUN |FDIVCAT-;principal?;SB;1| ((|d| (S)) ($ (|Boolean|)))
-        (QEQCAR (SPADCALL |d| (QREFELT $ 12)) 0)) 
+(SDEFUN |FDIVCAT-;principal?;SB;1| ((|d| (S)) (% (|Boolean|)))
+        (QEQCAR (SPADCALL |d| (QREFELT % 12)) 0)) 
 
 (SDEFUN |FDIVCAT-;divisor;R3UPFS;2|
-        ((|h| (R)) (|d| (UP)) (|dp| (UP)) (|g| (UP)) (|r| (F)) ($ (S)))
+        ((|h| (R)) (|d| (UP)) (|dp| (UP)) (|g| (UP)) (|r| (F)) (% (S)))
         (SPADCALL
          (SPADCALL |h|
                    (SPADCALL
-                    (SPADCALL (SPADCALL |r| |dp| (QREFELT $ 15))
-                              (QREFELT $ 17))
-                    (QREFELT $ 18))
-                   (QREFELT $ 19))
-         |d| |g| (QREFELT $ 20))) 
+                    (SPADCALL (SPADCALL |r| |dp| (QREFELT % 15))
+                              (QREFELT % 17))
+                    (QREFELT % 18))
+                   (QREFELT % 19))
+         |d| |g| (QREFELT % 20))) 
 
 (DECLAIM (NOTINLINE |FiniteDivisorCategory&;|)) 
 
 (DEFUN |FiniteDivisorCategory&| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -26,17 +26,17 @@
     (LETT DV$4 (|devaluate| |#4|))
     (LETT DV$5 (|devaluate| |#5|))
     (LETT |dv$| (LIST '|FiniteDivisorCategory&| DV$1 DV$2 DV$3 DV$4 DV$5))
-    (LETT $ (GETREFV 24))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (QSETREFV $ 10 |#5|)
-    (SETF |pv$| (QREFELT $ 3))
-    $))) 
+    (LETT % (GETREFV 24))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (QSETREFV % 10 |#5|)
+    (SETF |pv$| (QREFELT % 3))
+    %))) 
 
 (MAKEPROP '|FiniteDivisorCategory&| '|infovec|
           (LIST

@@ -22,16 +22,16 @@
      (COND
       ((NOT
         (EQ
-         (SETF |bfVar#2| #1=(GETHASH |bfVar#1| |canCoerceFrom;AL| #2='#:G115))
+         (SETF |bfVar#2| #1=(GETHASH |bfVar#1| |canCoerceFrom;AL| #2='#:G99))
          #2#))
        |bfVar#2|)
       ('T (SETF #1# (APPLY #'|canCoerceFrom;| |bfVar#1|)))))))
 (EVAL-WHEN (EVAL LOAD)
   (SETF (GET '|canCoerceFrom| '|cacheInfo|)
           '(|canCoerceFrom| |canCoerceFrom;AL| |hash-table|
-            (SETQ |canCoerceFrom;AL| (MAKE_HASHTABLE 'UEQUAL))
+            (SETQ |canCoerceFrom;AL| (MAKE_HASHTABLE 'EQUAL))
             (|hashCount| |canCoerceFrom;AL|))))
-(EVAL-WHEN (EVAL LOAD) (SETQ |canCoerceFrom;AL| (MAKE_HASHTABLE 'UEQUAL)))
+(EVAL-WHEN (EVAL LOAD) (SETQ |canCoerceFrom;AL| (MAKE_HASHTABLE 'EQUAL)))
 
 ; canCoerce(t1, t2) ==
 ;   val := canCoerce1(t1, t2) => val
@@ -55,16 +55,16 @@
     (RETURN
      (COND
       ((NOT
-        (EQ (SETF |bfVar#4| #1=(GETHASH |bfVar#3| |canCoerce;AL| #2='#:G116))
+        (EQ (SETF |bfVar#4| #1=(GETHASH |bfVar#3| |canCoerce;AL| #2='#:G100))
             #2#))
        |bfVar#4|)
       ('T (SETF #1# (APPLY #'|canCoerce;| |bfVar#3|)))))))
 (EVAL-WHEN (EVAL LOAD)
   (SETF (GET '|canCoerce| '|cacheInfo|)
           '(|canCoerce| |canCoerce;AL| |hash-table|
-            (SETQ |canCoerce;AL| (MAKE_HASHTABLE 'UEQUAL))
+            (SETQ |canCoerce;AL| (MAKE_HASHTABLE 'EQUAL))
             (|hashCount| |canCoerce;AL|))))
-(EVAL-WHEN (EVAL LOAD) (SETQ |canCoerce;AL| (MAKE_HASHTABLE 'UEQUAL)))
+(EVAL-WHEN (EVAL LOAD) (SETQ |canCoerce;AL| (MAKE_HASHTABLE 'EQUAL)))
 
 ; isValidType form ==
 ;   -- returns true IFF form is a type whose arguments satisfy the
@@ -116,7 +116,7 @@
 ;     cl:= replaceSharps(cl,form)
 ;     and/[isValid for x in argl for c in cl] where isValid ==
 ;       categoryForm?(c) =>
-;         evalCategory(x,MSUBSTQ(x,'_$,c)) and isValidType x
+;         evalCategory(x, MSUBSTQ(x, '%, c)) and isValidType x
 ;       not (GETDATABASE(opOf x, 'CONSTRUCTORKIND) = 'domain)
 
 (DEFUN |isValidType;| (|form|)
@@ -325,7 +325,7 @@
                                                   ((|categoryForm?| |c|)
                                                    (AND
                                                     (|evalCategory| |x|
-                                                     (MSUBSTQ |x| '$ |c|))
+                                                     (MSUBSTQ |x| '% |c|))
                                                     (|isValidType| |x|)))
                                                   (#1#
                                                    (NULL
@@ -344,16 +344,16 @@
      (COND
       ((NOT
         (EQ
-         (SETF |bfVar#21| #1=(GETHASH |bfVar#20| |isValidType;AL| #2='#:G117))
+         (SETF |bfVar#21| #1=(GETHASH |bfVar#20| |isValidType;AL| #2='#:G101))
          #2#))
        |bfVar#21|)
       ('T (SETF #1# (APPLY #'|isValidType;| |bfVar#20|)))))))
 (EVAL-WHEN (EVAL LOAD)
   (SETF (GET '|isValidType| '|cacheInfo|)
           '(|isValidType| |isValidType;AL| |hash-table|
-            (SETQ |isValidType;AL| (MAKE_HASHTABLE 'UEQUAL))
+            (SETQ |isValidType;AL| (MAKE_HASHTABLE 'EQUAL))
             (|hashCount| |isValidType;AL|))))
-(EVAL-WHEN (EVAL LOAD) (SETQ |isValidType;AL| (MAKE_HASHTABLE 'UEQUAL)))
+(EVAL-WHEN (EVAL LOAD) (SETQ |isValidType;AL| (MAKE_HASHTABLE 'EQUAL)))
 
 ; selectMms1(op,tar,args1,args2,$Coerce) ==
 ;     selectMms2(op,tar,args1,args2,$Coerce)
@@ -367,16 +367,16 @@
      (COND
       ((NOT
         (EQ
-         (SETF |bfVar#23| #1=(GETHASH |bfVar#22| |selectMms1;AL| #2='#:G118))
+         (SETF |bfVar#23| #1=(GETHASH |bfVar#22| |selectMms1;AL| #2='#:G102))
          #2#))
        |bfVar#23|)
       ('T (SETF #1# (APPLY #'|selectMms1;| |bfVar#22|)))))))
 (EVAL-WHEN (EVAL LOAD)
   (SETF (GET '|selectMms1| '|cacheInfo|)
           '(|selectMms1| |selectMms1;AL| |hash-table|
-            (SETQ |selectMms1;AL| (MAKE_HASHTABLE 'UEQUAL))
+            (SETQ |selectMms1;AL| (MAKE_HASHTABLE 'EQUAL))
             (|hashCount| |selectMms1;AL|))))
-(EVAL-WHEN (EVAL LOAD) (SETQ |selectMms1;AL| (MAKE_HASHTABLE 'UEQUAL)))
+(EVAL-WHEN (EVAL LOAD) (SETQ |selectMms1;AL| (MAKE_HASHTABLE 'EQUAL)))
 
 ; coerceConvertMmSelection(funName,m1,m2) ==
 ;   -- calls selectMms with $Coerce=NIL and tests for required
@@ -432,7 +432,7 @@
         (EQ
          (SETF |bfVar#27|
                  #1=(GETHASH |bfVar#26| |coerceConvertMmSelection;AL|
-                             #2='#:G119))
+                             #2='#:G103))
          #2#))
        |bfVar#27|)
       ('T (SETF #1# (APPLY #'|coerceConvertMmSelection;| |bfVar#26|)))))))
@@ -440,10 +440,10 @@
   (SETF (GET '|coerceConvertMmSelection| '|cacheInfo|)
           '(|coerceConvertMmSelection| |coerceConvertMmSelection;AL|
             |hash-table|
-            (SETQ |coerceConvertMmSelection;AL| (MAKE_HASHTABLE 'UEQUAL))
+            (SETQ |coerceConvertMmSelection;AL| (MAKE_HASHTABLE 'EQUAL))
             (|hashCount| |coerceConvertMmSelection;AL|))))
 (EVAL-WHEN (EVAL LOAD)
-  (SETQ |coerceConvertMmSelection;AL| (MAKE_HASHTABLE 'UEQUAL)))
+  (SETQ |coerceConvertMmSelection;AL| (MAKE_HASHTABLE 'EQUAL)))
 
 ; resolveTT(t1,t2) ==
 ;   -- resolves two types
@@ -475,16 +475,16 @@
     (RETURN
      (COND
       ((NOT
-        (EQ (SETF |bfVar#29| #1=(GETHASH |bfVar#28| |resolveTT;AL| #2='#:G120))
+        (EQ (SETF |bfVar#29| #1=(GETHASH |bfVar#28| |resolveTT;AL| #2='#:G104))
             #2#))
        |bfVar#29|)
       ('T (SETF #1# (APPLY #'|resolveTT;| |bfVar#28|)))))))
 (EVAL-WHEN (EVAL LOAD)
   (SETF (GET '|resolveTT| '|cacheInfo|)
           '(|resolveTT| |resolveTT;AL| |hash-table|
-            (SETQ |resolveTT;AL| (MAKE_HASHTABLE 'UEQUAL))
+            (SETQ |resolveTT;AL| (MAKE_HASHTABLE 'EQUAL))
             (|hashCount| |resolveTT;AL|))))
-(EVAL-WHEN (EVAL LOAD) (SETQ |resolveTT;AL| (MAKE_HASHTABLE 'UEQUAL)))
+(EVAL-WHEN (EVAL LOAD) (SETQ |resolveTT;AL| (MAKE_HASHTABLE 'EQUAL)))
 
 ; isLegitimateMode(t,hasPolyMode,polyVarList) ==
 ;   -- returns true IFF t is a valid type.  i.e. if t has no repeated
@@ -675,16 +675,16 @@
       ((NOT
         (EQ
          (SETF |bfVar#38|
-                 #1=(GETHASH |bfVar#37| |isLegitimateMode;AL| #2='#:G121))
+                 #1=(GETHASH |bfVar#37| |isLegitimateMode;AL| #2='#:G105))
          #2#))
        |bfVar#38|)
       ('T (SETF #1# (APPLY #'|isLegitimateMode;| |bfVar#37|)))))))
 (EVAL-WHEN (EVAL LOAD)
   (SETF (GET '|isLegitimateMode| '|cacheInfo|)
           '(|isLegitimateMode| |isLegitimateMode;AL| |hash-table|
-            (SETQ |isLegitimateMode;AL| (MAKE_HASHTABLE 'UEQUAL))
+            (SETQ |isLegitimateMode;AL| (MAKE_HASHTABLE 'EQUAL))
             (|hashCount| |isLegitimateMode;AL|))))
-(EVAL-WHEN (EVAL LOAD) (SETQ |isLegitimateMode;AL| (MAKE_HASHTABLE 'UEQUAL)))
+(EVAL-WHEN (EVAL LOAD) (SETQ |isLegitimateMode;AL| (MAKE_HASHTABLE 'EQUAL)))
 
 ; underDomainOf t ==
 ;   t = $RationalNumber => $Integer
@@ -711,16 +711,16 @@
       ((NOT
         (EQ
          (SETF |bfVar#40|
-                 #1=(GETHASH |bfVar#39| |underDomainOf;AL| #2='#:G122))
+                 #1=(GETHASH |bfVar#39| |underDomainOf;AL| #2='#:G106))
          #2#))
        |bfVar#40|)
       ('T (SETF #1# (APPLY #'|underDomainOf;| |bfVar#39|)))))))
 (EVAL-WHEN (EVAL LOAD)
   (SETF (GET '|underDomainOf| '|cacheInfo|)
           '(|underDomainOf| |underDomainOf;AL| |hash-table|
-            (SETQ |underDomainOf;AL| (MAKE_HASHTABLE 'UEQUAL))
+            (SETQ |underDomainOf;AL| (MAKE_HASHTABLE 'EQUAL))
             (|hashCount| |underDomainOf;AL|))))
-(EVAL-WHEN (EVAL LOAD) (SETQ |underDomainOf;AL| (MAKE_HASHTABLE 'UEQUAL)))
+(EVAL-WHEN (EVAL LOAD) (SETQ |underDomainOf;AL| (MAKE_HASHTABLE 'EQUAL)))
 
 ; findRetractMms(st, tt) == findRetractMms1(st, tt)
 
@@ -733,16 +733,16 @@
       ((NOT
         (EQ
          (SETF |bfVar#42|
-                 #1=(GETHASH |bfVar#41| |findRetractMms;AL| #2='#:G123))
+                 #1=(GETHASH |bfVar#41| |findRetractMms;AL| #2='#:G107))
          #2#))
        |bfVar#42|)
       ('T (SETF #1# (APPLY #'|findRetractMms;| |bfVar#41|)))))))
 (EVAL-WHEN (EVAL LOAD)
   (SETF (GET '|findRetractMms| '|cacheInfo|)
           '(|findRetractMms| |findRetractMms;AL| |hash-table|
-            (SETQ |findRetractMms;AL| (MAKE_HASHTABLE 'UEQUAL))
+            (SETQ |findRetractMms;AL| (MAKE_HASHTABLE 'EQUAL))
             (|hashCount| |findRetractMms;AL|))))
-(EVAL-WHEN (EVAL LOAD) (SETQ |findRetractMms;AL| (MAKE_HASHTABLE 'UEQUAL)))
+(EVAL-WHEN (EVAL LOAD) (SETQ |findRetractMms;AL| (MAKE_HASHTABLE 'EQUAL)))
 
 ; getConstantFromDomain(form,domainForm) ==
 ;     getConstantFromDomain1(form,domainForm)
@@ -756,17 +756,17 @@
       ((NOT
         (EQ
          (SETF |bfVar#44|
-                 #1=(GETHASH |bfVar#43| |getConstantFromDomain;AL| #2='#:G124))
+                 #1=(GETHASH |bfVar#43| |getConstantFromDomain;AL| #2='#:G108))
          #2#))
        |bfVar#44|)
       ('T (SETF #1# (APPLY #'|getConstantFromDomain;| |bfVar#43|)))))))
 (EVAL-WHEN (EVAL LOAD)
   (SETF (GET '|getConstantFromDomain| '|cacheInfo|)
           '(|getConstantFromDomain| |getConstantFromDomain;AL| |hash-table|
-            (SETQ |getConstantFromDomain;AL| (MAKE_HASHTABLE 'UEQUAL))
+            (SETQ |getConstantFromDomain;AL| (MAKE_HASHTABLE 'EQUAL))
             (|hashCount| |getConstantFromDomain;AL|))))
 (EVAL-WHEN (EVAL LOAD)
-  (SETQ |getConstantFromDomain;AL| (MAKE_HASHTABLE 'UEQUAL)))
+  (SETQ |getConstantFromDomain;AL| (MAKE_HASHTABLE 'EQUAL)))
 
 ; interpLookup(funName, sig, dc) ==
 ;     dcVector:= evalDomain dc
@@ -784,13 +784,13 @@
      (COND
       ((NOT
         (EQ
-         (SETF |bfVar#46| #1=(GETHASH |bfVar#45| |interpLookup;AL| #2='#:G125))
+         (SETF |bfVar#46| #1=(GETHASH |bfVar#45| |interpLookup;AL| #2='#:G109))
          #2#))
        |bfVar#46|)
       ('T (SETF #1# (APPLY #'|interpLookup;| |bfVar#45|)))))))
 (EVAL-WHEN (EVAL LOAD)
   (SETF (GET '|interpLookup| '|cacheInfo|)
           '(|interpLookup| |interpLookup;AL| |hash-table|
-            (SETQ |interpLookup;AL| (MAKE_HASHTABLE 'UEQUAL))
+            (SETQ |interpLookup;AL| (MAKE_HASHTABLE 'EQUAL))
             (|hashCount| |interpLookup;AL|))))
-(EVAL-WHEN (EVAL LOAD) (SETQ |interpLookup;AL| (MAKE_HASHTABLE 'UEQUAL)))
+(EVAL-WHEN (EVAL LOAD) (SETQ |interpLookup;AL| (MAKE_HASHTABLE 'EQUAL)))

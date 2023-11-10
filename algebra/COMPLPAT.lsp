@@ -1,21 +1,21 @@
 
-(SDEFUN |COMPLPAT;convert;CSP;1| ((|cs| (CS)) ($ (|Pattern| R)))
+(SDEFUN |COMPLPAT;convert;CSP;1| ((|cs| (CS)) (% (|Pattern| R)))
         (COND
-         ((SPADCALL (SPADCALL |cs| (QREFELT $ 14)) (QREFELT $ 15))
-          (SPADCALL (SPADCALL |cs| (QREFELT $ 16)) (QREFELT $ 17)))
+         ((SPADCALL (SPADCALL |cs| (QREFELT % 14)) (QREFELT % 15))
+          (SPADCALL (SPADCALL |cs| (QREFELT % 16)) (QREFELT % 17)))
          ('T
-          (SPADCALL (SPADCALL (SPADCALL |cs| (QREFELT $ 16)) (QREFELT $ 17))
-                    (SPADCALL (QREFELT $ 13)
-                              (SPADCALL (SPADCALL |cs| (QREFELT $ 14))
-                                        (QREFELT $ 17))
-                              (QREFELT $ 18))
-                    (QREFELT $ 19))))) 
+          (SPADCALL (SPADCALL (SPADCALL |cs| (QREFELT % 16)) (QREFELT % 17))
+                    (SPADCALL (QREFELT % 13)
+                              (SPADCALL (SPADCALL |cs| (QREFELT % 14))
+                                        (QREFELT % 17))
+                              (QREFELT % 18))
+                    (QREFELT % 19))))) 
 
 (DECLAIM (NOTINLINE |ComplexPattern;|)) 
 
-(DEFUN |ComplexPattern| (&REST #1=#:G693)
+(DEFUN |ComplexPattern| (&REST #1=#:G451)
   (SPROG NIL
-         (PROG (#2=#:G694)
+         (PROG (#2=#:G452)
            (RETURN
             (COND
              ((LETT #2#
@@ -33,24 +33,24 @@
                   (HREM |$ConstructorCache| '|ComplexPattern|)))))))))) 
 
 (DEFUN |ComplexPattern;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT DV$3 (|devaluate| |#3|))
           (LETT |dv$| (LIST '|ComplexPattern| DV$1 DV$2 DV$3))
-          (LETT $ (GETREFV 21))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 21))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|ComplexPattern|
-                      (LIST DV$1 DV$2 DV$3) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (QSETREFV $ 8 |#3|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 13 (SPADCALL '|%i| 'T NIL NIL (QREFELT $ 12)))
-          $))) 
+                      (LIST DV$1 DV$2 DV$3) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (QSETREFV % 8 |#3|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 13 (SPADCALL '|%i| 'T NIL NIL (QREFELT % 12)))
+          %))) 
 
 (MAKEPROP '|ComplexPattern| '|infovec|
           (LIST

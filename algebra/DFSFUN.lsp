@@ -3,127 +3,127 @@
 
 (SDEFUN |DFSFUN;polygamma;Nni2C;1|
         ((|k| (|NonNegativeInteger|)) (|z| (|Complex| (|DoubleFloat|)))
-         ($ (|Complex| (|DoubleFloat|))))
+         (% (|Complex| (|DoubleFloat|))))
         (|c_psi| |k| |z|)) 
 
 (PUT '|DFSFUN;besselJ;3C;2| '|SPADreplace| '|c_besselj|) 
 
 (SDEFUN |DFSFUN;besselJ;3C;2|
         ((|v| (|Complex| (|DoubleFloat|))) (|z| (|Complex| (|DoubleFloat|)))
-         ($ (|Complex| (|DoubleFloat|))))
+         (% (|Complex| (|DoubleFloat|))))
         (|c_besselj| |v| |z|)) 
 
 (PUT '|DFSFUN;besselJ;3Df;3| '|SPADreplace| '|r_besselj|) 
 
 (SDEFUN |DFSFUN;besselJ;3Df;3|
-        ((|n| (|DoubleFloat|)) (|x| (|DoubleFloat|)) ($ (|DoubleFloat|)))
+        ((|n| (|DoubleFloat|)) (|x| (|DoubleFloat|)) (% (|DoubleFloat|)))
         (|r_besselj| |n| |x|)) 
 
 (PUT '|DFSFUN;besselI;3C;4| '|SPADreplace| '|c_besseli|) 
 
 (SDEFUN |DFSFUN;besselI;3C;4|
         ((|v| (|Complex| (|DoubleFloat|))) (|z| (|Complex| (|DoubleFloat|)))
-         ($ (|Complex| (|DoubleFloat|))))
+         (% (|Complex| (|DoubleFloat|))))
         (|c_besseli| |v| |z|)) 
 
 (PUT '|DFSFUN;besselI;3Df;5| '|SPADreplace| '|r_besseli|) 
 
 (SDEFUN |DFSFUN;besselI;3Df;5|
-        ((|n| (|DoubleFloat|)) (|x| (|DoubleFloat|)) ($ (|DoubleFloat|)))
+        ((|n| (|DoubleFloat|)) (|x| (|DoubleFloat|)) (% (|DoubleFloat|)))
         (|r_besseli| |n| |x|)) 
 
 (SDEFUN |DFSFUN;digamma;2C;6|
-        ((|z| (|Complex| (|DoubleFloat|))) ($ (|Complex| (|DoubleFloat|))))
-        (SPADCALL 0 |z| (QREFELT $ 8))) 
+        ((|z| (|Complex| (|DoubleFloat|))) (% (|Complex| (|DoubleFloat|))))
+        (SPADCALL 0 |z| (QREFELT % 8))) 
 
 (SDEFUN |DFSFUN;besselY;3Df;7|
-        ((|n| (|DoubleFloat|)) (|x| (|DoubleFloat|)) ($ (|DoubleFloat|)))
+        ((|n| (|DoubleFloat|)) (|x| (|DoubleFloat|)) (% (|DoubleFloat|)))
         (SPROG ((|vp| (|DoubleFloat|)))
                (SEQ
                 (COND
-                 ((SPADCALL |n| (QREFELT $ 19))
-                  (LETT |n| (|add_DF| |n| (QREFELT $ 16)))))
+                 ((SPADCALL |n| (QREFELT % 19))
+                  (LETT |n| (|add_DF| |n| (QREFELT % 16)))))
                 (LETT |vp|
                       (|mul_DF| |n| (FLOAT PI MOST-POSITIVE-DOUBLE-FLOAT)))
                 (EXIT
                  (|div_DF|
                   (|sub_DF|
-                   (|mul_DF| (|cos_DF| |vp|) (SPADCALL |n| |x| (QREFELT $ 11)))
-                   (SPADCALL (|minus_DF| |n|) |x| (QREFELT $ 11)))
+                   (|mul_DF| (|cos_DF| |vp|) (SPADCALL |n| |x| (QREFELT % 11)))
+                   (SPADCALL (|minus_DF| |n|) |x| (QREFELT % 11)))
                   (|sin_DF| |vp|)))))) 
 
 (SDEFUN |DFSFUN;besselY;3C;8|
         ((|v| (|Complex| (|DoubleFloat|))) (|z| (|Complex| (|DoubleFloat|)))
-         ($ (|Complex| (|DoubleFloat|))))
+         (% (|Complex| (|DoubleFloat|))))
         (SPROG ((|vp| (|Complex| (|DoubleFloat|))))
                (SEQ
                 (COND
-                 ((SPADCALL |v| (QREFELT $ 22))
+                 ((SPADCALL |v| (QREFELT % 22))
                   (LETT |v|
-                        (SPADCALL |v| (SPADCALL (QREFELT $ 16) (QREFELT $ 23))
-                                  (QREFELT $ 24)))))
+                        (SPADCALL |v| (SPADCALL (QREFELT % 16) (QREFELT % 23))
+                                  (QREFELT % 24)))))
                 (LETT |vp|
-                      (SPADCALL |v| (SPADCALL (QREFELT $ 25)) (QREFELT $ 26)))
+                      (SPADCALL |v| (SPADCALL (QREFELT % 25)) (QREFELT % 26)))
                 (EXIT
                  (SPADCALL
                   (SPADCALL
-                   (SPADCALL (SPADCALL |vp| (QREFELT $ 27))
-                             (SPADCALL |v| |z| (QREFELT $ 9)) (QREFELT $ 26))
-                   (SPADCALL (SPADCALL |v| (QREFELT $ 28)) |z| (QREFELT $ 9))
-                   (QREFELT $ 29))
-                  (SPADCALL |vp| (QREFELT $ 30)) (QREFELT $ 31)))))) 
+                   (SPADCALL (SPADCALL |vp| (QREFELT % 27))
+                             (SPADCALL |v| |z| (QREFELT % 9)) (QREFELT % 26))
+                   (SPADCALL (SPADCALL |v| (QREFELT % 28)) |z| (QREFELT % 9))
+                   (QREFELT % 29))
+                  (SPADCALL |vp| (QREFELT % 30)) (QREFELT % 31)))))) 
 
 (SDEFUN |DFSFUN;besselK;3Df;9|
-        ((|n| (|DoubleFloat|)) (|x| (|DoubleFloat|)) ($ (|DoubleFloat|)))
+        ((|n| (|DoubleFloat|)) (|x| (|DoubleFloat|)) (% (|DoubleFloat|)))
         (SPROG
          ((|ahalf| (|DoubleFloat|)) (|vp| (|DoubleFloat|))
           (|p| (|DoubleFloat|)))
          (SEQ
           (COND
-           ((SPADCALL |n| (QREFELT $ 19))
-            (LETT |n| (|add_DF| |n| (QREFELT $ 16)))))
+           ((SPADCALL |n| (QREFELT % 19))
+            (LETT |n| (|add_DF| |n| (QREFELT % 16)))))
           (LETT |p| (FLOAT PI MOST-POSITIVE-DOUBLE-FLOAT))
           (LETT |vp| (|mul_DF| |n| |p|))
           (LETT |ahalf| (|div_DF| 1.0 (FLOAT 2 MOST-POSITIVE-DOUBLE-FLOAT)))
           (EXIT
            (|div_DF|
             (|mul_DF| (|mul_DF| |p| |ahalf|)
-                      (|sub_DF| (SPADCALL (|minus_DF| |n|) |x| (QREFELT $ 13))
-                                (SPADCALL |n| |x| (QREFELT $ 13))))
+                      (|sub_DF| (SPADCALL (|minus_DF| |n|) |x| (QREFELT % 13))
+                                (SPADCALL |n| |x| (QREFELT % 13))))
             (|sin_DF| |vp|)))))) 
 
 (SDEFUN |DFSFUN;besselK;3C;10|
         ((|v| (|Complex| (|DoubleFloat|))) (|z| (|Complex| (|DoubleFloat|)))
-         ($ (|Complex| (|DoubleFloat|))))
+         (% (|Complex| (|DoubleFloat|))))
         (SPROG
          ((|ahalf| (|Complex| (|DoubleFloat|)))
           (|vp| (|Complex| (|DoubleFloat|))) (|p| (|Complex| (|DoubleFloat|))))
          (SEQ
           (COND
-           ((SPADCALL |v| (QREFELT $ 22))
+           ((SPADCALL |v| (QREFELT % 22))
             (LETT |v|
-                  (SPADCALL |v| (SPADCALL (QREFELT $ 16) (QREFELT $ 23))
-                            (QREFELT $ 24)))))
-          (LETT |p| (SPADCALL (QREFELT $ 25)))
-          (LETT |vp| (SPADCALL |v| |p| (QREFELT $ 26)))
+                  (SPADCALL |v| (SPADCALL (QREFELT % 16) (QREFELT % 23))
+                            (QREFELT % 24)))))
+          (LETT |p| (SPADCALL (QREFELT % 25)))
+          (LETT |vp| (SPADCALL |v| |p| (QREFELT % 26)))
           (LETT |ahalf|
-                (SPADCALL (|spadConstant| $ 33) (SPADCALL 2 (QREFELT $ 36))
-                          (QREFELT $ 31)))
+                (SPADCALL (|spadConstant| % 33) (SPADCALL 2 (QREFELT % 36))
+                          (QREFELT % 31)))
           (EXIT
            (SPADCALL
-            (SPADCALL (SPADCALL |p| |ahalf| (QREFELT $ 26))
+            (SPADCALL (SPADCALL |p| |ahalf| (QREFELT % 26))
                       (SPADCALL
-                       (SPADCALL (SPADCALL |v| (QREFELT $ 28)) |z|
-                                 (QREFELT $ 12))
-                       (SPADCALL |v| |z| (QREFELT $ 12)) (QREFELT $ 29))
-                      (QREFELT $ 26))
-            (SPADCALL |vp| (QREFELT $ 30)) (QREFELT $ 31)))))) 
+                       (SPADCALL (SPADCALL |v| (QREFELT % 28)) |z|
+                                 (QREFELT % 12))
+                       (SPADCALL |v| |z| (QREFELT % 12)) (QREFELT % 29))
+                      (QREFELT % 26))
+            (SPADCALL |vp| (QREFELT % 30)) (QREFELT % 31)))))) 
 
 (DECLAIM (NOTINLINE |DoubleFloatSpecialFunctions;|)) 
 
 (DEFUN |DoubleFloatSpecialFunctions| ()
   (SPROG NIL
-         (PROG (#1=#:G729)
+         (PROG (#1=#:G471)
            (RETURN
             (COND
              ((LETT #1#
@@ -145,19 +145,19 @@
                         '|DoubleFloatSpecialFunctions|)))))))))) 
 
 (DEFUN |DoubleFloatSpecialFunctions;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|DoubleFloatSpecialFunctions|))
-          (LETT $ (GETREFV 38))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 38))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|DoubleFloatSpecialFunctions| NIL
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 16
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 16
                     (|expt_DF_I| (FLOAT 10 MOST-POSITIVE-DOUBLE-FLOAT) -7))
-          $))) 
+          %))) 
 
 (MAKEPROP '|DoubleFloatSpecialFunctions| '|infovec|
           (LIST

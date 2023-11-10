@@ -8,48 +8,48 @@
         (T (SETQ |StringAggregate;AL| (|StringAggregate;|))))) 
 
 (DEFUN |StringAggregate;| ()
-  (SPROG ((#1=#:G690 NIL))
+  (SPROG ((#1=#:G449 NIL))
          (PROG1
              (LETT #1#
-                   (|subst_in_cat| '(#2=#:G689) (LIST '(|Character|))
+                   (|subst_in_cat| '(#2=#:G448) (LIST '(|Character|))
                                    (|Join|
                                     (|OneDimensionalArrayAggregate| '#2#)
                                     (|mkCategory|
-                                     '(((|lowerCase| ($ $)) T)
-                                       ((|lowerCase!| ($ $)) T)
-                                       ((|upperCase| ($ $)) T)
-                                       ((|upperCase!| ($ $)) T)
-                                       ((|prefix?| ((|Boolean|) $ $)) T)
-                                       ((|suffix?| ((|Boolean|) $ $)) T)
+                                     '(((|lowerCase| (% %)) T)
+                                       ((|lowerCase!| (% %)) T)
+                                       ((|upperCase| (% %)) T)
+                                       ((|upperCase!| (% %)) T)
+                                       ((|prefix?| ((|Boolean|) % %)) T)
+                                       ((|suffix?| ((|Boolean|) % %)) T)
                                        ((|substring?|
-                                         ((|Boolean|) $ $ (|Integer|)))
+                                         ((|Boolean|) % % (|Integer|)))
                                         T)
                                        ((|match?|
-                                         ((|Boolean|) $ $ (|Character|)))
+                                         ((|Boolean|) % % (|Character|)))
                                         T)
                                        ((|replace|
-                                         ($ $ (|UniversalSegment| (|Integer|))
-                                          $))
+                                         (% % (|UniversalSegment| (|Integer|))
+                                          %))
                                         T)
                                        ((|position|
-                                         ((|Integer|) $ $ (|Integer|)))
+                                         ((|Integer|) % % (|Integer|)))
                                         T)
                                        ((|position|
-                                         ((|Integer|) (|CharacterClass|) $
+                                         ((|Integer|) (|CharacterClass|) %
                                           (|Integer|)))
                                         T)
-                                       ((|coerce| ($ (|Character|))) T)
-                                       ((|split| ((|List| $) $ (|Character|)))
+                                       ((|coerce| (% (|Character|))) T)
+                                       ((|split| ((|List| %) % (|Character|)))
                                         T)
                                        ((|split|
-                                         ((|List| $) $ (|CharacterClass|)))
+                                         ((|List| %) % (|CharacterClass|)))
                                         T)
-                                       ((|trim| ($ $ (|CharacterClass|))) T)
-                                       ((|leftTrim| ($ $ (|CharacterClass|)))
+                                       ((|trim| (% % (|CharacterClass|))) T)
+                                       ((|leftTrim| (% % (|CharacterClass|)))
                                         T)
-                                       ((|rightTrim| ($ $ (|CharacterClass|)))
+                                       ((|rightTrim| (% % (|CharacterClass|)))
                                         T)
-                                       ((|elt| ($ $ $)) T))
+                                       ((|elt| (% % %)) T))
                                      NIL NIL NIL))))
            (SETELT #1# 0 '(|StringAggregate|))))) 
 

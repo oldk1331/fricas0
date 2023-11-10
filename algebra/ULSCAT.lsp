@@ -6,7 +6,7 @@
 (DEFPARAMETER |UnivariateLaurentSeriesCategory;AL| 'NIL) 
 
 (DEFUN |UnivariateLaurentSeriesCategory| (|t#1|)
-  (LET (#1=#:G696 (#2=#:G697 (|devaluate| |t#1|)))
+  (LET (#1=#:G452 (#2=#:G453 (|devaluate| |t#1|)))
     (COND
      ((SETQ #1# (|assoc| #2# |UnivariateLaurentSeriesCategory;AL|)) (CDR #1#))
      (T
@@ -17,11 +17,11 @@
       #1#)))) 
 
 (DEFUN |UnivariateLaurentSeriesCategory;| (|t#1|)
-  (SPROG ((#1=#:G695 NIL))
+  (SPROG ((#1=#:G451 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
-                                   (|subst_in_cat| '(#2=#:G694)
+                                   (|subst_in_cat| '(#2=#:G450)
                                                    (LIST '(|Integer|))
                                                    (COND
                                                     (|UnivariateLaurentSeriesCategory;CAT|)
@@ -33,7 +33,7 @@
                                                         '|t#1| '#2#)
                                                        (|mkCategory|
                                                         '(((|series|
-                                                            ($
+                                                            (%
                                                              (|Stream|
                                                               (|Record|
                                                                (|:| |k|
@@ -42,27 +42,27 @@
                                                                     |t#1|)))))
                                                            T)
                                                           ((|laurent|
-                                                            ($ (|Integer|)
+                                                            (% (|Integer|)
                                                              (|Stream| |t#1|)))
                                                            T)
                                                           ((|multiplyCoefficients|
-                                                            ($
+                                                            (%
                                                              (|Mapping| |t#1|
                                                                         (|Integer|))
-                                                             $))
+                                                             %))
                                                            T)
                                                           ((|rationalFunction|
                                                             ((|Fraction|
                                                               (|Polynomial|
                                                                |t#1|))
-                                                             $ (|Integer|)))
+                                                             % (|Integer|)))
                                                            (|has| |t#1|
                                                                   (|IntegralDomain|)))
                                                           ((|rationalFunction|
                                                             ((|Fraction|
                                                               (|Polynomial|
                                                                |t#1|))
-                                                             $ (|Integer|)
+                                                             % (|Integer|)
                                                              (|Integer|)))
                                                            (|has| |t#1|
                                                                   (|IntegralDomain|))))

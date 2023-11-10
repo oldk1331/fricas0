@@ -6,7 +6,7 @@
 (DEFPARAMETER |FiniteRankAlgebra;AL| 'NIL) 
 
 (DEFUN |FiniteRankAlgebra| (|t#1| |t#2|)
-  (LET (#1=#:G690 (#2=#:G691 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
+  (LET (#1=#:G449 (#2=#:G450 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
     (COND ((SETQ #1# (|assoc| #2# |FiniteRankAlgebra;AL|)) (CDR #1#))
           (T
            (SETQ |FiniteRankAlgebra;AL|
@@ -16,7 +16,7 @@
            #1#)))) 
 
 (DEFUN |FiniteRankAlgebra;| (|t#1| |t#2|)
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2|) (LIST |t#1| |t#2|)
@@ -31,39 +31,39 @@
                                                             T)
                                                            ((|regularRepresentation|
                                                              ((|Matrix| |t#1|)
-                                                              $ (|Vector| $)))
+                                                              % (|Vector| %)))
                                                             T)
-                                                           ((|trace| (|t#1| $))
+                                                           ((|trace| (|t#1| %))
                                                             T)
-                                                           ((|norm| (|t#1| $))
+                                                           ((|norm| (|t#1| %))
                                                             T)
                                                            ((|coordinates|
                                                              ((|Vector| |t#1|)
-                                                              $ (|Vector| $)))
+                                                              % (|Vector| %)))
                                                             T)
                                                            ((|coordinates|
                                                              ((|Matrix| |t#1|)
-                                                              (|Vector| $)
-                                                              (|Vector| $)))
+                                                              (|Vector| %)
+                                                              (|Vector| %)))
                                                             T)
                                                            ((|represents|
-                                                             ($
+                                                             (%
                                                               (|Vector| |t#1|)
-                                                              (|Vector| $)))
+                                                              (|Vector| %)))
                                                             T)
                                                            ((|discriminant|
                                                              (|t#1|
-                                                              (|Vector| $)))
+                                                              (|Vector| %)))
                                                             T)
                                                            ((|traceMatrix|
                                                              ((|Matrix| |t#1|)
-                                                              (|Vector| $)))
+                                                              (|Vector| %)))
                                                             T)
                                                            ((|characteristicPolynomial|
-                                                             (|t#2| $))
+                                                             (|t#2| %))
                                                             T)
                                                            ((|minimalPolynomial|
-                                                             (|t#2| $))
+                                                             (|t#2| %))
                                                             (|has| |t#1|
                                                                    (|Field|))))
                                                          '(((|CharacteristicZero|)

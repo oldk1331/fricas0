@@ -524,11 +524,11 @@
              (|removeZeroOneDestructively| (CDR |t|))))))))
 
 ; listSort(pred,list,:optional) ==
-;    NOT functionp pred => error "listSort: first arg must be a function"
-;    NOT LISTP list => error "listSort: second argument must be a list"
+;    NOT functionp pred => error '"listSort: first arg must be a function"
+;    NOT LISTP list => error '"listSort: second argument must be a list"
 ;    NULL optional => mergeSort(pred,function Identity,list,LENGTH list)
 ;    key := CAR optional
-;    NOT functionp key => error "listSort: last arg must be a function"
+;    NOT functionp key => error '"listSort: last arg must be a function"
 ;    mergeSort(pred,key,list,LENGTH list)
 
 (DEFUN |listSort| (|pred| LIST &REST |optional|)
@@ -536,16 +536,16 @@
     (RETURN
      (COND
       ((NULL (|functionp| |pred|))
-       (|error| '|listSort: first arg must be a function|))
+       (|error| "listSort: first arg must be a function"))
       ((NULL (LISTP LIST))
-       (|error| '|listSort: second argument must be a list|))
+       (|error| "listSort: second argument must be a list"))
       ((NULL |optional|) (|mergeSort| |pred| #'|Identity| LIST (LENGTH LIST)))
       (#1='T
        (PROGN
         (SETQ |key| (CAR |optional|))
         (COND
          ((NULL (|functionp| |key|))
-          (|error| '|listSort: last arg must be a function|))
+          (|error| "listSort: last arg must be a function"))
          (#1# (|mergeSort| |pred| |key| LIST (LENGTH LIST))))))))))
 
 ; MSORT list == listSort(function GLESSEQP, COPY_-LIST list)
@@ -639,10 +639,6 @@
       (SETQ |q| (|mergeSort| |f| |g| |q| (|sub_SI| |n| |l|)))
       (|mergeInPlace| |f| |g| |p| |q|)))))
 
-; throw_to_reader() == THROW('SPAD_READER, nil)
-
-(DEFUN |throw_to_reader| () (PROG () (RETURN (THROW 'SPAD_READER NIL))))
-
 ; spadThrow() ==
 ;   if $interpOnly and $mapName then
 ;     putHist($mapName,'localModemap, nil, $e)
@@ -667,7 +663,7 @@
   (PROG () (RETURN (PROGN (|sayBrightly| |x|) (|spadThrow|)))))
 
 ; formatUnabbreviatedSig sig ==
-;   null sig => ["() -> ()"]
+;   null sig => ['"() -> ()"]
 ;   [target,:args] := sig
 ;   target := formatUnabbreviated target
 ;   null args => ['"() -> ",:target]
@@ -678,7 +674,7 @@
 (DEFUN |formatUnabbreviatedSig| (|sig|)
   (PROG (|target| |args|)
     (RETURN
-     (COND ((NULL |sig|) (LIST '|() -> ()|))
+     (COND ((NULL |sig|) (LIST "() -> ()"))
            (#1='T
             (PROGN
              (SETQ |target| (CAR |sig|))
@@ -716,6 +712,7 @@
                                    (QCDR |t|))))))))))))
 
 ; formatUnabbreviated t ==
+;   t = '% => ['"%%"]
 ;   atom t =>
 ;     [t]
 ;   null t =>
@@ -739,7 +736,8 @@
 (DEFUN |formatUnabbreviated| (|t|)
   (PROG (|p| |ISTMP#1| |sel| |ISTMP#2| |arg| |args| |arg1|)
     (RETURN
-     (COND ((ATOM |t|) (LIST |t|)) ((NULL |t|) (LIST "()"))
+     (COND ((EQ |t| '%) (LIST "%%")) ((ATOM |t|) (LIST |t|))
+           ((NULL |t|) (LIST "()"))
            ((AND (CONSP |t|)
                  (PROGN
                   (SETQ |p| (CAR |t|))
@@ -1248,13 +1246,13 @@
 
 (EVAL-WHEN (EVAL LOAD) (SETQ |$charFauxNewline| (CODE-CHAR 25)))
 
-; $stringNewline      := PNAME CODE_-CHAR(10)
+; $stringNewline      := STRING($charNewline)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$stringNewline| (PNAME (CODE-CHAR 10))))
+(EVAL-WHEN (EVAL LOAD) (SETQ |$stringNewline| (STRING |$charNewline|)))
 
-; $stringFauxNewline  := PNAME CODE_-CHAR(25)
+; $stringFauxNewline  := STRING($charFauxNewline)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$stringFauxNewline| (PNAME (CODE-CHAR 25))))
+(EVAL-WHEN (EVAL LOAD) (SETQ |$stringFauxNewline| (STRING |$charFauxNewline|)))
 
 ; $charExclusions := [char 'a, char 'A]
 

@@ -427,7 +427,7 @@
 ; unabbrevRecordComponent(a,modeIfTrue) ==
 ;   a is ["Declare",b,T] or a is [":",b,T] =>
 ;     [":",b,unabbrev1(T,modeIfTrue)]
-;   userError "wrong format for Record type"
+;   userError '"wrong format for Record type"
 
 (DEFUN |unabbrevRecordComponent| (|a| |modeIfTrue|)
   (PROG (|ISTMP#1| |b| |ISTMP#2| T$)
@@ -453,7 +453,7 @@
                     (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
                          (PROGN (SETQ T$ (CAR |ISTMP#2|)) #1#)))))))
        (LIST '|:| |b| (|unabbrev1| T$ |modeIfTrue|)))
-      (#1# (|userError| '|wrong format for Record type|))))))
+      (#1# (|userError| "wrong format for Record type"))))))
 
 ; unabbrevUnionComponent(a,modeIfTrue) ==
 ;   a is ["Declare",b,T] or a is [":",b,T] =>

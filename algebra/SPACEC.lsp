@@ -6,7 +6,7 @@
 (DEFPARAMETER |ThreeSpaceCategory;AL| 'NIL) 
 
 (DEFUN |ThreeSpaceCategory| (|t#1|)
-  (LET (#1=#:G690 (#2=#:G691 (|devaluate| |t#1|)))
+  (LET (#1=#:G449 (#2=#:G450 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |ThreeSpaceCategory;AL|)) (CDR #1#))
           (T
            (SETQ |ThreeSpaceCategory;AL|
@@ -15,7 +15,7 @@
            #1#)))) 
 
 (DEFUN |ThreeSpaceCategory;| (|t#1|)
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -25,85 +25,85 @@
                                                 (|Join| (|SetCategory|)
                                                         (|mkCategory|
                                                          '(((|create3Space|
-                                                             ($))
+                                                             (%))
                                                             T)
                                                            ((|create3Space|
-                                                             ($
+                                                             (%
                                                               (|SubSpace| 3
                                                                           |t#1|)))
                                                             T)
                                                            ((|numberOfComponents|
                                                              ((|NonNegativeInteger|)
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|numberOfComposites|
                                                              ((|NonNegativeInteger|)
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|merge|
-                                                             ($ (|List| $)))
+                                                             (% (|List| %)))
                                                             T)
-                                                           ((|merge| ($ $ $))
+                                                           ((|merge| (% % %))
                                                             T)
                                                            ((|composite|
-                                                             ($ (|List| $)))
+                                                             (% (|List| %)))
                                                             T)
                                                            ((|components|
-                                                             ((|List| $) $))
+                                                             ((|List| %) %))
                                                             T)
                                                            ((|composites|
-                                                             ((|List| $) $))
+                                                             ((|List| %) %))
                                                             T)
-                                                           ((|copy| ($ $)) T)
+                                                           ((|copy| (% %)) T)
                                                            ((|enterPointData|
                                                              ((|NonNegativeInteger|)
-                                                              $
+                                                              %
                                                               (|List|
                                                                (|Point|
                                                                 |t#1|))))
                                                             T)
                                                            ((|modifyPointData|
-                                                             ($ $
+                                                             (% %
                                                               (|NonNegativeInteger|)
                                                               (|Point| |t#1|)))
                                                             T)
                                                            ((|point|
-                                                             ($ $
+                                                             (% %
                                                               (|Point| |t#1|)))
                                                             T)
                                                            ((|point|
-                                                             ($ $
+                                                             (% %
                                                               (|List| |t#1|)))
                                                             T)
                                                            ((|point|
-                                                             ($ $
+                                                             (% %
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|point|
-                                                             ($
+                                                             (%
                                                               (|Point| |t#1|)))
                                                             T)
                                                            ((|point|
                                                              ((|Point| |t#1|)
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|point?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|curve|
-                                                             ($ $
+                                                             (% %
                                                               (|List|
                                                                (|Point|
                                                                 |t#1|))))
                                                             T)
                                                            ((|curve|
-                                                             ($ $
+                                                             (% %
                                                               (|List|
                                                                (|List|
                                                                 |t#1|))))
                                                             T)
                                                            ((|curve|
-                                                             ($
+                                                             (%
                                                               (|List|
                                                                (|Point|
                                                                 |t#1|))))
@@ -111,25 +111,25 @@
                                                            ((|curve|
                                                              ((|List|
                                                                (|Point| |t#1|))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|curve?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|closedCurve|
-                                                             ($ $
+                                                             (% %
                                                               (|List|
                                                                (|Point|
                                                                 |t#1|))))
                                                             T)
                                                            ((|closedCurve|
-                                                             ($ $
+                                                             (% %
                                                               (|List|
                                                                (|List|
                                                                 |t#1|))))
                                                             T)
                                                            ((|closedCurve|
-                                                             ($
+                                                             (%
                                                               (|List|
                                                                (|Point|
                                                                 |t#1|))))
@@ -137,25 +137,25 @@
                                                            ((|closedCurve|
                                                              ((|List|
                                                                (|Point| |t#1|))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|closedCurve?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|polygon|
-                                                             ($ $
+                                                             (% %
                                                               (|List|
                                                                (|Point|
                                                                 |t#1|))))
                                                             T)
                                                            ((|polygon|
-                                                             ($ $
+                                                             (% %
                                                               (|List|
                                                                (|List|
                                                                 |t#1|))))
                                                             T)
                                                            ((|polygon|
-                                                             ($
+                                                             (%
                                                               (|List|
                                                                (|Point|
                                                                 |t#1|))))
@@ -163,13 +163,13 @@
                                                            ((|polygon|
                                                              ((|List|
                                                                (|Point| |t#1|))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|polygon?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|mesh|
-                                                             ($ $
+                                                             (% %
                                                               (|List|
                                                                (|List|
                                                                 (|Point|
@@ -179,7 +179,7 @@
                                                               (|SubSpaceComponentProperty|)))
                                                             T)
                                                            ((|mesh|
-                                                             ($ $
+                                                             (% %
                                                               (|List|
                                                                (|List|
                                                                 (|List|
@@ -189,7 +189,7 @@
                                                               (|SubSpaceComponentProperty|)))
                                                             T)
                                                            ((|mesh|
-                                                             ($ $
+                                                             (% %
                                                               (|List|
                                                                (|List|
                                                                 (|Point|
@@ -198,7 +198,7 @@
                                                               (|Boolean|)))
                                                             T)
                                                            ((|mesh|
-                                                             ($ $
+                                                             (% %
                                                               (|List|
                                                                (|List|
                                                                 (|List|
@@ -207,14 +207,14 @@
                                                               (|Boolean|)))
                                                             T)
                                                            ((|mesh|
-                                                             ($
+                                                             (%
                                                               (|List|
                                                                (|List|
                                                                 (|Point|
                                                                  |t#1|)))))
                                                             T)
                                                            ((|mesh|
-                                                             ($
+                                                             (%
                                                               (|List|
                                                                (|List|
                                                                 (|Point|
@@ -227,22 +227,22 @@
                                                                (|List|
                                                                 (|Point|
                                                                  |t#1|)))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|mesh?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|lp|
                                                              ((|List|
                                                                (|Point| |t#1|))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|lllip|
                                                              ((|List|
                                                                (|List|
                                                                 (|List|
                                                                  (|NonNegativeInteger|))))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|lllp|
                                                              ((|List|
@@ -250,18 +250,18 @@
                                                                 (|List|
                                                                  (|Point|
                                                                   |t#1|))))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|llprop|
                                                              ((|List|
                                                                (|List|
                                                                 (|SubSpaceComponentProperty|)))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|lprop|
                                                              ((|List|
                                                                (|SubSpaceComponentProperty|))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|objects|
                                                              ((|Record|
@@ -274,17 +274,17 @@
                                                                (|:|
                                                                 |constructs|
                                                                 (|NonNegativeInteger|)))
-                                                              $))
+                                                              %))
                                                             T)
-                                                           ((|check| ($ $)) T)
+                                                           ((|check| (% %)) T)
                                                            ((|subspace|
                                                              ((|SubSpace| 3
                                                                           |t#1|)
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|coerce|
                                                              ((|OutputForm|)
-                                                              $))
+                                                              %))
                                                             T))
                                                          NIL NIL NIL)))))))
            (SETELT #1# 0 (LIST '|ThreeSpaceCategory| |t#1|))))) 

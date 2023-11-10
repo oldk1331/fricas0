@@ -1,21 +1,21 @@
 
 (SDEFUN |MAGCDT4;FP_to_MP|
-        ((|p| (|FakePolynomial|)) ($ (|Polynomial| (|Integer|))))
+        ((|p| (|FakePolynomial|)) (% (|Polynomial| (|Integer|))))
         (SPROG
          ((|p2|
            (|Record| (|:| |numer| (|Polynomial| (|Integer|)))
                      (|:| |denom| (|Polynomial| (|Integer|))))))
-         (SEQ (LETT |p2| (SPADCALL |p| (QREFELT $ 8)))
+         (SEQ (LETT |p2| (SPADCALL |p| (QREFELT % 8)))
               (COND
                ((NULL
-                 (SPADCALL (QCDR |p2|) (|spadConstant| $ 10) (QREFELT $ 12)))
+                 (SPADCALL (QCDR |p2|) (|spadConstant| % 10) (QREFELT % 12)))
                 (EXIT (|error| "FP_to_MP: denom(p2) = 1"))))
               (EXIT (QCAR |p2|))))) 
 
 (SDEFUN |MAGCDT4;pack_modulus;LLIU;2|
         ((|lm| (|List| (|FakePolynomial|))) (|lvz| (|List| (|Symbol|)))
          (|p| (|Integer|))
-         ($
+         (%
           (|Union|
            (|Record| (|:| |svz| (|List| (|Symbol|)))
                      (|:| |sm| (|List| (|Polynomial| (|Integer|))))
@@ -23,8 +23,8 @@
                      (|:| |sp| (|Integer|)))
            "failed")))
         (SPROG
-         ((|lm2| (|List| (|Polynomial| (|Integer|)))) (#1=#:G718 NIL) (|m| NIL)
-          (#2=#:G717 NIL))
+         ((|lm2| (|List| (|Polynomial| (|Integer|)))) (#1=#:G465 NIL) (|m| NIL)
+          (#2=#:G464 NIL))
          (SEQ
           (LETT |lm2|
                 (PROGN
@@ -34,10 +34,10 @@
                        ((OR (ATOM #1#) (PROGN (LETT |m| (CAR #1#)) NIL))
                         (GO G191)))
                       (SEQ
-                       (EXIT (LETT #2# (CONS (|MAGCDT4;FP_to_MP| |m| $) #2#))))
+                       (EXIT (LETT #2# (CONS (|MAGCDT4;FP_to_MP| |m| %) #2#))))
                       (LETT #1# (CDR #1#)) (GO G190) G191
                       (EXIT (NREVERSE #2#)))))
-          (EXIT (SPADCALL |lm2| |lvz| |p| (QREFELT $ 18)))))) 
+          (EXIT (SPADCALL |lm2| |lvz| |p| (QREFELT % 18)))))) 
 
 (SDEFUN |MAGCDT4;FrP_to_MP|
         ((|c|
@@ -48,7 +48,7 @@
                     (|:| |sm| (|List| (|Polynomial| (|Integer|))))
                     (|:| |msizes| (|List| (|Integer|)))
                     (|:| |sp| (|Integer|))))
-         ($ (|Union| (|Polynomial| (|Integer|)) "failed")))
+         (% (|Union| (|Polynomial| (|Integer|)) "failed")))
         (SPROG
          ((|res1|
            (|Union| (|SparseUnivariatePolynomial| (|Polynomial| (|Integer|)))
@@ -56,19 +56,19 @@
           (|p1| (|SparseUnivariatePolynomial| (|Polynomial| (|Integer|)))))
          (SEQ
           (COND
-           ((SPADCALL (QCDR |c|) (|spadConstant| $ 21) (QREFELT $ 12))
+           ((SPADCALL (QCDR |c|) (|spadConstant| % 21) (QREFELT % 12))
             (CONS 1 "failed"))
            (#1='T
             (SEQ
              (LETT |p1|
-                   (SPADCALL (SPADCALL (QCDR |c|) 1 (QREFELT $ 24))
-                             (SPADCALL (QCAR |c|) (QREFELT $ 25))
-                             (QREFELT $ 26)))
-             (LETT |res1| (SPADCALL |p1| |mu| (QREFELT $ 28)))
+                   (SPADCALL (SPADCALL (QCDR |c|) 1 (QREFELT % 24))
+                             (SPADCALL (QCAR |c|) (QREFELT % 25))
+                             (QREFELT % 26)))
+             (LETT |res1| (SPADCALL |p1| |mu| (QREFELT % 28)))
              (EXIT
               (COND ((QEQCAR |res1| 1) (CONS 1 "failed"))
                     (#1#
-                     (CONS 0 (SPADCALL (QCDR |res1|) 0 (QREFELT $ 30)))))))))))) 
+                     (CONS 0 (SPADCALL (QCDR |res1|) 0 (QREFELT % 30)))))))))))) 
 
 (SDEFUN |MAGCDT4;MPtoMPT;FpSLRU;4|
         ((|p| (|FakePolynomial|)) (|ivx| #1=(|Symbol|)) (|ivz| (|List| #1#))
@@ -77,24 +77,24 @@
                     (|:| |sm| (|List| (|Polynomial| (|Integer|))))
                     (|:| |msizes| (|List| (|Integer|)))
                     (|:| |sp| (|Integer|))))
-         ($
+         (%
           (|Union| (|SparseUnivariatePolynomial| (|Polynomial| (|Integer|)))
                    "failed")))
         (SPROG NIL
-               (SPADCALL (CONS #'|MAGCDT4;MPtoMPT;FpSLRU;4!0| (VECTOR $ |mu|))
-                         |p| (QREFELT $ 33)))) 
+               (SPADCALL (CONS #'|MAGCDT4;MPtoMPT;FpSLRU;4!0| (VECTOR % |mu|))
+                         |p| (QREFELT % 33)))) 
 
 (SDEFUN |MAGCDT4;MPtoMPT;FpSLRU;4!0| ((|c| NIL) ($$ NIL))
-        (PROG (|mu| $)
+        (PROG (|mu| %)
           (LETT |mu| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (|MAGCDT4;FrP_to_MP| |c| |mu| $))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (|MAGCDT4;FrP_to_MP| |c| |mu| %))))) 
 
 (DECLAIM (NOTINLINE |ModularAlgebraicGcdTools4;|)) 
 
 (DEFUN |ModularAlgebraicGcdTools4| ()
   (SPROG NIL
-         (PROG (#1=#:G741)
+         (PROG (#1=#:G487)
            (RETURN
             (COND
              ((LETT #1#
@@ -115,17 +115,17 @@
                         '|ModularAlgebraicGcdTools4|)))))))))) 
 
 (DEFUN |ModularAlgebraicGcdTools4;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|ModularAlgebraicGcdTools4|))
-          (LETT $ (GETREFV 39))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 39))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|ModularAlgebraicGcdTools4| NIL
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|ModularAlgebraicGcdTools4| '|infovec|
           (LIST

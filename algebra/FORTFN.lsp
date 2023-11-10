@@ -8,51 +8,51 @@
         (T (SETQ |FortranFunctionCategory;AL| (|FortranFunctionCategory;|))))) 
 
 (DEFUN |FortranFunctionCategory;| ()
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|FortranProgramCategory|)
                            (|mkCategory|
-                            '(((|coerce| ($ (|List| (|FortranCode|)))) T)
-                              ((|coerce| ($ (|FortranCode|))) T)
+                            '(((|coerce| (% (|List| (|FortranCode|)))) T)
+                              ((|coerce| (% (|FortranCode|))) T)
                               ((|coerce|
-                                ($
+                                (%
                                  (|Record| (|:| |localSymbols| (|SymbolTable|))
                                            (|:| |code|
                                                 (|List| (|FortranCode|))))))
                                T)
-                              ((|retract| ($ (|Expression| (|Float|)))) T)
+                              ((|retract| (% (|Expression| (|Float|)))) T)
                               ((|retractIfCan|
-                                ((|Union| $ "failed")
+                                ((|Union| % "failed")
                                  (|Expression| (|Float|))))
                                T)
-                              ((|retract| ($ (|Expression| (|Integer|)))) T)
+                              ((|retract| (% (|Expression| (|Integer|)))) T)
                               ((|retractIfCan|
-                                ((|Union| $ "failed")
+                                ((|Union| % "failed")
                                  (|Expression| (|Integer|))))
                                T)
-                              ((|retract| ($ (|Polynomial| (|Float|)))) T)
+                              ((|retract| (% (|Polynomial| (|Float|)))) T)
                               ((|retractIfCan|
-                                ((|Union| $ "failed")
+                                ((|Union| % "failed")
                                  (|Polynomial| (|Float|))))
                                T)
-                              ((|retract| ($ (|Polynomial| (|Integer|)))) T)
+                              ((|retract| (% (|Polynomial| (|Integer|)))) T)
                               ((|retractIfCan|
-                                ((|Union| $ "failed")
+                                ((|Union| % "failed")
                                  (|Polynomial| (|Integer|))))
                                T)
                               ((|retract|
-                                ($ (|Fraction| (|Polynomial| (|Float|)))))
+                                (% (|Fraction| (|Polynomial| (|Float|)))))
                                T)
                               ((|retractIfCan|
-                                ((|Union| $ "failed")
+                                ((|Union| % "failed")
                                  (|Fraction| (|Polynomial| (|Float|)))))
                                T)
                               ((|retract|
-                                ($ (|Fraction| (|Polynomial| (|Integer|)))))
+                                (% (|Fraction| (|Polynomial| (|Integer|)))))
                                T)
                               ((|retractIfCan|
-                                ((|Union| $ "failed")
+                                ((|Union| % "failed")
                                  (|Fraction| (|Polynomial| (|Integer|)))))
                                T))
                             NIL NIL NIL)))

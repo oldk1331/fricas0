@@ -1,25 +1,25 @@
 
-(SDEFUN |FPC-;primeFrobenius;2S;1| ((|a| (S)) ($ (S)))
-        (SPADCALL |a| (SPADCALL (QREFELT $ 8)) (QREFELT $ 9))) 
+(SDEFUN |FPC-;primeFrobenius;2S;1| ((|a| (S)) (% (S)))
+        (SPADCALL |a| (SPADCALL (QREFELT % 8)) (QREFELT % 9))) 
 
 (SDEFUN |FPC-;primeFrobenius;SNniS;2|
-        ((|a| (S)) (|s| (|NonNegativeInteger|)) ($ (S)))
-        (SPADCALL |a| (EXPT (SPADCALL (QREFELT $ 8)) |s|) (QREFELT $ 9))) 
+        ((|a| (S)) (|s| (|NonNegativeInteger|)) (% (S)))
+        (SPADCALL |a| (EXPT (SPADCALL (QREFELT % 8)) |s|) (QREFELT % 9))) 
 
 (DECLAIM (NOTINLINE |FieldOfPrimeCharacteristic&;|)) 
 
 (DEFUN |FieldOfPrimeCharacteristic&| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|FieldOfPrimeCharacteristic&| DV$1))
-          (LETT $ (GETREFV 12))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 12))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|FieldOfPrimeCharacteristic&| '|infovec|
           (LIST

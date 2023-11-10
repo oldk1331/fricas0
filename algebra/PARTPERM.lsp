@@ -1,40 +1,40 @@
 
 (SDEFUN |PARTPERM;partitions;3IS;1|
         ((M (|Integer|)) (N (|Integer|)) (|n| (|Integer|))
-         ($ (|Stream| (|List| (|Integer|)))))
+         (% (|Stream| (|List| (|Integer|)))))
         (SPROG ((|c| (|Stream| (|List| (|Integer|)))))
                (SEQ
                 (COND
                  ((ZEROP |n|)
-                  (SPADCALL NIL (SPADCALL (QREFELT $ 7)) (QREFELT $ 9)))
+                  (SPADCALL NIL (SPADCALL (QREFELT % 7)) (QREFELT % 9)))
                  ((OR (ZEROP M) (OR (ZEROP N) (< |n| 0)))
-                  (SPADCALL (QREFELT $ 7)))
+                  (SPADCALL (QREFELT % 7)))
                  ('T
                   (SEQ
                    (LETT |c|
                          (SPADCALL
-                          (CONS #'|PARTPERM;partitions;3IS;1!0| (VECTOR $ N))
-                          (SPADCALL (- M 1) N (- |n| N) (QREFELT $ 12))
-                          (QREFELT $ 14)))
+                          (CONS #'|PARTPERM;partitions;3IS;1!0| (VECTOR % N))
+                          (SPADCALL (- M 1) N (- |n| N) (QREFELT % 12))
+                          (QREFELT % 14)))
                    (EXIT
-                    (SPADCALL |c| (SPADCALL M (- N 1) |n| (QREFELT $ 12))
-                              (QREFELT $ 15))))))))) 
+                    (SPADCALL |c| (SPADCALL M (- N 1) |n| (QREFELT % 12))
+                              (QREFELT % 15))))))))) 
 
 (SDEFUN |PARTPERM;partitions;3IS;1!0| ((|l1| NIL) ($$ NIL))
-        (PROG (N $)
+        (PROG (N %)
           (LETT N (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL N |l1| (QREFELT $ 11)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL N |l1| (QREFELT % 11)))))) 
 
 (SDEFUN |PARTPERM;partitions;IS;2|
-        ((|n| (|Integer|)) ($ (|Stream| (|List| (|Integer|)))))
-        (SPADCALL |n| |n| |n| (QREFELT $ 12))) 
+        ((|n| (|Integer|)) (% (|Stream| (|List| (|Integer|)))))
+        (SPADCALL |n| |n| |n| (QREFELT % 12))) 
 
 (SDEFUN |PARTPERM;partitions;2IS;3|
-        ((M (|Integer|)) (N (|Integer|)) ($ (|Stream| (|List| (|Integer|)))))
+        ((M (|Integer|)) (N (|Integer|)) (% (|Stream| (|List| (|Integer|)))))
         (SPROG
-         ((|aaa| (|List| (|Stream| (|List| (|Integer|))))) (#1=#:G724 NIL)
-          (|i| NIL) (#2=#:G723 NIL))
+         ((|aaa| (|List| (|Stream| (|List| (|Integer|))))) (#1=#:G472 NIL)
+          (|i| NIL) (#2=#:G471 NIL))
          (SEQ
           (LETT |aaa|
                 (PROGN
@@ -44,80 +44,80 @@
                       (SEQ
                        (EXIT
                         (LETT #2#
-                              (CONS (SPADCALL M N |i| (QREFELT $ 12)) #2#))))
+                              (CONS (SPADCALL M N |i| (QREFELT % 12)) #2#))))
                       (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                       (EXIT (NREVERSE #2#)))))
-          (EXIT (SPADCALL (SPADCALL |aaa| (QREFELT $ 19)) (QREFELT $ 21)))))) 
+          (EXIT (SPADCALL (SPADCALL |aaa| (QREFELT % 19)) (QREFELT % 21)))))) 
 
 (SDEFUN |PARTPERM;odd_partitions;3IS;4|
         ((M (|Integer|)) (N (|Integer|)) (|n| (|Integer|))
-         ($ (|Stream| (|List| (|Integer|)))))
+         (% (|Stream| (|List| (|Integer|)))))
         (SPROG ((|c| (|Stream| (|List| (|Integer|)))))
                (SEQ
                 (COND
                  ((ZEROP |n|)
-                  (SPADCALL NIL (SPADCALL (QREFELT $ 7)) (QREFELT $ 9)))
+                  (SPADCALL NIL (SPADCALL (QREFELT % 7)) (QREFELT % 9)))
                  ((OR (OR (ZEROP M) (<= N 0)) (< |n| 0))
-                  (SPADCALL (QREFELT $ 7)))
+                  (SPADCALL (QREFELT % 7)))
                  ('T
                   (SEQ (COND ((EVENP N) (LETT N (- N 1))))
                        (LETT |c|
                              (SPADCALL
                               (CONS #'|PARTPERM;odd_partitions;3IS;4!0|
-                                    (VECTOR $ N))
-                              (SPADCALL (- M 1) N (- |n| N) (QREFELT $ 23))
-                              (QREFELT $ 14)))
+                                    (VECTOR % N))
+                              (SPADCALL (- M 1) N (- |n| N) (QREFELT % 23))
+                              (QREFELT % 14)))
                        (EXIT
-                        (SPADCALL |c| (SPADCALL M (- N 2) |n| (QREFELT $ 23))
-                                  (QREFELT $ 15))))))))) 
+                        (SPADCALL |c| (SPADCALL M (- N 2) |n| (QREFELT % 23))
+                                  (QREFELT % 15))))))))) 
 
 (SDEFUN |PARTPERM;odd_partitions;3IS;4!0| ((|l1| NIL) ($$ NIL))
-        (PROG (N $)
+        (PROG (N %)
           (LETT N (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL N |l1| (QREFELT $ 11)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL N |l1| (QREFELT % 11)))))) 
 
 (SDEFUN |PARTPERM;odd_partitions;IS;5|
-        ((|n| (|Integer|)) ($ (|Stream| (|List| (|Integer|)))))
-        (SPADCALL |n| |n| |n| (QREFELT $ 23))) 
+        ((|n| (|Integer|)) (% (|Stream| (|List| (|Integer|)))))
+        (SPADCALL |n| |n| |n| (QREFELT % 23))) 
 
 (SDEFUN |PARTPERM;distinct_partitions;3IS;6|
         ((M (|Integer|)) (N (|Integer|)) (|n| (|Integer|))
-         ($ (|Stream| (|List| (|Integer|)))))
+         (% (|Stream| (|List| (|Integer|)))))
         (SPROG ((|c| (|Stream| (|List| (|Integer|)))))
                (SEQ
                 (COND
                  ((ZEROP |n|)
-                  (SPADCALL NIL (SPADCALL (QREFELT $ 7)) (QREFELT $ 9)))
+                  (SPADCALL NIL (SPADCALL (QREFELT % 7)) (QREFELT % 9)))
                  ((OR (ZEROP M) (OR (ZEROP N) (< |n| 0)))
-                  (SPADCALL (QREFELT $ 7)))
+                  (SPADCALL (QREFELT % 7)))
                  ('T
                   (SEQ
                    (LETT |c|
                          (SPADCALL
                           (CONS #'|PARTPERM;distinct_partitions;3IS;6!0|
-                                (VECTOR $ N))
-                          (SPADCALL (- M 1) (- N 1) (- |n| N) (QREFELT $ 25))
-                          (QREFELT $ 14)))
+                                (VECTOR % N))
+                          (SPADCALL (- M 1) (- N 1) (- |n| N) (QREFELT % 25))
+                          (QREFELT % 14)))
                    (EXIT
-                    (SPADCALL |c| (SPADCALL M (- N 1) |n| (QREFELT $ 25))
-                              (QREFELT $ 15))))))))) 
+                    (SPADCALL |c| (SPADCALL M (- N 1) |n| (QREFELT % 25))
+                              (QREFELT % 15))))))))) 
 
 (SDEFUN |PARTPERM;distinct_partitions;3IS;6!0| ((|l1| NIL) ($$ NIL))
-        (PROG (N $)
+        (PROG (N %)
           (LETT N (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL N |l1| (QREFELT $ 11)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL N |l1| (QREFELT % 11)))))) 
 
 (SDEFUN |PARTPERM;distinct_partitions;IS;7|
-        ((|n| (|Integer|)) ($ (|Stream| (|List| (|Integer|)))))
-        (SPADCALL |n| |n| |n| (QREFELT $ 25))) 
+        ((|n| (|Integer|)) (% (|Stream| (|List| (|Integer|)))))
+        (SPADCALL |n| |n| |n| (QREFELT % 25))) 
 
 (SDEFUN |PARTPERM;nogreq|
-        ((|n| (|Integer|)) (|x| (|List| (|Integer|))) ($ (|Integer|)))
+        ((|n| (|Integer|)) (|x| (|List| (|Integer|))) (% (|Integer|)))
         (SPROG
-         ((#1=#:G740 NIL) (#2=#:G739 #3=(|Integer|)) (#4=#:G741 #3#)
-          (#5=#:G743 NIL) (|i| NIL))
+         ((#1=#:G488 NIL) (#2=#:G487 #3=(|Integer|)) (#4=#:G489 #3#)
+          (#5=#:G491 NIL) (|i| NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -136,8 +136,8 @@
            (COND (#1# #2#) ('T 0)))))) 
 
 (SDEFUN |PARTPERM;conjugate;2L;9|
-        ((|x| (|List| (|Integer|))) ($ (|List| (|Integer|))))
-        (SPROG ((#1=#:G749 NIL) (|i| NIL) (#2=#:G748 NIL))
+        ((|x| (|List| (|Integer|))) (% (|List| (|Integer|))))
+        (SPROG ((#1=#:G497 NIL) (|i| NIL) (#2=#:G496 NIL))
                (SEQ
                 (COND ((NULL |x|) NIL)
                       ('T
@@ -148,69 +148,69 @@
                              (SEQ
                               (EXIT
                                (LETT #2#
-                                     (CONS (|PARTPERM;nogreq| |i| |x| $)
+                                     (CONS (|PARTPERM;nogreq| |i| |x| %)
                                            #2#))))
                              (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                              (EXIT (NREVERSE #2#))))))))) 
 
 (SDEFUN |PARTPERM;conjugates;2S;10|
         ((|z| (|Stream| (|List| (|Integer|))))
-         ($ (|Stream| (|List| (|Integer|)))))
-        (SPADCALL (ELT $ 27) |z| (QREFELT $ 14))) 
+         (% (|Stream| (|List| (|Integer|)))))
+        (SPADCALL (ELT % 27) |z| (QREFELT % 14))) 
 
 (SDEFUN |PARTPERM;shuffle;2LS;11|
         ((|x| (|List| (|Integer|))) (|y| (|List| (|Integer|)))
-         ($ (|Stream| (|List| (|Integer|)))))
+         (% (|Stream| (|List| (|Integer|)))))
         (SPROG NIL
                (COND
                 ((NULL |x|)
-                 (SPADCALL |y| (SPADCALL (QREFELT $ 7)) (QREFELT $ 9)))
+                 (SPADCALL |y| (SPADCALL (QREFELT % 7)) (QREFELT % 9)))
                 ((NULL |y|)
-                 (SPADCALL |x| (SPADCALL (QREFELT $ 7)) (QREFELT $ 9)))
+                 (SPADCALL |x| (SPADCALL (QREFELT % 7)) (QREFELT % 9)))
                 ('T
                  (SPADCALL
-                  (SPADCALL (CONS #'|PARTPERM;shuffle;2LS;11!0| (VECTOR $ |x|))
-                            (SPADCALL (CDR |x|) |y| (QREFELT $ 30))
-                            (QREFELT $ 14))
-                  (SPADCALL (CONS #'|PARTPERM;shuffle;2LS;11!1| (VECTOR $ |y|))
-                            (SPADCALL |x| (CDR |y|) (QREFELT $ 30))
-                            (QREFELT $ 14))
-                  (QREFELT $ 15)))))) 
+                  (SPADCALL (CONS #'|PARTPERM;shuffle;2LS;11!0| (VECTOR % |x|))
+                            (SPADCALL (CDR |x|) |y| (QREFELT % 30))
+                            (QREFELT % 14))
+                  (SPADCALL (CONS #'|PARTPERM;shuffle;2LS;11!1| (VECTOR % |y|))
+                            (SPADCALL |x| (CDR |y|) (QREFELT % 30))
+                            (QREFELT % 14))
+                  (QREFELT % 15)))))) 
 
 (SDEFUN |PARTPERM;shuffle;2LS;11!1| ((|l1| NIL) ($$ NIL))
-        (PROG (|y| $)
+        (PROG (|y| %)
           (LETT |y| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
+          (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPADCALL (SPADCALL |y| (QREFELT $ 29)) |l1| (QREFELT $ 11)))))) 
+            (SPADCALL (SPADCALL |y| (QREFELT % 29)) |l1| (QREFELT % 11)))))) 
 
 (SDEFUN |PARTPERM;shuffle;2LS;11!0| ((|l1| NIL) ($$ NIL))
-        (PROG (|x| $)
+        (PROG (|x| %)
           (LETT |x| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
+          (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPADCALL (SPADCALL |x| (QREFELT $ 29)) |l1| (QREFELT $ 11)))))) 
+            (SPADCALL (SPADCALL |x| (QREFELT % 29)) |l1| (QREFELT % 11)))))) 
 
 (SDEFUN |PARTPERM;shufflein;L2S;12|
         ((|x| (|List| (|Integer|))) (|yy| (|Stream| (|List| (|Integer|))))
-         ($ (|Stream| (|List| (|Integer|)))))
+         (% (|Stream| (|List| (|Integer|)))))
         (SPROG NIL
                (SPADCALL
-                (SPADCALL (CONS #'|PARTPERM;shufflein;L2S;12!0| (VECTOR $ |x|))
-                          |yy| (QREFELT $ 33))
-                (QREFELT $ 21)))) 
+                (SPADCALL (CONS #'|PARTPERM;shufflein;L2S;12!0| (VECTOR % |x|))
+                          |yy| (QREFELT % 33))
+                (QREFELT % 21)))) 
 
 (SDEFUN |PARTPERM;shufflein;L2S;12!0| ((|l1| NIL) ($$ NIL))
-        (PROG (|x| $)
+        (PROG (|x| %)
           (LETT |x| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |x| |l1| (QREFELT $ 30)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |x| |l1| (QREFELT % 30)))))) 
 
 (SDEFUN |PARTPERM;rpt|
-        ((|n| (|Integer|)) (|m| (|Integer|)) ($ (|List| (|Integer|))))
-        (SPROG ((#1=#:G774 NIL) (|i| NIL) (#2=#:G773 NIL))
+        ((|n| (|Integer|)) (|m| (|Integer|)) (% (|List| (|Integer|))))
+        (SPROG ((#1=#:G522 NIL) (|i| NIL) (#2=#:G521 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -222,20 +222,20 @@
 
 (SDEFUN |PARTPERM;zrpt|
         ((|x| (|List| (|Integer|))) (|y| (|List| (|Integer|)))
-         ($ (|Stream| (|List| (|Integer|)))))
-        (SPADCALL (CONS (|function| |PARTPERM;rpt|) $)
-                  (SPADCALL |x| (QREFELT $ 36)) (SPADCALL |y| (QREFELT $ 36))
-                  (QREFELT $ 39))) 
+         (% (|Stream| (|List| (|Integer|)))))
+        (SPADCALL (CONS (|function| |PARTPERM;rpt|) %)
+                  (SPADCALL |x| (QREFELT % 36)) (SPADCALL |y| (QREFELT % 36))
+                  (QREFELT % 39))) 
 
 (SDEFUN |PARTPERM;sequences;2LS;15|
         ((|x| (|List| (|Integer|))) (|y| (|List| (|Integer|)))
-         ($ (|Stream| (|List| (|Integer|)))))
-        (SPADCALL (SPADCALL NIL (SPADCALL (QREFELT $ 7)) (QREFELT $ 9))
-                  (ELT $ 34) (|PARTPERM;zrpt| |x| |y| $) (QREFELT $ 41))) 
+         (% (|Stream| (|List| (|Integer|)))))
+        (SPADCALL (SPADCALL NIL (SPADCALL (QREFELT % 7)) (QREFELT % 9))
+                  (ELT % 34) (|PARTPERM;zrpt| |x| |y| %) (QREFELT % 41))) 
 
 (SDEFUN |PARTPERM;sequences;LS;16|
-        ((|x| (|List| (|Integer|))) ($ (|Stream| (|List| (|Integer|)))))
-        (SPROG ((#1=#:G785 NIL) (|i| NIL) (#2=#:G784 NIL))
+        ((|x| (|List| (|Integer|))) (% (|Stream| (|List| (|Integer|)))))
+        (SPROG ((#1=#:G533 NIL) (|i| NIL) (#2=#:G532 NIL))
                (SEQ
                 (SPADCALL |x|
                           (PROGN
@@ -245,13 +245,13 @@
                                 (SEQ (EXIT (LETT #2# (CONS |i| #2#))))
                                 (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                                 (EXIT (NREVERSE #2#))))
-                          (QREFELT $ 42))))) 
+                          (QREFELT % 42))))) 
 
 (SDEFUN |PARTPERM;permutations;IS;17|
-        ((|n| (|Integer|)) ($ (|Stream| (|List| (|Integer|)))))
-        (SPROG ((#1=#:G790 NIL) (|i| NIL) (#2=#:G789 NIL))
+        ((|n| (|Integer|)) (% (|Stream| (|List| (|Integer|)))))
+        (SPROG ((#1=#:G538 NIL) (|i| NIL) (#2=#:G537 NIL))
                (SEQ
-                (SPADCALL (|PARTPERM;rpt| |n| 1 $)
+                (SPADCALL (|PARTPERM;rpt| |n| 1 %)
                           (PROGN
                            (LETT #2# NIL)
                            (SEQ (LETT |i| 1) (LETT #1# |n|) G190
@@ -259,13 +259,13 @@
                                 (SEQ (EXIT (LETT #2# (CONS |i| #2#))))
                                 (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                                 (EXIT (NREVERSE #2#))))
-                          (QREFELT $ 42))))) 
+                          (QREFELT % 42))))) 
 
 (DECLAIM (NOTINLINE |PartitionsAndPermutations;|)) 
 
 (DEFUN |PartitionsAndPermutations| ()
   (SPROG NIL
-         (PROG (#1=#:G792)
+         (PROG (#1=#:G540)
            (RETURN
             (COND
              ((LETT #1#
@@ -286,17 +286,17 @@
                         '|PartitionsAndPermutations|)))))))))) 
 
 (DEFUN |PartitionsAndPermutations;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|PartitionsAndPermutations|))
-          (LETT $ (GETREFV 45))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 45))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PartitionsAndPermutations| NIL
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|PartitionsAndPermutations| '|infovec|
           (LIST

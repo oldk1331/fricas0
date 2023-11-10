@@ -6,7 +6,7 @@
 (DEFPARAMETER |AlgebraicallyClosedFunctionSpace;AL| 'NIL) 
 
 (DEFUN |AlgebraicallyClosedFunctionSpace| (|t#1|)
-  (LET (#1=#:G702 (#2=#:G703 (|devaluate| |t#1|)))
+  (LET (#1=#:G461 (#2=#:G462 (|devaluate| |t#1|)))
     (COND
      ((SETQ #1# (|assoc| #2# |AlgebraicallyClosedFunctionSpace;AL|)) (CDR #1#))
      (T
@@ -17,7 +17,7 @@
       #1#)))) 
 
 (DEFUN |AlgebraicallyClosedFunctionSpace;| (|t#1|)
-  (SPROG ((#1=#:G701 NIL))
+  (SPROG ((#1=#:G460 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -29,24 +29,24 @@
                                       (|Join| (|AlgebraicallyClosedField|)
                                               (|FunctionSpace| '|t#1|)
                                               (|mkCategory|
-                                               '(((|rootOf| ($ $)) T)
-                                                 ((|rootsOf| ((|List| $) $)) T)
-                                                 ((|rootOf| ($ $ (|Symbol|)))
+                                               '(((|rootOf| (% %)) T)
+                                                 ((|rootsOf| ((|List| %) %)) T)
+                                                 ((|rootOf| (% % (|Symbol|)))
                                                   T)
                                                  ((|rootsOf|
-                                                   ((|List| $) $ (|Symbol|)))
+                                                   ((|List| %) % (|Symbol|)))
                                                   T)
-                                                 ((|zeroOf| ($ $)) T)
-                                                 ((|zerosOf| ((|List| $) $)) T)
-                                                 ((|zeroOf| ($ $ (|Symbol|)))
+                                                 ((|zeroOf| (% %)) T)
+                                                 ((|zerosOf| ((|List| %) %)) T)
+                                                 ((|zeroOf| (% % (|Symbol|)))
                                                   T)
                                                  ((|zerosOf|
-                                                   ((|List| $) $ (|Symbol|)))
+                                                   ((|List| %) % (|Symbol|)))
                                                   T)
                                                  ((|rootSum|
-                                                   ($ $
+                                                   (% %
                                                     (|SparseUnivariatePolynomial|
-                                                     $)
+                                                     %)
                                                     (|Symbol|)))
                                                   T))
                                                '(((|RetractableTo|

@@ -1,16 +1,16 @@
 
-(SDEFUN |DISTPOL;eval;DUPSS;1| ((|x| (|Distribution| R)) (|p| (UPS)) ($ (S)))
+(SDEFUN |DISTPOL;eval;DUPSS;1| ((|x| (|Distribution| R)) (|p| (UPS)) (% (S)))
         (SPROG ((|res| (S)))
                (SEQ
                 (COND
-                 ((SPADCALL |p| (QREFELT $ 10))
-                  (SPADCALL (SPADCALL |p| (QREFELT $ 11)) (|spadConstant| $ 12)
-                            (QREFELT $ 13)))
+                 ((SPADCALL |p| (QREFELT % 10))
+                  (SPADCALL (SPADCALL |p| (QREFELT % 11)) (|spadConstant| % 12)
+                            (QREFELT % 13)))
                  ('T
-                  (SEQ (LETT |res| (|spadConstant| $ 14))
+                  (SEQ (LETT |res| (|spadConstant| % 14))
                        (SEQ G190
                             (COND
-                             ((NULL (NULL (SPADCALL |p| (QREFELT $ 15))))
+                             ((NULL (NULL (SPADCALL |p| (QREFELT % 15))))
                               (GO G191)))
                             (SEQ
                              (LETT |res|
@@ -18,56 +18,56 @@
                                              (SPADCALL
                                               (SPADCALL |x|
                                                         (SPADCALL |p|
-                                                                  (QREFELT $
+                                                                  (QREFELT %
                                                                            17))
-                                                        (QREFELT $ 19))
-                                              (SPADCALL |p| (QREFELT $ 11))
-                                              (QREFELT $ 20))
-                                             (QREFELT $ 21)))
-                             (EXIT (LETT |p| (SPADCALL |p| (QREFELT $ 22)))))
+                                                        (QREFELT % 19))
+                                              (SPADCALL |p| (QREFELT % 11))
+                                              (QREFELT % 20))
+                                             (QREFELT % 21)))
+                             (EXIT (LETT |p| (SPADCALL |p| (QREFELT % 22)))))
                             NIL (GO G190) G191 (EXIT NIL))
                        (EXIT |res|))))))) 
 
 (SDEFUN |DISTPOL;integrate;UPSDS;2|
-        ((|p| (UPS)) (|x| (|Distribution| R)) ($ (S)))
-        (SPADCALL |x| |p| (QREFELT $ 23))) 
+        ((|p| (UPS)) (|x| (|Distribution| R)) (% (S)))
+        (SPADCALL |x| |p| (QREFELT % 23))) 
 
 (SDEFUN |DISTPOL;apply;UPSDD;3|
-        ((|p| (UPS)) (|x| (|Distribution| R)) ($ (|Distribution| S)))
+        ((|p| (UPS)) (|x| (|Distribution| R)) (% (|Distribution| S)))
         (SPROG ((|mompx| (|Stream| S)) (IN (|Stream| (|Integer|))))
                (SEQ
                 (LETT IN
-                      (SPADCALL (LIST (SPADCALL 1 (QREFELT $ 28)))
-                                (QREFELT $ 31)))
+                      (SPADCALL (LIST (SPADCALL 1 (QREFELT % 28)))
+                                (QREFELT % 31)))
                 (LETT |mompx|
                       (SPADCALL
-                       (CONS #'|DISTPOL;apply;UPSDD;3!0| (VECTOR $ |p| |x|)) IN
-                       (QREFELT $ 37)))
+                       (CONS #'|DISTPOL;apply;UPSDD;3!0| (VECTOR % |p| |x|)) IN
+                       (QREFELT % 37)))
                 (EXIT
-                 (SPADCALL (SPADCALL |mompx| (QREFELT $ 39)) (QREFELT $ 41)))))) 
+                 (SPADCALL (SPADCALL |mompx| (QREFELT % 39)) (QREFELT % 41)))))) 
 
 (SDEFUN |DISTPOL;apply;UPSDD;3!0| ((|k| NIL) ($$ NIL))
-        (PROG (|x| |p| $)
+        (PROG (|x| |p| %)
           (LETT |x| (QREFELT $$ 2))
           (LETT |p| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
+          (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((#1=#:G709 NIL))
+            (SPROG ((#1=#:G459 NIL))
                    (SPADCALL |x|
                              (SPADCALL |p|
                                        (PROG1 (LETT #1# |k|)
                                          (|check_subtype2| (> #1# 0)
                                                            '(|PositiveInteger|)
                                                            '(|Integer|) #1#))
-                                       (QREFELT $ 33))
-                             (QREFELT $ 23))))))) 
+                                       (QREFELT % 33))
+                             (QREFELT % 23))))))) 
 
 (DECLAIM (NOTINLINE |DistributionPolynomialPackage;|)) 
 
-(DEFUN |DistributionPolynomialPackage| (&REST #1=#:G713)
+(DEFUN |DistributionPolynomialPackage| (&REST #1=#:G463)
   (SPROG NIL
-         (PROG (#2=#:G714)
+         (PROG (#2=#:G464)
            (RETURN
             (COND
              ((LETT #2#
@@ -87,23 +87,23 @@
                         '|DistributionPolynomialPackage|)))))))))) 
 
 (DEFUN |DistributionPolynomialPackage;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT DV$3 (|devaluate| |#3|))
           (LETT |dv$| (LIST '|DistributionPolynomialPackage| DV$1 DV$2 DV$3))
-          (LETT $ (GETREFV 43))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 43))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|DistributionPolynomialPackage|
-                      (LIST DV$1 DV$2 DV$3) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (QSETREFV $ 8 |#3|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2 DV$3) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (QSETREFV % 8 |#3|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|DistributionPolynomialPackage| '|infovec|
           (LIST
@@ -114,7 +114,7 @@
               (|Distribution| 6) (34 . |moment|) (40 . *) (46 . +)
               (52 . |reductum|) |DISTPOL;eval;DUPSS;1|
               |DISTPOL;integrate;UPSDS;2| (57 . |One|) (|Integer|)
-              (|UniversalSegment| 26) (61 . SEGMENT) (|Stream| 26) (|List| $)
+              (|UniversalSegment| 26) (61 . SEGMENT) (|Stream| 26) (|List| %)
               (66 . |expand|) (|PositiveInteger|) (71 . ^) (|Stream| 7)
               (|Mapping| 7 26) (|StreamFunctions2| 26 7) (77 . |map|)
               (|Sequence| 7) (83 . |sequence|) (|Distribution| 7)

@@ -71,7 +71,7 @@
             ("\\windowlink" . 2))))
 
 ; buildHtMacroTable() ==
-;   $htMacroTable := MAKE_HASHTABLE('UEQUAL)
+;   $htMacroTable := MAKE_HASHTABLE('EQUAL)
 ;   fn := CONCAT(getEnv '"FRICAS", '"/share/hypertex/pages/util.ht")
 ;   if PROBE_-FILE(fn) then
 ;     instream := MAKE_INSTREAM(fn)
@@ -89,7 +89,7 @@
   (PROG (|n| |s| |numOfArgs| |string| |ISTMP#1| |line| |instream| |fn|)
     (RETURN
      (PROGN
-      (SETQ |$htMacroTable| (MAKE_HASHTABLE 'UEQUAL))
+      (SETQ |$htMacroTable| (MAKE_HASHTABLE 'EQUAL))
       (SETQ |fn| (CONCAT (|getEnv| "FRICAS") "/share/hypertex/pages/util.ht"))
       (COND
        ((PROBE-FILE |fn|) (SETQ |instream| (MAKE_INSTREAM |fn|))

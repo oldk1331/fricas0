@@ -1,218 +1,218 @@
 
-(PUT '|OMDEV;OMopenFile;2SOme$;1| '|SPADreplace| 'OM-OPENFILEDEV) 
+(PUT '|OMDEV;OMopenFile;2SOme%;1| '|SPADreplace| 'OM-OPENFILEDEV) 
 
-(SDEFUN |OMDEV;OMopenFile;2SOme$;1|
+(SDEFUN |OMDEV;OMopenFile;2SOme%;1|
         ((|fname| (|String|)) (|fmode| (|String|)) (|enc| (|OpenMathEncoding|))
-         ($ ($)))
+         (% (%)))
         (OM-OPENFILEDEV |fname| |fmode| |enc|)) 
 
-(PUT '|OMDEV;OMopenString;SOme$;2| '|SPADreplace| 'OM-OPENSTRINGDEV) 
+(PUT '|OMDEV;OMopenString;SOme%;2| '|SPADreplace| 'OM-OPENSTRINGDEV) 
 
-(SDEFUN |OMDEV;OMopenString;SOme$;2|
-        ((|str| (|String|)) (|enc| (|OpenMathEncoding|)) ($ ($)))
+(SDEFUN |OMDEV;OMopenString;SOme%;2|
+        ((|str| (|String|)) (|enc| (|OpenMathEncoding|)) (% (%)))
         (OM-OPENSTRINGDEV |str| |enc|)) 
 
-(PUT '|OMDEV;OMclose;$V;3| '|SPADreplace| 'OM-CLOSEDEV) 
+(PUT '|OMDEV;OMclose;%V;3| '|SPADreplace| 'OM-CLOSEDEV) 
 
-(SDEFUN |OMDEV;OMclose;$V;3| ((|dev| ($)) ($ (|Void|))) (OM-CLOSEDEV |dev|)) 
+(SDEFUN |OMDEV;OMclose;%V;3| ((|dev| (%)) (% (|Void|))) (OM-CLOSEDEV |dev|)) 
 
-(PUT '|OMDEV;OMsetEncoding;$OmeV;4| '|SPADreplace| 'OM-SETDEVENCODING) 
+(PUT '|OMDEV;OMsetEncoding;%OmeV;4| '|SPADreplace| 'OM-SETDEVENCODING) 
 
-(SDEFUN |OMDEV;OMsetEncoding;$OmeV;4|
-        ((|dev| ($)) (|enc| (|OpenMathEncoding|)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMsetEncoding;%OmeV;4|
+        ((|dev| (%)) (|enc| (|OpenMathEncoding|)) (% (|Void|)))
         (OM-SETDEVENCODING |dev| |enc|)) 
 
-(PUT '|OMDEV;OMputApp;$V;5| '|SPADreplace| 'OM-PUTAPP) 
+(PUT '|OMDEV;OMputApp;%V;5| '|SPADreplace| 'OM-PUTAPP) 
 
-(SDEFUN |OMDEV;OMputApp;$V;5| ((|dev| ($)) ($ (|Void|))) (OM-PUTAPP |dev|)) 
+(SDEFUN |OMDEV;OMputApp;%V;5| ((|dev| (%)) (% (|Void|))) (OM-PUTAPP |dev|)) 
 
-(PUT '|OMDEV;OMputAtp;$V;6| '|SPADreplace| 'OM-PUTATP) 
+(PUT '|OMDEV;OMputAtp;%V;6| '|SPADreplace| 'OM-PUTATP) 
 
-(SDEFUN |OMDEV;OMputAtp;$V;6| ((|dev| ($)) ($ (|Void|))) (OM-PUTATP |dev|)) 
+(SDEFUN |OMDEV;OMputAtp;%V;6| ((|dev| (%)) (% (|Void|))) (OM-PUTATP |dev|)) 
 
-(PUT '|OMDEV;OMputAttr;$V;7| '|SPADreplace| 'OM-PUTATTR) 
+(PUT '|OMDEV;OMputAttr;%V;7| '|SPADreplace| 'OM-PUTATTR) 
 
-(SDEFUN |OMDEV;OMputAttr;$V;7| ((|dev| ($)) ($ (|Void|))) (OM-PUTATTR |dev|)) 
+(SDEFUN |OMDEV;OMputAttr;%V;7| ((|dev| (%)) (% (|Void|))) (OM-PUTATTR |dev|)) 
 
-(PUT '|OMDEV;OMputBind;$V;8| '|SPADreplace| 'OM-PUTBIND) 
+(PUT '|OMDEV;OMputBind;%V;8| '|SPADreplace| 'OM-PUTBIND) 
 
-(SDEFUN |OMDEV;OMputBind;$V;8| ((|dev| ($)) ($ (|Void|))) (OM-PUTBIND |dev|)) 
+(SDEFUN |OMDEV;OMputBind;%V;8| ((|dev| (%)) (% (|Void|))) (OM-PUTBIND |dev|)) 
 
-(PUT '|OMDEV;OMputBVar;$V;9| '|SPADreplace| 'OM-PUTBVAR) 
+(PUT '|OMDEV;OMputBVar;%V;9| '|SPADreplace| 'OM-PUTBVAR) 
 
-(SDEFUN |OMDEV;OMputBVar;$V;9| ((|dev| ($)) ($ (|Void|))) (OM-PUTBVAR |dev|)) 
+(SDEFUN |OMDEV;OMputBVar;%V;9| ((|dev| (%)) (% (|Void|))) (OM-PUTBVAR |dev|)) 
 
-(PUT '|OMDEV;OMputError;$V;10| '|SPADreplace| 'OM-PUTERROR) 
+(PUT '|OMDEV;OMputError;%V;10| '|SPADreplace| 'OM-PUTERROR) 
 
-(SDEFUN |OMDEV;OMputError;$V;10| ((|dev| ($)) ($ (|Void|))) (OM-PUTERROR |dev|)) 
+(SDEFUN |OMDEV;OMputError;%V;10| ((|dev| (%)) (% (|Void|))) (OM-PUTERROR |dev|)) 
 
-(PUT '|OMDEV;OMputObject;$V;11| '|SPADreplace| 'OM-PUTOBJECT) 
+(PUT '|OMDEV;OMputObject;%V;11| '|SPADreplace| 'OM-PUTOBJECT) 
 
-(SDEFUN |OMDEV;OMputObject;$V;11| ((|dev| ($)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMputObject;%V;11| ((|dev| (%)) (% (|Void|)))
         (OM-PUTOBJECT |dev|)) 
 
-(PUT '|OMDEV;OMputEndApp;$V;12| '|SPADreplace| 'OM-PUTENDAPP) 
+(PUT '|OMDEV;OMputEndApp;%V;12| '|SPADreplace| 'OM-PUTENDAPP) 
 
-(SDEFUN |OMDEV;OMputEndApp;$V;12| ((|dev| ($)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMputEndApp;%V;12| ((|dev| (%)) (% (|Void|)))
         (OM-PUTENDAPP |dev|)) 
 
-(PUT '|OMDEV;OMputEndAtp;$V;13| '|SPADreplace| 'OM-PUTENDATP) 
+(PUT '|OMDEV;OMputEndAtp;%V;13| '|SPADreplace| 'OM-PUTENDATP) 
 
-(SDEFUN |OMDEV;OMputEndAtp;$V;13| ((|dev| ($)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMputEndAtp;%V;13| ((|dev| (%)) (% (|Void|)))
         (OM-PUTENDATP |dev|)) 
 
-(PUT '|OMDEV;OMputEndAttr;$V;14| '|SPADreplace| 'OM-PUTENDATTR) 
+(PUT '|OMDEV;OMputEndAttr;%V;14| '|SPADreplace| 'OM-PUTENDATTR) 
 
-(SDEFUN |OMDEV;OMputEndAttr;$V;14| ((|dev| ($)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMputEndAttr;%V;14| ((|dev| (%)) (% (|Void|)))
         (OM-PUTENDATTR |dev|)) 
 
-(PUT '|OMDEV;OMputEndBind;$V;15| '|SPADreplace| 'OM-PUTENDBIND) 
+(PUT '|OMDEV;OMputEndBind;%V;15| '|SPADreplace| 'OM-PUTENDBIND) 
 
-(SDEFUN |OMDEV;OMputEndBind;$V;15| ((|dev| ($)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMputEndBind;%V;15| ((|dev| (%)) (% (|Void|)))
         (OM-PUTENDBIND |dev|)) 
 
-(PUT '|OMDEV;OMputEndBVar;$V;16| '|SPADreplace| 'OM-PUTENDBVAR) 
+(PUT '|OMDEV;OMputEndBVar;%V;16| '|SPADreplace| 'OM-PUTENDBVAR) 
 
-(SDEFUN |OMDEV;OMputEndBVar;$V;16| ((|dev| ($)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMputEndBVar;%V;16| ((|dev| (%)) (% (|Void|)))
         (OM-PUTENDBVAR |dev|)) 
 
-(PUT '|OMDEV;OMputEndError;$V;17| '|SPADreplace| 'OM-PUTENDERROR) 
+(PUT '|OMDEV;OMputEndError;%V;17| '|SPADreplace| 'OM-PUTENDERROR) 
 
-(SDEFUN |OMDEV;OMputEndError;$V;17| ((|dev| ($)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMputEndError;%V;17| ((|dev| (%)) (% (|Void|)))
         (OM-PUTENDERROR |dev|)) 
 
-(PUT '|OMDEV;OMputEndObject;$V;18| '|SPADreplace| 'OM-PUTENDOBJECT) 
+(PUT '|OMDEV;OMputEndObject;%V;18| '|SPADreplace| 'OM-PUTENDOBJECT) 
 
-(SDEFUN |OMDEV;OMputEndObject;$V;18| ((|dev| ($)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMputEndObject;%V;18| ((|dev| (%)) (% (|Void|)))
         (OM-PUTENDOBJECT |dev|)) 
 
-(PUT '|OMDEV;OMputInteger;$IV;19| '|SPADreplace| 'OM-PUTINT) 
+(PUT '|OMDEV;OMputInteger;%IV;19| '|SPADreplace| 'OM-PUTINT) 
 
-(SDEFUN |OMDEV;OMputInteger;$IV;19|
-        ((|dev| ($)) (|i| (|Integer|)) ($ (|Void|))) (OM-PUTINT |dev| |i|)) 
+(SDEFUN |OMDEV;OMputInteger;%IV;19|
+        ((|dev| (%)) (|i| (|Integer|)) (% (|Void|))) (OM-PUTINT |dev| |i|)) 
 
-(PUT '|OMDEV;OMputFloat;$DfV;20| '|SPADreplace| 'OM-PUTFLOAT) 
+(PUT '|OMDEV;OMputFloat;%DfV;20| '|SPADreplace| 'OM-PUTFLOAT) 
 
-(SDEFUN |OMDEV;OMputFloat;$DfV;20|
-        ((|dev| ($)) (|f| (|DoubleFloat|)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMputFloat;%DfV;20|
+        ((|dev| (%)) (|f| (|DoubleFloat|)) (% (|Void|)))
         (OM-PUTFLOAT |dev| |f|)) 
 
-(PUT '|OMDEV;OMputVariable;$SV;21| '|SPADreplace| 'OM-PUTVAR) 
+(PUT '|OMDEV;OMputVariable;%SV;21| '|SPADreplace| 'OM-PUTVAR) 
 
-(SDEFUN |OMDEV;OMputVariable;$SV;21|
-        ((|dev| ($)) (|v| (|Symbol|)) ($ (|Void|))) (OM-PUTVAR |dev| |v|)) 
+(SDEFUN |OMDEV;OMputVariable;%SV;21|
+        ((|dev| (%)) (|v| (|Symbol|)) (% (|Void|))) (OM-PUTVAR |dev| |v|)) 
 
-(PUT '|OMDEV;OMputString;$SV;22| '|SPADreplace| 'OM-PUTSTRING) 
+(PUT '|OMDEV;OMputString;%SV;22| '|SPADreplace| 'OM-PUTSTRING) 
 
-(SDEFUN |OMDEV;OMputString;$SV;22| ((|dev| ($)) (|s| (|String|)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMputString;%SV;22| ((|dev| (%)) (|s| (|String|)) (% (|Void|)))
         (OM-PUTSTRING |dev| |s|)) 
 
-(PUT '|OMDEV;OMputSymbol;$2SV;23| '|SPADreplace| 'OM-PUTSYMBOL) 
+(PUT '|OMDEV;OMputSymbol;%2SV;23| '|SPADreplace| 'OM-PUTSYMBOL) 
 
-(SDEFUN |OMDEV;OMputSymbol;$2SV;23|
-        ((|dev| ($)) (|cd| (|String|)) (|nm| (|String|)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMputSymbol;%2SV;23|
+        ((|dev| (%)) (|cd| (|String|)) (|nm| (|String|)) (% (|Void|)))
         (OM-PUTSYMBOL |dev| |cd| |nm|)) 
 
-(PUT '|OMDEV;OMgetApp;$V;24| '|SPADreplace| 'OM-GETAPP) 
+(PUT '|OMDEV;OMgetApp;%V;24| '|SPADreplace| 'OM-GETAPP) 
 
-(SDEFUN |OMDEV;OMgetApp;$V;24| ((|dev| ($)) ($ (|Void|))) (OM-GETAPP |dev|)) 
+(SDEFUN |OMDEV;OMgetApp;%V;24| ((|dev| (%)) (% (|Void|))) (OM-GETAPP |dev|)) 
 
-(PUT '|OMDEV;OMgetAtp;$V;25| '|SPADreplace| 'OM-GETATP) 
+(PUT '|OMDEV;OMgetAtp;%V;25| '|SPADreplace| 'OM-GETATP) 
 
-(SDEFUN |OMDEV;OMgetAtp;$V;25| ((|dev| ($)) ($ (|Void|))) (OM-GETATP |dev|)) 
+(SDEFUN |OMDEV;OMgetAtp;%V;25| ((|dev| (%)) (% (|Void|))) (OM-GETATP |dev|)) 
 
-(PUT '|OMDEV;OMgetAttr;$V;26| '|SPADreplace| 'OM-GETATTR) 
+(PUT '|OMDEV;OMgetAttr;%V;26| '|SPADreplace| 'OM-GETATTR) 
 
-(SDEFUN |OMDEV;OMgetAttr;$V;26| ((|dev| ($)) ($ (|Void|))) (OM-GETATTR |dev|)) 
+(SDEFUN |OMDEV;OMgetAttr;%V;26| ((|dev| (%)) (% (|Void|))) (OM-GETATTR |dev|)) 
 
-(PUT '|OMDEV;OMgetBind;$V;27| '|SPADreplace| 'OM-GETBIND) 
+(PUT '|OMDEV;OMgetBind;%V;27| '|SPADreplace| 'OM-GETBIND) 
 
-(SDEFUN |OMDEV;OMgetBind;$V;27| ((|dev| ($)) ($ (|Void|))) (OM-GETBIND |dev|)) 
+(SDEFUN |OMDEV;OMgetBind;%V;27| ((|dev| (%)) (% (|Void|))) (OM-GETBIND |dev|)) 
 
-(PUT '|OMDEV;OMgetBVar;$V;28| '|SPADreplace| 'OM-GETBVAR) 
+(PUT '|OMDEV;OMgetBVar;%V;28| '|SPADreplace| 'OM-GETBVAR) 
 
-(SDEFUN |OMDEV;OMgetBVar;$V;28| ((|dev| ($)) ($ (|Void|))) (OM-GETBVAR |dev|)) 
+(SDEFUN |OMDEV;OMgetBVar;%V;28| ((|dev| (%)) (% (|Void|))) (OM-GETBVAR |dev|)) 
 
-(PUT '|OMDEV;OMgetError;$V;29| '|SPADreplace| 'OM-GETERROR) 
+(PUT '|OMDEV;OMgetError;%V;29| '|SPADreplace| 'OM-GETERROR) 
 
-(SDEFUN |OMDEV;OMgetError;$V;29| ((|dev| ($)) ($ (|Void|))) (OM-GETERROR |dev|)) 
+(SDEFUN |OMDEV;OMgetError;%V;29| ((|dev| (%)) (% (|Void|))) (OM-GETERROR |dev|)) 
 
-(PUT '|OMDEV;OMgetObject;$V;30| '|SPADreplace| 'OM-GETOBJECT) 
+(PUT '|OMDEV;OMgetObject;%V;30| '|SPADreplace| 'OM-GETOBJECT) 
 
-(SDEFUN |OMDEV;OMgetObject;$V;30| ((|dev| ($)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMgetObject;%V;30| ((|dev| (%)) (% (|Void|)))
         (OM-GETOBJECT |dev|)) 
 
-(PUT '|OMDEV;OMgetEndApp;$V;31| '|SPADreplace| 'OM-GETENDAPP) 
+(PUT '|OMDEV;OMgetEndApp;%V;31| '|SPADreplace| 'OM-GETENDAPP) 
 
-(SDEFUN |OMDEV;OMgetEndApp;$V;31| ((|dev| ($)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMgetEndApp;%V;31| ((|dev| (%)) (% (|Void|)))
         (OM-GETENDAPP |dev|)) 
 
-(PUT '|OMDEV;OMgetEndAtp;$V;32| '|SPADreplace| 'OM-GETENDATP) 
+(PUT '|OMDEV;OMgetEndAtp;%V;32| '|SPADreplace| 'OM-GETENDATP) 
 
-(SDEFUN |OMDEV;OMgetEndAtp;$V;32| ((|dev| ($)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMgetEndAtp;%V;32| ((|dev| (%)) (% (|Void|)))
         (OM-GETENDATP |dev|)) 
 
-(PUT '|OMDEV;OMgetEndAttr;$V;33| '|SPADreplace| 'OM-GETENDATTR) 
+(PUT '|OMDEV;OMgetEndAttr;%V;33| '|SPADreplace| 'OM-GETENDATTR) 
 
-(SDEFUN |OMDEV;OMgetEndAttr;$V;33| ((|dev| ($)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMgetEndAttr;%V;33| ((|dev| (%)) (% (|Void|)))
         (OM-GETENDATTR |dev|)) 
 
-(PUT '|OMDEV;OMgetEndBind;$V;34| '|SPADreplace| 'OM-GETENDBIND) 
+(PUT '|OMDEV;OMgetEndBind;%V;34| '|SPADreplace| 'OM-GETENDBIND) 
 
-(SDEFUN |OMDEV;OMgetEndBind;$V;34| ((|dev| ($)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMgetEndBind;%V;34| ((|dev| (%)) (% (|Void|)))
         (OM-GETENDBIND |dev|)) 
 
-(PUT '|OMDEV;OMgetEndBVar;$V;35| '|SPADreplace| 'OM-GETENDBVAR) 
+(PUT '|OMDEV;OMgetEndBVar;%V;35| '|SPADreplace| 'OM-GETENDBVAR) 
 
-(SDEFUN |OMDEV;OMgetEndBVar;$V;35| ((|dev| ($)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMgetEndBVar;%V;35| ((|dev| (%)) (% (|Void|)))
         (OM-GETENDBVAR |dev|)) 
 
-(PUT '|OMDEV;OMgetEndError;$V;36| '|SPADreplace| 'OM-GETENDERROR) 
+(PUT '|OMDEV;OMgetEndError;%V;36| '|SPADreplace| 'OM-GETENDERROR) 
 
-(SDEFUN |OMDEV;OMgetEndError;$V;36| ((|dev| ($)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMgetEndError;%V;36| ((|dev| (%)) (% (|Void|)))
         (OM-GETENDERROR |dev|)) 
 
-(PUT '|OMDEV;OMgetEndObject;$V;37| '|SPADreplace| 'OM-GETENDOBJECT) 
+(PUT '|OMDEV;OMgetEndObject;%V;37| '|SPADreplace| 'OM-GETENDOBJECT) 
 
-(SDEFUN |OMDEV;OMgetEndObject;$V;37| ((|dev| ($)) ($ (|Void|)))
+(SDEFUN |OMDEV;OMgetEndObject;%V;37| ((|dev| (%)) (% (|Void|)))
         (OM-GETENDOBJECT |dev|)) 
 
-(PUT '|OMDEV;OMgetInteger;$I;38| '|SPADreplace| 'OM-GETINT) 
+(PUT '|OMDEV;OMgetInteger;%I;38| '|SPADreplace| 'OM-GETINT) 
 
-(SDEFUN |OMDEV;OMgetInteger;$I;38| ((|dev| ($)) ($ (|Integer|)))
+(SDEFUN |OMDEV;OMgetInteger;%I;38| ((|dev| (%)) (% (|Integer|)))
         (OM-GETINT |dev|)) 
 
-(PUT '|OMDEV;OMgetFloat;$Df;39| '|SPADreplace| 'OM-GETFLOAT) 
+(PUT '|OMDEV;OMgetFloat;%Df;39| '|SPADreplace| 'OM-GETFLOAT) 
 
-(SDEFUN |OMDEV;OMgetFloat;$Df;39| ((|dev| ($)) ($ (|DoubleFloat|)))
+(SDEFUN |OMDEV;OMgetFloat;%Df;39| ((|dev| (%)) (% (|DoubleFloat|)))
         (OM-GETFLOAT |dev|)) 
 
-(PUT '|OMDEV;OMgetVariable;$S;40| '|SPADreplace| 'OM-GETVAR) 
+(PUT '|OMDEV;OMgetVariable;%S;40| '|SPADreplace| 'OM-GETVAR) 
 
-(SDEFUN |OMDEV;OMgetVariable;$S;40| ((|dev| ($)) ($ (|Symbol|)))
+(SDEFUN |OMDEV;OMgetVariable;%S;40| ((|dev| (%)) (% (|Symbol|)))
         (OM-GETVAR |dev|)) 
 
-(PUT '|OMDEV;OMgetString;$S;41| '|SPADreplace| 'OM-GETSTRING) 
+(PUT '|OMDEV;OMgetString;%S;41| '|SPADreplace| 'OM-GETSTRING) 
 
-(SDEFUN |OMDEV;OMgetString;$S;41| ((|dev| ($)) ($ (|String|)))
+(SDEFUN |OMDEV;OMgetString;%S;41| ((|dev| (%)) (% (|String|)))
         (OM-GETSTRING |dev|)) 
 
-(PUT '|OMDEV;OMgetSymbol;$R;42| '|SPADreplace| 'OM-GETSYMBOL) 
+(PUT '|OMDEV;OMgetSymbol;%R;42| '|SPADreplace| 'OM-GETSYMBOL) 
 
-(SDEFUN |OMDEV;OMgetSymbol;$R;42|
-        ((|dev| ($))
-         ($ (|Record| (|:| |cd| (|String|)) (|:| |name| (|String|)))))
+(SDEFUN |OMDEV;OMgetSymbol;%R;42|
+        ((|dev| (%))
+         (% (|Record| (|:| |cd| (|String|)) (|:| |name| (|String|)))))
         (OM-GETSYMBOL |dev|)) 
 
-(PUT '|OMDEV;OMgetType;$S;43| '|SPADreplace| 'OM-GETTYPE) 
+(PUT '|OMDEV;OMgetType;%S;43| '|SPADreplace| 'OM-GETTYPE) 
 
-(SDEFUN |OMDEV;OMgetType;$S;43| ((|dev| ($)) ($ (|Symbol|))) (OM-GETTYPE |dev|)) 
+(SDEFUN |OMDEV;OMgetType;%S;43| ((|dev| (%)) (% (|Symbol|))) (OM-GETTYPE |dev|)) 
 
 (DECLAIM (NOTINLINE |OpenMathDevice;|)) 
 
 (DEFUN |OpenMathDevice| ()
   (SPROG NIL
-         (PROG (#1=#:G741)
+         (PROG (#1=#:G494)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OpenMathDevice|))
@@ -229,43 +229,43 @@
                   (HREM |$ConstructorCache| '|OpenMathDevice|)))))))))) 
 
 (DEFUN |OpenMathDevice;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|OpenMathDevice|))
-          (LETT $ (GETREFV 56))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|OpenMathDevice| NIL (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 56))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|OpenMathDevice| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|OpenMathDevice| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|String|) (|OpenMathEncoding|)
-              |OMDEV;OMopenFile;2SOme$;1| |OMDEV;OMopenString;SOme$;2| (|Void|)
-              |OMDEV;OMclose;$V;3| |OMDEV;OMsetEncoding;$OmeV;4|
-              |OMDEV;OMputApp;$V;5| |OMDEV;OMputAtp;$V;6|
-              |OMDEV;OMputAttr;$V;7| |OMDEV;OMputBind;$V;8|
-              |OMDEV;OMputBVar;$V;9| |OMDEV;OMputError;$V;10|
-              |OMDEV;OMputObject;$V;11| |OMDEV;OMputEndApp;$V;12|
-              |OMDEV;OMputEndAtp;$V;13| |OMDEV;OMputEndAttr;$V;14|
-              |OMDEV;OMputEndBind;$V;15| |OMDEV;OMputEndBVar;$V;16|
-              |OMDEV;OMputEndError;$V;17| |OMDEV;OMputEndObject;$V;18|
-              (|Integer|) |OMDEV;OMputInteger;$IV;19| (|DoubleFloat|)
-              |OMDEV;OMputFloat;$DfV;20| (|Symbol|)
-              |OMDEV;OMputVariable;$SV;21| |OMDEV;OMputString;$SV;22|
-              |OMDEV;OMputSymbol;$2SV;23| |OMDEV;OMgetApp;$V;24|
-              |OMDEV;OMgetAtp;$V;25| |OMDEV;OMgetAttr;$V;26|
-              |OMDEV;OMgetBind;$V;27| |OMDEV;OMgetBVar;$V;28|
-              |OMDEV;OMgetError;$V;29| |OMDEV;OMgetObject;$V;30|
-              |OMDEV;OMgetEndApp;$V;31| |OMDEV;OMgetEndAtp;$V;32|
-              |OMDEV;OMgetEndAttr;$V;33| |OMDEV;OMgetEndBind;$V;34|
-              |OMDEV;OMgetEndBVar;$V;35| |OMDEV;OMgetEndError;$V;36|
-              |OMDEV;OMgetEndObject;$V;37| |OMDEV;OMgetInteger;$I;38|
-              |OMDEV;OMgetFloat;$Df;39| |OMDEV;OMgetVariable;$S;40|
-              |OMDEV;OMgetString;$S;41| (|Record| (|:| |cd| 6) (|:| |name| 6))
-              |OMDEV;OMgetSymbol;$R;42| |OMDEV;OMgetType;$S;43|)
+              |OMDEV;OMopenFile;2SOme%;1| |OMDEV;OMopenString;SOme%;2| (|Void|)
+              |OMDEV;OMclose;%V;3| |OMDEV;OMsetEncoding;%OmeV;4|
+              |OMDEV;OMputApp;%V;5| |OMDEV;OMputAtp;%V;6|
+              |OMDEV;OMputAttr;%V;7| |OMDEV;OMputBind;%V;8|
+              |OMDEV;OMputBVar;%V;9| |OMDEV;OMputError;%V;10|
+              |OMDEV;OMputObject;%V;11| |OMDEV;OMputEndApp;%V;12|
+              |OMDEV;OMputEndAtp;%V;13| |OMDEV;OMputEndAttr;%V;14|
+              |OMDEV;OMputEndBind;%V;15| |OMDEV;OMputEndBVar;%V;16|
+              |OMDEV;OMputEndError;%V;17| |OMDEV;OMputEndObject;%V;18|
+              (|Integer|) |OMDEV;OMputInteger;%IV;19| (|DoubleFloat|)
+              |OMDEV;OMputFloat;%DfV;20| (|Symbol|)
+              |OMDEV;OMputVariable;%SV;21| |OMDEV;OMputString;%SV;22|
+              |OMDEV;OMputSymbol;%2SV;23| |OMDEV;OMgetApp;%V;24|
+              |OMDEV;OMgetAtp;%V;25| |OMDEV;OMgetAttr;%V;26|
+              |OMDEV;OMgetBind;%V;27| |OMDEV;OMgetBVar;%V;28|
+              |OMDEV;OMgetError;%V;29| |OMDEV;OMgetObject;%V;30|
+              |OMDEV;OMgetEndApp;%V;31| |OMDEV;OMgetEndAtp;%V;32|
+              |OMDEV;OMgetEndAttr;%V;33| |OMDEV;OMgetEndBind;%V;34|
+              |OMDEV;OMgetEndBVar;%V;35| |OMDEV;OMgetEndError;%V;36|
+              |OMDEV;OMgetEndObject;%V;37| |OMDEV;OMgetInteger;%I;38|
+              |OMDEV;OMgetFloat;%Df;39| |OMDEV;OMgetVariable;%S;40|
+              |OMDEV;OMgetString;%S;41| (|Record| (|:| |cd| 6) (|:| |name| 6))
+              |OMDEV;OMgetSymbol;%R;42| |OMDEV;OMgetType;%S;43|)
            '#(|OMsetEncoding| 0 |OMputVariable| 6 |OMputSymbol| 12
               |OMputString| 19 |OMputObject| 25 |OMputInteger| 30 |OMputFloat|
               36 |OMputError| 42 |OMputEndObject| 47 |OMputEndError| 52

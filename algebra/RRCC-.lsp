@@ -1,105 +1,105 @@
 
 (SDEFUN |RRCC-;zero?;ThePolsSB;1|
-        ((|toTest| (|ThePols|)) (|rootChar| (S)) ($ (|Boolean|)))
-        (EQL (SPADCALL |toTest| |rootChar| (QREFELT $ 10)) 0)) 
+        ((|toTest| (|ThePols|)) (|rootChar| (S)) (% (|Boolean|)))
+        (EQL (SPADCALL |toTest| |rootChar| (QREFELT % 10)) 0)) 
 
 (SDEFUN |RRCC-;negative?;ThePolsSB;2|
-        ((|toTest| (|ThePols|)) (|rootChar| (S)) ($ (|Boolean|)))
-        (< (SPADCALL |toTest| |rootChar| (QREFELT $ 10)) 0)) 
+        ((|toTest| (|ThePols|)) (|rootChar| (S)) (% (|Boolean|)))
+        (< (SPADCALL |toTest| |rootChar| (QREFELT % 10)) 0)) 
 
 (SDEFUN |RRCC-;positive?;ThePolsSB;3|
-        ((|toTest| (|ThePols|)) (|rootChar| (S)) ($ (|Boolean|)))
-        (> (SPADCALL |toTest| |rootChar| (QREFELT $ 10)) 0)) 
+        ((|toTest| (|ThePols|)) (|rootChar| (S)) (% (|Boolean|)))
+        (> (SPADCALL |toTest| |rootChar| (QREFELT % 10)) 0)) 
 
 (SDEFUN |RRCC-;rootOf;ThePolsPiU;4|
         ((|pol| (|ThePols|)) (|n| (|PositiveInteger|))
-         ($ (|Union| S "failed")))
+         (% (|Union| S "failed")))
         (SPROG ((|liste| (|List| S)))
-               (SEQ (LETT |liste| (SPADCALL |pol| (QREFELT $ 16)))
+               (SEQ (LETT |liste| (SPADCALL |pol| (QREFELT % 16)))
                     (EXIT
                      (COND ((> (LENGTH |liste|) |n|) (CONS 1 "failed"))
                            ('T
-                            (CONS 0 (SPADCALL |liste| |n| (QREFELT $ 18))))))))) 
+                            (CONS 0 (SPADCALL |liste| |n| (QREFELT % 18))))))))) 
 
 (SDEFUN |RRCC-;recip;ThePolsSU;5|
         ((|toInv| (|ThePols|)) (|rootChar| (S))
-         ($ (|Union| |ThePols| #1="failed")))
+         (% (|Union| |ThePols| #1="failed")))
         (SPROG
          ((|d|
            (|Record| (|:| |coef| (|List| |ThePols|))
                      (|:| |generator| |ThePols|)))
-          (|defPol| (|ThePols|)) (#2=#:G733 NIL)
+          (|defPol| (|ThePols|)) (#2=#:G471 NIL)
           (|res| (|Union| |TheField| "failed")))
          (SEQ
           (COND
-           ((EQL (SPADCALL |toInv| (QREFELT $ 23)) 0)
+           ((EQL (SPADCALL |toInv| (QREFELT % 23)) 0)
             (SEQ
              (LETT |res|
-                   (SPADCALL (SPADCALL |toInv| (QREFELT $ 24)) (QREFELT $ 25)))
+                   (SPADCALL (SPADCALL |toInv| (QREFELT % 24)) (QREFELT % 25)))
              (EXIT
               (COND ((QEQCAR |res| 1) (CONS 1 "failed"))
-                    (#3='T (CONS 0 (SPADCALL (QCDR |res|) (QREFELT $ 26))))))))
+                    (#3='T (CONS 0 (SPADCALL (QCDR |res|) (QREFELT % 26))))))))
            (#3#
-            (SEQ (LETT |defPol| (SPADCALL |rootChar| (QREFELT $ 27)))
-                 (LETT |d| (SPADCALL (LIST |defPol| |toInv|) (QREFELT $ 29)))
+            (SEQ (LETT |defPol| (SPADCALL |rootChar| (QREFELT % 27)))
+                 (LETT |d| (SPADCALL (LIST |defPol| |toInv|) (QREFELT % 29)))
                  (EXIT
                   (COND
-                   ((SPADCALL (QCDR |d|) |rootChar| (QREFELT $ 30))
+                   ((SPADCALL (QCDR |d|) |rootChar| (QREFELT % 30))
                     (CONS 1 "failed"))
                    (#3#
                     (SEQ
                      (COND
-                      ((SPADCALL (SPADCALL (QCDR |d|) (QREFELT $ 23)) 0
-                                 (QREFELT $ 31))
+                      ((SPADCALL (SPADCALL (QCDR |d|) (QREFELT % 23)) 0
+                                 (QREFELT % 31))
                        (SEQ
                         (LETT |defPol|
                               (PROG2
                                   (LETT #2#
                                         (SPADCALL |defPol| (QCDR |d|)
-                                                  (QREFELT $ 32)))
+                                                  (QREFELT % 32)))
                                   (QCDR #2#)
-                                (|check_union2| (QEQCAR #2# 0) (QREFELT $ 8)
-                                                (|Union| (QREFELT $ 8) #1#)
+                                (|check_union2| (QEQCAR #2# 0) (QREFELT % 8)
+                                                (|Union| (QREFELT % 8) #1#)
                                                 #2#)))
                         (EXIT
                          (LETT |d|
                                (SPADCALL (LIST |defPol| |toInv|)
-                                         (QREFELT $ 29)))))))
+                                         (QREFELT % 29)))))))
                      (EXIT
-                      (CONS 0 (SPADCALL (QCAR |d|) 2 (QREFELT $ 34)))))))))))))) 
+                      (CONS 0 (SPADCALL (QCAR |d|) 2 (QREFELT % 34)))))))))))))) 
 
 (DECLAIM (NOTINLINE |RealRootCharacterizationCategory&;|)) 
 
 (DEFUN |RealRootCharacterizationCategory&| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT DV$3 (|devaluate| |#3|))
           (LETT |dv$|
                 (LIST '|RealRootCharacterizationCategory&| DV$1 DV$2 DV$3))
-          (LETT $ (GETREFV 37))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (QSETREFV $ 8 |#3|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 37))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (QSETREFV % 8 |#3|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|RealRootCharacterizationCategory&| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|Integer|) (0 . |sign|) (|Boolean|)
               |RRCC-;zero?;ThePolsSB;1| |RRCC-;negative?;ThePolsSB;2|
-              |RRCC-;positive?;ThePolsSB;3| (|List| $) (6 . |allRootsOf|)
-              (|List| 6) (11 . |elt|) (|Union| $ '#1="failed")
+              |RRCC-;positive?;ThePolsSB;3| (|List| %) (6 . |allRootsOf|)
+              (|List| 6) (11 . |elt|) (|Union| % '#1="failed")
               (|PositiveInteger|) |RRCC-;rootOf;ThePolsPiU;4|
               (|NonNegativeInteger|) (17 . |degree|)
               (22 . |leadingCoefficient|) (27 . |recip|) (32 . |coerce|)
               (37 . |definingPolynomial|)
-              (|Record| (|:| |coef| 15) (|:| |generator| $))
+              (|Record| (|:| |coef| 15) (|:| |generator| %))
               (42 . |principalIdeal|) (47 . |zero?|) (53 . ~=) (59 . |exquo|)
               (|List| 8) (65 . |elt|) (|Union| 8 '#2="failed")
               |RRCC-;recip;ThePolsSU;5|)

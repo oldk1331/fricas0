@@ -1,7 +1,7 @@
 
 (SDEFUN |FCPAK1;zeroVector;SPFc;1|
         ((|fname| (|Symbol|)) (|n| (|Polynomial| (|Integer|)))
-         ($ (|FortranCode|)))
+         (% (|FortranCode|)))
         (SPROG
          ((|fa| (|FortranCode|))
           (|indices| (|List| #1=(|Polynomial| (|Integer|)))) (|ip1| #1#)
@@ -9,21 +9,21 @@
           (|segp1| (|Segment| (|Polynomial| (|Integer|))))
           (|hp1| (|Polynomial| (|Integer|))) (|lp1| (|Polynomial| (|Integer|)))
           (|i1| (|Symbol|)) (|ue| (|Expression| (|Integer|))))
-         (SEQ (LETT |ue| (|spadConstant| $ 7)) (LETT |i1| 'I1)
-              (LETT |lp1| (|spadConstant| $ 9)) (LETT |hp1| |n|)
-              (LETT |segp1| (SPADCALL |lp1| |hp1| (QREFELT $ 11)))
-              (LETT |segbp1| (SPADCALL |i1| |segp1| (QREFELT $ 14)))
-              (LETT |ip1| (SPADCALL |i1| (QREFELT $ 15)))
+         (SEQ (LETT |ue| (|spadConstant| % 7)) (LETT |i1| 'I1)
+              (LETT |lp1| (|spadConstant| % 9)) (LETT |hp1| |n|)
+              (LETT |segp1| (SPADCALL |lp1| |hp1| (QREFELT % 11)))
+              (LETT |segbp1| (SPADCALL |i1| |segp1| (QREFELT % 14)))
+              (LETT |ip1| (SPADCALL |i1| (QREFELT % 15)))
               (LETT |indices| (LIST |ip1|))
               (LETT |fa|
                     (SPADCALL |segbp1|
-                              (SPADCALL |fname| |indices| |ue| (QREFELT $ 18))
-                              (QREFELT $ 19)))
+                              (SPADCALL |fname| |indices| |ue| (QREFELT % 18))
+                              (QREFELT % 19)))
               (EXIT |fa|)))) 
 
 (SDEFUN |FCPAK1;zeroMatrix;S2PFc;2|
         ((|fname| (|Symbol|)) (|m| (|Polynomial| (|Integer|)))
-         (|n| (|Polynomial| (|Integer|))) ($ (|FortranCode|)))
+         (|n| (|Polynomial| (|Integer|))) (% (|FortranCode|)))
         (SPROG
          ((|fa| (|FortranCode|))
           (|indices| (|List| #1=(|Polynomial| (|Integer|)))) (|ip2| #1#)
@@ -34,53 +34,53 @@
           (|segp1| #3#) (|hp1| (|Polynomial| (|Integer|)))
           (|lp1| (|Polynomial| (|Integer|))) (|i1| (|Symbol|))
           (|ue| (|Expression| (|Integer|))))
-         (SEQ (LETT |ue| (|spadConstant| $ 7)) (LETT |i1| 'I1)
-              (LETT |lp1| (|spadConstant| $ 9)) (LETT |hp1| |m|)
-              (LETT |segp1| (SPADCALL |lp1| |hp1| (QREFELT $ 11)))
-              (LETT |segbp1| (SPADCALL |i1| |segp1| (QREFELT $ 14)))
+         (SEQ (LETT |ue| (|spadConstant| % 7)) (LETT |i1| 'I1)
+              (LETT |lp1| (|spadConstant| % 9)) (LETT |hp1| |m|)
+              (LETT |segp1| (SPADCALL |lp1| |hp1| (QREFELT % 11)))
+              (LETT |segbp1| (SPADCALL |i1| |segp1| (QREFELT % 14)))
               (LETT |i2| 'I2) (LETT |hp2| |n|)
-              (LETT |segp2| (SPADCALL |lp1| |hp2| (QREFELT $ 11)))
-              (LETT |segbp2| (SPADCALL |i2| |segp2| (QREFELT $ 14)))
-              (LETT |ip1| (SPADCALL |i1| (QREFELT $ 15)))
-              (LETT |ip2| (SPADCALL |i2| (QREFELT $ 15)))
+              (LETT |segp2| (SPADCALL |lp1| |hp2| (QREFELT % 11)))
+              (LETT |segbp2| (SPADCALL |i2| |segp2| (QREFELT % 14)))
+              (LETT |ip1| (SPADCALL |i1| (QREFELT % 15)))
+              (LETT |ip2| (SPADCALL |i2| (QREFELT % 15)))
               (LETT |indices| (LIST |ip1| |ip2|))
               (LETT |fa|
                     (SPADCALL |segbp1|
                               (SPADCALL |segbp2|
                                         (SPADCALL |fname| |indices| |ue|
-                                                  (QREFELT $ 18))
-                                        (QREFELT $ 19))
-                              (QREFELT $ 19)))
+                                                  (QREFELT % 18))
+                                        (QREFELT % 19))
+                              (QREFELT % 19)))
               (EXIT |fa|)))) 
 
 (SDEFUN |FCPAK1;zeroMatrix;S2SbFc;3|
         ((|fname| (|Symbol|))
          (|segbp1| (|SegmentBinding| (|Polynomial| (|Integer|))))
          (|segbp2| (|SegmentBinding| (|Polynomial| (|Integer|))))
-         ($ (|FortranCode|)))
+         (% (|FortranCode|)))
         (SPROG
          ((|fa| (|FortranCode|))
           (|indices| (|List| #1=(|Polynomial| (|Integer|)))) (|ip2| #1#)
           (|ip1| (|Polynomial| (|Integer|))) (|i2| #2=(|Symbol|)) (|i1| #2#)
           (|ue| (|Expression| (|Integer|))))
-         (SEQ (LETT |ue| (|spadConstant| $ 7))
-              (LETT |i1| (SPADCALL |segbp1| (QREFELT $ 22)))
-              (LETT |i2| (SPADCALL |segbp2| (QREFELT $ 22)))
-              (LETT |ip1| (SPADCALL |i1| (QREFELT $ 15)))
-              (LETT |ip2| (SPADCALL |i2| (QREFELT $ 15)))
+         (SEQ (LETT |ue| (|spadConstant| % 7))
+              (LETT |i1| (SPADCALL |segbp1| (QREFELT % 22)))
+              (LETT |i2| (SPADCALL |segbp2| (QREFELT % 22)))
+              (LETT |ip1| (SPADCALL |i1| (QREFELT % 15)))
+              (LETT |ip2| (SPADCALL |i2| (QREFELT % 15)))
               (LETT |indices| (LIST |ip1| |ip2|))
               (LETT |fa|
                     (SPADCALL |segbp1|
                               (SPADCALL |segbp2|
                                         (SPADCALL |fname| |indices| |ue|
-                                                  (QREFELT $ 18))
-                                        (QREFELT $ 19))
-                              (QREFELT $ 19)))
+                                                  (QREFELT % 18))
+                                        (QREFELT % 19))
+                              (QREFELT % 19)))
               (EXIT |fa|)))) 
 
 (SDEFUN |FCPAK1;zeroSquareMatrix;SPFc;4|
         ((|fname| (|Symbol|)) (|n| (|Polynomial| (|Integer|)))
-         ($ (|FortranCode|)))
+         (% (|FortranCode|)))
         (SPROG
          ((|fa| (|FortranCode|))
           (|indices| (|List| #1=(|Polynomial| (|Integer|)))) (|ip2| #1#)
@@ -90,27 +90,27 @@
           (|segp1| (|Segment| (|Polynomial| (|Integer|))))
           (|hp1| (|Polynomial| (|Integer|))) (|lp1| (|Polynomial| (|Integer|)))
           (|i1| (|Symbol|)) (|ue| (|Expression| (|Integer|))))
-         (SEQ (LETT |ue| (|spadConstant| $ 7)) (LETT |i1| 'I1)
-              (LETT |lp1| (|spadConstant| $ 9)) (LETT |hp1| |n|)
-              (LETT |segp1| (SPADCALL |lp1| |hp1| (QREFELT $ 11)))
-              (LETT |segbp1| (SPADCALL |i1| |segp1| (QREFELT $ 14)))
+         (SEQ (LETT |ue| (|spadConstant| % 7)) (LETT |i1| 'I1)
+              (LETT |lp1| (|spadConstant| % 9)) (LETT |hp1| |n|)
+              (LETT |segp1| (SPADCALL |lp1| |hp1| (QREFELT % 11)))
+              (LETT |segbp1| (SPADCALL |i1| |segp1| (QREFELT % 14)))
               (LETT |i2| 'I2)
-              (LETT |segbp2| (SPADCALL |i2| |segp1| (QREFELT $ 14)))
-              (LETT |ip1| (SPADCALL |i1| (QREFELT $ 15)))
-              (LETT |ip2| (SPADCALL |i2| (QREFELT $ 15)))
+              (LETT |segbp2| (SPADCALL |i2| |segp1| (QREFELT % 14)))
+              (LETT |ip1| (SPADCALL |i1| (QREFELT % 15)))
+              (LETT |ip2| (SPADCALL |i2| (QREFELT % 15)))
               (LETT |indices| (LIST |ip1| |ip2|))
               (LETT |fa|
                     (SPADCALL |segbp1|
                               (SPADCALL |segbp2|
                                         (SPADCALL |fname| |indices| |ue|
-                                                  (QREFELT $ 18))
-                                        (QREFELT $ 19))
-                              (QREFELT $ 19)))
+                                                  (QREFELT % 18))
+                                        (QREFELT % 19))
+                              (QREFELT % 19)))
               (EXIT |fa|)))) 
 
 (SDEFUN |FCPAK1;identitySquareMatrix;SPFc;5|
         ((|fname| (|Symbol|)) (|n| (|Polynomial| (|Integer|)))
-         ($ (|FortranCode|)))
+         (% (|FortranCode|)))
         (SPROG
          ((|fa| #1=(|FortranCode|)) (|fl| (|List| #2=(|FortranCode|)))
           (|f1| #2#) (|fc| #1#)
@@ -123,33 +123,33 @@
           (|hp1| (|Polynomial| (|Integer|))) (|lp1| (|Polynomial| (|Integer|)))
           (|i1| (|Symbol|)) (|u1| (|Expression| (|Integer|)))
           (|ue| (|Expression| (|Integer|))))
-         (SEQ (LETT |ue| (|spadConstant| $ 7))
-              (LETT |u1| (|spadConstant| $ 25)) (LETT |i1| 'I1)
-              (LETT |lp1| (|spadConstant| $ 9)) (LETT |hp1| |n|)
-              (LETT |segp1| (SPADCALL |lp1| |hp1| (QREFELT $ 11)))
-              (LETT |segbp1| (SPADCALL |i1| |segp1| (QREFELT $ 14)))
+         (SEQ (LETT |ue| (|spadConstant| % 7))
+              (LETT |u1| (|spadConstant| % 25)) (LETT |i1| 'I1)
+              (LETT |lp1| (|spadConstant| % 9)) (LETT |hp1| |n|)
+              (LETT |segp1| (SPADCALL |lp1| |hp1| (QREFELT % 11)))
+              (LETT |segbp1| (SPADCALL |i1| |segp1| (QREFELT % 14)))
               (LETT |i2| 'I2)
-              (LETT |segbp2| (SPADCALL |i2| |segp1| (QREFELT $ 14)))
-              (LETT |ip1| (SPADCALL |i1| (QREFELT $ 15)))
-              (LETT |ip2| (SPADCALL |i2| (QREFELT $ 15)))
+              (LETT |segbp2| (SPADCALL |i2| |segp1| (QREFELT % 14)))
+              (LETT |ip1| (SPADCALL |i1| (QREFELT % 15)))
+              (LETT |ip2| (SPADCALL |i2| (QREFELT % 15)))
               (LETT |indice1| (LIST |ip1| |ip1|))
               (LETT |indices| (LIST |ip1| |ip2|))
               (LETT |fc|
                     (SPADCALL |segbp2|
-                              (SPADCALL |fname| |indices| |ue| (QREFELT $ 18))
-                              (QREFELT $ 19)))
-              (LETT |f1| (SPADCALL |fname| |indice1| |u1| (QREFELT $ 18)))
+                              (SPADCALL |fname| |indices| |ue| (QREFELT % 18))
+                              (QREFELT % 19)))
+              (LETT |f1| (SPADCALL |fname| |indice1| |u1| (QREFELT % 18)))
               (LETT |fl| (LIST |fc| |f1|))
               (LETT |fa|
-                    (SPADCALL |segbp1| (SPADCALL |fl| (QREFELT $ 27))
-                              (QREFELT $ 19)))
+                    (SPADCALL |segbp1| (SPADCALL |fl| (QREFELT % 27))
+                              (QREFELT % 19)))
               (EXIT |fa|)))) 
 
 (DECLAIM (NOTINLINE |FortranCodePackage1;|)) 
 
 (DEFUN |FortranCodePackage1| ()
   (SPROG NIL
-         (PROG (#1=#:G711)
+         (PROG (#1=#:G459)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|FortranCodePackage1|))
@@ -167,17 +167,17 @@
                   (HREM |$ConstructorCache| '|FortranCodePackage1|)))))))))) 
 
 (DEFUN |FortranCodePackage1;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|FortranCodePackage1|))
-          (LETT $ (GETREFV 29))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 29))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|FortranCodePackage1| NIL
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|FortranCodePackage1| '|infovec|
           (LIST
@@ -188,7 +188,7 @@
               (32 . |forLoop|) |FCPAK1;zeroVector;SPFc;1|
               |FCPAK1;zeroMatrix;S2PFc;2| (38 . |variable|)
               |FCPAK1;zeroMatrix;S2SbFc;3| |FCPAK1;zeroSquareMatrix;SPFc;4|
-              (43 . |One|) (|List| $) (47 . |block|)
+              (43 . |One|) (|List| %) (47 . |block|)
               |FCPAK1;identitySquareMatrix;SPFc;5|)
            '#(|zeroVector| 52 |zeroSquareMatrix| 58 |zeroMatrix| 64
               |identitySquareMatrix| 78)

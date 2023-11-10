@@ -8,29 +8,29 @@
         (T (SETQ |FloatingPointSystem;AL| (|FloatingPointSystem;|))))) 
 
 (DEFUN |FloatingPointSystem;| ()
-  (SPROG ((#1=#:G690 NIL))
+  (SPROG ((#1=#:G449 NIL))
          (PROG1
              (LETT #1#
-                   (|subst_in_cat| '(#2=#:G689) (LIST '(|String|))
+                   (|subst_in_cat| '(#2=#:G448) (LIST '(|String|))
                                    (|Join| (|RealNumberSystem|) (|Approximate|)
                                            (|ConvertibleTo| '#2#)
                                            (|mkCategory|
-                                            '(((/ ($ $ (|Integer|))) T)
+                                            '(((/ (% % (|Integer|))) T)
                                               ((|float|
-                                                ($ (|Integer|) (|Integer|)))
+                                                (% (|Integer|) (|Integer|)))
                                                T)
                                               ((|float|
-                                                ($ (|Integer|) (|Integer|)
+                                                (% (|Integer|) (|Integer|)
                                                  (|PositiveInteger|)))
                                                T)
-                                              ((|order| ((|Integer|) $)) T)
+                                              ((|order| ((|Integer|) %)) T)
                                               ((|base| ((|PositiveInteger|)))
                                                T)
-                                              ((|exponent| ((|Integer|) $)) T)
-                                              ((|mantissa| ((|Integer|) $)) T)
-                                              ((|toString| ((|String|) $)) T)
+                                              ((|exponent| ((|Integer|) %)) T)
+                                              ((|mantissa| ((|Integer|) %)) T)
+                                              ((|toString| ((|String|) %)) T)
                                               ((|toString|
-                                                ((|String|) $
+                                                ((|String|) %
                                                  (|NonNegativeInteger|)))
                                                T)
                                               ((|bits| ((|PositiveInteger|)))
@@ -43,43 +43,43 @@
                                               ((|bits|
                                                 ((|PositiveInteger|)
                                                  (|PositiveInteger|)))
-                                               (|has| $
+                                               (|has| %
                                                       (|arbitraryPrecision|)))
                                               ((|digits|
                                                 ((|PositiveInteger|)
                                                  (|PositiveInteger|)))
-                                               (|has| $
+                                               (|has| %
                                                       (|arbitraryPrecision|)))
                                               ((|precision|
                                                 ((|PositiveInteger|)
                                                  (|PositiveInteger|)))
-                                               (|has| $
+                                               (|has| %
                                                       (|arbitraryPrecision|)))
                                               ((|increasePrecision|
                                                 ((|PositiveInteger|)
                                                  (|Integer|)))
-                                               (|has| $
+                                               (|has| %
                                                       (|arbitraryPrecision|)))
                                               ((|decreasePrecision|
                                                 ((|PositiveInteger|)
                                                  (|Integer|)))
-                                               (|has| $
+                                               (|has| %
                                                       (|arbitraryPrecision|)))
-                                              ((|min| ($))
+                                              ((|min| (%))
                                                (AND
                                                 (|not|
-                                                 (|has| $
+                                                 (|has| %
                                                         (|arbitraryPrecision|)))
                                                 (|not|
-                                                 (|has| $
+                                                 (|has| %
                                                         (|arbitraryExponent|)))))
-                                              ((|max| ($))
+                                              ((|max| (%))
                                                (AND
                                                 (|not|
-                                                 (|has| $
+                                                 (|has| %
                                                         (|arbitraryPrecision|)))
                                                 (|not|
-                                                 (|has| $
+                                                 (|has| %
                                                         (|arbitraryExponent|))))))
                                             NIL NIL NIL))))
            (SETELT #1# 0 '(|FloatingPointSystem|))))) 

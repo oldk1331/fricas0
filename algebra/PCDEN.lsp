@@ -1,51 +1,51 @@
 
-(SDEFUN |PCDEN;commonDenominator;PR;1| ((|p| (P)) ($ (R)))
-        (SPADCALL (SPADCALL |p| (QREFELT $ 12)) (QREFELT $ 14))) 
+(SDEFUN |PCDEN;commonDenominator;PR;1| ((|p| (P)) (% (R)))
+        (SPADCALL (SPADCALL |p| (QREFELT % 12)) (QREFELT % 14))) 
 
-(SDEFUN |PCDEN;clearDenominator;2P;2| ((|p| (P)) ($ (P)))
+(SDEFUN |PCDEN;clearDenominator;2P;2| ((|p| (P)) (% (P)))
         (SPROG ((|d| (R)))
-               (SEQ (LETT |d| (SPADCALL |p| (QREFELT $ 15)))
+               (SEQ (LETT |d| (SPADCALL |p| (QREFELT % 15)))
                     (EXIT
                      (SPADCALL
-                      (CONS #'|PCDEN;clearDenominator;2P;2!0| (VECTOR $ |d|))
-                      |p| (QREFELT $ 20)))))) 
+                      (CONS #'|PCDEN;clearDenominator;2P;2!0| (VECTOR % |d|))
+                      |p| (QREFELT % 20)))))) 
 
 (SDEFUN |PCDEN;clearDenominator;2P;2!0| ((|x| NIL) ($$ NIL))
-        (PROG (|d| $)
+        (PROG (|d| %)
           (LETT |d| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
+          (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
             (SPADCALL
-             (SPADCALL (SPADCALL |d| |x| (QREFELT $ 16)) (QREFELT $ 17))
-             (QREFELT $ 18)))))) 
+             (SPADCALL (SPADCALL |d| |x| (QREFELT % 16)) (QREFELT % 17))
+             (QREFELT % 18)))))) 
 
 (SDEFUN |PCDEN;splitDenominator;PR;3|
-        ((|p| (P)) ($ (|Record| (|:| |num| P) (|:| |den| R))))
+        ((|p| (P)) (% (|Record| (|:| |num| P) (|:| |den| R))))
         (SPROG ((|d| (R)))
-               (SEQ (LETT |d| (SPADCALL |p| (QREFELT $ 15)))
+               (SEQ (LETT |d| (SPADCALL |p| (QREFELT % 15)))
                     (EXIT
                      (CONS
                       (SPADCALL
-                       (CONS #'|PCDEN;splitDenominator;PR;3!0| (VECTOR $ |d|))
-                       |p| (QREFELT $ 20))
+                       (CONS #'|PCDEN;splitDenominator;PR;3!0| (VECTOR % |d|))
+                       |p| (QREFELT % 20))
                       |d|))))) 
 
 (SDEFUN |PCDEN;splitDenominator;PR;3!0| ((|x| NIL) ($$ NIL))
-        (PROG (|d| $)
+        (PROG (|d| %)
           (LETT |d| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
+          (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
             (SPADCALL
-             (SPADCALL (SPADCALL |d| |x| (QREFELT $ 16)) (QREFELT $ 17))
-             (QREFELT $ 18)))))) 
+             (SPADCALL (SPADCALL |d| |x| (QREFELT % 16)) (QREFELT % 17))
+             (QREFELT % 18)))))) 
 
 (DECLAIM (NOTINLINE |PolynomialCommonDenominator;|)) 
 
-(DEFUN |PolynomialCommonDenominator| (&REST #1=#:G702)
+(DEFUN |PolynomialCommonDenominator| (&REST #1=#:G457)
   (SPROG NIL
-         (PROG (#2=#:G703)
+         (PROG (#2=#:G458)
            (RETURN
             (COND
              ((LETT #2#
@@ -66,7 +66,7 @@
 
 (DEFUN |PolynomialCommonDenominator;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -75,19 +75,19 @@
     (LETT DV$4 (|devaluate| |#4|))
     (LETT DV$5 (|devaluate| |#5|))
     (LETT |dv$| (LIST '|PolynomialCommonDenominator| DV$1 DV$2 DV$3 DV$4 DV$5))
-    (LETT $ (GETREFV 24))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (LETT % (GETREFV 24))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|PolynomialCommonDenominator|
-                (LIST DV$1 DV$2 DV$3 DV$4 DV$5) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (QSETREFV $ 10 |#5|)
-    (SETF |pv$| (QREFELT $ 3))
-    $))) 
+                (LIST DV$1 DV$2 DV$3 DV$4 DV$5) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (QSETREFV % 10 |#5|)
+    (SETF |pv$| (QREFELT % 3))
+    %))) 
 
 (MAKEPROP '|PolynomialCommonDenominator| '|infovec|
           (LIST

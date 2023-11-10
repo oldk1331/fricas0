@@ -1,17 +1,17 @@
 
 (PUT '|MAPHACK2;arg1;ACA;1| '|SPADreplace| '(XLAM (|a| |c|) |a|)) 
 
-(SDEFUN |MAPHACK2;arg1;ACA;1| ((|a| (A)) (|c| (C)) ($ (A))) |a|) 
+(SDEFUN |MAPHACK2;arg1;ACA;1| ((|a| (A)) (|c| (C)) (% (A))) |a|) 
 
 (PUT '|MAPHACK2;arg2;A2C;2| '|SPADreplace| '(XLAM (|a| |c|) |c|)) 
 
-(SDEFUN |MAPHACK2;arg2;A2C;2| ((|a| (A)) (|c| (C)) ($ (C))) |c|) 
+(SDEFUN |MAPHACK2;arg2;A2C;2| ((|a| (A)) (|c| (C)) (% (C))) |c|) 
 
 (DECLAIM (NOTINLINE |MappingPackageInternalHacks2;|)) 
 
-(DEFUN |MappingPackageInternalHacks2| (&REST #1=#:G691)
+(DEFUN |MappingPackageInternalHacks2| (&REST #1=#:G450)
   (SPROG NIL
-         (PROG (#2=#:G692)
+         (PROG (#2=#:G451)
            (RETURN
             (COND
              ((LETT #2#
@@ -31,21 +31,21 @@
                         '|MappingPackageInternalHacks2|)))))))))) 
 
 (DEFUN |MappingPackageInternalHacks2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|MappingPackageInternalHacks2| DV$1 DV$2))
-          (LETT $ (GETREFV 10))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 10))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|MappingPackageInternalHacks2|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|MappingPackageInternalHacks2| '|infovec|
           (LIST

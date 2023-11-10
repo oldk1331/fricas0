@@ -1,10 +1,10 @@
 
 (SDEFUN |TRIGMNPA;ker2explogs|
-        ((|k| (|Kernel| FG)) (|l| (|List| (|Kernel| FG))) ($ (FG)))
+        ((|k| (|Kernel| FG)) (|l| (|List| (|Kernel| FG))) (% (FG)))
         (SPROG
-         ((|e| (FG)) (|z| (FG)) (|args| (|List| FG)) (#1=#:G726 NIL) (|a| NIL)
-          (#2=#:G725 NIL) (|kf| (FG)))
-         (SEQ (LETT |kf| (SPADCALL |k| (QREFELT $ 13)))
+         ((|e| (FG)) (|z| (FG)) (|args| (|List| FG)) (#1=#:G469 NIL) (|a| NIL)
+          (#2=#:G468 NIL) (|kf| (FG)))
+         (SEQ (LETT |kf| (SPADCALL |k| (QREFELT % 13)))
               (EXIT
                (COND
                 ((NULL
@@ -12,7 +12,7 @@
                         (PROGN
                          (LETT #2# NIL)
                          (SEQ (LETT |a| NIL)
-                              (LETT #1# (SPADCALL |k| (QREFELT $ 16))) G190
+                              (LETT #1# (SPADCALL |k| (QREFELT % 16))) G190
                               (COND
                                ((OR (ATOM #1#)
                                     (PROGN (LETT |a| (CAR #1#)) NIL))
@@ -20,7 +20,7 @@
                               (SEQ
                                (EXIT
                                 (LETT #2#
-                                      (CONS (SPADCALL |a| |l| (QREFELT $ 18))
+                                      (CONS (SPADCALL |a| |l| (QREFELT % 18))
                                             #2#))))
                               (LETT #1# (CDR #1#)) (GO G190) G191
                               (EXIT (NREVERSE #2#))))))
@@ -29,79 +29,79 @@
                  (SEQ (LETT |z| (|SPADfirst| |args|))
                       (EXIT
                        (COND
-                        ((SPADCALL |k| '|tan| (QREFELT $ 21))
+                        ((SPADCALL |k| '|tan| (QREFELT % 21))
                          (SEQ
                           (LETT |e|
                                 (COND
-                                 ((SPADCALL |k| |l| (QREFELT $ 22))
+                                 ((SPADCALL |k| |l| (QREFELT % 22))
                                   (SPADCALL
                                    (SPADCALL
-                                    (SPADCALL (QREFELT $ 11) |z|
-                                              (QREFELT $ 23))
-                                    (QREFELT $ 24))
-                                   2 (QREFELT $ 26)))
+                                    (SPADCALL (QREFELT % 11) |z|
+                                              (QREFELT % 23))
+                                    (QREFELT % 24))
+                                   2 (QREFELT % 26)))
                                  (#3#
                                   (SPADCALL
                                    (SPADCALL
-                                    (SPADCALL 2 (QREFELT $ 11) (QREFELT $ 28))
-                                    |z| (QREFELT $ 23))
-                                   (QREFELT $ 24)))))
+                                    (SPADCALL 2 (QREFELT % 11) (QREFELT % 28))
+                                    |z| (QREFELT % 23))
+                                   (QREFELT % 24)))))
                           (EXIT
                            (SPADCALL
                             (SPADCALL
-                             (SPADCALL (QREFELT $ 11)
-                                       (SPADCALL |e| (|spadConstant| $ 30)
-                                                 (QREFELT $ 31))
-                                       (QREFELT $ 23))
-                             (SPADCALL |e| (|spadConstant| $ 30)
-                                       (QREFELT $ 32))
-                             (QREFELT $ 33))
-                            (QREFELT $ 34)))))
-                        ((SPADCALL |k| '|atan| (QREFELT $ 21))
+                             (SPADCALL (QREFELT % 11)
+                                       (SPADCALL |e| (|spadConstant| % 30)
+                                                 (QREFELT % 31))
+                                       (QREFELT % 23))
+                             (SPADCALL |e| (|spadConstant| % 30)
+                                       (QREFELT % 32))
+                             (QREFELT % 33))
+                            (QREFELT % 34)))))
+                        ((SPADCALL |k| '|atan| (QREFELT % 21))
                          (SPADCALL
-                          (SPADCALL (QREFELT $ 11)
+                          (SPADCALL (QREFELT % 11)
                                     (SPADCALL
                                      (SPADCALL
-                                      (SPADCALL (|spadConstant| $ 30)
-                                                (SPADCALL (QREFELT $ 11) |z|
-                                                          (QREFELT $ 23))
-                                                (QREFELT $ 31))
-                                      (SPADCALL (|spadConstant| $ 30)
-                                                (SPADCALL (QREFELT $ 11) |z|
-                                                          (QREFELT $ 23))
-                                                (QREFELT $ 32))
-                                      (QREFELT $ 33))
-                                     (QREFELT $ 35))
-                                    (QREFELT $ 23))
-                          (SPADCALL 2 (QREFELT $ 36)) (QREFELT $ 33)))
+                                      (SPADCALL (|spadConstant| % 30)
+                                                (SPADCALL (QREFELT % 11) |z|
+                                                          (QREFELT % 23))
+                                                (QREFELT % 31))
+                                      (SPADCALL (|spadConstant| % 30)
+                                                (SPADCALL (QREFELT % 11) |z|
+                                                          (QREFELT % 23))
+                                                (QREFELT % 32))
+                                      (QREFELT % 33))
+                                     (QREFELT % 35))
+                                    (QREFELT % 23))
+                          (SPADCALL 2 (QREFELT % 36)) (QREFELT % 33)))
                         (#3#
-                         (SPADCALL (SPADCALL |k| (QREFELT $ 38)) |args|
-                                   (QREFELT $ 40)))))))))))) 
+                         (SPADCALL (SPADCALL |k| (QREFELT % 38)) |args|
+                                   (QREFELT % 40)))))))))))) 
 
 (SDEFUN |TRIGMNPA;trigs2explogs;FGLFG;2|
-        ((|f| (FG)) (|l| (|List| (|Kernel| FG))) ($ (FG)))
-        (SPADCALL (|TRIGMNPA;smp2explogs| (SPADCALL |f| (QREFELT $ 42)) |l| $)
-                  (|TRIGMNPA;smp2explogs| (SPADCALL |f| (QREFELT $ 43)) |l| $)
-                  (QREFELT $ 33))) 
+        ((|f| (FG)) (|l| (|List| (|Kernel| FG))) (% (FG)))
+        (SPADCALL (|TRIGMNPA;smp2explogs| (SPADCALL |f| (QREFELT % 42)) |l| %)
+                  (|TRIGMNPA;smp2explogs| (SPADCALL |f| (QREFELT % 43)) |l| %)
+                  (QREFELT % 33))) 
 
 (SDEFUN |TRIGMNPA;smp2explogs|
         ((|p| (|SparseMultivariatePolynomial| G (|Kernel| FG)))
-         (|l| (|List| (|Kernel| FG))) ($ (FG)))
+         (|l| (|List| (|Kernel| FG))) (% (FG)))
         (SPROG NIL
-               (SPADCALL (CONS #'|TRIGMNPA;smp2explogs!0| (VECTOR $ |l|))
-                         (ELT $ 10) |p| (QREFELT $ 48)))) 
+               (SPADCALL (CONS #'|TRIGMNPA;smp2explogs!0| (VECTOR % |l|))
+                         (ELT % 10) |p| (QREFELT % 48)))) 
 
 (SDEFUN |TRIGMNPA;smp2explogs!0| ((|x| NIL) ($$ NIL))
-        (PROG (|l| $)
+        (PROG (|l| %)
           (LETT |l| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (|TRIGMNPA;ker2explogs| |x| |l| $))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (|TRIGMNPA;ker2explogs| |x| |l| %))))) 
 
 (DECLAIM (NOTINLINE |TrigonometricManipulationsAux;|)) 
 
-(DEFUN |TrigonometricManipulationsAux| (&REST #1=#:G730)
+(DEFUN |TrigonometricManipulationsAux| (&REST #1=#:G473)
   (SPROG NIL
-         (PROG (#2=#:G731)
+         (PROG (#2=#:G474)
            (RETURN
             (COND
              ((LETT #2#
@@ -121,40 +121,40 @@
                         '|TrigonometricManipulationsAux|)))))))))) 
 
 (DEFUN |TrigonometricManipulationsAux;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|TrigonometricManipulationsAux| DV$1 DV$2))
-          (LETT $ (GETREFV 49))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 49))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|TrigonometricManipulationsAux|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 9
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 9
                     (COND
                      ((|HasSignature| |#1|
                                       (LIST '|imaginary|
                                             (LIST (|devaluate| |#1|))))
-                      (SPADCALL (QREFELT $ 8)))
+                      (SPADCALL (QREFELT % 8)))
                      ('T (|error| "G must have imaginary unit"))))
-          (QSETREFV $ 11 (SPADCALL (QREFELT $ 9) (QREFELT $ 10)))
-          $))) 
+          (QSETREFV % 11 (SPADCALL (QREFELT % 9) (QREFELT % 10)))
+          %))) 
 
 (MAKEPROP '|TrigonometricManipulationsAux| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (0 . |imaginary|) '|im1| (4 . |coerce|) '|im| (|Kernel| $)
+              (0 . |imaginary|) '|im1| (4 . |coerce|) '|im| (|Kernel| %)
               (9 . |coerce|) (|List| 7) (|Kernel| 7) (14 . |argument|)
               (|List| 15) |TRIGMNPA;trigs2explogs;FGLFG;2| (|Boolean|)
               (|Symbol|) (19 . |is?|) (25 . |member?|) (31 . *) (37 . |exp|)
               (|Integer|) (42 . ^) (|PositiveInteger|) (48 . *) (54 . |One|)
               (58 . |One|) (62 . -) (68 . +) (74 . /) (80 . -) (85 . |log|)
-              (90 . |coerce|) (|BasicOperator|) (95 . |operator|) (|List| $)
+              (90 . |coerce|) (|BasicOperator|) (95 . |operator|) (|List| %)
               (100 . |elt|) (|SparseMultivariatePolynomial| 6 12)
               (106 . |numer|) (111 . |denom|) (|Mapping| 7 15) (|Mapping| 7 6)
               (|SparseMultivariatePolynomial| 6 15)

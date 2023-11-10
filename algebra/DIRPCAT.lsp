@@ -6,7 +6,7 @@
 (DEFPARAMETER |DirectProductCategory;AL| 'NIL) 
 
 (DEFUN |DirectProductCategory| (|t#1| |t#2|)
-  (LET (#1=#:G698 (#2=#:G699 (LIST |t#1| (|devaluate| |t#2|))))
+  (LET (#1=#:G453 (#2=#:G454 (LIST |t#1| (|devaluate| |t#2|))))
     (COND ((SETQ #1# (|assoc| #2# |DirectProductCategory;AL|)) (CDR #1#))
           (T
            (SETQ |DirectProductCategory;AL|
@@ -17,11 +17,11 @@
            #1#)))) 
 
 (DEFUN |DirectProductCategory;| (|t#1| |t#2|)
-  (SPROG ((#1=#:G697 NIL))
+  (SPROG ((#1=#:G452 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2|) (LIST |t#1| |t#2|)
-                                   (|subst_in_cat| '(#2=#:G695 #3=#:G696)
+                                   (|subst_in_cat| '(#2=#:G450 #3=#:G451)
                                                    (LIST '(|Integer|)
                                                          '(|Vector| |t#2|))
                                                    (COND
@@ -38,27 +38,27 @@
                                                        (|finiteAggregate|)
                                                        (|mkCategory|
                                                         '(((|directProduct|
-                                                            ($
+                                                            (%
                                                              (|Vector| |t#2|)))
                                                            T)
                                                           ((|unitVector|
-                                                            ($
+                                                            (%
                                                              (|PositiveInteger|)))
                                                            (AND
                                                             (|has| |t#2|
                                                                    (|Monoid|))
                                                             (|has| |t#2|
                                                                    (|AbelianMonoid|))))
-                                                          ((|dot| (|t#2| $ $))
+                                                          ((|dot| (|t#2| % %))
                                                            (AND
                                                             (|has| |t#2|
                                                                    (|AbelianMonoid|))
                                                             (|has| |t#2|
                                                                    (|SemiRng|))))
-                                                          ((* ($ |t#2| $))
+                                                          ((* (% |t#2| %))
                                                            (|has| |t#2|
                                                                   (|SemiGroup|)))
-                                                          ((* ($ $ |t#2|))
+                                                          ((* (% % |t#2|))
                                                            (|has| |t#2|
                                                                   (|SemiGroup|))))
                                                         '(((|FullyRetractableTo|

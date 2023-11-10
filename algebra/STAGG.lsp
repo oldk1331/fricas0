@@ -6,7 +6,7 @@
 (DEFPARAMETER |StreamAggregate;AL| 'NIL) 
 
 (DEFUN |StreamAggregate| (|t#1|)
-  (LET (#1=#:G698 (#2=#:G699 (|devaluate| |t#1|)))
+  (LET (#1=#:G457 (#2=#:G458 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |StreamAggregate;AL|)) (CDR #1#))
           (T
            (SETQ |StreamAggregate;AL|
@@ -15,7 +15,7 @@
            #1#)))) 
 
 (DEFUN |StreamAggregate;| (|t#1|)
-  (SPROG ((#1=#:G697 NIL))
+  (SPROG ((#1=#:G456 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -28,10 +28,10 @@
                                                  (|LinearAggregate| '|t#1|)
                                                  (|mkCategory|
                                                   '(((|explicitlyFinite?|
-                                                      ((|Boolean|) $))
+                                                      ((|Boolean|) %))
                                                      T)
                                                     ((|possiblyInfinite?|
-                                                      ((|Boolean|) $))
+                                                      ((|Boolean|) %))
                                                      T))
                                                   NIL NIL NIL)))))))
            (SETELT #1# 0 (LIST '|StreamAggregate| |t#1|))))) 

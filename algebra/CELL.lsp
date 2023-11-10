@@ -1,16 +1,16 @@
 
-(PUT '|CELL;simpleCells;$L;1| '|SPADreplace| '(XLAM (|c|) |c|)) 
+(PUT '|CELL;simpleCells;%L;1| '|SPADreplace| '(XLAM (|c|) |c|)) 
 
-(SDEFUN |CELL;simpleCells;$L;1|
-        ((|c| ($))
-         ($
+(SDEFUN |CELL;simpleCells;%L;1|
+        ((|c| (%))
+         (%
           (|List|
            (|SimpleCell| |TheField|
                          (|SparseUnivariatePolynomial| |TheField|)))))
         |c|) 
 
-(SDEFUN |CELL;coerce;$Of;2| ((|c| ($)) ($ (|OutputForm|)))
-        (SPROG ((#1=#:G707 NIL) (|sc| NIL) (#2=#:G706 NIL))
+(SDEFUN |CELL;coerce;%Of;2| ((|c| (%)) (% (|OutputForm|)))
+        (SPROG ((#1=#:G461 NIL) (|sc| NIL) (#2=#:G460 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -21,13 +21,13 @@
                          (GO G191)))
                        (SEQ
                         (EXIT
-                         (LETT #2# (CONS (SPADCALL |sc| (QREFELT $ 12)) #2#))))
+                         (LETT #2# (CONS (SPADCALL |sc| (QREFELT % 12)) #2#))))
                        (LETT #1# (CDR #1#)) (GO G190) G191
                        (EXIT (NREVERSE #2#))))
-                 (QREFELT $ 14))))) 
+                 (QREFELT % 14))))) 
 
-(SDEFUN |CELL;projection;$U;3| ((|cell| ($)) ($ (|Union| $ "failed")))
-        (SPROG ((|r| ($)))
+(SDEFUN |CELL;projection;%U;3| ((|cell| (%)) (% (|Union| % "failed")))
+        (SPROG ((|r| (%)))
                (SEQ
                 (COND ((NULL |cell|) (|error| "projection: should not appear"))
                       (#1='T
@@ -36,42 +36,42 @@
                              (COND ((NULL |r|) (CONS 1 "failed"))
                                    (#1# (CONS 0 |r|)))))))))) 
 
-(PUT '|CELL;makeCell;L$;4| '|SPADreplace| '(XLAM (|l|) |l|)) 
+(PUT '|CELL;makeCell;L%;4| '|SPADreplace| '(XLAM (|l|) |l|)) 
 
-(SDEFUN |CELL;makeCell;L$;4|
+(SDEFUN |CELL;makeCell;L%;4|
         ((|l|
           (|List|
            (|SimpleCell| |TheField|
                          (|SparseUnivariatePolynomial| |TheField|))))
-         ($ ($)))
+         (% (%)))
         |l|) 
 
-(PUT '|CELL;makeCell;Sc2$;5| '|SPADreplace| 'CONS) 
+(PUT '|CELL;makeCell;Sc2%;5| '|SPADreplace| 'CONS) 
 
-(SDEFUN |CELL;makeCell;Sc2$;5|
+(SDEFUN |CELL;makeCell;Sc2%;5|
         ((|scell|
           (|SimpleCell| |TheField| (|SparseUnivariatePolynomial| |TheField|)))
-         (|toAdd| ($)) ($ ($)))
+         (|toAdd| (%)) (% (%)))
         (CONS |scell| |toAdd|)) 
 
-(SDEFUN |CELL;mainVariableOf;$S;6| ((|cell| ($)) ($ (|Symbol|)))
+(SDEFUN |CELL;mainVariableOf;%S;6| ((|cell| (%)) (% (|Symbol|)))
         (COND ((NULL |cell|) (|error| "Should not appear"))
-              ('T (SPADCALL (|SPADfirst| |cell|) (QREFELT $ 21))))) 
+              ('T (SPADCALL (|SPADfirst| |cell|) (QREFELT % 21))))) 
 
-(SDEFUN |CELL;variablesOf;$L;7| ((|cell| ($)) ($ (|List| (|Symbol|))))
+(SDEFUN |CELL;variablesOf;%L;7| ((|cell| (%)) (% (|List| (|Symbol|))))
         (COND ((NULL |cell|) NIL)
               ('T
-               (CONS (SPADCALL |cell| (QREFELT $ 22))
-                     (SPADCALL (CDR |cell|) (QREFELT $ 24)))))) 
+               (CONS (SPADCALL |cell| (QREFELT % 22))
+                     (SPADCALL (CDR |cell|) (QREFELT % 24)))))) 
 
-(SDEFUN |CELL;dimension;$Nni;8| ((|cell| ($)) ($ (|NonNegativeInteger|)))
+(SDEFUN |CELL;dimension;%Nni;8| ((|cell| (%)) (% (|NonNegativeInteger|)))
         (COND ((NULL |cell|) 0)
-              ((SPADCALL (|SPADfirst| |cell|) (QREFELT $ 26))
-               (+ 1 (SPADCALL (CDR |cell|) (QREFELT $ 29))))
-              ('T (SPADCALL (CDR |cell|) (QREFELT $ 29))))) 
+              ((SPADCALL (|SPADfirst| |cell|) (QREFELT % 26))
+               (+ 1 (SPADCALL (CDR |cell|) (QREFELT % 29))))
+              ('T (SPADCALL (CDR |cell|) (QREFELT % 29))))) 
 
-(SDEFUN |CELL;hasDimension?;$SB;9|
-        ((|cell| ($)) (|var| (|Symbol|)) ($ (|Boolean|)))
+(SDEFUN |CELL;hasDimension?;%SB;9|
+        ((|cell| (%)) (|var| (|Symbol|)) (% (|Boolean|)))
         (SPROG
          ((|v| (|Symbol|))
           (|sc|
@@ -81,24 +81,24 @@
           (COND ((NULL |cell|) (|error| "Should not appear"))
                 (#1='T
                  (SEQ (LETT |sc| (|SPADfirst| |cell|))
-                      (LETT |v| (SPADCALL |sc| (QREFELT $ 21)))
+                      (LETT |v| (SPADCALL |sc| (QREFELT % 21)))
                       (EXIT
-                       (COND ((EQUAL |v| |var|) (SPADCALL |sc| (QREFELT $ 26)))
+                       (COND ((EQUAL |v| |var|) (SPADCALL |sc| (QREFELT % 26)))
                              ((GGREATERP |var| |v|) NIL)
-                             ((SPADCALL |v| |var| (QREFELT $ 30)) 'T)
+                             ((SPADCALL |v| |var| (QREFELT % 30)) 'T)
                              (#1# (|error| "impossible")))))))))) 
 
-(SDEFUN |CELL;samplePoint;$L;10| ((|cell| ($)) ($ (|List| |TheField|)))
+(SDEFUN |CELL;samplePoint;%L;10| ((|cell| (%)) (% (|List| |TheField|)))
         (COND ((NULL |cell|) NIL)
               ('T
-               (CONS (SPADCALL (|SPADfirst| |cell|) (QREFELT $ 32))
-                     (SPADCALL (CDR |cell|) (QREFELT $ 34)))))) 
+               (CONS (SPADCALL (|SPADfirst| |cell|) (QREFELT % 32))
+                     (SPADCALL (CDR |cell|) (QREFELT % 34)))))) 
 
 (DECLAIM (NOTINLINE |Cell;|)) 
 
-(DEFUN |Cell| (#1=#:G742)
+(DEFUN |Cell| (#1=#:G485)
   (SPROG NIL
-         (PROG (#2=#:G743)
+         (PROG (#2=#:G486)
            (RETURN
             (COND
              ((LETT #2#
@@ -112,35 +112,35 @@
                 (COND ((NOT #2#) (HREM |$ConstructorCache| '|Cell|)))))))))) 
 
 (DEFUN |Cell;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Cell| DV$1))
-          (LETT $ (GETREFV 35))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|Cell| (LIST DV$1) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 9
+          (LETT % (GETREFV 35))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|Cell| (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 9
                     (|List|
                      (|SimpleCell| |#1| (|SparseUnivariatePolynomial| |#1|))))
-          $))) 
+          %))) 
 
 (MAKEPROP '|Cell| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|List| 11)
-              |CELL;simpleCells;$L;1| '|Rep| (|OutputForm|)
+              |CELL;simpleCells;%L;1| '|Rep| (|OutputForm|)
               (|SimpleCell| 6 (|SparseUnivariatePolynomial| 6)) (0 . |coerce|)
-              (|List| $) (5 . |paren|) |CELL;coerce;$Of;2|
-              (|Union| $ '"failed") |CELL;projection;$U;3| |CELL;makeCell;L$;4|
-              |CELL;makeCell;Sc2$;5| (|Symbol|) (10 . |variableOf|)
-              |CELL;mainVariableOf;$S;6| (|List| 20) |CELL;variablesOf;$L;7|
+              (|List| %) (5 . |paren|) |CELL;coerce;%Of;2|
+              (|Union| % '"failed") |CELL;projection;%U;3| |CELL;makeCell;L%;4|
+              |CELL;makeCell;Sc2%;5| (|Symbol|) (10 . |variableOf|)
+              |CELL;mainVariableOf;%S;6| (|List| 20) |CELL;variablesOf;%L;7|
               (|Boolean|) (15 . |hasDimension?|) (20 . |One|)
-              (|NonNegativeInteger|) |CELL;dimension;$Nni;8| (24 . >)
-              |CELL;hasDimension?;$SB;9| (30 . |samplePoint|) (|List| 6)
-              |CELL;samplePoint;$L;10|)
+              (|NonNegativeInteger|) |CELL;dimension;%Nni;8| (24 . >)
+              |CELL;hasDimension?;%SB;9| (30 . |samplePoint|) (|List| 6)
+              |CELL;samplePoint;%L;10|)
            '#(|variablesOf| 35 |simpleCells| 40 |samplePoint| 45 |projection|
               50 |makeCell| 55 |mainVariableOf| 66 |hasDimension?| 71
               |dimension| 77 |coerce| 82)

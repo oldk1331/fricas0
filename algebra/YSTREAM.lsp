@@ -1,26 +1,26 @@
 
 (SDEFUN |YSTREAM;Y;MS;1|
-        ((|f| (|Mapping| #1=(|Stream| A) (|Stream| A))) ($ (|Stream| A)))
+        ((|f| (|Mapping| #1=(|Stream| A) (|Stream| A))) (% (|Stream| A)))
         (SPROG ((|j| #1#) (|y| (|Stream| A)))
-               (SEQ (LETT |y| (CONS (QREFELT $ 7) 0))
+               (SEQ (LETT |y| (CONS (QREFELT % 7) 0))
                     (LETT |j| (SPADCALL |y| |f|))
-                    (RPLACA |y| (SPADCALL |j| (QREFELT $ 9)))
-                    (RPLACD |y| (SPADCALL |j| (QREFELT $ 10))) (EXIT |y|)))) 
+                    (RPLACA |y| (SPADCALL |j| (QREFELT % 9)))
+                    (RPLACD |y| (SPADCALL |j| (QREFELT % 10))) (EXIT |y|)))) 
 
 (SDEFUN |YSTREAM;Y;MIL;2|
         ((|g| (|Mapping| #1=(|List| (|Stream| A)) (|List| (|Stream| A))))
-         (|n| (|Integer|)) ($ (|List| (|Stream| A))))
+         (|n| (|Integer|)) (% (|List| (|Stream| A))))
         (SPROG
-         ((#2=#:G712 NIL) (|xi| NIL) (#3=#:G713 NIL) (|ji| NIL) (|j| #1#)
-          (|x| (|List| (|Stream| A))) (#4=#:G711 NIL) (|i| NIL)
-          (#5=#:G710 NIL))
+         ((#2=#:G461 NIL) (|xi| NIL) (#3=#:G462 NIL) (|ji| NIL) (|j| #1#)
+          (|x| (|List| (|Stream| A))) (#4=#:G460 NIL) (|i| NIL)
+          (#5=#:G459 NIL))
          (SEQ
           (LETT |x|
                 (PROGN
                  (LETT #5# NIL)
                  (SEQ (LETT |i| 1) (LETT #4# |n|) G190
                       (COND ((|greater_SI| |i| #4#) (GO G191)))
-                      (SEQ (EXIT (LETT #5# (CONS (CONS (QREFELT $ 7) 0) #5#))))
+                      (SEQ (EXIT (LETT #5# (CONS (CONS (QREFELT % 7) 0) #5#))))
                       (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                       (EXIT (NREVERSE #5#)))))
           (LETT |j| (SPADCALL |x| |g|))
@@ -30,17 +30,17 @@
                 ((OR (ATOM #2#) (PROGN (LETT |xi| (CAR #2#)) NIL) (ATOM #3#)
                      (PROGN (LETT |ji| (CAR #3#)) NIL))
                  (GO G191)))
-               (SEQ (RPLACA |xi| (SPADCALL |ji| (QREFELT $ 9)))
-                    (EXIT (RPLACD |xi| (SPADCALL |ji| (QREFELT $ 10)))))
+               (SEQ (RPLACA |xi| (SPADCALL |ji| (QREFELT % 9)))
+                    (EXIT (RPLACD |xi| (SPADCALL |ji| (QREFELT % 10)))))
                (LETT #2# (PROG1 (CDR #2#) (LETT #3# (CDR #3#)))) (GO G190) G191
                (EXIT NIL))
           (EXIT |x|)))) 
 
 (DECLAIM (NOTINLINE |ParadoxicalCombinatorsForStreams;|)) 
 
-(DEFUN |ParadoxicalCombinatorsForStreams| (#1=#:G714)
+(DEFUN |ParadoxicalCombinatorsForStreams| (#1=#:G463)
   (SPROG NIL
-         (PROG (#2=#:G715)
+         (PROG (#2=#:G464)
            (RETURN
             (COND
              ((LETT #2#
@@ -59,20 +59,20 @@
                         '|ParadoxicalCombinatorsForStreams|)))))))))) 
 
 (DEFUN |ParadoxicalCombinatorsForStreams;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|ParadoxicalCombinatorsForStreams| DV$1))
-          (LETT $ (GETREFV 17))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 17))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|ParadoxicalCombinatorsForStreams|
-                      (LIST DV$1) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 7 |$UninitializedStream|)
-          $))) 
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 7 |$UninitializedStream|)
+          %))) 
 
 (MAKEPROP '|ParadoxicalCombinatorsForStreams| '|infovec|
           (LIST

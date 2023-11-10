@@ -6,7 +6,7 @@
 (DEFPARAMETER |OctonionCategory;AL| 'NIL) 
 
 (DEFUN |OctonionCategory| (|t#1|)
-  (LET (#1=#:G756 (#2=#:G757 (|devaluate| |t#1|)))
+  (LET (#1=#:G515 (#2=#:G516 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |OctonionCategory;AL|)) (CDR #1#))
           (T
            (SETQ |OctonionCategory;AL|
@@ -15,7 +15,7 @@
            #1#)))) 
 
 (DEFUN |OctonionCategory;| (|t#1|)
-  (SPROG ((#1=#:G755 NIL))
+  (SPROG ((#1=#:G514 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -28,31 +28,31 @@
                                                  (|FullyRetractableTo| '|t#1|)
                                                  (|FullyEvalableOver| '|t#1|)
                                                  (|mkCategory|
-                                                  '(((|conjugate| ($ $)) T)
-                                                    ((|real| (|t#1| $)) T)
-                                                    ((|imagi| (|t#1| $)) T)
-                                                    ((|imagj| (|t#1| $)) T)
-                                                    ((|imagk| (|t#1| $)) T)
-                                                    ((|imagE| (|t#1| $)) T)
-                                                    ((|imagI| (|t#1| $)) T)
-                                                    ((|imagJ| (|t#1| $)) T)
-                                                    ((|imagK| (|t#1| $)) T)
-                                                    ((|norm| (|t#1| $)) T)
+                                                  '(((|conjugate| (% %)) T)
+                                                    ((|real| (|t#1| %)) T)
+                                                    ((|imagi| (|t#1| %)) T)
+                                                    ((|imagj| (|t#1| %)) T)
+                                                    ((|imagk| (|t#1| %)) T)
+                                                    ((|imagE| (|t#1| %)) T)
+                                                    ((|imagI| (|t#1| %)) T)
+                                                    ((|imagJ| (|t#1| %)) T)
+                                                    ((|imagK| (|t#1| %)) T)
+                                                    ((|norm| (|t#1| %)) T)
                                                     ((|octon|
-                                                      ($ |t#1| |t#1| |t#1|
+                                                      (% |t#1| |t#1| |t#1|
                                                        |t#1| |t#1| |t#1| |t#1|
                                                        |t#1|))
                                                      T)
-                                                    ((|abs| (|t#1| $))
+                                                    ((|abs| (|t#1| %))
                                                      (|has| |t#1|
                                                             (|RealNumberSystem|)))
                                                     ((|rational?|
-                                                      ((|Boolean|) $))
+                                                      ((|Boolean|) %))
                                                      (|has| |t#1|
                                                             (|IntegerNumberSystem|)))
                                                     ((|rational|
                                                       ((|Fraction| (|Integer|))
-                                                       $))
+                                                       %))
                                                      (|has| |t#1|
                                                             (|IntegerNumberSystem|)))
                                                     ((|rationalIfCan|
@@ -60,10 +60,10 @@
                                                         (|Fraction|
                                                          (|Integer|))
                                                         "failed")
-                                                       $))
+                                                       %))
                                                      (|has| |t#1|
                                                             (|IntegerNumberSystem|)))
-                                                    ((|inv| ($ $))
+                                                    ((|inv| (% %))
                                                      (|has| |t#1| (|Field|))))
                                                   '(((|OrderedSet|)
                                                      (|has| |t#1|

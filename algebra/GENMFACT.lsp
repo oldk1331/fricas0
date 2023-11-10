@@ -1,49 +1,49 @@
 
-(SDEFUN |GENMFACT;factor;PF;1| ((|p| (P)) ($ (|Factored| P)))
+(SDEFUN |GENMFACT;factor;PF;1| ((|p| (P)) (% (|Factored| P)))
         (SEQ
          (COND
-          ((|HasCategory| (QREFELT $ 9) '(|FiniteFieldCategory|))
-           (SPADCALL |p| (QREFELT $ 13)))
+          ((|HasCategory| (QREFELT % 9) '(|FiniteFieldCategory|))
+           (SPADCALL |p| (QREFELT % 13)))
           (#1='T
            (SEQ
             (COND
-             ((|domainEqual| (QREFELT $ 9) (|Polynomial| (QREFELT $ 8)))
+             ((|domainEqual| (QREFELT % 9) (|Polynomial| (QREFELT % 8)))
               (COND
-               ((|HasCategory| (QREFELT $ 8) '(|EuclideanDomain|))
-                (EXIT (SPADCALL |p| (QREFELT $ 15)))))))
+               ((|HasCategory| (QREFELT % 8) '(|EuclideanDomain|))
+                (EXIT (SPADCALL |p| (QREFELT % 15)))))))
             (COND
-             ((|domainEqual| (QREFELT $ 9) (|Fraction| (QREFELT $ 8)))
+             ((|domainEqual| (QREFELT % 9) (|Fraction| (QREFELT % 8)))
               (COND
-               ((|HasCategory| (QREFELT $ 8) '(|CharacteristicZero|))
+               ((|HasCategory| (QREFELT % 8) '(|CharacteristicZero|))
                 (COND
-                 ((|HasCategory| (QREFELT $ 8) '(|EuclideanDomain|))
+                 ((|HasCategory| (QREFELT % 8) '(|EuclideanDomain|))
                   (COND
-                   ((|HasCategory| (QREFELT $ 8)
+                   ((|HasCategory| (QREFELT % 8)
                                    '(|PolynomialFactorizationExplicit|))
-                    (EXIT (SPADCALL |p| (QREFELT $ 17)))))))))))
+                    (EXIT (SPADCALL |p| (QREFELT % 17)))))))))))
             (EXIT
              (COND
-              ((|domainEqual| (QREFELT $ 9)
-                              (|Fraction| (|Polynomial| (QREFELT $ 8))))
-               (SPADCALL |p| (QREFELT $ 19)))
+              ((|domainEqual| (QREFELT % 9)
+                              (|Fraction| (|Polynomial| (QREFELT % 8))))
+               (SPADCALL |p| (QREFELT % 19)))
               (#1#
                (SEQ
                 (COND
-                 ((|HasCategory| (QREFELT $ 9) '(|CharacteristicZero|))
+                 ((|HasCategory| (QREFELT % 9) '(|CharacteristicZero|))
                   (COND
-                   ((|HasCategory| (QREFELT $ 9) '(|EuclideanDomain|))
+                   ((|HasCategory| (QREFELT % 9) '(|EuclideanDomain|))
                     (COND
-                     ((|HasCategory| (QREFELT $ 9)
+                     ((|HasCategory| (QREFELT % 9)
                                      '(|PolynomialFactorizationExplicit|))
-                      (EXIT (SPADCALL |p| (QREFELT $ 21)))))))))
+                      (EXIT (SPADCALL |p| (QREFELT % 21)))))))))
                 (EXIT
                  (|error| "factor for this domain is unimplemented"))))))))))) 
 
 (DECLAIM (NOTINLINE |GeneralizedMultivariateFactorize;|)) 
 
-(DEFUN |GeneralizedMultivariateFactorize| (&REST #1=#:G708)
+(DEFUN |GeneralizedMultivariateFactorize| (&REST #1=#:G451)
   (SPROG NIL
-         (PROG (#2=#:G709)
+         (PROG (#2=#:G452)
            (RETURN
             (COND
              ((LETT #2#
@@ -65,7 +65,7 @@
 
 (DEFUN |GeneralizedMultivariateFactorize;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -75,19 +75,19 @@
     (LETT DV$5 (|devaluate| |#5|))
     (LETT |dv$|
           (LIST '|GeneralizedMultivariateFactorize| DV$1 DV$2 DV$3 DV$4 DV$5))
-    (LETT $ (GETREFV 23))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (LETT % (GETREFV 23))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|GeneralizedMultivariateFactorize|
-                (LIST DV$1 DV$2 DV$3 DV$4 DV$5) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (QSETREFV $ 10 |#5|)
-    (SETF |pv$| (QREFELT $ 3))
-    $))) 
+                (LIST DV$1 DV$2 DV$3 DV$4 DV$5) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (QSETREFV % 10 |#5|)
+    (SETF |pv$| (QREFELT % 3))
+    %))) 
 
 (MAKEPROP '|GeneralizedMultivariateFactorize| '|infovec|
           (LIST

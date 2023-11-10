@@ -1,44 +1,44 @@
 
-(SDEFUN |RCFIELD-;sqrt;2S;1| ((|a| (S)) ($ (S))) (SPADCALL |a| 2 (QREFELT $ 8))) 
+(SDEFUN |RCFIELD-;sqrt;2S;1| ((|a| (S)) (% (S))) (SPADCALL |a| 2 (QREFELT % 8))) 
 
-(SDEFUN |RCFIELD-;sqrt;FS;2| ((|a| (|Fraction| (|Integer|))) ($ (S)))
-        (SPADCALL (SPADCALL |a| (QREFELT $ 11)) 2 (QREFELT $ 8))) 
+(SDEFUN |RCFIELD-;sqrt;FS;2| ((|a| (|Fraction| (|Integer|))) (% (S)))
+        (SPADCALL (SPADCALL |a| (QREFELT % 11)) 2 (QREFELT % 8))) 
 
-(SDEFUN |RCFIELD-;sqrt;IS;3| ((|a| (|Integer|)) ($ (S)))
-        (SPADCALL (SPADCALL |a| (QREFELT $ 14)) 2 (QREFELT $ 8))) 
+(SDEFUN |RCFIELD-;sqrt;IS;3| ((|a| (|Integer|)) (% (S)))
+        (SPADCALL (SPADCALL |a| (QREFELT % 14)) 2 (QREFELT % 8))) 
 
 (PUT '|RCFIELD-;characteristic;Nni;4| '|SPADreplace| '(XLAM NIL 0)) 
 
-(SDEFUN |RCFIELD-;characteristic;Nni;4| (($ (|NonNegativeInteger|))) 0) 
+(SDEFUN |RCFIELD-;characteristic;Nni;4| ((% (|NonNegativeInteger|))) 0) 
 
 (SDEFUN |RCFIELD-;rootOf;SupPiOfU;5|
         ((|pol| (|SparseUnivariatePolynomial| S)) (|n| (|PositiveInteger|))
-         (|o| (|OutputForm|)) ($ (|Union| S "failed")))
+         (|o| (|OutputForm|)) (% (|Union| S "failed")))
         (SPROG ((|r| (|Union| S "failed")))
-               (SEQ (LETT |r| (SPADCALL |pol| |n| (QREFELT $ 20)))
+               (SEQ (LETT |r| (SPADCALL |pol| |n| (QREFELT % 20)))
                     (EXIT
                      (COND ((QEQCAR |r| 1) (CONS 1 "failed"))
                            ('T
                             (CONS 0
                                   (SPADCALL (QCDR |r|) |o|
-                                            (QREFELT $ 22))))))))) 
+                                            (QREFELT % 22))))))))) 
 
 (SDEFUN |RCFIELD-;rootOf;SupPiU;6|
         ((|pol| (|SparseUnivariatePolynomial| S)) (|n| (|PositiveInteger|))
-         ($ (|Union| S "failed")))
+         (% (|Union| S "failed")))
         (SPROG ((|liste| (|List| S)))
-               (SEQ (LETT |liste| (SPADCALL |pol| (QREFELT $ 25)))
+               (SEQ (LETT |liste| (SPADCALL |pol| (QREFELT % 25)))
                     (EXIT
                      (COND ((> (LENGTH |liste|) |n|) (CONS 1 "failed"))
                            ('T
-                            (CONS 0 (SPADCALL |liste| |n| (QREFELT $ 27))))))))) 
+                            (CONS 0 (SPADCALL |liste| |n| (QREFELT % 27))))))))) 
 
-(SDEFUN |RCFIELD-;sqrt;SPiS;7| ((|x| (S)) (|n| (|PositiveInteger|)) ($ (S)))
+(SDEFUN |RCFIELD-;sqrt;SPiS;7| ((|x| (S)) (|n| (|PositiveInteger|)) (% (S)))
         (SPROG ((|r| (|Union| S "failed")))
                (SEQ
                 (COND ((EQL |n| 1) |x|)
-                      ((SPADCALL |x| (QREFELT $ 31)) (|spadConstant| $ 32))
-                      ((SPADCALL |x| (QREFELT $ 33)) (|spadConstant| $ 29))
+                      ((SPADCALL |x| (QREFELT % 31)) (|spadConstant| % 32))
+                      ((SPADCALL |x| (QREFELT % 33)) (|spadConstant| % 29))
                       (#1='T
                        (SEQ
                         (COND
@@ -46,45 +46,45 @@
                           (LETT |r|
                                 (SPADCALL
                                  (SPADCALL
-                                  (SPADCALL (|spadConstant| $ 29) |n|
-                                            (QREFELT $ 35))
-                                  (SPADCALL |x| (QREFELT $ 36)) (QREFELT $ 37))
-                                 1 (QREFELT $ 20))))
+                                  (SPADCALL (|spadConstant| % 29) |n|
+                                            (QREFELT % 35))
+                                  (SPADCALL |x| (QREFELT % 36)) (QREFELT % 37))
+                                 1 (QREFELT % 20))))
                          (#1#
                           (LETT |r|
                                 (SPADCALL
                                  (SPADCALL
-                                  (SPADCALL (|spadConstant| $ 29) |n|
-                                            (QREFELT $ 35))
-                                  (SPADCALL |x| (QREFELT $ 36)) (QREFELT $ 37))
-                                 2 (QREFELT $ 20)))))
+                                  (SPADCALL (|spadConstant| % 29) |n|
+                                            (QREFELT % 35))
+                                  (SPADCALL |x| (QREFELT % 36)) (QREFELT % 37))
+                                 2 (QREFELT % 20)))))
                         (EXIT
                          (COND ((QEQCAR |r| 1) (|error| "no roots"))
                                ((EQL |n| 2)
                                 (SPADCALL (QCDR |r|)
                                           (SPADCALL
-                                           (SPADCALL |x| (QREFELT $ 38))
-                                           (QREFELT $ 39))
-                                          (QREFELT $ 40)))
+                                           (SPADCALL |x| (QREFELT % 38))
+                                           (QREFELT % 39))
+                                          (QREFELT % 40)))
                                (#1#
                                 (SPADCALL (QCDR |r|)
                                           (SPADCALL
-                                           (SPADCALL |x| (QREFELT $ 38))
-                                           (SPADCALL |n| (QREFELT $ 41))
-                                           (QREFELT $ 42))
-                                          (QREFELT $ 40))))))))))) 
+                                           (SPADCALL |x| (QREFELT % 38))
+                                           (SPADCALL |n| (QREFELT % 41))
+                                           (QREFELT % 42))
+                                          (QREFELT % 40))))))))))) 
 
-(SDEFUN |RCFIELD-;^;SFS;8| ((|x| (S)) (|rn| (|Fraction| (|Integer|))) ($ (S)))
-        (SPROG ((#1=#:G763 NIL))
+(SDEFUN |RCFIELD-;^;SFS;8| ((|x| (S)) (|rn| (|Fraction| (|Integer|))) (% (S)))
+        (SPROG ((#1=#:G496 NIL))
                (SPADCALL
-                (SPADCALL |x| (SPADCALL |rn| (QREFELT $ 44)) (QREFELT $ 45))
-                (PROG1 (LETT #1# (SPADCALL |rn| (QREFELT $ 46)))
+                (SPADCALL |x| (SPADCALL |rn| (QREFELT % 44)) (QREFELT % 45))
+                (PROG1 (LETT #1# (SPADCALL |rn| (QREFELT % 46)))
                   (|check_subtype2| (> #1# 0) '(|PositiveInteger|) '(|Integer|)
                                     #1#))
-                (QREFELT $ 8)))) 
+                (QREFELT % 8)))) 
 
-(SDEFUN |RCFIELD-;nthRoot;SIS;9| ((|x| (S)) (|n| (|Integer|)) ($ (S)))
-        (SPROG ((#1=#:G767 NIL) (#2=#:G765 NIL))
+(SDEFUN |RCFIELD-;nthRoot;SIS;9| ((|x| (S)) (|n| (|Integer|)) (% (S)))
+        (SPROG ((#1=#:G500 NIL) (#2=#:G498 NIL))
                (COND ((ZEROP |n|) |x|)
                      ((MINUSP |n|)
                       (SPADCALL
@@ -93,50 +93,50 @@
                                    (|check_subtype2| (> #2# 0)
                                                      '(|PositiveInteger|)
                                                      '(|Integer|) #2#))
-                                 (QREFELT $ 8))
-                       (QREFELT $ 48)))
+                                 (QREFELT % 8))
+                       (QREFELT % 48)))
                      ('T
                       (SPADCALL |x|
                                 (PROG1 (LETT #1# |n|)
                                   (|check_subtype2| (> #1# 0)
                                                     '(|PositiveInteger|)
                                                     '(|Integer|) #1#))
-                                (QREFELT $ 8)))))) 
+                                (QREFELT % 8)))))) 
 
 (SDEFUN |RCFIELD-;allRootsOf;SupL;10|
         ((|p| (|SparseUnivariatePolynomial| (|Fraction| (|Integer|))))
-         ($ (|List| S)))
-        (SPADCALL (SPADCALL (ELT $ 11) |p| (QREFELT $ 53)) (QREFELT $ 25))) 
+         (% (|List| S)))
+        (SPADCALL (SPADCALL (ELT % 11) |p| (QREFELT % 53)) (QREFELT % 25))) 
 
 (SDEFUN |RCFIELD-;allRootsOf;SupL;11|
-        ((|p| (|SparseUnivariatePolynomial| (|Integer|))) ($ (|List| S)))
-        (SPADCALL (SPADCALL (ELT $ 14) |p| (QREFELT $ 58)) (QREFELT $ 25))) 
+        ((|p| (|SparseUnivariatePolynomial| (|Integer|))) (% (|List| S)))
+        (SPADCALL (SPADCALL (ELT % 14) |p| (QREFELT % 58)) (QREFELT % 25))) 
 
-(SDEFUN |RCFIELD-;allRootsOf;PL;12| ((|p| (|Polynomial| S)) ($ (|List| S)))
-        (SPADCALL (SPADCALL |p| (QREFELT $ 61)) (QREFELT $ 25))) 
+(SDEFUN |RCFIELD-;allRootsOf;PL;12| ((|p| (|Polynomial| S)) (% (|List| S)))
+        (SPADCALL (SPADCALL |p| (QREFELT % 61)) (QREFELT % 25))) 
 
 (SDEFUN |RCFIELD-;allRootsOf;PL;13|
-        ((|p| (|Polynomial| (|Fraction| (|Integer|)))) ($ (|List| S)))
-        (SPADCALL (SPADCALL |p| (QREFELT $ 65)) (QREFELT $ 66))) 
+        ((|p| (|Polynomial| (|Fraction| (|Integer|)))) (% (|List| S)))
+        (SPADCALL (SPADCALL |p| (QREFELT % 65)) (QREFELT % 66))) 
 
 (SDEFUN |RCFIELD-;allRootsOf;PL;14|
-        ((|p| (|Polynomial| (|Integer|))) ($ (|List| S)))
-        (SPADCALL (SPADCALL |p| (QREFELT $ 69)) (QREFELT $ 70))) 
+        ((|p| (|Polynomial| (|Integer|))) (% (|List| S)))
+        (SPADCALL (SPADCALL |p| (QREFELT % 69)) (QREFELT % 70))) 
 
 (DECLAIM (NOTINLINE |RealClosedField&;|)) 
 
 (DEFUN |RealClosedField&| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RealClosedField&| DV$1))
-          (LETT $ (GETREFV 72))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 72))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|RealClosedField&| '|infovec|
           (LIST
@@ -144,9 +144,9 @@
               (0 . |sqrt|) |RCFIELD-;sqrt;2S;1| (|Fraction| 13) (6 . |coerce|)
               |RCFIELD-;sqrt;FS;2| (|Integer|) (11 . |coerce|)
               |RCFIELD-;sqrt;IS;3| (|NonNegativeInteger|)
-              |RCFIELD-;characteristic;Nni;4| (|Union| $ '#1="failed")
-              (|SparseUnivariatePolynomial| $) (16 . |rootOf|) (|OutputForm|)
-              (22 . |rename!|) |RCFIELD-;rootOf;SupPiOfU;5| (|List| $)
+              |RCFIELD-;characteristic;Nni;4| (|Union| % '#1="failed")
+              (|SparseUnivariatePolynomial| %) (16 . |rootOf|) (|OutputForm|)
+              (22 . |rename!|) |RCFIELD-;rootOf;SupPiOfU;5| (|List| %)
               (28 . |allRootsOf|) (|List| 6) (33 . |elt|)
               |RCFIELD-;rootOf;SupPiU;6| (39 . |One|) (|Boolean|)
               (43 . |zero?|) (48 . |Zero|) (52 . |one?|)
@@ -161,7 +161,7 @@
               (|SparseUnivariatePolynomial| 13)
               (|SparseUnivariatePolynomialFunctions2| 13 6) (128 . |map|)
               |RCFIELD-;allRootsOf;SupL;11| (|Polynomial| 6)
-              (134 . |univariate|) (|Polynomial| $) |RCFIELD-;allRootsOf;PL;12|
+              (134 . |univariate|) (|Polynomial| %) |RCFIELD-;allRootsOf;PL;12|
               (|Polynomial| 10) (139 . |univariate|) (144 . |allRootsOf|)
               |RCFIELD-;allRootsOf;PL;13| (|Polynomial| 13)
               (149 . |univariate|) (154 . |allRootsOf|)

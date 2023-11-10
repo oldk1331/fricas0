@@ -6,7 +6,7 @@
 (DEFPARAMETER |HomogeneousAggregate;AL| 'NIL) 
 
 (DEFUN |HomogeneousAggregate| (|t#1|)
-  (LET (#1=#:G694 (#2=#:G695 (|devaluate| |t#1|)))
+  (LET (#1=#:G453 (#2=#:G454 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |HomogeneousAggregate;AL|)) (CDR #1#))
           (T
            (SETQ |HomogeneousAggregate;AL|
@@ -15,7 +15,7 @@
            #1#)))) 
 
 (DEFUN |HomogeneousAggregate;| (|t#1|)
-  (SPROG ((#1=#:G693 NIL))
+  (SPROG ((#1=#:G452 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -25,87 +25,87 @@
                                                 (|Join| (|Aggregate|)
                                                         (|mkCategory|
                                                          '(((|map|
-                                                             ($
+                                                             (%
                                                               (|Mapping| |t#1|
                                                                          |t#1|)
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|map!|
-                                                             ($
+                                                             (%
                                                               (|Mapping| |t#1|
                                                                          |t#1|)
-                                                              $))
-                                                            (|has| $
+                                                              %))
+                                                            (|has| %
                                                                    (|shallowlyMutable|)))
                                                            ((|any?|
                                                              ((|Boolean|)
                                                               (|Mapping|
                                                                (|Boolean|)
                                                                |t#1|)
-                                                              $))
-                                                            (|has| $
+                                                              %))
+                                                            (|has| %
                                                                    (|finiteAggregate|)))
                                                            ((|every?|
                                                              ((|Boolean|)
                                                               (|Mapping|
                                                                (|Boolean|)
                                                                |t#1|)
-                                                              $))
-                                                            (|has| $
+                                                              %))
+                                                            (|has| %
                                                                    (|finiteAggregate|)))
                                                            ((|count|
                                                              ((|NonNegativeInteger|)
                                                               (|Mapping|
                                                                (|Boolean|)
                                                                |t#1|)
-                                                              $))
-                                                            (|has| $
+                                                              %))
+                                                            (|has| %
                                                                    (|finiteAggregate|)))
                                                            ((|parts|
                                                              ((|List| |t#1|)
-                                                              $))
-                                                            (|has| $
+                                                              %))
+                                                            (|has| %
                                                                    (|finiteAggregate|)))
                                                            ((|members|
                                                              ((|List| |t#1|)
-                                                              $))
-                                                            (|has| $
+                                                              %))
+                                                            (|has| %
                                                                    (|finiteAggregate|)))
                                                            ((|max|
                                                              (|t#1|
                                                               (|Mapping|
                                                                (|Boolean|)
                                                                |t#1| |t#1|)
-                                                              $))
-                                                            (|has| $
+                                                              %))
+                                                            (|has| %
                                                                    (|finiteAggregate|)))
-                                                           ((|min| (|t#1| $))
+                                                           ((|min| (|t#1| %))
                                                             (AND
                                                              (|has| |t#1|
                                                                     (|OrderedSet|))
-                                                             (|has| $
+                                                             (|has| %
                                                                     (|finiteAggregate|))))
-                                                           ((|max| (|t#1| $))
+                                                           ((|max| (|t#1| %))
                                                             (AND
                                                              (|has| |t#1|
                                                                     (|OrderedSet|))
-                                                             (|has| $
+                                                             (|has| %
                                                                     (|finiteAggregate|))))
                                                            ((|count|
                                                              ((|NonNegativeInteger|)
-                                                              |t#1| $))
+                                                              |t#1| %))
                                                             (AND
                                                              (|has| |t#1|
                                                                     (|BasicType|))
-                                                             (|has| $
+                                                             (|has| %
                                                                     (|finiteAggregate|))))
                                                            ((|member?|
                                                              ((|Boolean|) |t#1|
-                                                              $))
+                                                              %))
                                                             (AND
                                                              (|has| |t#1|
                                                                     (|BasicType|))
-                                                             (|has| $
+                                                             (|has| %
                                                                     (|finiteAggregate|)))))
                                                          '(((|CoercibleTo|
                                                              (|OutputForm|))
@@ -126,7 +126,7 @@
                                                             (AND
                                                              (|has| |t#1|
                                                                     (|BasicType|))
-                                                             (|has| $
+                                                             (|has| %
                                                                     (|finiteAggregate|)))))
                                                          NIL NIL)))))))
            (SETELT #1# 0 (LIST '|HomogeneousAggregate| |t#1|))))) 

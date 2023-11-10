@@ -1,44 +1,44 @@
 
-(SDEFUN |MAPPKG1;nullary;AM;1| ((|a| (A)) ($ (|Mapping| A)))
+(SDEFUN |MAPPKG1;nullary;AM;1| ((|a| (A)) (% (|Mapping| A)))
         (CONS #'|MAPPKG1;nullary;AM;1!0| |a|)) 
 
 (SDEFUN |MAPPKG1;nullary;AM;1!0| ((|a| NIL)) |a|) 
 
-(SDEFUN |MAPPKG1;coerce;AM;2| ((|a| (A)) ($ (|Mapping| A)))
-        (SPADCALL |a| (QREFELT $ 8))) 
+(SDEFUN |MAPPKG1;coerce;AM;2| ((|a| (A)) (% (|Mapping| A)))
+        (SPADCALL |a| (QREFELT % 8))) 
 
 (PUT '|MAPPKG1;id;2A;3| '|SPADreplace| '(XLAM (|a|) |a|)) 
 
-(SDEFUN |MAPPKG1;id;2A;3| ((|a| (A)) ($ (A))) |a|) 
+(SDEFUN |MAPPKG1;id;2A;3| ((|a| (A)) (% (A))) |a|) 
 
 (SDEFUN |MAPPKG1;^;MNniM;4|
         ((|g| (|Mapping| A A)) (|n| (|NonNegativeInteger|))
-         ($ (|Mapping| A A)))
-        (SPROG NIL (CONS #'|MAPPKG1;^;MNniM;4!0| (VECTOR $ |n| |g|)))) 
+         (% (|Mapping| A A)))
+        (SPROG NIL (CONS #'|MAPPKG1;^;MNniM;4!0| (VECTOR % |n| |g|)))) 
 
 (SDEFUN |MAPPKG1;^;MNniM;4!0| ((|a1| NIL) ($$ NIL))
-        (PROG (|g| |n| $)
+        (PROG (|g| |n| %)
           (LETT |g| (QREFELT $$ 2))
           (LETT |n| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |g| |n| |a1| (QREFELT $ 14)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |g| |n| |a1| (QREFELT % 14)))))) 
 
 (SDEFUN |MAPPKG1;recur;2M;5|
         ((|fnaa| (|Mapping| A (|NonNegativeInteger|) A))
-         ($ (|Mapping| A (|NonNegativeInteger|) A)))
-        (SPROG NIL (CONS #'|MAPPKG1;recur;2M;5!0| (VECTOR $ |fnaa|)))) 
+         (% (|Mapping| A (|NonNegativeInteger|) A)))
+        (SPROG NIL (CONS #'|MAPPKG1;recur;2M;5!0| (VECTOR % |fnaa|)))) 
 
 (SDEFUN |MAPPKG1;recur;2M;5!0| ((|n1| NIL) (|a2| NIL) ($$ NIL))
-        (PROG (|fnaa| $)
+        (PROG (|fnaa| %)
           (LETT |fnaa| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |fnaa| |n1| |a2| (QREFELT $ 17)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |fnaa| |n1| |a2| (QREFELT % 17)))))) 
 
 (DECLAIM (NOTINLINE |MappingPackage1;|)) 
 
-(DEFUN |MappingPackage1| (#1=#:G705)
+(DEFUN |MappingPackage1| (#1=#:G460)
   (SPROG NIL
-         (PROG (#2=#:G706)
+         (PROG (#2=#:G461)
            (RETURN
             (COND
              ((LETT #2#
@@ -54,19 +54,19 @@
                   (HREM |$ConstructorCache| '|MappingPackage1|)))))))))) 
 
 (DEFUN |MappingPackage1;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|MappingPackage1| DV$1))
-          (LETT $ (GETREFV 19))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 19))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|MappingPackage1| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|MappingPackage1| '|infovec|
           (LIST

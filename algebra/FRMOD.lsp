@@ -6,7 +6,7 @@
 (DEFPARAMETER |FramedModule;AL| 'NIL) 
 
 (DEFUN |FramedModule| (|t#1|)
-  (LET (#1=#:G690 (#2=#:G691 (|devaluate| |t#1|)))
+  (LET (#1=#:G449 (#2=#:G450 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |FramedModule;AL|)) (CDR #1#))
           (T
            (SETQ |FramedModule;AL|
@@ -15,7 +15,7 @@
            #1#)))) 
 
 (DEFUN |FramedModule;| (|t#1|)
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -25,35 +25,38 @@
                                                 (|Join| (|LeftModule| '|t#1|)
                                                         (|mkCategory|
                                                          '(((|basis|
-                                                             ((|Vector| $)))
+                                                             ((|Vector| %)))
                                                             T)
                                                            ((|rank|
                                                              ((|PositiveInteger|)))
                                                             T)
                                                            ((|coordinates|
                                                              ((|Vector| |t#1|)
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|coordinates|
                                                              ((|Matrix| |t#1|)
-                                                              (|Vector| $)))
+                                                              (|Vector| %)))
                                                             T)
                                                            ((|represents|
-                                                             ($
+                                                             (%
                                                               (|Vector|
                                                                |t#1|)))
                                                             T)
                                                            ((|convert|
                                                              ((|Vector| |t#1|)
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|convert|
-                                                             ($
+                                                             (%
                                                               (|Vector|
                                                                |t#1|)))
                                                             T))
                                                          '(((|Finite|)
                                                             (|has| |t#1|
-                                                                   (|Finite|))))
+                                                                   (|Finite|)))
+                                                           ((|Hashable|)
+                                                            (|has| |t#1|
+                                                                   (|Hashable|))))
                                                          NIL NIL)))))))
            (SETELT #1# 0 (LIST '|FramedModule| |t#1|))))) 

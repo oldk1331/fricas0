@@ -1,29 +1,29 @@
 
 (SDEFUN |PLOT1;plot;SSSP;1|
         ((|f| (S)) (|x| (|Symbol|)) (|xRange| (|Segment| (|DoubleFloat|)))
-         ($ (|Plot|)))
-        (SPADCALL (SPADCALL |f| |x| (QREFELT $ 10)) |xRange| (QREFELT $ 13))) 
+         (% (|Plot|)))
+        (SPADCALL (SPADCALL |f| |x| (QREFELT % 10)) |xRange| (QREFELT % 13))) 
 
-(SDEFUN |PLOT1;plotPolar;SSP;2| ((|f| (S)) (|theta| (|Symbol|)) ($ (|Plot|)))
-        (SPADCALL (SPADCALL |f| |theta| (QREFELT $ 10)) (QREFELT $ 15))) 
+(SDEFUN |PLOT1;plotPolar;SSP;2| ((|f| (S)) (|theta| (|Symbol|)) (% (|Plot|)))
+        (SPADCALL (SPADCALL |f| |theta| (QREFELT % 10)) (QREFELT % 15))) 
 
 (SDEFUN |PLOT1;plot;2SSSP;3|
         ((|f1| (S)) (|f2| (S)) (|t| (|Symbol|))
-         (|tRange| (|Segment| (|DoubleFloat|))) ($ (|Plot|)))
-        (SPADCALL (SPADCALL |f1| |t| (QREFELT $ 10))
-                  (SPADCALL |f2| |t| (QREFELT $ 10)) |tRange| (QREFELT $ 17))) 
+         (|tRange| (|Segment| (|DoubleFloat|))) (% (|Plot|)))
+        (SPADCALL (SPADCALL |f1| |t| (QREFELT % 10))
+                  (SPADCALL |f2| |t| (QREFELT % 10)) |tRange| (QREFELT % 17))) 
 
 (SDEFUN |PLOT1;plotPolar;SSSP;4|
         ((|f| (S)) (|theta| (|Symbol|))
-         (|thetaRange| (|Segment| (|DoubleFloat|))) ($ (|Plot|)))
-        (SPADCALL (SPADCALL |f| |theta| (QREFELT $ 10)) |thetaRange|
-                  (QREFELT $ 19))) 
+         (|thetaRange| (|Segment| (|DoubleFloat|))) (% (|Plot|)))
+        (SPADCALL (SPADCALL |f| |theta| (QREFELT % 10)) |thetaRange|
+                  (QREFELT % 19))) 
 
 (DECLAIM (NOTINLINE |PlotFunctions1;|)) 
 
-(DEFUN |PlotFunctions1| (#1=#:G705)
+(DEFUN |PlotFunctions1| (#1=#:G457)
   (SPROG NIL
-         (PROG (#2=#:G706)
+         (PROG (#2=#:G458)
            (RETURN
             (COND
              ((LETT #2#
@@ -39,19 +39,19 @@
                   (HREM |$ConstructorCache| '|PlotFunctions1|)))))))))) 
 
 (DEFUN |PlotFunctions1;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|PlotFunctions1| DV$1))
-          (LETT $ (GETREFV 21))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 21))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PlotFunctions1| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|PlotFunctions1| '|infovec|
           (LIST

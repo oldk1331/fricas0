@@ -1,13 +1,13 @@
 
 (PUT '|NONE1;coerce;SN;1| '|SPADreplace| '(XLAM (|s|) |s|)) 
 
-(SDEFUN |NONE1;coerce;SN;1| ((|s| (S)) ($ (|None|))) |s|) 
+(SDEFUN |NONE1;coerce;SN;1| ((|s| (S)) (% (|None|))) |s|) 
 
 (DECLAIM (NOTINLINE |NoneFunctions1;|)) 
 
-(DEFUN |NoneFunctions1| (#1=#:G690)
+(DEFUN |NoneFunctions1| (#1=#:G449)
   (SPROG NIL
-         (PROG (#2=#:G691)
+         (PROG (#2=#:G450)
            (RETURN
             (COND
              ((LETT #2#
@@ -23,19 +23,19 @@
                   (HREM |$ConstructorCache| '|NoneFunctions1|)))))))))) 
 
 (DEFUN |NoneFunctions1;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|NoneFunctions1| DV$1))
-          (LETT $ (GETREFV 9))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 9))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|NoneFunctions1| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|NoneFunctions1| '|infovec|
           (LIST

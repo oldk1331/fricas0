@@ -1,11 +1,11 @@
 
 (SDEFUN |PFUTIL;decompose;UP2L;1|
-        ((|nn| (UP)) (|dens| (|List| UP)) ($ (|List| UP)))
+        ((|nn| (UP)) (|dens| (|List| UP)) (% (|List| UP)))
         (SPROG
-         ((#1=#:G725 NIL) (|res| (|List| UP)) (#2=#:G729 NIL) (|c| NIL)
-          (#3=#:G728 NIL) (|fden| NIL) (|pfr| (|PartialFraction| UP))
+         ((#1=#:G466 NIL) (|res| (|List| UP)) (#2=#:G470 NIL) (|c| NIL)
+          (#3=#:G469 NIL) (|fden| NIL) (|pfr| (|PartialFraction| UP))
           (|nd| (|Factored| UP)) (|fdens| (|List| (|Factored| UP)))
-          (#4=#:G727 NIL) (|nden| NIL) (#5=#:G726 NIL))
+          (#4=#:G468 NIL) (|nden| NIL) (#5=#:G467 NIL))
          (SEQ
           (LETT |fdens|
                 (PROGN
@@ -17,17 +17,17 @@
                       (SEQ
                        (EXIT
                         (LETT #5#
-                              (CONS (SPADCALL |nden| 1 (QREFELT $ 12)) #5#))))
+                              (CONS (SPADCALL |nden| 1 (QREFELT % 12)) #5#))))
                       (LETT #4# (CDR #4#)) (GO G190) G191
                       (EXIT (NREVERSE #5#)))))
           (LETT |nd|
-                (SPADCALL (ELT $ 14) |fdens| (|spadConstant| $ 15)
-                          (QREFELT $ 18)))
-          (LETT |pfr| (SPADCALL |nn| |nd| (QREFELT $ 20)))
+                (SPADCALL (ELT % 14) |fdens| (|spadConstant| % 15)
+                          (QREFELT % 18)))
+          (LETT |pfr| (SPADCALL |nn| |nd| (QREFELT % 20)))
           (EXIT
            (COND
-            ((SPADCALL (SPADCALL |pfr| (QREFELT $ 21)) (|spadConstant| $ 22)
-                       (QREFELT $ 24))
+            ((SPADCALL (SPADCALL |pfr| (QREFELT % 21)) (|spadConstant| % 22)
+                       (QREFELT % 24))
              (|error| "decompose: wholePart(pfr) ~= 0"))
             ('T
              (SEQ (LETT |res| NIL)
@@ -38,7 +38,7 @@
                        (SEQ
                         (EXIT
                          (SEQ (LETT |c| NIL)
-                              (LETT #2# (SPADCALL |pfr| (QREFELT $ 27))) G190
+                              (LETT #2# (SPADCALL |pfr| (QREFELT % 27))) G190
                               (COND
                                ((OR (ATOM #2#)
                                     (PROGN (LETT |c| (CAR #2#)) NIL))
@@ -46,12 +46,12 @@
                               (SEQ
                                (EXIT
                                 (COND
-                                 ((SPADCALL (QCDR |c|) |fden| (QREFELT $ 28))
+                                 ((SPADCALL (QCDR |c|) |fden| (QREFELT % 28))
                                   (SEQ (LETT |res| (CONS (QCAR |c|) |res|))
                                        (EXIT
                                         (PROGN
                                          (LETT #1# 1)
-                                         (GO #6=#:G720))))))))
+                                         (GO #6=#:G461))))))))
                               (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL)))
                         #6# (EXIT #1#))
                        (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
@@ -59,9 +59,9 @@
 
 (DECLAIM (NOTINLINE |PartialFractionUtilities;|)) 
 
-(DEFUN |PartialFractionUtilities| (&REST #1=#:G730)
+(DEFUN |PartialFractionUtilities| (&REST #1=#:G471)
   (SPROG NIL
-         (PROG (#2=#:G731)
+         (PROG (#2=#:G472)
            (RETURN
             (COND
              ((LETT #2#
@@ -80,21 +80,21 @@
                         '|PartialFractionUtilities|)))))))))) 
 
 (DEFUN |PartialFractionUtilities;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|PartialFractionUtilities| DV$1 DV$2))
-          (LETT $ (GETREFV 31))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 31))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PartialFractionUtilities|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|PartialFractionUtilities| '|infovec|
           (LIST

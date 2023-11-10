@@ -6,7 +6,7 @@
 (DEFPARAMETER |LinearAggregate;AL| 'NIL) 
 
 (DEFUN |LinearAggregate| (|t#1|)
-  (LET (#1=#:G696 (#2=#:G697 (|devaluate| |t#1|)))
+  (LET (#1=#:G452 (#2=#:G453 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |LinearAggregate;AL|)) (CDR #1#))
           (T
            (SETQ |LinearAggregate;AL|
@@ -15,11 +15,11 @@
            #1#)))) 
 
 (DEFUN |LinearAggregate;| (|t#1|)
-  (SPROG ((#1=#:G695 NIL))
+  (SPROG ((#1=#:G451 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
-                                   (|subst_in_cat| '(#2=#:G693 #3=#:G694)
+                                   (|subst_in_cat| '(#2=#:G449 #3=#:G450)
                                                    (LIST '(|Integer|)
                                                          '(|UniversalSegment|
                                                            (|Integer|)))
@@ -32,192 +32,198 @@
                                                        (|IndexedAggregate| '#2#
                                                                            '|t#1|)
                                                        (|Collection| '|t#1|)
-                                                       (|Eltable| '#3# '$)
+                                                       (|Eltable| '#3# '%)
                                                        (|mkCategory|
                                                         '(((|new|
-                                                            ($
+                                                            (%
                                                              (|NonNegativeInteger|)
                                                              |t#1|))
                                                            T)
                                                           ((|concat|
-                                                            ($ $ |t#1|))
+                                                            (% % |t#1|))
                                                            T)
                                                           ((|concat|
-                                                            ($ |t#1| $))
+                                                            (% |t#1| %))
                                                            T)
-                                                          ((|concat| ($ $ $))
+                                                          ((|concat| (% % %))
                                                            T)
                                                           ((|concat|
-                                                            ($ (|List| $)))
+                                                            (% (|List| %)))
                                                            T)
                                                           ((|map|
-                                                            ($
+                                                            (%
                                                              (|Mapping| |t#1|
                                                                         |t#1|
                                                                         |t#1|)
-                                                             $ $))
+                                                             % %))
                                                            T)
                                                           ((|delete|
-                                                            ($ $ (|Integer|)))
+                                                            (% % (|Integer|)))
                                                            T)
                                                           ((|delete|
-                                                            ($ $
+                                                            (% %
                                                              (|UniversalSegment|
                                                               (|Integer|))))
                                                            T)
                                                           ((|first|
-                                                            ($ $
+                                                            (% %
                                                              (|NonNegativeInteger|)))
                                                            T)
                                                           ((|insert|
-                                                            ($ |t#1| $
+                                                            (% |t#1| %
                                                              (|Integer|)))
                                                            T)
                                                           ((|insert|
-                                                            ($ $ $
+                                                            (% % %
                                                              (|Integer|)))
                                                            T)
                                                           ((|setelt!|
-                                                            (|t#1| $
+                                                            (|t#1| %
                                                              (|UniversalSegment|
                                                               (|Integer|))
                                                              |t#1|))
-                                                           (|has| $
+                                                           (|has| %
                                                                   (|shallowlyMutable|)))
                                                           ((|merge|
-                                                            ($
+                                                            (%
                                                              (|Mapping|
                                                               (|Boolean|) |t#1|
                                                               |t#1|)
-                                                             $ $))
-                                                           (|has| $
+                                                             % %))
+                                                           (|has| %
                                                                   (|finiteAggregate|)))
-                                                          ((|reverse| ($ $))
-                                                           (|has| $
+                                                          ((|reverse| (% %))
+                                                           (|has| %
                                                                   (|finiteAggregate|)))
                                                           ((|sort|
-                                                            ($
+                                                            (%
                                                              (|Mapping|
                                                               (|Boolean|) |t#1|
                                                               |t#1|)
-                                                             $))
-                                                           (|has| $
+                                                             %))
+                                                           (|has| %
                                                                   (|finiteAggregate|)))
                                                           ((|sorted?|
                                                             ((|Boolean|)
                                                              (|Mapping|
                                                               (|Boolean|) |t#1|
                                                               |t#1|)
-                                                             $))
-                                                           (|has| $
+                                                             %))
+                                                           (|has| %
                                                                   (|finiteAggregate|)))
                                                           ((|position|
                                                             ((|Integer|)
                                                              (|Mapping|
                                                               (|Boolean|)
                                                               |t#1|)
-                                                             $))
-                                                           (|has| $
+                                                             %))
+                                                           (|has| %
                                                                   (|finiteAggregate|)))
                                                           ((|position|
                                                             ((|Integer|) |t#1|
-                                                             $))
+                                                             %))
                                                            (AND
                                                             (|has| |t#1|
                                                                    (|BasicType|))
-                                                            (|has| $
+                                                            (|has| %
                                                                    (|finiteAggregate|))))
                                                           ((|position|
                                                             ((|Integer|) |t#1|
-                                                             $ (|Integer|)))
+                                                             % (|Integer|)))
                                                            (AND
                                                             (|has| |t#1|
                                                                    (|BasicType|))
-                                                            (|has| $
+                                                            (|has| %
                                                                    (|finiteAggregate|))))
                                                           ((|leftTrim|
-                                                            ($ $ |t#1|))
+                                                            (% % |t#1|))
                                                            (AND
                                                             (|has| |t#1|
                                                                    (|BasicType|))
-                                                            (|has| $
+                                                            (|has| %
                                                                    (|finiteAggregate|))))
                                                           ((|rightTrim|
-                                                            ($ $ |t#1|))
+                                                            (% % |t#1|))
                                                            (AND
                                                             (|has| |t#1|
                                                                    (|BasicType|))
-                                                            (|has| $
+                                                            (|has| %
                                                                    (|finiteAggregate|))))
-                                                          ((|trim| ($ $ |t#1|))
+                                                          ((|trim| (% % |t#1|))
                                                            (AND
                                                             (|has| |t#1|
                                                                    (|BasicType|))
-                                                            (|has| $
+                                                            (|has| %
                                                                    (|finiteAggregate|))))
-                                                          ((|merge| ($ $ $))
+                                                          ((|merge| (% % %))
                                                            (AND
                                                             (|has| |t#1|
                                                                    (|OrderedSet|))
-                                                            (|has| $
+                                                            (|has| %
                                                                    (|finiteAggregate|))))
-                                                          ((|sort| ($ $))
+                                                          ((|sort| (% %))
                                                            (AND
                                                             (|has| |t#1|
                                                                    (|OrderedSet|))
-                                                            (|has| $
+                                                            (|has| %
                                                                    (|finiteAggregate|))))
                                                           ((|sorted?|
-                                                            ((|Boolean|) $))
+                                                            ((|Boolean|) %))
                                                            (AND
                                                             (|has| |t#1|
                                                                    (|OrderedSet|))
-                                                            (|has| $
+                                                            (|has| %
                                                                    (|finiteAggregate|))))
                                                           ((|copyInto!|
-                                                            ($ $ $
+                                                            (% % %
                                                              (|Integer|)))
                                                            (AND
-                                                            (|has| $
+                                                            (|has| %
                                                                    (|shallowlyMutable|))
-                                                            (|has| $
+                                                            (|has| %
                                                                    (|finiteAggregate|))))
-                                                          ((|reverse!| ($ $))
+                                                          ((|reverse!| (% %))
                                                            (AND
-                                                            (|has| $
+                                                            (|has| %
                                                                    (|shallowlyMutable|))
-                                                            (|has| $
+                                                            (|has| %
                                                                    (|finiteAggregate|))))
                                                           ((|sort!|
-                                                            ($
+                                                            (%
                                                              (|Mapping|
                                                               (|Boolean|) |t#1|
                                                               |t#1|)
-                                                             $))
+                                                             %))
                                                            (AND
-                                                            (|has| $
+                                                            (|has| %
                                                                    (|shallowlyMutable|))
-                                                            (|has| $
+                                                            (|has| %
                                                                    (|finiteAggregate|))))
-                                                          ((|sort!| ($ $))
+                                                          ((|sort!| (% %))
                                                            (AND
                                                             (|has| |t#1|
                                                                    (|OrderedSet|))
-                                                            (|has| $
+                                                            (|has| %
                                                                    (|shallowlyMutable|))
-                                                            (|has| $
+                                                            (|has| %
                                                                    (|finiteAggregate|)))))
-                                                        '(((|Comparable|)
+                                                        '(((|Hashable|)
+                                                           (AND
+                                                            (|has| |t#1|
+                                                                   (|Hashable|))
+                                                            (|has| %
+                                                                   (|finiteAggregate|))))
+                                                          ((|Comparable|)
                                                            (AND
                                                             (|has| |t#1|
                                                                    (|Comparable|))
-                                                            (|has| $
+                                                            (|has| %
                                                                    (|finiteAggregate|))))
                                                           ((|OrderedSet|)
                                                            (AND
                                                             (|has| |t#1|
                                                                    (|OrderedSet|))
-                                                            (|has| $
+                                                            (|has| %
                                                                    (|finiteAggregate|)))))
                                                         NIL NIL))))))))
            (SETELT #1# 0 (LIST '|LinearAggregate| |t#1|))))) 

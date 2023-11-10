@@ -1,28 +1,28 @@
 
 (SDEFUN |GROUPPF1;convert;LLGp;1|
         ((|lg| (|List| S)) (|lr| (|List| (|FreeGroup| S)))
-         ($ (|GroupPresentation|)))
+         (% (|GroupPresentation|)))
         (SPROG
-         ((#1=#:G718 NIL) (|l| NIL) (#2=#:G717 NIL)
+         ((#1=#:G467 NIL) (|l| NIL) (#2=#:G466 NIL)
           (|nlr| (|List| (|List| (|Integer|)))) (|nr| (|List| (|Integer|)))
-          (#3=#:G716 NIL) (|m| #4=(|Integer|)) (|k| (|Integer|))
-          (#5=#:G715 NIL) (|t| NIL)
+          (#3=#:G465 NIL) (|m| #4=(|Integer|)) (|k| (|Integer|))
+          (#5=#:G464 NIL) (|t| NIL)
           (|fr| (|List| (|Record| (|:| |gen| S) (|:| |exp| #4#))))
-          (#6=#:G714 NIL) (|r| NIL) (|n| (|NonNegativeInteger|)))
+          (#6=#:G463 NIL) (|r| NIL) (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (LENGTH |lg|)) (LETT |nlr| NIL)
               (SEQ (LETT |r| NIL) (LETT #6# |lr|) G190
                    (COND
                     ((OR (ATOM #6#) (PROGN (LETT |r| (CAR #6#)) NIL))
                      (GO G191)))
                    (SEQ (LETT |nr| NIL)
-                        (LETT |fr| (SPADCALL |r| (QREFELT $ 10)))
+                        (LETT |fr| (SPADCALL |r| (QREFELT % 10)))
                         (SEQ (LETT |t| NIL) (LETT #5# |fr|) G190
                              (COND
                               ((OR (ATOM #5#) (PROGN (LETT |t| (CAR #5#)) NIL))
                                (GO G191)))
                              (SEQ
                               (LETT |k|
-                                    (SPADCALL (QCAR |t|) |lg| (QREFELT $ 13)))
+                                    (SPADCALL (QCAR |t|) |lg| (QREFELT % 13)))
                               (EXIT
                                (COND
                                 ((< |k| 1)
@@ -30,7 +30,7 @@
                                   (SPADCALL
                                    "convert: relation contains generator"
                                    "not in list of generators"
-                                   (QREFELT $ 16))))
+                                   (QREFELT % 16))))
                                 ('T
                                  (SEQ (LETT |m| (QCDR |t|))
                                       (LETT |k|
@@ -59,13 +59,13 @@
                       (SEQ (EXIT (LETT #2# (CONS |l| #2#))))
                       (LETT |l| (|inc_SI| |l|)) (GO G190) G191
                       (EXIT (NREVERSE #2#))))
-                (NREVERSE |nlr|) (QREFELT $ 20)))))) 
+                (NREVERSE |nlr|) (QREFELT % 20)))))) 
 
 (DECLAIM (NOTINLINE |GroupPresentationFunctions1;|)) 
 
-(DEFUN |GroupPresentationFunctions1| (#1=#:G719)
+(DEFUN |GroupPresentationFunctions1| (#1=#:G468)
   (SPROG NIL
-         (PROG (#2=#:G720)
+         (PROG (#2=#:G469)
            (RETURN
             (COND
              ((LETT #2#
@@ -83,19 +83,19 @@
                         '|GroupPresentationFunctions1|)))))))))) 
 
 (DEFUN |GroupPresentationFunctions1;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|GroupPresentationFunctions1| DV$1))
-          (LETT $ (GETREFV 23))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 23))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|GroupPresentationFunctions1|
-                      (LIST DV$1) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|GroupPresentationFunctions1| '|infovec|
           (LIST

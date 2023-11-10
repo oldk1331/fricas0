@@ -78,16 +78,13 @@
 
 ; editFile file ==
 ;   MEMQ(INTERN('"WIN32",FIND_-PACKAGE("KEYWORD")),_*FEATURES_*) =>
-;     OBEY STRCONC('"notepad ", namestring pathname file)
-;   OBEY STRCONC('"$FRICAS/lib/SPADEDIT ",namestring pathname file)
+;       OBEY STRCONC('"notepad ", file)
+;   OBEY STRCONC('"$FRICAS/lib/SPADEDIT ", file)
 
 (DEFUN |editFile| (|file|)
   (PROG ()
     (RETURN
      (COND
       ((MEMQ (INTERN "WIN32" (FIND-PACKAGE 'KEYWORD)) *FEATURES*)
-       (OBEY (STRCONC "notepad " (|namestring| (|pathname| |file|)))))
-      ('T
-       (OBEY
-        (STRCONC "$FRICAS/lib/SPADEDIT "
-         (|namestring| (|pathname| |file|)))))))))
+       (OBEY (STRCONC "notepad " |file|)))
+      ('T (OBEY (STRCONC "$FRICAS/lib/SPADEDIT " |file|)))))))

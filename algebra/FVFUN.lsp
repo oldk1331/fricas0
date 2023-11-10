@@ -10,64 +10,64 @@
                  (|FortranVectorFunctionCategory;|))))) 
 
 (DEFUN |FortranVectorFunctionCategory;| ()
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|FortranProgramCategory|)
                            (|mkCategory|
-                            '(((|coerce| ($ (|List| (|FortranCode|)))) T)
-                              ((|coerce| ($ (|FortranCode|))) T)
+                            '(((|coerce| (% (|List| (|FortranCode|)))) T)
+                              ((|coerce| (% (|FortranCode|))) T)
                               ((|coerce|
-                                ($
+                                (%
                                  (|Record| (|:| |localSymbols| (|SymbolTable|))
                                            (|:| |code|
                                                 (|List| (|FortranCode|))))))
                                T)
                               ((|retract|
-                                ($ (|Vector| (|Expression| (|Float|)))))
+                                (% (|Vector| (|Expression| (|Float|)))))
                                T)
                               ((|retractIfCan|
-                                ((|Union| $ "failed")
+                                ((|Union| % "failed")
                                  (|Vector| (|Expression| (|Float|)))))
                                T)
                               ((|retract|
-                                ($ (|Vector| (|Expression| (|Integer|)))))
+                                (% (|Vector| (|Expression| (|Integer|)))))
                                T)
                               ((|retractIfCan|
-                                ((|Union| $ "failed")
+                                ((|Union| % "failed")
                                  (|Vector| (|Expression| (|Integer|)))))
                                T)
                               ((|retract|
-                                ($ (|Vector| (|Polynomial| (|Float|)))))
+                                (% (|Vector| (|Polynomial| (|Float|)))))
                                T)
                               ((|retractIfCan|
-                                ((|Union| $ "failed")
+                                ((|Union| % "failed")
                                  (|Vector| (|Polynomial| (|Float|)))))
                                T)
                               ((|retract|
-                                ($ (|Vector| (|Polynomial| (|Integer|)))))
+                                (% (|Vector| (|Polynomial| (|Integer|)))))
                                T)
                               ((|retractIfCan|
-                                ((|Union| $ "failed")
+                                ((|Union| % "failed")
                                  (|Vector| (|Polynomial| (|Integer|)))))
                                T)
                               ((|retract|
-                                ($
+                                (%
                                  (|Vector|
                                   (|Fraction| (|Polynomial| (|Float|))))))
                                T)
                               ((|retractIfCan|
-                                ((|Union| $ "failed")
+                                ((|Union| % "failed")
                                  (|Vector|
                                   (|Fraction| (|Polynomial| (|Float|))))))
                                T)
                               ((|retract|
-                                ($
+                                (%
                                  (|Vector|
                                   (|Fraction| (|Polynomial| (|Integer|))))))
                                T)
                               ((|retractIfCan|
-                                ((|Union| $ "failed")
+                                ((|Union| % "failed")
                                  (|Vector|
                                   (|Fraction| (|Polynomial| (|Integer|))))))
                                T))

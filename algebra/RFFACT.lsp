@@ -1,18 +1,18 @@
 
 (SDEFUN |RFFACT;likuniv|
         ((|p| (|Polynomial| (|Integer|))) (|x| (|Symbol|))
-         (|d| (|Polynomial| (|Integer|))) ($ (UP)))
+         (|d| (|Polynomial| (|Integer|))) (% (UP)))
         (SPROG NIL
-               (SPADCALL (CONS #'|RFFACT;likuniv!0| (VECTOR $ |d|))
-                         (SPADCALL |p| |x| (QREFELT $ 14)) (QREFELT $ 18)))) 
+               (SPADCALL (CONS #'|RFFACT;likuniv!0| (VECTOR % |d|))
+                         (SPADCALL |p| |x| (QREFELT % 14)) (QREFELT % 18)))) 
 
 (SDEFUN |RFFACT;likuniv!0| ((|y| NIL) ($$ NIL))
-        (PROG (|d| $)
+        (PROG (|d| %)
           (LETT |d| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |y| |d| (QREFELT $ 12)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |y| |d| (QREFELT % 12)))))) 
 
-(SDEFUN |RFFACT;factor;UPF;2| ((|p| (UP)) ($ (|Factored| UP)))
+(SDEFUN |RFFACT;factor;UPF;2| ((|p| (UP)) (% (|Factored| UP)))
         (SPROG
          ((|d| (|Polynomial| (|Integer|)))
           (|q| (|Fraction| (|Polynomial| (|Integer|)))))
@@ -22,28 +22,28 @@
                  (LETT |q|
                        (SPADCALL |p|
                                  (SPADCALL
-                                  (SPADCALL (QREFELT $ 9) (QREFELT $ 19))
-                                  (QREFELT $ 20))
-                                 (QREFELT $ 21)))
-                 (QREFELT $ 22)))
+                                  (SPADCALL (QREFELT % 9) (QREFELT % 19))
+                                  (QREFELT % 20))
+                                 (QREFELT % 21)))
+                 (QREFELT % 22)))
           (EXIT
            (SPADCALL
-            (CONS #'|RFFACT;factor;UPF;2!0| (VECTOR $ |d| (QREFELT $ 9)))
-            (SPADCALL (SPADCALL |q| (QREFELT $ 23)) (QREFELT $ 26))
-            (QREFELT $ 30)))))) 
+            (CONS #'|RFFACT;factor;UPF;2!0| (VECTOR % |d| (QREFELT % 9)))
+            (SPADCALL (SPADCALL |q| (QREFELT % 23)) (QREFELT % 26))
+            (QREFELT % 30)))))) 
 
 (SDEFUN |RFFACT;factor;UPF;2!0| ((|x| NIL) ($$ NIL))
-        (PROG (|dummy| |d| $)
+        (PROG (|dummy| |d| %)
           (LETT |dummy| (QREFELT $$ 2))
           (LETT |d| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (|RFFACT;likuniv| |x| |dummy| |d| $))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (|RFFACT;likuniv| |x| |dummy| |d| %))))) 
 
 (DECLAIM (NOTINLINE |RationalFunctionFactor;|)) 
 
-(DEFUN |RationalFunctionFactor| (#1=#:G725)
+(DEFUN |RationalFunctionFactor| (#1=#:G453)
   (SPROG NIL
-         (PROG (#2=#:G726)
+         (PROG (#2=#:G454)
            (RETURN
             (COND
              ((LETT #2#
@@ -60,26 +60,26 @@
                   (HREM |$ConstructorCache| '|RationalFunctionFactor|)))))))))) 
 
 (DEFUN |RationalFunctionFactor;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RationalFunctionFactor| DV$1))
-          (LETT $ (GETREFV 32))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 32))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|RationalFunctionFactor| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 9 (SPADCALL (QREFELT $ 8)))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 9 (SPADCALL (QREFELT % 8)))
+          %))) 
 
 (MAKEPROP '|RationalFunctionFactor| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|Symbol|) (0 . |new|)
               '|dummy| (|Polynomial| (|Integer|)) (|Fraction| 10) (4 . /)
-              (|SparseUnivariatePolynomial| $) (10 . |univariate|)
+              (|SparseUnivariatePolynomial| %) (10 . |univariate|)
               (|Mapping| 11 10) (|SparseUnivariatePolynomial| 10)
               (|UnivariatePolynomialCategoryFunctions2| 10 16 11 6)
               (16 . |map|) (22 . |coerce|) (27 . |coerce|) (32 . |elt|)

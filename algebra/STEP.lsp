@@ -7,13 +7,13 @@
   (COND (|StepThrough;AL|) (T (SETQ |StepThrough;AL| (|StepThrough;|))))) 
 
 (DEFUN |StepThrough;| ()
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|SetCategory|)
                            (|mkCategory|
-                            '(((|init| ($) |constant|) T)
-                              ((|nextItem| ((|Union| $ "failed") $)) T))
+                            '(((|init| (%) |constant|) T)
+                              ((|nextItem| ((|Union| % "failed") %)) T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|StepThrough|))))) 
 

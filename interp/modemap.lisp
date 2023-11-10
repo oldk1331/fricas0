@@ -242,7 +242,7 @@
 ; --     if fn is [kind,'Rep,.] and
 ;                -- save old sig for NRUNTIME
 ; --       (kind = 'ELT or kind = 'CONST) then fn:=[kind,'Rep,sig]
-;      sig:= substitute("$",'Rep,sig)
+;      sig:= substitute("%", 'Rep, sig)
 ;   currentProplist:= getProplist(op,e) or nil
 ;   newModemapList:=
 ;     mkNewModemapList(mc,sig,pred,fn,LASSOC('modemap,currentProplist),e,nil)
@@ -255,7 +255,7 @@
   (PROG (|currentProplist| |newModemapList| |newProplist|)
     (RETURN
      (PROGN
-      (COND ((EQ |mc| '|Rep|) (SETQ |sig| (|substitute| '$ '|Rep| |sig|))))
+      (COND ((EQ |mc| '|Rep|) (SETQ |sig| (|substitute| '% '|Rep| |sig|))))
       (SETQ |currentProplist| (OR (|getProplist| |op| |e|) NIL))
       (SETQ |newModemapList|
               (|mkNewModemapList| |mc| |sig| |pred| |fn|
@@ -414,14 +414,15 @@
 
 ; isSuperDomain(domainForm,domainForm',e) ==
 ;   isSubset(domainForm',domainForm,e) => true
-;   domainForm='Rep and domainForm'="$" => true --regard $ as a subdomain of Rep
+;   domainForm = 'Rep and domainForm' = "%" =>
+;       true --regard % as a subdomain of Rep
 ;   LASSOC(opOf domainForm',get(domainForm,"SubDomain",e))
 
 (DEFUN |isSuperDomain| (|domainForm| |domainForm'| |e|)
   (PROG ()
     (RETURN
      (COND ((|isSubset| |domainForm'| |domainForm| |e|) T)
-           ((AND (EQ |domainForm| '|Rep|) (EQ |domainForm'| '$)) T)
+           ((AND (EQ |domainForm| '|Rep|) (EQ |domainForm'| '%)) T)
            ('T
             (LASSOC (|opOf| |domainForm'|)
              (|get| |domainForm| '|SubDomain| |e|)))))))
@@ -473,7 +474,7 @@
              (|augModemapsFromDomain1| |name| |functorForm| |e|)))))))
 
 ; substituteCategoryArguments(argl,catform) ==
-;   argl:= substitute("$$","$",argl)
+;   argl := substitute("$$", "%", argl)
 ;   arglAssoc := [[INTERNL1("#", STRINGIMAGE i), :a] for i in 1.. for a in argl]
 ;   SUBLIS(arglAssoc,catform)
 
@@ -481,7 +482,7 @@
   (PROG (|arglAssoc|)
     (RETURN
      (PROGN
-      (SETQ |argl| (|substitute| '$$ '$ |argl|))
+      (SETQ |argl| (|substitute| '$$ '% |argl|))
       (SETQ |arglAssoc|
               ((LAMBDA (|bfVar#11| |i| |bfVar#10| |a|)
                  (LOOP
@@ -500,7 +501,7 @@
 
 ; augModemapsFromCategory(domainName, functorForm, categoryForm, e) ==
 ;   [fnAlist,e]:= evalAndSub(domainName, functorForm, categoryForm, e)
-;   compilerMessage ["Adding ",domainName," modemaps"]
+;   compilerMessage ['"Adding ",domainName,'" modemaps"]
 ;   e:= putDomainsInScope(domainName,e)
 ;   for [[op,sig,:.],cond,fnsel] in fnAlist repeat
 ;       e:= addModemapKnown(op,domainName,sig,cond,fnsel,e)
@@ -516,7 +517,7 @@
               (|evalAndSub| |domainName| |functorForm| |categoryForm| |e|))
       (SETQ |fnAlist| (CAR |LETTMP#1|))
       (SETQ |e| (CADR |LETTMP#1|))
-      (|compilerMessage| (LIST '|Adding | |domainName| '| modemaps|))
+      (|compilerMessage| (LIST "Adding " |domainName| " modemaps"))
       (SETQ |e| (|putDomainsInScope| |domainName| |e|))
       ((LAMBDA (|bfVar#13| |bfVar#12|)
          (LOOP
@@ -553,7 +554,7 @@
 ;   $tmp_e : local := e
 ;   --next lines necessary-- see MPOLY for which $ is actual arg. --- RDJ 3/83
 ;   if CONTAINED("$$",form) then
-;       e := put("$$", "mode", get("$", "mode", e), e)
+;       e := put("$$", "mode", get("%", "mode", e), e)
 ;   $tmp_e : local := e
 ;   opAlist:= getOperationAlist(domainName,functorForm,form)
 ;   substAlist:= substNames(domainName, functorForm, opAlist)
@@ -567,7 +568,7 @@
       (SETQ |$tmp_e| |e|)
       (COND
        ((CONTAINED '$$ |form|)
-        (SETQ |e| (|put| '$$ '|mode| (|get| '$ '|mode| |e|) |e|))))
+        (SETQ |e| (|put| '$$ '|mode| (|get| '% '|mode| |e|) |e|))))
       (SETQ |$tmp_e| |e|)
       (SETQ |opAlist| (|getOperationAlist| |domainName| |functorForm| |form|))
       (SETQ |substAlist| (|substNames| |domainName| |functorForm| |opAlist|))
@@ -577,11 +578,11 @@
 ;   if atom name and GETDATABASE(name,'NILADIC) then functorForm:= [functorForm]
 ;   (u:= isFunctor functorForm) and not
 ;     ($insideFunctorIfTrue and first functorForm=first $functorForm) => u
-;   $insideFunctorIfTrue and name="$" =>
-;     ($domainShell => $domainShell.(1); systemError '"$ has no shell now")
+;   $insideFunctorIfTrue and name = "%" =>
+;     ($domainShell => $domainShell.(1); systemError '"% has no shell now")
 ;   T := compMakeCategoryObject(form, $tmp_e) =>
 ;       ([., ., $tmp_e] := T; T.expr.(1))
-;   stackMessage ["not a category form: ",form]
+;   stackMessage ['"not a category form: ",form]
 
 (DEFUN |getOperationAlist| (|name| |functorForm| |form|)
   (PROG (|u| T$)
@@ -596,25 +597,25 @@
               (AND |$insideFunctorIfTrue|
                    (EQUAL (CAR |functorForm|) (CAR |$functorForm|)))))
         |u|)
-       ((AND |$insideFunctorIfTrue| (EQ |name| '$))
+       ((AND |$insideFunctorIfTrue| (EQ |name| '%))
         (COND (|$domainShell| (ELT |$domainShell| 1))
-              (#1='T (|systemError| "$ has no shell now"))))
+              (#1='T (|systemError| "% has no shell now"))))
        ((SETQ T$ (|compMakeCategoryObject| |form| |$tmp_e|))
         (PROGN (SETQ |$tmp_e| (CADDR T$)) (ELT (CAR T$) 1)))
-       (#1# (|stackMessage| (LIST '|not a category form: | |form|))))))))
+       (#1# (|stackMessage| (LIST "not a category form: " |form|))))))))
 
 ; substNames(domainName, functorForm, opalist) ==
-;   functorForm := SUBSTQ("$$","$", functorForm)
+;   functorForm := SUBSTQ("$$", "%", functorForm)
 ;   nameForDollar :=
 ;     isCategoryPackageName functorForm => CADR functorForm
 ;     domainName
 ;
 ;        -- following calls to SUBSTQ must copy to save RPLAC's in
 ;        -- putInLocalDomainReferences
-;   [[:SUBSTQ("$","$$",SUBSTQ(nameForDollar,"$",modemapform)),
-;        [sel, domainName, if domainName = "$" then pos else
+;   [[:SUBSTQ("%", "$$", SUBSTQ(nameForDollar, "%", modemapform)),
+;        [sel, domainName, if domainName = "%" then pos else
 ;                                          CADAR modemapform]]
-;      for [:modemapform,[sel,"$",pos]] in
+;      for [:modemapform, [sel, "%", pos]] in
 ;           EQSUBSTLIST(IFCDR functorForm, $FormalMapVariableList, opalist)]
 
 (DEFUN |substNames| (|domainName| |functorForm| |opalist|)
@@ -622,7 +623,7 @@
          |modemapform|)
     (RETURN
      (PROGN
-      (SETQ |functorForm| (SUBSTQ '$$ '$ |functorForm|))
+      (SETQ |functorForm| (SUBSTQ '$$ '% |functorForm|))
       (SETQ |nameForDollar|
               (COND
                ((|isCategoryPackageName| |functorForm|) (CADR |functorForm|))
@@ -643,7 +644,7 @@
                        (PROGN
                         (SETQ |sel| (CAR |ISTMP#2|))
                         (SETQ |ISTMP#3| (CDR |ISTMP#2|))
-                        (AND (CONSP |ISTMP#3|) (EQ (CAR |ISTMP#3|) '$)
+                        (AND (CONSP |ISTMP#3|) (EQ (CAR |ISTMP#3|) '%)
                              (PROGN
                               (SETQ |ISTMP#4| (CDR |ISTMP#3|))
                               (AND (CONSP |ISTMP#4|) (EQ (CDR |ISTMP#4|) NIL)
@@ -655,11 +656,11 @@
                  (SETQ |bfVar#16|
                          (CONS
                           (APPEND
-                           (SUBSTQ '$ '$$
-                            (SUBSTQ |nameForDollar| '$ |modemapform|))
+                           (SUBSTQ '% '$$
+                            (SUBSTQ |nameForDollar| '% |modemapform|))
                            (CONS
                             (LIST |sel| |domainName|
-                                  (COND ((EQ |domainName| '$) |pos|)
+                                  (COND ((EQ |domainName| '%) |pos|)
                                         (#1# (CADAR |modemapform|))))
                             NIL))
                           |bfVar#16|)))))
@@ -757,7 +758,7 @@
 ;   for [op,sig,opcode] in funList repeat
 ;     if opcode is [sel,dc,n] and sel='ELT then
 ;           nsig := substitute("$$$",name,sig)
-;           nsig := substitute('$,"$$$",substitute("$$",'$,nsig))
+;           nsig := substitute('%, "$$$", substitute("$$", '%, nsig))
 ;           opcode := [sel,dc,nsig]
 ;     e:= addModemap(op,name,sig,true,opcode,e)
 ;   e
@@ -813,8 +814,8 @@
                                  (EQ |sel| 'ELT))
                             (SETQ |nsig| (|substitute| '$$$ |name| |sig|))
                             (SETQ |nsig|
-                                    (|substitute| '$ '$$$
-                                     (|substitute| '$$ '$ |nsig|)))
+                                    (|substitute| '% '$$$
+                                     (|substitute| '$$ '% |nsig|)))
                             (SETQ |opcode| (LIST |sel| |dc| |nsig|))))
                           (SETQ |e|
                                   (|addModemap| |op| |name| |sig| T |opcode|
@@ -835,7 +836,7 @@
 
 ; putDomainsInScope(x,e) ==
 ;   l:= getDomainsInScope e
-;   if member(x,l) then SAY("****** Domain: ",x," already in scope")
+;   if member(x,l) then SAY('"****** Domain: ",x,'" already in scope")
 ;   newValue:= [x,:delete(x,l)]
 ;   $insideCapsuleFunctionIfTrue => ($CapsuleDomainsInScope:= newValue; e)
 ;   put("$DomainsInScope","special",newValue,e)
@@ -846,7 +847,7 @@
      (PROGN
       (SETQ |l| (|getDomainsInScope| |e|))
       (COND
-       ((|member| |x| |l|) (SAY '|****** Domain: | |x| '| already in scope|)))
+       ((|member| |x| |l|) (SAY "****** Domain: " |x| " already in scope")))
       (SETQ |newValue| (CONS |x| (|delete| |x| |l|)))
       (COND
        (|$insideCapsuleFunctionIfTrue|

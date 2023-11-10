@@ -10,7 +10,6 @@
 
 ; hashType(type, percentHash) ==
 ;         SYMBOLP type  =>
-;            type = '$ => percentHash
 ;            type = "%" => percentHash
 ;            hashString SYMBOL_-NAME type
 ;         STRINGP type  => hashCombine(hashString type,
@@ -58,7 +57,7 @@
     (RETURN
      (COND
       ((SYMBOLP |type|)
-       (COND ((EQ |type| '$) |percentHash|) ((EQ |type| '%) |percentHash|)
+       (COND ((EQ |type| '%) |percentHash|)
              (#1='T (|hashString| (SYMBOL-NAME |type|)))))
       ((STRINGP |type|)
        (|hashCombine| (|hashString| |type|) (|hashString| "Enumeration")))

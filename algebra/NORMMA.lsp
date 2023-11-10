@@ -1,43 +1,43 @@
 
 (SDEFUN |NORMMA;PolR2SUP|
-        ((|q| (|PolR|)) ($ (|SparseUnivariatePolynomial| |PolR|)))
-        (SPADCALL (ELT $ 10) |q| (QREFELT $ 14))) 
+        ((|q| (|PolR|)) (% (|SparseUnivariatePolynomial| |PolR|)))
+        (SPADCALL (ELT % 10) |q| (QREFELT % 14))) 
 
-(SDEFUN |NORMMA;norm;PolEPolR;2| ((|q| (|PolE|)) ($ (|PolR|)))
+(SDEFUN |NORMMA;norm;PolEPolR;2| ((|q| (|PolE|)) (% (|PolR|)))
         (SPROG ((|p| (|SparseUnivariatePolynomial| |PolR|)))
-               (SEQ (LETT |p| (|spadConstant| $ 17))
+               (SEQ (LETT |p| (|spadConstant| % 17))
                     (SEQ G190
                          (COND
                           ((NULL
-                            (SPADCALL |q| (|spadConstant| $ 20)
-                                      (QREFELT $ 22)))
+                            (SPADCALL |q| (|spadConstant| % 20)
+                                      (QREFELT % 22)))
                            (GO G191)))
                          (SEQ
                           (LETT |p|
                                 (SPADCALL |p|
                                           (SPADCALL
-                                           (SPADCALL (|spadConstant| $ 23)
+                                           (SPADCALL (|spadConstant| % 23)
                                                      (SPADCALL |q|
-                                                               (QREFELT $ 26))
-                                                     (QREFELT $ 27))
+                                                               (QREFELT % 26))
+                                                     (QREFELT % 27))
                                            (|NORMMA;PolR2SUP|
                                             (SPADCALL
-                                             (SPADCALL |q| (QREFELT $ 28))
-                                             (QREFELT $ 29))
-                                            $)
-                                           (QREFELT $ 30))
-                                          (QREFELT $ 31)))
-                          (EXIT (LETT |q| (SPADCALL |q| (QREFELT $ 32)))))
+                                             (SPADCALL |q| (QREFELT % 28))
+                                             (QREFELT % 29))
+                                            %)
+                                           (QREFELT % 30))
+                                          (QREFELT % 31)))
+                          (EXIT (LETT |q| (SPADCALL |q| (QREFELT % 32)))))
                          NIL (GO G190) G191 (EXIT NIL))
                     (EXIT
-                     (SPADCALL (SPADCALL |p| (QREFELT $ 16) (QREFELT $ 33))
-                               (QREFELT $ 34)))))) 
+                     (SPADCALL (SPADCALL |p| (QREFELT % 16) (QREFELT % 33))
+                               (QREFELT % 34)))))) 
 
 (DECLAIM (NOTINLINE |NormInMonogenicAlgebra;|)) 
 
-(DEFUN |NormInMonogenicAlgebra| (&REST #1=#:G704)
+(DEFUN |NormInMonogenicAlgebra| (&REST #1=#:G454)
   (SPROG NIL
-         (PROG (#2=#:G705)
+         (PROG (#2=#:G455)
            (RETURN
             (COND
              ((LETT #2#
@@ -56,7 +56,7 @@
 
 (DEFUN |NormInMonogenicAlgebra;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -64,19 +64,19 @@
     (LETT DV$3 (|devaluate| |#3|))
     (LETT DV$4 (|devaluate| |#4|))
     (LETT |dv$| (LIST '|NormInMonogenicAlgebra| DV$1 DV$2 DV$3 DV$4))
-    (LETT $ (GETREFV 36))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (LETT % (GETREFV 36))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|NormInMonogenicAlgebra|
-                (LIST DV$1 DV$2 DV$3 DV$4) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (SETF |pv$| (QREFELT $ 3))
-    (QSETREFV $ 16 (|NORMMA;PolR2SUP| (SPADCALL (QREFELT $ 15)) $))
-    $))) 
+                (LIST DV$1 DV$2 DV$3 DV$4) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (SETF |pv$| (QREFELT % 3))
+    (QSETREFV % 16 (|NORMMA;PolR2SUP| (SPADCALL (QREFELT % 15)) %))
+    %))) 
 
 (MAKEPROP '|NormInMonogenicAlgebra| '|infovec|
           (LIST

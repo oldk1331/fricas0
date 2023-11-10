@@ -180,7 +180,7 @@
 ;   props =>
 ;     #props > 5 and ELT(props, 6) =>
 ;       FUNCALL(SYMBOL_-FUNCTION ELT(props, 6), ELT(props, 0))
-;     replacePercentByDollar ELT(props, 0)
+;     ELT(props, 0)
 ;   nil
 
 (DEFUN |htpLabelFilteredInputString| (|htPage| |label|)
@@ -193,26 +193,8 @@
         (COND
          ((AND (< 5 (LENGTH |props|)) (ELT |props| 6))
           (FUNCALL (SYMBOL-FUNCTION (ELT |props| 6)) (ELT |props| 0)))
-         (#1='T (|replacePercentByDollar| (ELT |props| 0)))))
+         (#1='T (ELT |props| 0))))
        (#1# NIL))))))
-
-; replacePercentByDollar s == fn(s,0,MAXINDEX s) where
-;   fn(s,i,n) ==
-;     i > n => '""
-;     (m := charPosition(char "%",s,i)) > n => SUBSTRING(s,i,nil)
-;     STRCONC(SUBSTRING(s,i,m - i),'"$",fn(s,m + 1,n))
-
-(DEFUN |replacePercentByDollar| (|s|)
-  (PROG () (RETURN (|replacePercentByDollar,fn| |s| 0 (MAXINDEX |s|)))))
-(DEFUN |replacePercentByDollar,fn| (|s| |i| |n|)
-  (PROG (|m|)
-    (RETURN
-     (COND ((< |n| |i|) "")
-           ((< |n| (SETQ |m| (|charPosition| (|char| '%) |s| |i|)))
-            (SUBSTRING |s| |i| NIL))
-           ('T
-            (STRCONC (SUBSTRING |s| |i| (- |m| |i|)) "$"
-             (|replacePercentByDollar,fn| |s| (+ |m| 1) |n|)))))))
 
 ; htpLabelSpadValue(htPage, label) ==
 ; -- Scratchpad value of parsed and evaled inputString, as (type . value)
@@ -384,21 +366,15 @@
              |l|))))))
 
 ; basicStringize s ==
-;   STRINGP s =>
-;     s = '"\$"      => '"\%"
-;     s = '"{\em $}" => '"{\em \%}"
-;     s
-;   s = '_$ => '"\%"
-;   PRINC_-TO_-STRING s
+;     STRINGP(s) => s
+;     s = '_% => '"\%"
+;     PRINC_-TO_-STRING(s)
 
 (DEFUN |basicStringize| (|s|)
   (PROG ()
     (RETURN
-     (COND
-      ((STRINGP |s|)
-       (COND ((EQUAL |s| "\\$") "\\%") ((EQUAL |s| "{\\em $}") "{\\em \\%}")
-             (#1='T |s|)))
-      ((EQ |s| '$) "\\%") (#1# (PRINC-TO-STRING |s|))))))
+     (COND ((STRINGP |s|) |s|) ((EQ |s| '%) "\\%")
+           ('T (PRINC-TO-STRING |s|))))))
 
 ; stringize s ==
 ;   STRINGP s => s

@@ -2,14 +2,14 @@
 (PUT '|OPQUERY;getDatabase;SD;1| '|SPADreplace| '|getBrowseDatabase|) 
 
 (SDEFUN |OPQUERY;getDatabase;SD;1|
-        ((|s| (|String|)) ($ (|Database| (|IndexCard|))))
+        ((|s| (|String|)) (% (|Database| (|IndexCard|))))
         (|getBrowseDatabase| |s|)) 
 
 (DECLAIM (NOTINLINE |OperationsQuery;|)) 
 
 (DEFUN |OperationsQuery| ()
   (SPROG NIL
-         (PROG (#1=#:G691)
+         (PROG (#1=#:G450)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OperationsQuery|))
@@ -26,16 +26,16 @@
                   (HREM |$ConstructorCache| '|OperationsQuery|)))))))))) 
 
 (DEFUN |OperationsQuery;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|OperationsQuery|))
-          (LETT $ (GETREFV 9))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|OperationsQuery| NIL (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 9))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|OperationsQuery| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|OperationsQuery| '|infovec|
           (LIST

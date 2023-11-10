@@ -8,11 +8,11 @@
         (T (SETQ |FinitelyGenerated;AL| (|FinitelyGenerated;|))))) 
 
 (DEFUN |FinitelyGenerated;| ()
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|Join|
-                    (|mkCategory| '(((|generators| ((|List| $))) T)) NIL NIL
+                    (|mkCategory| '(((|generators| ((|List| %))) T)) NIL NIL
                                   NIL)))
            (SETELT #1# 0 '(|FinitelyGenerated|))))) 
 

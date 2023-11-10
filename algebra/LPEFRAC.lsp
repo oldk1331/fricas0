@@ -1,24 +1,24 @@
 
 (SDEFUN |LPEFRAC;pullback|
         ((|pF| (|SparseUnivariatePolynomial| (|Fraction| R)))
-         ($ #1=(|Union| (|SparseUnivariatePolynomial| R) "failed")))
+         (% #1=(|Union| (|SparseUnivariatePolynomial| R) "failed")))
         (SPROG ((|r| #1#) (|c| (|Union| R "failed")))
                (SEQ
                 (COND
-                 ((SPADCALL |pF| (|spadConstant| $ 11) (QREFELT $ 13))
-                  (CONS 0 (|spadConstant| $ 9)))
+                 ((SPADCALL |pF| (|spadConstant| % 11) (QREFELT % 13))
+                  (CONS 0 (|spadConstant| % 9)))
                  (#2='T
                   (SEQ
                    (LETT |c|
-                         (SPADCALL (SPADCALL |pF| (QREFELT $ 15))
-                                   (QREFELT $ 17)))
+                         (SPADCALL (SPADCALL |pF| (QREFELT % 15))
+                                   (QREFELT % 17)))
                    (EXIT
                     (COND ((QEQCAR |c| 1) (CONS 1 "failed"))
                           (#2#
                            (SEQ
                             (LETT |r|
                                   (|LPEFRAC;pullback|
-                                   (SPADCALL |pF| (QREFELT $ 18)) $))
+                                   (SPADCALL |pF| (QREFELT % 18)) %))
                             (EXIT
                              (COND ((QEQCAR |r| 1) (CONS 1 "failed"))
                                    (#2#
@@ -26,25 +26,25 @@
                                           (SPADCALL
                                            (SPADCALL (QCDR |c|)
                                                      (SPADCALL |pF|
-                                                               (QREFELT $ 20))
-                                                     (QREFELT $ 21))
+                                                               (QREFELT % 20))
+                                                     (QREFELT % 21))
                                            (QCDR |r|)
-                                           (QREFELT $ 22)))))))))))))))) 
+                                           (QREFELT % 22)))))))))))))))) 
 
 (SDEFUN |LPEFRAC;solveLinearPolynomialEquationByFractions;LSupU;2|
         ((|lp| (|List| (|SparseUnivariatePolynomial| R)))
          (|pp| (|SparseUnivariatePolynomial| R))
-         ($ (|Union| (|List| (|SparseUnivariatePolynomial| R)) "failed")))
+         (% (|Union| (|List| (|SparseUnivariatePolynomial| R)) "failed")))
         (SPROG
-         ((#1=#:G727 NIL)
+         ((#1=#:G473 NIL)
           (|vv| (|Union| (|SparseUnivariatePolynomial| R) "failed"))
-          (#2=#:G731 NIL) (|v| NIL) (#3=#:G730 NIL)
+          (#2=#:G477 NIL) (|v| NIL) (#3=#:G476 NIL)
           (|ans|
            (|Union| (|List| (|SparseUnivariatePolynomial| (|Fraction| R)))
                     "failed"))
           (|pF| (|SparseUnivariatePolynomial| (|Fraction| R)))
           (|lpF| (|List| (|SparseUnivariatePolynomial| (|Fraction| R))))
-          (#4=#:G729 NIL) (|u| NIL) (#5=#:G728 NIL))
+          (#4=#:G475 NIL) (|u| NIL) (#5=#:G474 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -58,12 +58,12 @@
                         (SEQ
                          (EXIT
                           (LETT #5#
-                                (CONS (SPADCALL (ELT $ 23) |u| (QREFELT $ 26))
+                                (CONS (SPADCALL (ELT % 23) |u| (QREFELT % 26))
                                       #5#))))
                         (LETT #4# (CDR #4#)) (GO G190) G191
                         (EXIT (NREVERSE #5#)))))
-            (LETT |pF| (SPADCALL (ELT $ 23) |pp| (QREFELT $ 26)))
-            (LETT |ans| (SPADCALL |lpF| |pF| (QREFELT $ 30)))
+            (LETT |pF| (SPADCALL (ELT % 23) |pp| (QREFELT % 26)))
+            (LETT |ans| (SPADCALL |lpF| |pF| (QREFELT % 30)))
             (EXIT
              (COND ((QEQCAR |ans| 1) (CONS 1 "failed"))
                    ('T
@@ -81,13 +81,13 @@
                                         (CONS
                                          (SEQ
                                           (LETT |vv|
-                                                (|LPEFRAC;pullback| |v| $))
+                                                (|LPEFRAC;pullback| |v| %))
                                           (EXIT
                                            (COND
                                             ((QEQCAR |vv| 1)
                                              (PROGN
                                               (LETT #1# (CONS 1 "failed"))
-                                              (GO #6=#:G726)))
+                                              (GO #6=#:G472)))
                                             ('T (QCDR |vv|)))))
                                          #3#))))
                                 (LETT #2# (CDR #2#)) (GO G190) G191
@@ -96,9 +96,9 @@
 
 (DECLAIM (NOTINLINE |LinearPolynomialEquationByFractions;|)) 
 
-(DEFUN |LinearPolynomialEquationByFractions| (#1=#:G732)
+(DEFUN |LinearPolynomialEquationByFractions| (#1=#:G478)
   (SPROG NIL
-         (PROG (#2=#:G733)
+         (PROG (#2=#:G479)
            (RETURN
             (COND
              ((LETT #2#
@@ -117,20 +117,20 @@
                         '|LinearPolynomialEquationByFractions|)))))))))) 
 
 (DEFUN |LinearPolynomialEquationByFractions;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|LinearPolynomialEquationByFractions| DV$1))
-          (LETT $ (GETREFV 34))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 34))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache|
                       '|LinearPolynomialEquationByFractions| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|LinearPolynomialEquationByFractions| '|infovec|
           (LIST
@@ -143,7 +143,7 @@
               (50 . |coerce|) (|Mapping| 14 6)
               (|UnivariatePolynomialCategoryFunctions2| 6 8 14 10) (55 . |map|)
               (|Union| 28 '"failed") (|List| 29)
-              (|SparseUnivariatePolynomial| $)
+              (|SparseUnivariatePolynomial| %)
               (61 . |solveLinearPolynomialEquation|) (|Union| 32 '#1="failed")
               (|List| 8)
               |LPEFRAC;solveLinearPolynomialEquationByFractions;LSupU;2|)

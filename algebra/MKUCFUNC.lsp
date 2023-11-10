@@ -2,44 +2,44 @@
 (PUT '|MKUCFUNC;func| '|SPADreplace|
      '(XLAM (|name| |x|) (FUNCALL |name| |x| NIL))) 
 
-(SDEFUN |MKUCFUNC;func| ((|name| (|Symbol|)) (|x| (D)) ($ (I)))
+(SDEFUN |MKUCFUNC;func| ((|name| (|Symbol|)) (|x| (D)) (% (I)))
         (FUNCALL |name| |x| NIL)) 
 
-(SDEFUN |MKUCFUNC;unaryFunction;SM;2| ((|name| (|Symbol|)) ($ (|Mapping| I D)))
-        (SPROG NIL (CONS #'|MKUCFUNC;unaryFunction;SM;2!0| (VECTOR $ |name|)))) 
+(SDEFUN |MKUCFUNC;unaryFunction;SM;2| ((|name| (|Symbol|)) (% (|Mapping| I D)))
+        (SPROG NIL (CONS #'|MKUCFUNC;unaryFunction;SM;2!0| (VECTOR % |name|)))) 
 
 (SDEFUN |MKUCFUNC;unaryFunction;SM;2!0| ((|d1| NIL) ($$ NIL))
-        (PROG (|name| $)
+        (PROG (|name| %)
           (LETT |name| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (|MKUCFUNC;func| |name| |d1| $))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (|MKUCFUNC;func| |name| |d1| %))))) 
 
 (SDEFUN |MKUCFUNC;compiledFunction;SSM;3|
-        ((|e| (S)) (|x| (|Symbol|)) ($ (|Mapping| I D)))
+        ((|e| (S)) (|x| (|Symbol|)) (% (|Mapping| I D)))
         (SPROG ((|t| (|List| (|InputForm|))))
                (SEQ
                 (LETT |t|
                       (LIST
                        (SPADCALL
-                        (SPADCALL (|devaluate| (QREFELT $ 7)) (QREFELT $ 13))
-                        (QREFELT $ 16))))
+                        (SPADCALL (|devaluate| (QREFELT % 7)) (QREFELT % 13))
+                        (QREFELT % 16))))
                 (EXIT
                  (SPADCALL
                   (SPADCALL
                    (SPADCALL |e|
                              (SPADCALL
                               (|devaluate|
-                               (|Mapping| (QREFELT $ 8) (QREFELT $ 7)))
-                              (QREFELT $ 17))
-                             |x| (QREFELT $ 19))
-                   |t| (QREFELT $ 20))
-                  (QREFELT $ 11)))))) 
+                               (|Mapping| (QREFELT % 8) (QREFELT % 7)))
+                              (QREFELT % 17))
+                             |x| (QREFELT % 19))
+                   |t| (QREFELT % 20))
+                  (QREFELT % 11)))))) 
 
 (DECLAIM (NOTINLINE |MakeUnaryCompiledFunction;|)) 
 
-(DEFUN |MakeUnaryCompiledFunction| (&REST #1=#:G707)
+(DEFUN |MakeUnaryCompiledFunction| (&REST #1=#:G456)
   (SPROG NIL
-         (PROG (#2=#:G708)
+         (PROG (#2=#:G457)
            (RETURN
             (COND
              ((LETT #2#
@@ -58,30 +58,30 @@
                         '|MakeUnaryCompiledFunction|)))))))))) 
 
 (DEFUN |MakeUnaryCompiledFunction;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT DV$3 (|devaluate| |#3|))
           (LETT |dv$| (LIST '|MakeUnaryCompiledFunction| DV$1 DV$2 DV$3))
-          (LETT $ (GETREFV 22))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 22))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|MakeUnaryCompiledFunction|
-                      (LIST DV$1 DV$2 DV$3) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (QSETREFV $ 8 |#3|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2 DV$3) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (QSETREFV % 8 |#3|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|MakeUnaryCompiledFunction| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|Mapping| 8 7) (|Symbol|)
               |MKUCFUNC;unaryFunction;SM;2| (|List| 15) (0 . |construct|)
-              (|List| $) (|InputForm|) (5 . |convert|) (10 . |declare|)
+              (|List| %) (|InputForm|) (5 . |convert|) (10 . |declare|)
               (|MakeFunction| 6) (15 . |function|) (22 . |compile|)
               |MKUCFUNC;compiledFunction;SSM;3|)
            '#(|unaryFunction| 28 |compiledFunction| 33) 'NIL

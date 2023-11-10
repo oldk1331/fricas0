@@ -2,7 +2,7 @@
 (SDEFUN |LIMITRF;limit;FEU;1|
         ((|f| (|Fraction| (|Polynomial| R)))
          (|eq| (|Equation| (|Fraction| (|Polynomial| R))))
-         ($
+         (%
           (|Union| (|OrderedCompletion| (|Fraction| (|Polynomial| R)))
                    (|Record|
                     (|:| |leftHandLimit|
@@ -18,42 +18,42 @@
          ((|a| (|Fraction| (|Polynomial| R))) (|x| (|Symbol|))
           (|xx| (|Union| (|Symbol|) "failed")))
          (SEQ
-          (LETT |xx| (SPADCALL (SPADCALL |eq| (QREFELT $ 9)) (QREFELT $ 11)))
+          (LETT |xx| (SPADCALL (SPADCALL |eq| (QREFELT % 9)) (QREFELT % 11)))
           (EXIT
            (COND
             ((QEQCAR |xx| 1)
              (|error| "limit: left hand side must be a variable"))
             ('T
              (SEQ (LETT |x| (QCDR |xx|))
-                  (LETT |a| (SPADCALL |eq| (QREFELT $ 12)))
+                  (LETT |a| (SPADCALL |eq| (QREFELT % 12)))
                   (EXIT
-                   (|LIMITRF;locallimit| |f| |x| (SPADCALL |a| (QREFELT $ 14))
-                    $))))))))) 
+                   (|LIMITRF;locallimit| |f| |x| (SPADCALL |a| (QREFELT % 14))
+                    %))))))))) 
 
 (SDEFUN |LIMITRF;complexLimit;FEOpc;2|
         ((|f| (|Fraction| (|Polynomial| R)))
          (|eq| (|Equation| (|Fraction| (|Polynomial| R))))
-         ($ (|OnePointCompletion| (|Fraction| (|Polynomial| R)))))
+         (% (|OnePointCompletion| (|Fraction| (|Polynomial| R)))))
         (SPROG
          ((|a| (|Fraction| (|Polynomial| R))) (|x| (|Symbol|))
           (|xx| (|Union| (|Symbol|) "failed")))
          (SEQ
-          (LETT |xx| (SPADCALL (SPADCALL |eq| (QREFELT $ 9)) (QREFELT $ 11)))
+          (LETT |xx| (SPADCALL (SPADCALL |eq| (QREFELT % 9)) (QREFELT % 11)))
           (EXIT
            (COND
             ((QEQCAR |xx| 1)
              (|error| "limit: left hand side must be a variable"))
             ('T
              (SEQ (LETT |x| (QCDR |xx|))
-                  (LETT |a| (SPADCALL |eq| (QREFELT $ 12)))
+                  (LETT |a| (SPADCALL |eq| (QREFELT % 12)))
                   (EXIT
                    (|LIMITRF;locallimitcomplex| |f| |x|
-                    (SPADCALL |a| (QREFELT $ 20)) $))))))))) 
+                    (SPADCALL |a| (QREFELT % 20)) %))))))))) 
 
 (SDEFUN |LIMITRF;limit;FEU;3|
         ((|f| (|Fraction| (|Polynomial| R)))
          (|eq| (|Equation| (|OrderedCompletion| (|Polynomial| R))))
-         ($
+         (%
           (|Union| (|OrderedCompletion| (|Fraction| (|Polynomial| R)))
                    (|Record|
                     (|:| |leftHandLimit|
@@ -70,13 +70,13 @@
           (|x| (|Symbol|)) (|xx| (|Union| (|Symbol|) "failed"))
           (|p| (|Union| (|Polynomial| R) "failed")))
          (SEQ
-          (LETT |p| (SPADCALL (SPADCALL |eq| (QREFELT $ 24)) (QREFELT $ 26)))
+          (LETT |p| (SPADCALL (SPADCALL |eq| (QREFELT % 24)) (QREFELT % 26)))
           (EXIT
            (COND
             ((QEQCAR |p| 1)
              (|error| "limit: left hand side must be a variable"))
             (#2='T
-             (SEQ (LETT |xx| (SPADCALL (QCDR |p|) (QREFELT $ 28)))
+             (SEQ (LETT |xx| (SPADCALL (QCDR |p|) (QREFELT % 28)))
                   (EXIT
                    (COND
                     ((QEQCAR |xx| 1)
@@ -84,27 +84,27 @@
                     (#2#
                      (SEQ (LETT |x| (QCDR |xx|))
                           (LETT |a|
-                                (SPADCALL (ELT $ 29)
-                                          (SPADCALL |eq| (QREFELT $ 30))
-                                          (QREFELT $ 33)))
-                          (EXIT (|LIMITRF;locallimit| |f| |x| |a| $))))))))))))) 
+                                (SPADCALL (ELT % 29)
+                                          (SPADCALL |eq| (QREFELT % 30))
+                                          (QREFELT % 33)))
+                          (EXIT (|LIMITRF;locallimit| |f| |x| |a| %))))))))))))) 
 
 (SDEFUN |LIMITRF;complexLimit;FEOpc;4|
         ((|f| (|Fraction| (|Polynomial| R)))
          (|eq| (|Equation| (|OnePointCompletion| (|Polynomial| R))))
-         ($ (|OnePointCompletion| (|Fraction| (|Polynomial| R)))))
+         (% (|OnePointCompletion| (|Fraction| (|Polynomial| R)))))
         (SPROG
          ((|a| (|OnePointCompletion| (|Fraction| (|Polynomial| R))))
           (|x| (|Symbol|)) (|xx| (|Union| (|Symbol|) "failed"))
           (|p| (|Union| (|Polynomial| R) "failed")))
          (SEQ
-          (LETT |p| (SPADCALL (SPADCALL |eq| (QREFELT $ 37)) (QREFELT $ 38)))
+          (LETT |p| (SPADCALL (SPADCALL |eq| (QREFELT % 37)) (QREFELT % 38)))
           (EXIT
            (COND
             ((QEQCAR |p| 1)
              (|error| "limit: left hand side must be a variable"))
             (#1='T
-             (SEQ (LETT |xx| (SPADCALL (QCDR |p|) (QREFELT $ 28)))
+             (SEQ (LETT |xx| (SPADCALL (QCDR |p|) (QREFELT % 28)))
                   (EXIT
                    (COND
                     ((QEQCAR |xx| 1)
@@ -112,23 +112,23 @@
                     (#1#
                      (SEQ (LETT |x| (QCDR |xx|))
                           (LETT |a|
-                                (SPADCALL (ELT $ 29)
-                                          (SPADCALL |eq| (QREFELT $ 39))
-                                          (QREFELT $ 41)))
+                                (SPADCALL (ELT % 29)
+                                          (SPADCALL |eq| (QREFELT % 39))
+                                          (QREFELT % 41)))
                           (EXIT
                            (|LIMITRF;locallimitcomplex| |f| |x| |a|
-                            $))))))))))))) 
+                            %))))))))))))) 
 
 (SDEFUN |LIMITRF;fLimit|
         ((|n| (|Integer|))
          (|d| (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R))))
          (|a| (|Fraction| (|Polynomial| R))) (|dir| (|Integer|))
-         ($
+         (%
           (|Union| (|OrderedCompletion| (|Fraction| (|Polynomial| R)))
                    "failed")))
         (SPROG ((|si| (|Integer|)) (|s| (|Union| (|Integer|) "failed")))
                (SEQ
-                (LETT |s| (SPADCALL |d| |a| |dir| (ELT $ 45) (QREFELT $ 50)))
+                (LETT |s| (SPADCALL |d| |a| |dir| (ELT % 45) (QREFELT % 50)))
                 (EXIT
                  (COND ((QEQCAR |s| 1) (CONS 1 "failed"))
                        (#1='T
@@ -136,38 +136,38 @@
                              (EXIT
                               (COND
                                ((EQL |si| 0) (|error| "fLimit: sign is 0"))
-                               ((> |si| 0) (CONS 0 (SPADCALL (QREFELT $ 52))))
-                               (#1# (CONS 0 (SPADCALL (QREFELT $ 53))))))))))))) 
+                               ((> |si| 0) (CONS 0 (SPADCALL (QREFELT % 52))))
+                               (#1# (CONS 0 (SPADCALL (QREFELT % 53))))))))))))) 
 
 (SDEFUN |LIMITRF;finiteComplexLimit|
         ((|f|
           (|Fraction|
            (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R)))))
          (|a| (|Fraction| (|Polynomial| R)))
-         ($ (|OnePointCompletion| (|Fraction| (|Polynomial| R)))))
+         (% (|OnePointCompletion| (|Fraction| (|Polynomial| R)))))
         (SPROG ((|d| #1=(|Fraction| (|Polynomial| R))) (|n| #1#))
                (COND
                 ((SPADCALL
                   (LETT |n|
-                        (SPADCALL (SPADCALL |f| (QREFELT $ 55)) |a|
-                                  (QREFELT $ 56)))
-                  (QREFELT $ 58))
-                 (SPADCALL (|spadConstant| $ 59) (QREFELT $ 20)))
+                        (SPADCALL (SPADCALL |f| (QREFELT % 55)) |a|
+                                  (QREFELT % 56)))
+                  (QREFELT % 58))
+                 (SPADCALL (|spadConstant| % 59) (QREFELT % 20)))
                 ((SPADCALL
                   (LETT |d|
-                        (SPADCALL (SPADCALL |f| (QREFELT $ 60)) |a|
-                                  (QREFELT $ 56)))
-                  (QREFELT $ 58))
-                 (SPADCALL (QREFELT $ 61)))
+                        (SPADCALL (SPADCALL |f| (QREFELT % 60)) |a|
+                                  (QREFELT % 56)))
+                  (QREFELT % 58))
+                 (SPADCALL (QREFELT % 61)))
                 ('T
-                 (SPADCALL (SPADCALL |n| |d| (QREFELT $ 62)) (QREFELT $ 20)))))) 
+                 (SPADCALL (SPADCALL |n| |d| (QREFELT % 62)) (QREFELT % 20)))))) 
 
 (SDEFUN |LIMITRF;finiteLimit|
         ((|f|
           (|Fraction|
            (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R)))))
          (|a| (|Fraction| (|Polynomial| R)))
-         ($
+         (%
           (|Union| (|OrderedCompletion| (|Fraction| (|Polynomial| R)))
                    (|Record|
                     (|:| |leftHandLimit|
@@ -189,24 +189,24 @@
           (COND
            ((SPADCALL
              (LETT |n|
-                   (SPADCALL (SPADCALL |f| (QREFELT $ 55)) |a| (QREFELT $ 56)))
-             (QREFELT $ 58))
-            (CONS 0 (SPADCALL (|spadConstant| $ 59) (QREFELT $ 14))))
+                   (SPADCALL (SPADCALL |f| (QREFELT % 55)) |a| (QREFELT % 56)))
+             (QREFELT % 58))
+            (CONS 0 (SPADCALL (|spadConstant| % 59) (QREFELT % 14))))
            ((SPADCALL
              (LETT |d|
-                   (SPADCALL (SPADCALL |f| (QREFELT $ 60)) |a| (QREFELT $ 56)))
-             (QREFELT $ 58))
-            (SEQ (LETT |s| (SPADCALL |n| (QREFELT $ 45)))
+                   (SPADCALL (SPADCALL |f| (QREFELT % 60)) |a| (QREFELT % 56)))
+             (QREFELT % 58))
+            (SEQ (LETT |s| (SPADCALL |n| (QREFELT % 45)))
                  (EXIT
                   (COND ((QEQCAR |s| 1) (CONS 2 "failed"))
                         (#4='T
                          (SEQ
                           (LETT |rhsl|
                                 (|LIMITRF;fLimit| (QCDR |s|)
-                                 (SPADCALL |f| (QREFELT $ 60)) |a| 1 $))
+                                 (SPADCALL |f| (QREFELT % 60)) |a| 1 %))
                           (LETT |lhsl|
                                 (|LIMITRF;fLimit| (QCDR |s|)
-                                 (SPADCALL |f| (QREFELT $ 60)) |a| -1 $))
+                                 (SPADCALL |f| (QREFELT % 60)) |a| -1 %))
                           (EXIT
                            (COND
                             ((QEQCAR |rhsl| 1)
@@ -216,18 +216,18 @@
                             (#4#
                              (COND
                               ((SPADCALL (QCDR |rhsl|) (QCDR |lhsl|)
-                                         (QREFELT $ 65))
+                                         (QREFELT % 65))
                                (CONS 0 (QCDR |lhsl|)))
                               (#4# (CONS 1 (CONS |lhsl| |rhsl|)))))))))))))
            (#4#
             (CONS 0
-                  (SPADCALL (SPADCALL |n| |d| (QREFELT $ 62))
-                            (QREFELT $ 14)))))))) 
+                  (SPADCALL (SPADCALL |n| |d| (QREFELT % 62))
+                            (QREFELT % 14)))))))) 
 
 (SDEFUN |LIMITRF;locallimit|
         ((|f| (|Fraction| (|Polynomial| R))) (|x| (|Symbol|))
          (|a| (|OrderedCompletion| (|Fraction| (|Polynomial| R))))
-         ($
+         (%
           (|Union| (|OrderedCompletion| (|Fraction| (|Polynomial| R)))
                    (|Record|
                     (|:| |leftHandLimit|
@@ -246,33 +246,33 @@
           (|g|
            (|Fraction|
             (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R))))))
-         (SEQ (LETT |g| (SPADCALL |f| |x| (QREFELT $ 68)))
+         (SEQ (LETT |g| (SPADCALL |f| |x| (QREFELT % 68)))
               (EXIT
                (COND
-                ((|zero?_SI| (LETT |n| (SPADCALL |a| (QREFELT $ 70))))
-                 (|LIMITRF;finiteLimit| |g| (SPADCALL |a| (QREFELT $ 71)) $))
+                ((|zero?_SI| (LETT |n| (SPADCALL |a| (QREFELT % 70))))
+                 (|LIMITRF;finiteLimit| |g| (SPADCALL |a| (QREFELT % 71)) %))
                 (#4='T
                  (SEQ
                   (LETT |dn|
-                        (SPADCALL (SPADCALL |g| (QREFELT $ 55))
-                                  (QREFELT $ 73)))
+                        (SPADCALL (SPADCALL |g| (QREFELT % 55))
+                                  (QREFELT % 73)))
                   (LETT |dd|
-                        (SPADCALL (SPADCALL |g| (QREFELT $ 60))
-                                  (QREFELT $ 73)))
+                        (SPADCALL (SPADCALL |g| (QREFELT % 60))
+                                  (QREFELT % 73)))
                   (EXIT
                    (COND
                     ((> |dn| |dd|)
                      (SEQ
                       (LETT |sn|
-                            (SPADCALL (SPADCALL |g| (QREFELT $ 55)) |n|
-                                      (ELT $ 45) (QREFELT $ 74)))
+                            (SPADCALL (SPADCALL |g| (QREFELT % 55)) |n|
+                                      (ELT % 45) (QREFELT % 74)))
                       (EXIT
                        (COND ((QEQCAR |sn| 1) (CONS 2 "failed"))
                              (#4#
                               (SEQ
                                (LETT |sd|
-                                     (SPADCALL (SPADCALL |g| (QREFELT $ 60))
-                                               |n| (ELT $ 45) (QREFELT $ 74)))
+                                     (SPADCALL (SPADCALL |g| (QREFELT % 60))
+                                               |n| (ELT % 45) (QREFELT % 74)))
                                (EXIT
                                 (COND ((QEQCAR |sd| 1) (CONS 2 "failed"))
                                       (#4#
@@ -283,28 +283,28 @@
                                           ((EQL |si| 0)
                                            (|error| "locallimit: sign is 0"))
                                           ((> |si| 0)
-                                           (CONS 0 (SPADCALL (QREFELT $ 52))))
+                                           (CONS 0 (SPADCALL (QREFELT % 52))))
                                           (#4#
                                            (CONS 0
                                                  (SPADCALL
-                                                  (QREFELT $ 53))))))))))))))))
+                                                  (QREFELT % 53))))))))))))))))
                     ((< |dn| |dd|)
-                     (CONS 0 (SPADCALL (|spadConstant| $ 59) (QREFELT $ 14))))
+                     (CONS 0 (SPADCALL (|spadConstant| % 59) (QREFELT % 14))))
                     (#4#
                      (CONS 0
                            (SPADCALL
                             (SPADCALL
-                             (SPADCALL (SPADCALL |g| (QREFELT $ 55))
-                                       (QREFELT $ 75))
-                             (SPADCALL (SPADCALL |g| (QREFELT $ 60))
-                                       (QREFELT $ 75))
-                             (QREFELT $ 62))
-                            (QREFELT $ 14))))))))))))) 
+                             (SPADCALL (SPADCALL |g| (QREFELT % 55))
+                                       (QREFELT % 75))
+                             (SPADCALL (SPADCALL |g| (QREFELT % 60))
+                                       (QREFELT % 75))
+                             (QREFELT % 62))
+                            (QREFELT % 14))))))))))))) 
 
 (SDEFUN |LIMITRF;limit;FESU;9|
         ((|f| (|Fraction| (|Polynomial| R)))
          (|eq| (|Equation| (|Fraction| (|Polynomial| R)))) (|st| (|String|))
-         ($
+         (%
           (|Union| (|OrderedCompletion| (|Fraction| (|Polynomial| R)))
                    "failed")))
         (SPROG
@@ -316,85 +316,85 @@
           (|a| (|Fraction| (|Polynomial| R))) (|x| (|Symbol|))
           (|xx| (|Union| (|Symbol|) "failed")))
          (SEQ
-          (LETT |xx| (SPADCALL (SPADCALL |eq| (QREFELT $ 9)) (QREFELT $ 11)))
+          (LETT |xx| (SPADCALL (SPADCALL |eq| (QREFELT % 9)) (QREFELT % 11)))
           (EXIT
            (COND
             ((QEQCAR |xx| 1)
              (|error| "limit: left hand side must be a variable"))
             (#2='T
              (SEQ (LETT |x| (QCDR |xx|))
-                  (LETT |a| (SPADCALL |eq| (QREFELT $ 12)))
+                  (LETT |a| (SPADCALL |eq| (QREFELT % 12)))
                   (EXIT
                    (COND
                     ((SPADCALL
                       (LETT |n|
                             (SPADCALL
                              (SPADCALL
-                              (LETT |g| (SPADCALL |f| |x| (QREFELT $ 68)))
-                              (QREFELT $ 55))
-                             |a| (QREFELT $ 56)))
-                      (QREFELT $ 58))
-                     (CONS 0 (SPADCALL (|spadConstant| $ 59) (QREFELT $ 14))))
+                              (LETT |g| (SPADCALL |f| |x| (QREFELT % 68)))
+                              (QREFELT % 55))
+                             |a| (QREFELT % 56)))
+                      (QREFELT % 58))
+                     (CONS 0 (SPADCALL (|spadConstant| % 59) (QREFELT % 14))))
                     ((SPADCALL
                       (LETT |d|
-                            (SPADCALL (SPADCALL |g| (QREFELT $ 60)) |a|
-                                      (QREFELT $ 56)))
-                      (QREFELT $ 58))
-                     (SEQ (LETT |s| (SPADCALL |n| (QREFELT $ 45)))
+                            (SPADCALL (SPADCALL |g| (QREFELT % 60)) |a|
+                                      (QREFELT % 56)))
+                      (QREFELT % 58))
+                     (SEQ (LETT |s| (SPADCALL |n| (QREFELT % 45)))
                           (EXIT
                            (COND ((QEQCAR |s| 1) (CONS 1 "failed"))
                                  (#2#
                                   (|LIMITRF;fLimit| (QCDR |s|)
-                                   (SPADCALL |g| (QREFELT $ 60)) |a|
-                                   (SPADCALL |st| (QREFELT $ 78)) $))))))
+                                   (SPADCALL |g| (QREFELT % 60)) |a|
+                                   (SPADCALL |st| (QREFELT % 78)) %))))))
                     (#2#
                      (CONS 0
-                           (SPADCALL (SPADCALL |n| |d| (QREFELT $ 62))
-                                     (QREFELT $ 14))))))))))))) 
+                           (SPADCALL (SPADCALL |n| |d| (QREFELT % 62))
+                                     (QREFELT % 14))))))))))))) 
 
 (SDEFUN |LIMITRF;locallimitcomplex|
         ((|f| (|Fraction| (|Polynomial| R))) (|x| (|Symbol|))
          (|a| (|OnePointCompletion| (|Fraction| (|Polynomial| R))))
-         ($ (|OnePointCompletion| (|Fraction| (|Polynomial| R)))))
+         (% (|OnePointCompletion| (|Fraction| (|Polynomial| R)))))
         (SPROG
          ((|dd| #1=(|NonNegativeInteger|)) (|dn| #1#)
           (|r| (|Union| (|Fraction| (|Polynomial| R)) "failed"))
           (|g|
            (|Fraction|
             (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R))))))
-         (SEQ (LETT |g| (SPADCALL |f| |x| (QREFELT $ 68)))
-              (LETT |r| (SPADCALL |a| (QREFELT $ 81)))
+         (SEQ (LETT |g| (SPADCALL |f| |x| (QREFELT % 68)))
+              (LETT |r| (SPADCALL |a| (QREFELT % 81)))
               (EXIT
                (COND
                 ((QEQCAR |r| 0)
-                 (|LIMITRF;finiteComplexLimit| |g| (QCDR |r|) $))
+                 (|LIMITRF;finiteComplexLimit| |g| (QCDR |r|) %))
                 (#2='T
                  (SEQ
                   (LETT |dn|
-                        (SPADCALL (SPADCALL |g| (QREFELT $ 55))
-                                  (QREFELT $ 73)))
+                        (SPADCALL (SPADCALL |g| (QREFELT % 55))
+                                  (QREFELT % 73)))
                   (LETT |dd|
-                        (SPADCALL (SPADCALL |g| (QREFELT $ 60))
-                                  (QREFELT $ 73)))
+                        (SPADCALL (SPADCALL |g| (QREFELT % 60))
+                                  (QREFELT % 73)))
                   (EXIT
-                   (COND ((> |dn| |dd|) (SPADCALL (QREFELT $ 61)))
+                   (COND ((> |dn| |dd|) (SPADCALL (QREFELT % 61)))
                          ((< |dn| |dd|)
-                          (SPADCALL (|spadConstant| $ 59) (QREFELT $ 20)))
+                          (SPADCALL (|spadConstant| % 59) (QREFELT % 20)))
                          (#2#
                           (SPADCALL
                            (SPADCALL
-                            (SPADCALL (SPADCALL |g| (QREFELT $ 55))
-                                      (QREFELT $ 75))
-                            (SPADCALL (SPADCALL |g| (QREFELT $ 60))
-                                      (QREFELT $ 75))
-                            (QREFELT $ 62))
-                           (QREFELT $ 20)))))))))))) 
+                            (SPADCALL (SPADCALL |g| (QREFELT % 55))
+                                      (QREFELT % 75))
+                            (SPADCALL (SPADCALL |g| (QREFELT % 60))
+                                      (QREFELT % 75))
+                            (QREFELT % 62))
+                           (QREFELT % 20)))))))))))) 
 
 (DECLAIM (NOTINLINE |RationalFunctionLimitPackage;|)) 
 
-(DEFUN |RationalFunctionLimitPackage| (#1=#:G834)
+(DEFUN |RationalFunctionLimitPackage| (#1=#:G572)
   (SPROG NIL
-         (PROG (#2=#:G835)
+         (PROG (#2=#:G573)
            (RETURN
             (COND
              ((LETT #2#
@@ -412,19 +412,19 @@
                         '|RationalFunctionLimitPackage|)))))))))) 
 
 (DEFUN |RationalFunctionLimitPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RationalFunctionLimitPackage| DV$1))
-          (LETT $ (GETREFV 82))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 82))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|RationalFunctionLimitPackage|
-                      (LIST DV$1) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|RationalFunctionLimitPackage| '|infovec|
           (LIST

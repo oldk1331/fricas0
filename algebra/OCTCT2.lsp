@@ -1,19 +1,19 @@
 
-(SDEFUN |OCTCT2;map;MOROS;1| ((|fn| (|Mapping| S R)) (|u| (OR)) ($ (OS)))
-        (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT $ 10)) |fn|)
-                  (SPADCALL (SPADCALL |u| (QREFELT $ 11)) |fn|)
-                  (SPADCALL (SPADCALL |u| (QREFELT $ 12)) |fn|)
-                  (SPADCALL (SPADCALL |u| (QREFELT $ 13)) |fn|)
-                  (SPADCALL (SPADCALL |u| (QREFELT $ 14)) |fn|)
-                  (SPADCALL (SPADCALL |u| (QREFELT $ 15)) |fn|)
-                  (SPADCALL (SPADCALL |u| (QREFELT $ 16)) |fn|)
-                  (SPADCALL (SPADCALL |u| (QREFELT $ 17)) |fn|) (QREFELT $ 18))) 
+(SDEFUN |OCTCT2;map;MOROS;1| ((|fn| (|Mapping| S R)) (|u| (OR)) (% (OS)))
+        (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 10)) |fn|)
+                  (SPADCALL (SPADCALL |u| (QREFELT % 11)) |fn|)
+                  (SPADCALL (SPADCALL |u| (QREFELT % 12)) |fn|)
+                  (SPADCALL (SPADCALL |u| (QREFELT % 13)) |fn|)
+                  (SPADCALL (SPADCALL |u| (QREFELT % 14)) |fn|)
+                  (SPADCALL (SPADCALL |u| (QREFELT % 15)) |fn|)
+                  (SPADCALL (SPADCALL |u| (QREFELT % 16)) |fn|)
+                  (SPADCALL (SPADCALL |u| (QREFELT % 17)) |fn|) (QREFELT % 18))) 
 
 (DECLAIM (NOTINLINE |OctonionCategoryFunctions2;|)) 
 
-(DEFUN |OctonionCategoryFunctions2| (&REST #1=#:G691)
+(DEFUN |OctonionCategoryFunctions2| (&REST #1=#:G450)
   (SPROG NIL
-         (PROG (#2=#:G692)
+         (PROG (#2=#:G451)
            (RETURN
             (COND
              ((LETT #2#
@@ -33,7 +33,7 @@
 
 (DEFUN |OctonionCategoryFunctions2;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -41,18 +41,18 @@
     (LETT DV$3 (|devaluate| |#3|))
     (LETT DV$4 (|devaluate| |#4|))
     (LETT |dv$| (LIST '|OctonionCategoryFunctions2| DV$1 DV$2 DV$3 DV$4))
-    (LETT $ (GETREFV 21))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (LETT % (GETREFV 21))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|OctonionCategoryFunctions2|
-                (LIST DV$1 DV$2 DV$3 DV$4) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (SETF |pv$| (QREFELT $ 3))
-    $))) 
+                (LIST DV$1 DV$2 DV$3 DV$4) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (SETF |pv$| (QREFELT % 3))
+    %))) 
 
 (MAKEPROP '|OctonionCategoryFunctions2| '|infovec|
           (LIST

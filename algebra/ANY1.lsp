@@ -1,24 +1,24 @@
 
-(SDEFUN |ANY1;retractable?;AB;1| ((|a| (|Any|)) ($ (|Boolean|)))
-        (SPADCALL (SPADCALL |a| (QREFELT $ 10)) (QREFELT $ 7) (QREFELT $ 12))) 
+(SDEFUN |ANY1;retractable?;AB;1| ((|a| (|Any|)) (% (|Boolean|)))
+        (SPADCALL (SPADCALL |a| (QREFELT % 10)) (QREFELT % 7) (QREFELT % 12))) 
 
-(SDEFUN |ANY1;coerce;SA;2| ((|s| (S)) ($ (|Any|)))
-        (SPADCALL (QREFELT $ 7) (SPADCALL |s| (QREFELT $ 16)) (QREFELT $ 17))) 
+(SDEFUN |ANY1;coerce;SA;2| ((|s| (S)) (% (|Any|)))
+        (SPADCALL (QREFELT % 7) (SPADCALL |s| (QREFELT % 16)) (QREFELT % 17))) 
 
-(SDEFUN |ANY1;retractIfCan;AU;3| ((|a| (|Any|)) ($ (|Union| S "failed")))
+(SDEFUN |ANY1;retractIfCan;AU;3| ((|a| (|Any|)) (% (|Union| S "failed")))
         (COND
-         ((SPADCALL |a| (QREFELT $ 13)) (CONS 0 (SPADCALL |a| (QREFELT $ 19))))
+         ((SPADCALL |a| (QREFELT % 13)) (CONS 0 (SPADCALL |a| (QREFELT % 19))))
          ('T (CONS 1 "failed")))) 
 
-(SDEFUN |ANY1;retract;AS;4| ((|a| (|Any|)) ($ (S)))
-        (COND ((SPADCALL |a| (QREFELT $ 13)) (SPADCALL |a| (QREFELT $ 19)))
+(SDEFUN |ANY1;retract;AS;4| ((|a| (|Any|)) (% (S)))
+        (COND ((SPADCALL |a| (QREFELT % 13)) (SPADCALL |a| (QREFELT % 19)))
               ('T (|error| "Cannot retract value.")))) 
 
 (DECLAIM (NOTINLINE |AnyFunctions1;|)) 
 
-(DEFUN |AnyFunctions1| (#1=#:G703)
+(DEFUN |AnyFunctions1| (#1=#:G462)
   (SPROG NIL
-         (PROG (#2=#:G704)
+         (PROG (#2=#:G463)
            (RETURN
             (COND
              ((LETT #2#
@@ -33,20 +33,20 @@
                  ((NOT #2#) (HREM |$ConstructorCache| '|AnyFunctions1|)))))))))) 
 
 (DEFUN |AnyFunctions1;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|AnyFunctions1| DV$1))
-          (LETT $ (GETREFV 23))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 23))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|AnyFunctions1| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 7 (|devaluate| |#1|))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 7 (|devaluate| |#1|))
+          %))) 
 
 (MAKEPROP '|AnyFunctions1| '|infovec|
           (LIST

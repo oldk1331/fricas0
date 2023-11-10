@@ -1,17 +1,17 @@
 
 (SDEFUN |PARSU2;map;MPsPs;1|
         ((|f| (|Mapping| CF2 CF1)) (|c| (|ParametricSurface| CF1))
-         ($ (|ParametricSurface| CF2)))
-        (SPADCALL (SPADCALL (SPADCALL |c| 1 (QREFELT $ 10)) |f|)
-                  (SPADCALL (SPADCALL |c| 2 (QREFELT $ 10)) |f|)
-                  (SPADCALL (SPADCALL |c| 3 (QREFELT $ 10)) |f|)
-                  (QREFELT $ 12))) 
+         (% (|ParametricSurface| CF2)))
+        (SPADCALL (SPADCALL (SPADCALL |c| 1 (QREFELT % 10)) |f|)
+                  (SPADCALL (SPADCALL |c| 2 (QREFELT % 10)) |f|)
+                  (SPADCALL (SPADCALL |c| 3 (QREFELT % 10)) |f|)
+                  (QREFELT % 12))) 
 
 (DECLAIM (NOTINLINE |ParametricSurfaceFunctions2;|)) 
 
-(DEFUN |ParametricSurfaceFunctions2| (&REST #1=#:G696)
+(DEFUN |ParametricSurfaceFunctions2| (&REST #1=#:G450)
   (SPROG NIL
-         (PROG (#2=#:G697)
+         (PROG (#2=#:G451)
            (RETURN
             (COND
              ((LETT #2#
@@ -31,21 +31,21 @@
                         '|ParametricSurfaceFunctions2|)))))))))) 
 
 (DEFUN |ParametricSurfaceFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|ParametricSurfaceFunctions2| DV$1 DV$2))
-          (LETT $ (GETREFV 15))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 15))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|ParametricSurfaceFunctions2|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|ParametricSurfaceFunctions2| '|infovec|
           (LIST

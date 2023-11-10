@@ -25,15 +25,18 @@
 
 (DEFUN |intUnsetQuiet| () (PROG () (RETURN (SETQ |$QuietCommand_tmp| NIL))))
 
-; interpsysInitialization() ==
+; interpsysInitialization(display_messages) ==
 ;   -- The function  start  begins the interpreter process, reading in
 ;   -- the profile and printing start-up messages.
 ;   $PrintCompilerMessageIfTrue: local := nil
 ;   resetWorkspaceVariables()
+;   save_displayStartMsgs := $displayStartMsgs
+;   if not(display_messages) then
+;       $displayStartMsgs := display_messages
 ;   initHist()
 ;   initNewWorld()
-;   compressOpen()
-;   interpOpen()
+;   compressOpen(display_messages)
+;   interpOpen(display_messages)
 ;   createInitializers()
 ;   if $displayStartMsgs then sayKeyedMsg("S2IZ0053",['"interpreter"])
 ;   initializeTimedNames($interpreterTimedNames,$interpreterTimedClasses)
@@ -53,19 +56,24 @@
 ;   if $displayStartMsgs then sayKeyedMsg("S2IZ0053",['"history"])
 ;   initHist()
 ;   if $displayStartMsgs then spadStartUpMsgs()
-;   $superHash := MAKE_HASHTABLE('UEQUAL)
+;   $superHash := MAKE_HASHTABLE('EQUAL)
+;   $displayStartMsgs := save_displayStartMsgs
 
-(DEFUN |interpsysInitialization| ()
-  (PROG (|$PrintCompilerMessageIfTrue|)
+(DEFUN |interpsysInitialization| (|display_messages|)
+  (PROG (|$PrintCompilerMessageIfTrue| |save_displayStartMsgs|)
     (DECLARE (SPECIAL |$PrintCompilerMessageIfTrue|))
     (RETURN
      (PROGN
       (SETQ |$PrintCompilerMessageIfTrue| NIL)
       (|resetWorkspaceVariables|)
+      (SETQ |save_displayStartMsgs| |$displayStartMsgs|)
+      (COND
+       ((NULL |display_messages|)
+        (SETQ |$displayStartMsgs| |display_messages|)))
       (|initHist|)
       (|initNewWorld|)
-      (|compressOpen|)
-      (|interpOpen|)
+      (|compressOpen| |display_messages|)
+      (|interpOpen| |display_messages|)
       (|createInitializers|)
       (COND
        (|$displayStartMsgs| (|sayKeyedMsg| 'S2IZ0053 (LIST "interpreter"))))
@@ -88,7 +96,8 @@
       (COND (|$displayStartMsgs| (|sayKeyedMsg| 'S2IZ0053 (LIST "history"))))
       (|initHist|)
       (COND (|$displayStartMsgs| (|spadStartUpMsgs|)))
-      (SETQ |$superHash| (MAKE_HASHTABLE 'UEQUAL))))))
+      (SETQ |$superHash| (MAKE_HASHTABLE 'EQUAL))
+      (SETQ |$displayStartMsgs| |save_displayStartMsgs|)))))
 
 ; interpsys_restart() ==
 ;   $IOindex := 1
@@ -100,11 +109,11 @@
 ;
 ;   if $displayStartMsgs then spadStartUpMsgs()
 ;   $currentLine := nil
-;   compressOpen() -- set up the compression tables
-;   interpOpen() -- open up the interpreter database
-;   operationOpen() -- all of the operations known to the system
-;   categoryOpen() -- answer hasCategory question
-;   browseOpen()
+;   compressOpen(true) -- set up the compression tables
+;   interpOpen(true) -- open up the interpreter database
+;   operationOpen(true) -- all of the operations known to the system
+;   categoryOpen(true) -- answer hasCategory question
+;   browseOpen(true)
 ;   makeConstructorsAutoLoad()
 ;   createInitializers2()
 
@@ -120,11 +129,11 @@
       (|initializeInterpreterFrameRing|)
       (COND (|$displayStartMsgs| (|spadStartUpMsgs|)))
       (SETQ |$currentLine| NIL)
-      (|compressOpen|)
-      (|interpOpen|)
-      (|operationOpen|)
-      (|categoryOpen|)
-      (|browseOpen|)
+      (|compressOpen| T)
+      (|interpOpen| T)
+      (|operationOpen| T)
+      (|categoryOpen| T)
+      (|browseOpen| T)
       (|makeConstructorsAutoLoad|)
       (|createInitializers2|)))))
 

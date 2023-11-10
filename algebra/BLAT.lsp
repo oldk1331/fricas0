@@ -8,7 +8,7 @@
         (T (SETQ |BoundedLattice;AL| (|BoundedLattice;|))))) 
 
 (DEFUN |BoundedLattice;| ()
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|BoundedMeetSemilattice|)

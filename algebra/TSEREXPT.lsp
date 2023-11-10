@@ -3,17 +3,17 @@
         ((|f| (|Stream| |Coef|)) (|x| (|Stream| |Coef|))
          (|xn| (|Stream| |Coef|))
          (|d| (|Mapping| (|Stream| |Coef|) (|Stream| |Coef|)))
-         (|n| (|Integer|)) ($ (|Stream| (|Stream| |Coef|))))
+         (|n| (|Integer|)) (% (|Stream| (|Stream| |Coef|))))
         (SPROG NIL
                (SEQ
                 (SPADCALL
                  (CONS #'|TSEREXPT;stream_taylor!0|
-                       (VECTOR |x| |d| |xn| |f| |n| $))
-                 (QREFELT $ 23))))) 
+                       (VECTOR |x| |d| |xn| |f| |n| %))
+                 (QREFELT % 23))))) 
 
 (SDEFUN |TSEREXPT;stream_taylor!0| (($$ NIL))
-        (PROG ($ |n| |f| |xn| |d| |x|)
-          (LETT $ (QREFELT $$ 5))
+        (PROG (% |n| |f| |xn| |d| |x|)
+          (LETT % (QREFELT $$ 5))
           (LETT |n| (QREFELT $$ 4))
           (LETT |f| (QREFELT $$ 3))
           (LETT |xn| (QREFELT $$ 2))
@@ -24,30 +24,30 @@
             (SPROG ((|qn| NIL) (|ninv| NIL) (|fn| NIL))
                    (SEQ
                     (LETT |qn|
-                          (SPADCALL (|spadConstant| $ 11) |n| (QREFELT $ 13)))
+                          (SPADCALL (|spadConstant| % 11) |n| (QREFELT % 13)))
                     (LETT |ninv|
-                          (SPADCALL |qn| (|spadConstant| $ 8) (QREFELT $ 14)))
-                    (LETT |fn| (SPADCALL |f| |xn| (QREFELT $ 17)))
+                          (SPADCALL |qn| (|spadConstant| % 8) (QREFELT % 14)))
+                    (LETT |fn| (SPADCALL |f| |xn| (QREFELT % 17)))
                     (EXIT
                      (SPADCALL |fn|
                                (|TSEREXPT;stream_taylor|
-                                (SPADCALL (SPADCALL |ninv| |f| (QREFELT $ 18))
+                                (SPADCALL (SPADCALL |ninv| |f| (QREFELT % 18))
                                           |d|)
-                                |x| (SPADCALL |x| |xn| (QREFELT $ 17)) |d|
-                                (SPADCALL |n| (|spadConstant| $ 11)
-                                          (QREFELT $ 19))
-                                $)
-                               (QREFELT $ 21))))))))) 
+                                |x| (SPADCALL |x| |xn| (QREFELT % 17)) |d|
+                                (SPADCALL |n| (|spadConstant| % 11)
+                                          (QREFELT % 19))
+                                %)
+                               (QREFELT % 21))))))))) 
 
 (SDEFUN |TSEREXPT;taylor_via_deriv;UTSLLUTS;2|
         ((|f| (UTS)) (|lx| (|List| UTS))
-         (|ld| (|List| (|Mapping| |Coef| |Coef|))) ($ (UTS)))
+         (|ld| (|List| (|Mapping| |Coef| |Coef|))) (% (UTS)))
         (SPROG
          ((|ds| (|Stream| (|Stream| |Coef|))) (|one| #1=(|Stream| |Coef|))
           (|xs| #1#) (|fs| #1#) (|x1| (UTS)))
          (SEQ
           (COND
-           ((SPADCALL (LENGTH |lx|) (LENGTH |ld|) (QREFELT $ 26))
+           ((SPADCALL (LENGTH |lx|) (LENGTH |ld|) (QREFELT % 26))
             (|error|
              "taylor_via_deriv: number of variables must equal number of derivatives"))
            ((EQL (LENGTH |lx|) 0) |f|)
@@ -55,69 +55,69 @@
             (SEQ (LETT |x1| (|SPADfirst| |lx|))
                  (EXIT
                   (COND
-                   ((< (SPADCALL |x1| 1 (QREFELT $ 27)) 1)
+                   ((< (SPADCALL |x1| 1 (QREFELT % 27)) 1)
                     (|error| "taylor_via_deriv: variable has constant term"))
                    (#2#
                     (SEQ
                      (LETT |f|
-                           (SPADCALL |f| (CDR |lx|) (CDR |ld|) (QREFELT $ 31)))
-                     (LETT |fs| (SPADCALL |f| (QREFELT $ 32)))
-                     (LETT |xs| (SPADCALL |x1| (QREFELT $ 32)))
+                           (SPADCALL |f| (CDR |lx|) (CDR |ld|) (QREFELT % 31)))
+                     (LETT |fs| (SPADCALL |f| (QREFELT % 32)))
+                     (LETT |xs| (SPADCALL |x1| (QREFELT % 32)))
                      (EXIT
-                      (COND ((SPADCALL |xs| (QREFELT $ 33)) |f|)
+                      (COND ((SPADCALL |xs| (QREFELT % 33)) |f|)
                             (#2#
-                             (SEQ (LETT |xs| (SPADCALL |xs| (QREFELT $ 34)))
+                             (SEQ (LETT |xs| (SPADCALL |xs| (QREFELT % 34)))
                                   (LETT |one|
-                                        (SPADCALL (|spadConstant| $ 9)
-                                                  (QREFELT $ 32)))
+                                        (SPADCALL (|spadConstant| % 9)
+                                                  (QREFELT % 32)))
                                   (LETT |ds|
                                         (|TSEREXPT;stream_taylor| |fs| |xs|
                                          |one|
                                          (CONS
                                           #'|TSEREXPT;taylor_via_deriv;UTSLLUTS;2!0|
-                                          (VECTOR $ |ld|))
-                                         1 $))
+                                          (VECTOR % |ld|))
+                                         1 %))
                                   (EXIT
-                                   (SPADCALL (SPADCALL |ds| (QREFELT $ 37))
-                                             (QREFELT $ 38))))))))))))))))) 
+                                   (SPADCALL (SPADCALL |ds| (QREFELT % 37))
+                                             (QREFELT % 38))))))))))))))))) 
 
 (SDEFUN |TSEREXPT;taylor_via_deriv;UTSLLUTS;2!0| ((|s| NIL) ($$ NIL))
-        (PROG (|ld| $)
+        (PROG (|ld| %)
           (LETT |ld| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
+          (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPADCALL (SPADCALL |ld| (QREFELT $ 35)) |s| (QREFELT $ 36)))))) 
+            (SPADCALL (SPADCALL |ld| (QREFELT % 35)) |s| (QREFELT % 36)))))) 
 
 (SDEFUN |TSEREXPT;taylor_via_lode;LUTSLUTS;3|
-        ((|la| (|List| UTS)) (|z| (UTS)) (|lc| (|List| |Coef|)) ($ (UTS)))
+        ((|la| (|List| UTS)) (|z| (UTS)) (|lc| (|List| |Coef|)) (% (UTS)))
         (SPROG NIL
                (SEQ
                 (COND
-                 ((< (SPADCALL |z| 1 (QREFELT $ 27)) 1)
+                 ((< (SPADCALL |z| 1 (QREFELT % 27)) 1)
                   (|error| "taylor_via_lode: variable has constant term"))
-                 ((SPADCALL (LENGTH |lc|) (LENGTH |la|) (QREFELT $ 26))
+                 ((SPADCALL (LENGTH |lc|) (LENGTH |la|) (QREFELT % 26))
                   (|error|
                    "taylor_via_lode: number of coefficient and initial values must be equal"))
                  ('T
                   (SPADCALL
                    (SPADCALL
                     (CONS #'|TSEREXPT;taylor_via_lode;LUTSLUTS;3!0|
-                          (VECTOR |la| $))
-                    |lc| (QREFELT $ 46))
-                   |z| (QREFELT $ 47))))))) 
+                          (VECTOR |la| %))
+                    |lc| (QREFELT % 46))
+                   |z| (QREFELT % 47))))))) 
 
 (SDEFUN |TSEREXPT;taylor_via_lode;LUTSLUTS;3!0| ((|ls| NIL) ($$ NIL))
-        (PROG ($ |la|)
-          (LETT $ (QREFELT $$ 1))
+        (PROG (% |la|)
+          (LETT % (QREFELT $$ 1))
           (LETT |la| (QREFELT $$ 0))
           (RETURN
            (PROGN
             (SPROG
-             ((#1=#:G739 NIL) (|s| NIL) (#2=#:G740 NIL) (|a| NIL)
-              (#3=#:G738 NIL))
+             ((#1=#:G486 NIL) (|s| NIL) (#2=#:G487 NIL) (|a| NIL)
+              (#3=#:G485 NIL))
              (SEQ
-              (SPADCALL (ELT $ 39)
+              (SPADCALL (ELT % 39)
                         (PROGN
                          (LETT #3# NIL)
                          (SEQ (LETT |a| NIL) (LETT #2# |la|) (LETT |s| NIL)
@@ -130,26 +130,26 @@
                               (SEQ
                                (EXIT
                                 (LETT #3#
-                                      (CONS (SPADCALL |s| |a| (QREFELT $ 40))
+                                      (CONS (SPADCALL |s| |a| (QREFELT % 40))
                                             #3#))))
                               (LETT #1# (PROG1 (CDR #1#) (LETT #2# (CDR #2#))))
                               (GO G190) G191 (EXIT (NREVERSE #3#))))
-                        (QREFELT $ 42)))))))) 
+                        (QREFELT % 42)))))))) 
 
 (PUT '|TSEREXPT;applyTaylor;M2UTS;4| '|SPADreplace|
      '(XLAM (|g| |f|) (SPADCALL |f| |g|))) 
 
 (SDEFUN |TSEREXPT;applyTaylor;M2UTS;4|
-        ((|g| (|Mapping| UTS UTS)) (|f| (UTS)) ($ (UTS))) (SPADCALL |f| |g|)) 
+        ((|g| (|Mapping| UTS UTS)) (|f| (UTS)) (% (UTS))) (SPADCALL |f| |g|)) 
 
-(SDEFUN |TSEREXPT;apply_taylor;3UTS;5| ((|g| (UTS)) (|f| (UTS)) ($ (UTS)))
-        (SPADCALL |g| |f| (QREFELT $ 47))) 
+(SDEFUN |TSEREXPT;apply_taylor;3UTS;5| ((|g| (UTS)) (|f| (UTS)) (% (UTS)))
+        (SPADCALL |g| |f| (QREFELT % 47))) 
 
 (DECLAIM (NOTINLINE |TaylorSeriesExpansionTaylor;|)) 
 
-(DEFUN |TaylorSeriesExpansionTaylor| (&REST #1=#:G747)
+(DEFUN |TaylorSeriesExpansionTaylor| (&REST #1=#:G494)
   (SPROG NIL
-         (PROG (#2=#:G748)
+         (PROG (#2=#:G495)
            (RETURN
             (COND
              ((LETT #2#
@@ -169,28 +169,28 @@
                         '|TaylorSeriesExpansionTaylor|)))))))))) 
 
 (DEFUN |TaylorSeriesExpansionTaylor;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|TaylorSeriesExpansionTaylor| DV$1 DV$2))
-          (LETT $ (GETREFV 52))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 52))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|TaylorSeriesExpansionTaylor|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|TaylorSeriesExpansionTaylor| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (0 . |One|)
               (4 . |One|) (|Integer|) (8 . |One|) (|Fraction| 10) (12 . /)
               (18 . *) (|Stream| 6) (|StreamTaylorSeriesOperations| 6) (24 . *)
-              (30 . *) (36 . +) (|Stream| 15) (42 . |concat|) (|Mapping| $)
+              (30 . *) (36 . +) (|Stream| 15) (42 . |concat|) (|Mapping| %)
               (48 . |delay|) (|Boolean|) (|NonNegativeInteger|) (53 . ~=)
               (59 . |order|) (|List| 7) (|Mapping| 6 6) (|List| 29)
               |TSEREXPT;taylor_via_deriv;UTSLLUTS;2| (65 . |coefficients|)

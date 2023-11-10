@@ -1,15 +1,15 @@
 
 (SDEFUN |EQ2;map;MEE;1|
-        ((|fn| (|Mapping| R S)) (|eqn| (|Equation| S)) ($ (|Equation| R)))
-        (SPADCALL (SPADCALL (SPADCALL |eqn| (QREFELT $ 9)) |fn|)
-                  (SPADCALL (SPADCALL |eqn| (QREFELT $ 10)) |fn|)
-                  (QREFELT $ 12))) 
+        ((|fn| (|Mapping| R S)) (|eqn| (|Equation| S)) (% (|Equation| R)))
+        (SPADCALL (SPADCALL (SPADCALL |eqn| (QREFELT % 9)) |fn|)
+                  (SPADCALL (SPADCALL |eqn| (QREFELT % 10)) |fn|)
+                  (QREFELT % 12))) 
 
 (DECLAIM (NOTINLINE |EquationFunctions2;|)) 
 
-(DEFUN |EquationFunctions2| (&REST #1=#:G691)
+(DEFUN |EquationFunctions2| (&REST #1=#:G450)
   (SPROG NIL
-         (PROG (#2=#:G692)
+         (PROG (#2=#:G451)
            (RETURN
             (COND
              ((LETT #2#
@@ -27,21 +27,21 @@
                   (HREM |$ConstructorCache| '|EquationFunctions2|)))))))))) 
 
 (DEFUN |EquationFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|EquationFunctions2| DV$1 DV$2))
-          (LETT $ (GETREFV 15))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 15))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|EquationFunctions2|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|EquationFunctions2| '|infovec|
           (LIST

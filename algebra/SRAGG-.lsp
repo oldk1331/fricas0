@@ -1,36 +1,36 @@
 
-(SDEFUN |SRAGG-;trim;SCcS;1| ((|s| (S)) (|cc| (|CharacterClass|)) ($ (S)))
-        (SPADCALL (SPADCALL |s| |cc| (QREFELT $ 8)) |cc| (QREFELT $ 9))) 
+(SDEFUN |SRAGG-;trim;SCcS;1| ((|s| (S)) (|cc| (|CharacterClass|)) (% (S)))
+        (SPADCALL (SPADCALL |s| |cc| (QREFELT % 8)) |cc| (QREFELT % 9))) 
 
-(SDEFUN |SRAGG-;lowerCase;2S;2| ((|s| (S)) ($ (S)))
-        (SPADCALL (SPADCALL |s| (QREFELT $ 11)) (QREFELT $ 12))) 
+(SDEFUN |SRAGG-;lowerCase;2S;2| ((|s| (S)) (% (S)))
+        (SPADCALL (SPADCALL |s| (QREFELT % 11)) (QREFELT % 12))) 
 
-(SDEFUN |SRAGG-;upperCase;2S;3| ((|s| (S)) ($ (S)))
-        (SPADCALL (SPADCALL |s| (QREFELT $ 11)) (QREFELT $ 14))) 
+(SDEFUN |SRAGG-;upperCase;2S;3| ((|s| (S)) (% (S)))
+        (SPADCALL (SPADCALL |s| (QREFELT % 11)) (QREFELT % 14))) 
 
-(SDEFUN |SRAGG-;prefix?;2SB;4| ((|s| (S)) (|t| (S)) ($ (|Boolean|)))
-        (SPADCALL |s| |t| (SPADCALL |t| (QREFELT $ 17)) (QREFELT $ 19))) 
+(SDEFUN |SRAGG-;prefix?;2SB;4| ((|s| (S)) (|t| (S)) (% (|Boolean|)))
+        (SPADCALL |s| |t| (SPADCALL |t| (QREFELT % 17)) (QREFELT % 19))) 
 
-(SDEFUN |SRAGG-;coerce;CS;5| ((|c| (|Character|)) ($ (S)))
-        (SPADCALL 1 |c| (QREFELT $ 23))) 
+(SDEFUN |SRAGG-;coerce;CS;5| ((|c| (|Character|)) (% (S)))
+        (SPADCALL 1 |c| (QREFELT % 23))) 
 
-(SDEFUN |SRAGG-;elt;3S;6| ((|s| (S)) (|t| (S)) ($ (S)))
-        (SPADCALL |s| |t| (QREFELT $ 25))) 
+(SDEFUN |SRAGG-;elt;3S;6| ((|s| (S)) (|t| (S)) (% (S)))
+        (SPADCALL |s| |t| (QREFELT % 25))) 
 
 (DECLAIM (NOTINLINE |StringAggregate&;|)) 
 
 (DEFUN |StringAggregate&| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|StringAggregate&| DV$1))
-          (LETT $ (GETREFV 29))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 29))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|StringAggregate&| '|infovec|
           (LIST

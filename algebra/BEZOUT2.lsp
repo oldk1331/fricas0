@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |BezoutMatrixWrapper;|)) 
 
-(DEFUN |BezoutMatrixWrapper| (&REST #1=#:G694)
+(DEFUN |BezoutMatrixWrapper| (&REST #1=#:G448)
   (SPROG NIL
-         (PROG (#2=#:G695)
+         (PROG (#2=#:G449)
            (RETURN
             (COND
              ((LETT #2#
@@ -21,26 +21,26 @@
                   (HREM |$ConstructorCache| '|BezoutMatrixWrapper|)))))))))) 
 
 (DEFUN |BezoutMatrixWrapper;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|BezoutMatrixWrapper| DV$1 DV$2))
-          (LETT $ (GETREFV 11))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 11))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
                                               (|HasCategory| |#1|
                                                              '(|CommutativeRing|))))))
           (|haddProp| |$ConstructorCache| '|BezoutMatrixWrapper|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|BezoutMatrixWrapper| '|infovec|
           (LIST

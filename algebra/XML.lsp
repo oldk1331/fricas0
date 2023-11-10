@@ -1,51 +1,51 @@
 
 (SDEFUN |XML;writeXml;XeSV;1|
-        ((|content| (|XmlElement|)) (|filename| (|String|)) ($ (|Void|)))
+        ((|content| (|XmlElement|)) (|filename| (|String|)) (% (|Void|)))
         (SPROG
-         ((#1=#:G702 NIL) (|line| NIL) (|lines| (|List| (|String|)))
+         ((#1=#:G452 NIL) (|line| NIL) (|lines| (|List| (|String|)))
           (|s1| (|String|)) (|f1| (|TextFile|)))
          (SEQ
           (LETT |f1|
-                (SPADCALL (SPADCALL |filename| (QREFELT $ 8)) "output"
-                          (QREFELT $ 10)))
+                (SPADCALL (SPADCALL |filename| (QREFELT % 8)) "output"
+                          (QREFELT % 10)))
           (LETT |s1| "<?xml version=")
-          (LETT |s1| (SPADCALL |s1| (SPADCALL (QREFELT $ 12)) (QREFELT $ 13)))
+          (LETT |s1| (SPADCALL |s1| (SPADCALL (QREFELT % 12)) (QREFELT % 13)))
           (LETT |s1| (STRCONC |s1| "1.0"))
-          (LETT |s1| (SPADCALL |s1| (SPADCALL (QREFELT $ 12)) (QREFELT $ 13)))
+          (LETT |s1| (SPADCALL |s1| (SPADCALL (QREFELT % 12)) (QREFELT % 13)))
           (LETT |s1| (STRCONC |s1| " encoding="))
-          (LETT |s1| (SPADCALL |s1| (SPADCALL (QREFELT $ 12)) (QREFELT $ 13)))
+          (LETT |s1| (SPADCALL |s1| (SPADCALL (QREFELT % 12)) (QREFELT % 13)))
           (LETT |s1| (STRCONC |s1| "UTF-8"))
-          (LETT |s1| (SPADCALL |s1| (SPADCALL (QREFELT $ 12)) (QREFELT $ 13)))
+          (LETT |s1| (SPADCALL |s1| (SPADCALL (QREFELT % 12)) (QREFELT % 13)))
           (LETT |s1| (STRCONC |s1| " standalone="))
-          (LETT |s1| (SPADCALL |s1| (SPADCALL (QREFELT $ 12)) (QREFELT $ 13)))
+          (LETT |s1| (SPADCALL |s1| (SPADCALL (QREFELT % 12)) (QREFELT % 13)))
           (LETT |s1| (STRCONC |s1| "no"))
-          (LETT |s1| (SPADCALL |s1| (SPADCALL (QREFELT $ 12)) (QREFELT $ 13)))
-          (LETT |s1| (STRCONC |s1| "?>")) (SPADCALL |f1| |s1| (QREFELT $ 14))
-          (LETT |lines| (SPADCALL |content| (QREFELT $ 17)))
+          (LETT |s1| (SPADCALL |s1| (SPADCALL (QREFELT % 12)) (QREFELT % 13)))
+          (LETT |s1| (STRCONC |s1| "?>")) (SPADCALL |f1| |s1| (QREFELT % 14))
+          (LETT |lines| (SPADCALL |content| (QREFELT % 17)))
           (SEQ (LETT |line| NIL) (LETT #1# |lines|) G190
                (COND
                 ((OR (ATOM #1#) (PROGN (LETT |line| (CAR #1#)) NIL))
                  (GO G191)))
-               (SEQ (EXIT (SPADCALL |f1| |line| (QREFELT $ 14))))
+               (SEQ (EXIT (SPADCALL |f1| |line| (QREFELT % 14))))
                (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
-          (EXIT (SPADCALL |f1| (QREFELT $ 18)))))) 
+          (EXIT (SPADCALL |f1| (QREFELT % 18)))))) 
 
 (SDEFUN |XML;writeVRML;XeSV;2|
-        ((|content| (|XmlElement|)) (|filename| (|String|)) ($ (|Void|)))
+        ((|content| (|XmlElement|)) (|filename| (|String|)) (% (|Void|)))
         (SPROG ((|f1| (|TextFile|)))
                (SEQ
                 (LETT |f1|
-                      (SPADCALL (SPADCALL |filename| (QREFELT $ 8)) "output"
-                                (QREFELT $ 10)))
-                (SPADCALL |f1| "#VRML V2.0 utf8" (QREFELT $ 14))
-                (SPADCALL |content| |f1| (QREFELT $ 21))
-                (EXIT (SPADCALL |f1| (QREFELT $ 18)))))) 
+                      (SPADCALL (SPADCALL |filename| (QREFELT % 8)) "output"
+                                (QREFELT % 10)))
+                (SPADCALL |f1| "#VRML V2.0 utf8" (QREFELT % 14))
+                (SPADCALL |content| |f1| (QREFELT % 21))
+                (EXIT (SPADCALL |f1| (QREFELT % 18)))))) 
 
 (DECLAIM (NOTINLINE |ExportXml;|)) 
 
 (DEFUN |ExportXml| ()
   (SPROG NIL
-         (PROG (#1=#:G706)
+         (PROG (#1=#:G456)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ExportXml|))
@@ -61,16 +61,16 @@
                  ((NOT #1#) (HREM |$ConstructorCache| '|ExportXml|)))))))))) 
 
 (DEFUN |ExportXml;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|ExportXml|))
-          (LETT $ (GETREFV 23))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|ExportXml| NIL (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 23))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|ExportXml| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|ExportXml| '|infovec|
           (LIST

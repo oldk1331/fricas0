@@ -1961,7 +1961,7 @@
 ;     if ZEROP(i) or (ABS(i) <  1.0E-10*(ABS r)) then
 ;         r
 ;     else
-;         error "Result is not real."
+;         error '"Result is not real."
 
 (DEFUN |c_to_r| (|c|)
   (PROG (|r| |i|)
@@ -1971,7 +1971,7 @@
       (SETQ |i| (IMAGPART |c|))
       (COND
        ((OR (ZEROP |i|) (< (ABS |i|) (* 9.999999999999999e-11 (ABS |r|)))) |r|)
-       ('T (|error| '|Result is not real.|)))))))
+       ('T (|error| "Result is not real.")))))))
 
 ; c_to_rf(c) == COERCE(c_to_r(c), 'DOUBLE_-FLOAT)
 

@@ -6,8 +6,8 @@
 (DEFPARAMETER |PolynomialCategory;AL| 'NIL) 
 
 (DEFUN |PolynomialCategory| (|t#1| |t#2| |t#3|)
-  (LET (#1=#:G715
-        (#2=#:G716
+  (LET (#1=#:G474
+        (#2=#:G475
          (LIST (|devaluate| |t#1|) (|devaluate| |t#2|) (|devaluate| |t#3|))))
     (COND ((SETQ #1# (|assoc| #2# |PolynomialCategory;AL|)) (CDR #1#))
           (T
@@ -18,7 +18,7 @@
            #1#)))) 
 
 (DEFUN |PolynomialCategory;| (|t#1| |t#2| |t#3|)
-  (SPROG ((#1=#:G714 NIL))
+  (SPROG ((#1=#:G473 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3|)
@@ -31,55 +31,55 @@
                                                   '|t#1| '|t#2| '|t#3|)
                                                  (|InnerEvalable| '|t#3|
                                                                   '|t#1|)
-                                                 (|InnerEvalable| '|t#3| '$)
+                                                 (|InnerEvalable| '|t#3| '%)
                                                  (|VariablesCommuteWithCoefficients|)
                                                  (|mkCategory|
                                                   '(((|univariate|
                                                       ((|SparseUnivariatePolynomial|
-                                                        $)
-                                                       $ |t#3|))
+                                                        %)
+                                                       % |t#3|))
                                                      T)
                                                     ((|univariate|
                                                       ((|SparseUnivariatePolynomial|
                                                         |t#1|)
-                                                       $))
+                                                       %))
                                                      T)
                                                     ((|minimumDegree|
-                                                      ((|NonNegativeInteger|) $
+                                                      ((|NonNegativeInteger|) %
                                                        |t#3|))
                                                      T)
                                                     ((|minimumDegree|
                                                       ((|List|
                                                         (|NonNegativeInteger|))
-                                                       $ (|List| |t#3|)))
+                                                       % (|List| |t#3|)))
                                                      T)
                                                     ((|monicDivide|
                                                       ((|Record|
-                                                        (|:| |quotient| $)
-                                                        (|:| |remainder| $))
-                                                       $ $ |t#3|))
+                                                        (|:| |quotient| %)
+                                                        (|:| |remainder| %))
+                                                       % % |t#3|))
                                                      (|has| |t#1| (|Ring|)))
                                                     ((|multivariate|
-                                                      ($
+                                                      (%
                                                        (|SparseUnivariatePolynomial|
                                                         |t#1|)
                                                        |t#3|))
                                                      T)
                                                     ((|multivariate|
-                                                      ($
+                                                      (%
                                                        (|SparseUnivariatePolynomial|
-                                                        $)
+                                                        %)
                                                        |t#3|))
                                                      T)
                                                     ((|isPlus|
-                                                      ((|Union| (|List| $)
+                                                      ((|Union| (|List| %)
                                                                 "failed")
-                                                       $))
+                                                       %))
                                                      T)
                                                     ((|isTimes|
-                                                      ((|Union| (|List| $)
+                                                      ((|Union| (|List| %)
                                                                 "failed")
-                                                       $))
+                                                       %))
                                                      (|has| |t#1|
                                                             (|SemiRing|)))
                                                     ((|isExpt|
@@ -89,43 +89,49 @@
                                                          (|:| |exponent|
                                                               (|NonNegativeInteger|)))
                                                         "failed")
-                                                       $))
+                                                       %))
                                                      (|has| |t#1|
                                                             (|SemiRing|)))
                                                     ((|resultant|
-                                                      ($ $ $ |t#3|))
+                                                      (% % % |t#3|))
                                                      (|has| |t#1|
                                                             (|CommutativeRing|)))
                                                     ((|discriminant|
-                                                      ($ $ |t#3|))
+                                                      (% % |t#3|))
                                                      (|has| |t#1|
                                                             (|CommutativeRing|)))
-                                                    ((|content| ($ $ |t#3|))
+                                                    ((|content| (% % |t#3|))
                                                      (|has| |t#1|
                                                             (|GcdDomain|)))
-                                                    ((|primitivePart| ($ $))
+                                                    ((|primitivePart| (% %))
                                                      (|has| |t#1|
                                                             (|GcdDomain|)))
                                                     ((|primitivePart|
-                                                      ($ $ |t#3|))
+                                                      (% % |t#3|))
                                                      (|has| |t#1|
                                                             (|GcdDomain|)))
                                                     ((|squareFree|
-                                                      ((|Factored| $) $))
+                                                      ((|Factored| %) %))
                                                      (|has| |t#1|
                                                             (|GcdDomain|)))
-                                                    ((|squareFreePart| ($ $))
+                                                    ((|squareFreePart| (% %))
                                                      (|has| |t#1|
                                                             (|GcdDomain|))))
                                                   '(((|RetractableTo| |t#3|)
                                                      (|has| |t#1|
                                                             (|SemiRing|)))
-                                                    ((|Evalable| $)
+                                                    ((|Evalable| %)
                                                      (|has| |t#1|
                                                             (|SemiRing|)))
                                                     ((|PartialDifferentialRing|
                                                       |t#3|)
                                                      (|has| |t#1| (|Ring|)))
+                                                    ((|Hashable|)
+                                                     (AND
+                                                      (|has| |t#3|
+                                                             (|Hashable|))
+                                                      (|has| |t#1|
+                                                             (|Hashable|))))
                                                     ((|ConvertibleTo|
                                                       (|InputForm|))
                                                      (AND

@@ -2,59 +2,59 @@
 (SDEFUN |IR2;NLE2F|
         ((|func| (|Mapping| F E))
          (|r| (|Record| (|:| |coeff| E) (|:| |logand| E)))
-         ($ (|Record| (|:| |coeff| F) (|:| |logand| F))))
+         (% (|Record| (|:| |coeff| F) (|:| |logand| F))))
         (CONS (SPADCALL (QCAR |r|) |func|) (SPADCALL (QCDR |r|) |func|))) 
 
 (SDEFUN |IR2;NEE2F|
         ((|func| (|Mapping| F E))
          (|n| (|Record| (|:| |integrand| E) (|:| |intvar| E)))
-         ($ (|Record| (|:| |integrand| F) (|:| |intvar| F))))
+         (% (|Record| (|:| |integrand| F) (|:| |intvar| F))))
         (CONS (SPADCALL (QCAR |n|) |func|) (SPADCALL (QCDR |n|) |func|))) 
 
 (SDEFUN |IR2;map;MUU;3|
         ((|func| (|Mapping| F E)) (|u| (|Union| E "failed"))
-         ($ (|Union| F "failed")))
+         (% (|Union| F "failed")))
         (COND ((QEQCAR |u| 1) (CONS 1 "failed"))
               ('T (CONS 0 (SPADCALL (QCDR |u|) |func|))))) 
 
 (SDEFUN |IR2;map;MIrIr;4|
         ((|func| (|Mapping| F E)) (|ir| (|IntegrationResult| E))
-         ($ (|IntegrationResult| F)))
+         (% (|IntegrationResult| F)))
         (SPROG
-         ((#1=#:G727 NIL) (|g| NIL) (#2=#:G726 NIL) (#3=#:G725 NIL) (|f| NIL)
-          (#4=#:G724 NIL))
+         ((#1=#:G482 NIL) (|g| NIL) (#2=#:G481 NIL) (#3=#:G480 NIL) (|f| NIL)
+          (#4=#:G479 NIL))
          (SEQ
-          (SPADCALL (SPADCALL (SPADCALL |ir| (QREFELT $ 13)) |func|)
+          (SPADCALL (SPADCALL (SPADCALL |ir| (QREFELT % 13)) |func|)
                     (PROGN
                      (LETT #4# NIL)
                      (SEQ (LETT |f| NIL)
-                          (LETT #3# (SPADCALL |ir| (QREFELT $ 16))) G190
+                          (LETT #3# (SPADCALL |ir| (QREFELT % 16))) G190
                           (COND
                            ((OR (ATOM #3#) (PROGN (LETT |f| (CAR #3#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #4# (CONS (|IR2;LGE2F| |func| |f| $) #4#))))
+                            (LETT #4# (CONS (|IR2;LGE2F| |func| |f| %) #4#))))
                           (LETT #3# (CDR #3#)) (GO G190) G191
                           (EXIT (NREVERSE #4#))))
                     (PROGN
                      (LETT #2# NIL)
                      (SEQ (LETT |g| NIL)
-                          (LETT #1# (SPADCALL |ir| (QREFELT $ 19))) G190
+                          (LETT #1# (SPADCALL |ir| (QREFELT % 19))) G190
                           (COND
                            ((OR (ATOM #1#) (PROGN (LETT |g| (CAR #1#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #2# (CONS (|IR2;NEE2F| |func| |g| $) #2#))))
+                            (LETT #2# (CONS (|IR2;NEE2F| |func| |g| %) #2#))))
                           (LETT #1# (CDR #1#)) (GO G190) G191
                           (EXIT (NREVERSE #2#))))
-                    (QREFELT $ 25))))) 
+                    (QREFELT % 25))))) 
 
 (SDEFUN |IR2;map;MUU;5|
         ((|func| (|Mapping| F E))
          (|u| (|Union| (|Record| (|:| |ratpart| E) (|:| |coeff| E)) "failed"))
-         ($ (|Union| (|Record| (|:| |ratpart| F) (|:| |coeff| F)) "failed")))
+         (% (|Union| (|Record| (|:| |ratpart| F) (|:| |coeff| F)) "failed")))
         (COND ((QEQCAR |u| 1) (CONS 1 "failed"))
               ('T
                (CONS 0
@@ -70,14 +70,14 @@
                           (|List|
                            (|Record| (|:| |coeff| E) (|:| |logand| E)))))
            "failed"))
-         ($
+         (%
           (|Union|
            (|Record| (|:| |mainpart| F)
                      (|:| |limitedlogs|
                           (|List|
                            (|Record| (|:| |coeff| F) (|:| |logand| F)))))
            "failed")))
-        (SPROG ((#1=#:G770 NIL) (|f| NIL) (#2=#:G769 NIL))
+        (SPROG ((#1=#:G525 NIL) (|f| NIL) (#2=#:G524 NIL))
                (SEQ
                 (COND ((QEQCAR |u| 1) (CONS 1 "failed"))
                       ('T
@@ -97,7 +97,7 @@
                                           (EXIT
                                            (LETT #2#
                                                  (CONS
-                                                  (|IR2;NLE2F| |func| |f| $)
+                                                  (|IR2;NLE2F| |func| |f| %)
                                                   #2#))))
                                          (LETT #1# (CDR #1#)) (GO G190) G191
                                          (EXIT (NREVERSE #2#))))))))))) 
@@ -108,18 +108,18 @@
           (|Record| (|:| |scalar| (|Fraction| (|Integer|)))
                     (|:| |coeff| (|SparseUnivariatePolynomial| E))
                     (|:| |logand| (|SparseUnivariatePolynomial| E))))
-         ($
+         (%
           (|Record| (|:| |scalar| (|Fraction| (|Integer|)))
                     (|:| |coeff| (|SparseUnivariatePolynomial| F))
                     (|:| |logand| (|SparseUnivariatePolynomial| F)))))
-        (VECTOR (QVELT |lg| 0) (SPADCALL |func| (QVELT |lg| 1) (QREFELT $ 42))
-                (SPADCALL |func| (QVELT |lg| 2) (QREFELT $ 42)))) 
+        (VECTOR (QVELT |lg| 0) (SPADCALL |func| (QVELT |lg| 1) (QREFELT % 42))
+                (SPADCALL |func| (QVELT |lg| 2) (QREFELT % 42)))) 
 
 (DECLAIM (NOTINLINE |IntegrationResultFunctions2;|)) 
 
-(DEFUN |IntegrationResultFunctions2| (&REST #1=#:G781)
+(DEFUN |IntegrationResultFunctions2| (&REST #1=#:G531)
   (SPROG NIL
-         (PROG (#2=#:G782)
+         (PROG (#2=#:G532)
            (RETURN
             (COND
              ((LETT #2#
@@ -139,21 +139,21 @@
                         '|IntegrationResultFunctions2|)))))))))) 
 
 (DEFUN |IntegrationResultFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|IntegrationResultFunctions2| DV$1 DV$2))
-          (LETT $ (GETREFV 43))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 43))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|IntegrationResultFunctions2|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|IntegrationResultFunctions2| '|infovec|
           (LIST

@@ -1,16 +1,16 @@
 
-(SDEFUN |KERNEL2;constantKernel;RK;1| ((|r| (R)) ($ (|Kernel| S)))
-        (SPADCALL (SPADCALL |r| (QREFELT $ 10)) NIL 1 (QREFELT $ 14))) 
+(SDEFUN |KERNEL2;constantKernel;RK;1| ((|r| (R)) (% (|Kernel| S)))
+        (SPADCALL (SPADCALL |r| (QREFELT % 10)) NIL 1 (QREFELT % 14))) 
 
 (SDEFUN |KERNEL2;constantIfCan;KU;2|
-        ((|k| (|Kernel| S)) ($ (|Union| R "failed")))
-        (SPADCALL (SPADCALL |k| (QREFELT $ 16)) (QREFELT $ 18))) 
+        ((|k| (|Kernel| S)) (% (|Union| R "failed")))
+        (SPADCALL (SPADCALL |k| (QREFELT % 16)) (QREFELT % 18))) 
 
 (DECLAIM (NOTINLINE |KernelFunctions2;|)) 
 
-(DEFUN |KernelFunctions2| (&REST #1=#:G702)
+(DEFUN |KernelFunctions2| (&REST #1=#:G453)
   (SPROG NIL
-         (PROG (#2=#:G703)
+         (PROG (#2=#:G454)
            (RETURN
             (COND
              ((LETT #2#
@@ -28,21 +28,21 @@
                   (HREM |$ConstructorCache| '|KernelFunctions2|)))))))))) 
 
 (DEFUN |KernelFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|KernelFunctions2| DV$1 DV$2))
-          (LETT $ (GETREFV 20))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 20))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|KernelFunctions2| (LIST DV$1 DV$2)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|KernelFunctions2| '|infovec|
           (LIST

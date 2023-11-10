@@ -1,23 +1,23 @@
 
 (SDEFUN |PINTERPA;LagrangeInterpolation;2LP;1|
-        ((|lx| (|List| F)) (|ly| (|List| F)) ($ (P)))
+        ((|lx| (|List| F)) (|ly| (|List| F)) (% (P)))
         (SPROG
-         ((|ip| (P)) (|xp| (F)) (|pp| (P)) (#1=#:G712 NIL) (|xj| NIL) (|j| NIL)
-          (#2=#:G710 NIL) (|xi| NIL) (#3=#:G711 NIL) (|yi| NIL) (|i| NIL))
+         ((|ip| (P)) (|xp| (F)) (|pp| (P)) (#1=#:G460 NIL) (|xj| NIL) (|j| NIL)
+          (#2=#:G458 NIL) (|xi| NIL) (#3=#:G459 NIL) (|yi| NIL) (|i| NIL))
          (SEQ
           (COND
-           ((SPADCALL (LENGTH |lx|) (LENGTH |ly|) (QREFELT $ 10))
+           ((SPADCALL (LENGTH |lx|) (LENGTH |ly|) (QREFELT % 10))
             (|error| "Different number of points and values."))
            ('T
-            (SEQ (LETT |ip| (|spadConstant| $ 11))
+            (SEQ (LETT |ip| (|spadConstant| % 11))
                  (SEQ (LETT |i| 0) (LETT |yi| NIL) (LETT #3# |ly|)
                       (LETT |xi| NIL) (LETT #2# |lx|) G190
                       (COND
                        ((OR (ATOM #2#) (PROGN (LETT |xi| (CAR #2#)) NIL)
                             (ATOM #3#) (PROGN (LETT |yi| (CAR #3#)) NIL))
                         (GO G191)))
-                      (SEQ (LETT |pp| (|spadConstant| $ 12))
-                           (LETT |xp| (|spadConstant| $ 13))
+                      (SEQ (LETT |pp| (|spadConstant| % 12))
+                           (LETT |xp| (|spadConstant| % 13))
                            (SEQ (LETT |j| 0) (LETT |xj| NIL) (LETT #1# |lx|)
                                 G190
                                 (COND
@@ -27,24 +27,24 @@
                                 (SEQ
                                  (EXIT
                                   (COND
-                                   ((SPADCALL |i| |j| (QREFELT $ 10))
+                                   ((SPADCALL |i| |j| (QREFELT % 10))
                                     (SEQ
                                      (LETT |pp|
                                            (SPADCALL |pp|
                                                      (SPADCALL
                                                       (SPADCALL
-                                                       (|spadConstant| $ 13) 1
-                                                       (QREFELT $ 14))
+                                                       (|spadConstant| % 13) 1
+                                                       (QREFELT % 14))
                                                       (SPADCALL |xj| 0
-                                                                (QREFELT $ 14))
-                                                      (QREFELT $ 16))
-                                                     (QREFELT $ 17)))
+                                                                (QREFELT % 14))
+                                                      (QREFELT % 16))
+                                                     (QREFELT % 17)))
                                      (EXIT
                                       (LETT |xp|
                                             (SPADCALL |xp|
                                                       (SPADCALL |xi| |xj|
-                                                                (QREFELT $ 18))
-                                                      (QREFELT $ 19)))))))))
+                                                                (QREFELT % 18))
+                                                      (QREFELT % 19)))))))))
                                 (LETT #1#
                                       (PROG1 (CDR #1#)
                                         (LETT |j| (|inc_SI| |j|))))
@@ -54,9 +54,9 @@
                                   (SPADCALL |ip|
                                             (SPADCALL
                                              (SPADCALL |yi| |xp|
-                                                       (QREFELT $ 20))
-                                             |pp| (QREFELT $ 21))
-                                            (QREFELT $ 22)))))
+                                                       (QREFELT % 20))
+                                             |pp| (QREFELT % 21))
+                                            (QREFELT % 22)))))
                       (LETT #2#
                             (PROG1 (CDR #2#)
                               (LETT #3#
@@ -67,9 +67,9 @@
 
 (DECLAIM (NOTINLINE |PolynomialInterpolationAlgorithms;|)) 
 
-(DEFUN |PolynomialInterpolationAlgorithms| (&REST #1=#:G713)
+(DEFUN |PolynomialInterpolationAlgorithms| (&REST #1=#:G461)
   (SPROG NIL
-         (PROG (#2=#:G714)
+         (PROG (#2=#:G462)
            (RETURN
             (COND
              ((LETT #2#
@@ -90,21 +90,21 @@
                         '|PolynomialInterpolationAlgorithms|)))))))))) 
 
 (DEFUN |PolynomialInterpolationAlgorithms;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|PolynomialInterpolationAlgorithms| DV$1 DV$2))
-          (LETT $ (GETREFV 25))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 25))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PolynomialInterpolationAlgorithms|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|PolynomialInterpolationAlgorithms| '|infovec|
           (LIST

@@ -1,30 +1,30 @@
 
-(SDEFUN |MKFUNC;function;S2S;1| ((|s| (S)) (|name| (|Symbol|)) ($ (|Symbol|)))
-        (SPADCALL |s| |name| NIL (QREFELT $ 9))) 
+(SDEFUN |MKFUNC;function;S2S;1| ((|s| (S)) (|name| (|Symbol|)) (% (|Symbol|)))
+        (SPADCALL |s| |name| NIL (QREFELT % 9))) 
 
 (SDEFUN |MKFUNC;function;S3S;2|
-        ((|s| (S)) (|name| (|Symbol|)) (|x| (|Symbol|)) ($ (|Symbol|)))
-        (SPADCALL |s| |name| (LIST |x|) (QREFELT $ 9))) 
+        ((|s| (S)) (|name| (|Symbol|)) (|x| (|Symbol|)) (% (|Symbol|)))
+        (SPADCALL |s| |name| (LIST |x|) (QREFELT % 9))) 
 
 (SDEFUN |MKFUNC;function;S4S;3|
         ((|s| (S)) (|name| (|Symbol|)) (|x| (|Symbol|)) (|y| (|Symbol|))
-         ($ (|Symbol|)))
-        (SPADCALL |s| |name| (LIST |x| |y|) (QREFELT $ 9))) 
+         (% (|Symbol|)))
+        (SPADCALL |s| |name| (LIST |x| |y|) (QREFELT % 9))) 
 
 (SDEFUN |MKFUNC;function;SSLS;4|
         ((|s| (S)) (|name| (|Symbol|)) (|args| (|List| (|Symbol|)))
-         ($ (|Symbol|)))
+         (% (|Symbol|)))
         (SEQ
          (SPADCALL
-          (SPADCALL (SPADCALL |s| (QREFELT $ 14)) |args| |name| (QREFELT $ 15))
-          (QREFELT $ 17))
+          (SPADCALL (SPADCALL |s| (QREFELT % 14)) |args| |name| (QREFELT % 15))
+          (QREFELT % 17))
          (EXIT |name|))) 
 
 (DECLAIM (NOTINLINE |MakeFunction;|)) 
 
-(DEFUN |MakeFunction| (#1=#:G698)
+(DEFUN |MakeFunction| (#1=#:G453)
   (SPROG NIL
-         (PROG (#2=#:G699)
+         (PROG (#2=#:G454)
            (RETURN
             (COND
              ((LETT #2#
@@ -39,19 +39,19 @@
                  ((NOT #2#) (HREM |$ConstructorCache| '|MakeFunction|)))))))))) 
 
 (DEFUN |MakeFunction;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|MakeFunction| DV$1))
-          (LETT $ (GETREFV 18))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 18))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|MakeFunction| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|MakeFunction| '|infovec|
           (LIST

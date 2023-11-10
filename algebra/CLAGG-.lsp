@@ -1,79 +1,79 @@
 
 (SDEFUN |CLAGG-;find;MAU;1|
-        ((|f| (|Mapping| (|Boolean|) S)) (|c| (A)) ($ (|Union| S "failed")))
-        (SPADCALL |f| (SPADCALL |c| (QREFELT $ 9)) (QREFELT $ 12))) 
+        ((|f| (|Mapping| (|Boolean|) S)) (|c| (A)) (% (|Union| S "failed")))
+        (SPADCALL |f| (SPADCALL |c| (QREFELT % 9)) (QREFELT % 12))) 
 
-(SDEFUN |CLAGG-;reduce;MAS;2| ((|f| (|Mapping| S S S)) (|x| (A)) ($ (S)))
-        (SPADCALL |f| (SPADCALL |x| (QREFELT $ 9)) (QREFELT $ 15))) 
+(SDEFUN |CLAGG-;reduce;MAS;2| ((|f| (|Mapping| S S S)) (|x| (A)) (% (S)))
+        (SPADCALL |f| (SPADCALL |x| (QREFELT % 9)) (QREFELT % 15))) 
 
 (SDEFUN |CLAGG-;reduce;MA2S;3|
-        ((|f| (|Mapping| S S S)) (|x| (A)) (|s| (S)) ($ (S)))
-        (SPADCALL |f| (SPADCALL |x| (QREFELT $ 9)) |s| (QREFELT $ 17))) 
+        ((|f| (|Mapping| S S S)) (|x| (A)) (|s| (S)) (% (S)))
+        (SPADCALL |f| (SPADCALL |x| (QREFELT % 9)) |s| (QREFELT % 17))) 
 
 (SDEFUN |CLAGG-;remove;M2A;4|
-        ((|f| (|Mapping| (|Boolean|) S)) (|x| (A)) ($ (A)))
-        (SPADCALL (SPADCALL |f| (SPADCALL |x| (QREFELT $ 9)) (QREFELT $ 19))
-                  (QREFELT $ 20))) 
+        ((|f| (|Mapping| (|Boolean|) S)) (|x| (A)) (% (A)))
+        (SPADCALL (SPADCALL |f| (SPADCALL |x| (QREFELT % 9)) (QREFELT % 19))
+                  (QREFELT % 20))) 
 
 (SDEFUN |CLAGG-;select;M2A;5|
-        ((|f| (|Mapping| (|Boolean|) S)) (|x| (A)) ($ (A)))
-        (SPADCALL (SPADCALL |f| (SPADCALL |x| (QREFELT $ 9)) (QREFELT $ 22))
-                  (QREFELT $ 20))) 
+        ((|f| (|Mapping| (|Boolean|) S)) (|x| (A)) (% (A)))
+        (SPADCALL (SPADCALL |f| (SPADCALL |x| (QREFELT % 9)) (QREFELT % 22))
+                  (QREFELT % 20))) 
 
-(SDEFUN |CLAGG-;remove;S2A;6| ((|s| (S)) (|x| (A)) ($ (A)))
+(SDEFUN |CLAGG-;remove;S2A;6| ((|s| (S)) (|x| (A)) (% (A)))
         (SPROG NIL
-               (SPADCALL (CONS #'|CLAGG-;remove;S2A;6!0| (VECTOR $ |s|)) |x|
-                         (QREFELT $ 26)))) 
+               (SPADCALL (CONS #'|CLAGG-;remove;S2A;6!0| (VECTOR % |s|)) |x|
+                         (QREFELT % 26)))) 
 
 (SDEFUN |CLAGG-;remove;S2A;6!0| ((|y| NIL) ($$ NIL))
-        (PROG (|s| $)
+        (PROG (|s| %)
           (LETT |s| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |y| |s| (QREFELT $ 25)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |y| |s| (QREFELT % 25)))))) 
 
 (SDEFUN |CLAGG-;reduce;MA3S;7|
-        ((|f| (|Mapping| S S S)) (|x| (A)) (|s1| (S)) (|s2| (S)) ($ (S)))
-        (SPADCALL |f| (SPADCALL |x| (QREFELT $ 9)) |s1| |s2| (QREFELT $ 28))) 
+        ((|f| (|Mapping| S S S)) (|x| (A)) (|s1| (S)) (|s2| (S)) (% (S)))
+        (SPADCALL |f| (SPADCALL |x| (QREFELT % 9)) |s1| |s2| (QREFELT % 28))) 
 
-(SDEFUN |CLAGG-;removeDuplicates;2A;8| ((|x| (A)) ($ (A)))
-        (SPADCALL (SPADCALL (SPADCALL |x| (QREFELT $ 9)) (QREFELT $ 30))
-                  (QREFELT $ 20))) 
+(SDEFUN |CLAGG-;removeDuplicates;2A;8| ((|x| (A)) (% (A)))
+        (SPADCALL (SPADCALL (SPADCALL |x| (QREFELT % 9)) (QREFELT % 30))
+                  (QREFELT % 20))) 
 
-(SDEFUN |CLAGG-;convert;AIf;9| ((|x| (A)) ($ (|InputForm|)))
+(SDEFUN |CLAGG-;convert;AIf;9| ((|x| (A)) (% (|InputForm|)))
         (SPROG
          ((|a_form| (|InputForm|)) (|l_form| (|List| (|InputForm|)))
-          (|p_form| (|List| (|InputForm|))) (#1=#:G743 NIL) (|el| NIL)
-          (#2=#:G742 NIL))
+          (|p_form| (|List| (|InputForm|))) (#1=#:G488 NIL) (|el| NIL)
+          (#2=#:G487 NIL))
          (SEQ
           (LETT |p_form|
                 (PROGN
                  (LETT #2# NIL)
-                 (SEQ (LETT |el| NIL) (LETT #1# (SPADCALL |x| (QREFELT $ 9)))
+                 (SEQ (LETT |el| NIL) (LETT #1# (SPADCALL |x| (QREFELT % 9)))
                       G190
                       (COND
                        ((OR (ATOM #1#) (PROGN (LETT |el| (CAR #1#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2# (CONS (SPADCALL |el| (QREFELT $ 33)) #2#))))
+                        (LETT #2# (CONS (SPADCALL |el| (QREFELT % 33)) #2#))))
                       (LETT #1# (CDR #1#)) (GO G190) G191
                       (EXIT (NREVERSE #2#)))))
           (LETT |l_form|
-                (CONS (SPADCALL '|construct| (QREFELT $ 35)) |p_form|))
-          (LETT |a_form| (SPADCALL |l_form| (QREFELT $ 37)))
-          (EXIT (SPADCALL '|construct| (LIST |a_form|) (QREFELT $ 40)))))) 
+                (CONS (SPADCALL '|construct| (QREFELT % 35)) |p_form|))
+          (LETT |a_form| (SPADCALL |l_form| (QREFELT % 37)))
+          (EXIT (SPADCALL '|construct| (LIST |a_form|) (QREFELT % 40)))))) 
 
 (DECLAIM (NOTINLINE |Collection&;|)) 
 
 (DEFUN |Collection&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|Collection&| DV$1 DV$2))
-          (LETT $ (GETREFV 42))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 42))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
@@ -84,39 +84,39 @@
                                                              '(|BasicType|))
                                               (|HasCategory| |#1|
                                                              '(|finiteAggregate|))))))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
           (COND
            ((|testBitVector| |pv$| 3)
             (PROGN
-             (QSETREFV $ 13 (CONS (|dispatchFunction| |CLAGG-;find;MAU;1|) $))
-             (QSETREFV $ 16
-                       (CONS (|dispatchFunction| |CLAGG-;reduce;MAS;2|) $))
-             (QSETREFV $ 18
-                       (CONS (|dispatchFunction| |CLAGG-;reduce;MA2S;3|) $))
-             (QSETREFV $ 21
-                       (CONS (|dispatchFunction| |CLAGG-;remove;M2A;4|) $))
-             (QSETREFV $ 23
-                       (CONS (|dispatchFunction| |CLAGG-;select;M2A;5|) $))
+             (QSETREFV % 13 (CONS (|dispatchFunction| |CLAGG-;find;MAU;1|) %))
+             (QSETREFV % 16
+                       (CONS (|dispatchFunction| |CLAGG-;reduce;MAS;2|) %))
+             (QSETREFV % 18
+                       (CONS (|dispatchFunction| |CLAGG-;reduce;MA2S;3|) %))
+             (QSETREFV % 21
+                       (CONS (|dispatchFunction| |CLAGG-;remove;M2A;4|) %))
+             (QSETREFV % 23
+                       (CONS (|dispatchFunction| |CLAGG-;select;M2A;5|) %))
              (COND
               ((|testBitVector| |pv$| 2)
                (PROGN
-                (QSETREFV $ 27
-                          (CONS (|dispatchFunction| |CLAGG-;remove;S2A;6|) $))
-                (QSETREFV $ 29
-                          (CONS (|dispatchFunction| |CLAGG-;reduce;MA3S;7|) $))
-                (QSETREFV $ 31
+                (QSETREFV % 27
+                          (CONS (|dispatchFunction| |CLAGG-;remove;S2A;6|) %))
+                (QSETREFV % 29
+                          (CONS (|dispatchFunction| |CLAGG-;reduce;MA3S;7|) %))
+                (QSETREFV % 31
                           (CONS
                            (|dispatchFunction| |CLAGG-;removeDuplicates;2A;8|)
-                           $)))))
+                           %)))))
              (COND
               ((|testBitVector| |pv$| 1)
-               (QSETREFV $ 41
+               (QSETREFV % 41
                          (CONS (|dispatchFunction| |CLAGG-;convert;AIf;9|)
-                               $)))))))
-          $))) 
+                               %)))))))
+          %))) 
 
 (MAKEPROP '|Collection&| '|infovec|
           (LIST
@@ -129,7 +129,7 @@
               (84 . |remove|) (90 . |reduce|) (98 . |reduce|)
               (106 . |removeDuplicates|) (111 . |removeDuplicates|)
               (|InputForm|) (116 . |convert|) (|Symbol|) (121 . |convert|)
-              (|List| $) (126 . |convert|) (|List| 32)
+              (|List| %) (126 . |convert|) (|List| 32)
               (|InputFormFunctions1| 6) (131 . |packageCall|)
               (137 . |convert|))
            '#(|select| 142 |removeDuplicates| 148 |remove| 153 |reduce| 165

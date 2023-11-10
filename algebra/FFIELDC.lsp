@@ -8,14 +8,14 @@
         (T (SETQ |FiniteFieldCategory;AL| (|FiniteFieldCategory;|))))) 
 
 (DEFUN |FiniteFieldCategory;| ()
-  (SPROG ((#1=#:G696 NIL))
+  (SPROG ((#1=#:G455 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|FieldOfPrimeCharacteristic|) (|Finite|)
                            (|StepThrough|) (|DifferentialRing|)
                            (|PolynomialFactorizationExplicit|)
                            (|mkCategory|
-                            '(((|charthRoot| ($ $)) T)
+                            '(((|charthRoot| (% %)) T)
                               ((|factorsOfCyclicGroupSize|
                                 ((|List|
                                   (|Record| (|:| |factor| (|Integer|))
@@ -27,11 +27,11 @@
                                           (|NonNegativeInteger|))
                                  (|Integer|)))
                                T)
-                              ((|createPrimitiveElement| ($)) T)
-                              ((|primitiveElement| ($)) T)
-                              ((|primitive?| ((|Boolean|) $)) T)
-                              ((|discreteLog| ((|NonNegativeInteger|) $)) T)
-                              ((|order| ((|PositiveInteger|) $)) T)
+                              ((|createPrimitiveElement| (%)) T)
+                              ((|primitiveElement| (%)) T)
+                              ((|primitive?| ((|Boolean|) %)) T)
+                              ((|discreteLog| ((|NonNegativeInteger|) %)) T)
+                              ((|order| ((|PositiveInteger|) %)) T)
                               ((|representationType|
                                 ((|Union| "prime" "polynomial" "normal"
                                           "cyclic")))

@@ -95,15 +95,15 @@
 (DEFUN |kxPage| (|htPage| |name|) (PROG () (RETURN (|downlink| |name|))))
 
 ; kdPageInfo(name,abbrev,nargs,conform,signature,file?) ==
-;   htSay("{\sf ",name,'"}")
-;   if abbrev ~= name then bcHt [" has abbreviation ",abbrev]
+;   htSay('"{\sf ",name,'"}")
+;   if abbrev ~= name then bcHt ['" has abbreviation ",abbrev]
 ;   if file? then bcHt ['" is a source file."]
 ;   if nargs = 0 then (if abbrev ~= name then bcHt '".")
 ;     else
 ;       if abbrev ~= name then bcHt '" and"
 ;       bcHt
 ;         nargs = 1 => '" takes one argument:"
-;         [" takes ",STRINGIMAGE nargs," arguments:"]
+;         ['" takes ",STRINGIMAGE nargs,'" arguments:"]
 ;   htSayStandard '"\indentrel{2}"
 ;   if nargs > 0 then kPageArgs(conform,signature)
 ;   htSayStandard '"\indentrel{-2}"
@@ -121,17 +121,17 @@
   (PROG (|sourceFileName| |filename|)
     (RETURN
      (PROGN
-      (|htSay| '|{\\sf | |name| "}")
+      (|htSay| "{\\sf " |name| "}")
       (COND
        ((NOT (EQUAL |abbrev| |name|))
-        (|bcHt| (LIST '| has abbreviation | |abbrev|))))
+        (|bcHt| (LIST " has abbreviation " |abbrev|))))
       (COND (|file?| (|bcHt| (LIST " is a source file."))))
       (COND
        ((EQL |nargs| 0) (COND ((NOT (EQUAL |abbrev| |name|)) (|bcHt| "."))))
        (#1='T (COND ((NOT (EQUAL |abbrev| |name|)) (|bcHt| " and")))
         (|bcHt|
          (COND ((EQL |nargs| 1) " takes one argument:")
-               (#1# (LIST '| takes | (STRINGIMAGE |nargs|) '| arguments:|))))))
+               (#1# (LIST " takes " (STRINGIMAGE |nargs|) " arguments:"))))))
       (|htSayStandard| "\\indentrel{2}")
       (COND ((< 0 |nargs|) (|kPageArgs| |conform| |signature|)))
       (|htSayStandard| "\\indentrel{-2}")
@@ -776,13 +776,13 @@
 ;         p:=SUBLISLIS(rest conform,$FormalMapVariableList,kTestPred catpredvec.i)
 ;         $domain => EVAL p
 ;         p
-;       if domname and CONTAINED('$,pred) then pred := SUBST(domname,'$,pred)
+;       if domname and CONTAINED('%, pred) then pred := SUBST(domname, '%, pred)
 ;       (pak := catinfo . i) and pred   --only those with default packages
 ;     pakform ==
 ;       pak and not IDENTP pak => devaluate pak --in case it has been instantiated
 ;       catform := kFormatSlotDomain catvec . i
-;       res := dbSubConform(rest conform,[pak,"$",:rest catform])
-;       if domname then res := SUBST(domname,'$,res)
+;       res := dbSubConform(rest(conform), [pak, "%", :rest(catform)])
+;       if domname then res := SUBST(domname, '%, res)
 ;       res
 ;   [:dbAddChain conform,:catforms]
 
@@ -820,8 +820,8 @@
                                                (ELT |catpredvec| |i|))))
                                      (COND (|$domain| (EVAL |p|)) (#1# |p|)))))
                            (COND
-                            ((AND |domname| (CONTAINED '$ |pred|))
-                             (SETQ |pred| (SUBST |domname| '$ |pred|))))
+                            ((AND |domname| (CONTAINED '% |pred|))
+                             (SETQ |pred| (SUBST |domname| '% |pred|))))
                            (AND (SETQ |pak| (ELT |catinfo| |i|)) |pred|))
                           (SETQ |bfVar#23|
                                   (CONS
@@ -837,12 +837,12 @@
                                        (SETQ |res|
                                                (|dbSubConform| (CDR |conform|)
                                                 (CONS |pak|
-                                                      (CONS '$
+                                                      (CONS '%
                                                             (CDR |catform|)))))
                                        (COND
                                         (|domname|
                                          (SETQ |res|
-                                                 (SUBST |domname| '$ |res|))))
+                                                 (SUBST |domname| '% |res|))))
                                        |res|)))
                                     |pred|)
                                    |bfVar#23|)))))
@@ -985,7 +985,7 @@
 ;   if whichever ~= '"ancestor" then
 ;     ancestors := augmentHasArgs(ancestors,conform)
 ;   ancestors := listSort(function GLESSEQP,ancestors)
-; --if domname then ancestors := SUBST(domname,'$,ancestors)
+;   -- if domname then ancestors := SUBST(domname, '%, ancestors)
 ;   htpSetProperty(htPage,'cAlist,ancestors)
 ;   htpSetProperty(htPage,'thing,whichever)
 ;   choice :=
@@ -1290,7 +1290,8 @@
 ;     opOf conform
 ;   domList := getImports pakname
 ;   if domname then
-;     domList := SUBLISLIS([domname,:rest domname],['$,:rest conform],domList)
+;       domList := SUBLISLIS([domname, :rest(domname)],
+;                            ['%, :rest(conform)], domList)
 ;   cAlist := [[x,:true] for x in domList]
 ;   htpSetProperty(htPage,'cAlist,cAlist)
 ;   htpSetProperty(htPage,'thing,'"benefactor")
@@ -1335,7 +1336,7 @@
           (|domname|
            (SETQ |domList|
                    (SUBLISLIS (CONS |domname| (CDR |domname|))
-                    (CONS '$ (CDR |conform|)) |domList|))))
+                    (CONS '% (CDR |conform|)) |domList|))))
          (SETQ |cAlist|
                  ((LAMBDA (|bfVar#35| |bfVar#34| |x|)
                     (LOOP
@@ -1941,7 +1942,7 @@
 ; dbDocTable conform ==
 ; --assumes $docTableHash bound --see dbExpandOpAlistIfNecessary
 ;   table := HGET($docTableHash,conform) => table
-;   $docTable : local := MAKE_HASHTABLE('ID)
+;   $docTable : local := MAKE_HASHTABLE('EQ)
 ;   --process in reverse order so that closest cover up farthest
 ;   for x in originsInOrder conform repeat dbAddDocTable x
 ;   dbAddDocTable conform
@@ -1955,7 +1956,7 @@
      (COND ((SETQ |table| (HGET |$docTableHash| |conform|)) |table|)
            (#1='T
             (PROGN
-             (SETQ |$docTable| (MAKE_HASHTABLE 'ID))
+             (SETQ |$docTable| (MAKE_HASHTABLE 'EQ))
              ((LAMBDA (|bfVar#60| |x|)
                 (LOOP
                  (COND
@@ -2013,8 +2014,8 @@
 ; dbAddDocTable conform ==
 ;   conname := opOf conform
 ;   storedArgs := rest getConstructorForm conname
-;   for [op,:alist] in SUBLISLIS(["$",:rest conform],
-;     ["%",:storedArgs],GETDATABASE(opOf conform,'DOCUMENTATION))
+;   for [op, :alist] in SUBLISLIS(["%", :rest(conform)],
+;     ["%", :storedArgs], GETDATABASE(opOf(conform), 'DOCUMENTATION))
 ;       repeat
 ;        op1 :=
 ;          op = '(Zero) => 0
@@ -2064,7 +2065,7 @@
                       (SETQ |bfVar#66| (CDR |bfVar#66|))))
                    |alist| NIL)))))
           (SETQ |bfVar#64| (CDR |bfVar#64|))))
-       (SUBLISLIS (CONS '$ (CDR |conform|)) (CONS '% |storedArgs|)
+       (SUBLISLIS (CONS '% (CDR |conform|)) (CONS '% |storedArgs|)
         (GETDATABASE (|opOf| |conform|) 'DOCUMENTATION))
        NIL)))))
 
@@ -2387,7 +2388,7 @@
 ;     key = 'parameters => bcConTable REMDUP ASSOCLEFT cAlist
 ;     key = 'kinds => dbShowConsKinds cAlist
 ;   dbConsExposureMessage()
-;   htSayStandard("\endscroll ")
+;   htSayStandard('"\endscroll ")
 ;   dbPresentCons(page,kind,key)
 ;   htShowPageNoScroll()
 
@@ -2524,7 +2525,7 @@
                     (|bcConTable| (REMDUP (ASSOCLEFT |cAlist|))))
                    ((EQ |key| '|kinds|) (|dbShowConsKinds| |cAlist|)))))))
          (|dbConsExposureMessage|)
-         (|htSayStandard| '|\\endscroll |)
+         (|htSayStandard| "\\endscroll ")
          (|dbPresentCons| |page| |kind| |key|)
          (|htShowPageNoScroll|))))))))
 
@@ -3043,21 +3044,21 @@
 
 ; PUT('Record,'documentation,SUBST(MESSAGE,'MESSAGE,'(
 ;   (constructor (NIL MESSAGE))
-;  (_=  (((Boolean) _$ _$)
+;  (_=  (((Boolean) _% _%)
 ;    "\spad{r = s} tests for equality of two records \spad{r} and \spad{s}"))
-;  (coerce (((OutputForm) _$)
+;  (coerce (((OutputForm) _%)
 ;    "\spad{coerce(r)} returns an representation of \spad{r} as an output form")
-;          ((_$ (List (Any)))
+;          ((_% (List (Any)))
 ;    "\spad{coerce(u)}, where \spad{u} is the list \spad{[x,y]} for \spad{x} of type \spad{A} and \spad{y} of type \spad{B}, returns the record \spad{[a:x,b:y]}"))
-;  (construct ((_$ A B)
+;  (construct ((_% A B)
 ;    "\spad{construct(x, y)} returns the record \spad{[a:x,b:y]}"))
-;  (elt ((A $ "a")
+;  (elt ((A % "a")
 ;    "\spad{r . a} returns the value stored in record \spad{r} under selector \spad{a}.")
-;       ((B $ "b")
+;       ((B % "b")
 ;    "\spad{r . b} returns the value stored in record \spad{r} under selector \spad{b}."))
-;  (setelt ((A $ "a" A)
+;  (setelt_! ((A % "a" A)
 ;    "\spad{r . a := x} destructively replaces the value stored in record \spad{r} under selector \spad{a} by the value of \spad{x}. Error: if \spad{r} has not been previously assigned a value.")
-;          ((B $ "b" B)
+;          ((B % "b" B)
 ;    "\spad{r . b := y} destructively replaces the value stored in record \spad{r} under selector \spad{b} by the value of \spad{y}. Error: if \spad{r} has not been previously assigned a value."))
 ;    )))
 
@@ -3068,25 +3069,25 @@
       (SUBST MESSAGE 'MESSAGE
              '((|constructor| (NIL MESSAGE))
                (=
-                (((|Boolean|) $ $)
+                (((|Boolean|) % %)
                  "\\spad{r = s} tests for equality of two records \\spad{r} and \\spad{s}"))
                (|coerce|
-                (((|OutputForm|) $)
+                (((|OutputForm|) %)
                  "\\spad{coerce(r)} returns an representation of \\spad{r} as an output form")
-                (($ (|List| (|Any|)))
+                ((% (|List| (|Any|)))
                  "\\spad{coerce(u)}, where \\spad{u} is the list \\spad{[x,y]} for \\spad{x} of type \\spad{A} and \\spad{y} of type \\spad{B}, returns the record \\spad{[a:x,b:y]}"))
                (|construct|
-                (($ A B)
+                ((% A B)
                  "\\spad{construct(x, y)} returns the record \\spad{[a:x,b:y]}"))
                (|elt|
-                ((A $ "a")
+                ((A % "a")
                  "\\spad{r . a} returns the value stored in record \\spad{r} under selector \\spad{a}.")
-                ((B $ "b")
+                ((B % "b")
                  "\\spad{r . b} returns the value stored in record \\spad{r} under selector \\spad{b}."))
-               (|setelt|
-                ((A $ "a" A)
+               (|setelt!|
+                ((A % "a" A)
                  "\\spad{r . a := x} destructively replaces the value stored in record \\spad{r} under selector \\spad{a} by the value of \\spad{x}. Error: if \\spad{r} has not been previously assigned a value.")
-                ((B $ "b" B)
+                ((B % "b" B)
                  "\\spad{r . b := y} destructively replaces the value stored in record \\spad{r} under selector \\spad{b} by the value of \\spad{y}. Error: if \\spad{r} has not been previously assigned a value."))))))))
 
 ; X := '"{\sf Union(A,B)} denotes the class of objects which are which are either members of domain {\em A} or of domain {\em B}. The {\sf Union} constructor can take any number of arguments. "
@@ -3107,19 +3108,19 @@
 
 ; PUT('UntaggedUnion,'documentation,SUBST(MESSAGE,'MESSAGE,'(
 ;   (constructor (NIL MESSAGE))
-;   (_=  (((Boolean) $ $)
+;   (_=  (((Boolean) % %)
 ;     "\spad{u = v} tests if two objects of the union are equal, that is, u and v are hold objects of same branch which are equal."))
-;   (case (((Boolean) $ "A")
+;   (case (((Boolean) % "A")
 ;     "\spad{u case A} tests if \spad{u} is of the type \spad{A} branch of the union.")
-;         (((Boolean) $ "B")
+;         (((Boolean) % "B")
 ;     "\spad{u case B} tests if \spad{u} is of the \spad{B} branch of the union."))
-;   (coerce ((A $)
+;   (coerce ((A %)
 ;     "\spad{coerce(u)} returns \spad{x} of type \spad{A} if \spad{x} is of the \spad{A} branch of the union. Error: if \spad{u} is of the \spad{B} branch of the union.")
-;           ((B $)
+;           ((B %)
 ;     "\spad{coerce(u)} returns \spad{x} of type \spad{B} if \spad{x} is of the \spad{B} branch of the union. Error: if \spad{u} is of the \spad{A} branch of the union.")
-;           (($ A)
+;           ((% A)
 ;     "\spad{coerce(x)}, where \spad{x} has type \spad{A}, returns \spad{x} as a union type.")
-;           (($ B)
+;           ((% B)
 ;     "\spad{coerce(y)}, where \spad{y} has type \spad{B}, returns \spad{y} as a union type."))
 ;   )))
 
@@ -3130,21 +3131,21 @@
       (SUBST MESSAGE 'MESSAGE
              '((|constructor| (NIL MESSAGE))
                (=
-                (((|Boolean|) $ $)
+                (((|Boolean|) % %)
                  "\\spad{u = v} tests if two objects of the union are equal, that is, u and v are hold objects of same branch which are equal."))
                (CASE
-                   (((|Boolean|) $ "A")
+                   (((|Boolean|) % "A")
                     "\\spad{u case A} tests if \\spad{u} is of the type \\spad{A} branch of the union.")
-                 (((|Boolean|) $ "B")
+                 (((|Boolean|) % "B")
                   "\\spad{u case B} tests if \\spad{u} is of the \\spad{B} branch of the union."))
                (|coerce|
-                ((A $)
+                ((A %)
                  "\\spad{coerce(u)} returns \\spad{x} of type \\spad{A} if \\spad{x} is of the \\spad{A} branch of the union. Error: if \\spad{u} is of the \\spad{B} branch of the union.")
-                ((B $)
+                ((B %)
                  "\\spad{coerce(u)} returns \\spad{x} of type \\spad{B} if \\spad{x} is of the \\spad{B} branch of the union. Error: if \\spad{u} is of the \\spad{A} branch of the union.")
-                (($ A)
+                ((% A)
                  "\\spad{coerce(x)}, where \\spad{x} has type \\spad{A}, returns \\spad{x} as a union type.")
-                (($ B)
+                ((% B)
                  "\\spad{coerce(y)}, where \\spad{y} has type \\spad{B}, returns \\spad{y} as a union type."))))))))
 
 ; X := '"{\sf Union(a:A,b:B)} denotes the class of objects which are either members of domain {\em A} or of domain {\em B}. "
@@ -3183,19 +3184,19 @@
 
 ; PUT('Union,'documentation,SUBST(MESSAGE,'MESSAGE,'(
 ;   (constructor (NIL MESSAGE))
-;   (_=  (((Boolean) $ $)
+;   (_=  (((Boolean) % %)
 ;     "\spad{u = v} tests if two objects of the union are equal, that is, \spad{u} and \spad{v} are objects of same branch which are equal."))
-;   (case (((Boolean) $ "A")
+;   (case (((Boolean) % "A")
 ;     "\spad{u case a} tests if \spad{u} is of branch \spad{a} of the union.")
-;                 (((Boolean) $ "B")
+;                 (((Boolean) % "B")
 ;     "\spad{u case b} tests if \spad{u} is of branch \spad{b} of the union."))
-;   (coerce ((A $)
+;   (coerce ((A %)
 ;     "\spad{coerce(u)} returns \spad{x} of type \spad{A} if \spad{x} is of branch \spad{a} of the union. Error: if \spad{u} is of branch \spad{b} of the union.")
-;           ((B $)
+;           ((B %)
 ;     "\spad{coerce(u)} returns \spad{x} of type \spad{B} if \spad{x} is of branch \spad{b} branch of the union. Error: if \spad{u} is of the \spad{a} branch of the union.")
-;           (($ A)
+;           ((% A)
 ;     "\spad{coerce(x)}, where \spad{x} has type \spad{A}, returns \spad{x} as a union type.")
-;           (($ B)
+;           ((% B)
 ;     "\spad{coerce(y)}, where \spad{y} has type \spad{B}, returns \spad{y} as a union type."))
 ;   )))
 
@@ -3206,21 +3207,21 @@
       (SUBST MESSAGE 'MESSAGE
              '((|constructor| (NIL MESSAGE))
                (=
-                (((|Boolean|) $ $)
+                (((|Boolean|) % %)
                  "\\spad{u = v} tests if two objects of the union are equal, that is, \\spad{u} and \\spad{v} are objects of same branch which are equal."))
                (CASE
-                   (((|Boolean|) $ "A")
+                   (((|Boolean|) % "A")
                     "\\spad{u case a} tests if \\spad{u} is of branch \\spad{a} of the union.")
-                 (((|Boolean|) $ "B")
+                 (((|Boolean|) % "B")
                   "\\spad{u case b} tests if \\spad{u} is of branch \\spad{b} of the union."))
                (|coerce|
-                ((A $)
+                ((A %)
                  "\\spad{coerce(u)} returns \\spad{x} of type \\spad{A} if \\spad{x} is of branch \\spad{a} of the union. Error: if \\spad{u} is of branch \\spad{b} of the union.")
-                ((B $)
+                ((B %)
                  "\\spad{coerce(u)} returns \\spad{x} of type \\spad{B} if \\spad{x} is of branch \\spad{b} branch of the union. Error: if \\spad{u} is of the \\spad{a} branch of the union.")
-                (($ A)
+                ((% A)
                  "\\spad{coerce(x)}, where \\spad{x} has type \\spad{A}, returns \\spad{x} as a union type.")
-                (($ B)
+                ((% B)
                  "\\spad{coerce(y)}, where \\spad{y} has type \\spad{B}, returns \\spad{y} as a union type."))))))))
 
 ; X := '"{\sf Mapping(T,S,...)} denotes the class of objects which are mappings from a source domain ({\em S,...}) into a target domain {\em T}. The {\sf Mapping} constructor can take any number of arguments."
@@ -3247,7 +3248,7 @@
 
 ; PUT('Mapping,'documentation, SUBST(MESSAGE,'MESSAGE,'(
 ;   (constructor (NIL MESSAGE))
-;   (_=  (((Boolean) $ $)
+;   (_=  (((Boolean) % %)
 ;     "\spad{u = v} tests if mapping objects are equal."))
 ;    )))
 
@@ -3258,7 +3259,7 @@
       (SUBST MESSAGE 'MESSAGE
              '((|constructor| (NIL MESSAGE))
                (=
-                (((|Boolean|) $ $)
+                (((|Boolean|) % %)
                  "\\spad{u = v} tests if mapping objects are equal."))))))))
 
 ; X := '"{\em Enumeration(a1, a2 ,..., aN)} creates an object which is exactly one of the N symbols {\em a1}, {\em a2}, ..., or {\em aN}, N > 0. "
@@ -3279,13 +3280,13 @@
 
 ; PUT('Enumeration, 'documentation, SUBST(MESSAGE, 'MESSAGE, '(
 ;   (constructor (NIL MESSAGE))
-;   (_= (((Boolean) _$ _$)
+;   (_= (((Boolean) _% _%)
 ;     "\spad{e = f} tests for equality of two enumerations \spad{e} and \spad{f}"))
-;   (_^_= (((Boolean) _$ _$)
+;   (_^_= (((Boolean) _% _%)
 ;     "\spad{e ~= f} tests that two enumerations \spad{e} and \spad{f} are nont equal"))
-;   (coerce (((OutputForm) _$)
+;   (coerce (((OutputForm) _%)
 ;      "\spad{coerce(e)} returns a representation of enumeration \spad{r} as an output form")
-;           ((_$ (Symbol))
+;           ((_% (Symbol))
 ;      "\spad{coerce(s)} converts a symbol \spad{s} into an enumeration which has \spad{s} as a member symbol"))
 ;   )))
 
@@ -3296,13 +3297,13 @@
       (SUBST MESSAGE 'MESSAGE
              '((|constructor| (NIL MESSAGE))
                (=
-                (((|Boolean|) $ $)
+                (((|Boolean|) % %)
                  "\\spad{e = f} tests for equality of two enumerations \\spad{e} and \\spad{f}"))
                (^=
-                (((|Boolean|) $ $)
+                (((|Boolean|) % %)
                  "\\spad{e ~= f} tests that two enumerations \\spad{e} and \\spad{f} are nont equal"))
                (|coerce|
-                (((|OutputForm|) $)
+                (((|OutputForm|) %)
                  "\\spad{coerce(e)} returns a representation of enumeration \\spad{r} as an output form")
-                (($ (|Symbol|))
+                ((% (|Symbol|))
                  "\\spad{coerce(s)} converts a symbol \\spad{s} into an enumeration which has \\spad{s} as a member symbol"))))))))

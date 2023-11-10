@@ -8,10 +8,10 @@
         (T (SETQ |RealClosedField;AL| (|RealClosedField;|))))) 
 
 (DEFUN |RealClosedField;| ()
-  (SPROG ((#1=#:G705 NIL))
+  (SPROG ((#1=#:G457 NIL))
          (PROG1
              (LETT #1#
-                   (|subst_in_cat| '(#2=#:G702 #3=#:G703 #4=#:G704)
+                   (|subst_in_cat| '(#2=#:G454 #3=#:G455 #4=#:G456)
                                    (LIST '(|Fraction| (|Integer|)) '(|Integer|)
                                          '(|Fraction| (|Integer|)))
                                    (|Join| (|CharacteristicZero|)
@@ -24,76 +24,76 @@
                                             '(((|mainForm|
                                                 ((|Union| (|OutputForm|)
                                                           "failed")
-                                                 $))
+                                                 %))
                                                T)
                                               ((|mainDefiningPolynomial|
                                                 ((|Union|
                                                   (|SparseUnivariatePolynomial|
-                                                   $)
+                                                   %)
                                                   "failed")
-                                                 $))
+                                                 %))
                                                T)
                                               ((|mainValue|
                                                 ((|Union|
                                                   (|SparseUnivariatePolynomial|
-                                                   $)
+                                                   %)
                                                   "failed")
-                                                 $))
+                                                 %))
                                                T)
                                               ((|rootOf|
-                                                ((|Union| $ "failed")
+                                                ((|Union| % "failed")
                                                  (|SparseUnivariatePolynomial|
-                                                  $)
+                                                  %)
                                                  (|PositiveInteger|)
                                                  (|OutputForm|)))
                                                T)
                                               ((|rootOf|
-                                                ((|Union| $ "failed")
+                                                ((|Union| % "failed")
                                                  (|SparseUnivariatePolynomial|
-                                                  $)
+                                                  %)
                                                  (|PositiveInteger|)))
                                                T)
                                               ((|allRootsOf|
-                                                ((|List| $)
+                                                ((|List| %)
                                                  (|SparseUnivariatePolynomial|
-                                                  $)))
+                                                  %)))
                                                T)
                                               ((|allRootsOf|
-                                                ((|List| $)
+                                                ((|List| %)
                                                  (|SparseUnivariatePolynomial|
                                                   (|Fraction| (|Integer|)))))
                                                T)
                                               ((|allRootsOf|
-                                                ((|List| $)
+                                                ((|List| %)
                                                  (|SparseUnivariatePolynomial|
                                                   (|Integer|))))
                                                T)
                                               ((|allRootsOf|
-                                                ((|List| $) (|Polynomial| $)))
+                                                ((|List| %) (|Polynomial| %)))
                                                T)
                                               ((|allRootsOf|
-                                                ((|List| $)
+                                                ((|List| %)
                                                  (|Polynomial|
                                                   (|Fraction| (|Integer|)))))
                                                T)
                                               ((|allRootsOf|
-                                                ((|List| $)
+                                                ((|List| %)
                                                  (|Polynomial| (|Integer|))))
                                                T)
                                               ((|sqrt|
-                                                ($ $ (|PositiveInteger|)))
+                                                (% % (|PositiveInteger|)))
                                                T)
-                                              ((|sqrt| ($ $)) T)
+                                              ((|sqrt| (% %)) T)
                                               ((|sqrt|
-                                                ($ (|Fraction| (|Integer|))))
+                                                (% (|Fraction| (|Integer|))))
                                                T)
-                                              ((|sqrt| ($ (|Integer|))) T)
-                                              ((|rename!| ($ $ (|OutputForm|)))
+                                              ((|sqrt| (% (|Integer|))) T)
+                                              ((|rename!| (% % (|OutputForm|)))
                                                T)
-                                              ((|rename| ($ $ (|OutputForm|)))
+                                              ((|rename| (% % (|OutputForm|)))
                                                T)
                                               ((|approximate|
-                                                ((|Fraction| (|Integer|)) $ $))
+                                                ((|Fraction| (|Integer|)) % %))
                                                T))
                                             NIL NIL NIL))))
            (SETELT #1# 0 '(|RealClosedField|))))) 

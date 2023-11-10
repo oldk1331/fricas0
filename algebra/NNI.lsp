@@ -6,24 +6,24 @@
                             (DELASC #1# (|get| #2# #3# |$CategoryFrame|)))
                       |$CategoryFrame|))) 
 
-(PUT '|NNI;sup;3$;1| '|SPADreplace| 'MAX) 
+(PUT '|NNI;sup;3%;1| '|SPADreplace| 'MAX) 
 
-(SDEFUN |NNI;sup;3$;1| ((|x| ($)) (|y| ($)) ($ ($))) (MAX |x| |y|)) 
+(SDEFUN |NNI;sup;3%;1| ((|x| (%)) (|y| (%)) (% (%))) (MAX |x| |y|)) 
 
-(PUT '|NNI;inf;3$;2| '|SPADreplace| 'MIN) 
+(PUT '|NNI;inf;3%;2| '|SPADreplace| 'MIN) 
 
-(SDEFUN |NNI;inf;3$;2| ((|x| ($)) (|y| ($)) ($ ($))) (MIN |x| |y|)) 
+(SDEFUN |NNI;inf;3%;2| ((|x| (%)) (|y| (%)) (% (%))) (MIN |x| |y|)) 
 
-(PUT '|NNI;shift;$I$;3| '|SPADreplace| 'ASH) 
+(PUT '|NNI;shift;%I%;3| '|SPADreplace| 'ASH) 
 
-(SDEFUN |NNI;shift;$I$;3| ((|x| ($)) (|n| (|Integer|)) ($ ($))) (ASH |x| |n|)) 
+(SDEFUN |NNI;shift;%I%;3| ((|x| (%)) (|n| (|Integer|)) (% (%))) (ASH |x| |n|)) 
 
-(PUT '|NNI;qcoerce;I$;4| '|SPADreplace| '(XLAM (|n|) |n|)) 
+(PUT '|NNI;qcoerce;I%;4| '|SPADreplace| '(XLAM (|n|) |n|)) 
 
-(SDEFUN |NNI;qcoerce;I$;4| ((|n| (|Integer|)) ($ ($))) |n|) 
+(SDEFUN |NNI;qcoerce;I%;4| ((|n| (|Integer|)) (% (%))) |n|) 
 
-(SDEFUN |NNI;subtractIfCan;2$U;5|
-        ((|x| ($)) (|y| ($)) ($ (|Union| $ "failed")))
+(SDEFUN |NNI;subtractIfCan;2%U;5|
+        ((|x| (%)) (|y| (%)) (% (|Union| % "failed")))
         (SPROG ((|c| (|Integer|)))
                (SEQ (LETT |c| (- |x| |y|))
                     (EXIT
@@ -33,7 +33,7 @@
 
 (DEFUN |NonNegativeInteger| ()
   (SPROG NIL
-         (PROG (#1=#:G2377)
+         (PROG (#1=#:G2055)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|NonNegativeInteger|))
@@ -51,26 +51,26 @@
                   (HREM |$ConstructorCache| '|NonNegativeInteger|)))))))))) 
 
 (DEFUN |NonNegativeInteger;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|NonNegativeInteger|))
-          (LETT $ (GETREFV 21))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|NonNegativeInteger| NIL (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (AND (|HasCategory| $ '(|AbelianGroup|)) (|augmentPredVector| $ 1))
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 21))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|NonNegativeInteger| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (AND (|HasCategory| % '(|AbelianGroup|)) (|augmentPredVector| % 1))
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|NonNegativeInteger| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL (|Integer|) |NNI;sup;3$;1| |NNI;inf;3$;2|
-              |NNI;shift;$I$;3| |NNI;qcoerce;I$;4| (|Union| $ '"failed")
-              |NNI;subtractIfCan;2$U;5|
-              (|Record| (|:| |quotient| $) (|:| |remainder| $)) (|InputForm|)
-              (|PositiveInteger|) (|NonNegativeInteger|) (|Boolean|) (|String|)
-              (|SingleInteger|) (|HashState|) (|OutputForm|))
+           '#(NIL NIL NIL NIL NIL (|Integer|) |NNI;sup;3%;1| |NNI;inf;3%;2|
+              |NNI;shift;%I%;3| |NNI;qcoerce;I%;4| (|Union| % '"failed")
+              |NNI;subtractIfCan;2%U;5|
+              (|Record| (|:| |quotient| %) (|:| |remainder| %)) (|InputForm|)
+              (|SingleInteger|) (|PositiveInteger|) (|HashState|)
+              (|NonNegativeInteger|) (|Boolean|) (|String|) (|OutputForm|))
            '#(~= 0 |zero?| 6 |sup| 11 |subtractIfCan| 17 |smaller?| 23 |shift|
               29 |sample| 35 |rightRecip| 39 |rightPower| 44 |rem| 56 |recip|
               62 |random| 67 |quo| 72 |qcoerce| 78 |opposite?| 83 |one?| 89
@@ -83,12 +83,12 @@
            (CONS
             (|makeByteWordVec2| 1
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0))
+                                  0 0 0 0 0))
             (CONS
              '#(NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL |OrderedSet&|
                 NIL |MagmaWithUnit&| |NonAssociativeSemiRng&| |AbelianMonoid&|
-                NIL |Magma&| |AbelianSemiGroup&| NIL |SetCategory&| NIL NIL
-                |BasicType&| |PartialOrder&| NIL)
+                NIL |Magma&| |AbelianSemiGroup&| NIL |Hashable&| |SetCategory&|
+                NIL NIL |BasicType&| |PartialOrder&| NIL)
              (CONS
               '#((|SemiRing|) (|SemiRng|) (|OrderedAbelianMonoidSup|)
                  (|BiModule| $$ $$) (|OrderedCancellationAbelianMonoid|)
@@ -98,23 +98,24 @@
                  (|OrderedSet|) (|SemiGroup|) (|MagmaWithUnit|)
                  (|NonAssociativeSemiRng|) (|AbelianMonoid|) (|Comparable|)
                  (|Magma|) (|AbelianSemiGroup|) (|CommutativeStar|)
-                 (|SetCategory|) (|ConvertibleTo| 13) (|TwoSidedRecip|)
-                 (|BasicType|) (|PartialOrder|) (|CoercibleTo| 20))
+                 (|Hashable|) (|SetCategory|) (|ConvertibleTo| 13)
+                 (|TwoSidedRecip|) (|BasicType|) (|PartialOrder|)
+                 (|CoercibleTo| 20))
               (|makeByteWordVec2| 20
-                                  '(2 0 16 0 0 1 1 0 16 0 1 2 0 0 0 0 6 2 0 10
-                                    0 0 11 2 0 16 0 0 1 2 0 0 0 5 8 0 0 0 1 1 0
-                                    10 0 1 2 0 0 0 14 1 2 0 0 0 15 1 2 0 0 0 0
+                                  '(2 0 18 0 0 1 1 0 18 0 1 2 0 0 0 0 6 2 0 10
+                                    0 0 11 2 0 18 0 0 1 2 0 0 0 5 8 0 0 0 1 1 0
+                                    10 0 1 2 0 0 0 15 1 2 0 0 0 17 1 2 0 0 0 0
                                     1 1 0 10 0 1 1 0 0 0 1 2 0 0 0 0 1 1 0 0 5
-                                    9 2 0 16 0 0 1 1 0 16 0 1 2 0 0 0 0 1 2 0 0
-                                    0 0 1 1 0 10 0 1 2 0 0 0 14 1 2 0 0 0 15 1
-                                    1 0 17 0 1 2 0 0 0 0 7 2 0 19 19 0 1 1 0 18
+                                    9 2 0 18 0 0 1 1 0 18 0 1 2 0 0 0 0 1 2 0 0
+                                    0 0 1 1 0 10 0 1 2 0 0 0 15 1 2 0 0 0 17 1
+                                    1 0 19 0 1 2 0 0 0 0 7 2 0 16 16 0 1 1 0 14
                                     0 1 2 0 0 0 0 1 2 0 10 0 0 1 2 0 12 0 0 1 1
-                                    0 13 0 1 1 0 20 0 1 2 0 0 0 0 1 2 0 0 0 14
-                                    1 2 0 0 0 15 1 0 0 0 1 0 0 0 1 2 0 16 0 0 1
-                                    2 0 16 0 0 1 2 0 16 0 0 1 2 0 16 0 0 1 2 0
-                                    16 0 0 1 2 1 0 0 0 1 1 1 0 0 1 2 0 0 0 0 1
-                                    2 1 0 5 0 1 2 0 0 0 0 1 2 0 0 15 0 1 2 0 0
-                                    14 0 1)))))
+                                    0 13 0 1 1 0 20 0 1 2 0 0 0 0 1 2 0 0 0 15
+                                    1 2 0 0 0 17 1 0 0 0 1 0 0 0 1 2 0 18 0 0 1
+                                    2 0 18 0 0 1 2 0 18 0 0 1 2 0 18 0 0 1 2 0
+                                    18 0 0 1 1 1 0 0 1 2 1 0 0 0 1 2 0 0 0 0 1
+                                    2 1 0 5 0 1 2 0 0 0 0 1 2 0 0 17 0 1 2 0 0
+                                    15 0 1)))))
            '|lookupComplete|)) 
 
 (MAKEPROP '|NonNegativeInteger| 'NILADIC T) 

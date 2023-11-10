@@ -453,9 +453,9 @@
 ;   centerAndHighlight(STRCONC('"Current Values of ",label,
 ;     '" Variables"),$LINELENGTH," ")
 ;   TERPRI()
-;   sayBrightly ["Variable     ",
-;                "Description                                ",
-;                  "Current Value"]
+;   sayBrightly ['"Variable     ",
+;                '"Description                                ",
+;                  '"Current Value"]
 ;   SAY fillerSpaces($LINELENGTH,specialChar 'hbar)
 ;   subtree := nil
 ;   for setData in setTree repeat
@@ -502,8 +502,8 @@
        $LINELENGTH '| |)
       (TERPRI)
       (|sayBrightly|
-       (LIST '|Variable     | '|Description                                |
-             '|Current Value|))
+       (LIST "Variable     " "Description                                "
+             "Current Value"))
       (SAY (|fillerSpaces| $LINELENGTH (|specialChar| '|hbar|)))
       (SETQ |subtree| NIL)
       ((LAMBDA (|bfVar#5| |setData|)
@@ -706,7 +706,7 @@
 ;     displayHiddenConstructors()
 ;     -- give some more details
 ;     sayMSG '" "
-;     sayKeyedMsg("S2IZ0049D",[namestring pathname ["INTERP","EXPOSED"]])
+;     sayKeyedMsg("S2IZ0049D", ['"exposed"])
 ;
 ;   arg is [fn,:fnargs] and (fn := selectOptionLC(fn,
 ;     '(add drop initialize),NIL)) =>
@@ -729,8 +729,7 @@
              (|sayMSG| " ")
              (|displayHiddenConstructors|)
              (|sayMSG| " ")
-             (|sayKeyedMsg| 'S2IZ0049D
-              (LIST (|namestring| (|pathname| (LIST 'INTERP 'EXPOSED)))))))
+             (|sayKeyedMsg| 'S2IZ0049D (LIST "exposed"))))
            ((AND (CONSP |arg|)
                  (PROGN
                   (SETQ |fn| (CAR |arg|))
@@ -747,7 +746,7 @@
 
 ; setExposeAdd arg ==
 ;   (null arg) =>
-;     centerAndHighlight ("The add Option",$LINELENGTH,specialChar 'hbar)
+;     centerAndHighlight ('"The add Option",$LINELENGTH,specialChar 'hbar)
 ;     --  give msg about exposure groups
 ;     displayExposedGroups()
 ;     --  give msg about explicitly exposed constructors
@@ -768,7 +767,7 @@
      (COND
       ((NULL |arg|)
        (PROGN
-        (|centerAndHighlight| '|The add Option| $LINELENGTH
+        (|centerAndHighlight| "The add Option" $LINELENGTH
          (|specialChar| '|hbar|))
         (|displayExposedGroups|)
         (|sayMSG| " ")
@@ -785,11 +784,11 @@
 
 ; setExposeAddGroup arg ==
 ;   (null arg) =>
-;     centerAndHighlight("The group Option",$LINELENGTH,specialChar 'hbar)
+;     centerAndHighlight('"The group Option",$LINELENGTH,specialChar 'hbar)
 ;     --  give msg about exposure groups
 ;     displayExposedGroups()
 ;     sayMSG '" "
-;     sayKeyedMsg("S2IZ0049G",[namestring pathname ["INTERP","EXPOSED"]])
+;     sayKeyedMsg("S2IZ0049G", ['"exposed"])
 ;     sayMSG '" "
 ;     sayAsManyPerLineAsPossible [object2String first x for x in
 ;       $globalExposureGroupAlist]
@@ -819,12 +818,11 @@
      (COND
       ((NULL |arg|)
        (PROGN
-        (|centerAndHighlight| '|The group Option| $LINELENGTH
+        (|centerAndHighlight| "The group Option" $LINELENGTH
          (|specialChar| '|hbar|))
         (|displayExposedGroups|)
         (|sayMSG| " ")
-        (|sayKeyedMsg| 'S2IZ0049G
-         (LIST (|namestring| (|pathname| (LIST 'INTERP 'EXPOSED)))))
+        (|sayKeyedMsg| 'S2IZ0049G (LIST "exposed"))
         (|sayMSG| " ")
         (|sayAsManyPerLineAsPossible|
          ((LAMBDA (|bfVar#9| |bfVar#8| |x|)
@@ -882,7 +880,7 @@
 
 ; setExposeAddConstr arg ==
 ;   (null arg) =>
-;     centerAndHighlight ("The constructor Option",$LINELENGTH,
+;     centerAndHighlight ('"The constructor Option",$LINELENGTH,
 ;       specialChar 'hbar)
 ;     --  give msg about explicitly exposed constructors
 ;     displayExposedConstructors()
@@ -907,7 +905,7 @@
      (COND
       ((NULL |arg|)
        (PROGN
-        (|centerAndHighlight| '|The constructor Option| $LINELENGTH
+        (|centerAndHighlight| "The constructor Option" $LINELENGTH
          (|specialChar| '|hbar|))
         (|displayExposedConstructors|)))
       (#1='T
@@ -941,7 +939,7 @@
 
 ; setExposeDrop arg ==
 ;   (null arg) =>
-;     centerAndHighlight ("The drop Option",$LINELENGTH,specialChar 'hbar)
+;     centerAndHighlight ('"The drop Option",$LINELENGTH,specialChar 'hbar)
 ;     --  give msg about explicitly hidden constructors
 ;     displayHiddenConstructors()
 ;     sayMSG '" "
@@ -959,7 +957,7 @@
      (COND
       ((NULL |arg|)
        (PROGN
-        (|centerAndHighlight| '|The drop Option| $LINELENGTH
+        (|centerAndHighlight| "The drop Option" $LINELENGTH
          (|specialChar| '|hbar|))
         (|displayHiddenConstructors|)
         (|sayMSG| " ")
@@ -974,7 +972,7 @@
 
 ; setExposeDropGroup arg ==
 ;   (null arg) =>
-;     centerAndHighlight ("The group Option",$LINELENGTH,specialChar 'hbar)
+;     centerAndHighlight ('"The group Option",$LINELENGTH,specialChar 'hbar)
 ;     sayKeyedMsg("S2IZ0049L",NIL)
 ;     sayMSG '" "
 ;     displayExposedGroups()
@@ -1004,7 +1002,7 @@
      (COND
       ((NULL |arg|)
        (PROGN
-        (|centerAndHighlight| '|The group Option| $LINELENGTH
+        (|centerAndHighlight| "The group Option" $LINELENGTH
          (|specialChar| '|hbar|))
         (|sayKeyedMsg| 'S2IZ0049L NIL)
         (|sayMSG| " ")
@@ -1045,7 +1043,7 @@
 
 ; setExposeDropConstr arg ==
 ;   (null arg) =>
-;     centerAndHighlight ("The constructor Option",$LINELENGTH,
+;     centerAndHighlight ('"The constructor Option",$LINELENGTH,
 ;       specialChar 'hbar)
 ;     sayKeyedMsg("S2IZ0049N",NIL)
 ;     sayMSG '" "
@@ -1072,7 +1070,7 @@
      (COND
       ((NULL |arg|)
        (PROGN
-        (|centerAndHighlight| '|The constructor Option| $LINELENGTH
+        (|centerAndHighlight| "The constructor Option" $LINELENGTH
          (|specialChar| '|hbar|))
         (|sayKeyedMsg| 'S2IZ0049N NIL)
         (|sayMSG| " ")
@@ -1270,18 +1268,18 @@
 
 ; sayCacheCount(fn,n) ==
 ;   prefix:=
-;     fn => ["function",:bright linearFormatName fn]
-;     n = 0 => ["interpreter functions "]
-;     ["In general, interpreter functions "]
+;     fn => ['"function",:bright linearFormatName fn]
+;     n = 0 => ['"interpreter functions "]
+;     ['"In general, interpreter functions "]
 ;   n = 0 =>
 ;     fn =>
 ;       sayBrightly ['"   Caching for ",:prefix,
 ;         '"is turned off"]
 ;     sayBrightly '" In general, functions will cache no returned values."
 ;   phrase:=
-;     n="all" => [:bright "all","values."]
-;     n=1 => [" only the last value."]
-;     [" the last",:bright n,"values."]
+;     n="all" => [:bright '"all",'"values."]
+;     n=1 => ['" only the last value."]
+;     ['" the last",:bright n,'"values."]
 ;   sayBrightly ['"   ",:prefix,'"will cache",:phrase]
 
 (DEFUN |sayCacheCount| (|fn| |n|)
@@ -1290,9 +1288,9 @@
      (PROGN
       (SETQ |prefix|
               (COND
-               (|fn| (CONS '|function| (|bright| (|linearFormatName| |fn|))))
-               ((EQL |n| 0) (LIST '|interpreter functions |))
-               (#1='T (LIST '|In general, interpreter functions |))))
+               (|fn| (CONS "function" (|bright| (|linearFormatName| |fn|))))
+               ((EQL |n| 0) (LIST "interpreter functions "))
+               (#1='T (LIST "In general, interpreter functions "))))
       (COND
        ((EQL |n| 0)
         (COND
@@ -1308,11 +1306,11 @@
          (SETQ |phrase|
                  (COND
                   ((EQ |n| '|all|)
-                   (APPEND (|bright| '|all|) (CONS '|values.| NIL)))
-                  ((EQL |n| 1) (LIST '| only the last value.|))
+                   (APPEND (|bright| "all") (CONS "values." NIL)))
+                  ((EQL |n| 1) (LIST " only the last value."))
                   (#1#
-                   (CONS '| the last|
-                         (APPEND (|bright| |n|) (CONS '|values.| NIL))))))
+                   (CONS " the last"
+                         (APPEND (|bright| |n|) (CONS "values." NIL))))))
          (|sayBrightly|
           (CONS "   " (APPEND |prefix| (CONS "will cache" |phrase|)))))))))))
 
@@ -1487,7 +1485,7 @@
 ;     if (ptype := pathnameType fn) then
 ;         fn := STRCONC(pathnameDirectory fn,pathnameName fn)
 ;         ft := ptype
-;     filename := make_full_namestring([fn, ft])
+;     filename := make_full_namestring(make_filename0(fn, ft))
 ;     null filename => [NIL, NIL]
 ;     (testStream := makeStream(append, filename)) => [testStream, filename]
 ;     [NIL, NIL]
@@ -1500,7 +1498,7 @@
        ((SETQ |ptype| (|pathnameType| |fn|))
         (SETQ |fn| (STRCONC (|pathnameDirectory| |fn|) (|pathnameName| |fn|)))
         (SETQ |ft| |ptype|)))
-      (SETQ |filename| (|make_full_namestring| (LIST |fn| |ft|)))
+      (SETQ |filename| (|make_full_namestring| (|make_filename0| |fn| |ft|)))
       (COND ((NULL |filename|) (LIST NIL NIL))
             ((SETQ |testStream| (|makeStream| APPEND |filename|))
              (LIST |testStream| |filename|))

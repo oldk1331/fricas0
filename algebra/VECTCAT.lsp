@@ -6,7 +6,7 @@
 (DEFPARAMETER |VectorCategory;AL| 'NIL) 
 
 (DEFUN |VectorCategory| (|t#1|)
-  (LET (#1=#:G695 (#2=#:G696 (|devaluate| |t#1|)))
+  (LET (#1=#:G454 (#2=#:G455 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |VectorCategory;AL|)) (CDR #1#))
           (T
            (SETQ |VectorCategory;AL|
@@ -15,7 +15,7 @@
            #1#)))) 
 
 (DEFUN |VectorCategory;| (|t#1|)
-  (SPROG ((#1=#:G694 NIL))
+  (SPROG ((#1=#:G453 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -26,43 +26,43 @@
                                                  (|OneDimensionalArrayAggregate|
                                                   '|t#1|)
                                                  (|mkCategory|
-                                                  '(((+ ($ $ $))
+                                                  '(((+ (% % %))
                                                      (|has| |t#1|
                                                             (|AbelianSemiGroup|)))
                                                     ((|zero|
-                                                      ($
+                                                      (%
                                                        (|NonNegativeInteger|)))
                                                      (|has| |t#1|
                                                             (|AbelianMonoid|)))
-                                                    ((|zero?| ((|Boolean|) $))
+                                                    ((|zero?| ((|Boolean|) %))
                                                      (|has| |t#1|
                                                             (|AbelianMonoid|)))
-                                                    ((- ($ $))
+                                                    ((- (% %))
                                                      (|has| |t#1|
                                                             (|AbelianGroup|)))
-                                                    ((- ($ $ $))
+                                                    ((- (% % %))
                                                      (|has| |t#1|
                                                             (|AbelianGroup|)))
-                                                    ((* ($ (|Integer|) $))
+                                                    ((* (% (|Integer|) %))
                                                      (|has| |t#1|
                                                             (|AbelianGroup|)))
-                                                    ((* ($ |t#1| $))
+                                                    ((* (% |t#1| %))
                                                      (|has| |t#1|
                                                             (|SemiGroup|)))
-                                                    ((* ($ $ |t#1|))
+                                                    ((* (% % |t#1|))
                                                      (|has| |t#1|
                                                             (|SemiGroup|)))
-                                                    ((|dot| (|t#1| $ $))
+                                                    ((|dot| (|t#1| % %))
                                                      (AND
                                                       (|has| |t#1| (|SemiRng|))
                                                       (|has| |t#1|
                                                              (|AbelianMonoid|))))
                                                     ((|outerProduct|
-                                                      ((|Matrix| |t#1|) $ $))
+                                                      ((|Matrix| |t#1|) % %))
                                                      (|has| |t#1| (|Ring|)))
-                                                    ((|cross| ($ $ $))
+                                                    ((|cross| (% % %))
                                                      (|has| |t#1| (|Ring|)))
-                                                    ((|length| (|t#1| $))
+                                                    ((|length| (|t#1| %))
                                                      (AND
                                                       (|has| |t#1| (|Ring|))
                                                       (|has| |t#1|

@@ -1,103 +1,103 @@
 
 (SDEFUN |STEXPST;expre|
         ((|r| (|Coef|)) (|e| (|Stream| |Coef|)) (|dx| (|Stream| |Coef|))
-         ($ (|Stream| |Coef|)))
+         (% (|Stream| |Coef|)))
         (SPROG NIL
-               (SPADCALL |r| (CONS #'|STEXPST;expre!0| (VECTOR $ |dx| |e|))
-                         (QREFELT $ 11)))) 
+               (SPADCALL |r| (CONS #'|STEXPST;expre!0| (VECTOR % |dx| |e|))
+                         (QREFELT % 11)))) 
 
 (SDEFUN |STEXPST;expre!0| (($$ NIL))
-        (PROG (|e| |dx| $)
+        (PROG (|e| |dx| %)
           (LETT |e| (QREFELT $$ 2))
           (LETT |dx| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |e| |dx| (QREFELT $ 9)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |e| |dx| (QREFELT % 9)))))) 
 
-(SDEFUN |STEXPST;exp;2S;2| ((|z| (|Stream| |Coef|)) ($ (|Stream| |Coef|)))
+(SDEFUN |STEXPST;exp;2S;2| ((|z| (|Stream| |Coef|)) (% (|Stream| |Coef|)))
         (SPROG ((|coef| (|Coef|)))
                (SEQ
                 (COND
-                 ((SPADCALL |z| (QREFELT $ 13))
-                  (SPADCALL (|spadConstant| $ 14) (SPADCALL (QREFELT $ 15))
-                            (QREFELT $ 16)))
+                 ((SPADCALL |z| (QREFELT % 13))
+                  (SPADCALL (|spadConstant| % 14) (SPADCALL (QREFELT % 15))
+                            (QREFELT % 16)))
                  (#1='T
-                  (SEQ (LETT |coef| (SPADCALL |z| (QREFELT $ 17)))
+                  (SEQ (LETT |coef| (SPADCALL |z| (QREFELT % 17)))
                        (EXIT
                         (COND
-                         ((SPADCALL |coef| (|spadConstant| $ 18)
-                                    (QREFELT $ 19))
+                         ((SPADCALL |coef| (|spadConstant| % 18)
+                                    (QREFELT % 19))
                           (SPADCALL
-                           (CONS #'|STEXPST;exp;2S;2!0| (VECTOR |z| $))
-                           (QREFELT $ 23)))
+                           (CONS #'|STEXPST;exp;2S;2!0| (VECTOR |z| %))
+                           (QREFELT % 23)))
                          (#1#
                           (SPADCALL
-                           (CONS #'|STEXPST;exp;2S;2!1| (VECTOR |z| $ |coef|))
-                           (QREFELT $ 23))))))))))) 
+                           (CONS #'|STEXPST;exp;2S;2!1| (VECTOR |z| % |coef|))
+                           (QREFELT % 23))))))))))) 
 
 (SDEFUN |STEXPST;exp;2S;2!1| ((|y| NIL) ($$ NIL))
-        (PROG (|coef| $ |z|)
+        (PROG (|coef| % |z|)
           (LETT |coef| (QREFELT $$ 2))
-          (LETT $ (QREFELT $$ 1))
+          (LETT % (QREFELT $$ 1))
           (LETT |z| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (|STEXPST;expre| (SPADCALL |coef| (QREFELT $ 24)) |y|
-             (SPADCALL |z| (QREFELT $ 20)) $))))) 
+            (|STEXPST;expre| (SPADCALL |coef| (QREFELT % 24)) |y|
+             (SPADCALL |z| (QREFELT % 20)) %))))) 
 
 (SDEFUN |STEXPST;exp;2S;2!0| ((|y| NIL) ($$ NIL))
-        (PROG ($ |z|)
-          (LETT $ (QREFELT $$ 1))
+        (PROG (% |z|)
+          (LETT % (QREFELT $$ 1))
           (LETT |z| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (|STEXPST;expre| (|spadConstant| $ 14) |y|
-             (SPADCALL |z| (QREFELT $ 20)) $))))) 
+            (|STEXPST;expre| (|spadConstant| % 14) |y|
+             (SPADCALL |z| (QREFELT % 20)) %))))) 
 
-(SDEFUN |STEXPST;log;2S;3| ((|z| (|Stream| |Coef|)) ($ (|Stream| |Coef|)))
+(SDEFUN |STEXPST;log;2S;3| ((|z| (|Stream| |Coef|)) (% (|Stream| |Coef|)))
         (SPROG ((|c| (|Coef|)))
                (SEQ
                 (COND
-                 ((SPADCALL |z| (QREFELT $ 13))
+                 ((SPADCALL |z| (QREFELT % 13))
                   (|error| "log: constant coefficient should not be 0"))
                  (#1='T
-                  (SEQ (LETT |c| (SPADCALL |z| (QREFELT $ 17)))
+                  (SEQ (LETT |c| (SPADCALL |z| (QREFELT % 17)))
                        (EXIT
                         (COND
-                         ((SPADCALL |c| (|spadConstant| $ 18) (QREFELT $ 19))
+                         ((SPADCALL |c| (|spadConstant| % 18) (QREFELT % 19))
                           (|error|
                            "log: constant coefficient should not be 0"))
                          (#1#
                           (SPADCALL
-                           (CONS #'|STEXPST;log;2S;3!1| (VECTOR |z| $ |c|))
-                           (QREFELT $ 23))))))))))) 
+                           (CONS #'|STEXPST;log;2S;3!1| (VECTOR |z| % |c|))
+                           (QREFELT % 23))))))))))) 
 
 (SDEFUN |STEXPST;log;2S;3!1| ((|y| NIL) ($$ NIL))
-        (PROG (|c| $ |z|)
+        (PROG (|c| % |z|)
           (LETT |c| (QREFELT $$ 2))
-          (LETT $ (QREFELT $$ 1))
+          (LETT % (QREFELT $$ 1))
           (LETT |z| (QREFELT $$ 0))
           (RETURN
            (PROGN
             (SPROG NIL
-                   (SPADCALL (SPADCALL |c| (QREFELT $ 26))
-                             (CONS #'|STEXPST;log;2S;3!0| (VECTOR |z| $ |y|))
-                             (QREFELT $ 11))))))) 
+                   (SPADCALL (SPADCALL |c| (QREFELT % 26))
+                             (CONS #'|STEXPST;log;2S;3!0| (VECTOR |z| % |y|))
+                             (QREFELT % 11))))))) 
 
 (SDEFUN |STEXPST;log;2S;3!0| (($$ NIL))
-        (PROG (|y| $ |z|)
+        (PROG (|y| % |z|)
           (LETT |y| (QREFELT $$ 2))
-          (LETT $ (QREFELT $$ 1))
+          (LETT % (QREFELT $$ 1))
           (LETT |z| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPADCALL (SPADCALL (SPADCALL |y| (QREFELT $ 28)) (QREFELT $ 25))
-                      (SPADCALL |z| (QREFELT $ 20)) (QREFELT $ 9)))))) 
+            (SPADCALL (SPADCALL (SPADCALL |y| (QREFELT % 28)) (QREFELT % 25))
+                      (SPADCALL |z| (QREFELT % 20)) (QREFELT % 9)))))) 
 
 (DECLAIM (NOTINLINE |StreamExponentialSeriesTranscendentalFunctions;|)) 
 
-(DEFUN |StreamExponentialSeriesTranscendentalFunctions| (#1=#:G712)
+(DEFUN |StreamExponentialSeriesTranscendentalFunctions| (#1=#:G462)
   (SPROG NIL
-         (PROG (#2=#:G713)
+         (PROG (#2=#:G463)
            (RETURN
             (COND
              ((LETT #2#
@@ -117,21 +117,21 @@
                         '|StreamExponentialSeriesTranscendentalFunctions|)))))))))) 
 
 (DEFUN |StreamExponentialSeriesTranscendentalFunctions;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$|
                 (LIST '|StreamExponentialSeriesTranscendentalFunctions| DV$1))
-          (LETT $ (GETREFV 30))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 30))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache|
                       '|StreamExponentialSeriesTranscendentalFunctions|
-                      (LIST DV$1) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|StreamExponentialSeriesTranscendentalFunctions| '|infovec|
           (LIST

@@ -1,81 +1,81 @@
 
 (SDEFUN |DSTCFPG;JContinuedFraction;DUpCf;1|
         ((|x| (|Distribution| R)) (|zz| (|UnivariatePolynomial| |z| R))
-         ($ (|ContinuedFraction| (|UnivariatePolynomial| |z| R))))
+         (% (|ContinuedFraction| (|UnivariatePolynomial| |z| R))))
         (SPROG
          ((|bn1| #1=(|Stream| (|UnivariatePolynomial| |z| R))) (|an1| #1#)
           (|jac| (|Record| (|:| |an| (|Stream| R)) (|:| |bn| (|Stream| R)))))
-         (SEQ (LETT |jac| (SPADCALL |x| (QREFELT $ 10)))
+         (SEQ (LETT |jac| (SPADCALL |x| (QREFELT % 10)))
               (LETT |an1|
                     (SPADCALL
                      (CONS #'|DSTCFPG;JContinuedFraction;DUpCf;1!0|
-                           (VECTOR $ |zz|))
-                     (QCAR |jac|) (QREFELT $ 22)))
+                           (VECTOR % |zz|))
+                     (QCAR |jac|) (QREFELT % 22)))
               (LETT |bn1|
-                    (SPADCALL (CONS #'|DSTCFPG;JContinuedFraction;DUpCf;1!1| $)
-                              (QCDR |jac|) (QREFELT $ 22)))
+                    (SPADCALL (CONS #'|DSTCFPG;JContinuedFraction;DUpCf;1!1| %)
+                              (QCDR |jac|) (QREFELT % 22)))
               (EXIT
-               (SPADCALL (|spadConstant| $ 24)
-                         (SPADCALL (|spadConstant| $ 26) |bn1| (QREFELT $ 27))
-                         (SPADCALL |zz| |an1| (QREFELT $ 27))
-                         (QREFELT $ 29)))))) 
+               (SPADCALL (|spadConstant| % 24)
+                         (SPADCALL (|spadConstant| % 26) |bn1| (QREFELT % 27))
+                         (SPADCALL |zz| |an1| (QREFELT % 27))
+                         (QREFELT % 29)))))) 
 
-(SDEFUN |DSTCFPG;JContinuedFraction;DUpCf;1!1| ((|b| NIL) ($ NIL))
-        (SPADCALL (SPADCALL |b| (QREFELT $ 23)) (|spadConstant| $ 14)
-                  (QREFELT $ 16))) 
+(SDEFUN |DSTCFPG;JContinuedFraction;DUpCf;1!1| ((|b| NIL) (% NIL))
+        (SPADCALL (SPADCALL |b| (QREFELT % 23)) (|spadConstant| % 14)
+                  (QREFELT % 16))) 
 
 (SDEFUN |DSTCFPG;JContinuedFraction;DUpCf;1!0| ((|a| NIL) ($$ NIL))
-        (PROG (|zz| $)
+        (PROG (|zz| %)
           (LETT |zz| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
+          (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPADCALL |zz| (SPADCALL |a| (|spadConstant| $ 14) (QREFELT $ 16))
-                      (QREFELT $ 17)))))) 
+            (SPADCALL |zz| (SPADCALL |a| (|spadConstant| % 14) (QREFELT % 16))
+                      (QREFELT % 17)))))) 
 
 (SDEFUN |DSTCFPG;JContinuedFraction;DUpCf;2|
         ((|x| (|Distribution| R))
          (|zz| (|UnivariatePolynomial| |z| (|Fraction| R)))
-         ($ (|ContinuedFraction| (|UnivariatePolynomial| |z| (|Fraction| R)))))
+         (% (|ContinuedFraction| (|UnivariatePolynomial| |z| (|Fraction| R)))))
         (SPROG
          ((|bn1| #1=(|Stream| (|UnivariatePolynomial| |z| (|Fraction| R))))
           (|an1| #1#)
           (|jac|
            (|Record| (|:| |an| (|Stream| (|Fraction| R)))
                      (|:| |bn| (|Stream| (|Fraction| R))))))
-         (SEQ (LETT |jac| (SPADCALL |x| (QREFELT $ 32)))
+         (SEQ (LETT |jac| (SPADCALL |x| (QREFELT % 32)))
               (LETT |an1|
                     (SPADCALL
                      (CONS #'|DSTCFPG;JContinuedFraction;DUpCf;2!0|
-                           (VECTOR $ |zz|))
-                     (QCAR |jac|) (QREFELT $ 41)))
+                           (VECTOR % |zz|))
+                     (QCAR |jac|) (QREFELT % 41)))
               (LETT |bn1|
-                    (SPADCALL (CONS #'|DSTCFPG;JContinuedFraction;DUpCf;2!1| $)
-                              (QCDR |jac|) (QREFELT $ 41)))
+                    (SPADCALL (CONS #'|DSTCFPG;JContinuedFraction;DUpCf;2!1| %)
+                              (QCDR |jac|) (QREFELT % 41)))
               (EXIT
-               (SPADCALL (|spadConstant| $ 43)
-                         (SPADCALL (|spadConstant| $ 44) |bn1| (QREFELT $ 45))
-                         (SPADCALL |zz| |an1| (QREFELT $ 45))
-                         (QREFELT $ 47)))))) 
+               (SPADCALL (|spadConstant| % 43)
+                         (SPADCALL (|spadConstant| % 44) |bn1| (QREFELT % 45))
+                         (SPADCALL |zz| |an1| (QREFELT % 45))
+                         (QREFELT % 47)))))) 
 
-(SDEFUN |DSTCFPG;JContinuedFraction;DUpCf;2!1| ((|b| NIL) ($ NIL))
-        (SPADCALL (SPADCALL |b| (QREFELT $ 42)) (|spadConstant| $ 14)
-                  (QREFELT $ 35))) 
+(SDEFUN |DSTCFPG;JContinuedFraction;DUpCf;2!1| ((|b| NIL) (% NIL))
+        (SPADCALL (SPADCALL |b| (QREFELT % 42)) (|spadConstant| % 14)
+                  (QREFELT % 35))) 
 
 (SDEFUN |DSTCFPG;JContinuedFraction;DUpCf;2!0| ((|a| NIL) ($$ NIL))
-        (PROG (|zz| $)
+        (PROG (|zz| %)
           (LETT |zz| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
+          (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPADCALL |zz| (SPADCALL |a| (|spadConstant| $ 14) (QREFELT $ 35))
-                      (QREFELT $ 36)))))) 
+            (SPADCALL |zz| (SPADCALL |a| (|spadConstant| % 14) (QREFELT % 35))
+                      (QREFELT % 36)))))) 
 
 (DECLAIM (NOTINLINE |DistributionContinuedFractionPackage;|)) 
 
-(DEFUN |DistributionContinuedFractionPackage| (&REST #1=#:G714)
+(DEFUN |DistributionContinuedFractionPackage| (&REST #1=#:G459)
   (SPROG NIL
-         (PROG (#2=#:G715)
+         (PROG (#2=#:G460)
            (RETURN
             (COND
              ((LETT #2#
@@ -98,14 +98,14 @@
 
 (DEFUN |DistributionContinuedFractionPackage;| (|#1| |#2|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G713 NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+   ((|pv$| NIL) (#1=#:G458 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 |#2|)
     (LETT |dv$| (LIST '|DistributionContinuedFractionPackage| DV$1 DV$2))
-    (LETT $ (GETREFV 49))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3
+    (LETT % (GETREFV 49))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3
               (LETT |pv$|
                     (|buildPredVector| 0 0
                                        (LIST
@@ -116,21 +116,21 @@
                                                         '(|IntegralDomain|))
                                          (|not| #1#))))))
     (|haddProp| |$ConstructorCache| '|DistributionContinuedFractionPackage|
-                (LIST DV$1 DV$2) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (SETF |pv$| (QREFELT $ 3))
+                (LIST DV$1 DV$2) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (SETF |pv$| (QREFELT % 3))
     (COND
      ((|testBitVector| |pv$| 1)
-      (QSETREFV $ 30
+      (QSETREFV % 30
                 (CONS (|dispatchFunction| |DSTCFPG;JContinuedFraction;DUpCf;1|)
-                      $)))
+                      %)))
      ((|HasCategory| |#1| '(|IntegralDomain|))
-      (QSETREFV $ 48
+      (QSETREFV % 48
                 (CONS (|dispatchFunction| |DSTCFPG;JContinuedFraction;DUpCf;2|)
-                      $))))
-    $))) 
+                      %))))
+    %))) 
 
 (MAKEPROP '|DistributionContinuedFractionPackage| '|infovec|
           (LIST
@@ -138,7 +138,7 @@
               (|Record| (|:| |an| 20) (|:| |bn| 20)) (|Distribution| 6)
               (0 . |jacobiParameters|) (5 . |Zero|) (9 . |Zero|)
               (|NonNegativeInteger|) (13 . |Zero|)
-              (|UnivariatePolynomial| (NRTEVAL (QREFELT $ 7)) 6)
+              (|UnivariatePolynomial| (NRTEVAL (QREFELT % 7)) 6)
               (17 . |monomial|) (23 . -) (|Stream| 15) (|Mapping| 15 6)
               (|Stream| 6) (|StreamFunctions2| 6 15) (29 . |map|) (35 . -)
               (40 . |Zero|) (44 . |One|) (48 . |One|) (52 . |cons|)
@@ -146,7 +146,7 @@
               (65 . |JContinuedFraction|)
               (|Record| (|:| |an| 39) (|:| |bn| 39)) (71 . |jacobiParameters|)
               (|Fraction| 6)
-              (|UnivariatePolynomial| (NRTEVAL (QREFELT $ 7)) 33)
+              (|UnivariatePolynomial| (NRTEVAL (QREFELT % 7)) 33)
               (76 . |monomial|) (82 . -) (|Stream| 34) (|Mapping| 34 33)
               (|Stream| 33) (|StreamFunctions2| 33 34) (88 . |map|) (94 . -)
               (99 . |Zero|) (103 . |One|) (107 . |cons|)

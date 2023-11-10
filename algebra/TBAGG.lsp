@@ -6,7 +6,7 @@
 (DEFPARAMETER |TableAggregate;AL| 'NIL) 
 
 (DEFUN |TableAggregate| (|t#1| |t#2|)
-  (LET (#1=#:G697 (#2=#:G698 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
+  (LET (#1=#:G456 (#2=#:G457 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
     (COND ((SETQ #1# (|assoc| #2# |TableAggregate;AL|)) (CDR #1#))
           (T
            (SETQ |TableAggregate;AL|
@@ -16,7 +16,7 @@
            #1#)))) 
 
 (DEFUN |TableAggregate;| (|t#1| |t#2|)
-  (SPROG ((#1=#:G696 NIL))
+  (SPROG ((#1=#:G455 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2|) (LIST |t#1| |t#2|)
@@ -30,11 +30,11 @@
                                                                      '|t#2|)
                                                  (|mkCategory|
                                                   '(((|setelt!|
-                                                      (|t#2| $ |t#1| |t#2|))
+                                                      (|t#2| % |t#1| |t#2|))
                                                      T)
-                                                    ((|table| ($)) T)
+                                                    ((|table| (%)) T)
                                                     ((|table|
-                                                      ($
+                                                      (%
                                                        (|List|
                                                         (|Record|
                                                          (|:| |key| |t#1|)
@@ -42,10 +42,10 @@
                                                               |t#2|)))))
                                                      T)
                                                     ((|map|
-                                                      ($
+                                                      (%
                                                        (|Mapping| |t#2| |t#2|
                                                                   |t#2|)
-                                                       $ $))
+                                                       % %))
                                                      T))
                                                   NIL NIL NIL)))))))
            (SETELT #1# 0 (LIST '|TableAggregate| |t#1| |t#2|))))) 

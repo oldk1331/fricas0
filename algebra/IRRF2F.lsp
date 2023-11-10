@@ -1,49 +1,49 @@
 
 (SDEFUN |IRRF2F;toEF|
         ((|i| (|IntegrationResult| (|Fraction| (|Polynomial| R))))
-         ($ (|IntegrationResult| (|Expression| R))))
-        (SPADCALL (ELT $ 9) |i| (QREFELT $ 14))) 
+         (% (|IntegrationResult| (|Expression| R))))
+        (SPADCALL (ELT % 9) |i| (QREFELT % 14))) 
 
 (SDEFUN |IRRF2F;expand;IrSL;2|
         ((|i| (|IntegrationResult| (|Fraction| (|Polynomial| R))))
-         (|x| (|Symbol|)) ($ (|List| (|Expression| R))))
-        (SPADCALL (|IRRF2F;toEF| |i| $) |x| (QREFELT $ 18))) 
+         (|x| (|Symbol|)) (% (|List| (|Expression| R))))
+        (SPADCALL (|IRRF2F;toEF| |i| %) |x| (QREFELT % 18))) 
 
 (SDEFUN |IRRF2F;complexExpand;IrE;3|
         ((|i| (|IntegrationResult| (|Fraction| (|Polynomial| R))))
-         ($ (|Expression| R)))
-        (SPADCALL (|IRRF2F;toEF| |i| $) (QREFELT $ 20))) 
+         (% (|Expression| R)))
+        (SPADCALL (|IRRF2F;toEF| |i| %) (QREFELT % 20))) 
 
 (SDEFUN |IRRF2F;split;2Ir;4|
         ((|i| (|IntegrationResult| (|Fraction| (|Polynomial| R))))
-         ($ (|IntegrationResult| (|Fraction| (|Polynomial| R)))))
-        (SPADCALL (ELT $ 22) (SPADCALL (|IRRF2F;toEF| |i| $) (QREFELT $ 23))
-                  (QREFELT $ 26))) 
+         (% (|IntegrationResult| (|Fraction| (|Polynomial| R)))))
+        (SPADCALL (ELT % 22) (SPADCALL (|IRRF2F;toEF| |i| %) (QREFELT % 23))
+                  (QREFELT % 26))) 
 
 (SDEFUN |IRRF2F;complexIntegrate;FSE;5|
         ((|f| (|Fraction| (|Polynomial| R))) (|x| (|Symbol|))
-         ($ (|Expression| R)))
-        (SPADCALL (SPADCALL |f| |x| (QREFELT $ 29)) (QREFELT $ 21))) 
+         (% (|Expression| R)))
+        (SPADCALL (SPADCALL |f| |x| (QREFELT % 29)) (QREFELT % 21))) 
 
 (SDEFUN |IRRF2F;integrate;FSU;6|
         ((|f| (|Fraction| (|Polynomial| R))) (|x| (|Symbol|))
-         ($ (|Union| (|Expression| R) (|List| (|Expression| R)))))
-        (CONS 0 (SPADCALL |f| |x| (QREFELT $ 30)))) 
+         (% (|Union| (|Expression| R) (|List| (|Expression| R)))))
+        (CONS 0 (SPADCALL |f| |x| (QREFELT % 30)))) 
 
 (SDEFUN |IRRF2F;integrate;FSU;7|
         ((|f| (|Fraction| (|Polynomial| R))) (|x| (|Symbol|))
-         ($ (|Union| (|Expression| R) (|List| (|Expression| R)))))
+         (% (|Union| (|Expression| R) (|List| (|Expression| R)))))
         (SPROG
-         ((|l| (|List| (|Expression| R))) (#1=#:G726 NIL) (|g| NIL)
-          (#2=#:G725 NIL))
+         ((|l| (|List| (|Expression| R))) (#1=#:G470 NIL) (|g| NIL)
+          (#2=#:G469 NIL))
          (SEQ
           (LETT |l|
                 (PROGN
                  (LETT #2# NIL)
                  (SEQ (LETT |g| NIL)
                       (LETT #1#
-                            (SPADCALL (SPADCALL |f| |x| (QREFELT $ 29)) |x|
-                                      (QREFELT $ 19)))
+                            (SPADCALL (SPADCALL |f| |x| (QREFELT % 29)) |x|
+                                      (QREFELT % 19)))
                       G190
                       (COND
                        ((OR (ATOM #1#) (PROGN (LETT |g| (CAR #1#)) NIL))
@@ -52,8 +52,8 @@
                        (EXIT
                         (LETT #2#
                               (CONS
-                               (SPADCALL (SPADCALL |g| (QREFELT $ 34)) |x|
-                                         (QREFELT $ 36))
+                               (SPADCALL (SPADCALL |g| (QREFELT % 34)) |x|
+                                         (QREFELT % 36))
                                #2#))))
                       (LETT #1# (CDR #1#)) (GO G190) G191
                       (EXIT (NREVERSE #2#)))))
@@ -63,9 +63,9 @@
 
 (DECLAIM (NOTINLINE |IntegrationResultRFToFunction;|)) 
 
-(DEFUN |IntegrationResultRFToFunction| (#1=#:G727)
+(DEFUN |IntegrationResultRFToFunction| (#1=#:G471)
   (SPROG NIL
-         (PROG (#2=#:G728)
+         (PROG (#2=#:G472)
            (RETURN
             (COND
              ((LETT #2#
@@ -83,41 +83,41 @@
                         '|IntegrationResultRFToFunction|)))))))))) 
 
 (DEFUN |IntegrationResultRFToFunction;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|IntegrationResultRFToFunction| DV$1))
-          (LETT $ (GETREFV 37))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 37))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
                                               (|HasCategory| |#1|
                                                              '(|CharacteristicZero|))))))
           (|haddProp| |$ConstructorCache| '|IntegrationResultRFToFunction|
-                      (LIST DV$1) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
           (COND
            ((|testBitVector| |pv$| 1)
             (PROGN
-             (QSETREFV $ 30
+             (QSETREFV % 30
                        (CONS
                         (|dispatchFunction| |IRRF2F;complexIntegrate;FSE;5|)
-                        $))
+                        %))
              (COND
               ((|HasSignature| |#1|
                                (LIST '|imaginary| (LIST (|devaluate| |#1|))))
-               (QSETREFV $ 32
+               (QSETREFV % 32
                          (CONS (|dispatchFunction| |IRRF2F;integrate;FSU;6|)
-                               $)))
+                               %)))
               ('T
-               (QSETREFV $ 32
+               (QSETREFV % 32
                          (CONS (|dispatchFunction| |IRRF2F;integrate;FSU;7|)
-                               $)))))))
-          $))) 
+                               %)))))))
+          %))) 
 
 (MAKEPROP '|IntegrationResultRFToFunction| '|infovec|
           (LIST

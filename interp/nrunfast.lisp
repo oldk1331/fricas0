@@ -414,7 +414,7 @@
 ;                                               opvec.code, endPos)) => nil
 ;             --numOfArgs := byteVector.(opvec.code)
 ;             --numOfArgs ~= #(QCDR sig) => nil
-;             packageForm := [entry, '$, :rest cat]
+;             packageForm := [entry, '%, :rest(cat)]
 ;             package := evalSlotDomain(packageForm,dom)
 ;             packageVec.i := package
 ;             package
@@ -534,7 +534,7 @@
                                                               (SETQ |packageForm|
                                                                       (CONS
                                                                        |entry|
-                                                                       (CONS '$
+                                                                       (CONS '%
                                                                              (CDR
                                                                               |cat|))))
                                                               (SETQ |package|
@@ -660,7 +660,7 @@
 ;       MEMQ(op,'(Union Mapping QUOTE)) =>
 ;          and/[lazyMatchArg(s,a,dollar,domain) for s in sargl for a in argl]
 ;       coSig := GETDATABASE(op,'COSIG)
-;       NULL coSig => error ["bad Constructor op", op]
+;       NULL coSig => error ['"bad Constructor op", op]
 ;       and/[lazyMatchArg2(s,a,dollar,domain,flag)
 ;            for s in sargl for a in argl for flag in rest coSig]
 ;   STRINGP source and lazyt is ['QUOTE,=source] => true
@@ -739,7 +739,7 @@
         (#1#
          (PROGN
           (SETQ |coSig| (GETDATABASE |op| 'COSIG))
-          (COND ((NULL |coSig|) (|error| (LIST '|bad Constructor op| |op|)))
+          (COND ((NULL |coSig|) (|error| (LIST "bad Constructor op" |op|)))
                 (#1#
                  ((LAMBDA
                       (|bfVar#20| |bfVar#17| |s| |bfVar#18| |a| |bfVar#19|
@@ -807,7 +807,7 @@
 ;    fn ==
 ;     x = arg => true
 ;     x is ['elt,someDomain,opname] => lookupInDomainByName(opname,evalDomain someDomain,arg)
-;     x = '$ and (arg = dollarName or arg = domainName) => true
+;     x = '% and (arg = dollarName or arg = domainName) => true
 ;     x = dollarName and arg = domainName => true
 ;     ATOM x or ATOM arg => false
 ;     xt and first x = first arg =>
@@ -865,7 +865,7 @@
                                                      #1#))))))
                                    (|lookupInDomainByName| |opname|
                                     (|evalDomain| |someDomain|) |arg|))
-                                  ((AND (EQ |x| '$)
+                                  ((AND (EQ |x| '%)
                                         (OR (EQUAL |arg| |dollarName|)
                                             (EQUAL |arg| |domainName|)))
                                    T)
@@ -993,7 +993,7 @@
 ;           [functorName,:[newExpandLocalTypeArgs(a,dollar,domain,true) for a in argl]]
 ;   functorName = 'QUOTE => [functorName,:argl]
 ;   coSig := GETDATABASE(functorName,'COSIG)
-;   NULL coSig => error ["bad functorName", functorName]
+;   NULL coSig => error ['"bad functorName", functorName]
 ;   [functorName,:[newExpandLocalTypeArgs(a,dollar,domain,flag)
 ;         for a in argl for flag in rest coSig]]
 
@@ -1055,7 +1055,7 @@
         (PROGN
          (SETQ |coSig| (GETDATABASE |functorName| 'COSIG))
          (COND
-          ((NULL |coSig|) (|error| (LIST '|bad functorName| |functorName|)))
+          ((NULL |coSig|) (|error| (LIST "bad functorName" |functorName|)))
           (#1#
            (CONS |functorName|
                  ((LAMBDA (|bfVar#34| |bfVar#32| |a| |bfVar#33| |flag|)
@@ -1077,7 +1077,7 @@
                   NIL |argl| NIL (CDR |coSig|) NIL)))))))))))
 
 ; newExpandLocalTypeArgs(u,dollar,domain,typeFlag) ==
-;   u = '$ => u
+;   u = '% => u
 ;   INTEGERP u =>
 ;      typeFlag => newExpandTypeSlot(u, dollar,domain)
 ;      domain.u
@@ -1090,7 +1090,7 @@
 (DEFUN |newExpandLocalTypeArgs| (|u| |dollar| |domain| |typeFlag|)
   (PROG (|ISTMP#1| |y|)
     (RETURN
-     (COND ((EQ |u| '$) |u|)
+     (COND ((EQ |u| '%) |u|)
            ((INTEGERP |u|)
             (COND (|typeFlag| (|newExpandTypeSlot| |u| |dollar| |domain|))
                   (#1='T (ELT |domain| |u|))))
@@ -1110,13 +1110,13 @@
            (#1# (|newExpandLocalTypeForm| |u| |dollar| |domain|))))))
 
 ; nrtEval(expr,dom) ==
-;   $:fluid := dom
-;   eval expr
+;     % : fluid := dom
+;     eval expr
 
 (DEFUN |nrtEval| (|expr| |dom|)
-  (PROG ($)
-    (DECLARE (SPECIAL $))
-    (RETURN (PROGN (SETQ $ |dom|) (|eval| |expr|)))))
+  (PROG (%)
+    (DECLARE (SPECIAL %))
+    (RETURN (PROGN (SETQ % |dom|) (|eval| |expr|)))))
 
 ; domainVal(dollar,domain,index) ==
 ; --returns a domain or a lazy slot
@@ -1132,14 +1132,14 @@
 
 ; sigDomainVal(dollar,domain,index) ==
 ; --returns a domain or a lazy slot
-;   index = 0 => "$"
+;   index = 0 => "%"
 ;   index = 2 => domain
 ;   domain.index
 
 (DEFUN |sigDomainVal| (|dollar| |domain| |index|)
   (PROG ()
     (RETURN
-     (COND ((EQL |index| 0) '$) ((EQL |index| 2) |domain|)
+     (COND ((EQL |index| 0) '%) ((EQL |index| 2) |domain|)
            ('T (ELT |domain| |index|))))))
 
 ; newHasTest(domform,catOrAtt) ==

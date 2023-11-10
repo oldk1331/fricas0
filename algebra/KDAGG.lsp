@@ -6,7 +6,7 @@
 (DEFPARAMETER |KeyedDictionary;AL| 'NIL) 
 
 (DEFUN |KeyedDictionary| (|t#1| |t#2|)
-  (LET (#1=#:G693 (#2=#:G694 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
+  (LET (#1=#:G452 (#2=#:G453 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
     (COND ((SETQ #1# (|assoc| #2# |KeyedDictionary;AL|)) (CDR #1#))
           (T
            (SETQ |KeyedDictionary;AL|
@@ -16,11 +16,11 @@
            #1#)))) 
 
 (DEFUN |KeyedDictionary;| (|t#1| |t#2|)
-  (SPROG ((#1=#:G692 NIL))
+  (SPROG ((#1=#:G451 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2|) (LIST |t#1| |t#2|)
-                                   (|subst_in_cat| '(#2=#:G691)
+                                   (|subst_in_cat| '(#2=#:G450)
                                                    (LIST
                                                     '(|Record|
                                                       (|:| |key| |t#1|)
@@ -35,20 +35,20 @@
                                                        (|mkCategory|
                                                         '(((|key?|
                                                             ((|Boolean|) |t#1|
-                                                             $))
+                                                             %))
                                                            T)
                                                           ((|keys|
-                                                            ((|List| |t#1|) $))
+                                                            ((|List| |t#1|) %))
                                                            T)
                                                           ((|remove!|
                                                             ((|Union| |t#2|
                                                                       "failed")
-                                                             |t#1| $))
+                                                             |t#1| %))
                                                            T)
                                                           ((|search|
                                                             ((|Union| |t#2|
                                                                       "failed")
-                                                             |t#1| $))
+                                                             |t#1| %))
                                                            T))
                                                         NIL NIL NIL))))))))
            (SETELT #1# 0 (LIST '|KeyedDictionary| |t#1| |t#2|))))) 

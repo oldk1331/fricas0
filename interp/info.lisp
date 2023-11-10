@@ -84,10 +84,10 @@
 
 ; formatInfo u ==
 ;   atom u => u
-;   u is ["SIGNATURE",:v] => ["SIGNATURE","$",:v]
+;   u is ["SIGNATURE", :v] => ["SIGNATURE", "%", :v]
 ;   u is ["PROGN",:l] => ["PROGN",:[formatInfo v for v in l]]
 ;   u is ["ATTRIBUTE", v] =>
-;       isCategoryForm(v) => ["has", "$", v]
+;       isCategoryForm(v) => ["has", "%", v]
 ;       BREAK()
 ;   u is ["IF",a,b,c] =>
 ;     c="noBranch" => ["COND",:liftCond [formatPred a,formatInfo b]]
@@ -102,7 +102,7 @@
      (COND ((ATOM |u|) |u|)
            ((AND (CONSP |u|) (EQ (CAR |u|) 'SIGNATURE)
                  (PROGN (SETQ |v| (CDR |u|)) #1='T))
-            (CONS 'SIGNATURE (CONS '$ |v|)))
+            (CONS 'SIGNATURE (CONS '% |v|)))
            ((AND (CONSP |u|) (EQ (CAR |u|) 'PROGN)
                  (PROGN (SETQ |l| (CDR |u|)) #1#))
             (CONS 'PROGN
@@ -121,7 +121,7 @@
                   (SETQ |ISTMP#1| (CDR |u|))
                   (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
                        (PROGN (SETQ |v| (CAR |ISTMP#1|)) #1#))))
-            (COND ((|isCategoryForm| |v|) (LIST '|has| '$ |v|)) (#1# (BREAK))))
+            (COND ((|isCategoryForm| |v|) (LIST '|has| '% |v|)) (#1# (BREAK))))
            ((AND (CONSP |u|) (EQ (CAR |u|) 'IF)
                  (PROGN
                   (SETQ |ISTMP#1| (CDR |u|))
@@ -479,7 +479,7 @@
 ;     cat is ["ATTRIBUTE",:a] => BREAK()
 ;     cat is ["SIGNATURE",:a] => knownInfo ["SIGNATURE",name,:a]
 ;     name is ['Union,:.] => false
-;     -- FIXME: there is confusion between '$ in outer domain
+;     -- FIXME: there is confusion between '% in outer domain
 ;     -- (the one which needs info) and freshly compiled
 ;     -- domain...
 ;     v := compForMode(name, $EmptyMode, $info_e)
@@ -489,7 +489,7 @@
 ;     vmode is ["Join",:l] and member(cat,l) => true
 ;     [vv, ., .] := get_catlist(vmode, $info_e)
 ;     catlist := vv.4
-;     --catlist := SUBST(name,'$,vv.4)
+;     --catlist := SUBST(name, '%, vv.4)
 ;     null vv => stackSemanticError(["can't make category of ",name],nil)
 ;     member(cat,first catlist) => true  --checks princ. ancestors
 ;     (u:= assoc(cat,CADR catlist)) and knownInfo(CADR u) => true
@@ -697,13 +697,13 @@
 ;     implem:=
 ;       (implem := assoc([name, :modemap], get(operator, 'modemap, e))) =>
 ;           CADADR implem
-;       name = "$" => ['ELT,name,-1]
-;       ['ELT,name,substitute('$,name,modemap)]
+;       name = "%" => ['ELT, name, -1]
+;       ['ELT, name, substitute('%, name, modemap)]
 ;     e := addModemap(operator, name, modemap, true, implem, e)
 ;     [vval, vmode, venv] := GetValue(name, e)
 ;     SAY("augmenting ",name,": ",u)
-;     key:= if CONTAINED("$",vmode) then "domain" else name
-;     cat:= ["CATEGORY",key,["SIGNATURE",operator,modemap]]
+;     key := if CONTAINED("%", vmode) then "domain" else name
+;     cat := ["CATEGORY", key, ["SIGNATURE", operator, modemap]]
 ;     put(name, "value", [vval, mkJoin(cat, vmode), venv], e)
 ;   u is ["has",name,cat] =>
 ;     [vval, vmode, venv] := GetValue(name, e)
@@ -825,10 +825,10 @@
                                   (|assoc| (CONS |name| |modemap|)
                                    (|get| |operator| '|modemap| |e|)))
                           (CADADR |implem|))
-                         ((EQ |name| '$) (LIST 'ELT |name| (- 1)))
+                         ((EQ |name| '%) (LIST 'ELT |name| (- 1)))
                          (#1#
                           (LIST 'ELT |name|
-                                (|substitute| '$ |name| |modemap|)))))
+                                (|substitute| '% |name| |modemap|)))))
                 (SETQ |e|
                         (|addModemap| |operator| |name| |modemap| T |implem|
                          |e|))
@@ -838,7 +838,7 @@
                 (SETQ |venv| (CADDR . #2#))
                 (SAY '|augmenting | |name| '|: | |u|)
                 (SETQ |key|
-                        (COND ((CONTAINED '$ |vmode|) '|domain|) (#1# |name|)))
+                        (COND ((CONTAINED '% |vmode|) '|domain|) (#1# |name|)))
                 (SETQ |cat|
                         (LIST 'CATEGORY |key|
                               (LIST 'SIGNATURE |operator| |modemap|)))

@@ -1,18 +1,18 @@
 
-(SDEFUN |INFINITY;infinity;Opc;1| (($ (|OnePointCompletion| (|Integer|))))
-        (SPADCALL (QREFELT $ 7))) 
+(SDEFUN |INFINITY;infinity;Opc;1| ((% (|OnePointCompletion| (|Integer|))))
+        (SPADCALL (QREFELT % 7))) 
 
-(SDEFUN |INFINITY;plusInfinity;Oc;2| (($ (|OrderedCompletion| (|Integer|))))
-        (SPADCALL (QREFELT $ 10))) 
+(SDEFUN |INFINITY;plusInfinity;Oc;2| ((% (|OrderedCompletion| (|Integer|))))
+        (SPADCALL (QREFELT % 10))) 
 
-(SDEFUN |INFINITY;minusInfinity;Oc;3| (($ (|OrderedCompletion| (|Integer|))))
-        (SPADCALL (QREFELT $ 12))) 
+(SDEFUN |INFINITY;minusInfinity;Oc;3| ((% (|OrderedCompletion| (|Integer|))))
+        (SPADCALL (QREFELT % 12))) 
 
 (DECLAIM (NOTINLINE |Infinity;|)) 
 
 (DEFUN |Infinity| ()
   (SPROG NIL
-         (PROG (#1=#:G698)
+         (PROG (#1=#:G452)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Infinity|))
@@ -27,16 +27,16 @@
                 (COND ((NOT #1#) (HREM |$ConstructorCache| '|Infinity|)))))))))) 
 
 (DEFUN |Infinity;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|Infinity|))
-          (LETT $ (GETREFV 14))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|Infinity| NIL (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 14))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|Infinity| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|Infinity| '|infovec|
           (LIST

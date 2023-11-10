@@ -1,84 +1,84 @@
 
-(SDEFUN |DISTEX;gaussianDistribution;RD;1| ((|a| (R)) ($ (|Distribution| R)))
+(SDEFUN |DISTEX;gaussianDistribution;RD;1| ((|a| (R)) (% (|Distribution| R)))
         (SPROG ((|cumu| (|Stream| R)))
                (SEQ
                 (LETT |cumu|
                       (SPADCALL
-                       (SPADCALL (LIST (|spadConstant| $ 7) |a|)
-                                 (QREFELT $ 10))
-                       (SPADCALL (LIST (|spadConstant| $ 7)) (QREFELT $ 13))
-                       (QREFELT $ 14)))
+                       (SPADCALL (LIST (|spadConstant| % 7) |a|)
+                                 (QREFELT % 10))
+                       (SPADCALL (LIST (|spadConstant| % 7)) (QREFELT % 13))
+                       (QREFELT % 14)))
                 (EXIT
-                 (SPADCALL (SPADCALL |cumu| (QREFELT $ 16)) (QREFELT $ 17)))))) 
+                 (SPADCALL (SPADCALL |cumu| (QREFELT % 16)) (QREFELT % 17)))))) 
 
-(SDEFUN |DISTEX;poissonDistribution;RD;2| ((|a| (R)) ($ (|Distribution| R)))
+(SDEFUN |DISTEX;poissonDistribution;RD;2| ((|a| (R)) (% (|Distribution| R)))
         (SPROG ((|cumu| (|Stream| R)))
-               (SEQ (LETT |cumu| (SPADCALL (LIST |a|) (QREFELT $ 13)))
+               (SEQ (LETT |cumu| (SPADCALL (LIST |a|) (QREFELT % 13)))
                     (EXIT
-                     (SPADCALL (SPADCALL |cumu| (QREFELT $ 16))
-                               (QREFELT $ 17)))))) 
+                     (SPADCALL (SPADCALL |cumu| (QREFELT % 16))
+                               (QREFELT % 17)))))) 
 
-(SDEFUN |DISTEX;wignerDistribution;RD;3| ((|a| (R)) ($ (|Distribution| R)))
+(SDEFUN |DISTEX;wignerDistribution;RD;3| ((|a| (R)) (% (|Distribution| R)))
         (SPROG ((|cumu| (|Stream| R)))
                (SEQ
                 (LETT |cumu|
                       (SPADCALL
-                       (SPADCALL (LIST (|spadConstant| $ 7) |a|)
-                                 (QREFELT $ 10))
-                       (SPADCALL (LIST (|spadConstant| $ 7)) (QREFELT $ 13))
-                       (QREFELT $ 14)))
+                       (SPADCALL (LIST (|spadConstant| % 7) |a|)
+                                 (QREFELT % 10))
+                       (SPADCALL (LIST (|spadConstant| % 7)) (QREFELT % 13))
+                       (QREFELT % 14)))
                 (EXIT
-                 (SPADCALL (SPADCALL |cumu| (QREFELT $ 16)) (QREFELT $ 20)))))) 
+                 (SPADCALL (SPADCALL |cumu| (QREFELT % 16)) (QREFELT % 20)))))) 
 
 (SDEFUN |DISTEX;freePoissonDistribution;RD;4|
-        ((|a| (R)) ($ (|Distribution| R)))
+        ((|a| (R)) (% (|Distribution| R)))
         (SPROG ((|cumu| (|Stream| R)))
-               (SEQ (LETT |cumu| (SPADCALL (LIST |a|) (QREFELT $ 13)))
+               (SEQ (LETT |cumu| (SPADCALL (LIST |a|) (QREFELT % 13)))
                     (EXIT
-                     (SPADCALL (SPADCALL |cumu| (QREFELT $ 16))
-                               (QREFELT $ 20)))))) 
+                     (SPADCALL (SPADCALL |cumu| (QREFELT % 16))
+                               (QREFELT % 20)))))) 
 
 (SDEFUN |DISTEX;bernoulliDistribution01;RD;5|
-        ((|a| (R)) ($ (|Distribution| R)))
+        ((|a| (R)) (% (|Distribution| R)))
         (SPROG ((|mom| (|Stream| R)))
-               (SEQ (LETT |mom| (SPADCALL (LIST |a|) (QREFELT $ 13)))
+               (SEQ (LETT |mom| (SPADCALL (LIST |a|) (QREFELT % 13)))
                     (EXIT
-                     (SPADCALL (SPADCALL |mom| (QREFELT $ 16))
-                               (QREFELT $ 23)))))) 
+                     (SPADCALL (SPADCALL |mom| (QREFELT % 16))
+                               (QREFELT % 23)))))) 
 
-(SDEFUN |DISTEX;arcsineDistribution;RD;6| ((|a| (R)) ($ (|Distribution| R)))
+(SDEFUN |DISTEX;arcsineDistribution;RD;6| ((|a| (R)) (% (|Distribution| R)))
         (SPROG
-         ((|mgf| (|Stream| R)) (#1=#:G713 NIL)
+         ((|mgf| (|Stream| R)) (#1=#:G459 NIL)
           (|half| (|Fraction| (|Integer|))))
          (SEQ
           (LETT |mgf|
                 (SPADCALL
                  (SPADCALL
-                  (SPADCALL (SPADCALL 2 (QREFELT $ 26)) |a| (QREFELT $ 27))
-                  (QREFELT $ 28))
-                 (SPADCALL (LIST (|spadConstant| $ 7)) (QREFELT $ 13))
-                 (QREFELT $ 29)))
-          (LETT |mgf| (SPADCALL (|spadConstant| $ 7) |mgf| (QREFELT $ 29)))
-          (LETT |half| (SPADCALL 1 2 (QREFELT $ 32)))
+                  (SPADCALL (SPADCALL 2 (QREFELT % 26)) |a| (QREFELT % 27))
+                  (QREFELT % 28))
+                 (SPADCALL (LIST (|spadConstant| % 7)) (QREFELT % 13))
+                 (QREFELT % 29)))
+          (LETT |mgf| (SPADCALL (|spadConstant| % 7) |mgf| (QREFELT % 29)))
+          (LETT |half| (SPADCALL 1 2 (QREFELT % 32)))
           (LETT |mgf|
                 (SPADCALL |half|
-                          (SPADCALL (|spadConstant| $ 30) |mgf| (QREFELT $ 29))
-                          (QREFELT $ 34)))
+                          (SPADCALL (|spadConstant| % 30) |mgf| (QREFELT % 29))
+                          (QREFELT % 34)))
           (LETT |mgf|
-                (PROG2 (LETT #1# (SPADCALL |mgf| (QREFELT $ 36)))
+                (PROG2 (LETT #1# (SPADCALL |mgf| (QREFELT % 36)))
                     (QCDR #1#)
-                  (|check_union2| (QEQCAR #1# 0) (|Stream| (QREFELT $ 6))
-                                  (|Union| (|Stream| (QREFELT $ 6)) "failed")
+                  (|check_union2| (QEQCAR #1# 0) (|Stream| (QREFELT % 6))
+                                  (|Union| (|Stream| (QREFELT % 6)) "failed")
                                   #1#)))
           (EXIT
-           (SPADCALL (SPADCALL (SPADCALL |mgf| (QREFELT $ 37)) (QREFELT $ 16))
-                     (QREFELT $ 23)))))) 
+           (SPADCALL (SPADCALL (SPADCALL |mgf| (QREFELT % 37)) (QREFELT % 16))
+                     (QREFELT % 23)))))) 
 
 (DECLAIM (NOTINLINE |DistributionPackage;|)) 
 
-(DEFUN |DistributionPackage| (#1=#:G717)
+(DEFUN |DistributionPackage| (#1=#:G463)
   (SPROG NIL
-         (PROG (#2=#:G718)
+         (PROG (#2=#:G464)
            (RETURN
             (COND
              ((LETT #2#
@@ -94,13 +94,13 @@
                   (HREM |$ConstructorCache| '|DistributionPackage|)))))))))) 
 
 (DEFUN |DistributionPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|DistributionPackage| DV$1))
-          (LETT $ (GETREFV 39))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 39))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
@@ -109,18 +109,18 @@
                                                                (|Fraction|
                                                                 (|Integer|))))))))
           (|haddProp| |$ConstructorCache| '|DistributionPackage| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
           (COND
            ((|testBitVector| |pv$| 1)
             (PROGN
-             (QSETREFV $ 38
+             (QSETREFV % 38
                        (CONS
                         (|dispatchFunction| |DISTEX;arcsineDistribution;RD;6|)
-                        $)))))
-          $))) 
+                        %)))))
+          %))) 
 
 (MAKEPROP '|DistributionPackage| '|infovec|
           (LIST

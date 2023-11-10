@@ -163,18 +163,14 @@
       ('T (SETQ |$ncMsgList| (CONS |msg| |$ncMsgList|)))))))
 
 ; putDatabaseStuff msg ==
-;     [text,attributes] := getMsgInfoFromKey msg
-;     if attributes then setMsgUnforcedAttrList(msg,aL)
+;     text := getMsgInfoFromKey msg
 ;     setMsgText(msg,text)
 
 (DEFUN |putDatabaseStuff| (|msg|)
-  (PROG (|LETTMP#1| |text| |attributes|)
+  (PROG (|text|)
     (RETURN
      (PROGN
-      (SETQ |LETTMP#1| (|getMsgInfoFromKey| |msg|))
-      (SETQ |text| (CAR |LETTMP#1|))
-      (SETQ |attributes| (CADR |LETTMP#1|))
-      (COND (|attributes| (|setMsgUnforcedAttrList| |msg| |aL|)))
+      (SETQ |text| (|getMsgInfoFromKey| |msg|))
       (|setMsgText| |msg| |text|)))))
 
 ; getMsgInfoFromKey msg ==
@@ -183,12 +179,10 @@
 ;            getKeyedMsg msgKey
 ;         getMsgKey msg                  --temp oldmsgs
 ;     msgText := segmentKeyedMsg  msgText
-;     [msgText,attributes] := removeAttributes msgText
-;     msgText := substituteSegmentedMsg(msgText, getMsgArgL msg)
-;     [msgText,attributes]
+;     substituteSegmentedMsg(msgText, getMsgArgL msg)
 
 (DEFUN |getMsgInfoFromKey| (|msg|)
-  (PROG (|msgKey| |msgText| |LETTMP#1| |attributes|)
+  (PROG (|msgKey| |msgText|)
     (RETURN
      (PROGN
       (SETQ |msgText|
@@ -196,12 +190,7 @@
                ((SETQ |msgKey| (|getMsgKey?| |msg|)) (|getKeyedMsg| |msgKey|))
                ('T (|getMsgKey| |msg|))))
       (SETQ |msgText| (|segmentKeyedMsg| |msgText|))
-      (SETQ |LETTMP#1| (|removeAttributes| |msgText|))
-      (SETQ |msgText| (CAR |LETTMP#1|))
-      (SETQ |attributes| (CADR |LETTMP#1|))
-      (SETQ |msgText|
-              (|substituteSegmentedMsg| |msgText| (|getMsgArgL| |msg|)))
-      (LIST |msgText| |attributes|)))))
+      (|substituteSegmentedMsg| |msgText| (|getMsgArgL| |msg|))))))
 
 ; processChPosesForOneLine msgList ==
 ;     chPosList := posPointers msgList
@@ -1041,22 +1030,6 @@
 (DEFUN |getMsgCatAttr| (|msg| |cat|)
   (PROG () (RETURN (IFCDR (ASSQ |cat| (|ncAlist| |msg|))))))
 
-; setMsgUnforcedAttrList (msg,aL) ==
-;     for attr in aL repeat
-;         setMsgUnforcedAttr(msg,whichCat attr,attr)
-
-(DEFUN |setMsgUnforcedAttrList| (|msg| |aL|)
-  (PROG ()
-    (RETURN
-     ((LAMBDA (|bfVar#12| |attr|)
-        (LOOP
-         (COND
-          ((OR (ATOM |bfVar#12|) (PROGN (SETQ |attr| (CAR |bfVar#12|)) NIL))
-           (RETURN NIL))
-          ('T (|setMsgUnforcedAttr| |msg| (|whichCat| |attr|) |attr|)))
-         (SETQ |bfVar#12| (CDR |bfVar#12|))))
-      |aL| NIL))))
-
 ; setMsgUnforcedAttr(msg,cat,attr) ==
 ;     cat = 'catless => setMsgCatlessAttr(msg,attr)
 ;     not ASSQ(cat, ncAlist msg) => ncPutQ(msg,cat,attr)
@@ -1090,16 +1063,16 @@
     (RETURN
      (PROGN
       (SETQ |found| '|catless|)
-      ((LAMBDA (|bfVar#13| |cat|)
+      ((LAMBDA (|bfVar#12| |cat|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#13|) (PROGN (SETQ |cat| (CAR |bfVar#13|)) NIL))
+           ((OR (ATOM |bfVar#12|) (PROGN (SETQ |cat| (CAR |bfVar#12|)) NIL))
             (RETURN NIL))
            ('T
             (COND
              ((|ListMember?| |attr| (EVAL |cat|)) (SETQ |found| |cat|)
               (RETURN |found|)))))
-          (SETQ |bfVar#13| (CDR |bfVar#13|))))
+          (SETQ |bfVar#12| (CDR |bfVar#12|))))
        |$attrCats| NIL)
       |found|))))
 
@@ -1118,17 +1091,17 @@
      (PROGN
       (SETQ |st| (|make_full_CVEC| (- |$preLength| 3)))
       (SETQ |oldPos| (- 1))
-      ((LAMBDA (|bfVar#15| |bfVar#14|)
+      ((LAMBDA (|bfVar#14| |bfVar#13|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#15|)
-                (PROGN (SETQ |bfVar#14| (CAR |bfVar#15|)) NIL))
+           ((OR (ATOM |bfVar#14|)
+                (PROGN (SETQ |bfVar#13| (CAR |bfVar#14|)) NIL))
             (RETURN NIL))
            (#1='T
-            (AND (CONSP |bfVar#14|)
+            (AND (CONSP |bfVar#13|)
                  (PROGN
-                  (SETQ |posNum| (CAR |bfVar#14|))
-                  (SETQ |posLetter| (CDR |bfVar#14|))
+                  (SETQ |posNum| (CAR |bfVar#13|))
+                  (SETQ |posLetter| (CDR |bfVar#13|))
                   #1#)
                  (PROGN
                   (SETQ |st|
@@ -1136,7 +1109,7 @@
                            (|rep| (|char| '|.|) (- (- |posNum| |oldPos|) 1))
                            |posLetter|))
                   (SETQ |oldPos| |posNum|)))))
-          (SETQ |bfVar#15| (CDR |bfVar#15|))))
+          (SETQ |bfVar#14| (CDR |bfVar#14|))))
        (REVERSE |chPosList|) NIL)
       (LIST '|leader| |$nopos| '|nokey| NIL NIL (LIST |st|))))))
 

@@ -23,9 +23,9 @@
 ;     dom.0 := ['Record, :[['_:, first a, devaluate rest a] for a in args]]
 ;     dom.1 :=
 ;            [function lookupInTable,dom,
-;                [['_=,[[['Boolean],'_$,'_$],:6]],
-;                 ['_~_=,[[['Boolean],'_$,'_$],:10]],
-;                  ['coerce, [[$OutputForm, '_$], :7]]]]
+;                [['_=,[[['Boolean], '%, '%], :6]],
+;                 ['_~_=,[[['Boolean], '%, '%], :10]],
+;                  ['coerce, [[$OutputForm, '%], :7]]]]
 ;     dom.2 := NIL
 ;     dom.3 := ['RecordCategory,:QCDR dom.0]
 ;     dom.4 :=
@@ -65,9 +65,9 @@
                      NIL |args| NIL)))
       (SETF (ELT |dom| 1)
               (LIST #'|lookupInTable| |dom|
-                    (LIST (LIST '= (CONS (LIST (LIST '|Boolean|) '$ '$) 6))
-                          (LIST '~= (CONS (LIST (LIST '|Boolean|) '$ '$) 10))
-                          (LIST '|coerce| (CONS (LIST |$OutputForm| '$) 7)))))
+                    (LIST (LIST '= (CONS (LIST (LIST '|Boolean|) '% '%) 6))
+                          (LIST '~= (CONS (LIST (LIST '|Boolean|) '% '%) 10))
+                          (LIST '|coerce| (CONS (LIST |$OutputForm| '%) 7)))))
       (SETF (ELT |dom| 2) NIL)
       (SETF (ELT |dom| 3) (CONS '|RecordCategory| (QCDR (ELT |dom| 0))))
       (SETF (ELT |dom| 4)
@@ -174,10 +174,10 @@
              (|coerceByFunction| (|objNewWrap| |x| |m|) |$OutputForm|)))))))
 
 ; findEqualFun(dom) ==
-;   compiledLookup('_=,[$Boolean,'$,'$],dom)
+;     compiledLookup('_=, [$Boolean, '%, '%], dom)
 
 (DEFUN |findEqualFun| (|dom|)
-  (PROG () (RETURN (|compiledLookup| '= (LIST |$Boolean| '$ '$) |dom|))))
+  (PROG () (RETURN (|compiledLookup| '= (LIST |$Boolean| '% '%) |dom|))))
 
 ; coerceRe2E(x,source) ==
 ;   n := #rest(source)
@@ -246,9 +246,9 @@
 ;                           else devaluate a) for a in args]]
 ;     dom.1 :=
 ;             [function lookupInTable,dom,
-;                [['_=,[[['Boolean],'_$,'_$],:6]],
-;                 ['_~_=, [[['Boolean],'_$,'_$],:9]],
-;                  ['coerce,[[$OutputForm, '_$],:7]]]]
+;                [['_=, [[['Boolean], '%, '%], :6]],
+;                 ['_~_=, [[['Boolean], '%, '%], :9]],
+;                  ['coerce,[[$OutputForm, '%], :7]]]]
 ;     dom.2 := NIL
 ;     dom.3 :=
 ;       '(SetCategory)
@@ -300,9 +300,9 @@
                      NIL |args| NIL)))
       (SETF (ELT |dom| 1)
               (LIST #'|lookupInTable| |dom|
-                    (LIST (LIST '= (CONS (LIST (LIST '|Boolean|) '$ '$) 6))
-                          (LIST '~= (CONS (LIST (LIST '|Boolean|) '$ '$) 9))
-                          (LIST '|coerce| (CONS (LIST |$OutputForm| '$) 7)))))
+                    (LIST (LIST '= (CONS (LIST (LIST '|Boolean|) '% '%) 6))
+                          (LIST '~= (CONS (LIST (LIST '|Boolean|) '% '%) 9))
+                          (LIST '|coerce| (CONS (LIST |$OutputForm| '%) 7)))))
       (SETF (ELT |dom| 2) NIL)
       (SETF (ELT |dom| 3) '(|SetCategory|))
       (SETF (ELT |dom| 4)
@@ -490,8 +490,8 @@
 ;     dom.0 := ['Mapping, :[devaluate a for a in args]]
 ;     dom.1 :=
 ;             [function lookupInTable,dom,
-;                [['_=,[[['Boolean],'_$,'_$],:6]],
-;                  ['coerce,[[$OutputForm, '_$],:7]]]]
+;                [['_=, [[['Boolean], '%, '%], :6]],
+;                  ['coerce, [[$OutputForm, '%], :7]]]]
 ;     dom.2 := NIL
 ;     dom.3 :=
 ;       '(SetCategory)
@@ -525,8 +525,8 @@
                      NIL |args| NIL)))
       (SETF (ELT |dom| 1)
               (LIST #'|lookupInTable| |dom|
-                    (LIST (LIST '= (CONS (LIST (LIST '|Boolean|) '$ '$) 6))
-                          (LIST '|coerce| (CONS (LIST |$OutputForm| '$) 7)))))
+                    (LIST (LIST '= (CONS (LIST (LIST '|Boolean|) '% '%) 6))
+                          (LIST '|coerce| (CONS (LIST |$OutputForm| '%) 7)))))
       (SETF (ELT |dom| 2) NIL)
       (SETF (ELT |dom| 3) '(|SetCategory|))
       (SETF (ELT |dom| 4)
@@ -575,8 +575,8 @@
 ;     dom.0 := ['Enumeration, :args]
 ;     dom.1 :=
 ;            [function lookupInTable,dom,
-;                [['_=,[[['Boolean],'_$,'_$],:6]],
-;                  ['coerce,[[$OutputForm, '_$],:7], [['_$, $Symbol], :8]]
+;                [['_=, [[['Boolean], '%, '%], :6]],
+;                  ['coerce, [[$OutputForm, '%], :7], [['%, $Symbol], :8]]
 ;                          ]]
 ;     dom.2 := NIL
 ;     dom.3 := ['EnumerationCategory,:QCDR dom.0]
@@ -598,9 +598,9 @@
       (SETF (ELT |dom| 0) (CONS '|Enumeration| |args|))
       (SETF (ELT |dom| 1)
               (LIST #'|lookupInTable| |dom|
-                    (LIST (LIST '= (CONS (LIST (LIST '|Boolean|) '$ '$) 6))
-                          (LIST '|coerce| (CONS (LIST |$OutputForm| '$) 7)
-                                (CONS (LIST '$ |$Symbol|) 8)))))
+                    (LIST (LIST '= (CONS (LIST (LIST '|Boolean|) '% '%) 6))
+                          (LIST '|coerce| (CONS (LIST |$OutputForm| '%) 7)
+                                (CONS (LIST '% |$Symbol|) 8)))))
       (SETF (ELT |dom| 2) NIL)
       (SETF (ELT |dom| 3) (CONS '|EnumerationCategory| (QCDR (ELT |dom| 0))))
       (SETF (ELT |dom| 4)
@@ -632,7 +632,7 @@
 ;   val := -1
 ;   for v in args for i in 0.. repeat
 ;      sym=v => return(val:=i)
-;   val<0 => error ["Cannot coerce",sym,"to",["Enumeration",:args]]
+;   val<0 => error ['"Cannot coerce",sym,'"to",['"Enumeration",:args]]
 ;   val
 
 (DEFUN |createEnum| (|sym| |dom|)
@@ -654,7 +654,7 @@
       (COND
        ((MINUSP |val|)
         (|error|
-         (LIST '|Cannot coerce| |sym| '|to| (CONS '|Enumeration| |args|))))
+         (LIST "Cannot coerce" |sym| "to" (CONS "Enumeration" |args|))))
        (#1# |val|))))))
 
 ; get_oplist_maker(op) ==
@@ -690,7 +690,7 @@
 ; constructorCategory (title is [op,:.]) ==
 ;   constructorFunction := get_oplist_maker(op) or
 ;               systemErrorHere '"constructorCategory"
-;   [funlist,.]:= FUNCALL(constructorFunction,"$",title,$CategoryFrame)
+;   [funlist, .] := FUNCALL(constructorFunction, "%", title, $CategoryFrame)
 ;   oplist:= [[[a,b],true,c] for [a,b,c] in funlist]
 ;   cat:=
 ;       JoinInner([SetCategory(), mkCategory(oplist, nil, nil, nil)])
@@ -707,7 +707,7 @@
               (OR (|get_oplist_maker| |op|)
                   (|systemErrorHere| "constructorCategory")))
       (SETQ |LETTMP#1|
-              (FUNCALL |constructorFunction| '$ |title| |$CategoryFrame|))
+              (FUNCALL |constructorFunction| '% |title| |$CategoryFrame|))
       (SETQ |funlist| (CAR |LETTMP#1|))
       (SETQ |oplist|
               ((LAMBDA (|bfVar#23| |bfVar#22| |bfVar#21|)
@@ -744,7 +744,7 @@
 ;     [['_=,[['Boolean],nam ,nam],['ELT,dc,6]],
 ;      ['_~_=, [['Boolean], nam, nam], ['ELT, dc, 9]],
 ;        ['coerce, [$OutputForm, nam], ['ELT, dc, 7]]]
-;   [substitute(nam,dc,substitute("$",'Rep,sigFunAlist)),e]
+;   [substitute(nam, dc, substitute("%", 'Rep, sigFunAlist)), e]
 
 (DEFUN |mkMappingFunList| (|nam| |mapForm| |e|)
   (PROG (|dc| |sigFunAlist|)
@@ -758,7 +758,7 @@
                (LIST '~= (LIST (LIST '|Boolean|) |nam| |nam|)
                      (LIST 'ELT |dc| 9))
                (LIST '|coerce| (LIST |$OutputForm| |nam|) (LIST 'ELT |dc| 7))))
-      (LIST (|substitute| |nam| |dc| (|substitute| '$ '|Rep| |sigFunAlist|))
+      (LIST (|substitute| |nam| |dc| (|substitute| '% '|Rep| |sigFunAlist|))
             |e|)))))
 
 ; mkRecordFunList(nam,['Record,:Alist],e) ==
@@ -784,7 +784,7 @@
 ;               for i in 0.. for [.,a,A] in Alist],:
 ;                 [['copy,[nam,nam],['XLAM,["$1"],['RECORDCOPY,
 ;                   "$1",len]]]]]
-;   [substitute(nam,dc,substitute("$",'Rep,sigFunAlist)),e]
+;   [substitute(nam, dc, substitute("%", 'Rep, sigFunAlist)), e]
 
 (DEFUN |mkRecordFunList| (|nam| |bfVar#33| |e|)
   (PROG (|Alist| |len| |dc| |ISTMP#1| |a| |ISTMP#2| A |sigFunAlist|)
@@ -896,12 +896,12 @@
                      (LIST '|copy| (LIST |nam| |nam|)
                            (LIST 'XLAM (LIST '$1)
                                  (LIST 'RECORDCOPY '$1 |len|)))))))))))
-      (LIST (|substitute| |nam| |dc| (|substitute| '$ '|Rep| |sigFunAlist|))
+      (LIST (|substitute| |nam| |dc| (|substitute| '% '|Rep| |sigFunAlist|))
             |e|)))))
 
 ; mkNewUnionFunList(name,form is ['Union,:listOfEntries],e) ==
 ;   dc := name
-;   if name = 'Rep then name := '$
+;   if name = 'Rep then name := '%
 ;   --2. create coercions from subtypes to subUnion
 ;   cList:=
 ;     [['_=,[['Boolean],name ,name],['ELT,dc,6]],
@@ -928,7 +928,7 @@
      (PROGN
       (SETQ |listOfEntries| (CDR |form|))
       (SETQ |dc| |name|)
-      (COND ((EQ |name| '|Rep|) (SETQ |name| '$)))
+      (COND ((EQ |name| '|Rep|) (SETQ |name| '%)))
       (SETQ |cList|
               (CONS
                (LIST '= (LIST (LIST '|Boolean|) |name| |name|)
@@ -1082,7 +1082,7 @@
 ;                   ['XLAM,["#1"],['QEQCAR,x,n]]
 ;                 ['XLAM,["#1"],p]
 ;   op:=
-;     op='Rep => '$
+;     op = 'Rep => '%
 ;     op
 ;   cList:= substitute(op,g,cList)
 ;   [cList,e]
@@ -1272,6 +1272,6 @@
                         (SETQ |bfVar#38| (CDR |bfVar#38|))
                         (SETQ |bfVar#39| (CDR |bfVar#39|))))
                      NIL |predList| NIL |listOfEntries| NIL)))))
-         (SETQ |op| (COND ((EQ |op| '|Rep|) '$) (#1# |op|)))
+         (SETQ |op| (COND ((EQ |op| '|Rep|) '%) (#1# |op|)))
          (SETQ |cList| (|substitute| |op| |g| |cList|))
          (LIST |cList| |e|))))))))

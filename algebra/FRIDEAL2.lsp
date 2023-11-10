@@ -1,9 +1,9 @@
 
-(SDEFUN |FRIDEAL2;fmap| ((|f| (|Mapping| F2 F1)) (|a| (A1)) ($ (A2)))
+(SDEFUN |FRIDEAL2;fmap| ((|f| (|Mapping| F2 F1)) (|a| (A1)) (% (A2)))
         (SPROG
-         ((#1=#:G699 NIL) (#2=#:G701 NIL) (|i| NIL) (#3=#:G700 NIL)
+         ((#1=#:G452 NIL) (#2=#:G454 NIL) (|i| NIL) (#3=#:G453 NIL)
           (|v| (|Vector| F1)))
-         (SEQ (LETT |v| (SPADCALL |a| (QREFELT $ 15)))
+         (SEQ (LETT |v| (SPADCALL |a| (QREFELT % 15)))
               (EXIT
                (SPADCALL
                 (PROGN
@@ -11,7 +11,7 @@
                        (GETREFV
                         (|inc_SI|
                          (- #4=(QVSIZE |v|)
-                            #5=(SPADCALL |v| (QREFELT $ 17))))))
+                            #5=(SPADCALL |v| (QREFELT % 17))))))
                  (SEQ (LETT |i| #5#) (LETT #2# #4#) (LETT #1# 0) G190
                       (COND ((> |i| #2#) (GO G191)))
                       (SEQ
@@ -20,15 +20,15 @@
                       (LETT #1# (PROG1 (|inc_SI| #1#) (LETT |i| (+ |i| 1))))
                       (GO G190) G191 (EXIT NIL))
                  #3#)
-                (QREFELT $ 19)))))) 
+                (QREFELT % 19)))))) 
 
 (SDEFUN |FRIDEAL2;map;MFiFi;2|
         ((|f| (|Mapping| R2 R1)) (|i| (|FractionalIdeal| R1 F1 U1 A1))
-         ($ (|FractionalIdeal| R2 F2 U2 A2)))
+         (% (|FractionalIdeal| R2 F2 U2 A2)))
         (SPROG
-         ((#1=#:G708 NIL) (#2=#:G710 NIL) (|j| NIL) (#3=#:G709 NIL)
+         ((#1=#:G461 NIL) (#2=#:G463 NIL) (|j| NIL) (#3=#:G462 NIL)
           (|b| (|Vector| A1)))
-         (SEQ (LETT |b| (SPADCALL |i| (QREFELT $ 22)))
+         (SEQ (LETT |b| (SPADCALL |i| (QREFELT % 22)))
               (EXIT
                (SPADCALL
                 (PROGN
@@ -36,7 +36,7 @@
                        (GETREFV
                         (|inc_SI|
                          (- #4=(QVSIZE |b|)
-                            #5=(SPADCALL |b| (QREFELT $ 23))))))
+                            #5=(SPADCALL |b| (QREFELT % 23))))))
                  (SEQ (LETT |j| #5#) (LETT #2# #4#) (LETT #1# 0) G190
                       (COND ((> |j| #2#) (GO G191)))
                       (SEQ
@@ -44,28 +44,28 @@
                         (SETELT #3# #1#
                                 (|FRIDEAL2;fmap|
                                  (CONS #'|FRIDEAL2;map;MFiFi;2!0|
-                                       (VECTOR |f| $))
-                                 (QAREF1O |b| |j| 1) $))))
+                                       (VECTOR |f| %))
+                                 (QAREF1O |b| |j| 1) %))))
                       (LETT #1# (PROG1 (|inc_SI| #1#) (LETT |j| (+ |j| 1))))
                       (GO G190) G191 (EXIT NIL))
                  #3#)
-                (QREFELT $ 29)))))) 
+                (QREFELT % 29)))))) 
 
 (SDEFUN |FRIDEAL2;map;MFiFi;2!0| ((|s| NIL) ($$ NIL))
-        (PROG ($ |f|)
-          (LETT $ (QREFELT $$ 1))
+        (PROG (% |f|)
+          (LETT % (QREFELT $$ 1))
           (LETT |f| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPADCALL (SPADCALL (SPADCALL |s| (QREFELT $ 24)) |f|)
-                      (SPADCALL (SPADCALL |s| (QREFELT $ 25)) |f|)
-                      (QREFELT $ 26)))))) 
+            (SPADCALL (SPADCALL (SPADCALL |s| (QREFELT % 24)) |f|)
+                      (SPADCALL (SPADCALL |s| (QREFELT % 25)) |f|)
+                      (QREFELT % 26)))))) 
 
 (DECLAIM (NOTINLINE |FractionalIdealFunctions2;|)) 
 
-(DEFUN |FractionalIdealFunctions2| (&REST #1=#:G711)
+(DEFUN |FractionalIdealFunctions2| (&REST #1=#:G464)
   (SPROG NIL
-         (PROG (#2=#:G712)
+         (PROG (#2=#:G465)
            (RETURN
             (COND
              ((LETT #2#
@@ -85,7 +85,7 @@
 
 (DEFUN |FractionalIdealFunctions2;| (|#1| |#2| |#3| |#4| |#5| |#6| |#7| |#8|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$8 NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$8 NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL)
     (DV$4 NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -99,22 +99,22 @@
     (LETT |dv$|
           (LIST '|FractionalIdealFunctions2| DV$1 DV$2 DV$3 DV$4 DV$5 DV$6 DV$7
                 DV$8))
-    (LETT $ (GETREFV 32))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (LETT % (GETREFV 32))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|FractionalIdealFunctions2|
-                (LIST DV$1 DV$2 DV$3 DV$4 DV$5 DV$6 DV$7 DV$8) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (QSETREFV $ 10 |#5|)
-    (QSETREFV $ 11 |#6|)
-    (QSETREFV $ 12 |#7|)
-    (QSETREFV $ 13 |#8|)
-    (SETF |pv$| (QREFELT $ 3))
-    $))) 
+                (LIST DV$1 DV$2 DV$3 DV$4 DV$5 DV$6 DV$7 DV$8) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (QSETREFV % 10 |#5|)
+    (QSETREFV % 11 |#6|)
+    (QSETREFV % 12 |#7|)
+    (QSETREFV % 13 |#8|)
+    (SETF |pv$| (QREFELT % 3))
+    %))) 
 
 (MAKEPROP '|FractionalIdealFunctions2| '|infovec|
           (LIST

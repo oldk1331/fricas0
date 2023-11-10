@@ -1,15 +1,15 @@
 
 (SDEFUN |DIOSP;dioSolve;ER;1|
         ((|eq| (|Equation| (|Polynomial| (|Integer|))))
-         ($
+         (%
           (|Record| (|:| |varOrder| (|List| (|Symbol|)))
                     (|:| |inhom|
                          (|Union| (|List| (|Vector| (|NonNegativeInteger|)))
                                   "failed"))
                     (|:| |hom| (|List| (|Vector| (|NonNegativeInteger|)))))))
         (SPROG
-         ((|vars| (|List| (|Symbol|))) (#1=#:G733 NIL) (|x| NIL)
-          (#2=#:G732 NIL) (|ihs| #3=(|List| (|Vector| (|NonNegativeInteger|))))
+         ((|vars| (|List| (|Symbol|))) (#1=#:G481 NIL) (|x| NIL)
+          (#2=#:G480 NIL) (|ihs| #3=(|List| (|Vector| (|NonNegativeInteger|))))
           (|hs| #3#) (|sol| (|Vector| (|NonNegativeInteger|)))
           (|graph|
            (|Record|
@@ -19,37 +19,37 @@
                             (|:| |is_free| (|Boolean|)))))
             (|:| |dim| (|NonNegativeInteger|)) (|:| |zeroNode| (|Integer|))))
           (|mon| (|List| (|Polynomial| (|Integer|)))) (|c| (|Integer|))
-          (#4=#:G731 NIL) (|n| (|NonNegativeInteger|))
+          (#4=#:G479 NIL) (|n| (|NonNegativeInteger|))
           (|p| (|Polynomial| (|Integer|))))
          (SEQ
           (LETT |p|
-                (SPADCALL (SPADCALL |eq| (QREFELT $ 8))
-                          (SPADCALL |eq| (QREFELT $ 9)) (QREFELT $ 10)))
-          (LETT |n| (SPADCALL |p| (QREFELT $ 12)))
+                (SPADCALL (SPADCALL |eq| (QREFELT % 8))
+                          (SPADCALL |eq| (QREFELT % 9)) (QREFELT % 10)))
+          (LETT |n| (SPADCALL |p| (QREFELT % 12)))
           (COND
            ((OR (EQL |n| 0) (> |n| 1))
             (EXIT (|error| "a linear Diophantine equation is expected"))))
           (LETT |mon| NIL) (LETT |c| 0)
-          (SEQ (LETT |x| NIL) (LETT #4# (SPADCALL |p| (QREFELT $ 14))) G190
+          (SEQ (LETT |x| NIL) (LETT #4# (SPADCALL |p| (QREFELT % 14))) G190
                (COND
                 ((OR (ATOM #4#) (PROGN (LETT |x| (CAR #4#)) NIL)) (GO G191)))
                (SEQ
                 (EXIT
                  (COND
-                  ((SPADCALL |x| (QREFELT $ 16))
-                   (LETT |c| (SPADCALL |x| (QREFELT $ 18))))
+                  ((SPADCALL |x| (QREFELT % 16))
+                   (LETT |c| (SPADCALL |x| (QREFELT % 18))))
                   ('T (LETT |mon| (CONS |x| |mon|))))))
                (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT NIL))
-          (LETT |graph| (|DIOSP;initializeGraph| |mon| |c| $))
-          (LETT |sol| (SPADCALL (QVELT |graph| 1) (QREFELT $ 20)))
+          (LETT |graph| (|DIOSP;initializeGraph| |mon| |c| %))
+          (LETT |sol| (SPADCALL (QVELT |graph| 1) (QREFELT % 20)))
           (LETT |hs|
                 (|DIOSP;findSolutions| |sol| (QVELT |graph| 2) 1 1 |graph| 'T
-                 $))
+                 %))
           (LETT |ihs|
                 (COND ((EQL |c| 0) (LIST |sol|))
                       (#5='T
                        (|DIOSP;findSolutions| |sol| (+ (QVELT |graph| 2) |c|) 1
-                        1 |graph| NIL $))))
+                        1 |graph| NIL %))))
           (LETT |vars|
                 (PROGN
                  (LETT #2# NIL)
@@ -60,7 +60,7 @@
                       (SEQ
                        (EXIT
                         (LETT #2#
-                              (CONS (|SPADfirst| (SPADCALL |x| (QREFELT $ 22)))
+                              (CONS (|SPADfirst| (SPADCALL |x| (QREFELT % 22)))
                                     #2#))))
                       (LETT #1# (CDR #1#)) (GO G190) G191
                       (EXIT (NREVERSE #2#)))))
@@ -71,7 +71,7 @@
 
 (SDEFUN |DIOSP;initializeGraph|
         ((|mon| (|List| (|Polynomial| (|Integer|)))) (|c| (|Integer|))
-         ($
+         (%
           (|Record|
            (|:| |vn|
                 (|Vector|
@@ -79,10 +79,10 @@
                            (|:| |is_free| (|Boolean|)))))
            (|:| |dim| (|NonNegativeInteger|)) (|:| |zeroNode| (|Integer|)))))
         (SPROG
-         ((#1=#:G750 NIL) (#2=#:G752 NIL) (|i| NIL) (#3=#:G751 NIL)
+         ((#1=#:G496 NIL) (#2=#:G498 NIL) (|i| NIL) (#3=#:G497 NIL)
           (|n| (|Integer|)) (|m| (|Integer|)) (|k| (|NonNegativeInteger|))
-          (|coeffs| (|Vector| (|Integer|))) (#4=#:G749 NIL) (|x| NIL)
-          (#5=#:G748 NIL))
+          (|coeffs| (|Vector| (|Integer|))) (#4=#:G495 NIL) (|x| NIL)
+          (#5=#:G494 NIL))
          (SEQ
           (LETT |coeffs|
                 (SPADCALL
@@ -96,14 +96,14 @@
                         (EXIT
                          (LETT #5#
                                (CONS
-                                (|SPADfirst| (SPADCALL |x| (QREFELT $ 27)))
+                                (|SPADfirst| (SPADCALL |x| (QREFELT % 27)))
                                 #5#))))
                        (LETT #4# (CDR #4#)) (GO G190) G191
                        (EXIT (NREVERSE #5#))))
-                 (QREFELT $ 29)))
+                 (QREFELT % 29)))
           (LETT |k| (QVSIZE |coeffs|))
-          (LETT |m| (MIN |c| (SPADCALL (ELT $ 30) |coeffs| (QREFELT $ 32))))
-          (LETT |n| (MAX |c| (SPADCALL (ELT $ 33) |coeffs| (QREFELT $ 32))))
+          (LETT |m| (MIN |c| (SPADCALL (ELT % 30) |coeffs| (QREFELT % 32))))
+          (LETT |n| (MAX |c| (SPADCALL (ELT % 33) |coeffs| (QREFELT % 32))))
           (EXIT
            (VECTOR
             (PROGN
@@ -114,7 +114,7 @@
                    (EXIT
                     (SETELT #3# #1#
                             (|DIOSP;createNode| |i| |coeffs| |k| (- 1 |m|)
-                             $))))
+                             %))))
                   (LETT #1# (PROG1 (|inc_SI| #1#) (LETT |i| (+ |i| 1))))
                   (GO G190) G191 (EXIT NIL))
              #3#)
@@ -123,13 +123,13 @@
 (SDEFUN |DIOSP;createNode|
         ((|ind| (|Integer|)) (|coeffs| (|Vector| (|Integer|)))
          (|k| (|NonNegativeInteger|)) (|zeroNode| (|Integer|))
-         ($
+         (%
           (|Record| (|:| |vert| (|Vector| (|Integer|)))
                     (|:| |is_free| (|Boolean|)))))
         (SPROG
-         ((#1=#:G761 NIL) (#2=#:G760 NIL) (#3=#:G762 NIL) (|i| NIL)
+         ((#1=#:G507 NIL) (#2=#:G506 NIL) (#3=#:G508 NIL) (|i| NIL)
           (|v| (|Vector| (|Integer|))))
-         (SEQ (LETT |v| (SPADCALL |k| (QREFELT $ 34)))
+         (SEQ (LETT |v| (SPADCALL |k| (QREFELT % 34)))
               (SEQ (LETT |i| 1) (LETT #3# |k|) G190
                    (COND ((|greater_SI| |i| #3#) (GO G191)))
                    (SEQ
@@ -139,29 +139,29 @@
                        (SEQ
                         (EXIT
                          (COND
-                          ((< (SPADCALL |coeffs| |i| (QREFELT $ 35)) 0)
+                          ((< (SPADCALL |coeffs| |i| (QREFELT % 35)) 0)
                            (PROGN
                             (LETT #2#
                                   (SPADCALL |v| |i|
                                             (+ (+ |zeroNode| |ind|)
                                                (SPADCALL |coeffs| |i|
-                                                         (QREFELT $ 35)))
-                                            (QREFELT $ 36)))
-                            (GO #4=#:G755)))))
+                                                         (QREFELT % 35)))
+                                            (QREFELT % 36)))
+                            (GO #4=#:G501)))))
                         #4# (EXIT #2#)))
                       ('T
                        (SEQ
                         (EXIT
                          (COND
-                          ((> (SPADCALL |coeffs| |i| (QREFELT $ 35)) 0)
+                          ((> (SPADCALL |coeffs| |i| (QREFELT % 35)) 0)
                            (PROGN
                             (LETT #1#
                                   (SPADCALL |v| |i|
                                             (+ (+ |zeroNode| |ind|)
                                                (SPADCALL |coeffs| |i|
-                                                         (QREFELT $ 35)))
-                                            (QREFELT $ 36)))
-                            (GO #5=#:G756)))))
+                                                         (QREFELT % 35)))
+                                            (QREFELT % 36)))
+                            (GO #5=#:G502)))))
                         #5# (EXIT #1#))))))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
               (EXIT (CONS |v| 'T))))) 
@@ -176,17 +176,17 @@
                  (|Record| (|:| |vert| #2=(|Vector| (|Integer|)))
                            (|:| |is_free| (|Boolean|)))))
            (|:| |dim| (|NonNegativeInteger|)) (|:| |zeroNode| (|Integer|))))
-         (|flag| (|Boolean|)) ($ (|List| (|Vector| (|NonNegativeInteger|)))))
+         (|flag| (|Boolean|)) (% (|List| (|Vector| (|NonNegativeInteger|)))))
         (SPROG
          ((|sols| (|List| (|Vector| (|NonNegativeInteger|))))
           (|s| (|List| (|Vector| (|NonNegativeInteger|))))
-          (|x| (|NonNegativeInteger|)) (#3=#:G778 NIL) (|i| NIL) (|k| #1#)
+          (|x| (|NonNegativeInteger|)) (#3=#:G524 NIL) (|i| NIL) (|k| #1#)
           (|v| #2#)
           (|node|
            (|Record| (|:| |vert| (|Vector| (|Integer|)))
                      (|:| |is_free| (|Boolean|)))))
          (SEQ (LETT |sols| NIL)
-              (LETT |node| (SPADCALL (QVELT |graph| 0) |ind| (QREFELT $ 39)))
+              (LETT |node| (SPADCALL (QVELT |graph| 0) |ind| (QREFELT % 39)))
               (EXIT
                (COND
                 ((QCDR |node|)
@@ -197,32 +197,32 @@
                                   (#4='T |n|)))
                       (SEQ (LETT |i| |k|) (LETT #3# (QVELT |graph| 1)) G190
                            (COND ((> |i| #3#) (GO G191)))
-                           (SEQ (LETT |x| (SPADCALL |sol| |i| (QREFELT $ 40)))
+                           (SEQ (LETT |x| (SPADCALL |sol| |i| (QREFELT % 40)))
                                 (EXIT
                                  (COND
-                                  ((> (SPADCALL |v| |i| (QREFELT $ 35)) 0)
+                                  ((> (SPADCALL |v| |i| (QREFELT % 35)) 0)
                                    (SEQ
                                     (SPADCALL |sol| |i| (+ |x| 1)
-                                              (QREFELT $ 41))
+                                              (QREFELT % 41))
                                     (EXIT
                                      (COND
-                                      ((EQL (SPADCALL |v| |i| (QREFELT $ 35))
+                                      ((EQL (SPADCALL |v| |i| (QREFELT % 35))
                                             (QVELT |graph| 2))
                                        (COND
                                         ((|DIOSP;verifyMinimality| |sol|
-                                          |graph| |flag| $)
+                                          |graph| |flag| %)
                                          (SEQ
                                           (LETT |sols|
                                                 (CONS
                                                  (SPADCALL |sol|
-                                                           (QREFELT $ 42))
+                                                           (QREFELT % 42))
                                                  |sols|))
                                           (EXIT
                                            (SPADCALL |sol| |i| |x|
-                                                     (QREFELT $ 41)))))
+                                                     (QREFELT % 41)))))
                                         ('T
                                          (SPADCALL |sol| |i| |x|
-                                                   (QREFELT $ 41)))))
+                                                   (QREFELT % 41)))))
                                       ('T
                                        (SEQ
                                         (LETT |s|
@@ -230,19 +230,19 @@
                                                ((< |ind| (QVELT |graph| 2))
                                                 (|DIOSP;findSolutions| |sol|
                                                  (SPADCALL |v| |i|
-                                                           (QREFELT $ 35))
-                                                 |i| |n| |graph| |flag| $))
+                                                           (QREFELT % 35))
+                                                 |i| |n| |graph| |flag| %))
                                                ('T
                                                 (|DIOSP;findSolutions| |sol|
                                                  (SPADCALL |v| |i|
-                                                           (QREFELT $ 35))
-                                                 |m| |i| |graph| |flag| $))))
+                                                           (QREFELT % 35))
+                                                 |m| |i| |graph| |flag| %))))
                                         (LETT |sols|
                                               (SPADCALL |s| |sols|
-                                                        (QREFELT $ 44)))
+                                                        (QREFELT % 44)))
                                         (EXIT
                                          (SPADCALL |sol| |i| |x|
-                                                   (QREFELT $ 41))))))))))))
+                                                   (QREFELT % 41))))))))))))
                            (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL))
                       (PROGN (RPLACD |node| 'T) (QCDR |node|)) (EXIT |sols|)))
                 (#4# |sols|)))))) 
@@ -256,9 +256,9 @@
                  (|Record| (|:| |vert| (|Vector| (|Integer|)))
                            (|:| |is_free| (|Boolean|)))))
            (|:| |dim| (|NonNegativeInteger|)) (|:| |zeroNode| (|Integer|))))
-         (|flag| (|Boolean|)) ($ (|Boolean|)))
+         (|flag| (|Boolean|)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G782 NIL) (|x| (|NonNegativeInteger|))
+         ((#1=#:G528 NIL) (|x| (|NonNegativeInteger|))
           (|i| (|NonNegativeInteger|)))
          (SEQ
           (COND
@@ -266,23 +266,23 @@
             (SEQ (LETT |i| 1)
                  (SEQ G190
                       (COND
-                       ((NULL (EQL (SPADCALL |sol| |i| (QREFELT $ 40)) 0))
+                       ((NULL (EQL (SPADCALL |sol| |i| (QREFELT % 40)) 0))
                         (GO G191)))
                       (SEQ (EXIT (LETT |i| (+ |i| 1)))) NIL (GO G190) G191
                       (EXIT NIL))
-                 (LETT |x| (SPADCALL |sol| |i| (QREFELT $ 40)))
+                 (LETT |x| (SPADCALL |sol| |i| (QREFELT % 40)))
                  (SPADCALL |sol| |i|
                            (PROG1 (LETT #1# (- |x| 1))
                              (|check_subtype2| (>= #1# 0)
                                                '(|NonNegativeInteger|)
                                                '(|Integer|) #1#))
-                           (QREFELT $ 41))
+                           (QREFELT % 41))
                  (LETT |flag|
                        (|DIOSP;verifySolution| |sol| (QVELT |graph| 2) 1 1
-                        |graph| $))
-                 (SPADCALL |sol| |i| |x| (QREFELT $ 41)) (EXIT |flag|)))
+                        |graph| %))
+                 (SPADCALL |sol| |i| |x| (QREFELT % 41)) (EXIT |flag|)))
            ('T
-            (|DIOSP;verifySolution| |sol| (QVELT |graph| 2) 1 1 |graph| $)))))) 
+            (|DIOSP;verifySolution| |sol| (QVELT |graph| 2) 1 1 |graph| %)))))) 
 
 (SDEFUN |DIOSP;verifySolution|
         ((|sol| (|Vector| (|NonNegativeInteger|))) (|ind| (|Integer|))
@@ -294,28 +294,28 @@
                  (|Record| (|:| |vert| #2=(|Vector| (|Integer|)))
                            (|:| |is_free| (|Boolean|)))))
            (|:| |dim| (|NonNegativeInteger|)) (|:| |zeroNode| (|Integer|))))
-         ($ (|Boolean|)))
+         (% (|Boolean|)))
         (SPROG
-         ((#3=#:G799 NIL) (|flag| (|Boolean|)) (#4=#:G789 NIL)
-          (|x| (|NonNegativeInteger|)) (#5=#:G800 NIL) (|i| NIL) (|k| #1#)
+         ((#3=#:G545 NIL) (|flag| (|Boolean|)) (#4=#:G535 NIL)
+          (|x| (|NonNegativeInteger|)) (#5=#:G546 NIL) (|i| NIL) (|k| #1#)
           (|v| #2#)
           (|node|
            (|Record| (|:| |vert| (|Vector| (|Integer|)))
                      (|:| |is_free| (|Boolean|)))))
          (SEQ (LETT |flag| 'T)
-              (LETT |node| (SPADCALL (QVELT |graph| 0) |ind| (QREFELT $ 39)))
+              (LETT |node| (SPADCALL (QVELT |graph| 0) |ind| (QREFELT % 39)))
               (LETT |v| (QCAR |node|))
               (LETT |k| (COND ((< |ind| (QVELT |graph| 2)) |m|) ('T |n|)))
               (SEQ (LETT |i| |k|) (LETT #5# (QVELT |graph| 1)) G190
                    (COND ((OR (> |i| #5#) (NULL |flag|)) (GO G191)))
-                   (SEQ (LETT |x| (SPADCALL |sol| |i| (QREFELT $ 40)))
+                   (SEQ (LETT |x| (SPADCALL |sol| |i| (QREFELT % 40)))
                         (EXIT
                          (COND
                           ((> |x| 0)
                            (SEQ
                             (EXIT
                              (COND
-                              ((> (SPADCALL |v| |i| (QREFELT $ 35)) 0)
+                              ((> (SPADCALL |v| |i| (QREFELT % 35)) 0)
                                (PROGN
                                 (LETT #3#
                                       (SEQ
@@ -325,16 +325,16 @@
                                                                      '(|NonNegativeInteger|)
                                                                      '(|Integer|)
                                                                      #4#))
-                                                 (QREFELT $ 41))
+                                                 (QREFELT % 41))
                                        (EXIT
                                         (COND
                                          ((EQL
-                                           (SPADCALL |v| |i| (QREFELT $ 35))
+                                           (SPADCALL |v| |i| (QREFELT % 35))
                                            (QVELT |graph| 2))
                                           (SEQ (LETT |flag| NIL)
                                                (EXIT
                                                 (SPADCALL |sol| |i| |x|
-                                                          (QREFELT $ 41)))))
+                                                          (QREFELT % 41)))))
                                          ('T
                                           (SEQ
                                            (LETT |flag|
@@ -343,18 +343,18 @@
                                                    (|DIOSP;verifySolution|
                                                     |sol|
                                                     (SPADCALL |v| |i|
-                                                              (QREFELT $ 35))
-                                                    |i| |n| |graph| $))
+                                                              (QREFELT % 35))
+                                                    |i| |n| |graph| %))
                                                   ('T
                                                    (|DIOSP;verifySolution|
                                                     |sol|
                                                     (SPADCALL |v| |i|
-                                                              (QREFELT $ 35))
-                                                    |m| |i| |graph| $))))
+                                                              (QREFELT % 35))
+                                                    |m| |i| |graph| %))))
                                            (EXIT
                                             (SPADCALL |sol| |i| |x|
-                                                      (QREFELT $ 41)))))))))
-                                (GO #6=#:G794)))))
+                                                      (QREFELT % 41)))))))))
+                                (GO #6=#:G540)))))
                             #6# (EXIT #3#))))))
                    (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL))
               (EXIT |flag|)))) 
@@ -363,7 +363,7 @@
 
 (DEFUN |DiophantineSolutionPackage| ()
   (SPROG NIL
-         (PROG (#1=#:G802)
+         (PROG (#1=#:G548)
            (RETURN
             (COND
              ((LETT #1#
@@ -385,23 +385,23 @@
                         '|DiophantineSolutionPackage|)))))))))) 
 
 (DEFUN |DiophantineSolutionPackage;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|DiophantineSolutionPackage|))
-          (LETT $ (GETREFV 45))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 45))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|DiophantineSolutionPackage| NIL
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|DiophantineSolutionPackage| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|Polynomial| 17) (|Equation| 6)
               (0 . |lhs|) (5 . |rhs|) (10 . -) (|NonNegativeInteger|)
-              (16 . |totalDegree|) (|List| $) (21 . |monomials|) (|Boolean|)
+              (16 . |totalDegree|) (|List| %) (21 . |monomials|) (|Boolean|)
               (26 . |ground?|) (|Integer|) (31 . |ground|) (|Vector| 11)
               (36 . |zero|) (|List| (|Symbol|)) (41 . |variables|)
               (|Union| 43 '#1="failed")

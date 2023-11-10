@@ -1,13 +1,13 @@
 
-(SDEFUN |FFCAT2;map;MF1F2;1| ((|f| (|Mapping| R2 R1)) (|f1| (F1)) ($ (F2)))
-        (SPADCALL (SPADCALL |f| (SPADCALL |f1| (QREFELT $ 14)) (QREFELT $ 17))
-                  (QREFELT $ 18))) 
+(SDEFUN |FFCAT2;map;MF1F2;1| ((|f| (|Mapping| R2 R1)) (|f1| (F1)) (% (F2)))
+        (SPADCALL (SPADCALL |f| (SPADCALL |f1| (QREFELT % 14)) (QREFELT % 17))
+                  (QREFELT % 18))) 
 
 (DECLAIM (NOTINLINE |FunctionFieldCategoryFunctions2;|)) 
 
-(DEFUN |FunctionFieldCategoryFunctions2| (&REST #1=#:G691)
+(DEFUN |FunctionFieldCategoryFunctions2| (&REST #1=#:G450)
   (SPROG NIL
-         (PROG (#2=#:G692)
+         (PROG (#2=#:G451)
            (RETURN
             (COND
              ((LETT #2#
@@ -30,7 +30,7 @@
 (DEFUN |FunctionFieldCategoryFunctions2;|
        (|#1| |#2| |#3| |#4| |#5| |#6| |#7| |#8|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$8 NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$8 NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL)
     (DV$4 NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -44,22 +44,22 @@
     (LETT |dv$|
           (LIST '|FunctionFieldCategoryFunctions2| DV$1 DV$2 DV$3 DV$4 DV$5
                 DV$6 DV$7 DV$8))
-    (LETT $ (GETREFV 20))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (LETT % (GETREFV 20))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|FunctionFieldCategoryFunctions2|
-                (LIST DV$1 DV$2 DV$3 DV$4 DV$5 DV$6 DV$7 DV$8) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (QSETREFV $ 10 |#5|)
-    (QSETREFV $ 11 |#6|)
-    (QSETREFV $ 12 |#7|)
-    (QSETREFV $ 13 |#8|)
-    (SETF |pv$| (QREFELT $ 3))
-    $))) 
+                (LIST DV$1 DV$2 DV$3 DV$4 DV$5 DV$6 DV$7 DV$8) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (QSETREFV % 10 |#5|)
+    (QSETREFV % 11 |#6|)
+    (QSETREFV % 12 |#7|)
+    (QSETREFV % 13 |#8|)
+    (SETF |pv$| (QREFELT % 3))
+    %))) 
 
 (MAKEPROP '|FunctionFieldCategoryFunctions2| '|infovec|
           (LIST

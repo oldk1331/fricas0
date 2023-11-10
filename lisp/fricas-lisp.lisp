@@ -209,37 +209,41 @@ with this hack and will try to convince the GCL crowd to fix this.
 
 ;;; How to exit Lisp process
 #+:GCL
-(defun exit-with-status (s) (lisp::quit s))
+(defun |exit_with_status| (s) (SI::quit s))
 
 #+:cmu
-(defun exit-with-status (s)
+(defun |exit_with_status| (s)
     (setf *terminal-io* *saved-terminal-io*)
     (unix:unix-exit s))
 
 #+:sbcl
-(defun exit-with-status (s)
+(defun |exit_with_status| (s)
     (setf *terminal-io* *saved-terminal-io*)
     (sb-ext::quit :UNIX-STATUS s))
 
 #+:clisp
-(defun exit-with-status (s) (ext::quit s))
+(defun |exit_with_status| (s) (ext::quit s))
 
 #+:openmcl
-(defun exit-with-status (s) (ccl::quit s))
+(defun |exit_with_status| (s) (ccl::quit s))
 
 #+:ecl
-(defun exit-with-status (s)
+(defun |exit_with_status| (s)
     (SI:quit s))
 
 #+:lispworks
-(defun exit-with-status (s)
+(defun |exit_with_status| (s)
   (lispworks:quit :status s))
 
-#+:poplog
-(defun quit() (pop11::sysexit))
+#+:abcl
+(defun |exit_with_status| (s)
+  (ext:quit :status s))
 
-#-:poplog
-(defun quit() (exit-with-status 0))
+#+:poplog
+(defun |exit_with_status| (s)
+    (pop11::sysexit1 s))
+
+(defun quit() (|exit_with_status| 0))
 
 ;;; -----------------------------------------------------------------
 
@@ -331,6 +335,7 @@ with this hack and will try to convince the GCL crowd to fix this.
   #+:poplog (let ((pres (POP11::systranslate var-name)))
                 (if (stringp pres) pres))
   #+:lispworks (lispworks:environment-variable var-name)
+  #+:abcl (ext:getenv var-name)
   )
 
 ;;; Command-line arguments
@@ -347,6 +352,7 @@ with this hack and will try to convince the GCL crowd to fix this.
         res)
   #+:poplog '()
   #+:lispworks system:*line-arguments-list*
+  #+:abcl ext:*command-line-argument-list*
   )
 
 ;;; Silent loading of files
@@ -385,12 +391,34 @@ with this hack and will try to convince the GCL crowd to fix this.
 
 )
 
+(defvar *c_type_as_string* '(
+    (int "int")
+    (c-string "char *")
+    (double "double")
+))
+
+(defun c_type_as_string(c_type) (nth 1 (assoc c_type *c_type_as_string*)))
+
+(defun c_args_as_string  (arguments)
+    (cond
+        ((null arguments) "")
+        (t (let ((res (c_type_as_string (nth 1 (car arguments)))))
+              (dolist (el (rest arguments))
+                  (setf res (concatenate 'string res ", "
+                             (c_type_as_string (nth 1 el)))))
+              res)))
+)
+
+(defun make_extern (return-type c-name arguments)
+    (concatenate 'string "extern " (c_type_as_string return-type) " "
+                 c-name "(" (c_args_as_string arguments) ");"))
+
 #+:GCL
 (eval-when (:compile-toplevel :load-toplevel :execute)
 (setf *c-type-to-ffi* '(
-    (int LISP::int)
-    (c-string LISP::string)
-    (double LISP::double)
+    (int SI::int)
+    (c-string SI::string)
+    (double SI::double)
 ))
 
 (defun c-args-to-gcl (arguments)
@@ -399,7 +427,7 @@ with this hack and will try to convince the GCL crowd to fix this.
 (defun gcl-foreign-call (name c-name return-type arguments)
     (let ((gcl-args (c-args-to-gcl arguments))
           (gcl-ret (c-type-to-ffi return-type)))
-    `(LISP::defentry ,name ,gcl-args (,gcl-ret ,c-name))
+    `(SI::defentry ,name ,gcl-args (,gcl-ret ,c-name))
   ))
 
 (defmacro fricas-foreign-call (name c-name return-type &rest arguments)
@@ -548,7 +576,10 @@ with this hack and will try to convince the GCL crowd to fix this.
     (multiple-value-bind (fargs strs) (c-args-to-ecl arguments)
         (let ((l-ret (c-type-to-ffi return-type))
                wrapper)
-            (if strs
+          `(progn
+            (ext:with-backend :c/c++
+               (FFI:clines ,(make_extern return-type c-name arguments)))
+            ,(if strs
                 (let* ((sym (gensym))
                        (wargs (mapcar #'car fargs))
                        (largs (mapcar #'car arguments))
@@ -560,14 +591,14 @@ with this hack and will try to convince the GCL crowd to fix this.
                                 ,fargs :returning ,l-ret)
                             ,wrapper))
                 `(ffi:def-function (,c-name ,name)
-                     ,fargs :returning ,l-ret)))))
+                     ,fargs :returning ,l-ret))))))
 
 (defmacro fricas-foreign-call (name c-name return-type &rest arguments)
     (ecl-foreign-call name c-name return-type arguments))
 
 )
 
-#+:poplog
+#+(or :poplog :abcl)
 (eval-when (:compile-toplevel :load-toplevel :execute)
 
 (defmacro fricas-foreign-call (name c-name return-type &rest arguments)
@@ -629,7 +660,7 @@ with this hack and will try to convince the GCL crowd to fix this.
         (val int))
 
 #+:GCL
-(LISP::clines "extern double sock_get_float();")
+(SI::clines "extern double sock_get_float();")
 
 (fricas-foreign-call |sockGetFloat| "sock_get_float" double
         (purpose int))
@@ -637,10 +668,6 @@ with this hack and will try to convince the GCL crowd to fix this.
 (fricas-foreign-call |sockSendFloat| "sock_send_float" int
        (purpose int)
        (num double))
-
-;;; (fricas-foreign-call |sockSendString| "sock_send_string" int
-;;;       (purpose int)
-;;;       (str c-string))
 
 (fricas-foreign-call sock_send_string_len "sock_send_string_len" int
        (purpose int)
@@ -659,21 +686,21 @@ with this hack and will try to convince the GCL crowd to fix this.
 #+:GCL
 (progn
 
-(LISP::defentry sock_get_string_buf (LISP::int LISP::object LISP::int)
-    (LISP::int "sock_get_string_buf_wrapper"))
+(SI::defentry sock_get_string_buf (SI::int SI::object SI::int)
+    (SI::int "sock_get_string_buf_wrapper"))
 
 ;; GCL may pass strings by value.  'sock_get_string_buf' should fill
 ;; string with data read from connection, therefore needs address of
 ;; actual string buffer. We use 'sock_get_string_buf_wrapper' to
 ;; resolve the problem
-(LISP::clines "int sock_get_string_buf_wrapper(int i, object x, int j)"
+(SI::clines "int sock_get_string_buf_wrapper(int i, object x, int j)"
     "{ if (type_of(x)!=t_string) FEwrong_type_argument(sLstring,x);"
     "  if (x->st.st_fillp<j)"
     "    FEerror(\"string too small in sock_get_string_buf_wrapper\",0);"
     "  return sock_get_string_buf(i, x->st.st_self, j); }")
 
-(LISP::defentry sock_get_string_buf (LISP::int LISP::object LISP::int)
-    (LISP::int "sock_get_string_buf_wrapper"))
+(SI::defentry sock_get_string_buf (SI::int SI::object SI::int)
+    (SI::int "sock_get_string_buf_wrapper"))
 
 (defun |sockGetStringFrom| (type)
     (let ((buf (MAKE-STRING 10000)))
@@ -788,6 +815,10 @@ with this hack and will try to convince the GCL crowd to fix this.
 #+:ecl
 (progn
 
+(ext:with-backend :c/c++
+   (FFI:clines "extern void sock_get_string_buf(int purpose,"
+               "                  char * buf, int len);"))
+
 (ffi:def-function ("sock_get_string_buf" sock_get_string_buf_wrapper)
                    ((purpose :int) (buf (:array :unsigned-char 10000)) (len :int))
                    :returning :void)
@@ -819,29 +850,15 @@ with this hack and will try to convince the GCL crowd to fix this.
 ;;; File and directory support
 ;;; First version contributed by Juergen Weiss.
 
-#+:GCL
+#+(or :ECL :GCL)
 (progn
-  (LISP::defentry file_kind (LISP::string)      (LISP::int "directoryp"))
-  (LISP::defentry |makedir| (LISP::string)         (LISP::int "makedir")))
 
-#+:ecl
-(ffi:def-function ("directoryp" raw_file_kind)
-                   ((arg :cstring))
-                   :returning :int)
-#+:ecl
-(defun file_kind (name)
-      (FFI:WITH-CSTRING (cname name)
-           (raw_file_kind cname)))
+  (fricas-foreign-call file_kind "directoryp" int
+                   (arg c-string))
 
-#+:ecl
-(ffi:def-function ("makedir" raw_makedir)
-                   ((arg :cstring))
-                   :returning :int)
-
-#+:ecl
-(defun |makedir| (name)
-      (FFI:WITH-CSTRING (cname name)
-          (raw_makedir cname)))
+  (fricas-foreign-call makedir "makedir" int
+                   (arg c-string))
+)
 
 (defun trim-directory-name (name)
     #+(or :unix :win32)
@@ -859,9 +876,6 @@ with this hack and will try to convince the GCL crowd to fix this.
     )
 
 ;;; Make directory
-
-#+(or :GCL :ecl)
-(defun makedir (fname) (|makedir| fname))
 
 #+:cmu
 (defun makedir (fname)
@@ -886,6 +900,10 @@ with this hack and will try to convince the GCL crowd to fix this.
 #+:lispworks
 (defun makedir (fname)
     (system:call-system (concatenate 'string "mkdir " fname)))
+
+#+:abcl
+(defun makedir (fname)
+    (sys:run-program "mkdir" (list fname)))
 
 ;;;
 
@@ -920,6 +938,12 @@ with this hack and will try to convince the GCL crowd to fix this.
                  (if (ignore-errors (truename fname))
                      0
                      -1)))
+   #+:abcl
+   (if filename
+       (if (ext:file-directory-p filename)
+           1
+         (if (probe-file filename) 0 -1))
+     -1)
    #+:lispworks
    (if filename
        (if (lispworks:file-directory-p filename)
@@ -932,7 +956,7 @@ with this hack and will try to convince the GCL crowd to fix this.
   (multiple-value-bind (win dir) (unix::unix-current-directory)
                        (declare (ignore win))  dir))
 
-#+(or :ecl :GCL :sbcl :clisp :openmcl)
+#+(or :ecl :GCL :sbcl :clisp :openmcl :abcl)
 (defun get-current-directory ()
     (trim-directory-name (namestring (truename ""))))
 
@@ -948,13 +972,6 @@ with this hack and will try to convince the GCL crowd to fix this.
 
 
 (defun |fricas_probe_file| (file)
-#|
-#+:GCL (if (fboundp 'system::stat)
-           ;;; gcl-2.6.8
-           (and (system::stat file) (truename file))
-           ;;; gcl-2.6.7
-           (probe-file file))
-|#
 #+:GCL (let* ((fk (file-kind (namestring file)))
               (fname (trim-directory-name (namestring file)))
               (dname (pad-directory-name fname)))
@@ -966,7 +983,7 @@ with this hack and will try to convince the GCL crowd to fix this.
              (t nil)))
 #+:cmu (if (unix:unix-file-kind file) (truename file))
 #+:sbcl (if (sbcl-file-kind file) (truename file))
-#+(or :openmcl :ecl :lispworks) (probe-file file)
+#+(or :abcl :ecl :lispworks :openmcl :poplog) (probe-file file)
 #+:clisp(let* ((fname (trim-directory-name (namestring file)))
                (dname (pad-directory-name fname)))
                  (or (ignore-errors (truename dname))
@@ -978,7 +995,7 @@ with this hack and will try to convince the GCL crowd to fix this.
     (let ((ns (namestring name)))
          (if (and (consp (pathname-directory name))
                   (eq (car (pathname-directory name))
-                      #-:GCL :absolute #+:GCL :root))
+                      :absolute))
              ns
              (concatenate 'string (get-current-directory)  "/" ns))))
 #+:cmu

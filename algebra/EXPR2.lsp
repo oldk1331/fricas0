@@ -1,13 +1,13 @@
 
 (SDEFUN |EXPR2;map;MEE;1|
-        ((|f| (|Mapping| S R)) (|r| (|Expression| R)) ($ (|Expression| S)))
-        (SPADCALL |f| |r| (QREFELT $ 12))) 
+        ((|f| (|Mapping| S R)) (|r| (|Expression| R)) (% (|Expression| S)))
+        (SPADCALL |f| |r| (QREFELT % 12))) 
 
 (DECLAIM (NOTINLINE |ExpressionFunctions2;|)) 
 
-(DEFUN |ExpressionFunctions2| (&REST #1=#:G692)
+(DEFUN |ExpressionFunctions2| (&REST #1=#:G450)
   (SPROG NIL
-         (PROG (#2=#:G693)
+         (PROG (#2=#:G451)
            (RETURN
             (COND
              ((LETT #2#
@@ -25,21 +25,21 @@
                   (HREM |$ConstructorCache| '|ExpressionFunctions2|)))))))))) 
 
 (DEFUN |ExpressionFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|ExpressionFunctions2| DV$1 DV$2))
-          (LETT $ (GETREFV 14))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 14))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|ExpressionFunctions2|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|ExpressionFunctions2| '|infovec|
           (LIST

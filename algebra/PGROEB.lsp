@@ -1,13 +1,18 @@
 
 (SDEFUN |PGROEB;lexGroebner;LLL;1|
         ((|lp| (|List| (|Polynomial| F))) (|lv| (|List| (|Symbol|)))
-         ($ (|List| (|Polynomial| F))))
+         (% (|List| (|Polynomial| F))))
         (SPROG
-         ((#1=#:G711 NIL) (|pp| NIL) (#2=#:G710 NIL) (|gb| (|List| |DPoly|))
-          (|b| (|List| |DPoly|)) (#3=#:G709 NIL) (|pol| NIL) (#4=#:G708 NIL)
+         ((#1=#:G457 NIL) (|pp| NIL) (#2=#:G456 NIL) (|gb| (|List| |DPoly|))
+          (|b| (|List| |DPoly|)) (#3=#:G455 NIL) (|pol| NIL) (#4=#:G454 NIL)
           (DP
-           (|DirectProductCategory| (|call| LENGTH |lv|)
-                                    (|NonNegativeInteger|)))
+           (|Join|
+            (|DirectProductCategory| (|call| LENGTH |lv|)
+                                     #5=(|NonNegativeInteger|))
+            (CATEGORY |package|
+             (IF (|has| #5# (|Hashable|))
+                 (ATTRIBUTE (|Hashable|))
+                 |noBranch|))))
           (|DPoly|
            (|Join|
             (|PolynomialCategory| F
@@ -15,7 +20,7 @@
                                                    (|NonNegativeInteger|))
                                   (|OrderedVariableList| |lv|))
             (CATEGORY |domain|
-             (SIGNATURE |reorder| ($ $ (|List| (|Integer|)))))))
+             (SIGNATURE |reorder| (% % (|List| (|Integer|)))))))
           (PP
            (CATEGORY |package|
             (SIGNATURE |dmpToHdmp|
@@ -35,9 +40,9 @@
             (SIGNATURE |pToDmp|
              ((|DistributedMultivariatePolynomial| |lv| F)
               (|Polynomial| F))))))
-         (SEQ (LETT PP (|PolToPol| |lv| (QREFELT $ 6)))
+         (SEQ (LETT PP (|PolToPol| |lv| (QREFELT % 6)))
               (LETT |DPoly|
-                    (|DistributedMultivariatePolynomial| |lv| (QREFELT $ 6)))
+                    (|DistributedMultivariatePolynomial| |lv| (QREFELT % 6)))
               (LETT DP (|DirectProduct| (LENGTH |lv|) (|NonNegativeInteger|)))
               (LETT |b|
                     (PROGN
@@ -57,12 +62,12 @@
                                                                       '|DistributedMultivariatePolynomial|
                                                                       |lv|
                                                                       (|devaluate|
-                                                                       (ELT $
+                                                                       (ELT %
                                                                             6)))
                                                                      (LIST
                                                                       '|Polynomial|
                                                                       (|devaluate|
-                                                                       (ELT $
+                                                                       (ELT %
                                                                             6))))
                                                                     PP))
                                    #4#))))
@@ -79,7 +84,7 @@
                                                             (|devaluate|
                                                              |DPoly|)))
                                                      (|GroebnerPackage|
-                                                      (ELT $ 6) DP |DPoly|))))
+                                                      (ELT % 6) DP |DPoly|))))
               (EXIT
                (PROGN
                 (LETT #2# NIL)
@@ -97,12 +102,12 @@
                                                                 (LIST
                                                                  '|Polynomial|
                                                                  (|devaluate|
-                                                                  (ELT $ 6)))
+                                                                  (ELT % 6)))
                                                                 (LIST
                                                                  '|DistributedMultivariatePolynomial|
                                                                  |lv|
                                                                  (|devaluate|
-                                                                  (ELT $ 6))))
+                                                                  (ELT % 6))))
                                                                PP))
                               #2#))))
                      (LETT #1# (CDR #1#)) (GO G190) G191
@@ -110,10 +115,10 @@
 
 (SDEFUN |PGROEB;totalGroebner;LLL;2|
         ((|lp| (|List| (|Polynomial| F))) (|lv| (|List| (|Symbol|)))
-         ($ (|List| (|Polynomial| F))))
+         (% (|List| (|Polynomial| F))))
         (SPROG
-         ((#1=#:G723 NIL) (|pp| NIL) (#2=#:G722 NIL) (|gb| (|List| |HDPoly|))
-          (|b| (|List| |HDPoly|)) (#3=#:G721 NIL) (|pol| NIL) (#4=#:G720 NIL)
+         ((#1=#:G467 NIL) (|pp| NIL) (#2=#:G466 NIL) (|gb| (|List| |HDPoly|))
+          (|b| (|List| |HDPoly|)) (#3=#:G465 NIL) (|pol| NIL) (#4=#:G464 NIL)
           (HDP
            (|DirectProductCategory| (|call| LENGTH |lv|)
                                     (|NonNegativeInteger|)))
@@ -124,7 +129,7 @@
                                                               (|NonNegativeInteger|))
                                   (|OrderedVariableList| |lv|))
             (CATEGORY |domain|
-             (SIGNATURE |reorder| ($ $ (|List| (|Integer|)))))))
+             (SIGNATURE |reorder| (% % (|List| (|Integer|)))))))
           (PP
            (CATEGORY |package|
             (SIGNATURE |dmpToHdmp|
@@ -144,10 +149,10 @@
             (SIGNATURE |pToDmp|
              ((|DistributedMultivariatePolynomial| |lv| F)
               (|Polynomial| F))))))
-         (SEQ (LETT PP (|PolToPol| |lv| (QREFELT $ 6)))
+         (SEQ (LETT PP (|PolToPol| |lv| (QREFELT % 6)))
               (LETT |HDPoly|
                     (|HomogeneousDistributedMultivariatePolynomial| |lv|
-                                                                    (QREFELT $
+                                                                    (QREFELT %
                                                                              6)))
               (LETT HDP
                     (|HomogeneousDirectProduct| (LENGTH |lv|)
@@ -170,12 +175,12 @@
                                                                       '|HomogeneousDistributedMultivariatePolynomial|
                                                                       |lv|
                                                                       (|devaluate|
-                                                                       (ELT $
+                                                                       (ELT %
                                                                             6)))
                                                                      (LIST
                                                                       '|Polynomial|
                                                                       (|devaluate|
-                                                                       (ELT $
+                                                                       (ELT %
                                                                             6))))
                                                                     PP))
                                    #4#))))
@@ -192,7 +197,7 @@
                                                             (|devaluate|
                                                              |HDPoly|)))
                                                      (|GroebnerPackage|
-                                                      (ELT $ 6) HDP
+                                                      (ELT % 6) HDP
                                                       |HDPoly|))))
               (EXIT
                (PROGN
@@ -211,12 +216,12 @@
                                                                 (LIST
                                                                  '|Polynomial|
                                                                  (|devaluate|
-                                                                  (ELT $ 6)))
+                                                                  (ELT % 6)))
                                                                 (LIST
                                                                  '|HomogeneousDistributedMultivariatePolynomial|
                                                                  |lv|
                                                                  (|devaluate|
-                                                                  (ELT $ 6))))
+                                                                  (ELT % 6))))
                                                                PP))
                               #2#))))
                      (LETT #1# (CDR #1#)) (GO G190) G191
@@ -224,9 +229,9 @@
 
 (DECLAIM (NOTINLINE |PolyGroebner;|)) 
 
-(DEFUN |PolyGroebner| (#1=#:G724)
+(DEFUN |PolyGroebner| (#1=#:G468)
   (SPROG NIL
-         (PROG (#2=#:G725)
+         (PROG (#2=#:G469)
            (RETURN
             (COND
              ((LETT #2#
@@ -241,19 +246,19 @@
                  ((NOT #2#) (HREM |$ConstructorCache| '|PolyGroebner|)))))))))) 
 
 (DEFUN |PolyGroebner;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|PolyGroebner| DV$1))
-          (LETT $ (GETREFV 11))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 11))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PolyGroebner| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|PolyGroebner| '|infovec|
           (LIST

@@ -1,13 +1,13 @@
 
-(SDEFUN |QFCAT2;map;MRS;1| ((|f| (|Mapping| B A)) (|r| (R)) ($ (S)))
-        (SPADCALL (SPADCALL (SPADCALL |r| (QREFELT $ 10)) |f|)
-                  (SPADCALL (SPADCALL |r| (QREFELT $ 11)) |f|) (QREFELT $ 12))) 
+(SDEFUN |QFCAT2;map;MRS;1| ((|f| (|Mapping| B A)) (|r| (R)) (% (S)))
+        (SPADCALL (SPADCALL (SPADCALL |r| (QREFELT % 10)) |f|)
+                  (SPADCALL (SPADCALL |r| (QREFELT % 11)) |f|) (QREFELT % 12))) 
 
 (DECLAIM (NOTINLINE |QuotientFieldCategoryFunctions2;|)) 
 
-(DEFUN |QuotientFieldCategoryFunctions2| (&REST #1=#:G691)
+(DEFUN |QuotientFieldCategoryFunctions2| (&REST #1=#:G450)
   (SPROG NIL
-         (PROG (#2=#:G692)
+         (PROG (#2=#:G451)
            (RETURN
             (COND
              ((LETT #2#
@@ -29,7 +29,7 @@
 
 (DEFUN |QuotientFieldCategoryFunctions2;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -37,18 +37,18 @@
     (LETT DV$3 (|devaluate| |#3|))
     (LETT DV$4 (|devaluate| |#4|))
     (LETT |dv$| (LIST '|QuotientFieldCategoryFunctions2| DV$1 DV$2 DV$3 DV$4))
-    (LETT $ (GETREFV 15))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (LETT % (GETREFV 15))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|QuotientFieldCategoryFunctions2|
-                (LIST DV$1 DV$2 DV$3 DV$4) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (SETF |pv$| (QREFELT $ 3))
-    $))) 
+                (LIST DV$1 DV$2 DV$3 DV$4) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (SETF |pv$| (QREFELT % 3))
+    %))) 
 
 (MAKEPROP '|QuotientFieldCategoryFunctions2| '|infovec|
           (LIST

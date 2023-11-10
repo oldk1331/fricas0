@@ -8,37 +8,37 @@
 (DEFUN |Category| () (PROG () (RETURN NIL)))
 
 ; CategoryPrint(D) ==
-;   SAY "--------------------------------------"
-;   SAY "Name (and arguments) of category:"
+;   SAY '"--------------------------------------"
+;   SAY '"Name (and arguments) of category:"
 ;   PRETTYPRINT D.(0)
-;   SAY "operations:"
+;   SAY '"operations:"
 ;   PRETTYPRINT D.(1)
-;   SAY "attributes:"
+;   SAY '"attributes:"
 ;   PRETTYPRINT D.2
-;   SAY "This is a sub-category of"
+;   SAY '"This is a sub-category of"
 ;   PRETTYPRINT first D.4
 ;   for u in CADR D.4 repeat
-;     SAY("This has an alternate view: slot ",rest u," corresponds to ",first u)
+;     SAY('"This has an alternate view: slot ",rest u,'" corresponds to ",first u)
 ;   for u in CADDR D.4 repeat
-;     SAY("This has a local domain: slot ",rest u," corresponds to ",first u)
+;     SAY('"This has a local domain: slot ",rest u,'" corresponds to ",first u)
 ;   for j in 6..MAXINDEX D repeat
 ;     u:= D.j
-;     null u => SAY "another domain"
-;     atom first u => SAY("Alternate View corresponding to: ",u)
+;     null u => SAY '"another domain"
+;     atom first u => SAY('"Alternate View corresponding to: ",u)
 ;     PRETTYPRINT u
 
 (DEFUN |CategoryPrint| (D)
   (PROG (|u|)
     (RETURN
      (PROGN
-      (SAY '--------------------------------------)
-      (SAY '|Name (and arguments) of category:|)
+      (SAY "--------------------------------------")
+      (SAY "Name (and arguments) of category:")
       (PRETTYPRINT (ELT D 0))
-      (SAY '|operations:|)
+      (SAY "operations:")
       (PRETTYPRINT (ELT D 1))
-      (SAY '|attributes:|)
+      (SAY "attributes:")
       (PRETTYPRINT (ELT D 2))
-      (SAY '|This is a sub-category of|)
+      (SAY "This is a sub-category of")
       (PRETTYPRINT (CAR (ELT D 4)))
       ((LAMBDA (|bfVar#1| |u|)
          (LOOP
@@ -46,8 +46,8 @@
            ((OR (ATOM |bfVar#1|) (PROGN (SETQ |u| (CAR |bfVar#1|)) NIL))
             (RETURN NIL))
            (#1='T
-            (SAY '|This has an alternate view: slot | (CDR |u|)
-             '| corresponds to | (CAR |u|))))
+            (SAY "This has an alternate view: slot " (CDR |u|)
+             " corresponds to " (CAR |u|))))
           (SETQ |bfVar#1| (CDR |bfVar#1|))))
        (CADR (ELT D 4)) NIL)
       ((LAMBDA (|bfVar#2| |u|)
@@ -56,8 +56,8 @@
            ((OR (ATOM |bfVar#2|) (PROGN (SETQ |u| (CAR |bfVar#2|)) NIL))
             (RETURN NIL))
            (#1#
-            (SAY '|This has a local domain: slot | (CDR |u|)
-             '| corresponds to | (CAR |u|))))
+            (SAY "This has a local domain: slot " (CDR |u|) " corresponds to "
+             (CAR |u|))))
           (SETQ |bfVar#2| (CDR |bfVar#2|))))
        (CADDR (ELT D 4)) NIL)
       ((LAMBDA (|bfVar#3| |j|)
@@ -66,9 +66,9 @@
                 (#1#
                  (PROGN
                   (SETQ |u| (ELT D |j|))
-                  (COND ((NULL |u|) (SAY '|another domain|))
+                  (COND ((NULL |u|) (SAY "another domain"))
                         ((ATOM (CAR |u|))
-                         (SAY '|Alternate View corresponding to: | |u|))
+                         (SAY "Alternate View corresponding to: " |u|))
                         (#1# (PRETTYPRINT |u|))))))
           (SETQ |j| (+ |j| 1))))
        (MAXINDEX D) 6)))))
@@ -895,7 +895,7 @@
 ;     -- FIXME: this is ugly hack to get around compiler bug.
 ;     -- Namely, sometimes '$' is not what it should be...
 ;     $compForModeIfTrue => cond
-;     cond is ["has", "$", =catname] => nil
+;     cond is ["has", '%, =catname] => nil
 ;     cond is ["OR", :l] =>
 ;         rl := []
 ;         for c1 in l repeat
@@ -925,7 +925,7 @@
            ((AND (CONSP |cond|) (EQ (CAR |cond|) '|has|)
                  (PROGN
                   (SETQ |ISTMP#1| (CDR |cond|))
-                  (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) '$)
+                  (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) '%)
                        (PROGN
                         (SETQ |ISTMP#2| (CDR |ISTMP#1|))
                         (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)

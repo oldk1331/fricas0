@@ -1,47 +1,47 @@
 
 (SDEFUN |KOVACIC;kovacic;3FU;1|
         ((|a0| (|Fraction| UP)) (|a1| (|Fraction| UP)) (|a2| (|Fraction| UP))
-         ($ (|Union| (|SparseUnivariatePolynomial| (|Fraction| UP)) "failed")))
-        (SPADCALL |a0| |a1| |a2| (ELT $ 9) (QREFELT $ 13))) 
+         (% (|Union| (|SparseUnivariatePolynomial| (|Fraction| UP)) "failed")))
+        (SPADCALL |a0| |a1| |a2| (ELT % 9) (QREFELT % 13))) 
 
 (SDEFUN |KOVACIC;kovacic;3FMU;2|
         ((|a0| (|Fraction| UP)) (|a1| (|Fraction| UP)) (|a2| (|Fraction| UP))
          (|ezfactor| (|Mapping| (|Factored| UP) UP))
-         ($ (|Union| (|SparseUnivariatePolynomial| (|Fraction| UP)) "failed")))
+         (% (|Union| (|SparseUnivariatePolynomial| (|Fraction| UP)) "failed")))
         (SPROG
          ((|lf|
            (|List|
             (|Record| (|:| |factor| UP)
                       (|:| |exponent| (|NonNegativeInteger|)))))
           (|r| (|Fraction| UP)))
-         (SEQ (LETT |r| (SPADCALL |a1| 2 (QREFELT $ 16)))
+         (SEQ (LETT |r| (SPADCALL |a1| 2 (QREFELT % 16)))
               (LETT |r|
                     (SPADCALL |r|
-                              (SPADCALL (SPADCALL 2 |a2| (QREFELT $ 17))
-                                        (SPADCALL |a1| (QREFELT $ 18))
-                                        (QREFELT $ 19))
-                              (QREFELT $ 20)))
+                              (SPADCALL (SPADCALL 2 |a2| (QREFELT % 17))
+                                        (SPADCALL |a1| (QREFELT % 18))
+                                        (QREFELT % 19))
+                              (QREFELT % 20)))
               (LETT |r|
                     (SPADCALL |r|
-                              (SPADCALL (SPADCALL 2 |a1| (QREFELT $ 17))
-                                        (SPADCALL |a2| (QREFELT $ 18))
-                                        (QREFELT $ 19))
-                              (QREFELT $ 21)))
+                              (SPADCALL (SPADCALL 2 |a1| (QREFELT % 17))
+                                        (SPADCALL |a2| (QREFELT % 18))
+                                        (QREFELT % 19))
+                              (QREFELT % 21)))
               (LETT |r|
                     (SPADCALL |r|
-                              (SPADCALL (SPADCALL 4 |a0| (QREFELT $ 17)) |a2|
-                                        (QREFELT $ 19))
-                              (QREFELT $ 21)))
+                              (SPADCALL (SPADCALL 4 |a0| (QREFELT % 17)) |a2|
+                                        (QREFELT % 19))
+                              (QREFELT % 21)))
               (LETT |r|
                     (SPADCALL |r|
-                              (SPADCALL 4 (SPADCALL |a2| 2 (QREFELT $ 16))
-                                        (QREFELT $ 17))
-                              (QREFELT $ 22)))
+                              (SPADCALL 4 (SPADCALL |a2| 2 (QREFELT % 16))
+                                        (QREFELT % 17))
+                              (QREFELT % 22)))
               (LETT |lf|
                     (SPADCALL
-                     (SPADCALL (SPADCALL |r| (QREFELT $ 23)) (QREFELT $ 9))
-                     (QREFELT $ 27)))
-              (EXIT (|KOVACIC;case2| |r| |lf| |ezfactor| $))))) 
+                     (SPADCALL (SPADCALL |r| (QREFELT % 23)) (QREFELT % 9))
+                     (QREFELT % 27)))
+              (EXIT (|KOVACIC;case2| |r| |lf| |ezfactor| %))))) 
 
 (SDEFUN |KOVACIC;case2|
         ((|r| (|Fraction| UP))
@@ -50,30 +50,30 @@
            (|Record| (|:| |factor| UP)
                      (|:| |exponent| (|NonNegativeInteger|)))))
          (|ezfactor| (|Mapping| (|Factored| UP) UP))
-         ($ (|Union| (|SparseUnivariatePolynomial| (|Fraction| UP)) "failed")))
+         (% (|Union| (|SparseUnivariatePolynomial| (|Fraction| UP)) "failed")))
         (SPROG
          ((|b| (|Fraction| UP)) (|sol| (|List| (|Fraction| UP)))
           (|l2| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP))))
          (SEQ
-          (COND ((|KOVACIC;cannotCase2?| |lf| $) (CONS 1 "failed"))
+          (COND ((|KOVACIC;cannotCase2?| |lf| %) (CONS 1 "failed"))
                 (#1='T
                  (SEQ
                   (LETT |l2|
                         (SPADCALL
                          (SPADCALL
-                          (SPADCALL (|spadConstant| $ 30) 3 (QREFELT $ 33))
-                          (SPADCALL (SPADCALL 4 |r| (QREFELT $ 17)) 1
-                                    (QREFELT $ 33))
-                          (QREFELT $ 34))
+                          (SPADCALL (|spadConstant| % 30) 3 (QREFELT % 33))
+                          (SPADCALL (SPADCALL 4 |r| (QREFELT % 17)) 1
+                                    (QREFELT % 33))
+                          (QREFELT % 34))
                          (SPADCALL 2
-                                   (SPADCALL (SPADCALL |r| (QREFELT $ 18))
-                                             (QREFELT $ 35))
-                                   (QREFELT $ 36))
-                         (QREFELT $ 34)))
+                                   (SPADCALL (SPADCALL |r| (QREFELT % 18))
+                                             (QREFELT % 35))
+                                   (QREFELT % 36))
+                         (QREFELT % 34)))
                   (EXIT
                    (COND
                     ((NULL
-                      (LETT |sol| (SPADCALL |l2| |ezfactor| (QREFELT $ 39))))
+                      (LETT |sol| (SPADCALL |l2| |ezfactor| (QREFELT % 39))))
                      (CONS 1 "failed"))
                     (#1#
                      (SEQ (LETT |b| (|SPADfirst| |sol|))
@@ -81,29 +81,29 @@
                            (CONS 0
                                  (SPADCALL
                                   (SPADCALL
-                                   (SPADCALL (|spadConstant| $ 30) 2
-                                             (QREFELT $ 41))
-                                   (SPADCALL |b| 1 (QREFELT $ 41))
-                                   (QREFELT $ 42))
+                                   (SPADCALL (|spadConstant| % 30) 2
+                                             (QREFELT % 41))
+                                   (SPADCALL |b| 1 (QREFELT % 41))
+                                   (QREFELT % 42))
                                   (SPADCALL
                                    (SPADCALL
                                     (SPADCALL
-                                     (SPADCALL (SPADCALL |b| (QREFELT $ 18))
-                                               (SPADCALL |b| 2 (QREFELT $ 16))
-                                               (QREFELT $ 20))
-                                     (SPADCALL 2 |r| (QREFELT $ 17))
-                                     (QREFELT $ 21))
-                                    (SPADCALL 2 (QREFELT $ 44)) (QREFELT $ 22))
-                                   (QREFELT $ 45))
-                                  (QREFELT $ 46)))))))))))))) 
+                                     (SPADCALL (SPADCALL |b| (QREFELT % 18))
+                                               (SPADCALL |b| 2 (QREFELT % 16))
+                                               (QREFELT % 20))
+                                     (SPADCALL 2 |r| (QREFELT % 17))
+                                     (QREFELT % 21))
+                                    (SPADCALL 2 (QREFELT % 44)) (QREFELT % 22))
+                                   (QREFELT % 45))
+                                  (QREFELT % 46)))))))))))))) 
 
 (SDEFUN |KOVACIC;cannotCase2?|
         ((|lf|
           (|List|
            (|Record| (|:| |factor| UP)
                      (|:| |exponent| (|NonNegativeInteger|)))))
-         ($ (|Boolean|)))
-        (SPROG ((#1=#:G750 NIL) (#2=#:G751 NIL) (#3=#:G752 NIL) (|rec| NIL))
+         (% (|Boolean|)))
+        (SPROG ((#1=#:G485 NIL) (#2=#:G486 NIL) (#3=#:G487 NIL) (|rec| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -118,8 +118,8 @@
                            (COND
                             ((EQL (QCDR |rec|) 2)
                              (PROGN
-                              (LETT #1# (PROGN (LETT #2# NIL) (GO #4=#:G749)))
-                              (GO #5=#:G747)))
+                              (LETT #1# (PROGN (LETT #2# NIL) (GO #4=#:G484)))
+                              (GO #5=#:G482)))
                             ((ODDP (QCDR |rec|))
                              (COND
                               ((> (QCDR |rec|) 2)
@@ -133,9 +133,9 @@
 
 (DECLAIM (NOTINLINE |Kovacic;|)) 
 
-(DEFUN |Kovacic| (&REST #1=#:G753)
+(DEFUN |Kovacic| (&REST #1=#:G488)
   (SPROG NIL
-         (PROG (#2=#:G754)
+         (PROG (#2=#:G489)
            (RETURN
             (COND
              ((LETT #2#
@@ -150,26 +150,26 @@
                 (COND ((NOT #2#) (HREM |$ConstructorCache| '|Kovacic|)))))))))) 
 
 (DEFUN |Kovacic;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|Kovacic| DV$1 DV$2))
-          (LETT $ (GETREFV 47))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 47))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|Kovacic| (LIST DV$1 DV$2)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|Kovacic| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|Factored| $) (0 . |squareFree|) (|Union| 40 '#1="failed")
+              (|Factored| %) (0 . |squareFree|) (|Union| 40 '#1="failed")
               (|Fraction| 7) (|Mapping| 26 7) |KOVACIC;kovacic;3FMU;2|
               |KOVACIC;kovacic;3FU;1| (|PositiveInteger|) (5 . ^) (11 . *)
               (17 . |differentiate|) (22 . *) (28 . +) (34 . -) (40 . /)

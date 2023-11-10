@@ -185,6 +185,33 @@
          NIL))
        ('T (PROGN (|intloopInclude| |source| 0) NIL)))))))
 
+; interpret_block(code) ==
+;     $newcompErrorCount : local := 0
+;     $inclAssertions : local := []
+;     $ncMsgList : local := []
+;     $erMsgToss : local := false
+;     $lastPos : local := $nopos
+;     $EchoLines : local := false
+;     st := MAKE_-STRING_-INPUT_-STREAM(code)
+;     intloopInclude0(st, 'webspad, 0)
+
+(DEFUN |interpret_block| (|code|)
+  (PROG (|$EchoLines| |$lastPos| |$erMsgToss| |$ncMsgList| |$inclAssertions|
+         |$newcompErrorCount| |st|)
+    (DECLARE
+     (SPECIAL |$EchoLines| |$lastPos| |$erMsgToss| |$ncMsgList|
+      |$inclAssertions| |$newcompErrorCount|))
+    (RETURN
+     (PROGN
+      (SETQ |$newcompErrorCount| 0)
+      (SETQ |$inclAssertions| NIL)
+      (SETQ |$ncMsgList| NIL)
+      (SETQ |$erMsgToss| NIL)
+      (SETQ |$lastPos| |$nopos|)
+      (SETQ |$EchoLines| NIL)
+      (SETQ |st| (MAKE-STRING-INPUT-STREAM |code|))
+      (|intloopInclude0| |st| '|webspad| 0)))))
+
 ; ncINTERPFILE(file, echo) ==
 ;   $EchoLines : local := echo
 ;   $ReadingFile : local := true

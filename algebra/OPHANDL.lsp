@@ -1,39 +1,39 @@
 
-(SDEFUN |OPHANDL;new;$;1| (($ ($))) (SPADCALL (QREFELT $ 8))) 
+(SDEFUN |OPHANDL;new;%;1| ((% (%))) (SPADCALL (QREFELT % 8))) 
 
-(SDEFUN |OPHANDL;knownHandler?;$ISB;2|
-        ((|t| ($)) (|n| (|Integer|)) (|op| (|String|)) ($ (|Boolean|)))
+(SDEFUN |OPHANDL;knownHandler?;%ISB;2|
+        ((|t| (%)) (|n| (|Integer|)) (|op| (|String|)) (% (|Boolean|)))
         (COND
-         ((SPADCALL |n| |t| (QREFELT $ 12))
-          (SPADCALL |op| (SPADCALL |t| |n| (QREFELT $ 14)) (QREFELT $ 16)))
+         ((SPADCALL |n| |t| (QREFELT % 12))
+          (SPADCALL |op| (SPADCALL |t| |n| (QREFELT % 14)) (QREFELT % 16)))
          ('T NIL))) 
 
-(SDEFUN |OPHANDL;handler;$ISHANDLER;3|
-        ((|t| ($)) (|n| (|Integer|)) (|op| (|String|)) ($ (HANDLER)))
-        (SPADCALL (SPADCALL |t| |n| (QREFELT $ 14)) |op| (QREFELT $ 18))) 
+(SDEFUN |OPHANDL;handler;%ISHANDLER;3|
+        ((|t| (%)) (|n| (|Integer|)) (|op| (|String|)) (% (HANDLER)))
+        (SPADCALL (SPADCALL |t| |n| (QREFELT % 14)) |op| (QREFELT % 18))) 
 
-(SDEFUN |OPHANDL;setHandler!;$IS2HANDLER;4|
-        ((|t| ($)) (|n| (|Integer|)) (|op| (|String|)) (|h| (HANDLER))
-         ($ (HANDLER)))
+(SDEFUN |OPHANDL;setHandler!;%IS2HANDLER;4|
+        ((|t| (%)) (|n| (|Integer|)) (|op| (|String|)) (|h| (HANDLER))
+         (% (HANDLER)))
         (SEQ
          (COND
-          ((NULL (SPADCALL |n| |t| (QREFELT $ 12)))
-           (SPADCALL |t| |n| (SPADCALL (QREFELT $ 20)) (QREFELT $ 21))))
+          ((NULL (SPADCALL |n| |t| (QREFELT % 12)))
+           (SPADCALL |t| |n| (SPADCALL (QREFELT % 20)) (QREFELT % 21))))
          (EXIT
-          (SPADCALL (SPADCALL |t| |n| (QREFELT $ 14)) |op| |h|
-                    (QREFELT $ 22))))) 
+          (SPADCALL (SPADCALL |t| |n| (QREFELT % 14)) |op| |h|
+                    (QREFELT % 22))))) 
 
-(SDEFUN |OPHANDL;removeHandler!;$ISV;5|
-        ((|t| ($)) (|n| (|Integer|)) (|op| (|String|)) ($ (|Void|)))
+(SDEFUN |OPHANDL;removeHandler!;%ISV;5|
+        ((|t| (%)) (|n| (|Integer|)) (|op| (|String|)) (% (|Void|)))
         (COND
-         ((SPADCALL |n| |t| (QREFELT $ 12))
-          (SPADCALL |op| (SPADCALL |t| |n| (QREFELT $ 14)) (QREFELT $ 25))))) 
+         ((SPADCALL |n| |t| (QREFELT % 12))
+          (SPADCALL |op| (SPADCALL |t| |n| (QREFELT % 14)) (QREFELT % 25))))) 
 
 (DECLAIM (NOTINLINE |OperatorHandlers;|)) 
 
-(DEFUN |OperatorHandlers| (#1=#:G707)
+(DEFUN |OperatorHandlers| (#1=#:G462)
   (SPROG NIL
-         (PROG (#2=#:G708)
+         (PROG (#2=#:G463)
            (RETURN
             (COND
              ((LETT #2#
@@ -49,30 +49,30 @@
                   (HREM |$ConstructorCache| '|OperatorHandlers|)))))))))) 
 
 (DEFUN |OperatorHandlers;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|OperatorHandlers| DV$1))
-          (LETT $ (GETREFV 28))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 28))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|OperatorHandlers| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|OperatorHandlers| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|XHashTable| 11 13)
-              (0 . |empty|) |OPHANDL;new;$;1| (|Boolean|) (|Integer|)
+              (0 . |empty|) |OPHANDL;new;%;1| (|Boolean|) (|Integer|)
               (4 . |key?|) (|XHashTable| 15 6) (10 . |elt|) (|String|)
-              (16 . |key?|) |OPHANDL;knownHandler?;$ISB;2| (22 . |elt|)
-              |OPHANDL;handler;$ISHANDLER;3| (28 . |empty|) (32 . |setelt!|)
-              (39 . |setelt!|) |OPHANDL;setHandler!;$IS2HANDLER;4|
+              (16 . |key?|) |OPHANDL;knownHandler?;%ISB;2| (22 . |elt|)
+              |OPHANDL;handler;%ISHANDLER;3| (28 . |empty|) (32 . |setelt!|)
+              (39 . |setelt!|) |OPHANDL;setHandler!;%IS2HANDLER;4|
               (|Union| 6 '"failed") (46 . |remove!|) (|Void|)
-              |OPHANDL;removeHandler!;$ISV;5|)
+              |OPHANDL;removeHandler!;%ISV;5|)
            '#(|setHandler!| 52 |removeHandler!| 60 |new| 67 |knownHandler?| 71
               |handler| 78)
            'NIL

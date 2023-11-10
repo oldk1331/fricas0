@@ -1,14 +1,14 @@
 
-(SDEFUN |FORTFORM;assignable_form?| ((|o| (|OutputForm|)) ($ (|Boolean|)))
+(SDEFUN |FORTFORM;assignable_form?| ((|o| (|OutputForm|)) (% (|Boolean|)))
         (SPROG ((|sop| (|Symbol|)) (|op| (|OutputForm|)))
                (SEQ
-                (COND ((SPADCALL |o| (QREFELT $ 10)) 'T)
+                (COND ((SPADCALL |o| (QREFELT % 10)) 'T)
                       (#1='T
-                       (SEQ (LETT |op| (SPADCALL |o| (QREFELT $ 11)))
+                       (SEQ (LETT |op| (SPADCALL |o| (QREFELT % 11)))
                             (EXIT
                              (COND
-                              ((SPADCALL |op| (QREFELT $ 12))
-                               (SEQ (LETT |sop| (SPADCALL |op| (QREFELT $ 14)))
+                              ((SPADCALL |op| (QREFELT % 12))
+                               (SEQ (LETT |sop| (SPADCALL |op| (QREFELT % 14)))
                                     (COND
                                      ((OR (EQUAL |sop| '=)
                                           (OR (EQUAL |sop| 'MATRIX)
@@ -17,31 +17,31 @@
                                     (EXIT 'T)))
                               (#1# 'T))))))))) 
 
-(SDEFUN |FORTFORM;convert;OfI$;2|
-        ((|o| (|OutputForm|)) (|i| (|Integer|)) ($ ($)))
-        (SPROG ((|var| ($)))
+(SDEFUN |FORTFORM;convert;OfI%;2|
+        ((|o| (|OutputForm|)) (|i| (|Integer|)) (% (%)))
+        (SPROG ((|var| (%)))
                (SEQ
-                (COND ((NULL (|FORTFORM;assignable_form?| |o| $)) |o|)
+                (COND ((NULL (|FORTFORM;assignable_form?| |o| %)) |o|)
                       ('T
                        (SEQ
                         (LETT |var|
                               (SPADCALL
                                (SPADCALL (STRCONC "R" (STRINGIMAGE |i|))
-                                         (QREFELT $ 16))
-                               (QREFELT $ 17)))
+                                         (QREFELT % 16))
+                               (QREFELT % 17)))
                         (EXIT
-                         (SPADCALL (SPADCALL '= (QREFELT $ 18))
-                                   (LIST |var| |o|) (QREFELT $ 20))))))))) 
+                         (SPADCALL (SPADCALL '= (QREFELT % 18))
+                                   (LIST |var| |o|) (QREFELT % 20))))))))) 
 
-(SDEFUN |FORTFORM;display;$V;3| ((|x| ($)) ($ (|Void|)))
-        (SPADCALL (SPADCALL (SPADCALL |x| (QREFELT $ 25)) (QREFELT $ 26))
-                  (QREFELT $ 28))) 
+(SDEFUN |FORTFORM;display;%V;3| ((|x| (%)) (% (|Void|)))
+        (SPADCALL (SPADCALL (SPADCALL |x| (QREFELT % 25)) (QREFELT % 26))
+                  (QREFELT % 28))) 
 
 (DECLAIM (NOTINLINE |FortranFormat;|)) 
 
 (DEFUN |FortranFormat| ()
   (SPROG NIL
-         (PROG (#1=#:G719)
+         (PROG (#1=#:G464)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|FortranFormat|))
@@ -57,28 +57,28 @@
                  ((NOT #1#) (HREM |$ConstructorCache| '|FortranFormat|)))))))))) 
 
 (DEFUN |FortranFormat;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|FortranFormat|))
-          (LETT $ (GETREFV 30))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|FortranFormat| NIL (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 6 (|OutputForm|))
-          $))) 
+          (LETT % (GETREFV 30))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|FortranFormat| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 6 (|OutputForm|))
+          %))) 
 
 (MAKEPROP '|FortranFormat| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL '|Rep| (|Boolean|) (|OutputForm|)
               (|OutputFormTools|) (0 . |atom?|) (5 . |operator|)
               (10 . |symbol?|) (|Symbol|) (15 . |symbol|) (|String|)
-              (20 . |coerce|) (25 . |coerce|) (30 . |outputForm|) (|List| $)
-              (35 . |elt|) (|Integer|) |FORTFORM;convert;OfI$;2| (|List| 15)
+              (20 . |coerce|) (25 . |coerce|) (30 . |outputForm|) (|List| %)
+              (35 . |elt|) (|Integer|) |FORTFORM;convert;OfI%;2| (|List| 15)
               (|FortranCodeTools|) (41 . |expression2Fortran|)
               (46 . |fort_clean_lines|) (|Void|) (51 . |displayLines|)
-              |FORTFORM;display;$V;3|)
+              |FORTFORM;display;%V;3|)
            '#(|display| 56 |convert| 61) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

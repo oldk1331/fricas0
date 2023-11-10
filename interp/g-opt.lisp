@@ -557,7 +557,7 @@
 
 ; compileTimeBindingOf u ==
 ;   NULL(name:= BPINAME u)  => keyedSystemError("S2OO0001",[u])
-;   name="Undef" => MOAN "optimiser found unknown function"
+;   name="Undef" => MOAN '"optimiser found unknown function"
 ;   name
 
 (DEFUN |compileTimeBindingOf| (|u|)
@@ -566,7 +566,7 @@
      (COND
       ((NULL (SETQ |name| (BPINAME |u|)))
        (|keyedSystemError| 'S2OO0001 (LIST |u|)))
-      ((EQ |name| '|Undef|) (MOAN '|optimiser found unknown function|))
+      ((EQ |name| '|Undef|) (MOAN "optimiser found unknown function"))
       ('T |name|)))))
 
 ; optMkRecord ["mkRecord",:u] ==

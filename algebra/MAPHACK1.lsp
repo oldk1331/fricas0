@@ -1,7 +1,7 @@
 
 (SDEFUN |MAPHACK1;iter;MNni2A;1|
-        ((|g| (|Mapping| A A)) (|n| (|NonNegativeInteger|)) (|x| (A)) ($ (A)))
-        (SPROG ((#1=#:G700 NIL) (|i| NIL))
+        ((|g| (|Mapping| A A)) (|n| (|NonNegativeInteger|)) (|x| (A)) (% (A)))
+        (SPROG ((#1=#:G453 NIL) (|i| NIL))
                (SEQ
                 (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -11,8 +11,8 @@
 
 (SDEFUN |MAPHACK1;recur;MNni2A;2|
         ((|g| (|Mapping| A (|NonNegativeInteger|) A))
-         (|n| (|NonNegativeInteger|)) (|x| (A)) ($ (A)))
-        (SPROG ((#1=#:G706 NIL) (|i| NIL))
+         (|n| (|NonNegativeInteger|)) (|x| (A)) (% (A)))
+        (SPROG ((#1=#:G459 NIL) (|i| NIL))
                (SEQ
                 (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -22,9 +22,9 @@
 
 (DECLAIM (NOTINLINE |MappingPackageInternalHacks1;|)) 
 
-(DEFUN |MappingPackageInternalHacks1| (#1=#:G707)
+(DEFUN |MappingPackageInternalHacks1| (#1=#:G460)
   (SPROG NIL
-         (PROG (#2=#:G708)
+         (PROG (#2=#:G461)
            (RETURN
             (COND
              ((LETT #2#
@@ -42,19 +42,19 @@
                         '|MappingPackageInternalHacks1|)))))))))) 
 
 (DEFUN |MappingPackageInternalHacks1;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|MappingPackageInternalHacks1| DV$1))
-          (LETT $ (GETREFV 12))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 12))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|MappingPackageInternalHacks1|
-                      (LIST DV$1) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|MappingPackageInternalHacks1| '|infovec|
           (LIST

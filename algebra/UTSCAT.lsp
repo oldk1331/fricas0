@@ -6,7 +6,7 @@
 (DEFPARAMETER |UnivariateTaylorSeriesCategory;AL| 'NIL) 
 
 (DEFUN |UnivariateTaylorSeriesCategory| (|t#1|)
-  (LET (#1=#:G712 (#2=#:G713 (|devaluate| |t#1|)))
+  (LET (#1=#:G470 (#2=#:G471 (|devaluate| |t#1|)))
     (COND
      ((SETQ #1# (|assoc| #2# |UnivariateTaylorSeriesCategory;AL|)) (CDR #1#))
      (T
@@ -17,11 +17,11 @@
       #1#)))) 
 
 (DEFUN |UnivariateTaylorSeriesCategory;| (|t#1|)
-  (SPROG ((#1=#:G711 NIL))
+  (SPROG ((#1=#:G469 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
-                                   (|subst_in_cat| '(#2=#:G710)
+                                   (|subst_in_cat| '(#2=#:G468)
                                                    (LIST
                                                     '(|NonNegativeInteger|))
                                                    (COND
@@ -34,7 +34,7 @@
                                                         '|t#1| '#2#)
                                                        (|mkCategory|
                                                         '(((|series|
-                                                            ($
+                                                            (%
                                                              (|Stream|
                                                               (|Record|
                                                                (|:| |k|
@@ -44,34 +44,34 @@
                                                            T)
                                                           ((|coefficients|
                                                             ((|Stream| |t#1|)
-                                                             $))
+                                                             %))
                                                            T)
                                                           ((|series|
-                                                            ($
+                                                            (%
                                                              (|Stream| |t#1|)))
                                                            T)
-                                                          ((|quoByVar| ($ $))
+                                                          ((|quoByVar| (% %))
                                                            T)
                                                           ((|multiplyCoefficients|
-                                                            ($
+                                                            (%
                                                              (|Mapping| |t#1|
                                                                         (|Integer|))
-                                                             $))
+                                                             %))
                                                            T)
                                                           ((|polynomial|
                                                             ((|Polynomial|
                                                               |t#1|)
-                                                             $
+                                                             %
                                                              (|NonNegativeInteger|)))
                                                            T)
                                                           ((|polynomial|
                                                             ((|Polynomial|
                                                               |t#1|)
-                                                             $
+                                                             %
                                                              (|NonNegativeInteger|)
                                                              (|NonNegativeInteger|)))
                                                            T)
-                                                          ((^ ($ $ |t#1|))
+                                                          ((^ (% % |t#1|))
                                                            (|has| |t#1|
                                                                   (|Field|))))
                                                         NIL NIL NIL))))))))

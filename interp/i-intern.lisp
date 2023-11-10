@@ -1853,7 +1853,7 @@
 ;   null atom x => put(first x,prop,val,e)
 ;   newProplist:= augProplistOf(x,prop,val,e)
 ;   prop="modemap" and $insideCapsuleFunctionIfTrue=true =>
-;     SAY ["**** modemap PUT on CapsuleModemapFrame: ",val]
+;     SAY ['"**** modemap PUT on CapsuleModemapFrame: ",val]
 ;     $CapsuleModemapFrame:=
 ;       addBinding(x,augProplistOf(x,"modemap",val,$CapsuleModemapFrame),
 ;         $CapsuleModemapFrame)
@@ -1873,7 +1873,7 @@
         (COND
          ((AND (EQ |prop| '|modemap|) (EQUAL |$insideCapsuleFunctionIfTrue| T))
           (PROGN
-           (SAY (LIST '|**** modemap PUT on CapsuleModemapFrame: | |val|))
+           (SAY (LIST "**** modemap PUT on CapsuleModemapFrame: " |val|))
            (SETQ |$CapsuleModemapFrame|
                    (|addBinding| |x|
                     (|augProplistOf| |x| '|modemap| |val|

@@ -6,8 +6,8 @@
 (DEFPARAMETER |SExpressionCategory;AL| 'NIL) 
 
 (DEFUN |SExpressionCategory| (|t#1| |t#2| |t#3| |t#4|)
-  (LET (#1=#:G690
-        (#2=#:G691
+  (LET (#1=#:G449
+        (#2=#:G450
          (LIST (|devaluate| |t#1|) (|devaluate| |t#2|) (|devaluate| |t#3|)
                (|devaluate| |t#4|))))
     (COND ((SETQ #1# (|assoc| #2# |SExpressionCategory;AL|)) (CDR #1#))
@@ -19,7 +19,7 @@
            #1#)))) 
 
 (DEFUN |SExpressionCategory;| (|t#1| |t#2| |t#3| |t#4|)
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3| |t#4|)
@@ -28,73 +28,74 @@
                                          ('T
                                           (LETT |SExpressionCategory;CAT|
                                                 (|Join| (|SetCategory|)
+                                                        (|Hashable|)
                                                         (|mkCategory|
                                                          '(((|eq|
-                                                             ((|Boolean|) $ $))
+                                                             ((|Boolean|) % %))
                                                             T)
                                                            ((|null?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|atom?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|pair?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|list?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|string?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|symbol?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|integer?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|float?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|destruct|
-                                                             ((|List| $) $))
+                                                             ((|List| %) %))
                                                             T)
                                                            ((|string|
-                                                             (|t#1| $))
+                                                             (|t#1| %))
                                                             T)
                                                            ((|symbol|
-                                                             (|t#2| $))
+                                                             (|t#2| %))
                                                             T)
                                                            ((|integer|
-                                                             (|t#3| $))
+                                                             (|t#3| %))
                                                             T)
-                                                           ((|float| (|t#4| $))
-                                                            T)
-                                                           ((|convert|
-                                                             ($ (|List| $)))
+                                                           ((|float| (|t#4| %))
                                                             T)
                                                            ((|convert|
-                                                             ($ |t#1|))
+                                                             (% (|List| %)))
                                                             T)
                                                            ((|convert|
-                                                             ($ |t#2|))
+                                                             (% |t#1|))
                                                             T)
                                                            ((|convert|
-                                                             ($ |t#3|))
+                                                             (% |t#2|))
                                                             T)
                                                            ((|convert|
-                                                             ($ |t#4|))
+                                                             (% |t#3|))
                                                             T)
-                                                           ((|car| ($ $)) T)
-                                                           ((|cdr| ($ $)) T)
+                                                           ((|convert|
+                                                             (% |t#4|))
+                                                            T)
+                                                           ((|car| (% %)) T)
+                                                           ((|cdr| (% %)) T)
                                                            ((|#|
-                                                             ((|Integer|) $))
+                                                             ((|Integer|) %))
                                                             T)
                                                            ((|elt|
-                                                             ($ $ (|Integer|)))
+                                                             (% % (|Integer|)))
                                                             T)
                                                            ((|elt|
-                                                             ($ $
+                                                             (% %
                                                               (|List|
                                                                (|Integer|))))
                                                             T))

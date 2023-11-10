@@ -6,7 +6,7 @@
 (DEFPARAMETER |LazyStreamAggregate;AL| 'NIL) 
 
 (DEFUN |LazyStreamAggregate| (|t#1|)
-  (LET (#1=#:G783 (#2=#:G784 (|devaluate| |t#1|)))
+  (LET (#1=#:G542 (#2=#:G543 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |LazyStreamAggregate;AL|)) (CDR #1#))
           (T
            (SETQ |LazyStreamAggregate;AL|
@@ -15,7 +15,7 @@
            #1#)))) 
 
 (DEFUN |LazyStreamAggregate;| (|t#1|)
-  (SPROG ((#1=#:G782 NIL))
+  (SPROG ((#1=#:G541 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -26,35 +26,35 @@
                                                  (|StreamAggregate| '|t#1|)
                                                  (|mkCategory|
                                                   '(((|remove|
-                                                      ($
+                                                      (%
                                                        (|Mapping| (|Boolean|)
                                                                   |t#1|)
-                                                       $))
+                                                       %))
                                                      T)
                                                     ((|select|
-                                                      ($
+                                                      (%
                                                        (|Mapping| (|Boolean|)
                                                                   |t#1|)
-                                                       $))
+                                                       %))
                                                      T)
                                                     ((|explicitEntries?|
-                                                      ((|Boolean|) $))
+                                                      ((|Boolean|) %))
                                                      T)
                                                     ((|explicitlyEmpty?|
-                                                      ((|Boolean|) $))
+                                                      ((|Boolean|) %))
                                                      T)
-                                                    ((|lazy?| ((|Boolean|) $))
+                                                    ((|lazy?| ((|Boolean|) %))
                                                      T)
-                                                    ((|lazyEvaluate| ($ $)) T)
-                                                    ((|frst| (|t#1| $)) T)
-                                                    ((|rst| ($ $)) T)
+                                                    ((|lazyEvaluate| (% %)) T)
+                                                    ((|frst| (|t#1| %)) T)
+                                                    ((|rst| (% %)) T)
                                                     ((|numberOfComputedEntries|
                                                       ((|NonNegativeInteger|)
-                                                       $))
+                                                       %))
                                                      T)
                                                     ((|extend|
-                                                      ($ $ (|Integer|)))
+                                                      (% % (|Integer|)))
                                                      T)
-                                                    ((|complete| ($ $)) T))
+                                                    ((|complete| (% %)) T))
                                                   NIL NIL NIL)))))))
            (SETELT #1# 0 (LIST '|LazyStreamAggregate| |t#1|))))) 

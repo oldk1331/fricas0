@@ -1,22 +1,22 @@
 
-(SDEFUN |RCAGG-;elt;AvalueS;1| ((|x| (A)) (T1 ("value")) ($ (S)))
-        (SPADCALL |x| (QREFELT $ 8))) 
+(SDEFUN |RCAGG-;elt;AvalueS;1| ((|x| (A)) (T3 ("value")) (% (S)))
+        (SPADCALL |x| (QREFELT % 8))) 
 
-(SDEFUN |RCAGG-;leaf?;AB;2| ((|x| (A)) ($ (|Boolean|)))
-        (COND ((SPADCALL |x| (QREFELT $ 12)) NIL)
-              ('T (NULL (SPADCALL |x| (QREFELT $ 14)))))) 
+(SDEFUN |RCAGG-;leaf?;AB;2| ((|x| (A)) (% (|Boolean|)))
+        (COND ((SPADCALL |x| (QREFELT % 12)) NIL)
+              ('T (NULL (SPADCALL |x| (QREFELT % 14)))))) 
 
-(SDEFUN |RCAGG-;nodes;AL;3| ((|x| (A)) ($ (|List| A)))
-        (SPROG ((#1=#:G728 NIL) (|y| NIL) (#2=#:G727 NIL))
+(SDEFUN |RCAGG-;nodes;AL;3| ((|x| (A)) (% (|List| A)))
+        (SPROG ((#1=#:G468 NIL) (|y| NIL) (#2=#:G467 NIL))
                (SEQ
-                (COND ((SPADCALL |x| (QREFELT $ 12)) NIL)
+                (COND ((SPADCALL |x| (QREFELT % 12)) NIL)
                       ('T
                        (CONS |x|
                              (SPADCALL
                               (PROGN
                                (LETT #2# NIL)
                                (SEQ (LETT |y| NIL)
-                                    (LETT #1# (SPADCALL |x| (QREFELT $ 14)))
+                                    (LETT #1# (SPADCALL |x| (QREFELT % 14)))
                                     G190
                                     (COND
                                      ((OR (ATOM #1#)
@@ -25,24 +25,24 @@
                                     (SEQ
                                      (EXIT
                                       (LETT #2#
-                                            (CONS (SPADCALL |y| (QREFELT $ 16))
+                                            (CONS (SPADCALL |y| (QREFELT % 16))
                                                   #2#))))
                                     (LETT #1# (CDR #1#)) (GO G190) G191
                                     (EXIT (NREVERSE #2#))))
-                              (QREFELT $ 18)))))))) 
+                              (QREFELT % 18)))))))) 
 
-(SDEFUN |RCAGG-;leaves;AL;4| ((|x| (A)) ($ (|List| S)))
-        (SPROG ((#1=#:G735 NIL) (|y| NIL) (#2=#:G734 NIL))
+(SDEFUN |RCAGG-;leaves;AL;4| ((|x| (A)) (% (|List| S)))
+        (SPROG ((#1=#:G475 NIL) (|y| NIL) (#2=#:G474 NIL))
                (SEQ
-                (COND ((SPADCALL |x| (QREFELT $ 12)) NIL)
-                      ((SPADCALL |x| (QREFELT $ 20))
-                       (LIST (SPADCALL |x| (QREFELT $ 8))))
+                (COND ((SPADCALL |x| (QREFELT % 12)) NIL)
+                      ((SPADCALL |x| (QREFELT % 20))
+                       (LIST (SPADCALL |x| (QREFELT % 8))))
                       ('T
                        (SPADCALL
                         (PROGN
                          (LETT #2# NIL)
                          (SEQ (LETT |y| NIL)
-                              (LETT #1# (SPADCALL |x| (QREFELT $ 14))) G190
+                              (LETT #1# (SPADCALL |x| (QREFELT % 14))) G190
                               (COND
                                ((OR (ATOM #1#)
                                     (PROGN (LETT |y| (CAR #1#)) NIL))
@@ -50,47 +50,47 @@
                               (SEQ
                                (EXIT
                                 (LETT #2#
-                                      (CONS (SPADCALL |y| (QREFELT $ 22))
+                                      (CONS (SPADCALL |y| (QREFELT % 22))
                                             #2#))))
                               (LETT #1# (CDR #1#)) (GO G190) G191
                               (EXIT (NREVERSE #2#))))
-                        (QREFELT $ 23))))))) 
+                        (QREFELT % 23))))))) 
 
 (SDEFUN |RCAGG-;setelt!;Avalue2S;5|
-        ((|x| (A)) (T3 ("value")) (|y| (S)) ($ (S)))
-        (SPADCALL |x| |y| (QREFELT $ 25))) 
+        ((|x| (A)) (T4 ("value")) (|y| (S)) (% (S)))
+        (SPADCALL |x| |y| (QREFELT % 25))) 
 
-(SDEFUN |RCAGG-;child?;2AB;6| ((|x| (A)) (|l| (A)) ($ (|Boolean|)))
-        (COND ((SPADCALL |l| (QREFELT $ 12)) NIL)
-              ('T (SPADCALL |x| (SPADCALL |l| (QREFELT $ 14)) (QREFELT $ 27))))) 
+(SDEFUN |RCAGG-;child?;2AB;6| ((|x| (A)) (|l| (A)) (% (|Boolean|)))
+        (COND ((SPADCALL |l| (QREFELT % 12)) NIL)
+              ('T (SPADCALL |x| (SPADCALL |l| (QREFELT % 14)) (QREFELT % 27))))) 
 
-(SDEFUN |RCAGG-;parts;AL;7| ((|x| (A)) ($ (|List| S)))
-        (SPROG ((#1=#:G743 NIL) (|i| NIL) (#2=#:G742 NIL))
+(SDEFUN |RCAGG-;parts;AL;7| ((|x| (A)) (% (|List| S)))
+        (SPROG ((#1=#:G483 NIL) (|i| NIL) (#2=#:G482 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
-                 (SEQ (LETT |i| NIL) (LETT #1# (SPADCALL |x| (QREFELT $ 16)))
+                 (SEQ (LETT |i| NIL) (LETT #1# (SPADCALL |x| (QREFELT % 16)))
                       G190
                       (COND
                        ((OR (ATOM #1#) (PROGN (LETT |i| (CAR #1#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2# (CONS (SPADCALL |i| (QREFELT $ 8)) #2#))))
+                        (LETT #2# (CONS (SPADCALL |i| (QREFELT % 8)) #2#))))
                       (LETT #1# (CDR #1#)) (GO G190) G191
                       (EXIT (NREVERSE #2#))))))) 
 
 (DECLAIM (NOTINLINE |RecursiveAggregate&;|)) 
 
 (DEFUN |RecursiveAggregate&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|RecursiveAggregate&| DV$1 DV$2))
-          (LETT $ (GETREFV 30))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 30))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
@@ -98,32 +98,32 @@
                                                              '(|shallowlyMutable|))
                                               (|HasCategory| |#2|
                                                              '(|BasicType|))))))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
           (COND
            ((|testBitVector| |pv$| 1)
-            (QSETREFV $ 26
+            (QSETREFV % 26
                       (CONS (|dispatchFunction| |RCAGG-;setelt!;Avalue2S;5|)
-                            $))))
+                            %))))
           (COND
            ((|HasCategory| |#1| '(|BasicType|))
             (COND
              ((|testBitVector| |pv$| 2)
-              (QSETREFV $ 28
+              (QSETREFV % 28
                         (CONS (|dispatchFunction| |RCAGG-;child?;2AB;6|)
-                              $))))))
+                              %))))))
           (COND
            ((|HasCategory| |#1| '(|finiteAggregate|))
-            (QSETREFV $ 29 (CONS (|dispatchFunction| |RCAGG-;parts;AL;7|) $))))
-          $))) 
+            (QSETREFV % 29 (CONS (|dispatchFunction| |RCAGG-;parts;AL;7|) %))))
+          %))) 
 
 (MAKEPROP '|RecursiveAggregate&| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (0 . |value|) '#1="value" |RCAGG-;elt;AvalueS;1| (|Boolean|)
-              (5 . |empty?|) (|List| $) (10 . |children|) |RCAGG-;leaf?;AB;2|
+              (5 . |empty?|) (|List| %) (10 . |children|) |RCAGG-;leaf?;AB;2|
               (15 . |nodes|) (|List| 6) (20 . |concat|) |RCAGG-;nodes;AL;3|
               (25 . |leaf?|) (|List| 7) (30 . |leaves|) (35 . |concat|)
               |RCAGG-;leaves;AL;4| (40 . |setvalue!|) (46 . |setelt!|)

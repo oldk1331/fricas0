@@ -1,86 +1,84 @@
 
-(PUT '|COCHNC;coChainComplex;L$;1| '|SPADreplace| '(XLAM (|v|) |v|)) 
+(PUT '|COCHNC;coChainComplex;L%;1| '|SPADreplace| '(XLAM (|v|) |v|)) 
 
-(SDEFUN |COCHNC;coChainComplex;L$;1|
-        ((|v| (|List| (|Matrix| (|Integer|)))) ($ ($))) |v|) 
+(SDEFUN |COCHNC;coChainComplex;L%;1|
+        ((|v| (|List| (|Matrix| (|Integer|)))) (% (%))) |v|) 
 
-(SDEFUN |COCHNC;coChainComplex;Cc$;2| ((|s| (|ChainComplex|)) ($ ($)))
-        (SPROG ((|tm| ($)))
-               (SEQ (LETT |tm| (SPADCALL |s| (QREFELT $ 11)))
+(SDEFUN |COCHNC;coChainComplex;Cc%;2| ((|s| (|ChainComplex|)) (% (%)))
+        (SPROG ((|tm| (%)))
+               (SEQ (LETT |tm| (SPADCALL |s| (QREFELT % 11)))
                     (LETT |tm| (NREVERSE |tm|))
-                    (EXIT (SPADCALL (ELT $ 13) |tm| (QREFELT $ 15)))))) 
+                    (EXIT (SPADCALL (ELT % 13) |tm| (QREFELT % 15)))))) 
 
-(SDEFUN |COCHNC;validate;$B;3| ((|a| ($)) ($ (|Boolean|)))
+(SDEFUN |COCHNC;validate;%B;3| ((|a| (%)) (% (|Boolean|)))
         (SPROG
-         ((|last| #1=(|Matrix| (|Integer|))) (#2=#:G725 NIL)
-          (|prod| (|Matrix| (|Integer|))) (|m| #1#) (#3=#:G726 NIL) (|x| NIL)
+         ((|last| (|Matrix| (|Integer|))) (#1=#:G464 NIL)
+          (|prod| (|Matrix| (|Integer|))) (#2=#:G465 NIL) (|m| NIL)
           (|len| (|NonNegativeInteger|)))
          (SEQ
           (EXIT
            (SEQ (LETT |len| (LENGTH |a|))
-                (COND ((< |len| 2) (PROGN (LETT #2# 'T) (GO #4=#:G724))))
-                (LETT |last| (SPADCALL |a| 1 (QREFELT $ 18)))
-                (SEQ (LETT |x| 2) (LETT #3# |len|) G190
-                     (COND ((|greater_SI| |x| #3#) (GO G191)))
-                     (SEQ (LETT |m| (SPADCALL |a| |x| (QREFELT $ 18)))
-                          (COND
-                           ((SPADCALL (SPADCALL |m| (QREFELT $ 19))
-                                      (SPADCALL |last| (QREFELT $ 20))
-                                      (QREFELT $ 22))
-                            (SEQ
+                (COND ((< |len| 2) (PROGN (LETT #1# 'T) (GO #3=#:G463))))
+                (LETT |last| (|SPADfirst| |a|))
+                (SEQ (LETT |m| NIL) (LETT #2# (CDR |a|)) G190
+                     (COND
+                      ((OR (ATOM #2#) (PROGN (LETT |m| (CAR #2#)) NIL))
+                       (GO G191)))
+                     (SEQ
+                      (COND
+                       ((SPADCALL (SPADCALL |m| (QREFELT % 18))
+                                  (SPADCALL |last| (QREFELT % 19))
+                                  (QREFELT % 21))
+                        (SEQ
+                         (SPADCALL
+                          (SPADCALL
+                           (SPADCALL
+                            (SPADCALL
+                             (SPADCALL "validate failed nRows=" (QREFELT % 24))
+                             (SPADCALL (SPADCALL |m| (QREFELT % 18))
+                                       (QREFELT % 25))
+                             (QREFELT % 26))
+                            (SPADCALL " not equal to nCols " (QREFELT % 24))
+                            (QREFELT % 26))
+                           (SPADCALL (SPADCALL |last| (QREFELT % 19))
+                                     (QREFELT % 25))
+                           (QREFELT % 26))
+                          (QREFELT % 28))
+                         (EXIT (PROGN (LETT #1# NIL) (GO #3#))))))
+                      (LETT |prod| (SPADCALL |last| |m| (QREFELT % 29)))
+                      (COND
+                       ((NULL (SPADCALL |prod| (QREFELT % 30)))
+                        (SEQ
+                         (SPADCALL
+                          (SPADCALL
+                           (SPADCALL
+                            (SPADCALL
                              (SPADCALL
                               (SPADCALL
                                (SPADCALL
-                                (SPADCALL
-                                 (SPADCALL "validate failed nRows="
-                                           (QREFELT $ 25))
-                                 (SPADCALL (SPADCALL |m| (QREFELT $ 19))
-                                           (QREFELT $ 26))
-                                 (QREFELT $ 27))
-                                (SPADCALL " not equal to nCols "
-                                          (QREFELT $ 25))
-                                (QREFELT $ 27))
-                               (SPADCALL (SPADCALL |last| (QREFELT $ 20))
-                                         (QREFELT $ 26))
-                               (QREFELT $ 27))
-                              (QREFELT $ 29))
-                             (EXIT (PROGN (LETT #2# NIL) (GO #4#))))))
-                          (LETT |prod| (SPADCALL |last| |m| (QREFELT $ 30)))
-                          (COND
-                           ((NULL (SPADCALL |prod| (QREFELT $ 31)))
-                            (SEQ
-                             (SPADCALL
-                              (SPADCALL
-                               (SPADCALL
-                                (SPADCALL
-                                 (SPADCALL
-                                  (SPADCALL
-                                   (SPADCALL
-                                    "validate failed: product of adjacent maps should be zero"
-                                    (QREFELT $ 25))
-                                   (SPADCALL |last| (QREFELT $ 32))
-                                   (QREFELT $ 27))
-                                  (SPADCALL " * " (QREFELT $ 25))
-                                  (QREFELT $ 27))
-                                 (SPADCALL |m| (QREFELT $ 32)) (QREFELT $ 27))
-                                (SPADCALL " = " (QREFELT $ 25)) (QREFELT $ 27))
-                               (SPADCALL |prod| (QREFELT $ 32)) (QREFELT $ 27))
-                              (QREFELT $ 29))
-                             (EXIT (PROGN (LETT #2# NIL) (GO #4#))))))
-                          (EXIT (LETT |last| |m|)))
-                     (LETT |x| (|inc_SI| |x|)) (GO G190) G191 (EXIT NIL))
+                                "validate failed: product of adjacent maps should be zero"
+                                (QREFELT % 24))
+                               (SPADCALL |last| (QREFELT % 31)) (QREFELT % 26))
+                              (SPADCALL " * " (QREFELT % 24)) (QREFELT % 26))
+                             (SPADCALL |m| (QREFELT % 31)) (QREFELT % 26))
+                            (SPADCALL " = " (QREFELT % 24)) (QREFELT % 26))
+                           (SPADCALL |prod| (QREFELT % 31)) (QREFELT % 26))
+                          (QREFELT % 28))
+                         (EXIT (PROGN (LETT #1# NIL) (GO #3#))))))
+                      (EXIT (LETT |last| |m|)))
+                     (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                 (EXIT 'T)))
-          #4# (EXIT #2#)))) 
+          #3# (EXIT #1#)))) 
 
-(SDEFUN |COCHNC;coboundary;$Nni2L;4|
-        ((|a| ($)) (|n| (|NonNegativeInteger|)) (|inp| (|List| VS))
-         ($ (|List| VS)))
+(SDEFUN |COCHNC;coboundary;%Nni2L;4|
+        ((|a| (%)) (|n| (|NonNegativeInteger|)) (|inp| (|List| VS))
+         (% (|List| VS)))
         (SPROG
-         ((|res| (|List| VS)) (#1=#:G744 NIL) (|i| NIL) (#2=#:G743 NIL)
-          (|res1| (|List| VS)) (|val| (VS)) (#3=#:G742 NIL) (|v| NIL)
+         ((|res| (|List| VS)) (#1=#:G483 NIL) (|i| NIL) (#2=#:G482 NIL)
+          (|res1| (|List| VS)) (|val| (VS)) (#3=#:G481 NIL) (|v| NIL)
           (|vs| (|Vector| (|Integer|))) (|m| (|Matrix| (|Integer|)))
           (|b| (|Vector| (|Integer|))) (|base| (|List| (|Integer|)))
-          (#4=#:G741 NIL) (|x| NIL) (#5=#:G740 NIL) (#6=#:G739 NIL) (|p| NIL)
+          (#4=#:G480 NIL) (|x| NIL) (#5=#:G479 NIL) (#6=#:G478 NIL) (|p| NIL)
           (|inpn| (|NonNegativeInteger|))
           (|maps| (|List| (|Matrix| (|Integer|)))))
          (SEQ (LETT |maps| (REVERSE |a|)) (LETT |res| NIL)
@@ -100,35 +98,35 @@
                                               #5#))))
                                 (LETT |x| (|inc_SI| |x|)) (GO G190) G191
                                 (EXIT (NREVERSE #5#)))))
-                    (LETT |b| (SPADCALL |base| (QREFELT $ 36)))
+                    (LETT |b| (SPADCALL |base| (QREFELT % 35)))
                     (LETT |m|
-                          (SPADCALL (SPADCALL |maps| |n| (QREFELT $ 18))
-                                    (QREFELT $ 13)))
-                    (LETT |vs| (SPADCALL |b| |m| (QREFELT $ 37)))
+                          (SPADCALL (SPADCALL |maps| |n| (QREFELT % 36))
+                                    (QREFELT % 13)))
+                    (LETT |vs| (SPADCALL |b| |m| (QREFELT % 37)))
                     (LETT |res1| NIL)
                     (SEQ (LETT |v| NIL)
-                         (LETT #3# (SPADCALL |vs| (QREFELT $ 38))) G190
+                         (LETT #3# (SPADCALL |vs| (QREFELT % 38))) G190
                          (COND
                           ((OR (ATOM #3#) (PROGN (LETT |v| (CAR #3#)) NIL))
                            (GO G191)))
-                         (SEQ (LETT |val| (SPADCALL |inp| |p| (QREFELT $ 40)))
+                         (SEQ (LETT |val| (SPADCALL |inp| |p| (QREFELT % 40)))
                               (COND
                                ((EQL |v| 0)
                                 (LETT |res1|
-                                      (SPADCALL |res1| (|spadConstant| $ 41)
-                                                (QREFELT $ 42)))))
+                                      (SPADCALL |res1| (|spadConstant| % 41)
+                                                (QREFELT % 42)))))
                               (COND
                                ((> |v| 0)
                                 (LETT |res1|
                                       (SPADCALL |res1|
-                                                (SPADCALL |val| (QREFELT $ 43))
-                                                (QREFELT $ 42)))))
+                                                (SPADCALL |val| (QREFELT % 43))
+                                                (QREFELT % 42)))))
                               (EXIT
                                (COND
                                 ((< |v| 0)
                                  (LETT |res1|
                                        (SPADCALL |res1| |val|
-                                                 (QREFELT $ 42)))))))
+                                                 (QREFELT % 42)))))))
                          (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
                     (EXIT
                      (COND ((NULL |res|) (LETT |res| |res1|))
@@ -146,20 +144,20 @@
                                                 (CONS
                                                  (SPADCALL
                                                   (SPADCALL |res| |i|
-                                                            (QREFELT $ 40))
+                                                            (QREFELT % 40))
                                                   (SPADCALL |res1| |i|
-                                                            (QREFELT $ 40))
-                                                  (QREFELT $ 44))
+                                                            (QREFELT % 40))
+                                                  (QREFELT % 44))
                                                  #2#))))
                                         (LETT |i| (|inc_SI| |i|)) (GO G190)
                                         G191 (EXIT (NREVERSE #2#)))))))))
                    (LETT |p| (|inc_SI| |p|)) (GO G190) G191 (EXIT NIL))
               (EXIT |res|)))) 
 
-(SDEFUN |COCHNC;coHomology;$L;5| ((|a| ($)) ($ (|List| (|Homology|))))
+(SDEFUN |COCHNC;coHomology;%L;5| ((|a| (%)) (% (|List| (|Homology|))))
         (SPROG
          ((|prev| (|Matrix| (|Integer|))) (|notFirst| (|Boolean|))
-          (|res| (|List| (|Homology|))) (|m2| (|Homology|)) (#1=#:G751 NIL)
+          (|res| (|List| (|Homology|))) (|m2| (|Homology|)) (#1=#:G490 NIL)
           (|m1| NIL))
          (SEQ (LETT |res| NIL) (LETT |prev| (MAKE_MATRIX 0 0))
               (LETT |notFirst| NIL)
@@ -170,18 +168,18 @@
                    (SEQ
                     (COND
                      (|notFirst|
-                      (SEQ (LETT |m2| (SPADCALL |m1| |prev| (QREFELT $ 48)))
+                      (SEQ (LETT |m2| (SPADCALL |m1| |prev| (QREFELT % 48)))
                            (EXIT
                             (LETT |res|
-                                  (SPADCALL |res| |m2| (QREFELT $ 50)))))))
+                                  (SPADCALL |res| |m2| (QREFELT % 50)))))))
                     (LETT |notFirst| 'T) (EXIT (LETT |prev| |m1|)))
                    (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
               (EXIT |res|)))) 
 
-(SDEFUN |COCHNC;coerce;$Of;6| ((|s| ($)) ($ (|OutputForm|)))
+(SDEFUN |COCHNC;coerce;%Of;6| ((|s| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|lst| (|List| (|OutputForm|))) (#1=#:G757 NIL) (|x| NIL)
-          (#2=#:G756 NIL))
+         ((|lst| (|List| (|OutputForm|))) (#1=#:G496 NIL) (|x| NIL)
+          (#2=#:G495 NIL))
          (SEQ
           (LETT |lst|
                 (PROGN
@@ -192,16 +190,16 @@
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2# (CONS (SPADCALL |x| (QREFELT $ 32)) #2#))))
+                        (LETT #2# (CONS (SPADCALL |x| (QREFELT % 31)) #2#))))
                       (LETT #1# (CDR #1#)) (GO G190) G191
                       (EXIT (NREVERSE #2#)))))
-          (EXIT (SPADCALL |lst| (QREFELT $ 53)))))) 
+          (EXIT (SPADCALL |lst| (QREFELT % 53)))))) 
 
 (DECLAIM (NOTINLINE |CoChainComplex;|)) 
 
-(DEFUN |CoChainComplex| (#1=#:G758)
+(DEFUN |CoChainComplex| (#1=#:G497)
   (SPROG NIL
-         (PROG (#2=#:G759)
+         (PROG (#2=#:G498)
            (RETURN
             (COND
              ((LETT #2#
@@ -217,60 +215,57 @@
                   (HREM |$ConstructorCache| '|CoChainComplex|)))))))))) 
 
 (DEFUN |CoChainComplex;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|CoChainComplex| DV$1))
-          (LETT $ (GETREFV 57))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 55))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|CoChainComplex| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 7 (|List| (|Matrix| (|Integer|))))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 7 (|List| (|Matrix| (|Integer|))))
+          %))) 
 
 (MAKEPROP '|CoChainComplex| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) '|Rep| (|List| 12)
-              |COCHNC;coChainComplex;L$;1| (|ChainComplex|)
+              |COCHNC;coChainComplex;L%;1| (|ChainComplex|)
               (0 . |transition_matrices|) (|Matrix| 17) (5 . |transpose|)
-              (|Mapping| 12 12) (10 . |map|) |COCHNC;coChainComplex;Cc$;2|
-              (|Integer|) (16 . |elt|) (22 . |maxRowIndex|)
-              (27 . |maxColIndex|) (|Boolean|) (32 . ~=) (|String|)
-              (|OutputForm|) (38 . |message|) (43 . |coerce|) (48 . |hconcat|)
-              (|Void|) (54 . |print|) (59 . *) (65 . |zero?|) (70 . |coerce|)
-              |COCHNC;validate;$B;3| (|List| 17) (|Vector| 17) (75 . |vector|)
-              (80 . *) (86 . |entries|) (|List| 6) (91 . |elt|) (97 . |Zero|)
+              (|Mapping| 12 12) (10 . |map|) |COCHNC;coChainComplex;Cc%;2|
+              (|Integer|) (16 . |maxRowIndex|) (21 . |maxColIndex|) (|Boolean|)
+              (26 . ~=) (|String|) (|OutputForm|) (32 . |message|)
+              (37 . |coerce|) (42 . |hconcat|) (|Void|) (48 . |print|) (53 . *)
+              (59 . |zero?|) (64 . |coerce|) |COCHNC;validate;%B;3| (|List| 17)
+              (|Vector| 17) (69 . |vector|) (74 . |elt|) (80 . *)
+              (86 . |entries|) (|List| 6) (91 . |elt|) (97 . |Zero|)
               (101 . |concat|) (107 . -) (112 . +) (|NonNegativeInteger|)
-              |COCHNC;coboundary;$Nni2L;4| (|Homology|) (118 . |homologyGroup|)
-              (|List| 47) (124 . |concat|) |COCHNC;coHomology;$L;5| (|List| $)
-              (130 . |commaSeparate|) |COCHNC;coerce;$Of;6| (|SingleInteger|)
-              (|HashState|))
-           '#(~= 135 |validate| 141 |latex| 146 |hashUpdate!| 151 |hash| 157
-              |coerce| 162 |coboundary| 167 |coHomology| 174 |coChainComplex|
-              179 = 189)
+              |COCHNC;coboundary;%Nni2L;4| (|Homology|) (118 . |homologyGroup|)
+              (|List| 47) (124 . |concat|) |COCHNC;coHomology;%L;5| (|List| %)
+              (130 . |commaSeparate|) |COCHNC;coerce;%Of;6|)
+           '#(~= 135 |validate| 141 |latex| 146 |coerce| 151 |coboundary| 156
+              |coHomology| 163 |coChainComplex| 168 = 178)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
                  (CONS '#(|SetCategory&| |BasicType&| NIL)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 24))
-                        (|makeByteWordVec2| 56
+                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 23))
+                        (|makeByteWordVec2| 54
                                             '(1 10 8 0 11 1 12 0 0 13 2 7 0 14
-                                              0 15 2 7 12 0 17 18 1 12 17 0 19
-                                              1 12 17 0 20 2 17 21 0 0 22 1 24
-                                              0 23 25 1 17 24 0 26 2 24 0 0 0
-                                              27 1 24 28 0 29 2 12 0 0 0 30 1
-                                              12 21 0 31 1 12 24 0 32 1 35 0 34
-                                              36 2 12 35 35 0 37 1 35 34 0 38 2
-                                              39 6 0 17 40 0 6 0 41 2 39 0 0 6
-                                              42 1 6 0 0 43 2 6 0 0 0 44 2 47 0
-                                              12 12 48 2 49 0 0 47 50 1 24 0 52
-                                              53 2 0 21 0 0 1 1 0 21 0 33 1 0
-                                              23 0 1 2 0 56 56 0 1 1 0 55 0 1 1
-                                              0 24 0 54 3 0 39 0 45 39 46 1 0
-                                              49 0 51 1 0 0 8 9 1 0 0 10 16 2 0
-                                              21 0 0 1)))))
+                                              0 15 1 12 17 0 18 1 12 17 0 19 2
+                                              17 20 0 0 21 1 23 0 22 24 1 17 23
+                                              0 25 2 23 0 0 0 26 1 23 27 0 28 2
+                                              12 0 0 0 29 1 12 20 0 30 1 12 23
+                                              0 31 1 34 0 33 35 2 7 12 0 17 36
+                                              2 12 34 34 0 37 1 34 33 0 38 2 39
+                                              6 0 17 40 0 6 0 41 2 39 0 0 6 42
+                                              1 6 0 0 43 2 6 0 0 0 44 2 47 0 12
+                                              12 48 2 49 0 0 47 50 1 23 0 52 53
+                                              2 0 20 0 0 1 1 0 20 0 32 1 0 22 0
+                                              1 1 0 23 0 54 3 0 39 0 45 39 46 1
+                                              0 49 0 51 1 0 0 10 16 1 0 0 8 9 2
+                                              0 20 0 0 1)))))
            '|lookupComplete|)) 

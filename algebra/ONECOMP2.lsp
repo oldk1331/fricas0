@@ -1,25 +1,25 @@
 
 (SDEFUN |ONECOMP2;map;MOpcOpc;1|
         ((|f| (|Mapping| S R)) (|r| (|OnePointCompletion| R))
-         ($ (|OnePointCompletion| S)))
-        (SPADCALL |f| |r| (SPADCALL (QREFELT $ 9)) (QREFELT $ 12))) 
+         (% (|OnePointCompletion| S)))
+        (SPADCALL |f| |r| (SPADCALL (QREFELT % 9)) (QREFELT % 12))) 
 
 (SDEFUN |ONECOMP2;map;MOpc2Opc;2|
         ((|f| (|Mapping| S R)) (|r| (|OnePointCompletion| R))
-         (|i| (|OnePointCompletion| S)) ($ (|OnePointCompletion| S)))
+         (|i| (|OnePointCompletion| S)) (% (|OnePointCompletion| S)))
         (SPROG ((|u| (|Union| R "failed")))
-               (SEQ (LETT |u| (SPADCALL |r| (QREFELT $ 15)))
+               (SEQ (LETT |u| (SPADCALL |r| (QREFELT % 15)))
                     (EXIT
                      (COND
                       ((QEQCAR |u| 0)
-                       (SPADCALL (SPADCALL (QCDR |u|) |f|) (QREFELT $ 16)))
+                       (SPADCALL (SPADCALL (QCDR |u|) |f|) (QREFELT % 16)))
                       ('T |i|)))))) 
 
 (DECLAIM (NOTINLINE |OnePointCompletionFunctions2;|)) 
 
-(DEFUN |OnePointCompletionFunctions2| (&REST #1=#:G697)
+(DEFUN |OnePointCompletionFunctions2| (&REST #1=#:G455)
   (SPROG NIL
-         (PROG (#2=#:G698)
+         (PROG (#2=#:G456)
            (RETURN
             (COND
              ((LETT #2#
@@ -39,21 +39,21 @@
                         '|OnePointCompletionFunctions2|)))))))))) 
 
 (DEFUN |OnePointCompletionFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|OnePointCompletionFunctions2| DV$1 DV$2))
-          (LETT $ (GETREFV 17))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 17))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|OnePointCompletionFunctions2|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|OnePointCompletionFunctions2| '|infovec|
           (LIST

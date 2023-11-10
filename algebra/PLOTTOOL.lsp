@@ -2,37 +2,37 @@
 (SDEFUN |PLOTTOOL;drawToScaleRanges|
         ((|xVals| (|Segment| (|DoubleFloat|)))
          (|yVals| (|Segment| (|DoubleFloat|)))
-         ($ (|List| (|Segment| (|DoubleFloat|)))))
+         (% (|List| (|Segment| (|DoubleFloat|)))))
         (SPROG
          ((|pad| (|DoubleFloat|)) (|yDiff| #1=(|DoubleFloat|))
           (|yLo| #2=(|DoubleFloat|)) (|yHi| #3=(|DoubleFloat|)) (|xDiff| #1#)
           (|xLo| #2#) (|xHi| #3#))
          (SEQ
           (LETT |xDiff|
-                (|sub_DF| (LETT |xHi| (SPADCALL |xVals| (QREFELT $ 8)))
-                          (LETT |xLo| (SPADCALL |xVals| (QREFELT $ 9)))))
+                (|sub_DF| (LETT |xHi| (SPADCALL |xVals| (QREFELT % 8)))
+                          (LETT |xLo| (SPADCALL |xVals| (QREFELT % 9)))))
           (LETT |yDiff|
-                (|sub_DF| (LETT |yHi| (SPADCALL |yVals| (QREFELT $ 8)))
-                          (LETT |yLo| (SPADCALL |yVals| (QREFELT $ 9)))))
+                (|sub_DF| (LETT |yHi| (SPADCALL |yVals| (QREFELT % 8)))
+                          (LETT |yLo| (SPADCALL |yVals| (QREFELT % 9)))))
           (LETT |pad| (|div_DF_I| (|abs_DF| (|sub_DF| |yDiff| |xDiff|)) 2))
           (EXIT
            (COND
-            ((SPADCALL |yDiff| |xDiff| (QREFELT $ 11))
+            ((SPADCALL |yDiff| |xDiff| (QREFELT % 11))
              (LIST
               (SPADCALL (|sub_DF| |xLo| |pad|) (|add_DF| |xHi| |pad|)
-                        (QREFELT $ 12))
+                        (QREFELT % 12))
               |yVals|))
             ('T
              (LIST |xVals|
                    (SPADCALL (|sub_DF| |yLo| |pad|) (|add_DF| |yHi| |pad|)
-                             (QREFELT $ 12))))))))) 
+                             (QREFELT % 12))))))))) 
 
 (SDEFUN |PLOTTOOL;select|
         ((|l| (|List| (|Point| (|DoubleFloat|))))
          (|f| (|Mapping| #1=(|DoubleFloat|) (|Point| (|DoubleFloat|))))
          (|g| (|Mapping| (|DoubleFloat|) (|DoubleFloat|) (|DoubleFloat|)))
-         ($ (|DoubleFloat|)))
-        (SPROG ((|m| #1#) (#2=#:G705 NIL) (|p| NIL))
+         (% (|DoubleFloat|)))
+        (SPROG ((|m| #1#) (#2=#:G454 NIL) (|p| NIL))
                (SEQ (LETT |m| (SPADCALL (|SPADfirst| |l|) |f|))
                     (SEQ (LETT |p| NIL) (LETT #2# (CDR |l|)) G190
                          (COND
@@ -46,25 +46,25 @@
 
 (SDEFUN |PLOTTOOL;xRange0|
         ((|list| (|List| (|Point| (|DoubleFloat|))))
-         ($ (|Segment| (|DoubleFloat|))))
-        (SPADCALL (|PLOTTOOL;select| |list| (ELT $ 15) (ELT $ 16) $)
-                  (|PLOTTOOL;select| |list| (ELT $ 15) (ELT $ 17) $)
-                  (QREFELT $ 18))) 
+         (% (|Segment| (|DoubleFloat|))))
+        (SPADCALL (|PLOTTOOL;select| |list| (ELT % 15) (ELT % 16) %)
+                  (|PLOTTOOL;select| |list| (ELT % 15) (ELT % 17) %)
+                  (QREFELT % 18))) 
 
 (SDEFUN |PLOTTOOL;yRange0|
         ((|list| (|List| (|Point| (|DoubleFloat|))))
-         ($ (|Segment| (|DoubleFloat|))))
-        (SPADCALL (|PLOTTOOL;select| |list| (ELT $ 19) (ELT $ 16) $)
-                  (|PLOTTOOL;select| |list| (ELT $ 19) (ELT $ 17) $)
-                  (QREFELT $ 18))) 
+         (% (|Segment| (|DoubleFloat|))))
+        (SPADCALL (|PLOTTOOL;select| |list| (ELT % 19) (ELT % 16) %)
+                  (|PLOTTOOL;select| |list| (ELT % 19) (ELT % 17) %)
+                  (QREFELT % 18))) 
 
 (SDEFUN |PLOTTOOL;select2|
         ((|l| (|List| (|List| (|Point| (|DoubleFloat|)))))
          (|f|
           (|Mapping| #1=(|DoubleFloat|) (|List| (|Point| (|DoubleFloat|)))))
          (|g| (|Mapping| (|DoubleFloat|) (|DoubleFloat|) (|DoubleFloat|)))
-         ($ (|DoubleFloat|)))
-        (SPROG ((|m| #1#) (#2=#:G724 NIL) (|p| NIL))
+         (% (|DoubleFloat|)))
+        (SPROG ((|m| #1#) (#2=#:G473 NIL) (|p| NIL))
                (SEQ (LETT |m| (SPADCALL (|SPADfirst| |l|) |f|))
                     (SEQ (LETT |p| NIL) (LETT #2# (CDR |l|)) G190
                          (COND
@@ -78,50 +78,50 @@
 
 (SDEFUN |PLOTTOOL;xRange|
         ((|list| (|List| (|List| (|Point| (|DoubleFloat|)))))
-         ($ (|Segment| (|DoubleFloat|))))
+         (% (|Segment| (|DoubleFloat|))))
         (SPADCALL
-         (|PLOTTOOL;select2| |list| (CONS #'|PLOTTOOL;xRange!0| $) (ELT $ 16)
-          $)
-         (|PLOTTOOL;select2| |list| (CONS #'|PLOTTOOL;xRange!1| $) (ELT $ 17)
-          $)
-         (QREFELT $ 18))) 
+         (|PLOTTOOL;select2| |list| (CONS #'|PLOTTOOL;xRange!0| %) (ELT % 16)
+          %)
+         (|PLOTTOOL;select2| |list| (CONS #'|PLOTTOOL;xRange!1| %) (ELT % 17)
+          %)
+         (QREFELT % 18))) 
 
-(SDEFUN |PLOTTOOL;xRange!1| ((|v1| NIL) ($ NIL))
-        (SPADCALL (|PLOTTOOL;xRange0| |v1| $) (QREFELT $ 8))) 
+(SDEFUN |PLOTTOOL;xRange!1| ((|v1| NIL) (% NIL))
+        (SPADCALL (|PLOTTOOL;xRange0| |v1| %) (QREFELT % 8))) 
 
-(SDEFUN |PLOTTOOL;xRange!0| ((|u1| NIL) ($ NIL))
-        (SPADCALL (|PLOTTOOL;xRange0| |u1| $) (QREFELT $ 9))) 
+(SDEFUN |PLOTTOOL;xRange!0| ((|u1| NIL) (% NIL))
+        (SPADCALL (|PLOTTOOL;xRange0| |u1| %) (QREFELT % 9))) 
 
 (SDEFUN |PLOTTOOL;yRange|
         ((|list| (|List| (|List| (|Point| (|DoubleFloat|)))))
-         ($ (|Segment| (|DoubleFloat|))))
+         (% (|Segment| (|DoubleFloat|))))
         (SPADCALL
-         (|PLOTTOOL;select2| |list| (CONS #'|PLOTTOOL;yRange!0| $) (ELT $ 16)
-          $)
-         (|PLOTTOOL;select2| |list| (CONS #'|PLOTTOOL;yRange!1| $) (ELT $ 17)
-          $)
-         (QREFELT $ 18))) 
+         (|PLOTTOOL;select2| |list| (CONS #'|PLOTTOOL;yRange!0| %) (ELT % 16)
+          %)
+         (|PLOTTOOL;select2| |list| (CONS #'|PLOTTOOL;yRange!1| %) (ELT % 17)
+          %)
+         (QREFELT % 18))) 
 
-(SDEFUN |PLOTTOOL;yRange!1| ((|v1| NIL) ($ NIL))
-        (SPADCALL (|PLOTTOOL;yRange0| |v1| $) (QREFELT $ 8))) 
+(SDEFUN |PLOTTOOL;yRange!1| ((|v1| NIL) (% NIL))
+        (SPADCALL (|PLOTTOOL;yRange0| |v1| %) (QREFELT % 8))) 
 
-(SDEFUN |PLOTTOOL;yRange!0| ((|u1| NIL) ($ NIL))
-        (SPADCALL (|PLOTTOOL;yRange0| |u1| $) (QREFELT $ 9))) 
+(SDEFUN |PLOTTOOL;yRange!0| ((|u1| NIL) (% NIL))
+        (SPADCALL (|PLOTTOOL;yRange0| |u1| %) (QREFELT % 9))) 
 
 (SDEFUN |PLOTTOOL;calcRanges;LL;8|
         ((|llp| (|List| (|List| (|Point| (|DoubleFloat|)))))
-         ($ (|List| (|Segment| (|DoubleFloat|)))))
+         (% (|List| (|Segment| (|DoubleFloat|)))))
         (COND
-         ((SPADCALL (QREFELT $ 21))
-          (|PLOTTOOL;drawToScaleRanges| (|PLOTTOOL;xRange| |llp| $)
-           (|PLOTTOOL;yRange| |llp| $) $))
-         ('T (LIST (|PLOTTOOL;xRange| |llp| $) (|PLOTTOOL;yRange| |llp| $))))) 
+         ((SPADCALL (QREFELT % 21))
+          (|PLOTTOOL;drawToScaleRanges| (|PLOTTOOL;xRange| |llp| %)
+           (|PLOTTOOL;yRange| |llp| %) %))
+         ('T (LIST (|PLOTTOOL;xRange| |llp| %) (|PLOTTOOL;yRange| |llp| %))))) 
 
 (DECLAIM (NOTINLINE |PlotTools;|)) 
 
 (DEFUN |PlotTools| ()
   (SPROG NIL
-         (PROG (#1=#:G741)
+         (PROG (#1=#:G490)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|PlotTools|))
@@ -137,16 +137,16 @@
                  ((NOT #1#) (HREM |$ConstructorCache| '|PlotTools|)))))))))) 
 
 (DEFUN |PlotTools;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|PlotTools|))
-          (LETT $ (GETREFV 25))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|PlotTools| NIL (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 25))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|PlotTools| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|PlotTools| '|infovec|
           (LIST

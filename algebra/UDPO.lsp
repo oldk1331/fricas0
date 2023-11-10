@@ -1,79 +1,79 @@
 
-(SDEFUN |UDPO;userOrdered?;B;1| (($ (|Boolean|)))
-        (COND ((NULL (QREFELT $ 7)) (NULL (NULL (QREFELT $ 8)))) ('T 'T))) 
+(SDEFUN |UDPO;userOrdered?;B;1| ((% (|Boolean|)))
+        (COND ((NULL (QREFELT % 7)) (NULL (NULL (QREFELT % 8)))) ('T 'T))) 
 
 (SDEFUN |UDPO;getOrder;R;2|
-        (($ (|Record| (|:| |low| (|List| S)) (|:| |high| (|List| S)))))
-        (CONS (QREFELT $ 7) (QREFELT $ 8))) 
+        ((% (|Record| (|:| |low| (|List| S)) (|:| |high| (|List| S)))))
+        (CONS (QREFELT % 7) (QREFELT % 8))) 
 
-(SDEFUN |UDPO;setOrder;LV;3| ((|l| (|List| S)) ($ (|Void|)))
-        (SPADCALL NIL |l| (QREFELT $ 15))) 
+(SDEFUN |UDPO;setOrder;LV;3| ((|l| (|List| S)) (% (|Void|)))
+        (SPADCALL NIL |l| (QREFELT % 15))) 
 
-(SDEFUN |UDPO;setOrder;2LV;4| ((|l| (|List| S)) (|h| (|List| S)) ($ (|Void|)))
-        (SEQ (SETELT $ 7 (SPADCALL |l| (QREFELT $ 17)))
-             (SETELT $ 8 (SPADCALL |h| (QREFELT $ 17)))
-             (EXIT (SPADCALL (QREFELT $ 18))))) 
+(SDEFUN |UDPO;setOrder;2LV;4| ((|l| (|List| S)) (|h| (|List| S)) (% (|Void|)))
+        (SEQ (SETELT % 7 (SPADCALL |l| (QREFELT % 17)))
+             (SETELT % 8 (SPADCALL |h| (QREFELT % 17)))
+             (EXIT (SPADCALL (QREFELT % 18))))) 
 
 (SDEFUN |UDPO;less?;2SMB;5|
-        ((|a| (S)) (|b| (S)) (|f| (|Mapping| (|Boolean|) S S)) ($ (|Boolean|)))
+        ((|a| (S)) (|b| (S)) (|f| (|Mapping| (|Boolean|) S S)) (% (|Boolean|)))
         (SPROG ((|u| (|Union| (|Boolean|) "failed")))
-               (SEQ (LETT |u| (SPADCALL |a| |b| (QREFELT $ 20)))
+               (SEQ (LETT |u| (SPADCALL |a| |b| (QREFELT % 20)))
                     (EXIT
                      (COND ((QEQCAR |u| 1) (SPADCALL |a| |b| |f|))
                            ('T (QCDR |u|))))))) 
 
 (SDEFUN |UDPO;largest;LMS;6|
-        ((|x| (|List| S)) (|f| (|Mapping| (|Boolean|) S S)) ($ (S)))
+        ((|x| (|List| S)) (|f| (|Mapping| (|Boolean|) S S)) (% (S)))
         (SPROG ((|a| (S)))
                (SEQ
                 (COND ((NULL |x|) (|error| "largest: empty list"))
                       ((NULL (CDR |x|)) (|SPADfirst| |x|))
                       (#1='T
-                       (SEQ (LETT |a| (SPADCALL (CDR |x|) |f| (QREFELT $ 23)))
+                       (SEQ (LETT |a| (SPADCALL (CDR |x|) |f| (QREFELT % 23)))
                             (EXIT
                              (COND
                               ((SPADCALL (|SPADfirst| |x|) |a| |f|
-                                         (QREFELT $ 22))
+                                         (QREFELT % 22))
                                |a|)
                               (#1# (|SPADfirst| |x|)))))))))) 
 
 (SDEFUN |UDPO;less?;2SU;7|
-        ((|a| (S)) (|b| (S)) ($ (|Union| (|Boolean|) "failed")))
+        ((|a| (S)) (|b| (S)) (% (|Union| (|Boolean|) "failed")))
         (SPROG
-         ((|bb| #1=(|Boolean|)) (#2=#:G735 NIL) (|aa| #1#) (#3=#:G737 NIL)
-          (|x| NIL) (#4=#:G736 NIL))
+         ((|bb| #1=(|Boolean|)) (#2=#:G487 NIL) (|aa| #1#) (#3=#:G489 NIL)
+          (|x| NIL) (#4=#:G488 NIL))
          (SEQ
           (EXIT
            (SEQ
-            (SEQ (LETT |x| NIL) (LETT #4# (QREFELT $ 7)) G190
+            (SEQ (LETT |x| NIL) (LETT #4# (QREFELT % 7)) G190
                  (COND
                   ((OR (ATOM #4#) (PROGN (LETT |x| (CAR #4#)) NIL)) (GO G191)))
                  (SEQ
                   (EXIT
                    (COND
-                    ((SPADCALL |x| |a| (QREFELT $ 24))
+                    ((SPADCALL |x| |a| (QREFELT % 24))
                      (PROGN
-                      (LETT #2# (CONS 0 (SPADCALL |a| |b| (QREFELT $ 25))))
-                      (GO #5=#:G734)))
-                    ((SPADCALL |x| |b| (QREFELT $ 24))
+                      (LETT #2# (CONS 0 (SPADCALL |a| |b| (QREFELT % 25))))
+                      (GO #5=#:G486)))
+                    ((SPADCALL |x| |b| (QREFELT % 24))
                      (PROGN (LETT #2# (CONS 0 NIL)) (GO #5#))))))
                  (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT NIL))
             (LETT |aa| (LETT |bb| 'NIL))
-            (SEQ (LETT |x| NIL) (LETT #3# (QREFELT $ 8)) G190
+            (SEQ (LETT |x| NIL) (LETT #3# (QREFELT % 8)) G190
                  (COND
                   ((OR (ATOM #3#) (PROGN (LETT |x| (CAR #3#)) NIL)) (GO G191)))
                  (SEQ
                   (COND
-                   ((SPADCALL |x| |a| (QREFELT $ 24))
+                   ((SPADCALL |x| |a| (QREFELT % 24))
                     (COND (|bb| (PROGN (LETT #2# (CONS 0 NIL)) (GO #5#)))
                           ('T (LETT |aa| 'T)))))
                   (EXIT
                    (COND
-                    ((SPADCALL |x| |b| (QREFELT $ 24))
+                    ((SPADCALL |x| |b| (QREFELT % 24))
                      (COND
                       (|aa|
                        (PROGN
-                        (LETT #2# (CONS 0 (SPADCALL |a| |b| (QREFELT $ 25))))
+                        (LETT #2# (CONS 0 (SPADCALL |a| |b| (QREFELT % 25))))
                         (GO #5#)))
                       ('T (LETT |bb| 'T)))))))
                  (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
@@ -82,17 +82,17 @@
                    ('T (CONS 1 "failed"))))))
           #5# (EXIT #2#)))) 
 
-(SDEFUN |UDPO;more?;2SB;8| ((|a| (S)) (|b| (S)) ($ (|Boolean|)))
-        (NULL (SPADCALL |a| |b| (ELT $ 26) (QREFELT $ 22)))) 
+(SDEFUN |UDPO;more?;2SB;8| ((|a| (S)) (|b| (S)) (% (|Boolean|)))
+        (NULL (SPADCALL |a| |b| (ELT % 26) (QREFELT % 22)))) 
 
-(SDEFUN |UDPO;largest;LS;9| ((|x| (|List| S)) ($ (S)))
-        (SPADCALL |x| (ELT $ 26) (QREFELT $ 23))) 
+(SDEFUN |UDPO;largest;LS;9| ((|x| (|List| S)) (% (S)))
+        (SPADCALL |x| (ELT % 26) (QREFELT % 23))) 
 
 (DECLAIM (NOTINLINE |UserDefinedPartialOrdering;|)) 
 
-(DEFUN |UserDefinedPartialOrdering| (#1=#:G741)
+(DEFUN |UserDefinedPartialOrdering| (#1=#:G493)
   (SPROG NIL
-         (PROG (#2=#:G742)
+         (PROG (#2=#:G494)
            (RETURN
             (COND
              ((LETT #2#
@@ -110,32 +110,32 @@
                         '|UserDefinedPartialOrdering|)))))))))) 
 
 (DEFUN |UserDefinedPartialOrdering;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|UserDefinedPartialOrdering| DV$1))
-          (LETT $ (GETREFV 29))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 29))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
                                               (|HasCategory| |#1|
                                                              '(|OrderedSet|))))))
           (|haddProp| |$ConstructorCache| '|UserDefinedPartialOrdering|
-                      (LIST DV$1) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 7 NIL)
-          (QSETREFV $ 8 NIL)
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 7 NIL)
+          (QSETREFV % 8 NIL)
           (COND
            ((|testBitVector| |pv$| 1)
             (PROGN
-             (QSETREFV $ 27 (CONS (|dispatchFunction| |UDPO;more?;2SB;8|) $))
-             (QSETREFV $ 28
-                       (CONS (|dispatchFunction| |UDPO;largest;LS;9|) $)))))
-          $))) 
+             (QSETREFV % 27 (CONS (|dispatchFunction| |UDPO;more?;2SB;8|) %))
+             (QSETREFV % 28
+                       (CONS (|dispatchFunction| |UDPO;largest;LS;9|) %)))))
+          %))) 
 
 (MAKEPROP '|UserDefinedPartialOrdering| '|infovec|
           (LIST

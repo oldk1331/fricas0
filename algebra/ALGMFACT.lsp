@@ -1,37 +1,37 @@
 
 (SDEFUN |ALGMFACT;factor;PLF;1|
-        ((|p| (P)) (|lalg| (|List| (|AlgebraicNumber|))) ($ (|Factored| P)))
+        ((|p| (P)) (|lalg| (|List| (|AlgebraicNumber|))) (% (|Factored| P)))
         (SPROG NIL
                (SPADCALL |p|
-                         (CONS #'|ALGMFACT;factor;PLF;1!0| (VECTOR $ |lalg|))
-                         (QREFELT $ 17)))) 
+                         (CONS #'|ALGMFACT;factor;PLF;1!0| (VECTOR % |lalg|))
+                         (QREFELT % 17)))) 
 
 (SDEFUN |ALGMFACT;factor;PLF;1!0| ((|z1| NIL) ($$ NIL))
-        (PROG (|lalg| $)
+        (PROG (|lalg| %)
           (LETT |lalg| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |z1| |lalg| (QREFELT $ 13)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |z1| |lalg| (QREFELT % 13)))))) 
 
 (SDEFUN |ALGMFACT;factor;SupLF;2|
         ((|up| (|SparseUnivariatePolynomial| P))
          (|lalg| (|List| (|AlgebraicNumber|)))
-         ($ (|Factored| (|SparseUnivariatePolynomial| P))))
+         (% (|Factored| (|SparseUnivariatePolynomial| P))))
         (SPROG NIL
                (SPADCALL |up|
-                         (CONS #'|ALGMFACT;factor;SupLF;2!0| (VECTOR $ |lalg|))
-                         (QREFELT $ 21)))) 
+                         (CONS #'|ALGMFACT;factor;SupLF;2!0| (VECTOR % |lalg|))
+                         (QREFELT % 21)))) 
 
 (SDEFUN |ALGMFACT;factor;SupLF;2!0| ((|z1| NIL) ($$ NIL))
-        (PROG (|lalg| $)
+        (PROG (|lalg| %)
           (LETT |lalg| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |z1| |lalg| (QREFELT $ 13)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |z1| |lalg| (QREFELT % 13)))))) 
 
 (DECLAIM (NOTINLINE |AlgebraicMultFact;|)) 
 
-(DEFUN |AlgebraicMultFact| (&REST #1=#:G708)
+(DEFUN |AlgebraicMultFact| (&REST #1=#:G452)
   (SPROG NIL
-         (PROG (#2=#:G709)
+         (PROG (#2=#:G453)
            (RETURN
             (COND
              ((LETT #2#
@@ -49,26 +49,26 @@
                   (HREM |$ConstructorCache| '|AlgebraicMultFact|)))))))))) 
 
 (DEFUN |AlgebraicMultFact;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT DV$3 (|devaluate| |#3|))
           (LETT |dv$| (LIST '|AlgebraicMultFact| DV$1 DV$2 DV$3))
-          (LETT $ (GETREFV 23))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 23))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|AlgebraicMultFact|
-                      (LIST DV$1 DV$2 DV$3) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (QSETREFV $ 8 |#3|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 9
+                      (LIST DV$1 DV$2 DV$3) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (QSETREFV % 8 |#3|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 9
                     (|AlgFactor|
                      (|SparseUnivariatePolynomial| (|AlgebraicNumber|))))
-          $))) 
+          %))) 
 
 (MAKEPROP '|AlgebraicMultFact| '|infovec|
           (LIST

@@ -1,39 +1,39 @@
 
 (SDEFUN |INTRF;infieldIntegrate;FSU;1|
         ((|f| (|Fraction| (|Polynomial| F))) (|x| (|Symbol|))
-         ($ (|Union| (|Fraction| (|Polynomial| F)) "failed")))
+         (% (|Union| (|Fraction| (|Polynomial| F)) "failed")))
         (SPROG NIL
                (SPADCALL
-                (CONS #'|INTRF;infieldIntegrate;FSU;1!0| (VECTOR $ |x|))
-                (SPADCALL (SPADCALL |f| |x| (QREFELT $ 12)) (QREFELT $ 15))
-                (QREFELT $ 19)))) 
+                (CONS #'|INTRF;infieldIntegrate;FSU;1!0| (VECTOR % |x|))
+                (SPADCALL (SPADCALL |f| |x| (QREFELT % 12)) (QREFELT % 15))
+                (QREFELT % 19)))) 
 
 (SDEFUN |INTRF;infieldIntegrate;FSU;1!0| ((|x1| NIL) ($$ NIL))
-        (PROG (|x| $)
+        (PROG (|x| %)
           (LETT |x| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |x1| |x| (QREFELT $ 11)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |x1| |x| (QREFELT % 11)))))) 
 
 (SDEFUN |INTRF;internalIntegrate;FSIr;2|
         ((|f| (|Fraction| (|Polynomial| F))) (|x| (|Symbol|))
-         ($ (|IntegrationResult| (|Fraction| (|Polynomial| F)))))
+         (% (|IntegrationResult| (|Fraction| (|Polynomial| F)))))
         (SPROG NIL
                (SPADCALL
-                (CONS #'|INTRF;internalIntegrate;FSIr;2!0| (VECTOR $ |x|))
-                (SPADCALL (SPADCALL |f| |x| (QREFELT $ 12)) (QREFELT $ 22))
-                (QREFELT $ 24)))) 
+                (CONS #'|INTRF;internalIntegrate;FSIr;2!0| (VECTOR % |x|))
+                (SPADCALL (SPADCALL |f| |x| (QREFELT % 12)) (QREFELT % 22))
+                (QREFELT % 24)))) 
 
 (SDEFUN |INTRF;internalIntegrate;FSIr;2!0| ((|x1| NIL) ($$ NIL))
-        (PROG (|x| $)
+        (PROG (|x| %)
           (LETT |x| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |x1| |x| (QREFELT $ 11)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |x1| |x| (QREFELT % 11)))))) 
 
 (DECLAIM (NOTINLINE |RationalFunctionIntegration;|)) 
 
-(DEFUN |RationalFunctionIntegration| (#1=#:G707)
+(DEFUN |RationalFunctionIntegration| (#1=#:G458)
   (SPROG NIL
-         (PROG (#2=#:G708)
+         (PROG (#2=#:G459)
            (RETURN
             (COND
              ((LETT #2#
@@ -51,19 +51,19 @@
                         '|RationalFunctionIntegration|)))))))))) 
 
 (DEFUN |RationalFunctionIntegration;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RationalFunctionIntegration| DV$1))
-          (LETT $ (GETREFV 26))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 26))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|RationalFunctionIntegration|
-                      (LIST DV$1) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|RationalFunctionIntegration| '|infovec|
           (LIST

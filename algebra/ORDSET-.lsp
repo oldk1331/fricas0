@@ -1,36 +1,36 @@
 
-(SDEFUN |ORDSET-;smaller?;2SB;1| ((|x| (S)) (|y| (S)) ($ (|Boolean|)))
-        (SPADCALL |x| |y| (QREFELT $ 8))) 
+(SDEFUN |ORDSET-;smaller?;2SB;1| ((|x| (S)) (|y| (S)) (% (|Boolean|)))
+        (SPADCALL |x| |y| (QREFELT % 8))) 
 
-(SDEFUN |ORDSET-;max;3S;2| ((|x| (S)) (|y| (S)) ($ (S)))
-        (COND ((SPADCALL |x| |y| (QREFELT $ 10)) |x|) ('T |y|))) 
+(SDEFUN |ORDSET-;max;3S;2| ((|x| (S)) (|y| (S)) (% (S)))
+        (COND ((SPADCALL |x| |y| (QREFELT % 10)) |x|) ('T |y|))) 
 
-(SDEFUN |ORDSET-;min;3S;3| ((|x| (S)) (|y| (S)) ($ (S)))
-        (COND ((SPADCALL |x| |y| (QREFELT $ 10)) |y|) ('T |x|))) 
+(SDEFUN |ORDSET-;min;3S;3| ((|x| (S)) (|y| (S)) (% (S)))
+        (COND ((SPADCALL |x| |y| (QREFELT % 10)) |y|) ('T |x|))) 
 
-(SDEFUN |ORDSET-;>;2SB;4| ((|x| (S)) (|y| (S)) ($ (|Boolean|)))
-        (SPADCALL |y| |x| (QREFELT $ 8))) 
+(SDEFUN |ORDSET-;>;2SB;4| ((|x| (S)) (|y| (S)) (% (|Boolean|)))
+        (SPADCALL |y| |x| (QREFELT % 8))) 
 
-(SDEFUN |ORDSET-;>=;2SB;5| ((|x| (S)) (|y| (S)) ($ (|Boolean|)))
-        (NULL (SPADCALL |x| |y| (QREFELT $ 8)))) 
+(SDEFUN |ORDSET-;>=;2SB;5| ((|x| (S)) (|y| (S)) (% (|Boolean|)))
+        (NULL (SPADCALL |x| |y| (QREFELT % 8)))) 
 
-(SDEFUN |ORDSET-;<=;2SB;6| ((|x| (S)) (|y| (S)) ($ (|Boolean|)))
-        (NULL (SPADCALL |y| |x| (QREFELT $ 8)))) 
+(SDEFUN |ORDSET-;<=;2SB;6| ((|x| (S)) (|y| (S)) (% (|Boolean|)))
+        (NULL (SPADCALL |y| |x| (QREFELT % 8)))) 
 
 (DECLAIM (NOTINLINE |OrderedSet&;|)) 
 
 (DEFUN |OrderedSet&| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|OrderedSet&| DV$1))
-          (LETT $ (GETREFV 16))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 16))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|OrderedSet&| '|infovec|
           (LIST

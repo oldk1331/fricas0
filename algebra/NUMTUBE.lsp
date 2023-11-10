@@ -1,43 +1,43 @@
 
 (SDEFUN |NUMTUBE;colinearity|
         ((|x| (|Point| (|DoubleFloat|))) (|y| (|Point| (|DoubleFloat|)))
-         ($ (|DoubleFloat|)))
-        (|div_DF| (|expt_DF_I| (SPADCALL |x| |y| (QREFELT $ 16)) 2)
-                  (|mul_DF| (SPADCALL |x| |x| (QREFELT $ 16))
-                            (SPADCALL |y| |y| (QREFELT $ 16))))) 
+         (% (|DoubleFloat|)))
+        (|div_DF| (|expt_DF_I| (SPADCALL |x| |y| (QREFELT % 16)) 2)
+                  (|mul_DF| (SPADCALL |x| |x| (QREFELT % 16))
+                            (SPADCALL |y| |y| (QREFELT % 16))))) 
 
 (SDEFUN |NUMTUBE;orthog|
         ((|x| (|Point| (|DoubleFloat|))) (|y| (|Point| (|DoubleFloat|)))
-         ($ (|Point| (|DoubleFloat|))))
+         (% (|Point| (|DoubleFloat|))))
         (SPROG ((|a| (|DoubleFloat|)))
                (SEQ
                 (COND
-                 ((SPADCALL (|NUMTUBE;colinearity| |x| |y| $) (QREFELT $ 7)
-                            (QREFELT $ 18))
-                  (LETT |y| (QREFELT $ 15))))
+                 ((SPADCALL (|NUMTUBE;colinearity| |x| |y| %) (QREFELT % 7)
+                            (QREFELT % 18))
+                  (LETT |y| (QREFELT % 15))))
                 (COND
-                 ((SPADCALL (|NUMTUBE;colinearity| |x| |y| $) (QREFELT $ 7)
-                            (QREFELT $ 18))
+                 ((SPADCALL (|NUMTUBE;colinearity| |x| |y| %) (QREFELT % 7)
+                            (QREFELT % 18))
                   (LETT |y|
                         (COND
                          ((|less_DF|
-                           (|NUMTUBE;colinearity| |x| (QREFELT $ 12) $)
-                           (QREFELT $ 7))
-                          (QREFELT $ 12))
-                         ('T (QREFELT $ 13))))))
+                           (|NUMTUBE;colinearity| |x| (QREFELT % 12) %)
+                           (QREFELT % 7))
+                          (QREFELT % 12))
+                         ('T (QREFELT % 13))))))
                 (LETT |a|
                       (|minus_DF|
-                       (|div_DF| (SPADCALL |x| |y| (QREFELT $ 16))
-                                 (SPADCALL |x| |x| (QREFELT $ 16)))))
+                       (|div_DF| (SPADCALL |x| |y| (QREFELT % 16))
+                                 (SPADCALL |x| |x| (QREFELT % 16)))))
                 (EXIT
-                 (SETELT $ 15
-                         (SPADCALL (SPADCALL |a| |x| (QREFELT $ 19)) |y|
-                                   (QREFELT $ 20))))))) 
+                 (SETELT % 15
+                         (SPADCALL (SPADCALL |a| |x| (QREFELT % 19)) |y|
+                                   (QREFELT % 20))))))) 
 
 (SDEFUN |NUMTUBE;poTriad|
         ((|pl| (|Point| (|DoubleFloat|))) (|po| (|Point| (|DoubleFloat|)))
          (|pr| (|Point| (|DoubleFloat|)))
-         ($
+         (%
           (|Record| (|:| |tang| (|Point| (|DoubleFloat|)))
                     (|:| |norm| (|Point| (|DoubleFloat|)))
                     (|:| |bin| (|Point| (|DoubleFloat|))))))
@@ -46,14 +46,14 @@
           (|t| #1#))
          (SEQ
           (LETT |t|
-                (SPADCALL (SPADCALL |pr| |pl| (QREFELT $ 21)) (QREFELT $ 22)))
-          (LETT |pol| (SPADCALL |pl| |po| (QREFELT $ 21)))
-          (LETT |n| (SPADCALL (|NUMTUBE;orthog| |t| |pol| $) (QREFELT $ 22)))
-          (EXIT (VECTOR |t| |n| (SPADCALL |t| |n| (QREFELT $ 23))))))) 
+                (SPADCALL (SPADCALL |pr| |pl| (QREFELT % 21)) (QREFELT % 22)))
+          (LETT |pol| (SPADCALL |pl| |po| (QREFELT % 21)))
+          (LETT |n| (SPADCALL (|NUMTUBE;orthog| |t| |pol| %) (QREFELT % 22)))
+          (EXIT (VECTOR |t| |n| (SPADCALL |t| |n| (QREFELT % 23))))))) 
 
 (SDEFUN |NUMTUBE;curveTriads|
         ((|l| (|List| (|Point| (|DoubleFloat|))))
-         ($
+         (%
           (|List|
            #1=(|Record| (|:| |tang| (|Point| (|DoubleFloat|)))
                         (|:| |norm| (|Point| (|DoubleFloat|)))
@@ -70,8 +70,8 @@
             (|Record| (|:| |tang| (|Point| (|DoubleFloat|)))
                       (|:| |norm| (|Point| (|DoubleFloat|)))
                       (|:| |bin| (|Point| (|DoubleFloat|))))))
-          (#3=#:G737 NIL) (|pl| NIL) (#4=#:G738 NIL) (|po| NIL) (#5=#:G739 NIL)
-          (|pr| NIL) (#6=#:G736 NIL) (|triad| #1#)
+          (#3=#:G470 NIL) (|pl| NIL) (#4=#:G471 NIL) (|po| NIL) (#5=#:G472 NIL)
+          (|pr| NIL) (#6=#:G469 NIL) (|triad| #1#)
           (|b| (|Point| (|DoubleFloat|))) (|k| (|NonNegativeInteger|)))
          (SEQ (LETT |k| (LENGTH |l|))
               (EXIT
@@ -79,21 +79,21 @@
                 ((< |k| 2)
                  (|error| "Need at least 2 points to specify a curve"))
                 (#7='T
-                 (SEQ (SETELT $ 15 (QREFELT $ 14))
+                 (SEQ (SETELT % 15 (QREFELT % 14))
                       (EXIT
                        (COND
                         ((EQL |k| 2)
                          (SEQ
                           (LETT |t|
                                 (SPADCALL
-                                 (SPADCALL (SPADCALL |l| (QREFELT $ 25))
-                                           (|SPADfirst| |l|) (QREFELT $ 21))
-                                 (QREFELT $ 22)))
+                                 (SPADCALL (SPADCALL |l| (QREFELT % 25))
+                                           (|SPADfirst| |l|) (QREFELT % 21))
+                                 (QREFELT % 22)))
                           (LETT |n|
                                 (SPADCALL
-                                 (SPADCALL |t| (QREFELT $ 12) (QREFELT $ 21))
-                                 (QREFELT $ 22)))
-                          (LETT |b| (SPADCALL |t| |n| (QREFELT $ 23)))
+                                 (SPADCALL |t| (QREFELT % 12) (QREFELT % 21))
+                                 (QREFELT % 22)))
+                          (LETT |b| (SPADCALL |t| |n| (QREFELT % 23)))
                           (LETT |triad| (VECTOR |t| |n| |b|))
                           (EXIT (LIST |triad| |triad|))))
                         (#7#
@@ -118,7 +118,7 @@
                                         (LETT #6#
                                               (CONS
                                                (|NUMTUBE;poTriad| |pl| |po|
-                                                |pr| $)
+                                                |pr| %)
                                                #6#))))
                                       (LETT #3#
                                             (PROG1 (CDR #3#)
@@ -129,50 +129,50 @@
                           (LETT |x| (|SPADfirst| |midtriads|))
                           (LETT |t|
                                 (SPADCALL
-                                 (SPADCALL (SPADCALL |l| (QREFELT $ 25))
-                                           (|SPADfirst| |l|) (QREFELT $ 21))
-                                 (QREFELT $ 22)))
+                                 (SPADCALL (SPADCALL |l| (QREFELT % 25))
+                                           (|SPADfirst| |l|) (QREFELT % 21))
+                                 (QREFELT % 22)))
                           (LETT |n|
                                 (SPADCALL
-                                 (|NUMTUBE;orthog| |t| (QVELT |x| 1) $)
-                                 (QREFELT $ 22)))
+                                 (|NUMTUBE;orthog| |t| (QVELT |x| 1) %)
+                                 (QREFELT % 22)))
                           (LETT |begtriad|
                                 (VECTOR |t| |n|
-                                        (SPADCALL |t| |n| (QREFELT $ 23))))
-                          (LETT |x| (SPADCALL |midtriads| (QREFELT $ 28)))
+                                        (SPADCALL |t| |n| (QREFELT % 23))))
+                          (LETT |x| (SPADCALL |midtriads| (QREFELT % 28)))
                           (LETT |t|
                                 (SPADCALL
-                                 (SPADCALL (SPADCALL |l| |k| (QREFELT $ 30))
+                                 (SPADCALL (SPADCALL |l| |k| (QREFELT % 30))
                                            (SPADCALL |l| (- |k| 1)
-                                                     (QREFELT $ 30))
-                                           (QREFELT $ 21))
-                                 (QREFELT $ 22)))
+                                                     (QREFELT % 30))
+                                           (QREFELT % 21))
+                                 (QREFELT % 22)))
                           (LETT |n|
                                 (SPADCALL
-                                 (|NUMTUBE;orthog| |t| (QVELT |x| 1) $)
-                                 (QREFELT $ 22)))
+                                 (|NUMTUBE;orthog| |t| (QVELT |x| 1) %)
+                                 (QREFELT % 22)))
                           (LETT |endtriad|
                                 (VECTOR |t| |n|
-                                        (SPADCALL |t| |n| (QREFELT $ 23))))
+                                        (SPADCALL |t| |n| (QREFELT % 23))))
                           (EXIT
                            (CONS |begtriad|
                                  (SPADCALL |midtriads| |endtriad|
-                                           (QREFELT $ 31))))))))))))))) 
+                                           (QREFELT % 31))))))))))))))) 
 
 (SDEFUN |NUMTUBE;curveLoops|
         ((|pts| (|List| (|Point| (|DoubleFloat|)))) (|r| (|DoubleFloat|))
-         (|nn| (|Integer|)) ($ (|List| (|List| (|Point| (|DoubleFloat|))))))
+         (|nn| (|Integer|)) (% (|List| (|List| (|Point| (|DoubleFloat|))))))
         (SPROG
          ((|loops| (|List| (|List| (|Point| (|DoubleFloat|)))))
           (|b| #1=(|Point| (|DoubleFloat|))) (|n| #2=(|Point| (|DoubleFloat|)))
-          (#3=#:G746 NIL) (|pt| NIL) (#4=#:G747 NIL) (|triad| NIL)
+          (#3=#:G479 NIL) (|pt| NIL) (#4=#:G480 NIL) (|triad| NIL)
           (|cosSin| (|List| (|List| (|DoubleFloat|))))
           (|triads|
            (|List|
             (|Record| (|:| |tang| (|Point| (|DoubleFloat|))) (|:| |norm| #2#)
                       (|:| |bin| #1#)))))
-         (SEQ (LETT |triads| (|NUMTUBE;curveTriads| |pts| $))
-              (LETT |cosSin| (SPADCALL |nn| (QREFELT $ 33))) (LETT |loops| NIL)
+         (SEQ (LETT |triads| (|NUMTUBE;curveTriads| |pts| %))
+              (LETT |cosSin| (SPADCALL |nn| (QREFELT % 33))) (LETT |loops| NIL)
               (SEQ (LETT |triad| NIL) (LETT #4# |triads|) (LETT |pt| NIL)
                    (LETT #3# |pts|) G190
                    (COND
@@ -185,7 +185,7 @@
                          (LETT |loops|
                                (CONS
                                 (SPADCALL |pt| |n| |b| |r| |cosSin|
-                                          (QREFELT $ 34))
+                                          (QREFELT % 34))
                                 |loops|))))
                    (LETT #3# (PROG1 (CDR #3#) (LETT #4# (CDR #4#)))) (GO G190)
                    G191 (EXIT NIL))
@@ -193,14 +193,14 @@
 
 (SDEFUN |NUMTUBE;tube;CurveDfITp;6|
         ((|curve| (|Curve|)) (|r| (|DoubleFloat|)) (|n| (|Integer|))
-         ($ (|TubePlot| |Curve|)))
+         (% (|TubePlot| |Curve|)))
         (SPROG
-         ((|loops| (|List| (|List| (|Point| (|DoubleFloat|))))) (#1=#:G752 NIL)
+         ((|loops| (|List| (|List| (|Point| (|DoubleFloat|))))) (#1=#:G485 NIL)
           (|bran| NIL) (|brans| (|List| (|List| (|Point| (|DoubleFloat|))))))
          (SEQ
           (COND ((< |n| 3) (|error| "tube: n should be at least 3"))
                 ('T
-                 (SEQ (LETT |brans| (SPADCALL |curve| (QREFELT $ 36)))
+                 (SEQ (LETT |brans| (SPADCALL |curve| (QREFELT % 36)))
                       (LETT |loops| NIL)
                       (SEQ (LETT |bran| NIL) (LETT #1# |brans|) G190
                            (COND
@@ -212,16 +212,16 @@
                              (LETT |loops|
                                    (SPADCALL |loops|
                                              (|NUMTUBE;curveLoops| |bran| |r|
-                                              |n| $)
-                                             (QREFELT $ 37)))))
+                                              |n| %)
+                                             (QREFELT % 37)))))
                            (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
-                      (EXIT (SPADCALL |curve| |loops| NIL (QREFELT $ 39))))))))) 
+                      (EXIT (SPADCALL |curve| |loops| NIL (QREFELT % 39))))))))) 
 
 (DECLAIM (NOTINLINE |NumericTubePlot;|)) 
 
-(DEFUN |NumericTubePlot| (#1=#:G753)
+(DEFUN |NumericTubePlot| (#1=#:G486)
   (SPROG NIL
-         (PROG (#2=#:G754)
+         (PROG (#2=#:G487)
            (RETURN
             (COND
              ((LETT #2#
@@ -237,24 +237,24 @@
                   (HREM |$ConstructorCache| '|NumericTubePlot|)))))))))) 
 
 (DEFUN |NumericTubePlot;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|NumericTubePlot| DV$1))
-          (LETT $ (GETREFV 41))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 41))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|NumericTubePlot| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 7 (|mk_DF| 995 -3))
-          (QSETREFV $ 12 (SPADCALL 1.0 0.0 0.0 0.0 (QREFELT $ 11)))
-          (QSETREFV $ 13 (SPADCALL 0.0 1.0 0.0 0.0 (QREFELT $ 11)))
-          (QSETREFV $ 14 (SPADCALL 1.0 1.0 0.0 0.0 (QREFELT $ 11)))
-          (QSETREFV $ 15 (QREFELT $ 14))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 7 (|mk_DF| 995 -3))
+          (QSETREFV % 12 (SPADCALL 1.0 0.0 0.0 0.0 (QREFELT % 11)))
+          (QSETREFV % 13 (SPADCALL 0.0 1.0 0.0 0.0 (QREFELT % 11)))
+          (QSETREFV % 14 (SPADCALL 1.0 1.0 0.0 0.0 (QREFELT % 11)))
+          (QSETREFV % 15 (QREFELT % 14))
+          %))) 
 
 (MAKEPROP '|NumericTubePlot| '|infovec|
           (LIST

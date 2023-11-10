@@ -13,7 +13,7 @@
 ;   [collectOp,:itl,body]:= collectForm
 ;   if STRINGP op then op:= INTERN op
 ;   not MEMQ(collectOp,'(COLLECT COLLECTV COLLECTVEC)) =>
-;         systemError ["illegal reduction form:",form]
+;         systemError ['"illegal reduction form:",form]
 ;   $sideEffectsList: local := nil
 ;   $until: local := nil
 ;   $initList: local := nil
@@ -61,7 +61,7 @@
       (COND ((STRINGP |op|) (SETQ |op| (INTERN |op|))))
       (COND
        ((NULL (MEMQ |collectOp| '(COLLECT COLLECTV COLLECTVEC)))
-        (|systemError| (LIST '|illegal reduction form:| |form|)))
+        (|systemError| (LIST "illegal reduction form:" |form|)))
        (#2='T
         (PROGN
          (SETQ |$sideEffectsList| NIL)
@@ -413,7 +413,7 @@
 ;         [res, e]
 ;     [mOver, mUnder] :=
 ;       modeIsAggregateOf("List",m,e) or return
-;          stackMessage ["mode: ",m," must be a list of some mode"]
+;          stackMessage ['"mode: ",m,'" must be a list of some mode"]
 ;     if null get(x,"mode",e) then [.,.,e]:=
 ;       compMakeDeclaration([":",x,mUnder],$EmptyMode,e) or return nil
 ;     e:= put(x,"value",[genSomeVariable(),mUnder,e],e)
@@ -424,7 +424,7 @@
 ;     [y',m,e]:= comp(y,$EmptyMode,e) or return nil
 ;     [mOver,mUnder]:=
 ;       modeIsAggregateOf("List",m,e) or return
-;         stackMessage ["mode: ",m," must be a list of other modes"]
+;         stackMessage ['"mode: ",m,'" must be a list of other modes"]
 ;     if null get(x,"mode",e) then [.,.,e]:=
 ;       compMakeDeclaration([":",x,m],$EmptyMode,e) or return nil
 ;     e:= put(x,"value",[genSomeVariable(),m,e],e)
@@ -451,14 +451,14 @@
 ;             [["ISTEP",index,start'.expr,inc'.expr,:optFinal],e]
 ;     [start,.,e]:=
 ;       comp(start,$Integer,e) or return
-;         stackMessage ["start value of index: ",start," must be an integer"]
+;         stackMessage ['"start value of index: ",start,'" must be an integer"]
 ;     [inc,.,e]:=
 ;       comp(inc,$Integer,e) or return
-;         stackMessage ["index increment:",inc," must be an integer"]
+;         stackMessage ['"index increment:",inc,'" must be an integer"]
 ;     if optFinal is [final] then
 ;       [final,.,e]:=
 ;         comp(final,$Integer,e) or return
-;           stackMessage ["final value of index: ",final," must be an integer"]
+;           stackMessage ['"final value of index: ",final,'" must be an integer"]
 ;       optFinal:= [final]
 ;     indexmode:=
 ;       comp(CADDR it,$NonNegativeInteger,e) => $NonNegativeInteger
@@ -470,13 +470,13 @@
 ;   it is ["WHILE",p] =>
 ;     [p',m,e]:=
 ;       comp(p,$Boolean,e) or return
-;         stackMessage ["WHILE operand: ",p," is not Boolean valued"]
+;         stackMessage ['"WHILE operand: ",p,'" is not Boolean valued"]
 ;     [["WHILE",p'],e]
 ;   it is ["UNTIL",p] => ($until:= p; ['$until,e])
 ;   it is ["|",x] =>
 ;     u:=
 ;       comp(x,$Boolean,e) or return
-;         stackMessage ["SUCHTHAT operand: ",x," is not Boolean value"]
+;         stackMessage ['"SUCHTHAT operand: ",x,'" is not Boolean value"]
 ;     [["|",u.expr],u.env]
 ;   nil
 
@@ -534,8 +534,7 @@
                    (OR (|modeIsAggregateOf| '|List| |m| |e|)
                        (RETURN
                         (|stackMessage|
-                         (LIST '|mode: | |m|
-                               '| must be a list of some mode|)))))
+                         (LIST "mode: " |m| " must be a list of some mode")))))
            (SETQ |mOver| (CAR |LETTMP#1|))
            (SETQ |mUnder| (CADR |LETTMP#1|))
            (COND
@@ -574,8 +573,7 @@
                 (OR (|modeIsAggregateOf| '|List| |m| |e|)
                     (RETURN
                      (|stackMessage|
-                      (LIST '|mode: | |m|
-                            '| must be a list of other modes|)))))
+                      (LIST "mode: " |m| " must be a list of other modes")))))
         (SETQ |mOver| (CAR |LETTMP#1|))
         (SETQ |mUnder| (CADR |LETTMP#1|))
         (COND
@@ -651,16 +649,16 @@
                    (OR (|comp| |start| |$Integer| |e|)
                        (RETURN
                         (|stackMessage|
-                         (LIST '|start value of index: | |start|
-                               '| must be an integer|)))))
+                         (LIST "start value of index: " |start|
+                               " must be an integer")))))
            (SETQ |start| (CAR |LETTMP#1|))
            (SETQ |e| (CADDR |LETTMP#1|))
            (SETQ |LETTMP#1|
                    (OR (|comp| |inc| |$Integer| |e|)
                        (RETURN
                         (|stackMessage|
-                         (LIST '|index increment:| |inc|
-                               '| must be an integer|)))))
+                         (LIST "index increment:" |inc|
+                               " must be an integer")))))
            (SETQ |inc| (CAR |LETTMP#1|))
            (SETQ |e| (CADDR |LETTMP#1|))
            (COND
@@ -670,8 +668,8 @@
                      (OR (|comp| |final| |$Integer| |e|)
                          (RETURN
                           (|stackMessage|
-                           (LIST '|final value of index: | |final|
-                                 '| must be an integer|)))))
+                           (LIST "final value of index: " |final|
+                                 " must be an integer")))))
              (SETQ |final| (CAR |LETTMP#1|)) (SETQ |e| (CADDR |LETTMP#1|))
              (SETQ |optFinal| (LIST |final|))))
            (SETQ |indexmode|
@@ -703,8 +701,7 @@
                 (OR (|comp| |p| |$Boolean| |e|)
                     (RETURN
                      (|stackMessage|
-                      (LIST '|WHILE operand: | |p|
-                            '| is not Boolean valued|)))))
+                      (LIST "WHILE operand: " |p| " is not Boolean valued")))))
         (SETQ |p'| (CAR |LETTMP#1|))
         (SETQ |m| (CADR . #6=(|LETTMP#1|)))
         (SETQ |e| (CADDR . #6#))
@@ -725,8 +722,8 @@
                 (OR (|comp| |x| |$Boolean| |e|)
                     (RETURN
                      (|stackMessage|
-                      (LIST '|SUCHTHAT operand: | |x|
-                            '| is not Boolean value|)))))
+                      (LIST "SUCHTHAT operand: " |x|
+                            " is not Boolean value")))))
         (LIST (LIST '|\|| (CAR |u|)) (CADDR |u|))))
       (#1# NIL)))))
 
@@ -761,8 +758,8 @@
 ;     it is ["INBY", i, n, inc] =>
 ;         u := match_segment(i, n)
 ;         u isnt ['STEP, i, a, 1, :r] =>
-;             stackAndThrow ["   You cannot use", "%b", "by", "%d",
-;                       "except for an explicitly indexed sequence."]
+;             stackAndThrow ['"   You cannot use", "%b", '"by", "%d",
+;                       '"except for an explicitly indexed sequence."]
 ;         compIterator1(['STEP, i, a, inc, :r], e)
 ;     it is ["IN", i, n] =>
 ;         compIterator1(match_segment(i, n), e)
@@ -805,8 +802,8 @@
                                    (SETQ |r| (CDR |ISTMP#3|))
                                    #1#)))))))))
           (|stackAndThrow|
-           (LIST '|   You cannot use| '|%b| '|by| '|%d|
-                 '|except for an explicitly indexed sequence.|)))
+           (LIST "   You cannot use" '|%b| "by" '|%d|
+                 "except for an explicitly indexed sequence.")))
          (#1#
           (|compIterator1| (CONS 'STEP (CONS |i| (CONS |a| (CONS |inc| |r|))))
            |e|)))))
@@ -830,7 +827,7 @@
 ;     1=#mList => first mList
 ;   name:=
 ;     m is [fn,:.] => fn
-;     m="$" => "Rep"
+;     m = "%" => "Rep"
 ;     m
 ;   get(name,"value",e) is [[ =ListOrVector,R],:.] => [m,R]
 
@@ -867,7 +864,7 @@
         (SETQ |name|
                 (COND
                  ((AND (CONSP |m|) (PROGN (SETQ |fn| (CAR |m|)) #1#)) |fn|)
-                 ((EQ |m| '$) '|Rep|) (#1# |m|)))
+                 ((EQ |m| '%) '|Rep|) (#1# |m|)))
         (COND
          ((PROGN
            (SETQ |ISTMP#1| (|get| |name| '|value| |e|))

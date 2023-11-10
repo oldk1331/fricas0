@@ -1,10 +1,10 @@
 
 (SDEFUN |RADUTIL;radix;FIA;1|
-        ((|q| (|Fraction| (|Integer|))) (|b| (|Integer|)) ($ (|Any|)))
+        ((|q| (|Fraction| (|Integer|))) (|b| (|Integer|)) (% (|Any|)))
         (SPADCALL
          (SPADCALL |q|
                    (|compiledLookupCheck| '|coerce|
-                                          (LIST '$
+                                          (LIST '%
                                                 (LIST '|Fraction|
                                                       (LIST '|Integer|)))
                                           (|RadixExpansion| |b|)))
@@ -17,7 +17,7 @@
 
 (DEFUN |RadixUtilities| ()
   (SPROG NIL
-         (PROG (#1=#:G701)
+         (PROG (#1=#:G450)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|RadixUtilities|))
@@ -34,16 +34,16 @@
                   (HREM |$ConstructorCache| '|RadixUtilities|)))))))))) 
 
 (DEFUN |RadixUtilities;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|RadixUtilities|))
-          (LETT $ (GETREFV 10))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|RadixUtilities| NIL (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 10))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|RadixUtilities| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|RadixUtilities| '|infovec|
           (LIST

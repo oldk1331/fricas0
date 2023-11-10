@@ -1,42 +1,46 @@
 
 (SDEFUN |SPECOUT;juxtaposeTerms|
-        ((|l| (|List| (|OutputForm|))) ($ (|OutputForm|)))
-        (SPADCALL |l| (QREFELT $ 8))) 
+        ((|l| (|List| (|OutputForm|))) (% (|OutputForm|)))
+        (SPADCALL |l| (QREFELT % 8))) 
 
-(SDEFUN |SPECOUT;outputAsFortran;OfV;2| ((|e| (|OutputForm|)) ($ (|Void|)))
-        (SEQ (|dispfortexp| |e|) (EXIT (SPADCALL (QREFELT $ 10))))) 
+(PUT '|SPECOUT;outputAsFortran;OfV;2| '|SPADreplace| '|fortranFormat|) 
+
+(SDEFUN |SPECOUT;outputAsFortran;OfV;2| ((|e| (|OutputForm|)) (% (|Void|)))
+        (|fortranFormat| |e|)) 
 
 (SDEFUN |SPECOUT;outputAsFortran;SOfV;3|
-        ((|var| (|String|)) (|e| (|OutputForm|)) ($ (|Void|)))
+        ((|var| (|String|)) (|e| (|OutputForm|)) (% (|Void|)))
         (SEQ
          (LETT |e|
                (SPADCALL
-                (SPADCALL (SPADCALL |var| (QREFELT $ 14)) (QREFELT $ 15)) |e|
-                (QREFELT $ 16)))
-         (EXIT (SPADCALL |e| (QREFELT $ 11))))) 
+                (SPADCALL (SPADCALL |var| (QREFELT % 13)) (QREFELT % 14)) |e|
+                (QREFELT % 15)))
+         (EXIT (SPADCALL |e| (QREFELT % 10))))) 
 
 (SDEFUN |SPECOUT;outputAsFortran;LV;4|
-        ((|l| (|List| (|OutputForm|))) ($ (|Void|)))
-        (SPADCALL (|SPECOUT;juxtaposeTerms| |l| $) (QREFELT $ 11))) 
+        ((|l| (|List| (|OutputForm|))) (% (|Void|)))
+        (SPADCALL (|SPECOUT;juxtaposeTerms| |l| %) (QREFELT % 10))) 
 
-(SDEFUN |SPECOUT;outputAsScript;OfV;5| ((|e| (|OutputForm|)) ($ (|Void|)))
-        (SEQ (|formulaFormat| |e|) (EXIT (SPADCALL (QREFELT $ 10))))) 
+(PUT '|SPECOUT;outputAsMathML;OfV;5| '|SPADreplace| '|mathmlFormat|) 
 
-(SDEFUN |SPECOUT;outputAsScript;LV;6|
-        ((|l| (|List| (|OutputForm|))) ($ (|Void|)))
-        (SPADCALL (|SPECOUT;juxtaposeTerms| |l| $) (QREFELT $ 20))) 
+(SDEFUN |SPECOUT;outputAsMathML;OfV;5| ((|e| (|OutputForm|)) (% (|Void|)))
+        (|mathmlFormat| |e|)) 
 
-(SDEFUN |SPECOUT;outputAsTex;OfV;7| ((|e| (|OutputForm|)) ($ (|Void|)))
-        (SEQ (|texFormat| |e|) (EXIT (SPADCALL (QREFELT $ 10))))) 
+(SDEFUN |SPECOUT;outputAsMathML;LV;6|
+        ((|l| (|List| (|OutputForm|))) (% (|Void|)))
+        (SPADCALL (|SPECOUT;juxtaposeTerms| |l| %) (QREFELT % 19))) 
 
-(SDEFUN |SPECOUT;outputAsTex;LV;8| ((|l| (|List| (|OutputForm|))) ($ (|Void|)))
-        (SPADCALL (|SPECOUT;juxtaposeTerms| |l| $) (QREFELT $ 22))) 
+(SDEFUN |SPECOUT;outputAsTex;OfV;7| ((|e| (|OutputForm|)) (% (|Void|)))
+        (SEQ (|texFormat| |e|) (EXIT (SPADCALL (QREFELT % 21))))) 
+
+(SDEFUN |SPECOUT;outputAsTex;LV;8| ((|l| (|List| (|OutputForm|))) (% (|Void|)))
+        (SPADCALL (|SPECOUT;juxtaposeTerms| |l| %) (QREFELT % 22))) 
 
 (DECLAIM (NOTINLINE |SpecialOutputPackage;|)) 
 
 (DEFUN |SpecialOutputPackage| ()
   (SPROG NIL
-         (PROG (#1=#:G716)
+         (PROG (#1=#:G459)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|SpecialOutputPackage|))
@@ -54,29 +58,28 @@
                   (HREM |$ConstructorCache| '|SpecialOutputPackage|)))))))))) 
 
 (DEFUN |SpecialOutputPackage;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|SpecialOutputPackage|))
-          (LETT $ (GETREFV 24))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 24))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|SpecialOutputPackage| NIL
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|SpecialOutputPackage| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|List| $) (|OutputForm|)
-              (0 . |blankSeparate|) (|Void|) (5 . |void|)
-              |SPECOUT;outputAsFortran;OfV;2| (|String|) (|Symbol|)
-              (9 . |coerce|) (14 . |coerce|) (19 . =)
+           '#(NIL NIL NIL NIL NIL NIL (|List| %) (|OutputForm|)
+              (0 . |blankSeparate|) (|Void|) |SPECOUT;outputAsFortran;OfV;2|
+              (|String|) (|Symbol|) (5 . |coerce|) (10 . |coerce|) (15 . =)
               |SPECOUT;outputAsFortran;SOfV;3| (|List| 7)
-              |SPECOUT;outputAsFortran;LV;4| |SPECOUT;outputAsScript;OfV;5|
-              |SPECOUT;outputAsScript;LV;6| |SPECOUT;outputAsTex;OfV;7|
-              |SPECOUT;outputAsTex;LV;8|)
-           '#(|outputAsTex| 25 |outputAsScript| 35 |outputAsFortran| 45) 'NIL
+              |SPECOUT;outputAsFortran;LV;4| |SPECOUT;outputAsMathML;OfV;5|
+              |SPECOUT;outputAsMathML;LV;6| (21 . |void|)
+              |SPECOUT;outputAsTex;OfV;7| |SPECOUT;outputAsTex;LV;8|)
+           '#(|outputAsTex| 25 |outputAsMathML| 35 |outputAsFortran| 45) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
                        (CONS
@@ -88,24 +91,24 @@
                                 T)
                               '((|outputAsFortran| ((|Void|) (|OutputForm|)))
                                 T)
-                              '((|outputAsScript| ((|Void|) (|OutputForm|))) T)
-                              '((|outputAsTex| ((|Void|) (|OutputForm|))) T)
                               '((|outputAsFortran|
                                  ((|Void|) (|List| (|OutputForm|))))
                                 T)
-                              '((|outputAsScript|
+                              '((|outputAsMathML| ((|Void|) (|OutputForm|))) T)
+                              '((|outputAsMathML|
                                  ((|Void|) (|List| (|OutputForm|))))
                                 T)
+                              '((|outputAsTex| ((|Void|) (|OutputForm|))) T)
                               '((|outputAsTex|
                                  ((|Void|) (|List| (|OutputForm|))))
                                 T))
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 23
-                                            '(1 7 0 6 8 0 9 0 10 1 13 0 12 14 1
-                                              13 7 0 15 2 7 0 0 0 16 1 0 9 7 22
-                                              1 0 9 18 23 1 0 9 7 20 1 0 9 18
-                                              21 2 0 9 12 7 17 1 0 9 7 11 1 0 9
-                                              18 19)))))
+                                            '(1 7 0 6 8 1 12 0 11 13 1 12 7 0
+                                              14 2 7 0 0 0 15 0 9 0 21 1 0 9 17
+                                              23 1 0 9 7 22 1 0 9 17 20 1 0 9 7
+                                              19 2 0 9 11 7 16 1 0 9 17 18 1 0
+                                              9 7 10)))))
            '|lookupComplete|)) 
 
 (MAKEPROP '|SpecialOutputPackage| 'NILADIC T) 

@@ -244,8 +244,8 @@
 ; makeCompactSigCode(sig) == [fn for x in sig] where
 ;   fn ==
 ;     x = '_$_$ => 2
-;     x = '$ => 0
-;     NULL INTEGERP x => systemError ['"code vector slot is ",x,"; must be number"]
+;     x = '% => 0
+;     NULL INTEGERP x => systemError ['"code vector slot is ",x,'"; must be number"]
 ;     x
 
 (DEFUN |makeCompactSigCode| (|sig|)
@@ -259,11 +259,11 @@
           (#1='T
            (SETQ |bfVar#17|
                    (CONS
-                    (COND ((EQ |x| '$$) 2) ((EQ |x| '$) 0)
+                    (COND ((EQ |x| '$$) 2) ((EQ |x| '%) 0)
                           ((NULL (INTEGERP |x|))
                            (|systemError|
                             (LIST "code vector slot is " |x|
-                                  '|; must be number|)))
+                                  "; must be number")))
                           (#1# |x|))
                     |bfVar#17|))))
          (SETQ |bfVar#16| (CDR |bfVar#16|))))
@@ -364,7 +364,7 @@
 ;     atom item => [SYMBOL_-FUNCTION item,:dollar]
 ;     item is [n,:op] and INTEGERP n => [FUNCTION newGoGet,dollar,:item]
 ;     item is ['CONS,.,['FUNCALL,a,b]] =>
-;       b = '$ => [FUNCTION makeSpadConstant,eval a,dollar,i]
+;       b = '% => [FUNCTION makeSpadConstant, eval(a), dollar, i]
 ;       sayBrightlyNT '"Unexpected constant environment!!"
 ;       pp devaluate b
 ;       nil
@@ -408,7 +408,7 @@
                                                                  |ISTMP#5|))
                                                         #1#))))))))))))
                     (COND
-                     ((EQ |b| '$)
+                     ((EQ |b| '%)
                       (LIST #'|makeSpadConstant| (|eval| |a|) |dollar| |i|))
                      (#1#
                       (PROGN
@@ -521,7 +521,7 @@
 ; augmentPredCode(n,lastPl) ==
 ;   ['LIST,:pl] := mungeAddGensyms(lastPl,$predGensymAlist)
 ;   delta := 2^n
-;   l := [(u := MKPF([x, ['augmentPredVector, '$, delta]], 'AND);
+;   l := [(u := MKPF([x, ['augmentPredVector, '%, delta]], 'AND);
 ;          delta:=2 * delta; u) for x in pl]
 
 (DEFUN |augmentPredCode| (|n| |lastPl|)
@@ -545,7 +545,7 @@
                               (SETQ |u|
                                       (MKPF
                                        (LIST |x|
-                                             (LIST '|augmentPredVector| '$
+                                             (LIST '|augmentPredVector| '%
                                                    |delta|))
                                        'AND))
                               (SETQ |delta| (* 2 |delta|))
@@ -563,7 +563,7 @@
 ; isHasDollarPred pred ==
 ;   pred is [op,:r] =>
 ;     MEMQ(op,'(AND and OR or NOT not)) => or/[isHasDollarPred x for x in r]
-;     op is "HasCategory" => first r = '$
+;     op is "HasCategory" => first(r) = '%
 ;     false
 ;   false
 
@@ -586,7 +586,7 @@
                 (COND (|bfVar#26| (RETURN |bfVar#26|))))))
              (SETQ |bfVar#25| (CDR |bfVar#25|))))
           NIL |r| NIL))
-        ((EQ |op| '|HasCategory|) (EQ (CAR |r|) '$)) (#1# NIL)))
+        ((EQ |op| '|HasCategory|) (EQ (CAR |r|) '%)) (#1# NIL)))
       (#1# NIL)))))
 
 ; stripOutNonDollarPreds pred ==
@@ -619,7 +619,7 @@
 ;     fn p ==
 ;       p is [op,:argl] and op in '(AND and OR or NOT not) =>
 ;           makePrefixForm(fnl argl,op)
-;       p is ['has,'$,['ATTRIBUTE,a]] => BREAK()
+;       p is ['has, '%, ['ATTRIBUTE, a]] => BREAK()
 ;       p
 ;     fnl p == [fn x for x in p]
 
@@ -647,7 +647,7 @@
       ((AND (CONSP |p|) (EQ (CAR |p|) '|has|)
             (PROGN
              (SETQ |ISTMP#1| (CDR |p|))
-             (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) '$)
+             (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) '%)
                   (PROGN
                    (SETQ |ISTMP#2| (CDR |ISTMP#1|))
                    (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
@@ -847,7 +847,7 @@
     (RETURN (COND ((EQL |n| 0) 0) ('T (+ 1 (|bitsOf| (QUOTIENT |n| 2))))))))
 
 ; NRTmakeCategoryAlist(et) ==
-;   $depthAssocCache : local := MAKE_HASHTABLE('ID)
+;   $depthAssocCache : local := MAKE_HASHTABLE('EQ)
 ;   $catAncestorAlist: local := NIL
 ;   pcAlist := [:[[x,:'T] for x in $uncondAlist],:$condAlist]
 ;   $levelAlist: local := depthAssocList [CAAR x for x in pcAlist]
@@ -858,7 +858,7 @@
 ;   sixEtc := [5 + i for i in 1..#$pairlis]
 ;   formals := ASSOCRIGHT $pairlis
 ;   for x in slot1 repeat
-;       RPLACA(x, EQSUBSTLIST(["$$"], ["$"], first x))
+;       RPLACA(x, EQSUBSTLIST(["$$"], ["%"], first x))
 ;   -----------code to make a new style slot4 -----------------
 ;   predList := ASSOCRIGHT slot1  --is list of predicate indices
 ;   maxPredList := "MAX"/predList
@@ -877,7 +877,7 @@
     (DECLARE (SPECIAL |$levelAlist| |$catAncestorAlist| |$depthAssocCache|))
     (RETURN
      (PROGN
-      (SETQ |$depthAssocCache| (MAKE_HASHTABLE 'ID))
+      (SETQ |$depthAssocCache| (MAKE_HASHTABLE 'EQ))
       (SETQ |$catAncestorAlist| NIL)
       (SETQ |pcAlist|
               (APPEND
@@ -953,7 +953,7 @@
           (COND
            ((OR (ATOM |bfVar#52|) (PROGN (SETQ |x| (CAR |bfVar#52|)) NIL))
             (RETURN NIL))
-           (#1# (RPLACA |x| (EQSUBSTLIST (LIST '$$) (LIST '$) (CAR |x|)))))
+           (#1# (RPLACA |x| (EQSUBSTLIST (LIST '$$) (LIST '%) (CAR |x|)))))
           (SETQ |bfVar#52| (CDR |bfVar#52|))))
        |slot1| NIL)
       (SETQ |predList| (ASSOCRIGHT |slot1|))
@@ -1357,7 +1357,7 @@
 (DEFUN |getCodeVector| () (PROG () (RETURN (|getCodeVector1| |$infovec|))))
 
 ; formatSlotDomain x ==
-;   x = 0 => ["$"]
+;   x = 0 => ["%"]
 ;   x = 2 => ["$$"]
 ;   INTEGERP x =>
 ;     val := $infovec.0.x
@@ -1371,7 +1371,7 @@
 (DEFUN |formatSlotDomain| (|x|)
   (PROG (|val| |ISTMP#1| |y|)
     (RETURN
-     (COND ((EQL |x| 0) (LIST '$)) ((EQL |x| 2) (LIST '$$))
+     (COND ((EQL |x| 0) (LIST '%)) ((EQL |x| 2) (LIST '$$))
            ((INTEGERP |x|)
             (PROGN
              (SETQ |val| (ELT (ELT |$infovec| 0) |x|))
@@ -1856,7 +1856,7 @@
 ;     sayBrightly [s,'" : ",x]
 ;     total := total + s
 ;   sayBrightly '"------------total-------------"
-;   sayBrightly [count," constructors; ",total," BYTES"]
+;   sayBrightly [count,'" constructors; ",total,'" BYTES"]
 
 (DEFUN |dcSizeAll| ()
   (PROG (|s| |total| |count|)
@@ -1879,7 +1879,7 @@
           (SETQ |bfVar#83| (CDR |bfVar#83|))))
        (|allConstructors|) NIL)
       (|sayBrightly| "------------total-------------")
-      (|sayBrightly| (LIST |count| '| constructors; | |total| '| BYTES|))))))
+      (|sayBrightly| (LIST |count| " constructors; " |total| " BYTES"))))))
 
 ; sum(:l) == +/l
 
@@ -2109,7 +2109,7 @@
 ;   if null extends then
 ;     [u,msg,:v] := $why
 ;     sayBrightly '"--------------non extending category----------------------"
-;     sayBrightlyNT ['"..",:bright form2String domform,"of cat "]
+;     sayBrightlyNT ['"..",:bright form2String domform,'"of cat "]
 ;     PRINT u
 ;     sayBrightlyNT bright msg
 ;     if v then PRINT first v else TERPRI()
@@ -2138,7 +2138,7 @@
                 (|sayBrightlyNT|
                  (CONS ".."
                        (APPEND (|bright| (|form2String| |domform|))
-                               (CONS '|of cat | NIL))))
+                               (CONS "of cat " NIL))))
                 (PRINT |u|) (|sayBrightlyNT| (|bright| |msg|))
                 (COND (|v| (PRINT (CAR |v|))) (#1# (TERPRI)))))
               (COND (|extends| '|lookupIncomplete|)
@@ -2599,7 +2599,7 @@
                       NIL |argl| NIL))))))))))
 
 ; expandTypeArgs(u,template,domform) ==
-;   u = '$ => u --template.0      -------eliminate this as $ is rep by 0
+;   u = '% => u --template.0      -------eliminate this as $ is rep by 0
 ;   INTEGERP u => expandType(templateVal(template, domform, u), template,domform)
 ;   u is ['NRTEVAL,y] => y  --eval  y
 ;   u is ['QUOTE,y] => y
@@ -2609,7 +2609,7 @@
 (DEFUN |expandTypeArgs| (|u| |template| |domform|)
   (PROG (|ISTMP#1| |y|)
     (RETURN
-     (COND ((EQ |u| '$) |u|)
+     (COND ((EQ |u| '%) |u|)
            ((INTEGERP |u|)
             (|expandType| (|templateVal| |template| |domform| |u|) |template|
              |domform|))

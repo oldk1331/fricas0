@@ -6,7 +6,7 @@
 (DEFPARAMETER |IndexedDirectProductCategory;AL| 'NIL) 
 
 (DEFUN |IndexedDirectProductCategory| (|t#1| |t#2|)
-  (LET (#1=#:G690 (#2=#:G691 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
+  (LET (#1=#:G449 (#2=#:G450 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
     (COND
      ((SETQ #1# (|assoc| #2# |IndexedDirectProductCategory;AL|)) (CDR #1#))
      (T
@@ -18,7 +18,7 @@
       #1#)))) 
 
 (DEFUN |IndexedDirectProductCategory;| (|t#1| |t#2|)
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2|) (LIST |t#1| |t#2|)
@@ -34,10 +34,10 @@
                                                  ((|List|
                                                    (|Record| (|:| |k| |t#2|)
                                                              (|:| |c| |t#1|)))
-                                                  $))
+                                                  %))
                                                 T)
                                                ((|numberOfMonomials|
-                                                 ((|NonNegativeInteger|) $))
+                                                 ((|NonNegativeInteger|) %))
                                                 T))
                                              '(((|Comparable|)
                                                 (AND

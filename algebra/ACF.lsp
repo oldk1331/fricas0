@@ -8,39 +8,39 @@
         (T (SETQ |AlgebraicallyClosedField;AL| (|AlgebraicallyClosedField;|))))) 
 
 (DEFUN |AlgebraicallyClosedField;| ()
-  (SPROG ((#1=#:G702 NIL))
+  (SPROG ((#1=#:G461 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|Field|) (|RadicalCategory|)
                            (|mkCategory|
-                            '(((|rootOf| ($ (|Polynomial| $))) T)
-                              ((|rootOf| ($ (|SparseUnivariatePolynomial| $)))
+                            '(((|rootOf| (% (|Polynomial| %))) T)
+                              ((|rootOf| (% (|SparseUnivariatePolynomial| %)))
                                T)
                               ((|rootOf|
-                                ($ (|SparseUnivariatePolynomial| $)
+                                (% (|SparseUnivariatePolynomial| %)
                                  (|Symbol|)))
                                T)
-                              ((|rootsOf| ((|List| $) (|Polynomial| $))) T)
+                              ((|rootsOf| ((|List| %) (|Polynomial| %))) T)
                               ((|rootsOf|
-                                ((|List| $) (|SparseUnivariatePolynomial| $)))
+                                ((|List| %) (|SparseUnivariatePolynomial| %)))
                                T)
                               ((|rootsOf|
-                                ((|List| $) (|SparseUnivariatePolynomial| $)
+                                ((|List| %) (|SparseUnivariatePolynomial| %)
                                  (|Symbol|)))
                                T)
-                              ((|zeroOf| ($ (|Polynomial| $))) T)
-                              ((|zeroOf| ($ (|SparseUnivariatePolynomial| $)))
+                              ((|zeroOf| (% (|Polynomial| %))) T)
+                              ((|zeroOf| (% (|SparseUnivariatePolynomial| %)))
                                T)
                               ((|zeroOf|
-                                ($ (|SparseUnivariatePolynomial| $)
+                                (% (|SparseUnivariatePolynomial| %)
                                  (|Symbol|)))
                                T)
-                              ((|zerosOf| ((|List| $) (|Polynomial| $))) T)
+                              ((|zerosOf| ((|List| %) (|Polynomial| %))) T)
                               ((|zerosOf|
-                                ((|List| $) (|SparseUnivariatePolynomial| $)))
+                                ((|List| %) (|SparseUnivariatePolynomial| %)))
                                T)
                               ((|zerosOf|
-                                ((|List| $) (|SparseUnivariatePolynomial| $)
+                                ((|List| %) (|SparseUnivariatePolynomial| %)
                                  (|Symbol|)))
                                T))
                             NIL NIL NIL)))

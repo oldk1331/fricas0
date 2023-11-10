@@ -6,10 +6,10 @@
 (DEFUN |SemiRng| () (COND (|SemiRng;AL|) (T (SETQ |SemiRng;AL| (|SemiRng;|))))) 
 
 (DEFUN |SemiRng;| ()
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
-                   (|Join| (|NonAssociativeSemiRng|) (|BiModule| '$ '$)
+                   (|Join| (|NonAssociativeSemiRng|) (|BiModule| '% '%)
                            (|SemiGroup|)))
            (SETELT #1# 0 '(|SemiRng|))))) 
 

@@ -19,6 +19,35 @@
 
 (DEFVAR |$timedNameStack|)
 
+; DEFPARAMETER($inLispVM, false)
+
+(DEFPARAMETER |$inLispVM| NIL)
+
+; spad_system_error_handler (c) ==
+;     $NeedToSignalSessionManager := true
+;     not($inLispVM) and MEMQ($BreakMode,
+;            ["nobreak", "query", "resume", "quit", "trapSpadErrors"]) =>
+;         systemError(error_format(c))
+;     $BreakMode = "letPrint2" =>
+;         $BreakMode := nil
+;         THROW("letPrint2", nil)
+;     nil
+
+(DEFUN |spad_system_error_handler| (|c|)
+  (PROG ()
+    (RETURN
+     (PROGN
+      (SETQ |$NeedToSignalSessionManager| T)
+      (COND
+       ((AND (NULL |$inLispVM|)
+             (MEMQ |$BreakMode|
+                   (LIST '|nobreak| '|query| '|resume| '|quit|
+                         '|trapSpadErrors|)))
+        (|systemError| (|error_format| |c|)))
+       ((EQ |$BreakMode| '|letPrint2|)
+        (PROGN (SETQ |$BreakMode| NIL) (THROW '|letPrint2| NIL)))
+       ('T NIL))))))
+
 ; BUMPCOMPERRORCOUNT() == nil
 
 (DEFUN BUMPCOMPERRORCOUNT () (PROG () (RETURN NIL)))
@@ -144,6 +173,7 @@
 ;   -- The next line is to try to deal with some reported cases of unwanted
 ;   -- backtraces appearing, MCD.
 ;   ENABLE_BACKTRACE(nil)
+;   $BreakMode = 'trapSpadErrors => THROW('trapSpadErrors, $numericFailure)
 ;   $BreakMode = 'break =>
 ;     sayBrightly '" "
 ;     BREAK()
@@ -163,7 +193,7 @@
 ;       null x =>
 ;         sayBrightly bright '"  That was not one of your choices!"
 ;         gotIt := NIL
-;       x = 'top => returnToTopLevel()
+;       x = 'top => throw_to_top_level()
 ;       x = 'break =>
 ;         $BreakMode := 'break
 ;         sayBrightly ['"   Enter",:bright '":C",
@@ -173,13 +203,13 @@
 ;         BREAK()
 ;       sayBrightly
 ;         '"   Processing will continue where it was interrupted."
-;       THROW('SPAD_READER, nil)
+;       throw_to_reader()
 ;   $BreakMode = 'resume =>
 ;     returnToReader()
-;   $BreakMode = 'throw_reader => THROW('SPAD_READER, nil)
+;   $BreakMode = 'throw_reader => throw_to_reader()
 ;   $BreakMode = 'quit =>
-;     EXIT_-WITH_-STATUS(1)
-;   returnToTopLevel()
+;     exit_with_status(1)
+;   throw_to_top_level()
 
 (DEFUN |handleLispBreakLoop| (|$BreakMode|)
   (DECLARE (SPECIAL |$BreakMode|))
@@ -188,20 +218,22 @@
      (PROGN
       (TERPRI)
       (ENABLE_BACKTRACE NIL)
-      (COND ((EQ |$BreakMode| '|break|) (PROGN (|sayBrightly| " ") (BREAK)))
-            ((EQ |$BreakMode| '|query|)
-             (PROGN
-              (SETQ |gotIt| NIL)
-              ((LAMBDA ()
-                 (LOOP
-                  (COND (|gotIt| (RETURN NIL))
-                        (#1='T
-                         (PROGN
-                          (SETQ |gotIt| T)
-                          (SETQ |msgQ|
-                                  (CONS '|%l|
-                                        (CONS
-                                         "   You have three options. Enter:"
+      (COND
+       ((EQ |$BreakMode| '|trapSpadErrors|)
+        (THROW '|trapSpadErrors| |$numericFailure|))
+       ((EQ |$BreakMode| '|break|) (PROGN (|sayBrightly| " ") (BREAK)))
+       ((EQ |$BreakMode| '|query|)
+        (PROGN
+         (SETQ |gotIt| NIL)
+         ((LAMBDA ()
+            (LOOP
+             (COND (|gotIt| (RETURN NIL))
+                   (#1='T
+                    (PROGN
+                     (SETQ |gotIt| T)
+                     (SETQ |msgQ|
+                             (CONS '|%l|
+                                   (CONS "   You have three options. Enter:"
                                          (CONS '|%l|
                                                (CONS "    "
                                                      (APPEND
@@ -231,76 +263,76 @@
                                                                            (CONS
                                                                             "   Please enter your choice now:"
                                                                             NIL))))))))))))))))))
-                          (SETQ |x| (STRING2ID_N (|queryUser| |msgQ|) 1))
-                          (SETQ |x|
-                                  (|selectOptionLC| |x|
-                                   '(|top| |break| |continue|) NIL))
-                          (COND
-                           ((NULL |x|)
-                            (PROGN
-                             (|sayBrightly|
-                              (|bright| "  That was not one of your choices!"))
-                             (SETQ |gotIt| NIL)))
-                           ((EQ |x| '|top|) (|returnToTopLevel|))
-                           ((EQ |x| '|break|)
-                            (PROGN
-                             (SETQ |$BreakMode| '|break|)
-                             (|sayBrightly|
-                              (CONS "   Enter"
-                                    (APPEND (|bright| ":C")
-                                            (CONS
-                                             "when you are ready to continue processing where you "
-                                             (CONS '|%l|
-                                                   (CONS
-                                                    "   interrupted the system, enter"
-                                                    (APPEND (|bright| "(TOP)")
-                                                            (CONS
-                                                             "when you wish to return"
-                                                             (CONS '|%l|
-                                                                   (CONS
-                                                                    "   to top level."
-                                                                    (CONS '|%l|
-                                                                          (CONS
-                                                                           '|%l|
-                                                                           NIL))))))))))))
-                             (BREAK)))
-                           (#1#
-                            (PROGN
-                             (|sayBrightly|
-                              "   Processing will continue where it was interrupted.")
-                             (THROW 'SPAD_READER NIL))))))))))))
-            ((EQ |$BreakMode| '|resume|) (|returnToReader|))
-            ((EQ |$BreakMode| '|throw_reader|) (THROW 'SPAD_READER NIL))
-            ((EQ |$BreakMode| '|quit|) (EXIT-WITH-STATUS 1))
-            (#1# (|returnToTopLevel|)))))))
+                     (SETQ |x| (STRING2ID_N (|queryUser| |msgQ|) 1))
+                     (SETQ |x|
+                             (|selectOptionLC| |x| '(|top| |break| |continue|)
+                              NIL))
+                     (COND
+                      ((NULL |x|)
+                       (PROGN
+                        (|sayBrightly|
+                         (|bright| "  That was not one of your choices!"))
+                        (SETQ |gotIt| NIL)))
+                      ((EQ |x| '|top|) (|throw_to_top_level|))
+                      ((EQ |x| '|break|)
+                       (PROGN
+                        (SETQ |$BreakMode| '|break|)
+                        (|sayBrightly|
+                         (CONS "   Enter"
+                               (APPEND (|bright| ":C")
+                                       (CONS
+                                        "when you are ready to continue processing where you "
+                                        (CONS '|%l|
+                                              (CONS
+                                               "   interrupted the system, enter"
+                                               (APPEND (|bright| "(TOP)")
+                                                       (CONS
+                                                        "when you wish to return"
+                                                        (CONS '|%l|
+                                                              (CONS
+                                                               "   to top level."
+                                                               (CONS '|%l|
+                                                                     (CONS
+                                                                      '|%l|
+                                                                      NIL))))))))))))
+                        (BREAK)))
+                      (#1#
+                       (PROGN
+                        (|sayBrightly|
+                         "   Processing will continue where it was interrupted.")
+                        (|throw_to_reader|))))))))))))
+       ((EQ |$BreakMode| '|resume|) (|returnToReader|))
+       ((EQ |$BreakMode| '|throw_reader|) (|throw_to_reader|))
+       ((EQ |$BreakMode| '|quit|) (|exit_with_status| 1))
+       (#1# (|throw_to_top_level|)))))))
 
-; TOP() == returnToTopLevel()
+; throw_to_reader() == THROW('SPAD_READER, nil)
 
-(DEFUN TOP () (PROG () (RETURN (|returnToTopLevel|))))
+(DEFUN |throw_to_reader| () (PROG () (RETURN (THROW 'SPAD_READER NIL))))
 
-; returnToTopLevel() ==
-;   TOPLEVEL()
+; TOP() == throw_to_top_level()
 
-(DEFUN |returnToTopLevel| () (PROG () (RETURN (TOPLEVEL))))
+(DEFUN TOP () (PROG () (RETURN (|throw_to_top_level|))))
 
-; TOPLEVEL() ==
+; throw_to_top_level() ==
 ;     THROW('top_level, 'restart)
 
-(DEFUN TOPLEVEL () (PROG () (RETURN (THROW '|top_level| '|restart|))))
+(DEFUN |throw_to_top_level| ()
+  (PROG () (RETURN (THROW '|top_level| '|restart|))))
 
 ; returnToReader() ==
-;   not $ReadingFile => returnToTopLevel()
-;   sayBrightly ['"   Continuing to read the file...", '%l]
-;   THROW('SPAD_READER, nil)
+;     not $ReadingFile => throw_to_top_level()
+;     sayBrightly ['"   Continuing to read the file...", '%l]
+;     throw_to_reader()
 
 (DEFUN |returnToReader| ()
   (PROG ()
     (RETURN
-     (COND ((NULL |$ReadingFile|) (|returnToTopLevel|))
+     (COND ((NULL |$ReadingFile|) (|throw_to_top_level|))
            ('T
             (PROGN
              (|sayBrightly| (LIST "   Continuing to read the file..." '|%l|))
-             (THROW 'SPAD_READER NIL)))))))
+             (|throw_to_reader|)))))))
 
 ; sayErrorly(errorLabel, msg) ==
 ;   sayErrorly1(errorLabel, msg)
@@ -404,13 +436,13 @@
   (PROG () (RETURN (|check_union_failure_msg| |val| |submode| |mode|))))
 
 ; IdentityError(op) ==
-;     error(["No identity element for reduce of empty list using operation",op])
+;     error(['"No identity element for reduce of empty list using operation",op])
 
 (DEFUN |IdentityError| (|op|)
   (PROG ()
     (RETURN
      (|error|
-      (LIST '|No identity element for reduce of empty list using operation|
+      (LIST "No identity element for reduce of empty list using operation"
             |op|)))))
 
 ; throwMessage(:msg) ==

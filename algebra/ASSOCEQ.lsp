@@ -1,8 +1,8 @@
 
 (SDEFUN |ASSOCEQ;makeMatrix|
         ((|v| (|Vector| (|Matrix| R))) (|n| (|NonNegativeInteger|))
-         ($ (|Matrix| R)))
-        (SPROG ((#1=#:G706 NIL) (|i| NIL) (#2=#:G705 NIL))
+         (% (|Matrix| R)))
+        (SPROG ((#1=#:G454 NIL) (|i| NIL) (#2=#:G453 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -14,43 +14,43 @@
                          (LETT #2#
                                (CONS
                                 (SPADCALL
-                                 (SPADCALL (SPADCALL |v| |i| (QREFELT $ 13))
-                                           |n| (QREFELT $ 15))
-                                 (QREFELT $ 17))
+                                 (SPADCALL (SPADCALL |v| |i| (QREFELT % 13))
+                                           |n| (QREFELT % 15))
+                                 (QREFELT % 17))
                                 #2#))))
                        (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                        (EXIT (NREVERSE #2#))))
-                 (QREFELT $ 19))))) 
+                 (QREFELT % 19))))) 
 
 (SDEFUN |ASSOCEQ;associatedSystem;LPiR;2|
         ((|op| (L)) (|m| (|PositiveInteger|))
-         ($
+         (%
           (|Record| (|:| |mat| (|Matrix| R))
                     (|:| |vec| (|Vector| (|List| (|PositiveInteger|)))))))
         (SPROG
-         ((|u| (|Union| S #1="failed")) (#2=#:G735 NIL) (#3=#:G730 NIL)
-          (#4=#:G750 NIL) (|j| NIL) (#5=#:G722 NIL) (#6=#:G749 NIL) (|k| NIL)
-          (|wi| (S)) (|eq| (|Vector| R)) (#7=#:G748 NIL) (|i| NIL)
-          (|a| (|Vector| R)) (#8=#:G716 NIL) (#9=#:G747 NIL) (#10=#:G746 NIL)
-          (|an| (R)) (|m1| (|PositiveInteger|)) (#11=#:G713 NIL)
+         ((|u| (|Union| S #1="failed")) (#2=#:G480 NIL) (#3=#:G475 NIL)
+          (#4=#:G495 NIL) (|j| NIL) (#5=#:G467 NIL) (#6=#:G494 NIL) (|k| NIL)
+          (|wi| (S)) (|eq| (|Vector| R)) (#7=#:G493 NIL) (|i| NIL)
+          (|a| (|Vector| R)) (#8=#:G461 NIL) (#9=#:G492 NIL) (#10=#:G491 NIL)
+          (|an| (R)) (|m1| (|PositiveInteger|)) (#11=#:G458 NIL)
           (M (|Matrix| R)) (|ww| (|Vector| (|List| (|PositiveInteger|))))
           (|s| (|NonNegativeInteger|)) (|w| (|Vector| S))
           (S
            (|Join| (|Finite|)
                    (CATEGORY |domain|
                     (SIGNATURE |incrementKthElement|
-                     ((|Union| $ #12="failed") $ (|PositiveInteger|)))
+                     ((|Union| % #12="failed") % (|PositiveInteger|)))
                     (SIGNATURE |replaceKthElement|
-                     ((|Union| $ #12#) $ (|PositiveInteger|)
+                     ((|Union| % #12#) % (|PositiveInteger|)
                       (|PositiveInteger|)))
-                    (SIGNATURE |elements| ((|List| (|PositiveInteger|)) $))
-                    (SIGNATURE |setOfMinN| ($ (|List| (|PositiveInteger|))))
-                    (SIGNATURE |enumerate| ((|Vector| $)))
-                    (SIGNATURE |member?| ((|Boolean|) (|PositiveInteger|) $))
+                    (SIGNATURE |elements| ((|List| (|PositiveInteger|)) %))
+                    (SIGNATURE |setOfMinN| (% (|List| (|PositiveInteger|))))
+                    (SIGNATURE |enumerate| ((|Vector| %)))
+                    (SIGNATURE |member?| ((|Boolean|) (|PositiveInteger|) %))
                     (SIGNATURE |delta|
-                     ((|NonNegativeInteger|) $ (|PositiveInteger|)
+                     ((|NonNegativeInteger|) % (|PositiveInteger|)
                       (|PositiveInteger|))))))
-          (|n| (|PositiveInteger|)) (#13=#:G712 NIL))
+          (|n| (|PositiveInteger|)) (#13=#:G457 NIL))
          (SEQ
           (LETT S
                 (|SetOfMIntegersInOneToN| |m|
@@ -58,7 +58,7 @@
                                                 (PROG1
                                                     (LETT #13#
                                                           (SPADCALL |op|
-                                                                    (QREFELT $
+                                                                    (QREFELT %
                                                                              21)))
                                                   (|check_subtype2| (> #13# 0)
                                                                     '(|PositiveInteger|)
@@ -66,7 +66,7 @@
                                                                     #13#)))))
           (LETT |w|
                 (SPADCALL
-                 (|compiledLookupCheck| '|enumerate| (LIST (LIST '|Vector| '$))
+                 (|compiledLookupCheck| '|enumerate| (LIST (LIST '|Vector| '%))
                                         S)))
           (LETT |s|
                 (SPADCALL
@@ -74,12 +74,12 @@
                                         (LIST (LIST '|NonNegativeInteger|))
                                         S)))
           (LETT |ww| (MAKEARR1 |s| NIL))
-          (LETT M (MAKE_MATRIX1 |s| |s| (|spadConstant| $ 22)))
+          (LETT M (MAKE_MATRIX1 |s| |s| (|spadConstant| % 22)))
           (LETT |m1|
                 (PROG1 (LETT #11# (- |m| 1))
                   (|check_subtype2| (> #11# 0) '(|PositiveInteger|)
                                     '(|Integer|) #11#)))
-          (LETT |an| (SPADCALL |op| (QREFELT $ 26)))
+          (LETT |an| (SPADCALL |op| (QREFELT % 26)))
           (LETT |a|
                 (PROGN
                  (LETT #10# (GETREFV |n|))
@@ -92,24 +92,24 @@
                                  (PROG2
                                      (LETT #8#
                                            (SPADCALL
-                                            (SPADCALL |op| |j| (QREFELT $ 27))
-                                            |an| (QREFELT $ 29)))
+                                            (SPADCALL |op| |j| (QREFELT % 27))
+                                            |an| (QREFELT % 29)))
                                      (QCDR #8#)
-                                   (|check_union2| (QEQCAR #8# 0) (QREFELT $ 6)
-                                                   (|Union| (QREFELT $ 6)
+                                   (|check_union2| (QEQCAR #8# 0) (QREFELT % 6)
+                                                   (|Union| (QREFELT % 6)
                                                             "failed")
                                                    #8#))
-                                 (QREFELT $ 30)))))
+                                 (QREFELT % 30)))))
                       (LETT |j| (|inc_SI| |j|)) (GO G190) G191 (EXIT NIL))
                  #10#))
           (SEQ (LETT |i| 1) (LETT #7# |s|) G190
                (COND ((|greater_SI| |i| #7#) (GO G191)))
-               (SEQ (LETT |eq| (MAKEARR1 |s| (|spadConstant| $ 22)))
+               (SEQ (LETT |eq| (MAKEARR1 |s| (|spadConstant| % 22)))
                     (LETT |wi|
                           (SPADCALL |w| |i|
                                     (|compiledLookupCheck| '|elt|
                                                            (LIST
-                                                            (|devaluate| S) '$
+                                                            (|devaluate| S) '%
                                                             (LIST '|Integer|))
                                                            (|Vector| S))))
                     (SPADCALL |ww| |i|
@@ -119,9 +119,9 @@
                                                                 (LIST '|List|
                                                                       (LIST
                                                                        '|PositiveInteger|))
-                                                                '$)
+                                                                '%)
                                                                S))
-                              (QREFELT $ 33))
+                              (QREFELT % 33))
                     (SEQ (LETT |k| 1) (LETT #6# |m1|) G190
                          (COND ((|greater_SI| |k| #6#) (GO G191)))
                          (SEQ
@@ -134,7 +134,7 @@
                                                               #5#))
                                           (|compiledLookupCheck|
                                            '|incrementKthElement|
-                                           (LIST (LIST '|Union| '$ '#1#) '$
+                                           (LIST (LIST '|Union| '% '#1#) '%
                                                  (LIST '|PositiveInteger|))
                                            S)))
                           (EXIT
@@ -146,10 +146,10 @@
                                                   '|lookup|
                                                   (LIST
                                                    (LIST '|PositiveInteger|)
-                                                   '$)
+                                                   '%)
                                                   S))
-                                       (|spadConstant| $ 24)
-                                       (QREFELT $ 34))))))
+                                       (|spadConstant| % 24)
+                                       (QREFELT % 34))))))
                          (LETT |k| (|inc_SI| |k|)) (GO G190) G191 (EXIT NIL))
                     (COND
                      ((SPADCALL |n| |wi|
@@ -157,15 +157,15 @@
                                                        (LIST (LIST '|Boolean|)
                                                              (LIST
                                                               '|PositiveInteger|)
-                                                             '$)
+                                                             '%)
                                                        S))
                       (SEQ (LETT |j| 1) (LETT #4# |n|) G190
                            (COND ((|greater_SI| |j| #4#) (GO G191)))
                            (SEQ
                             (EXIT
                              (COND
-                              ((SPADCALL (SPADCALL |a| |j| (QREFELT $ 35))
-                                         (|spadConstant| $ 22) (QREFELT $ 37))
+                              ((SPADCALL (SPADCALL |a| |j| (QREFELT % 35))
+                                         (|spadConstant| % 22) (QREFELT % 37))
                                (SEQ
                                 (LETT |u|
                                       (SPADCALL |wi| |m|
@@ -176,8 +176,8 @@
                                                                     #3#))
                                                 (|compiledLookupCheck|
                                                  '|replaceKthElement|
-                                                 (LIST (LIST '|Union| '$ '#1#)
-                                                       '$
+                                                 (LIST (LIST '|Union| '% '#1#)
+                                                       '%
                                                        (LIST
                                                         '|PositiveInteger|)
                                                        (LIST
@@ -193,7 +193,7 @@
                                                         (LIST
                                                          (LIST
                                                           '|PositiveInteger|)
-                                                         '$)
+                                                         '%)
                                                         S))
                                              (COND
                                               ((ODDP
@@ -209,7 +209,7 @@
                                                            (LIST
                                                             (LIST
                                                              '|NonNegativeInteger|)
-                                                            '$
+                                                            '%
                                                             (LIST
                                                              '|PositiveInteger|)
                                                             (LIST
@@ -217,12 +217,12 @@
                                                            S)))
                                                (SPADCALL
                                                 (SPADCALL |a| |j|
-                                                          (QREFELT $ 35))
-                                                (QREFELT $ 30)))
+                                                          (QREFELT % 35))
+                                                (QREFELT % 30)))
                                               ('T
                                                (SPADCALL |a| |j|
-                                                         (QREFELT $ 35))))
-                                             (QREFELT $ 34))))))))))
+                                                         (QREFELT % 35))))
+                                             (QREFELT % 34))))))))))
                            (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                            (EXIT NIL)))
                      ('T
@@ -231,7 +231,7 @@
                              (SPADCALL |wi| |m|
                                        (|compiledLookupCheck|
                                         '|incrementKthElement|
-                                        (LIST (LIST '|Union| '$ '#1#) '$
+                                        (LIST (LIST '|Union| '% '#1#) '%
                                               (LIST '|PositiveInteger|))
                                         S)))
                        (EXIT
@@ -243,22 +243,22 @@
                                                                      (LIST
                                                                       (LIST
                                                                        '|PositiveInteger|)
-                                                                      '$)
+                                                                      '%)
                                                                      S))
-                                    (|spadConstant| $ 24) (QREFELT $ 34))))))))
-                    (EXIT (SPADCALL M |i| |eq| (QREFELT $ 38))))
+                                    (|spadConstant| % 24) (QREFELT % 34))))))))
+                    (EXIT (SPADCALL M |i| |eq| (QREFELT % 38))))
                (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
           (EXIT (CONS M |ww|))))) 
 
 (SDEFUN |ASSOCEQ;uncouplingMatrices;MV;3|
-        ((|m| #1=(|Matrix| R)) ($ (|Vector| (|Matrix| R))))
+        ((|m| #1=(|Matrix| R)) (% (|Vector| (|Matrix| R))))
         (SPROG
-         ((#2=#:G759 NIL) (#3=#:G761 NIL) (|i| NIL) (#4=#:G760 NIL) (|mi| #1#)
-          (#5=#:G758 NIL) (|v| (|Vector| (|Matrix| R)))
+         ((#2=#:G504 NIL) (#3=#:G506 NIL) (|i| NIL) (#4=#:G505 NIL) (|mi| #1#)
+          (#5=#:G503 NIL) (|v| (|Vector| (|Matrix| R)))
           (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (ANROWS |m|))
-              (LETT |v| (MAKEARR1 |n| (SPADCALL 1 0 (QREFELT $ 42))))
-              (SPADCALL |v| 1 (LETT |mi| |m|) (QREFELT $ 43))
+              (LETT |v| (MAKEARR1 |n| (SPADCALL 1 0 (QREFELT % 42))))
+              (SPADCALL |v| 1 (LETT |mi| |m|) (QREFELT % 43))
               (SEQ (LETT |i| 2) (LETT #5# |n|) G190
                    (COND ((|greater_SI| |i| #5#) (GO G191)))
                    (SEQ
@@ -269,11 +269,11 @@
                                       (SPADCALL
                                        (CONS
                                         #'|ASSOCEQ;uncouplingMatrices;MV;3!0|
-                                        (VECTOR $ (QREFELT $ 9)))
-                                       |mi| (QREFELT $ 46))
-                                      (SPADCALL |mi| |m| (QREFELT $ 47))
-                                      (QREFELT $ 48)))
-                               (QREFELT $ 43))))
+                                        (VECTOR % (QREFELT % 9)))
+                                       |mi| (QREFELT % 46))
+                                      (SPADCALL |mi| |m| (QREFELT % 47))
+                                      (QREFELT % 48)))
+                               (QREFELT % 43))))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
               (EXIT
                (PROGN
@@ -281,33 +281,33 @@
                 (SEQ (LETT |i| 1) (LETT #3# |n|) (LETT #2# 0) G190
                      (COND ((|greater_SI| |i| #3#) (GO G191)))
                      (SEQ
-                      (EXIT (SETELT #4# #2# (|ASSOCEQ;makeMatrix| |v| |i| $))))
+                      (EXIT (SETELT #4# #2# (|ASSOCEQ;makeMatrix| |v| |i| %))))
                      (LETT #2#
                            (PROG1 (|inc_SI| #2#) (LETT |i| (|inc_SI| |i|))))
                      (GO G190) G191 (EXIT NIL))
                 #4#))))) 
 
 (SDEFUN |ASSOCEQ;uncouplingMatrices;MV;3!0| ((|z1| NIL) ($$ NIL))
-        (PROG (|diff| $)
+        (PROG (|diff| %)
           (LETT |diff| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |diff| |z1| (QREFELT $ 44)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |diff| |z1| (QREFELT % 44)))))) 
 
 (SDEFUN |ASSOCEQ;makeeq|
         ((|v| (|Vector| (|List| (|PositiveInteger|)))) (|m| (|Matrix| R))
          (|i| (|NonNegativeInteger|)) (|n| (|NonNegativeInteger|))
-         ($
+         (%
           (|Record| (|:| |minor| (|List| (|PositiveInteger|))) (|:| |eq| L)
                     (|:| |minors| (|List| (|List| (|PositiveInteger|))))
                     (|:| |ops| (|List| L)))))
         (SPROG
-         ((#1=#:G771 NIL) (|j| NIL) (#2=#:G770 NIL) (#3=#:G769 NIL)
-          (#4=#:G768 NIL))
+         ((#1=#:G516 NIL) (|j| NIL) (#2=#:G515 NIL) (#3=#:G514 NIL)
+          (#4=#:G513 NIL))
          (SEQ
-          (VECTOR (SPADCALL |v| |i| (QREFELT $ 50))
+          (VECTOR (SPADCALL |v| |i| (QREFELT % 50))
                   (SPADCALL
-                   (|ASSOCEQ;makeop| (SPADCALL |m| |i| (QREFELT $ 15)) $)
-                   (|spadConstant| $ 25) (QREFELT $ 51))
+                   (|ASSOCEQ;makeop| (SPADCALL |m| |i| (QREFELT % 15)) %)
+                   (|spadConstant| % 25) (QREFELT % 51))
                   (PROGN
                    (LETT #4# NIL)
                    (SEQ (LETT |j| 1) (LETT #3# |n|) G190
@@ -315,9 +315,9 @@
                         (SEQ
                          (EXIT
                           (COND
-                           ((SPADCALL |j| |i| (QREFELT $ 52))
+                           ((SPADCALL |j| |i| (QREFELT % 52))
                             (LETT #4#
-                                  (CONS (SPADCALL |v| |j| (QREFELT $ 50))
+                                  (CONS (SPADCALL |v| |j| (QREFELT % 50))
                                         #4#))))))
                         (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                         (EXIT (NREVERSE #4#))))
@@ -328,51 +328,51 @@
                         (SEQ
                          (EXIT
                           (COND
-                           ((SPADCALL |j| |i| (QREFELT $ 52))
+                           ((SPADCALL |j| |i| (QREFELT % 52))
                             (LETT #2#
                                   (CONS
                                    (|ASSOCEQ;makeop|
-                                    (SPADCALL |m| |j| (QREFELT $ 15)) $)
+                                    (SPADCALL |m| |j| (QREFELT % 15)) %)
                                    #2#))))))
                         (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                         (EXIT (NREVERSE #2#)))))))) 
 
 (SDEFUN |ASSOCEQ;associatedEquations;LPiR;5|
         ((|op| (L)) (|m| (|PositiveInteger|))
-         ($
+         (%
           (|Record| (|:| |minor| (|List| (|PositiveInteger|))) (|:| |eq| L)
                     (|:| |minors| (|List| (|List| (|PositiveInteger|))))
                     (|:| |ops| (|List| L)))))
         (SPROG
-         ((#1=#:G784 NIL) (|i| NIL)
+         ((#1=#:G529 NIL) (|i| NIL)
           (|ww| (|Vector| (|List| (|PositiveInteger|))))
           (|s| (|NonNegativeInteger|)) (|w| (|Vector| S))
           (S
            (|Join| (|Finite|)
                    (CATEGORY |domain|
                     (SIGNATURE |incrementKthElement|
-                     ((|Union| $ #2="failed") $ (|PositiveInteger|)))
+                     ((|Union| % #2="failed") % (|PositiveInteger|)))
                     (SIGNATURE |replaceKthElement|
-                     ((|Union| $ #2#) $ (|PositiveInteger|)
+                     ((|Union| % #2#) % (|PositiveInteger|)
                       (|PositiveInteger|)))
-                    (SIGNATURE |elements| ((|List| (|PositiveInteger|)) $))
-                    (SIGNATURE |setOfMinN| ($ (|List| (|PositiveInteger|))))
-                    (SIGNATURE |enumerate| ((|Vector| $)))
-                    (SIGNATURE |member?| ((|Boolean|) (|PositiveInteger|) $))
+                    (SIGNATURE |elements| ((|List| (|PositiveInteger|)) %))
+                    (SIGNATURE |setOfMinN| (% (|List| (|PositiveInteger|))))
+                    (SIGNATURE |enumerate| ((|Vector| %)))
+                    (SIGNATURE |member?| ((|Boolean|) (|PositiveInteger|) %))
                     (SIGNATURE |delta|
-                     ((|NonNegativeInteger|) $ (|PositiveInteger|)
+                     ((|NonNegativeInteger|) % (|PositiveInteger|)
                       (|PositiveInteger|))))))
-          (#3=#:G776 NIL) (|v| (|Union| (|Matrix| R) "failed"))
+          (#3=#:G521 NIL) (|v| (|Union| (|Matrix| R) "failed"))
           (|u| (|Union| (|Matrix| R) "failed")))
-         (SEQ (LETT |u| (SPADCALL |op| |m| (QREFELT $ 55)))
+         (SEQ (LETT |u| (SPADCALL |op| |m| (QREFELT % 55)))
               (EXIT
-               (COND ((QEQCAR |u| 1) (|ASSOCEQ;computeIt| |op| |m| 1 $))
+               (COND ((QEQCAR |u| 1) (|ASSOCEQ;computeIt| |op| |m| 1 %))
                      (#4='T
-                      (SEQ (LETT |v| (SPADCALL (QCDR |u|) (QREFELT $ 56)))
+                      (SEQ (LETT |v| (SPADCALL (QCDR |u|) (QREFELT % 56)))
                            (EXIT
                             (COND
                              ((QEQCAR |v| 1)
-                              (|ASSOCEQ;computeIt| |op| |m| 2 $))
+                              (|ASSOCEQ;computeIt| |op| |m| 2 %))
                              (#4#
                               (SEQ
                                (LETT S
@@ -382,7 +382,7 @@
                                                                          (SPADCALL
                                                                           |op|
                                                                           (QREFELT
-                                                                           $
+                                                                           %
                                                                            21)))
                                                                  (|check_subtype2|
                                                                   (> #3# 0)
@@ -394,7 +394,7 @@
                                       (|compiledLookupCheck| '|enumerate|
                                                              (LIST
                                                               (LIST '|Vector|
-                                                                    '$))
+                                                                    '%))
                                                              S)))
                                (LETT |s|
                                      (SPADCALL
@@ -414,7 +414,7 @@
                                                            (|compiledLookupCheck|
                                                             '|elt|
                                                             (LIST
-                                                             (|devaluate| S) '$
+                                                             (|devaluate| S) '%
                                                              (LIST '|Integer|))
                                                             (|Vector| S)))
                                                  (|compiledLookupCheck|
@@ -423,32 +423,32 @@
                                                    (LIST '|List|
                                                          (LIST
                                                           '|PositiveInteger|))
-                                                   '$)
+                                                   '%)
                                                   S))
-                                                (QREFELT $ 33))))
+                                                (QREFELT % 33))))
                                     (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                                     (EXIT NIL))
                                (EXIT
                                 (|ASSOCEQ;makeeq| |ww| (QCDR |v|) 1 |s|
-                                 $))))))))))))) 
+                                 %))))))))))))) 
 
 (SDEFUN |ASSOCEQ;computeIt|
         ((|op| (L)) (|m| (|PositiveInteger|)) (|k| (|NonNegativeInteger|))
-         ($
+         (%
           (|Record| (|:| |minor| (|List| (|PositiveInteger|))) (|:| |eq| L)
                     (|:| |minors| (|List| (|List| (|PositiveInteger|))))
                     (|:| |ops| (|List| L)))))
         (SPROG
-         ((#1=#:G795 NIL) (#2=#:G796 NIL) (|u| (|Union| (|Matrix| R) "failed"))
-          (#3=#:G797 NIL) (|i| NIL) (|n| (|NonNegativeInteger|))
+         ((#1=#:G540 NIL) (#2=#:G541 NIL) (|u| (|Union| (|Matrix| R) "failed"))
+          (#3=#:G542 NIL) (|i| NIL) (|n| (|NonNegativeInteger|))
           (|a| (|Vector| (|Matrix| R)))
           (|rec|
            (|Record| (|:| |mat| (|Matrix| R))
                      (|:| |vec| (|Vector| (|List| (|PositiveInteger|)))))))
          (SEQ
           (EXIT
-           (SEQ (LETT |rec| (SPADCALL |op| |m| (QREFELT $ 41)))
-                (LETT |a| (SPADCALL (QCAR |rec|) (QREFELT $ 49)))
+           (SEQ (LETT |rec| (SPADCALL |op| |m| (QREFELT % 41)))
+                (LETT |a| (SPADCALL (QCAR |rec|) (QREFELT % 49)))
                 (LETT |n| (QVSIZE |a|))
                 (SEQ
                  (EXIT
@@ -456,8 +456,8 @@
                        (COND ((> |i| #3#) (GO G191)))
                        (SEQ
                         (LETT |u|
-                              (SPADCALL (SPADCALL |a| |i| (QREFELT $ 13))
-                                        (QREFELT $ 56)))
+                              (SPADCALL (SPADCALL |a| |i| (QREFELT % 13))
+                                        (QREFELT % 56)))
                         (EXIT
                          (COND
                           ((QEQCAR |u| 0)
@@ -466,17 +466,17 @@
                                   (PROGN
                                    (LETT #2#
                                          (|ASSOCEQ;makeeq| (QCDR |rec|)
-                                          (QCDR |u|) |i| |n| $))
-                                   (GO #4=#:G794)))
-                            (GO #5=#:G792))))))
+                                          (QCDR |u|) |i| |n| %))
+                                   (GO #4=#:G539)))
+                            (GO #5=#:G537))))))
                        (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL)))
                  #5# (EXIT #1#))
                 (EXIT (|error| "associatedEquations: full degenerate case"))))
           #4# (EXIT #2#)))) 
 
-(SDEFUN |ASSOCEQ;makeop| ((|v| (|Vector| R)) ($ (L)))
-        (SPROG ((|op| (L)) (#1=#:G802 NIL) (|i| NIL))
-               (SEQ (LETT |op| (|spadConstant| $ 23))
+(SDEFUN |ASSOCEQ;makeop| ((|v| (|Vector| R)) (% (L)))
+        (SPROG ((|op| (L)) (#1=#:G547 NIL) (|i| NIL))
+               (SEQ (LETT |op| (|spadConstant| % 23))
                     (SEQ (LETT |i| 1) (LETT #1# (QVSIZE |v|)) G190
                          (COND ((|greater_SI| |i| #1#) (GO G191)))
                          (SEQ
@@ -484,17 +484,17 @@
                            (LETT |op|
                                  (SPADCALL |op|
                                            (SPADCALL
-                                            (SPADCALL |v| |i| (QREFELT $ 35))
-                                            |i| (QREFELT $ 59))
-                                           (QREFELT $ 60)))))
+                                            (SPADCALL |v| |i| (QREFELT % 35))
+                                            |i| (QREFELT % 59))
+                                           (QREFELT % 60)))))
                          (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                     (EXIT |op|)))) 
 
 (DECLAIM (NOTINLINE |AssociatedEquations;|)) 
 
-(DEFUN |AssociatedEquations| (&REST #1=#:G803)
+(DEFUN |AssociatedEquations| (&REST #1=#:G548)
   (SPROG NIL
-         (PROG (#2=#:G804)
+         (PROG (#2=#:G549)
            (RETURN
             (COND
              ((LETT #2#
@@ -512,35 +512,35 @@
                   (HREM |$ConstructorCache| '|AssociatedEquations|)))))))))) 
 
 (DEFUN |AssociatedEquations;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|AssociatedEquations| DV$1 DV$2))
-          (LETT $ (GETREFV 61))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 61))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
                                               (|HasCategory| |#1|
                                                              '(|Field|))))))
           (|haddProp| |$ConstructorCache| '|AssociatedEquations|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 9 (SPADCALL (QREFELT $ 8)))
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 9 (SPADCALL (QREFELT % 8)))
           (COND
            ((|testBitVector| |pv$| 1)
             (PROGN
-             (QSETREFV $ 58
+             (QSETREFV % 58
                        (CONS
                         (|dispatchFunction|
                          |ASSOCEQ;associatedEquations;LPiR;5|)
-                        $)))))
-          $))) 
+                        %)))))
+          %))) 
 
 (MAKEPROP '|AssociatedEquations| '|infovec|
           (LIST
@@ -550,7 +550,7 @@
               (21 . |matrix|) (|NonNegativeInteger|) (26 . |degree|)
               (31 . |Zero|) (35 . |Zero|) (39 . |One|) (43 . |One|)
               (47 . |leadingCoefficient|) (52 . |coefficient|)
-              (|Union| $ '"failed") (58 . |exquo|) (64 . -) (|List| 40)
+              (|Union| % '"failed") (58 . |exquo|) (64 . -) (|List| 40)
               (|Vector| 31) (69 . |setelt!|) (76 . |setelt!|) (83 . |elt|)
               (|Boolean|) (89 . ~=) (95 . |setRow!|)
               (|Record| (|:| |mat| 10) (|:| |vec| 32)) (|PositiveInteger|)

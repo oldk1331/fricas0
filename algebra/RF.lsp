@@ -1,53 +1,53 @@
 
-(SDEFUN |RF;coerce;RF;1| ((|r| (R)) ($ (|Fraction| (|Polynomial| R))))
-        (SPADCALL (SPADCALL |r| (QREFELT $ 8)) (QREFELT $ 10))) 
+(SDEFUN |RF;coerce;RF;1| ((|r| (R)) (% (|Fraction| (|Polynomial| R))))
+        (SPADCALL (SPADCALL |r| (QREFELT % 8)) (QREFELT % 10))) 
 
 (SDEFUN |RF;variables;FL;2|
-        ((|f| (|Fraction| (|Polynomial| R))) ($ (|List| (|Symbol|))))
-        (SPADCALL |f| (QREFELT $ 14))) 
+        ((|f| (|Fraction| (|Polynomial| R))) (% (|List| (|Symbol|))))
+        (SPADCALL |f| (QREFELT % 14))) 
 
 (SDEFUN |RF;mainVariable;FU;3|
-        ((|f| (|Fraction| (|Polynomial| R))) ($ (|Union| (|Symbol|) "failed")))
-        (SPADCALL |f| (QREFELT $ 17))) 
+        ((|f| (|Fraction| (|Polynomial| R))) (% (|Union| (|Symbol|) "failed")))
+        (SPADCALL |f| (QREFELT % 17))) 
 
 (SDEFUN |RF;univariate;FSF;4|
         ((|f| (|Fraction| (|Polynomial| R))) (|x| (|Symbol|))
-         ($
+         (%
           (|Fraction|
            (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R))))))
-        (SPADCALL |f| |x| (QREFELT $ 21))) 
+        (SPADCALL |f| |x| (QREFELT % 21))) 
 
 (SDEFUN |RF;multivariate;FSF;5|
         ((|f|
           (|Fraction|
            (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R)))))
-         (|x| (|Symbol|)) ($ (|Fraction| (|Polynomial| R))))
-        (SPADCALL |f| |x| (QREFELT $ 23))) 
+         (|x| (|Symbol|)) (% (|Fraction| (|Polynomial| R))))
+        (SPADCALL |f| |x| (QREFELT % 23))) 
 
 (SDEFUN |RF;eval;FS2F;6|
         ((|x| (|Fraction| (|Polynomial| R))) (|s| (|Symbol|))
-         (|y| (|Fraction| (|Polynomial| R))) ($ (|Fraction| (|Polynomial| R))))
-        (SPADCALL |x| (LIST |s|) (LIST |y|) (QREFELT $ 26))) 
+         (|y| (|Fraction| (|Polynomial| R))) (% (|Fraction| (|Polynomial| R))))
+        (SPADCALL |x| (LIST |s|) (LIST |y|) (QREFELT % 26))) 
 
 (SDEFUN |RF;eval;FEF;7|
         ((|x| (|Fraction| (|Polynomial| R)))
          (|eq| (|Equation| (|Fraction| (|Polynomial| R))))
-         ($ (|Fraction| (|Polynomial| R))))
-        (SPADCALL |x| (LIST |eq|) (QREFELT $ 29))) 
+         (% (|Fraction| (|Polynomial| R))))
+        (SPADCALL |x| (LIST |eq|) (QREFELT % 29))) 
 
 (SDEFUN |RF;foo|
         ((|ls| (|List| (|Symbol|)))
          (|lv| (|List| (|Fraction| (|Polynomial| R)))) (|x| (|Symbol|))
-         ($ (|Fraction| (|Polynomial| R))))
-        (SPADCALL |ls| |lv| |x| (SPADCALL |x| (QREFELT $ 32)) (QREFELT $ 34))) 
+         (% (|Fraction| (|Polynomial| R))))
+        (SPADCALL |ls| |lv| |x| (SPADCALL |x| (QREFELT % 32)) (QREFELT % 34))) 
 
 (SDEFUN |RF;eval;FLF;9|
         ((|x| (|Fraction| (|Polynomial| R)))
          (|l| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))
-         ($ (|Fraction| (|Polynomial| R))))
+         (% (|Fraction| (|Polynomial| R))))
         (SPROG
-         ((#1=#:G719 NIL) (|eq| NIL) (#2=#:G718 NIL) (#3=#:G717 NIL)
-          (#4=#:G716 NIL))
+         ((#1=#:G467 NIL) (|eq| NIL) (#2=#:G466 NIL) (#3=#:G465 NIL)
+          (#4=#:G464 NIL))
          (SEQ
           (SPADCALL |x|
                     (PROGN
@@ -60,8 +60,8 @@
                            (EXIT
                             (LETT #4#
                                   (CONS
-                                   (SPADCALL (SPADCALL |eq| (QREFELT $ 35))
-                                             (QREFELT $ 36))
+                                   (SPADCALL (SPADCALL |eq| (QREFELT % 35))
+                                             (QREFELT % 36))
                                    #4#))))
                           (LETT #3# (CDR #3#)) (GO G190) G191
                           (EXIT (NREVERSE #4#))))
@@ -74,39 +74,39 @@
                           (SEQ
                            (EXIT
                             (LETT #2#
-                                  (CONS (SPADCALL |eq| (QREFELT $ 37)) #2#))))
+                                  (CONS (SPADCALL |eq| (QREFELT % 37)) #2#))))
                           (LETT #1# (CDR #1#)) (GO G190) G191
                           (EXIT (NREVERSE #2#))))
-                    (QREFELT $ 26))))) 
+                    (QREFELT % 26))))) 
 
 (SDEFUN |RF;eval;FLLF;10|
         ((|x| (|Fraction| (|Polynomial| R))) (|ls| (|List| (|Symbol|)))
          (|lv| (|List| (|Fraction| (|Polynomial| R))))
-         ($ (|Fraction| (|Polynomial| R))))
-        (SPADCALL (|RF;peval| (SPADCALL |x| (QREFELT $ 38)) |ls| |lv| $)
-                  (|RF;peval| (SPADCALL |x| (QREFELT $ 39)) |ls| |lv| $)
-                  (QREFELT $ 40))) 
+         (% (|Fraction| (|Polynomial| R))))
+        (SPADCALL (|RF;peval| (SPADCALL |x| (QREFELT % 38)) |ls| |lv| %)
+                  (|RF;peval| (SPADCALL |x| (QREFELT % 39)) |ls| |lv| %)
+                  (QREFELT % 40))) 
 
 (SDEFUN |RF;peval|
         ((|p| (|Polynomial| R)) (|ls| (|List| (|Symbol|)))
          (|lv| (|List| (|Fraction| (|Polynomial| R))))
-         ($ (|Fraction| (|Polynomial| R))))
+         (% (|Fraction| (|Polynomial| R))))
         (SPROG NIL
-               (SPADCALL (CONS #'|RF;peval!0| (VECTOR $ |lv| |ls|)) (ELT $ 11)
-                         |p| (QREFELT $ 44)))) 
+               (SPADCALL (CONS #'|RF;peval!0| (VECTOR % |lv| |ls|)) (ELT % 11)
+                         |p| (QREFELT % 44)))) 
 
 (SDEFUN |RF;peval!0| ((|z1| NIL) ($$ NIL))
-        (PROG (|ls| |lv| $)
+        (PROG (|ls| |lv| %)
           (LETT |ls| (QREFELT $$ 2))
           (LETT |lv| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (|RF;foo| |ls| |lv| |z1| $))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (|RF;foo| |ls| |lv| |z1| %))))) 
 
 (DECLAIM (NOTINLINE |RationalFunction;|)) 
 
-(DEFUN |RationalFunction| (#1=#:G723)
+(DEFUN |RationalFunction| (#1=#:G471)
   (SPROG NIL
-         (PROG (#2=#:G724)
+         (PROG (#2=#:G472)
            (RETURN
             (COND
              ((LETT #2#
@@ -122,19 +122,19 @@
                   (HREM |$ConstructorCache| '|RationalFunction|)))))))))) 
 
 (DEFUN |RationalFunction;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RationalFunction| DV$1))
-          (LETT $ (GETREFV 45))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 45))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|RationalFunction| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|RationalFunction| '|infovec|
           (LIST

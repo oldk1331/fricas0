@@ -1,41 +1,41 @@
 
 (SDEFUN |REALSOLV;prn2rfi|
         ((|p| (|Polynomial| (|Fraction| (|Integer|))))
-         ($ (|Fraction| (|Polynomial| (|Integer|)))))
-        (SPADCALL (ELT $ 8) (CONS #'|REALSOLV;prn2rfi!0| $) |p| (QREFELT $ 19))) 
+         (% (|Fraction| (|Polynomial| (|Integer|)))))
+        (SPADCALL (ELT % 8) (CONS #'|REALSOLV;prn2rfi!0| %) |p| (QREFELT % 19))) 
 
-(SDEFUN |REALSOLV;prn2rfi!0| ((|x| NIL) ($ NIL))
-        (SPADCALL (SPADCALL (SPADCALL |x| (QREFELT $ 11)) (QREFELT $ 12))
-                  (SPADCALL (SPADCALL |x| (QREFELT $ 13)) (QREFELT $ 12))
-                  (QREFELT $ 14))) 
+(SDEFUN |REALSOLV;prn2rfi!0| ((|x| NIL) (% NIL))
+        (SPADCALL (SPADCALL (SPADCALL |x| (QREFELT % 11)) (QREFELT % 12))
+                  (SPADCALL (SPADCALL |x| (QREFELT % 13)) (QREFELT % 12))
+                  (QREFELT % 14))) 
 
 (SDEFUN |REALSOLV;pi2rfi|
         ((|p| (|Polynomial| (|Integer|)))
-         ($ (|Fraction| (|Polynomial| (|Integer|)))))
-        (SPADCALL |p| (QREFELT $ 21))) 
+         (% (|Fraction| (|Polynomial| (|Integer|)))))
+        (SPADCALL |p| (QREFELT % 21))) 
 
 (SDEFUN |REALSOLV;solve;PFL;3|
         ((|p| (|Polynomial| (|Fraction| (|Integer|)))) (|eps| (|Float|))
-         ($ (|List| (|Float|))))
-        (SPADCALL (|REALSOLV;prn2rfi| |p| $) |eps| (QREFELT $ 25))) 
+         (% (|List| (|Float|))))
+        (SPADCALL (|REALSOLV;prn2rfi| |p| %) |eps| (QREFELT % 25))) 
 
 (SDEFUN |REALSOLV;solve;PFL;4|
         ((|p| (|Polynomial| (|Integer|))) (|eps| (|Float|))
-         ($ (|List| (|Float|))))
-        (SPADCALL (SPADCALL |p| (QREFELT $ 21)) |eps| (QREFELT $ 25))) 
+         (% (|List| (|Float|))))
+        (SPADCALL (SPADCALL |p| (QREFELT % 21)) |eps| (QREFELT % 25))) 
 
 (SDEFUN |REALSOLV;realSolve;LLFL;5|
         ((|lp| (|List| (|Polynomial| (|Integer|)))) (|lv| (|List| (|Symbol|)))
-         (|eps| (|Float|)) ($ (|List| (|List| (|Float|)))))
+         (|eps| (|Float|)) (% (|List| (|List| (|Float|)))))
         (SPADCALL
-         (SPADCALL (CONS (|function| |REALSOLV;pi2rfi|) $) |lp| (QREFELT $ 32))
-         |lv| |eps| (QREFELT $ 35))) 
+         (SPADCALL (CONS (|function| |REALSOLV;pi2rfi|) %) |lp| (QREFELT % 32))
+         |lv| |eps| (QREFELT % 35))) 
 
 (DECLAIM (NOTINLINE |RealSolvePackage;|)) 
 
 (DEFUN |RealSolvePackage| ()
   (SPROG NIL
-         (PROG (#1=#:G712)
+         (PROG (#1=#:G456)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|RealSolvePackage|))
@@ -52,16 +52,16 @@
                   (HREM |$ConstructorCache| '|RealSolvePackage|)))))))))) 
 
 (DEFUN |RealSolvePackage;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|RealSolvePackage|))
-          (LETT $ (GETREFV 37))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|RealSolvePackage| NIL (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 37))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|RealSolvePackage| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|RealSolvePackage| '|infovec|
           (LIST

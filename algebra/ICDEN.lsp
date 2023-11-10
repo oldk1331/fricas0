@@ -1,52 +1,52 @@
 
-(SDEFUN |ICDEN;clearDenominator;BA;1| ((|l| (B)) ($ (A)))
+(SDEFUN |ICDEN;clearDenominator;BA;1| ((|l| (B)) (% (A)))
         (SPROG ((|d| (R)))
-               (SEQ (LETT |d| (SPADCALL |l| (QREFELT $ 10)))
+               (SEQ (LETT |d| (SPADCALL |l| (QREFELT % 10)))
                     (EXIT
                      (SPADCALL
-                      (CONS #'|ICDEN;clearDenominator;BA;1!0| (VECTOR $ |d|))
-                      |l| (QREFELT $ 16)))))) 
+                      (CONS #'|ICDEN;clearDenominator;BA;1!0| (VECTOR % |d|))
+                      |l| (QREFELT % 16)))))) 
 
 (SDEFUN |ICDEN;clearDenominator;BA;1!0| ((|x| NIL) ($$ NIL))
-        (PROG (|d| $)
+        (PROG (|d| %)
           (LETT |d| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
+          (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPADCALL (SPADCALL |d| |x| (QREFELT $ 12)) (QREFELT $ 13)))))) 
+            (SPADCALL (SPADCALL |d| |x| (QREFELT % 12)) (QREFELT % 13)))))) 
 
 (SDEFUN |ICDEN;splitDenominator;BR;2|
-        ((|l| (B)) ($ (|Record| (|:| |num| A) (|:| |den| R))))
+        ((|l| (B)) (% (|Record| (|:| |num| A) (|:| |den| R))))
         (SPROG ((|d| (R)))
-               (SEQ (LETT |d| (SPADCALL |l| (QREFELT $ 10)))
+               (SEQ (LETT |d| (SPADCALL |l| (QREFELT % 10)))
                     (EXIT
                      (CONS
                       (SPADCALL
-                       (CONS #'|ICDEN;splitDenominator;BR;2!0| (VECTOR $ |d|))
-                       |l| (QREFELT $ 16))
+                       (CONS #'|ICDEN;splitDenominator;BR;2!0| (VECTOR % |d|))
+                       |l| (QREFELT % 16))
                       |d|))))) 
 
 (SDEFUN |ICDEN;splitDenominator;BR;2!0| ((|x| NIL) ($$ NIL))
-        (PROG (|d| $)
+        (PROG (|d| %)
           (LETT |d| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
+          (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPADCALL (SPADCALL |d| |x| (QREFELT $ 12)) (QREFELT $ 13)))))) 
+            (SPADCALL (SPADCALL |d| |x| (QREFELT % 12)) (QREFELT % 13)))))) 
 
-(SDEFUN |ICDEN;commonDenominator;BR;3| ((|l| (B)) ($ (R)))
-        (SPADCALL (ELT $ 20) (SPADCALL (ELT $ 21) |l| (QREFELT $ 16))
-                  (|spadConstant| $ 22) (QREFELT $ 24))) 
+(SDEFUN |ICDEN;commonDenominator;BR;3| ((|l| (B)) (% (R)))
+        (SPADCALL (ELT % 20) (SPADCALL (ELT % 21) |l| (QREFELT % 16))
+                  (|spadConstant| % 22) (QREFELT % 24))) 
 
-(SDEFUN |ICDEN;commonDenominator;BR;4| ((|l| (B)) ($ (R)))
-        (SPADCALL (ELT $ 11) (SPADCALL (ELT $ 21) |l| (QREFELT $ 16))
-                  (|spadConstant| $ 22) (QREFELT $ 24))) 
+(SDEFUN |ICDEN;commonDenominator;BR;4| ((|l| (B)) (% (R)))
+        (SPADCALL (ELT % 11) (SPADCALL (ELT % 21) |l| (QREFELT % 16))
+                  (|spadConstant| % 22) (QREFELT % 24))) 
 
 (DECLAIM (NOTINLINE |InnerCommonDenominator;|)) 
 
-(DEFUN |InnerCommonDenominator| (&REST #1=#:G716)
+(DEFUN |InnerCommonDenominator| (&REST #1=#:G466)
   (SPROG NIL
-         (PROG (#2=#:G717)
+         (PROG (#2=#:G467)
            (RETURN
             (COND
              ((LETT #2#
@@ -65,7 +65,7 @@
 
 (DEFUN |InnerCommonDenominator;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -73,25 +73,25 @@
     (LETT DV$3 (|devaluate| |#3|))
     (LETT DV$4 (|devaluate| |#4|))
     (LETT |dv$| (LIST '|InnerCommonDenominator| DV$1 DV$2 DV$3 DV$4))
-    (LETT $ (GETREFV 25))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (LETT % (GETREFV 25))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|InnerCommonDenominator|
-                (LIST DV$1 DV$2 DV$3 DV$4) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (SETF |pv$| (QREFELT $ 3))
+                (LIST DV$1 DV$2 DV$3 DV$4) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (SETF |pv$| (QREFELT % 3))
     (COND
      ((|HasCategory| |#1| '(|GcdDomain|))
-      (QSETREFV $ 10
-                (CONS (|dispatchFunction| |ICDEN;commonDenominator;BR;3|) $)))
+      (QSETREFV % 10
+                (CONS (|dispatchFunction| |ICDEN;commonDenominator;BR;3|) %)))
      ('T
-      (QSETREFV $ 10
-                (CONS (|dispatchFunction| |ICDEN;commonDenominator;BR;4|) $))))
-    $))) 
+      (QSETREFV % 10
+                (CONS (|dispatchFunction| |ICDEN;commonDenominator;BR;4|) %))))
+    %))) 
 
 (MAKEPROP '|InnerCommonDenominator| '|infovec|
           (LIST

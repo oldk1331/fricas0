@@ -672,20 +672,13 @@
       (|concat| (|formatOpSignature| |op| |sig|) (|formatIf| |pred|))))))
 
 ; formatOpSignature(op,sig) ==
-;   concat('%b,formatOpSymbol(op,sig),'%d,": ",formatSignature sig)
+;   concat('%b,formatOpSymbol(op,sig),'%d,'": ",formatSignature sig)
 
 (DEFUN |formatOpSignature| (|op| |sig|)
   (PROG ()
     (RETURN
-     (|concat| '|%b| (|formatOpSymbol| |op| |sig|) '|%d| '|: |
+     (|concat| '|%b| (|formatOpSymbol| |op| |sig|) '|%d| ": "
       (|formatSignature| |sig|)))))
-
-; formatOpConstant op ==
-;   concat('%b,formatOpSymbol(op,'($)),'%d,'": constant")
-
-(DEFUN |formatOpConstant| (|op|)
-  (PROG ()
-    (RETURN (|concat| '|%b| (|formatOpSymbol| |op| '($)) '|%d| ": constant"))))
 
 ; formatOpSymbol(op,sig) ==
 ;   if op = 'Zero then op := "0"
@@ -694,10 +687,10 @@
 ;   quad := specialChar 'quad
 ;   n := #sig
 ;   (op = 'elt) and (n = 3) =>
-;     (CADR(sig) = '_$) =>
-;       STRINGP (sel := CADDR(sig)) =>
-;         [quad,".",sel]
-;       [quad,".",quad]
+;     -- (CADR(sig) = '_$) =>
+;     --   STRINGP (sel := CADDR(sig)) =>
+;     --    [quad,".",sel]
+;     --  [quad,".",quad]
 ;     op
 ;   STRINGP op or GETL(op,"Led") or GETL(op,"Nud") =>
 ;     n = 3 =>
@@ -714,7 +707,7 @@
 ;   op
 
 (DEFUN |formatOpSymbol| (|op| |sig|)
-  (PROG (|quad| |n| |sel|)
+  (PROG (|quad| |n|)
     (RETURN
      (PROGN
       (COND ((EQ |op| '|Zero|) (SETQ |op| '|0|))
@@ -724,38 +717,31 @@
              (PROGN
               (SETQ |quad| (|specialChar| '|quad|))
               (SETQ |n| (LENGTH |sig|))
-              (COND
-               ((AND (EQ |op| '|elt|) (EQL |n| 3))
-                (COND
-                 ((EQ (CADR |sig|) '$)
-                  (COND
-                   ((STRINGP (SETQ |sel| (CADDR |sig|)))
-                    (LIST |quad| '|.| |sel|))
-                   (#1# (LIST |quad| '|.| |quad|))))
-                 (#1# |op|)))
-               ((OR (STRINGP |op|) (GETL |op| '|Led|) (GETL |op| '|Nud|))
-                (COND
-                 ((EQL |n| 3)
-                  (PROGN
-                   (COND ((EQ |op| 'SEGMENT) (SETQ |op| "..")))
-                   (COND ((EQ |op| '|in|) (LIST |quad| " " |op| " " |quad|))
+              (COND ((AND (EQ |op| '|elt|) (EQL |n| 3)) |op|)
+                    ((OR (STRINGP |op|) (GETL |op| '|Led|) (GETL |op| '|Nud|))
+                     (COND
+                      ((EQL |n| 3)
+                       (PROGN
+                        (COND ((EQ |op| 'SEGMENT) (SETQ |op| "..")))
+                        (COND
+                         ((EQ |op| '|in|) (LIST |quad| " " |op| " " |quad|))
                          ((EQ |op| '|exquo|) |op|)
                          (#1# (LIST |quad| |op| |quad|)))))
-                 ((EQL |n| 2)
-                  (COND ((NULL (GETL |op| '|Nud|)) (LIST |quad| |op|))
-                        (#1# (LIST |op| |quad|))))
-                 (#1# |op|)))
-               (#1# |op|)))))))))
+                      ((EQL |n| 2)
+                       (COND ((NULL (GETL |op| '|Nud|)) (LIST |quad| |op|))
+                             (#1# (LIST |op| |quad|))))
+                      (#1# |op|)))
+                    (#1# |op|)))))))))
 
 ; dollarPercentTran x ==
-;     -- Translate $ to %. We actually return %% so that the message
+;     -- Handle %. We actually return %% so that the message
 ;     -- printer will display a single %
 ;     x is [y,:z] =>
 ;         y1 := dollarPercentTran y
 ;         z1 := dollarPercentTran z
 ;         EQ(y, y1) and EQ(z, z1) => x
 ;         [y1, :z1]
-;     x = "$" or x = '"$" => "%%"
+;     x = "%" or x = '"%" => "%%"
 ;     x
 
 (DEFUN |dollarPercentTran| (|x|)
@@ -768,7 +754,7 @@
         (SETQ |y1| (|dollarPercentTran| |y|))
         (SETQ |z1| (|dollarPercentTran| |z|))
         (COND ((AND (EQ |y| |y1|) (EQ |z| |z1|)) |x|) (#1# (CONS |y1| |z1|)))))
-      ((OR (EQ |x| '$) (EQUAL |x| "$")) '%%) (#1# |x|)))))
+      ((OR (EQ |x| '%) (EQUAL |x| "%")) '%%) (#1# |x|)))))
 
 ; formatSignature sig ==
 ;   formatSignature0 sig
@@ -782,17 +768,17 @@
   (PROG () (RETURN (|formatSignatureArgs0| |sml|))))
 
 ; formatSignature0 sig ==
-;   null sig => "() -> ()"
+;   null sig => '"() -> ()"
 ;   INTEGERP sig => '"hashcode"
 ;   [tm,:sml] := sig
 ;   sourcePart:= formatSignatureArgs0 sml
 ;   targetPart:= prefix2String0 tm
-;   dollarPercentTran concat(sourcePart,concat(" -> ",targetPart))
+;   dollarPercentTran concat(sourcePart,concat('" -> ",targetPart))
 
 (DEFUN |formatSignature0| (|sig|)
   (PROG (|tm| |sml| |sourcePart| |targetPart|)
     (RETURN
-     (COND ((NULL |sig|) '|() -> ()|) ((INTEGERP |sig|) "hashcode")
+     (COND ((NULL |sig|) "() -> ()") ((INTEGERP |sig|) "hashcode")
            ('T
             (PROGN
              (SETQ |tm| (CAR |sig|))
@@ -800,21 +786,21 @@
              (SETQ |sourcePart| (|formatSignatureArgs0| |sml|))
              (SETQ |targetPart| (|prefix2String0| |tm|))
              (|dollarPercentTran|
-              (|concat| |sourcePart| (|concat| '| -> | |targetPart|)))))))))
+              (|concat| |sourcePart| (|concat| " -> " |targetPart|)))))))))
 
 ; formatSignatureArgs0(sml) ==
 ; -- formats the arguments of a signature
-;   null sml => ["_(_)"]
+;   null sml => ['"_(_)"]
 ;   null rest sml => prefix2String0 first sml
 ;   argList:= prefix2String0 first sml
 ;   for m in rest sml repeat
-;     argList:= concat(argList,concat(", ",prefix2String0 m))
-;   concat("_(",concat(argList,"_)"))
+;     argList:= concat(argList,concat('", ",prefix2String0 m))
+;   concat('"_(",concat(argList,'"_)"))
 
 (DEFUN |formatSignatureArgs0| (|sml|)
   (PROG (|argList|)
     (RETURN
-     (COND ((NULL |sml|) (LIST '|()|))
+     (COND ((NULL |sml|) (LIST "()"))
            ((NULL (CDR |sml|)) (|prefix2String0| (CAR |sml|)))
            (#1='T
             (PROGN
@@ -828,10 +814,10 @@
                   (#1#
                    (SETQ |argList|
                            (|concat| |argList|
-                            (|concat| '|, | (|prefix2String0| |m|))))))
+                            (|concat| ", " (|prefix2String0| |m|))))))
                  (SETQ |bfVar#20| (CDR |bfVar#20|))))
               (CDR |sml|) NIL)
-             (|concat| '|(| (|concat| |argList| '|)|))))))))
+             (|concat| "(" (|concat| |argList| ")"))))))))
 
 ; expr2String x ==
 ;   atom (u:= prefix2String0 x) => u
@@ -882,18 +868,6 @@
        (|$whereList|
         (|concat| |s| '|%b| "where" '|%d| '|%i| |$whereList| '|%u|))
        ('T |s|))))))
-
-; form2StringWithPrens form ==
-;   null (argl := rest form) => [first form]
-;   null rest argl => [first form,"(",first argl,")"]
-;   form2String form
-
-(DEFUN |form2StringWithPrens| (|form|)
-  (PROG (|argl|)
-    (RETURN
-     (COND ((NULL (SETQ |argl| (CDR |form|))) (LIST (CAR |form|)))
-           ((NULL (CDR |argl|)) (LIST (CAR |form|) '|(| (CAR |argl|) '|)|))
-           ('T (|form2String| |form|))))))
 
 ; formString u ==
 ;   x := form2String u
@@ -977,9 +951,6 @@
 ;   op='Join or op= 'mkCategory => formJoin1(op,argl)
 ;   $InteractiveMode and (u:= constructor? op) =>
 ;     null argl => app2StringWrap(formWrapId constructorName op, u1)
-;     op = "NTuple"  => [ form2String1 first argl, "*"]
-;     op = "Map"     => ["(",:formatSignature0 [argl.1,argl.0],")"]
-;     op = 'Record => record2String(argl)
 ;     $justUnparseType or null(conSig := getConstructorSignature op) =>
 ;       application2String(constructorName op,[form2String1(a) for a in argl], u1)
 ;     ml := rest conSig
@@ -1060,13 +1031,6 @@
           (COND
            ((NULL |argl|)
             (|app2StringWrap| (|formWrapId| (|constructorName| |op|)) |u1|))
-           ((EQ |op| '|NTuple|) (LIST (|form2String1| (CAR |argl|)) '*))
-           ((EQ |op| '|Map|)
-            (CONS '|(|
-                  (APPEND
-                   (|formatSignature0| (LIST (ELT |argl| 1) (ELT |argl| 0)))
-                   (CONS '|)| NIL))))
-           ((EQ |op| '|Record|) (|record2String| |argl|))
            ((OR |$justUnparseType|
                 (NULL (SETQ |conSig| (|getConstructorSignature| |op|))))
             (|application2String| (|constructorName| |op|)
@@ -1560,7 +1524,7 @@
 ;     $abbreviateJoin = true => concat(formJoin2 argl,'%b,'"with",'%d,'"...")
 ;     $permitWhere = true =>
 ;       opList:= formatJoinKey(r,id)
-;       $whereList:= concat($whereList,"%l",$declVar,": ",
+;       $whereList:= concat($whereList,"%l",$declVar,'": ",
 ;         formJoin2 argl,'%b,'"with",'%d,"%i",opList,"%u")
 ;       formJoin2 argl
 ;     opList:= formatJoinKey(r,id)
@@ -1590,7 +1554,7 @@
            (PROGN
             (SETQ |opList| (|formatJoinKey| |r| |id|))
             (SETQ |$whereList|
-                    (|concat| |$whereList| '|%l| |$declVar| '|: |
+                    (|concat| |$whereList| '|%l| |$declVar| ": "
                      (|formJoin2| |argl|) '|%b| "with" '|%d| '|%i| |opList|
                      '|%u|))
             (|formJoin2| |argl|)))
@@ -1789,7 +1753,7 @@
 ;   last is ["CATEGORY",.,:atsigList] =>
 ;     postString:= concat("_(",formTuple2String atsigList,"_)")
 ;     #argl=1 => concat(first argl,'" with ",postString)
-;     concat(application2String('Join,argl, NIL)," with ",postString)
+;     concat(application2String('Join,argl, NIL),'" with ",postString)
 ;   application2String('Join,u, NIL)
 
 (DEFUN |formJoin2String| (|u|)
@@ -1812,7 +1776,7 @@
           ((EQL (LENGTH |argl|) 1)
            (|concat| (CAR |argl|) " with " |postString|))
           (#1#
-           (|concat| (|application2String| '|Join| |argl| NIL) '| with |
+           (|concat| (|application2String| '|Join| |argl| NIL) " with "
             |postString|)))))
        (#1# (|application2String| '|Join| |u| NIL)))))))
 
@@ -1887,13 +1851,13 @@
 ; formIterator2String x ==
 ;   x is ["STEP",y,s,.,:l] =>
 ;     tail:= (l is [f] => form2StringLocal f; nil)
-;     concat("for ",y," in ",s,'"..",tail)
-;   x is ["tails",y] => concat("tails ",formatIterator y)
-;   x is ["reverse",y] => concat("reverse ",formatIterator y)
-;   x is ["|",y,p] => concat(formatIterator y," | ",form2StringLocal p)
-;   x is ["until",p] => concat("until ",form2StringLocal p)
-;   x is ["while",p] => concat("while ",form2StringLocal p)
-;   systemErrorHere "formatIterator"
+;     concat('"for ",y,'" in ",s,'"..",tail)
+;   x is ["tails",y] => concat('"tails ",formatIterator y)
+;   x is ["reverse",y] => concat('"reverse ",formatIterator y)
+;   x is ["|",y,p] => concat(formatIterator y,'" | ",form2StringLocal p)
+;   x is ["until",p] => concat('"until ",form2StringLocal p)
+;   x is ["while",p] => concat('"while ",form2StringLocal p)
+;   systemErrorHere '"formatIterator"
 
 (DEFUN |formIterator2String| (|x|)
   (PROG (|ISTMP#1| |y| |ISTMP#2| |s| |ISTMP#3| |l| |f| |tail| |p|)
@@ -1919,19 +1883,19 @@
                        (PROGN (SETQ |f| (CAR |l|)) #1#))
                   (|form2StringLocal| |f|))
                  (#1# NIL)))
-        (|concat| '|for | |y| '| in | |s| ".." |tail|)))
+        (|concat| "for " |y| " in " |s| ".." |tail|)))
       ((AND (CONSP |x|) (EQ (CAR |x|) '|tails|)
             (PROGN
              (SETQ |ISTMP#1| (CDR |x|))
              (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
                   (PROGN (SETQ |y| (CAR |ISTMP#1|)) #1#))))
-       (|concat| '|tails | (|formatIterator| |y|)))
+       (|concat| "tails " (|formatIterator| |y|)))
       ((AND (CONSP |x|) (EQ (CAR |x|) '|reverse|)
             (PROGN
              (SETQ |ISTMP#1| (CDR |x|))
              (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
                   (PROGN (SETQ |y| (CAR |ISTMP#1|)) #1#))))
-       (|concat| '|reverse | (|formatIterator| |y|)))
+       (|concat| "reverse " (|formatIterator| |y|)))
       ((AND (CONSP |x|) (EQ (CAR |x|) '|\||)
             (PROGN
              (SETQ |ISTMP#1| (CDR |x|))
@@ -1941,20 +1905,20 @@
                    (SETQ |ISTMP#2| (CDR |ISTMP#1|))
                    (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
                         (PROGN (SETQ |p| (CAR |ISTMP#2|)) #1#))))))
-       (|concat| (|formatIterator| |y|) '| \| | (|form2StringLocal| |p|)))
+       (|concat| (|formatIterator| |y|) " | " (|form2StringLocal| |p|)))
       ((AND (CONSP |x|) (EQ (CAR |x|) '|until|)
             (PROGN
              (SETQ |ISTMP#1| (CDR |x|))
              (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
                   (PROGN (SETQ |p| (CAR |ISTMP#1|)) #1#))))
-       (|concat| '|until | (|form2StringLocal| |p|)))
+       (|concat| "until " (|form2StringLocal| |p|)))
       ((AND (CONSP |x|) (EQ (CAR |x|) '|while|)
             (PROGN
              (SETQ |ISTMP#1| (CDR |x|))
              (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
                   (PROGN (SETQ |p| (CAR |ISTMP#1|)) #1#))))
-       (|concat| '|while | (|form2StringLocal| |p|)))
-      (#1# (|systemErrorHere| '|formatIterator|))))))
+       (|concat| "while " (|form2StringLocal| |p|)))
+      (#1# (|systemErrorHere| "formatIterator"))))))
 
 ; tuple2String argl ==
 ;   fn1 argl where
@@ -2230,9 +2194,9 @@
 ; record2String x ==
 ;   argPart := NIL
 ;   for [":",a,b] in x repeat argPart:=
-;     concat(argPart,",",a,": ",form2StringLocal b)
+;     concat(argPart,'",",a,'": ",form2StringLocal b)
 ;   null argPart => '"Record()"
-;   concat("Record_(",rest argPart,"_)")
+;   concat('"Record_(",rest argPart,'"_)")
 
 (DEFUN |record2String| (|x|)
   (PROG (|argPart| |ISTMP#1| |a| |ISTMP#2| |b|)
@@ -2256,12 +2220,12 @@
                         (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
                              (PROGN (SETQ |b| (CAR |ISTMP#2|)) #1#)))))
                  (SETQ |argPart|
-                         (|concat| |argPart| '|,| |a| '|: |
+                         (|concat| |argPart| "," |a| ": "
                           (|form2StringLocal| |b|))))))
           (SETQ |bfVar#70| (CDR |bfVar#70|))))
        |x| NIL)
       (COND ((NULL |argPart|) "Record()")
-            (#1# (|concat| '|Record(| (CDR |argPart|) '|)|)))))))
+            (#1# (|concat| "Record(" (CDR |argPart|) ")")))))))
 
 ; plural(n,string) ==
 ;   suffix:=
@@ -2413,7 +2377,7 @@
 ;       (_> . " > ") (_>_= . " >= ") (_=  . " = ") (_^_= . " _^_= ")))) =>
 ;         concat(pred2English a,translation,pred2English b)
 ;   x is ['ATTRIBUTE, form] => BREAK()
-;   x is '$ => '"%%"
+;   x is '% => '"%%"
 ;   form2String x
 
 (DEFUN |pred2English| (|x|)
@@ -2551,7 +2515,7 @@
              (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
                   (PROGN (SETQ |form| (CAR |ISTMP#1|)) #1#))))
        (BREAK))
-      ((EQ |x| '$) "%%") (#1# (|form2String| |x|))))))
+      ((EQ |x| '%) "%%") (#1# (|form2String| |x|))))))
 
 ; mathObject2String x ==
 ;   CHARACTERP x => COERCE([x],'STRING)
@@ -2674,7 +2638,7 @@
 ;   x is [op,:argl] =>
 ;     op = 'QUOTE => ['"(QUOTE ",:form2FenceQuote first argl,'")"]
 ;     ['"(", FORMAT(NIL, '"|~a|", op),:"append"/[form2Fence1 y for y in argl],'")"]
-;   x = "$" => ["%"]
+;   x = "%" => ["%"]
 ;   IDENTP x => [FORMAT(NIL, '"|~a|", x)]
 ; --  [x]
 ;   ['"  ", x]
@@ -2705,7 +2669,7 @@
                           (SETQ |bfVar#81| (CDR |bfVar#81|))))
                        NIL |argl| NIL)
                       (CONS ")" NIL)))))))
-      ((EQ |x| '$) (LIST '%)) ((IDENTP |x|) (LIST (FORMAT NIL "|~a|" |x|)))
+      ((EQ |x| '%) (LIST '%)) ((IDENTP |x|) (LIST (FORMAT NIL "|~a|" |x|)))
       (#1# (LIST "  " |x|))))))
 
 ; form2FenceQuote x ==

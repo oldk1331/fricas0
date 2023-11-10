@@ -6,8 +6,8 @@
 (DEFPARAMETER |RectangularMatrixCategory;AL| 'NIL) 
 
 (DEFUN |RectangularMatrixCategory| (|t#1| |t#2| |t#3| |t#4| |t#5|)
-  (LET (#1=#:G700
-        (#2=#:G701
+  (LET (#1=#:G455
+        (#2=#:G456
          (LIST |t#1| |t#2| (|devaluate| |t#3|) (|devaluate| |t#4|)
                (|devaluate| |t#5|))))
     (COND ((SETQ #1# (|assoc| #2# |RectangularMatrixCategory;AL|)) (CDR #1#))
@@ -21,7 +21,7 @@
            #1#)))) 
 
 (DEFUN |RectangularMatrixCategory;| (|t#1| |t#2| |t#3| |t#4| |t#5|)
-  (SPROG ((#1=#:G699 NIL))
+  (SPROG ((#1=#:G454 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3| |t#4| |t#5|)
@@ -36,105 +36,105 @@
                                                  (|finiteAggregate|)
                                                  (|mkCategory|
                                                   '(((|matrix|
-                                                      ($
+                                                      (%
                                                        (|List|
                                                         (|List| |t#3|))))
                                                      T)
                                                     ((|square?|
-                                                      ((|Boolean|) $))
+                                                      ((|Boolean|) %))
                                                      T)
                                                     ((|diagonal?|
-                                                      ((|Boolean|) $))
+                                                      ((|Boolean|) %))
                                                      T)
                                                     ((|symmetric?|
-                                                      ((|Boolean|) $))
+                                                      ((|Boolean|) %))
                                                      T)
                                                     ((|antisymmetric?|
-                                                      ((|Boolean|) $))
+                                                      ((|Boolean|) %))
                                                      (|has| |t#3|
                                                             (|AbelianGroup|)))
                                                     ((|antisymmetric?|
-                                                      ((|Boolean|) $))
+                                                      ((|Boolean|) %))
                                                      T)
                                                     ((|minRowIndex|
-                                                      ((|Integer|) $))
+                                                      ((|Integer|) %))
                                                      T)
                                                     ((|maxRowIndex|
-                                                      ((|Integer|) $))
+                                                      ((|Integer|) %))
                                                      T)
                                                     ((|minColIndex|
-                                                      ((|Integer|) $))
+                                                      ((|Integer|) %))
                                                      T)
                                                     ((|maxColIndex|
-                                                      ((|Integer|) $))
+                                                      ((|Integer|) %))
                                                      T)
                                                     ((|nrows|
                                                       ((|NonNegativeInteger|)
-                                                       $))
+                                                       %))
                                                      T)
                                                     ((|ncols|
                                                       ((|NonNegativeInteger|)
-                                                       $))
+                                                       %))
                                                      T)
                                                     ((|listOfLists|
                                                       ((|List| (|List| |t#3|))
-                                                       $))
+                                                       %))
                                                      T)
                                                     ((|elt|
-                                                      (|t#3| $ (|Integer|)
+                                                      (|t#3| % (|Integer|)
                                                        (|Integer|)))
                                                      T)
                                                     ((|qelt|
-                                                      (|t#3| $ (|Integer|)
+                                                      (|t#3| % (|Integer|)
                                                        (|Integer|)))
                                                      T)
                                                     ((|elt|
-                                                      (|t#3| $ (|Integer|)
+                                                      (|t#3| % (|Integer|)
                                                        (|Integer|) |t#3|))
                                                      T)
                                                     ((|row|
-                                                      (|t#4| $ (|Integer|)))
+                                                      (|t#4| % (|Integer|)))
                                                      T)
                                                     ((|column|
-                                                      (|t#5| $ (|Integer|)))
+                                                      (|t#5| % (|Integer|)))
                                                      T)
                                                     ((|map|
-                                                      ($
+                                                      (%
                                                        (|Mapping| |t#3| |t#3|)
-                                                       $))
+                                                       %))
                                                      T)
                                                     ((|map|
-                                                      ($
+                                                      (%
                                                        (|Mapping| |t#3| |t#3|
                                                                   |t#3|)
-                                                       $ $))
+                                                       % %))
                                                      T)
                                                     ((|exquo|
-                                                      ((|Union| $ "failed") $
+                                                      ((|Union| % "failed") %
                                                        |t#3|))
                                                      (|has| |t#3|
                                                             (|IntegralDomain|)))
-                                                    ((/ ($ $ |t#3|))
+                                                    ((/ (% % |t#3|))
                                                      (|has| |t#3| (|Field|)))
-                                                    ((|rowEchelon| ($ $))
+                                                    ((|rowEchelon| (% %))
                                                      (|has| |t#3|
                                                             (|EuclideanDomain|)))
                                                     ((|columnSpace|
-                                                      ((|List| |t#5|) $))
+                                                      ((|List| |t#5|) %))
                                                      (|has| |t#3|
                                                             (|EuclideanDomain|)))
                                                     ((|rank|
                                                       ((|NonNegativeInteger|)
-                                                       $))
+                                                       %))
                                                      (|has| |t#3|
                                                             (|IntegralDomain|)))
                                                     ((|nullity|
                                                       ((|NonNegativeInteger|)
-                                                       $))
+                                                       %))
                                                      (|has| |t#3|
                                                             (|IntegralDomain|)))
                                                     ((|nullSpace|
-                                                      ((|List| |t#5|) $))
+                                                      ((|List| |t#5|) %))
                                                      (|has| |t#3|
                                                             (|IntegralDomain|))))
                                                   '(((|Finite|)

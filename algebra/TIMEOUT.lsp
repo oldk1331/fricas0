@@ -2,14 +2,14 @@
 (PUT '|TIMEOUT;eval_with_timeout;MIU;1| '|SPADreplace| '|eval_with_timeout|) 
 
 (SDEFUN |TIMEOUT;eval_with_timeout;MIU;1|
-        ((|f| (|Mapping| S)) (|i| (|Integer|)) ($ (|Union| S "failed")))
+        ((|f| (|Mapping| S)) (|i| (|Integer|)) (% (|Union| S "failed")))
         (|eval_with_timeout| |f| |i|)) 
 
 (DECLAIM (NOTINLINE |TimeoutPackage;|)) 
 
-(DEFUN |TimeoutPackage| (#1=#:G700)
+(DEFUN |TimeoutPackage| (#1=#:G456)
   (SPROG NIL
-         (PROG (#2=#:G701)
+         (PROG (#2=#:G457)
            (RETURN
             (COND
              ((LETT #2#
@@ -25,19 +25,19 @@
                   (HREM |$ConstructorCache| '|TimeoutPackage|)))))))))) 
 
 (DEFUN |TimeoutPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|TimeoutPackage| DV$1))
-          (LETT $ (GETREFV 11))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 11))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|TimeoutPackage| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|TimeoutPackage| '|infovec|
           (LIST

@@ -8,12 +8,12 @@
         (T (SETQ |OrderedAbelianMonoidSup;AL| (|OrderedAbelianMonoidSup;|))))) 
 
 (DEFUN |OrderedAbelianMonoidSup;| ()
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|OrderedCancellationAbelianMonoid|)
                            (|mkCategory|
-                            '(((|sup| ($ $ $)) T) ((|inf| ($ $ $)) T)) NIL NIL
+                            '(((|sup| (% % %)) T) ((|inf| (% % %)) T)) NIL NIL
                             NIL)))
            (SETELT #1# 0 '(|OrderedAbelianMonoidSup|))))) 
 

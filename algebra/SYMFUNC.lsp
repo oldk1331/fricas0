@@ -1,22 +1,22 @@
 
 (SDEFUN |SYMFUNC;coef_vect|
         ((|p| (|SparseUnivariatePolynomial| R)) (|n| (|NonNegativeInteger|))
-         ($ (|Vector| R)))
-        (SPADCALL (SPADCALL |p| |n| (QREFELT $ 10)) (QREFELT $ 11))) 
+         (% (|Vector| R)))
+        (SPADCALL (SPADCALL |p| |n| (QREFELT % 10)) (QREFELT % 11))) 
 
 (SDEFUN |SYMFUNC;symFunc;RPiV;2|
-        ((|x| (R)) (|n| (|PositiveInteger|)) ($ (|Vector| R)))
+        ((|x| (R)) (|n| (|PositiveInteger|)) (% (|Vector| R)))
         (|SYMFUNC;coef_vect|
          (SPADCALL
-          (SPADCALL (SPADCALL (|spadConstant| $ 12) 1 (QREFELT $ 13))
-                    (SPADCALL |x| (QREFELT $ 14)) (QREFELT $ 15))
-          |n| (QREFELT $ 16))
-         |n| $)) 
+          (SPADCALL (SPADCALL (|spadConstant| % 12) 1 (QREFELT % 13))
+                    (SPADCALL |x| (QREFELT % 14)) (QREFELT % 15))
+          |n| (QREFELT % 16))
+         |n| %)) 
 
-(SDEFUN |SYMFUNC;symFunc;LV;3| ((|l| (|List| R)) ($ (|Vector| R)))
+(SDEFUN |SYMFUNC;symFunc;LV;3| ((|l| (|List| R)) (% (|Vector| R)))
         (SPROG
-         ((#1=#:G702 NIL) (#2=#:G701 #3=(|SparseUnivariatePolynomial| R))
-          (#4=#:G703 #3#) (#5=#:G705 NIL) (|a| NIL))
+         ((#1=#:G451 NIL) (#2=#:G450 #3=(|SparseUnivariatePolynomial| R))
+          (#4=#:G452 #3#) (#5=#:G454 NIL) (|a| NIL))
          (SEQ
           (|SYMFUNC;coef_vect|
            (PROGN
@@ -29,19 +29,19 @@
                    (PROGN
                     (LETT #4#
                           (SPADCALL
-                           (SPADCALL (|spadConstant| $ 12) 1 (QREFELT $ 13))
-                           (SPADCALL |a| (QREFELT $ 14)) (QREFELT $ 15)))
-                    (COND (#1# (LETT #2# (SPADCALL #2# #4# (QREFELT $ 20))))
+                           (SPADCALL (|spadConstant| % 12) 1 (QREFELT % 13))
+                           (SPADCALL |a| (QREFELT % 14)) (QREFELT % 15)))
+                    (COND (#1# (LETT #2# (SPADCALL #2# #4# (QREFELT % 20))))
                           ('T (PROGN (LETT #2# #4#) (LETT #1# 'T)))))))
                  (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
-            (COND (#1# #2#) ('T (|spadConstant| $ 19))))
-           (LENGTH |l|) $)))) 
+            (COND (#1# #2#) ('T (|spadConstant| % 19))))
+           (LENGTH |l|) %)))) 
 
 (DECLAIM (NOTINLINE |SymmetricFunctions;|)) 
 
-(DEFUN |SymmetricFunctions| (#1=#:G706)
+(DEFUN |SymmetricFunctions| (#1=#:G455)
   (SPROG NIL
-         (PROG (#2=#:G707)
+         (PROG (#2=#:G456)
            (RETURN
             (COND
              ((LETT #2#
@@ -57,19 +57,19 @@
                   (HREM |$ConstructorCache| '|SymmetricFunctions|)))))))))) 
 
 (DEFUN |SymmetricFunctions;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|SymmetricFunctions| DV$1))
-          (LETT $ (GETREFV 23))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 23))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|SymmetricFunctions| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|SymmetricFunctions| '|infovec|
           (LIST

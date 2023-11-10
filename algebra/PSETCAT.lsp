@@ -6,8 +6,8 @@
 (DEFPARAMETER |PolynomialSetCategory;AL| 'NIL) 
 
 (DEFUN |PolynomialSetCategory| (|t#1| |t#2| |t#3| |t#4|)
-  (LET (#1=#:G739
-        (#2=#:G740
+  (LET (#1=#:G494
+        (#2=#:G495
          (LIST (|devaluate| |t#1|) (|devaluate| |t#2|) (|devaluate| |t#3|)
                (|devaluate| |t#4|))))
     (COND ((SETQ #1# (|assoc| #2# |PolynomialSetCategory;AL|)) (CDR #1#))
@@ -20,12 +20,12 @@
            #1#)))) 
 
 (DEFUN |PolynomialSetCategory;| (|t#1| |t#2| |t#3| |t#4|)
-  (SPROG ((#1=#:G738 NIL))
+  (SPROG ((#1=#:G493 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3| |t#4|)
                                    (LIST |t#1| |t#2| |t#3| |t#4|)
-                                   (|subst_in_cat| '(#2=#:G736 #3=#:G737)
+                                   (|subst_in_cat| '(#2=#:G491 #3=#:G492)
                                                    (LIST '(|List| |t#4|)
                                                          '(|List| |t#4|))
                                                    (COND
@@ -43,66 +43,66 @@
                                                               (|finiteAggregate|)
                                                               (|mkCategory|
                                                                '(((|mvar|
-                                                                   (|t#3| $))
+                                                                   (|t#3| %))
                                                                   T)
                                                                  ((|variables|
                                                                    ((|List|
                                                                      |t#3|)
-                                                                    $))
+                                                                    %))
                                                                   T)
                                                                  ((|mainVariables|
                                                                    ((|List|
                                                                      |t#3|)
-                                                                    $))
+                                                                    %))
                                                                   T)
                                                                  ((|mainVariable?|
                                                                    ((|Boolean|)
-                                                                    |t#3| $))
+                                                                    |t#3| %))
                                                                   T)
                                                                  ((|collectUnder|
-                                                                   ($ $ |t#3|))
+                                                                   (% % |t#3|))
                                                                   T)
                                                                  ((|collect|
-                                                                   ($ $ |t#3|))
+                                                                   (% % |t#3|))
                                                                   T)
                                                                  ((|collectUpper|
-                                                                   ($ $ |t#3|))
+                                                                   (% % |t#3|))
                                                                   T)
                                                                  ((|sort|
                                                                    ((|Record|
                                                                      (|:|
                                                                       |under|
-                                                                      $)
+                                                                      %)
                                                                      (|:|
                                                                       |floor|
-                                                                      $)
+                                                                      %)
                                                                      (|:|
                                                                       |upper|
-                                                                      $))
-                                                                    $ |t#3|))
+                                                                      %))
+                                                                    % |t#3|))
                                                                   T)
                                                                  ((|trivialIdeal?|
                                                                    ((|Boolean|)
-                                                                    $))
+                                                                    %))
                                                                   T)
                                                                  ((|roughBase?|
                                                                    ((|Boolean|)
-                                                                    $))
+                                                                    %))
                                                                   (|has| |t#1|
                                                                          (|IntegralDomain|)))
                                                                  ((|roughSubIdeal?|
                                                                    ((|Boolean|)
-                                                                    $ $))
+                                                                    % %))
                                                                   (|has| |t#1|
                                                                          (|IntegralDomain|)))
                                                                  ((|roughEqualIdeals?|
                                                                    ((|Boolean|)
-                                                                    $ $))
+                                                                    % %))
                                                                   (|has| |t#1|
                                                                          (|IntegralDomain|)))
                                                                  ((|roughUnitIdeal?|
                                                                    ((|Boolean|)
-                                                                    $))
+                                                                    %))
                                                                   (|has| |t#1|
                                                                          (|IntegralDomain|)))
                                                                  ((|headRemainder|
@@ -111,7 +111,7 @@
                                                                           |t#4|)
                                                                      (|:| |den|
                                                                           |t#1|))
-                                                                    |t#4| $))
+                                                                    |t#4| %))
                                                                   (|has| |t#1|
                                                                          (|IntegralDomain|)))
                                                                  ((|remainder|
@@ -124,7 +124,7 @@
                                                                       |t#4|)
                                                                      (|:| |den|
                                                                           |t#1|))
-                                                                    |t#4| $))
+                                                                    |t#4| %))
                                                                   (|has| |t#1|
                                                                          (|IntegralDomain|)))
                                                                  ((|rewriteIdealWithHeadRemainder|
@@ -132,7 +132,7 @@
                                                                      |t#4|)
                                                                     (|List|
                                                                      |t#4|)
-                                                                    $))
+                                                                    %))
                                                                   (|has| |t#1|
                                                                          (|IntegralDomain|)))
                                                                  ((|rewriteIdealWithRemainder|
@@ -140,12 +140,12 @@
                                                                      |t#4|)
                                                                     (|List|
                                                                      |t#4|)
-                                                                    $))
+                                                                    %))
                                                                   (|has| |t#1|
                                                                          (|IntegralDomain|)))
                                                                  ((|triangular?|
                                                                    ((|Boolean|)
-                                                                    $))
+                                                                    %))
                                                                   (|has| |t#1|
                                                                          (|IntegralDomain|)))
                                                                  ((|iexactQuo|

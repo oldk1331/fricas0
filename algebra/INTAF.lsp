@@ -5,33 +5,33 @@
            (|Fraction| (|SparseUnivariatePolynomial| F))))
          (|t| (|Fraction| (|SparseUnivariatePolynomial| F)))
          (|cf| (|Fraction| (|SparseUnivariatePolynomial| F)))
-         (|kx| (|Kernel| F)) (|k| (|Kernel| F)) ($ (F)))
-        (|INTAF;UPUP2F0| (SPADCALL |p| |t| |cf| (QREFELT $ 11)) |kx| |k| $)) 
+         (|kx| (|Kernel| F)) (|k| (|Kernel| F)) (% (F)))
+        (|INTAF;UPUP2F0| (SPADCALL |p| |t| |cf| (QREFELT % 11)) |kx| |k| %)) 
 
 (SDEFUN |INTAF;UPUP2F0|
         ((|p|
           (|SparseUnivariatePolynomial|
            (|Fraction| (|SparseUnivariatePolynomial| F))))
-         (|kx| (|Kernel| F)) (|k| (|Kernel| F)) ($ (F)))
+         (|kx| (|Kernel| F)) (|k| (|Kernel| F)) (% (F)))
         (SPROG NIL
                (SPADCALL
-                (SPADCALL (CONS #'|INTAF;UPUP2F0!0| (VECTOR $ |kx|)) |p|
-                          (QREFELT $ 18))
-                (SPADCALL |k| (QREFELT $ 20)) (QREFELT $ 21)))) 
+                (SPADCALL (CONS #'|INTAF;UPUP2F0!0| (VECTOR % |kx|)) |p|
+                          (QREFELT % 18))
+                (SPADCALL |k| (QREFELT % 20)) (QREFELT % 21)))) 
 
 (SDEFUN |INTAF;UPUP2F0!0| ((|x1| NIL) ($$ NIL))
-        (PROG (|kx| $)
+        (PROG (|kx| %)
           (LETT |kx| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |x1| |kx| (QREFELT $ 14)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |x1| |kx| (QREFELT % 14)))))) 
 
 (SDEFUN |INTAF;F2UPUP|
         ((|f| (F)) (|kx| (|Kernel| F)) (|k| (|Kernel| F))
          (|p| (|SparseUnivariatePolynomial| F))
-         ($
+         (%
           (|SparseUnivariatePolynomial|
            (|Fraction| (|SparseUnivariatePolynomial| F)))))
-        (|INTAF;UP2UPUP| (SPADCALL |f| |k| |p| (QREFELT $ 22)) |kx| $)) 
+        (|INTAF;UP2UPUP| (SPADCALL |f| |k| |p| (QREFELT % 22)) |kx| %)) 
 
 (SDEFUN |INTAF;rootintegrate|
         ((|f| (F)) (|t| (|Kernel| F)) (|k| (|Kernel| F))
@@ -39,7 +39,7 @@
           (|Mapping| (|SparseUnivariatePolynomial| F)
                      (|SparseUnivariatePolynomial| F)))
          (|rec_int| (|Mapping| (|IntegrationResult| F) F))
-         ($ (|IntegrationResult| F)))
+         (% (|IntegrationResult| F)))
         (SPROG
          ((|curve|
            (|FunctionFieldCategory| F (|SparseUnivariatePolynomial| F)
@@ -51,7 +51,7 @@
            (|Record|
             (|:| |radicand| (|Fraction| (|SparseUnivariatePolynomial| F)))
             (|:| |deg| (|NonNegativeInteger|))))
-          (#1=#:G718 NIL)
+          (#1=#:G465 NIL)
           (|f1|
            (|SparseUnivariatePolynomial|
             (|Fraction| (|SparseUnivariatePolynomial| F))))
@@ -69,57 +69,57 @@
                 (SPADCALL
                  (LETT |modulus|
                        (|INTAF;UP2UPUP|
-                        (LETT |p| (SPADCALL |k| (QREFELT $ 24))) |t| $))
-                 (QREFELT $ 26)))
+                        (LETT |p| (SPADCALL |k| (QREFELT % 24))) |t| %))
+                 (QREFELT % 26)))
           (LETT |f1|
-                (SPADCALL (|INTAF;F2UPUP| |f| |t| |k| |p| $)
-                          (SPADCALL (SPADCALL (QCAR |r1|) (QREFELT $ 27)) 1
-                                    (QREFELT $ 30))
-                          (QREFELT $ 31)))
+                (SPADCALL (|INTAF;F2UPUP| |f| |t| |k| |p| %)
+                          (SPADCALL (SPADCALL (QCAR |r1|) (QREFELT % 27)) 1
+                                    (QREFELT % 30))
+                          (QREFELT % 31)))
           (LETT |r|
-                (PROG2 (LETT #1# (SPADCALL (QCDR |r1|) (QREFELT $ 34)))
+                (PROG2 (LETT #1# (SPADCALL (QCDR |r1|) (QREFELT % 34)))
                     (QCDR #1#)
                   (|check_union2| (QEQCAR #1# 0)
                                   (|Record|
                                    (|:| |radicand|
                                         (|Fraction|
                                          (|SparseUnivariatePolynomial|
-                                          (QREFELT $ 7))))
+                                          (QREFELT % 7))))
                                    (|:| |deg| (|NonNegativeInteger|)))
                                   (|Union|
                                    (|Record|
                                     (|:| |radicand|
                                          (|Fraction|
                                           (|SparseUnivariatePolynomial|
-                                           (QREFELT $ 7))))
+                                           (QREFELT % 7))))
                                     (|:| |deg| (|NonNegativeInteger|)))
                                    "failed")
                                   #1#)))
-          (LETT |q| (SPADCALL (QCAR |r|) (QREFELT $ 35)))
+          (LETT |q| (SPADCALL (QCAR |r|) (QREFELT % 35)))
           (LETT |curve|
-                (|RadicalFunctionField| (QREFELT $ 7)
+                (|RadicalFunctionField| (QREFELT % 7)
                                         (|SparseUnivariatePolynomial|
-                                         (QREFELT $ 7))
+                                         (QREFELT % 7))
                                         (|SparseUnivariatePolynomial|
                                          (|Fraction|
                                           (|SparseUnivariatePolynomial|
-                                           (QREFELT $ 7))))
-                                        (SPADCALL |q| (QREFELT $ 36))
+                                           (QREFELT % 7))))
+                                        (SPADCALL |q| (QREFELT % 36))
                                         (QCDR |r|)))
           (EXIT
            (SPADCALL
-            (CONS #'|INTAF;rootintegrate!0| (VECTOR |k| |t| |r1| |curve| $))
+            (CONS #'|INTAF;rootintegrate!0| (VECTOR |k| |t| |r1| |curve| %))
             (SPADCALL
              (SPADCALL |f1|
                        (|compiledLookupCheck| '|reduce|
-                                              (LIST '$
+                                              (LIST '%
                                                     (LIST
                                                      '|SparseUnivariatePolynomial|
                                                      (LIST '|Fraction|
                                                            (LIST
                                                             '|SparseUnivariatePolynomial|
                                                             (|devaluate|
-                                                             (ELT $ 7))))))
+                                                             (ELT % 7))))))
                                               |curve|))
              |derivation| |rec_int|
              (|compiledLookupCheck| '|algintegrate|
@@ -129,36 +129,36 @@
                                      (|devaluate| |curve|)
                                      (LIST '|Mapping|
                                            (LIST '|SparseUnivariatePolynomial|
-                                                 (|devaluate| (ELT $ 7)))
+                                                 (|devaluate| (ELT % 7)))
                                            (LIST '|SparseUnivariatePolynomial|
-                                                 (|devaluate| (ELT $ 7))))
+                                                 (|devaluate| (ELT % 7))))
                                      (LIST '|Mapping|
                                            (LIST '|IntegrationResult|
-                                                 (|devaluate| (ELT $ 7)))
-                                           (|devaluate| (ELT $ 7))))
-                                    (|AlgebraicIntegrate| (ELT $ 6) (ELT $ 7)
+                                                 (|devaluate| (ELT % 7)))
+                                           (|devaluate| (ELT % 7))))
+                                    (|AlgebraicIntegrate| (ELT % 6) (ELT % 7)
                                                           (|SparseUnivariatePolynomial|
-                                                           (ELT $ 7))
+                                                           (ELT % 7))
                                                           (|SparseUnivariatePolynomial|
                                                            (|Fraction|
                                                             (|SparseUnivariatePolynomial|
-                                                             (ELT $ 7))))
+                                                             (ELT % 7))))
                                                           |curve|)))
             (|compiledLookupCheck| '|map|
                                    (LIST
                                     (LIST '|IntegrationResult|
-                                          (|devaluate| (ELT $ 7)))
-                                    (LIST '|Mapping| (|devaluate| (ELT $ 7))
+                                          (|devaluate| (ELT % 7)))
+                                    (LIST '|Mapping| (|devaluate| (ELT % 7))
                                           (|devaluate| |curve|))
                                     (LIST '|IntegrationResult|
                                           (|devaluate| |curve|)))
                                    (|IntegrationResultFunctions2| |curve|
-                                                                  (ELT $
+                                                                  (ELT %
                                                                        7)))))))) 
 
 (SDEFUN |INTAF;rootintegrate!0| ((|x1| NIL) ($$ NIL))
-        (PROG ($ |curve| |r1| |t| |k|)
-          (LETT $ (QREFELT $$ 4))
+        (PROG (% |curve| |r1| |t| |k|)
+          (LETT % (QREFELT $$ 4))
           (LETT |curve| (QREFELT $$ 3))
           (LETT |r1| (QREFELT $$ 2))
           (LETT |t| (QREFELT $$ 1))
@@ -175,10 +175,10 @@
                                                       (LIST
                                                        '|SparseUnivariatePolynomial|
                                                        (|devaluate|
-                                                        (ELT $ 7)))))
-                                               '$)
+                                                        (ELT % 7)))))
+                                               '%)
                                               |curve|))
-             (QCAR |r1|) |t| |k| $))))) 
+             (QCAR |r1|) |t| |k| %))))) 
 
 (SDEFUN |INTAF;algintegrate|
         ((|f| (F)) (|t| (|Kernel| F)) (|k| (|Kernel| F))
@@ -186,7 +186,7 @@
           (|Mapping| (|SparseUnivariatePolynomial| F)
                      (|SparseUnivariatePolynomial| F)))
          (|rec_int| (|Mapping| (|IntegrationResult| F) F))
-         ($ (|IntegrationResult| F)))
+         (% (|IntegrationResult| F)))
         (SPROG
          ((|curve|
            (|Join|
@@ -213,36 +213,36 @@
                 (SPADCALL
                  (LETT |modulus|
                        (|INTAF;UP2UPUP|
-                        (LETT |p| (SPADCALL |k| (QREFELT $ 24))) |t| $))
-                 (QREFELT $ 26)))
+                        (LETT |p| (SPADCALL |k| (QREFELT % 24))) |t| %))
+                 (QREFELT % 26)))
           (LETT |f1|
-                (SPADCALL (|INTAF;F2UPUP| |f| |t| |k| |p| $)
-                          (SPADCALL (SPADCALL (QCAR |r1|) (QREFELT $ 27)) 1
-                                    (QREFELT $ 30))
-                          (QREFELT $ 31)))
+                (SPADCALL (|INTAF;F2UPUP| |f| |t| |k| |p| %)
+                          (SPADCALL (SPADCALL (QCAR |r1|) (QREFELT % 27)) 1
+                                    (QREFELT % 30))
+                          (QREFELT % 31)))
           (LETT |curve|
-                (|AlgebraicFunctionField| (QREFELT $ 7)
+                (|AlgebraicFunctionField| (QREFELT % 7)
                                           (|SparseUnivariatePolynomial|
-                                           (QREFELT $ 7))
+                                           (QREFELT % 7))
                                           (|SparseUnivariatePolynomial|
                                            (|Fraction|
                                             (|SparseUnivariatePolynomial|
-                                             (QREFELT $ 7))))
+                                             (QREFELT % 7))))
                                           (QCDR |r1|)))
           (EXIT
            (SPADCALL
-            (CONS #'|INTAF;algintegrate!0| (VECTOR |k| |t| |r1| |curve| $))
+            (CONS #'|INTAF;algintegrate!0| (VECTOR |k| |t| |r1| |curve| %))
             (SPADCALL
              (SPADCALL |f1|
                        (|compiledLookupCheck| '|reduce|
-                                              (LIST '$
+                                              (LIST '%
                                                     (LIST
                                                      '|SparseUnivariatePolynomial|
                                                      (LIST '|Fraction|
                                                            (LIST
                                                             '|SparseUnivariatePolynomial|
                                                             (|devaluate|
-                                                             (ELT $ 7))))))
+                                                             (ELT % 7))))))
                                               |curve|))
              |derivation| |rec_int|
              (|compiledLookupCheck| '|algintegrate|
@@ -252,36 +252,36 @@
                                      (|devaluate| |curve|)
                                      (LIST '|Mapping|
                                            (LIST '|SparseUnivariatePolynomial|
-                                                 (|devaluate| (ELT $ 7)))
+                                                 (|devaluate| (ELT % 7)))
                                            (LIST '|SparseUnivariatePolynomial|
-                                                 (|devaluate| (ELT $ 7))))
+                                                 (|devaluate| (ELT % 7))))
                                      (LIST '|Mapping|
                                            (LIST '|IntegrationResult|
-                                                 (|devaluate| (ELT $ 7)))
-                                           (|devaluate| (ELT $ 7))))
-                                    (|AlgebraicIntegrate| (ELT $ 6) (ELT $ 7)
+                                                 (|devaluate| (ELT % 7)))
+                                           (|devaluate| (ELT % 7))))
+                                    (|AlgebraicIntegrate| (ELT % 6) (ELT % 7)
                                                           (|SparseUnivariatePolynomial|
-                                                           (ELT $ 7))
+                                                           (ELT % 7))
                                                           (|SparseUnivariatePolynomial|
                                                            (|Fraction|
                                                             (|SparseUnivariatePolynomial|
-                                                             (ELT $ 7))))
+                                                             (ELT % 7))))
                                                           |curve|)))
             (|compiledLookupCheck| '|map|
                                    (LIST
                                     (LIST '|IntegrationResult|
-                                          (|devaluate| (ELT $ 7)))
-                                    (LIST '|Mapping| (|devaluate| (ELT $ 7))
+                                          (|devaluate| (ELT % 7)))
+                                    (LIST '|Mapping| (|devaluate| (ELT % 7))
                                           (|devaluate| |curve|))
                                     (LIST '|IntegrationResult|
                                           (|devaluate| |curve|)))
                                    (|IntegrationResultFunctions2| |curve|
-                                                                  (ELT $
+                                                                  (ELT %
                                                                        7)))))))) 
 
 (SDEFUN |INTAF;algintegrate!0| ((|x1| NIL) ($$ NIL))
-        (PROG ($ |curve| |r1| |t| |k|)
-          (LETT $ (QREFELT $$ 4))
+        (PROG (% |curve| |r1| |t| |k|)
+          (LETT % (QREFELT $$ 4))
           (LETT |curve| (QREFELT $$ 3))
           (LETT |r1| (QREFELT $$ 2))
           (LETT |t| (QREFELT $$ 1))
@@ -298,17 +298,17 @@
                                                       (LIST
                                                        '|SparseUnivariatePolynomial|
                                                        (|devaluate|
-                                                        (ELT $ 7)))))
-                                               '$)
+                                                        (ELT % 7)))))
+                                               '%)
                                               |curve|))
-             (QCAR |r1|) |t| |k| $))))) 
+             (QCAR |r1|) |t| |k| %))))) 
 
 (SDEFUN |INTAF;rootcurve|
         ((|lf| (|List| F)) (|t| (|Kernel| F)) (|k| (|Kernel| F))
          (|derivation|
           (|Mapping| (|SparseUnivariatePolynomial| F)
                      (|SparseUnivariatePolynomial| F)))
-         ($
+         (%
           (|Record|
            (|:| |funs|
                 (|List|
@@ -337,12 +337,12 @@
            (|Record|
             (|:| |radicand| (|Fraction| (|SparseUnivariatePolynomial| F)))
             (|:| |deg| (|NonNegativeInteger|))))
-          (#1=#:G746 NIL)
+          (#1=#:G484 NIL)
           (|lf1|
            (|List|
             (|SparseUnivariatePolynomial|
              (|Fraction| (|SparseUnivariatePolynomial| F)))))
-          (#2=#:G751 NIL) (|f| NIL) (#3=#:G750 NIL)
+          (#2=#:G489 NIL) (|f| NIL) (#3=#:G488 NIL)
           (|mon1|
            (|SparseUnivariatePolynomial|
             (|Fraction| (|SparseUnivariatePolynomial| F))))
@@ -360,11 +360,11 @@
                 (SPADCALL
                  (LETT |modulus|
                        (|INTAF;UP2UPUP|
-                        (LETT |p| (SPADCALL |k| (QREFELT $ 24))) |t| $))
-                 (QREFELT $ 26)))
+                        (LETT |p| (SPADCALL |k| (QREFELT % 24))) |t| %))
+                 (QREFELT % 26)))
           (LETT |mon1|
-                (SPADCALL (SPADCALL (QCAR |r1|) (QREFELT $ 27)) 1
-                          (QREFELT $ 30)))
+                (SPADCALL (SPADCALL (QCAR |r1|) (QREFELT % 27)) 1
+                          (QREFELT % 30)))
           (LETT |lf1|
                 (PROGN
                  (LETT #3# NIL)
@@ -376,40 +376,40 @@
                        (EXIT
                         (LETT #3#
                               (CONS
-                               (SPADCALL (|INTAF;F2UPUP| |f| |t| |k| |p| $)
-                                         |mon1| (QREFELT $ 31))
+                               (SPADCALL (|INTAF;F2UPUP| |f| |t| |k| |p| %)
+                                         |mon1| (QREFELT % 31))
                                #3#))))
                       (LETT #2# (CDR #2#)) (GO G190) G191
                       (EXIT (NREVERSE #3#)))))
           (LETT |r|
-                (PROG2 (LETT #1# (SPADCALL (QCDR |r1|) (QREFELT $ 34)))
+                (PROG2 (LETT #1# (SPADCALL (QCDR |r1|) (QREFELT % 34)))
                     (QCDR #1#)
                   (|check_union2| (QEQCAR #1# 0)
                                   (|Record|
                                    (|:| |radicand|
                                         (|Fraction|
                                          (|SparseUnivariatePolynomial|
-                                          (QREFELT $ 7))))
+                                          (QREFELT % 7))))
                                    (|:| |deg| (|NonNegativeInteger|)))
                                   (|Union|
                                    (|Record|
                                     (|:| |radicand|
                                          (|Fraction|
                                           (|SparseUnivariatePolynomial|
-                                           (QREFELT $ 7))))
+                                           (QREFELT % 7))))
                                     (|:| |deg| (|NonNegativeInteger|)))
                                    "failed")
                                   #1#)))
-          (LETT |q| (SPADCALL (QCAR |r|) (QREFELT $ 35)))
+          (LETT |q| (SPADCALL (QCAR |r|) (QREFELT % 35)))
           (LETT |curve|
-                (|RadicalFunctionField| (QREFELT $ 7)
+                (|RadicalFunctionField| (QREFELT % 7)
                                         (|SparseUnivariatePolynomial|
-                                         (QREFELT $ 7))
+                                         (QREFELT % 7))
                                         (|SparseUnivariatePolynomial|
                                          (|Fraction|
                                           (|SparseUnivariatePolynomial|
-                                           (QREFELT $ 7))))
-                                        (SPADCALL |q| (QREFELT $ 36))
+                                           (QREFELT % 7))))
+                                        (SPADCALL |q| (QREFELT % 36))
                                         (QCDR |r|)))
           (EXIT (VECTOR |lf1| |r1| |curve|))))) 
 
@@ -418,7 +418,7 @@
          (|derivation|
           (|Mapping| (|SparseUnivariatePolynomial| F)
                      (|SparseUnivariatePolynomial| F)))
-         ($
+         (%
           (|Record|
            (|:| |funs|
                 (|List|
@@ -449,7 +449,7 @@
            (|List|
             (|SparseUnivariatePolynomial|
              (|Fraction| (|SparseUnivariatePolynomial| F)))))
-          (#1=#:G758 NIL) (|f| NIL) (#2=#:G757 NIL)
+          (#1=#:G496 NIL) (|f| NIL) (#2=#:G495 NIL)
           (|mon1|
            (|SparseUnivariatePolynomial|
             (|Fraction| (|SparseUnivariatePolynomial| F))))
@@ -467,11 +467,11 @@
                 (SPADCALL
                  (LETT |modulus|
                        (|INTAF;UP2UPUP|
-                        (LETT |p| (SPADCALL |k| (QREFELT $ 24))) |t| $))
-                 (QREFELT $ 26)))
+                        (LETT |p| (SPADCALL |k| (QREFELT % 24))) |t| %))
+                 (QREFELT % 26)))
           (LETT |mon1|
-                (SPADCALL (SPADCALL (QCAR |r1|) (QREFELT $ 27)) 1
-                          (QREFELT $ 30)))
+                (SPADCALL (SPADCALL (QCAR |r1|) (QREFELT % 27)) 1
+                          (QREFELT % 30)))
           (LETT |lf1|
                 (PROGN
                  (LETT #2# NIL)
@@ -483,19 +483,19 @@
                        (EXIT
                         (LETT #2#
                               (CONS
-                               (SPADCALL (|INTAF;F2UPUP| |f| |t| |k| |p| $)
-                                         |mon1| (QREFELT $ 31))
+                               (SPADCALL (|INTAF;F2UPUP| |f| |t| |k| |p| %)
+                                         |mon1| (QREFELT % 31))
                                #2#))))
                       (LETT #1# (CDR #1#)) (GO G190) G191
                       (EXIT (NREVERSE #2#)))))
           (LETT |curve|
-                (|AlgebraicFunctionField| (QREFELT $ 7)
+                (|AlgebraicFunctionField| (QREFELT % 7)
                                           (|SparseUnivariatePolynomial|
-                                           (QREFELT $ 7))
+                                           (QREFELT % 7))
                                           (|SparseUnivariatePolynomial|
                                            (|Fraction|
                                             (|SparseUnivariatePolynomial|
-                                             (QREFELT $ 7))))
+                                             (QREFELT % 7))))
                                           (QCDR |r1|)))
           (EXIT (VECTOR |lf1| |r1| |curve|))))) 
 
@@ -521,13 +521,13 @@
            (|List| (|Fraction| (|SparseUnivariatePolynomial| F)))))
          (|csolve| (|Mapping| (|List| (|Vector| F)) (|Matrix| F)))
          (|lg| (|List| F))
-         ($ (|List| (|Record| (|:| |ratpart| F) (|:| |coeffs| (|Vector| F))))))
+         (% (|List| (|Record| (|:| |ratpart| F) (|:| |coeffs| (|Vector| F))))))
         (SPROG
-         ((#1=#:G790 NIL) (|be| NIL) (#2=#:G789 NIL)
+         ((#1=#:G527 NIL) (|be| NIL) (#2=#:G526 NIL)
           (|res1|
            (|List|
             (|Record| (|:| |ratpart| |curve|) (|:| |coeffs| (|Vector| F)))))
-          (#3=#:G788 NIL) (|f| NIL) (#4=#:G787 NIL)
+          (#3=#:G525 NIL) (|f| NIL) (#4=#:G524 NIL)
           (|cc| (|Fraction| (|SparseUnivariatePolynomial| F)))
           (|red|
            (|Mapping| |curve|
@@ -559,22 +559,22 @@
          (SEQ
           (LETT |c_rec|
                 (COND
-                 ((SPADCALL |y| '|nthRoot| (QREFELT $ 39))
-                  (|INTAF;rootcurve| |lg| |t| |y| |der| $))
-                 ((SPADCALL |y| '|rootOf| (QREFELT $ 39))
-                  (|INTAF;algcurve| |lg| |t| |y| |der| $))
+                 ((SPADCALL |y| '|nthRoot| (QREFELT % 39))
+                  (|INTAF;rootcurve| |lg| |t| |y| |der| %))
+                 ((SPADCALL |y| '|rootOf| (QREFELT % 39))
+                  (|INTAF;algcurve| |lg| |t| |y| |der| %))
                  ('T (|error| "failed - cannot handle that integrand"))))
           (LETT |curve| (QVELT |c_rec| 2))
           (LETT |red|
                 (|compiledLookupCheck| '|reduce|
-                                       (LIST '$
+                                       (LIST '%
                                              (LIST
                                               '|SparseUnivariatePolynomial|
                                               (LIST '|Fraction|
                                                     (LIST
                                                      '|SparseUnivariatePolynomial|
                                                      (|devaluate|
-                                                      (ELT $ 7))))))
+                                                      (ELT % 7))))))
                                        |curve|))
           (LETT |cc| (QCAR (QVELT |c_rec| 1)))
           (LETT |res1|
@@ -605,17 +605,17 @@
                                                                     (LIST
                                                                      '|Vector|
                                                                      (|devaluate|
-                                                                      (ELT $
+                                                                      (ELT %
                                                                            7))))))
                                                   (LIST '|Mapping|
                                                         (LIST
                                                          '|SparseUnivariatePolynomial|
                                                          (|devaluate|
-                                                          (ELT $ 7)))
+                                                          (ELT % 7)))
                                                         (LIST
                                                          '|SparseUnivariatePolynomial|
                                                          (|devaluate|
-                                                          (ELT $ 7))))
+                                                          (ELT % 7))))
                                                   (LIST '|Mapping|
                                                         (LIST '|List|
                                                               (LIST '|Record|
@@ -627,7 +627,7 @@
                                                                             '|SparseUnivariatePolynomial|
                                                                             (|devaluate|
                                                                              (ELT
-                                                                              $
+                                                                              %
                                                                               7)))))
                                                                     (LIST '|:|
                                                                           '|coeffs|
@@ -635,14 +635,14 @@
                                                                            '|Vector|
                                                                            (|devaluate|
                                                                             (ELT
-                                                                             $
+                                                                             %
                                                                              7))))))
                                                         (LIST '|List|
                                                               (LIST '|Fraction|
                                                                     (LIST
                                                                      '|SparseUnivariatePolynomial|
                                                                      (|devaluate|
-                                                                      (ELT $
+                                                                      (ELT %
                                                                            7))))))
                                                   (LIST '|Mapping|
                                                         (LIST '|List|
@@ -655,7 +655,7 @@
                                                                             '|SparseUnivariatePolynomial|
                                                                             (|devaluate|
                                                                              (ELT
-                                                                              $
+                                                                              %
                                                                               7)))))
                                                                     (LIST '|:|
                                                                           '|coeffs|
@@ -663,39 +663,39 @@
                                                                            '|Vector|
                                                                            (|devaluate|
                                                                             (ELT
-                                                                             $
+                                                                             %
                                                                              7))))))
                                                         (LIST '|Fraction|
                                                               (LIST
                                                                '|SparseUnivariatePolynomial|
                                                                (|devaluate|
-                                                                (ELT $ 7))))
+                                                                (ELT % 7))))
                                                         (LIST '|List|
                                                               (LIST '|Fraction|
                                                                     (LIST
                                                                      '|SparseUnivariatePolynomial|
                                                                      (|devaluate|
-                                                                      (ELT $
+                                                                      (ELT %
                                                                            7))))))
                                                   (LIST '|Mapping|
                                                         (LIST '|List|
                                                               (LIST '|Vector|
                                                                     (|devaluate|
-                                                                     (ELT $
+                                                                     (ELT %
                                                                           7))))
                                                         (LIST '|Matrix|
                                                               (|devaluate|
-                                                               (ELT $ 7))))
+                                                               (ELT % 7))))
                                                   (LIST '|List|
                                                         (|devaluate| |curve|)))
                                                  (|AlgebraicIntegrate2|
-                                                  (ELT $ 6) (ELT $ 7)
+                                                  (ELT % 6) (ELT % 7)
                                                   (|SparseUnivariatePolynomial|
-                                                   (ELT $ 7))
+                                                   (ELT % 7))
                                                   (|SparseUnivariatePolynomial|
                                                    (|Fraction|
                                                     (|SparseUnivariatePolynomial|
-                                                     (ELT $ 7))))
+                                                     (ELT % 7))))
                                                   |curve|))))
           (EXIT
            (PROGN
@@ -720,10 +720,10 @@
                                                                 (LIST
                                                                  '|SparseUnivariatePolynomial|
                                                                  (|devaluate|
-                                                                  (ELT $ 7)))))
-                                                              '$)
+                                                                  (ELT % 7)))))
+                                                              '%)
                                                              |curve|))
-                            |cc| |t| |y| $)
+                            |cc| |t| |y| %)
                            (QCDR |be|))
                           #2#))))
                  (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT (NREVERSE #2#)))))))) 
@@ -735,13 +735,13 @@
                      (|SparseUnivariatePolynomial| F)))
          (|csolve| (|Mapping| (|List| (|Vector| F)) (|Matrix| F)))
          (|lg| (|List| F))
-         ($ (|List| (|Record| (|:| |ratpart| F) (|:| |coeffs| (|Vector| F))))))
+         (% (|List| (|Record| (|:| |ratpart| F) (|:| |coeffs| (|Vector| F))))))
         (SPROG
-         ((#1=#:G817 NIL) (|be| NIL) (#2=#:G816 NIL)
+         ((#1=#:G554 NIL) (|be| NIL) (#2=#:G553 NIL)
           (|res1|
            (|List|
             (|Record| (|:| |ratpart| |curve|) (|:| |coeffs| (|Vector| F)))))
-          (#3=#:G815 NIL) (|f| NIL) (#4=#:G814 NIL)
+          (#3=#:G552 NIL) (|f| NIL) (#4=#:G551 NIL)
           (|red|
            (|Mapping| |curve|
                       (|SparseUnivariatePolynomial|
@@ -755,7 +755,7 @@
            (|Record|
             (|:| |radicand| (|Fraction| (|SparseUnivariatePolynomial| F)))
             (|:| |deg| (|NonNegativeInteger|))))
-          (#5=#:G797 NIL)
+          (#5=#:G534 NIL)
           (|cv|
            (|Record|
             (|:| |func|
@@ -772,9 +772,9 @@
            (|List|
             (|SparseUnivariatePolynomial|
              (|Fraction| (|SparseUnivariatePolynomial| F)))))
-          (#6=#:G813 NIL) (|g| NIL) (#7=#:G812 NIL)
+          (#6=#:G550 NIL) (|g| NIL) (#7=#:G549 NIL)
           (|p| (|SparseUnivariatePolynomial| F)))
-         (SEQ (LETT |p| (SPADCALL |y| (QREFELT $ 24)))
+         (SEQ (LETT |p| (SPADCALL |y| (QREFELT % 24)))
               (LETT |lg1|
                     (PROGN
                      (LETT #7# NIL)
@@ -785,38 +785,38 @@
                           (SEQ
                            (EXIT
                             (LETT #7#
-                                  (CONS (|INTAF;F2UPUP| |g| |x| |y| |p| $)
+                                  (CONS (|INTAF;F2UPUP| |g| |x| |y| |p| %)
                                         #7#))))
                           (LETT #6# (CDR #6#)) (GO G190) G191
                           (EXIT (NREVERSE #7#)))))
               (LETT |cv|
-                    (SPADCALL |lg1| (|INTAF;UP2UPUP| |p| |x| $)
-                              (QREFELT $ 51)))
+                    (SPADCALL |lg1| (|INTAF;UP2UPUP| |p| |x| %)
+                              (QREFELT % 51)))
               (LETT |curve|
                     (COND
-                     ((SPADCALL |y| '|rootOf| (QREFELT $ 39))
-                      (|AlgebraicFunctionField| (QREFELT $ 7)
+                     ((SPADCALL |y| '|rootOf| (QREFELT % 39))
+                      (|AlgebraicFunctionField| (QREFELT % 7)
                                                 (|SparseUnivariatePolynomial|
-                                                 (QREFELT $ 7))
+                                                 (QREFELT % 7))
                                                 (|SparseUnivariatePolynomial|
                                                  (|Fraction|
                                                   (|SparseUnivariatePolynomial|
-                                                   (QREFELT $ 7))))
+                                                   (QREFELT % 7))))
                                                 (QVELT |cv| 1)))
-                     ((SPADCALL |y| '|nthRoot| (QREFELT $ 39))
+                     ((SPADCALL |y| '|nthRoot| (QREFELT % 39))
                       (SEQ
                        (LETT |r|
                              (PROG2
                                  (LETT #5#
                                        (SPADCALL (QVELT |cv| 1)
-                                                 (QREFELT $ 34)))
+                                                 (QREFELT % 34)))
                                  (QCDR #5#)
                                (|check_union2| (QEQCAR #5# 0)
                                                (|Record|
                                                 (|:| |radicand|
                                                      (|Fraction|
                                                       (|SparseUnivariatePolynomial|
-                                                       (QREFELT $ 7))))
+                                                       (QREFELT % 7))))
                                                 (|:| |deg|
                                                      (|NonNegativeInteger|)))
                                                (|Union|
@@ -824,31 +824,31 @@
                                                  (|:| |radicand|
                                                       (|Fraction|
                                                        (|SparseUnivariatePolynomial|
-                                                        (QREFELT $ 7))))
+                                                        (QREFELT % 7))))
                                                  (|:| |deg|
                                                       (|NonNegativeInteger|)))
                                                 "failed")
                                                #5#)))
                        (EXIT
-                        (|RadicalFunctionField| (QREFELT $ 7)
+                        (|RadicalFunctionField| (QREFELT % 7)
                                                 (|SparseUnivariatePolynomial|
-                                                 (QREFELT $ 7))
+                                                 (QREFELT % 7))
                                                 (|SparseUnivariatePolynomial|
                                                  (|Fraction|
                                                   (|SparseUnivariatePolynomial|
-                                                   (QREFELT $ 7))))
+                                                   (QREFELT % 7))))
                                                 (QCAR |r|) (QCDR |r|)))))
                      ('T (|error| "failed - cannot handle that integrand"))))
               (LETT |red|
                     (|compiledLookupCheck| '|reduce|
-                                           (LIST '$
+                                           (LIST '%
                                                  (LIST
                                                   '|SparseUnivariatePolynomial|
                                                   (LIST '|Fraction|
                                                         (LIST
                                                          '|SparseUnivariatePolynomial|
                                                          (|devaluate|
-                                                          (ELT $ 7))))))
+                                                          (ELT % 7))))))
                                            |curve|))
               (LETT |res1|
                     (SPADCALL |der| |csolve|
@@ -880,38 +880,38 @@
                                                                          '|Vector|
                                                                          (|devaluate|
                                                                           (ELT
-                                                                           $
+                                                                           %
                                                                            7))))))
                                                       (LIST '|Mapping|
                                                             (LIST
                                                              '|SparseUnivariatePolynomial|
                                                              (|devaluate|
-                                                              (ELT $ 7)))
+                                                              (ELT % 7)))
                                                             (LIST
                                                              '|SparseUnivariatePolynomial|
                                                              (|devaluate|
-                                                              (ELT $ 7))))
+                                                              (ELT % 7))))
                                                       (LIST '|Mapping|
                                                             (LIST '|List|
                                                                   (LIST
                                                                    '|Vector|
                                                                    (|devaluate|
-                                                                    (ELT $
+                                                                    (ELT %
                                                                          7))))
                                                             (LIST '|Matrix|
                                                                   (|devaluate|
-                                                                   (ELT $ 7))))
+                                                                   (ELT % 7))))
                                                       (LIST '|List|
                                                             (|devaluate|
                                                              |curve|)))
                                                      (|AlgebraicIntegrate2|
-                                                      (ELT $ 6) (ELT $ 7)
+                                                      (ELT % 6) (ELT % 7)
                                                       (|SparseUnivariatePolynomial|
-                                                       (ELT $ 7))
+                                                       (ELT % 7))
                                                       (|SparseUnivariatePolynomial|
                                                        (|Fraction|
                                                         (|SparseUnivariatePolynomial|
-                                                         (ELT $ 7))))
+                                                         (ELT % 7))))
                                                       |curve|))))
               (EXIT
                (PROGN
@@ -936,11 +936,11 @@
                                                                     (LIST
                                                                      '|SparseUnivariatePolynomial|
                                                                      (|devaluate|
-                                                                      (ELT $
+                                                                      (ELT %
                                                                            7)))))
-                                                                  '$)
+                                                                  '%)
                                                                  |curve|))
-                                (QVELT |cv| 2) (QVELT |cv| 3) |x| |y| $)
+                                (QVELT |cv| 2) (QVELT |cv| 3) |x| |y| %)
                                (QCDR |be|))
                               #2#))))
                      (LETT #1# (CDR #1#)) (GO G190) G191
@@ -948,38 +948,38 @@
 
 (SDEFUN |INTAF;UP2UPUP|
         ((|p| (|SparseUnivariatePolynomial| F)) (|k| (|Kernel| F))
-         ($
+         (%
           (|SparseUnivariatePolynomial|
            (|Fraction| (|SparseUnivariatePolynomial| F)))))
         (SPROG NIL
-               (SPADCALL (CONS #'|INTAF;UP2UPUP!0| (VECTOR $ |k|)) |p|
-                         (QREFELT $ 57)))) 
+               (SPADCALL (CONS #'|INTAF;UP2UPUP!0| (VECTOR % |k|)) |p|
+                         (QREFELT % 57)))) 
 
 (SDEFUN |INTAF;UP2UPUP!0| ((|x1| NIL) ($$ NIL))
-        (PROG (|k| $)
+        (PROG (|k| %)
           (LETT |k| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |x1| |k| (QREFELT $ 54)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |x1| |k| (QREFELT % 54)))))) 
 
 (SDEFUN |INTAF;UPUP2F|
         ((|p|
           (|SparseUnivariatePolynomial|
            (|Fraction| (|SparseUnivariatePolynomial| F))))
          (|cf| (|Fraction| (|SparseUnivariatePolynomial| F)))
-         (|t| (|Kernel| F)) (|k| (|Kernel| F)) ($ (F)))
+         (|t| (|Kernel| F)) (|k| (|Kernel| F)) (% (F)))
         (SPROG NIL
                (SPADCALL
-                (SPADCALL (CONS #'|INTAF;UPUP2F!0| (VECTOR $ |t|)) |p|
-                          (QREFELT $ 18))
-                (SPADCALL (SPADCALL |cf| |t| (QREFELT $ 14))
-                          (SPADCALL |k| (QREFELT $ 20)) (QREFELT $ 58))
-                (QREFELT $ 21)))) 
+                (SPADCALL (CONS #'|INTAF;UPUP2F!0| (VECTOR % |t|)) |p|
+                          (QREFELT % 18))
+                (SPADCALL (SPADCALL |cf| |t| (QREFELT % 14))
+                          (SPADCALL |k| (QREFELT % 20)) (QREFELT % 58))
+                (QREFELT % 21)))) 
 
 (SDEFUN |INTAF;UPUP2F!0| ((|x1| NIL) ($$ NIL))
-        (PROG (|t| $)
+        (PROG (|t| %)
           (LETT |t| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |x1| |t| (QREFELT $ 14)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |x1| |t| (QREFELT % 14)))))) 
 
 (SDEFUN |INTAF;algint;F2KMMIr;12|
         ((|f| (F)) (|t| (|Kernel| F)) (|y| (|Kernel| F))
@@ -987,19 +987,19 @@
           (|Mapping| (|SparseUnivariatePolynomial| F)
                      (|SparseUnivariatePolynomial| F)))
          (|rec_int| (|Mapping| (|IntegrationResult| F) F))
-         ($ (|IntegrationResult| F)))
+         (% (|IntegrationResult| F)))
         (COND
-         ((SPADCALL |y| '|nthRoot| (QREFELT $ 39))
-          (|INTAF;rootintegrate| |f| |t| |y| |derivation| |rec_int| $))
-         ((SPADCALL |y| '|rootOf| (QREFELT $ 39))
-          (|INTAF;algintegrate| |f| |t| |y| |derivation| |rec_int| $))
+         ((SPADCALL |y| '|nthRoot| (QREFELT % 39))
+          (|INTAF;rootintegrate| |f| |t| |y| |derivation| |rec_int| %))
+         ((SPADCALL |y| '|rootOf| (QREFELT % 39))
+          (|INTAF;algintegrate| |f| |t| |y| |derivation| |rec_int| %))
          ('T (|error| "failed - cannot handle that integrand")))) 
 
 (DECLAIM (NOTINLINE |AlgebraicIntegration;|)) 
 
-(DEFUN |AlgebraicIntegration| (&REST #1=#:G835)
+(DEFUN |AlgebraicIntegration| (&REST #1=#:G571)
   (SPROG NIL
-         (PROG (#2=#:G836)
+         (PROG (#2=#:G572)
            (RETURN
             (COND
              ((LETT #2#
@@ -1017,21 +1017,21 @@
                   (HREM |$ConstructorCache| '|AlgebraicIntegration|)))))))))) 
 
 (DEFUN |AlgebraicIntegration;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|AlgebraicIntegration| DV$1 DV$2))
-          (LETT $ (GETREFV 62))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 62))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|AlgebraicIntegration|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|AlgebraicIntegration| '|infovec|
           (LIST
@@ -1045,8 +1045,8 @@
                                                      7)
               (7 . |multivariate|) (|SparseUnivariatePolynomial| 7)
               (|Mapping| 7 9) (|SparseUnivariatePolynomialFunctions2| 9 7)
-              (13 . |map|) (|Kernel| $) (19 . |coerce|) (24 . |elt|)
-              (30 . |univariate|) (|SparseUnivariatePolynomial| $)
+              (13 . |map|) (|Kernel| %) (19 . |coerce|) (24 . |elt|)
+              (30 . |univariate|) (|SparseUnivariatePolynomial| %)
               (37 . |minPoly|) (|Record| (|:| |coef| 9) (|:| |poly| 8))
               (42 . |mkIntegral|) (47 . |inv|) (52 . |One|)
               (|NonNegativeInteger|) (56 . |monomial|) (62 . |elt|)

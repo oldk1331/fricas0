@@ -6,7 +6,7 @@
 (DEFPARAMETER |MultivariateTaylorSeriesCategory;AL| 'NIL) 
 
 (DEFUN |MultivariateTaylorSeriesCategory| (|t#1| |t#2|)
-  (LET (#1=#:G691 (#2=#:G692 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
+  (LET (#1=#:G450 (#2=#:G451 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
     (COND
      ((SETQ #1# (|assoc| #2# |MultivariateTaylorSeriesCategory;AL|)) (CDR #1#))
      (T
@@ -20,11 +20,11 @@
       #1#)))) 
 
 (DEFUN |MultivariateTaylorSeriesCategory;| (|t#1| |t#2|)
-  (SPROG ((#1=#:G690 NIL))
+  (SPROG ((#1=#:G449 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2|) (LIST |t#1| |t#2|)
-                                   (|subst_in_cat| '(#2=#:G689)
+                                   (|subst_in_cat| '(#2=#:G448)
                                                    (LIST
                                                     '(|IndexedExponents|
                                                       |t#2|))
@@ -39,55 +39,55 @@
                                                        (|PowerSeriesCategory|
                                                         '|t#1| '#2# '|t#2|)
                                                        (|InnerEvalable| '|t#2|
-                                                                        '$)
-                                                       (|Evalable| '$)
+                                                                        '%)
+                                                       (|Evalable| '%)
                                                        (|mkCategory|
                                                         '(((|coefficient|
-                                                            ($ $ |t#2|
+                                                            (% % |t#2|
                                                              (|NonNegativeInteger|)))
                                                            T)
                                                           ((|coefficient|
-                                                            ($ $ (|List| |t#2|)
+                                                            (% % (|List| |t#2|)
                                                              (|List|
                                                               (|NonNegativeInteger|))))
                                                            T)
                                                           ((|extend|
-                                                            ($ $
+                                                            (% %
                                                              (|NonNegativeInteger|)))
                                                            T)
                                                           ((|monomial|
-                                                            ($ $ |t#2|
+                                                            (% % |t#2|
                                                              (|NonNegativeInteger|)))
                                                            T)
                                                           ((|monomial|
-                                                            ($ $ (|List| |t#2|)
+                                                            (% % (|List| |t#2|)
                                                              (|List|
                                                               (|NonNegativeInteger|))))
                                                            T)
                                                           ((|order|
                                                             ((|NonNegativeInteger|)
-                                                             $ |t#2|))
+                                                             % |t#2|))
                                                            T)
                                                           ((|order|
                                                             ((|NonNegativeInteger|)
-                                                             $ |t#2|
+                                                             % |t#2|
                                                              (|NonNegativeInteger|)))
                                                            T)
                                                           ((|polynomial|
                                                             ((|Polynomial|
                                                               |t#1|)
-                                                             $
+                                                             %
                                                              (|NonNegativeInteger|)))
                                                            T)
                                                           ((|polynomial|
                                                             ((|Polynomial|
                                                               |t#1|)
-                                                             $
+                                                             %
                                                              (|NonNegativeInteger|)
                                                              (|NonNegativeInteger|)))
                                                            T)
                                                           ((|integrate|
-                                                            ($ $ |t#2|))
+                                                            (% % |t#2|))
                                                            (|has| |t#1|
                                                                   (|Algebra|
                                                                    (|Fraction|

@@ -1,29 +1,29 @@
 
-(SDEFUN |FACTCAT-;empty?;SB;1| ((|orf| (S)) ($ (|Boolean|)))
-        (SPROG ((#1=#:G704 NIL))
+(SDEFUN |FACTCAT-;empty?;SB;1| ((|orf| (S)) (% (|Boolean|)))
+        (SPROG ((#1=#:G457 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
-                   ((EQL (SPADCALL |orf| (QREFELT $ 8)) 0)
-                    (PROGN (LETT #1# 'T) (GO #2=#:G703))))
-                  (EXIT (EQL (SPADCALL |orf| (QREFELT $ 10)) 0))))
+                   ((EQL (SPADCALL |orf| (QREFELT % 8)) 0)
+                    (PROGN (LETT #1# 'T) (GO #2=#:G456))))
+                  (EXIT (EQL (SPADCALL |orf| (QREFELT % 10)) 0))))
                 #2# (EXIT #1#)))) 
 
 (DECLAIM (NOTINLINE |FacetCategory&;|)) 
 
 (DEFUN |FacetCategory&| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|FacetCategory&| DV$1))
-          (LETT $ (GETREFV 13))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 13))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|FacetCategory&| '|infovec|
           (LIST

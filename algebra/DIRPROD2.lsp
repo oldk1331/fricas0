@@ -1,27 +1,27 @@
 
 (SDEFUN |DIRPROD2;map;MDpDp;1|
         ((|f| (|Mapping| B A)) (|v| (|DirectProduct| |dim| A))
-         ($ (|DirectProduct| |dim| B)))
-        (SPADCALL (SPADCALL |f| (SPADCALL |v| (QREFELT $ 11)) (QREFELT $ 15))
-                  (QREFELT $ 17))) 
+         (% (|DirectProduct| |dim| B)))
+        (SPADCALL (SPADCALL |f| (SPADCALL |v| (QREFELT % 11)) (QREFELT % 15))
+                  (QREFELT % 17))) 
 
 (SDEFUN |DIRPROD2;scan;MDpBDp;2|
         ((|f| (|Mapping| B A B)) (|v| (|DirectProduct| |dim| A)) (|b| (B))
-         ($ (|DirectProduct| |dim| B)))
+         (% (|DirectProduct| |dim| B)))
         (SPADCALL
-         (SPADCALL |f| (SPADCALL |v| (QREFELT $ 11)) |b| (QREFELT $ 20))
-         (QREFELT $ 17))) 
+         (SPADCALL |f| (SPADCALL |v| (QREFELT % 11)) |b| (QREFELT % 20))
+         (QREFELT % 17))) 
 
 (SDEFUN |DIRPROD2;reduce;MDp2B;3|
         ((|f| (|Mapping| B A B)) (|v| (|DirectProduct| |dim| A)) (|b| (B))
-         ($ (B)))
-        (SPADCALL |f| (SPADCALL |v| (QREFELT $ 11)) |b| (QREFELT $ 22))) 
+         (% (B)))
+        (SPADCALL |f| (SPADCALL |v| (QREFELT % 11)) |b| (QREFELT % 22))) 
 
 (DECLAIM (NOTINLINE |DirectProductFunctions2;|)) 
 
-(DEFUN |DirectProductFunctions2| (&REST #1=#:G702)
+(DEFUN |DirectProductFunctions2| (&REST #1=#:G456)
   (SPROG NIL
-         (PROG (#2=#:G703)
+         (PROG (#2=#:G457)
            (RETURN
             (COND
              ((LETT #2#
@@ -39,32 +39,32 @@
                   (HREM |$ConstructorCache| '|DirectProductFunctions2|)))))))))) 
 
 (DEFUN |DirectProductFunctions2;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT DV$2 (|devaluate| |#2|))
           (LETT DV$3 (|devaluate| |#3|))
           (LETT |dv$| (LIST '|DirectProductFunctions2| DV$1 DV$2 DV$3))
-          (LETT $ (GETREFV 24))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 24))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|DirectProductFunctions2|
-                      (LIST DV$1 DV$2 DV$3) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (QSETREFV $ 8 |#3|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2 DV$3) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (QSETREFV % 8 |#3|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|DirectProductFunctions2| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|Vector| 7)
-              (|DirectProduct| (NRTEVAL (QREFELT $ 6)) 7) (0 . |coerce|)
+              (|DirectProduct| (NRTEVAL (QREFELT % 6)) 7) (0 . |coerce|)
               (|Vector| 8) (|Mapping| 8 7)
               (|FiniteLinearAggregateFunctions2| 7 9 8 12) (5 . |map|)
-              (|DirectProduct| (NRTEVAL (QREFELT $ 6)) 8)
+              (|DirectProduct| (NRTEVAL (QREFELT % 6)) 8)
               (11 . |directProduct|) |DIRPROD2;map;MDpDp;1| (|Mapping| 8 7 8)
               (16 . |scan|) |DIRPROD2;scan;MDpBDp;2| (23 . |reduce|)
               |DIRPROD2;reduce;MDp2B;3|)

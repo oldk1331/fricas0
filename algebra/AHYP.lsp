@@ -10,14 +10,14 @@
                  (|ArcHyperbolicFunctionCategory;|))))) 
 
 (DEFUN |ArcHyperbolicFunctionCategory;| ()
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|Join|
                     (|mkCategory|
-                     '(((|acosh| ($ $)) T) ((|acoth| ($ $)) T)
-                       ((|acsch| ($ $)) T) ((|asech| ($ $)) T)
-                       ((|asinh| ($ $)) T) ((|atanh| ($ $)) T))
+                     '(((|acosh| (% %)) T) ((|acoth| (% %)) T)
+                       ((|acsch| (% %)) T) ((|asech| (% %)) T)
+                       ((|asinh| (% %)) T) ((|atanh| (% %)) T))
                      NIL NIL NIL)))
            (SETELT #1# 0 '(|ArcHyperbolicFunctionCategory|))))) 
 

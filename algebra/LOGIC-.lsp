@@ -1,22 +1,22 @@
 
-(SDEFUN |LOGIC-;T$;S;1| (($ (S))) (|spadConstant| $ 7)) 
+(SDEFUN |LOGIC-;T$;S;1| ((% (S))) (|spadConstant| % 7)) 
 
-(SDEFUN |LOGIC-;_\|_;S;2| (($ (S))) (|spadConstant| $ 9)) 
+(SDEFUN |LOGIC-;_\|_;S;2| ((% (S))) (|spadConstant| % 9)) 
 
 (DECLAIM (NOTINLINE |Logic&;|)) 
 
 (DEFUN |Logic&| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Logic&| DV$1))
-          (LETT $ (GETREFV 11))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 11))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|Logic&| '|infovec|
           (LIST

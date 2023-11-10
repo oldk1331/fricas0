@@ -269,7 +269,7 @@
 ;   FUNCALL(fn,page,opAlist,which,data) --apply branch function
 ;   if $atLeastOneUnexposed then
 ;       htSay '"{\em *} = unexposed"
-;   htSayStandard("\endscroll ")
+;   htSayStandard('"\endscroll ")
 ;   dbPresentOps(page,which,branch)
 ;   htShowPageNoScroll()
 
@@ -448,7 +448,7 @@
                 (FUNCALL |fn| |page| |opAlist| |which| |data|)
                 (COND
                  (|$atLeastOneUnexposed| (|htSay| "{\\em *} = unexposed")))
-                (|htSayStandard| '|\\endscroll |)
+                (|htSayStandard| "\\endscroll ")
                 (|dbPresentOps| |page| |which| |branch|)
                 (|htShowPageNoScroll|))))))))))
 
@@ -2285,7 +2285,7 @@
 ;   conform := htpProperty(htPage,'conform)
 ;   --prepare opAlist for possible filtering of groups
 ;   if null BOUNDP '$topicHash then
-;     $topicHash := MAKE_HASHTABLE('ID)
+;     $topicHash := MAKE_HASHTABLE('EQ)
 ;     for [x,:c] in '((extended . 0) (basic . 1) (hidden . 2)) repeat
 ;       HPUT($topicHash,x,c)
 ;   domform := htpProperty(htPage,'domname)
@@ -2326,7 +2326,7 @@
              (SETQ |conform| (|htpProperty| |htPage| '|conform|))
              (COND
               ((NULL (BOUNDP '|$topicHash|))
-               (SETQ |$topicHash| (MAKE_HASHTABLE 'ID))
+               (SETQ |$topicHash| (MAKE_HASHTABLE 'EQ))
                ((LAMBDA (|bfVar#91| |bfVar#90|)
                   (LOOP
                    (COND
@@ -2376,7 +2376,7 @@
 ; reduceOpAlistForDomain(opAlist,domform,conform) ==
 ; --destructively simplify all predicates; filter out any that fail
 ;   form1 := [domform,:rest domform]
-;   form2 := ['$,:rest conform]
+;   form2 := ['%, :rest(conform)]
 ;   new_opAlist := []
 ;   for pair in opAlist repeat
 ;     n_items := [test for item in rest pair | test] where test ==
@@ -2396,7 +2396,7 @@
     (RETURN
      (PROGN
       (SETQ |form1| (CONS |domform| (CDR |domform|)))
-      (SETQ |form2| (CONS '$ (CDR |conform|)))
+      (SETQ |form2| (CONS '% (CDR |conform|)))
       (SETQ |new_opAlist| NIL)
       ((LAMBDA (|bfVar#92| |pair|)
          (LOOP
@@ -2593,10 +2593,8 @@
 ;             'skip
 ;           u :=
 ;             tail is [.,origin,:.] and origin =>
-; --  must change any % into $ otherwise we will not pick up comments properly
-; --  delete the SUBLISLIS when we fix on % or $
-;               dbGetDocTable(op,SUBLISLIS(['$],['%],sig),dbDocTable origin,which,nil)
-;             if packageSymbol then sig := substitute('_$, packageSymbol, sig)
+;                 dbGetDocTable(op, sig, dbDocTable(origin), which, nil)
+;             if packageSymbol then sig := substitute('%, packageSymbol, sig)
 ;             dbGetDocTable(op,sig,docTable,which,nil)
 ;           origin := IFCAR u or origin
 ;           docCode := IFCDR u   --> (doc . code)
@@ -2785,8 +2783,7 @@
                                                                  #1#)))
                                                               |origin|)
                                                          (|dbGetDocTable| |op|
-                                                          (SUBLISLIS (LIST '$)
-                                                           (LIST '%) |sig|)
+                                                          |sig|
                                                           (|dbDocTable|
                                                            |origin|)
                                                           |which| NIL))
@@ -2796,7 +2793,7 @@
                                                            (|packageSymbol|
                                                             (SETQ |sig|
                                                                     (|substitute|
-                                                                     '$
+                                                                     '%
                                                                      |packageSymbol|
                                                                      |sig|))))
                                                           (|dbGetDocTable| |op|
@@ -3176,9 +3173,10 @@
 ;           f = 'nowhere => 'nowhere           --see replaceGoGetSlot
 ;           f = function makeSpadConstant => 'constant
 ;           f = function IDENTITY => 'constant
-;           f = function newGoGet => substitute('_$, domname, devaluate first r)
+;           f = function newGoGet =>
+;               substitute('_%, domname, devaluate(first(r)))
 ;           null VECP r => systemError devaluateList r
-;           substitute('_$, domname, devaluate r)
+;           substitute('_%, domname, devaluate(r))
 ;         'nowhere
 ;       [sig1,:info]
 
@@ -3302,7 +3300,7 @@
                                                                            |f|
                                                                            #'|newGoGet|)
                                                                           (|substitute|
-                                                                           '$
+                                                                           '%
                                                                            |domname|
                                                                            (|devaluate|
                                                                             (CAR
@@ -3315,7 +3313,7 @@
                                                                             |r|)))
                                                                          (#1#
                                                                           (|substitute|
-                                                                           '$
+                                                                           '%
                                                                            |domname|
                                                                            (|devaluate|
                                                                             |r|))))))

@@ -1,28 +1,28 @@
 
-(SDEFUN |MDDFACT;reduction| ((|u| (U)) (|p| (|Integer|)) ($ (U)))
+(SDEFUN |MDDFACT;reduction| ((|u| (U)) (|p| (|Integer|)) (% (U)))
         (SPROG NIL
                (COND ((ZEROP |p|) |u|)
                      ('T
-                      (SPADCALL (CONS #'|MDDFACT;reduction!0| (VECTOR $ |p|))
-                                |u| (QREFELT $ 10)))))) 
+                      (SPADCALL (CONS #'|MDDFACT;reduction!0| (VECTOR % |p|))
+                                |u| (QREFELT % 10)))))) 
 
 (SDEFUN |MDDFACT;reduction!0| ((|i1| NIL) ($$ NIL))
-        (PROG (|p| $)
+        (PROG (|p| %)
           (LETT |p| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |i1| |p| (QREFELT $ 8)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |i1| |p| (QREFELT % 8)))))) 
 
 (SDEFUN |MDDFACT;merge|
         ((|p| (|Integer|)) (|q| (|Integer|))
-         ($ (|Union| (|Integer|) "failed")))
+         (% (|Union| (|Integer|) "failed")))
         (COND ((EQL |p| |q|) (CONS 0 |p|)) ((EQL |p| 0) (CONS 0 |q|))
               ((EQL |q| 0) (CONS 0 |p|)) ('T (CONS 1 "failed")))) 
 
 (SDEFUN |MDDFACT;modInverse|
-        ((|c| (|Integer|)) (|p| (|Integer|)) ($ (|Integer|)))
-        (SPROG ((#1=#:G713 NIL))
+        ((|c| (|Integer|)) (|p| (|Integer|)) (% (|Integer|)))
+        (SPROG ((#1=#:G469 NIL))
                (QCAR
-                (PROG2 (LETT #1# (SPADCALL |c| |p| 1 (QREFELT $ 15)))
+                (PROG2 (LETT #1# (SPADCALL |c| |p| 1 (QREFELT % 15)))
                     (QCDR #1#)
                   (|check_union2| (QEQCAR #1# 0)
                                   (|Record| (|:| |coef1| (|Integer|))
@@ -34,77 +34,77 @@
                                   #1#))))) 
 
 (SDEFUN |MDDFACT;exactquo|
-        ((|u| (U)) (|v| (U)) (|p| (|Integer|)) ($ (|Union| U "failed")))
+        ((|u| (U)) (|v| (U)) (|p| (|Integer|)) (% (|Union| U "failed")))
         (SPROG
          ((|r| (|Record| (|:| |quotient| U) (|:| |remainder| U)))
           (|invlcv| (|Integer|)))
          (SEQ
           (LETT |invlcv|
-                (|MDDFACT;modInverse| (SPADCALL |v| (QREFELT $ 16)) |p| $))
+                (|MDDFACT;modInverse| (SPADCALL |v| (QREFELT % 16)) |p| %))
           (LETT |r|
                 (SPADCALL |u|
                           (|MDDFACT;reduction|
-                           (SPADCALL |invlcv| |v| (QREFELT $ 17)) |p| $)
-                          (QREFELT $ 19)))
+                           (SPADCALL |invlcv| |v| (QREFELT % 17)) |p| %)
+                          (QREFELT % 19)))
           (EXIT
            (COND
-            ((SPADCALL (|MDDFACT;reduction| (QCDR |r|) |p| $)
-                       (|spadConstant| $ 11) (QREFELT $ 21))
+            ((SPADCALL (|MDDFACT;reduction| (QCDR |r|) |p| %)
+                       (|spadConstant| % 11) (QREFELT % 21))
              (CONS 1 "failed"))
             ('T
              (CONS 0
                    (|MDDFACT;reduction|
-                    (SPADCALL |invlcv| (QCAR |r|) (QREFELT $ 17)) |p| $)))))))) 
+                    (SPADCALL |invlcv| (QCAR |r|) (QREFELT % 17)) |p| %)))))))) 
 
-(SDEFUN |MDDFACT;lc| ((|u| (EMR)) ($ (|Integer|)))
-        (SPADCALL (SPADCALL |u| (QREFELT $ 23)) (QREFELT $ 16))) 
+(SDEFUN |MDDFACT;lc| ((|u| (EMR)) (% (|Integer|)))
+        (SPADCALL (SPADCALL |u| (QREFELT % 23)) (QREFELT % 16))) 
 
-(SDEFUN |MDDFACT;degree| ((|u| (EMR)) ($ (|Integer|)))
-        (SPADCALL (SPADCALL |u| (QREFELT $ 23)) (QREFELT $ 25))) 
+(SDEFUN |MDDFACT;degree| ((|u| (EMR)) (% (|Integer|)))
+        (SPADCALL (SPADCALL |u| (QREFELT % 23)) (QREFELT % 25))) 
 
-(SDEFUN |MDDFACT;makeMonic| ((|u| (EMR)) ($ (EMR)))
+(SDEFUN |MDDFACT;makeMonic| ((|u| (EMR)) (% (EMR)))
         (SPADCALL
-         (|MDDFACT;modInverse| (|MDDFACT;lc| |u| $)
-          (SPADCALL |u| (QREFELT $ 26)) $)
-         |u| (QREFELT $ 27))) 
+         (|MDDFACT;modInverse| (|MDDFACT;lc| |u| %)
+          (SPADCALL |u| (QREFELT % 26)) %)
+         |u| (QREFELT % 27))) 
 
 (SDEFUN |MDDFACT;exptmod|
-        ((|u1| (EMR)) (|i| (|Integer|)) (|u2| (EMR)) ($ (EMR)))
+        ((|u1| (EMR)) (|i| (|Integer|)) (|u2| (EMR)) (% (EMR)))
         (SPROG ((|ans| (EMR)))
                (SEQ
                 (COND
                  ((< |i| 0)
                   (|error| "negative exponentiation not allowed for exptMod"))
                  ('T
-                  (SEQ (LETT |ans| (|spadConstant| $ 28))
+                  (SEQ (LETT |ans| (|spadConstant| % 28))
                        (SEQ G190 (COND ((NULL (> |i| 0)) (GO G191)))
                             (SEQ
                              (COND
                               ((ODDP |i|)
                                (LETT |ans|
                                      (SPADCALL
-                                      (SPADCALL |ans| |u1| (QREFELT $ 29)) |u2|
-                                      (QREFELT $ 30)))))
+                                      (SPADCALL |ans| |u1| (QREFELT % 29)) |u2|
+                                      (QREFELT % 30)))))
                              (LETT |i| (QUOTIENT2 |i| 2))
                              (EXIT
                               (LETT |u1|
                                     (SPADCALL
-                                     (SPADCALL |u1| |u1| (QREFELT $ 29)) |u2|
-                                     (QREFELT $ 30)))))
+                                     (SPADCALL |u1| |u1| (QREFELT % 29)) |u2|
+                                     (QREFELT % 30)))))
                             NIL (GO G190) G191 (EXIT NIL))
                        (EXIT |ans|))))))) 
 
-(SDEFUN |MDDFACT;ddfactor| ((|u| (EMR)) ($ (|List| EMR)))
+(SDEFUN |MDDFACT;ddfactor| ((|u| (EMR)) (% (|List| EMR)))
         (SPROG
-         ((#1=#:G758 NIL) (|f| NIL) (#2=#:G757 NIL) (|ans| (|List| EMR))
+         ((#1=#:G508 NIL) (|f| NIL) (#2=#:G507 NIL) (|ans| (|List| EMR))
           (|c| (|Integer|)))
          (SEQ
           (COND
-           ((SPADCALL (LETT |c| (|MDDFACT;lc| |u| $)) 1 (QREFELT $ 31))
-            (LETT |u| (|MDDFACT;makeMonic| |u| $))))
-          (LETT |ans| (|MDDFACT;sepfact| (|MDDFACT;ddfact| |u| $) $))
+           ((SPADCALL (LETT |c| (|MDDFACT;lc| |u| %)) 1 (QREFELT % 31))
+            (LETT |u| (|MDDFACT;makeMonic| |u| %))))
+          (LETT |ans| (|MDDFACT;sepfact| (|MDDFACT;ddfact| |u| %) %))
           (EXIT
-           (CONS (SPADCALL |c| (QREFELT $ 32))
+           (CONS (SPADCALL |c| (QREFELT % 32))
                  (PROGN
                   (LETT #2# NIL)
                   (SEQ (LETT |f| NIL) (LETT #1# |ans|) G190
@@ -114,60 +114,60 @@
                        (SEQ
                         (EXIT
                          (COND
-                          ((> (|MDDFACT;degree| |f| $) 0)
+                          ((> (|MDDFACT;degree| |f| %) 0)
                            (LETT #2#
-                                 (CONS (|MDDFACT;makeMonic| |f| $) #2#))))))
+                                 (CONS (|MDDFACT;makeMonic| |f| %) #2#))))))
                        (LETT #1# (CDR #1#)) (GO G190) G191
                        (EXIT (NREVERSE #2#))))))))) 
 
-(SDEFUN |MDDFACT;gcd;2UIU;10| ((|u| (U)) (|v| (U)) (|q| (|Integer|)) ($ (U)))
+(SDEFUN |MDDFACT;gcd;2UIU;10| ((|u| (U)) (|v| (U)) (|q| (|Integer|)) (% (U)))
         (SPADCALL
-         (SPADCALL (SPADCALL |u| |q| (QREFELT $ 33))
-                   (SPADCALL |v| |q| (QREFELT $ 33)) (QREFELT $ 34))
-         (QREFELT $ 23))) 
+         (SPADCALL (SPADCALL |u| |q| (QREFELT % 33))
+                   (SPADCALL |v| |q| (QREFELT % 33)) (QREFELT % 34))
+         (QREFELT % 23))) 
 
 (SDEFUN |MDDFACT;ddfact|
         ((|u| (EMR))
-         ($ (|List| (|Record| (|:| |factor| EMR) (|:| |degree| (|Integer|))))))
+         (% (|List| (|Record| (|:| |factor| EMR) (|:| |degree| (|Integer|))))))
         (SPROG
-         ((#1=#:G770 NIL) (#2=#:G771 NIL) (|d| (|Integer|))
+         ((#1=#:G520 NIL) (#2=#:G521 NIL) (|d| (|Integer|))
           (|ans|
            (|List| (|Record| (|:| |factor| EMR) (|:| |degree| (|Integer|)))))
           (|g| (EMR)) (|w| (EMR)) (|c| (|Integer|)) (|m| (EMR))
           (|p| (|Integer|)))
          (SEQ
           (EXIT
-           (SEQ (LETT |p| (SPADCALL |u| (QREFELT $ 26)))
+           (SEQ (LETT |p| (SPADCALL |u| (QREFELT % 26)))
                 (LETT |w|
-                      (SPADCALL (SPADCALL 1 1 (QREFELT $ 36)) |p|
-                                (QREFELT $ 33)))
+                      (SPADCALL (SPADCALL 1 1 (QREFELT % 36)) |p|
+                                (QREFELT % 33)))
                 (LETT |m| |w|) (LETT |d| 1)
                 (COND
-                 ((SPADCALL (LETT |c| (|MDDFACT;lc| |u| $)) 1 (QREFELT $ 31))
-                  (LETT |u| (|MDDFACT;makeMonic| |u| $))))
+                 ((SPADCALL (LETT |c| (|MDDFACT;lc| |u| %)) 1 (QREFELT % 31))
+                  (LETT |u| (|MDDFACT;makeMonic| |u| %))))
                 (LETT |ans| NIL)
                 (EXIT
                  (SEQ G190 NIL
-                      (SEQ (LETT |w| (|MDDFACT;exptmod| |w| |p| |u| $))
+                      (SEQ (LETT |w| (|MDDFACT;exptmod| |w| |p| |u| %))
                            (LETT |g|
-                                 (SPADCALL (SPADCALL |w| |m| (QREFELT $ 37))
-                                           |u| (QREFELT $ 34)))
+                                 (SPADCALL (SPADCALL |w| |m| (QREFELT % 37))
+                                           |u| (QREFELT % 34)))
                            (COND
-                            ((> (|MDDFACT;degree| |g| $) 0)
-                             (SEQ (LETT |g| (|MDDFACT;makeMonic| |g| $))
+                            ((> (|MDDFACT;degree| |g| %) 0)
+                             (SEQ (LETT |g| (|MDDFACT;makeMonic| |g| %))
                                   (LETT |ans| (CONS (CONS |g| |d|) |ans|))
                                   (EXIT
                                    (LETT |u|
-                                         (SPADCALL |u| |g| (QREFELT $ 38)))))))
+                                         (SPADCALL |u| |g| (QREFELT % 38)))))))
                            (EXIT
                             (COND
-                             ((EQL (|MDDFACT;degree| |u| $) 0)
+                             ((EQL (|MDDFACT;degree| |u| %) 0)
                               (PROGN
                                (LETT #2#
                                      (CONS
-                                      (CONS (SPADCALL |c| (QREFELT $ 32)) 0)
+                                      (CONS (SPADCALL |c| (QREFELT % 32)) 0)
                                       |ans|))
-                               (GO #3=#:G769)))
+                               (GO #3=#:G519)))
                              ('T
                               (SEQ
                                (EXIT
@@ -175,7 +175,7 @@
                                      (EXIT
                                       (COND
                                        ((> |d|
-                                           (QUOTIENT2 (|MDDFACT;degree| |u| $)
+                                           (QUOTIENT2 (|MDDFACT;degree| |u| %)
                                                       2))
                                         (PROGN
                                          (LETT #1#
@@ -184,29 +184,29 @@
                                                       (CONS
                                                        (CONS
                                                         (SPADCALL |c|
-                                                                  (QREFELT $
+                                                                  (QREFELT %
                                                                            32))
                                                         0)
                                                        (CONS
                                                         (CONS |u|
                                                               (|MDDFACT;degree|
-                                                               |u| $))
+                                                               |u| %))
                                                         |ans|)))
                                                 (GO #3#)))
-                                         (GO #4=#:G765)))))))
+                                         (GO #4=#:G515)))))))
                                #4# (EXIT #1#))))))
                       NIL (GO G190) G191 (EXIT NIL)))))
           #3# (EXIT #2#)))) 
 
 (SDEFUN |MDDFACT;ddFact;UIL;12|
         ((|u| (U)) (|q| (|Integer|))
-         ($ (|List| (|Record| (|:| |factor| U) (|:| |degree| (|Integer|))))))
+         (% (|List| (|Record| (|:| |factor| U) (|:| |degree| (|Integer|))))))
         (SPROG
-         ((#1=#:G785 NIL) (|dd| NIL) (#2=#:G784 NIL)
+         ((#1=#:G531 NIL) (|dd| NIL) (#2=#:G530 NIL)
           (|ans|
            (|List| (|Record| (|:| |factor| EMR) (|:| |degree| (|Integer|))))))
          (SEQ
-          (LETT |ans| (|MDDFACT;ddfact| (SPADCALL |u| |q| (QREFELT $ 33)) $))
+          (LETT |ans| (|MDDFACT;ddfact| (SPADCALL |u| |q| (QREFELT % 33)) %))
           (EXIT
            (PROGN
             (LETT #2# NIL)
@@ -218,7 +218,7 @@
                   (EXIT
                    (LETT #2#
                          (CONS
-                          (CONS (SPADCALL (QCAR |dd|) (QREFELT $ 23))
+                          (CONS (SPADCALL (QCAR |dd|) (QREFELT % 23))
                                 (QCDR |dd|))
                           #2#))))
                  (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT (NREVERSE #2#)))))))) 
@@ -226,10 +226,10 @@
 (SDEFUN |MDDFACT;sepfact|
         ((|factList|
           (|List| (|Record| (|:| |factor| EMR) (|:| |degree| (|Integer|)))))
-         ($ (|List| EMR)))
+         (% (|List| EMR)))
         (SPROG
-         ((#1=#:G788 NIL) (#2=#:G787 #3=(|List| EMR)) (#4=#:G789 #3#)
-          (#5=#:G791 NIL) (|f| NIL))
+         ((#1=#:G534 NIL) (#2=#:G533 #3=(|List| EMR)) (#4=#:G535 #3#)
+          (#5=#:G537 NIL) (|f| NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -239,8 +239,8 @@
                 (SEQ
                  (EXIT
                   (PROGN
-                   (LETT #4# (|MDDFACT;sepFact1| |f| $))
-                   (COND (#1# (LETT #2# (SPADCALL #2# #4# (QREFELT $ 43))))
+                   (LETT #4# (|MDDFACT;sepFact1| |f| %))
+                   (COND (#1# (LETT #2# (SPADCALL #2# #4# (QREFELT % 43))))
                          ('T (PROGN (LETT #2# #4#) (LETT #1# 'T)))))))
                 (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
            (COND (#1# #2#) ('T NIL)))))) 
@@ -248,10 +248,10 @@
 (SDEFUN |MDDFACT;separateFactors;LIL;14|
         ((|uddList|
           (|List| (|Record| (|:| |factor| U) (|:| |degree| (|Integer|)))))
-         (|q| (|Integer|)) ($ (|List| U)))
+         (|q| (|Integer|)) (% (|List| U)))
         (SPROG
-         ((#1=#:G803 NIL) (|f| NIL) (#2=#:G802 NIL) (|ans| (|List| EMR))
-          (#3=#:G801 NIL) (|udd| NIL) (#4=#:G800 NIL))
+         ((#1=#:G549 NIL) (|f| NIL) (#2=#:G548 NIL) (|ans| (|List| EMR))
+          (#3=#:G547 NIL) (|udd| NIL) (#4=#:G546 NIL))
          (SEQ
           (LETT |ans|
                 (|MDDFACT;sepfact|
@@ -266,12 +266,12 @@
                          (LETT #4#
                                (CONS
                                 (CONS
-                                 (SPADCALL (QCAR |udd|) |q| (QREFELT $ 33))
+                                 (SPADCALL (QCAR |udd|) |q| (QREFELT % 33))
                                  (QCDR |udd|))
                                 #4#))))
                        (LETT #3# (CDR #3#)) (GO G190) G191
                        (EXIT (NREVERSE #4#))))
-                 $))
+                 %))
           (EXIT
            (PROGN
             (LETT #2# NIL)
@@ -279,53 +279,53 @@
                  (COND
                   ((OR (ATOM #1#) (PROGN (LETT |f| (CAR #1#)) NIL)) (GO G191)))
                  (SEQ
-                  (EXIT (LETT #2# (CONS (SPADCALL |f| (QREFELT $ 23)) #2#))))
+                  (EXIT (LETT #2# (CONS (SPADCALL |f| (QREFELT % 23)) #2#))))
                  (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT (NREVERSE #2#)))))))) 
 
 (SDEFUN |MDDFACT;decode|
-        ((|s| (|Integer|)) (|p| (|Integer|)) (|x| (U)) ($ (U)))
+        ((|s| (|Integer|)) (|p| (|Integer|)) (|x| (U)) (% (U)))
         (SPROG
          ((|qr|
            (|Record| (|:| |quotient| (|Integer|))
                      (|:| |remainder| (|Integer|)))))
          (SEQ
-          (COND ((< |s| |p|) (SPADCALL |s| (QREFELT $ 46)))
+          (COND ((< |s| |p|) (SPADCALL |s| (QREFELT % 46)))
                 ('T
                  (SEQ (LETT |qr| (DIVIDE2 |s| |p|))
                       (EXIT
-                       (SPADCALL (SPADCALL (QCDR |qr|) (QREFELT $ 46))
+                       (SPADCALL (SPADCALL (QCDR |qr|) (QREFELT % 46))
                                  (SPADCALL |x|
                                            (|MDDFACT;decode| (QCAR |qr|) |p|
-                                            |x| $)
-                                           (QREFELT $ 47))
-                                 (QREFELT $ 48))))))))) 
+                                            |x| %)
+                                           (QREFELT % 47))
+                                 (QREFELT % 48))))))))) 
 
 (SDEFUN |MDDFACT;sepFact1|
         ((|f| (|Record| (|:| |factor| EMR) (|:| |degree| #1=(|Integer|))))
-         ($ (|List| EMR)))
+         (% (|List| EMR)))
         (SPROG
-         ((#2=#:G835 NIL) (|x| (U)) (|ss| (|Integer|)) (|s| (|Integer|))
+         ((#2=#:G579 NIL) (|x| (U)) (|ss| (|Integer|)) (|s| (|Integer|))
           (|ans| (|List| EMR)) (|stack| (|List| EMR)) (|df1| #3=(|Integer|))
-          (|f1| (EMR)) (#4=#:G837 NIL) (|fact| NIL)
-          (|flist| (|Union| (|List| EMR) "failed")) (|t| (EMR)) (#5=#:G836 NIL)
+          (|f1| (EMR)) (#4=#:G581 NIL) (|fact| NIL)
+          (|flist| (|Union| (|List| EMR) "failed")) (|t| (EMR)) (#5=#:G580 NIL)
           (|y| (U)) (|du| #3#) (|i| NIL) (|u| (EMR)) (|c| (|Integer|))
           (|d| #1#) (|p| (|Integer|)))
-         (SEQ (LETT |u| (QCAR |f|)) (LETT |p| (SPADCALL |u| (QREFELT $ 26)))
+         (SEQ (LETT |u| (QCAR |f|)) (LETT |p| (SPADCALL |u| (QREFELT % 26)))
               (LETT |d| (QCDR |f|))
               (EXIT
                (COND ((EQL |d| 0) (LIST |u|))
                      (#6='T
                       (SEQ
                        (COND
-                        ((SPADCALL (LETT |c| (|MDDFACT;lc| |u| $)) 1
-                                   (QREFELT $ 31))
-                         (LETT |u| (|MDDFACT;makeMonic| |u| $))))
-                       (LETT |du| (|MDDFACT;degree| |u| $))
+                        ((SPADCALL (LETT |c| (|MDDFACT;lc| |u| %)) 1
+                                   (QREFELT % 31))
+                         (LETT |u| (|MDDFACT;makeMonic| |u| %))))
+                       (LETT |du| (|MDDFACT;degree| |u| %))
                        (EXIT
                         (COND ((EQL |d| |du|) (LIST |u|))
                               (#6#
                                (SEQ (LETT |ans| NIL)
-                                    (LETT |x| (SPADCALL 1 1 (QREFELT $ 36)))
+                                    (LETT |x| (SPADCALL 1 1 (QREFELT % 36)))
                                     (COND
                                      ((EQL |d| 1)
                                       (COND
@@ -342,10 +342,10 @@
                                                     (SPADCALL |u|
                                                               (SPADCALL |i|
                                                                         (QREFELT
-                                                                         $ 46))
-                                                              (QREFELT $ 49))
-                                                    (|spadConstant| $ 11)
-                                                    (QREFELT $ 50))
+                                                                         % 46))
+                                                              (QREFELT % 49))
+                                                    (|spadConstant| % 11)
+                                                    (QREFELT % 50))
                                                    (SEQ
                                                     (LETT |ans|
                                                           (CONS
@@ -354,10 +354,10 @@
                                                                       (SPADCALL
                                                                        |i|
                                                                        (QREFELT
-                                                                        $ 46))
+                                                                        % 46))
                                                                       (QREFELT
-                                                                       $ 51))
-                                                            |p| (QREFELT $ 33))
+                                                                       % 51))
+                                                            |p| (QREFELT % 33))
                                                            |ans|))
                                                     (EXIT
                                                      (LETT |du|
@@ -373,14 +373,14 @@
                                           (LETT |t|
                                                 (SPADCALL
                                                  (SPADCALL
-                                                  (SPADCALL |s| (QREFELT $ 46))
-                                                  |x| (QREFELT $ 48))
-                                                 |p| (QREFELT $ 33)))
+                                                  (SPADCALL |s| (QREFELT % 46))
+                                                  |x| (QREFELT % 48))
+                                                 |p| (QREFELT % 33)))
                                           (SEQ
                                            (LETT |flist|
                                                  (|MDDFACT;probSplit|
                                                   (|SPADfirst| |stack|) |t| |d|
-                                                  $))
+                                                  %))
                                            (EXIT
                                             (COND
                                              ((NULL (QEQCAR |flist| 1))
@@ -401,10 +401,10 @@
                                                          (SEQ
                                                           (LETT |f1|
                                                                 (|MDDFACT;makeMonic|
-                                                                 |fact| $))
+                                                                 |fact| %))
                                                           (LETT |df1|
                                                                 (|MDDFACT;degree|
-                                                                 |f1| $))
+                                                                 |f1| %))
                                                           (EXIT
                                                            (COND
                                                             ((EQL |df1| 0) NIL)
@@ -428,8 +428,8 @@
                                                          (SPADCALL |y|
                                                                    (|MDDFACT;decode|
                                                                     |ss| |p|
-                                                                    |y| $)
-                                                                   (QREFELT $
+                                                                    |y| %)
+                                                                   (QREFELT %
                                                                             47))))))
                                             ('T
                                              (SEQ (LETT |s| (+ |s| 1))
@@ -447,9 +447,9 @@
                                                                              |ss|
                                                                              |p|
                                                                              |y|
-                                                                             $)
+                                                                             %)
                                                                             (QREFELT
-                                                                             $
+                                                                             %
                                                                              47)))
                                                             (EXIT
                                                              (COND
@@ -457,7 +457,7 @@
                                                                 (EQL
                                                                  (SPADCALL |x|
                                                                            (QREFELT
-                                                                            $
+                                                                            %
                                                                             16))
                                                                  1))
                                                                (PROGN
@@ -470,7 +470,7 @@
                                                                          (SPADCALL
                                                                           |x|
                                                                           (QREFELT
-                                                                           $
+                                                                           %
                                                                            25))))
                                                                        (EXIT
                                                                         (LETT
@@ -481,34 +481,34 @@
                                                                            (SPADCALL
                                                                             |x|
                                                                             (QREFELT
-                                                                             $
+                                                                             %
                                                                              25))
                                                                            1)
                                                                           (QREFELT
-                                                                           $
+                                                                           %
                                                                            52))))))
                                                                 (GO
-                                                                 #7=#:G827)))))))
+                                                                 #7=#:G571)))))))
                                                       #7# (EXIT #2#))))))))))
                                          (LETT #5# (NULL |stack|)) (GO G190)
                                          G191 (EXIT NIL))
                                     (EXIT
                                      (CONS
                                       (SPADCALL |c| (|SPADfirst| |ans|)
-                                                (QREFELT $ 27))
+                                                (QREFELT % 27))
                                       (CDR |ans|)))))))))))))) 
 
 (SDEFUN |MDDFACT;probSplit|
         ((|u| (EMR)) (|t| (EMR)) (|d| (|Integer|))
-         ($ (|Union| (|List| EMR) "failed")))
+         (% (|Union| (|List| EMR) "failed")))
         (SPROG
          ((|g| (EMR)) (|f2| (EMR)) (|n| (EMR)) (|r| (|NonNegativeInteger|))
-          (#1=#:G909 NIL) (#2=#:G908 NIL) (|f1| (EMR)) (|p| (|Integer|)))
-         (SEQ (LETT |p| (SPADCALL |u| (QREFELT $ 26)))
+          (#1=#:G653 NIL) (#2=#:G652 NIL) (|f1| (EMR)) (|p| (|Integer|)))
+         (SEQ (LETT |p| (SPADCALL |u| (QREFELT % 26)))
               (EXIT
-               (COND ((EQL |p| 2) (|MDDFACT;probSplit2| |u| |t| |d| $))
+               (COND ((EQL |p| 2) (|MDDFACT;probSplit2| |u| |t| |d| %))
                      ('T
-                      (SEQ (LETT |f1| (SPADCALL |u| |t| (QREFELT $ 34)))
+                      (SEQ (LETT |f1| (SPADCALL |u| |t| (QREFELT % 34)))
                            (LETT |r|
                                  (PROG1
                                      (LETT #1#
@@ -525,47 +525,47 @@
                                    (|check_subtype2| (>= #1# 0)
                                                      '(|NonNegativeInteger|)
                                                      '(|Integer|) #1#)))
-                           (LETT |n| (|MDDFACT;exptmod| |t| |r| |u| $))
+                           (LETT |n| (|MDDFACT;exptmod| |t| |r| |u| %))
                            (LETT |f2|
                                  (SPADCALL |u|
-                                           (SPADCALL |n| (|spadConstant| $ 28)
-                                                     (QREFELT $ 53))
-                                           (QREFELT $ 34)))
-                           (LETT |g| (SPADCALL |f1| |f2| (QREFELT $ 29)))
+                                           (SPADCALL |n| (|spadConstant| % 28)
+                                                     (QREFELT % 53))
+                                           (QREFELT % 34)))
+                           (LETT |g| (SPADCALL |f1| |f2| (QREFELT % 29)))
                            (EXIT
                             (COND
                              ((OR
-                               (SPADCALL |g| (|spadConstant| $ 28)
-                                         (QREFELT $ 54))
-                               (SPADCALL |g| |u| (QREFELT $ 54)))
+                               (SPADCALL |g| (|spadConstant| % 28)
+                                         (QREFELT % 54))
+                               (SPADCALL |g| |u| (QREFELT % 54)))
                               (CONS 1 "failed"))
                              ('T
                               (CONS 0
                                     (LIST |f1| |f2|
                                           (SPADCALL |u| |g|
-                                                    (QREFELT $ 38)))))))))))))) 
+                                                    (QREFELT % 38)))))))))))))) 
 
 (SDEFUN |MDDFACT;probSplit2|
         ((|u| (EMR)) (|t| (EMR)) (|d| (|Integer|))
-         ($ (|Union| (|List| EMR) "failed")))
+         (% (|Union| (|List| EMR) "failed")))
         (SPROG ((|f| (EMR)))
                (SEQ
                 (LETT |f|
-                      (SPADCALL |u| (|MDDFACT;trace| |t| |d| |u| $)
-                                (QREFELT $ 34)))
+                      (SPADCALL |u| (|MDDFACT;trace| |t| |d| |u| %)
+                                (QREFELT % 34)))
                 (EXIT
                  (COND
-                  ((OR (SPADCALL |f| (|spadConstant| $ 28) (QREFELT $ 54))
-                       (EQL (|MDDFACT;degree| |u| $) (|MDDFACT;degree| |f| $)))
+                  ((OR (SPADCALL |f| (|spadConstant| % 28) (QREFELT % 54))
+                       (EQL (|MDDFACT;degree| |u| %) (|MDDFACT;degree| |f| %)))
                    (CONS 1 "failed"))
                   ('T
                    (CONS 0
-                         (LIST (|spadConstant| $ 28) |f|
-                               (SPADCALL |u| |f| (QREFELT $ 38)))))))))) 
+                         (LIST (|spadConstant| % 28) |f|
+                               (SPADCALL |u| |f| (QREFELT % 38)))))))))) 
 
-(SDEFUN |MDDFACT;trace| ((|t| (EMR)) (|d| (|Integer|)) (|u| (EMR)) ($ (EMR)))
+(SDEFUN |MDDFACT;trace| ((|t| (EMR)) (|d| (|Integer|)) (|u| (EMR)) (% (EMR)))
         (SPROG ((|tt| (EMR)) (|p| (|Integer|)))
-               (SEQ (LETT |p| (SPADCALL |t| (QREFELT $ 26)))
+               (SEQ (LETT |p| (SPADCALL |t| (QREFELT % 26)))
                     (LETT |d| (- |d| 1)) (LETT |tt| |t|)
                     (SEQ G190 (COND ((NULL (> |d| 0)) (GO G191)))
                          (SEQ
@@ -574,18 +574,18 @@
                                  (SPADCALL |tt|
                                            (LETT |t|
                                                  (|MDDFACT;exptmod| |t| |p| |u|
-                                                  $))
-                                           (QREFELT $ 53))
-                                 |u| (QREFELT $ 30)))
+                                                  %))
+                                           (QREFELT % 53))
+                                 |u| (QREFELT % 30)))
                           (EXIT (LETT |d| (- |d| 1))))
                          NIL (GO G190) G191 (EXIT NIL))
                     (EXIT |tt|)))) 
 
 (DECLAIM (NOTINLINE |ModularDistinctDegreeFactorizer;|)) 
 
-(DEFUN |ModularDistinctDegreeFactorizer| (#1=#:G924)
+(DEFUN |ModularDistinctDegreeFactorizer| (#1=#:G668)
   (SPROG NIL
-         (PROG (#2=#:G925)
+         (PROG (#2=#:G669)
            (RETURN
             (COND
              ((LETT #2#
@@ -603,38 +603,38 @@
                         '|ModularDistinctDegreeFactorizer|)))))))))) 
 
 (DEFUN |ModularDistinctDegreeFactorizer;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|ModularDistinctDegreeFactorizer| DV$1))
-          (LETT $ (GETREFV 55))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 55))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|ModularDistinctDegreeFactorizer|
-                      (LIST DV$1) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 22
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 22
                     (|EuclideanModularRing| (|Integer|) |#1| (|Integer|)
                                             (CONS
                                              (|function| |MDDFACT;reduction|)
-                                             $)
+                                             %)
                                             (CONS (|function| |MDDFACT;merge|)
-                                                  $)
+                                                  %)
                                             (CONS
                                              (|function| |MDDFACT;exactquo|)
-                                             $)))
-          $))) 
+                                             %)))
+          %))) 
 
 (MAKEPROP '|ModularDistinctDegreeFactorizer| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|Integer|)
               (0 . |positiveRemainder|) (|Mapping| 7 7) (6 . |map|)
               (12 . |Zero|) (16 . |One|)
-              (|Record| (|:| |coef1| $) (|:| |coef2| $)) (|Union| 13 '"failed")
+              (|Record| (|:| |coef1| %) (|:| |coef2| %)) (|Union| 13 '"failed")
               (20 . |extendedEuclidean|) (27 . |leadingCoefficient|) (32 . *)
-              (|Record| (|:| |quotient| $) (|:| |remainder| $))
+              (|Record| (|:| |quotient| %) (|:| |remainder| %))
               (38 . |monicDivide|) (|Boolean|) (44 . ~=) 'EMR (50 . |coerce|)
               (|NonNegativeInteger|) (55 . |degree|) (60 . |modulus|) (65 . *)
               (71 . |One|) (75 . *) (81 . |rem|) (87 . ~=) (93 . |coerce|)

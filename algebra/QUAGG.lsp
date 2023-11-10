@@ -6,7 +6,7 @@
 (DEFPARAMETER |QueueAggregate;AL| 'NIL) 
 
 (DEFUN |QueueAggregate| (|t#1|)
-  (LET (#1=#:G690 (#2=#:G691 (|devaluate| |t#1|)))
+  (LET (#1=#:G449 (#2=#:G450 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |QueueAggregate;AL|)) (CDR #1#))
           (T
            (SETQ |QueueAggregate;AL|
@@ -15,7 +15,7 @@
            #1#)))) 
 
 (DEFUN |QueueAggregate;| (|t#1|)
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -26,16 +26,19 @@
                                                         (|finiteAggregate|)
                                                         (|mkCategory|
                                                          '(((|enqueue!|
-                                                             (|t#1| |t#1| $))
+                                                             (|t#1| |t#1| %))
                                                             T)
                                                            ((|dequeue!|
-                                                             (|t#1| $))
+                                                             (|t#1| %))
                                                             T)
-                                                           ((|rotate!| ($ $))
+                                                           ((|rotate!| (% %))
                                                             T)
-                                                           ((|front| (|t#1| $))
+                                                           ((|front| (|t#1| %))
                                                             T)
-                                                           ((|back| (|t#1| $))
+                                                           ((|back| (|t#1| %))
                                                             T))
-                                                         NIL NIL NIL)))))))
+                                                         '(((|Hashable|)
+                                                            (|has| |t#1|
+                                                                   (|Hashable|))))
+                                                         NIL NIL)))))))
            (SETELT #1# 0 (LIST '|QueueAggregate| |t#1|))))) 

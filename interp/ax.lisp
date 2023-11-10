@@ -333,15 +333,10 @@
       (COND ((EQL (LENGTH |args|) 1) (CAR |args|)) ('T (CONS |op| |args|)))))))
 
 ; axFormatDecl(sym, type) ==
-;    if sym = '$ then sym := '%
 ;    ['Declare, sym, axFormatType type]
 
 (DEFUN |axFormatDecl| (|sym| |type|)
-  (PROG ()
-    (RETURN
-     (PROGN
-      (COND ((EQ |sym| '$) (SETQ |sym| '%)))
-      (LIST '|Declare| |sym| (|axFormatType| |type|))))))
+  (PROG () (RETURN (LIST '|Declare| |sym| (|axFormatType| |type|)))))
 
 ; makeTypeSequence l ==
 ;    ['Sequence,: delete('Type, l)]
@@ -360,7 +355,7 @@
 
 ; axFormatType(typeform) ==
 ;   atom typeform =>
-;      typeform = '$ => '%
+;      typeform = '% => '%
 ;      STRINGP typeform =>
 ;         ['Apply,'Enumeration, INTERN typeform]
 ;      INTEGERP typeform =>
@@ -383,7 +378,6 @@
 ;                         :[axFormatType a for a in args]],
 ;                           ['Apply, 'List, 'Symbol] ]
 ;   typeform is [op] =>
-;     op = '$ => '%
 ;     op = 'Void => ['Comma]
 ;     op
 ;   typeform is ['local, val] => axFormatType val
@@ -439,7 +433,7 @@
 ;                   ['PretendTo, axFormatType first args, axFormatType arg1type],
 ;                      :[axFormatType a for a in rest args]]
 ;       ['Apply, op, :[axFormatType a for a in args]]
-;   error "unknown entry type"
+;   error '"unknown entry type"
 
 (DEFUN |axFormatType| (|typeform|)
   (PROG (|args| |op| |ISTMP#1| |val| |ISTMP#2| |lastcat| |cats| |type| |ops|
@@ -448,7 +442,7 @@
     (RETURN
      (COND
       ((ATOM |typeform|)
-       (COND ((EQ |typeform| '$) '%)
+       (COND ((EQ |typeform| '%) '%)
              ((STRINGP |typeform|)
               (LIST '|Apply| '|Enumeration| (INTERN |typeform|)))
              ((INTEGERP |typeform|)
@@ -497,7 +491,7 @@
               (LIST '|Apply| '|List| '|Symbol|))))
       ((AND (CONSP |typeform|) (EQ (CDR |typeform|) NIL)
             (PROGN (SETQ |op| (CAR |typeform|)) #1#))
-       (COND ((EQ |op| '$) '%) ((EQ |op| '|Void|) (LIST '|Comma|)) (#1# |op|)))
+       (COND ((EQ |op| '|Void|) (LIST '|Comma|)) (#1# |op|)))
       ((AND (CONSP |typeform|) (EQ (CAR |typeform|) '|local|)
             (PROGN
              (SETQ |ISTMP#1| (CDR |typeform|))
@@ -835,7 +829,7 @@
                                    (CONS (|axFormatType| |a|) |bfVar#35|))))
                          (SETQ |bfVar#34| (CDR |bfVar#34|))))
                       NIL |args| NIL))))))
-      (#1# (|error| '|unknown entry type|))))))
+      (#1# (|error| "unknown entry type"))))))
 
 ; pretendTo(a, t) == ['PretendTo, axFormatType a, axFormatType t]
 
@@ -845,7 +839,7 @@
 
 ; augmentTo(a, t) ==
 ;   not $conditionalCast => axFormatType a
-;   a = '$ => pretendTo(a, t)
+;   a = '% => pretendTo(a, t)
 ;   ax := axFormatType a -- a looks like |#i|
 ;   not(null(kv:=ASSOC(a,$augmentedArgs))) =>
 ;       ['PretendTo, ax, formatAugmentedType(rest kv, a, $augmentedArgs)]
@@ -857,7 +851,7 @@
   (PROG (|ax| |kv|)
     (RETURN
      (COND ((NULL |$conditionalCast|) (|axFormatType| |a|))
-           ((EQ |a| '$) (|pretendTo| |a| |t|))
+           ((EQ |a| '%) (|pretendTo| |a| |t|))
            (#1='T
             (PROGN
              (SETQ |ax| (|axFormatType| |a|))
@@ -944,7 +938,7 @@
 ;       name
 ;    opOf name = 'Zero => '_0
 ;    opOf name = 'One => '_1
-;    error "bad op name"
+;    error '"bad op name"
 
 (DEFUN |axOpTran| (|name|)
   (PROG ()
@@ -955,7 +949,7 @@
              ((EQ |name| 'SEGMENT) '|..|) ((EQL |name| 1) '|1|)
              ((EQL |name| 0) '|0|) (#1='T |name|)))
       ((EQ (|opOf| |name|) '|Zero|) '|0|) ((EQ (|opOf| |name|) '|One|) '|1|)
-      (#1# (|error| '|bad op name|))))))
+      (#1# (|error| "bad op name"))))))
 
 ; axFormatOpSig(name, [result,:argtypes]) ==
 ;    ['Declare, axOpTran name,
@@ -1000,8 +994,7 @@
 ;    op = 'IF => axFormatOp pred
 ;    op = 'has =>
 ;       [name,type] := args
-;       if name = '$ then name := '%
-;       else name := axFormatOp name
+;       name := axFormatOp(name)
 ;       ftype := axFormatOp type
 ;       if ftype is ['Declare,:.] then
 ;            ftype := ['With, [], ftype]
@@ -1013,7 +1006,7 @@
 ;    op = 'or  => ['Or,:axArglist]
 ;    op = 'NOT => ['Not,:axArglist]
 ;    op = 'not => ['Not,:axArglist]
-;    error LIST("unknown predicate", pred)
+;    error LIST('"unknown predicate", pred)
 
 (DEFUN |axFormatPred| (|pred|)
   (PROG (|op| |args| |name| |type| |ftype| |axArglist|)
@@ -1028,8 +1021,7 @@
                     (PROGN
                      (SETQ |name| (CAR |args|))
                      (SETQ |type| (CADR |args|))
-                     (COND ((EQ |name| '$) (SETQ |name| '%))
-                           (#1# (SETQ |name| (|axFormatOp| |name|))))
+                     (SETQ |name| (|axFormatOp| |name|))
                      (SETQ |ftype| (|axFormatOp| |type|))
                      (COND
                       ((AND (CONSP |ftype|) (EQ (CAR |ftype|) '|Declare|))
@@ -1060,7 +1052,7 @@
                            ((EQ |op| '|not|) (CONS '|Not| |axArglist|))
                            (#1#
                             (|error|
-                             (LIST '|unknown predicate| |pred|)))))))))))))
+                             (LIST "unknown predicate" |pred|)))))))))))))
 
 ; axFormatAugmentOp(op, axFormattedPred, pred, augargs) ==
 ;   if axFormattedPred is ['Test, ['Has, arg, augtype]] then
@@ -1265,7 +1257,7 @@
 
 ; addDefaults(catname, withform) ==
 ;   withform isnt ['With, joins, ['Sequence,: oplist]] =>
-;      error "bad category body"
+;      error '"bad category body"
 ;   null(defaults := getDefaultingOps catname) => withform
 ;   defaultdefs := [decl for decl in defaults]
 ;   ['With, joins,
@@ -1292,7 +1284,7 @@
                                (PROGN
                                 (SETQ |oplist| (CDR |ISTMP#3|))
                                 #1='T)))))))))
-       (|error| '|bad category body|))
+       (|error| "bad category body"))
       ((NULL (SETQ |defaults| (|getDefaultingOps| |catname|))) |withform|)
       (#1#
        (PROGN
@@ -1315,7 +1307,7 @@
 
 ; makeDefaultDef(decl) ==
 ;   decl isnt ['Declare, op, type] =>
-;        error LIST("bad default definition", decl)
+;        error LIST('"bad default definition", decl)
 ;   $defaultFlag := true
 ;   type is ['Apply, "->", args, result] =>
 ;        ['Define, decl, ['Lambda, makeDefaultArgs args, result,
@@ -1336,7 +1328,7 @@
                     (SETQ |ISTMP#2| (CDR |ISTMP#1|))
                     (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
                          (PROGN (SETQ |type| (CAR |ISTMP#2|)) #1='T)))))))
-       (|error| (LIST '|bad default definition| |decl|)))
+       (|error| (LIST "bad default definition" |decl|)))
       (#1#
        (PROGN
         (SETQ |$defaultFlag| T)
@@ -1362,7 +1354,7 @@
           (LIST '|Define| (LIST '|Declare| |op| |type|) '|dummyDefault|)))))))))
 
 ; makeDefaultArgs args ==
-;   args isnt ['Comma,:argl] => error "bad default argument list"
+;   args isnt ['Comma,:argl] => error '"bad default argument list"
 ;   ['Comma,: [['Declare,v,t] for v in $TriangleVariableList for t in argl]]
 
 (DEFUN |makeDefaultArgs| (|args|)
@@ -1372,7 +1364,7 @@
       ((NOT
         (AND (CONSP |args|) (EQ (CAR |args|) '|Comma|)
              (PROGN (SETQ |argl| (CDR |args|)) #1='T)))
-       (|error| '|bad default argument list|))
+       (|error| "bad default argument list"))
       (#1#
        (CONS '|Comma|
              ((LAMBDA (|bfVar#48| |bfVar#46| |v| |bfVar#47| |t|)
@@ -1505,7 +1497,7 @@
 
 ; axCatSignature(sig) ==
 ;     ATOM sig => sig
-;     sig = '($) => '$
+;     sig = '(%) => '%
 ;     CAR(sig) = "local" => CADR(sig)
 ;     CAR(sig) = "QUOTE" => CADR(sig)
 ;     [axCatSignature elt for elt in sig]
@@ -1513,7 +1505,7 @@
 (DEFUN |axCatSignature| (|sig|)
   (PROG ()
     (RETURN
-     (COND ((ATOM |sig|) |sig|) ((EQUAL |sig| '($)) '$)
+     (COND ((ATOM |sig|) |sig|) ((EQUAL |sig| '(%)) '%)
            ((EQ (CAR |sig|) '|local|) (CADR |sig|))
            ((EQ (CAR |sig|) 'QUOTE) (CADR |sig|))
            (#1='T

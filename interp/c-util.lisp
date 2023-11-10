@@ -131,9 +131,9 @@
 ;   sayBrightly ['"****** level",'%b,level,'%d,'" ******"]
 ;   [$x, $m, $f, $exitModeStack] := $s.(level - 1)
 ;   ($X:=$x;$M:=$m;$F:=$f)
-;   SAY("$x:= ",$x)
-;   SAY("$m:= ",$m)
-;   SAY "$f:="
+;   SAY('"$x:= ",$x)
+;   SAY('"$m:= ",$m)
+;   SAY '"$f:="
 ;   limited_print1_stdout($f)
 ;   nil
 
@@ -156,9 +156,9 @@
       (SETQ $X |$x|)
       (SETQ $M |$m|)
       (SETQ $F |$f|)
-      (SAY '|$x:= | |$x|)
-      (SAY '|$m:= | |$m|)
-      (SAY '|$f:=|)
+      (SAY "$x:= " |$x|)
+      (SAY "$m:= " |$m|)
+      (SAY "$f:=")
       (|limited_print1_stdout| |$f|)
       NIL))))
 
@@ -410,7 +410,7 @@
 ;       pair:= assoc("mode",p) =>
 ;         pair':= assoc("mode",p') =>
 ;           m'' := unifiable(rest pair, rest pair', ce) => LIST ["mode", :m'']
-;           stackSemanticError(['%b,$var,'%d,"has two modes: "],nil)
+;           stackSemanticError(['%b,$var,'%d,'"has two modes: "],nil)
 ;        --stackWarning ("mode for",'%b,$var,'%d,"introduced conditionally")
 ;         LIST ["conditionalmode",:rest pair]
 ;         --LIST pair
@@ -530,7 +530,7 @@
                     |ce|))
            (LIST (CONS '|mode| |m''|)))
           (#1='T
-           (|stackSemanticError| (LIST '|%b| |$var| '|%d| '|has two modes: |)
+           (|stackSemanticError| (LIST '|%b| |$var| '|%d| "has two modes: ")
             NIL))))
         (#1# (LIST (CONS '|conditionalmode| (CDR |pair|))))))
       ((SETQ |pair'| (|assoc| '|mode| |p'|))
@@ -594,8 +594,8 @@
 ;                      --check for conflicts with earlier mode
 ;                      if vv:=LASSOC("mode",e) then
 ;                         if v ~=vv then
-;                           stackWarning ["The conditional modes ",
-;                                      v," and ",vv," conflict"]
+;                           stackWarning ['"The conditional modes ",
+;                                      v,'" and ",vv,'" conflict"]
 ;         LIST c
 
 (DEFUN |addContour| (|c| E)
@@ -650,8 +650,8 @@
           (COND
            ((NOT (EQUAL |v| |vv|))
             (|stackWarning|
-             (LIST '|The conditional modes | |v| '| and | |vv|
-                   '| conflict|))))))))))))
+             (LIST "The conditional modes " |v| " and " |vv|
+                   " conflict"))))))))))))
 
 ; makeCommonEnvironment(e,e') ==
 ;   interE makeSameLength(e,e') where  --$ie:=
@@ -733,10 +733,10 @@
 ;       SAY('"******CONTOUR ",j,'", LEVEL ",i,'":******")
 ;       for z in y repeat
 ;         TERPRI()
-;         SAY("Properties Of: ",first z)
+;         SAY('"Properties Of: ",first z)
 ;         for u in rest z repeat
 ;           PRIN0 first u
-;           printString ": "
+;           printString '": "
 ;           PRETTYPRINT tran(rest u,first u) where
 ;             tran(val,prop) ==
 ;               prop="value" => DROP(-1,val)
@@ -768,7 +768,7 @@
                        (#1#
                         (PROGN
                          (TERPRI)
-                         (SAY '|Properties Of: | (CAR |z|))
+                         (SAY "Properties Of: " (CAR |z|))
                          ((LAMBDA (|bfVar#27| |u|)
                             (LOOP
                              (COND
@@ -778,7 +778,7 @@
                               (#1#
                                (PROGN
                                 (PRIN0 (CAR |u|))
-                                (|printString| '|: |)
+                                (|printString| ": ")
                                 (PRETTYPRINT
                                  (|printEnv,tran| (CDR |u|) (CAR |u|))))))
                              (SETQ |bfVar#27| (CDR |bfVar#27|))))
@@ -801,10 +801,10 @@
 ;       SAY('"******CONTOUR ",j,'", LEVEL ",i,'":******")
 ;       for z in y | not LASSOC("modemap",rest z) repeat
 ;         TERPRI()
-;         SAY("Properties Of: ",first z)
+;         SAY('"Properties Of: ",first z)
 ;         for u in rest z repeat
 ;           PRIN0 first u
-;           printString ": "
+;           printString '": "
 ;           PRETTYPRINT tran(rest u,first u) where
 ;             tran(val,prop) ==
 ;               prop="value" => DROP(-1,val)
@@ -837,7 +837,7 @@
                         (AND (NULL (LASSOC '|modemap| (CDR |z|)))
                              (PROGN
                               (TERPRI)
-                              (SAY '|Properties Of: | (CAR |z|))
+                              (SAY "Properties Of: " (CAR |z|))
                               ((LAMBDA (|bfVar#31| |u|)
                                  (LOOP
                                   (COND
@@ -849,7 +849,7 @@
                                    (#1#
                                     (PROGN
                                      (PRIN0 (CAR |u|))
-                                     (|printString| '|: |)
+                                     (|printString| ": ")
                                      (PRETTYPRINT
                                       (|prEnv,tran| (CDR |u|) (CAR |u|))))))
                                   (SETQ |bfVar#31| (CDR |bfVar#31|))))
@@ -875,7 +875,7 @@
 ;           listOfOperatorsSeenSoFar:= [first z,:listOfOperatorsSeenSoFar]
 ;           TERPRI()
 ;           PRIN0 first z
-;           printString ": "
+;           printString '": "
 ;           PRETTYPRINT modemap
 
 (DEFUN |prModemaps| (E)
@@ -911,7 +911,7 @@
                                   (CONS (CAR |z|) |listOfOperatorsSeenSoFar|))
                           (TERPRI)
                           (PRIN0 (CAR |z|))
-                          (|printString| '|: |)
+                          (|printString| ": ")
                           (PRETTYPRINT |modemap|)))))
                       (SETQ |bfVar#34| (CDR |bfVar#34|))))
                    |y| NIL)))
@@ -1060,14 +1060,14 @@
       ('T NIL)))))
 
 ; isSubset(x,y,e) ==
-;   x = "$" and y = "Rep" or x = y or is_integer_subset(opOf(x), opOf(y)) or
+;   x = "%" and y = "Rep" or x = y or is_integer_subset(opOf(x), opOf(y)) or
 ;       LASSOC(opOf(x), get(opOf(y), "SubDomain", e)) or
-;         opOf(y)='Type
+;         opOf(y) = 'Type
 
 (DEFUN |isSubset| (|x| |y| |e|)
   (PROG ()
     (RETURN
-     (OR (AND (EQ |x| '$) (EQ |y| '|Rep|)) (EQUAL |x| |y|)
+     (OR (AND (EQ |x| '%) (EQ |y| '|Rep|)) (EQUAL |x| |y|)
          (|is_integer_subset| (|opOf| |x|) (|opOf| |y|))
          (LASSOC (|opOf| |x|) (|get| (|opOf| |y|) '|SubDomain| |e|))
          (EQ (|opOf| |y|) '|Type|)))))
@@ -1567,11 +1567,11 @@
 ; printSignature(before,op,[target,:argSigList]) ==
 ;   printString before
 ;   printString op
-;   printString ": _("
+;   printString '": _("
 ;   if argSigList then
 ;     printAny first argSigList
-;     for m in rest argSigList repeat (printString ","; printAny m)
-;   printString "_) -> "
+;     for m in rest argSigList repeat (printString '","; printAny m)
+;   printString '"_) -> "
 ;   printAny target
 ;   TERPRI()
 
@@ -1583,7 +1583,7 @@
       (SETQ |argSigList| (CDR |bfVar#48|))
       (|printString| |before|)
       (|printString| |op|)
-      (|printString| '|: (|)
+      (|printString| ": (")
       (COND
        (|argSigList| (|printAny| (CAR |argSigList|))
         ((LAMBDA (|bfVar#47| |m|)
@@ -1591,10 +1591,10 @@
             (COND
              ((OR (ATOM |bfVar#47|) (PROGN (SETQ |m| (CAR |bfVar#47|)) NIL))
               (RETURN NIL))
-             ('T (PROGN (|printString| '|,|) (|printAny| |m|))))
+             ('T (PROGN (|printString| ",") (|printAny| |m|))))
             (SETQ |bfVar#47| (CDR |bfVar#47|))))
          (CDR |argSigList|) NIL)))
-      (|printString| '|) -> |)
+      (|printString| ") -> ")
       (|printAny| |target|)
       (TERPRI)))))
 
@@ -1686,24 +1686,24 @@
 ;                               for x in l]
 ;   form is ["CATEGORY",.,:l] =>
 ;     member(form',l) or
-;       stackWarning ["not known that ",form'," is of mode ",form] or true
+;       stackWarning ['"not known that ",form','" is of mode ",form] or true
 ;   isCategoryForm(form) =>
 ;           --Constructs the associated vector
 ;     formVec := (compMakeCategoryObject(form, e)).expr
 ;             --Must be e to pick up locally bound domains
 ;     form' is ["SIGNATURE",op,args,:.] =>
 ;         assoc([op,args],formVec.(1)) or
-;             assoc(SUBSTQ(domain,"$",[op,args]),
-;                   SUBSTQ(domain,"$",formVec.(1)))
+;             assoc(SUBSTQ(domain, "%", [op, args]),
+;                   SUBSTQ(domain, "%", formVec.(1)))
 ;     form' is ["ATTRIBUTE",at] => BREAK()
 ;     form' is ["IF",:.] => true --temporary hack so comp won't fail
 ;     -- Are we dealing with an Aldor category?  If so use the "has" function ...
 ;     # formVec = 1 => newHasTest(form,form')
 ;     catvlist:= formVec.4
 ;     member(form',first catvlist) or
-;      member(form',SUBSTQ(domain,"$",first catvlist)) or
+;      member(form', SUBSTQ(domain, "%", first(catvlist))) or
 ;       (or/
-;         [extendsCategoryForm(domain, SUBSTQ(domain, "$", cat), form', e)
+;         [extendsCategoryForm(domain, SUBSTQ(domain, "%", cat), form', e)
 ;           for [cat,:.] in CADR catvlist])
 ;   nil
 
@@ -1767,7 +1767,7 @@
                        (PROGN (SETQ |l| (CDR |ISTMP#1|)) #1#))))
             (OR (|member| |form'| |l|)
                 (|stackWarning|
-                 (LIST '|not known that | |form'| '| is of mode | |form|))
+                 (LIST "not known that " |form'| " is of mode " |form|))
                 T))
            ((|isCategoryForm| |form|)
             (PROGN
@@ -1783,8 +1783,8 @@
                            (AND (CONSP |ISTMP#2|)
                                 (PROGN (SETQ |args| (CAR |ISTMP#2|)) #1#))))))
                (OR (|assoc| (LIST |op| |args|) (ELT |formVec| 1))
-                   (|assoc| (SUBSTQ |domain| '$ (LIST |op| |args|))
-                    (SUBSTQ |domain| '$ (ELT |formVec| 1)))))
+                   (|assoc| (SUBSTQ |domain| '% (LIST |op| |args|))
+                    (SUBSTQ |domain| '% (ELT |formVec| 1)))))
               ((AND (CONSP |form'|) (EQ (CAR |form'|) 'ATTRIBUTE)
                     (PROGN
                      (SETQ |ISTMP#1| (CDR |form'|))
@@ -1797,7 +1797,7 @@
                (PROGN
                 (SETQ |catvlist| (ELT |formVec| 4))
                 (OR (|member| |form'| (CAR |catvlist|))
-                    (|member| |form'| (SUBSTQ |domain| '$ (CAR |catvlist|)))
+                    (|member| |form'| (SUBSTQ |domain| '% (CAR |catvlist|)))
                     ((LAMBDA (|bfVar#60| |bfVar#59| |bfVar#58|)
                        (LOOP
                         (COND
@@ -1810,7 +1810,7 @@
                                (PROGN
                                 (SETQ |bfVar#60|
                                         (|extendsCategoryForm| |domain|
-                                         (SUBSTQ |domain| '$ |cat|) |form'|
+                                         (SUBSTQ |domain| '% |cat|) |form'|
                                          |e|))
                                 (COND (|bfVar#60| (RETURN |bfVar#60|)))))))
                         (SETQ |bfVar#59| (CDR |bfVar#59|))))
@@ -1969,7 +1969,7 @@
       (#1# |x|)))))
 
 ; traceUp() ==
-;   atom $x => sayBrightly "$x is an atom"
+;   atom $x => sayBrightly '"$x is an atom"
 ;   for y in rest $x repeat
 ;     u:= comp(y,$EmptyMode,$f) =>
 ;       sayBrightly [y,'" ==> mode",'%b,u.mode,'%d]
@@ -1978,7 +1978,7 @@
 (DEFUN |traceUp| ()
   (PROG (|u|)
     (RETURN
-     (COND ((ATOM |$x|) (|sayBrightly| '|$x is an atom|))
+     (COND ((ATOM |$x|) (|sayBrightly| "$x is an atom"))
            (#1='T
             ((LAMBDA (|bfVar#65| |y|)
                (LOOP
@@ -2007,7 +2007,7 @@
 ; traceDown() ==
 ;   mmList:= getFormModemaps($x,$f) =>
 ;     for mm in mmList repeat if u:= qModemap mm then return u
-;   sayBrightly "no modemaps for $x"
+;   sayBrightly '"no modemaps for $x"
 
 (DEFUN |traceDown| ()
   (PROG (|u| |mmList|)
@@ -2022,13 +2022,13 @@
             (#1='T (COND ((SETQ |u| (|qModemap| |mm|)) (RETURN |u|)))))
            (SETQ |bfVar#66| (CDR |bfVar#66|))))
         |mmList| NIL))
-      (#1# (|sayBrightly| '|no modemaps for $x|))))))
+      (#1# (|sayBrightly| "no modemaps for $x"))))))
 
 ; qModemap mm ==
 ;   sayBrightly ['%b,"modemap",'%d,:formatModemap mm]
 ;   [[dc,target,:sl],[pred,:.]]:= mm
 ;   and/[qArg(a,m) for a in rest $x for m in sl] => target
-;   sayBrightly ['%b,"fails",'%d,'%l]
+;   sayBrightly ['%b,'"fails",'%d,'%l]
 
 (DEFUN |qModemap| (|mm|)
   (PROG (|dc| |target| |sl| |pred|)
@@ -2055,13 +2055,13 @@
             (SETQ |bfVar#68| (CDR |bfVar#68|))))
          T (CDR |$x|) NIL |sl| NIL)
         |target|)
-       (#2# (|sayBrightly| (LIST '|%b| '|fails| '|%d| '|%l|))))))))
+       (#2# (|sayBrightly| (LIST '|%b| "fails" '|%d| '|%l|))))))))
 
 ; qArg(a,m) ==
 ;   yesOrNo:=
 ;     u:= comp(a,m,$f) => "yes"
 ;     "no"
-;   sayBrightly [a," --> ",m,'%b,yesOrNo,'%d]
+;   sayBrightly [a,'" --> ",m,'%b,yesOrNo,'%d]
 ;   yesOrNo="yes"
 
 (DEFUN |qArg| (|a| |m|)
@@ -2070,13 +2070,13 @@
      (PROGN
       (SETQ |yesOrNo|
               (COND ((SETQ |u| (|comp| |a| |m| |$f|)) '|yes|) ('T '|no|)))
-      (|sayBrightly| (LIST |a| '| --> | |m| '|%b| |yesOrNo| '|%d|))
+      (|sayBrightly| (LIST |a| " --> " |m| '|%b| |yesOrNo| '|%d|))
       (EQ |yesOrNo| '|yes|)))))
 
 ; _?comp x ==
 ;   msg:=
 ;     u:= comp(x,$EmptyMode,$f) =>
-;       [MAKESTRING "compiles to mode",'%b,u.mode,'%d]
+;       [MAKESTRING '"compiles to mode",'%b,u.mode,'%d]
 ;     nil
 ;   sayBrightly msg
 
@@ -2087,7 +2087,7 @@
       (SETQ |msg|
               (COND
                ((SETQ |u| (|comp| |x| |$EmptyMode| |$f|))
-                (LIST (MAKESTRING '|compiles to mode|) '|%b| (CADR |u|) '|%d|))
+                (LIST (MAKESTRING "compiles to mode") '|%b| (CADR |u|) '|%d|))
                ('T NIL)))
       (|sayBrightly| |msg|)))))
 
@@ -2115,19 +2115,19 @@
      (|displayProplist| |x| (LIST (CONS '|value| (|get| |x| '|value| |$f|)))))))
 
 ; displayProplist(x,alist) ==
-;   sayBrightly ["properties of",'%b,x,'%d,":"]
+;   sayBrightly ['"properties of",'%b,x,'%d,'":"]
 ;   fn alist where
 ;     fn alist ==
 ;       alist is [[prop,:val],:l] =>
 ;         if prop="value" then val:= [val.expr,val.mode,'"..."]
-;         sayBrightly ["   ",'%b,prop,'%d,": ",val]
+;         sayBrightly ['"   ",'%b,prop,'%d,'": ",val]
 ;         fn deleteAssoc(prop,l)
 
 (DEFUN |displayProplist| (|x| |alist|)
   (PROG ()
     (RETURN
      (PROGN
-      (|sayBrightly| (LIST '|properties of| '|%b| |x| '|%d| '|:|))
+      (|sayBrightly| (LIST "properties of" '|%b| |x| '|%d| ":"))
       (|displayProplist,fn| |alist|)))))
 (DEFUN |displayProplist,fn| (|alist|)
   (PROG (|ISTMP#1| |prop| |val| |l|)
@@ -2147,7 +2147,7 @@
          (COND
           ((EQ |prop| '|value|)
            (SETQ |val| (LIST (CAR |val|) (CADR |val|) "..."))))
-         (|sayBrightly| (LIST '|   | '|%b| |prop| '|%d| '|: | |val|))
+         (|sayBrightly| (LIST "   " '|%b| |prop| '|%d| ": " |val|))
          (|displayProplist,fn| (|deleteAssoc| |prop| |l|)))))))))
 
 ; displayModemaps E ==

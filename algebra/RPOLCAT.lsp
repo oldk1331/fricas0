@@ -6,8 +6,8 @@
 (DEFPARAMETER |RecursivePolynomialCategory;AL| 'NIL) 
 
 (DEFUN |RecursivePolynomialCategory| (|t#1| |t#2| |t#3|)
-  (LET (#1=#:G825
-        (#2=#:G826
+  (LET (#1=#:G584
+        (#2=#:G585
          (LIST (|devaluate| |t#1|) (|devaluate| |t#2|) (|devaluate| |t#3|))))
     (COND ((SETQ #1# (|assoc| #2# |RecursivePolynomialCategory;AL|)) (CDR #1#))
           (T
@@ -21,7 +21,7 @@
            #1#)))) 
 
 (DEFUN |RecursivePolynomialCategory;| (|t#1| |t#2| |t#3|)
-  (SPROG ((#1=#:G824 NIL))
+  (SPROG ((#1=#:G583 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3|)
@@ -34,127 +34,127 @@
                                             (|PolynomialCategory| '|t#1| '|t#2|
                                                                   '|t#3|)
                                             (|mkCategory|
-                                             '(((|mvar| (|t#3| $)) T)
+                                             '(((|mvar| (|t#3| %)) T)
                                                ((|mdeg|
-                                                 ((|NonNegativeInteger|) $))
+                                                 ((|NonNegativeInteger|) %))
                                                 T)
-                                               ((|init| ($ $)) T)
-                                               ((|head| ($ $)) T)
-                                               ((|tail| ($ $)) T)
-                                               ((|deepestTail| ($ $)) T)
+                                               ((|init| (% %)) T)
+                                               ((|head| (% %)) T)
+                                               ((|tail| (% %)) T)
+                                               ((|deepestTail| (% %)) T)
                                                ((|iteratedInitials|
-                                                 ((|List| $) $))
+                                                 ((|List| %) %))
                                                 T)
-                                               ((|deepestInitial| ($ $)) T)
+                                               ((|deepestInitial| (% %)) T)
                                                ((|leadingCoefficient|
-                                                 ($ $ |t#3|))
+                                                 (% % |t#3|))
                                                 T)
-                                               ((|reductum| ($ $ |t#3|)) T)
-                                               ((|monic?| ((|Boolean|) $)) T)
-                                               ((|quasiMonic?| ((|Boolean|) $))
+                                               ((|reductum| (% % |t#3|)) T)
+                                               ((|monic?| ((|Boolean|) %)) T)
+                                               ((|quasiMonic?| ((|Boolean|) %))
                                                 T)
-                                               ((|mainMonomial| ($ $)) T)
-                                               ((|leastMonomial| ($ $)) T)
+                                               ((|mainMonomial| (% %)) T)
+                                               ((|leastMonomial| (% %)) T)
                                                ((|mainCoefficients|
-                                                 ((|List| $) $))
+                                                 ((|List| %) %))
                                                 T)
                                                ((|mainMonomials|
-                                                 ((|List| $) $))
+                                                 ((|List| %) %))
                                                 T)
                                                ((|RittWuCompare|
                                                  ((|Union| (|Boolean|)
                                                            "failed")
-                                                  $ $))
+                                                  % %))
                                                 T)
                                                ((|infRittWu?|
-                                                 ((|Boolean|) $ $))
+                                                 ((|Boolean|) % %))
                                                 T)
                                                ((|supRittWu?|
-                                                 ((|Boolean|) $ $))
+                                                 ((|Boolean|) % %))
                                                 T)
-                                               ((|reduced?| ((|Boolean|) $ $))
+                                               ((|reduced?| ((|Boolean|) % %))
                                                 T)
                                                ((|reduced?|
-                                                 ((|Boolean|) $ (|List| $)))
+                                                 ((|Boolean|) % (|List| %)))
                                                 T)
                                                ((|headReduced?|
-                                                 ((|Boolean|) $ $))
+                                                 ((|Boolean|) % %))
                                                 T)
                                                ((|headReduced?|
-                                                 ((|Boolean|) $ (|List| $)))
+                                                 ((|Boolean|) % (|List| %)))
                                                 T)
                                                ((|initiallyReduced?|
-                                                 ((|Boolean|) $ $))
+                                                 ((|Boolean|) % %))
                                                 T)
                                                ((|initiallyReduced?|
-                                                 ((|Boolean|) $ (|List| $)))
+                                                 ((|Boolean|) % (|List| %)))
                                                 T)
                                                ((|normalized?|
-                                                 ((|Boolean|) $ $))
+                                                 ((|Boolean|) % %))
                                                 T)
                                                ((|normalized?|
-                                                 ((|Boolean|) $ (|List| $)))
+                                                 ((|Boolean|) % (|List| %)))
                                                 T)
-                                               ((|prem| ($ $ $)) T)
-                                               ((|pquo| ($ $ $)) T)
-                                               ((|prem| ($ $ $ |t#3|)) T)
-                                               ((|pquo| ($ $ $ |t#3|)) T)
-                                               ((|lazyPrem| ($ $ $)) T)
-                                               ((|lazyPquo| ($ $ $)) T)
-                                               ((|lazyPrem| ($ $ $ |t#3|)) T)
-                                               ((|lazyPquo| ($ $ $ |t#3|)) T)
+                                               ((|prem| (% % %)) T)
+                                               ((|pquo| (% % %)) T)
+                                               ((|prem| (% % % |t#3|)) T)
+                                               ((|pquo| (% % % |t#3|)) T)
+                                               ((|lazyPrem| (% % %)) T)
+                                               ((|lazyPquo| (% % %)) T)
+                                               ((|lazyPrem| (% % % |t#3|)) T)
+                                               ((|lazyPquo| (% % % |t#3|)) T)
                                                ((|lazyPremWithDefault|
-                                                 ((|Record| (|:| |coef| $)
+                                                 ((|Record| (|:| |coef| %)
                                                             (|:| |gap|
                                                                  (|NonNegativeInteger|))
                                                             (|:| |remainder|
-                                                                 $))
-                                                  $ $))
+                                                                 %))
+                                                  % %))
                                                 T)
                                                ((|lazyPremWithDefault|
-                                                 ((|Record| (|:| |coef| $)
+                                                 ((|Record| (|:| |coef| %)
                                                             (|:| |gap|
                                                                  (|NonNegativeInteger|))
                                                             (|:| |remainder|
-                                                                 $))
-                                                  $ $ |t#3|))
+                                                                 %))
+                                                  % % |t#3|))
                                                 T)
                                                ((|lazyPseudoDivide|
-                                                 ((|Record| (|:| |coef| $)
+                                                 ((|Record| (|:| |coef| %)
                                                             (|:| |gap|
                                                                  (|NonNegativeInteger|))
-                                                            (|:| |quotient| $)
+                                                            (|:| |quotient| %)
                                                             (|:| |remainder|
-                                                                 $))
-                                                  $ $))
+                                                                 %))
+                                                  % %))
                                                 T)
                                                ((|lazyPseudoDivide|
-                                                 ((|Record| (|:| |coef| $)
+                                                 ((|Record| (|:| |coef| %)
                                                             (|:| |gap|
                                                                  (|NonNegativeInteger|))
-                                                            (|:| |quotient| $)
+                                                            (|:| |quotient| %)
                                                             (|:| |remainder|
-                                                                 $))
-                                                  $ $ |t#3|))
+                                                                 %))
+                                                  % % |t#3|))
                                                 T)
                                                ((|pseudoDivide|
-                                                 ((|Record| (|:| |quotient| $)
+                                                 ((|Record| (|:| |quotient| %)
                                                             (|:| |remainder|
-                                                                 $))
-                                                  $ $))
+                                                                 %))
+                                                  % %))
                                                 T)
-                                               ((|monicModulo| ($ $ $)) T)
+                                               ((|monicModulo| (% % %)) T)
                                                ((|lazyResidueClass|
-                                                 ((|Record| (|:| |polnum| $)
-                                                            (|:| |polden| $)
+                                                 ((|Record| (|:| |polnum| %)
+                                                            (|:| |polden| %)
                                                             (|:| |power|
                                                                  (|NonNegativeInteger|)))
-                                                  $ $))
+                                                  % %))
                                                 T)
-                                               ((|headReduce| ($ $ $)) T)
-                                               ((|initiallyReduce| ($ $ $)) T)
+                                               ((|headReduce| (% % %)) T)
+                                               ((|initiallyReduce| (% % %)) T)
                                                ((|retractIfCan|
-                                                 ((|Union| $ "failed")
+                                                 ((|Union| % "failed")
                                                   (|Polynomial|
                                                    (|Fraction| (|Integer|)))))
                                                 (AND
@@ -166,7 +166,7 @@
                                                         (|ConvertibleTo|
                                                          (|Symbol|)))))
                                                ((|retract|
-                                                 ($
+                                                 (%
                                                   (|Polynomial|
                                                    (|Fraction| (|Integer|)))))
                                                 (AND
@@ -178,7 +178,7 @@
                                                         (|ConvertibleTo|
                                                          (|Symbol|)))))
                                                ((|convert|
-                                                 ($
+                                                 (%
                                                   (|Polynomial|
                                                    (|Fraction| (|Integer|)))))
                                                 (AND
@@ -190,7 +190,7 @@
                                                         (|ConvertibleTo|
                                                          (|Symbol|)))))
                                                ((|retractIfCan|
-                                                 ((|Union| $ "failed")
+                                                 ((|Union| % "failed")
                                                   (|Polynomial| (|Integer|))))
                                                 (AND
                                                  (|has| |t#1|
@@ -200,7 +200,7 @@
                                                         (|ConvertibleTo|
                                                          (|Symbol|)))))
                                                ((|retract|
-                                                 ($
+                                                 (%
                                                   (|Polynomial| (|Integer|))))
                                                 (AND
                                                  (|has| |t#1|
@@ -210,7 +210,7 @@
                                                         (|ConvertibleTo|
                                                          (|Symbol|)))))
                                                ((|convert|
-                                                 ($
+                                                 (%
                                                   (|Polynomial| (|Integer|))))
                                                 (AND
                                                  (|has| |t#1|
@@ -220,100 +220,100 @@
                                                         (|ConvertibleTo|
                                                          (|Symbol|)))))
                                                ((|retractIfCan|
-                                                 ((|Union| $ "failed")
+                                                 ((|Union| % "failed")
                                                   (|Polynomial| |t#1|)))
                                                 (|has| |t#3|
                                                        (|ConvertibleTo|
                                                         (|Symbol|))))
                                                ((|retract|
-                                                 ($ (|Polynomial| |t#1|)))
+                                                 (% (|Polynomial| |t#1|)))
                                                 (|has| |t#3|
                                                        (|ConvertibleTo|
                                                         (|Symbol|))))
                                                ((|convert|
-                                                 ($ (|Polynomial| |t#1|)))
+                                                 (% (|Polynomial| |t#1|)))
                                                 (|has| |t#3|
                                                        (|ConvertibleTo|
                                                         (|Symbol|))))
                                                ((|primPartElseUnitCanonical|
-                                                 ($ $))
+                                                 (% %))
                                                 (|has| |t#1|
                                                        (|IntegralDomain|)))
                                                ((|primPartElseUnitCanonical!|
-                                                 ($ $))
+                                                 (% %))
                                                 (|has| |t#1|
                                                        (|IntegralDomain|)))
-                                               ((|exactQuotient| ($ $ |t#1|))
+                                               ((|exactQuotient| (% % |t#1|))
                                                 (|has| |t#1|
                                                        (|IntegralDomain|)))
-                                               ((|exactQuotient!| ($ $ |t#1|))
+                                               ((|exactQuotient!| (% % |t#1|))
                                                 (|has| |t#1|
                                                        (|IntegralDomain|)))
-                                               ((|exactQuotient| ($ $ $))
+                                               ((|exactQuotient| (% % %))
                                                 (|has| |t#1|
                                                        (|IntegralDomain|)))
-                                               ((|exactQuotient!| ($ $ $))
+                                               ((|exactQuotient!| (% % %))
                                                 (|has| |t#1|
                                                        (|IntegralDomain|)))
-                                               ((|subResultantGcd| ($ $ $))
+                                               ((|subResultantGcd| (% % %))
                                                 (|has| |t#1|
                                                        (|IntegralDomain|)))
                                                ((|extendedSubResultantGcd|
-                                                 ((|Record| (|:| |gcd| $)
-                                                            (|:| |coef1| $)
-                                                            (|:| |coef2| $))
-                                                  $ $))
+                                                 ((|Record| (|:| |gcd| %)
+                                                            (|:| |coef1| %)
+                                                            (|:| |coef2| %))
+                                                  % %))
                                                 (|has| |t#1|
                                                        (|IntegralDomain|)))
                                                ((|halfExtendedSubResultantGcd1|
-                                                 ((|Record| (|:| |gcd| $)
-                                                            (|:| |coef1| $))
-                                                  $ $))
+                                                 ((|Record| (|:| |gcd| %)
+                                                            (|:| |coef1| %))
+                                                  % %))
                                                 (|has| |t#1|
                                                        (|IntegralDomain|)))
                                                ((|halfExtendedSubResultantGcd2|
-                                                 ((|Record| (|:| |gcd| $)
-                                                            (|:| |coef2| $))
-                                                  $ $))
+                                                 ((|Record| (|:| |gcd| %)
+                                                            (|:| |coef2| %))
+                                                  % %))
                                                 (|has| |t#1|
                                                        (|IntegralDomain|)))
-                                               ((|resultant| ($ $ $))
+                                               ((|resultant| (% % %))
                                                 (|has| |t#1|
                                                        (|IntegralDomain|)))
                                                ((|subResultantChain|
-                                                 ((|List| $) $ $))
+                                                 ((|List| %) % %))
                                                 (|has| |t#1|
                                                        (|IntegralDomain|)))
-                                               ((|lastSubResultant| ($ $ $))
+                                               ((|lastSubResultant| (% % %))
                                                 (|has| |t#1|
                                                        (|IntegralDomain|)))
                                                ((|LazardQuotient|
-                                                 ($ $ $
+                                                 (% % %
                                                   (|NonNegativeInteger|)))
                                                 (|has| |t#1|
                                                        (|IntegralDomain|)))
                                                ((|LazardQuotient2|
-                                                 ($ $ $ $
+                                                 (% % % %
                                                   (|NonNegativeInteger|)))
                                                 (|has| |t#1|
                                                        (|IntegralDomain|)))
                                                ((|next_subResultant2|
-                                                 ($ $ $ $ $))
+                                                 (% % % % %))
                                                 (|has| |t#1|
                                                        (|IntegralDomain|)))
                                                ((|iexactQuo|
                                                  (|t#1| |t#1| |t#1|))
                                                 (|has| |t#1|
                                                        (|IntegralDomain|)))
-                                               ((|gcd| (|t#1| |t#1| $))
+                                               ((|gcd| (|t#1| |t#1| %))
                                                 (|has| |t#1| (|GcdDomain|)))
-                                               ((|primitivePart!| ($ $))
+                                               ((|primitivePart!| (% %))
                                                 (|has| |t#1| (|GcdDomain|)))
-                                               ((|mainContent| ($ $))
+                                               ((|mainContent| (% %))
                                                 (|has| |t#1| (|GcdDomain|)))
-                                               ((|mainPrimitivePart| ($ $))
+                                               ((|mainPrimitivePart| (% %))
                                                 (|has| |t#1| (|GcdDomain|)))
-                                               ((|mainSquareFreePart| ($ $))
+                                               ((|mainSquareFreePart| (% %))
                                                 (|has| |t#1| (|GcdDomain|))))
                                              '(((|CoercibleTo|
                                                  (|Polynomial| |t#1|))

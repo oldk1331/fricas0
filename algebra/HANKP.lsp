@@ -1,9 +1,9 @@
 
-(SDEFUN |HANKP;HankelMatrix;LM;1| ((|l| (|List| R)) ($ (|Matrix| R)))
+(SDEFUN |HANKP;HankelMatrix;LM;1| ((|l| (|List| R)) (% (|Matrix| R)))
         (SPROG
-         ((#1=#:G718 NIL) (|x| NIL) (#2=#:G719 NIL) (|i| NIL) (#3=#:G717 NIL)
-          (|lloc| (|List| R)) (#4=#:G716 NIL) (|j| NIL) (#5=#:G715 NIL)
-          (|n| (|Integer|)) (#6=#:G702 NIL))
+         ((#1=#:G465 NIL) (|x| NIL) (#2=#:G466 NIL) (|i| NIL) (#3=#:G464 NIL)
+          (|lloc| (|List| R)) (#4=#:G463 NIL) (|j| NIL) (#5=#:G462 NIL)
+          (|n| (|Integer|)) (#6=#:G451 NIL))
          (SEQ
           (COND ((NULL (ODDP (LENGTH |l|))) (|error| "n must be odd"))
                 ('T
@@ -12,15 +12,15 @@
                         (PROG2
                             (LETT #6#
                                   (SPADCALL (+ (LENGTH |l|) 1) 2
-                                            (QREFELT $ 10)))
+                                            (QREFELT % 10)))
                             (QCDR #6#)
                           (|check_union2| (QEQCAR #6# 0) (|NonNegativeInteger|)
                                           (|Union| (|NonNegativeInteger|)
                                                    "failed")
                                           #6#)))
-                  (LETT |lloc| (CONS (|spadConstant| $ 11) |l|))
+                  (LETT |lloc| (CONS (|spadConstant| % 11) |l|))
                   (EXIT
-                   (SPADCALL (ELT $ 13)
+                   (SPADCALL (ELT % 13)
                              (PROGN
                               (LETT #5# NIL)
                               (SEQ (LETT |j| 1) (LETT #4# |n|) G190
@@ -64,17 +64,17 @@
                                                           (GO G190) G191
                                                           (EXIT
                                                            (NREVERSE #3#)))))
-                                                   (QREFELT $ 15))))
+                                                   (QREFELT % 15))))
                                             #5#))))
                                    (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                                    (EXIT (NREVERSE #5#))))
-                             (QREFELT $ 18))))))))) 
+                             (QREFELT % 18))))))))) 
 
 (DECLAIM (NOTINLINE |HankelPackage;|)) 
 
-(DEFUN |HankelPackage| (#1=#:G720)
+(DEFUN |HankelPackage| (#1=#:G467)
   (SPROG NIL
-         (PROG (#2=#:G721)
+         (PROG (#2=#:G468)
            (RETURN
             (COND
              ((LETT #2#
@@ -89,24 +89,24 @@
                  ((NOT #2#) (HREM |$ConstructorCache| '|HankelPackage|)))))))))) 
 
 (DEFUN |HankelPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|HankelPackage| DV$1))
-          (LETT $ (GETREFV 21))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 21))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|HankelPackage| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|HankelPackage| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |One|)
-              (|Union| $ '"failed") (|NonNegativeInteger|) (4 . |exquo|)
+              (|Union| % '"failed") (|NonNegativeInteger|) (4 . |exquo|)
               (10 . |Zero|) (|Matrix| 6) (14 . |vertConcat|) (|List| 19)
               (20 . |matrix|) (|Mapping| 12 12 12) (|List| 12) (25 . |reduce|)
               (|List| 6) |HANKP;HankelMatrix;LM;1|)

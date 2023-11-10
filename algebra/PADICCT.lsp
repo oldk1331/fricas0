@@ -6,7 +6,7 @@
 (DEFPARAMETER |PAdicIntegerCategory;AL| 'NIL) 
 
 (DEFUN |PAdicIntegerCategory| (|t#1|)
-  (LET (#1=#:G693 (#2=#:G694 |t#1|))
+  (LET (#1=#:G449 (#2=#:G450 |t#1|))
     (COND ((SETQ #1# (|assoc| #2# |PAdicIntegerCategory;AL|)) (CDR #1#))
           (T
            (SETQ |PAdicIntegerCategory;AL|
@@ -15,7 +15,7 @@
            #1#)))) 
 
 (DEFUN |PAdicIntegerCategory;| (|t#1|)
-  (SPROG ((#1=#:G692 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -28,35 +28,35 @@
                                                          '(((|digits|
                                                              ((|Stream|
                                                                (|Integer|))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|order|
                                                              ((|NonNegativeInteger|)
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|extend|
-                                                             ($ $ (|Integer|)))
+                                                             (% % (|Integer|)))
                                                             T)
-                                                           ((|complete| ($ $))
+                                                           ((|complete| (% %))
                                                             T)
                                                            ((|modulus|
                                                              ((|Integer|)))
                                                             T)
                                                            ((|moduloP|
-                                                             ((|Integer|) $))
+                                                             ((|Integer|) %))
                                                             T)
                                                            ((|quotientByP|
-                                                             ($ $))
+                                                             (% %))
                                                             T)
                                                            ((|approximate|
-                                                             ((|Integer|) $
+                                                             ((|Integer|) %
                                                               (|Integer|)))
                                                             T)
                                                            ((|sqrt|
-                                                             ($ $ (|Integer|)))
+                                                             (% % (|Integer|)))
                                                             T)
                                                            ((|root|
-                                                             ($
+                                                             (%
                                                               (|SparseUnivariatePolynomial|
                                                                (|Integer|))
                                                               (|Integer|)))

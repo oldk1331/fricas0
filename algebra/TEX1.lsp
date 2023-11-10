@@ -1,12 +1,12 @@
 
-(SDEFUN |TEX1;coerce;STf;1| ((|s| (S)) ($ (|TexFormat|)))
-        (SPADCALL (SPADCALL |s| (QREFELT $ 8)) (QREFELT $ 10))) 
+(SDEFUN |TEX1;coerce;STf;1| ((|s| (S)) (% (|TexFormat|)))
+        (SPADCALL (SPADCALL |s| (QREFELT % 8)) (QREFELT % 10))) 
 
 (DECLAIM (NOTINLINE |TexFormat1;|)) 
 
-(DEFUN |TexFormat1| (#1=#:G690)
+(DEFUN |TexFormat1| (#1=#:G449)
   (SPROG NIL
-         (PROG (#2=#:G691)
+         (PROG (#2=#:G450)
            (RETURN
             (COND
              ((LETT #2#
@@ -21,18 +21,18 @@
                  ((NOT #2#) (HREM |$ConstructorCache| '|TexFormat1|)))))))))) 
 
 (DEFUN |TexFormat1;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|TexFormat1| DV$1))
-          (LETT $ (GETREFV 12))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|TexFormat1| (LIST DV$1) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 12))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|TexFormat1| (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|TexFormat1| '|infovec|
           (LIST

@@ -10,7 +10,7 @@
                  (|TranscendentalFunctionCategory;|))))) 
 
 (DEFUN |TranscendentalFunctionCategory;| ()
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|TrigonometricFunctionCategory|)
@@ -18,7 +18,7 @@
                            (|HyperbolicFunctionCategory|)
                            (|ArcHyperbolicFunctionCategory|)
                            (|ElementaryFunctionCategory|)
-                           (|mkCategory| '(((|pi| ($)) T)) NIL NIL NIL)))
+                           (|mkCategory| '(((|pi| (%)) T)) NIL NIL NIL)))
            (SETELT #1# 0 '(|TranscendentalFunctionCategory|))))) 
 
 (MAKEPROP '|TranscendentalFunctionCategory| 'NILADIC T) 

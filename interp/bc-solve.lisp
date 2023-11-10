@@ -369,7 +369,7 @@
   (PROG () (RETURN (STRCONC "x" (STRINGIMAGE |i|)))))
 
 ; bcMakeUnknowns(number)==
-;    concatenateStringList([STRCONC(bcCreateVariableString(i)," ")
+;    concatenateStringList([STRCONC(bcCreateVariableString(i),'" ")
 ;                             for i in 1..number])
 
 (DEFUN |bcMakeUnknowns| (|number|)
@@ -381,7 +381,7 @@
           (COND ((> |i| |number|) (RETURN (NREVERSE |bfVar#2|)))
                 ('T
                  (SETQ |bfVar#2|
-                         (CONS (STRCONC (|bcCreateVariableString| |i|) '| |)
+                         (CONS (STRCONC (|bcCreateVariableString| |i|) " ")
                                |bfVar#2|))))
           (SETQ |i| (+ |i| 1))))
        NIL 1)))))

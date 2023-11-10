@@ -1,40 +1,40 @@
 
-(SDEFUN |INFORM1;getType;If;1| (($ (|InputForm|))) (QREFELT $ 7)) 
+(SDEFUN |INFORM1;getType;If;1| ((% (|InputForm|))) (QREFELT % 7)) 
 
-(SDEFUN |INFORM1;packageCall;SIf;2| ((|name| (|Symbol|)) ($ (|InputForm|)))
+(SDEFUN |INFORM1;packageCall;SIf;2| ((|name| (|Symbol|)) (% (|InputForm|)))
         (SPADCALL
-         (LIST (SPADCALL '|$elt| (QREFELT $ 11)) (QREFELT $ 7)
-               (SPADCALL |name| (QREFELT $ 11)))
-         (QREFELT $ 13))) 
+         (LIST (SPADCALL '|$elt| (QREFELT % 11)) (QREFELT % 7)
+               (SPADCALL |name| (QREFELT % 11)))
+         (QREFELT % 13))) 
 
 (SDEFUN |INFORM1;packageCall;SLIf;3|
-        ((|name| (|Symbol|)) (|args| (|List| (|InputForm|))) ($ (|InputForm|)))
-        (SPADCALL (CONS (SPADCALL |name| (QREFELT $ 14)) |args|)
-                  (QREFELT $ 13))) 
+        ((|name| (|Symbol|)) (|args| (|List| (|InputForm|))) (% (|InputForm|)))
+        (SPADCALL (CONS (SPADCALL |name| (QREFELT % 14)) |args|)
+                  (QREFELT % 13))) 
 
-(SDEFUN |INFORM1;coerceToType;2If;4| ((|form| (|InputForm|)) ($ (|InputForm|)))
-        (SPADCALL (LIST (SPADCALL '|::| (QREFELT $ 11)) |form| (QREFELT $ 7))
-                  (QREFELT $ 13))) 
+(SDEFUN |INFORM1;coerceToType;2If;4| ((|form| (|InputForm|)) (% (|InputForm|)))
+        (SPADCALL (LIST (SPADCALL '|::| (QREFELT % 11)) |form| (QREFELT % 7))
+                  (QREFELT % 13))) 
 
-(SDEFUN |INFORM1;atType;2If;5| ((|form| (|InputForm|)) ($ (|InputForm|)))
-        (SPADCALL (LIST (SPADCALL '@ (QREFELT $ 11)) |form| (QREFELT $ 7))
-                  (QREFELT $ 13))) 
+(SDEFUN |INFORM1;atType;2If;5| ((|form| (|InputForm|)) (% (|InputForm|)))
+        (SPADCALL (LIST (SPADCALL '@ (QREFELT % 11)) |form| (QREFELT % 7))
+                  (QREFELT % 13))) 
 
 (SDEFUN |INFORM1;pretendOfType;2If;6|
-        ((|form| (|InputForm|)) ($ (|InputForm|)))
+        ((|form| (|InputForm|)) (% (|InputForm|)))
         (SPADCALL
-         (LIST (SPADCALL '|pretend| (QREFELT $ 11)) |form| (QREFELT $ 7))
-         (QREFELT $ 13))) 
+         (LIST (SPADCALL '|pretend| (QREFELT % 11)) |form| (QREFELT % 7))
+         (QREFELT % 13))) 
 
-(SDEFUN |INFORM1;interpret;IfR;7| ((|form| (|InputForm|)) ($ (R)))
-        (SPADCALL (SPADCALL (SPADCALL |form| (QREFELT $ 18)) (QREFELT $ 21))
-                  (QREFELT $ 23))) 
+(SDEFUN |INFORM1;interpret;IfR;7| ((|form| (|InputForm|)) (% (R)))
+        (SPADCALL (SPADCALL (SPADCALL |form| (QREFELT % 18)) (QREFELT % 21))
+                  (QREFELT % 23))) 
 
 (DECLAIM (NOTINLINE |InputFormFunctions1;|)) 
 
-(DEFUN |InputFormFunctions1| (#1=#:G706)
+(DEFUN |InputFormFunctions1| (#1=#:G455)
   (SPROG NIL
-         (PROG (#2=#:G707)
+         (PROG (#2=#:G456)
            (RETURN
             (COND
              ((LETT #2#
@@ -50,25 +50,25 @@
                   (HREM |$ConstructorCache| '|InputFormFunctions1|)))))))))) 
 
 (DEFUN |InputFormFunctions1;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|InputFormFunctions1| DV$1))
-          (LETT $ (GETREFV 25))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 25))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|InputFormFunctions1| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 7 (|typeToInputForm| |#1|))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 7 (|typeToInputForm| |#1|))
+          %))) 
 
 (MAKEPROP '|InputFormFunctions1| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) '|Rname| (|InputForm|)
-              |INFORM1;getType;If;1| (|Symbol|) (0 . |convert|) (|List| $)
+              |INFORM1;getType;If;1| (|Symbol|) (0 . |convert|) (|List| %)
               (5 . |convert|) |INFORM1;packageCall;SIf;2| (|List| 8)
               |INFORM1;packageCall;SLIf;3| |INFORM1;coerceToType;2If;4|
               |INFORM1;atType;2If;5| |INFORM1;pretendOfType;2If;6| (|Any|)

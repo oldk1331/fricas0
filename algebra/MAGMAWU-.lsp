@@ -1,79 +1,79 @@
 
-(SDEFUN |MAGMAWU-;one?;SB;1| ((|x| (S)) ($ (|Boolean|)))
-        (SPADCALL |x| (|spadConstant| $ 7) (QREFELT $ 9))) 
+(SDEFUN |MAGMAWU-;one?;SB;1| ((|x| (S)) (% (|Boolean|)))
+        (SPADCALL |x| (|spadConstant| % 7) (QREFELT % 9))) 
 
-(SDEFUN |MAGMAWU-;sample;S;2| (($ (S))) (|spadConstant| $ 7)) 
+(SDEFUN |MAGMAWU-;sample;S;2| ((% (S))) (|spadConstant| % 7)) 
 
-(SDEFUN |MAGMAWU-;^;SNniS;3| ((|x| (S)) (|n| (|NonNegativeInteger|)) ($ (S)))
-        (COND ((ZEROP |n|) (|spadConstant| $ 7))
-              ('T (SPADCALL |x| |n| (QREFELT $ 14))))) 
+(SDEFUN |MAGMAWU-;^;SNniS;3| ((|x| (S)) (|n| (|NonNegativeInteger|)) (% (S)))
+        (COND ((ZEROP |n|) (|spadConstant| % 7))
+              ('T (SPADCALL |x| |n| (QREFELT % 14))))) 
 
 (SDEFUN |MAGMAWU-;rightPower;SNniS;4|
-        ((|a| (S)) (|n| (|NonNegativeInteger|)) ($ (S)))
-        (SPROG ((|res| (S)) (#1=#:G717 NIL) (|i| NIL))
+        ((|a| (S)) (|n| (|NonNegativeInteger|)) (% (S)))
+        (SPROG ((|res| (S)) (#1=#:G467 NIL) (|i| NIL))
                (SEQ
-                (COND ((ZEROP |n|) (|spadConstant| $ 7))
+                (COND ((ZEROP |n|) (|spadConstant| % 7))
                       ('T
-                       (SEQ (LETT |res| (|spadConstant| $ 7))
+                       (SEQ (LETT |res| (|spadConstant| % 7))
                             (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                                  (COND ((|greater_SI| |i| #1#) (GO G191)))
                                  (SEQ
                                   (EXIT
                                    (LETT |res|
-                                         (SPADCALL |res| |a| (QREFELT $ 17)))))
+                                         (SPADCALL |res| |a| (QREFELT % 17)))))
                                  (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                                  (EXIT NIL))
                             (EXIT |res|))))))) 
 
 (SDEFUN |MAGMAWU-;leftPower;SNniS;5|
-        ((|a| (S)) (|n| (|NonNegativeInteger|)) ($ (S)))
-        (SPROG ((|res| (S)) (#1=#:G723 NIL) (|i| NIL))
+        ((|a| (S)) (|n| (|NonNegativeInteger|)) (% (S)))
+        (SPROG ((|res| (S)) (#1=#:G473 NIL) (|i| NIL))
                (SEQ
-                (COND ((ZEROP |n|) (|spadConstant| $ 7))
+                (COND ((ZEROP |n|) (|spadConstant| % 7))
                       ('T
-                       (SEQ (LETT |res| (|spadConstant| $ 7))
+                       (SEQ (LETT |res| (|spadConstant| % 7))
                             (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                                  (COND ((|greater_SI| |i| #1#) (GO G191)))
                                  (SEQ
                                   (EXIT
                                    (LETT |res|
-                                         (SPADCALL |a| |res| (QREFELT $ 17)))))
+                                         (SPADCALL |a| |res| (QREFELT % 17)))))
                                  (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                                  (EXIT NIL))
                             (EXIT |res|))))))) 
 
-(SDEFUN |MAGMAWU-;recip;SU;6| ((|x| (S)) ($ (|Union| S "failed")))
-        (COND ((SPADCALL |x| (|spadConstant| $ 7) (QREFELT $ 9)) (CONS 0 |x|))
+(SDEFUN |MAGMAWU-;recip;SU;6| ((|x| (S)) (% (|Union| S "failed")))
+        (COND ((SPADCALL |x| (|spadConstant| % 7) (QREFELT % 9)) (CONS 0 |x|))
               ('T (CONS 1 "failed")))) 
 
-(SDEFUN |MAGMAWU-;leftRecip;SU;7| ((|x| (S)) ($ (|Union| S "failed")))
-        (SPADCALL |x| (QREFELT $ 22))) 
+(SDEFUN |MAGMAWU-;leftRecip;SU;7| ((|x| (S)) (% (|Union| S "failed")))
+        (SPADCALL |x| (QREFELT % 22))) 
 
-(SDEFUN |MAGMAWU-;rightRecip;SU;8| ((|x| (S)) ($ (|Union| S "failed")))
-        (SPADCALL |x| (QREFELT $ 22))) 
+(SDEFUN |MAGMAWU-;rightRecip;SU;8| ((|x| (S)) (% (|Union| S "failed")))
+        (SPADCALL |x| (QREFELT % 22))) 
 
 (DECLAIM (NOTINLINE |MagmaWithUnit&;|)) 
 
 (DEFUN |MagmaWithUnit&| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|MagmaWithUnit&| DV$1))
-          (LETT $ (GETREFV 25))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
+          (LETT % (GETREFV 25))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
           (COND
            ((|HasCategory| |#1| '(|TwoSidedRecip|))
             (PROGN
-             (QSETREFV $ 23
-                       (CONS (|dispatchFunction| |MAGMAWU-;leftRecip;SU;7|) $))
-             (QSETREFV $ 24
+             (QSETREFV % 23
+                       (CONS (|dispatchFunction| |MAGMAWU-;leftRecip;SU;7|) %))
+             (QSETREFV % 24
                        (CONS (|dispatchFunction| |MAGMAWU-;rightRecip;SU;8|)
-                             $)))))
-          $))) 
+                             %)))))
+          %))) 
 
 (MAKEPROP '|MagmaWithUnit&| '|infovec|
           (LIST
@@ -82,7 +82,7 @@
               (|PositiveInteger|) (|RepeatedSquaring| 6) (10 . |expt|)
               (|NonNegativeInteger|) |MAGMAWU-;^;SNniS;3| (16 . *)
               |MAGMAWU-;rightPower;SNniS;4| |MAGMAWU-;leftPower;SNniS;5|
-              (|Union| $ '#1="failed") |MAGMAWU-;recip;SU;6| (22 . |recip|)
+              (|Union| % '#1="failed") |MAGMAWU-;recip;SU;6| (22 . |recip|)
               (27 . |leftRecip|) (32 . |rightRecip|))
            '#(|sample| 37 |rightRecip| 41 |rightPower| 46 |recip| 52 |one?| 57
               |leftRecip| 62 |leftPower| 67 ^ 73)

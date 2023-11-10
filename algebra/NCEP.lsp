@@ -1,37 +1,37 @@
 
 (SDEFUN |NCEP;characteristicPolynomial;MP;1|
         ((|m| (|Matrix| (|Complex| (|Fraction| (|Integer|)))))
-         ($ (|Polynomial| (|Complex| (|Fraction| (|Integer|))))))
+         (% (|Polynomial| (|Complex| (|Fraction| (|Integer|))))))
         (SPROG ((|x| (|Symbol|)))
-               (SEQ (LETT |x| (SPADCALL (QREFELT $ 8)))
+               (SEQ (LETT |x| (SPADCALL (QREFELT % 8)))
                     (EXIT
-                     (SPADCALL (SPADCALL |m| (QREFELT $ 12)) |x|
-                               (QREFELT $ 14)))))) 
+                     (SPADCALL (SPADCALL |m| (QREFELT % 12)) |x|
+                               (QREFELT % 14)))))) 
 
 (SDEFUN |NCEP;characteristicPolynomial;MSP;2|
         ((A (|Matrix| (|Complex| (|Fraction| (|Integer|))))) (|x| (|Symbol|))
-         ($ (|Polynomial| (|Complex| (|Fraction| (|Integer|))))))
-        (SPADCALL (SPADCALL A (QREFELT $ 12)) |x| (QREFELT $ 14))) 
+         (% (|Polynomial| (|Complex| (|Fraction| (|Integer|))))))
+        (SPADCALL (SPADCALL A (QREFELT % 12)) |x| (QREFELT % 14))) 
 
 (SDEFUN |NCEP;complexEigenvalues;MParL;3|
         ((|m| (|Matrix| (|Complex| (|Fraction| (|Integer|))))) (|eps| (|Par|))
-         ($ (|List| (|Complex| |Par|))))
-        (SPADCALL (SPADCALL |m| (QREFELT $ 12)) |eps| (QREFELT $ 18))) 
+         (% (|List| (|Complex| |Par|))))
+        (SPADCALL (SPADCALL |m| (QREFELT % 12)) |eps| (QREFELT % 18))) 
 
 (SDEFUN |NCEP;complexEigenvectors;MParL;4|
         ((|m| (|Matrix| (|Complex| (|Fraction| (|Integer|))))) (|eps| (|Par|))
-         ($
+         (%
           (|List|
            (|Record| (|:| |outval| (|Complex| |Par|))
                      (|:| |outmult| (|Integer|))
                      (|:| |outvect| (|List| (|Matrix| (|Complex| |Par|))))))))
-        (SPADCALL |m| |eps| (ELT $ 23) (QREFELT $ 27))) 
+        (SPADCALL |m| |eps| (ELT % 23) (QREFELT % 27))) 
 
 (DECLAIM (NOTINLINE |NumericComplexEigenPackage;|)) 
 
-(DEFUN |NumericComplexEigenPackage| (#1=#:G733)
+(DEFUN |NumericComplexEigenPackage| (#1=#:G455)
   (SPROG NIL
-         (PROG (#2=#:G734)
+         (PROG (#2=#:G456)
            (RETURN
             (COND
              ((LETT #2#
@@ -49,19 +49,19 @@
                         '|NumericComplexEigenPackage|)))))))))) 
 
 (DEFUN |NumericComplexEigenPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|NumericComplexEigenPackage| DV$1))
-          (LETT $ (GETREFV 29))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 29))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|NumericComplexEigenPackage|
-                      (LIST DV$1) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|NumericComplexEigenPackage| '|infovec|
           (LIST
@@ -72,7 +72,7 @@
               |NCEP;characteristicPolynomial;MP;1|
               |NCEP;characteristicPolynomial;MSP;2| (|List| (|Complex| 6))
               (15 . |solve1|) |NCEP;complexEigenvalues;MParL;3| (|Factored| 21)
-              (|SparseUnivariatePolynomial| $)
+              (|SparseUnivariatePolynomial| %)
               (|Complex| (|Fraction| (|Integer|))) (21 . |factorPolynomial|)
               (|Record| (|:| |outval| (|Complex| 6))
                         (|:| |outmult| (|Integer|))

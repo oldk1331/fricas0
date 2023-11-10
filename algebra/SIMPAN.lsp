@@ -1,13 +1,13 @@
 
 (SDEFUN |SIMPAN;simplify;AnE;1|
-        ((|a| (|AlgebraicNumber|)) ($ (|Expression| (|Integer|))))
-        (SPADCALL (SPADCALL |a| (QREFELT $ 8)) (QREFELT $ 10))) 
+        ((|a| (|AlgebraicNumber|)) (% (|Expression| (|Integer|))))
+        (SPADCALL (SPADCALL |a| (QREFELT % 8)) (QREFELT % 10))) 
 
 (DECLAIM (NOTINLINE |SimplifyAlgebraicNumberConvertPackage;|)) 
 
 (DEFUN |SimplifyAlgebraicNumberConvertPackage| ()
   (SPROG NIL
-         (PROG (#1=#:G696)
+         (PROG (#1=#:G450)
            (RETURN
             (COND
              ((LETT #1#
@@ -31,17 +31,17 @@
                         '|SimplifyAlgebraicNumberConvertPackage|)))))))))) 
 
 (DEFUN |SimplifyAlgebraicNumberConvertPackage;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|SimplifyAlgebraicNumberConvertPackage|))
-          (LETT $ (GETREFV 12))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 12))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache|
-                      '|SimplifyAlgebraicNumberConvertPackage| NIL (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      '|SimplifyAlgebraicNumberConvertPackage| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|SimplifyAlgebraicNumberConvertPackage| '|infovec|
           (LIST

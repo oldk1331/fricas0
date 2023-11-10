@@ -1,55 +1,55 @@
 
 (SDEFUN |REAL0Q;convert2PolInt|
-        ((|f| (|Pol|)) ($ (|SparseUnivariatePolynomial| (|Integer|))))
-        (SPROG ((|pden| (|Integer|)) (#1=#:G707 NIL) (|c| NIL) (#2=#:G706 NIL))
+        ((|f| (|Pol|)) (% (|SparseUnivariatePolynomial| (|Integer|))))
+        (SPROG ((|pden| (|Integer|)) (#1=#:G454 NIL) (|c| NIL) (#2=#:G453 NIL))
                (SEQ
                 (LETT |pden|
                       (SPADCALL
                        (PROGN
                         (LETT #2# NIL)
                         (SEQ (LETT |c| NIL)
-                             (LETT #1# (SPADCALL |f| (QREFELT $ 8))) G190
+                             (LETT #1# (SPADCALL |f| (QREFELT % 8))) G190
                              (COND
                               ((OR (ATOM #1#) (PROGN (LETT |c| (CAR #1#)) NIL))
                                (GO G191)))
                              (SEQ
                               (EXIT
                                (LETT #2#
-                                     (CONS (SPADCALL |c| (QREFELT $ 11))
+                                     (CONS (SPADCALL |c| (QREFELT % 11))
                                            #2#))))
                              (LETT #1# (CDR #1#)) (GO G190) G191
                              (EXIT (NREVERSE #2#))))
-                       (QREFELT $ 13)))
+                       (QREFELT % 13)))
                 (EXIT
-                 (SPADCALL (ELT $ 14) (SPADCALL |pden| |f| (QREFELT $ 15))
-                           (QREFELT $ 19)))))) 
+                 (SPADCALL (ELT % 14) (SPADCALL |pden| |f| (QREFELT % 15))
+                           (QREFELT % 19)))))) 
 
 (SDEFUN |REAL0Q;realZeros;PolL;2|
         ((|f| (|Pol|))
-         ($
+         (%
           (|List|
            (|Record| (|:| |left| (|Fraction| (|Integer|)))
                      (|:| |right| (|Fraction| (|Integer|)))))))
-        (SPADCALL (|REAL0Q;convert2PolInt| |f| $) (QREFELT $ 23))) 
+        (SPADCALL (|REAL0Q;convert2PolInt| |f| %) (QREFELT % 23))) 
 
 (SDEFUN |REAL0Q;realZeros;PolFL;3|
         ((|f| (|Pol|)) (|rn| (|Fraction| (|Integer|)))
-         ($
+         (%
           (|List|
            (|Record| (|:| |left| (|Fraction| (|Integer|)))
                      (|:| |right| (|Fraction| (|Integer|)))))))
-        (SPADCALL (|REAL0Q;convert2PolInt| |f| $) |rn| (QREFELT $ 25))) 
+        (SPADCALL (|REAL0Q;convert2PolInt| |f| %) |rn| (QREFELT % 25))) 
 
 (SDEFUN |REAL0Q;realZeros;PolRL;4|
         ((|f| (|Pol|))
          (|bounds|
           (|Record| (|:| |left| (|Fraction| (|Integer|)))
                     (|:| |right| (|Fraction| (|Integer|)))))
-         ($
+         (%
           (|List|
            (|Record| (|:| |left| (|Fraction| (|Integer|)))
                      (|:| |right| (|Fraction| (|Integer|)))))))
-        (SPADCALL (|REAL0Q;convert2PolInt| |f| $) |bounds| (QREFELT $ 27))) 
+        (SPADCALL (|REAL0Q;convert2PolInt| |f| %) |bounds| (QREFELT % 27))) 
 
 (SDEFUN |REAL0Q;realZeros;PolRFL;5|
         ((|f| (|Pol|))
@@ -57,11 +57,11 @@
           (|Record| (|:| |left| (|Fraction| (|Integer|)))
                     (|:| |right| (|Fraction| (|Integer|)))))
          (|rn| (|Fraction| (|Integer|)))
-         ($
+         (%
           (|List|
            (|Record| (|:| |left| (|Fraction| (|Integer|)))
                      (|:| |right| (|Fraction| (|Integer|)))))))
-        (SPADCALL (|REAL0Q;convert2PolInt| |f| $) |bounds| |rn| (QREFELT $ 29))) 
+        (SPADCALL (|REAL0Q;convert2PolInt| |f| %) |bounds| |rn| (QREFELT % 29))) 
 
 (SDEFUN |REAL0Q;refine;PolRFR;6|
         ((|f| (|Pol|))
@@ -69,10 +69,10 @@
           (|Record| (|:| |left| (|Fraction| (|Integer|)))
                     (|:| |right| (|Fraction| (|Integer|)))))
          (|eps| (|Fraction| (|Integer|)))
-         ($
+         (%
           (|Record| (|:| |left| (|Fraction| (|Integer|)))
                     (|:| |right| (|Fraction| (|Integer|))))))
-        (SPADCALL (|REAL0Q;convert2PolInt| |f| $) |int| |eps| (QREFELT $ 31))) 
+        (SPADCALL (|REAL0Q;convert2PolInt| |f| %) |int| |eps| (QREFELT % 31))) 
 
 (SDEFUN |REAL0Q;refine;Pol2RU;7|
         ((|f| (|Pol|))
@@ -82,19 +82,19 @@
          (|bounds|
           (|Record| (|:| |left| (|Fraction| (|Integer|)))
                     (|:| |right| (|Fraction| (|Integer|)))))
-         ($
+         (%
           (|Union|
            (|Record| (|:| |left| (|Fraction| (|Integer|)))
                      (|:| |right| (|Fraction| (|Integer|))))
            "failed")))
-        (SPADCALL (|REAL0Q;convert2PolInt| |f| $) |int| |bounds|
-                  (QREFELT $ 34))) 
+        (SPADCALL (|REAL0Q;convert2PolInt| |f| %) |int| |bounds|
+                  (QREFELT % 34))) 
 
 (DECLAIM (NOTINLINE |RealZeroPackageQ;|)) 
 
-(DEFUN |RealZeroPackageQ| (#1=#:G723)
+(DEFUN |RealZeroPackageQ| (#1=#:G470)
   (SPROG NIL
-         (PROG (#2=#:G724)
+         (PROG (#2=#:G471)
            (RETURN
             (COND
              ((LETT #2#
@@ -110,25 +110,25 @@
                   (HREM |$ConstructorCache| '|RealZeroPackageQ|)))))))))) 
 
 (DEFUN |RealZeroPackageQ;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RealZeroPackageQ| DV$1))
-          (LETT $ (GETREFV 36))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 36))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|RealZeroPackageQ| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|RealZeroPackageQ| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|List| 10)
               (0 . |coefficients|) (|Integer|) (|Fraction| 9) (5 . |denom|)
-              (|List| $) (10 . |lcm|) (15 . |numer|) (20 . *)
+              (|List| %) (10 . |lcm|) (15 . |numer|) (20 . *)
               (|SparseUnivariatePolynomial| 9) (|Mapping| 9 10)
               (|UnivariatePolynomialCategoryFunctions2| 10 6 9 16) (26 . |map|)
               (|Record| (|:| |left| 10) (|:| |right| 10)) (|List| 20)

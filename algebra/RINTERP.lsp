@@ -1,20 +1,20 @@
 
 (SDEFUN |RINTERP;interpolate;2L2NniF;1|
         ((|xlist| (|List| F)) (|ylist| (|List| F)) (|m| (|NonNegativeInteger|))
-         (|k| (|NonNegativeInteger|)) ($ (|Fraction| (|Polynomial| F))))
+         (|k| (|NonNegativeInteger|)) (% (|Fraction| (|Polynomial| F))))
         (SPROG
-         ((|reslist| (|List| (|List| (|Polynomial| F)))) (#1=#:G759 NIL)
-          (|i| NIL) (#2=#:G758 NIL) (#3=#:G757 NIL) (#4=#:G756 NIL)
+         ((|reslist| (|List| (|List| (|Polynomial| F)))) (#1=#:G491 NIL)
+          (|i| NIL) (#2=#:G490 NIL) (#3=#:G489 NIL) (#4=#:G488 NIL)
           (|res| (|List| (|Vector| F))) (|collist| (|List| (|List| F)))
-          (#5=#:G755 NIL) (#6=#:G754 NIL) (#7=#:G753 NIL) (|j| NIL)
-          (#8=#:G752 NIL) (#9=#:G751 NIL) (#10=#:G750 NIL)
-          (|tempvec| (|List| F)) (#11=#:G749 NIL) (#12=#:G748 NIL)
-          (#13=#:G747 NIL) (#14=#:G746 NIL) (#15=#:G745 NIL) (#16=#:G744 NIL))
+          (#5=#:G487 NIL) (#6=#:G486 NIL) (#7=#:G485 NIL) (|j| NIL)
+          (#8=#:G484 NIL) (#9=#:G483 NIL) (#10=#:G482 NIL)
+          (|tempvec| (|List| F)) (#11=#:G481 NIL) (#12=#:G480 NIL)
+          (#13=#:G479 NIL) (#14=#:G478 NIL) (#15=#:G477 NIL) (#16=#:G476 NIL))
          (SEQ
           (COND
-           ((SPADCALL (LENGTH |xlist|) (LENGTH |ylist|) (QREFELT $ 10))
+           ((SPADCALL (LENGTH |xlist|) (LENGTH |ylist|) (QREFELT % 10))
             (|error| "Different number of points and values."))
-           ((SPADCALL (LENGTH |xlist|) (+ (+ |m| |k|) 1) (QREFELT $ 10))
+           ((SPADCALL (LENGTH |xlist|) (+ (+ |m| |k|) 1) (QREFELT % 10))
             (|error| "wrong number of points"))
            ('T
             (SEQ
@@ -24,7 +24,7 @@
                     (SEQ (LETT |i| 1) (LETT #15# (+ (+ |m| |k|) 1)) G190
                          (COND ((|greater_SI| |i| #15#) (GO G191)))
                          (SEQ
-                          (EXIT (LETT #16# (CONS (|spadConstant| $ 11) #16#))))
+                          (EXIT (LETT #16# (CONS (|spadConstant| % 11) #16#))))
                          (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                          (EXIT (NREVERSE #16#)))))
              (LETT |collist|
@@ -54,12 +54,12 @@
                                                              (SPADCALL
                                                               (SPADCALL
                                                                |tempvec| |i|
-                                                               (QREFELT $ 14))
+                                                               (QREFELT % 14))
                                                               (SPADCALL |xlist|
                                                                         |i|
                                                                         (QREFELT
-                                                                         $ 14))
-                                                              (QREFELT $ 15))
+                                                                         % 14))
+                                                              (QREFELT % 15))
                                                              #12#))))
                                                     (LETT |i| (|inc_SI| |i|))
                                                     (GO G190) G191
@@ -76,7 +76,7 @@
                           (SEQ
                            (EXIT
                             (LETT #10#
-                                  (CONS (SPADCALL |collist| |j| (QREFELT $ 19))
+                                  (CONS (SPADCALL |collist| |j| (QREFELT % 19))
                                         #10#))))
                           (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                           (EXIT (NREVERSE #10#))))
@@ -102,27 +102,27 @@
                                                    (SPADCALL
                                                     (SPADCALL
                                                      (SPADCALL |collist| |j|
-                                                               (QREFELT $ 19))
-                                                     |i| (QREFELT $ 14))
+                                                               (QREFELT % 19))
+                                                     |i| (QREFELT % 14))
                                                     (SPADCALL |ylist| |i|
-                                                              (QREFELT $ 14))
-                                                    (QREFELT $ 15))
-                                                   (QREFELT $ 20))
+                                                              (QREFELT % 14))
+                                                    (QREFELT % 15))
+                                                   (QREFELT % 20))
                                                   #6#))))
                                          (LETT |i| (|inc_SI| |i|)) (GO G190)
                                          G191 (EXIT (NREVERSE #6#))))
                                    #8#))))
                           (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                           (EXIT (NREVERSE #8#))))
-                    (QREFELT $ 21)))
+                    (QREFELT % 21)))
              (LETT |res|
                    (SPADCALL
-                    (SPADCALL (SPADCALL |collist| (QREFELT $ 23))
-                              (QREFELT $ 24))
-                    (QREFELT $ 26)))
+                    (SPADCALL (SPADCALL |collist| (QREFELT % 23))
+                              (QREFELT % 24))
+                    (QREFELT % 26)))
              (COND
-              ((SPADCALL (LENGTH |res|) 1 (QREFELT $ 10))
-               (SPADCALL "Warning: unattainable points!" (QREFELT $ 30))))
+              ((SPADCALL (LENGTH |res|) 1 (QREFELT % 10))
+               (SPADCALL "Warning: unattainable points!" (QREFELT % 30))))
              (LETT |reslist|
                    (LIST
                     (PROGN
@@ -134,12 +134,12 @@
                             (LETT #4#
                                   (CONS
                                    (SPADCALL
-                                    (SPADCALL (SPADCALL |res| 1 (QREFELT $ 32))
-                                              (+ |i| 1) (QREFELT $ 33))
+                                    (SPADCALL (SPADCALL |res| 1 (QREFELT % 32))
+                                              (+ |i| 1) (QREFELT % 33))
                                     (SPADCALL
-                                     (SPADCALL (QREFELT $ 6) (QREFELT $ 36))
-                                     |i| (QREFELT $ 37))
-                                    (QREFELT $ 38))
+                                     (SPADCALL (QREFELT % 6) (QREFELT % 36))
+                                     |i| (QREFELT % 37))
+                                    (QREFELT % 38))
                                    #4#))))
                           (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                           (EXIT (NREVERSE #4#))))
@@ -152,28 +152,28 @@
                             (LETT #2#
                                   (CONS
                                    (SPADCALL
-                                    (SPADCALL (SPADCALL |res| 1 (QREFELT $ 32))
-                                              (+ (+ |i| |m|) 2) (QREFELT $ 33))
+                                    (SPADCALL (SPADCALL |res| 1 (QREFELT % 32))
+                                              (+ (+ |i| |m|) 2) (QREFELT % 33))
                                     (SPADCALL
-                                     (SPADCALL (QREFELT $ 6) (QREFELT $ 36))
-                                     |i| (QREFELT $ 37))
-                                    (QREFELT $ 38))
+                                     (SPADCALL (QREFELT % 6) (QREFELT % 36))
+                                     |i| (QREFELT % 37))
+                                    (QREFELT % 38))
                                    #2#))))
                           (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                           (EXIT (NREVERSE #2#))))))
              (EXIT
               (SPADCALL
-               (SPADCALL (ELT $ 39) (SPADCALL |reslist| 1 (QREFELT $ 42))
-                         (QREFELT $ 44))
-               (SPADCALL (ELT $ 39) (SPADCALL |reslist| 2 (QREFELT $ 42))
-                         (QREFELT $ 44))
-               (QREFELT $ 45))))))))) 
+               (SPADCALL (ELT % 39) (SPADCALL |reslist| 1 (QREFELT % 42))
+                         (QREFELT % 44))
+               (SPADCALL (ELT % 39) (SPADCALL |reslist| 2 (QREFELT % 42))
+                         (QREFELT % 44))
+               (QREFELT % 45))))))))) 
 
 (DECLAIM (NOTINLINE |RationalInterpolation;|)) 
 
-(DEFUN |RationalInterpolation| (&REST #1=#:G760)
+(DEFUN |RationalInterpolation| (&REST #1=#:G492)
   (SPROG NIL
-         (PROG (#2=#:G761)
+         (PROG (#2=#:G493)
            (RETURN
             (COND
              ((LETT #2#
@@ -191,21 +191,21 @@
                   (HREM |$ConstructorCache| '|RationalInterpolation|)))))))))) 
 
 (DEFUN |RationalInterpolation;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|RationalInterpolation| DV$1 DV$2))
-          (LETT $ (GETREFV 47))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 47))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|RationalInterpolation|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|RationalInterpolation| '|infovec|
           (LIST

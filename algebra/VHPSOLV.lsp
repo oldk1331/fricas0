@@ -1,21 +1,21 @@
 
 (SDEFUN |VHPSOLV;power_action|
         ((|m| (|NonNegativeInteger|))
-         ($
+         (%
           (|Mapping| (|Expression| (|Integer|)) (|NonNegativeInteger|)
                      (|NonNegativeInteger|)
                      (|SparseUnivariatePolynomial|
                       (|Expression| (|Integer|))))))
-        (SPROG NIL (CONS #'|VHPSOLV;power_action!0| (VECTOR $ |m|)))) 
+        (SPROG NIL (CONS #'|VHPSOLV;power_action!0| (VECTOR % |m|)))) 
 
 (SDEFUN |VHPSOLV;power_action!0| ((|k| NIL) (|l| NIL) (|g| NIL) ($$ NIL))
-        (PROG (|m| $)
+        (PROG (|m| %)
           (LETT |m| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
+          (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPADCALL |k| (SPADCALL |m| |l| (QREFELT $ 7)) |g|
-                      (QREFELT $ 11)))))) 
+            (SPADCALL |k| (SPADCALL |m| |l| (QREFELT % 7)) |g|
+                      (QREFELT % 11)))))) 
 
 (SDEFUN |VHPSOLV;hp_solve;LLNniM;2|
         ((|lv|
@@ -23,28 +23,28 @@
            (|Vector|
             (|SparseUnivariatePolynomial| (|Expression| (|Integer|))))))
          (|eta| (|List| (|NonNegativeInteger|))) (K (|NonNegativeInteger|))
-         ($
+         (%
           (|Matrix|
            (|SparseUnivariatePolynomial| (|Expression| (|Integer|))))))
         (SPROG
-         ((#1=#:G747 NIL) (|j| NIL) (|i1| #2=(|NonNegativeInteger|))
-          (#3=#:G746 NIL) (|i| NIL)
+         ((#1=#:G490 NIL) (|j| NIL) (|i1| #2=(|NonNegativeInteger|))
+          (#3=#:G489 NIL) (|i| NIL)
           (|res|
            (|Matrix|
             (|SparseUnivariatePolynomial| (|Expression| (|Integer|)))))
-          (|n1| #2#) (#4=#:G745 NIL) (|n| (|NonNegativeInteger|))
+          (|n1| #2#) (#4=#:G488 NIL) (|n| (|NonNegativeInteger|))
           (|res1|
            (|Matrix|
             (|SparseUnivariatePolynomial| (|Expression| (|Integer|)))))
-          (C (|List| (|Expression| (|Integer|)))) (#5=#:G744 NIL)
-          (#6=#:G743 NIL) (|vd| (|Vector| (|Integer|))) (#7=#:G742 NIL)
-          (|ei| NIL) (#8=#:G741 NIL)
+          (C (|List| (|Expression| (|Integer|)))) (#5=#:G487 NIL)
+          (#6=#:G486 NIL) (|vd| (|Vector| (|Integer|))) (#7=#:G485 NIL)
+          (|ei| NIL) (#8=#:G484 NIL)
           (|lpp|
            (|List| (|SparseUnivariatePolynomial| (|Expression| (|Integer|)))))
           (|pp| (|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
-          (#9=#:G717 NIL)
+          (#9=#:G460 NIL)
           (|pp1| (|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
-          (#10=#:G740 NIL) (#11=#:G739 NIL) (|v| NIL)
+          (#10=#:G483 NIL) (#11=#:G482 NIL) (|v| NIL)
           (|m| (|NonNegativeInteger|)))
          (SEQ (LETT |m| (QVSIZE (|SPADfirst| |lv|))) (LETT |lpp| NIL)
               (SEQ (LETT |v| NIL) (LETT #11# |lv|) G190
@@ -54,33 +54,33 @@
                    (SEQ
                     (EXIT
                      (COND
-                      ((SPADCALL (QVSIZE |v|) |m| (QREFELT $ 13))
+                      ((SPADCALL (QVSIZE |v|) |m| (QREFELT % 13))
                        (|error|
                         "hp_solve: vectors must be of the same length"))
                       ('T
-                       (SEQ (LETT |pp| (|spadConstant| $ 14))
+                       (SEQ (LETT |pp| (|spadConstant| % 14))
                             (SEQ (LETT |i| 1) (LETT #10# |m|) G190
                                  (COND ((|greater_SI| |i| #10#) (GO G191)))
                                  (SEQ
                                   (LETT |pp1|
                                         (SPADCALL
-                                         (SPADCALL |v| |i| (QREFELT $ 17)) |m|
-                                         (QREFELT $ 18)))
+                                         (SPADCALL |v| |i| (QREFELT % 17)) |m|
+                                         (QREFELT % 18)))
                                   (EXIT
                                    (LETT |pp|
                                          (SPADCALL |pp|
                                                    (SPADCALL
                                                     (SPADCALL
-                                                     (|spadConstant| $ 20)
+                                                     (|spadConstant| % 20)
                                                      (PROG1
                                                          (LETT #9# (- |i| 1))
                                                        (|check_subtype2|
                                                         (>= #9# 0)
                                                         '(|NonNegativeInteger|)
                                                         '(|Integer|) #9#))
-                                                     (QREFELT $ 21))
-                                                    |pp1| (QREFELT $ 22))
-                                                   (QREFELT $ 23)))))
+                                                     (QREFELT % 21))
+                                                    |pp1| (QREFELT % 22))
+                                                   (QREFELT % 23)))))
                                  (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                                  (EXIT NIL))
                             (EXIT (LETT |lpp| (CONS |pp| |lpp|))))))))
@@ -97,37 +97,37 @@
                            (SEQ (EXIT (LETT #8# (CONS |ei| #8#))))
                            (LETT #7# (CDR #7#)) (GO G190) G191
                            (EXIT (NREVERSE #8#))))
-                     (QREFELT $ 26)))
+                     (QREFELT % 26)))
               (LETT C
                     (PROGN
                      (LETT #6# NIL)
                      (SEQ (LETT |i| 1) (LETT #5# K) G190
                           (COND ((|greater_SI| |i| #5#) (GO G191)))
                           (SEQ
-                           (EXIT (LETT #6# (CONS (|spadConstant| $ 27) #6#))))
+                           (EXIT (LETT #6# (CONS (|spadConstant| % 27) #6#))))
                           (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                           (EXIT (NREVERSE #6#)))))
               (LETT |res1|
-                    (SPADCALL C (|VHPSOLV;power_action| |m| $)
-                              (SPADCALL |lpp| (QREFELT $ 29)) |vd| K
-                              (QREFELT $ 33)))
+                    (SPADCALL C (|VHPSOLV;power_action| |m| %)
+                              (SPADCALL |lpp| (QREFELT % 29)) |vd| K
+                              (QREFELT % 33)))
               (LETT |n| (QVSIZE |vd|)) (LETT |n1| 0)
               (SEQ (LETT |i| 1) (LETT #4# |n|) G190
                    (COND ((|greater_SI| |i| #4#) (GO G191)))
                    (SEQ
                     (EXIT
                      (COND
-                      ((>= (SPADCALL |vd| |i| (QREFELT $ 34)) 0)
+                      ((>= (SPADCALL |vd| |i| (QREFELT % 34)) 0)
                        (LETT |n1| (+ |n1| 1))))))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
-              (LETT |res| (MAKE_MATRIX1 |n| |n1| (|spadConstant| $ 14)))
+              (LETT |res| (MAKE_MATRIX1 |n| |n1| (|spadConstant| % 14)))
               (LETT |i1| 0)
               (SEQ (LETT |i| 1) (LETT #3# |n|) G190
                    (COND ((|greater_SI| |i| #3#) (GO G191)))
                    (SEQ
                     (EXIT
                      (COND
-                      ((>= (SPADCALL |vd| |i| (QREFELT $ 34)) 0)
+                      ((>= (SPADCALL |vd| |i| (QREFELT % 34)) 0)
                        (SEQ (LETT |i1| (+ |i1| 1))
                             (EXIT
                              (SEQ (LETT |j| 1) (LETT #1# |n|) G190
@@ -136,8 +136,8 @@
                                    (EXIT
                                     (SPADCALL |res| |j| |i1|
                                               (SPADCALL |res1| |j| |i|
-                                                        (QREFELT $ 35))
-                                              (QREFELT $ 36))))
+                                                        (QREFELT % 35))
+                                              (QREFELT % 36))))
                                   (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                                   (EXIT NIL))))))))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
@@ -147,7 +147,7 @@
 
 (DEFUN |VectorHermitePadeSolver| ()
   (SPROG NIL
-         (PROG (#1=#:G749)
+         (PROG (#1=#:G492)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|VectorHermitePadeSolver|))
@@ -166,17 +166,17 @@
                   (HREM |$ConstructorCache| '|VectorHermitePadeSolver|)))))))))) 
 
 (DEFUN |VectorHermitePadeSolver;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|VectorHermitePadeSolver|))
-          (LETT $ (GETREFV 40))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 40))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|VectorHermitePadeSolver| NIL
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|VectorHermitePadeSolver| '|infovec|
           (LIST

@@ -1,27 +1,27 @@
 
-(SDEFUN |MODULE-;*;SRS;1| ((|x| (S)) (|r| (R)) ($ (S)))
-        (SPADCALL |r| |x| (QREFELT $ 8))) 
+(SDEFUN |MODULE-;*;SRS;1| ((|x| (S)) (|r| (R)) (% (S)))
+        (SPADCALL |r| |x| (QREFELT % 8))) 
 
 (DECLAIM (NOTINLINE |Module&;|)) 
 
 (DEFUN |Module&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|Module&| DV$1 DV$2))
-          (LETT $ (GETREFV 13))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
+          (LETT % (GETREFV 13))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
           (COND ((|domainEqual| |#2| |#1|))
                 ('T
-                 (QSETREFV $ 9
-                           (CONS (|dispatchFunction| |MODULE-;*;SRS;1|) $))))
-          $))) 
+                 (QSETREFV % 9
+                           (CONS (|dispatchFunction| |MODULE-;*;SRS;1|) %))))
+          %))) 
 
 (MAKEPROP '|Module&| '|infovec|
           (LIST

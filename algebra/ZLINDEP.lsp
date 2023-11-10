@@ -1,44 +1,44 @@
 
 (SDEFUN |ZLINDEP;linearlyDependentOverZ?;VB;1|
-        ((|v| (|Vector| R)) ($ (|Boolean|))) (SPADCALL |v| (QREFELT $ 10))) 
+        ((|v| (|Vector| R)) (% (|Boolean|))) (SPADCALL |v| (QREFELT % 10))) 
 
 (SDEFUN |ZLINDEP;linearDependenceOverZ;VU;2|
-        ((|v| (|Vector| R)) ($ (|Union| (|Vector| (|Integer|)) "failed")))
-        (SPADCALL |v| (QREFELT $ 13))) 
+        ((|v| (|Vector| R)) (% (|Union| (|Vector| (|Integer|)) "failed")))
+        (SPADCALL |v| (QREFELT % 13))) 
 
 (SDEFUN |ZLINDEP;particularSolutionOverQ;VRU;3|
         ((|v| (|Vector| R)) (|c| (R))
-         ($ (|Union| (|Vector| (|Fraction| (|Integer|))) "failed")))
-        (SPADCALL |v| |c| (QREFELT $ 16))) 
+         (% (|Union| (|Vector| (|Fraction| (|Integer|))) "failed")))
+        (SPADCALL |v| |c| (QREFELT % 16))) 
 
 (SDEFUN |ZLINDEP;particularSolutionOverQ;MVU;4|
         ((|m| (|Matrix| R)) (|v| (|Vector| R))
-         ($ (|Union| (|Vector| (|Fraction| (|Integer|))) "failed")))
-        (SPADCALL |m| |v| (QREFELT $ 19))) 
+         (% (|Union| (|Vector| (|Fraction| (|Integer|))) "failed")))
+        (SPADCALL |m| |v| (QREFELT % 19))) 
 
 (SDEFUN |ZLINDEP;solveLinearlyOverQ;VRR;5|
         ((|v| (|Vector| R)) (|c| (R))
-         ($
+         (%
           (|Record|
            (|:| |particular|
                 (|Union| (|Vector| (|Fraction| (|Integer|))) "failed"))
            (|:| |basis| (|List| (|Vector| (|Fraction| (|Integer|))))))))
-        (SPADCALL |v| |c| (QREFELT $ 22))) 
+        (SPADCALL |v| |c| (QREFELT % 22))) 
 
 (SDEFUN |ZLINDEP;solveLinearlyOverQ;MVR;6|
         ((|m| (|Matrix| R)) (|v| (|Vector| R))
-         ($
+         (%
           (|Record|
            (|:| |particular|
                 (|Union| (|Vector| (|Fraction| (|Integer|))) "failed"))
            (|:| |basis| (|List| (|Vector| (|Fraction| (|Integer|))))))))
-        (SPADCALL |m| |v| (QREFELT $ 24))) 
+        (SPADCALL |m| |v| (QREFELT % 24))) 
 
 (DECLAIM (NOTINLINE |IntegerLinearDependence;|)) 
 
-(DEFUN |IntegerLinearDependence| (#1=#:G718)
+(DEFUN |IntegerLinearDependence| (#1=#:G465)
   (SPROG NIL
-         (PROG (#2=#:G719)
+         (PROG (#2=#:G466)
            (RETURN
             (COND
              ((LETT #2#
@@ -55,19 +55,19 @@
                   (HREM |$ConstructorCache| '|IntegerLinearDependence|)))))))))) 
 
 (DEFUN |IntegerLinearDependence;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|IntegerLinearDependence| DV$1))
-          (LETT $ (GETREFV 26))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 26))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|IntegerLinearDependence|
-                      (LIST DV$1) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|IntegerLinearDependence| '|infovec|
           (LIST

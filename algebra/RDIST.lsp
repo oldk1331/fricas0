@@ -1,102 +1,102 @@
 
 (SDEFUN |RDIST;weighted;LM;1|
         ((|lvw| (|List| (|Record| (|:| |value| S) (|:| |weight| (|Integer|)))))
-         ($ (|Mapping| S)))
+         (% (|Mapping| S)))
         (SPROG
-         ((|totwt| (|Integer|)) (#1=#:G715 NIL) (|k| NIL) (#2=#:G716 NIL)
+         ((|totwt| (|Integer|)) (#1=#:G464 NIL) (|k| NIL) (#2=#:G465 NIL)
           (|i| NIL) (|wv| (|Vector| (|Integer|))) (|kv| (|Vector| S))
           (|n| (|NonNegativeInteger|)) (|kl| (|List| S)) (|w| (|Integer|))
-          (|u| (|Union| (|Integer|) "failed")) (#3=#:G714 NIL) (|r| NIL)
+          (|u| (|Union| (|Integer|) "failed")) (#3=#:G463 NIL) (|r| NIL)
           (|t| (|Table| S (|Integer|))))
-         (SEQ (LETT |t| (SPADCALL (QREFELT $ 8)))
+         (SEQ (LETT |t| (SPADCALL (QREFELT % 8)))
               (SEQ (LETT |r| NIL) (LETT #3# |lvw|) G190
                    (COND
                     ((OR (ATOM #3#) (PROGN (LETT |r| (CAR #3#)) NIL))
                      (GO G191)))
-                   (SEQ (LETT |u| (SPADCALL (QCAR |r|) |t| (QREFELT $ 10)))
+                   (SEQ (LETT |u| (SPADCALL (QCAR |r|) |t| (QREFELT % 10)))
                         (LETT |w|
-                              (COND ((QEQCAR |u| 1) (|spadConstant| $ 12))
+                              (COND ((QEQCAR |u| 1) (|spadConstant| % 12))
                                     ('T (QCDR |u|))))
                         (EXIT
                          (SPADCALL |t| (QCAR |r|)
-                                   (SPADCALL |w| (QCDR |r|) (QREFELT $ 13))
-                                   (QREFELT $ 14))))
+                                   (SPADCALL |w| (QCDR |r|) (QREFELT % 13))
+                                   (QREFELT % 14))))
                    (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
-              (LETT |kl| (SPADCALL |t| (QREFELT $ 16)))
-              (LETT |n| (SPADCALL |kl| (QREFELT $ 18)))
+              (LETT |kl| (SPADCALL |t| (QREFELT % 16)))
+              (LETT |n| (SPADCALL |kl| (QREFELT % 18)))
               (EXIT
                (COND
-                ((SPADCALL |n| (|spadConstant| $ 19) (QREFELT $ 21))
+                ((SPADCALL |n| (|spadConstant| % 19) (QREFELT % 21))
                  (|error| "Cannot select from empty set"))
                 ('T
                  (SEQ
                   (LETT |kv|
                         (SPADCALL |n|
-                                  (SPADCALL |kl| (|spadConstant| $ 19)
-                                            (QREFELT $ 22))
-                                  (QREFELT $ 24)))
+                                  (SPADCALL |kl| (|spadConstant| % 19)
+                                            (QREFELT % 22))
+                                  (QREFELT % 24)))
                   (LETT |wv|
-                        (SPADCALL |n| (|spadConstant| $ 19) (QREFELT $ 26)))
-                  (LETT |totwt| (|spadConstant| $ 19))
-                  (SEQ (LETT |i| (|spadConstant| $ 29)) (LETT #2# |n|)
+                        (SPADCALL |n| (|spadConstant| % 19) (QREFELT % 26)))
+                  (LETT |totwt| (|spadConstant| % 19))
+                  (SEQ (LETT |i| (|spadConstant| % 29)) (LETT #2# |n|)
                        (LETT |k| NIL) (LETT #1# |kl|) G190
                        (COND
                         ((OR (ATOM #1#) (PROGN (LETT |k| (CAR #1#)) NIL)
                              (> |i| #2#))
                          (GO G191)))
-                       (SEQ (SPADCALL |kv| |i| |k| (QREFELT $ 30))
+                       (SEQ (SPADCALL |kv| |i| |k| (QREFELT % 30))
                             (LETT |totwt|
                                   (SPADCALL |totwt|
-                                            (SPADCALL |t| |k| (QREFELT $ 31))
-                                            (QREFELT $ 13)))
-                            (EXIT (SPADCALL |wv| |i| |totwt| (QREFELT $ 32))))
+                                            (SPADCALL |t| |k| (QREFELT % 31))
+                                            (QREFELT % 13)))
+                            (EXIT (SPADCALL |wv| |i| |totwt| (QREFELT % 32))))
                        (LETT #1# (PROG1 (CDR #1#) (LETT |i| (+ |i| 1))))
                        (GO G190) G191 (EXIT NIL))
-                  (EXIT (SPADCALL |kv| |wv| |totwt| (QREFELT $ 34)))))))))) 
+                  (EXIT (SPADCALL |kv| |wv| |totwt| (QREFELT % 34)))))))))) 
 
 (SDEFUN |RDIST;rdHack1;VVIM;2|
         ((|kv| (|Vector| S)) (|wv| (|Vector| (|Integer|)))
-         (|totwt| (|Integer|)) ($ (|Mapping| S)))
+         (|totwt| (|Integer|)) (% (|Mapping| S)))
         (SPROG NIL
-               (SEQ (CONS #'|RDIST;rdHack1;VVIM;2!0| (VECTOR |kv| $ |totwt|))))) 
+               (SEQ (CONS #'|RDIST;rdHack1;VVIM;2!0| (VECTOR |kv| % |totwt|))))) 
 
 (SDEFUN |RDIST;rdHack1;VVIM;2!0| (($$ NIL))
-        (PROG (|totwt| $ |kv|)
+        (PROG (|totwt| % |kv|)
           (LETT |totwt| (QREFELT $$ 2))
-          (LETT $ (QREFELT $$ 1))
+          (LETT % (QREFELT $$ 1))
           (LETT |kv| (QREFELT $$ 0))
           (RETURN
            (PROGN
             (SPROG ((|w| NIL))
-                   (SEQ (LETT |w| (SPADCALL |totwt| (QREFELT $ 39)))
+                   (SEQ (LETT |w| (SPADCALL |totwt| (QREFELT % 39)))
                         (EXIT
-                         (SPADCALL |kv| (|spadConstant| $ 40)
-                                   (QREFELT $ 41))))))))) 
+                         (SPADCALL |kv| (|spadConstant| % 40)
+                                   (QREFELT % 41))))))))) 
 
-(SDEFUN |RDIST;uniform;SM;3| ((|fset| (|Set| S)) ($ (|Mapping| S)))
-        (SPROG NIL (SEQ (CONS #'|RDIST;uniform;SM;3!0| (VECTOR $ |fset|))))) 
+(SDEFUN |RDIST;uniform;SM;3| ((|fset| (|Set| S)) (% (|Mapping| S)))
+        (SPROG NIL (SEQ (CONS #'|RDIST;uniform;SM;3!0| (VECTOR % |fset|))))) 
 
 (SDEFUN |RDIST;uniform;SM;3!0| (($$ NIL))
-        (PROG (|fset| $)
+        (PROG (|fset| %)
           (LETT |fset| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
+          (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
             (SPROG ((|l| NIL) (|n| NIL))
-                   (SEQ (LETT |l| (SPADCALL |fset| (QREFELT $ 43)))
-                        (LETT |n| (SPADCALL |l| (QREFELT $ 18)))
+                   (SEQ (LETT |l| (SPADCALL |fset| (QREFELT % 43)))
+                        (LETT |n| (SPADCALL |l| (QREFELT % 18)))
                         (EXIT
                          (SPADCALL |l|
-                                   (SPADCALL (SPADCALL |n| (QREFELT $ 39))
-                                             (|spadConstant| $ 29)
-                                             (QREFELT $ 13))
-                                   (QREFELT $ 22))))))))) 
+                                   (SPADCALL (SPADCALL |n| (QREFELT % 39))
+                                             (|spadConstant| % 29)
+                                             (QREFELT % 13))
+                                   (QREFELT % 22))))))))) 
 
 (DECLAIM (NOTINLINE |RandomDistributions;|)) 
 
-(DEFUN |RandomDistributions| (#1=#:G733)
+(DEFUN |RandomDistributions| (#1=#:G482)
   (SPROG NIL
-         (PROG (#2=#:G734)
+         (PROG (#2=#:G483)
            (RETURN
             (COND
              ((LETT #2#
@@ -112,19 +112,19 @@
                   (HREM |$ConstructorCache| '|RandomDistributions|)))))))))) 
 
 (DEFUN |RandomDistributions;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RandomDistributions| DV$1))
-          (LETT $ (GETREFV 46))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 46))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|RandomDistributions| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|RandomDistributions| '|infovec|
           (LIST

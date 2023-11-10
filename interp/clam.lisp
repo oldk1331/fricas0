@@ -445,10 +445,10 @@
 ; cacheStats() ==
 ;   for [fn,kind,:u] in $clamList repeat
 ;     not MEMQ('count,u) =>
-;       sayBrightly ["%b",fn,"%d","does not keep reference counts"]
+;       sayBrightly ["%b",fn,"%d",'"does not keep reference counts"]
 ;     INTEGERP kind => reportCircularCacheStats(fn,kind)
 ;     kind = 'hash => reportHashCacheStats fn
-;     sayBrightly ["Unknown cache type for","%b",fn,"%d"]
+;     sayBrightly ['"Unknown cache type for","%b",fn,"%d"]
 
 (DEFUN |cacheStats| ()
   (PROG (|u| |kind| |ISTMP#1| |fn|)
@@ -472,12 +472,12 @@
                 (COND
                  ((NULL (MEMQ '|count| |u|))
                   (|sayBrightly|
-                   (LIST '|%b| |fn| '|%d| '|does not keep reference counts|)))
+                   (LIST '|%b| |fn| '|%d| "does not keep reference counts")))
                  ((INTEGERP |kind|) (|reportCircularCacheStats| |fn| |kind|))
                  ((EQ |kind| '|hash|) (|reportHashCacheStats| |fn|))
                  (#1#
                   (|sayBrightly|
-                   (LIST '|Unknown cache type for| '|%b| |fn| '|%d|)))))))
+                   (LIST "Unknown cache type for" '|%b| |fn| '|%d|)))))))
          (SETQ |bfVar#15| (CDR |bfVar#15|))))
       |$clamList| NIL))))
 
@@ -486,7 +486,7 @@
 ;   circList:= eval infovec.cacheName
 ;   numberUsed :=
 ;     +/[1 for i in 1..n for x in circList while x isnt [='_$failed,:.]]
-;   sayBrightly ["%b",fn,"%d","has","%b",numberUsed,"%d","/ ",n," values cached"]
+;   sayBrightly ["%b",fn,"%d",'"has","%b",numberUsed,"%d",'"/ ",n,'" values cached"]
 ;   displayCacheFrequency mkCircularCountAlist(circList,n)
 ;   TERPRI()
 
@@ -509,15 +509,15 @@
                   (SETQ |bfVar#16| (CDR |bfVar#16|))))
                0 1 |circList| NIL))
       (|sayBrightly|
-       (LIST '|%b| |fn| '|%d| '|has| '|%b| |numberUsed| '|%d| '|/ | |n|
-             '| values cached|))
+       (LIST '|%b| |fn| '|%d| "has" '|%b| |numberUsed| '|%d| "/ " |n|
+             " values cached"))
       (|displayCacheFrequency| (|mkCircularCountAlist| |circList| |n|))
       (TERPRI)))))
 
 ; displayCacheFrequency al ==
 ;   al := NREVERSE SORTBY('CAR,al)
-;   sayBrightlyNT "    #hits/#occurrences: "
-;   for [a,:b] in al repeat sayBrightlyNT [a,"/",b,"  "]
+;   sayBrightlyNT '"    #hits/#occurrences: "
+;   for [a,:b] in al repeat sayBrightlyNT [a,'"/",b,'"  "]
 ;   TERPRI()
 
 (DEFUN |displayCacheFrequency| (|al|)
@@ -525,7 +525,7 @@
     (RETURN
      (PROGN
       (SETQ |al| (NREVERSE (SORTBY 'CAR |al|)))
-      (|sayBrightlyNT| '|    #hits/#occurrences: |)
+      (|sayBrightlyNT| "    #hits/#occurrences: ")
       ((LAMBDA (|bfVar#19| |bfVar#18|)
          (LOOP
           (COND
@@ -538,7 +538,7 @@
                   (SETQ |a| (CAR |bfVar#18|))
                   (SETQ |b| (CDR |bfVar#18|))
                   #1#)
-                 (|sayBrightlyNT| (LIST |a| '/ |b| '|  |)))))
+                 (|sayBrightlyNT| (LIST |a| "/" |b| "  ")))))
           (SETQ |bfVar#19| (CDR |bfVar#19|))))
        |al| NIL)
       (TERPRI)))))
@@ -547,7 +547,7 @@
 ;   for [x,count,:.] in cl for i in 1..len while x ~= '_$failed repeat
 ;     u:= assoc(count,al) => RPLACD(u,1 + CDR u)
 ;     if INTEGERP $reportFavoritesIfNumber and count >= $reportFavoritesIfNumber then
-;       sayBrightlyNT ["   ",count,"  "]
+;       sayBrightlyNT ['"   ",count,'"  "]
 ;       pp x
 ;     al:= [[count,:1],:al]
 ;   al
@@ -578,8 +578,7 @@
                     (COND
                      ((AND (INTEGERP |$reportFavoritesIfNumber|)
                            (NOT (< |count| |$reportFavoritesIfNumber|)))
-                      (|sayBrightlyNT| (LIST '|   | |count| '|  |))
-                      (|pp| |x|)))
+                      (|sayBrightlyNT| (LIST "   " |count| "  ")) (|pp| |x|)))
                     (SETQ |al| (CONS (CONS |count| 1) |al|))))))))
           (SETQ |bfVar#21| (CDR |bfVar#21|))
           (SETQ |i| (+ |i| 1))))
@@ -813,21 +812,21 @@
 
 ; clamStats() ==
 ;   for [op,kind,:.] in $clamList repeat
-;     cacheVec := GET(op, 'cacheInfo) or systemErrorHere "clamStats"
+;     cacheVec := GET(op, 'cacheInfo) or systemErrorHere '"clamStats"
 ;     prefix:=
 ;       $reportCounts~= true => nil
 ;       hitCounter := INTERNL1(op, '";hit")
 ;       callCounter := INTERNL1(op, '";calls")
-;       res:= ["%b",eval hitCounter,"/",eval callCounter,"%d","calls to "]
+;       res:= ["%b",eval hitCounter,'"/",eval callCounter,"%d",'"calls to "]
 ;       SET(hitCounter,0)
 ;       SET(callCounter,0)
 ;       res
 ;     postString:=
 ;       cacheValue:= eval cacheVec.cacheName
-;       kind = 'hash => [" (","%b",HASH_-TABLE_-COUNT cacheValue,"%d","entries)"]
+;       kind = 'hash => ['" (","%b",HASH_-TABLE_-COUNT cacheValue,"%d",'"entries)"]
 ;       empties:= numberOfEmptySlots eval cacheVec.cacheName
 ;       empties = 0 => nil
-;       [" (","%b",kind-empties,"/",kind,"%d","slots used)"]
+;       ['" (","%b",kind-empties,'"/",kind,"%d",'"slots used)"]
 ;     sayBrightly
 ;       [:prefix,op,:postString]
 
@@ -851,7 +850,7 @@
                 (PROGN
                  (SETQ |cacheVec|
                          (OR (GET |op| '|cacheInfo|)
-                             (|systemErrorHere| '|clamStats|)))
+                             (|systemErrorHere| "clamStats")))
                  (SETQ |prefix|
                          (COND ((NOT (EQUAL |$reportCounts| T)) NIL)
                                (#1#
@@ -859,9 +858,9 @@
                                  (SETQ |hitCounter| (INTERNL1 |op| ";hit"))
                                  (SETQ |callCounter| (INTERNL1 |op| ";calls"))
                                  (SETQ |res|
-                                         (LIST '|%b| (|eval| |hitCounter|) '/
+                                         (LIST '|%b| (|eval| |hitCounter|) "/"
                                                (|eval| |callCounter|) '|%d|
-                                               '|calls to |))
+                                               "calls to "))
                                  (SET |hitCounter| 0)
                                  (SET |callCounter| 0)
                                  |res|))))
@@ -870,8 +869,8 @@
                           (SETQ |cacheValue| (|eval| (CADR |cacheVec|)))
                           (COND
                            ((EQ |kind| '|hash|)
-                            (LIST '| (| '|%b| (HASH-TABLE-COUNT |cacheValue|)
-                                  '|%d| '|entries)|))
+                            (LIST " (" '|%b| (HASH-TABLE-COUNT |cacheValue|)
+                                  '|%d| "entries)"))
                            (#1#
                             (PROGN
                              (SETQ |empties|
@@ -879,8 +878,8 @@
                                       (|eval| (CADR |cacheVec|))))
                              (COND ((EQL |empties| 0) NIL)
                                    (#1#
-                                    (LIST '| (| '|%b| (- |kind| |empties|) '/
-                                          |kind| '|%d| '|slots used)|))))))))
+                                    (LIST " (" '|%b| (- |kind| |empties|) "/"
+                                          |kind| '|%d| "slots used)"))))))))
                  (|sayBrightly| (APPEND |prefix| (CONS |op| |postString|)))))))
          (SETQ |bfVar#31| (CDR |bfVar#31|))))
       |$clamList| NIL))))
@@ -1264,9 +1263,9 @@
 ;       not INTEGERP n =>   keyedSystemError("S2GE0013",[x])
 ;       argList1:= [constructor2ConstructorForm x for x in argList]
 ;       reportList:= [[n,key,argList1],:reportList]
-;   sayBrightly ["%b","  USE  NAME ARGS","%d"]
+;   sayBrightly ["%b",'"  USE  NAME ARGS","%d"]
 ;   for [n,fn,args] in NREVERSE SORTBY(sortFn,reportList) repeat
-;     sayBrightlyNT [:rightJustifyString(n,6),"  ",fn,": "]
+;     sayBrightlyNT [:rightJustifyString(n,6),'"  ",fn,'": "]
 ;     pp args
 
 (DEFUN |globalHashtableStats| (|x| |sortFn|)
@@ -1325,7 +1324,7 @@
               |u| NIL))))
           (SETQ |bfVar#39| (CDR |bfVar#39|))))
        |keys| NIL)
-      (|sayBrightly| (LIST '|%b| '|  USE  NAME ARGS| '|%d|))
+      (|sayBrightly| (LIST '|%b| "  USE  NAME ARGS" '|%d|))
       ((LAMBDA (|bfVar#45| |bfVar#44|)
          (LOOP
           (COND
@@ -1346,7 +1345,7 @@
                  (PROGN
                   (|sayBrightlyNT|
                    (APPEND (|rightJustifyString| |n| 6)
-                           (CONS '|  | (CONS |fn| (CONS '|: | NIL)))))
+                           (CONS "  " (CONS |fn| (CONS ": " NIL)))))
                   (|pp| |args|)))))
           (SETQ |bfVar#45| (CDR |bfVar#45|))))
        (NREVERSE (SORTBY |sortFn| |reportList|)) NIL)))))

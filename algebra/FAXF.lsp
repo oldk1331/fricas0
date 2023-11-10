@@ -6,7 +6,7 @@
 (DEFPARAMETER |FiniteAlgebraicExtensionField;AL| 'NIL) 
 
 (DEFUN |FiniteAlgebraicExtensionField| (|t#1|)
-  (LET (#1=#:G699 (#2=#:G700 (|devaluate| |t#1|)))
+  (LET (#1=#:G457 (#2=#:G458 (|devaluate| |t#1|)))
     (COND
      ((SETQ #1# (|assoc| #2# |FiniteAlgebraicExtensionField;AL|)) (CDR #1#))
      (T
@@ -17,11 +17,11 @@
       #1#)))) 
 
 (DEFUN |FiniteAlgebraicExtensionField;| (|t#1|)
-  (SPROG ((#1=#:G698 NIL))
+  (SPROG ((#1=#:G456 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
-                                   (|subst_in_cat| '(#2=#:G697)
+                                   (|subst_in_cat| '(#2=#:G455)
                                                    (LIST
                                                     '(|SparseUnivariatePolynomial|
                                                       |t#1|))
@@ -46,47 +46,47 @@
                                                            T)
                                                           ((|degree|
                                                             ((|PositiveInteger|)
-                                                             $))
+                                                             %))
                                                            T)
                                                           ((|basis|
-                                                            ((|Vector| $)
+                                                            ((|Vector| %)
                                                              (|PositiveInteger|)))
                                                            (|has| |t#1|
                                                                   (|Finite|)))
                                                           ((|minimalPolynomial|
                                                             ((|SparseUnivariatePolynomial|
-                                                              $)
-                                                             $
+                                                              %)
+                                                             %
                                                              (|PositiveInteger|)))
                                                            (|has| |t#1|
                                                                   (|Finite|)))
                                                           ((|norm|
-                                                            ($ $
+                                                            (% %
                                                              (|PositiveInteger|)))
                                                            (|has| |t#1|
                                                                   (|Finite|)))
                                                           ((|trace|
-                                                            ($ $
+                                                            (% %
                                                              (|PositiveInteger|)))
                                                            (|has| |t#1|
                                                                   (|Finite|)))
                                                           ((|createNormalElement|
-                                                            ($))
+                                                            (%))
                                                            (|has| |t#1|
                                                                   (|Finite|)))
                                                           ((|normalElement|
-                                                            ($))
+                                                            (%))
                                                            (|has| |t#1|
                                                                   (|Finite|)))
                                                           ((|normal?|
-                                                            ((|Boolean|) $))
+                                                            ((|Boolean|) %))
                                                            (|has| |t#1|
                                                                   (|Finite|)))
-                                                          ((|generator| ($))
+                                                          ((|generator| (%))
                                                            (|has| |t#1|
                                                                   (|Finite|)))
                                                           ((|linearAssociatedExp|
-                                                            ($ $
+                                                            (% %
                                                              (|SparseUnivariatePolynomial|
                                                               |t#1|)))
                                                            (|has| |t#1|
@@ -94,13 +94,13 @@
                                                           ((|linearAssociatedOrder|
                                                             ((|SparseUnivariatePolynomial|
                                                               |t#1|)
-                                                             $))
+                                                             %))
                                                            (|has| |t#1|
                                                                   (|Finite|)))
                                                           ((|linearAssociatedLog|
                                                             ((|SparseUnivariatePolynomial|
                                                               |t#1|)
-                                                             $))
+                                                             %))
                                                            (|has| |t#1|
                                                                   (|Finite|)))
                                                           ((|linearAssociatedLog|
@@ -108,7 +108,7 @@
                                                               (|SparseUnivariatePolynomial|
                                                                |t#1|)
                                                               "failed")
-                                                             $ $))
+                                                             % %))
                                                            (|has| |t#1|
                                                                   (|Finite|))))
                                                         '(((|FiniteFieldCategory|)

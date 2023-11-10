@@ -6,7 +6,7 @@
 (DEFPARAMETER |ExtensionField;AL| 'NIL) 
 
 (DEFUN |ExtensionField| (|t#1|)
-  (LET (#1=#:G691 (#2=#:G692 (|devaluate| |t#1|)))
+  (LET (#1=#:G450 (#2=#:G451 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |ExtensionField;AL|)) (CDR #1#))
           (T
            (SETQ |ExtensionField;AL|
@@ -15,7 +15,7 @@
            #1#)))) 
 
 (DEFUN |ExtensionField;| (|t#1|)
-  (SPROG ((#1=#:G690 NIL))
+  (SPROG ((#1=#:G449 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -28,18 +28,18 @@
                                                         (|Module| '|t#1|)
                                                         (|mkCategory|
                                                          '(((|algebraic?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|transcendent?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|inGroundField?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|degree|
                                                              ((|OnePointCompletion|
                                                                (|PositiveInteger|))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|extensionDegree|
                                                              ((|OnePointCompletion|
@@ -48,12 +48,12 @@
                                                            ((|transcendenceDegree|
                                                              ((|NonNegativeInteger|)))
                                                             T)
-                                                           ((/ ($ $ |t#1|)) T)
-                                                           ((|Frobenius| ($ $))
+                                                           ((/ (% % |t#1|)) T)
+                                                           ((|Frobenius| (% %))
                                                             (|has| |t#1|
                                                                    (|Finite|)))
                                                            ((|Frobenius|
-                                                             ($ $
+                                                             (% %
                                                               (|NonNegativeInteger|)))
                                                             (|has| |t#1|
                                                                    (|Finite|))))

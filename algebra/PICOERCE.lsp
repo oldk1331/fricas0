@@ -1,22 +1,22 @@
 
-(SDEFUN |PICOERCE;coerce;PE;1| ((|x| (|Pi|)) ($ (|Expression| R)))
+(SDEFUN |PICOERCE;coerce;PE;1| ((|x| (|Pi|)) (% (|Expression| R)))
         (SPROG ((|f| (|Fraction| (|SparseUnivariatePolynomial| (|Integer|)))))
-               (SEQ (LETT |f| (SPADCALL |x| (QREFELT $ 9)))
+               (SEQ (LETT |f| (SPADCALL |x| (QREFELT % 9)))
                     (EXIT
-                     (SPADCALL (|PICOERCE;p2e| (SPADCALL |f| (QREFELT $ 11)) $)
-                               (|PICOERCE;p2e| (SPADCALL |f| (QREFELT $ 12)) $)
-                               (QREFELT $ 14)))))) 
+                     (SPADCALL (|PICOERCE;p2e| (SPADCALL |f| (QREFELT % 11)) %)
+                               (|PICOERCE;p2e| (SPADCALL |f| (QREFELT % 12)) %)
+                               (QREFELT % 14)))))) 
 
 (SDEFUN |PICOERCE;p2e|
-        ((|p| (|SparseUnivariatePolynomial| (|Integer|))) ($ (|Expression| R)))
-        (SPADCALL (SPADCALL (ELT $ 17) |p| (QREFELT $ 21))
-                  (SPADCALL (QREFELT $ 22)) (QREFELT $ 23))) 
+        ((|p| (|SparseUnivariatePolynomial| (|Integer|))) (% (|Expression| R)))
+        (SPADCALL (SPADCALL (ELT % 17) |p| (QREFELT % 21))
+                  (SPADCALL (QREFELT % 22)) (QREFELT % 23))) 
 
 (DECLAIM (NOTINLINE |PiCoercions;|)) 
 
-(DEFUN |PiCoercions| (#1=#:G706)
+(DEFUN |PiCoercions| (#1=#:G451)
   (SPROG NIL
-         (PROG (#2=#:G707)
+         (PROG (#2=#:G452)
            (RETURN
             (COND
              ((LETT #2#
@@ -31,19 +31,19 @@
                  ((NOT #2#) (HREM |$ConstructorCache| '|PiCoercions|)))))))))) 
 
 (DEFUN |PiCoercions;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|PiCoercions| DV$1))
-          (LETT $ (GETREFV 24))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 24))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PiCoercions| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|PiCoercions| '|infovec|
           (LIST

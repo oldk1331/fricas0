@@ -6,8 +6,8 @@
 (DEFPARAMETER |PowerSeriesCategory;AL| 'NIL) 
 
 (DEFUN |PowerSeriesCategory| (|t#1| |t#2| |t#3|)
-  (LET (#1=#:G695
-        (#2=#:G696
+  (LET (#1=#:G454
+        (#2=#:G455
          (LIST (|devaluate| |t#1|) (|devaluate| |t#2|) (|devaluate| |t#3|))))
     (COND ((SETQ #1# (|assoc| #2# |PowerSeriesCategory;AL|)) (CDR #1#))
           (T
@@ -18,7 +18,7 @@
            #1#)))) 
 
 (DEFUN |PowerSeriesCategory;| (|t#1| |t#2| |t#3|)
-  (SPROG ((#1=#:G694 NIL))
+  (SPROG ((#1=#:G453 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3|)
@@ -31,14 +31,14 @@
                                                                       '|t#2|)
                                                  (|VariablesCommuteWithCoefficients|)
                                                  (|mkCategory|
-                                                  '(((|leadingMonomial| ($ $))
+                                                  '(((|leadingMonomial| (% %))
                                                      T)
                                                     ((|leadingCoefficient|
-                                                      (|t#1| $))
+                                                      (|t#1| %))
                                                      T)
-                                                    ((|degree| (|t#2| $)) T)
-                                                    ((|pole?| ((|Boolean|) $))
+                                                    ((|degree| (|t#2| %)) T)
+                                                    ((|pole?| ((|Boolean|) %))
                                                      T)
-                                                    ((|complete| ($ $)) T))
+                                                    ((|complete| (% %)) T))
                                                   NIL NIL NIL)))))))
            (SETELT #1# 0 (LIST '|PowerSeriesCategory| |t#1| |t#2| |t#3|))))) 

@@ -3,18 +3,18 @@
      '(XLAM (|n| |i|) (LOGBITP |i| |n|))) 
 
 (SDEFUN |INTBIT;bitTruth;INniB;1|
-        ((|n| (|Integer|)) (|i| (|NonNegativeInteger|)) ($ (|Boolean|)))
+        ((|n| (|Integer|)) (|i| (|NonNegativeInteger|)) (% (|Boolean|)))
         (LOGBITP |i| |n|)) 
 
 (SDEFUN |INTBIT;bitCoef;INniI;2|
-        ((|n| (|Integer|)) (|i| (|NonNegativeInteger|)) ($ (|Integer|)))
-        (COND ((SPADCALL |n| |i| (QREFELT $ 9)) 1) ('T 0))) 
+        ((|n| (|Integer|)) (|i| (|NonNegativeInteger|)) (% (|Integer|)))
+        (COND ((SPADCALL |n| |i| (QREFELT % 9)) 1) ('T 0))) 
 
 (DECLAIM (NOTINLINE |IntegerBits;|)) 
 
 (DEFUN |IntegerBits| ()
   (SPROG NIL
-         (PROG (#1=#:G698)
+         (PROG (#1=#:G453)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|IntegerBits|))
@@ -30,16 +30,16 @@
                  ((NOT #1#) (HREM |$ConstructorCache| '|IntegerBits|)))))))))) 
 
 (DEFUN |IntegerBits;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|IntegerBits|))
-          (LETT $ (GETREFV 11))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|IntegerBits| NIL (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+          (LETT % (GETREFV 11))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|IntegerBits| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|IntegerBits| '|infovec|
           (LIST

@@ -1,13 +1,13 @@
 
 (SDEFUN |CMPLXRT;complexZeros;UPParL;1|
-        ((|p| (UP)) (|eps| (|Par|)) ($ (|List| (|Complex| |Par|))))
+        ((|p| (UP)) (|eps| (|Par|)) (% (|List| (|Complex| |Par|))))
         (SPROG
-         ((|ris| (|List| (|Complex| |Par|))) (#1=#:G740 NIL) (|z| NIL)
-          (#2=#:G739 NIL) (|lz| (|List| (|List| |Par|)))
+         ((|ris| (|List| (|Complex| |Par|))) (#1=#:G460 NIL) (|z| NIL)
+          (#2=#:G459 NIL) (|lz| (|List| (|List| |Par|)))
           (|p2| #3=(|Polynomial| (|Integer|))) (|p1| #3#)
           (|q| (|Polynomial| (|Complex| (|Integer|))))
           (|pp| #4=(|SparseUnivariatePolynomial| (|Complex| (|Integer|))))
-          (#5=#:G738 NIL) (|pf| NIL)
+          (#5=#:G458 NIL) (|pf| NIL)
           (|lpf|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
@@ -15,34 +15,34 @@
                       (|:| |exponent| (|NonNegativeInteger|)))))
           (|np| (|SparseUnivariatePolynomial| (|Complex| (|Integer|))))
           (|vv| #6=(|Symbol|)) (|x2| #6#) (|x1| #6#))
-         (SEQ (LETT |x1| (SPADCALL (QREFELT $ 9)))
-              (LETT |x2| (SPADCALL (QREFELT $ 9)))
-              (LETT |vv| (SPADCALL (QREFELT $ 9)))
-              (LETT |np| (SPADCALL |p| (QREFELT $ 11)))
+         (SEQ (LETT |x1| (SPADCALL (QREFELT % 9)))
+              (LETT |x2| (SPADCALL (QREFELT % 9)))
+              (LETT |vv| (SPADCALL (QREFELT % 9)))
+              (LETT |np| (SPADCALL |p| (QREFELT % 11)))
               (LETT |lpf|
-                    (SPADCALL (SPADCALL |np| (QREFELT $ 13)) (QREFELT $ 18)))
+                    (SPADCALL (SPADCALL |np| (QREFELT % 13)) (QREFELT % 18)))
               (LETT |ris| NIL)
               (SEQ (LETT |pf| NIL) (LETT #5# |lpf|) G190
                    (COND
                     ((OR (ATOM #5#) (PROGN (LETT |pf| (CAR #5#)) NIL))
                      (GO G191)))
                    (SEQ (LETT |pp| (QVELT |pf| 1))
-                        (LETT |q| (SPADCALL |pp| |vv| (QREFELT $ 20)))
+                        (LETT |q| (SPADCALL |pp| |vv| (QREFELT % 20)))
                         (LETT |q|
                               (SPADCALL |q| |vv|
                                         (SPADCALL
-                                         (SPADCALL |x1| (QREFELT $ 21))
+                                         (SPADCALL |x1| (QREFELT % 21))
                                          (SPADCALL
-                                          (SPADCALL 0 1 (QREFELT $ 27))
-                                          (SPADCALL |x2| (QREFELT $ 21))
-                                          (QREFELT $ 28))
-                                         (QREFELT $ 29))
-                                        (QREFELT $ 30)))
-                        (LETT |p1| (SPADCALL (ELT $ 31) |q| (QREFELT $ 35)))
-                        (LETT |p2| (SPADCALL (ELT $ 36) |q| (QREFELT $ 35)))
+                                          (SPADCALL 0 1 (QREFELT % 27))
+                                          (SPADCALL |x2| (QREFELT % 21))
+                                          (QREFELT % 28))
+                                         (QREFELT % 29))
+                                        (QREFELT % 30)))
+                        (LETT |p1| (SPADCALL (ELT % 31) |q| (QREFELT % 35)))
+                        (LETT |p2| (SPADCALL (ELT % 36) |q| (QREFELT % 35)))
                         (LETT |lz|
                               (SPADCALL (LIST |p1| |p2|) NIL (LIST |x1| |x2|)
-                                        |eps| (QREFELT $ 41)))
+                                        |eps| (QREFELT % 41)))
                         (EXIT
                          (LETT |ris|
                                (SPADCALL
@@ -59,21 +59,21 @@
                                               (CONS
                                                (SPADCALL (|SPADfirst| |z|)
                                                          (SPADCALL |z|
-                                                                   (QREFELT $
+                                                                   (QREFELT %
                                                                             43))
-                                                         (QREFELT $ 45))
+                                                         (QREFELT % 45))
                                                #2#))))
                                       (LETT #1# (CDR #1#)) (GO G190) G191
                                       (EXIT (NREVERSE #2#))))
-                                |ris| (QREFELT $ 47)))))
+                                |ris| (QREFELT % 47)))))
                    (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
               (EXIT |ris|)))) 
 
 (DECLAIM (NOTINLINE |ComplexRootPackage;|)) 
 
-(DEFUN |ComplexRootPackage| (&REST #1=#:G741)
+(DEFUN |ComplexRootPackage| (&REST #1=#:G461)
   (SPROG NIL
-         (PROG (#2=#:G742)
+         (PROG (#2=#:G462)
            (RETURN
             (COND
              ((LETT #2#
@@ -91,27 +91,27 @@
                   (HREM |$ConstructorCache| '|ComplexRootPackage|)))))))))) 
 
 (DEFUN |ComplexRootPackage;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|ComplexRootPackage| DV$1 DV$2))
-          (LETT $ (GETREFV 49))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 49))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|ComplexRootPackage|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|ComplexRootPackage| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (|Symbol|)
               (0 . |new|) (|SparseUnivariatePolynomial| 26) (4 . |makeSUP|)
-              (|Factored| $) (9 . |factor|)
+              (|Factored| %) (9 . |factor|)
               (|Union| '"nil" '"sqfr" '"irred" '"prime")
               (|Record| (|:| |flag| 14) (|:| |factor| 10)
                         (|:| |exponent| (|NonNegativeInteger|)))

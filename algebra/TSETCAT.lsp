@@ -6,8 +6,8 @@
 (DEFPARAMETER |TriangularSetCategory;AL| 'NIL) 
 
 (DEFUN |TriangularSetCategory| (|t#1| |t#2| |t#3| |t#4|)
-  (LET (#1=#:G754
-        (#2=#:G755
+  (LET (#1=#:G513
+        (#2=#:G514
          (LIST (|devaluate| |t#1|) (|devaluate| |t#2|) (|devaluate| |t#3|)
                (|devaluate| |t#4|))))
     (COND ((SETQ #1# (|assoc| #2# |TriangularSetCategory;AL|)) (CDR #1#))
@@ -20,7 +20,7 @@
            #1#)))) 
 
 (DEFUN |TriangularSetCategory;| (|t#1| |t#2| |t#3| |t#4|)
-  (SPROG ((#1=#:G753 NIL))
+  (SPROG ((#1=#:G512 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3| |t#4|)
@@ -35,11 +35,11 @@
                                                  (|shallowlyMutable|)
                                                  (|mkCategory|
                                                   '(((|infRittWu?|
-                                                      ((|Boolean|) $ $))
+                                                      ((|Boolean|) % %))
                                                      T)
                                                     ((|basicSet|
                                                       ((|Union|
-                                                        (|Record| (|:| |bas| $)
+                                                        (|Record| (|:| |bas| %)
                                                                   (|:| |top|
                                                                        (|List|
                                                                         |t#4|)))
@@ -51,7 +51,7 @@
                                                      T)
                                                     ((|basicSet|
                                                       ((|Union|
-                                                        (|Record| (|:| |bas| $)
+                                                        (|Record| (|:| |bas| %)
                                                                   (|:| |top|
                                                                        (|List|
                                                                         |t#4|)))
@@ -64,11 +64,11 @@
                                                                   |t#4|)))
                                                      T)
                                                     ((|initials|
-                                                      ((|List| |t#4|) $))
+                                                      ((|List| |t#4|) %))
                                                      T)
                                                     ((|degree|
                                                       ((|NonNegativeInteger|)
-                                                       $))
+                                                       %))
                                                      T)
                                                     ((|quasiComponent|
                                                       ((|Record|
@@ -76,47 +76,47 @@
                                                              (|List| |t#4|))
                                                         (|:| |open|
                                                              (|List| |t#4|)))
-                                                       $))
+                                                       %))
                                                      T)
                                                     ((|normalized?|
-                                                      ((|Boolean|) |t#4| $))
+                                                      ((|Boolean|) |t#4| %))
                                                      T)
                                                     ((|normalized?|
-                                                      ((|Boolean|) $))
+                                                      ((|Boolean|) %))
                                                      T)
                                                     ((|reduced?|
-                                                      ((|Boolean|) |t#4| $
+                                                      ((|Boolean|) |t#4| %
                                                        (|Mapping| (|Boolean|)
                                                                   |t#4|
                                                                   |t#4|)))
                                                      T)
                                                     ((|stronglyReduced?|
-                                                      ((|Boolean|) |t#4| $))
+                                                      ((|Boolean|) |t#4| %))
                                                      T)
                                                     ((|headReduced?|
-                                                      ((|Boolean|) |t#4| $))
+                                                      ((|Boolean|) |t#4| %))
                                                      T)
                                                     ((|initiallyReduced?|
-                                                      ((|Boolean|) |t#4| $))
+                                                      ((|Boolean|) |t#4| %))
                                                      T)
                                                     ((|autoReduced?|
-                                                      ((|Boolean|) $
+                                                      ((|Boolean|) %
                                                        (|Mapping| (|Boolean|)
                                                                   |t#4|
                                                                   (|List|
                                                                    |t#4|))))
                                                      T)
                                                     ((|stronglyReduced?|
-                                                      ((|Boolean|) $))
+                                                      ((|Boolean|) %))
                                                      T)
                                                     ((|headReduced?|
-                                                      ((|Boolean|) $))
+                                                      ((|Boolean|) %))
                                                      T)
                                                     ((|initiallyReduced?|
-                                                      ((|Boolean|) $))
+                                                      ((|Boolean|) %))
                                                      T)
                                                     ((|reduce|
-                                                      (|t#4| |t#4| $
+                                                      (|t#4| |t#4| %
                                                        (|Mapping| |t#4| |t#4|
                                                                   |t#4|)
                                                        (|Mapping| (|Boolean|)
@@ -125,7 +125,7 @@
                                                      T)
                                                     ((|rewriteSetWithReduction|
                                                       ((|List| |t#4|)
-                                                       (|List| |t#4|) $
+                                                       (|List| |t#4|) %
                                                        (|Mapping| |t#4| |t#4|
                                                                   |t#4|)
                                                        (|Mapping| (|Boolean|)
@@ -133,64 +133,64 @@
                                                                   |t#4|)))
                                                      T)
                                                     ((|stronglyReduce|
-                                                      (|t#4| |t#4| $))
+                                                      (|t#4| |t#4| %))
                                                      T)
                                                     ((|headReduce|
-                                                      (|t#4| |t#4| $))
+                                                      (|t#4| |t#4| %))
                                                      T)
                                                     ((|initiallyReduce|
-                                                      (|t#4| |t#4| $))
+                                                      (|t#4| |t#4| %))
                                                      T)
                                                     ((|removeZero|
-                                                      (|t#4| |t#4| $))
+                                                      (|t#4| |t#4| %))
                                                      T)
                                                     ((|collectQuasiMonic|
-                                                      ($ $))
+                                                      (% %))
                                                      T)
                                                     ((|reduceByQuasiMonic|
-                                                      (|t#4| |t#4| $))
+                                                      (|t#4| |t#4| %))
                                                      T)
                                                     ((|zeroSetSplit|
-                                                      ((|List| $)
+                                                      ((|List| %)
                                                        (|List| |t#4|)))
                                                      T)
                                                     ((|zeroSetSplitIntoTriangularSystems|
                                                       ((|List|
                                                         (|Record|
-                                                         (|:| |close| $)
+                                                         (|:| |close| %)
                                                          (|:| |open|
                                                               (|List| |t#4|))))
                                                        (|List| |t#4|)))
                                                      T)
                                                     ((|first|
                                                       ((|Union| |t#4| "failed")
-                                                       $))
+                                                       %))
                                                      T)
                                                     ((|last|
                                                       ((|Union| |t#4| "failed")
-                                                       $))
+                                                       %))
                                                      T)
                                                     ((|rest|
-                                                      ((|Union| $ "failed") $))
+                                                      ((|Union| % "failed") %))
                                                      T)
                                                     ((|algebraicVariables|
-                                                      ((|List| |t#3|) $))
+                                                      ((|List| |t#3|) %))
                                                      T)
                                                     ((|algebraic?|
-                                                      ((|Boolean|) |t#3| $))
+                                                      ((|Boolean|) |t#3| %))
                                                      T)
                                                     ((|select|
                                                       ((|Union| |t#4| "failed")
-                                                       $ |t#3|))
+                                                       % |t#3|))
                                                      T)
                                                     ((|extendIfCan|
-                                                      ((|Union| $ "failed") $
+                                                      ((|Union| % "failed") %
                                                        |t#4|))
                                                      T)
-                                                    ((|extend| ($ $ |t#4|)) T)
+                                                    ((|extend| (% % |t#4|)) T)
                                                     ((|coHeight|
                                                       ((|NonNegativeInteger|)
-                                                       $))
+                                                       %))
                                                      (|has| |t#3| (|Finite|))))
                                                   NIL NIL NIL)))))))
            (SETELT #1# 0

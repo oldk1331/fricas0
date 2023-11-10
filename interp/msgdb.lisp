@@ -184,7 +184,7 @@
 
 ; getKeyedMsg(key) ==
 ;     if not($msg_hash) then
-;         $msg_hash := MAKE_HASHTABLE('ID)
+;         $msg_hash := MAKE_HASHTABLE('EQ)
 ;         cacheKeyedMsg($defaultMsgDatabaseName)
 ;     HGET($msg_hash, key)
 
@@ -193,7 +193,7 @@
     (RETURN
      (PROGN
       (COND
-       ((NULL |$msg_hash|) (SETQ |$msg_hash| (MAKE_HASHTABLE 'ID))
+       ((NULL |$msg_hash|) (SETQ |$msg_hash| (MAKE_HASHTABLE 'EQ))
         (|cacheKeyedMsg| |$defaultMsgDatabaseName|)))
       (HGET |$msg_hash| |key|)))))
 
@@ -1205,7 +1205,7 @@
 ;   --  if not $displaySetValue then sayKeyedMsg("S2GL0007",NIL)
 ; --  if not $HiFiAccess then sayKeyedMsg("S2GL0008",NIL)
 ; --  version()
-;   sayMSG " "
+;   sayMSG '" "
 
 (DEFUN |spadStartUpMsgs| ()
   (PROG (|bar|)
@@ -1220,7 +1220,7 @@
              (|sayKeyedMsg| 'S2GL0018D NIL)
              (|sayKeyedMsg| 'S2GL0003B (LIST |$opSysName|))
              (|sayMSG| |bar|)
-             (|sayMSG| '| |)))))))
+             (|sayMSG| " ")))))))
 
 ; HELP() == sayKeyedMsg("S2GL0019",NIL)
 
@@ -2315,7 +2315,7 @@
   (PROG () (RETURN (|say_simple| |x| (|get_formatted_stream|)))))
 
 ; sayMSG2File(msg) ==
-;     file := makePathname("spadmsg", "listing")
+;     file := make_filename0('"spadmsg", '"listing")
 ;     str := MAKE_OUTSTREAM(file)
 ;     sayBrightly1(msg, str)
 ;     SHUT(str)
@@ -2324,7 +2324,7 @@
   (PROG (|file| |str|)
     (RETURN
      (PROGN
-      (SETQ |file| (|makePathname| '|spadmsg| '|listing|))
+      (SETQ |file| (|make_filename0| "spadmsg" "listing"))
       (SETQ |str| (MAKE_OUTSTREAM |file|))
       (|sayBrightly1| |msg| |str|)
       (SHUT |str|)))))

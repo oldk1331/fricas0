@@ -8,32 +8,32 @@
         (T (SETQ |EuclideanDomain;AL| (|EuclideanDomain;|))))) 
 
 (DEFUN |EuclideanDomain;| ()
-  (SPROG ((#1=#:G706 NIL))
+  (SPROG ((#1=#:G465 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|PrincipalIdealDomain|)
                            (|mkCategory|
-                            '(((|sizeLess?| ((|Boolean|) $ $)) T)
-                              ((|euclideanSize| ((|NonNegativeInteger|) $)) T)
+                            '(((|sizeLess?| ((|Boolean|) % %)) T)
+                              ((|euclideanSize| ((|NonNegativeInteger|) %)) T)
                               ((|divide|
-                                ((|Record| (|:| |quotient| $)
-                                           (|:| |remainder| $))
-                                 $ $))
+                                ((|Record| (|:| |quotient| %)
+                                           (|:| |remainder| %))
+                                 % %))
                                T)
-                              ((|quo| ($ $ $)) T) ((|rem| ($ $ $)) T)
+                              ((|quo| (% % %)) T) ((|rem| (% % %)) T)
                               ((|extendedEuclidean|
-                                ((|Record| (|:| |coef1| $) (|:| |coef2| $)
-                                           (|:| |generator| $))
-                                 $ $))
+                                ((|Record| (|:| |coef1| %) (|:| |coef2| %)
+                                           (|:| |generator| %))
+                                 % %))
                                T)
                               ((|extendedEuclidean|
                                 ((|Union|
-                                  (|Record| (|:| |coef1| $) (|:| |coef2| $))
+                                  (|Record| (|:| |coef1| %) (|:| |coef2| %))
                                   "failed")
-                                 $ $ $))
+                                 % % %))
                                T)
                               ((|multiEuclidean|
-                                ((|Union| (|List| $) "failed") (|List| $) $))
+                                ((|Union| (|List| %) "failed") (|List| %) %))
                                T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|EuclideanDomain|))))) 

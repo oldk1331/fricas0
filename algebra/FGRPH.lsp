@@ -6,7 +6,7 @@
 (DEFPARAMETER |FiniteGraph;AL| 'NIL) 
 
 (DEFUN |FiniteGraph| (|t#1|)
-  (LET (#1=#:G743 (#2=#:G744 (|devaluate| |t#1|)))
+  (LET (#1=#:G502 (#2=#:G503 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |FiniteGraph;AL|)) (CDR #1#))
           (T
            (SETQ |FiniteGraph;AL|
@@ -15,7 +15,7 @@
            #1#)))) 
 
 (DEFUN |FiniteGraph;| (|t#1|)
-  (SPROG ((#1=#:G742 NIL))
+  (SPROG ((#1=#:G501 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -25,10 +25,10 @@
                                                 (|Join| (|SetCategory|)
                                                         (|mkCategory|
                                                          '(((|addObject!|
-                                                             ($ $ |t#1|))
+                                                             (% % |t#1|))
                                                             T)
                                                            ((|addObject!|
-                                                             ($ $
+                                                             (% %
                                                               (|Record|
                                                                (|:| |value|
                                                                     |t#1|)
@@ -38,7 +38,7 @@
                                                                     (|NonNegativeInteger|)))))
                                                             T)
                                                            ((|addArrow!|
-                                                             ($ $
+                                                             (% %
                                                               (|Record|
                                                                (|:| |name|
                                                                     (|String|))
@@ -57,19 +57,19 @@
                                                                      (|NonNegativeInteger|))))))
                                                             T)
                                                            ((|addArrow!|
-                                                             ($ $ (|String|)
+                                                             (% % (|String|)
                                                               (|NonNegativeInteger|)
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|addArrow!|
-                                                             ($ $ (|String|)
+                                                             (% % (|String|)
                                                               (|NonNegativeInteger|)
                                                               (|NonNegativeInteger|)
                                                               (|List|
                                                                (|NonNegativeInteger|))))
                                                             T)
                                                            ((|addArrow!|
-                                                             ($ $ (|String|)
+                                                             (% % (|String|)
                                                               |t#1| |t#1|))
                                                             T)
                                                            ((|getVertices|
@@ -81,11 +81,11 @@
                                                                      (|NonNegativeInteger|))
                                                                 (|:| |posY|
                                                                      (|NonNegativeInteger|))))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|getVertexIndex|
                                                              ((|NonNegativeInteger|)
-                                                              $ |t#1|))
+                                                              % |t#1|))
                                                             T)
                                                            ((|getArrows|
                                                              ((|List|
@@ -105,220 +105,220 @@
                                                                 (|:| |map|
                                                                      (|List|
                                                                       (|NonNegativeInteger|)))))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|flatten|
-                                                             ($
+                                                             (%
                                                               (|DirectedGraph|
-                                                               $)))
+                                                               %)))
                                                             T)
-                                                           ((|initial| ($)) T)
+                                                           ((|initial| (%)) T)
                                                            ((|terminal|
-                                                             ($ |t#1|))
+                                                             (% |t#1|))
                                                             T)
                                                            ((|cycleOpen|
-                                                             ($ (|List| |t#1|)
+                                                             (% (|List| |t#1|)
                                                               (|String|)))
                                                             T)
                                                            ((|cycleClosed|
-                                                             ($ (|List| |t#1|)
+                                                             (% (|List| |t#1|)
                                                               (|String|)))
                                                             T)
                                                            ((|unit|
-                                                             ($ (|List| |t#1|)
+                                                             (% (|List| |t#1|)
                                                               (|String|)))
                                                             T)
                                                            ((|kgraph|
-                                                             ($ (|List| |t#1|)
+                                                             (% (|List| |t#1|)
                                                               (|String|)))
                                                             T)
                                                            ((|isDirectSuccessor?|
-                                                             ((|Boolean|) $
+                                                             ((|Boolean|) %
                                                               (|NonNegativeInteger|)
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|isGreaterThan?|
-                                                             ((|Boolean|) $
+                                                             ((|Boolean|) %
                                                               (|NonNegativeInteger|)
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|max|
                                                              ((|NonNegativeInteger|)
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|max|
                                                              ((|NonNegativeInteger|)
-                                                              $
+                                                              %
                                                               (|List|
                                                                (|NonNegativeInteger|))))
                                                             T)
                                                            ((|min|
                                                              ((|NonNegativeInteger|)
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|min|
                                                              ((|NonNegativeInteger|)
-                                                              $
+                                                              %
                                                               (|List|
                                                                (|NonNegativeInteger|))))
                                                             T)
                                                            ((|isFixPoint?|
-                                                             ((|Boolean|) $
+                                                             ((|Boolean|) %
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|arrowName|
-                                                             ((|String|) $
+                                                             ((|String|) %
                                                               (|NonNegativeInteger|)
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|getArrowIndex|
                                                              ((|NonNegativeInteger|)
-                                                              $
+                                                              %
                                                               (|NonNegativeInteger|)
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|inDegree|
                                                              ((|NonNegativeInteger|)
-                                                              $
+                                                              %
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|outDegree|
                                                              ((|NonNegativeInteger|)
-                                                              $
+                                                              %
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|nodeFromNode|
                                                              ((|List|
                                                                (|NonNegativeInteger|))
-                                                              $
+                                                              %
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|nodeToNode|
                                                              ((|List|
                                                                (|NonNegativeInteger|))
-                                                              $
+                                                              %
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|arrowsFromNode|
                                                              ((|List|
                                                                (|NonNegativeInteger|))
-                                                              $
+                                                              %
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|arrowsToNode|
                                                              ((|List|
                                                                (|NonNegativeInteger|))
-                                                              $
+                                                              %
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|nodeFromArrow|
                                                              ((|List|
                                                                (|NonNegativeInteger|))
-                                                              $
+                                                              %
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|nodeToArrow|
                                                              ((|List|
                                                                (|NonNegativeInteger|))
-                                                              $
+                                                              %
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|arrowsFromArrow|
                                                              ((|List|
                                                                (|NonNegativeInteger|))
-                                                              $
+                                                              %
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|arrowsToArrow|
                                                              ((|List|
                                                                (|NonNegativeInteger|))
-                                                              $
+                                                              %
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|routeNodes|
                                                              ((|List|
                                                                (|NonNegativeInteger|))
-                                                              $
+                                                              %
                                                               (|NonNegativeInteger|)
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|routeArrows|
                                                              ((|List|
                                                                (|NonNegativeInteger|))
-                                                              $
+                                                              %
                                                               (|NonNegativeInteger|)
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|distance|
-                                                             ((|Integer|) $
+                                                             ((|Integer|) %
                                                               (|NonNegativeInteger|)
                                                               (|NonNegativeInteger|)))
                                                             T)
-                                                           ((+ ($ $ $)) T)
-                                                           ((|merge| ($ $ $))
+                                                           ((+ (% % %)) T)
+                                                           ((|merge| (% % %))
                                                             T)
                                                            ((|spanningTreeArrow|
                                                              ((|Tree|
                                                                (|Integer|))
-                                                              $
+                                                              %
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|spanningForestArrow|
                                                              ((|List|
                                                                (|Tree|
                                                                 (|Integer|)))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|spanningTreeNode|
                                                              ((|Tree|
                                                                (|Integer|))
-                                                              $
+                                                              %
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|spanningForestNode|
                                                              ((|List|
                                                                (|Tree|
                                                                 (|Integer|)))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|loopsNodes|
                                                              ((|List| (|Loop|))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|loopsAtNode|
                                                              ((|List| (|Loop|))
-                                                              $
+                                                              %
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|loopsArrows|
                                                              ((|List| (|Loop|))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|isAcyclic?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|incidenceMatrix|
                                                              ((|Matrix|
                                                                (|Integer|))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|adjacencyMatrix|
                                                              ((|Matrix|
                                                                (|NonNegativeInteger|))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|laplacianMatrix|
                                                              ((|Matrix|
                                                                (|Integer|))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|distanceMatrix|
                                                              ((|Matrix|
                                                                (|Integer|))
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|isFunctional?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|isDirected?|
                                                              ((|Boolean|)))
@@ -328,32 +328,32 @@
                                                               (|Scene|
                                                                (|SCartesian|
                                                                 2))
-                                                              $ (|Boolean|)
+                                                              % (|Boolean|)
                                                               (|Boolean|)))
                                                             T)
                                                            ((|diagramSvg|
                                                              ((|Void|)
-                                                              (|String|) $
+                                                              (|String|) %
                                                               (|Boolean|)))
                                                             T)
                                                            ((|diagramsSvg|
                                                              ((|Void|)
                                                               (|String|)
-                                                              (|List| $)
+                                                              (|List| %)
                                                               (|Boolean|)))
                                                             T)
                                                            ((|deepDiagramSvg|
                                                              ((|Void|)
-                                                              (|String|) $
+                                                              (|String|) %
                                                               (|Boolean|)))
                                                             T)
                                                            ((|diagramWidth|
                                                              ((|NonNegativeInteger|)
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|diagramHeight|
                                                              ((|NonNegativeInteger|)
-                                                              $))
+                                                              %))
                                                             T)
                                                            ((|createWidth|
                                                              ((|NonNegativeInteger|)
@@ -370,10 +370,10 @@
                                                               (|NonNegativeInteger|)))
                                                             T)
                                                            ((|looseEquals|
-                                                             ((|Boolean|) $ $))
+                                                             ((|Boolean|) % %))
                                                             T)
                                                            ((|map|
-                                                             ($ $
+                                                             (% %
                                                               (|List|
                                                                (|NonNegativeInteger|))
                                                               (|List| |t#1|)
@@ -381,7 +381,7 @@
                                                               (|Integer|)))
                                                             T)
                                                            ((|mapContra|
-                                                             ($ $
+                                                             (% %
                                                               (|List|
                                                                (|NonNegativeInteger|))
                                                               (|List| |t#1|)

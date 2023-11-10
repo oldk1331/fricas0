@@ -1,45 +1,45 @@
 
 (SDEFUN |SEG2;map;MSS;1|
-        ((|f| (|Mapping| S R)) (|r| (|Segment| R)) ($ (|Segment| S)))
-        (SPADCALL (SPADCALL (SPADCALL |r| (QREFELT $ 9)) |f|)
-                  (SPADCALL (SPADCALL |r| (QREFELT $ 10)) |f|) (QREFELT $ 12))) 
+        ((|f| (|Mapping| S R)) (|r| (|Segment| R)) (% (|Segment| S)))
+        (SPADCALL (SPADCALL (SPADCALL |r| (QREFELT % 9)) |f|)
+                  (SPADCALL (SPADCALL |r| (QREFELT % 10)) |f|) (QREFELT % 12))) 
 
 (SDEFUN |SEG2;map;MSL;2|
-        ((|f| (|Mapping| S R)) (|r| (|Segment| R)) ($ (|List| S)))
+        ((|f| (|Mapping| S R)) (|r| (|Segment| R)) (% (|List| S)))
         (SPROG ((|l| (R)) (|lr| (|List| S)) (|inc| (R)) (|h| (R)))
-               (SEQ (LETT |lr| NIL) (LETT |l| (SPADCALL |r| (QREFELT $ 9)))
-                    (LETT |h| (SPADCALL |r| (QREFELT $ 10)))
+               (SEQ (LETT |lr| NIL) (LETT |l| (SPADCALL |r| (QREFELT % 9)))
+                    (LETT |h| (SPADCALL |r| (QREFELT % 10)))
                     (LETT |inc|
-                          (SPADCALL (SPADCALL |r| (QREFELT $ 16))
-                                    (QREFELT $ 17)))
+                          (SPADCALL (SPADCALL |r| (QREFELT % 16))
+                                    (QREFELT % 17)))
                     (COND
-                     ((SPADCALL |inc| (|spadConstant| $ 18) (QREFELT $ 20))
+                     ((SPADCALL |inc| (|spadConstant| % 18) (QREFELT % 20))
                       (SEQ G190
                            (COND
-                            ((NULL (SPADCALL |l| |h| (QREFELT $ 21)))
+                            ((NULL (SPADCALL |l| |h| (QREFELT % 21)))
                              (GO G191)))
                            (SEQ (LETT |lr| (CONS (SPADCALL |l| |f|) |lr|))
                                 (EXIT
                                  (LETT |l|
-                                       (SPADCALL |l| |inc| (QREFELT $ 22)))))
+                                       (SPADCALL |l| |inc| (QREFELT % 22)))))
                            NIL (GO G190) G191 (EXIT NIL)))
                      ('T
                       (SEQ G190
                            (COND
-                            ((NULL (SPADCALL |l| |h| (QREFELT $ 23)))
+                            ((NULL (SPADCALL |l| |h| (QREFELT % 23)))
                              (GO G191)))
                            (SEQ (LETT |lr| (CONS (SPADCALL |l| |f|) |lr|))
                                 (EXIT
                                  (LETT |l|
-                                       (SPADCALL |l| |inc| (QREFELT $ 22)))))
+                                       (SPADCALL |l| |inc| (QREFELT % 22)))))
                            NIL (GO G190) G191 (EXIT NIL))))
                     (EXIT (NREVERSE |lr|))))) 
 
 (DECLAIM (NOTINLINE |SegmentFunctions2;|)) 
 
-(DEFUN |SegmentFunctions2| (&REST #1=#:G706)
+(DEFUN |SegmentFunctions2| (&REST #1=#:G458)
   (SPROG NIL
-         (PROG (#2=#:G707)
+         (PROG (#2=#:G459)
            (RETURN
             (COND
              ((LETT #2#
@@ -57,29 +57,29 @@
                   (HREM |$ConstructorCache| '|SegmentFunctions2|)))))))))) 
 
 (DEFUN |SegmentFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|SegmentFunctions2| DV$1 DV$2))
-          (LETT $ (GETREFV 26))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 26))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
                                               (|HasCategory| |#1|
                                                              '(|OrderedRing|))))))
           (|haddProp| |$ConstructorCache| '|SegmentFunctions2| (LIST DV$1 DV$2)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
           (COND
            ((|testBitVector| |pv$| 1)
-            (QSETREFV $ 25 (CONS (|dispatchFunction| |SEG2;map;MSL;2|) $))))
-          $))) 
+            (QSETREFV % 25 (CONS (|dispatchFunction| |SEG2;map;MSL;2|) %))))
+          %))) 
 
 (MAKEPROP '|SegmentFunctions2| '|infovec|
           (LIST

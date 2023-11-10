@@ -112,7 +112,7 @@
         (STR_ELT s 0)
         `(|STR_to_CHAR_fun| ,s)))
 
-;;; Vectors and matrices of of small integer 32-bit numbers
+;;; Vectors and matrices of small integer (8-bit, 16-bit and 32-bit numbers)
 
 (defmacro suffixed_name(name s)
     `(intern (concatenate 'string (symbol-name ',name)
@@ -564,6 +564,13 @@
 
 (defmacro HREM (table key) `(remhash ,key ,table))
 
+(defun MAKE_HASHTABLE (tst)
+     (cond
+         ((MEMQ tst '(EQ EQUAL))
+             (make-hash-table :test tst))
+         (t (error "bad arg to MAKE_HASHTABLE")))
+)
+
 ; Misc operations
 
 (defmacro |qset_first|(l x) `(SETF (CAR (the cons ,l)) ,x))
@@ -636,7 +643,28 @@
 
 (defmacro ELT_BVEC (bv i)    `(sbit ,bv ,i))
 (defmacro SETELT_BVEC (bv i x)  `(setf (sbit ,bv ,i) ,x))
-(defmacro |size_BVEC| (bv)  `(size ,bv))
+(defmacro |size_BVEC| (bv)  `(length (the simple-bit-vector ,bv)))
+
+(defun |make_BVEC| (n x)
+    (make-array (list n) :element-type 'bit :initial-element x))
+(defun |equal_BVEC| (bv1 bv2) (equal (the simple-bit-vector bv1)
+                                     (the simple-bit-vector bv2)))
+(defun |copy_BVEC| (bv)  (copy-seq (the simple-bit-vector bv)))
+(defun |greater_BVEC| (bv1 bv2)
+  (let ((pos (mismatch (the simple-bit-vector bv1)
+                       (the simple-bit-vector bv2))))
+    (cond ((or (null pos) (>= pos (length bv1))) nil)
+          ((< pos (length bv2)) (> (bit bv1 pos) (bit bv2 pos)))
+          ((find 1 bv1 :start pos) t)
+          (t nil))))
+
+(defun |not_BVEC| (bv) (bit-not (the simple-bit-vector bv)))
+(defun |or_BVEC| (bv1 bv2) (bit-ior  (the simple-bit-vector bv1)
+                                     (the simple-bit-vector bv2)))
+(defun |xor_BVEC| (bv1 bv2) (bit-xor (the simple-bit-vector bv1)
+                                     (the simple-bit-vector bv2)))
+(defun |and_BVEC| (bv1 bv2) (bit-and (the simple-bit-vector bv1)
+                                     (the simple-bit-vector bv2)))
 
 (defun |is_BVEC| (bv) (simple-bit-vector-p bv))
 

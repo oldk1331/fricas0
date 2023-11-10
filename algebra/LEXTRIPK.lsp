@@ -3,29 +3,29 @@
         ((|lp|
           (|List|
            (|NewSparseMultivariatePolynomial| R (|OrderedVariableList| |ls|))))
-         ($ (|List| (|Symbol|))))
+         (% (|List| (|Symbol|))))
         (SPROG
-         ((|truels| (|List| (|Symbol|))) (#1=#:G713 NIL) (#2=#:G722 NIL)
+         ((|truels| (|List| (|Symbol|))) (#1=#:G467 NIL) (#2=#:G473 NIL)
           (|s| NIL) (|lv| (|List| (|OrderedVariableList| |ls|))))
          (SEQ
-          (LETT |lv| (SPADCALL (SPADCALL |lp| (QREFELT $ 10)) (QREFELT $ 12)))
+          (LETT |lv| (SPADCALL (SPADCALL |lp| (QREFELT % 10)) (QREFELT % 12)))
           (LETT |truels| NIL)
-          (SEQ (LETT |s| NIL) (LETT #2# (QREFELT $ 7)) G190
+          (SEQ (LETT |s| NIL) (LETT #2# (QREFELT % 7)) G190
                (COND
                 ((OR (ATOM #2#) (PROGN (LETT |s| (CAR #2#)) NIL)) (GO G191)))
                (SEQ
                 (EXIT
                  (COND
                   ((SPADCALL
-                    (PROG2 (LETT #1# (SPADCALL |s| (QREFELT $ 16)))
+                    (PROG2 (LETT #1# (SPADCALL |s| (QREFELT % 16)))
                         (QCDR #1#)
                       (|check_union2| (QEQCAR #1# 0)
-                                      (|OrderedVariableList| (QREFELT $ 7))
+                                      (|OrderedVariableList| (QREFELT % 7))
                                       (|Union|
-                                       (|OrderedVariableList| (QREFELT $ 7))
+                                       (|OrderedVariableList| (QREFELT % 7))
                                        "failed")
                                       #1#))
-                    |lv| (QREFELT $ 18))
+                    |lv| (QREFELT % 18))
                    (LETT |truels| (CONS |s| |truels|))))))
                (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
           (EXIT (REVERSE |truels|))))) 
@@ -34,10 +34,10 @@
         ((|lp|
           (|List|
            (|NewSparseMultivariatePolynomial| R (|OrderedVariableList| |ls|))))
-         ($ (|Boolean|)))
+         (% (|Boolean|)))
         (SPROG
-         ((|lq1| (|List| (|Polynomial| R))) (#1=#:G731 NIL) (|p| NIL)
-          (#2=#:G730 NIL)
+         ((|lq1| (|List| (|Polynomial| R))) (#1=#:G479 NIL) (|p| NIL)
+          (#2=#:G478 NIL)
           (|fglmpack|
            (CATEGORY |package|
             (SIGNATURE |zeroDimensional?|
@@ -48,8 +48,8 @@
             (SIGNATURE |groebner|
              ((|List| (|Polynomial| R)) (|List| (|Polynomial| R))))))
           (|truels| (|List| (|Symbol|))))
-         (SEQ (LETT |truels| (|LEXTRIPK;trueVariables| |lp| $))
-              (LETT |fglmpack| (|FGLMIfCanPackage| (QREFELT $ 6) |truels|))
+         (SEQ (LETT |truels| (|LEXTRIPK;trueVariables| |lp| %))
+              (LETT |fglmpack| (|FGLMIfCanPackage| (QREFELT % 6) |truels|))
               (LETT |lq1|
                     (PROGN
                      (LETT #2# NIL)
@@ -60,7 +60,7 @@
                           (SEQ
                            (EXIT
                             (LETT #2#
-                                  (CONS (SPADCALL |p| (QREFELT $ 21)) #2#))))
+                                  (CONS (SPADCALL |p| (QREFELT % 21)) #2#))))
                           (LETT #1# (CDR #1#)) (GO G190) G191
                           (EXIT (NREVERSE #2#)))))
               (EXIT
@@ -70,7 +70,7 @@
                                                       (LIST '|List|
                                                             (LIST '|Polynomial|
                                                                   (|devaluate|
-                                                                   (ELT $
+                                                                   (ELT %
                                                                         6)))))
                                                 |fglmpack|)))))) 
 
@@ -78,16 +78,16 @@
         ((|lp|
           (|List|
            (|NewSparseMultivariatePolynomial| R (|OrderedVariableList| |ls|))))
-         ($
+         (%
           (|Union|
            (|List|
             (|NewSparseMultivariatePolynomial| R (|OrderedVariableList| |ls|)))
            "failed")))
         (SPROG
-         ((#1=#:G752 NIL) (|q1| NIL) (#2=#:G751 NIL) (#3=#:G748 NIL)
+         ((#1=#:G500 NIL) (|q1| NIL) (#2=#:G499 NIL) (#3=#:G496 NIL)
           (|foo| (|Union| (|List| (|Polynomial| R)) #4="failed"))
-          (|lq1| (|List| (|Polynomial| R))) (#5=#:G750 NIL) (|p| NIL)
-          (#6=#:G749 NIL)
+          (|lq1| (|List| (|Polynomial| R))) (#5=#:G498 NIL) (|p| NIL)
+          (#6=#:G497 NIL)
           (|fglmpack|
            (CATEGORY |package|
             (SIGNATURE |zeroDimensional?|
@@ -100,8 +100,8 @@
           (|truels| (|List| (|Symbol|))))
          (SEQ
           (EXIT
-           (SEQ (LETT |truels| (|LEXTRIPK;trueVariables| |lp| $))
-                (LETT |fglmpack| (|FGLMIfCanPackage| (QREFELT $ 6) |truels|))
+           (SEQ (LETT |truels| (|LEXTRIPK;trueVariables| |lp| %))
+                (LETT |fglmpack| (|FGLMIfCanPackage| (QREFELT % 6) |truels|))
                 (LETT |lq1|
                       (PROGN
                        (LETT #6# NIL)
@@ -112,7 +112,7 @@
                             (SEQ
                              (EXIT
                               (LETT #6#
-                                    (CONS (SPADCALL |p| (QREFELT $ 21)) #6#))))
+                                    (CONS (SPADCALL |p| (QREFELT % 21)) #6#))))
                             (LETT #5# (CDR #5#)) (GO G190) G191
                             (EXIT (NREVERSE #6#)))))
                 (LETT |foo|
@@ -124,19 +124,19 @@
                                                                     (LIST
                                                                      '|Polynomial|
                                                                      (|devaluate|
-                                                                      (ELT $
+                                                                      (ELT %
                                                                            6))))
                                                               '#4#)
                                                         (LIST '|List|
                                                               (LIST
                                                                '|Polynomial|
                                                                (|devaluate|
-                                                                (ELT $ 6)))))
+                                                                (ELT % 6)))))
                                                        |fglmpack|)))
                 (EXIT
                  (COND
                   ((QEQCAR |foo| 1)
-                   (PROGN (LETT #3# (CONS 1 "failed")) (GO #7=#:G747)))
+                   (PROGN (LETT #3# (CONS 1 "failed")) (GO #7=#:G495)))
                   ('T
                    (SEQ
                     (LETT |lp|
@@ -150,7 +150,7 @@
                                 (SEQ
                                  (EXIT
                                   (LETT #2#
-                                        (CONS (SPADCALL |q1| (QREFELT $ 23))
+                                        (CONS (SPADCALL |q1| (QREFELT % 23))
                                               #2#))))
                                 (LETT #1# (CDR #1#)) (GO G190) G191
                                 (EXIT (NREVERSE #2#)))))
@@ -161,14 +161,14 @@
         ((|lp|
           (|List|
            (|NewSparseMultivariatePolynomial| R (|OrderedVariableList| |ls|))))
-         ($
+         (%
           (|List|
            (|NewSparseMultivariatePolynomial| R
                                               (|OrderedVariableList| |ls|)))))
         (SPROG
-         ((#1=#:G762 NIL) (|q1| NIL) (#2=#:G761 NIL)
-          (|lq1| (|List| (|Polynomial| R))) (#3=#:G760 NIL) (|p| NIL)
-          (#4=#:G759 NIL)
+         ((#1=#:G510 NIL) (|q1| NIL) (#2=#:G509 NIL)
+          (|lq1| (|List| (|Polynomial| R))) (#3=#:G508 NIL) (|p| NIL)
+          (#4=#:G507 NIL)
           (|fglmpack|
            (CATEGORY |package|
             (SIGNATURE |zeroDimensional?|
@@ -179,8 +179,8 @@
             (SIGNATURE |groebner|
              ((|List| (|Polynomial| R)) (|List| (|Polynomial| R))))))
           (|truels| (|List| (|Symbol|))))
-         (SEQ (LETT |truels| (|LEXTRIPK;trueVariables| |lp| $))
-              (LETT |fglmpack| (|FGLMIfCanPackage| (QREFELT $ 6) |truels|))
+         (SEQ (LETT |truels| (|LEXTRIPK;trueVariables| |lp| %))
+              (LETT |fglmpack| (|FGLMIfCanPackage| (QREFELT % 6) |truels|))
               (LETT |lq1|
                     (PROGN
                      (LETT #4# NIL)
@@ -191,7 +191,7 @@
                           (SEQ
                            (EXIT
                             (LETT #4#
-                                  (CONS (SPADCALL |p| (QREFELT $ 21)) #4#))))
+                                  (CONS (SPADCALL |p| (QREFELT % 21)) #4#))))
                           (LETT #3# (CDR #3#)) (GO G190) G191
                           (EXIT (NREVERSE #4#)))))
               (LETT |lq1|
@@ -201,11 +201,11 @@
                                                       (LIST '|List|
                                                             (LIST '|Polynomial|
                                                                   (|devaluate|
-                                                                   (ELT $ 6))))
+                                                                   (ELT % 6))))
                                                       (LIST '|List|
                                                             (LIST '|Polynomial|
                                                                   (|devaluate|
-                                                                   (ELT $
+                                                                   (ELT %
                                                                         6)))))
                                                      |fglmpack|)))
               (EXIT
@@ -219,7 +219,7 @@
                            (SEQ
                             (EXIT
                              (LETT #2#
-                                   (CONS (SPADCALL |q1| (QREFELT $ 23)) #2#))))
+                                   (CONS (SPADCALL |q1| (QREFELT % 23)) #2#))))
                            (LETT #1# (CDR #1#)) (GO G190) G191
                            (EXIT (NREVERSE #2#))))))))) 
 
@@ -227,7 +227,7 @@
         ((|base|
           (|List|
            (|NewSparseMultivariatePolynomial| R (|OrderedVariableList| |ls|))))
-         (|norm?| (|Boolean|)) ($ (|List| (|RegularChain| R |ls|))))
+         (|norm?| (|Boolean|)) (% (|List| (|RegularChain| R |ls|))))
         (SPROG
          ((|toSee|
            (|List|
@@ -238,7 +238,7 @@
                                                          (|OrderedVariableList|
                                                           |ls|))))
              (|:| |tower| (|RegularChain| R |ls|)))))
-          (#2=#:G794 NIL)
+          (#2=#:G542 NIL)
           (|newlp|
            (|List|
             (|NewSparseMultivariatePolynomial| R
@@ -267,12 +267,12 @@
                                                      (|OrderedVariableList|
                                                       |ls|))))
             (|:| |tower| (|RegularChain| R |ls|)))))
-         (SEQ (LETT |base| (SPADCALL (ELT $ 27) |base| (QREFELT $ 29)))
-              (LETT |base| (SPADCALL (ELT $ 30) |base| (QREFELT $ 32)))
+         (SEQ (LETT |base| (SPADCALL (ELT % 27) |base| (QREFELT % 29)))
+              (LETT |base| (SPADCALL (ELT % 30) |base| (QREFELT % 32)))
               (EXIT
-               (COND ((SPADCALL (ELT $ 33) |base| (QREFELT $ 34)) NIL)
+               (COND ((SPADCALL (ELT % 33) |base| (QREFELT % 34)) NIL)
                      ('T
-                      (SEQ (LETT |ts| (SPADCALL (QREFELT $ 36)))
+                      (SEQ (LETT |ts| (SPADCALL (QREFELT % 36)))
                            (LETT |toSee| (LIST (CONS |base| |ts|)))
                            (LETT |toSave| NIL)
                            (SEQ G190
@@ -290,11 +290,11 @@
                                              (LETT |lp| (CDR |lp|))
                                              (LETT |v|
                                                    (SPADCALL |p|
-                                                             (QREFELT $ 37)))
+                                                             (QREFELT % 37)))
                                              (EXIT
                                               (COND
                                                ((SPADCALL |v| |ts|
-                                                          (QREFELT $ 38))
+                                                          (QREFELT % 38))
                                                 (|error|
                                                  "lexTriangular$LEXTRIPK: should never happen !"))
                                                ('T
@@ -306,11 +306,11 @@
                                                       (QVELT
                                                        (SPADCALL
                                                         (SPADCALL |p|
-                                                                  (QREFELT $
+                                                                  (QREFELT %
                                                                            39))
-                                                        |ts| (QREFELT $ 41))
+                                                        |ts| (QREFELT % 41))
                                                        1)
-                                                      (QREFELT $ 30))
+                                                      (QREFELT % 30))
                                                      (EXIT
                                                       (LETT |toSee|
                                                             (CONS
@@ -322,10 +322,10 @@
                                                     ((SPADCALL
                                                       (SPADCALL
                                                        (SPADCALL |p|
-                                                                 (QREFELT $
+                                                                 (QREFELT %
                                                                           39))
-                                                       |ts| (QREFELT $ 42))
-                                                      (QREFELT $ 30))
+                                                       |ts| (QREFELT % 42))
+                                                      (QREFELT % 30))
                                                      (EXIT
                                                       (LETT |toSee|
                                                             (CONS
@@ -334,9 +334,9 @@
                                                  (LETT |lbwt|
                                                        (SPADCALL
                                                         (SPADCALL |p|
-                                                                  (QREFELT $
+                                                                  (QREFELT %
                                                                            39))
-                                                        |ts| (QREFELT $ 45)))
+                                                        |ts| (QREFELT % 45)))
                                                  (EXIT
                                                   (SEQ G190
                                                        (COND
@@ -363,7 +363,7 @@
                                                                      (SPADCALL
                                                                       |p| |us|
                                                                       (QREFELT
-                                                                       $ 47)))
+                                                                       % 47)))
                                                                (EXIT
                                                                 (LETT |lus|
                                                                       (LIST
@@ -371,7 +371,7 @@
                                                                         |newp|
                                                                         |us|
                                                                         (QREFELT
-                                                                         $
+                                                                         %
                                                                          48)))))))
                                                              ('T
                                                               (SEQ
@@ -383,7 +383,7 @@
                                                                        |newp|
                                                                        |us|
                                                                        (QREFELT
-                                                                        $
+                                                                        %
                                                                         50)))))))
                                                             (LETT |newlp| |lp|)
                                                             (SEQ G190
@@ -399,10 +399,10 @@
                                                                         (|SPADfirst|
                                                                          |newlp|)
                                                                         (QREFELT
-                                                                         $ 37))
+                                                                         % 37))
                                                                        |v|
                                                                        (QREFELT
-                                                                        $
+                                                                        %
                                                                         51)))))
                                                                    (GO G191)))
                                                                  (SEQ
@@ -447,13 +447,13 @@
                                                        NIL (GO G190) G191
                                                        (EXIT NIL))))))))))))
                                 NIL (GO G190) G191 (EXIT NIL))
-                           (EXIT (SPADCALL |toSave| (QREFELT $ 54)))))))))) 
+                           (EXIT (SPADCALL |toSave| (QREFELT % 54)))))))))) 
 
 (SDEFUN |LEXTRIPK;zeroSetSplit;LBL;6|
         ((|lp|
           (|List|
            (|NewSparseMultivariatePolynomial| R (|OrderedVariableList| |ls|))))
-         (|norm?| (|Boolean|)) ($ (|List| (|RegularChain| R |ls|))))
+         (|norm?| (|Boolean|)) (% (|List| (|RegularChain| R |ls|))))
         (SPROG
          ((|bar|
            (|Union|
@@ -461,19 +461,19 @@
              (|NewSparseMultivariatePolynomial| R
                                                 (|OrderedVariableList| |ls|)))
             "failed")))
-         (SEQ (LETT |bar| (SPADCALL |lp| (QREFELT $ 25)))
+         (SEQ (LETT |bar| (SPADCALL |lp| (QREFELT % 25)))
               (EXIT
                (COND
                 ((QEQCAR |bar| 1)
                  (|error| "zeroSetSplit$LEXTRIPK: #1 not zero-dimensional"))
-                ('T (SPADCALL (QCDR |bar|) |norm?| (QREFELT $ 55)))))))) 
+                ('T (SPADCALL (QCDR |bar|) |norm?| (QREFELT % 55)))))))) 
 
 (SDEFUN |LEXTRIPK;squareFreeLexTriangular;LBL;7|
         ((|base|
           (|List|
            (|NewSparseMultivariatePolynomial| R (|OrderedVariableList| |ls|))))
          (|norm?| (|Boolean|))
-         ($
+         (%
           (|List|
            (|SquareFreeRegularTriangularSet| R
                                              (|IndexedExponents|
@@ -502,7 +502,7 @@
                                                      R
                                                      (|OrderedVariableList|
                                                       |ls|)))))))
-          (#2=#:G830 NIL)
+          (#2=#:G578 NIL)
           (|newlp|
            (|List|
             (|NewSparseMultivariatePolynomial| R
@@ -589,12 +589,12 @@
                                                     R
                                                     (|OrderedVariableList|
                                                      |ls|)))))))
-         (SEQ (LETT |base| (SPADCALL (ELT $ 27) |base| (QREFELT $ 29)))
-              (LETT |base| (SPADCALL (ELT $ 30) |base| (QREFELT $ 32)))
+         (SEQ (LETT |base| (SPADCALL (ELT % 27) |base| (QREFELT % 29)))
+              (LETT |base| (SPADCALL (ELT % 30) |base| (QREFELT % 32)))
               (EXIT
-               (COND ((SPADCALL (ELT $ 33) |base| (QREFELT $ 34)) NIL)
+               (COND ((SPADCALL (ELT % 33) |base| (QREFELT % 34)) NIL)
                      ('T
-                      (SEQ (LETT |ts| (SPADCALL (QREFELT $ 58)))
+                      (SEQ (LETT |ts| (SPADCALL (QREFELT % 58)))
                            (LETT |toSee| (LIST (CONS |base| |ts|)))
                            (LETT |toSave| NIL)
                            (SEQ G190
@@ -612,11 +612,11 @@
                                              (LETT |lp| (CDR |lp|))
                                              (LETT |v|
                                                    (SPADCALL |p|
-                                                             (QREFELT $ 37)))
+                                                             (QREFELT % 37)))
                                              (EXIT
                                               (COND
                                                ((SPADCALL |v| |ts|
-                                                          (QREFELT $ 59))
+                                                          (QREFELT % 59))
                                                 (|error|
                                                  "lexTriangular$LEXTRIPK: should never happen !"))
                                                ('T
@@ -628,11 +628,11 @@
                                                       (QVELT
                                                        (SPADCALL
                                                         (SPADCALL |p|
-                                                                  (QREFELT $
+                                                                  (QREFELT %
                                                                            39))
-                                                        |ts| (QREFELT $ 60))
+                                                        |ts| (QREFELT % 60))
                                                        1)
-                                                      (QREFELT $ 30))
+                                                      (QREFELT % 30))
                                                      (EXIT
                                                       (LETT |toSee|
                                                             (CONS
@@ -644,10 +644,10 @@
                                                     ((SPADCALL
                                                       (SPADCALL
                                                        (SPADCALL |p|
-                                                                 (QREFELT $
+                                                                 (QREFELT %
                                                                           39))
-                                                       |ts| (QREFELT $ 61))
-                                                      (QREFELT $ 30))
+                                                       |ts| (QREFELT % 61))
+                                                      (QREFELT % 30))
                                                      (EXIT
                                                       (LETT |toSee|
                                                             (CONS
@@ -656,9 +656,9 @@
                                                  (LETT |lbwt|
                                                        (SPADCALL
                                                         (SPADCALL |p|
-                                                                  (QREFELT $
+                                                                  (QREFELT %
                                                                            39))
-                                                        |ts| (QREFELT $ 62)))
+                                                        |ts| (QREFELT % 62)))
                                                  (EXIT
                                                   (SEQ G190
                                                        (COND
@@ -685,20 +685,20 @@
                                                                      (SPADCALL
                                                                       |p| |us|
                                                                       (QREFELT
-                                                                       $ 64)))
+                                                                       % 64)))
                                                                (EXIT
                                                                 (LETT |lus|
                                                                       (SPADCALL
                                                                        |newp|
                                                                        |us|
                                                                        (QREFELT
-                                                                        $
+                                                                        %
                                                                         65))))))
                                                              ('T
                                                               (LETT |lus|
                                                                     (SPADCALL
                                                                      |p| |us|
-                                                                     (QREFELT $
+                                                                     (QREFELT %
                                                                               65)))))
                                                             (LETT |newlp| |lp|)
                                                             (SEQ G190
@@ -714,10 +714,10 @@
                                                                         (|SPADfirst|
                                                                          |newlp|)
                                                                         (QREFELT
-                                                                         $ 37))
+                                                                         % 37))
                                                                        |v|
                                                                        (QREFELT
-                                                                        $
+                                                                        %
                                                                         51)))))
                                                                    (GO G191)))
                                                                  (SEQ
@@ -762,14 +762,14 @@
                                                        NIL (GO G190) G191
                                                        (EXIT NIL))))))))))))
                                 NIL (GO G190) G191 (EXIT NIL))
-                           (EXIT (SPADCALL |toSave| (QREFELT $ 68)))))))))) 
+                           (EXIT (SPADCALL |toSave| (QREFELT % 68)))))))))) 
 
 (SDEFUN |LEXTRIPK;zeroSetSplit;LBL;8|
         ((|lp|
           (|List|
            (|NewSparseMultivariatePolynomial| R (|OrderedVariableList| |ls|))))
          (|norm?| (|Boolean|))
-         ($
+         (%
           (|List|
            (|SquareFreeRegularTriangularSet| R
                                              (|IndexedExponents|
@@ -785,18 +785,18 @@
              (|NewSparseMultivariatePolynomial| R
                                                 (|OrderedVariableList| |ls|)))
             "failed")))
-         (SEQ (LETT |bar| (SPADCALL |lp| (QREFELT $ 25)))
+         (SEQ (LETT |bar| (SPADCALL |lp| (QREFELT % 25)))
               (EXIT
                (COND
                 ((QEQCAR |bar| 1)
                  (|error| "zeroSetSplit$LEXTRIPK: #1 not zero-dimensional"))
-                ('T (SPADCALL (QCDR |bar|) |norm?| (QREFELT $ 69)))))))) 
+                ('T (SPADCALL (QCDR |bar|) |norm?| (QREFELT % 69)))))))) 
 
 (DECLAIM (NOTINLINE |LexTriangularPackage;|)) 
 
-(DEFUN |LexTriangularPackage| (&REST #1=#:G836)
+(DEFUN |LexTriangularPackage| (&REST #1=#:G584)
   (SPROG NIL
-         (PROG (#2=#:G837)
+         (PROG (#2=#:G585)
            (RETURN
             (COND
              ((LETT #2#
@@ -814,29 +814,29 @@
                   (HREM |$ConstructorCache| '|LexTriangularPackage|)))))))))) 
 
 (DEFUN |LexTriangularPackage;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 |#2|)
           (LETT |dv$| (LIST '|LexTriangularPackage| DV$1 DV$2))
-          (LETT $ (GETREFV 71))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 71))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|LexTriangularPackage|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|LexTriangularPackage| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (|List| 20)
               (|GeneralPolynomialSet| 6 (|IndexedExponents| 15) 15 20)
               (0 . |construct|) (|List| 15) (5 . |variables|)
-              (|Union| $ '"failed") (|Symbol|)
-              (|OrderedVariableList| (NRTEVAL (QREFELT $ 7))) (10 . |variable|)
+              (|Union| % '"failed") (|Symbol|)
+              (|OrderedVariableList| (NRTEVAL (QREFELT % 7))) (10 . |variable|)
               (|Boolean|) (15 . |member?|) (|Polynomial| 6)
               (|NewSparseMultivariatePolynomial| 6 15) (21 . |coerce|)
               |LEXTRIPK;zeroDimensional?;LB;2| (26 . |retract|)
@@ -844,15 +844,15 @@
               |LEXTRIPK;groebner;2L;4| (31 . |infRittWu?|) (|Mapping| 17 20 20)
               (37 . |sort|) (43 . |zero?|) (|Mapping| 17 20) (48 . |remove|)
               (54 . |ground?|) (59 . |any?|)
-              (|RegularChain| 6 (NRTEVAL (QREFELT $ 7))) (65 . |empty|)
+              (|RegularChain| 6 (NRTEVAL (QREFELT % 7))) (65 . |empty|)
               (69 . |mvar|) (74 . |algebraic?|) (80 . |init|)
               (|Record| (|:| |rnum| 6) (|:| |polnum| 20) (|:| |den| 6))
               (85 . |remainder|) (91 . |initiallyReduce|)
-              (|Record| (|:| |val| 17) (|:| |tower| $)) (|List| 43)
+              (|Record| (|:| |val| 17) (|:| |tower| %)) (|List| 43)
               (97 . |invertible?|)
               (|NormalizationPackage| 6 (|IndexedExponents| 15) 15 20 35)
               (103 . |normalizedAssociate|) (109 . |internalAugment|)
-              (|List| $) (115 . |augment|) (121 . =) (|List| 35)
+              (|List| %) (115 . |augment|) (121 . =) (|List| 35)
               (|QuasiComponentPackage| 6 (|IndexedExponents| 15) 15 20 35)
               (127 . |algebraicSort|) |LEXTRIPK;lexTriangular;LBL;5|
               |LEXTRIPK;zeroSetSplit;LBL;6|

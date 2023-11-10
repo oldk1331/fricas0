@@ -6,7 +6,7 @@
 (DEFPARAMETER |SegmentCategory;AL| 'NIL) 
 
 (DEFUN |SegmentCategory| (|t#1|)
-  (LET (#1=#:G690 (#2=#:G691 (|devaluate| |t#1|)))
+  (LET (#1=#:G449 (#2=#:G450 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |SegmentCategory;AL|)) (CDR #1#))
           (T
            (SETQ |SegmentCategory;AL|
@@ -15,7 +15,7 @@
            #1#)))) 
 
 (DEFUN |SegmentCategory;| (|t#1|)
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -25,34 +25,34 @@
                                                 (|Join| (|Type|)
                                                         (|mkCategory|
                                                          '(((SEGMENT
-                                                             ($ |t#1| |t#1|))
+                                                             (% |t#1| |t#1|))
                                                             T)
                                                            ((BY
-                                                             ($ $ (|Integer|)))
+                                                             (% % (|Integer|)))
                                                             T)
-                                                           ((|low| (|t#1| $))
+                                                           ((|low| (|t#1| %))
                                                             T)
-                                                           ((|high| (|t#1| $))
+                                                           ((|high| (|t#1| %))
                                                             T)
                                                            ((|incr|
-                                                             ((|Integer|) $))
+                                                             ((|Integer|) %))
                                                             T)
                                                            ((|segment|
-                                                             ($ |t#1| |t#1|))
+                                                             (% |t#1| |t#1|))
                                                             T)
                                                            ((|convert|
-                                                             ($ |t#1|))
+                                                             (% |t#1|))
                                                             T)
-                                                           ((+ ($ |t#1| $))
+                                                           ((+ (% |t#1| %))
                                                             (|has| |t#1|
                                                                    (|AbelianSemiGroup|)))
-                                                           ((+ ($ $ |t#1|))
+                                                           ((+ (% % |t#1|))
                                                             (|has| |t#1|
                                                                    (|AbelianSemiGroup|)))
-                                                           ((- ($ $ |t#1|))
+                                                           ((- (% % |t#1|))
                                                             (|has| |t#1|
                                                                    (|AbelianGroup|)))
-                                                           ((|reverse| ($ $))
+                                                           ((|reverse| (% %))
                                                             (|has| |t#1|
                                                                    (|OrderedRing|))))
                                                          '(((|SetCategory|)

@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |GuessPolynomial;|)) 
 
-(DEFUN |GuessPolynomial| (#1=#:G722)
+(DEFUN |GuessPolynomial| (#1=#:G466)
   (SPROG NIL
-         (PROG (#2=#:G723)
+         (PROG (#2=#:G467)
            (RETURN
             (COND
              ((LETT #2#
@@ -19,13 +19,13 @@
                   (HREM |$ConstructorCache| '|GuessPolynomial|)))))))))) 
 
 (DEFUN |GuessPolynomial;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|GuessPolynomial| DV$1))
-          (LETT $ (GETREFV 32))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 32))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
@@ -39,17 +39,17 @@
                                                 '(|RetractableTo|
                                                   (|Symbol|))))))))
           (|haddProp| |$ConstructorCache| '|GuessPolynomial| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|GuessPolynomial| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL
-              (|Guess| 7 (|Polynomial| 6) 8 (NRTEVAL (ELT $ 10))
-                       (NRTEVAL (ELT $ 11)))
+              (|Guess| 7 (|Polynomial| 6) 8 (NRTEVAL (ELT % 10))
+                       (NRTEVAL (ELT % 11)))
               (|local| |#1|) (|Fraction| (|Polynomial| 6))
               (|Expression| (|Integer|)) (|GuessPolynomialFunctions| 6)
               (0 . EXPRR2F) (5 . F2EXPRR) (|Mapping| 26 27 28) (|Symbol|)

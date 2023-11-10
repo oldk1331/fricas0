@@ -1,6 +1,6 @@
 
 (SDEFUN |UTSSOL;seriesSolve;MLUTSF;1|
-        ((|f| (|Mapping| UTSSMPF UTSSMPF)) (|l| (|List| F)) ($ (UTSF)))
+        ((|f| (|Mapping| UTSSMPF UTSSMPF)) (|l| (|List| F)) (% (UTSF)))
         (SPROG
          ((|next| (|Mapping| F))
           (|st|
@@ -10,7 +10,7 @@
           (|l2| (|Stream| (|SparseMultivariatePolynomialExpressions| F)))
           (|s1| (|Stream| (|Integer|)))
           (|l1| (|Stream| (|SparseMultivariatePolynomialExpressions| F)))
-          (#2=#:G892 NIL) (|e| NIL) (#3=#:G891 NIL))
+          (#2=#:G638 NIL) (|e| NIL) (#3=#:G637 NIL))
          (SEQ
           (LETT |l1|
                 (SPADCALL
@@ -22,227 +22,227 @@
                          (GO G191)))
                        (SEQ
                         (EXIT
-                         (LETT #3# (CONS (SPADCALL |e| (QREFELT $ 10)) #3#))))
+                         (LETT #3# (CONS (SPADCALL |e| (QREFELT % 10)) #3#))))
                        (LETT #2# (CDR #2#)) (GO G190) G191
                        (EXIT (NREVERSE #3#))))
-                 (QREFELT $ 13)))
-          (LETT |s1| (SPADCALL (ELT $ 15) 0 (QREFELT $ 18)))
+                 (QREFELT % 13)))
+          (LETT |s1| (SPADCALL (ELT % 15) 0 (QREFELT % 18)))
           (LETT |l2|
-                (SPADCALL (CONS #'|UTSSOL;seriesSolve;MLUTSF;1!0| $) |s1|
-                          (QREFELT $ 28)))
-          (LETT |coeffs| (SPADCALL |l1| |l2| (QREFELT $ 29)))
+                (SPADCALL (CONS #'|UTSSOL;seriesSolve;MLUTSF;1!0| %) |s1|
+                          (QREFELT % 28)))
+          (LETT |coeffs| (SPADCALL |l1| |l2| (QREFELT % 29)))
           (LETT |st| (LIST |coeffs| |coeffs|))
           (LETT |next|
-                (CONS #'|UTSSOL;seriesSolve;MLUTSF;1!1| (VECTOR |f| $ |st|)))
-          (EXIT (SPADCALL (SPADCALL |next| (QREFELT $ 75)) (QREFELT $ 76)))))) 
+                (CONS #'|UTSSOL;seriesSolve;MLUTSF;1!1| (VECTOR |f| % |st|)))
+          (EXIT (SPADCALL (SPADCALL |next| (QREFELT % 75)) (QREFELT % 76)))))) 
 
 (SDEFUN |UTSSOL;seriesSolve;MLUTSF;1!1| (($$ NIL))
-        (PROG (|st| $ |f|)
+        (PROG (|st| % |f|)
           (LETT |st| (QREFELT $$ 2))
-          (LETT $ (QREFELT $$ 1))
+          (LETT % (QREFELT $$ 1))
           (LETT |f| (QREFELT $$ 0))
           (RETURN
            (PROGN
             (SPROG
              ((|nr| NIL) (|coeff| NIL) (|eq| NIL) (|eqs| NIL) (|vars| NIL)
-              (#1=#:G885 NIL) (|var| NIL) (#2=#:G886 NIL) (|i| NIL)
+              (#1=#:G631 NIL) (|var| NIL) (#2=#:G632 NIL) (|i| NIL)
               (|res| NIL))
              (SEQ
-              (LETT |nr| (SPADCALL |st| (|spadConstant| $ 59) (QREFELT $ 31)))
+              (LETT |nr| (SPADCALL |st| (|spadConstant| % 59) (QREFELT % 31)))
               (COND
-               ((SPADCALL (LETT |coeff| (SPADCALL |nr| (QREFELT $ 32)))
-                          (QREFELT $ 34))
-                (SEQ (LETT |res| (SPADCALL |coeff| (QREFELT $ 35)))
+               ((SPADCALL (LETT |coeff| (SPADCALL |nr| (QREFELT % 32)))
+                          (QREFELT % 34))
+                (SEQ (LETT |res| (SPADCALL |coeff| (QREFELT % 35)))
                      (EXIT
-                      (SPADCALL |st| (|spadConstant| $ 59)
-                                (SPADCALL |nr| (QREFELT $ 36))
-                                (QREFELT $ 37)))))
+                      (SPADCALL |st| (|spadConstant| % 59)
+                                (SPADCALL |nr| (QREFELT % 36))
+                                (QREFELT % 37)))))
                ('T
                 (SEQ
                  (LETT |eqs|
                        (SPADCALL
                         (SPADCALL
-                         (SPADCALL (SPADCALL |st| 2 (QREFELT $ 31))
-                                   (QREFELT $ 38))
+                         (SPADCALL (SPADCALL |st| 2 (QREFELT % 31))
+                                   (QREFELT % 38))
                          |f|)
-                        (QREFELT $ 39)))
+                        (QREFELT % 39)))
                  (SEQ G190
                       (COND
                        ((NULL
-                         (SPADCALL (LETT |eq| (SPADCALL |eqs| (QREFELT $ 32)))
-                                   (QREFELT $ 40)))
+                         (SPADCALL (LETT |eq| (SPADCALL |eqs| (QREFELT % 32)))
+                                   (QREFELT % 40)))
                         (GO G191)))
-                      (SEQ (EXIT (LETT |eqs| (SPADCALL |eqs| (QREFELT $ 36)))))
+                      (SEQ (EXIT (LETT |eqs| (SPADCALL |eqs| (QREFELT % 36)))))
                       NIL (GO G190) G191 (EXIT NIL))
-                 (LETT |vars| (SPADCALL |eq| (QREFELT $ 42)))
+                 (LETT |vars| (SPADCALL |eq| (QREFELT % 42)))
                  (COND
                   ((NULL
-                    (SPADCALL (SPADCALL |coeff| (QREFELT $ 43)) |vars|
-                              (QREFELT $ 44)))
+                    (SPADCALL (SPADCALL |coeff| (QREFELT % 43)) |vars|
+                              (QREFELT % 44)))
                    (SEQ
                     (SPADCALL "The variable is:"
-                              (SPADCALL |coeff| (QREFELT $ 46)) (QREFELT $ 50))
+                              (SPADCALL |coeff| (QREFELT % 46)) (QREFELT % 50))
                     (SPADCALL "The next equations are:"
-                              (SPADCALL (SPADCALL |st| 2 (QREFELT $ 31))
-                                        (QREFELT $ 51))
-                              (QREFELT $ 50))
+                              (SPADCALL (SPADCALL |st| 2 (QREFELT % 31))
+                                        (QREFELT % 51))
+                              (QREFELT % 50))
                     (EXIT
                      (COND
-                      ((SPADCALL |vars| (QREFELT $ 52))
+                      ((SPADCALL |vars| (QREFELT % 52))
                        (|error|
                         (SPADCALL "seriesSolve: there is no solution with"
-                                  " the given initial values" (QREFELT $ 53))))
+                                  " the given initial values" (QREFELT % 53))))
                       ('T
                        (|error|
                         (SPADCALL "seriesSolve: coefficient does not appear"
-                                  " in equation" (QREFELT $ 53)))))))))
+                                  " in equation" (QREFELT % 53)))))))))
                  (EXIT
                   (COND
-                   ((SPADCALL (SPADCALL |vars| (QREFELT $ 54)) (QREFELT $ 55))
+                   ((SPADCALL (SPADCALL |vars| (QREFELT % 54)) (QREFELT % 55))
                     (COND
                      ((SPADCALL
-                       (SPADCALL |eq| (SPADCALL |vars| (QREFELT $ 56))
-                                 (QREFELT $ 57))
-                       (|spadConstant| $ 59) (QREFELT $ 60))
+                       (SPADCALL |eq| (SPADCALL |vars| (QREFELT % 56))
+                                 (QREFELT % 57))
+                       (|spadConstant| % 59) (QREFELT % 60))
                       (COND
-                       ((SPADCALL |eq| (QREFELT $ 61))
+                       ((SPADCALL |eq| (QREFELT % 61))
                         (SEQ
                          (SEQ (LETT |var| NIL) (LETT #1# |vars|) G190
                               (COND
                                ((OR (ATOM #1#)
                                     (PROGN (LETT |var| (CAR #1#)) NIL))
                                 (GO G191)))
-                              (SEQ (LETT |i| (|spadConstant| $ 59))
+                              (SEQ (LETT |i| (|spadConstant| % 59))
                                    (SEQ G190
                                         (COND
                                          ((NULL
                                            (COND
                                             ((SPADCALL
                                               (SPADCALL |nr| |i|
-                                                        (QREFELT $ 62))
-                                              (QREFELT $ 34))
+                                                        (QREFELT % 62))
+                                              (QREFELT % 34))
                                              'T)
                                             ('T
                                              (SPADCALL
                                               (SPADCALL
                                                (SPADCALL |nr| |i|
-                                                         (QREFELT $ 62))
-                                               (QREFELT $ 43))
-                                              |var| (QREFELT $ 63)))))
+                                                         (QREFELT % 62))
+                                               (QREFELT % 43))
+                                              |var| (QREFELT % 63)))))
                                           (GO G191)))
                                         (SEQ
                                          (EXIT
                                           (LETT |i|
                                                 (SPADCALL |i|
-                                                          (|spadConstant| $ 59)
-                                                          (QREFELT $ 64)))))
+                                                          (|spadConstant| % 59)
+                                                          (QREFELT % 64)))))
                                         NIL (GO G190) G191 (EXIT NIL))
                                    (EXIT
-                                    (SPADCALL |nr| |i| (|spadConstant| $ 67)
-                                              (QREFELT $ 68))))
+                                    (SPADCALL |nr| |i| (|spadConstant| % 67)
+                                              (QREFELT % 68))))
                               (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
-                         (SPADCALL |st| (|spadConstant| $ 59)
-                                   (SPADCALL |nr| (QREFELT $ 36))
-                                   (QREFELT $ 37))
-                         (EXIT (LETT |res| (|spadConstant| $ 65)))))
+                         (SPADCALL |st| (|spadConstant| % 59)
+                                   (SPADCALL |nr| (QREFELT % 36))
+                                   (QREFELT % 37))
+                         (EXIT (LETT |res| (|spadConstant| % 65)))))
                        ('T
                         (SEQ
                          (SPADCALL #3="The variable is:"
-                                   (SPADCALL |coeff| (QREFELT $ 46))
-                                   (QREFELT $ 50))
+                                   (SPADCALL |coeff| (QREFELT % 46))
+                                   (QREFELT % 50))
                          (SPADCALL #4="The equation is:"
-                                   (SPADCALL |eq| (QREFELT $ 46))
-                                   (QREFELT $ 50))
+                                   (SPADCALL |eq| (QREFELT % 46))
+                                   (QREFELT % 50))
                          (EXIT
                           (|error|
                            (SPADCALL #5="seriesSolve: coefficient not uniquely"
-                                     #6=" determined" (QREFELT $ 53))))))))
+                                     #6=" determined" (QREFELT % 53))))))))
                      ('T
                       (SEQ
                        (LETT |res|
                              (SPADCALL
                               (SPADCALL
                                (SPADCALL |eq|
-                                         (SPADCALL (|spadConstant| $ 69)
+                                         (SPADCALL (|spadConstant| % 69)
                                                    (SPADCALL |vars|
-                                                             (QREFELT $ 56))
-                                                   (QREFELT $ 24))
-                                         (QREFELT $ 70))
+                                                             (QREFELT % 56))
+                                                   (QREFELT % 24))
+                                         (QREFELT % 70))
                                (SPADCALL |eq|
-                                         (SPADCALL (|spadConstant| $ 22)
+                                         (SPADCALL (|spadConstant| % 22)
                                                    (SPADCALL |vars|
-                                                             (QREFELT $ 56))
-                                                   (QREFELT $ 24))
-                                         (QREFELT $ 70))
-                               (QREFELT $ 71))
-                              (QREFELT $ 72)))
-                       (SPADCALL |nr| (|spadConstant| $ 59)
-                                 (SPADCALL |res| (QREFELT $ 10))
-                                 (QREFELT $ 68))
+                                                             (QREFELT % 56))
+                                                   (QREFELT % 24))
+                                         (QREFELT % 70))
+                               (QREFELT % 71))
+                              (QREFELT % 72)))
+                       (SPADCALL |nr| (|spadConstant| % 59)
+                                 (SPADCALL |res| (QREFELT % 10))
+                                 (QREFELT % 68))
                        (EXIT
-                        (SPADCALL |st| (|spadConstant| $ 59)
-                                  (SPADCALL |nr| (QREFELT $ 36))
-                                  (QREFELT $ 37)))))))
-                   ((SPADCALL |eq| (QREFELT $ 61))
+                        (SPADCALL |st| (|spadConstant| % 59)
+                                  (SPADCALL |nr| (QREFELT % 36))
+                                  (QREFELT % 37)))))))
+                   ((SPADCALL |eq| (QREFELT % 61))
                     (SEQ
                      (SEQ (LETT |var| NIL) (LETT #2# |vars|) G190
                           (COND
                            ((OR (ATOM #2#) (PROGN (LETT |var| (CAR #2#)) NIL))
                             (GO G191)))
-                          (SEQ (LETT |i| (|spadConstant| $ 59))
+                          (SEQ (LETT |i| (|spadConstant| % 59))
                                (SEQ G190
                                     (COND
                                      ((NULL
                                        (COND
                                         ((SPADCALL
-                                          (SPADCALL |nr| |i| (QREFELT $ 62))
-                                          (QREFELT $ 34))
+                                          (SPADCALL |nr| |i| (QREFELT % 62))
+                                          (QREFELT % 34))
                                          'T)
                                         ('T
                                          (SPADCALL
                                           (SPADCALL
-                                           (SPADCALL |nr| |i| (QREFELT $ 62))
-                                           (QREFELT $ 43))
-                                          |var| (QREFELT $ 63)))))
+                                           (SPADCALL |nr| |i| (QREFELT % 62))
+                                           (QREFELT % 43))
+                                          |var| (QREFELT % 63)))))
                                       (GO G191)))
                                     (SEQ
                                      (EXIT
                                       (LETT |i|
-                                            (SPADCALL |i| (|spadConstant| $ 59)
-                                                      (QREFELT $ 64)))))
+                                            (SPADCALL |i| (|spadConstant| % 59)
+                                                      (QREFELT % 64)))))
                                     NIL (GO G190) G191 (EXIT NIL))
                                (EXIT
-                                (SPADCALL |nr| |i| (|spadConstant| $ 67)
-                                          (QREFELT $ 68))))
+                                (SPADCALL |nr| |i| (|spadConstant| % 67)
+                                          (QREFELT % 68))))
                           (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
-                     (SPADCALL |st| (|spadConstant| $ 59)
-                               (SPADCALL |nr| (QREFELT $ 36)) (QREFELT $ 37))
-                     (EXIT (LETT |res| (|spadConstant| $ 65)))))
+                     (SPADCALL |st| (|spadConstant| % 59)
+                               (SPADCALL |nr| (QREFELT % 36)) (QREFELT % 37))
+                     (EXIT (LETT |res| (|spadConstant| % 65)))))
                    ('T
                     (SEQ
-                     (SPADCALL #3# (SPADCALL |coeff| (QREFELT $ 46))
-                               (QREFELT $ 50))
-                     (SPADCALL #4# (SPADCALL |eq| (QREFELT $ 46))
-                               (QREFELT $ 50))
-                     (EXIT (|error| (SPADCALL #5# #6# (QREFELT $ 53)))))))))))
+                     (SPADCALL #3# (SPADCALL |coeff| (QREFELT % 46))
+                               (QREFELT % 50))
+                     (SPADCALL #4# (SPADCALL |eq| (QREFELT % 46))
+                               (QREFELT % 50))
+                     (EXIT (|error| (SPADCALL #5# #6# (QREFELT % 53)))))))))))
               (EXIT |res|))))))) 
 
-(SDEFUN |UTSSOL;seriesSolve;MLUTSF;1!0| ((|i| NIL) ($ NIL))
-        (SPROG ((#1=#:G712 NIL))
-               (SPADCALL (|spadConstant| $ 19)
-                         (SPADCALL (|spadConstant| $ 22)
+(SDEFUN |UTSSOL;seriesSolve;MLUTSF;1!0| ((|i| NIL) (% NIL))
+        (SPROG ((#1=#:G459 NIL))
+               (SPADCALL (|spadConstant| % 19)
+                         (SPADCALL (|spadConstant| % 22)
                                    (PROG1 (LETT #1# |i|)
                                      (|check_subtype2| (>= #1# 0)
                                                        '(|NonNegativeInteger|)
                                                        '(|Integer|) #1#))
-                                   (QREFELT $ 24))
-                         (QREFELT $ 25)))) 
+                                   (QREFELT % 24))
+                         (QREFELT % 25)))) 
 
 (DECLAIM (NOTINLINE |TaylorSolve;|)) 
 
-(DEFUN |TaylorSolve| (&REST #1=#:G893)
+(DEFUN |TaylorSolve| (&REST #1=#:G639)
   (SPROG NIL
-         (PROG (#2=#:G894)
+         (PROG (#2=#:G640)
            (RETURN
             (COND
              ((LETT #2#
@@ -258,23 +258,23 @@
                  ((NOT #2#) (HREM |$ConstructorCache| '|TaylorSolve|)))))))))) 
 
 (DEFUN |TaylorSolve;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT DV$3 (|devaluate| |#3|))
           (LETT |dv$| (LIST '|TaylorSolve| DV$1 DV$2 DV$3))
-          (LETT $ (GETREFV 80))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 80))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|TaylorSolve| (LIST DV$1 DV$2 DV$3)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (QSETREFV $ 8 |#3|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (QSETREFV % 8 |#3|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|TaylorSolve| '|infovec|
           (LIST

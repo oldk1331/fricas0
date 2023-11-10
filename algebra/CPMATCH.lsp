@@ -1,47 +1,47 @@
 
-(SDEFUN |CPMATCH;makeComplex| ((|p| (|Polynomial| S)) ($ (CS)))
+(SDEFUN |CPMATCH;makeComplex| ((|p| (|Polynomial| S)) (% (CS)))
         (SPROG
          ((|rcoef| (S)) (|icoef| (S)) (|up| (|SparseUnivariatePolynomial| S)))
-         (SEQ (LETT |up| (SPADCALL |p| (QREFELT $ 14)))
+         (SEQ (LETT |up| (SPADCALL |p| (QREFELT % 14)))
               (EXIT
                (COND
-                ((> (SPADCALL |up| (QREFELT $ 16)) 1)
+                ((> (SPADCALL |up| (QREFELT % 16)) 1)
                  (|error| "not linear in %i"))
                 ('T
-                 (SEQ (LETT |icoef| (SPADCALL |up| (QREFELT $ 18)))
+                 (SEQ (LETT |icoef| (SPADCALL |up| (QREFELT % 18)))
                       (LETT |rcoef|
-                            (SPADCALL (SPADCALL |p| (QREFELT $ 19))
-                                      (QREFELT $ 20)))
-                      (EXIT (SPADCALL |rcoef| |icoef| (QREFELT $ 21)))))))))) 
+                            (SPADCALL (SPADCALL |p| (QREFELT % 19))
+                                      (QREFELT % 20)))
+                      (EXIT (SPADCALL |rcoef| |icoef| (QREFELT % 21)))))))))) 
 
-(SDEFUN |CPMATCH;makePoly| ((|cs| (CS)) ($ (|Polynomial| S)))
-        (SPADCALL (SPADCALL (SPADCALL |cs| (QREFELT $ 22)) (QREFELT $ 23))
-                  (SPADCALL (SPADCALL |cs| (QREFELT $ 24)) (QREFELT $ 12)
-                            (QREFELT $ 25))
-                  (QREFELT $ 26))) 
+(SDEFUN |CPMATCH;makePoly| ((|cs| (CS)) (% (|Polynomial| S)))
+        (SPADCALL (SPADCALL (SPADCALL |cs| (QREFELT % 22)) (QREFELT % 23))
+                  (SPADCALL (SPADCALL |cs| (QREFELT % 24)) (QREFELT % 12)
+                            (QREFELT % 25))
+                  (QREFELT % 26))) 
 
 (SDEFUN |CPMATCH;patternMatch;CSP2Pmr;3|
         ((|cs| (CS)) (|pat| (|Pattern| R))
          (|result| (|PatternMatchResult| R CS))
-         ($ (|PatternMatchResult| R CS)))
+         (% (|PatternMatchResult| R CS)))
         (COND
-         ((SPADCALL (SPADCALL |cs| (QREFELT $ 24)) (QREFELT $ 28))
-          (SPADCALL (SPADCALL |cs| (QREFELT $ 22)) |pat| |result|
-                    (QREFELT $ 32)))
+         ((SPADCALL (SPADCALL |cs| (QREFELT % 24)) (QREFELT % 28))
+          (SPADCALL (SPADCALL |cs| (QREFELT % 22)) |pat| |result|
+                    (QREFELT % 32)))
          ('T
-          (SPADCALL (CONS (|function| |CPMATCH;makeComplex|) $)
-                    (SPADCALL (|CPMATCH;makePoly| |cs| $) |pat|
+          (SPADCALL (CONS (|function| |CPMATCH;makeComplex|) %)
+                    (SPADCALL (|CPMATCH;makePoly| |cs| %) |pat|
                               (SPADCALL
-                               (CONS (|function| |CPMATCH;makePoly|) $)
-                               |result| (QREFELT $ 36))
-                              (QREFELT $ 38))
-                    (QREFELT $ 41))))) 
+                               (CONS (|function| |CPMATCH;makePoly|) %)
+                               |result| (QREFELT % 36))
+                              (QREFELT % 38))
+                    (QREFELT % 41))))) 
 
 (DECLAIM (NOTINLINE |ComplexPatternMatch;|)) 
 
-(DEFUN |ComplexPatternMatch| (&REST #1=#:G712)
+(DEFUN |ComplexPatternMatch| (&REST #1=#:G458)
   (SPROG NIL
-         (PROG (#2=#:G713)
+         (PROG (#2=#:G459)
            (RETURN
             (COND
              ((LETT #2#
@@ -59,15 +59,15 @@
                   (HREM |$ConstructorCache| '|ComplexPatternMatch|)))))))))) 
 
 (DEFUN |ComplexPatternMatch;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT DV$3 (|devaluate| |#3|))
           (LETT |dv$| (LIST '|ComplexPatternMatch| DV$1 DV$2 DV$3))
-          (LETT $ (GETREFV 43))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3
+          (LETT % (GETREFV 43))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
@@ -76,20 +76,20 @@
                                                (LIST '|PatternMatchable|
                                                      (|devaluate| |#1|)))))))
           (|haddProp| |$ConstructorCache| '|ComplexPatternMatch|
-                      (LIST DV$1 DV$2 DV$3) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (QSETREFV $ 8 |#3|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 12 (SPADCALL '|%i| (QREFELT $ 11)))
+                      (LIST DV$1 DV$2 DV$3) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (QSETREFV % 8 |#3|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 12 (SPADCALL '|%i| (QREFELT % 11)))
           (COND
            ((|testBitVector| |pv$| 1)
-            (QSETREFV $ 42
+            (QSETREFV % 42
                       (CONS
                        (|dispatchFunction| |CPMATCH;patternMatch;CSP2Pmr;3|)
-                       $))))
-          $))) 
+                       %))))
+          %))) 
 
 (MAKEPROP '|ComplexPatternMatch| '|infovec|
           (LIST
@@ -104,7 +104,7 @@
               (|PatternMatchPushDown| 6 7 8) (72 . |patternMatch|)
               (|PatternMatchResult| 6 10) (|Mapping| 10 8)
               (|PatternMatchResultFunctions2| 6 8 10) (79 . |map|)
-              (|PatternMatchResult| 6 $) (85 . |patternMatch|) (|Mapping| 8 10)
+              (|PatternMatchResult| 6 %) (85 . |patternMatch|) (|Mapping| 8 10)
               (|PatternMatchResultFunctions2| 6 10 8) (92 . |map|)
               (98 . |patternMatch|))
            '#(|patternMatch| 105) 'NIL

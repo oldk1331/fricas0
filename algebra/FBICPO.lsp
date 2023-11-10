@@ -1,12 +1,12 @@
 
-(SDEFUN |FBICPO;join;$3Nni;1|
-        ((|s| ($)) (|a| #1=(|NonNegativeInteger|)) (|b| #1#)
-         ($ (|NonNegativeInteger|)))
+(SDEFUN |FBICPO;join;%3Nni;1|
+        ((|s| (%)) (|a| #1=(|NonNegativeInteger|)) (|b| #1#)
+         (% (|NonNegativeInteger|)))
         (SPROG
-         ((#2=#:G694 NIL) (|res| (|Union| (|NonNegativeInteger|) "failed")))
-         (SEQ (LETT |res| (SPADCALL |s| |a| |b| (QREFELT $ 9)))
+         ((#2=#:G449 NIL) (|res| (|Union| (|NonNegativeInteger|) "failed")))
+         (SEQ (LETT |res| (SPADCALL |s| |a| |b| (QREFELT % 9)))
               (COND
-               ((SPADCALL |res| (CONS 1 "failed") (QREFELT $ 11))
+               ((SPADCALL |res| (CONS 1 "failed") (QREFELT % 11))
                 (|error| "This POSET does not have join")))
               (EXIT
                (PROG2 (LETT #2# |res|)
@@ -15,14 +15,14 @@
                                  (|Union| (|NonNegativeInteger|) "failed")
                                  #2#)))))) 
 
-(SDEFUN |FBICPO;meet;$3Nni;2|
-        ((|s| ($)) (|a| #1=(|NonNegativeInteger|)) (|b| #1#)
-         ($ (|NonNegativeInteger|)))
+(SDEFUN |FBICPO;meet;%3Nni;2|
+        ((|s| (%)) (|a| #1=(|NonNegativeInteger|)) (|b| #1#)
+         (% (|NonNegativeInteger|)))
         (SPROG
-         ((#2=#:G699 NIL) (|res| (|Union| (|NonNegativeInteger|) "failed")))
-         (SEQ (LETT |res| (SPADCALL |s| |a| |b| (QREFELT $ 13)))
+         ((#2=#:G454 NIL) (|res| (|Union| (|NonNegativeInteger|) "failed")))
+         (SEQ (LETT |res| (SPADCALL |s| |a| |b| (QREFELT % 13)))
               (COND
-               ((SPADCALL |res| (CONS 1 "failed") (QREFELT $ 11))
+               ((SPADCALL |res| (CONS 1 "failed") (QREFELT % 11))
                 (|error| "This POSET does not have meet")))
               (EXIT
                (PROG2 (LETT #2# |res|)
@@ -33,9 +33,9 @@
 
 (DECLAIM (NOTINLINE |FiniteBiCPO;|)) 
 
-(DEFUN |FiniteBiCPO| (#1=#:G717)
+(DEFUN |FiniteBiCPO| (#1=#:G463)
   (SPROG NIL
-         (PROG (#2=#:G718)
+         (PROG (#2=#:G464)
            (RETURN
             (COND
              ((LETT #2#
@@ -50,36 +50,36 @@
                  ((NOT #2#) (HREM |$ConstructorCache| '|FiniteBiCPO|)))))))))) 
 
 (DEFUN |FiniteBiCPO;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|FiniteBiCPO| DV$1))
-          (LETT $ (GETREFV 38))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 36))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|FiniteBiCPO| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|FiniteBiCPO| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL (|FinitePoset| 6) (|local| |#1|)
               (|Union| 8 '"failed") (|NonNegativeInteger|) (0 . |joinIfCan|)
-              (|Boolean|) (7 . =) |FBICPO;join;$3Nni;1| (13 . |meetIfCan|)
-              |FBICPO;meet;$3Nni;2| (|IncidenceAlgebra| 21 6) (|List| 8)
+              (|Boolean|) (7 . =) |FBICPO;join;%3Nni;1| (13 . |meetIfCan|)
+              |FBICPO;meet;%3Nni;2| (|IncidenceAlgebra| 21 6) (|List| 8)
               (|Void|) (|List| (|List| 10)) (|List| 6) (|Mapping| 10 6 6)
-              (|Integer|) (|String|) (|List| $) (|Scene| (|SCartesian| '2))
+              (|Integer|) (|String|) (|List| %) (|Scene| (|SCartesian| '2))
               (|Matrix| 21) (|Matrix| 8) (|List| (|Loop|)) (|List| 29)
-              (|Tree| 21) (|DirectedGraph| $)
+              (|Tree| 21) (|DirectedGraph| %)
               (|Record| (|:| |name| 22) (|:| |arrType| 8) (|:| |fromOb| 8)
                         (|:| |toOb| 8) (|:| |xOffset| 21) (|:| |yOffset| 21)
                         (|:| |map| 16))
               (|List| 31)
               (|Record| (|:| |value| 6) (|:| |posX| 8) (|:| |posY| 8))
-              (|List| 33) (|HashState|) (|OutputForm|) (|SingleInteger|))
+              (|List| 33) (|OutputForm|))
            '#(|meetIfCan| 20 |meet| 27 |joinIfCan| 34 |join| 41) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0))
                  (CONS
@@ -88,7 +88,7 @@
                   (CONS
                    '#((|BiCPO| 6) (|Dcpo| 6) (|CoDcpo| 6) (|Poset| 6)
                       (|Preorder| 6) (|FiniteGraph| 6) (|SetCategory|)
-                      (|BasicType|) (|CoercibleTo| 36))
+                      (|BasicType|) (|CoercibleTo| 35))
                    (|makeByteWordVec2| 14
                                        '(3 0 7 0 8 8 9 2 7 10 0 0 11 3 0 7 0 8
                                          8 13 3 0 7 0 8 8 13 3 0 8 0 8 8 14 3 0

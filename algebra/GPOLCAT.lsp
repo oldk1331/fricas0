@@ -6,8 +6,8 @@
 (DEFPARAMETER |MaybeSkewPolynomialCategory;AL| 'NIL) 
 
 (DEFUN |MaybeSkewPolynomialCategory| (|t#1| |t#2| |t#3|)
-  (LET (#1=#:G693
-        (#2=#:G694
+  (LET (#1=#:G452
+        (#2=#:G453
          (LIST (|devaluate| |t#1|) (|devaluate| |t#2|) (|devaluate| |t#3|))))
     (COND ((SETQ #1# (|assoc| #2# |MaybeSkewPolynomialCategory;AL|)) (CDR #1#))
           (T
@@ -21,7 +21,7 @@
            #1#)))) 
 
 (DEFUN |MaybeSkewPolynomialCategory;| (|t#1| |t#2| |t#3|)
-  (SPROG ((#1=#:G692 NIL))
+  (SPROG ((#1=#:G451 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3|)
@@ -35,52 +35,52 @@
                                                                        '|t#2|)
                                             (|mkCategory|
                                              '(((|degree|
-                                                 ((|NonNegativeInteger|) $
+                                                 ((|NonNegativeInteger|) %
                                                   |t#3|))
                                                 T)
                                                ((|degree|
                                                  ((|List|
                                                    (|NonNegativeInteger|))
-                                                  $ (|List| |t#3|)))
+                                                  % (|List| |t#3|)))
                                                 T)
                                                ((|coefficient|
-                                                 ($ $ |t#3|
+                                                 (% % |t#3|
                                                   (|NonNegativeInteger|)))
                                                 T)
                                                ((|coefficient|
-                                                 ($ $ (|List| |t#3|)
+                                                 (% % (|List| |t#3|)
                                                   (|List|
                                                    (|NonNegativeInteger|))))
                                                 T)
-                                               ((|monomials| ((|List| $) $)) T)
+                                               ((|monomials| ((|List| %) %)) T)
                                                ((|mainVariable|
-                                                 ((|Union| |t#3| "failed") $))
+                                                 ((|Union| |t#3| "failed") %))
                                                 T)
                                                ((|monomial|
-                                                 ($ $ |t#3|
+                                                 (% % |t#3|
                                                   (|NonNegativeInteger|)))
                                                 T)
                                                ((|monomial|
-                                                 ($ $ (|List| |t#3|)
+                                                 (% % (|List| |t#3|)
                                                   (|List|
                                                    (|NonNegativeInteger|))))
                                                 T)
                                                ((|totalDegree|
-                                                 ((|NonNegativeInteger|) $))
+                                                 ((|NonNegativeInteger|) %))
                                                 T)
                                                ((|totalDegree|
-                                                 ((|NonNegativeInteger|) $
+                                                 ((|NonNegativeInteger|) %
                                                   (|List| |t#3|)))
                                                 T)
                                                ((|totalDegreeSorted|
-                                                 ((|NonNegativeInteger|) $
+                                                 ((|NonNegativeInteger|) %
                                                   (|List| |t#3|)))
                                                 T)
                                                ((|variables|
-                                                 ((|List| |t#3|) $))
+                                                 ((|List| |t#3|) %))
                                                 T)
                                                ((|primitiveMonomials|
-                                                 ((|List| $) $))
+                                                 ((|List| %) %))
                                                 (|has| |t#1| (|SemiRing|))))
                                              '(((|FullyLinearlyExplicitOver|
                                                  |t#1|)

@@ -1,24 +1,24 @@
 
 (SDEFUN |MPC3;map;MPR1PR2;1|
-        ((|f| (|Mapping| |Vars2| |Vars1|)) (|p| (PR1)) ($ (PR2)))
+        ((|f| (|Mapping| |Vars2| |Vars1|)) (|p| (PR1)) (% (PR2)))
         (SPROG
          ((|up| (|SparseUnivariatePolynomial| PR1)) (|ans| (PR2))
           (|x2| (|Vars2|)) (|c| (R)) (|x1| (|Union| |Vars1| "failed")))
-         (SEQ (LETT |x1| (SPADCALL |p| (QREFELT $ 14)))
+         (SEQ (LETT |x1| (SPADCALL |p| (QREFELT % 14)))
               (EXIT
                (COND
                 ((QEQCAR |x1| 1)
-                 (SEQ (LETT |c| (SPADCALL |p| (QREFELT $ 15)))
-                      (EXIT (SPADCALL |c| (QREFELT $ 16)))))
+                 (SEQ (LETT |c| (SPADCALL |p| (QREFELT % 15)))
+                      (EXIT (SPADCALL |c| (QREFELT % 16)))))
                 ('T
-                 (SEQ (LETT |up| (SPADCALL |p| (QCDR |x1|) (QREFELT $ 18)))
+                 (SEQ (LETT |up| (SPADCALL |p| (QCDR |x1|) (QREFELT % 18)))
                       (LETT |x2| (SPADCALL (QCDR |x1|) |f|))
-                      (LETT |ans| (|spadConstant| $ 19))
+                      (LETT |ans| (|spadConstant| % 19))
                       (SEQ G190
                            (COND
                             ((NULL
-                              (SPADCALL |up| (|spadConstant| $ 23)
-                                        (QREFELT $ 25)))
+                              (SPADCALL |up| (|spadConstant| % 23)
+                                        (QREFELT % 25)))
                              (GO G191)))
                            (SEQ
                             (LETT |ans|
@@ -26,22 +26,22 @@
                                             (SPADCALL
                                              (SPADCALL |f|
                                                        (SPADCALL |up|
-                                                                 (QREFELT $
+                                                                 (QREFELT %
                                                                           26))
-                                                       (QREFELT $ 28))
+                                                       (QREFELT % 28))
                                              |x2|
-                                             (SPADCALL |up| (QREFELT $ 30))
-                                             (QREFELT $ 31))
-                                            (QREFELT $ 32)))
-                            (EXIT (LETT |up| (SPADCALL |up| (QREFELT $ 33)))))
+                                             (SPADCALL |up| (QREFELT % 30))
+                                             (QREFELT % 31))
+                                            (QREFELT % 32)))
+                            (EXIT (LETT |up| (SPADCALL |up| (QREFELT % 33)))))
                            NIL (GO G190) G191 (EXIT NIL))
                       (EXIT |ans|)))))))) 
 
 (DECLAIM (NOTINLINE |MPolyCatFunctions3;|)) 
 
-(DEFUN |MPolyCatFunctions3| (&REST #1=#:G705)
+(DEFUN |MPolyCatFunctions3| (&REST #1=#:G459)
   (SPROG NIL
-         (PROG (#2=#:G706)
+         (PROG (#2=#:G460)
            (RETURN
             (COND
              ((LETT #2#
@@ -60,7 +60,7 @@
 
 (DEFUN |MPolyCatFunctions3;| (|#1| |#2| |#3| |#4| |#5| |#6| |#7|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL) (DV$4 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL) (DV$4 NIL)
     (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -72,28 +72,28 @@
     (LETT DV$7 (|devaluate| |#7|))
     (LETT |dv$|
           (LIST '|MPolyCatFunctions3| DV$1 DV$2 DV$3 DV$4 DV$5 DV$6 DV$7))
-    (LETT $ (GETREFV 34))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (LETT % (GETREFV 34))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|MPolyCatFunctions3|
-                (LIST DV$1 DV$2 DV$3 DV$4 DV$5 DV$6 DV$7) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (QSETREFV $ 10 |#5|)
-    (QSETREFV $ 11 |#6|)
-    (QSETREFV $ 12 |#7|)
-    (SETF |pv$| (QREFELT $ 3))
-    $))) 
+                (LIST DV$1 DV$2 DV$3 DV$4 DV$5 DV$6 DV$7) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (QSETREFV % 10 |#5|)
+    (QSETREFV % 11 |#6|)
+    (QSETREFV % 12 |#7|)
+    (SETF |pv$| (QREFELT % 3))
+    %))) 
 
 (MAKEPROP '|MPolyCatFunctions3| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|local| |#4|) (|local| |#5|) (|local| |#6|)
               (|local| |#7|) (|Union| 6 '"failed") (0 . |mainVariable|)
-              (5 . |retract|) (10 . |coerce|) (|SparseUnivariatePolynomial| $)
+              (5 . |retract|) (10 . |coerce|) (|SparseUnivariatePolynomial| %)
               (15 . |univariate|) (21 . |Zero|) (25 . |Zero|) (29 . |Zero|)
               (|SparseUnivariatePolynomial| 11) (33 . |Zero|) (|Boolean|)
               (37 . ~=) (43 . |leadingCoefficient|) (|Mapping| 7 6)

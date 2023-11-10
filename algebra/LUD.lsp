@@ -1,23 +1,23 @@
 
 (SDEFUN |LUD;LUDecomp;MR;1|
         ((AA (|Matrix| D))
-         ($
+         (%
           (|Record| (|:| LU (|Matrix| D)) (|:| |Perm| (|Vector| (|Integer|)))
                     (|:| |Pivots| (|List| D)))))
         (SPROG
-         ((#1=#:G736 NIL) (|k| NIL) (|d| (D)) (|Pivs| (|List| D))
-          (|i0| (|Integer|)) (|s| (D)) (#2=#:G735 NIL) (#3=#:G734 NIL)
-          (|i| NIL) (#4=#:G733 NIL) (#5=#:G732 NIL) (#6=#:G731 NIL) (|j| NIL)
-          (|PermV| (|Vector| (|Integer|))) (#7=#:G701 NIL) (|maxC| (|Integer|))
+         ((#1=#:G483 NIL) (|k| NIL) (|d| (D)) (|Pivs| (|List| D))
+          (|i0| (|Integer|)) (|s| (D)) (#2=#:G482 NIL) (#3=#:G481 NIL)
+          (|i| NIL) (#4=#:G480 NIL) (#5=#:G479 NIL) (#6=#:G478 NIL) (|j| NIL)
+          (|PermV| (|Vector| (|Integer|))) (#7=#:G455 NIL) (|maxC| (|Integer|))
           (|minC| (|Integer|)) (|maxR| (|Integer|)) (|minR| (|Integer|))
           (A (|Matrix| D)))
-         (SEQ (LETT A (SPADCALL AA (QREFELT $ 8))) (LETT |minR| (PROGN A 1))
-              (LETT |maxR| (SPADCALL A (QREFELT $ 10)))
+         (SEQ (LETT A (SPADCALL AA (QREFELT % 8))) (LETT |minR| (PROGN A 1))
+              (LETT |maxR| (SPADCALL A (QREFELT % 10)))
               (LETT |minC| (PROGN A 1))
-              (LETT |maxC| (SPADCALL A (QREFELT $ 11)))
+              (LETT |maxC| (SPADCALL A (QREFELT % 11)))
               (EXIT
                (COND
-                ((SPADCALL |maxR| |maxC| (QREFELT $ 13))
+                ((SPADCALL |maxR| |maxC| (QREFELT % 13))
                  (|error| "LU decomposition only of square matrices"))
                 ('T
                  (SEQ
@@ -45,8 +45,8 @@
                                                                    1)
                                                           (QAREF2O A |k| |j| 1
                                                                    1)
-                                                          (QREFELT $ 15))
-                                                         (QREFELT $ 16)))))
+                                                          (QREFELT % 15))
+                                                         (QREFELT % 16)))))
                                        (LETT |k| (+ |k| 1)) (GO G190) G191
                                        (EXIT NIL))
                                   (EXIT (QSETAREF2O A |i| |j| |s| 1 1)))
@@ -66,14 +66,14 @@
                                                                    1)
                                                           (QAREF2O A |k| |j| 1
                                                                    1)
-                                                          (QREFELT $ 15))
-                                                         (QREFELT $ 16)))))
+                                                          (QREFELT % 15))
+                                                         (QREFELT % 16)))))
                                        (LETT |k| (+ |k| 1)) (GO G190) G191
                                        (EXIT NIL))
                                   (QSETAREF2O A |i| |j| |s| 1 1)
                                   (EXIT
                                    (COND
-                                    ((NULL (SPADCALL |s| (QREFELT $ 17)))
+                                    ((NULL (SPADCALL |s| (QREFELT % 17)))
                                      (COND ((< |i0| 0) (LETT |i0| |i|)))))))
                              (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL))
                         (EXIT
@@ -82,18 +82,18 @@
                           ('T
                            (SEQ
                             (COND
-                             ((SPADCALL |j| |i0| (QREFELT $ 13))
-                              (SPADCALL A |j| |i0| (QREFELT $ 19))))
+                             ((SPADCALL |j| |i0| (QREFELT % 13))
+                              (SPADCALL A |j| |i0| (QREFELT % 19))))
                             (QSETAREF1O |PermV| |j| |i0| 1)
                             (LETT |Pivs| (CONS (QAREF2O A |j| |j| 1 1) |Pivs|))
                             (EXIT
                              (COND
-                              ((SPADCALL |j| |maxC| (QREFELT $ 13))
+                              ((SPADCALL |j| |maxC| (QREFELT % 13))
                                (SEQ
                                 (LETT |d|
-                                      (SPADCALL (|spadConstant| $ 14)
+                                      (SPADCALL (|spadConstant| % 14)
                                                 (QAREF2O A |j| |j| 1 1)
-                                                (QREFELT $ 20)))
+                                                (QREFELT % 20)))
                                 (EXIT
                                  (SEQ (LETT |k| (+ |j| 1)) (LETT #1# |maxR|)
                                       G190 (COND ((> |k| #1#) (GO G191)))
@@ -103,7 +103,7 @@
                                                     (SPADCALL |d|
                                                               (QAREF2O A |k|
                                                                        |j| 1 1)
-                                                              (QREFELT $ 15))
+                                                              (QREFELT % 15))
                                                     1 1)))
                                       (LETT |k| (+ |k| 1)) (GO G190) G191
                                       (EXIT NIL))))))))))))
@@ -112,16 +112,16 @@
 
 (SDEFUN |LUD;LUSolve;MV2V;2|
         ((LU (|Matrix| D)) (|Perm| (|Vector| (|Integer|))) (XX (|Vector| D))
-         ($ (|Vector| D)))
+         (% (|Vector| D)))
         (SPROG
-         ((|s| (D)) (#1=#:G754 NIL) (|j| NIL) (#2=#:G753 NIL) (|i| NIL)
-          (|ii| (|Integer|)) (#3=#:G752 NIL) (|ip| (|Integer|)) (#4=#:G751 NIL)
+         ((|s| (D)) (#1=#:G501 NIL) (|j| NIL) (#2=#:G500 NIL) (|i| NIL)
+          (|ii| (|Integer|)) (#3=#:G499 NIL) (|ip| (|Integer|)) (#4=#:G498 NIL)
           (|maxR| (|Integer|)) (|minR| (|Integer|)) (X (|Vector| D)))
-         (SEQ (LETT X (SPADCALL XX (QREFELT $ 24))) (LETT |minR| (PROGN LU 1))
-              (LETT |maxR| (SPADCALL LU (QREFELT $ 10)))
+         (SEQ (LETT X (SPADCALL XX (QREFELT % 24))) (LETT |minR| (PROGN LU 1))
+              (LETT |maxR| (SPADCALL LU (QREFELT % 10)))
               (EXIT
                (COND
-                ((SPADCALL (QVSIZE X) |maxR| (QREFELT $ 13))
+                ((SPADCALL (QVSIZE X) |maxR| (QREFELT % 13))
                  (|error| "Wrong dimensions in LUSolve"))
                 ('T
                  (SEQ (LETT |ii| -1)
@@ -142,11 +142,11 @@
                                                           (QAREF2O LU |i| |j| 1
                                                                    1)
                                                           (QAREF1O X |j| 1)
-                                                          (QREFELT $ 15))
-                                                         (QREFELT $ 16)))))
+                                                          (QREFELT % 15))
+                                                         (QREFELT % 16)))))
                                        (LETT |j| (+ |j| 1)) (GO G190) G191
                                        (EXIT NIL)))
-                                 ((NULL (SPADCALL |s| (QREFELT $ 17)))
+                                 ((NULL (SPADCALL |s| (QREFELT % 17)))
                                   (LETT |ii| |i|)))
                                 (EXIT (QSETAREF1O X |i| |s| 1)))
                            (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL))
@@ -163,50 +163,50 @@
                                                         (QAREF2O LU |i| |j| 1
                                                                  1)
                                                         (QAREF1O X |j| 1)
-                                                        (QREFELT $ 15))
-                                                       (QREFELT $ 16)))))
+                                                        (QREFELT % 15))
+                                                       (QREFELT % 16)))))
                                      (LETT |j| (+ |j| 1)) (GO G190) G191
                                      (EXIT NIL))
                                 (EXIT
                                  (QSETAREF1O X |i|
                                              (SPADCALL |s|
                                                        (QAREF2O LU |i| |i| 1 1)
-                                                       (QREFELT $ 20))
+                                                       (QREFELT % 20))
                                              1)))
                            (LETT |i| (+ |i| -1)) (GO G190) G191 (EXIT NIL))
                       (EXIT X)))))))) 
 
 (SDEFUN |LUD;LUInverse;MR;3|
         ((A (|Matrix| D))
-         ($ (|Record| (|:| |Inv| (|Matrix| D)) (|:| |Pivots| (|List| D)))))
+         (% (|Record| (|:| |Inv| (|Matrix| D)) (|:| |Pivots| (|List| D)))))
         (SPROG
-         ((|res| (|Matrix| D)) (|v| (|Vector| D)) (#1=#:G763 NIL) (|i| NIL)
+         ((|res| (|Matrix| D)) (|v| (|Vector| D)) (#1=#:G510 NIL) (|i| NIL)
           (|n| (|NonNegativeInteger|))
           (|Alu|
            (|Record| (|:| LU (|Matrix| D)) (|:| |Perm| (|Vector| (|Integer|)))
                      (|:| |Pivots| (|List| D)))))
-         (SEQ (LETT |Alu| (SPADCALL A (QREFELT $ 22))) (LETT |n| (ANCOLS A))
-              (LETT |res| (MAKE_MATRIX1 |n| |n| (|spadConstant| $ 18)))
+         (SEQ (LETT |Alu| (SPADCALL A (QREFELT % 22))) (LETT |n| (ANCOLS A))
+              (LETT |res| (MAKE_MATRIX1 |n| |n| (|spadConstant| % 18)))
               (SEQ (LETT |i| (PROGN A 1))
-                   (LETT #1# (SPADCALL A (QREFELT $ 10))) G190
+                   (LETT #1# (SPADCALL A (QREFELT % 10))) G190
                    (COND ((> |i| #1#) (GO G191)))
-                   (SEQ (LETT |v| (MAKEARR1 |n| (|spadConstant| $ 18)))
-                        (QSETAREF1O |v| |i| (|spadConstant| $ 14) 1)
+                   (SEQ (LETT |v| (MAKEARR1 |n| (|spadConstant| % 18)))
+                        (QSETAREF1O |v| |i| (|spadConstant| % 14) 1)
                         (EXIT
                          (LETT |res|
                                (SPADCALL |res| |i|
                                          (SPADCALL (QVELT |Alu| 0)
                                                    (QVELT |Alu| 1) |v|
-                                                   (QREFELT $ 26))
-                                         (QREFELT $ 27)))))
+                                                   (QREFELT % 26))
+                                         (QREFELT % 27)))))
                    (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL))
               (EXIT (CONS |res| (QVELT |Alu| 2)))))) 
 
 (DECLAIM (NOTINLINE |LUDecomposition;|)) 
 
-(DEFUN |LUDecomposition| (#1=#:G764)
+(DEFUN |LUDecomposition| (#1=#:G511)
   (SPROG NIL
-         (PROG (#2=#:G765)
+         (PROG (#2=#:G512)
            (RETURN
             (COND
              ((LETT #2#
@@ -222,19 +222,19 @@
                   (HREM |$ConstructorCache| '|LUDecomposition|)))))))))) 
 
 (DEFUN |LUDecomposition;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|LUDecomposition| DV$1))
-          (LETT $ (GETREFV 30))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 30))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|LUDecomposition| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|LUDecomposition| '|infovec|
           (LIST

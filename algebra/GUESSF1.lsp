@@ -1,15 +1,15 @@
 
-(SDEFUN |GUESSF1;F2EXPRR;FE;1| ((|p| (F)) ($ (|Expression| (|Integer|))))
-        (SPADCALL (SPADCALL |p| (QREFELT $ 8)) (QREFELT $ 10))) 
+(SDEFUN |GUESSF1;F2EXPRR;FE;1| ((|p| (F)) (% (|Expression| (|Integer|))))
+        (SPADCALL (SPADCALL |p| (QREFELT % 8)) (QREFELT % 10))) 
 
-(SDEFUN |GUESSF1;EXPRR2F;EF;2| ((|p| (|Expression| (|Integer|))) ($ (F)))
-        (SPADCALL (SPADCALL |p| (QREFELT $ 13)) (QREFELT $ 14))) 
+(SDEFUN |GUESSF1;EXPRR2F;EF;2| ((|p| (|Expression| (|Integer|))) (% (F)))
+        (SPADCALL (SPADCALL |p| (QREFELT % 13)) (QREFELT % 14))) 
 
 (DECLAIM (NOTINLINE |GuessFiniteFunctions;|)) 
 
-(DEFUN |GuessFiniteFunctions| (#1=#:G699)
+(DEFUN |GuessFiniteFunctions| (#1=#:G450)
   (SPROG NIL
-         (PROG (#2=#:G700)
+         (PROG (#2=#:G451)
            (RETURN
             (COND
              ((LETT #2#
@@ -26,19 +26,19 @@
                   (HREM |$ConstructorCache| '|GuessFiniteFunctions|)))))))))) 
 
 (DEFUN |GuessFiniteFunctions;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|GuessFiniteFunctions| DV$1))
-          (LETT $ (GETREFV 16))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 16))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|GuessFiniteFunctions| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|GuessFiniteFunctions| '|infovec|
           (LIST

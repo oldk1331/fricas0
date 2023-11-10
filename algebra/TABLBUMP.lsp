@@ -2,7 +2,7 @@
 (SDEFUN |TABLBUMP;bumprow;MLLR;1|
         ((|cf| (|Mapping| (|Boolean|) S S)) (|x| (|List| S))
          (|lls| (|List| (|List| S)))
-         ($
+         (%
           (|Record| (|:| |fs| (|Boolean|)) (|:| |sd| (|List| S))
                     (|:| |td| (|List| (|List| S))))))
         (SPROG
@@ -16,19 +16,19 @@
                  (SEQ (LETT |y| (|SPADfirst| |lls|))
                       (EXIT
                        (COND
-                        ((SPADCALL (SPADCALL |x| 2 (QREFELT $ 9))
-                                   (SPADCALL |y| 2 (QREFELT $ 9)) |cf|)
+                        ((SPADCALL (SPADCALL |x| 2 (QREFELT % 9))
+                                   (SPADCALL |y| 2 (QREFELT % 9)) |cf|)
                          (VECTOR 'T
-                                 (LIST (SPADCALL |x| 1 (QREFELT $ 9))
-                                       (SPADCALL |y| 2 (QREFELT $ 9)))
+                                 (LIST (SPADCALL |x| 1 (QREFELT % 9))
+                                       (SPADCALL |y| 2 (QREFELT % 9)))
                                  (CONS
-                                  (LIST (SPADCALL |y| 1 (QREFELT $ 9))
-                                        (SPADCALL |x| 2 (QREFELT $ 9)))
+                                  (LIST (SPADCALL |y| 1 (QREFELT % 9))
+                                        (SPADCALL |x| 2 (QREFELT % 9)))
                                   (CDR |lls|))))
                         (#1#
                          (SEQ
                           (LETT |rw|
-                                (SPADCALL |cf| |x| (CDR |lls|) (QREFELT $ 13)))
+                                (SPADCALL |cf| |x| (CDR |lls|) (QREFELT % 13)))
                           (EXIT
                            (VECTOR (QVELT |rw| 0) (QVELT |rw| 1)
                                    (CONS (|SPADfirst| |lls|)
@@ -37,7 +37,7 @@
 (SDEFUN |TABLBUMP;bumptab;ML2L;2|
         ((|cf| (|Mapping| (|Boolean|) S S)) (|x| (|List| S))
          (|llls| (|List| (|List| (|List| S))))
-         ($ (|List| (|List| (|List| S)))))
+         (% (|List| (|List| (|List| S)))))
         (SPROG
          ((|rw|
            (|Record| (|:| |fs| (|Boolean|)) (|:| |sd| (|List| S))
@@ -48,52 +48,52 @@
                  (SEQ
                   (LETT |rw|
                         (SPADCALL |cf| |x| (|SPADfirst| |llls|)
-                                  (QREFELT $ 13)))
+                                  (QREFELT % 13)))
                   (EXIT
                    (COND
                     ((QVELT |rw| 0)
                      (CONS (QVELT |rw| 2)
                            (SPADCALL |cf| (QVELT |rw| 1) (CDR |llls|)
-                                     (QREFELT $ 15))))
+                                     (QREFELT % 15))))
                     (#1# (CONS (QVELT |rw| 2) (CDR |llls|))))))))))) 
 
 (SDEFUN |TABLBUMP;bumptab1;L2L;3|
         ((|x| (|List| S)) (|llls| (|List| (|List| (|List| S))))
-         ($ (|List| (|List| (|List| S)))))
-        (SPADCALL (ELT $ 17) |x| |llls| (QREFELT $ 15))) 
+         (% (|List| (|List| (|List| S)))))
+        (SPADCALL (ELT % 17) |x| |llls| (QREFELT % 15))) 
 
 (SDEFUN |TABLBUMP;tab1;LL;4|
-        ((|lls| (|List| (|List| S))) ($ (|List| (|List| (|List| S)))))
-        (SPADCALL NIL (ELT $ 18) (SPADCALL |lls| (QREFELT $ 20))
-                  (QREFELT $ 23))) 
+        ((|lls| (|List| (|List| S))) (% (|List| (|List| (|List| S)))))
+        (SPADCALL NIL (ELT % 18) (SPADCALL |lls| (QREFELT % 20))
+                  (QREFELT % 23))) 
 
 (SDEFUN |TABLBUMP;lexorder|
-        ((|p1| (|List| S)) (|p2| (|List| S)) ($ (|Boolean|)))
+        ((|p1| (|List| S)) (|p2| (|List| S)) (% (|Boolean|)))
         (COND
-         ((SPADCALL (SPADCALL |p1| 1 (QREFELT $ 9))
-                    (SPADCALL |p2| 1 (QREFELT $ 9)) (QREFELT $ 25))
-          (SPADCALL (SPADCALL |p1| 2 (QREFELT $ 9))
-                    (SPADCALL |p2| 2 (QREFELT $ 9)) (QREFELT $ 17)))
+         ((SPADCALL (SPADCALL |p1| 1 (QREFELT % 9))
+                    (SPADCALL |p2| 1 (QREFELT % 9)) (QREFELT % 25))
+          (SPADCALL (SPADCALL |p1| 2 (QREFELT % 9))
+                    (SPADCALL |p2| 2 (QREFELT % 9)) (QREFELT % 17)))
          ('T
-          (SPADCALL (SPADCALL |p1| 1 (QREFELT $ 9))
-                    (SPADCALL |p2| 1 (QREFELT $ 9)) (QREFELT $ 17))))) 
+          (SPADCALL (SPADCALL |p1| 1 (QREFELT % 9))
+                    (SPADCALL |p2| 1 (QREFELT % 9)) (QREFELT % 17))))) 
 
 (SDEFUN |TABLBUMP;lex;2L;6|
-        ((|lp| (|List| (|List| S))) ($ (|List| (|List| S))))
-        (SPADCALL (CONS #'|TABLBUMP;lex;2L;6!0| $) |lp| (QREFELT $ 27))) 
+        ((|lp| (|List| (|List| S))) (% (|List| (|List| S))))
+        (SPADCALL (CONS #'|TABLBUMP;lex;2L;6!0| %) |lp| (QREFELT % 27))) 
 
-(SDEFUN |TABLBUMP;lex;2L;6!0| ((|s1| NIL) (|s2| NIL) ($ NIL))
-        (|TABLBUMP;lexorder| |s1| |s2| $)) 
+(SDEFUN |TABLBUMP;lex;2L;6!0| ((|s1| NIL) (|s2| NIL) (% NIL))
+        (|TABLBUMP;lexorder| |s1| |s2| %)) 
 
-(SDEFUN |TABLBUMP;slex;LL;7| ((|ls| (|List| S)) ($ (|List| (|List| S))))
+(SDEFUN |TABLBUMP;slex;LL;7| ((|ls| (|List| S)) (% (|List| (|List| S))))
         (SPROG
-         ((#1=#:G743 NIL) (|i| NIL) (#2=#:G744 NIL) (|j| NIL) (#3=#:G742 NIL))
+         ((#1=#:G485 NIL) (|i| NIL) (#2=#:G486 NIL) (|j| NIL) (#3=#:G484 NIL))
          (SEQ
           (SPADCALL
            (PROGN
             (LETT #3# NIL)
             (SEQ (LETT |j| NIL) (LETT #2# |ls|) (LETT |i| NIL)
-                 (LETT #1# (SPADCALL (ELT $ 17) |ls| (QREFELT $ 29))) G190
+                 (LETT #1# (SPADCALL (ELT % 17) |ls| (QREFELT % 29))) G190
                  (COND
                   ((OR (ATOM #1#) (PROGN (LETT |i| (CAR #1#)) NIL) (ATOM #2#)
                        (PROGN (LETT |j| (CAR #2#)) NIL))
@@ -101,12 +101,12 @@
                  (SEQ (EXIT (LETT #3# (CONS (LIST |i| |j|) #3#))))
                  (LETT #1# (PROG1 (CDR #1#) (LETT #2# (CDR #2#)))) (GO G190)
                  G191 (EXIT (NREVERSE #3#))))
-           (QREFELT $ 28))))) 
+           (QREFELT % 28))))) 
 
-(SDEFUN |TABLBUMP;inverse;2L;8| ((|ls| (|List| S)) ($ (|List| S)))
+(SDEFUN |TABLBUMP;inverse;2L;8| ((|ls| (|List| S)) (% (|List| S)))
         (SPROG
-         ((#1=#:G751 NIL) (#2=#:G753 NIL) (|i| NIL) (#3=#:G754 NIL) (|j| NIL)
-          (#4=#:G752 NIL) (|lss| NIL) (#5=#:G750 NIL))
+         ((#1=#:G493 NIL) (#2=#:G495 NIL) (|i| NIL) (#3=#:G496 NIL) (|j| NIL)
+          (#4=#:G494 NIL) (|lss| NIL) (#5=#:G492 NIL))
          (SEQ
           (PROGN
            (LETT #5# NIL)
@@ -117,7 +117,7 @@
                         (LETT #4# NIL)
                         (SEQ (LETT |j| NIL) (LETT #3# |ls|) (LETT |i| NIL)
                              (LETT #2#
-                                   (SPADCALL (ELT $ 17) |ls| (QREFELT $ 29)))
+                                   (SPADCALL (ELT % 17) |ls| (QREFELT % 29)))
                              G190
                              (COND
                               ((OR (ATOM #2#) (PROGN (LETT |i| (CAR #2#)) NIL)
@@ -126,25 +126,25 @@
                              (SEQ (EXIT (LETT #4# (CONS (LIST |j| |i|) #4#))))
                              (LETT #2# (PROG1 (CDR #2#) (LETT #3# (CDR #3#))))
                              (GO G190) G191 (EXIT (NREVERSE #4#))))
-                       (QREFELT $ 28)))
+                       (QREFELT % 28)))
                 G190
                 (COND
                  ((OR (ATOM #1#) (PROGN (LETT |lss| (CAR #1#)) NIL))
                   (GO G191)))
                 (SEQ
-                 (EXIT (LETT #5# (CONS (SPADCALL |lss| 2 (QREFELT $ 9)) #5#))))
+                 (EXIT (LETT #5# (CONS (SPADCALL |lss| 2 (QREFELT % 9)) #5#))))
                 (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT (NREVERSE #5#))))))) 
 
-(SDEFUN |TABLBUMP;tab;LT;9| ((|ls| (|List| S)) ($ (|Tableau| (|List| S))))
-        (SPADCALL (SPADCALL (SPADCALL |ls| (QREFELT $ 30)) (QREFELT $ 24))
-                  (QREFELT $ 33))) 
+(SDEFUN |TABLBUMP;tab;LT;9| ((|ls| (|List| S)) (% (|Tableau| (|List| S))))
+        (SPADCALL (SPADCALL (SPADCALL |ls| (QREFELT % 30)) (QREFELT % 24))
+                  (QREFELT % 33))) 
 
 (SDEFUN |TABLBUMP;maxrow;LLL3LR;10|
         ((|n| (|List| S)) (|a| (|List| (|List| (|List| S))))
          (|b| (|List| (|List| S))) (|c| (|List| (|List| (|List| S))))
          (|d| (|List| (|List| (|List| S))))
          (|llls| (|List| (|List| (|List| S))))
-         ($
+         (%
           (|Record| (|:| |f1| (|List| S))
                     (|:| |f2| (|List| (|List| (|List| S))))
                     (|:| |f3| (|List| (|List| S)))
@@ -159,31 +159,31 @@
                        (LETT |rst| (CDR (|SPADfirst| |llls|)))
                        (EXIT
                         (COND
-                         ((SPADCALL (SPADCALL |fst| 1 (QREFELT $ 9))
-                                    (SPADCALL |n| 1 (QREFELT $ 9))
-                                    (QREFELT $ 35))
+                         ((SPADCALL (SPADCALL |fst| 1 (QREFELT % 9))
+                                    (SPADCALL |n| 1 (QREFELT % 9))
+                                    (QREFELT % 35))
                           (SPADCALL |fst| |d| |rst| (CDR |llls|)
                                     (CONS (|SPADfirst| |llls|) |d|)
-                                    (CDR |llls|) (QREFELT $ 37)))
+                                    (CDR |llls|) (QREFELT % 37)))
                          ('T
                           (SPADCALL |n| |a| |b| |c|
                                     (CONS (|SPADfirst| |llls|) |d|)
-                                    (CDR |llls|) (QREFELT $ 37))))))))))) 
+                                    (CDR |llls|) (QREFELT % 37))))))))))) 
 
 (SDEFUN |TABLBUMP;mr;LR;11|
         ((|llls| (|List| (|List| (|List| S))))
-         ($
+         (%
           (|Record| (|:| |f1| (|List| S))
                     (|:| |f2| (|List| (|List| (|List| S))))
                     (|:| |f3| (|List| (|List| S)))
                     (|:| |f4| (|List| (|List| (|List| S)))))))
         (SPADCALL (|SPADfirst| (|SPADfirst| |llls|)) NIL
                   (CDR (|SPADfirst| |llls|)) (CDR |llls|) NIL |llls|
-                  (QREFELT $ 37))) 
+                  (QREFELT % 37))) 
 
 (SDEFUN |TABLBUMP;untab;LLL;12|
         ((|lp| (|List| (|List| S))) (|llls| (|List| (|List| (|List| S))))
-         ($ (|List| (|List| S))))
+         (% (|List| (|List| S))))
         (SPROG
          ((|rv| (|List| (|List| (|List| S))))
           (|rc|
@@ -194,12 +194,12 @@
          (SEQ
           (COND ((NULL |llls|) |lp|)
                 (#1='T
-                 (SEQ (LETT |rc| (SPADCALL |llls| (QREFELT $ 38)))
+                 (SEQ (LETT |rc| (SPADCALL |llls| (QREFELT % 38)))
                       (LETT |rv|
                             (REVERSE
-                             (SPADCALL (CONS #'|TABLBUMP;untab;LLL;12!0| $)
+                             (SPADCALL (CONS #'|TABLBUMP;untab;LLL;12!0| %)
                                        (QVELT |rc| 0) (QVELT |rc| 1)
-                                       (QREFELT $ 15))))
+                                       (QREFELT % 15))))
                       (EXIT
                        (SPADCALL (CONS (|SPADfirst| (|SPADfirst| |rv|)) |lp|)
                                  (SPADCALL (CDR |rv|)
@@ -207,15 +207,15 @@
                                                  (#1#
                                                   (CONS (QVELT |rc| 2)
                                                         (QVELT |rc| 3))))
-                                           (QREFELT $ 39))
-                                 (QREFELT $ 40))))))))) 
+                                           (QREFELT % 39))
+                                 (QREFELT % 40))))))))) 
 
-(SDEFUN |TABLBUMP;untab;LLL;12!0| ((|s1| NIL) (|s2| NIL) ($ NIL))
-        (SPADCALL |s2| |s1| (QREFELT $ 17))) 
+(SDEFUN |TABLBUMP;untab;LLL;12!0| ((|s1| NIL) (|s2| NIL) (% NIL))
+        (SPADCALL |s2| |s1| (QREFELT % 17))) 
 
 (SDEFUN |TABLBUMP;bat1;LL;13|
-        ((|llls| (|List| (|List| (|List| S)))) ($ (|List| (|List| S))))
-        (SPROG ((#1=#:G775 NIL) (|lls| NIL) (#2=#:G774 NIL))
+        ((|llls| (|List| (|List| (|List| S)))) (% (|List| (|List| S))))
+        (SPROG ((#1=#:G517 NIL) (|lls| NIL) (#2=#:G516 NIL))
                (SEQ
                 (SPADCALL NIL
                           (PROGN
@@ -229,17 +229,17 @@
                                  (EXIT (LETT #2# (CONS (REVERSE |lls|) #2#))))
                                 (LETT #1# (CDR #1#)) (GO G190) G191
                                 (EXIT (NREVERSE #2#))))
-                          (QREFELT $ 40))))) 
+                          (QREFELT % 40))))) 
 
 (SDEFUN |TABLBUMP;bat;TL;14|
-        ((|tb| (|Tableau| (|List| S))) ($ (|List| (|List| S))))
-        (SPADCALL (SPADCALL |tb| (QREFELT $ 42)) (QREFELT $ 41))) 
+        ((|tb| (|Tableau| (|List| S))) (% (|List| (|List| S))))
+        (SPADCALL (SPADCALL |tb| (QREFELT % 42)) (QREFELT % 41))) 
 
 (DECLAIM (NOTINLINE |TableauxBumpers;|)) 
 
-(DEFUN |TableauxBumpers| (#1=#:G777)
+(DEFUN |TableauxBumpers| (#1=#:G519)
   (SPROG NIL
-         (PROG (#2=#:G778)
+         (PROG (#2=#:G520)
            (RETURN
             (COND
              ((LETT #2#
@@ -255,19 +255,19 @@
                   (HREM |$ConstructorCache| '|TableauxBumpers|)))))))))) 
 
 (DEFUN |TableauxBumpers;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|TableauxBumpers| DV$1))
-          (LETT $ (GETREFV 44))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 44))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|TableauxBumpers| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|TableauxBumpers| '|infovec|
           (LIST

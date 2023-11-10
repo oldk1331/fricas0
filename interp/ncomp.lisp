@@ -64,7 +64,7 @@
 ;         mdef =>
 ;             repval := first(mdef)
 ;             null(rest(mdef)) => expandMacros(repval)
-;             userError("macro call needs arguments")
+;             userError('"macro call needs arguments")
 ;         tree
 ;     -- floating point numbers
 ;     [op, :args] := tree
@@ -81,7 +81,7 @@
 ;                 args
 ;             #args = #margs =>
 ;                 expandMacros(SUBLISLIS(args, margs, repval))
-;             userError("invalid macro call, #args ~= #margs")
+;             userError('"invalid macro call, #args ~= #margs")
 ;         [op, :[expandMacros(x) for x in args]]
 ;     [expandMacros(x) for x in tree]
 
@@ -97,7 +97,7 @@
           (PROGN
            (SETQ |repval| (CAR |mdef|))
            (COND ((NULL (CDR |mdef|)) (|expandMacros| |repval|))
-                 (#1='T (|userError| '|macro call needs arguments|)))))
+                 (#1='T (|userError| "macro call needs arguments")))))
          (#1# |tree|))))
       (#1#
        (PROGN
@@ -146,7 +146,7 @@
                         (|expandMacros| (SUBLISLIS |args| |margs| |repval|)))
                        (#1#
                         (|userError|
-                         '|invalid macro call, #args ~= #margs|))))))))
+                         "invalid macro call, #args ~= #margs"))))))))
                  (#1#
                   (CONS |op|
                         ((LAMBDA (|bfVar#6| |bfVar#5| |x|)
@@ -281,7 +281,7 @@
 ;         def := [def, :args]
 ;     else
 ;         SAY([name, def])
-;         userError("Invalid macro definition")
+;         userError('"Invalid macro definition")
 ;     prev_def := HGET($MacroTable, name)
 ;     PUSH([name, :prev_def], $restore_list)
 ;     HPUT($MacroTable, name, def)
@@ -308,7 +308,7 @@
                       (#1# |args|)))
              (SETQ |name| |op|) (SETQ |def| (CONS |def| |args|)))
             (#1# (SAY (LIST |name| |def|))
-             (|userError| '|Invalid macro definition|)))
+             (|userError| "Invalid macro definition")))
       (SETQ |prev_def| (HGET |$MacroTable| |name|))
       (PUSH (CONS |name| |prev_def|) |$restore_list|)
       (HPUT |$MacroTable| |name| |def|)))))
@@ -515,7 +515,7 @@
 ;     tree is ["==", head, def] => expandMacros(tree)
 ;     tree is ["where", ["==", name, def], env] =>
 ;         walkWhereList(name, def, env)
-;     userError("Parsing error: illegal toplevel form")
+;     userError('"Parsing error: illegal toplevel form")
 ;     nil
 
 (DEFUN |walkForm| (|tree|)
@@ -565,8 +565,7 @@
                    (AND (CONSP |ISTMP#5|) (EQ (CDR |ISTMP#5|) NIL)
                         (PROGN (SETQ |env| (CAR |ISTMP#5|)) #1#))))))
        (|walkWhereList| |name| |def| |env|))
-      (#1#
-       (PROGN (|userError| '|Parsing error: illegal toplevel form|) NIL))))))
+      (#1# (PROGN (|userError| "Parsing error: illegal toplevel form") NIL))))))
 
 ; isNiladic(head1) ==
 ;     SYMBOLP head1 => true
@@ -669,7 +668,7 @@
 ;         if nt then
 ;             handleKind(["DEF", form, [nt, :rest sig], body])
 ;         else
-;             SAY(["unhandled target", form])
+;             SAY(['"unhandled target", form])
 ;     boo_comp_cats()
 
 (DEFUN |processGlobals| ()
@@ -740,7 +739,7 @@
               (|nt|
                (|handleKind|
                 (LIST 'DEF |form| (CONS |nt| (CDR |sig|)) |body|)))
-              (#1# (SAY (LIST '|unhandled target| |form|)))))))
+              (#1# (SAY (LIST "unhandled target" |form|)))))))
           (SETQ |bfVar#18| (CDR |bfVar#18|))))
        |untypedDefs| NIL)
       (|boo_comp_cats|)))))
@@ -1000,7 +999,7 @@
 ;             pairlis:= [[v,:a] for a in argl for v in $FormalMapVariableList]
 ;             -- substitute
 ;             SUBLIS(pairlis, sig)
-;         PRETTYPRINT("strange untyped def")
+;         PRETTYPRINT('"strange untyped def")
 ;         PRETTYPRINT([lhs, rhs, modemap])
 ;         nil
 ;     BREAK()
@@ -1089,7 +1088,7 @@
             (SUBLIS |pairlis| |sig|)))
           (#1#
            (PROGN
-            (PRETTYPRINT '|strange untyped def|)
+            (PRETTYPRINT "strange untyped def")
             (PRETTYPRINT (LIST |lhs| |rhs| |modemap|))
             NIL)))))
        (#1# (BREAK)))))))
@@ -1170,7 +1169,7 @@
 ;     $TranslateOnly => $Translation := x
 ;     $postStack =>
 ;         displayPreCompilationErrors()
-;         userError "precompilation failed"
+;         userError '"precompilation failed"
 ;     $PrintOnly =>
 ;         FORMAT(true, '"~S   =====>~%", $currentLine)
 ;         PRETTYPRINT(x)
@@ -1241,7 +1240,7 @@
                             (|$postStack|
                              (PROGN
                               (|displayPreCompilationErrors|)
-                              (|userError| '|precompilation failed|)))
+                              (|userError| "precompilation failed")))
                             (|$PrintOnly|
                              (PROGN
                               (FORMAT T "~S   =====>~%" |$currentLine|)

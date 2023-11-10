@@ -7,14 +7,14 @@
   (COND (|CachableSet;AL|) (T (SETQ |CachableSet;AL| (|CachableSet;|))))) 
 
 (DEFUN |CachableSet;| ()
-  (SPROG ((#1=#:G689 NIL))
+  (SPROG ((#1=#:G448 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|SetCategory|)
                            (|mkCategory|
-                            '(((|position| ((|NonNegativeInteger|) $)) T)
+                            '(((|position| ((|NonNegativeInteger|) %)) T)
                               ((|setPosition|
-                                ((|Void|) $ (|NonNegativeInteger|)))
+                                ((|Void|) % (|NonNegativeInteger|)))
                                T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|CachableSet|))))) 

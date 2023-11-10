@@ -1,10 +1,10 @@
 
 (SDEFUN |NLINSOL;solveInField;LL;1|
         ((|l| (|List| (|Polynomial| R)))
-         ($ (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
+         (% (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
         (SPROG
-         ((#1=#:G702 NIL) (#2=#:G701 #3=(|List| (|Symbol|))) (#4=#:G703 #3#)
-          (#5=#:G708 NIL) (|p| NIL))
+         ((#1=#:G454 NIL) (#2=#:G453 #3=(|List| (|Symbol|))) (#4=#:G455 #3#)
+          (#5=#:G457 NIL) (|p| NIL))
          (SEQ
           (SPADCALL |l|
                     (PROGN
@@ -16,21 +16,21 @@
                           (SEQ
                            (EXIT
                             (PROGN
-                             (LETT #4# (SPADCALL |p| (QREFELT $ 9)))
+                             (LETT #4# (SPADCALL |p| (QREFELT % 9)))
                              (COND
                               (#1#
-                               (LETT #2# (SPADCALL #2# #4# (QREFELT $ 10))))
+                               (LETT #2# (SPADCALL #2# #4# (QREFELT % 10))))
                               ('T (PROGN (LETT #2# #4#) (LETT #1# 'T)))))))
                           (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
                      (COND (#1# #2#) ('T (|IdentityError| '|setUnion|))))
-                    (QREFELT $ 13))))) 
+                    (QREFELT % 13))))) 
 
 (SDEFUN |NLINSOL;solve;LL;2|
         ((|l| (|List| (|Polynomial| R)))
-         ($ (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
+         (% (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
         (SPROG
-         ((#1=#:G710 NIL) (#2=#:G709 #3=(|List| (|Symbol|))) (#4=#:G711 #3#)
-          (#5=#:G713 NIL) (|p| NIL))
+         ((#1=#:G459 NIL) (#2=#:G458 #3=(|List| (|Symbol|))) (#4=#:G460 #3#)
+          (#5=#:G462 NIL) (|p| NIL))
          (SEQ
           (SPADCALL |l|
                     (PROGN
@@ -42,40 +42,40 @@
                           (SEQ
                            (EXIT
                             (PROGN
-                             (LETT #4# (SPADCALL |p| (QREFELT $ 9)))
+                             (LETT #4# (SPADCALL |p| (QREFELT % 9)))
                              (COND
                               (#1#
-                               (LETT #2# (SPADCALL #2# #4# (QREFELT $ 10))))
+                               (LETT #2# (SPADCALL #2# #4# (QREFELT % 10))))
                               ('T (PROGN (LETT #2# #4#) (LETT #1# 'T)))))))
                           (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
                      (COND (#1# #2#) ('T (|IdentityError| '|setUnion|))))
-                    (QREFELT $ 15))))) 
+                    (QREFELT % 15))))) 
 
 (SDEFUN |NLINSOL;solve;LLL;3|
         ((|lp| (|List| (|Polynomial| R))) (|lv| (|List| (|Symbol|)))
-         ($ (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
-        (SPROG ((#1=#:G726 NIL) (|sol| NIL) (#2=#:G725 NIL))
+         (% (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
+        (SPROG ((#1=#:G467 NIL) (|sol| NIL) (#2=#:G466 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
                   (LETT #2# NIL)
                   (SEQ (LETT |sol| NIL)
-                       (LETT #1# (SPADCALL |lp| |lv| (QREFELT $ 13))) G190
+                       (LETT #1# (SPADCALL |lp| |lv| (QREFELT % 13))) G190
                        (COND
                         ((OR (ATOM #1#) (PROGN (LETT |sol| (CAR #1#)) NIL))
                          (GO G191)))
                        (SEQ
                         (EXIT
-                         (LETT #2# (CONS (|NLINSOL;expandSol| |sol| $) #2#))))
+                         (LETT #2# (CONS (|NLINSOL;expandSol| |sol| %) #2#))))
                        (LETT #1# (CDR #1#)) (GO G190) G191
                        (EXIT (NREVERSE #2#))))
-                 (QREFELT $ 18))))) 
+                 (QREFELT % 18))))) 
 
 (SDEFUN |NLINSOL;addRoot|
         ((|eq| (|Equation| (|Fraction| (|Polynomial| R))))
          (|l| (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R))))))
-         ($ (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
-        (SPROG ((#1=#:G731 NIL) (|sol| NIL) (#2=#:G730 NIL))
+         (% (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
+        (SPROG ((#1=#:G472 NIL) (|sol| NIL) (#2=#:G471 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -90,8 +90,8 @@
 (SDEFUN |NLINSOL;evalSol|
         ((|ls| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))
          (|l| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))
-         ($ (|List| (|Equation| (|Fraction| (|Polynomial| R))))))
-        (SPROG ((#1=#:G740 NIL) (|eq| NIL) (#2=#:G739 NIL))
+         (% (|List| (|Equation| (|Fraction| (|Polynomial| R))))))
+        (SPROG ((#1=#:G477 NIL) (|eq| NIL) (#2=#:G476 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -103,48 +103,48 @@
                        (EXIT
                         (LETT #2#
                               (CONS
-                               (SPADCALL (SPADCALL |eq| (QREFELT $ 21))
+                               (SPADCALL (SPADCALL |eq| (QREFELT % 21))
                                          (SPADCALL
-                                          (SPADCALL |eq| (QREFELT $ 22)) |l|
-                                          (QREFELT $ 25))
-                                         (QREFELT $ 26))
+                                          (SPADCALL |eq| (QREFELT % 22)) |l|
+                                          (QREFELT % 25))
+                                         (QREFELT % 26))
                                #2#))))
                       (LETT #1# (CDR #1#)) (GO G190) G191
                       (EXIT (NREVERSE #2#))))))) 
 
 (SDEFUN |NLINSOL;allRoots|
         ((|l| (|List| (|Polynomial| R)))
-         ($ (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
+         (% (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
         (SPROG
-         ((#1=#:G751 NIL) (|a| NIL) (#2=#:G750 NIL)
-          (|s| (|Fraction| (|Polynomial| R))) (#3=#:G742 NIL)
+         ((#1=#:G487 NIL) (|a| NIL) (#2=#:G486 NIL)
+          (|s| (|Fraction| (|Polynomial| R))) (#3=#:G479 NIL)
           (|p| (|Polynomial| R))
           (|z| (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
          (SEQ
           (COND ((NULL |l|) (LIST NIL))
                 ('T
-                 (SEQ (LETT |z| (|NLINSOL;allRoots| (CDR |l|) $))
+                 (SEQ (LETT |z| (|NLINSOL;allRoots| (CDR |l|) %))
                       (LETT |s|
                             (SPADCALL
                              (SPADCALL
                               (PROG2
                                   (LETT #3#
                                         (SPADCALL (LETT |p| (|SPADfirst| |l|))
-                                                  (QREFELT $ 28)))
+                                                  (QREFELT % 28)))
                                   (QCDR #3#)
                                 (|check_union2| (QEQCAR #3# 0) (|Symbol|)
                                                 (|Union| (|Symbol|) "failed")
                                                 #3#))
-                              (QREFELT $ 30))
-                             (QREFELT $ 31)))
+                              (QREFELT % 30))
+                             (QREFELT % 31)))
                       (EXIT
                        (SPADCALL
                         (PROGN
                          (LETT #2# NIL)
                          (SEQ (LETT |a| NIL)
                               (LETT #1#
-                                    (SPADCALL (SPADCALL |p| (QREFELT $ 33))
-                                              (QREFELT $ 35)))
+                                    (SPADCALL (SPADCALL |p| (QREFELT % 33))
+                                              (QREFELT % 35)))
                               G190
                               (COND
                                ((OR (ATOM #1#)
@@ -158,24 +158,24 @@
                                         (SPADCALL |s|
                                                   (SPADCALL
                                                    (SPADCALL |a|
-                                                             (QREFELT $ 36))
-                                                   (QREFELT $ 31))
-                                                  (QREFELT $ 26))
-                                        |z| $)
+                                                             (QREFELT % 36))
+                                                   (QREFELT % 31))
+                                                  (QREFELT % 26))
+                                        |z| %)
                                        #2#))))
                               (LETT #1# (CDR #1#)) (GO G190) G191
                               (EXIT (NREVERSE #2#))))
-                        (QREFELT $ 18))))))))) 
+                        (QREFELT % 18))))))))) 
 
 (SDEFUN |NLINSOL;expandSol|
         ((|l| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))
-         ($ (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
+         (% (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
         (SPROG
-         ((#1=#:G776 NIL) (|z| NIL) (#2=#:G775 NIL) (#3=#:G773 NIL)
+         ((#1=#:G511 NIL) (|z| NIL) (#2=#:G510 NIL) (#3=#:G508 NIL)
           (|luniv| (|List| (|Polynomial| R))) (|r| (|Union| R "failed"))
           (|u| (|Union| (|Polynomial| R) "failed"))
           (|lsubs| #4=(|List| (|Equation| (|Fraction| (|Polynomial| R)))))
-          (|lassign| #4#) (#5=#:G774 NIL) (|eq| NIL))
+          (|lassign| #4#) (#5=#:G509 NIL) (|eq| NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |lassign| (LETT |lsubs| NIL)) (LETT |luniv| NIL)
@@ -187,30 +187,30 @@
                       (EXIT
                        (COND
                         ((QEQCAR
-                          (SPADCALL (SPADCALL |eq| (QREFELT $ 21))
-                                    (QREFELT $ 37))
+                          (SPADCALL (SPADCALL |eq| (QREFELT % 21))
+                                    (QREFELT % 37))
                           0)
                          (COND
                           ((QEQCAR
-                            (|NLINSOL;RIfCan| (SPADCALL |eq| (QREFELT $ 22)) $)
+                            (|NLINSOL;RIfCan| (SPADCALL |eq| (QREFELT % 22)) %)
                             0)
                            (LETT |lassign| (CONS |eq| |lassign|)))
                           ('T (LETT |lsubs| (CONS |eq| |lsubs|)))))
                         ('T
                          (SEQ
                           (LETT |u|
-                                (SPADCALL (SPADCALL |eq| (QREFELT $ 21))
-                                          (QREFELT $ 39)))
+                                (SPADCALL (SPADCALL |eq| (QREFELT % 21))
+                                          (QREFELT % 39)))
                           (EXIT
                            (COND
                             ((QEQCAR |u| 0)
                              (COND
                               ((EQL
-                                (LENGTH (SPADCALL (QCDR |u|) (QREFELT $ 9))) 1)
+                                (LENGTH (SPADCALL (QCDR |u|) (QREFELT % 9))) 1)
                                (SEQ
                                 (LETT |r|
                                       (|NLINSOL;RIfCan|
-                                       (SPADCALL |eq| (QREFELT $ 22)) $))
+                                       (SPADCALL |eq| (QREFELT % 22)) %))
                                 (EXIT
                                  (COND
                                   ((QEQCAR |r| 0)
@@ -218,13 +218,13 @@
                                          (CONS
                                           (SPADCALL (QCDR |u|)
                                                     (SPADCALL (QCDR |r|)
-                                                              (QREFELT $ 36))
-                                                    (QREFELT $ 41))
+                                                              (QREFELT % 36))
+                                                    (QREFELT % 41))
                                           |luniv|)))
                                   ('T
                                    (PROGN
                                     (LETT #3# (LIST |l|))
-                                    (GO #6=#:G772)))))))
+                                    (GO #6=#:G507)))))))
                               ('T (PROGN (LETT #3# (LIST |l|)) (GO #6#)))))
                             ('T (PROGN (LETT #3# (LIST |l|)) (GO #6#))))))))))
                      (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
@@ -234,7 +234,7 @@
                         (PROGN
                          (LETT #2# NIL)
                          (SEQ (LETT |z| NIL)
-                              (LETT #1# (|NLINSOL;allRoots| |luniv| $)) G190
+                              (LETT #1# (|NLINSOL;allRoots| |luniv| %)) G190
                               (COND
                                ((OR (ATOM #1#)
                                     (PROGN (LETT |z| (CAR #1#)) NIL))
@@ -246,31 +246,31 @@
                                        (SPADCALL |z|
                                                  (SPADCALL
                                                   (|NLINSOL;evalSol| |lsubs|
-                                                   |z| $)
-                                                  |lassign| (QREFELT $ 42))
-                                                 (QREFELT $ 42))
+                                                   |z| %)
+                                                  |lassign| (QREFELT % 42))
+                                                 (QREFELT % 42))
                                        #2#))))
                               (LETT #1# (CDR #1#)) (GO G190) G191
                               (EXIT (NREVERSE #2#)))))))))
           #6# (EXIT #3#)))) 
 
 (SDEFUN |NLINSOL;RIfCan|
-        ((|f| (|Fraction| (|Polynomial| R))) ($ (|Union| R "failed")))
-        (SPROG ((#1=#:G784 NIL) (|d| #2=(|Union| R "failed")) (|n| #2#))
+        ((|f| (|Fraction| (|Polynomial| R))) (% (|Union| R "failed")))
+        (SPROG ((#1=#:G519 NIL) (|d| #2=(|Union| R "failed")) (|n| #2#))
                (SEQ
                 (EXIT
                  (SEQ
                   (SEQ
                    (LETT |n|
-                         (SPADCALL (SPADCALL |f| (QREFELT $ 43))
-                                   (QREFELT $ 45)))
+                         (SPADCALL (SPADCALL |f| (QREFELT % 43))
+                                   (QREFELT % 45)))
                    (EXIT
                     (COND
                      ((QEQCAR |n| 0)
                       (SEQ
                        (LETT |d|
-                             (SPADCALL (SPADCALL |f| (QREFELT $ 46))
-                                       (QREFELT $ 45)))
+                             (SPADCALL (SPADCALL |f| (QREFELT % 46))
+                                       (QREFELT % 45)))
                        (EXIT
                         (COND
                          ((QEQCAR |d| 0)
@@ -278,35 +278,35 @@
                            (LETT #1#
                                  (CONS 0
                                        (SPADCALL (QCDR |n|) (QCDR |d|)
-                                                 (QREFELT $ 47))))
-                           (GO #3=#:G782))))))))))
+                                                 (QREFELT % 47))))
+                           (GO #3=#:G517))))))))))
                   (EXIT (CONS 1 "failed"))))
                 #3# (EXIT #1#)))) 
 
 (SDEFUN |NLINSOL;solve;LL;9|
         ((|l| (|List| (|Polynomial| R)))
-         ($ (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
-        (SPADCALL |l| (QREFELT $ 14))) 
+         (% (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
+        (SPADCALL |l| (QREFELT % 14))) 
 
 (SDEFUN |NLINSOL;solve;LLL;10|
         ((|lp| (|List| (|Polynomial| R))) (|lv| (|List| (|Symbol|)))
-         ($ (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
-        (SPADCALL |lp| |lv| (QREFELT $ 13))) 
+         (% (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
+        (SPADCALL |lp| |lv| (QREFELT % 13))) 
 
 (SDEFUN |NLINSOL;solveInField;LLL;11|
         ((|lp| (|List| (|Polynomial| R))) (|lv| (|List| (|Symbol|)))
-         ($ (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
-        (SPADCALL |lp| |lv| (QREFELT $ 49))) 
+         (% (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
+        (SPADCALL |lp| |lv| (QREFELT % 49))) 
 
 (SDEFUN |NLINSOL;solveInField;LLL;12|
         ((|lp| (|List| (|Polynomial| R))) (|lv| (|List| (|Symbol|)))
-         ($ (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
-        (SPADCALL |lp| |lv| (QREFELT $ 51))) 
+         (% (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
+        (SPADCALL |lp| |lv| (QREFELT % 51))) 
 
 (SDEFUN |NLINSOL;solveInField;LLL;13|
         ((|lp| (|List| (|Polynomial| R))) (|lv| (|List| (|Symbol|)))
-         ($ (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
-        (SPROG ((#1=#:G793 NIL) (|p| NIL) (#2=#:G792 NIL))
+         (% (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
+        (SPROG ((#1=#:G528 NIL) (|p| NIL) (#2=#:G527 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -317,16 +317,16 @@
                          (GO G191)))
                        (SEQ
                         (EXIT
-                         (LETT #2# (CONS (SPADCALL |p| (QREFELT $ 31)) #2#))))
+                         (LETT #2# (CONS (SPADCALL |p| (QREFELT % 31)) #2#))))
                        (LETT #1# (CDR #1#)) (GO G190) G191
                        (EXIT (NREVERSE #2#))))
-                 |lv| (QREFELT $ 54))))) 
+                 |lv| (QREFELT % 54))))) 
 
 (DECLAIM (NOTINLINE |NonLinearSolvePackage;|)) 
 
-(DEFUN |NonLinearSolvePackage| (#1=#:G794)
+(DEFUN |NonLinearSolvePackage| (#1=#:G529)
   (SPROG NIL
-         (PROG (#2=#:G795)
+         (PROG (#2=#:G530)
            (RETURN
             (COND
              ((LETT #2#
@@ -343,44 +343,44 @@
                   (HREM |$ConstructorCache| '|NonLinearSolvePackage|)))))))))) 
 
 (DEFUN |NonLinearSolvePackage;| (|#1|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|NonLinearSolvePackage| DV$1))
-          (LETT $ (GETREFV 55))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 55))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|NonLinearSolvePackage| (LIST DV$1)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (SETF |pv$| (QREFELT $ 3))
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
           (COND
            ((|HasCategory| |#1| '(|AlgebraicallyClosedField|))
             (PROGN
-             (QSETREFV $ 16 (CONS (|dispatchFunction| |NLINSOL;solve;LL;2|) $))
-             (QSETREFV $ 15
-                       (CONS (|dispatchFunction| |NLINSOL;solve;LLL;3|) $))))
+             (QSETREFV % 16 (CONS (|dispatchFunction| |NLINSOL;solve;LL;2|) %))
+             (QSETREFV % 15
+                       (CONS (|dispatchFunction| |NLINSOL;solve;LLL;3|) %))))
            ('T
             (PROGN
-             (QSETREFV $ 16 (CONS (|dispatchFunction| |NLINSOL;solve;LL;9|) $))
-             (QSETREFV $ 15
-                       (CONS (|dispatchFunction| |NLINSOL;solve;LLL;10|) $)))))
+             (QSETREFV % 16 (CONS (|dispatchFunction| |NLINSOL;solve;LL;9|) %))
+             (QSETREFV % 15
+                       (CONS (|dispatchFunction| |NLINSOL;solve;LLL;10|) %)))))
           (COND ((|domainEqual| |#1| (|Fraction| (|Integer|))))
                 ((|HasCategory| |#1|
                                 '(|RetractableTo| (|Fraction| (|Integer|))))
-                 (QSETREFV $ 13
+                 (QSETREFV % 13
                            (CONS
                             (|dispatchFunction| |NLINSOL;solveInField;LLL;11|)
-                            $))))
+                            %))))
           (COND ((|domainEqual| |#1| (|Integer|)))
                 ((|HasCategory| |#1|
                                 '(|RetractableTo| (|Fraction| (|Integer|)))))
                 ((|HasCategory| |#1| '(|RetractableTo| (|Integer|)))
-                 (QSETREFV $ 13
+                 (QSETREFV % 13
                            (CONS
                             (|dispatchFunction| |NLINSOL;solveInField;LLL;12|)
-                            $))))
+                            %))))
           (COND
            ((OR (|domainEqual| |#1| (|Integer|))
                 (OR
@@ -388,23 +388,23 @@
                                 '(|RetractableTo| (|Fraction| (|Integer|))))
                  (|HasCategory| |#1| '(|RetractableTo| (|Integer|))))))
            ('T
-            (QSETREFV $ 13
+            (QSETREFV % 13
                       (CONS (|dispatchFunction| |NLINSOL;solveInField;LLL;13|)
-                            $))))
-          $))) 
+                            %))))
+          %))) 
 
 (MAKEPROP '|NonLinearSolvePackage| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|List| 29)
               (|Polynomial| 6) (0 . |variables|) (5 . |setUnion|) (|List| 23)
               (|List| 8) (11 . |solveInField|) |NLINSOL;solveInField;LL;1|
-              (17 . |solve|) (23 . |solve|) (|List| $) (28 . |concat|)
+              (17 . |solve|) (23 . |solve|) (|List| %) (28 . |concat|)
               (|Fraction| 8) (|Equation| 19) (33 . |lhs|) (38 . |rhs|)
               (|List| 20) (|RationalFunction| 6) (43 . |eval|)
               (49 . |equation|) (|Union| 29 '"failed") (55 . |mainVariable|)
               (|Symbol|) (60 . |coerce|) (65 . |coerce|)
               (|SparseUnivariatePolynomial| 6) (70 . |univariate|)
-              (|SparseUnivariatePolynomial| $) (75 . |zerosOf|) (80 . |coerce|)
+              (|SparseUnivariatePolynomial| %) (75 . |zerosOf|) (80 . |coerce|)
               (85 . |retractIfCan|) (|Union| 8 '"failed") (90 . |retractIfCan|)
               (95 . |One|) (99 . -) (105 . |concat|) (111 . |numer|)
               (|Union| 6 '"failed") (116 . |retractIfCan|) (121 . |denom|)

@@ -2,16 +2,16 @@
 (SDEFUN |ULS2;map;MUlsUls;1|
         ((|f| (|Mapping| |Coef2| |Coef1|))
          (|ups| (|UnivariateLaurentSeries| |Coef1| |var1| |cen1|))
-         ($ (|UnivariateLaurentSeries| |Coef2| |var2| |cen2|)))
-        (SPADCALL (SPADCALL |ups| (QREFELT $ 14))
-                  (SPADCALL |f| (SPADCALL |ups| (QREFELT $ 16)) (QREFELT $ 20))
-                  (QREFELT $ 22))) 
+         (% (|UnivariateLaurentSeries| |Coef2| |var2| |cen2|)))
+        (SPADCALL (SPADCALL |ups| (QREFELT % 14))
+                  (SPADCALL |f| (SPADCALL |ups| (QREFELT % 16)) (QREFELT % 20))
+                  (QREFELT % 22))) 
 
 (DECLAIM (NOTINLINE |UnivariateLaurentSeriesFunctions2;|)) 
 
-(DEFUN |UnivariateLaurentSeriesFunctions2| (&REST #1=#:G699)
+(DEFUN |UnivariateLaurentSeriesFunctions2| (&REST #1=#:G450)
   (SPROG NIL
-         (PROG (#2=#:G700)
+         (PROG (#2=#:G451)
            (RETURN
             (COND
              ((LETT #2#
@@ -34,7 +34,7 @@
 
 (DEFUN |UnivariateLaurentSeriesFunctions2;| (|#1| |#2| |#3| |#4| |#5| |#6|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$6 NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$6 NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL)
     (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -46,38 +46,38 @@
     (LETT |dv$|
           (LIST '|UnivariateLaurentSeriesFunctions2| DV$1 DV$2 DV$3 DV$4 DV$5
                 DV$6))
-    (LETT $ (GETREFV 24))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (LETT % (GETREFV 24))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|UnivariateLaurentSeriesFunctions2|
-                (LIST DV$1 DV$2 DV$3 DV$4 DV$5 DV$6) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (QSETREFV $ 10 |#5|)
-    (QSETREFV $ 11 |#6|)
-    (SETF |pv$| (QREFELT $ 3))
-    $))) 
+                (LIST DV$1 DV$2 DV$3 DV$4 DV$5 DV$6) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (QSETREFV % 10 |#5|)
+    (QSETREFV % 11 |#6|)
+    (SETF |pv$| (QREFELT % 3))
+    %))) 
 
 (MAKEPROP '|UnivariateLaurentSeriesFunctions2| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|local| |#4|) (|local| |#5|) (|local| |#6|)
               (|Integer|)
-              (|UnivariateLaurentSeries| 6 (NRTEVAL (QREFELT $ 8))
-                                         (NRTEVAL (QREFELT $ 10)))
+              (|UnivariateLaurentSeries| 6 (NRTEVAL (QREFELT % 8))
+                                         (NRTEVAL (QREFELT % 10)))
               (0 . |degree|)
-              (|UnivariateTaylorSeries| 6 (NRTEVAL (QREFELT $ 8))
-                                        (NRTEVAL (QREFELT $ 10)))
+              (|UnivariateTaylorSeries| 6 (NRTEVAL (QREFELT % 8))
+                                        (NRTEVAL (QREFELT % 10)))
               (5 . |taylorRep|)
-              (|UnivariateTaylorSeries| 7 (NRTEVAL (QREFELT $ 9))
-                                        (NRTEVAL (QREFELT $ 11)))
+              (|UnivariateTaylorSeries| 7 (NRTEVAL (QREFELT % 9))
+                                        (NRTEVAL (QREFELT % 11)))
               (|Mapping| 7 6) (|UnivariateTaylorSeriesFunctions2| 6 7 15 17)
               (10 . |map|)
-              (|UnivariateLaurentSeries| 7 (NRTEVAL (QREFELT $ 9))
-                                         (NRTEVAL (QREFELT $ 11)))
+              (|UnivariateLaurentSeries| 7 (NRTEVAL (QREFELT % 9))
+                                         (NRTEVAL (QREFELT % 11)))
               (16 . |laurent|) |ULS2;map;MUlsUls;1|)
            '#(|map| 22) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))

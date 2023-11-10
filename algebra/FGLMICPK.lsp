@@ -2,23 +2,23 @@
 (SDEFUN |FGLMICPK;zeroDim?|
         ((|lq2|
           (|List| (|HomogeneousDistributedMultivariatePolynomial| |ls| R)))
-         ($ (|Boolean|)))
+         (% (|Boolean|)))
         (SPROG
          ((|lv| (|List| (|OrderedVariableList| |ls|)))
-          (|x| (|OrderedVariableList| |ls|)) (#1=#:G707 NIL)
+          (|x| (|OrderedVariableList| |ls|)) (#1=#:G456 NIL)
           (|m| (|HomogeneousDistributedMultivariatePolynomial| |ls| R))
-          (#2=#:G721 NIL) (|q2| NIL) (#3=#:G720 NIL) (|s| NIL) (#4=#:G719 NIL))
-         (SEQ (LETT |lq2| (SPADCALL |lq2| (QREFELT $ 10)))
+          (#2=#:G469 NIL) (|q2| NIL) (#3=#:G468 NIL) (|s| NIL) (#4=#:G467 NIL))
+         (SEQ (LETT |lq2| (SPADCALL |lq2| (QREFELT % 10)))
               (EXIT
                (COND
-                ((OR (NULL |lq2|) (< (LENGTH |lq2|) (LENGTH (QREFELT $ 7))))
+                ((OR (NULL |lq2|) (< (LENGTH |lq2|) (LENGTH (QREFELT % 7))))
                  NIL)
                 ('T
                  (SEQ
                   (LETT |lv|
                         (PROGN
                          (LETT #4# NIL)
-                         (SEQ (LETT |s| NIL) (LETT #3# (QREFELT $ 7)) G190
+                         (SEQ (LETT |s| NIL) (LETT #3# (QREFELT % 7)) G190
                               (COND
                                ((OR (ATOM #3#)
                                     (PROGN (LETT |s| (CAR #3#)) NIL))
@@ -29,14 +29,14 @@
                                       (CONS
                                        (PROG2
                                            (LETT #1#
-                                                 (SPADCALL |s| (QREFELT $ 14)))
+                                                 (SPADCALL |s| (QREFELT % 14)))
                                            (QCDR #1#)
                                          (|check_union2| (QEQCAR #1# 0)
                                                          (|OrderedVariableList|
-                                                          (QREFELT $ 7))
+                                                          (QREFELT % 7))
                                                          (|Union|
                                                           (|OrderedVariableList|
-                                                           (QREFELT $ 7))
+                                                           (QREFELT % 7))
                                                           #5="failed")
                                                          #1#))
                                        #4#))))
@@ -47,36 +47,36 @@
                         ((OR (ATOM #2#) (PROGN (LETT |q2| (CAR #2#)) NIL)
                              (NULL (NULL (NULL |lv|))))
                          (GO G191)))
-                       (SEQ (LETT |m| (SPADCALL |q2| (QREFELT $ 16)))
+                       (SEQ (LETT |m| (SPADCALL |q2| (QREFELT % 16)))
                             (LETT |x|
                                   (PROG2
-                                      (LETT #1# (SPADCALL |m| (QREFELT $ 18)))
+                                      (LETT #1# (SPADCALL |m| (QREFELT % 18)))
                                       (QCDR #1#)
                                     (|check_union2| (QEQCAR #1# 0)
                                                     (|OrderedVariableList|
-                                                     (QREFELT $ 7))
+                                                     (QREFELT % 7))
                                                     (|Union|
                                                      (|OrderedVariableList|
-                                                      (QREFELT $ 7))
+                                                      (QREFELT % 7))
                                                      #5#)
                                                     #1#)))
                             (EXIT
                              (COND
                               ((SPADCALL
-                                (SPADCALL (SPADCALL |m| |x| (QREFELT $ 20))
-                                          (QREFELT $ 22))
-                                (QREFELT $ 24))
+                                (SPADCALL (SPADCALL |m| |x| (QREFELT % 20))
+                                          (QREFELT % 22))
+                                (QREFELT % 24))
                                (LETT |lv|
-                                     (SPADCALL |x| |lv| (QREFELT $ 26)))))))
+                                     (SPADCALL |x| |lv| (QREFELT % 26)))))))
                        (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                   (EXIT (NULL |lv|))))))))) 
 
 (SDEFUN |FGLMICPK;zeroDimensional?;LB;2|
-        ((|lq1| (|List| (|Polynomial| R))) ($ (|Boolean|)))
+        ((|lq1| (|List| (|Polynomial| R))) (% (|Boolean|)))
         (SPROG
          ((|lq2|
            (|List| (|HomogeneousDistributedMultivariatePolynomial| |ls| R)))
-          (#1=#:G730 NIL) (|q1| NIL) (#2=#:G729 NIL))
+          (#1=#:G475 NIL) (|q1| NIL) (#2=#:G474 NIL))
          (SEQ
           (LETT |lq2|
                 (PROGN
@@ -87,20 +87,20 @@
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2# (CONS (SPADCALL |q1| (QREFELT $ 29)) #2#))))
+                        (LETT #2# (CONS (SPADCALL |q1| (QREFELT % 29)) #2#))))
                       (LETT #1# (CDR #1#)) (GO G190) G191
                       (EXIT (NREVERSE #2#)))))
-          (EXIT (|FGLMICPK;zeroDim?| |lq2| $))))) 
+          (EXIT (|FGLMICPK;zeroDim?| |lq2| %))))) 
 
 (SDEFUN |FGLMICPK;fglmIfCan;LU;3|
         ((|lq1| (|List| (|Polynomial| R)))
-         ($ (|Union| (|List| (|Polynomial| R)) "failed")))
+         (% (|Union| (|List| (|Polynomial| R)) "failed")))
         (SPROG
-         ((#1=#:G748 NIL) (|q3| NIL) (#2=#:G747 NIL)
+         ((#1=#:G492 NIL) (|q3| NIL) (#2=#:G491 NIL)
           (|lq3| (|List| (|DistributedMultivariatePolynomial| |ls| R)))
           (|lq2|
            (|List| (|HomogeneousDistributedMultivariatePolynomial| |ls| R)))
-          (#3=#:G746 NIL) (|q1| NIL) (#4=#:G745 NIL))
+          (#3=#:G490 NIL) (|q1| NIL) (#4=#:G489 NIL))
          (SEQ
           (LETT |lq2|
                 (PROGN
@@ -111,13 +111,13 @@
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #4# (CONS (SPADCALL |q1| (QREFELT $ 29)) #4#))))
+                        (LETT #4# (CONS (SPADCALL |q1| (QREFELT % 29)) #4#))))
                       (LETT #3# (CDR #3#)) (GO G190) G191
                       (EXIT (NREVERSE #4#)))))
-          (LETT |lq2| (SPADCALL |lq2| (QREFELT $ 10)))
+          (LETT |lq2| (SPADCALL |lq2| (QREFELT % 10)))
           (COND
-           ((NULL (|FGLMICPK;zeroDim?| |lq2| $)) (EXIT (CONS 1 "failed"))))
-          (LETT |lq3| (SPADCALL |lq2| (QREFELT $ 34)))
+           ((NULL (|FGLMICPK;zeroDim?| |lq2| %)) (EXIT (CONS 1 "failed"))))
+          (LETT |lq3| (SPADCALL |lq2| (QREFELT % 34)))
           (LETT |lq1|
                 (PROGN
                  (LETT #2# NIL)
@@ -127,21 +127,21 @@
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2# (CONS (SPADCALL |q3| (QREFELT $ 36)) #2#))))
+                        (LETT #2# (CONS (SPADCALL |q3| (QREFELT % 36)) #2#))))
                       (LETT #1# (CDR #1#)) (GO G190) G191
                       (EXIT (NREVERSE #2#)))))
           (EXIT (CONS 0 |lq1|))))) 
 
 (SDEFUN |FGLMICPK;groebner;2L;4|
-        ((|lq1| (|List| (|Polynomial| R))) ($ (|List| (|Polynomial| R))))
+        ((|lq1| (|List| (|Polynomial| R))) (% (|List| (|Polynomial| R))))
         (SPROG
-         ((#1=#:G769 NIL) (|q3| NIL) (#2=#:G768 NIL)
+         ((#1=#:G512 NIL) (|q3| NIL) (#2=#:G511 NIL)
           (|lq3| (|List| (|DistributedMultivariatePolynomial| |ls| R)))
-          (#3=#:G767 NIL) (#4=#:G766 NIL) (#5=#:G765 NIL) (|q1| NIL)
-          (#6=#:G764 NIL)
+          (#3=#:G510 NIL) (#4=#:G509 NIL) (#5=#:G508 NIL) (|q1| NIL)
+          (#6=#:G507 NIL)
           (|lq2|
            (|List| (|HomogeneousDistributedMultivariatePolynomial| |ls| R)))
-          (#7=#:G763 NIL) (#8=#:G762 NIL))
+          (#7=#:G506 NIL) (#8=#:G505 NIL))
          (SEQ
           (LETT |lq2|
                 (PROGN
@@ -152,12 +152,12 @@
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #8# (CONS (SPADCALL |q1| (QREFELT $ 29)) #8#))))
+                        (LETT #8# (CONS (SPADCALL |q1| (QREFELT % 29)) #8#))))
                       (LETT #7# (CDR #7#)) (GO G190) G191
                       (EXIT (NREVERSE #8#)))))
-          (LETT |lq2| (SPADCALL |lq2| (QREFELT $ 10)))
+          (LETT |lq2| (SPADCALL |lq2| (QREFELT % 10)))
           (COND
-           ((NULL (|FGLMICPK;zeroDim?| |lq2| $))
+           ((NULL (|FGLMICPK;zeroDim?| |lq2| %))
             (EXIT
              (SEQ
               (LETT |lq3|
@@ -170,10 +170,10 @@
                           (SEQ
                            (EXIT
                             (LETT #6#
-                                  (CONS (SPADCALL |q1| (QREFELT $ 39)) #6#))))
+                                  (CONS (SPADCALL |q1| (QREFELT % 39)) #6#))))
                           (LETT #5# (CDR #5#)) (GO G190) G191
                           (EXIT (NREVERSE #6#)))))
-              (LETT |lq3| (SPADCALL |lq3| (QREFELT $ 41)))
+              (LETT |lq3| (SPADCALL |lq3| (QREFELT % 41)))
               (EXIT
                (PROGN
                 (LETT #4# NIL)
@@ -183,10 +183,10 @@
                        (GO G191)))
                      (SEQ
                       (EXIT
-                       (LETT #4# (CONS (SPADCALL |q3| (QREFELT $ 36)) #4#))))
+                       (LETT #4# (CONS (SPADCALL |q3| (QREFELT % 36)) #4#))))
                      (LETT #3# (CDR #3#)) (GO G190) G191
                      (EXIT (NREVERSE #4#)))))))))
-          (LETT |lq3| (SPADCALL |lq2| (QREFELT $ 34)))
+          (LETT |lq3| (SPADCALL |lq2| (QREFELT % 34)))
           (EXIT
            (PROGN
             (LETT #2# NIL)
@@ -195,14 +195,14 @@
                   ((OR (ATOM #1#) (PROGN (LETT |q3| (CAR #1#)) NIL))
                    (GO G191)))
                  (SEQ
-                  (EXIT (LETT #2# (CONS (SPADCALL |q3| (QREFELT $ 36)) #2#))))
+                  (EXIT (LETT #2# (CONS (SPADCALL |q3| (QREFELT % 36)) #2#))))
                  (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT (NREVERSE #2#)))))))) 
 
 (DECLAIM (NOTINLINE |FGLMIfCanPackage;|)) 
 
-(DEFUN |FGLMIfCanPackage| (&REST #1=#:G770)
+(DEFUN |FGLMIfCanPackage| (&REST #1=#:G513)
   (SPROG NIL
-         (PROG (#2=#:G771)
+         (PROG (#2=#:G514)
            (RETURN
             (COND
              ((LETT #2#
@@ -220,48 +220,48 @@
                   (HREM |$ConstructorCache| '|FGLMIfCanPackage|)))))))))) 
 
 (DEFUN |FGLMIfCanPackage;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 |#2|)
           (LETT |dv$| (LIST '|FGLMIfCanPackage| DV$1 DV$2))
-          (LETT $ (GETREFV 43))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 43))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|FGLMIfCanPackage| (LIST DV$1 DV$2)
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|FGLMIfCanPackage| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (|List| 15)
               (|GroebnerPackage| 6
                                  (|HomogeneousDirectProduct|
-                                  (NRTEVAL (LENGTH (QREFELT $ 7)))
+                                  (NRTEVAL (LENGTH (QREFELT % 7)))
                                   (|NonNegativeInteger|))
                                  15)
-              (0 . |groebner|) (|Union| $ '"failed") (|Symbol|)
-              (|OrderedVariableList| (NRTEVAL (QREFELT $ 7))) (5 . |variable|)
+              (0 . |groebner|) (|Union| % '"failed") (|Symbol|)
+              (|OrderedVariableList| (NRTEVAL (QREFELT % 7))) (5 . |variable|)
               (|HomogeneousDistributedMultivariatePolynomial|
-               (NRTEVAL (QREFELT $ 7)) 6)
+               (NRTEVAL (QREFELT % 7)) 6)
               (10 . |leadingMonomial|) (|Union| 13 '"failed")
-              (15 . |mainVariable|) (|SparseUnivariatePolynomial| $)
+              (15 . |mainVariable|) (|SparseUnivariatePolynomial| %)
               (20 . |univariate|) (|SparseUnivariatePolynomial| 15)
               (26 . |leadingCoefficient|) (|Boolean|) (31 . |ground?|)
               (|List| 13) (36 . |remove|) (|Polynomial| 6)
-              (|PolToPol| (NRTEVAL (QREFELT $ 7)) 6) (42 . |pToHdmp|)
+              (|PolToPol| (NRTEVAL (QREFELT % 7)) 6) (42 . |pToHdmp|)
               (|List| 27) |FGLMICPK;zeroDimensional?;LB;2| (|List| 35)
-              (|LinGroebnerPackage| (NRTEVAL (QREFELT $ 7)) 6) (47 . |totolex|)
-              (|DistributedMultivariatePolynomial| (NRTEVAL (QREFELT $ 7)) 6)
+              (|LinGroebnerPackage| (NRTEVAL (QREFELT % 7)) 6) (47 . |totolex|)
+              (|DistributedMultivariatePolynomial| (NRTEVAL (QREFELT % 7)) 6)
               (52 . |dmpToP|) (|Union| 30 '"failed") |FGLMICPK;fglmIfCan;LU;3|
               (57 . |pToDmp|)
               (|GroebnerPackage| 6
                                  (|DirectProduct|
-                                  (NRTEVAL (LENGTH (QREFELT $ 7)))
+                                  (NRTEVAL (LENGTH (QREFELT % 7)))
                                   (|NonNegativeInteger|))
                                  35)
               (62 . |groebner|) |FGLMICPK;groebner;2L;4|)

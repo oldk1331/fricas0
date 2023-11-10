@@ -1,40 +1,40 @@
 
-(PUT '|SFORT;fortran;SFstFS$;1| '|SPADreplace| 'VECTOR) 
+(PUT '|SFORT;fortran;SFstFS%;1| '|SPADreplace| 'VECTOR) 
 
-(SDEFUN |SFORT;fortran;SFstFS$;1|
+(SDEFUN |SFORT;fortran;SFstFS%;1|
         ((|fname| (|Symbol|)) (|ftype| (|FortranScalarType|)) (|res| (FS))
-         ($ ($)))
+         (% (%)))
         (VECTOR |fname| |ftype| |res|)) 
 
 (PUT '|SFORT;nameOf| '|SPADreplace| '(XLAM (|u|) (QVELT |u| 0))) 
 
-(SDEFUN |SFORT;nameOf| ((|u| ($)) ($ (|Symbol|))) (QVELT |u| 0)) 
+(SDEFUN |SFORT;nameOf| ((|u| (%)) (% (|Symbol|))) (QVELT |u| 0)) 
 
-(SDEFUN |SFORT;typeOf| ((|u| ($)) ($ (|Union| (|FortranScalarType|) "void")))
+(SDEFUN |SFORT;typeOf| ((|u| (%)) (% (|Union| (|FortranScalarType|) "void")))
         (CONS 0 (QVELT |u| 1))) 
 
 (PUT '|SFORT;bodyOf| '|SPADreplace| '(XLAM (|u|) (QVELT |u| 2))) 
 
-(SDEFUN |SFORT;bodyOf| ((|u| ($)) ($ (FS))) (QVELT |u| 2)) 
+(SDEFUN |SFORT;bodyOf| ((|u| (%)) (% (FS))) (QVELT |u| 2)) 
 
-(SDEFUN |SFORT;argumentsOf| ((|u| ($)) ($ (|List| (|Symbol|))))
-        (SPADCALL (|SFORT;bodyOf| |u| $) (QREFELT $ 13))) 
+(SDEFUN |SFORT;argumentsOf| ((|u| (%)) (% (|List| (|Symbol|))))
+        (SPADCALL (|SFORT;bodyOf| |u| %) (QREFELT % 13))) 
 
-(SDEFUN |SFORT;coerce;$Of;6| ((|u| ($)) ($ (|OutputForm|)))
-        (SPADCALL (|SFORT;nameOf| |u| $) (QREFELT $ 15))) 
+(SDEFUN |SFORT;coerce;%Of;6| ((|u| (%)) (% (|OutputForm|)))
+        (SPADCALL (|SFORT;nameOf| |u| %) (QREFELT % 15))) 
 
-(SDEFUN |SFORT;outputAsFortran;$V;7| ((|u| ($)) ($ (|Void|)))
+(SDEFUN |SFORT;outputAsFortran;%V;7| ((|u| (%)) (% (|Void|)))
         (SPROG
          ((|val| (|OutputForm|)) (|nargs| (|List| (|OutputForm|)))
-          (#1=#:G721 NIL) (|arg| NIL) (#2=#:G720 NIL)
+          (#1=#:G466 NIL) (|arg| NIL) (#2=#:G465 NIL)
           (|args| (|List| (|Symbol|))) (|fname| (|Symbol|))
           (|ftype_s| (|String|)) (|ftype| (|FortranScalarType|)))
          (SEQ (LETT |ftype| (QVELT |u| 1))
               (LETT |ftype_s|
-                    (SPADCALL (SPADCALL |ftype| (QREFELT $ 18))
-                              (QREFELT $ 20)))
-              (LETT |fname| (|SFORT;nameOf| |u| $))
-              (LETT |args| (|SFORT;argumentsOf| |u| $))
+                    (SPADCALL (SPADCALL |ftype| (QREFELT % 18))
+                              (QREFELT % 20)))
+              (LETT |fname| (|SFORT;nameOf| |u| %))
+              (LETT |args| (|SFORT;argumentsOf| |u| %))
               (LETT |nargs|
                     (PROGN
                      (LETT #2# NIL)
@@ -45,23 +45,23 @@
                           (SEQ
                            (EXIT
                             (LETT #2#
-                                  (CONS (SPADCALL |arg| (QREFELT $ 15)) #2#))))
+                                  (CONS (SPADCALL |arg| (QREFELT % 15)) #2#))))
                           (LETT #1# (CDR #1#)) (GO G190) G191
                           (EXIT (NREVERSE #2#)))))
-              (LETT |val| (SPADCALL (|SFORT;bodyOf| |u| $) (QREFELT $ 21)))
-              (SPADCALL |fname| (CONS 0 |ftype|) |args| (QREFELT $ 24))
-              (SPADCALL |ftype_s| |nargs| (QREFELT $ 26))
+              (LETT |val| (SPADCALL (|SFORT;bodyOf| |u| %) (QREFELT % 21)))
+              (SPADCALL |fname| (CONS 0 |ftype|) |args| (QREFELT % 24))
+              (SPADCALL |ftype_s| |nargs| (QREFELT % 26))
               (|dispfortexp1|
-               (LIST (SPADCALL "=" (QREFELT $ 27))
-                     (SPADCALL |fname| (QREFELT $ 15)) |val|))
+               (LIST (SPADCALL "=" (QREFELT % 27))
+                     (SPADCALL |fname| (QREFELT % 15)) |val|))
               (|dispfortexp1| "RETURN") (|dispfortexp1| "END")
-              (EXIT (SPADCALL (QREFELT $ 28)))))) 
+              (EXIT (SPADCALL (QREFELT % 28)))))) 
 
 (DECLAIM (NOTINLINE |SimpleFortranProgram;|)) 
 
-(DEFUN |SimpleFortranProgram| (&REST #1=#:G722)
+(DEFUN |SimpleFortranProgram| (&REST #1=#:G467)
   (SPROG NIL
-         (PROG (#2=#:G723)
+         (PROG (#2=#:G468)
            (RETURN
             (COND
              ((LETT #2#
@@ -79,36 +79,36 @@
                   (HREM |$ConstructorCache| '|SimpleFortranProgram|)))))))))) 
 
 (DEFUN |SimpleFortranProgram;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|SimpleFortranProgram| DV$1 DV$2))
-          (LETT $ (GETREFV 30))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 30))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|SimpleFortranProgram|
-                      (LIST DV$1 DV$2) (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (QSETREFV $ 6 |#1|)
-          (QSETREFV $ 7 |#2|)
-          (SETF |pv$| (QREFELT $ 3))
-          (QSETREFV $ 8
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 8
                     (|Record| (|:| |name| (|Symbol|))
                               (|:| |type| (|FortranScalarType|))
                               (|:| |body| |#2|)))
-          $))) 
+          %))) 
 
 (MAKEPROP '|SimpleFortranProgram| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) '|Rep|
-              (|Symbol|) (|FortranScalarType|) |SFORT;fortran;SFstFS$;1|
+              (|Symbol|) (|FortranScalarType|) |SFORT;fortran;SFstFS%;1|
               (|List| 9) (0 . |variables|) (|OutputForm|) (5 . |coerce|)
-              |SFORT;coerce;$Of;6| (|String|) (10 . |coerce|)
+              |SFORT;coerce;%Of;6| (|String|) (10 . |coerce|)
               (|FortranCodeTools|) (15 . |checkType|) (20 . |coerce|) (|Void|)
               (|Union| (|:| |fst| 10) (|:| |void| '"void"))
               (25 . |fortFormatHead|) (|List| 14) (32 . |fort_format_types|)
-              (38 . |coerce|) (43 . |void|) |SFORT;outputAsFortran;$V;7|)
+              (38 . |coerce|) (43 . |void|) |SFORT;outputAsFortran;%V;7|)
            '#(|outputAsFortran| 47 |fortran| 52 |coerce| 59) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
                  (CONS '#(NIL NIL NIL)

@@ -1,31 +1,31 @@
 
 (SDEFUN |FORDER;order;FdNni;1|
-        ((|d| (|FiniteDivisor| F UP UPUP R)) ($ (|NonNegativeInteger|)))
-        (SPROG ((|dd| (|FiniteDivisor| F UP UPUP R)) (#1=#:G702 NIL) (|i| NIL))
+        ((|d| (|FiniteDivisor| F UP UPUP R)) (% (|NonNegativeInteger|)))
+        (SPROG ((|dd| (|FiniteDivisor| F UP UPUP R)) (#1=#:G454 NIL) (|i| NIL))
                (SEQ
                 (EXIT
-                 (SEQ (LETT |dd| (LETT |d| (SPADCALL |d| (QREFELT $ 11))))
+                 (SEQ (LETT |dd| (LETT |d| (SPADCALL |d| (QREFELT % 11))))
                       (EXIT
                        (SEQ (LETT |i| 1) G190 NIL
                             (SEQ
                              (EXIT
                               (COND
-                               ((SPADCALL |dd| (QREFELT $ 13))
-                                (PROGN (LETT #1# |i|) (GO #2=#:G701)))
+                               ((SPADCALL |dd| (QREFELT % 13))
+                                (PROGN (LETT #1# |i|) (GO #2=#:G453)))
                                ('T
                                 (LETT |dd|
                                       (SPADCALL
-                                       (SPADCALL |d| |dd| (QREFELT $ 14))
-                                       (QREFELT $ 11)))))))
+                                       (SPADCALL |d| |dd| (QREFELT % 14))
+                                       (QREFELT % 11)))))))
                             (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                             (EXIT NIL)))))
                 #2# (EXIT #1#)))) 
 
 (DECLAIM (NOTINLINE |FindOrderFinite;|)) 
 
-(DEFUN |FindOrderFinite| (&REST #1=#:G703)
+(DEFUN |FindOrderFinite| (&REST #1=#:G455)
   (SPROG NIL
-         (PROG (#2=#:G704)
+         (PROG (#2=#:G456)
            (RETURN
             (COND
              ((LETT #2#
@@ -44,7 +44,7 @@
 
 (DEFUN |FindOrderFinite;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -52,18 +52,18 @@
     (LETT DV$3 (|devaluate| |#3|))
     (LETT DV$4 (|devaluate| |#4|))
     (LETT |dv$| (LIST '|FindOrderFinite| DV$1 DV$2 DV$3 DV$4))
-    (LETT $ (GETREFV 17))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (LETT % (GETREFV 17))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|FindOrderFinite|
-                (LIST DV$1 DV$2 DV$3 DV$4) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (SETF |pv$| (QREFELT $ 3))
-    $))) 
+                (LIST DV$1 DV$2 DV$3 DV$4) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (SETF |pv$| (QREFELT % 3))
+    %))) 
 
 (MAKEPROP '|FindOrderFinite| '|infovec|
           (LIST

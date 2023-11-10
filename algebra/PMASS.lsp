@@ -1,18 +1,18 @@
 
-(SDEFUN |PMASS;constant;SE;1| ((|x| (|Symbol|)) ($ (|Expression| (|Integer|))))
-        (SPADCALL (SPADCALL |x| (QREFELT $ 8)) (QREFELT $ 10))) 
+(SDEFUN |PMASS;constant;SE;1| ((|x| (|Symbol|)) (% (|Expression| (|Integer|))))
+        (SPADCALL (SPADCALL |x| (QREFELT % 8)) (QREFELT % 10))) 
 
-(SDEFUN |PMASS;multiple;SE;2| ((|x| (|Symbol|)) ($ (|Expression| (|Integer|))))
-        (SPADCALL (SPADCALL |x| (QREFELT $ 8)) (QREFELT $ 12))) 
+(SDEFUN |PMASS;multiple;SE;2| ((|x| (|Symbol|)) (% (|Expression| (|Integer|))))
+        (SPADCALL (SPADCALL |x| (QREFELT % 8)) (QREFELT % 12))) 
 
-(SDEFUN |PMASS;optional;SE;3| ((|x| (|Symbol|)) ($ (|Expression| (|Integer|))))
-        (SPADCALL (SPADCALL |x| (QREFELT $ 8)) (QREFELT $ 14))) 
+(SDEFUN |PMASS;optional;SE;3| ((|x| (|Symbol|)) (% (|Expression| (|Integer|))))
+        (SPADCALL (SPADCALL |x| (QREFELT % 8)) (QREFELT % 14))) 
 
 (DECLAIM (NOTINLINE |PatternMatchAssertions;|)) 
 
 (DEFUN |PatternMatchAssertions| ()
   (SPROG NIL
-         (PROG (#1=#:G697)
+         (PROG (#1=#:G452)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|PatternMatchAssertions|))
@@ -31,17 +31,17 @@
                   (HREM |$ConstructorCache| '|PatternMatchAssertions|)))))))))) 
 
 (DEFUN |PatternMatchAssertions;| ()
-  (SPROG ((|dv$| NIL) ($ NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|PatternMatchAssertions|))
-          (LETT $ (GETREFV 16))
-          (QSETREFV $ 0 |dv$|)
-          (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (LETT % (GETREFV 16))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PatternMatchAssertions| NIL
-                      (CONS 1 $))
-          (|stuffDomainSlots| $)
-          (SETF |pv$| (QREFELT $ 3))
-          $))) 
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|PatternMatchAssertions| '|infovec|
           (LIST

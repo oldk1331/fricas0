@@ -6,7 +6,7 @@
 (DEFPARAMETER |QuaternionCategory;AL| 'NIL) 
 
 (DEFUN |QuaternionCategory| (|t#1|)
-  (LET (#1=#:G723 (#2=#:G724 (|devaluate| |t#1|)))
+  (LET (#1=#:G482 (#2=#:G483 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |QuaternionCategory;AL|)) (CDR #1#))
           (T
            (SETQ |QuaternionCategory;AL|
@@ -15,7 +15,7 @@
            #1#)))) 
 
 (DEFUN |QuaternionCategory;| (|t#1|)
-  (SPROG ((#1=#:G722 NIL))
+  (SPROG ((#1=#:G481 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -32,33 +32,33 @@
                                                         (|FullyLinearlyExplicitOver|
                                                          '|t#1|)
                                                         (|mkCategory|
-                                                         '(((|conjugate| ($ $))
+                                                         '(((|conjugate| (% %))
                                                             T)
-                                                           ((|imagI| (|t#1| $))
+                                                           ((|imagI| (|t#1| %))
                                                             T)
-                                                           ((|imagJ| (|t#1| $))
+                                                           ((|imagJ| (|t#1| %))
                                                             T)
-                                                           ((|imagK| (|t#1| $))
+                                                           ((|imagK| (|t#1| %))
                                                             T)
-                                                           ((|norm| (|t#1| $))
+                                                           ((|norm| (|t#1| %))
                                                             T)
                                                            ((|quatern|
-                                                             ($ |t#1| |t#1|
+                                                             (% |t#1| |t#1|
                                                               |t#1| |t#1|))
                                                             T)
-                                                           ((|real| (|t#1| $))
+                                                           ((|real| (|t#1| %))
                                                             T)
-                                                           ((|abs| (|t#1| $))
+                                                           ((|abs| (|t#1| %))
                                                             (|has| |t#1|
                                                                    (|RealNumberSystem|)))
                                                            ((|rational?|
-                                                             ((|Boolean|) $))
+                                                             ((|Boolean|) %))
                                                             (|has| |t#1|
                                                                    (|IntegerNumberSystem|)))
                                                            ((|rational|
                                                              ((|Fraction|
                                                                (|Integer|))
-                                                              $))
+                                                              %))
                                                             (|has| |t#1|
                                                                    (|IntegerNumberSystem|)))
                                                            ((|rationalIfCan|
@@ -66,7 +66,7 @@
                                                                (|Fraction|
                                                                 (|Integer|))
                                                                "failed")
-                                                              $))
+                                                              %))
                                                             (|has| |t#1|
                                                                    (|IntegerNumberSystem|))))
                                                          '(((|EntireRing|)

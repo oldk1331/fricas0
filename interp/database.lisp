@@ -9,14 +9,14 @@
 
 ; augLisplibModemapsFromCategory(form is [op,:argl], body, signature,
 ;                                domainShell) ==
-;   sl := [["$",:"*1"],:[[a,:p] for a in argl
+;   sl := [["%", :"*1"], :[[a, :p] for a in argl
 ;     for p in rest $PatternVariableList]]
 ;   form:= SUBLIS(sl,form)
 ;   body:= SUBLIS(sl,body)
 ;   signature:= SUBLIS(sl,signature)
 ;   opAlist:= SUBLIS(sl, domainShell.(1)) or return nil
 ;   nonCategorySigAlist:=
-;     mkAlistOfExplicitCategoryOps substitute("*1","$",body)
+;     mkAlistOfExplicitCategoryOps(substitute("*1", "%", body))
 ;   domainList:=
 ;     [[a,m] for a in rest form for m in rest signature |
 ;       isCategoryForm(m)]
@@ -38,7 +38,7 @@
       (SETQ |op| (CAR |form|))
       (SETQ |argl| (CDR |form|))
       (SETQ |sl|
-              (CONS (CONS '$ '*1)
+              (CONS (CONS '% '*1)
                     ((LAMBDA (|bfVar#3| |bfVar#1| |a| |bfVar#2| |p|)
                        (LOOP
                         (COND
@@ -57,7 +57,7 @@
       (SETQ |signature| (SUBLIS |sl| |signature|))
       (SETQ |opAlist| (OR (SUBLIS |sl| (ELT |domainShell| 1)) (RETURN NIL)))
       (SETQ |nonCategorySigAlist|
-              (|mkAlistOfExplicitCategoryOps| (|substitute| '*1 '$ |body|)))
+              (|mkAlistOfExplicitCategoryOps| (|substitute| '*1 '% |body|)))
       (SETQ |domainList|
               ((LAMBDA (|bfVar#6| |bfVar#4| |a| |bfVar#5| |m|)
                  (LOOP
@@ -128,15 +128,15 @@
 ;     or/[(sig in catSig) for catSig in
 ;       allLASSOCs(op,nonCategorySigAlist)] repeat
 ;         skip:=
-;           argl and CONTAINED("$",rest sig) => 'SKIP
+;           argl and CONTAINED("%", rest(sig)) => 'SKIP
 ;           nil
-;         sel:= substitute(form,"$",sel)
+;         sel := substitute(form, "%", sel)
 ;         patternList:= listOfPatternIds sig
 ;         --get relevant predicates
 ;         predList:=
 ;           [[a,m] for a in argl for m in rest signature
 ;             | MEMQ(a,$PatternVariableList)]
-;         sig:= substitute(form,"$",sig)
+;         sig := substitute(form, "%", sig)
 ;         pred':= MKPF([pred,:[mkDatabasePred y for y in predList]],'AND)
 ;         l:=listOfPatternIds predList
 ;         if "OR"/[null MEMQ(u,l) for u in argl] then
@@ -201,9 +201,9 @@
                   NIL (|allLASSOCs| |op| |nonCategorySigAlist|) NIL)
                  (PROGN
                   (SETQ |skip|
-                          (COND ((AND |argl| (CONTAINED '$ (CDR |sig|))) 'SKIP)
+                          (COND ((AND |argl| (CONTAINED '% (CDR |sig|))) 'SKIP)
                                 (#1# NIL)))
-                  (SETQ |sel| (|substitute| |form| '$ |sel|))
+                  (SETQ |sel| (|substitute| |form| '% |sel|))
                   (SETQ |patternList| (|listOfPatternIds| |sig|))
                   (SETQ |predList|
                           ((LAMBDA (|bfVar#15| |bfVar#13| |a| |bfVar#14| |m|)
@@ -222,7 +222,7 @@
                               (SETQ |bfVar#13| (CDR |bfVar#13|))
                               (SETQ |bfVar#14| (CDR |bfVar#14|))))
                            NIL |argl| NIL (CDR |signature|) NIL))
-                  (SETQ |sig| (|substitute| |form| '$ |sig|))
+                  (SETQ |sig| (|substitute| |form| '% |sig|))
                   (SETQ |pred'|
                           (MKPF
                            (CONS |pred|
@@ -271,8 +271,8 @@
        |opAlist| NIL)))))
 
 ; saveUsersHashTable() ==
-;   erase_lib(['USERS, 'DATABASE])
-;   stream:= writeLib('USERS,'DATABASE)
+;   erase_lib('"USERS.DAASE")
+;   stream:= writeLib('"USERS.DAASE")
 ;   for k in MSORT HKEYS $usersTb repeat
 ;     rwrite(k, HGET($usersTb, k), stream)
 ;   RSHUT stream
@@ -281,8 +281,8 @@
   (PROG (|stream|)
     (RETURN
      (PROGN
-      (|erase_lib| (LIST 'USERS 'DATABASE))
-      (SETQ |stream| (|writeLib| 'USERS 'DATABASE))
+      (|erase_lib| "USERS.DAASE")
+      (SETQ |stream| (|writeLib| "USERS.DAASE"))
       ((LAMBDA (|bfVar#20| |k|)
          (LOOP
           (COND
@@ -294,8 +294,8 @@
       (RSHUT |stream|)))))
 
 ; saveDependentsHashTable() ==
-;   erase_lib(['DEPENDENTS, 'DATABASE])
-;   stream:= writeLib('DEPENDENTS,'DATABASE)
+;   erase_lib('"DEPENDENTS.DAASE")
+;   stream:= writeLib('"DEPENDENTS.DAASE")
 ;   for k in MSORT HKEYS $depTb repeat
 ;     rwrite(k, HGET($depTb, k), stream)
 ;   RSHUT stream
@@ -304,8 +304,8 @@
   (PROG (|stream|)
     (RETURN
      (PROGN
-      (|erase_lib| (LIST 'DEPENDENTS 'DATABASE))
-      (SETQ |stream| (|writeLib| 'DEPENDENTS 'DATABASE))
+      (|erase_lib| "DEPENDENTS.DAASE")
+      (SETQ |stream| (|writeLib| "DEPENDENTS.DAASE"))
       ((LAMBDA (|bfVar#21| |k|)
          (LOOP
           (COND
@@ -336,7 +336,7 @@
       (|saveDependentsHashTable|)))))
 
 ; getUsersOfConstructor(con) ==
-;   stream := readLib('USERS, 'DATABASE)
+;   stream := readLib('"USERS.DAASE")
 ;   val := rread_list(con, stream)
 ;   RSHUT stream
 ;   val
@@ -345,13 +345,13 @@
   (PROG (|stream| |val|)
     (RETURN
      (PROGN
-      (SETQ |stream| (|readLib| 'USERS 'DATABASE))
+      (SETQ |stream| (|readLib| "USERS.DAASE"))
       (SETQ |val| (|rread_list| |con| |stream|))
       (RSHUT |stream|)
       |val|))))
 
 ; getDependentsOfConstructor(con) ==
-;   stream := readLib('DEPENDENTS, 'DATABASE)
+;   stream := readLib('"DEPENDENTS.DAASE")
 ;   val := rread_list(con, stream)
 ;   RSHUT stream
 ;   val
@@ -360,7 +360,7 @@
   (PROG (|stream| |val|)
     (RETURN
      (PROGN
-      (SETQ |stream| (|readLib| 'DEPENDENTS 'DATABASE))
+      (SETQ |stream| (|readLib| "DEPENDENTS.DAASE"))
       (SETQ |val| (|rread_list| |con| |stream|))
       (RSHUT |stream|)
       |val|))))

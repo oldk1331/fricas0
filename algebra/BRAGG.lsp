@@ -6,7 +6,7 @@
 (DEFPARAMETER |BinaryRecursiveAggregate;AL| 'NIL) 
 
 (DEFUN |BinaryRecursiveAggregate| (|t#1|)
-  (LET (#1=#:G721 (#2=#:G722 (|devaluate| |t#1|)))
+  (LET (#1=#:G480 (#2=#:G481 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |BinaryRecursiveAggregate;AL|)) (CDR #1#))
           (T
            (SETQ |BinaryRecursiveAggregate;AL|
@@ -16,7 +16,7 @@
            #1#)))) 
 
 (DEFUN |BinaryRecursiveAggregate;| (|t#1|)
-  (SPROG ((#1=#:G720 NIL))
+  (SPROG ((#1=#:G479 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -26,22 +26,22 @@
                                                 (|Join|
                                                  (|RecursiveAggregate| '|t#1|)
                                                  (|mkCategory|
-                                                  '(((|left| ($ $)) T)
-                                                    ((|elt| ($ $ "left")) T)
-                                                    ((|right| ($ $)) T)
-                                                    ((|elt| ($ $ "right")) T)
-                                                    ((|setelt!| ($ $ "left" $))
-                                                     (|has| $
+                                                  '(((|left| (% %)) T)
+                                                    ((|elt| (% % "left")) T)
+                                                    ((|right| (% %)) T)
+                                                    ((|elt| (% % "right")) T)
+                                                    ((|setelt!| (% % "left" %))
+                                                     (|has| %
                                                             (|shallowlyMutable|)))
-                                                    ((|setleft!| ($ $ $))
-                                                     (|has| $
+                                                    ((|setleft!| (% % %))
+                                                     (|has| %
                                                             (|shallowlyMutable|)))
                                                     ((|setelt!|
-                                                      ($ $ "right" $))
-                                                     (|has| $
+                                                      (% % "right" %))
+                                                     (|has| %
                                                             (|shallowlyMutable|)))
-                                                    ((|setright!| ($ $ $))
-                                                     (|has| $
+                                                    ((|setright!| (% % %))
+                                                     (|has| %
                                                             (|shallowlyMutable|))))
                                                   NIL NIL NIL)))))))
            (SETELT #1# 0 (LIST '|BinaryRecursiveAggregate| |t#1|))))) 

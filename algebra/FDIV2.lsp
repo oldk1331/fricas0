@@ -1,34 +1,34 @@
 
 (SDEFUN |FDIV2;map;MFdFd;1|
         ((|f| (|Mapping| R2 R1)) (|d| (|FiniteDivisor| R1 UP1 UPUP1 F1))
-         ($ (|FiniteDivisor| R2 UP2 UPUP2 F2)))
+         (% (|FiniteDivisor| R2 UP2 UPUP2 F2)))
         (SPROG
          ((|rec|
            (|Record|
             (|:| |id| (|FractionalIdeal| UP1 (|Fraction| UP1) UPUP1 F1))
             (|:| |principalPart| F1))))
-         (SEQ (LETT |rec| (SPADCALL |d| (QREFELT $ 16)))
+         (SEQ (LETT |rec| (SPADCALL |d| (QREFELT % 16)))
               (EXIT
                (SPADCALL
-                (SPADCALL (SPADCALL |f| (QCDR |rec|) (QREFELT $ 19))
-                          (QREFELT $ 21))
+                (SPADCALL (SPADCALL |f| (QCDR |rec|) (QREFELT % 19))
+                          (QREFELT % 21))
                 (SPADCALL
-                 (SPADCALL (CONS #'|FDIV2;map;MFdFd;1!0| (VECTOR $ |f|))
-                           (QCAR |rec|) (QREFELT $ 28))
-                 (QREFELT $ 29))
-                (QREFELT $ 30)))))) 
+                 (SPADCALL (CONS #'|FDIV2;map;MFdFd;1!0| (VECTOR % |f|))
+                           (QCAR |rec|) (QREFELT % 28))
+                 (QREFELT % 29))
+                (QREFELT % 30)))))) 
 
 (SDEFUN |FDIV2;map;MFdFd;1!0| ((|s| NIL) ($$ NIL))
-        (PROG (|f| $)
+        (PROG (|f| %)
           (LETT |f| (QREFELT $$ 1))
-          (LETT $ (QREFELT $$ 0))
-          (RETURN (PROGN (SPADCALL |f| |s| (QREFELT $ 23)))))) 
+          (LETT % (QREFELT $$ 0))
+          (RETURN (PROGN (SPADCALL |f| |s| (QREFELT % 23)))))) 
 
 (DECLAIM (NOTINLINE |FiniteDivisorFunctions2;|)) 
 
-(DEFUN |FiniteDivisorFunctions2| (&REST #1=#:G728)
+(DEFUN |FiniteDivisorFunctions2| (&REST #1=#:G482)
   (SPROG NIL
-         (PROG (#2=#:G729)
+         (PROG (#2=#:G483)
            (RETURN
             (COND
              ((LETT #2#
@@ -47,7 +47,7 @@
 
 (DEFUN |FiniteDivisorFunctions2;| (|#1| |#2| |#3| |#4| |#5| |#6| |#7| |#8|)
   (SPROG
-   ((|pv$| NIL) ($ NIL) (|dv$| NIL) (DV$8 NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL)
+   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$8 NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL)
     (DV$4 NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -61,22 +61,22 @@
     (LETT |dv$|
           (LIST '|FiniteDivisorFunctions2| DV$1 DV$2 DV$3 DV$4 DV$5 DV$6 DV$7
                 DV$8))
-    (LETT $ (GETREFV 32))
-    (QSETREFV $ 0 |dv$|)
-    (QSETREFV $ 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+    (LETT % (GETREFV 32))
+    (QSETREFV % 0 |dv$|)
+    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|FiniteDivisorFunctions2|
-                (LIST DV$1 DV$2 DV$3 DV$4 DV$5 DV$6 DV$7 DV$8) (CONS 1 $))
-    (|stuffDomainSlots| $)
-    (QSETREFV $ 6 |#1|)
-    (QSETREFV $ 7 |#2|)
-    (QSETREFV $ 8 |#3|)
-    (QSETREFV $ 9 |#4|)
-    (QSETREFV $ 10 |#5|)
-    (QSETREFV $ 11 |#6|)
-    (QSETREFV $ 12 |#7|)
-    (QSETREFV $ 13 |#8|)
-    (SETF |pv$| (QREFELT $ 3))
-    $))) 
+                (LIST DV$1 DV$2 DV$3 DV$4 DV$5 DV$6 DV$7 DV$8) (CONS 1 %))
+    (|stuffDomainSlots| %)
+    (QSETREFV % 6 |#1|)
+    (QSETREFV % 7 |#2|)
+    (QSETREFV % 8 |#3|)
+    (QSETREFV % 9 |#4|)
+    (QSETREFV % 10 |#5|)
+    (QSETREFV % 11 |#6|)
+    (QSETREFV % 12 |#7|)
+    (QSETREFV % 13 |#8|)
+    (SETF |pv$| (QREFELT % 3))
+    %))) 
 
 (MAKEPROP '|FiniteDivisorFunctions2| '|infovec|
           (LIST
