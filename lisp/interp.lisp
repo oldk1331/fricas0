@@ -48,6 +48,7 @@
 (load "interp/match")
 (load "interp/msg")
 (load "interp/msgdb")
+(load "interp/nformat")
 (load "interp/nlib")
 (load "interp/nrunfast")
 (load "interp/nrungo")

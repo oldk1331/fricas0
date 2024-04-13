@@ -1,10 +1,11 @@
 (load "lisp/load-lisp.lisp")
 (load "lisp/interp.lisp")
 (in-package :boot)
-(defvar $spadroot ".")
+(setq |$spadroot| ".")
 (defvar |$defaultMsgDatabaseName| "msgs/s2-us.msgs")
-(defvar |$build_version| "Common Lisp - 1.3.9")
-(defvar |$build_date| "Sat Jul 8 2023")
+(defvar |$build_version| "Common Lisp - 1.3.10")
+(defvar |$build_date| "Thu Jan 11 2024")
+(defvar |$lisp_id_string| (concatenate 'string (lisp-implementation-type) " " (lisp-implementation-version)))
 
 
 #+:ABCL
