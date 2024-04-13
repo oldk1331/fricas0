@@ -2,66 +2,35 @@
 (SDEFUN |PFUTIL;decompose;UP2L;1|
         ((|nn| (UP)) (|dens| (|List| UP)) (% (|List| UP)))
         (SPROG
-         ((#1=#:G466 NIL) (|res| (|List| UP)) (#2=#:G470 NIL) (|c| NIL)
-          (#3=#:G469 NIL) (|fden| NIL) (|pfr| (|PartialFraction| UP))
-          (|nd| (|Factored| UP)) (|fdens| (|List| (|Factored| UP)))
-          (#4=#:G468 NIL) (|nden| NIL) (#5=#:G467 NIL))
+         ((|ru| (|Union| (|List| UP) "failed")) (|sdeg| (|Integer|))
+          (#1=#:G19 NIL) (|den| NIL))
          (SEQ
-          (LETT |fdens|
-                (PROGN
-                 (LETT #5# NIL)
-                 (SEQ (LETT |nden| NIL) (LETT #4# |dens|) G190
-                      (COND
-                       ((OR (ATOM #4#) (PROGN (LETT |nden| (CAR #4#)) NIL))
-                        (GO G191)))
-                      (SEQ
-                       (EXIT
-                        (LETT #5#
-                              (CONS (SPADCALL |nden| 1 (QREFELT % 12)) #5#))))
-                      (LETT #4# (CDR #4#)) (GO G190) G191
-                      (EXIT (NREVERSE #5#)))))
-          (LETT |nd|
-                (SPADCALL (ELT % 14) |fdens| (|spadConstant| % 15)
-                          (QREFELT % 18)))
-          (LETT |pfr| (SPADCALL |nn| |nd| (QREFELT % 20)))
+          (COND
+           ((NULL |dens|)
+            (COND
+             ((SPADCALL |nn| (|spadConstant| % 9) (QREFELT % 11))
+              (EXIT NIL)))))
+          (LETT |sdeg| 0)
+          (SEQ (LETT |den| NIL) (LETT #1# |dens|) G190
+               (COND
+                ((OR (ATOM #1#) (PROGN (LETT |den| (CAR #1#)) NIL)) (GO G191)))
+               (SEQ
+                (EXIT
+                 (LETT |sdeg| (+ |sdeg| (SPADCALL |den| (QREFELT % 13))))))
+               (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+          (COND
+           ((NULL (< (SPADCALL |nn| (QREFELT % 13)) |sdeg|))
+            (EXIT (|error| "decompose: has whole part"))))
+          (LETT |ru| (SPADCALL |dens| |nn| (QREFELT % 16)))
           (EXIT
-           (COND
-            ((SPADCALL (SPADCALL |pfr| (QREFELT % 21)) (|spadConstant| % 22)
-                       (QREFELT % 24))
-             (|error| "decompose: wholePart(pfr) ~= 0"))
-            ('T
-             (SEQ (LETT |res| NIL)
-                  (SEQ (LETT |fden| NIL) (LETT #3# |fdens|) G190
-                       (COND
-                        ((OR (ATOM #3#) (PROGN (LETT |fden| (CAR #3#)) NIL))
-                         (GO G191)))
-                       (SEQ
-                        (EXIT
-                         (SEQ (LETT |c| NIL)
-                              (LETT #2# (SPADCALL |pfr| (QREFELT % 27))) G190
-                              (COND
-                               ((OR (ATOM #2#)
-                                    (PROGN (LETT |c| (CAR #2#)) NIL))
-                                (GO G191)))
-                              (SEQ
-                               (EXIT
-                                (COND
-                                 ((SPADCALL (QCDR |c|) |fden| (QREFELT % 28))
-                                  (SEQ (LETT |res| (CONS (QCAR |c|) |res|))
-                                       (EXIT
-                                        (PROGN
-                                         (LETT #1# 1)
-                                         (GO #6=#:G461))))))))
-                              (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL)))
-                        #6# (EXIT #1#))
-                       (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
-                  (EXIT (NREVERSE |res|))))))))) 
+           (COND ((QEQCAR |ru| 1) (|error| "decompose: multiEuclidean failed"))
+                 ('T (QCDR |ru|))))))) 
 
 (DECLAIM (NOTINLINE |PartialFractionUtilities;|)) 
 
-(DEFUN |PartialFractionUtilities| (&REST #1=#:G471)
+(DEFUN |PartialFractionUtilities| (&REST #1=#:G20)
   (SPROG NIL
-         (PROG (#2=#:G472)
+         (PROG (#2=#:G21)
            (RETURN
             (COND
              ((LETT #2#
@@ -85,7 +54,7 @@
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|PartialFractionUtilities| DV$1 DV$2))
-          (LETT % (GETREFV 31))
+          (LETT % (GETREFV 19))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PartialFractionUtilities|
@@ -98,16 +67,12 @@
 
 (MAKEPROP '|PartialFractionUtilities| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (0 . |One|)
-              (4 . |One|) (|NonNegativeInteger|) (|Factored| 7)
-              (8 . |nilFactor|) (14 . *) (20 . *) (26 . |One|)
-              (|Mapping| 11 11 11) (|List| 11) (30 . |reduce|)
-              (|PartialFraction| 7) (37 . |partialFraction|) (43 . |wholePart|)
-              (48 . |Zero|) (|Boolean|) (52 . ~=)
-              (|Record| (|:| |num| 7) (|:| |den| 11)) (|List| 25)
-              (58 . |fractionalTerms|) (63 . =) (|List| 7)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
+              (0 . |Zero|) (4 . |Zero|) (|Boolean|) (8 . =)
+              (|NonNegativeInteger|) (14 . |degree|) (|Union| 15 '"failed")
+              (|List| %) (19 . |multiEuclidean|) (|List| 7)
               |PFUTIL;decompose;UP2L;1|)
-           '#(|decompose| 69) 'NIL
+           '#(|decompose| 25) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
                        (CONS
@@ -118,11 +83,8 @@
                                  ((|List| |#2|) |#2| (|List| |#2|)))
                                 T))
                              (LIST) NIL NIL)))
-                        (|makeByteWordVec2| 30
-                                            '(0 6 0 8 0 7 0 9 2 11 0 7 10 12 2
-                                              7 0 0 0 13 2 11 0 0 0 14 0 11 0
-                                              15 3 17 11 16 0 11 18 2 19 0 7 11
-                                              20 1 19 7 0 21 0 7 0 22 2 7 23 0
-                                              0 24 1 19 26 0 27 2 11 23 0 0 28
-                                              2 0 29 7 29 30)))))
+                        (|makeByteWordVec2| 18
+                                            '(0 6 0 8 0 7 0 9 2 7 10 0 0 11 1 7
+                                              12 0 13 2 7 14 15 0 16 2 0 17 7
+                                              17 18)))))
            '|lookupComplete|)) 

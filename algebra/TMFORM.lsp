@@ -468,7 +468,7 @@
                       (#1# (QCDR |res|))))))) 
 
 (SDEFUN |TMFORM;utf2cork| ((|str| (|String|)) (% (|String|)))
-        (SPROG ((#1=#:G554 NIL) (|i| NIL) (#2=#:G553 NIL))
+        (SPROG ((#1=#:G117 NIL) (|i| NIL) (#2=#:G116 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -501,227 +501,231 @@
                        (|TMFORM;formatNary| '|,| "" 0 |args| |prec| %))
                       ((EQUAL |op| 'AGGSET)
                        (|TMFORM;formatNary| '|;| "" 0 |args| |prec| %))
-                      ((EQUAL |op| 'TAG)
+                      ((EQUAL |op| '~>)
                        (|TMFORM;group|
                         (SPADCALL
                          (LIST
                           (|TMFORM;formatExpr| (|SPADfirst| |args|) |prec| %)
-                          " \"<rightarrow>\" "
+                          " \"<rightsquigarrow>\" "
                           (|TMFORM;formatExpr| (SPADCALL |args| (QREFELT % 50))
                            |prec| %))
                          (QREFELT % 41))
                         %))
-                      ((EQUAL |op| 'SLASH)
-                       (|TMFORM;group|
-                        (SPADCALL
-                         (LIST
-                          (|TMFORM;formatExpr| (|SPADfirst| |args|) |prec| %)
-                          " \"/\" "
-                          (|TMFORM;formatExpr| (SPADCALL |args| (QREFELT % 50))
-                           |prec| %))
-                         (QREFELT % 41))
-                        %))
-                      ((EQUAL |op| 'CONCATB)
-                       (|TMFORM;formatNary| 'STRSEP "(space \"1spc\")" 0 |args|
-                        |prec| %))
-                      ((EQUAL |op| 'CONCAT)
-                       (|TMFORM;formatNary| 'STRSEP "" 0 |args| (QREFELT % 13)
-                        %))
-                      ((EQUAL |op| 'QUOTE)
-                       (|TMFORM;group|
-                        (STRCONC "'"
-                                 (|TMFORM;formatExpr| (|SPADfirst| |args|)
-                                  (QREFELT % 13) %))
-                        %))
-                      ((EQUAL |op| 'BRACKET)
-                       (|TMFORM;group|
-                        (|TMFORM;addBrackets|
-                         (|TMFORM;ungroup|
-                          (|TMFORM;formatExpr| (|SPADfirst| |args|)
-                           (QREFELT % 13) %)
-                          %)
-                         %)
-                        %))
-                      ((EQUAL |op| 'BRACE)
-                       (|TMFORM;group|
-                        (|TMFORM;addBraces|
-                         (|TMFORM;ungroup|
-                          (|TMFORM;formatExpr| (|SPADfirst| |args|)
-                           (QREFELT % 13) %)
-                          %)
-                         %)
-                        %))
-                      ((EQUAL |op| 'PAREN)
-                       (|TMFORM;group|
-                        (|TMFORM;parenthesize|
-                         (|TMFORM;ungroup|
-                          (|TMFORM;formatExpr| (|SPADfirst| |args|)
-                           (QREFELT % 13) %)
-                          %)
-                         %)
-                        %))
-                      ((EQUAL |op| 'PRIME)
-                       (|TMFORM;formatSpecial| 'SUPERSUB
-                        (LIST (|SPADfirst| |args|) (SPADCALL (QREFELT % 51))
-                              (SPADCALL |args| (QREFELT % 50)))
-                        |prec| %))
-                      ((EQUAL |op| 'OVERBAR)
-                       (COND ((NULL |args|) "")
-                             (#1='T
-                              (SPADCALL
-                               (LIST "(wide "
-                                     (|TMFORM;formatExpr| (|SPADfirst| |args|)
-                                      (QREFELT % 13) %)
-                                     " \"<bar>\")")
-                               (QREFELT % 41)))))
-                      ((EQUAL |op| 'ROOT)
-                       (COND ((NULL |args|) "")
-                             (#1#
-                              (SEQ
-                               (LETT |tmp|
-                                     (|TMFORM;group|
-                                      (|TMFORM;formatExpr| (|SPADfirst| |args|)
-                                       (QREFELT % 13) %)
-                                      %))
-                               (EXIT
-                                (COND
-                                 ((NULL (CDR |args|))
-                                  (SPADCALL (LIST "(sqrt " |tmp| ")")
-                                            (QREFELT % 41)))
-                                 (#1#
-                                  (SPADCALL
-                                   (LIST "(sqrt " |tmp| " "
-                                         (|TMFORM;formatExpr|
-                                          (|SPADfirst| (CDR |args|))
-                                          (QREFELT % 13) %)
-                                         ")")
-                                   (QREFELT % 41)))))))))
-                      ((EQUAL |op| 'SEGMENT)
-                       (SEQ
-                        (LETT |tmp|
-                              (SPADCALL
-                               (LIST
-                                (|TMFORM;formatExpr| (|SPADfirst| |args|)
-                                 (QREFELT % 13) %)
-                                " \"..\" ")
-                               (QREFELT % 41)))
-                        (EXIT
+                      (#1='T
+                       (COND
+                        ((EQUAL |op| 'SLASH)
                          (|TMFORM;group|
-                          (COND ((NULL (CDR |args|)) |tmp|)
-                                (#1#
-                                 (SPADCALL
-                                  (LIST |tmp|
+                          (SPADCALL
+                           (LIST
+                            (|TMFORM;formatExpr| (|SPADfirst| |args|) |prec| %)
+                            " \"/\" "
+                            (|TMFORM;formatExpr|
+                             (SPADCALL |args| (QREFELT % 50)) |prec| %))
+                           (QREFELT % 41))
+                          %))
+                        ((EQUAL |op| 'CONCATB)
+                         (|TMFORM;formatNary| 'STRSEP "(space \"1spc\")" 0
+                          |args| |prec| %))
+                        ((EQUAL |op| 'CONCAT)
+                         (|TMFORM;formatNary| 'STRSEP "" 0 |args|
+                          (QREFELT % 13) %))
+                        ((EQUAL |op| 'QUOTE)
+                         (|TMFORM;group|
+                          (STRCONC "'"
+                                   (|TMFORM;formatExpr| (|SPADfirst| |args|)
+                                    (QREFELT % 13) %))
+                          %))
+                        ((EQUAL |op| 'BRACKET)
+                         (|TMFORM;group|
+                          (|TMFORM;addBrackets|
+                           (|TMFORM;ungroup|
+                            (|TMFORM;formatExpr| (|SPADfirst| |args|)
+                             (QREFELT % 13) %)
+                            %)
+                           %)
+                          %))
+                        ((EQUAL |op| 'BRACE)
+                         (|TMFORM;group|
+                          (|TMFORM;addBraces|
+                           (|TMFORM;ungroup|
+                            (|TMFORM;formatExpr| (|SPADfirst| |args|)
+                             (QREFELT % 13) %)
+                            %)
+                           %)
+                          %))
+                        ((EQUAL |op| 'PAREN)
+                         (|TMFORM;group|
+                          (|TMFORM;parenthesize|
+                           (|TMFORM;ungroup|
+                            (|TMFORM;formatExpr| (|SPADfirst| |args|)
+                             (QREFELT % 13) %)
+                            %)
+                           %)
+                          %))
+                        ((EQUAL |op| 'PRIME)
+                         (|TMFORM;formatSpecial| 'SUPERSUB
+                          (LIST (|SPADfirst| |args|) (SPADCALL (QREFELT % 51))
+                                (SPADCALL |args| (QREFELT % 50)))
+                          |prec| %))
+                        ((EQUAL |op| 'OVERBAR)
+                         (COND ((NULL |args|) "")
+                               (#1#
+                                (SPADCALL
+                                 (LIST "(wide "
+                                       (|TMFORM;formatExpr|
+                                        (|SPADfirst| |args|) (QREFELT % 13) %)
+                                       " \"<bar>\")")
+                                 (QREFELT % 41)))))
+                        ((EQUAL |op| 'ROOT)
+                         (COND ((NULL |args|) "")
+                               (#1#
+                                (SEQ
+                                 (LETT |tmp|
+                                       (|TMFORM;group|
                                         (|TMFORM;formatExpr|
-                                         (|SPADfirst| (CDR |args|))
-                                         (QREFELT % 13) %))
-                                  (QREFELT % 41))))
-                          %))))
-                      ((EQUAL |op| 'SUB)
-                       (|TMFORM;group|
-                        (SPADCALL
-                         (LIST "(concat "
-                               (|TMFORM;formatExpr| (|SPADfirst| |args|)
-                                (QREFELT % 13) %)
-                               "(rsub "
-                               (|TMFORM;formatSpecial| 'AGGLST (CDR |args|)
-                                (QREFELT % 13) %)
-                               "))")
-                         (QREFELT % 41))
-                        %))
-                      ((EQUAL |op| 'SUPERSUB)
-                       (SEQ
-                        (LETT |base|
-                              (|TMFORM;formatExpr| (|SPADfirst| |args|)
-                               (QREFELT % 13) %))
-                        (LETT |args| (CDR |args|))
-                        (EXIT
-                         (COND
-                          ((> (LENGTH |args|) 4)
-                           (|error|
-                            "multiscript object has more than 4 scripts"))
-                          (#1#
-                           (SEQ
-                            (COND
-                             ((NULL (NULL |args|))
-                              (SEQ
-                               (LETT |base|
-                                     (SPADCALL
-                                      (LIST |base| " "
-                                            (|TMFORM;optionalWrap| "rsub"
-                                             (SPADCALL |args| 1 (QREFELT % 52))
-                                             (QREFELT % 13) %))
-                                      (QREFELT % 41)))
-                               (EXIT (LETT |args| (CDR |args|))))))
-                            (COND
-                             ((NULL (NULL |args|))
-                              (SEQ
-                               (LETT |base|
-                                     (SPADCALL
-                                      (LIST |base| " "
-                                            (|TMFORM;optionalWrap| "rsup"
-                                             (SPADCALL |args| 1 (QREFELT % 52))
-                                             (QREFELT % 13) %))
-                                      (QREFELT % 41)))
-                               (EXIT (LETT |args| (CDR |args|))))))
-                            (COND
-                             ((NULL (NULL |args|))
-                              (SEQ
-                               (LETT |base|
-                                     (SPADCALL
-                                      (LIST
-                                       (|TMFORM;optionalWrap| "lsup"
-                                        (SPADCALL |args| 1 (QREFELT % 52))
-                                        (QREFELT % 13) %)
-                                       " " |base|)
-                                      (QREFELT % 41)))
-                               (EXIT (LETT |args| (CDR |args|))))))
-                            (COND
-                             ((NULL (NULL |args|))
-                              (LETT |base|
+                                         (|SPADfirst| |args|) (QREFELT % 13) %)
+                                        %))
+                                 (EXIT
+                                  (COND
+                                   ((NULL (CDR |args|))
+                                    (SPADCALL (LIST "(sqrt " |tmp| ")")
+                                              (QREFELT % 41)))
+                                   (#1#
                                     (SPADCALL
-                                     (LIST
-                                      (|TMFORM;optionalWrap| "lsub"
-                                       (SPADCALL |args| 1 (QREFELT % 52))
-                                       (QREFELT % 13) %)
-                                      " " |base|)
-                                     (QREFELT % 41)))))
-                            (EXIT
-                             (SPADCALL (LIST "(concat " |base| ")")
-                                       (QREFELT % 41)))))))))
-                      ((EQUAL |op| 'SC)
-                       (COND ((NULL |args|) "")
-                             (#1#
-                              (SEQ
-                               (LETT |tmp|
-                                     (|TMFORM;formatNaryNoGroup| 'STRSEP
-                                      ")) (row (cell " 0 |args| (QREFELT % 13)
-                                      %))
-                               (EXIT
+                                     (LIST "(sqrt " |tmp| " "
+                                           (|TMFORM;formatExpr|
+                                            (|SPADfirst| (CDR |args|))
+                                            (QREFELT % 13) %)
+                                           ")")
+                                     (QREFELT % 41)))))))))
+                        ((EQUAL |op| 'SEGMENT)
+                         (SEQ
+                          (LETT |tmp|
                                 (SPADCALL
                                  (LIST
-                                  "(tabular (tformat (twith \"table-valign\" \"t\") (table (row (cell "
-                                  |tmp| ")))))")
-                                 (QREFELT % 41)))))))
-                      ((EQUAL |op| 'MATRIX)
-                       (|TMFORM;formatMatrix| (CDR |args|) %))
-                      ((EQUAL |op| 'BINOMIAL)
-                       (SPADCALL
-                        (LIST "(binom "
-                              (|TMFORM;formatExpr|
-                               (SPADCALL |args| 1 (QREFELT % 52))
-                               (QREFELT % 13) %)
-                              " "
-                              (|TMFORM;formatExpr|
-                               (SPADCALL |args| 2 (QREFELT % 52))
-                               (QREFELT % 13) %)
-                              ")")
-                        (QREFELT % 41)))
-                      ((EQUAL |op| 'NOTHING) "\"\"")
-                      (#1#
-                       (SPADCALL
-                        (LIST "(concat \"not done yet for: "
-                              (SPADCALL |op| (QREFELT % 54)) "\")")
-                        (QREFELT % 41))))))) 
+                                  (|TMFORM;formatExpr| (|SPADfirst| |args|)
+                                   (QREFELT % 13) %)
+                                  " \"..\" ")
+                                 (QREFELT % 41)))
+                          (EXIT
+                           (|TMFORM;group|
+                            (COND ((NULL (CDR |args|)) |tmp|)
+                                  (#1#
+                                   (SPADCALL
+                                    (LIST |tmp|
+                                          (|TMFORM;formatExpr|
+                                           (|SPADfirst| (CDR |args|))
+                                           (QREFELT % 13) %))
+                                    (QREFELT % 41))))
+                            %))))
+                        ((EQUAL |op| 'SUB)
+                         (|TMFORM;group|
+                          (SPADCALL
+                           (LIST "(concat "
+                                 (|TMFORM;formatExpr| (|SPADfirst| |args|)
+                                  (QREFELT % 13) %)
+                                 "(rsub "
+                                 (|TMFORM;formatSpecial| 'AGGLST (CDR |args|)
+                                  (QREFELT % 13) %)
+                                 "))")
+                           (QREFELT % 41))
+                          %))
+                        ((EQUAL |op| 'SUPERSUB)
+                         (SEQ
+                          (LETT |base|
+                                (|TMFORM;formatExpr| (|SPADfirst| |args|)
+                                 (QREFELT % 13) %))
+                          (LETT |args| (CDR |args|))
+                          (EXIT
+                           (COND
+                            ((> (LENGTH |args|) 4)
+                             (|error|
+                              "multiscript object has more than 4 scripts"))
+                            (#1#
+                             (SEQ
+                              (COND
+                               ((NULL (NULL |args|))
+                                (SEQ
+                                 (LETT |base|
+                                       (SPADCALL
+                                        (LIST |base| " "
+                                              (|TMFORM;optionalWrap| "rsub"
+                                               (SPADCALL |args| 1
+                                                         (QREFELT % 52))
+                                               (QREFELT % 13) %))
+                                        (QREFELT % 41)))
+                                 (EXIT (LETT |args| (CDR |args|))))))
+                              (COND
+                               ((NULL (NULL |args|))
+                                (SEQ
+                                 (LETT |base|
+                                       (SPADCALL
+                                        (LIST |base| " "
+                                              (|TMFORM;optionalWrap| "rsup"
+                                               (SPADCALL |args| 1
+                                                         (QREFELT % 52))
+                                               (QREFELT % 13) %))
+                                        (QREFELT % 41)))
+                                 (EXIT (LETT |args| (CDR |args|))))))
+                              (COND
+                               ((NULL (NULL |args|))
+                                (SEQ
+                                 (LETT |base|
+                                       (SPADCALL
+                                        (LIST
+                                         (|TMFORM;optionalWrap| "lsup"
+                                          (SPADCALL |args| 1 (QREFELT % 52))
+                                          (QREFELT % 13) %)
+                                         " " |base|)
+                                        (QREFELT % 41)))
+                                 (EXIT (LETT |args| (CDR |args|))))))
+                              (COND
+                               ((NULL (NULL |args|))
+                                (LETT |base|
+                                      (SPADCALL
+                                       (LIST
+                                        (|TMFORM;optionalWrap| "lsub"
+                                         (SPADCALL |args| 1 (QREFELT % 52))
+                                         (QREFELT % 13) %)
+                                        " " |base|)
+                                       (QREFELT % 41)))))
+                              (EXIT
+                               (SPADCALL (LIST "(concat " |base| ")")
+                                         (QREFELT % 41)))))))))
+                        ((EQUAL |op| 'SC)
+                         (COND ((NULL |args|) "")
+                               (#1#
+                                (SEQ
+                                 (LETT |tmp|
+                                       (|TMFORM;formatNaryNoGroup| 'STRSEP
+                                        ")) (row (cell " 0 |args|
+                                        (QREFELT % 13) %))
+                                 (EXIT
+                                  (SPADCALL
+                                   (LIST
+                                    "(tabular (tformat (twith \"table-valign\" \"t\") (table (row (cell "
+                                    |tmp| ")))))")
+                                   (QREFELT % 41)))))))
+                        ((EQUAL |op| 'MATRIX)
+                         (|TMFORM;formatMatrix| (CDR |args|) %))
+                        ((EQUAL |op| 'BINOMIAL)
+                         (SPADCALL
+                          (LIST "(binom "
+                                (|TMFORM;formatExpr|
+                                 (SPADCALL |args| 1 (QREFELT % 52))
+                                 (QREFELT % 13) %)
+                                " "
+                                (|TMFORM;formatExpr|
+                                 (SPADCALL |args| 2 (QREFELT % 52))
+                                 (QREFELT % 13) %)
+                                ")")
+                          (QREFELT % 41)))
+                        ((EQUAL |op| 'NOTHING) "\"\"")
+                        (#1#
+                         (SPADCALL
+                          (LIST "(concat \"not done yet for: "
+                                (SPADCALL |op| (QREFELT % 54)) "\")")
+                          (QREFELT % 41))))))))) 
 
 (SDEFUN |TMFORM;formatPlex|
         ((|op| (|Symbol|)) (|args| (|List| (|OutputForm|)))
@@ -816,7 +820,7 @@
 (SDEFUN |TMFORM;formatIntBody|
         ((|body| (|OutputForm|)) (|opPrec| (|Integer|)) (% (|String|)))
         (SPROG
-         ((#1=#:G616 NIL) (|bvarS| (|String|))
+         ((#1=#:G193 NIL) (|bvarS| (|String|))
           (|bvarL| #2=(|List| (|OutputForm|))) (|bvar| (|OutputForm|))
           (|bodyL| #2#))
          (SEQ
@@ -863,7 +867,7 @@
                                                     " \"*<mathd>" |bvarS|
                                                     "\")")
                                               (QREFELT % 41)))
-                                       (GO #3=#:G615))))))))))))))))))))
+                                       (GO #3=#:G192))))))))))))))))))))
             (EXIT (|TMFORM;formatExpr| |body| |opPrec| %))))
           #3# (EXIT #1#)))) 
 
@@ -982,6 +986,7 @@
                                               ((EQUAL |op| '>) "<gtr>")
                                               ((EQUAL |op| '>=) "<geq>")
                                               ((EQUAL |op| '+->) "<mapsto>")
+                                              ((EQUAL |op| '->) "<rightarrow>")
                                               (#2#
                                                (COND ((EQUAL |op| 'LET) ":=")
                                                      (#2#
@@ -1012,7 +1017,7 @@
         ((|op| (|Symbol|)) (|sep| (|String|)) (|opprec| (|Integer|))
          (|args| (|List| (|OutputForm|))) (|prec| (|Integer|)) (% (|String|)))
         (SPROG
-         ((|s| (|String|)) (|l| (|List| (|String|))) (#1=#:G648 NIL) (|a| NIL)
+         ((|s| (|String|)) (|l| (|List| (|String|))) (#1=#:G225 NIL) (|a| NIL)
           (|opPrec| (|Integer|)) (|ops| (|String|)) (|p| (|Integer|)))
          (SEQ
           (COND ((NULL |args|) "")
@@ -1140,7 +1145,7 @@
          ((|op| #1=(|Symbol|)) (|nargs| (|Integer|))
           (|args| (|List| (|OutputForm|))) (|opf| (|OutputForm|))
           (|i| (|Integer|)) (|len| (|Integer|)) (|str| (|String|))
-          (#2=#:G687 NIL) (|es| #1#) (|nstr| (|String|))
+          (#2=#:G264 NIL) (|es| #1#) (|nstr| (|String|))
           (|intSplitLen| (|Integer|)))
          (SEQ
           (EXIT
@@ -1218,7 +1223,7 @@
                              (EXIT
                               (COND
                                ((EQUAL |es| '|%pi|)
-                                (PROGN (LETT #2# "<mathpi>") (GO #4=#:G686)))
+                                (PROGN (LETT #2# "<mathpi>") (GO #4=#:G263)))
                                ((EQUAL |es| '|%e|)
                                 (PROGN (LETT #2# "<mathe>") (GO #4#)))
                                ((EQUAL |es| '|%i|)
@@ -1345,7 +1350,7 @@
 
 (DEFUN |TexmacsFormat| ()
   (SPROG NIL
-         (PROG (#1=#:G689)
+         (PROG (#1=#:G266)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|TexmacsFormat|))
@@ -1376,8 +1381,9 @@
           (QSETREFV % 13 0)
           (QSETREFV % 14 '(-))
           (QSETREFV % 15 '(710))
-          (QSETREFV % 16 '(+-> |\|| ^ / = ~= < <= > >= OVER LET))
-          (QSETREFV % 17 (LIST 0 0 900 700 400 400 400 400 400 400 700 125))
+          (QSETREFV % 16 '(+-> |\|| ^ / = ~= < <= > >= OVER LET ->))
+          (QSETREFV % 17
+                    (LIST 0 0 900 700 400 400 400 400 400 400 700 125 1001))
           (QSETREFV % 18 '(- + * |,| |;| ROW STRSEP TENSOR))
           (QSETREFV % 19 (LIST 700 700 800 110 110 0 0 850))
           (QSETREFV % 20 '(ROW))
@@ -1385,7 +1391,7 @@
           (QSETREFV % 22 '(750 750 750 750 700))
           (QSETREFV % 23
                     '(MATRIX BRACKET BRACE CONCATB VCONCAT AGGLST CONCAT
-                      OVERBAR ROOT SUB TAG SUPERSUB ZAG AGGSET SC PAREN SEGMENT
+                      OVERBAR ROOT SUB ~> SUPERSUB ZAG AGGSET SC PAREN SEGMENT
                       QUOTE |theMap| SLASH PRIME BOX EQUATNUM BINOMIAL
                       NOTHING))
           (QSETREFV % 24

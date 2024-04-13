@@ -72,7 +72,7 @@
                       ('T (|spadConstant| % 15))))))) 
 
 (SDEFUN |PADICRC;wholePart;%PADIC;12| ((|x| (%)) (% (PADIC)))
-        (SPROG ((|ix| (PADIC)) (#1=#:G501 NIL) (|i| NIL) (|n| (|Integer|)))
+        (SPROG ((|ix| (PADIC)) (#1=#:G65 NIL) (|i| NIL) (|n| (|Integer|)))
                (SEQ (LETT |n| (|PADICRC;getExpon| |x| %))
                     (COND
                      ((< |n| 0)
@@ -125,7 +125,7 @@
                      ('T |x|)))) 
 
 (SDEFUN |PADICRC;=;2%B;15| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
-        (SPROG ((#1=#:G708 NIL) (#2=#:G641 NIL) (|n| (|Integer|)))
+        (SPROG ((#1=#:G272 NIL) (#2=#:G205 NIL) (|n| (|Integer|)))
                (SEQ
                 (COND ((EQ |x| |y|) 'T)
                       (#3='T
@@ -157,7 +157,7 @@
                             (|PADICRC;getZp| |x| %) (QREFELT % 39))))))))))) 
 
 (SDEFUN |PADICRC;+;3%;16| ((|x| (%)) (|y| (%)) (% (%)))
-        (SPROG ((#1=#:G726 NIL) (#2=#:G722 NIL) (|n| (|Integer|)))
+        (SPROG ((#1=#:G290 NIL) (#2=#:G286 NIL) (|n| (|Integer|)))
                (SEQ
                 (LETT |n|
                       (- (|PADICRC;getExpon| |x| %)
@@ -194,7 +194,7 @@
          (SPADCALL (|PADICRC;getZp| |x| %) (QREFELT % 43)) %)) 
 
 (SDEFUN |PADICRC;-;3%;18| ((|x| (%)) (|y| (%)) (% (%)))
-        (SPROG ((#1=#:G744 NIL) (#2=#:G740 NIL) (|n| (|Integer|)))
+        (SPROG ((#1=#:G308 NIL) (#2=#:G304 NIL) (|n| (|Integer|)))
                (SEQ
                 (LETT |n|
                       (- (|PADICRC;getExpon| |x| %)
@@ -238,7 +238,7 @@
          %)) 
 
 (SDEFUN |PADICRC;^;%I%;21| ((|x| (%)) (|n| (|Integer|)) (% (%)))
-        (SPROG ((#1=#:G751 NIL) (#2=#:G750 NIL))
+        (SPROG ((#1=#:G315 NIL) (#2=#:G314 NIL))
                (COND ((ZEROP |n|) (|spadConstant| % 16))
                      ((PLUSP |n|)
                       (SPADCALL |x|
@@ -371,7 +371,7 @@
 (SDEFUN |PADICRC;coerce;%Of;32| ((|x| (%)) (% (|OutputForm|)))
         (SPROG
          ((|l| (|List| (|OutputForm|))) (|uu| (|Stream| (|Integer|)))
-          (|uu1| (|Stream| (|Integer|))) (|n| NIL) (#1=#:G810 NIL)
+          (|uu1| (|Stream| (|Integer|))) (|n| NIL) (#1=#:G383 NIL)
           (|count| (|NonNegativeInteger|)) (|zp| (PADIC)) (|m| (|Integer|)))
          (SEQ (LETT |x| (SPADCALL |$streamCount| |x| (QREFELT % 25)))
               (LETT |m| (|PADICRC;getExpon| |x| %))
@@ -462,9 +462,9 @@
 
 (DECLAIM (NOTINLINE |PAdicRationalConstructor;|)) 
 
-(DEFUN |PAdicRationalConstructor| (&REST #1=#:G842)
+(DEFUN |PAdicRationalConstructor| (&REST #1=#:G431)
   (SPROG NIL
-         (PROG (#2=#:G843)
+         (PROG (#2=#:G432)
            (RETURN
             (COND
              ((LETT #2#
@@ -484,7 +484,7 @@
 
 (DEFUN |PAdicRationalConstructor;| (|#1| |#2|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G841 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+   ((|pv$| NIL) (#1=#:G430 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 |#1|)
     (LETT DV$2 (|devaluate| |#2|))

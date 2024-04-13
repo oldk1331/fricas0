@@ -18,7 +18,7 @@
               ('T (QCAR (SPADCALL |p| (QREFELT % 18)))))) 
 
 (SDEFUN |XPR;coef;%ER;6| ((|p| (%)) (|e| (E)) (% (R)))
-        (SPROG ((#1=#:G485 NIL) (#2=#:G486 NIL) (#3=#:G487 NIL) (|tm| NIL))
+        (SPROG ((#1=#:G48 NIL) (#2=#:G49 NIL) (#3=#:G50 NIL) (|tm| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -30,7 +30,7 @@
                         (EXIT
                          (COND
                           ((SPADCALL (QCAR |tm|) |e| (QREFELT % 21))
-                           (PROGN (LETT #2# (QCDR |tm|)) (GO #4=#:G484)))
+                           (PROGN (LETT #2# (QCDR |tm|)) (GO #4=#:G47)))
                           ('T
                            (SEQ
                             (EXIT
@@ -41,7 +41,7 @@
                                       (PROGN
                                        (LETT #2# (|spadConstant| % 23))
                                        (GO #4#)))
-                                (GO #5=#:G480)))))
+                                (GO #5=#:G43)))))
                             #5# (EXIT #1#))))))
                        (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
                   (EXIT (|spadConstant| % 23))))
@@ -63,7 +63,7 @@
                          (|spadConstant| % 9) (QREFELT % 29))))) 
 
 (SDEFUN |XPR;quasiRegular;2%;10| ((|p| (%)) (% (%)))
-        (SPROG ((#1=#:G500 NIL) (|t| NIL) (#2=#:G499 NIL))
+        (SPROG ((#1=#:G63 NIL) (|t| NIL) (#2=#:G62 NIL))
                (SEQ
                 (COND ((SPADCALL |p| (QREFELT % 30)) |p|)
                       ('T
@@ -164,8 +164,8 @@
 
 (SDEFUN |XPR;*;3%;16| ((|p1| (%)) (|p2| (%)) (% (%)))
         (SPROG
-         ((#1=#:G538 NIL) (#2=#:G537 (%)) (#3=#:G539 (%)) (#4=#:G548 NIL)
-          (|t2| NIL) (#5=#:G547 NIL) (#6=#:G546 NIL) (|t1| NIL))
+         ((#1=#:G102 NIL) (#2=#:G101 (%)) (#3=#:G103 (%)) (#4=#:G112 NIL)
+          (|t2| NIL) (#5=#:G111 NIL) (#6=#:G110 NIL) (|t1| NIL))
          (SEQ
           (COND ((OR (NULL |p1|) (NULL |p2|)) (|spadConstant| % 25))
                 ((SPADCALL (QCAR (|SPADfirst| |p1|)) (|spadConstant| % 9)
@@ -212,8 +212,8 @@
 
 (SDEFUN |XPR;*;3%;17| ((|p1| (%)) (|p2| (%)) (% (%)))
         (SPROG
-         ((#1=#:G551 NIL) (#2=#:G550 (%)) (#3=#:G552 (%)) (|r| (R))
-          (#4=#:G562 NIL) (|t2| NIL) (#5=#:G561 NIL) (#6=#:G560 NIL)
+         ((#1=#:G115 NIL) (#2=#:G114 (%)) (#3=#:G116 (%)) (|r| (R))
+          (#4=#:G126 NIL) (|t2| NIL) (#5=#:G125 NIL) (#6=#:G124 NIL)
           (|t1| NIL))
          (SEQ
           (COND ((OR (NULL |p1|) (NULL |p2|)) (|spadConstant| % 25))
@@ -272,7 +272,7 @@
         (|XPR;repeatMultExpt| |p| |nn| %)) 
 
 (SDEFUN |XPR;repeatMultExpt| ((|x| (%)) (|nn| (|NonNegativeInteger|)) (% (%)))
-        (SPROG ((|y| (%)) (#1=#:G568 NIL) (|i| NIL))
+        (SPROG ((|y| (%)) (#1=#:G134 NIL) (|i| NIL))
                (SEQ
                 (COND ((EQL |nn| 0) (|spadConstant| % 11))
                       ('T
@@ -298,7 +298,7 @@
                     (QREFELT % 54))))) 
 
 (SDEFUN |XPR;coerce;%Of;21| ((|a| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G578 NIL) (|t| NIL) (#2=#:G577 NIL))
+        (SPROG ((#1=#:G144 NIL) (|t| NIL) (#2=#:G143 NIL))
                (SEQ
                 (COND
                  ((NULL |a|) (SPADCALL (|spadConstant| % 23) (QREFELT % 53)))
@@ -328,9 +328,9 @@
 
 (DECLAIM (NOTINLINE |XPolynomialRing;|)) 
 
-(DEFUN |XPolynomialRing| (&REST #1=#:G585)
+(DEFUN |XPolynomialRing| (&REST #1=#:G151)
   (SPROG NIL
-         (PROG (#2=#:G586)
+         (PROG (#2=#:G152)
            (RETURN
             (COND
              ((LETT #2#
@@ -349,7 +349,7 @@
 
 (DEFUN |XPolynomialRing;| (|#1| |#2|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G584 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+   ((|pv$| NIL) (#1=#:G150 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))

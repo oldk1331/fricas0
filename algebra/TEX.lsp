@@ -53,8 +53,8 @@
 
 (SDEFUN |TEX;display;%IV;8| ((|f| (%)) (|len| (|Integer|)) (% (|Void|)))
         (SPROG
-         ((#1=#:G581 NIL) (|s| NIL) (#2=#:G580 NIL) (|t| NIL) (#3=#:G579 NIL)
-          (#4=#:G578 NIL))
+         ((#1=#:G149 NIL) (|s| NIL) (#2=#:G148 NIL) (|t| NIL) (#3=#:G147 NIL)
+          (#4=#:G146 NIL))
          (SEQ
           (SEQ (LETT |s| NIL) (LETT #4# (QVELT |f| 0)) G190
                (COND
@@ -119,8 +119,8 @@
 
 (SDEFUN |TEX;coerce;%Of;16| ((|f| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|l| (|List| (|String|))) (#1=#:G602 NIL) (|s| NIL) (#2=#:G601 NIL)
-          (|t| NIL) (#3=#:G600 NIL) (#4=#:G599 NIL))
+         ((|l| (|List| (|String|))) (#1=#:G170 NIL) (|s| NIL) (#2=#:G169 NIL)
+          (|t| NIL) (#3=#:G168 NIL) (#4=#:G167 NIL))
          (SEQ (LETT |l| NIL)
               (SEQ (LETT |s| NIL) (LETT #4# (QVELT |f| 0)) G190
                    (COND
@@ -178,7 +178,7 @@
 
 (SDEFUN |TEX;postcondition| ((|str| (|String|)) (% (|String|)))
         (SPROG
-         ((#1=#:G616 NIL) (|i| NIL) (|minus| #2=(|Character|)) (|plus| #2#)
+         ((#1=#:G184 NIL) (|i| NIL) (|minus| #2=(|Character|)) (|plus| #2#)
           (|len| (|Integer|)))
          (SEQ (LETT |str| (|TEX;ungroup| |str| %)) (LETT |len| (QCSIZE |str|))
               (LETT |plus| (|STR_to_CHAR| "+"))
@@ -241,7 +241,7 @@
         (SPROG
          ((|l| (|List| (|String|))) (|s| (|String|)) (|ls| (|Integer|))
           (|ownLine| (|Boolean|)) (|u| (|UniversalSegment| (|Integer|)))
-          (|lss| (|Integer|)) (#1=#:G646 NIL) (|ss| NIL))
+          (|lss| (|Integer|)) (#1=#:G214 NIL) (|ss| NIL))
          (SEQ (LETT |l| NIL) (LETT |s| "") (LETT |ls| 0)
               (SEQ (LETT |ss| NIL)
                    (LETT #1#
@@ -334,7 +334,7 @@
         ((|args| (|List| (|OutputForm|))) (|prec| (|Integer|)) (% (|String|)))
         (SPROG
          ((|narg2| #1=(|OutputForm|)) (|k| (|NonNegativeInteger|))
-          (#2=#:G665 NIL) (|j| NIL) (#3=#:G664 NIL) (|i| NIL)
+          (#2=#:G235 NIL) (|j| NIL) (#3=#:G234 NIL) (|i| NIL)
           (|res| (|String|)) (|n| (|NonNegativeInteger|))
           (|prime_str| (#4="\\prime")) (|c_char| (|Character|))
           (|arg2s| (|String|)) (|arg2| #1#))
@@ -407,8 +407,8 @@
          (|prec| (|Integer|)) (% (|String|)))
         (SPROG
          ((|tmp| (|String|)) (|prescript| (|Boolean|))
-          (|form| (|List| (|String|))) (#1=#:G718 NIL) (|u| NIL)
-          (#2=#:G717 NIL))
+          (|form| (|List| (|String|))) (#1=#:G287 NIL) (|u| NIL)
+          (#2=#:G286 NIL))
          (SEQ (LETT |prescript| NIL)
               (EXIT
                (COND ((EQUAL |op| '|theMap|) "\\mbox{theMap(...)}")
@@ -416,313 +416,310 @@
                       (|TEX;formatNary| '|,| "" 0 |args| |prec| %))
                      ((EQUAL |op| 'AGGSET)
                       (|TEX;formatNary| '|;| "" 0 |args| |prec| %))
-                     ((EQUAL |op| 'TAG)
+                     ((EQUAL |op| '~>)
                       (|TEX;group|
                        (SPADCALL
                         (LIST (|TEX;formatExpr| (|SPADfirst| |args|) |prec| %)
-                              "\\rightarrow"
+                              "\\rightsquigarrow"
                               (|TEX;formatExpr|
                                (SPADCALL |args| (QREFELT % 59)) |prec| %))
                         (QREFELT % 57))
                        %))
-                     ((EQUAL |op| 'SLASH)
-                      (|TEX;group|
-                       (SPADCALL
-                        (LIST (|TEX;formatExpr| (|SPADfirst| |args|) |prec| %)
-                              "/"
-                              (|TEX;formatExpr|
-                               (SPADCALL |args| (QREFELT % 59)) |prec| %))
-                        (QREFELT % 57))
-                       %))
-                     ((EQUAL |op| 'VCONCAT)
-                      (|TEX;group|
-                       (STRCONC "\\begin{array}{c}"
-                                (STRCONC
-                                 (SPADCALL
-                                  (PROGN
-                                   (LETT #2# NIL)
-                                   (SEQ (LETT |u| NIL) (LETT #1# |args|) G190
-                                        (COND
-                                         ((OR (ATOM #1#)
-                                              (PROGN (LETT |u| (CAR #1#)) NIL))
-                                          (GO G191)))
-                                        (SEQ
-                                         (EXIT
-                                          (LETT #2#
-                                                (CONS
-                                                 (STRCONC
-                                                  (|TEX;formatExpr| |u|
-                                                   (QREFELT % 13) %)
-                                                  "\\\\")
-                                                 #2#))))
-                                        (LETT #1# (CDR #1#)) (GO G190) G191
-                                        (EXIT (NREVERSE #2#))))
-                                  (QREFELT % 57))
-                                 "\\end{array}"))
-                       %))
-                     ((EQUAL |op| 'CONCATB)
-                      (|TEX;formatNary| 'STRSEP " \\ " 0 |args| |prec| %))
-                     ((EQUAL |op| 'CONCAT)
-                      (|TEX;formatNary| 'STRSEP "" 0 |args| (QREFELT % 13) %))
-                     ((EQUAL |op| 'QUOTE)
-                      (|TEX;group|
-                       (STRCONC "{\\tt '}"
-                                (|TEX;formatExpr| (|SPADfirst| |args|)
-                                 (QREFELT % 13) %))
-                       %))
-                     ((EQUAL |op| 'BRACKET)
-                      (|TEX;group|
-                       (|TEX;addBrackets|
-                        (|TEX;ungroup|
-                         (|TEX;formatExpr| (|SPADfirst| |args|) (QREFELT % 13)
-                          %)
-                         %)
-                        %)
-                       %))
-                     ((EQUAL |op| 'BRACE)
-                      (|TEX;group|
-                       (|TEX;addBraces|
-                        (|TEX;ungroup|
-                         (|TEX;formatExpr| (|SPADfirst| |args|) (QREFELT % 13)
-                          %)
-                         %)
-                        %)
-                       %))
-                     ((EQUAL |op| 'PAREN)
-                      (|TEX;group|
-                       (|TEX;parenthesize|
-                        (|TEX;ungroup|
-                         (|TEX;formatExpr| (|SPADfirst| |args|) (QREFELT % 13)
-                          %)
-                         %)
-                        %)
-                       %))
-                     ((EQUAL |op| 'PRIME) (|TEX;format_prime| |args| |prec| %))
-                     ((EQUAL |op| 'OVERBAR)
-                      (COND ((NULL |args|) "")
-                            (#3='T
-                             (|TEX;group|
-                              (SPADCALL
-                               (LIST "\\overline "
-                                     (|TEX;formatExpr| (|SPADfirst| |args|)
-                                      (QREFELT % 13) %))
-                               (QREFELT % 57))
-                              %))))
-                     ((EQUAL |op| 'ROOT)
-                      (COND ((NULL |args|) "")
-                            (#3#
-                             (SEQ
-                              (LETT |tmp|
-                                    (|TEX;group|
-                                     (|TEX;formatExpr| (|SPADfirst| |args|)
-                                      (QREFELT % 13) %)
-                                     %))
-                              (EXIT
-                               (COND
-                                ((NULL (CDR |args|))
-                                 (|TEX;group|
-                                  (SPADCALL (LIST "\\sqrt " |tmp|)
-                                            (QREFELT % 57))
-                                  %))
-                                (#3#
-                                 (|TEX;group|
-                                  (SPADCALL
-                                   (LIST "\\root "
-                                         (|TEX;group|
-                                          (|TEX;formatExpr|
-                                           (|SPADfirst| (CDR |args|))
-                                           (QREFELT % 13) %)
-                                          %)
-                                         " \\of " |tmp|)
-                                   (QREFELT % 57))
-                                  %))))))))
-                     ((EQUAL |op| 'SEGMENT)
-                      (SEQ
-                       (LETT |tmp|
-                             (SPADCALL
-                              (LIST
-                               (|TEX;formatExpr| (|SPADfirst| |args|)
-                                (QREFELT % 13) %)
-                               "..")
-                              (QREFELT % 57)))
-                       (EXIT
+                     (#3='T
+                      (COND
+                       ((EQUAL |op| 'SLASH)
                         (|TEX;group|
-                         (COND ((NULL (CDR |args|)) |tmp|)
-                               (#3#
-                                (SPADCALL
-                                 (LIST |tmp|
-                                       (|TEX;formatExpr|
-                                        (|SPADfirst| (CDR |args|))
-                                        (QREFELT % 13) %))
-                                 (QREFELT % 57))))
-                         %))))
-                     ((EQUAL |op| 'SUB)
-                      (|TEX;group|
-                       (SPADCALL
-                        (LIST
-                         (|TEX;formatExpr| (|SPADfirst| |args|) (QREFELT % 13)
+                         (SPADCALL
+                          (LIST
+                           (|TEX;formatExpr| (|SPADfirst| |args|) |prec| %) "/"
+                           (|TEX;formatExpr| (SPADCALL |args| (QREFELT % 59))
+                            |prec| %))
+                          (QREFELT % 57))
+                         %))
+                       ((EQUAL |op| 'VCONCAT)
+                        (|TEX;group|
+                         (STRCONC "\\begin{array}{c}"
+                                  (STRCONC
+                                   (SPADCALL
+                                    (PROGN
+                                     (LETT #2# NIL)
+                                     (SEQ (LETT |u| NIL) (LETT #1# |args|) G190
+                                          (COND
+                                           ((OR (ATOM #1#)
+                                                (PROGN
+                                                 (LETT |u| (CAR #1#))
+                                                 NIL))
+                                            (GO G191)))
+                                          (SEQ
+                                           (EXIT
+                                            (LETT #2#
+                                                  (CONS
+                                                   (STRCONC
+                                                    (|TEX;formatExpr| |u|
+                                                     (QREFELT % 13) %)
+                                                    "\\\\")
+                                                   #2#))))
+                                          (LETT #1# (CDR #1#)) (GO G190) G191
+                                          (EXIT (NREVERSE #2#))))
+                                    (QREFELT % 57))
+                                   "\\end{array}"))
+                         %))
+                       ((EQUAL |op| 'CONCATB)
+                        (|TEX;formatNary| 'STRSEP " \\ " 0 |args| |prec| %))
+                       ((EQUAL |op| 'CONCAT)
+                        (|TEX;formatNary| 'STRSEP "" 0 |args| (QREFELT % 13)
+                         %))
+                       ((EQUAL |op| 'QUOTE)
+                        (|TEX;group|
+                         (STRCONC "{\\tt '}"
+                                  (|TEX;formatExpr| (|SPADfirst| |args|)
+                                   (QREFELT % 13) %))
+                         %))
+                       ((EQUAL |op| 'BRACKET)
+                        (|TEX;group|
+                         (|TEX;addBrackets|
+                          (|TEX;ungroup|
+                           (|TEX;formatExpr| (|SPADfirst| |args|)
+                            (QREFELT % 13) %)
+                           %)
                           %)
-                         " \\sb "
-                         (|TEX;formatSpecial| 'AGGLST (CDR |args|)
-                          (QREFELT % 13) %))
-                        (QREFELT % 57))
-                       %))
-                     ((EQUAL |op| 'SUPERSUB)
-                      (SEQ
-                       (LETT |form|
-                             (LIST
-                              (|TEX;formatExpr| (|SPADfirst| |args|)
-                               (QREFELT % 13) %)))
-                       (LETT |args| (CDR |args|))
-                       (EXIT
-                        (COND ((NULL |args|) (SPADCALL |form| (QREFELT % 57)))
+                         %))
+                       ((EQUAL |op| 'BRACE)
+                        (|TEX;group|
+                         (|TEX;addBraces|
+                          (|TEX;ungroup|
+                           (|TEX;formatExpr| (|SPADfirst| |args|)
+                            (QREFELT % 13) %)
+                           %)
+                          %)
+                         %))
+                       ((EQUAL |op| 'PAREN)
+                        (|TEX;group|
+                         (|TEX;parenthesize|
+                          (|TEX;ungroup|
+                           (|TEX;formatExpr| (|SPADfirst| |args|)
+                            (QREFELT % 13) %)
+                           %)
+                          %)
+                         %))
+                       ((EQUAL |op| 'PRIME)
+                        (|TEX;format_prime| |args| |prec| %))
+                       ((EQUAL |op| 'OVERBAR)
+                        (COND ((NULL |args|) "")
+                              (#3#
+                               (|TEX;group|
+                                (SPADCALL
+                                 (LIST "\\overline "
+                                       (|TEX;formatExpr| (|SPADfirst| |args|)
+                                        (QREFELT % 13) %))
+                                 (QREFELT % 57))
+                                %))))
+                       ((EQUAL |op| 'ROOT)
+                        (COND ((NULL |args|) "")
                               (#3#
                                (SEQ
                                 (LETT |tmp|
-                                      (|TEX;formatExpr| (|SPADfirst| |args|)
-                                       (QREFELT % 13) %))
-                                (COND
-                                 ((SPADCALL |tmp| "" (QREFELT % 67))
-                                  (COND
-                                   ((SPADCALL |tmp| "{}" (QREFELT % 67))
-                                    (COND
-                                     ((SPADCALL |tmp| " " (QREFELT % 67))
-                                      (LETT |form|
-                                            (SPADCALL |form|
-                                                      (LIST " \\sb "
-                                                            (|TEX;group| |tmp|
-                                                             %))
-                                                      (QREFELT % 68)))))))))
-                                (LETT |args| (CDR |args|))
+                                      (|TEX;group|
+                                       (|TEX;formatExpr| (|SPADfirst| |args|)
+                                        (QREFELT % 13) %)
+                                       %))
                                 (EXIT
                                  (COND
-                                  ((NULL |args|)
+                                  ((NULL (CDR |args|))
                                    (|TEX;group|
-                                    (SPADCALL |form| (QREFELT % 57)) %))
+                                    (SPADCALL (LIST "\\sqrt " |tmp|)
+                                              (QREFELT % 57))
+                                    %))
                                   (#3#
-                                   (SEQ
-                                    (LETT |tmp|
-                                          (|TEX;formatExpr|
-                                           (|SPADfirst| |args|) (QREFELT % 13)
-                                           %))
-                                    (COND
-                                     ((SPADCALL |tmp| "" (QREFELT % 67))
-                                      (COND
-                                       ((SPADCALL |tmp| "{}" (QREFELT % 67))
-                                        (COND
-                                         ((SPADCALL |tmp| " " (QREFELT % 67))
-                                          (LETT |form|
-                                                (SPADCALL |form|
-                                                          (LIST " \\sp "
-                                                                (|TEX;group|
-                                                                 |tmp| %))
-                                                          (QREFELT %
-                                                                   68)))))))))
-                                    (LETT |args| (CDR |args|))
-                                    (EXIT
-                                     (COND
-                                      ((NULL |args|)
-                                       (|TEX;group|
-                                        (SPADCALL |form| (QREFELT % 57)) %))
-                                      (#3#
-                                       (SEQ
-                                        (LETT |tmp|
-                                              (|TEX;formatExpr|
-                                               (|SPADfirst| |args|)
-                                               (QREFELT % 13) %))
-                                        (COND
-                                         ((SPADCALL |tmp| "" (QREFELT % 67))
-                                          (COND
-                                           ((SPADCALL |tmp| "{}"
-                                                      (QREFELT % 67))
-                                            (COND
-                                             ((SPADCALL |tmp| " "
-                                                        (QREFELT % 67))
-                                              (SEQ
-                                               (LETT |form|
-                                                     (SPADCALL
-                                                      (LIST " \\sp "
-                                                            (|TEX;group| |tmp|
-                                                             %))
-                                                      |form| (QREFELT % 68)))
-                                               (EXIT
-                                                (LETT |prescript| 'T)))))))))
-                                        (LETT |args| (CDR |args|))
-                                        (EXIT
-                                         (COND
-                                          ((NULL |args|)
+                                   (|TEX;group|
+                                    (SPADCALL
+                                     (LIST "\\root "
                                            (|TEX;group|
-                                            (SPADCALL
-                                             (COND
-                                              (|prescript| (CONS "{}" |form|))
-                                              (#3# |form|))
-                                             (QREFELT % 57))
+                                            (|TEX;formatExpr|
+                                             (|SPADfirst| (CDR |args|))
+                                             (QREFELT % 13) %)
+                                            %)
+                                           " \\of " |tmp|)
+                                     (QREFELT % 57))
+                                    %))))))))
+                       ((EQUAL |op| 'SEGMENT)
+                        (SEQ
+                         (LETT |tmp|
+                               (SPADCALL
+                                (LIST
+                                 (|TEX;formatExpr| (|SPADfirst| |args|)
+                                  (QREFELT % 13) %)
+                                 "..")
+                                (QREFELT % 57)))
+                         (EXIT
+                          (|TEX;group|
+                           (COND ((NULL (CDR |args|)) |tmp|)
+                                 (#3#
+                                  (SPADCALL
+                                   (LIST |tmp|
+                                         (|TEX;formatExpr|
+                                          (|SPADfirst| (CDR |args|))
+                                          (QREFELT % 13) %))
+                                   (QREFELT % 57))))
+                           %))))
+                       ((EQUAL |op| 'SUB)
+                        (|TEX;group|
+                         (SPADCALL
+                          (LIST
+                           (|TEX;formatExpr| (|SPADfirst| |args|)
+                            (QREFELT % 13) %)
+                           " \\sb "
+                           (|TEX;formatSpecial| 'AGGLST (CDR |args|)
+                            (QREFELT % 13) %))
+                          (QREFELT % 57))
+                         %))
+                       ((EQUAL |op| 'SUPERSUB)
+                        (SEQ
+                         (LETT |form|
+                               (LIST
+                                (|TEX;formatExpr| (|SPADfirst| |args|)
+                                 (QREFELT % 13) %)))
+                         (LETT |args| (CDR |args|))
+                         (EXIT
+                          (COND
+                           ((NULL |args|) (SPADCALL |form| (QREFELT % 57)))
+                           (#3#
+                            (SEQ
+                             (LETT |tmp|
+                                   (|TEX;formatExpr| (|SPADfirst| |args|)
+                                    (QREFELT % 13) %))
+                             (COND
+                              ((SPADCALL |tmp| "" (QREFELT % 67))
+                               (COND
+                                ((SPADCALL |tmp| "{}" (QREFELT % 67))
+                                 (COND
+                                  ((SPADCALL |tmp| " " (QREFELT % 67))
+                                   (LETT |form|
+                                         (SPADCALL |form|
+                                                   (LIST " \\sb "
+                                                         (|TEX;group| |tmp| %))
+                                                   (QREFELT % 68)))))))))
+                             (LETT |args| (CDR |args|))
+                             (EXIT
+                              (COND
+                               ((NULL |args|)
+                                (|TEX;group| (SPADCALL |form| (QREFELT % 57))
+                                 %))
+                               (#3#
+                                (SEQ
+                                 (LETT |tmp|
+                                       (|TEX;formatExpr| (|SPADfirst| |args|)
+                                        (QREFELT % 13) %))
+                                 (COND
+                                  ((SPADCALL |tmp| "" (QREFELT % 67))
+                                   (COND
+                                    ((SPADCALL |tmp| "{}" (QREFELT % 67))
+                                     (COND
+                                      ((SPADCALL |tmp| " " (QREFELT % 67))
+                                       (LETT |form|
+                                             (SPADCALL |form|
+                                                       (LIST " \\sp "
+                                                             (|TEX;group| |tmp|
+                                                              %))
+                                                       (QREFELT % 68)))))))))
+                                 (LETT |args| (CDR |args|))
+                                 (EXIT
+                                  (COND
+                                   ((NULL |args|)
+                                    (|TEX;group|
+                                     (SPADCALL |form| (QREFELT % 57)) %))
+                                   (#3#
+                                    (SEQ
+                                     (LETT |tmp|
+                                           (|TEX;formatExpr|
+                                            (|SPADfirst| |args|) (QREFELT % 13)
                                             %))
-                                          (#3#
+                                     (COND
+                                      ((SPADCALL |tmp| "" (QREFELT % 67))
+                                       (COND
+                                        ((SPADCALL |tmp| "{}" (QREFELT % 67))
+                                         (COND
+                                          ((SPADCALL |tmp| " " (QREFELT % 67))
                                            (SEQ
-                                            (LETT |tmp|
-                                                  (|TEX;formatExpr|
-                                                   (|SPADfirst| |args|)
-                                                   (QREFELT % 13) %))
+                                            (LETT |form|
+                                                  (SPADCALL
+                                                   (LIST " \\sp "
+                                                         (|TEX;group| |tmp| %))
+                                                   |form| (QREFELT % 68)))
+                                            (EXIT (LETT |prescript| 'T)))))))))
+                                     (LETT |args| (CDR |args|))
+                                     (EXIT
+                                      (COND
+                                       ((NULL |args|)
+                                        (|TEX;group|
+                                         (SPADCALL
+                                          (COND
+                                           (|prescript| (CONS "{}" |form|))
+                                           (#3# |form|))
+                                          (QREFELT % 57))
+                                         %))
+                                       (#3#
+                                        (SEQ
+                                         (LETT |tmp|
+                                               (|TEX;formatExpr|
+                                                (|SPADfirst| |args|)
+                                                (QREFELT % 13) %))
+                                         (COND
+                                          ((SPADCALL |tmp| "" (QREFELT % 67))
+                                           (COND
+                                            ((SPADCALL |tmp| "{}"
+                                                       (QREFELT % 67))
+                                             (COND
+                                              ((SPADCALL |tmp| " "
+                                                         (QREFELT % 67))
+                                               (SEQ
+                                                (LETT |form|
+                                                      (SPADCALL
+                                                       (LIST " \\sb "
+                                                             (|TEX;group| |tmp|
+                                                              %))
+                                                       |form| (QREFELT % 68)))
+                                                (EXIT
+                                                 (LETT |prescript| 'T)))))))))
+                                         (EXIT
+                                          (|TEX;group|
+                                           (SPADCALL
                                             (COND
-                                             ((SPADCALL |tmp| ""
-                                                        (QREFELT % 67))
-                                              (COND
-                                               ((SPADCALL |tmp| "{}"
-                                                          (QREFELT % 67))
-                                                (COND
-                                                 ((SPADCALL |tmp| " "
-                                                            (QREFELT % 67))
-                                                  (SEQ
-                                                   (LETT |form|
-                                                         (SPADCALL
-                                                          (LIST " \\sb "
-                                                                (|TEX;group|
-                                                                 |tmp| %))
-                                                          |form|
-                                                          (QREFELT % 68)))
-                                                   (EXIT
-                                                    (LETT |prescript|
-                                                          'T)))))))))
-                                            (EXIT
-                                             (|TEX;group|
-                                              (SPADCALL
-                                               (COND
-                                                (|prescript|
-                                                 (CONS "{}" |form|))
-                                                (#3# |form|))
-                                               (QREFELT % 57))
-                                              %))))))))))))))))))))
-                     ((EQUAL |op| 'SC)
-                      (COND ((NULL |args|) "")
-                            (#3#
-                             (SEQ
-                              (LETT |tmp|
-                                    (|TEX;formatNaryNoGroup| 'STRSEP " \\\\ "
-                                     800 |args| (QREFELT % 13) %))
-                              (EXIT
-                               (|TEX;group|
-                                (SPADCALL
-                                 (LIST "\\begin{array}{l} " |tmp|
-                                       " \\end{array} ")
-                                 (QREFELT % 57))
-                                %))))))
-                     ((EQUAL |op| 'MATRIX) (|TEX;formatMatrix| (CDR |args|) %))
-                     ((EQUAL |op| 'ZAG)
-                      (SPADCALL
-                       (LIST " \\zag{"
-                             (|TEX;formatExpr| (|SPADfirst| |args|)
-                              (QREFELT % 13) %)
-                             "}{"
-                             (|TEX;formatExpr| (|SPADfirst| (CDR |args|))
-                              (QREFELT % 13) %)
-                             "}")
-                       (QREFELT % 57)))
-                     (#3#
-                      (SPADCALL
-                       (LIST "not done yet for "
-                             (SPADCALL |op| (QREFELT % 69)))
-                       (QREFELT % 57)))))))) 
+                                             (|prescript| (CONS "{}" |form|))
+                                             (#3# |form|))
+                                            (QREFELT % 57))
+                                           %))))))))))))))))))))
+                       ((EQUAL |op| 'SC)
+                        (COND ((NULL |args|) "")
+                              (#3#
+                               (SEQ
+                                (LETT |tmp|
+                                      (|TEX;formatNaryNoGroup| 'STRSEP " \\\\ "
+                                       800 |args| (QREFELT % 13) %))
+                                (EXIT
+                                 (|TEX;group|
+                                  (SPADCALL
+                                   (LIST "\\begin{array}{l} " |tmp|
+                                         " \\end{array} ")
+                                   (QREFELT % 57))
+                                  %))))))
+                       ((EQUAL |op| 'MATRIX)
+                        (|TEX;formatMatrix| (CDR |args|) %))
+                       ((EQUAL |op| 'ZAG)
+                        (SPADCALL
+                         (LIST " \\zag{"
+                               (|TEX;formatExpr| (|SPADfirst| |args|)
+                                (QREFELT % 13) %)
+                               "}{"
+                               (|TEX;formatExpr| (|SPADfirst| (CDR |args|))
+                                (QREFELT % 13) %)
+                               "}")
+                         (QREFELT % 57)))
+                       (#3#
+                        (SPADCALL
+                         (LIST "not done yet for "
+                               (SPADCALL |op| (QREFELT % 69)))
+                         (QREFELT % 57)))))))))) 
 
 (SDEFUN |TEX;formatPlex|
         ((|op| (|Symbol|)) (|args| (|List| (|OutputForm|)))
@@ -796,7 +793,7 @@
                        (EXIT (|TEX;group| |s| %))))))))) 
 
 (SDEFUN |TEX;formatMatrix| ((|args| (|List| (|OutputForm|))) (% (|String|)))
-        (SPROG ((|cols| (|String|)) (#1=#:G738 NIL) (|i| NIL))
+        (SPROG ((|cols| (|String|)) (#1=#:G315 NIL) (|i| NIL))
                (SEQ (LETT |cols| "{")
                     (SEQ (LETT |i| 1)
                          (LETT #1#
@@ -894,6 +891,7 @@
                                    ((EQUAL |op| '/) " \\over ")
                                    (#2#
                                     (COND ((EQUAL |op| 'OVER) " \\over ")
+                                          ((EQUAL |op| '->) " \\to ")
                                           ((EQUAL |op| '+->) " \\mapsto ")
                                           ((EQUAL |op| '~=) " \\ne ")
                                           ((EQUAL |op| '<=) " \\leq ")
@@ -944,7 +942,7 @@
         ((|op| (|Symbol|)) (|sep| (|String|)) (|opprec| (|Integer|))
          (|args| (|List| (|OutputForm|))) (|prec| (|Integer|)) (% (|String|)))
         (SPROG
-         ((|s| (|String|)) (|l| (|List| (|String|))) (#1=#:G768 NIL) (|a| NIL)
+         ((|s| (|String|)) (|l| (|List| (|String|))) (#1=#:G345 NIL) (|a| NIL)
           (|opPrec| (|Integer|)) (|ops| (|String|)) (|p| (|Integer|)))
          (SEQ
           (COND ((NULL |args|) "")
@@ -1003,9 +1001,9 @@
         (SPROG
          ((|op| #1=(|Symbol|)) (|nargs| (|Integer|))
           (|args| (|List| (|OutputForm|))) (|opf| (|OutputForm|))
-          (|i| (|Integer|)) (|str| (|String|)) (|s| (|String|)) (#2=#:G816 NIL)
-          (#3=#:G815 NIL) (|u| (|UniversalSegment| (|Integer|)))
-          (|len| (|Integer|)) (#4=#:G814 NIL) (|es| #1#) (|nstr| (|String|))
+          (|i| (|Integer|)) (|str| (|String|)) (|s| (|String|)) (#2=#:G393 NIL)
+          (#3=#:G392 NIL) (|u| (|UniversalSegment| (|Integer|)))
+          (|len| (|Integer|)) (#4=#:G391 NIL) (|es| #1#) (|nstr| (|String|))
           (|intSplitLen| (|Integer|)))
          (SEQ
           (EXIT
@@ -1076,7 +1074,7 @@
                              (EXIT
                               (COND
                                ((EQUAL |es| '|%pi|)
-                                (PROGN (LETT #4# "\\pi") (GO #6=#:G813)))
+                                (PROGN (LETT #4# "\\pi") (GO #6=#:G390)))
                                ((EQUAL |es| '|%e|)
                                 (PROGN (LETT #4# "e") (GO #6#)))
                                ((EQUAL |es| '|%i|)
@@ -1248,7 +1246,7 @@
 
 (DEFUN |TexFormat| ()
   (SPROG NIL
-         (PROG (#1=#:G818)
+         (PROG (#1=#:G395)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|TexFormat|))
@@ -1283,8 +1281,9 @@
           (QSETREFV % 13 0)
           (QSETREFV % 14 '(-))
           (QSETREFV % 15 '(710))
-          (QSETREFV % 16 '(+-> |\|| ^ / = ~= < <= > >= OVER LET))
-          (QSETREFV % 17 (LIST 0 0 900 700 400 400 400 400 400 400 700 125))
+          (QSETREFV % 16 '(+-> |\|| ^ / = ~= < <= > >= OVER LET ->))
+          (QSETREFV % 17
+                    (LIST 0 0 900 700 400 400 400 400 400 400 700 125 1001))
           (QSETREFV % 18 '(- + * |,| |;| ROW STRSEP TENSOR))
           (QSETREFV % 19 (LIST 700 700 800 110 110 0 0 850))
           (QSETREFV % 20 '(ROW))
@@ -1292,7 +1291,7 @@
           (QSETREFV % 22 '(750 750 750 750 700))
           (QSETREFV % 23
                     '(MATRIX BRACKET BRACE CONCATB VCONCAT AGGLST CONCAT
-                      OVERBAR ROOT SUB TAG SUPERSUB ZAG AGGSET SC PAREN SEGMENT
+                      OVERBAR ROOT SUB ~> SUPERSUB ZAG AGGSET SC PAREN SEGMENT
                       QUOTE |theMap| SLASH PRIME))
           (QSETREFV % 24
                     '(|cos| |cot| |csc| |log| |sec| |sin| |tan| |cosh| |coth|

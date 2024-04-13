@@ -2,7 +2,7 @@
 (SDEFUN |GRAY;firstSubsetGray;PiV;1|
         ((|n| (|PositiveInteger|)) (% (|Vector| (|Vector| (|Integer|)))))
         (SPROG
-         ((#1=#:G453 NIL) (|i| NIL) (|vv| (|Vector| (|Vector| (|Integer|)))))
+         ((#1=#:G13 NIL) (|i| NIL) (|vv| (|Vector| (|Vector| (|Integer|)))))
          (SEQ (LETT |vv| (MAKEARR1 2 #()))
               (SPADCALL |vv| 1 (MAKEARR1 |n| 0) (QREFELT % 9))
               (SPADCALL |vv| 2 (MAKEARR1 (+ |n| 1) 1) (QREFELT % 9))
@@ -36,7 +36,7 @@
 
 (DEFUN |GrayCode| ()
   (SPROG NIL
-         (PROG (#1=#:G458)
+         (PROG (#1=#:G18)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|GrayCode|))

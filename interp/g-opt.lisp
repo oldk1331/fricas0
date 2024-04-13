@@ -1179,7 +1179,7 @@
 ;               (RECORDCOPY   optRECORDCOPY)) _
 ;       repeat MAKEPROP(CAR x,'OPTIMIZE, CADR x)
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (PROG ()
     (RETURN
      ((LAMBDA (|bfVar#10| |x|)

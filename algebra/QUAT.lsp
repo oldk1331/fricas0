@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |Quaternion;|)) 
 
-(DEFUN |Quaternion| (#1=#:G465)
+(DEFUN |Quaternion| (#1=#:G33)
   (SPROG NIL
-         (PROG (#2=#:G466)
+         (PROG (#2=#:G34)
            (RETURN
             (COND
              ((LETT #2#
@@ -18,7 +18,7 @@
                  ((NOT #2#) (HREM |$ConstructorCache| '|Quaternion|)))))))))) 
 
 (DEFUN |Quaternion;| (|#1|)
-  (SPROG ((|pv$| NIL) (#1=#:G464 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (#1=#:G32 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Quaternion| DV$1))

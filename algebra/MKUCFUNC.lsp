@@ -37,9 +37,9 @@
 
 (DECLAIM (NOTINLINE |MakeUnaryCompiledFunction;|)) 
 
-(DEFUN |MakeUnaryCompiledFunction| (&REST #1=#:G456)
+(DEFUN |MakeUnaryCompiledFunction| (&REST #1=#:G19)
   (SPROG NIL
-         (PROG (#2=#:G457)
+         (PROG (#2=#:G20)
            (RETURN
             (COND
              ((LETT #2#

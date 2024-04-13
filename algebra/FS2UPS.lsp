@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |FunctionSpaceToUnivariatePowerSeries;|)) 
 
-(DEFUN |FunctionSpaceToUnivariatePowerSeries| (&REST #1=#:G460)
+(DEFUN |FunctionSpaceToUnivariatePowerSeries| (&REST #1=#:G25)
   (SPROG NIL
-         (PROG (#2=#:G461)
+         (PROG (#2=#:G26)
            (RETURN
             (COND
              ((LETT #2#

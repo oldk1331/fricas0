@@ -105,7 +105,7 @@
 
 (SDEFUN |LF;eqint| ((|k1| (|Kernel| F)) (|k2| (|Kernel| F)) (% (|Boolean|)))
         (SPROG
-         ((|res| (|Boolean|)) (#1=#:G509 NIL) (|a2| #2=(|List| F)) (|a1| #2#))
+         ((|res| (|Boolean|)) (#1=#:G88 NIL) (|a2| #2=(|List| F)) (|a1| #2#))
          (SEQ
           (EXIT
            (SEQ (LETT |a1| (SPADCALL |k1| (QREFELT % 70)))
@@ -113,7 +113,7 @@
                 (LETT |res|
                       (SPADCALL (SPADCALL |k1| (QREFELT % 71))
                                 (SPADCALL |k2| (QREFELT % 71)) (QREFELT % 72)))
-                (COND ((NULL |res|) (PROGN (LETT #1# |res|) (GO #3=#:G508))))
+                (COND ((NULL |res|) (PROGN (LETT #1# |res|) (GO #3=#:G87))))
                 (LETT |res| (SPADCALL |a1| |a2| (QREFELT % 73)))
                 (COND (|res| (PROGN (LETT #1# |res|) (GO #3#))))
                 (EXIT
@@ -164,8 +164,8 @@
 
 (SDEFUN |LF;dviint| ((|l| (|List| F)) (|v| (|Symbol|)) (% (F)))
         (SPROG
-         ((|m| (|Integer|)) (|lv| (|List| (|Symbol|))) (#1=#:G527 NIL)
-          (|vf| NIL) (#2=#:G526 NIL) (|lvf| (|List| F))
+         ((|m| (|Integer|)) (|lv| (|List| (|Symbol|))) (#1=#:G110 NIL)
+          (|vf| NIL) (#2=#:G109 NIL) (|lvf| (|List| F))
           (|n| (|NonNegativeInteger|))
           (|nu| (|Union| (|NonNegativeInteger|) "failed")))
          (SEQ (LETT |nu| (SPADCALL (LENGTH |l|) 2 (QREFELT % 83)))
@@ -199,58 +199,75 @@
 
 (SDEFUN |LF;dvdint| ((|l| (|List| F)) (|x| (|Symbol|)) (% (F)))
         (SPROG
-         ((|g| (F)) (|f| (F)) (|h| (F)) (|k| (|Kernel| F)) (|d| (F)) (|y| (F)))
+         ((|p3| (F)) (|df| (F)) (|p2| (F)) (|dg| (F)) (|p1| (F)) (|dh| (F))
+          (|g| (F)) (|h| (F)) (|f| (F)) (|k| (|Kernel| F)) (|d| (F)) (|y| (F)))
          (SEQ
           (COND
            ((EQUAL |x|
                    (SPADCALL (LETT |y| (SPADCALL |l| (QREFELT % 55)))
                              (QREFELT % 88)))
             (|spadConstant| % 46))
-           ('T
+           (#1='T
             (SEQ
              (LETT |k|
                    (SPADCALL (LETT |d| (SPADCALL |l| (QREFELT % 52)))
                              (QREFELT % 54)))
+             (LETT |f| (|SPADfirst| |l|))
+             (LETT |h| (SPADCALL (CDR (CDR |l|)) (QREFELT % 55)))
+             (LETT |g| (SPADCALL (CDR |l|) (QREFELT % 55)))
+             (LETT |dh| (SPADCALL |h| |x| (QREFELT % 78)))
+             (LETT |p1|
+                   (SEQ (LETT |dh| (SPADCALL |h| |x| (QREFELT % 78)))
+                        (EXIT
+                         (COND
+                          ((SPADCALL |dh| (|spadConstant| % 46) (QREFELT % 50))
+                           (|spadConstant| % 46))
+                          (#1#
+                           (SPADCALL |dh| (SPADCALL |f| |k| |h| (QREFELT % 56))
+                                     (QREFELT % 79)))))))
+             (LETT |p2|
+                   (SEQ (LETT |dg| (SPADCALL |g| |x| (QREFELT % 78)))
+                        (EXIT
+                         (COND
+                          ((SPADCALL |dg| (|spadConstant| % 46) (QREFELT % 50))
+                           (|spadConstant| % 46))
+                          (#1#
+                           (SPADCALL |dg| (SPADCALL |f| |k| |g| (QREFELT % 56))
+                                     (QREFELT % 79)))))))
+             (LETT |p3|
+                   (SEQ (LETT |df| (SPADCALL |f| |x| (QREFELT % 78)))
+                        (EXIT
+                         (COND
+                          ((SPADCALL |df| (|spadConstant| % 46) (QREFELT % 50))
+                           (|spadConstant| % 46))
+                          (#1#
+                           (SPADCALL (QREFELT % 18) (LIST |df| |d| |y| |g| |h|)
+                                     (QREFELT % 61)))))))
              (EXIT
-              (SPADCALL
-               (SPADCALL
-                (SPADCALL
-                 (SPADCALL (LETT |h| (SPADCALL (CDR (CDR |l|)) (QREFELT % 55)))
-                           |x| (QREFELT % 78))
-                 (SPADCALL (LETT |f| (|SPADfirst| |l|)) |k| |h| (QREFELT % 56))
-                 (QREFELT % 79))
-                (SPADCALL
-                 (SPADCALL (LETT |g| (SPADCALL (CDR |l|) (QREFELT % 55))) |x|
-                           (QREFELT % 78))
-                 (SPADCALL |f| |k| |g| (QREFELT % 56)) (QREFELT % 79))
-                (QREFELT % 92))
-               (SPADCALL (QREFELT % 18)
-                         (LIST (SPADCALL |f| |x| (QREFELT % 78)) |d| |y| |g|
-                               |h|)
-                         (QREFELT % 61))
-               (QREFELT % 80))))))))) 
+              (SPADCALL (SPADCALL |p1| |p2| (QREFELT % 80)) |p3|
+                        (QREFELT % 80))))))))) 
 
 (SDEFUN |LF;integral;FSbF;31| ((|f| (F)) (|s| (|SegmentBinding| F)) (% (F)))
         (SPROG ((|x| (|Kernel| F)))
                (SEQ
                 (LETT |x|
-                      (SPADCALL (SPADCALL |s| (QREFELT % 94)) (QREFELT % 58)))
+                      (SPADCALL (SPADCALL |s| (QREFELT % 93)) (QREFELT % 58)))
                 (EXIT
                  (SPADCALL (QREFELT % 18)
                            (LIST
                             (SPADCALL |f| |x| (QREFELT % 12) (QREFELT % 56))
                             (QREFELT % 12) (SPADCALL |x| (QREFELT % 59))
-                            (SPADCALL (SPADCALL |s| (QREFELT % 96))
-                                      (QREFELT % 97))
-                            (SPADCALL (SPADCALL |s| (QREFELT % 96))
-                                      (QREFELT % 98)))
+                            (SPADCALL (SPADCALL |s| (QREFELT % 95))
+                                      (QREFELT % 96))
+                            (SPADCALL (SPADCALL |s| (QREFELT % 95))
+                                      (QREFELT % 97)))
                            (QREFELT % 61)))))) 
 
 (SDEFUN |LF;ili| ((|x| (F)) (% (F)))
         (COND
          ((SPADCALL |x| (|spadConstant| % 49) (QREFELT % 50))
           (|error| "Invalid argument"))
-         ((SPADCALL |x| '|exp| (QREFELT % 100))
+         ((SPADCALL |x| '|exp| (QREFELT % 99))
           (SPADCALL
            (|SPADfirst|
             (SPADCALL (SPADCALL |x| (QREFELT % 54)) (QREFELT % 70)))
@@ -261,7 +278,7 @@
         (COND
          ((SPADCALL |x| (|spadConstant| % 46) (QREFELT % 50))
           (|error| "Invalid argument"))
-         ((SPADCALL |x| '|log| (QREFELT % 100))
+         ((SPADCALL |x| '|log| (QREFELT % 99))
           (SPADCALL
            (|SPADfirst|
             (SPADCALL (SPADCALL |x| (QREFELT % 54)) (QREFELT % 70)))
@@ -269,20 +286,20 @@
          ('T (SPADCALL (QREFELT % 19) |x| (QREFELT % 47))))) 
 
 (SDEFUN |LF;operator;2Bo;34| ((|op| (|BasicOperator|)) (% (|BasicOperator|)))
-        (COND ((SPADCALL |op| '|integral| (QREFELT % 101)) (QREFELT % 16))
-              ((SPADCALL |op| '|%iint| (QREFELT % 101)) (QREFELT % 17))
-              ((SPADCALL |op| '|%defint| (QREFELT % 101)) (QREFELT % 18))
-              ((SPADCALL |op| '|Ei| (QREFELT % 101)) (QREFELT % 19))
-              ((SPADCALL |op| '|Si| (QREFELT % 101)) (QREFELT % 21))
-              ((SPADCALL |op| '|Ci| (QREFELT % 101)) (QREFELT % 22))
-              ((SPADCALL |op| '|Shi| (QREFELT % 101)) (QREFELT % 23))
-              ((SPADCALL |op| '|Chi| (QREFELT % 101)) (QREFELT % 24))
-              ((SPADCALL |op| '|li| (QREFELT % 101)) (QREFELT % 20))
-              ((SPADCALL |op| '|erf| (QREFELT % 101)) (QREFELT % 26))
-              ((SPADCALL |op| '|erfi| (QREFELT % 101)) (QREFELT % 27))
-              ((SPADCALL |op| '|dilog| (QREFELT % 101)) (QREFELT % 25))
-              ((SPADCALL |op| '|fresnelC| (QREFELT % 101)) (QREFELT % 29))
-              ((SPADCALL |op| '|fresnelS| (QREFELT % 101)) (QREFELT % 28))
+        (COND ((SPADCALL |op| '|integral| (QREFELT % 100)) (QREFELT % 16))
+              ((SPADCALL |op| '|%iint| (QREFELT % 100)) (QREFELT % 17))
+              ((SPADCALL |op| '|%defint| (QREFELT % 100)) (QREFELT % 18))
+              ((SPADCALL |op| '|Ei| (QREFELT % 100)) (QREFELT % 19))
+              ((SPADCALL |op| '|Si| (QREFELT % 100)) (QREFELT % 21))
+              ((SPADCALL |op| '|Ci| (QREFELT % 100)) (QREFELT % 22))
+              ((SPADCALL |op| '|Shi| (QREFELT % 100)) (QREFELT % 23))
+              ((SPADCALL |op| '|Chi| (QREFELT % 100)) (QREFELT % 24))
+              ((SPADCALL |op| '|li| (QREFELT % 100)) (QREFELT % 20))
+              ((SPADCALL |op| '|erf| (QREFELT % 100)) (QREFELT % 26))
+              ((SPADCALL |op| '|erfi| (QREFELT % 100)) (QREFELT % 27))
+              ((SPADCALL |op| '|dilog| (QREFELT % 100)) (QREFELT % 25))
+              ((SPADCALL |op| '|fresnelC| (QREFELT % 100)) (QREFELT % 29))
+              ((SPADCALL |op| '|fresnelS| (QREFELT % 100)) (QREFELT % 28))
               ('T (|error| "Not a Liouvillian operator")))) 
 
 (SDEFUN |LF;pint| ((|l| (|List| (|InputForm|))) (% (|InputForm|)))
@@ -325,9 +342,9 @@
 
 (DECLAIM (NOTINLINE |LiouvillianFunction;|)) 
 
-(DEFUN |LiouvillianFunction| (&REST #1=#:G613)
+(DEFUN |LiouvillianFunction| (&REST #1=#:G214)
   (SPROG NIL
-         (PROG (#2=#:G614)
+         (PROG (#2=#:G215)
            (RETURN
             (COND
              ((LETT #2#
@@ -376,53 +393,53 @@
           (QSETREFV % 28 (SPADCALL '|fresnelS| (QREFELT % 15)))
           (QSETREFV % 29 (SPADCALL '|fresnelC| (QREFELT % 15)))
           (SPADCALL (QREFELT % 19) (CONS (|function| |LF;iei|) %)
-                    (QREFELT % 105))
+                    (QREFELT % 104))
           (SPADCALL (QREFELT % 20) (CONS (|function| |LF;ili|) %)
-                    (QREFELT % 105))
+                    (QREFELT % 104))
           (SPADCALL (QREFELT % 21) (CONS (|function| |LF;isi|) %)
-                    (QREFELT % 105))
+                    (QREFELT % 104))
           (SPADCALL (QREFELT % 22) (CONS (|function| |LF;ici|) %)
-                    (QREFELT % 105))
+                    (QREFELT % 104))
           (SPADCALL (QREFELT % 23) (CONS (|function| |LF;ishi|) %)
-                    (QREFELT % 105))
+                    (QREFELT % 104))
           (SPADCALL (QREFELT % 24) (CONS (|function| |LF;ichi|) %)
-                    (QREFELT % 105))
+                    (QREFELT % 104))
           (SPADCALL (QREFELT % 26) (CONS (|function| |LF;ierf|) %)
-                    (QREFELT % 105))
+                    (QREFELT % 104))
           (SPADCALL (QREFELT % 27) (CONS (|function| |LF;ierfi|) %)
-                    (QREFELT % 105))
+                    (QREFELT % 104))
           (SPADCALL (QREFELT % 25) (CONS (|function| |LF;ili2|) %)
-                    (QREFELT % 105))
+                    (QREFELT % 104))
           (SPADCALL (QREFELT % 28) (CONS (|function| |LF;ifis|) %)
-                    (QREFELT % 105))
+                    (QREFELT % 104))
           (SPADCALL (QREFELT % 29) (CONS (|function| |LF;ific|) %)
-                    (QREFELT % 105))
+                    (QREFELT % 104))
           (SPADCALL (QREFELT % 16) (CONS (|function| |LF;iint|) %)
-                    (QREFELT % 107))
+                    (QREFELT % 106))
           (SPADCALL (QREFELT % 17) (CONS (|function| |LF;iiint|) %)
-                    (QREFELT % 107))
+                    (QREFELT % 106))
           (SPADCALL (QREFELT % 21) (CONS #'|LiouvillianFunction!0| %)
-                    (QREFELT % 110))
+                    (QREFELT % 109))
           (SPADCALL (QREFELT % 22) (CONS #'|LiouvillianFunction!1| %)
-                    (QREFELT % 110))
+                    (QREFELT % 109))
           (SPADCALL (QREFELT % 23) (CONS #'|LiouvillianFunction!2| %)
-                    (QREFELT % 110))
+                    (QREFELT % 109))
           (SPADCALL (QREFELT % 24) (CONS #'|LiouvillianFunction!3| %)
-                    (QREFELT % 110))
+                    (QREFELT % 109))
           (SPADCALL (QREFELT % 19) (CONS #'|LiouvillianFunction!4| %)
-                    (QREFELT % 110))
+                    (QREFELT % 109))
           (SPADCALL (QREFELT % 20) (CONS #'|LiouvillianFunction!5| %)
-                    (QREFELT % 110))
+                    (QREFELT % 109))
           (SPADCALL (QREFELT % 26) (CONS #'|LiouvillianFunction!6| %)
-                    (QREFELT % 110))
+                    (QREFELT % 109))
           (SPADCALL (QREFELT % 27) (CONS #'|LiouvillianFunction!7| %)
-                    (QREFELT % 110))
+                    (QREFELT % 109))
           (SPADCALL (QREFELT % 25) (CONS #'|LiouvillianFunction!8| %)
-                    (QREFELT % 110))
+                    (QREFELT % 109))
           (SPADCALL (QREFELT % 28) (CONS #'|LiouvillianFunction!9| %)
-                    (QREFELT % 110))
+                    (QREFELT % 109))
           (SPADCALL (QREFELT % 29) (CONS #'|LiouvillianFunction!10| %)
-                    (QREFELT % 110))
+                    (QREFELT % 109))
           (SPADCALL (QREFELT % 16) '|%specialEqual|
                     (CONS (|function| |LF;eqint|) %) (QREFELT % 125))
           (SPADCALL (QREFELT % 16) '|%specialDiff|
@@ -445,56 +462,56 @@
 (DEFUN |LiouvillianFunction!10| (|z1| %)
   (SPADCALL
    (SPADCALL
-    (SPADCALL (SPADCALL (QREFELT % 121)) (SPADCALL |z1| 2 (QREFELT % 118))
+    (SPADCALL (SPADCALL (QREFELT % 120)) (SPADCALL |z1| 2 (QREFELT % 117))
               (QREFELT % 79))
-    (SPADCALL 2 (QREFELT % 123)) (QREFELT % 109))
-   (QREFELT % 111))) 
+    (SPADCALL 2 (QREFELT % 123)) (QREFELT % 108))
+   (QREFELT % 110))) 
 
 (DEFUN |LiouvillianFunction!9| (|z1| %)
   (SPADCALL
    (SPADCALL
-    (SPADCALL (SPADCALL (QREFELT % 121)) (SPADCALL |z1| 2 (QREFELT % 118))
+    (SPADCALL (SPADCALL (QREFELT % 120)) (SPADCALL |z1| 2 (QREFELT % 117))
               (QREFELT % 79))
-    (SPADCALL 2 (QREFELT % 123)) (QREFELT % 109))
-   (QREFELT % 108))) 
+    (SPADCALL 2 (QREFELT % 123)) (QREFELT % 108))
+   (QREFELT % 107))) 
 
 (DEFUN |LiouvillianFunction!8| (|z1| %)
-  (SPADCALL (SPADCALL |z1| (QREFELT % 115))
-            (SPADCALL (|spadConstant| % 49) |z1| (QREFELT % 92))
-            (QREFELT % 109))) 
+  (SPADCALL (SPADCALL |z1| (QREFELT % 114))
+            (SPADCALL (|spadConstant| % 49) |z1| (QREFELT % 122))
+            (QREFELT % 108))) 
 
 (DEFUN |LiouvillianFunction!7| (|z1| %)
   (SPADCALL
-   (SPADCALL 2 (SPADCALL (SPADCALL |z1| 2 (QREFELT % 118)) (QREFELT % 114))
-             (QREFELT % 120))
-   (SPADCALL (SPADCALL (QREFELT % 121)) (QREFELT % 122)) (QREFELT % 109))) 
+   (SPADCALL 2 (SPADCALL (SPADCALL |z1| 2 (QREFELT % 117)) (QREFELT % 113))
+             (QREFELT % 119))
+   (SPADCALL (SPADCALL (QREFELT % 120)) (QREFELT % 121)) (QREFELT % 108))) 
 
 (DEFUN |LiouvillianFunction!6| (|z1| %)
   (SPADCALL
    (SPADCALL 2
              (SPADCALL
-              (SPADCALL (SPADCALL |z1| 2 (QREFELT % 118)) (QREFELT % 119))
-              (QREFELT % 114))
-             (QREFELT % 120))
-   (SPADCALL (SPADCALL (QREFELT % 121)) (QREFELT % 122)) (QREFELT % 109))) 
+              (SPADCALL (SPADCALL |z1| 2 (QREFELT % 117)) (QREFELT % 118))
+              (QREFELT % 113))
+             (QREFELT % 119))
+   (SPADCALL (SPADCALL (QREFELT % 120)) (QREFELT % 121)) (QREFELT % 108))) 
 
 (DEFUN |LiouvillianFunction!5| (|z1| %)
-  (SPADCALL (SPADCALL |z1| (QREFELT % 115)) (QREFELT % 116))) 
+  (SPADCALL (SPADCALL |z1| (QREFELT % 114)) (QREFELT % 115))) 
 
 (DEFUN |LiouvillianFunction!4| (|z1| %)
-  (SPADCALL (SPADCALL |z1| (QREFELT % 114)) |z1| (QREFELT % 109))) 
+  (SPADCALL (SPADCALL |z1| (QREFELT % 113)) |z1| (QREFELT % 108))) 
 
 (DEFUN |LiouvillianFunction!3| (|z1| %)
-  (SPADCALL (SPADCALL |z1| (QREFELT % 113)) |z1| (QREFELT % 109))) 
+  (SPADCALL (SPADCALL |z1| (QREFELT % 112)) |z1| (QREFELT % 108))) 
 
 (DEFUN |LiouvillianFunction!2| (|z1| %)
-  (SPADCALL (SPADCALL |z1| (QREFELT % 112)) |z1| (QREFELT % 109))) 
+  (SPADCALL (SPADCALL |z1| (QREFELT % 111)) |z1| (QREFELT % 108))) 
 
 (DEFUN |LiouvillianFunction!1| (|z1| %)
-  (SPADCALL (SPADCALL |z1| (QREFELT % 111)) |z1| (QREFELT % 109))) 
+  (SPADCALL (SPADCALL |z1| (QREFELT % 110)) |z1| (QREFELT % 108))) 
 
 (DEFUN |LiouvillianFunction!0| (|z1| %)
-  (SPADCALL (SPADCALL |z1| (QREFELT % 108)) |z1| (QREFELT % 109))) 
+  (SPADCALL (SPADCALL |z1| (QREFELT % 107)) |z1| (QREFELT % 108))) 
 
 (MAKEPROP '|LiouvillianFunction| '|infovec|
           (LIST
@@ -518,17 +535,17 @@
               (|NonNegativeInteger|) (181 . |exquo|) (187 . |rest|)
               (|Mapping| 42 7) (193 . |every?|) (199 . |first|)
               (205 . |retract|) (|List| 9) (210 . |position|) (216 . |Zero|)
-              (220 . -) (|SegmentBinding| 7) (226 . |variable|) (|Segment| 7)
-              (231 . |segment|) (236 . |low|) (241 . |high|)
-              |LF;integral;FSbF;31| (246 . |is?|) (252 . |is?|)
+              (|SegmentBinding| 7) (220 . |variable|) (|Segment| 7)
+              (225 . |segment|) (230 . |low|) (235 . |high|)
+              |LF;integral;FSbF;31| (240 . |is?|) (246 . |is?|)
               |LF;operator;2Bo;34| (|Mapping| 7 7)
-              (|BasicOperatorFunctions1| 7) (258 . |evaluate|) (|Mapping| 7 51)
-              (264 . |evaluate|) (270 . |sin|) (275 . /) (281 . |derivative|)
-              (287 . |cos|) (292 . |sinh|) (297 . |cosh|) (302 . |exp|)
-              (307 . |log|) (312 . |inv|) (|PositiveInteger|) (317 . ^)
-              (323 . -) (328 . *) (334 . |pi|) (338 . |sqrt|) (343 . |coerce|)
-              (|None|) (348 . |setProperty|) (|InputForm|) (355 . |convert|)
-              (360 . |convert|) (365 . |convert|))
+              (|BasicOperatorFunctions1| 7) (252 . |evaluate|) (|Mapping| 7 51)
+              (258 . |evaluate|) (264 . |sin|) (269 . /) (275 . |derivative|)
+              (281 . |cos|) (286 . |sinh|) (291 . |cosh|) (296 . |exp|)
+              (301 . |log|) (306 . |inv|) (|PositiveInteger|) (311 . ^)
+              (317 . -) (322 . *) (328 . |pi|) (332 . |sqrt|) (337 . -)
+              (343 . |coerce|) (|None|) (348 . |setProperty|) (|InputForm|)
+              (355 . |convert|) (360 . |convert|) (365 . |convert|))
            '#(|operator| 370 |li| 375 |integral| 380 |fresnelS| 392 |fresnelC|
               397 |erfi| 402 |erf| 407 |dilog| 412 |belong?| 417 |Si| 422 |Shi|
               427 |Ei| 432 |Ci| 437 |Chi| 442)
@@ -572,20 +589,20 @@
                                               78 2 7 0 0 0 79 2 7 0 0 0 80 2 82
                                               81 0 0 83 2 51 0 0 82 84 2 51 42
                                               85 0 86 2 51 0 0 82 87 1 7 9 0 88
-                                              2 89 74 9 0 90 0 6 0 91 2 7 0 0 0
-                                              92 1 93 9 0 94 1 93 95 0 96 1 95
-                                              7 0 97 1 95 7 0 98 2 7 42 0 9 100
-                                              2 13 42 0 9 101 2 104 13 13 103
-                                              105 2 104 13 13 106 107 1 7 0 0
-                                              108 2 7 0 0 0 109 2 104 13 13 103
+                                              2 89 74 9 0 90 0 6 0 91 1 92 9 0
+                                              93 1 92 94 0 95 1 94 7 0 96 1 94
+                                              7 0 97 2 7 42 0 9 99 2 13 42 0 9
+                                              100 2 103 13 13 102 104 2 103 13
+                                              13 105 106 1 7 0 0 107 2 7 0 0 0
+                                              108 2 103 13 13 102 109 1 7 0 0
                                               110 1 7 0 0 111 1 7 0 0 112 1 7 0
-                                              0 113 1 7 0 0 114 1 7 0 0 115 1 7
-                                              0 0 116 2 7 0 0 117 118 1 7 0 0
-                                              119 2 7 0 117 0 120 0 7 0 121 1 7
+                                              0 113 1 7 0 0 114 1 7 0 0 115 2 7
+                                              0 0 116 117 1 7 0 0 118 2 7 0 116
+                                              0 119 0 7 0 120 1 7 0 0 121 2 7 0
                                               0 0 122 1 7 0 74 123 3 13 0 0 9
                                               124 125 1 9 126 0 127 1 126 0 60
-                                              128 1 7 126 0 129 1 0 13 13 102 1
-                                              0 7 7 38 2 0 7 7 93 99 2 0 7 7 9
+                                              128 1 7 126 0 129 1 0 13 13 101 1
+                                              0 7 7 38 2 0 7 7 92 98 2 0 7 7 9
                                               62 1 0 7 7 40 1 0 7 7 41 1 0 7 7
                                               37 1 0 7 7 36 1 0 7 7 39 1 0 42
                                               13 44 1 0 7 7 31 1 0 7 7 33 1 0 7

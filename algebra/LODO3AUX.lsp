@@ -5,9 +5,9 @@
 
 (DECLAIM (NOTINLINE |LinearOrdinaryDifferentialOperator3Aux;|)) 
 
-(DEFUN |LinearOrdinaryDifferentialOperator3Aux| (&REST #1=#:G449)
+(DEFUN |LinearOrdinaryDifferentialOperator3Aux| (&REST #1=#:G6)
   (SPROG NIL
-         (PROG (#2=#:G450)
+         (PROG (#2=#:G7)
            (RETURN
             (COND
              ((LETT #2#

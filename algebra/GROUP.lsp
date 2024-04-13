@@ -6,7 +6,7 @@
 (DEFUN |Group| () (COND (|Group;AL|) (T (SETQ |Group;AL| (|Group;|))))) 
 
 (DEFUN |Group;| ()
-  (SPROG ((#1=#:G449 NIL))
+  (SPROG ((#1=#:G2 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|Monoid|) (|TwoSidedRecip|) (|unitsKnown|)

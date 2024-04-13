@@ -6,9 +6,9 @@
 
 (SDEFUN |RMATRIX;matrix;L%;3| ((|l| (|List| (|List| R))) (% (%)))
         (SPROG
-         ((#1=#:G468 NIL) (|j| NIL) (#2=#:G469 NIL) (|r| NIL) (#3=#:G466 NIL)
-          (|i| NIL) (#4=#:G467 NIL) (|ll| NIL) (|ans| (|Matrix| R))
-          (#5=#:G464 NIL) (#6=#:G465 NIL))
+         ((#1=#:G33 NIL) (|j| NIL) (#2=#:G34 NIL) (|r| NIL) (#3=#:G31 NIL)
+          (|i| NIL) (#4=#:G32 NIL) (|ll| NIL) (|ans| (|Matrix| R))
+          (#5=#:G29 NIL) (#6=#:G30 NIL))
          (SEQ
           (COND
            ((SPADCALL (LENGTH |l|) (QREFELT % 6) (QREFELT % 17))
@@ -27,7 +27,7 @@
                        ((SPADCALL (LENGTH |ll|) (QREFELT % 7) (QREFELT % 17))
                         (PROGN
                          (LETT #5# (|error| "matrix: wrong number of columns"))
-                         (GO #7=#:G456))))))
+                         (GO #7=#:G19))))))
                     (LETT #6# (CDR #6#)) (GO G190) G191 (EXIT NIL)))
               #7# (EXIT #5#))
              (LETT |ans|
@@ -78,7 +78,7 @@
 
 (SDEFUN |RMATRIX;columnSpace;%L;9|
         ((|x| (%)) (% (|List| (|DirectProduct| |m| R))))
-        (SPROG ((#1=#:G482 NIL) (|c| NIL) (#2=#:G481 NIL))
+        (SPROG ((#1=#:G47 NIL) (|c| NIL) (#2=#:G46 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -101,7 +101,7 @@
 
 (SDEFUN |RMATRIX;nullSpace;%L;12|
         ((|x| (%)) (% (|List| (|DirectProduct| |m| R))))
-        (SPROG ((#1=#:G489 NIL) (|c| NIL) (#2=#:G488 NIL))
+        (SPROG ((#1=#:G54 NIL) (|c| NIL) (#2=#:G53 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -124,9 +124,9 @@
 
 (DECLAIM (NOTINLINE |RectangularMatrix;|)) 
 
-(DEFUN |RectangularMatrix| (&REST #1=#:G502)
+(DEFUN |RectangularMatrix| (&REST #1=#:G71)
   (SPROG NIL
-         (PROG (#2=#:G503)
+         (PROG (#2=#:G72)
            (RETURN
             (COND
              ((LETT #2#
@@ -145,7 +145,7 @@
 
 (DEFUN |RectangularMatrix;| (|#1| |#2| |#3|)
   (SPROG
-   ((#1=#:G501 NIL) (|pv$| NIL) (#2=#:G498 NIL) (#3=#:G499 NIL) (% NIL)
+   ((#1=#:G70 NIL) (|pv$| NIL) (#2=#:G67 NIL) (#3=#:G68 NIL) (% NIL)
     (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 |#1|)

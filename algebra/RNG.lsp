@@ -6,7 +6,7 @@
 (DEFUN |Rng| () (COND (|Rng;AL|) (T (SETQ |Rng;AL| (|Rng;|))))) 
 
 (DEFUN |Rng;| ()
-  (SPROG ((#1=#:G448 NIL))
+  (SPROG ((#1=#:G1 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|NonAssociativeRng|) (|SemiRng|)

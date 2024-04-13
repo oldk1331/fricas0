@@ -5,7 +5,7 @@
 
 ; $returnNowhereFromGoGet := false
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$returnNowhereFromGoGet| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$returnNowhereFromGoGet| NIL))
 
 ; showSummary dom ==
 ;   showPredicates dom

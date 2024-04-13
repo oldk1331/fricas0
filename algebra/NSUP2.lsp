@@ -6,9 +6,9 @@
 
 (DECLAIM (NOTINLINE |NewSparseUnivariatePolynomialFunctions2;|)) 
 
-(DEFUN |NewSparseUnivariatePolynomialFunctions2| (&REST #1=#:G450)
+(DEFUN |NewSparseUnivariatePolynomialFunctions2| (&REST #1=#:G4)
   (SPROG NIL
-         (PROG (#2=#:G451)
+         (PROG (#2=#:G5)
            (RETURN
             (COND
              ((LETT #2#

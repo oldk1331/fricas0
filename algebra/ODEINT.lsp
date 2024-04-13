@@ -21,8 +21,7 @@
            (|Record| (|:| |coef| (|Fraction| (|Integer|))) (|:| |logand| F))))
          (% (F)))
         (SPROG
-         ((#1=#:G468 NIL) (#2=#:G467 (F)) (#3=#:G469 (F)) (#4=#:G474 NIL)
-          (|r| NIL)
+         ((#1=#:G34 NIL) (#2=#:G33 (F)) (#3=#:G35 (F)) (#4=#:G40 NIL) (|r| NIL)
           (|ll|
            (|List|
             (|Record| (|:| |coef| (|Fraction| (|Integer|))) (|:| |logand| F))))
@@ -86,7 +85,7 @@
            (|Union|
             (|Record| (|:| |coef| (|Fraction| (|Integer|))) (|:| |logand| F))
             "failed"))
-          (#1=#:G492 NIL) (|term| NIL)
+          (#1=#:G61 NIL) (|term| NIL)
           (|l| (|List| #2=(|SparseMultivariatePolynomial| R (|Kernel| F))))
           (|v|
            (|Union| (|List| (|SparseMultivariatePolynomial| R (|Kernel| F)))
@@ -143,8 +142,8 @@
 (SDEFUN |ODEINT;isQ|
         ((|l| (|List| F)) (% (|Union| (|Fraction| (|Integer|)) "failed")))
         (SPROG
-         ((|prod| (|Fraction| (|Integer|))) (#1=#:G501 NIL)
-          (|u| (|Union| (|Fraction| (|Integer|)) "failed")) (#2=#:G502 NIL)
+         ((|prod| (|Fraction| (|Integer|))) (#1=#:G70 NIL)
+          (|u| (|Union| (|Fraction| (|Integer|)) "failed")) (#2=#:G71 NIL)
           (|x| NIL))
          (SEQ
           (EXIT
@@ -159,7 +158,7 @@
                             ((QEQCAR |u| 1)
                              (PROGN
                               (LETT #1# (CONS 1 "failed"))
-                              (GO #3=#:G500)))
+                              (GO #3=#:G69)))
                             ('T
                              (LETT |prod|
                                    (SPADCALL |prod| (QCDR |u|)
@@ -175,7 +174,7 @@
            (|Record| (|:| |coef| (|Fraction| (|Integer|))) (|:| |logand| F))
            "failed")))
         (SPROG
-         ((#1=#:G524 NIL) (#2=#:G523 NIL)
+         ((#1=#:G93 NIL) (#2=#:G92 NIL)
           (|u| (|Union| (|Fraction| (|Integer|)) "failed")) (|l| (|List| F))
           (|v| (|Union| (|List| F) "failed")))
          (SEQ
@@ -225,18 +224,18 @@
                                                                             55))
                                                                   (QREFELT %
                                                                            58))))))
-                                              (GO #3=#:G517))))))))
+                                              (GO #3=#:G86))))))))
                                    (EXIT (CONS 1 "failed"))))
                                  #3# (EXIT #2#)))
-                          (GO #4=#:G520))))))))
+                          (GO #4=#:G89))))))))
                (EXIT (CONS 1 "failed"))))
              #4# (EXIT #1#))))))) 
 
 (DECLAIM (NOTINLINE |ODEIntegration;|)) 
 
-(DEFUN |ODEIntegration| (&REST #1=#:G525)
+(DEFUN |ODEIntegration| (&REST #1=#:G94)
   (SPROG NIL
-         (PROG (#2=#:G526)
+         (PROG (#2=#:G95)
            (RETURN
             (COND
              ((LETT #2#

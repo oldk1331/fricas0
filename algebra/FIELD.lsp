@@ -6,7 +6,7 @@
 (DEFUN |Field| () (COND (|Field;AL|) (T (SETQ |Field;AL| (|Field;|))))) 
 
 (DEFUN |Field;| ()
-  (SPROG ((#1=#:G453 NIL))
+  (SPROG ((#1=#:G6 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|EuclideanDomain|) (|UniqueFactorizationDomain|)

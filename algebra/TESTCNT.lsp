@@ -296,19 +296,19 @@
 
 (SDEFUN |TESTCNT;statistics;V;15| ((% (|Void|)))
         (SPROG
-         ((#1=#:G587 NIL) (#2=#:G583 NIL) (#3=#:G579 NIL) (#4=#:G575 NIL)
-          (#5=#:G571 NIL) (|stotalTests| #6=(|String|)) (|sfailedTests| #6#)
+         ((#1=#:G156 NIL) (#2=#:G152 NIL) (#3=#:G148 NIL) (#4=#:G144 NIL)
+          (#5=#:G140 NIL) (|stotalTests| #6=(|String|)) (|sfailedTests| #6#)
           (|stotalCases| #6#) (|sfailedCases| #6#)
           (|tsfailedTests| (|Integer|)) (|tstotalTests| (|Integer|))
           (|failedCases| (|Integer|)) (|totalCases| (|Integer|))
-          (#7=#:G603 NIL) (|tstcase| NIL) (#8=#:G602 NIL) (|tstsuite| NIL)
-          (#9=#:G601 NIL) (|f| NIL) (#10=#:G548 NIL) (#11=#:G600 NIL)
-          (#12=#:G599 NIL) (|outstring| (|String|)) (#13=#:G597 NIL) (|o| NIL)
-          (#14=#:G598 NIL) (|i| NIL) (#15=#:G596 NIL) (#16=#:G525 NIL)
-          (#17=#:G595 NIL) (|xfpassedTests| (|Integer|))
+          (#7=#:G172 NIL) (|tstcase| NIL) (#8=#:G171 NIL) (|tstsuite| NIL)
+          (#9=#:G170 NIL) (|f| NIL) (#10=#:G117 NIL) (#11=#:G169 NIL)
+          (#12=#:G168 NIL) (|outstring| (|String|)) (#13=#:G166 NIL) (|o| NIL)
+          (#14=#:G167 NIL) (|i| NIL) (#15=#:G165 NIL) (#16=#:G94 NIL)
+          (#17=#:G164 NIL) (|xfpassedTests| (|Integer|))
           (|xfailedTests| (|Integer|)) (|failedTests| (|Integer|))
           (|totalTests| (|Integer|)) (|xfpassedCases| (|Integer|))
-          (#18=#:G594 NIL) (#19=#:G593 NIL) (#20=#:G592 NIL) (|w| NIL))
+          (#18=#:G163 NIL) (#19=#:G162 NIL) (#20=#:G161 NIL) (|w| NIL))
          (SEQ
           (SPADCALL (|make_full_CVEC2| (QREFELT % 6) (|STR_to_CHAR| "="))
                     (QREFELT % 24))
@@ -865,7 +865,7 @@
 
 (DEFUN |UnittestCount| ()
   (SPROG NIL
-         (PROG (#1=#:G605)
+         (PROG (#1=#:G174)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|UnittestCount|))

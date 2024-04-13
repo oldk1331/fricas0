@@ -16,8 +16,8 @@
         ((|m| (|Matrix| S)) (|v| (|Vector| S))
          (% (|Union| (|Vector| S) "failed")))
         (SPROG
-         ((#1=#:G475 NIL) (|cu| (|Union| S "failed")) (|cq| (|Fraction| S))
-          (#2=#:G476 NIL) (|i| NIL) (|u| (|Vector| S))
+         ((#1=#:G45 NIL) (|cu| (|Union| S "failed")) (|cq| (|Fraction| S))
+          (#2=#:G46 NIL) (|i| NIL) (|u| (|Vector| S))
           (|n| (|NonNegativeInteger|)) (|rp| (|Vector| (|Fraction| S)))
           (|rpu| #3=(|Union| (|Vector| (|Fraction| S)) "failed"))
           (|res|
@@ -47,7 +47,7 @@
                                      ((QEQCAR |cu| 1)
                                       (PROGN
                                        (LETT #1# (CONS 1 "failed"))
-                                       (GO #4=#:G474)))
+                                       (GO #4=#:G44)))
                                      ('T
                                       (SPADCALL |u| |i| (QCDR |cu|)
                                                 (QREFELT % 33))))))
@@ -58,9 +58,9 @@
 
 (DECLAIM (NOTINLINE |LinearSystemMatrixPackage2;|)) 
 
-(DEFUN |LinearSystemMatrixPackage2| (#1=#:G477)
+(DEFUN |LinearSystemMatrixPackage2| (#1=#:G47)
   (SPROG NIL
-         (PROG (#2=#:G478)
+         (PROG (#2=#:G48)
            (RETURN
             (COND
              ((LETT #2#

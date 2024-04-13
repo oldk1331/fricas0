@@ -9,7 +9,8 @@
 ;       ["**", '"**"], ["^", '"^"], [":", '":"], ["::", '"::"], _
 ;       ["@", '"@"], ["SEL", '"."], ["exquo", '" exquo "], ["div", '" div "], _
 ;       ["quo", '" quo "], ["rem", '" rem "], ["case", '" case "], _
-;       ["and", '" and "], ["or", '" or "], ["TAG", '" -> "], _
+;       ["and", '" and "], ["or", '" or "], ["~>", '" ~> "], _
+;       ["->", '"->"], _
 ;       ["+->", '" +-> "], ["SEGMENT", '".."], ["in", '" in "], _
 ;       ["~=", '"~="], ["JOIN", '" JOIN "], ["EQUATNUM", '"  "], _
 ;       ["=", '" = "], ["==", '" == "], [">=", '" >= "], [">", '" > "], _
@@ -156,12 +157,13 @@
              (LIST '|exquo| " exquo ") (LIST '|div| " div ")
              (LIST '|quo| " quo ") (LIST '|rem| " rem ")
              (LIST '|case| " case ") (LIST '|and| " and ") (LIST '|or| " or ")
-             (LIST 'TAG " -> ") (LIST '+-> " +-> ") (LIST 'SEGMENT "..")
-             (LIST '|in| " in ") (LIST '~= "~=") (LIST 'JOIN " JOIN ")
-             (LIST 'EQUATNUM "  ") (LIST '= " = ") (LIST '== " == ")
-             (LIST '>= " >= ") (LIST '> " > ") (LIST '<= " <= ")
-             (LIST '< " < ") (LIST '|\|| " | ") (LIST '+ " + ") (LIST '- " - ")
-             (LIST 'WHERE " WHERE ") (LIST 'MAX " MAX ") (LIST 'MIN " MIN "))
+             (LIST '~> " ~> ") (LIST '-> "->") (LIST '+-> " +-> ")
+             (LIST 'SEGMENT "..") (LIST '|in| " in ") (LIST '~= "~=")
+             (LIST 'JOIN " JOIN ") (LIST 'EQUATNUM "  ") (LIST '= " = ")
+             (LIST '== " == ") (LIST '>= " >= ") (LIST '> " > ")
+             (LIST '<= " <= ") (LIST '< " < ") (LIST '|\|| " | ")
+             (LIST '+ " + ") (LIST '- " - ") (LIST 'WHERE " WHERE ")
+             (LIST 'MAX " MAX ") (LIST 'MIN " MIN "))
        NIL)
       ((LAMBDA (|bfVar#2| |sv|)
          (LOOP
@@ -298,7 +300,8 @@
 
 ; init_output_properties()
 
-(EVAL-WHEN (EVAL LOAD) (PROG () (RETURN (|init_output_properties|))))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (PROG () (RETURN (|init_output_properties|))))
 
 ; DEFPARAMETER($plainRTspecialCharacters, [
 ;     '_+,      -- upper left corner   (+)
@@ -329,15 +332,17 @@
 
 ; DEFCONST(MATBORCH, '"*")
 
-(EVAL-WHEN (EVAL LOAD) (PROG () (RETURN (DEFCONST MATBORCH "*"))))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (PROG () (RETURN (DEFCONST MATBORCH "*"))))
 
 ; DEFCONST($EmptyString, '"")
 
-(EVAL-WHEN (EVAL LOAD) (PROG () (RETURN (DEFCONST |$EmptyString| ""))))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (PROG () (RETURN (DEFCONST |$EmptyString| ""))))
 
 ; DEFCONST($DoubleQuote, '"_"")
 
-(EVAL-WHEN (EVAL LOAD) (PROG () (RETURN (DEFCONST |$DoubleQuote| "\""))))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (PROG () (RETURN (DEFCONST |$DoubleQuote| "\""))))
 
 ; DEFVAR($algebraFormat, true) -- produce 2-d algebra output
 
@@ -435,7 +440,7 @@
 
 ; $collectOutput := nil
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$collectOutput| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$collectOutput| NIL))
 
 ; get_lisp_stream(fs) == REST(fs)
 
@@ -3746,25 +3751,36 @@
       (FORCE-OUTPUT (|get_formatted_stream|))
       NIL))))
 
+; do_formatters(x, was_type) ==
+;     if $fortranFormat and not(was_type) then fortranFormat(x)
+;     if $algebraFormat then mathprintWithNumber(x)
+;     if $texFormat     then texFormat(x)
+;     if $mathmlFormat  then mathmlFormat(x)
+;     if $texmacsFormat then texmacsFormat(x)
+;     if $htmlFormat    then htmlFormat(x)
+;     if $formattedFormat then formattedFormat(x)
+
+(DEFUN |do_formatters| (|x| |was_type|)
+  (PROG ()
+    (RETURN
+     (PROGN
+      (COND ((AND |$fortranFormat| (NULL |was_type|)) (|fortranFormat| |x|)))
+      (COND (|$algebraFormat| (|mathprintWithNumber| |x|)))
+      (COND (|$texFormat| (|texFormat| |x|)))
+      (COND (|$mathmlFormat| (|mathmlFormat| |x|)))
+      (COND (|$texmacsFormat| (|texmacsFormat| |x|)))
+      (COND (|$htmlFormat| (|htmlFormat| |x|)))
+      (COND (|$formattedFormat| (|formattedFormat| |x|)))))))
+
 ; output(expr,domain) ==
 ;   $resolve_level : local := 0
 ;   if isWrapped expr then expr := unwrap expr
 ;   isMapExpr expr and not(domain is ["FunctionCalled", .]) => BREAK()
-;   categoryForm? domain or domain = ["Mode"] =>
-;     if $algebraFormat then
-;       mathprintWithNumber outputDomainConstructor expr
-;     if $texFormat     then
-;       texFormat outputDomainConstructor expr
+;   categoryForm?(domain) or domain = ["Mode"] =>
+;       do_formatters(constructor_to_OutputForm(expr), true)
 ;   T := coerceInteractive(objNewWrap(expr,domain),$OutputForm) =>
-;     x := objValUnwrap T
-;     if $fortranFormat then fortranFormat x
-;     if $algebraFormat then
-;       mathprintWithNumber x
-;     if $texFormat     then texFormat x
-;     if $mathmlFormat  then mathmlFormat x
-;     if $texmacsFormat then texmacsFormat x
-;     if $htmlFormat    then htmlFormat x
-;     if $formattedFormat then formattedFormat x
+;       x := objValUnwrap T
+;       do_formatters(x, false)
 ;   (FUNCTIONP(opOf domain)) and (not(SYMBOLP(opOf domain))) and
 ;     (printfun := compiledLookup("<<",'(TextWriter TextWriter %), evalDomain domain))
 ;        and (textwrit := compiledLookup("print", '(%), TextWriter())) =>
@@ -3793,24 +3809,11 @@
                     (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL))))))
         (BREAK))
        ((OR (|categoryForm?| |domain|) (EQUAL |domain| (LIST '|Mode|)))
-        (PROGN
-         (COND
-          (|$algebraFormat|
-           (|mathprintWithNumber| (|outputDomainConstructor| |expr|))))
-         (COND
-          (|$texFormat| (|texFormat| (|outputDomainConstructor| |expr|))))))
+        (|do_formatters| (|constructor_to_OutputForm| |expr|) T))
        ((SETQ T$
                 (|coerceInteractive| (|objNewWrap| |expr| |domain|)
                  |$OutputForm|))
-        (PROGN
-         (SETQ |x| (|objValUnwrap| T$))
-         (COND (|$fortranFormat| (|fortranFormat| |x|)))
-         (COND (|$algebraFormat| (|mathprintWithNumber| |x|)))
-         (COND (|$texFormat| (|texFormat| |x|)))
-         (COND (|$mathmlFormat| (|mathmlFormat| |x|)))
-         (COND (|$texmacsFormat| (|texmacsFormat| |x|)))
-         (COND (|$htmlFormat| (|htmlFormat| |x|)))
-         (COND (|$formattedFormat| (|formattedFormat| |x|)))))
+        (PROGN (SETQ |x| (|objValUnwrap| T$)) (|do_formatters| |x| NIL)))
        ((AND (FUNCTIONP (|opOf| |domain|)) (NULL (SYMBOLP (|opOf| |domain|)))
              (SETQ |printfun|
                      (|compiledLookup| '<< '(|TextWriter| |TextWriter| %)
@@ -6345,7 +6348,6 @@
 
 ; maPrin u ==
 ;   null u => nil
-;   $highlightDelta := 0
 ;   c := CATCH('outputFailure,charybdis(u, $MARGIN, $LINELENGTH))
 ;   c ~= 'outputFailure => c
 ;   sayKeyedMsg("S2IX0009",NIL)
@@ -6364,7 +6366,6 @@
      (COND ((NULL |u|) NIL)
            (#1='T
             (PROGN
-             (SETQ |$highlightDelta| 0)
              (SETQ |c|
                      (CATCH '|outputFailure|
                        (|charybdis| |u| $MARGIN $LINELENGTH)))

@@ -106,7 +106,7 @@
         ((|n| (|Integer|)) (% (|List| (|List| (|DoubleFloat|)))))
         (SPROG
          ((|ans| (|List| (|List| (|DoubleFloat|)))) (|angle| (|DoubleFloat|))
-          (#1=#:G473 NIL) (|i| NIL) (|theta| (|DoubleFloat|)))
+          (#1=#:G44 NIL) (|i| NIL) (|theta| (|DoubleFloat|)))
          (SEQ (LETT |ans| NIL)
               (LETT |theta|
                     (|div_DF_I|
@@ -162,7 +162,7 @@
 
 (DEFUN |TubePlotTools| ()
   (SPROG NIL
-         (PROG (#1=#:G481)
+         (PROG (#1=#:G62)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|TubePlotTools|))

@@ -7,7 +7,7 @@
   (COND (|MagmaWithUnit;AL|) (T (SETQ |MagmaWithUnit;AL| (|MagmaWithUnit;|))))) 
 
 (DEFUN |MagmaWithUnit;| ()
-  (SPROG ((#1=#:G451 NIL))
+  (SPROG ((#1=#:G4 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|Magma|)

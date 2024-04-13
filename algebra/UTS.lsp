@@ -176,9 +176,9 @@
          (% (|UnivariatePolynomial| |var| |Coef|)))
         (SPROG
          ((|st| (%)) (|term| (|UnivariatePolynomial| |var| |Coef|))
-          (|ress| (|UnivariatePolynomial| |var| |Coef|)) (#1=#:G515 NIL)
-          (#2=#:G517 NIL) (|k| NIL)
-          (|t1| (|UnivariatePolynomial| |var| |Coef|)) (#3=#:G516 NIL))
+          (|ress| (|UnivariatePolynomial| |var| |Coef|)) (#1=#:G87 NIL)
+          (#2=#:G89 NIL) (|k| NIL) (|t1| (|UnivariatePolynomial| |var| |Coef|))
+          (#3=#:G88 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |ress| (|spadConstant| % 65))
@@ -194,7 +194,7 @@
                           (EXIT
                            (COND
                             ((SPADCALL |st| (QREFELT % 29))
-                             (PROGN (LETT #1# |ress|) (GO #4=#:G514)))
+                             (PROGN (LETT #1# |ress|) (GO #4=#:G86)))
                             ('T
                              (SEQ
                               (LETT |term|
@@ -243,9 +243,9 @@
 (SDEFUN |UTS;coerce;Up%;17|
         ((|p| (|UnivariatePolynomial| |var| |Coef|)) (% (%)))
         (SPROG
-         ((|st| (|Stream| |Coef|)) (#1=#:G532 NIL) (|i| NIL)
-          (|oldDeg| (|NonNegativeInteger|)) (#2=#:G531 NIL)
-          (|delta| (|NonNegativeInteger|)) (#3=#:G521 NIL)
+         ((|st| (|Stream| |Coef|)) (#1=#:G104 NIL) (|i| NIL)
+          (|oldDeg| (|NonNegativeInteger|)) (#2=#:G103 NIL)
+          (|delta| (|NonNegativeInteger|)) (#3=#:G93 NIL)
           (|deg| (|NonNegativeInteger|)))
          (SEQ
           (COND ((SPADCALL |p| (QREFELT % 74)) (|spadConstant| % 17))
@@ -326,7 +326,7 @@
 
 (SDEFUN |UTS;coefficient;%NniCoef;22|
         ((|x| (%)) (|n| (|NonNegativeInteger|)) (% (|Coef|)))
-        (SPROG ((#1=#:G541 NIL) (|u| (%)))
+        (SPROG ((#1=#:G114 NIL) (|u| (%)))
                (SEQ (LETT |u| (|UTS;stream| |x| %))
                     (SEQ G190
                          (COND
@@ -418,8 +418,8 @@
 (SDEFUN |UTS;truncate;%2Nni%;38|
         ((|x| (%)) (|n1| #1=(|NonNegativeInteger|)) (|n2| #1#) (% (%)))
         (SPROG
-         ((|st| (%)) (#2=#:G572 NIL) (|i| NIL) (|m| (|NonNegativeInteger|))
-          (#3=#:G567 NIL) (|#G84| #1#) (|#G83| #1#))
+         ((|st| (%)) (#2=#:G154 NIL) (|i| NIL) (|m| (|NonNegativeInteger|))
+          (#3=#:G149 NIL) (|#G84| #1#) (|#G83| #1#))
          (SEQ
           (COND
            ((< |n2| |n1|)
@@ -538,9 +538,9 @@
 
 (DECLAIM (NOTINLINE |UnivariateTaylorSeries;|)) 
 
-(DEFUN |UnivariateTaylorSeries| (&REST #1=#:G612)
+(DEFUN |UnivariateTaylorSeries| (&REST #1=#:G194)
   (SPROG NIL
-         (PROG (#2=#:G613)
+         (PROG (#2=#:G195)
            (RETURN
             (COND
              ((LETT #2#
@@ -559,7 +559,7 @@
 
 (DEFUN |UnivariateTaylorSeries;| (|#1| |#2| |#3|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G606 NIL) (#2=#:G607 NIL) (#3=#:G608 NIL) (#4=#:G611 NIL)
+   ((|pv$| NIL) (#1=#:G188 NIL) (#2=#:G189 NIL) (#3=#:G190 NIL) (#4=#:G193 NIL)
     (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))

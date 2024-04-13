@@ -19,9 +19,9 @@
 
 (DECLAIM (NOTINLINE |DirectProductFunctions2;|)) 
 
-(DEFUN |DirectProductFunctions2| (&REST #1=#:G456)
+(DEFUN |DirectProductFunctions2| (&REST #1=#:G14)
   (SPROG NIL
-         (PROG (#2=#:G457)
+         (PROG (#2=#:G15)
            (RETURN
             (COND
              ((LETT #2#

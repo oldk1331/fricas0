@@ -37,7 +37,7 @@
                      (SPADCALL |x| (CDR |y|) (QREFELT % 20)))))) 
 
 (SDEFUN |PRTITION;*;Nni2%;8| ((|n| (|NonNegativeInteger|)) (|x| (%)) (% (%)))
-        (SPROG ((#1=#:G485 NIL))
+        (SPROG ((#1=#:G47 NIL))
                (COND ((ZEROP |n|) (|spadConstant| % 7))
                      ('T
                       (SPADCALL |x|
@@ -152,8 +152,8 @@
 
 (SDEFUN |PRTITION;pdct;%I;18| ((|x| (%)) (% (|Integer|)))
         (SPROG
-         ((#1=#:G524 NIL) (#2=#:G523 #3=(|Integer|)) (#4=#:G525 #3#)
-          (#5=#:G527 NIL) (|a| NIL))
+         ((#1=#:G88 NIL) (#2=#:G87 #3=(|Integer|)) (#4=#:G89 #3#)
+          (#5=#:G91 NIL) (|a| NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -178,7 +178,7 @@
 
 (DEFUN |Partition| ()
   (SPROG NIL
-         (PROG (#1=#:G529)
+         (PROG (#1=#:G93)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Partition|))

@@ -6,7 +6,7 @@
 (DEFPARAMETER |OctonionCategory;AL| 'NIL) 
 
 (DEFUN |OctonionCategory| (|t#1|)
-  (LET (#1=#:G515 (#2=#:G516 (|devaluate| |t#1|)))
+  (LET (#1=#:G68 (#2=#:G69 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |OctonionCategory;AL|)) (CDR #1#))
           (T
            (SETQ |OctonionCategory;AL|
@@ -15,7 +15,7 @@
            #1#)))) 
 
 (DEFUN |OctonionCategory;| (|t#1|)
-  (SPROG ((#1=#:G514 NIL))
+  (SPROG ((#1=#:G67 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)

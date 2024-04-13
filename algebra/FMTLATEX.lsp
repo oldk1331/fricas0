@@ -458,7 +458,7 @@
           (RETURN
            (PROGN
             (SPROG
-             ((|b2| NIL) (|lb| NIL) (|o| NIL) (#1=#:G552 NIL) (|a| NIL)
+             ((|b2| NIL) (|lb| NIL) (|o| NIL) (#1=#:G129 NIL) (|a| NIL)
               (|i| NIL) (|b1| NIL))
              (SEQ
               (LETT |b1|
@@ -682,7 +682,7 @@
          (%
           (|OperatorHandlers|
            (|Mapping| (|OutputBox|) (|Integer|) (|List| (|OutputForm|))))))
-        (SPROG ((#1=#:G1002 NIL))
+        (SPROG ((#1=#:G583 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -1096,8 +1096,14 @@
                                       (SPADCALL 125 (QREFELT % 99))
                                       (QREFELT % 94))
                             (QREFELT % 103))
-                  (SPADCALL |oh| 2 "TAG"
-                            (SPADCALL "\\to " 100 (SPADCALL 100 (QREFELT % 99))
+                  (SPADCALL |oh| 2 "->"
+                            (SPADCALL "\\to " 1001
+                                      (SPADCALL 1001 (QREFELT % 99))
+                                      (QREFELT % 94))
+                            (QREFELT % 103))
+                  (SPADCALL |oh| 2 "~>"
+                            (SPADCALL "\\leadsto " 100
+                                      (SPADCALL 100 (QREFELT % 99))
                                       (QREFELT % 94))
                             (QREFELT % 103))
                   (SPADCALL |oh| 2 "+->"
@@ -1190,7 +1196,7 @@
                   (SPADCALL |oh| -1 "MATRIX" (SPADCALL "[" "]" (QREFELT % 100))
                             (QREFELT % 103))
                   (SPADCALL |oh| -1 "theMap" (ELT % 65) (QREFELT % 103))
-                  (EXIT (PROGN (LETT #1# |oh|) (GO #6=#:G1001)))))
+                  (EXIT (PROGN (LETT #1# |oh|) (GO #6=#:G582)))))
                 #6# (EXIT #1#)))) 
 
 (SDEFUN |FMTLATEX;operatorHandlers;Oh;38|
@@ -1203,7 +1209,7 @@
 
 (DEFUN |FormatLaTeX| ()
   (SPROG NIL
-         (PROG (#1=#:G1005)
+         (PROG (#1=#:G586)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|FormatLaTeX|))

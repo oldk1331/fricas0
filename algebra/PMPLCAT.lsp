@@ -11,7 +11,7 @@
                      (|PatternMatchResult| S P)))
          (% (|PatternMatchResult| S P)))
         (SPROG
-         ((#1=#:G530 NIL)
+         ((#1=#:G93 NIL)
           (|ex|
            (|Union|
             (|Record| (|:| |var| V) (|:| |exponent| (|NonNegativeInteger|)))
@@ -227,7 +227,7 @@
                                                                   (QCDR |ep|))
                                                                  |l| |vmatch|))
                                                           (GO
-                                                           #5=#:G522))))))))))))
+                                                           #5=#:G85))))))))))))
                                                (EXIT
                                                 (SPADCALL (QREFELT % 41)))))
                                              #5#
@@ -250,8 +250,8 @@
 
 (SDEFUN |PMPLCAT;patternMatch;PPPmrMPmr;2!0| ((|l1| NIL) (% NIL))
         (SPROG
-         ((#1=#:G473 NIL) (#2=#:G472 NIL) (#3=#:G474 NIL) (#4=#:G476 NIL)
-          (#5=#:G448 NIL))
+         ((#1=#:G31 NIL) (#2=#:G30 NIL) (#3=#:G32 NIL) (#4=#:G37 NIL)
+          (#5=#:G1 NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -269,9 +269,9 @@
 
 (DECLAIM (NOTINLINE |PatternMatchPolynomialCategory;|)) 
 
-(DEFUN |PatternMatchPolynomialCategory| (&REST #1=#:G531)
+(DEFUN |PatternMatchPolynomialCategory| (&REST #1=#:G94)
   (SPROG NIL
-         (PROG (#2=#:G532)
+         (PROG (#2=#:G95)
            (RETURN
             (COND
              ((LETT #2#

@@ -60,10 +60,6 @@
   '(|abbreviations| |all| |macros| |modes| |names| |operations| |properties|
     |types| |values|))
 
-; DEFPARAMETER($countAssoc, '( (cache countCache) ))
-
-(DEFPARAMETER |$countAssoc| '((|cache| |countCache|)))
-
 ; initializeSystemCommands() ==
 ;   l := $systemCommands
 ;   $SYSCOMMANDS := NIL
@@ -671,6 +667,7 @@
 ; clearCmdAll() ==
 ;   clear_sorted_caches()
 ;   ------undo special variables------
+;   $prevCarrier := ($currentCarrier := ['carrier])
 ;   $frameRecord := nil
 ;   $previousBindings := nil
 ;   untraceMapSubNames $trace_names
@@ -691,6 +688,7 @@
     (RETURN
      (PROGN
       (|clear_sorted_caches|)
+      (SETQ |$prevCarrier| (SETQ |$currentCarrier| (LIST '|carrier|)))
       (SETQ |$frameRecord| NIL)
       (SETQ |$previousBindings| NIL)
       (|untraceMapSubNames| |$trace_names|)
@@ -1640,18 +1638,36 @@
     (DECLARE (SPECIAL |$options|))
     (RETURN (PROGN (SETQ |$options| NIL) (LOCALDATABASE |args| |$options|)))))
 
-; summary l ==
-;  OBEY STRCONC ('"cat ",getEnv('"FRICAS"),'"/lib/summary")
+; print_text_stream stream ==
+;     if stream then
+;         while (str := read_line stream) repeat
+;             SAY str
+
+(DEFUN |print_text_stream| (|stream|)
+  (PROG (|str|)
+    (RETURN
+     (COND
+      (|stream|
+       ((LAMBDA ()
+          (LOOP
+           (COND ((NOT (SETQ |str| (|read_line| |stream|))) (RETURN NIL))
+                 ('T (SAY |str|)))))))))))
+
+; print_text_file filename ==
+;     handle_input_file(filename, function print_text_stream, [])
+
+(DEFUN |print_text_file| (|filename|)
+  (PROG () (RETURN (|handle_input_file| |filename| #'|print_text_stream| NIL))))
+
+; summary l == print_text_file STRCONC($spadroot, '"/lib/summary")
 
 (DEFUN |summary| (|l|)
-  (PROG () (RETURN (OBEY (STRCONC "cat " (|getEnv| "FRICAS") "/lib/summary")))))
+  (PROG () (RETURN (|print_text_file| (STRCONC |$spadroot| "/lib/summary")))))
 
-; copyright () ==
-;  OBEY STRCONC ('"cat ",getEnv('"FRICAS"),'"/lib/copyright")
+; copyright() == print_text_file STRCONC($spadroot, '"/lib/copyright")
 
 (DEFUN |copyright| ()
-  (PROG ()
-    (RETURN (OBEY (STRCONC "cat " (|getEnv| "FRICAS") "/lib/copyright")))))
+  (PROG () (RETURN (|print_text_file| (STRCONC |$spadroot| "/lib/copyright")))))
 
 ; credits() ==
 ;  for i in CREDITS repeat
@@ -2724,11 +2740,11 @@
 
 ; $frameRecord  := nil  --Initial setting for frame record
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$frameRecord| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$frameRecord| NIL))
 
 ; $previousBindings := nil
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$previousBindings| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$previousBindings| NIL))
 
 ; frame l == frameSpad2Cmd l
 
@@ -4646,7 +4662,7 @@
 
 ; $eof_marker := GENSYM()
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$eof_marker| (GENSYM)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$eof_marker| (GENSYM)))
 
 ; eof_marker?(x) == EQ(x, $eof_marker)
 
@@ -5043,7 +5059,7 @@
 ;      ["U32",  ['UNSIGNED_-BYTE, 32]],
 ;       ["DF",  'DOUBLE_-FLOAT]]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$type_tags|
           (LIST (LIST 'U8 (LIST 'UNSIGNED-BYTE 8))
                 (LIST 'U16 (LIST 'UNSIGNED-BYTE 16))
@@ -5644,6 +5660,15 @@
 ; leaveScratchpad () == QUIT()
 
 (DEFUN |leaveScratchpad| () (PROG () (RETURN (QUIT))))
+
+; version() == FORMAT(true, '"~S~%",
+;                     CONCAT($build_version, '" compiled at ", $build_date))
+
+(DEFUN |version| ()
+  (PROG ()
+    (RETURN
+     (FORMAT T "~S~%"
+             (CONCAT |$build_version| " compiled at " |$build_date|)))))
 
 ; DEFVAR($nopiles, false)
 
@@ -6540,7 +6565,7 @@
 
 ; $undoFlag := true     --Default setting for undo is "on"
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$undoFlag| T))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$undoFlag| T))
 
 ; undo(l) ==
 ; --undo takes one option ")redo" which simply reads "redo.input",
@@ -7819,7 +7844,7 @@
               (SETQ LINE |cl|)
               (|processSynonyms|))))))))
 
-; doSystemCommand string ==
+; doSystemCommand1(string) ==
 ;    string := CONCAT('")", string)
 ;    LINE: fluid := string
 ;    processSynonyms()
@@ -7838,7 +7863,7 @@
 ;         nil
 ;    nil
 
-(DEFUN |doSystemCommand| (|string|)
+(DEFUN |doSystemCommand1| (|string|)
   (PROG (LINE |optionList| |unab| |tok|)
     (DECLARE (SPECIAL LINE))
     (RETURN
@@ -7870,6 +7895,12 @@
                        (|handleParsedSystemCommands| |unab| |optionList|)
                        NIL))))))))
                (#1# NIL)))))))))
+
+; doSystemCommand(string) ==
+;     CATCH('SPAD_READER, doSystemCommand1(string))
+
+(DEFUN |doSystemCommand| (|string|)
+  (PROG () (RETURN (CATCH 'SPAD_READER (|doSystemCommand1| |string|)))))
 
 ; handleNoParseCommands(unab, string) ==
 ;   string := stripSpaces string

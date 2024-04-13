@@ -13,9 +13,9 @@
 
 (DECLAIM (NOTINLINE |PolynomialInterpolation;|)) 
 
-(DEFUN |PolynomialInterpolation| (&REST #1=#:G451)
+(DEFUN |PolynomialInterpolation| (&REST #1=#:G15)
   (SPROG NIL
-         (PROG (#2=#:G452)
+         (PROG (#2=#:G16)
            (RETURN
             (COND
              ((LETT #2#

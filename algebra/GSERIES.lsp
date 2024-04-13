@@ -124,9 +124,9 @@
 
 (DECLAIM (NOTINLINE |GeneralUnivariatePowerSeries;|)) 
 
-(DEFUN |GeneralUnivariatePowerSeries| (&REST #1=#:G508)
+(DEFUN |GeneralUnivariatePowerSeries| (&REST #1=#:G94)
   (SPROG NIL
-         (PROG (#2=#:G509)
+         (PROG (#2=#:G95)
            (RETURN
             (COND
              ((LETT #2#
@@ -147,8 +147,8 @@
 
 (DEFUN |GeneralUnivariatePowerSeries;| (|#1| |#2| |#3|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G501 NIL) (#2=#:G502 NIL) (#3=#:G503 NIL) (#4=#:G504 NIL)
-    (#5=#:G506 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+   ((|pv$| NIL) (#1=#:G87 NIL) (#2=#:G88 NIL) (#3=#:G89 NIL) (#4=#:G90 NIL)
+    (#5=#:G92 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 |#2|)

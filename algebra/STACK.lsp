@@ -68,9 +68,9 @@
 
 (DECLAIM (NOTINLINE |Stack;|)) 
 
-(DEFUN |Stack| (#1=#:G485)
+(DEFUN |Stack| (#1=#:G48)
   (SPROG NIL
-         (PROG (#2=#:G486)
+         (PROG (#2=#:G49)
            (RETURN
             (COND
              ((LETT #2#
@@ -85,7 +85,7 @@
 
 (DEFUN |Stack;| (|#1|)
   (SPROG
-   ((#1=#:G484 NIL) (|pv$| NIL) (#2=#:G481 NIL) (#3=#:G482 NIL) (#4=#:G483 NIL)
+   ((#1=#:G47 NIL) (|pv$| NIL) (#2=#:G44 NIL) (#3=#:G45 NIL) (#4=#:G46 NIL)
     (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))

@@ -26,7 +26,7 @@
 
 (SDEFUN |PFACET;getMaxLeft;%Nni;4| ((|orf| (%)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((|m| (|NonNegativeInteger|)) (#1=#:G473 NIL) (|index| NIL)
+         ((|m| (|NonNegativeInteger|)) (#1=#:G34 NIL) (|index| NIL)
           (|indexes|
            (|List|
             (|Record| (|:| |left| (|NonNegativeInteger|))
@@ -45,7 +45,7 @@
 
 (SDEFUN |PFACET;getMaxRight;%Nni;5| ((|orf| (%)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((|m| (|NonNegativeInteger|)) (#1=#:G481 NIL) (|index| NIL)
+         ((|m| (|NonNegativeInteger|)) (#1=#:G42 NIL) (|index| NIL)
           (|indexes|
            (|List|
             (|Record| (|:| |left| (|NonNegativeInteger|))
@@ -89,7 +89,7 @@
 
 (SDEFUN |PFACET;=;2%B;10| ((|a| (%)) (|b| (%)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G503 NIL) (#2=#:G504 NIL) (|inda| NIL) (#3=#:G505 NIL)
+         ((#1=#:G72 NIL) (#2=#:G73 NIL) (|inda| NIL) (#3=#:G74 NIL)
           (|indb| NIL)
           (|indbs|
            #4=(|List|
@@ -101,7 +101,7 @@
            (SEQ
             (COND
              ((SPADCALL (QCAR |a|) (QCAR |b|) (QREFELT % 24))
-              (PROGN (LETT #1# NIL) (GO #5=#:G502))))
+              (PROGN (LETT #1# NIL) (GO #5=#:G71))))
             (LETT |indas| (SPADCALL |a| (QREFELT % 14)))
             (LETT |indbs| (SPADCALL |b| (QREFELT % 14)))
             (COND
@@ -130,7 +130,7 @@
         (SPROG
          ((|body| (|OutputForm|)) (|elements| (|List| (|OutputForm|)))
           (|element| (|OutputForm|)) (|r| (|NonNegativeInteger|))
-          (|l| (|NonNegativeInteger|)) (#1=#:G515 NIL) (|x| NIL)
+          (|l| (|NonNegativeInteger|)) (#1=#:G84 NIL) (|x| NIL)
           (|prefix| (|OutputForm|)) (|m| (|Integer|)))
          (SEQ (LETT |prefix| (SPADCALL "" (QREFELT % 28)))
               (LETT |m| (QCAR |s|))
@@ -165,7 +165,7 @@
 
 (DEFUN |ProductFacet| ()
   (SPROG NIL
-         (PROG (#1=#:G517)
+         (PROG (#1=#:G86)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ProductFacet|))

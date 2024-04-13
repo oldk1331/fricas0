@@ -14,9 +14,9 @@
 
 (DECLAIM (NOTINLINE |OrderlyDifferentialVariable;|)) 
 
-(DEFUN |OrderlyDifferentialVariable| (#1=#:G456)
+(DEFUN |OrderlyDifferentialVariable| (#1=#:G13)
   (SPROG NIL
-         (PROG (#2=#:G457)
+         (PROG (#2=#:G14)
            (RETURN
             (COND
              ((LETT #2#

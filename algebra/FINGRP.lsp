@@ -7,7 +7,7 @@
   (COND (|FiniteGroup;AL|) (T (SETQ |FiniteGroup;AL| (|FiniteGroup;|))))) 
 
 (DEFUN |FiniteGroup;| ()
-  (SPROG ((#1=#:G449 NIL))
+  (SPROG ((#1=#:G2 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|Group|) (|Finite|)

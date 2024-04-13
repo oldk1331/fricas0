@@ -30,7 +30,7 @@
 
 (DEFUN |NonNegativeRational| ()
   (SPROG NIL
-         (PROG (#1=#:G459)
+         (PROG (#1=#:G21)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|NonNegativeRational|))

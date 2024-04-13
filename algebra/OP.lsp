@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |Operator;|)) 
 
-(DEFUN |Operator| (#1=#:G458)
+(DEFUN |Operator| (#1=#:G17)
   (SPROG NIL
-         (PROG (#2=#:G459)
+         (PROG (#2=#:G18)
            (RETURN
             (COND
              ((LETT #2#

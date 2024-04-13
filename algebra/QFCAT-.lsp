@@ -28,8 +28,8 @@
 
 (SDEFUN |QFCAT-;reducedSystem;MM;6| ((|m| (|Matrix| A)) (% (|Matrix| S)))
         (SPROG
-         ((#1=#:G471 NIL) (|ell| (A)) (#2=#:G480 NIL) (|j| NIL) (|d| (S))
-          (#3=#:G479 NIL) (|i| NIL) (|ans| (|Matrix| S))
+         ((#1=#:G36 NIL) (|ell| (A)) (#2=#:G45 NIL) (|j| NIL) (|d| (S))
+          (#3=#:G44 NIL) (|i| NIL) (|ans| (|Matrix| S))
           (|ncm| (|NonNegativeInteger|)) (|nrm| (|NonNegativeInteger|)))
          (SEQ (LETT |nrm| (ANROWS |m|)) (LETT |ncm| (ANCOLS |m|))
               (LETT |ans| (MAKE_MATRIX1 |nrm| |ncm| (|spadConstant| % 24)))

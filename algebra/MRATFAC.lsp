@@ -18,11 +18,11 @@
 
 (SDEFUN |MRATFAC;factor;PF;5| ((|p| (P)) (% (|Factored| P)))
         (SPROG
-         ((#1=#:G464 NIL) (#2=#:G463 #3=(|Factored| P)) (#4=#:G465 #3#)
-          (#5=#:G472 NIL) (|u| NIL)
+         ((#1=#:G42 NIL) (#2=#:G41 #3=(|Factored| P)) (#4=#:G43 #3#)
+          (#5=#:G50 NIL) (|u| NIL)
           (|ffact| (|Factored| (|SparseMultivariatePolynomial| R OV)))
           (|ipol| (|SparseMultivariatePolynomial| R OV)) (|pol| (P))
-          (|pden| (R)) (#6=#:G471 NIL) (|c| NIL) (#7=#:G470 NIL))
+          (|pden| (R)) (#6=#:G49 NIL) (|c| NIL) (#7=#:G48 NIL))
          (SEQ
           (LETT |pden|
                 (SPADCALL
@@ -77,9 +77,9 @@
 
 (DECLAIM (NOTINLINE |MRationalFactorize;|)) 
 
-(DEFUN |MRationalFactorize| (&REST #1=#:G473)
+(DEFUN |MRationalFactorize| (&REST #1=#:G51)
   (SPROG NIL
-         (PROG (#2=#:G474)
+         (PROG (#2=#:G52)
            (RETURN
             (COND
              ((LETT #2#

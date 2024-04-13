@@ -5,55 +5,55 @@
 
 ; SPACE_CHAR       := STR_ELT('"    ", 0)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ SPACE_CHAR (STR_ELT "    " 0)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ SPACE_CHAR (STR_ELT "    " 0)))
 
 ; PAGE_CTL    := 12
 
-(EVAL-WHEN (EVAL LOAD) (SETQ PAGE_CTL 12))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ PAGE_CTL 12))
 
 ; ESCAPE      := STR_ELT('"__  ", 0)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ ESCAPE (STR_ELT "_  " 0)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ ESCAPE (STR_ELT "_  " 0)))
 
 ; STRING_CHAR := STR_ELT('"_"  ", 0)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ STRING_CHAR (STR_ELT "\"  " 0)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ STRING_CHAR (STR_ELT "\"  " 0)))
 
 ; PLUSCOMMENT := STR_ELT('"+   ", 0)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ PLUSCOMMENT (STR_ELT "+   " 0)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ PLUSCOMMENT (STR_ELT "+   " 0)))
 
 ; MINUSCOMMENT:= STR_ELT('"-   ", 0)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ MINUSCOMMENT (STR_ELT "-   " 0)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ MINUSCOMMENT (STR_ELT "-   " 0)))
 
 ; RADIX_CHAR  := STR_ELT('"r   ", 0)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ RADIX_CHAR (STR_ELT "r   " 0)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ RADIX_CHAR (STR_ELT "r   " 0)))
 
 ; DOT         := STR_ELT('".   ", 0)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ DOT (STR_ELT ".   " 0)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ DOT (STR_ELT ".   " 0)))
 
 ; EXPONENT1   := STR_ELT('"E   ", 0)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ EXPONENT1 (STR_ELT "E   " 0)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ EXPONENT1 (STR_ELT "E   " 0)))
 
 ; EXPONENT2   := STR_ELT('"e   ", 0)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ EXPONENT2 (STR_ELT "e   " 0)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ EXPONENT2 (STR_ELT "e   " 0)))
 
 ; CLOSEPAREN  := STR_ELT('")   ", 0)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ CLOSEPAREN (STR_ELT ")   " 0)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ CLOSEPAREN (STR_ELT ")   " 0)))
 
 ; CLOSEANGLE  := STR_ELT('">   ", 0)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ CLOSEANGLE (STR_ELT ">   " 0)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ CLOSEANGLE (STR_ELT ">   " 0)))
 
 ; QUESTION    := STR_ELT('"?   ", 0)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ QUESTION (STR_ELT "?   " 0)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ QUESTION (STR_ELT "?   " 0)))
 
 ; scanKeyWords := [ _
 ;            ['"add",      "add"], _
@@ -161,7 +161,7 @@
 ;            ['"`", "BACKQUOTE" ]_
 ;                           ]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |scanKeyWords|
           (LIST (LIST "add" '|add|) (LIST "and" '|and|) (LIST "break" '|break|)
                 (LIST "by" '|by|) (LIST "case" '|case|) (LIST "catch" '|catch|)
@@ -340,15 +340,15 @@
 
 ; scanKeyTable:=scanKeyTableCons()
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |scanKeyTable| (|scanKeyTableCons|)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |scanKeyTable| (|scanKeyTableCons|)))
 
 ; scanDict:=scanDictCons()
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |scanDict| (|scanDictCons|)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |scanDict| (|scanDictCons|)))
 
 ; scanPun:=scanPunCons()
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |scanPun| (|scanPunCons|)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |scanPun| (|scanPunCons|)))
 
 ; for i in   [ _
 ;    ["=",   "="], _
@@ -383,7 +383,7 @@
 ;    ["SEG"       ,".."] _
 ;     ] repeat MAKEPROP(first i, 'INFGENERIC, CADR i)
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (PROG ()
     (RETURN
      ((LAMBDA (|bfVar#6| |i|)
@@ -941,7 +941,7 @@
 
 ; scanCloser:=[")","}","]","|)","|}","|]"]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |scanCloser| (LIST '|)| '} '] '|\|)| '|\|}| '|\|]|)))
 
 ; scanCloser? w== MEMQ(keyword w,scanCloser)

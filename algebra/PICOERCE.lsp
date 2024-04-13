@@ -1,5 +1,5 @@
 
-(SDEFUN |PICOERCE;coerce;PE;1| ((|x| (|Pi|)) (% (|Expression| R)))
+(SDEFUN |PICOERCE;coerce;PdE;1| ((|x| (|PiDomain|)) (% (|Expression| R)))
         (SPROG ((|f| (|Fraction| (|SparseUnivariatePolynomial| (|Integer|)))))
                (SEQ (LETT |f| (SPADCALL |x| (QREFELT % 9)))
                     (EXIT
@@ -14,9 +14,9 @@
 
 (DECLAIM (NOTINLINE |PiCoercions;|)) 
 
-(DEFUN |PiCoercions| (#1=#:G451)
+(DEFUN |PiCoercions| (#1=#:G18)
   (SPROG NIL
-         (PROG (#2=#:G452)
+         (PROG (#2=#:G19)
            (RETURN
             (COND
              ((LETT #2#
@@ -47,12 +47,13 @@
 
 (MAKEPROP '|PiCoercions| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|Fraction| 10) (|Pi|)
-              (0 . |convert|) (|SparseUnivariatePolynomial| 16) (5 . |numer|)
-              (10 . |denom|) (|Expression| 6) (15 . /) |PICOERCE;coerce;PE;1|
-              (|Integer|) (21 . |coerce|) (|SparseUnivariatePolynomial| 13)
-              (|Mapping| 13 16) (|SparseUnivariatePolynomialFunctions2| 16 13)
-              (26 . |map|) (32 . |pi|) (36 . |elt|))
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|Fraction| 10)
+              (|PiDomain|) (0 . |convert|) (|SparseUnivariatePolynomial| 16)
+              (5 . |numer|) (10 . |denom|) (|Expression| 6) (15 . /)
+              |PICOERCE;coerce;PdE;1| (|Integer|) (21 . |coerce|)
+              (|SparseUnivariatePolynomial| 13) (|Mapping| 13 16)
+              (|SparseUnivariatePolynomialFunctions2| 16 13) (26 . |map|)
+              (32 . |pi|) (36 . |elt|))
            '#(|coerce| 42) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -60,7 +61,8 @@
                         '#((|Join|
                             (|mkCategory|
                              (LIST
-                              '((|coerce| ((|Expression| |#1|) (|Pi|))) T))
+                              '((|coerce| ((|Expression| |#1|) (|PiDomain|)))
+                                T))
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 23
                                             '(1 8 7 0 9 1 7 10 0 11 1 7 10 0 12

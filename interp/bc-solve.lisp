@@ -5,15 +5,15 @@
 
 ; $systemType := nil
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$systemType| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$systemType| NIL))
 
 ; $numberOfEquations := 0
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$numberOfEquations| 0))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$numberOfEquations| 0))
 
 ; $solutionMethod := nil
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$solutionMethod| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$solutionMethod| NIL))
 
 ; bcSolve() ==
 ;   htInitPage('"Solve Basic Command", nil)

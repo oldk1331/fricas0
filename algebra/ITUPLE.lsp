@@ -20,9 +20,9 @@
 
 (DECLAIM (NOTINLINE |InfiniteTuple;|)) 
 
-(DEFUN |InfiniteTuple| (#1=#:G457)
+(DEFUN |InfiniteTuple| (#1=#:G10)
   (SPROG NIL
-         (PROG (#2=#:G458)
+         (PROG (#2=#:G11)
            (RETURN
             (COND
              ((LETT #2#

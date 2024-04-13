@@ -10,7 +10,7 @@
 
 (DEFUN |BinaryExpansion| ()
   (SPROG NIL
-         (PROG (#1=#:G484)
+         (PROG (#1=#:G69)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|BinaryExpansion|))
@@ -27,7 +27,7 @@
                   (HREM |$ConstructorCache| '|BinaryExpansion|)))))))))) 
 
 (DEFUN |BinaryExpansion;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (#1=#:G482 NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (#1=#:G67 NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|BinaryExpansion|))
           (LETT % (GETREFV 53))

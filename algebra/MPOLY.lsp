@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |MultivariatePolynomial;|)) 
 
-(DEFUN |MultivariatePolynomial| (&REST #1=#:G496)
+(DEFUN |MultivariatePolynomial| (&REST #1=#:G80)
   (SPROG NIL
-         (PROG (#2=#:G497)
+         (PROG (#2=#:G81)
            (RETURN
             (COND
              ((LETT #2#
@@ -22,9 +22,9 @@
 
 (DEFUN |MultivariatePolynomial;| (|#1| |#2|)
   (SPROG
-   ((#1=#:G495 NIL) (|pv$| NIL) (#2=#:G486 NIL) (#3=#:G488 NIL) (#4=#:G487 NIL)
-    (#5=#:G489 NIL) (#6=#:G490 NIL) (#7=#:G491 NIL) (#8=#:G492 NIL)
-    (#9=#:G493 NIL) (#10=#:G494 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+   ((#1=#:G79 NIL) (|pv$| NIL) (#2=#:G70 NIL) (#3=#:G72 NIL) (#4=#:G71 NIL)
+    (#5=#:G73 NIL) (#6=#:G74 NIL) (#7=#:G75 NIL) (#8=#:G76 NIL) (#9=#:G77 NIL)
+    (#10=#:G78 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 |#1|)
     (LETT DV$2 (|devaluate| |#2|))

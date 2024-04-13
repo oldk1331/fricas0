@@ -6,7 +6,7 @@
 
 (DEFUN |TopLevelThreeSpace| ()
   (SPROG NIL
-         (PROG (#1=#:G450)
+         (PROG (#1=#:G6)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|TopLevelThreeSpace|))

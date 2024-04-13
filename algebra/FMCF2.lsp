@@ -20,9 +20,9 @@
 
 (DECLAIM (NOTINLINE |FreeModuleCoefficientFunctions2;|)) 
 
-(DEFUN |FreeModuleCoefficientFunctions2| (&REST #1=#:G460)
+(DEFUN |FreeModuleCoefficientFunctions2| (&REST #1=#:G20)
   (SPROG NIL
-         (PROG (#2=#:G461)
+         (PROG (#2=#:G21)
            (RETURN
             (COND
              ((LETT #2#

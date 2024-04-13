@@ -19,9 +19,9 @@
 
 (DECLAIM (NOTINLINE |UnivariateLaurentSeries;|)) 
 
-(DEFUN |UnivariateLaurentSeries| (&REST #1=#:G508)
+(DEFUN |UnivariateLaurentSeries| (&REST #1=#:G98)
   (SPROG NIL
-         (PROG (#2=#:G509)
+         (PROG (#2=#:G99)
            (RETURN
             (COND
              ((LETT #2#
@@ -40,10 +40,9 @@
 
 (DEFUN |UnivariateLaurentSeries;| (|#1| |#2| |#3|)
   (SPROG
-   ((#1=#:G507 NIL) (|pv$| NIL) (#2=#:G496 NIL) (#3=#:G497 NIL) (#4=#:G499 NIL)
-    (#5=#:G500 NIL) (#6=#:G501 NIL) (#7=#:G502 NIL) (#8=#:G503 NIL)
-    (#9=#:G505 NIL) (#10=#:G506 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((#1=#:G97 NIL) (|pv$| NIL) (#2=#:G86 NIL) (#3=#:G87 NIL) (#4=#:G89 NIL)
+    (#5=#:G90 NIL) (#6=#:G91 NIL) (#7=#:G92 NIL) (#8=#:G93 NIL) (#9=#:G95 NIL)
+    (#10=#:G96 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 |#2|)

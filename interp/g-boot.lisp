@@ -843,7 +843,7 @@
 
 ; $TRACELETFLAG := false
 
-(EVAL-WHEN (EVAL LOAD) (SETQ $TRACELETFLAG NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ $TRACELETFLAG NIL))
 
 ; expandREPEAT(l) ==
 ;     [conds, :body] := repeat_tran(l, [])

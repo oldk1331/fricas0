@@ -4,7 +4,7 @@
         (SPADCALL |p| (QREFELT % 10))) 
 
 (SDEFUN |XDPOLY;sh;%Nni%;2| ((|p| (%)) (|n| (|NonNegativeInteger|)) (% (%)))
-        (SPROG ((|n1| (|NonNegativeInteger|)) (#1=#:G465 NIL))
+        (SPROG ((|n1| (|NonNegativeInteger|)) (#1=#:G29 NIL))
                (SEQ
                 (COND ((EQL |n| 0) (|spadConstant| % 14)) ((EQL |n| 1) |p|)
                       ('T
@@ -19,33 +19,35 @@
                                    (QREFELT % 18))))))))) 
 
 (SDEFUN |XDPOLY;sh;3%;3| ((|p1| (%)) (|p2| (%)) (% (%)))
-        (SPROG
-         ((|p| (%)) (#1=#:G475 NIL) (|t2| NIL) (#2=#:G474 NIL) (|t1| NIL))
-         (SEQ (LETT |p| (|spadConstant| % 12))
-              (SEQ (LETT |t1| NIL) (LETT #2# |p1|) G190
-                   (COND
-                    ((OR (ATOM #2#) (PROGN (LETT |t1| (CAR #2#)) NIL))
-                     (GO G191)))
-                   (SEQ
-                    (EXIT
-                     (SEQ (LETT |t2| NIL) (LETT #1# |p2|) G190
-                          (COND
-                           ((OR (ATOM #1#) (PROGN (LETT |t2| (CAR #1#)) NIL))
-                            (GO G191)))
-                          (SEQ
-                           (EXIT
-                            (LETT |p|
-                                  (SPADCALL |p|
-                                            (SPADCALL
-                                             (SPADCALL (QCDR |t1|) (QCDR |t2|)
-                                                       (QREFELT % 19))
-                                             (|XDPOLY;shw| (QCAR |t1|)
-                                              (QCAR |t2|) %)
-                                             (QREFELT % 20))
-                                            (QREFELT % 21)))))
-                          (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))))
-                   (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
-              (EXIT |p|)))) 
+        (SPROG ((|p| (%)) (#1=#:G40 NIL) (|t2| NIL) (#2=#:G39 NIL) (|t1| NIL))
+               (SEQ (LETT |p| (|spadConstant| % 12))
+                    (SEQ (LETT |t1| NIL) (LETT #2# |p1|) G190
+                         (COND
+                          ((OR (ATOM #2#) (PROGN (LETT |t1| (CAR #2#)) NIL))
+                           (GO G191)))
+                         (SEQ
+                          (EXIT
+                           (SEQ (LETT |t2| NIL) (LETT #1# |p2|) G190
+                                (COND
+                                 ((OR (ATOM #1#)
+                                      (PROGN (LETT |t2| (CAR #1#)) NIL))
+                                  (GO G191)))
+                                (SEQ
+                                 (EXIT
+                                  (LETT |p|
+                                        (SPADCALL |p|
+                                                  (SPADCALL
+                                                   (SPADCALL (QCDR |t1|)
+                                                             (QCDR |t2|)
+                                                             (QREFELT % 19))
+                                                   (|XDPOLY;shw| (QCAR |t1|)
+                                                    (QCAR |t2|) %)
+                                                   (QREFELT % 20))
+                                                  (QREFELT % 21)))))
+                                (LETT #1# (CDR #1#)) (GO G190) G191
+                                (EXIT NIL))))
+                         (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                    (EXIT |p|)))) 
 
 (SDEFUN |XDPOLY;coerce;Fm%;4| ((|w| (|FreeMonoid| |vl|)) (% (%)))
         (SPADCALL (|spadConstant| % 15) |w| (QREFELT % 23))) 
@@ -54,7 +56,7 @@
         (SPADCALL (SPADCALL |v| (QREFELT % 25)) (QREFELT % 24))) 
 
 (SDEFUN |XDPOLY;*;vl2%;6| ((|v| (|vl|)) (|p| (%)) (% (%)))
-        (SPROG ((#1=#:G482 NIL) (|t| NIL) (#2=#:G481 NIL))
+        (SPROG ((#1=#:G47 NIL) (|t| NIL) (#2=#:G46 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -130,8 +132,8 @@
 
 (SDEFUN |XDPOLY;varList;%L;12| ((|p| (%)) (% (|List| |vl|)))
         (SPROG
-         ((|le| #1=(|List| |vl|)) (#2=#:G509 NIL) (#3=#:G508 #1#)
-          (#4=#:G510 #1#) (#5=#:G514 NIL) (|t| NIL))
+         ((|le| #1=(|List| |vl|)) (#2=#:G74 NIL) (#3=#:G73 #1#) (#4=#:G75 #1#)
+          (#5=#:G79 NIL) (|t| NIL))
          (SEQ
           (COND ((SPADCALL |p| (QREFELT % 47)) NIL)
                 (#6='T
@@ -160,8 +162,8 @@
 
 (SDEFUN |XDPOLY;rquo;%Fm%;13| ((|p| (%)) (|w| (|FreeMonoid| |vl|)) (% (%)))
         (SPROG
-         ((#1=#:G517 NIL) (|r| (|Union| (|FreeMonoid| |vl|) #2="failed"))
-          (#3=#:G523 NIL) (|t| NIL) (#4=#:G522 NIL))
+         ((#1=#:G82 NIL) (|r| (|Union| (|FreeMonoid| |vl|) #2="failed"))
+          (#3=#:G88 NIL) (|t| NIL) (#4=#:G87 NIL))
          (SEQ
           (PROGN
            (LETT #4# NIL)
@@ -190,8 +192,8 @@
 
 (SDEFUN |XDPOLY;lquo;%Fm%;14| ((|p| (%)) (|w| (|FreeMonoid| |vl|)) (% (%)))
         (SPROG
-         ((#1=#:G526 NIL) (|r| (|Union| (|FreeMonoid| |vl|) #2="failed"))
-          (#3=#:G532 NIL) (|t| NIL) (#4=#:G531 NIL))
+         ((#1=#:G91 NIL) (|r| (|Union| (|FreeMonoid| |vl|) #2="failed"))
+          (#3=#:G97 NIL) (|t| NIL) (#4=#:G96 NIL))
          (SEQ
           (PROGN
            (LETT #4# NIL)
@@ -220,8 +222,8 @@
 
 (SDEFUN |XDPOLY;rquo;%vl%;15| ((|p| (%)) (|v| (|vl|)) (% (%)))
         (SPROG
-         ((#1=#:G535 NIL) (|r| (|Union| (|FreeMonoid| |vl|) #2="failed"))
-          (#3=#:G541 NIL) (|t| NIL) (#4=#:G540 NIL))
+         ((#1=#:G100 NIL) (|r| (|Union| (|FreeMonoid| |vl|) #2="failed"))
+          (#3=#:G106 NIL) (|t| NIL) (#4=#:G105 NIL))
          (SEQ
           (PROGN
            (LETT #4# NIL)
@@ -250,8 +252,8 @@
 
 (SDEFUN |XDPOLY;lquo;%vl%;16| ((|p| (%)) (|v| (|vl|)) (% (%)))
         (SPROG
-         ((#1=#:G544 NIL) (|r| (|Union| (|FreeMonoid| |vl|) #2="failed"))
-          (#3=#:G550 NIL) (|t| NIL) (#4=#:G549 NIL))
+         ((#1=#:G109 NIL) (|r| (|Union| (|FreeMonoid| |vl|) #2="failed"))
+          (#3=#:G115 NIL) (|t| NIL) (#4=#:G114 NIL))
          (SEQ
           (PROGN
            (LETT #4# NIL)
@@ -304,8 +306,8 @@
 
 (SDEFUN |XDPOLY;lquo;3%;18| ((|p| (%)) (|q| (%)) (% (%)))
         (SPROG
-         ((#1=#:G556 NIL) (#2=#:G555 (%)) (#3=#:G557 (%)) (|r| (%))
-          (#4=#:G559 NIL) (|t| NIL))
+         ((#1=#:G121 NIL) (#2=#:G120 (%)) (#3=#:G122 (%)) (|r| (%))
+          (#4=#:G124 NIL) (|t| NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -327,8 +329,8 @@
 
 (SDEFUN |XDPOLY;rquo;3%;19| ((|p| (%)) (|q| (%)) (% (%)))
         (SPROG
-         ((#1=#:G561 NIL) (#2=#:G560 (%)) (#3=#:G562 (%)) (|r| (%))
-          (#4=#:G564 NIL) (|t| NIL))
+         ((#1=#:G126 NIL) (#2=#:G125 (%)) (#3=#:G127 (%)) (|r| (%))
+          (#4=#:G129 NIL) (|t| NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -349,7 +351,7 @@
            (COND (#1# #2#) ('T (|spadConstant| % 12))))))) 
 
 (SDEFUN |XDPOLY;coef;2%R;20| ((|p| (%)) (|q| (%)) (% (R)))
-        (SPROG ((#1=#:G568 NIL))
+        (SPROG ((#1=#:G133 NIL))
                (SEQ
                 (EXIT
                  (COND
@@ -372,14 +374,14 @@
                                        (QCDR (|SPADfirst| |q|)) (QREFELT % 19))
                              (SPADCALL (CDR |p|) (CDR |q|) (QREFELT % 69))
                              (QREFELT % 71)))
-                      (GO #2=#:G567)))))))
+                      (GO #2=#:G132)))))))
                 #2# (EXIT #1#)))) 
 
 (DECLAIM (NOTINLINE |XDistributedPolynomial;|)) 
 
-(DEFUN |XDistributedPolynomial| (&REST #1=#:G573)
+(DEFUN |XDistributedPolynomial| (&REST #1=#:G138)
   (SPROG NIL
-         (PROG (#2=#:G574)
+         (PROG (#2=#:G139)
            (RETURN
             (COND
              ((LETT #2#
@@ -398,7 +400,7 @@
 
 (DEFUN |XDistributedPolynomial;| (|#1| |#2|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G572 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+   ((|pv$| NIL) (#1=#:G137 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))

@@ -44,9 +44,9 @@
 
 (DECLAIM (NOTINLINE |LinearSystemMatrixPackage1;|)) 
 
-(DEFUN |LinearSystemMatrixPackage1| (#1=#:G462)
+(DEFUN |LinearSystemMatrixPackage1| (#1=#:G26)
   (SPROG NIL
-         (PROG (#2=#:G463)
+         (PROG (#2=#:G27)
            (RETURN
             (COND
              ((LETT #2#

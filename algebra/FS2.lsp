@@ -35,7 +35,7 @@
                   (QREFELT % 25))) 
 
 (SDEFUN |FS2;map;MAB;3| ((|f| (|Mapping| S R)) (|x| (A)) (% (B)))
-        (SPROG ((#1=#:G482 NIL))
+        (SPROG ((#1=#:G42 NIL))
                (SPADCALL (|FS2;smpmap| |f| (SPADCALL |x| (QREFELT % 23)) %)
                          (PROG2
                              (LETT #1#
@@ -54,9 +54,9 @@
 
 (DECLAIM (NOTINLINE |FunctionSpaceFunctions2;|)) 
 
-(DEFUN |FunctionSpaceFunctions2| (&REST #1=#:G592)
+(DEFUN |FunctionSpaceFunctions2| (&REST #1=#:G157)
   (SPROG NIL
-         (PROG (#2=#:G593)
+         (PROG (#2=#:G158)
            (RETURN
             (COND
              ((LETT #2#

@@ -33,9 +33,9 @@
 
 (DECLAIM (NOTINLINE |HashTable;|)) 
 
-(DEFUN |HashTable| (&REST #1=#:G526)
+(DEFUN |HashTable| (&REST #1=#:G87)
   (SPROG NIL
-         (PROG (#2=#:G527)
+         (PROG (#2=#:G88)
            (RETURN
             (COND
              ((LETT #2#
@@ -52,7 +52,7 @@
 
 (DEFUN |HashTable;| (|#1| |#2| |#3|)
   (SPROG
-   ((#1=#:G525 NIL) (#2=#:G524 NIL) (|pv$| NIL) (#3=#:G522 NIL) (#4=#:G523 NIL)
+   ((#1=#:G86 NIL) (#2=#:G85 NIL) (|pv$| NIL) (#3=#:G83 NIL) (#4=#:G84 NIL)
     (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))

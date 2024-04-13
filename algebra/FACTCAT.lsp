@@ -7,7 +7,7 @@
   (COND (|FacetCategory;AL|) (T (SETQ |FacetCategory;AL| (|FacetCategory;|))))) 
 
 (DEFUN |FacetCategory;| ()
-  (SPROG ((#1=#:G449 NIL))
+  (SPROG ((#1=#:G2 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|SetCategory|) (|OrderedSet|)

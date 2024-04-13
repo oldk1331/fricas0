@@ -101,7 +101,7 @@
 
 (SDEFUN |RFDIST;chiSquare1;NniF;7|
         ((|dgfree| (|NonNegativeInteger|)) (% (|Float|)))
-        (SPROG ((|x| (|Float|)) (#1=#:G471 NIL) (|i| NIL))
+        (SPROG ((|x| (|Float|)) (#1=#:G36 NIL) (|i| NIL))
                (SEQ (LETT |x| (|spadConstant| % 21))
                     (SEQ (LETT |i| 1) (LETT #1# (QUOTIENT2 |dgfree| 2)) G190
                          (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -201,7 +201,7 @@
 
 (DEFUN |RandomFloatDistributions| ()
   (SPROG NIL
-         (PROG (#1=#:G490)
+         (PROG (#1=#:G55)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|RandomFloatDistributions|))

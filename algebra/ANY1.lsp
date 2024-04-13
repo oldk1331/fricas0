@@ -16,9 +16,9 @@
 
 (DECLAIM (NOTINLINE |AnyFunctions1;|)) 
 
-(DEFUN |AnyFunctions1| (#1=#:G462)
+(DEFUN |AnyFunctions1| (#1=#:G15)
   (SPROG NIL
-         (PROG (#2=#:G463)
+         (PROG (#2=#:G16)
            (RETURN
             (COND
              ((LETT #2#

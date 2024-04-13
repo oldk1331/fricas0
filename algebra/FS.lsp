@@ -6,7 +6,7 @@
 (DEFPARAMETER |FunctionSpace;AL| 'NIL) 
 
 (DEFUN |FunctionSpace| (|t#1|)
-  (LET (#1=#:G494 (#2=#:G495 (|devaluate| |t#1|)))
+  (LET (#1=#:G47 (#2=#:G48 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |FunctionSpace;AL|)) (CDR #1#))
           (T
            (SETQ |FunctionSpace;AL|
@@ -15,11 +15,11 @@
            #1#)))) 
 
 (DEFUN |FunctionSpace;| (|t#1|)
-  (SPROG ((#1=#:G493 NIL))
+  (SPROG ((#1=#:G46 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
-                                   (|subst_in_cat| '(#2=#:G492)
+                                   (|subst_in_cat| '(#2=#:G45)
                                                    (LIST '(|Symbol|))
                                                    (COND (|FunctionSpace;CAT|)
                                                          ('T

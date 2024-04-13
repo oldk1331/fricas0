@@ -22,8 +22,8 @@
            (|SparseMultivariatePolynomial| (|Expression| (|Integer|)) JB))
           (|Exp| (|List| (|NonNegativeInteger|))) (JV (|List| JB))
           (|newco| (|Expression| (|Integer|))) (|jv| (|Union| JB "failed"))
-          (|vs| (%)) (#1=#:G494 NIL) (|v| NIL) (#2=#:G492 NIL) (|mon| NIL)
-          (#3=#:G493 NIL) (|co| NIL) (CO (|List| (|Integer|)))
+          (|vs| (%)) (#1=#:G63 NIL) (|v| NIL) (#2=#:G61 NIL) (|mon| NIL)
+          (#3=#:G62 NIL) (|co| NIL) (CO (|List| (|Integer|)))
           (PM
            (|List| (|SparseMultivariatePolynomial| (|Integer|) (|Kernel| %))))
           (|p| (|SparseMultivariatePolynomial| (|Integer|) (|Kernel| %))))
@@ -82,8 +82,8 @@
         ((|p| (|SparseMultivariatePolynomial| (|Expression| (|Integer|)) JB))
          (% (%)))
         (SPROG
-         ((|res| (%)) (|prod| (%)) (#1=#:G504 NIL) (|v| NIL) (#2=#:G502 NIL)
-          (|mon| NIL) (#3=#:G503 NIL) (|co| NIL)
+         ((|res| (%)) (|prod| (%)) (#1=#:G74 NIL) (|v| NIL) (#2=#:G72 NIL)
+          (|mon| NIL) (#3=#:G73 NIL) (|co| NIL)
           (CO (|List| (|Expression| (|Integer|))))
           (PM
            (|List|
@@ -145,7 +145,7 @@
 (SDEFUN |JBE;purge|
         ((|l| (|List| (|Kernel| %))) (|q| (|NonNegativeInteger|))
          (% (|List| (|Kernel| %))))
-        (SPROG ((#1=#:G522 NIL) (|k| NIL) (#2=#:G521 NIL))
+        (SPROG ((#1=#:G92 NIL) (|k| NIL) (#2=#:G91 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -170,9 +170,9 @@
          (|sets| #2=(|List| (|List| (|Kernel| %))))
          (% (|List| (|List| (|Kernel| %)))))
         (SPROG
-         ((|res| #2#) (|elem| (|Boolean|)) (#3=#:G544 NIL) (|ik| NIL)
-          (#4=#:G543 NIL) (#5=#:G541 NIL) (|m| NIL) (#6=#:G542 NIL)
-          (#7=#:G539 NIL) (|lv| NIL) (#8=#:G540 NIL)
+         ((|res| #2#) (|elem| (|Boolean|)) (#3=#:G124 NIL) (|ik| NIL)
+          (#4=#:G123 NIL) (#5=#:G121 NIL) (|m| NIL) (#6=#:G122 NIL)
+          (#7=#:G119 NIL) (|lv| NIL) (#8=#:G120 NIL)
           (|indK| (|List| (|Kernel| %))) (|newVars| #1#) (|jk| (|Kernel| %)))
          (SEQ (LETT |res| |sets|) (LETT |newVars| |remVars|)
               (SEQ G190 (COND ((NULL (NULL (NULL |newVars|))) (GO G191)))
@@ -238,12 +238,12 @@
         ((|sys| (|List| %)) (|jm| (|SparseEchelonMatrix| JB %))
          (|q| (|NonNegativeInteger|)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((|dim| (|NonNegativeInteger|)) (#1=#:G558 NIL) (|ind| NIL)
+         ((|dim| (|NonNegativeInteger|)) (#1=#:G138 NIL) (|ind| NIL)
           (|indSets| (|List| (|List| (|Kernel| %))))
-          (|dim0| (|NonNegativeInteger|)) (#2=#:G550 NIL)
-          (|allvars| (|List| (|Kernel| %))) (#3=#:G557 NIL) (|lv| NIL)
-          (|lmv| (|List| (|List| (|Kernel| %)))) (#4=#:G556 NIL) (|p| NIL)
-          (#5=#:G555 NIL)
+          (|dim0| (|NonNegativeInteger|)) (#2=#:G130 NIL)
+          (|allvars| (|List| (|Kernel| %))) (#3=#:G137 NIL) (|lv| NIL)
+          (|lmv| (|List| (|List| (|Kernel| %)))) (#4=#:G136 NIL) (|p| NIL)
+          (#5=#:G135 NIL)
           (|polys|
            (|List| (|SparseMultivariatePolynomial| (|Integer|) (|Kernel| %)))))
          (SEQ (LETT |polys| (SPADCALL (ELT % 19) |sys| (QREFELT % 78)))
@@ -297,12 +297,12 @@
         ((|sys| (|List| %)) (|jm| (|SparseEchelonMatrix| JB %))
          (|q| (|NonNegativeInteger|)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((|dim| (|NonNegativeInteger|)) (#1=#:G572 NIL) (|ind| NIL)
+         ((|dim| (|NonNegativeInteger|)) (#1=#:G152 NIL) (|ind| NIL)
           (|indSets| (|List| (|List| (|Kernel| %))))
-          (|dim0| (|NonNegativeInteger|)) (#2=#:G564 NIL)
-          (|allvars| (|List| (|Kernel| %))) (#3=#:G571 NIL) (|lv| NIL)
-          (|lmv| (|List| (|List| (|Kernel| %)))) (#4=#:G570 NIL) (|p| NIL)
-          (#5=#:G569 NIL)
+          (|dim0| (|NonNegativeInteger|)) (#2=#:G144 NIL)
+          (|allvars| (|List| (|Kernel| %))) (#3=#:G151 NIL) (|lv| NIL)
+          (|lmv| (|List| (|List| (|Kernel| %)))) (#4=#:G150 NIL) (|p| NIL)
+          (#5=#:G149 NIL)
           (|polys|
            (|List| (|SparseMultivariatePolynomial| (|Integer|) (|Kernel| %)))))
          (SEQ (LETT |polys| (SPADCALL (ELT % 19) |sys| (QREFELT % 78)))
@@ -479,12 +479,12 @@
                                     (|:| |Entries| (|List| %))))
                      (|:| |Depend| (|List| (|NonNegativeInteger|)))))))
         (SPROG
-         ((#1=#:G618 NIL) (|fun| NIL) (|i| NIL) (#2=#:G617 NIL)
-          (|resJM| (|SparseEchelonMatrix| JB %)) (#3=#:G616 NIL) (|eq| NIL)
-          (#4=#:G615 NIL) (|resSys| (|List| %)) (#5=#:G614 NIL) (|rec| NIL)
-          (#6=#:G613 NIL) (|resDep| (|List| (|NonNegativeInteger|)))
-          (|tmp| (|List| (|List| (|NonNegativeInteger|)))) (#7=#:G612 NIL)
-          (#8=#:G611 NIL))
+         ((#1=#:G201 NIL) (|fun| NIL) (|i| NIL) (#2=#:G200 NIL)
+          (|resJM| (|SparseEchelonMatrix| JB %)) (#3=#:G199 NIL) (|eq| NIL)
+          (#4=#:G198 NIL) (|resSys| (|List| %)) (#5=#:G197 NIL) (|rec| NIL)
+          (#6=#:G196 NIL) (|resDep| (|List| (|NonNegativeInteger|)))
+          (|tmp| (|List| (|List| (|NonNegativeInteger|)))) (#7=#:G195 NIL)
+          (#8=#:G194 NIL))
          (SEQ
           (SPADCALL
            (SPADCALL (SPADCALL "groebnerSimp: #" (QREFELT % 110))
@@ -573,8 +573,8 @@
           (|newDep| (|List| (|NonNegativeInteger|)))
           (|newJMR|
            (|Record| (|:| |Indices| (|List| JB)) (|:| |Entries| (|List| %))))
-          (|newFun| (%)) (#1=#:G642 NIL)
-          (|sdep| (|List| (|NonNegativeInteger|))) (|ssub| (%)) (#2=#:G624 NIL)
+          (|newFun| (%)) (#1=#:G225 NIL)
+          (|sdep| (|List| (|NonNegativeInteger|))) (|ssub| (%)) (#2=#:G207 NIL)
           (|rsysL|
            (|List|
             (|Record| (|:| |Fun| %)
@@ -789,7 +789,7 @@
                                   (|List| (|List| (|NonNegativeInteger|))))))))
         (SPROG
          ((|resDep| (|List| (|List| (|NonNegativeInteger|))))
-          (|resSys| (|List| %)) (#1=#:G702 NIL) (|rec| NIL) (|i| NIL)
+          (|resSys| (|List| %)) (#1=#:G290 NIL) (|rec| NIL) (|i| NIL)
           (|resJM| (|SparseEchelonMatrix| JB %))
           (|sysL|
            (|List|
@@ -800,7 +800,7 @@
                       (|:| |Depend| (|List| (|NonNegativeInteger|))))))
           (|r|
            (|Record| (|:| |Indices| (|List| JB)) (|:| |Entries| (|List| %))))
-          (|neq| (%)) (#2=#:G701 NIL) (|eq| NIL) (|inds| (|List| JB)))
+          (|neq| (%)) (#2=#:G289 NIL) (|eq| NIL) (|inds| (|List| JB)))
          (SEQ (LETT |inds| (SPADCALL |jm| (QREFELT % 142))) (LETT |sysL| NIL)
               (SEQ (LETT |i| 1) (LETT |eq| NIL) (LETT #2# |sys|) G190
                    (COND
@@ -882,15 +882,15 @@
 
 (SDEFUN |JBE;jetVariables;%L;22| ((|Phi| (%)) (% (|List| JB)))
         (SPROG
-         ((JV (|List| JB)) (#1=#:G721 NIL)
-          (|pmindex| (|List| (|NonNegativeInteger|))) (#2=#:G718 NIL)
-          (#3=#:G736 NIL) (|i| NIL) (#4=#:G735 NIL)
-          (|mindex| (|List| (|Integer|))) (#5=#:G734 NIL) (#6=#:G733 NIL)
-          (|pupindex| #7=(|Integer|)) (#8=#:G713 NIL) (|uindex| #7#)
-          (#9=#:G710 NIL) (|xindex| #7#) (|arg| (|List| %)) (|typ| (|Symbol|))
-          (#10=#:G707 NIL) (#11=#:G731 NIL) (|Ke| NIL) (#12=#:G732 NIL)
-          (|Op| NIL) (|LOps| (|List| (|BasicOperator|))) (#13=#:G730 NIL)
-          (#14=#:G729 NIL) (|LKernels| (|List| (|Kernel| %))))
+         ((JV (|List| JB)) (#1=#:G309 NIL)
+          (|pmindex| (|List| (|NonNegativeInteger|))) (#2=#:G306 NIL)
+          (#3=#:G324 NIL) (|i| NIL) (#4=#:G323 NIL)
+          (|mindex| (|List| (|Integer|))) (#5=#:G322 NIL) (#6=#:G321 NIL)
+          (|pupindex| #7=(|Integer|)) (#8=#:G301 NIL) (|uindex| #7#)
+          (#9=#:G298 NIL) (|xindex| #7#) (|arg| (|List| %)) (|typ| (|Symbol|))
+          (#10=#:G295 NIL) (#11=#:G319 NIL) (|Ke| NIL) (#12=#:G320 NIL)
+          (|Op| NIL) (|LOps| (|List| (|BasicOperator|))) (#13=#:G318 NIL)
+          (#14=#:G317 NIL) (|LKernels| (|List| (|Kernel| %))))
          (SEQ (LETT JV NIL) (LETT |LKernels| (SPADCALL |Phi| (QREFELT % 157)))
               (LETT |LOps|
                     (PROGN
@@ -1079,9 +1079,9 @@
 
 (SDEFUN |JBE;hidedisp| ((|l| (|List| %)) (% (|OutputForm|)))
         (SPROG
-         ((|op| (|OutputForm|)) (#1=#:G765 NIL) (|e| NIL) (#2=#:G764 NIL)
-          (#3=#:G763 NIL) (|k| NIL) (|args| (|List| (|OutputForm|)))
-          (#4=#:G762 NIL) (|show| #5=(|Integer|)) (|num| #5#)
+         ((|op| (|OutputForm|)) (#1=#:G353 NIL) (|e| NIL) (#2=#:G352 NIL)
+          (#3=#:G351 NIL) (|k| NIL) (|args| (|List| (|OutputForm|)))
+          (#4=#:G350 NIL) (|show| #5=(|Integer|)) (|num| #5#)
           (|name| (|Symbol|)))
          (SEQ
           (LETT |name|
@@ -1137,11 +1137,11 @@
 
 (SDEFUN |JBE;hidediff| ((|l| (|List| %)) (|x| (|Symbol|)) (% (%)))
         (SPROG
-         ((|res| (%)) (|newarg| (|List| %)) (#1=#:G792 NIL) (|j| NIL)
-          (#2=#:G791 NIL) (|da| (%)) (|k| NIL) (#3=#:G790 NIL) (|arg| NIL)
-          (|op| (|BasicOperator|)) (|oldarg| (|List| %)) (#4=#:G771 NIL)
-          (|diff| (|List| (|Integer|))) (#5=#:G789 NIL) (#6=#:G788 NIL)
-          (|args| (|List| %)) (#7=#:G787 NIL) (|num| (|Integer|))
+         ((|res| (%)) (|newarg| (|List| %)) (#1=#:G380 NIL) (|j| NIL)
+          (#2=#:G379 NIL) (|da| (%)) (|k| NIL) (#3=#:G378 NIL) (|arg| NIL)
+          (|op| (|BasicOperator|)) (|oldarg| (|List| %)) (#4=#:G359 NIL)
+          (|diff| (|List| (|Integer|))) (#5=#:G377 NIL) (#6=#:G376 NIL)
+          (|args| (|List| %)) (#7=#:G375 NIL) (|num| (|Integer|))
           (|name| (|Symbol|)))
          (SEQ (LETT |oldarg| (SPADCALL |l| (QREFELT % 200)))
               (LETT |name|
@@ -1279,9 +1279,9 @@
 
 (DECLAIM (NOTINLINE |JetBundleExpression;|)) 
 
-(DEFUN |JetBundleExpression| (#1=#:G853)
+(DEFUN |JetBundleExpression| (#1=#:G457)
   (SPROG NIL
-         (PROG (#2=#:G854)
+         (PROG (#2=#:G458)
            (RETURN
             (COND
              ((LETT #2#
@@ -1297,7 +1297,7 @@
                   (HREM |$ConstructorCache| '|JetBundleExpression|)))))))))) 
 
 (DEFUN |JetBundleExpression;| (|#1|)
-  (SPROG ((|pv$| NIL) (#1=#:G852 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (#1=#:G456 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|JetBundleExpression| DV$1))
@@ -1449,10 +1449,11 @@
               (|List| 240) (|Polynomial| 24) (|Union| 242 '#1#)
               (|SegmentBinding| %)
               (|Record| (|:| |coef| 20) (|:| |generator| %))
-              (|Record| (|:| |coef1| %) (|:| |coef2| %) (|:| |generator| %))
               (|Record| (|:| |coef1| %) (|:| |coef2| %))
-              (|Union| 247 '"failed") (|Polynomial| %) (|Union| 28 '#1#)
-              (|List| 180) (|Union| 144 '#1#) (|Union| 24 '#1#)
+              (|Union| 246 '"failed")
+              (|Record| (|:| |coef1| %) (|:| |coef2| %) (|:| |generator| %))
+              (|Polynomial| %) (|Union| 28 '#1#) (|List| 180)
+              (|Union| 144 '#1#) (|Union| 24 '#1#)
               (|Record| (|:| |DSys| 20) (|:| |JVars| 125))
               (|Record| (|:| |DPhi| %) (|:| |JVars| 39))
               (|Record| (|:| |unit| %) (|:| |canonical| %) (|:| |associate| %))
@@ -1514,8 +1515,8 @@
               2620 |acsch| 2625 |acsc| 2630 |acoth| 2635 |acot| 2640 |acosh|
               2645 |acos| 2650 |abs| 2655 ^ 2660 |Zero| 2690 X 2694 U 2703 |Si|
               2712 |Shi| 2717 P 2722 |One| 2744 |Gamma| 2748 |Ei| 2759 D 2764
-              |Ci| 2790 |Chi| 2795 |Beta| 2800 = 2806 / 2812 - 2824 + 2835 *
-              2841)
+              |Ci| 2790 |Chi| 2795 |Beta| 2800 = 2813 / 2819 - 2831 + 2842 *
+              2848)
            'NIL
            (CONS
             (|makeByteWordVec2| 13
@@ -1666,8 +1667,8 @@
                                     5 242 0 1 1 0 28 0 182 1 0 144 0 191 1 0 24
                                     0 165 1 0 6 0 1 2 0 0 0 0 1 2 5 229 230 231
                                     1 1 5 232 230 1 2 0 20 20 20 1 1 0 0 0 1 1
-                                    0 57 0 61 2 0 0 0 0 1 2 0 0 0 244 1 2 0 0 0
-                                    144 1 1 0 245 20 1 1 0 65 0 1 2 0 0 0 0 1 2
+                                    0 57 0 61 2 0 0 0 0 1 2 0 0 0 144 1 2 0 0 0
+                                    244 1 1 0 245 20 1 1 0 65 0 1 2 0 0 0 0 1 2
                                     0 0 0 0 1 2 0 0 0 147 1 0 0 0 1 2 0 0 0 0 1
                                     3 10 225 0 217 225 1 3 11 226 0 218 226 1 1
                                     0 0 0 1 3 0 33 20 85 33 88 1 0 33 0 62 2 0
@@ -1697,9 +1698,9 @@
                                     209 1 0 0 0 1 1 0 0 0 1 2 0 65 0 0 1 2 0 65
                                     0 144 1 2 0 65 0 6 1 1 0 0 0 1 3 0 254 20
                                     147 85 1 3 0 255 0 147 85 1 2 0 0 0 40 1 2
-                                    0 20 20 147 1 2 0 0 0 147 1 1 0 0 0 1 1 0 0
-                                    0 1 2 0 0 0 144 1 1 0 0 0 1 1 0 219 0 1 1 0
-                                    85 85 1 2 0 246 0 0 1 3 0 248 0 0 0 1 2 0
+                                    0 20 20 147 1 2 0 0 0 147 1 1 0 0 0 1 2 0 0
+                                    0 144 1 1 0 0 0 1 1 0 0 0 1 1 0 219 0 1 1 0
+                                    85 85 1 3 0 247 0 0 0 1 2 0 248 0 0 1 2 0
                                     57 0 0 59 2 0 212 20 0 1 1 0 0 0 1 1 17 65
                                     0 1 4 7 0 0 158 0 144 1 4 7 0 0 215 20 144
                                     1 4 5 0 0 237 40 239 1 4 5 0 0 144 33 240 1
@@ -1747,10 +1748,10 @@
                                     0 0 33 1 1 0 0 40 1 2 0 0 147 40 1 0 0 0 36
                                     2 0 0 0 0 1 1 0 0 0 1 1 0 0 0 1 3 0 0 0 144
                                     33 1 3 0 0 0 237 40 1 2 0 0 0 237 1 2 0 0 0
-                                    144 1 1 0 0 0 1 1 0 0 0 1 2 0 0 0 0 1 2 0
-                                    65 0 0 143 2 1 0 14 14 15 2 0 0 0 0 60 2 0
-                                    0 0 0 1 1 0 0 0 187 2 0 0 0 0 53 2 5 0 0 24
-                                    1 2 0 0 210 0 1 2 0 0 0 210 1 2 0 0 33 0 1
-                                    2 0 0 24 0 1 2 0 0 0 0 52 2 0 0 147 0
-                                    1)))))
+                                    144 1 1 0 0 0 1 1 0 0 0 1 2 0 0 0 0 1 3 0 0
+                                    0 0 0 1 2 0 65 0 0 143 2 1 0 14 14 15 2 0 0
+                                    0 0 60 2 0 0 0 0 1 1 0 0 0 187 2 0 0 0 0 53
+                                    2 5 0 0 24 1 2 0 0 0 210 1 2 0 0 210 0 1 2
+                                    0 0 33 0 1 2 0 0 24 0 1 2 0 0 0 0 52 2 0 0
+                                    147 0 1)))))
            '|lookupComplete|)) 

@@ -16,9 +16,9 @@
 
 (DECLAIM (NOTINLINE |InfiniteTupleFunctions3;|)) 
 
-(DEFUN |InfiniteTupleFunctions3| (&REST #1=#:G457)
+(DEFUN |InfiniteTupleFunctions3| (&REST #1=#:G10)
   (SPROG NIL
-         (PROG (#2=#:G458)
+         (PROG (#2=#:G11)
            (RETURN
             (COND
              ((LETT #2#

@@ -16,9 +16,9 @@
 
 (DECLAIM (NOTINLINE |AssociatedLieAlgebra;|)) 
 
-(DEFUN |AssociatedLieAlgebra| (&REST #1=#:G461)
+(DEFUN |AssociatedLieAlgebra| (&REST #1=#:G30)
   (SPROG NIL
-         (PROG (#2=#:G462)
+         (PROG (#2=#:G31)
            (RETURN
             (COND
              ((LETT #2#

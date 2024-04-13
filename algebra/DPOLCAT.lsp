@@ -6,8 +6,8 @@
 (DEFPARAMETER |DifferentialPolynomialCategory;AL| 'NIL) 
 
 (DEFUN |DifferentialPolynomialCategory| (|t#1| |t#2| |t#3| |t#4|)
-  (LET (#1=#:G467
-        (#2=#:G468
+  (LET (#1=#:G20
+        (#2=#:G21
          (LIST (|devaluate| |t#1|) (|devaluate| |t#2|) (|devaluate| |t#3|)
                (|devaluate| |t#4|))))
     (COND
@@ -22,7 +22,7 @@
       #1#)))) 
 
 (DEFUN |DifferentialPolynomialCategory;| (|t#1| |t#2| |t#3| |t#4|)
-  (SPROG ((#1=#:G466 NIL))
+  (SPROG ((#1=#:G19 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3| |t#4|)

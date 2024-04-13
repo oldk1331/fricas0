@@ -15,7 +15,7 @@
 
 ; $GENNO := 0
 
-(EVAL-WHEN (EVAL LOAD) (SETQ $GENNO 0))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ $GENNO 0))
 
 ; GENVAR() ==
 ;     INTERNL1('"$", STRINGIMAGE($GENNO := $GENNO + 1))
@@ -1037,7 +1037,7 @@
 
 ; $blank := char ('_ )
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$blank| (|char| '| |)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$blank| (|char| '| |)))
 
 ; trimString s ==
 ;   leftTrim rightTrim s
@@ -1148,26 +1148,27 @@
 
 ; $htHash      := MAKE_HASHTABLE('EQUAL)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$htHash| (MAKE_HASHTABLE 'EQUAL)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$htHash| (MAKE_HASHTABLE 'EQUAL)))
 
 ; $glossHash   := MAKE_HASHTABLE('EQUAL)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$glossHash| (MAKE_HASHTABLE 'EQUAL)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$glossHash| (MAKE_HASHTABLE 'EQUAL)))
 
 ; $lispHash    := MAKE_HASHTABLE('EQUAL)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$lispHash| (MAKE_HASHTABLE 'EQUAL)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$lispHash| (MAKE_HASHTABLE 'EQUAL)))
 
 ; $sysHash     := MAKE_HASHTABLE('EQUAL)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$sysHash| (MAKE_HASHTABLE 'EQUAL)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$sysHash| (MAKE_HASHTABLE 'EQUAL)))
 
 ; $htSystemCommands := '(
 ;  (boot . development) clear display (fin . development) edit help
 ;  frame history load quit read set show synonym system
 ;  trace what )
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$htSystemCommands|
           '((|boot| . |development|) |clear| |display| (|fin| . |development|)
             |edit| |help| |frame| |history| |load| |quit| |read| |set| |show|
@@ -1175,7 +1176,7 @@
 
 ; $currentSysList := [opOf x for x in $htSystemCommands] --see ht-root
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$currentSysList|
           ((LAMBDA (|bfVar#17| |bfVar#16| |x|)
              (LOOP
@@ -1188,113 +1189,107 @@
 
 ; $outStream   := nil
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$outStream| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$outStream| NIL))
 
 ; $recheckingFlag    := false     --see transformAndRecheckComments
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$recheckingFlag| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$recheckingFlag| NIL))
 
 ; $exposeFlag        := false     --if true, messages go to $outStream
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$exposeFlag| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$exposeFlag| NIL))
 
 ; $exposeFlagHeading := false     --see htcheck.boot
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$exposeFlagHeading| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$exposeFlagHeading| NIL))
 
 ; $checkingXmptex? := false       --see htcheck.boot
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$checkingXmptex?| NIL))
-
-; $exposeDocHeading:= nil         --see htcheck.boot
-
-(EVAL-WHEN (EVAL LOAD) (SETQ |$exposeDocHeading| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$checkingXmptex?| NIL))
 
 ; $charPlus := char '_+
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$charPlus| (|char| '+)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$charPlus| (|char| '+)))
 
 ; $charBlank:= (char '_ )
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$charBlank| (|char| '| |)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$charBlank| (|char| '| |)))
 
 ; $charLbrace:= char '_{
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$charLbrace| (|char| '{)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$charLbrace| (|char| '{)))
 
 ; $charRbrace:= char '_}
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$charRbrace| (|char| '})))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$charRbrace| (|char| '})))
 
 ; $charBack := char '_\
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$charBack| (|char| '|\\|)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$charBack| (|char| '|\\|)))
 
 ; $charDash := char '_-
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$charDash| (|char| '-)))
-
-; $charTab            := CODE_-CHAR(9)
-
-(EVAL-WHEN (EVAL LOAD) (SETQ |$charTab| (CODE-CHAR 9)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$charDash| (|char| '-)))
 
 ; $charNewline        := CODE_-CHAR(10)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$charNewline| (CODE-CHAR 10)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$charNewline| (CODE-CHAR 10)))
 
 ; $charFauxNewline    := CODE_-CHAR(25)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$charFauxNewline| (CODE-CHAR 25)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$charFauxNewline| (CODE-CHAR 25)))
 
 ; $stringNewline      := STRING($charNewline)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$stringNewline| (STRING |$charNewline|)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$stringNewline| (STRING |$charNewline|)))
 
 ; $stringFauxNewline  := STRING($charFauxNewline)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$stringFauxNewline| (STRING |$charFauxNewline|)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$stringFauxNewline| (STRING |$charFauxNewline|)))
 
 ; $charExclusions := [char 'a, char 'A]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$charExclusions| (LIST (|char| '|a|) (|char| 'A))))
 
 ; $charQuote := char '_'
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$charQuote| (|char| '|'|)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$charQuote| (|char| '|'|)))
 
 ; $charSemiColon := char '_;
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$charSemiColon| (|char| '|;|)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$charSemiColon| (|char| '|;|)))
 
 ; $charComma     := char '_,
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$charComma| (|char| '|,|)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$charComma| (|char| '|,|)))
 
 ; $charPeriod    := char '_.
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$charPeriod| (|char| '|.|)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$charPeriod| (|char| '|.|)))
 
 ; $checkPrenAlist := [[char '_(,:char '_)],[char '_{,:char '_}],[char '_[,:char '_]]]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$checkPrenAlist|
           (LIST (CONS (|char| '|(|) (|char| '|)|))
                 (CONS (|char| '{) (|char| '})) (CONS (|char| '[) (|char| '])))))
 
 ; $charEscapeList:= [char '_%,char '_#,$charBack]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$charEscapeList| (LIST (|char| '%) (|char| '|#|) |$charBack|)))
 
 ; $charIdentifierEndings := [char '__, char '_!, char '_?]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$charIdentifierEndings| (LIST (|char| '_) (|char| '!) (|char| '?))))
 
 ; $charSplitList := [$charComma,$charPeriod,char '_[, char '_],$charLbrace, $charRbrace, char '_(, char '_), char '_$, char '_%]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$charSplitList|
           (LIST |$charComma| |$charPeriod| (|char| '[) (|char| '])
                 |$charLbrace| |$charRbrace| (|char| '|(|) (|char| '|)|)
@@ -1302,13 +1297,13 @@
 
 ; $charDelimiters := [$charBlank, char '_(, char '_), $charBack]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$charDelimiters|
           (LIST |$charBlank| (|char| '|(|) (|char| '|)|) |$charBack|)))
 
 ; $HTspadmacros := '("\spadtype" "\spadcommand" "\spadop" "\spadfun" "\spadatt" "\spadsyscom" "\spad" "\s")
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$HTspadmacros|
           '("\\spadtype" "\\spadcommand" "\\spadop" "\\spadfun" "\\spadatt"
             "\\spadsyscom" "\\spad" "\\s")))
@@ -1321,7 +1316,7 @@
 ;          ['"\beginscroll",$charRbrace,'"scroll",$charLbrace,'"\begin"],
 ;            ['"\endscroll",$charRbrace,'"scroll",$charLbrace,'"\end"]]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$HTmacs|
           (LIST
            (LIST "\\beginmenu" |$charRbrace| "menu" |$charLbrace| "\\begin")
@@ -1339,7 +1334,7 @@
 ;   "\menuwindowlink"
 ;   "\menumemolink")
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$HTlinks|
           '("\\downlink" "\\menulink" "\\menudownlink" "\\menuwindowlink"
             "\\menumemolink")))
@@ -1352,7 +1347,7 @@
 ;   "\lispwindowlink"
 ;   "\lispmemolink")
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$HTlisplinks|
           '("\\lispdownlink" "\\menulispdownlink" "\\menulispwindowlink"
             "\\menulispmemolink" "\\lispwindowlink" "\\lispmemolink")))
@@ -1365,7 +1360,7 @@
 ;   "verbatim"
 ;   "detail")
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$beginEndList| '("page" "items" "menu" "scroll" "verbatim" "detail")))
 
 ; isDefaultPackageName x == (s := PNAME x).(MAXINDEX s) = char '_&

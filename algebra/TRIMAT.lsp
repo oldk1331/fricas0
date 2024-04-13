@@ -1,9 +1,9 @@
 
 (SDEFUN |TRIMAT;UpTriBddDenomInv;MRM;1| ((A (M)) (|denom| (R)) (% (M)))
         (SPROG
-         ((#1=#:G450 NIL) (#2=#:G462 NIL) (#3=#:G461 (R)) (#4=#:G463 (R))
-          (#5=#:G472 NIL) (|k| NIL) (#6=#:G471 NIL) (|j| NIL) (#7=#:G470 NIL)
-          (|i| NIL) (#8=#:G468 NIL) (#9=#:G469 NIL) (|offset| (|Integer|))
+         ((#1=#:G9 NIL) (#2=#:G22 NIL) (#3=#:G21 (R)) (#4=#:G23 (R))
+          (#5=#:G32 NIL) (|k| NIL) (#6=#:G31 NIL) (|j| NIL) (#7=#:G30 NIL)
+          (|i| NIL) (#8=#:G28 NIL) (#9=#:G29 NIL) (|offset| (|Integer|))
           (AI (M)))
          (SEQ
           (LETT AI
@@ -104,9 +104,9 @@
 
 (SDEFUN |TRIMAT;LowTriBddDenomInv;MRM;2| ((A (M)) (|denom| (R)) (% (M)))
         (SPROG
-         ((#1=#:G475 NIL) (#2=#:G487 NIL) (#3=#:G486 (R)) (#4=#:G488 (R))
-          (#5=#:G497 NIL) (|k| NIL) (#6=#:G496 NIL) (|j| NIL) (#7=#:G495 NIL)
-          (|i| NIL) (#8=#:G493 NIL) (#9=#:G494 NIL) (|offset| (|Integer|))
+         ((#1=#:G35 NIL) (#2=#:G47 NIL) (#3=#:G46 (R)) (#4=#:G48 (R))
+          (#5=#:G57 NIL) (|k| NIL) (#6=#:G56 NIL) (|j| NIL) (#7=#:G55 NIL)
+          (|i| NIL) (#8=#:G53 NIL) (#9=#:G54 NIL) (|offset| (|Integer|))
           (AI (M)))
          (SEQ
           (LETT AI
@@ -206,9 +206,9 @@
 
 (DECLAIM (NOTINLINE |TriangularMatrixOperations;|)) 
 
-(DEFUN |TriangularMatrixOperations| (&REST #1=#:G498)
+(DEFUN |TriangularMatrixOperations| (&REST #1=#:G58)
   (SPROG NIL
-         (PROG (#2=#:G499)
+         (PROG (#2=#:G59)
            (RETURN
             (COND
              ((LETT #2#

@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |XPolynomial;|)) 
 
-(DEFUN |XPolynomial| (#1=#:G466)
+(DEFUN |XPolynomial| (#1=#:G32)
   (SPROG NIL
-         (PROG (#2=#:G467)
+         (PROG (#2=#:G33)
            (RETURN
             (COND
              ((LETT #2#
@@ -18,7 +18,7 @@
                  ((NOT #2#) (HREM |$ConstructorCache| '|XPolynomial|)))))))))) 
 
 (DEFUN |XPolynomial;| (|#1|)
-  (SPROG ((|pv$| NIL) (#1=#:G465 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (#1=#:G31 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|XPolynomial| DV$1))

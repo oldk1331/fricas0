@@ -15,7 +15,7 @@
 
 (DEFUN |Exit| ()
   (SPROG NIL
-         (PROG (#1=#:G451)
+         (PROG (#1=#:G4)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Exit|))

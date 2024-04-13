@@ -6,7 +6,7 @@
 (DEFPARAMETER |AlgebraicallyClosedFunctionSpace;AL| 'NIL) 
 
 (DEFUN |AlgebraicallyClosedFunctionSpace| (|t#1|)
-  (LET (#1=#:G461 (#2=#:G462 (|devaluate| |t#1|)))
+  (LET (#1=#:G14 (#2=#:G15 (|devaluate| |t#1|)))
     (COND
      ((SETQ #1# (|assoc| #2# |AlgebraicallyClosedFunctionSpace;AL|)) (CDR #1#))
      (T
@@ -17,7 +17,7 @@
       #1#)))) 
 
 (DEFUN |AlgebraicallyClosedFunctionSpace;| (|t#1|)
-  (SPROG ((#1=#:G460 NIL))
+  (SPROG ((#1=#:G13 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)

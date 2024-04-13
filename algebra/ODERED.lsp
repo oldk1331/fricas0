@@ -4,8 +4,8 @@
 
 (SDEFUN |ODERED;get_sys| ((|l| (LO)) (% (|Matrix| L)))
         (SPROG
-         ((|mdi| (|Matrix| L)) (|sys| #1=(|Matrix| L)) (#2=#:G460 NIL)
-          (|i| NIL) (#3=#:G458 NIL) (#4=#:G459 NIL) (|j| NIL) (|md| #1#))
+         ((|mdi| (|Matrix| L)) (|sys| #1=(|Matrix| L)) (#2=#:G20 NIL) (|i| NIL)
+          (#3=#:G18 NIL) (#4=#:G19 NIL) (|j| NIL) (|md| #1#))
          (SEQ
           (LETT |md|
                 (|ODERED;matF2L|
@@ -66,7 +66,7 @@
          (%
           (|Record| (|:| |mat| (|Matrix| L))
                     (|:| |vecs| (|List| (|Vector| F))))))
-        (SPROG ((#1=#:G470 NIL) (|g| NIL) (#2=#:G469 NIL))
+        (SPROG ((#1=#:G34 NIL) (|g| NIL) (#2=#:G33 NIL))
                (SEQ
                 (CONS (|ODERED;get_sys| |l| %)
                       (PROGN
@@ -84,9 +84,9 @@
 
 (DECLAIM (NOTINLINE |ReduceLODE;|)) 
 
-(DEFUN |ReduceLODE| (&REST #1=#:G471)
+(DEFUN |ReduceLODE| (&REST #1=#:G35)
   (SPROG NIL
-         (PROG (#2=#:G472)
+         (PROG (#2=#:G36)
            (RETURN
             (COND
              ((LETT #2#

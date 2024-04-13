@@ -74,7 +74,7 @@
         ((|x| (|UnivariateLaurentSeries| |Coef| |var| |cen|)) (|term| (|Coef|))
          (|n| (|Integer|)) (% (|Coef|)))
         (SPROG
-         ((|app| (|Coef|)) (#1=#:G492 NIL) (|m| (|Integer|)) (|e| (|Integer|)))
+         ((|app| (|Coef|)) (#1=#:G61 NIL) (|m| (|Integer|)) (|e| (|Integer|)))
          (SEQ (LETT |m| (- |n| (LETT |e| (SPADCALL |x| (QREFELT % 51)))))
               (EXIT
                (COND ((< |m| 0) (|spadConstant| % 30))
@@ -155,7 +155,7 @@
          (|uu| (|Stream| |Coef|)) (|xxx| (|OutputForm|)) (% (|OutputForm|)))
         (SPROG
          ((|l| (|List| (|OutputForm|))) (|uu1| (|Stream| |Coef|)) (|n| NIL)
-          (#1=#:G526 NIL) (|count| (|NonNegativeInteger|)))
+          (#1=#:G106 NIL) (|count| (|NonNegativeInteger|)))
          (SEQ (LETT |l| NIL)
               (EXIT
                (COND
@@ -289,9 +289,9 @@
 
 (DECLAIM (NOTINLINE |UnivariatePuiseuxSeries;|)) 
 
-(DEFUN |UnivariatePuiseuxSeries| (&REST #1=#:G557)
+(DEFUN |UnivariatePuiseuxSeries| (&REST #1=#:G147)
   (SPROG NIL
-         (PROG (#2=#:G558)
+         (PROG (#2=#:G148)
            (RETURN
             (COND
              ((LETT #2#
@@ -310,8 +310,8 @@
 
 (DEFUN |UnivariatePuiseuxSeries;| (|#1| |#2| |#3|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G550 NIL) (#2=#:G551 NIL) (#3=#:G552 NIL) (#4=#:G553 NIL)
-    (#5=#:G555 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+   ((|pv$| NIL) (#1=#:G140 NIL) (#2=#:G141 NIL) (#3=#:G142 NIL) (#4=#:G143 NIL)
+    (#5=#:G145 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 |#2|)

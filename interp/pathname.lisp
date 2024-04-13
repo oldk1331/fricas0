@@ -58,7 +58,7 @@
 (DEFUN |isExistingFile| (|f|)
   (PROG () (RETURN (COND ((|make_input_filename| |f|) T) ('T NIL)))))
 
-; isSystemDirectory dir == EVERY(function CHAR_=,$SPADROOT,dir)
+; isSystemDirectory dir == EVERY(function CHAR_=,$spadroot,dir)
 
 (DEFUN |isSystemDirectory| (|dir|)
-  (PROG () (RETURN (EVERY #'CHAR= $SPADROOT |dir|))))
+  (PROG () (RETURN (EVERY #'CHAR= |$spadroot| |dir|))))

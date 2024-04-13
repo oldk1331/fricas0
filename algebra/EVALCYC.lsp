@@ -2,7 +2,7 @@
 (SDEFUN |EVALCYC;evp|
         ((|fn| (|Mapping| F (|Integer|))) (|pt| (|Partition|)) (% (F)))
         (SPROG
-         ((#1=#:G449 NIL) (#2=#:G448 (F)) (#3=#:G450 (F)) (#4=#:G452 NIL)
+         ((#1=#:G11 NIL) (#2=#:G10 (F)) (#3=#:G12 (F)) (#4=#:G14 NIL)
           (|i| NIL))
          (SEQ
           (PROGN
@@ -35,9 +35,9 @@
 
 (DECLAIM (NOTINLINE |EvaluateCycleIndicators;|)) 
 
-(DEFUN |EvaluateCycleIndicators| (#1=#:G456)
+(DEFUN |EvaluateCycleIndicators| (#1=#:G24)
   (SPROG NIL
-         (PROG (#2=#:G457)
+         (PROG (#2=#:G25)
            (RETURN
             (COND
              ((LETT #2#

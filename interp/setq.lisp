@@ -151,6 +151,7 @@
    (|trace|                          . |interpreter|)
    (|undo|                           . |interpreter|)
    (|what|                           . |interpreter|)
+   (|version|                        . |interpreter|)
  ))
 
 (SETQ |$noParseCommands| '(
@@ -165,6 +166,7 @@
     |suspend|
     |synonym|
     |system|
+    |version|
     ))
 
 (SETQ |$tokenCommands| '(
@@ -231,9 +233,9 @@
        (|startGraphics|    .  "system $FRICAS/lib/viewman &")
        (|stopGraphics|     .  "lisp (|sockSendSignal| 2 15)")
        (|time|       . "set message time")
+       (|storage|    . "set message storage")
        (|type|       . "set message type")
        (|unexpose|   . "set expose drop constructor")
-       (|version|    . "lisp (concat |$build_version| \" compiled at \" |$build_date|)")
        (|wc|         . "what categories")
        (|wd|         . "what domains")
        (|wp|         . "what packages")
@@ -268,8 +270,6 @@
 
 ;; the following symbol holds the canonical "failed" value
 (SETQ |$failed| "failed")
-
-(SETQ |$constructorDataTable| NIL)
 
 (SETQ |$univariateDomains| '(
     |UnivariatePolynomial|
@@ -316,7 +316,7 @@
    |UnionCategory|
       ))
 
-(SETQ |$printStorageIfTrue| NIL) ;; storage info disabled in common lisp
+(SETQ |$printStorageIfTrue| NIL)
 (SETQ |$noEnv| NIL)
 
 (SETQ |$SideEffectFreeFunctionList| '(

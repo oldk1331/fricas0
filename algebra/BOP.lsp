@@ -117,7 +117,7 @@
 
 (SDEFUN |BOP;arity;%U;25|
         ((|op| (%)) (% (|Union| (|NonNegativeInteger|) "failed")))
-        (SPROG ((#1=#:G524 NIL) (|n| (|SingleInteger|)))
+        (SPROG ((#1=#:G92 NIL) (|n| (|SingleInteger|)))
                (COND
                 ((|negative?_SI| (LETT |n| (QVELT |op| 1))) (CONS 1 "failed"))
                 ('T
@@ -127,7 +127,7 @@
                                            '(|Integer|) #1#))))))) 
 
 (SDEFUN |BOP;copy;2%;26| ((|op| (%)) (% (%)))
-        (SPROG ((#1=#:G535 NIL) (|r| NIL) (#2=#:G534 NIL))
+        (SPROG ((#1=#:G103 NIL) (|r| NIL) (#2=#:G102 NIL))
                (SEQ
                 (|BOP;oper| (SPADCALL |op| (QREFELT % 13)) (QVELT |op| 1)
                  (SPADCALL
@@ -265,7 +265,7 @@
 
 (DEFUN |BasicOperator| ()
   (SPROG NIL
-         (PROG (#1=#:G572)
+         (PROG (#1=#:G140)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|BasicOperator|))

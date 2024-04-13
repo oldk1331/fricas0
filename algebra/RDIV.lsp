@@ -197,9 +197,9 @@
 
 (DECLAIM (NOTINLINE |ReducedDivisor;|)) 
 
-(DEFUN |ReducedDivisor| (&REST #1=#:G464)
+(DEFUN |ReducedDivisor| (&REST #1=#:G32)
   (SPROG NIL
-         (PROG (#2=#:G465)
+         (PROG (#2=#:G33)
            (RETURN
             (COND
              ((LETT #2#

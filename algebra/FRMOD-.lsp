@@ -6,7 +6,7 @@
         (SPADCALL |v| (QREFELT % 11))) 
 
 (SDEFUN |FRMOD-;coordinates;VM;3| ((|v| (|Vector| S)) (% (|Matrix| R)))
-        (SPROG ((#1=#:G461 NIL) (|i| NIL) (|j| NIL) (|m| (|Matrix| R)))
+        (SPROG ((#1=#:G25 NIL) (|i| NIL) (|j| NIL) (|m| (|Matrix| R)))
                (SEQ
                 (LETT |m|
                       (MAKE_MATRIX1 (QVSIZE |v|) (SPADCALL (QREFELT % 14))
@@ -29,7 +29,7 @@
          ((|l| (|List| R)) (|i1| #1=(|Integer|)) (|ii| (|Integer|))
           (|#G11|
            (|Record| (|:| |quotient| (|Integer|)) (|:| |remainder| #1#)))
-          (#2=#:G468 NIL) (|j| NIL) (|m| (|NonNegativeInteger|)))
+          (#2=#:G37 NIL) (|j| NIL) (|m| (|NonNegativeInteger|)))
          (SEQ (LETT |m| (SPADCALL (QREFELT % 24))) (LETT |l| NIL)
               (LETT |ii| (- |i| 1))
               (SEQ (LETT |j| 1) (LETT #2# (SPADCALL (QREFELT % 14))) G190
@@ -48,7 +48,7 @@
 
 (SDEFUN |FRMOD-;lookup;SPi;5| ((|x| (S)) (% (|PositiveInteger|)))
         (SPROG
-         ((|res| (|Integer|)) (#1=#:G473 NIL) (|i| NIL)
+         ((|res| (|Integer|)) (#1=#:G42 NIL) (|i| NIL)
           (|m| (|NonNegativeInteger|)) (|v| (|Vector| R)))
          (SEQ (LETT |v| (SPADCALL |x| (QREFELT % 9))) (LETT |res| 0)
               (LETT |m| (SPADCALL (QREFELT % 24)))
@@ -69,7 +69,7 @@
         (EXPT (SPADCALL (QREFELT % 24)) (SPADCALL (QREFELT % 14)))) 
 
 (SDEFUN |FRMOD-;random;S;7| ((% (S)))
-        (SPROG ((#1=#:G478 NIL) (#2=#:G480 NIL) (|i| NIL) (#3=#:G479 NIL))
+        (SPROG ((#1=#:G47 NIL) (#2=#:G49 NIL) (|i| NIL) (#3=#:G48 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN

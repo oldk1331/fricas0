@@ -5,7 +5,7 @@
 
 ; $spadLibFT := 'NRLIB
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$spadLibFT| 'NRLIB))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$spadLibFT| 'NRLIB))
 
 ; readLib(fn) == rMkIstream(make_filename(fn))
 

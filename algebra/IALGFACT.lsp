@@ -3,7 +3,7 @@
         ((|f| (|AlPol|)) (|k| (|Integer|))
          (|fact| (|Mapping| (|Factored| UP) UP)) (% (|List| |AlPol|)))
         (SPROG
-         ((#1=#:G458 NIL) (|pp| NIL) (#2=#:G457 NIL) (|pol| (|AlPol|))
+         ((#1=#:G28 NIL) (|pp| NIL) (#2=#:G27 NIL) (|pol| (|AlPol|))
           (|lsols| (|List| |AlPol|)) (|newf| (|AlPol|)))
          (SEQ
           (LETT |pol|
@@ -42,8 +42,8 @@
         ((|f| (|AlPol|)) (|k| (|Integer|))
          (|fact| (|Mapping| (|Factored| UP) UP)) (% (|List| |AlPol|)))
         (SPROG
-         ((|listerm| (|List| |AlPol|)) (|newf| (|AlPol|)) (#1=#:G465 NIL)
-          (|g| (|AlPol|)) (#2=#:G475 NIL) (|pelt| NIL)
+         ((|listerm| (|List| |AlPol|)) (|newf| (|AlPol|)) (#1=#:G35 NIL)
+          (|g| (|AlPol|)) (#2=#:G45 NIL) (|pelt| NIL)
           (|listfact|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
@@ -107,87 +107,56 @@
         ((|f| (|AlPol|)) (|fact| (|Mapping| (|Factored| UP) UP))
          (% (|Factored| |AlPol|)))
         (SPROG
-         ((#1=#:G478 NIL) (#2=#:G477 #3=(|Factored| |AlPol|)) (#4=#:G479 #3#)
-          (#5=#:G482 NIL) (#6=#:G481 #3#) (#7=#:G483 #3#) (#8=#:G488 NIL)
-          (|pol| NIL) (#9=#:G487 NIL) (|sqterm| NIL)
+         ((|fl|
+           (|List|
+            (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
+                      (|:| |factor| |AlPol|)
+                      (|:| |exponent| #1=(|NonNegativeInteger|)))))
+          (#2=#:G62 NIL) (|f1| NIL) (|e1| #1#) (#3=#:G61 NIL) (|sq1| NIL)
           (|sqf| (|Factored| |AlPol|)))
-         (SEQ (LETT |sqf| (SPADCALL |f| (QREFELT % 34)))
+         (SEQ (LETT |sqf| (SPADCALL |f| (QREFELT % 34))) (LETT |fl| NIL)
+              (SEQ (LETT |sq1| NIL) (LETT #3# (SPADCALL |sqf| (QREFELT % 38)))
+                   G190
+                   (COND
+                    ((OR (ATOM #3#) (PROGN (LETT |sq1| (CAR #3#)) NIL))
+                     (GO G191)))
+                   (SEQ (LETT |e1| (QVELT |sq1| 2))
+                        (EXIT
+                         (SEQ (LETT |f1| NIL)
+                              (LETT #2#
+                                    (|IALGFACT;irrfactor| (QVELT |sq1| 1) 0
+                                     |fact| %))
+                              G190
+                              (COND
+                               ((OR (ATOM #2#)
+                                    (PROGN (LETT |f1| (CAR #2#)) NIL))
+                                (GO G191)))
+                              (SEQ
+                               (EXIT
+                                (LETT |fl|
+                                      (CONS (VECTOR (CONS 3 "prime") |f1| |e1|)
+                                            |fl|))))
+                              (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))))
+                   (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
               (EXIT
-               (SPADCALL (SPADCALL |sqf| (QREFELT % 36))
-                         (PROGN
-                          (LETT #1# NIL)
-                          (SEQ (LETT |sqterm| NIL)
-                               (LETT #9# (SPADCALL |sqf| (QREFELT % 39))) G190
-                               (COND
-                                ((OR (ATOM #9#)
-                                     (PROGN (LETT |sqterm| (CAR #9#)) NIL))
-                                 (GO G191)))
-                               (SEQ
-                                (EXIT
-                                 (PROGN
-                                  (LETT #4#
-                                        (PROGN
-                                         (LETT #5# NIL)
-                                         (SEQ (LETT |pol| NIL)
-                                              (LETT #8#
-                                                    (|IALGFACT;irrfactor|
-                                                     (QVELT |sqterm| 1) 0
-                                                     |fact| %))
-                                              G190
-                                              (COND
-                                               ((OR (ATOM #8#)
-                                                    (PROGN
-                                                     (LETT |pol| (CAR #8#))
-                                                     NIL))
-                                                (GO G191)))
-                                              (SEQ
-                                               (EXIT
-                                                (PROGN
-                                                 (LETT #7#
-                                                       (SPADCALL |pol|
-                                                                 (QVELT
-                                                                  |sqterm| 2)
-                                                                 (QREFELT %
-                                                                          40)))
-                                                 (COND
-                                                  (#5#
-                                                   (LETT #6#
-                                                         (SPADCALL #6# #7#
-                                                                   (QREFELT %
-                                                                            41))))
-                                                  ('T
-                                                   (PROGN
-                                                    (LETT #6# #7#)
-                                                    (LETT #5# 'T)))))))
-                                              (LETT #8# (CDR #8#)) (GO G190)
-                                              G191 (EXIT NIL))
-                                         (COND (#5# #6#)
-                                               ('T (|spadConstant| % 42)))))
-                                  (COND
-                                   (#1#
-                                    (LETT #2#
-                                          (SPADCALL #2# #4# (QREFELT % 41))))
-                                   ('T
-                                    (PROGN (LETT #2# #4#) (LETT #1# 'T)))))))
-                               (LETT #9# (CDR #9#)) (GO G190) G191 (EXIT NIL))
-                          (COND (#1# #2#) ('T (|spadConstant| % 42))))
-                         (QREFELT % 43)))))) 
+               (SPADCALL (SPADCALL |sqf| (QREFELT % 39)) |fl|
+                         (QREFELT % 40)))))) 
 
 (SDEFUN |IALGFACT;pnorm| ((|q| (|AlPol|)) (% (UP)))
-        (SPADCALL (|IALGFACT;convrt| |q| %) (QREFELT % 53) (QREFELT % 54))) 
+        (SPADCALL (|IALGFACT;convrt| |q| %) (QREFELT % 50) (QREFELT % 51))) 
 
 (SDEFUN |IALGFACT;change| ((|q| (UP)) (% (|AlPol|)))
-        (SPADCALL (ELT % 55) |q| (QREFELT % 58))) 
+        (SPADCALL (ELT % 52) |q| (QREFELT % 55))) 
 
 (SDEFUN |IALGFACT;convrt|
         ((|q| (|AlPol|)) (% (|SparseUnivariatePolynomial| UP)))
-        (SPADCALL (SPADCALL (ELT % 59) |q| (QREFELT % 62)) (QREFELT % 64))) 
+        (SPADCALL (SPADCALL (ELT % 56) |q| (QREFELT % 59)) (QREFELT % 61))) 
 
 (DECLAIM (NOTINLINE |InnerAlgFactor;|)) 
 
-(DEFUN |InnerAlgFactor| (&REST #1=#:G494)
+(DEFUN |InnerAlgFactor| (&REST #1=#:G69)
   (SPROG NIL
-         (PROG (#2=#:G495)
+         (PROG (#2=#:G70)
            (RETURN
             (COND
              ((LETT #2#
@@ -214,7 +183,7 @@
     (LETT DV$3 (|devaluate| |#3|))
     (LETT DV$4 (|devaluate| |#4|))
     (LETT |dv$| (LIST '|InnerAlgFactor| DV$1 DV$2 DV$3 DV$4))
-    (LETT % (GETREFV 65))
+    (LETT % (GETREFV 62))
     (QSETREFV % 0 |dv$|)
     (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
     (|haddProp| |$ConstructorCache| '|InnerAlgFactor|
@@ -225,8 +194,8 @@
     (QSETREFV % 8 |#3|)
     (QSETREFV % 9 |#4|)
     (SETF |pv$| (QREFELT % 3))
-    (QSETREFV % 47 (SPADCALL (QREFELT % 46)))
-    (QSETREFV % 53 (SPADCALL (ELT % 48) (QREFELT % 47) (QREFELT % 52)))
+    (QSETREFV % 44 (SPADCALL (QREFELT % 43)))
+    (QSETREFV % 50 (SPADCALL (ELT % 45) (QREFELT % 44) (QREFELT % 49)))
     %))) 
 
 (MAKEPROP '|InnerAlgFactor| '|infovec|
@@ -240,19 +209,19 @@
               (|Record| (|:| |flag| 23) (|:| |factor| 7) (|:| |exponent| 12))
               (|List| 24) (|Factored| 7) (57 . |factorList|) (62 . |gcd|)
               (|Union| % '"failed") (68 . |exquo|) (|List| 9) (74 . |append|)
-              (|Factored| %) (80 . |squareFree|) (|Factored| 9) (85 . |unit|)
+              (|Factored| %) (80 . |squareFree|)
               (|Record| (|:| |flag| 23) (|:| |factor| 9) (|:| |exponent| 12))
-              (|List| 37) (90 . |factorList|) (95 . |primeFactor|) (101 . *)
-              (107 . |One|) (111 . *) (|Mapping| 26 7)
-              |IALGFACT;factor;AlPolMF;3| (117 . |definingPolynomial|) '|p|
-              (121 . |coerce|) (|SparseUnivariatePolynomial| 7) (|Mapping| 7 6)
-              (|UnivariatePolynomialCategoryFunctions2| 6 7 7 49) (126 . |map|)
-              '|newp| (132 . |resultant|) (138 . |coerce|) (|Mapping| 8 6)
-              (|UnivariatePolynomialCategoryFunctions2| 6 7 8 9) (143 . |map|)
-              (149 . |lift|) (|Mapping| 7 8)
-              (|UnivariatePolynomialCategoryFunctions2| 8 9 7 49) (154 . |map|)
-              (|CommuteUnivariatePolynomialCategory| 6 7 49) (160 . |swap|))
-           '#(|factor| 165) 'NIL
+              (|List| 35) (|Factored| 9) (85 . |factorList|) (90 . |unit|)
+              (95 . |makeFR|) (|Mapping| 26 7) |IALGFACT;factor;AlPolMF;3|
+              (101 . |definingPolynomial|) '|p| (105 . |coerce|)
+              (|SparseUnivariatePolynomial| 7) (|Mapping| 7 6)
+              (|UnivariatePolynomialCategoryFunctions2| 6 7 7 46) (110 . |map|)
+              '|newp| (116 . |resultant|) (122 . |coerce|) (|Mapping| 8 6)
+              (|UnivariatePolynomialCategoryFunctions2| 6 7 8 9) (127 . |map|)
+              (133 . |lift|) (|Mapping| 7 8)
+              (|UnivariatePolynomialCategoryFunctions2| 8 9 7 46) (138 . |map|)
+              (|CommuteUnivariatePolynomialCategory| 6 7 46) (144 . |swap|))
+           '#(|factor| 149) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
                        (CONS
@@ -264,18 +233,17 @@
                                   (|Mapping| (|Factored| |#2|) |#2|)))
                                 T))
                              (LIST) NIL NIL)))
-                        (|makeByteWordVec2| 64
+                        (|makeByteWordVec2| 61
                                             '(0 8 0 10 0 6 0 11 2 9 0 8 12 13 1
                                               6 0 14 15 0 7 0 16 2 7 0 6 12 17
                                               1 8 0 7 18 2 9 0 0 0 19 2 9 0 0 0
                                               20 2 9 0 0 0 21 1 9 12 0 22 1 26
                                               25 0 27 2 9 0 0 0 28 2 9 29 0 0
-                                              30 2 31 0 0 0 32 1 9 33 0 34 1 35
-                                              9 0 36 1 35 38 0 39 2 35 0 9 12
-                                              40 2 35 0 0 0 41 0 35 0 42 2 35 0
-                                              9 0 43 0 8 7 46 1 7 0 6 48 2 51
-                                              49 50 7 52 2 49 7 0 0 54 1 8 0 6
-                                              55 2 57 9 56 7 58 1 8 7 0 59 2 61
-                                              49 60 9 62 1 63 49 49 64 2 0 35 9
-                                              44 45)))))
+                                              30 2 31 0 0 0 32 1 9 33 0 34 1 37
+                                              36 0 38 1 37 9 0 39 2 37 0 9 36
+                                              40 0 8 7 43 1 7 0 6 45 2 48 46 47
+                                              7 49 2 46 7 0 0 51 1 8 0 6 52 2
+                                              54 9 53 7 55 1 8 7 0 56 2 58 46
+                                              57 9 59 1 60 46 46 61 2 0 37 9 41
+                                              42)))))
            '|lookupComplete|)) 

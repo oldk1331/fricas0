@@ -41,7 +41,7 @@
                     (|:| |totdeg| (|NonNegativeInteger|)) (|:| |poli| |Dpol|)
                     (|:| |polj| |Dpol|))))
         (SPROG
-         ((|tdeg| (|NonNegativeInteger|)) (|e2| (|Expon|)) (#1=#:G475 NIL)
+         ((|tdeg| (|NonNegativeInteger|)) (|e2| (|Expon|)) (#1=#:G32 NIL)
           (|e1| (|Expon|)) (|deg| (|Expon|)) (|p1| (|Dpol|)))
          (SEQ (LETT |p1| (QCDR |sp1|))
               (LETT |deg|
@@ -78,7 +78,7 @@
 
 (SDEFUN |NGROEB;gbasis| ((|Pol| (|List| |Dpol|)) (% (|List| |Dpol|)))
         (SPROG
-         ((#1=#:G522 NIL) (|x| NIL) (#2=#:G521 NIL) (|redPols| (|List| |Dpol|))
+         ((#1=#:G91 NIL) (|x| NIL) (#2=#:G90 NIL) (|redPols| (|List| |Dpol|))
           (|basPols|
            (|List|
             (|Record| (|:| |totdeg| (|NonNegativeInteger|))
@@ -88,13 +88,13 @@
             #3=(|Record| (|:| |lcmfij| |Expon|)
                          (|:| |totdeg| (|NonNegativeInteger|))
                          (|:| |poli| |Dpol|) (|:| |polj| |Dpol|))))
-          (D1 (|List| #3#)) (#4=#:G520 NIL) (#5=#:G519 NIL) (#6=#:G514 NIL)
-          (#7=#:G513 NIL) (|h| (|Dpol|)) (|s| (|Dpol|))
+          (D1 (|List| #3#)) (#4=#:G89 NIL) (#5=#:G88 NIL) (#6=#:G83 NIL)
+          (#7=#:G82 NIL) (|h| (|Dpol|)) (|s| (|Dpol|))
           (D0
            (|Record| (|:| |lcmfij| |Expon|)
                      (|:| |totdeg| (|NonNegativeInteger|)) (|:| |poli| |Dpol|)
                      (|:| |polj| |Dpol|)))
-          (#8=#:G518 NIL) (#9=#:G517 NIL) (#10=#:G516 NIL) (#11=#:G515 NIL)
+          (#8=#:G87 NIL) (#9=#:G86 NIL) (#10=#:G85 NIL) (#11=#:G84 NIL)
           (|toth| (|NonNegativeInteger|)) (|Pol1| (|List| |Dpol|)))
          (SEQ
           (LETT |Pol1|
@@ -161,12 +161,12 @@
                         (EXIT
                          (COND
                           ((SPADCALL |h| (|spadConstant| % 36) (QREFELT % 37))
-                           (PROGN (LETT #7# |$NoValue|) (GO #12=#:G497)))
+                           (PROGN (LETT #7# |$NoValue|) (GO #12=#:G58)))
                           ((SPADCALL (SPADCALL |h| (QREFELT % 16))
                                      (|spadConstant| % 35) (QREFELT % 38))
                            (SEQ (LETT D NIL)
                                 (LETT |basPols| (|NGROEB;updatF| |h| 0 NIL %))
-                                (EXIT (PROGN (LETT #6# 1) (GO #13=#:G508)))))
+                                (EXIT (PROGN (LETT #6# 1) (GO #13=#:G77)))))
                           ('T
                            (SEQ
                             (LETT D1
@@ -250,7 +250,7 @@
          (% (|Dpol|)))
         (SPROG
          ((|cc| (|Record| (|:| |co1| |Dom|) (|:| |co2| |Dom|))) (|fj| (|Dpol|))
-          (#1=#:G530 NIL) (|fi| (|Dpol|)) (|Tij| (|Expon|)))
+          (#1=#:G100 NIL) (|fi| (|Dpol|)) (|Tij| (|Expon|)))
          (SEQ (LETT |Tij| (QVELT |p| 0)) (LETT |fi| (QVELT |p| 2))
               (LETT |fj| (QVELT |p| 3))
               (LETT |fi|
@@ -475,9 +475,9 @@
 
 (DECLAIM (NOTINLINE |NGroebnerPackage;|)) 
 
-(DEFUN |NGroebnerPackage| (&REST #1=#:G575)
+(DEFUN |NGroebnerPackage| (&REST #1=#:G145)
   (SPROG NIL
-         (PROG (#2=#:G576)
+         (PROG (#2=#:G146)
            (RETURN
             (COND
              ((LETT #2#

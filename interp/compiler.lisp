@@ -58,7 +58,8 @@
 
 ; init_compiler_properties()
 
-(EVAL-WHEN (EVAL LOAD) (PROG () (RETURN (|init_compiler_properties|))))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (PROG () (RETURN (|init_compiler_properties|))))
 
 ; DEFPARAMETER($currentFunctionLevel, 0)
 

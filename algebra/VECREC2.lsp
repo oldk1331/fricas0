@@ -1,7 +1,7 @@
 
 (SDEFUN |VECREC2;modInverse|
         ((|c| (|Integer|)) (|p| (|Integer|)) (% (|Integer|)))
-        (SPROG ((#1=#:G463 NIL))
+        (SPROG ((#1=#:G19 NIL))
                (QCAR
                 (PROG2 (LETT #1# (SPADCALL |c| |p| 1 (QREFELT % 10)))
                     (QCDR #1#)
@@ -15,7 +15,7 @@
                                   #1#))))) 
 
 (SDEFUN |VECREC2;empty;I%;2| ((|nint| (|Integer|)) (% (%)))
-        (SPROG ((|intvec| (|PrimitiveArray| (|Integer|))) (#1=#:G467 NIL))
+        (SPROG ((|intvec| (|PrimitiveArray| (|Integer|))) (#1=#:G24 NIL))
                (SEQ
                 (LETT |intvec|
                       (MAKEARR1
@@ -31,10 +31,10 @@
         ((|vec| (|U32Vector|)) (|p| (|Integer|)) (|statearg| (%)) (% (|Void|)))
         (SPROG
          ((|nmp| #1=(|Integer|)) (|cor| #2=(|Integer|)) (|ii| (|Integer|))
-          (#3=#:G491 NIL) (|i| NIL) (|mpfact| #1#) (|nbmp| #1#)
+          (#3=#:G51 NIL) (|i| NIL) (|mpfact| #1#) (|nbmp| #1#)
           (|mpcor| (|Integer|)) (|mpval| #2#) (|bmp| (|Integer|))
-          (|bintvec| (|PrimitiveArray| (|Integer|))) (#4=#:G490 NIL)
-          (#5=#:G474 NIL) (#6=#:G489 NIL)
+          (|bintvec| (|PrimitiveArray| (|Integer|))) (#4=#:G50 NIL)
+          (#5=#:G34 NIL) (#6=#:G49 NIL)
           (|intvec| (|PrimitiveArray| (|Integer|))) (|mp| (|Integer|))
           (|state| (|Rep|)))
          (SEQ (LETT |state| |statearg|) (LETT |mp| (QVELT |state| 0))
@@ -149,7 +149,7 @@
 (SDEFUN |VECREC2;hensel_update;UvI%V;4|
         ((|vec| (|U32Vector|)) (|p| (|Integer|)) (|statearg| (%)) (% (|Void|)))
         (SPROG
-         ((#1=#:G497 NIL) (|i| NIL) (|intvec| (|PrimitiveArray| (|Integer|)))
+         ((#1=#:G57 NIL) (|i| NIL) (|intvec| (|PrimitiveArray| (|Integer|)))
           (|mp| (|Integer|)) (|state| (|Rep|)))
          (SEQ (LETT |state| |statearg|) (LETT |mp| (QVELT |state| 0))
               (LETT |intvec| (QVELT |state| 4))
@@ -200,16 +200,16 @@
                      (|:| |denoms| (|PrimitiveArray| (|Integer|))))
            "failed")))
         (SPROG
-         ((#1=#:G555 NIL) (|cden| #2=(|Integer|))
+         ((#1=#:G115 NIL) (|cden| #2=(|Integer|))
           (|ppr| (|Record| (|:| |num| (|Integer|)) (|:| |den| (|Integer|))))
           (|pp|
            (|Union| (|Record| (|:| |num| (|Integer|)) (|:| |den| #2#))
                     "failed"))
           (|r1| (|Integer|)) (|co| (|Integer|)) (|cb| (|Integer|))
-          (|j| #3=(|Integer|)) (#4=#:G554 NIL) (|ctmp| (|Integer|))
-          (#5=#:G556 NIL) (|jj| NIL) (|dens| (|PrimitiveArray| (|Integer|)))
-          (|nums| (|PrimitiveArray| (|Integer|))) (#6=#:G532 NIL)
-          (#7=#:G530 NIL) (|mm| (|NonNegativeInteger|)) (|n| (|Integer|))
+          (|j| #3=(|Integer|)) (#4=#:G114 NIL) (|ctmp| (|Integer|))
+          (#5=#:G116 NIL) (|jj| NIL) (|dens| (|PrimitiveArray| (|Integer|)))
+          (|nums| (|PrimitiveArray| (|Integer|))) (#6=#:G92 NIL) (#7=#:G90 NIL)
+          (|mm| (|NonNegativeInteger|)) (|n| (|Integer|))
           (|bound2| (|Integer|)) (|bound| (|Integer|)) (|j0| #3#)
           (|intvec| (|PrimitiveArray| (|Integer|))) (|modulus| (|Integer|))
           (|state| (|Rep|)))
@@ -232,7 +232,7 @@
                          (#8='T
                           (PROGN
                            (LETT #1# (CONS 1 "failed"))
-                           (GO #9=#:G553)))))))))
+                           (GO #9=#:G113)))))))))
                    (QSETVELT |state| 8 (QVELT |state| 7))
                    (LETT |modulus| (QVELT |state| 6))
                    (EXIT (LETT |intvec| (QVELT |state| 5))))))
@@ -291,7 +291,7 @@
                                              (EXIT
                                               (PROGN
                                                (LETT #4# |$NoValue|)
-                                               (GO #10=#:G538))))))))
+                                               (GO #10=#:G98))))))))
                                     (LETT |jj| (|inc_SI| |jj|)) (GO G190) G191
                                     (EXIT NIL)))
                               #10# (EXIT #4#))
@@ -402,7 +402,7 @@
 (SDEFUN |VECREC2;lcm|
         ((|nums| (|PrimitiveArray| (|Integer|))) (|lo| (|Integer|))
          (|hi| (|Integer|)) (% (|Integer|)))
-        (SPROG ((|res| (|Integer|)) (#1=#:G566 NIL) (|i| NIL))
+        (SPROG ((|res| (|Integer|)) (#1=#:G126 NIL) (|i| NIL))
                (SEQ (LETT |res| (QAREF1 |nums| |lo|))
                     (SEQ (LETT |i| (+ |lo| 1)) (LETT #1# |hi|) G190
                          (COND ((> |i| #1#) (GO G191)))
@@ -417,7 +417,7 @@
 (SDEFUN |VECREC2;gcd|
         ((|nums| (|PrimitiveArray| (|Integer|))) (|lo| (|Integer|))
          (|hi| (|Integer|)) (% (|Integer|)))
-        (SPROG ((|res| (|Integer|)) (#1=#:G571 NIL) (|i| NIL))
+        (SPROG ((|res| (|Integer|)) (#1=#:G131 NIL) (|i| NIL))
                (SEQ (LETT |res| (QAREF1 |nums| |lo|))
                     (SEQ (LETT |i| (+ |lo| 1)) (LETT #1# |hi|) G190
                          (COND ((> |i| #1#) (GO G191)))
@@ -432,9 +432,9 @@
          (|dens| (|PrimitiveArray| (|Integer|)))
          (% (|PrimitiveArray| (|Integer|))))
         (SPROG
-         ((#1=#:G576 NIL) (#2=#:G589 NIL) (|i| NIL) (|cfactor| (|Integer|))
-          (|tmpp2| (|Integer|)) (#3=#:G588 NIL) (|cden| (|Integer|))
-          (|hi| #4=(|Integer|)) (|li| #4#) (#5=#:G587 NIL) (|ib| NIL)
+         ((#1=#:G136 NIL) (#2=#:G149 NIL) (|i| NIL) (|cfactor| (|Integer|))
+          (|tmpp2| (|Integer|)) (#3=#:G148 NIL) (|cden| (|Integer|))
+          (|hi| #4=(|Integer|)) (|li| #4#) (#5=#:G147 NIL) (|ib| NIL)
           (|res| (|PrimitiveArray| (|Integer|))) (|np| (|NonNegativeInteger|))
           (|nb| (|NonNegativeInteger|)))
          (SEQ (LETT |nb| (QVSIZE |block_offsets|)) (LETT |np| (QVSIZE |nums|))
@@ -502,7 +502,7 @@
          ((|ppr|
            (|Record| (|:| |numers| (|PrimitiveArray| (|Integer|)))
                      (|:| |denoms| (|PrimitiveArray| (|Integer|)))))
-          (#1=#:G599 NIL)
+          (#1=#:G159 NIL)
           (|pp|
            (|Union|
             (|Record| (|:| |numers| (|PrimitiveArray| (|Integer|)))
@@ -517,7 +517,7 @@
             (EXIT
              (COND
               ((QEQCAR |pp| 1)
-               (PROGN (LETT #1# (CONS 1 "failed")) (GO #2=#:G598)))
+               (PROGN (LETT #1# (CONS 1 "failed")) (GO #2=#:G158)))
               ('T
                (SEQ (LETT |ppr| (QCDR |pp|))
                     (EXIT
@@ -530,7 +530,7 @@
 
 (DEFUN |VectorIntegerReconstructor| ()
   (SPROG NIL
-         (PROG (#1=#:G601)
+         (PROG (#1=#:G161)
            (RETURN
             (COND
              ((LETT #1#

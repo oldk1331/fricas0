@@ -10,7 +10,7 @@
 (SDEFUN |FRIMOD;basis;%V;3| ((|m| (%)) (% (|Vector| A))) |m|) 
 
 (SDEFUN |FRIMOD;rowdiv| ((|r| (|Vector| R)) (|f| (R)) (% (|Vector| F)))
-        (SPROG ((#1=#:G455 NIL) (#2=#:G457 NIL) (|i| NIL) (#3=#:G456 NIL))
+        (SPROG ((#1=#:G19 NIL) (#2=#:G21 NIL) (|i| NIL) (#3=#:G20 NIL))
                (SEQ
                 (PROGN
                  (LETT #3#
@@ -42,8 +42,8 @@
 
 (SDEFUN |FRIMOD;getinvintmat| ((% (|Boolean|)))
         (SPROG
-         ((#1=#:G471 NIL) (|j| NIL) (#2=#:G470 NIL) (|i| NIL)
-          (|m| (|Matrix| F)) (#3=#:G462 NIL))
+         ((#1=#:G35 NIL) (|j| NIL) (#2=#:G34 NIL) (|i| NIL) (|m| (|Matrix| F))
+          (#3=#:G26 NIL))
          (SEQ
           (LETT |m|
                 (PROG2 (LETT #3# (SPADCALL (|FRIMOD;intmat| %) (QREFELT % 37)))
@@ -69,8 +69,7 @@
 
 (SDEFUN |FRIMOD;getintmat| ((% (|Boolean|)))
         (SPROG
-         ((#1=#:G479 NIL) (|j| NIL) (#2=#:G478 NIL) (|i| NIL)
-          (|m| (|Matrix| F)))
+         ((#1=#:G43 NIL) (|j| NIL) (#2=#:G42 NIL) (|i| NIL) (|m| (|Matrix| F)))
          (SEQ (LETT |m| (SPADCALL (QREFELT % 10) (QREFELT % 34)))
               (SEQ (LETT |i| (PROGN |m| 1))
                    (LETT #2# (SPADCALL |m| (QREFELT % 38))) G190
@@ -100,7 +99,7 @@
 (SDEFUN |FRIMOD;vectProd|
         ((|v1| (|Vector| A)) (|v2| (|Vector| A)) (% (|Vector| A)))
         (SPROG
-         ((|k| (|Integer|)) (#1=#:G492 NIL) (|j| NIL) (#2=#:G491 NIL) (|i| NIL)
+         ((|k| (|Integer|)) (#1=#:G57 NIL) (|j| NIL) (#2=#:G56 NIL) (|i| NIL)
           (|v| (|Vector| A)))
          (SEQ
           (LETT |k|
@@ -140,8 +139,7 @@
 
 (SDEFUN |FRIMOD;*;3%;14| ((|m1| (%)) (|m2| (%)) (% (%)))
         (SPROG
-         ((|u| (A)) (#1=#:G501 NIL) (|i| NIL) (#2=#:G500 NIL)
-          (|m| (|Matrix| R))
+         ((|u| (A)) (#1=#:G66 NIL) (|i| NIL) (#2=#:G65 NIL) (|m| (|Matrix| R))
           (|cd| (|Record| (|:| |num| (|Matrix| R)) (|:| |den| R))))
          (SEQ
           (LETT |m|
@@ -184,9 +182,9 @@
 
 (DECLAIM (NOTINLINE |FractionalIdealAsModule;|)) 
 
-(DEFUN |FractionalIdealAsModule| (&REST #1=#:G503)
+(DEFUN |FractionalIdealAsModule| (&REST #1=#:G68)
   (SPROG NIL
-         (PROG (#2=#:G504)
+         (PROG (#2=#:G69)
            (RETURN
             (COND
              ((LETT #2#

@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |LinearOrdinaryDifferentialOperator1;|)) 
 
-(DEFUN |LinearOrdinaryDifferentialOperator1| (#1=#:G481)
+(DEFUN |LinearOrdinaryDifferentialOperator1| (#1=#:G49)
   (SPROG NIL
-         (PROG (#2=#:G482)
+         (PROG (#2=#:G50)
            (RETURN
             (COND
              ((LETT #2#
@@ -23,7 +23,7 @@
 
 (DEFUN |LinearOrdinaryDifferentialOperator1;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G478 NIL) (#2=#:G480 NIL) (#3=#:G479 NIL) (% NIL)
+   ((|pv$| NIL) (#1=#:G46 NIL) (#2=#:G48 NIL) (#3=#:G47 NIL) (% NIL)
     (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))

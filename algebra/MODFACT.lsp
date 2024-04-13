@@ -3,7 +3,7 @@
 
 (DEFUN |ModularFactorization| ()
   (SPROG NIL
-         (PROG (#1=#:G456)
+         (PROG (#1=#:G17)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ModularFactorization|))
@@ -24,7 +24,7 @@
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|ModularFactorization|))
-          (LETT % (GETREFV 12))
+          (LETT % (GETREFV 13))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|ModularFactorization| NIL
@@ -36,17 +36,17 @@
 (MAKEPROP '|ModularFactorization| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL
-              (|ModularFactorizationGeneral| 9 (|U32Matrix|) 10
+              (|ModularFactorizationGeneral| 7 (|U32Matrix|) 8
                                              (|List|
                                               (|Record|
                                                (|:| |ind|
                                                     (|NonNegativeInteger|))
-                                               (|:| |poly| 9)))
+                                               (|:| |poly| 7)))
                                              (|ModularFactorizationTools1|))
-              (|Mapping| 11)
-              (|Record| (|:| |poly| 9) (|:| |degree| (|NonNegativeInteger|))
-                        (|:| |separate_factors| 6))
-              (|List| 7) (|U32Vector|) (|Integer|) (|List| 9))
+              (|List| 7) (|U32Vector|) (|Integer|) (|Boolean|) (|Mapping| 6)
+              (|Record| (|:| |poly| 7) (|:| |degree| (|NonNegativeInteger|))
+                        (|:| |separate_factors| 10))
+              (|List| 11))
            '#() 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -66,7 +66,8 @@
                                              (|:| |separate_factors|
                                                   (|Mapping| (|List| #1#)))))
                                   #1# #2#))
-                                T))
+                                T)
+                              '((|irreducible?| ((|Boolean|) #1# #2#)) T))
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| -999999 'NIL))))
            '|lookupIncomplete|)) 

@@ -7,9 +7,9 @@
 
 (DEFVAR |$has_category_hash| NIL)
 
-; DEFVAR($ancestor_hash, nil)
+; DEFVAR($ancestors_hash, nil)
 
-(DEFVAR |$ancestor_hash| NIL)
+(DEFVAR |$ancestors_hash| NIL)
 
 ; compressHashTable(ht) == ht
 

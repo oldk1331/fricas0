@@ -24,9 +24,9 @@
 
 (DECLAIM (NOTINLINE |AssociatedJordanAlgebra;|)) 
 
-(DEFUN |AssociatedJordanAlgebra| (&REST #1=#:G463)
+(DEFUN |AssociatedJordanAlgebra| (&REST #1=#:G32)
   (SPROG NIL
-         (PROG (#2=#:G464)
+         (PROG (#2=#:G33)
            (RETURN
             (COND
              ((LETT #2#
@@ -44,100 +44,112 @@
                   (HREM |$ConstructorCache| '|AssociatedJordanAlgebra|)))))))))) 
 
 (DEFUN |AssociatedJordanAlgebra;| (|#1| |#2|)
-  (SPROG
-   ((#1=#:G450 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-   (PROGN
-    (LETT DV$1 (|devaluate| |#1|))
-    (LETT DV$2 (|devaluate| |#2|))
-    (LETT |dv$| (LIST '|AssociatedJordanAlgebra| DV$1 DV$2))
-    (LETT % (GETREFV 43))
-    (QSETREFV % 0 |dv$|)
-    (QSETREFV % 3
-              (LETT |pv$|
-                    (|buildPredVector| 0 0
-                                       (LIST
-                                        (|HasCategory| |#2|
-                                                       (LIST
-                                                        '|FramedNonAssociativeAlgebra|
-                                                        (|devaluate| |#1|)))
-                                        (AND (|HasCategory| |#1| '(|Finite|))
-                                             (|HasCategory| |#2|
-                                                            (LIST
-                                                             '|FramedNonAssociativeAlgebra|
-                                                             (|devaluate|
-                                                              |#1|))))
-                                        (|HasCategory| |#2|
-                                                       (LIST
-                                                        '|FiniteRankNonAssociativeAlgebra|
-                                                        (|devaluate| |#1|)))
-                                        (OR
-                                         (AND
-                                          (|HasCategory| |#1|
-                                                         '(|IntegralDomain|))
-                                          (|HasCategory| |#2|
-                                                         (LIST
-                                                          '|FiniteRankNonAssociativeAlgebra|
-                                                          (|devaluate| |#1|))))
-                                         (AND
-                                          (|HasCategory| |#1|
-                                                         '(|IntegralDomain|))
-                                          (|HasCategory| |#2|
-                                                         (LIST
-                                                          '|FramedNonAssociativeAlgebra|
-                                                          (|devaluate|
-                                                           |#1|)))))
-                                        (OR
-                                         (|HasCategory| |#2|
-                                                        (LIST
-                                                         '|FiniteRankNonAssociativeAlgebra|
-                                                         (|devaluate| |#1|)))
-                                         (|HasCategory| |#2|
-                                                        (LIST
-                                                         '|FramedNonAssociativeAlgebra|
-                                                         (|devaluate| |#1|))))
-                                        (AND (|HasCategory| |#1| '(|Hashable|))
-                                             (|HasCategory| |#2|
-                                                            (LIST
-                                                             '|FramedNonAssociativeAlgebra|
-                                                             (|devaluate|
-                                                              |#1|))))
-                                        (OR
-                                         (AND (|HasCategory| |#1| '(|Finite|))
+  (SPROG ((#1=#:G3 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT DV$2 (|devaluate| |#2|))
+          (LETT |dv$| (LIST '|AssociatedJordanAlgebra| DV$1 DV$2))
+          (LETT % (GETREFV 43))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
+                    (LETT |pv$|
+                          (|buildPredVector| 0 0
+                                             (LIST
                                               (|HasCategory| |#2|
                                                              (LIST
                                                               '|FramedNonAssociativeAlgebra|
                                                               (|devaluate|
-                                                               |#1|))))
-                                         (AND
-                                          (|HasCategory| |#1| '(|Hashable|))
-                                          (|HasCategory| |#2|
-                                                         (LIST
-                                                          '|FramedNonAssociativeAlgebra|
-                                                          (|devaluate|
-                                                           |#1|)))))
-                                        (AND (|HasCategory| |#1| '(|Field|))
-                                             (|HasCategory| |#2|
-                                                            (LIST
-                                                             '|FramedNonAssociativeAlgebra|
-                                                             (|devaluate|
-                                                              |#1|))))))))
-    (|haddProp| |$ConstructorCache| '|AssociatedJordanAlgebra| (LIST DV$1 DV$2)
-                (CONS 1 %))
-    (|stuffDomainSlots| %)
-    (QSETREFV % 5 |#2|)
-    (QSETREFV % 6 |#1|)
-    (QSETREFV % 7 |#2|)
-    (SETF |pv$| (QREFELT % 3))
-    (QSETREFV % 8 |#2|)
-    (QSETREFV % 11
-              (SPADCALL (|spadConstant| % 9) (|spadConstant| % 9)
-                        (QREFELT % 10)))
-    (QSETREFV % 14
-              (PROG2 (LETT #1# #2=(SPADCALL (QREFELT % 11) (QREFELT % 13)))
-                  (QCDR #1#)
-                (|check_union2| (QEQCAR #1# 0) #2# (|Union| #2# "failed")
-                                #1#)))
-    %))) 
+                                                               |#1|)))
+                                              (AND
+                                               (|HasCategory| |#1| '(|Finite|))
+                                               (|HasCategory| |#2|
+                                                              (LIST
+                                                               '|FramedNonAssociativeAlgebra|
+                                                               (|devaluate|
+                                                                |#1|))))
+                                              (|HasCategory| |#2|
+                                                             (LIST
+                                                              '|FiniteRankNonAssociativeAlgebra|
+                                                              (|devaluate|
+                                                               |#1|)))
+                                              (OR
+                                               (AND
+                                                (|HasCategory| |#1|
+                                                               '(|IntegralDomain|))
+                                                (|HasCategory| |#2|
+                                                               (LIST
+                                                                '|FiniteRankNonAssociativeAlgebra|
+                                                                (|devaluate|
+                                                                 |#1|))))
+                                               (AND
+                                                (|HasCategory| |#1|
+                                                               '(|IntegralDomain|))
+                                                (|HasCategory| |#2|
+                                                               (LIST
+                                                                '|FramedNonAssociativeAlgebra|
+                                                                (|devaluate|
+                                                                 |#1|)))))
+                                              (OR
+                                               (|HasCategory| |#2|
+                                                              (LIST
+                                                               '|FiniteRankNonAssociativeAlgebra|
+                                                               (|devaluate|
+                                                                |#1|)))
+                                               (|HasCategory| |#2|
+                                                              (LIST
+                                                               '|FramedNonAssociativeAlgebra|
+                                                               (|devaluate|
+                                                                |#1|))))
+                                              (AND
+                                               (|HasCategory| |#1|
+                                                              '(|Hashable|))
+                                               (|HasCategory| |#2|
+                                                              (LIST
+                                                               '|FramedNonAssociativeAlgebra|
+                                                               (|devaluate|
+                                                                |#1|))))
+                                              (OR
+                                               (AND
+                                                (|HasCategory| |#1|
+                                                               '(|Finite|))
+                                                (|HasCategory| |#2|
+                                                               (LIST
+                                                                '|FramedNonAssociativeAlgebra|
+                                                                (|devaluate|
+                                                                 |#1|))))
+                                               (AND
+                                                (|HasCategory| |#1|
+                                                               '(|Hashable|))
+                                                (|HasCategory| |#2|
+                                                               (LIST
+                                                                '|FramedNonAssociativeAlgebra|
+                                                                (|devaluate|
+                                                                 |#1|)))))
+                                              (AND
+                                               (|HasCategory| |#1| '(|Field|))
+                                               (|HasCategory| |#2|
+                                                              (LIST
+                                                               '|FramedNonAssociativeAlgebra|
+                                                               (|devaluate|
+                                                                |#1|))))))))
+          (|haddProp| |$ConstructorCache| '|AssociatedJordanAlgebra|
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 5 |#2|)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 8 |#2|)
+          (QSETREFV % 11
+                    (SPADCALL (|spadConstant| % 9) (|spadConstant| % 9)
+                              (QREFELT % 10)))
+          (QSETREFV % 14
+                    (PROG2
+                        (LETT #1# #2=(SPADCALL (QREFELT % 11) (QREFELT % 13)))
+                        (QCDR #1#)
+                      (|check_union2| (QEQCAR #1# 0) #2# (|Union| #2# "failed")
+                                      #1#)))
+          %))) 
 
 (MAKEPROP '|AssociatedJordanAlgebra| '|infovec|
           (LIST

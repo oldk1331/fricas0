@@ -8,7 +8,7 @@
            (|List|
             (|Record| (|:| |var| |VarSet|)
                       (|:| |weight| (|NonNegativeInteger|)))))
-          (#1=#:G467 NIL))
+          (#1=#:G31 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |l| (QREFELT % 22))
@@ -21,7 +21,7 @@
                         ((SPADCALL |v| (QCAR (|SPADfirst| |l|)) (QREFELT % 26))
                          (PROGN
                           (LETT #1# (QCDR (|SPADfirst| |l|)))
-                          (GO #2=#:G466)))
+                          (GO #2=#:G30)))
                         ('T (LETT |l| (CDR |l|))))))
                      NIL (GO G190) G191 (EXIT NIL))
                 (EXIT 0)))
@@ -115,7 +115,7 @@
 
 (SDEFUN |WP;coerce;%P;5| ((|w| (%)) (% (P)))
         (SPROG
-         ((#1=#:G486 NIL) (#2=#:G485 (P)) (#3=#:G487 (P)) (#4=#:G489 NIL)
+         ((#1=#:G51 NIL) (#2=#:G50 (P)) (#3=#:G52 (P)) (#4=#:G54 NIL)
           (|c| NIL))
          (SEQ
           (PROGN
@@ -133,7 +133,7 @@
            (COND (#1# #2#) ('T (|spadConstant| % 52))))))) 
 
 (SDEFUN |WP;coerce;%Of;6| ((|p| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G504 NIL) (|c| NIL) (#2=#:G503 NIL))
+        (SPROG ((#1=#:G69 NIL) (|c| NIL) (#2=#:G68 NIL))
                (SEQ
                 (COND
                  ((SPADCALL |p| (QREFELT % 42)) (SPADCALL 0 (QREFELT % 56)))
@@ -208,9 +208,9 @@
 
 (DECLAIM (NOTINLINE |WeightedPolynomials;|)) 
 
-(DEFUN |WeightedPolynomials| (&REST #1=#:G527)
+(DEFUN |WeightedPolynomials| (&REST #1=#:G93)
   (SPROG NIL
-         (PROG (#2=#:G528)
+         (PROG (#2=#:G94)
            (RETURN
             (COND
              ((LETT #2#
@@ -229,7 +229,7 @@
 
 (DEFUN |WeightedPolynomials;| (|#1| |#2| |#3| |#4| |#5| |#6| |#7|)
   (SPROG
-   ((#1=#:G525 NIL) (|v| NIL) (#2=#:G526 NIL) (|n| NIL) (#3=#:G524 NIL)
+   ((#1=#:G91 NIL) (|v| NIL) (#2=#:G92 NIL) (|n| NIL) (#3=#:G90 NIL)
     (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL) (DV$4 NIL)
     (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (SEQ
@@ -290,7 +290,7 @@
               (|local| |#3|) (|local| |#4|) (|local| |#5|) (|local| |#6|)
               (|local| |#7|) '|Rep| (|Void|) (|NonNegativeInteger|)
               |WP;changeWeightLevel;NniV;1| (|List| 15) (0 . |#|) (|Boolean|)
-              (5 . ~=) '#:G448 '|lookupList|
+              (5 . ~=) '#:G1 '|lookupList|
               (|Record| (|:| |var| 7) (|:| |weight| 15)) (|List| 23) (11 . ~=)
               (17 . =)
               (CONS IDENTITY (FUNCALL (|dispatchFunction| |WP;Zero;%;7|) %))

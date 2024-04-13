@@ -32,7 +32,7 @@
 
 (DEFUN |OpenMathEncoding| ()
   (SPROG NIL
-         (PROG (#1=#:G459)
+         (PROG (#1=#:G14)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OpenMathEncoding|))

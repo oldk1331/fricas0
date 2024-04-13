@@ -14,7 +14,7 @@
           (RETURN (PROGN (SPADCALL |s| |x| (QREFELT % 10)))))) 
 
 (SDEFUN |CHVAR;good?| ((|a| (F)) (|p| (UP)) (|lq| (|List| UP)) (% (|Boolean|)))
-        (SPROG ((#1=#:G467 NIL) (#2=#:G468 NIL) (|q| NIL))
+        (SPROG ((#1=#:G32 NIL) (#2=#:G33 NIL) (|q| NIL))
                (SEQ
                 (EXIT
                  (COND
@@ -32,7 +32,7 @@
                            (COND
                             ((SPADCALL (SPADCALL |q| |a| (QREFELT % 20))
                                        (|spadConstant| % 21) (QREFELT % 23))
-                             (PROGN (LETT #1# NIL) (GO #3=#:G466))))))
+                             (PROGN (LETT #1# NIL) (GO #3=#:G31))))))
                          (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                     (EXIT 'T)))))
                 #3# (EXIT #1#)))) 
@@ -118,11 +118,11 @@
                     (|:| |c1| (|Fraction| UP)) (|:| |c2| (|Fraction| UP))
                     (|:| |deg| (|NonNegativeInteger|)))))
         (SPROG
-         ((#1=#:G497 NIL) (|f| NIL) (#2=#:G496 NIL) (|ir2| #3=(|Fraction| UP))
+         ((#1=#:G63 NIL) (|f| NIL) (#2=#:G62 NIL) (|ir2| #3=(|Fraction| UP))
           (|im2| (|Fraction| UP)) (|t| #3#) (|r2c| (UP))
           (|r2| #4=(|Record| (|:| |coef| (|Fraction| UP)) (|:| |poly| UPUP)))
           (|x| (|Fraction| UP)) (|a| (F)) (|inf_deg| (|NonNegativeInteger|))
-          (|lf1| (|List| UPUP)) (#5=#:G495 NIL) (#6=#:G494 NIL) (|m1| (UPUP))
+          (|lf1| (|List| UPUP)) (#5=#:G61 NIL) (#6=#:G60 NIL) (|m1| (UPUP))
           (|r1inv| #3#) (|r1| #4#))
          (SEQ (LETT |r1| (SPADCALL |modulus| (QREFELT % 36)))
               (LETT |r1inv| (SPADCALL (QCAR |r1|) (QREFELT % 31)))
@@ -342,8 +342,8 @@
 (SDEFUN |CHVAR;goodPoint;LUPUPF;9|
         ((|lp| (|List| UPUP)) (|modulus| (UPUP)) (% (F)))
         (SPROG
-         ((#1=#:G535 NIL) (#2=#:G536 NIL) (|a| (F)) (|i| NIL)
-          (|ld| (|List| UP)) (#3=#:G538 NIL) (|p| NIL) (#4=#:G537 NIL)
+         ((#1=#:G103 NIL) (#2=#:G104 NIL) (|a| (F)) (|i| NIL)
+          (|ld| (|List| UP)) (#3=#:G106 NIL) (|p| NIL) (#4=#:G105 NIL)
           (|q| (UP))
           (|r|
            (|Union|
@@ -383,7 +383,7 @@
                     (COND
                      ((|CHVAR;good?| (LETT |a| (SPADCALL |i| (QREFELT % 81)))
                        |q| |ld| %)
-                      (PROGN (LETT #2# |a|) (GO #5=#:G534)))
+                      (PROGN (LETT #2# |a|) (GO #5=#:G102)))
                      ('T
                       (SEQ
                        (EXIT
@@ -395,7 +395,7 @@
                                  (PROGN
                                   (LETT #2# (SPADCALL |a| (QREFELT % 82)))
                                   (GO #5#)))
-                           (GO #6=#:G530)))))
+                           (GO #6=#:G98)))))
                        #6# (EXIT #1#))))))
                   (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL)))))
           #5# (EXIT #2#)))) 
@@ -424,12 +424,12 @@
           (|Record| (|:| |exponent| (|NonNegativeInteger|))
                     (|:| |coef| (|Fraction| UP)) (|:| |radicand| UP))))
         (SPROG
-         ((#1=#:G553 NIL) (#2=#:G552 (UP)) (#3=#:G554 (UP)) (#4=#:G558 NIL)
-          (#5=#:G448 NIL)
+         ((#1=#:G130 NIL) (#2=#:G129 (UP)) (#3=#:G131 (UP)) (#4=#:G135 NIL)
+          (#5=#:G1 NIL)
           (|pr|
            (|Record| (|:| |exponent| (|NonNegativeInteger|)) (|:| |coef| UP)
                      (|:| |radicand| (|List| UP))))
-          (#6=#:G550 NIL) (|d| (UP)))
+          (#6=#:G127 NIL) (|d| (UP)))
          (SEQ
           (COND ((SPADCALL |g| (QREFELT % 85)) (|error| "Should not happen"))
                 (#7='T
@@ -475,9 +475,9 @@
 
 (DECLAIM (NOTINLINE |ChangeOfVariable;|)) 
 
-(DEFUN |ChangeOfVariable| (&REST #1=#:G559)
+(DEFUN |ChangeOfVariable| (&REST #1=#:G136)
   (SPROG NIL
-         (PROG (#2=#:G560)
+         (PROG (#2=#:G137)
            (RETURN
             (COND
              ((LETT #2#

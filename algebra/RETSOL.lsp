@@ -11,7 +11,7 @@
 (SDEFUN |RETSOL;LEQQ2F|
         ((|l| (|List| (|Equation| (|Fraction| (|Polynomial| Q)))))
          (% (|List| (|Equation| (|Fraction| (|Polynomial| R))))))
-        (SPROG ((#1=#:G454 NIL) (|eq| NIL) (#2=#:G453 NIL))
+        (SPROG ((#1=#:G18 NIL) (|eq| NIL) (#2=#:G17 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -37,8 +37,8 @@
         ((|lp| (|List| (|Polynomial| R))) (|lv| (|List| (|Symbol|)))
          (% (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
         (SPROG
-         ((#1=#:G467 NIL) (|l| NIL) (#2=#:G466 NIL) (#3=#:G465 NIL) (|p| NIL)
-          (#4=#:G464 NIL)
+         ((#1=#:G31 NIL) (|l| NIL) (#2=#:G30 NIL) (#3=#:G29 NIL) (|p| NIL)
+          (#4=#:G28 NIL)
           (|u| (|Union| (|List| (|Fraction| (|Polynomial| Q))) "failed")))
          (SEQ (LETT |u| (|RETSOL;QIfCan| |lp| %))
               (EXIT
@@ -75,9 +75,9 @@
         ((|l| (|List| (|Polynomial| R)))
          (% (|Union| (|List| (|Fraction| (|Polynomial| Q))) "failed")))
         (SPROG
-         ((|ans| (|List| (|Fraction| (|Polynomial| Q)))) (#1=#:G479 NIL)
-          (|u| (|Union| (|Fraction| (|Polynomial| Q)) "failed"))
-          (#2=#:G480 NIL) (|p| NIL))
+         ((|ans| (|List| (|Fraction| (|Polynomial| Q)))) (#1=#:G46 NIL)
+          (|u| (|Union| (|Fraction| (|Polynomial| Q)) "failed")) (#2=#:G47 NIL)
+          (|p| NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |ans| NIL)
@@ -91,7 +91,7 @@
                             ((QEQCAR |u| 1)
                              (PROGN
                               (LETT #1# (CONS 1 "failed"))
-                              (GO #3=#:G478)))
+                              (GO #3=#:G45)))
                             ('T (LETT |ans| (CONS (QCDR |u|) |ans|))))))
                      (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                 (EXIT (CONS 0 |ans|))))
@@ -102,7 +102,7 @@
          (% (|Union| (|Fraction| (|Polynomial| Q)) #1="failed")))
         (SPROG
          ((|up| (|SparseUnivariatePolynomial| (|Polynomial| R)))
-          (|ans| (|Fraction| (|Polynomial| Q))) (#2=#:G498 NIL)
+          (|ans| (|Fraction| (|Polynomial| Q))) (#2=#:G67 NIL)
           (|v| (|Union| (|Fraction| (|Polynomial| Q)) #1#)) (|s| (|Symbol|))
           (|r| (|Union| Q "failed")) (|u| (|Union| (|Symbol|) "failed")))
          (SEQ
@@ -142,7 +142,7 @@
                             ((QEQCAR |v| 1)
                              (PROGN
                               (LETT #2# (CONS 1 "failed"))
-                              (GO #4=#:G497)))
+                              (GO #4=#:G66)))
                             ('T
                              (SEQ
                               (LETT |ans|
@@ -164,9 +164,9 @@
 
 (DECLAIM (NOTINLINE |RetractSolvePackage;|)) 
 
-(DEFUN |RetractSolvePackage| (&REST #1=#:G499)
+(DEFUN |RetractSolvePackage| (&REST #1=#:G68)
   (SPROG NIL
-         (PROG (#2=#:G500)
+         (PROG (#2=#:G69)
            (RETURN
             (COND
              ((LETT #2#

@@ -199,9 +199,9 @@
 
 (DECLAIM (NOTINLINE |UniversalSegment;|)) 
 
-(DEFUN |UniversalSegment| (#1=#:G540)
+(DEFUN |UniversalSegment| (#1=#:G108)
   (SPROG NIL
-         (PROG (#2=#:G541)
+         (PROG (#2=#:G109)
            (RETURN
             (COND
              ((LETT #2#

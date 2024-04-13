@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |GuessFinite;|)) 
 
-(DEFUN |GuessFinite| (#1=#:G466)
+(DEFUN |GuessFinite| (#1=#:G27)
   (SPROG NIL
-         (PROG (#2=#:G467)
+         (PROG (#2=#:G28)
            (RETURN
             (COND
              ((LETT #2#

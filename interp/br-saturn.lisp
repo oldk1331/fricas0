@@ -5,7 +5,7 @@
 
 ; $atLeastOneUnexposed := false
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$atLeastOneUnexposed| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$atLeastOneUnexposed| NIL))
 
 ; page() == $curPage
 

@@ -10,26 +10,26 @@
 ; $domainTypeTokens := ['lazyOldAxiomDomain, 'oldAxiomDomain, 'oldAxiomPreCategory,
 ;            'oldAxiomCategory, 0]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$domainTypeTokens|
           (LIST '|lazyOldAxiomDomain| '|oldAxiomDomain| '|oldAxiomPreCategory|
                 '|oldAxiomCategory| 0)))
 
 ; DNameStringID := 0
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |DNameStringID| 0))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |DNameStringID| 0))
 
 ; DNameApplyID  := 1
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |DNameApplyID| 1))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |DNameApplyID| 1))
 
 ; DNameTupleID  := 2
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |DNameTupleID| 2))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |DNameTupleID| 2))
 
 ; DNameOtherID  := 3
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |DNameOtherID| 3))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |DNameOtherID| 3))
 
 ; DNameToSExpr1 dname ==
 ;   NULL dname => error '"unexpected domain name"
@@ -291,7 +291,7 @@
 ;           [function lazyOldAxiomDomainHashCode],
 ;           [function lazyOldAxiomAddChild])
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$lazyOldAxiomDomainDispatch|
           (VECTOR '|lazyOldAxiomDomain| (LIST #'|lazyOldAxiomDomainDevaluate|)
                   (LIST NIL) (LIST #'|lazyOldAxiomDomainLookupExport|)
@@ -354,7 +354,7 @@
 ;           [function oldAxiomPreCategoryBuild],
 ;           [nil])
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$oldAxiomPreCategoryDispatch|
           (VECTOR '|oldAxiomPreCategory|
                   (LIST #'|oldAxiomPreCategoryDevaluate|) (LIST NIL) (LIST NIL)
@@ -544,7 +544,7 @@
 ;           [function oldAxiomCategoryParentCount],
 ;           [function oldAxiomCategoryNthParent]) -- 1 indexed
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$oldAxiomCategoryDispatch|
           (VECTOR '|oldAxiomCategory| (LIST #'|oldAxiomCategoryDevaluate|)
                   (LIST NIL) (LIST #'|oldAxiomCategoryLookupExport|)
@@ -647,27 +647,24 @@
 
 ; $hashOp1 := hashString '"1"
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$hashOp1| (|hashString| "1")))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$hashOp1| (|hashString| "1")))
 
 ; $hashOp0 := hashString '"0"
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$hashOp0| (|hashString| "0")))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$hashOp0| (|hashString| "0")))
 
 ; $hashOpApply := hashString '"apply"
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$hashOpApply| (|hashString| "apply")))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$hashOpApply| (|hashString| "apply")))
 
 ; $hashOpSet := hashString '"set!"
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$hashOpSet| (|hashString| "set!")))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$hashOpSet| (|hashString| "set!")))
 
 ; $hashSeg := hashString '".."
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$hashSeg| (|hashString| "..")))
-
-; $hashPercent := hashString '"%"
-
-(EVAL-WHEN (EVAL LOAD) (SETQ |$hashPercent| (|hashString| "%")))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$hashSeg| (|hashString| "..")))
 
 ; oldAxiomDomainLookupExport _
 ;   (domenv, self, op, sig, box, skipdefaults, env) ==
@@ -744,7 +741,7 @@
 ;           [function oldAxiomDomainHashCode],
 ;           [function oldAxiomAddChild])
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$oldAxiomDomainDispatch|
           (VECTOR '|oldAxiomDomain| (LIST #'|oldAxiomDomainDevaluate|)
                   (LIST NIL) (LIST #'|oldAxiomDomainLookupExport|)
@@ -993,7 +990,7 @@
 
 ; $hasCatOpHash := hashString '"%%"
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$hasCatOpHash| (|hashString| "%%")))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$hasCatOpHash| (|hashString| "%%")))
 
 ; opIsHasCat op ==
 ;   hashCode? op => EQL(op, $hasCatOpHash)

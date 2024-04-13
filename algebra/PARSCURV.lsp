@@ -14,9 +14,9 @@
 
 (DECLAIM (NOTINLINE |ParametricSpaceCurve;|)) 
 
-(DEFUN |ParametricSpaceCurve| (#1=#:G453)
+(DEFUN |ParametricSpaceCurve| (#1=#:G11)
   (SPROG NIL
-         (PROG (#2=#:G454)
+         (PROG (#2=#:G12)
            (RETURN
             (COND
              ((LETT #2#

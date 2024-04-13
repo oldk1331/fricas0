@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |ModularField;|)) 
 
-(DEFUN |ModularField| (&REST #1=#:G476)
+(DEFUN |ModularField| (&REST #1=#:G52)
   (SPROG NIL
-         (PROG (#2=#:G477)
+         (PROG (#2=#:G53)
            (RETURN
             (COND
              ((LETT #2#

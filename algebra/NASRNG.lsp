@@ -8,7 +8,7 @@
         (T (SETQ |NonAssociativeSemiRng;AL| (|NonAssociativeSemiRng;|))))) 
 
 (DEFUN |NonAssociativeSemiRng;| ()
-  (SPROG ((#1=#:G448 NIL))
+  (SPROG ((#1=#:G1 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|AbelianSemiGroup|) (|Magma|)

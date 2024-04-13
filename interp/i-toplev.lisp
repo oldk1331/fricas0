@@ -40,7 +40,6 @@
 ;   createInitializers()
 ;   if $displayStartMsgs then sayKeyedMsg("S2IZ0053",['"interpreter"])
 ;   initializeTimedNames($interpreterTimedNames,$interpreterTimedClasses)
-;   statisticsInitialization()
 ;   $InteractiveFrame := makeInitialModemapFrame()
 ;   initializeSystemCommands()
 ;   initializeInterpreterFrameRing()
@@ -79,7 +78,6 @@
        (|$displayStartMsgs| (|sayKeyedMsg| 'S2IZ0053 (LIST "interpreter"))))
       (|initializeTimedNames| |$interpreterTimedNames|
        |$interpreterTimedClasses|)
-      (|statisticsInitialization|)
       (SETQ |$InteractiveFrame| (|makeInitialModemapFrame|))
       (|initializeSystemCommands|)
       (|initializeInterpreterFrameRing|)
@@ -103,9 +101,9 @@
 ;   $IOindex := 1
 ;   $InteractiveFrame := makeInitialModemapFrame()
 ;   loadExposureGroupData()
-;   statisticsInitialization()
 ;   initHist()
 ;   initializeInterpreterFrameRing()
+;   buildHtMacroTable()
 ;
 ;   if $displayStartMsgs then spadStartUpMsgs()
 ;   $currentLine := nil
@@ -124,9 +122,9 @@
       (SETQ |$IOindex| 1)
       (SETQ |$InteractiveFrame| (|makeInitialModemapFrame|))
       (|loadExposureGroupData|)
-      (|statisticsInitialization|)
       (|initHist|)
       (|initializeInterpreterFrameRing|)
+      (|buildHtMacroTable|)
       (COND (|$displayStartMsgs| (|spadStartUpMsgs|)))
       (SETQ |$currentLine| NIL)
       (|compressOpen| T)
@@ -183,11 +181,32 @@
 (DEFPARAMETER |$inRetract| NIL)
 
 ; processInteractive(form, posnForm) ==
+;     $timedNameStack : local := NIL
+;     initializeTimedNames($interpreterTimedNames,$interpreterTimedClasses);
+;     finally(
+;         object := processInteractive0(form, posnForm),
+;           while $timedNameStack repeat stopTimingProcess peekTimedName())
+;     object
+
+(DEFUN |processInteractive| (|form| |posnForm|)
+  (PROG (|$timedNameStack| |object|)
+    (DECLARE (SPECIAL |$timedNameStack|))
+    (RETURN
+     (PROGN
+      (SETQ |$timedNameStack| NIL)
+      (|initializeTimedNames| |$interpreterTimedNames|
+       |$interpreterTimedClasses|)
+      (|finally| (SETQ |object| (|processInteractive0| |form| |posnForm|))
+       ((LAMBDA ()
+          (LOOP
+           (COND ((NOT |$timedNameStack|) (RETURN NIL))
+                 ('T (|stopTimingProcess| (|peekTimedName|))))))))
+      |object|))))
+
+; processInteractive0(form, posnForm) ==
 ;   --  Top-level dispatcher for the interpreter.  It sets local variables
 ;   --  and then calls processInteractive1 to do most of the work.
 ;   --  This function receives the output from the parser.
-;
-;   initializeTimedNames($interpreterTimedNames,$interpreterTimedClasses)
 ;
 ;   $op: local:= (form is [op,:.] => op; form) --name of operator
 ;   $Coerce: local := NIL
@@ -216,9 +235,11 @@
 ;       CLRHASH $instantRecord
 ;     writeHistModesAndValues()
 ;     updateHist()
+;   if $printTimeIfTrue then printTime()
+;   if $printStorageIfTrue then printStorage()
 ;   object
 
-(DEFUN |processInteractive| (|form| |posnForm|)
+(DEFUN |processInteractive0| (|form| |posnForm|)
   (PROG (|$inRetract| |$domPvar| |$minivector| |$instantMmCondCount|
          |$instantCanCoerceCount| |$instantCoerceCount| |$analyzingMapList|
          |$localVars| |$declaredMode| |$timeGlobalName| |$whereCacheList|
@@ -232,8 +253,6 @@
       |$compErrorMessageStack| |$Coerce| |$op|))
     (RETURN
      (PROGN
-      (|initializeTimedNames| |$interpreterTimedNames|
-       |$interpreterTimedClasses|)
       (SETQ |$op|
               (COND
                ((AND (CONSP |form|) (PROGN (SETQ |op| (CAR |form|)) #1='T))
@@ -264,6 +283,8 @@
          ((EQUAL |$reportInstantiations| T) (|reportInstantiations|)
           (CLRHASH |$instantRecord|)))
         (|writeHistModesAndValues|) (|updateHist|)))
+      (COND (|$printTimeIfTrue| (|printTime|)))
+      (COND (|$printStorageIfTrue| (|printStorage|)))
       |object|))))
 
 ; processInteractive1(form, posnForm) ==
@@ -323,9 +344,7 @@
 ;     if $QuietCommand = false then
 ;       output(x',md')
 ;   putHist('%,'value,objNewWrap(x,md),$e)
-;   if $printTimeIfTrue or $printTypeIfTrue then printTypeAndTime(x',md')
-;   if $printStorageIfTrue then printStorage()
-;   if $printStatisticsSummaryIfTrue then printStatisticsSummary()
+;   if $printTypeIfTrue then printType(x', md')
 ;   'done
 
 (DEFUN |recordAndPrint| (|x| |md|)
@@ -342,45 +361,23 @@
         (COND ((NULL |$collectOutput|) (TERPRI (|get_algebra_stream|))))
         (COND ((NULL |$QuietCommand|) (|output| |x'| |md'|)))))
       (|putHist| '% '|value| (|objNewWrap| |x| |md|) |$e|)
-      (COND
-       ((OR |$printTimeIfTrue| |$printTypeIfTrue|)
-        (|printTypeAndTime| |x'| |md'|)))
-      (COND (|$printStorageIfTrue| (|printStorage|)))
-      (COND (|$printStatisticsSummaryIfTrue| (|printStatisticsSummary|)))
+      (COND (|$printTypeIfTrue| (|printType| |x'| |md'|)))
       '|done|))))
 
-; printTypeAndTime(x,m) ==  --m is the mode/type of the result
-;   printTypeAndTimeNormal(x, m)
-
-(DEFUN |printTypeAndTime| (|x| |m|)
-  (PROG () (RETURN (|printTypeAndTimeNormal| |x| |m|))))
-
-; printTypeAndTimeNormal(x,m) ==
-;   -- called only if either type or time is to be displayed
+; printType(x, m) ==  -- m is the mode/type of the result
 ;   if m is ['Union, :argl] then
 ;     x' := retract(objNewWrap(x,m))
 ;     m' := objMode x'
 ;     m := ['Union, :[arg for arg in argl | sameUnionBranch(arg, m')], '"..."]
-;   if $printTimeIfTrue then
-;     timeString := makeLongTimeString($interpreterTimedNames,
-;       $interpreterTimedClasses)
 ;   if $printTypeIfTrue then
-;       type_string := outputDomainConstructor(m)
-;   $printTimeIfTrue and $printTypeIfTrue =>
-;     $collectOutput =>
-;       $outputLines := [msgText("S2GL0012", [type_string]), :$outputLines]
-;     sayKeyedMsg("S2GL0014", [type_string, timeString])
-;   $printTimeIfTrue =>
-;     $collectOutput => nil
-;     sayKeyedMsg("S2GL0013",[timeString])
-;   $printTypeIfTrue =>
+;     type_string := outputDomainConstructor(m)
 ;     $collectOutput =>
 ;         $outputLines :=
 ;             [justifyMyType msgText("S2GL0012", [type_string]), :$outputLines]
 ;     sayKeyedMsg("S2GL0012", [type_string])
 
-(DEFUN |printTypeAndTimeNormal| (|x| |m|)
-  (PROG (|argl| |x'| |m'| |timeString| |type_string|)
+(DEFUN |printType| (|x| |m|)
+  (PROG (|argl| |x'| |m'| |type_string|)
     (RETURN
      (PROGN
       (COND
@@ -404,25 +401,7 @@
                         NIL |argl| NIL)
                        (CONS "..." NIL))))))
       (COND
-       (|$printTimeIfTrue|
-        (SETQ |timeString|
-                (|makeLongTimeString| |$interpreterTimedNames|
-                 |$interpreterTimedClasses|))))
-      (COND
-       (|$printTypeIfTrue|
-        (SETQ |type_string| (|outputDomainConstructor| |m|))))
-      (COND
-       ((AND |$printTimeIfTrue| |$printTypeIfTrue|)
-        (COND
-         (|$collectOutput|
-          (SETQ |$outputLines|
-                  (CONS (|msgText| 'S2GL0012 (LIST |type_string|))
-                        |$outputLines|)))
-         (#1# (|sayKeyedMsg| 'S2GL0014 (LIST |type_string| |timeString|)))))
-       (|$printTimeIfTrue|
-        (COND (|$collectOutput| NIL)
-              (#1# (|sayKeyedMsg| 'S2GL0013 (LIST |timeString|)))))
-       (|$printTypeIfTrue|
+       (|$printTypeIfTrue| (SETQ |type_string| (|outputDomainConstructor| |m|))
         (COND
          (|$collectOutput|
           (SETQ |$outputLines|
@@ -487,13 +466,25 @@
             ('T (CONCAT (|fillerSpaces| (- $LINELENGTH |len|) " ") |t|)))))))
 
 ; typeTimePrin x ==
-;   $highlightDelta: local:= 0
 ;   maprinSpecial(x,0,79)
 
-(DEFUN |typeTimePrin| (|x|)
-  (PROG (|$highlightDelta|)
-    (DECLARE (SPECIAL |$highlightDelta|))
-    (RETURN (PROGN (SETQ |$highlightDelta| 0) (|maprinSpecial| |x| 0 79)))))
+(DEFUN |typeTimePrin| (|x|) (PROG () (RETURN (|maprinSpecial| |x| 0 79))))
+
+; printTime() ==
+;   $collectOutput => nil
+;   s := makeLongTimeString($interpreterTimedNames, $interpreterTimedClasses)
+;   sayKeyedMsg("S2GL0013", [s])
+
+(DEFUN |printTime| ()
+  (PROG (|s|)
+    (RETURN
+     (COND (|$collectOutput| NIL)
+           ('T
+            (PROGN
+             (SETQ |s|
+                     (|makeLongTimeString| |$interpreterTimedNames|
+                      |$interpreterTimedClasses|))
+             (|sayKeyedMsg| 'S2GL0013 (LIST |s|))))))))
 
 ; printStorage() ==
 ;   $collectOutput => nil
@@ -511,20 +502,6 @@
                      (|makeLongSpaceString| |$interpreterTimedNames|
                       |$interpreterTimedClasses|))
              (|sayKeyedMsg| 'S2GL0016 (LIST |storeString|))))))))
-
-; printStatisticsSummary() ==
-;   $collectOutput => nil
-;   summary := statisticsSummary()
-;   sayKeyedMsg("S2GL0017",[summary])
-
-(DEFUN |printStatisticsSummary| ()
-  (PROG (|summary|)
-    (RETURN
-     (COND (|$collectOutput| NIL)
-           ('T
-            (PROGN
-             (SETQ |summary| (|statisticsSummary|))
-             (|sayKeyedMsg| 'S2GL0017 (LIST |summary|))))))))
 
 ; interpretTopLevel(x, posnForm) ==
 ;   --  Top level entry point from processInteractive1.  Sets up catch

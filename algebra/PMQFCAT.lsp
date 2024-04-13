@@ -8,7 +8,7 @@
            (|Union|
             (|Record| (|:| |num| (|Pattern| S)) (|:| |den| (|Pattern| S)))
             "failed"))
-          (#1=#:G452 NIL) (|r| (|Union| R "failed")))
+          (#1=#:G6 NIL) (|r| (|Union| R "failed")))
          (SEQ
           (COND
            ((SPADCALL |p| (QREFELT % 11))
@@ -41,9 +41,9 @@
 
 (DECLAIM (NOTINLINE |PatternMatchQuotientFieldCategory;|)) 
 
-(DEFUN |PatternMatchQuotientFieldCategory| (&REST #1=#:G463)
+(DEFUN |PatternMatchQuotientFieldCategory| (&REST #1=#:G17)
   (SPROG NIL
-         (PROG (#2=#:G464)
+         (PROG (#2=#:G18)
            (RETURN
             (COND
              ((LETT #2#

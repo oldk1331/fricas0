@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |ModularFactorizationK;|)) 
 
-(DEFUN |ModularFactorizationK| (#1=#:G458)
+(DEFUN |ModularFactorizationK| (#1=#:G14)
   (SPROG NIL
-         (PROG (#2=#:G459)
+         (PROG (#2=#:G15)
            (RETURN
             (COND
              ((LETT #2#
@@ -24,7 +24,7 @@
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|ModularFactorizationK| DV$1))
-          (LETT % (GETREFV 13))
+          (LETT % (GETREFV 14))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|ModularFactorizationK| (LIST DV$1)
@@ -37,18 +37,18 @@
 (MAKEPROP '|ModularFactorizationK| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL
-              (|ModularFactorizationGeneral| 10
+              (|ModularFactorizationGeneral| 8
                                              (|PrimitiveTwoDimensionalArray| 6)
-                                             11
-                                             (|Record| (|:| |mod_data| 11)
-                                                       (|:| |p_mod| 10))
+                                             9
+                                             (|Record| (|:| |mod_data| 9)
+                                                       (|:| |p_mod| 8))
                                              (|ModularFactorizationTools3| 6))
-              (|local| |#1|) (|Mapping| 12)
-              (|Record| (|:| |poly| 10) (|:| |degree| (|NonNegativeInteger|))
-                        (|:| |separate_factors| 7))
-              (|List| 8) (|PrimitiveArray| 6)
+              (|local| |#1|) (|List| 8) (|PrimitiveArray| 6)
               (|Record| (|:| |i_mod| (|Integer|)) (|:| |deg| (|Integer|)))
-              (|List| 10))
+              (|Boolean|) (|Mapping| 7)
+              (|Record| (|:| |poly| 8) (|:| |degree| (|NonNegativeInteger|))
+                        (|:| |separate_factors| 11))
+              (|List| 12))
            '#() 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -71,6 +71,9 @@
                                          (|Mapping|
                                           (|List| (|PrimitiveArray| |#1|))))))
                                   (|PrimitiveArray| |#1|) #1#))
+                                T)
+                              '((|irreducible?|
+                                 ((|Boolean|) (|PrimitiveArray| |#1|) #1#))
                                 T))
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| -999999 'NIL))))

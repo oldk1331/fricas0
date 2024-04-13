@@ -4,7 +4,7 @@
 (DEFPARAMETER |ModularEvaluationCategory;AL| 'NIL) 
 
 (DEFUN |ModularEvaluationCategory| (|t#1| |t#2|)
-  (LET (#1=#:G449 (#2=#:G450 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
+  (LET (#1=#:G2 (#2=#:G3 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
     (COND ((SETQ #1# (|assoc| #2# |ModularEvaluationCategory;AL|)) (CDR #1#))
           (T
            (SETQ |ModularEvaluationCategory;AL|
@@ -16,7 +16,7 @@
            #1#)))) 
 
 (DEFUN |ModularEvaluationCategory;| (|t#1| |t#2|)
-  (SPROG ((#1=#:G448 NIL))
+  (SPROG ((#1=#:G1 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2|) (LIST |t#1| |t#2|)

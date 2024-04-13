@@ -6,7 +6,7 @@
 (DEFPARAMETER |LinearOrdinaryDifferentialOperatorCategory;AL| 'NIL) 
 
 (DEFUN |LinearOrdinaryDifferentialOperatorCategory| (|t#1|)
-  (LET (#1=#:G450 (#2=#:G451 (|devaluate| |t#1|)))
+  (LET (#1=#:G3 (#2=#:G4 (|devaluate| |t#1|)))
     (COND
      ((SETQ #1# (|assoc| #2# |LinearOrdinaryDifferentialOperatorCategory;AL|))
       (CDR #1#))
@@ -21,7 +21,7 @@
       #1#)))) 
 
 (DEFUN |LinearOrdinaryDifferentialOperatorCategory;| (|t#1|)
-  (SPROG ((#1=#:G449 NIL))
+  (SPROG ((#1=#:G2 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)

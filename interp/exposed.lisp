@@ -1,7 +1,7 @@
 (in-package "BOOT")
 (setq |$globalExposureGroupAlist|
 '(
-;;define the groups |basic| |naglink| |anna| |categories| |Hidden| |defaults|
+;;define the groups |basic| |categories| |Hidden| |defaults|
 (|basic|
   (|AlgebraicManipulations| . ALGMANIP)
   (|AlgebraicNumber| . AN)
@@ -51,7 +51,6 @@
   (|DiophantineSolutionPackage| . DIOSP)
   (|DirectProductFunctions2| . DIRPROD2)
   (|DisplayPackage| . DISPLAY)
-  (|DistinctDegreeFactorize| . DDFACT)
   (|Distribution| . DISTRO)
   (|DistributionContinuedFractionPackage| . DSTCFPG)
   (|DistributionFunctions2| . DISTRO2)
@@ -181,7 +180,6 @@
   (|MatrixCommonDenominator| . MCDEN)
   (|MatrixLinearAlgebraFunctions| . MATLIN)
   (|MergeThing| . MTHING)
-  (|ModularDistinctDegreeFactorizer| . MDDFACT)
   (|ModuleOperator| . MODOP)
   (|MonoidRingFunctions2| . MRF2)
   (|MoreSystemCommands| . MSYSCMD)
@@ -227,6 +225,7 @@
   (|PartialFraction| . PFR)
   (|PartialFractionPackage| . PFRPAC)
   (|ParametricPlaneCurve| . PARPCURV)
+  (|ParametricComplexCurve| . PARCCURV)
   (|ParametricSpaceCurve| . PARSCURV)
   (|ParametricSurface| . PARSURF)
   (|ParametricPlaneCurveFunctions2| . PARPC2)
@@ -242,7 +241,7 @@
   (|PermutationGroupExamples| . PGE)
   (|PermutationGroup| . PERMGRP)
   (|Permutation| . PERM)
-  (|Pi| . HACKPI)
+  (|PiDomain| . HACKPI)
   (|PiCoercions| . PICOERCE)
   (|PointFunctions2| . PTFUNC2)
   (|PolyGroebner| . PGROEB)
@@ -352,6 +351,7 @@
   (|ViewDefaultsPackage| . VIEWDEF)
   (|Void| . VOID)
   (|WuWenTsunTriangularSet| . WUTSET)
+  (|ZeroDimensionalSolvePackage| . ZDSOLVE)
 )
 (|categories|
   (|AbelianGroup| . ABELGRP)
@@ -554,7 +554,7 @@
   (|XAlgebra| . XALG)
   (|XFreeAlgebra| . XFALG)
   (|XPolynomialsCat| . XPOLYC)
-  (|ZeroDimensionalSolvePackage| . ZDSOLVE))
+)
 (|Hidden|
   (|AlgebraicFunction| . AF)
   (|AlgebraicFunctionField| . ALGFF)
@@ -588,7 +588,6 @@
   (|ComplexRootFindingPackage| . CRFP)
   (|ConstantLODE| . ODECONST)
   (|CyclicStreamTools| . CSTTOOLS)
-  (|CyclotomicPolynomialPackage| . CYCLOTOM)
   (|DefiniteIntegrationTools| . DFINTTLS)
   (|DegreeReductionPackage| . DEGRED)
   (|DeRhamComplex| . DERHAM)
@@ -605,7 +604,6 @@
   (|ElementaryFunctionsUnivariateLaurentSeries| . EFULS)
   (|ElementaryFunctionsUnivariatePuiseuxSeries| . EFUPXS)
   (|ElementaryIntegration| . INTEF)
-  (|ElementaryRischDESystem| . RDEEFS)
   (|EllipticFunctionsUnivariateTaylorSeries| . ELFUTS)
   (|EqTable| . EQTBL)
   (|EuclideanModularRing| . EMR)
@@ -710,7 +708,6 @@
   (|IntegrationTools| . INTTOOLS)
   (|InternalPrintPackage| . IPRNTPK)
   (|InternalRationalUnivariateRepresentationPackage| . IRURPK)
-  (|IrredPolyOverFiniteField| . IRREDFFX)
   (|Kernel| . KERNEL)
   (|Kovacic| . KOVACIC)
   (|LaurentPolynomial| . LAUPOL)
@@ -898,7 +895,6 @@
   (|ToolsForSign| . TOOLSIGN)
   (|TranscendentalHermiteIntegration| . INTHERTR)
   (|TranscendentalIntegration| . INTTR)
-  (|TranscendentalRischDESystem| . RDETRS)
   (|TransSolvePackageService| . SOLVESER)
   (|TriangularMatrixOperations| . TRIMAT)
   (|TubePlot| . TUBE)

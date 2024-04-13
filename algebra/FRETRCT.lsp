@@ -6,7 +6,7 @@
 (DEFPARAMETER |FullyRetractableTo;AL| 'NIL) 
 
 (DEFUN |FullyRetractableTo| (|t#1|)
-  (LET (#1=#:G449 (#2=#:G450 (|devaluate| |t#1|)))
+  (LET (#1=#:G2 (#2=#:G3 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |FullyRetractableTo;AL|)) (CDR #1#))
           (T
            (SETQ |FullyRetractableTo;AL|
@@ -15,7 +15,7 @@
            #1#)))) 
 
 (DEFUN |FullyRetractableTo;| (|t#1|)
-  (SPROG ((#1=#:G448 NIL))
+  (SPROG ((#1=#:G1 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)

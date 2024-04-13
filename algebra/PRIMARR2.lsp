@@ -15,9 +15,9 @@
 
 (DECLAIM (NOTINLINE |PrimitiveArrayFunctions2;|)) 
 
-(DEFUN |PrimitiveArrayFunctions2| (&REST #1=#:G456)
+(DEFUN |PrimitiveArrayFunctions2| (&REST #1=#:G9)
   (SPROG NIL
-         (PROG (#2=#:G457)
+         (PROG (#2=#:G10)
            (RETURN
             (COND
              ((LETT #2#

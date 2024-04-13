@@ -11,9 +11,9 @@
            (|List|
             (|Record| (|:| |complexRoots| (|SparseUnivariatePolynomial| R))
                       (|:| |coordinates| (|List| (|Polynomial| R))))))
-          (|lc| (|List| (|Polynomial| R))) (#1=#:G526 NIL) (#2=#:G525 NIL)
-          (|g| (|SparseUnivariatePolynomial| R)) (#3=#:G465 NIL)
-          (#4=#:G524 NIL) (|us| NIL) (#5=#:G523 NIL)
+          (|lc| (|List| (|Polynomial| R))) (#1=#:G106 NIL) (#2=#:G105 NIL)
+          (|g| (|SparseUnivariatePolynomial| R)) (#3=#:G44 NIL) (#4=#:G104 NIL)
+          (|us| NIL) (#5=#:G103 NIL)
           (|lus|
            (|List|
             (|SquareFreeRegularTriangularSet| R
@@ -23,7 +23,7 @@
                                               (|NewSparseMultivariatePolynomial|
                                                R
                                                (|OrderedVariableList| |lv|)))))
-          (#6=#:G522 NIL)
+          (#6=#:G102 NIL)
           (|toSee|
            (|List|
             (|Record|
@@ -47,7 +47,7 @@
            (|List|
             (|NewSparseMultivariatePolynomial| R
                                                (|OrderedVariableList| |lv|))))
-          (#7=#:G521 NIL) (#8=#:G520 NIL)
+          (#7=#:G101 NIL) (#8=#:G100 NIL)
           (|newts|
            (|SquareFreeRegularTriangularSet| R
                                              (|IndexedExponents|
@@ -64,7 +64,7 @@
                                              (|OrderedVariableList| |lv|)
                                              (|NewSparseMultivariatePolynomial|
                                               R (|OrderedVariableList| |lv|))))
-          (#9=#:G519 NIL) (|qwt| NIL)
+          (#9=#:G99 NIL) (|qwt| NIL)
           (|lsfqwt|
            (|List|
             (|Record|
@@ -83,12 +83,12 @@
                                                      R
                                                      (|OrderedVariableList|
                                                       |lv|)))))))
-          (#10=#:G518 NIL) (#11=#:G517 NIL) (#12=#:G516 NIL) (|fq| NIL)
+          (#10=#:G98 NIL) (#11=#:G97 NIL) (#12=#:G96 NIL) (|fq| NIL)
           (|lfq|
            (|List|
             (|NewSparseMultivariatePolynomial| R
                                                (|OrderedVariableList| |lv|))))
-          (#13=#:G477 NIL)
+          (#13=#:G56 NIL)
           (|lq|
            (|List|
             (|NewSparseMultivariatePolynomial| R
@@ -123,7 +123,7 @@
            (|Union|
             (|NewSparseMultivariatePolynomial| R (|OrderedVariableList| |lv|))
             "failed"))
-          (#14=#:G515 NIL) (|p| NIL))
+          (#14=#:G95 NIL) (|p| NIL))
          (SEQ (LETT |lp| (SPADCALL (ELT % 23) |lp| (QREFELT % 26)))
               (EXIT
                (COND ((NULL |lp|) (|error| "rur$RURPACK: #1 is empty"))
@@ -475,9 +475,9 @@
 
 (DECLAIM (NOTINLINE |RationalUnivariateRepresentationPackage;|)) 
 
-(DEFUN |RationalUnivariateRepresentationPackage| (&REST #1=#:G531)
+(DEFUN |RationalUnivariateRepresentationPackage| (&REST #1=#:G111)
   (SPROG NIL
-         (PROG (#2=#:G532)
+         (PROG (#2=#:G112)
            (RETURN
             (COND
              ((LETT #2#
@@ -499,33 +499,35 @@
                         '|RationalUnivariateRepresentationPackage|)))))))))) 
 
 (DEFUN |RationalUnivariateRepresentationPackage;| (|#1| |#2|)
-  (SPROG
-   ((#1=#:G457 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-   (PROGN
-    (LETT DV$1 (|devaluate| |#1|))
-    (LETT DV$2 |#2|)
-    (LETT |dv$| (LIST '|RationalUnivariateRepresentationPackage| DV$1 DV$2))
-    (LETT % (GETREFV 76))
-    (QSETREFV % 0 |dv$|)
-    (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-    (|haddProp| |$ConstructorCache| '|RationalUnivariateRepresentationPackage|
-                (LIST DV$1 DV$2) (CONS 1 %))
-    (|stuffDomainSlots| %)
-    (QSETREFV % 6 |#1|)
-    (QSETREFV % 7 |#2|)
-    (SETF |pv$| (QREFELT % 3))
-    (QSETREFV % 10 (SPADCALL (QREFELT % 9)))
-    (QSETREFV % 13 (SPADCALL |#2| (QREFELT % 10) (QREFELT % 12)))
-    (QSETREFV % 17
-              (PROG2 (LETT #1# (SPADCALL (QREFELT % 10) (QREFELT % 16)))
-                  (QCDR #1#)
-                (|check_union2| (QEQCAR #1# 0)
-                                (|OrderedVariableList| (QREFELT % 13))
-                                (|Union| (|OrderedVariableList| (QREFELT % 13))
-                                         "failed")
-                                #1#)))
-    (QSETREFV % 20 (SPADCALL (QREFELT % 17) (QREFELT % 19)))
-    %))) 
+  (SPROG ((#1=#:G32 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT DV$2 |#2|)
+          (LETT |dv$|
+                (LIST '|RationalUnivariateRepresentationPackage| DV$1 DV$2))
+          (LETT % (GETREFV 76))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache|
+                      '|RationalUnivariateRepresentationPackage|
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 10 (SPADCALL (QREFELT % 9)))
+          (QSETREFV % 13 (SPADCALL |#2| (QREFELT % 10) (QREFELT % 12)))
+          (QSETREFV % 17
+                    (PROG2 (LETT #1# (SPADCALL (QREFELT % 10) (QREFELT % 16)))
+                        (QCDR #1#)
+                      (|check_union2| (QEQCAR #1# 0)
+                                      (|OrderedVariableList| (QREFELT % 13))
+                                      (|Union|
+                                       (|OrderedVariableList| (QREFELT % 13))
+                                       "failed")
+                                      #1#)))
+          (QSETREFV % 20 (SPADCALL (QREFELT % 17) (QREFELT % 19)))
+          %))) 
 
 (MAKEPROP '|RationalUnivariateRepresentationPackage| '|infovec|
           (LIST

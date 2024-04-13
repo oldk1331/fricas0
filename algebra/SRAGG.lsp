@@ -8,10 +8,10 @@
         (T (SETQ |StringAggregate;AL| (|StringAggregate;|))))) 
 
 (DEFUN |StringAggregate;| ()
-  (SPROG ((#1=#:G449 NIL))
+  (SPROG ((#1=#:G2 NIL))
          (PROG1
              (LETT #1#
-                   (|subst_in_cat| '(#2=#:G448) (LIST '(|Character|))
+                   (|subst_in_cat| '(#2=#:G1) (LIST '(|Character|))
                                    (|Join|
                                     (|OneDimensionalArrayAggregate| '#2#)
                                     (|mkCategory|

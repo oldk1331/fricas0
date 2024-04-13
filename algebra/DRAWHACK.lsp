@@ -6,9 +6,9 @@
 
 (DECLAIM (NOTINLINE |DrawNumericHack;|)) 
 
-(DEFUN |DrawNumericHack| (#1=#:G450)
+(DEFUN |DrawNumericHack| (#1=#:G5)
   (SPROG NIL
-         (PROG (#2=#:G451)
+         (PROG (#2=#:G6)
            (RETURN
             (COND
              ((LETT #2#

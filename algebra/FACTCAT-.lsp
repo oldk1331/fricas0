@@ -1,12 +1,12 @@
 
 (SDEFUN |FACTCAT-;empty?;SB;1| ((|orf| (S)) (% (|Boolean|)))
-        (SPROG ((#1=#:G457 NIL))
+        (SPROG ((#1=#:G16 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((EQL (SPADCALL |orf| (QREFELT % 8)) 0)
-                    (PROGN (LETT #1# 'T) (GO #2=#:G456))))
+                    (PROGN (LETT #1# 'T) (GO #2=#:G15))))
                   (EXIT (EQL (SPADCALL |orf| (QREFELT % 10)) 0))))
                 #2# (EXIT #1#)))) 
 

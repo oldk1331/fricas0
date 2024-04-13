@@ -26,7 +26,7 @@
         ((|l| (|List| (|GuessOption|)))
          (% (|Union| (|PositiveInteger|) "arbitrary")))
         (SPROG
-         ((#1=#:G485 NIL) (|d| (|Union| (|NonNegativeInteger|) "arbitrary")))
+         ((#1=#:G47 NIL) (|d| (|Union| (|NonNegativeInteger|) "arbitrary")))
          (SEQ (LETT |d| (SPADCALL |l| (QREFELT % 17)))
               (EXIT
                (COND
@@ -285,7 +285,7 @@
 
 (DEFUN |GuessOptionFunctions0| ()
   (SPROG NIL
-         (PROG (#1=#:G621)
+         (PROG (#1=#:G185)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|GuessOptionFunctions0|))

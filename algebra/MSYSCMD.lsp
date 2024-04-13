@@ -8,7 +8,7 @@
 
 (DEFUN |MoreSystemCommands| ()
   (SPROG NIL
-         (PROG (#1=#:G450)
+         (PROG (#1=#:G3)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|MoreSystemCommands|))

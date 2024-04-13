@@ -3,7 +3,7 @@
         ((|s| (%)) (|a| #1=(|NonNegativeInteger|)) (|b| #1#)
          (% (|NonNegativeInteger|)))
         (SPROG
-         ((#2=#:G449 NIL) (|res| (|Union| (|NonNegativeInteger|) "failed")))
+         ((#2=#:G6 NIL) (|res| (|Union| (|NonNegativeInteger|) "failed")))
          (SEQ (LETT |res| (SPADCALL |s| |a| |b| (QREFELT % 9)))
               (COND
                ((SPADCALL |res| (CONS 1 "failed") (QREFELT % 11))
@@ -17,9 +17,9 @@
 
 (DECLAIM (NOTINLINE |FiniteCoDcpo;|)) 
 
-(DEFUN |FiniteCoDcpo| (#1=#:G458)
+(DEFUN |FiniteCoDcpo| (#1=#:G22)
   (SPROG NIL
-         (PROG (#2=#:G459)
+         (PROG (#2=#:G23)
            (RETURN
             (COND
              ((LETT #2#

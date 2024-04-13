@@ -17,9 +17,9 @@
 
 (DECLAIM (NOTINLINE |OnePointCompletionFunctions2;|)) 
 
-(DEFUN |OnePointCompletionFunctions2| (&REST #1=#:G455)
+(DEFUN |OnePointCompletionFunctions2| (&REST #1=#:G9)
   (SPROG NIL
-         (PROG (#2=#:G456)
+         (PROG (#2=#:G10)
            (RETURN
             (COND
              ((LETT #2#

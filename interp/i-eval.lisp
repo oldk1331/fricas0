@@ -5,7 +5,7 @@
 
 ; $genValue := false
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$genValue| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$genValue| NIL))
 
 ; quoteNontypeArgs(t) ==
 ;     t is [.] => t
@@ -53,11 +53,11 @@
 
 ; $noEvalTypeMsg := nil
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$noEvalTypeMsg| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$noEvalTypeMsg| NIL))
 
 ; $evalDomain := nil
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$evalDomain| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$evalDomain| NIL))
 
 ; evalDomain form ==
 ;   if $evalDomain then

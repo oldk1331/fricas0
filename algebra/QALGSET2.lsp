@@ -4,7 +4,7 @@
          (%
           (|DistributedMultivariatePolynomial| |newvl|
                                                (|Fraction| (|Integer|)))))
-        (SPROG ((#1=#:G453 NIL))
+        (SPROG ((#1=#:G20 NIL))
                (SPADCALL
                 (PROG2
                     (LETT #1#
@@ -23,7 +23,7 @@
         ((|v| (|OrderedVariableList| |newvl|))
          (%
           (|DistributedMultivariatePolynomial| |vl| (|Fraction| (|Integer|)))))
-        (SPROG ((#1=#:G457 NIL))
+        (SPROG ((#1=#:G31 NIL))
                (COND
                 ((SPADCALL |v| (QREFELT % 14) (QREFELT % 20))
                  (|spadConstant| % 22))
@@ -127,7 +127,7 @@
            (|List|
             (|DistributedMultivariatePolynomial| |newvl|
                                                  (|Fraction| (|Integer|)))))
-          (#1=#:G484 NIL) (|g| NIL) (#2=#:G483 NIL)
+          (#1=#:G60 NIL) (|g| NIL) (#2=#:G59 NIL)
           (|tp|
            (|DistributedMultivariatePolynomial| |newvl|
                                                 (|Fraction| (|Integer|))))
@@ -202,9 +202,9 @@
 
 (DECLAIM (NOTINLINE |QuasiAlgebraicSet2;|)) 
 
-(DEFUN |QuasiAlgebraicSet2| (#1=#:G485)
+(DEFUN |QuasiAlgebraicSet2| (#1=#:G61)
   (SPROG NIL
-         (PROG (#2=#:G486)
+         (PROG (#2=#:G62)
            (RETURN
             (COND
              ((LETT #2#
@@ -220,7 +220,7 @@
                   (HREM |$ConstructorCache| '|QuasiAlgebraicSet2|)))))))))) 
 
 (DEFUN |QuasiAlgebraicSet2;| (|#1|)
-  (SPROG ((#1=#:G453 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((#1=#:G20 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT |dv$| (LIST '|QuasiAlgebraicSet2| DV$1))

@@ -24,10 +24,10 @@
 (SDEFUN |RSETGCD;toseInvertible?;PTSB;5|
         ((|p| (P)) (|ts| (TS)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G530 NIL) (#2=#:G532 NIL) (|g| (P)) (#3=#:G534 NIL) (|gwt| NIL)
+         ((#1=#:G90 NIL) (#2=#:G92 NIL) (|g| (P)) (#3=#:G94 NIL) (|gwt| NIL)
           (|lgwt| (|List| (|Record| (|:| |val| P) (|:| |tower| TS))))
-          (|ts_v-| (TS)) (|ts_v| (P)) (#4=#:G519 NIL) (#5=#:G531 NIL)
-          (#6=#:G533 NIL) (|bwt| NIL)
+          (|ts_v-| (TS)) (|ts_v| (P)) (#4=#:G79 NIL) (#5=#:G91 NIL)
+          (#6=#:G93 NIL) (|bwt| NIL)
           (|toCheck|
            (|List| (|Record| (|:| |val| (|Boolean|)) (|:| |tower| TS))))
           (|v| (V)) (|q| (P)))
@@ -62,8 +62,8 @@
                                          (LETT #5#
                                                (PROGN
                                                 (LETT #2# NIL)
-                                                (GO #7=#:G529)))
-                                         (GO #8=#:G515))))))
+                                                (GO #7=#:G89)))
+                                         (GO #8=#:G75))))))
                                     (LETT #6# (CDR #6#)) (GO G190) G191
                                     (EXIT NIL)))
                               #8# (EXIT #5#))
@@ -101,7 +101,7 @@
                                                  (PROGN
                                                   (LETT #2# NIL)
                                                   (GO #7#)))
-                                           (GO #9=#:G524)))))))))
+                                           (GO #9=#:G84)))))))))
                                #9# (EXIT #1#))
                               (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
                          (EXIT 'T)))))))
@@ -112,14 +112,14 @@
          (% (|List| (|Record| (|:| |val| (|Boolean|)) (|:| |tower| TS)))))
         (SPROG
          ((|lbwt| (|List| (|Record| (|:| |val| (|Boolean|)) (|:| |tower| TS))))
-          (#1=#:G570 NIL) (|bwt| NIL) (#2=#:G569 NIL)
+          (#1=#:G138 NIL) (|bwt| NIL) (#2=#:G137 NIL)
           (|inv|
            #3=(|List| (|Record| (|:| |val| (|Boolean|)) (|:| |tower| TS))))
-          (|ts_h| (TS)) (|h| (P)) (|ts_g| (TS)) (|g| (P)) (#4=#:G568 NIL)
+          (|ts_h| (TS)) (|h| (P)) (|ts_g| (TS)) (|g| (P)) (#4=#:G136 NIL)
           (|gwt| NIL)
           (|lgwt| (|List| (|Record| (|:| |val| P) (|:| |tower| TS))))
-          (|ts_v+| (TS)) (|ts_v-| (TS)) (|ts_v| (P)) (#5=#:G543 NIL)
-          (#6=#:G566 NIL) (|newq| (P)) (#7=#:G567 NIL) (|toCheck| #3#)
+          (|ts_v+| (TS)) (|ts_v-| (TS)) (|ts_v| (P)) (#5=#:G111 NIL)
+          (#6=#:G134 NIL) (|newq| (P)) (#7=#:G135 NIL) (|toCheck| #3#)
           (|v| (V)) (|q| (P)))
          (SEQ
           (EXIT
@@ -170,7 +170,7 @@
                                       (LETT #7# (CDR #7#)) (GO G190) G191
                                       (EXIT NIL))
                                  (EXIT
-                                  (PROGN (LETT #6# |lbwt|) (GO #8=#:G565)))))))
+                                  (PROGN (LETT #6# |lbwt|) (GO #8=#:G133)))))))
                          (LETT |ts_v|
                                (PROG2
                                    (LETT #5#
@@ -274,10 +274,10 @@
         ((|p| (P)) (|ts| (TS)) (% (|List| TS)))
         (SPROG
          ((|toSave| (|List| TS)) (|inv| (|List| TS)) (|ts_h| (TS)) (|h| (P))
-          (|g| (P)) (#1=#:G602 NIL) (|gwt| NIL)
+          (|g| (P)) (#1=#:G170 NIL) (|gwt| NIL)
           (|lgwt| (|List| (|Record| (|:| |val| P) (|:| |tower| TS))))
-          (|ts_v+| (TS)) (|ts_v-| (TS)) (|ts_v| (P)) (#2=#:G583 NIL)
-          (#3=#:G600 NIL) (|newq| (P)) (#4=#:G601 NIL) (|bwt| NIL)
+          (|ts_v+| (TS)) (|ts_v-| (TS)) (|ts_v| (P)) (#2=#:G151 NIL)
+          (#3=#:G168 NIL) (|newq| (P)) (#4=#:G169 NIL) (|bwt| NIL)
           (|toCheck|
            (|List| (|Record| (|:| |val| (|Boolean|)) (|:| |tower| TS))))
           (|v| (V)) (|q| (P)) (|e| (|Union| (|List| TS) "failed"))
@@ -359,7 +359,7 @@
                                             (LETT #3#
                                                   (SPADCALL |toSave|
                                                             (QREFELT % 74)))
-                                            (GO #6=#:G599)))))))
+                                            (GO #6=#:G167)))))))
                                       (LETT |ts_v|
                                             (PROG2
                                                 (LETT #2#
@@ -471,7 +471,7 @@
          (% (|List| (|Record| (|:| |val| P) (|:| |tower| TS)))))
         (SPROG
          ((|lpwt| (|List| (|Record| (|:| |val| P) (|:| |tower| TS))))
-          (|sfp| (P)) (|g| (P)) (|us| (TS)) (#1=#:G612 NIL) (|gwt| NIL)
+          (|sfp| (P)) (|g| (P)) (|us| (TS)) (#1=#:G181 NIL) (|gwt| NIL)
           (|lgwt| (|List| (|Record| (|:| |val| P) (|:| |tower| TS)))) (|q| (P))
           (|v| (V)))
          (SEQ
@@ -526,7 +526,7 @@
          ((|toSee| (|List| #1#))
           (|toSave|
            (|List| (|Record| (|:| |val| (|List| P)) (|:| |tower| TS))))
-          (|newp2| (P)) (|s| (P)) (#2=#:G621 NIL) (|p3| (P)) (#3=#:G634 NIL)
+          (|newp2| (P)) (|s| (P)) (#2=#:G191 NIL) (|p3| (P)) (#3=#:G204 NIL)
           (|bwt| NIL)
           (|lbwt| (|List| (|Record| (|:| |val| (|Boolean|)) (|:| |tower| TS))))
           (|lpwt| (|Record| (|:| |val| (|List| P)) (|:| |tower| TS)))
@@ -649,7 +649,7 @@
         (SPROG
          ((|toSave| (|List| (|Record| (|:| |val| P) (|:| |tower| TS))))
           (|toSee| (|List| (|Record| (|:| |val| (|List| P)) (|:| |tower| TS))))
-          (|s| (P)) (#1=#:G649 NIL) (|p3| (P)) (#2=#:G655 NIL)
+          (|s| (P)) (#1=#:G219 NIL) (|p3| (P)) (#2=#:G225 NIL)
           (|e|
            (|Union| (|List| (|Record| (|:| |val| P) (|:| |tower| TS)))
                     "failed"))
@@ -667,7 +667,7 @@
                          (LETT |toSave|
                                (SPADCALL |p1| |p2| |ts| (QREFELT % 99)))
                          (SPADCALL |k| |toSave| (QREFELT % 103))
-                         (EXIT (PROGN (LETT #2# |toSave|) (GO #3=#:G654)))))
+                         (EXIT (PROGN (LETT #2# |toSave|) (GO #3=#:G224)))))
                        (#4='T
                         (SEQ
                          (COND
@@ -710,16 +710,16 @@
          (|v| (V)) (|b2| (|Boolean|))
          (% (|List| (|Record| (|:| |val| P) (|:| |tower| TS)))))
         (SPROG
-         ((#1=#:G684 NIL) (|s| (P)) (|p2| (P)) (|p1| (P)) (|#G80| (P))
+         ((#1=#:G254 NIL) (|s| (P)) (|p2| (P)) (|p1| (P)) (|#G80| (P))
           (|#G79| (P))
           (|toReturn| (|List| (|Record| (|:| |val| P) (|:| |tower| TS))))
-          (#2=#:G683 NIL) (|p3| (P)) (|delta| (|NonNegativeInteger|))
-          (#3=#:G668 NIL)
+          (#2=#:G253 NIL) (|p3| (P)) (|delta| (|NonNegativeInteger|))
+          (#3=#:G238 NIL)
           (|toSee| (|List| (|Record| (|:| |val| (|List| P)) (|:| |tower| TS))))
           (|lpwt| (|Record| (|:| |val| (|List| P)) (|:| |tower| TS)))
-          (#4=#:G680 NIL) (#5=#:G682 NIL) (|bwt| NIL)
+          (#4=#:G250 NIL) (#5=#:G252 NIL) (|bwt| NIL)
           (|lbwt| (|List| (|Record| (|:| |val| (|Boolean|)) (|:| |tower| TS))))
-          (|ts| (TS)) (#6=#:G681 NIL))
+          (|ts| (TS)) (#6=#:G251 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |toReturn| NIL)
@@ -768,7 +768,7 @@
                                                            (QREFELT % 85)))
                                                 (PROGN
                                                  (LETT #4# |toReturn|)
-                                                 (GO #7=#:G679)))))))))
+                                                 (GO #7=#:G249)))))))))
                                          ('T
                                           (LETT |llpwt|
                                                 (CONS
@@ -931,9 +931,9 @@
 
 (DECLAIM (NOTINLINE |RegularTriangularSetGcdPackage;|)) 
 
-(DEFUN |RegularTriangularSetGcdPackage| (&REST #1=#:G698)
+(DEFUN |RegularTriangularSetGcdPackage| (&REST #1=#:G268)
   (SPROG NIL
-         (PROG (#2=#:G699)
+         (PROG (#2=#:G269)
            (RETURN
             (COND
              ((LETT #2#

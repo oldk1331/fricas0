@@ -1,8 +1,8 @@
 
 (SDEFUN |RMCAT2;map;MM1M2;1| ((|f| (|Mapping| R2 R1)) (|mat| (M1)) (% (M2)))
         (SPROG
-         ((#1=#:G457 NIL) (|j| NIL) (#2=#:G458 NIL) (|l| NIL) (#3=#:G455 NIL)
-          (|i| NIL) (#4=#:G456 NIL) (|k| NIL) (|ans| (M2)))
+         ((#1=#:G17 NIL) (|j| NIL) (#2=#:G18 NIL) (|l| NIL) (#3=#:G15 NIL)
+          (|i| NIL) (#4=#:G16 NIL) (|k| NIL) (|ans| (M2)))
          (SEQ
           (LETT |ans|
                 (MAKE_MATRIX1 (QREFELT % 6) (QREFELT % 7)
@@ -34,7 +34,7 @@
 
 (SDEFUN |RMCAT2;reduce;MM12R2;2|
         ((|f| (|Mapping| R2 R1 R2)) (|mat| (M1)) (|ident| (R2)) (% (R2)))
-        (SPROG ((|s| (R2)) (#1=#:G467 NIL) (|j| NIL) (#2=#:G466 NIL) (|i| NIL))
+        (SPROG ((|s| (R2)) (#1=#:G27 NIL) (|j| NIL) (#2=#:G26 NIL) (|i| NIL))
                (SEQ (LETT |s| |ident|)
                     (SEQ (LETT |i| (SPADCALL |mat| (QREFELT % 18)))
                          (LETT #2# (SPADCALL |mat| (QREFELT % 19))) G190
@@ -58,9 +58,9 @@
 
 (DECLAIM (NOTINLINE |RectangularMatrixCategoryFunctions2;|)) 
 
-(DEFUN |RectangularMatrixCategoryFunctions2| (&REST #1=#:G468)
+(DEFUN |RectangularMatrixCategoryFunctions2| (&REST #1=#:G28)
   (SPROG NIL
-         (PROG (#2=#:G469)
+         (PROG (#2=#:G29)
            (RETURN
             (COND
              ((LETT #2#

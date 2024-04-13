@@ -48,9 +48,9 @@
 
 (DECLAIM (NOTINLINE |InfiniteCyclicGroup;|)) 
 
-(DEFUN |InfiniteCyclicGroup| (#1=#:G469)
+(DEFUN |InfiniteCyclicGroup| (#1=#:G41)
   (SPROG NIL
-         (PROG (#2=#:G470)
+         (PROG (#2=#:G42)
            (RETURN
             (COND
              ((LETT #2#

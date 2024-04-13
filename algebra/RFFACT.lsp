@@ -41,9 +41,9 @@
 
 (DECLAIM (NOTINLINE |RationalFunctionFactor;|)) 
 
-(DEFUN |RationalFunctionFactor| (#1=#:G453)
+(DEFUN |RationalFunctionFactor| (#1=#:G37)
   (SPROG NIL
-         (PROG (#2=#:G454)
+         (PROG (#2=#:G38)
            (RETURN
             (COND
              ((LETT #2#

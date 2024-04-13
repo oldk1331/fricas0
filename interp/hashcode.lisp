@@ -160,7 +160,7 @@
 
 ; $hashModulus := 1073741789                      -- largest 30-bit prime
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$hashModulus| 1073741789))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$hashModulus| 1073741789))
 
 ; hashString str ==
 ;         h := 0
@@ -191,15 +191,15 @@
 
 ; $hashZ1 := 1100661313
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$hashZ1| 1100661313))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$hashZ1| 1100661313))
 
 ; $hashZ2 := 1433925857
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$hashZ2| 1433925857))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$hashZ2| 1433925857))
 
 ; $hashZZ := 4903203917250634599
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$hashZZ| 4903203917250634599))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$hashZZ| 4903203917250634599))
 
 ; hashCombine(hash1, hash2) ==
 ;          h1 := LOGAND(hash1, ASH(1, 32) - 1)
@@ -218,4 +218,4 @@
 
 ; $VoidHash := hashString '"Void"
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$VoidHash| (|hashString| "Void")))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$VoidHash| (|hashString| "Void")))

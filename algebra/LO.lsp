@@ -66,37 +66,11 @@
                                  (SPADCALL |xd| (QREFELT % 37))
                                  (QREFELT % 38)))))))) 
 
-(SDEFUN |LO;latex;%S;14| ((|x| (%)) (% (|String|)))
-        (SPROG ((|dl| #1=(|String|)) (|nl| #1#) (|xd| (R)))
-               (SEQ (LETT |xd| (QCDR |x|))
-                    (EXIT
-                     (COND
-                      ((SPADCALL |xd| (|spadConstant| % 11) (QREFELT % 30))
-                       (SPADCALL (QCAR |x|) (QREFELT % 41)))
-                      ('T
-                       (SEQ
-                        (LETT |nl|
-                              (STRCONC "{"
-                                       (STRCONC
-                                        (SPADCALL (QCAR |x|) (QREFELT % 41))
-                                        "}")))
-                        (LETT |dl|
-                              (STRCONC "{"
-                                       (STRCONC
-                                        (SPADCALL (QCDR |x|) (QREFELT % 42))
-                                        "}")))
-                        (EXIT
-                         (STRCONC "{ "
-                                  (STRCONC |nl|
-                                           (STRCONC " \\over "
-                                                    (STRCONC |dl|
-                                                             " }")))))))))))) 
-
 (DECLAIM (NOTINLINE |Localize;|)) 
 
-(DEFUN |Localize| (&REST #1=#:G481)
+(DEFUN |Localize| (&REST #1=#:G35)
   (SPROG NIL
-         (PROG (#2=#:G482)
+         (PROG (#2=#:G36)
            (RETURN
             (COND
              ((LETT #2#
@@ -116,7 +90,7 @@
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|Localize| DV$1 DV$2))
-          (LETT % (GETREFV 47))
+          (LETT % (GETREFV 44))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3
                     (LETT |pv$|
@@ -163,13 +137,12 @@
               (42 . +) (48 . *) |LO;+;3%;8| (|Integer|) (54 . *) |LO;*;I2%;9|
               (60 . =) |LO;*;R2%;10| (66 . |zero?|) |LO;/;%R%;11| |LO;/;MR%;12|
               (|OutputForm|) (71 . |coerce|) (76 . |coerce|) (81 . /)
-              |LO;coerce;%Of;13| (|String|) (87 . |latex|) (92 . |latex|)
-              |LO;latex;%S;14| (|Union| % '"failed") (|NonNegativeInteger|)
-              (|PositiveInteger|))
-           '#(~= 97 |zero?| 103 |subtractIfCan| 108 |smaller?| 114 |sample| 120
-              |opposite?| 124 |numer| 130 |min| 135 |max| 141 |latex| 147
-              |denom| 152 |coerce| 157 |Zero| 162 >= 166 > 172 = 178 <= 184 <
-              190 / 196 - 208 + 219 * 225)
+              |LO;coerce;%Of;13| (|Union| % '"failed") (|NonNegativeInteger|)
+              (|PositiveInteger|) (|String|))
+           '#(~= 87 |zero?| 93 |subtractIfCan| 98 |smaller?| 104 |sample| 110
+              |opposite?| 114 |numer| 120 |min| 125 |max| 131 |latex| 137
+              |denom| 142 |coerce| 147 |Zero| 152 >= 156 > 162 = 168 <= 174 <
+              180 / 186 - 198 + 209 * 215)
            'NIL
            (CONS (|makeByteWordVec2| 3 '(0 0 1 0 0 1 1 3 1 3 1 2 0 1 0 0 0 1))
                  (CONS
@@ -185,20 +158,20 @@
                       (|OrderedSet|) (|AbelianMonoid|) (|AbelianSemiGroup|)
                       (|Comparable|) (|SetCategory|) (|BasicType|)
                       (|CoercibleTo| 35) (|PartialOrder|))
-                   (|makeByteWordVec2| 46
+                   (|makeByteWordVec2| 43
                                        '(0 6 0 10 0 7 0 11 1 6 12 0 13 1 6 0 0
                                          15 2 6 0 7 0 17 2 6 12 0 0 18 2 6 12 0
                                          0 22 2 0 12 0 0 23 2 6 0 0 0 24 2 7 0
                                          0 0 25 2 6 0 27 0 28 2 7 12 0 0 30 1 7
                                          12 0 32 1 6 35 0 36 1 7 35 0 37 2 35 0
-                                         0 0 38 1 6 40 0 41 1 7 40 0 42 2 0 12
-                                         0 0 1 1 4 12 0 14 2 3 44 0 0 1 2 1 12
-                                         0 0 1 0 4 0 1 2 4 12 0 0 1 1 0 6 0 20
-                                         2 1 0 0 0 1 2 1 0 0 0 1 1 0 40 0 43 1
-                                         0 7 0 21 1 0 35 0 39 0 4 0 9 2 1 12 0
-                                         0 1 2 1 12 0 0 1 2 0 12 0 0 19 2 1 12
-                                         0 0 1 2 1 12 0 0 23 2 0 0 6 7 34 2 0 0
-                                         0 7 33 1 3 0 0 16 2 3 0 0 0 1 2 0 0 0
-                                         0 26 2 3 0 27 0 29 2 4 0 45 0 1 2 0 0
-                                         0 7 1 2 0 0 7 0 31 2 0 0 46 0 1)))))
+                                         0 0 38 2 0 12 0 0 1 1 4 12 0 14 2 3 40
+                                         0 0 1 2 1 12 0 0 1 0 4 0 1 2 4 12 0 0
+                                         1 1 0 6 0 20 2 1 0 0 0 1 2 1 0 0 0 1 1
+                                         0 43 0 1 1 0 7 0 21 1 0 35 0 39 0 4 0
+                                         9 2 1 12 0 0 1 2 1 12 0 0 1 2 0 12 0 0
+                                         19 2 1 12 0 0 1 2 1 12 0 0 23 2 0 0 6
+                                         7 34 2 0 0 0 7 33 1 3 0 0 16 2 3 0 0 0
+                                         1 2 0 0 0 0 26 2 3 0 27 0 29 2 4 0 41
+                                         0 1 2 0 0 0 7 1 2 0 0 7 0 31 2 0 0 42
+                                         0 1)))))
            '|lookupComplete|)) 

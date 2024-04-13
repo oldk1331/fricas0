@@ -7,7 +7,7 @@
 (SDEFUN |FLASORT;siftUp|
         ((|l| (|Mapping| (|Boolean|) S S)) (|r| (V)) (|i| (|Integer|))
          (|n| (|Integer|)) (% (|Void|)))
-        (SPROG ((#1=#:G465 NIL) (|j| #2=(|Integer|)) (|k| #2#) (|t| (S)))
+        (SPROG ((#1=#:G25 NIL) (|j| #2=(|Integer|)) (|k| #2#) (|t| (S)))
                (SEQ (LETT |t| (SPADCALL |r| |i| (QREFELT % 13)))
                     (EXIT
                      (SEQ
@@ -36,7 +36,7 @@
                                            (QREFELT % 14))
                                  (SPADCALL |r| |j| |t| (QREFELT % 14))
                                  (EXIT (LETT |i| |j|))))
-                               ('T (PROGN (LETT #1# 1) (GO #3=#:G462))))))
+                               ('T (PROGN (LETT #1# 1) (GO #3=#:G22))))))
                             NIL (GO G190) G191 (EXIT NIL)))
                       #3# (EXIT #1#)))))) 
 
@@ -99,7 +99,7 @@
 (SDEFUN |FLASORT;QuickSort|
         ((|l| (|Mapping| (|Boolean|) S S)) (|r| (V)) (|i| (|Integer|))
          (|j| (|Integer|)) (% (V)))
-        (SPROG ((|k| (|Integer|)) (#1=#:G504 NIL) (|n| (|Integer|)))
+        (SPROG ((|k| (|Integer|)) (#1=#:G66 NIL) (|n| (|Integer|)))
                (SEQ
                 (EXIT
                  (SEQ G190 NIL
@@ -112,7 +112,7 @@
                                (SPADCALL |r| |i| |j| (QREFELT % 18))))))
                            (EXIT
                             (COND
-                             ((< |n| 2) (PROGN (LETT #1# |r|) (GO #2=#:G503)))
+                             ((< |n| 2) (PROGN (LETT #1# |r|) (GO #2=#:G65)))
                              ('T
                               (SEQ
                                (LETT |k|
@@ -134,7 +134,7 @@
 (SDEFUN |FLASORT;shellSort;M2V;6|
         ((|l| (|Mapping| (|Boolean|) S S)) (|r| (V)) (% (V)))
         (SPROG
-         ((|g| (|Integer|)) (|j| (|Integer|)) (#1=#:G518 NIL) (|i| NIL)
+         ((|g| (|Integer|)) (|j| (|Integer|)) (#1=#:G80 NIL) (|i| NIL)
           (|n| (|Integer|)) (|m| (|Integer|)))
          (SEQ (LETT |m| (SPADCALL |r| (QREFELT % 9)))
               (LETT |n| (SPADCALL |r| (QREFELT % 10))) (LETT |g| 1)

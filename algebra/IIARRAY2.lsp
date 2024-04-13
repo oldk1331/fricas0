@@ -65,45 +65,9 @@
           (|error| "setelt!: index out of range"))
          ('T (SPADCALL |m| |i| |j| |r| (QREFELT % 24))))) 
 
-(SDEFUN |IIARRAY2;latex;%S;14| ((|m| (%)) (% (|String|)))
-        (SPROG
-         ((|s| (|String|)) (#1=#:G2757 NIL) (|j| NIL) (#2=#:G2756 NIL)
-          (|i| NIL) (#3=#:G2755 NIL))
-         (SEQ (LETT |s| "\\left[ \\begin{array}{")
-              (SEQ (LETT |j| (SPADCALL |m| (QREFELT % 17)))
-                   (LETT #3# (SPADCALL |m| (QREFELT % 21))) G190
-                   (COND ((> |j| #3#) (GO G191)))
-                   (SEQ (EXIT (LETT |s| (STRCONC |s| "c"))))
-                   (LETT |j| (+ |j| 1)) (GO G190) G191 (EXIT NIL))
-              (LETT |s| (STRCONC |s| "} "))
-              (SEQ (LETT |i| (SPADCALL |m| (QREFELT % 16)))
-                   (LETT #2# (SPADCALL |m| (QREFELT % 19))) G190
-                   (COND ((> |i| #2#) (GO G191)))
-                   (SEQ
-                    (SEQ (LETT |j| (SPADCALL |m| (QREFELT % 17)))
-                         (LETT #1# (SPADCALL |m| (QREFELT % 21))) G190
-                         (COND ((> |j| #1#) (GO G191)))
-                         (SEQ
-                          (LETT |s|
-                                (STRCONC |s|
-                                         (SPADCALL
-                                          (SPADCALL |m| |i| |j| (QREFELT % 22))
-                                          (QREFELT % 27))))
-                          (EXIT
-                           (COND
-                            ((< |j| (SPADCALL |m| (QREFELT % 21)))
-                             (LETT |s| (STRCONC |s| " & "))))))
-                         (LETT |j| (+ |j| 1)) (GO G190) G191 (EXIT NIL))
-                    (EXIT
-                     (COND
-                      ((< |i| (SPADCALL |m| (QREFELT % 19)))
-                       (LETT |s| (STRCONC |s| " \\\\ "))))))
-                   (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL))
-              (EXIT (STRCONC |s| "\\end{array} \\right]"))))) 
-
-(SDEFUN |IIARRAY2;hashUpdate!;Hs%Hs;15|
+(SDEFUN |IIARRAY2;hashUpdate!;Hs%Hs;14|
         ((|s| (|HashState|)) (|m| (%)) (% (|HashState|)))
-        (SPROG ((#1=#:G2765 NIL) (|j| NIL) (#2=#:G2764 NIL) (|i| NIL))
+        (SPROG ((#1=#:G2295 NIL) (|j| NIL) (#2=#:G2294 NIL) (|i| NIL))
                (SEQ
                 (SEQ (LETT |i| (SPADCALL |m| (QREFELT % 16)))
                      (LETT #2# (SPADCALL |m| (QREFELT % 19))) G190
@@ -119,16 +83,16 @@
                                     (SPADCALL |s|
                                               (SPADCALL |m| |i| |j|
                                                         (QREFELT % 22))
-                                              (QREFELT % 30)))))
+                                              (QREFELT % 27)))))
                             (LETT |j| (+ |j| 1)) (GO G190) G191 (EXIT NIL))))
                      (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL))
                 (EXIT |s|)))) 
 
 (DECLAIM (NOTINLINE |InnerIndexedTwoDimensionalArray;|)) 
 
-(DEFUN |InnerIndexedTwoDimensionalArray| (&REST #1=#:G2773)
+(DEFUN |InnerIndexedTwoDimensionalArray| (&REST #1=#:G2303)
   (SPROG NIL
-         (PROG (#2=#:G2774)
+         (PROG (#2=#:G2304)
            (RETURN
             (COND
              ((LETT #2#
@@ -151,7 +115,7 @@
 
 (DEFUN |InnerIndexedTwoDimensionalArray;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G2770 NIL) (#2=#:G2771 NIL) (% NIL) (|dv$| NIL)
+   ((|pv$| NIL) (#1=#:G2300 NIL) (#2=#:G2301 NIL) (% NIL) (|dv$| NIL)
     (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -161,7 +125,7 @@
     (LETT DV$5 (|devaluate| |#5|))
     (LETT |dv$|
           (LIST '|InnerIndexedTwoDimensionalArray| DV$1 DV$2 DV$3 DV$4 DV$5))
-    (LETT % (GETREFV 50))
+    (LETT % (GETREFV 48))
     (QSETREFV % 0 |dv$|)
     (QSETREFV % 3
               (LETT |pv$|
@@ -233,12 +197,9 @@
      (|augmentPredVector| % 16384))
     (SETF |pv$| (QREFELT % 3))
     (COND
-     ((|testBitVector| |pv$| 5)
-      (QSETREFV % 28 (CONS (|dispatchFunction| |IIARRAY2;latex;%S;14|) %))))
-    (COND
      ((|testBitVector| |pv$| 2)
-      (QSETREFV % 31
-                (CONS (|dispatchFunction| |IIARRAY2;hashUpdate!;Hs%Hs;15|)
+      (QSETREFV % 28
+                (CONS (|dispatchFunction| |IIARRAY2;hashUpdate!;Hs%Hs;14|)
                       %))))
     %))) 
 
@@ -252,26 +213,25 @@
               |IIARRAY2;maxRowIndex;%I;6| |IIARRAY2;ncols;%Nni;9|
               |IIARRAY2;maxColIndex;%I;7| |IIARRAY2;qelt;%2IR;10|
               |IIARRAY2;elt;%2IR;11| |IIARRAY2;qsetelt!;%2I2R;12|
-              |IIARRAY2;setelt!;%2I2R;13| (|String|) (0 . |latex|)
-              (5 . |latex|) (|HashState|) (10 . |hashUpdate!|)
-              (16 . |hashUpdate!|) (|Boolean|) (|List| 6) (|Equation| 6)
-              (|List| 34) (|Mapping| 32 6 6) (|Mapping| 32 6) (|OutputForm|)
-              (|SingleInteger|) (|Mapping| 6 6 6) (|List| 45) (|List| 12)
-              (|Mapping| 6 6) (|PositiveInteger|) (|List| %) (|List| 47)
-              (|Segment| 15) (|List| 15) (|List| 33))
-           '#(~= 22 |vertSplit| 28 |vertConcat| 40 |transpose| 51 |swapRows!|
-              56 |swapColumns!| 63 |subMatrix| 70 |squareTop| 79 |smaller?| 84
-              |size?| 90 |setsubMatrix!| 96 |setelt!| 104 |setRow!| 200
-              |setColumn!| 207 |sample| 214 |rowSlice| 218 |row| 223 |qsetelt!|
-              229 |qnew| 237 |qelt| 243 |parts| 250 |nrows| 255 |new| 260
-              |ncols| 267 |more?| 272 |minRowIndex| 278 |minColIndex| 283 |min|
-              288 |members| 293 |member?| 298 |maxRowIndex| 304 |maxColIndex|
-              309 |max| 314 |map!| 325 |map| 331 |listOfLists| 352 |less?| 357
-              |latex| 363 |horizSplit| 368 |horizConcat| 380 |hashUpdate!| 391
-              |hash| 397 |fill!| 402 |every?| 408 |eval| 414 |eq?| 440 |empty?|
-              446 |empty| 451 |elt| 455 |count| 547 |copy| 559 |column| 564
-              |colSlice| 570 |coerce| 575 |blockSplit| 580 |blockConcat| 594
-              |array2| 599 |any?| 604 = 610 |#| 616)
+              |IIARRAY2;setelt!;%2I2R;13| (|HashState|) (0 . |hashUpdate!|)
+              (6 . |hashUpdate!|) (|Boolean|) (|List| 6) (|Equation| 6)
+              (|List| 31) (|Mapping| 29 6 6) (|Mapping| 29 6) (|OutputForm|)
+              (|SingleInteger|) (|String|) (|Mapping| 6 6 6) (|List| 43)
+              (|List| 12) (|Mapping| 6 6) (|PositiveInteger|) (|List| %)
+              (|List| 45) (|Segment| 15) (|List| 15) (|List| 30))
+           '#(~= 12 |vertSplit| 18 |vertConcat| 30 |transpose| 41 |swapRows!|
+              46 |swapColumns!| 53 |subMatrix| 60 |squareTop| 69 |smaller?| 74
+              |size?| 80 |setsubMatrix!| 86 |setelt!| 94 |setRow!| 190
+              |setColumn!| 197 |sample| 204 |rowSlice| 208 |row| 213 |qsetelt!|
+              219 |qnew| 227 |qelt| 233 |parts| 240 |nrows| 245 |new| 250
+              |ncols| 257 |more?| 262 |minRowIndex| 268 |minColIndex| 273 |min|
+              278 |members| 283 |member?| 288 |maxRowIndex| 294 |maxColIndex|
+              299 |max| 304 |map!| 315 |map| 321 |listOfLists| 342 |less?| 347
+              |latex| 353 |horizSplit| 358 |horizConcat| 370 |hashUpdate!| 381
+              |hash| 387 |fill!| 392 |every?| 398 |eval| 404 |eq?| 430 |empty?|
+              436 |empty| 441 |elt| 445 |count| 537 |copy| 549 |column| 554
+              |colSlice| 560 |coerce| 565 |blockSplit| 570 |blockConcat| 584
+              |array2| 589 |any?| 594 = 600 |#| 606)
            'NIL
            (CONS (|makeByteWordVec2| 11 '(0 0 1 0 9 6 2 0 0 0 9 11 7))
                  (CONS
@@ -283,44 +243,43 @@
                       (|HomogeneousAggregate| 6) (|Comparable|) (|Aggregate|)
                       (|Evalable| 6) (|SetCategory|) (|Hashable|) (|Type|)
                       (|finiteAggregate|) (|shallowlyMutable|)
-                      (|InnerEvalable| 6 6) (|CoercibleTo| 38) (|BasicType|))
-                   (|makeByteWordVec2| 49
-                                       '(1 6 26 0 27 1 0 26 0 28 2 6 29 29 0 30
-                                         2 0 29 29 0 31 2 15 32 0 0 1 2 0 45 0
-                                         42 1 2 0 45 0 44 1 1 0 0 45 1 2 0 0 0
-                                         0 1 1 0 0 0 1 3 0 0 0 15 15 1 3 0 0 0
-                                         15 15 1 5 0 0 0 15 15 15 15 1 1 0 0 0
-                                         1 2 1 32 0 0 1 2 0 32 0 12 1 4 0 0 0
-                                         15 15 0 1 4 0 0 0 46 46 0 1 4 0 0 0 47
-                                         46 0 1 4 0 0 0 46 47 0 1 4 0 0 0 47 48
-                                         0 1 4 0 0 0 47 47 0 1 4 0 0 0 48 47 0
-                                         1 4 0 0 0 48 48 0 1 4 0 0 0 15 48 0 1
-                                         4 0 0 0 48 15 0 1 4 0 6 0 15 15 6 25 4
-                                         0 0 0 46 15 0 1 4 0 0 0 15 46 0 1 3 0
-                                         0 0 15 9 1 3 0 0 0 15 10 1 0 0 0 1 1 0
-                                         47 0 1 2 0 9 0 15 1 4 0 6 0 15 15 6 24
-                                         2 0 0 12 12 13 3 0 6 0 15 15 22 1 0 33
-                                         0 1 1 0 12 0 18 3 0 0 12 12 6 14 1 0
-                                         12 0 20 2 0 32 0 12 1 1 0 15 0 16 1 0
-                                         15 0 17 1 13 6 0 1 1 12 33 0 1 2 14 32
-                                         6 0 1 1 0 15 0 19 1 0 15 0 21 1 13 6 0
-                                         1 2 12 6 36 0 1 2 0 0 43 0 1 4 0 0 40
-                                         0 0 6 1 3 0 0 40 0 0 1 2 0 0 43 0 1 1
-                                         0 49 0 1 2 0 32 0 12 1 1 5 26 0 28 2 0
-                                         45 0 44 1 2 0 45 0 42 1 1 0 0 45 1 2 0
-                                         0 0 0 1 2 2 29 29 0 31 1 2 39 0 1 2 0
-                                         0 0 6 1 2 12 32 37 0 1 3 8 0 0 6 6 1 3
-                                         8 0 0 33 33 1 2 8 0 0 34 1 2 8 0 0 35
-                                         1 2 0 32 0 0 1 1 0 32 0 1 0 0 0 11 3 0
-                                         0 0 46 46 1 3 0 0 0 47 46 1 3 0 0 0 46
-                                         47 1 3 0 0 0 46 15 1 3 0 0 0 15 46 1 3
-                                         0 0 0 48 47 1 3 0 0 0 47 48 1 3 0 0 0
-                                         47 47 1 3 0 0 0 48 15 1 3 0 0 0 48 48
-                                         1 3 0 0 0 15 48 1 4 0 6 0 15 15 6 1 3
-                                         0 6 0 15 15 23 2 14 12 6 0 1 2 12 12
-                                         37 0 1 1 0 0 0 1 2 0 10 0 15 1 1 0 47
-                                         0 1 1 10 38 0 1 3 0 41 0 42 42 1 3 0
-                                         41 0 44 44 1 1 0 0 41 1 1 0 0 49 1 2
-                                         12 32 37 0 1 2 15 32 0 0 1 1 12 12 0
-                                         1)))))
+                      (|InnerEvalable| 6 6) (|CoercibleTo| 35) (|BasicType|))
+                   (|makeByteWordVec2| 47
+                                       '(2 6 26 26 0 27 2 0 26 26 0 28 2 15 29
+                                         0 0 1 2 0 43 0 40 1 2 0 43 0 42 1 1 0
+                                         0 43 1 2 0 0 0 0 1 1 0 0 0 1 3 0 0 0
+                                         15 15 1 3 0 0 0 15 15 1 5 0 0 0 15 15
+                                         15 15 1 1 0 0 0 1 2 1 29 0 0 1 2 0 29
+                                         0 12 1 4 0 0 0 15 15 0 1 4 0 0 0 44 44
+                                         0 1 4 0 0 0 45 44 0 1 4 0 0 0 44 45 0
+                                         1 4 0 0 0 45 46 0 1 4 0 0 0 45 45 0 1
+                                         4 0 0 0 46 45 0 1 4 0 0 0 46 46 0 1 4
+                                         0 0 0 15 46 0 1 4 0 0 0 46 15 0 1 4 0
+                                         6 0 15 15 6 25 4 0 0 0 44 15 0 1 4 0 0
+                                         0 15 44 0 1 3 0 0 0 15 9 1 3 0 0 0 15
+                                         10 1 0 0 0 1 1 0 45 0 1 2 0 9 0 15 1 4
+                                         0 6 0 15 15 6 24 2 0 0 12 12 13 3 0 6
+                                         0 15 15 22 1 0 30 0 1 1 0 12 0 18 3 0
+                                         0 12 12 6 14 1 0 12 0 20 2 0 29 0 12 1
+                                         1 0 15 0 16 1 0 15 0 17 1 13 6 0 1 1
+                                         12 30 0 1 2 14 29 6 0 1 1 0 15 0 19 1
+                                         0 15 0 21 1 13 6 0 1 2 12 6 33 0 1 2 0
+                                         0 41 0 1 4 0 0 38 0 0 6 1 3 0 0 38 0 0
+                                         1 2 0 0 41 0 1 1 0 47 0 1 2 0 29 0 12
+                                         1 1 5 37 0 1 2 0 43 0 42 1 2 0 43 0 40
+                                         1 1 0 0 43 1 2 0 0 0 0 1 2 2 26 26 0
+                                         28 1 2 36 0 1 2 0 0 0 6 1 2 12 29 34 0
+                                         1 3 8 0 0 6 6 1 3 8 0 0 30 30 1 2 8 0
+                                         0 31 1 2 8 0 0 32 1 2 0 29 0 0 1 1 0
+                                         29 0 1 0 0 0 11 3 0 0 0 44 44 1 3 0 0
+                                         0 45 44 1 3 0 0 0 44 45 1 3 0 0 0 44
+                                         15 1 3 0 0 0 15 44 1 3 0 0 0 46 45 1 3
+                                         0 0 0 45 46 1 3 0 0 0 45 45 1 3 0 0 0
+                                         46 15 1 3 0 0 0 46 46 1 3 0 0 0 15 46
+                                         1 4 0 6 0 15 15 6 1 3 0 6 0 15 15 23 2
+                                         14 12 6 0 1 2 12 12 34 0 1 1 0 0 0 1 2
+                                         0 10 0 15 1 1 0 45 0 1 1 10 35 0 1 3 0
+                                         39 0 40 40 1 3 0 39 0 42 42 1 1 0 0 39
+                                         1 1 0 0 47 1 2 12 29 34 0 1 2 15 29 0
+                                         0 1 1 12 12 0 1)))))
            '|lookupComplete|)) 

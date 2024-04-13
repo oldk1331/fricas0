@@ -120,8 +120,8 @@
          ((|a11| #1=(|OutputForm|)) (|args1| #2=(|List| (|OutputForm|)))
           (|op1| #3=(|OutputForm|)) (|op| #3#) (|a2| (|OutputForm|)) (|a1| #1#)
           (|nargs| (|List| (|OutputForm|))) (|args2| #2#)
-          (|n| (|NonNegativeInteger|)) (|args| #2#) (#4=#:G586 NIL) (|arg| NIL)
-          (#5=#:G585 NIL) (|xi| (|Integer|)))
+          (|n| (|NonNegativeInteger|)) (|args| #2#) (#4=#:G163 NIL) (|arg| NIL)
+          (#5=#:G162 NIL) (|xi| (|Integer|)))
          (SEQ
           (COND ((SPADCALL |x| (QREFELT % 14)) |x|)
                 ((SPADCALL |x| (QREFELT % 13))
@@ -435,7 +435,7 @@
 
 (DEFUN |OutputFormTools| ()
   (SPROG NIL
-         (PROG (#1=#:G588)
+         (PROG (#1=#:G165)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OutputFormTools|))

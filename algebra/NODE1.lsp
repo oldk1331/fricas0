@@ -117,7 +117,7 @@
                      (|:| |exponent| (|NonNegativeInteger|)))
            "failed")))
         (SPROG
-         ((#1=#:G502 NIL) (|b| (F)) (|a| (F))
+         ((#1=#:G79 NIL) (|b| (F)) (|a| (F))
           (|pp|
            (|SparseUnivariatePolynomial|
             (|SparseMultivariatePolynomial| R (|Kernel| F))))
@@ -168,7 +168,7 @@
                                 (SPADCALL (SPADCALL |p| (QREFELT % 57))
                                           (QREFELT % 27)))
                           |y| (QREFELT % 46))))))
-                  (PROGN (LETT #1# (CONS 1 #2="failed")) (GO #3=#:G500)))))))
+                  (PROGN (LETT #1# (CONS 1 #2="failed")) (GO #3=#:G77)))))))
              ('T (EXIT (CONS 1 #2#))))
             (EXIT
              (CONS 0
@@ -184,7 +184,7 @@
          (% (|Union| F "failed")))
         (SPROG
          ((|sol| (|Record| (|:| |particular| F) (|:| |basis| (|List| F))))
-          (#1=#:G509 NIL) (|deq| (F)) (|n1| (|Integer|)))
+          (#1=#:G86 NIL) (|deq| (F)) (|n1| (|Integer|)))
          (SEQ (LETT |n1| (- 1 (QVELT |rec| 2)))
               (LETT |deq|
                     (SPADCALL
@@ -275,7 +275,7 @@
          (% (|Union| F "failed")))
         (SPROG
          ((|gsol| (|Record| (|:| |particular| F) (|:| |basis| (|List| F))))
-          (#1=#:G529 NIL) (|deq| (F)) (|u| (|Union| F "failed")))
+          (#1=#:G114 NIL) (|deq| (F)) (|u| (|Union| F "failed")))
          (SEQ (LETT |u| (|NODE1;partSolRiccati| |l| |y| |x| |yx| %))
               (EXIT
                (COND ((QEQCAR |u| 1) (CONS 1 "failed"))
@@ -331,7 +331,7 @@
         ((|l| (|List| F)) (|y| (|BasicOperator|)) (|x| (|Symbol|)) (|yx| (F))
          (% (|Union| F "failed")))
         (SPROG
-         ((#1=#:G547 NIL) (|bas| #2=(|List| F))
+         ((#1=#:G132 NIL) (|bas| #2=(|List| F))
           (|gsol|
            (|Union| (|Record| (|:| |particular| F) (|:| |basis| #2#)) F
                     "failed"))
@@ -361,7 +361,7 @@
                    ((QEQCAR |gsol| 0)
                     (COND
                      ((NULL (LETT |bas| (QCDR (QCDR |gsol|))))
-                      (PROGN (LETT #1# (CONS 1 #3="failed")) (GO #4=#:G545)))))
+                      (PROGN (LETT #1# (CONS 1 #3="failed")) (GO #4=#:G130)))))
                    ('T (PROGN (LETT #1# (CONS 1 #3#)) (GO #4#))))))
             (EXIT
              (CONS 0
@@ -372,9 +372,9 @@
 
 (DECLAIM (NOTINLINE |NonLinearFirstOrderODESolver;|)) 
 
-(DEFUN |NonLinearFirstOrderODESolver| (&REST #1=#:G548)
+(DEFUN |NonLinearFirstOrderODESolver| (&REST #1=#:G133)
   (SPROG NIL
-         (PROG (#2=#:G549)
+         (PROG (#2=#:G134)
            (RETURN
             (COND
              ((LETT #2#

@@ -5,7 +5,7 @@
           (|Record| (|:| |coefvec| (|Vector| (|Fraction| P)))
                     (|:| |reductum| (|Fraction| P)))))
         (SPROG
-         ((|c| (P)) (|u| (|SparseUnivariatePolynomial| P)) (#1=#:G457 NIL)
+         ((|c| (P)) (|u| (|SparseUnivariatePolynomial| P)) (#1=#:G25 NIL)
           (|v| NIL) (|i| NIL) (|coefs| (|Vector| (|Fraction| P))))
          (SEQ (LETT |coefs| (MAKEARR1 (LENGTH |vs|) (|spadConstant| % 11)))
               (SEQ (LETT |i| 1) (LETT |v| NIL) (LETT #1# |vs|) G190
@@ -46,7 +46,7 @@
           (|r|
            (|Record| (|:| |coefvec| (|Vector| (|Fraction| P)))
                      (|:| |reductum| (|Fraction| P))))
-          (#1=#:G466 NIL) (|p| NIL) (|i| NIL) (|v| (|Vector| (|Fraction| P))))
+          (#1=#:G35 NIL) (|p| NIL) (|i| NIL) (|v| (|Vector| (|Fraction| P))))
          (SEQ (LETT |m| (SPADCALL (LENGTH |ps|) (LENGTH |vs|) (QREFELT % 32)))
               (LETT |v| (MAKEARR1 (LENGTH |ps|) (|spadConstant| % 11)))
               (SEQ (LETT |i| 1) (LETT |p| NIL) (LETT #1# |ps|) G190
@@ -85,9 +85,9 @@
 
 (DECLAIM (NOTINLINE |LinearSystemPolynomialPackage;|)) 
 
-(DEFUN |LinearSystemPolynomialPackage| (&REST #1=#:G471)
+(DEFUN |LinearSystemPolynomialPackage| (&REST #1=#:G42)
   (SPROG NIL
-         (PROG (#2=#:G472)
+         (PROG (#2=#:G43)
            (RETURN
             (COND
              ((LETT #2#

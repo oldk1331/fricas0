@@ -8,7 +8,7 @@
         (T (SETQ |OrderedSemiGroup;AL| (|OrderedSemiGroup;|))))) 
 
 (DEFUN |OrderedSemiGroup;| ()
-  (SPROG ((#1=#:G448 NIL))
+  (SPROG ((#1=#:G1 NIL))
          (PROG1 (LETT #1# (|Join| (|OrderedSet|) (|SemiGroup|)))
            (SETELT #1# 0 '(|OrderedSemiGroup|))))) 
 

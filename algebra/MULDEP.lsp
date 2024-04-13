@@ -10,13 +10,12 @@
          (|q| (|Fraction| (|Integer|)))
          (% (|Union| (|Vector| (|Fraction| (|Integer|))) "failed")))
         (SPROG
-         ((|qv| #1=(|Vector| (|Fraction| (|Integer|)))) (#2=#:G476 NIL)
-          (|i| NIL) (#3=#:G475 NIL) (|m| (|Matrix| (|Fraction| (|Integer|))))
-          (#4=#:G474 NIL) (|j| NIL) (#5=#:G473 NIL) (#6=#:G472 NIL)
-          (#7=#:G471 NIL) (|tm| #8=(|Matrix| (|Integer|)))
-          (|li| (|List| (|NonNegativeInteger|))) (#9=#:G470 NIL)
-          (#10=#:G469 NIL) (|k0| (|NonNegativeInteger|))
-          (|bas| #11=(|Vector| (|Integer|)))
+         ((|qv| #1=(|Vector| (|Fraction| (|Integer|)))) (#2=#:G54 NIL)
+          (|i| NIL) (#3=#:G53 NIL) (|m| (|Matrix| (|Fraction| (|Integer|))))
+          (#4=#:G52 NIL) (|j| NIL) (#5=#:G51 NIL) (#6=#:G50 NIL) (#7=#:G49 NIL)
+          (|tm| #8=(|Matrix| (|Integer|)))
+          (|li| (|List| (|NonNegativeInteger|))) (#9=#:G48 NIL) (#10=#:G47 NIL)
+          (|k0| (|NonNegativeInteger|)) (|bas| #11=(|Vector| (|Integer|)))
           (|dr| (|Record| (|:| |basis| #11#) (|:| |transform| #8#))) (|v| #1#)
           (|n| (|NonNegativeInteger|)))
          (SEQ
@@ -132,7 +131,7 @@
 
 (DEFUN |MultiplicativeDependence| ()
   (SPROG NIL
-         (PROG (#1=#:G478)
+         (PROG (#1=#:G56)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|MultiplicativeDependence|))

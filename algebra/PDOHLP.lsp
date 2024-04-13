@@ -13,9 +13,9 @@
 
 (DECLAIM (NOTINLINE |PartialDifferentialOperatorHelper;|)) 
 
-(DEFUN |PartialDifferentialOperatorHelper| (&REST #1=#:G452)
+(DEFUN |PartialDifferentialOperatorHelper| (&REST #1=#:G5)
   (SPROG NIL
-         (PROG (#2=#:G453)
+         (PROG (#2=#:G6)
            (RETURN
             (COND
              ((LETT #2#

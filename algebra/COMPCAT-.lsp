@@ -54,14 +54,14 @@
         ((|pp| (|SparseUnivariatePolynomial| S))
          (% (|Factored| (|SparseUnivariatePolynomial| S))))
         (SPROG
-         ((#1=#:G537 NIL)
+         ((#1=#:G120 NIL)
           (|lF|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| (|SparseUnivariatePolynomial| S))
                       (|:| |exponent| (|NonNegativeInteger|)))))
           (|p2| (|SparseUnivariatePolynomial| S))
-          (|p1| (|SparseUnivariatePolynomial| S)) (#2=#:G544 NIL) (|u| NIL)
+          (|p1| (|SparseUnivariatePolynomial| S)) (#2=#:G127 NIL) (|u| NIL)
           (|fR| (|Factored| (|SparseUnivariatePolynomial| R)))
           (|pnorm| (|SparseUnivariatePolynomial| R)) (|k| (R)))
          (SEQ (LETT |pnorm| (|COMPCAT-;normPolynomial| |pp| %))
@@ -290,7 +290,7 @@
 (SDEFUN |COMPCAT-;coordinates;SVV;29|
         ((|x| (S)) (|v| (|Vector| S)) (% (|Vector| R)))
         (SPROG
-         ((|ix| (R)) (|rx| (R)) (#1=#:G584 NIL) (|d| (|Union| R "failed"))
+         ((|ix| (R)) (|rx| (R)) (#1=#:G174 NIL) (|d| (|Union| R "failed"))
           (|ia| (R)) (|ib| (R)) (|rb| (R)) (|b| (S)) (|ra| (R)) (|a| (S)))
          (SEQ
           (EXIT
@@ -322,7 +322,7 @@
                (EXIT
                 (COND
                  ((QEQCAR |d| 1)
-                  (PROGN (LETT #1# (|error| #2#)) (GO #3=#:G582))))))))
+                  (PROGN (LETT #1# (|error| #2#)) (GO #3=#:G172))))))))
             (LETT |rx| (SPADCALL |x| (QREFELT % 24)))
             (LETT |ix| (SPADCALL |x| (QREFELT % 86)))
             (EXIT
@@ -689,7 +689,7 @@
         ((|x| (S)) (|y| (S))
          (% (|Record| (|:| |quotient| S) (|:| |remainder| S))))
         (SPROG
-         ((#1=#:G691 NIL) (|y1| (S)) (|b| (R)) (|x2| (R)) (|a| (R)) (|x1| (R))
+         ((#1=#:G297 NIL) (|y1| (S)) (|b| (R)) (|x2| (R)) (|a| (R)) (|x1| (R))
           (|xx| (S)) (|r| (R)))
          (SEQ (LETT |r| (SPADCALL |y| (QREFELT % 19)))
               (LETT |y1| (SPADCALL |y| (QREFELT % 41)))
@@ -743,7 +743,7 @@
                 |y1|))))) 
 
 (SDEFUN |COMPCAT-;atan2loc| ((|x| (R)) (|y| (R)) (% (R)))
-        (SPROG ((|theta| (R)) (#1=#:G696 NIL) (|pi2| (R)) (|pi1| (R)))
+        (SPROG ((|theta| (R)) (#1=#:G302 NIL) (|pi2| (R)) (|pi1| (R)))
                (SEQ (LETT |pi1| (SPADCALL (QREFELT % 242)))
                     (LETT |pi2|
                           (SPADCALL |pi1| (QREFELT % 241) (QREFELT % 120)))
@@ -785,7 +785,7 @@
          (SPADCALL |x| (QREFELT % 86)) %)) 
 
 (SDEFUN |COMPCAT-;argument;SR;60| ((|x| (S)) (% (R)))
-        (SPROG ((#1=#:G696 NIL) (|x1| (R)) (|n1| (R)))
+        (SPROG ((#1=#:G302 NIL) (|x1| (R)) (|n1| (R)))
                (SEQ
                 (LETT |n1|
                       (SPADCALL (SPADCALL |x| (QREFELT % 19)) (QREFELT % 166)))
@@ -811,7 +811,7 @@
                            (QREFELT % 120)))))) 
 
 (SDEFUN |COMPCAT-;argument;SR;61| ((|x| (S)) (% (R)))
-        (SPROG ((#1=#:G696 NIL) (|x1| (R)) (|n1| (R)))
+        (SPROG ((#1=#:G302 NIL) (|x1| (R)) (|n1| (R)))
                (SEQ
                 (LETT |n1|
                       (SPADCALL
@@ -942,7 +942,7 @@
                   (QREFELT % 30)))))) 
 
 (SDEFUN |COMPCAT-;cos;2S;80| ((|x| (S)) (% (S)))
-        (SPROG ((#1=#:G728 NIL) (|e| (S)))
+        (SPROG ((#1=#:G334 NIL) (|e| (S)))
                (SEQ
                 (LETT |e|
                       (SPADCALL
@@ -965,7 +965,7 @@
                            (QREFELT % 224)))))) 
 
 (SDEFUN |COMPCAT-;sin;2S;81| ((|x| (S)) (% (S)))
-        (SPROG ((#1=#:G733 NIL) (|e| (S)))
+        (SPROG ((#1=#:G339 NIL) (|e| (S)))
                (SEQ
                 (LETT |e|
                       (SPADCALL
@@ -1094,7 +1094,7 @@
                          (QREFELT % 30))))))))) 
 
 (SDEFUN |COMPCAT-;^;SFS;87| ((|x| (S)) (|q| (|Fraction| (|Integer|))) (% (S)))
-        (SPROG ((|e| (R)) (|t| (R)) (#1=#:G696 NIL) (|i| (R)) (|r| (R)))
+        (SPROG ((|e| (R)) (|t| (R)) (#1=#:G302 NIL) (|i| (R)) (|r| (R)))
                (SEQ
                 (COND
                  ((SPADCALL |q| (QREFELT % 280))
@@ -1187,7 +1187,7 @@
 
 (DEFUN |ComplexCategory&| (|#1| |#2|)
   (SPROG
-   ((#1=#:G696 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+   ((#1=#:G302 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))

@@ -384,7 +384,7 @@
 
 ; $npPParg := nil
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$npPParg| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$npPParg| NIL))
 
 ; npPPff() ==
 ;   FUNCALL $npPParg and npPush [npPop1()]
@@ -425,7 +425,7 @@
 
 ; $npPCff := nil
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$npPCff| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$npPCff| NIL))
 
 ; npPCff() ==
 ;   FUNCALL $npPCff and npPush [npPop1()]
@@ -723,7 +723,7 @@
 
 ; $npTokToNames:= ["~","#","[]","{}", "[||]","{||}"]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$npTokToNames| (LIST '~ '|#| '[] '{} '|[\|\|]| '|{\|\|}|)))
 
 ; npId() ==

@@ -3,7 +3,7 @@
         ((|subSp| (|SubSpace| 3 (|DoubleFloat|)))
          (% (|List| (|NonNegativeInteger|))))
         (SPROG
-         ((|faceIndexList| (|List| (|NonNegativeInteger|))) (#1=#:G457 NIL)
+         ((|faceIndexList| (|List| (|NonNegativeInteger|))) (#1=#:G22 NIL)
           (|poly| NIL))
          (SEQ (LETT |faceIndexList| NIL)
               (SEQ (LETT |poly| NIL)
@@ -23,8 +23,8 @@
         ((|f1| (|TextFile|)) (|curves| (|List| (|SubSpace| 3 (|DoubleFloat|))))
          (% (|Void|)))
         (SPROG
-         ((|s| (|String|)) (#1=#:G466 NIL) (|i| NIL)
-          (|faceIndexList| (|List| (|NonNegativeInteger|))) (#2=#:G465 NIL)
+         ((|s| (|String|)) (#1=#:G33 NIL) (|i| NIL)
+          (|faceIndexList| (|List| (|NonNegativeInteger|))) (#2=#:G32 NIL)
           (|curve| NIL))
          (SEQ (LETT |faceIndexList| NIL)
               (SEQ (LETT |curve| NIL) (LETT #2# |curves|) G190
@@ -52,11 +52,11 @@
         ((|f1| (|TextFile|)) (|curves| (|List| (|SubSpace| 3 (|DoubleFloat|))))
          (% (|Void|)))
         (SPROG
-         ((|s| (|String|)) (#1=#:G478 NIL) (|j| NIL) (#2=#:G477 NIL) (|i| NIL)
+         ((|s| (|String|)) (#1=#:G55 NIL) (|j| NIL) (#2=#:G54 NIL) (|i| NIL)
           (|colLength| (|NonNegativeInteger|))
           (|rowLength| (|NonNegativeInteger|))
           (|meshIndexArray| (|List| (|List| (|NonNegativeInteger|))))
-          (#3=#:G476 NIL) (|curve| NIL))
+          (#3=#:G53 NIL) (|curve| NIL))
          (SEQ (LETT |meshIndexArray| NIL)
               (SEQ (LETT |curve| NIL) (LETT #3# |curves|) G190
                    (COND
@@ -120,8 +120,8 @@
         ((|subSp| (|SubSpace| 3 (|DoubleFloat|))) (|filename| (|String|))
          (% (|Void|)))
         (SPROG
-         ((|curves| (|List| (|SubSpace| 3 (|DoubleFloat|)))) (#1=#:G492 NIL)
-          (|component| NIL) (#2=#:G491 NIL) (|v| NIL)
+         ((|curves| (|List| (|SubSpace| 3 (|DoubleFloat|)))) (#1=#:G69 NIL)
+          (|component| NIL) (#2=#:G68 NIL) (|v| NIL)
           (|verts| (|List| (|Point| (|DoubleFloat|)))) (|f1| (|TextFile|)))
          (SEQ
           (LETT |f1|
@@ -186,7 +186,7 @@
 
 (DEFUN |Export3D| ()
   (SPROG NIL
-         (PROG (#1=#:G494)
+         (PROG (#1=#:G71)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Export3D|))

@@ -23,9 +23,9 @@
 
 (DECLAIM (NOTINLINE |StreamTensor;|)) 
 
-(DEFUN |StreamTensor| (#1=#:G457)
+(DEFUN |StreamTensor| (#1=#:G14)
   (SPROG NIL
-         (PROG (#2=#:G458)
+         (PROG (#2=#:G15)
            (RETURN
             (COND
              ((LETT #2#

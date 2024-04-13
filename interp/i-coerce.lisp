@@ -736,9 +736,8 @@
 ;     sayFunctionSelectionResult(funName,[t],mms)
 ;   null mms => NIL
 ;
-;   -- [[dc, :.], slot, .] := first mms
+;   -- [[dc, :.], ., .] := first mms
 ;   dc := CAAAR mms
-;   slot := CADAR mms
 ;   fun := interpLookup(funName, [target,t], dc)
 ; --+
 ;   NULL fun => NIL
@@ -750,7 +749,7 @@
 ;   NIL
 
 (DEFUN |retractByFunction| (|object| |u|)
-  (PROG (|$reportBottomUpFlag| |u'| |object'| |fun| |slot| |dc| |mms| |funName|
+  (PROG (|$reportBottomUpFlag| |u'| |object'| |fun| |dc| |mms| |funName|
          |target| |val| |t|)
     (DECLARE (SPECIAL |$reportBottomUpFlag|))
     (RETURN
@@ -772,7 +771,6 @@
             (#1='T
              (PROGN
               (SETQ |dc| (CAAAR |mms|))
-              (SETQ |slot| (CADAR |mms|))
               (SETQ |fun| (|interpLookup| |funName| (LIST |target| |t|) |dc|))
               (COND ((NULL |fun|) NIL) ((EQUAL (CAR |fun|) #'|Undef|) NIL)
                     (#1#
@@ -1985,10 +1983,10 @@
 (DEFUN |typeToInputForm| (|t|)
   (PROG () (RETURN (|typeToForm| |t| '(|InputForm|)))))
 
-; typeToOutputForm(t) == typeToForm(t, $OutputForm)
+; typeToOutputForm(t) == constructor_to_OutputForm(t)
 
 (DEFUN |typeToOutputForm| (|t|)
-  (PROG () (RETURN (|typeToForm| |t| |$OutputForm|))))
+  (PROG () (RETURN (|constructor_to_OutputForm| |t|))))
 
 ; typeToForm(t, toForm) ==
 ;     t0 := devaluate(t)
@@ -3195,7 +3193,7 @@
 ;     sayFunctionSelectionResult('map,args,mms)
 ;   null mms => NIL
 ;
-;   [[dc, :sig], slot, .] := first mms
+;   [[dc, :sig], ., .] := first mms
 ;   fun := compiledLookup('map,sig,evalDomain(dc))
 ;   NULL fun => NIL
 ;   [fn,:d]:= fun
@@ -3209,8 +3207,8 @@
 ;   objNewWrap(val,t2)
 
 (DEFUN |coerceIntByMap| (|triple| |t2|)
-  (PROG (|t1| |u2| |u1| |top| |args| |mms| |LETTMP#1| |dc| |sig| |slot| |fun|
-         |fn| |d| |code| |val|)
+  (PROG (|t1| |u2| |u1| |top| |args| |mms| |LETTMP#1| |dc| |sig| |fun| |fn| |d|
+         |code| |val|)
     (RETURN
      (PROGN
       (SETQ |t1| (|objMode| |triple|))
@@ -3259,7 +3257,6 @@
                                          (SETQ |LETTMP#1| (CAR |mms|))
                                          (SETQ |dc| (CAAR . #2=(|LETTMP#1|)))
                                          (SETQ |sig| (CDAR . #2#))
-                                         (SETQ |slot| (CADR |LETTMP#1|))
                                          (SETQ |fun|
                                                  (|compiledLookup| '|map| |sig|
                                                   (|evalDomain| |dc|)))

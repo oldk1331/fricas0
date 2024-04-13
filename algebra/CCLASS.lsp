@@ -43,7 +43,7 @@
         (SPADCALL (SPADCALL |cl| (QREFELT % 31)) (QREFELT % 32))) 
 
 (SDEFUN |CCLASS;convert;%L;14| ((|cl| (%)) (% (|List| (|Character|))))
-        (SPROG ((#1=#:G466 NIL) (|i| NIL) (#2=#:G465 NIL))
+        (SPROG ((#1=#:G30 NIL) (|i| NIL) (#2=#:G29 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -59,7 +59,7 @@
                       (EXIT (NREVERSE #2#))))))) 
 
 (SDEFUN |CCLASS;charClass;S%;15| ((|s| (|String|)) (% (%)))
-        (SPROG ((|j| (|Integer|)) (#1=#:G472 NIL) (|i| NIL) (|cl| (%)))
+        (SPROG ((|j| (|Integer|)) (#1=#:G36 NIL) (|i| NIL) (|cl| (%)))
                (SEQ (LETT |cl| (SPADCALL (QREFELT % 7) NIL (QREFELT % 36)))
                     (SEQ (LETT |i| (SPADCALL |s| (QREFELT % 37)))
                          (LETT #1# (SPADCALL |s| (QREFELT % 38))) G190
@@ -74,7 +74,7 @@
                     (EXIT |cl|)))) 
 
 (SDEFUN |CCLASS;charClass;L%;16| ((|l| (|List| (|Character|))) (% (%)))
-        (SPROG ((|j| (|Integer|)) (#1=#:G478 NIL) (|c| NIL) (|cl| (%)))
+        (SPROG ((|j| (|Integer|)) (#1=#:G42 NIL) (|c| NIL) (|cl| (%)))
                (SEQ (LETT |cl| (SPADCALL (QREFELT % 7) NIL (QREFELT % 36)))
                     (SEQ (LETT |c| NIL) (LETT #1# |l|) G190
                          (COND
@@ -93,7 +93,7 @@
         (SPADCALL (SPADCALL |cl| (QREFELT % 33)) (QREFELT % 43))) 
 
 (SDEFUN |CCLASS;#;%Nni;18| ((|a| (%)) (% (|NonNegativeInteger|)))
-        (SPROG ((|n| (|NonNegativeInteger|)) (#1=#:G484 NIL) (|i| NIL))
+        (SPROG ((|n| (|NonNegativeInteger|)) (#1=#:G48 NIL) (|i| NIL))
                (SEQ (LETT |n| 0)
                     (SEQ (LETT |i| 0) (LETT #1# (- (QREFELT % 7) 1)) G190
                          (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -129,7 +129,7 @@
                 (EXIT |a|)))) 
 
 (SDEFUN |CCLASS;inspect;%C;23| ((|a| (%)) (% (|Character|)))
-        (SPROG ((#1=#:G497 NIL) (#2=#:G498 NIL) (|i| NIL))
+        (SPROG ((#1=#:G61 NIL) (#2=#:G62 NIL) (|i| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -141,14 +141,14 @@
                           ((SPADCALL |a| |i| (QREFELT % 21))
                            (PROGN
                             (LETT #1# (SPADCALL |i| (QREFELT % 34)))
-                            (GO #3=#:G496))))))
+                            (GO #3=#:G60))))))
                        (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                   (EXIT
                    (|error| "Cannot take a character from an empty class."))))
                 #3# (EXIT #1#)))) 
 
 (SDEFUN |CCLASS;extract!;%C;24| ((|a| (%)) (% (|Character|)))
-        (SPROG ((#1=#:G504 NIL) (#2=#:G505 NIL) (|i| NIL))
+        (SPROG ((#1=#:G68 NIL) (#2=#:G69 NIL) (|i| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -162,7 +162,7 @@
                                 (EXIT
                                  (PROGN
                                   (LETT #1# (SPADCALL |i| (QREFELT % 34)))
-                                  (GO #3=#:G503))))))))
+                                  (GO #3=#:G67))))))))
                        (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                   (EXIT
                    (|error| "Cannot take a character from an empty class."))))
@@ -170,7 +170,7 @@
 
 (SDEFUN |CCLASS;map;M2%;25|
         ((|f| (|Mapping| #1=(|Character|) #1#)) (|a| (%)) (% (%)))
-        (SPROG ((#2=#:G511 NIL) (|i| NIL) (|b| (%)))
+        (SPROG ((#2=#:G75 NIL) (|i| NIL) (|b| (%)))
                (SEQ (LETT |b| (SPADCALL (QREFELT % 7) NIL (QREFELT % 36)))
                     (SEQ (LETT |i| 0) (LETT #2# (- (QREFELT % 7) 1)) G190
                          (COND ((|greater_SI| |i| #2#) (GO G191)))
@@ -187,7 +187,7 @@
 
 (SDEFUN |CCLASS;map!;M2%;26|
         ((|f| (|Mapping| #1=(|Character|) #1#)) (|a| (%)) (% (%)))
-        (SPROG ((#2=#:G516 NIL) (|i| NIL))
+        (SPROG ((#2=#:G80 NIL) (|i| NIL))
                (SEQ (SPADCALL (QREFELT % 54) NIL (QREFELT % 55))
                     (SEQ (LETT |i| 0) (LETT #2# (- (QREFELT % 7) 1)) G190
                          (COND ((|greater_SI| |i| #2#) (GO G191)))
@@ -203,7 +203,7 @@
                     (EXIT (SPADCALL |a| (QREFELT % 54) 0 (QREFELT % 56)))))) 
 
 (SDEFUN |CCLASS;parts;%L;27| ((|a| (%)) (% (|List| (|Character|))))
-        (SPROG ((#1=#:G521 NIL) (|i| NIL) (#2=#:G520 NIL))
+        (SPROG ((#1=#:G85 NIL) (|i| NIL) (#2=#:G84 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -222,7 +222,7 @@
 
 (DEFUN |CharacterClass| ()
   (SPROG NIL
-         (PROG (#1=#:G531)
+         (PROG (#1=#:G95)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|CharacterClass|))
@@ -239,7 +239,7 @@
                   (HREM |$ConstructorCache| '|CharacterClass|)))))))))) 
 
 (DEFUN |CharacterClass;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (#1=#:G528 NIL) (|pv$| NIL) (#2=#:G529 NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (#1=#:G92 NIL) (|pv$| NIL) (#2=#:G93 NIL))
          (PROGN
           (LETT |dv$| '(|CharacterClass|))
           (LETT % (GETREFV 70))

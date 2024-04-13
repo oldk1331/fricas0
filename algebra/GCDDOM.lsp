@@ -7,7 +7,7 @@
   (COND (|GcdDomain;AL|) (T (SETQ |GcdDomain;AL| (|GcdDomain;|))))) 
 
 (DEFUN |GcdDomain;| ()
-  (SPROG ((#1=#:G454 NIL))
+  (SPROG ((#1=#:G7 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|IntegralDomain|) (|LeftOreRing|)

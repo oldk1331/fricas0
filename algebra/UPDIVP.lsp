@@ -5,8 +5,8 @@
           (|Union| (|Record| (|:| |quotient| UP) (|:| |remainder| UP))
                    "failed")))
         (SPROG
-         ((|q| (UP)) (|ee| (|NonNegativeInteger|)) (#1=#:G455 NIL)
-          (#2=#:G473 NIL) (|c| (|Union| R "failed"))
+         ((|q| (UP)) (|ee| (|NonNegativeInteger|)) (#1=#:G12 NIL)
+          (#2=#:G31 NIL) (|c| (|Union| R "failed"))
           (|e| (|Union| (|NonNegativeInteger|) #3="failed")) (|lc| (R)))
          (SEQ
           (EXIT
@@ -41,7 +41,7 @@
                                   ((QEQCAR |c| 1)
                                    (PROGN
                                     (LETT #2# (CONS 1 "failed"))
-                                    (GO #5=#:G472)))
+                                    (GO #5=#:G30)))
                                   ('T
                                    (SEQ
                                     (LETT |ee|
@@ -83,9 +83,9 @@
 
 (DECLAIM (NOTINLINE |UnivariatePolynomialDivisionPackage;|)) 
 
-(DEFUN |UnivariatePolynomialDivisionPackage| (&REST #1=#:G474)
+(DEFUN |UnivariatePolynomialDivisionPackage| (&REST #1=#:G32)
   (SPROG NIL
-         (PROG (#2=#:G475)
+         (PROG (#2=#:G33)
            (RETURN
             (COND
              ((LETT #2#

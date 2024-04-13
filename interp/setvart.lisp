@@ -316,12 +316,12 @@
 ;       $displayStartMsgs
 ;       (on off)
 ;       on)
-;      (summary
-;       "print statistics after computation"
+;      (storage
+;       "print memory usage after computation"
 ;       interpreter
 ;       LITERALS
-;       $printStatisticsSummaryIfTrue
-;       (on off)
+;       $printStorageIfTrue
+;       (on off long)
 ;       off)
 ;      (testing
 ;       "print system testing header"
@@ -593,7 +593,7 @@
 ;       "prettyprint BOOT func's as they compile"
 ;       development
 ;       LITERALS
-;       $PRETTYPRINT
+;       $PrettyPrint
 ;       (on off)
 ;       off)
 ;    ))
@@ -695,8 +695,8 @@
        |$displaySetValue| (|on| |off|) |off|)
       (|startup| "display messages on start-up" |interpreter| LITERALS
        |$displayStartMsgs| (|on| |off|) |on|)
-      (|summary| "print statistics after computation" |interpreter| LITERALS
-       |$printStatisticsSummaryIfTrue| (|on| |off|) |off|)
+      (|storage| "print memory usage after computation" |interpreter| LITERALS
+       |$printStorageIfTrue| (|on| |off| |long|) |off|)
       (|testing| "print system testing header" |development| LITERALS
        |$testingSystem| (|on| |off|) |off|)
       (|time| "print timings after computation" |interpreter| LITERALS
@@ -799,7 +799,7 @@
       (|optimization| "show optimized LISP code" |development| LITERALS
        |$reportOptimization| (|on| |off|) |off|)
       (|prettyprint| "prettyprint BOOT func's as they compile" |development|
-       LITERALS $PRETTYPRINT (|on| |off|) |off|)))
+       LITERALS |$PrettyPrint| (|on| |off|) |off|)))
     (|userlevel| "operation access level of system user" |interpreter| LITERALS
      |$UserLevel| (|interpreter| |compiler| |development|) |development|)))
 
@@ -817,5 +817,5 @@
 
 ; initializeSetVariables $setOptions
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (PROG () (RETURN (|initializeSetVariables| |$setOptions|))))

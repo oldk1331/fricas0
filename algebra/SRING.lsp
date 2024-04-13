@@ -7,7 +7,7 @@
   (COND (|SemiRing;AL|) (T (SETQ |SemiRing;AL| (|SemiRing;|))))) 
 
 (DEFUN |SemiRing;| ()
-  (SPROG ((#1=#:G448 NIL))
+  (SPROG ((#1=#:G1 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|NonAssociativeSemiRing|) (|SemiRng|) (|Monoid|)))

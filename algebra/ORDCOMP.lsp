@@ -101,9 +101,9 @@
 
 (DECLAIM (NOTINLINE |OrderedCompletion;|)) 
 
-(DEFUN |OrderedCompletion| (#1=#:G514)
+(DEFUN |OrderedCompletion| (#1=#:G88)
   (SPROG NIL
-         (PROG (#2=#:G515)
+         (PROG (#2=#:G89)
            (RETURN
             (COND
              ((LETT #2#

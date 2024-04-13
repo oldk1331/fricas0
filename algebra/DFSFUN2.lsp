@@ -366,7 +366,7 @@
         ((|x| (|DoubleFloat|)) (|s| (|DoubleFloat|))
          (|n| (|NonNegativeInteger|)) (|m| (|Integer|)) (% (|DoubleFloat|)))
         (SPROG
-         ((|xm| (|DoubleFloat|)) (#1=#:G537 NIL) (|i| NIL) (|nn| (|Integer|)))
+         ((|xm| (|DoubleFloat|)) (#1=#:G114 NIL) (|i| NIL) (|nn| (|Integer|)))
          (SEQ (LETT |nn| (- -1 |n|))
               (SEQ (LETT |i| 1) (LETT #1# |m|) G190
                    (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -384,7 +384,7 @@
          (|r_eps| (|DoubleFloat|)) (|df_n| (|DoubleFloat|))
          (% (|DoubleFloat|)))
         (SPROG
-         ((|df_k| (|DoubleFloat|)) (|s| (|DoubleFloat|)) (#1=#:G544 NIL)
+         ((|df_k| (|DoubleFloat|)) (|s| (|DoubleFloat|)) (#1=#:G121 NIL)
           (|tk| (|DoubleFloat|)) (|k| NIL))
          (SEQ (LETT |s| 0.0) (LETT |df_k| (FLOAT 2 MOST-POSITIVE-DOUBLE-FLOAT))
               (SEQ
@@ -406,7 +406,7 @@
                       (EXIT
                        (COND
                         ((|less_DF| (|abs_DF| |tk|) |r_eps|)
-                         (PROGN (LETT #1# 1) (GO #2=#:G541)))
+                         (PROGN (LETT #1# 1) (GO #2=#:G118)))
                         ('T
                          (SEQ (LETT |s| (|add_DF| |s| |tk|))
                               (EXIT
@@ -482,8 +482,8 @@
          (% (|DoubleFloat|)))
         (SPROG
          ((|res| #1=(|DoubleFloat|)) (|i| NIL) (|u| #2=(|DoubleFloat|))
-          (|r0| (|DoubleFloat|)) (|t| #1#) (|t1| #2#) (#3=#:G565 NIL) (|k| NIL)
-          (|j1| (|Integer|)) (|j| #4=(|NonNegativeInteger|)) (#5=#:G564 NIL)
+          (|r0| (|DoubleFloat|)) (|t| #1#) (|t1| #2#) (#3=#:G142 NIL) (|k| NIL)
+          (|j1| (|Integer|)) (|j| #4=(|NonNegativeInteger|)) (#5=#:G141 NIL)
           (|v| (|DoubleFloatVector|)) (|nn| #4#) (|cot_x| (|DoubleFloat|)))
          (SEQ (LETT |cot_x| (COT |x|))
               (EXIT
@@ -709,7 +709,7 @@
         (SPROG
          ((|res| #1=(|DoubleFloat|)) (|a_k1| #1#) (|a_k2| #2=(|DoubleFloat|))
           (|a_k3| #3=(|DoubleFloat|)) (|ak| #1#) (|k21| (|Integer|))
-          (#4=#:G607 NIL) (|k| NIL) (|r1| #2#) (|r0| #3#))
+          (#4=#:G184 NIL) (|k| NIL) (|r1| #2#) (|r0| #3#))
          (SEQ (LETT |r0| (LETT |a_k3| 1.0))
               (LETT |r1|
                     (LETT |a_k2|
@@ -747,7 +747,7 @@
          ((|res| #1=(|Complex| (|DoubleFloat|))) (|a_k1| #1#)
           (|a_k2| #2=(|Complex| (|DoubleFloat|)))
           (|a_k3| #3=(|Complex| (|DoubleFloat|))) (|ak| #1#)
-          (|k21| (|Integer|)) (#4=#:G613 NIL) (|k| NIL) (|r1| #2#) (|r0| #3#))
+          (|k21| (|Integer|)) (#4=#:G190 NIL) (|k| NIL) (|r1| #2#) (|r0| #3#))
          (SEQ (LETT |r0| (LETT |a_k3| (|spadConstant| % 11)))
               (LETT |r1|
                     (LETT |a_k2|
@@ -876,7 +876,7 @@
         ((|a| (|DoubleFloat|)) (|x| (|DoubleFloat|)) (|n| (|Integer|))
          (% (|DoubleFloat|)))
         (SPROG
-         ((|s| (|DoubleFloat|)) (|fac| (|DoubleFloat|)) (#1=#:G623 NIL)
+         ((|s| (|DoubleFloat|)) (|fac| (|DoubleFloat|)) (#1=#:G200 NIL)
           (|i| NIL))
          (SEQ (LETT |s| 0.0) (LETT |fac| 1.0)
               (SEQ (LETT |i| 0) (LETT #1# |n|) G190
@@ -899,7 +899,7 @@
          (|n| (|Integer|)) (% (|Complex| (|DoubleFloat|))))
         (SPROG
          ((|s| (|Complex| (|DoubleFloat|))) (|fac| (|Complex| (|DoubleFloat|)))
-          (#1=#:G629 NIL) (|i| NIL))
+          (#1=#:G206 NIL) (|i| NIL))
          (SEQ (LETT |s| (|spadConstant| % 22))
               (LETT |fac| (|spadConstant| % 11))
               (SEQ (LETT |i| 0) (LETT #1# |n|) G190
@@ -1394,7 +1394,7 @@
 
 (DEFUN |DoubleFloatSpecialFunctions2| ()
   (SPROG NIL
-         (PROG (#1=#:G682)
+         (PROG (#1=#:G259)
            (RETURN
             (COND
              ((LETT #1#

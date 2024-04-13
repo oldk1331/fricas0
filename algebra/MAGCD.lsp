@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |ModularAlgebraicGcd;|)) 
 
-(DEFUN |ModularAlgebraicGcd| (&REST #1=#:G448)
+(DEFUN |ModularAlgebraicGcd| (&REST #1=#:G12)
   (SPROG NIL
-         (PROG (#2=#:G449)
+         (PROG (#2=#:G13)
            (RETURN
             (COND
              ((LETT #2#

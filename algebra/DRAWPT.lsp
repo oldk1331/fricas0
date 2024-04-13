@@ -13,7 +13,7 @@
         ((|lx| (|List| (|DoubleFloat|))) (|ly| (|List| (|DoubleFloat|)))
          (|l| (|List| (|DrawOption|))) (% (|TwoDimensionalViewport|)))
         (SPROG
-         ((#1=#:G458 NIL) (|x| NIL) (#2=#:G459 NIL) (|y| NIL) (#3=#:G457 NIL))
+         ((#1=#:G18 NIL) (|x| NIL) (#2=#:G19 NIL) (|y| NIL) (#3=#:G17 NIL))
          (SEQ
           (SPADCALL
            (PROGN
@@ -146,7 +146,7 @@
 
 (DEFUN |TopLevelDrawFunctionsForPoints| ()
   (SPROG NIL
-         (PROG (#1=#:G475)
+         (PROG (#1=#:G54)
            (RETURN
             (COND
              ((LETT #1#

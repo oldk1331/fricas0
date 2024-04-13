@@ -8,15 +8,14 @@
 (SDEFUN |TENSOR;tensor;M1M2%;2| ((|x1| (M1)) (|x2| (M2)) (% (%)))
         (SPROG
          ((|res| (|List| (|Record| (|:| |k| (|Product| B1 B2)) (|:| |c| R))))
-          (#1=#:G468 NIL) (|s2| NIL) (#2=#:G467 NIL) (|s1| NIL)
+          (#1=#:G31 NIL) (|s2| NIL) (#2=#:G30 NIL) (|s1| NIL)
           (|ltx2| (|List| (|Record| (|:| |k| B2) (|:| |c| R))))
-          (|ltx1| (|List| (|Record| (|:| |k| B1) (|:| |c| R))))
-          (#3=#:G466 NIL))
+          (|ltx1| (|List| (|Record| (|:| |k| B1) (|:| |c| R)))) (#3=#:G29 NIL))
          (SEQ
           (EXIT
            (COND
             ((OR (SPADCALL |x1| (QREFELT % 14)) (SPADCALL |x2| (QREFELT % 16)))
-             (PROGN (LETT #3# (|spadConstant| % 15)) (GO #4=#:G465)))
+             (PROGN (LETT #3# (|spadConstant| % 15)) (GO #4=#:G28)))
             ('T
              (SEQ (LETT |ltx1| (SPADCALL |x1| (QREFELT % 19)))
                   (LETT |ltx2| (SPADCALL |x2| (QREFELT % 22))) (LETT |res| NIL)
@@ -49,9 +48,9 @@
 (SDEFUN |TENSOR;*;3%;3| ((|x1| (%)) (|x2| (%)) (% (%)))
         (SPROG
          ((|res| (|List| (|Record| (|:| |k| (|Product| B1 B2)) (|:| |c| R))))
-          (#1=#:G480 NIL) (|t| NIL) (|t2b| (M2)) (|t2a| (M1)) (|t1b| (M2))
-          (|t1a| (M1)) (|t2k| #2=(|Product| B1 B2)) (|t1k| #2#) (#3=#:G479 NIL)
-          (|t2| NIL) (#4=#:G478 NIL) (|t1| NIL))
+          (#1=#:G43 NIL) (|t| NIL) (|t2b| (M2)) (|t2a| (M1)) (|t1b| (M2))
+          (|t1a| (M1)) (|t2k| #2=(|Product| B1 B2)) (|t1k| #2#) (#3=#:G42 NIL)
+          (|t2| NIL) (#4=#:G41 NIL) (|t1| NIL))
          (SEQ (LETT |res| NIL)
               (SEQ (LETT |t1| NIL) (LETT #4# (SPADCALL |x1| (QREFELT % 29)))
                    G190
@@ -111,7 +110,7 @@
 
 (SDEFUN |TENSOR;coerce;%Of;5| ((|x| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|le| (|List| (|OutputForm|))) (|ko| (|OutputForm|)) (#1=#:G491 NIL)
+         ((|le| (|List| (|OutputForm|))) (|ko| (|OutputForm|)) (#1=#:G54 NIL)
           (|rec| NIL))
          (SEQ
           (COND
@@ -149,9 +148,9 @@
 
 (DECLAIM (NOTINLINE |TensorProduct;|)) 
 
-(DEFUN |TensorProduct| (&REST #1=#:G500)
+(DEFUN |TensorProduct| (&REST #1=#:G63)
   (SPROG NIL
-         (PROG (#2=#:G501)
+         (PROG (#2=#:G64)
            (RETURN
             (COND
              ((LETT #2#
@@ -169,7 +168,7 @@
 
 (DEFUN |TensorProduct;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G497 NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL)
+   ((|pv$| NIL) (#1=#:G60 NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL)
     (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))

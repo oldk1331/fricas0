@@ -7,9 +7,9 @@
 
 (DECLAIM (NOTINLINE |TimeoutPackage;|)) 
 
-(DEFUN |TimeoutPackage| (#1=#:G456)
+(DEFUN |TimeoutPackage| (#1=#:G12)
   (SPROG NIL
-         (PROG (#2=#:G457)
+         (PROG (#2=#:G13)
            (RETURN
             (COND
              ((LETT #2#

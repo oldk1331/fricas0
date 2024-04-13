@@ -6,7 +6,7 @@
 (DEFPARAMETER |DifferentialVariableCategory;AL| 'NIL) 
 
 (DEFUN |DifferentialVariableCategory| (|t#1|)
-  (LET (#1=#:G454 (#2=#:G455 (|devaluate| |t#1|)))
+  (LET (#1=#:G7 (#2=#:G8 (|devaluate| |t#1|)))
     (COND
      ((SETQ #1# (|assoc| #2# |DifferentialVariableCategory;AL|)) (CDR #1#))
      (T
@@ -17,7 +17,7 @@
       #1#)))) 
 
 (DEFUN |DifferentialVariableCategory;| (|t#1|)
-  (SPROG ((#1=#:G453 NIL))
+  (SPROG ((#1=#:G6 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)

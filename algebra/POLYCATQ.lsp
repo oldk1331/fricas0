@@ -11,7 +11,7 @@
          (% (|SparseUnivariatePolynomial| F)))
         (SPROG
          ((|nd| (F)) (|cofact| (|SparseUnivariatePolynomial| F))
-          (|cf2| #1=(|SparseUnivariatePolynomial| F)) (#2=#:G462 NIL)
+          (|cf2| #1=(|SparseUnivariatePolynomial| F)) (#2=#:G25 NIL)
           (|ndu| (|Union| (|SparseUnivariatePolynomial| F) #3="failed"))
           (|nd1| (|SparseUnivariatePolynomial| F)) (|cf1| #1#) (|c0| (F))
           (|c1| (F)) (|c2| (F)) (|df| #4=(|SparseUnivariatePolynomial| F))
@@ -256,7 +256,7 @@
 (SDEFUN |POLYCATQ;isTimes;FU;9| ((|f| (F)) (% (|Union| (|List| F) "failed")))
         (SPROG
          ((|d| (F)) (|den| (P)) (|l| (|Union| (|List| F) "failed"))
-          (#1=#:G535 NIL) (|x| NIL) (#2=#:G534 NIL)
+          (#1=#:G110 NIL) (|x| NIL) (#2=#:G109 NIL)
           (|t| (|Union| (|List| P) "failed")) (|num| (P)))
          (SEQ
           (LETT |t|
@@ -300,7 +300,7 @@
 
 (SDEFUN |POLYCATQ;isPlus;FU;10| ((|f| (F)) (% (|Union| (|List| F) "failed")))
         (SPROG
-         ((#1=#:G548 NIL) (|x| NIL) (#2=#:G547 NIL)
+         ((#1=#:G123 NIL) (|x| NIL) (#2=#:G122 NIL)
           (|s| (|Union| (|List| P) "failed")))
          (SEQ
           (COND
@@ -349,9 +349,9 @@
 
 (DECLAIM (NOTINLINE |PolynomialCategoryQuotientFunctions;|)) 
 
-(DEFUN |PolynomialCategoryQuotientFunctions| (&REST #1=#:G555)
+(DEFUN |PolynomialCategoryQuotientFunctions| (&REST #1=#:G130)
   (SPROG NIL
-         (PROG (#2=#:G556)
+         (PROG (#2=#:G131)
            (RETURN
             (COND
              ((LETT #2#

@@ -11,9 +11,9 @@
 
 (DECLAIM (NOTINLINE |IntegerRetractions;|)) 
 
-(DEFUN |IntegerRetractions| (#1=#:G457)
+(DEFUN |IntegerRetractions| (#1=#:G13)
   (SPROG NIL
-         (PROG (#2=#:G458)
+         (PROG (#2=#:G14)
            (RETURN
             (COND
              ((LETT #2#

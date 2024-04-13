@@ -26,7 +26,7 @@
 (SDEFUN |DELTCF;projectiveSpace;IDc;4|
         ((|n| (|Integer|)) (% (|DeltaComplex| VS)))
         (SPROG
-         ((|cl| (|List| (|List| (|List| (|Integer|))))) (#1=#:G460 NIL)
+         ((|cl| (|List| (|List| (|List| (|Integer|))))) (#1=#:G24 NIL)
           (|i| NIL) (|vs1| (|List| VS)))
          (SEQ (LETT |vs1| NIL) (LETT |cl| NIL)
               (SEQ (LETT |i| 1) (LETT #1# |n|) G190
@@ -50,9 +50,9 @@
 
 (DECLAIM (NOTINLINE |DeltaComplexFactory;|)) 
 
-(DEFUN |DeltaComplexFactory| (#1=#:G463)
+(DEFUN |DeltaComplexFactory| (#1=#:G27)
   (SPROG NIL
-         (PROG (#2=#:G464)
+         (PROG (#2=#:G28)
            (RETURN
             (COND
              ((LETT #2#

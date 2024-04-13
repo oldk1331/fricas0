@@ -29,7 +29,7 @@
 (SDEFUN |DFLOAT;precision;Pi;7| ((% (|PositiveInteger|))) (FLOAT-DIGITS 0.0)) 
 
 (SDEFUN |DFLOAT;bits;Pi;8| ((% (|PositiveInteger|)))
-        (SPROG ((#1=#:G771 NIL))
+        (SPROG ((#1=#:G339 NIL))
                (COND
                 ((EQL (SPADCALL (QREFELT % 18)) 2) (SPADCALL (QREFELT % 22)))
                 ((EQL (SPADCALL (QREFELT % 18)) 16)
@@ -462,7 +462,7 @@
                        (EXIT |theta|))))))) 
 
 (SDEFUN |DFLOAT;retract;%F;98| ((|x| (%)) (% (|Fraction| (|Integer|))))
-        (SPROG ((#1=#:G886 NIL))
+        (SPROG ((#1=#:G455 NIL))
                (SPADCALL |x|
                          (PROG1 (LETT #1# (- (SPADCALL (QREFELT % 22)) 1))
                            (|check_subtype2| (>= #1# 0) '(|NonNegativeInteger|)
@@ -471,7 +471,7 @@
 
 (SDEFUN |DFLOAT;retractIfCan;%U;99|
         ((|x| (%)) (% (|Union| (|Fraction| (|Integer|)) "failed")))
-        (SPROG ((#1=#:G891 NIL))
+        (SPROG ((#1=#:G460 NIL))
                (CONS 0
                      (SPADCALL |x|
                                (PROG1
@@ -521,7 +521,7 @@
         (SPROG
          ((|two53| (|PositiveInteger|))
           (|me| (|Record| (|:| |man| %) (|:| |exp| (|Integer|))))
-          (#1=#:G912 NIL) (|s| (|Integer|)))
+          (#1=#:G481 NIL) (|s| (|Integer|)))
          (SEQ
           (EXIT
            (COND ((|zero?_DF| |x|) (CONS 0 0))
@@ -541,7 +541,7 @@
                                   1)
                                  (SPADCALL MOST-POSITIVE-DOUBLE-FLOAT
                                            (QREFELT % 21))))
-                          (GO #2=#:G911))))
+                          (GO #2=#:G480))))
                        (LETT |me| (MANEXP |x|))
                        (LETT |two53|
                              (EXPT (SPADCALL (QREFELT % 18))
@@ -561,11 +561,11 @@
          ((|t| #1=(|Integer|)) (|s| #2=(|Integer|)) (|#G148| #3=(|Integer|))
           (|#G147| #1#) (|q1| #4=(|Integer|)) (|q0| (|Integer|))
           (|#G146| #5=(|Integer|)) (|#G145| #4#) (|p1| #6=(|Integer|))
-          (|p0| (|Integer|)) (|#G144| #5#) (|#G143| #6#) (#7=#:G946 NIL)
+          (|p0| (|Integer|)) (|#G144| #5#) (|#G143| #6#) (#7=#:G515 NIL)
           (|q2| #5#) (|p2| #5#) (|r| #3#) (|q| #8=(|Integer|))
           (|#G142| (|Record| (|:| |quotient| #8#) (|:| |remainder| #3#)))
-          (|tol| (|NonNegativeInteger|)) (|de| #1#) (#9=#:G936 NIL)
-          (#10=#:G934 NIL) (BASE (|PositiveInteger|)) (|ex| #11=(|Integer|))
+          (|tol| (|NonNegativeInteger|)) (|de| #1#) (#9=#:G505 NIL)
+          (#10=#:G503 NIL) (BASE (|PositiveInteger|)) (|ex| #11=(|Integer|))
           (|nu| #2#)
           (|#G141| (|Record| (|:| MANTISSA #2#) (|:| EXPONENT #11#))))
          (SEQ
@@ -625,7 +625,7 @@
                                         (LETT #7#
                                               (SPADCALL |p2| |q2|
                                                         (QREFELT % 171)))
-                                        (GO #13=#:G945)))))
+                                        (GO #13=#:G514)))))
                                     (PROGN
                                      (LETT |#G143| |p1|)
                                      (LETT |#G144| |p2|)
@@ -646,7 +646,7 @@
           #13# (EXIT #7#)))) 
 
 (SDEFUN |DFLOAT;^;%F%;108| ((|x| (%)) (|r| (|Fraction| (|Integer|))) (% (%)))
-        (SPROG ((#1=#:G956 NIL) (|d| (|Integer|)) (|n| (|Integer|)))
+        (SPROG ((#1=#:G525 NIL) (|d| (|Integer|)) (|n| (|Integer|)))
                (SEQ
                 (EXIT
                  (COND
@@ -674,7 +674,7 @@
                                         (|minus_DF|
                                          (SPADCALL (|minus_DF| |x|) |r|
                                                    (QREFELT % 178))))
-                                  (GO #3=#:G955)))
+                                  (GO #3=#:G524)))
                                 (#2#
                                  (PROGN
                                   (LETT #1#
@@ -696,7 +696,7 @@
 
 (DEFUN |DoubleFloat| ()
   (SPROG NIL
-         (PROG (#1=#:G970)
+         (PROG (#1=#:G550)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|DoubleFloat|))
@@ -805,7 +805,7 @@
               |DFLOAT;conjugate;2%;105| (200 . |coerce|) (205 . /)
               (211 . |zero?|) (216 . |negative?|) (221 . |One|) (225 . =)
               (231 . |numer|) (236 . |denom|) |DFLOAT;^;%F%;108| (|List| %)
-              (|SingleInteger|) (|PatternMatchResult| 136 %) (|Pattern| 136)
+              (|SingleInteger|) (|Pattern| 136) (|PatternMatchResult| 136 %)
               (|Factored| %) (|Record| (|:| |coef1| %) (|:| |coef2| %))
               (|Union| 184 '#1="failed") (|Union| 179 '#1#)
               (|Record| (|:| |coef1| %) (|:| |coef2| %) (|:| |generator| %))
@@ -856,8 +856,8 @@
               |airyBiPrime| 1250 |airyBi| 1255 |airyAiPrime| 1260 |airyAi| 1265
               |acsch| 1270 |acsc| 1275 |acoth| 1280 |acot| 1285 |acosh| 1290
               |acos| 1295 |abs| 1300 ^ 1305 |Zero| 1335 |One| 1339 |OMwrite|
-              1343 |Gamma| 1367 D 1378 |Beta| 1389 >= 1395 > 1401 = 1407 <=
-              1413 < 1419 / 1425 - 1437 + 1448 * 1454)
+              1343 |Gamma| 1367 D 1378 |Beta| 1389 >= 1402 > 1408 = 1414 <=
+              1420 < 1426 / 1432 - 1444 + 1455 * 1461)
            'NIL
            (CONS
             (|makeByteWordVec2| 1
@@ -911,7 +911,7 @@
                  (|HyperbolicFunctionCategory|)
                  (|ArcTrigonometricFunctionCategory|)
                  (|TrigonometricFunctionCategory|) (|OpenMath|)
-                 (|ConvertibleTo| 7) (|Approximate|) (|ConvertibleTo| 182)
+                 (|ConvertibleTo| 7) (|Approximate|) (|ConvertibleTo| 181)
                  (|RadicalCategory|) (|CoercibleFrom| 156) (|CoercibleFrom| 19)
                  (|ConvertibleTo| 136) (|ConvertibleTo| 12) (|PartialOrder|)
                  (|canonicalsClosed|) (|canonicalUnitNormal|)
@@ -952,7 +952,7 @@
                                     2 0 0 0 0 1 1 0 0 0 53 1 0 0 0 60 1 0 190
                                     179 1 1 0 15 0 1 1 1 17 17 1 0 0 17 22 1 0
                                     15 0 1 2 0 0 0 0 1 2 0 0 0 0 121 2 0 0 0 17
-                                    1 0 0 0 32 3 0 181 0 182 181 1 1 0 19 0 28
+                                    1 0 0 0 32 3 0 182 0 181 182 1 1 0 19 0 28
                                     2 0 15 0 0 1 1 0 15 0 1 2 0 0 0 19 1 1 0 0
                                     0 1 1 0 15 0 87 2 0 186 179 0 1 0 2 0 27 2
                                     0 0 0 0 49 4 0 0 0 0 0 0 1 5 3 0 179 179
@@ -969,8 +969,8 @@
                                     19 1 3 3 0 179 179 0 1 2 0 0 0 0 1 2 0 89
                                     89 0 90 1 0 180 0 1 2 0 0 0 0 1 2 0 0 0 0 1
                                     2 0 189 189 189 1 1 0 0 179 1 2 0 0 0 0 1 1
-                                    0 0 0 1 1 0 0 0 1 2 0 0 19 19 1 3 0 0 19 19
-                                    17 153 1 0 183 0 1 3 0 185 0 0 0 1 2 0 187
+                                    0 0 0 1 1 0 0 0 1 3 0 0 19 19 17 153 2 0 0
+                                    19 19 1 1 0 183 0 1 3 0 185 0 0 0 1 2 0 187
                                     0 0 1 2 0 91 0 0 1 2 0 186 179 0 1 1 0 19 0
                                     21 0 0 0 31 1 0 0 0 58 1 0 116 0 1 3 0 0 0
                                     0 0 135 1 0 0 0 129 2 0 0 0 0 127 2 0 0 0 0
@@ -978,7 +978,7 @@
                                     0 0 1 1 1 17 17 1 0 0 17 1 1 0 0 0 118 1 0
                                     0 0 93 2 0 0 0 116 1 1 1 17 19 1 1 0 0 0 77
                                     1 0 0 0 66 1 0 0 0 78 1 0 0 0 64 1 0 0 0 75
-                                    1 0 0 0 62 1 0 39 0 41 1 0 7 0 33 1 0 182 0
+                                    1 0 0 0 62 1 0 39 0 41 1 0 7 0 33 1 0 181 0
                                     1 1 0 12 0 154 1 0 136 0 155 1 0 0 0 169 2
                                     0 0 0 0 1 1 0 0 156 1 1 0 0 19 57 1 0 0 0 1
                                     1 0 35 0 37 3 0 0 0 0 0 1 0 0 116 1 1 0 0 0
@@ -992,14 +992,15 @@
                                     0 0 84 1 0 0 0 72 1 0 0 0 81 1 0 0 0 68 1 0
                                     0 0 168 2 0 0 0 0 56 2 0 0 0 156 178 2 0 0
                                     0 19 55 2 0 0 0 116 1 2 0 0 0 17 1 0 0 0 29
-                                    0 0 0 30 2 0 9 10 0 1 3 0 9 10 0 15 16 1 0
-                                    7 0 1 2 0 7 0 15 1 2 0 0 0 0 1 1 0 0 0 107
-                                    1 0 0 0 1 2 0 0 0 116 1 2 0 0 0 0 105 2 0
-                                    15 0 0 34 2 0 15 0 0 159 2 0 15 0 0 50 2 0
-                                    15 0 0 1 2 0 15 0 0 42 2 0 0 0 19 51 2 0 0
-                                    0 0 86 2 0 0 0 0 45 1 0 0 0 43 2 0 0 0 0 44
-                                    2 0 0 0 156 1 2 0 0 156 0 1 2 0 0 116 0 1 2
-                                    0 0 19 0 47 2 0 0 0 0 46 2 0 0 17 0 24)))))
+                                    0 0 0 30 3 0 9 10 0 15 16 2 0 7 0 15 1 2 0
+                                    9 10 0 1 1 0 7 0 1 2 0 0 0 0 1 1 0 0 0 107
+                                    1 0 0 0 1 2 0 0 0 116 1 3 0 0 0 0 0 1 2 0 0
+                                    0 0 105 2 0 15 0 0 34 2 0 15 0 0 159 2 0 15
+                                    0 0 50 2 0 15 0 0 1 2 0 15 0 0 42 2 0 0 0
+                                    19 51 2 0 0 0 0 86 2 0 0 0 0 45 1 0 0 0 43
+                                    2 0 0 0 0 44 2 0 0 0 156 1 2 0 0 156 0 1 2
+                                    0 0 116 0 1 2 0 0 19 0 47 2 0 0 0 0 46 2 0
+                                    0 17 0 24)))))
            '|lookupComplete|)) 
 
 (MAKEPROP '|DoubleFloat| 'NILADIC T) 

@@ -13,7 +13,8 @@
 
 ; DEFCONST($failure, GENSYM())
 
-(EVAL-WHEN (EVAL LOAD) (PROG () (RETURN (DEFCONST |$failure| (GENSYM)))))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (PROG () (RETURN (DEFCONST |$failure| (GENSYM)))))
 
 ; mkAtreeNode x ==
 ;   -- maker of attrib tree node

@@ -4,14 +4,14 @@
          (|ldmval| (|List| (|Expression| F))) (|ld| (|List| (|Mapping| F F)))
          (% (|Expression| F)))
         (SPROG
-         ((#1=#:G484 NIL) (|a| NIL) (#2=#:G483 NIL)
+         ((#1=#:G64 NIL) (|a| NIL) (#2=#:G63 NIL)
           (|kmap1| (|Mapping| (|Expression| F) (|Kernel| F)))
           (|sa2| #3=(|Symbol|)) (|da2| #4=(|Kernel| F)) (|a2| (F)) (|sa1| #3#)
           (|da| #4#) (|a1| (F)) (|n| (|NonNegativeInteger|))
           (|u| (|Union| (|None|) "failed")) (|args| (|List| F))
-          (|op| (|BasicOperator|)) (#5=#:G478 NIL) (|is_const| (|Boolean|))
-          (#6=#:G482 NIL) (|d| NIL) (|kf| (F)) (#7=#:G479 NIL) (#8=#:G480 NIL)
-          (|dmvar| NIL) (#9=#:G481 NIL) (|dmval| NIL))
+          (|op| (|BasicOperator|)) (#5=#:G58 NIL) (|is_const| (|Boolean|))
+          (#6=#:G62 NIL) (|d| NIL) (|kf| (F)) (#7=#:G59 NIL) (#8=#:G60 NIL)
+          (|dmvar| NIL) (#9=#:G61 NIL) (|dmval| NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -25,7 +25,7 @@
                   (EXIT
                    (COND
                     ((SPADCALL |k| |dmvar| (QREFELT % 11))
-                     (PROGN (LETT #7# |dmval|) (GO #10=#:G477))))))
+                     (PROGN (LETT #7# |dmval|) (GO #10=#:G57))))))
                  (LETT #8# (PROG1 (CDR #8#) (LETT #9# (CDR #9#)))) (GO G190)
                  G191 (EXIT NIL))
             (LETT |is_const| 'T) (LETT |kf| (SPADCALL |k| (QREFELT % 13)))
@@ -41,7 +41,7 @@
                       ((SPADCALL (SPADCALL |kf| |d|) (|spadConstant| % 14)
                                  (QREFELT % 15))
                        (SEQ (LETT |is_const| NIL)
-                            (EXIT (PROGN (LETT #5# 1) (GO #11=#:G459))))))))
+                            (EXIT (PROGN (LETT #5# 1) (GO #11=#:G17))))))))
                    (LETT #6# (CDR #6#)) (GO G190) G191 (EXIT NIL)))
              #11# (EXIT #5#))
             (EXIT
@@ -268,17 +268,17 @@
           (|Record| (|:| |transform| (|Matrix| F))
                     (|:| |basis| (|List| (|Vector| F))))))
         (SPROG
-         ((#1=#:G566 NIL) (|bv| NIL) (#2=#:G565 NIL) (|m2| #3=(|Matrix| F))
-          (#4=#:G564 NIL) (|i| NIL) (#5=#:G563 NIL) (#6=#:G562 NIL)
-          (#7=#:G561 NIL) (|l3| (|List| (|Vector| F))) (#8=#:G560 NIL)
-          (#9=#:G559 NIL) (|s1| (|List| (|Vector| F))) (|m| (|Matrix| F))
+         ((#1=#:G155 NIL) (|bv| NIL) (#2=#:G154 NIL) (|m2| #3=(|Matrix| F))
+          (#4=#:G153 NIL) (|i| NIL) (#5=#:G152 NIL) (#6=#:G151 NIL)
+          (#7=#:G150 NIL) (|l3| (|List| (|Vector| F))) (#8=#:G149 NIL)
+          (#9=#:G148 NIL) (|s1| (|List| (|Vector| F))) (|m| (|Matrix| F))
           (|lr| (|List| (|Vector| F))) (|ll| (|List| (|List| F)))
-          (|ll1| (|List| F)) (#10=#:G558 NIL) (|d1| NIL)
-          (|lpiv1| (|List| (|Integer|))) (|kk| (|Integer|)) (#11=#:G557 NIL)
-          (|j| NIL) (#12=#:G556 NIL) (|lpiv| (|List| (|Integer|)))
-          (|lri| (|List| (|Integer|))) (|k| #13=(|Integer|)) (#14=#:G552 NIL)
-          (|k1| #13#) (#15=#:G555 NIL) (|m1| (|Matrix| F)) (|m0| (|Matrix| F))
-          (|m0b| #3#) (#16=#:G554 NIL) (#17=#:G553 NIL)
+          (|ll1| (|List| F)) (#10=#:G147 NIL) (|d1| NIL)
+          (|lpiv1| (|List| (|Integer|))) (|kk| (|Integer|)) (#11=#:G146 NIL)
+          (|j| NIL) (#12=#:G145 NIL) (|lpiv| (|List| (|Integer|)))
+          (|lri| (|List| (|Integer|))) (|k| #13=(|Integer|)) (#14=#:G141 NIL)
+          (|k1| #13#) (#15=#:G144 NIL) (|m1| (|Matrix| F)) (|m0| (|Matrix| F))
+          (|m0b| #3#) (#16=#:G143 NIL) (#17=#:G142 NIL)
           (|nr| (|NonNegativeInteger|)) (|nc| (|NonNegativeInteger|)))
          (SEQ
           (COND
@@ -330,7 +330,7 @@
                              (EXIT
                               (COND
                                ((< |nc| |k1|)
-                                (PROGN (LETT #14# |$NoValue|) (GO #18=#:G524)))
+                                (PROGN (LETT #14# |$NoValue|) (GO #18=#:G112)))
                                ('T
                                 (SEQ (LETT |k| |k1|)
                                      (EXIT
@@ -465,9 +465,9 @@
 
 (DECLAIM (NOTINLINE |ConstantLinearDependence;|)) 
 
-(DEFUN |ConstantLinearDependence| (&REST #1=#:G567)
+(DEFUN |ConstantLinearDependence| (&REST #1=#:G156)
   (SPROG NIL
-         (PROG (#2=#:G568)
+         (PROG (#2=#:G157)
            (RETURN
             (COND
              ((LETT #2#

@@ -19,11 +19,11 @@
 
 ; $ncmMacro :=            NIL
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$ncmMacro| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$ncmMacro| NIL))
 
 ; $ncmPhase :=      NIL
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$ncmPhase| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$ncmPhase| NIL))
 
 ; evalInlineCode() ==
 ;   args := getCLArgs()
@@ -496,7 +496,7 @@
 
 ; $pfMacros := []
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$pfMacros| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$pfMacros| NIL))
 
 ; clearMacroTable() ==
 ;    SETF($pfMacros, nil)

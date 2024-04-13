@@ -5,12 +5,12 @@
           (|Record| (|:| |matrix| (|Matrix| F))
                     (|:| |block_list| (|List| (|Integer|))))))
         (SPROG
-         ((#1=#:G493 NIL) (|j| NIL) (#2=#:G492 NIL) (|i| NIL) (|s| (F))
-          (#3=#:G491 NIL) (#4=#:G490 NIL) (|val| (F)) (#5=#:G489 NIL)
-          (|cc| (F)) (#6=#:G488 NIL) (|piv| (F)) (#7=#:G485 NIL)
-          (|blocks| (|List| (|Integer|))) (|nn| (|Integer|)) (#8=#:G484 NIL)
-          (|has_block| (|Boolean|)) (#9=#:G487 NIL) (|kk| NIL)
-          (|k1| (|Integer|)) (|n1| (|Integer|)) (#10=#:G486 NIL) (|nc| NIL)
+         ((#1=#:G58 NIL) (|j| NIL) (#2=#:G57 NIL) (|i| NIL) (|s| (F))
+          (#3=#:G56 NIL) (#4=#:G55 NIL) (|val| (F)) (#5=#:G54 NIL) (|cc| (F))
+          (#6=#:G53 NIL) (|piv| (F)) (#7=#:G50 NIL)
+          (|blocks| (|List| (|Integer|))) (|nn| (|Integer|)) (#8=#:G49 NIL)
+          (|has_block| (|Boolean|)) (#9=#:G52 NIL) (|kk| NIL)
+          (|k1| (|Integer|)) (|n1| (|Integer|)) (#10=#:G51 NIL) (|nc| NIL)
           (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (ANCOLS |m|))
               (EXIT
@@ -75,7 +75,7 @@
                                                              (PROGN
                                                               (LETT #8# 1)
                                                               (GO
-                                                               #11=#:G458))))))))
+                                                               #11=#:G22))))))))
                                                        (LETT |kk|
                                                              (|inc_SI| |kk|))
                                                        (GO G190) G191
@@ -89,7 +89,7 @@
                                           (EXIT
                                            (PROGN
                                             (LETT #7# |$NoValue|)
-                                            (GO #12=#:G454)))))
+                                            (GO #12=#:G16)))))
                                     ('T
                                      (SEQ
                                       (LETT |piv|
@@ -205,8 +205,8 @@
         ((|m| (|Matrix| F)) (% (|SparseUnivariatePolynomial| F)))
         (SPROG
          ((|res| (|SparseUnivariatePolynomial| F))
-          (|res1| (|SparseUnivariatePolynomial| F)) (#1=#:G501 NIL)
-          (#2=#:G499 NIL) (#3=#:G507 NIL) (|i| NIL) (|i1| (|Integer|))
+          (|res1| (|SparseUnivariatePolynomial| F)) (#1=#:G67 NIL)
+          (#2=#:G65 NIL) (#3=#:G73 NIL) (|i| NIL) (|i1| (|Integer|))
           (|blocks| #4=(|List| (|Integer|))) (|i0| (|Integer|))
           (|mp| #5=(|Matrix| F)) (|n| (|NonNegativeInteger|))
           (|pp| (|Record| (|:| |matrix| #5#) (|:| |block_list| #4#))))
@@ -260,9 +260,9 @@
 
 (DECLAIM (NOTINLINE |CharacteristicPolynomial2;|)) 
 
-(DEFUN |CharacteristicPolynomial2| (#1=#:G508)
+(DEFUN |CharacteristicPolynomial2| (#1=#:G74)
   (SPROG NIL
-         (PROG (#2=#:G509)
+         (PROG (#2=#:G75)
            (RETURN
             (COND
              ((LETT #2#

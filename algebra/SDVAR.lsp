@@ -23,9 +23,9 @@
 
 (DECLAIM (NOTINLINE |SequentialDifferentialVariable;|)) 
 
-(DEFUN |SequentialDifferentialVariable| (#1=#:G460)
+(DEFUN |SequentialDifferentialVariable| (#1=#:G17)
   (SPROG NIL
-         (PROG (#2=#:G461)
+         (PROG (#2=#:G18)
            (RETURN
             (COND
              ((LETT #2#

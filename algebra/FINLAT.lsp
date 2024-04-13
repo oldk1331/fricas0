@@ -42,9 +42,9 @@
 
 (DECLAIM (NOTINLINE |FiniteLattice;|)) 
 
-(DEFUN |FiniteLattice| (&REST #1=#:G460)
+(DEFUN |FiniteLattice| (&REST #1=#:G24)
   (SPROG NIL
-         (PROG (#2=#:G461)
+         (PROG (#2=#:G25)
            (RETURN
             (COND
              ((LETT #2#

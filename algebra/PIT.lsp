@@ -4,7 +4,7 @@
          (% (|Record| (|:| |normal| P) (|:| |special| P))))
         (SPROG
          ((|rec1| #1=(|Record| (|:| |normal| P) (|:| |special| P)))
-          (#2=#:G454 NIL) (|pbar| (P)) (|gdif| (P)) (|gder| (P)) (|p1| (P))
+          (#2=#:G8 NIL) (|pbar| (P)) (|gdif| (P)) (|gder| (P)) (|p1| (P))
           (|rec0| #1#) (|up1| (|SparseUnivariatePolynomial| P)) (|p0| (P))
           (|up| (|SparseUnivariatePolynomial| P)) (|v| (|Union| V "failed")))
          (SEQ (LETT |v| (SPADCALL |p| (QREFELT % 10)))
@@ -76,7 +76,7 @@
           (LETT P (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((#1=#:G454 NIL))
+            (SPROG ((#1=#:G8 NIL))
                    (PROG2 (LETT #1# (SPADCALL |x| |p0| (QREFELT % 18)))
                        (QCDR #1#)
                      (|check_union2| (QEQCAR #1# 0) P (|Union| P "failed")
@@ -84,9 +84,9 @@
 
 (DECLAIM (NOTINLINE |ParallelIntegrationTools;|)) 
 
-(DEFUN |ParallelIntegrationTools| (&REST #1=#:G466)
+(DEFUN |ParallelIntegrationTools| (&REST #1=#:G29)
   (SPROG NIL
-         (PROG (#2=#:G467)
+         (PROG (#2=#:G30)
            (RETURN
             (COND
              ((LETT #2#

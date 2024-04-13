@@ -53,7 +53,7 @@
           (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((#1=#:G459 NIL))
+            (SPROG ((#1=#:G21 NIL))
                    (SPADCALL |x|
                              (SPADCALL |p|
                                        (PROG1 (LETT #1# |k|)
@@ -65,9 +65,9 @@
 
 (DECLAIM (NOTINLINE |DistributionPolynomialPackage;|)) 
 
-(DEFUN |DistributionPolynomialPackage| (&REST #1=#:G463)
+(DEFUN |DistributionPolynomialPackage| (&REST #1=#:G25)
   (SPROG NIL
-         (PROG (#2=#:G464)
+         (PROG (#2=#:G26)
            (RETURN
             (COND
              ((LETT #2#

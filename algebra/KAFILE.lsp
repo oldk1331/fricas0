@@ -113,7 +113,7 @@
 
 (SDEFUN |KAFILE;keys;%L;13| ((|f| (%)) (% (|List| (|String|))))
         (SPROG
-         ((#1=#:G508 NIL) (|n| NIL) (#2=#:G507 NIL)
+         ((#1=#:G78 NIL) (|n| NIL) (#2=#:G77 NIL)
           (|l| (|List| (|SExpression|))))
          (SEQ (SPADCALL |f| (QREFELT % 23)) (LETT |l| (RKEYIDS (QVELT |f| 0)))
               (EXIT
@@ -168,9 +168,9 @@
 
 (DECLAIM (NOTINLINE |KeyedAccessFile;|)) 
 
-(DEFUN |KeyedAccessFile| (#1=#:G574)
+(DEFUN |KeyedAccessFile| (#1=#:G145)
   (SPROG NIL
-         (PROG (#2=#:G575)
+         (PROG (#2=#:G146)
            (RETURN
             (COND
              ((LETT #2#
@@ -186,7 +186,7 @@
                   (HREM |$ConstructorCache| '|KeyedAccessFile|)))))))))) 
 
 (DEFUN |KeyedAccessFile;| (|#1|)
-  (SPROG ((#1=#:G573 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((#1=#:G144 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|KeyedAccessFile| DV$1))

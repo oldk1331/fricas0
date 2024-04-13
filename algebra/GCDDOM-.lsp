@@ -29,7 +29,7 @@
          (|p2| (|SparseUnivariatePolynomial| S))
          (% (|SparseUnivariatePolynomial| S)))
         (SPROG
-         ((#1=#:G603 NIL) (|c2| (S)) (|p| (|SparseUnivariatePolynomial| S))
+         ((#1=#:G168 NIL) (|c2| (S)) (|p| (|SparseUnivariatePolynomial| S))
           (|c1| (S)) (|e1| #2=(|NonNegativeInteger|)) (|e2| #2#))
          (SEQ
           (COND ((SPADCALL |p1| (QREFELT % 24)) (SPADCALL |p2| (QREFELT % 25)))
@@ -162,7 +162,7 @@
 (SDEFUN |GCDDOM-;lcmCoef;2SR;5|
         ((|c1| (S)) (|c2| (S))
          (% (|Record| (|:| |llcm_res| S) (|:| |coeff1| S) (|:| |coeff2| S))))
-        (SPROG ((|cc2| (S)) (#1=#:G708 NIL) (|cc1| (S)) (|g| (S)))
+        (SPROG ((|cc2| (S)) (#1=#:G277 NIL) (|cc1| (S)) (|g| (S)))
                (SEQ (LETT |g| (SPADCALL |c1| |c2| (QREFELT % 10)))
                     (LETT |cc1|
                           (PROG2 (LETT #1# (SPADCALL |c2| |g| (QREFELT % 12)))

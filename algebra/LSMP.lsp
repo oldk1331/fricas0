@@ -18,10 +18,10 @@
 
 (SDEFUN |LSMP;aSolution| ((|m| (M)) (% (|Union| |Col| "failed")))
         (SPROG
-         ((#1=#:G489 NIL) (|j| NIL) (#2=#:G488 NIL) (|i| NIL)
+         ((#1=#:G48 NIL) (|j| NIL) (#2=#:G47 NIL) (|i| NIL)
           (|v| (|PrimitiveArray| (|Integer|))) (|sol| (|Col|))
           (|ck| (|Integer|)) (|rk| (|Integer|)) (|nvar| (|NonNegativeInteger|))
-          (#3=#:G468 NIL))
+          (#3=#:G25 NIL))
          (SEQ
           (LETT |nvar|
                 (PROG1 (LETT #3# (- (SPADCALL |m| (QREFELT % 21)) 1))
@@ -143,7 +143,7 @@
            (|Record| (|:| |particular| (|Union| |Col| #1="failed"))
                      (|:| |basis| #2=(|List| |Col|))))))
         (SPROG
-         ((#3=#:G511 NIL) (|b| NIL) (#4=#:G510 NIL) (|nl| #2#)
+         ((#3=#:G74 NIL) (|b| NIL) (#4=#:G73 NIL) (|nl| #2#)
           (|sol0|
            (|Record| (|:| |particular| (|Union| |Col| #1#))
                      (|:| |basis| (|List| |Col|)))))
@@ -186,9 +186,9 @@
 
 (DECLAIM (NOTINLINE |LinearSystemMatrixPackage;|)) 
 
-(DEFUN |LinearSystemMatrixPackage| (&REST #1=#:G512)
+(DEFUN |LinearSystemMatrixPackage| (&REST #1=#:G75)
   (SPROG NIL
-         (PROG (#2=#:G513)
+         (PROG (#2=#:G76)
            (RETURN
             (COND
              ((LETT #2#

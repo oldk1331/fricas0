@@ -114,8 +114,7 @@
           (RETURN
            (PROGN
             (SPROG
-             ((#1=#:G486 NIL) (|s| NIL) (#2=#:G487 NIL) (|a| NIL)
-              (#3=#:G485 NIL))
+             ((#1=#:G51 NIL) (|s| NIL) (#2=#:G52 NIL) (|a| NIL) (#3=#:G50 NIL))
              (SEQ
               (SPADCALL (ELT % 39)
                         (PROGN
@@ -147,9 +146,9 @@
 
 (DECLAIM (NOTINLINE |TaylorSeriesExpansionTaylor;|)) 
 
-(DEFUN |TaylorSeriesExpansionTaylor| (&REST #1=#:G494)
+(DEFUN |TaylorSeriesExpansionTaylor| (&REST #1=#:G59)
   (SPROG NIL
-         (PROG (#2=#:G495)
+         (PROG (#2=#:G60)
            (RETURN
             (COND
              ((LETT #2#

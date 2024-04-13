@@ -102,9 +102,9 @@
 
 (DECLAIM (NOTINLINE |File;|)) 
 
-(DEFUN |File| (#1=#:G500)
+(DEFUN |File| (#1=#:G58)
   (SPROG NIL
-         (PROG (#2=#:G501)
+         (PROG (#2=#:G59)
            (RETURN
             (COND
              ((LETT #2#

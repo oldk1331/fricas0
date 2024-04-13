@@ -50,8 +50,8 @@
 
 (SDEFUN |JBP;groebner;2L;7| ((|lp| (|List| %)) (% (|List| %)))
         (SPROG
-         ((LJV (|List| JB)) (|lj| (|List| (|List| JB))) (#1=#:G479 NIL)
-          (|p| NIL) (#2=#:G478 NIL))
+         ((LJV (|List| JB)) (|lj| (|List| (|List| JB))) (#1=#:G48 NIL)
+          (|p| NIL) (#2=#:G47 NIL))
          (SEQ (SPADCALL (SPADCALL "groebner" (QREFELT % 32)) (QREFELT % 34))
               (LETT |lj|
                     (PROGN
@@ -86,9 +86,9 @@
 
 (DECLAIM (NOTINLINE |JetBundlePolynomial;|)) 
 
-(DEFUN |JetBundlePolynomial| (&REST #1=#:G522)
+(DEFUN |JetBundlePolynomial| (&REST #1=#:G106)
   (SPROG NIL
-         (PROG (#2=#:G523)
+         (PROG (#2=#:G107)
            (RETURN
             (COND
              ((LETT #2#
@@ -107,7 +107,7 @@
 
 (DEFUN |JetBundlePolynomial;| (|#1| |#2|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G521 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+   ((|pv$| NIL) (#1=#:G105 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))

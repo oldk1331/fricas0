@@ -16,7 +16,7 @@
         (SPADCALL (CDR (CDR |jv|)) (QREFELT % 19))) 
 
 (SDEFUN |IJB;index;%Pi;4| ((|jv| (%)) (% (|PositiveInteger|)))
-        (SPROG ((#1=#:G460 NIL))
+        (SPROG ((#1=#:G22 NIL))
                (PROG1 (LETT #1# (|SPADfirst| (CDR |jv|)))
                  (|check_subtype2| (> #1# 0) '(|PositiveInteger|)
                                    '(|NonNegativeInteger|) #1#)))) 
@@ -30,7 +30,7 @@
 
 (SDEFUN |IJB;CheckZeroIndex|
         ((|il| (|List| (|NonNegativeInteger|))) (% (|Boolean|)))
-        (SPROG ((#1=#:G470 NIL) (#2=#:G471 NIL) (|i| NIL))
+        (SPROG ((#1=#:G32 NIL) (#2=#:G33 NIL) (|i| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -42,7 +42,7 @@
                         (EXIT
                          (COND
                           ((NULL (ZEROP |i|))
-                           (PROGN (LETT #1# NIL) (GO #3=#:G469))))))
+                           (PROGN (LETT #1# NIL) (GO #3=#:G31))))))
                        (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                   (EXIT 'T)))
                 #3# (EXIT #1#)))) 
@@ -52,7 +52,7 @@
               ('T (LIST 1 |up|)))) 
 
 (SDEFUN |IJB;U;Pi%;8| ((|up| (|PositiveInteger|)) (% (%)))
-        (SPROG ((#1=#:G477 NIL) (|i| NIL) (#2=#:G476 NIL))
+        (SPROG ((#1=#:G41 NIL) (|i| NIL) (#2=#:G40 NIL))
                (SEQ
                 (COND
                  ((> |up| (QREFELT % 10)) (|error| "Improper upper index"))
@@ -87,9 +87,9 @@
 
 (SDEFUN |IJB;name;%S;13| ((|jv| (%)) (% (|Symbol|)))
         (SPROG
-         ((#1=#:G502 NIL) (|j| NIL) (#2=#:G501 NIL) (#3=#:G500 NIL)
-          (#4=#:G499 NIL) (#5=#:G498 NIL) (|i| NIL) (#6=#:G497 NIL)
-          (#7=#:G496 NIL) (#8=#:G495 NIL) (|jt| (|Symbol|)))
+         ((#1=#:G73 NIL) (|j| NIL) (#2=#:G72 NIL) (#3=#:G71 NIL) (#4=#:G70 NIL)
+          (#5=#:G69 NIL) (|i| NIL) (#6=#:G68 NIL) (#7=#:G67 NIL) (#8=#:G66 NIL)
+          (|jt| (|Symbol|)))
          (SEQ (LETT |jt| (SPADCALL |jv| (QREFELT % 24)))
               (EXIT
                (COND ((EQUAL |jt| '|Const|) '|1|)
@@ -236,8 +236,8 @@
 
 (SDEFUN |IJB;coerce;%E;15| ((|jv| (%)) (% (|Expression| (|Integer|))))
         (SPROG
-         ((|arg| (|List| (|Expression| (|Integer|)))) (#1=#:G515 NIL) (|j| NIL)
-          (#2=#:G514 NIL) (#3=#:G513 NIL) (|i| NIL) (#4=#:G512 NIL)
+         ((|arg| (|List| (|Expression| (|Integer|)))) (#1=#:G87 NIL) (|j| NIL)
+          (#2=#:G86 NIL) (#3=#:G85 NIL) (|i| NIL) (#4=#:G84 NIL)
           (|jop| (|BasicOperator|)) (|tmp| (|None|)) (|opname| (|Symbol|)))
          (SEQ
           (COND
@@ -303,9 +303,9 @@
 
 (DECLAIM (NOTINLINE |IndexedJetBundle;|)) 
 
-(DEFUN |IndexedJetBundle| (&REST #1=#:G522)
+(DEFUN |IndexedJetBundle| (&REST #1=#:G94)
   (SPROG NIL
-         (PROG (#2=#:G523)
+         (PROG (#2=#:G95)
            (RETURN
             (COND
              ((LETT #2#

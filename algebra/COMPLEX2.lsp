@@ -7,9 +7,9 @@
 
 (DECLAIM (NOTINLINE |ComplexFunctions2;|)) 
 
-(DEFUN |ComplexFunctions2| (&REST #1=#:G450)
+(DEFUN |ComplexFunctions2| (&REST #1=#:G8)
   (SPROG NIL
-         (PROG (#2=#:G451)
+         (PROG (#2=#:G9)
            (RETURN
             (COND
              ((LETT #2#

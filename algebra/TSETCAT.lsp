@@ -6,8 +6,8 @@
 (DEFPARAMETER |TriangularSetCategory;AL| 'NIL) 
 
 (DEFUN |TriangularSetCategory| (|t#1| |t#2| |t#3| |t#4|)
-  (LET (#1=#:G513
-        (#2=#:G514
+  (LET (#1=#:G66
+        (#2=#:G67
          (LIST (|devaluate| |t#1|) (|devaluate| |t#2|) (|devaluate| |t#3|)
                (|devaluate| |t#4|))))
     (COND ((SETQ #1# (|assoc| #2# |TriangularSetCategory;AL|)) (CDR #1#))
@@ -20,7 +20,7 @@
            #1#)))) 
 
 (DEFUN |TriangularSetCategory;| (|t#1| |t#2| |t#3| |t#4|)
-  (SPROG ((#1=#:G512 NIL))
+  (SPROG ((#1=#:G65 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3| |t#4|)

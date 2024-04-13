@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |InnerFiniteField;|)) 
 
-(DEFUN |InnerFiniteField| (&REST #1=#:G486)
+(DEFUN |InnerFiniteField| (&REST #1=#:G67)
   (SPROG NIL
-         (PROG (#2=#:G487)
+         (PROG (#2=#:G68)
            (RETURN
             (COND
              ((LETT #2#
@@ -21,42 +21,44 @@
                   (HREM |$ConstructorCache| '|InnerFiniteField|)))))))))) 
 
 (DEFUN |InnerFiniteField;| (|#1| |#2|)
-  (SPROG
-   ((|pv$| NIL) (#1=#:G485 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-   (PROGN
-    (LETT DV$1 |#1|)
-    (LETT DV$2 |#2|)
-    (LETT |dv$| (LIST '|InnerFiniteField| DV$1 DV$2))
-    (LETT % (GETREFV 48))
-    (QSETREFV % 0 |dv$|)
-    (QSETREFV % 3
-              (LETT |pv$|
-                    (|buildPredVector| 0 0
-                                       (LIST
-                                        (|HasCategory| (|InnerPrimeField| |#1|)
-                                                       '(|CharacteristicZero|))
-                                        (LETT #1#
+  (SPROG ((|pv$| NIL) (#1=#:G66 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 |#1|)
+          (LETT DV$2 |#2|)
+          (LETT |dv$| (LIST '|InnerFiniteField| DV$1 DV$2))
+          (LETT % (GETREFV 48))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
+                    (LETT |pv$|
+                          (|buildPredVector| 0 0
+                                             (LIST
                                               (|HasCategory|
                                                (|InnerPrimeField| |#1|)
-                                               '(|Finite|)))
-                                        (OR
-                                         (|HasCategory|
-                                          (|InnerPrimeField| |#1|)
-                                          '(|CharacteristicNonZero|))
-                                         #1#)
-                                        (|HasCategory| (|InnerPrimeField| |#1|)
-                                                       '(|Hashable|))
-                                        (|HasCategory| (|InnerPrimeField| |#1|)
-                                                       '(|Field|))))))
-    (|haddProp| |$ConstructorCache| '|InnerFiniteField| (LIST DV$1 DV$2)
-                (CONS 1 %))
-    (|stuffDomainSlots| %)
-    (QSETREFV % 6 |#1|)
-    (QSETREFV % 7 |#2|)
-    (AND (|HasCategory| % '(|CharacteristicNonZero|)) #1#
-         (|augmentPredVector| % 32))
-    (SETF |pv$| (QREFELT % 3))
-    %))) 
+                                               '(|CharacteristicZero|))
+                                              (LETT #1#
+                                                    (|HasCategory|
+                                                     (|InnerPrimeField| |#1|)
+                                                     '(|Finite|)))
+                                              (OR
+                                               (|HasCategory|
+                                                (|InnerPrimeField| |#1|)
+                                                '(|CharacteristicNonZero|))
+                                               #1#)
+                                              (|HasCategory|
+                                               (|InnerPrimeField| |#1|)
+                                               '(|Hashable|))
+                                              (|HasCategory|
+                                               (|InnerPrimeField| |#1|)
+                                               '(|Field|))))))
+          (|haddProp| |$ConstructorCache| '|InnerFiniteField| (LIST DV$1 DV$2)
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (AND (|HasCategory| % '(|CharacteristicNonZero|)) #1#
+               (|augmentPredVector| % 32))
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
 
 (MAKEPROP '|InnerFiniteField| '|infovec|
           (LIST

@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |FlexibleArray;|)) 
 
-(DEFUN |FlexibleArray| (#1=#:G458)
+(DEFUN |FlexibleArray| (#1=#:G21)
   (SPROG NIL
-         (PROG (#2=#:G459)
+         (PROG (#2=#:G22)
            (RETURN
             (COND
              ((LETT #2#
@@ -19,7 +19,7 @@
 
 (DEFUN |FlexibleArray;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G455 NIL) (#2=#:G456 NIL) (#3=#:G457 NIL) (% NIL)
+   ((|pv$| NIL) (#1=#:G18 NIL) (#2=#:G19 NIL) (#3=#:G20 NIL) (% NIL)
     (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))

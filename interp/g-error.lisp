@@ -19,13 +19,9 @@
 
 (DEFVAR |$timedNameStack|)
 
-; DEFPARAMETER($inLispVM, false)
-
-(DEFPARAMETER |$inLispVM| NIL)
-
 ; spad_system_error_handler (c) ==
 ;     $NeedToSignalSessionManager := true
-;     not($inLispVM) and MEMQ($BreakMode,
+;     MEMQ($BreakMode,
 ;            ["nobreak", "query", "resume", "quit", "trapSpadErrors"]) =>
 ;         systemError(error_format(c))
 ;     $BreakMode = "letPrint2" =>
@@ -39,18 +35,12 @@
      (PROGN
       (SETQ |$NeedToSignalSessionManager| T)
       (COND
-       ((AND (NULL |$inLispVM|)
-             (MEMQ |$BreakMode|
-                   (LIST '|nobreak| '|query| '|resume| '|quit|
-                         '|trapSpadErrors|)))
+       ((MEMQ |$BreakMode|
+              (LIST '|nobreak| '|query| '|resume| '|quit| '|trapSpadErrors|))
         (|systemError| (|error_format| |c|)))
        ((EQ |$BreakMode| '|letPrint2|)
         (PROGN (SETQ |$BreakMode| NIL) (THROW '|letPrint2| NIL)))
        ('T NIL))))))
-
-; BUMPCOMPERRORCOUNT() == nil
-
-(DEFUN BUMPCOMPERRORCOUNT () (PROG () (RETURN NIL)))
 
 ; argumentDataError(argnum, condit, funname) ==
 ;   msg := ['"The test",:bright pred2English condit,'"evaluates to",
@@ -105,7 +95,6 @@
       ('T (|errorSupervisor1| |errorType| |errorMsg| |$BreakMode|))))))
 
 ; errorSupervisor1(errorType,errorMsg,$BreakMode) ==
-;   BUMPCOMPERRORCOUNT()
 ;   errorLabel :=
 ;       errorType = $SystemError  => '"System error"
 ;       errorType = $UserError    => '"Apparent user error"
@@ -130,7 +119,6 @@
   (PROG (|errorLabel| |splitmsg| |msg|)
     (RETURN
      (PROGN
-      (BUMPCOMPERRORCOUNT)
       (SETQ |errorLabel|
               (COND ((EQUAL |errorType| |$SystemError|) "System error")
                     ((EQUAL |errorType| |$UserError|) "Apparent user error")

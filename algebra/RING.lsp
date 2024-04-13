@@ -6,7 +6,7 @@
 (DEFUN |Ring| () (COND (|Ring;AL|) (T (SETQ |Ring;AL| (|Ring;|))))) 
 
 (DEFUN |Ring;| ()
-  (SPROG ((#1=#:G448 NIL))
+  (SPROG ((#1=#:G1 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|Rng|) (|SemiRing|) (|NonAssociativeRing|)

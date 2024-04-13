@@ -100,7 +100,7 @@
 
 (SDEFUN |FDIV;intReduce| ((|h| (R)) (|b| (UP)) (% (R)))
         (SPROG
-         ((#1=#:G502 NIL) (#2=#:G504 NIL) (|i| NIL) (#3=#:G503 NIL)
+         ((#1=#:G70 NIL) (#2=#:G72 NIL) (|i| NIL) (#3=#:G71 NIL)
           (|v| (|Vector| UP)))
          (SEQ (LETT |v| (QCAR (SPADCALL |h| (QREFELT % 70))))
               (EXIT
@@ -150,8 +150,8 @@
 
 (SDEFUN |FDIV;divisor;2FI%;30| ((|a| (F)) (|b| (F)) (|n| (|Integer|)) (% (%)))
         (SPROG
-         ((|g| (%)) (|m| (|NonNegativeInteger|)) (#1=#:G514 NIL)
-          (#2=#:G513 NIL) (|d| (UP)))
+         ((|g| (%)) (|m| (|NonNegativeInteger|)) (#1=#:G82 NIL) (#2=#:G81 NIL)
+          (|d| (UP)))
          (SEQ
           (COND
            ((NULL
@@ -275,7 +275,7 @@
 
 (SDEFUN |FDIV;generator;%U;33| ((|d| (%)) (% (|Union| R "failed")))
         (SPROG
-         ((#1=#:G542 NIL) (#2=#:G543 NIL) (#3=#:G544 NIL) (|i| NIL)
+         ((#1=#:G111 NIL) (#2=#:G112 NIL) (#3=#:G113 NIL) (|i| NIL)
           (|bsis| (|Vector| R)))
          (SEQ
           (EXIT
@@ -296,8 +296,8 @@
                                          (CONS 0
                                                (SPADCALL (QAREF1O |bsis| |i| 1)
                                                          (QREFELT % 121))))
-                                   (GO #4=#:G541)))
-                            (GO #5=#:G539))))))
+                                   (GO #4=#:G110)))
+                            (GO #5=#:G108))))))
                        (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL)))
                  #5# (EXIT #1#))
                 (EXIT (CONS 1 "failed"))))
@@ -307,8 +307,8 @@
         ((|d| (%)) (|k| (|Integer|)) (|lp| (|List| UP))
          (% (|Union| R "failed")))
         (SPROG
-         ((#1=#:G553 NIL) (#2=#:G554 NIL) (|kk| (|Integer|)) (|fi| (R))
-          (#3=#:G555 NIL) (|i| NIL) (|bas| (|Vector| R)))
+         ((#1=#:G122 NIL) (#2=#:G123 NIL) (|kk| (|Integer|)) (|fi| (R))
+          (#3=#:G124 NIL) (|i| NIL) (|bas| (|Vector| R)))
          (SEQ
           (EXIT
            (SEQ (LETT |bas| (SPADCALL |d| (QREFELT % 119)))
@@ -331,8 +331,8 @@
                                          (CONS 0
                                                (SPADCALL |fi|
                                                          (QREFELT % 121))))
-                                   (GO #4=#:G552)))
-                            (GO #5=#:G550))))))
+                                   (GO #4=#:G121)))
+                            (GO #5=#:G119))))))
                        (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL)))
                  #5# (EXIT #1#))
                 (EXIT (CONS 1 "failed"))))
@@ -376,9 +376,9 @@
 
 (DECLAIM (NOTINLINE |FiniteDivisor;|)) 
 
-(DEFUN |FiniteDivisor| (&REST #1=#:G562)
+(DEFUN |FiniteDivisor| (&REST #1=#:G131)
   (SPROG NIL
-         (PROG (#2=#:G563)
+         (PROG (#2=#:G132)
            (RETURN
             (COND
              ((LETT #2#

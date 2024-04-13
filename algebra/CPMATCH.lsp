@@ -39,9 +39,9 @@
 
 (DECLAIM (NOTINLINE |ComplexPatternMatch;|)) 
 
-(DEFUN |ComplexPatternMatch| (&REST #1=#:G458)
+(DEFUN |ComplexPatternMatch| (&REST #1=#:G24)
   (SPROG NIL
-         (PROG (#2=#:G459)
+         (PROG (#2=#:G25)
            (RETURN
             (COND
              ((LETT #2#

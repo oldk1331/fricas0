@@ -89,32 +89,32 @@
         (SPADCALL (SPADCALL (ELT % 57) |p| (QREFELT % 61))
                   (SPADCALL (QREFELT % 62)) (QREFELT % 63))) 
 
-(DECLAIM (NOTINLINE |Pi;|)) 
+(DECLAIM (NOTINLINE |PiDomain;|)) 
 
-(DEFUN |Pi| ()
+(DEFUN |PiDomain| ()
   (SPROG NIL
-         (PROG (#1=#:G495)
+         (PROG (#1=#:G85)
            (RETURN
             (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|Pi|))
+             ((LETT #1# (HGET |$ConstructorCache| '|PiDomain|))
               (|CDRwithIncrement| (CDAR #1#)))
              ('T
               (UNWIND-PROTECT
                   (PROG1
                       (CDDAR
-                       (HPUT |$ConstructorCache| '|Pi|
-                             (LIST (CONS NIL (CONS 1 (|Pi;|))))))
+                       (HPUT |$ConstructorCache| '|PiDomain|
+                             (LIST (CONS NIL (CONS 1 (|PiDomain;|))))))
                     (LETT #1# T))
-                (COND ((NOT #1#) (HREM |$ConstructorCache| '|Pi|)))))))))) 
+                (COND ((NOT #1#) (HREM |$ConstructorCache| '|PiDomain|)))))))))) 
 
-(DEFUN |Pi;| ()
+(DEFUN |PiDomain;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
-          (LETT |dv$| '(|Pi|))
+          (LETT |dv$| '(|PiDomain|))
           (LETT % (GETREFV 81))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|Pi| NIL (CONS 1 %))
+          (|haddProp| |$ConstructorCache| '|PiDomain| NIL (CONS 1 %))
           (|stuffDomainSlots| %)
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 6
@@ -122,7 +122,7 @@
           (QSETREFV % 7 '|%pi|)
           %))) 
 
-(MAKEPROP '|Pi| '|infovec|
+(MAKEPROP '|PiDomain| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL (|Fraction| 12) '|Rep| '|sympi| (0 . |One|)
               (4 . |One|) (|Integer|) (|NonNegativeInteger|)
@@ -238,4 +238,4 @@
                                     0 79 0 1)))))
            '|lookupComplete|)) 
 
-(MAKEPROP '|Pi| 'NILADIC T) 
+(MAKEPROP '|PiDomain| 'NILADIC T) 

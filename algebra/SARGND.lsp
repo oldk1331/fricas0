@@ -135,13 +135,13 @@
 (SDEFUN |SARGND;hash| ((|s| (%)) (% (|SingleInteger|))) 0) 
 
 (SDEFUN |SARGND;=;2%B;30| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
-        (SPROG ((#1=#:G503 NIL))
+        (SPROG ((#1=#:G79 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((SPADCALL (QCAR |x|) (QCAR |y|) (QREFELT % 17))
-                    (PROGN (LETT #1# NIL) (GO #2=#:G502))))
+                    (PROGN (LETT #1# NIL) (GO #2=#:G78))))
                   (COND
                    ((SPADCALL (QCDR |x|) (QCDR |y|) (QREFELT % 17))
                     (PROGN (LETT #1# NIL) (GO #2#))))
@@ -171,7 +171,7 @@
 
 (DEFUN |SArgand| ()
   (SPROG NIL
-         (PROG (#1=#:G508)
+         (PROG (#1=#:G89)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|SArgand|))

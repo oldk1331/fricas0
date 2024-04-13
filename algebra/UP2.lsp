@@ -6,9 +6,9 @@
 
 (DECLAIM (NOTINLINE |UnivariatePolynomialFunctions2;|)) 
 
-(DEFUN |UnivariatePolynomialFunctions2| (&REST #1=#:G450)
+(DEFUN |UnivariatePolynomialFunctions2| (&REST #1=#:G9)
   (SPROG NIL
-         (PROG (#2=#:G451)
+         (PROG (#2=#:G10)
            (RETURN
             (COND
              ((LETT #2#

@@ -114,9 +114,9 @@
 
 (DECLAIM (NOTINLINE |LinearDependence;|)) 
 
-(DEFUN |LinearDependence| (&REST #1=#:G513)
+(DEFUN |LinearDependence| (&REST #1=#:G81)
   (SPROG NIL
-         (PROG (#2=#:G514)
+         (PROG (#2=#:G82)
            (RETURN
             (COND
              ((LETT #2#
@@ -134,49 +134,61 @@
                   (HREM |$ConstructorCache| '|LinearDependence|)))))))))) 
 
 (DEFUN |LinearDependence;| (|#1| |#2|)
-  (SPROG
-   ((|pv$| NIL) (#1=#:G512 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-   (PROGN
-    (LETT DV$1 (|devaluate| |#1|))
-    (LETT DV$2 (|devaluate| |#2|))
-    (LETT |dv$| (LIST '|LinearDependence| DV$1 DV$2))
-    (LETT % (GETREFV 60))
-    (QSETREFV % 0 |dv$|)
-    (QSETREFV % 3
-              (LETT |pv$|
-                    (|buildPredVector| 0 0
-                                       (LIST
-                                        (LETT #1#
-                                              (|HasCategory| |#1| '(|Field|)))
-                                        (|not| #1#)))))
-    (|haddProp| |$ConstructorCache| '|LinearDependence| (LIST DV$1 DV$2)
-                (CONS 1 %))
-    (|stuffDomainSlots| %)
-    (QSETREFV % 6 |#1|)
-    (QSETREFV % 7 |#2|)
-    (SETF |pv$| (QREFELT % 3))
-    (COND
-     ((|testBitVector| |pv$| 1)
-      (PROGN
-       (QSETREFV % 29 (CONS (|dispatchFunction| |LINDEP;solveLinear;VRR;4|) %))
-       (QSETREFV % 28 (CONS (|dispatchFunction| |LINDEP;solveLinear;MVR;5|) %))
-       (QSETREFV % 38
-                 (CONS (|dispatchFunction| |LINDEP;particularSolution;VRU;6|)
-                       %))
-       (QSETREFV % 41
-                 (CONS (|dispatchFunction| |LINDEP;particularSolution;MVU;7|)
-                       %))))
-     ('T
-      (PROGN
-       (QSETREFV % 45 (CONS (|dispatchFunction| |LINDEP;solveLinear;VRR;8|) %))
-       (QSETREFV % 44 (CONS (|dispatchFunction| |LINDEP;solveLinear;MVR;9|) %))
-       (QSETREFV % 58
-                 (CONS (|dispatchFunction| |LINDEP;particularSolution;VRU;10|)
-                       %))
-       (QSETREFV % 59
-                 (CONS (|dispatchFunction| |LINDEP;particularSolution;MVU;11|)
-                       %)))))
-    %))) 
+  (SPROG ((|pv$| NIL) (#1=#:G80 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT DV$2 (|devaluate| |#2|))
+          (LETT |dv$| (LIST '|LinearDependence| DV$1 DV$2))
+          (LETT % (GETREFV 60))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
+                    (LETT |pv$|
+                          (|buildPredVector| 0 0
+                                             (LIST
+                                              (LETT #1#
+                                                    (|HasCategory| |#1|
+                                                                   '(|Field|)))
+                                              (|not| #1#)))))
+          (|haddProp| |$ConstructorCache| '|LinearDependence| (LIST DV$1 DV$2)
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          (COND
+           ((|testBitVector| |pv$| 1)
+            (PROGN
+             (QSETREFV % 29
+                       (CONS (|dispatchFunction| |LINDEP;solveLinear;VRR;4|)
+                             %))
+             (QSETREFV % 28
+                       (CONS (|dispatchFunction| |LINDEP;solveLinear;MVR;5|)
+                             %))
+             (QSETREFV % 38
+                       (CONS
+                        (|dispatchFunction| |LINDEP;particularSolution;VRU;6|)
+                        %))
+             (QSETREFV % 41
+                       (CONS
+                        (|dispatchFunction| |LINDEP;particularSolution;MVU;7|)
+                        %))))
+           ('T
+            (PROGN
+             (QSETREFV % 45
+                       (CONS (|dispatchFunction| |LINDEP;solveLinear;VRR;8|)
+                             %))
+             (QSETREFV % 44
+                       (CONS (|dispatchFunction| |LINDEP;solveLinear;MVR;9|)
+                             %))
+             (QSETREFV % 58
+                       (CONS
+                        (|dispatchFunction| |LINDEP;particularSolution;VRU;10|)
+                        %))
+             (QSETREFV % 59
+                       (CONS
+                        (|dispatchFunction| |LINDEP;particularSolution;MVU;11|)
+                        %)))))
+          %))) 
 
 (MAKEPROP '|LinearDependence| '|infovec|
           (LIST

@@ -28,9 +28,9 @@
 
 (DECLAIM (NOTINLINE |NumericRealEigenPackage;|)) 
 
-(DEFUN |NumericRealEigenPackage| (#1=#:G455)
+(DEFUN |NumericRealEigenPackage| (#1=#:G40)
   (SPROG NIL
-         (PROG (#2=#:G456)
+         (PROG (#2=#:G41)
            (RETURN
             (COND
              ((LETT #2#

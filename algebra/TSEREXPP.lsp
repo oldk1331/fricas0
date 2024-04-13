@@ -2,7 +2,7 @@
 (SDEFUN |TSEREXPP;rescale|
         ((|p| (UPS)) (|r0| (|Fraction| (|Integer|)))
          (|rn| (|Fraction| (|Integer|))) (% (ULS)))
-        (SPROG ((|s| (|PositiveInteger|)) (#1=#:G448 NIL))
+        (SPROG ((|s| (|PositiveInteger|)) (#1=#:G10 NIL))
                (SEQ
                 (LETT |s|
                       (PROG1
@@ -20,11 +20,11 @@
           (|Record| (|:| |laus| (|List| ULS))
                     (|:| |rpow| (|Fraction| (|Integer|))))))
         (SPROG
-         ((#1=#:G525 NIL) (|p| NIL) (#2=#:G526 NIL) (|r| NIL) (#3=#:G524 NIL)
-          (|rn| (|Fraction| (|Integer|))) (#4=#:G523 NIL) (#5=#:G522 NIL)
-          (#6=#:G521 NIL) (#7=#:G520 NIL)
-          (|lr| (|List| (|Fraction| (|Integer|)))) (#8=#:G519 NIL)
-          (#9=#:G518 NIL))
+         ((#1=#:G91 NIL) (|p| NIL) (#2=#:G92 NIL) (|r| NIL) (#3=#:G90 NIL)
+          (|rn| (|Fraction| (|Integer|))) (#4=#:G89 NIL) (#5=#:G88 NIL)
+          (#6=#:G87 NIL) (#7=#:G86 NIL)
+          (|lr| (|List| (|Fraction| (|Integer|)))) (#8=#:G85 NIL)
+          (#9=#:G84 NIL))
          (SEQ
           (LETT |lr|
                 (PROGN
@@ -136,9 +136,9 @@
 
 (DECLAIM (NOTINLINE |TaylorSeriesExpansionPuiseux;|)) 
 
-(DEFUN |TaylorSeriesExpansionPuiseux| (&REST #1=#:G536)
+(DEFUN |TaylorSeriesExpansionPuiseux| (&REST #1=#:G102)
   (SPROG NIL
-         (PROG (#2=#:G537)
+         (PROG (#2=#:G103)
            (RETURN
             (COND
              ((LETT #2#

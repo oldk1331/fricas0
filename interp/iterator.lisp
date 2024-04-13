@@ -155,7 +155,7 @@
 ;    ['and, 'true], _
 ;    ['or, 'false]]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$identity_list|
           (LIST (LIST '+ (LIST '|Zero|)) (LIST '* (LIST '|One|))
                 (LIST '|gcd| (LIST '|Zero|)) (LIST '|lcm| (LIST '|One|))

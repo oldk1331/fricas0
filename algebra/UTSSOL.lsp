@@ -10,7 +10,7 @@
           (|l2| (|Stream| (|SparseMultivariatePolynomialExpressions| F)))
           (|s1| (|Stream| (|Integer|)))
           (|l1| (|Stream| (|SparseMultivariatePolynomialExpressions| F)))
-          (#2=#:G638 NIL) (|e| NIL) (#3=#:G637 NIL))
+          (#2=#:G204 NIL) (|e| NIL) (#3=#:G203 NIL))
          (SEQ
           (LETT |l1|
                 (SPADCALL
@@ -45,7 +45,7 @@
            (PROGN
             (SPROG
              ((|nr| NIL) (|coeff| NIL) (|eq| NIL) (|eqs| NIL) (|vars| NIL)
-              (#1=#:G631 NIL) (|var| NIL) (#2=#:G632 NIL) (|i| NIL)
+              (#1=#:G197 NIL) (|var| NIL) (#2=#:G198 NIL) (|i| NIL)
               (|res| NIL))
              (SEQ
               (LETT |nr| (SPADCALL |st| (|spadConstant| % 59) (QREFELT % 31)))
@@ -228,7 +228,7 @@
               (EXIT |res|))))))) 
 
 (SDEFUN |UTSSOL;seriesSolve;MLUTSF;1!0| ((|i| NIL) (% NIL))
-        (SPROG ((#1=#:G459 NIL))
+        (SPROG ((#1=#:G24 NIL))
                (SPADCALL (|spadConstant| % 19)
                          (SPADCALL (|spadConstant| % 22)
                                    (PROG1 (LETT #1# |i|)
@@ -240,9 +240,9 @@
 
 (DECLAIM (NOTINLINE |TaylorSolve;|)) 
 
-(DEFUN |TaylorSolve| (&REST #1=#:G639)
+(DEFUN |TaylorSolve| (&REST #1=#:G205)
   (SPROG NIL
-         (PROG (#2=#:G640)
+         (PROG (#2=#:G206)
            (RETURN
             (COND
              ((LETT #2#

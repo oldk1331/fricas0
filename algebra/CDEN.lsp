@@ -68,9 +68,9 @@
 
 (DECLAIM (NOTINLINE |CommonDenominator;|)) 
 
-(DEFUN |CommonDenominator| (&REST #1=#:G465)
+(DEFUN |CommonDenominator| (&REST #1=#:G18)
   (SPROG NIL
-         (PROG (#2=#:G466)
+         (PROG (#2=#:G19)
            (RETURN
             (COND
              ((LETT #2#

@@ -46,7 +46,7 @@
 
 (DEFUN |Palette| ()
   (SPROG NIL
-         (PROG (#1=#:G461)
+         (PROG (#1=#:G31)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Palette|))

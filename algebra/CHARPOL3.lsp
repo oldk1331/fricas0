@@ -3,11 +3,11 @@
         ((|m| (|Matrix| R)) (|ld| (|List| R))
          (% (|SparseUnivariatePolynomial| (|Fraction| R))))
         (SPROG
-         ((#1=#:G458 NIL) (|j| NIL) (#2=#:G459 NIL) (|di| NIL)
+         ((#1=#:G27 NIL) (|j| NIL) (#2=#:G28 NIL) (|di| NIL)
           (|m1| (|SparseUnivariatePolynomial| (|Fraction| R)))
           (|res| (|SparseUnivariatePolynomial| (|Fraction| R)))
           (|cor| (|Fraction| R)) (|m1v| (|Fraction| R)) (|i_f| (|Fraction| R))
-          (|d1| (R)) (#3=#:G457 NIL) (|i| NIL) (|v| (|SingletonAsOrderedSet|))
+          (|d1| (R)) (#3=#:G26 NIL) (|i| NIL) (|v| (|SingletonAsOrderedSet|))
           (A1 (|Matrix| R)) (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (ANCOLS |m|))
               (EXIT
@@ -77,7 +77,7 @@
         ((|m| (|Matrix| R)) (% (|SparseUnivariatePolynomial| R)))
         (SPROG
          ((|p1| (|SparseUnivariatePolynomial| (|Fraction| R)))
-          (|ld| (|List| R)) (#1=#:G466 NIL) (|i| NIL) (#2=#:G465 NIL))
+          (|ld| (|List| R)) (#1=#:G35 NIL) (|i| NIL) (#2=#:G34 NIL))
          (SEQ
           (LETT |ld|
                 (PROGN
@@ -94,9 +94,9 @@
         ((|m| (|Matrix| (|Fraction| R)))
          (% (|Record| (|:| |mr| (|Matrix| R)) (|:| |rd| (|List| R)))))
         (SPROG
-         ((|g1| (R)) (#1=#:G473 NIL) (|a| (|Fraction| R)) (#2=#:G483 NIL)
+         ((|g1| (R)) (#1=#:G42 NIL) (|a| (|Fraction| R)) (#2=#:G52 NIL)
           (|j| NIL) (|lg| (|List| R)) (|g| (R)) (|lr| (|List| R))
-          (#3=#:G482 NIL) (#4=#:G481 NIL) (|i| NIL) (B (|Matrix| R))
+          (#3=#:G51 NIL) (#4=#:G50 NIL) (|i| NIL) (B (|Matrix| R))
           (|k| (|NonNegativeInteger|)) (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (ANROWS |m|)) (LETT |k| (ANCOLS |m|)) (LETT |lg| NIL)
               (LETT B (MAKE_MATRIX1 |n| |n| (|spadConstant| % 43)))
@@ -199,9 +199,9 @@
 
 (DECLAIM (NOTINLINE |CharacteristicPolynomial3;|)) 
 
-(DEFUN |CharacteristicPolynomial3| (#1=#:G493)
+(DEFUN |CharacteristicPolynomial3| (#1=#:G62)
   (SPROG NIL
-         (PROG (#2=#:G494)
+         (PROG (#2=#:G63)
            (RETURN
             (COND
              ((LETT #2#

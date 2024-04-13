@@ -26,7 +26,7 @@
 
 (SDEFUN |SPLTREE;construct;VCL%;5|
         ((|v| (V)) (|t| (C)) (|ls| (|List| (|SplittingNode| V C))) (% (%)))
-        (SPROG ((#1=#:G514 NIL) (|s| NIL) (#2=#:G513 NIL))
+        (SPROG ((#1=#:G71 NIL) (|s| NIL) (#2=#:G70 NIL))
                (SEQ
                 (|SPLTREE;per|
                  (CONS (SPADCALL |v| |t| (QREFELT % 10))
@@ -173,7 +173,7 @@
 
 (SDEFUN |SPLTREE;map;M2%;17|
         ((|foo| (|Mapping| #1=(|SplittingNode| V C) #1#)) (|a| (%)) (% (%)))
-        (SPROG ((#2=#:G555 NIL) (|c| NIL) (#3=#:G554 NIL) (|b| (%)))
+        (SPROG ((#2=#:G115 NIL) (|c| NIL) (#3=#:G114 NIL) (|b| (%)))
                (SEQ
                 (COND ((SPADCALL |a| (QREFELT % 22)) |a|)
                       (#4='T
@@ -214,7 +214,7 @@
 
 (SDEFUN |SPLTREE;map!;M2%;18|
         ((|foo| (|Mapping| #1=(|SplittingNode| V C) #1#)) (|a| (%)) (% (%)))
-        (SPROG ((#2=#:G563 NIL) (|c| NIL) (#3=#:G562 NIL))
+        (SPROG ((#2=#:G123 NIL) (|c| NIL) (#3=#:G122 NIL))
                (SEQ
                 (COND ((SPADCALL |a| (QREFELT % 22)) |a|)
                       (#4='T
@@ -263,7 +263,7 @@
         (|error| "in eq? from SPLTREE : unimplemented")) 
 
 (SDEFUN |SPLTREE;nodes;%L;21| ((|a| (%)) (% (|List| %)))
-        (SPROG ((#1=#:G573 NIL) (|c| NIL) (#2=#:G572 NIL))
+        (SPROG ((#1=#:G141 NIL) (|c| NIL) (#2=#:G140 NIL))
                (SEQ
                 (COND ((SPADCALL |a| (QREFELT % 22)) NIL)
                       ((SPADCALL |a| (QREFELT % 41)) (LIST |a|))
@@ -292,7 +292,7 @@
                                  (QREFELT % 31))))))) 
 
 (SDEFUN |SPLTREE;leaves;%L;22| ((|a| (%)) (% (|List| (|SplittingNode| V C))))
-        (SPROG ((#1=#:G580 NIL) (|c| NIL) (#2=#:G579 NIL))
+        (SPROG ((#1=#:G148 NIL) (|c| NIL) (#2=#:G147 NIL))
                (SEQ
                 (COND ((SPADCALL |a| (QREFELT % 22)) NIL)
                       ((SPADCALL |a| (QREFELT % 41))
@@ -317,7 +317,7 @@
                         (QREFELT % 53))))))) 
 
 (SDEFUN |SPLTREE;members;%L;23| ((|a| (%)) (% (|List| (|SplittingNode| V C))))
-        (SPROG ((#1=#:G587 NIL) (|c| NIL) (#2=#:G586 NIL))
+        (SPROG ((#1=#:G155 NIL) (|c| NIL) (#2=#:G154 NIL))
                (SEQ
                 (COND ((SPADCALL |a| (QREFELT % 22)) NIL)
                       ((SPADCALL |a| (QREFELT % 41))
@@ -344,7 +344,7 @@
                               (QREFELT % 53)))))))) 
 
 (SDEFUN |SPLTREE;#;%Nni;24| ((|a| (%)) (% (|NonNegativeInteger|)))
-        (SPROG ((#1=#:G596 NIL) (|c| NIL) (#2=#:G595 NIL))
+        (SPROG ((#1=#:G165 NIL) (|c| NIL) (#2=#:G164 NIL))
                (SEQ
                 (COND ((SPADCALL |a| (QREFELT % 22)) 0)
                       ((SPADCALL |a| (QREFELT % 41)) 1)
@@ -389,9 +389,9 @@
 (SDEFUN |SPLTREE;localCoerce|
         ((|a| (%)) (|k| (|NonNegativeInteger|)) (% (|OutputForm|)))
         (SPROG
-         ((|lo| (|List| (|OutputForm|))) (#1=#:G614 NIL) (|c| NIL)
-          (#2=#:G613 NIL) (|ro| (|OutputForm|)) (|s| (|String|))
-          (#3=#:G612 NIL) (|i| NIL))
+         ((|lo| (|List| (|OutputForm|))) (#1=#:G187 NIL) (|c| NIL)
+          (#2=#:G186 NIL) (|ro| (|OutputForm|)) (|s| (|String|))
+          (#3=#:G185 NIL) (|i| NIL))
          (SEQ (COND ((EQL |k| 1) (LETT |s| "* ")) (#4='T (LETT |s| "-> ")))
               (SEQ (LETT |i| 2) (LETT #3# |k|) G190
                    (COND ((|greater_SI| |i| #3#) (GO G191)))
@@ -441,7 +441,7 @@
 
 (SDEFUN |SPLTREE;extractSplittingLeaf;%U;28|
         ((|a| (%)) (% (|Union| % #1="failed")))
-        (SPROG ((|la| (|List| %)) (#2=#:G629 NIL) (|esl| (|Union| % #1#)))
+        (SPROG ((|la| (|List| %)) (#2=#:G202 NIL) (|esl| (|Union| % #1#)))
                (SEQ
                 (EXIT
                  (COND
@@ -469,7 +469,7 @@
                                          ((QEQCAR |esl| 0)
                                           (PROGN
                                            (LETT #2# |esl|)
-                                           (GO #3=#:G628)))
+                                           (GO #3=#:G201)))
                                          ('T
                                           (LETT |la|
                                                 (SPADCALL |la|
@@ -513,7 +513,7 @@
 (SDEFUN |SPLTREE;result;%L;30|
         ((|a| (%)) (% (|List| (|Record| (|:| |val| V) (|:| |tower| C)))))
         (SPROG
-         ((#1=#:G648 NIL) (|s| NIL) (#2=#:G647 NIL)
+         ((#1=#:G221 NIL) (|s| NIL) (#2=#:G220 NIL)
           (|ls| (|List| (|SplittingNode| V C))))
          (SEQ
           (COND ((SPADCALL |a| (QREFELT % 22)) NIL)
@@ -540,7 +540,7 @@
 
 (SDEFUN |SPLTREE;conditions;%L;31| ((|a| (%)) (% (|List| C)))
         (SPROG
-         ((#1=#:G655 NIL) (|s| NIL) (#2=#:G654 NIL)
+         ((#1=#:G228 NIL) (|s| NIL) (#2=#:G227 NIL)
           (|ls| (|List| (|SplittingNode| V C))))
          (SEQ
           (COND ((SPADCALL |a| (QREFELT % 22)) NIL)
@@ -679,9 +679,9 @@
 
 (DECLAIM (NOTINLINE |SplittingTree;|)) 
 
-(DEFUN |SplittingTree| (&REST #1=#:G700)
+(DEFUN |SplittingTree| (&REST #1=#:G273)
   (SPROG NIL
-         (PROG (#2=#:G701)
+         (PROG (#2=#:G274)
            (RETURN
             (COND
              ((LETT #2#
@@ -699,7 +699,7 @@
 
 (DEFUN |SplittingTree;| (|#1| |#2|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G697 NIL) (#2=#:G698 NIL) (#3=#:G699 NIL) (% NIL)
+   ((|pv$| NIL) (#1=#:G270 NIL) (#2=#:G271 NIL) (#3=#:G272 NIL) (% NIL)
     (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))

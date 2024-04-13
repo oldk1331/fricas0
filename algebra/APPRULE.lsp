@@ -2,7 +2,7 @@
 (SDEFUN |APPRULE;applist|
         ((|lrule| (|List| (|RewriteRule| |Base| R F))) (|arglist| (|List| F))
          (% (|List| F)))
-        (SPROG ((#1=#:G460 NIL) (|arg| NIL) (#2=#:G459 NIL))
+        (SPROG ((#1=#:G17 NIL) (|arg| NIL) (#2=#:G16 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -24,7 +24,7 @@
         (SPROG
          ((|lv| (|List| F)) (|lk| (|List| (|Kernel| F)))
           (|ncr| (|List| (|RewriteRule| |Base| R F)))
-          (|u| (|Union| (|Equation| F) "failed")) (#1=#:G471 NIL) (|r| NIL))
+          (|u| (|Union| (|Equation| F) "failed")) (#1=#:G31 NIL) (|r| NIL))
          (SEQ (LETT |ncr| NIL) (LETT |lk| NIL) (LETT |lv| NIL)
               (SEQ (LETT |r| NIL) (LETT #1# |l|) G190
                    (COND
@@ -52,7 +52,7 @@
 (SDEFUN |APPRULE;applyRules;L2F;3|
         ((|l| (|List| (|RewriteRule| |Base| R F))) (|s| (F)) (% (F)))
         (SPROG
-         ((#1=#:G478 NIL) (|new| (F))
+         ((#1=#:G40 NIL) (|new| (F))
           (|rec|
            (|Record| (|:| |lker| (|List| (|Kernel| F))) (|:| |lval| (|List| F))
                      (|:| |rl| (|List| (|RewriteRule| |Base| R F))))))
@@ -68,7 +68,7 @@
                        (EXIT
                         (COND
                          ((SPADCALL |new| |s| (QREFELT % 18))
-                          (PROGN (LETT #1# |s|) (GO #2=#:G477)))
+                          (PROGN (LETT #1# |s|) (GO #2=#:G39)))
                          ('T (LETT |s| |new|)))))
                       NIL (GO G190) G191 (EXIT NIL)))))
           #2# (EXIT #1#)))) 
@@ -90,7 +90,7 @@
          (|lrule| (|List| (|RewriteRule| |Base| R F))) (|subject| (F))
          (|n| (|PositiveInteger|)) (% (F)))
         (SPROG
-         ((#1=#:G490 NIL) (|k| NIL) (#2=#:G491 NIL) (|v| NIL) (#3=#:G489 NIL)
+         ((#1=#:G54 NIL) (|k| NIL) (#2=#:G55 NIL) (|v| NIL) (#3=#:G53 NIL)
           (|i| NIL))
          (SEQ
           (SEQ (LETT |i| 1) (LETT #3# |n|) G190
@@ -116,7 +116,7 @@
         ((|f| (F)) (|res| (|PatternMatchResult| |Base| F))
          (|l| (|List| (|Symbol|))) (% (F)))
         (SPROG
-         ((|lv| (|List| F)) (|lk| (|List| (|Kernel| F))) (#1=#:G498 NIL)
+         ((|lv| (|List| F)) (|lk| (|List| (|Kernel| F))) (#1=#:G62 NIL)
           (|rec| NIL))
          (SEQ (LETT |lk| NIL) (LETT |lv| NIL)
               (SEQ (LETT |rec| NIL) (LETT #1# (SPADCALL |res| (QREFELT % 27)))
@@ -137,7 +137,7 @@
          (|bad| (|List| (|PatternMatchResult| |Base| F)))
          (% (|PatternMatchResult| |Base| F)))
         (SPROG
-         ((#1=#:G504 NIL) (#2=#:G512 NIL) (|v| NIL) (#3=#:G500 NIL)
+         ((#1=#:G69 NIL) (#2=#:G77 NIL) (|v| NIL) (#3=#:G65 NIL)
           (|u| (|PatternMatchResult| |Base| F)))
          (SEQ
           (COND
@@ -178,7 +178,7 @@
 (SDEFUN |APPRULE;isit|
         ((|subject| (F)) (|pat| (|Pattern| |Base|))
          (% (|PatternMatchResult| |Base| F)))
-        (SPROG ((#1=#:G518 NIL) (|l| (|List| (|Pattern| |Base|))) (|v| NIL))
+        (SPROG ((#1=#:G83 NIL) (|l| (|List| (|Pattern| |Base|))) (|v| NIL))
                (SEQ
                 (COND
                  ((SPADCALL |pat| (QREFELT % 48))
@@ -199,17 +199,17 @@
 (SDEFUN |APPRULE;app|
         ((|lrule| (|List| (|RewriteRule| |Base| R F))) (|subject| (F)) (% (F)))
         (SPROG
-         ((#1=#:G544 NIL) (#2=#:G541 NIL) (#3=#:G539 NIL) (|f| (F))
+         ((#1=#:G109 NIL) (#2=#:G106 NIL) (#3=#:G104 NIL) (|f| (F))
           (|ee| (|Record| (|:| |val| F) (|:| |exponent| (|Integer|))))
           (|e|
            (|Union| (|Record| (|:| |val| F) (|:| |exponent| (|Integer|)))
                     #4="failed"))
-          (#5=#:G532 NIL) (#6=#:G531 (F)) (#7=#:G533 (F)) (#8=#:G555 NIL)
-          (#9=#:G449 NIL) (|l| (|Union| (|List| F) #4#)) (#10=#:G529 NIL)
-          (#11=#:G528 (F)) (#12=#:G530 (F)) (#13=#:G554 NIL) (#14=#:G448 NIL)
-          (|k| (|Union| (|Kernel| F) "failed")) (#15=#:G551 NIL)
-          (#16=#:G552 NIL) (|u| (|PatternMatchResult| |Base| F))
-          (#17=#:G553 NIL) (|r| NIL))
+          (#5=#:G97 NIL) (#6=#:G96 (F)) (#7=#:G98 (F)) (#8=#:G120 NIL)
+          (#9=#:G2 NIL) (|l| (|Union| (|List| F) #4#)) (#10=#:G94 NIL)
+          (#11=#:G93 (F)) (#12=#:G95 (F)) (#13=#:G119 NIL) (#14=#:G1 NIL)
+          (|k| (|Union| (|Kernel| F) "failed")) (#15=#:G116 NIL)
+          (#16=#:G117 NIL) (|u| (|PatternMatchResult| |Base| F))
+          (#17=#:G118 NIL) (|r| NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -235,8 +235,8 @@
                                      (|APPRULE;rewrite|
                                       (SPADCALL |r| (QREFELT % 52)) |u|
                                       (SPADCALL |r| (QREFELT % 54)) %))
-                               (GO #18=#:G550)))
-                        (GO #19=#:G521))))))
+                               (GO #18=#:G115)))
+                        (GO #19=#:G86))))))
                    (LETT #17# (CDR #17#)) (GO G190) G191 (EXIT NIL)))
              #19# (EXIT #15#))
             (LETT |k| (SPADCALL |subject| (QREFELT % 56)))
@@ -352,9 +352,9 @@
 
 (DECLAIM (NOTINLINE |ApplyRules;|)) 
 
-(DEFUN |ApplyRules| (&REST #1=#:G556)
+(DEFUN |ApplyRules| (&REST #1=#:G121)
   (SPROG NIL
-         (PROG (#2=#:G557)
+         (PROG (#2=#:G122)
            (RETURN
             (COND
              ((LETT #2#

@@ -646,7 +646,7 @@
 
 ; grepSplit(lines,doc?) ==
 ;   if doc? then
-;     instream2 := OPEN STRCONC(getEnv '"FRICAS",'"/algebra/libdb.text")
+;     instream2 := OPEN STRCONC($spadroot, '"/algebra/libdb.text")
 ;   cons := atts := doms := nil
 ;   while lines is [line, :lines] repeat
 ;     if doc? then
@@ -685,8 +685,7 @@
      (PROGN
       (COND
        (|doc?|
-        (SETQ |instream2|
-                (OPEN (STRCONC (|getEnv| "FRICAS") "/algebra/libdb.text")))))
+        (SETQ |instream2| (OPEN (STRCONC |$spadroot| "/algebra/libdb.text")))))
       (SETQ CONS (SETQ |atts| (SETQ |doms| NIL)))
       ((LAMBDA ()
          (LOOP
@@ -2204,7 +2203,7 @@
 
 ; $dbDelimiters := [char " " , char "(", char ")"]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$dbDelimiters| (LIST (|char| '| |) (|char| '|(|) (|char| '|)|))))
 
 ; dbWordFrom(l,i) ==
@@ -2858,8 +2857,8 @@
       |line|))))
 
 ; grepSource key ==
-;   key = 'libdb   => STRCONC($SPADROOT,'"/algebra/libdb.text")
-;   key = 'gloss   => STRCONC($SPADROOT,'"/algebra/glosskey.text")
+;   key = 'libdb   => STRCONC($spadroot,'"/algebra/libdb.text")
+;   key = 'gloss   => STRCONC($spadroot,'"/algebra/glosskey.text")
 ;   key = $localLibdb => $localLibdb
 ;   mkGrepTextfile
 ;     MEMQ(key, '(_. a c d k o p x)) => 'libdb
@@ -2868,18 +2867,19 @@
 (DEFUN |grepSource| (|key|)
   (PROG ()
     (RETURN
-     (COND ((EQ |key| '|libdb|) (STRCONC $SPADROOT "/algebra/libdb.text"))
-           ((EQ |key| '|gloss|) (STRCONC $SPADROOT "/algebra/glosskey.text"))
+     (COND ((EQ |key| '|libdb|) (STRCONC |$spadroot| "/algebra/libdb.text"))
+           ((EQ |key| '|gloss|) (STRCONC |$spadroot| "/algebra/glosskey.text"))
            ((EQUAL |key| |$localLibdb|) |$localLibdb|)
            (#1='T
             (|mkGrepTextfile|
              (COND ((MEMQ |key| '(|.| |a| |c| |d| |k| |o| |p| |x|)) '|libdb|)
                    (#1# '|comdb|))))))))
 
-; mkGrepTextfile s == STRCONC($SPADROOT,"/algebra/", STRINGIMAGE s, '".text")
+; mkGrepTextfile s == STRCONC($spadroot,"/algebra/", STRINGIMAGE s, '".text")
 
 (DEFUN |mkGrepTextfile| (|s|)
-  (PROG () (RETURN (STRCONC $SPADROOT '|/algebra/| (STRINGIMAGE |s|) ".text"))))
+  (PROG ()
+    (RETURN (STRCONC |$spadroot| '|/algebra/| (STRINGIMAGE |s|) ".text"))))
 
 ; mkGrepFile s ==  --called to generate a path name for a temporary grep file
 ;   prefix := '"/tmp/"

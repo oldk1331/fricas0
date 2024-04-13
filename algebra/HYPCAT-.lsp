@@ -26,7 +26,7 @@
                   (QREFELT % 14))) 
 
 (SDEFUN |HYPCAT-;cosh;2S;5| ((|x| (S)) (% (S)))
-        (SPROG ((#1=#:G471 NIL) (|e| (S)))
+        (SPROG ((#1=#:G31 NIL) (|e| (S)))
                (SEQ (LETT |e| (SPADCALL |x| (QREFELT % 18)))
                     (EXIT
                      (SPADCALL
@@ -48,7 +48,7 @@
                       (QREFELT % 14)))))) 
 
 (SDEFUN |HYPCAT-;sinh;2S;6| ((|x| (S)) (% (S)))
-        (SPROG ((#1=#:G476 NIL) (|e| (S)))
+        (SPROG ((#1=#:G36 NIL) (|e| (S)))
                (SEQ (LETT |e| (SPADCALL |x| (QREFELT % 18)))
                     (EXIT
                      (SPADCALL

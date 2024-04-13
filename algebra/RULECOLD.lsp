@@ -8,14 +8,11 @@
 
 (SDEFUN |RULECOLD;=;2%B;3| ((|x| (%)) (|y| (%)) (% (|Boolean|))) 'T) 
 
-(SDEFUN |RULECOLD;latex;%S;4| ((|x| (%)) (% (|String|)))
-        (SPADCALL (QREFELT % 6) (QREFELT % 15))) 
-
 (DECLAIM (NOTINLINE |RuleCalled;|)) 
 
-(DEFUN |RuleCalled| (#1=#:G452)
+(DEFUN |RuleCalled| (#1=#:G18)
   (SPROG NIL
-         (PROG (#2=#:G453)
+         (PROG (#2=#:G19)
            (RETURN
             (COND
              ((LETT #2#
@@ -34,7 +31,7 @@
          (PROGN
           (LETT DV$1 |#1|)
           (LETT |dv$| (LIST '|RuleCalled| DV$1))
-          (LETT % (GETREFV 17))
+          (LETT % (GETREFV 15))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|RuleCalled| (LIST DV$1) (CONS 1 %))
@@ -47,15 +44,15 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|Symbol|)
               |RULECOLD;name;%S;1| (|OutputForm|) (0 . |coerce|)
-              |RULECOLD;coerce;%Of;2| (|Boolean|) |RULECOLD;=;2%B;3| (|String|)
-              (5 . |latex|) |RULECOLD;latex;%S;4|)
-           '#(~= 10 |name| 16 |latex| 21 |coerce| 26 = 31) 'NIL
+              |RULECOLD;coerce;%Of;2| (|Boolean|) |RULECOLD;=;2%B;3|
+              (|String|))
+           '#(~= 5 |name| 11 |latex| 16 |coerce| 21 = 26) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
                  (CONS '#(|SetCategory&| |BasicType&| NIL)
                        (CONS
                         '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 9))
-                        (|makeByteWordVec2| 16
-                                            '(1 7 9 0 10 1 7 14 0 15 2 0 12 0 0
-                                              1 1 0 7 0 8 1 0 14 0 16 1 0 9 0
-                                              11 2 0 12 0 0 13)))))
+                        (|makeByteWordVec2| 14
+                                            '(1 7 9 0 10 2 0 12 0 0 1 1 0 7 0 8
+                                              1 0 14 0 1 1 0 9 0 11 2 0 12 0 0
+                                              13)))))
            '|lookupComplete|)) 

@@ -21,9 +21,9 @@
 
 (DECLAIM (NOTINLINE |PlotFunctions1;|)) 
 
-(DEFUN |PlotFunctions1| (#1=#:G457)
+(DEFUN |PlotFunctions1| (#1=#:G17)
   (SPROG NIL
-         (PROG (#2=#:G458)
+         (PROG (#2=#:G18)
            (RETURN
             (COND
              ((LETT #2#

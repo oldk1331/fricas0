@@ -53,7 +53,7 @@
 
 (DEFUN |FortranOutputStackPackage| ()
   (SPROG NIL
-         (PROG (#1=#:G466)
+         (PROG (#1=#:G28)
            (RETURN
             (COND
              ((LETT #1#

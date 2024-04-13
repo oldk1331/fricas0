@@ -14,194 +14,194 @@ apply`2735
 argument`2768
 arity`3056
 assignment`3205
-attribute`3976
-basis`4258
-benefactor`4414
-binary`4562
-binding`4613
-block`4964
-body`5076
-boolean`5134
-built-in function`5277
-cache`5377
-capsule`5942
-case`6092
-Category`6409
-category`6500
-category constructor`8227
-category extension`8506
-category hierarchy`8868
-character`9148
-client`9342
-coercion`9442
-comment`9724
-Common LISP`9934
-compile-time`10027
-compiler`10122
-computational object`10649
-conditional`10798
-constant`11121
-constructor`11499
-continuation`11612
-control structure`11858
-conversion`12099
-copying semantics`12461
-data structure`12597
-datatype`12707
-declaration`12760
-default definition`13208
-default package`13429
-definition`13612
-delimiter`14036
-destructive operation`14223
-documentation`14735
-domain`14899
-domain constructor`16031
-domain extension`16677
-dot notation`17131
-dynamic`17369
-dynamic lookup`17713
-empty`18939
-environment`18999
-evaluation`19035
-Exit`19216
-exit`19354
-explicit export`19687
-export`20177
-expose`20265
-expression`20662
-extend`20760
-field`20832
-file`21114
-float`21191
-formal parameter`21599
-frame`21852
-free`22118
-free variable`22744
-function`22916
-function body`23916
-garbage collection`24128
-garbage collector`24299
-Gaussian`24364
-GCL`24500
-generic function`24676
-global variable`25014
-Groebner basis`25370
-group`25529
-hash table`25609
-heap`25952
-history`26221
-ideal`26567
-identifier`26740
-immutable`27079
-implicit export`27512
-index`27751
-infix`27933
-input area`28290
-instantiate`28372
-integer`28469
-interactive`28757
-interpreter`28827
-invocation`29859
-iteration`30470
-Join`30643
-library`30829
-LISP`30960
-list`31171
-literal`31215
-local`31439
-local variable`31719
-loop`32562
-loop body`32741
-macro`33026
-mode`33674
-mutable`33839
-name`34219
-nullary`34464
-nullary`34545
-object`34597
-object code`35150
-operand`35242
-operation`35337
-operator`35574
-overloading`35761
-package`36074
-package call`36816
-package call`36992
-package constructor`37129
-parameter`37174
-parameterized datatype`37204
-parameterized form`37300
-parent`37391
-parse`37538
-parse`37724
-partially ordered set`37868
-pattern match`37957
-pile`38790
-pointer`38896
-pointer semantics`39245
-polymorphic`40752
-postfix`41274
-precedence`41400
-precision`41620
-predicate`41742
-prefix`41861
-quote`42219
-Record`42302
-recurrence relation`42750
-recursion`43108
-recursive`43250
-reference`43399
-Rep`43428
-representation`43579
-reserved word`44000
-retraction`44346
-return`44582
-ring`44707
-rule`44859
-run-time`45120
-run-time check`45432
-SBCL`45597
-search path`45749
-search string`46334
-selector`46412
-semantics`46494
-semigroup`46634
-side effect`46739
-signature`46853
-small float`47106
-small integer`47199
-source`47286
-sparse`47526
-static`47634
-step number`47731
-stream`47865
-string`48117
-subdomain`48343
-such that clause`49168
-suffix`49249
-symbol`49387
-syntax`49578
-system commands`49653
-tag`49813
-target`49891
-top-level`50030
-totally ordered set`50104
-trace`50188
-tuple`50302
-Type`50704
-type`50848
-type checking`51186
-type constructor`51298
-type inference`51373
-unary`51663
-underlying domain`51715
-Union`51963
-unit`52665
-user function`52709
-user variable`52814
-value`52893
-variable`53077
-Void`53667
-wild card`53864
-workspace`54049
+attribute`3980
+basis`4262
+benefactor`4418
+binary`4566
+binding`4617
+block`4968
+body`5080
+boolean`5138
+built-in function`5281
+cache`5381
+capsule`5946
+case`6096
+Category`6413
+category`6504
+category constructor`8231
+category extension`8510
+category hierarchy`8872
+character`9152
+client`9346
+coercion`9446
+comment`9728
+Common LISP`9938
+compile-time`10031
+compiler`10126
+computational object`10653
+conditional`10802
+constant`11125
+constructor`11503
+continuation`11616
+control structure`11862
+conversion`12103
+copying semantics`12465
+data structure`12601
+datatype`12711
+declaration`12764
+default definition`13212
+default package`13433
+definition`13616
+delimiter`14040
+destructive operation`14227
+documentation`14739
+domain`14903
+domain constructor`16035
+domain extension`16681
+dot notation`17135
+dynamic`17373
+dynamic lookup`17717
+empty`18943
+environment`19003
+evaluation`19039
+Exit`19220
+exit`19358
+explicit export`19691
+export`20181
+expose`20269
+expression`20666
+extend`20764
+field`20836
+file`21118
+float`21195
+formal parameter`21603
+frame`21856
+free`22122
+free variable`22748
+function`22920
+function body`23920
+garbage collection`24132
+garbage collector`24303
+Gaussian`24368
+GCL`24504
+generic function`24680
+global variable`25018
+Groebner basis`25374
+group`25533
+hash table`25613
+heap`25956
+history`26225
+ideal`26571
+identifier`26744
+immutable`27083
+implicit export`27516
+index`27755
+infix`27937
+input area`28294
+instantiate`28376
+integer`28473
+interactive`28761
+interpreter`28831
+invocation`29863
+iteration`30474
+Join`30647
+library`30833
+LISP`30964
+list`31175
+literal`31219
+local`31443
+local variable`31723
+loop`32566
+loop body`32745
+macro`33030
+mode`33678
+mutable`33843
+name`34223
+nullary`34468
+nullary`34549
+object`34601
+object code`35154
+operand`35246
+operation`35341
+operator`35582
+overloading`35769
+package`36082
+package call`36824
+package call`37000
+package constructor`37137
+parameter`37182
+parameterized datatype`37212
+parameterized form`37308
+parent`37399
+parse`37546
+parse`37732
+partially ordered set`37876
+pattern match`37965
+pile`38798
+pointer`38904
+pointer semantics`39253
+polymorphic`40760
+postfix`41282
+precedence`41408
+precision`41628
+predicate`41750
+prefix`41869
+quote`42227
+Record`42310
+recurrence relation`42758
+recursion`43116
+recursive`43258
+reference`43407
+Rep`43436
+representation`43587
+reserved word`44008
+retraction`44354
+return`44590
+ring`44715
+rule`44867
+run-time`45128
+run-time check`45440
+SBCL`45605
+search path`45757
+search string`46342
+selector`46420
+semantics`46502
+semigroup`46642
+side effect`46747
+signature`46861
+small float`47114
+small integer`47207
+source`47294
+sparse`47534
+static`47642
+step number`47739
+stream`47873
+string`48125
+subdomain`48351
+such that clause`49176
+suffix`49257
+symbol`49395
+syntax`49586
+system commands`49661
+tag`49821
+target`49899
+top-level`50038
+totally ordered set`50112
+trace`50196
+tuple`50310
+Type`50712
+type`50856
+type checking`51194
+type constructor`51306
+type inference`51381
+unary`51675
+underlying domain`51727
+Union`51975
+unit`52677
+user function`52721
+user variable`52826
+value`52905
+variable`53089
+Void`53679
+wild card`53876
+workspace`54061

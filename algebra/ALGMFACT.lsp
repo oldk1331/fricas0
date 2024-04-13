@@ -29,9 +29,9 @@
 
 (DECLAIM (NOTINLINE |AlgebraicMultFact;|)) 
 
-(DEFUN |AlgebraicMultFact| (&REST #1=#:G452)
+(DEFUN |AlgebraicMultFact| (&REST #1=#:G20)
   (SPROG NIL
-         (PROG (#2=#:G453)
+         (PROG (#2=#:G21)
            (RETURN
             (COND
              ((LETT #2#

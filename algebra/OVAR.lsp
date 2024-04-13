@@ -26,8 +26,7 @@
 
 (SDEFUN |OVAR;variable;SU;9| ((|exp| (|Symbol|)) (% (|Union| % "failed")))
         (SPROG
-         ((#1=#:G468 NIL) (#2=#:G461 NIL) (|i| NIL) (#3=#:G469 NIL)
-          (|exp2| NIL))
+         ((#1=#:G47 NIL) (#2=#:G40 NIL) (|i| NIL) (#3=#:G48 NIL) (|exp2| NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -47,7 +46,7 @@
                                                       '(|PositiveInteger|)
                                                       '(|NonNegativeInteger|)
                                                       #2#))))
-                      (GO #4=#:G467))))))
+                      (GO #4=#:G46))))))
                  (LETT |i| (PROG1 (|inc_SI| |i|) (LETT #3# (CDR #3#))))
                  (GO G190) G191 (EXIT NIL))
             (EXIT (CONS 1 "failed"))))
@@ -61,17 +60,14 @@
 
 (SDEFUN |OVAR;=;2%B;11| ((|s1| (%)) (|s2| (%)) (% (|Boolean|))) (EQL |s1| |s2|)) 
 
-(SDEFUN |OVAR;latex;%S;12| ((|x| (%)) (% (|String|)))
-        (SPADCALL (SPADCALL |x| (QREFELT % 13)) (QREFELT % 37))) 
-
-(SDEFUN |OVAR;hashUpdate!;Hs%Hs;13| ((|hs| #1=(|HashState|)) (|s| (%)) (% #1#))
+(SDEFUN |OVAR;hashUpdate!;Hs%Hs;12| ((|hs| #1=(|HashState|)) (|s| (%)) (% #1#))
         (HASHSTATEUPDATE |hs| (SXHASH |s|))) 
 
 (DECLAIM (NOTINLINE |OrderedVariableList;|)) 
 
-(DEFUN |OrderedVariableList| (#1=#:G474)
+(DEFUN |OrderedVariableList| (#1=#:G52)
   (SPROG NIL
-         (PROG (#2=#:G475)
+         (PROG (#2=#:G53)
            (RETURN
             (COND
              ((LETT #2#
@@ -91,7 +87,7 @@
          (PROGN
           (LETT DV$1 |#1|)
           (LETT |dv$| (LIST '|OrderedVariableList| DV$1))
-          (LETT % (GETREFV 43))
+          (LETT % (GETREFV 41))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|OrderedVariableList| (LIST DV$1)
@@ -114,13 +110,13 @@
               |OVAR;convert;%P;5| (|PositiveInteger|) |OVAR;index;Pi%;6|
               |OVAR;lookup;%Pi;7| (|NonNegativeInteger|) |OVAR;size;Nni;8|
               (|Union| % '"failed") |OVAR;variable;SU;9| (|Boolean|)
-              |OVAR;<;2%B;10| |OVAR;=;2%B;11| (|String|) (31 . |latex|)
-              |OVAR;latex;%S;12| (|HashState|) |OVAR;hashUpdate!;Hs%Hs;13|
-              (|SingleInteger|) (|List| %))
-           '#(~= 36 |variable| 42 |smaller?| 47 |size| 53 |random| 57 |min| 61
-              |max| 67 |lookup| 73 |latex| 78 |index| 83 |hashUpdate!| 88
-              |hash| 94 |enumerate| 99 |convert| 103 |coerce| 123 >= 128 > 134
-              = 140 <= 146 < 152)
+              |OVAR;<;2%B;10| |OVAR;=;2%B;11| (|HashState|)
+              |OVAR;hashUpdate!;Hs%Hs;12| (|SingleInteger|) (|List| %)
+              (|String|))
+           '#(~= 31 |variable| 37 |smaller?| 42 |size| 48 |random| 52 |min| 56
+              |max| 62 |lookup| 68 |latex| 73 |index| 78 |hashUpdate!| 83
+              |hash| 89 |enumerate| 94 |convert| 98 |coerce| 118 >= 123 > 129 =
+              135 <= 141 < 147)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0 0 0))
                  (CONS
@@ -132,15 +128,15 @@
                       (|ConvertibleTo| 20) (|ConvertibleTo| 23)
                       (|ConvertibleTo| 10) (|ConvertibleTo| 17) (|BasicType|)
                       (|PartialOrder|) (|CoercibleTo| 14))
-                   (|makeByteWordVec2| 42
+                   (|makeByteWordVec2| 40
                                        '(1 7 0 0 8 2 7 10 0 11 12 1 10 14 0 15
                                          1 10 17 0 18 1 10 20 0 21 1 10 23 0 24
-                                         1 10 36 0 37 2 0 33 0 0 1 1 0 31 10 32
-                                         2 0 33 0 0 1 0 0 29 30 0 0 0 1 2 0 0 0
-                                         0 1 2 0 0 0 0 1 1 0 26 0 28 1 0 36 0
-                                         38 1 0 0 26 27 2 0 39 39 0 40 1 0 41 0
-                                         1 0 0 42 1 1 0 20 0 22 1 0 23 0 25 1 0
-                                         17 0 19 1 0 10 0 13 1 0 14 0 16 2 0 33
-                                         0 0 1 2 0 33 0 0 1 2 0 33 0 0 35 2 0
-                                         33 0 0 1 2 0 33 0 0 34)))))
+                                         2 0 33 0 0 1 1 0 31 10 32 2 0 33 0 0 1
+                                         0 0 29 30 0 0 0 1 2 0 0 0 0 1 2 0 0 0
+                                         0 1 1 0 26 0 28 1 0 40 0 1 1 0 0 26 27
+                                         2 0 36 36 0 37 1 0 38 0 1 0 0 39 1 1 0
+                                         20 0 22 1 0 23 0 25 1 0 17 0 19 1 0 10
+                                         0 13 1 0 14 0 16 2 0 33 0 0 1 2 0 33 0
+                                         0 1 2 0 33 0 0 35 2 0 33 0 0 1 2 0 33
+                                         0 0 34)))))
            '|lookupComplete|)) 

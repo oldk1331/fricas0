@@ -16,7 +16,7 @@
         (SPADCALL (- |n| 1) (QREFELT % 13))) 
 
 (SDEFUN |CHAR;lookup;%Pi;5| ((|c| (%)) (% (|PositiveInteger|)))
-        (SPROG ((#1=#:G725 NIL))
+        (SPROG ((#1=#:G291 NIL))
                (PROG1 (LETT #1# (+ 1 (SPADCALL |c| (QREFELT % 16))))
                  (|check_subtype2| (> #1# 0) '(|PositiveInteger|) '(|Integer|)
                                    #1#)))) 
@@ -59,22 +59,19 @@
 (SDEFUN |CHAR;alphanumeric?;%B;19| ((|c| (%)) (% (|Boolean|)))
         (SPADCALL |c| (|spadConstant| % 39) (QREFELT % 29))) 
 
-(SDEFUN |CHAR;latex;%S;20| ((|c| (%)) (% (|String|)))
-        (STRCONC "\\mbox{`" (STRCONC (|make_full_CVEC2| 1 |c|) "'}"))) 
+(PUT '|CHAR;char;S%;20| '|SPADreplace| '|STR_to_CHAR|) 
 
-(PUT '|CHAR;char;S%;21| '|SPADreplace| '|STR_to_CHAR|) 
+(SDEFUN |CHAR;char;S%;20| ((|s| (|String|)) (% (%))) (|STR_to_CHAR| |s|)) 
 
-(SDEFUN |CHAR;char;S%;21| ((|s| (|String|)) (% (%))) (|STR_to_CHAR| |s|)) 
-
-(SDEFUN |CHAR;upperCase;2%;22| ((|c| (%)) (% (%)))
+(SDEFUN |CHAR;upperCase;2%;21| ((|c| (%)) (% (%)))
         (STR_ELT (PNAME (UPCASE (NUM2CHAR (SPADCALL |c| (QREFELT % 16))))) 0)) 
 
-(SDEFUN |CHAR;lowerCase;2%;23| ((|c| (%)) (% (%)))
+(SDEFUN |CHAR;lowerCase;2%;22| ((|c| (%)) (% (%)))
         (STR_ELT (PNAME (DOWNCASE (NUM2CHAR (SPADCALL |c| (QREFELT % 16))))) 0)) 
 
-(PUT '|CHAR;hashUpdate!;Hs%Hs;24| '|SPADreplace| 'HASHSTATEUPDATE) 
+(PUT '|CHAR;hashUpdate!;Hs%Hs;23| '|SPADreplace| 'HASHSTATEUPDATE) 
 
-(SDEFUN |CHAR;hashUpdate!;Hs%Hs;24|
+(SDEFUN |CHAR;hashUpdate!;Hs%Hs;23|
         ((|hs| (|HashState|)) (|c| (%)) (% (|HashState|)))
         (HASHSTATEUPDATE |hs| |c|)) 
 
@@ -82,7 +79,7 @@
 
 (DEFUN |Character| ()
   (SPROG NIL
-         (PROG (#1=#:G748)
+         (PROG (#1=#:G312)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Character|))
@@ -101,7 +98,7 @@
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|Character|))
-          (LETT % (GETREFV 51))
+          (LETT % (GETREFV 50))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|Character| NIL (CONS 1 %))
@@ -124,10 +121,10 @@
               |CHAR;upperCase?;%B;16| (23 . |lowerCase|)
               |CHAR;lowerCase?;%B;17| (27 . |alphabetic|)
               |CHAR;alphabetic?;%B;18| (31 . |alphanumeric|)
-              |CHAR;alphanumeric?;%B;19| (|String|) |CHAR;latex;%S;20|
-              |CHAR;char;S%;21| |CHAR;upperCase;2%;22| |CHAR;lowerCase;2%;23|
-              (|HashState|) |CHAR;hashUpdate!;Hs%Hs;24| (|InputForm|)
-              (|SingleInteger|) (|List| %))
+              |CHAR;alphanumeric?;%B;19| (|String|) |CHAR;char;S%;20|
+              |CHAR;upperCase;2%;21| |CHAR;lowerCase;2%;22| (|HashState|)
+              |CHAR;hashUpdate!;Hs%Hs;23| (|InputForm|) (|SingleInteger|)
+              (|List| %))
            '#(~= 35 |upperCase?| 41 |upperCase| 46 |underscore| 51 |space| 55
               |smaller?| 59 |size| 65 |random| 69 |quote| 73 |ord| 77 |newline|
               82 |min| 86 |max| 92 |lowerCase?| 98 |lowerCase| 103 |lookup| 108
@@ -143,22 +140,22 @@
                   (CONS
                    '#((|OrderedFinite|) (|OrderedSet|) (|Finite|)
                       (|Comparable|) (|Hashable|) (|SetCategory|)
-                      (|ConvertibleTo| 48) (|BasicType|) (|PartialOrder|)
+                      (|ConvertibleTo| 47) (|BasicType|) (|PartialOrder|)
                       (|CoercibleTo| 24))
-                   (|makeByteWordVec2| 50
+                   (|makeByteWordVec2| 49
                                        '(1 6 0 12 18 0 26 0 27 2 26 7 28 0 29 0
                                          26 0 31 0 26 0 33 0 26 0 35 0 26 0 37
                                          0 26 0 39 2 0 7 0 0 1 1 0 7 0 34 1 0 0
-                                         0 44 0 0 0 22 0 0 0 20 2 0 7 0 0 1 0 0
+                                         0 43 0 0 0 22 0 0 0 20 2 0 7 0 0 1 0 0
                                          10 11 0 0 0 19 0 0 0 21 1 0 12 0 16 0
                                          0 0 23 2 0 0 0 0 1 2 0 0 0 0 1 1 0 7 0
-                                         36 1 0 0 0 45 1 0 14 0 17 1 0 41 0 42
-                                         1 0 0 14 15 1 0 7 0 32 2 0 46 46 0 47
-                                         1 0 49 0 1 0 0 50 1 1 0 7 0 30 1 0 48
-                                         0 1 1 0 24 0 25 1 0 0 12 13 1 0 0 41
-                                         43 1 0 7 0 40 1 0 7 0 38 2 0 7 0 0 1 2
-                                         0 7 0 0 1 2 0 7 0 0 8 2 0 7 0 0 1 2 0
-                                         7 0 0 9)))))
+                                         36 1 0 0 0 44 1 0 14 0 17 1 0 41 0 1 1
+                                         0 0 14 15 1 0 7 0 32 2 0 45 45 0 46 1
+                                         0 48 0 1 0 0 49 1 1 0 7 0 30 1 0 47 0
+                                         1 1 0 24 0 25 1 0 0 12 13 1 0 0 41 42
+                                         1 0 7 0 40 1 0 7 0 38 2 0 7 0 0 1 2 0
+                                         7 0 0 1 2 0 7 0 0 8 2 0 7 0 0 1 2 0 7
+                                         0 0 9)))))
            '|lookupComplete|)) 
 
 (MAKEPROP '|Character| 'NILADIC T) 

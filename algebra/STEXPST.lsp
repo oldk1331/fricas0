@@ -95,9 +95,9 @@
 
 (DECLAIM (NOTINLINE |StreamExponentialSeriesTranscendentalFunctions;|)) 
 
-(DEFUN |StreamExponentialSeriesTranscendentalFunctions| (#1=#:G462)
+(DEFUN |StreamExponentialSeriesTranscendentalFunctions| (#1=#:G24)
   (SPROG NIL
-         (PROG (#2=#:G463)
+         (PROG (#2=#:G25)
            (RETURN
             (COND
              ((LETT #2#

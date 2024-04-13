@@ -6,7 +6,7 @@
 (DEFPARAMETER |Poset;AL| 'NIL) 
 
 (DEFUN |Poset| (|t#1|)
-  (LET (#1=#:G481 (#2=#:G482 (|devaluate| |t#1|)))
+  (LET (#1=#:G34 (#2=#:G35 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |Poset;AL|)) (CDR #1#))
           (T
            (SETQ |Poset;AL|
@@ -14,7 +14,7 @@
            #1#)))) 
 
 (DEFUN |Poset;| (|t#1|)
-  (SPROG ((#1=#:G480 NIL))
+  (SPROG ((#1=#:G33 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)

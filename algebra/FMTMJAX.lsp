@@ -526,9 +526,9 @@
           (RETURN
            (PROGN
             (SPROG
-             ((|bx| NIL) (|tu| NIL) (|tl| NIL) (#1=#:G578 NIL) (|l| NIL)
-              (#2=#:G579 NIL) (|u| NIL) (|bu| NIL) (|lu| NIL) (|bl| NIL)
-              (|ll| NIL) (|b| NIL) (#3=#:G577 NIL) (|a| NIL) (|i| NIL)
+             ((|bx| NIL) (|tu| NIL) (|tl| NIL) (#1=#:G155 NIL) (|l| NIL)
+              (#2=#:G156 NIL) (|u| NIL) (|bu| NIL) (|lu| NIL) (|bl| NIL)
+              (|ll| NIL) (|b| NIL) (#3=#:G154 NIL) (|a| NIL) (|i| NIL)
               (|ba| NIL))
              (SEQ
               (LETT |ba|
@@ -634,7 +634,7 @@
           (RETURN
            (PROGN
             (SPROG
-             ((|b2| NIL) (|r| NIL) (#1=#:G584 NIL) (#2=#:G582 NIL) (|n| NIL)
+             ((|b2| NIL) (|r| NIL) (#1=#:G161 NIL) (#2=#:G159 NIL) (|n| NIL)
               (|b1| NIL))
              (SEQ
               (LETT |b1|
@@ -916,7 +916,7 @@
          (%
           (|OperatorHandlers|
            (|Mapping| (|OutputBox|) (|Integer|) (|List| (|OutputForm|))))))
-        (SPROG ((#1=#:G1005 NIL))
+        (SPROG ((#1=#:G586 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -1311,8 +1311,13 @@
                             (SPADCALL ":=" 125 (SPADCALL 125 (QREFELT % 110))
                                       (QREFELT % 106))
                             (QREFELT % 115))
-                  (SPADCALL |oh| 2 "TAG"
-                            (SPADCALL "\\to " 100
+                  (SPADCALL |oh| 2 "->"
+                            (SPADCALL "\\to " 1001
+                                      (SPADCALL 1001 (QREFELT % 110))
+                                      (QREFELT % 106))
+                            (QREFELT % 115))
+                  (SPADCALL |oh| 2 "~>"
+                            (SPADCALL "\\leadsto " 100
                                       (SPADCALL 100 (QREFELT % 110))
                                       (QREFELT % 106))
                             (QREFELT % 115))
@@ -1407,7 +1412,7 @@
                   (SPADCALL |oh| -1 "MATRIX" (SPADCALL "[" "]" (QREFELT % 112))
                             (QREFELT % 115))
                   (SPADCALL |oh| -1 "theMap" (ELT % 65) (QREFELT % 115))
-                  (EXIT (PROGN (LETT #1# |oh|) (GO #6=#:G1004)))))
+                  (EXIT (PROGN (LETT #1# |oh|) (GO #6=#:G585)))))
                 #6# (EXIT #1#)))) 
 
 (SDEFUN |FMTMJAX;operatorHandlers;Oh;39|
@@ -1420,7 +1425,7 @@
 
 (DEFUN |FormatMathJax| ()
   (SPROG NIL
-         (PROG (#1=#:G1008)
+         (PROG (#1=#:G589)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|FormatMathJax|))

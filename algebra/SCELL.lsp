@@ -30,7 +30,7 @@
         (SPROG
          ((|new_left| (|TheField|)) (|new_right| (|TheField|))
           (|lr| (|List| |TheField|)) (|sg| (|Integer|)) (|nbe| (|TheField|))
-          (#1=#:G479 NIL) (|ll| (|List| |TheField|)) (|middle| (|TheField|)))
+          (#1=#:G48 NIL) (|ll| (|List| |TheField|)) (|middle| (|TheField|)))
          (SEQ
           (EXIT
            (SEQ
@@ -57,7 +57,7 @@
                                        (LETT #1#
                                              (|SCELL;separate| (REVERSE |ll|)
                                               |left| |middle| %))
-                                       (GO #3=#:G478)))
+                                       (GO #3=#:G47)))
                                      ('T
                                       (SEQ (LETT |nbe| (|SPADfirst| |lr|))
                                            (LETT |sg|
@@ -190,10 +190,10 @@
         ((|lp| (|List| |ThePols|)) (|var| (|Symbol|)) (% (|List| %)))
         (SPROG
          ((|l1| (|List| |TheField|)) (|res| (|List| %))
-          (|l| #1=(|List| |TheField|)) (#2=#:G488 NIL) (#3=#:G487 #1#)
-          (#4=#:G489 #1#) (#5=#:G499 NIL) (|p| NIL) (|b| (|TheField|))
-          (#6=#:G485 NIL) (#7=#:G484 (|TheField|)) (#8=#:G486 (|TheField|))
-          (#9=#:G498 NIL) (|lp1| (|List| |ThePols|)))
+          (|l| #1=(|List| |TheField|)) (#2=#:G57 NIL) (#3=#:G56 #1#)
+          (#4=#:G58 #1#) (#5=#:G69 NIL) (|p| NIL) (|b| (|TheField|))
+          (#6=#:G54 NIL) (#7=#:G53 (|TheField|)) (#8=#:G55 (|TheField|))
+          (#9=#:G68 NIL) (|lp1| (|List| |ThePols|)))
          (SEQ (LETT |lp1| (SPADCALL |lp| (QREFELT % 39)))
               (EXIT
                (COND
@@ -276,9 +276,9 @@
 
 (DECLAIM (NOTINLINE |SimpleCell;|)) 
 
-(DEFUN |SimpleCell| (&REST #1=#:G500)
+(DEFUN |SimpleCell| (&REST #1=#:G70)
   (SPROG NIL
-         (PROG (#2=#:G501)
+         (PROG (#2=#:G71)
            (RETURN
             (COND
              ((LETT #2#

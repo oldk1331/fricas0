@@ -69,9 +69,9 @@
 
 (DECLAIM (NOTINLINE |MakeCachableSet;|)) 
 
-(DEFUN |MakeCachableSet| (#1=#:G469)
+(DEFUN |MakeCachableSet| (#1=#:G26)
   (SPROG NIL
-         (PROG (#2=#:G470)
+         (PROG (#2=#:G27)
            (RETURN
             (COND
              ((LETT #2#

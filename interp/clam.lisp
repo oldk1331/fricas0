@@ -917,7 +917,6 @@
 ; haddProp(ht,op,prop,val) ==
 ;   --called inside functors (except for union and record types ??)
 ;   --presently, ht always = $ConstructorCache
-;   statRecordInstantiationEvent()
 ;   if $reportInstantiations = true or $reportEachInstantiation = true then
 ;     startTimingProcess 'debug
 ;     recordInstantiation(op,prop,false)
@@ -937,7 +936,6 @@
     (DECLARE (SPECIAL |$op|))
     (RETURN
      (PROGN
-      (|statRecordInstantiationEvent|)
       (COND
        ((OR (EQUAL |$reportInstantiations| T)
             (EQUAL |$reportEachInstantiation| T))
@@ -1378,7 +1376,7 @@
 ; removeAllClams() ==
 ;   for [fun,:.] in $clamList repeat
 ;     sayBrightly ['"Un-clamming function",'%b,fun,'%d]
-;     SET(fun,eval INTERN STRCONC(STRINGIMAGE fun,'";"))
+;     SETF(SYMBOL_-FUNCTION fun, SYMBOL_-FUNCTION INTERN STRCONC(STRINGIMAGE fun,'";"))
 
 (DEFUN |removeAllClams| ()
   (PROG (|fun|)
@@ -1394,7 +1392,8 @@
                 (PROGN
                  (|sayBrightly|
                   (LIST "Un-clamming function" '|%b| |fun| '|%d|))
-                 (SET |fun|
-                      (|eval| (INTERN (STRCONC (STRINGIMAGE |fun|) ";"))))))))
+                 (SETF (SYMBOL-FUNCTION |fun|)
+                         (SYMBOL-FUNCTION
+                          (INTERN (STRCONC (STRINGIMAGE |fun|) ";"))))))))
          (SETQ |bfVar#47| (CDR |bfVar#47|))))
       |$clamList| NIL))))

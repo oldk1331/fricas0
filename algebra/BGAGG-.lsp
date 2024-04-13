@@ -1,6 +1,6 @@
 
 (SDEFUN |BGAGG-;construct;LA;1| ((|l| (|List| S)) (% (A)))
-        (SPROG ((|x| (A)) (#1=#:G459 NIL) (|s| NIL))
+        (SPROG ((|x| (A)) (#1=#:G20 NIL) (|s| NIL))
                (SEQ (LETT |x| (SPADCALL (QREFELT % 8)))
                     (SEQ (LETT |s| NIL) (LETT #1# |l|) G190
                          (COND

@@ -1,6 +1,6 @@
 
 (SDEFUN |FINITE-;random;S;1| ((% (S)))
-        (SPROG ((#1=#:G454 NIL))
+        (SPROG ((#1=#:G14 NIL))
                (SPADCALL
                 (PROG1 (LETT #1# (+ 1 (RANDOM (SPADCALL (QREFELT % 9)))))
                   (|check_subtype2| (> #1# 0) '(|PositiveInteger|)
@@ -8,7 +8,7 @@
                 (QREFELT % 11)))) 
 
 (SDEFUN |FINITE-;enumerate;L;2| ((% (|List| S)))
-        (SPROG ((#1=#:G458 NIL) (#2=#:G462 NIL) (|i| NIL) (#3=#:G461 NIL))
+        (SPROG ((#1=#:G24 NIL) (#2=#:G28 NIL) (|i| NIL) (#3=#:G27 NIL))
                (SEQ
                 (PROGN
                  (LETT #3# NIL)

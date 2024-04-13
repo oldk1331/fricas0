@@ -8,35 +8,23 @@
 ;   total := 0
 ;   str := '""
 ;   otherStatTotal := GET('other, property)
+;   insignificantStat := 0
 ;   for [name,class,:ab] in listofnames repeat
-;     name = 'other => 'iterate
 ;     cl := first LASSOC(class, listofclasses)
 ;     n := GET(name, property)
 ;     PUT(cl, classproperty, n + GET(cl, classproperty))
 ;     total := total + n
-;     if n >= 0.01
-;       then timestr := normalizeStatAndStringify n
-;       else
-;         timestr := '""
-;         otherStatTotal := otherStatTotal + n
-;     str := makeStatString(str,timestr,ab,flag)
-;   otherStatTotal := otherStatTotal
-;   PUT('other, property, otherStatTotal)
-;   if otherStatTotal > 0 then
-;     str := makeStatString(str,normalizeStatAndStringify otherStatTotal,'O,flag)
-;     total := total + otherStatTotal
-;     cl := first LASSOC('other, listofnames)
-;     cl := first LASSOC(cl, listofclasses)
-;     PUT(cl, classproperty, otherStatTotal + GET(cl, classproperty))
-;   if flag ~= 'long then
-;     total := 0
-;     str := '""
+;     name = 'other or flag ~= 'long => 'iterate
+;     if significantStat? n then
+;         str := makeStatString(str, n, name, flag)
+;     else
+;         insignificantStat := insignificantStat + n
+;   if flag = 'long then
+;     str := makeStatString(str, otherStatTotal + insignificantStat, 'other, flag)
+;   else
 ;     for [class,name,:ab] in listofclasses repeat
 ;       n := GET(name, classproperty)
-;       n = 0.0 => 'iterate
-;       total := total + n
-;       timestr := normalizeStatAndStringify n
-;       str := makeStatString(str,timestr,ab,flag)
+;       str := makeStatString(str, n, ab, flag)
 ;   total := STRCONC(normalizeStatAndStringify total,'" ", units)
 ;   str = '"" =>  total
 ;   STRCONC(str, '" = ", total)
@@ -44,13 +32,14 @@
 (DEFUN |makeLongStatStringByProperty|
        (|listofnames| |listofclasses| |property| |classproperty| |units|
         |flag|)
-  (PROG (|total| |str| |otherStatTotal| |name| |ISTMP#1| |class| |ab| |cl| |n|
-         |timestr|)
+  (PROG (|total| |str| |otherStatTotal| |insignificantStat| |name| |ISTMP#1|
+         |class| |ab| |cl| |n|)
     (RETURN
      (PROGN
       (SETQ |total| 0)
       (SETQ |str| "")
       (SETQ |otherStatTotal| (GET '|other| |property|))
+      (SETQ |insignificantStat| 0)
       ((LAMBDA (|bfVar#2| |bfVar#1|)
          (LOOP
           (COND
@@ -66,38 +55,29 @@
                         (SETQ |class| (CAR |ISTMP#1|))
                         (SETQ |ab| (CDR |ISTMP#1|))
                         #1#)))
-                 (COND ((EQ |name| '|other|) '|iterate|)
-                       (#1#
-                        (PROGN
-                         (SETQ |cl| (CAR (LASSOC |class| |listofclasses|)))
-                         (SETQ |n| (GET |name| |property|))
-                         (PUT |cl| |classproperty|
-                          (+ |n| (GET |cl| |classproperty|)))
-                         (SETQ |total| (+ |total| |n|))
-                         (COND
-                          ((NOT (< |n| 0.01))
-                           (SETQ |timestr| (|normalizeStatAndStringify| |n|)))
-                          (#1# (SETQ |timestr| "")
-                           (SETQ |otherStatTotal| (+ |otherStatTotal| |n|))))
-                         (SETQ |str|
-                                 (|makeStatString| |str| |timestr| |ab|
-                                  |flag|))))))))
+                 (PROGN
+                  (SETQ |cl| (CAR (LASSOC |class| |listofclasses|)))
+                  (SETQ |n| (GET |name| |property|))
+                  (PUT |cl| |classproperty| (+ |n| (GET |cl| |classproperty|)))
+                  (SETQ |total| (+ |total| |n|))
+                  (COND
+                   ((OR (EQ |name| '|other|) (NOT (EQ |flag| '|long|)))
+                    '|iterate|)
+                   (#1#
+                    (COND
+                     ((|significantStat?| |n|)
+                      (SETQ |str| (|makeStatString| |str| |n| |name| |flag|)))
+                     (#1#
+                      (SETQ |insignificantStat|
+                              (+ |insignificantStat| |n|))))))))))
           (SETQ |bfVar#2| (CDR |bfVar#2|))))
        |listofnames| NIL)
-      (SETQ |otherStatTotal| |otherStatTotal|)
-      (PUT '|other| |property| |otherStatTotal|)
       (COND
-       ((< 0 |otherStatTotal|)
+       ((EQ |flag| '|long|)
         (SETQ |str|
                 (|makeStatString| |str|
-                 (|normalizeStatAndStringify| |otherStatTotal|) 'O |flag|))
-        (SETQ |total| (+ |total| |otherStatTotal|))
-        (SETQ |cl| (CAR (LASSOC '|other| |listofnames|)))
-        (SETQ |cl| (CAR (LASSOC |cl| |listofclasses|)))
-        (PUT |cl| |classproperty|
-         (+ |otherStatTotal| (GET |cl| |classproperty|)))))
-      (COND
-       ((NOT (EQ |flag| '|long|)) (SETQ |total| 0) (SETQ |str| "")
+                 (+ |otherStatTotal| |insignificantStat|) '|other| |flag|)))
+       (#1#
         ((LAMBDA (|bfVar#4| |bfVar#3|)
            (LOOP
             (COND
@@ -116,14 +96,7 @@
                           #1#)))
                    (PROGN
                     (SETQ |n| (GET |name| |classproperty|))
-                    (COND ((EQUAL |n| 0.0) '|iterate|)
-                          (#1#
-                           (PROGN
-                            (SETQ |total| (+ |total| |n|))
-                            (SETQ |timestr| (|normalizeStatAndStringify| |n|))
-                            (SETQ |str|
-                                    (|makeStatString| |str| |timestr| |ab|
-                                     |flag|)))))))))
+                    (SETQ |str| (|makeStatString| |str| |n| |ab| |flag|))))))
             (SETQ |bfVar#4| (CDR |bfVar#4|))))
          |listofclasses| NIL)))
       (SETQ |total|
@@ -132,71 +105,54 @@
 
 ; normalizeStatAndStringify t ==
 ;   FLOATP t =>
-;       t := roundStat t
-;       t = 0.0 => '"0"
-;       FORMAT(nil,'"~,2F",t)
-;   INTEGERP t =>
-;       K := 1024
-;       M := K*K
-;       t > 9*M => CONCAT(STRINGIMAGE((t + 512*K)/M), '"M")
-;       t > 9*K => CONCAT(STRINGIMAGE((t + 512)/K),   '"K")
-;       STRINGIMAGE t
+;       not significantStat? t => '"0"
+;       fmtStr := STRCONC('"~,", STRINGIMAGE $timePrintDigits, '"F")
+;       FORMAT(nil, fmtStr, t)
+;   INTEGERP t => FORMAT(nil, '"~:d", t)
 ;   STRINGIMAGE t
 
 (DEFUN |normalizeStatAndStringify| (|t|)
-  (PROG (K M)
+  (PROG (|fmtStr|)
     (RETURN
      (COND
       ((FLOATP |t|)
-       (PROGN
-        (SETQ |t| (|roundStat| |t|))
-        (COND ((EQUAL |t| 0.0) "0") (#1='T (FORMAT NIL "~,2F" |t|)))))
-      ((INTEGERP |t|)
-       (PROGN
-        (SETQ K 1024)
-        (SETQ M (* K K))
-        (COND
-         ((< (* 9 M) |t|) (CONCAT (STRINGIMAGE (/ (+ |t| (* 512 K)) M)) "M"))
-         ((< (* 9 K) |t|) (CONCAT (STRINGIMAGE (/ (+ |t| 512) K)) "K"))
-         (#1# (STRINGIMAGE |t|)))))
-      (#1# (STRINGIMAGE |t|))))))
-
-; significantStat t ==
-;    FLOATP t => (t > 0.01)
-;    INTEGERP  t => (t > 100)
-;    true
-
-(DEFUN |significantStat| (|t|)
-  (PROG ()
-    (RETURN
-     (COND ((FLOATP |t|) (< 0.01 |t|)) ((INTEGERP |t|) (< 100 |t|)) ('T T)))))
-
-; roundStat t ==
-;   not FLOATP t => t
-;   (TRUNCATE (0.5 + t * 1000.0)) / 1000.0
-
-(DEFUN |roundStat| (|t|)
-  (PROG ()
-    (RETURN
-     (COND ((NULL (FLOATP |t|)) |t|)
-           ('T (/ (TRUNCATE (+ 0.5 (* |t| 1000.0))) 1000.0))))))
+       (COND ((NULL (|significantStat?| |t|)) "0")
+             (#1='T
+              (PROGN
+               (SETQ |fmtStr|
+                       (STRCONC "~," (STRINGIMAGE |$timePrintDigits|) "F"))
+               (FORMAT NIL |fmtStr| |t|)))))
+      ((INTEGERP |t|) (FORMAT NIL "~:d" |t|)) (#1# (STRINGIMAGE |t|))))))
 
 ; makeStatString(oldstr,time,abb,flag) ==
-;   time = '"" => oldstr
+;   not significantStat? time => oldstr
 ;   opening := (flag = 'long => '"("; '" (")
-;   oldstr = '"" => STRCONC(time,opening,abb,'")")
-;   STRCONC(oldstr,'" + ",time,opening,abb,'")")
+;   timestr := normalizeStatAndStringify time
+;   oldstr = '"" => STRCONC(timestr, opening, abb, '")")
+;   STRCONC(oldstr, '" + ", timestr, opening, abb, '")")
 
 (DEFUN |makeStatString| (|oldstr| |time| |abb| |flag|)
-  (PROG (|opening|)
+  (PROG (|opening| |timestr|)
     (RETURN
-     (COND ((EQUAL |time| "") |oldstr|)
+     (COND ((NULL (|significantStat?| |time|)) |oldstr|)
            (#1='T
             (PROGN
              (SETQ |opening| (COND ((EQ |flag| '|long|) "(") (#1# " (")))
-             (COND ((EQUAL |oldstr| "") (STRCONC |time| |opening| |abb| ")"))
-                   (#1#
-                    (STRCONC |oldstr| " + " |time| |opening| |abb| ")")))))))))
+             (SETQ |timestr| (|normalizeStatAndStringify| |time|))
+             (COND
+              ((EQUAL |oldstr| "") (STRCONC |timestr| |opening| |abb| ")"))
+              (#1#
+               (STRCONC |oldstr| " + " |timestr| |opening| |abb| ")")))))))))
+
+; significantStat? s ==
+;   INTEGERP s => s ~= 0
+;   s >= 0.1^$timePrintDigits
+
+(DEFUN |significantStat?| (|s|)
+  (PROG ()
+    (RETURN
+     (COND ((INTEGERP |s|) (NOT (EQL |s| 0)))
+           ('T (NOT (< |s| (EXPT 0.1 |$timePrintDigits|))))))))
 
 ; peekTimedName() == IFCAR $timedNameStack
 
@@ -224,15 +180,11 @@
 ; startTimingProcess name ==
 ;   updateTimedName peekTimedName()
 ;   pushTimedName name
-;   if EQ(name, 'load) then          statRecordLoadEvent()
 
 (DEFUN |startTimingProcess| (|name|)
   (PROG ()
     (RETURN
-     (PROGN
-      (|updateTimedName| (|peekTimedName|))
-      (|pushTimedName| |name|)
-      (COND ((EQ |name| '|load|) (|statRecordLoadEvent|)))))))
+     (PROGN (|updateTimedName| (|peekTimedName|)) (|pushTimedName| |name|)))))
 
 ; stopTimingProcess name ==
 ;   (name ~= peekTimedName()) and null $InteractiveMode =>
@@ -260,9 +212,9 @@
 
 (DEFPARAMETER |$oldElapsedTime| 0.0)
 
-; DEFPARAMETER($gcTimeTotal, 0.0)
+; DEFPARAMETER($timePrintDigits, 2)
 
-(DEFPARAMETER |$gcTimeTotal| 0.0)
+(DEFPARAMETER |$timePrintDigits| 2)
 
 ; DEFPARAMETER($timedNameStack, '(other))
 
@@ -286,6 +238,7 @@
 ;   (other          3 .   O) _
 ;   (diskread       3 .   K) _
 ;   (resolve        1 .   R) _
+;   (print          3 .   P) _
 ;   ))
 
 (DEFPARAMETER |$interpreterTimedNames|
@@ -293,7 +246,7 @@
     (|compilation| 3 . T) (|debug| 3 . D) (|evaluation| 2 . E) (|gc| 4 . G)
     (|history| 3 . H) (|instantiation| 3 . I) (|load| 3 . L) (|modemaps| 1 . M)
     (|optimization| 3 . Z) (|querycoerce| 1 . Q) (|other| 3 . O)
-    (|diskread| 3 . K) (|resolve| 1 . R)))
+    (|diskread| 3 . K) (|resolve| 1 . R) (|print| 3 . P)))
 
 ; DEFPARAMETER($interpreterTimedClasses, '(
 ; -- number class name    short name
@@ -316,6 +269,7 @@
 ;     PUT( name, 'ClassSpaceTotal,  0)
 ;   $timedNameStack := '(other)
 ;   computeElapsedTime()
+;   computeElapsedSpace()
 ;   PUT('gc, 'TimeTotal, 0.0)
 ;   PUT('gc, 'SpaceTotal,  0)
 ;   NIL
@@ -354,6 +308,7 @@
        |listofclasses| NIL)
       (SETQ |$timedNameStack| '(|other|))
       (|computeElapsedTime|)
+      (|computeElapsedSpace|)
       (PUT '|gc| '|TimeTotal| 0.0)
       (PUT '|gc| '|SpaceTotal| 0)
       NIL))))
@@ -361,6 +316,8 @@
 ; updateTimedName name ==
 ;   count := (GET(name, 'TimeTotal) or 0) + computeElapsedTime()
 ;   PUT(name, 'TimeTotal, count)
+;   count := (GET(name, 'SpaceTotal) or 0) + computeElapsedSpace()
+;   PUT(name, 'SpaceTotal, count)
 
 (DEFUN |updateTimedName| (|name|)
   (PROG (|count|)
@@ -368,7 +325,10 @@
      (PROGN
       (SETQ |count|
               (+ (OR (GET |name| '|TimeTotal|) 0) (|computeElapsedTime|)))
-      (PUT |name| '|TimeTotal| |count|)))))
+      (PUT |name| '|TimeTotal| |count|)
+      (SETQ |count|
+              (+ (OR (GET |name| '|SpaceTotal|) 0) (|computeElapsedSpace|)))
+      (PUT |name| '|SpaceTotal| |count|)))))
 
 ; makeLongTimeString(listofnames,listofclasses) ==
 ;   makeLongStatStringByProperty(listofnames, listofclasses,  _
@@ -397,8 +357,7 @@
 (DEFPARAMETER |$inverseTimerTicksPerSecond| (/ 1.0 |$timerTicksPerSecond|))
 
 ; computeElapsedTime() ==
-;   -- in total time lists, CAR is VIRTCPU and CADR is TOTCPU
-;   currentTime:= elapsedUserTime()
+;   currentTime:= get_run_time()
 ;   currentGCTime:= elapsedGcTime()
 ;   gcDelta := currentGCTime - $oldElapsedGCTime
 ;   elapsedSeconds:= $inverseTimerTicksPerSecond *
@@ -413,7 +372,7 @@
   (PROG (|elapsedSeconds| |gcDelta| |currentGCTime| |currentTime|)
     (RETURN
      (PROGN
-      (SETQ |currentTime| (|elapsedUserTime|))
+      (SETQ |currentTime| (|get_run_time|))
       (SETQ |currentGCTime| (|elapsedGcTime|))
       (SETQ |gcDelta| (- |currentGCTime| |$oldElapsedGCTime|))
       (SETQ |elapsedSeconds|
@@ -513,23 +472,3 @@
            (SETQ |bfVar#9| (CDR |bfVar#9|))))
         NIL (|splitIntoBlocksOf200| |a|) NIL))
       (#1# (|eval| |code|))))))
-
-; displayHeapStatsIfWanted() ==
-;    $printStorageIfTrue => sayBrightly OLDHEAPSTATS()
-
-(DEFUN |displayHeapStatsIfWanted| ()
-  (PROG ()
-    (RETURN
-     (COND (|$printStorageIfTrue| (IDENTITY (|sayBrightly| (OLDHEAPSTATS))))))))
-
-; statRecordInstantiationEvent() == nil
-
-(DEFUN |statRecordInstantiationEvent| () (PROG () (RETURN NIL)))
-
-; statRecordLoadEvent()          == nil
-
-(DEFUN |statRecordLoadEvent| () (PROG () (RETURN NIL)))
-
-; statisticsSummary()  == '"No statistics available."
-
-(DEFUN |statisticsSummary| () (PROG () (RETURN "No statistics available.")))

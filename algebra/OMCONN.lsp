@@ -36,7 +36,7 @@
 
 (DEFUN |OpenMathConnection| ()
   (SPROG NIL
-         (PROG (#1=#:G455)
+         (PROG (#1=#:G10)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OpenMathConnection|))

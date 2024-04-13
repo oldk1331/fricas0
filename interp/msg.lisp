@@ -5,61 +5,62 @@
 
 ; $compBugPrefix :=      '"Bug!"
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$compBugPrefix| "Bug!"))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$compBugPrefix| "Bug!"))
 
 ; $compErrorPrefix :=    '"Error"
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$compErrorPrefix| "Error"))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$compErrorPrefix| "Error"))
 
 ; $nopos   := ['noposition]
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$nopos| (LIST '|noposition|)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$nopos| (LIST '|noposition|)))
 
 ; $showKeyNum   :=        NIL
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$showKeyNum| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$showKeyNum| NIL))
 
 ; $newcompErrorCount :=           0
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$newcompErrorCount| 0))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$newcompErrorCount| 0))
 
 ; $preLength := 11
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$preLength| 11))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$preLength| 11))
 
 ; $LOGLENGTH := $LINELENGTH - 6
 
-(EVAL-WHEN (EVAL LOAD) (SETQ $LOGLENGTH (- $LINELENGTH 6)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ $LOGLENGTH (- $LINELENGTH 6)))
 
 ; $specificMsgTags := []
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$specificMsgTags| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$specificMsgTags| NIL))
 
 ; $imPrTagGuys := ['unimple, 'bug, 'debug, 'say, 'warn]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$imPrTagGuys| (LIST '|unimple| '|bug| '|debug| '|say| '|warn|)))
 
 ; $toWhereGuys := ['fileOnly, 'screenOnly ]
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$toWhereGuys| (LIST '|fileOnly| '|screenOnly|)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$toWhereGuys| (LIST '|fileOnly| '|screenOnly|)))
 
 ; $imPrGuys    := ['imPr]
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$imPrGuys| (LIST '|imPr|)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$imPrGuys| (LIST '|imPr|)))
 
 ; $repGuys     := ['noRep, 'rep]
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$repGuys| (LIST '|noRep| '|rep|)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$repGuys| (LIST '|noRep| '|rep|)))
 
 ; $attrCats    := ['$imPrGuys, '$toWhereGuys, '$repGuys]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$attrCats| (LIST '|$imPrGuys| '|$toWhereGuys| '|$repGuys|)))
 
 ; $ncMsgList := nil
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$ncMsgList| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$ncMsgList| NIL))
 
 ; ncSoftError(pos, erMsgKey, erArgL) ==
 ;   $newcompErrorCount := $newcompErrorCount + 1

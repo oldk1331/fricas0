@@ -2,7 +2,7 @@
 (SDEFUN |DIFEXT-;differentiate;SMNniS;1|
         ((|x| (S)) (|derivation| (|Mapping| R R)) (|n| (|NonNegativeInteger|))
          (% (S)))
-        (SPROG ((#1=#:G460 NIL) (|i| NIL))
+        (SPROG ((#1=#:G23 NIL) (|i| NIL))
                (SEQ
                 (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))

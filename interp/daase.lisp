@@ -258,8 +258,6 @@ database.
 
 (defvar |$miss| nil "print out cache misses on getdatabase calls")
 
-(defvar |$do_not_compress_databases| t)
-
    ; note that constructorcategory information need only be kept for
    ; items of type category. this will be fixed in the next iteration
    ; when the need for the various caches are reviewed
@@ -307,7 +305,7 @@ database.
  "call the aldor compiler"
  (#| system::system |#
    obey
-   (concatenate 'string (|getEnv| "FRICAS") "/compiler/bin/aldor "
+   (concatenate 'string |$spadroot| "/compiler/bin/aldor "
     flags " " file)))
 
 (defun resethashtables (display_messages)
@@ -406,13 +404,13 @@ database.
   |UnaryRecursiveAggregate&| |OrderedSet&| |AbelianGroup&| |Algebra&|
   |Module&| |Ring&| |StringAggregate&| |AbelianMonoid&|
   |ExtensibleLinearAggregate&| |PositiveInteger| |StreamAggregate&|
-  |IndexedString| |IndexedList| |ListAggregate&| |LinearAggregate&|
+  |IndexedString| |ListAggregate&| |LinearAggregate&|
   |Character| |String| |NonNegativeInteger| |SingleInteger|
   |OneDimensionalArrayAggregate&| |FiniteLinearAggregate&| |PrimitiveArray|
   |Integer| |List| |OutputForm|))
  (dolist (con constr)
   (let ((c (concatenate 'string
-             (|getEnv| "FRICAS") "/algebra/"
+             |$spadroot| "/algebra/"
              (string (getdatabase con 'abbreviation)) "." |$lisp_bin_filetype|)))
     (if display_messages
         (format t "   preloading ~a.." c))
@@ -490,7 +488,7 @@ database.
 ; system files is only the filename and extension. for user files it
 ; contains the full pathname. when the database is first opened the
 ; sourcefile slot contains system names. the lookup function
-; has to prefix the $spadroot information if the directory-namestring is
+; has to prefix the |$spadroot| information if the directory-namestring is
 ; null (we don't know the real root at database build time).
 ; a object-hash table is set up to look up nrlib and ao information.
 ; this slot is empty until a user does a )library call. we remember
@@ -663,7 +661,7 @@ database.
      (setf (get constructor 'abbreviationfor) nil)))))
 
 (defun getdatabase (constructor key)
- (declare (special $spadroot) (special |$miss|))
+ (declare (special |$spadroot|) (special |$miss|))
  (when (eq |$miss| t) (format t "getdatabase call: ~20a ~a~%" constructor key))
  (let (data table stream struct)
   (when (or (symbolp constructor)
@@ -795,7 +793,7 @@ database.
      (when (and data (string= (directory-namestring data) "")
              (string= (pathname-type data) "spad"))
       (setq data
-       (concatenate 'string $spadroot "/../../src/algebra/" data))))
+       (concatenate 'string |$spadroot| "/../../src/algebra/" data))))
     (asharp?                               ; is this asharp code?
      (if (consp data)
       (setq data (cdr data))
@@ -804,11 +802,11 @@ database.
      (if (consp data)
        (setq data
              (if (string= (directory-namestring (car data)) "")
-                 (concatenate 'string $spadroot "/algebra/" (car data)
+                 (concatenate 'string |$spadroot| "/algebra/" (car data)
                                         "." |$lisp_bin_filetype|)
                (car data)))
       (when (and data (string= (directory-namestring data) ""))
-       (setq data (concatenate 'string $spadroot "/algebra/" data
+       (setq data (concatenate 'string |$spadroot| "/algebra/" data
                                           "." |$lisp_bin_filetype|)))))))
   data))
 
@@ -1180,12 +1178,12 @@ database.
 
 (defun DaaseName (name)
  (let (daase filename)
-  (declare (special $spadroot))
+  (declare (special |$spadroot|))
   (if (setq daase (|getEnv| "DAASE"))
    (progn
     (setq filename  (concatenate 'string daase "/algebra/" name))
     (format t "   Using local database ~a.." filename))
-   (setq filename (concatenate 'string $spadroot "/algebra/" name)))
+   (setq filename (concatenate 'string |$spadroot| "/algebra/" name)))
   filename))
 
 ;; The compress database is special. It contains a list of symbols.
@@ -1209,7 +1207,8 @@ database.
    (setq lst (read |$compress_stream|))
    (setq |$compress_vector_length| (car lst))
    (setq |$compress_vector|
-     (make-array (car lst) :initial-contents (cdr lst))))))
+     (make-array (car lst) :initial-contents (cdr lst)))))
+   (format t "~&"))
 
 (defun write-compress ()
  (let (compresslist masterpos out)
@@ -1425,7 +1424,7 @@ database.
 
 ;; following needs to happen inside restart since $FRICAS may change
 (defun |createInitializers2| ()
- (let ((asharprootlib (strconc (|getEnv| "FRICAS") "/aldor/lib/")))
+ (let ((asharprootlib (strconc |$spadroot| "/aldor/lib/")))
    (set-file-getter (strconc asharprootlib "runtime"))
    (set-file-getter (strconc asharprootlib "lang"))
    (set-file-getter (strconc asharprootlib "attrib"))

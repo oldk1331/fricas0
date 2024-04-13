@@ -7,7 +7,7 @@
                         (|:| |basis| (|List| F)))
            L F))
          (% (|Record| (|:| |ltilde| L) (|:| |r| (|Union| L "failed")))))
-        (SPROG ((|rt| (L)) (#3=#:G452 NIL) (|rec| #1#) (|a| (L)))
+        (SPROG ((|rt| (L)) (#3=#:G5 NIL) (|rec| #1#) (|a| (L)))
                (SEQ (LETT |a| (SPADCALL |l| (QREFELT % 8)))
                     (LETT |rec|
                           (SPADCALL |a| (|spadConstant| % 9) |rat_solve|))
@@ -49,9 +49,9 @@
 
 (DECLAIM (NOTINLINE |IntegrateSolutions;|)) 
 
-(DEFUN |IntegrateSolutions| (&REST #1=#:G469)
+(DEFUN |IntegrateSolutions| (&REST #1=#:G27)
   (SPROG NIL
-         (PROG (#2=#:G470)
+         (PROG (#2=#:G28)
            (RETURN
             (COND
              ((LETT #2#

@@ -1,5 +1,5 @@
 
-(SDEFUN |RCAGG-;elt;AvalueS;1| ((|x| (A)) (T3 ("value")) (% (S)))
+(SDEFUN |RCAGG-;elt;AvalueS;1| ((|x| (A)) (T1 ("value")) (% (S)))
         (SPADCALL |x| (QREFELT % 8))) 
 
 (SDEFUN |RCAGG-;leaf?;AB;2| ((|x| (A)) (% (|Boolean|)))
@@ -7,7 +7,7 @@
               ('T (NULL (SPADCALL |x| (QREFELT % 14)))))) 
 
 (SDEFUN |RCAGG-;nodes;AL;3| ((|x| (A)) (% (|List| A)))
-        (SPROG ((#1=#:G468 NIL) (|y| NIL) (#2=#:G467 NIL))
+        (SPROG ((#1=#:G40 NIL) (|y| NIL) (#2=#:G39 NIL))
                (SEQ
                 (COND ((SPADCALL |x| (QREFELT % 12)) NIL)
                       ('T
@@ -32,7 +32,7 @@
                               (QREFELT % 18)))))))) 
 
 (SDEFUN |RCAGG-;leaves;AL;4| ((|x| (A)) (% (|List| S)))
-        (SPROG ((#1=#:G475 NIL) (|y| NIL) (#2=#:G474 NIL))
+        (SPROG ((#1=#:G47 NIL) (|y| NIL) (#2=#:G46 NIL))
                (SEQ
                 (COND ((SPADCALL |x| (QREFELT % 12)) NIL)
                       ((SPADCALL |x| (QREFELT % 20))
@@ -57,7 +57,7 @@
                         (QREFELT % 23))))))) 
 
 (SDEFUN |RCAGG-;setelt!;Avalue2S;5|
-        ((|x| (A)) (T4 ("value")) (|y| (S)) (% (S)))
+        ((|x| (A)) (T3 ("value")) (|y| (S)) (% (S)))
         (SPADCALL |x| |y| (QREFELT % 25))) 
 
 (SDEFUN |RCAGG-;child?;2AB;6| ((|x| (A)) (|l| (A)) (% (|Boolean|)))
@@ -65,7 +65,7 @@
               ('T (SPADCALL |x| (SPADCALL |l| (QREFELT % 14)) (QREFELT % 27))))) 
 
 (SDEFUN |RCAGG-;parts;AL;7| ((|x| (A)) (% (|List| S)))
-        (SPROG ((#1=#:G483 NIL) (|i| NIL) (#2=#:G482 NIL))
+        (SPROG ((#1=#:G55 NIL) (|i| NIL) (#2=#:G54 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)

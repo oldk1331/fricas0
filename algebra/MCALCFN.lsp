@@ -1,7 +1,7 @@
 
 (SDEFUN |MCALCFN;localGradient|
         ((|v| (F)) (|xlist| (|List| S)) (% (|Vector| F)))
-        (SPROG ((#1=#:G452 NIL) (|x| NIL) (#2=#:G451 NIL))
+        (SPROG ((#1=#:G12 NIL) (|x| NIL) (#2=#:G11 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -27,8 +27,8 @@
 (SDEFUN |MCALCFN;localDivergence|
         ((|vf| (|Vector| F)) (|xlist| (|List| S)) (% (F)))
         (SPROG
-         ((|ans| (F)) (#1=#:G460 NIL) (|i| NIL) (|n| (|NonNegativeInteger|))
-          (#2=#:G455 NIL))
+         ((|ans| (F)) (#1=#:G32 NIL) (|i| NIL) (|n| (|NonNegativeInteger|))
+          (#2=#:G17 NIL))
          (SEQ
           (LETT |n|
                 (MIN (LENGTH |xlist|)
@@ -53,8 +53,8 @@
 (SDEFUN |MCALCFN;divergence;FLAFFLASF;4|
         ((|vf| (FLAF)) (|xflas| (FLAS)) (% (F)))
         (SPROG
-         ((|ans| (F)) (#1=#:G466 NIL) (|i| NIL) (|n| (|NonNegativeInteger|))
-          (#2=#:G461 NIL) (|xlist| (|List| S)))
+         ((|ans| (F)) (#1=#:G38 NIL) (|i| NIL) (|n| (|NonNegativeInteger|))
+          (#2=#:G33 NIL) (|xlist| (|List| S)))
          (SEQ (LETT |xlist| (SPADCALL |xflas| (QREFELT % 15)))
               (LETT |n|
                     (MIN (LENGTH |xlist|)
@@ -85,8 +85,8 @@
 (SDEFUN |MCALCFN;hessian;FFLASM;6|
         ((|v| (F)) (|xflas| (FLAS)) (% (|Matrix| F)))
         (SPROG
-         ((#1=#:G478 NIL) (|x| NIL) (#2=#:G477 NIL) (#3=#:G476 NIL) (|y| NIL)
-          (#4=#:G475 NIL) (|xlist| (|List| S)))
+         ((#1=#:G51 NIL) (|x| NIL) (#2=#:G50 NIL) (#3=#:G49 NIL) (|y| NIL)
+          (#4=#:G48 NIL) (|xlist| (|List| S)))
          (SEQ (LETT |xlist| (SPADCALL |xflas| (QREFELT % 15)))
               (EXIT
                (SPADCALL
@@ -124,8 +124,8 @@
 (SDEFUN |MCALCFN;jacobian;FLAFFLASM;7|
         ((|vf| (FLAF)) (|xflas| (FLAS)) (% (|Matrix| F)))
         (SPROG
-         ((#1=#:G488 NIL) (|x| NIL) (#2=#:G487 NIL) (#3=#:G486 NIL) (|i| NIL)
-          (#4=#:G485 NIL) (|xlist| (|List| S)))
+         ((#1=#:G61 NIL) (|x| NIL) (#2=#:G60 NIL) (#3=#:G59 NIL) (|i| NIL)
+          (#4=#:G58 NIL) (|xlist| (|List| S)))
          (SEQ (LETT |xlist| (SPADCALL |xflas| (QREFELT % 15)))
               (EXIT
                (SPADCALL
@@ -164,7 +164,7 @@
         ((|v| (F)) (|xflas| (FLAS)) (|k| (|NonNegativeInteger|))
          (% (|Matrix| F)))
         (SPROG
-         ((#1=#:G499 NIL) (|j| NIL) (#2=#:G498 NIL) (|iw| NIL) (#3=#:G497 NIL)
+         ((#1=#:G72 NIL) (|j| NIL) (#2=#:G71 NIL) (|iw| NIL) (#3=#:G70 NIL)
           (|bandM| (|Matrix| F)) (|n| (|NonNegativeInteger|))
           (|xlist| (|List| S)))
          (SEQ (LETT |xlist| (SPADCALL |xflas| (QREFELT % 15)))
@@ -206,8 +206,8 @@
 (SDEFUN |MCALCFN;jacobian;FLAFFLASM;9|
         ((|vf| (FLAF)) (|xflas| (FLAS)) (% (|Matrix| F)))
         (SPROG
-         ((#1=#:G509 NIL) (|x| NIL) (#2=#:G508 NIL) (#3=#:G507 NIL) (|i| NIL)
-          (#4=#:G506 NIL) (|xlist| (|List| S)))
+         ((#1=#:G82 NIL) (|x| NIL) (#2=#:G81 NIL) (#3=#:G80 NIL) (|i| NIL)
+          (#4=#:G79 NIL) (|xlist| (|List| S)))
          (SEQ (LETT |xlist| (SPADCALL |xflas| (QREFELT % 15)))
               (EXIT
                (SPADCALL
@@ -246,8 +246,8 @@
         ((|vf| (FLAF)) (|xflas| (FLAS)) (|kl| (|NonNegativeInteger|))
          (|ku| (|NonNegativeInteger|)) (% (|Matrix| F)))
         (SPROG
-         ((#1=#:G526 NIL) (|j| NIL) (#2=#:G525 NIL) (|iw| NIL) (#3=#:G524 NIL)
-          (#4=#:G523 NIL) (#5=#:G522 NIL) (|bandM| (|Matrix| F))
+         ((#1=#:G99 NIL) (|j| NIL) (#2=#:G98 NIL) (|iw| NIL) (#3=#:G97 NIL)
+          (#4=#:G96 NIL) (#5=#:G95 NIL) (|bandM| (|Matrix| F))
           (|n| (|NonNegativeInteger|)) (|xlist| (|List| S)))
          (SEQ (LETT |xlist| (SPADCALL |xflas| (QREFELT % 15)))
               (LETT |n| (LENGTH |xlist|))
@@ -305,9 +305,9 @@
 
 (DECLAIM (NOTINLINE |MultiVariableCalculusFunctions;|)) 
 
-(DEFUN |MultiVariableCalculusFunctions| (&REST #1=#:G527)
+(DEFUN |MultiVariableCalculusFunctions| (&REST #1=#:G100)
   (SPROG NIL
-         (PROG (#2=#:G528)
+         (PROG (#2=#:G101)
            (RETURN
             (COND
              ((LETT #2#

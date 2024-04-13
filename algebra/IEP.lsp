@@ -89,7 +89,7 @@
 (SDEFUN |IEP;characteristicPolynomial;MSup;9|
         ((A (|Matrix| F)) (% (|SparseUnivariatePolynomial| F)))
         (SPROG
-         ((#1=#:G490 NIL) (|j| NIL) (#2=#:G489 NIL) (|i| NIL)
+         ((#1=#:G64 NIL) (|j| NIL) (#2=#:G63 NIL) (|i| NIL)
           (B (|Matrix| (|SparseUnivariatePolynomial| F)))
           (|dimA| (|NonNegativeInteger|)))
          (SEQ (LETT |dimA| (ANROWS A))
@@ -133,10 +133,10 @@
                      (|SparseUnivariatePolynomial| F)))
          (% (|List| (|Union| F (|SparseUnivariatePolynomial| F)))))
         (SPROG
-         ((#1=#:G509 NIL) (|ls| NIL) (#2=#:G508 NIL) (#3=#:G507 NIL) (|lr| NIL)
-          (#4=#:G506 NIL) (|lsym| (|List| (|SparseUnivariatePolynomial| F)))
+         ((#1=#:G83 NIL) (|ls| NIL) (#2=#:G82 NIL) (#3=#:G81 NIL) (|lr| NIL)
+          (#4=#:G80 NIL) (|lsym| (|List| (|SparseUnivariatePolynomial| F)))
           (|lrat| (|List| F)) (|rv| (F))
-          (|f1| (|SparseUnivariatePolynomial| F)) (#5=#:G505 NIL) (|fr| NIL)
+          (|f1| (|SparseUnivariatePolynomial| F)) (#5=#:G79 NIL) (|fr| NIL)
           (|fp| (|Factored| (|SparseUnivariatePolynomial| F)))
           (|pol| (|SparseUnivariatePolynomial| F)))
          (SEQ (LETT |pol| (SPADCALL A (QREFELT % 38))) (LETT |lrat| NIL)
@@ -194,9 +194,9 @@
          (% (|List| (|Vector| (|SparseUnivariatePolynomial| F)))))
         (SPROG
          ((|sol| (|List| (|Vector| (|SparseUnivariatePolynomial| F))))
-          (#1=#:G529 NIL) (|i| NIL)
-          (|w| (|Vector| (|SparseUnivariatePolynomial| F))) (#2=#:G528 NIL)
-          (|v| NIL) (#3=#:G527 NIL) (|j| NIL) (#4=#:G526 NIL) (B (|Matrix| F))
+          (#1=#:G107 NIL) (|i| NIL)
+          (|w| (|Vector| (|SparseUnivariatePolynomial| F))) (#2=#:G106 NIL)
+          (|v| NIL) (#3=#:G105 NIL) (|j| NIL) (#4=#:G104 NIL) (B (|Matrix| F))
           (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (ANROWS A)) (LETT B (SPADCALL |n| |n| (QREFELT % 64)))
               (SEQ (LETT |i| 1) (LETT #4# |n|) G190
@@ -247,9 +247,9 @@
          (% (|List| (|Vector| (|SparseUnivariatePolynomial| F)))))
         (SPROG
          ((|sol| (|List| (|Vector| (|SparseUnivariatePolynomial| F))))
-          (#1=#:G559 NIL) (|i| NIL)
-          (|w| (|Vector| (|SparseUnivariatePolynomial| F))) (#2=#:G558 NIL)
-          (|vec| NIL) (#3=#:G557 NIL) (|j| NIL) (#4=#:G556 NIL) (B (AM))
+          (#1=#:G138 NIL) (|i| NIL)
+          (|w| (|Vector| (|SparseUnivariatePolynomial| F))) (#2=#:G137 NIL)
+          (|vec| NIL) (#3=#:G136 NIL) (|j| NIL) (#4=#:G135 NIL) (B (AM))
           (|alg| (MM)) (|pol| (|SparseUnivariatePolynomial| F))
           (AM
            (|Join| (|MatrixCategory| MM (|Vector| MM) (|Vector| MM))
@@ -417,7 +417,7 @@
          (A (|Matrix| F)) (|k| (|NonNegativeInteger|))
          (|g| (|NonNegativeInteger|))
          (% (|List| (|Vector| (|SparseUnivariatePolynomial| F)))))
-        (SPROG ((#1=#:G564 NIL) (#2=#:G563 NIL))
+        (SPROG ((#1=#:G143 NIL) (#2=#:G142 NIL))
                (COND
                 ((QEQCAR |alpha| 0)
                  (|IEP;intRatEig| (QCDR |alpha|) A
@@ -456,7 +456,7 @@
             (|:| |geneigvec|
                  (|List| (|Vector| (|SparseUnivariatePolynomial| F))))))))
         (SPROG
-         ((#1=#:G578 NIL) (|leg| NIL) (#2=#:G577 NIL)
+         ((#1=#:G157 NIL) (|leg| NIL) (#2=#:G156 NIL)
           (|leig|
            (|List|
             (|Record|
@@ -499,7 +499,7 @@
                 (|:| |eigvec|
                      (|List| (|Vector| (|SparseUnivariatePolynomial| F)))))))
           (|alpha| #2=(|SparseUnivariatePolynomial| F)) (|ratSol| #1#)
-          (|vec| (F)) (|pol| #2#) (#3=#:G591 NIL) (|fact| NIL)
+          (|vec| (F)) (|pol| #2#) (#3=#:G170 NIL) (|fact| NIL)
           (|lff|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
@@ -545,9 +545,9 @@
 
 (DECLAIM (NOTINLINE |InnerEigenPackage;|)) 
 
-(DEFUN |InnerEigenPackage| (#1=#:G592)
+(DEFUN |InnerEigenPackage| (#1=#:G171)
   (SPROG NIL
-         (PROG (#2=#:G593)
+         (PROG (#2=#:G172)
            (RETURN
             (COND
              ((LETT #2#

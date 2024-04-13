@@ -15,7 +15,7 @@
 
 (SDEFUN |TANEXP;tanNa;RIR;3| ((|a| (R)) (|n| (|Integer|)) (% (R)))
         (SPROG
-         ((|t| (|Fraction| (|SparseUnivariatePolynomial| R))) (#1=#:G458 NIL))
+         ((|t| (|Fraction| (|SparseUnivariatePolynomial| R))) (#1=#:G21 NIL))
          (COND ((ZEROP |n|) (|spadConstant| % 16))
                ((MINUSP |n|)
                 (SPADCALL (SPADCALL |a| (- |n|) (QREFELT % 18))
@@ -37,9 +37,9 @@
 
 (SDEFUN |TANEXP;tanSum;LR;4| ((|l| (|List| R)) (% (R)))
         (SPROG
-         ((#1=#:G466 NIL) (#2=#:G465 (R)) (#3=#:G467 (R)) (#4=#:G472 NIL)
-          (|i| NIL) (#5=#:G463 NIL) (#6=#:G462 (R)) (#7=#:G464 (R))
-          (#8=#:G471 NIL) (|m| (|Integer|)) (|v| (|Vector| R)))
+         ((#1=#:G35 NIL) (#2=#:G34 (R)) (#3=#:G36 (R)) (#4=#:G41 NIL) (|i| NIL)
+          (#5=#:G32 NIL) (#6=#:G31 (R)) (#7=#:G33 (R)) (#8=#:G40 NIL)
+          (|m| (|Integer|)) (|v| (|Vector| R)))
          (SEQ
           (COND ((NULL |l|) (|spadConstant| % 16))
                 (#9='T
@@ -106,9 +106,9 @@
         ((|n| (|PositiveInteger|))
          (% (|Fraction| (|SparseUnivariatePolynomial| R))))
         (SPROG
-         ((#1=#:G477 NIL) (#2=#:G476 #3=(|SparseUnivariatePolynomial| R))
-          (#4=#:G478 #3#) (#5=#:G482 NIL) (|i| NIL) (#6=#:G474 NIL)
-          (#7=#:G473 #3#) (#8=#:G475 #3#) (#9=#:G481 NIL) (|m| (|Integer|))
+         ((#1=#:G46 NIL) (#2=#:G45 #3=(|SparseUnivariatePolynomial| R))
+          (#4=#:G47 #3#) (#5=#:G51 NIL) (|i| NIL) (#6=#:G43 NIL) (#7=#:G42 #3#)
+          (#8=#:G44 #3#) (#9=#:G50 NIL) (|m| (|Integer|))
           (|v| (|Vector| (|SparseUnivariatePolynomial| R))))
          (SEQ
           (LETT |m|
@@ -163,9 +163,9 @@
 
 (DECLAIM (NOTINLINE |TangentExpansions;|)) 
 
-(DEFUN |TangentExpansions| (#1=#:G483)
+(DEFUN |TangentExpansions| (#1=#:G52)
   (SPROG NIL
-         (PROG (#2=#:G484)
+         (PROG (#2=#:G53)
            (RETURN
             (COND
              ((LETT #2#

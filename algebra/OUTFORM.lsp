@@ -53,7 +53,7 @@
 
 (SDEFUN |OUTFORM;convert;%If;14| ((|a| (%)) (% (|InputForm|)))
         (SPROG
-         ((#1=#:G2100 NIL) (|b| (|SExpression|)) (|d| (|String|))
+         ((#1=#:G1692 NIL) (|b| (|SExpression|)) (|d| (|String|))
           (|l| (|Integer|)) (|c| (|String|)))
          (SEQ
           (EXIT
@@ -94,7 +94,7 @@
                      ((NULL (SPADCALL |b| (QREFELT % 42)))
                       (PROGN
                        (LETT #1# (SPADCALL |b| (QREFELT % 44)))
-                       (GO #2=#:G2099))))))))
+                       (GO #2=#:G1691))))))))
                 (EXIT
                  (SPADCALL
                   (LIST (SPADCALL 'QUOTE (QREFELT % 45))
@@ -151,7 +151,7 @@
                          (QREFELT % 57))))) 
 
 (SDEFUN |OUTFORM;matrix;L%;26| ((|ll| (|List| (|List| %))) (% (%)))
-        (SPROG ((|lv| (|List| %)) (#1=#:G2119 NIL) (|l| NIL) (#2=#:G2118 NIL))
+        (SPROG ((|lv| (|List| %)) (#1=#:G1711 NIL) (|l| NIL) (#2=#:G1710 NIL))
                (SEQ
                 (COND ((NULL |ll|) (SPADCALL NIL (QREFELT % 59)))
                       ('T
@@ -191,7 +191,7 @@
 (SDEFUN |OUTFORM;blankSeparate;L%;30| ((|l| (|List| %)) (% (%)))
         (SPROG
          ((|l1| (|List| %)) (|l2| (|List| %)) (|uo| (|OutputForm|))
-          (#1=#:G2129 NIL) (|u| NIL) (|c| (%)))
+          (#1=#:G1721 NIL) (|u| NIL) (|c| (%)))
          (SEQ (LETT |c| (|OUTFORM;eform| 'CONCATB %)) (LETT |l1| NIL)
               (SEQ (LETT |u| NIL) (LETT #1# (SPADCALL |l| (QREFELT % 65))) G190
                    (COND
@@ -342,13 +342,13 @@
         (SPADCALL (LIST (|OUTFORM;eform| 'NOTHING %)) (QREFELT % 19))) 
 
 (SDEFUN |OUTFORM;infix?;%B;68| ((|a| (%)) (% (|Boolean|)))
-        (SPROG ((|e| (%)) (#1=#:G2175 NIL))
+        (SPROG ((|e| (%)) (#1=#:G1767 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (LETT |e|
                         (COND ((IDENTP |a|) |a|) ((STRINGP |a|) (INTERN |a|))
-                              (#2='T (PROGN (LETT #1# NIL) (GO #3=#:G2174)))))
+                              (#2='T (PROGN (LETT #1# NIL) (GO #3=#:G1766)))))
                   (EXIT (COND ((GET |e| 'INFIXOP) 'T) (#2# NIL)))))
                 #3# (EXIT #1#)))) 
 
@@ -441,11 +441,11 @@
         (SPADCALL (LIST (|OUTFORM;eform| 'EQUATNUM %) |a| |b|) (QREFELT % 19))) 
 
 (SDEFUN |OUTFORM;rarrow;3%;90| ((|a| (%)) (|b| (%)) (% (%)))
-        (SPADCALL (LIST (|OUTFORM;eform| 'TAG %) |a| |b|) (QREFELT % 19))) 
+        (SPADCALL (LIST (|OUTFORM;eform| '~> %) |a| |b|) (QREFELT % 19))) 
 
 (SDEFUN |OUTFORM;differentiate;%Nni%;91|
         ((|a| (%)) (|nn| (|NonNegativeInteger|)) (% (%)))
-        (SPROG ((|s| (|String|)) (|r| (|String|)) (#1=#:G2207 NIL))
+        (SPROG ((|s| (|String|)) (|r| (|String|)) (#1=#:G1799 NIL))
                (SEQ
                 (COND ((ZEROP |nn|) |a|)
                       ((< |nn| 4) (SPADCALL |a| |nn| (QREFELT % 120)))
@@ -509,7 +509,7 @@
 
 (DEFUN |OutputForm| ()
   (SPROG NIL
-         (PROG (#1=#:G2222)
+         (PROG (#1=#:G1814)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OutputForm|))

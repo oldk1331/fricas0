@@ -24,9 +24,9 @@
 
 (DECLAIM (NOTINLINE |MultivariateFactorize;|)) 
 
-(DEFUN |MultivariateFactorize| (&REST #1=#:G458)
+(DEFUN |MultivariateFactorize| (&REST #1=#:G36)
   (SPROG NIL
-         (PROG (#2=#:G459)
+         (PROG (#2=#:G37)
            (RETURN
             (COND
              ((LETT #2#

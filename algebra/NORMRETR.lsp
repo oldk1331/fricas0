@@ -1,7 +1,7 @@
 
 (SDEFUN |NORMRETR;normFactors;ExtPL;1| ((|p| (|ExtP|)) (% (|List| |ExtP|)))
         (SPROG
-         ((|facs| (|List| |ExtP|)) (#1=#:G454 NIL) (#2=#:G455 NIL) (|i| NIL))
+         ((|facs| (|List| |ExtP|)) (#1=#:G18 NIL) (#2=#:G19 NIL) (|i| NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |facs| (LIST |p|))
@@ -12,7 +12,7 @@
                        (COND
                         ((SPADCALL (LETT |p| (SPADCALL |p| (QREFELT % 11)))
                                    |facs| (QREFELT % 14))
-                         (PROGN (LETT #1# |facs|) (GO #3=#:G453)))
+                         (PROGN (LETT #1# |facs|) (GO #3=#:G17)))
                         ('T (LETT |facs| (CONS |p| |facs|))))))
                      (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                 (EXIT |facs|)))
@@ -52,7 +52,7 @@
          ((|fft|
            (|SparseUnivariatePolynomial| (|SparseUnivariatePolynomial| F)))
           (|lc| (|SUEx|)) (|plc| (|SparseUnivariatePolynomial| F))
-          (#1=#:G480 NIL) (|retlc| (|Union| F "failed")) (|lclc| (|ExtF|)))
+          (#1=#:G45 NIL) (|retlc| (|Union| F "failed")) (|lclc| (|ExtF|)))
          (SEQ
           (EXIT
            (SEQ (LETT |fft| (|spadConstant| % 28))
@@ -77,7 +77,7 @@
                                   ((QEQCAR |retlc| 1)
                                    (PROGN
                                     (LETT #1# (CONS 1 "failed"))
-                                    (GO #2=#:G479)))
+                                    (GO #2=#:G44)))
                                   ('T
                                    (SEQ
                                     (LETT |plc|
@@ -107,9 +107,9 @@
 
 (DECLAIM (NOTINLINE |NormRetractPackage;|)) 
 
-(DEFUN |NormRetractPackage| (&REST #1=#:G481)
+(DEFUN |NormRetractPackage| (&REST #1=#:G46)
   (SPROG NIL
-         (PROG (#2=#:G482)
+         (PROG (#2=#:G47)
            (RETURN
             (COND
              ((LETT #2#

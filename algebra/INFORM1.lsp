@@ -32,9 +32,9 @@
 
 (DECLAIM (NOTINLINE |InputFormFunctions1;|)) 
 
-(DEFUN |InputFormFunctions1| (#1=#:G455)
+(DEFUN |InputFormFunctions1| (#1=#:G18)
   (SPROG NIL
-         (PROG (#2=#:G456)
+         (PROG (#2=#:G19)
            (RETURN
             (COND
              ((LETT #2#

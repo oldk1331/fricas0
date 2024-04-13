@@ -50,7 +50,7 @@
          ('T NIL))) 
 
 (SDEFUN |FRIDEAL;agcd| ((|l| (|List| A)) (% (R)))
-        (SPROG ((#1=#:G480 NIL) (|a| NIL) (#2=#:G479 NIL))
+        (SPROG ((#1=#:G42 NIL) (|a| NIL) (#2=#:G41 NIL))
                (SEQ
                 (SPADCALL (ELT % 39)
                           (PROGN
@@ -72,7 +72,7 @@
                           (|spadConstant| % 38) (QREFELT % 42))))) 
 
 (SDEFUN |FRIDEAL;oldnorm| ((|i| (%)) (% (F)))
-        (SPROG ((#1=#:G497 NIL) (|u| NIL) (#2=#:G496 NIL))
+        (SPROG ((#1=#:G60 NIL) (|u| NIL) (#2=#:G59 NIL))
                (SEQ
                 (SPADCALL
                  (SPADCALL
@@ -100,9 +100,9 @@
 
 (SDEFUN |FRIDEAL;norm;%F;11| ((|i| (%)) (% (F)))
         (SPROG
-         ((#1=#:G519 NIL) (|j| NIL) (#2=#:G518 NIL)
+         ((#1=#:G89 NIL) (|j| NIL) (#2=#:G88 NIL)
           (|dv| (|SingletonAsOrderedSet|))
-          (|pp| (|SparseUnivariatePolynomial| A)) (#3=#:G517 NIL)
+          (|pp| (|SparseUnivariatePolynomial| A)) (#3=#:G87 NIL)
           (|j0| (|Integer|)) (|chara| (|NonNegativeInteger|)) (|n| (|Integer|))
           (|v| (|Vector| A)))
          (SEQ (LETT |v| (SPADCALL |i| (QREFELT % 15)))
@@ -156,7 +156,7 @@
         ((|range| (|NonNegativeInteger|)) (|nm| (|Vector| A)) (|nrm| (R))
          (|i| (%)) (% (|Union| % "failed")))
         (SPROG
-         ((#1=#:G531 NIL) (#2=#:G532 NIL) (#3=#:G525 NIL) (|a| (A)) (|j| NIL))
+         ((#1=#:G101 NIL) (#2=#:G102 NIL) (#3=#:G95 NIL) (|a| (A)) (|j| NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -193,8 +193,8 @@
                                               (QREFELT % 73))
                                              |a|)
                                             (SPADCALL |i| (QREFELT % 16)) %)))
-                               (GO #4=#:G530)))
-                        (GO #5=#:G527)))))))
+                               (GO #4=#:G100)))
+                        (GO #5=#:G97)))))))
                   #5# (EXIT #1#))
                  (LETT |j| (|inc_SI| |j|)) (GO G190) G191 (EXIT NIL))
             (EXIT (CONS 1 "failed"))))
@@ -202,7 +202,7 @@
 
 (SDEFUN |FRIDEAL;summat| ((|i| (%)) (% (|Matrix| UP)))
         (SPROG
-         ((#1=#:G542 NIL) (|j| NIL) (#2=#:G541 NIL) (|m| (|Integer|))
+         ((#1=#:G112 NIL) (|j| NIL) (#2=#:G111 NIL) (|m| (|Integer|))
           (|v| (|Vector| A)))
          (SEQ
           (LETT |m|
@@ -227,12 +227,12 @@
 
 (SDEFUN |FRIDEAL;inv;2%;14| ((|i| (%)) (% (%)))
         (SPROG
-         ((#1=#:G681 NIL) (|j| NIL) (#2=#:G680 NIL)
-          (|d| (|NonNegativeInteger|)) (#3=#:G679 NIL) (|p| NIL)
-          (#4=#:G678 NIL) (|invd| (F))
+         ((#1=#:G251 NIL) (|j| NIL) (#2=#:G250 NIL)
+          (|d| (|NonNegativeInteger|)) (#3=#:G249 NIL) (|p| NIL)
+          (#4=#:G248 NIL) (|invd| (F))
           (|cd2| (|Record| (|:| |num| (|List| R)) (|:| |den| R)))
           (|cd| (|Record| (|:| |num| (|Matrix| UP)) (|:| |den| UP)))
-          (|m| (|Matrix| (|Fraction| UP))) (#5=#:G550 NIL))
+          (|m| (|Matrix| (|Fraction| UP))) (#5=#:G120 NIL))
          (SEQ
           (LETT |m|
                 (PROG2
@@ -314,8 +314,8 @@
 
 (SDEFUN |FRIDEAL;ideal;V%;15| ((|v| (|Vector| A)) (% (%)))
         (SPROG
-         ((#1=#:G699 NIL) (|i| NIL) (#2=#:G698 NIL) (|d| (R)) (#3=#:G697 NIL)
-          (#4=#:G696 NIL))
+         ((#1=#:G269 NIL) (|i| NIL) (#2=#:G268 NIL) (|d| (R)) (#3=#:G267 NIL)
+          (#4=#:G266 NIL))
          (SEQ
           (LETT |d|
                 (SPADCALL (ELT % 110)
@@ -354,10 +354,10 @@
 
 (SDEFUN |FRIDEAL;intIdeal| ((|l| (|List| A)) (|d| (R)) (% (%)))
         (SPROG
-         ((|va| (|Vector| A)) (#1=#:G716 NIL) (#2=#:G718 NIL) (|m| NIL)
-          (#3=#:G717 NIL) (|invb| (F)) (|a| (A)) (|b| (R)) (|g| (R)) (|r| (R))
+         ((|va| (|Vector| A)) (#1=#:G286 NIL) (#2=#:G288 NIL) (|m| NIL)
+          (#3=#:G287 NIL) (|invb| (F)) (|a| (A)) (|b| (R)) (|g| (R)) (|r| (R))
           (|nr| (|List| A)) (|lr| (|List| R)) (|u| (|Union| F "failed"))
-          (#4=#:G715 NIL) (|x| NIL))
+          (#4=#:G285 NIL) (|x| NIL))
          (SEQ (LETT |lr| NIL) (LETT |nr| NIL)
               (SEQ (LETT |x| NIL) (LETT #4# (SPADCALL |l| (QREFELT % 112)))
                    G190
@@ -417,7 +417,7 @@
                   %))))))) 
 
 (SDEFUN |FRIDEAL;vgcd| ((|v| (|Vector| F)) (% (R)))
-        (SPROG ((#1=#:G723 NIL) (|i| NIL) (#2=#:G722 NIL))
+        (SPROG ((#1=#:G293 NIL) (|i| NIL) (#2=#:G292 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -438,8 +438,8 @@
 
 (SDEFUN |FRIDEAL;poly| ((|i| (%)) (% (|SparseUnivariatePolynomial| A)))
         (SPROG
-         ((#1=#:G725 NIL) (#2=#:G724 #3=(|SparseUnivariatePolynomial| A))
-          (#4=#:G726 #3#) (#5=#:G729 NIL) (|m| (|Integer|)) (|v| (|Vector| A)))
+         ((#1=#:G295 NIL) (#2=#:G294 #3=(|SparseUnivariatePolynomial| A))
+          (#4=#:G296 #3#) (#5=#:G299 NIL) (|m| (|Integer|)) (|v| (|Vector| A)))
          (SEQ
           (LETT |m|
                 (SPADCALL (LETT |v| (SPADCALL |i| (QREFELT % 15)))
@@ -472,8 +472,8 @@
 
 (SDEFUN |FRIDEAL;^;%I%;20| ((|i| (%)) (|m| (|Integer|)) (% (%)))
         (SPROG
-         ((#1=#:G738 NIL) (|j| NIL) (#2=#:G737 NIL) (|v| (|Vector| A))
-          (|n| (|NonNegativeInteger|)) (#3=#:G732 NIL))
+         ((#1=#:G308 NIL) (|j| NIL) (#2=#:G307 NIL) (|v| (|Vector| A))
+          (|n| (|NonNegativeInteger|)) (#3=#:G302 NIL))
          (SEQ
           (COND
            ((< |m| 0)
@@ -505,7 +505,7 @@
                %)))))))) 
 
 (SDEFUN |FRIDEAL;num2O| ((|v| (|Vector| A)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G743 NIL) (|i| NIL) (#2=#:G742 NIL))
+        (SPROG ((#1=#:G313 NIL) (|i| NIL) (#2=#:G312 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -525,7 +525,7 @@
 
 (SDEFUN |FRIDEAL;basis;%V;22| ((|i| (%)) (% (|Vector| A)))
         (SPROG
-         ((#1=#:G749 NIL) (#2=#:G751 NIL) (|j| NIL) (#3=#:G750 NIL) (|d| (F))
+         ((#1=#:G319 NIL) (#2=#:G321 NIL) (|j| NIL) (#3=#:G320 NIL) (|d| (F))
           (|v| (|Vector| A)))
          (SEQ (LETT |v| (SPADCALL |i| (QREFELT % 15)))
               (LETT |d|
@@ -569,7 +569,7 @@
 (SDEFUN |FRIDEAL;randomLC;NniVA;24|
         ((|m| (|NonNegativeInteger|)) (|v| (|Vector| A)) (% (A)))
         (SPROG
-         ((#1=#:G756 NIL) (#2=#:G755 (A)) (#3=#:G757 (A)) (#4=#:G759 NIL)
+         ((#1=#:G326 NIL) (#2=#:G325 (A)) (#3=#:G327 (A)) (#4=#:G329 NIL)
           (|j| NIL))
          (SEQ
           (PROGN
@@ -590,7 +590,7 @@
 (SDEFUN |FRIDEAL;randomLC;NniVA;25|
         ((|m| (|NonNegativeInteger|)) (|v| (|Vector| A)) (% (A)))
         (SPROG
-         ((#1=#:G761 NIL) (#2=#:G760 (A)) (#3=#:G762 (A)) (#4=#:G764 NIL)
+         ((#1=#:G331 NIL) (#2=#:G330 (A)) (#3=#:G332 (A)) (#4=#:G334 NIL)
           (|j| NIL))
          (SEQ
           (PROGN
@@ -610,7 +610,7 @@
 
 (SDEFUN |FRIDEAL;minimize;2%;26| ((|i| (%)) (% (%)))
         (SPROG
-         ((#1=#:G774 NIL) (#2=#:G775 NIL) (|u| (|Union| % "failed"))
+         ((#1=#:G344 NIL) (#2=#:G345 NIL) (|u| (|Union| % "failed"))
           (|range| NIL) (|nrm| (R)) (|n| (|NonNegativeInteger|))
           (|nm| (|Vector| A)))
          (SEQ
@@ -636,8 +636,8 @@
                           ((QEQCAR |u| 0)
                            (PROGN
                             (LETT #1#
-                                  (PROGN (LETT #2# (QCDR |u|)) (GO #3=#:G773)))
-                            (GO #4=#:G771))))))
+                                  (PROGN (LETT #2# (QCDR |u|)) (GO #3=#:G343)))
+                            (GO #4=#:G341))))))
                        (LETT |range| (|inc_SI| |range|)) (GO G190) G191
                        (EXIT NIL)))
                  #4# (EXIT #1#))
@@ -646,9 +646,9 @@
 
 (DECLAIM (NOTINLINE |FractionalIdeal;|)) 
 
-(DEFUN |FractionalIdeal| (&REST #1=#:G776)
+(DEFUN |FractionalIdeal| (&REST #1=#:G346)
   (SPROG NIL
-         (PROG (#2=#:G777)
+         (PROG (#2=#:G347)
            (RETURN
             (COND
              ((LETT #2#

@@ -34,8 +34,8 @@
         ((|f| (|Fraction| (|Polynomial| R))) (|x| (|Symbol|))
          (% (|Union| (|Expression| R) (|List| (|Expression| R)))))
         (SPROG
-         ((|l| (|List| (|Expression| R))) (#1=#:G470 NIL) (|g| NIL)
-          (#2=#:G469 NIL))
+         ((|l| (|List| (|Expression| R))) (#1=#:G38 NIL) (|g| NIL)
+          (#2=#:G37 NIL))
          (SEQ
           (LETT |l|
                 (PROGN
@@ -51,10 +51,7 @@
                       (SEQ
                        (EXIT
                         (LETT #2#
-                              (CONS
-                               (SPADCALL (SPADCALL |g| (QREFELT % 34)) |x|
-                                         (QREFELT % 36))
-                               #2#))))
+                              (CONS (SPADCALL |g| |x| (QREFELT % 34)) #2#))))
                       (LETT #1# (CDR #1#)) (GO G190) G191
                       (EXIT (NREVERSE #2#)))))
           (EXIT
@@ -63,9 +60,9 @@
 
 (DECLAIM (NOTINLINE |IntegrationResultRFToFunction;|)) 
 
-(DEFUN |IntegrationResultRFToFunction| (#1=#:G471)
+(DEFUN |IntegrationResultRFToFunction| (#1=#:G39)
   (SPROG NIL
-         (PROG (#2=#:G472)
+         (PROG (#2=#:G40)
            (RETURN
             (COND
              ((LETT #2#
@@ -87,7 +84,7 @@
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|IntegrationResultRFToFunction| DV$1))
-          (LETT % (GETREFV 37))
+          (LETT % (GETREFV 35))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3
                     (LETT |pv$|
@@ -131,11 +128,10 @@
               (|Mapping| 7 8) (|IntegrationResultFunctions2| 8 7) (32 . |map|)
               |IRRF2F;split;2Ir;4| (|RationalFunctionIntegration| 6)
               (38 . |internalIntegrate|) (44 . |complexIntegrate|)
-              (|Union| 8 15) (50 . |integrate|)
-              (|TrigonometricManipulations| 6 8) (56 . |real|)
-              (|IntegrationTools| 6 8) (61 . |mkPrim|))
-           '#(|split| 67 |integrate| 72 |expand| 78 |complexIntegrate| 84
-              |complexExpand| 90)
+              (|Union| 8 15) (50 . |integrate|) (|IntegrationTools| 6 8)
+              (56 . |mkPrim|))
+           '#(|split| 62 |integrate| 67 |expand| 73 |complexIntegrate| 79
+              |complexExpand| 85)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -170,13 +166,12 @@
                                   (|Fraction| (|Polynomial| |#1|)) (|Symbol|)))
                                 (|has| 6 (|CharacteristicZero|))))
                              (LIST) NIL NIL)))
-                        (|makeByteWordVec2| 36
+                        (|makeByteWordVec2| 34
                                             '(1 8 0 7 9 2 13 10 11 12 14 2 17
                                               15 10 16 18 1 17 8 10 20 1 8 7 0
                                               22 1 17 10 10 23 2 25 12 24 10 26
                                               2 28 12 7 16 29 2 0 8 7 16 30 2 0
-                                              31 7 16 32 1 33 8 8 34 2 35 8 8
-                                              16 36 1 0 12 12 27 2 1 31 7 16 32
-                                              2 0 15 12 16 19 2 1 8 7 16 30 1 0
-                                              8 12 21)))))
+                                              31 7 16 32 2 33 8 8 16 34 1 0 12
+                                              12 27 2 1 31 7 16 32 2 0 15 12 16
+                                              19 2 1 8 7 16 30 1 0 8 12 21)))))
            '|lookupComplete|)) 

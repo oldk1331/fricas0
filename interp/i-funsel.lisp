@@ -699,7 +699,7 @@
 ;       putTarget(opNode, target := $Boolean)
 ;       target
 ;     op = 'pi =>
-;       putTarget(opNode, target := ['Pi])
+;       putTarget(opNode, target := ['PiDomain])
 ;       target
 ;     op = 'infinity =>
 ;       putTarget(opNode, target := ['OnePointCompletion, $Integer])
@@ -888,7 +888,9 @@
          ((OR (EQ |op| '|true|) (EQ |op| '|false|))
           (PROGN (|putTarget| |opNode| (SETQ |target| |$Boolean|)) |target|))
          ((EQ |op| '|pi|)
-          (PROGN (|putTarget| |opNode| (SETQ |target| (LIST '|Pi|))) |target|))
+          (PROGN
+           (|putTarget| |opNode| (SETQ |target| (LIST '|PiDomain|)))
+           |target|))
          ((EQ |op| '|infinity|)
           (PROGN
            (|putTarget| |opNode|
@@ -1353,7 +1355,7 @@
 ; defaultTargetFE(a,:options) ==
 ;   a is ['Variable,.] or a = $RationalNumber or MEMQ(QCAR a,
 ;     [QCAR $Symbol,
-;      'Pi]) or typeIsASmallInteger(a) or isEqualOrSubDomain(a, $Integer) or
+;      'PiDomain]) or typeIsASmallInteger(a) or isEqualOrSubDomain(a, $Integer) or
 ;        a = '(AlgebraicNumber) =>
 ;           IFCAR options => [$FunctionalExpression, ['Complex, $Integer]]
 ;           [$FunctionalExpression, $Integer]
@@ -1374,7 +1376,7 @@
               (SETQ |ISTMP#1| (CDR |a|))
               (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL))))
         (EQUAL |a| |$RationalNumber|)
-        (MEMQ (QCAR |a|) (LIST (QCAR |$Symbol|) '|Pi|))
+        (MEMQ (QCAR |a|) (LIST (QCAR |$Symbol|) '|PiDomain|))
         (|typeIsASmallInteger| |a|) (|isEqualOrSubDomain| |a| |$Integer|)
         (EQUAL |a| '(|AlgebraicNumber|)))
        (COND
@@ -2044,9 +2046,9 @@
 ; hitListOfTarget(t) ==
 ;   -- assigns a number between 1 and 998 to a type t
 ;
-;   -- want to make it hard to go to Polynomial Pi
+;   -- want to make it hard to go to Polynomial PiDomain
 ;
-;   t = '(Polynomial (Pi)) => 90000
+;   t = '(Polynomial (PiDomain)) => 90000
 ;
 ;   EQ(first t, 'Polynomial) => 300
 ;   EQ(first t, 'List) => 400
@@ -2059,7 +2061,7 @@
 (DEFUN |hitListOfTarget| (|t|)
   (PROG ()
     (RETURN
-     (COND ((EQUAL |t| '(|Polynomial| (|Pi|))) 90000)
+     (COND ((EQUAL |t| '(|Polynomial| (|PiDomain|))) 90000)
            ((EQ (CAR |t|) '|Polynomial|) 300) ((EQ (CAR |t|) '|List|) 400)
            ((EQ (CAR |t|) '|Matrix|) 910)
            ((EQ (CAR |t|) '|UniversalSegment|) 501)

@@ -2,7 +2,7 @@
 (SDEFUN |CHARPOL;characteristicPolynomial;M2R;1|
         ((A (|Matrix| R)) (|v| (R)) (% (R)))
         (SPROG
-         ((#1=#:G458 NIL) (|j| NIL) (#2=#:G457 NIL) (|i| NIL) (B (|Matrix| R))
+         ((#1=#:G22 NIL) (|j| NIL) (#2=#:G21 NIL) (|i| NIL) (B (|Matrix| R))
           (|dimA| (|NonNegativeInteger|)))
          (SEQ (LETT |dimA| (ANROWS A))
               (EXIT
@@ -36,9 +36,9 @@
 
 (DECLAIM (NOTINLINE |CharacteristicPolynomialPackage;|)) 
 
-(DEFUN |CharacteristicPolynomialPackage| (#1=#:G459)
+(DEFUN |CharacteristicPolynomialPackage| (#1=#:G23)
   (SPROG NIL
-         (PROG (#2=#:G460)
+         (PROG (#2=#:G24)
            (RETURN
             (COND
              ((LETT #2#

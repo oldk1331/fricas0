@@ -8,10 +8,10 @@
         (T (SETQ |RealNumberSystem;AL| (|RealNumberSystem;|))))) 
 
 (DEFUN |RealNumberSystem;| ()
-  (SPROG ((#1=#:G457 NIL))
+  (SPROG ((#1=#:G19 NIL))
          (PROG1
              (LETT #1#
-                   (|subst_in_cat| '(#2=#:G453 #3=#:G454 #4=#:G455 #5=#:G456)
+                   (|subst_in_cat| '(#2=#:G15 #3=#:G16 #4=#:G17 #5=#:G18)
                                    (LIST '(|Integer|) '(|Fraction| (|Integer|))
                                          '(|Pattern| (|Float|)) '(|Float|))
                                    (|Join| (|Field|) (|OrderedRing|)

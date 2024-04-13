@@ -12,9 +12,9 @@
 
 (DECLAIM (NOTINLINE |PolynomialToUnivariatePolynomial;|)) 
 
-(DEFUN |PolynomialToUnivariatePolynomial| (&REST #1=#:G451)
+(DEFUN |PolynomialToUnivariatePolynomial| (&REST #1=#:G14)
   (SPROG NIL
-         (PROG (#2=#:G452)
+         (PROG (#2=#:G15)
            (RETURN
             (COND
              ((LETT #2#

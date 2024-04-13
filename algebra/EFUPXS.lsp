@@ -576,9 +576,9 @@
 
 (DECLAIM (NOTINLINE |ElementaryFunctionsUnivariatePuiseuxSeries;|)) 
 
-(DEFUN |ElementaryFunctionsUnivariatePuiseuxSeries| (&REST #1=#:G847)
+(DEFUN |ElementaryFunctionsUnivariatePuiseuxSeries| (&REST #1=#:G411)
   (SPROG NIL
-         (PROG (#2=#:G848)
+         (PROG (#2=#:G412)
            (RETURN
             (COND
              ((LETT #2#

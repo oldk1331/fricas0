@@ -233,294 +233,303 @@
         (SPROG
          ((|tmp| (|String|)) (|base| (|String|)) (|tmp3| #1=(|String|))
           (|tmp2| #1#) (|tmp1| #1#) (|n| (|NonNegativeInteger|))
-          (#2=#:G606 NIL) (|u| NIL) (#3=#:G605 NIL))
+          (#2=#:G183 NIL) (|u| NIL) (#3=#:G182 NIL))
          (SEQ
           (COND ((EQUAL |op| '|theMap|) "<mtext>theMap(...)</mtext>")
                 ((EQUAL |op| 'AGGLST)
                  (|MMLFORM;formatNary| '|,| "" 0 |args| |prec| %))
                 ((EQUAL |op| 'AGGSET)
                  (|MMLFORM;formatNary| '|;| "" 0 |args| |prec| %))
-                ((EQUAL |op| 'TAG)
+                ((EQUAL |op| '~>)
                  (|MMLFORM;group|
                   (SPADCALL
                    (LIST (|MMLFORM;formatExpr| (|SPADfirst| |args|) |prec| %)
-                         "<mo>&#x02192;</mo>"
+                         "<mo>&#x021DD;</mo>"
                          (|MMLFORM;formatExpr| (SPADCALL |args| (QREFELT % 48))
                           |prec| %))
                    (QREFELT % 44))
                   %))
-                ((EQUAL |op| 'SLASH)
-                 (|MMLFORM;group|
-                  (SPADCALL
-                   (LIST (|MMLFORM;formatExpr| (|SPADfirst| |args|) |prec| %)
-                         "<mo>/</mo>"
-                         (|MMLFORM;formatExpr| (SPADCALL |args| (QREFELT % 48))
-                          |prec| %))
-                   (QREFELT % 44))
-                  %))
-                ((EQUAL |op| 'VCONCAT)
-                 (|MMLFORM;group|
-                  (SPADCALL
-                   (LIST "<mtable><mtr>"
-                         (SPADCALL
-                          (PROGN
-                           (LETT #3# NIL)
-                           (SEQ (LETT |u| NIL) (LETT #2# |args|) G190
-                                (COND
-                                 ((OR (ATOM #2#)
-                                      (PROGN (LETT |u| (CAR #2#)) NIL))
-                                  (GO G191)))
-                                (SEQ
-                                 (EXIT
-                                  (LETT #3#
-                                        (CONS
-                                         (SPADCALL
-                                          (LIST "<mtd>"
-                                                (|MMLFORM;formatExpr| |u|
-                                                 (QREFELT % 8) %)
-                                                "</mtd>")
-                                          (QREFELT % 44))
-                                         #3#))))
-                                (LETT #2# (CDR #2#)) (GO G190) G191
-                                (EXIT (NREVERSE #3#))))
-                          (QREFELT % 44))
-                         "</mtr></mtable>")
-                   (QREFELT % 44))
-                  %))
-                ((EQUAL |op| 'CONCATB)
-                 (|MMLFORM;formatNary| 'STRSEP " " 0 |args| (QREFELT % 8) %))
-                ((EQUAL |op| 'CONCAT)
-                 (|MMLFORM;formatNary| 'STRSEP "" 0 |args| (QREFELT % 8) %))
-                ((EQUAL |op| 'QUOTE)
-                 (|MMLFORM;group|
-                  (STRCONC "<mo>'</mo>"
-                           (|MMLFORM;formatExpr| (|SPADfirst| |args|)
-                            (QREFELT % 8) %))
-                  %))
-                ((EQUAL |op| 'BRACKET)
-                 (|MMLFORM;group|
-                  (|MMLFORM;addBrackets|
-                   (|MMLFORM;ungroup|
-                    (|MMLFORM;formatExpr| (|SPADfirst| |args|) (QREFELT % 8) %)
-                    %)
-                   %)
-                  %))
-                ((EQUAL |op| 'BRACE)
-                 (|MMLFORM;group|
-                  (|MMLFORM;addBraces|
-                   (|MMLFORM;ungroup|
-                    (|MMLFORM;formatExpr| (|SPADfirst| |args|) (QREFELT % 8) %)
-                    %)
-                   %)
-                  %))
-                ((EQUAL |op| 'PAREN)
-                 (|MMLFORM;group|
-                  (|MMLFORM;parenthesize|
-                   (|MMLFORM;ungroup|
-                    (|MMLFORM;formatExpr| (|SPADfirst| |args|) (QREFELT % 8) %)
-                    %)
-                   %)
-                  %))
-                ((EQUAL |op| 'PRIME) (|MMLFORM;formatPrime| |args| |prec| %))
-                ((EQUAL |op| 'OVERBAR)
-                 (COND ((NULL |args|) "")
-                       (#4='T
-                        (|MMLFORM;group|
-                         (SPADCALL
-                          (LIST "<mover accent='true'><mrow>"
-                                (|MMLFORM;formatExpr| (|SPADfirst| |args|)
-                                 (QREFELT % 8) %)
-                                "</mrow><mo stretchy='true'>&#x000AF;</mo></mover>")
-                          (QREFELT % 44))
-                         %))))
-                ((EQUAL |op| 'ROOT)
-                 (COND ((NULL |args|) "")
-                       (#4#
-                        (SEQ
-                         (LETT |tmp|
-                               (|MMLFORM;group|
-                                (|MMLFORM;formatExpr| (|SPADfirst| |args|)
-                                 (QREFELT % 8) %)
-                                %))
-                         (EXIT
-                          (COND
-                           ((NULL (CDR |args|))
-                            (SPADCALL (LIST "<msqrt>" |tmp| "</msqrt>")
-                                      (QREFELT % 44)))
-                           (#4#
-                            (|MMLFORM;group|
+                (#4='T
+                 (COND
+                  ((EQUAL |op| 'SLASH)
+                   (|MMLFORM;group|
+                    (SPADCALL
+                     (LIST (|MMLFORM;formatExpr| (|SPADfirst| |args|) |prec| %)
+                           "<mo>/</mo>"
+                           (|MMLFORM;formatExpr|
+                            (SPADCALL |args| (QREFELT % 48)) |prec| %))
+                     (QREFELT % 44))
+                    %))
+                  ((EQUAL |op| 'VCONCAT)
+                   (|MMLFORM;group|
+                    (SPADCALL
+                     (LIST "<mtable><mtr>"
+                           (SPADCALL
+                            (PROGN
+                             (LETT #3# NIL)
+                             (SEQ (LETT |u| NIL) (LETT #2# |args|) G190
+                                  (COND
+                                   ((OR (ATOM #2#)
+                                        (PROGN (LETT |u| (CAR #2#)) NIL))
+                                    (GO G191)))
+                                  (SEQ
+                                   (EXIT
+                                    (LETT #3#
+                                          (CONS
+                                           (SPADCALL
+                                            (LIST "<mtd>"
+                                                  (|MMLFORM;formatExpr| |u|
+                                                   (QREFELT % 8) %)
+                                                  "</mtd>")
+                                            (QREFELT % 44))
+                                           #3#))))
+                                  (LETT #2# (CDR #2#)) (GO G190) G191
+                                  (EXIT (NREVERSE #3#))))
+                            (QREFELT % 44))
+                           "</mtr></mtable>")
+                     (QREFELT % 44))
+                    %))
+                  ((EQUAL |op| 'CONCATB)
+                   (|MMLFORM;formatNary| 'STRSEP " " 0 |args| (QREFELT % 8) %))
+                  ((EQUAL |op| 'CONCAT)
+                   (|MMLFORM;formatNary| 'STRSEP "" 0 |args| (QREFELT % 8) %))
+                  ((EQUAL |op| 'QUOTE)
+                   (|MMLFORM;group|
+                    (STRCONC "<mo>'</mo>"
+                             (|MMLFORM;formatExpr| (|SPADfirst| |args|)
+                              (QREFELT % 8) %))
+                    %))
+                  ((EQUAL |op| 'BRACKET)
+                   (|MMLFORM;group|
+                    (|MMLFORM;addBrackets|
+                     (|MMLFORM;ungroup|
+                      (|MMLFORM;formatExpr| (|SPADfirst| |args|) (QREFELT % 8)
+                       %)
+                      %)
+                     %)
+                    %))
+                  ((EQUAL |op| 'BRACE)
+                   (|MMLFORM;group|
+                    (|MMLFORM;addBraces|
+                     (|MMLFORM;ungroup|
+                      (|MMLFORM;formatExpr| (|SPADfirst| |args|) (QREFELT % 8)
+                       %)
+                      %)
+                     %)
+                    %))
+                  ((EQUAL |op| 'PAREN)
+                   (|MMLFORM;group|
+                    (|MMLFORM;parenthesize|
+                     (|MMLFORM;ungroup|
+                      (|MMLFORM;formatExpr| (|SPADfirst| |args|) (QREFELT % 8)
+                       %)
+                      %)
+                     %)
+                    %))
+                  ((EQUAL |op| 'PRIME) (|MMLFORM;formatPrime| |args| |prec| %))
+                  ((EQUAL |op| 'OVERBAR)
+                   (COND ((NULL |args|) "")
+                         (#4#
+                          (|MMLFORM;group|
+                           (SPADCALL
+                            (LIST "<mover accent='true'><mrow>"
+                                  (|MMLFORM;formatExpr| (|SPADfirst| |args|)
+                                   (QREFELT % 8) %)
+                                  "</mrow><mo stretchy='true'>&#x000AF;</mo></mover>")
+                            (QREFELT % 44))
+                           %))))
+                  ((EQUAL |op| 'ROOT)
+                   (COND ((NULL |args|) "")
+                         (#4#
+                          (SEQ
+                           (LETT |tmp|
+                                 (|MMLFORM;group|
+                                  (|MMLFORM;formatExpr| (|SPADfirst| |args|)
+                                   (QREFELT % 8) %)
+                                  %))
+                           (EXIT
+                            (COND
+                             ((NULL (CDR |args|))
+                              (SPADCALL (LIST "<msqrt>" |tmp| "</msqrt>")
+                                        (QREFELT % 44)))
+                             (#4#
+                              (|MMLFORM;group|
+                               (SPADCALL
+                                (LIST "<mroot><mrow>" |tmp| "</mrow>"
+                                      (|MMLFORM;formatExpr|
+                                       (|SPADfirst| (CDR |args|)) (QREFELT % 8)
+                                       %)
+                                      "</mroot>")
+                                (QREFELT % 44))
+                               %))))))))
+                  ((EQUAL |op| 'SEGMENT)
+                   (SEQ
+                    (LETT |tmp|
+                          (SPADCALL
+                           (LIST
+                            (|MMLFORM;formatExpr| (|SPADfirst| |args|)
+                             (QREFELT % 8) %)
+                            "<mo>..</mo>")
+                           (QREFELT % 44)))
+                    (EXIT
+                     (|MMLFORM;group|
+                      (COND ((NULL (CDR |args|)) |tmp|)
+                            (#4#
                              (SPADCALL
-                              (LIST "<mroot><mrow>" |tmp| "</mrow>"
+                              (LIST |tmp|
                                     (|MMLFORM;formatExpr|
                                      (|SPADfirst| (CDR |args|)) (QREFELT % 8)
-                                     %)
-                                    "</mroot>")
-                              (QREFELT % 44))
-                             %))))))))
-                ((EQUAL |op| 'SEGMENT)
-                 (SEQ
-                  (LETT |tmp|
-                        (SPADCALL
-                         (LIST
-                          (|MMLFORM;formatExpr| (|SPADfirst| |args|)
-                           (QREFELT % 8) %)
-                          "<mo>..</mo>")
-                         (QREFELT % 44)))
-                  (EXIT
+                                     %))
+                              (QREFELT % 44))))
+                      %))))
+                  ((EQUAL |op| 'SUB)
                    (|MMLFORM;group|
-                    (COND ((NULL (CDR |args|)) |tmp|)
-                          (#4#
-                           (SPADCALL
-                            (LIST |tmp|
-                                  (|MMLFORM;formatExpr|
-                                   (|SPADfirst| (CDR |args|)) (QREFELT % 8) %))
-                            (QREFELT % 44))))
-                    %))))
-                ((EQUAL |op| 'SUB)
-                 (|MMLFORM;group|
-                  (SPADCALL
-                   (LIST "<msub>"
-                         (|MMLFORM;formatExpr| (|SPADfirst| |args|)
-                          (QREFELT % 8) %)
-                         (|MMLFORM;formatSpecial| 'AGGLST (CDR |args|)
-                          (QREFELT % 8) %)
-                         "</msub>")
-                   (QREFELT % 44))
-                  %))
-                ((EQUAL |op| 'SUPERSUB)
-                 (SEQ
-                  (LETT |base|
-                        (SPADCALL
-                         (LIST "<mrow>"
-                               (|MMLFORM;formatExpr| (|SPADfirst| |args|)
-                                (QREFELT % 8) %)
-                               "</mrow>")
-                         (QREFELT % 44)))
-                  (LETT |args| (CDR |args|)) (LETT |n| (LENGTH |args|))
-                  (EXIT
-                   (COND
-                    ((> |n| 4)
-                     (|error| "multiscript object has more than 4 scripts"))
-                    (#4#
-                     (SEQ
-                      (LETT |tmp1|
-                            (|MMLFORM;optionalWrap|
-                             (SPADCALL |args| 1 (QREFELT % 49)) %))
-                      (EXIT
-                       (COND
-                        ((EQL |n| 1)
-                         (SPADCALL (LIST "<msub>" |base| |tmp1| "</msub>")
-                                   (QREFELT % 44)))
-                        (#4#
-                         (SEQ
-                          (LETT |tmp2|
-                                (|MMLFORM;optionalWrap|
-                                 (SPADCALL |args| 2 (QREFELT % 49)) %))
-                          (EXIT
-                           (COND
-                            ((EQL |n| 2)
-                             (SPADCALL
-                              (LIST "<msubsup>" |base| |tmp1| |tmp2|
-                                    "</msubsup>")
-                              (QREFELT % 44)))
-                            (#4#
-                             (SEQ
-                              (LETT |tmp3|
-                                    (|MMLFORM;optionalWrap|
-                                     (SPADCALL |args| 3 (QREFELT % 49)) %))
-                              (LETT |base|
-                                    (SPADCALL
-                                     (LIST "<mmultiscripts>" |base| |tmp1|
-                                           |tmp2| "<mprescripts/>" |tmp3|)
+                    (SPADCALL
+                     (LIST "<msub>"
+                           (|MMLFORM;formatExpr| (|SPADfirst| |args|)
+                            (QREFELT % 8) %)
+                           (|MMLFORM;formatSpecial| 'AGGLST (CDR |args|)
+                            (QREFELT % 8) %)
+                           "</msub>")
+                     (QREFELT % 44))
+                    %))
+                  ((EQUAL |op| 'SUPERSUB)
+                   (SEQ
+                    (LETT |base|
+                          (SPADCALL
+                           (LIST "<mrow>"
+                                 (|MMLFORM;formatExpr| (|SPADfirst| |args|)
+                                  (QREFELT % 8) %)
+                                 "</mrow>")
+                           (QREFELT % 44)))
+                    (LETT |args| (CDR |args|)) (LETT |n| (LENGTH |args|))
+                    (EXIT
+                     (COND
+                      ((> |n| 4)
+                       (|error| "multiscript object has more than 4 scripts"))
+                      (#4#
+                       (SEQ
+                        (LETT |tmp1|
+                              (|MMLFORM;optionalWrap|
+                               (SPADCALL |args| 1 (QREFELT % 49)) %))
+                        (EXIT
+                         (COND
+                          ((EQL |n| 1)
+                           (SPADCALL (LIST "<msub>" |base| |tmp1| "</msub>")
                                      (QREFELT % 44)))
-                              (EXIT
-                               (COND
-                                ((EQL |n| 3)
-                                 (SPADCALL
-                                  (LIST |base| "<none/></mmultiscripts>")
-                                  (QREFELT % 44)))
-                                (#4#
-                                 (SPADCALL
-                                  (LIST |base|
-                                        (|MMLFORM;optionalWrap|
-                                         (SPADCALL |args| 4 (QREFELT % 49)) %)
-                                        "</mmultiscripts>")
-                                  (QREFELT % 44)))))))))))))))))))
-                ((EQUAL |op| 'SC)
-                 (COND ((NULL |args|) "")
-                       (#4#
-                        (SEQ
-                         (LETT |tmp|
-                               (|MMLFORM;formatNaryNoGroup| 'STRSEP
-                                "</mtd></mtr><mtr><mtd>" 800 |args|
-                                (QREFELT % 8) %))
-                         (EXIT
-                          (|MMLFORM;group|
-                           (SPADCALL
-                            (LIST "<mtable><mtr><mtd>" |tmp|
-                                  "</mtd></mtr></mtable>")
-                            (QREFELT % 44))
-                           %))))))
-                ((EQUAL |op| 'MATRIX) (|MMLFORM;formatMatrix| (CDR |args|) %))
-                ((EQUAL |op| 'BOX)
-                 (COND ((NULL |args|) "")
-                       (#4#
-                        (SEQ
-                         (LETT |tmp|
-                               (|MMLFORM;formatNaryNoGroup| 'STRSEP "" 0 |args|
-                                (QREFELT % 8) %))
-                         (EXIT
-                          (|MMLFORM;group|
-                           (SPADCALL
-                            (LIST "<mtable frame=\"solid\"><mtr><mtd>" |tmp|
-                                  "</mtd></mtr></mtable>")
-                            (QREFELT % 44))
-                           %))))))
-                ((EQUAL |op| 'EQUATNUM)
-                 (SPADCALL
-                  (LIST "<mtable><mtr><mtd>"
-                        (|MMLFORM;formatExpr|
-                         (SPADCALL |args| 1 (QREFELT % 49)) (QREFELT % 8) %)
-                        "</mtd><mtd style=\"padding-left: 50px;\">"
-                        (|MMLFORM;formatExpr|
-                         (SPADCALL |args| 2 (QREFELT % 49)) (QREFELT % 8) %)
-                        "</mtd></mtr></mtable>")
-                  (QREFELT % 44)))
-                ((EQUAL |op| 'BINOMIAL)
-                 (SPADCALL
-                  (LIST "<mrow><mo stretchy=\"true\">(</mo>"
-                        "<mfrac linethickness=\"0\">"
-                        (|MMLFORM;formatExpr|
-                         (SPADCALL |args| 1 (QREFELT % 49)) (QREFELT % 8) %)
-                        (|MMLFORM;formatExpr|
-                         (SPADCALL |args| 2 (QREFELT % 49)) (QREFELT % 8) %)
-                        "</mfrac><mo>)</mo></mrow>")
-                  (QREFELT % 44)))
-                ((EQUAL |op| 'NOTHING) "<none/>")
-                ((EQUAL |op| 'ZAG)
-                 (SPADCALL
-                  (LIST
-                   "<mtable><mtr><mtd style=\"border-right: solid 1px black;"
-                   " border-bottom: solid 1px black; padding-right: 2px;"
-                   " padding-left: 2px;\">"
-                   (|MMLFORM;formatExpr| (|SPADfirst| |args|) (QREFELT % 8) %)
-                   "</mtd></mtr><mtr><mtd style=\"border-left: solid 1px black;"
-                   " padding-left: 2px; padding-right: 2px;\">"
-                   (|MMLFORM;formatExpr| (|SPADfirst| (CDR |args|))
-                    (QREFELT % 8) %)
-                   "</mtd></mtr></mtable>")
-                  (QREFELT % 44)))
-                (#4#
-                 (SPADCALL
-                  (LIST "<mtext>not done yet for: "
-                        (SPADCALL |op| (QREFELT % 51)) "</mtext>")
-                  (QREFELT % 44))))))) 
+                          (#4#
+                           (SEQ
+                            (LETT |tmp2|
+                                  (|MMLFORM;optionalWrap|
+                                   (SPADCALL |args| 2 (QREFELT % 49)) %))
+                            (EXIT
+                             (COND
+                              ((EQL |n| 2)
+                               (SPADCALL
+                                (LIST "<msubsup>" |base| |tmp1| |tmp2|
+                                      "</msubsup>")
+                                (QREFELT % 44)))
+                              (#4#
+                               (SEQ
+                                (LETT |tmp3|
+                                      (|MMLFORM;optionalWrap|
+                                       (SPADCALL |args| 3 (QREFELT % 49)) %))
+                                (LETT |base|
+                                      (SPADCALL
+                                       (LIST "<mmultiscripts>" |base| |tmp1|
+                                             |tmp2| "<mprescripts/>" |tmp3|)
+                                       (QREFELT % 44)))
+                                (EXIT
+                                 (COND
+                                  ((EQL |n| 3)
+                                   (SPADCALL
+                                    (LIST |base| "<none/></mmultiscripts>")
+                                    (QREFELT % 44)))
+                                  (#4#
+                                   (SPADCALL
+                                    (LIST |base|
+                                          (|MMLFORM;optionalWrap|
+                                           (SPADCALL |args| 4 (QREFELT % 49))
+                                           %)
+                                          "</mmultiscripts>")
+                                    (QREFELT % 44)))))))))))))))))))
+                  ((EQUAL |op| 'SC)
+                   (COND ((NULL |args|) "")
+                         (#4#
+                          (SEQ
+                           (LETT |tmp|
+                                 (|MMLFORM;formatNaryNoGroup| 'STRSEP
+                                  "</mtd></mtr><mtr><mtd>" 800 |args|
+                                  (QREFELT % 8) %))
+                           (EXIT
+                            (|MMLFORM;group|
+                             (SPADCALL
+                              (LIST "<mtable><mtr><mtd>" |tmp|
+                                    "</mtd></mtr></mtable>")
+                              (QREFELT % 44))
+                             %))))))
+                  ((EQUAL |op| 'MATRIX)
+                   (|MMLFORM;formatMatrix| (CDR |args|) %))
+                  ((EQUAL |op| 'BOX)
+                   (COND ((NULL |args|) "")
+                         (#4#
+                          (SEQ
+                           (LETT |tmp|
+                                 (|MMLFORM;formatNaryNoGroup| 'STRSEP "" 0
+                                  |args| (QREFELT % 8) %))
+                           (EXIT
+                            (|MMLFORM;group|
+                             (SPADCALL
+                              (LIST "<mtable frame=\"solid\"><mtr><mtd>" |tmp|
+                                    "</mtd></mtr></mtable>")
+                              (QREFELT % 44))
+                             %))))))
+                  ((EQUAL |op| 'EQUATNUM)
+                   (SPADCALL
+                    (LIST "<mtable><mtr><mtd>"
+                          (|MMLFORM;formatExpr|
+                           (SPADCALL |args| 1 (QREFELT % 49)) (QREFELT % 8) %)
+                          "</mtd><mtd style=\"padding-left: 50px;\">"
+                          (|MMLFORM;formatExpr|
+                           (SPADCALL |args| 2 (QREFELT % 49)) (QREFELT % 8) %)
+                          "</mtd></mtr></mtable>")
+                    (QREFELT % 44)))
+                  ((EQUAL |op| 'BINOMIAL)
+                   (SPADCALL
+                    (LIST "<mrow><mo stretchy=\"true\">(</mo>"
+                          "<mfrac linethickness=\"0\">"
+                          (|MMLFORM;formatExpr|
+                           (SPADCALL |args| 1 (QREFELT % 49)) (QREFELT % 8) %)
+                          (|MMLFORM;formatExpr|
+                           (SPADCALL |args| 2 (QREFELT % 49)) (QREFELT % 8) %)
+                          "</mfrac><mo>)</mo></mrow>")
+                    (QREFELT % 44)))
+                  ((EQUAL |op| 'NOTHING) "<none/>")
+                  ((EQUAL |op| 'ZAG)
+                   (SPADCALL
+                    (LIST
+                     "<mtable><mtr><mtd style=\"border-right: solid 1px black;"
+                     " border-bottom: solid 1px black; padding-right: 2px;"
+                     " padding-left: 2px;\">"
+                     (|MMLFORM;formatExpr| (|SPADfirst| |args|) (QREFELT % 8)
+                      %)
+                     "</mtd></mtr><mtr><mtd style=\"border-left: solid 1px black;"
+                     " padding-left: 2px; padding-right: 2px;\">"
+                     (|MMLFORM;formatExpr| (|SPADfirst| (CDR |args|))
+                      (QREFELT % 8) %)
+                     "</mtd></mtr></mtable>")
+                    (QREFELT % 44)))
+                  (#4#
+                   (SPADCALL
+                    (LIST "<mtext>not done yet for: "
+                          (SPADCALL |op| (QREFELT % 51)) "</mtext>")
+                    (QREFELT % 44))))))))) 
 
 (SDEFUN |MMLFORM;formatPrime|
         ((|args| (|List| (|OutputForm|))) (|prec| (|Integer|)) (% (|String|)))
         (SPROG
          ((|arg2| (|OutputForm|)) (|s| (|String|)) (|commaTest| (|String|))
-          (#1=#:G615 NIL) (|i| NIL) (|commaS| (|String|)))
+          (#1=#:G192 NIL) (|i| NIL) (|commaS| (|String|)))
          (SEQ (LETT |arg2| (SPADCALL |args| (QREFELT % 48)))
               (COND
                ((SPADCALL |arg2| (QREFELT % 52))
@@ -741,6 +750,10 @@
                                   (LIST "<mfrac><mrow>" |s1| "</mrow><mrow>"
                                         |s2| "</mrow></mfrac>")
                                   (QREFELT % 44)))
+                                ((EQUAL |op| '->)
+                                 (SPADCALL
+                                  (LIST |s1| "<mo>&#x02192;</mo>" |s2|)
+                                  (QREFELT % 44)))
                                 (#2#
                                  (SEQ
                                   (LETT |ops|
@@ -774,7 +787,7 @@
         ((|op| (|Symbol|)) (|sep| (|String|)) (|opprec| (|Integer|))
          (|args| (|List| (|OutputForm|))) (|prec| (|Integer|)) (% (|String|)))
         (SPROG
-         ((|s| (|String|)) (|l| (|List| (|String|))) (#1=#:G654 NIL) (|a| NIL)
+         ((|s| (|String|)) (|l| (|List| (|String|))) (#1=#:G231 NIL) (|a| NIL)
           (|opPrec| (|Integer|)) (|ops| (|String|)) (|p| (|Integer|)))
          (SEQ
           (COND ((NULL |args|) "")
@@ -836,7 +849,7 @@
          ((|op| #1=(|Symbol|)) (|nargs| (|Integer|))
           (|args| (|List| (|OutputForm|))) (|opf| (|OutputForm|))
           (|i| (|Integer|)) (|len| (|Integer|)) (|str| (|String|))
-          (#2=#:G689 NIL) (|es| #1#) (|nstr| (|String|))
+          (#2=#:G266 NIL) (|es| #1#) (|nstr| (|String|))
           (|intSplitLen| (|Integer|)))
          (SEQ
           (EXIT
@@ -919,7 +932,7 @@
                                ((EQUAL |es| '|%pi|)
                                 (PROGN
                                  (LETT #2# "<mi>&#x003C0;</mi>")
-                                 (GO #4=#:G688)))
+                                 (GO #4=#:G265)))
                                ((EQUAL |es| '|%e|)
                                 (PROGN
                                  (LETT #2# "<mi>&#x02147;</mi>")
@@ -1046,7 +1059,7 @@
 
 (DEFUN |MathMLFormat| ()
   (SPROG NIL
-         (PROG (#1=#:G691)
+         (PROG (#1=#:G268)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|MathMLFormat|))
@@ -1085,7 +1098,7 @@
           (QSETREFV % 17 '(750 750 750 750 700))
           (QSETREFV % 18
                     '(MATRIX BRACKET BRACE CONCATB VCONCAT AGGLST CONCAT
-                      OVERBAR ROOT SUB TAG SUPERSUB ZAG AGGSET SC PAREN SEGMENT
+                      OVERBAR ROOT SUB ~> SUPERSUB ZAG AGGSET SC PAREN SEGMENT
                       QUOTE |theMap| SLASH PRIME BOX EQUATNUM BINOMIAL
                       NOTHING))
           (QSETREFV % 19

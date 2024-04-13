@@ -33,9 +33,9 @@
 
 (DECLAIM (NOTINLINE |SegmentBinding;|)) 
 
-(DEFUN |SegmentBinding| (#1=#:G460)
+(DEFUN |SegmentBinding| (#1=#:G30)
   (SPROG NIL
-         (PROG (#2=#:G461)
+         (PROG (#2=#:G31)
            (RETURN
             (COND
              ((LETT #2#

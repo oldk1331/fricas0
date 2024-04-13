@@ -6,8 +6,8 @@
 (DEFPARAMETER |MatrixCategory;AL| 'NIL) 
 
 (DEFUN |MatrixCategory| (|t#1| |t#2| |t#3|)
-  (LET (#1=#:G479
-        (#2=#:G480
+  (LET (#1=#:G32
+        (#2=#:G33
          (LIST (|devaluate| |t#1|) (|devaluate| |t#2|) (|devaluate| |t#3|))))
     (COND ((SETQ #1# (|assoc| #2# |MatrixCategory;AL|)) (CDR #1#))
           (T
@@ -18,7 +18,7 @@
            #1#)))) 
 
 (DEFUN |MatrixCategory;| (|t#1| |t#2| |t#3|)
-  (SPROG ((#1=#:G478 NIL))
+  (SPROG ((#1=#:G31 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3|)

@@ -193,7 +193,7 @@
                      (|List| (|SparseUnivariatePolynomial| S))))
          (% (|Union| (|Matrix| (|SparseUnivariatePolynomial| S)) (|Boolean|))))
         (SPROG
-         ((#4=#:G577 NIL)
+         ((#4=#:G157 NIL)
           (|pp|
            (|Union| (|Matrix| (|SparseUnivariatePolynomial| (|Integer|)))
                     (|Boolean|)))
@@ -209,7 +209,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |pp| 0)
-                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G576)))
+                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G156)))
                   ('T (PROGN (LETT #4# (CONS 1 (QCDR |pp|))) (GO #5#)))))))
           #5# (EXIT #4#)))) 
 
@@ -294,7 +294,7 @@
                      (|List| (|SparseUnivariatePolynomial| S))))
          (% (|Union| (|Matrix| (|SparseUnivariatePolynomial| S)) (|Boolean|))))
         (SPROG
-         ((#4=#:G620 NIL)
+         ((#4=#:G200 NIL)
           (|pp|
            (|Union| (|Matrix| (|SparseUnivariatePolynomial| (|Integer|)))
                     (|Boolean|)))
@@ -310,7 +310,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |pp| 0)
-                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G619)))
+                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G199)))
                   ('T (PROGN (LETT #4# (CONS 1 (QCDR |pp|))) (GO #5#)))))))
           #5# (EXIT #4#)))) 
 
@@ -426,7 +426,7 @@
                      (|List| (|SparseUnivariatePolynomial| S))))
          (% (|Union| (|Matrix| (|SparseUnivariatePolynomial| S)) (|Boolean|))))
         (SPROG
-         ((#4=#:G681 NIL)
+         ((#4=#:G261 NIL)
           (|pp|
            (|Union| (|Matrix| (|SparseUnivariatePolynomial| (|Integer|)))
                     (|Boolean|)))
@@ -442,7 +442,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |pp| 0)
-                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G680)))
+                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G260)))
                   ('T (PROGN (LETT #4# (CONS 1 (QCDR |pp|))) (GO #5#)))))))
           #5# (EXIT #4#)))) 
 
@@ -527,7 +527,7 @@
                      (|List| (|SparseUnivariatePolynomial| S))))
          (% (|Union| (|Matrix| (|SparseUnivariatePolynomial| S)) (|Boolean|))))
         (SPROG
-         ((#4=#:G724 NIL)
+         ((#4=#:G304 NIL)
           (|pp|
            (|Union| (|Matrix| (|SparseUnivariatePolynomial| (|Integer|)))
                     (|Boolean|)))
@@ -543,7 +543,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |pp| 0)
-                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G723)))
+                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G303)))
                   ('T (PROGN (LETT #4# (CONS 1 (QCDR |pp|))) (GO #5#)))))))
           #5# (EXIT #4#)))) 
 
@@ -689,7 +689,7 @@
                      (|List| (|SparseUnivariatePolynomial| S))))
          (% (|Union| (|Matrix| (|SparseUnivariatePolynomial| S)) (|Boolean|))))
         (SPROG
-         ((#4=#:G803 NIL)
+         ((#4=#:G383 NIL)
           (|pp|
            (|Union| (|Matrix| (|SparseUnivariatePolynomial| (|Integer|)))
                     (|Boolean|)))
@@ -705,7 +705,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |pp| 0)
-                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G802)))
+                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G382)))
                   ('T (PROGN (LETT #4# (CONS 1 (QCDR |pp|))) (GO #5#)))))))
           #5# (EXIT #4#)))) 
 
@@ -790,7 +790,7 @@
                      (|List| (|SparseUnivariatePolynomial| S))))
          (% (|Union| (|Matrix| (|SparseUnivariatePolynomial| S)) (|Boolean|))))
         (SPROG
-         ((#4=#:G846 NIL)
+         ((#4=#:G426 NIL)
           (|pp|
            (|Union| (|Matrix| (|SparseUnivariatePolynomial| (|Integer|)))
                     (|Boolean|)))
@@ -806,7 +806,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |pp| 0)
-                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G845)))
+                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G425)))
                   ('T (PROGN (LETT #4# (CONS 1 (QCDR |pp|))) (GO #5#)))))))
           #5# (EXIT #4#)))) 
 
@@ -922,7 +922,7 @@
                      (|List| (|SparseUnivariatePolynomial| S))))
          (% (|Union| (|Matrix| (|SparseUnivariatePolynomial| S)) (|Boolean|))))
         (SPROG
-         ((#4=#:G907 NIL)
+         ((#4=#:G487 NIL)
           (|pp|
            (|Union| (|Matrix| (|SparseUnivariatePolynomial| (|Integer|)))
                     (|Boolean|)))
@@ -938,7 +938,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |pp| 0)
-                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G906)))
+                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G486)))
                   ('T (PROGN (LETT #4# (CONS 1 (QCDR |pp|))) (GO #5#)))))))
           #5# (EXIT #4#)))) 
 
@@ -1023,7 +1023,7 @@
                      (|List| (|SparseUnivariatePolynomial| S))))
          (% (|Union| (|Matrix| (|SparseUnivariatePolynomial| S)) (|Boolean|))))
         (SPROG
-         ((#4=#:G950 NIL)
+         ((#4=#:G530 NIL)
           (|pp|
            (|Union| (|Matrix| (|SparseUnivariatePolynomial| (|Integer|)))
                     (|Boolean|)))
@@ -1039,7 +1039,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |pp| 0)
-                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G949)))
+                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G529)))
                   ('T (PROGN (LETT #4# (CONS 1 (QCDR |pp|))) (GO #5#)))))))
           #5# (EXIT #4#)))) 
 
@@ -1252,7 +1252,7 @@
                      (|List| (|SparseUnivariatePolynomial| S))))
          (% (|Union| (|Matrix| (|SparseUnivariatePolynomial| S)) (|Boolean|))))
         (SPROG
-         ((#4=#:G1060 NIL)
+         ((#4=#:G640 NIL)
           (|pp|
            (|Union| (|Matrix| (|SparseUnivariatePolynomial| (|Integer|)))
                     (|Boolean|)))
@@ -1268,7 +1268,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |pp| 0)
-                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G1059)))
+                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G639)))
                   ('T (PROGN (LETT #4# (CONS 1 (QCDR |pp|))) (GO #5#)))))))
           #5# (EXIT #4#)))) 
 
@@ -1353,7 +1353,7 @@
                      (|List| (|SparseUnivariatePolynomial| S))))
          (% (|Union| (|Matrix| (|SparseUnivariatePolynomial| S)) (|Boolean|))))
         (SPROG
-         ((#4=#:G1103 NIL)
+         ((#4=#:G683 NIL)
           (|pp|
            (|Union| (|Matrix| (|SparseUnivariatePolynomial| (|Integer|)))
                     (|Boolean|)))
@@ -1369,7 +1369,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |pp| 0)
-                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G1102)))
+                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G682)))
                   ('T (PROGN (LETT #4# (CONS 1 (QCDR |pp|))) (GO #5#)))))))
           #5# (EXIT #4#)))) 
 
@@ -1485,7 +1485,7 @@
                      (|List| (|SparseUnivariatePolynomial| S))))
          (% (|Union| (|Matrix| (|SparseUnivariatePolynomial| S)) (|Boolean|))))
         (SPROG
-         ((#4=#:G1164 NIL)
+         ((#4=#:G744 NIL)
           (|pp|
            (|Union| (|Matrix| (|SparseUnivariatePolynomial| (|Integer|)))
                     (|Boolean|)))
@@ -1501,7 +1501,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |pp| 0)
-                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G1163)))
+                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G743)))
                   ('T (PROGN (LETT #4# (CONS 1 (QCDR |pp|))) (GO #5#)))))))
           #5# (EXIT #4#)))) 
 
@@ -1586,7 +1586,7 @@
                      (|List| (|SparseUnivariatePolynomial| S))))
          (% (|Union| (|Matrix| (|SparseUnivariatePolynomial| S)) (|Boolean|))))
         (SPROG
-         ((#4=#:G1207 NIL)
+         ((#4=#:G787 NIL)
           (|pp|
            (|Union| (|Matrix| (|SparseUnivariatePolynomial| (|Integer|)))
                     (|Boolean|)))
@@ -1602,7 +1602,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |pp| 0)
-                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G1206)))
+                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G786)))
                   ('T (PROGN (LETT #4# (CONS 1 (QCDR |pp|))) (GO #5#)))))))
           #5# (EXIT #4#)))) 
 
@@ -1748,7 +1748,7 @@
                      (|List| (|SparseUnivariatePolynomial| S))))
          (% (|Union| (|Matrix| (|SparseUnivariatePolynomial| S)) (|Boolean|))))
         (SPROG
-         ((#4=#:G1286 NIL)
+         ((#4=#:G866 NIL)
           (|pp|
            (|Union| (|Matrix| (|SparseUnivariatePolynomial| (|Integer|)))
                     (|Boolean|)))
@@ -1764,7 +1764,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |pp| 0)
-                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G1285)))
+                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G865)))
                   ('T (PROGN (LETT #4# (CONS 1 (QCDR |pp|))) (GO #5#)))))))
           #5# (EXIT #4#)))) 
 
@@ -1849,7 +1849,7 @@
                      (|List| (|SparseUnivariatePolynomial| S))))
          (% (|Union| (|Matrix| (|SparseUnivariatePolynomial| S)) (|Boolean|))))
         (SPROG
-         ((#4=#:G1329 NIL)
+         ((#4=#:G909 NIL)
           (|pp|
            (|Union| (|Matrix| (|SparseUnivariatePolynomial| (|Integer|)))
                     (|Boolean|)))
@@ -1865,7 +1865,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |pp| 0)
-                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G1328)))
+                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G908)))
                   ('T (PROGN (LETT #4# (CONS 1 (QCDR |pp|))) (GO #5#)))))))
           #5# (EXIT #4#)))) 
 
@@ -1981,7 +1981,7 @@
                      (|List| (|SparseUnivariatePolynomial| S))))
          (% (|Union| (|Matrix| (|SparseUnivariatePolynomial| S)) (|Boolean|))))
         (SPROG
-         ((#4=#:G1390 NIL)
+         ((#4=#:G970 NIL)
           (|pp|
            (|Union| (|Matrix| (|SparseUnivariatePolynomial| (|Integer|)))
                     (|Boolean|)))
@@ -1997,7 +1997,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |pp| 0)
-                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G1389)))
+                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G969)))
                   ('T (PROGN (LETT #4# (CONS 1 (QCDR |pp|))) (GO #5#)))))))
           #5# (EXIT #4#)))) 
 
@@ -2082,7 +2082,7 @@
                      (|List| (|SparseUnivariatePolynomial| S))))
          (% (|Union| (|Matrix| (|SparseUnivariatePolynomial| S)) (|Boolean|))))
         (SPROG
-         ((#4=#:G1433 NIL)
+         ((#4=#:G1013 NIL)
           (|pp|
            (|Union| (|Matrix| (|SparseUnivariatePolynomial| (|Integer|)))
                     (|Boolean|)))
@@ -2098,7 +2098,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |pp| 0)
-                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G1432)))
+                   (PROGN (LETT #4# (CONS 0 (QCDR |pp|))) (GO #5=#:G1012)))
                   ('T (PROGN (LETT #4# (CONS 1 (QCDR |pp|))) (GO #5#)))))))
           #5# (EXIT #4#)))) 
 
@@ -2180,14 +2180,14 @@
          (|qvar| (|Symbol|)) (|vars| (|List| (|Symbol|)))
          (% (|Union| "good" "reject" "no_solution")))
         (SPROG
-         ((#1=#:G1493 NIL) (|min_ord| #2=(|NonNegativeInteger|))
-          (#3=#:G1490 NIL) (|delta| (|Integer|)) (|sigma0| #2#)
-          (|pa| (|U32Vector|)) (#4=#:G1496 NIL) (|j| NIL) (|c0| (|Integer|))
-          (#5=#:G1491 NIL) (|ord| #2#) (#6=#:G1495 NIL) (|i| NIL)
+         ((#1=#:G1080 NIL) (|min_ord| #2=(|NonNegativeInteger|))
+          (#3=#:G1077 NIL) (|delta| (|Integer|)) (|sigma0| #2#)
+          (|pa| (|U32Vector|)) (#4=#:G1083 NIL) (|j| NIL) (|c0| (|Integer|))
+          (#5=#:G1078 NIL) (|ord| #2#) (#6=#:G1082 NIL) (|i| NIL)
           (|nres| (|Vector| (|U32Vector|))) (|gv0| (|U32Vector|))
-          (|gvl| (|List| (|U32Vector|))) (#7=#:G1492 NIL)
+          (|gvl| (|List| (|U32Vector|))) (#7=#:G1079 NIL)
           (|gv0p| (|Union| (|List| (|U32Vector|)) "failed"))
-          (|lpt| (|List| (|Integer|))) (|qval| (|Integer|)) (#8=#:G1494 NIL)
+          (|lpt| (|List| (|Integer|))) (|qval| (|Integer|)) (#8=#:G1081 NIL)
           (|var| NIL) (|ii| NIL) (|n0| (|NonNegativeInteger|)))
          (SEQ
           (EXIT
@@ -2240,7 +2240,7 @@
                                      ((QEQCAR |gv0p| 1)
                                       (PROGN
                                        (LETT #7# |$NoValue|)
-                                       (GO #10=#:G1460)))
+                                       (GO #10=#:G1040)))
                                      ('T
                                       (SEQ (LETT |gvl| (QCDR |gv0p|))
                                            (EXIT
@@ -2282,7 +2282,7 @@
                                                                 (PROGN
                                                                  (LETT #5# 1)
                                                                  (GO
-                                                                  #11=#:G1473))))))))
+                                                                  #11=#:G1060))))))))
                                                       (LETT |i| (|inc_SI| |i|))
                                                       (GO G190) G191
                                                       (EXIT NIL)))
@@ -2294,7 +2294,7 @@
                                                    (LETT #1#
                                                          (CONS 2
                                                                "no_solution"))
-                                                   (GO #12=#:G1489)))
+                                                   (GO #12=#:G1076)))
                                                  ((< |ord| |sigma0|)
                                                   (SEQ
                                                    (LETT |c0|
@@ -2343,7 +2343,7 @@
                                                                 (PROGN
                                                                  (LETT #3# 1)
                                                                  (GO
-                                                                  #13=#:G1480)))))
+                                                                  #13=#:G1067)))))
                                                              ('T
                                                               (SETELT_U32 |gv0|
                                                                           (+
@@ -2375,9 +2375,9 @@
 
 (DECLAIM (NOTINLINE |ModularHermitePadeSolver;|)) 
 
-(DEFUN |ModularHermitePadeSolver| (&REST #1=#:G1497)
+(DEFUN |ModularHermitePadeSolver| (&REST #1=#:G1084)
   (SPROG NIL
-         (PROG (#2=#:G1498)
+         (PROG (#2=#:G1085)
            (RETURN
             (COND
              ((LETT #2#
@@ -2397,14 +2397,14 @@
 
 (DEFUN |ModularHermitePadeSolver;| (|#1| |#2|)
   (SPROG
-   ((#1=#:G1415 NIL) (#2=#:G1413 NIL) (#3=#:G1372 NIL) (#4=#:G1370 NIL)
-    (#5=#:G1311 NIL) (#6=#:G1309 NIL) (#7=#:G1268 NIL) (#8=#:G1266 NIL)
-    (#9=#:G1189 NIL) (#10=#:G1187 NIL) (#11=#:G1146 NIL) (#12=#:G1144 NIL)
-    (#13=#:G1085 NIL) (#14=#:G1083 NIL) (#15=#:G1042 NIL) (#16=#:G1040 NIL)
-    (#17=#:G932 NIL) (#18=#:G930 NIL) (#19=#:G889 NIL) (#20=#:G887 NIL)
-    (#21=#:G828 NIL) (#22=#:G826 NIL) (#23=#:G785 NIL) (#24=#:G783 NIL)
-    (#25=#:G706 NIL) (#26=#:G704 NIL) (#27=#:G663 NIL) (#28=#:G661 NIL)
-    (#29=#:G602 NIL) (#30=#:G600 NIL) (#31=#:G559 NIL) (#32=#:G557 NIL)
+   ((#1=#:G995 NIL) (#2=#:G993 NIL) (#3=#:G952 NIL) (#4=#:G950 NIL)
+    (#5=#:G891 NIL) (#6=#:G889 NIL) (#7=#:G848 NIL) (#8=#:G846 NIL)
+    (#9=#:G769 NIL) (#10=#:G767 NIL) (#11=#:G726 NIL) (#12=#:G724 NIL)
+    (#13=#:G665 NIL) (#14=#:G663 NIL) (#15=#:G622 NIL) (#16=#:G620 NIL)
+    (#17=#:G512 NIL) (#18=#:G510 NIL) (#19=#:G469 NIL) (#20=#:G467 NIL)
+    (#21=#:G408 NIL) (#22=#:G406 NIL) (#23=#:G365 NIL) (#24=#:G363 NIL)
+    (#25=#:G286 NIL) (#26=#:G284 NIL) (#27=#:G243 NIL) (#28=#:G241 NIL)
+    (#29=#:G182 NIL) (#30=#:G180 NIL) (#31=#:G139 NIL) (#32=#:G137 NIL)
     (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))

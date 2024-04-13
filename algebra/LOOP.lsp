@@ -4,7 +4,7 @@
          ((|li| #1=(|List| (|NonNegativeInteger|)))
           (|lx| #2=(|List| (|NonNegativeInteger|)))
           (|minValue| (|NonNegativeInteger|)) (|l2| #2#) (|l1| #1#)
-          (#3=#:G465 NIL) (|x| NIL) (#4=#:G464 NIL))
+          (#3=#:G34 NIL) (|x| NIL) (#4=#:G33 NIL))
          (SEQ
           (LETT |li|
                 (PROGN
@@ -42,64 +42,49 @@
 
 (SDEFUN |LOOP;hash| ((|s| (%)) (% (|SingleInteger|))) 0) 
 
-(SDEFUN |LOOP;latex;%S;4| ((|lp| (%)) (% (|String|)))
-        (SPROG
-         ((|res| (|String|)) (|x| (|NonNegativeInteger|)) (#1=#:G473 NIL)
-          (|i| NIL))
-         (SEQ (LETT |res| "")
-              (SEQ (LETT |i| 1) (LETT #1# (SPADCALL |lp| (QREFELT % 14))) G190
-                   (COND ((|greater_SI| |i| #1#) (GO G191)))
-                   (SEQ (LETT |x| (QAREF1 |lp| (- |i| 1)))
-                        (EXIT
-                         (LETT |res|
-                               (SPADCALL (LIST |res| "->" (STRINGIMAGE |x|))
-                                         (QREFELT % 17)))))
-                   (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
-              (EXIT (SPADCALL (LIST "[" |res| "]") (QREFELT % 17)))))) 
-
-(SDEFUN |LOOP;=;2%B;5| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
-        (SPROG ((#1=#:G480 NIL) (#2=#:G481 NIL) (|i| NIL))
+(SDEFUN |LOOP;=;2%B;4| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
+        (SPROG ((#1=#:G45 NIL) (#2=#:G46 NIL) (|i| NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((SPADCALL (SPADCALL |x| (QREFELT % 14))
-                              (SPADCALL |y| (QREFELT % 14)) (QREFELT % 20))
-                    (PROGN (LETT #1# NIL) (GO #3=#:G479))))
+                              (SPADCALL |y| (QREFELT % 14)) (QREFELT % 16))
+                    (PROGN (LETT #1# NIL) (GO #3=#:G44))))
                   (SEQ (LETT |i| 1) (LETT #2# (SPADCALL |x| (QREFELT % 14)))
                        G190 (COND ((|greater_SI| |i| #2#) (GO G191)))
                        (SEQ
                         (EXIT
                          (COND
                           ((SPADCALL (QAREF1 |x| (- |i| 1))
-                                     (QAREF1 |y| (- |i| 1)) (QREFELT % 20))
+                                     (QAREF1 |y| (- |i| 1)) (QREFELT % 16))
                            (PROGN (LETT #1# NIL) (GO #3#))))))
                        (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                   (EXIT 'T)))
                 #3# (EXIT #1#)))) 
 
-(SDEFUN |LOOP;coerce;%Of;6| ((|lp| (%)) (% (|OutputForm|)))
+(SDEFUN |LOOP;coerce;%Of;5| ((|lp| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|res| (|OutputForm|)) (|x| (|NonNegativeInteger|)) (#1=#:G487 NIL)
+         ((|res| (|OutputForm|)) (|x| (|NonNegativeInteger|)) (#1=#:G52 NIL)
           (|i| NIL))
-         (SEQ (LETT |res| (SPADCALL (QREFELT % 23)))
+         (SEQ (LETT |res| (SPADCALL (QREFELT % 19)))
               (SEQ (LETT |i| 1) (LETT #1# (SPADCALL |lp| (QREFELT % 14))) G190
                    (COND ((|greater_SI| |i| #1#) (GO G191)))
                    (SEQ (LETT |x| (QAREF1 |lp| (- |i| 1)))
                         (EXIT
                          (LETT |res|
                                (SPADCALL
-                                (LIST |res| (SPADCALL '-> (QREFELT % 25))
-                                      (SPADCALL |x| (QREFELT % 26)))
-                                (QREFELT % 27)))))
+                                (LIST |res| (SPADCALL '-> (QREFELT % 21))
+                                      (SPADCALL |x| (QREFELT % 22)))
+                                (QREFELT % 24)))))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
-              (EXIT (SPADCALL |res| (QREFELT % 28)))))) 
+              (EXIT (SPADCALL |res| (QREFELT % 25)))))) 
 
 (DECLAIM (NOTINLINE |Loop;|)) 
 
 (DEFUN |Loop| ()
   (SPROG NIL
-         (PROG (#1=#:G489)
+         (PROG (#1=#:G54)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Loop|))
@@ -117,7 +102,7 @@
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|Loop|))
-          (LETT % (GETREFV 30))
+          (LETT % (GETREFV 28))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|Loop| NIL (CONS 1 %))
@@ -130,24 +115,22 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL '|Rep| (|List| 13) (0 . |concat|)
               (6 . |construct|) |LOOP;loop;L%;1| (11 . |entries|)
-              |LOOP;entries;%L;2| (|NonNegativeInteger|) (16 . |#|) (|List| %)
-              (|String|) (21 . |concat|) |LOOP;latex;%S;4| (|Boolean|)
-              (26 . ~=) |LOOP;=;2%B;5| (|OutputForm|) (32 . |empty|) (|Symbol|)
-              (36 . |outputForm|) (41 . |coerce|) (46 . |hconcat|)
-              (51 . |bracket|) |LOOP;coerce;%Of;6|)
-           '#(~= 56 |loop| 62 |latex| 67 |entries| 72 |coerce| 77 = 82) 'NIL
+              |LOOP;entries;%L;2| (|NonNegativeInteger|) (16 . |#|) (|Boolean|)
+              (21 . ~=) |LOOP;=;2%B;4| (|OutputForm|) (27 . |empty|) (|Symbol|)
+              (31 . |outputForm|) (36 . |coerce|) (|List| %) (41 . |hconcat|)
+              (46 . |bracket|) |LOOP;coerce;%Of;5| (|String|))
+           '#(~= 51 |loop| 57 |latex| 62 |entries| 67 |coerce| 72 = 77) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
                  (CONS '#(|SetCategory&| |BasicType&| NIL)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 22))
-                        (|makeByteWordVec2| 29
+                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 18))
+                        (|makeByteWordVec2| 27
                                             '(2 7 0 0 0 8 1 6 0 7 9 1 6 7 0 11
-                                              1 6 13 0 14 1 16 0 15 17 2 13 19
-                                              0 0 20 0 22 0 23 1 22 0 24 25 1
-                                              13 22 0 26 1 22 0 15 27 1 22 0 0
-                                              28 2 0 19 0 0 1 1 0 0 7 10 1 0 16
-                                              0 18 1 0 7 0 12 1 0 22 0 29 2 0
-                                              19 0 0 21)))))
+                                              1 6 13 0 14 2 13 15 0 0 16 0 18 0
+                                              19 1 18 0 20 21 1 13 18 0 22 1 18
+                                              0 23 24 1 18 0 0 25 2 0 15 0 0 1
+                                              1 0 0 7 10 1 0 27 0 1 1 0 7 0 12
+                                              1 0 18 0 26 2 0 15 0 0 17)))))
            '|lookupComplete|)) 
 
 (MAKEPROP '|Loop| 'NILADIC T) 

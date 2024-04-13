@@ -61,7 +61,7 @@
 
 (DEFUN |TextFile| ()
   (SPROG NIL
-         (PROG (#1=#:G492)
+         (PROG (#1=#:G50)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|TextFile|))

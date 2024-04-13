@@ -9,83 +9,80 @@
 
 ; $includeUnexposed? := true   --default setting
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$includeUnexposed?| T))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$includeUnexposed?| T))
 
 ; $tick := char '_`            --field separator for database files
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$tick| (|char| '|`|)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$tick| (|char| '|`|)))
 
 ; $charUnderscore := ('__)     --needed because of parser bug
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$charUnderscore| '_))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$charUnderscore| '_))
 
 ; $wild1 := '"[^`]*"           --phrase used to convert keys to grep strings
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$wild1| "[^`]*"))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$wild1| "[^`]*"))
 
 ; $browseCountThreshold := 10  --the maximum number of names that will display
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$browseCountThreshold| 10))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$browseCountThreshold| 10))
 
 ; $opDescriptionThreshold := 4 --if <= 4 operations with unique name, give desc
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$opDescriptionThreshold| 4))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$opDescriptionThreshold| 4))
 
 ; $browseMixedCase := true     --distinquish case in the browser?
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$browseMixedCase| T))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$browseMixedCase| T))
 
 ; $docTable := nil             --cache for documentation table
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$docTable| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$docTable| NIL))
 
 ; $conArgstrings := nil        --bound by conPage so that kPage
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$conArgstrings| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$conArgstrings| NIL))
 
 ; $conformsAreDomains  := false     --are all arguments of a constructor given?
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$conformsAreDomains| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$conformsAreDomains| NIL))
 
 ; $returnNowhereFromGoGet := false  --special branch out for goget for browser
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$returnNowhereFromGoGet| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$returnNowhereFromGoGet| NIL))
 
 ; $dbDataFunctionAlist := nil       --set by dbGatherData
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$dbDataFunctionAlist| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$dbDataFunctionAlist| NIL))
 
 ; $domain   := nil             --bound in koOps
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$domain| NIL))
-
-; $infovec  := nil             --bound in koOps
-
-(EVAL-WHEN (EVAL LOAD) (SETQ |$infovec| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$domain| NIL))
 
 ; $predvec  := nil             --bound in koOps
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$predvec| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$predvec| NIL))
 
 ; $exposedOnlyIfTrue := nil    --see repeatSearch, dbShowOps, dbShowCon
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$exposedOnlyIfTrue| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$exposedOnlyIfTrue| NIL))
 
 ; $bcMultipleNames := nil      --see bcNameConTable
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$bcMultipleNames| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$bcMultipleNames| NIL))
 
 ; $docTableHash := MAKE_HASHTABLE('EQUAL)  --see dbExpandOpAlistIfNecessary
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$docTableHash| (MAKE_HASHTABLE 'EQUAL)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$docTableHash| (MAKE_HASHTABLE 'EQUAL)))
 
 ; $groupChoice := nil  --see dbShowOperationsFromConform
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$groupChoice| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$groupChoice| NIL))
 
 ; $pmFilterDelimiters := [char '_(,char '_),char '_ ]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$pmFilterDelimiters| (LIST (|char| '|(|) (|char| '|)|) (|char| '| |))))
 
 ; $dbKindAlist :=
@@ -93,7 +90,7 @@
 ;     [char 'd,:'"domain"],[char 'p,:'"package"],
 ;       [char 'c,:'"category"],[char 'x,:'"default_ package"]]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$dbKindAlist|
           (LIST (CONS (|char| '|o|) "operation") (CONS (|char| '|d|) "domain")
                 (CONS (|char| '|p|) "package") (CONS (|char| '|c|) "category")
@@ -109,7 +106,7 @@
 ;   (implementation  nil         "Implementation Domains" dbShowOpImplementations)
 ;   (conditions      "Condition" "Conditions"      dbShowOpConditions))
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$OpViewTable|
           '((|names| "Name" "Names" |dbShowOpNames|)
             (|documentation| "Name" "Names" |dbShowOpDocumentation|)
@@ -831,7 +828,7 @@
 
 ; $from_show_implementations := false
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$from_show_implementations| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$from_show_implementations| NIL))
 
 ; dbEvalableConstructor? form ==
 ;     form is [op,:argl] =>

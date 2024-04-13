@@ -5,11 +5,7 @@
 
 ; $historyDisplayWidth := 120
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$historyDisplayWidth| 120))
-
-; $newline := char 10
-
-(EVAL-WHEN (EVAL LOAD) (SETQ |$newline| (|char| 10)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$historyDisplayWidth| 120))
 
 ; downlink page ==
 ;   htInitPage('"Bridge",nil)
@@ -373,7 +369,7 @@
 ;   grepForm := mkGrepPattern(filter,'none)
 ;   $key: local := 'none
 ;   results := applyGrep(grepForm,'gloss)
-;   defstream := MAKE_INSTREAM(STRCONC(getEnv '"FRICAS",
+;   defstream := MAKE_INSTREAM(STRCONC($spadroot,
 ;                                      '"/algebra/glossdef.text"))
 ;   lines := gatherGlossLines(results,defstream)
 ;   heading :=
@@ -418,7 +414,7 @@
               (SETQ |results| (|applyGrep| |grepForm| '|gloss|))
               (SETQ |defstream|
                       (MAKE_INSTREAM
-                       (STRCONC (|getEnv| "FRICAS") "/algebra/glossdef.text")))
+                       (STRCONC |$spadroot| "/algebra/glossdef.text")))
               (SETQ |lines| (|gatherGlossLines| |results| |defstream|))
               (SETQ |heading|
                       (COND ((EQUAL |pattern| "") "Glossary")

@@ -43,9 +43,9 @@
         ((|f| (|SparseUnivariatePolynomial| P)) (|lvar| (|List| OV))
          (% #1=(|List| (|NonNegativeInteger|))))
         (SPROG
-         ((|ldeg| #1#) (#2=#:G459 NIL) (#3=#:G458 #4=(|NonNegativeInteger|))
-          (#5=#:G460 #4#) (#6=#:G466 NIL) (|fc| NIL) (#7=#:G465 NIL) (|xx| NIL)
-          (#8=#:G464 NIL) (|coefs| (|List| P)))
+         ((|ldeg| #1#) (#2=#:G21 NIL) (#3=#:G20 #4=(|NonNegativeInteger|))
+          (#5=#:G22 #4#) (#6=#:G28 NIL) (|fc| NIL) (#7=#:G27 NIL) (|xx| NIL)
+          (#8=#:G26 NIL) (|coefs| (|List| P)))
          (SEQ (LETT |coefs| (SPADCALL |f| (QREFELT % 37)))
               (EXIT
                (LETT |ldeg|
@@ -92,8 +92,8 @@
 (SDEFUN |FACUTIL;variables;SupL;5|
         ((|f| (|SparseUnivariatePolynomial| P)) (% (|List| OV)))
         (SPROG
-         ((#1=#:G468 NIL) (#2=#:G467 #3=(|List| OV)) (#4=#:G469 #3#)
-          (#5=#:G471 NIL) (|cf| NIL))
+         ((#1=#:G30 NIL) (#2=#:G29 #3=(|List| OV)) (#4=#:G31 #3#)
+          (#5=#:G33 NIL) (|cf| NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -120,7 +120,7 @@
          (% (|SparseUnivariatePolynomial| P)))
         (SPROG
          ((|n| #1=(|Integer|)) (|ris| (|SparseUnivariatePolynomial| P))
-          (#2=#:G478 NIL) (|n1| #1#) (|k| (|Integer|))
+          (#2=#:G45 NIL) (|n1| #1#) (|k| (|Integer|))
           (|#G1| (|NonNegativeInteger|)))
          (SEQ (LETT |#G1| (SPADCALL |f| (QREFELT % 18))) (LETT |n1| |#G1|)
               (EXIT
@@ -163,9 +163,9 @@
 
 (DECLAIM (NOTINLINE |FactoringUtilities;|)) 
 
-(DEFUN |FactoringUtilities| (&REST #1=#:G484)
+(DEFUN |FactoringUtilities| (&REST #1=#:G51)
   (SPROG NIL
-         (PROG (#2=#:G485)
+         (PROG (#2=#:G52)
            (RETURN
             (COND
              ((LETT #2#

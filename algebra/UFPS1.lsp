@@ -10,9 +10,9 @@
 
 (DECLAIM (NOTINLINE |UnivariateFormalPowerSeriesFunctions;|)) 
 
-(DEFUN |UnivariateFormalPowerSeriesFunctions| (#1=#:G449)
+(DEFUN |UnivariateFormalPowerSeriesFunctions| (#1=#:G3)
   (SPROG NIL
-         (PROG (#2=#:G450)
+         (PROG (#2=#:G4)
            (RETURN
             (COND
              ((LETT #2#

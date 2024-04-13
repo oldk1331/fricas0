@@ -1,12 +1,12 @@
 
-(SDEFUN |DLIST;elt;%unique%;1| ((|x| (%)) (T3 ("unique")) (% (%)))
+(SDEFUN |DLIST;elt;%unique%;1| ((|x| (%)) (T1 ("unique")) (% (%)))
         (SPADCALL |x| (QREFELT % 7))) 
 
-(SDEFUN |DLIST;elt;%sort%;2| ((|x| (%)) (T4 ("sort")) (% (%)))
+(SDEFUN |DLIST;elt;%sort%;2| ((|x| (%)) (T2 ("sort")) (% (%)))
         (SPADCALL |x| (QREFELT % 10))) 
 
 (SDEFUN |DLIST;elt;%countNni;3|
-        ((|x| (%)) (T5 ("count")) (% (|NonNegativeInteger|)))
+        ((|x| (%)) (T3 ("count")) (% (|NonNegativeInteger|)))
         (SPADCALL |x| (QREFELT % 14))) 
 
 (PUT '|DLIST;coerce;L%;4| '|SPADreplace| '(XLAM (|x|) |x|)) 
@@ -25,9 +25,9 @@
 
 (DECLAIM (NOTINLINE |DataList;|)) 
 
-(DEFUN |DataList| (#1=#:G469)
+(DEFUN |DataList| (#1=#:G32)
   (SPROG NIL
-         (PROG (#2=#:G470)
+         (PROG (#2=#:G33)
            (RETURN
             (COND
              ((LETT #2#
@@ -42,8 +42,8 @@
 
 (DEFUN |DataList;| (|#1|)
   (SPROG
-   ((#1=#:G465 NIL) (#2=#:G466 NIL) (#3=#:G468 NIL) (#4=#:G467 NIL) (|pv$| NIL)
-    (#5=#:G462 NIL) (#6=#:G463 NIL) (#7=#:G464 NIL) (% NIL) (|dv$| NIL)
+   ((#1=#:G28 NIL) (#2=#:G29 NIL) (#3=#:G31 NIL) (#4=#:G30 NIL) (|pv$| NIL)
+    (#5=#:G25 NIL) (#6=#:G26 NIL) (#7=#:G27 NIL) (% NIL) (|dv$| NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))

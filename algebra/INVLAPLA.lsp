@@ -8,8 +8,8 @@
         ((|p| (|SparseUnivariatePolynomial| F)) (|v| (|Symbol|))
          (% (|Boolean|)))
         (SPROG
-         ((#1=#:G463 NIL) (#2=#:G462 #3=(|Boolean|)) (#4=#:G464 #3#)
-          (#5=#:G466 NIL) (|c| NIL))
+         ((#1=#:G21 NIL) (#2=#:G20 #3=(|Boolean|)) (#4=#:G22 #3#)
+          (#5=#:G24 NIL) (|c| NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -85,11 +85,11 @@
 (SDEFUN |INVLAPLA;iltsqfr|
         ((|r| (|Fraction| (|SparseUnivariatePolynomial| F))) (|t| (F)) (% (F)))
         (SPROG
-         ((#1=#:G486 NIL) (#2=#:G485 (F)) (#3=#:G487 (F)) (#4=#:G493 NIL)
-          (|a| NIL) (#5=#:G494 NIL) (|b| NIL)
-          (|nl| (|List| (|SparseUnivariatePolynomial| F))) (#6=#:G483 NIL)
-          (|ql| (|List| (|SparseUnivariatePolynomial| F))) (#7=#:G492 NIL)
-          (|qq| NIL) (#8=#:G491 NIL) (|q| (|SparseUnivariatePolynomial| F))
+         ((#1=#:G61 NIL) (#2=#:G60 (F)) (#3=#:G62 (F)) (#4=#:G68 NIL) (|a| NIL)
+          (#5=#:G69 NIL) (|b| NIL)
+          (|nl| (|List| (|SparseUnivariatePolynomial| F))) (#6=#:G58 NIL)
+          (|ql| (|List| (|SparseUnivariatePolynomial| F))) (#7=#:G67 NIL)
+          (|qq| NIL) (#8=#:G66 NIL) (|q| (|SparseUnivariatePolynomial| F))
           (|p| (|SparseUnivariatePolynomial| F)))
          (SEQ
           (COND
@@ -156,7 +156,7 @@
         ((|p| (|SparseUnivariatePolynomial| F))
          (|q| (|SparseUnivariatePolynomial| F)) (|t| (F)) (% (F)))
         (SPROG
-         ((#1=#:G500 NIL) (#2=#:G499 (F)) (#3=#:G501 (F)) (#4=#:G506 NIL)
+         ((#1=#:G79 NIL) (#2=#:G78 (F)) (#3=#:G80 (F)) (#4=#:G85 NIL)
           (|root| NIL) (|q1| (|SparseUnivariatePolynomial| F))
           (|roots| (|List| F)) (|alpha| (F)) (|d| (F)) (|b| (F)) (|e| (F))
           (|c| (F)) (|a| (F)) (|cp| (F)))
@@ -270,9 +270,9 @@
 
 (DECLAIM (NOTINLINE |InverseLaplaceTransform;|)) 
 
-(DEFUN |InverseLaplaceTransform| (&REST #1=#:G507)
+(DEFUN |InverseLaplaceTransform| (&REST #1=#:G86)
   (SPROG NIL
-         (PROG (#2=#:G508)
+         (PROG (#2=#:G87)
            (RETURN
             (COND
              ((LETT #2#

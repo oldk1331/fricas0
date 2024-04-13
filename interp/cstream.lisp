@@ -46,7 +46,7 @@
 
 ; StreamNil:= ["nullstream"]
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |StreamNil| (LIST '|nullstream|)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |StreamNil| (LIST '|nullstream|)))
 
 ; incRgen s==Delay(function incRgen1,[s])
 

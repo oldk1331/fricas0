@@ -10,9 +10,9 @@
 
 (DECLAIM (NOTINLINE |ResolveLatticeCompletion;|)) 
 
-(DEFUN |ResolveLatticeCompletion| (#1=#:G450)
+(DEFUN |ResolveLatticeCompletion| (#1=#:G3)
   (SPROG NIL
-         (PROG (#2=#:G451)
+         (PROG (#2=#:G4)
            (RETURN
             (COND
              ((LETT #2#

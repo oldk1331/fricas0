@@ -44,7 +44,7 @@
 
 ; init_parse_tran()
 
-(EVAL-WHEN (EVAL LOAD) (PROG () (RETURN (|init_parse_tran|))))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (PROG () (RETURN (|init_parse_tran|))))
 
 ; parseTran x ==
 ;   atom x => parseAtom x

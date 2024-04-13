@@ -3,8 +3,8 @@
         ((|lp| (|List| (|Polynomial| F))) (|lv| (|List| (|Symbol|)))
          (% (|List| (|Polynomial| F))))
         (SPROG
-         ((#1=#:G457 NIL) (|pp| NIL) (#2=#:G456 NIL) (|gb| (|List| |DPoly|))
-          (|b| (|List| |DPoly|)) (#3=#:G455 NIL) (|pol| NIL) (#4=#:G454 NIL)
+         ((#1=#:G23 NIL) (|pp| NIL) (#2=#:G22 NIL) (|gb| (|List| |DPoly|))
+          (|b| (|List| |DPoly|)) (#3=#:G21 NIL) (|pol| NIL) (#4=#:G20 NIL)
           (DP
            (|Join|
             (|DirectProductCategory| (|call| LENGTH |lv|)
@@ -117,8 +117,8 @@
         ((|lp| (|List| (|Polynomial| F))) (|lv| (|List| (|Symbol|)))
          (% (|List| (|Polynomial| F))))
         (SPROG
-         ((#1=#:G467 NIL) (|pp| NIL) (#2=#:G466 NIL) (|gb| (|List| |HDPoly|))
-          (|b| (|List| |HDPoly|)) (#3=#:G465 NIL) (|pol| NIL) (#4=#:G464 NIL)
+         ((#1=#:G35 NIL) (|pp| NIL) (#2=#:G34 NIL) (|gb| (|List| |HDPoly|))
+          (|b| (|List| |HDPoly|)) (#3=#:G33 NIL) (|pol| NIL) (#4=#:G32 NIL)
           (HDP
            (|DirectProductCategory| (|call| LENGTH |lv|)
                                     (|NonNegativeInteger|)))
@@ -229,9 +229,9 @@
 
 (DECLAIM (NOTINLINE |PolyGroebner;|)) 
 
-(DEFUN |PolyGroebner| (#1=#:G468)
+(DEFUN |PolyGroebner| (#1=#:G36)
   (SPROG NIL
-         (PROG (#2=#:G469)
+         (PROG (#2=#:G37)
            (RETURN
             (COND
              ((LETT #2#

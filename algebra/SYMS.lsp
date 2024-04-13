@@ -142,7 +142,7 @@
 
 (DEFUN |TheSymbolTable| ()
   (SPROG NIL
-         (PROG (#1=#:G506)
+         (PROG (#1=#:G65)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|TheSymbolTable|))

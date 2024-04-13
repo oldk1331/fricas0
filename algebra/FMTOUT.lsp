@@ -9,7 +9,7 @@
         ((|e| (|OutputForm|)) (|n| (|Integer|)) (% (%))) (CONS |e| |n|)) 
 
 (SDEFUN |FMTOUT;display;%V;3| ((|x| (%)) (% (|Void|)))
-        (SPROG ((#1=#:G454 NIL) (F NIL))
+        (SPROG ((#1=#:G14 NIL) (F NIL))
                (SEQ (LETT F NIL)
                     (LETT #1# (SPADCALL (QREFELT % 9) (QREFELT % 16))) G190
                     (COND
@@ -34,7 +34,7 @@
 
 (DEFUN |FormattedOutput| ()
   (SPROG NIL
-         (PROG (#1=#:G456)
+         (PROG (#1=#:G16)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|FormattedOutput|))

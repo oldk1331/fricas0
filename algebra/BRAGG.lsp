@@ -6,7 +6,7 @@
 (DEFPARAMETER |BinaryRecursiveAggregate;AL| 'NIL) 
 
 (DEFUN |BinaryRecursiveAggregate| (|t#1|)
-  (LET (#1=#:G480 (#2=#:G481 (|devaluate| |t#1|)))
+  (LET (#1=#:G33 (#2=#:G34 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |BinaryRecursiveAggregate;AL|)) (CDR #1#))
           (T
            (SETQ |BinaryRecursiveAggregate;AL|
@@ -16,7 +16,7 @@
            #1#)))) 
 
 (DEFUN |BinaryRecursiveAggregate;| (|t#1|)
-  (SPROG ((#1=#:G479 NIL))
+  (SPROG ((#1=#:G32 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)

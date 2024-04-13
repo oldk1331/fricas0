@@ -8,10 +8,10 @@
         (T (SETQ |FloatingPointSystem;AL| (|FloatingPointSystem;|))))) 
 
 (DEFUN |FloatingPointSystem;| ()
-  (SPROG ((#1=#:G449 NIL))
+  (SPROG ((#1=#:G2 NIL))
          (PROG1
              (LETT #1#
-                   (|subst_in_cat| '(#2=#:G448) (LIST '(|String|))
+                   (|subst_in_cat| '(#2=#:G1) (LIST '(|String|))
                                    (|Join| (|RealNumberSystem|) (|Approximate|)
                                            (|ConvertibleTo| '#2#)
                                            (|mkCategory|

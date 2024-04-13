@@ -762,8 +762,8 @@
 ; dbSearchOrder(conform,domname,$domain) ==  --domain = nil or set to live domain
 ;   conform := domname or conform
 ;   name:= opOf conform
-;   $infovec: local := dbInfovec name or return nil  --exit for categories
-;   u := $infovec.3
+;   infovec := dbInfovec name or return nil  --exit for categories
+;   u := infovec.3
 ;   $predvec:=
 ;     $domain => $domain . 3
 ;     GETDATABASE(name,'PREDICATES)
@@ -780,7 +780,7 @@
 ;       (pak := catinfo . i) and pred   --only those with default packages
 ;     pakform ==
 ;       pak and not IDENTP pak => devaluate pak --in case it has been instantiated
-;       catform := kFormatSlotDomain catvec . i
+;       catform := kFormatSlotDomain1(catvec.i, infovec)
 ;       res := dbSubConform(rest(conform), [pak, "%", :rest(catform)])
 ;       if domname then res := SUBST(domname, '%, res)
 ;       res
@@ -788,15 +788,14 @@
 
 (DEFUN |dbSearchOrder| (|conform| |domname| |$domain|)
   (DECLARE (SPECIAL |$domain|))
-  (PROG (|$infovec| |catforms| |res| |catform| |pak| |pred| |p| |catvec|
-         |catinfo| |catpredvec| |u| |name|)
-    (DECLARE (SPECIAL |$infovec|))
+  (PROG (|name| |infovec| |u| |catpredvec| |catinfo| |catvec| |p| |pred| |pak|
+         |catform| |res| |catforms|)
     (RETURN
      (PROGN
       (SETQ |conform| (OR |domname| |conform|))
       (SETQ |name| (|opOf| |conform|))
-      (SETQ |$infovec| (OR (|dbInfovec| |name|) (RETURN NIL)))
-      (SETQ |u| (ELT |$infovec| 3))
+      (SETQ |infovec| (OR (|dbInfovec| |name|) (RETURN NIL)))
+      (SETQ |u| (ELT |infovec| 3))
       (SETQ |$predvec|
               (COND (|$domain| (ELT |$domain| 3))
                     (#1='T (GETDATABASE |name| 'PREDICATES))))
@@ -832,8 +831,8 @@
                                      (#1#
                                       (PROGN
                                        (SETQ |catform|
-                                               (|kFormatSlotDomain|
-                                                (ELT |catvec| |i|)))
+                                               (|kFormatSlotDomain1|
+                                                (ELT |catvec| |i|) |infovec|))
                                        (SETQ |res|
                                                (|dbSubConform| (CDR |conform|)
                                                 (CONS |pak|
@@ -2198,23 +2197,23 @@
 
 ; dbAddChainDomain conform ==
 ;   [name,:args] := conform
-;   $infovec := dbInfovec name or return nil  --exit for categories
-;   template := $infovec . 0
+;   infovec := dbInfovec(name) or return nil  --exit for categories
+;   template := infovec.0
 ;   null (form := template . 5) => nil
-;   dbSubConform(args,kFormatSlotDomain devaluate form)
+;   dbSubConform(args, kFormatSlotDomain1(devaluate(form), infovec))
 
 (DEFUN |dbAddChainDomain| (|conform|)
-  (PROG (|name| |args| |template| |form|)
+  (PROG (|name| |args| |infovec| |template| |form|)
     (RETURN
      (PROGN
       (SETQ |name| (CAR |conform|))
       (SETQ |args| (CDR |conform|))
-      (SETQ |$infovec| (OR (|dbInfovec| |name|) (RETURN NIL)))
-      (SETQ |template| (ELT |$infovec| 0))
+      (SETQ |infovec| (OR (|dbInfovec| |name|) (RETURN NIL)))
+      (SETQ |template| (ELT |infovec| 0))
       (COND ((NULL (SETQ |form| (ELT |template| 5))) NIL)
             ('T
              (|dbSubConform| |args|
-              (|kFormatSlotDomain| (|devaluate| |form|)))))))))
+              (|kFormatSlotDomain1| (|devaluate| |form|) |infovec|))))))))
 
 ; dbSubConform(args,u) ==
 ;   atom u =>
@@ -3022,25 +3021,25 @@
 
 ; X := '"{\sf Record(a:A,b:B)} is used to create the class of pairs of objects made up of a value of type {\em A} selected by the symbol {\em a} and a value of type {\em B} selected by the symbol {\em b}. "
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ X
           "{\\sf Record(a:A,b:B)} is used to create the class of pairs of objects made up of a value of type {\\em A} selected by the symbol {\\em a} and a value of type {\\em B} selected by the symbol {\\em b}. "))
 
 ; Y := '"In general, the {\sf Record} constructor can take any number of arguments and thus can be used to create aggregates of heterogeneous components of arbitrary size selectable by name. "
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ Y
           "In general, the {\\sf Record} constructor can take any number of arguments and thus can be used to create aggregates of heterogeneous components of arbitrary size selectable by name. "))
 
 ; Z := '"{\sf Record} is a primitive domain of \Language{} which cannot be defined in the \Language{} language."
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ Z
           "{\\sf Record} is a primitive domain of \\Language{} which cannot be defined in the \\Language{} language."))
 
 ; MESSAGE := STRCONC(X,Y,Z)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ MESSAGE (STRCONC X Y Z)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ MESSAGE (STRCONC X Y Z)))
 
 ; PUT('Record,'documentation,SUBST(MESSAGE,'MESSAGE,'(
 ;   (constructor (NIL MESSAGE))
@@ -3062,7 +3061,7 @@
 ;    "\spad{r . b := y} destructively replaces the value stored in record \spad{r} under selector \spad{b} by the value of \spad{y}. Error: if \spad{r} has not been previously assigned a value."))
 ;    )))
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (PROG ()
     (RETURN
      (PUT '|Record| '|documentation|
@@ -3092,19 +3091,19 @@
 
 ; X := '"{\sf Union(A,B)} denotes the class of objects which are which are either members of domain {\em A} or of domain {\em B}. The {\sf Union} constructor can take any number of arguments. "
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ X
           "{\\sf Union(A,B)} denotes the class of objects which are which are either members of domain {\\em A} or of domain {\\em B}. The {\\sf Union} constructor can take any number of arguments. "))
 
 ; Y := '"For an alternate form of {\sf Union} with _"tags_", see \downlink{Union(a:A,b:B)}{DomainUnion}. {\sf Union} is a primitive domain of \Language{} which cannot be defined in the \Language{} language."
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ Y
           "For an alternate form of {\\sf Union} with \"tags\", see \\downlink{Union(a:A,b:B)}{DomainUnion}. {\\sf Union} is a primitive domain of \\Language{} which cannot be defined in the \\Language{} language."))
 
 ; MESSAGE := STRCONC(X,Y)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ MESSAGE (STRCONC X Y)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ MESSAGE (STRCONC X Y)))
 
 ; PUT('UntaggedUnion,'documentation,SUBST(MESSAGE,'MESSAGE,'(
 ;   (constructor (NIL MESSAGE))
@@ -3124,7 +3123,7 @@
 ;     "\spad{coerce(y)}, where \spad{y} has type \spad{B}, returns \spad{y} as a union type."))
 ;   )))
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (PROG ()
     (RETURN
      (PUT '|UntaggedUnion| '|documentation|
@@ -3150,37 +3149,37 @@
 
 ; X := '"{\sf Union(a:A,b:B)} denotes the class of objects which are either members of domain {\em A} or of domain {\em B}. "
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ X
           "{\\sf Union(a:A,b:B)} denotes the class of objects which are either members of domain {\\em A} or of domain {\\em B}. "))
 
 ; Y := '"The symbols {\em a} and {\em b} are called _"tags_" and are used to identify the two _"branches_" of the union. "
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ Y
           "The symbols {\\em a} and {\\em b} are called \"tags\" and are used to identify the two \"branches\" of the union. "))
 
 ; Z := '"The {\sf Union} constructor can take any number of arguments and has an alternate form without {\em tags} (see \downlink{Union(A,B)}{UntaggedUnion}). "
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ Z
           "The {\\sf Union} constructor can take any number of arguments and has an alternate form without {\\em tags} (see \\downlink{Union(A,B)}{UntaggedUnion}). "))
 
 ; W := '"This tagged {\sf Union} type is necessary, for example, to disambiguate two branches of a union where {\em A} and {\em B} denote the same type. "
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ W
           "This tagged {\\sf Union} type is necessary, for example, to disambiguate two branches of a union where {\\em A} and {\\em B} denote the same type. "))
 
 ; A := '"{\sf Union} is a primitive domain of \Language{} which cannot be defined in the \Language{} language."
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ A
           "{\\sf Union} is a primitive domain of \\Language{} which cannot be defined in the \\Language{} language."))
 
 ; MESSAGE := STRCONC(X,Y,Z,W,A)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ MESSAGE (STRCONC X Y Z W A)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ MESSAGE (STRCONC X Y Z W A)))
 
 ; PUT('Union,'documentation,SUBST(MESSAGE,'MESSAGE,'(
 ;   (constructor (NIL MESSAGE))
@@ -3200,7 +3199,7 @@
 ;     "\spad{coerce(y)}, where \spad{y} has type \spad{B}, returns \spad{y} as a union type."))
 ;   )))
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (PROG ()
     (RETURN
      (PUT '|Union| '|documentation|
@@ -3226,25 +3225,25 @@
 
 ; X := '"{\sf Mapping(T,S,...)} denotes the class of objects which are mappings from a source domain ({\em S,...}) into a target domain {\em T}. The {\sf Mapping} constructor can take any number of arguments."
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ X
           "{\\sf Mapping(T,S,...)} denotes the class of objects which are mappings from a source domain ({\\em S,...}) into a target domain {\\em T}. The {\\sf Mapping} constructor can take any number of arguments."))
 
 ; Y := '" All but the first argument is regarded as part of a source tuple for the mapping. For example, {\sf Mapping(T,A,B)} denotes the class of mappings from {\em (A,B)} into {\em T}. "
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ Y
           " All but the first argument is regarded as part of a source tuple for the mapping. For example, {\\sf Mapping(T,A,B)} denotes the class of mappings from {\\em (A,B)} into {\\em T}. "))
 
 ; Z := '"{\sf Mapping} is a primitive domain of \Language{} which cannot be defined in the \Language{} language."
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ Z
           "{\\sf Mapping} is a primitive domain of \\Language{} which cannot be defined in the \\Language{} language."))
 
 ; MESSAGE := STRCONC(X,Y,Z)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ MESSAGE (STRCONC X Y Z)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ MESSAGE (STRCONC X Y Z)))
 
 ; PUT('Mapping,'documentation, SUBST(MESSAGE,'MESSAGE,'(
 ;   (constructor (NIL MESSAGE))
@@ -3252,7 +3251,7 @@
 ;     "\spad{u = v} tests if mapping objects are equal."))
 ;    )))
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (PROG ()
     (RETURN
      (PUT '|Mapping| '|documentation|
@@ -3264,19 +3263,19 @@
 
 ; X := '"{\em Enumeration(a1, a2 ,..., aN)} creates an object which is exactly one of the N symbols {\em a1}, {\em a2}, ..., or {\em aN}, N > 0. "
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ X
           "{\\em Enumeration(a1, a2 ,..., aN)} creates an object which is exactly one of the N symbols {\\em a1}, {\\em a2}, ..., or {\\em aN}, N > 0. "))
 
 ; Y := '" The {\em Enumeration} can constructor can take any number of symbols as arguments."
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ Y
           " The {\\em Enumeration} can constructor can take any number of symbols as arguments."))
 
 ; MESSAGE := STRCONC(X, Y)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ MESSAGE (STRCONC X Y)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ MESSAGE (STRCONC X Y)))
 
 ; PUT('Enumeration, 'documentation, SUBST(MESSAGE, 'MESSAGE, '(
 ;   (constructor (NIL MESSAGE))
@@ -3290,7 +3289,7 @@
 ;      "\spad{coerce(s)} converts a symbol \spad{s} into an enumeration which has \spad{s} as a member symbol"))
 ;   )))
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (PROG ()
     (RETURN
      (PUT '|Enumeration| '|documentation|

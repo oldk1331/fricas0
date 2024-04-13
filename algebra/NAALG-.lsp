@@ -1,7 +1,7 @@
 
 (SDEFUN |NAALG-;plenaryPower;SPiS;1|
         ((|a| (S)) (|n| (|PositiveInteger|)) (% (S)))
-        (SPROG ((|n1| (|PositiveInteger|)) (#1=#:G459 NIL) (#2=#:G458 NIL))
+        (SPROG ((|n1| (|PositiveInteger|)) (#1=#:G23 NIL) (#2=#:G22 NIL))
                (SEQ
                 (COND ((EQL |n| 1) |a|)
                       ('T

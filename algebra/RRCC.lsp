@@ -6,7 +6,7 @@
 (DEFPARAMETER |RealRootCharacterizationCategory;AL| 'NIL) 
 
 (DEFUN |RealRootCharacterizationCategory| (|t#1| |t#2|)
-  (LET (#1=#:G453 (#2=#:G454 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
+  (LET (#1=#:G6 (#2=#:G7 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
     (COND
      ((SETQ #1# (|assoc| #2# |RealRootCharacterizationCategory;AL|)) (CDR #1#))
      (T
@@ -20,7 +20,7 @@
       #1#)))) 
 
 (DEFUN |RealRootCharacterizationCategory;| (|t#1| |t#2|)
-  (SPROG ((#1=#:G452 NIL))
+  (SPROG ((#1=#:G5 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2|) (LIST |t#1| |t#2|)

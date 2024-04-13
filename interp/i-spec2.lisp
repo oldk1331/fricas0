@@ -3578,7 +3578,7 @@
 ;       functionName
 ;      )
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (PROG (|functionName|)
     (RETURN
      ((LAMBDA (|bfVar#86| |name|)

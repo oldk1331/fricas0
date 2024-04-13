@@ -137,7 +137,7 @@
 
 (DEFUN |DoubleFloatElementaryFunctions| ()
   (SPROG NIL
-         (PROG (#1=#:G464)
+         (PROG (#1=#:G34)
            (RETURN
             (COND
              ((LETT #1#

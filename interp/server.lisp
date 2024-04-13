@@ -278,17 +278,17 @@
 
 ; executeQuietCommand() ==
 ;   $QuietCommand: fluid := true
-;   sockGetStringFrom($MenuServer)
+;   stringBuf := sockGetStringFrom($MenuServer)
 ;   CATCH('coerceFailure, CATCH('top_level, CATCH('SPAD_READER,
 ;     parseAndInterpret stringBuf)))
 
 (DEFUN |executeQuietCommand| ()
-  (PROG (|$QuietCommand|)
+  (PROG (|$QuietCommand| |stringBuf|)
     (DECLARE (SPECIAL |$QuietCommand|))
     (RETURN
      (PROGN
       (SETQ |$QuietCommand| T)
-      (|sockGetStringFrom| |$MenuServer|)
+      (SETQ |stringBuf| (|sockGetStringFrom| |$MenuServer|))
       (CATCH '|coerceFailure|
         (CATCH '|top_level|
           (CATCH 'SPAD_READER (|parseAndInterpret| |stringBuf|))))))))

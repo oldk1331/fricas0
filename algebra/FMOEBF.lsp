@@ -13,8 +13,8 @@
 (SDEFUN |FMOEBF;moebiusFunction;L%;4| ((|xx| (|List| P)) (% (%)))
         (SPROG
          ((|mf| (|Matrix| (|Integer|))) (|zf| (|Matrix| (|Integer|)))
-          (#1=#:G469 NIL) (|y| NIL) (#2=#:G468 NIL) (#3=#:G467 NIL) (|x| NIL)
-          (#4=#:G466 NIL) (|xxo| (|List| P)))
+          (#1=#:G30 NIL) (|y| NIL) (#2=#:G29 NIL) (#3=#:G28 NIL) (|x| NIL)
+          (#4=#:G27 NIL) (|xxo| (|List| P)))
          (SEQ
           (LETT |xxo|
                 (SPADCALL (SPADCALL (ELT % 11) |xx| (QREFELT % 14))
@@ -58,20 +58,20 @@
           (EXIT (|FMOEBF;per| (CONS |mf| |xxo|) %))))) 
 
 (SDEFUN |FMOEBF;canonicalZeta| ((|pi| (P)) (|si| (P)) (% (|Integer|)))
-        (SPROG ((#1=#:G472 NIL))
+        (SPROG ((#1=#:G33 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((SPADCALL |pi| |si| (QREFELT % 11))
-                    (PROGN (LETT #1# 1) (GO #2=#:G471))))
+                    (PROGN (LETT #1# 1) (GO #2=#:G32))))
                   (EXIT 0)))
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |FMOEBF;moebiusMu;%2PI;6|
         ((|mf| (%)) (|x| (P)) (|y| (P)) (% (|Integer|)))
         (SPROG
-         ((#1=#:G478 NIL) (|ky| #2=(|Integer|)) (|kx| #2#)
+         ((#1=#:G39 NIL) (|ky| #2=(|Integer|)) (|kx| #2#)
           (|mfn| (|Matrix| (|Integer|))))
          (SEQ
           (EXIT
@@ -88,12 +88,12 @@
                 (EXIT
                  (PROGN
                   (LETT #1# (SPADCALL |mfn| |kx| |ky| (QREFELT % 24)))
-                  (GO #3=#:G477)))))
+                  (GO #3=#:G38)))))
           #3# (EXIT #1#)))) 
 
 (SDEFUN |FMOEBF;apply;%2PI;7| ((|mf| (%)) (|x| (P)) (|y| (P)) (% (|Integer|)))
         (SPROG
-         ((#1=#:G484 NIL) (|ky| #2=(|Integer|)) (|kx| #2#)
+         ((#1=#:G45 NIL) (|ky| #2=(|Integer|)) (|kx| #2#)
           (|mfn| (|Matrix| (|Integer|))))
          (SEQ
           (EXIT
@@ -110,7 +110,7 @@
                 (EXIT
                  (PROGN
                   (LETT #1# (SPADCALL |mfn| |kx| |ky| (QREFELT % 24)))
-                  (GO #3=#:G483)))))
+                  (GO #3=#:G44)))))
           #3# (EXIT #1#)))) 
 
 (SDEFUN |FMOEBF;moebiusMatrix;%M;8| ((|mf| (%)) (% (|Matrix| (|Integer|))))
@@ -123,9 +123,9 @@
 
 (DECLAIM (NOTINLINE |FiniteMoebiusFunction;|)) 
 
-(DEFUN |FiniteMoebiusFunction| (#1=#:G489)
+(DEFUN |FiniteMoebiusFunction| (#1=#:G50)
   (SPROG NIL
-         (PROG (#2=#:G490)
+         (PROG (#2=#:G51)
            (RETURN
             (COND
              ((LETT #2#

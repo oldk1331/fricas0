@@ -22,9 +22,9 @@
 
 (DECLAIM (NOTINLINE |OrdinaryDifferentialRing;|)) 
 
-(DEFUN |OrdinaryDifferentialRing| (&REST #1=#:G469)
+(DEFUN |OrdinaryDifferentialRing| (&REST #1=#:G45)
   (SPROG NIL
-         (PROG (#2=#:G470)
+         (PROG (#2=#:G46)
            (RETURN
             (COND
              ((LETT #2#

@@ -149,7 +149,7 @@
 
 (DEFUN |FortranCodePackage1| ()
   (SPROG NIL
-         (PROG (#1=#:G459)
+         (PROG (#1=#:G23)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|FortranCodePackage1|))

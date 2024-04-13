@@ -1,7 +1,7 @@
 
 (SDEFUN |UTSODETL;UP2UTS;UPUTS;1| ((|p| (UP)) (% (UTS)))
         (SPROG
-         ((#1=#:G449 NIL) (#2=#:G448 (UTS)) (#3=#:G450 (UTS)) (#4=#:G453 NIL)
+         ((#1=#:G8 NIL) (#2=#:G7 (UTS)) (#3=#:G9 (UTS)) (#4=#:G12 NIL)
           (|i| NIL) (|q| (UP)))
          (SEQ
           (LETT |q|
@@ -32,7 +32,7 @@
 (SDEFUN |UTSODETL;UTS2UP;UTSNniUP;2|
         ((|s| (UTS)) (|n| (|NonNegativeInteger|)) (% (UP)))
         (SPROG
-         ((|xmcn| (UP)) (|ans| (UP)) (#1=#:G459 NIL) (|i| NIL) (|xmc| (UP)))
+         ((|xmcn| (UP)) (|ans| (UP)) (#1=#:G19 NIL) (|i| NIL) (|xmc| (UP)))
          (SEQ
           (LETT |xmc|
                 (SPADCALL (SPADCALL (|spadConstant| % 10) 1 (QREFELT % 13))
@@ -56,9 +56,9 @@
 
 (SDEFUN |UTSODETL;LODO2FUN;LM;3| ((|op| (L)) (% (|Mapping| UTS (|List| UTS))))
         (SPROG
-         ((|v| (|Vector| UTS)) (#1=#:G471 NIL) (#2=#:G473 NIL) (|i| NIL)
-          (#3=#:G472 NIL) (|n| (|NonNegativeInteger|)) (#4=#:G464 NIL)
-          (|a| (UTS)) (#5=#:G462 NIL))
+         ((|v| (|Vector| UTS)) (#1=#:G35 NIL) (#2=#:G37 NIL) (|i| NIL)
+          (#3=#:G36 NIL) (|n| (|NonNegativeInteger|)) (#4=#:G28 NIL)
+          (|a| (UTS)) (#5=#:G26 NIL))
          (SEQ
           (LETT |a|
                 (PROG2
@@ -105,7 +105,7 @@
           (RETURN (PROGN (|UTSODETL;fun| |v| |l1| %))))) 
 
 (SDEFUN |UTSODETL;fun| ((|v| (|Vector| UTS)) (|l| (|List| UTS)) (% (UTS)))
-        (SPROG ((|ans| (UTS)) (#1=#:G478 NIL) (|b| NIL) (|i| NIL))
+        (SPROG ((|ans| (UTS)) (#1=#:G42 NIL) (|b| NIL) (|i| NIL))
                (SEQ (LETT |ans| (|spadConstant| % 16))
                     (SEQ (LETT |i| 1) (LETT |b| NIL) (LETT #1# |l|) G190
                          (COND
@@ -124,7 +124,7 @@
                     (EXIT |ans|)))) 
 
 (SDEFUN |UTSODETL;RF2UTS;FUTS;5| ((|f| (|Fraction| UP)) (% (UTS)))
-        (SPROG ((#1=#:G480 NIL))
+        (SPROG ((#1=#:G48 NIL))
                (SPADCALL
                 (SPADCALL (SPADCALL |f| (QREFELT % 49)) (QREFELT % 25))
                 (PROG2
@@ -140,9 +140,9 @@
 
 (DECLAIM (NOTINLINE |UTSodetools;|)) 
 
-(DEFUN |UTSodetools| (&REST #1=#:G483)
+(DEFUN |UTSodetools| (&REST #1=#:G51)
   (SPROG NIL
-         (PROG (#2=#:G484)
+         (PROG (#2=#:G52)
            (RETURN
             (COND
              ((LETT #2#

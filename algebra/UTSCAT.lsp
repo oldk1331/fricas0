@@ -6,7 +6,7 @@
 (DEFPARAMETER |UnivariateTaylorSeriesCategory;AL| 'NIL) 
 
 (DEFUN |UnivariateTaylorSeriesCategory| (|t#1|)
-  (LET (#1=#:G470 (#2=#:G471 (|devaluate| |t#1|)))
+  (LET (#1=#:G24 (#2=#:G25 (|devaluate| |t#1|)))
     (COND
      ((SETQ #1# (|assoc| #2# |UnivariateTaylorSeriesCategory;AL|)) (CDR #1#))
      (T
@@ -17,11 +17,11 @@
       #1#)))) 
 
 (DEFUN |UnivariateTaylorSeriesCategory;| (|t#1|)
-  (SPROG ((#1=#:G469 NIL))
+  (SPROG ((#1=#:G23 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
-                                   (|subst_in_cat| '(#2=#:G468)
+                                   (|subst_in_cat| '(#2=#:G22)
                                                    (LIST
                                                     '(|NonNegativeInteger|))
                                                    (COND

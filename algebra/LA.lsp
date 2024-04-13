@@ -15,9 +15,9 @@
 
 (DECLAIM (NOTINLINE |LocalAlgebra;|)) 
 
-(DEFUN |LocalAlgebra| (&REST #1=#:G454)
+(DEFUN |LocalAlgebra| (&REST #1=#:G12)
   (SPROG NIL
-         (PROG (#2=#:G455)
+         (PROG (#2=#:G13)
            (RETURN
             (COND
              ((LETT #2#

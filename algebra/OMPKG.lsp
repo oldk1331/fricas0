@@ -48,7 +48,7 @@
 
 (DEFUN |OpenMathPackage| ()
   (SPROG NIL
-         (PROG (#1=#:G463)
+         (PROG (#1=#:G25)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OpenMathPackage|))

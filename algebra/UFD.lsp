@@ -9,7 +9,7 @@
          (SETQ |UniqueFactorizationDomain;AL| (|UniqueFactorizationDomain;|))))) 
 
 (DEFUN |UniqueFactorizationDomain;| ()
-  (SPROG ((#1=#:G448 NIL))
+  (SPROG ((#1=#:G1 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|GcdDomain|)

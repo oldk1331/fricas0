@@ -5,19 +5,19 @@
 
 ; $bcParseOnly := true
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$bcParseOnly| T))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$bcParseOnly| T))
 
 ; $htLineList := nil
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$htLineList| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$htLineList| NIL))
 
 ; $curPage := nil
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$curPage| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$curPage| NIL))
 
 ; $activePageList := nil
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$activePageList| NIL))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$activePageList| NIL))
 
 ; htpDestroyPage(pageName) ==
 ;   pageName in $activePageList =>
@@ -1562,11 +1562,11 @@
 
 ; $funnyQuote := char 127
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$funnyQuote| (|char| 127)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$funnyQuote| (|char| 127)))
 
 ; $funnyBacks := char 128
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$funnyBacks| (|char| 128)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$funnyBacks| (|char| 128)))
 
 ; htEscapeString str ==
 ;   str := SUBSTITUTE($funnyQuote, char '_", str)

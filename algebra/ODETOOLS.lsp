@@ -4,22 +4,22 @@
 
 (SDEFUN |ODETOOLS;wronskianMatrix;LNniM;2|
         ((|l| (|List| F)) (|q| (|NonNegativeInteger|)) (% (|Matrix| F)))
-        (SPROG
-         ((|v| (|Vector| F)) (#1=#:G457 NIL) (|i| NIL) (|m| (|Matrix| F)))
-         (SEQ (LETT |v| (SPADCALL |l| (QREFELT % 16)))
-              (LETT |m| (SPADCALL |q| (QVSIZE |v|) (QREFELT % 17)))
-              (SEQ (LETT |i| (PROGN |m| 1))
-                   (LETT #1# (SPADCALL |m| (QREFELT % 19))) G190
-                   (COND ((> |i| #1#) (GO G191)))
-                   (SEQ (SPADCALL |m| |i| |v| (QREFELT % 20))
-                        (EXIT
-                         (LETT |v|
-                               (SPADCALL
-                                (CONS #'|ODETOOLS;wronskianMatrix;LNniM;2!0|
-                                      (VECTOR % (QREFELT % 9)))
-                                |v| (QREFELT % 23)))))
-                   (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL))
-              (EXIT |m|)))) 
+        (SPROG ((|v| (|Vector| F)) (#1=#:G23 NIL) (|i| NIL) (|m| (|Matrix| F)))
+               (SEQ (LETT |v| (SPADCALL |l| (QREFELT % 16)))
+                    (LETT |m| (SPADCALL |q| (QVSIZE |v|) (QREFELT % 17)))
+                    (SEQ (LETT |i| (PROGN |m| 1))
+                         (LETT #1# (SPADCALL |m| (QREFELT % 19))) G190
+                         (COND ((> |i| #1#) (GO G191)))
+                         (SEQ (SPADCALL |m| |i| |v| (QREFELT % 20))
+                              (EXIT
+                               (LETT |v|
+                                     (SPADCALL
+                                      (CONS
+                                       #'|ODETOOLS;wronskianMatrix;LNniM;2!0|
+                                       (VECTOR % (QREFELT % 9)))
+                                      |v| (QREFELT % 23)))))
+                         (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL))
+                    (EXIT |m|)))) 
 
 (SDEFUN |ODETOOLS;wronskianMatrix;LNniM;2!0| ((|f1| NIL) ($$ NIL))
         (PROG (|diff| %)
@@ -52,7 +52,7 @@
         ((|op| (LODO)) (|g| (F)) (|b| (|List| F))
          (|integration| (|Mapping| F F)) (% (|Union| F "failed")))
         (SPROG
-         ((|ans| (F)) (#1=#:G479 NIL) (|f| NIL) (|i| NIL) (|s| (|Vector| F))
+         ((|ans| (F)) (#1=#:G46 NIL) (|f| NIL) (|i| NIL) (|s| (|Vector| F))
           (|sol| (|Union| (|Vector| F) "failed")))
          (SEQ
           (COND ((SPADCALL |g| (QREFELT % 33)) (CONS 0 (|spadConstant| % 25)))
@@ -89,9 +89,9 @@
 
 (DECLAIM (NOTINLINE |ODETools;|)) 
 
-(DEFUN |ODETools| (&REST #1=#:G480)
+(DEFUN |ODETools| (&REST #1=#:G47)
   (SPROG NIL
-         (PROG (#2=#:G481)
+         (PROG (#2=#:G48)
            (RETURN
             (COND
              ((LETT #2#

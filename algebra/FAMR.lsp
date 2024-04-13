@@ -6,7 +6,7 @@
 (DEFPARAMETER |FiniteAbelianMonoidRing;AL| 'NIL) 
 
 (DEFUN |FiniteAbelianMonoidRing| (|t#1| |t#2|)
-  (LET (#1=#:G458 (#2=#:G459 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
+  (LET (#1=#:G11 (#2=#:G12 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
     (COND ((SETQ #1# (|assoc| #2# |FiniteAbelianMonoidRing;AL|)) (CDR #1#))
           (T
            (SETQ |FiniteAbelianMonoidRing;AL|
@@ -17,7 +17,7 @@
            #1#)))) 
 
 (DEFUN |FiniteAbelianMonoidRing;| (|t#1| |t#2|)
-  (SPROG ((#1=#:G457 NIL))
+  (SPROG ((#1=#:G10 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2|) (LIST |t#1| |t#2|)

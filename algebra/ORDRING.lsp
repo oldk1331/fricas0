@@ -7,7 +7,7 @@
   (COND (|OrderedRing;AL|) (T (SETQ |OrderedRing;AL| (|OrderedRing;|))))) 
 
 (DEFUN |OrderedRing;| ()
-  (SPROG ((#1=#:G454 NIL))
+  (SPROG ((#1=#:G7 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|OrderedAbelianGroup|) (|Ring|)

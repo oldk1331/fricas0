@@ -6,8 +6,8 @@
 (DEFPARAMETER |RectangularMatrixCategory;AL| 'NIL) 
 
 (DEFUN |RectangularMatrixCategory| (|t#1| |t#2| |t#3| |t#4| |t#5|)
-  (LET (#1=#:G455
-        (#2=#:G456
+  (LET (#1=#:G12
+        (#2=#:G13
          (LIST |t#1| |t#2| (|devaluate| |t#3|) (|devaluate| |t#4|)
                (|devaluate| |t#5|))))
     (COND ((SETQ #1# (|assoc| #2# |RectangularMatrixCategory;AL|)) (CDR #1#))
@@ -21,7 +21,7 @@
            #1#)))) 
 
 (DEFUN |RectangularMatrixCategory;| (|t#1| |t#2| |t#3| |t#4| |t#5|)
-  (SPROG ((#1=#:G454 NIL))
+  (SPROG ((#1=#:G11 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3| |t#4| |t#5|)

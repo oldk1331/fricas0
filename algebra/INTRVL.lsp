@@ -139,13 +139,13 @@
                     (QREFELT % 31))))) 
 
 (SDEFUN |INTRVL;+;3%;17| ((|a| (%)) (|b| (%)) (% (%)))
-        (SPROG ((#1=#:G555 NIL))
+        (SPROG ((#1=#:G113 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((SPADCALL |a| (QREFELT % 37))
-                    (PROGN (LETT #1# |b|) (GO #2=#:G554)))
+                    (PROGN (LETT #1# |b|) (GO #2=#:G112)))
                    ((SPADCALL |b| (QREFELT % 37))
                     (PROGN (LETT #1# |a|) (GO #2#))))
                   (COND
@@ -169,7 +169,7 @@
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |INTRVL;-;3%;18| ((|a| (%)) (|b| (%)) (% (%)))
-        (SPROG ((#1=#:G560 NIL))
+        (SPROG ((#1=#:G118 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -177,7 +177,7 @@
                    ((SPADCALL |a| (QREFELT % 37))
                     (PROGN
                      (LETT #1# (SPADCALL |b| (QREFELT % 42)))
-                     (GO #2=#:G559)))
+                     (GO #2=#:G117)))
                    ((SPADCALL |b| (QREFELT % 37))
                     (PROGN (LETT #1# |a|) (GO #2#))))
                   (EXIT
@@ -190,13 +190,13 @@
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |INTRVL;*;3%;19| ((|a| (%)) (|b| (%)) (% (%)))
-        (SPROG ((|prods| (|List| R)) (#1=#:G567 NIL))
+        (SPROG ((|prods| (|List| R)) (#1=#:G131 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((SPADCALL |a| (QREFELT % 44))
-                    (PROGN (LETT #1# |b|) (GO #2=#:G566)))
+                    (PROGN (LETT #1# |b|) (GO #2=#:G130)))
                    ((SPADCALL |b| (QREFELT % 44))
                     (PROGN (LETT #1# |a|) (GO #2#))))
                   (COND
@@ -1059,9 +1059,9 @@
 
 (DECLAIM (NOTINLINE |Interval;|)) 
 
-(DEFUN |Interval| (#1=#:G723)
+(DEFUN |Interval| (#1=#:G293)
   (SPROG NIL
-         (PROG (#2=#:G724)
+         (PROG (#2=#:G294)
            (RETURN
             (COND
              ((LETT #2#

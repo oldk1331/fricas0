@@ -28,9 +28,9 @@
 
 (DECLAIM (NOTINLINE |FourierComponent;|)) 
 
-(DEFUN |FourierComponent| (#1=#:G465)
+(DEFUN |FourierComponent| (#1=#:G22)
   (SPROG NIL
-         (PROG (#2=#:G466)
+         (PROG (#2=#:G23)
            (RETURN
             (COND
              ((LETT #2#

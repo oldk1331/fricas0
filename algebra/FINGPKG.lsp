@@ -3,9 +3,9 @@
         ((|x| (G)) (% (|Permutation| (|Integer|))))
         (SPROG
          ((|p| (|Permutation| (|Integer|))) (|imag| (|List| (|Integer|)))
-          (#1=#:G461 NIL) (|a| NIL) (#2=#:G460 NIL)
-          (|preimag| (|List| (|Integer|))) (#3=#:G459 NIL) (|k| NIL)
-          (#4=#:G458 NIL) (|xall| (|List| G)) (#5=#:G457 NIL) (#6=#:G456 NIL)
+          (#1=#:G25 NIL) (|a| NIL) (#2=#:G24 NIL)
+          (|preimag| (|List| (|Integer|))) (#3=#:G23 NIL) (|k| NIL)
+          (#4=#:G22 NIL) (|xall| (|List| G)) (#5=#:G21 NIL) (#6=#:G20 NIL)
           (|n| (|Integer|)) (|all| (|List| G)))
          (SEQ (LETT |all| (SPADCALL (QREFELT % 8))) (LETT |n| (LENGTH |all|))
               (LETT |xall|
@@ -57,9 +57,9 @@
 
 (DECLAIM (NOTINLINE |FiniteGroupPackage;|)) 
 
-(DEFUN |FiniteGroupPackage| (#1=#:G464)
+(DEFUN |FiniteGroupPackage| (#1=#:G29)
   (SPROG NIL
-         (PROG (#2=#:G465)
+         (PROG (#2=#:G30)
            (RETURN
             (COND
              ((LETT #2#

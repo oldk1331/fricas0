@@ -124,9 +124,9 @@
 
 (DECLAIM (NOTINLINE |DenavitHartenbergMatrix;|)) 
 
-(DEFUN |DenavitHartenbergMatrix| (#1=#:G473)
+(DEFUN |DenavitHartenbergMatrix| (#1=#:G38)
   (SPROG NIL
-         (PROG (#2=#:G474)
+         (PROG (#2=#:G39)
            (RETURN
             (COND
              ((LETT #2#
@@ -144,7 +144,7 @@
 
 (DEFUN |DenavitHartenbergMatrix;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G470 NIL) (#2=#:G471 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+   ((|pv$| NIL) (#1=#:G35 NIL) (#2=#:G36 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT |dv$| (LIST '|DenavitHartenbergMatrix| DV$1))

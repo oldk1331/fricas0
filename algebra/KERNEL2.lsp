@@ -8,9 +8,9 @@
 
 (DECLAIM (NOTINLINE |KernelFunctions2;|)) 
 
-(DEFUN |KernelFunctions2| (&REST #1=#:G453)
+(DEFUN |KernelFunctions2| (&REST #1=#:G14)
   (SPROG NIL
-         (PROG (#2=#:G454)
+         (PROG (#2=#:G15)
            (RETURN
             (COND
              ((LETT #2#

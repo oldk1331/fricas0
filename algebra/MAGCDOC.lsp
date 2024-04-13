@@ -4,8 +4,8 @@
 (DEFPARAMETER |ModularAlgebraicGcdOperations;AL| 'NIL) 
 
 (DEFUN |ModularAlgebraicGcdOperations| (|t#1| |t#2| |t#3|)
-  (LET (#1=#:G449
-        (#2=#:G450
+  (LET (#1=#:G2
+        (#2=#:G3
          (LIST (|devaluate| |t#1|) (|devaluate| |t#2|) (|devaluate| |t#3|))))
     (COND
      ((SETQ #1# (|assoc| #2# |ModularAlgebraicGcdOperations;AL|)) (CDR #1#))
@@ -18,7 +18,7 @@
       #1#)))) 
 
 (DEFUN |ModularAlgebraicGcdOperations;| (|t#1| |t#2| |t#3|)
-  (SPROG ((#1=#:G448 NIL))
+  (SPROG ((#1=#:G1 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3|)

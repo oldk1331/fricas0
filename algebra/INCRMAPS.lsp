@@ -16,9 +16,9 @@
 
 (DECLAIM (NOTINLINE |IncrementingMaps;|)) 
 
-(DEFUN |IncrementingMaps| (#1=#:G453)
+(DEFUN |IncrementingMaps| (#1=#:G6)
   (SPROG NIL
-         (PROG (#2=#:G454)
+         (PROG (#2=#:G7)
            (RETURN
             (COND
              ((LETT #2#

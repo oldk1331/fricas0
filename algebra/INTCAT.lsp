@@ -6,7 +6,7 @@
 (DEFPARAMETER |IntervalCategory;AL| 'NIL) 
 
 (DEFUN |IntervalCategory| (|t#1|)
-  (LET (#1=#:G450 (#2=#:G451 (|devaluate| |t#1|)))
+  (LET (#1=#:G6 (#2=#:G7 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |IntervalCategory;AL|)) (CDR #1#))
           (T
            (SETQ |IntervalCategory;AL|
@@ -15,11 +15,11 @@
            #1#)))) 
 
 (DEFUN |IntervalCategory;| (|t#1|)
-  (SPROG ((#1=#:G449 NIL))
+  (SPROG ((#1=#:G5 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
-                                   (|subst_in_cat| '(#2=#:G448)
+                                   (|subst_in_cat| '(#2=#:G4)
                                                    (LIST '(|Integer|))
                                                    (COND
                                                     (|IntervalCategory;CAT|)

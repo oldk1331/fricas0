@@ -22,7 +22,7 @@
           (|Record| (|:| |ker| (|List| (|Kernel| F))) (|:| |val| (|List| F)))))
         (SPROG
          ((|lv| (|List| F)) (|lk| (|List| (|Kernel| F)))
-          (|u| (|Union| F "failed")) (#1=#:G476 NIL) (|k| NIL))
+          (|u| (|Union| F "failed")) (#1=#:G50 NIL) (|k| NIL))
          (SEQ (LETT |lk| NIL) (LETT |lv| NIL)
               (SEQ (LETT |k| NIL) (LETT #1# (SPADCALL |f| (QREFELT % 34))) G190
                    (COND
@@ -39,9 +39,8 @@
 
 (SDEFUN |TRIGMNIP;kcomplex| ((|k| (|Kernel| F)) (% (|Union| F "failed")))
         (SPROG
-         ((#1=#:G494 NIL) (|u| (|Union| (|Integer|) "failed")) (|a| (F))
-          (#2=#:G493 NIL) (|n| (F)) (|arg| (|List| F))
-          (|op| (|BasicOperator|)))
+         ((#1=#:G70 NIL) (|u| (|Union| (|Integer|) "failed")) (|a| (F))
+          (#2=#:G69 NIL) (|n| (F)) (|arg| (|List| F)) (|op| (|BasicOperator|)))
          (SEQ (LETT |op| (SPADCALL |k| (QREFELT % 36)))
               (EXIT
                (COND
@@ -80,7 +79,7 @@
                                                          (QREFELT % 10))
                                                         |n| (QREFELT % 47))
                                               (QREFELT % 14))))
-                                 (GO #3=#:G486))))))))))
+                                 (GO #3=#:G62))))))))))
                         (EXIT (CONS 1 "failed"))))
                   #3# (EXIT #2#)))
                 ('T
@@ -110,7 +109,7 @@
                                                               (QREFELT % 10))
                                                     (QREFELT % 48))
                                           (QREFELT % 15) (QREFELT % 49))))
-                             (GO #4=#:G490))))))))))
+                             (GO #4=#:G66))))))))))
                     (EXIT (CONS 1 "failed"))))
                   #4# (EXIT #1#)))))))) 
 
@@ -146,7 +145,7 @@
           (RETURN (PROGN (SPADCALL |x| RTRIG (QREFELT % 56)))))) 
 
 (SDEFUN |TRIGMNIP;complexNormalize;FSF;9| ((|f| (F)) (|x| (|Symbol|)) (% (F)))
-        (SPROG ((#1=#:G509 NIL) (|g| (F)) (|k| NIL) (#2=#:G508 NIL))
+        (SPROG ((#1=#:G85 NIL) (|g| (F)) (|k| NIL) (#2=#:G84 NIL))
                (SEQ
                 (COND
                  ((SPADCALL
@@ -216,7 +215,7 @@
 
 (SDEFUN |TRIGMNIP;complexElementary;FSF;11|
         ((|f| (F)) (|x| (|Symbol|)) (% (F)))
-        (SPROG ((#1=#:G523 NIL) (|g| (F)) (|k| NIL) (#2=#:G522 NIL))
+        (SPROG ((#1=#:G99 NIL) (|g| (F)) (|k| NIL) (#2=#:G98 NIL))
                (SEQ
                 (COND
                  ((SPADCALL
@@ -276,7 +275,7 @@
 
 (SDEFUN |TRIGMNIP;localexplogs|
         ((|f| (F)) (|g| (F)) (% (|Expression| (|Complex| R))))
-        (SPROG ((#1=#:G532 NIL) (|k| NIL) (#2=#:G531 NIL))
+        (SPROG ((#1=#:G108 NIL) (|k| NIL) (#2=#:G107 NIL))
                (SEQ
                 (SPADCALL (SPADCALL |g| (QREFELT % 21))
                           (PROGN
@@ -318,9 +317,9 @@
 
 (DECLAIM (NOTINLINE |TrigonometricManipulations;|)) 
 
-(DEFUN |TrigonometricManipulations| (&REST #1=#:G536)
+(DEFUN |TrigonometricManipulations| (&REST #1=#:G112)
   (SPROG NIL
-         (PROG (#2=#:G537)
+         (PROG (#2=#:G113)
            (RETURN
             (COND
              ((LETT #2#

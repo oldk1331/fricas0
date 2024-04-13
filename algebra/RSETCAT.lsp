@@ -6,8 +6,8 @@
 (DEFPARAMETER |RegularTriangularSetCategory;AL| 'NIL) 
 
 (DEFUN |RegularTriangularSetCategory| (|t#1| |t#2| |t#3| |t#4|)
-  (LET (#1=#:G486
-        (#2=#:G487
+  (LET (#1=#:G39
+        (#2=#:G40
          (LIST (|devaluate| |t#1|) (|devaluate| |t#2|) (|devaluate| |t#3|)
                (|devaluate| |t#4|))))
     (COND
@@ -21,7 +21,7 @@
       #1#)))) 
 
 (DEFUN |RegularTriangularSetCategory;| (|t#1| |t#2| |t#3| |t#4|)
-  (SPROG ((#1=#:G485 NIL))
+  (SPROG ((#1=#:G38 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3| |t#4|)

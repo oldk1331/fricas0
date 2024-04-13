@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |PAdicRational;|)) 
 
-(DEFUN |PAdicRational| (#1=#:G485)
+(DEFUN |PAdicRational| (#1=#:G70)
   (SPROG NIL
-         (PROG (#2=#:G486)
+         (PROG (#2=#:G71)
            (RETURN
             (COND
              ((LETT #2#
@@ -18,7 +18,7 @@
                  ((NOT #2#) (HREM |$ConstructorCache| '|PAdicRational|)))))))))) 
 
 (DEFUN |PAdicRational;| (|#1|)
-  (SPROG ((|pv$| NIL) (#1=#:G484 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (#1=#:G69 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT |dv$| (LIST '|PAdicRational| DV$1))

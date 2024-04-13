@@ -78,7 +78,7 @@
                            (|SparseUnivariatePolynomial| (|Fraction| UP)))
                       (|:| |logand|
                            (|SparseUnivariatePolynomial| (|Fraction| UP))))))
-          (#2=#:G502 NIL) (|term| NIL) (#3=#:G501 NIL)
+          (#2=#:G78 NIL) (|term| NIL) (#3=#:G77 NIL)
           (|rec|
            (|Record| (|:| |normal| (|Factored| UP))
                      (|:| |special| (|Factored| UP))))
@@ -227,8 +227,8 @@
         ((|p| (UP)) (|derivation| (|Mapping| UP UP))
          (% (|Record| (|:| |answer| UP) (|:| |polypart| UP))))
         (SPROG
-         ((|ans| (UP)) (|term| (UP)) (#1=#:G509 NIL) (|n| (|Integer|))
-          (|l| (F)) (|d| (|Integer|)) (|dt| (UP)))
+         ((|ans| (UP)) (|term| (UP)) (#1=#:G85 NIL) (|n| (|Integer|)) (|l| (F))
+          (|d| (|Integer|)) (|dt| (UP)))
          (SEQ
           (LETT |d|
                 (SPADCALL
@@ -434,7 +434,7 @@
             (|Record| (|:| |answer| (|LaurentPolynomial| F UP)) (|:| |a0| F))
             (|Record| (|:| |elem| (|LaurentPolynomial| F UP))
                       (|:| |notelem| (|LaurentPolynomial| F UP)))))
-          (|special| (|LaurentPolynomial| F UP)) (#1=#:G560 NIL)
+          (|special| (|LaurentPolynomial| F UP)) (#1=#:G138 NIL)
           (|i1| (|IntegrationResult| (|Fraction| UP)))
           (|rec|
            (|Record| (|:| |ir| (|IntegrationResult| (|Fraction| UP)))
@@ -549,7 +549,7 @@
          ((|ri2|
            (|Record| (|:| |answer| (|IntegrationResult| (|Fraction| UP)))
                      (|:| |a0| (|IntegrationResult| F))))
-          (|sp| (|LaurentPolynomial| F UP)) (#1=#:G583 NIL) (|n| (|Integer|))
+          (|sp| (|LaurentPolynomial| F UP)) (#1=#:G161 NIL) (|n| (|Integer|))
           (|sd| (UP)) (|i1| (|IntegrationResult| (|Fraction| UP)))
           (|rec|
            (|Record| (|:| |ir| (|IntegrationResult| (|Fraction| UP)))
@@ -614,8 +614,8 @@
           (|Record| (|:| |answer| (|IntegrationResult| (|Fraction| UP)))
                     (|:| |a0| (|IntegrationResult| F)))))
         (SPROG
-         ((#2=#:G623 NIL) (|answr| (|LaurentPolynomial| F UP)) (|clg0| (F))
-          (|db1| (F)) (|b1| (F)) (#3=#:G624 NIL) (|i0| (|IntegrationResult| F))
+         ((#2=#:G201 NIL) (|answr| (|LaurentPolynomial| F UP)) (|clg0| (F))
+          (|db1| (F)) (|b1| (F)) (#3=#:G202 NIL) (|i0| (|IntegrationResult| F))
           (|lcoeff| (F)) (|ans1| #1#) (|p0| (F)) (|d| (|Integer|)))
          (SEQ
           (EXIT
@@ -635,7 +635,7 @@
                               (LETT #3#
                                     (CONS (|INTTR;mkir| |answr| |lcoeff| |p| %)
                                           |i0|))
-                              (GO #4=#:G622)))
+                              (GO #4=#:G200)))
                             ('T
                              (SEQ
                               (EXIT
@@ -736,7 +736,7 @@
                                                   (QREFELT % 127))
                                                  (EXIT
                                                   (|error| "impossible"))))
-                                          (GO #5=#:G618)))))))))
+                                          (GO #5=#:G196)))))))))
                               #5# (EXIT #2#))))))
                      NIL (GO G190) G191 (EXIT NIL))
                 (EXIT
@@ -757,7 +757,7 @@
           (|Union| (|Record| (|:| |answer| UP) (|:| |a0| F))
                    (|Record| (|:| |elem| UP) (|:| |notelem| UP)))))
         (SPROG
-         ((|ans1| #1#) (|rp| (F)) (|ans| (UP)) (#2=#:G635 NIL) (#3=#:G642 NIL)
+         ((|ans1| #1#) (|rp| (F)) (|ans| (UP)) (#2=#:G213 NIL) (#3=#:G220 NIL)
           (|d| (|NonNegativeInteger|)))
          (SEQ
           (EXIT
@@ -779,7 +779,7 @@
                           ((QEQCAR |ans1| 1)
                            (PROGN
                             (LETT #3# (CONS 1 (CONS |ans| |p|)))
-                            (GO #5=#:G641)))
+                            (GO #5=#:G219)))
                           ('T
                            (SEQ
                             (LETT |p|
@@ -841,9 +841,9 @@
 
 (DECLAIM (NOTINLINE |TranscendentalIntegration;|)) 
 
-(DEFUN |TranscendentalIntegration| (&REST #1=#:G643)
+(DEFUN |TranscendentalIntegration| (&REST #1=#:G221)
   (SPROG NIL
-         (PROG (#2=#:G644)
+         (PROG (#2=#:G222)
            (RETURN
             (COND
              ((LETT #2#

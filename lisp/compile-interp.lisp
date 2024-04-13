@@ -70,6 +70,7 @@
 (compile-file "interp/msgdb.lisp")
 (compile-file "interp/msg.lisp")
 (compile-file "interp/ncomp.lisp")
+(compile-file "interp/nformat.lisp")
 (compile-file "interp/nlib.lisp")
 (compile-file "interp/nruncomp.lisp")
 (compile-file "interp/nrunfast.lisp")

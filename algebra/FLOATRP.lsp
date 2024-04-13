@@ -3,7 +3,7 @@
         ((|nres| (|List| |Par|)) (|lv| (|List| (|Symbol|)))
          (% (|List| (|Equation| (|Polynomial| |Par|)))))
         (SPROG
-         ((#1=#:G454 NIL) (|x| NIL) (#2=#:G455 NIL) (|r| NIL) (#3=#:G453 NIL))
+         ((#1=#:G14 NIL) (|x| NIL) (#2=#:G15 NIL) (|r| NIL) (#3=#:G13 NIL))
          (SEQ
           (PROGN
            (LETT #3# NIL)
@@ -35,9 +35,9 @@
          (% (|List| (|List| |Par|))))
         (SPROG
          ((|lden| (|List| #1=(|Polynomial| (|Integer|)))) (|dp| #1#)
-          (#2=#:G466 NIL) (|p| NIL) (#3=#:G465 NIL)
-          (|lnum| (|List| (|Polynomial| (|Integer|)))) (#4=#:G464 NIL)
-          (#5=#:G463 NIL))
+          (#2=#:G34 NIL) (|p| NIL) (#3=#:G33 NIL)
+          (|lnum| (|List| (|Polynomial| (|Integer|)))) (#4=#:G32 NIL)
+          (#5=#:G31 NIL))
          (SEQ
           (LETT |lnum|
                 (PROGN
@@ -73,14 +73,14 @@
          (|eps| (|Par|))
          (% (|List| (|List| (|Equation| (|Polynomial| |Par|))))))
         (SPROG
-         ((#1=#:G489 NIL) (|numres| NIL) (#2=#:G488 NIL)
-          (|lv| #3=(|List| (|Symbol|))) (#4=#:G475 NIL) (#5=#:G474 #3#)
-          (#6=#:G476 #3#) (#7=#:G487 NIL) (#8=#:G472 NIL) (#9=#:G471 #3#)
-          (#10=#:G473 #3#) (#11=#:G486 NIL) (|np| NIL)
+         ((#1=#:G57 NIL) (|numres| NIL) (#2=#:G56 NIL)
+          (|lv| #3=(|List| (|Symbol|))) (#4=#:G43 NIL) (#5=#:G42 #3#)
+          (#6=#:G44 #3#) (#7=#:G55 NIL) (#8=#:G40 NIL) (#9=#:G39 #3#)
+          (#10=#:G41 #3#) (#11=#:G54 NIL) (|np| NIL)
           (|lden| (|List| #12=(|Polynomial| (|Integer|)))) (|dp| #12#)
-          (#13=#:G485 NIL) (|p| NIL) (#14=#:G484 NIL)
-          (|lnum| (|List| (|Polynomial| (|Integer|)))) (#15=#:G483 NIL)
-          (#16=#:G482 NIL))
+          (#13=#:G53 NIL) (|p| NIL) (#14=#:G52 NIL)
+          (|lnum| (|List| (|Polynomial| (|Integer|)))) (#15=#:G51 NIL)
+          (#16=#:G50 NIL))
          (SEQ
           (LETT |lnum|
                 (PROGN
@@ -173,16 +173,16 @@
          (|eps| (|Par|))
          (% (|List| (|List| (|Equation| (|Polynomial| |Par|))))))
         (SPROG
-         ((#1=#:G516 NIL) (|numres| NIL) (#2=#:G515 NIL)
-          (|lv| #3=(|List| (|Symbol|))) (#4=#:G500 NIL) (#5=#:G499 #3#)
-          (#6=#:G501 #3#) (#7=#:G514 NIL) (#8=#:G497 NIL) (#9=#:G496 #3#)
-          (#10=#:G498 #3#) (#11=#:G513 NIL) (|np| NIL)
+         ((#1=#:G84 NIL) (|numres| NIL) (#2=#:G83 NIL)
+          (|lv| #3=(|List| (|Symbol|))) (#4=#:G68 NIL) (#5=#:G67 #3#)
+          (#6=#:G69 #3#) (#7=#:G82 NIL) (#8=#:G65 NIL) (#9=#:G64 #3#)
+          (#10=#:G66 #3#) (#11=#:G81 NIL) (|np| NIL)
           (|lden| (|List| #12=(|Polynomial| (|Integer|)))) (|dp| #12#)
-          (#13=#:G512 NIL) (|p| NIL) (#14=#:G511 NIL)
-          (|lnum| (|List| (|Polynomial| (|Integer|)))) (#15=#:G510 NIL)
-          (#16=#:G509 NIL)
+          (#13=#:G80 NIL) (|p| NIL) (#14=#:G79 NIL)
+          (|lnum| (|List| (|Polynomial| (|Integer|)))) (#15=#:G78 NIL)
+          (#16=#:G77 NIL)
           (|lp| (|List| (|Fraction| (|Polynomial| (|Integer|)))))
-          (#17=#:G508 NIL) (|ep| NIL) (#18=#:G507 NIL))
+          (#17=#:G76 NIL) (|ep| NIL) (#18=#:G75 NIL))
          (SEQ
           (LETT |lp|
                 (PROGN
@@ -291,8 +291,8 @@
         ((|p| (|Fraction| (|Polynomial| (|Integer|)))) (|eps| (|Par|))
          (% (|List| (|Equation| (|Polynomial| |Par|)))))
         (SPROG
-         ((#1=#:G526 NIL) (|val| NIL) (#2=#:G525 NIL)
-          (|x| (|Polynomial| |Par|)) (|mvar| (|Union| (|Symbol|) "failed")))
+         ((#1=#:G94 NIL) (|val| NIL) (#2=#:G93 NIL) (|x| (|Polynomial| |Par|))
+          (|mvar| (|Union| (|Symbol|) "failed")))
          (SEQ
           (LETT |mvar| (SPADCALL (SPADCALL |p| (QREFELT % 15)) (QREFELT % 42)))
           (EXIT
@@ -331,9 +331,9 @@
 
 (DECLAIM (NOTINLINE |FloatingRealPackage;|)) 
 
-(DEFUN |FloatingRealPackage| (#1=#:G528)
+(DEFUN |FloatingRealPackage| (#1=#:G96)
   (SPROG NIL
-         (PROG (#2=#:G529)
+         (PROG (#2=#:G97)
            (RETURN
             (COND
              ((LETT #2#

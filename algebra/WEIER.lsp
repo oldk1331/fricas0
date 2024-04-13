@@ -23,7 +23,7 @@
 (SDEFUN |WEIER;streamlikeUniv|
         ((|p| (|SparseUnivariatePolynomial| (|Polynomial| R)))
          (|n| (|NonNegativeInteger|)) (% (|Stream| (|Polynomial| R))))
-        (SPROG ((#1=#:G463 NIL))
+        (SPROG ((#1=#:G29 NIL))
                (COND
                 ((EQL |n| 0)
                  (SPADCALL (SPADCALL |p| 0 (QREFELT % 32))
@@ -121,9 +121,9 @@
         (SPROG
          ((|q| (|Stream| (|TaylorSeries| R))) (|f| (|Stream| (|Polynomial| R)))
           (|e| (|Union| (|Stream| (|Polynomial| R)) "failed"))
-          (|b| (|Stream| (|Polynomial| R))) (#1=#:G504 NIL)
+          (|b| (|Stream| (|Polynomial| R))) (#1=#:G73 NIL)
           (|a| (|NonNegativeInteger|)) (|c| (|Union| R "failed"))
-          (#2=#:G503 NIL) (|b0| (|Polynomial| R)) (|a0| NIL)
+          (#2=#:G72 NIL) (|b0| (|Polynomial| R)) (|a0| NIL)
           (|p| (|Stream| (|TaylorSeries| R))))
          (SEQ (LETT |p| (|WEIER;tp| |v| |sts| %))
               (LETT |b| (SPADCALL |p| (QREFELT % 58)))
@@ -146,7 +146,7 @@
                                       (EXIT
                                        (PROGN
                                         (LETT #2# |$NoValue|)
-                                        (GO #3=#:G487)))))
+                                        (GO #3=#:G53)))))
                                 ('T
                                  (SEQ (LETT |c| (SPADCALL |b0| (QREFELT % 61)))
                                       (EXIT
@@ -156,7 +156,7 @@
                                               (EXIT
                                                (PROGN
                                                 (LETT #1# |$NoValue|)
-                                                (GO #4=#:G496)))))
+                                                (GO #4=#:G65)))))
                                         ('T
                                          (LETT |b|
                                                (SPADCALL |b|
@@ -219,9 +219,9 @@
 
 (DECLAIM (NOTINLINE |WeierstrassPreparation;|)) 
 
-(DEFUN |WeierstrassPreparation| (#1=#:G511)
+(DEFUN |WeierstrassPreparation| (#1=#:G80)
   (SPROG NIL
-         (PROG (#2=#:G512)
+         (PROG (#2=#:G81)
            (RETURN
             (COND
              ((LETT #2#

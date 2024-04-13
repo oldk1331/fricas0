@@ -28,9 +28,9 @@
 
 (DECLAIM (NOTINLINE |LiftLinearDependence;|)) 
 
-(DEFUN |LiftLinearDependence| (&REST #1=#:G455)
+(DEFUN |LiftLinearDependence| (&REST #1=#:G20)
   (SPROG NIL
-         (PROG (#2=#:G456)
+         (PROG (#2=#:G21)
            (RETURN
             (COND
              ((LETT #2#

@@ -3,7 +3,7 @@
         ((|fv| (|Mapping| S |Vars|)) (|fc| (|Mapping| S R)) (|p| (P)) (% (S)))
         (SPROG
          ((|ans| (S)) (|pow0| (S)) (|i0| #1=(|NonNegativeInteger|)) (|pow| (S))
-          (|i| #1#) (#2=#:G466 NIL) (|mon| NIL) (|lc0| (S))
+          (|i| #1#) (#2=#:G29 NIL) (|mon| NIL) (|lc0| (S))
           (|mon0| (|SparseUnivariatePolynomial| P)) (|t| (S))
           (|ml| (|List| (|SparseUnivariatePolynomial| P)))
           (|up| (|SparseUnivariatePolynomial| P))
@@ -120,9 +120,9 @@
 
 (DECLAIM (NOTINLINE |PolynomialCategoryLifting;|)) 
 
-(DEFUN |PolynomialCategoryLifting| (&REST #1=#:G481)
+(DEFUN |PolynomialCategoryLifting| (&REST #1=#:G48)
   (SPROG NIL
-         (PROG (#2=#:G482)
+         (PROG (#2=#:G49)
            (RETURN
             (COND
              ((LETT #2#

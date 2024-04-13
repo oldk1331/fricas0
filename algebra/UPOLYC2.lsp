@@ -72,9 +72,9 @@
 
 (DECLAIM (NOTINLINE |UnivariatePolynomialCategoryFunctions2;|)) 
 
-(DEFUN |UnivariatePolynomialCategoryFunctions2| (&REST #1=#:G472)
+(DEFUN |UnivariatePolynomialCategoryFunctions2| (&REST #1=#:G41)
   (SPROG NIL
-         (PROG (#2=#:G473)
+         (PROG (#2=#:G42)
            (RETURN
             (COND
              ((LETT #2#
@@ -134,7 +134,7 @@
 (MAKEPROP '|UnivariatePolynomialCategoryFunctions2| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (|local| |#4|) '|op_of_PS| '#:G448 '|RepPS|
+              (|local| |#3|) (|local| |#4|) '|op_of_PS| '#:G1 '|RepPS|
               (0 . |Zero|) (4 . |Zero|) (|Boolean|) (8 . =)
               (14 . |leadingCoefficient|) (19 . |Zero|) (23 . ~=)
               (|NonNegativeInteger|) (29 . |degree|) (34 . |reductum|)

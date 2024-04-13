@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |BalancedPAdicInteger;|)) 
 
-(DEFUN |BalancedPAdicInteger| (#1=#:G463)
+(DEFUN |BalancedPAdicInteger| (#1=#:G27)
   (SPROG NIL
-         (PROG (#2=#:G464)
+         (PROG (#2=#:G28)
            (RETURN
             (COND
              ((LETT #2#

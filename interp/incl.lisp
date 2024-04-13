@@ -153,7 +153,7 @@
 ;              '"else"   , _
 ;              '"endif" ]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |incCommands|
           (LIST "say" "include" "fin" "assert" "if" "elseif" "else" "endif")))
 
@@ -304,43 +304,43 @@
 
 ; Top            := 01
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |Top| 1))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |Top| 1))
 
 ; IfSkipToEnd    := 10
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |IfSkipToEnd| 10))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |IfSkipToEnd| 10))
 
 ; IfKeepPart     := 11
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |IfKeepPart| 11))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |IfKeepPart| 11))
 
 ; IfSkipPart     := 12
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |IfSkipPart| 12))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |IfSkipPart| 12))
 
 ; ElseifSkipToEnd:= 20
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |ElseifSkipToEnd| 20))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |ElseifSkipToEnd| 20))
 
 ; ElseifKeepPart := 21
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |ElseifKeepPart| 21))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |ElseifKeepPart| 21))
 
 ; ElseifSkipPart := 22
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |ElseifSkipPart| 22))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |ElseifSkipPart| 22))
 
 ; ElseSkipToEnd  := 30
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |ElseSkipToEnd| 30))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |ElseSkipToEnd| 30))
 
 ; ElseKeepPart   := 31
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |ElseKeepPart| 31))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |ElseKeepPart| 31))
 
 ; Continuation   := 41
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |Continuation| 41))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |Continuation| 41))
 
 ; Top?     (st) == QUOTIENT(st,10) = 0
 

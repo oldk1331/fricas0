@@ -1,6 +1,6 @@
 
 (SDEFUN |LAZM3PK;convert| ((|st| (ST)) (% (TS)))
-        (SPROG ((|ts| (TS)) (#1=#:G461 NIL) (|p| NIL) (|lp| (|List| P)))
+        (SPROG ((|ts| (TS)) (#1=#:G21 NIL) (|p| NIL) (|lp| (|List| P)))
                (SEQ (LETT |ts| (SPADCALL (QREFELT % 12)))
                     (LETT |lp| (SPADCALL |st| (QREFELT % 14)))
                     (LETT |lp| (SPADCALL (ELT % 16) |lp| (QREFELT % 18)))
@@ -17,9 +17,9 @@
 (SDEFUN |LAZM3PK;squareFree| ((|ts| (TS)) (% (|List| ST)))
         (SPROG
          ((|toSee| (|List| ST)) (|toSave| (|List| ST)) (|newus| (ST))
-          (#1=#:G479 NIL) (|pwt| NIL)
+          (#1=#:G39 NIL) (|pwt| NIL)
           (|lpwt| (|List| (|Record| (|:| |val| P) (|:| |tower| ST))))
-          (|us| (ST)) (#2=#:G478 NIL) (|p| NIL) (|newts| (ST))
+          (|us| (ST)) (#2=#:G38 NIL) (|p| NIL) (|newts| (ST))
           (|lp| (|List| P)))
          (SEQ
           (COND
@@ -66,8 +66,8 @@
 
 (SDEFUN |LAZM3PK;normalizeIfCan;2ST;3| ((|ts| (ST)) (% (ST)))
         (SPROG
-         ((|newts| (ST)) (|p| (P)) (|lp| (|List| P)) (#1=#:G494 NIL)
-          (#2=#:G495 NIL) (#3=#:G496 NIL) (|v| NIL) (|lv| (|List| V)))
+         ((|newts| (ST)) (|p| (P)) (|lp| (|List| P)) (#1=#:G54 NIL)
+          (#2=#:G55 NIL) (#3=#:G56 NIL) (|v| NIL) (|lv| (|List| V)))
          (SEQ
           (EXIT
            (COND ((SPADCALL |ts| (QREFELT % 28)) |ts|)
@@ -111,8 +111,8 @@
                                                                       |newts|
                                                                       (QREFELT
                                                                        % 36)))
-                                                      (GO #4=#:G493)))
-                                               (GO #5=#:G486)))))
+                                                      (GO #4=#:G53)))
+                                               (GO #5=#:G46)))))
                                            #5# (EXIT #1#))))))
                                       (LETT #3# (CDR #3#)) (GO G190) G191
                                       (EXIT NIL))
@@ -130,8 +130,8 @@
 (SDEFUN |LAZM3PK;zeroSetSplit;LBL;4|
         ((|lp| (|List| P)) (|clos?| (|Boolean|)) (% (|List| ST)))
         (SPROG
-         ((#1=#:G505 NIL) (|ts| NIL) (#2=#:G504 NIL) (|toSave| (|List| ST))
-          (#3=#:G503 NIL) (|toSee| (|List| TS)))
+         ((#1=#:G73 NIL) (|ts| NIL) (#2=#:G72 NIL) (|toSave| (|List| ST))
+          (#3=#:G71 NIL) (|toSee| (|List| TS)))
          (SEQ (LETT |toSee| (SPADCALL |lp| |clos?| (QREFELT % 41)))
               (LETT |toSave| NIL)
               (SEQ (LETT |ts| NIL) (LETT #3# |toSee|) G190
@@ -160,9 +160,9 @@
 
 (DECLAIM (NOTINLINE |LazardSetSolvingPackage;|)) 
 
-(DEFUN |LazardSetSolvingPackage| (&REST #1=#:G506)
+(DEFUN |LazardSetSolvingPackage| (&REST #1=#:G74)
   (SPROG NIL
-         (PROG (#2=#:G507)
+         (PROG (#2=#:G75)
            (RETURN
             (COND
              ((LETT #2#

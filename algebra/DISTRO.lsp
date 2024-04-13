@@ -154,7 +154,7 @@
          (|laurent| (|Fraction| (|Integer|))) (|coef| (|Sequence| R)) (% (%)))
         (SPROG
          ((|psi| #1=(|Stream| R)) (|psi2| #1#) (|chi2| #2=(|Stream| R))
-          (|z1z| #2#) (S2 (|Sequence| R)) (#3=#:G496 NIL) (|chi| (|Stream| R)))
+          (|z1z| #2#) (S2 (|Sequence| R)) (#3=#:G62 NIL) (|chi| (|Stream| R)))
          (SEQ
           (EXIT
            (COND
@@ -179,7 +179,7 @@
                        (SPADCALL (SPADCALL |psi| (QREFELT % 22))
                                  (QREFELT % 13))
                        (QREFELT % 14)))
-                (GO #4=#:G495)))))
+                (GO #4=#:G61)))))
             ((SPADCALL |puiseux| (SPADCALL 1 2 (QREFELT % 65)) (QREFELT % 60))
              (COND
               ((SPADCALL |laurent|
@@ -221,7 +221,7 @@
 (SDEFUN |DISTRO;freeMultiplicativeConvolution;3%;24|
         ((|x| (%)) (|y| (%)) (% (%)))
         (SPROG
-         ((|Sxyc| (|Stream| R)) (#1=#:G511 NIL) (|Syc| #2=(|Stream| R))
+         ((|Sxyc| (|Stream| R)) (#1=#:G77 NIL) (|Syc| #2=(|Stream| R))
           (|Sxc| #2#)
           (|Sy|
            #3=(|Record| (|:| |puiseux| (|Fraction| (|Integer|)))
@@ -254,7 +254,7 @@
                                        (|spadConstant| % 73)
                                        (SPADCALL |Sxyc| (QREFELT % 13))
                                        (QREFELT % 69)))
-                       (GO #4=#:G510)))))
+                       (GO #4=#:G76)))))
                ((SPADCALL (QVELT |Sx| 0) (SPADCALL 1 2 (QREFELT % 65))
                           (QREFELT % 60))
                 (LETT |Sxyc|
@@ -435,7 +435,7 @@
           (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|k| NIL) (#1=#:G563 NIL) (|res| NIL))
+            (SPROG ((|k| NIL) (#1=#:G131 NIL) (|res| NIL))
                    (SEQ (LETT |res| |s|)
                         (SEQ (LETT |k| 2) (LETT #1# |n|) G190
                              (COND ((|greater_SI| |k| #1#) (GO G191)))
@@ -494,9 +494,9 @@
 
 (DECLAIM (NOTINLINE |Distribution;|)) 
 
-(DEFUN |Distribution| (#1=#:G571)
+(DEFUN |Distribution| (#1=#:G139)
   (SPROG NIL
-         (PROG (#2=#:G572)
+         (PROG (#2=#:G140)
            (RETURN
             (COND
              ((LETT #2#

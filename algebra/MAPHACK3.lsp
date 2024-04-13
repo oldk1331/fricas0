@@ -5,9 +5,9 @@
 
 (DECLAIM (NOTINLINE |MappingPackageInternalHacks3;|)) 
 
-(DEFUN |MappingPackageInternalHacks3| (&REST #1=#:G451)
+(DEFUN |MappingPackageInternalHacks3| (&REST #1=#:G4)
   (SPROG NIL
-         (PROG (#2=#:G452)
+         (PROG (#2=#:G5)
            (RETURN
             (COND
              ((LETT #2#

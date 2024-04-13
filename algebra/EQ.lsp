@@ -1,6 +1,6 @@
 
 (SDEFUN |EQ;factorAndSplit;%L;1| ((|eq| (%)) (% (|List| %)))
-        (SPROG ((#1=#:G457 NIL) (|rcf| NIL) (#2=#:G456 NIL) (|eq0| (%)))
+        (SPROG ((#1=#:G23 NIL) (|rcf| NIL) (#2=#:G22 NIL) (|eq0| (%)))
                (SEQ
                 (COND
                  ((|HasSignature| (QREFELT % 6)
@@ -232,9 +232,9 @@
 
 (SDEFUN |EQ;factorAndSplit;%L;38| ((|eq| (%)) (% (|List| %)))
         (SPROG
-         ((#1=#:G541 NIL) (|rcf| NIL) (#2=#:G540 NIL)
-          (|p| (|Polynomial| (|Integer|))) (|eq0| (%)) (#3=#:G539 NIL)
-          (#4=#:G538 NIL))
+         ((#1=#:G114 NIL) (|rcf| NIL) (#2=#:G113 NIL)
+          (|p| (|Polynomial| (|Integer|))) (|eq0| (%)) (#3=#:G112 NIL)
+          (#4=#:G111 NIL))
          (SEQ
           (COND
            ((|HasSignature| (QREFELT % 6)
@@ -316,11 +316,22 @@
                       (SPADCALL (SPADCALL |eq1| (QREFELT % 22)) |eq3|
                                 (QREFELT % 90))))))) 
 
+(SDEFUN |EQ;convert;%If;43| ((|eq| (%)) (% (|InputForm|)))
+        (SPROG ((|l_form| (|List| #1=(|InputForm|))) (|rf| #1#) (|lf| #1#))
+               (SEQ
+                (LETT |lf|
+                      (SPADCALL (SPADCALL |eq| (QREFELT % 9)) (QREFELT % 93)))
+                (LETT |rf|
+                      (SPADCALL (SPADCALL |eq| (QREFELT % 22)) (QREFELT % 93)))
+                (LETT |l_form|
+                      (LIST (SPADCALL '|equation| (QREFELT % 94)) |lf| |rf|))
+                (EXIT (SPADCALL |l_form| (QREFELT % 95)))))) 
+
 (DECLAIM (NOTINLINE |Equation;|)) 
 
-(DEFUN |Equation| (#1=#:G551)
+(DEFUN |Equation| (#1=#:G131)
   (SPROG NIL
-         (PROG (#2=#:G552)
+         (PROG (#2=#:G132)
            (RETURN
             (COND
              ((LETT #2#
@@ -335,17 +346,20 @@
 
 (DEFUN |Equation;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G547 NIL) (#2=#:G548 NIL) (#3=#:G549 NIL) (#4=#:G550 NIL)
+   ((|pv$| NIL) (#1=#:G127 NIL) (#2=#:G128 NIL) (#3=#:G129 NIL) (#4=#:G130 NIL)
     (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT |dv$| (LIST '|Equation| DV$1))
-    (LETT % (GETREFV 95))
+    (LETT % (GETREFV 100))
     (QSETREFV % 0 |dv$|)
     (QSETREFV % 3
               (LETT |pv$|
                     (|buildPredVector| 0 0
                                        (LIST
+                                        (|HasCategory| |#1|
+                                                       '(|ConvertibleTo|
+                                                         (|InputForm|)))
                                         (|HasCategory| |#1|
                                                        '(|PartialDifferentialRing|
                                                          (|Symbol|)))
@@ -445,10 +459,10 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 7 (|Record| (|:| |lhs| |#1|) (|:| |rhs| |#1|)))
     (COND
-     ((|testBitVector| |pv$| 22)
+     ((|testBitVector| |pv$| 23)
       (QSETREFV % 20 (CONS (|dispatchFunction| |EQ;factorAndSplit;%L;1|) %))))
     (COND
-     ((|testBitVector| |pv$| 12)
+     ((|testBitVector| |pv$| 13)
       (PROGN
        (QSETREFV % 28 (CONS (|dispatchFunction| |EQ;eval;%SS%;8|) %))
        (QSETREFV % 32 (CONS (|dispatchFunction| |EQ;eval;%LL%;9|) %)))))
@@ -458,19 +472,19 @@
        (QSETREFV % 35 (CONS (|dispatchFunction| |EQ;eval;3%;10|) %))
        (QSETREFV % 38 (CONS (|dispatchFunction| |EQ;eval;%L%;11|) %)))))
     (COND
-     ((|testBitVector| |pv$| 2)
+     ((|testBitVector| |pv$| 3)
       (PROGN
        (QSETREFV % 41 (CONS (|dispatchFunction| |EQ;=;2%B;12|) %))
        (QSETREFV % 45 (CONS (|dispatchFunction| |EQ;coerce;%Of;13|) %))
        (QSETREFV % 46 (CONS (|dispatchFunction| |EQ;coerce;%B;14|) %)))))
     (COND
-     ((|testBitVector| |pv$| 19)
+     ((|testBitVector| |pv$| 20)
       (PROGN
        (QSETREFV % 48 (CONS (|dispatchFunction| |EQ;+;3%;15|) %))
        (QSETREFV % 49 (CONS (|dispatchFunction| |EQ;+;S2%;16|) %))
        (QSETREFV % 50 (CONS (|dispatchFunction| |EQ;+;%S%;17|) %)))))
     (COND
-     ((|testBitVector| |pv$| 3)
+     ((|testBitVector| |pv$| 4)
       (PROGN
        (QSETREFV % 52 (CONS (|dispatchFunction| |EQ;-;2%;18|) %))
        (QSETREFV % 54 (CONS (|dispatchFunction| |EQ;-;S2%;19|) %))
@@ -482,14 +496,14 @@
                        (LIST (|dispatchFunction| |EQ;Zero;%;23|) % 56)))
        (QSETREFV % 53 (CONS (|dispatchFunction| |EQ;-;3%;24|) %)))))
     (COND
-     ((|testBitVector| |pv$| 16)
+     ((|testBitVector| |pv$| 17)
       (PROGN
        (QSETREFV % 60 (CONS (|dispatchFunction| |EQ;*;3%;25|) %))
        (QSETREFV % 61 (CONS (|dispatchFunction| |EQ;*;S2%;26|) %))
        (QSETREFV % 61 (CONS (|dispatchFunction| |EQ;*;S2%;27|) %))
        (QSETREFV % 62 (CONS (|dispatchFunction| |EQ;*;%S%;28|) %)))))
     (COND
-     ((|testBitVector| |pv$| 6)
+     ((|testBitVector| |pv$| 7)
       (PROGN
        (QSETREFV % 64
                  (CONS #'|makeSpadConstant|
@@ -498,21 +512,21 @@
        (QSETREFV % 68 (CONS (|dispatchFunction| |EQ;leftOne;%U;31|) %))
        (QSETREFV % 69 (CONS (|dispatchFunction| |EQ;rightOne;%U;32|) %)))))
     (COND
-     ((|testBitVector| |pv$| 9)
+     ((|testBitVector| |pv$| 10)
       (PROGN
        (QSETREFV % 71 (CONS (|dispatchFunction| |EQ;inv;2%;33|) %))
        (QSETREFV % 68 (CONS (|dispatchFunction| |EQ;leftOne;%U;34|) %))
        (QSETREFV % 69 (CONS (|dispatchFunction| |EQ;rightOne;%U;35|) %)))))
     (COND
-     ((|testBitVector| |pv$| 4)
+     ((|testBitVector| |pv$| 5)
       (PROGN
        (QSETREFV % 74 (CONS (|dispatchFunction| |EQ;characteristic;Nni;36|) %))
        (QSETREFV % 77 (CONS (|dispatchFunction| |EQ;*;I2%;37|) %)))))
     (COND
-     ((|testBitVector| |pv$| 22)
+     ((|testBitVector| |pv$| 23)
       (QSETREFV % 20 (CONS (|dispatchFunction| |EQ;factorAndSplit;%L;38|) %))))
     (COND
-     ((|testBitVector| |pv$| 1)
+     ((|testBitVector| |pv$| 2)
       (QSETREFV % 86 (CONS (|dispatchFunction| |EQ;differentiate;%S%;39|) %))))
     (COND
      ((|HasCategory| |#1| '(|Field|))
@@ -520,8 +534,11 @@
        (QSETREFV % 88 (CONS (|dispatchFunction| |EQ;/;3%;40|) %))
        (QSETREFV % 71 (CONS (|dispatchFunction| |EQ;inv;2%;41|) %)))))
     (COND
-     ((|testBitVector| |pv$| 23)
+     ((|testBitVector| |pv$| 24)
       (QSETREFV % 91 (CONS (|dispatchFunction| |EQ;subst;3%;42|) %))))
+    (COND
+     ((|testBitVector| |pv$| 1)
+      (QSETREFV % 96 (CONS (|dispatchFunction| |EQ;convert;%If;43|) %))))
     %))) 
 
 (MAKEPROP '|Equation| '|infovec|
@@ -551,28 +568,29 @@
               (|Record| (|:| |flag| 12) (|:| |factor| 79) (|:| |exponent| 72))
               (|List| 82) (262 . |factorList|) (267 . |differentiate|)
               (273 . |differentiate|) (279 . /) (285 . /) (|Equation| %)
-              (291 . |subst|) (297 . |subst|) (|PositiveInteger|) (|List| 72)
-              (|String|))
-           '#(~= 303 |zero?| 309 |swap| 314 |subtractIfCan| 319 |subst| 325
-              |sample| 331 |rightZero| 335 |rightRecip| 340 |rightPower| 345
-              |rightOne| 357 |rhs| 362 |recip| 367 |opposite?| 372 |one?| 378
-              |map| 383 |lhs| 389 |leftZero| 394 |leftRecip| 399 |leftPower|
-              404 |leftOne| 416 |latex| 421 |inv| 426 |factorAndSplit| 431
-              |eval| 436 |equation| 462 |differentiate| 468 |conjugate| 494
-              |commutator| 500 |coerce| 506 |characteristic| 521 |associator|
-              525 |antiCommutator| 532 |annihilate?| 538 ^ 544 |Zero| 562 |One|
-              566 D 570 = 596 / 608 - 614 + 637 * 655)
+              (291 . |subst|) (297 . |subst|) (|InputForm|) (303 . |convert|)
+              (308 . |convert|) (313 . |convert|) (318 . |convert|)
+              (|PositiveInteger|) (|List| 72) (|String|))
+           '#(~= 323 |zero?| 329 |swap| 334 |subtractIfCan| 339 |subst| 345
+              |sample| 351 |rightZero| 355 |rightRecip| 360 |rightPower| 365
+              |rightOne| 377 |rhs| 382 |recip| 387 |opposite?| 392 |one?| 398
+              |map| 403 |lhs| 409 |leftZero| 414 |leftRecip| 419 |leftPower|
+              424 |leftOne| 436 |latex| 441 |inv| 446 |factorAndSplit| 451
+              |eval| 456 |equation| 482 |differentiate| 488 |convert| 514
+              |conjugate| 519 |commutator| 525 |coerce| 531 |characteristic|
+              546 |associator| 550 |antiCommutator| 557 |annihilate?| 563 ^ 569
+              |Zero| 587 |One| 591 D 595 = 621 / 633 - 639 + 662 * 680)
            'NIL
            (CONS
-            (|makeByteWordVec2| 21
-                                '(1 5 5 4 4 7 4 4 8 4 4 5 8 4 3 9 3 4 11 6 5 3
-                                  17 20 17 21 0 2 10 21 9 2 12))
+            (|makeByteWordVec2| 22
+                                '(2 6 6 5 5 8 5 5 9 5 5 6 9 5 4 10 4 5 12 7 6 4
+                                  18 21 18 22 0 1 3 11 22 10 3 13))
             (CONS
              '#(|PartialDifferentialRing&| NIL |Rng&| NIL NIL |Module&| NIL
                 |NonAssociativeRing&| NIL NIL NIL |NonAssociativeRng&| NIL NIL
                 |AbelianGroup&| |Group&| NIL NIL NIL |MagmaWithUnit&|
                 |NonAssociativeSemiRng&| |AbelianMonoid&| NIL
-                |AbelianSemiGroup&| |Magma&| |SetCategory&| NIL NIL NIL
+                |AbelianSemiGroup&| |Magma&| |SetCategory&| NIL NIL NIL NIL
                 |BasicType&| NIL NIL |InnerEvalable&|)
              (CONS
               '#((|PartialDifferentialRing| 26) (|Ring|) (|Rng|) (|SemiRing|)
@@ -583,10 +601,10 @@
                  (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
                  (|Monoid|) (|MagmaWithUnit|) (|NonAssociativeSemiRng|)
                  (|AbelianMonoid|) (|SemiGroup|) (|AbelianSemiGroup|) (|Magma|)
-                 (|SetCategory|) (|Type|) (|CoercibleTo| 42) (|unitsKnown|)
-                 (|BasicType|) (|TwoSidedRecip|) (|CoercibleTo| 39)
-                 (|InnerEvalable| 26 6))
-              (|makeByteWordVec2| 94
+                 (|SetCategory|) (|Type|) (|ConvertibleTo| 92)
+                 (|CoercibleTo| 42) (|unitsKnown|) (|BasicType|)
+                 (|TwoSidedRecip|) (|CoercibleTo| 39) (|InnerEvalable| 26 6))
+              (|makeByteWordVec2| 99
                                   '(1 0 0 0 8 1 6 10 0 11 1 15 14 0 16 0 6 0 17
                                     1 0 19 0 20 3 6 0 0 26 6 27 3 0 0 0 26 6 28
                                     3 6 0 0 29 30 31 3 0 0 0 29 30 32 2 6 0 0
@@ -603,25 +621,27 @@
                                     0 75 76 2 0 0 75 0 77 1 80 78 79 81 1 78 83
                                     0 84 2 6 0 0 26 85 2 0 0 0 26 86 2 6 0 0 0
                                     87 2 0 0 0 0 88 2 6 0 0 89 90 2 0 0 0 0 91
-                                    2 2 39 0 0 1 1 14 39 0 1 1 0 0 0 23 2 3 65
-                                    0 0 1 2 23 0 0 0 91 0 13 0 1 1 3 0 0 8 1 6
-                                    65 0 1 2 6 0 0 72 1 2 16 0 0 92 1 1 6 65 0
-                                    69 1 0 6 0 22 1 6 65 0 67 2 14 39 0 0 1 1 6
-                                    39 0 1 2 0 0 24 0 25 1 0 6 0 9 1 3 0 0 58 1
-                                    6 65 0 1 2 6 0 0 72 1 2 16 0 0 92 1 1 6 65
-                                    0 68 1 2 94 0 1 1 15 0 0 71 1 22 19 0 20 2
-                                    18 0 0 0 35 2 18 0 0 19 38 3 12 0 0 29 30
-                                    32 3 12 0 0 26 6 28 2 0 0 6 6 18 3 1 0 0 29
-                                    93 1 2 1 0 0 29 1 3 1 0 0 26 72 1 2 1 0 0
-                                    26 86 2 9 0 0 0 1 2 10 0 0 0 1 1 4 0 75 1 1
-                                    2 39 0 46 1 2 42 0 45 0 4 72 74 3 4 0 0 0 0
-                                    1 2 4 0 0 0 1 2 4 39 0 0 1 2 9 0 0 75 1 2 6
-                                    0 0 72 1 2 16 0 0 92 1 0 14 0 56 0 6 0 64 3
-                                    1 0 0 29 93 1 2 1 0 0 29 1 3 1 0 0 26 72 1
-                                    2 1 0 0 26 1 2 2 39 0 0 41 2 0 0 6 6 21 2
-                                    15 0 0 0 88 2 3 0 6 0 54 2 3 0 0 6 55 1 3 0
-                                    0 52 2 3 0 0 0 53 2 19 0 6 0 49 2 19 0 0 6
-                                    50 2 19 0 0 0 48 2 14 0 72 0 1 2 3 0 75 0
-                                    77 2 19 0 92 0 1 2 16 0 0 6 62 2 16 0 6 0
-                                    61 2 16 0 0 0 60)))))
+                                    1 6 92 0 93 1 92 0 26 94 1 92 0 19 95 1 0
+                                    92 0 96 2 3 39 0 0 1 1 15 39 0 1 1 0 0 0 23
+                                    2 4 65 0 0 1 2 24 0 0 0 91 0 14 0 1 1 4 0 0
+                                    8 1 7 65 0 1 2 7 0 0 72 1 2 17 0 0 97 1 1 7
+                                    65 0 69 1 0 6 0 22 1 7 65 0 67 2 15 39 0 0
+                                    1 1 7 39 0 1 2 0 0 24 0 25 1 0 6 0 9 1 4 0
+                                    0 58 1 7 65 0 1 2 7 0 0 72 1 2 17 0 0 97 1
+                                    1 7 65 0 68 1 3 99 0 1 1 16 0 0 71 1 23 19
+                                    0 20 2 19 0 0 0 35 2 19 0 0 19 38 3 13 0 0
+                                    29 30 32 3 13 0 0 26 6 28 2 0 0 6 6 18 3 2
+                                    0 0 26 72 1 3 2 0 0 29 98 1 2 2 0 0 26 86 2
+                                    2 0 0 29 1 1 1 92 0 96 2 10 0 0 0 1 2 11 0
+                                    0 0 1 1 5 0 75 1 1 3 39 0 46 1 3 42 0 45 0
+                                    5 72 74 3 5 0 0 0 0 1 2 5 0 0 0 1 2 5 39 0
+                                    0 1 2 10 0 0 75 1 2 7 0 0 72 1 2 17 0 0 97
+                                    1 0 15 0 56 0 7 0 64 3 2 0 0 26 72 1 3 2 0
+                                    0 29 98 1 2 2 0 0 26 1 2 2 0 0 29 1 2 3 39
+                                    0 0 41 2 0 0 6 6 21 2 16 0 0 0 88 2 4 0 6 0
+                                    54 2 4 0 0 6 55 2 4 0 0 0 53 1 4 0 0 52 2
+                                    20 0 6 0 49 2 20 0 0 6 50 2 20 0 0 0 48 2
+                                    15 0 72 0 1 2 4 0 75 0 77 2 20 0 97 0 1 2
+                                    17 0 6 0 61 2 17 0 0 6 62 2 17 0 0 0
+                                    60)))))
            '|lookupComplete|)) 

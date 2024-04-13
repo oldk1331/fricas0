@@ -8,7 +8,7 @@
         (T (SETQ |BoundedJoinSemilattice;AL| (|BoundedJoinSemilattice;|))))) 
 
 (DEFUN |BoundedJoinSemilattice;| ()
-  (SPROG ((#1=#:G448 NIL))
+  (SPROG ((#1=#:G1 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|JoinSemilattice|)

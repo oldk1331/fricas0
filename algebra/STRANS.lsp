@@ -98,9 +98,9 @@
 
 (DECLAIM (NOTINLINE |STransformPackage;|)) 
 
-(DEFUN |STransformPackage| (&REST #1=#:G465)
+(DEFUN |STransformPackage| (&REST #1=#:G27)
   (SPROG NIL
-         (PROG (#2=#:G466)
+         (PROG (#2=#:G28)
            (RETURN
             (COND
              ((LETT #2#

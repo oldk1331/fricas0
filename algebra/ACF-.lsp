@@ -115,7 +115,7 @@
          (|fn| (|Mapping| S (|SparseUnivariatePolynomial| S) (|Symbol|)))
          (% (|List| S)))
         (SPROG
-         ((#1=#:G542 NIL) (#2=#:G536 NIL) (|i| NIL) (#3=#:G541 NIL)
+         ((#1=#:G117 NIL) (#2=#:G111 NIL) (|i| NIL) (#3=#:G116 NIL)
           (|beta| (S)) (|x| (|Symbol|))
           (|cyclo| (|SparseUnivariatePolynomial| S))
           (|n| (|NonNegativeInteger|)) (|alpha| (S)))
@@ -162,10 +162,10 @@
          (|fn| (|Mapping| S (|SparseUnivariatePolynomial| S) (|Symbol|)))
          (% (|List| S)))
         (SPROG
-         ((|ans| (|List| S)) (#1=#:G583 NIL)
+         ((|ans| (|List| S)) (#1=#:G160 NIL)
           (|q| (|SparseUnivariatePolynomial| S)) (|alpha| (S)) (|x| (|Symbol|))
-          (#2=#:G588 NIL) (#3=#:G587 #4=(|List| S)) (#5=#:G589 #4#)
-          (#6=#:G637 NIL) (|r| NIL) (|groots| #4#)
+          (#2=#:G165 NIL) (#3=#:G164 #4=(|List| S)) (#5=#:G166 #4#)
+          (#6=#:G214 NIL) (|r| NIL) (|groots| #4#)
           (|g| (|SparseUnivariatePolynomial| S))
           (|h| (|SparseUnivariatePolynomial| S))
           (|decompList| (|List| (|SparseUnivariatePolynomial| S)))

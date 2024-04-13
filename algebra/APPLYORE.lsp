@@ -1,7 +1,7 @@
 
 (SDEFUN |APPLYORE;apply;PM2M;1|
         ((|p| (P)) (|f| (|Mapping| M M)) (|m| (M)) (% (M)))
-        (SPROG ((|mn| (M)) (|w| (M)) (#1=#:G454 NIL) (|i| NIL))
+        (SPROG ((|mn| (M)) (|w| (M)) (#1=#:G14 NIL) (|i| NIL))
                (SEQ (LETT |w| (|spadConstant| % 9)) (LETT |mn| |m|)
                     (SEQ (LETT |i| 0) (LETT #1# (SPADCALL |p| (QREFELT % 11)))
                          G190 (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -18,9 +18,9 @@
 
 (DECLAIM (NOTINLINE |ApplyUnivariateSkewPolynomial;|)) 
 
-(DEFUN |ApplyUnivariateSkewPolynomial| (&REST #1=#:G455)
+(DEFUN |ApplyUnivariateSkewPolynomial| (&REST #1=#:G15)
   (SPROG NIL
-         (PROG (#2=#:G456)
+         (PROG (#2=#:G16)
            (RETURN
             (COND
              ((LETT #2#

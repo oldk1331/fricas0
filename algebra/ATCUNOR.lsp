@@ -8,7 +8,7 @@
         (T (SETQ |canonicalUnitNormal;AL| (|canonicalUnitNormal;|))))) 
 
 (DEFUN |canonicalUnitNormal;| ()
-  (SPROG ((#1=#:G448 NIL))
+  (SPROG ((#1=#:G1 NIL))
          (PROG1 (LETT #1# (|Join| (|mkCategory| NIL NIL NIL NIL)))
            (SETELT #1# 0 '(|canonicalUnitNormal|))))) 
 

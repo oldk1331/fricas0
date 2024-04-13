@@ -7,9 +7,9 @@
 
 (DECLAIM (NOTINLINE |GuessFiniteFunctions;|)) 
 
-(DEFUN |GuessFiniteFunctions| (#1=#:G450)
+(DEFUN |GuessFiniteFunctions| (#1=#:G11)
   (SPROG NIL
-         (PROG (#2=#:G451)
+         (PROG (#2=#:G12)
            (RETURN
             (COND
              ((LETT #2#

@@ -38,7 +38,7 @@
 
 (SDEFUN |FFIELDC-;createPrimitiveElement;S;8| ((% (S)))
         (SPROG
-         ((|found| (|Boolean|)) (|e| (S)) (#1=#:G494 NIL) (|i| NIL)
+         ((|found| (|Boolean|)) (|e| (S)) (#1=#:G71 NIL) (|i| NIL)
           (|start| (|Integer|)) (|sm1| (|PositiveInteger|)))
          (SEQ (LETT |sm1| (- (SPADCALL (QREFELT % 32)) 1))
               (LETT |start|
@@ -63,8 +63,7 @@
 
 (SDEFUN |FFIELDC-;primitive?;SB;9| ((|a| (S)) (% (|Boolean|)))
         (SPROG
-         ((|equalone| (|Boolean|)) (#1=#:G505 NIL) (|exp| NIL)
-          (|q| (|Integer|))
+         ((|equalone| (|Boolean|)) (#1=#:G82 NIL) (|exp| NIL) (|q| (|Integer|))
           (|explist|
            (|List|
             (|Record| (|:| |factor| (|Integer|))
@@ -93,8 +92,8 @@
 (SDEFUN |FFIELDC-;order;SPi;10| ((|e| (S)) (% (|PositiveInteger|)))
         (SPROG
          ((|ord| (|Integer|)) (|goon| (|Boolean|)) (|a| (|Integer|))
-          (#1=#:G516 NIL) (|j| NIL) (|primeDivisor| #2=(|Integer|))
-          (#3=#:G515 NIL) (|rec| NIL)
+          (#1=#:G93 NIL) (|j| NIL) (|primeDivisor| #2=(|Integer|))
+          (#3=#:G92 NIL) (|rec| NIL)
           (|lof|
            (|List|
             (|Record| (|:| |factor| #2#)
@@ -139,11 +138,11 @@
         (SPROG
          ((|a| (S)) (|disclog| (|Integer|)) (|mult| (|Integer|)) (|c| (S))
           (|disc1| (|Integer|)) (|found| (|Boolean|))
-          (|rho| (|Union| (|NonNegativeInteger|) "failed")) (#1=#:G538 NIL)
+          (|rho| (|Union| (|NonNegativeInteger|) "failed")) (#1=#:G115 NIL)
           (|i| NIL) (|end| (|Integer|)) (|n| (|NonNegativeInteger|))
           (|exptable| (|Table| (|PositiveInteger|) (|NonNegativeInteger|)))
-          (|exp| #2=(|Integer|)) (#3=#:G537 NIL) (|t| NIL)
-          (|fac| #4=(|Integer|)) (#5=#:G536 NIL) (|f| NIL) (|groupord| #2#)
+          (|exp| #2=(|Integer|)) (#3=#:G114 NIL) (|t| NIL)
+          (|fac| #4=(|Integer|)) (#5=#:G113 NIL) (|f| NIL) (|groupord| #2#)
           (|gen| (S))
           (|faclist|
            (|List|
@@ -271,10 +270,10 @@
          (% (|Union| (|NonNegativeInteger|) "failed")))
         (SPROG
          ((|a| (S)) (|mult| (|Integer|)) (|disclog| (|Integer|))
-          (|rho| (|Integer|)) (#1=#:G561 NIL)
+          (|rho| (|Integer|)) (#1=#:G142 NIL)
           (|rhoHelp| (|Union| (|NonNegativeInteger|) "failed"))
-          (|exp| (|Integer|)) (#2=#:G563 NIL) (|t| NIL) (|primroot| (S))
-          (|fac| #3=(|Integer|)) (#4=#:G562 NIL) (|f| NIL)
+          (|exp| (|Integer|)) (#2=#:G144 NIL) (|t| NIL) (|primroot| (S))
+          (|fac| #3=(|Integer|)) (#4=#:G143 NIL) (|f| NIL)
           (|faclist|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
@@ -333,7 +332,7 @@
                                        ((QEQCAR |rhoHelp| 1)
                                         (PROGN
                                          (LETT #1# (CONS 1 "failed"))
-                                         (GO #5=#:G560)))
+                                         (GO #5=#:G141)))
                                        ('T
                                         (SEQ
                                          (LETT |rho|
@@ -368,57 +367,13 @@
 (SDEFUN |FFIELDC-;factorSquareFreePolynomial;SupF;15|
         ((|f| (|SparseUnivariatePolynomial| S))
          (% (|Factored| (|SparseUnivariatePolynomial| S))))
-        (SPROG
-         ((#1=#:G578 NIL)
-          (#2=#:G577 #3=(|Factored| (|SparseUnivariatePolynomial| S)))
-          (#4=#:G579 #3#) (#5=#:G582 NIL) (|u| NIL)
-          (|flist|
-           (|Record| (|:| |cont| S)
-                     (|:| |factors|
-                          (|List|
-                           (|Record|
-                            (|:| |irr| (|SparseUnivariatePolynomial| S))
-                            (|:| |pow| (|NonNegativeInteger|))))))))
-         (SEQ
-          (COND
-           ((SPADCALL |f| (|spadConstant| % 83) (QREFELT % 84))
-            (|spadConstant| % 85))
-           (#6='T
-            (SEQ (LETT |flist| (SPADCALL |f| 'T (QREFELT % 88)))
-                 (EXIT
-                  (SPADCALL (SPADCALL (QCAR |flist|) (QREFELT % 89))
-                            (PROGN
-                             (LETT #1# NIL)
-                             (SEQ (LETT |u| NIL) (LETT #5# (QCDR |flist|)) G190
-                                  (COND
-                                   ((OR (ATOM #5#)
-                                        (PROGN (LETT |u| (CAR #5#)) NIL))
-                                    (GO G191)))
-                                  (SEQ
-                                   (EXIT
-                                    (PROGN
-                                     (LETT #4#
-                                           (SPADCALL (QCAR |u|) (QCDR |u|)
-                                                     (QREFELT % 90)))
-                                     (COND
-                                      (#1#
-                                       (LETT #2#
-                                             (SPADCALL #2# #4#
-                                                       (QREFELT % 91))))
-                                      ('T
-                                       (PROGN
-                                        (LETT #2# #4#)
-                                        (LETT #1# 'T)))))))
-                                  (LETT #5# (CDR #5#)) (GO G190) G191
-                                  (EXIT NIL))
-                             (COND (#1# #2#) (#6# (|spadConstant| % 92))))
-                            (QREFELT % 93))))))))) 
+        (SPADCALL |f| (QREFELT % 83))) 
 
 (SDEFUN |FFIELDC-;gcdPolynomial;3Sup;16|
         ((|f| (|SparseUnivariatePolynomial| S))
          (|g| (|SparseUnivariatePolynomial| S))
          (% (|SparseUnivariatePolynomial| S)))
-        (SPADCALL |f| |g| (QREFELT % 96))) 
+        (SPADCALL |f| |g| (QREFELT % 86))) 
 
 (DECLAIM (NOTINLINE |FiniteFieldCategory&;|)) 
 
@@ -427,7 +382,7 @@
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|FiniteFieldCategory&| DV$1))
-          (LETT % (GETREFV 98))
+          (LETT % (GETREFV 88))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|stuffDomainSlots| %)
@@ -466,20 +421,16 @@
               (|UnivariatePolynomialSquareFree| 6 74) (139 . |squareFree|)
               (|Factored| 78) (|SparseUnivariatePolynomial| %)
               |FFIELDC-;squareFreePolynomial;SupF;13|
-              (|DistinctDegreeFactorize| 6 74) (144 . |factor|)
-              |FFIELDC-;factorPolynomial;SupF;14| (149 . |Zero|) (153 . =)
-              (159 . |Zero|) (|Record| (|:| |irr| 74) (|:| |pow| 31))
-              (|Record| (|:| |cont| 6) (|:| |factors| (|List| 86)))
-              (163 . |distdfact|) (169 . |coerce|) (174 . |primeFactor|)
-              (180 . *) (186 . |One|) (190 . *)
+              (|UnivariateFiniteFieldFactorize| 6 74) (144 . |factor|)
+              |FFIELDC-;factorPolynomial;SupF;14| (149 . |factorSquareFree|)
               |FFIELDC-;factorSquareFreePolynomial;SupF;15|
-              (|EuclideanDomain&| 74) (196 . |gcd|)
+              (|EuclideanDomain&| 74) (154 . |gcd|)
               |FFIELDC-;gcdPolynomial;3Sup;16|)
-           '#(|squareFreePolynomial| 202 |primitive?| 207 |order| 212
-              |nextItem| 222 |init| 227 |gcdPolynomial| 231
-              |factorSquareFreePolynomial| 237 |factorPolynomial| 242
-              |discreteLog| 247 |differentiate| 258 |createPrimitiveElement|
-              263 |conditionP| 267 |charthRoot| 272)
+           '#(|squareFreePolynomial| 160 |primitive?| 165 |order| 170
+              |nextItem| 180 |init| 185 |gcdPolynomial| 189
+              |factorSquareFreePolynomial| 195 |factorPolynomial| 200
+              |discreteLog| 205 |differentiate| 216 |createPrimitiveElement|
+              221 |conditionP| 225 |charthRoot| 230)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -537,7 +488,7 @@
                                        (|SparseUnivariatePolynomial| |#1|)))
                                      T))
                              (LIST) NIL NIL)))
-                        (|makeByteWordVec2| 97
+                        (|makeByteWordVec2| 87
                                             '(0 6 0 7 1 6 10 0 11 1 6 0 10 12 1
                                               6 13 0 14 1 6 10 0 17 1 18 0 10
                                               19 1 22 21 0 23 1 6 0 0 24 2 26 0
@@ -549,15 +500,11 @@
                                               57 2 6 0 0 0 58 1 62 60 61 63 1
                                               43 64 0 65 1 48 68 0 69 3 70 56 6
                                               6 31 71 1 75 73 74 76 1 80 73 74
-                                              81 0 74 0 83 2 74 13 0 0 84 0 73
-                                              0 85 2 80 87 74 13 88 1 74 0 6 89
-                                              2 73 0 74 31 90 2 73 0 0 0 91 0
-                                              73 0 92 2 73 0 74 0 93 2 95 0 0 0
-                                              96 1 0 77 78 79 1 0 13 0 47 1 0
-                                              10 0 50 1 0 18 0 20 1 0 15 0 16 0
-                                              0 0 9 2 0 78 78 78 97 1 0 77 78
-                                              94 1 0 77 78 82 1 0 31 0 59 2 0
-                                              56 0 0 72 1 0 0 0 8 0 0 0 39 1 0
-                                              28 29 30 1 0 0 0 35 1 0 15 0
-                                              36)))))
+                                              81 1 80 73 74 83 2 85 0 0 0 86 1
+                                              0 77 78 79 1 0 13 0 47 1 0 10 0
+                                              50 1 0 18 0 20 1 0 15 0 16 0 0 0
+                                              9 2 0 78 78 78 87 1 0 77 78 84 1
+                                              0 77 78 82 1 0 31 0 59 2 0 56 0 0
+                                              72 1 0 0 0 8 0 0 0 39 1 0 28 29
+                                              30 1 0 0 0 35 1 0 15 0 36)))))
            '|lookupComplete|)) 

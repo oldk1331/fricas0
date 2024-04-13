@@ -38,11 +38,10 @@
 
 (SDEFUN |INFORM;flatten;2%;11| ((|s| (%)) (% (%)))
         (SPROG
-         ((#1=#:G486 NIL) (|u| NIL) (#2=#:G485 NIL) (#3=#:G484 NIL)
-          (#4=#:G483 NIL)
+         ((#1=#:G67 NIL) (|u| NIL) (#2=#:G66 NIL) (#3=#:G65 NIL) (#4=#:G64 NIL)
           (|l2| (|List| (|Record| (|:| |lst| (|List| %)) (|:| |symb| %))))
-          (|n| (|NonNegativeInteger|)) (#5=#:G482 NIL) (|l| (|List| %))
-          (|x| NIL) (#6=#:G481 NIL) (|sy| (|Symbol|)))
+          (|n| (|NonNegativeInteger|)) (#5=#:G63 NIL) (|l| (|List| %))
+          (|x| NIL) (#6=#:G62 NIL) (|sy| (|Symbol|)))
          (SEQ
           (COND
            ((OR (SPADCALL |s| (QREFELT % 28))
@@ -124,10 +123,9 @@
         ((|s| (%)) (|sy| (|Symbol|)) (|n| (|NonNegativeInteger|))
          (% (|Record| (|:| |lst| (|List| %)) (|:| |symb| %))))
         (SPROG
-         ((#1=#:G502 NIL) (|u| NIL) (#2=#:G501 NIL) (#3=#:G500 NIL)
-          (#4=#:G499 NIL)
+         ((#1=#:G83 NIL) (|u| NIL) (#2=#:G82 NIL) (#3=#:G81 NIL) (#4=#:G80 NIL)
           (|l2| (|List| (|Record| (|:| |lst| (|List| %)) (|:| |symb| %))))
-          (#5=#:G498 NIL) (|l| (|List| %)) (|x| NIL) (#6=#:G497 NIL) (|a| (%)))
+          (#5=#:G79 NIL) (|l| (|List| %)) (|x| NIL) (#6=#:G78 NIL) (|a| (%)))
          (SEQ
           (COND ((SPADCALL |s| (QREFELT % 28)) (CONS NIL |s|))
                 ('T
@@ -208,7 +206,7 @@
               ('T (|error| "strsym: form is neither a string or symbol")))) 
 
 (SDEFUN |INFORM;unparse;%S;14| ((|x| (%)) (% (|String|)))
-        (SPROG ((#1=#:G511 NIL) (|a| NIL) (#2=#:G510 NIL) (|s| (%)))
+        (SPROG ((#1=#:G92 NIL) (|a| NIL) (#2=#:G91 NIL) (|s| (%)))
                (SEQ
                 (COND
                  ((SPADCALL (LETT |s| (|unparseInputForm| |x|)) (QREFELT % 28))
@@ -279,7 +277,7 @@
                              (QREFELT % 57)))))))) 
 
 (SDEFUN |INFORM;tuplify| ((|l| (|List| (|Symbol|))) (% (%)))
-        (SPROG ((#1=#:G525 NIL) (|x| NIL) (#2=#:G524 NIL))
+        (SPROG ((#1=#:G107 NIL) (|x| NIL) (#2=#:G106 NIL))
                (SEQ
                 (COND
                  ((NULL (CDR |l|)) (SPADCALL (|SPADfirst| |l|) (QREFELT % 17)))
@@ -305,7 +303,7 @@
 
 (SDEFUN |INFORM;function;%LS%;21|
         ((|f| (%)) (|l| (|List| (|Symbol|))) (|name| (|Symbol|)) (% (%)))
-        (SPROG ((#1=#:G531 NIL) (|x| NIL) (#2=#:G530 NIL) (|nn| (%)))
+        (SPROG ((#1=#:G113 NIL) (|x| NIL) (#2=#:G112 NIL) (|nn| (%)))
                (SEQ
                 (LETT |nn|
                       (SPADCALL
@@ -388,7 +386,7 @@
 
 (DEFUN |InputForm| ()
   (SPROG NIL
-         (PROG (#1=#:G541)
+         (PROG (#1=#:G123)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|InputForm|))

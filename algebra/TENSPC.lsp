@@ -6,8 +6,7 @@
 (DEFPARAMETER |TensorPowerCategory;AL| 'NIL) 
 
 (DEFUN |TensorPowerCategory| (|t#1| |t#2| |t#3|)
-  (LET (#1=#:G449
-        (#2=#:G450 (LIST |t#1| (|devaluate| |t#2|) (|devaluate| |t#3|))))
+  (LET (#1=#:G6 (#2=#:G7 (LIST |t#1| (|devaluate| |t#2|) (|devaluate| |t#3|))))
     (COND ((SETQ #1# (|assoc| #2# |TensorPowerCategory;AL|)) (CDR #1#))
           (T
            (SETQ |TensorPowerCategory;AL|
@@ -17,7 +16,7 @@
            #1#)))) 
 
 (DEFUN |TensorPowerCategory;| (|t#1| |t#2| |t#3|)
-  (SPROG ((#1=#:G448 NIL))
+  (SPROG ((#1=#:G5 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3|)

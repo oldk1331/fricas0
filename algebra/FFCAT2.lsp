@@ -5,9 +5,9 @@
 
 (DECLAIM (NOTINLINE |FunctionFieldCategoryFunctions2;|)) 
 
-(DEFUN |FunctionFieldCategoryFunctions2| (&REST #1=#:G450)
+(DEFUN |FunctionFieldCategoryFunctions2| (&REST #1=#:G3)
   (SPROG NIL
-         (PROG (#2=#:G451)
+         (PROG (#2=#:G4)
            (RETURN
             (COND
              ((LETT #2#

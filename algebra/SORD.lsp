@@ -55,7 +55,7 @@
 
 (SDEFUN |SORD;ordinalAdd;3%;15| ((|o1| (%)) (|o2| (%)) (% (%)))
         (SPROG
-         ((|p2| (|Rep|)) (#1=#:G486 NIL) (|t| NIL) (|p1| (|Rep|))
+         ((|p2| (|Rep|)) (#1=#:G54 NIL) (|t| NIL) (|p1| (|Rep|))
           (|lt| (|List| |Rep|)) (|e| (%)))
          (SEQ (LETT |p1| |o1|) (LETT |p2| |o2|)
               (LETT |e| (SPADCALL |p2| (QREFELT % 39)))
@@ -98,7 +98,7 @@
                     (EXIT (SPADCALL |p| (QREFELT % 29)))))) 
 
 (SDEFUN |SORD;limitPart;2%;17| ((|o| (%)) (% (%)))
-        (SPROG ((#1=#:G492 NIL))
+        (SPROG ((#1=#:G60 NIL))
                (PROG2
                    (LETT #1#
                          (SPADCALL |o|
@@ -253,7 +253,7 @@
 
 (DEFUN |SmallOrdinal| ()
   (SPROG NIL
-         (PROG (#1=#:G519)
+         (PROG (#1=#:G88)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|SmallOrdinal|))

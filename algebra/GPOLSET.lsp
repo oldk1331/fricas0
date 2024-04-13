@@ -27,8 +27,8 @@
 
 (SDEFUN |GPOLSET;=;2%B;8| ((|ps1| (%)) (|ps2| (%)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G467 NIL) (|p| NIL) (#2=#:G466 NIL) (#3=#:G465 NIL)
-          (#4=#:G464 NIL))
+         ((#1=#:G27 NIL) (|p| NIL) (#2=#:G26 NIL) (#3=#:G25 NIL)
+          (#4=#:G24 NIL))
          (SEQ
           (SPADCALL
            (SPADCALL
@@ -56,7 +56,7 @@
            (QREFELT % 29))))) 
 
 (SDEFUN |GPOLSET;coerce;%Of;9| ((|ps| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G475 NIL) (|p| NIL) (#2=#:G474 NIL) (|lp| (|List| P)))
+        (SPROG ((#1=#:G35 NIL) (|p| NIL) (#2=#:G34 NIL) (|lp| (|List| P)))
                (SEQ
                 (LETT |lp|
                       (SPADCALL (ELT % 31) (SPADCALL |ps| (QREFELT % 14))
@@ -104,9 +104,9 @@
 
 (DECLAIM (NOTINLINE |GeneralPolynomialSet;|)) 
 
-(DEFUN |GeneralPolynomialSet| (&REST #1=#:G499)
+(DEFUN |GeneralPolynomialSet| (&REST #1=#:G60)
   (SPROG NIL
-         (PROG (#2=#:G500)
+         (PROG (#2=#:G61)
            (RETURN
             (COND
              ((LETT #2#
@@ -125,7 +125,7 @@
 
 (DEFUN |GeneralPolynomialSet;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((#1=#:G498 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
+   ((#1=#:G59 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
     (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))

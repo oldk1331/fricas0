@@ -6,7 +6,7 @@
 (DEFPARAMETER |FramedNonAssociativeAlgebra;AL| 'NIL) 
 
 (DEFUN |FramedNonAssociativeAlgebra| (|t#1|)
-  (LET (#1=#:G453 (#2=#:G454 (|devaluate| |t#1|)))
+  (LET (#1=#:G6 (#2=#:G7 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |FramedNonAssociativeAlgebra;AL|)) (CDR #1#))
           (T
            (SETQ |FramedNonAssociativeAlgebra;AL|
@@ -16,7 +16,7 @@
            #1#)))) 
 
 (DEFUN |FramedNonAssociativeAlgebra;| (|t#1|)
-  (SPROG ((#1=#:G452 NIL))
+  (SPROG ((#1=#:G5 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)

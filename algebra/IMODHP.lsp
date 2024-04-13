@@ -13,13 +13,13 @@
          (% (|Union| (|List| (|U32Vector|)) "failed")))
         (SPROG
          ((|resl| (|List| (|U32Vector|))) (|nlc| (|Integer|))
-          (|dms| (|SingleInteger|)) (#2=#:G501 NIL) (|dm| #3=(|Integer|))
+          (|dms| (|SingleInteger|)) (#2=#:G67 NIL) (|dm| #3=(|Integer|))
           (|nm| #3#)
           (|nlcq|
            (|Record| (|:| |numer| (|Polynomial| (|Integer|)))
                      (|:| |denom| (|Polynomial| (|Integer|)))))
-          (#4=#:G503 NIL) (|j| NIL) (|ress| (|U32Vector|))
-          (|n| (|NonNegativeInteger|)) (#5=#:G502 NIL) (|gv0| NIL) (|p| #1#))
+          (#4=#:G69 NIL) (|j| NIL) (|ress| (|U32Vector|))
+          (|n| (|NonNegativeInteger|)) (#5=#:G68 NIL) (|gv0| NIL) (|p| #1#))
          (SEQ
           (EXIT
            (SEQ (LETT |p| (QVELT |pss| 0)) (LETT |resl| NIL)
@@ -43,7 +43,7 @@
                                       ((EQL |dm| 0)
                                        (PROGN
                                         (LETT #2# (CONS 1 "failed"))
-                                        (GO #6=#:G500)))
+                                        (GO #6=#:G66)))
                                       ('T
                                        (SEQ (LETT |dms| |dm|)
                                             (LETT |nlc|
@@ -87,7 +87,7 @@
             (|PrimitiveArray|
              (|Record| (|:| |numer| (|Polynomial| (|Integer|)))
                        (|:| |denom| (|Polynomial| (|Integer|)))))))
-          (#1=#:G524 NIL)
+          (#1=#:G90 NIL)
           (|res1|
            (|Union|
             (|Record| (|:| |numer| (|Polynomial| (|Integer|)))
@@ -96,12 +96,12 @@
           (|nlcq|
            (|Record| (|:| |numer| (|Polynomial| (|Integer|)))
                      (|:| |denom| (|Polynomial| (|Integer|)))))
-          (#2=#:G526 NIL) (|j| NIL)
+          (#2=#:G92 NIL) (|j| NIL)
           (|ress|
            (|PrimitiveArray|
             (|Record| (|:| |numer| (|Polynomial| (|Integer|)))
                       (|:| |denom| (|Polynomial| (|Integer|))))))
-          (|n| (|NonNegativeInteger|)) (#3=#:G525 NIL) (|gv0| NIL))
+          (|n| (|NonNegativeInteger|)) (#3=#:G91 NIL) (|gv0| NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |resl| NIL)
@@ -125,7 +125,7 @@
                                       ((QEQCAR |res1| 1)
                                        (PROGN
                                         (LETT #1# (CONS 1 "failed"))
-                                        (GO #4=#:G523)))
+                                        (GO #4=#:G89)))
                                       ('T
                                        (QSETAREF1 |ress| |j| (QCDR |res1|))))))
                                (LETT |j| (|inc_SI| |j|)) (GO G190) G191
@@ -152,19 +152,19 @@
             (|PrimitiveArray|
              (|Record| (|:| |numer| (|Polynomial| (|Integer|)))
                        (|:| |denom| (|Polynomial| (|Integer|)))))))
-          (#1=#:G541 NIL)
+          (#1=#:G111 NIL)
           (|res1|
            (|Union|
             (|Record| (|:| |numer| (|Polynomial| (|Integer|)))
                       (|:| |denom| (|Polynomial| (|Integer|))))
             "failed"))
-          (|nlcq| (|Fraction| (|Polynomial| (|Integer|)))) (#2=#:G543 NIL)
+          (|nlcq| (|Fraction| (|Polynomial| (|Integer|)))) (#2=#:G113 NIL)
           (|j| NIL)
           (|ress|
            (|PrimitiveArray|
             (|Record| (|:| |numer| (|Polynomial| (|Integer|)))
                       (|:| |denom| (|Polynomial| (|Integer|))))))
-          (|n| (|NonNegativeInteger|)) (#3=#:G542 NIL) (|gv0| NIL))
+          (|n| (|NonNegativeInteger|)) (#3=#:G112 NIL) (|gv0| NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |resl| NIL)
@@ -187,7 +187,7 @@
                                       ((QEQCAR |res1| 1)
                                        (PROGN
                                         (LETT #1# (CONS 1 "failed"))
-                                        (GO #4=#:G540)))
+                                        (GO #4=#:G110)))
                                       ('T
                                        (QSETAREF1 |ress| |j| (QCDR |res1|))))))
                                (LETT |j| (|inc_SI| |j|)) (GO G190) G191
@@ -222,9 +222,9 @@
                      (|:| |cinds| (|Vector| (|Integer|))))
            "no_solution")))
         (SPROG
-         ((#2=#:G588 NIL) (|j| (|Integer|)) (#3=#:G587 NIL) (#4=#:G595 NIL)
-          (|i| NIL) (|cindk| (|Integer|)) (#5=#:G594 NIL) (|k| NIL)
-          (#6=#:G593 NIL) (#7=#:G592 NIL)
+         ((#2=#:G172 NIL) (|j| (|Integer|)) (#3=#:G171 NIL) (#4=#:G179 NIL)
+          (|i| NIL) (|cindk| (|Integer|)) (#5=#:G178 NIL) (|k| NIL)
+          (#6=#:G177 NIL) (#7=#:G176 NIL)
           (|nbas| (|TwoDimensionalArray| (|U32Vector|)))
           (|nr| (|NonNegativeInteger|)) (|bas| #1#)
           (|res|
@@ -232,10 +232,10 @@
                      (|:| |defects| (|Vector| (|Integer|)))
                      (|:| |cinds| (|Vector| (|Integer|)))))
           (|bm| (|Vector| (|U32Vector|))) (|dbm| #8=(|Any|)) (|ok| (|Boolean|))
-          (#9=#:G591 NIL) (|m2| #10=(|NonNegativeInteger|))
+          (#9=#:G175 NIL) (|m2| #10=(|NonNegativeInteger|))
           (|va| (|Vector| (|Integer|))) (|dva| #8#) (|blr| (|List| (|Any|)))
           (|nve| (|Vector| (|Integer|))) (|ngv| (|Vector| (|U32Vector|)))
-          (#11=#:G590 NIL) (|m1| (|NonNegativeInteger|)) (#12=#:G589 NIL)
+          (#11=#:G174 NIL) (|m1| (|NonNegativeInteger|)) (#12=#:G173 NIL)
           (|m0| #10#))
          (SEQ
           (EXIT
@@ -358,7 +358,7 @@
                                                       (EXIT
                                                        (PROGN
                                                         (LETT #3# 1)
-                                                        (GO #14=#:G577))))))
+                                                        (GO #14=#:G161))))))
                                                    (EXIT
                                                     (LETT |j| (+ |j| 1))))))))
                                               (LETT |i| (|inc_SI| |i|))
@@ -370,14 +370,14 @@
                   (#13#
                    (PROGN
                     (LETT #2# (CONS 1 "no_solution"))
-                    (GO #15=#:G586)))))))
+                    (GO #15=#:G170)))))))
           #15# (EXIT #2#)))) 
 
 (SDEFUN |IMODHP;compute_blocks|
         ((|offsets| (|Vector| (|Integer|))) (|rowlen| (|Integer|))
          (|nsols| (|Integer|)) (% (|Vector| (|Integer|))))
         (SPROG
-         ((#1=#:G600 NIL) (|i| NIL) (|block_offsets| (|Vector| (|Integer|))))
+         ((#1=#:G184 NIL) (|i| NIL) (|block_offsets| (|Vector| (|Integer|))))
          (SEQ (LETT |block_offsets| (MAKEARR1 |nsols| 0))
               (SEQ (LETT |i| 1) (LETT #1# |nsols|) G190
                    (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -396,11 +396,11 @@
          (|nexps| (|SortedExponentVector|)) (% (|List| (|List| (|Integer|)))))
         (SPROG
          ((|j0| (|Integer|)) (|i0| (|Integer|)) (|j| (|Integer|))
-          (|i| (|Integer|)) (|ci| (|Integer|)) (#1=#:G632 NIL)
+          (|i| (|Integer|)) (|ci| (|Integer|)) (#1=#:G216 NIL)
           (|j0i| (|Integer|)) (|ji| #2=(|Integer|)) (|jl| (|List| (|Integer|)))
           (|i0i| (|Integer|)) (|ii| #2#) (|il| (|List| (|Integer|)))
-          (#3=#:G636 NIL) (|k| NIL) (|lj| (|Integer|)) (|li| (|Integer|))
-          (#4=#:G633 NIL) (#5=#:G635 NIL) (|jj| NIL) (#6=#:G634 NIL)
+          (#3=#:G220 NIL) (|k| NIL) (|lj| (|Integer|)) (|li| (|Integer|))
+          (#4=#:G217 NIL) (#5=#:G219 NIL) (|jj| NIL) (#6=#:G218 NIL)
           (|kk| (|Integer|)) (|nn| (|Integer|)) (|oc| (|NonNegativeInteger|))
           (|m| #7=(|Integer|)) (|n| #7#))
          (SEQ
@@ -444,7 +444,7 @@
                                        (LETT #4#
                                              (LIST (NREVERSE |il|)
                                                    (NREVERSE |jl|)))
-                                       (GO #8=#:G631)))
+                                       (GO #8=#:G215)))
                                      ('T
                                       (SEQ (LETT |i0| |li|) (LETT |j0| |lj|)
                                            (LETT |i| (* |i0| |nvars|))
@@ -488,7 +488,7 @@
                                                 (EXIT
                                                  (PROGN
                                                   (LETT #1# 1)
-                                                  (GO #9=#:G627)))))
+                                                  (GO #9=#:G211)))))
                                               ('T
                                                (SEQ
                                                 (LETT |jl| (CONS |ci| |jl|))
@@ -516,13 +516,13 @@
           (|Record| (|:| |offsetdata| (|Vector| (|Integer|)))
                     (|:| |expdata| (|SortedExponentVector|)))))
         (SPROG
-         ((#1=#:G668 NIL) (|i| (|Integer|)) (|ci| (|Integer|))
+         ((#1=#:G252 NIL) (|i| (|Integer|)) (|ci| (|Integer|))
           (|i00| (|Integer|)) (|i0| (|Integer|)) (|j0| (|Integer|))
-          (|j| (|Integer|)) (#2=#:G667 NIL) (|k| NIL) (|j00| (|Integer|))
-          (#3=#:G666 NIL) (|lj| #4=(|Integer|)) (|li| #4#) (|kk| (|Integer|))
-          (#5=#:G665 NIL) (|ci0| (|Integer|)) (|nv1| (|Integer|))
+          (|j| (|Integer|)) (#2=#:G251 NIL) (|k| NIL) (|j00| (|Integer|))
+          (#3=#:G250 NIL) (|lj| #4=(|Integer|)) (|li| #4#) (|kk| (|Integer|))
+          (#5=#:G249 NIL) (|ci0| (|Integer|)) (|nv1| (|Integer|))
           (|noffsets| (|Vector| (|Integer|))) (|m| (|NonNegativeInteger|))
-          (|nexps| (|SortedExponentVector|)) (#6=#:G639 NIL)
+          (|nexps| (|SortedExponentVector|)) (#6=#:G223 NIL)
           (|nn1| (|Integer|)) (|n1| (|Integer|)) (|nn| (|NonNegativeInteger|))
           (|n0| (|NonNegativeInteger|)))
          (SEQ (LETT |n0| (QV_LEN_U32 |exps1|)) (LETT |nn| (LENGTH |odl|))
@@ -628,8 +628,8 @@
                                         (|SortedExponentVector|))))))
          (% (|Union| "OK" "failed" "all_bad")))
         (SPROG
-         ((#4=#:G689 NIL) (#5=#:G688 NIL) (|is_bad| (|Boolean|))
-          (|all_bad| (|Boolean|)) (#6=#:G690 NIL) (|i| NIL) (|ociv| #2#)
+         ((#4=#:G273 NIL) (#5=#:G272 NIL) (|is_bad| (|Boolean|))
+          (|all_bad| (|Boolean|)) (#6=#:G274 NIL) (|i| NIL) (|ociv| #2#)
           (|ova| #1#) (|nsols| #3#))
          (SEQ
           (EXIT
@@ -652,7 +652,7 @@
                                       (SPADCALL |ova| |i| (QREFELT % 31)))
                                    (SEQ (LETT |all_bad| 'T)
                                         (EXIT
-                                         (PROGN (LETT #5# 1) (GO #7=#:G683)))))
+                                         (PROGN (LETT #5# 1) (GO #7=#:G267)))))
                                   ((> (SPADCALL |va| |i| (QREFELT % 31))
                                       (SPADCALL |ova| |i| (QREFELT % 31)))
                                    (SEQ (LETT |is_bad| 'T)
@@ -672,7 +672,7 @@
                 (EXIT
                  (COND
                   (|is_bad|
-                   (PROGN (LETT #4# (CONS 1 "failed")) (GO #8=#:G687)))
+                   (PROGN (LETT #4# (CONS 1 "failed")) (GO #8=#:G271)))
                   (|all_bad| (PROGN (LETT #4# (CONS 2 "all_bad")) (GO #8#)))
                   ('T (PROGN (LETT #4# (CONS 0 "OK")) (GO #8#)))))))
           #8# (EXIT #4#)))) 
@@ -710,7 +710,7 @@
                      (|:| |coeffdata| (|U32Vector|)))
            "failed" "no_solution")))
         (SPROG
-         ((#5=#:G734 NIL)
+         ((#5=#:G318 NIL)
           (|ngvl|
            (|List|
             (|PrimitiveArray|
@@ -723,13 +723,13 @@
               (|Record| (|:| |numer| (|Polynomial| (|Integer|)))
                         (|:| |denom| (|Polynomial| (|Integer|))))))
             "failed"))
-          (#6=#:G739 NIL) (|i| NIL) (|nev| #7=(|SortedExponentVector|))
-          (#8=#:G720 NIL) (|ncv| #9=(|U32Vector|)) (#10=#:G718 NIL)
-          (|k| (|Integer|)) (|cpl| (|Integer|)) (#11=#:G738 NIL) (|l| NIL)
+          (#6=#:G323 NIL) (|i| NIL) (|nev| #7=(|SortedExponentVector|))
+          (#8=#:G304 NIL) (|ncv| #9=(|U32Vector|)) (#10=#:G302 NIL)
+          (|k| (|Integer|)) (|cpl| (|Integer|)) (#11=#:G322 NIL) (|l| NIL)
           (|cp| (|U32Vector|)) (|mm| (|Integer|)) (|k1| (|Integer|))
-          (#12=#:G737 NIL) (|j| NIL) (#13=#:G736 NIL)
-          (|ov| (|Vector| (|Integer|))) (|ev| #7#) (#14=#:G707 NIL) (|cv| #9#)
-          (#15=#:G705 NIL) (|r_cnt| (|Integer|)) (#16=#:G735 NIL)
+          (#12=#:G321 NIL) (|j| NIL) (#13=#:G320 NIL)
+          (|ov| (|Vector| (|Integer|))) (|ev| #7#) (#14=#:G291 NIL) (|cv| #9#)
+          (#15=#:G289 NIL) (|r_cnt| (|Integer|)) (#16=#:G319 NIL)
           (|m| #17=(|NonNegativeInteger|)) (|nsols| #17#)
           (|civ| #18=(|Vector| (|Integer|))) (|va| #19=(|Vector| (|Integer|)))
           (|bm| #20=(|TwoDimensionalArray| (|U32Vector|)))
@@ -759,7 +759,7 @@
                     (EXIT
                      (COND
                       ((QEQCAR |ngv10p| 1)
-                       (PROGN (LETT #5# (CONS 1 "failed")) (GO #21=#:G733)))
+                       (PROGN (LETT #5# (CONS 1 "failed")) (GO #21=#:G317)))
                       (#22='T
                        (SEQ (LETT |ngv10| (QCDR |ngv10p|))
                             (LETT |ngv2|
@@ -957,7 +957,7 @@
                      (|:| |coeffdata| (|U32Vector|)))
            "failed" "no_solution")))
         (SPROG
-         ((#4=#:G798 NIL) (#5=#:G799 NIL)
+         ((#4=#:G382 NIL) (#5=#:G383 NIL)
           (|rr|
            (|Record| (|:| |nvars| (|Integer|))
                      (|:| |offsetdata| (|Vector| (|Integer|)))
@@ -970,12 +970,12 @@
                       (|:| |expdata| (|SortedExponentVector|))
                       (|:| |coeffdata| (|U32Vector|)))
             "failed"))
-          (#6=#:G803 NIL) (|j| NIL) (|hi| #7=(|Integer|)) (|lo| #7#)
-          (|invc| (|Integer|)) (#8=#:G796 NIL) (|ok| #9=(|Boolean|))
+          (#6=#:G387 NIL) (|j| NIL) (|hi| #7=(|Integer|)) (|lo| #7#)
+          (|invc| (|Integer|)) (#8=#:G380 NIL) (|ok| #9=(|Boolean|))
           (|nofi| #7#) (|ofi| #7#) (|ofin| #10=(|Integer|)) (|cnum| #7#)
-          (#11=#:G802 NIL) (|i| (|Integer|)) (|n1| (|NonNegativeInteger|))
+          (#11=#:G386 NIL) (|i| (|Integer|)) (|n1| (|NonNegativeInteger|))
           (|block_offsets| (|Vector| (|Integer|))) (|coeffs| (|U32Vector|))
-          (|jl| (|Integer|)) (|ndl| #12=(|List| (|Integer|))) (#13=#:G801 NIL)
+          (|jl| (|Integer|)) (|ndl| #12=(|List| (|Integer|))) (#13=#:G385 NIL)
           (|ncoeffs| (|U32Vector|)) (|nn| (|NonNegativeInteger|))
           (|n0| (|NonNegativeInteger|))
           (|rstate| (|VectorModularReconstructor|))
@@ -1006,8 +1006,8 @@
                       (|:| |expdata| (|SortedExponentVector|))
                       (|:| |coeffdata| (|U32Vector|)))
             "failed" "no_solution"))
-          (|qn| (|Integer|)) (#15=#:G800 NIL) (|k| NIL) (|pts| #1#)
-          (|npt| (|Integer|)) (|lpt| (|List| (|Integer|))) (#16=#:G797 NIL)
+          (|qn| (|Integer|)) (#15=#:G384 NIL) (|k| NIL) (|pts| #1#)
+          (|npt| (|Integer|)) (|lpt| (|List| (|Integer|))) (#16=#:G381 NIL)
           (|pt| (|Integer|)) (|nvars| (|NonNegativeInteger|)) (|m| #2#)
           (|p| #3#) (|update_qval| (|Boolean|)) (|update_points| #9#))
          (SEQ
@@ -1049,7 +1049,7 @@
                                                       (QREFELT % 55))
                                             (PROGN
                                              (LETT #16# |$NoValue|)
-                                             (GO #17=#:G747)))
+                                             (GO #17=#:G331)))
                                            ('T
                                             (SEQ (LETT |lpt| (CONS |pt| |lpt|))
                                                  (EXIT (LETT |ok| 'T))))))))
@@ -1101,7 +1101,7 @@
                                    ((QEQCAR |pprp| 2)
                                     (PROGN
                                      (LETT #5# (CONS 2 "no_solution"))
-                                     (GO #18=#:G795)))
+                                     (GO #18=#:G379)))
                                    ((QEQCAR |pprp| 1)
                                     (SEQ (LETT |bad_cnt| (+ |bad_cnt| 1))
                                          (EXIT
@@ -1113,7 +1113,7 @@
                                            ('T
                                             (PROGN
                                              (LETT #4# |$NoValue|)
-                                             (GO #19=#:G746)))))))
+                                             (GO #19=#:G330)))))))
                                    ('T
                                     (SEQ (LETT |ppr| (QCDR |pprp|))
                                          (LETT |va| (QVELT |ppr| 0))
@@ -1307,7 +1307,7 @@
                                                               (PROGN
                                                                (LETT #8# 1)
                                                                (GO
-                                                                #20=#:G782)))))
+                                                                #20=#:G366)))))
                                                        ('T
                                                         (SEQ
                                                          (LETT |invc|
@@ -1442,14 +1442,14 @@
                      (|:| |coeffdata| (|PrimitiveArray| (|Integer|))))
            "no_solution")))
         (SPROG
-         ((#3=#:G853 NIL) (#4=#:G854 NIL)
+         ((#3=#:G437 NIL) (#4=#:G438 NIL)
           (|pp| (|Union| (|PrimitiveArray| (|Integer|)) "failed"))
-          (#5=#:G857 NIL) (|j| NIL) (|hi| #6=(|Integer|)) (|lo| #6#)
-          (|invc| (|Integer|)) (#7=#:G851 NIL) (|ok| #8=(|Boolean|))
+          (#5=#:G441 NIL) (|j| NIL) (|hi| #6=(|Integer|)) (|lo| #6#)
+          (|invc| (|Integer|)) (#7=#:G435 NIL) (|ok| #8=(|Boolean|))
           (|nofi| #6#) (|ofi| #6#) (|ofin| #9=(|Integer|)) (|cnum| #6#)
-          (#10=#:G856 NIL) (|i| (|Integer|)) (|n1| (|NonNegativeInteger|))
+          (#10=#:G440 NIL) (|i| (|Integer|)) (|n1| (|NonNegativeInteger|))
           (|block_offsets| (|Vector| (|Integer|))) (|coeffs| (|U32Vector|))
-          (|jl| (|Integer|)) (|ndl| #11=(|List| (|Integer|))) (#12=#:G855 NIL)
+          (|jl| (|Integer|)) (|ndl| #11=(|List| (|Integer|))) (#12=#:G439 NIL)
           (|ncoeffs| (|U32Vector|)) (|nn| (|NonNegativeInteger|))
           (|n0| (|NonNegativeInteger|))
           (|rstate| (|VectorIntegerReconstructor|))
@@ -1491,7 +1491,7 @@
               (|Record| (|:| |numer| (|Polynomial| (|Integer|)))
                         (|:| |denom| (|Polynomial| (|Integer|))))))
             "failed"))
-          (|lp| (|List| (|Integer|))) (#13=#:G852 NIL) (|p| (|Integer|))
+          (|lp| (|List| (|Integer|))) (#13=#:G436 NIL) (|p| (|Integer|))
           (|k| NIL) (|nvars| (|NonNegativeInteger|)) (|m| #1#) (|pss1| #2#))
          (SEQ
           (EXIT
@@ -1521,7 +1521,7 @@
                                        ((SPADCALL |p| |lp| (QREFELT % 55))
                                         (PROGN
                                          (LETT #13# |$NoValue|)
-                                         (GO #14=#:G811)))
+                                         (GO #14=#:G395)))
                                        ('T
                                         (SEQ (LETT |lp| (CONS |p| |lp|))
                                              (EXIT (LETT |ok| 'T))))))))
@@ -1539,7 +1539,7 @@
                                        ((QEQCAR |ngv0p| 1)
                                         (PROGN
                                          (LETT #3# |$NoValue|)
-                                         (GO #15=#:G810)))
+                                         (GO #15=#:G394)))
                                        ('T
                                         (SEQ (LETT |ngvl| (QCDR |ngv0p|))
                                              (LETT |pprp|
@@ -1552,7 +1552,7 @@
                                                 (PROGN
                                                  (LETT #4#
                                                        (CONS 1 "no_solution"))
-                                                 (GO #16=#:G850)))
+                                                 (GO #16=#:G434)))
                                                ((QEQCAR |pprp| 1)
                                                 (PROGN
                                                  (LETT #3# |$NoValue|)
@@ -1833,7 +1833,7 @@
                                                                        (LETT
                                                                         #7# 1)
                                                                        (GO
-                                                                        #17=#:G838)))))
+                                                                        #17=#:G422)))))
                                                                    ('T
                                                                     (SEQ
                                                                      (LETT
@@ -1974,7 +1974,7 @@
                      (|:| |coeffdata| (|PrimitiveArray| (|Integer|))))
            "no_solution")))
         (SPROG
-         ((#1=#:G870 NIL)
+         ((#1=#:G454 NIL)
           (|pss|
            (|Record| (|:| |degree_bounds| (|Vector| (|Integer|)))
                      (|:| |pss_sigma| (|NonNegativeInteger|))
@@ -2003,14 +2003,14 @@
                  (PROGN
                   (LETT #1#
                         (|IMODHP;do_poly_integer0| |vars| |gvl| |pss| |gen| %))
-                  (GO #2=#:G869)))))
+                  (GO #2=#:G453)))))
           #2# (EXIT #1#)))) 
 
 (DECLAIM (NOTINLINE |InnerModularHermitePade;|)) 
 
 (DEFUN |InnerModularHermitePade| ()
   (SPROG NIL
-         (PROG (#1=#:G872)
+         (PROG (#1=#:G456)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|InnerModularHermitePade|))

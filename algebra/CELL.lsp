@@ -10,7 +10,7 @@
         |c|) 
 
 (SDEFUN |CELL;coerce;%Of;2| ((|c| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G461 NIL) (|sc| NIL) (#2=#:G460 NIL))
+        (SPROG ((#1=#:G19 NIL) (|sc| NIL) (#2=#:G18 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -96,9 +96,9 @@
 
 (DECLAIM (NOTINLINE |Cell;|)) 
 
-(DEFUN |Cell| (#1=#:G485)
+(DEFUN |Cell| (#1=#:G54)
   (SPROG NIL
-         (PROG (#2=#:G486)
+         (PROG (#2=#:G55)
            (RETURN
             (COND
              ((LETT #2#

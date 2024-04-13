@@ -6,7 +6,7 @@
 (DEFPARAMETER |FreeModuleCategory;AL| 'NIL) 
 
 (DEFUN |FreeModuleCategory| (|t#1| |t#2|)
-  (LET (#1=#:G453 (#2=#:G454 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
+  (LET (#1=#:G6 (#2=#:G7 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
     (COND ((SETQ #1# (|assoc| #2# |FreeModuleCategory;AL|)) (CDR #1#))
           (T
            (SETQ |FreeModuleCategory;AL|
@@ -16,7 +16,7 @@
            #1#)))) 
 
 (DEFUN |FreeModuleCategory;| (|t#1| |t#2|)
-  (SPROG ((#1=#:G452 NIL))
+  (SPROG ((#1=#:G5 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2|) (LIST |t#1| |t#2|)

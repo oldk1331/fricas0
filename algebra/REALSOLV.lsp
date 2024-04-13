@@ -35,7 +35,7 @@
 
 (DEFUN |RealSolvePackage| ()
   (SPROG NIL
-         (PROG (#1=#:G456)
+         (PROG (#1=#:G24)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|RealSolvePackage|))

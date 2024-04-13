@@ -38,9 +38,9 @@
 
 (DECLAIM (NOTINLINE |PadeApproximantPackage;|)) 
 
-(DEFUN |PadeApproximantPackage| (&REST #1=#:G458)
+(DEFUN |PadeApproximantPackage| (&REST #1=#:G26)
   (SPROG NIL
-         (PROG (#2=#:G459)
+         (PROG (#2=#:G27)
            (RETURN
             (COND
              ((LETT #2#

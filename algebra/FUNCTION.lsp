@@ -8,14 +8,11 @@
 
 (SDEFUN |FUNCTION;=;2%B;3| ((|x| (%)) (|y| (%)) (% (|Boolean|))) 'T) 
 
-(SDEFUN |FUNCTION;latex;%S;4| ((|x| (%)) (% (|String|)))
-        (SPADCALL (QREFELT % 6) (QREFELT % 14))) 
-
 (DECLAIM (NOTINLINE |FunctionCalled;|)) 
 
-(DEFUN |FunctionCalled| (#1=#:G452)
+(DEFUN |FunctionCalled| (#1=#:G4)
   (SPROG NIL
-         (PROG (#2=#:G453)
+         (PROG (#2=#:G5)
            (RETURN
             (COND
              ((LETT #2#
@@ -35,7 +32,7 @@
          (PROGN
           (LETT DV$1 |#1|)
           (LETT |dv$| (LIST '|FunctionCalled| DV$1))
-          (LETT % (GETREFV 16))
+          (LETT % (GETREFV 14))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|FunctionCalled| (LIST DV$1)
@@ -49,15 +46,13 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|Symbol|)
               |FUNCTION;name;%S;1| (|OutputForm|) |FUNCTION;coerce;%Of;2|
-              (|Boolean|) |FUNCTION;=;2%B;3| (|String|) (0 . |latex|)
-              |FUNCTION;latex;%S;4|)
-           '#(~= 5 |name| 11 |latex| 16 |coerce| 21 = 26) 'NIL
+              (|Boolean|) |FUNCTION;=;2%B;3| (|String|))
+           '#(~= 0 |name| 6 |latex| 11 |coerce| 16 = 21) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
                  (CONS '#(|SetCategory&| |BasicType&| NIL)
                        (CONS
                         '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 9))
-                        (|makeByteWordVec2| 15
-                                            '(1 7 13 0 14 2 0 11 0 0 1 1 0 7 0
-                                              8 1 0 13 0 15 1 0 9 0 10 2 0 11 0
-                                              0 12)))))
+                        (|makeByteWordVec2| 13
+                                            '(2 0 11 0 0 1 1 0 7 0 8 1 0 13 0 1
+                                              1 0 9 0 10 2 0 11 0 0 12)))))
            '|lookupComplete|)) 

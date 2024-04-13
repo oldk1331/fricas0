@@ -4,8 +4,7 @@
          (% (|SparseUnivariatePolynomial| (|Polynomial| R))))
         (SPROG
          ((|res| (|SparseUnivariatePolynomial| (|Polynomial| R)))
-          (#1=#:G466 NIL) (|i| NIL)
-          (|vectorOfCoef| (|Vector| (|Polynomial| R)))
+          (#1=#:G43 NIL) (|i| NIL) (|vectorOfCoef| (|Vector| (|Polynomial| R)))
           (|cond| (|Matrix| (|Polynomial| R))) (|k| (|PositiveInteger|)))
          (SEQ (LETT |k| 1) (LETT |cond| (SPADCALL |x| (QREFELT % 9)))
               (SEQ G190
@@ -38,12 +37,12 @@
         ((|left| (|Boolean|))
          (% (|SparseUnivariatePolynomial| (|Polynomial| R))))
         (SPROG
-         ((|cijk| (R)) (|mxjk| (|Polynomial| R)) (#1=#:G488 NIL) (|k| NIL)
-          (#2=#:G487 NIL) (|j| NIL) (|mo| (|Polynomial| R)) (#3=#:G486 NIL)
+         ((|cijk| (R)) (|mxjk| (|Polynomial| R)) (#1=#:G70 NIL) (|k| NIL)
+          (#2=#:G69 NIL) (|j| NIL) (|mo| (|Polynomial| R)) (#3=#:G68 NIL)
           (|i| NIL) (|mx| #4=(|Matrix| (|Polynomial| R))) (|x| #4#)
-          (|symbolsForCoef| (|Vector| (|Symbol|))) (#5=#:G483 NIL)
-          (#6=#:G485 NIL) (#7=#:G484 NIL) (|listOfNumbers| (|List| (|String|)))
-          (#8=#:G482 NIL) (|q| NIL) (#9=#:G481 NIL)
+          (|symbolsForCoef| (|Vector| (|Symbol|))) (#5=#:G65 NIL)
+          (#6=#:G67 NIL) (#7=#:G66 NIL) (|listOfNumbers| (|List| (|String|)))
+          (#8=#:G64 NIL) (|q| NIL) (#9=#:G63 NIL)
           (|gamma| (|Vector| (|Matrix| R))) (|b| (|Vector| S))
           (|n| (|PositiveInteger|)))
          (SEQ (LETT |n| (SPADCALL (QREFELT % 11)))
@@ -130,8 +129,8 @@
           (|Record| (|:| |particular| (|Union| (|Vector| R) "failed"))
                     (|:| |basis| (|List| (|Vector| R))))))
         (SPROG
-         ((#1=#:G503 NIL) (|j| NIL) (|addOn| (R)) (|z| (|Integer|))
-          (#2=#:G502 NIL) (|i| NIL) (#3=#:G501 NIL) (|k| NIL)
+         ((#1=#:G87 NIL) (|j| NIL) (|addOn| (R)) (|z| (|Integer|))
+          (#2=#:G86 NIL) (|i| NIL) (#3=#:G85 NIL) (|k| NIL)
           (|rhs| (|Vector| R)) (|cond| (|Matrix| R))
           (|gamma| (|Vector| (|Matrix| R))) (|b| (|Vector| S))
           (|n| (|PositiveInteger|)))
@@ -174,7 +173,7 @@
 
 (SDEFUN |FRNAALG-;leftUnit;U;6| ((% (|Union| S "failed")))
         (SPROG
-         ((#1=#:G509 NIL)
+         ((#1=#:G93 NIL)
           (|res|
            (|Record| (|:| |particular| (|Union| (|Vector| R) #2="failed"))
                      (|:| |basis| (|List| (|Vector| R))))))
@@ -201,7 +200,7 @@
           (|Union| (|Record| (|:| |particular| S) (|:| |basis| (|List| S)))
                    "failed")))
         (SPROG
-         ((#1=#:G523 NIL)
+         ((#1=#:G107 NIL)
           (|res|
            (|Record| (|:| |particular| (|Union| (|Vector| R) #2="failed"))
                      (|:| |basis| (|List| (|Vector| R))))))
@@ -231,8 +230,8 @@
           (|Record| (|:| |particular| (|Union| (|Vector| R) "failed"))
                     (|:| |basis| (|List| (|Vector| R))))))
         (SPROG
-         ((#1=#:G545 NIL) (|j| NIL) (|addOn| (R)) (|z| (|Integer|))
-          (#2=#:G544 NIL) (|i| NIL) (#3=#:G543 NIL) (|k| NIL)
+         ((#1=#:G129 NIL) (|j| NIL) (|addOn| (R)) (|z| (|Integer|))
+          (#2=#:G128 NIL) (|i| NIL) (#3=#:G127 NIL) (|k| NIL)
           (|rhs| (|Vector| R)) (|condo| (|Matrix| R))
           (|gamma| (|Vector| (|Matrix| R))) (|b| (|Vector| S))
           (|n| (|PositiveInteger|)))
@@ -275,7 +274,7 @@
 
 (SDEFUN |FRNAALG-;rightUnit;U;9| ((% (|Union| S "failed")))
         (SPROG
-         ((#1=#:G551 NIL)
+         ((#1=#:G135 NIL)
           (|res|
            (|Record| (|:| |particular| (|Union| (|Vector| R) #2="failed"))
                      (|:| |basis| (|List| (|Vector| R))))))
@@ -303,7 +302,7 @@
           (|Union| (|Record| (|:| |particular| S) (|:| |basis| (|List| S)))
                    "failed")))
         (SPROG
-         ((#1=#:G562 NIL)
+         ((#1=#:G146 NIL)
           (|res|
            (|Record| (|:| |particular| (|Union| (|Vector| R) #2="failed"))
                      (|:| |basis| (|List| (|Vector| R))))))
@@ -331,9 +330,9 @@
 
 (SDEFUN |FRNAALG-;unit;U;11| ((% (|Union| S "failed")))
         (SPROG
-         ((|res| (|Union| (|Vector| R) "failed")) (#1=#:G587 NIL) (|j| NIL)
-          (|addOn| (R)) (|z| (|Integer|)) (#2=#:G586 NIL) (|i| NIL)
-          (#3=#:G585 NIL) (|k| NIL) (|u| (|Integer|)) (|rhs| (|Vector| R))
+         ((|res| (|Union| (|Vector| R) "failed")) (#1=#:G171 NIL) (|j| NIL)
+          (|addOn| (R)) (|z| (|Integer|)) (#2=#:G170 NIL) (|i| NIL)
+          (#3=#:G169 NIL) (|k| NIL) (|u| (|Integer|)) (|rhs| (|Vector| R))
           (|cond| (|Matrix| R)) (|gamma| (|Vector| (|Matrix| R)))
           (|b| (|Vector| S)) (|n| (|PositiveInteger|)))
          (SEQ (LETT |n| (SPADCALL (QREFELT % 11)))

@@ -8,7 +8,7 @@
         (T (SETQ |SpecialFunctionCategory;AL| (|SpecialFunctionCategory;|))))) 
 
 (DEFUN |SpecialFunctionCategory;| ()
-  (SPROG ((#1=#:G448 NIL))
+  (SPROG ((#1=#:G1 NIL))
          (PROG1
              (LETT #1#
                    (|Join|
@@ -18,13 +18,14 @@
                        ((|floor| (% %)) T) ((|fractionPart| (% %)) T)
                        ((|diracDelta| (% %)) T) ((|conjugate| (% %)) T)
                        ((|Gamma| (% %)) T) ((|Beta| (% % %)) T)
-                       ((|digamma| (% %)) T) ((|polygamma| (% % %)) T)
-                       ((|Gamma| (% % %)) T) ((|besselJ| (% % %)) T)
-                       ((|besselY| (% % %)) T) ((|besselI| (% % %)) T)
-                       ((|besselK| (% % %)) T) ((|airyAi| (% %)) T)
-                       ((|airyAiPrime| (% %)) T) ((|airyBi| (% %)) T)
-                       ((|airyBiPrime| (% %)) T) ((|lambertW| (% %)) T)
-                       ((|polylog| (% % %)) T) ((|weierstrassP| (% % % %)) T)
+                       ((|Beta| (% % % %)) T) ((|digamma| (% %)) T)
+                       ((|polygamma| (% % %)) T) ((|Gamma| (% % %)) T)
+                       ((|besselJ| (% % %)) T) ((|besselY| (% % %)) T)
+                       ((|besselI| (% % %)) T) ((|besselK| (% % %)) T)
+                       ((|airyAi| (% %)) T) ((|airyAiPrime| (% %)) T)
+                       ((|airyBi| (% %)) T) ((|airyBiPrime| (% %)) T)
+                       ((|lambertW| (% %)) T) ((|polylog| (% % %)) T)
+                       ((|weierstrassP| (% % % %)) T)
                        ((|weierstrassPPrime| (% % % %)) T)
                        ((|weierstrassSigma| (% % % %)) T)
                        ((|weierstrassZeta| (% % % %)) T)

@@ -8,7 +8,7 @@
         (T (SETQ |EuclideanDomain;AL| (|EuclideanDomain;|))))) 
 
 (DEFUN |EuclideanDomain;| ()
-  (SPROG ((#1=#:G465 NIL))
+  (SPROG ((#1=#:G18 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|PrincipalIdealDomain|)

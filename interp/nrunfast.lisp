@@ -299,7 +299,7 @@
 
 ; AND_char := ELT('"&", 0)
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |AND_char| (ELT "&" 0)))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |AND_char| (ELT "&" 0)))
 
 ; isDefaultPackageForm? x == x is [op,:.]
 ;   and IDENTP op and (s := PNAME op).(MAXINDEX s) = AND_char

@@ -387,7 +387,7 @@
 ;     t2 is ['UnivariatePolynomial,y,T] =>
 ;       (x = y) and (U := resolveTT1(S,T)) and ['UnivariatePolynomial,x,U]
 ;     nil
-;   t1 = '(Pi) =>
+;   t1 = '(PiDomain) =>
 ;     t2 is ['Complex,d] => defaultTargetFE t2
 ;     t2 is ['AlgebraicNumber] => defaultTargetFE t2
 ;     EQCAR(t2, 'Variable) or t2 = $Symbol =>
@@ -648,7 +648,7 @@
               (AND (EQUAL |x| |y|) (SETQ U (|resolveTT1| S T$))
                    (LIST '|UnivariatePolynomial| |x| U)))
              (#1# NIL)))
-      ((EQUAL |t1| '(|Pi|))
+      ((EQUAL |t1| '(|PiDomain|))
        (COND
         ((AND (CONSP |t2|) (EQ (CAR |t2|) '|Complex|)
               (PROGN

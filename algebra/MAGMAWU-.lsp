@@ -10,7 +10,7 @@
 
 (SDEFUN |MAGMAWU-;rightPower;SNniS;4|
         ((|a| (S)) (|n| (|NonNegativeInteger|)) (% (S)))
-        (SPROG ((|res| (S)) (#1=#:G467 NIL) (|i| NIL))
+        (SPROG ((|res| (S)) (#1=#:G29 NIL) (|i| NIL))
                (SEQ
                 (COND ((ZEROP |n|) (|spadConstant| % 7))
                       ('T
@@ -27,7 +27,7 @@
 
 (SDEFUN |MAGMAWU-;leftPower;SNniS;5|
         ((|a| (S)) (|n| (|NonNegativeInteger|)) (% (S)))
-        (SPROG ((|res| (S)) (#1=#:G473 NIL) (|i| NIL))
+        (SPROG ((|res| (S)) (#1=#:G35 NIL) (|i| NIL))
                (SEQ
                 (COND ((ZEROP |n|) (|spadConstant| % 7))
                       ('T

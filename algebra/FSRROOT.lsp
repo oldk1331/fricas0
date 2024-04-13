@@ -11,9 +11,9 @@
 
 (DECLAIM (NOTINLINE |FunctionSpaceRationalRoots;|)) 
 
-(DEFUN |FunctionSpaceRationalRoots| (&REST #1=#:G450)
+(DEFUN |FunctionSpaceRationalRoots| (&REST #1=#:G12)
   (SPROG NIL
-         (PROG (#2=#:G451)
+         (PROG (#2=#:G13)
            (RETURN
             (COND
              ((LETT #2#

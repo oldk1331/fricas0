@@ -50,7 +50,7 @@
 ;   ("\vspace" .      1)
 ;   ("\windowlink"         . 2))
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$primitiveHtCommands|
           '(("\\ContinueButton" . 1) ("\\andexample" . 1) ("\\autobutt" . 0)
             ("\\autobuttons" . 0) ("\\begin" . 1) ("\\beginscroll" . 0)
@@ -72,7 +72,7 @@
 
 ; buildHtMacroTable() ==
 ;   $htMacroTable := MAKE_HASHTABLE('EQUAL)
-;   fn := CONCAT(getEnv '"FRICAS", '"/share/hypertex/pages/util.ht")
+;   fn := CONCAT($spadroot, '"/share/hypertex/pages/util.ht")
 ;   if PROBE_-FILE(fn) then
 ;     instream := MAKE_INSTREAM(fn)
 ;     while not EOFP instream repeat
@@ -90,7 +90,7 @@
     (RETURN
      (PROGN
       (SETQ |$htMacroTable| (MAKE_HASHTABLE 'EQUAL))
-      (SETQ |fn| (CONCAT (|getEnv| "FRICAS") "/share/hypertex/pages/util.ht"))
+      (SETQ |fn| (CONCAT |$spadroot| "/share/hypertex/pages/util.ht"))
       (COND
        ((PROBE-FILE |fn|) (SETQ |instream| (MAKE_INSTREAM |fn|))
         ((LAMBDA ()
@@ -231,7 +231,3 @@
                    ((EQ |kind| 'INTEGER) (INTEGERP |arg|))
                    ((EQ |kind| 'FUNCTION) (ATOM |arg|))
                    (#1# (|systemError| "unknown tree branch")))))))))
-
-; buildHtMacroTable()
-
-(EVAL-WHEN (EVAL LOAD) (PROG () (RETURN (|buildHtMacroTable|))))

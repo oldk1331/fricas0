@@ -6,7 +6,7 @@
 (DEFPARAMETER |OneDimensionalArrayAggregate;AL| 'NIL) 
 
 (DEFUN |OneDimensionalArrayAggregate| (|t#1|)
-  (LET (#1=#:G482 (#2=#:G483 (|devaluate| |t#1|)))
+  (LET (#1=#:G35 (#2=#:G36 (|devaluate| |t#1|)))
     (COND
      ((SETQ #1# (|assoc| #2# |OneDimensionalArrayAggregate;AL|)) (CDR #1#))
      (T
@@ -17,7 +17,7 @@
       #1#)))) 
 
 (DEFUN |OneDimensionalArrayAggregate;| (|t#1|)
-  (SPROG ((#1=#:G481 NIL))
+  (SPROG ((#1=#:G34 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)

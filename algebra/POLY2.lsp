@@ -13,9 +13,9 @@
 
 (DECLAIM (NOTINLINE |PolynomialFunctions2;|)) 
 
-(DEFUN |PolynomialFunctions2| (&REST #1=#:G451)
+(DEFUN |PolynomialFunctions2| (&REST #1=#:G7)
   (SPROG NIL
-         (PROG (#2=#:G452)
+         (PROG (#2=#:G8)
            (RETURN
             (COND
              ((LETT #2#

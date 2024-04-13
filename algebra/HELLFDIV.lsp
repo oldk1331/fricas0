@@ -50,7 +50,7 @@
 
 (SDEFUN |HELLFDIV;+;3%;8| ((|d1| (%)) (|d2| (%)) (% (%)))
         (SPROG
-         ((|dd| (%)) (|b| (UP)) (#1=#:G468 NIL) (|a| (UP)) (|h| #2=(|List| UP))
+         ((|dd| (%)) (|b| (UP)) (#1=#:G21 NIL) (|a| (UP)) (|h| #2=(|List| UP))
           (|d| (UP)) (|rec| (|Record| (|:| |coef| #2#) (|:| |generator| UP)))
           (|b2| (UP)) (|b1| (UP)) (|a2| (UP)) (|a1| (UP)))
          (SEQ (LETT |a1| (QVELT |d1| 0)) (LETT |a2| (QVELT |d2| 0))
@@ -188,7 +188,7 @@
 (SDEFUN |HELLFDIV;redpolyIfCan|
         ((|h| (R)) (|a| (UP)) (% (|Union| UP "failed")))
         (SPROG
-         ((#1=#:G468 NIL)
+         ((#1=#:G21 NIL)
           (|rec|
            (|Record| (|:| |coef1| UP) (|:| |coef2| UP) (|:| |generator| UP)))
           (|q| (|Fraction| UP)) (|p| (UPUP)))
@@ -247,7 +247,7 @@
 
 (SDEFUN |HELLFDIV;reduce;2%;14| ((|d| (%)) (% (%)))
         (SPROG
-         ((|g| (R)) (|b0| (UP)) (|a0| (UP)) (#1=#:G468 NIL) (|b| (UP))
+         ((|g| (R)) (|b0| (UP)) (|a0| (UP)) (#1=#:G21 NIL) (|b| (UP))
           (|a| (UP)))
          (SEQ
           (COND ((QVELT |d| 3) |d|)
@@ -324,7 +324,7 @@
         ((|d| (%)) (|k| (|Integer|)) (|lp| (|List| UP))
          (% (|Union| R "failed")))
         (SPROG
-         ((|cp| (UP)) (#1=#:G468 NIL) (|cg| (UP)) (#2=#:G544 NIL) (|p| NIL))
+         ((|cp| (UP)) (#1=#:G21 NIL) (|cg| (UP)) (#2=#:G119 NIL) (|p| NIL))
          (SEQ (LETT |d| (SPADCALL |d| (QREFELT % 67)))
               (EXIT
                (COND ((|HELLFDIV;princ?| |d| %) (CONS 0 (QVELT |d| 2)))
@@ -406,7 +406,7 @@
 
 (SDEFUN |HELLFDIV;intReduce| ((|h| (R)) (|b| (UP)) (% (R)))
         (SPROG
-         ((#1=#:G559 NIL) (#2=#:G561 NIL) (|i| NIL) (#3=#:G560 NIL)
+         ((#1=#:G134 NIL) (#2=#:G136 NIL) (|i| NIL) (#3=#:G135 NIL)
           (|v| (|Vector| UP)))
          (SEQ (LETT |v| (QCAR (SPADCALL |h| (QREFELT % 116))))
               (EXIT
@@ -431,7 +431,7 @@
 
 (SDEFUN |HELLFDIV;divisor;R2UP%;21| ((|h| (R)) (|a| (UP)) (|g| (UP)) (% (%)))
         (SPROG
-         ((|bb| (UP)) (#1=#:G468 NIL)
+         ((|bb| (UP)) (#1=#:G21 NIL)
           (|rec|
            (|Record| (|:| |coef1| UP) (|:| |coef2| UP) (|:| |generator| UP)))
           (|b| (|Fraction| UP)) (|hh| (UPUP)))
@@ -479,9 +479,9 @@
 
 (DECLAIM (NOTINLINE |HyperellipticFiniteDivisor;|)) 
 
-(DEFUN |HyperellipticFiniteDivisor| (&REST #1=#:G568)
+(DEFUN |HyperellipticFiniteDivisor| (&REST #1=#:G143)
   (SPROG NIL
-         (PROG (#2=#:G569)
+         (PROG (#2=#:G144)
            (RETURN
             (COND
              ((LETT #2#
@@ -501,7 +501,7 @@
 
 (DEFUN |HyperellipticFiniteDivisor;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((#1=#:G474 NIL) (#2=#:G468 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL)
+   ((#1=#:G32 NIL) (#2=#:G21 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL)
     (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))

@@ -238,7 +238,7 @@
 ;                   ["string", "SPADSTRING"], ["char", "SPADSTRING"], _
 ;                   ["integer", "NUMBER"], ["float", "SPADFLOAT"]]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$trans_table|
           (LIST (LIST '|id| 'IDENTIFIER) (LIST '|key| 'KEYWORD)
                 (LIST '|string| 'SPADSTRING) (LIST '|char| 'SPADSTRING)
@@ -249,7 +249,7 @@
 ;                 ["SEG", ".."], _
 ;                 ["BACKSET", ";"]]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$trans_key|
           (LIST (LIST 'ARROW '->) (LIST 'SEG '|..|) (LIST 'BACKSET '|;|))))
 
@@ -260,7 +260,7 @@
 ;                 ["RULE", "rule"] _
 ;                 ]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$trans_key_id|
           (LIST (LIST '|break| '|break|) (LIST 'ITERATE '|iterate|)
                 (LIST 'DEFAULT '|default|) (LIST 'RULE '|rule|))))
@@ -269,7 +269,7 @@
 ;     ",", "==", "=>", "+->", "==>", ";",
 ;     "has", "is", "pretend", "where", ")"]
 
-(EVAL-WHEN (EVAL LOAD)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$expression_nostarters|
           (LIST 'ARROW 'BACKSET '|:=| '|:| '|,| '== '=> '+-> '==> '|;| '|has|
                 '|is| '|pretend| '|where| '|)|)))

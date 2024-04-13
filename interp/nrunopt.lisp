@@ -1187,26 +1187,25 @@
 
 ; dcSlots con ==
 ;   name := abbreviation? con or con
-;   $infovec: local := getInfovec name
-;   template := $infovec.0
+;   infovec := getInfovec name
+;   template := infovec.0
 ;   for i in 5..MAXINDEX template repeat
 ;     sayBrightlyNT bright i
 ;     item := template.i
-;     item is [n,:op] and INTEGERP n => dcOpLatchPrint(op,n)
+;     item is [n, :op] and INTEGERP n => dcOpLatchPrint(op, n, infovec)
 ;     null item and i > 5 => sayBrightly ['"arg  ",STRCONC('"#",STRINGIMAGE(i - 5))]
 ;     atom item => sayBrightly ['"fun  ",item]
 ;     item is ['CONS,.,['FUNCALL,[.,a],b]] => sayBrightly ['"constant ",a]
-;     sayBrightly concat('"lazy ",form2String formatSlotDomain i)
+;     sayBrightly concat('"lazy ", form2String(formatSlotDomain1(i, infovec)))
 
 (DEFUN |dcSlots| (|con|)
-  (PROG (|$infovec| |b| |ISTMP#7| |a| |ISTMP#6| |ISTMP#5| |ISTMP#4| |ISTMP#3|
-         |ISTMP#2| |ISTMP#1| |op| |n| |item| |template| |name|)
-    (DECLARE (SPECIAL |$infovec|))
+  (PROG (|name| |infovec| |template| |item| |n| |op| |ISTMP#1| |ISTMP#2|
+         |ISTMP#3| |ISTMP#4| |ISTMP#5| |ISTMP#6| |a| |ISTMP#7| |b|)
     (RETURN
      (PROGN
       (SETQ |name| (OR (|abbreviation?| |con|) |con|))
-      (SETQ |$infovec| (|getInfovec| |name|))
-      (SETQ |template| (ELT |$infovec| 0))
+      (SETQ |infovec| (|getInfovec| |name|))
+      (SETQ |template| (ELT |infovec| 0))
       ((LAMBDA (|bfVar#72| |i|)
          (LOOP
           (COND ((> |i| |bfVar#72|) (RETURN NIL))
@@ -1221,7 +1220,7 @@
                           (SETQ |op| (CDR |item|))
                           #1#)
                          (INTEGERP |n|))
-                    (|dcOpLatchPrint| |op| |n|))
+                    (|dcOpLatchPrint| |op| |n| |infovec|))
                    ((AND (NULL |item|) (< 5 |i|))
                     (|sayBrightly|
                      (LIST "arg  " (STRCONC "#" (STRINGIMAGE (- |i| 5))))))
@@ -1271,33 +1270,36 @@
                    (#1#
                     (|sayBrightly|
                      (|concat| "lazy "
-                      (|form2String| (|formatSlotDomain| |i|)))))))))
+                      (|form2String|
+                       (|formatSlotDomain1| |i| |infovec|)))))))))
           (SETQ |i| (+ |i| 1))))
        (MAXINDEX |template|) 5)))))
 
-; dcOpLatchPrint(op,index) ==
-;   numvec := getCodeVector()
+; dcOpLatchPrint(op, index, infovec) ==
+;   numvec := getCodeVector1(infovec)
 ;   numOfArgs := numvec.index
 ;   whereNumber := numvec.(index := index + 1)
-;   signumList := dcSig(numvec,index + 1,numOfArgs)
+;   signumList := dcSig1(numvec, index + 1, numOfArgs, infovec)
 ;   index := index + numOfArgs + 1
 ;   namePart := concat(bright "from",
-;     dollarPercentTran form2String formatSlotDomain whereNumber)
+;     dollarPercentTran(form2String(formatSlotDomain1(whereNumber, infovec))))
 ;   sayBrightly ['"latch",:formatOpSignature(op,signumList),:namePart]
 
-(DEFUN |dcOpLatchPrint| (|op| |index|)
+(DEFUN |dcOpLatchPrint| (|op| |index| |infovec|)
   (PROG (|numvec| |numOfArgs| |whereNumber| |signumList| |namePart|)
     (RETURN
      (PROGN
-      (SETQ |numvec| (|getCodeVector|))
+      (SETQ |numvec| (|getCodeVector1| |infovec|))
       (SETQ |numOfArgs| (ELT |numvec| |index|))
       (SETQ |whereNumber| (ELT |numvec| (SETQ |index| (+ |index| 1))))
-      (SETQ |signumList| (|dcSig| |numvec| (+ |index| 1) |numOfArgs|))
+      (SETQ |signumList|
+              (|dcSig1| |numvec| (+ |index| 1) |numOfArgs| |infovec|))
       (SETQ |index| (+ (+ |index| |numOfArgs|) 1))
       (SETQ |namePart|
               (|concat| (|bright| '|from|)
                (|dollarPercentTran|
-                (|form2String| (|formatSlotDomain| |whereNumber|)))))
+                (|form2String|
+                 (|formatSlotDomain1| |whereNumber| |infovec|)))))
       (|sayBrightly|
        (CONS "latch"
              (APPEND (|formatOpSignature| |op| |signumList|) |namePart|)))))))
@@ -1322,15 +1324,15 @@
              (|loadLibNoUpdate| |name| |name| |fullLibName|)
              (GET |name| '|infovec|)))))))
 
-; getOpSegment index ==
-;   numOfArgs := (vec := getCodeVector()).index
+; getOpSegment(index, vec) ==
+;   numOfArgs := vec.index
 ;   [vec.i for i in index..(index + numOfArgs + 3)]
 
-(DEFUN |getOpSegment| (|index|)
-  (PROG (|vec| |numOfArgs|)
+(DEFUN |getOpSegment| (|index| |vec|)
+  (PROG (|numOfArgs|)
     (RETURN
      (PROGN
-      (SETQ |numOfArgs| (ELT (SETQ |vec| (|getCodeVector|)) |index|))
+      (SETQ |numOfArgs| (ELT |vec| |index|))
       ((LAMBDA (|bfVar#74| |bfVar#73| |i|)
          (LOOP
           (COND ((> |i| |bfVar#73|) (RETURN (NREVERSE |bfVar#74|)))
@@ -1352,31 +1354,27 @@
       (SETQ |u| (CDDR |proto4|))
       (COND ((VECP |u|) (BREAK)) ('T (CDR |u|)))))))
 
-; getCodeVector() == getCodeVector1($infovec)
-
-(DEFUN |getCodeVector| () (PROG () (RETURN (|getCodeVector1| |$infovec|))))
-
-; formatSlotDomain x ==
+; formatSlotDomain1(x, infovec) ==
 ;   x = 0 => ["%"]
 ;   x = 2 => ["$$"]
 ;   INTEGERP x =>
-;     val := $infovec.0.x
+;     val := infovec.0.x
 ;     null val => [STRCONC('"#",STRINGIMAGE (x  - 5))]
-;     formatSlotDomain val
+;     formatSlotDomain1(val, infovec)
 ;   atom x => x
 ;   x is ['NRTEVAL,y] => (atom y => [y]; y)
 ;   x is ['QUOTE, .] => x
-;   [first x,:[formatSlotDomain y for y in rest x]]
+;   [first x,:[formatSlotDomain1(y, infovec) for y in rest x]]
 
-(DEFUN |formatSlotDomain| (|x|)
+(DEFUN |formatSlotDomain1| (|x| |infovec|)
   (PROG (|val| |ISTMP#1| |y|)
     (RETURN
      (COND ((EQL |x| 0) (LIST '%)) ((EQL |x| 2) (LIST '$$))
            ((INTEGERP |x|)
             (PROGN
-             (SETQ |val| (ELT (ELT |$infovec| 0) |x|))
+             (SETQ |val| (ELT (ELT |infovec| 0) |x|))
              (COND ((NULL |val|) (LIST (STRCONC "#" (STRINGIMAGE (- |x| 5)))))
-                   (#1='T (|formatSlotDomain| |val|)))))
+                   (#1='T (|formatSlotDomain1| |val| |infovec|)))))
            ((ATOM |x|) |x|)
            ((AND (CONSP |x|) (EQ (CAR |x|) 'NRTEVAL)
                  (PROGN
@@ -1399,38 +1397,39 @@
                         (RETURN (NREVERSE |bfVar#76|)))
                        (#1#
                         (SETQ |bfVar#76|
-                                (CONS (|formatSlotDomain| |y|) |bfVar#76|))))
+                                (CONS (|formatSlotDomain1| |y| |infovec|)
+                                      |bfVar#76|))))
                       (SETQ |bfVar#75| (CDR |bfVar#75|))))
                    NIL (CDR |x|) NIL)))))))
 
 ; dcOpTable con ==
 ;   name := abbreviation? con or con
-;   $infovec: local := getInfovec name
-;   template := $infovec.0
+;   infovec := getInfovec(name)
+;   template := infovec.0
 ;   $predvec: local := GETDATABASE(name, 'PREDICATES)
-;   opTable := $infovec.1
+;   opTable := infovec.1
 ;   for i in 0..MAXINDEX opTable repeat
 ;     op := opTable.i
 ;     i := i + 1
 ;     startIndex := opTable.i
 ;     stopIndex :=
-;       i + 1 > MAXINDEX opTable => MAXINDEX getCodeVector()
+;       i + 1 > MAXINDEX opTable => MAXINDEX getCodeVector1(infovec)
 ;       opTable.(i + 2)
 ;     curIndex := startIndex
 ;     while curIndex < stopIndex repeat
-;       curIndex := dcOpPrint(op,curIndex)
+;         curIndex := dcOpPrint(op, curIndex, infovec)
 
 (DEFUN |dcOpTable| (|con|)
-  (PROG (|$predvec| |$infovec| |curIndex| |stopIndex| |startIndex| |op|
-         |opTable| |template| |name|)
-    (DECLARE (SPECIAL |$predvec| |$infovec|))
+  (PROG (|$predvec| |curIndex| |stopIndex| |startIndex| |op| |opTable|
+         |template| |infovec| |name|)
+    (DECLARE (SPECIAL |$predvec|))
     (RETURN
      (PROGN
       (SETQ |name| (OR (|abbreviation?| |con|) |con|))
-      (SETQ |$infovec| (|getInfovec| |name|))
-      (SETQ |template| (ELT |$infovec| 0))
+      (SETQ |infovec| (|getInfovec| |name|))
+      (SETQ |template| (ELT |infovec| 0))
       (SETQ |$predvec| (GETDATABASE |name| 'PREDICATES))
-      (SETQ |opTable| (ELT |$infovec| 1))
+      (SETQ |opTable| (ELT |infovec| 1))
       ((LAMBDA (|bfVar#77| |i|)
          (LOOP
           (COND ((> |i| |bfVar#77|) (RETURN NIL))
@@ -1442,7 +1441,7 @@
                   (SETQ |stopIndex|
                           (COND
                            ((< (MAXINDEX |opTable|) (+ |i| 1))
-                            (MAXINDEX (|getCodeVector|)))
+                            (MAXINDEX (|getCodeVector1| |infovec|)))
                            (#1# (ELT |opTable| (+ |i| 2)))))
                   (SETQ |curIndex| |startIndex|)
                   ((LAMBDA ()
@@ -1450,18 +1449,19 @@
                       (COND ((NOT (< |curIndex| |stopIndex|)) (RETURN NIL))
                             (#1#
                              (SETQ |curIndex|
-                                     (|dcOpPrint| |op| |curIndex|))))))))))
+                                     (|dcOpPrint| |op| |curIndex|
+                                      |infovec|))))))))))
           (SETQ |i| (+ |i| 1))))
        (MAXINDEX |opTable|) 0)))))
 
-; dcOpPrint(op,index) ==
-;   numvec := getCodeVector()
-;   segment := getOpSegment index
+; dcOpPrint(op, index, infovec) ==
+;   numvec := getCodeVector1(infovec)
+;   segment := getOpSegment(index, numvec)
 ;   numOfArgs := numvec.index
 ;   index := index + 1
 ;   predNumber := numvec.index
 ;   index := index + 1
-;   signumList := dcSig(numvec,index,numOfArgs)
+;   signumList := dcSig1(numvec, index, numOfArgs, infovec)
 ;   index := index + numOfArgs + 1
 ;   slotNumber := numvec.index
 ;   suffix :=
@@ -1470,24 +1470,24 @@
 ;   namePart := bright
 ;     slotNumber = 0 => '"subsumed by next entry"
 ;     slotNumber = 1 => '"missing"
-;     name := $infovec.0.slotNumber
+;     name := infovec.0.slotNumber
 ;     atom name => name
 ;     '"looked up"
 ;   sayBrightly [:formatOpSignature(op,signumList),:namePart, :suffix]
 ;   index + 1
 
-(DEFUN |dcOpPrint| (|op| |index|)
+(DEFUN |dcOpPrint| (|op| |index| |infovec|)
   (PROG (|numvec| |segment| |numOfArgs| |predNumber| |signumList| |slotNumber|
          |suffix| |name| |namePart|)
     (RETURN
      (PROGN
-      (SETQ |numvec| (|getCodeVector|))
-      (SETQ |segment| (|getOpSegment| |index|))
+      (SETQ |numvec| (|getCodeVector1| |infovec|))
+      (SETQ |segment| (|getOpSegment| |index| |numvec|))
       (SETQ |numOfArgs| (ELT |numvec| |index|))
       (SETQ |index| (+ |index| 1))
       (SETQ |predNumber| (ELT |numvec| |index|))
       (SETQ |index| (+ |index| 1))
-      (SETQ |signumList| (|dcSig| |numvec| |index| |numOfArgs|))
+      (SETQ |signumList| (|dcSig1| |numvec| |index| |numOfArgs| |infovec|))
       (SETQ |index| (+ (+ |index| |numOfArgs|) 1))
       (SETQ |slotNumber| (ELT |numvec| |index|))
       (SETQ |suffix|
@@ -1502,17 +1502,17 @@
                      ((EQL |slotNumber| 1) "missing")
                      (#1#
                       (PROGN
-                       (SETQ |name| (ELT (ELT |$infovec| 0) |slotNumber|))
+                       (SETQ |name| (ELT (ELT |infovec| 0) |slotNumber|))
                        (COND ((ATOM |name|) |name|) (#1# "looked up")))))))
       (|sayBrightly|
        (APPEND (|formatOpSignature| |op| |signumList|)
                (APPEND |namePart| |suffix|)))
       (+ |index| 1)))))
 
-; dcSig(numvec,index,numOfArgs) ==
-;   [formatSlotDomain numvec.(index + i) for i in 0..numOfArgs]
+; dcSig1(numvec,index, numOfArgs, infovec) ==
+;   [formatSlotDomain1(numvec.(index + i), infovec) for i in 0..numOfArgs]
 
-(DEFUN |dcSig| (|numvec| |index| |numOfArgs|)
+(DEFUN |dcSig1| (|numvec| |index| |numOfArgs| |infovec|)
   (PROG ()
     (RETURN
      ((LAMBDA (|bfVar#78| |i|)
@@ -1521,26 +1521,24 @@
                ('T
                 (SETQ |bfVar#78|
                         (CONS
-                         (|formatSlotDomain| (ELT |numvec| (+ |index| |i|)))
+                         (|formatSlotDomain1| (ELT |numvec| (+ |index| |i|))
+                          |infovec|)
                          |bfVar#78|))))
          (SETQ |i| (+ |i| 1))))
       NIL 0))))
 
 ; dcPreds con ==
 ;   name := abbreviation? con or con
-;   $infovec: local := getInfovec name
 ;   $predvec:= GETDATABASE(name, 'PREDICATES)
 ;   for i in 0..MAXINDEX $predvec repeat
 ;     sayBrightlyNT bright (i + 1)
 ;     sayBrightly pred2English $predvec.i
 
 (DEFUN |dcPreds| (|con|)
-  (PROG (|$infovec| |name|)
-    (DECLARE (SPECIAL |$infovec|))
+  (PROG (|name|)
     (RETURN
      (PROGN
       (SETQ |name| (OR (|abbreviation?| |con|) |con|))
-      (SETQ |$infovec| (|getInfovec| |name|))
       (SETQ |$predvec| (GETDATABASE |name| 'PREDICATES))
       ((LAMBDA (|bfVar#79| |i|)
          (LOOP
@@ -1554,8 +1552,8 @@
 
 ; dcCats con ==
 ;   name := abbreviation? con or con
-;   $infovec: local := getInfovec name
-;   u := $infovec.3
+;   infovec := getInfovec name
+;   u := infovec.3
 ;   VECP CDDR u => BREAK()
 ;   $predvec:= GETDATABASE(name, 'PREDICATES)
 ;   catpredvec := first u
@@ -1572,17 +1570,17 @@
 ;       null (info := catinfo.i) => nil
 ;       IDENTP info => bright '"package"
 ;       bright '"instantiated"
-;     sayBrightly concat(form2String formatSlotDomain form,suffix,extra)
+;     sayBrightly concat(form2String(formatSlotDomain1(form, infovec)),
+;                        suffix, extra)
 
 (DEFUN |dcCats| (|con|)
-  (PROG (|$infovec| |extra| |info| |suffix| |predNumber| |form| |catvec|
-         |catinfo| |catpredvec| |u| |name|)
-    (DECLARE (SPECIAL |$infovec|))
+  (PROG (|name| |infovec| |u| |catpredvec| |catinfo| |catvec| |form|
+         |predNumber| |suffix| |info| |extra|)
     (RETURN
      (PROGN
       (SETQ |name| (OR (|abbreviation?| |con|) |con|))
-      (SETQ |$infovec| (|getInfovec| |name|))
-      (SETQ |u| (ELT |$infovec| 3))
+      (SETQ |infovec| (|getInfovec| |name|))
+      (SETQ |u| (ELT |infovec| 3))
       (COND ((VECP (CDDR |u|)) (BREAK))
             (#1='T
              (PROGN
@@ -1613,31 +1611,31 @@
                                    (#1# (|bright| "instantiated"))))
                           (|sayBrightly|
                            (|concat|
-                            (|form2String| (|formatSlotDomain| |form|))
+                            (|form2String|
+                             (|formatSlotDomain1| |form| |infovec|))
                             |suffix| |extra|)))))
                   (SETQ |i| (+ |i| 1))))
                (MAXINDEX |catvec|) 0))))))))
 
 ; dcData con ==
 ;   name := abbreviation? con or con
-;   $infovec: local := getInfovec name
+;   infovec := getInfovec(name)
 ;   sayBrightly '"Operation data from slot 1"
-;   print_full1 $infovec.1
-;   vec := getCodeVector()
+;   print_full1(infovec.1)
+;   vec := getCodeVector1(infovec)
 ;   vec := (PAIRP vec => rest vec; vec)
 ;   sayBrightly ['"Information vector has ",SIZE vec,'" entries"]
 ;   dcData1 vec
 
 (DEFUN |dcData| (|con|)
-  (PROG (|$infovec| |vec| |name|)
-    (DECLARE (SPECIAL |$infovec|))
+  (PROG (|name| |infovec| |vec|)
     (RETURN
      (PROGN
       (SETQ |name| (OR (|abbreviation?| |con|) |con|))
-      (SETQ |$infovec| (|getInfovec| |name|))
+      (SETQ |infovec| (|getInfovec| |name|))
       (|sayBrightly| "Operation data from slot 1")
-      (|print_full1| (ELT |$infovec| 1))
-      (SETQ |vec| (|getCodeVector|))
+      (|print_full1| (ELT |infovec| 1))
+      (SETQ |vec| (|getCodeVector1| |infovec|))
       (SETQ |vec| (COND ((CONSP |vec|) (CDR |vec|)) ('T |vec|)))
       (|sayBrightly| (LIST "Information vector has " (SIZE |vec|) " entries"))
       (|dcData1| |vec|)))))
@@ -1993,10 +1991,10 @@
 
 ; dcAll con ==
 ;   con := abbreviation? con or con
-;   $infovec : local := getInfovec con
+;   infovec := getInfovec con
 ;   complete? :=
-;     #$infovec = 4 => false
-;     $infovec.4 = 'lookupComplete
+;     #infovec = 4 => false
+;     infovec.4 = 'lookupComplete
 ;   sayBrightly '"----------------Template-----------------"
 ;   dcSlots con
 ;   sayBrightly
@@ -2014,15 +2012,14 @@
 ;   'done
 
 (DEFUN |dcAll| (|con|)
-  (PROG (|$infovec| |complete?|)
-    (DECLARE (SPECIAL |$infovec|))
+  (PROG (|infovec| |complete?|)
     (RETURN
      (PROGN
       (SETQ |con| (OR (|abbreviation?| |con|) |con|))
-      (SETQ |$infovec| (|getInfovec| |con|))
+      (SETQ |infovec| (|getInfovec| |con|))
       (SETQ |complete?|
-              (COND ((EQL (LENGTH |$infovec|) 4) NIL)
-                    (#1='T (EQ (ELT |$infovec| 4) '|lookupComplete|))))
+              (COND ((EQL (LENGTH |infovec|) 4) NIL)
+                    (#1='T (EQ (ELT |infovec| 4) '|lookupComplete|))))
       (|sayBrightly| "----------------Template-----------------")
       (|dcSlots| |con|)
       (|sayBrightly|

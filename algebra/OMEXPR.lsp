@@ -2,7 +2,7 @@
 (SDEFUN |OMEXPR;outputOMArith1|
         ((|dev| (|OpenMathDevice|)) (|sym| (|String|))
          (|args| (|List| (|Expression| R))) (% (|Void|)))
-        (SPROG ((#1=#:G471 NIL) (|arg| NIL))
+        (SPROG ((#1=#:G34 NIL) (|arg| NIL))
                (SEQ (SPADCALL |dev| (QREFELT % 16))
                     (SPADCALL |dev| "arith1" |sym| (QREFELT % 18))
                     (SEQ (LETT |arg| NIL) (LETT #1# |args|) G190
@@ -45,7 +45,7 @@
 (SDEFUN |OMEXPR;outputOMBinomial|
         ((|dev| (|OpenMathDevice|)) (|args| (|List| (|Expression| R)))
          (% (|Void|)))
-        (SPROG ((#1=#:G483 NIL) (|arg| NIL))
+        (SPROG ((#1=#:G51 NIL) (|arg| NIL))
                (SEQ
                 (COND
                  ((NULL (EQL (LENGTH |args|) 2))
@@ -152,7 +152,7 @@
         ((|dev| (|OpenMathDevice|)) (|op| (|Symbol|))
          (|args| (|List| (|Expression| R))) (% (|Void|)))
         (SPROG
-         ((#1=#:G515 NIL) (|arg| NIL)
+         ((#1=#:G93 NIL) (|arg| NIL)
           (|omOp|
            (|Union| (|Record| (|:| |cd| (|String|)) (|:| |name| (|String|)))
                     "failed"))
@@ -217,7 +217,7 @@
 (SDEFUN |OMEXPR;outputOMExpr|
         ((|dev| (|OpenMathDevice|)) (|ex| (|Expression| R)) (% (|Void|)))
         (SPROG
-         ((|k| (|Kernel| (|Expression| R))) (#1=#:G542 NIL)
+         ((|k| (|Kernel| (|Expression| R))) (#1=#:G120 NIL)
           (|z|
            (|Union|
             (|Record| (|:| |val| (|Expression| R))
@@ -245,7 +245,7 @@
                       ((NULL (QEQCAR |v| 1))
                        (PROGN
                         (LETT #1# (SPADCALL |dev| (QCDR |v|) (QREFELT % 44)))
-                        (GO #2=#:G539))))))
+                        (GO #2=#:G117))))))
                (SEQ (LETT |w| (SPADCALL |ex| (QREFELT % 46)))
                     (EXIT
                      (COND
@@ -349,9 +349,9 @@
 
 (DECLAIM (NOTINLINE |ExpressionToOpenMath;|)) 
 
-(DEFUN |ExpressionToOpenMath| (#1=#:G551)
+(DEFUN |ExpressionToOpenMath| (#1=#:G129)
   (SPROG NIL
-         (PROG (#2=#:G552)
+         (PROG (#2=#:G130)
            (RETURN
             (COND
              ((LETT #2#

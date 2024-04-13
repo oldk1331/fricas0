@@ -85,7 +85,7 @@
 
 (DEFUN |Any| ()
   (SPROG NIL
-         (PROG (#1=#:G472)
+         (PROG (#1=#:G32)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Any|))

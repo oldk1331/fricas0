@@ -896,10 +896,10 @@
 ;   $conname : local := first conform
 ;   domList := getUsersOfConstructor $conname
 ;   for name in domList repeat
-;     $infovec : local := dbInfovec name
-;     null $infovec => 'skip           --category
-;     template := $infovec . 0
-;     numvec := getCodeVector1($infovec)
+;     infovec := dbInfovec(name)
+;     null infovec => 'skip           --category
+;     template := infovec.0
+;     numvec := getCodeVector1(infovec)
 ;     opacc := nil
 ;     for i in 7..MAXINDEX template repeat
 ;       item := template . i
@@ -909,7 +909,7 @@
 ;       null member(numOfArgs,numOfArgsList) => 'skip
 ;       whereNumber := numvec.(index := index + 1)
 ;       template . whereNumber isnt [= $conname,:.] => 'skip
-;       signumList := dcSig(numvec,index + 1,numOfArgs)
+;       signumList := dcSig1(numvec, index + 1, numOfArgs, infovec)
 ;       opsig := or/[pair for (pair := [op1,:sig]) in opSigList |
 ;                    op1 = op and whoUsesMatch?(signumList,sig,nil)]
 ;       if opsig then opacc := [opsig,:opacc]
@@ -917,10 +917,10 @@
 ;   acc
 
 (DEFUN |whoUses| (|opSigList| |conform|)
-  (PROG (|$infovec| |$conname| |opsig| |op1| |signumList| |ISTMP#1|
-         |whereNumber| |numOfArgs| |index| |op| |n| |item| |opacc| |numvec|
-         |template| |domList| |acc| |numOfArgsList| |sig| |opList|)
-    (DECLARE (SPECIAL |$infovec| |$conname|))
+  (PROG (|$conname| |opsig| |op1| |signumList| |ISTMP#1| |whereNumber|
+         |numOfArgs| |index| |op| |n| |item| |opacc| |numvec| |template|
+         |infovec| |domList| |acc| |numOfArgsList| |sig| |opList|)
+    (DECLARE (SPECIAL |$conname|))
     (RETURN
      (PROGN
       (SETQ |opList| (REMDUP (ASSOCLEFT |opSigList|)))
@@ -950,12 +950,12 @@
             (RETURN NIL))
            (#1#
             (PROGN
-             (SETQ |$infovec| (|dbInfovec| |name|))
-             (COND ((NULL |$infovec|) '|skip|)
+             (SETQ |infovec| (|dbInfovec| |name|))
+             (COND ((NULL |infovec|) '|skip|)
                    (#1#
                     (PROGN
-                     (SETQ |template| (ELT |$infovec| 0))
-                     (SETQ |numvec| (|getCodeVector1| |$infovec|))
+                     (SETQ |template| (ELT |infovec| 0))
+                     (SETQ |numvec| (|getCodeVector1| |infovec|))
                      (SETQ |opacc| NIL)
                      ((LAMBDA (|bfVar#33| |i|)
                         (LOOP
@@ -1000,8 +1000,9 @@
                                         (#1#
                                          (PROGN
                                           (SETQ |signumList|
-                                                  (|dcSig| |numvec|
-                                                   (+ |index| 1) |numOfArgs|))
+                                                  (|dcSig1| |numvec|
+                                                   (+ |index| 1) |numOfArgs|
+                                                   |infovec|))
                                           (SETQ |opsig|
                                                   ((LAMBDA
                                                        (|bfVar#35| |bfVar#34|
@@ -1116,7 +1117,6 @@
 ; --        koCatOps(conform,domname)
 ;     asharpConstructorName? opOf conform => nil
 ;     ----------> new <------------------
-;     $infovec: local := dbInfovec conname--------> removed 94/10/24
 ;     exposureTail :=
 ;       null $packageItem => '(NIL NIL)
 ;       isExposedConstructor opOf conform => [conform,:'(T)]
@@ -1157,9 +1157,9 @@
          (SETQ |bfVar#36| (CDR |bfVar#36|))))
       NIL |u| NIL))))
 (DEFUN |koOps,fn| (|conform| |domname|)
-  (PROG (|$infovec| |subargs| |acc| |npred| |key| |ISTMP#3| |pred| |ISTMP#2|
-         |slot| |ISTMP#1| |sig| |op1| |op| |exposureTail| |u| |args| |conname|)
-    (DECLARE (SPECIAL |$infovec| |subargs|))
+  (PROG (|subargs| |acc| |npred| |key| |ISTMP#3| |pred| |ISTMP#2| |slot|
+         |ISTMP#1| |sig| |op1| |op| |exposureTail| |u| |args| |conname|)
+    (DECLARE (SPECIAL |subargs|))
     (RETURN
      (PROGN
       (SETQ |conform| (OR |domname| |conform|))
@@ -1170,7 +1170,6 @@
             ((|asharpConstructorName?| (|opOf| |conform|)) NIL)
             (#1='T
              (PROGN
-              (SETQ |$infovec| (|dbInfovec| |conname|))
               (SETQ |exposureTail|
                       (COND ((NULL |$packageItem|) '(NIL NIL))
                             ((|isExposedConstructor| (|opOf| |conform|))
@@ -1303,7 +1302,8 @@
 (DEFUN |zeroOneConvert| (|x|)
   (PROG () (RETURN (COND ((EQ |x| '|Zero|) 0) ((EQ |x| '|One|) 1) ('T |x|)))))
 
-; kFormatSlotDomain x == fn formatSlotDomain x where fn x ==
+; kFormatSlotDomain1(x, infovec) ==
+;               fn formatSlotDomain1(x, infovec) where fn x ==
 ;   atom x => x
 ;   (op := first x) = '_% => '_%
 ;   op = 'local => CADR x
@@ -1314,15 +1314,16 @@
 ;   op = 'QUOTE and atom CADR x => CADR x
 ;   x
 
-(DEFUN |kFormatSlotDomain| (|x|)
-  (PROG () (RETURN (|kFormatSlotDomain,fn| (|formatSlotDomain| |x|)))))
-(DEFUN |kFormatSlotDomain,fn| (|x|)
+(DEFUN |kFormatSlotDomain1| (|x| |infovec|)
+  (PROG ()
+    (RETURN (|kFormatSlotDomain1,fn| (|formatSlotDomain1| |x| |infovec|)))))
+(DEFUN |kFormatSlotDomain1,fn| (|x|)
   (PROG (|op|)
     (RETURN
      (COND ((ATOM |x|) |x|) ((EQ (SETQ |op| (CAR |x|)) '%) '%)
            ((EQ |op| '|local|) (CADR |x|))
            ((EQ |op| '|:|)
-            (LIST '|:| (CADR |x|) (|kFormatSlotDomain,fn| (CADDR |x|))))
+            (LIST '|:| (CADR |x|) (|kFormatSlotDomain1,fn| (CADDR |x|))))
            ((OR (MEMQ |op| |$Primitives|) (|constructor?| |op|))
             ((LAMBDA (|bfVar#48| |bfVar#47| |y|)
                (LOOP
@@ -1332,7 +1333,7 @@
                   (RETURN (NREVERSE |bfVar#48|)))
                  (#1='T
                   (SETQ |bfVar#48|
-                          (CONS (|kFormatSlotDomain,fn| |y|) |bfVar#48|))))
+                          (CONS (|kFormatSlotDomain1,fn| |y|) |bfVar#48|))))
                 (SETQ |bfVar#47| (CDR |bfVar#47|))))
              NIL |x| NIL))
            ((INTEGERP |op|) |op|)

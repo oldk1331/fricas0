@@ -18,9 +18,9 @@
 
 (DECLAIM (NOTINLINE |SuchThat;|)) 
 
-(DEFUN |SuchThat| (&REST #1=#:G455)
+(DEFUN |SuchThat| (&REST #1=#:G22)
   (SPROG NIL
-         (PROG (#2=#:G456)
+         (PROG (#2=#:G23)
            (RETURN
             (COND
              ((LETT #2#

@@ -10,10 +10,10 @@
                  (|FortranMachineTypeCategory;|))))) 
 
 (DEFUN |FortranMachineTypeCategory;| ()
-  (SPROG ((#1=#:G449 NIL))
+  (SPROG ((#1=#:G5 NIL))
          (PROG1
              (LETT #1#
-                   (|subst_in_cat| '(#2=#:G448) (LIST '(|Integer|))
+                   (|subst_in_cat| '(#2=#:G4) (LIST '(|Integer|))
                                    (|Join| (|IntegralDomain|) (|OrderedSet|)
                                            (|RetractableTo| '#2#))))
            (SETELT #1# 0 '(|FortranMachineTypeCategory|))))) 

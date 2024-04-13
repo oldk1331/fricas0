@@ -149,7 +149,7 @@
               ('T (|error| "Not an elementary operator")))) 
 
 (SDEFUN |EF;dropfun| ((|x| (F)) (% (F)))
-        (SPROG ((#1=#:G672 NIL) (|k| (|Union| (|Kernel| F) "failed")))
+        (SPROG ((#1=#:G234 NIL) (|k| (|Union| (|Kernel| F) "failed")))
                (SEQ
                 (EXIT
                  (SEQ
@@ -160,7 +160,7 @@
                               (NULL (SPADCALL (QCDR |k|) (QREFELT % 99))))
                           (PROGN
                            (LETT #1# (|spadConstant| % 89))
-                           (GO #2=#:G670))))))
+                           (GO #2=#:G232))))))
                   (EXIT (|SPADfirst| (SPADCALL (QCDR |k|) (QREFELT % 99))))))
                 #2# (EXIT #1#)))) 
 
@@ -1331,7 +1331,7 @@
 (SDEFUN |EF;iexp| ((|x| (F)) (% (F)))
         (SPROG
          ((|u| (|Union| F "failed")) (|s3| (F)) (|s2| (F)) (|h| (F)) (|y| (F))
-          (|xi| (F)) (|i| (F)) (#1=#:G883 NIL) (|kx| (|Kernel| F))
+          (|xi| (F)) (|i| (F)) (#1=#:G460 NIL) (|kx| (|Kernel| F))
           (|kxu| (|Union| (|Kernel| F) "failed")))
          (SEQ
           (COND ((SPADCALL |x| (QREFELT % 114)) (|spadConstant| % 48))
@@ -1354,7 +1354,7 @@
                                       (|SPADfirst|
                                        (SPADCALL |kx| (QREFELT % 99)))
                                       |x| (QREFELT % 100)))
-                               (GO #3=#:G879))))))))
+                               (GO #3=#:G456))))))))
                     (COND
                      ((SPADCALL |x| (|spadConstant| % 89) (QREFELT % 125))
                       (COND
@@ -1553,7 +1553,7 @@
 
 (SDEFUN |EF;ilog| ((|x| (F)) (% (F)))
         (SPROG
-         ((#1=#:G907 NIL)
+         ((#1=#:G484 NIL)
           (|den| (|SparseMultivariatePolynomial| R (|Kernel| F)))
           (|num1| (|Boolean|))
           (|num| (|SparseMultivariatePolynomial| R (|Kernel| F))))
@@ -1587,7 +1587,7 @@
                                        (QREFELT % 145))
                                       (QREFELT % 121))
                             (QREFELT % 49)))
-                     (GO #2=#:G905))))))))))
+                     (GO #2=#:G482))))))))))
             (EXIT (SPADCALL (QREFELT % 14) |x| (QREFELT % 121)))))
           #2# (EXIT #1#)))) 
 
@@ -1879,9 +1879,9 @@
 
 (DECLAIM (NOTINLINE |ElementaryFunction;|)) 
 
-(DEFUN |ElementaryFunction| (&REST #1=#:G1164)
+(DEFUN |ElementaryFunction| (&REST #1=#:G741)
   (SPROG NIL
-         (PROG (#2=#:G1165)
+         (PROG (#2=#:G742)
            (RETURN
             (COND
              ((LETT #2#
@@ -2338,10 +2338,10 @@
               '|opasec| '|opacsc| '|opsinh| '|opcosh| '|optanh| '|opcoth|
               '|opsech| '|opcsch| '|opasinh| '|opacosh| '|opatanh| '|opacoth|
               '|opasech| '|opacsch| (5 . |pi|) (9 . |coerce|) (14 . |pi|)
-              '|Pie| (|List| %) (18 . |kernel|) (24 . |imaginary|) '|isqrt1|
-              (28 . |One|) (32 . -) (37 . |sqrt|) (|Integer|) (42 . |coerce|)
-              (47 . |sqrt|) (52 . |iisqrt2|) (56 . |iisqrt3|) '|isqrt2|
-              '|isqrt3| (60 . |coerce|) (65 . |elt|) |EF;log;2F;12|
+              '|cachedPi| (|List| %) (18 . |kernel|) (24 . |imaginary|)
+              '|isqrt1| (28 . |One|) (32 . -) (37 . |sqrt|) (|Integer|)
+              (42 . |coerce|) (47 . |sqrt|) (52 . |iisqrt2|) (56 . |iisqrt3|)
+              '|isqrt2| '|isqrt3| (60 . |coerce|) (65 . |elt|) |EF;log;2F;12|
               |EF;exp;2F;13| |EF;sin;2F;14| |EF;cos;2F;15| |EF;tan;2F;16|
               |EF;cot;2F;17| |EF;sec;2F;18| |EF;csc;2F;19| |EF;asin;2F;20|
               |EF;acos;2F;21| |EF;atan;2F;22| |EF;acot;2F;23| |EF;asec;2F;24|

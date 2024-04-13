@@ -85,9 +85,9 @@
 
 (DECLAIM (NOTINLINE |SparseMultivariatePolynomialExpressions;|)) 
 
-(DEFUN |SparseMultivariatePolynomialExpressions| (#1=#:G522)
+(DEFUN |SparseMultivariatePolynomialExpressions| (#1=#:G106)
   (SPROG NIL
-         (PROG (#2=#:G523)
+         (PROG (#2=#:G107)
            (RETURN
             (COND
              ((LETT #2#
@@ -107,9 +107,9 @@
 
 (DEFUN |SparseMultivariatePolynomialExpressions;| (|#1|)
   (SPROG
-   ((#1=#:G521 NIL) (|pv$| NIL) (#2=#:G512 NIL) (#3=#:G514 NIL) (#4=#:G513 NIL)
-    (#5=#:G515 NIL) (#6=#:G516 NIL) (#7=#:G517 NIL) (#8=#:G518 NIL)
-    (#9=#:G519 NIL) (#10=#:G520 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+   ((#1=#:G105 NIL) (|pv$| NIL) (#2=#:G96 NIL) (#3=#:G98 NIL) (#4=#:G97 NIL)
+    (#5=#:G99 NIL) (#6=#:G100 NIL) (#7=#:G101 NIL) (#8=#:G102 NIL)
+    (#9=#:G103 NIL) (#10=#:G104 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT |dv$| (LIST '|SparseMultivariatePolynomialExpressions| DV$1))

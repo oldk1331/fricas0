@@ -5,7 +5,7 @@
 
 ; $dotdot := INTERN('"..", '"BOOT")
 
-(EVAL-WHEN (EVAL LOAD) (SETQ |$dotdot| (INTERN ".." "BOOT")))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$dotdot| (INTERN ".." "BOOT")))
 
 ; pf2Sex pf ==
 ;   intUnsetQuiet()

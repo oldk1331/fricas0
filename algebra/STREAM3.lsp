@@ -59,9 +59,9 @@
 
 (DECLAIM (NOTINLINE |StreamFunctions3;|)) 
 
-(DEFUN |StreamFunctions3| (&REST #1=#:G480)
+(DEFUN |StreamFunctions3| (&REST #1=#:G33)
   (SPROG NIL
-         (PROG (#2=#:G481)
+         (PROG (#2=#:G34)
            (RETURN
             (COND
              ((LETT #2#

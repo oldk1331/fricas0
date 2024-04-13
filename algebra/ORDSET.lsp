@@ -7,7 +7,7 @@
   (COND (|OrderedSet;AL|) (T (SETQ |OrderedSet;AL| (|OrderedSet;|))))) 
 
 (DEFUN |OrderedSet;| ()
-  (SPROG ((#1=#:G448 NIL))
+  (SPROG ((#1=#:G1 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|Comparable|) (|PartialOrder|)

@@ -8,10 +8,10 @@
         (T (SETQ |RealClosedField;AL| (|RealClosedField;|))))) 
 
 (DEFUN |RealClosedField;| ()
-  (SPROG ((#1=#:G457 NIL))
+  (SPROG ((#1=#:G17 NIL))
          (PROG1
              (LETT #1#
-                   (|subst_in_cat| '(#2=#:G454 #3=#:G455 #4=#:G456)
+                   (|subst_in_cat| '(#2=#:G14 #3=#:G15 #4=#:G16)
                                    (LIST '(|Fraction| (|Integer|)) '(|Integer|)
                                          '(|Fraction| (|Integer|)))
                                    (|Join| (|CharacteristicZero|)

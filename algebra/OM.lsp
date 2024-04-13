@@ -7,7 +7,7 @@
   (COND (|OpenMath;AL|) (T (SETQ |OpenMath;AL| (|OpenMath;|))))) 
 
 (DEFUN |OpenMath;| ()
-  (SPROG ((#1=#:G448 NIL))
+  (SPROG ((#1=#:G1 NIL))
          (PROG1
              (LETT #1#
                    (|Join|

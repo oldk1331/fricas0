@@ -1,7 +1,7 @@
 
 (SDEFUN |FRIDEAL2;fmap| ((|f| (|Mapping| F2 F1)) (|a| (A1)) (% (A2)))
         (SPROG
-         ((#1=#:G452 NIL) (#2=#:G454 NIL) (|i| NIL) (#3=#:G453 NIL)
+         ((#1=#:G11 NIL) (#2=#:G13 NIL) (|i| NIL) (#3=#:G12 NIL)
           (|v| (|Vector| F1)))
          (SEQ (LETT |v| (SPADCALL |a| (QREFELT % 15)))
               (EXIT
@@ -26,7 +26,7 @@
         ((|f| (|Mapping| R2 R1)) (|i| (|FractionalIdeal| R1 F1 U1 A1))
          (% (|FractionalIdeal| R2 F2 U2 A2)))
         (SPROG
-         ((#1=#:G461 NIL) (#2=#:G463 NIL) (|j| NIL) (#3=#:G462 NIL)
+         ((#1=#:G20 NIL) (#2=#:G22 NIL) (|j| NIL) (#3=#:G21 NIL)
           (|b| (|Vector| A1)))
          (SEQ (LETT |b| (SPADCALL |i| (QREFELT % 22)))
               (EXIT
@@ -63,9 +63,9 @@
 
 (DECLAIM (NOTINLINE |FractionalIdealFunctions2;|)) 
 
-(DEFUN |FractionalIdealFunctions2| (&REST #1=#:G464)
+(DEFUN |FractionalIdealFunctions2| (&REST #1=#:G23)
   (SPROG NIL
-         (PROG (#2=#:G465)
+         (PROG (#2=#:G24)
            (RETURN
             (COND
              ((LETT #2#

@@ -11,9 +11,9 @@
 
 (DECLAIM (NOTINLINE |DrawOptionFunctions1;|)) 
 
-(DEFUN |DrawOptionFunctions1| (#1=#:G459)
+(DEFUN |DrawOptionFunctions1| (#1=#:G16)
   (SPROG NIL
-         (PROG (#2=#:G460)
+         (PROG (#2=#:G17)
            (RETURN
             (COND
              ((LETT #2#
