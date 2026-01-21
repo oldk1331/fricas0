@@ -49,7 +49,6 @@
 (MAKEPROP '|GuessPolynomialInteger| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL (|GuessPolynomial| (|Integer|))
-              (|Mapping| 20 21 22) (|Symbol|)
               (|Mapping|
                (|Stream|
                 (|UnivariateFormalPowerSeries|
@@ -58,7 +57,7 @@
                 (|Fraction| (|Polynomial| (|Integer|)))))
               (|Mapping| (|Vector| (|U32Vector|)) (|List| (|U32Vector|))
                          (|Integer|) (|Integer|))
-              (|Mapping| 9 (|NonNegativeInteger|))
+              (|Mapping| 7 (|NonNegativeInteger|))
               (|Mapping|
                (|Vector|
                 (|UnivariateFormalPowerSeries|
@@ -69,9 +68,9 @@
                 (|SparseMultivariatePolynomial|
                  (|Fraction| (|Polynomial| (|Integer|)))
                  (|NonNegativeInteger|))))
-              (|Mapping| 11 (|List| (|PositiveInteger|)))
+              (|Mapping| 9 (|List| (|PositiveInteger|)))
               (|Mapping| (|Stream| (|Expression| (|Integer|)))
-                         (|Expression| (|Integer|)) 7)
+                         (|Expression| (|Integer|)) 24)
               (|Mapping| (|Polynomial| (|Integer|)) (|NonNegativeInteger|)
                          (|NonNegativeInteger|)
                          (|SparseUnivariatePolynomial|
@@ -84,18 +83,19 @@
                 (|SparseMultivariatePolynomial|
                  (|Fraction| (|Polynomial| (|Integer|)))
                  (|NonNegativeInteger|))))
-              (|Mapping| (|Expression| (|Integer|)) (|NonNegativeInteger|) 7
+              (|Mapping| (|Expression| (|Integer|)) (|NonNegativeInteger|) 24
                          (|Expression| (|Integer|)))
               (|Mapping| (|List| (|Polynomial| (|Integer|)))
                          (|NonNegativeInteger|))
               (|Record| (|:| |degreeStream| (|Stream| (|NonNegativeInteger|)))
-                        (|:| |guessStream| 8) (|:| |guessModGen| 10)
-                        (|:| |testGen| 12) (|:| |exprStream| 13) (|:| |kind| 7)
-                        (|:| |qvar| 7) (|:| A 14) (|:| AF 15) (|:| AX 16)
-                        (|:| C 17))
-              (|Mapping| 18 22) (|List| (|Expression| (|Integer|)))
-              (|List| (|Fraction| (|Polynomial| (|Integer|))))
-              (|List| (|GuessOption|)) (|List| 6) (|List| 7) (|List| 21))
+                        (|:| |guessStream| 6) (|:| |guessModGen| 8)
+                        (|:| |testGen| 10) (|:| |exprStream| 11)
+                        (|:| |kind| 24) (|:| |qvar| 24) (|:| A 12) (|:| AF 13)
+                        (|:| AX 14) (|:| C 15))
+              (|List| (|GuessOption|)) (|List| (|Expression| (|Integer|)))
+              (|List| (|Fraction| (|Polynomial| (|Integer|)))) (|List| 19)
+              (|Mapping| 18 19 17) (|List| 21) (|List| 24) (|Symbol|)
+              (|Mapping| 16 17))
            '#() 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -161,9 +161,9 @@
                                   (|Symbol|)))
                                 (AND
                                  (|has| (|Polynomial| (|Integer|))
-                                        (|RetractableTo| 7))
+                                        (|RetractableTo| 24))
                                  (|has| (|Fraction| (|Polynomial| (|Integer|)))
-                                        (|RetractableTo| 7))))
+                                        (|RetractableTo| 24))))
                               '((|guessBinRat|
                                  ((|Mapping|
                                    (|List| (|Expression| (|Integer|)))
@@ -172,9 +172,9 @@
                                   (|Symbol|)))
                                 (AND
                                  (|has| (|Polynomial| (|Integer|))
-                                        (|RetractableTo| 7))
+                                        (|RetractableTo| 24))
                                  (|has| (|Fraction| (|Polynomial| (|Integer|)))
-                                        (|RetractableTo| 7))))
+                                        (|RetractableTo| 24))))
                               '((|guessAlgDep|
                                  ((|List| (|Expression| (|Integer|)))
                                   (|List|
@@ -584,9 +584,9 @@
                                   (|Symbol|)))
                                 (AND
                                  (|has| (|Polynomial| (|Integer|))
-                                        (|RetractableTo| 7))
+                                        (|RetractableTo| 24))
                                  (|has| (|Fraction| (|Polynomial| (|Integer|)))
-                                        (|RetractableTo| 7))))
+                                        (|RetractableTo| 24))))
                               '((|diffHP|
                                  ((|Mapping|
                                    (|Record|
@@ -655,9 +655,9 @@
                                   (|Symbol|)))
                                 (AND
                                  (|has| (|Polynomial| (|Integer|))
-                                        (|RetractableTo| 7))
+                                        (|RetractableTo| 24))
                                  (|has| (|Fraction| (|Polynomial| (|Integer|)))
-                                        (|RetractableTo| 7))))
+                                        (|RetractableTo| 24))))
                               '((|guessRec|
                                  ((|Mapping|
                                    (|List| (|Expression| (|Integer|)))
@@ -666,9 +666,9 @@
                                   (|Symbol|)))
                                 (AND
                                  (|has| (|Polynomial| (|Integer|))
-                                        (|RetractableTo| 7))
+                                        (|RetractableTo| 24))
                                  (|has| (|Fraction| (|Polynomial| (|Integer|)))
-                                        (|RetractableTo| 7))))
+                                        (|RetractableTo| 24))))
                               '((|guessPRec|
                                  ((|Mapping|
                                    (|List| (|Expression| (|Integer|)))
@@ -677,9 +677,9 @@
                                   (|Symbol|)))
                                 (AND
                                  (|has| (|Polynomial| (|Integer|))
-                                        (|RetractableTo| 7))
+                                        (|RetractableTo| 24))
                                  (|has| (|Fraction| (|Polynomial| (|Integer|)))
-                                        (|RetractableTo| 7))))
+                                        (|RetractableTo| 24))))
                               '((|guessRat|
                                  ((|Mapping|
                                    (|List| (|Expression| (|Integer|)))
@@ -688,9 +688,9 @@
                                   (|Symbol|)))
                                 (AND
                                  (|has| (|Polynomial| (|Integer|))
-                                        (|RetractableTo| 7))
+                                        (|RetractableTo| 24))
                                  (|has| (|Fraction| (|Polynomial| (|Integer|)))
-                                        (|RetractableTo| 7))))
+                                        (|RetractableTo| 24))))
                               '((|guessADE|
                                  ((|Mapping|
                                    (|List| (|Expression| (|Integer|)))
@@ -699,9 +699,9 @@
                                   (|Symbol|)))
                                 (AND
                                  (|has| (|Polynomial| (|Integer|))
-                                        (|RetractableTo| 7))
+                                        (|RetractableTo| 24))
                                  (|has| (|Fraction| (|Polynomial| (|Integer|)))
-                                        (|RetractableTo| 7))))
+                                        (|RetractableTo| 24))))
                               '((|guessHolo|
                                  ((|Mapping|
                                    (|List| (|Expression| (|Integer|)))
@@ -710,11 +710,9 @@
                                   (|Symbol|)))
                                 (AND
                                  (|has| (|Polynomial| (|Integer|))
-                                        (|RetractableTo| 7))
+                                        (|RetractableTo| 24))
                                  (|has| (|Fraction| (|Polynomial| (|Integer|)))
-                                        (|RetractableTo| 7)))))
+                                        (|RetractableTo| 24)))))
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| -999999 'NIL))))
            '|lookupIncomplete|)) 
-
-(MAKEPROP '|GuessPolynomialInteger| 'NILADIC T) 

@@ -19,5 +19,3 @@
                        ((|sec| (% %)) T) ((|sin| (% %)) T) ((|tan| (% %)) T))
                      NIL NIL NIL)))
            (SETELT #1# 0 '(|TrigonometricFunctionCategory|))))) 
-
-(MAKEPROP '|TrigonometricFunctionCategory| 'NILADIC T) 

@@ -132,11 +132,11 @@
         ((|b| (S)) (|x| (S))
          (% (|Union| (|SparseUnivariatePolynomial| F) "failed")))
         (SPROG
-         ((|p| #1=(|SparseUnivariatePolynomial| F)) (#2=#:G92 NIL)
-          (#3=#:G91 #1#) (#4=#:G93 #1#) (#5=#:G102 NIL) (|i| NIL)
-          (|rown| (|Integer|)) (#6=#:G101 NIL) (|v| (|Vector| F))
+         ((|p| #1=(|SparseUnivariatePolynomial| F)) (#2=#:G84 NIL)
+          (#3=#:G83 #1#) (#4=#:G85 #1#) (#5=#:G94 NIL) (|i| NIL)
+          (|rown| (|Integer|)) (#6=#:G93 NIL) (|v| (|Vector| F))
           (|m1| (|Matrix| F)) (|l| (|List| (|List| F))) (|a| (S))
-          (#7=#:G100 NIL) (|extdeg| (|NonNegativeInteger|)))
+          (#7=#:G92 NIL) (|extdeg| (|NonNegativeInteger|)))
          (SEQ
           (COND
            ((SPADCALL |x| (|spadConstant| % 8) (QREFELT % 48))
@@ -209,7 +209,7 @@
 
 (SDEFUN |FAXF-;linearAssociatedLog;SSup;13|
         ((|x| (S)) (% (|SparseUnivariatePolynomial| F)))
-        (SPROG ((#1=#:G104 NIL))
+        (SPROG ((#1=#:G96 NIL))
                (PROG2
                    (LETT #1#
                          (SPADCALL (SPADCALL (QREFELT % 71)) |x|
@@ -225,9 +225,9 @@
 (SDEFUN |FAXF-;linearAssociatedOrder;SSup;14|
         ((|x| (S)) (% (|SparseUnivariatePolynomial| F)))
         (SPROG
-         ((#1=#:G111 NIL) (#2=#:G110 #3=(|SparseUnivariatePolynomial| F))
-          (#4=#:G112 #3#) (#5=#:G116 NIL) (|i| NIL) (|v| (|Vector| F))
-          (|l| (|List| (|List| F))) (|a| (S)) (#6=#:G115 NIL))
+         ((#1=#:G103 NIL) (#2=#:G102 #3=(|SparseUnivariatePolynomial| F))
+          (#4=#:G104 #3#) (#5=#:G108 NIL) (|i| NIL) (|v| (|Vector| F))
+          (|l| (|List| (|List| F))) (|a| (S)) (#6=#:G107 NIL))
          (SEQ
           (COND
            ((SPADCALL |x| (|spadConstant| % 8) (QREFELT % 48))
@@ -308,7 +308,7 @@
 
 (SDEFUN |FAXF-;norm;SPiS;17| ((|e| (S)) (|s| (|PositiveInteger|)) (% (S)))
         (SPROG
-         ((#1=#:G132 NIL) (|pow| (|Integer|))
+         ((#1=#:G124 NIL) (|pow| (|Integer|))
           (|qr|
            (|Record| (|:| |quotient| (|NonNegativeInteger|))
                      (|:| |remainder| (|NonNegativeInteger|)))))
@@ -333,7 +333,7 @@
 
 (SDEFUN |FAXF-;trace;SPiS;18| ((|e| (S)) (|s| (|PositiveInteger|)) (% (S)))
         (SPROG
-         ((|a| (S)) (#1=#:G142 NIL) (|i| NIL) (|q| (|NonNegativeInteger|))
+         ((|a| (S)) (#1=#:G134 NIL) (|i| NIL) (|q| (|NonNegativeInteger|))
           (|qr|
            (|Record| (|:| |quotient| (|NonNegativeInteger|))
                      (|:| |remainder| (|NonNegativeInteger|)))))
@@ -364,7 +364,7 @@
 
 (SDEFUN |FAXF-;createNormalElement;S;20| ((% (S)))
         (SPROG
-         ((#1=#:G152 NIL) (#2=#:G153 NIL) (|res| (S)) (#3=#:G146 NIL)
+         ((#1=#:G144 NIL) (#2=#:G145 NIL) (|res| (S)) (#3=#:G138 NIL)
           (|i| NIL))
          (SEQ
           (EXIT
@@ -394,8 +394,8 @@
                                    (LETT #1#
                                          (PROGN
                                           (LETT #2# |res|)
-                                          (GO #4=#:G151)))
-                                   (GO #5=#:G148)))))
+                                          (GO #4=#:G143)))
+                                   (GO #5=#:G140)))))
                           (GO #5#)))))))
                     #5# (EXIT #1#))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
@@ -404,8 +404,8 @@
 
 (SDEFUN |FAXF-;normal?;SB;21| ((|x| (S)) (% (|Boolean|)))
         (SPROG
-         ((|f| #1=(|SparseUnivariatePolynomial| S)) (#2=#:G155 NIL)
-          (#3=#:G154 #1#) (#4=#:G156 #1#) (#5=#:G159 NIL) (|i| NIL)
+         ((|f| #1=(|SparseUnivariatePolynomial| S)) (#2=#:G147 NIL)
+          (#3=#:G146 #1#) (#4=#:G148 #1#) (#5=#:G151 NIL) (|i| NIL)
           (|p| (|SparseUnivariatePolynomial| S)))
          (SEQ
           (LETT |p|
@@ -650,12 +650,12 @@
                                               0 101 2 81 0 0 0 102 0 81 0 103 2
                                               81 34 0 0 104 1 0 34 0 105 2 6 34
                                               0 0 106 1 0 11 0 107 1 0 34 0 36
-                                              0 0 21 22 2 0 0 0 11 93 1 0 7 0
-                                              40 0 0 21 94 1 0 0 14 20 1 0 34 0
-                                              105 2 0 0 0 11 92 1 0 7 0 42 2 0
-                                              86 0 11 87 1 0 43 0 76 2 0 69 0 0
-                                              70 1 0 43 0 73 2 0 0 0 43 47 0 0
-                                              11 37 0 0 23 25 1 0 11 0 107 1 0
-                                              23 0 27 0 0 0 99 1 0 31 9 33 1 0
+                                              0 0 21 22 1 0 7 0 40 2 0 0 0 11
+                                              93 0 0 21 94 1 0 0 14 20 1 0 34 0
+                                              105 1 0 7 0 42 2 0 0 0 11 92 2 0
+                                              86 0 11 87 1 0 43 0 76 1 0 43 0
+                                              73 2 0 69 0 0 70 2 0 0 0 43 47 0
+                                              0 23 25 0 0 11 37 1 0 23 0 27 1 0
+                                              11 0 107 0 0 0 99 1 0 31 9 33 1 0
                                               78 0 79 1 0 34 0 35)))))
            '|lookupComplete|)) 

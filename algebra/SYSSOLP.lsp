@@ -609,7 +609,7 @@
         ((|pol| (|Fraction| (|Polynomial| R))) (|var| (|Symbol|))
          (% (|List| (|Equation| (|Fraction| (|Polynomial| R))))))
         (SPROG
-         ((#1=#:G140 NIL) (|ff| NIL) (#2=#:G139 NIL)
+         ((#1=#:G132 NIL) (|ff| NIL) (#2=#:G131 NIL)
           (|fp| (|Factored| (|Polynomial| R))) (|p| (|Polynomial| R)))
          (SEQ
           (COND
@@ -643,7 +643,7 @@
 (SDEFUN |SYSSOLP;makePolys|
         ((|l| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))
          (% (|List| (|Fraction| (|Polynomial| R)))))
-        (SPROG ((#1=#:G145 NIL) (|e| NIL) (#2=#:G144 NIL))
+        (SPROG ((#1=#:G137 NIL) (|e| NIL) (#2=#:G136 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -673,7 +673,7 @@
           (#1=#:G169 NIL) (|i| NIL) (#2=#:G168 NIL)
           (|sym| (|Fraction| (|Polynomial| R))) (#3=#:G167 NIL) (|p| NIL)
           (|zeron| (|Vector| (|Fraction| (|Polynomial| R))))
-          (|rhs| (|Vector| (|Fraction| (|Polynomial| R)))) (#4=#:G153 NIL)
+          (|rhs| (|Vector| (|Fraction| (|Polynomial| R)))) (#4=#:G145 NIL)
           (|rec|
            (|Record|
             (|:| |particular|
@@ -1161,8 +1161,9 @@
                                               0 76 9 80 2 11 17 0 76 81 2 36 0
                                               9 9 82 2 56 0 0 0 83 2 11 0 0 0
                                               84 2 7 25 0 11 90 2 56 36 0 76 91
-                                              2 0 50 51 11 52 2 0 85 56 11 89 2
-                                              0 85 51 11 86 1 0 85 56 88 1 0 85
-                                              51 87 2 0 56 36 17 63 2 0 56 9 17
-                                              57 1 0 56 9 58 1 0 56 36 62)))))
+                                              2 0 50 51 11 52 1 0 56 36 62 1 0
+                                              56 9 58 2 0 56 9 17 57 2 0 56 36
+                                              17 63 1 0 85 51 87 1 0 85 56 88 2
+                                              0 85 51 11 86 2 0 85 56 11
+                                              89)))))
            '|lookupComplete|)) 

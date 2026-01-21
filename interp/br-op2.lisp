@@ -12,7 +12,7 @@
 ;     bcConform(u,true)
 ;   htSay
 ;     key = 'is => '"the domain "
-;     kind := GETDATABASE(opOf u,'CONSTRUCTORKIND)
+;     kind := get_database(opOf(u), 'CONSTRUCTORKIND)
 ;     kind = 'domain => '"an element of "
 ;     '"a domain of "
 ;   u is ['Join,:middle,r] =>
@@ -59,7 +59,7 @@
          (COND ((EQ |key| '|is|) "the domain ")
                (#1#
                 (PROGN
-                 (SETQ |kind| (GETDATABASE (|opOf| |u|) 'CONSTRUCTORKIND))
+                 (SETQ |kind| (|get_database| (|opOf| |u|) 'CONSTRUCTORKIND))
                  (COND ((EQ |kind| '|domain|) "an element of ")
                        (#1# "a domain of "))))))
         (COND
@@ -406,8 +406,8 @@
 ;     x
 ;   name := opOf typ
 ;   kind :=
-;     name = "%" => 'domain
-;     GETDATABASE(name,'CONSTRUCTORKIND)
+;         name = "%" => 'domain
+;         get_database(name, 'CONSTRUCTORKIND)
 ;   s := PNAME opOf typ
 ;   kind ~= 'category =>
 ;     anySubstring?('"Integer",s,0) or anySubstring?('"Number",s,0) =>
@@ -441,7 +441,7 @@
         (SETQ |name| (|opOf| |typ|))
         (SETQ |kind|
                 (COND ((EQ |name| '%) '|domain|)
-                      (#1# (GETDATABASE |name| 'CONSTRUCTORKIND))))
+                      (#1# (|get_database| |name| 'CONSTRUCTORKIND))))
         (SETQ |s| (PNAME (|opOf| |typ|)))
         (COND
          ((NOT (EQ |kind| '|category|))
@@ -1113,7 +1113,7 @@
 ;     subargs: local := args
 ;     ----------> new <------------------
 ;     u := koCatOps(conform,domname) => u
-; --    'category = GETDATABASE(conname,'CONSTRUCTORKIND) =>
+; --    'category = get_database(conname, 'CONSTRUCTORKIND) =>
 ; --        koCatOps(conform,domname)
 ;     asharpConstructorName? opOf conform => nil
 ;     ----------> new <------------------
@@ -1341,7 +1341,7 @@
 
 ; koCatOps(conform,domname) ==
 ;   conname := opOf conform
-;   oplist := REVERSE GETDATABASE(conname,'OPERATIONALIST)
+;   oplist := REVERSE(get_database(conname, 'OPERATIONALIST))
 ;   oplist := sublisFormal(IFCDR domname or IFCDR conform ,oplist)
 ;   --check below for INTEGERP key to avoid subsumed signatures
 ;   [[zeroOneConvert op,:nalist] for [op,:alist] in oplist | nalist := koCatOps1(alist)]
@@ -1351,7 +1351,7 @@
     (RETURN
      (PROGN
       (SETQ |conname| (|opOf| |conform|))
-      (SETQ |oplist| (REVERSE (GETDATABASE |conname| 'OPERATIONALIST)))
+      (SETQ |oplist| (REVERSE (|get_database| |conname| 'OPERATIONALIST)))
       (SETQ |oplist|
               (|sublisFormal| (OR (IFCDR |domname|) (IFCDR |conform|))
                |oplist|))
@@ -1809,7 +1809,7 @@
 ;   null(candidates) => nil
 ;   [ofWord,id,cform] := first(candidates)
 ;   if #candidates > 1 and ofWord = 'ofCategory and _
-;        null(GETDATABASE(opOf cform, 'MODEMAPS)) then
+;        null(get_database(opOf(cform), 'MODEMAPS)) then
 ;      [ofWord,id,cform] := first(rest(candidates))
 ;   conform := getConstructorForm opOf cform
 ;   ofWord = 'ofCategory =>
@@ -1848,7 +1848,7 @@
               (SETQ |cform| (CADDR . #2#))
               (COND
                ((AND (< 1 (LENGTH |candidates|)) (EQ |ofWord| '|ofCategory|)
-                     (NULL (GETDATABASE (|opOf| |cform|) 'MODEMAPS)))
+                     (NULL (|get_database| (|opOf| |cform|) 'MODEMAPS)))
                 (SETQ |LETTMP#1| (CAR (CDR |candidates|)))
                 (SETQ |ofWord| (CAR |LETTMP#1|))
                 (SETQ |id| (CADR . #3=(|LETTMP#1|)))

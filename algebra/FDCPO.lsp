@@ -51,25 +51,25 @@
           (LIST
            '#(NIL NIL NIL NIL NIL (|FinitePoset| 6) (|local| |#1|)
               (|Union| 8 '"failed") (|NonNegativeInteger|) (0 . |joinIfCan|)
-              (|Boolean|) (7 . =) |FDCPO;join;%3Nni;1|
-              (|IncidenceAlgebra| 19 6) (|List| 8) (|Void|) (|List| 6)
-              (|List| (|List| 10)) (|Mapping| 10 6 6) (|Integer|) (|String|)
-              (|List| %) (|Scene| (|SCartesian| '2)) (|Matrix| 19) (|Matrix| 8)
-              (|List| (|Loop|)) (|List| 27) (|Tree| 19) (|DirectedGraph| %)
-              (|Record| (|:| |name| 20) (|:| |arrType| 8) (|:| |fromOb| 8)
-                        (|:| |toOb| 8) (|:| |xOffset| 19) (|:| |yOffset| 19)
-                        (|:| |map| 14))
-              (|List| 29)
+              (|Boolean|) (7 . =) |FDCPO;join;%3Nni;1| (|String|)
+              (|OutputForm|)
               (|Record| (|:| |value| 6) (|:| |posX| 8) (|:| |posY| 8))
-              (|List| 31) (|OutputForm|))
+              (|Record| (|:| |name| 13) (|:| |arrType| 8) (|:| |fromOb| 8)
+                        (|:| |toOb| 8) (|:| |xOffset| 22) (|:| |yOffset| 22)
+                        (|:| |map| 17))
+              (|List| 8) (|List| 15) (|List| 16) (|DirectedGraph| %) (|List| 6)
+              (|Integer|) (|List| 24) (|Tree| 22) (|List| (|Loop|))
+              (|Matrix| 8) (|Matrix| 22) (|Void|) (|Scene| (|SCartesian| '2))
+              (|List| %) (|List| (|List| 10)) (|Mapping| 10 6 6)
+              (|IncidenceAlgebra| 22 6))
            '#(|joinIfCan| 13 |join| 20) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0))
                  (CONS
-                  '#(NIL |Poset&| NIL |FiniteGraph&| |SetCategory&|
-                     |BasicType&| NIL)
+                  '#(NIL |Poset&| NIL |FiniteGraph&| |SetCategory&| NIL
+                     |BasicType&|)
                   (CONS
                    '#((|Dcpo| 6) (|Poset| 6) (|Preorder| 6) (|FiniteGraph| 6)
-                      (|SetCategory|) (|BasicType|) (|CoercibleTo| 33))
+                      (|SetCategory|) (|CoercibleTo| 14) (|BasicType|))
                    (|makeByteWordVec2| 12
                                        '(3 0 7 0 8 8 9 2 7 10 0 0 11 3 0 7 0 8
                                          8 9 3 0 8 0 8 8 12)))))

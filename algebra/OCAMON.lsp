@@ -16,5 +16,3 @@
                    (|Join| (|OrderedAbelianMonoid|)
                            (|CancellationAbelianMonoid|)))
            (SETELT #1# 0 '(|OrderedCancellationAbelianMonoid|))))) 
-
-(MAKEPROP '|OrderedCancellationAbelianMonoid| 'NILADIC T) 

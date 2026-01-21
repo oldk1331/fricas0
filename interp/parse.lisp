@@ -115,7 +115,7 @@
 ;   mkand [['has,x,u] for u in fn y] where
 ;     mkand x ==
 ;       x is [a] => a
-;       ["and",:x]
+;       parseAnd(x)
 ;     fn y ==
 ;       y is [":" ,op,['Mapping,:map]] =>
 ;          op:= (STRINGP op => INTERN op; op)
@@ -146,7 +146,7 @@
      (COND
       ((AND (CONSP |x|) (EQ (CDR |x|) NIL) (PROGN (SETQ |a| (CAR |x|)) #1='T))
        |a|)
-      (#1# (CONS '|and| |x|))))))
+      (#1# (|parseAnd| |x|))))))
 (DEFUN |parseHas,fn| (|y|)
   (PROG (|ISTMP#1| |op| |ISTMP#2| |ISTMP#3| |map| |u|)
     (RETURN

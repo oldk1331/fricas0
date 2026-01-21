@@ -3,10 +3,6 @@
 
 (IN-PACKAGE "BOOT")
 
-; $returnNowhereFromGoGet := false
-
-(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$returnNowhereFromGoGet| NIL))
-
 ; showSummary dom ==
 ;   showPredicates dom
 ;   showAttributes dom
@@ -27,7 +23,7 @@
 ;   missingOnlyFlag := IFCAR options
 ;   domainForm := devaluate dom
 ;   [nam, :.] := domainForm
-;   $predicateList: local := GETDATABASE(nam,'PREDICATES)
+;   $predicateList : local := get_database(nam, 'PREDICATES)
 ;   u := getDomainOpTable(dom,true)
 ;   --sort into 4 groups: domain exports, unexports, default exports, others
 ;   for (x := [.,.,:key]) in u repeat
@@ -77,7 +73,7 @@
       (SETQ |missingOnlyFlag| (IFCAR |options|))
       (SETQ |domainForm| (|devaluate| |dom|))
       (SETQ |nam| (CAR |domainForm|))
-      (SETQ |$predicateList| (GETDATABASE |nam| 'PREDICATES))
+      (SETQ |$predicateList| (|get_database| |nam| 'PREDICATES))
       (SETQ |u| (|getDomainOpTable| |dom| T))
       ((LAMBDA (|bfVar#1| |x|)
          (LOOP
@@ -172,7 +168,7 @@
 ;   alist := nil
 ;   domainForm := devaluate D
 ;   [nam,:.] := domainForm
-;   $predicateList: local := GETDATABASE(nam,'PREDICATES)
+;   $predicateList : local := get_database(nam, 'PREDICATES)
 ;   for (opSig := [op,sig]) in getDomainSigs1(D,ops) repeat
 ;     u := from?(D,op,sig)
 ;     x := ASSOC(u,alist) => RPLACD(x,[opSig,:rest x])
@@ -191,7 +187,7 @@
       (SETQ |alist| NIL)
       (SETQ |domainForm| (|devaluate| D))
       (SETQ |nam| (CAR |domainForm|))
-      (SETQ |$predicateList| (GETDATABASE |nam| 'PREDICATES))
+      (SETQ |$predicateList| (|get_database| |nam| 'PREDICATES))
       ((LAMBDA (|bfVar#2| |opSig|)
          (LOOP
           (COND
@@ -249,7 +245,7 @@
 ; getDomainOps D ==
 ;   domname := D.0
 ;   conname := first domname
-;   $predicateList: local := GETDATABASE(conname,'PREDICATES)
+;   $predicateList : local := get_database(conname, 'PREDICATES)
 ;   REMDUP listSort(function GLESSEQP,ASSOCLEFT getDomainOpTable(D,nil))
 
 (DEFUN |getDomainOps| (D)
@@ -259,14 +255,14 @@
      (PROGN
       (SETQ |domname| (ELT D 0))
       (SETQ |conname| (CAR |domname|))
-      (SETQ |$predicateList| (GETDATABASE |conname| 'PREDICATES))
+      (SETQ |$predicateList| (|get_database| |conname| 'PREDICATES))
       (REMDUP
        (|listSort| #'GLESSEQP (ASSOCLEFT (|getDomainOpTable| D NIL))))))))
 
 ; getDomainSigs(D,:option) ==
 ;   domname := D.0
 ;   conname := first domname
-;   $predicateList: local := GETDATABASE(conname,'PREDICATES)
+;   $predicateList : local := get_database(conname, 'PREDICATES)
 ;   getDomainSigs1(D,first option)
 
 (DEFUN |getDomainSigs| (D &REST |option|)
@@ -276,7 +272,7 @@
      (PROGN
       (SETQ |domname| (ELT D 0))
       (SETQ |conname| (CAR |domname|))
-      (SETQ |$predicateList| (GETDATABASE |conname| 'PREDICATES))
+      (SETQ |$predicateList| (|get_database| |conname| 'PREDICATES))
       (|getDomainSigs1| D (CAR |option|))))))
 
 ; getDomainSigs1(D,ops) == listSort(function GLESSEQP,u) where
@@ -301,7 +297,7 @@
 ; getDomainDocs(D,:option) ==
 ;   domname := D.0
 ;   conname := first domname
-;   $predicateList: local := GETDATABASE(conname,'PREDICATES)
+;   $predicateList : local := get_database(conname, 'PREDICATES)
 ;   ops := IFCAR option
 ;   [[op,sig,:getInheritanceByDoc(D,op,sig)] for [op,sig] in getDomainSigs1(D,ops)]
 
@@ -312,7 +308,7 @@
      (PROGN
       (SETQ |domname| (ELT D 0))
       (SETQ |conname| (CAR |domname|))
-      (SETQ |$predicateList| (GETDATABASE |conname| 'PREDICATES))
+      (SETQ |$predicateList| (|get_database| |conname| 'PREDICATES))
       (SETQ |ops| (IFCAR |option|))
       ((LAMBDA (|bfVar#11| |bfVar#10| |bfVar#9|)
          (LOOP
@@ -498,32 +494,33 @@
           '(NIL NIL))))))
 
 ; getDocDomainForOpSig(op,sig,dollar,D) ==
-;   (u := LASSOC(op, GETDATABASE(first dollar, 'DOCUMENTATION)))
+;   (u := LASSOC(op, get_database(first(dollar), 'DOCUMENTATION)))
 ;     and (doc := or/[[d,dollar] for [s,:d] in u | compareSig(sig,s,D,dollar)])
 
 (DEFUN |getDocDomainForOpSig| (|op| |sig| |dollar| D)
   (PROG (|u| |s| |d| |doc|)
     (RETURN
-     (AND (SETQ |u| (LASSOC |op| (GETDATABASE (CAR |dollar|) 'DOCUMENTATION)))
-          (SETQ |doc|
-                  ((LAMBDA (|bfVar#21| |bfVar#20| |bfVar#19|)
-                     (LOOP
-                      (COND
-                       ((OR (ATOM |bfVar#20|)
-                            (PROGN (SETQ |bfVar#19| (CAR |bfVar#20|)) NIL))
-                        (RETURN |bfVar#21|))
-                       (#1='T
-                        (AND (CONSP |bfVar#19|)
-                             (PROGN
-                              (SETQ |s| (CAR |bfVar#19|))
-                              (SETQ |d| (CDR |bfVar#19|))
-                              #1#)
-                             (|compareSig| |sig| |s| D |dollar|)
-                             (PROGN
-                              (SETQ |bfVar#21| (LIST |d| |dollar|))
-                              (COND (|bfVar#21| (RETURN |bfVar#21|)))))))
-                      (SETQ |bfVar#20| (CDR |bfVar#20|))))
-                   NIL |u| NIL))))))
+     (AND
+      (SETQ |u| (LASSOC |op| (|get_database| (CAR |dollar|) 'DOCUMENTATION)))
+      (SETQ |doc|
+              ((LAMBDA (|bfVar#21| |bfVar#20| |bfVar#19|)
+                 (LOOP
+                  (COND
+                   ((OR (ATOM |bfVar#20|)
+                        (PROGN (SETQ |bfVar#19| (CAR |bfVar#20|)) NIL))
+                    (RETURN |bfVar#21|))
+                   (#1='T
+                    (AND (CONSP |bfVar#19|)
+                         (PROGN
+                          (SETQ |s| (CAR |bfVar#19|))
+                          (SETQ |d| (CDR |bfVar#19|))
+                          #1#)
+                         (|compareSig| |sig| |s| D |dollar|)
+                         (PROGN
+                          (SETQ |bfVar#21| (LIST |d| |dollar|))
+                          (COND (|bfVar#21| (RETURN |bfVar#21|)))))))
+                  (SETQ |bfVar#20| (CDR |bfVar#20|))))
+               NIL |u| NIL))))))
 
 ; showDomainsOp1(u,key) ==
 ;   while u and first u is [op, sig, : =key] repeat
@@ -615,7 +612,7 @@
 ;   sayBrightly '"--------------------Predicate summary-------------------"
 ;   conname := first(dom.0)
 ;   predvector := dom.3
-;   predicateList := GETDATABASE(conname,'PREDICATES)
+;   predicateList := get_database(conname, 'PREDICATES)
 ;   for i in 1.. for p in predicateList repeat
 ;     prefix :=
 ;       testBitVector(predvector,i) => '"true : "
@@ -630,7 +627,7 @@
        "--------------------Predicate summary-------------------")
       (SETQ |conname| (CAR (ELT |dom| 0)))
       (SETQ |predvector| (ELT |dom| 3))
-      (SETQ |predicateList| (GETDATABASE |conname| 'PREDICATES))
+      (SETQ |predicateList| (|get_database| |conname| 'PREDICATES))
       ((LAMBDA (|i| |bfVar#25| |p|)
          (LOOP
           (COND

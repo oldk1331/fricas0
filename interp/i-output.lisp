@@ -372,6 +372,22 @@
 
 (DEFVAR |$formattedFormat| NIL)
 
+; $LINELENGTH := 77
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ $LINELENGTH 77))
+
+; $MARGIN := 3
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ $MARGIN 3))
+
+; DEFCONST(BLANK, '" ")
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (PROG () (RETURN (DEFCONST BLANK " "))))
+
+; DEFCONST(UNDERBAR, '"__")
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (PROG () (RETURN (DEFCONST UNDERBAR "_"))))
+
 ; makeCharacter n == INTERN(NUM2USTR(n))
 
 (DEFUN |makeCharacter| (|n|) (PROG () (RETURN (INTERN (NUM2USTR |n|)))))
@@ -674,6 +690,19 @@
 
 (DEFUN |mathprint| (|x|)
   (PROG () (RETURN (PROGN (SETQ |x| (|outputTran2| |x|)) (|maprin| |x|)))))
+
+; mathprint2 x ==
+;   ioHook("startAlgebraOutput")
+;   mathprint x
+;   ioHook("endOfAlgebraOutput")
+
+(DEFUN |mathprint2| (|x|)
+  (PROG ()
+    (RETURN
+     (PROGN
+      (|ioHook| '|startAlgebraOutput|)
+      (|mathprint| |x|)
+      (|ioHook| '|endOfAlgebraOutput|)))))
 
 ; sayMath u ==
 ;   for x in u repeat acc:= concat(acc,linearFormatName x)
@@ -1103,7 +1132,7 @@
 ;   $linearFormatScripts : local := true
 ;
 ;   -- get the real names of the parameters
-;   alias := get(op, 'alias, $InteractiveFrame)
+;   alias := getI(op, 'alias)
 ;
 ;   rest l =>             -- if multiple forms, call repeatedly
 ;       ['SC, :[outputMapTran0(op, ll, alias) for ll in l]]
@@ -1122,7 +1151,7 @@
       (#1#
        (PROGN
         (SETQ |$linearFormatScripts| T)
-        (SETQ |alias| (|get| |op| '|alias| |$InteractiveFrame|))
+        (SETQ |alias| (|getI| |op| '|alias|))
         (COND
          ((CDR |l|)
           (CONS 'SC
@@ -3515,15 +3544,15 @@
 ;   rplac(rest l, nil)
 ;   [list, :splitConcat(x, maxWidth, nil, addBlankIfTrue)]
 
-(DEFUN |splitConcat| (LIST |maxWidth| |firstTimeIfTrue| |addBlankIfTrue|)
+(DEFUN |splitConcat| (|list| |maxWidth| |firstTimeIfTrue| |addBlankIfTrue|)
   (PROG (|totalWidth| |oneOrZero| |l| |maxW| |width| |x|)
     (RETURN
-     (COND ((NULL LIST) NIL)
+     (COND ((NULL |list|) NIL)
            (#1='T
             (PROGN
              (SETQ |totalWidth| 0)
              (SETQ |oneOrZero| (COND (|addBlankIfTrue| 1) (#1# 0)))
-             (SETQ |l| LIST)
+             (SETQ |l| |list|)
              (SETQ |maxW|
                      (COND (|firstTimeIfTrue| |maxWidth|)
                            (#1# (- |maxWidth| 2))))
@@ -3556,7 +3585,7 @@
                  |l|)
                 (SETQ |x| (CDR |l|))
                 (|rplac| (CDR |l|) NIL)
-                (CONS LIST
+                (CONS |list|
                       (|splitConcat| |x| |maxWidth| NIL
                        |addBlankIfTrue|)))))))))))
 
@@ -5527,14 +5556,17 @@
 ;             [LIST('CONCAT, '" ", y) for y in rest u] )
 ;   repeat
 ;     s := 0
+;     prev_x := nil
+;     last_x := nil
 ;     for x in tails u repeat
-;              lastx := x
+;              prev_x := last_x
+;              last_x := x
 ;              ((s := s + WIDTH first x + 1) >= linelength) => return(s)
 ;              null rest x => return(s := -1)
 ;     nil or
 ;        EQ(s, -1) => (nextu := nil)
-;        EQ(lastx, u) => ((nextu := rest u); RPLACD(u, nil) )
-;        true => ((nextu := lastx); RPLACD(PREDECESSOR(lastx, u), nil))
+;        EQ(last_x, u) => ((nextu := rest u); RPLACD(u, nil) )
+;        true => ((nextu := last_x); RPLACD(prev_x, nil))
 ;     for x in tails u repeat
 ;            RPLACA(x, LIST('CONCAT, first x, tchr))
 ;     if null nextu then RPLACA(CDDR last u, close)
@@ -5544,7 +5576,7 @@
 ;     null u => return(nil)
 
 (DEFUN |bracketagglist| (|u| |start| |linelength| |tchr| |open| |close|)
-  (PROG (|s| |lastx| |nextu|)
+  (PROG (|s| |prev_x| |last_x| |nextu|)
     (RETURN
      (PROGN
       (SETQ |u|
@@ -5566,12 +5598,15 @@
                 (#1#
                  (PROGN
                   (SETQ |s| 0)
+                  (SETQ |prev_x| NIL)
+                  (SETQ |last_x| NIL)
                   ((LAMBDA (|x|)
                      (LOOP
                       (COND ((ATOM |x|) (RETURN NIL))
                             (#1#
                              (PROGN
-                              (SETQ |lastx| |x|)
+                              (SETQ |prev_x| |last_x|)
+                              (SETQ |last_x| |x|)
                               (COND
                                ((NOT
                                  (< (SETQ |s| (+ (+ |s| (WIDTH (CAR |x|))) 1))
@@ -5582,12 +5617,12 @@
                    |u|)
                   (OR NIL
                       (COND ((EQ |s| (- 1)) (SETQ |nextu| NIL))
-                            ((EQ |lastx| |u|)
+                            ((EQ |last_x| |u|)
                              (PROGN (SETQ |nextu| (CDR |u|)) (RPLACD |u| NIL)))
                             (T
                              (PROGN
-                              (SETQ |nextu| |lastx|)
-                              (RPLACD (PREDECESSOR |lastx| |u|) NIL)))))
+                              (SETQ |nextu| |last_x|)
+                              (RPLACD |prev_x| NIL)))))
                   ((LAMBDA (|x|)
                      (LOOP
                       (COND ((ATOM |x|) (RETURN NIL))

@@ -114,7 +114,7 @@
               (104 . |addMatch|) (111 . |constant?|) (|Union| 29 '"failed")
               (116 . |retractIfCan|) (121 . =) (127 . |failed|)
               (|PatternMatchResult| 29 %) |RNS-;patternMatch;SP2Pmr;10|
-              (|DoubleFloat|) (|OutputForm|))
+              (|OutputForm|) (|DoubleFloat|))
            '#(|truncate| 131 |round| 136 |patternMatch| 141 |norm| 148
               |fractionPart| 153 |floor| 158 |convert| 163 |coerce| 168
               |characteristic| 173 |ceiling| 177)

@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |StringTable;|)) 
 
-(DEFUN |StringTable| (#1=#:G67)
+(DEFUN |StringTable| (#1=#:G65)
   (SPROG NIL
-         (PROG (#2=#:G68)
+         (PROG (#2=#:G66)
            (RETURN
             (COND
              ((LETT #2#
@@ -19,7 +19,7 @@
 
 (DEFUN |StringTable;| (|#1|)
   (SPROG
-   ((#1=#:G66 NIL) (#2=#:G65 NIL) (|pv$| NIL) (#3=#:G63 NIL) (#4=#:G64 NIL)
+   ((#1=#:G64 NIL) (#2=#:G63 NIL) (|pv$| NIL) (#3=#:G61 NIL) (#4=#:G62 NIL)
     (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -133,44 +133,44 @@
 
 (MAKEPROP '|StringTable| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL (|HashTable| 18 6 '"EQUAL") (|local| |#1|)
-              (|Record| (|:| |key| 18) (|:| |entry| 6)) (|List| 7) (|List| 10)
-              (|Equation| 7) (|Mapping| 7 7 7) (|NonNegativeInteger|)
-              (|Boolean|) (|Equation| 6) (|List| 14) (|List| 6) (|OutputForm|)
-              (|String|) (|InputForm|) (|Mapping| 13 6) (|Mapping| 13 6 6)
-              (|Mapping| 13 7) (|Mapping| 13 7 7) (|Mapping| 6 6) (|Void|)
-              (|Mapping| 7 7) (|Mapping| 6 6 6) (|List| 18)
-              (|Union| 6 '"failed") (|Union| 7 '"failed"))
+           '#(NIL NIL NIL NIL NIL (|HashTable| 14 6 '"EQUAL") (|local| |#1|)
+              (|Boolean|) (|NonNegativeInteger|)
+              (|Record| (|:| |key| 14) (|:| |entry| 6)) (|Mapping| 9 9)
+              (|List| 9) (|Union| 9 '"failed") (|Mapping| 7 9) (|String|)
+              (|List| 14) (|Union| 6 '"failed") (|List| 6) (|Mapping| 6 6)
+              (|Mapping| 6 6 6) (|Mapping| 9 9 9) (|List| 22) (|Equation| 6)
+              (|Equation| 9) (|List| 23) (|OutputForm|) (|Mapping| 7 9 9)
+              (|Mapping| 7 6 6) (|Mapping| 7 6) (|Void|) (|InputForm|))
            '#() 'NIL
            (CONS
             (|makeByteWordVec2| 13
-                                '(0 0 0 0 0 0 0 0 0 0 0 10 8 12 0 0 0 0 10 1 8
-                                  11 13))
+                                '(0 0 0 0 0 0 0 0 0 12 8 10 0 0 13 11 8 1 10 0
+                                  0 0 0))
             (CONS
              '#(|TableAggregate&| |KeyedDictionary&| |Dictionary&|
-                |DictionaryOperations&| |BagAggregate&| |Collection&|
-                |IndexedAggregate&| |HomogeneousAggregate&|
-                |HomogeneousAggregate&| |EltableAggregate&| |Aggregate&|
-                |Evalable&| |Evalable&| |SetCategory&| NIL NIL NIL NIL
-                |InnerEvalable&| NIL |InnerEvalable&| |BasicType&| NIL)
+                |DictionaryOperations&| |BagAggregate&| |IndexedAggregate&|
+                |Collection&| |HomogeneousAggregate&| |HomogeneousAggregate&|
+                |SetCategory&| |Evalable&| |Evalable&| |Aggregate&|
+                |EltableAggregate&| NIL |BasicType&| |InnerEvalable&| NIL
+                |InnerEvalable&| NIL NIL NIL NIL)
              (CONS
-              '#((|TableAggregate| 18 6) (|KeyedDictionary| 18 6)
-                 (|Dictionary| (|Record| (|:| |key| 18) (|:| |entry| 6)))
+              '#((|TableAggregate| 14 6) (|KeyedDictionary| 14 6)
+                 (|Dictionary| (|Record| (|:| |key| 14) (|:| |entry| 6)))
                  (|DictionaryOperations|
-                  (|Record| (|:| |key| 18) (|:| |entry| 6)))
-                 (|BagAggregate| (|Record| (|:| |key| 18) (|:| |entry| 6)))
-                 (|Collection| (|Record| (|:| |key| 18) (|:| |entry| 6)))
-                 (|IndexedAggregate| 18 6)
+                  (|Record| (|:| |key| 14) (|:| |entry| 6)))
+                 (|BagAggregate| (|Record| (|:| |key| 14) (|:| |entry| 6)))
+                 (|IndexedAggregate| 14 6)
+                 (|Collection| (|Record| (|:| |key| 14) (|:| |entry| 6)))
+                 (|HomogeneousAggregate| 6)
                  (|HomogeneousAggregate|
-                  (|Record| (|:| |key| 18) (|:| |entry| 6)))
-                 (|HomogeneousAggregate| 6) (|EltableAggregate| 18 6)
-                 (|Aggregate|)
-                 (|Evalable| (|Record| (|:| |key| 18) (|:| |entry| 6)))
-                 (|Evalable| 6) (|SetCategory|) (|finiteAggregate|)
-                 (|Eltable| 18 6) (|Type|) (|shallowlyMutable|)
-                 (|InnerEvalable| (|Record| (|:| |key| 18) (|:| |entry| 6))
-                                  (|Record| (|:| |key| 18) (|:| |entry| 6)))
-                 (|ConvertibleTo| 19) (|InnerEvalable| 6 6) (|BasicType|)
-                 (|CoercibleTo| 17))
+                  (|Record| (|:| |key| 14) (|:| |entry| 6)))
+                 (|SetCategory|) (|Evalable| 6)
+                 (|Evalable| (|Record| (|:| |key| 14) (|:| |entry| 6)))
+                 (|Aggregate|) (|EltableAggregate| 14 6) (|CoercibleTo| 25)
+                 (|BasicType|) (|InnerEvalable| 6 6) (|ConvertibleTo| 30)
+                 (|InnerEvalable| (|Record| (|:| |key| 14) (|:| |entry| 6))
+                                  (|Record| (|:| |key| 14) (|:| |entry| 6)))
+                 (|shallowlyMutable|) (|Type|) (|Eltable| 14 6)
+                 (|finiteAggregate|))
               (|makeByteWordVec2| -999999 'NIL))))
            '|lookupIncomplete|)) 

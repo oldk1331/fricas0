@@ -925,7 +925,6 @@
 ;     $topOp : local := nil
 ;     $semanticErrorStack : local := []
 ;     $warningStack : local := []
-;     $exitMode : local := $EmptyMode
 ;     $exitModeStack : local := []
 ;     $returnMode : local := $EmptyMode
 ;     $leaveLevelStack : local := []
@@ -946,16 +945,14 @@
   (PROG (|$previousTime| |$genSDVar| |$e| |$insideCapsuleFunctionIfTrue|
          |$insideCategoryIfTrue| |$insideWhereIfTrue| |$insideFunctorIfTrue|
          |$CategoryFrame| |$iterate_count| |$iterate_tag| |$leaveLevelStack|
-         |$returnMode| |$exitModeStack| |$exitMode| |$warningStack|
-         |$semanticErrorStack| |$topOp| |$postStack| |$compUniquelyIfTrue|
-         $MACROASSOC |$Index|)
+         |$returnMode| |$exitModeStack| |$warningStack| |$semanticErrorStack|
+         |$topOp| |$postStack| |$compUniquelyIfTrue| $MACROASSOC |$Index|)
     (DECLARE
      (SPECIAL |$previousTime| |$genSDVar| |$e| |$insideCapsuleFunctionIfTrue|
       |$insideCategoryIfTrue| |$insideWhereIfTrue| |$insideFunctorIfTrue|
       |$CategoryFrame| |$iterate_count| |$iterate_tag| |$leaveLevelStack|
-      |$returnMode| |$exitModeStack| |$exitMode| |$warningStack|
-      |$semanticErrorStack| |$topOp| |$postStack| |$compUniquelyIfTrue|
-      $MACROASSOC |$Index|))
+      |$returnMode| |$exitModeStack| |$warningStack| |$semanticErrorStack|
+      |$topOp| |$postStack| |$compUniquelyIfTrue| $MACROASSOC |$Index|))
     (RETURN
      (PROGN
       (SETQ |$Index| 0)
@@ -965,7 +962,6 @@
       (SETQ |$topOp| NIL)
       (SETQ |$semanticErrorStack| NIL)
       (SETQ |$warningStack| NIL)
-      (SETQ |$exitMode| |$EmptyMode|)
       (SETQ |$exitModeStack| NIL)
       (SETQ |$returnMode| |$EmptyMode|)
       (SETQ |$leaveLevelStack| NIL)
@@ -994,7 +990,7 @@
 ;     rhs is ['Vector,:l] => ['VectorCategory,:l]
 ;
 ;     rhs is [op, :argl] =>
-;         modemap := GETDATABASE(op, 'CONSTRUCTORMODEMAP)
+;         modemap := get_database(op, 'CONSTRUCTORMODEMAP)
 ;         modemap is [[form, sig, :.], [=true,.]] =>
 ;             pairlis:= [[v,:a] for a in argl for v in $FormalMapVariableList]
 ;             -- substitute
@@ -1049,7 +1045,7 @@
        ((AND (CONSP |rhs|)
              (PROGN (SETQ |op| (CAR |rhs|)) (SETQ |argl| (CDR |rhs|)) #1#))
         (PROGN
-         (SETQ |modemap| (GETDATABASE |op| 'CONSTRUCTORMODEMAP))
+         (SETQ |modemap| (|get_database| |op| 'CONSTRUCTORMODEMAP))
          (COND
           ((AND (CONSP |modemap|)
                 (PROGN
@@ -1137,7 +1133,6 @@
 ;     $topOp : local := nil
 ;     $semanticErrorStack : local := nil
 ;     $warningStack : local := nil
-;     $exitMode : local := $EmptyMode
 ;     $exitModeStack : local := []
 ;     $returnMode : local := $EmptyMode
 ;     $leaveLevelStack : local := []
@@ -1153,7 +1148,6 @@
 ;     $previousTime : local := get_run_time()
 ;     $s : local := nil
 ;     $x : local := nil
-;     $m : local := nil
 ;     null(x) => nil
 ;     $SaveParseOnly =>
 ;         x := walkForm(x)
@@ -1179,20 +1173,19 @@
 ;     TERPRI()
 
 (DEFUN |S_process| (|x|)
-  (PROG (|$m| |$x| |$s| |$previousTime| |$genSDVar| |$e|
+  (PROG (|$x| |$s| |$previousTime| |$genSDVar| |$e|
          |$insideCapsuleFunctionIfTrue| |$insideCategoryIfTrue|
          |$insideWhereIfTrue| |$insideFunctorIfTrue| |$CategoryFrame|
          |$iterate_count| |$iterate_tag| |$leaveLevelStack| |$returnMode|
-         |$exitModeStack| |$exitMode| |$warningStack| |$semanticErrorStack|
-         |$topOp| |$postStack| |$compUniquelyIfTrue| $MACROASSOC |$Index| |u|
-         |nform|)
+         |$exitModeStack| |$warningStack| |$semanticErrorStack| |$topOp|
+         |$postStack| |$compUniquelyIfTrue| $MACROASSOC |$Index| |u| |nform|)
     (DECLARE
-     (SPECIAL |$m| |$x| |$s| |$previousTime| |$genSDVar| |$e|
+     (SPECIAL |$x| |$s| |$previousTime| |$genSDVar| |$e|
       |$insideCapsuleFunctionIfTrue| |$insideCategoryIfTrue|
       |$insideWhereIfTrue| |$insideFunctorIfTrue| |$CategoryFrame|
       |$iterate_count| |$iterate_tag| |$leaveLevelStack| |$returnMode|
-      |$exitModeStack| |$exitMode| |$warningStack| |$semanticErrorStack|
-      |$topOp| |$postStack| |$compUniquelyIfTrue| $MACROASSOC |$Index|))
+      |$exitModeStack| |$warningStack| |$semanticErrorStack| |$topOp|
+      |$postStack| |$compUniquelyIfTrue| $MACROASSOC |$Index|))
     (RETURN
      (PROGN
       (SETQ |$Index| 0)
@@ -1202,7 +1195,6 @@
       (SETQ |$topOp| NIL)
       (SETQ |$semanticErrorStack| NIL)
       (SETQ |$warningStack| NIL)
-      (SETQ |$exitMode| |$EmptyMode|)
       (SETQ |$exitModeStack| NIL)
       (SETQ |$returnMode| |$EmptyMode|)
       (SETQ |$leaveLevelStack| NIL)
@@ -1218,7 +1210,6 @@
       (SETQ |$previousTime| (|get_run_time|))
       (SETQ |$s| NIL)
       (SETQ |$x| NIL)
-      (SETQ |$m| NIL)
       (COND ((NULL |x|) NIL)
             (|$SaveParseOnly|
              (PROGN

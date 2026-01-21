@@ -100,5 +100,3 @@
                                               0 12 1 0 10 0 11 1 0 8 0 9 2 0 13
                                               0 6 16)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|OpenMathConnection| 'NILADIC T) 

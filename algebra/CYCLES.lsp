@@ -817,5 +817,3 @@
                                               12 12 73 1 0 12 6 35 1 0 12 20
                                               79)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|CycleIndicators| 'NILADIC T) 

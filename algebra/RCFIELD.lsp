@@ -97,5 +97,3 @@
                                                T))
                                             NIL NIL NIL))))
            (SETELT #1# 0 '(|RealClosedField|))))) 
-
-(MAKEPROP '|RealClosedField| 'NILADIC T) 

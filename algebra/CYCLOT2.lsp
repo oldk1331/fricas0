@@ -1296,5 +1296,3 @@
                                               34 7 35 1 0 21 16 22 1 0 16 7 38
                                               1 0 45 7 47)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|CyclotomicUtilities| 'NILADIC T) 

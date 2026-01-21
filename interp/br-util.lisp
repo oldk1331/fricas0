@@ -47,10 +47,6 @@
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$conformsAreDomains| NIL))
 
-; $returnNowhereFromGoGet := false  --special branch out for goget for browser
-
-(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$returnNowhereFromGoGet| NIL))
-
 ; $dbDataFunctionAlist := nil       --set by dbGatherData
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$dbDataFunctionAlist| NIL))
@@ -570,7 +566,7 @@
              (|args2LispString,fnTailTail| (CDR |x|))))))))
 
 ; dbConstructorKind x ==
-;   target := CADAR GETDATABASE(x,'CONSTRUCTORMODEMAP)
+;   target := CADAR(get_database(x, 'CONSTRUCTORMODEMAP))
 ;   target = '(Category) => 'category
 ;   target is ['CATEGORY,'package,:.] => 'package
 ;   HGET($defaultPackageNamesHT,x) => 'default_ package
@@ -580,7 +576,7 @@
   (PROG (|target| |ISTMP#1|)
     (RETURN
      (PROGN
-      (SETQ |target| (CADAR (GETDATABASE |x| 'CONSTRUCTORMODEMAP)))
+      (SETQ |target| (CADAR (|get_database| |x| 'CONSTRUCTORMODEMAP)))
       (COND ((EQUAL |target| '(|Category|)) '|category|)
             ((AND (CONSP |target|) (EQ (CAR |target|) 'CATEGORY)
                   (PROGN
@@ -596,7 +592,7 @@
 ;   name = 'Record  => '(Record (_: a A) (_: b B))
 ;   name = 'Mapping => '(Mapping T S)
 ;   name = 'Enumeration => '(Enumeration a b)
-;   GETDATABASE(name,'CONSTRUCTORFORM)
+;   get_database(name, 'CONSTRUCTORFORM)
 
 (DEFUN |getConstructorForm| (|name|)
   (PROG ()
@@ -606,7 +602,7 @@
            ((EQ |name| '|Record|) '(|Record| (|:| |a| A) (|:| |b| B)))
            ((EQ |name| '|Mapping|) '(|Mapping| T S))
            ((EQ |name| '|Enumeration|) '(|Enumeration| |a| |b|))
-           ('T (GETDATABASE |name| 'CONSTRUCTORFORM))))))
+           ('T (|get_database| |name| 'CONSTRUCTORFORM))))))
 
 ; getConstructorArgs conname == rest getConstructorForm conname
 
@@ -832,7 +828,7 @@
 
 ; dbEvalableConstructor? form ==
 ;     form is [op,:argl] =>
-;         null(cosig := GETDATABASE(op, 'COSIG)) => false
+;         null(cosig := get_database(op, 'COSIG)) => false
 ;         cosig := rest cosig
 ;         #cosig ~= #argl => false
 ;         res := true
@@ -850,7 +846,7 @@
      (COND
       ((AND (CONSP |form|)
             (PROGN (SETQ |op| (CAR |form|)) (SETQ |argl| (CDR |form|)) #1='T))
-       (COND ((NULL (SETQ |cosig| (GETDATABASE |op| 'COSIG))) NIL)
+       (COND ((NULL (SETQ |cosig| (|get_database| |op| 'COSIG))) NIL)
              (#1#
               (PROGN
                (SETQ |cosig| (CDR |cosig|))
@@ -972,15 +968,15 @@
 (DEFUN |bcStarConform| (|form|)
   (PROG () (RETURN (PROGN (|bcStar| (|opOf| |form|)) (|bcConform| |form|)))))
 
-; asharpConstructorName? name ==
-;   u:= GETDATABASE(name,'SOURCEFILE)
-;   u and PATHNAME_-TYPE u = '"as"
+; asharpConstructorName?(name) ==
+;     u:= get_database(name, 'SOURCEFILE)
+;     u and PATHNAME_-TYPE u = '"as"
 
 (DEFUN |asharpConstructorName?| (|name|)
   (PROG (|u|)
     (RETURN
      (PROGN
-      (SETQ |u| (GETDATABASE |name| 'SOURCEFILE))
+      (SETQ |u| (|get_database| |name| 'SOURCEFILE))
       (AND |u| (EQUAL (PATHNAME-TYPE |u|) "as"))))))
 
 ; asharpConstructors() ==
@@ -1016,38 +1012,6 @@
       (COND ((EQUAL |k| |m|) (SUBSTRING |s| |i| NIL))
             ('T (|extractFileNameFromPath,fn| |s| (+ |k| 1) |m|)))))))
 
-; bcOpTable(u,fn) ==
-;   htBeginTable()
-;   for op in u for i in 0.. repeat
-;     htSay '"{"
-;     htMakePage [['bcLinks,[escapeSpecialChars STRINGIMAGE opOf op,'"",fn,i]]]
-;     htSay '"}"
-;   htEndTable()
-
-(DEFUN |bcOpTable| (|u| |fn|)
-  (PROG ()
-    (RETURN
-     (PROGN
-      (|htBeginTable|)
-      ((LAMBDA (|bfVar#14| |op| |i|)
-         (LOOP
-          (COND
-           ((OR (ATOM |bfVar#14|) (PROGN (SETQ |op| (CAR |bfVar#14|)) NIL))
-            (RETURN NIL))
-           ('T
-            (PROGN
-             (|htSay| "{")
-             (|htMakePage|
-              (LIST
-               (LIST '|bcLinks|
-                     (LIST (|escapeSpecialChars| (STRINGIMAGE (|opOf| |op|)))
-                           "" |fn| |i|))))
-             (|htSay| "}"))))
-          (SETQ |bfVar#14| (CDR |bfVar#14|))
-          (SETQ |i| (+ |i| 1))))
-       |u| NIL 0)
-      (|htEndTable|)))))
-
 ; bcNameConTable u ==
 ;   $bcMultipleNames: local := (#u ~= 1)
 ;   bcConTable REMDUP u
@@ -1074,10 +1038,10 @@
     (RETURN
      (PROGN
       (|htBeginTable|)
-      ((LAMBDA (|bfVar#15| |con|)
+      ((LAMBDA (|bfVar#14| |con|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#15|) (PROGN (SETQ |con| (CAR |bfVar#15|)) NIL))
+           ((OR (ATOM |bfVar#14|) (PROGN (SETQ |con| (CAR |bfVar#14|)) NIL))
             (RETURN NIL))
            ('T
             (PROGN
@@ -1085,7 +1049,7 @@
              (|bcStarSpace| (|opOf| |con|))
              (|bcConform| |con|)
              (|htSay| "}"))))
-          (SETQ |bfVar#15| (CDR |bfVar#15|))))
+          (SETQ |bfVar#14| (CDR |bfVar#14|))))
        |u| NIL)
       (|htEndTable|)))))
 
@@ -1104,10 +1068,10 @@
     (RETURN
      (PROGN
       (|htBeginTable|)
-      ((LAMBDA (|bfVar#16| |x|)
+      ((LAMBDA (|bfVar#15| |x|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#16|) (PROGN (SETQ |x| (CAR |bfVar#16|)) NIL))
+           ((OR (ATOM |bfVar#15|) (PROGN (SETQ |x| (CAR |bfVar#15|)) NIL))
             (RETURN NIL))
            (#1='T
             (COND
@@ -1118,7 +1082,7 @@
                     (AND (CONSP |ISTMP#1|)
                          (PROGN (SETQ |abb| (CAR |ISTMP#1|)) #1#))))
               (|htSay| "{") (|bcAbb| |con| |abb|) (|htSay| "}")))))
-          (SETQ |bfVar#16| (CDR |bfVar#16|))))
+          (SETQ |bfVar#15| (CDR |bfVar#15|))))
        (REMDUP |u|) NIL)
       (|htEndTable|)))))
 
@@ -1145,17 +1109,17 @@
      (PROGN
       (SETQ |italicList| (IFCAR |options|))
       (|htBeginTable|)
-      ((LAMBDA (|bfVar#18| |bfVar#17|)
+      ((LAMBDA (|bfVar#17| |bfVar#16|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#18|)
-                (PROGN (SETQ |bfVar#17| (CAR |bfVar#18|)) NIL))
+           ((OR (ATOM |bfVar#17|)
+                (PROGN (SETQ |bfVar#16| (CAR |bfVar#17|)) NIL))
             (RETURN NIL))
            (#1='T
-            (AND (CONSP |bfVar#17|)
+            (AND (CONSP |bfVar#16|)
                  (PROGN
-                  (SETQ |conform| (CAR |bfVar#17|))
-                  (SETQ |pred| (CDR |bfVar#17|))
+                  (SETQ |conform| (CAR |bfVar#16|))
+                  (SETQ |pred| (CDR |bfVar#16|))
                   #1#)
                  (PROGN
                   (|htSay| "{")
@@ -1178,7 +1142,7 @@
                   (COND
                    ((NOT (EQ |pred| '|etc|)) (|bcPred| |pred| |italicList|)))
                   (|htSay| "}")))))
-          (SETQ |bfVar#18| (CDR |bfVar#18|))))
+          (SETQ |bfVar#17| (CDR |bfVar#17|))))
        |u| NIL)
       (|htEndTable|)))))
 
@@ -1221,17 +1185,17 @@
             (PROGN (SETQ |op| (CAR |x|)) (SETQ |argl| (CDR |x|)) #1='T))
        (COND ((EQ |op| '|hasArgs|) |x|)
              ((MEMQ |op| '(AND OR NOT))
-              ((LAMBDA (|bfVar#20| |bfVar#19| |y|)
+              ((LAMBDA (|bfVar#19| |bfVar#18| |y|)
                  (LOOP
                   (COND
-                   ((OR (ATOM |bfVar#19|)
-                        (PROGN (SETQ |y| (CAR |bfVar#19|)) NIL))
-                    (RETURN |bfVar#20|))
+                   ((OR (ATOM |bfVar#18|)
+                        (PROGN (SETQ |y| (CAR |bfVar#18|)) NIL))
+                    (RETURN |bfVar#19|))
                    (#1#
                     (PROGN
-                     (SETQ |bfVar#20| (|extractHasArgs,find| |y|))
-                     (COND (|bfVar#20| (RETURN |bfVar#20|))))))
-                  (SETQ |bfVar#19| (CDR |bfVar#19|))))
+                     (SETQ |bfVar#19| (|extractHasArgs,find| |y|))
+                     (COND (|bfVar#19| (RETURN |bfVar#19|))))))
+                  (SETQ |bfVar#18| (CDR |bfVar#18|))))
                NIL |argl| NIL))
              (#1# NIL)))
       (#1# NIL)))))
@@ -1249,10 +1213,10 @@
     (RETURN
      (PROGN
       (SETQ |uncond| (SETQ |cond| NIL))
-      ((LAMBDA (|bfVar#21| |pair|)
+      ((LAMBDA (|bfVar#20| |pair|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#21|) (PROGN (SETQ |pair| (CAR |bfVar#21|)) NIL))
+           ((OR (ATOM |bfVar#20|) (PROGN (SETQ |pair| (CAR |bfVar#20|)) NIL))
             (RETURN NIL))
            (#1='T
             (AND (CONSP |pair|)
@@ -1265,44 +1229,9 @@
                             (AND (CONSP |pred|) (EQ (CAR |pred|) '|hasArgs|)))
                         (SETQ |uncond| (CONS |pair| |uncond|)))
                        (#1# (SETQ |cond| (CONS |pair| |cond|)))))))
-          (SETQ |bfVar#21| (CDR |bfVar#21|))))
+          (SETQ |bfVar#20| (CDR |bfVar#20|))))
        CONS NIL)
       (CONS (NREVERSE |uncond|) (NREVERSE |cond|))))))
-
-; bcNameTable(u,fn,:option) ==   --option if * prefix
-;   htSay '"\newline"
-;   htBeginTable()
-;   for x in u repeat
-;     htSay '"{"
-;     if IFCAR option then bcStar x
-;     htMakePage [['bcLinks,[s := escapeSpecialChars STRINGIMAGE x,'"",fn,s]]]
-;     htSay '"}"
-;   htEndTable()
-
-(DEFUN |bcNameTable| (|u| |fn| &REST |option|)
-  (PROG (|s|)
-    (RETURN
-     (PROGN
-      (|htSay| "\\newline")
-      (|htBeginTable|)
-      ((LAMBDA (|bfVar#22| |x|)
-         (LOOP
-          (COND
-           ((OR (ATOM |bfVar#22|) (PROGN (SETQ |x| (CAR |bfVar#22|)) NIL))
-            (RETURN NIL))
-           ('T
-            (PROGN
-             (|htSay| "{")
-             (COND ((IFCAR |option|) (|bcStar| |x|)))
-             (|htMakePage|
-              (LIST
-               (LIST '|bcLinks|
-                     (LIST (SETQ |s| (|escapeSpecialChars| (STRINGIMAGE |x|)))
-                           "" |fn| |s|))))
-             (|htSay| "}"))))
-          (SETQ |bfVar#22| (CDR |bfVar#22|))))
-       |u| NIL)
-      (|htEndTable|)))))
 
 ; bcNameCountTable(u, fn, gn) ==
 ;   linkFunction := 'bcLispLinks
@@ -1321,10 +1250,10 @@
       (SETQ |linkFunction| '|bcLispLinks|)
       (|htSay| "\\newline")
       (|htBeginTable|)
-      ((LAMBDA (|i| |bfVar#23| |x|)
+      ((LAMBDA (|i| |bfVar#21| |x|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#23|) (PROGN (SETQ |x| (CAR |bfVar#23|)) NIL))
+           ((OR (ATOM |bfVar#21|) (PROGN (SETQ |x| (CAR |bfVar#21|)) NIL))
             (RETURN NIL))
            ('T
             (PROGN
@@ -1334,19 +1263,9 @@
                (LIST |linkFunction| (LIST (FUNCALL |fn| |x|) "" |gn| |i|))))
              (|htSay| "}"))))
           (SETQ |i| (+ |i| 1))
-          (SETQ |bfVar#23| (CDR |bfVar#23|))))
+          (SETQ |bfVar#21| (CDR |bfVar#21|))))
        0 |u| NIL)
       (|htEndTable|)))))
-
-; dbSayItemsItalics(:u) ==
-;   htSay '"{\em "
-;   APPLY(function dbSayItems,u)
-;   htSay '"}"
-
-(DEFUN |dbSayItemsItalics| (&REST |u|)
-  (PROG ()
-    (RETURN
-     (PROGN (|htSay| "{\\em ") (APPLY #'|dbSayItems| |u|) (|htSay| "}")))))
 
 ; dbSayItems(countOrPrefix,singular,plural,:options) ==
 ;   bcHt '"\newline "
@@ -1381,13 +1300,13 @@
       (COND ((EQL |count| 0) (|htSayList| (LIST "No " |singular|)))
             ((EQL |count| 1) (|htSayList| (LIST "1 " |singular|)))
             (#1# (|htSayList| (LIST |count| " " |plural|))))
-      ((LAMBDA (|bfVar#24| |x|)
+      ((LAMBDA (|bfVar#22| |x|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#24|) (PROGN (SETQ |x| (CAR |bfVar#24|)) NIL))
+           ((OR (ATOM |bfVar#22|) (PROGN (SETQ |x| (CAR |bfVar#22|)) NIL))
             (RETURN NIL))
            (#1# (|bcHt| |x|)))
-          (SETQ |bfVar#24| (CDR |bfVar#24|))))
+          (SETQ |bfVar#22| (CDR |bfVar#22|))))
        |options| NIL)
       (COND ((NOT (EQL |count| 0)) (|bcHt| ":")))))))
 
@@ -1396,33 +1315,33 @@
 (DEFUN |htCopyProplist| (|htPage|)
   (PROG (|x| |y|)
     (RETURN
-     ((LAMBDA (|bfVar#27| |bfVar#26| |bfVar#25|)
+     ((LAMBDA (|bfVar#25| |bfVar#24| |bfVar#23|)
         (LOOP
          (COND
-          ((OR (ATOM |bfVar#26|)
-               (PROGN (SETQ |bfVar#25| (CAR |bfVar#26|)) NIL))
-           (RETURN (NREVERSE |bfVar#27|)))
+          ((OR (ATOM |bfVar#24|)
+               (PROGN (SETQ |bfVar#23| (CAR |bfVar#24|)) NIL))
+           (RETURN (NREVERSE |bfVar#25|)))
           (#1='T
-           (AND (CONSP |bfVar#25|)
+           (AND (CONSP |bfVar#23|)
                 (PROGN
-                 (SETQ |x| (CAR |bfVar#25|))
-                 (SETQ |y| (CDR |bfVar#25|))
+                 (SETQ |x| (CAR |bfVar#23|))
+                 (SETQ |y| (CDR |bfVar#23|))
                  #1#)
-                (SETQ |bfVar#27| (CONS (CONS |x| |y|) |bfVar#27|)))))
-         (SETQ |bfVar#26| (CDR |bfVar#26|))))
+                (SETQ |bfVar#25| (CONS (CONS |x| |y|) |bfVar#25|)))))
+         (SETQ |bfVar#24| (CDR |bfVar#24|))))
       NIL (|htpPropertyList| |htPage|) NIL))))
 
 ; dbInfovec name ==
-;   'category = GETDATABASE(name,'CONSTRUCTORKIND) => nil
-;   GETDATABASE(name, 'ASHARP?) => nil
+;   'category = get_database(name, 'CONSTRUCTORKIND) => nil
+;   get_database(name, 'ASHARP?) => nil
 ;   loadLibIfNotLoaded(name)
 ;   u := GET(name, 'infovec) => u
 
 (DEFUN |dbInfovec| (|name|)
   (PROG (|u|)
     (RETURN
-     (COND ((EQ '|category| (GETDATABASE |name| 'CONSTRUCTORKIND)) NIL)
-           ((GETDATABASE |name| 'ASHARP?) NIL)
+     (COND ((EQ '|category| (|get_database| |name| 'CONSTRUCTORKIND)) NIL)
+           ((|get_database| |name| 'ASHARP?) NIL)
            ('T
             (PROGN
              (|loadLibIfNotLoaded| |name|)
@@ -1463,13 +1382,13 @@
   (PROG ()
     (RETURN
      (COND
-      (((LAMBDA (|bfVar#29| |bfVar#28| |i|)
+      (((LAMBDA (|bfVar#27| |bfVar#26| |i|)
           (LOOP
-           (COND ((> |i| |bfVar#28|) (RETURN |bfVar#29|))
+           (COND ((> |i| |bfVar#26|) (RETURN |bfVar#27|))
                  (#1='T
                   (PROGN
-                   (SETQ |bfVar#29| (DIGIT-CHAR-P (ELT |s| |i|)))
-                   (COND ((NOT |bfVar#29|) (RETURN NIL))))))
+                   (SETQ |bfVar#27| (DIGIT-CHAR-P (ELT |s| |i|)))
+                   (COND ((NOT |bfVar#27|) (RETURN NIL))))))
            (SETQ |i| (+ |i| 1))))
         T (MAXINDEX |s|) 0)
        (PARSE-INTEGER |s|))
@@ -1504,13 +1423,13 @@
        (PROGN
         (|htInitPage| (CAR |r|) NIL)
         (|bcBlankLine|)
-        ((LAMBDA (|bfVar#30| |x|)
+        ((LAMBDA (|bfVar#28| |x|)
            (LOOP
             (COND
-             ((OR (ATOM |bfVar#30|) (PROGN (SETQ |x| (CAR |bfVar#30|)) NIL))
+             ((OR (ATOM |bfVar#28|) (PROGN (SETQ |x| (CAR |bfVar#28|)) NIL))
               (RETURN NIL))
              (#1# (|htSay| |x|)))
-            (SETQ |bfVar#30| (CDR |bfVar#30|))))
+            (SETQ |bfVar#28| (CDR |bfVar#28|))))
          (CDR |r|) NIL)
         (|htShowPage|)))
       (#1# (|systemError| "Unexpected error message"))))))
@@ -1523,12 +1442,12 @@
 ;   for x in info repeat htSay x
 ;   htShowPage()
 
-(DEFUN |errorPage| (|htPage| |bfVar#32|)
+(DEFUN |errorPage| (|htPage| |bfVar#30|)
   (PROG (|heading| |kind| |info|)
     (RETURN
      (PROGN
-      (SETQ |heading| (CAR |bfVar#32|))
-      (SETQ |kind| (CADR . #1=(|bfVar#32|)))
+      (SETQ |heading| (CAR |bfVar#30|))
+      (SETQ |kind| (CADR . #1=(|bfVar#30|)))
       (SETQ |info| (CDDR . #1#))
       (COND ((EQ |kind| '|invalidType|) (|kInvalidTypePage| (CAR |info|)))
             (#2='T
@@ -1536,14 +1455,14 @@
               (COND ((EQ |heading| '|error|) (|htInitPage| "Error" NIL))
                     (#2# (|htInitPage| |heading| NIL)))
               (|bcBlankLine|)
-              ((LAMBDA (|bfVar#31| |x|)
+              ((LAMBDA (|bfVar#29| |x|)
                  (LOOP
                   (COND
-                   ((OR (ATOM |bfVar#31|)
-                        (PROGN (SETQ |x| (CAR |bfVar#31|)) NIL))
+                   ((OR (ATOM |bfVar#29|)
+                        (PROGN (SETQ |x| (CAR |bfVar#29|)) NIL))
                     (RETURN NIL))
                    (#2# (|htSay| |x|)))
-                  (SETQ |bfVar#31| (CDR |bfVar#31|))))
+                  (SETQ |bfVar#29| (CDR |bfVar#29|))))
                |info| NIL)
               (|htShowPage|))))))))
 
@@ -1556,21 +1475,6 @@
      (|errorPage| NIL
       (LIST "{\\em *} not a valid search string" NIL
             "\\vspace{3}\\centerline{{\\em *} is not a valid search string for a general search}\\centerline{\\em {it would match everything!}}")))))
-
-; htQueryPage(htPage,heading,message,query,fn) ==
-;   htInitPage(heading,nil)
-;   htSay message
-;   htQuery(query, fn, false)
-;   htShowPage()
-
-(DEFUN |htQueryPage| (|htPage| |heading| |message| |query| |fn|)
-  (PROG ()
-    (RETURN
-     (PROGN
-      (|htInitPage| |heading| NIL)
-      (|htSay| |message|)
-      (|htQuery| |query| |fn| NIL)
-      (|htShowPage|)))))
 
 ; htQuery(question, fn, upLink?) ==
 ;   if question then
@@ -1748,23 +1652,23 @@
     (RETURN
      (PROGN
       (SETQ |args|
-              ((LAMBDA (|bfVar#34| |bfVar#33| |x|)
+              ((LAMBDA (|bfVar#32| |bfVar#31| |x|)
                  (LOOP
                   (COND
-                   ((OR (ATOM |bfVar#33|)
-                        (PROGN (SETQ |x| (CAR |bfVar#33|)) NIL))
-                    (RETURN (NREVERSE |bfVar#34|)))
-                   (#1='T (AND |x| (SETQ |bfVar#34| (CONS |x| |bfVar#34|)))))
-                  (SETQ |bfVar#33| (CDR |bfVar#33|))))
+                   ((OR (ATOM |bfVar#31|)
+                        (PROGN (SETQ |x| (CAR |bfVar#31|)) NIL))
+                    (RETURN (NREVERSE |bfVar#32|)))
+                   (#1='T (AND |x| (SETQ |bfVar#32| (CONS |x| |bfVar#32|)))))
+                  (SETQ |bfVar#31| (CDR |bfVar#31|))))
                NIL |args| NIL))
       (STRCONC |name| "(" |arg|
-       ((LAMBDA (|bfVar#36| |bfVar#35| |x|)
+       ((LAMBDA (|bfVar#34| |bfVar#33| |x|)
           (LOOP
            (COND
-            ((OR (ATOM |bfVar#35|) (PROGN (SETQ |x| (CAR |bfVar#35|)) NIL))
-             (RETURN |bfVar#36|))
-            (#1# (SETQ |bfVar#36| (STRCONC |bfVar#36| (STRCONC "," |x|)))))
-           (SETQ |bfVar#35| (CDR |bfVar#35|))))
+            ((OR (ATOM |bfVar#33|) (PROGN (SETQ |x| (CAR |bfVar#33|)) NIL))
+             (RETURN |bfVar#34|))
+            (#1# (SETQ |bfVar#34| (STRCONC |bfVar#34| (STRCONC "," |x|)))))
+           (SETQ |bfVar#33| (CDR |bfVar#33|))))
         "" |args| NIL)
        ")")))))
 
@@ -1773,14 +1677,14 @@
 (DEFUN |bcFindString| (|s| |i| |n| |char|)
   (PROG ()
     (RETURN
-     ((LAMBDA (|bfVar#37| |j|)
+     ((LAMBDA (|bfVar#35| |j|)
         (LOOP
-         (COND ((> |j| |n|) (RETURN |bfVar#37|))
+         (COND ((> |j| |n|) (RETURN |bfVar#35|))
                ('T
                 (AND (EQUAL (ELT |s| |j|) |char|)
                      (PROGN
-                      (SETQ |bfVar#37| |j|)
-                      (COND (|bfVar#37| (RETURN |bfVar#37|)))))))
+                      (SETQ |bfVar#35| |j|)
+                      (COND (|bfVar#35| (RETURN |bfVar#35|)))))))
          (SETQ |j| (+ |j| 1))))
       NIL |i|))))
 
@@ -1823,10 +1727,6 @@
 (DEFUN |bcOptional| (|s|)
   (PROG () (RETURN (COND ((EQUAL |s| "") "2") ('T |s|)))))
 
-; bcvspace() == bcHt '"\vspace{1}\newline "
-
-(DEFUN |bcvspace| () (PROG () (RETURN (|bcHt| "\\vspace{1}\\newline "))))
-
 ; bcString2WordList s == fn(s,0,MAXINDEX s) where
 ;   fn(s,i,n) ==
 ;     i > n => nil
@@ -1845,15 +1745,15 @@
            (#1='T
             (PROGN
              (SETQ |k|
-                     ((LAMBDA (|bfVar#38| |j|)
+                     ((LAMBDA (|bfVar#36| |j|)
                         (LOOP
-                         (COND ((> |j| |n|) (RETURN |bfVar#38|))
+                         (COND ((> |j| |n|) (RETURN |bfVar#36|))
                                (#1#
                                 (AND (NOT (EQUAL (ELT |s| |j|) (|char| '| |)))
                                      (PROGN
-                                      (SETQ |bfVar#38| |j|)
+                                      (SETQ |bfVar#36| |j|)
                                       (COND
-                                       (|bfVar#38| (RETURN |bfVar#38|)))))))
+                                       (|bfVar#36| (RETURN |bfVar#36|)))))))
                          (SETQ |j| (+ |j| 1))))
                       NIL |i|))
              (COND ((NULL (INTEGERP |k|)) NIL)

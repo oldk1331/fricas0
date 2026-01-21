@@ -306,8 +306,8 @@
               (120 . |coerce|) (|String|) (125 . |message|) (130 . ~=)
               (136 . |leadingCoefficient|) |SORD;coerce;%Of;24| (141 . ^)
               (147 . *) (153 . +) (|Mapping| 55 55 55) (|List| 55)
-              (159 . |reduce|) (|Integer|) (|SingleInteger|)
-              (|PositiveInteger|))
+              (159 . |reduce|) (|PositiveInteger|) (|SingleInteger|)
+              (|Integer|))
            '#(~= 165 |zero?| 171 |subtractIfCan| 176 |smaller?| 182 |sample|
               188 |rightRecip| 192 |rightPower| 197 |retractIfCan| 209
               |retract| 214 |recip| 219 |ordinalPower| 224 |ordinalMul| 230
@@ -322,20 +322,21 @@
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0 0))
             (CONS
-             '#(NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL |OrderedSet&|
-                |AbelianMonoid&| NIL |MagmaWithUnit&| |NonAssociativeSemiRng&|
-                NIL |Magma&| |AbelianSemiGroup&| |Hashable&| |RetractableTo&|
-                |SetCategory&| NIL |BasicType&| |PartialOrder&| NIL)
+             '#(NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL
+                |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL |AbelianMonoid&|
+                |OrderedSet&| |AbelianSemiGroup&| |Magma&| NIL |SetCategory&|
+                |RetractableTo&| |Hashable&| NIL |PartialOrder&| |BasicType&|
+                NIL)
              (CONS
-              '#((|SemiRing|) (|SemiRng|) (|BiModule| $$ $$) (|RightModule| $$)
-                 (|LeftModule| $$) (|OrderedAbelianMonoid|)
-                 (|OrderedAbelianSemiGroup|) (|CancellationAbelianMonoid|)
-                 (|Monoid|) (|NonAssociativeSemiRing|) (|OrderedSet|)
-                 (|AbelianMonoid|) (|SemiGroup|) (|MagmaWithUnit|)
-                 (|NonAssociativeSemiRng|) (|Comparable|) (|Magma|)
-                 (|AbelianSemiGroup|) (|Hashable|) (|RetractableTo| 11)
-                 (|SetCategory|) (|CoercibleFrom| 11) (|BasicType|)
-                 (|PartialOrder|) (|CoercibleTo| 55))
+              '#((|SemiRing|) (|SemiRng|) (|BiModule| $$ $$) (|LeftModule| $$)
+                 (|RightModule| $$) (|OrderedAbelianMonoid|)
+                 (|NonAssociativeSemiRing|) (|Monoid|)
+                 (|CancellationAbelianMonoid|) (|OrderedAbelianSemiGroup|)
+                 (|NonAssociativeSemiRng|) (|MagmaWithUnit|) (|SemiGroup|)
+                 (|AbelianMonoid|) (|OrderedSet|) (|AbelianSemiGroup|)
+                 (|Magma|) (|Comparable|) (|SetCategory|) (|RetractableTo| 11)
+                 (|Hashable|) (|CoercibleTo| 55) (|PartialOrder|) (|BasicType|)
+                 (|CoercibleFrom| 11))
               (|makeByteWordVec2| 70
                                   '(0 6 0 7 0 6 0 9 2 6 0 11 2 12 1 6 15 0 16 2
                                     6 15 0 0 18 2 6 21 21 0 22 1 6 25 0 26 1 6
@@ -347,19 +348,17 @@
                                     2 0 15 0 0 59 1 6 11 0 60 2 55 0 0 0 62 2
                                     55 0 0 0 63 2 55 0 0 0 64 2 66 55 65 0 67 2
                                     0 15 0 0 59 1 0 15 0 17 2 0 36 0 0 38 2 0
-                                    15 0 0 1 0 0 0 1 1 0 36 0 1 2 0 0 0 70 1 2
-                                    0 0 0 11 1 1 0 25 0 27 1 0 11 0 51 1 0 36 0
+                                    15 0 0 1 0 0 0 1 1 0 36 0 1 2 0 0 0 11 1 2
+                                    0 0 0 68 1 1 0 25 0 27 1 0 11 0 51 1 0 36 0
                                     1 2 0 0 0 0 52 2 0 0 0 0 50 2 0 0 0 0 43 2
                                     0 15 0 0 1 1 0 15 0 19 1 0 0 0 14 0 0 0 13
                                     2 0 0 0 0 1 2 0 0 0 0 1 1 0 0 0 45 1 0 36 0
-                                    1 2 0 0 0 70 1 2 0 0 0 11 1 1 0 57 0 1 1 0
-                                    11 0 44 2 0 21 21 0 23 1 0 69 0 1 1 0 0 11
-                                    24 1 0 55 0 61 2 0 0 0 0 1 2 0 0 0 0 54 2 0
-                                    0 0 70 1 2 0 0 0 11 53 0 0 0 8 0 0 0 10 2 0
-                                    15 0 0 40 2 0 15 0 0 46 2 0 15 0 0 20 2 0
-                                    15 0 0 1 2 0 15 0 0 31 1 1 0 0 1 2 1 0 0 0
-                                    1 2 0 0 0 0 33 2 1 0 68 0 1 2 0 0 0 0 35 2
-                                    0 0 11 0 1 2 0 0 70 0 1)))))
+                                    1 2 0 0 0 11 1 2 0 0 0 68 1 1 0 57 0 1 1 0
+                                    11 0 44 2 0 21 21 0 23 1 0 69 0 1 1 0 55 0
+                                    61 1 0 0 11 24 2 0 0 0 0 1 2 0 0 0 11 53 2
+                                    0 0 0 68 1 2 0 0 0 0 54 0 0 0 8 0 0 0 10 2
+                                    0 15 0 0 40 2 0 15 0 0 46 2 0 15 0 0 20 2 0
+                                    15 0 0 1 2 0 15 0 0 31 2 1 0 0 0 1 1 1 0 0
+                                    1 2 0 0 0 0 33 2 0 0 68 0 1 2 0 0 11 0 1 2
+                                    0 0 0 0 35 2 1 0 70 0 1)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|SmallOrdinal| 'NILADIC T) 

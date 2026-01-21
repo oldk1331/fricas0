@@ -64,7 +64,7 @@
 ;   cacheCountCode:= ['countCircularAlist,cacheName,cacheCount]
 ;   cacheVector:=
 ;     mkCacheVec(op,cacheName,cacheType,cacheResetCode,cacheCountCode)
-;   $e:= put(nam,'cacheInfo, cacheVector,$e)
+;   $e := putIntSymTab(nam, 'cacheInfo, cacheVector, $e)
 ;   eval cacheResetCode
 ;   SET(cacheName,mkCircularAlist cacheCount)
 ;   nam
@@ -174,7 +174,7 @@
             (SETQ |cacheVector|
                     (|mkCacheVec| |op| |cacheName| |cacheType| |cacheResetCode|
                      |cacheCountCode|))
-            (SETQ |$e| (|put| |nam| '|cacheInfo| |cacheVector| |$e|))
+            (SETQ |$e| (|putIntSymTab| |nam| '|cacheInfo| |cacheVector| |$e|))
             (|eval| |cacheResetCode|)
             (SET |cacheName| (|mkCircularAlist| |cacheCount|))
             |nam|))))))))))
@@ -212,7 +212,7 @@
 ;   cacheCountCode:= ['hashCount,cacheName]
 ;   cacheVector:=
 ;     mkCacheVec(op,cacheName,cacheType,cacheResetCode,cacheCountCode)
-;   $e:= put(nam,'cacheInfo, cacheVector,$e)
+;   $e := putIntSymTab(nam, 'cacheInfo, cacheVector, $e)
 ;   eval cacheResetCode
 ;   nam
 
@@ -260,7 +260,7 @@
       (SETQ |cacheVector|
               (|mkCacheVec| |op| |cacheName| |cacheType| |cacheResetCode|
                |cacheCountCode|))
-      (SETQ |$e| (|put| |nam| '|cacheInfo| |cacheVector| |$e|))
+      (SETQ |$e| (|putIntSymTab| |nam| '|cacheInfo| |cacheVector| |$e|))
       (|eval| |cacheResetCode|)
       |nam|))))
 
@@ -440,7 +440,7 @@
 ;   cacheType:= 'recurrence
 ;   cacheCountCode:= ['nodeCount,stateNam]
 ;   cacheVector:= mkCacheVec(op,stateNam,cacheType,cacheResetCode,cacheCountCode)
-;   $e:= put(nam,'cacheInfo, cacheVector,$e)
+;   $e := putIntSymTab(nam, 'cacheInfo, cacheVector, $e)
 ;   nam
 
 (DEFUN |compileRecurrenceRelation| (|op| |nam| |argl| |junk| |bfVar#17|)
@@ -639,7 +639,7 @@
       (SETQ |cacheVector|
               (|mkCacheVec| |op| |stateNam| |cacheType| |cacheResetCode|
                |cacheCountCode|))
-      (SETQ |$e| (|put| |nam| '|cacheInfo| |cacheVector| |$e|))
+      (SETQ |$e| (|putIntSymTab| |nam| '|cacheInfo| |cacheVector| |$e|))
       |nam|))))
 
 ; NUMOFNODES(x) ==
@@ -668,7 +668,7 @@
   (PROG () (RETURN (LIST |op| |nam| |kind| |resetCode| |countCode|))))
 
 ; clearCache x ==
-;   get(x,'localModemap,$e) or get(x,'mapBody,$e) =>
+;   get0(x, 'localModemap, $e) or get0(x, 'mapBody, $e) =>
 ;     for [map,:sub] in $mapSubNameAlist repeat
 ;       map=x => untrace2(sub,[])
 ;     $e:= putHist(x,'localModemap,nil,$e)
@@ -680,7 +680,7 @@
   (PROG (|map| |sub|)
     (RETURN
      (COND
-      ((OR (|get| |x| '|localModemap| |$e|) (|get| |x| '|mapBody| |$e|))
+      ((OR (|get0| |x| '|localModemap| |$e|) (|get0| |x| '|mapBody| |$e|))
        (IDENTITY
         (PROGN
          ((LAMBDA (|bfVar#19| |bfVar#18|)

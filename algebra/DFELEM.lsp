@@ -214,5 +214,3 @@
                                               21 21 32 1 13 0 0 33 1 0 13 13 20
                                               1 0 21 21 25)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|DoubleFloatElementaryFunctions| 'NILADIC T) 

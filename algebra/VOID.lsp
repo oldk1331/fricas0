@@ -53,5 +53,3 @@
                         (|makeByteWordVec2| 10
                                             '(1 6 8 0 9 0 0 0 7 1 0 8 0 10)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|Void| 'NILADIC T) 

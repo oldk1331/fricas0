@@ -3,6 +3,18 @@
 
 (IN-PACKAGE "BOOT")
 
+; $useCoerceOrCroak := true
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$useCoerceOrCroak| T))
+
+; $insideCanCoerceFrom := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$insideCanCoerceFrom| NIL))
+
+; $useConvertForCoercions := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$useConvertForCoercions| NIL))
+
 ; algCoerceInteractive(p,source,target) ==
 ;   -- now called in some groebner code
 ;   $useConvertForCoercions : local := true
@@ -343,7 +355,7 @@
 ;     coerceInt(object, ['UnivariateTaylorSeries, coef, var, cen])
 ;
 ;   type is ['FunctionCalled,name] =>
-;     null (m := get(name,'mode,$e)) => NIL
+;     null (m := get0(name, 'mode, $e)) => NIL
 ;     isPartialMode m => NIL
 ;     objNew(val,m)
 ;   NIL
@@ -617,7 +629,7 @@
               (SETQ |ISTMP#1| (CDR |type|))
               (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
                    (PROGN (SETQ |name| (CAR |ISTMP#1|)) #1#))))
-        (COND ((NULL (SETQ |m| (|get| |name| '|mode| |$e|))) NIL)
+        (COND ((NULL (SETQ |m| (|get0| |name| '|mode| |$e|))) NIL)
               ((|isPartialMode| |m|) NIL) (#1# (|objNew| |val| |m|))))
        (#1# NIL))))))
 
@@ -1991,7 +2003,7 @@
 ; typeToForm(t, toForm) ==
 ;     t0 := devaluate(t)
 ;     [op,:argl] := t0
-;     coSig := rest GETDATABASE(op, 'COSIG)
+;     coSig := rest(get_database(op, 'COSIG))
 ;     sig := getConstructorSignature t0
 ;     ml := replaceSharps(rest sig, t0)
 ;     nl := [fn(x, t1, c, toForm) for x in argl for t1 in ml_
@@ -2008,7 +2020,7 @@
       (SETQ |t0| (|devaluate| |t|))
       (SETQ |op| (CAR |t0|))
       (SETQ |argl| (CDR |t0|))
-      (SETQ |coSig| (CDR (GETDATABASE |op| 'COSIG)))
+      (SETQ |coSig| (CDR (|get_database| |op| 'COSIG)))
       (SETQ |sig| (|getConstructorSignature| |t0|))
       (SETQ |ml| (|replaceSharps| (CDR |sig|) |t0|))
       (SETQ |nl|
@@ -2290,7 +2302,7 @@
 ;     objNewWrap(intName,t2)
 ;   (t1 is ['FunctionCalled,sym]) =>
 ;     t2 = $OutputForm => coerceByFunction(objNewWrap(val, t1), t2)
-;     (t3 := get(sym,'mode,$e)) and t3 is ['Mapping,:.] =>
+;     (t3 := get0(sym, 'mode, $e)) and t3 is ['Mapping, :.] =>
 ;       (triple' := coerceInt(triple,t3)) => coerceInt(triple',t2)
 ;       NIL
 ;     NIL
@@ -2705,7 +2717,7 @@
                                ((EQUAL |t2| |$OutputForm|)
                                 (|coerceByFunction| (|objNewWrap| |val| |t1|)
                                  |t2|))
-                               ((AND (SETQ |t3| (|get| |sym| '|mode| |$e|))
+                               ((AND (SETQ |t3| (|get0| |sym| '|mode| |$e|))
                                      (CONSP |t3|) (EQ (CAR |t3|) '|Mapping|))
                                 (COND
                                  ((SETQ |triple'| (|coerceInt| |triple| |t3|))
@@ -2748,7 +2760,7 @@
 ; coerceSubDomain(val, tSuper, tSub) ==
 ;   -- Try to coerce from a sub domain to a super domain
 ;   val = '_$fromCoerceable_$ => nil
-;   super := GETDATABASE(first tSub, 'SUPERDOMAIN)
+;   super := get_database(first(tSub), 'SUPERDOMAIN)
 ;   superDomain := first super
 ;   superDomain = tSuper =>
 ;     coerceImmediateSubDomain(val, tSuper, tSub, CADR super)
@@ -2762,7 +2774,7 @@
      (COND ((EQ |val| '|$fromCoerceable$|) NIL)
            (#1='T
             (PROGN
-             (SETQ |super| (GETDATABASE (CAR |tSub|) 'SUPERDOMAIN))
+             (SETQ |super| (|get_database| (CAR |tSub|) 'SUPERDOMAIN))
              (SETQ |superDomain| (CAR |super|))
              (COND
               ((EQUAL |superDomain| |tSuper|)
@@ -3309,7 +3321,7 @@
 ; valueArgsEqual?(t1, t2) ==
 ;   -- returns true if the object-valued arguments to t1 and t2 are the same
 ;   -- under coercion
-;   coSig := rest GETDATABASE(first t1, 'COSIG)
+;   coSig := rest(get_database(first(t1), 'COSIG))
 ;   constrSig := rest getConstructorSignature first t1
 ;   tl1 := replaceSharps(constrSig, t1)
 ;   tl2 := replaceSharps(constrSig, t2)
@@ -3330,7 +3342,7 @@
   (PROG (|coSig| |constrSig| |tl1| |tl2| |done| |value| |trip| |newVal|)
     (RETURN
      (PROGN
-      (SETQ |coSig| (CDR (GETDATABASE (CAR |t1|) 'COSIG)))
+      (SETQ |coSig| (CDR (|get_database| (CAR |t1|) 'COSIG)))
       (SETQ |constrSig| (CDR (|getConstructorSignature| (CAR |t1|))))
       (SETQ |tl1| (|replaceSharps| |constrSig| |t1|))
       (SETQ |tl2| (|replaceSharps| |constrSig| |t2|))

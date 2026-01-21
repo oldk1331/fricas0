@@ -195,7 +195,7 @@
 
 ; pfAppend list       == APPLY(function APPEND,list)
 
-(DEFUN |pfAppend| (LIST) (PROG () (RETURN (APPLY #'APPEND LIST))))
+(DEFUN |pfAppend| (|list|) (PROG () (RETURN (APPLY #'APPEND |list|))))
 
 ; pfNothing ()        == pfTree('nothing, [])
 

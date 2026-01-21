@@ -3,6 +3,18 @@
 
 (IN-PACKAGE "BOOT")
 
+; $testingSystem := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$testingSystem| NIL))
+
+; $sayBrightlyStream := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$sayBrightlyStream| NIL))
+
+; $highlightAllowed := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$highlightAllowed| NIL))
+
 ; DEFPARAMETER($testingErrorPrefix, '"Daly Bug")
 
 (DEFPARAMETER |$testingErrorPrefix| "Daly Bug")
@@ -2169,14 +2181,14 @@
       |ans|))))
 
 ; sayBrightlyNT2(x, str) ==
-;     NULL(X) => nil
+;     NULL(x) => nil
 ;     $sayBrightlyStream => sayBrightlyNT1(x, $sayBrightlyStream)
 ;     sayBrightlyNT1(x, str)
 
 (DEFUN |sayBrightlyNT2| (|x| |str|)
   (PROG ()
     (RETURN
-     (COND ((NULL X) NIL)
+     (COND ((NULL |x|) NIL)
            (|$sayBrightlyStream| (|sayBrightlyNT1| |x| |$sayBrightlyStream|))
            ('T (|sayBrightlyNT1| |x| |str|))))))
 

@@ -619,9 +619,9 @@
               |LPOLY;degree;%Nni;29| (254 . |reductum|) |LPOLY;trunc;%Nni%;28|
               (259 . =) (|OutputForm|) (265 . |coerce|) (270 . |coerce|)
               (275 . *) (281 . +) (|Mapping| 91 91 91) (|List| 91)
-              (287 . |reduce|) |LPOLY;coerce;%Of;31|
-              (|Record| (|:| |k| 10) (|:| |c| 7)) (|List| 100) (|Mapping| 7 10)
-              (|List| 7) (|Mapping| 7 7) (|List| 10) (|String|))
+              (287 . |reduce|) |LPOLY;coerce;%Of;31| (|String|) (|List| 10)
+              (|Mapping| 7 7) (|List| 7) (|Record| (|:| |k| 10) (|:| |c| 7))
+              (|List| 104) (|Mapping| 7 10))
            '#(~= 293 |zero?| 299 |varList| 304 |trunc| 309 |support| 315
               |subtractIfCan| 320 |smaller?| 326 |sample| 332 |rquo| 336
               |reductum| 342 |opposite?| 347 |numberOfMonomials| 353
@@ -633,21 +633,23 @@
               |coefficients| 500 |coefficient| 505 |coef| 511 |Zero| 517
               |LiePolyIfCan| 521 |LiePoly| 526 = 531 / 537 - 543 + 554 * 560)
            'NIL
-           (CONS (|makeByteWordVec2| 8 '(0 0 0 0 0 0 0 0 0 0 1 2 5 0 8 0 0 0))
+           (CONS (|makeByteWordVec2| 8 '(0 0 0 0 0 0 0 0 0 0 1 2 5 8 0 0 0 0))
                  (CONS
-                  '#(NIL |LieAlgebra&| |FreeModuleCategory&| |Module&| NIL NIL
-                     NIL NIL NIL NIL |AbelianGroup&| NIL |AbelianMonoid&|
-                     |AbelianSemiGroup&| NIL |SetCategory&| |BasicType&| NIL)
+                  '#(NIL |FreeModuleCategory&| |LieAlgebra&| NIL |Module&| NIL
+                     NIL NIL NIL NIL |AbelianGroup&| NIL |AbelianMonoid&| NIL
+                     |AbelianSemiGroup&| |SetCategory&| NIL |BasicType&|)
                   (CONS
-                   '#((|FreeLieAlgebra| 6 7) (|LieAlgebra| 7)
-                      (|FreeModuleCategory| 7 (|LyndonWord| 6)) (|Module| 7)
+                   '#((|FreeLieAlgebra| 6 7)
+                      (|FreeModuleCategory| 7 (|LyndonWord| 6))
+                      (|LieAlgebra| 7)
                       (|IndexedDirectProductCategory| 7 (|LyndonWord| 6))
+                      (|Module| 7) (|BiModule| 7 7)
                       (|IndexedProductCategory| 7 (|LyndonWord| 6))
-                      (|BiModule| 7 7) (|AbelianProductCategory| 7)
-                      (|LeftModule| 7) (|RightModule| 7) (|AbelianGroup|)
+                      (|RightModule| 7) (|LeftModule| 7)
+                      (|AbelianProductCategory| 7) (|AbelianGroup|)
                       (|CancellationAbelianMonoid|) (|AbelianMonoid|)
-                      (|AbelianSemiGroup|) (|Comparable|) (|SetCategory|)
-                      (|BasicType|) (|CoercibleTo| 91))
+                      (|Comparable|) (|AbelianSemiGroup|) (|SetCategory|)
+                      (|CoercibleTo| 91) (|BasicType|))
                    (|makeByteWordVec2| 106
                                        '(1 10 9 0 11 2 9 12 6 0 13 1 10 15 0 16
                                          2 6 12 0 0 17 1 10 0 0 18 1 10 0 0 19
@@ -668,21 +670,21 @@
                                          0 88 2 7 12 0 0 90 1 10 91 0 92 1 7 91
                                          0 93 2 91 0 0 0 94 2 91 0 0 0 95 2 97
                                          91 96 0 98 2 0 12 0 0 1 1 4 12 0 1 1 0
-                                         9 0 81 2 0 0 0 86 89 1 0 105 0 1 2 2
+                                         9 0 81 2 0 0 0 86 89 1 0 101 0 1 2 2
                                          56 0 0 1 2 8 12 0 0 1 0 4 0 1 2 0 34
                                          34 0 49 1 7 0 0 88 2 4 12 0 0 1 1 0 86
                                          0 1 1 0 32 0 1 1 0 12 0 1 2 0 0 7 10
-                                         26 1 0 0 0 85 2 0 0 104 0 1 2 0 34 34
-                                         0 48 1 0 101 0 1 2 6 7 102 0 1 1 7 100
+                                         26 1 0 0 0 85 2 0 0 102 0 1 2 0 34 34
+                                         0 48 1 0 105 0 1 2 6 7 106 0 1 1 7 104
                                          0 1 1 7 10 0 1 1 7 0 0 1 1 7 7 0 1 1 0
-                                         106 0 1 3 0 0 0 6 0 31 3 0 0 0 9 32 33
-                                         1 0 86 0 87 1 7 0 101 1 2 0 0 0 10 75
-                                         2 0 0 10 10 76 2 0 0 10 0 74 1 0 0 101
-                                         1 2 0 0 0 0 20 1 0 34 0 42 1 0 0 6 73
-                                         1 0 50 0 59 1 0 91 0 99 1 0 103 0 1 2
-                                         0 7 0 10 1 2 0 7 34 0 44 0 4 0 23 1 0
-                                         56 50 61 1 0 0 10 14 2 0 12 0 0 45 2 3
-                                         0 0 7 1 1 1 0 0 67 2 1 0 0 0 1 2 0 0 0
-                                         0 30 2 1 0 21 0 1 2 4 0 86 0 1 2 0 0 0
-                                         7 1 2 0 0 7 0 29 2 0 0 82 0 1)))))
+                                         100 0 1 3 0 0 0 9 32 33 3 0 0 0 6 0 31
+                                         1 0 86 0 87 1 7 0 105 1 2 0 0 0 0 20 1
+                                         0 0 105 1 2 0 0 10 0 74 2 0 0 10 10 76
+                                         2 0 0 0 10 75 1 0 91 0 99 1 0 50 0 59
+                                         1 0 0 6 73 1 0 34 0 42 1 0 103 0 1 2 0
+                                         7 0 10 1 2 0 7 34 0 44 0 4 0 23 1 0 56
+                                         50 61 1 0 0 10 14 2 0 12 0 0 45 2 3 0
+                                         0 7 1 2 1 0 0 0 1 1 1 0 0 67 2 0 0 0 0
+                                         30 2 0 0 82 0 1 2 0 0 7 0 29 2 0 0 0 7
+                                         1 2 1 0 21 0 1 2 4 0 86 0 1)))))
            '|lookupComplete|)) 

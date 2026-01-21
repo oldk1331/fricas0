@@ -15,5 +15,3 @@
                     (|mkCategory| '(((|generators| ((|List| %))) T)) NIL NIL
                                   NIL)))
            (SETELT #1# 0 '(|FinitelyGenerated|))))) 
-
-(MAKEPROP '|FinitelyGenerated| 'NILADIC T) 

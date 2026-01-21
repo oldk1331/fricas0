@@ -348,9 +348,9 @@
               179)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 62))
+                        '#((|SetCategory|) (|CoercibleTo| 62) (|BasicType|))
                         (|makeByteWordVec2| 62
                                             '(2 9 6 7 8 10 1 13 11 12 14 1 23
                                               22 12 24 1 27 26 12 28 1 30 19 12
@@ -368,5 +368,3 @@
                                               0 26 15 29 1 0 41 15 45 2 0 26 0
                                               0 1)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|GuessOptionFunctions0| 'NILADIC T) 

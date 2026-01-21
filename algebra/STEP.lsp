@@ -16,5 +16,3 @@
                               ((|nextItem| ((|Union| % "failed") %)) T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|StepThrough|))))) 
-
-(MAKEPROP '|StepThrough| 'NILADIC T) 

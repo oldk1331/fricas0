@@ -14,15 +14,15 @@
 
 (SDEFUN |SYMBOL;convert;%If;3| ((|s| (%)) (% (|InputForm|)))
         (SPROG
-         ((|d| (|InputForm|)) (G (|List| (|InputForm|))) (#1=#:G2040 NIL)
-          (F NIL) (#2=#:G2039 NIL) (FF (|List| (|List| (|InputForm|))))
-          (#3=#:G2038 NIL) (|e| NIL) (#4=#:G2037 NIL) (|b| #5=(|InputForm|))
-          (|a| #5#) (E (|List| (|InputForm|))) (#6=#:G2036 NIL)
-          (#7=#:G2035 NIL) (D (|List| (|InputForm|))) (#8=#:G2034 NIL)
-          (#9=#:G2033 NIL) (C (|List| (|InputForm|))) (#10=#:G2032 NIL)
-          (#11=#:G2031 NIL) (B (|List| (|InputForm|))) (#12=#:G2030 NIL)
-          (#13=#:G2029 NIL) (A (|List| (|InputForm|))) (#14=#:G2028 NIL)
-          (#15=#:G2027 NIL)
+         ((|d| (|InputForm|)) (G (|List| (|InputForm|))) (#1=#:G2041 NIL)
+          (F NIL) (#2=#:G2040 NIL) (FF (|List| (|List| (|InputForm|))))
+          (#3=#:G2039 NIL) (|e| NIL) (#4=#:G2038 NIL) (|b| #5=(|InputForm|))
+          (|a| #5#) (E (|List| (|InputForm|))) (#6=#:G2037 NIL)
+          (#7=#:G2036 NIL) (D (|List| (|InputForm|))) (#8=#:G2035 NIL)
+          (#9=#:G2034 NIL) (C (|List| (|InputForm|))) (#10=#:G2033 NIL)
+          (#11=#:G2032 NIL) (B (|List| (|InputForm|))) (#12=#:G2031 NIL)
+          (#13=#:G2030 NIL) (A (|List| (|InputForm|))) (#14=#:G2029 NIL)
+          (#15=#:G2028 NIL)
           (|ls|
            (|Record| (|:| |sub| (|List| (|OutputForm|)))
                      (|:| |sup| (|List| (|OutputForm|)))
@@ -139,16 +139,18 @@
         ((|hs| #1=(|HashState|)) (|s| (%)) (% #1#))
         (HASHSTATEUPDATE |hs| (SXHASH |s|))) 
 
-(PUT '|SYMBOL;<;2%B;8| '|SPADreplace| '(XLAM (|x| |y|) (GGREATERP |y| |x|))) 
-
 (SDEFUN |SYMBOL;<;2%B;8| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
-        (GGREATERP |y| |x|)) 
+        (COND
+         ((SPADCALL |x| (QREFELT % 18))
+          (COND ((SPADCALL |y| (QREFELT % 18)) (|lt_sexp| |x| |y|))
+                (#1='T 'T)))
+         ((SPADCALL |y| (QREFELT % 18)) NIL) (#1# (|lt_sexp| |x| |y|)))) 
 
 (SDEFUN |SYMBOL;coerce;%Of;9| ((|x| (%)) (% (|OutputForm|)))
         (SPROG
          ((|a| (|List| (|OutputForm|))) (|x0| (|OutputForm|))
-          (|sl| (|List| (|OutputForm|))) (|se| (|OutputForm|)) (#1=#:G2056 NIL)
-          (#2=#:G2057 NIL) (|si| NIL) (|rsl| (|List| (|List| (|OutputForm|))))
+          (|sl| (|List| (|OutputForm|))) (|se| (|OutputForm|)) (#1=#:G2060 NIL)
+          (#2=#:G2061 NIL) (|si| NIL) (|rsl| (|List| (|List| (|OutputForm|))))
           (|ss|
            (|Record| (|:| |sub| (|List| (|OutputForm|)))
                      (|:| |sup| (|List| (|OutputForm|)))
@@ -178,7 +180,7 @@
                              (EXIT
                               (PROGN
                                (LETT #1# |$NoValue|)
-                               (GO #3=#:G2048)))))))
+                               (GO #3=#:G2052)))))))
                          (LETT |se|
                                (COND ((EQL (LENGTH |si|) 1) (|SPADfirst| |si|))
                                      ('T (SPADCALL |si| (QREFELT % 47)))))
@@ -236,7 +238,7 @@
                     (|:| |args| (|List| (|OutputForm|)))))
          (% (|String|)))
         (SPROG
-         ((#1=#:G2072 NIL) (|n| NIL) (#2=#:G2071 NIL)
+         ((#1=#:G2076 NIL) (|n| NIL) (#2=#:G2075 NIL)
           (|ns| (|List| (|Integer|))))
          (SEQ
           (LETT |ns|
@@ -332,7 +334,7 @@
 
 (SDEFUN |SYMBOL;anyRadix| ((|n| (|Integer|)) (|s| (|String|)) (% (|String|)))
         (SPROG
-         ((#1=#:G2102 NIL) (|ns| (|String|))
+         ((#1=#:G2106 NIL) (|ns| (|String|))
           (|qr|
            (|Record| (|:| |quotient| (|Integer|))
                      (|:| |remainder| (|Integer|)))))
@@ -353,7 +355,7 @@
                            (EXIT
                             (COND
                              ((ZEROP |n|)
-                              (PROGN (LETT #1# |ns|) (GO #2=#:G2101))))))
+                              (PROGN (LETT #1# |ns|) (GO #2=#:G2105))))))
                       NIL (GO G190) G191 (EXIT NIL)))))
           #2# (EXIT #1#)))) 
 
@@ -399,7 +401,7 @@
                      (SPADCALL |x| (QREFELT % 31)) (QREFELT % 76)))))) 
 
 (SDEFUN |SYMBOL;resetNew;V;26| ((% (|Void|)))
-        (SPROG ((#1=#:G2125 NIL) (|k| NIL))
+        (SPROG ((#1=#:G2129 NIL) (|k| NIL))
                (SEQ (SETELT % 6 0)
                     (SEQ (LETT |k| NIL)
                          (LETT #1# (SPADCALL (QREFELT % 9) (QREFELT % 91)))
@@ -446,10 +448,10 @@
                     (|:| |presub| (|List| (|OutputForm|)))
                     (|:| |args| (|List| (|OutputForm|))))))
         (SPROG
-         ((|allscripts| (|List| (|OutputForm|))) (|i| NIL) (#1=#:G2143 NIL)
+         ((|allscripts| (|List| (|OutputForm|))) (|i| NIL) (#1=#:G2147 NIL)
           (|n| NIL) (|m| (|Integer|))
-          (|nscripts| (|List| (|NonNegativeInteger|))) (#2=#:G2134 NIL)
-          (#3=#:G2142 NIL) (|j| NIL) (|str| (|String|))
+          (|nscripts| (|List| (|NonNegativeInteger|))) (#2=#:G2138 NIL)
+          (#3=#:G2146 NIL) (|j| NIL) (|str| (|String|))
           (|lscripts| (|List| (|List| (|OutputForm|)))))
          (SEQ
           (COND
@@ -523,7 +525,7 @@
 
 (DEFUN |Symbol| ()
   (SPROG NIL
-         (PROG (#1=#:G2147)
+         (PROG (#1=#:G2151)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Symbol|))
@@ -610,15 +612,15 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|OrderedSet&| NIL NIL NIL |SetCategory&| |Hashable&| NIL
-                     NIL NIL |BasicType&| |OpenMath&| NIL |PartialOrder&| NIL)
+                  '#(|OrderedSet&| NIL NIL NIL |Hashable&| |SetCategory&| NIL
+                     |PartialOrder&| NIL |OpenMath&| |BasicType&| NIL NIL NIL)
                   (CONS
-                   '#((|OrderedSet|) (|Comparable|)
-                      (|PatternMatchable| (|Float|)) (|PatternMatchable| 78)
-                      (|SetCategory|) (|Hashable|) (|ConvertibleTo| 65)
-                      (|ConvertibleTo| 59) (|ConvertibleTo| 20) (|BasicType|)
-                      (|OpenMath|) (|ConvertibleTo| 32) (|PartialOrder|)
-                      (|CoercibleTo| 33))
+                   '#((|OrderedSet|) (|PatternMatchable| 78)
+                      (|PatternMatchable| (|Float|)) (|Comparable|)
+                      (|Hashable|) (|SetCategory|) (|CoercibleTo| 33)
+                      (|PartialOrder|) (|ConvertibleTo| 32) (|OpenMath|)
+                      (|BasicType|) (|ConvertibleTo| 20) (|ConvertibleTo| 59)
+                      (|ConvertibleTo| 65))
                    (|makeByteWordVec2| 107
                                        '(0 7 0 8 1 11 0 10 12 2 21 19 0 20 22 1
                                          21 19 0 23 1 21 19 0 24 1 33 32 0 34 1
@@ -636,17 +638,15 @@
                                          0 0 98 104 2 51 53 0 78 105 2 0 17 0 0
                                          1 2 0 0 0 53 56 2 0 0 0 53 54 1 0 40 0
                                          77 2 0 17 0 0 1 1 0 30 0 31 1 0 17 0
-                                         18 2 0 0 0 30 76 2 0 0 0 51 52 0 0 0
-                                         106 0 0 19 94 3 0 68 0 65 68 69 3 0 62
-                                         0 59 62 63 1 0 0 0 89 0 0 0 83 1 0 0 0
+                                         18 2 0 0 0 51 52 2 0 0 0 30 76 0 0 0
+                                         106 0 0 19 94 3 0 62 0 59 62 63 3 0 68
+                                         0 65 68 69 0 0 0 83 1 0 0 0 89 1 0 0 0
                                          29 2 0 0 0 0 1 2 0 0 0 0 1 1 0 40 0 1
                                          2 0 43 43 0 44 1 0 107 0 1 2 0 0 0 53
-                                         55 1 0 59 0 73 1 0 65 0 71 1 0 20 0 39
-                                         1 0 32 0 38 1 0 0 40 41 1 0 33 0 50 2
-                                         0 0 0 53 57 3 0 19 21 0 17 25 2 0 40 0
-                                         17 1 2 0 19 21 0 1 1 0 40 0 1 2 0 17 0
+                                         55 1 0 32 0 38 1 0 20 0 39 1 0 65 0 71
+                                         1 0 59 0 73 1 0 33 0 50 1 0 0 40 41 2
+                                         0 0 0 53 57 1 0 40 0 1 2 0 19 21 0 1 2
+                                         0 40 0 17 1 3 0 19 21 0 17 25 2 0 17 0
                                          0 1 2 0 17 0 0 1 2 0 17 0 0 42 2 0 17
                                          0 0 1 2 0 17 0 0 45)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|Symbol| 'NILADIC T) 

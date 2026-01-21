@@ -247,5 +247,3 @@
                                               38 1 7 9 0 39 1 14 0 0 40 2 0 34
                                               7 13 41)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|Export3D| 'NILADIC T) 

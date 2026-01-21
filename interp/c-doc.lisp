@@ -468,28 +468,6 @@
 ;       checkDocError1 ['"Not documented!!!!"]
 ;     u := checkTrim($x,(STRINGP lines => [lines]; $x = 'constructor => first lines; lines))
 ;     $argl : local := nil    --set by checkGetArgs
-; -- tpd: related domain information doesn't exist
-; --    if v := checkExtract('"Related Domains:",u) then
-; --      $lisplibRelatedDomains:=[w for x in gn(v) | w := fn(x)] where
-; --        gn(v) ==  --note: unabbrev checks for correct number of arguments
-; --          s := checkExtractItemList v
-; --          parse := ncParseFromString s  --is a single conform or a tuple
-; --          null parse => nil
-; --          parse is ['Tuple,:r] => r
-; --          [parse]
-; --        fn(x) ==
-; --          expectedNumOfArgs := checkNumOfArgs x
-; --          null expectedNumOfArgs =>
-; --            checkDocError ['"Unknown constructor name?: ",opOf x]
-; --            x
-; --          expectedNumOfArgs ~= (n := #(IFCDR x)) =>
-; --            n = 0 => checkDocError1
-; --              ['"You must give arguments to the _"Related Domain_": ",x]
-; --            checkDocError
-; --              ['"_"Related Domain_" has wrong number of arguments: ",x]
-; --            nil
-; --          n=0 and atom x => [x]
-; --          x
 ;     longline :=
 ;       $x = 'constructor =>
 ;         v :=checkExtract('"Description:",u) or u and
@@ -1022,7 +1000,7 @@
 ; checkNumOfArgs conform ==
 ;   conname := opOf conform
 ;   constructor? conname or (conname := abbreviation? conname) =>
-;     #GETDATABASE(conname,'CONSTRUCTORARGS)
+;         #get_database(conname, 'CONSTRUCTORARGS)
 ;   nil  --signals error
 
 (DEFUN |checkNumOfArgs| (|conform|)
@@ -1033,7 +1011,7 @@
       (COND
        ((OR (|constructor?| |conname|)
             (SETQ |conname| (|abbreviation?| |conname|)))
-        (LENGTH (GETDATABASE |conname| 'CONSTRUCTORARGS)))
+        (LENGTH (|get_database| |conname| 'CONSTRUCTORARGS)))
        ('T NIL))))))
 
 ; checkIsValidType form == main where
@@ -1043,7 +1021,7 @@
 ;     [op,:args] := form
 ;     conname := (constructor? op => op; abbreviation? op)
 ;     null conname => nil
-;     fn(form,GETDATABASE(conname,'COSIG))
+;     fn(form, get_database(conname, 'COSIG))
 ;   fn(form,coSig) ==
 ;     #form ~= #coSig => form
 ;     or/[null checkIsValidType x for x in rest form for flag in rest coSig | flag]
@@ -1064,7 +1042,7 @@
              (COND ((NULL |conname|) NIL)
                    (#1#
                     (|checkIsValidType,fn| |form|
-                     (GETDATABASE |conname| 'COSIG))))))))))
+                     (|get_database| |conname| 'COSIG))))))))))
 (DEFUN |checkIsValidType,fn| (|form| |coSig|)
   (PROG ()
     (RETURN
@@ -1291,8 +1269,7 @@
 ;   main ==
 ;     $checkErrorFlag: local := false
 ;     margin := checkGetMargin lines
-;     if (null BOUNDP '$attribute? or null $attribute?)
-;       and nameSig ~= 'constructor then lines :=
+;     if not($attribute?) and nameSig ~= 'constructor then lines :=
 ;         [checkTransformFirsts(first nameSig,first lines,margin),:rest lines]
 ;     u := checkIndentedLines(lines, margin)
 ;     $argl := checkGetArgs first u      --set $argl
@@ -1330,8 +1307,7 @@
       (SETQ |$checkErrorFlag| NIL)
       (SETQ |margin| (|checkGetMargin| |lines|))
       (COND
-       ((AND (OR (NULL (BOUNDP '|$attribute?|)) (NULL |$attribute?|))
-             (NOT (EQ |nameSig| '|constructor|)))
+       ((AND (NULL |$attribute?|) (NOT (EQ |nameSig| '|constructor|)))
         (SETQ |lines|
                 (CONS
                  (|checkTransformFirsts| (CAR |nameSig|) (CAR |lines|)
@@ -3381,7 +3357,7 @@
       (COND (|$exposeFlag| (|sayBrightly1| |msg| |$outStream|)))))))
 
 ; checkDocMessage u ==
-;   sourcefile := GETDATABASE($constructorName,'SOURCEFILE)
+;   sourcefile := get_database($constructorName, 'SOURCEFILE)
 ;   person := '"---"
 ;   middle :=
 ;     BOUNDP '$x => ['"(",$x,'"): "]
@@ -3392,7 +3368,7 @@
   (PROG (|sourcefile| |person| |middle|)
     (RETURN
      (PROGN
-      (SETQ |sourcefile| (GETDATABASE |$constructorName| 'SOURCEFILE))
+      (SETQ |sourcefile| (|get_database| |$constructorName| 'SOURCEFILE))
       (SETQ |person| "---")
       (SETQ |middle|
               (COND ((BOUNDP '|$x|) (LIST "(" |$x| "): ")) ('T (LIST ": "))))

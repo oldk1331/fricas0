@@ -174,5 +174,3 @@
                                               14 18 1 20 6 19 21 1 0 6 22 23 1
                                               0 6 24 25)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|JFriCASSupport| 'NILADIC T) 

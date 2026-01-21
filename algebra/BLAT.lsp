@@ -14,5 +14,3 @@
                    (|Join| (|BoundedMeetSemilattice|)
                            (|BoundedJoinSemilattice|)))
            (SETELT #1# 0 '(|BoundedLattice|))))) 
-
-(MAKEPROP '|BoundedLattice| 'NILADIC T) 

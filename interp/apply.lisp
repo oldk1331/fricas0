@@ -729,6 +729,7 @@
                '|%d|))))))))
 
 ; compMapCond''(cexpr, dc, e) ==
+;   cexpr = false => false
 ;   cexpr=true => true
 ;   cexpr is ["AND", :l] or cexpr is ["and", :l] =>
 ;       and/[compMapCond''(u, dc, e) for u in l]
@@ -749,7 +750,7 @@
 (DEFUN |compMapCond''| (|cexpr| |dc| |e|)
   (PROG (|l| |ISTMP#1| |u| |name| |ISTMP#2| |cat|)
     (RETURN
-     (COND ((EQUAL |cexpr| T) T)
+     (COND ((NULL |cexpr|) NIL) ((EQUAL |cexpr| T) T)
            ((OR
              (AND (CONSP |cexpr|) (EQ (CAR |cexpr|) 'AND)
                   (PROGN (SETQ |l| (CDR |cexpr|)) #1='T))

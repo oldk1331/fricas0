@@ -278,7 +278,7 @@
 (SDEFUN |TSETCAT-;reduce;PSMMP;13|
         ((|p| (P)) (|ts| (S)) (|redOp| (|Mapping| P P P))
          (|redOp?| (|Mapping| (|Boolean|) P P)) (% (P)))
-        (SPROG ((#1=#:G218 NIL) (|reductor| (P)) (#2=#:G215 NIL) (|ts0| (S)))
+        (SPROG ((#1=#:G210 NIL) (|reductor| (P)) (#2=#:G207 NIL) (|ts0| (S)))
                (SEQ
                 (COND
                  ((OR (SPADCALL |ts| (QREFELT % 12))
@@ -384,7 +384,7 @@
 
 (SDEFUN |TSETCAT-;removeZero;PSP;18| ((|p| (P)) (|ts| (S)) (% (P)))
         (SPROG
-         ((|q| (P)) (#1=#:G275 NIL) (#2=#:G263 NIL) (|ts_v-| (S)) (|v| (V)))
+         ((|q| (P)) (#1=#:G267 NIL) (#2=#:G255 NIL) (|ts_v-| (S)) (|v| (V)))
          (SEQ
           (EXIT
            (COND
@@ -412,7 +412,7 @@
                      (EXIT
                       (COND
                        ((SPADCALL |q| (QREFELT % 31))
-                        (PROGN (LETT #1# |q|) (GO #3=#:G274)))
+                        (PROGN (LETT #1# |q|) (GO #3=#:G266)))
                        ((SPADCALL (SPADCALL |q| |ts_v-| (QREFELT % 84))
                                   (QREFELT % 31))
                         (PROGN (LETT #1# (|spadConstant| % 85)) (GO #3#))))))))
@@ -488,7 +488,7 @@
         (SPADCALL |ts| (ELT % 103) (QREFELT % 98))) 
 
 (SDEFUN |TSETCAT-;mvar;SV;25| ((|ts| (S)) (% (V)))
-        (SPROG ((#1=#:G302 NIL))
+        (SPROG ((#1=#:G294 NIL))
                (COND
                 ((SPADCALL |ts| (QREFELT % 12))
                  (|error| "Error from TSETCAT in mvar : #1 is empty"))
@@ -541,7 +541,7 @@
         (SPADCALL (ELT % 22) (SPADCALL |ts| (QREFELT % 28)) (QREFELT % 36))) 
 
 (SDEFUN |TSETCAT-;algebraicVariables;SL;30| ((|ts| (S)) (% (|List| V)))
-        (SPROG ((#1=#:G337 NIL) (|p| NIL) (#2=#:G336 NIL))
+        (SPROG ((#1=#:G329 NIL) (|p| NIL) (#2=#:G328 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -678,7 +678,7 @@
 
 (SDEFUN |TSETCAT-;coHeight;SNni;39| ((|ts| (S)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((#1=#:G392 NIL) (|m| (|NonNegativeInteger|))
+         ((#1=#:G384 NIL) (|m| (|NonNegativeInteger|))
           (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (SPADCALL (QREFELT % 125)))
               (LETT |m| (LENGTH (SPADCALL |ts| (QREFELT % 28))))
@@ -908,22 +908,22 @@
                                               103 1 6 0 27 108 1 6 111 0 113 2
                                               111 11 9 0 114 1 6 16 27 120 2 6
                                               16 0 10 122 0 9 49 125 2 49 16 0
-                                              0 126 1 0 49 0 127 1 0 11 0 99 2
-                                              0 11 10 0 59 2 0 10 10 0 74 2 0
-                                              13 0 9 116 4 0 27 27 0 67 29 72 1
-                                              0 16 27 123 1 0 16 0 109 2 0 10
-                                              10 0 91 3 0 11 10 0 29 30 2 0 10
-                                              10 0 95 4 0 10 10 0 67 29 68 1 0
-                                              53 0 54 1 0 11 0 100 2 0 11 10 0
-                                              57 1 0 9 0 105 1 0 13 0 107 1 0
-                                              27 0 48 1 0 11 0 104 2 0 11 10 0
-                                              66 2 0 10 10 0 80 2 0 11 0 0 26 1
-                                              0 11 0 102 2 0 11 10 0 62 2 0 10
-                                              10 0 77 1 0 13 0 106 2 0 0 0 10
-                                              124 1 0 49 0 51 1 0 0 27 121 2 0
-                                              0 0 9 119 2 0 0 0 9 118 1 0 0 0
-                                              117 1 0 27 0 110 1 0 49 0 127 3 0
-                                              41 27 32 29 44 2 0 41 27 29 42 2
-                                              0 11 0 96 97 1 0 111 0 112 2 0 11
-                                              9 0 115 2 0 11 0 0 19)))))
+                                              0 126 1 0 49 0 127 2 0 11 10 0 59
+                                              1 0 11 0 99 2 0 10 10 0 74 2 0 13
+                                              0 9 116 4 0 27 27 0 67 29 72 1 0
+                                              16 27 123 1 0 16 0 109 2 0 10 10
+                                              0 91 3 0 11 10 0 29 30 2 0 10 10
+                                              0 95 4 0 10 10 0 67 29 68 1 0 53
+                                              0 54 2 0 11 10 0 57 1 0 11 0 100
+                                              1 0 9 0 105 1 0 13 0 107 1 0 27 0
+                                              48 2 0 11 10 0 66 1 0 11 0 104 2
+                                              0 10 10 0 80 2 0 11 0 0 26 2 0 11
+                                              10 0 62 1 0 11 0 102 2 0 10 10 0
+                                              77 1 0 13 0 106 2 0 0 0 10 124 1
+                                              0 49 0 51 1 0 0 27 121 2 0 0 0 9
+                                              119 2 0 0 0 9 118 1 0 0 0 117 1 0
+                                              27 0 110 1 0 49 0 127 2 0 41 27
+                                              29 42 3 0 41 27 32 29 44 2 0 11 0
+                                              96 97 1 0 111 0 112 2 0 11 9 0
+                                              115 2 0 11 0 0 19)))))
            '|lookupComplete|)) 

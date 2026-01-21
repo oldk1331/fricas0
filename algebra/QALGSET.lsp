@@ -503,9 +503,9 @@
               |coerce| 298 = 303)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 60))
+                        '#((|SetCategory|) (|CoercibleTo| 60) (|BasicType|))
                         (|makeByteWordVec2| 85
                                             '(1 9 11 0 12 1 14 13 9 15 1 13 18
                                               0 19 1 21 20 20 22 2 23 9 9 20 24

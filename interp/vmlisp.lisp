@@ -264,10 +264,8 @@
                (GO A)))))
 ; 14.5 Updating
 
-(defun NREMOVE (list item &optional (count 1))
-  (if (integerp count)
-      (delete item list :count count :test #'equal)
-      (delete item list :test #'equal)))
+(defun NREMOVE (list item)
+    (delete item list :test #'equal))
 
 (defun EFFACE (item list) (delete item list :count 1 :test #'equal))
 
@@ -276,8 +274,7 @@
 ; 14.6 Miscellaneous
 
 (defun SORTBY (keyfn l)
- (declare (special sortgreaterp))
-  (nreverse (sort (copy-seq l) SORTGREATERP :key keyfn)))
+    (sort (copy-seq l) #'|lt_sexp| :key keyfn))
 
 ; 16.0 Operations on Vectors
 
@@ -431,7 +428,7 @@
 
 
 #-AKCL
-(defun concat (a b &rest l)
+(defun CONCAT (a b &rest l)
    (let ((type (cond ((bit-vector-p a) 'bit-vector) (t 'string))))
       (cond ((eq type 'string)
              (setq a (string a) b (string b))
@@ -439,14 +436,14 @@
       (if l (apply #'concatenate type a b l)
         (concatenate type a b))) )
 #+AKCL
-(defun concat (a b &rest l)
+(defun CONCAT (a b &rest l)
   (if (bit-vector-p a)
       (if l (apply #'concatenate 'bit-vector a b l)
         (concatenate 'bit-vector a b))
     (if l (apply #'system:string-concatenate a b l)
       (system:string-concatenate a b))))
 
-(define-function 'strconc #'concat)
+(define-function 'STRCONC #'CONCAT)
 
 (defun |make_full_CVEC2|(sint char)
   (make-string sint :initial-element (if (integerp char)
@@ -641,7 +638,7 @@
 
 (defun |read_line| (st) (read-line st nil nil))
 
-;;; GCMSG when called with argument eqal to NIL is supposed to
+;;; GCMSG when called with argument equal to NIL is supposed to
 ;;; supress messages from garbage collector.  Empty body is
 ;;; OK if garbage collector prints no messages.
 #+:gcl
@@ -706,56 +703,6 @@
                  res
                  func)))
       ((symbolp func) func)))
-
-#+:cmu
-(defun OBEY (S)
-  (ext::process-exit-code
-   (ext::run-program "sh" (list "-c" S) :input t :output t)))
-
-#+:GCL
-(defun OBEY (S) (SI::SYSTEM S))
-
-#+:allegro
-(defun OBEY (S) (excl::run-shell-command s))
-
-(defvar *OBEY-STDOUT* nil "if T use *standard output*")
-#+:sbcl
-(defun OBEY (S)
-   #-:win32 (if *OBEY-STDOUT*
-               (sb-ext::process-exit-code
-                (sb-ext::run-program "/bin/sh" (list "-c" S) :input t
-                     :output *standard-output* :error *standard-output*))
-
-               (sb-ext::process-exit-code
-                (sb-ext::run-program "/bin/sh"
-                    (list "-c" S) :input t :output t :error t)))
-   #+:win32 (sb-ext::process-exit-code
-             (sb-ext::run-program "sh"
-                    (list "-c" S) :input t :output t :error t :search t)))
-
-#+:openmcl
-(defun OBEY (S)
-  (ccl::run-program "sh" (list "-c" S) :input t :output t :error t))
-
-#+(and :clisp (or :win32 :unix))
-(defun OBEY (S)
-   (ext:run-shell-command S))
-
-#+:ecl
-(defun OBEY (S)
-   (ext:system S))
-
-#+:poplog
-(defun OBEY (S)
-   (POP11:sysobey S))
-
-#+:abcl
-(defun OBEY (S)
-   (sys:run-program "sh" (list "-c" S) :input t :output t :error t))
-
-#+:lispworks
-(defun OBEY (S)
-   (system:call-system S))
 
 ;;; moved from hash.lisp
 

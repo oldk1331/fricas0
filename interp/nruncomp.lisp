@@ -3,6 +3,10 @@
 
 (IN-PACKAGE "BOOT")
 
+; $bootstrapDomains := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$bootstrapDomains| NIL))
+
 ; NRTaddDeltaCode(kvec) ==
 ; --NOTES: This function is called from buildFunctor to initially
 ; --  fill slots in $template. The $template so created is stored in the
@@ -116,6 +120,10 @@
                  NIL |formalSig| NIL))
         (CONS |newSig| (CONS |dcCode| (CONS |op| |kindFlag|)))))))))
 
+; $devaluateList := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$devaluateList| NIL))
+
 ; NRTreplaceAllLocalReferences(form) ==
 ;   $devaluateList :local := []
 ;   NRTputInLocalReferences form
@@ -140,7 +148,7 @@
 ;               [QCAR(x), :[['_:, a, encode(b, c, false, true)]
 ;                for [., a, b] in QCDR(x) for [., =a, c] in rest compForm]]
 ;           constructor?(QCAR(x)) or MEMQ(QCAR x, '(Union Mapping)) =>
-;               cosig := rest GETDATABASE(QCAR(x), 'COSIG)
+;               cosig := rest(get_database(QCAR(x), 'COSIG))
 ;               if NULL(cosig) then
 ;                   cosig := [true for y in QCDR(x)]
 ;               [QCAR x, :[encode(y, z, false, cdom) for y in QCDR(x)
@@ -234,7 +242,7 @@
         ((OR (|constructor?| (QCAR |x|))
              (MEMQ (QCAR |x|) '(|Union| |Mapping|)))
          (PROGN
-          (SETQ |cosig| (CDR (GETDATABASE (QCAR |x|) 'COSIG)))
+          (SETQ |cosig| (CDR (|get_database| (QCAR |x|) 'COSIG)))
           (COND
            ((NULL |cosig|)
             (SETQ |cosig|
@@ -727,7 +735,7 @@
 ; cheap_comp_delta_entry(item) ==
 ;     item is [op, :args] =>
 ;         not(ATOM(op)) => false
-;         null(cosig := GETDATABASE(op, 'COSIG)) => false
+;         null(cosig := get_database(op, 'COSIG)) => false
 ;         ok := true
 ;         for arg in args for tp in rest(cosig) while ok repeat
 ;             ok :=
@@ -745,7 +753,7 @@
       ((AND (CONSP |item|)
             (PROGN (SETQ |op| (CAR |item|)) (SETQ |args| (CDR |item|)) #1='T))
        (COND ((NULL (ATOM |op|)) NIL)
-             ((NULL (SETQ |cosig| (GETDATABASE |op| 'COSIG))) NIL)
+             ((NULL (SETQ |cosig| (|get_database| |op| 'COSIG))) NIL)
              (#1#
               (PROGN
                (SETQ |ok| T)
@@ -868,7 +876,7 @@
 ;     isFunctor op or op = 'Mapping or constructor? op =>
 ;          -- call to constructor? needed if op was compiled in $bootStrapMode
 ;         not(op = 'Mapping or op = 'Union) and
-;           (cosig := GETDATABASE(op, 'COSIG)) =>
+;           (cosig := get_database(op, 'COSIG)) =>
 ;             mkList([MKQ op, :[maybe_cons_dn(y, dc, e, c) for y in argl
 ;                               for c in rest(cosig)]])
 ;         mkList [MKQ op, :[consDomainName(y, dc, e) for y in argl]]
@@ -928,7 +936,7 @@
                   (|constructor?| |op|))
               (COND
                ((AND (NULL (OR (EQ |op| '|Mapping|) (EQ |op| '|Union|)))
-                     (SETQ |cosig| (GETDATABASE |op| 'COSIG)))
+                     (SETQ |cosig| (|get_database| |op| 'COSIG)))
                 (|mkList|
                  (CONS (MKQ |op|)
                        ((LAMBDA (|bfVar#40| |bfVar#38| |y| |bfVar#39| |c|)

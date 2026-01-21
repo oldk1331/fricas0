@@ -89,7 +89,7 @@
 
 (SDEFUN |PFACET;=;2%B;10| ((|a| (%)) (|b| (%)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G72 NIL) (#2=#:G73 NIL) (|inda| NIL) (#3=#:G74 NIL)
+         ((#1=#:G64 NIL) (#2=#:G65 NIL) (|inda| NIL) (#3=#:G66 NIL)
           (|indb| NIL)
           (|indbs|
            #4=(|List|
@@ -101,7 +101,7 @@
            (SEQ
             (COND
              ((SPADCALL (QCAR |a|) (QCAR |b|) (QREFELT % 24))
-              (PROGN (LETT #1# NIL) (GO #5=#:G71))))
+              (PROGN (LETT #1# NIL) (GO #5=#:G63))))
             (LETT |indas| (SPADCALL |a| (QREFELT % 14)))
             (LETT |indbs| (SPADCALL |b| (QREFELT % 14)))
             (COND
@@ -130,7 +130,7 @@
         (SPROG
          ((|body| (|OutputForm|)) (|elements| (|List| (|OutputForm|)))
           (|element| (|OutputForm|)) (|r| (|NonNegativeInteger|))
-          (|l| (|NonNegativeInteger|)) (#1=#:G84 NIL) (|x| NIL)
+          (|l| (|NonNegativeInteger|)) (#1=#:G76 NIL) (|x| NIL)
           (|prefix| (|OutputForm|)) (|m| (|Integer|)))
          (SEQ (LETT |prefix| (SPADCALL "" (QREFELT % 28)))
               (LETT |m| (QCAR |s|))
@@ -165,7 +165,7 @@
 
 (DEFUN |ProductFacet| ()
   (SPROG NIL
-         (PROG (#1=#:G86)
+         (PROG (#1=#:G78)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ProductFacet|))
@@ -220,24 +220,22 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0))
                  (CONS
-                  '#(|FacetCategory&| |OrderedSet&| NIL |SetCategory&|
-                     |PartialOrder&| |BasicType&| NIL)
+                  '#(|FacetCategory&| |OrderedSet&| NIL |SetCategory&| NIL
+                     |BasicType&| |PartialOrder&|)
                   (CONS
                    '#((|FacetCategory|) (|OrderedSet|) (|Comparable|)
-                      (|SetCategory|) (|PartialOrder|) (|BasicType|)
-                      (|CoercibleTo| 27))
+                      (|SetCategory|) (|CoercibleTo| 27) (|BasicType|)
+                      (|PartialOrder|))
                    (|makeByteWordVec2| 37
                                        '(1 11 9 0 12 2 9 0 0 8 21 2 7 23 0 0 24
                                          1 27 0 26 28 1 7 27 0 29 2 27 0 0 0 30
                                          1 15 27 0 31 1 27 0 32 33 2 34 0 0 27
                                          35 1 27 0 32 36 2 0 23 0 0 1 2 0 23 0
-                                         0 1 2 0 0 0 7 20 2 0 0 7 9 10 2 0 0 7
-                                         11 13 1 0 15 0 18 2 0 0 0 0 1 2 0 0 0
-                                         0 1 1 0 26 0 1 1 0 7 0 19 1 0 15 0 17
-                                         1 0 15 0 16 1 0 9 0 14 1 0 23 0 1 1 0
-                                         27 0 37 2 0 0 0 8 22 2 0 23 0 0 1 2 0
-                                         23 0 0 1 2 0 23 0 0 25 2 0 23 0 0 1 2
-                                         0 23 0 0 1)))))
+                                         0 1 2 0 0 0 7 20 2 0 0 7 11 13 2 0 0 7
+                                         9 10 1 0 15 0 18 2 0 0 0 0 1 2 0 0 0 0
+                                         1 1 0 26 0 1 1 0 7 0 19 1 0 15 0 17 1
+                                         0 15 0 16 1 0 9 0 14 1 0 23 0 1 1 0 27
+                                         0 37 2 0 0 0 8 22 2 0 23 0 0 1 2 0 23
+                                         0 0 1 2 0 23 0 0 25 2 0 23 0 0 1 2 0
+                                         23 0 0 1)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|ProductFacet| 'NILADIC T) 

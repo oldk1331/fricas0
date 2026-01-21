@@ -49,12 +49,12 @@
               |VARIABLE;=;2%B;4| (|String|))
            '#(~= 5 |variable| 11 |latex| 15 |coerce| 20 = 30) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL NIL)
+                 (CONS '#(|SetCategory&| NIL NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 7)
-                           (|CoercibleTo| 9))
+                        '#((|SetCategory|) (|CoercibleTo| 9) (|CoercibleTo| 7)
+                           (|BasicType|))
                         (|makeByteWordVec2| 15
                                             '(1 7 9 0 10 2 0 13 0 0 1 0 0 7 12
-                                              1 0 15 0 1 1 0 7 0 8 1 0 9 0 11 2
+                                              1 0 15 0 1 1 0 9 0 11 1 0 7 0 8 2
                                               0 13 0 0 14)))))
            '|lookupComplete|)) 

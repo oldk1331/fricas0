@@ -510,10 +510,10 @@
            (|List| (|HomogeneousDistributedMultivariatePolynomial| |lv| F)))
           (|part|
            (|List| (|HomogeneousDistributedMultivariatePolynomial| |lv| F)))
-          (#1=#:G131 NIL) (|var| NIL)
+          (#1=#:G123 NIL) (|var| NIL)
           (|mB|
            (|List| (|HomogeneousDistributedMultivariatePolynomial| |lv| F)))
-          (#2=#:G130 NIL) (|f| NIL) (#3=#:G129 NIL))
+          (#2=#:G122 NIL) (|f| NIL) (#3=#:G121 NIL))
          (SEQ
           (LETT |mB|
                 (PROGN
@@ -554,7 +554,7 @@
          ((|part|
            (|List| (|HomogeneousDistributedMultivariatePolynomial| |lv| F)))
           (|g| (|HomogeneousDistributedMultivariatePolynomial| |lv| F))
-          (#1=#:G137 NIL) (|f| NIL))
+          (#1=#:G129 NIL) (|f| NIL))
          (SEQ
           (COND ((SPADCALL |lr| NIL (QREFELT % 84)) |lr|)
                 ('T
@@ -612,7 +612,7 @@
         ((|vv| (|List| F)) (|mf| (|DistributedMultivariatePolynomial| |lv| F))
          (B (|List| (|DistributedMultivariatePolynomial| |lv| F)))
          (% (|DistributedMultivariatePolynomial| |lv| F)))
-        (SPROG ((#1=#:G151 NIL) (|f| NIL) (#2=#:G152 NIL) (|c| NIL))
+        (SPROG ((#1=#:G143 NIL) (|f| NIL) (#2=#:G144 NIL) (|c| NIL))
                (SEQ
                 (SEQ (LETT |c| NIL) (LETT #2# |vv|) (LETT |f| NIL) (LETT #1# B)
                      G190
@@ -1276,8 +1276,8 @@
                                               107 2 92 10 0 16 108 2 40 109 0
                                               10 110 2 111 40 0 40 112 1 113 47
                                               47 114 1 0 28 40 51 1 0 47 29 66
-                                              2 0 28 29 10 68 3 0 28 29 29 10
-                                              67 1 0 104 29 105 3 0 29 10 29 29
+                                              3 0 28 29 29 10 67 2 0 28 29 10
+                                              68 1 0 104 29 105 3 0 29 10 29 29
                                               82 1 0 115 47 116 2 0 15 28 29 56
                                               1 0 29 29 39 2 0 40 40 47 48 3 0
                                               40 88 40 47 89)))))

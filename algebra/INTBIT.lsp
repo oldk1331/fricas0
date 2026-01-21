@@ -64,5 +64,3 @@
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 10 '(2 0 6 7 8 9 2 0 7 7 8 10)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|IntegerBits| 'NILADIC T) 

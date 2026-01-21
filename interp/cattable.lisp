@@ -11,19 +11,15 @@
 
 (DEFVAR |$ancestors_hash| NIL)
 
-; compressHashTable(ht) == ht
-
-(DEFUN |compressHashTable| (|ht|) (PROG () (RETURN |ht|)))
-
 ; hasCat(domainOrCatName,catName) ==
-;   catName='Type  -- every domain is a Type
-;    or GETDATABASE([domainOrCatName,:catName],'HASCATEGORY)
+;     catName='Type  -- every domain is a Type
+;         or get_database([domainOrCatName, :catName], 'HASCATEGORY)
 
 (DEFUN |hasCat| (|domainOrCatName| |catName|)
   (PROG ()
     (RETURN
      (OR (EQ |catName| '|Type|)
-         (GETDATABASE (CONS |domainOrCatName| |catName|) 'HASCATEGORY)))))
+         (|get_database| (CONS |domainOrCatName| |catName|) 'HASCATEGORY)))))
 
 ; showCategoryTable con ==
 ;   [[b,:val] for (key :=[a,:b]) in HKEYS $has_category_hash
@@ -93,9 +89,9 @@
 ;   genTempCategoryTable()
 ;   domainList:=
 ;     [con for con in allConstructors()
-;       | GETDATABASE(con,'CONSTRUCTORKIND) = 'domain]
+;         | get_database(con, 'CONSTRUCTORKIND) = 'domain]
 ;   domainTable:= [addDomainToTable(con,getConstrCat catl) for con
-;     in domainList | catl := GETDATABASE(con,'CONSTRUCTORCATEGORY)]
+;         in domainList | catl := get_database(con, 'CONSTRUCTORCATEGORY)]
 ;   -- $nonLisplibDomains, $noCategoryDomains are set in BUILDOM BOOT
 ;   specialDs := SETDIFFERENCE($nonLisplibDomains,$noCategoryDomains)
 ;   domainTable:= [:[addDomainToTable(id, getConstrCat (eval [id]).3)
@@ -104,9 +100,7 @@
 ;     for [a,:b] in encodeCategoryAlist(id,entry) repeat
 ;       HPUT($has_category_hash, [id, :a], b)
 ;   simpTempCategoryTable()
-;   compressHashTable $ancestors_hash
 ;   simpCategoryTable()
-;   compressHashTable $has_category_hash
 
 (DEFUN |genCategoryTable| ()
   (PROG (|b| |a| |entry| |id| |specialDs| |domainTable| |catl| |domainList|)
@@ -123,7 +117,7 @@
                         (PROGN (SETQ |con| (CAR |bfVar#5|)) NIL))
                     (RETURN (NREVERSE |bfVar#6|)))
                    (#1='T
-                    (AND (EQ (GETDATABASE |con| 'CONSTRUCTORKIND) '|domain|)
+                    (AND (EQ (|get_database| |con| 'CONSTRUCTORKIND) '|domain|)
                          (SETQ |bfVar#6| (CONS |con| |bfVar#6|)))))
                   (SETQ |bfVar#5| (CDR |bfVar#5|))))
                NIL (|allConstructors|) NIL))
@@ -135,12 +129,13 @@
                         (PROGN (SETQ |con| (CAR |bfVar#7|)) NIL))
                     (RETURN (NREVERSE |bfVar#8|)))
                    (#1#
-                    (AND (SETQ |catl| (GETDATABASE |con| 'CONSTRUCTORCATEGORY))
-                         (SETQ |bfVar#8|
-                                 (CONS
-                                  (|addDomainToTable| |con|
-                                   (|getConstrCat| |catl|))
-                                  |bfVar#8|)))))
+                    (AND
+                     (SETQ |catl| (|get_database| |con| 'CONSTRUCTORCATEGORY))
+                     (SETQ |bfVar#8|
+                             (CONS
+                              (|addDomainToTable| |con|
+                               (|getConstrCat| |catl|))
+                              |bfVar#8|)))))
                   (SETQ |bfVar#7| (CDR |bfVar#7|))))
                NIL |domainList| NIL))
       (SETQ |specialDs|
@@ -192,13 +187,11 @@
           (SETQ |bfVar#12| (CDR |bfVar#12|))))
        |domainTable| NIL)
       (|simpTempCategoryTable|)
-      (|compressHashTable| |$ancestors_hash|)
-      (|simpCategoryTable|)
-      (|compressHashTable| |$has_category_hash|)))))
+      (|simpCategoryTable|)))))
 
 ; simpTempCategoryTable() ==
 ;   for id in HKEYS $ancestors_hash repeat
-;     for (u:=[a,:b]) in GETDATABASE(id,'ANCESTORS) repeat
+;     for (u := [a, :b]) in get_database(id, 'ANCESTORS) repeat
 ;       RPLACD(u,simpHasPred b)
 
 (DEFUN |simpTempCategoryTable| ()
@@ -220,7 +213,7 @@
                       (PROGN (SETQ |a| (CAR |u|)) (SETQ |b| (CDR |u|)) #1#)
                       (RPLACD |u| (|simpHasPred| |b|)))))
                (SETQ |bfVar#16| (CDR |bfVar#16|))))
-            (GETDATABASE |id| 'ANCESTORS) NIL)))
+            (|get_database| |id| 'ANCESTORS) NIL)))
          (SETQ |bfVar#15| (CDR |bfVar#15|))))
       (HKEYS |$ancestors_hash|) NIL))))
 
@@ -438,7 +431,7 @@
 ;   IDENTP conform => pred
 ;   [conname,:args] := conform
 ;   n := #sig
-;   u := LASSOC(op,GETDATABASE(conname,'OPERATIONALIST))
+;   u := LASSOC(op, get_database(conname, 'OPERATIONALIST))
 ;   candidates := [x for (x := [sig1,:.]) in u | #sig1 = #sig]  or return false
 ;   match := or/[x for (x := [sig1,:.]) in candidates
 ;                 | sig = sublisFormal(args,sig1)] or return false
@@ -454,7 +447,8 @@
              (SETQ |conname| (CAR |conform|))
              (SETQ |args| (CDR |conform|))
              (SETQ |n| (LENGTH |sig|))
-             (SETQ |u| (LASSOC |op| (GETDATABASE |conname| 'OPERATIONALIST)))
+             (SETQ |u|
+                     (LASSOC |op| (|get_database| |conname| 'OPERATIONALIST)))
              (SETQ |candidates|
                      (OR
                       ((LAMBDA (|bfVar#27| |bfVar#26| |x|)
@@ -605,8 +599,8 @@
 ;   --           "IF pred THEN ofCategory(key,form)"
 ;   --  where form can involve #1, #2, ... the parameters of key
 ;   for con in allConstructors()  repeat
-;     GETDATABASE(con,'CONSTRUCTORKIND) = 'category =>
-;       addToCategoryTable con
+;         get_database(con, 'CONSTRUCTORKIND) = 'category =>
+;             addToCategoryTable con
 ;   for id in HKEYS $ancestors_hash repeat
 ;     item := HGET($ancestors_hash, id)
 ;     for (u:=[.,:b]) in item repeat
@@ -624,7 +618,7 @@
             (RETURN NIL))
            (#1='T
             (COND
-             ((EQ (GETDATABASE |con| 'CONSTRUCTORKIND) '|category|)
+             ((EQ (|get_database| |con| 'CONSTRUCTORKIND) '|category|)
               (IDENTITY (|addToCategoryTable| |con|))))))
           (SETQ |bfVar#36| (CDR |bfVar#36|))))
        (|allConstructors|) NIL)
@@ -652,7 +646,7 @@
        (HKEYS |$ancestors_hash|) NIL)))))
 
 ; addToCategoryTable con ==
-;   u := CAAR GETDATABASE(con,'CONSTRUCTORMODEMAP) --domain
+;   u := CAAR(get_database(con, 'CONSTRUCTORMODEMAP)) --domain
 ;   alist := getCategoryExtensionAlist u
 ;   HPUT($ancestors_hash, first u, alist)
 ;   alist
@@ -661,7 +655,7 @@
   (PROG (|u| |alist|)
     (RETURN
      (PROGN
-      (SETQ |u| (CAAR (GETDATABASE |con| 'CONSTRUCTORMODEMAP)))
+      (SETQ |u| (CAAR (|get_database| |con| 'CONSTRUCTORMODEMAP)))
       (SETQ |alist| (|getCategoryExtensionAlist| |u|))
       (HPUT |$ancestors_hash| (CAR |u|) |alist|)
       |alist|))))
@@ -845,7 +839,7 @@
             (#2# (CONS 'OR |newList|)))))))
 
 ; tempExtendsCat(b,c) ==
-;   or/[first c = a for [[a,:.],:.] in GETDATABASE(first b,'ANCESTORS)]
+;     or/[first c = a for [[a, :.], :.] in get_database(first(b), 'ANCESTORS)]
 
 (DEFUN |tempExtendsCat| (|b| |c|)
   (PROG (|ISTMP#1| |a|)
@@ -866,7 +860,7 @@
                  (SETQ |bfVar#44| (EQUAL (CAR |c|) |a|))
                  (COND (|bfVar#44| (RETURN |bfVar#44|)))))))
          (SETQ |bfVar#43| (CDR |bfVar#43|))))
-      NIL (GETDATABASE (CAR |b|) 'ANCESTORS) NIL))))
+      NIL (|get_database| (CAR |b|) 'ANCESTORS) NIL))))
 
 ; getCategoryExtensionAlist0 cform ==
 ;   [[cform,:'T],:getCategoryExtensionAlist cform]
@@ -875,16 +869,16 @@
   (PROG ()
     (RETURN (CONS (CONS |cform| 'T) (|getCategoryExtensionAlist| |cform|)))))
 
-; getCategoryExtensionAlist cform ==
-;   --avoids substitution as much as possible
-;   u:= GETDATABASE(first cform,'ANCESTORS) => formalSubstitute(cform,u)
-;   mkCategoryExtensionAlist cform
+; getCategoryExtensionAlist(cform) ==
+;     --avoids substitution as much as possible
+;     u := get_database(first(cform), 'ANCESTORS) => formalSubstitute(cform, u)
+;     mkCategoryExtensionAlist(cform)
 
 (DEFUN |getCategoryExtensionAlist| (|cform|)
   (PROG (|u|)
     (RETURN
      (COND
-      ((SETQ |u| (GETDATABASE (CAR |cform|) 'ANCESTORS))
+      ((SETQ |u| (|get_database| (CAR |cform|) 'ANCESTORS))
        (|formalSubstitute| |cform| |u|))
       ('T (|mkCategoryExtensionAlist| |cform|))))))
 
@@ -1196,7 +1190,7 @@
       (#1# NIL)))))
 
 ; testExtend(a:=[op,:argl],b) ==
-;   (u:= GETDATABASE(op,'ANCESTORS)) and (val:= LASSOC(b,u)) =>
+;   (u := get_database(op, 'ANCESTORS)) and (val := LASSOC(b, u)) =>
 ;     formalSubstitute(a,val)
 ;   nil
 
@@ -1207,7 +1201,7 @@
       (SETQ |op| (CAR |a|))
       (SETQ |argl| (CDR |a|))
       (COND
-       ((AND (SETQ |u| (GETDATABASE |op| 'ANCESTORS))
+       ((AND (SETQ |u| (|get_database| |op| 'ANCESTORS))
              (SETQ |val| (LASSOC |b| |u|)))
         (|formalSubstitute| |a| |val|))
        ('T NIL))))))
@@ -1345,13 +1339,13 @@
       |cats|))))
 
 ; getConstructorExports(conform, do_constr) == categoryParts(conform,
-;   GETDATABASE(opOf conform, 'CONSTRUCTORCATEGORY), do_constr)
+;     get_database(opOf(conform), 'CONSTRUCTORCATEGORY), do_constr)
 
 (DEFUN |getConstructorExports| (|conform| |do_constr|)
   (PROG ()
     (RETURN
      (|categoryParts| |conform|
-      (GETDATABASE (|opOf| |conform|) 'CONSTRUCTORCATEGORY) |do_constr|))))
+      (|get_database| (|opOf| |conform|) 'CONSTRUCTORCATEGORY) |do_constr|))))
 
 ; DEFVAR($oplist)
 
@@ -1362,14 +1356,14 @@
 (DEFVAR |$conslist|)
 
 ; categoryParts(conform, category, do_constr) ==
-;     kind := GETDATABASE(opOf(conform), 'CONSTRUCTORKIND)
+;     kind := get_database(opOf(conform), 'CONSTRUCTORKIND)
 ;     categoryParts1(kind, conform, category, do_constr)
 
 (DEFUN |categoryParts| (|conform| |category| |do_constr|)
   (PROG (|kind|)
     (RETURN
      (PROGN
-      (SETQ |kind| (GETDATABASE (|opOf| |conform|) 'CONSTRUCTORKIND))
+      (SETQ |kind| (|get_database| (|opOf| |conform|) 'CONSTRUCTORKIND))
       (|categoryParts1| |kind| |conform| |category| |do_constr|)))))
 
 ; categoryParts1(kind, conform, category, do_constr) == main where
@@ -1393,6 +1387,7 @@
 ;       constructor? opOf attr =>
 ;         $conslist := [[attr,:pred],:$conslist]
 ;         nil
+;       -- FIXME: Just signal user error
 ;       BREAK()
 ;     item is ['TYPE,op,type] =>
 ;         BREAK()
@@ -1557,7 +1552,7 @@
 ; updateCategoryTable(cname,kind) ==
 ;   kind = 'domain =>
 ;     updateCategoryTableForDomain(cname,getConstrCat(
-;       GETDATABASE(cname,'CONSTRUCTORCATEGORY)))
+;             get_database(cname, 'CONSTRUCTORCATEGORY)))
 
 (DEFUN |updateCategoryTable| (|cname| |kind|)
   (PROG ()
@@ -1566,15 +1561,13 @@
       ((EQ |kind| '|domain|)
        (IDENTITY
         (|updateCategoryTableForDomain| |cname|
-         (|getConstrCat| (GETDATABASE |cname| 'CONSTRUCTORCATEGORY)))))))))
+         (|getConstrCat| (|get_database| |cname| 'CONSTRUCTORCATEGORY)))))))))
 
 ; updateCategoryTableForDomain(cname,category) ==
 ;   clearCategoryTable(cname)
 ;   [cname,:domainEntry]:= addDomainToTable(cname,category)
 ;   for [a,:b] in encodeCategoryAlist(cname,domainEntry) repeat
 ;     HPUT($has_category_hash, [cname, :a], b)
-;   $doNotCompressHashTableIfTrue = true => $has_category_hash
-;   compressHashTable $has_category_hash
 
 (DEFUN |updateCategoryTableForDomain| (|cname| |category|)
   (PROG (|LETTMP#1| |domainEntry| |a| |b|)
@@ -1598,9 +1591,7 @@
                   #1#)
                  (HPUT |$has_category_hash| (CONS |cname| |a|) |b|))))
           (SETQ |bfVar#69| (CDR |bfVar#69|))))
-       (|encodeCategoryAlist| |cname| |domainEntry|) NIL)
-      (COND ((EQUAL |$doNotCompressHashTableIfTrue| T) |$has_category_hash|)
-            (#1# (|compressHashTable| |$has_category_hash|)))))))
+       (|encodeCategoryAlist| |cname| |domainEntry|) NIL)))))
 
 ; clearCategoryTable($cname) ==
 ;   MAPHASH('clearCategoryTable1, $has_category_hash)
@@ -1623,7 +1614,7 @@
 ;   for key in HKEYS($ancestors_hash) repeat
 ;     MEMQ(key,catNames) => nil
 ;     extensions:= nil
-;     for (extension:= [catForm,:.]) in GETDATABASE(key,'ANCESTORS)
+;     for (extension := [catForm, :.]) in get_database(key, 'ANCESTORS)
 ;       repeat
 ;         MEMQ(first catForm, catNames) => nil
 ;         extensions:= [extension,:extensions]
@@ -1657,7 +1648,7 @@
                                              (CONS |extension|
                                                    |extensions|)))))))
                        (SETQ |bfVar#71| (CDR |bfVar#71|))))
-                    (GETDATABASE |key| 'ANCESTORS) NIL)
+                    (|get_database| |key| 'ANCESTORS) NIL)
                    (HPUT |$ancestors_hash| |key| |extensions|))))))
          (SETQ |bfVar#70| (CDR |bfVar#70|))))
       (HKEYS |$ancestors_hash|) NIL))))

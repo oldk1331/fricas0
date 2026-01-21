@@ -308,9 +308,9 @@
 (SDEFUN |IR;differentiate;%MF;24|
         ((|u| (%)) (|derivation| (|Mapping| F F)) (% (F)))
         (SPROG
-         ((#1=#:G148 NIL) (#2=#:G147 (F)) (#3=#:G149 (F)) (#4=#:G153 NIL)
-          (|ne| NIL) (#5=#:G143 NIL) (#6=#:G142 (F)) (#7=#:G144 (F))
-          (#8=#:G152 NIL) (|log| NIL))
+         ((#1=#:G140 NIL) (#2=#:G139 (F)) (#3=#:G141 (F)) (#4=#:G145 NIL)
+          (|ne| NIL) (#5=#:G135 NIL) (#6=#:G134 (F)) (#7=#:G136 (F))
+          (#8=#:G144 NIL) (|log| NIL))
          (SEQ
           (SPADCALL
            (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 24)) |derivation|)
@@ -369,11 +369,11 @@
          (|derivation| (|Mapping| F F)) (% (F)))
         (SPROG
          ((|ans| (F)) (|algans| #1=(|SparseUnivariatePolynomial| F))
-          (#2=#:G176 NIL) (|i| NIL)
+          (#2=#:G168 NIL) (|i| NIL)
           (|diflog|
            (|Record| (|:| |coef1| #1#)
                      (|:| |coef2| (|SparseUnivariatePolynomial| F))))
-          (#3=#:G167 NIL) (|numlog| (|SparseUnivariatePolynomial| F)) (|c| (F))
+          (#3=#:G159 NIL) (|numlog| (|SparseUnivariatePolynomial| F)) (|c| (F))
           (|n| (|NonNegativeInteger|)))
          (SEQ
           (COND
@@ -459,8 +459,8 @@
 
 (SDEFUN |IR;coerce;%Of;27| ((|u| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|l| (|List| (|OutputForm|))) (#1=#:G202 NIL) (|f| NIL)
-          (#2=#:G201 NIL) (#3=#:G200 NIL) (#4=#:G199 NIL)
+         ((|l| (|List| (|OutputForm|))) (#1=#:G194 NIL) (|f| NIL)
+          (#2=#:G193 NIL) (#3=#:G192 NIL) (#4=#:G191 NIL)
           (|r| (|Union| F "failed")))
          (SEQ (LETT |r| (SPADCALL |u| (QREFELT % 67)))
               (EXIT
@@ -532,9 +532,9 @@
 
 (DECLAIM (NOTINLINE |IntegrationResult;|)) 
 
-(DEFUN |IntegrationResult| (#1=#:G209)
+(DEFUN |IntegrationResult| (#1=#:G201)
   (SPROG NIL
-         (PROG (#2=#:G210)
+         (PROG (#2=#:G202)
            (RETURN
             (COND
              ((LETT #2#
@@ -550,7 +550,7 @@
                   (HREM |$ConstructorCache| '|IntegrationResult|)))))))))) 
 
 (DEFUN |IntegrationResult;| (|#1|)
-  (SPROG ((|pv$| NIL) (#1=#:G208 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (#1=#:G200 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|IntegrationResult| DV$1))
@@ -654,8 +654,8 @@
               (253 . |extendedEuclidean|) (260 . -) (266 . |monomial|)
               (272 . *) (278 . |rem|) (|List| 10) (284 . |concat|)
               |IR;coerce;%Of;27| (290 . +) (|Mapping| 10 10 10)
-              (296 . |reduce|) (302 . |hconcat|) (307 . |int|)
-              (|Union| % '"failed") (|PositiveInteger|) (|String|))
+              (296 . |reduce|) (302 . |hconcat|) (307 . |int|) (|String|)
+              (|PositiveInteger|) (|Union| % '"failed"))
            '#(~= 312 |zero?| 318 |subtractIfCan| 323 |sample| 329
               |retractIfCan| 333 |retract| 338 |ratpart| 343 |opposite?| 348
               |notelem| 354 |mkAnswer| 359 |logpart| 366 |latex| 371 |integral|
@@ -665,14 +665,14 @@
            (CONS (|makeByteWordVec2| 3 '(0 0 0 0 1 1 3 0 0 0 0 0 0))
                  (CONS
                   '#(|Module&| NIL NIL NIL |AbelianGroup&| NIL |AbelianMonoid&|
-                     |AbelianSemiGroup&| |RetractableTo&| |SetCategory&| NIL
+                     |AbelianSemiGroup&| |SetCategory&| |RetractableTo&| NIL
                      |BasicType&| NIL)
                   (CONS
-                   '#((|Module| 29) (|BiModule| 29 29) (|LeftModule| 29)
-                      (|RightModule| 29) (|AbelianGroup|)
+                   '#((|Module| 29) (|BiModule| 29 29) (|RightModule| 29)
+                      (|LeftModule| 29) (|AbelianGroup|)
                       (|CancellationAbelianMonoid|) (|AbelianMonoid|)
-                      (|AbelianSemiGroup|) (|RetractableTo| 6) (|SetCategory|)
-                      (|CoercibleFrom| 6) (|BasicType|) (|CoercibleTo| 10))
+                      (|AbelianSemiGroup|) (|SetCategory|) (|RetractableTo| 6)
+                      (|CoercibleTo| 10) (|BasicType|) (|CoercibleFrom| 6))
                    (|makeByteWordVec2| 103
                                        '(0 8 0 9 1 8 10 0 11 0 6 0 17 2 29 0 29
                                          0 30 1 6 27 0 31 2 6 0 0 0 33 1 29 0
@@ -694,13 +694,13 @@
                                          45 0 0 0 91 2 45 0 0 0 92 2 93 0 0 0
                                          94 2 10 0 0 0 96 2 93 10 97 0 98 1 10
                                          0 52 99 1 10 0 0 100 2 0 27 0 0 1 1 2
-                                         27 0 1 2 1 101 0 0 1 0 2 0 1 1 0 66 0
+                                         27 0 1 2 1 103 0 0 1 0 2 0 1 1 0 66 0
                                          67 1 0 6 0 1 1 0 6 0 24 2 2 27 0 0 1 1
                                          0 21 0 26 3 0 0 6 19 21 22 1 0 19 0 25
-                                         1 0 103 0 1 2 5 0 6 8 43 2 0 0 6 6 32
-                                         1 0 27 0 28 2 4 6 0 8 80 2 0 6 0 78 79
-                                         1 0 0 6 23 1 0 10 0 95 0 2 0 16 2 0 27
-                                         0 0 1 2 1 0 0 0 1 1 1 0 0 15 2 0 0 0 0
-                                         76 2 1 0 13 0 14 2 2 0 44 0 1 2 0 0 0
-                                         29 1 2 0 0 29 0 35 2 0 0 102 0 1)))))
+                                         1 0 101 0 1 2 0 0 6 6 32 2 5 0 6 8 43
+                                         1 0 27 0 28 2 0 6 0 78 79 2 4 6 0 8 80
+                                         1 0 10 0 95 1 0 0 6 23 0 2 0 16 2 0 27
+                                         0 0 1 1 1 0 0 15 2 1 0 0 0 1 2 0 0 0 0
+                                         76 2 0 0 102 0 1 2 0 0 29 0 35 2 0 0 0
+                                         29 1 2 1 0 13 0 14 2 2 0 44 0 1)))))
            '|lookupComplete|)) 

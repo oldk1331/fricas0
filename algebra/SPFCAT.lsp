@@ -55,5 +55,3 @@
                         (|has| % (|RetractableTo| (|Integer|)))))
                      NIL NIL NIL)))
            (SETELT #1# 0 '(|SpecialFunctionCategory|))))) 
-
-(MAKEPROP '|SpecialFunctionCategory| 'NILADIC T) 

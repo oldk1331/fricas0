@@ -11,5 +11,3 @@
   (SPROG ((#1=#:G1 NIL))
          (PROG1 (LETT #1# (|Join| (|OrderedSet|) (|SemiGroup|)))
            (SETELT #1# 0 '(|OrderedSemiGroup|))))) 
-
-(MAKEPROP '|OrderedSemiGroup| 'NILADIC T) 

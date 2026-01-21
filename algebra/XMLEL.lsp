@@ -18,8 +18,8 @@
 
 (SDEFUN |XMLEL;outputStructured| ((|rp| (%)) (% (|List| (|String|))))
         (SPROG
-         ((|res| (|List| #1=(|String|))) (#2=#:G43 NIL) (|el| NIL) (|atts| #1#)
-          (#3=#:G42 NIL) (|s| NIL) (#4=#:G41 NIL))
+         ((|res| (|List| #1=(|String|))) (#2=#:G35 NIL) (|el| NIL) (|atts| #1#)
+          (#3=#:G34 NIL) (|s| NIL) (#4=#:G33 NIL))
          (SEQ
           (LETT |atts|
                 (SPADCALL
@@ -65,8 +65,8 @@
 
 (SDEFUN |XMLEL;outputUnstructured| ((|rp| (%)) (% (|List| (|String|))))
         (SPROG
-         ((|res| (|List| #1=(|String|))) (|atts| #1#) (#2=#:G49 NIL) (|s| NIL)
-          (#3=#:G48 NIL))
+         ((|res| (|List| #1=(|String|))) (|atts| #1#) (#2=#:G41 NIL) (|s| NIL)
+          (#3=#:G40 NIL))
          (SEQ
           (LETT |atts|
                 (SPADCALL
@@ -101,8 +101,8 @@
 
 (SDEFUN |XMLEL;outputVRML;%TfV;7| ((|rp| (%)) (|f1| (|TextFile|)) (% (|Void|)))
         (SPROG
-         ((#1=#:G78 NIL) (|el| NIL) (#2=#:G77 NIL) (|att| NIL) (#3=#:G75 NIL)
-          (#4=#:G76 NIL))
+         ((#1=#:G70 NIL) (|el| NIL) (#2=#:G69 NIL) (|att| NIL) (#3=#:G67 NIL)
+          (#4=#:G68 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -115,7 +115,7 @@
                       (GO G191)))
                     (SEQ (EXIT (SPADCALL |el| |f1| (QREFELT % 26))))
                     (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT NIL))
-               (EXIT (PROGN (LETT #3# (|Void|)) (GO #5=#:G74))))))
+               (EXIT (PROGN (LETT #3# (|Void|)) (GO #5=#:G66))))))
             (SPADCALL |f1| (STRCONC (QVELT |rp| 0) "{") (QREFELT % 27))
             (COND
              ((EQUAL (QVELT |rp| 0) "Shape")
@@ -149,7 +149,7 @@
 
 (DEFUN |XmlElement| ()
   (SPROG NIL
-         (PROG (#1=#:G80)
+         (PROG (#1=#:G72)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|XmlElement|))
@@ -213,9 +213,7 @@
                                             '(1 12 7 0 13 1 7 0 8 14 1 16 15 0
                                               17 2 18 0 0 0 20 2 18 0 0 7 21 2
                                               25 7 0 7 27 2 12 24 0 25 28 3 0 0
-                                              7 7 9 11 3 0 0 7 8 9 10 2 0 24 0
+                                              7 8 9 10 3 0 0 7 7 9 11 2 0 24 0
                                               25 26 1 0 22 0 23 1 0 18 0
                                               19)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|XmlElement| 'NILADIC T) 

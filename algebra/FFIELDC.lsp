@@ -38,5 +38,3 @@
                                T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|FiniteFieldCategory|))))) 
-
-(MAKEPROP '|FiniteFieldCategory| 'NILADIC T) 

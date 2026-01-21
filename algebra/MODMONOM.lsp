@@ -72,24 +72,24 @@
               (|local| |#1|) (|local| |#2|) (|local| |#3|) '|Rep| (|Boolean|)
               |MODMONOM;<;2%B;1| |MODMONOM;exponent;%E;2|
               |MODMONOM;index;%IS;3| |MODMONOM;coerce;%R;4|
-              |MODMONOM;coerce;R%;5| |MODMONOM;construct;ISE%;6| (|OutputForm|)
-              (|String|))
+              |MODMONOM;coerce;R%;5| |MODMONOM;construct;ISE%;6| (|String|)
+              (|OutputForm|))
            '#(~= 0 |smaller?| 6 |min| 12 |max| 18 |latex| 24 |index| 29
               |exponent| 34 |construct| 39 |coerce| 45 >= 60 > 66 = 72 <= 78 <
               84)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0))
                  (CONS
-                  '#(|OrderedSet&| NIL |SetCategory&| |BasicType&|
-                     |PartialOrder&| NIL)
+                  '#(|OrderedSet&| NIL |SetCategory&| NIL |PartialOrder&|
+                     |BasicType&|)
                   (CONS
                    '#((|OrderedSet|) (|Comparable|) (|SetCategory|)
-                      (|BasicType|) (|PartialOrder|) (|CoercibleTo| 17))
+                      (|CoercibleTo| 18) (|PartialOrder|) (|BasicType|))
                    (|makeByteWordVec2| 18
                                        '(2 0 10 0 0 1 2 0 10 0 0 1 2 0 0 0 0 1
-                                         2 0 0 0 0 1 1 0 18 0 1 1 0 6 0 13 1 0
-                                         7 0 12 2 0 0 6 7 16 1 0 5 0 14 1 0 0 5
-                                         15 1 0 17 0 1 2 0 10 0 0 1 2 0 10 0 0
+                                         2 0 0 0 0 1 1 0 17 0 1 1 0 6 0 13 1 0
+                                         7 0 12 2 0 0 6 7 16 1 0 18 0 1 1 0 0 5
+                                         15 1 0 5 0 14 2 0 10 0 0 1 2 0 10 0 0
                                          1 2 0 10 0 0 1 2 0 10 0 0 1 2 0 10 0 0
                                          11)))))
            '|lookupComplete|)) 

@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |UnivariateFormalPowerSeries;|)) 
 
-(DEFUN |UnivariateFormalPowerSeries| (#1=#:G39)
+(DEFUN |UnivariateFormalPowerSeries| (#1=#:G43)
   (SPROG NIL
-         (PROG (#2=#:G40)
+         (PROG (#2=#:G44)
            (RETURN
             (COND
              ((LETT #2#
@@ -22,7 +22,7 @@
 
 (DEFUN |UnivariateFormalPowerSeries;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G33 NIL) (#2=#:G34 NIL) (#3=#:G35 NIL) (#4=#:G38 NIL)
+   ((|pv$| NIL) (#1=#:G37 NIL) (#2=#:G38 NIL) (#3=#:G39 NIL) (#4=#:G42 NIL)
     (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -289,70 +289,69 @@
            '#(NIL NIL NIL NIL NIL
               (|UnivariateTaylorSeries| 6 (NRTEVAL '|x|)
                                         (NRTEVAL (|spadConstant| % 7)))
-              (|local| |#1|) (0 . |Zero|) (|Boolean|) (|Union| % '"failed")
+              (|local| |#1|) (0 . |Zero|) (|Boolean|) (|OutputForm|) (|String|)
+              (|PositiveInteger|) (|Record| (|:| |k| 14) (|:| |c| 6))
+              (|List| 12) (|NonNegativeInteger|) (|Mapping| 6 6) (|Stream| 12)
+              (|Symbol|) (|Stream| 6) (|Polynomial| 6) (|Mapping| 6 23)
+              (|UnivariatePolynomial| (NRTEVAL '|x|) 6)
+              (|Variable| (NRTEVAL '|x|)) (|Integer|)
               (|Record| (|:| |unit| %) (|:| |canonical| %) (|:| |associate| %))
-              (|Symbol|) (|NonNegativeInteger|) (|List| 11) (|List| 12)
-              (|PositiveInteger|) (|Integer|)
-              (|Record| (|:| |k| 12) (|:| |c| 6)) (|List| 17)
-              (|Variable| (NRTEVAL '|x|)) (|Fraction| 16) (|Stream| 6)
-              (|UnivariatePolynomial| (NRTEVAL '|x|) 6) (|Polynomial| 6)
-              (|Mapping| 6 16) (|Stream| 17) (|Mapping| 6 6) (|String|)
-              (|OutputForm|))
+              (|Union| % '"failed") (|List| 17) (|List| 14) (|Fraction| 23))
            '#() 'NIL
            (CONS
             (|makeByteWordVec2| 23
-                                '(0 0 0 0 0 2 6 1 6 2 3 4 5 8 7 17 1 6 5 14 17
-                                  0 1 6 5 0 0 0 1 16 0 0 0 0 0 1 1 17 23 22 14
-                                  14 0 0 21 14 0 0 0 6 1 0 0 0 6 2 16 9 1 1 1 1
-                                  1 1))
+                                '(0 0 0 0 0 2 6 7 8 5 4 3 2 6 1 17 17 14 5 6 1
+                                  5 6 1 0 16 1 0 0 0 17 1 1 0 0 0 0 0 23 14 14
+                                  22 14 21 0 0 0 0 1 6 0 1 1 1 1 1 1 9 16 2 6 0
+                                  0 0))
             (CONS
              '#(|UnivariateTaylorSeriesCategory&| NIL
                 |UnivariatePowerSeriesCategory&| |PowerSeriesCategory&|
-                |AbelianMonoidRing&| NIL NIL |Algebra&| |Algebra&|
-                |EntireRing&| NIL NIL |Algebra&| |PartialDifferentialRing&|
-                |DifferentialRing&| NIL |NonAssociativeAlgebra&|
-                |NonAssociativeAlgebra&| |NonAssociativeAlgebra&| NIL |Rng&|
-                NIL |Module&| |Module&| |Module&| NIL NIL NIL NIL
-                |NonAssociativeRing&| NIL NIL NIL NIL NIL NIL NIL
-                |NonAssociativeRng&| |AbelianGroup&| NIL NIL NIL
-                |NonAssociativeSemiRng&| NIL |AbelianMonoid&| |MagmaWithUnit&|
-                |Magma&| |AbelianSemiGroup&| |SetCategory&| NIL
-                |TranscendentalFunctionCategory&| NIL |BasicType&| NIL NIL NIL
-                NIL NIL |TrigonometricFunctionCategory&|
+                |AbelianMonoidRing&| NIL NIL |DifferentialRing&|
+                |PartialDifferentialRing&| |Algebra&| NIL NIL |EntireRing&|
+                |Algebra&| |Algebra&| NIL |Rng&| NIL |NonAssociativeAlgebra&|
+                |NonAssociativeAlgebra&| |NonAssociativeAlgebra&| |Module&|
+                |Module&| |Module&| NIL |NonAssociativeRing&| NIL NIL NIL NIL
+                |NonAssociativeRng&| NIL NIL NIL NIL NIL NIL NIL
+                |AbelianGroup&| NIL NIL NIL |MagmaWithUnit&| |AbelianMonoid&|
+                NIL |NonAssociativeSemiRng&| |AbelianSemiGroup&| |Magma&|
+                |TranscendentalFunctionCategory&| NIL |SetCategory&|
+                |RadicalCategory&| |ElementaryFunctionCategory&| NIL
+                |HyperbolicFunctionCategory&|
                 |ArcTrigonometricFunctionCategory&|
-                |HyperbolicFunctionCategory&| NIL |ElementaryFunctionCategory&|
-                |RadicalCategory&|)
+                |TrigonometricFunctionCategory&| NIL NIL NIL NIL NIL
+                |BasicType&| NIL)
              (CONS
               '#((|UnivariateTaylorSeriesCategory| 6)
-                 (|UnivariateSeriesWithRationalExponents| 6 12)
-                 (|UnivariatePowerSeriesCategory| 6 12)
-                 (|PowerSeriesCategory| 6 12 (|SingletonAsOrderedSet|))
-                 (|AbelianMonoidRing| 6 12) (|IntegralDomain|)
-                 (|CommutativeRing|) (|Algebra| 20) (|Algebra| $$)
-                 (|EntireRing|) (|CharacteristicNonZero|)
-                 (|CharacteristicZero|) (|Algebra| 6)
-                 (|PartialDifferentialRing| 11) (|DifferentialRing|) (|Ring|)
-                 (|NonAssociativeAlgebra| 20) (|NonAssociativeAlgebra| $$)
-                 (|NonAssociativeAlgebra| 6) (|SemiRing|) (|Rng|) (|SemiRng|)
-                 (|Module| 20) (|Module| $$) (|Module| 6)
-                 (|IndexedProductCategory| 6 12) (|BiModule| 6 6)
-                 (|BiModule| $$ $$) (|BiModule| 20 20) (|NonAssociativeRing|)
-                 (|AbelianProductCategory| 6) (|LeftModule| 6)
-                 (|RightModule| 6) (|RightModule| $$) (|LeftModule| $$)
-                 (|LeftModule| 20) (|RightModule| 20) (|NonAssociativeRng|)
-                 (|AbelianGroup|) (|CancellationAbelianMonoid|)
-                 (|NonAssociativeSemiRing|) (|Monoid|)
-                 (|NonAssociativeSemiRng|) (|SemiGroup|) (|AbelianMonoid|)
-                 (|MagmaWithUnit|) (|Magma|) (|AbelianSemiGroup|)
-                 (|SetCategory|) (|CommutativeStar|)
-                 (|TranscendentalFunctionCategory|)
-                 (|VariablesCommuteWithCoefficients|) (|BasicType|)
-                 (|CoercibleTo| 28) (|TwoSidedRecip|) (|noZeroDivisors|)
-                 (|unitsKnown|) (|Eltable| $$ $$)
-                 (|TrigonometricFunctionCategory|)
-                 (|ArcTrigonometricFunctionCategory|)
-                 (|HyperbolicFunctionCategory|)
+                 (|UnivariateSeriesWithRationalExponents| 6 14)
+                 (|UnivariatePowerSeriesCategory| 6 14)
+                 (|PowerSeriesCategory| 6 14 (|SingletonAsOrderedSet|))
+                 (|AbelianMonoidRing| 6 14) (|IntegralDomain|)
+                 (|CommutativeRing|) (|DifferentialRing|)
+                 (|PartialDifferentialRing| 17) (|Algebra| 6)
+                 (|CharacteristicZero|) (|CharacteristicNonZero|)
+                 (|EntireRing|) (|Algebra| $$) (|Algebra| 28) (|Ring|) (|Rng|)
+                 (|SemiRing|) (|NonAssociativeAlgebra| 6)
+                 (|NonAssociativeAlgebra| $$) (|NonAssociativeAlgebra| 28)
+                 (|Module| 6) (|Module| $$) (|Module| 28) (|SemiRng|)
+                 (|NonAssociativeRing|) (|BiModule| 28 28) (|BiModule| $$ $$)
+                 (|BiModule| 6 6) (|IndexedProductCategory| 6 14)
+                 (|NonAssociativeRng|) (|RightModule| 28) (|LeftModule| 28)
+                 (|LeftModule| $$) (|RightModule| $$) (|RightModule| 6)
+                 (|LeftModule| 6) (|AbelianProductCategory| 6) (|AbelianGroup|)
+                 (|Monoid|) (|NonAssociativeSemiRing|)
+                 (|CancellationAbelianMonoid|) (|MagmaWithUnit|)
+                 (|AbelianMonoid|) (|SemiGroup|) (|NonAssociativeSemiRng|)
+                 (|AbelianSemiGroup|) (|Magma|)
+                 (|TranscendentalFunctionCategory|) (|CommutativeStar|)
+                 (|SetCategory|) (|RadicalCategory|)
+                 (|ElementaryFunctionCategory|)
                  (|ArcHyperbolicFunctionCategory|)
-                 (|ElementaryFunctionCategory|) (|RadicalCategory|))
+                 (|HyperbolicFunctionCategory|)
+                 (|ArcTrigonometricFunctionCategory|)
+                 (|TrigonometricFunctionCategory|) (|Eltable| $$ $$)
+                 (|unitsKnown|) (|noZeroDivisors|) (|TwoSidedRecip|)
+                 (|CoercibleTo| 9) (|BasicType|)
+                 (|VariablesCommuteWithCoefficients|))
               (|makeByteWordVec2| 7 '(0 6 0 7)))))
            '|lookupIncomplete|)) 

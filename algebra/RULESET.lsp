@@ -71,15 +71,15 @@
               73)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL NIL)
+                 (CONS '#(|SetCategory&| NIL NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|Eltable| 8 8)
-                           (|CoercibleTo| 13))
+                        '#((|SetCategory|) (|CoercibleTo| 13) (|Eltable| 8 8)
+                           (|BasicType|))
                         (|makeByteWordVec2| 27
                                             '(1 9 0 10 11 1 9 13 0 14 2 9 16 0
                                               0 17 2 20 8 10 8 21 3 20 8 10 8
                                               23 24 1 9 10 0 26 2 0 16 0 0 1 1
                                               0 0 10 12 1 0 10 0 19 1 0 27 0 1
-                                              3 0 8 0 8 23 25 2 0 8 0 8 22 1 0
+                                              2 0 8 0 8 22 3 0 8 0 8 23 25 1 0
                                               13 0 15 2 0 16 0 0 18)))))
            '|lookupComplete|)) 

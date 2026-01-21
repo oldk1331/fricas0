@@ -3,12 +3,6 @@
 
 (IN-PACKAGE "BOOT")
 
-; htsv() ==
-;   startHTPage(50)
-;   htSetVars()
-
-(DEFUN |htsv| () (PROG () (RETURN (PROGN (|startHTPage| 50) (|htSetVars|)))))
-
 ; htSetVars() ==
 ;   $path := nil
 ;   $lastTree := nil

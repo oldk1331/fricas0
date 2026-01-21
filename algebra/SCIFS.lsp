@@ -22,7 +22,7 @@
          ((|j| #1=(|NonNegativeInteger|))
           (|in2| (|List| (|List| (|NonNegativeInteger|))))
           (|thisLine| (|List| (|NonNegativeInteger|))) (|i| #1#)
-          (|pt2| (|List| PT)) (#2=#:G45 NIL) (|p| NIL) (#3=#:G44 NIL)
+          (|pt2| (|List| PT)) (#2=#:G37 NIL) (|p| NIL) (#3=#:G36 NIL)
           (|lpt| NIL) (|colLength| (|NonNegativeInteger|)))
          (SEQ (LETT |pt2| NIL) (LETT |in2| NIL)
               (LETT |colLength| (LENGTH (|SPADfirst| |ptin|))) (LETT |j| 0)
@@ -82,8 +82,8 @@
 
 (SDEFUN |SCIFS;singleFace;L%;5| ((|ptin| (|List| PT)) (% (%)))
         (SPROG
-         ((|in2| (|List| (|List| (|NonNegativeInteger|)))) (#1=#:G53 NIL)
-          (|i| NIL) (#2=#:G52 NIL) (|pt2| (|List| PT)))
+         ((|in2| (|List| (|List| (|NonNegativeInteger|)))) (#1=#:G45 NIL)
+          (|i| NIL) (#2=#:G44 NIL) (|pt2| (|List| PT)))
          (SEQ (LETT |pt2| |ptin|)
               (LETT |in2|
                     (LIST

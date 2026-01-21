@@ -249,7 +249,7 @@
             (|Record| (|:| |scalar| (|Fraction| (|Integer|)))
                       (|:| |coeff| (|SparseUnivariatePolynomial| F))
                       (|:| |logand| (|SparseUnivariatePolynomial| F)))))
-          (#1=#:G144 NIL) (|ll| NIL) (|rp1| (F)) (|rp| (F)))
+          (#1=#:G136 NIL) (|ll| NIL) (|rp1| (F)) (|rp| (F)))
          (SEQ (LETT |rp| (SPADCALL |irf| (QREFELT % 85)))
               (LETT |rp1|
                     (SPADCALL
@@ -280,7 +280,7 @@
 (SDEFUN |INTG0;field_gens|
         ((|y| (|Kernel| F)) (|lf| (|List| F)) (% (|List| F)))
         (SPROG
-         ((|res| (|List| F)) (#1=#:G149 NIL) (#2=#:G150 NIL) (|k| NIL)
+         ((|res| (|List| F)) (#1=#:G141 NIL) (#2=#:G142 NIL) (|k| NIL)
           (|at| (|List| (|Kernel| F))))
          (SEQ (LETT |at| (SPADCALL |lf| (QREFELT % 99))) (LETT |res| NIL)
               (SEQ (LETT |k| NIL) (LETT #2# |at|) G190
@@ -291,7 +291,7 @@
                     (EXIT
                      (COND
                       ((SPADCALL |k| |y| (QREFELT % 100))
-                       (PROGN (LETT #1# |$NoValue|) (GO #3=#:G145)))
+                       (PROGN (LETT #1# |$NoValue|) (GO #3=#:G137)))
                       ('T
                        (LETT |res|
                              (CONS (SPADCALL |k| (QREFELT % 73)) |res|)))))
@@ -597,7 +597,7 @@
          (|z| (|Kernel| F)) (|xx| (F))
          (|dx| (|Fraction| (|SparseUnivariatePolynomial| F))) (|r| (F))
          (% (|Union| F #2#)))
-        (SPROG ((|u| #1#) (#3=#:G181 NIL) (|g1| (F)) (|f1| (F)))
+        (SPROG ((|u| #1#) (#3=#:G173 NIL) (|g1| (F)) (|f1| (F)))
                (SEQ
                 (LETT |f1|
                       (SPADCALL |f| |y|
@@ -655,7 +655,7 @@
          (|den| (F)) (|radi| (|SparseUnivariatePolynomial| F))
          (% (|Union| F #2#)))
         (SPROG
-         ((|u| #1#) (#3=#:G205 NIL)
+         ((|u| #1#) (#3=#:G197 NIL)
           (|pr|
            (|Record| (|:| |diff| F)
                      (|:| |subs|
@@ -699,8 +699,8 @@
           (|Record| (|:| |particular| (|Union| F "failed"))
                     (|:| |basis| (|List| F)))))
         (SPROG
-         ((#1=#:G222 NIL) (|bas| (|List| F)) (#2=#:G232 NIL) (|b| NIL)
-          (#3=#:G231 NIL)
+         ((#1=#:G214 NIL) (|bas| (|List| F)) (#2=#:G224 NIL) (|b| NIL)
+          (#3=#:G223 NIL)
           (|rec|
            (|Record|
             (|:| |particular|
@@ -714,7 +714,7 @@
           (|op|
            (|LinearOrdinaryDifferentialOperator1|
             (|Fraction| (|SparseUnivariatePolynomial| F))))
-          (#5=#:G230 NIL) (|i| NIL)
+          (#5=#:G222 NIL) (|i| NIL)
           (|d|
            (|LinearOrdinaryDifferentialOperator1|
             (|Fraction| (|SparseUnivariatePolynomial| F))))
@@ -805,8 +805,8 @@
           (|Record| (|:| |particular| (|Union| F "failed"))
                     (|:| |basis| (|List| F)))))
         (SPROG
-         ((#1=#:G241 NIL) (|bas| (|List| F)) (#2=#:G250 NIL) (|b| NIL)
-          (#3=#:G249 NIL)
+         ((#1=#:G233 NIL) (|bas| (|List| F)) (#2=#:G242 NIL) (|b| NIL)
+          (#3=#:G241 NIL)
           (|yinv| (|Fraction| (|SparseUnivariatePolynomial| F)))
           (|rec|
            (|Record|
@@ -822,7 +822,7 @@
           (|op|
            (|LinearOrdinaryDifferentialOperator1|
             (|Fraction| (|SparseUnivariatePolynomial| F))))
-          (|c1| (F)) (#5=#:G248 NIL) (|i| NIL) (|y1| (F))
+          (|c1| (F)) (#5=#:G240 NIL) (|i| NIL) (|y1| (F))
           (|d|
            (|LinearOrdinaryDifferentialOperator1|
             (|Fraction| (|SparseUnivariatePolynomial| F)))))
@@ -899,9 +899,9 @@
 
 (DECLAIM (NOTINLINE |GenusZeroIntegration;|)) 
 
-(DEFUN |GenusZeroIntegration| (&REST #1=#:G251)
+(DEFUN |GenusZeroIntegration| (&REST #1=#:G243)
   (SPROG NIL
-         (PROG (#2=#:G252)
+         (PROG (#2=#:G244)
            (RETURN
             (COND
              ((LETT #2#
@@ -1155,11 +1155,11 @@
                                               105 163 6 0 164 8 7 11 11 7 23
                                               165 8 0 164 8 7 11 11 11 7 105 7
                                               166 4 0 26 7 11 11 23 28 2 0 84
-                                              84 11 97 7 0 84 7 11 11 11 7 105
-                                              7 138 5 0 84 7 11 11 7 23 115 7 0
-                                              142 7 7 11 11 143 7 23 148 9 0
+                                              84 11 97 5 0 84 7 11 11 7 23 115
+                                              7 0 84 7 11 11 11 7 105 7 138 9 0
                                               142 7 7 11 11 143 11 7 105 7 144
-                                              8 1 164 8 7 11 11 11 7 105 7 166
-                                              6 1 164 8 7 11 11 7 23 165 3 0 7
-                                              26 11 7 103 2 0 26 23 11 27)))))
+                                              7 0 142 7 7 11 11 143 7 23 148 6
+                                              1 164 8 7 11 11 7 23 165 8 1 164
+                                              8 7 11 11 11 7 105 7 166 3 0 7 26
+                                              11 7 103 2 0 26 23 11 27)))))
            '|lookupComplete|)) 

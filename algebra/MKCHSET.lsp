@@ -117,14 +117,14 @@
            '#(~= 25 |setPosition| 31 |position| 37 |latex| 42 |coerce| 47 = 62)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0))
-                 (CONS '#(NIL |SetCategory&| |BasicType&| NIL NIL)
+                 (CONS '#(NIL |SetCategory&| NIL NIL |BasicType&|)
                        (CONS
-                        '#((|CachableSet|) (|SetCategory|) (|BasicType|)
-                           (|CoercibleTo| 6) (|CoercibleTo| 16))
+                        '#((|CachableSet|) (|SetCategory|) (|CoercibleTo| 16)
+                           (|CoercibleTo| 6) (|BasicType|))
                         (|makeByteWordVec2| 25
                                             '(0 9 8 10 0 8 0 13 1 6 16 0 17 2 6
                                               19 0 0 20 2 9 2 2 21 22 2 0 19 0
                                               0 1 2 0 8 0 11 14 1 0 11 0 12 1 0
-                                              25 0 1 1 0 6 0 15 1 0 0 6 23 1 0
-                                              16 0 18 2 0 19 0 0 24)))))
+                                              25 0 1 1 0 16 0 18 1 0 0 6 23 1 0
+                                              6 0 15 2 0 19 0 0 24)))))
            '|lookupComplete|)) 

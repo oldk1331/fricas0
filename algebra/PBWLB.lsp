@@ -198,13 +198,13 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|OrderedSet&| NIL |SetCategory&| |RetractableTo&|
-                     |BasicType&| NIL |PartialOrder&| NIL)
+                  '#(|OrderedSet&| NIL |RetractableTo&| |SetCategory&| NIL
+                     |PartialOrder&| NIL |BasicType&|)
                   (CONS
-                   '#((|OrderedSet|) (|Comparable|) (|SetCategory|)
-                      (|RetractableTo| (|LyndonWord| 6)) (|BasicType|)
-                      (|CoercibleFrom| (|LyndonWord| 6)) (|PartialOrder|)
-                      (|CoercibleTo| 30))
+                   '#((|OrderedSet|) (|Comparable|)
+                      (|RetractableTo| (|LyndonWord| 6)) (|SetCategory|)
+                      (|CoercibleTo| 30) (|PartialOrder|)
+                      (|CoercibleFrom| (|LyndonWord| 6)) (|BasicType|))
                    (|makeByteWordVec2| 50
                                        '(2 7 9 0 0 10 1 13 12 0 14 2 12 0 0 0
                                          15 1 13 0 6 19 0 24 0 25 1 13 24 0 26
@@ -215,8 +215,8 @@
                                          0 0 1 1 0 9 0 38 1 0 42 0 43 1 0 13 0
                                          41 1 0 0 0 18 2 0 0 0 0 1 2 0 0 0 0 1
                                          1 0 22 0 23 1 0 39 0 46 1 0 50 0 1 1 0
-                                         13 0 17 1 0 24 0 27 1 0 0 6 20 1 0 0
-                                         13 21 1 0 30 0 37 0 0 0 8 2 0 9 0 0 1
-                                         2 0 9 0 0 1 2 0 9 0 0 11 2 0 9 0 0 1 2
-                                         0 9 0 0 49)))))
+                                         13 0 17 1 0 30 0 37 1 0 0 13 21 1 0 0
+                                         6 20 1 0 24 0 27 0 0 0 8 2 0 9 0 0 1 2
+                                         0 9 0 0 1 2 0 9 0 0 11 2 0 9 0 0 1 2 0
+                                         9 0 0 49)))))
            '|lookupComplete|)) 

@@ -11,5 +11,3 @@
   (SPROG ((#1=#:G1 NIL))
          (PROG1 (LETT #1# (|Join| (|Ring|) (|Algebra| '%) (|CommutativeStar|)))
            (SETELT #1# 0 '(|CommutativeRing|))))) 
-
-(MAKEPROP '|CommutativeRing| 'NILADIC T) 

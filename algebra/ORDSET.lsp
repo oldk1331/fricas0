@@ -15,5 +15,3 @@
                             '(((|max| (% % %)) T) ((|min| (% % %)) T)) NIL NIL
                             NIL)))
            (SETELT #1# 0 '(|OrderedSet|))))) 
-
-(MAKEPROP '|OrderedSet| 'NILADIC T) 

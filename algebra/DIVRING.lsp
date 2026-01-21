@@ -18,5 +18,3 @@
                                               ((|inv| (% %)) T))
                                             NIL NIL NIL))))
            (SETELT #1# 0 '(|DivisionRing|))))) 
-
-(MAKEPROP '|DivisionRing| 'NILADIC T) 

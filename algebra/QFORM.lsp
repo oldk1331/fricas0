@@ -82,28 +82,28 @@
               (5 . *) (11 . |dot|) |QFORM;elt;%DpK;3| (|InputForm|)
               (17 . |convert|) (|Symbol|) (|SExpression|) (22 . |convert|)
               (27 . |convert|) (|List| %) (32 . |convert|) (37 . |convert|)
-              (|Integer|) (|Union| % '"failed") (|NonNegativeInteger|)
-              (|PositiveInteger|) (|String|) (|OutputForm|))
+              (|OutputForm|) (|String|) (|PositiveInteger|)
+              (|NonNegativeInteger|) (|Union| % '"failed") (|Integer|))
            '#(~= 42 |zero?| 48 |subtractIfCan| 53 |sample| 59 |quadraticForm|
               63 |opposite?| 68 |matrix| 74 |latex| 79 |elt| 84 |convert| 90
               |coerce| 95 |Zero| 100 = 104 - 110 + 121 * 127)
            'NIL
-           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 1))
+           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 1 0 0))
                  (CONS
                   '#(|AbelianGroup&| NIL |AbelianMonoid&| |AbelianSemiGroup&|
-                     |SetCategory&| |BasicType&| NIL NIL)
+                     |SetCategory&| NIL NIL |BasicType&|)
                   (CONS
                    '#((|AbelianGroup|) (|CancellationAbelianMonoid|)
                       (|AbelianMonoid|) (|AbelianSemiGroup|) (|SetCategory|)
-                      (|BasicType|) (|CoercibleTo| 31) (|ConvertibleTo| 17))
+                      (|ConvertibleTo| 17) (|CoercibleTo| 26) (|BasicType|))
                    (|makeByteWordVec2| 31
                                        '(1 8 9 0 10 2 8 13 0 13 14 2 13 7 0 0
                                          15 1 5 17 0 18 1 20 0 19 21 1 17 0 20
                                          22 1 17 0 23 24 1 0 17 0 25 2 0 9 0 0
-                                         1 1 0 9 0 1 2 0 27 0 0 1 0 0 0 1 1 0 0
-                                         5 11 2 0 9 0 0 1 1 0 5 0 12 1 0 30 0 1
-                                         2 0 7 0 13 16 1 1 17 0 25 1 0 31 0 1 0
-                                         0 0 1 2 0 9 0 0 1 2 0 0 0 0 1 1 0 0 0
-                                         1 2 0 0 0 0 1 2 0 0 26 0 1 2 0 0 28 0
-                                         1 2 0 0 29 0 1)))))
+                                         1 1 0 9 0 1 2 0 30 0 0 1 0 0 0 1 1 0 0
+                                         5 11 2 0 9 0 0 1 1 0 5 0 12 1 0 27 0 1
+                                         2 0 7 0 13 16 1 1 17 0 25 1 0 26 0 1 0
+                                         0 0 1 2 0 9 0 0 1 1 0 0 0 1 2 0 0 0 0
+                                         1 2 0 0 0 0 1 2 0 0 28 0 1 2 0 0 29 0
+                                         1 2 0 0 31 0 1)))))
            '|lookupComplete|)) 

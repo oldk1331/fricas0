@@ -72,7 +72,7 @@
 (SDEFUN |CHAINC;homology;%L;4| ((|a| (%)) (% (|List| (|Homology|))))
         (SPROG
          ((|prev| (|Matrix| (|Integer|))) (|notFirst| (|Boolean|))
-          (|res| (|List| (|Homology|))) (|m2| (|Homology|)) (#1=#:G40 NIL)
+          (|res| (|List| (|Homology|))) (|m2| (|Homology|)) (#1=#:G32 NIL)
           (|m1| NIL))
          (SEQ (LETT |res| NIL) (LETT |prev| (MAKE_MATRIX 0 0))
               (LETT |notFirst| NIL)
@@ -93,8 +93,8 @@
 
 (SDEFUN |CHAINC;coerce;%Of;5| ((|s| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|lst| (|List| (|OutputForm|))) (#1=#:G46 NIL) (|x| NIL)
-          (#2=#:G45 NIL))
+         ((|lst| (|List| (|OutputForm|))) (#1=#:G38 NIL) (|x| NIL)
+          (#2=#:G37 NIL))
          (SEQ
           (LETT |lst|
                 (PROGN
@@ -114,7 +114,7 @@
 
 (DEFUN |ChainComplex| ()
   (SPROG NIL
-         (PROG (#1=#:G48)
+         (PROG (#1=#:G40)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ChainComplex|))
@@ -157,9 +157,9 @@
               |homology| 91 |coerce| 96 |chainComplex| 101 = 106)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 17))
+                        '#((|SetCategory|) (|CoercibleTo| 17) (|BasicType|))
                         (|makeByteWordVec2| 34
                                             '(1 11 10 0 12 1 11 10 0 13 2 10 14
                                               0 0 15 1 17 0 16 18 1 10 17 0 19
@@ -171,5 +171,3 @@
                                               31 1 0 17 0 34 1 0 0 7 8 2 0 14 0
                                               0 1)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|ChainComplex| 'NILADIC T) 

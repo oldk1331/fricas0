@@ -98,16 +98,16 @@
               (|OutputForm|) (17 . |coerce|) (|List| %) (22 . |paren|)
               (27 . |coerce|) (|String|))
            '#(~= 32 |select| 38 |latex| 44 |coerce| 49 = 64 |#| 70) 'NIL
-           (CONS (|makeByteWordVec2| 2 '(1 0 1 2))
+           (CONS (|makeByteWordVec2| 2 '(1 2 1 0))
                  (CONS '#(|SetCategory&| NIL |BasicType&| NIL)
                        (CONS
-                        '#((|SetCategory|) (|CoercibleTo| (|PrimitiveArray| 6))
-                           (|BasicType|) (|CoercibleTo| 19))
+                        '#((|SetCategory|) (|CoercibleTo| 19) (|BasicType|)
+                           (|CoercibleTo| (|PrimitiveArray| 6)))
                         (|makeByteWordVec2| 24
                                             '(2 8 14 0 0 15 2 0 14 0 0 16 1 8
                                               17 0 18 1 6 19 0 20 1 19 0 21 22
                                               1 0 19 0 23 2 1 14 0 0 1 2 0 6 0
-                                              11 13 1 1 24 0 1 1 2 19 0 23 1 0
-                                              0 8 9 1 0 8 0 10 2 1 14 0 0 16 1
-                                              0 11 0 12)))))
+                                              11 13 1 1 24 0 1 1 0 8 0 10 1 0 0
+                                              8 9 1 2 19 0 23 2 1 14 0 0 16 1 0
+                                              11 0 12)))))
            '|lookupComplete|)) 

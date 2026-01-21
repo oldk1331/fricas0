@@ -96,17 +96,15 @@
               60 = 75)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0))
-                 (CONS '#(NIL |SetCategory&| |BasicType&| NIL)
+                 (CONS '#(NIL |SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|FileNameCategory|) (|SetCategory|) (|BasicType|)
-                           (|CoercibleTo| 10))
+                        '#((|FileNameCategory|) (|SetCategory|)
+                           (|CoercibleTo| 10) (|BasicType|))
                         (|makeByteWordVec2| 21
                                             '(1 8 10 0 11 2 0 6 0 0 1 1 0 6 0
                                               20 1 0 6 0 19 3 0 0 8 8 8 21 1 0
                                               8 0 16 1 0 8 0 1 3 0 0 8 8 8 14 1
                                               0 8 0 17 1 0 6 0 18 1 0 8 0 15 1
-                                              0 0 8 13 1 0 8 0 9 1 0 10 0 12 2
+                                              0 10 0 12 1 0 8 0 9 1 0 0 8 13 2
                                               0 6 0 0 7)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|FileName| 'NILADIC T) 

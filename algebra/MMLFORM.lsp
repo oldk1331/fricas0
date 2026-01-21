@@ -1142,9 +1142,9 @@
               |coerce| 218 = 228)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 21))
+                        '#((|SetCategory|) (|CoercibleTo| 21) (|BasicType|))
                         (|makeByteWordVec2| 76
                                             '(1 22 21 21 23 0 28 0 29 2 32 0 31
                                               31 33 2 24 0 0 32 34 1 35 28 24
@@ -1163,8 +1163,6 @@
                                               73 1 22 21 21 74 1 22 47 21 75 2
                                               57 41 50 0 76 2 0 41 0 0 1 1 0 24
                                               0 1 1 0 28 24 30 1 0 24 21 26 1 0
-                                              24 21 27 1 0 24 21 25 1 0 21 0 1
+                                              24 21 27 1 0 21 0 1 1 0 24 21 25
                                               2 0 41 0 0 1)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|MathMLFormat| 'NILADIC T) 

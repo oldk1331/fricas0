@@ -280,14 +280,14 @@
               (86 . |fmecg|) (94 . |rem|) |EMR;euclideanSize;%Nni;4|
               (100 . |zero?|) (105 . |One|) (109 . *) |EMR;unitCanonical;2%;5|
               (|Record| (|:| |unit| %) (|:| |canonical| %) (|:| |associate| %))
-              |EMR;unitNormal;%R;6| (115 . |elt|) |EMR;elt;%2R;7|
-              (|Union| % '"failed") (|Union| 47 '#1="failed") (|List| %)
-              (|Record| (|:| |coef1| %) (|:| |coef2| %) (|:| |generator| %))
-              (|Record| (|:| |coef1| %) (|:| |coef2| %)) (|Union| 49 '#1#)
-              (|SparseUnivariatePolynomial| %)
-              (|Record| (|:| |coef| 47) (|:| |generator| %))
+              |EMR;unitNormal;%R;6| (115 . |elt|) |EMR;elt;%2R;7| (|String|)
+              (|OutputForm|) (|PositiveInteger|) (|Integer|)
+              (|Union| % '"failed")
               (|Record| (|:| |llcm_res| %) (|:| |coeff1| %) (|:| |coeff2| %))
-              (|PositiveInteger|) (|Integer|) (|OutputForm|) (|String|))
+              (|List| %) (|Record| (|:| |coef| 51) (|:| |generator| %))
+              (|SparseUnivariatePolynomial| %) (|Union| 51 '"failed")
+              (|Record| (|:| |coef1| %) (|:| |coef2| %)) (|Union| 55 '"failed")
+              (|Record| (|:| |coef1| %) (|:| |coef2| %) (|:| |generator| %)))
            '#(|zero?| 121 |unitNormal| 126 |unitCanonical| 131 |rem| 136
               |reduce| 142 |inv| 148 |euclideanSize| 153 |elt| 158 |divide| 164
               |Zero| 170 |One| 174 * 178)
@@ -297,27 +297,26 @@
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0 0 0 0 0 0 0 0 0 0 0 0 0))
             (CONS
-             '#(|EuclideanDomain&| NIL |GcdDomain&| NIL NIL NIL |EntireRing&|
-                |Algebra&| NIL |NonAssociativeAlgebra&| |Rng&| NIL |Module&|
-                NIL NIL |NonAssociativeRing&| NIL |NonAssociativeRng&| NIL
-                |AbelianGroup&| NIL NIL NIL NIL |MagmaWithUnit&|
-                |NonAssociativeSemiRng&| |AbelianMonoid&| |Magma&|
-                |AbelianSemiGroup&| NIL |SetCategory&| NIL NIL NIL |BasicType&|
-                NIL)
+             '#(|EuclideanDomain&| NIL |GcdDomain&| NIL NIL NIL |Algebra&|
+                |EntireRing&| NIL NIL |Rng&| |NonAssociativeAlgebra&| NIL
+                |Module&| |NonAssociativeRing&| NIL NIL |NonAssociativeRng&|
+                NIL |AbelianGroup&| NIL NIL NIL |AbelianMonoid&|
+                |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL
+                |AbelianSemiGroup&| |Magma&| |SetCategory&| NIL NIL
+                |BasicType&| NIL NIL NIL)
              (CONS
               '#((|EuclideanDomain|) (|PrincipalIdealDomain|) (|GcdDomain|)
-                 (|IntegralDomain|) (|CommutativeRing|) (|LeftOreRing|)
-                 (|EntireRing|) (|Algebra| $$) (|Ring|)
-                 (|NonAssociativeAlgebra| $$) (|Rng|) (|SemiRing|)
-                 (|Module| $$) (|SemiRng|) (|BiModule| $$ $$)
-                 (|NonAssociativeRing|) (|LeftModule| $$) (|NonAssociativeRng|)
-                 (|RightModule| $$) (|AbelianGroup|) (|Monoid|)
-                 (|NonAssociativeSemiRing|) (|CancellationAbelianMonoid|)
-                 (|SemiGroup|) (|MagmaWithUnit|) (|NonAssociativeSemiRng|)
-                 (|AbelianMonoid|) (|Magma|) (|AbelianSemiGroup|)
-                 (|CommutativeStar|) (|SetCategory|) (|noZeroDivisors|)
-                 (|TwoSidedRecip|) (|unitsKnown|) (|BasicType|)
-                 (|CoercibleTo| 56))
+                 (|IntegralDomain|) (|LeftOreRing|) (|CommutativeRing|)
+                 (|Algebra| $$) (|EntireRing|) (|Ring|) (|SemiRing|) (|Rng|)
+                 (|NonAssociativeAlgebra| $$) (|SemiRng|) (|Module| $$)
+                 (|NonAssociativeRing|) (|BiModule| $$ $$) (|RightModule| $$)
+                 (|NonAssociativeRng|) (|LeftModule| $$) (|AbelianGroup|)
+                 (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
+                 (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
+                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|) (|Magma|)
+                 (|SetCategory|) (|CommutativeStar|) (|CoercibleTo| 46)
+                 (|BasicType|) (|unitsKnown|) (|TwoSidedRecip|)
+                 (|noZeroDivisors|))
               (|makeByteWordVec2| 44
                                   '(1 7 6 0 13 0 6 0 14 2 6 15 0 0 16 0 7 0 17
                                     1 7 0 6 18 2 0 0 7 8 19 1 0 0 0 20 2 7 0 0

@@ -91,5 +91,3 @@
                                                    24 23 23 26 1 24 27 23 28 1
                                                    0 27 0 29 2 0 0 8 21 22)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|FortranFormat| 'NILADIC T) 

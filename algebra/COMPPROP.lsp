@@ -89,9 +89,9 @@
               |coerce| 41 |closed?| 46 |close| 51 = 57)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 15))
+                        '#((|SetCategory|) (|CoercibleTo| 15) (|BasicType|))
                         (|makeByteWordVec2| 19
                                             '(1 15 0 14 16 1 15 0 17 18 2 0 7 0
                                               0 1 1 0 7 0 9 2 0 7 0 7 11 0 0 0
@@ -99,5 +99,3 @@
                                               19 1 0 7 0 8 2 0 7 0 7 10 2 0 7 0
                                               0 1)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|SubSpaceComponentProperty| 'NILADIC T) 

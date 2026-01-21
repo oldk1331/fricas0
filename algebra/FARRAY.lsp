@@ -122,33 +122,34 @@
 (MAKEPROP '|FlexibleArray| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL (|IndexedFlexibleArray| 6 (NRTEVAL 1))
-              (|local| |#1|) (|Mapping| 10 6 6) (|Integer|) (|Mapping| 6 6 6)
-              (|Boolean|) (|NonNegativeInteger|) (|SingleInteger|)
-              (|HashState|) (|List| 6) (|List| 16) (|Equation| 6)
-              (|OutputForm|) (|String|) (|Mapping| 10 6) (|UniversalSegment| 8)
-              (|Void|) (|Mapping| 6 6) (|InputForm|) (|List| %)
-              (|Union| 6 '"failed") (|List| 8))
+              (|local| |#1|) (|Boolean|) (|NonNegativeInteger|) (|Mapping| 6 6)
+              (|Integer|) (|List| 6) (|List| 10) (|Union| 6 '"failed")
+              (|Mapping| 7 6) (|UniversalSegment| 10) (|List| %)
+              (|Mapping| 6 6 6) (|Mapping| 7 6 6) (|HashState|)
+              (|SingleInteger|) (|Equation| 6) (|List| 21) (|OutputForm|)
+              (|String|) (|Void|) (|InputForm|))
            '#() 'NIL
            (CONS
             (|makeByteWordVec2| 13
-                                '(0 0 0 0 0 0 1 0 7 0 0 9 10 2 0 0 0 0 0 9 13 1
-                                  11 3))
+                                '(0 0 0 0 1 0 0 7 0 2 10 9 0 0 3 11 1 13 9 0 0
+                                  0 0 0))
             (CONS
-             '#(|OneDimensionalArrayAggregate&| NIL
-                |ExtensibleLinearAggregate&| |LinearAggregate&|
-                |IndexedAggregate&| |Collection&| |OrderedSet&|
-                |HomogeneousAggregate&| NIL |Aggregate&| |EltableAggregate&|
-                |Evalable&| |SetCategory&| |Hashable&| NIL NIL NIL NIL NIL
-                |InnerEvalable&| NIL |PartialOrder&| |BasicType&| NIL)
+             '#(|OneDimensionalArrayAggregate&| |ExtensibleLinearAggregate&|
+                NIL |LinearAggregate&| |OrderedSet&| |Collection&|
+                |IndexedAggregate&| NIL |HomogeneousAggregate&| |Hashable&|
+                |SetCategory&| |Evalable&| |EltableAggregate&| |Aggregate&| NIL
+                |BasicType&| |PartialOrder&| NIL |InnerEvalable&| NIL NIL NIL
+                NIL NIL)
              (CONS
-              '#((|OneDimensionalArrayAggregate| 6) (|FiniteLinearAggregate| 6)
-                 (|ExtensibleLinearAggregate| 6) (|LinearAggregate| 6)
-                 (|IndexedAggregate| 8 6) (|Collection| 6) (|OrderedSet|)
-                 (|HomogeneousAggregate| 6) (|Comparable|) (|Aggregate|)
-                 (|EltableAggregate| 8 6) (|Evalable| 6) (|SetCategory|)
-                 (|Hashable|) (|shallowlyMutable|) (|finiteAggregate|)
-                 (|Eltable| 20 $$) (|Type|) (|Eltable| 8 6)
-                 (|InnerEvalable| 6 6) (|CoercibleTo| 17) (|PartialOrder|)
-                 (|BasicType|) (|ConvertibleTo| 23))
+              '#((|OneDimensionalArrayAggregate| 6)
+                 (|ExtensibleLinearAggregate| 6) (|FiniteLinearAggregate| 6)
+                 (|LinearAggregate| 6) (|OrderedSet|) (|Collection| 6)
+                 (|IndexedAggregate| 10 6) (|Comparable|)
+                 (|HomogeneousAggregate| 6) (|Hashable|) (|SetCategory|)
+                 (|Evalable| 6) (|EltableAggregate| 10 6) (|Aggregate|)
+                 (|ConvertibleTo| 26) (|BasicType|) (|PartialOrder|)
+                 (|CoercibleTo| 23) (|InnerEvalable| 6 6) (|Eltable| 10 6)
+                 (|Type|) (|Eltable| 15 $$) (|finiteAggregate|)
+                 (|shallowlyMutable|))
               (|makeByteWordVec2| -999999 'NIL))))
            '|lookupIncomplete|)) 

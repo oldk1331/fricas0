@@ -436,5 +436,3 @@
                                               15 6 0 59 1 60 19 6 61 1 0 37 6
                                               58 1 0 19 15 62 1 0 42 15 57)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|GaussianFactorizationPackage| 'NILADIC T) 

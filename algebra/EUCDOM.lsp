@@ -37,5 +37,3 @@
                                T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|EuclideanDomain|))))) 
-
-(MAKEPROP '|EuclideanDomain| 'NILADIC T) 

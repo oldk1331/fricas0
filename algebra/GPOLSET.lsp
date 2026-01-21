@@ -183,12 +183,12 @@
               (|List| 8) (71 . |variables|) (76 . |max|) (|Mapping| 8 8 8)
               (82 . |reduce|) |GPOLSET;mvar;%VarSet;10| (|Union| % '"failed")
               |GPOLSET;retractIfCan;LU;11| |GPOLSET;coerce;%L;12|
-              |GPOLSET;convert;L%;13| (|NonNegativeInteger|) (|Mapping| 9 9 9)
-              (|Equation| 9) (|List| 52) (|Mapping| 24 9) (|InputForm|)
-              (|Record| (|:| |num| 9) (|:| |den| 6))
-              (|Record| (|:| |rnum| 6) (|:| |polnum| 9) (|:| |den| 6))
+              |GPOLSET;convert;L%;13| (|String|) (|Union| 9 '"failed")
+              (|Mapping| 24 9) (|NonNegativeInteger|)
               (|Record| (|:| |under| %) (|:| |floor| %) (|:| |upper| %))
-              (|Union| 9 '"failed") (|String|))
+              (|Mapping| 9 9 9) (|List| 57) (|Equation| 9) (|InputForm|)
+              (|Record| (|:| |rnum| 6) (|:| |polnum| 9) (|:| |den| 6))
+              (|Record| (|:| |num| 9) (|:| |den| 6)))
            '#(~= 88 |variables| 94 |trivialIdeal?| 99 |triangular?| 104 |sort|
               109 |size?| 115 |select| 121 |sample| 127 |roughUnitIdeal?| 131
               |roughSubIdeal?| 136 |roughEqualIdeals?| 142 |roughBase?| 148
@@ -203,20 +203,19 @@
               |collectUpper| 393 |collectUnder| 399 |collect| 405 |coerce| 411
               |any?| 421 = 427 |#| 433)
            'NIL
-           (CONS (|makeByteWordVec2| 2 '(0 0 0 0 0 0 1 0 0 0 0 0 0 1 2))
+           (CONS (|makeByteWordVec2| 2 '(0 0 0 1 0 0 0 2 1 0 0 0 0 0 0))
                  (CONS
                   '#(|PolynomialSetCategory&| |Collection&|
-                     |HomogeneousAggregate&| |SetCategory&| |RetractableFrom&|
-                     |Aggregate&| |Evalable&| |BasicType&| NIL NIL NIL NIL NIL
-                     |InnerEvalable&| NIL)
+                     |HomogeneousAggregate&| |Evalable&| |Aggregate&|
+                     |RetractableFrom&| |SetCategory&| NIL |InnerEvalable&| NIL
+                     NIL NIL NIL NIL |BasicType&|)
                   (CONS
                    '#((|PolynomialSetCategory| 6 7 8 9) (|Collection| 9)
-                      (|HomogeneousAggregate| 9) (|SetCategory|)
-                      (|RetractableFrom| (|List| 9)) (|Aggregate|)
-                      (|Evalable| 9) (|BasicType|) (|shallowlyMutable|)
-                      (|finiteAggregate|) (|CoercibleTo| (|List| 9)) (|Type|)
-                      (|CoercibleTo| 34) (|InnerEvalable| 9 9)
-                      (|ConvertibleTo| 55))
+                      (|HomogeneousAggregate| 9) (|Evalable| 9) (|Aggregate|)
+                      (|RetractableFrom| (|List| 9)) (|SetCategory|)
+                      (|ConvertibleTo| 58) (|InnerEvalable| 9 9)
+                      (|CoercibleTo| 34) (|Type|) (|CoercibleTo| (|List| 9))
+                      (|finiteAggregate|) (|shallowlyMutable|) (|BasicType|))
                    (|makeByteWordVec2| 60
                                        '(1 11 0 0 12 1 0 11 0 14 1 11 0 0 15 2
                                          11 0 19 0 20 2 11 0 19 0 22 2 11 24 9
@@ -224,24 +223,24 @@
                                          24 0 0 31 2 11 0 32 0 33 1 9 34 0 35 1
                                          34 0 36 37 1 0 24 0 39 1 0 40 0 41 2 8
                                          0 0 0 42 2 40 8 43 0 44 2 0 24 0 0 1 1
-                                         0 40 0 41 1 0 24 0 1 1 5 24 0 1 2 0 58
-                                         0 8 1 2 0 24 0 50 1 2 7 0 54 0 1 0 0 0
+                                         0 40 0 41 1 0 24 0 1 1 5 24 0 1 2 0 54
+                                         0 8 1 2 0 24 0 53 1 2 7 0 52 0 1 0 0 0
                                          1 1 5 24 0 1 2 5 24 0 0 1 2 5 24 0 0 1
                                          1 5 24 0 1 2 5 11 11 0 1 2 5 11 11 0 1
                                          1 0 46 11 47 1 0 0 11 1 1 8 0 0 1 2 8
-                                         0 9 0 1 2 7 0 54 0 1 2 5 57 9 0 1 4 8
-                                         9 51 0 9 9 1 3 7 9 51 0 9 1 2 7 9 51 0
-                                         1 1 7 11 0 18 1 0 8 0 45 2 0 24 0 50 1
+                                         0 9 0 1 2 7 0 52 0 1 2 5 59 9 0 1 4 8
+                                         9 55 0 9 9 1 2 7 9 55 0 1 3 7 9 55 0 9
+                                         1 1 7 11 0 18 1 0 8 0 45 2 0 24 0 53 1
                                          1 9 9 0 1 1 7 11 0 14 2 8 24 9 0 26 1
                                          9 9 0 1 2 7 9 32 0 1 2 6 0 19 0 23 2 0
                                          0 19 0 21 1 0 40 0 1 2 0 24 8 0 1 2 0
-                                         24 0 50 1 1 0 60 0 1 2 5 6 6 6 1 2 5
-                                         56 9 0 1 2 0 59 54 0 1 2 7 24 54 0 1 2
-                                         1 0 0 52 1 2 1 0 0 53 1 3 1 0 0 11 11
-                                         1 3 1 0 0 9 9 1 2 0 24 0 0 1 1 0 24 0
-                                         39 0 0 0 17 2 8 50 9 0 1 2 7 50 54 0 1
-                                         1 0 0 0 16 1 2 55 0 1 1 0 0 11 49 1 0
+                                         24 0 53 1 1 0 50 0 1 2 5 6 6 6 1 2 5
+                                         60 9 0 1 2 0 51 52 0 1 2 7 24 52 0 1 3
+                                         1 0 0 9 9 1 3 1 0 0 11 11 1 2 1 0 0 56
+                                         1 2 1 0 0 57 1 2 0 24 0 0 1 1 0 24 0
+                                         39 0 0 0 17 2 8 53 9 0 1 2 7 53 52 0 1
+                                         1 0 0 0 16 1 0 0 11 49 1 2 58 0 1 1 0
                                          0 11 13 2 0 0 0 8 1 2 0 0 0 8 1 2 0 0
-                                         0 8 1 1 0 11 0 48 1 0 34 0 38 2 7 24
-                                         54 0 1 2 0 24 0 0 30 1 7 50 0 1)))))
+                                         0 8 1 1 0 34 0 38 1 0 11 0 48 2 7 24
+                                         52 0 1 2 0 24 0 0 30 1 7 53 0 1)))))
            '|lookupComplete|)) 

@@ -372,36 +372,6 @@
                          (#1# (SETQ |i| (+ |i| 1)))))))))
              |ok|))))))
 
-; dropLeadingBlanks str ==
-;   str := object2String str
-;   l := QCSIZE str
-;   nb := NIL
-;   i := 0
-;   while (i < l) and not nb repeat
-;     if SCHAR(str,i) ~= SCHAR('" ",0) then nb := i
-;     else i := i + 1
-;   nb = 0 => str
-;   nb => SUBSTRING(str,nb,NIL)
-;   '""
-
-(DEFUN |dropLeadingBlanks| (|str|)
-  (PROG (|l| |nb| |i|)
-    (RETURN
-     (PROGN
-      (SETQ |str| (|object2String| |str|))
-      (SETQ |l| (QCSIZE |str|))
-      (SETQ |nb| NIL)
-      (SETQ |i| 0)
-      ((LAMBDA ()
-         (LOOP
-          (COND ((NOT (AND (< |i| |l|) (NULL |nb|))) (RETURN NIL))
-                (#1='T
-                 (COND
-                  ((NOT (EQUAL (SCHAR |str| |i|) (SCHAR " " 0)))
-                   (SETQ |nb| |i|))
-                  (#1# (SETQ |i| (+ |i| 1)))))))))
-      (COND ((EQL |nb| 0) |str|) (|nb| (SUBSTRING |str| |nb| NIL)) (#1# ""))))))
-
 ; concat(:l) == concatList l
 
 (DEFUN |concat| (&REST |l|) (PROG () (RETURN (|concatList| |l|))))
@@ -531,35 +501,37 @@
 ;    NOT functionp key => error '"listSort: last arg must be a function"
 ;    mergeSort(pred,key,list,LENGTH list)
 
-(DEFUN |listSort| (|pred| LIST &REST |optional|)
+(DEFUN |listSort| (|pred| |list| &REST |optional|)
   (PROG (|key|)
     (RETURN
      (COND
       ((NULL (|functionp| |pred|))
        (|error| "listSort: first arg must be a function"))
-      ((NULL (LISTP LIST))
+      ((NULL (LISTP |list|))
        (|error| "listSort: second argument must be a list"))
-      ((NULL |optional|) (|mergeSort| |pred| #'|Identity| LIST (LENGTH LIST)))
+      ((NULL |optional|)
+       (|mergeSort| |pred| #'|Identity| |list| (LENGTH |list|)))
       (#1='T
        (PROGN
         (SETQ |key| (CAR |optional|))
         (COND
          ((NULL (|functionp| |key|))
           (|error| "listSort: last arg must be a function"))
-         (#1# (|mergeSort| |pred| |key| LIST (LENGTH LIST))))))))))
+         (#1# (|mergeSort| |pred| |key| |list| (LENGTH |list|))))))))))
 
 ; MSORT list == listSort(function GLESSEQP, COPY_-LIST list)
 
-(DEFUN MSORT (LIST) (PROG () (RETURN (|listSort| #'GLESSEQP (COPY-LIST LIST)))))
+(DEFUN MSORT (|list|)
+  (PROG () (RETURN (|listSort| #'GLESSEQP (COPY-LIST |list|)))))
 
 ; NMSORT list == listSort(function GLESSEQP, list)
 
-(DEFUN NMSORT (LIST) (PROG () (RETURN (|listSort| #'GLESSEQP LIST))))
+(DEFUN NMSORT (|list|) (PROG () (RETURN (|listSort| #'GLESSEQP |list|))))
 
-; orderList l == listSort(function _?ORDER, COPY_-LIST l)
+; orderList l == listSort(function lt_sexp, COPY_-LIST l)
 
 (DEFUN |orderList| (|l|)
-  (PROG () (RETURN (|listSort| #'?ORDER (COPY-LIST |l|)))))
+  (PROG () (RETURN (|listSort| #'|lt_sexp| (COPY-LIST |l|)))))
 
 ; mergeInPlace(f,g,p,q) ==
 ;    -- merge the two sorted lists p and q

@@ -15,5 +15,3 @@
                            (|mkCategory| '(((T$ (%) |constant|) T)) NIL NIL
                                          NIL)))
            (SETELT #1# 0 '(|BoundedMeetSemilattice|))))) 
-
-(MAKEPROP '|BoundedMeetSemilattice| 'NILADIC T) 

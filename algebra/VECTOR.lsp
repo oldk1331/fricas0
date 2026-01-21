@@ -22,9 +22,9 @@
 
 (DECLAIM (NOTINLINE |Vector;|)) 
 
-(DEFUN |Vector| (#1=#:G2164)
+(DEFUN |Vector| (#1=#:G2168)
   (SPROG NIL
-         (PROG (#2=#:G2165)
+         (PROG (#2=#:G2169)
            (RETURN
             (COND
              ((LETT #2#
@@ -39,7 +39,7 @@
 
 (DEFUN |Vector;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G2161 NIL) (#2=#:G2162 NIL) (#3=#:G2163 NIL) (% NIL)
+   ((|pv$| NIL) (#1=#:G2165 NIL) (#2=#:G2166 NIL) (#3=#:G2167 NIL) (% NIL)
     (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -168,35 +168,35 @@
               |VECTOR;qsetelt!;%I2R;2| (|List| 6) (0 . |construct|)
               |VECTOR;vector;L%;3| (|Symbol|) (|InputForm|) (5 . |convert|)
               (10 . |parts|) (15 . |convert|) (|List| %) (20 . |convert|)
-              (25 . |convert|) (|Mapping| 23 6 6) (|Mapping| 6 6 6) (|Boolean|)
-              (|NonNegativeInteger|) (|SingleInteger|) (|HashState|)
-              (|List| 28) (|Equation| 6) (|OutputForm|) (|String|)
-              (|Mapping| 23 6) (|UniversalSegment| 7) (|Void|) (|Mapping| 6 6)
-              (|Matrix| 6) (|Union| 6 '"failed") (|List| 7))
+              (25 . |convert|) (|Boolean|) (|NonNegativeInteger|)
+              (|Mapping| 6 6) (|List| 7) (|Union| 6 '"failed") (|Mapping| 21 6)
+              (|UniversalSegment| 7) (|Mapping| 6 6 6) (|Mapping| 21 6 6)
+              (|HashState|) (|SingleInteger|) (|Equation| 6) (|List| 32)
+              (|OutputForm|) (|String|) (|Void|) (|Matrix| 6))
            '#(|vector| 30 |qsetelt!| 35 |qelt| 42 |parts| 48 |convert| 53
               |construct| 58)
            'NIL
            (CONS
             (|makeByteWordVec2| 13
-                                '(0 0 0 0 0 0 1 0 7 0 0 9 10 2 0 0 0 0 0 9 13 1
-                                  11 3))
+                                '(0 0 0 0 1 0 0 7 0 2 10 9 0 0 3 11 1 13 9 0 0
+                                  0 0 0))
             (CONS
              '#(|VectorCategory&| |OneDimensionalArrayAggregate&| NIL
-                |LinearAggregate&| |IndexedAggregate&| |Collection&|
-                |OrderedSet&| |HomogeneousAggregate&| NIL |Aggregate&|
-                |EltableAggregate&| |Evalable&| |SetCategory&| |Hashable&| NIL
-                NIL NIL NIL NIL |InnerEvalable&| NIL |PartialOrder&|
-                |BasicType&| NIL)
+                |LinearAggregate&| |OrderedSet&| |Collection&|
+                |IndexedAggregate&| NIL |HomogeneousAggregate&| |Hashable&|
+                |SetCategory&| |Evalable&| |EltableAggregate&| |Aggregate&| NIL
+                |BasicType&| |PartialOrder&| NIL |InnerEvalable&| NIL NIL NIL
+                NIL NIL)
              (CONS
               '#((|VectorCategory| 6) (|OneDimensionalArrayAggregate| 6)
                  (|FiniteLinearAggregate| 6) (|LinearAggregate| 6)
-                 (|IndexedAggregate| 7 6) (|Collection| 6) (|OrderedSet|)
-                 (|HomogeneousAggregate| 6) (|Comparable|) (|Aggregate|)
-                 (|EltableAggregate| 7 6) (|Evalable| 6) (|SetCategory|)
-                 (|Hashable|) (|shallowlyMutable|) (|finiteAggregate|)
-                 (|Eltable| 32 $$) (|Type|) (|Eltable| 7 6)
-                 (|InnerEvalable| 6 6) (|CoercibleTo| 29) (|PartialOrder|)
-                 (|BasicType|) (|ConvertibleTo| 14))
+                 (|OrderedSet|) (|Collection| 6) (|IndexedAggregate| 7 6)
+                 (|Comparable|) (|HomogeneousAggregate| 6) (|Hashable|)
+                 (|SetCategory|) (|Evalable| 6) (|EltableAggregate| 7 6)
+                 (|Aggregate|) (|ConvertibleTo| 14) (|BasicType|)
+                 (|PartialOrder|) (|CoercibleTo| 34) (|InnerEvalable| 6 6)
+                 (|Eltable| 7 6) (|Type|) (|Eltable| 27 $$) (|finiteAggregate|)
+                 (|shallowlyMutable|))
               (|makeByteWordVec2| 22
                                   '(1 0 0 10 11 1 14 0 13 15 1 0 10 0 16 1 10
                                     14 0 17 1 14 0 18 19 1 0 14 0 20 1 0 0 10

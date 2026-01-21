@@ -20,5 +20,3 @@
                               ((|factor| ((|Factored| %) %)) T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|UniqueFactorizationDomain|))))) 
-
-(MAKEPROP '|UniqueFactorizationDomain| 'NILADIC T) 

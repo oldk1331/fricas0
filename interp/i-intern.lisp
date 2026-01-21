@@ -16,6 +16,10 @@
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (PROG () (RETURN (DEFCONST |$failure| (GENSYM)))))
 
+; DEFCONSTANT($immediateDataSymbol, "--immediateData--")
+
+(DEFCONSTANT |$immediateDataSymbol| '|--immediateData--|)
+
 ; mkAtreeNode x ==
 ;   -- maker of attrib tree node
 ;   v := MAKE_VEC(5)
@@ -1040,7 +1044,7 @@
 ;   null l or atom l or null rest l => l
 ;   l is ['valueOf,u] and IDENTP u =>
 ;     v := mkAtreeNode $immediateDataSymbol
-;     putValue(v,get(u,'value,$InteractiveFrame) or
+;     putValue(v, getI(u, 'value) or
 ;       objNewWrap(u,['Variable,u]))
 ;     v
 ;   [mkAtreeValueOf1 x for x in l]
@@ -1058,7 +1062,7 @@
             (PROGN
              (SETQ |v| (|mkAtreeNode| |$immediateDataSymbol|))
              (|putValue| |v|
-              (OR (|get| |u| '|value| |$InteractiveFrame|)
+              (OR (|getI| |u| '|value|)
                   (|objNewWrap| |u| (LIST '|Variable| |u|))))
              |v|))
            (#1#
@@ -1233,10 +1237,10 @@
 ;     repeat transfer(x,node,prop)
 ;       where
 ;         transfer(x,node,prop) ==
-;           u := get(x,prop,$env) => putAtree(node,prop,u)
-;           (not (x in $localVars)) and (u := get(x,prop,$e)) =>
+;           u := get0(x, prop, $env) => putAtree(node, prop, u)
+;           (not(x in $localVars)) and (u := get0(x, prop, $e)) =>
 ;             putAtree(node,prop,u)
-;   if not getMode(t) and (am := get(x,'automode,$env)) then
+;   if not(getMode(t)) and (am := get0(x, 'automode, $env)) then
 ;     putModeSet(t,[am])
 ;     putMode(t,am)
 ;   t
@@ -1261,16 +1265,16 @@
                '(|mode| |localModemap| |value| |name| |generatedCode|) NIL)
               (COND
                ((AND (NULL (|getMode| |t|))
-                     (SETQ |am| (|get| |x| '|automode| |$env|)))
+                     (SETQ |am| (|get0| |x| '|automode| |$env|)))
                 (|putModeSet| |t| (LIST |am|)) (|putMode| |t| |am|)))
               |t|)))))))
 (DEFUN |transferPropsToNode,transfer| (|x| |node| |prop|)
   (PROG (|u|)
     (RETURN
      (COND
-      ((SETQ |u| (|get| |x| |prop| |$env|)) (|putAtree| |node| |prop| |u|))
+      ((SETQ |u| (|get0| |x| |prop| |$env|)) (|putAtree| |node| |prop| |u|))
       ((AND (NULL (|member| |x| |$localVars|))
-            (SETQ |u| (|get| |x| |prop| |$e|)))
+            (SETQ |u| (|get0| |x| |prop| |$e|)))
        (|putAtree| |node| |prop| |u|))))))
 
 ; isLeaf x == atom x     --may be a number or a vector
@@ -1575,7 +1579,7 @@
 
 ; getValueFromSpecificEnvironment(id,mode,e) ==
 ;   PAIRP e =>
-;     u := get(id,'value,e) =>
+;     u := get0(id, 'value, e) =>
 ;       objMode(u) = $EmptyMode =>
 ;         systemErrorHere '"getValueFromSpecificEnvironment"
 ;       v := objValUnwrap u
@@ -1585,7 +1589,7 @@
 ;       null v' => throwKeyedMsg("S2IC0002",[objMode u,mode])
 ;       objValUnwrap v'
 ;
-;     m := get(id,'mode,e) =>
+;     m := get0(id, 'mode, e) =>
 ;       -- See if we can make it into declared mode from symbolic form
 ;       -- For example, (x : P[x] I; x + 1)
 ;       if isPartialMode(m) then m' := resolveTM(['Variable,id],m)
@@ -1604,7 +1608,7 @@
      (COND
       ((CONSP |e|)
        (COND
-        ((SETQ |u| (|get| |id| '|value| |e|))
+        ((SETQ |u| (|get0| |id| '|value| |e|))
          (COND
           ((EQUAL (|objMode| |u|) |$EmptyMode|)
            (|systemErrorHere| "getValueFromSpecificEnvironment"))
@@ -1624,7 +1628,7 @@
                 ((NULL |v'|)
                  (|throwKeyedMsg| 'S2IC0002 (LIST (|objMode| |u|) |mode|)))
                 (#1# (|objValUnwrap| |v'|))))))))))
-        ((SETQ |m| (|get| |id| '|mode| |e|))
+        ((SETQ |m| (|get0| |id| '|mode| |e|))
          (PROGN
           (COND
            ((|isPartialMode| |m|)
@@ -1675,35 +1679,30 @@
        (PROGN (RPLACD |u| |val|) |proplist|))
       ('T (CONS (CONS |prop| |val|) |proplist|))))))
 
-; getFlag x == get("--flags--",x,$e)
+; getFlag(x) == get0("--flags--", x, $e)
 
-(DEFUN |getFlag| (|x|) (PROG () (RETURN (|get| '|--flags--| |x| |$e|))))
+(DEFUN |getFlag| (|x|) (PROG () (RETURN (|get0| '|--flags--| |x| |$e|))))
 
 ; putFlag(flag,value) ==
-;   $e := put ("--flags--", flag, value, $e)
+;     $e := putIntSymTab("--flags--", flag, value, $e)
 
 (DEFUN |putFlag| (|flag| |value|)
-  (PROG () (RETURN (SETQ |$e| (|put| '|--flags--| |flag| |value| |$e|)))))
-
-; get(x,prop,e) ==
-;   $InteractiveMode => get0(x,prop,e)
-;   get1(x,prop,e)
-
-(DEFUN |get| (|x| |prop| |e|)
   (PROG ()
-    (RETURN
-     (COND (|$InteractiveMode| (|get0| |x| |prop| |e|))
-           ('T (|get1| |x| |prop| |e|))))))
+    (RETURN (SETQ |$e| (|putIntSymTab| '|--flags--| |flag| |value| |$e|)))))
+
+; get(x, prop, e) == get1(x, prop, e)
+
+(DEFUN |get| (|x| |prop| |e|) (PROG () (RETURN (|get1| |x| |prop| |e|))))
 
 ; get0(x,prop,e) ==
-;   null atom x => get(QCAR x,prop,e)
+;   not(atom(x)) => get0(QCAR(x), prop, e)
 ;   (pl := getProplist(x, e)) => QLASSQ(prop, pl)
 ;   nil
 
 (DEFUN |get0| (|x| |prop| |e|)
   (PROG (|pl|)
     (RETURN
-     (COND ((NULL (ATOM |x|)) (|get| (QCAR |x|) |prop| |e|))
+     (COND ((NULL (ATOM |x|)) (|get0| (QCAR |x|) |prop| |e|))
            ((SETQ |pl| (|getProplist| |x| |e|)) (QLASSQ |prop| |pl|))
            ('T NIL)))))
 
@@ -1775,17 +1774,10 @@
              (#1='T NIL)))
       (#1# NIL)))))
 
-; getI(x,prop) == get(x,prop,$InteractiveFrame)
+; getI(x, prop) == get0(x, prop, $InteractiveFrame)
 
 (DEFUN |getI| (|x| |prop|)
-  (PROG () (RETURN (|get| |x| |prop| |$InteractiveFrame|))))
-
-; putI(x,prop,val) == ($InteractiveFrame := put(x,prop,val,$InteractiveFrame))
-
-(DEFUN |putI| (|x| |prop| |val|)
-  (PROG ()
-    (RETURN
-     (SETQ |$InteractiveFrame| (|put| |x| |prop| |val| |$InteractiveFrame|)))))
+  (PROG () (RETURN (|get0| |x| |prop| |$InteractiveFrame|))))
 
 ; getIProplist x == getProplist(x,$InteractiveFrame)
 
@@ -1848,8 +1840,7 @@
                     (IDENTITY |u|)))))))))))))
 
 ; put(x,prop,val,e) ==
-;   $InteractiveMode and not EQ(e,$CategoryFrame) =>
-;     putIntSymTab(x,prop,val,e)
+;   $InteractiveMode and not EQ(e,$CategoryFrame) => BREAK()
 ;   --e must never be $CapsuleModemapFrame
 ;   null atom x => put(first x,prop,val,e)
 ;   newProplist:= augProplistOf(x,prop,val,e)
@@ -1864,24 +1855,23 @@
 (DEFUN |put| (|x| |prop| |val| |e|)
   (PROG (|newProplist|)
     (RETURN
-     (COND
-      ((AND |$InteractiveMode| (NULL (EQ |e| |$CategoryFrame|)))
-       (|putIntSymTab| |x| |prop| |val| |e|))
-      ((NULL (ATOM |x|)) (|put| (CAR |x|) |prop| |val| |e|))
-      (#1='T
-       (PROGN
-        (SETQ |newProplist| (|augProplistOf| |x| |prop| |val| |e|))
-        (COND
-         ((AND (EQ |prop| '|modemap|) (EQUAL |$insideCapsuleFunctionIfTrue| T))
-          (PROGN
-           (SAY (LIST "**** modemap PUT on CapsuleModemapFrame: " |val|))
-           (SETQ |$CapsuleModemapFrame|
-                   (|addBinding| |x|
-                    (|augProplistOf| |x| '|modemap| |val|
-                     |$CapsuleModemapFrame|)
-                    |$CapsuleModemapFrame|))
-           |e|))
-         (#1# (|addBinding| |x| |newProplist| |e|)))))))))
+     (COND ((AND |$InteractiveMode| (NULL (EQ |e| |$CategoryFrame|))) (BREAK))
+           ((NULL (ATOM |x|)) (|put| (CAR |x|) |prop| |val| |e|))
+           (#1='T
+            (PROGN
+             (SETQ |newProplist| (|augProplistOf| |x| |prop| |val| |e|))
+             (COND
+              ((AND (EQ |prop| '|modemap|)
+                    (EQUAL |$insideCapsuleFunctionIfTrue| T))
+               (PROGN
+                (SAY (LIST "**** modemap PUT on CapsuleModemapFrame: " |val|))
+                (SETQ |$CapsuleModemapFrame|
+                        (|addBinding| |x|
+                         (|augProplistOf| |x| '|modemap| |val|
+                          |$CapsuleModemapFrame|)
+                         |$CapsuleModemapFrame|))
+                |e|))
+              (#1# (|addBinding| |x| |newProplist| |e|)))))))))
 
 ; putIntSymTab(x,prop,val,e) ==
 ;   null atom x => putIntSymTab(first x,prop,val,e)

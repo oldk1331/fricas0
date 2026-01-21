@@ -2268,5 +2268,3 @@
                                               65 109 110 6 0 165 166 25 79 16
                                               65 167 168)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|ModularHermitePade| 'NILADIC T) 

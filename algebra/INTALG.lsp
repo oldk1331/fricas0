@@ -380,7 +380,7 @@
             "failed"))
           (|di| (|FiniteDivisor| F UP UPUP R))
           (|di2| #3=(|FiniteDivisor| F UP UPUP R)) (|di1| #3#) (|na| (F))
-          (|nfac| #1#) (#4=#:G214 NIL) (|peq| NIL) (|alpha| (F)) (|p| (UP))
+          (|nfac| #1#) (#4=#:G206 NIL) (|peq| NIL) (|alpha| (F)) (|p| (UP))
           (|pc1|
            (|Record| (|:| |factor| UP) (|:| |exponent| (|NonNegativeInteger|))
                      (|:| |coeff| (|Fraction| (|Integer|))))))
@@ -469,7 +469,7 @@
                            (|:| |exponent| (|NonNegativeInteger|))
                            (|:| |coeff| (|Fraction| (|Integer|)))))))))
         (SPROG
-         ((#3=#:G236 NIL)
+         ((#3=#:G228 NIL)
           (|ff|
            (|Record| (|:| |factor| UP) (|:| |exponent| (|NonNegativeInteger|))
                      (|:| |coeff| (|Fraction| (|Integer|)))))
@@ -478,8 +478,8 @@
             (|Record| (|:| |factor| UP) (|:| |exponent| (|NonNegativeInteger|))
                       (|:| |coeff| (|Fraction| (|Integer|))))
             "failed"))
-          (|nfac| #2#) (#4=#:G239 NIL) (|peq| NIL) (|lp1| (|List| #1#))
-          (#5=#:G238 NIL) (#6=#:G237 NIL) (|p| (UP))
+          (|nfac| #2#) (#4=#:G231 NIL) (|peq| NIL) (|lp1| (|List| #1#))
+          (#5=#:G230 NIL) (#6=#:G229 NIL) (|p| (UP))
           (|pc1|
            (|Record| (|:| |factor| UP) (|:| |exponent| (|NonNegativeInteger|))
                      (|:| |coeff| (|Fraction| (|Integer|))))))
@@ -539,7 +539,7 @@
                                     ((QEQCAR |fu| 1)
                                      (PROGN
                                       (LETT #3# (VECTOR NIL NIL |lp|))
-                                      (GO #8=#:G235)))
+                                      (GO #8=#:G227)))
                                     ('T
                                      (SEQ (LETT |ff| (QCDR |fu|))
                                           (EXIT
@@ -566,7 +566,7 @@
                       (QREFELT % 120)))))) 
 
 (SDEFUN |INTALG;get_coeffs0| ((|lp| (|List| UP)) (% (|List| F)))
-        (SPROG ((|res| (|List| F)) (#1=#:G244 NIL) (|p| NIL))
+        (SPROG ((|res| (|List| F)) (#1=#:G236 NIL) (|p| NIL))
                (SEQ (LETT |res| NIL)
                     (SEQ (LETT |p| NIL) (LETT #1# |lp|) G190
                          (COND
@@ -681,7 +681,7 @@
                   (|Record| (|:| |factor| UP)
                             (|:| |exponent| (|NonNegativeInteger|))
                             (|:| |coeff| (|Fraction| (|Integer|))))))))
-          (#1=#:G278 NIL) (|lp| NIL)
+          (#1=#:G270 NIL) (|lp| NIL)
           (|lm|
            (|List|
             (|List|
@@ -755,8 +755,8 @@
                       (|:| |coeff| (|Fraction| (|Integer|)))))))
          (% (|List| UP)))
         (SPROG
-         ((#1=#:G295 NIL) (|peq| NIL) (#2=#:G294 NIL) (#3=#:G293 NIL)
-          (#4=#:G292 NIL))
+         ((#1=#:G287 NIL) (|peq| NIL) (#2=#:G286 NIL) (#3=#:G285 NIL)
+          (#4=#:G284 NIL))
          (SEQ (COND ((NULL |ll1|) (COND ((NULL |ll2|) (EXIT NIL)))))
               (EXIT
                (COND
@@ -797,7 +797,7 @@
             (|Record| (|:| |factor| UP) (|:| |exponent| (|NonNegativeInteger|))
                       (|:| |coeff| (|Fraction| (|Integer|)))))))
          (% (|List| F)))
-        (SPROG ((#1=#:G302 NIL) (|lfac| NIL) (#2=#:G301 NIL))
+        (SPROG ((#1=#:G294 NIL) (|lfac| NIL) (#2=#:G293 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -833,8 +833,8 @@
                       (|:| |coeff| (|Fraction| (|Integer|)))))))
          (% (|List| (|FiniteDivisor| F UP UPUP R))))
         (SPROG
-         ((#1=#:G320 NIL) (|peq| NIL) (#2=#:G319 NIL) (#3=#:G318 NIL) (|a| NIL)
-          (#4=#:G317 NIL))
+         ((#1=#:G312 NIL) (|peq| NIL) (#2=#:G311 NIL) (#3=#:G310 NIL) (|a| NIL)
+          (#4=#:G309 NIL))
          (SEQ (COND ((NULL |ll1|) (COND ((NULL |ll2|) (EXIT NIL)))))
               (EXIT
                (COND
@@ -889,7 +889,7 @@
             "failed"))
           (|v1| (|FiniteDivisor| F UP UPUP R)) (|alpha| (F))
           (|ld| (|List| (|FiniteDivisor| F UP UPUP R))) (|la| (|List| F))
-          (|bb| (F)) (#1=#:G400 NIL) (|fcf| (UP))
+          (|bb| (F)) (#1=#:G392 NIL) (|fcf| (UP))
           (|lins2|
            (|List|
             #2=(|List|
@@ -903,7 +903,7 @@
            (|List|
             (|Record| (|:| |factor| UP) (|:| |exponent| (|NonNegativeInteger|))
                       (|:| |coeff| (|Fraction| (|Integer|))))))
-          (#3=#:G377 NIL)
+          (#3=#:G369 NIL)
           (|lins1|
            (|List|
             #4=(|List|
@@ -921,8 +921,8 @@
             (|Record| (|:| |factor| UP) (|:| |exponent| (|NonNegativeInteger|))
                       (|:| |coeff| (|Fraction| (|Integer|))) (|:| |scalar| F)
                       (|:| |divisor| (|FiniteDivisor| F UP UPUP R)))))
-          (#5=#:G413 NIL) (|nfl| NIL) (#6=#:G412 NIL) (#7=#:G411 NIL)
-          (#8=#:G410 NIL)
+          (#5=#:G405 NIL) (|nfl| NIL) (#6=#:G404 NIL) (#7=#:G403 NIL)
+          (#8=#:G402 NIL)
           (|nlins2|
            (|List|
             (|List|
@@ -937,8 +937,8 @@
                        (|:| |coeff| (|SparseUnivariatePolynomial| R))
                        (|:| |logand| (|SparseUnivariatePolynomial| R))))
             "failed"))
-          (#9=#:G409 NIL) (|nlins1| (|List| #4#)) (#10=#:G408 NIL)
-          (#11=#:G407 NIL) (|nfacs2| (|List| #2#)) (|nfacs1| (|List| #4#))
+          (#9=#:G401 NIL) (|nlins1| (|List| #4#)) (#10=#:G400 NIL)
+          (#11=#:G399 NIL) (|nfacs2| (|List| #2#)) (|nfacs1| (|List| #4#))
           (|ppr|
            (|Record|
             (|:| |result1|
@@ -1350,7 +1350,7 @@
 
 (SDEFUN |INTALG;varRoot?|
         ((|p| (UP)) (|derivation| (|Mapping| F F)) (% (|Boolean|)))
-        (SPROG ((#1=#:G437 NIL) (#2=#:G438 NIL) (#3=#:G439 NIL) (|c| NIL))
+        (SPROG ((#1=#:G429 NIL) (#2=#:G430 NIL) (#3=#:G431 NIL) (|c| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -1367,8 +1367,8 @@
                             ((SPADCALL (SPADCALL |c| |derivation|)
                                        (|spadConstant| % 41) (QREFELT % 170))
                              (PROGN
-                              (LETT #1# (PROGN (LETT #2# 'T) (GO #4=#:G436)))
-                              (GO #5=#:G434))))))
+                              (LETT #1# (PROGN (LETT #2# 'T) (GO #4=#:G428)))
+                              (GO #5=#:G426))))))
                          (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
                    #5# (EXIT #1#))
                   (EXIT NIL)))
@@ -1382,7 +1382,7 @@
          (|derivation| (|Mapping| R R)) (% (R)))
         (SPROG
          ((|ans| (R)) (|algans| #1=(|SparseUnivariatePolynomial| R))
-          (#2=#:G467 NIL) (|i| NIL)
+          (#2=#:G459 NIL) (|i| NIL)
           (|diflog|
            (|Union|
             (|Record| (|:| |coef1| #1#)
@@ -1532,12 +1532,12 @@
             (|Record| (|:| |order| (|NonNegativeInteger|)) (|:| |function| R))
             "failed"))
           (|v2| (|FiniteDivisor| F UP UPUP R))
-          (|v0| #1=(|FiniteDivisor| F UP UPUP R)) (#2=#:G482 NIL)
-          (#3=#:G481 #1#) (#4=#:G483 #1#) (#5=#:G493 NIL) (|a| NIL)
-          (#6=#:G494 NIL) (|dv| NIL)
+          (|v0| #1=(|FiniteDivisor| F UP UPUP R)) (#2=#:G474 NIL)
+          (#3=#:G473 #1#) (#4=#:G475 #1#) (#5=#:G485 NIL) (|a| NIL)
+          (#6=#:G486 NIL) (|dv| NIL)
           (|cd|
            (|Record| (|:| |num| (|List| (|Integer|))) (|:| |den| (|Integer|))))
-          (#7=#:G492 NIL) (#8=#:G491 NIL))
+          (#7=#:G484 NIL) (#8=#:G483 NIL))
          (SEQ
           (LETT |cd|
                 (SPADCALL
@@ -1623,8 +1623,8 @@
 (SDEFUN |INTALG;pole_parts|
         ((|lc| (|List| (|Fraction| UP))) (|ii| (|Integer|)) (% (|List| UP)))
         (SPROG
-         ((#1=#:G504 NIL) (|c| NIL) (#2=#:G503 NIL)
-          (|nn| (|NonNegativeInteger|)) (#3=#:G498 NIL))
+         ((#1=#:G496 NIL) (|c| NIL) (#2=#:G495 NIL)
+          (|nn| (|NonNegativeInteger|)) (#3=#:G490 NIL))
          (SEQ
           (LETT |nn|
                 (PROG1 (LETT #3# (- |ii| 1))
@@ -1653,16 +1653,16 @@
         ((|f| (R)) (|e_forms| (|List| R)) (|der| (|Mapping| UP UP))
          (% (|Union| (|List| F) "failed")))
         (SPROG
-         ((#1=#:G537 NIL) (#2=#:G541 NIL) (|c| NIL) (|cl| (|List| F))
+         ((#1=#:G529 NIL) (#2=#:G533 NIL) (|c| NIL) (|cl| (|List| F))
           (|pu| #3=(|Union| (|Vector| F) "failed"))
           (|sol|
            (|Record| (|:| |particular| #3#)
                      (|:| |basis| (|List| (|Vector| F)))))
           (|r_sys|
            (|Record| (|:| |mat| (|Matrix| F)) (|:| |vec| (|Vector| F))))
-          (|e_mat| (|Matrix| UP)) (|ll| (|List| (|List| UP))) (#4=#:G540 NIL)
-          (|e_f| NIL) (#5=#:G539 NIL) (|fv| (|Vector| UP)) (#6=#:G536 NIL)
-          (|inf_integral| (|Boolean|)) (#7=#:G538 NIL) (|ii| (|Integer|))
+          (|e_mat| (|Matrix| UP)) (|ll| (|List| (|List| UP))) (#4=#:G532 NIL)
+          (|e_f| NIL) (#5=#:G531 NIL) (|fv| (|Vector| UP)) (#6=#:G528 NIL)
+          (|inf_integral| (|Boolean|)) (#7=#:G530 NIL) (|ii| (|Integer|))
           (|rf| (|Fraction| UP)) (|r| (UPUP)) (|p| (UPUP)) (|g| (R))
           (|dx| (UP)) (|f_c| (|List| (|Fraction| UP)))
           (|f_c0| (|Vector| (|Fraction| UP)))
@@ -1731,7 +1731,7 @@
                                                (EXIT
                                                 (PROGN
                                                  (LETT #6# 1)
-                                                 (GO #9=#:G515))))))))
+                                                 (GO #9=#:G507))))))))
                                       (LETT #7# (CDR #7#)) (GO G190) G191
                                       (EXIT NIL)))
                                 #9# (EXIT #6#))
@@ -1833,7 +1833,7 @@
                                                           (LETT #1#
                                                                 (CONS 1
                                                                       "failed"))
-                                                          (GO #10=#:G535))))))
+                                                          (GO #10=#:G527))))))
                                                      (LETT #2# (CDR #2#))
                                                      (GO G190) G191 (EXIT NIL))
                                                 (EXIT
@@ -1885,7 +1885,7 @@
             (|Record| (|:| |result1| (|Fraction| UP)) (|:| |result2| F))
             "failed"))
           (|e_c| (F)) (|pol| (UP)) (|var| (F)) (|f_c| (R)) (|difFirstKind| (R))
-          (#1=#:G568 NIL) (#2=#:G567 (R)) (#3=#:G569 (R)) (#4=#:G598 NIL)
+          (#1=#:G560 NIL) (#2=#:G559 (R)) (#3=#:G561 (R)) (#4=#:G598 NIL)
           (|lg| NIL) (#5=#:G590 NIL)
           (|u|
            (|Union|

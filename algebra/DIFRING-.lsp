@@ -50,5 +50,5 @@
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 12
                                             '(1 6 0 0 7 2 6 0 0 9 11 2 0 0 0 9
-                                              10 2 0 0 0 9 12 1 0 0 0 8)))))
+                                              10 1 0 0 0 8 2 0 0 0 9 12)))))
            '|lookupComplete|)) 

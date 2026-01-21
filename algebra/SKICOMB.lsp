@@ -555,9 +555,9 @@
               177 |coerce| 183 |atom?| 188 S 193 K 197 I 201 = 205)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 46))
+                        '#((|SetCategory|) (|CoercibleTo| 46) (|BasicType|))
                         (|makeByteWordVec2| 57
                                             '(1 14 13 0 15 1 20 19 0 21 1 20 19
                                               0 22 1 20 19 0 23 2 6 16 14 17 24
@@ -567,8 +567,8 @@
                                               0 44 2 0 19 0 0 45 1 46 48 0 49 0
                                               46 0 52 1 53 46 0 54 1 46 0 14 55
                                               1 46 0 32 56 1 6 46 0 57 2 0 19 0
-                                              0 45 1 0 19 0 34 1 0 14 0 42 1 0
-                                              0 6 9 2 0 0 0 0 8 1 0 0 0 50 2 0
+                                              0 45 1 0 19 0 34 1 0 14 0 42 2 0
+                                              0 0 0 8 1 0 0 6 9 1 0 0 0 50 2 0
                                               16 14 17 18 1 0 0 14 30 1 0 14 0
                                               1 1 0 19 0 37 1 0 19 0 36 1 0 19
                                               0 35 1 0 6 0 39 1 0 32 0 33 2 0

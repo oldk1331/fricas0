@@ -83,15 +83,13 @@
               42 |OMReadError?| 47 |OMParseError?| 52 = 57)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 18))
+                        '#((|SetCategory|) (|CoercibleTo| 18) (|BasicType|))
                         (|makeByteWordVec2| 20
                                             '(1 13 12 0 14 2 6 7 2 2 16 1 6 18
-                                              2 19 2 0 7 0 0 1 1 0 12 0 1 1 0 0
-                                              13 15 1 0 18 0 20 1 0 7 0 10 1 0
-                                              7 0 9 1 0 7 0 11 1 0 7 0 8 2 0 7
-                                              0 0 17)))))
+                                              2 19 2 0 7 0 0 1 1 0 12 0 1 1 0
+                                              18 0 20 1 0 0 13 15 1 0 7 0 10 1
+                                              0 7 0 9 1 0 7 0 11 1 0 7 0 8 2 0
+                                              7 0 0 17)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|OpenMathErrorKind| 'NILADIC T) 

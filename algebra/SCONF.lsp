@@ -384,20 +384,20 @@
               - 236 + 242 * 248)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0))
-                 (CONS '#(|SPointCategory&| |SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SPointCategory&| |SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SPointCategory|) (|SetCategory|) (|BasicType|)
-                           (|CoercibleTo| 41))
+                        '#((|SPointCategory|) (|SetCategory|)
+                           (|CoercibleTo| 41) (|BasicType|))
                         (|makeByteWordVec2| 55
                                             '(2 8 9 0 15 16 2 9 20 0 0 21 1 9 0
                                               0 23 2 9 20 0 0 31 1 8 36 0 38 1
                                               41 0 40 42 1 41 43 0 44 1 9 41 0
                                               52 1 41 0 53 54 2 0 20 0 0 51 1 0
-                                              0 0 24 1 0 0 0 47 1 0 0 0 46 3 0
-                                              0 9 9 9 13 2 0 0 9 9 12 3 0 0 9 9
-                                              9 11 2 0 0 9 9 10 3 0 0 15 15 15
-                                              1 2 0 0 15 15 1 3 0 0 15 15 15 1
-                                              2 0 0 15 15 1 1 0 36 0 37 1 0 9 0
+                                              0 0 24 1 0 0 0 47 1 0 0 0 46 2 0
+                                              0 9 9 12 3 0 0 9 9 9 13 2 0 0 9 9
+                                              10 3 0 0 9 9 9 11 2 0 0 15 15 1 3
+                                              0 0 15 15 15 1 2 0 0 15 15 1 3 0
+                                              0 15 15 15 1 1 0 36 0 37 1 0 9 0
                                               35 1 0 9 0 34 1 0 9 0 33 2 0 0 0
                                               0 27 2 0 9 0 0 26 1 0 0 0 45 2 0
                                               0 0 0 14 2 0 0 0 0 17 1 0 40 0 1

@@ -69,26 +69,25 @@
            '#(NIL NIL NIL NIL NIL (|FinitePoset| 6) (|local| |#1|)
               (|Union| 8 '"failed") (|NonNegativeInteger|) (0 . |joinIfCan|)
               (|Boolean|) (7 . =) |FBICPO;join;%3Nni;1| (13 . |meetIfCan|)
-              |FBICPO;meet;%3Nni;2| (|IncidenceAlgebra| 21 6) (|List| 8)
-              (|Void|) (|List| (|List| 10)) (|List| 6) (|Mapping| 10 6 6)
-              (|Integer|) (|String|) (|List| %) (|Scene| (|SCartesian| '2))
-              (|Matrix| 21) (|Matrix| 8) (|List| (|Loop|)) (|List| 29)
-              (|Tree| 21) (|DirectedGraph| %)
-              (|Record| (|:| |name| 22) (|:| |arrType| 8) (|:| |fromOb| 8)
-                        (|:| |toOb| 8) (|:| |xOffset| 21) (|:| |yOffset| 21)
-                        (|:| |map| 16))
-              (|List| 31)
+              |FBICPO;meet;%3Nni;2| (|String|) (|OutputForm|)
               (|Record| (|:| |value| 6) (|:| |posX| 8) (|:| |posY| 8))
-              (|List| 33) (|OutputForm|))
+              (|Record| (|:| |name| 15) (|:| |arrType| 8) (|:| |fromOb| 8)
+                        (|:| |toOb| 8) (|:| |xOffset| 24) (|:| |yOffset| 24)
+                        (|:| |map| 19))
+              (|List| 8) (|List| 17) (|List| 18) (|DirectedGraph| %) (|List| 6)
+              (|Integer|) (|Tree| 24) (|List| 25) (|List| (|Loop|))
+              (|Matrix| 24) (|Matrix| 8) (|Void|) (|Scene| (|SCartesian| '2))
+              (|List| %) (|List| (|List| 10)) (|Mapping| 10 6 6)
+              (|IncidenceAlgebra| 24 6))
            '#(|meetIfCan| 20 |meet| 27 |joinIfCan| 34 |join| 41) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(NIL NIL NIL |Poset&| NIL |FiniteGraph&| |SetCategory&|
-                     |BasicType&| NIL)
+                  '#(NIL NIL NIL |Poset&| NIL |FiniteGraph&| |SetCategory&| NIL
+                     |BasicType&|)
                   (CONS
-                   '#((|BiCPO| 6) (|Dcpo| 6) (|CoDcpo| 6) (|Poset| 6)
+                   '#((|BiCPO| 6) (|CoDcpo| 6) (|Dcpo| 6) (|Poset| 6)
                       (|Preorder| 6) (|FiniteGraph| 6) (|SetCategory|)
-                      (|BasicType|) (|CoercibleTo| 35))
+                      (|CoercibleTo| 16) (|BasicType|))
                    (|makeByteWordVec2| 14
                                        '(3 0 7 0 8 8 9 2 7 10 0 0 11 3 0 7 0 8
                                          8 13 3 0 7 0 8 8 13 3 0 8 0 8 8 14 3 0

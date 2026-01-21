@@ -41,7 +41,7 @@
               (27 . |minIndex|) (|Boolean|) (32 . |substring?|)
               |SRAGG-;prefix?;2SB;4| (|NonNegativeInteger|) (|Character|)
               (39 . |new|) |SRAGG-;coerce;CS;5| (45 . |concat|)
-              |SRAGG-;elt;3S;6| (|OutputForm|) (|UniversalSegment| 16))
+              |SRAGG-;elt;3S;6| (|UniversalSegment| 16) (|OutputForm|))
            '#(|upperCase| 51 |trim| 56 |prefix?| 62 |lowerCase| 68 |elt| 73
               |coerce| 79)
            'NIL

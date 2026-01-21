@@ -66,5 +66,3 @@
                                             '(0 6 0 7 0 9 0 10 0 9 0 12 0 0 9
                                               11 0 0 9 13 0 0 6 8)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|Infinity| 'NILADIC T) 

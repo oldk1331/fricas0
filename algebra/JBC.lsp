@@ -135,5 +135,3 @@
                                                T))
                                             NIL NIL NIL))))
            (SETELT #1# 0 '(|JetBundleCategory|))))) 
-
-(MAKEPROP '|JetBundleCategory| 'NILADIC T) 

@@ -1291,11 +1291,11 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0))
                  (CONS
-                  '#(|RealRootCharacterizationCategory&| |SetCategory&|
-                     |BasicType&| NIL)
+                  '#(|RealRootCharacterizationCategory&| |SetCategory&| NIL
+                     |BasicType&|)
                   (CONS
                    '#((|RealRootCharacterizationCategory| 6 7) (|SetCategory|)
-                      (|BasicType|) (|CoercibleTo| 70))
+                      (|CoercibleTo| 70) (|BasicType|))
                    (|makeByteWordVec2| 94
                                        '(2 6 0 0 0 9 1 7 11 0 12 0 6 0 13 0 6 0
                                          14 0 7 0 15 2 7 6 0 11 16 1 7 6 0 17 2

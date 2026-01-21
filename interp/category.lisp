@@ -598,7 +598,7 @@
 ;       ans:=[n,:ans]
 ;   return ans
 
-(DEFUN |SigListOpSubsume| (|bfVar#17| LIST)
+(DEFUN |SigListOpSubsume| (|bfVar#17| |list|)
   (PROG (|name1| |sig1| |lsig1| |ans| |ISTMP#1| |name2| |ISTMP#2| |sig2|)
     (RETURN
      (PROGN
@@ -626,7 +626,7 @@
                         (|SourceLevelSubsume| |sig1| |sig2|))
                    (IDENTITY (SETQ |ans| (CONS |n| |ans|))))))))
           (SETQ |bfVar#16| (CDR |bfVar#16|))))
-       LIST NIL)
+       |list| NIL)
       (RETURN |ans|)))))
 
 ; SourceLevelSubsume([out1,:in1],[out2,:in2]) ==

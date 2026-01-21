@@ -14,5 +14,3 @@
                            (|mkCategory| '(((|order| ((|Integer|) %)) T)) NIL
                                          NIL NIL)))
            (SETELT #1# 0 '(|FiniteGroup|))))) 
-
-(MAKEPROP '|FiniteGroup| 'NILADIC T) 

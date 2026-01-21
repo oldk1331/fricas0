@@ -372,8 +372,8 @@
               (233 . -) (238 . -) (243 . -) (249 . -) (255 . -) (|Integer|)
               (261 . *) (267 . *) (273 . *) (279 . |sup|) (285 . |sup|)
               (291 . |sup|) (297 . <) (303 . <) (309 . <) (315 . |smaller?|)
-              (321 . |smaller?|) (327 . |smaller?|) (|InputForm|)
-              (|SingleInteger|) (|String|))
+              (321 . |smaller?|) (327 . |smaller?|) (|String|) (|InputForm|)
+              (|SingleInteger|))
            '#(~= 333 |zero?| 339 |sup| 344 |subtractIfCan| 350 |smaller?| 356
               |size| 362 |second| 366 |sample| 371 |rightRecip| 375
               |rightPower| 380 |recip| 392 |random| 397 |opposite?| 401 |one?|
@@ -386,22 +386,23 @@
            'NIL
            (CONS
             (|makeByteWordVec2| 10
-                                '(1 1 1 3 6 1 4 7 2 5 7 7 8 10 5 7 0 9 0 0 2 6
-                                  6 8))
+                                '(1 1 6 3 1 7 4 1 8 7 7 5 2 7 5 10 9 0 8 6 6 2
+                                  0 0))
             (CONS
-             '#(NIL NIL NIL |AbelianGroup&| |Group&| NIL NIL NIL |OrderedSet&|
-                |AbelianMonoid&| NIL |MagmaWithUnit&| |Finite&| NIL
-                |AbelianSemiGroup&| |Magma&| |SetCategory&| |Hashable&|
-                |BasicType&| NIL |PartialOrder&| NIL NIL NIL)
+             '#(NIL NIL |Group&| |AbelianGroup&| NIL NIL NIL NIL |Finite&|
+                |MagmaWithUnit&| NIL |AbelianMonoid&| |OrderedSet&| |Magma&|
+                |AbelianSemiGroup&| NIL |Hashable&| |SetCategory&| NIL NIL NIL
+                |PartialOrder&| NIL |BasicType&|)
              (CONS
               '#((|OrderedAbelianMonoidSup|)
-                 (|OrderedCancellationAbelianMonoid|) (|OrderedAbelianMonoid|)
-                 (|AbelianGroup|) (|Group|) (|OrderedAbelianSemiGroup|)
-                 (|CancellationAbelianMonoid|) (|Monoid|) (|OrderedSet|)
-                 (|AbelianMonoid|) (|SemiGroup|) (|MagmaWithUnit|) (|Finite|)
-                 (|Comparable|) (|AbelianSemiGroup|) (|Magma|) (|SetCategory|)
-                 (|Hashable|) (|BasicType|) (|CoercibleTo| 9) (|PartialOrder|)
-                 (|TwoSidedRecip|) (|unitsKnown|) (|ConvertibleTo| 84))
+                 (|OrderedCancellationAbelianMonoid|) (|Group|)
+                 (|AbelianGroup|) (|OrderedAbelianMonoid|) (|Monoid|)
+                 (|CancellationAbelianMonoid|) (|OrderedAbelianSemiGroup|)
+                 (|Finite|) (|MagmaWithUnit|) (|SemiGroup|) (|AbelianMonoid|)
+                 (|OrderedSet|) (|Magma|) (|AbelianSemiGroup|) (|Comparable|)
+                 (|Hashable|) (|SetCategory|) (|ConvertibleTo| 85)
+                 (|unitsKnown|) (|TwoSidedRecip|) (|PartialOrder|)
+                 (|CoercibleTo| 9) (|BasicType|))
               (|makeByteWordVec2| 86
                                   '(1 6 9 0 10 1 7 9 0 11 1 9 0 12 13 2 6 15 0
                                     0 16 2 7 15 0 0 17 0 6 0 22 0 7 0 23 0 0 0
@@ -423,17 +424,17 @@
                                     7 15 0 0 82 2 0 15 0 0 83 2 0 15 0 0 1 1 5
                                     15 0 1 2 1 0 0 0 77 2 4 61 0 0 64 2 10 15 0
                                     0 83 0 8 28 34 1 0 7 0 21 0 11 0 1 1 7 61 0
-                                    1 2 7 0 0 28 1 2 7 0 0 35 1 1 7 61 0 1 0 8
+                                    1 2 7 0 0 35 1 2 7 0 0 28 1 1 7 61 0 1 0 8
                                     0 41 2 5 15 0 0 1 1 7 15 0 1 2 2 0 0 0 1 2
-                                    2 0 0 0 1 1 8 35 0 44 1 7 61 0 1 2 7 0 0 28
-                                    1 2 7 0 0 35 1 1 0 86 0 1 1 6 0 0 51 2 1 0
-                                    0 0 1 1 8 0 35 38 2 9 45 45 0 48 1 9 85 0 1
-                                    1 0 6 0 20 0 8 12 1 1 8 84 0 1 2 0 0 6 7 19
+                                    2 0 0 0 1 1 8 35 0 44 1 7 61 0 1 2 7 0 0 35
+                                    1 2 7 0 0 28 1 1 0 84 0 1 1 6 0 0 51 2 1 0
+                                    0 0 1 1 8 0 35 38 2 9 45 45 0 48 1 9 86 0 1
+                                    1 0 6 0 20 0 8 12 1 1 8 85 0 1 2 0 0 6 7 19
                                     2 6 0 0 0 1 2 6 0 0 0 1 1 0 9 0 14 2 6 0 0
-                                    71 1 2 7 0 0 28 31 2 7 0 0 35 1 0 5 0 54 0
+                                    71 1 2 7 0 0 35 1 2 7 0 0 28 31 0 5 0 54 0
                                     7 0 24 2 2 15 0 0 1 2 2 15 0 0 1 2 0 15 0 0
-                                    18 2 2 15 0 0 1 2 2 15 0 0 80 2 6 0 0 0 1 2
-                                    3 0 0 0 70 1 3 0 0 67 2 5 0 0 0 57 2 3 0 71
-                                    0 74 2 5 0 28 0 60 2 5 0 35 0 1 2 7 0 0 0
+                                    18 2 2 15 0 0 1 2 2 15 0 0 80 2 6 0 0 0 1 1
+                                    3 0 0 67 2 3 0 0 0 70 2 5 0 0 0 57 2 3 0 71
+                                    0 74 2 5 0 35 0 1 2 5 0 28 0 60 2 7 0 0 0
                                     27)))))
            '|lookupComplete|)) 

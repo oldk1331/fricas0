@@ -437,7 +437,7 @@
 ;   member(IFCAR name or name, $DummyFunctorNames) => e
 ;   name = $Category or isCategoryForm(name) => e
 ;   member(name, getDomainsInScope e) => e
-;   if u:= GETDATABASE(opOf functorForm,'SUPERDOMAIN) then
+;   if u := get_database(opOf(functorForm), 'SUPERDOMAIN) then
 ;     e:= addNewDomain(first u,e)
 ;     --need code to handle parameterized SuperDomains
 ;   if innerDom:= listOrVectorElementMode name then e:= addDomain(innerDom,e)
@@ -454,7 +454,7 @@
            (#1='T
             (PROGN
              (COND
-              ((SETQ |u| (GETDATABASE (|opOf| |functorForm|) 'SUPERDOMAIN))
+              ((SETQ |u| (|get_database| (|opOf| |functorForm|) 'SUPERDOMAIN))
                (SETQ |e| (|addNewDomain| (CAR |u|) |e|))))
              (COND
               ((SETQ |innerDom| (|listOrVectorElementMode| |name|))
@@ -575,7 +575,8 @@
       (LIST |substAlist| |$tmp_e|)))))
 
 ; getOperationAlist(name,functorForm,form) ==
-;   if atom name and GETDATABASE(name,'NILADIC) then functorForm:= [functorForm]
+;   if atom name and get_database(name, 'NILADIC) then
+;         functorForm := [functorForm]
 ;   (u:= isFunctor functorForm) and not
 ;     ($insideFunctorIfTrue and first functorForm=first $functorForm) => u
 ;   $insideFunctorIfTrue and name = "%" =>
@@ -589,7 +590,7 @@
     (RETURN
      (PROGN
       (COND
-       ((AND (ATOM |name|) (GETDATABASE |name| 'NILADIC))
+       ((AND (ATOM |name|) (|get_database| |name| 'NILADIC))
         (SETQ |functorForm| (LIST |functorForm|))))
       (COND
        ((AND (SETQ |u| (|isFunctor| |functorForm|))

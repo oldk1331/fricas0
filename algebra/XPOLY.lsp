@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |XPolynomial;|)) 
 
-(DEFUN |XPolynomial| (#1=#:G32)
+(DEFUN |XPolynomial| (#1=#:G30)
   (SPROG NIL
-         (PROG (#2=#:G33)
+         (PROG (#2=#:G31)
            (RETURN
             (COND
              ((LETT #2#
@@ -18,7 +18,7 @@
                  ((NOT #2#) (HREM |$ConstructorCache| '|XPolynomial|)))))))))) 
 
 (DEFUN |XPolynomial;| (|#1|)
-  (SPROG ((|pv$| NIL) (#1=#:G31 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (#1=#:G29 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|XPolynomial| DV$1))
@@ -49,43 +49,42 @@
 
 (MAKEPROP '|XPolynomial| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL (|XRecursivePolynomial| 22 6) (|local| |#1|)
-              (|Boolean|) (|Record| (|:| |k| 10) (|:| |c| 6)) (|List| 8)
-              (|FreeMonoid| 22) (|Mapping| 6 10) (|NonNegativeInteger|)
-              (|PositiveInteger|) (|XDistributedPolynomial| 22 6)
-              (|Record| (|:| |k| 22) (|:| |c| %)) (|List| 15) (|List| 10)
-              (|List| 6) (|List| %) (|Mapping| 6 6) (|List| 22) (|Symbol|)
-              (|Union| 10 '#1="failed") (|Union| 6 '#1#) (|Integer|)
-              (|Union| % '"failed") (|String|) (|OutputForm|))
+           '#(NIL NIL NIL NIL NIL (|XRecursivePolynomial| 17 6) (|local| |#1|)
+              (|Boolean|) (|OutputForm|) (|String|) (|PositiveInteger|)
+              (|Integer|) (|Union| % '"failed") (|NonNegativeInteger|)
+              (|FreeMonoid| 17) (|Union| 6 '#1="failed") (|Union| 14 '#1#)
+              (|Symbol|) (|Record| (|:| |k| 14) (|:| |c| 6)) (|List| 17)
+              (|Mapping| 6 6) (|List| %) (|List| 6) (|List| 14) (|List| 18)
+              (|XDistributedPolynomial| 17 6)
+              (|Record| (|:| |k| 17) (|:| |c| %)) (|List| 26) (|Mapping| 6 14))
            '#() 'NIL
            (CONS
             (|makeByteWordVec2| 4
-                                '(0 0 0 1 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0 0 0 0 0 0 4 0 0 0 0 0 0 0 0 2))
+                                '(0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+                                  0 0 0 0 0 0 0 4 0 0 0 0 0 2 0 0 0 0 0))
             (CONS
-             '#(NIL NIL NIL |Algebra&| NIL |Rng&| |FreeModuleCategory&| NIL
-                |NonAssociativeAlgebra&| NIL NIL |Module&| NIL NIL
+             '#(NIL NIL NIL |Algebra&| NIL |NonAssociativeAlgebra&| NIL
+                |FreeModuleCategory&| |Rng&| |Module&| NIL NIL NIL
                 |NonAssociativeRing&| NIL NIL NIL NIL |NonAssociativeRng&| NIL
-                NIL |AbelianGroup&| NIL NIL NIL NIL |MagmaWithUnit&|
-                |NonAssociativeSemiRng&| |AbelianMonoid&| |Magma&|
-                |AbelianSemiGroup&| NIL |RetractableTo&| |RetractableTo&|
-                |SetCategory&| NIL NIL NIL |BasicType&| NIL NIL)
+                NIL NIL |AbelianGroup&| NIL NIL NIL |AbelianMonoid&|
+                |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL NIL
+                |AbelianSemiGroup&| |Magma&| |SetCategory&| |RetractableTo&|
+                |RetractableTo&| NIL NIL |BasicType&| NIL NIL NIL)
              (CONS
-              '#((|XPolynomialsCat| 22 6) (|XFreeAlgebra| 22 6) (|XAlgebra| 6)
-                 (|Algebra| 6) (|Ring|) (|Rng|) (|FreeModuleCategory| 6 10)
-                 (|SemiRing|) (|NonAssociativeAlgebra| 6)
-                 (|IndexedDirectProductCategory| 6 10) (|SemiRng|) (|Module| 6)
-                 (|IndexedProductCategory| 6 10) (|BiModule| 6 6)
-                 (|NonAssociativeRing|) (|BiModule| $$ $$)
-                 (|AbelianProductCategory| 6) (|LeftModule| 6)
-                 (|RightModule| 6) (|NonAssociativeRng|) (|RightModule| $$)
-                 (|LeftModule| $$) (|AbelianGroup|) (|Monoid|)
-                 (|NonAssociativeSemiRing|) (|CancellationAbelianMonoid|)
-                 (|SemiGroup|) (|MagmaWithUnit|) (|NonAssociativeSemiRng|)
-                 (|AbelianMonoid|) (|Magma|) (|AbelianSemiGroup|)
-                 (|Comparable|) (|RetractableTo| 10) (|RetractableTo| 6)
-                 (|SetCategory|) (|CoercibleFrom| 10) (|CoercibleFrom| 6)
-                 (|unitsKnown|) (|BasicType|) (|CoercibleTo| 28)
-                 (|noZeroDivisors|))
+              '#((|XPolynomialsCat| 17 6) (|XFreeAlgebra| 17 6) (|XAlgebra| 6)
+                 (|Algebra| 6) (|Ring|) (|NonAssociativeAlgebra| 6)
+                 (|SemiRing|) (|FreeModuleCategory| 6 14) (|Rng|) (|Module| 6)
+                 (|SemiRng|) (|IndexedDirectProductCategory| 6 14)
+                 (|BiModule| $$ $$) (|NonAssociativeRing|) (|BiModule| 6 6)
+                 (|IndexedProductCategory| 6 14) (|LeftModule| $$)
+                 (|RightModule| $$) (|NonAssociativeRng|) (|RightModule| 6)
+                 (|LeftModule| 6) (|AbelianProductCategory| 6) (|AbelianGroup|)
+                 (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
+                 (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
+                 (|MagmaWithUnit|) (|SemiGroup|) (|Comparable|)
+                 (|AbelianSemiGroup|) (|Magma|) (|SetCategory|)
+                 (|RetractableTo| 6) (|RetractableTo| 14) (|noZeroDivisors|)
+                 (|CoercibleTo| 8) (|BasicType|) (|unitsKnown|)
+                 (|CoercibleFrom| 6) (|CoercibleFrom| 14))
               (|makeByteWordVec2| -999999 'NIL))))
            '|lookupIncomplete|)) 

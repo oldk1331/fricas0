@@ -3,7 +3,7 @@
 
 (DEFUN |SExpression| ()
   (SPROG NIL
-         (PROG (#1=#:G1864)
+         (PROG (#1=#:G1862)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|SExpression|))
@@ -32,16 +32,14 @@
 
 (MAKEPROP '|SExpression| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL (|SExpressionOf| 9 10 7 8) (|List| 7)
-              (|Integer|) (|DoubleFloat|) (|String|) (|Symbol|) (|List| %)
-              (|Boolean|) (|HashState|) (|SingleInteger|) (|OutputForm|))
+           '#(NIL NIL NIL NIL NIL (|SExpressionOf| 7 13 12 14) (|Boolean|)
+              (|String|) (|OutputForm|) (|SingleInteger|) (|HashState|)
+              (|List| %) (|Integer|) (|Symbol|) (|DoubleFloat|) (|List| 12))
            '#() 'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0))
-                 (CONS '#(NIL |SetCategory&| |Hashable&| |BasicType&| NIL)
+                 (CONS '#(NIL |Hashable&| |SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SExpressionCategory| 9 10 7 8) (|SetCategory|)
-                           (|Hashable|) (|BasicType|) (|CoercibleTo| 15))
+                        '#((|SExpressionCategory| 7 13 12 14) (|Hashable|)
+                           (|SetCategory|) (|CoercibleTo| 8) (|BasicType|))
                         (|makeByteWordVec2| -999999 'NIL))))
            '|lookupIncomplete|)) 
-
-(MAKEPROP '|SExpression| 'NILADIC T) 

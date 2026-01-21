@@ -23,5 +23,3 @@
                               ((|unit?| ((|Boolean|) %)) T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|EntireRing|))))) 
-
-(MAKEPROP '|EntireRing| 'NILADIC T) 

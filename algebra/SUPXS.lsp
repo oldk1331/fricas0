@@ -78,9 +78,9 @@
 
 (DECLAIM (NOTINLINE |SparseUnivariatePuiseuxSeries;|)) 
 
-(DEFUN |SparseUnivariatePuiseuxSeries| (&REST #1=#:G87)
+(DEFUN |SparseUnivariatePuiseuxSeries| (&REST #1=#:G89)
   (SPROG NIL
-         (PROG (#2=#:G88)
+         (PROG (#2=#:G90)
            (RETURN
             (COND
              ((LETT #2#
@@ -102,8 +102,8 @@
 
 (DEFUN |SparseUnivariatePuiseuxSeries;| (|#1| |#2| |#3|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G80 NIL) (#2=#:G81 NIL) (#3=#:G82 NIL) (#4=#:G83 NIL)
-    (#5=#:G85 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+   ((|pv$| NIL) (#1=#:G82 NIL) (#2=#:G83 NIL) (#3=#:G84 NIL) (#4=#:G85 NIL)
+    (#5=#:G87 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 |#2|)
@@ -415,90 +415,91 @@
               (|OrderedCompletion| 53) (108 . |elt|) (|Union| 53 '"failed")
               (113 . |retractIfCan|) (|Integer|) (118 . |extend|)
               (124 . |rationalPower|) (|OutputForm|)
-              (129 . |seriesToOutputForm|) |SUPXS;coerce;%Of;9| (|List| 10)
-              (|NonNegativeInteger|) (|List| 60) (|PositiveInteger|)
-              (|Union| % '"failed")
+              (129 . |seriesToOutputForm|) |SUPXS;coerce;%Of;9| (|String|)
+              (|PositiveInteger|) (|Record| (|:| |k| 17) (|:| |c| 6))
+              (|List| 61) (|Mapping| 6 6) (|Stream| 61) (|NonNegativeInteger|)
+              (|List| 10) (|List| 65) (|Union| % '"failed")
               (|Record| (|:| |unit| %) (|:| |canonical| %) (|:| |associate| %))
-              (|Record| (|:| |k| 17) (|:| |c| 6)) (|List| 65)
-              (|Record| (|:| |llcm_res| %) (|:| |coeff1| %) (|:| |coeff2| %))
-              (|List| %) (|SparseUnivariatePolynomial| %)
-              (|Union| 68 '"failed")
-              (|Record| (|:| |coef| 68) (|:| |generator| %))
-              (|Record| (|:| |quotient| %) (|:| |remainder| %))
+              (|Factored| %) (|Record| (|:| |coef1| %) (|:| |coef2| %))
+              (|Union| 71 '#1="failed") (|Union| 74 '#1#) (|List| %)
               (|Record| (|:| |coef1| %) (|:| |coef2| %) (|:| |generator| %))
-              (|Record| (|:| |coef1| %) (|:| |coef2| %)) (|Union| 74 '"failed")
-              (|Factored| %) (|Stream| 6) (|Stream| 65) (|Mapping| 6 6)
-              (|String|))
+              (|Record| (|:| |quotient| %) (|:| |remainder| %))
+              (|Record| (|:| |coef| 74) (|:| |generator| %))
+              (|SparseUnivariatePolynomial| %)
+              (|Record| (|:| |llcm_res| %) (|:| |coeff1| %) (|:| |coeff2| %))
+              (|Stream| 6))
            '#(|variable| 138 |retractIfCan| 143 |rationalPower| 153 |monomial|
               158 |laurentRep| 164 |integrate| 169 |differentiate| 180 |coerce|
               191 |center| 211 |Zero| 216 |One| 220 + 224)
            'NIL
            (CONS
             (|makeByteWordVec2| 27
-                                '(0 0 0 7 0 7 0 7 7 0 7 16 7 15 7 1 2 10 4 3 15
-                                  16 6 21 10 18 15 21 6 0 10 15 6 0 0 0 20 6 0
-                                  0 0 0 0 21 6 6 27 26 18 18 0 0 25 18 0 0 0 0
-                                  0 6 15 0 0 0 0 0 5 6 6 6 6 6 6 20 15 16 7 7))
+                                '(0 0 7 0 7 0 7 7 0 7 0 16 7 15 7 6 16 15 3 4
+                                  10 2 1 21 6 21 15 18 10 6 15 10 0 6 20 0 0 0
+                                  6 6 21 0 0 0 0 0 27 18 18 26 18 25 0 0 0 0 15
+                                  6 0 0 0 7 7 16 15 20 6 6 6 6 6 6 5 0 0 0 0
+                                  0))
             (CONS
-             '#(|UnivariatePuiseuxSeriesConstructorCategory&| NIL NIL |Field&|
-                |UnivariatePowerSeriesCategory&| |EuclideanDomain&|
-                |PowerSeriesCategory&| NIL |UniqueFactorizationDomain&|
-                |AbelianMonoidRing&| |GcdDomain&| NIL NIL NIL |DivisionRing&|
-                NIL NIL |Algebra&| |PartialDifferentialRing&|
-                |DifferentialRing&| |Algebra&| |EntireRing&| |Algebra&| NIL
-                |NonAssociativeAlgebra&| NIL |NonAssociativeAlgebra&| |Rng&|
-                |NonAssociativeAlgebra&| NIL |Module&| |Module&| |Module&| NIL
-                NIL NIL |NonAssociativeRing&| NIL NIL NIL NIL NIL NIL
-                |NonAssociativeRng&| NIL NIL |AbelianGroup&| NIL NIL NIL
-                |NonAssociativeSemiRng&| NIL |AbelianMonoid&| |MagmaWithUnit&|
-                |Magma&| |AbelianSemiGroup&| |RetractableTo&| |RetractableTo&|
-                |SetCategory&| |TranscendentalFunctionCategory&| NIL NIL NIL
-                NIL |BasicType&| NIL NIL |TrigonometricFunctionCategory&|
+             '#(|UnivariatePuiseuxSeriesConstructorCategory&| NIL |Field&| NIL
+                |EuclideanDomain&| |UnivariatePowerSeriesCategory&|
+                |UniqueFactorizationDomain&| NIL |PowerSeriesCategory&|
+                |GcdDomain&| |AbelianMonoidRing&| NIL |DivisionRing&| NIL NIL
+                |Algebra&| |EntireRing&| |Algebra&| |DifferentialRing&|
+                |PartialDifferentialRing&| |Algebra&| NIL NIL NIL
+                |NonAssociativeAlgebra&| |Rng&| |NonAssociativeAlgebra&| NIL
+                |NonAssociativeAlgebra&| |Module&| |Module&| |Module&| NIL NIL
+                |NonAssociativeRing&| NIL NIL NIL NIL NIL |NonAssociativeRng&|
+                NIL NIL NIL NIL NIL |AbelianGroup&| NIL NIL NIL
+                |MagmaWithUnit&| |AbelianMonoid&| NIL |NonAssociativeSemiRng&|
+                |AbelianSemiGroup&| |Magma&| NIL
+                |TranscendentalFunctionCategory&| |SetCategory&|
+                |RetractableTo&| |RetractableTo&| NIL NIL NIL NIL NIL
+                |RadicalCategory&| |ElementaryFunctionCategory&| NIL
+                |HyperbolicFunctionCategory&|
                 |ArcTrigonometricFunctionCategory&|
-                |HyperbolicFunctionCategory&| NIL |ElementaryFunctionCategory&|
-                |RadicalCategory&| NIL NIL NIL NIL NIL)
+                |TrigonometricFunctionCategory&| NIL NIL |BasicType&| NIL NIL
+                NIL)
              (CONS
               '#((|UnivariatePuiseuxSeriesConstructorCategory| 6
                                                                (|SparseUnivariateLaurentSeries|
                                                                 6 7 8))
-                 (|UnivariatePuiseuxSeriesCategory| 6)
-                 (|UnivariateSeriesWithRationalExponents| 6 17) (|Field|)
-                 (|UnivariatePowerSeriesCategory| 6 17) (|EuclideanDomain|)
+                 (|UnivariatePuiseuxSeriesCategory| 6) (|Field|)
+                 (|UnivariateSeriesWithRationalExponents| 6 17)
+                 (|EuclideanDomain|) (|UnivariatePowerSeriesCategory| 6 17)
+                 (|UniqueFactorizationDomain|) (|PrincipalIdealDomain|)
                  (|PowerSeriesCategory| 6 17 (|SingletonAsOrderedSet|))
-                 (|PrincipalIdealDomain|) (|UniqueFactorizationDomain|)
-                 (|AbelianMonoidRing| 6 17) (|GcdDomain|) (|IntegralDomain|)
-                 (|LeftOreRing|) (|CommutativeRing|) (|DivisionRing|)
-                 (|CharacteristicNonZero|) (|CharacteristicZero|) (|Algebra| 6)
-                 (|PartialDifferentialRing| 10) (|DifferentialRing|)
-                 (|Algebra| $$) (|EntireRing|) (|Algebra| 17) (|Ring|)
-                 (|NonAssociativeAlgebra| 6) (|SemiRing|)
-                 (|NonAssociativeAlgebra| $$) (|Rng|)
-                 (|NonAssociativeAlgebra| 17) (|SemiRng|) (|Module| 6)
-                 (|Module| $$) (|Module| 17) (|IndexedProductCategory| 6 17)
-                 (|BiModule| 6 6) (|BiModule| $$ $$) (|NonAssociativeRing|)
-                 (|BiModule| 17 17) (|AbelianProductCategory| 6)
-                 (|LeftModule| 6) (|RightModule| 6) (|RightModule| $$)
-                 (|LeftModule| $$) (|NonAssociativeRng|) (|LeftModule| 17)
-                 (|RightModule| 17) (|AbelianGroup|)
-                 (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
-                 (|Monoid|) (|NonAssociativeSemiRng|) (|SemiGroup|)
-                 (|AbelianMonoid|) (|MagmaWithUnit|) (|Magma|)
-                 (|AbelianSemiGroup|)
-                 (|RetractableTo| (|SparseUnivariateTaylorSeries| 6 7 8))
+                 (|GcdDomain|) (|AbelianMonoidRing| 6 17) (|IntegralDomain|)
+                 (|DivisionRing|) (|CommutativeRing|) (|LeftOreRing|)
+                 (|Algebra| 17) (|EntireRing|) (|Algebra| $$)
+                 (|DifferentialRing|) (|PartialDifferentialRing| 10)
+                 (|Algebra| 6) (|CharacteristicZero|) (|CharacteristicNonZero|)
+                 (|Ring|) (|NonAssociativeAlgebra| 17) (|Rng|)
+                 (|NonAssociativeAlgebra| $$) (|SemiRing|)
+                 (|NonAssociativeAlgebra| 6) (|Module| 17) (|Module| $$)
+                 (|Module| 6) (|SemiRng|) (|BiModule| 17 17)
+                 (|NonAssociativeRing|) (|BiModule| $$ $$) (|BiModule| 6 6)
+                 (|IndexedProductCategory| 6 17) (|RightModule| 17)
+                 (|LeftModule| 17) (|NonAssociativeRng|) (|LeftModule| $$)
+                 (|RightModule| $$) (|RightModule| 6) (|LeftModule| 6)
+                 (|AbelianProductCategory| 6) (|AbelianGroup|) (|Monoid|)
+                 (|NonAssociativeSemiRing|) (|CancellationAbelianMonoid|)
+                 (|MagmaWithUnit|) (|AbelianMonoid|) (|SemiGroup|)
+                 (|NonAssociativeSemiRng|) (|AbelianSemiGroup|) (|Magma|)
+                 (|CommutativeStar|) (|TranscendentalFunctionCategory|)
+                 (|SetCategory|)
                  (|RetractableTo| (|SparseUnivariateLaurentSeries| 6 7 8))
-                 (|SetCategory|) (|TranscendentalFunctionCategory|)
-                 (|CommutativeStar|)
-                 (|CoercibleFrom| (|SparseUnivariateTaylorSeries| 6 7 8))
-                 (|CoercibleFrom| (|SparseUnivariateLaurentSeries| 6 7 8))
-                 (|VariablesCommuteWithCoefficients|) (|BasicType|)
-                 (|CoercibleTo| 56) (|Eltable| $$ $$)
-                 (|TrigonometricFunctionCategory|)
-                 (|ArcTrigonometricFunctionCategory|)
-                 (|HyperbolicFunctionCategory|)
+                 (|RetractableTo| (|SparseUnivariateTaylorSeries| 6 7 8))
+                 (|canonicalsClosed|) (|canonicalUnitNormal|)
+                 (|noZeroDivisors|) (|TwoSidedRecip|) (|unitsKnown|)
+                 (|RadicalCategory|) (|ElementaryFunctionCategory|)
                  (|ArcHyperbolicFunctionCategory|)
-                 (|ElementaryFunctionCategory|) (|RadicalCategory|)
-                 (|unitsKnown|) (|TwoSidedRecip|) (|noZeroDivisors|)
-                 (|canonicalUnitNormal|) (|canonicalsClosed|))
+                 (|HyperbolicFunctionCategory|)
+                 (|ArcTrigonometricFunctionCategory|)
+                 (|TrigonometricFunctionCategory|) (|Eltable| $$ $$)
+                 (|CoercibleTo| 56) (|BasicType|)
+                 (|VariablesCommuteWithCoefficients|)
+                 (|CoercibleFrom| (|SparseUnivariateLaurentSeries| 6 7 8))
+                 (|CoercibleFrom| (|SparseUnivariateTaylorSeries| 6 7 8)))
               (|makeByteWordVec2| 58
                                   '(1 6 13 0 14 0 6 0 15 0 0 0 16 0 17 0 18 2 0
                                     0 6 17 19 0 6 0 20 0 0 0 21 0 17 0 22 2 0 0
@@ -508,9 +509,9 @@
                                     1 43 45 0 46 1 42 13 0 47 1 42 13 0 48 1 45
                                     49 0 50 1 49 51 0 52 2 43 0 0 53 54 1 0 17
                                     0 55 5 43 56 42 45 10 6 17 57 1 0 10 0 11 1
-                                    0 33 0 35 1 0 31 0 32 1 0 17 0 55 2 0 0 6
-                                    17 19 1 0 27 0 40 2 6 0 0 24 39 1 6 0 0 38
-                                    1 3 0 0 36 2 0 0 0 24 37 1 0 0 26 30 1 0 0
-                                    24 25 1 0 0 27 29 1 0 56 0 58 1 0 6 0 12 0
+                                    0 31 0 32 1 0 33 0 35 1 0 17 0 55 2 0 0 6
+                                    17 19 1 0 27 0 40 1 6 0 0 38 2 6 0 0 24 39
+                                    2 0 0 0 24 37 1 3 0 0 36 1 0 56 0 58 1 0 0
+                                    27 29 1 0 0 24 25 1 0 0 26 30 1 0 6 0 12 0
                                     34 0 21 0 32 0 16 2 0 0 0 0 23)))))
            '|lookupIncomplete|)) 

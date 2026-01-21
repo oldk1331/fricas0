@@ -234,7 +234,7 @@
               (|PrimitiveArray| (|PrimeField| |pp|))))))
           (|pF|
            (|Join| (|FiniteFieldCategory|) (|FiniteAlgebraicExtensionField| %)
-                   (|ConvertibleTo| (|Integer|))
+                   (|ConvertibleTo| (|Integer|)) (|Canonical|)
                    (CATEGORY |domain| (SIGNATURE |sqrt| (% %)))))
           (|pp| (|PositiveInteger|)) (#2=#:G134 NIL))
          (SEQ
@@ -385,7 +385,7 @@
               (|PrimitiveArray| (|PrimeField| |pp|))))))
           (|pF|
            (|Join| (|FiniteFieldCategory|) (|FiniteAlgebraicExtensionField| %)
-                   (|ConvertibleTo| (|Integer|))
+                   (|ConvertibleTo| (|Integer|)) (|Canonical|)
                    (CATEGORY |domain| (SIGNATURE |sqrt| (% %)))))
           (|pp| (|PositiveInteger|)) (#3=#:G164 NIL)
           (|sfl| (|List| (|Mapping| (|List| (|U32Vector|))))) (#4=#:G159 NIL)
@@ -2590,18 +2590,18 @@
                                               0 161 1 135 134 0 162 2 48 0 38
                                               38 169 0 0 12 17 1 0 12 12 18 0 0
                                               12 13 1 0 12 12 14 0 0 12 15 1 0
-                                              12 12 16 1 0 19 19 21 0 0 19 20 1
-                                              0 38 41 42 1 0 19 19 23 0 0 19 22
+                                              12 12 16 0 0 19 20 1 0 19 19 21 1
+                                              0 38 41 42 0 0 19 22 1 0 19 19 23
                                               2 0 78 6 45 79 1 0 135 138 139 2
-                                              0 138 6 12 163 2 0 135 6 38 173 1
-                                              0 135 6 171 3 0 135 6 48 38 172 2
-                                              0 135 6 48 174 3 0 135 6 38 38
-                                              175 2 0 176 19 6 181 3 0 176 19 6
-                                              48 180 3 0 176 19 6 38 179 5 0
-                                              176 19 6 48 38 12 177 4 0 176 19
-                                              6 48 38 178 1 0 135 6 165 2 0 135
-                                              6 48 168 2 0 135 6 38 167 3 0 135
-                                              6 38 38 170 3 0 135 6 48 38 166 1
-                                              0 12 6 37 1 0 80 41 84 4 0 138 6
-                                              12 45 38 164)))))
+                                              0 138 6 12 163 3 0 135 6 38 38
+                                              175 2 0 135 6 48 174 3 0 135 6 48
+                                              38 172 1 0 135 6 171 2 0 135 6 38
+                                              173 4 0 176 19 6 48 38 178 5 0
+                                              176 19 6 48 38 12 177 3 0 176 19
+                                              6 38 179 3 0 176 19 6 48 180 2 0
+                                              176 19 6 181 3 0 135 6 48 38 166
+                                              3 0 135 6 38 38 170 2 0 135 6 38
+                                              167 2 0 135 6 48 168 1 0 135 6
+                                              165 1 0 12 6 37 1 0 80 41 84 4 0
+                                              138 6 12 45 38 164)))))
            '|lookupComplete|)) 

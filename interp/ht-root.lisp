@@ -368,6 +368,7 @@
 ;   filter := pmTransFilter pattern
 ;   grepForm := mkGrepPattern(filter,'none)
 ;   $key: local := 'none
+;   $localLibdb : local := []
 ;   results := applyGrep(grepForm,'gloss)
 ;   defstream := MAKE_INSTREAM(STRCONC($spadroot,
 ;                                      '"/algebra/glossdef.text"))
@@ -399,9 +400,9 @@
 ;   htShowPageNoScroll()
 
 (DEFUN |htGlossPage| (|htPage| |pattern| |tryAgain?|)
-  (PROG (|$key| |$wildCard| |tick| |k| |heading| |lines| |defstream| |results|
-         |grepForm| |filter|)
-    (DECLARE (SPECIAL |$key| |$wildCard|))
+  (PROG (|$localLibdb| |$key| |$wildCard| |tick| |k| |heading| |lines|
+         |defstream| |results| |grepForm| |filter|)
+    (DECLARE (SPECIAL |$localLibdb| |$key| |$wildCard|))
     (RETURN
      (PROGN
       (SETQ |$wildCard| (|char| '*))
@@ -411,6 +412,7 @@
               (SETQ |filter| (|pmTransFilter| |pattern|))
               (SETQ |grepForm| (|mkGrepPattern| |filter| '|none|))
               (SETQ |$key| '|none|)
+              (SETQ |$localLibdb| NIL)
               (SETQ |results| (|applyGrep| |grepForm| '|gloss|))
               (SETQ |defstream|
                       (MAKE_INSTREAM

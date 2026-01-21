@@ -97,9 +97,9 @@
               |failed| 74 |coerce| 78 |atoms| 83 = 88)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 28))
+                        '#((|SetCategory|) (|CoercibleTo| 28) (|BasicType|))
                         (|makeByteWordVec2| 31
                                             '(0 10 0 11 0 12 0 13 0 10 0 17 0
                                               12 0 18 1 10 20 0 21 2 10 20 0 0

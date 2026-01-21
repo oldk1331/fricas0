@@ -71,7 +71,7 @@
 ;   -- in Aldor.
 ;   axForms :=
 ;      [modemapToAx(modemap) for cname in constructors |
-;             (modemap:=GETDATABASE(cname,'CONSTRUCTORMODEMAP)) and
+;             (modemap := get_database(cname, 'CONSTRUCTORMODEMAP)) and
 ;               (not (cname in '(Tuple Exit Type))) and
 ;                 not isDefaultPackageName cname]
 ;   if $baseForms then
@@ -103,7 +103,8 @@
                     (RETURN (NREVERSE |bfVar#2|)))
                    ('T
                     (AND
-                     (SETQ |modemap| (GETDATABASE |cname| 'CONSTRUCTORMODEMAP))
+                     (SETQ |modemap|
+                             (|get_database| |cname| 'CONSTRUCTORMODEMAP))
                      (NULL (|member| |cname| '(|Tuple| |Exit| |Type|)))
                      (NULL (|isDefaultPackageName| |cname|))
                      (SETQ |bfVar#2|
@@ -153,7 +154,7 @@
 ;   argdecls:=['Comma, : [axFormatDecl(a, stripType t) for a in args for t in argtypes]]
 ;   resultType :=  axFormatType stripType target
 ;   categoryForm? constructor =>
-;       categoryInfo := GETDATABASE(constructor,'CONSTRUCTORCATEGORY)
+;       categoryInfo := get_database(constructor, 'CONSTRUCTORCATEGORY)
 ;       categoryInfo := SUBLISLIS($FormalMapVariableList, $TriangleVariableList,
 ;                        categoryInfo)
 ;       NULL args =>
@@ -172,7 +173,7 @@
 ;      rtype := ['Apply, conscat, :args]
 ; --     if resultType is ['With,a,b] then
 ; --        if not(b is ['Sequence,:withseq]) then withseq := [b]
-; --        cosigs := rest GETDATABASE(constructor, 'COSIG)
+; --        cosigs := rest(get_database(constructor, 'COSIG))
 ; --        exportargs := [['Export, [], arg, []] for arg in args for p in cosigs | p]
 ; --        resultType := ['With,a,['Sequence,:APPEND(exportargs, withseq)]]
 ;      consdef := ['Define,
@@ -188,7 +189,7 @@
 ;      ['Export, ['Declare, constructor, resultType],[],[]]
 ; --  if resultType is ['With,a,b] then
 ; --     if not(b is ['Sequence,:withseq]) then withseq := [b]
-; --     cosigs := rest GETDATABASE(constructor, 'COSIG)
+; --     cosigs := rest(get_database(constructor, 'COSIG))
 ; --     exportargs := [['Export, [], arg, []] for arg in args for p in cosigs | p]
 ; --     resultType := ['With,a,['Sequence,:APPEND(exportargs, withseq)]]
 ;   ['Export, ['Declare, constructor, ['Apply, "->", optcomma argdecls, resultType]],[],[]]
@@ -259,7 +260,8 @@
       (COND
        ((|categoryForm?| |constructor|)
         (PROGN
-         (SETQ |categoryInfo| (GETDATABASE |constructor| 'CONSTRUCTORCATEGORY))
+         (SETQ |categoryInfo|
+                 (|get_database| |constructor| 'CONSTRUCTORCATEGORY))
          (SETQ |categoryInfo|
                  (SUBLISLIS |$FormalMapVariableList| |$TriangleVariableList|
                   |categoryInfo|))
@@ -418,17 +420,18 @@
 ;           ['PretendTo, axFormatType CADDR typeform, 'SetCategory]]
 ;   typeform is [op,:args] =>
 ;       $conditionalCast and $pretendFlag and constructor? op and
-;         GETDATABASE(op,'CONSTRUCTORMODEMAP) is [[.,target,:argtypes],.] =>
+;         get_database(op, 'CONSTRUCTORMODEMAP) is [[.,target,:argtypes],.] =>
 ;           ['Apply, op, :[pretendTo(a, t) for a in args for t in argtypes]]
 ;       -- $augmentedArgs is non-empty if we are inside a "if A has T then ..."
 ;       -- block. In this case we must augment the type of A by T.
 ;       -- In nearly all cases t is ignored, but is needed for %.
 ;       not(null $augmentedArgs) and constructor? op and
-;         GETDATABASE(op,'CONSTRUCTORMODEMAP) is [[.,target,:argtypes],.] =>
+;         get_database(op, 'CONSTRUCTORMODEMAP) is [[.,target,:argtypes],.] =>
 ;           ['Apply, op, :[augmentTo(a, t) for a in args for t in argtypes]]
 ;       MEMQ(op, '(SquareMatrix SquareMatrixCategory DirectProduct
 ;          DirectProductCategory RadixExpansion)) and
-;             GETDATABASE(op,'CONSTRUCTORMODEMAP) is [[.,target,arg1type,:restargs],.] =>
+;             get_database(op, 'CONSTRUCTORMODEMAP) is
+;                        [[., target, arg1type, :restargs], .] =>
 ;                ['Apply, op,
 ;                   ['PretendTo, axFormatType first args, axFormatType arg1type],
 ;                      :[axFormatType a for a in rest args]]
@@ -711,7 +714,7 @@
        (COND
         ((AND |$conditionalCast| |$pretendFlag| (|constructor?| |op|)
               (PROGN
-               (SETQ |ISTMP#1| (GETDATABASE |op| 'CONSTRUCTORMODEMAP))
+               (SETQ |ISTMP#1| (|get_database| |op| 'CONSTRUCTORMODEMAP))
                (AND (CONSP |ISTMP#1|)
                     (PROGN
                      (SETQ |ISTMP#2| (CAR |ISTMP#1|))
@@ -744,7 +747,7 @@
                       NIL |args| NIL |argtypes| NIL))))
         ((AND (NULL (NULL |$augmentedArgs|)) (|constructor?| |op|)
               (PROGN
-               (SETQ |ISTMP#1| (GETDATABASE |op| 'CONSTRUCTORMODEMAP))
+               (SETQ |ISTMP#1| (|get_database| |op| 'CONSTRUCTORMODEMAP))
                (AND (CONSP |ISTMP#1|)
                     (PROGN
                      (SETQ |ISTMP#2| (CAR |ISTMP#1|))
@@ -780,7 +783,7 @@
                 '(|SquareMatrix| |SquareMatrixCategory| |DirectProduct|
                   |DirectProductCategory| |RadixExpansion|))
           (PROGN
-           (SETQ |ISTMP#1| (GETDATABASE |op| 'CONSTRUCTORMODEMAP))
+           (SETQ |ISTMP#1| (|get_database| |op| 'CONSTRUCTORMODEMAP))
            (AND (CONSP |ISTMP#1|)
                 (PROGN
                  (SETQ |ISTMP#2| (CAR |ISTMP#1|))
@@ -1398,8 +1401,8 @@
 ;     while curIndex < stopIndex repeat
 ;       curIndex := get1defaultOp(op, curIndex, infovec)
 ;   $pretendFlag : local := true
-;   catops := GETDATABASE(catname, 'OPERATIONALIST)
-;   catdefops := GETDATABASE(name, 'OPERATIONALIST)
+;   catops := get_database(catname, 'OPERATIONALIST)
+;   catdefops := get_database(name, 'OPERATIONALIST)
 ;   [axFormatDefaultOpSig(op,sig,catops,catdefops) for opsig in $opList | opsig is [op,sig]]
 
 (DEFUN |getDefaultingOps| (|catname|)
@@ -1438,8 +1441,8 @@
                  (SETQ |i| (+ |i| 1))))
               (MAXINDEX |opTable|) 0)
              (SETQ |$pretendFlag| T)
-             (SETQ |catops| (GETDATABASE |catname| 'OPERATIONALIST))
-             (SETQ |catdefops| (GETDATABASE |name| 'OPERATIONALIST))
+             (SETQ |catops| (|get_database| |catname| 'OPERATIONALIST))
+             (SETQ |catdefops| (|get_database| |name| 'OPERATIONALIST))
              ((LAMBDA (|bfVar#51| |bfVar#50| |opsig|)
                 (LOOP
                  (COND

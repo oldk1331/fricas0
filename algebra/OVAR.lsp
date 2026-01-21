@@ -111,8 +111,8 @@
               |OVAR;lookup;%Pi;7| (|NonNegativeInteger|) |OVAR;size;Nni;8|
               (|Union| % '"failed") |OVAR;variable;SU;9| (|Boolean|)
               |OVAR;<;2%B;10| |OVAR;=;2%B;11| (|HashState|)
-              |OVAR;hashUpdate!;Hs%Hs;12| (|SingleInteger|) (|List| %)
-              (|String|))
+              |OVAR;hashUpdate!;Hs%Hs;12| (|String|) (|List| %)
+              (|SingleInteger|))
            '#(~= 31 |variable| 37 |smaller?| 42 |size| 48 |random| 52 |min| 56
               |max| 62 |lookup| 68 |latex| 73 |index| 78 |hashUpdate!| 83
               |hash| 89 |enumerate| 94 |convert| 98 |coerce| 118 >= 123 > 129 =
@@ -120,23 +120,23 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(NIL |OrderedSet&| |Finite&| NIL |Hashable&| |SetCategory&|
-                     NIL NIL NIL NIL |BasicType&| |PartialOrder&| NIL)
+                  '#(NIL |Finite&| |OrderedSet&| NIL |SetCategory&| |Hashable&|
+                     NIL |PartialOrder&| |BasicType&| NIL NIL NIL NIL)
                   (CONS
-                   '#((|OrderedFinite|) (|OrderedSet|) (|Finite|)
-                      (|Comparable|) (|Hashable|) (|SetCategory|)
-                      (|ConvertibleTo| 20) (|ConvertibleTo| 23)
-                      (|ConvertibleTo| 10) (|ConvertibleTo| 17) (|BasicType|)
-                      (|PartialOrder|) (|CoercibleTo| 14))
+                   '#((|OrderedFinite|) (|Finite|) (|OrderedSet|)
+                      (|Comparable|) (|SetCategory|) (|Hashable|)
+                      (|CoercibleTo| 14) (|PartialOrder|) (|BasicType|)
+                      (|ConvertibleTo| 17) (|ConvertibleTo| 10)
+                      (|ConvertibleTo| 23) (|ConvertibleTo| 20))
                    (|makeByteWordVec2| 40
                                        '(1 7 0 0 8 2 7 10 0 11 12 1 10 14 0 15
                                          1 10 17 0 18 1 10 20 0 21 1 10 23 0 24
                                          2 0 33 0 0 1 1 0 31 10 32 2 0 33 0 0 1
                                          0 0 29 30 0 0 0 1 2 0 0 0 0 1 2 0 0 0
-                                         0 1 1 0 26 0 28 1 0 40 0 1 1 0 0 26 27
-                                         2 0 36 36 0 37 1 0 38 0 1 0 0 39 1 1 0
-                                         20 0 22 1 0 23 0 25 1 0 17 0 19 1 0 10
-                                         0 13 1 0 14 0 16 2 0 33 0 0 1 2 0 33 0
+                                         0 1 1 0 26 0 28 1 0 38 0 1 1 0 0 26 27
+                                         2 0 36 36 0 37 1 0 40 0 1 0 0 39 1 1 0
+                                         10 0 13 1 0 17 0 19 1 0 23 0 25 1 0 20
+                                         0 22 1 0 14 0 16 2 0 33 0 0 1 2 0 33 0
                                          0 1 2 0 33 0 0 35 2 0 33 0 0 1 2 0 33
                                          0 0 34)))))
            '|lookupComplete|)) 

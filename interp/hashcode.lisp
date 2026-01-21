@@ -38,7 +38,7 @@
 ;                 hash
 ;
 ;         cmm :=   CDDAR getConstructorModemap(op)
-;         cosig := rest GETDATABASE(op, 'COSIG)
+;         cosig := rest(get_database(op, 'COSIG))
 ;         for arg in args for c in cosig for ct in cmm repeat
 ;                 if c then
 ;                         hash := hashCombine(hashType(arg, percentHash), hash)
@@ -137,7 +137,7 @@
          (#1#
           (PROGN
            (SETQ |cmm| (CDDAR (|getConstructorModemap| |op|)))
-           (SETQ |cosig| (CDR (GETDATABASE |op| 'COSIG)))
+           (SETQ |cosig| (CDR (|get_database| |op| 'COSIG)))
            ((LAMBDA (|bfVar#4| |arg| |bfVar#5| |c| |bfVar#6| |ct|)
               (LOOP
                (COND

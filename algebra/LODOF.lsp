@@ -23,8 +23,8 @@
          (|ezfactor| (|Mapping| (|Factored| UP) UP)) (|all?| (|Boolean|))
          (% (|List| (|Fraction| UP))))
         (SPROG
-         ((|sol| (|List| (|Fraction| UP))) (#1=#:G61 NIL) (|f| NIL)
-          (#2=#:G60 NIL))
+         ((|sol| (|List| (|Fraction| UP))) (#1=#:G53 NIL) (|f| NIL)
+          (#2=#:G52 NIL))
          (SEQ
           (LETT |sol|
                 (PROGN
@@ -61,7 +61,7 @@
         (SPROG
          ((|l2n| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP)))
           (|ans| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP)))
-          (#1=#:G70 NIL) (|i| NIL))
+          (#1=#:G62 NIL) (|i| NIL))
          (SEQ (LETT |ans| (|spadConstant| % 33))
               (LETT |l2n| (|spadConstant| % 34))
               (SEQ (LETT |i| 0) (LETT #1# (SPADCALL |l1| (QREFELT % 36))) G190
@@ -85,7 +85,7 @@
          (% (|List| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP)))))
         (SPROG
          ((|q| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP)))
-          (#1=#:G72 NIL))
+          (#1=#:G64 NIL))
          (SEQ
           (LETT |q|
                 (PROG2 (LETT #1# (SPADCALL |l| |r| (QREFELT % 42)))
@@ -142,11 +142,11 @@
          (|ezfactor| (|Mapping| (|Factored| UP) UP)) (|r1?| (|Boolean|))
          (% (|List| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP)))))
         (SPROG
-         ((#1=#:G115 NIL) (#2=#:G116 NIL)
+         ((#1=#:G107 NIL) (#2=#:G108 NIL)
           (|u|
            (|Union| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP))
                     "failed"))
-          (#3=#:G117 NIL) (|i| NIL)
+          (#3=#:G109 NIL) (|i| NIL)
           (|ll| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP)))
           (|n| (|NonNegativeInteger|)))
          (SEQ
@@ -181,8 +181,8 @@
                                                            |ezfactor| NIL %)
                                                           (QCDR |u|)
                                                           (QREFELT % 53)))
-                                                   (GO #4=#:G114)))
-                                            (GO #5=#:G110))))))))
+                                                   (GO #4=#:G106)))
+                                            (GO #5=#:G102))))))))
                                      (EXIT
                                       (COND
                                        ((< (* 2 |i|) |n|)
@@ -446,6 +446,6 @@
                                               1 8 0 0 52 2 13 0 0 8 53 1 56 55
                                               0 57 1 59 0 58 60 2 63 61 62 7 64
                                               1 6 0 65 66 1 7 11 0 67 1 0 13 8
-                                              68 1 0 13 8 69 1 1 13 8 69 1 1 13
-                                              8 68 2 0 13 8 14 15)))))
+                                              68 1 0 13 8 69 1 1 13 8 69 2 0 13
+                                              8 14 15 1 1 13 8 68)))))
            '|lookupComplete|)) 

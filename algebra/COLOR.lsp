@@ -138,10 +138,10 @@
               |green| 65 |color| 69 |coerce| 74 |blue| 79 = 83 + 89 * 95)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0))
-                 (CONS '#(|AbelianSemiGroup&| |SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|AbelianSemiGroup&| |SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|AbelianSemiGroup|) (|SetCategory|) (|BasicType|)
-                           (|CoercibleTo| 26))
+                        '#((|AbelianSemiGroup|) (|SetCategory|)
+                           (|CoercibleTo| 26) (|BasicType|))
                         (|makeByteWordVec2| 32
                                             '(2 7 9 0 0 10 2 7 0 0 0 11 1 7 0 0
                                               12 1 26 0 25 27 1 19 26 0 28 1 7
@@ -149,8 +149,6 @@
                                               0 0 0 16 0 0 0 15 0 0 21 23 1 0
                                               25 0 1 1 0 19 0 20 0 0 0 17 1 0 0
                                               19 24 1 0 26 0 32 0 0 0 18 2 0 9
-                                              0 0 14 2 0 0 0 0 13 2 0 0 7 0 8 2
-                                              0 0 21 0 22)))))
+                                              0 0 14 2 0 0 0 0 13 2 0 0 21 0 22
+                                              2 0 0 7 0 8)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|Color| 'NILADIC T) 

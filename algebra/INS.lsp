@@ -44,5 +44,3 @@
                                ((|powmod| (% % % %)) T) ((|invmod| (% % %)) T))
                              NIL NIL NIL))))
            (SETELT #1# 0 '(|IntegerNumberSystem|))))) 
-
-(MAKEPROP '|IntegerNumberSystem| 'NILADIC T) 

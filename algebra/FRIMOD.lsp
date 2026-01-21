@@ -263,7 +263,7 @@
               (|Matrix| 6) (|ModularHermitianRowReduction| 6) (111 . |rowEch|)
               (116 . |maxRowIndex|) (121 . |row|) (127 . ~=) |FRIMOD;*;3%;14|
               (|FractionalIdeal| 6 7 8 9) (133 . |basis|) (138 . |module|)
-              (|PositiveInteger|) (|String|))
+              (|String|) (|PositiveInteger|))
            '#(~= 143 |sample| 149 |rightRecip| 153 |rightPower| 158 |recip| 170
               |one?| 175 |norm| 180 |module| 185 |leftRecip| 195 |leftPower|
               200 |latex| 212 |coerce| 217 |basis| 222 ^ 227 |One| 239 = 243 *
@@ -271,11 +271,11 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0))
                  (CONS
-                  '#(NIL NIL |MagmaWithUnit&| |Magma&| |SetCategory&|
-                     |BasicType&| NIL)
+                  '#(NIL |MagmaWithUnit&| NIL |Magma&| |SetCategory&| NIL
+                     |BasicType&|)
                   (CONS
-                   '#((|Monoid|) (|SemiGroup|) (|MagmaWithUnit|) (|Magma|)
-                      (|SetCategory|) (|BasicType|) (|CoercibleTo| 26))
+                   '#((|Monoid|) (|MagmaWithUnit|) (|SemiGroup|) (|Magma|)
+                      (|SetCategory|) (|CoercibleTo| 26) (|BasicType|))
                    (|makeByteWordVec2| 65
                                        '(0 7 0 14 1 22 21 0 23 2 22 6 0 21 24 2
                                          7 0 6 6 25 1 18 26 0 27 2 30 29 29 0
@@ -287,10 +287,10 @@
                                          51 30 53 1 55 54 54 56 1 54 21 0 57 2
                                          54 22 0 21 58 2 9 46 0 0 59 1 61 18 0
                                          62 1 0 0 61 63 2 0 46 0 0 1 0 0 0 1 1
-                                         0 36 0 1 2 0 0 0 47 1 2 0 0 0 64 1 1 0
-                                         36 0 1 1 0 46 0 1 1 0 7 0 50 1 1 0 61
-                                         63 1 0 0 18 19 1 0 36 0 1 2 0 0 0 47 1
-                                         2 0 0 0 64 1 1 0 65 0 1 1 0 26 0 28 1
-                                         0 18 0 20 2 0 0 0 47 1 2 0 0 0 64 1 0
+                                         0 36 0 1 2 0 0 0 65 1 2 0 0 0 47 1 1 0
+                                         36 0 1 1 0 46 0 1 1 0 7 0 50 1 0 0 18
+                                         19 1 1 0 61 63 1 0 36 0 1 2 0 0 0 65 1
+                                         2 0 0 0 47 1 1 0 64 0 1 1 0 26 0 28 1
+                                         0 18 0 20 2 0 0 0 65 1 2 0 0 0 47 1 0
                                          0 0 17 2 0 46 0 0 1 2 0 0 0 0 60)))))
            '|lookupComplete|)) 

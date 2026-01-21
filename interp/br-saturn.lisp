@@ -16,15 +16,6 @@
 
 (DEFUN |htSay| (|x|) (PROG () (RETURN (|bcHt| |x|))))
 
-; htSayCold x ==
-;   htSay '"\lispLink{}{"
-;   htSay x
-;   htSay '"}"
-
-(DEFUN |htSayCold| (|x|)
-  (PROG ()
-    (RETURN (PROGN (|htSay| "\\lispLink{}{") (|htSay| |x|) (|htSay| "}")))))
-
 ; htSayStandard(x) ==  --do AT MOST for $standard
 ;     bcHt(x)
 
@@ -115,6 +106,24 @@
       (|issueHTStandard| |line|)
       (|endHTPage|)))))
 
+; DEFCONSTANT($SendLine, 98)
+
+(DEFCONSTANT |$SendLine| 98)
+
+; DEFCONSTANT($EndOfPage, 99)
+
+(DEFCONSTANT |$EndOfPage| 99)
+
+; DEFCONSTANT($SpadError, 90)
+
+(DEFCONSTANT |$SpadError| 90)
+
+; sendHTErrorSignal() ==
+;     sockSendInt($MenuServer, $SpadError)
+
+(DEFUN |sendHTErrorSignal| ()
+  (PROG () (RETURN (|sockSendInt| |$MenuServer| |$SpadError|))))
+
 ; issueHTStandard line == --called by htMakePageNoScroll and htMakeErrorPage
 ;     sockSendInt($MenuServer, $SendLine)
 ;     sockSendString($MenuServer, line)
@@ -132,7 +141,7 @@
 ;   $curPage := htPage
 ;   htMakePage htpPageDescription htPage
 ;   line := concatenateStringList(nreverse $htLineList)
-;   issueHT line
+;   issueHTStandard(line)
 ;   endHTPage()
 
 (DEFUN |htMakeErrorPage| (|htPage|)
@@ -144,7 +153,7 @@
       (SETQ |$curPage| |htPage|)
       (|htMakePage| (|htpPageDescription| |htPage|))
       (SETQ |line| (|concatenateStringList| (NREVERSE |$htLineList|)))
-      (|issueHT| |line|)
+      (|issueHTStandard| |line|)
       (|endHTPage|)))))
 
 ; htMakePage itemList ==
@@ -180,7 +189,6 @@
 ;     itemType = 'inputStrings      => htInputStrings items
 ;     itemType = 'domainConditions  => htProcessDomainConditions items
 ;     itemType = 'bcStrings         => htProcessBcStrings items
-;     itemType = 'toggleButtons     => htProcessToggleButtons items
 ;     itemType = 'bcButtons         => htProcessBcButtons items
 ;     itemType = 'doneButton        => htProcessDoneButton items
 ;     itemType = 'doitButton        => htProcessDoitButton items
@@ -217,8 +225,6 @@
                   ((EQ |itemType| '|domainConditions|)
                    (|htProcessDomainConditions| |items|))
                   ((EQ |itemType| '|bcStrings|) (|htProcessBcStrings| |items|))
-                  ((EQ |itemType| '|toggleButtons|)
-                   (|htProcessToggleButtons| |items|))
                   ((EQ |itemType| '|bcButtons|) (|htProcessBcButtons| |items|))
                   ((EQ |itemType| '|doneButton|)
                    (|htProcessDoneButton| |items|))
@@ -1166,7 +1172,7 @@
 
 ; kPageArgs([op,:args],[.,.,:source]) ==
 ;   firstTime := true
-;   coSig := rest GETDATABASE(op,'COSIG)
+;   coSig := rest(get_database(op, 'COSIG))
 ;   for x in args for t in source for pred in coSig repeat
 ;     if firstTime then firstTime := false
 ;                  else
@@ -1191,7 +1197,7 @@
       (SETQ |op| (CAR |bfVar#31|))
       (SETQ |args| (CDR |bfVar#31|))
       (SETQ |firstTime| T)
-      (SETQ |coSig| (CDR (GETDATABASE |op| 'COSIG)))
+      (SETQ |coSig| (CDR (|get_database| |op| 'COSIG)))
       ((LAMBDA (|bfVar#28| |x| |bfVar#29| |t| |bfVar#30| |pred|)
          (LOOP
           (COND
@@ -1395,7 +1401,7 @@
 ;     which = '"attribute" => BREAK()
 ;     if not(implementation?) or member('implementation, exclusions) or
 ;       ((conname := opOf htpProperty(htPage,'conform))
-;         and GETDATABASE(conname,'CONSTRUCTORKIND) = 'category)
+;         and get_database(conname, 'CONSTRUCTORKIND) = 'category)
 ;     then htSay '"{\em Implementations}"
 ;     else htMakePage
 ;       [['bcLispLinks,['"Implementations",'"",'dbShowOps,which,'implementation]]]
@@ -1514,7 +1520,7 @@
                              (SETQ |conname|
                                      (|opOf|
                                       (|htpProperty| |htPage| '|conform|)))
-                             (EQ (GETDATABASE |conname| 'CONSTRUCTORKIND)
+                             (EQ (|get_database| |conname| 'CONSTRUCTORKIND)
                                  '|category|)))
                         (|htSay| "{\\em Implementations}"))
                        (#1#
@@ -1636,7 +1642,8 @@
 ;     if unexposed? and $includeUnexposed? then
 ;       htSayUnexposed()
 ;     htSay(ops)
-;     predicate='ASCONST or GETDATABASE(op,'NILADIC) or member(op,'(0 1)) => 'skip
+;     predicate = 'ASCONST or get_database(op, 'NILADIC)
+;             or member(op,'(0 1)) => 'skip
 ;     which = '"attribute" => BREAK()
 ;     htSay('"(")
 ;     if IFCAR args then
@@ -1648,7 +1655,7 @@
 ;   constring := form2HtString conform
 ;   conname   := first conform
 ;   $conkind   : local := htpProperty(htPage,'kind) -- a string e.g. "category"
-;                           or STRINGIMAGE GETDATABASE(conname,'CONSTRUCTORKIND)
+;                       or STRINGIMAGE(get_database(conname, 'CONSTRUCTORKIND))
 ;   $conlength : local := #constring
 ;   $conform   : local := conform
 ;   $conargs   : local := rest conform
@@ -1673,7 +1680,7 @@
 ;     $displayReturnValue: local := nil
 ;     if args then
 ;       htSayStandard('"\newline\tab{2}{\em Arguments:}")
-;       coSig := IFCDR GETDATABASE(op, 'COSIG)  --check if op is constructor
+;       coSig := IFCDR(get_database(op, 'COSIG))  --check if op is constructor
 ;       for a in args for t in rest $sig repeat
 ;             htSayIndentRel2(15, true)
 ;             position := IFCAR relatives
@@ -1742,7 +1749,7 @@
 ;     htSayIndentRel(-15)
 ;   --------> print abbr and source file for constructors <---------
 ;   if which = '"constructor" then
-;     if (abbr := GETDATABASE(conname,'ABBREVIATION)) then
+;     if (abbr := get_database(conname, 'ABBREVIATION)) then
 ;       htSayStandard('"\tab{2}{\em Abbreviation:}")
 ;       htSayIndentRel(15)
 ;       htSay abbr
@@ -1816,7 +1823,7 @@
           (COND ((AND |unexposed?| |$includeUnexposed?|) (|htSayUnexposed|)))
           (|htSay| |ops|)
           (COND
-           ((OR (EQ |predicate| 'ASCONST) (GETDATABASE |op| 'NILADIC)
+           ((OR (EQ |predicate| 'ASCONST) (|get_database| |op| 'NILADIC)
                 (|member| |op| '(0 1)))
             '|skip|)
            ((EQUAL |which| "attribute") (BREAK))
@@ -1843,7 +1850,7 @@
       (SETQ |conname| (CAR |conform|))
       (SETQ |$conkind|
               (OR (|htpProperty| |htPage| '|kind|)
-                  (STRINGIMAGE (GETDATABASE |conname| 'CONSTRUCTORKIND))))
+                  (STRINGIMAGE (|get_database| |conname| 'CONSTRUCTORKIND))))
       (SETQ |$conlength| (LENGTH |constring|))
       (SETQ |$conform| |conform|)
       (SETQ |$conargs| (CDR |conform|))
@@ -1888,7 +1895,7 @@
                 (SETQ |$displayReturnValue| NIL)
                 (COND
                  (|args| (|htSayStandard| "\\newline\\tab{2}{\\em Arguments:}")
-                  (SETQ |coSig| (IFCDR (GETDATABASE |op| 'COSIG)))
+                  (SETQ |coSig| (IFCDR (|get_database| |op| 'COSIG)))
                   ((LAMBDA (|bfVar#38| |a| |bfVar#39| |t|)
                      (LOOP
                       (COND
@@ -2025,7 +2032,7 @@
               (COND
                ((EQUAL |which| "constructor")
                 (COND
-                 ((SETQ |abbr| (GETDATABASE |conname| 'ABBREVIATION))
+                 ((SETQ |abbr| (|get_database| |conname| 'ABBREVIATION))
                   (|htSayStandard| "\\tab{2}{\\em Abbreviation:}")
                   (|htSayIndentRel| 15) (|htSay| |abbr|)
                   (|htSayIndentRel| (- 15)) (|htSayStandard| "\\newline{}")))
@@ -2034,7 +2041,7 @@
                 (|htSayIndentRel| (- 15)))))))))))
 
 ; htSaySourceFile conname ==
-;   sourceFileName := (GETDATABASE(conname,'SOURCEFILE) or '"none")
+;   sourceFileName := (get_database(conname, 'SOURCEFILE) or '"none")
 ;   filename :=  extractFileNameFromPath sourceFileName
 ;   htMakePage [['text,'"\unixcommand{",filename,'"}{_\$FRICAS/lib/SPADEDIT ",
 ;               sourceFileName, '" ", conname, '"}"]]
@@ -2043,7 +2050,8 @@
   (PROG (|sourceFileName| |filename|)
     (RETURN
      (PROGN
-      (SETQ |sourceFileName| (OR (GETDATABASE |conname| 'SOURCEFILE) "none"))
+      (SETQ |sourceFileName|
+              (OR (|get_database| |conname| 'SOURCEFILE) "none"))
       (SETQ |filename| (|extractFileNameFromPath| |sourceFileName|))
       (|htMakePage|
        (LIST
@@ -2263,12 +2271,3 @@
                   (SUBSTRING |s| 1 (- |k| 1))))
                 ('T (|dbName| |line|)))))
       (MEMQ |con| |conlist|)))))
-
-; purgeLocalLibdb() ==   --called by the user through a clear command?
-;   $newConstructorList := nil
-;   deleteFile '"libdb.text"
-
-(DEFUN |purgeLocalLibdb| ()
-  (PROG ()
-    (RETURN
-     (PROGN (SETQ |$newConstructorList| NIL) (|deleteFile| "libdb.text")))))

@@ -188,9 +188,9 @@
               150 |addMatch| 158 = 165)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 41))
+                        '#((|SetCategory|) (|CoercibleTo| 41) (|BasicType|))
                         (|makeByteWordVec2| 50
                                             '(0 9 0 10 1 16 15 0 17 2 9 0 18 0
                                               19 1 9 0 21 22 1 9 21 0 24 1 16

@@ -193,5 +193,3 @@
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 10 '(2 7 0 6 0 8 1 0 6 9 10)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|ScanningUtilities| 'NILADIC T) 

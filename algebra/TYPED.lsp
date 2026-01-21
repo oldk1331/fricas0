@@ -137,17 +137,15 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
                  (CONS '#(NIL NIL NIL)
-                       (CONS '#((|VarCat|) (|Type|) (|CoercibleTo| 31))
+                       (CONS '#((|VarCat|) (|CoercibleTo| 31) (|Type|))
                              (|makeByteWordVec2| 35
                                                  '(0 7 0 8 1 7 9 0 14 1 9 0 15
                                                    16 1 19 18 0 20 2 9 0 0 19
                                                    21 1 9 22 0 23 2 7 24 9 25
                                                    26 2 7 18 0 0 29 1 31 0 9 32
-                                                   1 7 31 0 33 1 31 0 15 34 2 0
-                                                   0 9 7 11 1 0 0 9 10 1 0 9 0
+                                                   1 7 31 0 33 1 31 0 15 34 1 0
+                                                   0 9 10 2 0 0 9 7 11 1 0 9 0
                                                    17 2 0 24 9 25 27 1 0 0 9 28
                                                    1 0 7 0 13 1 0 9 0 12 1 0 31
                                                    0 35 2 0 18 0 0 30)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|Typed| 'NILADIC T) 

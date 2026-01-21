@@ -21,7 +21,7 @@
         (SPADCALL |p| (SPADCALL |v| (QREFELT % 17)) (QREFELT % 18))) 
 
 (SDEFUN |PATTERN1;badValues;PL;4| ((|p| (|Pattern| R)) (% (|List| D)))
-        (SPROG ((#1=#:G28 NIL) (|v| NIL) (#2=#:G27 NIL))
+        (SPROG ((#1=#:G20 NIL) (|v| NIL) (#2=#:G19 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -59,7 +59,7 @@
                ('T (SPADCALL |l| (SPADCALL (QCDR |rec|) (QREFELT % 38))))))) 
 
 (SDEFUN |PATTERN1;applyAll| ((|l| (|List| (|Any|))) (|d| (D)) (% (|Boolean|)))
-        (SPROG ((#1=#:G44 NIL) (#2=#:G45 NIL) (#3=#:G46 NIL) (|f| NIL))
+        (SPROG ((#1=#:G36 NIL) (#2=#:G37 NIL) (#3=#:G38 NIL) (|f| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -75,8 +75,8 @@
                             ((NULL
                               (SPADCALL |d| (SPADCALL |f| (QREFELT % 40))))
                              (PROGN
-                              (LETT #1# (PROGN (LETT #2# NIL) (GO #4=#:G43)))
-                              (GO #5=#:G41))))))
+                              (LETT #1# (PROGN (LETT #2# NIL) (GO #4=#:G35)))
+                              (GO #5=#:G33))))))
                          (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
                    #5# (EXIT #1#))
                   (EXIT 'T)))
@@ -85,7 +85,7 @@
 (SDEFUN |PATTERN1;suchThat;PLP;10|
         ((|p| (|Pattern| R)) (|l| (|List| (|Mapping| (|Boolean|) D)))
          (% (|Pattern| R)))
-        (SPROG ((#1=#:G53 NIL) (|f| NIL) (#2=#:G52 NIL))
+        (SPROG ((#1=#:G45 NIL) (|f| NIL) (#2=#:G44 NIL))
                (SEQ
                 (|PATTERN1;st| |p|
                  (PROGN
@@ -103,9 +103,9 @@
 
 (DECLAIM (NOTINLINE |PatternFunctions1;|)) 
 
-(DEFUN |PatternFunctions1| (&REST #1=#:G54)
+(DEFUN |PatternFunctions1| (&REST #1=#:G46)
   (SPROG NIL
-         (PROG (#2=#:G55)
+         (PROG (#2=#:G47)
            (RETURN
             (COND
              ((LETT #2#
@@ -199,8 +199,8 @@
                                               8 0 20 1 16 7 15 21 1 9 0 0 24 1
                                               26 15 25 27 3 9 0 0 28 15 29 1 31
                                               15 13 32 1 9 36 0 37 1 26 25 15
-                                              38 1 31 13 15 40 2 0 9 9 41 42 2
-                                              0 9 9 13 33 3 0 9 9 28 25 30 2 0
-                                              34 22 9 39 2 0 34 7 9 35 1 0 13 9
+                                              38 1 31 13 15 40 3 0 9 9 28 25 30
+                                              2 0 9 9 13 33 2 0 9 9 41 42 2 0
+                                              34 7 9 35 2 0 34 22 9 39 1 0 13 9
                                               14 1 0 22 9 23 2 0 9 9 7 19)))))
            '|lookupComplete|)) 

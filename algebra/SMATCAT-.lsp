@@ -255,11 +255,11 @@
               (|Record| (|:| |mat| 44) (|:| |vec| 26)) (|Vector| %)
               (167 . |reducedSystem|) (173 . |elt|) (180 . +)
               |SMATCAT-;trace;SR;11| (186 . *) |SMATCAT-;diagonalProduct;SR;12|
-              (|Union| % '"failed") (192 . |inverse|) (197 . ^) (|List| 74)
-              (|List| 14) (|Symbol|) (|Matrix| 21)
-              (|Record| (|:| |mat| 75) (|:| |vec| (|Vector| 21)))
-              (|Fraction| 21) (|Union| 77 '#1#) (|Union| 21 '#1#)
-              (|OutputForm|) (|PositiveInteger|))
+              (|Union| % '"failed") (192 . |inverse|) (197 . ^)
+              (|PositiveInteger|) (|OutputForm|) (|Union| 21 '#1#)
+              (|Union| 76 '#1#) (|Fraction| 21)
+              (|Record| (|:| |mat| 78) (|:| |vec| (|Vector| 21))) (|Matrix| 21)
+              (|Symbol|) (|List| 79) (|List| 14))
            '#(|trace| 203 |retractIfCan| 208 |retract| 213 |reducedSystem| 218
               |differentiate| 229 |diagonalProduct| 235 |diagonal| 240 |coerce|
               245 ^ 250)
@@ -352,9 +352,9 @@
                                               0 21 60 2 0 61 45 62 63 3 6 8 0
                                               21 21 64 2 8 0 0 0 65 2 8 0 0 0
                                               67 1 6 69 0 70 2 0 0 0 21 71 1 0
-                                              8 0 66 1 0 36 0 38 1 0 8 0 35 2 0
-                                              61 45 62 63 1 0 44 45 56 2 0 0 0
+                                              8 0 66 1 0 36 0 38 1 0 8 0 35 1 0
+                                              44 45 56 2 0 61 45 62 63 2 0 0 0
                                               17 19 1 0 8 0 68 1 0 9 0 30 1 0 0
-                                              8 16 2 0 0 0 14 15 2 0 0 0 21
-                                              71)))))
+                                              8 16 2 0 0 0 21 71 2 0 0 0 14
+                                              15)))))
            '|lookupComplete|)) 

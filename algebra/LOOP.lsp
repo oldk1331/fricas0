@@ -4,7 +4,7 @@
          ((|li| #1=(|List| (|NonNegativeInteger|)))
           (|lx| #2=(|List| (|NonNegativeInteger|)))
           (|minValue| (|NonNegativeInteger|)) (|l2| #2#) (|l1| #1#)
-          (#3=#:G34 NIL) (|x| NIL) (#4=#:G33 NIL))
+          (#3=#:G26 NIL) (|x| NIL) (#4=#:G25 NIL))
          (SEQ
           (LETT |li|
                 (PROGN
@@ -43,14 +43,14 @@
 (SDEFUN |LOOP;hash| ((|s| (%)) (% (|SingleInteger|))) 0) 
 
 (SDEFUN |LOOP;=;2%B;4| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
-        (SPROG ((#1=#:G45 NIL) (#2=#:G46 NIL) (|i| NIL))
+        (SPROG ((#1=#:G37 NIL) (#2=#:G38 NIL) (|i| NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((SPADCALL (SPADCALL |x| (QREFELT % 14))
                               (SPADCALL |y| (QREFELT % 14)) (QREFELT % 16))
-                    (PROGN (LETT #1# NIL) (GO #3=#:G44))))
+                    (PROGN (LETT #1# NIL) (GO #3=#:G36))))
                   (SEQ (LETT |i| 1) (LETT #2# (SPADCALL |x| (QREFELT % 14)))
                        G190 (COND ((|greater_SI| |i| #2#) (GO G191)))
                        (SEQ
@@ -65,7 +65,7 @@
 
 (SDEFUN |LOOP;coerce;%Of;5| ((|lp| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|res| (|OutputForm|)) (|x| (|NonNegativeInteger|)) (#1=#:G52 NIL)
+         ((|res| (|OutputForm|)) (|x| (|NonNegativeInteger|)) (#1=#:G44 NIL)
           (|i| NIL))
          (SEQ (LETT |res| (SPADCALL (QREFELT % 19)))
               (SEQ (LETT |i| 1) (LETT #1# (SPADCALL |lp| (QREFELT % 14))) G190
@@ -84,7 +84,7 @@
 
 (DEFUN |Loop| ()
   (SPROG NIL
-         (PROG (#1=#:G54)
+         (PROG (#1=#:G46)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Loop|))
@@ -121,9 +121,9 @@
               (46 . |bracket|) |LOOP;coerce;%Of;5| (|String|))
            '#(~= 51 |loop| 57 |latex| 62 |entries| 67 |coerce| 72 = 77) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 18))
+                        '#((|SetCategory|) (|CoercibleTo| 18) (|BasicType|))
                         (|makeByteWordVec2| 27
                                             '(2 7 0 0 0 8 1 6 0 7 9 1 6 7 0 11
                                               1 6 13 0 14 2 13 15 0 0 16 0 18 0
@@ -132,5 +132,3 @@
                                               1 0 0 7 10 1 0 27 0 1 1 0 7 0 12
                                               1 0 18 0 26 2 0 15 0 0 17)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|Loop| 'NILADIC T) 

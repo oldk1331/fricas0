@@ -296,7 +296,7 @@
         ((|ps| (|List| P)) (|redOp?| (|Mapping| (|Boolean|) P P))
          (|redOp| (|Mapping| P P P)) (% (|List| %)))
         (SPROG
-         ((#1=#:G133 NIL) (|ln| (|List| (|SplittingNode| (|List| P) %)))
+         ((#1=#:G125 NIL) (|ln| (|List| (|SplittingNode| (|List| P) %)))
           (|newps| (|List| P)) (|lics| (|List| P)) (|cs| (%))
           (|charSet?| (|Union| % "failed"))
           (|esl| (|Union| (|SplittingTree| (|List| P) %) #2="failed"))
@@ -420,7 +420,7 @@
 
 (SDEFUN |WUTSET;removeSquares| ((|ts| (%)) (% #1=(|Union| % "failed")))
         (SPROG
-         ((|p| (P)) (|newts| (%)) (|rsts| #1#) (#2=#:G95 NIL) (#3=#:G161 NIL))
+         ((|p| (P)) (|newts| (%)) (|rsts| #1#) (#2=#:G87 NIL) (#3=#:G153 NIL))
          (SEQ
           (COND ((SPADCALL |ts| (QREFELT % 66)) (CONS 0 |ts|))
                 (#4='T
@@ -515,9 +515,9 @@
 
 (DECLAIM (NOTINLINE |WuWenTsunTriangularSet;|)) 
 
-(DEFUN |WuWenTsunTriangularSet| (&REST #1=#:G202)
+(DEFUN |WuWenTsunTriangularSet| (&REST #1=#:G194)
   (SPROG NIL
-         (PROG (#2=#:G203)
+         (PROG (#2=#:G195)
            (RETURN
             (COND
              ((LETT #2#
@@ -536,7 +536,7 @@
 
 (DEFUN |WuWenTsunTriangularSet;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((#1=#:G201 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
+   ((#1=#:G193 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
     (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -621,13 +621,14 @@
               (266 . |removeDuplicates|) (271 . |empty?|) (276 . |first|)
               (281 . |rest|) (286 . |cons|) (292 . |infRittWu?|)
               (|Mapping| 17 $$ $$) (298 . |sort|) (304 . |zeroSetSplit|)
-              (|NonNegativeInteger|) (|List| 90) (|Equation| 9) (|Mapping| 9 9)
-              (|InputForm|) (|Record| (|:| |num| 9) (|:| |den| 6))
-              (|Record| (|:| |rnum| 6) (|:| |polnum| 9) (|:| |den| 6))
-              (|List| 8) (|Record| (|:| |close| %) (|:| |open| 11)) (|List| 96)
-              (|Mapping| 17 9 11) (|Record| (|:| |close| 11) (|:| |open| 11))
+              (|String|) (|OutputForm|) (|Mapping| 9 9) (|NonNegativeInteger|)
+              (|List| 8)
               (|Record| (|:| |under| %) (|:| |floor| %) (|:| |upper| %))
-              (|OutputForm|) (|String|))
+              (|Record| (|:| |close| 11) (|:| |open| 11)) (|Mapping| 17 9 11)
+              (|Record| (|:| |close| %) (|:| |open| 11)) (|List| 96)
+              (|Equation| 9) (|List| 98) (|InputForm|)
+              (|Record| (|:| |rnum| 6) (|:| |polnum| 9) (|:| |den| 6))
+              (|Record| (|:| |num| 9) (|:| |den| 6)))
            '#(|zeroSetSplit| 309 |rewriteSetWithReduction| 314
               |rewriteIdealWithRemainder| 322 |rest| 328 |removeZero| 333
               |mvar| 339 |members| 344 |medialSet| 349 |initials| 361
@@ -635,21 +636,20 @@
               |empty| 388 |coerce| 392 |characteristicSet| 397
               |characteristicSerie| 409 |basicSet| 421)
            'NIL
-           (CONS (|makeByteWordVec2| 2 '(0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 2))
+           (CONS (|makeByteWordVec2| 2 '(0 0 0 0 1 0 0 0 2 1 0 0 0 0 0 0))
                  (CONS
                   '#(|TriangularSetCategory&| |PolynomialSetCategory&|
-                     |Collection&| |HomogeneousAggregate&| |SetCategory&|
-                     |RetractableFrom&| |Aggregate&| |Evalable&| |BasicType&|
-                     NIL NIL NIL NIL NIL |InnerEvalable&| NIL)
+                     |Collection&| |HomogeneousAggregate&| |Evalable&|
+                     |Aggregate&| |RetractableFrom&| |SetCategory&| NIL
+                     |InnerEvalable&| NIL NIL NIL NIL NIL |BasicType&|)
                   (CONS
                    '#((|TriangularSetCategory| 6 7 8 9)
                       (|PolynomialSetCategory| 6 7 8 9) (|Collection| 9)
-                      (|HomogeneousAggregate| 9) (|SetCategory|)
-                      (|RetractableFrom| (|List| 9)) (|Aggregate|)
-                      (|Evalable| 9) (|BasicType|) (|shallowlyMutable|)
-                      (|finiteAggregate|) (|CoercibleTo| (|List| 9)) (|Type|)
-                      (|CoercibleTo| 101) (|InnerEvalable| 9 9)
-                      (|ConvertibleTo| 92))
+                      (|HomogeneousAggregate| 9) (|Evalable| 9) (|Aggregate|)
+                      (|RetractableFrom| (|List| 9)) (|SetCategory|)
+                      (|ConvertibleTo| 100) (|InnerEvalable| 9 9)
+                      (|CoercibleTo| 89) (|Type|) (|CoercibleTo| (|List| 9))
+                      (|finiteAggregate|) (|shallowlyMutable|) (|BasicType|))
                    (|makeByteWordVec2| 87
                                        '(1 9 0 0 10 1 11 0 0 12 3 15 11 11 13
                                          14 16 1 9 17 0 18 2 11 17 19 0 20 2 0
@@ -673,10 +673,10 @@
                                          85 0 86 1 0 63 11 87 1 0 63 11 87 4 0
                                          11 11 0 14 13 27 2 5 11 11 0 24 1 0 30
                                          0 69 2 0 9 9 0 74 1 0 8 0 75 1 8 11 0
-                                         28 3 0 30 11 13 14 31 1 0 30 11 34 1 0
+                                         28 1 0 30 11 34 3 0 30 11 13 14 31 1 0
                                          11 0 49 2 0 9 9 0 73 2 0 17 0 0 84 1 0
                                          67 0 68 1 0 17 0 66 0 0 0 41 1 0 11 0
-                                         56 1 0 30 11 40 3 0 30 11 13 14 39 1 0
-                                         63 11 65 3 0 63 11 13 14 64 2 0 22 11
+                                         56 3 0 30 11 13 14 39 1 0 30 11 40 3 0
+                                         63 11 13 14 64 1 0 63 11 65 2 0 22 11
                                          13 23)))))
            '|lookupIncomplete|)) 

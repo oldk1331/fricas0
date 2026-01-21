@@ -45,9 +45,9 @@
 (MAKEPROP '|BezoutMatrixWrapper| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL
-              (|BezoutMatrix| 6 7 9 (|Vector| 6) (|Vector| 6)) (|local| |#1|)
-              (|local| |#2|) (|IndexedVector| 7 '0) (|Matrix| 6)
-              (|NonNegativeInteger|))
+              (|BezoutMatrix| 6 7 8 (|Vector| 6) (|Vector| 6)) (|local| |#1|)
+              (|local| |#2|) (|Matrix| 6) (|NonNegativeInteger|)
+              (|IndexedVector| 7 '0))
            '#() 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

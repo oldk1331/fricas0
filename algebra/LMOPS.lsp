@@ -225,10 +225,11 @@
               |latex| 189 |coerce| 194 = 204)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0))
-                 (CONS '#(|SetCategory&| |RetractableTo&| |BasicType&| NIL NIL)
+                 (CONS '#(|RetractableTo&| |SetCategory&| NIL NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|RetractableTo| 6) (|BasicType|)
-                           (|CoercibleFrom| 6) (|CoercibleTo| 17))
+                        '#((|RetractableTo| 6) (|SetCategory|)
+                           (|CoercibleTo| 17) (|CoercibleFrom| 6)
+                           (|BasicType|))
                         (|makeByteWordVec2| 57
                                             '(1 9 17 0 18 1 7 20 0 21 2 9 20 0
                                               0 24 2 9 11 0 26 27 0 7 0 34 2 7
@@ -243,6 +244,6 @@
                                               6 0 26 29 2 0 7 0 26 28 2 0 0 32
                                               0 33 2 0 0 36 0 37 0 0 0 10 2 0 0
                                               6 7 22 1 0 0 12 23 1 0 12 0 13 2
-                                              0 0 6 0 56 1 0 57 0 1 1 0 0 6 16
-                                              1 0 17 0 19 2 0 20 0 0 25)))))
+                                              0 0 6 0 56 1 0 57 0 1 1 0 17 0 19
+                                              1 0 0 6 16 2 0 20 0 0 25)))))
            '|lookupComplete|)) 

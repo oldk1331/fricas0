@@ -324,8 +324,8 @@
               (|PositiveInteger|) (126 . |LyndonWordsList|) (132 . |LiePoly|)
               (|List| 43) |LEXP;LyndonBasis;LL;10| |LEXP;coerce;%Xpbwp;11|
               (137 . |mirror|) (142 . |length|) (147 . -) |LEXP;inv;2%;12|
-              (|XDistributedPolynomial| 6 7) (|Integer|) (|Union| % '"failed")
-              (|String|))
+              (|String|) (|Union| % '"failed") (|Integer|)
+              (|XDistributedPolynomial| 6 7))
            '#(~= 152 |varList| 158 |sample| 163 |rightRecip| 167 |rightPower|
               172 |recip| 184 |one?| 189 |mirror| 194 |log| 199 |listOfTerms|
               204 |leftRecip| 209 |leftPower| 214 |latex| 226 |inv| 231
@@ -335,12 +335,12 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|Group&| NIL NIL |MagmaWithUnit&| |Magma&| |SetCategory&|
-                     NIL NIL |BasicType&| NIL)
+                  '#(|Group&| NIL |MagmaWithUnit&| NIL |Magma&| |SetCategory&|
+                     NIL |BasicType&| NIL NIL)
                   (CONS
-                   '#((|Group|) (|Monoid|) (|SemiGroup|) (|MagmaWithUnit|)
-                      (|Magma|) (|SetCategory|) (|unitsKnown|)
-                      (|TwoSidedRecip|) (|BasicType|) (|CoercibleTo| 20))
+                   '#((|Group|) (|Monoid|) (|MagmaWithUnit|) (|SemiGroup|)
+                      (|Magma|) (|SetCategory|) (|CoercibleTo| 20)
+                      (|BasicType|) (|TwoSidedRecip|) (|unitsKnown|))
                    (|makeByteWordVec2| 72
                                        '(0 7 0 10 2 11 0 7 7 12 2 14 13 0 0 15
                                          2 7 0 0 0 16 2 7 13 0 0 17 2 14 13 0 0
@@ -352,14 +352,14 @@
                                          0 51 2 0 13 0 0 52 2 54 20 53 0 55 2
                                          14 57 58 59 60 1 43 0 14 61 1 0 0 0 65
                                          1 36 40 0 66 1 7 0 0 67 2 0 13 0 0 1 1
-                                         0 58 0 1 0 0 0 1 1 0 71 0 1 2 0 0 0 40
-                                         1 2 0 0 0 59 1 1 0 71 0 1 1 0 13 0 1 1
+                                         0 58 0 1 0 0 0 1 1 0 70 0 1 2 0 0 0 59
+                                         1 2 0 0 0 40 1 1 0 70 0 1 1 0 13 0 1 1
                                          0 0 0 65 1 0 43 0 50 1 0 33 0 34 1 0
-                                         71 0 1 2 0 0 0 40 1 2 0 0 0 59 1 1 0
-                                         72 0 1 1 0 0 0 68 2 0 30 0 0 31 1 0 0
-                                         43 46 2 0 0 0 0 1 2 0 0 0 0 1 1 0 5 0
-                                         64 1 0 69 0 1 1 0 20 0 56 2 0 0 0 70 1
-                                         2 0 0 0 40 1 2 0 0 0 59 1 0 0 0 51 1 0
+                                         70 0 1 2 0 0 0 59 1 2 0 0 0 40 1 1 0
+                                         69 0 1 1 0 0 0 68 2 0 30 0 0 31 1 0 0
+                                         43 46 2 0 0 0 0 1 2 0 0 0 0 1 1 0 20 0
+                                         56 1 0 72 0 1 1 0 5 0 64 2 0 0 0 59 1
+                                         2 0 0 0 40 1 2 0 0 0 71 1 0 0 0 51 1 0
                                          28 0 29 1 0 62 58 63 2 0 13 0 0 52 2 0
                                          0 0 0 1 2 0 0 0 0 42)))))
            '|lookupComplete|)) 

@@ -1307,9 +1307,8 @@
 ; getInfovec name ==
 ;   u := GET(name, 'infovec) => u
 ;   GET(name, 'LOADED) => nil
-;   fullLibName := GETDATABASE(name,'OBJECT) or return nil
-;   startTimingProcess 'load
-;   loadLibNoUpdate(name, name, fullLibName)
+;   fullLibName := get_database(name, 'OBJECT) or return nil
+;   loadLibNoUpdate(name, fullLibName)
 ;   GET(name, 'infovec)
 
 (DEFUN |getInfovec| (|name|)
@@ -1319,9 +1318,8 @@
            ('T
             (PROGN
              (SETQ |fullLibName|
-                     (OR (GETDATABASE |name| 'OBJECT) (RETURN NIL)))
-             (|startTimingProcess| '|load|)
-             (|loadLibNoUpdate| |name| |name| |fullLibName|)
+                     (OR (|get_database| |name| 'OBJECT) (RETURN NIL)))
+             (|loadLibNoUpdate| |name| |fullLibName|)
              (GET |name| '|infovec|)))))))
 
 ; getOpSegment(index, vec) ==
@@ -1406,7 +1404,7 @@
 ;   name := abbreviation? con or con
 ;   infovec := getInfovec(name)
 ;   template := infovec.0
-;   $predvec: local := GETDATABASE(name, 'PREDICATES)
+;   $predvec : local := get_database(name, 'PREDICATES)
 ;   opTable := infovec.1
 ;   for i in 0..MAXINDEX opTable repeat
 ;     op := opTable.i
@@ -1428,7 +1426,7 @@
       (SETQ |name| (OR (|abbreviation?| |con|) |con|))
       (SETQ |infovec| (|getInfovec| |name|))
       (SETQ |template| (ELT |infovec| 0))
-      (SETQ |$predvec| (GETDATABASE |name| 'PREDICATES))
+      (SETQ |$predvec| (|get_database| |name| 'PREDICATES))
       (SETQ |opTable| (ELT |infovec| 1))
       ((LAMBDA (|bfVar#77| |i|)
          (LOOP
@@ -1529,7 +1527,7 @@
 
 ; dcPreds con ==
 ;   name := abbreviation? con or con
-;   $predvec:= GETDATABASE(name, 'PREDICATES)
+;   $predvec := get_database(name, 'PREDICATES)
 ;   for i in 0..MAXINDEX $predvec repeat
 ;     sayBrightlyNT bright (i + 1)
 ;     sayBrightly pred2English $predvec.i
@@ -1539,7 +1537,7 @@
     (RETURN
      (PROGN
       (SETQ |name| (OR (|abbreviation?| |con|) |con|))
-      (SETQ |$predvec| (GETDATABASE |name| 'PREDICATES))
+      (SETQ |$predvec| (|get_database| |name| 'PREDICATES))
       ((LAMBDA (|bfVar#79| |i|)
          (LOOP
           (COND ((> |i| |bfVar#79|) (RETURN NIL))
@@ -1555,7 +1553,7 @@
 ;   infovec := getInfovec name
 ;   u := infovec.3
 ;   VECP CDDR u => BREAK()
-;   $predvec:= GETDATABASE(name, 'PREDICATES)
+;   $predvec := get_database(name, 'PREDICATES)
 ;   catpredvec := first u
 ;   catinfo := CADR u
 ;   catvec := CADDR u
@@ -1584,7 +1582,7 @@
       (COND ((VECP (CDDR |u|)) (BREAK))
             (#1='T
              (PROGN
-              (SETQ |$predvec| (GETDATABASE |name| 'PREDICATES))
+              (SETQ |$predvec| (|get_database| |name| 'PREDICATES))
               (SETQ |catpredvec| (CAR |u|))
               (SETQ |catinfo| (CADR |u|))
               (SETQ |catvec| (CADDR |u|))
@@ -2145,7 +2143,7 @@
 ;   [op,:argl] := form
 ;   op = 'Record => ['RecordCategory,:argl]
 ;   op = 'Union => ['UnionCategory,:argl]
-;   functorModemap := GETDATABASE(op,'CONSTRUCTORMODEMAP)
+;   functorModemap := get_database(op, 'CONSTRUCTORMODEMAP)
 ;   [[.,target,:tl],:.] := functorModemap
 ;   EQSUBSTLIST(argl,$FormalMapVariableList,target)
 
@@ -2159,7 +2157,7 @@
             ((EQ |op| '|Union|) (CONS '|UnionCategory| |argl|))
             ('T
              (PROGN
-              (SETQ |functorModemap| (GETDATABASE |op| 'CONSTRUCTORMODEMAP))
+              (SETQ |functorModemap| (|get_database| |op| 'CONSTRUCTORMODEMAP))
               (SETQ |target| (CADAR . #1=(|functorModemap|)))
               (SETQ |tl| (CDDAR . #1#))
               (EQSUBSTLIST |argl| |$FormalMapVariableList| |target|))))))))

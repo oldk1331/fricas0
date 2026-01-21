@@ -175,5 +175,3 @@
                                               14 6 13 19 0 20 10 21 1 0 22 23
                                               24)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|PlotTools| 'NILADIC T) 

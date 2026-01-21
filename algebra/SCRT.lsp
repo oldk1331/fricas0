@@ -234,7 +234,7 @@
         (COND ((> (QREFELT % 6) 2) (QAREF1 |pt| 2)) ('T 0.0))) 
 
 (SDEFUN |SCRT;screenCoords;%L;21| ((|pt| (%)) (% (|List| (|DoubleFloat|))))
-        (SPROG ((|res| (|List| (|DoubleFloat|))) (#1=#:G113 NIL) (|i| NIL))
+        (SPROG ((|res| (|List| (|DoubleFloat|))) (#1=#:G105 NIL) (|i| NIL))
                (SEQ (LETT |res| NIL)
                     (SEQ (LETT |i| 0) (LETT #1# (- (QREFELT % 6) 1)) G190
                          (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -250,7 +250,7 @@
         (SPADCALL |pt| (QREFELT % 39))) 
 
 (SDEFUN |SCRT;toPoint;2%;23| ((|p| (%)) (% (%)))
-        (SPROG ((#1=#:G119 NIL) (|i| NIL) (|pt| (%)))
+        (SPROG ((#1=#:G111 NIL) (|i| NIL) (|pt| (%)))
                (SEQ (LETT |pt| (MAKEARR1 (+ (QREFELT % 6) 1) 0.0))
                     (SEQ (LETT |i| 0) (LETT #1# (- (QREFELT % 6) 1)) G190
                          (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -259,7 +259,7 @@
                     (QSETAREF1 |pt| (QREFELT % 6) 1.0) (EXIT |pt|)))) 
 
 (SDEFUN |SCRT;toVector;2%;24| ((|p| (%)) (% (%)))
-        (SPROG ((#1=#:G124 NIL) (|i| NIL) (|pt| (%)))
+        (SPROG ((#1=#:G116 NIL) (|i| NIL) (|pt| (%)))
                (SEQ (LETT |pt| (MAKEARR1 (+ (QREFELT % 6) 1) 0.0))
                     (SEQ (LETT |i| 0) (LETT #1# (- (QREFELT % 6) 1)) G190
                          (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -278,7 +278,7 @@
 (SDEFUN |SCRT;hash| ((|s| (%)) (% (|SingleInteger|))) 0) 
 
 (SDEFUN |SCRT;=;2%B;28| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
-        (SPROG ((#1=#:G133 NIL) (#2=#:G134 NIL) (|i| NIL))
+        (SPROG ((#1=#:G125 NIL) (#2=#:G126 NIL) (|i| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -289,7 +289,7 @@
                          (COND
                           ((SPADCALL (QAREF1 |x| |i|) (QAREF1 |y| |i|)
                                      (QREFELT % 20))
-                           (PROGN (LETT #1# NIL) (GO #3=#:G132))))))
+                           (PROGN (LETT #1# NIL) (GO #3=#:G124))))))
                        (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                   (EXIT 'T)))
                 #3# (EXIT #1#)))) 
@@ -299,8 +299,8 @@
 
 (SDEFUN |SCRT;coerce;%Of;30| ((|pt| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|eles| (|List| (|OutputForm|))) (#1=#:G148 NIL) (|i| NIL)
-          (#2=#:G147 NIL) (|s| (|Symbol|)))
+         ((|eles| (|List| (|OutputForm|))) (#1=#:G140 NIL) (|i| NIL)
+          (#2=#:G139 NIL) (|s| (|Symbol|)))
          (SEQ (LETT |s| '|proj|)
               (COND
                ((|eql_DF| (QAREF1 |pt| (QREFELT % 6)) 0.0) (LETT |s| '|vec|)))
@@ -325,9 +325,9 @@
 
 (DECLAIM (NOTINLINE |SCartesian;|)) 
 
-(DEFUN |SCartesian| (#1=#:G149)
+(DEFUN |SCartesian| (#1=#:G141)
   (SPROG NIL
-         (PROG (#2=#:G150)
+         (PROG (#2=#:G142)
            (RETURN
             (COND
              ((LETT #2#
@@ -386,21 +386,21 @@
               256)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0))
-                 (CONS '#(|SPointCategory&| |SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SPointCategory&| |SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SPointCategory|) (|SetCategory|) (|BasicType|)
-                           (|CoercibleTo| 47))
+                        '#((|SPointCategory|) (|SetCategory|)
+                           (|CoercibleTo| 47) (|BasicType|))
                         (|makeByteWordVec2| 55
                                             '(2 7 8 0 14 15 2 8 19 0 0 20 1 8 0
                                               0 23 2 0 0 14 14 26 2 8 19 0 0 29
                                               2 36 0 0 8 37 1 7 36 0 39 1 8 47
                                               0 48 1 49 47 0 50 1 47 0 51 52 2
                                               47 0 0 0 53 2 0 19 0 0 46 1 0 0 0
-                                              24 1 0 0 0 42 1 0 0 0 41 3 0 0 8
-                                              8 8 12 2 0 0 8 8 11 3 0 0 8 8 8
-                                              10 2 0 0 8 8 9 3 0 0 14 14 14 1 2
-                                              0 0 14 14 1 3 0 0 14 14 14 1 2 0
-                                              0 14 14 26 1 0 36 0 38 1 0 8 0 35
+                                              24 1 0 0 0 42 1 0 0 0 41 2 0 0 8
+                                              8 11 3 0 0 8 8 8 12 2 0 0 8 8 9 3
+                                              0 0 8 8 8 10 2 0 0 14 14 1 3 0 0
+                                              14 14 14 1 2 0 0 14 14 26 3 0 0
+                                              14 14 14 1 1 0 36 0 38 1 0 8 0 35
                                               1 0 8 0 34 1 0 8 0 33 2 0 0 0 0
                                               27 2 0 8 0 0 22 2 0 0 0 0 13 2 0
                                               0 0 0 16 1 0 55 0 1 1 0 19 0 44 1

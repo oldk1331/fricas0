@@ -10,7 +10,7 @@
 ; arg_to_OutputForm(arg, t, c) ==
 ;     c => constructor_to_OutputForm(arg)
 ;     isValidType(t) and PAIRP(t) and
-;             (GETDATABASE(first(t),'CONSTRUCTORKIND) = 'domain) =>
+;             (get_database(first(t), 'CONSTRUCTORKIND) = 'domain) =>
 ;         (val := coerceInteractive(objNewWrap(arg, t), $OutputForm)) =>
 ;             objValUnwrap(val)
 ;         -- Wrong, but we try to produce something
@@ -23,7 +23,7 @@
     (RETURN
      (COND (|c| (|constructor_to_OutputForm| |arg|))
            ((AND (|isValidType| |t|) (CONSP |t|)
-                 (EQ (GETDATABASE (CAR |t|) 'CONSTRUCTORKIND) '|domain|))
+                 (EQ (|get_database| (CAR |t|) 'CONSTRUCTORKIND) '|domain|))
             (COND
              ((SETQ |val|
                       (|coerceInteractive| (|objNewWrap| |arg| |t|)
@@ -237,7 +237,7 @@
 ;     (abb := constructor?(op)) =>
 ;         null(argl) => constructorName(op)
 ;         con_sig := getConstructorSignature(op)
-;         cosig := GETDATABASE(op,'COSIG)
+;         cosig := get_database(op, 'COSIG)
 ;         null(con_sig) or null(cosig) =>
 ;             -- Wrong, but we try to produce something
 ;             prefix_to_string(con)
@@ -277,7 +277,7 @@
                            (#1#
                             (PROGN
                              (SETQ |con_sig| (|getConstructorSignature| |op|))
-                             (SETQ |cosig| (GETDATABASE |op| 'COSIG))
+                             (SETQ |cosig| (|get_database| |op| 'COSIG))
                              (COND
                               ((OR (NULL |con_sig|) (NULL |cosig|))
                                (|prefix_to_string| |con|))

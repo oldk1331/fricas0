@@ -50,5 +50,3 @@
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 10 '(1 7 0 6 8 1 0 9 6 10)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|InternalPrintPackage| 'NILADIC T) 

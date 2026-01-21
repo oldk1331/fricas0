@@ -15,5 +15,3 @@
                      '(((= ((|Boolean|) % %)) T) ((~= ((|Boolean|) % %)) T))
                      NIL NIL NIL)))
            (SETELT #1# 0 '(|BasicType|))))) 
-
-(MAKEPROP '|BasicType| 'NILADIC T) 

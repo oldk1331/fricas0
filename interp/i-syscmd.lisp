@@ -3,6 +3,26 @@
 
 (IN-PACKAGE "BOOT")
 
+; $newConlist := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$newConlist| NIL))
+
+; $edit_file := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$edit_file| NIL))
+
+; $currentLine := '""
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$currentLine| ""))
+
+; $HiFiAccess := true
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$HiFiAccess| T))
+
+; $reportUndo := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$reportUndo| NIL))
+
 ; DEFPARAMETER($compileRecurrence, true)
 
 (DEFPARAMETER |$compileRecurrence| T)
@@ -59,29 +79,6 @@
 (DEFPARAMETER |$displayOptions|
   '(|abbreviations| |all| |macros| |modes| |names| |operations| |properties|
     |types| |values|))
-
-; initializeSystemCommands() ==
-;   l := $systemCommands
-;   $SYSCOMMANDS := NIL
-;   while l repeat
-;     $SYSCOMMANDS := CONS(CAAR l, $SYSCOMMANDS)
-;     l := rest l
-;   $SYSCOMMANDS := NREVERSE $SYSCOMMANDS
-
-(DEFUN |initializeSystemCommands| ()
-  (PROG (|l|)
-    (RETURN
-     (PROGN
-      (SETQ |l| |$systemCommands|)
-      (SETQ $SYSCOMMANDS NIL)
-      ((LAMBDA ()
-         (LOOP
-          (COND ((NOT |l|) (RETURN NIL))
-                ('T
-                 (PROGN
-                  (SETQ $SYSCOMMANDS (CONS (CAAR |l|) $SYSCOMMANDS))
-                  (SETQ |l| (CDR |l|))))))))
-      (SETQ $SYSCOMMANDS (NREVERSE $SYSCOMMANDS))))))
 
 ; systemCommand [[op,:argl],:options] ==
 ;   $options: local:= options
@@ -381,35 +378,6 @@
        |u| NIL)
       (|terminateSystemCommand|)))))
 
-; getSystemCommandLine() ==
-;   p := STRPOS('")",$currentLine,0,NIL)
-;   line := if p then SUBSTRING($currentLine,p,NIL) else $currentLine
-;   maxIndex:= MAXINDEX line
-;   for i in 0..maxIndex while (line.i~=" ") repeat index:= i
-;   if index=maxIndex then line := '""
-;   else line := SUBSTRING(line,index+2,nil)
-;   line
-
-(DEFUN |getSystemCommandLine| ()
-  (PROG (|index| |maxIndex| |line| |p|)
-    (RETURN
-     (PROGN
-      (SETQ |p| (STRPOS ")" |$currentLine| 0 NIL))
-      (SETQ |line|
-              (COND (|p| (SUBSTRING |$currentLine| |p| NIL))
-                    (#1='T |$currentLine|)))
-      (SETQ |maxIndex| (MAXINDEX |line|))
-      ((LAMBDA (|i|)
-         (LOOP
-          (COND
-           ((OR (> |i| |maxIndex|) (EQ (ELT |line| |i|) '| |)) (RETURN NIL))
-           (#1# (SETQ |index| |i|)))
-          (SETQ |i| (+ |i| 1))))
-       0)
-      (COND ((EQUAL |index| |maxIndex|) (SETQ |line| ""))
-            (#1# (SETQ |line| (SUBSTRING |line| (+ |index| 2) NIL))))
-      |line|))))
-
 ; abbreviations l ==
 ;   ioHook("startSysCmd", "abbrev")
 ;   abbreviationsSpad2Cmd l
@@ -541,11 +509,11 @@
 ; cd(args) ==
 ;     dname :=
 ;         null(args) =>
-;             TRIM_-DIRECTORY_-NAME(NAMESTRING(USER_-HOMEDIR_-PATHNAME()))
+;             trim_directory_name(NAMESTRING(USER_-HOMEDIR_-PATHNAME()))
 ;         first(args)
 ;     if SYMBOLP(dname) then dname := SYMBOL_-NAME(dname)
 ;     CHDIR(dname)
-;     sayKeyedMsg("S2IZ0070", [GET_-CURRENT_-DIRECTORY()])
+;     sayKeyedMsg("S2IZ0070", [get_current_directory()])
 
 (DEFUN |cd| (|args|)
   (PROG (|dname|)
@@ -554,11 +522,11 @@
       (SETQ |dname|
               (COND
                ((NULL |args|)
-                (TRIM-DIRECTORY-NAME (NAMESTRING (USER-HOMEDIR-PATHNAME))))
+                (|trim_directory_name| (NAMESTRING (USER-HOMEDIR-PATHNAME))))
                ('T (CAR |args|))))
       (COND ((SYMBOLP |dname|) (SETQ |dname| (SYMBOL-NAME |dname|))))
       (CHDIR |dname|)
-      (|sayKeyedMsg| 'S2IZ0070 (LIST (GET-CURRENT-DIRECTORY)))))))
+      (|sayKeyedMsg| 'S2IZ0070 (LIST (|get_current_directory|)))))))
 
 ; clear l == clearSpad2Cmd l
 
@@ -762,7 +730,7 @@
 ;     p1 := assoc(x,CAAR $InteractiveFrame) =>
 ;       option='properties =>
 ;         if isMap x then
-;           (lm := get(x,'localModemap,$InteractiveFrame)) =>
+;           (lm := getI(x, 'localModemap)) =>
 ;             PAIRP lm => untraceMapSubNames [CADAR lm]
 ;           NIL
 ;         for p2 in rest p1 repeat
@@ -826,9 +794,7 @@
                           (COND
                            ((|isMap| |x|)
                             (COND
-                             ((SETQ |lm|
-                                      (|get| |x| '|localModemap|
-                                       |$InteractiveFrame|))
+                             ((SETQ |lm| (|getI| |x| '|localModemap|))
                               (COND
                                ((CONSP |lm|)
                                 (IDENTITY
@@ -1176,7 +1142,7 @@
 ;     command :=
 ;        STRCONC(getEnv('"ALDOR_COMPILER"),_
 ;                      '" ", asharpArgs, '" ", path)
-;     rc := OBEY command
+;     rc := run_shell_command command
 ;
 ;     if (rc = 0) and doCompileLisp then
 ;         lsp := fnameMake('".", pathnameName(path), '"lsp")
@@ -1293,7 +1259,7 @@
          (SETQ |command|
                  (STRCONC (|getEnv| "ALDOR_COMPILER") " " |asharpArgs| " "
                   |path|))
-         (SETQ |rc| (OBEY |command|))
+         (SETQ |rc| (|run_shell_command| |command|))
          (COND
           ((AND (EQL |rc| 0) |doCompileLisp|)
            (SETQ |lsp| (|fnameMake| "." (|pathnameName| |path|) "lsp"))
@@ -1319,7 +1285,7 @@
 ;     -- the name is fully qualified.
 ;
 ;     path := first(args)
-;     FILE_-KIND(path) ~= 1 =>
+;     file_kind(path) ~= 1 =>
 ;           throwKeyedMsg("S2IL0003", [path])
 ;
 ;     -- here is the plan:
@@ -1332,23 +1298,21 @@
 ;     -- First try to make the directory in the current directory
 ;
 ;     dir  := fnameMake('".", pathnameName path, '"axldir")
-;     isDir := FILE_-KIND namestring dir
+;     isDir := file_kind(namestring(dir))
 ;     isDir = 0 =>
 ;         throwKeyedMsg("S2IL0027",[namestring dir, path])
 ;
 ;     if isDir ~= 1 then
-;         cmd  := STRCONC('"mkdir ", namestring dir)
-;         rc   := OBEY cmd
+;         rc := makedir namestring dir
 ;         rc ~= 0 => throwKeyedMsg("S2IL0027", [namestring dir, path])
 ;
-;     curDir := GET_-CURRENT_-DIRECTORY()
+;     curDir := get_current_directory()
 ;
 ;     -- cd to that directory and try to unarchive the .al file
 ;
 ;     cd [ namestring dir ]
 ;
-;     cmd := STRCONC( '"ar x ", path)
-;     rc := OBEY cmd
+;     rc := run_command('"ar", ['"x", path])
 ;     rc ~= 0 =>
 ;         cd [ namestring curDir ]
 ;         throwKeyedMsg("S2IL0028",[namestring dir, path])
@@ -1373,17 +1337,17 @@
 ;     spadPrompt()
 
 (DEFUN |compileAsharpArchiveCmd| (|args|)
-  (PROG (|path| |dir| |isDir| |cmd| |rc| |curDir| |asos|)
+  (PROG (|path| |dir| |isDir| |rc| |curDir| |asos|)
     (RETURN
      (PROGN
       (SETQ |path| (CAR |args|))
       (COND
-       ((NOT (EQL (FILE-KIND |path|) 1))
+       ((NOT (EQL (|file_kind| |path|) 1))
         (|throwKeyedMsg| 'S2IL0003 (LIST |path|)))
        (#1='T
         (PROGN
          (SETQ |dir| (|fnameMake| "." (|pathnameName| |path|) "axldir"))
-         (SETQ |isDir| (FILE-KIND (|namestring| |dir|)))
+         (SETQ |isDir| (|file_kind| (|namestring| |dir|)))
          (COND
           ((EQL |isDir| 0)
            (|throwKeyedMsg| 'S2IL0027 (LIST (|namestring| |dir|) |path|)))
@@ -1391,16 +1355,14 @@
            (PROGN
             (COND
              ((NOT (EQL |isDir| 1))
-              (SETQ |cmd| (STRCONC "mkdir " (|namestring| |dir|)))
-              (SETQ |rc| (OBEY |cmd|))
+              (SETQ |rc| (|makedir| (|namestring| |dir|)))
               (COND
                ((NOT (EQL |rc| 0))
                 (|throwKeyedMsg| 'S2IL0027
                  (LIST (|namestring| |dir|) |path|))))))
-            (SETQ |curDir| (GET-CURRENT-DIRECTORY))
+            (SETQ |curDir| (|get_current_directory|))
             (|cd| (LIST (|namestring| |dir|)))
-            (SETQ |cmd| (STRCONC "ar x " |path|))
-            (SETQ |rc| (OBEY |cmd|))
+            (SETQ |rc| (|run_command| "ar" (LIST "x" |path|)))
             (COND
              ((NOT (EQL |rc| 0))
               (PROGN
@@ -1568,7 +1530,7 @@
 ;     if doLibrary then
 ;         -- do we need to worry about where the compilation output went?
 ;         if not beQuiet then sayKeyedMsg("S2IZ0090", [ pathnameName path ])
-;         LOCALDATABASE([pathnameName(libname)], [])
+;         merge_info_from_objects([pathnameName(libname)], [], false)
 ;     else if not beQuiet then
 ;         sayKeyedMsg("S2IZ0084", nil)
 ;     terminateSystemCommand()
@@ -1624,19 +1586,23 @@
            (COND
             ((NULL |beQuiet|)
              (|sayKeyedMsg| 'S2IZ0090 (LIST (|pathnameName| |path|)))))
-           (LOCALDATABASE (LIST (|pathnameName| |libname|)) NIL))
+           (|merge_info_from_objects| (LIST (|pathnameName| |libname|)) NIL
+            NIL))
           ((NULL |beQuiet|) (|sayKeyedMsg| 'S2IZ0084 NIL)))
          (|terminateSystemCommand|)
          (|spadPrompt|))))))))
 
 ; withAsharpCmd args ==
 ;     $options: local := nil
-;     LOCALDATABASE(args, $options)
+;     merge_info_from_objects(args, $options, false)
 
 (DEFUN |withAsharpCmd| (|args|)
   (PROG (|$options|)
     (DECLARE (SPECIAL |$options|))
-    (RETURN (PROGN (SETQ |$options| NIL) (LOCALDATABASE |args| |$options|)))))
+    (RETURN
+     (PROGN
+      (SETQ |$options| NIL)
+      (|merge_info_from_objects| |args| |$options| NIL)))))
 
 ; print_text_stream stream ==
 ;     if stream then
@@ -2533,7 +2499,7 @@
 ;     STRCONC('"Value of ", PNAME op, '": ")
 ;   labmode := prefix2String objMode(u)
 ;   if ATOM labmode then labmode := [labmode]
-;   GETDATABASE(expr,'CONSTRUCTORKIND) = 'domain =>
+;   get_database(expr, 'CONSTRUCTORKIND) = 'domain =>
 ;     sayMSG concat('"   ",label,labmode,rhs,form2String expr)
 ;   mathprint ['CONCAT,label,:labmode,rhs,
 ;     outputFormat(expr,objMode(u))]
@@ -2568,7 +2534,7 @@
            (SETQ |labmode| (|prefix2String| (|objMode| |u|)))
            (COND ((ATOM |labmode|) (SETQ |labmode| (LIST |labmode|))))
            (COND
-            ((EQ (GETDATABASE |expr| 'CONSTRUCTORKIND) '|domain|)
+            ((EQ (|get_database| |expr| 'CONSTRUCTORKIND) '|domain|)
              (|sayMSG|
               (|concat| "   " |label| |labmode| |rhs| (|form2String| |expr|))))
             (#1#
@@ -2591,7 +2557,7 @@
 ; editSpad2Cmd l ==
 ;   l:=
 ;     null l => $edit_file
-;     first l
+;     PNAME first l
 ;   oldDir := pathnameDirectory l
 ;   fileTypes :=
 ;     pathnameType l => [pathnameType l]
@@ -2610,7 +2576,7 @@
   (PROG (|oldDir| |fileTypes| |ll| |rc|)
     (RETURN
      (PROGN
-      (SETQ |l| (COND ((NULL |l|) |$edit_file|) (#1='T (CAR |l|))))
+      (SETQ |l| (COND ((NULL |l|) |$edit_file|) (#1='T (PNAME (CAR |l|)))))
       (SETQ |oldDir| (|pathnameDirectory| |l|))
       (SETQ |fileTypes|
               (COND ((|pathnameType| |l|) (LIST (|pathnameType| |l|)))
@@ -2686,20 +2652,14 @@
 ;   null(helpFile := make_input_filename([narg, 'HELPSPAD])) => nil
 ;
 ;   $useFullScreenHelp =>
-;     OBEY STRCONC('"$FRICAS/lib/SPADEDIT ",namestring helpFile)
+;     editFile helpFile
 ;     true
 ;
-;   filestream := MAKE_INSTREAM(helpFile)
-;   repeat
-;     line := read_line(filestream)
-;     NULL line =>
-;       SHUT filestream
-;       return true
-;     SAY line
+;   print_text_file helpFile
 ;   true
 
 (DEFUN |newHelpSpad2Cmd| (|args|)
-  (PROG (|sarg| |arg| |narg| |helpFile| |filestream| |line|)
+  (PROG (|sarg| |arg| |narg| |helpFile|)
     (RETURN
      (PROGN
       (COND ((NULL |args|) (SETQ |args| (LIST '?))))
@@ -2718,25 +2678,8 @@
                  (SETQ |helpFile|
                          (|make_input_filename| (LIST |narg| 'HELPSPAD))))
                 NIL)
-               (|$useFullScreenHelp|
-                (PROGN
-                 (OBEY
-                  (STRCONC "$FRICAS/lib/SPADEDIT " (|namestring| |helpFile|)))
-                 T))
-               (#1#
-                (PROGN
-                 (SETQ |filestream| (MAKE_INSTREAM |helpFile|))
-                 ((LAMBDA ()
-                    (LOOP
-                     (COND (NIL (RETURN NIL))
-                           (#1#
-                            (PROGN
-                             (SETQ |line| (|read_line| |filestream|))
-                             (COND
-                              ((NULL |line|)
-                               (PROGN (SHUT |filestream|) (RETURN T)))
-                              (#1# (SAY |line|)))))))))
-                 T))))))))))
+               (|$useFullScreenHelp| (PROGN (|editFile| |helpFile|) T))
+               (#1# (PROGN (|print_text_file| |helpFile|) T))))))))))
 
 ; $frameRecord  := nil  --Initial setting for frame record
 
@@ -3471,7 +3414,7 @@
 ;     opt = 'show    => showHistory optargs
 ;     opt = 'change  => changeHistListLen first optargs
 ;     opt = 'restore => restoreHistory optargs
-;     opt = 'write   => writeInputLines(optargs,1)
+;     opt = 'write   => writeInputLines(first optargs, 1)
 ;   'done
 
 (DEFUN |historySpad2Cmd| ()
@@ -3552,7 +3495,8 @@
                   ((EQ |opt| '|show|) (|showHistory| |optargs|))
                   ((EQ |opt| '|change|) (|changeHistListLen| (CAR |optargs|)))
                   ((EQ |opt| '|restore|) (|restoreHistory| |optargs|))
-                  ((EQ |opt| '|write|) (|writeInputLines| |optargs| 1))))))
+                  ((EQ |opt| '|write|)
+                   (|writeInputLines| (CAR |optargs|) 1))))))
           (SETQ |bfVar#73| (CDR |bfVar#73|))))
        |opts| NIL)
       '|done|))))
@@ -3651,7 +3595,7 @@
 ;   null fn =>
 ;     throwKeyedMsg("S2IH0038", nil)          -- missing file name
 ;   maxn := 72
-;   breakChars := [" ","+"]
+;   breakChars := [char '" ", char '"+"]
 ;   for i in initial..$IOindex - 1 repeat
 ;     vecl := first readHiFi i
 ;     if STRINGP vecl then vecl := [vecl]
@@ -3689,7 +3633,7 @@
            (#1='T
             (PROGN
              (SETQ |maxn| 72)
-             (SETQ |breakChars| (LIST '| | '+))
+             (SETQ |breakChars| (LIST (|char| " ") (|char| "+")))
              ((LAMBDA (|bfVar#76| |i|)
                 (LOOP
                  (COND ((> |i| |bfVar#76|) (RETURN NIL))
@@ -3887,7 +3831,7 @@
 ; putHist(x,prop,val,e) ==
 ;   -- records new value to $HistRecord and old value to $HistList
 ;   -- then put is called with e
-;   if not (x='%) then recordOldValue(x,prop,get(x,prop,e))
+;   if not(x = '%) then recordOldValue(x, prop, get0(x, prop, e))
 ;   if $HiFiAccess then recordNewValue(x,prop,val)
 ;   putIntSymTab(x,prop,val,e)
 
@@ -3897,7 +3841,7 @@
      (PROGN
       (COND
        ((NULL (EQ |x| '%))
-        (|recordOldValue| |x| |prop| (|get| |x| |prop| |e|))))
+        (|recordOldValue| |x| |prop| (|get0| |x| |prop| |e|))))
       (COND (|$HiFiAccess| (|recordNewValue| |x| |prop| |val|)))
       (|putIntSymTab| |x| |prop| |val| |e|)))))
 
@@ -3925,7 +3869,7 @@
 ;     p2 := ASSQ(prop, rest p1) =>
 ;       RPLACD(p2,val)
 ;     RPLACD(p1, CONS(CONS(prop, val), rest p1))
-;   p:= CONS(x,list CONS(prop,val))
+;   p:= CONS(x, [CONS(prop,val)])
 ;   $HistRecord:= CONS(p,$HistRecord)
 
 (DEFUN |recordNewValue0| (|x| |prop| |val|)
@@ -3958,7 +3902,7 @@
 ;   p1 := ASSQ(x, first $HistList) =>
 ;     not ASSQ(prop, rest p1) =>
 ;       RPLACD(p1, CONS(CONS(prop, val), rest p1))
-;   p:= CONS(x,list CONS(prop,val))
+;   p:= CONS(x, [CONS(prop,val)])
 ;   RPLACA($HistList, CONS(p, first $HistList))
 
 (DEFUN |recordOldValue0| (|x| |prop| |val|)
@@ -4290,7 +4234,7 @@
 ;     updateInCoreHist()
 ;   $e := $InteractiveFrame
 ;   for [a,:.] in CAAR $InteractiveFrame repeat
-;     get(a,'localModemap,$InteractiveFrame) =>
+;     getI(a, 'localModemap) =>
 ;       rempropI(a,'localModemap)
 ;       rempropI(a,'localVars)
 ;       rempropI(a,'mapBody)
@@ -4360,7 +4304,7 @@
            (#1#
             (AND (CONSP |bfVar#91|) (PROGN (SETQ |a| (CAR |bfVar#91|)) #1#)
                  (COND
-                  ((|get| |a| '|localModemap| |$InteractiveFrame|)
+                  ((|getI| |a| '|localModemap|)
                    (IDENTITY
                     (PROGN
                      (|rempropI| |a| '|localModemap|)
@@ -4633,9 +4577,9 @@
 
 ; writeHistModesAndValues() ==
 ;   for [a,:.] in CAAR $InteractiveFrame repeat
-;     x := get(a,'value,$InteractiveFrame) =>
+;     x := getI(a, 'value) =>
 ;       putHist(a,'value,x,$InteractiveFrame)
-;     x := get(a,'mode,$InteractiveFrame) =>
+;     x := getI(a, 'mode) =>
 ;       putHist(a,'mode,x,$InteractiveFrame)
 ;   NIL
 
@@ -4652,9 +4596,9 @@
            (#1='T
             (AND (CONSP |bfVar#94|) (PROGN (SETQ |a| (CAR |bfVar#94|)) #1#)
                  (COND
-                  ((SETQ |x| (|get| |a| '|value| |$InteractiveFrame|))
+                  ((SETQ |x| (|getI| |a| '|value|))
                    (|putHist| |a| '|value| |x| |$InteractiveFrame|))
-                  ((SETQ |x| (|get| |a| '|mode| |$InteractiveFrame|))
+                  ((SETQ |x| (|getI| |a| '|mode|))
                    (|putHist| |a| '|mode| |x| |$InteractiveFrame|))))))
           (SETQ |bfVar#95| (CDR |bfVar#95|))))
        (CAAR |$InteractiveFrame|) NIL)
@@ -5512,8 +5456,8 @@
 
 ; library(args) ==
 ;    $newConlist : local := []
-;    original_directory := GET_-CURRENT_-DIRECTORY()
-;    LOCALDATABASE(args, $options)
+;    original_directory := get_current_directory()
+;    merge_info_from_objects(args, $options, false)
 ;    extendLocalLibdb($newConlist)
 ;    CHDIR(original_directory)
 ;    terminateSystemCommand()
@@ -5524,8 +5468,8 @@
     (RETURN
      (PROGN
       (SETQ |$newConlist| NIL)
-      (SETQ |original_directory| (GET-CURRENT-DIRECTORY))
-      (LOCALDATABASE |args| |$options|)
+      (SETQ |original_directory| (|get_current_directory|))
+      (|merge_info_from_objects| |args| |$options| NIL)
       (|extendLocalLibdb| |$newConlist|)
       (CHDIR |original_directory|)
       (|terminateSystemCommand|)))))
@@ -5765,7 +5709,7 @@
 ; do_read(ll, quiet, pile_mode) ==
 ;     $nopiles : local := pile_mode
 ;     $edit_file := ll
-;     read_or_compile(quiet, false)
+;     read_or_compile(quiet, ll)
 ;     terminateSystemCommand()
 ;     spadPrompt()
 
@@ -5776,7 +5720,7 @@
      (PROGN
       (SETQ |$nopiles| |pile_mode|)
       (SETQ |$edit_file| |ll|)
-      (|read_or_compile| |quiet| NIL)
+      (|read_or_compile| |quiet| |ll|)
       (|terminateSystemCommand|)
       (|spadPrompt|)))))
 
@@ -5784,9 +5728,8 @@
 
 (DEFUN |basename| (|x|) (PROG () (RETURN (NAMESTRING (PATHNAME-NAME |x|)))))
 
-; read_or_compile(quiet, lib) ==
-;     $LISPLIB : local := lib
-;     input_file := make_input_filename($edit_file)
+; read_or_compile(quiet, i_name) ==
+;     input_file := make_input_filename(i_name)
 ;     type := PATHNAME_-TYPE(input_file)
 ;     type = '"boot" =>
 ;         lfile := CONCAT(basename(input_file), '".clisp")
@@ -5794,18 +5737,15 @@
 ;         LOAD(COMPILE_-FILE(lfile))
 ;     type = '"lisp" =>
 ;         ffile := CONCAT(basename(input_file), ".", $lisp_bin_filetype)
-;         LOAD(FRICAS_COMPILE_FASL(input_file, ffile))
+;         LOAD(fricas_compile_fasl(input_file, ffile))
 ;     type = '"bbin" => LOAD(input_file)
 ;     type = '"input" => ncINTERPFILE(input_file, not(quiet))
-;     spadCompile(input_file)
 
-(DEFUN |read_or_compile| (|quiet| |lib|)
-  (PROG ($LISPLIB |ffile| |lfile| |type| |input_file|)
-    (DECLARE (SPECIAL $LISPLIB))
+(DEFUN |read_or_compile| (|quiet| |i_name|)
+  (PROG (|input_file| |type| |lfile| |ffile|)
     (RETURN
      (PROGN
-      (SETQ $LISPLIB |lib|)
-      (SETQ |input_file| (|make_input_filename| |$edit_file|))
+      (SETQ |input_file| (|make_input_filename| |i_name|))
       (SETQ |type| (PATHNAME-TYPE |input_file|))
       (COND
        ((EQUAL |type| "boot")
@@ -5817,10 +5757,10 @@
         (PROGN
          (SETQ |ffile|
                  (CONCAT (|basename| |input_file|) '|.| |$lisp_bin_filetype|))
-         (LOAD (FRICAS_COMPILE_FASL |input_file| |ffile|))))
+         (LOAD (|fricas_compile_fasl| |input_file| |ffile|))))
        ((EQUAL |type| "bbin") (LOAD |input_file|))
-       ((EQUAL |type| "input") (|ncINTERPFILE| |input_file| (NULL |quiet|)))
-       ('T (|spadCompile| |input_file|)))))))
+       ((EQUAL |type| "input")
+        (|ncINTERPFILE| |input_file| (NULL |quiet|))))))))
 
 ; show l ==
 ;   ioHook("startSysCmd", "show")
@@ -6061,12 +6001,12 @@
 ;   isRecordOrUnion := unitForm is [a,:.] and a in '(Record Union)
 ;   unit:= evalDomain unitForm
 ;   [top, :argl] := unitForm
-;   kind:= GETDATABASE(top,'CONSTRUCTORKIND)
+;   kind := get_database(top, 'CONSTRUCTORKIND)
 ;
 ;   sayBrightly concat('%b,formatOpType unitForm,
 ;     '%d,'"is a",'%b,kind,'%d, '"constructor.")
 ;   if not isRecordOrUnion then
-;     abb := GETDATABASE(top,'ABBREVIATION)
+;     abb := get_database(top, 'ABBREVIATION)
 ;     sayBrightly ['" Abbreviation for",:bright top,'"is",:bright abb]
 ;     verb :=
 ;       isExposedConstructor top => '"is"
@@ -6095,7 +6035,7 @@
 ;         sigList := EQSUBSTLIST(argl,$FormalMapVariableList, sigList)
 ;         ops := [formatOperationWithPred(x) for x in sigList]
 ;       else
-;         $predicateList: local := GETDATABASE(top, 'PREDICATES)
+;         $predicateList : local := get_database(top, 'PREDICATES)
 ;         -- x.1 is the type predicate of operation x
 ;         sigList := [x for x in sigList | evalDomainOpPred(unit, x.1)]
 ;         -- first(first(x)) is the name of operation x
@@ -6130,12 +6070,13 @@
       (SETQ |unit| (|evalDomain| |unitForm|))
       (SETQ |top| (CAR |unitForm|))
       (SETQ |argl| (CDR |unitForm|))
-      (SETQ |kind| (GETDATABASE |top| 'CONSTRUCTORKIND))
+      (SETQ |kind| (|get_database| |top| 'CONSTRUCTORKIND))
       (|sayBrightly|
        (|concat| '|%b| (|formatOpType| |unitForm|) '|%d| "is a" '|%b| |kind|
         '|%d| "constructor."))
       (COND
-       ((NULL |isRecordOrUnion|) (SETQ |abb| (GETDATABASE |top| 'ABBREVIATION))
+       ((NULL |isRecordOrUnion|)
+        (SETQ |abb| (|get_database| |top| 'ABBREVIATION))
         (|sayBrightly|
          (CONS " Abbreviation for"
                (APPEND (|bright| |top|) (CONS "is" (|bright| |abb|)))))
@@ -6238,7 +6179,8 @@
                                    (SETQ |bfVar#118| (CDR |bfVar#118|))))
                                 NIL |sigList| NIL)))
                       (#1#
-                       (SETQ |$predicateList| (GETDATABASE |top| 'PREDICATES))
+                       (SETQ |$predicateList|
+                               (|get_database| |top| 'PREDICATES))
                        (SETQ |sigList|
                                ((LAMBDA (|bfVar#121| |bfVar#120| |x|)
                                   (LOOP
@@ -6310,11 +6252,11 @@
 ;   argml :=
 ;     (s := getConstructorSignature op) => IFCDR s
 ;     NIL
-;   typ:= GETDATABASE(op,'CONSTRUCTORKIND)
+;   typ := get_database(op, 'CONSTRUCTORKIND)
 ;   nArgs:= #argml
 ;   nArgs = 0 and typ = 'domain =>
 ;       reportOpsFromUnitDirectly0 isType mkAtree evaluateType [op]
-;   argList := IFCDR GETDATABASE(op, 'CONSTRUCTORFORM)
+;   argList := IFCDR(get_database(op, 'CONSTRUCTORFORM))
 ;   functorForm:= [op,:argList]
 ;   argml:= EQSUBSTLIST(argList,$FormalMapVariableList,argml)
 ;   functorFormWithDecl:= [op,:[[":",a,m] for a in argList for m in argml]]
@@ -6348,7 +6290,7 @@
         (SETQ |argml|
                 (COND ((SETQ |s| (|getConstructorSignature| |op|)) (IFCDR |s|))
                       (#1# NIL)))
-        (SETQ |typ| (GETDATABASE |op| 'CONSTRUCTORKIND))
+        (SETQ |typ| (|get_database| |op| 'CONSTRUCTORKIND))
         (SETQ |nArgs| (LENGTH |argml|))
         (COND
          ((AND (EQL |nArgs| 0) (EQ |typ| '|domain|))
@@ -6356,7 +6298,7 @@
            (|isType| (|mkAtree| (|evaluateType| (LIST |op|))))))
          (#1#
           (PROGN
-           (SETQ |argList| (IFCDR (GETDATABASE |op| 'CONSTRUCTORFORM)))
+           (SETQ |argList| (IFCDR (|get_database| |op| 'CONSTRUCTORFORM)))
            (SETQ |functorForm| (CONS |op| |argList|))
            (SETQ |argml|
                    (EQSUBSTLIST |argList| |$FormalMapVariableList| |argml|))
@@ -6420,7 +6362,7 @@
 ;   [name,:argl] := form
 ;   centerAndHighlight('"Operations",$LINELENGTH,specialChar 'hbar)
 ;   sayBrightly '""
-;   opList:= GETDATABASE(name,'OPERATIONALIST)
+;   opList := get_database(name, 'OPERATIONALIST)
 ;   null opList => nil
 ;   opl:=REMDUP MSORT EQSUBSTLIST(argl,$FormalMapVariableList,opList)
 ;   ops:= nil
@@ -6437,7 +6379,7 @@
       (SETQ |argl| (CDR |form|))
       (|centerAndHighlight| "Operations" $LINELENGTH (|specialChar| '|hbar|))
       (|sayBrightly| "")
-      (SETQ |opList| (GETDATABASE |name| 'OPERATIONALIST))
+      (SETQ |opList| (|get_database| |name| 'OPERATIONALIST))
       (COND ((NULL |opList|) NIL)
             (#1='T
              (PROGN
@@ -6490,78 +6432,22 @@
               (#1#
                (PROGN (DRIBBLE |filename|) (TERPRI) (|clear_highlight|))))))))))
 
-; synonym(:l) == synonymSpad2Cmd()  -- always passed a null list
-
-(DEFUN |synonym| (&REST |l|) (PROG () (RETURN (|synonymSpad2Cmd|))))
-
-; synonymSpad2Cmd() ==
-;   line := getSystemCommandLine()
-;   if line = '"" then printSynonyms(NIL)
-;   else
-;     pair := processSynonymLine line
-;     if $CommandSynonymAlist then
-;       PUTALIST($CommandSynonymAlist, first pair, rest pair)
-;     else $CommandSynonymAlist := [pair]
-;   terminateSystemCommand()
-
-(DEFUN |synonymSpad2Cmd| ()
-  (PROG (|pair| |line|)
-    (RETURN
-     (PROGN
-      (SETQ |line| (|getSystemCommandLine|))
-      (COND ((EQUAL |line| "") (|printSynonyms| NIL))
-            (#1='T (SETQ |pair| (|processSynonymLine| |line|))
-             (COND
-              (|$CommandSynonymAlist|
-               (PUTALIST |$CommandSynonymAlist| (CAR |pair|) (CDR |pair|)))
-              (#1# (SETQ |$CommandSynonymAlist| (LIST |pair|))))))
-      (|terminateSystemCommand|)))))
-
 ; processSynonymLine line ==
+;   line := STRING_-LEFT_-TRIM('" ", line)
 ;   key := STRING2ID_N (line, 1)
-;   value := removeKeyFromLine line where
-;     removeKeyFromLine line ==
-;       line := dropLeadingBlanks line
-;       mx := MAXINDEX line
-;       for i in 0..mx repeat
-;         line.i = " " =>
-;           return (for j in (i+1)..mx repeat
-;             line.j ~= " " => return (SUBSTRING (line, j, nil)))
+;   value := SUBSTRING(line, # STRINGIMAGE key, nil)
+;   value := STRING_-LEFT_-TRIM('" ", value)
 ;   [key, :value]
 
 (DEFUN |processSynonymLine| (|line|)
   (PROG (|key| |value|)
     (RETURN
      (PROGN
+      (SETQ |line| (STRING-LEFT-TRIM " " |line|))
       (SETQ |key| (STRING2ID_N |line| 1))
-      (SETQ |value| (|processSynonymLine,removeKeyFromLine| |line|))
+      (SETQ |value| (SUBSTRING |line| (LENGTH (STRINGIMAGE |key|)) NIL))
+      (SETQ |value| (STRING-LEFT-TRIM " " |value|))
       (CONS |key| |value|)))))
-(DEFUN |processSynonymLine,removeKeyFromLine| (|line|)
-  (PROG (|mx|)
-    (RETURN
-     (PROGN
-      (SETQ |line| (|dropLeadingBlanks| |line|))
-      (SETQ |mx| (MAXINDEX |line|))
-      ((LAMBDA (|i|)
-         (LOOP
-          (COND ((> |i| |mx|) (RETURN NIL))
-                (#1='T
-                 (COND
-                  ((EQ (ELT |line| |i|) '| |)
-                   (IDENTITY
-                    (RETURN
-                     ((LAMBDA (|j|)
-                        (LOOP
-                         (COND ((> |j| |mx|) (RETURN NIL))
-                               (#1#
-                                (COND
-                                 ((NOT (EQ (ELT |line| |j|) '| |))
-                                  (IDENTITY
-                                   (RETURN (SUBSTRING |line| |j| NIL)))))))
-                         (SETQ |j| (+ |j| 1))))
-                      (+ |i| 1))))))))
-          (SETQ |i| (+ |i| 1))))
-       0)))))
 
 ; $undoFlag := true     --Default setting for undo is "on"
 
@@ -7387,9 +7273,9 @@
 
 ; whatConstructors constrType ==
 ;   -- here constrType should be one of 'category, 'domain, 'package
-;   MSORT [CONS(GETDATABASE(con,'ABBREVIATION), STRING(con))
+;   MSORT [CONS(get_database(con, 'ABBREVIATION), STRING(con))
 ;     for con in allConstructors()
-;       | GETDATABASE(con,'CONSTRUCTORKIND) = constrType]
+;             | get_database(con, 'CONSTRUCTORKIND) = constrType]
 
 (DEFUN |whatConstructors| (|constrType|)
   (PROG ()
@@ -7401,10 +7287,10 @@
            ((OR (ATOM |bfVar#160|) (PROGN (SETQ |con| (CAR |bfVar#160|)) NIL))
             (RETURN (NREVERSE |bfVar#161|)))
            ('T
-            (AND (EQUAL (GETDATABASE |con| 'CONSTRUCTORKIND) |constrType|)
+            (AND (EQUAL (|get_database| |con| 'CONSTRUCTORKIND) |constrType|)
                  (SETQ |bfVar#161|
                          (CONS
-                          (CONS (GETDATABASE |con| 'ABBREVIATION)
+                          (CONS (|get_database| |con| 'ABBREVIATION)
                                 (STRING |con|))
                           |bfVar#161|)))))
           (SETQ |bfVar#160| (CDR |bfVar#160|))))
@@ -8043,7 +7929,7 @@
 ;   null SEARCH(sysPart, STRING unab) =>
 ;     sayKeyedMsg("S2IZ0080", [sysPart])
 ;   command := SUBSEQ(str, spaceIndex+1)
-;   OBEY command
+;   run_shell_command command
 
 (DEFUN |npsystem| (|unab| |str|)
   (PROG (|spaceIndex| |sysPart| |command|)
@@ -8060,7 +7946,7 @@
                (#1#
                 (PROGN
                  (SETQ |command| (SUBSEQ |str| (+ |spaceIndex| 1)))
-                 (OBEY |command|)))))))))))
+                 (|run_shell_command| |command|)))))))))))
 
 ; npsynonym(unab, str) ==
 ;   npProcessSynonym(str)
@@ -8120,13 +8006,13 @@
 ;   blockStart := 0
 ;   parenCount := 0
 ;   for i in 0..#str-1 repeat
-;     STRING str.i = '"_"" =>
+;     str.i = char '"_"" =>
 ;       inString := not inString
-;     if STRING str.i = '"(" and not inString
+;     if str.i = char '"(" and not inString
 ;     then parenCount := parenCount + 1
-;     if STRING str.i = '")" and not inString
+;     if str.i = char '")" and not inString
 ;     then parenCount := parenCount - 1
-;     STRING str.i = '")" and not inString and parenCount = -1 =>
+;     str.i = char '")" and not inString and parenCount = -1 =>
 ;       block := stripSpaces SUBSEQ(str, blockStart, i)
 ;       blockList := [block, :blockList]
 ;       blockStart := i+1
@@ -8146,20 +8032,20 @@
           (COND ((> |i| |bfVar#180|) (RETURN NIL))
                 (#1='T
                  (COND
-                  ((EQUAL (STRING (ELT |str| |i|)) "\"")
+                  ((EQUAL (ELT |str| |i|) (|char| "\""))
                    (SETQ |inString| (NULL |inString|)))
                   (#1#
                    (PROGN
                     (COND
-                     ((AND (EQUAL (STRING (ELT |str| |i|)) "(")
+                     ((AND (EQUAL (ELT |str| |i|) (|char| "("))
                            (NULL |inString|))
                       (SETQ |parenCount| (+ |parenCount| 1))))
                     (COND
-                     ((AND (EQUAL (STRING (ELT |str| |i|)) ")")
+                     ((AND (EQUAL (ELT |str| |i|) (|char| ")"))
                            (NULL |inString|))
                       (SETQ |parenCount| (- |parenCount| 1))))
                     (COND
-                     ((AND (EQUAL (STRING (ELT |str| |i|)) ")")
+                     ((AND (EQUAL (ELT |str| |i|) (|char| ")"))
                            (NULL |inString|) (EQUAL |parenCount| (- 1)))
                       (PROGN
                        (SETQ |block|
@@ -8381,10 +8267,9 @@
 (DEFUN |ltrace| (|l|) (PROG () (RETURN (|trace| |l|))))
 
 ; stripSpaces str ==
-;   STRING_-TRIM([char '" "], str)
+;   STRING_-TRIM('" ", str)
 
-(DEFUN |stripSpaces| (|str|)
-  (PROG () (RETURN (STRING-TRIM (LIST (|char| " ")) |str|))))
+(DEFUN |stripSpaces| (|str|) (PROG () (RETURN (STRING-TRIM " " |str|))))
 
 ; npProcessSynonym(str) ==
 ;   if str = '"" then printSynonyms(NIL)

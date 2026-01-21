@@ -72,13 +72,11 @@
               = 37)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 10))
+                        '#((|SetCategory|) (|CoercibleTo| 10) (|BasicType|))
                         (|makeByteWordVec2| 16
                                             '(1 10 0 9 11 2 0 7 0 0 1 1 0 9 0 1
                                               1 0 10 0 12 0 0 0 15 0 0 0 13 0 0
                                               0 16 0 0 0 14 2 0 7 0 0 8)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|OpenMathEncoding| 'NILADIC T) 

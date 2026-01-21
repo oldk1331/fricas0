@@ -180,7 +180,7 @@
               (|Mapping| 6 6 12) |AUTOMOR;morphism;M%;9| (|Mapping| 6 6)
               |AUTOMOR;morphism;2M%;11| |AUTOMOR;morphism;M%;10| (16 . |Zero|)
               (|PositiveInteger|) (20 . ^) |AUTOMOR;*;3%;15|
-              (|NonNegativeInteger|) (|Union| % '"failed"))
+              (|Union| % '"failed") (|NonNegativeInteger|))
            '#(~= 26 |sample| 32 |rightRecip| 36 |rightPower| 41 |recip| 53
               |one?| 58 |morphism| 63 |leftRecip| 79 |leftPower| 84 |latex| 96
               |inv| 101 |elt| 106 |conjugate| 112 |commutator| 118 |coerce| 124
@@ -188,21 +188,22 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|Group&| NIL NIL |MagmaWithUnit&| |Magma&| |SetCategory&|
-                     NIL NIL NIL |BasicType&| NIL)
+                  '#(|Group&| NIL |MagmaWithUnit&| NIL |Magma&| |SetCategory&|
+                     NIL |BasicType&| NIL NIL NIL)
                   (CONS
-                   '#((|Group|) (|Monoid|) (|SemiGroup|) (|MagmaWithUnit|)
-                      (|Magma|) (|SetCategory|) (|Eltable| 6 6) (|unitsKnown|)
-                      (|TwoSidedRecip|) (|BasicType|) (|CoercibleTo| 18))
+                   '#((|Group|) (|Monoid|) (|MagmaWithUnit|) (|SemiGroup|)
+                      (|Magma|) (|SetCategory|) (|CoercibleTo| 18)
+                      (|BasicType|) (|TwoSidedRecip|) (|unitsKnown|)
+                      (|Eltable| 6 6))
                    (|makeByteWordVec2| 31
                                        '(1 12 0 0 13 2 12 0 0 12 15 1 18 0 17
                                          19 0 6 0 26 2 0 0 0 27 28 2 0 9 0 0 1
-                                         0 0 0 1 1 0 31 0 1 2 0 0 0 30 1 2 0 0
-                                         0 27 1 1 0 31 0 1 1 0 9 0 1 1 0 0 21
-                                         22 1 0 0 23 25 2 0 0 23 23 24 1 0 31 0
-                                         1 2 0 0 0 30 1 2 0 0 0 27 1 1 0 17 0 1
+                                         0 0 0 1 1 0 30 0 1 2 0 0 0 27 1 2 0 0
+                                         0 31 1 1 0 30 0 1 1 0 9 0 1 2 0 0 23
+                                         23 24 1 0 0 23 25 1 0 0 21 22 1 0 30 0
+                                         1 2 0 0 0 27 1 2 0 0 0 31 1 1 0 17 0 1
                                          1 0 0 0 14 2 0 6 0 6 11 2 0 0 0 0 1 2
-                                         0 0 0 0 1 1 0 18 0 20 2 0 0 0 12 16 2
-                                         0 0 0 30 1 2 0 0 0 27 28 0 0 0 8 2 0 9
+                                         0 0 0 0 1 1 0 18 0 20 2 0 0 0 27 28 2
+                                         0 0 0 31 1 2 0 0 0 12 16 0 0 0 8 2 0 9
                                          0 0 10 2 0 0 0 0 1 2 0 0 0 0 29)))))
            '|lookupComplete|)) 

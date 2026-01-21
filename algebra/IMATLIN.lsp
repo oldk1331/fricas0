@@ -1053,8 +1053,10 @@
           (SUP
            (|Join| (|UnivariatePolynomialCategory| R)
                    (CATEGORY |domain|
-                    (SIGNATURE |outputForm|
-                     ((|OutputForm|) % (|OutputForm|)))))))
+                    (SIGNATURE |outputForm| ((|OutputForm|) % (|OutputForm|)))
+                    (IF (|has| R (|Canonical|))
+                        (ATTRIBUTE (|Canonical|))
+                        |noBranch|)))))
          (SEQ (LETT SUP (|SparseUnivariatePolynomial| (QREFELT % 6)))
               (LETT FSUP (|Fraction| SUP)) (LETT VFSUP (|Vector| FSUP))
               (LETT MATCAT2

@@ -146,10 +146,10 @@
               = 167)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0))
-                 (CONS '#(NIL |SetCategory&| |BasicType&| NIL)
+                 (CONS '#(NIL |SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|FileCategory| 12 8) (|SetCategory|) (|BasicType|)
-                           (|CoercibleTo| 37))
+                        '#((|FileCategory| 12 8) (|SetCategory|)
+                           (|CoercibleTo| 37) (|BasicType|))
                         (|makeByteWordVec2| 37
                                             '(1 13 7 12 14 0 13 7 16 1 6 8 0 18
                                               1 19 8 8 20 1 8 21 0 22 1 8 23 0
@@ -158,11 +158,9 @@
                                               30 8 31 1 0 0 0 32 1 12 8 0 33 1
                                               8 0 34 35 1 12 0 8 36 2 0 21 0 0
                                               1 2 0 8 0 8 1 2 0 0 0 8 1 1 0 8 0
-                                              1 1 0 12 12 15 2 0 12 12 12 17 2
-                                              0 0 12 8 1 1 0 0 12 1 1 0 12 0 1
+                                              1 2 0 12 12 12 17 1 0 12 12 15 1
+                                              0 0 12 1 2 0 0 12 8 1 1 0 12 0 1
                                               1 0 8 0 1 1 0 8 0 1 1 0 7 8 9 1 0
                                               7 8 10 0 0 7 11 1 0 7 0 1 1 0 37
                                               0 1 1 0 0 0 32 2 0 21 0 0 1)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|FortranTemplate| 'NILADIC T) 

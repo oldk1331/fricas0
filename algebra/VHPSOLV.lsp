@@ -221,5 +221,3 @@
                                               30 9 0 15 15 9 36 3 0 30 37 38 6
                                               39)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|VectorHermitePadeSolver| 'NILADIC T) 

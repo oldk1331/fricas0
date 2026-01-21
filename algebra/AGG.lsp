@@ -25,5 +25,3 @@
                                (|has| % (|finiteAggregate|))))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|Aggregate|))))) 
-
-(MAKEPROP '|Aggregate| 'NILADIC T) 

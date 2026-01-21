@@ -219,9 +219,9 @@
               (109 . |reducedSystem|) (115 . |size|) (119 . |size|)
               (|PositiveInteger|) (123 . |index|) (128 . |setelt!|)
               (135 . |directProduct|) (140 . |index|) (145 . |elt|)
-              (151 . |lookup|) (156 . |lookup|) (|Fraction| 9) (|OutputForm|)
-              (|List| 58) (|List| 13) (|Symbol|)
-              (|Record| (|:| |mat| 60) (|:| |vec| (|Vector| 9))) (|Matrix| 9))
+              (151 . |lookup|) (156 . |lookup|) (|Matrix| 9)
+              (|Record| (|:| |mat| 54) (|:| |vec| (|Vector| 9))) (|List| 57)
+              (|Symbol|) (|List| 13) (|OutputForm|) (|Fraction| 9))
            '#(|size| 161 |reducedSystem| 165 |lookup| 176 |index| 181
               |differentiate| 186 |coerce| 192 |characteristic| 197)
            'NIL
@@ -297,8 +297,8 @@
                                               0 41 34 42 43 0 8 13 44 0 0 13 45
                                               1 8 0 46 47 3 39 8 0 9 8 48 1 6 0
                                               39 49 1 0 0 46 50 2 6 8 0 9 51 1
-                                              8 46 0 52 1 0 46 0 53 0 0 13 45 1
-                                              0 20 34 35 2 0 41 34 42 43 1 0 46
+                                              8 46 0 52 1 0 46 0 53 0 0 13 45 2
+                                              0 41 34 42 43 1 0 20 34 35 1 0 46
                                               0 53 1 0 0 46 50 2 0 0 0 16 18 1
                                               0 0 9 12 0 0 13 15)))))
            '|lookupComplete|)) 

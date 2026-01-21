@@ -111,9 +111,7 @@
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 20
                                             '(1 7 0 11 12 0 13 0 14 2 7 0 0 13
-                                              15 2 17 7 0 7 18 2 0 0 7 9 10 2 0
-                                              0 7 7 8 2 0 19 0 17 20 1 0 7 0
+                                              15 2 17 7 0 7 18 2 0 0 7 7 8 2 0
+                                              0 7 9 10 2 0 19 0 17 20 1 0 7 0
                                               16)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|XmlAttribute| 'NILADIC T) 

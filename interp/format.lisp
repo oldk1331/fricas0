@@ -3,6 +3,14 @@
 
 (IN-PACKAGE "BOOT")
 
+; $abbreviateJoin := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$abbreviateJoin| NIL))
+
+; $whereList := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$whereList| NIL))
+
 ; sayModemap m ==
 ;   -- sayMSG formatModemap displayTranModemap m
 ;   sayMSG formatModemap old2NewModemaps displayTranModemap m
@@ -12,6 +20,19 @@
     (RETURN
      (|sayMSG|
       (|formatModemap| (|old2NewModemaps| (|displayTranModemap| |m|)))))))
+
+; sayNewModemap(m) ==
+;     msg := formatModemap(displayTranModemap(m))
+;     msg := cleanUpSegmentedMsg(reverse(msg))
+;     sayMSG(flowSegmentedMsg(msg, $LINELENGTH, 3))
+
+(DEFUN |sayNewModemap| (|m|)
+  (PROG (|msg|)
+    (RETURN
+     (PROGN
+      (SETQ |msg| (|formatModemap| (|displayTranModemap| |m|)))
+      (SETQ |msg| (|cleanUpSegmentedMsg| (REVERSE |msg|)))
+      (|sayMSG| (|flowSegmentedMsg| |msg| $LINELENGTH 3))))))
 
 ; sayModemapWithNumber(m,n) ==
 ;   msg := reverse cleanUpSegmentedMsg reverse ["%i","%i",'" ",
@@ -849,6 +870,10 @@
 
 (DEFUN |prefix2String0| (|form|) (PROG () (RETURN (|form2StringLocal| |form|))))
 
+; $permitWhere := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$permitWhere| NIL))
+
 ; form2StringWithWhere u ==
 ;   $permitWhere : local := true
 ;   $whereList: local := nil
@@ -1451,8 +1476,11 @@
 ;     x is ["QUOTE", y] =>
 ;         m = $Symbol and SYMBOLP(y) => y
 ;         form2String1 x
+;     -- catch things like # D
+;     (m = ["NonNegativeInteger"] or m = ["Integer"]) and not INTEGERP(x) =>
+;         form2String1 x
 ;     isValidType(m) and PAIRP(m) and
-;       (GETDATABASE(first(m),'CONSTRUCTORKIND) = 'domain) =>
+;       (get_database(first(m), 'CONSTRUCTORKIND) = 'domain) =>
 ;         (x' := coerceInteractive(objNewWrap(x,m),$OutputForm)) =>
 ;           form2String1 objValUnwrap x'
 ;         form2String1 x
@@ -1488,8 +1516,13 @@
                   (PROGN (SETQ |y| (CAR |ISTMP#1|)) #1='T))))
        (COND ((AND (EQUAL |m| |$Symbol|) (SYMBOLP |y|)) |y|)
              (#1# (|form2String1| |x|))))
+      ((AND
+        (OR (EQUAL |m| (LIST '|NonNegativeInteger|))
+            (EQUAL |m| (LIST '|Integer|)))
+        (NULL (INTEGERP |x|)))
+       (|form2String1| |x|))
       ((AND (|isValidType| |m|) (CONSP |m|)
-            (EQ (GETDATABASE (CAR |m|) 'CONSTRUCTORKIND) '|domain|))
+            (EQ (|get_database| (CAR |m|) 'CONSTRUCTORKIND) '|domain|))
        (COND
         ((SETQ |x'| (|coerceInteractive| (|objNewWrap| |x| |m|) |$OutputForm|))
          (|form2String1| (|objValUnwrap| |x'|)))
@@ -2621,7 +2654,7 @@
 ; form2Fence form ==
 ;   -- body of dbMkEvalable
 ;   [op, :.] := form
-;   kind := GETDATABASE(op,'CONSTRUCTORKIND)
+;   kind := get_database(op, 'CONSTRUCTORKIND)
 ;   kind = 'category => form2Fence1 form
 ;   form2Fence1 mkEvalable form
 
@@ -2630,7 +2663,7 @@
     (RETURN
      (PROGN
       (SETQ |op| (CAR |form|))
-      (SETQ |kind| (GETDATABASE |op| 'CONSTRUCTORKIND))
+      (SETQ |kind| (|get_database| |op| 'CONSTRUCTORKIND))
       (COND ((EQ |kind| '|category|) (|form2Fence1| |form|))
             ('T (|form2Fence1| (|mkEvalable| |form|))))))))
 

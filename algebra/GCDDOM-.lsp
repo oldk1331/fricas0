@@ -29,7 +29,7 @@
          (|p2| (|SparseUnivariatePolynomial| S))
          (% (|SparseUnivariatePolynomial| S)))
         (SPROG
-         ((#1=#:G168 NIL) (|c2| (S)) (|p| (|SparseUnivariatePolynomial| S))
+         ((#1=#:G172 NIL) (|c2| (S)) (|p| (|SparseUnivariatePolynomial| S))
           (|c1| (S)) (|e1| #2=(|NonNegativeInteger|)) (|e2| #2#))
          (SEQ
           (COND ((SPADCALL |p1| (QREFELT % 24)) (SPADCALL |p2| (QREFELT % 25)))
@@ -162,7 +162,7 @@
 (SDEFUN |GCDDOM-;lcmCoef;2SR;5|
         ((|c1| (S)) (|c2| (S))
          (% (|Record| (|:| |llcm_res| S) (|:| |coeff1| S) (|:| |coeff2| S))))
-        (SPROG ((|cc2| (S)) (#1=#:G277 NIL) (|cc1| (S)) (|g| (S)))
+        (SPROG ((|cc2| (S)) (#1=#:G307 NIL) (|cc1| (S)) (|g| (S)))
                (SEQ (LETT |g| (SPADCALL |c1| |c2| (QREFELT % 10)))
                     (LETT |cc1|
                           (PROG2 (LETT #1# (SPADCALL |c2| |g| (QREFELT % 12)))
@@ -243,7 +243,7 @@
                                               32 2 23 11 0 0 33 1 23 28 0 34 2
                                               23 0 0 0 35 1 23 6 0 36 2 23 0 6
                                               0 37 1 23 0 0 38 2 23 0 0 0 39 2
-                                              0 42 0 0 43 2 0 0 0 0 14 1 0 0 20
-                                              21 2 0 40 40 40 41 1 0 0 20
+                                              0 42 0 0 43 1 0 0 20 21 2 0 0 0 0
+                                              14 2 0 40 40 40 41 1 0 0 20
                                               22)))))
            '|lookupComplete|)) 

@@ -48,9 +48,9 @@
               (|String|))
            '#(~= 5 |name| 11 |latex| 16 |coerce| 21 = 26) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 9))
+                        '#((|SetCategory|) (|CoercibleTo| 9) (|BasicType|))
                         (|makeByteWordVec2| 14
                                             '(1 7 9 0 10 2 0 12 0 0 1 1 0 7 0 8
                                               1 0 14 0 1 1 0 9 0 11 2 0 12 0 0

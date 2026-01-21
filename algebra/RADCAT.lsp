@@ -17,5 +17,3 @@
                        ((^ (% % (|Fraction| (|Integer|)))) T))
                      NIL NIL NIL)))
            (SETELT #1# 0 '(|RadicalCategory|))))) 
-
-(MAKEPROP '|RadicalCategory| 'NILADIC T) 

@@ -680,13 +680,13 @@
            (CONS (|makeByteWordVec2| 3 '(0 0 0 0 1 1 3 0 0 0 0))
                  (CONS
                   '#(|Module&| NIL NIL NIL |AbelianGroup&| NIL |AbelianMonoid&|
-                     |AbelianSemiGroup&| |SetCategory&| |BasicType&| NIL)
+                     |AbelianSemiGroup&| |SetCategory&| NIL |BasicType&|)
                   (CONS
-                   '#((|Module| 7) (|BiModule| 7 7) (|LeftModule| 7)
-                      (|RightModule| 7) (|AbelianGroup|)
+                   '#((|Module| 7) (|BiModule| 7 7) (|RightModule| 7)
+                      (|LeftModule| 7) (|AbelianGroup|)
                       (|CancellationAbelianMonoid|) (|AbelianMonoid|)
-                      (|AbelianSemiGroup|) (|SetCategory|) (|BasicType|)
-                      (|CoercibleTo| 26))
+                      (|AbelianSemiGroup|) (|SetCategory|) (|CoercibleTo| 26)
+                      (|BasicType|))
                    (|makeByteWordVec2| 98
                                        '(0 6 8 9 0 6 8 11 0 7 0 14 1 6 0 8 16 1
                                          6 0 8 18 2 6 0 8 20 21 1 7 23 0 24 1
@@ -711,8 +711,8 @@
                                          43 1 0 0 8 17 1 0 0 8 19 2 0 0 8 20 22
                                          1 0 0 6 15 1 0 0 0 48 2 0 0 0 0 86 1 0
                                          26 0 37 1 0 38 0 40 2 0 7 0 6 47 0 2 0
-                                         49 2 0 23 0 0 1 2 1 0 0 0 85 1 1 0 0
-                                         52 2 0 0 0 0 59 2 1 0 44 0 1 2 2 0 72
-                                         0 1 2 0 0 0 7 1 2 0 0 7 0 61 2 0 0 8 0
+                                         49 2 0 23 0 0 1 1 1 0 0 52 2 1 0 0 0
+                                         85 2 0 0 0 0 59 2 0 0 8 0 1 2 0 0 7 0
+                                         61 2 0 0 0 7 1 2 1 0 44 0 1 2 2 0 72 0
                                          1)))))
            '|lookupComplete|)) 

@@ -18,5 +18,3 @@
                                                T))
                                             NIL NIL NIL))))
            (SETELT #1# 0 '(|FortranProgramCategory|))))) 
-
-(MAKEPROP '|FortranProgramCategory| 'NILADIC T) 

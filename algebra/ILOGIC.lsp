@@ -1508,12 +1508,12 @@
               208)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0))
-                 (CONS '#(NIL NIL NIL NIL NIL |SetCategory&| |BasicType&| NIL)
+                 (CONS '#(NIL NIL NIL NIL NIL |SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|BoundedLattice|) (|BoundedMeetSemilattice|)
-                           (|BoundedJoinSemilattice|) (|MeetSemilattice|)
-                           (|JoinSemilattice|) (|SetCategory|) (|BasicType|)
-                           (|CoercibleTo| 48))
+                        '#((|BoundedLattice|) (|BoundedJoinSemilattice|)
+                           (|BoundedMeetSemilattice|) (|JoinSemilattice|)
+                           (|MeetSemilattice|) (|SetCategory|)
+                           (|CoercibleTo| 48) (|BasicType|))
                         (|makeByteWordVec2| 53
                                             '(2 16 12 0 0 17 1 22 2 0 23 1 22 2
                                               0 25 2 22 0 0 0 26 2 22 0 0 2 27
@@ -1532,5 +1532,3 @@
                                               0 1 2 0 12 0 0 13 2 0 0 0 0
                                               14)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|ILogic| 'NILADIC T) 

@@ -140,5 +140,3 @@
                                               21 13 16 22 23 2 0 21 10 13
                                               24)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|IntegerSolveLinearPolynomialEquation| 'NILADIC T) 

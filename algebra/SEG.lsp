@@ -258,13 +258,13 @@
               177 |incr| 182 |high| 187 |expand| 192 |convert| 202 |coerce| 212
               SEGMENT 217 BY 223 = 229 - 235 + 241)
            'NIL
-           (CONS (|makeByteWordVec2| 3 '(2 0 3 0 1 3 3))
-                 (CONS '#(NIL NIL |SetCategory&| NIL NIL |BasicType&| NIL)
+           (CONS (|makeByteWordVec2| 3 '(2 0 3 3 3 1 0))
+                 (CONS '#(NIL NIL |SetCategory&| NIL |BasicType&| NIL NIL)
                        (CONS
                         '#((|SegmentExpansionCategory| 6 (|List| 6))
-                           (|SegmentCategory| 6) (|SetCategory|) (|Type|)
-                           (|ConvertibleTo| 27) (|BasicType|)
-                           (|CoercibleTo| 18))
+                           (|SegmentCategory| 6) (|SetCategory|)
+                           (|CoercibleTo| 18) (|BasicType|)
+                           (|ConvertibleTo| 27) (|Type|))
                         (|makeByteWordVec2| 52
                                             '(2 6 15 0 0 16 2 0 15 0 0 17 1 6
                                               18 0 19 2 18 0 0 0 20 1 18 0 21
@@ -279,9 +279,9 @@
                                               47 0 50 2 0 47 51 0 52 2 3 15 0 0
                                               1 2 0 0 6 6 13 1 2 0 0 40 2 2 47
                                               51 0 52 1 0 6 0 9 1 3 21 0 1 1 0
-                                              11 0 12 1 0 6 0 10 1 2 47 0 50 1
-                                              2 47 48 49 1 1 27 0 34 1 0 0 6 26
+                                              11 0 12 1 0 6 0 10 1 2 47 48 49 1
+                                              2 47 0 50 1 0 0 6 26 1 1 27 0 34
                                               1 3 18 0 25 2 0 0 6 6 8 2 0 0 0
                                               11 14 2 3 15 0 0 17 2 5 0 0 6 39
-                                              2 4 0 0 6 37 2 4 0 6 0 36)))))
+                                              2 4 0 6 0 36 2 4 0 0 6 37)))))
            '|lookupComplete|)) 

@@ -250,9 +250,9 @@
               |coHomology| 163 |coChainComplex| 168 = 178)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 23))
+                        '#((|SetCategory|) (|CoercibleTo| 23) (|BasicType|))
                         (|makeByteWordVec2| 54
                                             '(1 10 8 0 11 1 12 0 0 13 2 7 0 14
                                               0 15 1 12 17 0 18 1 12 17 0 19 2
@@ -266,6 +266,6 @@
                                               12 48 2 49 0 0 47 50 1 23 0 52 53
                                               2 0 20 0 0 1 1 0 20 0 32 1 0 22 0
                                               1 1 0 23 0 54 3 0 39 0 45 39 46 1
-                                              0 49 0 51 1 0 0 10 16 1 0 0 8 9 2
+                                              0 49 0 51 1 0 0 8 9 1 0 0 10 16 2
                                               0 20 0 0 1)))))
            '|lookupComplete|)) 

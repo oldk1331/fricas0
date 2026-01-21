@@ -720,5 +720,3 @@
                                                    9 9 6 6 20 2 0 38 38 6 43 3
                                                    0 9 9 9 6 25)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|ModularFactorizationTools1| 'NILADIC T) 

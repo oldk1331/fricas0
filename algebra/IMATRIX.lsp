@@ -182,44 +182,43 @@
           (LIST
            '#(NIL NIL NIL NIL NIL
               (|InnerIndexedTwoDimensionalArray| 6 (NRTEVAL (QREFELT % 7))
-                                                 (NRTEVAL (QREFELT % 8)) 43 42)
+                                                 (NRTEVAL (QREFELT % 8)) 36 38)
               (|local| |#1|) (|local| |#2|) (|local| |#3|) (|Integer|)
               (0 . |minRowIndex|) (5 . |maxRowIndex|) (10 . |maxColIndex|)
               |IMATRIX;swapRows!;%2I%;1|
-              (|MatrixLinearAlgebraFunctions| 6 43 42 $$) (15 . |determinant|)
+              (|MatrixLinearAlgebraFunctions| 6 36 38 $$) (15 . |determinant|)
               (20 . |determinant|) (25 . |minordet|) (30 . |minordet|)
               (35 . |rowEchelon|) (40 . |rowEchelon|) (|NonNegativeInteger|)
               (45 . |rank|) (50 . |rank|) (55 . |nullity|) (60 . |nullity|)
-              (|List| 42) (65 . |nullSpace|) (70 . |nullSpace|)
+              (|List| 38) (65 . |nullSpace|) (70 . |nullSpace|)
               (|Union| $$ '"failed") (75 . |inverse|) (|Union| % '"failed")
-              (80 . |inverse|) (|Boolean|) (|List| 6) (|Equation| 6)
-              (|List| 35) (|Mapping| 33 6 6) (|Mapping| 33 6) (|OutputForm|)
-              (|SingleInteger|) (|HashState|)
-              (|IndexedVector| 6 (NRTEVAL (QREFELT % 7)))
-              (|IndexedVector| 6 (NRTEVAL (QREFELT % 8))) (|List| %) (|String|)
-              (|Void|) (|List| 55) (|Union| 6 '"one") (|Mapping| 6 9 9)
-              (|List| 34) (|Mapping| 6 6 6) (|Mapping| 6 6) (|List| 44)
-              (|PositiveInteger|) (|List| 21) (|List| 57) (|Segment| 9)
-              (|List| 9))
+              (80 . |inverse|) (|Boolean|) (|Mapping| 6 6) (|List| 37)
+              (|IndexedVector| 6 (NRTEVAL (QREFELT % 8))) (|List| 6)
+              (|IndexedVector| 6 (NRTEVAL (QREFELT % 7))) (|List| 9)
+              (|Segment| 9) (|List| 40) (|List| %) (|List| 42) (|List| 21)
+              (|PositiveInteger|) (|Mapping| 6 6 6) (|Mapping| 6 9 9) (|Void|)
+              (|List| 44) (|Union| 6 '"one") (|List| 52) (|Equation| 6)
+              (|Mapping| 33 6) (|Mapping| 33 6 6) (|OutputForm|) (|HashState|)
+              (|SingleInteger|) (|String|))
            '#(|swapRows!| 85 |rowEchelon| 92 |rank| 97 |nullity| 102
               |nullSpace| 107 |minordet| 112 |minRowIndex| 117 |maxRowIndex|
               122 |maxColIndex| 127 |inverse| 132 |determinant| 137)
            'NIL
-           (CONS (|makeByteWordVec2| 11 '(0 0 0 1 0 9 6 2 0 0 0 9 11 7))
+           (CONS (|makeByteWordVec2| 11 '(0 0 1 0 2 6 9 0 7 11 9 0 0 0))
                  (CONS
-                  '#(|MatrixCategory&| |TwoDimensionalArrayCategory&|
-                     |HomogeneousAggregate&| NIL |Aggregate&| |Evalable&|
-                     |SetCategory&| |Hashable&| NIL NIL NIL |InnerEvalable&|
-                     NIL |BasicType&|)
+                  '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL
+                     |HomogeneousAggregate&| |Hashable&| |SetCategory&|
+                     |Evalable&| |Aggregate&| |BasicType&| NIL |InnerEvalable&|
+                     NIL NIL NIL)
                   (CONS
                    '#((|MatrixCategory| 6 (|IndexedVector| 6 8)
                                         (|IndexedVector| 6 7))
                       (|TwoDimensionalArrayCategory| 6 (|IndexedVector| 6 8)
                                                      (|IndexedVector| 6 7))
-                      (|HomogeneousAggregate| 6) (|Comparable|) (|Aggregate|)
-                      (|Evalable| 6) (|SetCategory|) (|Hashable|) (|Type|)
-                      (|finiteAggregate|) (|shallowlyMutable|)
-                      (|InnerEvalable| 6 6) (|CoercibleTo| 39) (|BasicType|))
+                      (|Comparable|) (|HomogeneousAggregate| 6) (|Hashable|)
+                      (|SetCategory|) (|Evalable| 6) (|Aggregate|)
+                      (|BasicType|) (|CoercibleTo| 55) (|InnerEvalable| 6 6)
+                      (|shallowlyMutable|) (|finiteAggregate|) (|Type|))
                    (|makeByteWordVec2| 32
                                        '(1 0 9 0 10 1 0 9 0 11 1 0 9 0 12 1 14
                                          6 2 15 1 0 6 0 16 1 14 6 2 17 1 0 6 0

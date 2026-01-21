@@ -15,5 +15,3 @@
                            (|mkCategory| '(((|antiCommutator| (% % %)) T)) NIL
                                          NIL NIL)))
            (SETELT #1# 0 '(|NonAssociativeSemiRng|))))) 
-
-(MAKEPROP '|NonAssociativeSemiRng| 'NILADIC T) 

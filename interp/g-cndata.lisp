@@ -25,7 +25,7 @@
       |$lowerCaseConTb|))))
 
 ; augmentLowerCaseConTable x ==
-;   y:=GETDATABASE(x,'ABBREVIATION)
+;   y := get_database(x, 'ABBREVIATION)
 ;   item:=[x,y,nil]
 ;   HPUT($lowerCaseConTb,x,item)
 ;   HPUT($lowerCaseConTb,DOWNCASE x,item)
@@ -35,65 +35,44 @@
   (PROG (|y| |item|)
     (RETURN
      (PROGN
-      (SETQ |y| (GETDATABASE |x| 'ABBREVIATION))
+      (SETQ |y| (|get_database| |x| 'ABBREVIATION))
       (SETQ |item| (LIST |x| |y| NIL))
       (HPUT |$lowerCaseConTb| |x| |item|)
       (HPUT |$lowerCaseConTb| (DOWNCASE |x|) |item|)
       (HPUT |$lowerCaseConTb| |y| |item|)))))
 
-; getCDTEntry(info,isName) ==
-;   not IDENTP info => NIL
-;   (entry := HGET($lowerCaseConTb,info)) =>
-;     [name,abb,:.] := entry
-;     isName and EQ(name,info) => entry
-;     not isName and EQ(abb,info) => entry
-;     NIL
-;   entry
-
-(DEFUN |getCDTEntry| (|info| |isName|)
-  (PROG (|entry| |name| |abb|)
-    (RETURN
-     (COND ((NULL (IDENTP |info|)) NIL)
-           ((SETQ |entry| (HGET |$lowerCaseConTb| |info|))
-            (PROGN
-             (SETQ |name| (CAR |entry|))
-             (SETQ |abb| (CADR |entry|))
-             (COND ((AND |isName| (EQ |name| |info|)) |entry|)
-                   ((AND (NULL |isName|) (EQ |abb| |info|)) |entry|)
-                   (#1='T NIL))))
-           (#1# |entry|)))))
-
 ; abbreviation? abb ==
 ;   -- if it is an abbreviation, return the corresponding name
-;   GETDATABASE(abb,'CONSTRUCTOR)
+;   get_database(abb, 'CONSTRUCTOR)
 
 (DEFUN |abbreviation?| (|abb|)
-  (PROG () (RETURN (GETDATABASE |abb| 'CONSTRUCTOR))))
+  (PROG () (RETURN (|get_database| |abb| 'CONSTRUCTOR))))
 
 ; constructor? name ==
 ;   -- if it is a constructor name, return the abbreviation
-;   GETDATABASE(name,'ABBREVIATION)
+;   get_database(name, 'ABBREVIATION)
 
 (DEFUN |constructor?| (|name|)
-  (PROG () (RETURN (GETDATABASE |name| 'ABBREVIATION))))
+  (PROG () (RETURN (|get_database| |name| 'ABBREVIATION))))
 
 ; domainForm? d ==
-;   GETDATABASE(opOf d,'CONSTRUCTORKIND) = 'domain
+;   get_database(opOf(d), 'CONSTRUCTORKIND) = 'domain
 
 (DEFUN |domainForm?| (|d|)
-  (PROG () (RETURN (EQ (GETDATABASE (|opOf| |d|) 'CONSTRUCTORKIND) '|domain|))))
+  (PROG ()
+    (RETURN (EQ (|get_database| (|opOf| |d|) 'CONSTRUCTORKIND) '|domain|))))
 
 ; packageForm? d ==
-;   GETDATABASE(opOf d,'CONSTRUCTORKIND) = 'package
+;   get_database(opOf(d), 'CONSTRUCTORKIND) = 'package
 
 (DEFUN |packageForm?| (|d|)
   (PROG ()
-    (RETURN (EQ (GETDATABASE (|opOf| |d|) 'CONSTRUCTORKIND) '|package|))))
+    (RETURN (EQ (|get_database| (|opOf| |d|) 'CONSTRUCTORKIND) '|package|))))
 
 ; categoryForm? c ==
 ;   op := opOf c
 ;   MEMQ(op, $CategoryNames) => true
-;   GETDATABASE(op,'CONSTRUCTORKIND) = 'category => true
+;   get_database(op, 'CONSTRUCTORKIND) = 'category => true
 ;   nil
 
 (DEFUN |categoryForm?| (|c|)
@@ -102,24 +81,24 @@
      (PROGN
       (SETQ |op| (|opOf| |c|))
       (COND ((MEMQ |op| |$CategoryNames|) T)
-            ((EQ (GETDATABASE |op| 'CONSTRUCTORKIND) '|category|) T)
+            ((EQ (|get_database| |op| 'CONSTRUCTORKIND) '|category|) T)
             ('T NIL))))))
 
 ; getImmediateSuperDomain(d) ==
-;   IFCAR GETDATABASE(opOf d, 'SUPERDOMAIN)
+;   IFCAR(get_database(opOf(d), 'SUPERDOMAIN))
 
 (DEFUN |getImmediateSuperDomain| (|d|)
-  (PROG () (RETURN (IFCAR (GETDATABASE (|opOf| |d|) 'SUPERDOMAIN)))))
+  (PROG () (RETURN (IFCAR (|get_database| (|opOf| |d|) 'SUPERDOMAIN)))))
 
 ; maximalSuperType d ==
-;   d' := GETDATABASE(opOf d, 'SUPERDOMAIN) => maximalSuperType first d'
-;   d
+;     d' := get_database(opOf(d), 'SUPERDOMAIN) => maximalSuperType(first(d'))
+;     d
 
 (DEFUN |maximalSuperType| (|d|)
   (PROG (|d'|)
     (RETURN
      (COND
-      ((SETQ |d'| (GETDATABASE (|opOf| |d|) 'SUPERDOMAIN))
+      ((SETQ |d'| (|get_database| (|opOf| |d|) 'SUPERDOMAIN))
        (|maximalSuperType| (CAR |d'|)))
       ('T |d|)))))
 
@@ -137,7 +116,6 @@
 ;   clearClams()
 ;   clearConstructorCache(c)
 ;   installConstructor(c)
-;   setAutoLoadProperty(c)
 
 (DEFUN |mkUserConstructorAbbreviation| (|c| |a| |type|)
   (PROG ()
@@ -147,42 +125,37 @@
       (|constructorAbbreviationErrorCheck| |c| |a| |type|)
       (|clearClams|)
       (|clearConstructorCache| |c|)
-      (|installConstructor| |c|)
-      (|setAutoLoadProperty| |c|)))))
+      (|installConstructor| |c|)))))
 
 ; abbQuery(x) ==
-;   abb := GETDATABASE(x,'ABBREVIATION) =>
-;    sayKeyedMsg("S2IZ0001",[abb,GETDATABASE(x,'CONSTRUCTORKIND),x])
-;   sayKeyedMsg("S2IZ0003",[x])
+;     abb := get_database(x, 'ABBREVIATION) =>
+;         sayKeyedMsg("S2IZ0001", [abb, get_database(x, 'CONSTRUCTORKIND), x])
+;     sayKeyedMsg("S2IZ0003",[x])
 
 (DEFUN |abbQuery| (|x|)
   (PROG (|abb|)
     (RETURN
      (COND
-      ((SETQ |abb| (GETDATABASE |x| 'ABBREVIATION))
+      ((SETQ |abb| (|get_database| |x| 'ABBREVIATION))
        (|sayKeyedMsg| 'S2IZ0001
-        (LIST |abb| (GETDATABASE |x| 'CONSTRUCTORKIND) |x|)))
+        (LIST |abb| (|get_database| |x| 'CONSTRUCTORKIND) |x|)))
       ('T (|sayKeyedMsg| 'S2IZ0003 (LIST |x|)))))))
 
 ; installConstructor(cname) ==
-;   (entry := getCDTEntry(cname,true)) => entry
-;   item := [cname,GETDATABASE(cname,'ABBREVIATION),nil]
+;   item := [cname, get_database(cname, 'ABBREVIATION), nil]
 ;   if BOUNDP '$lowerCaseConTb and $lowerCaseConTb then
 ;     HPUT($lowerCaseConTb,cname,item)
 ;     HPUT($lowerCaseConTb,DOWNCASE cname,item)
 
 (DEFUN |installConstructor| (|cname|)
-  (PROG (|entry| |item|)
+  (PROG (|item|)
     (RETURN
-     (COND ((SETQ |entry| (|getCDTEntry| |cname| T)) |entry|)
-           ('T
-            (PROGN
-             (SETQ |item|
-                     (LIST |cname| (GETDATABASE |cname| 'ABBREVIATION) NIL))
-             (COND
-              ((AND (BOUNDP '|$lowerCaseConTb|) |$lowerCaseConTb|)
-               (HPUT |$lowerCaseConTb| |cname| |item|)
-               (HPUT |$lowerCaseConTb| (DOWNCASE |cname|) |item|)))))))))
+     (PROGN
+      (SETQ |item| (LIST |cname| (|get_database| |cname| 'ABBREVIATION) NIL))
+      (COND
+       ((AND (BOUNDP '|$lowerCaseConTb|) |$lowerCaseConTb|)
+        (HPUT |$lowerCaseConTb| |cname| |item|)
+        (HPUT |$lowerCaseConTb| (DOWNCASE |cname|) |item|)))))))
 
 ; constructorAbbreviationErrorCheck(c,a,typ) ==
 ;   siz := SIZE (s := PNAME a)
@@ -190,9 +163,9 @@
 ;     then throwKeyedErrorMsg('precompilation,"S2IL0021",NIL)
 ;   if siz > 8 then throwKeyedErrorMsg('precompilation,"S2IL0006",NIL)
 ;   if s ~= UPCASE s then throwKeyedMsg("S2IL0006",NIL)
-;   abb := GETDATABASE(c,'ABBREVIATION)
-;   name:= GETDATABASE(a,'CONSTRUCTOR)
-;   type := GETDATABASE(c,'CONSTRUCTORKIND)
+;   abb := get_database(c, 'ABBREVIATION)
+;   name := get_database(a, 'CONSTRUCTOR)
+;   type := get_database(c, 'CONSTRUCTORKIND)
 ;   a=abb and c~=name => lisplibError(c,a,typ,abb,name,type,'duplicateAbb)
 ;   a=name and c~=name => lisplibError(c,a,typ,abb,name,type,'abbIsName)
 ;   c=name and typ~=type => lisplibError(c,a,typ,abb,name,type,'wrongType)
@@ -208,9 +181,9 @@
       (COND
        ((< 8 |siz|) (|throwKeyedErrorMsg| '|precompilation| 'S2IL0006 NIL)))
       (COND ((NOT (EQUAL |s| (UPCASE |s|))) (|throwKeyedMsg| 'S2IL0006 NIL)))
-      (SETQ |abb| (GETDATABASE |c| 'ABBREVIATION))
-      (SETQ |name| (GETDATABASE |a| 'CONSTRUCTOR))
-      (SETQ |type| (GETDATABASE |c| 'CONSTRUCTORKIND))
+      (SETQ |abb| (|get_database| |c| 'ABBREVIATION))
+      (SETQ |name| (|get_database| |a| 'CONSTRUCTOR))
+      (SETQ |type| (|get_database| |c| 'CONSTRUCTORKIND))
       (COND
        ((AND (EQUAL |a| |abb|) (NOT (EQUAL |c| |name|)))
         (|lisplibError| |c| |a| |typ| |abb| |name| |type| '|duplicateAbb|))
@@ -262,7 +235,7 @@
 (DEFUN |unabbrevAndLoad| (|u|) (PROG () (RETURN (|unabbrev1| |u| T))))
 
 ; isNameOfType x ==
-;   (val := get(x,'value,$InteractiveFrame)) and
+;   (val := getI(x, 'value)) and
 ;     (domain := objMode val) and
 ;       domain in '((Mode) (Type) (Category)) => true
 ;   y := opOf unabbrev x
@@ -272,7 +245,7 @@
   (PROG (|val| |domain| |y|)
     (RETURN
      (COND
-      ((AND (SETQ |val| (|get| |x| '|value| |$InteractiveFrame|))
+      ((AND (SETQ |val| (|getI| |x| '|value|))
             (SETQ |domain| (|objMode| |val|))
             (|member| |domain| '((|Mode|) (|Type|) (|Category|))))
        T)
@@ -283,13 +256,13 @@
 ;     modeIfTrue =>
 ;       d:= isDomainValuedVariable u => u
 ;       a := abbreviation? u =>
-;         GETDATABASE(a,'NILADIC) => [a]
+;         get_database(a, 'NILADIC) => [a]
 ;         largs := ['_$EmptyMode for arg in
 ;           getPartialConstructorModemapSig(a)]
 ;         unabbrev1([u,:largs],modeIfTrue)
 ;       u
 ;     a:= abbreviation?(u) or u
-;     GETDATABASE(a,'NILADIC) => [a]
+;     get_database(a, 'NILADIC) => [a]
 ;     a
 ;   [op,:arglist] := u
 ;   op = 'Join => ['Join, :[unabbrev1(x, modeIfTrue) for x in arglist]]
@@ -312,7 +285,7 @@
         (|modeIfTrue|
          (COND ((SETQ |d| (|isDomainValuedVariable| |u|)) |u|)
                ((SETQ |a| (|abbreviation?| |u|))
-                (COND ((GETDATABASE |a| 'NILADIC) (LIST |a|))
+                (COND ((|get_database| |a| 'NILADIC) (LIST |a|))
                       (#1='T
                        (PROGN
                         (SETQ |largs|
@@ -335,7 +308,7 @@
         (#1#
          (PROGN
           (SETQ |a| (OR (|abbreviation?| |u|) |u|))
-          (COND ((GETDATABASE |a| 'NILADIC) (LIST |a|)) (#1# |a|))))))
+          (COND ((|get_database| |a| 'NILADIC) (LIST |a|)) (#1# |a|))))))
       (#1#
        (PROGN
         (SETQ |op| (CAR |u|))

@@ -113,8 +113,8 @@
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
                  (CONS '#(NIL NIL NIL)
                        (CONS
-                        '#((|FortranProgramCategory|) (|Type|)
-                           (|CoercibleTo| 14))
+                        '#((|FortranProgramCategory|) (|CoercibleTo| 14)
+                           (|Type|))
                         (|makeByteWordVec2| 29
                                             '(1 7 12 0 13 1 9 14 0 15 1 10 17 0
                                               18 1 19 17 17 20 1 7 14 0 21 3 19

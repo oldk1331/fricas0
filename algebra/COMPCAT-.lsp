@@ -1157,7 +1157,7 @@
                   (SEQ (LETT |yr| (SPADCALL |y| (QREFELT % 24)))
                        (EXIT
                         (COND
-                         ((SPADCALL (|spadConstant| % 21) |yr| (QREFELT % 225))
+                         ((SPADCALL (|spadConstant| % 21) |yr| (QREFELT % 291))
                           (|spadConstant| % 20))
                          (#1='T
                           (|error| "x^y with x = 0 and real(y) <= 0"))))))
@@ -1192,7 +1192,7 @@
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
     (LETT |dv$| (LIST '|ComplexCategory&| DV$1 DV$2))
-    (LETT % (GETREFV 298))
+    (LETT % (GETREFV 299))
     (QSETREFV % 0 |dv$|)
     (QSETREFV % 3
               (LETT |pv$|
@@ -1400,14 +1400,14 @@
                         (LIST '<
                               (LIST '(|Boolean|) (|devaluate| |#2|)
                                     (|devaluate| |#2|))))
-        (QSETREFV % 291 (CONS (|dispatchFunction| |COMPCAT-;^;3S;88|) %)))))
+        (QSETREFV % 292 (CONS (|dispatchFunction| |COMPCAT-;^;3S;88|) %)))))
      ((|domainEqual| |#2| (|DoubleFloat|))
       (COND
        ((|HasSignature| |#2|
                         (LIST '<
                               (LIST '(|Boolean|) (|devaluate| |#2|)
                                     (|devaluate| |#2|))))
-        (QSETREFV % 291 (CONS (|dispatchFunction| |COMPCAT-;^;3S;89|) %))))))
+        (QSETREFV % 292 (CONS (|dispatchFunction| |COMPCAT-;^;3S;89|) %))))))
     %))) 
 
 (MAKEPROP '|ComplexCategory&| '|infovec|
@@ -1514,25 +1514,25 @@
               (935 . |polarCoordinates|) (940 . |zero?|) (945 . |positive?|)
               (950 . ^) (956 . |denom|) (961 . |numer|) (966 . ^)
               (972 . |coerce|) (977 . ^) (983 . |coerce|) (988 . /) (994 . =)
-              (1000 . ^) (|List| 144) (|List| 10) (|Fraction| 11)
-              (|Record| (|:| |mat| 296) (|:| |vec| (|Vector| 25)))
-              (|Matrix| 25) (|Union| 25 '#3="failed"))
-           '#(|unitNormal| 1006 |trace| 1011 |tanh| 1016 |tan| 1021
-              |squareFree| 1026 |solveLinearPolynomialEquation| 1031 |smaller?|
-              1037 |sinh| 1043 |sin| 1048 |retractIfCan| 1053 |retract| 1058
-              |rem| 1063 |reducedSystem| 1069 |reduce| 1080 |recip| 1085
-              |rationalIfCan| 1090 |rational?| 1095 |rational| 1100 |rank| 1105
-              |quo| 1109 |prime?| 1115 |polarCoordinates| 1120 |pi| 1125
-              |patternMatch| 1129 |norm| 1143 |minimalPolynomial| 1148 |map|
-              1153 |log| 1159 |lift| 1164 |inv| 1169 |imaginary| 1174
-              |factorSquareFreePolynomial| 1178 |factorPolynomial| 1183
-              |factor| 1188 |exquo| 1193 |exp| 1205 |euclideanSize| 1210
-              |divide| 1215 |discriminant| 1221 |differentiate| 1225
-              |definingPolynomial| 1231 |cosh| 1235 |cos| 1240 |coordinates|
-              1245 |convert| 1256 |conjugate| 1281 |coerce| 1286
-              |characteristicPolynomial| 1291 |characteristic| 1296 |atanh|
-              1300 |atan| 1305 |asinh| 1310 |asin| 1315 |argument| 1320 |acosh|
-              1325 |acos| 1330 |abs| 1335 ^ 1340 = 1352 - 1358 + 1363 * 1369)
+              (1000 . <) (1006 . ^) (|Union| 25 '#3="failed") (|Matrix| 25)
+              (|Record| (|:| |mat| 294) (|:| |vec| (|Vector| 25)))
+              (|Fraction| 11) (|List| 144) (|List| 10))
+           '#(|unitNormal| 1012 |trace| 1017 |tanh| 1022 |tan| 1027
+              |squareFree| 1032 |solveLinearPolynomialEquation| 1037 |smaller?|
+              1043 |sinh| 1049 |sin| 1054 |retractIfCan| 1059 |retract| 1064
+              |rem| 1069 |reducedSystem| 1075 |reduce| 1086 |recip| 1091
+              |rationalIfCan| 1096 |rational?| 1101 |rational| 1106 |rank| 1111
+              |quo| 1115 |prime?| 1121 |polarCoordinates| 1126 |pi| 1131
+              |patternMatch| 1135 |norm| 1149 |minimalPolynomial| 1154 |map|
+              1159 |log| 1165 |lift| 1170 |inv| 1175 |imaginary| 1180
+              |factorSquareFreePolynomial| 1184 |factorPolynomial| 1189
+              |factor| 1194 |exquo| 1199 |exp| 1211 |euclideanSize| 1216
+              |divide| 1221 |discriminant| 1227 |differentiate| 1231
+              |definingPolynomial| 1237 |cosh| 1241 |cos| 1246 |coordinates|
+              1251 |convert| 1262 |conjugate| 1287 |coerce| 1292
+              |characteristicPolynomial| 1297 |characteristic| 1302 |atanh|
+              1306 |atan| 1311 |asinh| 1316 |asin| 1321 |argument| 1326 |acosh|
+              1331 |acos| 1336 |abs| 1341 ^ 1346 = 1358 - 1364 + 1369 * 1375)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -1777,7 +1777,7 @@
                                    '((|coerce| ((|OutputForm|) |#1|)) T)
                                    '((= ((|Boolean|) |#1| |#1|)) T))
                              (LIST) NIL NIL)))
-                        (|makeByteWordVec2| 291
+                        (|makeByteWordVec2| 292
                                             '(0 6 0 8 0 7 0 9 2 11 0 7 10 12 2
                                               11 0 0 13 14 1 6 7 0 15 2 11 0 0
                                               10 16 2 11 0 7 0 17 2 11 0 0 0 18
@@ -1855,36 +1855,36 @@
                                               282 1 205 25 0 283 1 205 25 0 284
                                               2 7 0 0 25 285 1 7 0 205 286 2 0
                                               0 0 205 287 1 205 0 25 288 2 205
-                                              0 0 0 289 2 6 28 0 0 290 2 0 0 0
-                                              0 291 1 0 222 0 228 1 0 7 0 109 1
-                                              0 0 0 260 1 0 0 0 253 1 0 48 0
-                                              100 2 0 36 37 38 39 2 0 28 0 0
-                                              203 1 0 0 0 258 1 0 0 0 251 1 0
-                                              151 0 152 1 0 7 0 150 2 0 0 0 0
-                                              233 2 0 164 159 140 165 1 0 154
-                                              159 160 1 0 0 11 132 1 0 82 0 219
-                                              1 0 208 0 209 1 0 28 0 204 1 0
-                                              205 0 207 0 0 13 103 2 0 0 0 0
-                                              235 1 0 28 0 102 1 0 278 0 279 0
-                                              0 0 248 3 0 195 0 184 195 196 3 0
-                                              200 0 188 200 201 1 0 7 0 107 1 0
-                                              11 0 134 2 0 0 114 0 115 1 0 0 0
-                                              250 1 0 11 0 133 1 0 0 0 212 0 0
-                                              0 110 1 0 50 38 84 1 0 50 38 56 1
-                                              0 48 0 98 2 0 82 0 0 217 2 0 82 0
-                                              7 214 1 0 0 0 249 1 0 10 0 230 2
-                                              0 129 0 0 240 0 0 7 105 2 0 0 0
-                                              114 126 0 0 11 127 1 0 0 0 259 1
-                                              0 0 0 252 1 0 122 0 123 2 0 122 0
-                                              140 141 1 0 170 0 172 1 0 178 0
-                                              183 1 0 175 0 177 1 0 184 0 187 1
-                                              0 188 0 191 1 0 0 0 111 1 0 142 0
-                                              149 1 0 11 0 23 0 0 10 113 1 0 0
-                                              0 265 1 0 0 0 257 1 0 0 0 261 1 0
-                                              0 0 254 1 0 7 0 245 1 0 0 0 262 1
-                                              0 0 0 255 1 0 0 0 167 2 0 0 0 0
-                                              291 2 0 0 0 205 287 2 0 28 0 0
-                                              117 1 0 0 0 119 2 0 0 0 0 118 2 0
-                                              0 7 0 121 2 0 0 25 0 125 2 0 0 0
-                                              0 153)))))
+                                              0 0 0 289 2 6 28 0 0 290 2 7 28 0
+                                              0 291 2 0 0 0 0 292 1 0 222 0 228
+                                              1 0 7 0 109 1 0 0 0 260 1 0 0 0
+                                              253 1 0 48 0 100 2 0 36 37 38 39
+                                              2 0 28 0 0 203 1 0 0 0 258 1 0 0
+                                              0 251 1 0 151 0 152 1 0 7 0 150 2
+                                              0 0 0 0 233 1 0 154 159 160 2 0
+                                              164 159 140 165 1 0 0 11 132 1 0
+                                              82 0 219 1 0 208 0 209 1 0 28 0
+                                              204 1 0 205 0 207 0 0 13 103 2 0
+                                              0 0 0 235 1 0 28 0 102 1 0 278 0
+                                              279 0 0 0 248 3 0 200 0 188 200
+                                              201 3 0 195 0 184 195 196 1 0 7 0
+                                              107 1 0 11 0 134 2 0 0 114 0 115
+                                              1 0 0 0 250 1 0 11 0 133 1 0 0 0
+                                              212 0 0 0 110 1 0 50 38 84 1 0 50
+                                              38 56 1 0 48 0 98 2 0 82 0 7 214
+                                              2 0 82 0 0 217 1 0 0 0 249 1 0 10
+                                              0 230 2 0 129 0 0 240 0 0 7 105 2
+                                              0 0 0 114 126 0 0 11 127 1 0 0 0
+                                              259 1 0 0 0 252 2 0 122 0 140 141
+                                              1 0 122 0 123 1 0 188 0 191 1 0
+                                              184 0 187 1 0 175 0 177 1 0 178 0
+                                              183 1 0 170 0 172 1 0 0 0 111 1 0
+                                              142 0 149 1 0 11 0 23 0 0 10 113
+                                              1 0 0 0 265 1 0 0 0 257 1 0 0 0
+                                              261 1 0 0 0 254 1 0 7 0 245 1 0 0
+                                              0 262 1 0 0 0 255 1 0 0 0 167 2 0
+                                              0 0 205 287 2 0 0 0 0 292 2 0 28
+                                              0 0 117 1 0 0 0 119 2 0 0 0 0 118
+                                              2 0 0 0 0 153 2 0 0 25 0 125 2 0
+                                              0 7 0 121)))))
            '|lookupComplete|)) 

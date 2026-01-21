@@ -794,8 +794,8 @@
               |SPLTREE;subNodeOf?;Sn%MB;33| (165 . |removeDuplicates|)
               (170 . |empty|) (174 . |empty|) (178 . |construct|)
               |SPLTREE;splitNodeOf!;2%L%;34| |SPLTREE;splitNodeOf!;2%LM%;35|
-              (|List| 92) (|Equation| 8) (|Mapping| 18 8 8) (|Mapping| 18 8)
-              '"value" (|Integer|))
+              '"value" (|Integer|) (|Equation| 8) (|List| 93) (|Mapping| 18 8)
+              (|Mapping| 18 8 8))
            '#(~= 185 |value| 191 |updateStatus!| 196 |subNodeOf?| 201
               |splitNodeOf!| 208 |size?| 223 |setvalue!| 229 |setelt!| 235
               |setchildren!| 242 |sample| 248 |result| 252 |remove!| 257
@@ -807,20 +807,19 @@
               |count| 426 |copy| 438 |construct| 443 |conditions| 470 |coerce|
               475 |children| 480 |child?| 485 |any?| 491 = 497 |#| 503)
            'NIL
-           (CONS (|makeByteWordVec2| 7 '(0 0 0 2 1 0 0 0 2 5 7))
+           (CONS (|makeByteWordVec2| 7 '(0 0 1 2 0 7 5 2 0 0 0))
                  (CONS
-                  '#(|RecursiveAggregate&| |HomogeneousAggregate&| |Aggregate&|
-                     |Evalable&| |SetCategory&| NIL NIL NIL |InnerEvalable&|
-                     |BasicType&| NIL)
+                  '#(|RecursiveAggregate&| |HomogeneousAggregate&|
+                     |SetCategory&| |Evalable&| |Aggregate&| NIL |BasicType&|
+                     |InnerEvalable&| NIL NIL NIL)
                   (CONS
                    '#((|RecursiveAggregate| (|SplittingNode| 6 7))
                       (|HomogeneousAggregate| (|SplittingNode| 6 7))
-                      (|Aggregate|) (|Evalable| (|SplittingNode| 6 7))
-                      (|SetCategory|) (|Type|) (|finiteAggregate|)
-                      (|shallowlyMutable|)
+                      (|SetCategory|) (|Evalable| (|SplittingNode| 6 7))
+                      (|Aggregate|) (|CoercibleTo| 65) (|BasicType|)
                       (|InnerEvalable| (|SplittingNode| 6 7)
                                        (|SplittingNode| 6 7))
-                      (|BasicType|) (|CoercibleTo| 65))
+                      (|shallowlyMutable|) (|finiteAggregate|) (|Type|))
                    (|makeByteWordVec2| 96
                                        '(2 8 0 6 7 10 2 8 11 6 15 16 1 8 18 0
                                          19 1 20 18 0 21 0 8 0 23 2 8 18 0 0 26
@@ -834,23 +833,23 @@
                                          0 11 70 2 65 0 0 0 71 2 8 0 0 18 76 3
                                          8 18 0 0 82 83 1 13 0 0 85 0 6 0 86 0
                                          7 0 87 3 8 0 6 7 18 88 2 11 18 0 0 1 1
-                                         0 8 0 25 1 0 0 0 75 3 0 18 8 0 82 84 4
-                                         0 0 0 0 13 82 90 3 0 0 0 0 13 89 2 0
-                                         18 0 55 1 2 12 8 0 8 42 3 12 8 0 95 8
+                                         0 8 0 25 1 0 0 0 75 3 0 18 8 0 82 84 3
+                                         0 0 0 0 13 89 4 0 0 0 0 13 82 90 2 0
+                                         18 0 55 1 2 12 8 0 8 42 3 12 8 0 91 8
                                          1 2 12 0 0 11 40 0 0 0 1 1 0 78 0 79 2
                                          0 0 8 0 38 2 0 0 8 0 30 1 8 13 0 1 1 0
                                          11 0 50 2 0 18 8 0 81 2 4 18 0 0 1 2 0
                                          18 0 55 1 1 9 8 0 1 1 8 13 0 54 2 10
-                                         18 8 0 1 1 9 8 0 1 2 8 8 93 0 1 2 12 0
+                                         18 8 0 1 1 9 8 0 1 2 8 8 96 0 1 2 12 0
                                          44 0 46 2 0 0 44 0 45 2 0 18 0 55 1 1
                                          0 13 0 52 1 0 18 0 41 1 1 64 0 1 1 0
-                                         73 0 74 2 8 18 94 0 1 3 2 0 0 8 8 1 3
-                                         2 0 0 13 13 1 2 2 0 0 91 1 2 2 0 0 92
-                                         1 2 0 18 0 0 49 1 0 18 0 22 0 0 0 24 2
-                                         0 8 0 95 1 2 0 96 0 0 1 1 0 18 0 43 2
-                                         10 55 8 0 1 2 8 55 94 0 1 1 0 0 0 48 3
-                                         0 0 6 7 13 14 4 0 0 6 7 6 15 17 1 0 0
-                                         8 9 3 0 0 6 7 11 12 1 0 15 0 80 1 6 65
+                                         73 0 74 2 8 18 95 0 1 2 2 0 0 93 1 2 2
+                                         0 0 94 1 3 2 0 0 13 13 1 3 2 0 0 8 8 1
+                                         2 0 18 0 0 49 1 0 18 0 22 0 0 0 24 2 0
+                                         8 0 91 1 2 0 92 0 0 1 1 0 18 0 43 2 10
+                                         55 8 0 1 2 8 55 95 0 1 1 0 0 0 48 3 0
+                                         0 6 7 11 12 1 0 0 8 9 4 0 0 6 7 6 15
+                                         17 3 0 0 6 7 13 14 1 0 15 0 80 1 6 65
                                          0 72 1 0 11 0 28 2 4 18 0 0 1 2 8 18
-                                         94 0 1 2 11 18 0 0 63 1 8 55 0 57)))))
+                                         95 0 1 2 11 18 0 0 63 1 8 55 0 57)))))
            '|lookupComplete|)) 

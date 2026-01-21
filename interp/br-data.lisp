@@ -59,8 +59,7 @@
 ;   domainList => 'done         --leave new database in temp.text
 ;   -- FIXME: This is confusing: result is in olibdb.text,
 ;   -- but this is expected by save_browser_data
-;   OBEY '"sort  _"temp.text_"  > _"libdb.text_""
-;   RENAME_-FILE('"libdb.text", '"olibdb.text")
+;   run_shell_command '"sort temp.text -o olibdb.text"
 ;   deleteFile '"temp.text"
 
 (DEFUN |buildLibdb| (|domainList|)
@@ -126,23 +125,23 @@
       (COND (|domainList| '|done|)
             (#1#
              (PROGN
-              (OBEY "sort  \"temp.text\"  > \"libdb.text\"")
-              (RENAME-FILE "libdb.text" "olibdb.text")
+              (|run_shell_command| "sort temp.text -o olibdb.text")
               (|deleteFile| "temp.text"))))))))
 
 ; buildLibdbConEntry conname ==
-;     NULL GETDATABASE(conname, 'CONSTRUCTORMODEMAP) => nil
-;     abb:=GETDATABASE(conname,'ABBREVIATION)
+;     NULL(get_database(conname, 'CONSTRUCTORMODEMAP)) => nil
+;     abb := get_database(conname, 'ABBREVIATION)
 ;     $conname := conname
-;     conform := GETDATABASE(conname,'CONSTRUCTORFORM) or [conname] --hack for Category,..
+;     -- hack for Category,..
+;     conform := get_database(conname, 'CONSTRUCTORFORM) or [conname]
 ;     $conform := dbMkForm SUBST('T,"T$",conform)
 ;     null $conform => nil
 ;     $exposed? := (isExposedConstructor conname => '"x"; '"n")
-;     $doc      := GETDATABASE(conname, 'DOCUMENTATION)
+;     $doc      := get_database(conname, 'DOCUMENTATION)
 ;     pname := PNAME conname
-;     kind  := GETDATABASE(conname,'CONSTRUCTORKIND)
+;     kind  := get_database(conname, 'CONSTRUCTORKIND)
 ;     if kind = 'domain
-;       and GETDATABASE(conname,'CONSTRUCTORMODEMAP) is [[.,t,:.],:.]
+;       and get_database(conname, 'CONSTRUCTORMODEMAP) is [[., t, :.], :.]
 ;        and t is ['CATEGORY,'package,:.] then kind := 'package
 ;     $kind :=
 ;       pname.(MAXINDEX pname) = char '_& => 'x
@@ -160,13 +159,13 @@
   (PROG (|abb| |conform| |pname| |kind| |ISTMP#1| |ISTMP#2| |ISTMP#3| |t|
          |argl| |r| |conComments| |argpart| |sigpart| |header|)
     (RETURN
-     (COND ((NULL (GETDATABASE |conname| 'CONSTRUCTORMODEMAP)) NIL)
+     (COND ((NULL (|get_database| |conname| 'CONSTRUCTORMODEMAP)) NIL)
            (#1='T
             (PROGN
-             (SETQ |abb| (GETDATABASE |conname| 'ABBREVIATION))
+             (SETQ |abb| (|get_database| |conname| 'ABBREVIATION))
              (SETQ |$conname| |conname|)
              (SETQ |conform|
-                     (OR (GETDATABASE |conname| 'CONSTRUCTORFORM)
+                     (OR (|get_database| |conname| 'CONSTRUCTORFORM)
                          (LIST |conname|)))
              (SETQ |$conform| (|dbMkForm| (SUBST 'T 'T$ |conform|)))
              (COND ((NULL |$conform|) NIL)
@@ -175,14 +174,14 @@
                      (SETQ |$exposed?|
                              (COND ((|isExposedConstructor| |conname|) "x")
                                    (#1# "n")))
-                     (SETQ |$doc| (GETDATABASE |conname| 'DOCUMENTATION))
+                     (SETQ |$doc| (|get_database| |conname| 'DOCUMENTATION))
                      (SETQ |pname| (PNAME |conname|))
-                     (SETQ |kind| (GETDATABASE |conname| 'CONSTRUCTORKIND))
+                     (SETQ |kind| (|get_database| |conname| 'CONSTRUCTORKIND))
                      (COND
                       ((AND (EQ |kind| '|domain|)
                             (PROGN
                              (SETQ |ISTMP#1|
-                                     (GETDATABASE |conname|
+                                     (|get_database| |conname|
                                       'CONSTRUCTORMODEMAP))
                              (AND (CONSP |ISTMP#1|)
                                   (PROGN
@@ -256,7 +255,7 @@
         "" |u| NIL))))))
 
 ; libConstructorSig [conname,:argl] ==
-;   [[.,:sig],:.] := GETDATABASE(conname,'CONSTRUCTORMODEMAP)
+;   [[., :sig], :.] := get_database(conname, 'CONSTRUCTORMODEMAP)
 ;   formals := TAKE(#argl,$FormalMapVariableList)
 ;   sig := SUBLISLIS(formals,$TriangleVariableList,sig)
 ;   keys := [g(f,sig,i) for f in formals for i in 1..] where
@@ -281,7 +280,7 @@
      (PROGN
       (SETQ |conname| (CAR |bfVar#17|))
       (SETQ |argl| (CDR |bfVar#17|))
-      (SETQ |LETTMP#1| (GETDATABASE |conname| 'CONSTRUCTORMODEMAP))
+      (SETQ |LETTMP#1| (|get_database| |conname| 'CONSTRUCTORMODEMAP))
       (SETQ |sig| (CDAR |LETTMP#1|))
       (SETQ |formals| (TAKE (LENGTH |argl|) |$FormalMapVariableList|))
       (SETQ |sig| (SUBLISLIS |formals| |$TriangleVariableList| |sig|))
@@ -1083,7 +1082,7 @@
 ;   catname := INTERN SUBSTRING(s := PNAME con,0,MAXINDEX s)
 ;   for [catAncestor,:.] in childrenOf([catname]) repeat
 ;     pakname := INTERN STRCONC(PNAME catAncestor,'"&")
-;     if getCDTEntry(pakname,true) then acc := [pakname,:acc]
+;     if get_database(pakname, 'ABBREVIATION) then acc := [pakname,:acc]
 ;     acc := union([CAAR x for x in domainsOf([catAncestor],nil)],acc)
 ;   listSort(function GLESSEQP,acc)
 
@@ -1105,7 +1104,7 @@
                  (PROGN
                   (SETQ |pakname| (INTERN (STRCONC (PNAME |catAncestor|) "&")))
                   (COND
-                   ((|getCDTEntry| |pakname| T)
+                   ((|get_database| |pakname| 'ABBREVIATION)
                     (SETQ |acc| (CONS |pakname| |acc|))))
                   (SETQ |acc|
                           (|union|
@@ -1213,7 +1212,7 @@
            (#1# (|getArgumentConstructors,fn| (CDR |x|)))))))
 
 ; getImports conname == --called by mkUsersHashTable
-;   conform := GETDATABASE(conname,'CONSTRUCTORFORM)
+;   conform := get_database(conname, 'CONSTRUCTORFORM)
 ;   infovec := dbInfovec conname or return nil
 ;   template := infovec.0
 ;   u := [import(i,template)
@@ -1246,7 +1245,7 @@
   (PROG (|conform| |infovec| |template| |ISTMP#1| |op| |u|)
     (RETURN
      (PROGN
-      (SETQ |conform| (GETDATABASE |conname| 'CONSTRUCTORFORM))
+      (SETQ |conform| (|get_database| |conname| 'CONSTRUCTORFORM))
       (SETQ |infovec| (OR (|dbInfovec| |conname|) (RETURN NIL)))
       (SETQ |template| (ELT |infovec| 0))
       (SETQ |u|
@@ -1357,7 +1356,7 @@
 ; --called by compDefineFunctor1
 ;   acc := nil
 ;   formals := TAKE(#formalParams,$TriangleVariableList)
-;   constructorForm := GETDATABASE(cname, 'CONSTRUCTORFORM)
+;   constructorForm := get_database(cname, 'CONSTRUCTORFORM)
 ;   for x in folks constructorCategory repeat
 ;     x := SUBLISLIS(formalParams,formals,x)
 ;     x := SUBLISLIS(IFCDR constructorForm,formalParams,x)
@@ -1370,7 +1369,7 @@
      (PROGN
       (SETQ |acc| NIL)
       (SETQ |formals| (TAKE (LENGTH |formalParams|) |$TriangleVariableList|))
-      (SETQ |constructorForm| (GETDATABASE |cname| 'CONSTRUCTORFORM))
+      (SETQ |constructorForm| (|get_database| |cname| 'CONSTRUCTORFORM))
       ((LAMBDA (|bfVar#57| |x|)
          (LOOP
           (COND
@@ -1408,7 +1407,7 @@
 
 ; parentsOfForm [op,:argl] ==
 ;   parents := parentsOf op
-;   null argl or argl = (newArgl := rest GETDATABASE(op,'CONSTRUCTORFORM)) =>
+;   null argl or argl = (newArgl := rest get_database(op, 'CONSTRUCTORFORM)) =>
 ;     parents
 ;   SUBLISLIS(argl, newArgl, parents)
 
@@ -1422,15 +1421,16 @@
       (COND
        ((OR (NULL |argl|)
             (EQUAL |argl|
-                   (SETQ |newArgl| (CDR (GETDATABASE |op| 'CONSTRUCTORFORM)))))
+                   (SETQ |newArgl|
+                           (CDR (|get_database| |op| 'CONSTRUCTORFORM)))))
         |parents|)
        ('T (SUBLISLIS |argl| |newArgl| |parents|)))))))
 
 ; getParentsForDomain domname  == --called by parentsOf
 ;   acc := nil
-;   for x in folks GETDATABASE(domname,'CONSTRUCTORCATEGORY) repeat
+;   for x in folks(get_database(domname, 'CONSTRUCTORCATEGORY)) repeat
 ;     x :=
-;       GETDATABASE(domname,'CONSTRUCTORKIND) = 'category =>
+;       get_database(domname,'CONSTRUCTORKIND) = 'category =>
 ;         sublisFormal(IFCDR getConstructorForm domname,x,$TriangleVariableList)
 ;       sublisFormal(IFCDR getConstructorForm domname,x)
 ;     acc := [:explodeIfs x,:acc]
@@ -1450,7 +1450,7 @@
             (PROGN
              (SETQ |x|
                      (COND
-                      ((EQ (GETDATABASE |domname| 'CONSTRUCTORKIND)
+                      ((EQ (|get_database| |domname| 'CONSTRUCTORKIND)
                            '|category|)
                        (|sublisFormal| (IFCDR (|getConstructorForm| |domname|))
                         |x| |$TriangleVariableList|))
@@ -1459,7 +1459,7 @@
                         |x|))))
              (SETQ |acc| (APPEND (|explodeIfs| |x|) |acc|)))))
           (SETQ |bfVar#59| (CDR |bfVar#59|))))
-       (|folks| (GETDATABASE |domname| 'CONSTRUCTORCATEGORY)) NIL)
+       (|folks| (|get_database| |domname| 'CONSTRUCTORCATEGORY)) NIL)
       (NREVERSE |acc|)))))
 
 ; explodeIfs x == main where  --called by getParents, getParentsForDomain
@@ -1605,10 +1605,10 @@
            (#1# (LIST |u|))))))
 
 ; descendantsOf(conform,domform) ==  --called by kcdPage
-;   'category = GETDATABASE((conname := opOf conform),'CONSTRUCTORKIND) =>
+;   'category = get_database((conname := opOf conform), 'CONSTRUCTORKIND) =>
 ;     cats := catsOf(conform,domform)
 ;     [op,:argl] := conform
-;     null argl or argl = (newArgl := rest (GETDATABASE(op,'CONSTRUCTORFORM)))
+;     null argl or argl = (newArgl := rest(get_database(op, 'CONSTRUCTORFORM)))
 ;         => cats
 ;     SUBLISLIS(argl, newArgl, cats)
 ;   'notAvailable
@@ -1618,7 +1618,8 @@
     (RETURN
      (COND
       ((EQ '|category|
-           (GETDATABASE (SETQ |conname| (|opOf| |conform|)) 'CONSTRUCTORKIND))
+           (|get_database| (SETQ |conname| (|opOf| |conform|))
+            'CONSTRUCTORKIND))
        (PROGN
         (SETQ |cats| (|catsOf| |conform| |domform|))
         (SETQ |op| (CAR |conform|))
@@ -1627,7 +1628,7 @@
          ((OR (NULL |argl|)
               (EQUAL |argl|
                      (SETQ |newArgl|
-                             (CDR (GETDATABASE |op| 'CONSTRUCTORFORM)))))
+                             (CDR (|get_database| |op| 'CONSTRUCTORFORM)))))
           |cats|)
          (#1='T (SUBLISLIS |argl| |newArgl| |cats|)))))
       (#1# '|notAvailable|)))))
@@ -1713,7 +1714,7 @@
 
 ; ancestors_of_cat(conform, domform) ==
 ;        conname := opOf(conform)
-;        alist := GETDATABASE(conname,'ANCESTORS)
+;        alist := get_database(conname, 'ANCESTORS)
 ;        argl := IFCDR domform or IFCDR conform
 ;        [pair for [a,:b] in alist | pair] where pair ==
 ;          left :=  sublisFormal(argl,a)
@@ -1727,7 +1728,7 @@
     (RETURN
      (PROGN
       (SETQ |conname| (|opOf| |conform|))
-      (SETQ |alist| (GETDATABASE |conname| 'ANCESTORS))
+      (SETQ |alist| (|get_database| |conname| 'ANCESTORS))
       (SETQ |argl| (OR (IFCDR |domform|) (IFCDR |conform|)))
       ((LAMBDA (|bfVar#75| |bfVar#74| |bfVar#73|)
          (LOOP
@@ -1751,7 +1752,7 @@
        NIL |alist| NIL)))))
 
 ; ancestorsOf(conform,domform) ==  --called by kcaPage, originsInOrder,...
-;   'category = GETDATABASE((conname := opOf(conform)), 'CONSTRUCTORKIND) =>
+;   'category = get_database((conname := opOf(conform)), 'CONSTRUCTORKIND) =>
 ;        ancestors_of_cat(conform, domform)
 ;   computeAncestorsOf(conform,domform)
 
@@ -1760,7 +1761,8 @@
     (RETURN
      (COND
       ((EQ '|category|
-           (GETDATABASE (SETQ |conname| (|opOf| |conform|)) 'CONSTRUCTORKIND))
+           (|get_database| (SETQ |conname| (|opOf| |conform|))
+            'CONSTRUCTORKIND))
        (|ancestors_of_cat| |conform| |domform|))
       ('T (|computeAncestorsOf| |conform| |domform|))))))
 
@@ -1908,7 +1910,7 @@
 ;   --u is list of pairs (a . b) where b = conname
 ;   --we sort u then replace each b by the predicate for which this is true
 ;   s := listSort(function GLESSEQP,COPY u)
-;   s := [[first pair, :GETDATABASE(pair, 'HASCATEGORY)] for pair in s]
+;   s := [[first pair, :get_database(pair, 'HASCATEGORY)] for pair in s]
 ;   transKCatAlist(conform,domname,listSort(function GLESSEQP,s))
 
 (DEFUN |domainsOf| (|conform| |domname|)
@@ -1941,7 +1943,7 @@
                     (SETQ |bfVar#83|
                             (CONS
                              (CONS (CAR |pair|)
-                                   (GETDATABASE |pair| 'HASCATEGORY))
+                                   (|get_database| |pair| 'HASCATEGORY))
                              |bfVar#83|))))
                   (SETQ |bfVar#82| (CDR |bfVar#82|))))
                NIL |s| NIL))
@@ -1951,7 +1953,7 @@
 ;   conname := opOf conform
 ;   alist := nil
 ;   for key in allConstructors() repeat
-;     for item in GETDATABASE(key,'ANCESTORS) | conname = CAAR item repeat
+;     for item in get_database(key, 'ANCESTORS) | conname = CAAR item repeat
 ;       [[op,:args],:pred] := item
 ;       newItem :=
 ;         args => [[args,:pred],:LASSOC(key,alist)]
@@ -1993,7 +1995,7 @@
                                 (|insertShortAlist| |key| |newItem|
                                  |alist|))))))
                 (SETQ |bfVar#85| (CDR |bfVar#85|))))
-             (GETDATABASE |key| 'ANCESTORS) NIL)))
+             (|get_database| |key| 'ANCESTORS) NIL)))
           (SETQ |bfVar#84| (CDR |bfVar#84|))))
        (|allConstructors|) NIL)
       (|transKCatAlist| |conform| |domname| (|listSort| #'GLESSEQP |alist|))))))
@@ -2300,6 +2302,14 @@
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$defaultPackageNamesHT| (|buildDefaultPackageNamesHT|)))
+
+; $createLocalLibDb := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$createLocalLibDb| NIL))
+
+; $newConstructorList := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$newConstructorList| NIL))
 
 ; extendLocalLibdb conlist ==   --  called by astran
 ;   not $createLocalLibDb => nil

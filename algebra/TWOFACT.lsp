@@ -459,10 +459,16 @@
           (|m1| #1#) (|mm| (TP))
           (TP
            (|Join| (|UnivariatePolynomialCategory| |SUEx|)
-                   . #24=((CATEGORY |domain|
-                           (SIGNATURE |outputForm|
-                            ((|OutputForm|) % (|OutputForm|)))))))
-          (|SUEx| (|Join| (|UnivariatePolynomialCategory| |extField|) . #24#)))
+                   (CATEGORY |domain|
+                    #24=(SIGNATURE |outputForm|
+                         ((|OutputForm|) % (|OutputForm|)))
+                    (IF (|has| |SUEx| . #25=((|Canonical|)))
+                        . #26=((ATTRIBUTE (|Canonical|)) |noBranch|)))))
+          (|SUEx|
+           (|Join| (|UnivariatePolynomialCategory| |extField|)
+                   (CATEGORY |domain| #24#
+                    (IF (|has| |extField| . #25#)
+                        . #26#)))))
          (SEQ (LETT |SUEx| (|SparseUnivariatePolynomial| |extField|))
               (LETT TP (|SparseUnivariatePolynomial| |SUEx|))
               (LETT |mm|
@@ -575,8 +581,8 @@
                   ((SPADCALL (QVELT (|SPADfirst| |flist|) 0) (CONS 3 "prime")
                              (QREFELT % 68))
                    (SPADCALL |m| 1 (QREFELT % 69)))
-                  (#25='T (SPADCALL |m| 1 (QREFELT % 70)))))
-                (#25#
+                  (#27='T (SPADCALL |m| 1 (QREFELT % 70)))))
+                (#27#
                  (SEQ
                   (LETT |Normp|
                         (|NormRetractPackage| (QREFELT % 6) |extField| |SUEx|
@@ -669,7 +675,7 @@
                                    (LETT #16#
                                          (LETT |lfactk|
                                                (CONS (QCDR |ffu|) |lfactk|)))
-                                   (GO #26=#:G148))))))
+                                   (GO #28=#:G148))))))
                               (LETT |normfacs|
                                     (SPADCALL |ff|
                                               (|compiledLookupCheck|
@@ -779,7 +785,7 @@
                                                          #17#)
                                                         #7#))
                                       |lfactk|)))))
-                        #26# (EXIT #16#))
+                        #28# (EXIT #16#))
                        NIL (GO G190) G191 (EXIT NIL))
                   (EXIT
                    (PROGN
@@ -796,7 +802,7 @@
                              (#2# (LETT #3# (SPADCALL #3# #5# (QREFELT % 71))))
                              ('T (PROGN (LETT #3# #5#) (LETT #2# 'T)))))))
                          (LETT #6# (CDR #6#)) (GO G190) G191 (EXIT NIL))
-                    (COND (#2# #3#) (#25# (|spadConstant| % 72)))))))))))) 
+                    (COND (#2# #3#) (#27# (|spadConstant| % 72)))))))))))) 
 
 (SDEFUN |TWOFACT;doExtension|
         ((|m| (|SparseUnivariatePolynomial| (|SparseUnivariatePolynomial| F)))

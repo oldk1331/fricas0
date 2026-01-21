@@ -533,5 +533,3 @@
                                               6 7 19 2 0 7 7 16 26 1 0 10 7 15
                                               1 0 6 7 8 1 0 16 7 17)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|OutputFormTools| 'NILADIC T) 

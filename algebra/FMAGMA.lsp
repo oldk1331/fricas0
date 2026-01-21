@@ -195,12 +195,12 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|OrderedSet&| NIL |SetCategory&| |RetractableTo&|
-                     |BasicType&| NIL |PartialOrder&| NIL)
+                  '#(|OrderedSet&| NIL |RetractableTo&| |SetCategory&| NIL
+                     |PartialOrder&| NIL |BasicType&|)
                   (CONS
-                   '#((|OrderedSet|) (|Comparable|) (|SetCategory|)
-                      (|RetractableTo| 6) (|BasicType|) (|CoercibleFrom| 6)
-                      (|PartialOrder|) (|CoercibleTo| 29))
+                   '#((|OrderedSet|) (|Comparable|) (|RetractableTo| 6)
+                      (|SetCategory|) (|CoercibleTo| 29) (|PartialOrder|)
+                      (|CoercibleFrom| 6) (|BasicType|))
                    (|makeByteWordVec2| 43
                                        '(2 6 9 0 0 10 2 7 9 0 0 11 2 13 0 0 0
                                          15 1 13 0 0 16 1 25 0 6 26 2 25 0 0 0
@@ -210,8 +210,8 @@
                                          0 21 0 22 1 0 6 0 20 1 0 0 0 36 1 0 0
                                          0 24 2 0 0 0 0 1 2 0 0 0 0 1 2 0 9 0 0
                                          42 1 0 37 0 38 1 0 0 0 17 1 0 43 0 1 1
-                                         0 6 0 35 1 0 25 0 27 1 0 0 6 23 1 0 29
-                                         0 31 2 0 9 0 0 1 2 0 9 0 0 1 2 0 9 0 0
+                                         0 6 0 35 1 0 29 0 31 1 0 0 6 23 1 0 25
+                                         0 27 2 0 9 0 0 1 2 0 9 0 0 1 2 0 9 0 0
                                          12 2 0 9 0 0 1 2 0 9 0 0 40 2 0 0 0 0
                                          34)))))
            '|lookupComplete|)) 

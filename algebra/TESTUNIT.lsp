@@ -226,5 +226,3 @@
                                               6 23 2 0 15 6 6 27 1 0 15 6 32 2
                                               0 15 6 6 21 2 0 15 6 6 25)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|Unittest| 'NILADIC T) 

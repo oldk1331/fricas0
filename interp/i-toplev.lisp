@@ -3,6 +3,10 @@
 
 (IN-PACKAGE "BOOT")
 
+; $interpOnly := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$interpOnly| NIL))
+
 ; DEFPARAMETER($QuietCommand, NIL)
 
 (DEFPARAMETER |$QuietCommand| NIL)
@@ -25,6 +29,127 @@
 
 (DEFUN |intUnsetQuiet| () (PROG () (RETURN (SETQ |$QuietCommand_tmp| NIL))))
 
+; $relative_directory_list := '("share/msgs/" "share/spadhelp/")
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$relative_directory_list| '("share/msgs/" "share/spadhelp/")))
+
+; $relative_library_directory_list := '("algebra/")
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$relative_library_directory_list| '("algebra/")))
+
+; $directory_list := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$directory_list| NIL))
+
+; $library_directory_list := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$library_directory_list| NIL))
+
+; $spadroot := '""
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$spadroot| ""))
+
+; make_absolute_filename(name) == STRCONC($spadroot, '"/", name)
+
+(DEFUN |make_absolute_filename| (|name|)
+  (PROG () (RETURN (STRCONC |$spadroot| "/" |name|))))
+
+; reroot(dir) ==
+;     $spadroot := dir
+;     $directory_list := MAPCAR(function make_absolute_filename,
+;                               $relative_directory_list)
+;     $library_directory_list := MAPCAR(function make_absolute_filename,
+;                                       $relative_library_directory_list)
+;     $defaultMsgDatabaseName :=
+;         make_absolute_filename('"share/msgs/s2-us.msgs")
+
+(DEFUN |reroot| (|dir|)
+  (PROG ()
+    (RETURN
+     (PROGN
+      (SETQ |$spadroot| |dir|)
+      (SETQ |$directory_list|
+              (MAPCAR #'|make_absolute_filename| |$relative_directory_list|))
+      (SETQ |$library_directory_list|
+              (MAPCAR #'|make_absolute_filename|
+                      |$relative_library_directory_list|))
+      (SETQ |$defaultMsgDatabaseName|
+              (|make_absolute_filename| "share/msgs/s2-us.msgs"))))))
+
+; initroot() ==
+;     spadroot := getEnv('"FRICAS")
+;     if not(spadroot) then
+;         bin_parent_dir := STRCONC(DIRECTORY_-NAMESTRING(first(getCLArgs())),
+;                                   '"/../")
+;         if fricas_probe_file(STRCONC(bin_parent_dir, '"algebra/interp.daase"))
+;         then spadroot := bin_parent_dir
+;         else ERROR('"Environment variable FRICAS is not set!")
+;     spadroot := fricas_probe_file(spadroot)
+;     if spadroot then
+;         reroot(trim_directory_name(NAMESTRING(spadroot)))
+;     else
+;         ERROR('"Environment variable FRICAS is not valid!")
+
+(DEFUN |initroot| ()
+  (PROG (|bin_parent_dir| |spadroot|)
+    (RETURN
+     (PROGN
+      (SETQ |spadroot| (|getEnv| "FRICAS"))
+      (COND
+       ((NULL |spadroot|)
+        (SETQ |bin_parent_dir|
+                (STRCONC (DIRECTORY-NAMESTRING (CAR (|getCLArgs|))) "/../"))
+        (COND
+         ((|fricas_probe_file|
+           (STRCONC |bin_parent_dir| "algebra/interp.daase"))
+          (SETQ |spadroot| |bin_parent_dir|))
+         (#1='T (ERROR "Environment variable FRICAS is not set!")))))
+      (SETQ |spadroot| (|fricas_probe_file| |spadroot|))
+      (COND
+       (|spadroot| (|reroot| (|trim_directory_name| (NAMESTRING |spadroot|))))
+       (#1# (ERROR "Environment variable FRICAS is not valid!")))))))
+
+; $trace_stream := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$trace_stream| NIL))
+
+; CUROUTSTREAM := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ CUROUTSTREAM NIL))
+
+; fricas_restart() ==
+;     -- Need to reinitialize various streams because
+;     -- CLISP closes them when dumping executable
+;     CUROUTSTREAM := $trace_stream := get_lisp_std_out()
+;     $algebraOutputStream := mkOutputConsoleStream()
+;     $fortranOutputStream := mkOutputConsoleStream()
+;     $mathmlOutputStream := mkOutputConsoleStream()
+;     $texmacsOutputStream := mkOutputConsoleStream()
+;     $htmlOutputStream := mkOutputConsoleStream()
+;     $openMathOutputStream := mkOutputConsoleStream()
+;     $texOutputStream := mkOutputConsoleStream()
+;     $formattedOutputStream := mkOutputConsoleStream()
+;     fricas_init()
+;     fricas_restart2()
+
+(DEFUN |fricas_restart| ()
+  (PROG (CUROUTSTREAM)
+    (RETURN
+     (PROGN
+      (SETQ CUROUTSTREAM (SETQ |$trace_stream| (|get_lisp_std_out|)))
+      (SETQ |$algebraOutputStream| (|mkOutputConsoleStream|))
+      (SETQ |$fortranOutputStream| (|mkOutputConsoleStream|))
+      (SETQ |$mathmlOutputStream| (|mkOutputConsoleStream|))
+      (SETQ |$texmacsOutputStream| (|mkOutputConsoleStream|))
+      (SETQ |$htmlOutputStream| (|mkOutputConsoleStream|))
+      (SETQ |$openMathOutputStream| (|mkOutputConsoleStream|))
+      (SETQ |$texOutputStream| (|mkOutputConsoleStream|))
+      (SETQ |$formattedOutputStream| (|mkOutputConsoleStream|))
+      (|fricas_init|)
+      (|fricas_restart2|)))))
+
 ; interpsysInitialization(display_messages) ==
 ;   -- The function  start  begins the interpreter process, reading in
 ;   -- the profile and printing start-up messages.
@@ -35,13 +160,11 @@
 ;       $displayStartMsgs := display_messages
 ;   initHist()
 ;   initNewWorld()
-;   compressOpen(display_messages)
-;   interpOpen(display_messages)
+;   open_interp_db(display_messages)
 ;   createInitializers()
 ;   if $displayStartMsgs then sayKeyedMsg("S2IZ0053",['"interpreter"])
-;   initializeTimedNames($interpreterTimedNames,$interpreterTimedClasses)
+;   initializeTimedNames()
 ;   $InteractiveFrame := makeInitialModemapFrame()
-;   initializeSystemCommands()
 ;   initializeInterpreterFrameRing()
 ;   setOutputAlgebra "%initialize%"
 ;   loadExposureGroupData()
@@ -71,15 +194,12 @@
         (SETQ |$displayStartMsgs| |display_messages|)))
       (|initHist|)
       (|initNewWorld|)
-      (|compressOpen| |display_messages|)
-      (|interpOpen| |display_messages|)
+      (|open_interp_db| |display_messages|)
       (|createInitializers|)
       (COND
        (|$displayStartMsgs| (|sayKeyedMsg| 'S2IZ0053 (LIST "interpreter"))))
-      (|initializeTimedNames| |$interpreterTimedNames|
-       |$interpreterTimedClasses|)
+      (|initializeTimedNames|)
       (SETQ |$InteractiveFrame| (|makeInitialModemapFrame|))
-      (|initializeSystemCommands|)
       (|initializeInterpreterFrameRing|)
       (|setOutputAlgebra| '|%initialize%|)
       (|loadExposureGroupData|)
@@ -107,11 +227,11 @@
 ;
 ;   if $displayStartMsgs then spadStartUpMsgs()
 ;   $currentLine := nil
-;   compressOpen(true) -- set up the compression tables
-;   interpOpen(true) -- open up the interpreter database
-;   operationOpen(true) -- all of the operations known to the system
-;   categoryOpen(true) -- answer hasCategory question
-;   browseOpen(true)
+;   -- open databases
+;   open_interp_db(true)
+;   open_operation_db(true)
+;   open_category_db(true)
+;   open_browse_db(true)
 ;   makeConstructorsAutoLoad()
 ;   createInitializers2()
 
@@ -127,11 +247,10 @@
       (|buildHtMacroTable|)
       (COND (|$displayStartMsgs| (|spadStartUpMsgs|)))
       (SETQ |$currentLine| NIL)
-      (|compressOpen| T)
-      (|interpOpen| T)
-      (|operationOpen| T)
-      (|categoryOpen| T)
-      (|browseOpen| T)
+      (|open_interp_db| T)
+      (|open_operation_db| T)
+      (|open_category_db| T)
+      (|open_browse_db| T)
       (|makeConstructorsAutoLoad|)
       (|createInitializers2|)))))
 
@@ -140,19 +259,19 @@
 ;   file := getEnv('"FRICAS_INITFILE")
 ;   file = '"" => nil
 ;   efile :=
-;     make_input_filename(file) => file
+;     fn := make_input_filename(file) => fn
 ;     file := ['_.fricas, 'input]
-;     make_input_filename(file) => file
+;     fn := make_input_filename(file) => fn
 ;     file := ['_.axiom, 'input]
-;     make_input_filename(file) => file
+;     fn := make_input_filename(file) => fn
 ;     NIL
 ;   efile =>
 ;     $edit_file := efile
-;     read_or_compile(true, false)
+;     read_or_compile(true, efile)
 ;   NIL
 
 (DEFUN |readSpadProfileIfThere| ()
-  (PROG (|efile| |file|)
+  (PROG (|efile| |fn| |file|)
     (RETURN
      (PROGN
       (SETQ |file| (|getEnv| "FRICAS_INITFILE"))
@@ -160,20 +279,25 @@
             (#1='T
              (PROGN
               (SETQ |efile|
-                      (COND ((|make_input_filename| |file|) |file|)
+                      (COND ((SETQ |fn| (|make_input_filename| |file|)) |fn|)
                             (#1#
                              (PROGN
                               (SETQ |file| (LIST '|.fricas| '|input|))
-                              (COND ((|make_input_filename| |file|) |file|)
-                                    (#1#
-                                     (PROGN
-                                      (SETQ |file| (LIST '|.axiom| '|input|))
-                                      (COND
-                                       ((|make_input_filename| |file|) |file|)
-                                       (#1# NIL)))))))))
+                              (COND
+                               ((SETQ |fn| (|make_input_filename| |file|))
+                                |fn|)
+                               (#1#
+                                (PROGN
+                                 (SETQ |file| (LIST '|.axiom| '|input|))
+                                 (COND
+                                  ((SETQ |fn| (|make_input_filename| |file|))
+                                   |fn|)
+                                  (#1# NIL)))))))))
               (COND
                (|efile|
-                (PROGN (SETQ |$edit_file| |efile|) (|read_or_compile| T NIL)))
+                (PROGN
+                 (SETQ |$edit_file| |efile|)
+                 (|read_or_compile| T |efile|)))
                (#1# NIL)))))))))
 
 ; DEFPARAMETER($inRetract, nil)
@@ -182,20 +306,21 @@
 
 ; processInteractive(form, posnForm) ==
 ;     $timedNameStack : local := NIL
-;     initializeTimedNames($interpreterTimedNames,$interpreterTimedClasses);
+;     $statsInfo : local := NIL
+;     initializeTimedStack()
 ;     finally(
 ;         object := processInteractive0(form, posnForm),
 ;           while $timedNameStack repeat stopTimingProcess peekTimedName())
 ;     object
 
 (DEFUN |processInteractive| (|form| |posnForm|)
-  (PROG (|$timedNameStack| |object|)
-    (DECLARE (SPECIAL |$timedNameStack|))
+  (PROG (|$statsInfo| |$timedNameStack| |object|)
+    (DECLARE (SPECIAL |$statsInfo| |$timedNameStack|))
     (RETURN
      (PROGN
       (SETQ |$timedNameStack| NIL)
-      (|initializeTimedNames| |$interpreterTimedNames|
-       |$interpreterTimedClasses|)
+      (SETQ |$statsInfo| NIL)
+      (|initializeTimedStack|)
       (|finally| (SETQ |object| (|processInteractive0| |form| |posnForm|))
        ((LAMBDA ()
           (LOOP
@@ -526,21 +651,46 @@
       (COND ((EQ |c| '|tryAgain|) (|interpretTopLevel| |x| |posnForm|))
             (#1# |c|))))))
 
+; interpret_in_new_env(x) ==
+;     $e : local := [[[]]]
+;     $localExposureData : local := COPY_-SEQ($localExposureDataDefault)
+;     interpret(x, nil)
+
+(DEFUN |interpret_in_new_env| (|x|)
+  (PROG (|$localExposureData| |$e|)
+    (DECLARE (SPECIAL |$localExposureData| |$e|))
+    (RETURN
+     (PROGN
+      (SETQ |$e| (LIST (LIST NIL)))
+      (SETQ |$localExposureData| (COPY-SEQ |$localExposureDataDefault|))
+      (|interpret| |x| NIL)))))
+
 ; interpret(x, posnForm) ==
 ;   --type analyzes and evaluates expression x, returns object
 ;   $env:local := [[NIL]]
 ;   $genValue:local := true       --evaluate all generated code
+;   $compilingMap : local := false
+;   $definingMap : local := false
+;   $minivector : local := NIL
+;   $insideCompileBodyIfTrue : local := false
 ;   -- counter used to limit recursion depth during resolve
 ;   $resolve_level : local := 0
 ;   interpret1(x,nil,posnForm)
 
 (DEFUN |interpret| (|x| |posnForm|)
-  (PROG (|$resolve_level| |$genValue| |$env|)
-    (DECLARE (SPECIAL |$resolve_level| |$genValue| |$env|))
+  (PROG (|$resolve_level| |$insideCompileBodyIfTrue| |$minivector|
+         |$definingMap| |$compilingMap| |$genValue| |$env|)
+    (DECLARE
+     (SPECIAL |$resolve_level| |$insideCompileBodyIfTrue| |$minivector|
+      |$definingMap| |$compilingMap| |$genValue| |$env|))
     (RETURN
      (PROGN
       (SETQ |$env| (LIST (LIST NIL)))
       (SETQ |$genValue| T)
+      (SETQ |$compilingMap| NIL)
+      (SETQ |$definingMap| NIL)
+      (SETQ |$minivector| NIL)
+      (SETQ |$insideCompileBodyIfTrue| NIL)
       (SETQ |$resolve_level| 0)
       (|interpret1| |x| NIL |posnForm|)))))
 

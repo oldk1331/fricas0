@@ -231,7 +231,7 @@
          (% (|List| (|Record| (|:| |val| P) (|:| |tower| TS)))))
         (SPROG
          ((|lpwt| (|List| (|Record| (|:| |val| P) (|:| |tower| TS)))) (|q| (P))
-          (|us| (TS)) (#1=#:G108 NIL) (|bwt| NIL)
+          (|us| (TS)) (#1=#:G100 NIL) (|bwt| NIL)
           (|lbwt|
            (|List| (|Record| (|:| |val| (|Boolean|)) (|:| |tower| TS)))))
          (SEQ
@@ -279,9 +279,9 @@
 
 (DECLAIM (NOTINLINE |NormalizationPackage;|)) 
 
-(DEFUN |NormalizationPackage| (&REST #1=#:G109)
+(DEFUN |NormalizationPackage| (&REST #1=#:G101)
   (SPROG NIL
-         (PROG (#2=#:G110)
+         (PROG (#2=#:G102)
            (RETURN
             (COND
              ((LETT #2#

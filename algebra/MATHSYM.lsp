@@ -351,5 +351,3 @@
                                               8 41 0 0 8 59 0 0 8 39 0 0 8
                                               38)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|MathematicalSymbols| 'NILADIC T) 

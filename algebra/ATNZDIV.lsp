@@ -11,5 +11,3 @@
   (SPROG ((#1=#:G1 NIL))
          (PROG1 (LETT #1# (|Join| (|mkCategory| NIL NIL NIL NIL)))
            (SETELT #1# 0 '(|noZeroDivisors|))))) 
-
-(MAKEPROP '|noZeroDivisors| 'NILADIC T) 

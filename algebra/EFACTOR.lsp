@@ -139,8 +139,10 @@
           (|ups|
            (|Join| (|UnivariatePolynomialCategory| |sae|)
                    (CATEGORY |domain|
-                    (SIGNATURE |outputForm|
-                     ((|OutputForm|) % (|OutputForm|))))))
+                    (SIGNATURE |outputForm| ((|OutputForm|) % (|OutputForm|)))
+                    (IF (|has| |sae| (|Canonical|))
+                        (ATTRIBUTE (|Canonical|))
+                        |noBranch|))))
           (|sae|
            (|Join| (|MonogenicAlgebra| F #3=(|SparseUnivariatePolynomial| F))
                    (CATEGORY |package|
@@ -416,9 +418,9 @@
 
 (DECLAIM (NOTINLINE |ExpressionFactorPolynomial;|)) 
 
-(DEFUN |ExpressionFactorPolynomial| (&REST #1=#:G106)
+(DEFUN |ExpressionFactorPolynomial| (&REST #1=#:G98)
   (SPROG NIL
-         (PROG (#2=#:G107)
+         (PROG (#2=#:G99)
            (RETURN
             (COND
              ((LETT #2#

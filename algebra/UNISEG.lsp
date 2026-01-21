@@ -199,9 +199,9 @@
 
 (DECLAIM (NOTINLINE |UniversalSegment;|)) 
 
-(DEFUN |UniversalSegment| (#1=#:G108)
+(DEFUN |UniversalSegment| (#1=#:G100)
   (SPROG NIL
-         (PROG (#2=#:G109)
+         (PROG (#2=#:G101)
            (RETURN
             (COND
              ((LETT #2#
@@ -302,13 +302,13 @@
               269 |incr| 274 |high| 279 |hasHi| 284 |expand| 289 |convert| 299
               |coerce| 309 SEGMENT 319 BY 330 = 336 - 342 + 348)
            'NIL
-           (CONS (|makeByteWordVec2| 3 '(2 0 3 0 1 3 3))
-                 (CONS '#(NIL NIL |SetCategory&| NIL NIL |BasicType&| NIL)
+           (CONS (|makeByteWordVec2| 3 '(2 0 3 3 3 1 0))
+                 (CONS '#(NIL NIL |SetCategory&| NIL |BasicType&| NIL NIL)
                        (CONS
                         '#((|SegmentExpansionCategory| 6 (|Stream| 6))
-                           (|SegmentCategory| 6) (|SetCategory|) (|Type|)
-                           (|ConvertibleTo| 40) (|BasicType|)
-                           (|CoercibleTo| 31))
+                           (|SegmentCategory| 6) (|SetCategory|)
+                           (|CoercibleTo| 31) (|BasicType|)
+                           (|ConvertibleTo| 40) (|Type|))
                         (|makeByteWordVec2| 76
                                             '(2 9 0 6 6 10 2 9 0 0 12 13 1 9 6
                                               0 16 1 9 6 0 19 1 9 12 0 21 1 9 0
@@ -327,13 +327,13 @@
                                               1 65 0 0 68 2 69 0 0 9 70 1 6 0
                                               12 71 2 57 0 61 6 72 1 9 73 58 74
                                               1 57 0 73 75 2 57 0 0 0 76 2 3 17
-                                              0 0 1 1 0 0 6 8 2 0 0 6 6 11 1 2
+                                              0 0 1 2 0 0 6 6 11 1 0 0 6 8 1 2
                                               0 0 1 2 2 57 61 0 63 1 0 6 0 14 1
                                               3 35 0 1 1 0 12 0 22 1 0 6 0 20 1
-                                              0 17 0 18 1 2 57 0 60 1 2 57 58
-                                              59 1 1 40 0 48 1 0 0 6 27 1 3 31
-                                              0 39 1 0 0 9 25 1 0 0 6 23 2 0 0
-                                              6 6 24 2 0 0 0 12 15 2 3 17 0 0
-                                              30 2 5 0 0 6 56 2 4 0 0 6 53 2 4
-                                              0 6 0 51)))))
+                                              0 17 0 18 1 2 57 58 59 1 2 57 0
+                                              60 1 0 0 6 27 1 1 40 0 48 1 0 0 9
+                                              25 1 3 31 0 39 2 0 0 6 6 24 1 0 0
+                                              6 23 2 0 0 0 12 15 2 3 17 0 0 30
+                                              2 5 0 0 6 56 2 4 0 6 0 51 2 4 0 0
+                                              6 53)))))
            '|lookupComplete|)) 

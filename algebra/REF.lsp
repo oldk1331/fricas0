@@ -27,9 +27,9 @@
 
 (DECLAIM (NOTINLINE |Reference;|)) 
 
-(DEFUN |Reference| (#1=#:G1861)
+(DEFUN |Reference| (#1=#:G1859)
   (SPROG NIL
-         (PROG (#2=#:G1862)
+         (PROG (#2=#:G1860)
            (RETURN
             (COND
              ((LETT #2#
@@ -76,11 +76,11 @@
            '#(~= 21 |setref| 27 |setelt!| 33 |ref| 39 |latex| 44 |elt| 49
               |deref| 54 |coerce| 59 = 64)
            'NIL
-           (CONS (|makeByteWordVec2| 1 '(1 0 1 1))
+           (CONS (|makeByteWordVec2| 1 '(1 1 1 0))
                  (CONS '#(|SetCategory&| NIL |BasicType&| NIL)
                        (CONS
-                        '#((|SetCategory|) (|Type|) (|BasicType|)
-                           (|CoercibleTo| 16))
+                        '#((|SetCategory|) (|CoercibleTo| 16) (|BasicType|)
+                           (|Type|))
                         (|makeByteWordVec2| 21
                                             '(1 16 0 15 17 1 6 16 0 18 2 16 0 0
                                               19 20 1 0 16 0 21 2 1 8 0 0 1 2 0

@@ -15,5 +15,3 @@
                            (|mkCategory| '(((|string| (% (|Integer|))) T)) NIL
                                          NIL NIL)))
            (SETELT #1# 0 '(|StringCategory|))))) 
-
-(MAKEPROP '|StringCategory| 'NILADIC T) 

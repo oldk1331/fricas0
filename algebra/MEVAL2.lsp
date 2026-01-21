@@ -342,5 +342,3 @@
                                                    21 31 2 0 6 19 7 20 4 0 28 8
                                                    7 21 22 29 2 0 6 8 7 10)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|ModularEvaluation2| 'NILADIC T) 

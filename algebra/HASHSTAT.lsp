@@ -23,7 +23,7 @@
 
 (DEFUN |HashState| ()
   (SPROG NIL
-         (PROG (#1=#:G921)
+         (PROG (#1=#:G919)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|HashState|))
@@ -68,5 +68,3 @@
                                             '(1 0 7 0 8 2 0 0 0 7 9 0 0 0
                                               6)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|HashState| 'NILADIC T) 

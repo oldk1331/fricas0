@@ -98,9 +98,7 @@
                                      T))
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 16
-                                            '(1 9 0 8 10 1 0 11 13 14 1 0 11 9
-                                              12 2 0 11 9 13 16 2 0 11 9 9
-                                              15)))))
+                                            '(1 9 0 8 10 2 0 11 9 9 15 2 0 11 9
+                                              13 16 1 0 11 9 12 1 0 11 13
+                                              14)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|ErrorFunctions| 'NILADIC T) 

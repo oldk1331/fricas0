@@ -5,7 +5,7 @@
         (SPROG
          ((|mul2| (|Integer|)) (|fac2| (|List| (|Segment| (|Integer|))))
           (|invert| (|Boolean|)) (|interv| (|Segment| (|Integer|)))
-          (|hi| (|Integer|)) (|lo| (|Integer|)) (#1=#:G46 NIL) (|x| NIL))
+          (|hi| (|Integer|)) (|lo| (|Integer|)) (#1=#:G38 NIL) (|x| NIL))
          (SEQ (LETT |mul2| |mul1|) (LETT |fac2| NIL) (LETT |invert| NIL)
               (SEQ (LETT |x| NIL) (LETT #1# |fac1|) G190
                    (COND
@@ -30,7 +30,7 @@
         ((|mul1| (|Integer|)) (|fac1| (|List| (|List| (|Integer|)))) (% (%)))
         (SPROG
          ((|fac2| (|List| (|Segment| (|Integer|))))
-          (|interv| (|Segment| (|Integer|))) (#1=#:G56 NIL) (|x| NIL))
+          (|interv| (|Segment| (|Integer|))) (#1=#:G48 NIL) (|x| NIL))
          (SEQ (LETT |fac2| NIL)
               (SEQ (LETT |x| NIL) (LETT #1# |fac1|) G190
                    (COND
@@ -62,8 +62,8 @@
 
 (SDEFUN |CFACET;order;%Nni;5| ((|f| (%)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((|value| (|NonNegativeInteger|)) (#1=#:G62 NIL) (|hi| (|Integer|))
-          (|lo| (|Integer|)) (#2=#:G67 NIL) (|seg| NIL)
+         ((|value| (|NonNegativeInteger|)) (#1=#:G54 NIL) (|hi| (|Integer|))
+          (|lo| (|Integer|)) (#2=#:G59 NIL) (|seg| NIL)
           (|facet| (|List| (|Segment| (|Integer|)))))
          (SEQ (LETT |value| 0) (LETT |facet| (QCDR |f|))
               (SEQ (LETT |seg| NIL) (LETT #2# |facet|) G190
@@ -92,7 +92,7 @@
                     (EXIT (SPADCALL |m| |fac2| (QREFELT % 14)))))) 
 
 (SDEFUN |CFACET;position;%LI;8| ((|e| (%)) (|lst| (|List| %)) (% (|Integer|)))
-        (SPROG ((#1=#:G80 NIL) (|res| (|Integer|)) (#2=#:G81 NIL) (|x| NIL))
+        (SPROG ((#1=#:G72 NIL) (|res| (|Integer|)) (#2=#:G73 NIL) (|x| NIL))
                (SEQ
                 (EXIT
                  (SEQ (LETT |res| 1)
@@ -106,7 +106,7 @@
                               (SEQ
                                (COND
                                 ((EQL (QCAR |e|) (QCAR |x|))
-                                 (PROGN (LETT #1# |res|) (GO #3=#:G79))))
+                                 (PROGN (LETT #1# |res|) (GO #3=#:G71))))
                                (EXIT (PROGN (LETT #1# (- |res|)) (GO #3#))))))
                             (EXIT (LETT |res| (+ |res| 1))))
                            (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
@@ -497,12 +497,12 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0))
                  (CONS
-                  '#(|FacetCategory&| |OrderedSet&| NIL |SetCategory&|
-                     |PartialOrder&| |BasicType&| NIL)
+                  '#(|FacetCategory&| |OrderedSet&| NIL |SetCategory&| NIL
+                     |BasicType&| |PartialOrder&|)
                   (CONS
                    '#((|FacetCategory|) (|OrderedSet|) (|Comparable|)
-                      (|SetCategory|) (|PartialOrder|) (|BasicType|)
-                      (|CoercibleTo| 54))
+                      (|SetCategory|) (|CoercibleTo| 54) (|BasicType|)
+                      (|PartialOrder|))
                    (|makeByteWordVec2| 60
                                        '(1 8 7 0 9 1 8 7 0 10 2 8 0 7 7 11 2 12
                                          0 0 8 13 2 7 15 0 0 16 1 17 7 0 18 1
@@ -516,12 +516,10 @@
                                          0 0 0 7 28 2 0 15 0 0 49 2 0 0 0 0 33
                                          2 0 7 0 30 31 1 0 25 0 26 2 0 0 0 0 1
                                          2 0 0 0 0 1 1 0 53 0 1 1 0 7 0 27 1 0
-                                         12 0 24 1 0 15 0 40 2 0 0 7 21 23 2 0
-                                         0 7 19 20 2 0 0 7 12 14 1 0 54 0 60 1
-                                         0 30 0 39 3 0 30 0 25 25 47 2 0 30 0
-                                         25 46 2 0 15 0 0 1 2 0 15 0 0 1 2 0 15
+                                         12 0 24 1 0 15 0 40 2 0 0 7 12 14 2 0
+                                         0 7 19 20 2 0 0 7 21 23 1 0 54 0 60 1
+                                         0 30 0 39 2 0 30 0 25 46 3 0 30 0 25
+                                         25 47 2 0 15 0 0 1 2 0 15 0 0 1 2 0 15
                                          0 0 52 2 0 15 0 0 51 2 0 15 0 0
                                          50)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|CubicalFacet| 'NILADIC T) 

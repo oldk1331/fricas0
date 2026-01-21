@@ -98,21 +98,19 @@
               (|Union| 7 '"failed") |TEXTFILE;readLineIfCan!;%U;4|
               |TEXTFILE;readIfCan!;%U;2| (|Boolean|) (0 . ~=)
               |TEXTFILE;write!;%2S;5| |TEXTFILE;writeLine!;%S;6|
-              |TEXTFILE;writeLine!;%2S;7| |TEXTFILE;endOfFile?;%B;8| (|Void|)
-              (|FileName|) (|OutputForm|))
+              |TEXTFILE;writeLine!;%2S;7| |TEXTFILE;endOfFile?;%B;8|
+              (|OutputForm|) (|FileName|) (|Void|))
            '#(|writeLine!| 6 |write!| 17 |readLineIfCan!| 23 |readLine!| 28
               |readIfCan!| 33 |read!| 38 |endOfFile?| 43)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0))
-                 (CONS '#(NIL |SetCategory&| |BasicType&| NIL)
+                 (CONS '#(NIL |SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|FileCategory| 20 7) (|SetCategory|) (|BasicType|)
-                           (|CoercibleTo| 21))
+                        '#((|FileCategory| 20 7) (|SetCategory|)
+                           (|CoercibleTo| 19) (|BasicType|))
                         (|makeByteWordVec2| 18
-                                            '(2 7 13 0 0 14 2 0 7 0 7 17 1 0 7
-                                              0 16 2 0 7 0 7 15 1 0 10 0 11 1 0
+                                            '(2 7 13 0 0 14 1 0 7 0 16 2 0 7 0
+                                              7 17 2 0 7 0 7 15 1 0 10 0 11 1 0
                                               7 0 8 1 0 10 0 12 1 0 7 0 9 1 0
                                               13 0 18)))))
            '|lookupIncomplete|)) 
-
-(MAKEPROP '|TextFile| 'NILADIC T) 

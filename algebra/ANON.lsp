@@ -40,15 +40,13 @@
 (MAKEPROP '|AnonymousFunction| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|OutputForm|) |ANON;coerce;%Of;1|
-              (|String|) (|Boolean|))
+              (|Boolean|) (|String|))
            '#(~= 0 |latex| 6 |coerce| 11 = 16) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 6))
+                        '#((|SetCategory|) (|CoercibleTo| 6) (|BasicType|))
                         (|makeByteWordVec2| 9
-                                            '(2 0 9 0 0 1 1 0 8 0 1 1 0 6 0 7 2
-                                              0 9 0 0 1)))))
+                                            '(2 0 8 0 0 1 1 0 9 0 1 1 0 6 0 7 2
+                                              0 8 0 0 1)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|AnonymousFunction| 'NILADIC T) 

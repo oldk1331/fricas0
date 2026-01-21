@@ -62,18 +62,16 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0))
                  (CONS
-                  '#(|OrderedSet&| NIL |SetCategory&| |BasicType&|
-                     |PartialOrder&| NIL)
+                  '#(|OrderedSet&| NIL |SetCategory&| NIL |PartialOrder&|
+                     |BasicType&|)
                   (CONS
                    '#((|OrderedSet|) (|Comparable|) (|SetCategory|)
-                      (|BasicType|) (|PartialOrder|) (|CoercibleTo| 13))
+                      (|CoercibleTo| 13) (|PartialOrder|) (|BasicType|))
                    (|makeByteWordVec2| 19
                                        '(1 14 13 0 15 1 6 13 0 16 2 13 0 0 0 17
                                          2 0 7 0 0 1 1 0 10 0 12 2 0 7 0 0 1 2
-                                         0 0 0 0 1 2 0 0 0 0 1 1 0 19 0 1 1 0 0
-                                         10 11 1 0 13 0 18 2 0 7 0 0 1 2 0 7 0
-                                         0 1 2 0 7 0 0 8 2 0 7 0 0 1 2 0 7 0 0
-                                         9)))))
+                                         0 0 0 0 1 2 0 0 0 0 1 1 0 19 0 1 1 0
+                                         13 0 18 1 0 0 10 11 2 0 7 0 0 1 2 0 7
+                                         0 0 1 2 0 7 0 0 8 2 0 7 0 0 1 2 0 7 0
+                                         0 9)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|OrdSetInts| 'NILADIC T) 

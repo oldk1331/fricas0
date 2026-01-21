@@ -42,12 +42,10 @@
               |NONE;coerce;%Of;1| (|Boolean|) |NONE;=;2%B;2|)
            '#(~= 5 |latex| 11 |coerce| 16 = 21) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 7))
+                        '#((|SetCategory|) (|CoercibleTo| 7) (|BasicType|))
                         (|makeByteWordVec2| 11
                                             '(1 7 0 6 8 2 0 10 0 0 1 1 0 6 0 1
                                               1 0 7 0 9 2 0 10 0 0 11)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|None| 'NILADIC T) 

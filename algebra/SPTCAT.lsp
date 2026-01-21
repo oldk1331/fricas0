@@ -54,5 +54,3 @@
                               ((|coerce| ((|OutputForm|) %)) T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|SPointCategory|))))) 
-
-(MAKEPROP '|SPointCategory| 'NILADIC T) 

@@ -169,9 +169,9 @@
               (|Vector| 6) (120 . |map|) (|Matrix| 7) (126 . |coordinates|)
               (132 . |derivationCoordinates|) (138 . |One|)
               (|Record| (|:| |coef1| %) (|:| |coef2| %)) (|Union| 55 '"failed")
-              (142 . |extendedEuclidean|) (149 . |recip|) (|List| 61)
-              (|List| 15) (|Symbol|) (|InputForm|) (|Union| 64 '#1#)
-              (|Fraction| 66) (|Union| 66 '#1#) (|Integer|) (|Vector| 7))
+              (142 . |extendedEuclidean|) (149 . |recip|) (|Vector| 7)
+              (|Integer|) (|Union| 60 '#1#) (|Fraction| 60) (|Union| 62 '#1#)
+              (|InputForm|) (|List| 66) (|Symbol|) (|List| 15))
            '#(|retractIfCan| 154 |retract| 159 |reduce| 164 |recip| 169 |norm|
               174 |generator| 179 |differentiate| 183 |derivationCoordinates|
               189 |convert| 195 |characteristicPolynomial| 205 |basis| 210)
@@ -247,7 +247,7 @@
                                               56 0 0 0 57 1 0 36 0 58 1 0 23 0
                                               25 1 0 7 0 22 1 0 36 33 38 1 0 36
                                               0 58 1 0 7 0 20 0 0 0 17 2 0 0 0
-                                              39 46 2 0 51 28 39 53 1 0 0 8 12
-                                              1 0 8 0 10 1 0 8 0 32 0 0 28
+                                              39 46 2 0 51 28 39 53 1 0 8 0 10
+                                              1 0 0 8 12 1 0 8 0 32 0 0 28
                                               29)))))
            '|lookupComplete|)) 

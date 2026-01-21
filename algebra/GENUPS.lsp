@@ -62,11 +62,10 @@
 (MAKEPROP '|GenerateUnivariatePowerSeries| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL (|GenerateUnivariatePowerSeries2| 7)
-              (|local| |#1|) (|local| |#2|) (|Any|) (|Symbol|) (|Equation| 7)
-              (|UniversalSegment| 12) (|Fraction| (|Integer|))
-              (|UniversalSegment| (|Integer|))
-              (|UniversalSegment| (|NonNegativeInteger|))
-              (|Mapping| 7 (|Integer|)) (|Mapping| 7 12))
+              (|local| |#1|) (|local| |#2|) (|Any|) (|Mapping| 7 (|Integer|))
+              (|Equation| 7) (|UniversalSegment| (|Integer|)) (|Mapping| 7 14)
+              (|UniversalSegment| 14) (|Fraction| (|Integer|))
+              (|UniversalSegment| (|NonNegativeInteger|)) (|Symbol|))
            '#() 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -130,22 +129,22 @@
                                   (|UniversalSegment| (|Fraction| (|Integer|)))
                                   (|Fraction| (|Integer|))))
                                 (AND (|has| 7 (|Evalable| 7))
-                                     (|has| 7 (|RetractableTo| 12))))
+                                     (|has| 7 (|RetractableTo| 14))))
                               '((|series|
                                  ((|Any|) |#2| (|Symbol|) (|Equation| |#2|)))
                                 (AND (|has| 7 (|Evalable| 7))
-                                     (|has| 7 (|RetractableTo| 12))))
+                                     (|has| 7 (|RetractableTo| 14))))
                               '((|series|
                                  ((|Any|) |#2| (|Symbol|) (|Equation| |#2|)
                                   (|UniversalSegment| (|Integer|))))
                                 (AND (|has| 7 (|Evalable| 7))
-                                     (|has| 7 (|RetractableTo| 12))))
+                                     (|has| 7 (|RetractableTo| 14))))
                               '((|series|
                                  ((|Any|) |#2| (|Symbol|) (|Equation| |#2|)
                                   (|UniversalSegment| (|Fraction| (|Integer|)))
                                   (|Fraction| (|Integer|))))
                                 (AND (|has| 7 (|Evalable| 7))
-                                     (|has| 7 (|RetractableTo| 12)))))
+                                     (|has| 7 (|RetractableTo| 14)))))
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| -999999 'NIL))))
            '|lookupIncomplete|)) 

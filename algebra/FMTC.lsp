@@ -17,5 +17,3 @@
                                    (|Join| (|IntegralDomain|) (|OrderedSet|)
                                            (|RetractableTo| '#2#))))
            (SETELT #1# 0 '(|FortranMachineTypeCategory|))))) 
-
-(MAKEPROP '|FortranMachineTypeCategory| 'NILADIC T) 

@@ -293,5 +293,3 @@
                                               1 0 6 7 16 0 0 6 1 0 0 6 1 0 0 6
                                               13)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|CubicalComplexFactory| 'NILADIC T) 

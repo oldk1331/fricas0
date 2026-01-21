@@ -17,5 +17,3 @@
                             '(((|subtractIfCan| ((|Union| % "failed") % %)) T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|CancellationAbelianMonoid|))))) 
-
-(MAKEPROP '|CancellationAbelianMonoid| 'NILADIC T) 

@@ -16,5 +16,3 @@
                                             '(((|latex| ((|String|) %)) T)) NIL
                                             NIL NIL))))
            (SETELT #1# 0 '(|SetCategory|))))) 
-
-(MAKEPROP '|SetCategory| 'NILADIC T) 

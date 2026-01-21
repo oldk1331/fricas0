@@ -3,9 +3,41 @@
 
 (IN-PACKAGE "BOOT")
 
+; $printLoadMsgs := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$printLoadMsgs| NIL))
+
 ; $spadLibFT := 'NRLIB
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$spadLibFT| 'NRLIB))
+
+; $LISPLIB := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ $LISPLIB NIL))
+
+; $libFile := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$libFile| NIL))
+
+; $lisplibForm := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$lisplibForm| NIL))
+
+; $lisplibKind := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$lisplibKind| NIL))
+
+; $lisplibModemapAlist := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$lisplibModemapAlist| NIL))
+
+; $lisplibModemap := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$lisplibModemap| NIL))
+
+; $lisplibOperationAlist := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$lisplibOperationAlist| NIL))
 
 ; readLib(fn) == rMkIstream(make_filename(fn))
 
@@ -29,13 +61,6 @@
 
 (DEFUN |lisplibWrite| (|prop| |val| |filename|)
   (PROG () (RETURN (COND ($LISPLIB (|rwrite| |prop| |val| |filename|))))))
-
-; evalAndRwriteLispForm(key,form) ==
-;   eval form
-;   rwriteLispForm(key,form)
-
-(DEFUN |evalAndRwriteLispForm| (|key| |form|)
-  (PROG () (RETURN (PROGN (|eval| |form|) (|rwriteLispForm| |key| |form|)))))
 
 ; rwriteLispForm(key,form) ==
 ;   if $LISPLIB then
@@ -61,89 +86,60 @@
 
 ; loadLib cname ==
 ;   startTimingProcess 'load
-;   fullLibName := GETDATABASE(cname,'OBJECT) or return nil
-;   systemdir? := isSystemDirectory(pathnameDirectory fullLibName)
-;   update? := $forceDatabaseUpdate or not systemdir?
-;   not update? =>
-;      loadLibNoUpdate(cname, cname, fullLibName)
-;   kind := GETDATABASE(cname,'CONSTRUCTORKIND)
-;   if $printLoadMsgs then
-;     sayKeyedMsg("S2IL0002", [fullLibName, kind, cname])
-;   load_quietly(fullLibName)
-;   clearConstructorCache cname
-;   updateDatabase(cname)
-;   installConstructor(cname)
-;   u := GETDATABASE(cname, 'CONSTRUCTORMODEMAP)
-;   updateCategoryTable(cname,kind)
-;   -- in following, add property value false or NIL to possibly clear
-;   -- old value
-;   if null rest GETDATABASE(cname, 'CONSTRUCTORFORM) then
-;       MAKEPROP(cname,'NILADIC,'T)
-;     else
-;       REMPROP(cname,'NILADIC)
-;   MAKEPROP(cname,'LOADED,fullLibName)
-;   if $InteractiveMode then $CategoryFrame := [[nil]]
+;   fullLibName := get_database(cname, 'OBJECT) or return nil
+;   systemdir? := isSystemDirectory(fullLibName)
+;   update? := not systemdir?
+;   loadLibNoUpdate1(cname, fullLibName)
+;   kind := get_database(cname, 'CONSTRUCTORKIND)
+;   if update? then
+;       updateCategoryTable(cname, kind)
 ;   stopTimingProcess 'load
-;   'T
 
 (DEFUN |loadLib| (|cname|)
-  (PROG (|fullLibName| |systemdir?| |update?| |kind| |u|)
+  (PROG (|fullLibName| |systemdir?| |update?| |kind|)
     (RETURN
      (PROGN
       (|startTimingProcess| '|load|)
-      (SETQ |fullLibName| (OR (GETDATABASE |cname| 'OBJECT) (RETURN NIL)))
-      (SETQ |systemdir?|
-              (|isSystemDirectory| (|pathnameDirectory| |fullLibName|)))
-      (SETQ |update?| (OR |$forceDatabaseUpdate| (NULL |systemdir?|)))
-      (COND
-       ((NULL |update?|) (|loadLibNoUpdate| |cname| |cname| |fullLibName|))
-       (#1='T
-        (PROGN
-         (SETQ |kind| (GETDATABASE |cname| 'CONSTRUCTORKIND))
-         (COND
-          (|$printLoadMsgs|
-           (|sayKeyedMsg| 'S2IL0002 (LIST |fullLibName| |kind| |cname|))))
-         (|load_quietly| |fullLibName|)
-         (|clearConstructorCache| |cname|)
-         (|updateDatabase| |cname|)
-         (|installConstructor| |cname|)
-         (SETQ |u| (GETDATABASE |cname| 'CONSTRUCTORMODEMAP))
-         (|updateCategoryTable| |cname| |kind|)
-         (COND
-          ((NULL (CDR (GETDATABASE |cname| 'CONSTRUCTORFORM)))
-           (MAKEPROP |cname| 'NILADIC 'T))
-          (#1# (REMPROP |cname| 'NILADIC)))
-         (MAKEPROP |cname| 'LOADED |fullLibName|)
-         (COND (|$InteractiveMode| (SETQ |$CategoryFrame| (LIST (LIST NIL)))))
-         (|stopTimingProcess| '|load|)
-         'T)))))))
+      (SETQ |fullLibName| (OR (|get_database| |cname| 'OBJECT) (RETURN NIL)))
+      (SETQ |systemdir?| (|isSystemDirectory| |fullLibName|))
+      (SETQ |update?| (NULL |systemdir?|))
+      (|loadLibNoUpdate1| |cname| |fullLibName|)
+      (SETQ |kind| (|get_database| |cname| 'CONSTRUCTORKIND))
+      (COND (|update?| (|updateCategoryTable| |cname| |kind|)))
+      (|stopTimingProcess| '|load|)))))
 
-; loadLibNoUpdate(cname, libName, fullLibName) ==
-;   kind := GETDATABASE(cname,'CONSTRUCTORKIND)
+; loadLibNoUpdate1(cname, fullLibName) ==
 ;   if $printLoadMsgs then
 ;     sayKeyedMsg("S2IL0002", [fullLibName, kind, cname])
 ;   load_quietly(fullLibName)
 ;   clearConstructorCache cname
 ;   installConstructor(cname)
 ;   MAKEPROP(cname,'LOADED,fullLibName)
-;   -- if $InteractiveMode then $CategoryFrame := [[nil]]
-;   stopTimingProcess 'load
-;   'T
 
-(DEFUN |loadLibNoUpdate| (|cname| |libName| |fullLibName|)
-  (PROG (|kind|)
+(DEFUN |loadLibNoUpdate1| (|cname| |fullLibName|)
+  (PROG ()
     (RETURN
      (PROGN
-      (SETQ |kind| (GETDATABASE |cname| 'CONSTRUCTORKIND))
       (COND
        (|$printLoadMsgs|
         (|sayKeyedMsg| 'S2IL0002 (LIST |fullLibName| |kind| |cname|))))
       (|load_quietly| |fullLibName|)
       (|clearConstructorCache| |cname|)
       (|installConstructor| |cname|)
-      (MAKEPROP |cname| 'LOADED |fullLibName|)
-      (|stopTimingProcess| '|load|)
-      'T))))
+      (MAKEPROP |cname| 'LOADED |fullLibName|)))))
+
+; loadLibNoUpdate(cname, fullLibName) ==
+;     startTimingProcess 'load
+;     loadLibNoUpdate1(cname, fullLibName)
+;     stopTimingProcess 'load
+
+(DEFUN |loadLibNoUpdate| (|cname| |fullLibName|)
+  (PROG ()
+    (RETURN
+     (PROGN
+      (|startTimingProcess| '|load|)
+      (|loadLibNoUpdate1| |cname| |fullLibName|)
+      (|stopTimingProcess| '|load|)))))
 
 ; loadIfNecessary u == loadLibIfNecessary(u,true)
 
@@ -163,7 +159,7 @@
 ;     loadLib u => u
 ;   null $InteractiveMode and ((null (y:= getProplist(u,$CategoryFrame)))
 ;     or (null LASSOC('isFunctor,y)) and (null LASSOC('isCategory,y))) =>
-;       y:= GETDATABASE(u,'CONSTRUCTORKIND) =>
+;       y:= get_database(u, 'CONSTRUCTORKIND) =>
 ;          y = 'category =>
 ;             updateCategoryFrameForCategory u
 ;          updateCategoryFrameForConstructor u
@@ -186,7 +182,7 @@
                         (AND (NULL (LASSOC '|isFunctor| |y|))
                              (NULL (LASSOC '|isCategory| |y|)))))
                (COND
-                ((SETQ |y| (GETDATABASE |u| 'CONSTRUCTORKIND))
+                ((SETQ |y| (|get_database| |u| 'CONSTRUCTORKIND))
                  (COND
                   ((EQ |y| '|category|) (|updateCategoryFrameForCategory| |u|))
                   (#1# (|updateCategoryFrameForConstructor| |u|))))
@@ -247,8 +243,9 @@
       (LIST (LIST |op| |typelist|) |pred| (LIST |impl| '% |slot|))))))
 
 ; updateCategoryFrameForConstructor(constructor) ==
-;    opAlist := GETDATABASE(constructor, 'OPERATIONALIST)
-;    [[dc,:sig],[pred,impl]] := GETDATABASE(constructor, 'CONSTRUCTORMODEMAP)
+;    opAlist := get_database(constructor, 'OPERATIONALIST)
+;    [[dc, :sig], [pred, impl]] :=
+;         get_database(constructor, 'CONSTRUCTORMODEMAP)
 ;    $CategoryFrame := put(constructor,'isFunctor,
 ;        convertOpAlist2compilerInfo(opAlist),
 ;        addModemap(constructor, dc, sig, pred, impl,
@@ -258,8 +255,8 @@
   (PROG (|opAlist| |LETTMP#1| |dc| |sig| |pred| |impl|)
     (RETURN
      (PROGN
-      (SETQ |opAlist| (GETDATABASE |constructor| 'OPERATIONALIST))
-      (SETQ |LETTMP#1| (GETDATABASE |constructor| 'CONSTRUCTORMODEMAP))
+      (SETQ |opAlist| (|get_database| |constructor| 'OPERATIONALIST))
+      (SETQ |LETTMP#1| (|get_database| |constructor| 'CONSTRUCTORMODEMAP))
       (SETQ |dc| (CAAR . #1=(|LETTMP#1|)))
       (SETQ |sig| (CDAR . #1#))
       (SETQ |pred| (CAADR . #2=(|LETTMP#1|)))
@@ -272,7 +269,7 @@
                  |$CategoryFrame|))))))))
 
 ; updateCategoryFrameForCategory(category) ==
-;    di := GETDATABASE(category, 'CONSTRUCTORMODEMAP)
+;    di := get_database(category, 'CONSTRUCTORMODEMAP)
 ;    if di then
 ;        [[dc,:sig],[pred,impl]] := di
 ;        $CategoryFrame :=
@@ -283,7 +280,7 @@
   (PROG (|di| |dc| |sig| |pred| |impl|)
     (RETURN
      (PROGN
-      (SETQ |di| (GETDATABASE |category| 'CONSTRUCTORMODEMAP))
+      (SETQ |di| (|get_database| |category| 'CONSTRUCTORMODEMAP))
       (COND
        (|di| (SETQ |dc| (CAAR . #1=(|di|))) (SETQ |sig| (CDAR . #1#))
         (SETQ |pred| (CAADR . #2=(|di|))) (SETQ |impl| (CADADR . #2#))
@@ -307,9 +304,6 @@
 ; makeConstructorsAutoLoad() ==
 ;   for cnam in allConstructors() repeat
 ;     REMPROP(cnam,'LOADED)
-;     if GETDATABASE(cnam,'NILADIC)
-;      then PUT(cnam,'NILADIC,'T)
-;      else REMPROP(cnam,'NILADIC)
 ;     systemDependentMkAutoload(cnam,cnam)
 
 (DEFUN |makeConstructorsAutoLoad| ()
@@ -320,80 +314,53 @@
          (COND
           ((OR (ATOM |bfVar#7|) (PROGN (SETQ |cnam| (CAR |bfVar#7|)) NIL))
            (RETURN NIL))
-          (#1='T
+          ('T
            (PROGN
             (REMPROP |cnam| 'LOADED)
-            (COND ((GETDATABASE |cnam| 'NILADIC) (PUT |cnam| 'NILADIC 'T))
-                  (#1# (REMPROP |cnam| 'NILADIC)))
             (|systemDependentMkAutoload| |cnam| |cnam|))))
          (SETQ |bfVar#7| (CDR |bfVar#7|))))
       (|allConstructors|) NIL))))
 
 ; systemDependentMkAutoload(fn,cnam) ==
 ;     FBOUNDP(cnam) => "next"
-;     asharpName := GETDATABASE(cnam, 'ASHARP?) =>
-;          kind := GETDATABASE(cnam, 'CONSTRUCTORKIND)
-;          cosig := GETDATABASE(cnam, 'COSIG)
-;          file := GETDATABASE(cnam, 'OBJECT)
+;     asharpName := get_database(cnam, 'ASHARP?) =>
+;          kind := get_database(cnam, 'CONSTRUCTORKIND)
+;          cosig := get_database(cnam, 'COSIG)
+;          file := get_database(cnam, 'OBJECT)
 ;          SET_-LIB_-FILE_-GETTER(file, cnam)
 ;          kind = 'category =>
 ;               ASHARPMKAUTOLOADCATEGORY(file, cnam, asharpName, cosig)
 ;          ASHARPMKAUTOLOADFUNCTOR(file, cnam, asharpName, cosig)
-;     SETF(SYMBOL_-FUNCTION cnam,mkAutoLoad(fn, cnam))
+;     spad_set_autoload(cnam)
 
 (DEFUN |systemDependentMkAutoload| (|fn| |cnam|)
   (PROG (|asharpName| |kind| |cosig| |file|)
     (RETURN
      (COND ((FBOUNDP |cnam|) '|next|)
-           ((SETQ |asharpName| (GETDATABASE |cnam| 'ASHARP?))
+           ((SETQ |asharpName| (|get_database| |cnam| 'ASHARP?))
             (PROGN
-             (SETQ |kind| (GETDATABASE |cnam| 'CONSTRUCTORKIND))
-             (SETQ |cosig| (GETDATABASE |cnam| 'COSIG))
-             (SETQ |file| (GETDATABASE |cnam| 'OBJECT))
+             (SETQ |kind| (|get_database| |cnam| 'CONSTRUCTORKIND))
+             (SETQ |cosig| (|get_database| |cnam| 'COSIG))
+             (SETQ |file| (|get_database| |cnam| 'OBJECT))
              (SET-LIB-FILE-GETTER |file| |cnam|)
              (COND
               ((EQ |kind| '|category|)
                (ASHARPMKAUTOLOADCATEGORY |file| |cnam| |asharpName| |cosig|))
               (#1='T
                (ASHARPMKAUTOLOADFUNCTOR |file| |cnam| |asharpName| |cosig|)))))
-           (#1# (SETF (SYMBOL-FUNCTION |cnam|) (|mkAutoLoad| |fn| |cnam|)))))))
+           (#1# (|spad_set_autoload| |cnam|))))))
 
-; autoLoad(abb,cname) ==
+; autoLoad(cname) ==
 ;   if not GET(cname, 'LOADED) then
 ;       FMAKUNBOUND cname
 ;       loadLib cname
-;   SYMBOL_-FUNCTION cname
 
-(DEFUN |autoLoad| (|abb| |cname|)
+(DEFUN |autoLoad| (|cname|)
   (PROG ()
     (RETURN
-     (PROGN
-      (COND
-       ((NULL (GET |cname| 'LOADED)) (FMAKUNBOUND |cname|)
-        (|loadLib| |cname|)))
-      (SYMBOL-FUNCTION |cname|)))))
-
-; setAutoLoadProperty(name) ==
-;   REMPROP(name,'LOADED)
-;   SETF(SYMBOL_-FUNCTION name,mkAutoLoad(name, name))
-
-(DEFUN |setAutoLoadProperty| (|name|)
-  (PROG ()
-    (RETURN
-     (PROGN
-      (REMPROP |name| 'LOADED)
-      (SETF (SYMBOL-FUNCTION |name|) (|mkAutoLoad| |name| |name|))))))
-
-; unloadOneConstructor(cnam,fn) ==
-;     REMPROP(cnam,'LOADED)
-;     SETF(SYMBOL_-FUNCTION cnam,mkAutoLoad(fn, cnam))
-
-(DEFUN |unloadOneConstructor| (|cnam| |fn|)
-  (PROG ()
-    (RETURN
-     (PROGN
-      (REMPROP |cnam| 'LOADED)
-      (SETF (SYMBOL-FUNCTION |cnam|) (|mkAutoLoad| |fn| |cnam|))))))
+     (COND
+      ((NULL (GET |cname| 'LOADED)) (FMAKUNBOUND |cname|)
+       (|loadLib| |cname|))))))
 
 ; compDefineLisplib(df:=["DEF",[op,:.],:.],m,e,prefix,fal,fn) ==
 ;   --fn= compDefineCategory OR compDefineFunctor
@@ -432,8 +399,7 @@
 ;   compile_lib(make_full_namestring(make_filename0(libName, $spadLibFT)))
 ;   FRESH_-LINE(get_algebra_stream())
 ;   sayMSG fillerSpaces(72,'"-")
-;   unloadOneConstructor(op,libName)
-;   LOCALDATABASE(LIST GETDATABASE(op,'ABBREVIATION),NIL)
+;   merge_info_from_objects([get_database(op, 'ABBREVIATION)], [], false)
 ;   $newConlist := [op, :$newConlist]  ---------->  bound in function "compiler"
 ;   if $lisplibKind = 'category
 ;     then updateCategoryFrameForCategory op
@@ -495,8 +461,8 @@
        (|make_full_namestring| (|make_filename0| |libName| |$spadLibFT|)))
       (FRESH-LINE (|get_algebra_stream|))
       (|sayMSG| (|fillerSpaces| 72 "-"))
-      (|unloadOneConstructor| |op| |libName|)
-      (LOCALDATABASE (LIST (GETDATABASE |op| 'ABBREVIATION)) NIL)
+      (|merge_info_from_objects| (LIST (|get_database| |op| 'ABBREVIATION)) NIL
+       NIL)
       (SETQ |$newConlist| (CONS |op| |$newConlist|))
       (COND
        ((EQ |$lisplibKind| '|category|)
@@ -536,8 +502,6 @@
 ;   lisplibWrite('"parents",removeZeroOne $lisplibParents,$libFile)
 ;   lisplibWrite('"ancestors",removeZeroOne $lisplibAncestors,$libFile)
 ;   lisplibWrite('"documentation",finalizeDocumentation(),$libFile)
-;   if $lisplibForm and null rest $lisplibForm then
-;     MAKEPROP(first $lisplibForm, 'NILADIC, 'T)
 
 (DEFUN |finalizeLisplib| (|libName|)
   (PROG (|kind| |ops|)
@@ -565,10 +529,7 @@
       (|lisplibWrite| "parents" (|removeZeroOne| |$lisplibParents|) |$libFile|)
       (|lisplibWrite| "ancestors" (|removeZeroOne| |$lisplibAncestors|)
        |$libFile|)
-      (|lisplibWrite| "documentation" (|finalizeDocumentation|) |$libFile|)
-      (COND
-       ((AND |$lisplibForm| (NULL (CDR |$lisplibForm|)))
-        (MAKEPROP (CAR |$lisplibForm|) 'NILADIC 'T)))))))
+      (|lisplibWrite| "documentation" (|finalizeDocumentation|) |$libFile|)))))
 
 ; lisplibDoRename(libName) ==
 ;     replace_lib(make_filename0(libName, '"erlib"),
@@ -752,13 +713,13 @@
       |newAlist|))))
 
 ; getConstructorModemap form ==
-;   GETDATABASE(opOf form, 'CONSTRUCTORMODEMAP)
+;     get_database(opOf(form), 'CONSTRUCTORMODEMAP)
 
 (DEFUN |getConstructorModemap| (|form|)
-  (PROG () (RETURN (GETDATABASE (|opOf| |form|) 'CONSTRUCTORMODEMAP))))
+  (PROG () (RETURN (|get_database| (|opOf| |form|) 'CONSTRUCTORMODEMAP))))
 
 ; getConstructorSignature form ==
-;   (mm := GETDATABASE(opOf(form),'CONSTRUCTORMODEMAP)) =>
+;   (mm := get_database(opOf(form), 'CONSTRUCTORMODEMAP)) =>
 ;     [[.,:sig],:.] := mm
 ;     sig
 ;   NIL
@@ -767,7 +728,7 @@
   (PROG (|mm| |sig|)
     (RETURN
      (COND
-      ((SETQ |mm| (GETDATABASE (|opOf| |form|) 'CONSTRUCTORMODEMAP))
+      ((SETQ |mm| (|get_database| (|opOf| |form|) 'CONSTRUCTORMODEMAP))
        (PROGN (SETQ |sig| (CDAR |mm|)) |sig|))
       ('T NIL)))))
 
@@ -836,7 +797,7 @@
 ;     MEMQ(op,$CategoryNames) =>
 ;         [x, m, e] := compOrCroak(c, $EmptyMode, e)
 ;         m=$Category => optFunctorBody x
-;     GETDATABASE(op,'CONSTRUCTORKIND) = 'category or
+;     get_database(op, 'CONSTRUCTORKIND) = 'category or
 ;       get(op,"isCategory",$CategoryFrame) =>
 ;         [op,:[quotifyCategoryArgument x for x in argl]]
 ;     [x, m, e] := compOrCroak(c, $EmptyMode, e)
@@ -878,7 +839,7 @@
           (SETQ |m| (CADR . #2=(|LETTMP#1|)))
           (SETQ |e| (CADDR . #2#))
           (COND ((EQUAL |m| |$Category|) (|optFunctorBody| |x|)))))
-        ((OR (EQ (GETDATABASE |op| 'CONSTRUCTORKIND) '|category|)
+        ((OR (EQ (|get_database| |op| 'CONSTRUCTORKIND) '|category|)
              (|get| |op| '|isCategory| |$CategoryFrame|))
          (CONS |op|
                ((LAMBDA (|bfVar#14| |bfVar#13| |x|)
@@ -953,12 +914,12 @@
 ;   not IDENTP op => false
 ;   $InteractiveMode =>
 ;     MEMQ(op,'(Union SubDomain Mapping Record)) => true
-;     MEMQ(GETDATABASE(op,'CONSTRUCTORKIND),'(domain package))
+;     MEMQ(get_database(op, 'CONSTRUCTORKIND),'(domain package))
 ;   u:= get(op,'isFunctor,$CategoryFrame)
 ;     or MEMQ(op,'(SubDomain Union Record)) => u
 ;   constructor? op =>
 ;     prop := get(op,'isFunctor,$CategoryFrame) => prop
-;     if GETDATABASE(op,'CONSTRUCTORKIND) = 'category
+;     if get_database(op, 'CONSTRUCTORKIND) = 'category
 ;       then updateCategoryFrameForCategory op
 ;       else updateCategoryFrameForConstructor op
 ;     get(op,'isFunctor,$CategoryFrame)
@@ -973,7 +934,7 @@
             (|$InteractiveMode|
              (COND ((MEMQ |op| '(|Union| |SubDomain| |Mapping| |Record|)) T)
                    (#1='T
-                    (MEMQ (GETDATABASE |op| 'CONSTRUCTORKIND)
+                    (MEMQ (|get_database| |op| 'CONSTRUCTORKIND)
                           '(|domain| |package|)))))
             ((SETQ |u|
                      (OR (|get| |op| '|isFunctor| |$CategoryFrame|)
@@ -985,7 +946,7 @@
               (#1#
                (PROGN
                 (COND
-                 ((EQ (GETDATABASE |op| 'CONSTRUCTORKIND) '|category|)
+                 ((EQ (|get_database| |op| 'CONSTRUCTORKIND) '|category|)
                   (|updateCategoryFrameForCategory| |op|))
                  (#1# (|updateCategoryFrameForConstructor| |op|)))
                 (|get| |op| '|isFunctor| |$CategoryFrame|)))))

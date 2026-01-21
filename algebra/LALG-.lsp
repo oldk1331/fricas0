@@ -22,7 +22,7 @@
 (MAKEPROP '|LeftAlgebra&| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (0 . |One|)
-              (4 . *) |LALG-;coerce;RS;1| (|OutputForm|) (|Integer|))
+              (4 . *) |LALG-;coerce;RS;1| (|Integer|) (|OutputForm|))
            '#(|coerce| 10) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

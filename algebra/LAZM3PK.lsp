@@ -130,8 +130,8 @@
 (SDEFUN |LAZM3PK;zeroSetSplit;LBL;4|
         ((|lp| (|List| P)) (|clos?| (|Boolean|)) (% (|List| ST)))
         (SPROG
-         ((#1=#:G73 NIL) (|ts| NIL) (#2=#:G72 NIL) (|toSave| (|List| ST))
-          (#3=#:G71 NIL) (|toSee| (|List| TS)))
+         ((#1=#:G65 NIL) (|ts| NIL) (#2=#:G64 NIL) (|toSave| (|List| ST))
+          (#3=#:G63 NIL) (|toSee| (|List| TS)))
          (SEQ (LETT |toSee| (SPADCALL |lp| |clos?| (QREFELT % 41)))
               (LETT |toSave| NIL)
               (SEQ (LETT |ts| NIL) (LETT #3# |toSee|) G190
@@ -160,9 +160,9 @@
 
 (DECLAIM (NOTINLINE |LazardSetSolvingPackage;|)) 
 
-(DEFUN |LazardSetSolvingPackage| (&REST #1=#:G74)
+(DEFUN |LazardSetSolvingPackage| (&REST #1=#:G66)
   (SPROG NIL
-         (PROG (#2=#:G75)
+         (PROG (#2=#:G67)
            (RETURN
             (COND
              ((LETT #2#

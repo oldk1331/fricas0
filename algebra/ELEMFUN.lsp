@@ -18,5 +18,3 @@
                      '(((|log| (% %)) T) ((|exp| (% %)) T) ((^ (% % %)) T)) NIL
                      NIL NIL)))
            (SETELT #1# 0 '(|ElementaryFunctionCategory|))))) 
-
-(MAKEPROP '|ElementaryFunctionCategory| 'NILADIC T) 

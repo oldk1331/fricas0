@@ -14,5 +14,3 @@
                             '(((|annihilate?| ((|Boolean|) % %)) T)) NIL NIL
                             NIL)))
            (SETELT #1# 0 '(|Rng|))))) 
-
-(MAKEPROP '|Rng| 'NILADIC T) 

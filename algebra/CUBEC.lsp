@@ -8,7 +8,7 @@
 (SDEFUN |CUBEC;cubicalComplex;LL%;2|
         ((|v| (|List| VS)) (|fs| (|List| (|List| (|Segment| (|Integer|)))))
          (% (%)))
-        (SPROG ((|res| (|List| (|CubicalFacet|))) (#1=#:G33 NIL) (|f| NIL))
+        (SPROG ((|res| (|List| (|CubicalFacet|))) (#1=#:G25 NIL) (|f| NIL))
                (SEQ (LETT |res| NIL)
                     (SEQ (LETT |f| NIL) (LETT #1# |fs|) G190
                          (COND
@@ -26,7 +26,7 @@
 (SDEFUN |CUBEC;cubicalComplex;LL%;3|
         ((|v| (|List| VS)) (|fs| (|List| (|List| (|List| (|Integer|)))))
          (% (%)))
-        (SPROG ((|res| (|List| (|CubicalFacet|))) (#1=#:G38 NIL) (|f| NIL))
+        (SPROG ((|res| (|List| (|CubicalFacet|))) (#1=#:G30 NIL) (|f| NIL))
                (SEQ (LETT |res| NIL)
                     (SEQ (LETT |f| NIL) (LETT #1# |fs|) G190
                          (COND
@@ -48,7 +48,7 @@
 (SDEFUN |CUBEC;maxIndex;%Nni;5| ((|s| (%)) (% (|NonNegativeInteger|)))
         (SPROG
          ((|res| (|NonNegativeInteger|)) (|m| (|NonNegativeInteger|))
-          (|i| (|List| (|Segment| (|Integer|)))) (#1=#:G47 NIL) (|fac| NIL)
+          (|i| (|List| (|Segment| (|Integer|)))) (#1=#:G39 NIL) (|fac| NIL)
           (|facs| (|List| (|CubicalFacet|))))
          (SEQ (LETT |res| 0) (LETT |facs| (QCDR |s|))
               (SEQ (LETT |fac| NIL) (LETT #1# |facs|) G190
@@ -64,7 +64,7 @@
 (SDEFUN |CUBEC;addCube;%Cf%;6| ((|a| (%)) (|f| (|CubicalFacet|)) (% (%)))
         (SPROG
          ((|res2| (|List| (|CubicalFacet|))) (|found| (|Boolean|))
-          (|m| (|Integer|)) (#1=#:G56 NIL) (|orf| NIL)
+          (|m| (|Integer|)) (#1=#:G48 NIL) (|orf| NIL)
           (|res| (|List| (|CubicalFacet|))))
          (SEQ (LETT |res| (QCDR |a|)) (LETT |res2| NIL) (LETT |found| NIL)
               (SEQ (LETT |orf| NIL) (LETT #1# |res|) G190
@@ -97,8 +97,8 @@
 
 (SDEFUN |CUBEC;boundary;2%;7| ((|s| (%)) (% (%)))
         (SPROG
-         ((|res| (%)) (#1=#:G65 NIL) (|y| NIL) (|x| (|List| (|CubicalFacet|)))
-          (#2=#:G64 NIL) (|facet| NIL))
+         ((|res| (%)) (#1=#:G57 NIL) (|y| NIL) (|x| (|List| (|CubicalFacet|)))
+          (#2=#:G56 NIL) (|facet| NIL))
          (SEQ (LETT |res| (SPADCALL (QCAR |s|) (QREFELT % 22)))
               (SEQ (LETT |facet| NIL) (LETT #2# (QCDR |s|)) G190
                    (COND
@@ -513,9 +513,9 @@
               280 = 286)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 69))
+                        '#((|SetCategory|) (|CoercibleTo| 69) (|BasicType|))
                         (|makeByteWordVec2| 77
                                             '(2 13 0 11 12 14 2 9 0 0 13 15 2
                                               13 0 11 18 19 1 13 12 0 23 2 12
@@ -533,10 +533,10 @@
                                               71 72 1 69 0 0 73 1 13 69 0 74 2
                                               69 0 0 0 75 2 0 26 0 0 1 2 0 0 0
                                               0 48 1 0 24 0 25 1 0 71 0 1 1 0
-                                              56 0 58 1 0 37 0 41 1 0 49 0 51 3
-                                              0 49 0 26 26 50 1 0 0 8 22 2 0 0
-                                              8 16 17 2 0 0 8 20 21 2 0 0 8 9
-                                              10 1 0 53 0 77 1 0 69 0 76 1 0 59
+                                              56 0 58 1 0 37 0 41 3 0 49 0 26
+                                              26 50 1 0 49 0 51 2 0 0 8 9 10 2
+                                              0 0 8 20 21 2 0 0 8 16 17 1 0 0 8
+                                              22 1 0 69 0 76 1 0 53 0 77 1 0 59
                                               0 61 1 0 0 0 35 1 0 37 0 44 2 0 0
                                               0 13 32 2 0 26 0 0 68)))))
            '|lookupComplete|)) 

@@ -16,7 +16,7 @@
         (SPADCALL (- |n| 1) (QREFELT % 13))) 
 
 (SDEFUN |CHAR;lookup;%Pi;5| ((|c| (%)) (% (|PositiveInteger|)))
-        (SPROG ((#1=#:G291 NIL))
+        (SPROG ((#1=#:G289 NIL))
                (PROG1 (LETT #1# (+ 1 (SPADCALL |c| (QREFELT % 16))))
                  (|check_subtype2| (> #1# 0) '(|PositiveInteger|) '(|Integer|)
                                    #1#)))) 
@@ -79,7 +79,7 @@
 
 (DEFUN |Character| ()
   (SPROG NIL
-         (PROG (#1=#:G312)
+         (PROG (#1=#:G310)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Character|))
@@ -123,8 +123,8 @@
               |CHAR;alphabetic?;%B;18| (31 . |alphanumeric|)
               |CHAR;alphanumeric?;%B;19| (|String|) |CHAR;char;S%;20|
               |CHAR;upperCase;2%;21| |CHAR;lowerCase;2%;22| (|HashState|)
-              |CHAR;hashUpdate!;Hs%Hs;23| (|InputForm|) (|SingleInteger|)
-              (|List| %))
+              |CHAR;hashUpdate!;Hs%Hs;23| (|List| %) (|SingleInteger|)
+              (|InputForm|))
            '#(~= 35 |upperCase?| 41 |upperCase| 46 |underscore| 51 |space| 55
               |smaller?| 59 |size| 65 |random| 69 |quote| 73 |ord| 77 |newline|
               82 |min| 86 |max| 92 |lowerCase?| 98 |lowerCase| 103 |lookup| 108
@@ -135,13 +135,13 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(NIL |OrderedSet&| |Finite&| NIL |Hashable&| |SetCategory&|
-                     NIL |BasicType&| |PartialOrder&| NIL)
+                  '#(NIL |Finite&| |OrderedSet&| NIL |SetCategory&| |Hashable&|
+                     NIL |PartialOrder&| |BasicType&| NIL)
                   (CONS
-                   '#((|OrderedFinite|) (|OrderedSet|) (|Finite|)
-                      (|Comparable|) (|Hashable|) (|SetCategory|)
-                      (|ConvertibleTo| 47) (|BasicType|) (|PartialOrder|)
-                      (|CoercibleTo| 24))
+                   '#((|OrderedFinite|) (|Finite|) (|OrderedSet|)
+                      (|Comparable|) (|SetCategory|) (|Hashable|)
+                      (|CoercibleTo| 24) (|PartialOrder|) (|BasicType|)
+                      (|ConvertibleTo| 49))
                    (|makeByteWordVec2| 49
                                        '(1 6 0 12 18 0 26 0 27 2 26 7 28 0 29 0
                                          26 0 31 0 26 0 33 0 26 0 35 0 26 0 37
@@ -151,11 +151,9 @@
                                          0 0 23 2 0 0 0 0 1 2 0 0 0 0 1 1 0 7 0
                                          36 1 0 0 0 44 1 0 14 0 17 1 0 41 0 1 1
                                          0 0 14 15 1 0 7 0 32 2 0 45 45 0 46 1
-                                         0 48 0 1 0 0 49 1 1 0 7 0 30 1 0 47 0
-                                         1 1 0 24 0 25 1 0 0 12 13 1 0 0 41 42
+                                         0 48 0 1 0 0 47 1 1 0 7 0 30 1 0 49 0
+                                         1 1 0 24 0 25 1 0 0 41 42 1 0 0 12 13
                                          1 0 7 0 40 1 0 7 0 38 2 0 7 0 0 1 2 0
                                          7 0 0 1 2 0 7 0 0 8 2 0 7 0 0 1 2 0 7
                                          0 0 9)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|Character| 'NILADIC T) 

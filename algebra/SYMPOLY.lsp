@@ -288,64 +288,64 @@
            '#(NIL NIL NIL NIL NIL (|PolynomialRing| 6 11) (|local| |#1|)
               '|Term| '|Rep| (0 . |Zero|) (|Boolean|) (|Partition|)
               (4 . |zero?|) (9 . *) (15 . |One|) (19 . |One|) (23 . =) (29 . +)
-              (35 . *) (41 . +) (47 . *) (53 . |Zero|) (57 . ~=) (|HashState|)
-              (|SingleInteger|) (|PositiveInteger|) (|Integer|)
-              (|NonNegativeInteger|) (|Union| % '"failed")
+              (35 . *) (41 . +) (47 . *) (53 . |Zero|) (57 . ~=) (|OutputForm|)
+              (|String|) (|PositiveInteger|)
+              (|Record| (|:| |k| 11) (|:| |c| 6)) (|List| 26) (|Mapping| 6 6)
+              (|List| %) (|List| 6) (|List| 11) (|NonNegativeInteger|)
+              (|Union| 6 '#1="failed") (|Mapping| 11 11) (|SingleInteger|)
+              (|HashState|) (|Integer|) (|Union| % '"failed")
               (|Record| (|:| |unit| %) (|:| |canonical| %) (|:| |associate| %))
-              (|Fraction| 26) (|Record| (|:| |k| 11) (|:| |c| 6)) (|List| 31)
-              (|Mapping| 6 11) (|Union| 30 '#1="failed") (|Union| 26 '#1#)
-              (|Mapping| 11 11) (|Union| 6 '#1#) (|List| 11) (|List| 6)
-              (|List| %) (|Mapping| 6 6) (|String|) (|OutputForm|))
+              (|Fraction| 37) (|Mapping| 6 11) (|Union| 40 '#1#)
+              (|Union| 37 '#1#))
            '#(|Zero| 63 |One| 67 = 71 + 77 * 83) 'NIL
            (CONS
             (|makeByteWordVec2| 24
-                                '(0 0 3 7 1 7 4 5 6 8 11 0 1 7 6 11 9 0 0 1 7 6
-                                  0 0 0 1 10 0 0 0 0 0 1 1 11 2 24 9 9 0 0 23 9
-                                  0 0 0 14 0 0 7 12 13 15 0 0 0 0 7 10 8 12 13
-                                  16))
+                                '(0 0 3 7 8 6 5 4 7 1 11 9 11 6 7 1 0 6 7 1 0 0
+                                  10 1 0 0 0 11 1 1 0 0 0 0 0 2 9 9 24 9 23 0 0
+                                  14 0 0 0 15 13 12 7 0 0 16 13 12 8 10 7 0 0 0
+                                  0))
             (CONS
              '#(|FiniteAbelianMonoidRing&| |AbelianMonoidRing&| NIL NIL
-                |Algebra&| |Algebra&| NIL NIL |Algebra&| |EntireRing&| NIL
-                |FreeModuleCategory&| |NonAssociativeAlgebra&|
-                |NonAssociativeAlgebra&| |NonAssociativeAlgebra&| |Rng&| NIL
-                NIL NIL |Module&| |Module&| |Module&| NIL NIL NIL NIL
-                |NonAssociativeRing&| NIL NIL NIL NIL NIL NIL NIL
-                |NonAssociativeRng&| |AbelianGroup&| NIL NIL NIL
-                |NonAssociativeSemiRng&| NIL |AbelianMonoid&| |MagmaWithUnit&|
-                |FullyRetractableTo&| |Magma&| |AbelianSemiGroup&| NIL
-                |RetractableTo&| |SetCategory&| NIL |RetractableTo&|
-                |RetractableTo&| |Hashable&| NIL NIL |BasicType&| NIL NIL NIL
-                NIL NIL NIL NIL)
+                |EntireRing&| |Algebra&| NIL NIL |Algebra&| |Algebra&| NIL NIL
+                |Rng&| |NonAssociativeAlgebra&| |NonAssociativeAlgebra&|
+                |NonAssociativeAlgebra&| |FreeModuleCategory&| |Module&|
+                |Module&| |Module&| NIL NIL |NonAssociativeRing&| NIL NIL NIL
+                NIL |NonAssociativeRng&| NIL NIL NIL NIL NIL NIL NIL
+                |AbelianGroup&| NIL NIL NIL |MagmaWithUnit&| |AbelianMonoid&|
+                NIL |NonAssociativeSemiRng&| NIL |AbelianSemiGroup&| |Magma&|
+                |FullyRetractableTo&| |Hashable&| |RetractableTo&|
+                |RetractableTo&| NIL |SetCategory&| |RetractableTo&| NIL NIL
+                NIL NIL NIL NIL NIL |BasicType&| NIL NIL)
              (CONS
               '#((|FiniteAbelianMonoidRing| 6 11) (|AbelianMonoidRing| 6 11)
-                 (|IntegralDomain|) (|CommutativeRing|) (|Algebra| 30)
-                 (|Algebra| $$) (|CharacteristicNonZero|)
-                 (|CharacteristicZero|) (|Algebra| 6) (|EntireRing|) (|Ring|)
-                 (|FreeModuleCategory| 6 11) (|NonAssociativeAlgebra| 30)
-                 (|NonAssociativeAlgebra| $$) (|NonAssociativeAlgebra| 6)
-                 (|Rng|) (|SemiRing|) (|SemiRng|)
-                 (|IndexedDirectProductCategory| 6 11) (|Module| 30)
-                 (|Module| $$) (|Module| 6) (|IndexedProductCategory| 6 11)
-                 (|BiModule| 6 6) (|BiModule| $$ $$) (|BiModule| 30 30)
-                 (|NonAssociativeRing|) (|AbelianProductCategory| 6)
-                 (|LeftModule| 6) (|RightModule| 6) (|RightModule| $$)
-                 (|LeftModule| $$) (|LeftModule| 30) (|RightModule| 30)
-                 (|NonAssociativeRng|) (|AbelianGroup|)
-                 (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
-                 (|Monoid|) (|NonAssociativeSemiRng|) (|SemiGroup|)
-                 (|AbelianMonoid|) (|MagmaWithUnit|) (|FullyRetractableTo| 6)
-                 (|Magma|) (|AbelianSemiGroup|) (|Comparable|)
-                 (|RetractableTo| 6) (|SetCategory|) (|CommutativeStar|)
-                 (|RetractableTo| 30) (|RetractableTo| 26) (|Hashable|)
-                 (|VariablesCommuteWithCoefficients|) (|CoercibleFrom| 6)
-                 (|BasicType|) (|CoercibleTo| 43) (|TwoSidedRecip|)
-                 (|unitsKnown|) (|noZeroDivisors|) (|CoercibleFrom| 30)
-                 (|CoercibleFrom| 26) (|canonicalUnitNormal|))
+                 (|IntegralDomain|) (|CommutativeRing|) (|EntireRing|)
+                 (|Algebra| 6) (|CharacteristicZero|) (|CharacteristicNonZero|)
+                 (|Algebra| $$) (|Algebra| 40) (|Ring|) (|SemiRing|) (|Rng|)
+                 (|NonAssociativeAlgebra| 6) (|NonAssociativeAlgebra| $$)
+                 (|NonAssociativeAlgebra| 40) (|FreeModuleCategory| 6 11)
+                 (|Module| 6) (|Module| $$) (|Module| 40)
+                 (|IndexedDirectProductCategory| 6 11) (|SemiRng|)
+                 (|NonAssociativeRing|) (|BiModule| 40 40) (|BiModule| $$ $$)
+                 (|BiModule| 6 6) (|IndexedProductCategory| 6 11)
+                 (|NonAssociativeRng|) (|RightModule| 40) (|LeftModule| 40)
+                 (|LeftModule| $$) (|RightModule| $$) (|RightModule| 6)
+                 (|LeftModule| 6) (|AbelianProductCategory| 6) (|AbelianGroup|)
+                 (|Monoid|) (|NonAssociativeSemiRing|)
+                 (|CancellationAbelianMonoid|) (|MagmaWithUnit|)
+                 (|AbelianMonoid|) (|SemiGroup|) (|NonAssociativeSemiRng|)
+                 (|Comparable|) (|AbelianSemiGroup|) (|Magma|)
+                 (|FullyRetractableTo| 6) (|Hashable|) (|RetractableTo| 37)
+                 (|RetractableTo| 40) (|CommutativeStar|) (|SetCategory|)
+                 (|RetractableTo| 6) (|canonicalUnitNormal|)
+                 (|CoercibleFrom| 37) (|CoercibleFrom| 40) (|noZeroDivisors|)
+                 (|unitsKnown|) (|TwoSidedRecip|) (|CoercibleTo| 23)
+                 (|BasicType|) (|CoercibleFrom| 6)
+                 (|VariablesCommuteWithCoefficients|))
               (|makeByteWordVec2| 32
                                   '(0 0 0 9 1 11 10 0 12 2 0 0 6 0 13 0 0 0 14
                                     0 6 0 15 2 0 10 0 0 16 2 11 0 0 0 17 2 6 0
                                     0 0 18 2 0 0 0 0 19 2 0 0 0 0 20 0 6 0 21 2
                                     6 10 0 0 22 0 32 0 9 0 30 0 14 2 0 10 0 0
-                                    16 2 0 0 0 0 19 2 0 0 6 0 13 2 0 0 0 0
-                                    20)))))
+                                    16 2 0 0 0 0 19 2 0 0 0 0 20 2 0 0 6 0
+                                    13)))))
            '|lookupIncomplete|)) 

@@ -14,5 +14,3 @@
                    (|Join| (|SetCategory|)
                            (|mkCategory| '(((|\\/| (% % %)) T)) NIL NIL NIL)))
            (SETELT #1# 0 '(|JoinSemilattice|))))) 
-
-(MAKEPROP '|JoinSemilattice| 'NILADIC T) 

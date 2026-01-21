@@ -46,5 +46,3 @@
                                (|has| % (|CharacteristicNonZero|))))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|PolynomialFactorizationExplicit|))))) 
-
-(MAKEPROP '|PolynomialFactorizationExplicit| 'NILADIC T) 

@@ -57,19 +57,19 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) '|Rep|
               |SUCH;construct;S1S2%;1| |SUCH;lhs;%S1;2| |SUCH;rhs;%S2;3|
               (|OutputForm|) (|Symbol|) (0 . |coerce|) (5 . |coerce|)
-              (10 . |coerce|) (15 . |infix|) |SUCH;coerce;%Of;4| (|String|)
-              (|Boolean|))
+              (10 . |coerce|) (15 . |infix|) |SUCH;coerce;%Of;4| (|Boolean|)
+              (|String|))
            '#(~= 22 |rhs| 28 |lhs| 33 |latex| 38 |construct| 43 |coerce| 49 =
               54)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 12))
+                        '#((|SetCategory|) (|CoercibleTo| 12) (|BasicType|))
                         (|makeByteWordVec2| 20
                                             '(1 13 12 0 14 1 6 12 0 15 1 7 12 0
-                                              16 3 12 0 0 0 0 17 2 0 20 0 0 1 1
-                                              0 7 0 11 1 0 6 0 10 1 0 19 0 1 2
-                                              0 0 6 7 9 1 0 12 0 18 2 0 20 0 0
+                                              16 3 12 0 0 0 0 17 2 0 19 0 0 1 1
+                                              0 7 0 11 1 0 6 0 10 1 0 20 0 1 2
+                                              0 0 6 7 9 1 0 12 0 18 2 0 19 0 0
                                               1)))))
            '|lookupComplete|)) 

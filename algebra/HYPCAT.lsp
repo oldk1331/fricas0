@@ -20,5 +20,3 @@
                        ((|tanh| (% %)) T))
                      NIL NIL NIL)))
            (SETELT #1# 0 '(|HyperbolicFunctionCategory|))))) 
-
-(MAKEPROP '|HyperbolicFunctionCategory| 'NILADIC T) 

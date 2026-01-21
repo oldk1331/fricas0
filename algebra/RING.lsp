@@ -12,5 +12,3 @@
                    (|Join| (|Rng|) (|SemiRing|) (|NonAssociativeRing|)
                            (|unitsKnown|)))
            (SETELT #1# 0 '(|Ring|))))) 
-
-(MAKEPROP '|Ring| 'NILADIC T) 

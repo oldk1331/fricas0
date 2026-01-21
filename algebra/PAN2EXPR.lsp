@@ -74,8 +74,6 @@
                         (|makeByteWordVec2| 21
                                             '(1 7 0 6 8 1 7 0 9 10 3 14 7 11 12
                                               13 15 1 17 13 0 18 1 17 13 0 19 2
-                                              7 0 0 0 20 1 0 7 17 21 1 0 7 13
-                                              16)))))
+                                              7 0 0 0 20 1 0 7 13 16 1 0 7 17
+                                              21)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|PolynomialAN2Expression| 'NILADIC T) 

@@ -24,7 +24,7 @@
 
 (SDEFUN |SRDCMPK;numberOfVariables;LLNni;2|
         ((|lp| (|List| P)) (|lts| (|List| TS)) (% (|NonNegativeInteger|)))
-        (SPROG ((|lv| (|List| V)) (#1=#:G70 NIL) (|ts| NIL))
+        (SPROG ((|lv| (|List| V)) (#1=#:G62 NIL) (|ts| NIL))
                (SEQ
                 (LETT |lv|
                       (SPADCALL (SPADCALL |lp| (QREFELT % 21)) (QREFELT % 23)))
@@ -49,13 +49,13 @@
                           (|Record| (|:| |val| (|List| P))
                                     (|:| |tower| TS)))))))
         (SPROG
-         ((#1=#:G94 NIL) (|lts| (|List| TS))
+         ((#1=#:G86 NIL) (|lts| (|List| TS))
           (|llpwt| (|List| (|Record| (|:| |val| (|List| P)) (|:| |tower| TS))))
-          (#2=#:G97 NIL) (|vs| NIL) (#3=#:G96 NIL) (|f| NIL)
+          (#2=#:G89 NIL) (|vs| NIL) (#3=#:G88 NIL) (|f| NIL)
           (|lsfp| (|List| P)) (|lus| (|List| TS)) (|h| (P)) (|us| (TS))
-          (|g| (P)) (#4=#:G95 NIL) (|gwt| NIL)
+          (|g| (P)) (#4=#:G87 NIL) (|gwt| NIL)
           (|lgwt| (|List| (|Record| (|:| |val| P) (|:| |tower| TS))))
-          (|ts_v| (P)) (#5=#:G73 NIL) (|ts_v+| (TS)) (|ts_v-| (TS))
+          (|ts_v| (P)) (#5=#:G65 NIL) (|ts_v+| (TS)) (|ts_v-| (TS))
           (|n| (|NonNegativeInteger|)) (|v| (V)))
          (SEQ
           (COND
@@ -155,7 +155,7 @@
                                                                             44))
                                                          (QREFELT % 45))
                                                         |lts| (QREFELT % 49))))
-                                           (GO #7=#:G84)))))
+                                           (GO #7=#:G76)))))
                                        #7# (EXIT #1#))))))))))
                       (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT NIL))
                  (EXIT (CONS |lts| |llpwt|)))))))) 
@@ -221,9 +221,9 @@
                           (|List|
                            (|Record| (|:| |val| (|List| P))
                                      (|:| |tower| TS))))))
-          (#1=#:G131 NIL) (|bwt| NIL)
+          (#1=#:G123 NIL) (|bwt| NIL)
           (|lbwt| (|List| (|Record| (|:| |val| (|Boolean|)) (|:| |tower| TS))))
-          (|tp| (P)) (|ip| (P)) (#2=#:G112 NIL) (|lmp| (P)))
+          (|tp| (P)) (|ip| (P)) (#2=#:G104 NIL) (|lmp| (P)))
          (SEQ (LETT |llpwt| NIL) (LETT |lts| NIL)
               (COND
                ((NULL (SPADCALL (SPADCALL |p| (QREFELT % 58)) (QREFELT % 40)))
@@ -332,9 +332,9 @@
                           (|List|
                            (|Record| (|:| |val| (|List| P))
                                      (|:| |tower| TS))))))
-          (#1=#:G153 NIL) (|bwt| NIL)
+          (#1=#:G145 NIL) (|bwt| NIL)
           (|lbwt| (|List| (|Record| (|:| |val| (|Boolean|)) (|:| |tower| TS))))
-          (|tp| (P)) (|ip| (P)) (#2=#:G135 NIL) (|lmp| (P)))
+          (|tp| (P)) (|ip| (P)) (#2=#:G127 NIL) (|lmp| (P)))
          (SEQ (LETT |llpwt| NIL) (LETT |lts| NIL)
               (COND
                ((NULL (SPADCALL (SPADCALL |p| (QREFELT % 58)) (QREFELT % 40)))
@@ -446,7 +446,7 @@
         ((|toSee| (|List| (|Record| (|:| |val| (|List| P)) (|:| |tower| TS))))
          (|n| (|NonNegativeInteger|)) (% (|Void|)))
         (SPROG
-         ((|s| (|String|)) (|m| (|NonNegativeInteger|)) (#1=#:G167 NIL)
+         ((|s| (|String|)) (|m| (|NonNegativeInteger|)) (#1=#:G159 NIL)
           (|lpwt| (|Record| (|:| |val| (|List| P)) (|:| |tower| TS))))
          (SEQ (LETT |lpwt| (|SPADfirst| |toSee|))
               (LETT |s|
@@ -487,8 +487,8 @@
                                      (|:| |tower| TS))))))
           (|p| (P)) (|toSave| (|List| TS)) (|ts| (TS))
           (|lpwt| (|Record| (|:| |val| (|List| P)) (|:| |tower| TS)))
-          (|bound| (|NonNegativeInteger|)) (#1=#:G188 NIL) (|br| NIL)
-          (#2=#:G187 NIL)
+          (|bound| (|NonNegativeInteger|)) (#1=#:G180 NIL) (|br| NIL)
+          (#2=#:G179 NIL)
           (|branches|
            (|List|
             (|Record| (|:| |eq| (|List| P)) (|:| |tower| TS)
@@ -891,12 +891,12 @@
                                               18 94 2 9 28 0 0 95 2 17 0 0 0 96
                                               2 17 0 97 0 98 2 88 28 10 18 99 1
                                               70 0 43 100 1 88 70 70 101 5 0 70
-                                              17 18 70 51 11 93 3 0 51 9 10 11
-                                              53 2 0 51 9 10 54 2 0 81 70 11 85
-                                              2 0 11 17 18 27 4 0 51 9 10 11 28
-                                              57 3 0 51 9 10 11 55 2 0 51 9 10
-                                              56 4 0 18 17 18 28 28 77 7 0 18
-                                              17 18 28 28 28 28 28 76 1 0 78 50
+                                              17 18 70 51 11 93 2 0 51 9 10 54
+                                              3 0 51 9 10 11 53 2 0 81 70 11 85
+                                              2 0 11 17 18 27 2 0 51 9 10 56 3
+                                              0 51 9 10 11 55 4 0 51 9 10 11 28
+                                              57 7 0 18 17 18 28 28 28 28 28 76
+                                              4 0 18 17 18 28 28 77 1 0 78 50
                                               80 2 0 51 9 10 52 2 0 11 17 18
                                               19)))))
            '|lookupComplete|)) 

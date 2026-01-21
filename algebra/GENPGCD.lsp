@@ -1069,7 +1069,7 @@
         ((|p1| (|SparseUnivariatePolynomial| P)) (% (|List| OV)))
         (SPROG
          ((#1=#:G217 NIL) (#2=#:G216 #3=(|List| OV)) (#4=#:G218 #3#)
-          (#5=#:G228 NIL) (|u| NIL))
+          (#5=#:G220 NIL) (|u| NIL))
          (SEQ
           (SPADCALL
            (PROGN
@@ -1149,7 +1149,7 @@
                       |md| (QREFELT % 73)))))) 
 
 (SDEFUN |GENPGCD;better| ((|p1| (P)) (|p2| (P)) (% (|Boolean|)))
-        (SPROG ((#1=#:G243 NIL))
+        (SPROG ((#1=#:G235 NIL))
                (COND ((SPADCALL |p1| (QREFELT % 98)) 'T)
                      ((SPADCALL |p2| (QREFELT % 98)) NIL)
                      ('T
@@ -1174,9 +1174,9 @@
 
 (DECLAIM (NOTINLINE |GeneralPolynomialGcdPackage;|)) 
 
-(DEFUN |GeneralPolynomialGcdPackage| (&REST #1=#:G248)
+(DEFUN |GeneralPolynomialGcdPackage| (&REST #1=#:G240)
   (SPROG NIL
-         (PROG (#2=#:G249)
+         (PROG (#2=#:G241)
            (RETURN
             (COND
              ((LETT #2#

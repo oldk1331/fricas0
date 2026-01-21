@@ -3,6 +3,14 @@
 
 (IN-PACKAGE "BOOT")
 
+; $compileDontDefineFunctions := true
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$compileDontDefineFunctions| T))
+
+; $fortranArrayStartingIndex := 0
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$fortranArrayStartingIndex| 0))
+
 ; DEFPARAMETER($setOptions, '(
 ;   (breakmode
 ;    "execute break processing on error"

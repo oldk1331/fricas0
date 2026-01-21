@@ -58,7 +58,12 @@
 (DEFUN |isExistingFile| (|f|)
   (PROG () (RETURN (COND ((|make_input_filename| |f|) T) ('T NIL)))))
 
-; isSystemDirectory dir == EVERY(function CHAR_=,$spadroot,dir)
+; isSystemDirectory path ==
+;   -- check if $spadroot is the prefix of 'path'
+;   # path >= # $spadroot and EVERY(function CHAR_=, $spadroot, path)
 
-(DEFUN |isSystemDirectory| (|dir|)
-  (PROG () (RETURN (EVERY #'CHAR= |$spadroot| |dir|))))
+(DEFUN |isSystemDirectory| (|path|)
+  (PROG ()
+    (RETURN
+     (AND (NOT (< (LENGTH |path|) (LENGTH |$spadroot|)))
+          (EVERY #'CHAR= |$spadroot| |path|)))))

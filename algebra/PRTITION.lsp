@@ -232,16 +232,16 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(NIL NIL NIL NIL |OrderedSet&| |AbelianMonoid&| NIL
-                     |AbelianSemiGroup&| |SetCategory&| NIL |BasicType&|
-                     |PartialOrder&| NIL)
+                  '#(NIL NIL NIL NIL |AbelianMonoid&| |OrderedSet&|
+                     |AbelianSemiGroup&| NIL |SetCategory&| NIL |PartialOrder&|
+                     |BasicType&| NIL)
                   (CONS
                    '#((|OrderedCancellationAbelianMonoid|)
-                      (|OrderedAbelianMonoid|) (|OrderedAbelianSemiGroup|)
-                      (|CancellationAbelianMonoid|) (|OrderedSet|)
-                      (|AbelianMonoid|) (|Comparable|) (|AbelianSemiGroup|)
-                      (|SetCategory|) (|ConvertibleTo| 8) (|BasicType|)
-                      (|PartialOrder|) (|CoercibleTo| 32))
+                      (|OrderedAbelianMonoid|) (|CancellationAbelianMonoid|)
+                      (|OrderedAbelianSemiGroup|) (|AbelianMonoid|)
+                      (|OrderedSet|) (|AbelianSemiGroup|) (|Comparable|)
+                      (|SetCategory|) (|CoercibleTo| 32) (|PartialOrder|)
+                      (|BasicType|) (|ConvertibleTo| 8))
                    (|makeByteWordVec2| 47
                                        '(1 8 0 0 10 2 13 12 0 0 14 2 6 0 15 0
                                          16 2 22 21 0 0 23 2 6 12 13 0 25 1 29
@@ -252,11 +252,9 @@
                                          21 0 0 26 2 0 12 0 0 1 0 0 0 1 1 0 27
                                          8 28 1 0 13 0 46 1 0 0 8 17 2 0 12 0 0
                                          1 2 0 0 0 0 1 2 0 0 0 0 1 1 0 34 0 1 1
-                                         0 8 0 11 1 0 0 0 31 1 0 8 0 9 1 0 32 0
-                                         44 0 0 0 7 2 0 12 0 0 1 2 0 12 0 0 1 2
-                                         0 12 0 0 19 2 0 12 0 0 1 2 0 12 0 0 18
-                                         2 0 0 0 0 20 2 0 0 22 0 24 2 0 0 47 0
-                                         1)))))
+                                         0 8 0 11 1 0 0 0 31 1 0 32 0 44 1 0 8
+                                         0 9 0 0 0 7 2 0 12 0 0 1 2 0 12 0 0 1
+                                         2 0 12 0 0 19 2 0 12 0 0 1 2 0 12 0 0
+                                         18 2 0 0 0 0 20 2 0 0 47 0 1 2 0 0 22
+                                         0 24)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|Partition| 'NILADIC T) 

@@ -316,5 +316,3 @@
                                               2 0 11 7 11 13 2 0 11 7 11
                                               12)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|DrawOptionFunctions0| 'NILADIC T) 

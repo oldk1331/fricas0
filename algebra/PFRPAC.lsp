@@ -90,8 +90,11 @@
                         |noBranch|))))
           (|up|
            (|Join|
-            (|UnivariatePolynomialCategory| (|Fraction| (|Polynomial| R)))
-            (CATEGORY |domain| (SIGNATURE |coerce| (% (|Variable| |v|)))))))
+            (|UnivariatePolynomialCategory| #9=(|Fraction| (|Polynomial| R)))
+            (CATEGORY |domain| (SIGNATURE |coerce| (% (|Variable| |v|)))
+             (IF (|has| #9# (|Canonical|))
+                 (ATTRIBUTE (|Canonical|))
+                 |noBranch|)))))
          (SEQ
           (LETT |up|
                 (|UnivariatePolynomial| |v|
@@ -235,6 +238,6 @@
                                             '(1 8 7 0 9 1 11 10 7 12 1 8 7 0 13
                                               2 7 18 0 15 19 1 8 0 7 20 2 24 21
                                               22 23 25 1 10 7 0 26 1 10 29 0 30
-                                              3 0 14 7 10 15 16 2 0 14 8 15
-                                              17)))))
+                                              2 0 14 8 15 17 3 0 14 7 10 15
+                                              16)))))
            '|lookupComplete|)) 

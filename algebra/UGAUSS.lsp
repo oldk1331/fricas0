@@ -381,5 +381,3 @@
                                               2 13 0 12 12 18 1 0 13 13 19 3 0
                                               13 13 7 7 15 1 0 13 13 17)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|UnitGaussianElimination| 'NILADIC T) 

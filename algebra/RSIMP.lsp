@@ -1,10 +1,9 @@
 
 (SDEFUN |RSIMP;str_to_expr| ((|s| (|String|)) (% (|Expression| (|Integer|))))
-        (SPROG ((|av| (|Any|)))
-               (SEQ
-                (LETT |av|
-                      (SPADCALL (SPADCALL |s| (QREFELT % 8)) (QREFELT % 10)))
-                (EXIT (SPADCALL |av| (QREFELT % 13)))))) 
+        (SPROG ((|av| (|Any|)) (|af| (|InputForm|)))
+               (SEQ (LETT |af| (SPADCALL |s| (QREFELT % 8)))
+                    (LETT |av| (SPADCALL |af| (QREFELT % 10)))
+                    (EXIT (SPADCALL |av| (QREFELT % 13)))))) 
 
 (SDEFUN |RSIMP;rsimp1_gen_2|
         ((|av| (|Expression| (|Integer|))) (|bv| (|Expression| (|Integer|)))
@@ -13,11 +12,11 @@
          (|ps| (|Expression| (|Integer|)))
          (% (|Union| (|List| (|Expression| (|Integer|))) "failed")))
         (SPROG
-         ((#1=#:G50 NIL) (|sv| (|Expression| (|Integer|)))
+         ((#1=#:G55 NIL) (|sv| (|Expression| (|Integer|)))
           (|el2| (|List| (|Equation| (|Expression| (|Integer|)))))
           (|cv| (|Expression| (|Integer|)))
           (|fp| #2=(|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
-          (#3=#:G51 NIL) (|fac| NIL)
+          (#3=#:G56 NIL) (|fac| NIL)
           (|fl|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
@@ -64,7 +63,7 @@
                                   (CONS 0
                                         (LIST |sv| |cv|
                                               (|spadConstant| % 40))))
-                            (GO #4=#:G49))))))))
+                            (GO #4=#:G54))))))))
                  (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
             (EXIT (CONS 1 "failed"))))
           #4# (EXIT #1#)))) 
@@ -370,12 +369,12 @@
          (|pd| (|Expression| (|Integer|))) (|ps| (|Expression| (|Integer|)))
          (% (|Union| (|List| (|Expression| (|Integer|))) "failed")))
         (SPROG
-         ((#1=#:G98 NIL) (|sv| #2=(|Expression| (|Integer|))) (#3=#:G97 NIL)
+         ((#1=#:G103 NIL) (|sv| #2=(|Expression| (|Integer|))) (#3=#:G102 NIL)
           (|sden| #4=(|Expression| (|Integer|)))
           (|el3| #5=(|List| (|Equation| (|Expression| (|Integer|)))))
           (|dv| #2#) (|dden| #4#) (|el2| #5#) (|ev| (|Expression| (|Integer|)))
           (|fp| #6=(|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
-          (#7=#:G99 NIL) (|fac| NIL)
+          (#7=#:G104 NIL) (|fac| NIL)
           (|fl|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
@@ -426,7 +425,7 @@
                             (COND
                              ((SPADCALL |dden| (|spadConstant| % 72)
                                         (QREFELT % 56))
-                              (PROGN (LETT #3# |$NoValue|) (GO #8=#:G91))))
+                              (PROGN (LETT #3# |$NoValue|) (GO #8=#:G96))))
                             (LETT |dv|
                                   (SPADCALL
                                    (SPADCALL
@@ -461,7 +460,7 @@
                                     (CONS 0
                                           (LIST |sv| |dv| |ev|
                                                 (|spadConstant| % 40))))
-                              (GO #9=#:G96)))))))))
+                              (GO #9=#:G101)))))))))
                   #8# (EXIT #3#))
                  (LETT #7# (CDR #7#)) (GO G190) G191 (EXIT NIL))
             (EXIT (CONS 1 "failed"))))
@@ -477,7 +476,7 @@
         ((|av| (|Expression| (|Integer|))) (|bv| (|Expression| (|Integer|)))
          (|cv| #1=(|Expression| (|Integer|))) (|rv| (|Expression| (|Integer|)))
          (% (|Union| (|List| (|Expression| (|Integer|))) "failed")))
-        (SPROG ((#2=#:G103 NIL) (|d| (|Expression| (|Integer|))) (|s| #1#))
+        (SPROG ((#2=#:G108 NIL) (|d| (|Expression| (|Integer|))) (|s| #1#))
                (SEQ
                 (EXIT
                  (SEQ
@@ -501,7 +500,7 @@
                                    (CONS 0
                                          (LIST |s| |d| (|spadConstant| % 40)
                                                (|spadConstant| % 72))))
-                             (GO #3=#:G102))))))))
+                             (GO #3=#:G107))))))))
                   (EXIT
                    (|RSIMP;rsimp1_gen_3| |av| |bv| |cv| |rv| (QREFELT % 83)
                     (QREFELT % 84) (QREFELT % 85) %))))
@@ -519,317 +518,400 @@
           (|r1l| (|List| (|Expression| (|Integer|)))) (|res1| #1#)
           (|s| (|Expression| (|Integer|))) (|tmp| (|Expression| (|Integer|))))
          (SEQ
-          (COND ((EQL |k| 2) (|RSIMP;rsimp1_gen_32| |av| |bv| |cv| |rv| %))
-                ((EQL |k| 3)
-                 (|RSIMP;rsimp1_gen_3| |av| |bv| |cv| |rv| (QREFELT % 87)
-                  (QREFELT % 88) (QREFELT % 89) %))
-                ((EQL |k| 4)
-                 (SEQ
-                  (LETT |res1| (|RSIMP;rsimp1_gen_32| |av| |bv| |cv| |rv| %))
-                  (EXIT
-                   (COND ((QEQCAR |res1| 1) (CONS 1 "failed"))
-                         (#2='T
-                          (SEQ (LETT |r1l| (QCDR |res1|))
-                               (LETT |res2|
-                                     (|RSIMP;rsimp1_gen_32|
-                                      (SPADCALL |r1l| 2 (QREFELT % 76))
-                                      (SPADCALL |r1l| 3 (QREFELT % 76))
-                                      (SPADCALL |r1l| 4 (QREFELT % 76)) |rv|
-                                      %))
-                               (EXIT
-                                (COND ((QEQCAR |res2| 1) (CONS 1 "failed"))
-                                      (#2#
-                                       (SEQ (LETT |r2l| (QCDR |res2|))
-                                            (EXIT
-                                             (CONS 0
-                                                   (LIST
-                                                    (SPADCALL
-                                                     (SPADCALL |r1l| 1
-                                                               (QREFELT % 76))
+          (COND
+           ((SPADCALL |bv| (|spadConstant| % 72) (QREFELT % 56))
+            (COND
+             ((SPADCALL |cv| (|spadConstant| % 72) (QREFELT % 56))
+              (EXIT
+               (CONS 0
+                     (LIST |av| (|spadConstant| % 40) (|spadConstant| % 72)
+                           (|spadConstant| % 72))))))))
+          (EXIT
+           (COND ((EQL |k| 2) (|RSIMP;rsimp1_gen_32| |av| |bv| |cv| |rv| %))
+                 ((EQL |k| 3)
+                  (|RSIMP;rsimp1_gen_3| |av| |bv| |cv| |rv| (QREFELT % 87)
+                   (QREFELT % 88) (QREFELT % 89) %))
+                 ((EQL |k| 4)
+                  (SEQ
+                   (LETT |res1| (|RSIMP;rsimp1_gen_32| |av| |bv| |cv| |rv| %))
+                   (EXIT
+                    (COND ((QEQCAR |res1| 1) (CONS 1 "failed"))
+                          (#2='T
+                           (SEQ (LETT |r1l| (QCDR |res1|))
+                                (LETT |res2|
+                                      (|RSIMP;rsimp1_gen_32|
+                                       (SPADCALL |r1l| 2 (QREFELT % 76))
+                                       (SPADCALL |r1l| 3 (QREFELT % 76))
+                                       (SPADCALL |r1l| 4 (QREFELT % 76)) |rv|
+                                       %))
+                                (EXIT
+                                 (COND ((QEQCAR |res2| 1) (CONS 1 "failed"))
+                                       (#2#
+                                        (SEQ (LETT |r2l| (QCDR |res2|))
+                                             (EXIT
+                                              (CONS 0
+                                                    (LIST
                                                      (SPADCALL
-                                                      (SPADCALL |r2l| 1
+                                                      (SPADCALL |r1l| 1
                                                                 (QREFELT % 76))
-                                                      2 (QREFELT % 77))
-                                                     (QREFELT % 25))
-                                                    (SPADCALL |r2l| 2
-                                                              (QREFELT % 76))
-                                                    (SPADCALL |r2l| 3
-                                                              (QREFELT % 76))
-                                                    (SPADCALL |r2l| 4
-                                                              (QREFELT %
-                                                                       76)))))))))))))))
-                ((EQL |k| 6)
-                 (SEQ
-                  (LETT |res1| (|RSIMP;rsimp1_gen_32| |av| |bv| |cv| |rv| %))
-                  (EXIT
-                   (COND ((QEQCAR |res1| 1) (CONS 1 "failed"))
-                         (#2#
-                          (SEQ (LETT |r1l| (QCDR |res1|))
-                               (LETT |res2|
-                                     (|RSIMP;rsimp1_gen_3|
-                                      (SPADCALL |r1l| 2 (QREFELT % 76))
-                                      (SPADCALL |r1l| 3 (QREFELT % 76))
-                                      (SPADCALL |r1l| 4 (QREFELT % 76)) |rv|
-                                      (QREFELT % 87) (QREFELT % 88)
-                                      (QREFELT % 89) %))
-                               (EXIT
-                                (COND ((QEQCAR |res2| 1) (CONS 1 "failed"))
-                                      (#2#
-                                       (SEQ (LETT |r2l| (QCDR |res2|))
-                                            (EXIT
-                                             (CONS 0
-                                                   (LIST
-                                                    (SPADCALL
-                                                     (SPADCALL |r1l| 1
+                                                      (SPADCALL
+                                                       (SPADCALL |r2l| 1
+                                                                 (QREFELT %
+                                                                          76))
+                                                       2 (QREFELT % 77))
+                                                      (QREFELT % 25))
+                                                     (SPADCALL |r2l| 2
                                                                (QREFELT % 76))
+                                                     (SPADCALL |r2l| 3
+                                                               (QREFELT % 76))
+                                                     (SPADCALL |r2l| 4
+                                                               (QREFELT %
+                                                                        76)))))))))))))))
+                 ((EQL |k| 6)
+                  (SEQ
+                   (LETT |res1| (|RSIMP;rsimp1_gen_32| |av| |bv| |cv| |rv| %))
+                   (EXIT
+                    (COND ((QEQCAR |res1| 1) (CONS 1 "failed"))
+                          (#2#
+                           (SEQ (LETT |r1l| (QCDR |res1|))
+                                (LETT |res2|
+                                      (|RSIMP;rsimp1_gen_3|
+                                       (SPADCALL |r1l| 2 (QREFELT % 76))
+                                       (SPADCALL |r1l| 3 (QREFELT % 76))
+                                       (SPADCALL |r1l| 4 (QREFELT % 76)) |rv|
+                                       (QREFELT % 87) (QREFELT % 88)
+                                       (QREFELT % 89) %))
+                                (EXIT
+                                 (COND ((QEQCAR |res2| 1) (CONS 1 "failed"))
+                                       (#2#
+                                        (SEQ (LETT |r2l| (QCDR |res2|))
+                                             (EXIT
+                                              (CONS 0
+                                                    (LIST
                                                      (SPADCALL
-                                                      (SPADCALL |r2l| 1
+                                                      (SPADCALL |r1l| 1
                                                                 (QREFELT % 76))
-                                                      2 (QREFELT % 77))
-                                                     (QREFELT % 25))
+                                                      (SPADCALL
+                                                       (SPADCALL |r2l| 1
+                                                                 (QREFELT %
+                                                                          76))
+                                                       2 (QREFELT % 77))
+                                                      (QREFELT % 25))
+                                                     (SPADCALL |r2l| 2
+                                                               (QREFELT % 76))
+                                                     (SPADCALL |r2l| 3
+                                                               (QREFELT % 76))
+                                                     (SPADCALL |r2l| 4
+                                                               (QREFELT %
+                                                                        76)))))))))))))))
+                 ((EQL |k| 8)
+                  (SEQ
+                   (LETT |res1| (|RSIMP;rsimp1_gen_32| |av| |bv| |cv| |rv| %))
+                   (EXIT
+                    (COND ((QEQCAR |res1| 1) (CONS 1 "failed"))
+                          (#2#
+                           (SEQ (LETT |r1l| (QCDR |res1|))
+                                (LETT |res2|
+                                      (|RSIMP;rsimp1_gen_32|
+                                       (SPADCALL |r1l| 2 (QREFELT % 76))
+                                       (SPADCALL |r1l| 3 (QREFELT % 76))
+                                       (SPADCALL |r1l| 4 (QREFELT % 76)) |rv|
+                                       %))
+                                (EXIT
+                                 (COND ((QEQCAR |res2| 1) (CONS 1 "failed"))
+                                       (#2#
+                                        (SEQ (LETT |r2l| (QCDR |res2|))
+                                             (LETT |res3|
+                                                   (|RSIMP;rsimp1_gen_32|
                                                     (SPADCALL |r2l| 2
                                                               (QREFELT % 76))
                                                     (SPADCALL |r2l| 3
                                                               (QREFELT % 76))
                                                     (SPADCALL |r2l| 4
-                                                              (QREFELT %
-                                                                       76)))))))))))))))
-                ((EQL |k| 8)
-                 (SEQ
-                  (LETT |res1| (|RSIMP;rsimp1_gen_32| |av| |bv| |cv| |rv| %))
-                  (EXIT
-                   (COND ((QEQCAR |res1| 1) (CONS 1 "failed"))
-                         (#2#
-                          (SEQ (LETT |r1l| (QCDR |res1|))
-                               (LETT |res2|
-                                     (|RSIMP;rsimp1_gen_32|
-                                      (SPADCALL |r1l| 2 (QREFELT % 76))
-                                      (SPADCALL |r1l| 3 (QREFELT % 76))
-                                      (SPADCALL |r1l| 4 (QREFELT % 76)) |rv|
-                                      %))
-                               (EXIT
-                                (COND ((QEQCAR |res2| 1) (CONS 1 "failed"))
-                                      (#2#
-                                       (SEQ (LETT |r2l| (QCDR |res2|))
-                                            (LETT |res3|
-                                                  (|RSIMP;rsimp1_gen_32|
-                                                   (SPADCALL |r2l| 2
-                                                             (QREFELT % 76))
-                                                   (SPADCALL |r2l| 3
-                                                             (QREFELT % 76))
-                                                   (SPADCALL |r2l| 4
-                                                             (QREFELT % 76))
-                                                   |rv| %))
-                                            (EXIT
-                                             (COND
-                                              ((QEQCAR |res3| 1)
-                                               (CONS 1 "failed"))
-                                              (#2#
-                                               (SEQ (LETT |r3l| (QCDR |res3|))
-                                                    (EXIT
-                                                     (CONS 0
-                                                           (LIST
-                                                            (SPADCALL
+                                                              (QREFELT % 76))
+                                                    |rv| %))
+                                             (EXIT
+                                              (COND
+                                               ((QEQCAR |res3| 1)
+                                                (CONS 1 "failed"))
+                                               (#2#
+                                                (SEQ (LETT |r3l| (QCDR |res3|))
+                                                     (EXIT
+                                                      (CONS 0
+                                                            (LIST
                                                              (SPADCALL
-                                                              (SPADCALL |r1l| 1
-                                                                        (QREFELT
-                                                                         % 76))
                                                               (SPADCALL
-                                                               (SPADCALL |r2l|
+                                                               (SPADCALL |r1l|
                                                                          1
                                                                          (QREFELT
                                                                           %
                                                                           76))
-                                                               2
-                                                               (QREFELT % 77))
-                                                              (QREFELT % 25))
-                                                             (SPADCALL
-                                                              (SPADCALL |r3l| 1
-                                                                        (QREFELT
-                                                                         % 76))
-                                                              4 (QREFELT % 77))
-                                                             (QREFELT % 25))
-                                                            (SPADCALL |r3l| 2
-                                                                      (QREFELT
-                                                                       % 76))
-                                                            (SPADCALL |r3l| 3
-                                                                      (QREFELT
-                                                                       % 76))
-                                                            (SPADCALL |r3l| 4
-                                                                      (QREFELT
-                                                                       %
-                                                                       76)))))))))))))))))))
-                ((EQL |k| 9)
-                 (SEQ
-                  (LETT |res1|
-                        (|RSIMP;rsimp1_gen_3| |av| |bv| |cv| |rv|
-                         (QREFELT % 87) (QREFELT % 88) (QREFELT % 89) %))
-                  (EXIT
-                   (COND ((QEQCAR |res1| 1) (CONS 1 "failed"))
-                         (#2#
-                          (SEQ (LETT |r1l| (QCDR |res1|))
-                               (LETT |s| (SPADCALL |r1l| 1 (QREFELT % 76)))
-                               (LETT |av| (SPADCALL |r1l| 2 (QREFELT % 76)))
-                               (LETT |bv| (SPADCALL |r1l| 3 (QREFELT % 76)))
-                               (LETT |cv| (SPADCALL |r1l| 4 (QREFELT % 76)))
-                               (LETT |res2|
-                                     (|RSIMP;rsimp1_gen_3| |av| |bv| |cv| |rv|
-                                      (QREFELT % 87) (QREFELT % 88)
-                                      (QREFELT % 89) %))
-                               (COND
-                                ((QEQCAR |res2| 1)
-                                 (SEQ
-                                  (LETT |tmp|
-                                        (SPADCALL |cv| |rv| (QREFELT % 25)))
-                                  (LETT |s| (SPADCALL |s| |rv| (QREFELT % 38)))
-                                  (LETT |cv| |bv|) (LETT |bv| |av|)
-                                  (LETT |av| |tmp|)
-                                  (LETT |res2|
-                                        (|RSIMP;rsimp1_gen_3| |av| |bv| |cv|
-                                         |rv| (QREFELT % 87) (QREFELT % 88)
-                                         (QREFELT % 89) %))
-                                  (EXIT
-                                   (COND
-                                    ((QEQCAR |res2| 1)
-                                     (SEQ
-                                      (LETT |tmp|
-                                            (SPADCALL |cv| |rv|
-                                                      (QREFELT % 25)))
-                                      (LETT |s|
-                                            (SPADCALL |s| |rv| (QREFELT % 38)))
-                                      (LETT |cv| |bv|) (LETT |bv| |av|)
-                                      (LETT |av| |tmp|)
-                                      (EXIT
-                                       (LETT |res2|
-                                             (|RSIMP;rsimp1_gen_3| |av| |bv|
-                                              |cv| |rv| (QREFELT % 87)
-                                              (QREFELT % 88) (QREFELT % 89)
-                                              %))))))))))
-                               (EXIT
-                                (COND ((QEQCAR |res2| 1) (CONS 1 "failed"))
-                                      (#2#
-                                       (SEQ (LETT |r2l| (QCDR |res2|))
-                                            (EXIT
-                                             (CONS 0
-                                                   (LIST
-                                                    (SPADCALL |s|
+                                                               (SPADCALL
+                                                                (SPADCALL |r2l|
+                                                                          1
+                                                                          (QREFELT
+                                                                           %
+                                                                           76))
+                                                                2
+                                                                (QREFELT % 77))
+                                                               (QREFELT % 25))
                                                               (SPADCALL
-                                                               (SPADCALL |r2l|
+                                                               (SPADCALL |r3l|
                                                                          1
                                                                          (QREFELT
                                                                           %
                                                                           76))
-                                                               3
+                                                               4
                                                                (QREFELT % 77))
                                                               (QREFELT % 25))
+                                                             (SPADCALL |r3l| 2
+                                                                       (QREFELT
+                                                                        % 76))
+                                                             (SPADCALL |r3l| 3
+                                                                       (QREFELT
+                                                                        % 76))
+                                                             (SPADCALL |r3l| 4
+                                                                       (QREFELT
+                                                                        %
+                                                                        76)))))))))))))))))))
+                 ((EQL |k| 9)
+                  (SEQ
+                   (LETT |res1|
+                         (|RSIMP;rsimp1_gen_3| |av| |bv| |cv| |rv|
+                          (QREFELT % 87) (QREFELT % 88) (QREFELT % 89) %))
+                   (EXIT
+                    (COND ((QEQCAR |res1| 1) (CONS 1 "failed"))
+                          (#2#
+                           (SEQ (LETT |r1l| (QCDR |res1|))
+                                (LETT |s| (SPADCALL |r1l| 1 (QREFELT % 76)))
+                                (LETT |av| (SPADCALL |r1l| 2 (QREFELT % 76)))
+                                (LETT |bv| (SPADCALL |r1l| 3 (QREFELT % 76)))
+                                (LETT |cv| (SPADCALL |r1l| 4 (QREFELT % 76)))
+                                (LETT |res2|
+                                      (|RSIMP;rsimp1_gen_3| |av| |bv| |cv| |rv|
+                                       (QREFELT % 87) (QREFELT % 88)
+                                       (QREFELT % 89) %))
+                                (COND
+                                 ((QEQCAR |res2| 1)
+                                  (SEQ
+                                   (LETT |tmp|
+                                         (SPADCALL |cv| |rv| (QREFELT % 25)))
+                                   (LETT |s|
+                                         (SPADCALL |s| |rv| (QREFELT % 38)))
+                                   (LETT |cv| |bv|) (LETT |bv| |av|)
+                                   (LETT |av| |tmp|)
+                                   (LETT |res2|
+                                         (|RSIMP;rsimp1_gen_3| |av| |bv| |cv|
+                                          |rv| (QREFELT % 87) (QREFELT % 88)
+                                          (QREFELT % 89) %))
+                                   (EXIT
+                                    (COND
+                                     ((QEQCAR |res2| 1)
+                                      (SEQ
+                                       (LETT |tmp|
+                                             (SPADCALL |cv| |rv|
+                                                       (QREFELT % 25)))
+                                       (LETT |s|
+                                             (SPADCALL |s| |rv|
+                                                       (QREFELT % 38)))
+                                       (LETT |cv| |bv|) (LETT |bv| |av|)
+                                       (LETT |av| |tmp|)
+                                       (EXIT
+                                        (LETT |res2|
+                                              (|RSIMP;rsimp1_gen_3| |av| |bv|
+                                               |cv| |rv| (QREFELT % 87)
+                                               (QREFELT % 88) (QREFELT % 89)
+                                               %))))))))))
+                                (EXIT
+                                 (COND ((QEQCAR |res2| 1) (CONS 1 "failed"))
+                                       (#2#
+                                        (SEQ (LETT |r2l| (QCDR |res2|))
+                                             (EXIT
+                                              (CONS 0
+                                                    (LIST
+                                                     (SPADCALL |s|
+                                                               (SPADCALL
+                                                                (SPADCALL |r2l|
+                                                                          1
+                                                                          (QREFELT
+                                                                           %
+                                                                           76))
+                                                                3
+                                                                (QREFELT % 77))
+                                                               (QREFELT % 25))
+                                                     (SPADCALL |r2l| 2
+                                                               (QREFELT % 76))
+                                                     (SPADCALL |r2l| 3
+                                                               (QREFELT % 76))
+                                                     (SPADCALL |r2l| 4
+                                                               (QREFELT %
+                                                                        76)))))))))))))))
+                 ((EQL |k| 12)
+                  (SEQ
+                   (LETT |res1| (|RSIMP;rsimp1_gen_32| |av| |bv| |cv| |rv| %))
+                   (EXIT
+                    (COND ((QEQCAR |res1| 1) (CONS 1 "failed"))
+                          (#2#
+                           (SEQ (LETT |r1l| (QCDR |res1|))
+                                (LETT |res2|
+                                      (|RSIMP;rsimp1_gen_32|
+                                       (SPADCALL |r1l| 2 (QREFELT % 76))
+                                       (SPADCALL |r1l| 3 (QREFELT % 76))
+                                       (SPADCALL |r1l| 4 (QREFELT % 76)) |rv|
+                                       %))
+                                (EXIT
+                                 (COND ((QEQCAR |res2| 1) (CONS 1 "failed"))
+                                       (#2#
+                                        (SEQ (LETT |r2l| (QCDR |res2|))
+                                             (LETT |res3|
+                                                   (|RSIMP;rsimp1_gen_3|
                                                     (SPADCALL |r2l| 2
                                                               (QREFELT % 76))
                                                     (SPADCALL |r2l| 3
                                                               (QREFELT % 76))
                                                     (SPADCALL |r2l| 4
-                                                              (QREFELT %
-                                                                       76)))))))))))))))
-                ((EQL |k| 12)
-                 (SEQ
-                  (LETT |res1| (|RSIMP;rsimp1_gen_32| |av| |bv| |cv| |rv| %))
-                  (EXIT
-                   (COND ((QEQCAR |res1| 1) (CONS 1 "failed"))
-                         (#2#
-                          (SEQ (LETT |r1l| (QCDR |res1|))
-                               (LETT |res2|
-                                     (|RSIMP;rsimp1_gen_32|
-                                      (SPADCALL |r1l| 2 (QREFELT % 76))
-                                      (SPADCALL |r1l| 3 (QREFELT % 76))
-                                      (SPADCALL |r1l| 4 (QREFELT % 76)) |rv|
-                                      %))
-                               (EXIT
-                                (COND ((QEQCAR |res2| 1) (CONS 1 "failed"))
-                                      (#2#
-                                       (SEQ (LETT |r2l| (QCDR |res2|))
-                                            (LETT |res3|
-                                                  (|RSIMP;rsimp1_gen_3|
-                                                   (SPADCALL |r2l| 2
-                                                             (QREFELT % 76))
-                                                   (SPADCALL |r2l| 3
-                                                             (QREFELT % 76))
-                                                   (SPADCALL |r2l| 4
-                                                             (QREFELT % 76))
-                                                   |rv| (QREFELT % 87)
-                                                   (QREFELT % 88)
-                                                   (QREFELT % 89) %))
-                                            (EXIT
-                                             (COND
-                                              ((QEQCAR |res3| 1)
-                                               (CONS 1 "failed"))
-                                              (#2#
-                                               (SEQ (LETT |r3l| (QCDR |res3|))
-                                                    (EXIT
-                                                     (CONS 0
-                                                           (LIST
-                                                            (SPADCALL
+                                                              (QREFELT % 76))
+                                                    |rv| (QREFELT % 87)
+                                                    (QREFELT % 88)
+                                                    (QREFELT % 89) %))
+                                             (EXIT
+                                              (COND
+                                               ((QEQCAR |res3| 1)
+                                                (CONS 1 "failed"))
+                                               (#2#
+                                                (SEQ (LETT |r3l| (QCDR |res3|))
+                                                     (EXIT
+                                                      (CONS 0
+                                                            (LIST
                                                              (SPADCALL
-                                                              (SPADCALL |r1l| 1
-                                                                        (QREFELT
-                                                                         % 76))
                                                               (SPADCALL
-                                                               (SPADCALL |r2l|
+                                                               (SPADCALL |r1l|
                                                                          1
                                                                          (QREFELT
                                                                           %
                                                                           76))
-                                                               2
+                                                               (SPADCALL
+                                                                (SPADCALL |r2l|
+                                                                          1
+                                                                          (QREFELT
+                                                                           %
+                                                                           76))
+                                                                2
+                                                                (QREFELT % 77))
+                                                               (QREFELT % 25))
+                                                              (SPADCALL
+                                                               (SPADCALL |r3l|
+                                                                         1
+                                                                         (QREFELT
+                                                                          %
+                                                                          76))
+                                                               4
                                                                (QREFELT % 77))
                                                               (QREFELT % 25))
-                                                             (SPADCALL
-                                                              (SPADCALL |r3l| 1
-                                                                        (QREFELT
-                                                                         % 76))
-                                                              4 (QREFELT % 77))
-                                                             (QREFELT % 25))
-                                                            (SPADCALL |r3l| 2
-                                                                      (QREFELT
-                                                                       % 76))
-                                                            (SPADCALL |r3l| 3
-                                                                      (QREFELT
-                                                                       % 76))
-                                                            (SPADCALL |r2l| 4
-                                                                      (QREFELT
-                                                                       %
-                                                                       76)))))))))))))))))))
-                (#2# (CONS 1 "failed")))))) 
+                                                             (SPADCALL |r3l| 2
+                                                                       (QREFELT
+                                                                        % 76))
+                                                             (SPADCALL |r3l| 3
+                                                                       (QREFELT
+                                                                        % 76))
+                                                             (SPADCALL |r2l| 4
+                                                                       (QREFELT
+                                                                        %
+                                                                        76)))))))))))))))))))
+                 (#2# (CONS 1 "failed"))))))) 
+
+(SDEFUN |RSIMP;split_eval|
+        ((|la| (|List| (|Expression| (|Integer|))))
+         (|kf| (|Expression| (|Integer|))) (|l| #1=(|Integer|))
+         (|m| (|Integer|)) (% (|List| (|Expression| (|Integer|)))))
+        (SPROG
+         ((#2=#:G142 NIL) (|ll| NIL) (|mm| #1#)
+          (|ki| (|Expression| (|Integer|))) (#3=#:G141 NIL)
+          (|r_vec| (|Vector| (|Expression| (|Integer|)))))
+         (SEQ (LETT |r_vec| (MAKEARR1 |l| (|spadConstant| % 72)))
+              (SEQ (LETT |ll| 1) (LETT #3# |l|) G190
+                   (COND ((|greater_SI| |ll| #3#) (GO G191)))
+                   (SEQ
+                    (SPADCALL |r_vec| |ll| (|SPADfirst| |la|) (QREFELT % 100))
+                    (EXIT (LETT |la| (CDR |la|))))
+                   (LETT |ll| (|inc_SI| |ll|)) (GO G190) G191 (EXIT NIL))
+              (LETT |ki| (|spadConstant| % 40)) (LETT |mm| |l|)
+              (SEQ G190 (COND ((NULL (< |mm| |m|)) (GO G191)))
+                   (SEQ (LETT |ki| (SPADCALL |ki| |kf| (QREFELT % 25)))
+                        (LETT |mm| (+ |mm| |l|))
+                        (EXIT
+                         (SEQ (LETT |ll| 1) (LETT #2# |l|) G190
+                              (COND ((|greater_SI| |ll| #2#) (GO G191)))
+                              (SEQ
+                               (SPADCALL |r_vec| |ll|
+                                         (SPADCALL
+                                          (SPADCALL |r_vec| |ll|
+                                                    (QREFELT % 101))
+                                          (SPADCALL (|SPADfirst| |la|) |ki|
+                                                    (QREFELT % 25))
+                                          (QREFELT % 28))
+                                         (QREFELT % 100))
+                               (EXIT (LETT |la| (CDR |la|))))
+                              (LETT |ll| (|inc_SI| |ll|)) (GO G190) G191
+                              (EXIT NIL))))
+                   NIL (GO G190) G191 (EXIT NIL))
+              (EXIT (SPADCALL |r_vec| (QREFELT % 102)))))) 
+
+(SDEFUN |RSIMP;my_coeffs|
+        ((|p| (|uPe|)) (|k| (|Integer|))
+         (% (|List| (|Expression| (|Integer|)))))
+        (SPROG
+         ((|res| (|List| (|Expression| (|Integer|))))
+          (|d| (|NonNegativeInteger|)) (|i| NIL))
+         (SEQ (LETT |res| NIL)
+              (SEQ (LETT |i| |k|) G190 (COND ((< |i| 0) (GO G191)))
+                   (SEQ (LETT |d| (SPADCALL |p| (QREFELT % 103)))
+                        (EXIT
+                         (COND
+                          ((< |d| |i|)
+                           (LETT |res| (CONS (|spadConstant| % 72) |res|)))
+                          ('T
+                           (SEQ
+                            (LETT |res|
+                                  (CONS (SPADCALL |p| (QREFELT % 104)) |res|))
+                            (EXIT
+                             (LETT |p| (SPADCALL |p| (QREFELT % 105)))))))))
+                   (LETT |i| (+ |i| -1)) (GO G190) G191 (EXIT NIL))
+              (EXIT |res|)))) 
 
 (SDEFUN |RSIMP;rsimp_gen_4|
-        ((|av| (|Expression| (|Integer|))) (|bv| (|Expression| (|Integer|)))
-         (|cv| (|Expression| (|Integer|))) (|dv| (|Expression| (|Integer|)))
+        ((|cl| (|List| (|Expression| (|Integer|))))
          (|rv| (|Expression| (|Integer|))) (|k| (|Integer|))
          (% (|Union| (|List| (|Expression| (|Integer|))) "failed")))
         (SPROG
          ((|du| #1=(|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
           (|cu| #1#) (|d1| #2=(|Expression| (|Integer|))) (|c1| #2#)
-          (|s2| #3=(|Expression| (|Integer|)))
+          (|s2| (|Expression| (|Integer|)))
           (|r2l| (|List| (|Expression| (|Integer|))))
-          (|tmp| #4=(|Expression| (|Integer|))) (#5=#:G134 NIL)
-          (|res2| #6=(|Union| (|List| (|Expression| (|Integer|))) "failed"))
-          (|a2| #4#) (|b2| #4#) (#7=#:G135 NIL) (|i| NIL) (|kk| (|Integer|))
+          (|tmp| #3=(|Expression| (|Integer|))) (#4=#:G159 NIL)
+          (|res2| #5=(|Union| (|List| (|Expression| (|Integer|))) "failed"))
+          (|a2| #3#) (|b2| #3#) (#6=#:G160 NIL) (|i| NIL) (|kk| (|Integer|))
           (|su| #1#) (|s1| #2#) (|r1l| (|List| (|Expression| (|Integer|))))
-          (|res1| #6#) (|b1| #3#) (|a1| #3#)
-          (|krr| (|Kernel| (|Expression| (|Integer|))))
+          (|res1| #5#) (|b1| NIL)
+          (|#G47| #7=(|List| (|Expression| (|Integer|)))) (|a1| NIL)
+          (|#G46| #7#) (|krr| (|Kernel| (|Expression| (|Integer|))))
           (|rr| (|Expression| (|Integer|))))
          (SEQ
           (EXIT
-           (SEQ (LETT |rr| (SPADCALL |rv| (QREFELT % 98)))
-                (LETT |krr| (SPADCALL |rr| (QREFELT % 99)))
-                (LETT |a1|
-                      (SPADCALL |av| (SPADCALL |cv| |rr| (QREFELT % 25))
-                                (QREFELT % 28)))
-                (LETT |b1|
-                      (SPADCALL |bv| (SPADCALL |dv| |rr| (QREFELT % 25))
-                                (QREFELT % 28)))
+           (SEQ (LETT |rr| (SPADCALL |rv| (QREFELT % 106)))
+                (LETT |krr| (SPADCALL |rr| (QREFELT % 107)))
+                (PROGN
+                 (LETT |#G46| (|RSIMP;split_eval| |cl| |rr| 2 4 %))
+                 (LETT |#G47| |#G46|)
+                 (LETT |a1| (|SPADfirst| |#G47|))
+                 (LETT |#G47| (CDR |#G47|))
+                 (LETT |b1| (|SPADfirst| |#G47|))
+                 |#G46|)
                 (LETT |res1| (|RSIMP;rsimp_gen_2| |a1| |b1| |rr| |k| %))
                 (EXIT
                  (COND
                   ((QEQCAR |res1| 1)
-                   (PROGN (LETT #5# (CONS 1 "failed")) (GO #8=#:G133)))
+                   (PROGN (LETT #4# (CONS 1 "failed")) (GO #8=#:G158)))
                   (#9='T
                    (SEQ (LETT |r1l| (QCDR |res1|))
                         (LETT |s1| (SPADCALL |r1l| 1 (QREFELT % 76)))
@@ -837,8 +919,8 @@
                         (LETT |d1| (SPADCALL |r1l| 3 (QREFELT % 76)))
                         (LETT |su|
                               (SPADCALL |s1| |krr|
-                                        (SPADCALL |krr| (QREFELT % 101))
-                                        (QREFELT % 102)))
+                                        (SPADCALL |krr| (QREFELT % 109))
+                                        (QREFELT % 110)))
                         (LETT |a2| (SPADCALL |su| 0 (QREFELT % 73)))
                         (LETT |b2| (SPADCALL |su| 1 (QREFELT % 73)))
                         (LETT |res2|
@@ -848,8 +930,8 @@
                           (COND
                            ((EQL (REM |k| 2) 0)
                             (SEQ (LETT |kk| (QUOTIENT2 |k| 2))
-                                 (SEQ (LETT |i| 1) (LETT #7# |kk|) G190
-                                      (COND ((|greater_SI| |i| #7#) (GO G191)))
+                                 (SEQ (LETT |i| 1) (LETT #6# |kk|) G190
+                                      (COND ((|greater_SI| |i| #6#) (GO G191)))
                                       (SEQ (LETT |tmp| |b2|) (LETT |b2| |a2|)
                                            (EXIT
                                             (LETT |a2|
@@ -864,7 +946,7 @@
                                   (COND
                                    ((QEQCAR |res2| 1)
                                     (PROGN
-                                     (LETT #5# (CONS 1 "failed"))
+                                     (LETT #4# (CONS 1 "failed"))
                                      (GO #8#)))
                                    (#9#
                                     (SEQ (LETT |tmp| |d1|)
@@ -890,13 +972,13 @@
                                      (LETT |cu|
                                            (SPADCALL |c1| |krr|
                                                      (SPADCALL |krr|
-                                                               (QREFELT % 101))
-                                                     (QREFELT % 102)))
+                                                               (QREFELT % 109))
+                                                     (QREFELT % 110)))
                                      (LETT |du|
                                            (SPADCALL |d1| |krr|
                                                      (SPADCALL |krr|
-                                                               (QREFELT % 101))
-                                                     (QREFELT % 102)))
+                                                               (QREFELT % 109))
+                                                     (QREFELT % 110)))
                                      (EXIT
                                       (CONS 0
                                             (LIST
@@ -907,15 +989,700 @@
                                              (SPADCALL |du| 1
                                                        (QREFELT %
                                                                 73)))))))))))))))
-          #8# (EXIT #5#)))) 
+          #8# (EXIT #4#)))) 
 
-(SDEFUN |RSIMP;rsimp1;EIU;9|
+(SDEFUN |RSIMP;rsimp_gen_6|
+        ((|cl| (|List| (|Expression| (|Integer|))))
+         (|rv| (|Expression| (|Integer|))) (|k| (|Integer|))
+         (% (|Union| (|List| (|Expression| (|Integer|))) "failed")))
+        (SPROG
+         ((|du| #1=(|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
+          (|cu| #1#) (|d1| #2=(|Expression| (|Integer|))) (|c1| #2#)
+          (|s2| (|Expression| (|Integer|)))
+          (|r2l| (|List| (|Expression| (|Integer|))))
+          (|res2| (|Union| (|List| (|Expression| (|Integer|))) "failed"))
+          (|c2| #3=(|Expression| (|Integer|))) (|b2| #3#) (|a2| #3#) (|su| #1#)
+          (|s1| #2#) (|r1l| (|List| (|Expression| (|Integer|))))
+          (#4=#:G165 NIL)
+          (|res1| (|Union| (|List| (|Expression| (|Integer|))) "failed"))
+          (|b1| NIL) (|#G55| #5=(|List| (|Expression| (|Integer|)))) (|a1| NIL)
+          (|#G54| #5#) (|krr| (|Kernel| (|Expression| (|Integer|))))
+          (|rr| (|Expression| (|Integer|))))
+         (SEQ
+          (EXIT
+           (SEQ
+            (LETT |rr|
+                  (SPADCALL |rv| (SPADCALL 1 3 (QREFELT % 113))
+                            (QREFELT % 114)))
+            (LETT |krr| (SPADCALL |rr| (QREFELT % 107)))
+            (PROGN
+             (LETT |#G54| (|RSIMP;split_eval| |cl| |rr| 2 6 %))
+             (LETT |#G55| |#G54|)
+             (LETT |a1| (|SPADfirst| |#G55|))
+             (LETT |#G55| (CDR |#G55|))
+             (LETT |b1| (|SPADfirst| |#G55|))
+             |#G54|)
+            (LETT |res1| (|RSIMP;rsimp_gen_2| |a1| |b1| |rr| |k| %))
+            (EXIT
+             (COND
+              ((QEQCAR |res1| 1)
+               (PROGN (LETT #4# (CONS 1 "failed")) (GO #6=#:G164)))
+              (#7='T
+               (SEQ (LETT |r1l| (QCDR |res1|))
+                    (LETT |s1| (SPADCALL |r1l| 1 (QREFELT % 76)))
+                    (LETT |c1| (SPADCALL |r1l| 2 (QREFELT % 76)))
+                    (LETT |d1| (SPADCALL |r1l| 3 (QREFELT % 76)))
+                    (LETT |su|
+                          (SPADCALL |s1| |krr| (SPADCALL |krr| (QREFELT % 109))
+                                    (QREFELT % 110)))
+                    (LETT |a2| (SPADCALL |su| 0 (QREFELT % 73)))
+                    (LETT |b2| (SPADCALL |su| 1 (QREFELT % 73)))
+                    (LETT |c2| (SPADCALL |su| 2 (QREFELT % 73)))
+                    (LETT |res2|
+                          (|RSIMP;rsimp_gen_3| |a2| |b2| |c2| |rv| |k| %))
+                    (EXIT
+                     (COND ((QEQCAR |res2| 1) (CONS 1 "failed"))
+                           (#7#
+                            (SEQ (LETT |r2l| (QCDR |res2|))
+                                 (LETT |s2|
+                                       (SPADCALL
+                                        (SPADCALL
+                                         (SPADCALL |r2l| 2 (QREFELT % 76))
+                                         (SPADCALL
+                                          (SPADCALL |r2l| 3 (QREFELT % 76))
+                                          |rr| (QREFELT % 25))
+                                         (QREFELT % 28))
+                                        (SPADCALL
+                                         (SPADCALL |r2l| 4 (QREFELT % 76))
+                                         (SPADCALL |rr| 2 (QREFELT % 24))
+                                         (QREFELT % 25))
+                                        (QREFELT % 28)))
+                                 (LETT |c1|
+                                       (SPADCALL |s2| |c1| (QREFELT % 25)))
+                                 (LETT |d1|
+                                       (SPADCALL |s2| |d1| (QREFELT % 25)))
+                                 (LETT |cu|
+                                       (SPADCALL |c1| |krr|
+                                                 (SPADCALL |krr|
+                                                           (QREFELT % 109))
+                                                 (QREFELT % 110)))
+                                 (LETT |du|
+                                       (SPADCALL |d1| |krr|
+                                                 (SPADCALL |krr|
+                                                           (QREFELT % 109))
+                                                 (QREFELT % 110)))
+                                 (EXIT
+                                  (CONS 0
+                                        (LIST (SPADCALL |r2l| 1 (QREFELT % 76))
+                                              (SPADCALL |cu| 0 (QREFELT % 73))
+                                              (SPADCALL |du| 0 (QREFELT % 73))
+                                              (SPADCALL |cu| 1 (QREFELT % 73))
+                                              (SPADCALL |du| 1 (QREFELT % 73))
+                                              (SPADCALL |cu| 2 (QREFELT % 73))
+                                              (SPADCALL |du| 2
+                                                        (QREFELT %
+                                                                 73)))))))))))))))
+          #6# (EXIT #4#)))) 
+
+(SDEFUN |RSIMP;rsimp_gen_8|
+        ((|cl| (|List| (|Expression| (|Integer|))))
+         (|rv| (|Expression| (|Integer|))) (|k| (|Integer|))
+         (% (|Union| (|List| (|Expression| (|Integer|))) "failed")))
+        (SPROG
+         ((|du| #1=(|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
+          (|cu| #1#) (|d1| #2=(|Expression| (|Integer|))) (|c1| #2#)
+          (|ss| #3=(|Expression| (|Integer|)))
+          (|r3l| (|List| (|Expression| (|Integer|)))) (|c2| #2#) (|d2| #2#)
+          (|tmp| #3#) (#4=#:G183 NIL)
+          (|res3| #5=(|Union| (|List| (|Expression| (|Integer|))) "failed"))
+          (|a3| #6=(|Expression| (|Integer|))) (|b3| #6#) (#7=#:G185 NIL)
+          (|i| NIL) (|kk| (|Integer|)) (|su2| #1#) (|s2| #2#)
+          (|r2l| (|List| (|Expression| (|Integer|)))) (|res2| #5#) (|a2| #3#)
+          (|b2| #3#) (#8=#:G184 NIL) (|su| #1#) (|s1| #2#)
+          (|r1l| (|List| (|Expression| (|Integer|)))) (|res1| #5#) (|b1| NIL)
+          (|#G62| #9=(|List| (|Expression| (|Integer|)))) (|a1| NIL)
+          (|#G61| #9#) (|krr| (|Kernel| (|Expression| (|Integer|))))
+          (|rr| (|Expression| (|Integer|))))
+         (SEQ
+          (EXIT
+           (SEQ
+            (LETT |rr|
+                  (SPADCALL |rv| (SPADCALL 1 4 (QREFELT % 113))
+                            (QREFELT % 114)))
+            (LETT |krr| (SPADCALL |rr| (QREFELT % 107)))
+            (PROGN
+             (LETT |#G61| (|RSIMP;split_eval| |cl| |rr| 2 8 %))
+             (LETT |#G62| |#G61|)
+             (LETT |a1| (|SPADfirst| |#G62|))
+             (LETT |#G62| (CDR |#G62|))
+             (LETT |b1| (|SPADfirst| |#G62|))
+             |#G61|)
+            (LETT |res1| (|RSIMP;rsimp_gen_2| |a1| |b1| |rr| |k| %))
+            (EXIT
+             (COND
+              ((QEQCAR |res1| 1)
+               (PROGN (LETT #4# (CONS 1 "failed")) (GO #10=#:G182)))
+              (#11='T
+               (SEQ (LETT |r1l| (QCDR |res1|))
+                    (LETT |s1| (SPADCALL |r1l| 1 (QREFELT % 76)))
+                    (LETT |c1| (SPADCALL |r1l| 2 (QREFELT % 76)))
+                    (LETT |d1| (SPADCALL |r1l| 3 (QREFELT % 76)))
+                    (LETT |su|
+                          (SPADCALL |s1| |krr| (SPADCALL |krr| (QREFELT % 109))
+                                    (QREFELT % 110)))
+                    (LETT |a2|
+                          (SPADCALL (SPADCALL |su| 0 (QREFELT % 73))
+                                    (SPADCALL (SPADCALL |su| 2 (QREFELT % 73))
+                                              (SPADCALL |rr| 2 (QREFELT % 24))
+                                              (QREFELT % 25))
+                                    (QREFELT % 28)))
+                    (LETT |b2|
+                          (SPADCALL (SPADCALL |su| 1 (QREFELT % 73))
+                                    (SPADCALL (SPADCALL |su| 3 (QREFELT % 73))
+                                              (SPADCALL |rr| 2 (QREFELT % 24))
+                                              (QREFELT % 25))
+                                    (QREFELT % 28)))
+                    (LETT |res2|
+                          (|RSIMP;rsimp_gen_2| |a2| |b2|
+                           (SPADCALL |rr| 2 (QREFELT % 24)) |k| %))
+                    (COND
+                     ((QEQCAR |res2| 1)
+                      (COND
+                       ((EQL (REM |k| 2) 0)
+                        (SEQ (LETT |kk| (QUOTIENT2 |k| 2))
+                             (SEQ (LETT |i| 1) (LETT #8# |kk|) G190
+                                  (COND ((|greater_SI| |i| #8#) (GO G191)))
+                                  (SEQ (LETT |tmp| |b2|) (LETT |b2| |a2|)
+                                       (EXIT
+                                        (LETT |a2|
+                                              (SPADCALL |tmp|
+                                                        (SPADCALL |rr| 2
+                                                                  (QREFELT %
+                                                                           24))
+                                                        (QREFELT % 25)))))
+                                  (LETT |i| (|inc_SI| |i|)) (GO G190) G191
+                                  (EXIT NIL))
+                             (LETT |res2|
+                                   (|RSIMP;rsimp_gen_2| |a2| |b2|
+                                    (SPADCALL |rr| 2 (QREFELT % 24)) |k| %))
+                             (EXIT
+                              (COND
+                               ((QEQCAR |res2| 1)
+                                (PROGN (LETT #4# (CONS 1 "failed")) (GO #10#)))
+                               (#11#
+                                (SEQ (LETT |tmp| |d1|)
+                                     (LETT |d1|
+                                           (SPADCALL |c1| |rr| (QREFELT % 38)))
+                                     (EXIT (LETT |c1| |tmp|)))))))))))
+                    (EXIT
+                     (COND ((QEQCAR |res2| 1) (CONS 1 "failed"))
+                           (#11#
+                            (SEQ (LETT |r2l| (QCDR |res2|))
+                                 (LETT |s2| (SPADCALL |r2l| 1 (QREFELT % 76)))
+                                 (LETT |c2| (SPADCALL |r2l| 2 (QREFELT % 76)))
+                                 (LETT |d2| (SPADCALL |r2l| 3 (QREFELT % 76)))
+                                 (LETT |su2|
+                                       (SPADCALL |s2| |krr|
+                                                 (SPADCALL |krr|
+                                                           (QREFELT % 109))
+                                                 (QREFELT % 110)))
+                                 (LETT |a3| (SPADCALL |su2| 0 (QREFELT % 73)))
+                                 (LETT |b3| (SPADCALL |su2| 2 (QREFELT % 73)))
+                                 (LETT |res3|
+                                       (|RSIMP;rsimp_gen_2| |a3| |b3| |rv| |k|
+                                        %))
+                                 (COND
+                                  ((QEQCAR |res3| 1)
+                                   (COND
+                                    ((EQL (REM |k| 2) 0)
+                                     (SEQ (LETT |kk| (QUOTIENT2 |k| 2))
+                                          (SEQ (LETT |i| 1) (LETT #7# |kk|)
+                                               G190
+                                               (COND
+                                                ((|greater_SI| |i| #7#)
+                                                 (GO G191)))
+                                               (SEQ (LETT |tmp| |b3|)
+                                                    (LETT |b3| |a3|)
+                                                    (EXIT
+                                                     (LETT |a3|
+                                                           (SPADCALL |tmp| |rv|
+                                                                     (QREFELT %
+                                                                              25)))))
+                                               (LETT |i| (|inc_SI| |i|))
+                                               (GO G190) G191 (EXIT NIL))
+                                          (LETT |res3|
+                                                (|RSIMP;rsimp_gen_2| |a3| |b3|
+                                                 |rv| |k| %))
+                                          (EXIT
+                                           (COND
+                                            ((QEQCAR |res3| 1)
+                                             (PROGN
+                                              (LETT #4# (CONS 1 "failed"))
+                                              (GO #10#)))
+                                            (#11#
+                                             (SEQ (LETT |tmp| |d2|)
+                                                  (LETT |d2|
+                                                        (SPADCALL |c2|
+                                                                  (SPADCALL
+                                                                   |rr| 2
+                                                                   (QREFELT %
+                                                                            24))
+                                                                  (QREFELT %
+                                                                           38)))
+                                                  (EXIT
+                                                   (LETT |c2| |tmp|)))))))))))
+                                 (EXIT
+                                  (COND ((QEQCAR |res3| 1) (CONS 1 "failed"))
+                                        (#11#
+                                         (SEQ (LETT |r3l| (QCDR |res3|))
+                                              (LETT |ss|
+                                                    (SPADCALL
+                                                     (SPADCALL |r3l| 2
+                                                               (QREFELT % 76))
+                                                     (SPADCALL
+                                                      (SPADCALL |r3l| 3
+                                                                (QREFELT % 76))
+                                                      (SPADCALL |rr| 2
+                                                                (QREFELT % 24))
+                                                      (QREFELT % 25))
+                                                     (QREFELT % 28)))
+                                              (LETT |ss|
+                                                    (SPADCALL |ss|
+                                                              (SPADCALL |c2|
+                                                                        (SPADCALL
+                                                                         |d2|
+                                                                         |rr|
+                                                                         (QREFELT
+                                                                          %
+                                                                          25))
+                                                                        (QREFELT
+                                                                         % 28))
+                                                              (QREFELT % 25)))
+                                              (LETT |c1|
+                                                    (SPADCALL |ss| |c1|
+                                                              (QREFELT % 25)))
+                                              (LETT |d1|
+                                                    (SPADCALL |ss| |d1|
+                                                              (QREFELT % 25)))
+                                              (LETT |cu|
+                                                    (SPADCALL |c1| |krr|
+                                                              (SPADCALL |krr|
+                                                                        (QREFELT
+                                                                         %
+                                                                         109))
+                                                              (QREFELT % 110)))
+                                              (LETT |du|
+                                                    (SPADCALL |d1| |krr|
+                                                              (SPADCALL |krr|
+                                                                        (QREFELT
+                                                                         %
+                                                                         109))
+                                                              (QREFELT % 110)))
+                                              (EXIT
+                                               (CONS 0
+                                                     (LIST
+                                                      (SPADCALL |r3l| 1
+                                                                (QREFELT % 76))
+                                                      (SPADCALL |cu| 0
+                                                                (QREFELT % 73))
+                                                      (SPADCALL |du| 0
+                                                                (QREFELT % 73))
+                                                      (SPADCALL |cu| 1
+                                                                (QREFELT % 73))
+                                                      (SPADCALL |du| 1
+                                                                (QREFELT % 73))
+                                                      (SPADCALL |cu| 2
+                                                                (QREFELT % 73))
+                                                      (SPADCALL |du| 2
+                                                                (QREFELT % 73))
+                                                      (SPADCALL |cu| 3
+                                                                (QREFELT % 73))
+                                                      (SPADCALL |du| 3
+                                                                (QREFELT %
+                                                                         73)))))))))))))))))))
+          #10# (EXIT #4#)))) 
+
+(SDEFUN |RSIMP;rsimp_gen_9|
+        ((|cl| (|List| (|Expression| (|Integer|))))
+         (|rv| (|Expression| (|Integer|))) (|k| (|Integer|))
+         (% (|Union| (|List| (|Expression| (|Integer|))) "failed")))
+        (SPROG
+         ((|fu| #1=(|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
+          (|eu| #1#) (|du| #1#) (|f1| #2=(|Expression| (|Integer|))) (|e1| #2#)
+          (|d1| #2#) (|s2| (|Expression| (|Integer|)))
+          (|r2l| (|List| (|Expression| (|Integer|))))
+          (|tmp| #3=(|Expression| (|Integer|))) (#4=#:G201 NIL)
+          (|res2| #5=(|Union| (|List| (|Expression| (|Integer|))) "failed"))
+          (|a2| #3#) (|b2| #3#) (|c2| #3#) (#6=#:G203 NIL) (|i| NIL)
+          (|kk| (|Integer|)) (#7=#:G202 NIL) (|su| #1#) (|s1| #2#)
+          (|r1l| (|List| (|Expression| (|Integer|)))) (|res1| #5#) (|c1| NIL)
+          (|#G71| #8=(|List| (|Expression| (|Integer|)))) (|b1| NIL) (|a1| NIL)
+          (|#G70| #8#) (|krr| (|Kernel| (|Expression| (|Integer|))))
+          (|rr| (|Expression| (|Integer|))))
+         (SEQ
+          (EXIT
+           (SEQ
+            (LETT |rr|
+                  (SPADCALL |rv| (SPADCALL 1 3 (QREFELT % 113))
+                            (QREFELT % 114)))
+            (LETT |krr| (SPADCALL |rr| (QREFELT % 107)))
+            (PROGN
+             (LETT |#G70| (|RSIMP;split_eval| |cl| |rr| 3 9 %))
+             (LETT |#G71| |#G70|)
+             (LETT |a1| (|SPADfirst| |#G71|))
+             (LETT |#G71| (CDR |#G71|))
+             (LETT |b1| (|SPADfirst| |#G71|))
+             (LETT |#G71| (CDR |#G71|))
+             (LETT |c1| (|SPADfirst| |#G71|))
+             |#G70|)
+            (LETT |res1| (|RSIMP;rsimp_gen_3| |a1| |b1| |c1| |rr| |k| %))
+            (EXIT
+             (COND
+              ((QEQCAR |res1| 1)
+               (PROGN (LETT #4# (CONS 1 "failed")) (GO #9=#:G200)))
+              (#10='T
+               (SEQ (LETT |r1l| (QCDR |res1|))
+                    (LETT |s1| (SPADCALL |r1l| 1 (QREFELT % 76)))
+                    (LETT |d1| (SPADCALL |r1l| 2 (QREFELT % 76)))
+                    (LETT |e1| (SPADCALL |r1l| 3 (QREFELT % 76)))
+                    (LETT |f1| (SPADCALL |r1l| 4 (QREFELT % 76)))
+                    (LETT |su|
+                          (SPADCALL |s1| |krr| (SPADCALL |krr| (QREFELT % 109))
+                                    (QREFELT % 110)))
+                    (LETT |a2| (SPADCALL |su| 0 (QREFELT % 73)))
+                    (LETT |b2| (SPADCALL |su| 1 (QREFELT % 73)))
+                    (LETT |c2| (SPADCALL |su| 2 (QREFELT % 73)))
+                    (LETT |res2|
+                          (|RSIMP;rsimp_gen_3| |a2| |b2| |c2| |rv| |k| %))
+                    (COND
+                     ((QEQCAR |res2| 1)
+                      (COND
+                       ((EQL (REM |k| 3) 0)
+                        (SEQ (LETT |kk| (QUOTIENT2 |k| 3))
+                             (SEQ (LETT |i| 1) (LETT #7# |kk|) G190
+                                  (COND ((|greater_SI| |i| #7#) (GO G191)))
+                                  (SEQ (LETT |tmp| |c2|) (LETT |c2| |b2|)
+                                       (LETT |b2| |a2|)
+                                       (EXIT
+                                        (LETT |a2|
+                                              (SPADCALL |tmp| |rv|
+                                                        (QREFELT % 25)))))
+                                  (LETT |i| (|inc_SI| |i|)) (GO G190) G191
+                                  (EXIT NIL))
+                             (LETT |res2|
+                                   (|RSIMP;rsimp_gen_3| |a2| |b2| |c2| |rv| |k|
+                                    %))
+                             (LETT |tmp| |d1|) (LETT |d1| |e1|)
+                             (LETT |e1| |f1|)
+                             (EXIT
+                              (LETT |f1|
+                                    (SPADCALL |tmp| |rr| (QREFELT % 38)))))))))
+                    (COND
+                     ((QEQCAR |res2| 1)
+                      (COND
+                       ((EQL (REM |k| 3) 0)
+                        (SEQ (LETT |kk| (QUOTIENT2 |k| 3))
+                             (SEQ (LETT |i| 1) (LETT #6# |kk|) G190
+                                  (COND ((|greater_SI| |i| #6#) (GO G191)))
+                                  (SEQ (LETT |tmp| |c2|) (LETT |c2| |b2|)
+                                       (LETT |b2| |a2|)
+                                       (EXIT
+                                        (LETT |a2|
+                                              (SPADCALL |tmp| |rv|
+                                                        (QREFELT % 25)))))
+                                  (LETT |i| (|inc_SI| |i|)) (GO G190) G191
+                                  (EXIT NIL))
+                             (LETT |res2|
+                                   (|RSIMP;rsimp_gen_3| |a2| |b2| |c2| |rv| |k|
+                                    %))
+                             (EXIT
+                              (COND
+                               ((QEQCAR |res2| 1)
+                                (PROGN (LETT #4# (CONS 1 "failed")) (GO #9#)))
+                               (#10#
+                                (SEQ (LETT |tmp| |d1|) (LETT |d1| |e1|)
+                                     (LETT |e1| |f1|)
+                                     (EXIT
+                                      (LETT |f1|
+                                            (SPADCALL |tmp| |rr|
+                                                      (QREFELT %
+                                                               38)))))))))))))
+                    (EXIT
+                     (COND ((QEQCAR |res2| 1) (CONS 1 "failed"))
+                           (#10#
+                            (SEQ (LETT |r2l| (QCDR |res2|))
+                                 (LETT |s2|
+                                       (SPADCALL
+                                        (SPADCALL
+                                         (SPADCALL |r2l| 2 (QREFELT % 76))
+                                         (SPADCALL
+                                          (SPADCALL |r2l| 3 (QREFELT % 76))
+                                          |rr| (QREFELT % 25))
+                                         (QREFELT % 28))
+                                        (SPADCALL
+                                         (SPADCALL |r2l| 4 (QREFELT % 76))
+                                         (SPADCALL |rr| 2 (QREFELT % 24))
+                                         (QREFELT % 25))
+                                        (QREFELT % 28)))
+                                 (LETT |d1|
+                                       (SPADCALL |s2| |d1| (QREFELT % 25)))
+                                 (LETT |e1|
+                                       (SPADCALL |s2| |e1| (QREFELT % 25)))
+                                 (LETT |f1|
+                                       (SPADCALL |s2| |f1| (QREFELT % 25)))
+                                 (LETT |du|
+                                       (SPADCALL |d1| |krr|
+                                                 (SPADCALL |krr|
+                                                           (QREFELT % 109))
+                                                 (QREFELT % 110)))
+                                 (LETT |eu|
+                                       (SPADCALL |e1| |krr|
+                                                 (SPADCALL |krr|
+                                                           (QREFELT % 109))
+                                                 (QREFELT % 110)))
+                                 (LETT |fu|
+                                       (SPADCALL |f1| |krr|
+                                                 (SPADCALL |krr|
+                                                           (QREFELT % 109))
+                                                 (QREFELT % 110)))
+                                 (EXIT
+                                  (CONS 0
+                                        (LIST (SPADCALL |r2l| 1 (QREFELT % 76))
+                                              (SPADCALL |du| 0 (QREFELT % 73))
+                                              (SPADCALL |eu| 0 (QREFELT % 73))
+                                              (SPADCALL |fu| 0 (QREFELT % 73))
+                                              (SPADCALL |du| 1 (QREFELT % 73))
+                                              (SPADCALL |eu| 1 (QREFELT % 73))
+                                              (SPADCALL |fu| 1 (QREFELT % 73))
+                                              (SPADCALL |du| 2 (QREFELT % 73))
+                                              (SPADCALL |eu| 2 (QREFELT % 73))
+                                              (SPADCALL |fu| 2
+                                                        (QREFELT %
+                                                                 73)))))))))))))))
+          #9# (EXIT #4#)))) 
+
+(SDEFUN |RSIMP;rsimp_gen_12|
+        ((|cl| (|List| (|Expression| (|Integer|))))
+         (|rv| (|Expression| (|Integer|))) (|k| (|Integer|))
+         (% (|Union| (|List| (|Expression| (|Integer|))) "failed")))
+        (SPROG
+         ((|rl| (|List| (|Expression| (|Integer|)))) (#1=#:G220 NIL) (|ci| NIL)
+          (#2=#:G221 NIL) (|di| NIL)
+          (|du| #3=(|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
+          (|cu| #3#) (|ss| (|Expression| (|Integer|)))
+          (|r3l| (|List| (|Expression| (|Integer|))))
+          (|res3| (|Union| (|List| (|Expression| (|Integer|))) "failed"))
+          (|c3| #4=(|Expression| (|Integer|))) (|b3| #4#) (|a3| #4#)
+          (|su2| #3#) (|d2| #5=(|Expression| (|Integer|))) (|c2| #5#)
+          (|s2| #5#) (|r2l| (|List| (|Expression| (|Integer|)))) (|c1| #5#)
+          (|d1| #5#) (|tmp| #6=(|Expression| (|Integer|))) (#7=#:G218 NIL)
+          (|res2| #8=(|Union| (|List| (|Expression| (|Integer|))) "failed"))
+          (|a2| (|Expression| (|Integer|))) (|b2| #6#) (#9=#:G219 NIL)
+          (|i| NIL) (|kk| (|Integer|)) (|#G85| #10=(|List| #6#)) (|#G84| #10#)
+          (|cl2| (|List| (|Expression| (|Integer|)))) (|su| #3#) (|s1| #5#)
+          (|r1l| (|List| (|Expression| (|Integer|)))) (|res1| #8#) (|b1| NIL)
+          (|#G81| #10#) (|a1| NIL) (|#G80| #10#)
+          (|krr| (|Kernel| (|Expression| (|Integer|))))
+          (|rr| (|Expression| (|Integer|))))
+         (SEQ
+          (EXIT
+           (SEQ
+            (LETT |rr|
+                  (SPADCALL |rv| (SPADCALL 1 6 (QREFELT % 113))
+                            (QREFELT % 114)))
+            (LETT |krr| (SPADCALL |rr| (QREFELT % 107)))
+            (PROGN
+             (LETT |#G80| (|RSIMP;split_eval| |cl| |rr| 2 12 %))
+             (LETT |#G81| |#G80|)
+             (LETT |a1| (|SPADfirst| |#G81|))
+             (LETT |#G81| (CDR |#G81|))
+             (LETT |b1| (|SPADfirst| |#G81|))
+             |#G80|)
+            (LETT |res1| (|RSIMP;rsimp_gen_2| |a1| |b1| |rr| |k| %))
+            (EXIT
+             (COND ((QEQCAR |res1| 1) (CONS 1 "failed"))
+                   (#11='T
+                    (SEQ (LETT |r1l| (QCDR |res1|))
+                         (LETT |s1| (SPADCALL |r1l| 1 (QREFELT % 76)))
+                         (LETT |c1| (SPADCALL |r1l| 2 (QREFELT % 76)))
+                         (LETT |d1| (SPADCALL |r1l| 3 (QREFELT % 76)))
+                         (LETT |su|
+                               (SPADCALL |s1| |krr|
+                                         (SPADCALL |krr| (QREFELT % 109))
+                                         (QREFELT % 110)))
+                         (LETT |cl2| (|RSIMP;my_coeffs| |su| 5 %))
+                         (PROGN
+                          (LETT |#G84|
+                                (|RSIMP;split_eval| |cl2|
+                                 (SPADCALL |rr| 2 (QREFELT % 24)) 2 6 %))
+                          (LETT |#G85| |#G84|)
+                          (LETT |a2| (|SPADfirst| |#G85|))
+                          (LETT |#G85| (CDR |#G85|))
+                          (LETT |b2| (|SPADfirst| |#G85|))
+                          |#G84|)
+                         (LETT |res2|
+                               (|RSIMP;rsimp_gen_2| |a2| |b2|
+                                (SPADCALL |rr| 2 (QREFELT % 24)) |k| %))
+                         (COND
+                          ((QEQCAR |res2| 1)
+                           (COND
+                            ((EQL (REM |k| 2) 0)
+                             (SEQ (LETT |kk| (QUOTIENT2 |k| 2))
+                                  (SEQ (LETT |i| 1) (LETT #9# |kk|) G190
+                                       (COND
+                                        ((|greater_SI| |i| #9#) (GO G191)))
+                                       (SEQ (LETT |tmp| |b2|) (LETT |b2| |a2|)
+                                            (EXIT
+                                             (LETT |a2|
+                                                   (SPADCALL |tmp|
+                                                             (SPADCALL |rr| 2
+                                                                       (QREFELT
+                                                                        % 24))
+                                                             (QREFELT % 25)))))
+                                       (LETT |i| (|inc_SI| |i|)) (GO G190) G191
+                                       (EXIT NIL))
+                                  (LETT |res2|
+                                        (|RSIMP;rsimp_gen_2| |a2| |b2|
+                                         (SPADCALL |rr| 2 (QREFELT % 24)) |k|
+                                         %))
+                                  (EXIT
+                                   (COND
+                                    ((QEQCAR |res2| 1)
+                                     (PROGN
+                                      (LETT #7# (CONS 1 "failed"))
+                                      (GO #12=#:G217)))
+                                    (#11#
+                                     (SEQ (LETT |tmp| |d1|)
+                                          (LETT |d1|
+                                                (SPADCALL |c1| |rr|
+                                                          (QREFELT % 38)))
+                                          (EXIT (LETT |c1| |tmp|)))))))))))
+                         (EXIT
+                          (COND ((QEQCAR |res2| 1) (CONS 1 "failed"))
+                                (#11#
+                                 (SEQ (LETT |r2l| (QCDR |res2|))
+                                      (LETT |s2|
+                                            (SPADCALL |r2l| 1 (QREFELT % 76)))
+                                      (LETT |c2|
+                                            (SPADCALL |r2l| 2 (QREFELT % 76)))
+                                      (LETT |d2|
+                                            (SPADCALL |r2l| 3 (QREFELT % 76)))
+                                      (LETT |su2|
+                                            (SPADCALL |s2| |krr|
+                                                      (SPADCALL |krr|
+                                                                (QREFELT %
+                                                                         109))
+                                                      (QREFELT % 110)))
+                                      (LETT |a3|
+                                            (SPADCALL |su2| 0 (QREFELT % 73)))
+                                      (LETT |b3|
+                                            (SPADCALL |su2| 2 (QREFELT % 73)))
+                                      (LETT |c3|
+                                            (SPADCALL |su2| 4 (QREFELT % 73)))
+                                      (LETT |res3|
+                                            (|RSIMP;rsimp_gen_3| |a3| |b3| |c3|
+                                             |rv| |k| %))
+                                      (EXIT
+                                       (COND
+                                        ((QEQCAR |res3| 1) (CONS 1 "failed"))
+                                        (#11#
+                                         (SEQ (LETT |r3l| (QCDR |res3|))
+                                              (LETT |ss|
+                                                    (SPADCALL
+                                                     (SPADCALL
+                                                      (SPADCALL |r3l| 2
+                                                                (QREFELT % 76))
+                                                      (SPADCALL
+                                                       (SPADCALL |r3l| 3
+                                                                 (QREFELT %
+                                                                          76))
+                                                       (SPADCALL |rr| 2
+                                                                 (QREFELT %
+                                                                          24))
+                                                       (QREFELT % 25))
+                                                      (QREFELT % 28))
+                                                     (SPADCALL
+                                                      (SPADCALL |r3l| 4
+                                                                (QREFELT % 76))
+                                                      (SPADCALL |rr| 4
+                                                                (QREFELT % 24))
+                                                      (QREFELT % 25))
+                                                     (QREFELT % 28)))
+                                              (LETT |ss|
+                                                    (SPADCALL |ss|
+                                                              (SPADCALL |c2|
+                                                                        (SPADCALL
+                                                                         |d2|
+                                                                         |rr|
+                                                                         (QREFELT
+                                                                          %
+                                                                          25))
+                                                                        (QREFELT
+                                                                         % 28))
+                                                              (QREFELT % 25)))
+                                              (LETT |cu|
+                                                    (SPADCALL
+                                                     (SPADCALL |ss| |c1|
+                                                               (QREFELT % 25))
+                                                     |krr|
+                                                     (SPADCALL |krr|
+                                                               (QREFELT % 109))
+                                                     (QREFELT % 110)))
+                                              (LETT |du|
+                                                    (SPADCALL
+                                                     (SPADCALL |ss| |d1|
+                                                               (QREFELT % 25))
+                                                     |krr|
+                                                     (SPADCALL |krr|
+                                                               (QREFELT % 109))
+                                                     (QREFELT % 110)))
+                                              (LETT |rl| NIL)
+                                              (SEQ (LETT |di| NIL)
+                                                   (LETT #2#
+                                                         (|RSIMP;my_coeffs|
+                                                          |du| 5 %))
+                                                   (LETT |ci| NIL)
+                                                   (LETT #1#
+                                                         (|RSIMP;my_coeffs|
+                                                          |cu| 5 %))
+                                                   G190
+                                                   (COND
+                                                    ((OR (ATOM #1#)
+                                                         (PROGN
+                                                          (LETT |ci| (CAR #1#))
+                                                          NIL)
+                                                         (ATOM #2#)
+                                                         (PROGN
+                                                          (LETT |di| (CAR #2#))
+                                                          NIL))
+                                                     (GO G191)))
+                                                   (SEQ
+                                                    (LETT |rl|
+                                                          (CONS |ci| |rl|))
+                                                    (EXIT
+                                                     (LETT |rl|
+                                                           (CONS |di| |rl|))))
+                                                   (LETT #1#
+                                                         (PROG1 (CDR #1#)
+                                                           (LETT #2#
+                                                                 (CDR #2#))))
+                                                   (GO G190) G191 (EXIT NIL))
+                                              (EXIT
+                                               (CONS 0
+                                                     (CONS
+                                                      (SPADCALL |r3l| 1
+                                                                (QREFELT % 76))
+                                                      (NREVERSE
+                                                       |rl|))))))))))))))))))
+          #12# (EXIT #7#)))) 
+
+(SDEFUN |RSIMP;rsimp1;EIU;15|
         ((|av| (|Expression| (|Integer|))) (|k| (|Integer|))
          (% (|Union| (|Expression| (|Integer|)) "failed")))
         (SPROG
-         ((#1=#:G148 NIL)
+         ((#1=#:G234 NIL)
           (|f1| (|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
-          (#2=#:G149 NIL) (|fac| NIL)
+          (#2=#:G235 NIL) (|fac| NIL)
           (|fpk|
            (|Factored|
             (|SparseUnivariatePolynomial| (|Expression| (|Integer|)))))
@@ -925,8 +1692,8 @@
            (SEQ
             (LETT |pk|
                   (SPADCALL
-                   (SPADCALL (|spadConstant| % 40) |k| (QREFELT % 104))
-                   (SPADCALL |av| (QREFELT % 105)) (QREFELT % 106)))
+                   (SPADCALL (|spadConstant| % 40) |k| (QREFELT % 115))
+                   (SPADCALL |av| (QREFELT % 116)) (QREFELT % 117)))
             (LETT |fpk| (SPADCALL |pk| (QREFELT % 64)))
             (SEQ (LETT |fac| NIL) (LETT #2# (SPADCALL |fpk| (QREFELT % 69)))
                  G190
@@ -946,7 +1713,7 @@
                                         (SPADCALL |f1| (QREFELT % 74))
                                         (QREFELT % 38))
                                        (QREFELT % 37))))
-                          (GO #3=#:G147))))))
+                          (GO #3=#:G233))))))
                  (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
             (EXIT (CONS 1 "failed"))))
           #3# (EXIT #1#)))) 
@@ -955,19 +1722,42 @@
         ((|s1| (|Expression| (|Integer|))) (|k| (|Integer|))
          (|opr| (|BasicOperator|)) (% (|Expression| (|Integer|))))
         (COND
-         ((SPADCALL (SPADCALL |s1| (QREFELT % 93)) (|spadConstant| % 109)
-                    (QREFELT % 110))
+         ((SPADCALL (SPADCALL |s1| (QREFELT % 93)) (|spadConstant| % 111)
+                    (QREFELT % 120))
           (SPADCALL (|spadConstant| % 40)
                     (SPADCALL |opr|
                               (LIST
                                (SPADCALL (|spadConstant| % 40) |s1|
                                          (QREFELT % 38))
                                (SPADCALL |k| (QREFELT % 94)))
-                              (QREFELT % 113))
+                              (QREFELT % 123))
                     (QREFELT % 38)))
          ('T
           (SPADCALL |opr| (LIST |s1| (SPADCALL |k| (QREFELT % 94)))
-                    (QREFELT % 113))))) 
+                    (QREFELT % 123))))) 
+
+(SDEFUN |RSIMP;eval_rl|
+        ((|rl| (|List| (|Expression| (|Integer|))))
+         (|kf| (|Expression| (|Integer|))) (|k| (|Integer|))
+         (% (|Expression| (|Integer|))))
+        (SPROG
+         ((|res| (|Expression| (|Integer|))) (|ki| (|Expression| (|Integer|)))
+          (#1=#:G243 NIL) (|i| NIL) (#2=#:G244 NIL) (|ci| NIL))
+         (SEQ (LETT |res| (|SPADfirst| |rl|)) (LETT |ki| (|spadConstant| % 40))
+              (SEQ (LETT |ci| NIL) (LETT #2# (CDR |rl|)) (LETT |i| 1)
+                   (LETT #1# (- |k| 1)) G190
+                   (COND
+                    ((OR (|greater_SI| |i| #1#) (ATOM #2#)
+                         (PROGN (LETT |ci| (CAR #2#)) NIL))
+                     (GO G191)))
+                   (SEQ (LETT |ki| (SPADCALL |ki| |kf| (QREFELT % 25)))
+                        (EXIT
+                         (LETT |res|
+                               (SPADCALL (SPADCALL |ci| |ki| (QREFELT % 25))
+                                         |res| (QREFELT % 28)))))
+                   (LETT |i| (PROG1 (|inc_SI| |i|) (LETT #2# (CDR #2#))))
+                   (GO G190) G191 (EXIT NIL))
+              (EXIT |res|)))) 
 
 (SDEFUN |RSIMP;rsimp2_gen|
         ((|arg| #1=(|Expression| (|Integer|)))
@@ -975,15 +1765,15 @@
          (|k| (|Integer|)) (|opr| (|BasicOperator|))
          (% (|Union| (|Expression| (|Integer|)) "failed")))
         (SPROG
-         ((|su| (|Union| (|Expression| (|Integer|)) "failed")) (#2=#:G171 NIL)
-          (|s1| #1#) (|res| (|Expression| (|Integer|)))
-          (|kf| (|Expression| (|Integer|)))
-          (|r1l| (|List| (|Expression| (|Integer|))))
+         ((|su| (|Union| (|Expression| (|Integer|)) "failed")) (|s1| #1#)
+          (|res| (|Expression| (|Integer|)))
+          (|r1l| (|List| (|Expression| (|Integer|)))) (#2=#:G262 NIL)
           (|res1| (|Union| (|List| (|Expression| (|Integer|))) "failed"))
-          (|dv| #3=(|Expression| (|Integer|))) (|cv| #3#) (|bv| #3#) (|av| #3#)
+          (|cl| (|List| (|Expression| (|Integer|))))
+          (|bv| #3=(|Expression| (|Integer|))) (|av| #3#)
           (|rv| (|Expression| (|Integer|))) (|deg_k| (|NonNegativeInteger|))
           (|def_k| (|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
-          (#4=#:G170 NIL) (#5=#:G172 NIL) (|ker| NIL))
+          (#4=#:G261 NIL) (#5=#:G263 NIL) (|ker| NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |s1| |arg|) (LETT |res| (|spadConstant| % 40))
@@ -995,21 +1785,21 @@
                       (EXIT
                        (COND
                         ((NULL
-                          (SPADCALL |ker| (SPADCALL |s1| (QREFELT % 115))
-                                    (QREFELT % 117)))
-                         (PROGN (LETT #4# |$NoValue|) (GO #6=#:G155)))
+                          (SPADCALL |ker| (SPADCALL |s1| (QREFELT % 125))
+                                    (QREFELT % 127)))
+                         (PROGN (LETT #4# |$NoValue|) (GO #6=#:G248)))
                         ('T
-                         (SEQ (LETT |def_k| (SPADCALL |ker| (QREFELT % 101)))
+                         (SEQ (LETT |def_k| (SPADCALL |ker| (QREFELT % 109)))
                               (LETT |deg_k| (SPADCALL |def_k| (QREFELT % 71)))
                               (EXIT
                                (COND
                                 ((>
-                                  (SPADCALL (SPADCALL |def_k| (QREFELT % 118))
+                                  (SPADCALL (SPADCALL |def_k| (QREFELT % 128))
                                             (QREFELT % 71))
                                   0)
                                  (PROGN
                                   (LETT #2# (CONS 1 "failed"))
-                                  (GO #7=#:G169)))
+                                  (GO #7=#:G260)))
                                 ('T
                                  (SEQ
                                   (LETT |rv|
@@ -1022,8 +1812,8 @@
                                   (LETT |su|
                                         (SPADCALL |s1| |ker|
                                                   (SPADCALL |ker|
-                                                            (QREFELT % 101))
-                                                  (QREFELT % 102)))
+                                                            (QREFELT % 109))
+                                                  (QREFELT % 110)))
                                   (LETT |av| (SPADCALL |su| 0 (QREFELT % 73)))
                                   (LETT |bv| (SPADCALL |su| 1 (QREFELT % 73)))
                                   (EXIT
@@ -1043,24 +1833,42 @@
                                          (SEQ (LETT |r1l| (QCDR |res1|))
                                               (LETT |res|
                                                     (SPADCALL |res|
-                                                              (SPADCALL
-                                                               (SPADCALL |r1l|
-                                                                         2
+                                                              (|RSIMP;eval_rl|
+                                                               (CDR |r1l|)
+                                                               (SPADCALL |ker|
                                                                          (QREFELT
                                                                           %
-                                                                          76))
-                                                               (SPADCALL
-                                                                (SPADCALL |r1l|
-                                                                          3
-                                                                          (QREFELT
-                                                                           %
-                                                                           76))
-                                                                (SPADCALL |ker|
-                                                                          (QREFELT
-                                                                           %
-                                                                           119))
-                                                                (QREFELT % 25))
-                                                               (QREFELT % 28))
+                                                                          129))
+                                                               2 %)
+                                                              (QREFELT % 25)))
+                                              (EXIT
+                                               (LETT |s1|
+                                                     (SPADCALL |r1l| 1
+                                                               (QREFELT %
+                                                                        76))))))))))
+                                    ((EQL |deg_k| 3)
+                                     (SEQ
+                                      (LETT |res1|
+                                            (|RSIMP;rsimp_gen_3| |av| |bv|
+                                             (SPADCALL |su| 2 (QREFELT % 73))
+                                             |rv| |k| %))
+                                      (EXIT
+                                       (COND
+                                        ((QEQCAR |res1| 1)
+                                         (PROGN
+                                          (LETT #2# (CONS 1 "failed"))
+                                          (GO #7#)))
+                                        ('T
+                                         (SEQ (LETT |r1l| (QCDR |res1|))
+                                              (LETT |res|
+                                                    (SPADCALL |res|
+                                                              (|RSIMP;eval_rl|
+                                                               (CDR |r1l|)
+                                                               (SPADCALL |ker|
+                                                                         (QREFELT
+                                                                          %
+                                                                          129))
+                                                               3 %)
                                                               (QREFELT % 25)))
                                               (EXIT
                                                (LETT |s1|
@@ -1069,150 +1877,58 @@
                                                                         76))))))))))
                                     ('T
                                      (SEQ
-                                      (LETT |cv|
-                                            (SPADCALL |su| 2 (QREFELT % 73)))
+                                      (COND
+                                       ((< 12 |deg_k|)
+                                        (PROGN
+                                         (LETT #2# (CONS 1 "failed"))
+                                         (GO #7#))))
+                                      (LETT |cl|
+                                            (|RSIMP;my_coeffs| |su|
+                                             (- |deg_k| 1) %))
+                                      (LETT |res1|
+                                            (COND
+                                             ((EQL |deg_k| 4)
+                                              (|RSIMP;rsimp_gen_4| |cl| |rv|
+                                               |k| %))
+                                             ((EQL |deg_k| 6)
+                                              (|RSIMP;rsimp_gen_6| |cl| |rv|
+                                               |k| %))
+                                             ((EQL |deg_k| 8)
+                                              (|RSIMP;rsimp_gen_8| |cl| |rv|
+                                               |k| %))
+                                             ((EQL |deg_k| 9)
+                                              (|RSIMP;rsimp_gen_9| |cl| |rv|
+                                               |k| %))
+                                             ((EQL |deg_k| 12)
+                                              (|RSIMP;rsimp_gen_12| |cl| |rv|
+                                               |k| %))
+                                             ('T (CONS 1 "failed"))))
                                       (EXIT
                                        (COND
-                                        ((EQL |deg_k| 3)
-                                         (SEQ
-                                          (LETT |res1|
-                                                (|RSIMP;rsimp_gen_3| |av| |bv|
-                                                 |cv| |rv| |k| %))
-                                          (EXIT
-                                           (COND
-                                            ((QEQCAR |res1| 1)
-                                             (PROGN
-                                              (LETT #2# (CONS 1 "failed"))
-                                              (GO #7#)))
-                                            ('T
-                                             (SEQ (LETT |r1l| (QCDR |res1|))
-                                                  (LETT |kf|
-                                                        (SPADCALL |ker|
-                                                                  (QREFELT %
-                                                                           119)))
-                                                  (LETT |res|
-                                                        (SPADCALL |res|
-                                                                  (SPADCALL
-                                                                   (SPADCALL
-                                                                    (SPADCALL
-                                                                     |r1l| 2
-                                                                     (QREFELT %
-                                                                              76))
-                                                                    (SPADCALL
-                                                                     (SPADCALL
-                                                                      |r1l| 3
-                                                                      (QREFELT
-                                                                       % 76))
-                                                                     |kf|
-                                                                     (QREFELT %
-                                                                              25))
-                                                                    (QREFELT %
-                                                                             28))
-                                                                   (SPADCALL
-                                                                    (SPADCALL
-                                                                     |r1l| 4
-                                                                     (QREFELT %
-                                                                              76))
-                                                                    (SPADCALL
-                                                                     |kf| 2
-                                                                     (QREFELT %
-                                                                              24))
-                                                                    (QREFELT %
-                                                                             25))
-                                                                   (QREFELT %
-                                                                            28))
-                                                                  (QREFELT %
-                                                                           25)))
-                                                  (EXIT
-                                                   (LETT |s1|
-                                                         (SPADCALL |r1l| 1
-                                                                   (QREFELT %
-                                                                            76))))))))))
+                                        ((QEQCAR |res1| 1)
+                                         (PROGN
+                                          (LETT #2# (CONS 1 "failed"))
+                                          (GO #7#)))
                                         ('T
-                                         (SEQ
-                                          (LETT |dv|
-                                                (SPADCALL |su| 3
-                                                          (QREFELT % 73)))
-                                          (EXIT
-                                           (COND
-                                            ((EQL |deg_k| 4)
-                                             (SEQ
-                                              (LETT |res1|
-                                                    (|RSIMP;rsimp_gen_4| |av|
-                                                     |bv| |cv| |dv| |rv| |k|
-                                                     %))
+                                         (SEQ (LETT |r1l| (QCDR |res1|))
+                                              (LETT |res|
+                                                    (SPADCALL |res|
+                                                              (|RSIMP;eval_rl|
+                                                               (CDR |r1l|)
+                                                               (SPADCALL |ker|
+                                                                         (QREFELT
+                                                                          %
+                                                                          129))
+                                                               |deg_k| %)
+                                                              (QREFELT % 25)))
                                               (EXIT
-                                               (COND
-                                                ((QEQCAR |res1| 1)
-                                                 (PROGN
-                                                  (LETT #2# (CONS 1 "failed"))
-                                                  (GO #7#)))
-                                                ('T
-                                                 (SEQ
-                                                  (LETT |r1l| (QCDR |res1|))
-                                                  (LETT |kf|
-                                                        (SPADCALL |ker|
-                                                                  (QREFELT %
-                                                                           119)))
-                                                  (LETT |res|
-                                                        (SPADCALL |res|
-                                                                  (SPADCALL
-                                                                   (SPADCALL
-                                                                    (SPADCALL
-                                                                     (SPADCALL
-                                                                      |r1l| 2
-                                                                      (QREFELT
-                                                                       % 76))
-                                                                     (SPADCALL
-                                                                      (SPADCALL
-                                                                       |r1l| 3
-                                                                       (QREFELT
-                                                                        % 76))
-                                                                      |kf|
-                                                                      (QREFELT
-                                                                       % 25))
-                                                                     (QREFELT %
-                                                                              28))
-                                                                    (SPADCALL
-                                                                     (SPADCALL
-                                                                      |r1l| 4
-                                                                      (QREFELT
-                                                                       % 76))
-                                                                     (SPADCALL
-                                                                      |kf| 2
-                                                                      (QREFELT
-                                                                       % 24))
-                                                                     (QREFELT %
-                                                                              25))
-                                                                    (QREFELT %
-                                                                             28))
-                                                                   (SPADCALL
-                                                                    (SPADCALL
-                                                                     |r1l| 5
-                                                                     (QREFELT %
-                                                                              76))
-                                                                    (SPADCALL
-                                                                     |kf| 3
-                                                                     (QREFELT %
-                                                                              24))
-                                                                    (QREFELT %
-                                                                             25))
-                                                                   (QREFELT %
-                                                                            28))
-                                                                  (QREFELT %
-                                                                           25)))
-                                                  (EXIT
-                                                   (LETT |s1|
-                                                         (SPADCALL |r1l| 1
-                                                                   (QREFELT %
-                                                                            76))))))))))
-                                            ('T
-                                             (PROGN
-                                              (LETT #2# (CONS 1 "failed"))
-                                              (GO #7#)))))))))))))))))))))
+                                               (LETT |s1|
+                                                     (SPADCALL |r1l| 1
+                                                               (QREFELT %
+                                                                        76))))))))))))))))))))
                       #6# (EXIT #4#))
                      (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
-                (LETT |su| (SPADCALL |s1| |k| (QREFELT % 108)))
+                (LETT |su| (SPADCALL |s1| |k| (QREFELT % 119)))
                 (EXIT
                  (COND
                   ((QEQCAR |su| 0)
@@ -1223,32 +1939,32 @@
                                    (QREFELT % 25))))))))
           #7# (EXIT #2#)))) 
 
-(SDEFUN |RSIMP;rsimp;EU;12|
+(SDEFUN |RSIMP;rsimp;EU;19|
         ((|av| (|Expression| (|Integer|)))
          (% (|Union| (|Expression| (|Integer|)) "failed")))
         (SPROG
-         ((|lk| (|List| (|Kernel| (|Expression| (|Integer|))))) (#1=#:G184 NIL)
-          (|ker| NIL) (#2=#:G183 NIL)
+         ((|lk| (|List| (|Kernel| (|Expression| (|Integer|))))) (#1=#:G275 NIL)
+          (|ker| NIL) (#2=#:G274 NIL)
           (|res1| (|Union| (|Expression| (|Integer|)) "failed"))
           (|k| (|Integer|)) (|kke| #3=(|Expression| (|Integer|))) (|a1| #3#)
           (|args| (|List| (|Expression| (|Integer|))))
           (|opr| (|BasicOperator|))
           (|ker0| (|Kernel| (|Expression| (|Integer|))))
           (|k0u| (|Union| (|Kernel| (|Expression| (|Integer|))) "failed")))
-         (SEQ (LETT |k0u| (SPADCALL |av| (QREFELT % 121)))
+         (SEQ (LETT |k0u| (SPADCALL |av| (QREFELT % 131)))
               (EXIT
                (COND ((QEQCAR |k0u| 1) (CONS 1 "failed"))
                      (#4='T
                       (SEQ (LETT |ker0| (QCDR |k0u|))
-                           (LETT |opr| (SPADCALL |ker0| (QREFELT % 122)))
+                           (LETT |opr| (SPADCALL |ker0| (QREFELT % 132)))
                            (COND
-                            ((NULL (SPADCALL |opr| '|nthRoot| (QREFELT % 123)))
+                            ((NULL (SPADCALL |opr| '|nthRoot| (QREFELT % 133)))
                              (EXIT (CONS 1 "failed"))))
-                           (LETT |args| (SPADCALL |ker0| (QREFELT % 124)))
+                           (LETT |args| (SPADCALL |ker0| (QREFELT % 134)))
                            (LETT |a1| (SPADCALL |args| 1 (QREFELT % 76)))
                            (LETT |kke| (SPADCALL |args| 2 (QREFELT % 76)))
-                           (LETT |k| (SPADCALL |kke| (QREFELT % 125)))
-                           (LETT |res1| (SPADCALL |a1| |k| (QREFELT % 108)))
+                           (LETT |k| (SPADCALL |kke| (QREFELT % 135)))
+                           (LETT |res1| (SPADCALL |a1| |k| (QREFELT % 119)))
                            (EXIT
                             (COND ((QEQCAR |res1| 0) |res1|)
                                   (#4#
@@ -1260,7 +1976,7 @@
                                                 (LETT #1#
                                                       (SPADCALL |a1|
                                                                 (QREFELT %
-                                                                         115)))
+                                                                         125)))
                                                 G190
                                                 (COND
                                                  ((OR (ATOM #1#)
@@ -1273,9 +1989,9 @@
                                                   (COND
                                                    ((SPADCALL
                                                      (SPADCALL |ker|
-                                                               (QREFELT % 122))
+                                                               (QREFELT % 132))
                                                      '|nthRoot|
-                                                     (QREFELT % 123))
+                                                     (QREFELT % 133))
                                                     (LETT #2#
                                                           (CONS |ker| #2#))))))
                                                 (LETT #1# (CDR #1#)) (GO G190)
@@ -1288,7 +2004,7 @@
 
 (DEFUN |RootSimplification| ()
   (SPROG NIL
-         (PROG (#1=#:G186)
+         (PROG (#1=#:G277)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|RootSimplification|))
@@ -1309,7 +2025,7 @@
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|RootSimplification|))
-          (LETT % (GETREFV 127))
+          (LETT % (GETREFV 137))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|RootSimplification| NIL (CONS 1 %))
@@ -2308,18 +3024,18 @@
                                                            (QREFELT % 96)
                                                            (|Expression|
                                                             (|Integer|))))
-          (QSETREFV % 103
+          (QSETREFV % 98
                     (|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
           %))) 
 
 (MAKEPROP '|RootSimplification| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|String|) (|InputForm|) (0 . |parse|)
-              (|Any|) (5 . |interpret|) (|Expression| 41) (|AnyFunctions1| 11)
-              (10 . |retract|) (|Symbol|) (15 . |coerce|) '|a| '|b| '|c|
-              (|Kernel| 11) (20 . |kernel|) '|kc| '|r| (|PositiveInteger|)
-              (25 . ^) (31 . *) (37 . *) (43 . -) (49 . +) '|p2c|
-              (|Fraction| 100) (|Kernel| %) (55 . |univariate|)
+              (|Any|) (5 . |interpret_in_new_env|) (|Expression| 41)
+              (|AnyFunctions1| 11) (10 . |retract|) (|Symbol|) (15 . |coerce|)
+              '|a| '|b| '|c| (|Kernel| 11) (20 . |kernel|) '|kc| '|r|
+              (|PositiveInteger|) (25 . ^) (31 . *) (37 . *) (43 . -) (49 . +)
+              '|p2c| (|Fraction| 108) (|Kernel| %) (55 . |univariate|)
               (|SparseUnivariatePolynomial| 11) (|Fraction| 33) (61 . |numer|)
               '|p2cu| (66 . -) (71 . /) '|p2s| (77 . |One|) (|Integer|)
               (81 . *) '|p3c| '|p3cu| '|p3s| '|p5c| '|p5cu| '|p5s| '|p7c|
@@ -2335,17 +3051,19 @@
               '|rp2| '|rp2u| '|rp2d| '|rp2s| '|rp3e| '|rp3u| '|rp3d| '|rp3s|
               (|SparseMultivariatePolynomial| 41 31) (159 . |denom|)
               (164 . |coerce|) (169 . |numer|) (174 . |coerce|) '|iE| '|sMp|
-              '|pQf| (179 . |sqrt|) (184 . |retract|)
-              (|SparseUnivariatePolynomial| %) (189 . |minPoly|)
-              (194 . |univariate|) '|uPe| (201 . |monomial|) (207 . |coerce|)
-              (212 . -) (|Union| 11 '"failed") |RSIMP;rsimp1;EIU;9|
-              (218 . |One|) (222 . =) (|BasicOperator|) (|List| %)
-              (228 . |kernel|) (|List| 31) (234 . |kernels|) (|List| 19)
-              (239 . |member?|) (245 . |reductum|) (250 . |coerce|)
-              (|Union| 31 '"failed") (255 . |retractIfCan|) (260 . |operator|)
-              (265 . |is?|) (271 . |argument|) (276 . |retract|)
-              |RSIMP;rsimp;EU;12|)
-           '#(|rsimp1| 281 |rsimp| 287) 'NIL
+              '|pQf| '|uPe| (|Vector| 11) (179 . |setelt!|) (186 . |elt|)
+              (192 . |entries|) (197 . |degree|) (202 . |leadingCoefficient|)
+              (207 . |reductum|) (212 . |sqrt|) (217 . |retract|)
+              (|SparseUnivariatePolynomial| %) (222 . |minPoly|)
+              (227 . |univariate|) (234 . |One|) (|Fraction| 41) (238 . /)
+              (244 . ^) (250 . |monomial|) (256 . |coerce|) (261 . -)
+              (|Union| 11 '"failed") |RSIMP;rsimp1;EIU;15| (267 . =)
+              (|BasicOperator|) (|List| %) (273 . |kernel|) (|List| 31)
+              (279 . |kernels|) (|List| 19) (284 . |member?|)
+              (290 . |reductum|) (295 . |coerce|) (|Union| 31 '"failed")
+              (300 . |retractIfCan|) (305 . |operator|) (310 . |is?|)
+              (316 . |argument|) (321 . |retract|) |RSIMP;rsimp;EU;19|)
+           '#(|rsimp1| 326 |rsimp| 332) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
                        (CONS
@@ -2361,7 +3079,7 @@
                                   (|Expression| (|Integer|)) (|Integer|)))
                                 T))
                              (LIST) NIL NIL)))
-                        (|makeByteWordVec2| 126
+                        (|makeByteWordVec2| 136
                                             '(1 7 0 6 8 1 7 9 0 10 1 12 11 9 13
                                               1 11 0 14 15 1 19 0 14 20 2 11 0
                                               0 23 24 2 11 0 0 0 25 2 11 0 23 0
@@ -2375,17 +3093,19 @@
                                               73 1 33 11 0 74 2 75 11 0 41 76 2
                                               11 0 0 41 77 2 6 0 0 0 78 1 11 90
                                               0 91 1 11 0 90 92 1 11 90 0 93 1
-                                              11 0 41 94 1 11 0 0 98 1 11 31 0
-                                              99 1 11 100 31 101 3 97 33 11 19
-                                              33 102 2 103 0 11 70 104 1 103 0
-                                              11 105 2 33 0 0 0 106 0 96 0 109
-                                              2 96 55 0 0 110 2 11 0 111 112
-                                              113 1 11 114 0 115 2 116 55 19 0
-                                              117 1 33 0 0 118 1 11 0 31 119 1
-                                              11 120 0 121 1 19 111 0 122 2 111
-                                              55 0 14 123 1 19 75 0 124 1 11 41
-                                              0 125 2 0 107 11 41 108 1 0 107
-                                              11 126)))))
+                                              11 0 41 94 3 99 11 0 41 11 100 2
+                                              99 11 0 41 101 1 99 75 0 102 1 98
+                                              70 0 103 1 98 11 0 104 1 98 0 0
+                                              105 1 11 0 0 106 1 11 31 0 107 1
+                                              11 108 31 109 3 97 33 11 19 33
+                                              110 0 96 0 111 2 112 0 41 41 113
+                                              2 11 0 0 112 114 2 98 0 11 70 115
+                                              1 98 0 11 116 2 33 0 0 0 117 2 96
+                                              55 0 0 120 2 11 0 121 122 123 1
+                                              11 124 0 125 2 126 55 19 0 127 1
+                                              33 0 0 128 1 11 0 31 129 1 11 130
+                                              0 131 1 19 121 0 132 2 121 55 0
+                                              14 133 1 19 75 0 134 1 11 41 0
+                                              135 2 0 118 11 41 119 1 0 118 11
+                                              136)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|RootSimplification| 'NILADIC T) 

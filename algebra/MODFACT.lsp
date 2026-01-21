@@ -36,17 +36,17 @@
 (MAKEPROP '|ModularFactorization| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL
-              (|ModularFactorizationGeneral| 7 (|U32Matrix|) 8
+              (|ModularFactorizationGeneral| 9 (|U32Matrix|) 10
                                              (|List|
                                               (|Record|
                                                (|:| |ind|
                                                     (|NonNegativeInteger|))
-                                               (|:| |poly| 7)))
+                                               (|:| |poly| 9)))
                                              (|ModularFactorizationTools1|))
-              (|List| 7) (|U32Vector|) (|Integer|) (|Boolean|) (|Mapping| 6)
-              (|Record| (|:| |poly| 7) (|:| |degree| (|NonNegativeInteger|))
-                        (|:| |separate_factors| 10))
-              (|List| 11))
+              (|Mapping| 12)
+              (|Record| (|:| |poly| 9) (|:| |degree| (|NonNegativeInteger|))
+                        (|:| |separate_factors| 6))
+              (|List| 7) (|U32Vector|) (|Integer|) (|Boolean|) (|List| 9))
            '#() 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -71,5 +71,3 @@
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| -999999 'NIL))))
            '|lookupIncomplete|)) 
-
-(MAKEPROP '|ModularFactorization| 'NILADIC T) 

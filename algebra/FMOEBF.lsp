@@ -176,9 +176,9 @@
               |members| 80 |latex| 85 |coerce| 90 |apply| 95 = 102)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 29))
+                        '#((|SetCategory|) (|CoercibleTo| 29) (|BasicType|))
                         (|makeByteWordVec2| 33
                                             '(2 6 10 0 0 11 2 13 8 12 8 14 1 8
                                               0 0 15 1 17 0 16 18 2 20 17 17 19

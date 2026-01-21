@@ -293,11 +293,11 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0))
                  (CONS
-                  '#(|SetCategory&| |RetractableTo&| |BasicType&| NIL NIL NIL)
+                  '#(|RetractableTo&| |SetCategory&| NIL NIL NIL |BasicType&|)
                   (CONS
-                   '#((|SetCategory|) (|RetractableTo| (|Equation| 8))
-                      (|BasicType|) (|CoercibleFrom| (|Equation| 8))
-                      (|Eltable| 8 8) (|CoercibleTo| 78))
+                   '#((|RetractableTo| (|Equation| 8)) (|SetCategory|)
+                      (|CoercibleTo| 78) (|Eltable| 8 8)
+                      (|CoercibleFrom| (|Equation| 8)) (|BasicType|))
                    (|makeByteWordVec2| 83
                                        '(1 16 8 0 17 1 16 8 0 18 2 23 8 22 8 24
                                          3 27 10 10 14 26 28 2 8 30 0 0 31 2 14
@@ -312,9 +312,9 @@
                                          72 0 45 0 73 0 8 0 74 1 10 71 0 75 0 7
                                          0 76 0 8 0 77 1 45 78 0 79 1 8 78 0 80
                                          3 78 0 0 0 0 81 2 0 30 0 0 1 3 0 0 0
-                                         14 26 29 2 0 0 8 8 21 3 0 0 8 8 14 19
+                                         14 26 29 3 0 0 8 8 14 19 2 0 0 8 8 21
                                          1 0 8 0 13 1 0 55 0 56 1 0 16 0 1 1 0
                                          14 0 15 1 0 10 0 11 1 0 8 0 12 1 0 83
-                                         0 1 3 0 8 0 8 34 36 2 0 8 0 8 25 1 0 0
-                                         16 20 1 0 78 0 82 2 0 30 0 0 33)))))
+                                         0 1 2 0 8 0 8 25 3 0 8 0 8 34 36 1 0
+                                         78 0 82 1 0 0 16 20 2 0 30 0 0 33)))))
            '|lookupComplete|)) 

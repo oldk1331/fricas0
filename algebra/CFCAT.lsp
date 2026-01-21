@@ -19,5 +19,3 @@
                        ((|permutation| (% % %)) T))
                      NIL NIL NIL)))
            (SETELT #1# 0 '(|CombinatorialFunctionCategory|))))) 
-
-(MAKEPROP '|CombinatorialFunctionCategory| 'NILADIC T) 

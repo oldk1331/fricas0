@@ -7,7 +7,7 @@
 
 (DEFUN |U64Int| ()
   (SPROG NIL
-         (PROG (#1=#:G2905)
+         (PROG (#1=#:G2909)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|U64Int|))
@@ -36,8 +36,8 @@
 (MAKEPROP '|U64Int| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL (|Integer|) |U64INT;qconvert;I%;1|
-              (|NonNegativeInteger|) (|Union| % '"failed") (|Boolean|)
-              (|PositiveInteger|) (|String|) (|OutputForm|))
+              (|Boolean|) (|OutputForm|) (|String|) (|PositiveInteger|)
+              (|Union| % '"failed") (|NonNegativeInteger|))
            '#(~= 0 |zero?| 6 |subtractIfCan| 11 |sample| 17 |rightRecip| 21
               |rightPower| 26 |recip| 38 |qconvert| 43 |opposite?| 48 |one?| 54
               |leftRecip| 59 |leftPower| 64 |latex| 76 |commutator| 81 |coerce|
@@ -50,30 +50,29 @@
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0))
             (CONS
-             '#(NIL |Rng&| NIL NIL |NonAssociativeRing&| NIL
-                |NonAssociativeRng&| NIL NIL |AbelianGroup&| NIL NIL NIL NIL
-                |MagmaWithUnit&| |NonAssociativeSemiRng&| |AbelianMonoid&|
-                |Magma&| |AbelianSemiGroup&| |SetCategory&| NIL |BasicType&|
+             '#(NIL NIL |Rng&| NIL NIL |NonAssociativeRing&| NIL NIL
+                |NonAssociativeRng&| |AbelianGroup&| NIL NIL NIL
+                |AbelianMonoid&| |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL
+                |AbelianSemiGroup&| |Magma&| |SetCategory&| NIL |BasicType&|
                 NIL)
              (CONS
-              '#((|Ring|) (|Rng|) (|SemiRing|) (|SemiRng|)
-                 (|NonAssociativeRing|) (|BiModule| $$ $$)
-                 (|NonAssociativeRng|) (|RightModule| $$) (|LeftModule| $$)
-                 (|AbelianGroup|) (|Monoid|) (|NonAssociativeSemiRing|)
-                 (|CancellationAbelianMonoid|) (|SemiGroup|) (|MagmaWithUnit|)
-                 (|NonAssociativeSemiRng|) (|AbelianMonoid|) (|Magma|)
-                 (|AbelianSemiGroup|) (|SetCategory|) (|unitsKnown|)
-                 (|BasicType|) (|CoercibleTo| 12))
+              '#((|Ring|) (|SemiRing|) (|Rng|) (|SemiRng|) (|BiModule| $$ $$)
+                 (|NonAssociativeRing|) (|LeftModule| $$) (|RightModule| $$)
+                 (|NonAssociativeRng|) (|AbelianGroup|)
+                 (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
+                 (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
+                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|) (|Magma|)
+                 (|SetCategory|) (|CoercibleTo| 8) (|BasicType|)
+                 (|unitsKnown|))
               (|makeByteWordVec2| 12
-                                  '(2 0 9 0 0 1 1 0 9 0 1 2 0 8 0 0 1 0 0 0 1 1
-                                    0 8 0 1 2 0 0 0 7 1 2 0 0 0 10 1 1 0 8 0 1
-                                    1 0 0 5 6 2 0 9 0 0 1 1 0 9 0 1 1 0 8 0 1 2
-                                    0 0 0 7 1 2 0 0 0 10 1 1 0 11 0 1 2 0 0 0 0
-                                    1 1 0 0 5 1 1 0 12 0 1 0 0 7 1 3 0 0 0 0 0
-                                    1 2 0 0 0 0 1 2 0 9 0 0 1 2 0 0 0 7 1 2 0 0
-                                    0 10 1 0 0 0 1 0 0 0 1 2 0 9 0 0 1 1 0 0 0
-                                    1 2 0 0 0 0 1 2 0 0 0 0 1 2 0 0 7 0 1 2 0 0
-                                    5 0 1 2 0 0 0 0 1 2 0 0 10 0 1)))))
+                                  '(2 0 7 0 0 1 1 0 7 0 1 2 0 11 0 0 1 0 0 0 1
+                                    1 0 11 0 1 2 0 0 0 10 1 2 0 0 0 12 1 1 0 11
+                                    0 1 1 0 0 5 6 2 0 7 0 0 1 1 0 7 0 1 1 0 11
+                                    0 1 2 0 0 0 10 1 2 0 0 0 12 1 1 0 9 0 1 2 0
+                                    0 0 0 1 1 0 8 0 1 1 0 0 5 1 0 0 12 1 3 0 0
+                                    0 0 0 1 2 0 0 0 0 1 2 0 7 0 0 1 2 0 0 0 10
+                                    1 2 0 0 0 12 1 0 0 0 1 0 0 0 1 2 0 7 0 0 1
+                                    2 0 0 0 0 1 1 0 0 0 1 2 0 0 0 0 1 2 0 0 10
+                                    0 1 2 0 0 0 0 1 2 0 0 5 0 1 2 0 0 12 0
+                                    1)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|U64Int| 'NILADIC T) 

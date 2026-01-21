@@ -251,6 +251,10 @@
                             (#1#
                              (PROGN (RPLACD (LASTNODE |v|) |u|) |v|)))))))))))
 
+; $DALYMODE := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ $DALYMODE NIL))
+
 ; intloopReadConsole(b, n)==
 ;     repeat
 ;         ioHook("startReadLine")

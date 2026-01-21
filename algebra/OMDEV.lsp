@@ -362,5 +362,3 @@
                                               0 10 0 36 1 0 10 0 35 1 0 10 0
                                               11)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|OpenMathDevice| 'NILADIC T) 

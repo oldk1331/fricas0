@@ -220,9 +220,9 @@
               |condition| 169 |coerce| 174 = 179)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 43))
+                        '#((|SetCategory|) (|CoercibleTo| 43) (|BasicType|))
                         (|makeByteWordVec2| 49
                                             '(0 6 0 8 0 7 0 9 1 6 11 0 12 1 7
                                               11 0 13 2 6 11 0 0 32 2 6 11 0 0
@@ -234,8 +234,8 @@
                                               0 0 0 11 30 1 0 0 0 31 2 0 0 0 7
                                               29 1 0 42 0 1 4 0 11 0 0 33 34 35
                                               1 0 11 0 14 0 0 0 10 1 0 0 0 27 2
-                                              0 22 6 25 26 1 0 0 20 21 1 0 22
-                                              23 24 3 0 0 6 7 11 18 2 0 0 6 7
-                                              19 1 0 7 0 16 1 0 43 0 49 2 0 11
-                                              0 0 39)))))
+                                              0 0 6 7 19 3 0 0 6 7 11 18 1 0 22
+                                              23 24 1 0 0 20 21 2 0 22 6 25 26
+                                              1 0 7 0 16 1 0 43 0 49 2 0 11 0 0
+                                              39)))))
            '|lookupComplete|)) 

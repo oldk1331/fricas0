@@ -135,9 +135,9 @@
 (SDEFUN |FFCAT-;nonSingularModel;SL;13|
         ((|u| (|Symbol|)) (% (|List| (|Polynomial| F))))
         (SPROG
-         ((#1=#:G114 NIL) (|v| NIL) (#2=#:G115 NIL) (|i| NIL) (#3=#:G113 NIL)
+         ((#1=#:G106 NIL) (|v| NIL) (#2=#:G107 NIL) (|i| NIL) (#3=#:G105 NIL)
           (|y| (|Symbol|)) (|x| (|Symbol|)) (|vars| (|List| (|Symbol|)))
-          (#4=#:G112 NIL) (|n| (|Integer|)) (#5=#:G111 NIL)
+          (#4=#:G104 NIL) (|n| (|Integer|)) (#5=#:G103 NIL)
           (|d| (|Fraction| UP)) (|w| (|Vector| S)))
          (SEQ
           (LETT |d|
@@ -230,7 +230,7 @@
 
 (SDEFUN |FFCAT-;rationalPoints;L;15| ((% (|List| (|List| F))))
         (SPROG
-         ((|pt| (|List| F)) (#1=#:G123 NIL) (#2=#:G121 NIL) (#3=#:G132 NIL)
+         ((|pt| (|List| F)) (#1=#:G115 NIL) (#2=#:G113 NIL) (#3=#:G132 NIL)
           (|y| NIL) (#4=#:G131 NIL) (#5=#:G130 NIL) (|x| NIL) (#6=#:G129 NIL)
           (|p| (UPUP)))
          (SEQ (LETT |p| (SPADCALL (QREFELT % 36)))
@@ -1151,10 +1151,9 @@
                                               2 0 0 125 8 158 1 0 81 81 139 0 0
                                               111 113 2 0 22 7 7 70 1 0 0 0 132
                                               0 0 17 157 1 0 81 81 187 1 0 101
-                                              88 106 1 0 22 0 151 2 0 22 0 8
-                                              191 2 0 22 0 7 28 1 0 22 0 24 0 0
-                                              45 47 0 0 17 167 3 0 7 0 7 7 124
-                                              0 0 45 65 2 0 0 0 62 195 1 0 81
-                                              81 144 2 0 61 0 62 63 0 0 22
-                                              30)))))
+                                              88 106 1 0 22 0 151 1 0 22 0 24 2
+                                              0 22 0 7 28 2 0 22 0 8 191 0 0 45
+                                              47 0 0 17 167 3 0 7 0 7 7 124 0 0
+                                              45 65 2 0 0 0 62 195 1 0 81 81
+                                              144 2 0 61 0 62 63 0 0 22 30)))))
            '|lookupComplete|)) 

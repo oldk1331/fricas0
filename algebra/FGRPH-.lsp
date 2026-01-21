@@ -201,7 +201,7 @@
          (% (|Tree| (|Integer|))))
         (SPROG
          ((|ch| (|List| (|Tree| (|Integer|))))
-          (|visited1| (|List| (|NonNegativeInteger|))) (#1=#:G150 NIL)
+          (|visited1| (|List| (|NonNegativeInteger|))) (#1=#:G142 NIL)
           (|x| NIL) (|aa| (|List| (|NonNegativeInteger|))))
          (SEQ (LETT |aa| (SPADCALL |s| |i| (QREFELT % 41))) (LETT |ch| NIL)
               (LETT |visited1| (SPADCALL |visited| (QREFELT % 43)))
@@ -237,7 +237,7 @@
 
 (SDEFUN |FGRPH-;spanningForestArrow;AL;11|
         ((|s| (A)) (% (|List| (|Tree| (|Integer|)))))
-        (SPROG ((#1=#:G157 NIL) (|i| NIL) (#2=#:G156 NIL))
+        (SPROG ((#1=#:G149 NIL) (|i| NIL) (#2=#:G148 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -256,10 +256,10 @@
          (|visited| (|Reference| (|List| (|NonNegativeInteger|))))
          (% (|Tree| (|Integer|))))
         (SPROG
-         ((|ch| (|List| (|Tree| (|Integer|)))) (#1=#:G167 NIL) (|n| NIL)
-          (#2=#:G168 NIL) (|flag| NIL)
+         ((|ch| (|List| (|Tree| (|Integer|)))) (#1=#:G159 NIL) (|n| NIL)
+          (#2=#:G160 NIL) (|flag| NIL)
           (|visited1| (|List| (|NonNegativeInteger|)))
-          (|flags| (|List| (|Boolean|))) (#3=#:G166 NIL)
+          (|flags| (|List| (|Boolean|))) (#3=#:G158 NIL)
           (|oa| (|List| (|NonNegativeInteger|))))
          (SEQ (LETT |oa| (SPADCALL |s| |i| (QREFELT % 57))) (LETT |ch| NIL)
               (LETT |flags| NIL)
@@ -307,7 +307,7 @@
 
 (SDEFUN |FGRPH-;spanningForestNode;AL;14|
         ((|s| (A)) (% (|List| (|Tree| (|Integer|)))))
-        (SPROG ((#1=#:G175 NIL) (|i| NIL) (#2=#:G174 NIL))
+        (SPROG ((#1=#:G167 NIL) (|i| NIL) (#2=#:G166 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -325,9 +325,9 @@
         ((|t| (|Tree| (|Integer|))) (|visited| (|List| (|NonNegativeInteger|)))
          (% #1=(|List| (|Loop|))))
         (SPROG
-         ((|res| (|List| (|Loop|))) (|ll| #1#) (#2=#:G184 NIL) (#3=#:G190 NIL)
-          (|x| NIL) (#4=#:G189 NIL) (#5=#:G180 NIL) (|afterIndex| (|Integer|))
-          (|i| (|Integer|)) (|v2| (|NonNegativeInteger|)) (#6=#:G176 NIL)
+         ((|res| (|List| (|Loop|))) (|ll| #1#) (#2=#:G176 NIL) (#3=#:G182 NIL)
+          (|x| NIL) (#4=#:G181 NIL) (#5=#:G172 NIL) (|afterIndex| (|Integer|))
+          (|i| (|Integer|)) (|v2| (|NonNegativeInteger|)) (#6=#:G168 NIL)
           (|v| (|Integer|)) (|c| (|List| (|Tree| (|Integer|)))))
          (SEQ
           (EXIT
@@ -345,7 +345,7 @@
                     ((< |i| 1)
                      (PROGN
                       (LETT #4# (LIST (SPADCALL |visited| (QREFELT % 67))))
-                      (GO #7=#:G188))))
+                      (GO #7=#:G180))))
                    (LETT |afterIndex|
                          (- (+ (SPADCALL |visited| (QREFELT % 68)) 1) |i|))
                    (COND
@@ -388,7 +388,7 @@
 
 (SDEFUN |FGRPH-;loopsNodes;AL;16| ((|s| (A)) (% (|List| (|Loop|))))
         (SPROG
-         ((|res| (|List| (|Loop|))) (#1=#:G195 NIL) (|x| NIL)
+         ((|res| (|List| (|Loop|))) (#1=#:G187 NIL) (|x| NIL)
           (|sf| (|List| (|Tree| (|Integer|)))))
          (SEQ (LETT |res| NIL) (LETT |sf| (SPADCALL |s| (QREFELT % 72)))
               (SEQ (LETT |x| NIL) (LETT #1# |sf|) G190
@@ -416,9 +416,9 @@
         ((|t| (|Tree| (|Integer|))) (|visited| (|List| (|NonNegativeInteger|)))
          (% #1=(|List| (|Loop|))))
         (SPROG
-         ((|res| (|List| (|Loop|))) (|ll| #1#) (#2=#:G204 NIL) (#3=#:G210 NIL)
-          (|x| NIL) (#4=#:G209 NIL) (#5=#:G200 NIL) (|afterIndex| (|Integer|))
-          (|i| (|Integer|)) (|v2| (|NonNegativeInteger|)) (#6=#:G198 NIL)
+         ((|res| (|List| (|Loop|))) (|ll| #1#) (#2=#:G196 NIL) (#3=#:G202 NIL)
+          (|x| NIL) (#4=#:G201 NIL) (#5=#:G192 NIL) (|afterIndex| (|Integer|))
+          (|i| (|Integer|)) (|v2| (|NonNegativeInteger|)) (#6=#:G190 NIL)
           (|v| (|Integer|)) (|c| (|List| (|Tree| (|Integer|)))))
          (SEQ
           (EXIT
@@ -436,7 +436,7 @@
                     ((< |i| 1)
                      (PROGN
                       (LETT #4# (LIST (SPADCALL |visited| (QREFELT % 67))))
-                      (GO #7=#:G208))))
+                      (GO #7=#:G200))))
                    (LETT |afterIndex|
                          (- (+ (SPADCALL |visited| (QREFELT % 68)) 1) |i|))
                    (COND
@@ -479,7 +479,7 @@
 
 (SDEFUN |FGRPH-;loopsArrows;AL;19| ((|s| (A)) (% (|List| (|Loop|))))
         (SPROG
-         ((|res| (|List| (|Loop|))) (#1=#:G215 NIL) (|x| NIL)
+         ((|res| (|List| (|Loop|))) (#1=#:G207 NIL) (|x| NIL)
           (|sf| (|List| (|Tree| (|Integer|)))))
          (SEQ (LETT |res| NIL) (LETT |sf| (SPADCALL |s| (QREFELT % 76)))
               (SEQ (LETT |x| NIL) (LETT #1# |sf|) G190
@@ -501,7 +501,7 @@
 (SDEFUN |FGRPH-;isDirectSuccessor?;A2NniB;21|
         ((|s| (A)) (|a| (|NonNegativeInteger|)) (|b| (|NonNegativeInteger|))
          (% (|Boolean|)))
-        (SPROG ((#1=#:G223 NIL) (#2=#:G224 NIL) (|arr| NIL))
+        (SPROG ((#1=#:G215 NIL) (#2=#:G216 NIL) (|arr| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -516,14 +516,14 @@
                           ((EQL (QVELT |arr| 2) |a|)
                            (COND
                             ((EQL (QVELT |arr| 3) |b|)
-                             (PROGN (LETT #1# 'T) (GO #3=#:G222))))))))
+                             (PROGN (LETT #1# 'T) (GO #3=#:G214))))))))
                        (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                   (EXIT NIL)))
                 #3# (EXIT #1#)))) 
 
 (SDEFUN |FGRPH-;isFixPoint?;ANniB;22|
         ((|s| (A)) (|a| (|NonNegativeInteger|)) (% (|Boolean|)))
-        (SPROG ((#1=#:G231 NIL) (#2=#:G232 NIL) (|arr| NIL))
+        (SPROG ((#1=#:G223 NIL) (#2=#:G224 NIL) (|arr| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -538,7 +538,7 @@
                           ((EQL (QVELT |arr| 2) |a|)
                            (COND
                             ((EQL (QVELT |arr| 3) |a|)
-                             (PROGN (LETT #1# 'T) (GO #3=#:G230))))))))
+                             (PROGN (LETT #1# 'T) (GO #3=#:G222))))))))
                        (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                   (EXIT NIL)))
                 #3# (EXIT #1#)))) 
@@ -2228,9 +2228,9 @@
                                               0 40 0 13 13 98 3 0 40 0 13 13
                                               101 2 0 13 0 13 87 2 0 40 0 13 89
                                               2 0 40 0 13 93 2 0 40 0 13 88 2 0
-                                              40 0 13 92 2 0 13 0 40 107 1 0 13
-                                              0 106 2 0 13 0 40 105 1 0 13 0
-                                              104 2 0 11 0 0 166 1 0 70 0 74 2
+                                              40 0 13 92 1 0 13 0 106 2 0 13 0
+                                              40 107 1 0 13 0 104 2 0 13 0 40
+                                              105 2 0 11 0 0 166 1 0 70 0 74 2
                                               0 70 0 13 75 1 0 70 0 77 1 0 23 0
                                               37 3 0 11 0 13 13 102 1 0 11 0
                                               111 2 0 11 0 13 82 0 0 11 19 3 0

@@ -154,8 +154,8 @@
               |CYCGRP;size;Nni;13| (34 . |submod|) (|PositiveInteger|)
               |CYCGRP;index;Pi%;14| |CYCGRP;lookup;%Pi;15| |CYCGRP;random;%;16|
               (|List| %) |CYCGRP;enumerate;L;17| |CYCGRP;generator;%;18|
-              |CYCGRP;generators;L;20| (|InputForm|) (|SingleInteger|)
-              (|Union| % '"failed") (|String|))
+              |CYCGRP;generators;L;20| (|String|) (|Union| % '"failed")
+              (|SingleInteger|) (|InputForm|))
            '#(~= 41 |smaller?| 47 |size| 53 |sample| 57 |rightRecip| 61
               |rightPower| 66 |recip| 78 |random| 83 |order| 87 |one?| 92
               |lookup| 97 |leftRecip| 102 |leftPower| 107 |latex| 119 |inv| 124
@@ -166,29 +166,29 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|FiniteGroup&| |Group&| NIL NIL |Finite&| |MagmaWithUnit&|
-                     NIL |Magma&| NIL |Hashable&| |SetCategory&| NIL NIL NIL
-                     NIL NIL |BasicType&| NIL)
+                  '#(|FiniteGroup&| |Group&| NIL |MagmaWithUnit&| |Finite&| NIL
+                     |Magma&| NIL |SetCategory&| |Hashable&| NIL NIL
+                     |BasicType&| NIL NIL NIL NIL NIL)
                   (CONS
-                   '#((|FiniteGroup|) (|Group|) (|Monoid|) (|SemiGroup|)
-                      (|Finite|) (|MagmaWithUnit|) (|Comparable|) (|Magma|)
-                      (|CommutativeStar|) (|Hashable|) (|SetCategory|)
-                      (|ConvertibleTo| 21) (|TwoSidedRecip|)
-                      (|FinitelyGenerated|) (|ConvertibleTo| 43) (|unitsKnown|)
-                      (|BasicType|) (|CoercibleTo| 11))
+                   '#((|FiniteGroup|) (|Group|) (|Monoid|) (|MagmaWithUnit|)
+                      (|Finite|) (|SemiGroup|) (|Magma|) (|Comparable|)
+                      (|SetCategory|) (|Hashable|) (|CommutativeStar|)
+                      (|CoercibleTo| 11) (|BasicType|) (|unitsKnown|)
+                      (|ConvertibleTo| 46) (|FinitelyGenerated|)
+                      (|TwoSidedRecip|) (|ConvertibleTo| 21))
                    (|makeByteWordVec2| 46
                                        '(1 12 11 0 13 1 14 11 0 15 2 11 0 0 0
                                          16 2 8 18 18 0 19 1 21 0 12 22 3 8 0 0
                                          0 0 27 3 12 0 0 0 0 34 2 0 9 0 0 1 2 0
-                                         9 0 0 31 0 0 32 33 0 0 0 1 1 0 45 0 1
-                                         2 0 0 0 32 1 2 0 0 0 35 1 1 0 45 0 1 0
+                                         9 0 0 31 0 0 32 33 0 0 0 1 1 0 44 0 1
+                                         2 0 0 0 35 1 2 0 0 0 32 1 1 0 44 0 1 0
                                          0 0 38 1 0 12 0 26 1 0 9 0 10 1 0 35 0
-                                         37 1 0 45 0 1 2 0 0 0 32 1 2 0 0 0 35
-                                         1 1 0 46 0 1 1 0 0 0 29 1 0 0 35 36 2
-                                         0 18 18 0 20 1 0 44 0 1 0 0 39 42 0 0
-                                         0 41 1 0 12 0 25 0 0 39 40 1 0 21 0 23
-                                         1 0 43 0 1 2 0 0 0 0 1 2 0 0 0 0 1 1 0
-                                         11 0 17 2 0 0 0 12 1 2 0 0 0 32 1 2 0
-                                         0 0 35 1 0 0 0 24 2 0 9 0 0 30 2 0 0 0
-                                         0 1 2 0 0 0 0 28)))))
+                                         37 1 0 44 0 1 2 0 0 0 35 1 2 0 0 0 32
+                                         1 1 0 43 0 1 1 0 0 0 29 1 0 0 35 36 2
+                                         0 18 18 0 20 1 0 45 0 1 0 0 39 42 0 0
+                                         0 41 1 0 12 0 25 0 0 39 40 1 0 46 0 1
+                                         1 0 21 0 23 2 0 0 0 0 1 2 0 0 0 0 1 1
+                                         0 11 0 17 2 0 0 0 35 1 2 0 0 0 32 1 2
+                                         0 0 0 12 1 0 0 0 24 2 0 9 0 0 30 2 0 0
+                                         0 0 1 2 0 0 0 0 28)))))
            '|lookupComplete|)) 

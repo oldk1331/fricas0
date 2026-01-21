@@ -23,5 +23,3 @@
                                T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|PrincipalIdealDomain|))))) 
-
-(MAKEPROP '|PrincipalIdealDomain| 'NILADIC T) 

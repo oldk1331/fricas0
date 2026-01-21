@@ -112,14 +112,14 @@
          (% (|List| (|Record| (|:| |val| (|Boolean|)) (|:| |tower| TS)))))
         (SPROG
          ((|lbwt| (|List| (|Record| (|:| |val| (|Boolean|)) (|:| |tower| TS))))
-          (#1=#:G138 NIL) (|bwt| NIL) (#2=#:G137 NIL)
+          (#1=#:G130 NIL) (|bwt| NIL) (#2=#:G129 NIL)
           (|inv|
            #3=(|List| (|Record| (|:| |val| (|Boolean|)) (|:| |tower| TS))))
-          (|ts_h| (TS)) (|h| (P)) (|ts_g| (TS)) (|g| (P)) (#4=#:G136 NIL)
+          (|ts_h| (TS)) (|h| (P)) (|ts_g| (TS)) (|g| (P)) (#4=#:G128 NIL)
           (|gwt| NIL)
           (|lgwt| (|List| (|Record| (|:| |val| P) (|:| |tower| TS))))
-          (|ts_v+| (TS)) (|ts_v-| (TS)) (|ts_v| (P)) (#5=#:G111 NIL)
-          (#6=#:G134 NIL) (|newq| (P)) (#7=#:G135 NIL) (|toCheck| #3#)
+          (|ts_v+| (TS)) (|ts_v-| (TS)) (|ts_v| (P)) (#5=#:G103 NIL)
+          (#6=#:G126 NIL) (|newq| (P)) (#7=#:G127 NIL) (|toCheck| #3#)
           (|v| (V)) (|q| (P)))
          (SEQ
           (EXIT
@@ -170,7 +170,7 @@
                                       (LETT #7# (CDR #7#)) (GO G190) G191
                                       (EXIT NIL))
                                  (EXIT
-                                  (PROGN (LETT #6# |lbwt|) (GO #8=#:G133)))))))
+                                  (PROGN (LETT #6# |lbwt|) (GO #8=#:G125)))))))
                          (LETT |ts_v|
                                (PROG2
                                    (LETT #5#
@@ -274,10 +274,10 @@
         ((|p| (P)) (|ts| (TS)) (% (|List| TS)))
         (SPROG
          ((|toSave| (|List| TS)) (|inv| (|List| TS)) (|ts_h| (TS)) (|h| (P))
-          (|g| (P)) (#1=#:G170 NIL) (|gwt| NIL)
+          (|g| (P)) (#1=#:G162 NIL) (|gwt| NIL)
           (|lgwt| (|List| (|Record| (|:| |val| P) (|:| |tower| TS))))
-          (|ts_v+| (TS)) (|ts_v-| (TS)) (|ts_v| (P)) (#2=#:G151 NIL)
-          (#3=#:G168 NIL) (|newq| (P)) (#4=#:G169 NIL) (|bwt| NIL)
+          (|ts_v+| (TS)) (|ts_v-| (TS)) (|ts_v| (P)) (#2=#:G143 NIL)
+          (#3=#:G160 NIL) (|newq| (P)) (#4=#:G161 NIL) (|bwt| NIL)
           (|toCheck|
            (|List| (|Record| (|:| |val| (|Boolean|)) (|:| |tower| TS))))
           (|v| (V)) (|q| (P)) (|e| (|Union| (|List| TS) "failed"))
@@ -359,7 +359,7 @@
                                             (LETT #3#
                                                   (SPADCALL |toSave|
                                                             (QREFELT % 74)))
-                                            (GO #6=#:G167)))))))
+                                            (GO #6=#:G159)))))))
                                       (LETT |ts_v|
                                             (PROG2
                                                 (LETT #2#
@@ -471,7 +471,7 @@
          (% (|List| (|Record| (|:| |val| P) (|:| |tower| TS)))))
         (SPROG
          ((|lpwt| (|List| (|Record| (|:| |val| P) (|:| |tower| TS))))
-          (|sfp| (P)) (|g| (P)) (|us| (TS)) (#1=#:G181 NIL) (|gwt| NIL)
+          (|sfp| (P)) (|g| (P)) (|us| (TS)) (#1=#:G173 NIL) (|gwt| NIL)
           (|lgwt| (|List| (|Record| (|:| |val| P) (|:| |tower| TS)))) (|q| (P))
           (|v| (V)))
          (SEQ
@@ -1121,10 +1121,10 @@
                                               48 103 4 9 0 0 0 0 76 105 4 9 0 0
                                               0 0 0 106 2 10 21 9 0 107 2 10 21
                                               9 0 108 2 0 48 9 10 81 3 0 48 9 9
-                                              10 109 2 0 69 9 10 70 2 0 43 9 10
-                                              44 2 0 21 9 10 52 0 0 11 35 0 0
+                                              10 109 2 0 69 9 10 70 2 0 21 9 10
+                                              52 2 0 43 9 10 44 0 0 11 35 0 0
                                               11 25 3 0 11 16 16 16 31 3 0 11
-                                              16 16 16 20 3 0 92 9 9 10 93 5 0
-                                              48 9 9 10 21 21 49 3 0 48 92 8 21
-                                              104 3 0 48 9 9 10 99)))))
+                                              16 16 16 20 3 0 92 9 9 10 93 3 0
+                                              48 92 8 21 104 5 0 48 9 9 10 21
+                                              21 49 3 0 48 9 9 10 99)))))
            '|lookupComplete|)) 

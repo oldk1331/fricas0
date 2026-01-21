@@ -224,38 +224,38 @@
               (56 . =) (62 . |dom|) (67 . |hconcat|) (|List| 7) (72 . |keys|)
               (77 . |elt|) (83 . |bracket|) |RESULT;coerce;%Of;4|
               |RESULT;showArrayValues;2B;5| |RESULT;showScalarValues;2B;6|
-              (|List| 39) (|Equation| 25) (|List| 25)
-              (|Record| (|:| |key| 7) (|:| |entry| 25)) (|List| 41)
-              (|Equation| 41) (|List| 43) (|NonNegativeInteger|)
-              (|Mapping| 41 41 41) (|String|) (|InputForm|) (|Mapping| 13 25)
-              (|Mapping| 13 25 25) (|Mapping| 13 41) (|Mapping| 13 41 41)
-              (|Mapping| 25 25) (|Void|) (|Mapping| 41 41) (|Mapping| 25 25 25)
-              (|Union| 25 '"failed") (|Union| 41 '"failed"))
+              (|NonNegativeInteger|) (|Record| (|:| |key| 7) (|:| |entry| 25))
+              (|Mapping| 39 39) (|Union| 39 '"failed") (|Mapping| 13 39)
+              (|List| 39) (|Union| 25 '"failed") (|List| 25) (|Mapping| 25 25)
+              (|Mapping| 25 25 25) (|Mapping| 39 39 39) (|Equation| 25)
+              (|List| 49) (|List| 52) (|Equation| 39) (|String|)
+              (|Mapping| 13 39 39) (|Mapping| 13 25 25) (|Mapping| 13 25)
+              (|Void|) (|InputForm|))
            '#(|showScalarValues| 88 |showArrayValues| 93 |keys| 98 |elt| 103
               |coerce| 109)
            'NIL
            (CONS
             (|makeByteWordVec2| 13
-                                '(0 0 0 0 0 0 0 0 0 0 0 10 8 12 0 0 0 0 10 1 8
-                                  11 13))
+                                '(0 0 0 0 0 0 0 0 0 12 8 10 0 0 13 11 8 1 10 0
+                                  0 0 0))
             (CONS
              '#(|TableAggregate&| |KeyedDictionary&| |Dictionary&|
-                |DictionaryOperations&| |BagAggregate&| |Collection&|
-                |IndexedAggregate&| |HomogeneousAggregate&|
-                |HomogeneousAggregate&| |EltableAggregate&| |Aggregate&|
-                |Evalable&| |Evalable&| |SetCategory&| NIL NIL NIL NIL
-                |InnerEvalable&| NIL |InnerEvalable&| |BasicType&| NIL)
+                |DictionaryOperations&| |BagAggregate&| |IndexedAggregate&|
+                |Collection&| |HomogeneousAggregate&| |HomogeneousAggregate&|
+                |SetCategory&| |Evalable&| |Evalable&| |Aggregate&|
+                |EltableAggregate&| NIL |BasicType&| |InnerEvalable&| NIL
+                |InnerEvalable&| NIL NIL NIL NIL)
              (CONS
               '#((|TableAggregate| 7 25) (|KeyedDictionary| 7 25)
-                 (|Dictionary| 41) (|DictionaryOperations| 41)
-                 (|BagAggregate| 41) (|Collection| 41)
-                 (|IndexedAggregate| 7 25) (|HomogeneousAggregate| 41)
-                 (|HomogeneousAggregate| 25) (|EltableAggregate| 7 25)
-                 (|Aggregate|) (|Evalable| 41) (|Evalable| 25) (|SetCategory|)
-                 (|finiteAggregate|) (|Eltable| 7 25) (|Type|)
-                 (|shallowlyMutable|) (|InnerEvalable| 41 41)
-                 (|ConvertibleTo| 48) (|InnerEvalable| 25 25) (|BasicType|)
-                 (|CoercibleTo| 6))
+                 (|Dictionary| 39) (|DictionaryOperations| 39)
+                 (|BagAggregate| 39) (|IndexedAggregate| 7 25)
+                 (|Collection| 39) (|HomogeneousAggregate| 25)
+                 (|HomogeneousAggregate| 39) (|SetCategory|) (|Evalable| 25)
+                 (|Evalable| 39) (|Aggregate|) (|EltableAggregate| 7 25)
+                 (|CoercibleTo| 6) (|BasicType|) (|InnerEvalable| 25 25)
+                 (|ConvertibleTo| 58) (|InnerEvalable| 39 39)
+                 (|shallowlyMutable|) (|Type|) (|Eltable| 7 25)
+                 (|finiteAggregate|))
               (|makeByteWordVec2| 37
                                   '(1 7 6 0 8 1 14 13 0 15 1 14 6 0 16 1 14 17
                                     0 18 1 14 0 0 19 1 14 13 0 20 1 14 0 0 21 1
@@ -265,5 +265,3 @@
                                     0 13 13 37 1 0 13 13 36 1 0 31 0 32 2 0 25
                                     0 7 33 1 5 6 0 35)))))
            '|lookupIncomplete|)) 
-
-(MAKEPROP '|Result| 'NILADIC T) 

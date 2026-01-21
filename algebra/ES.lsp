@@ -172,5 +172,3 @@
                                                        (|Integer|)))))
                                             NIL NIL NIL))))
            (SETELT #1# 0 '(|ExpressionSpace|))))) 
-
-(MAKEPROP '|ExpressionSpace| 'NILADIC T) 

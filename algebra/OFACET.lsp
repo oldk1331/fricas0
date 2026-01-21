@@ -91,17 +91,17 @@
 (SDEFUN |OFACET;orientedFacetIfCan;LU;5|
         ((|boundary| (|List| %)) (% (|Union| % "failed")))
         (SPROG
-         ((#1=#:G96 NIL) (|mm| (|Integer|)) (#2=#:G100 NIL) (|e| NIL)
-          (#3=#:G99 NIL) (|expected| (|List| %)) (|res| (%))
-          (|indexes| (|List| (|NonNegativeInteger|))) (#4=#:G98 NIL) (|i| NIL)
-          (|indexLst| (|List| (|List| (|NonNegativeInteger|)))) (#5=#:G97 NIL)
+         ((#1=#:G88 NIL) (|mm| (|Integer|)) (#2=#:G92 NIL) (|e| NIL)
+          (#3=#:G91 NIL) (|expected| (|List| %)) (|res| (%))
+          (|indexes| (|List| (|NonNegativeInteger|))) (#4=#:G90 NIL) (|i| NIL)
+          (|indexLst| (|List| (|List| (|NonNegativeInteger|)))) (#5=#:G89 NIL)
           (|subFacet| NIL) (|b| (|List| %)))
          (SEQ
           (EXIT
            (SEQ (LETT |indexLst| NIL)
                 (COND
                  ((< (SPADCALL |boundary| (QREFELT % 22)) 1)
-                  (PROGN (LETT #1# (CONS 1 "failed")) (GO #6=#:G95))))
+                  (PROGN (LETT #1# (CONS 1 "failed")) (GO #6=#:G87))))
                 (LETT |b| (SPADCALL |boundary| (QREFELT % 23)))
                 (SEQ (LETT |subFacet| NIL) (LETT #5# |b|) G190
                      (COND
@@ -171,7 +171,7 @@
 
 (SDEFUN |OFACET;minIndex;%Nni;8| ((|orf| (%)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((|m| (|NonNegativeInteger|)) (#1=#:G108 NIL) (|i| NIL)
+         ((|m| (|NonNegativeInteger|)) (#1=#:G100 NIL) (|i| NIL)
           (|inds| (|List| (|NonNegativeInteger|))))
          (SEQ (LETT |m| 0) (LETT |inds| (SPADCALL |orf| (QREFELT % 24)))
               (SEQ (LETT |i| NIL) (LETT #1# |inds|) G190
@@ -186,7 +186,7 @@
 
 (SDEFUN |OFACET;maxIndex;%Nni;9| ((|orf| (%)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((|m| (|NonNegativeInteger|)) (#1=#:G113 NIL) (|i| NIL)
+         ((|m| (|NonNegativeInteger|)) (#1=#:G105 NIL) (|i| NIL)
           (|inds| (|List| (|NonNegativeInteger|))))
          (SEQ (LETT |m| 0) (LETT |inds| (SPADCALL |orf| (QREFELT % 24)))
               (SEQ (LETT |i| NIL) (LETT #1# |inds|) G190
@@ -200,7 +200,7 @@
 (SDEFUN |OFACET;getIndexesSigned;%L;10| ((|orf| (%)) (% (|List| (|Integer|))))
         (SPROG
          ((|neg| (|Boolean|)) (|res| (|List| (|Integer|))) (|i2| (|Integer|))
-          (#1=#:G120 NIL) (|i| NIL))
+          (#1=#:G112 NIL) (|i| NIL))
          (SEQ (LETT |res| NIL)
               (LETT |neg| (EQL (SPADCALL (QCAR |orf|) (QREFELT % 38)) -1))
               (SEQ (LETT |i| NIL) (LETT #1# (QCDR |orf|)) G190
@@ -776,12 +776,12 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0))
                  (CONS
-                  '#(|FacetCategory&| |OrderedSet&| NIL |SetCategory&|
-                     |PartialOrder&| |BasicType&| NIL)
+                  '#(|FacetCategory&| |OrderedSet&| NIL |SetCategory&| NIL
+                     |BasicType&| |PartialOrder&|)
                   (CONS
                    '#((|FacetCategory|) (|OrderedSet|) (|Comparable|)
-                      (|SetCategory|) (|PartialOrder|) (|BasicType|)
-                      (|CoercibleTo| 86))
+                      (|SetCategory|) (|CoercibleTo| 86) (|BasicType|)
+                      (|PartialOrder|))
                    (|makeByteWordVec2| 92
                                        '(1 7 0 0 8 2 10 9 0 0 11 1 7 0 0 14 1
                                          18 7 0 19 1 21 10 0 22 1 21 0 0 23 2
@@ -800,16 +800,14 @@
                                          55 2 0 9 0 0 1 2 0 0 0 12 42 2 0 9 0 0
                                          81 1 0 0 0 59 2 0 0 0 10 79 2 0 74 0 0
                                          76 2 0 12 0 28 31 1 0 0 15 16 1 0 0 15
-                                         17 1 0 32 28 33 2 0 0 12 18 20 2 0 0
-                                         12 7 13 1 0 10 0 35 1 0 10 0 36 2 0 0
-                                         0 0 1 1 0 10 0 37 2 0 0 0 0 1 1 0 85 0
-                                         1 2 0 0 0 0 53 2 0 9 0 0 52 1 0 12 0
-                                         41 1 0 15 0 40 1 0 7 0 24 1 0 9 0 45 1
-                                         0 86 0 92 1 0 28 0 29 3 0 60 60 10 10
-                                         61 2 0 60 10 10 62 3 0 28 0 10 10 50 2
-                                         0 28 0 10 49 2 0 0 0 10 78 2 0 9 0 0 1
-                                         2 0 9 0 0 1 2 0 9 0 0 51 2 0 9 0 0 83
-                                         2 0 9 0 0 82)))))
+                                         17 1 0 32 28 33 2 0 0 12 7 13 2 0 0 12
+                                         18 20 1 0 10 0 35 1 0 10 0 36 2 0 0 0
+                                         0 1 1 0 10 0 37 2 0 0 0 0 1 1 0 85 0 1
+                                         2 0 0 0 0 53 2 0 9 0 0 52 1 0 12 0 41
+                                         1 0 15 0 40 1 0 7 0 24 1 0 9 0 45 1 0
+                                         86 0 92 1 0 28 0 29 2 0 60 10 10 62 3
+                                         0 60 60 10 10 61 2 0 28 0 10 49 3 0 28
+                                         0 10 10 50 2 0 0 0 10 78 2 0 9 0 0 1 2
+                                         0 9 0 0 1 2 0 9 0 0 51 2 0 9 0 0 83 2
+                                         0 9 0 0 82)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|OrientedFacet| 'NILADIC T) 

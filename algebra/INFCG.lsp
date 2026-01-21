@@ -92,8 +92,8 @@
               |INFCG;generators;L;7| |INFCG;exponent;%I;8|
               (CONS IDENTITY (FUNCALL (|dispatchFunction| |INFCG;One;%;9|) %))
               |INFCG;*;3%;11| |INFCG;inv;2%;12| |INFCG;=;2%B;13|
-              |INFCG;<;2%B;14| (|SingleInteger|) (|NonNegativeInteger|)
-              (|Union| % '"failed") (|PositiveInteger|) (|String|))
+              |INFCG;<;2%B;14| (|String|) (|PositiveInteger|)
+              (|Union| % '"failed") (|NonNegativeInteger|) (|SingleInteger|))
            '#(~= 32 |smaller?| 38 |sample| 44 |rightRecip| 48 |rightPower| 53
               |recip| 65 |one?| 70 |min| 75 |max| 81 |leftRecip| 87 |leftPower|
               92 |latex| 104 |inv| 109 |hashUpdate!| 114 |hash| 120
@@ -104,27 +104,27 @@
            (CONS
             (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
             (CONS
-             '#(|Group&| NIL NIL NIL NIL |OrderedSet&| |MagmaWithUnit&| NIL
-                |Magma&| NIL |Hashable&| |SetCategory&| NIL NIL |PartialOrder&|
-                NIL NIL |BasicType&| NIL)
+             '#(NIL |Group&| NIL NIL |MagmaWithUnit&| |OrderedSet&| NIL
+                |Magma&| NIL |SetCategory&| |Hashable&| NIL NIL |BasicType&|
+                NIL NIL |PartialOrder&| NIL NIL)
              (CONS
-              '#((|Group|) (|OrderedMonoid|) (|Monoid|) (|OrderedSemiGroup|)
-                 (|SemiGroup|) (|OrderedSet|) (|MagmaWithUnit|) (|Comparable|)
-                 (|Magma|) (|CommutativeStar|) (|Hashable|) (|SetCategory|)
-                 (|ConvertibleTo| 21) (|TwoSidedRecip|) (|PartialOrder|)
-                 (|FinitelyGenerated|) (|unitsKnown|) (|BasicType|)
-                 (|CoercibleTo| 10))
+              '#((|OrderedMonoid|) (|Group|) (|OrderedSemiGroup|) (|Monoid|)
+                 (|MagmaWithUnit|) (|OrderedSet|) (|SemiGroup|) (|Magma|)
+                 (|Comparable|) (|SetCategory|) (|Hashable|)
+                 (|CommutativeStar|) (|CoercibleTo| 10) (|BasicType|)
+                 (|unitsKnown|) (|FinitelyGenerated|) (|PartialOrder|)
+                 (|TwoSidedRecip|) (|ConvertibleTo| 21))
               (|makeByteWordVec2| 37
                                   '(1 11 10 0 12 1 13 10 0 14 1 7 10 0 15 2 10
                                     0 0 0 16 2 7 18 18 0 19 1 21 0 11 22 2 0 8
                                     0 0 1 2 0 8 0 0 1 0 0 0 1 1 0 35 0 1 2 0 0
                                     0 34 1 2 0 0 0 36 1 1 0 35 0 1 1 0 8 0 9 2
                                     0 0 0 0 1 2 0 0 0 0 1 1 0 35 0 1 2 0 0 0 34
-                                    1 2 0 0 0 36 1 1 0 37 0 1 1 0 0 0 30 2 0 18
-                                    18 0 20 1 0 33 0 1 0 0 25 26 0 0 0 24 1 0
+                                    1 2 0 0 0 36 1 1 0 33 0 1 1 0 0 0 30 2 0 18
+                                    18 0 20 1 0 37 0 1 0 0 25 26 0 0 0 24 1 0
                                     11 0 27 1 0 21 0 23 2 0 0 0 0 1 2 0 0 0 0 1
-                                    1 0 10 0 17 2 0 0 0 11 1 2 0 0 0 34 1 2 0 0
-                                    0 36 1 0 0 0 28 2 0 8 0 0 1 2 0 8 0 0 1 2 0
+                                    1 0 10 0 17 2 0 0 0 34 1 2 0 0 0 36 1 2 0 0
+                                    0 11 1 0 0 0 28 2 0 8 0 0 1 2 0 8 0 0 1 2 0
                                     8 0 0 31 2 0 8 0 0 1 2 0 8 0 0 32 2 0 0 0 0
                                     1 2 0 0 0 0 29)))))
            '|lookupComplete|)) 

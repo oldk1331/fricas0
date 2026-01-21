@@ -312,8 +312,8 @@
               (86 . |weight|) (|NoneFunctions1| 33) (91 . |coerce|)
               (|NoneFunctions1| 21) (96 . |coerce|) (101 . |coerce|)
               (106 . |coerce|) (|List| 51) (111 . |concat!|) (|List| %)
-              (117 . |kernel|) |JBUNDLE;coerce;%E;17| (|Union| % '"failed")
-              (|Union| % '"0") (|List| 41))
+              (117 . |kernel|) |JBUNDLE;coerce;%E;17| (|List| 41)
+              (|Union| % '"0") (|Union| % '"failed"))
            '#(~= 123 |weight| 129 |variables| 134 |type| 145 |smaller?| 150
               |setNotation| 156 |repeatedIndex| 161 |r2m| 166 |order| 171
               |one?| 176 |numIndVar| 181 |numDepVar| 185 |name| 189
@@ -325,12 +325,12 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|JetBundleCategory&| |OrderedSet&| NIL |SetCategory&|
-                     |BasicType&| NIL |PartialOrder&| NIL)
+                  '#(|JetBundleCategory&| |OrderedSet&| NIL |SetCategory&| NIL
+                     |PartialOrder&| NIL |BasicType&|)
                   (CONS
                    '#((|JetBundleCategory|) (|OrderedSet|) (|Comparable|)
-                      (|SetCategory|) (|BasicType|) (|CoercibleTo| 51)
-                      (|PartialOrder|) (|CoercibleTo| 17))
+                      (|SetCategory|) (|CoercibleTo| 17) (|PartialOrder|)
+                      (|CoercibleTo| 51) (|BasicType|))
                    (|makeByteWordVec2| 75
                                        '(1 11 0 10 12 1 17 0 16 18 1 17 19 0 20
                                          1 15 0 0 24 1 15 33 0 34 2 33 35 0 0
@@ -340,20 +340,20 @@
                                          58 57 2 59 3 53 0 0 21 57 60 1 0 33 0
                                          61 1 62 57 33 63 1 64 57 21 65 1 51 0
                                          21 66 1 51 0 38 67 2 68 0 0 0 69 2 51
-                                         0 53 70 71 2 0 35 0 0 1 1 0 33 0 61 2
-                                         0 70 33 27 1 1 0 70 33 1 1 0 21 0 29 2
+                                         0 53 70 71 2 0 35 0 0 1 1 0 33 0 61 1
+                                         0 70 33 1 2 0 70 33 27 1 1 0 21 0 29 2
                                          0 35 0 0 1 1 0 21 21 22 1 0 41 0 46 1
                                          0 25 41 1 1 0 33 0 1 1 0 35 0 1 0 0 27
                                          44 0 0 27 45 1 0 21 0 50 1 0 25 0 26 2
                                          0 0 0 0 1 2 0 0 0 0 1 1 0 41 25 1 1 0
-                                         16 0 1 2 0 73 0 27 1 2 0 0 0 27 1 1 0
+                                         16 0 1 2 0 75 0 27 1 2 0 0 0 27 1 1 0
                                          27 0 28 0 0 21 23 1 0 33 33 1 1 0 33
-                                         33 1 2 0 74 0 27 1 2 0 25 0 0 1 1 0 0
-                                         21 40 1 0 51 0 72 1 0 17 0 1 1 0 33 25
-                                         1 1 0 33 0 1 1 0 75 25 1 0 0 0 1 1 0 0
-                                         27 31 0 0 0 1 1 0 0 27 32 2 0 0 27 41
-                                         42 2 0 0 27 25 37 1 0 0 33 1 2 0 0 27
-                                         33 1 1 0 0 25 1 2 0 0 27 25 1 0 0 0 30
+                                         33 1 2 0 74 0 27 1 2 0 25 0 0 1 1 0 17
+                                         0 1 1 0 51 0 72 1 0 0 21 40 1 0 33 0 1
+                                         1 0 33 25 1 1 0 73 25 1 1 0 0 27 31 0
+                                         0 0 1 1 0 0 27 32 0 0 0 1 2 0 0 27 41
+                                         42 2 0 0 27 25 37 2 0 0 27 25 1 1 0 0
+                                         25 1 2 0 0 27 33 1 1 0 0 33 1 0 0 0 30
                                          2 0 0 21 10 43 2 0 35 0 0 1 2 0 35 0 0
                                          1 2 0 35 0 0 1 2 0 35 0 0 1 2 0 35 0 0
                                          1)))))

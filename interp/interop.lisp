@@ -3,6 +3,10 @@
 
 (IN-PACKAGE "BOOT")
 
+; $returnNowhereFromGoGet := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$returnNowhereFromGoGet| NIL))
+
 ; hashCode? x == INTEGERP x
 
 (DEFUN |hashCode?| (|x|) (PROG () (RETURN (INTEGERP |x|))))
@@ -111,7 +115,7 @@
 ;   first sexpr = 'Union or first sexpr = 'Record =>
 ;     [DNameApplyID, name0,
 ;         [DNameTupleID, :[ SExprToDName(sx, 'T) for sx in rest sexpr]]]
-;   newCosig := rest GETDATABASE(first sexpr, QUOTE COSIG)
+;   newCosig := rest(get_database(first(sexpr), 'COSIG))
 ;   [DNameApplyID, name0,
 ;     :MAPCAR(function SExprToDName, rest sexpr, newCosig)]
 
@@ -169,7 +173,8 @@
                                NIL (CDR |sexpr|) NIL))))
                  (#1#
                   (PROGN
-                   (SETQ |newCosig| (CDR (GETDATABASE (CAR |sexpr|) 'COSIG)))
+                   (SETQ |newCosig|
+                           (CDR (|get_database| (CAR |sexpr|) 'COSIG)))
                    (CONS |DNameApplyID|
                          (CONS |name0|
                                (MAPCAR #'|SExprToDName| (CDR |sexpr|)
@@ -189,7 +194,7 @@
 
 ; runOldAxiomFunctor(:allArgs) ==
 ;   [:args,env] := allArgs
-;   GETDATABASE(env, 'CONSTRUCTORKIND) = 'category =>
+;   get_database(env, 'CONSTRUCTORKIND) = 'category =>
 ;       [$oldAxiomPreCategoryDispatch,: [env, :args]]
 ;   dom:=APPLY(env, args)
 ;   makeOldAxiomDispatchDomain dom
@@ -202,7 +207,7 @@
       (SETQ |env| (CAR |LETTMP#1|))
       (SETQ |args| (NREVERSE (CDR |LETTMP#1|)))
       (COND
-       ((EQ (GETDATABASE |env| 'CONSTRUCTORKIND) '|category|)
+       ((EQ (|get_database| |env| 'CONSTRUCTORKIND) '|category|)
         (CONS |$oldAxiomPreCategoryDispatch| (CONS |env| |args|)))
        ('T
         (PROGN
@@ -210,7 +215,7 @@
          (|makeOldAxiomDispatchDomain| |dom|))))))))
 
 ; makeLazyOldAxiomDispatchDomain domform ==
-;   GETDATABASE(opOf domform, 'CONSTRUCTORKIND) = 'category =>
+;   get_database(opOf(domform), 'CONSTRUCTORKIND) = 'category =>
 ;       [$oldAxiomPreCategoryDispatch,: domform]
 ;   dd := [$lazyOldAxiomDomainDispatch, hashTypeForm(domform,0), domform]
 ;   NCONC(dd,dd) -- installs back pointer to head of domain.
@@ -220,7 +225,7 @@
   (PROG (|dd|)
     (RETURN
      (COND
-      ((EQ (GETDATABASE (|opOf| |domform|) 'CONSTRUCTORKIND) '|category|)
+      ((EQ (|get_database| (|opOf| |domform|) 'CONSTRUCTORKIND) '|category|)
        (CONS |$oldAxiomPreCategoryDispatch| |domform|))
       ('T
        (PROGN
@@ -362,9 +367,9 @@
                   (LIST #'|oldAxiomPreCategoryBuild|) (LIST NIL))))
 
 ; oldAxiomPreCategoryParents(catform,dom) ==
-;   vars := ["%", :rest GETDATABASE(opOf(catform), 'CONSTRUCTORFORM)]
+;   vars := ["%", :rest(get_database(opOf(catform), 'CONSTRUCTORFORM))]
 ;   vals := [dom,:rest catform]
-;   -- parents :=  GETDATABASE(opOf catform, 'PARENTS)
+;   -- parents :=  get_database(opOf(catform), 'PARENTS)
 ;   parents := parentsOf opOf catform
 ;   -- strip out forms listed both conditionally and unconditionally
 ;   unconditionalParents := []
@@ -386,7 +391,8 @@
      (PROGN
       (SETQ |vars|
               (CONS '%
-                    (CDR (GETDATABASE (|opOf| |catform|) 'CONSTRUCTORFORM))))
+                    (CDR
+                     (|get_database| (|opOf| |catform|) 'CONSTRUCTORFORM))))
       (SETQ |vals| (CONS |dom| (CDR |catform|)))
       (SETQ |parents| (|parentsOf| (|opOf| |catform|)))
       (SETQ |unconditionalParents| NIL)

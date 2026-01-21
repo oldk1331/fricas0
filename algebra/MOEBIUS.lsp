@@ -240,8 +240,9 @@
               |MOEBIUS;eval;%2Opc;16| (|String|) (|OutputForm|)
               (50 . |message|) (55 . |coerce|) (60 . *) (66 . +) (72 . /)
               (78 . |rarrow|) |MOEBIUS;coerce;%Of;17| (|Mapping| 6 6)
-              (|List| 6) (84 . |map|) (90 . =) |MOEBIUS;=;2%B;19| (|Integer|)
-              (|NonNegativeInteger|) (|Union| % '"failed") (|PositiveInteger|))
+              (|List| 6) (84 . |map|) (90 . =) |MOEBIUS;=;2%B;19|
+              (|PositiveInteger|) (|Union| % '"failed") (|NonNegativeInteger|)
+              (|Integer|))
            '#(~= 96 |shift| 102 |scale| 113 |sample| 124 |rightRecip| 128
               |rightPower| 133 |recip| 145 |one?| 159 |moebius| 164 |leftRecip|
               172 |leftPower| 177 |latex| 189 |inv| 194 |eval| 199 |conjugate|
@@ -250,12 +251,12 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|Group&| NIL NIL |MagmaWithUnit&| |Magma&| |SetCategory&|
-                     NIL NIL |BasicType&| NIL)
+                  '#(|Group&| NIL |MagmaWithUnit&| NIL |Magma&| |SetCategory&|
+                     NIL |BasicType&| NIL NIL)
                   (CONS
-                   '#((|Group|) (|Monoid|) (|SemiGroup|) (|MagmaWithUnit|)
-                      (|Magma|) (|SetCategory|) (|unitsKnown|)
-                      (|TwoSidedRecip|) (|BasicType|) (|CoercibleTo| 34))
+                   '#((|Group|) (|Monoid|) (|MagmaWithUnit|) (|SemiGroup|)
+                      (|Magma|) (|SetCategory|) (|CoercibleTo| 34)
+                      (|BasicType|) (|TwoSidedRecip|) (|unitsKnown|))
                    (|makeByteWordVec2| 50
                                        '(0 6 0 10 0 6 0 11 2 6 0 0 0 12 2 6 0 0
                                          0 13 1 6 0 0 15 2 6 0 0 0 23 1 26 25 0
@@ -263,14 +264,14 @@
                                          34 0 33 35 1 6 34 0 36 2 34 0 0 0 37 2
                                          34 0 0 0 38 2 34 0 0 0 39 2 34 0 0 0
                                          40 2 43 0 42 0 44 2 43 29 0 0 45 2 0
-                                         29 0 0 1 2 0 0 0 6 20 1 0 0 6 17 2 0 0
-                                         0 6 21 1 0 0 6 18 0 0 0 1 1 0 49 0 1 2
-                                         0 0 0 48 1 2 0 0 0 50 1 1 0 0 0 22 0 0
-                                         0 19 1 0 49 0 1 1 0 29 0 1 4 0 0 6 6 6
-                                         6 8 1 0 49 0 1 2 0 0 0 48 1 2 0 0 0 50
-                                         1 1 0 33 0 1 1 0 0 0 16 2 0 26 0 26 32
-                                         2 0 6 0 6 24 2 0 0 0 0 1 2 0 0 0 0 1 1
-                                         0 34 0 41 2 0 0 0 47 1 2 0 0 0 48 1 2
+                                         29 0 0 1 1 0 0 6 17 2 0 0 0 6 20 1 0 0
+                                         6 18 2 0 0 0 6 21 0 0 0 1 1 0 48 0 1 2
+                                         0 0 0 47 1 2 0 0 0 49 1 1 0 48 0 1 0 0
+                                         0 19 1 0 0 0 22 1 0 29 0 1 4 0 0 6 6 6
+                                         6 8 1 0 48 0 1 2 0 0 0 47 1 2 0 0 0 49
+                                         1 1 0 33 0 1 1 0 0 0 16 2 0 6 0 6 24 2
+                                         0 26 0 26 32 2 0 0 0 0 1 2 0 0 0 0 1 1
+                                         0 34 0 41 2 0 0 0 47 1 2 0 0 0 49 1 2
                                          0 0 0 50 1 0 0 0 9 2 0 29 0 0 46 2 0 0
                                          0 0 1 2 0 0 0 0 14)))))
            '|lookupComplete|)) 

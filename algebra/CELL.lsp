@@ -84,15 +84,15 @@
                       (LETT |v| (SPADCALL |sc| (QREFELT % 21)))
                       (EXIT
                        (COND ((EQUAL |v| |var|) (SPADCALL |sc| (QREFELT % 26)))
-                             ((GGREATERP |var| |v|) NIL)
-                             ((SPADCALL |v| |var| (QREFELT % 30)) 'T)
+                             ((SPADCALL |v| |var| (QREFELT % 30)) NIL)
+                             ((SPADCALL |v| |var| (QREFELT % 31)) 'T)
                              (#1# (|error| "impossible")))))))))) 
 
 (SDEFUN |CELL;samplePoint;%L;10| ((|cell| (%)) (% (|List| |TheField|)))
         (COND ((NULL |cell|) NIL)
               ('T
-               (CONS (SPADCALL (|SPADfirst| |cell|) (QREFELT % 32))
-                     (SPADCALL (CDR |cell|) (QREFELT % 34)))))) 
+               (CONS (SPADCALL (|SPADfirst| |cell|) (QREFELT % 33))
+                     (SPADCALL (CDR |cell|) (QREFELT % 35)))))) 
 
 (DECLAIM (NOTINLINE |Cell;|)) 
 
@@ -116,7 +116,7 @@
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Cell| DV$1))
-          (LETT % (GETREFV 35))
+          (LETT % (GETREFV 36))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|Cell| (LIST DV$1) (CONS 1 %))
@@ -138,23 +138,24 @@
               |CELL;makeCell;Sc2%;5| (|Symbol|) (10 . |variableOf|)
               |CELL;mainVariableOf;%S;6| (|List| 20) |CELL;variablesOf;%L;7|
               (|Boolean|) (15 . |hasDimension?|) (20 . |One|)
-              (|NonNegativeInteger|) |CELL;dimension;%Nni;8| (24 . >)
-              |CELL;hasDimension?;%SB;9| (30 . |samplePoint|) (|List| 6)
+              (|NonNegativeInteger|) |CELL;dimension;%Nni;8| (24 . <) (30 . >)
+              |CELL;hasDimension?;%SB;9| (36 . |samplePoint|) (|List| 6)
               |CELL;samplePoint;%L;10|)
-           '#(|variablesOf| 35 |simpleCells| 40 |samplePoint| 45 |projection|
-              50 |makeCell| 55 |mainVariableOf| 66 |hasDimension?| 71
-              |dimension| 77 |coerce| 82)
+           '#(|variablesOf| 41 |simpleCells| 46 |samplePoint| 51 |projection|
+              56 |makeCell| 61 |mainVariableOf| 72 |hasDimension?| 77
+              |dimension| 83 |coerce| 88)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
                        (CONS '#((|CoercibleTo| 10))
-                             (|makeByteWordVec2| 34
+                             (|makeByteWordVec2| 35
                                                  '(1 11 10 0 12 1 10 0 13 14 1
                                                    11 20 0 21 1 11 25 0 26 0 6
-                                                   0 27 2 20 25 0 0 30 1 11 6 0
-                                                   32 1 0 23 0 24 1 0 7 0 8 1 0
-                                                   33 0 34 1 0 16 0 17 2 0 0 11
-                                                   0 19 1 0 0 7 18 1 0 20 0 22
-                                                   2 0 25 0 20 31 1 0 28 0 29 1
-                                                   0 10 0 15)))))
+                                                   0 27 2 20 25 0 0 30 2 20 25
+                                                   0 0 31 1 11 6 0 33 1 0 23 0
+                                                   24 1 0 7 0 8 1 0 34 0 35 1 0
+                                                   16 0 17 1 0 0 7 18 2 0 0 11
+                                                   0 19 1 0 20 0 22 2 0 25 0 20
+                                                   32 1 0 28 0 29 1 0 10 0
+                                                   15)))))
            '|lookupComplete|)) 

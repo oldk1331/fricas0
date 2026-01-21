@@ -445,5 +445,3 @@
                                               42 2 0 43 44 36 45 2 0 11 11 36
                                               37 1 0 38 11 39 1 0 11 11 41)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|LLLReduction| 'NILADIC T) 

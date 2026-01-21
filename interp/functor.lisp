@@ -1443,8 +1443,8 @@
   (PROG (|principal| |secondaries| |op| |LETTMP#1| |principal'| |cond| |new|
          |l| |Conditions| |PrincipalSecondaries| |MinimalPrimary|
          |MaximalPrimary| |necessarySecondaries| |MaximalPrimaries|
-         |MinimalPrimaries| |HackSlot4| |partList| |masterSecondaries| |v| LIST
-         |w|)
+         |MinimalPrimaries| |HackSlot4| |partList| |masterSecondaries| |v|
+         |list| |w|)
     (RETURN
      (PROGN
       (SETQ |principal| (CAR |catvecListMaker|))
@@ -1647,7 +1647,7 @@
                            |u| NIL)))
                         (SETQ |bfVar#71| (CDR |bfVar#71|))))
                      |partList| NIL)
-                    (SETQ LIST
+                    (SETQ |list|
                             ((LAMBDA (|bfVar#75| |bfVar#74| |u|)
                                (LOOP
                                 (COND
@@ -1710,13 +1710,13 @@
                                        NIL))))
                                (SETQ |bfVar#79| (CDR |bfVar#79|))))
                             |newS| NIL)
-                           (SETQ LIST
-                                   (|InvestigateConditions,update| LIST |u|
+                           (SETQ |list|
+                                   (|InvestigateConditions,update| |list| |u|
                                     |secondaries| |newS|)))))
                         (SETQ |bfVar#76| (CDR |bfVar#76|))
                         (SETQ |bfVar#77| (CDR |bfVar#77|))))
                      |Conditions| NIL |partList| NIL)
-                    (SETQ LIST (|ICformat_loop| LIST |secondaries| |e|))
+                    (SETQ |list| (|ICformat_loop| |list| |secondaries| |e|))
                     (CONS T
                           ((LAMBDA (|bfVar#87| |bfVar#86| |ms|)
                              (LOOP
@@ -1726,10 +1726,11 @@
                                 (RETURN (NREVERSE |bfVar#87|)))
                                (#1#
                                 (SETQ |bfVar#87|
-                                        (CONS (LASSOC |ms| LIST) |bfVar#87|))))
+                                        (CONS (LASSOC |ms| |list|)
+                                              |bfVar#87|))))
                               (SETQ |bfVar#86| (CDR |bfVar#86|))))
                            NIL |masterSecondaries| NIL)))))))))))))))
-(DEFUN |InvestigateConditions,update| (LIST |cond| |secondaries| |newS|)
+(DEFUN |InvestigateConditions,update| (|list| |cond| |secondaries| |newS|)
   (PROG (|list2|)
     (RETURN
      (PROGN
@@ -1750,7 +1751,7 @@
                              |bfVar#83|))))
                   (SETQ |bfVar#81| (CDR |bfVar#81|))
                   (SETQ |bfVar#82| (CDR |bfVar#82|))))
-               NIL |secondaries| NIL LIST NIL))
+               NIL |secondaries| NIL |list| NIL))
       |list2|))))
 (DEFUN |InvestigateConditions,flist| (|sec| |newS| |old| |cond|)
   (PROG (|newS2| |morecond| |cond2|)
@@ -1891,7 +1892,7 @@
 ;   $ICformat_hash : local := MAKE_HASHTABLE('EQUAL)
 ;   [[sec, :ICformat(u, e)] for u in list for sec in secondaries]
 
-(DEFUN |ICformat_loop| (LIST |secondaries| |e|)
+(DEFUN |ICformat_loop| (|list| |secondaries| |e|)
   (PROG (|$ICformat_hash|)
     (DECLARE (SPECIAL |$ICformat_hash|))
     (RETURN
@@ -1908,7 +1909,7 @@
                     (CONS (CONS |sec| (|ICformat| |u| |e|)) |bfVar#90|))))
           (SETQ |bfVar#88| (CDR |bfVar#88|))
           (SETQ |bfVar#89| (CDR |bfVar#89|))))
-       NIL LIST NIL |secondaries| NIL)))))
+       NIL |list| NIL |secondaries| NIL)))))
 
 ; ORreduce l ==
 ;     for u in l | u is ['AND, :.] or u is ['and, :.] repeat

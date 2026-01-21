@@ -11,5 +11,3 @@
   (SPROG ((#1=#:G1 NIL))
          (PROG1 (LETT #1# (|Join| (|TwoSidedRecip|)))
            (SETELT #1# 0 '(|CommutativeStar|))))) 
-
-(MAKEPROP '|CommutativeStar| 'NILADIC T) 

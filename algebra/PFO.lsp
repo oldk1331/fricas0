@@ -647,7 +647,7 @@
           (|alpha| (|gf|)) (|m| (|SparseUnivariatePolynomial| |gf|))
           (|gf|
            (|Join| (|FiniteFieldCategory|) (|FiniteAlgebraicExtensionField| %)
-                   (|ConvertibleTo| (|Integer|))
+                   (|ConvertibleTo| (|Integer|)) (|Canonical|)
                    (CATEGORY |domain| (SIGNATURE |sqrt| (% %))
                     (SIGNATURE |quadraticNonResidue| (%)))))
           (|mm| #2=(|SparseUnivariatePolynomial| (|Fraction| (|Integer|))))
@@ -1038,7 +1038,7 @@
         (SPROG
          ((|gf|
            (|Join| (|FiniteFieldCategory|) (|FiniteAlgebraicExtensionField| %)
-                   (|ConvertibleTo| (|Integer|))
+                   (|ConvertibleTo| (|Integer|)) (|Canonical|)
                    (CATEGORY |domain| (SIGNATURE |sqrt| (% %))
                     (SIGNATURE |quadraticNonResidue| (%))))))
          (SEQ (LETT |gf| (|InnerPrimeField| |p|))
@@ -1613,7 +1613,7 @@
           (|f| NIL) (#4=#:G804 NIL)
           (|gf|
            (|Join| (|FiniteFieldCategory|) (|FiniteAlgebraicExtensionField| %)
-                   (|ConvertibleTo| (|Integer|))
+                   (|ConvertibleTo| (|Integer|)) (|Canonical|)
                    (CATEGORY |domain| (SIGNATURE |sqrt| (% %))
                     (SIGNATURE |quadraticNonResidue| (%))))))
          (SEQ

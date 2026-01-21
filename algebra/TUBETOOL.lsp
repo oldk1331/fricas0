@@ -162,7 +162,7 @@
 
 (DEFUN |TubePlotTools| ()
   (SPROG NIL
-         (PROG (#1=#:G62)
+         (PROG (#1=#:G54)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|TubePlotTools|))
@@ -265,5 +265,3 @@
                                               2 0 7 7 7 20 2 0 7 7 7 19 2 0 7 9
                                               7 18)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|TubePlotTools| 'NILADIC T) 

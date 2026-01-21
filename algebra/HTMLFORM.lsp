@@ -1649,9 +1649,9 @@
               |coerceL| 247 |coerce| 252 = 262)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 22))
+                        '#((|SetCategory|) (|CoercibleTo| 22) (|BasicType|))
                         (|makeByteWordVec2| 82
                                             '(1 23 22 22 24 0 29 0 30 2 33 0 25
                                               32 34 2 33 25 0 25 35 1 33 36 0
@@ -1673,8 +1673,6 @@
                                               0 81 2 55 36 25 0 82 2 0 36 0 0 1
                                               1 0 25 0 1 1 0 25 22 42 1 0 29 25
                                               31 1 0 25 22 27 1 0 25 22 28 1 0
-                                              25 22 26 1 0 22 0 1 2 0 36 0 0
+                                              22 0 1 1 0 25 22 26 2 0 36 0 0
                                               1)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|HTMLFormat| 'NILADIC T) 

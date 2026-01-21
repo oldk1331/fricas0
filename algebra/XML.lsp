@@ -100,5 +100,3 @@
                                               2 0 19 16 6 20 2 0 19 16 6
                                               22)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|ExportXml| 'NILADIC T) 

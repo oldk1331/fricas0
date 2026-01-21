@@ -17,5 +17,3 @@
                               ((|commutator| (% % %)) T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|Group|))))) 
-
-(MAKEPROP '|Group| 'NILADIC T) 

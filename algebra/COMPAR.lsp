@@ -14,5 +14,3 @@
                            (|mkCategory| '(((|smaller?| ((|Boolean|) % %)) T))
                                          NIL NIL NIL)))
            (SETELT #1# 0 '(|Comparable|))))) 
-
-(MAKEPROP '|Comparable| 'NILADIC T) 

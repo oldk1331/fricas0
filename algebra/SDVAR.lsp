@@ -65,8 +65,8 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) '|Rep|
               (|NonNegativeInteger|) |SDVAR;makeVariable;SNni%;1|
               |SDVAR;variable;%S;2| |SDVAR;order;%Nni;3| (|Boolean|) (0 . =)
-              (6 . <) |SDVAR;<;2%B;4| (|Union| 6 '"failed") (|String|)
-              (|OutputForm|))
+              (6 . <) |SDVAR;<;2%B;4| (|OutputForm|) (|String|)
+              (|Union| 6 '"failed"))
            '#(~= 12 |weight| 18 |variable| 23 |smaller?| 28 |retractIfCan| 34
               |retract| 39 |order| 44 |min| 49 |max| 55 |makeVariable| 61
               |latex| 67 |differentiate| 72 |coerce| 83 >= 93 > 99 = 105 <= 111
@@ -75,19 +75,19 @@
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0))
                  (CONS
                   '#(|DifferentialVariableCategory&| |OrderedSet&| NIL
-                     |SetCategory&| |RetractableTo&| |BasicType&| NIL
-                     |PartialOrder&| NIL)
+                     |RetractableTo&| |SetCategory&| NIL |PartialOrder&| NIL
+                     |BasicType&|)
                   (CONS
                    '#((|DifferentialVariableCategory| 6) (|OrderedSet|)
-                      (|Comparable|) (|SetCategory|) (|RetractableTo| 6)
-                      (|BasicType|) (|CoercibleFrom| 6) (|PartialOrder|)
-                      (|CoercibleTo| 18))
+                      (|Comparable|) (|RetractableTo| 6) (|SetCategory|)
+                      (|CoercibleTo| 16) (|PartialOrder|) (|CoercibleFrom| 6)
+                      (|BasicType|))
                    (|makeByteWordVec2| 18
                                        '(2 6 12 0 0 13 2 6 12 0 0 14 2 0 12 0 0
                                          1 1 0 8 0 1 1 0 6 0 10 2 0 12 0 0 1 1
-                                         0 16 0 1 1 0 6 0 1 1 0 8 0 11 2 0 0 0
+                                         0 18 0 1 1 0 6 0 1 1 0 8 0 11 2 0 0 0
                                          0 1 2 0 0 0 0 1 2 0 0 6 8 9 1 0 17 0 1
-                                         1 0 0 0 1 2 0 0 0 8 1 1 0 0 6 1 1 0 18
-                                         0 1 2 0 12 0 0 1 2 0 12 0 0 1 2 0 12 0
+                                         2 0 0 0 8 1 1 0 0 0 1 1 0 16 0 1 1 0 0
+                                         6 1 2 0 12 0 0 1 2 0 12 0 0 1 2 0 12 0
                                          0 1 2 0 12 0 0 1 2 0 12 0 0 15)))))
            '|lookupComplete|)) 

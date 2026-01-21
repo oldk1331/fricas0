@@ -527,7 +527,8 @@
 ;     upOp    := PNAME opOf  updomain
 ;     ['" {\em from} ",:dbConformGen dnForm,'" {\em under} \ops{",upOp,'"}{",:$pn,:upFence,'"}"]
 ;   domname  := htpProperty(htPage,'domname)
-;   numberOfUnderlyingDomains := #[x for x in rest GETDATABASE(opOf domname,'COSIG) | x]
+;   numberOfUnderlyingDomains :=
+;         #[x for x in rest(get_database(opOf(domname), 'COSIG)) | x]
 ;   IFCDR domname => ['" {\em from} ", :dbConformGen domname]
 ;   htpProperty(htPage,'fromHeading)
 
@@ -571,7 +572,7 @@
                                (AND |x|
                                     (SETQ |bfVar#25| (CONS |x| |bfVar#25|)))))
                              (SETQ |bfVar#24| (CDR |bfVar#24|))))
-                          NIL (CDR (GETDATABASE (|opOf| |domname|) 'COSIG))
+                          NIL (CDR (|get_database| (|opOf| |domname|) 'COSIG))
                           NIL)))
                 (COND
                  ((IFCDR |domname|)
@@ -585,10 +586,10 @@
 ;   special := MEMQ(op,'(Union Record Mapping))
 ;   cosig :=
 ;     special => ['T for x in args]
-;     rest GETDATABASE(op,'COSIG)
+;     rest(get_database(op, 'COSIG))
 ;   atypes :=
 ;     special => cosig
-;     rest CDAR GETDATABASE(op,'CONSTRUCTORMODEMAP)
+;     rest(CDAR(get_database(op, 'CONSTRUCTORMODEMAP)))
 ;   sargl := [fn for x in args for atype in atypes for pred in cosig] where fn ==
 ;     keyword :=
 ;       special and x is [":",y,t] =>
@@ -637,12 +638,13 @@
                              (#1# (SETQ |bfVar#27| (CONS 'T |bfVar#27|))))
                             (SETQ |bfVar#26| (CDR |bfVar#26|))))
                          NIL |args| NIL))
-                       (#1# (CDR (GETDATABASE |op| 'COSIG)))))
+                       (#1# (CDR (|get_database| |op| 'COSIG)))))
               (SETQ |atypes|
                       (COND (|special| |cosig|)
                             (#1#
                              (CDR
-                              (CDAR (GETDATABASE |op| 'CONSTRUCTORMODEMAP))))))
+                              (CDAR
+                               (|get_database| |op| 'CONSTRUCTORMODEMAP))))))
               (SETQ |sargl|
                       ((LAMBDA
                            (|bfVar#31| |bfVar#28| |x| |bfVar#29| |atype|
@@ -821,8 +823,8 @@
 ;   else
 ;     op := form
 ;     args := nil
-;   cosig := rest GETDATABASE(op,'COSIG)
-;   atypes := rest CDAR GETDATABASE(op,'CONSTRUCTORMODEMAP)
+;   cosig := rest(get_database(op, 'COSIG))
+;   atypes := rest(CDAR(get_database(op, 'CONSTRUCTORMODEMAP)))
 ;   argl := [fn for x in args for atype in atypes for pred in cosig] where fn ==
 ;     pred => x
 ;     typ := sublisFormal(args,atype)
@@ -842,8 +844,8 @@
        ((LISTP |form|) (SETQ |op| (CAR |form|)) (SETQ |args| (CDR |form|))
         |form|)
        (#1='T (SETQ |op| |form|) (SETQ |args| NIL)))
-      (SETQ |cosig| (CDR (GETDATABASE |op| 'COSIG)))
-      (SETQ |atypes| (CDR (CDAR (GETDATABASE |op| 'CONSTRUCTORMODEMAP))))
+      (SETQ |cosig| (CDR (|get_database| |op| 'COSIG)))
+      (SETQ |atypes| (CDR (CDAR (|get_database| |op| 'CONSTRUCTORMODEMAP))))
       (SETQ |argl|
               ((LAMBDA
                    (|bfVar#40| |bfVar#37| |x| |bfVar#38| |atype| |bfVar#39|
@@ -1202,7 +1204,7 @@
 ;   dom     := EVAL domainForm
 ;   which   := '"operation"
 ;   [nam, :.] := domainForm
-;   $predicateList: local := GETDATABASE(nam,'PREDICATES)
+;   $predicateList: local := get_database(nam, 'PREDICATES)
 ;   u := getDomainOpTable2(dom, true, ASSOCLEFT opAlist)
 ;   --u has form ((op,sig,:implementor)...)
 ;   --sort into 4 groups: domain exports, unexports, default exports, others
@@ -1242,7 +1244,7 @@
       (SETQ |dom| (EVAL |domainForm|))
       (SETQ |which| "operation")
       (SETQ |nam| (CAR |domainForm|))
-      (SETQ |$predicateList| (GETDATABASE |nam| 'PREDICATES))
+      (SETQ |$predicateList| (|get_database| |nam| 'PREDICATES))
       (SETQ |u| (|getDomainOpTable2| |dom| T (ASSOCLEFT |opAlist|)))
       ((LAMBDA (|bfVar#47| |x| |i|)
          (LOOP
@@ -1689,7 +1691,7 @@
 ;   for [op,:items] in opAlist repeat
 ;     for [.,predicate,origin,:.] in items repeat
 ;       conname := first origin
-;       GETDATABASE(conname,'CONSTRUCTORKIND) = 'category =>
+;       get_database(conname, 'CONSTRUCTORKIND) = 'category =>
 ;         pred := simpOrDumb(predicate, QLASSQ(conname, catOriginAlist) or true)
 ;         catOriginAlist := insertAlist(conname,pred,catOriginAlist)
 ;       pred := simpOrDumb(predicate, QLASSQ(conname, domOriginAlist) or true)
@@ -1700,7 +1702,7 @@
 ;   for pair in u repeat
 ;     [dom,:cat] := pair
 ;     QLASSQ(cat, catOriginAlist) = 'etc => RPLACD(pair, 'etc)
-;     RPLACD(pair,simpOrDumb(GETDATABASE(pair,'HASCATEGORY),true))
+;     RPLACD(pair, simpOrDumb(get_database(pair, 'HASCATEGORY), true))
 ;   --now add all of the domains
 ;   for [dom,:pred] in domOriginAlist repeat
 ;     u := insertAlist(dom, simpOrDumb(pred, QLASSQ(dom, u) or true), u)
@@ -1754,7 +1756,7 @@
                             (PROGN
                              (SETQ |conname| (CAR |origin|))
                              (COND
-                              ((EQ (GETDATABASE |conname| 'CONSTRUCTORKIND)
+                              ((EQ (|get_database| |conname| 'CONSTRUCTORKIND)
                                    '|category|)
                                (PROGN
                                 (SETQ |pred|
@@ -1805,7 +1807,8 @@
                (RPLACD |pair| '|etc|))
               (#1#
                (RPLACD |pair|
-                       (|simpOrDumb| (GETDATABASE |pair| 'HASCATEGORY) T)))))))
+                       (|simpOrDumb| (|get_database| |pair| 'HASCATEGORY)
+                        T)))))))
           (SETQ |bfVar#79| (CDR |bfVar#79|))))
        |u| NIL)
       ((LAMBDA (|bfVar#81| |bfVar#80|)
@@ -1884,7 +1887,7 @@
 
 ; dbShowKind conform ==
 ;   conname := first conform
-;   kind := GETDATABASE(conname,'CONSTRUCTORKIND)
+;   kind := get_database(conname, 'CONSTRUCTORKIND)
 ;   kind = 'domain =>
 ;     (s := PNAME conname).(MAXINDEX s) = '_& => '"default package"
 ;     '"domain"
@@ -1895,7 +1898,7 @@
     (RETURN
      (PROGN
       (SETQ |conname| (CAR |conform|))
-      (SETQ |kind| (GETDATABASE |conname| 'CONSTRUCTORKIND))
+      (SETQ |kind| (|get_database| |conname| 'CONSTRUCTORKIND))
       (COND
        ((EQ |kind| '|domain|)
         (COND
@@ -2826,7 +2829,7 @@
                    (#1# '|done|))))))))
 
 ; getRegistry(op,sig) ==
-;   u := GETDATABASE('AttributeRegistry,'DOCUMENTATION)
+;   u := get_database('AttributeRegistry, 'DOCUMENTATION)
 ;   v := LASSOC(op,u)
 ;   match := or/[y for y in v | y is [['attribute,: =sig],:.]] => CADR match
 ;   '""
@@ -2835,7 +2838,7 @@
   (PROG (|u| |v| |ISTMP#1| |match|)
     (RETURN
      (PROGN
-      (SETQ |u| (GETDATABASE '|AttributeRegistry| 'DOCUMENTATION))
+      (SETQ |u| (|get_database| '|AttributeRegistry| 'DOCUMENTATION))
       (SETQ |v| (LASSOC |op| |u|))
       (COND
        ((SETQ |match|
@@ -2863,7 +2866,7 @@
 ; evalableConstructor2HtString domform ==
 ;   if VECP domform then domform := devaluate domform
 ;   conname := first domform
-;   coSig   := rest GETDATABASE(conname,'COSIG)
+;   coSig   := rest(get_database(conname, 'COSIG))
 ;   --entries are T for arguments which are domains; NIL for computational objects
 ;   and/[x for x in coSig] => form2HtString(domform,nil,true)
 ;   arglist := [unquote x for x in rest domform] where
@@ -2872,7 +2875,7 @@
 ;         f = 'QUOTE => first args
 ;         [f,:[unquote x for x in args]]
 ;       arg
-;   fargtypes:=CDDAR GETDATABASE(conname,'CONSTRUCTORMODEMAP)
+;   fargtypes := CDDAR(get_database(conname, 'CONSTRUCTORMODEMAP))
 ; --argtypes:= sublisFormal(arglist,fargtypes)
 ;   form2HtString([conname,:[fn for arg in arglist for x in coSig
 ;                    for ftype in fargtypes]],nil,true) where
@@ -2887,7 +2890,7 @@
      (PROGN
       (COND ((VECP |domform|) (SETQ |domform| (|devaluate| |domform|))))
       (SETQ |conname| (CAR |domform|))
-      (SETQ |coSig| (CDR (GETDATABASE |conname| 'COSIG)))
+      (SETQ |coSig| (CDR (|get_database| |conname| 'COSIG)))
       (COND
        (((LAMBDA (|bfVar#104| |bfVar#103| |x|)
            (LOOP
@@ -2917,7 +2920,8 @@
                                 |bfVar#106|))))
                      (SETQ |bfVar#105| (CDR |bfVar#105|))))
                   NIL (CDR |domform|) NIL))
-         (SETQ |fargtypes| (CDDAR (GETDATABASE |conname| 'CONSTRUCTORMODEMAP)))
+         (SETQ |fargtypes|
+                 (CDDAR (|get_database| |conname| 'CONSTRUCTORMODEMAP)))
          (|form2HtString|
           (CONS |conname|
                 ((LAMBDA
@@ -3333,7 +3337,7 @@
            ((EQ |op| '|Zero|) (AND (MEMQ 0 |ops|) 0)) ('T NIL)))))
 
 ; evalDomainOpPred2(dom, pred) ==
-;     $predicateList : local := GETDATABASE(first(dom.0), 'PREDICATES)
+;     $predicateList : local := get_database(first(dom.0), 'PREDICATES)
 ;     evalDomainOpPred(dom,pred)
 
 (DEFUN |evalDomainOpPred2| (|dom| |pred|)
@@ -3341,7 +3345,7 @@
     (DECLARE (SPECIAL |$predicateList|))
     (RETURN
      (PROGN
-      (SETQ |$predicateList| (GETDATABASE (CAR (ELT |dom| 0)) 'PREDICATES))
+      (SETQ |$predicateList| (|get_database| (CAR (ELT |dom| 0)) 'PREDICATES))
       (|evalDomainOpPred| |dom| |pred|)))))
 
 ; evalDomainOpPred(dom,pred) == process(dom,pred) where

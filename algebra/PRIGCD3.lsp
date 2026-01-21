@@ -585,5 +585,3 @@
                                               6 6 18 9 9 30 4 0 6 6 6 9 11 26 4
                                               0 6 6 18 9 9 27)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|PrimGCD| 'NILADIC T) 

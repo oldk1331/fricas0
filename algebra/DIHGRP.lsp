@@ -245,8 +245,9 @@
               |DIHGRP;smaller?;2%B;15| (|NonNegativeInteger|)
               |DIHGRP;size;Nni;16| (108 . |coerce|) (|PositiveInteger|)
               |DIHGRP;index;Pi%;17| |DIHGRP;lookup;%Pi;18| (|List| $$)
-              (113 . |concat|) |DIHGRP;enumerate;L;19| (|InputForm|)
-              (|HashState|) (|SingleInteger|) (|Union| % '"failed") (|String|))
+              (113 . |concat|) |DIHGRP;enumerate;L;19| (|String|)
+              (|Union| % '"failed") (|SingleInteger|) (|HashState|)
+              (|InputForm|))
            '#(~= 119 |smaller?| 125 |size| 131 |sample| 135 |rightRecip| 139
               |rightPower| 144 |recip| 156 |random| 161 |order| 165 |one?| 170
               |lookup| 175 |leftRecip| 180 |leftPower| 185 |latex| 197 |inv|
@@ -257,15 +258,15 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|FiniteGroup&| |Group&| NIL NIL |Finite&| |MagmaWithUnit&|
-                     NIL |Magma&| |Hashable&| |SetCategory&| NIL NIL NIL NIL
-                     |BasicType&| NIL)
+                  '#(|FiniteGroup&| |Group&| NIL |MagmaWithUnit&| |Finite&| NIL
+                     |Magma&| NIL |SetCategory&| |Hashable&| NIL |BasicType&|
+                     NIL NIL NIL NIL)
                   (CONS
-                   '#((|FiniteGroup|) (|Group|) (|Monoid|) (|SemiGroup|)
-                      (|Finite|) (|MagmaWithUnit|) (|Comparable|) (|Magma|)
-                      (|Hashable|) (|SetCategory|) (|FinitelyGenerated|)
-                      (|ConvertibleTo| 60) (|unitsKnown|) (|TwoSidedRecip|)
-                      (|BasicType|) (|CoercibleTo| 26))
+                   '#((|FiniteGroup|) (|Group|) (|Monoid|) (|MagmaWithUnit|)
+                      (|Finite|) (|SemiGroup|) (|Magma|) (|Comparable|)
+                      (|SetCategory|) (|Hashable|) (|CoercibleTo| 26)
+                      (|BasicType|) (|TwoSidedRecip|) (|unitsKnown|)
+                      (|ConvertibleTo| 64) (|FinitelyGenerated|))
                    (|makeByteWordVec2| 64
                                        '(1 10 14 0 15 1 12 14 0 17 0 10 0 19 0
                                          12 0 20 1 10 22 0 23 1 12 22 0 24 1 14
@@ -276,15 +277,15 @@
                                          22 0 45 2 10 22 0 0 47 2 12 22 0 0 48
                                          1 10 0 14 53 2 57 0 0 0 58 2 0 22 0 0
                                          1 2 0 22 0 0 50 0 0 51 52 0 0 0 1 1 0
-                                         63 0 1 2 0 0 0 51 1 2 0 0 0 54 1 1 0
-                                         63 0 1 0 0 0 1 1 0 14 0 46 1 0 22 0 25
-                                         1 0 54 0 56 1 0 63 0 1 2 0 0 0 51 1 2
-                                         0 0 0 54 1 1 0 64 0 1 1 0 0 0 44 1 0 0
-                                         54 55 2 0 61 61 0 1 1 0 62 0 1 0 0 37
+                                         61 0 1 2 0 0 0 54 1 2 0 0 0 51 1 1 0
+                                         61 0 1 0 0 0 1 1 0 14 0 46 1 0 22 0 25
+                                         1 0 54 0 56 1 0 61 0 1 2 0 0 0 54 1 2
+                                         0 0 0 51 1 1 0 60 0 1 1 0 0 0 44 1 0 0
+                                         54 55 2 0 63 63 0 1 1 0 62 0 1 0 0 37
                                          38 1 0 14 0 18 1 0 14 0 16 1 0 12 0 13
-                                         1 0 10 0 11 0 0 37 59 1 0 60 0 1 2 0 0
+                                         1 0 10 0 11 0 0 37 59 1 0 64 0 1 2 0 0
                                          0 0 1 2 0 0 0 0 1 1 0 26 0 34 2 0 0 0
-                                         14 1 2 0 0 0 51 1 2 0 0 0 54 1 0 0 0
+                                         54 1 2 0 0 0 51 1 2 0 0 0 14 1 0 0 0
                                          21 2 0 22 0 0 49 2 0 0 0 0 1 2 0 0 0 0
                                          42)))))
            '|lookupComplete|)) 

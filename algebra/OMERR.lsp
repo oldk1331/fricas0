@@ -103,9 +103,9 @@
               |coerce| 68 = 73)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 11))
+                        '#((|SetCategory|) (|CoercibleTo| 11) (|BasicType|))
                         (|makeByteWordVec2| 26
                                             '(1 8 7 0 9 1 11 0 10 12 1 8 7 0 13
                                               1 14 10 0 15 1 8 7 0 16 2 18 14 0
@@ -114,5 +114,3 @@
                                               1 0 8 0 25 1 0 18 0 26 1 0 11 0
                                               23 2 0 7 0 0 1)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|OpenMathError| 'NILADIC T) 

@@ -141,8 +141,8 @@
               (32 . |coerce|) (37 . +) (|Union| 23 '#1#)
               (43 . |canonicalIfCan|) (49 . |Zero|) (53 . |coefficient|)
               (|Union| 9 '"failed") (|Mapping| 31 6) (59 . |map|) (|Symbol|)
-              |MAGCDT4;MPtoMPT;FpSLRU;4| (|Void|) (|U32Vector|)
-              (|SortedExponentVector|))
+              |MAGCDT4;MPtoMPT;FpSLRU;4| (|SortedExponentVector|) (|Void|)
+              (|U32Vector|))
            '#(|zero?| 65 |repack1| 70 |pseudoRem| 78 |pack_modulus| 85
               |pack_exps| 92 |degree| 99 |canonicalIfCan| 104 |MPtoMPT| 110)
            'NIL
@@ -156,11 +156,9 @@
                                                    25 2 23 0 0 0 26 2 5 27 23
                                                    13 28 0 23 0 29 2 23 9 0 22
                                                    30 2 7 27 32 0 33 1 0 11 23
-                                                   1 4 0 36 23 37 17 13 1 3 0
+                                                   1 4 0 37 23 38 17 13 1 3 0
                                                    23 23 23 13 1 3 0 14 19 16
-                                                   17 20 3 0 38 17 17 13 1 1 0
+                                                   17 20 3 0 36 17 17 13 1 1 0
                                                    17 23 1 2 0 27 23 13 1 4 0
                                                    27 7 34 16 13 35)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|ModularAlgebraicGcdTools4| 'NILADIC T) 

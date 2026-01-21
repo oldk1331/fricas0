@@ -52,20 +52,20 @@
                        (NRTEVAL (ELT % 11)))
               (|local| |#1|) (|Fraction| (|Polynomial| 6))
               (|Expression| (|Integer|)) (|GuessPolynomialFunctions| 6)
-              (0 . EXPRR2F) (5 . F2EXPRR) (|Mapping| 26 27 28) (|Symbol|)
+              (0 . EXPRR2F) (5 . F2EXPRR)
               (|Mapping| (|Stream| (|UnivariateFormalPowerSeries| 7))
                          (|UnivariateFormalPowerSeries| 7))
               (|Mapping| (|Vector| (|U32Vector|)) (|List| (|U32Vector|))
                          (|Integer|) (|Integer|))
-              (|Mapping| 15 (|NonNegativeInteger|))
+              (|Mapping| 13 (|NonNegativeInteger|))
               (|Mapping|
                (|Vector|
                 (|UnivariateFormalPowerSeries|
                  (|SparseMultivariatePolynomial| 7 (|NonNegativeInteger|))))
                (|UnivariateFormalPowerSeries|
                 (|SparseMultivariatePolynomial| 7 (|NonNegativeInteger|))))
-              (|Mapping| 17 (|List| (|PositiveInteger|)))
-              (|Mapping| (|Stream| 8) 8 13)
+              (|Mapping| 15 (|List| (|PositiveInteger|)))
+              (|Mapping| (|Stream| 8) 8 30)
               (|Mapping| (|Polynomial| 6) (|NonNegativeInteger|)
                          (|NonNegativeInteger|)
                          (|SparseUnivariatePolynomial| (|Polynomial| 6)))
@@ -74,15 +74,16 @@
                (|NonNegativeInteger|) (|NonNegativeInteger|)
                (|UnivariateFormalPowerSeries|
                 (|SparseMultivariatePolynomial| 7 (|NonNegativeInteger|))))
-              (|Mapping| 8 (|NonNegativeInteger|) 13 8)
+              (|Mapping| 8 (|NonNegativeInteger|) 30 8)
               (|Mapping| (|List| (|Polynomial| 6)) (|NonNegativeInteger|))
               (|Record| (|:| |degreeStream| (|Stream| (|NonNegativeInteger|)))
-                        (|:| |guessStream| 14) (|:| |guessModGen| 16)
-                        (|:| |testGen| 18) (|:| |exprStream| 19)
-                        (|:| |kind| 13) (|:| |qvar| 13) (|:| A 20) (|:| AF 21)
-                        (|:| AX 22) (|:| C 23))
-              (|Mapping| 24 28) (|List| 8) (|List| 7) (|List| (|GuessOption|))
-              (|List| 12) (|List| 13) (|List| 27))
+                        (|:| |guessStream| 12) (|:| |guessModGen| 14)
+                        (|:| |testGen| 16) (|:| |exprStream| 17)
+                        (|:| |kind| 30) (|:| |qvar| 30) (|:| A 18) (|:| AF 19)
+                        (|:| AX 20) (|:| C 21))
+              (|List| (|GuessOption|)) (|List| 8) (|List| 7) (|List| 25)
+              (|Mapping| 24 25 23) (|List| 27) (|List| 30) (|Symbol|)
+              (|Mapping| 22 23))
            '#() 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -147,9 +148,9 @@
                                              (|List| (|GuessOption|)))
                                   (|Symbol|)))
                                 (AND
-                                 (|has| (|Polynomial| 6) (|RetractableTo| 13))
+                                 (|has| (|Polynomial| 6) (|RetractableTo| 30))
                                  (|has| (|Fraction| (|Polynomial| 6))
-                                        (|RetractableTo| 13))))
+                                        (|RetractableTo| 30))))
                               '((|guessBinRat|
                                  ((|Mapping| (|List| #1#)
                                              (|List|
@@ -157,9 +158,9 @@
                                              (|List| (|GuessOption|)))
                                   (|Symbol|)))
                                 (AND
-                                 (|has| (|Polynomial| 6) (|RetractableTo| 13))
+                                 (|has| (|Polynomial| 6) (|RetractableTo| 30))
                                  (|has| (|Fraction| (|Polynomial| 6))
-                                        (|RetractableTo| 13))))
+                                        (|RetractableTo| 30))))
                               '((|guessAlgDep|
                                  ((|List| #1#)
                                   (|List|
@@ -548,9 +549,9 @@
                                    (|List| (|GuessOption|)))
                                   (|Symbol|)))
                                 (AND
-                                 (|has| (|Polynomial| 6) (|RetractableTo| 13))
+                                 (|has| (|Polynomial| 6) (|RetractableTo| 30))
                                  (|has| (|Fraction| (|Polynomial| 6))
-                                        (|RetractableTo| 13))))
+                                        (|RetractableTo| 30))))
                               '((|diffHP|
                                  ((|Mapping|
                                    (|Record|
@@ -614,9 +615,9 @@
                                    (|List| (|GuessOption|)))
                                   (|Symbol|)))
                                 (AND
-                                 (|has| (|Polynomial| 6) (|RetractableTo| 13))
+                                 (|has| (|Polynomial| 6) (|RetractableTo| 30))
                                  (|has| (|Fraction| (|Polynomial| 6))
-                                        (|RetractableTo| 13))))
+                                        (|RetractableTo| 30))))
                               '((|guessRec|
                                  ((|Mapping| (|List| #1#)
                                              (|List|
@@ -624,9 +625,9 @@
                                              (|List| (|GuessOption|)))
                                   (|Symbol|)))
                                 (AND
-                                 (|has| (|Polynomial| 6) (|RetractableTo| 13))
+                                 (|has| (|Polynomial| 6) (|RetractableTo| 30))
                                  (|has| (|Fraction| (|Polynomial| 6))
-                                        (|RetractableTo| 13))))
+                                        (|RetractableTo| 30))))
                               '((|guessPRec|
                                  ((|Mapping| (|List| #1#)
                                              (|List|
@@ -634,9 +635,9 @@
                                              (|List| (|GuessOption|)))
                                   (|Symbol|)))
                                 (AND
-                                 (|has| (|Polynomial| 6) (|RetractableTo| 13))
+                                 (|has| (|Polynomial| 6) (|RetractableTo| 30))
                                  (|has| (|Fraction| (|Polynomial| 6))
-                                        (|RetractableTo| 13))))
+                                        (|RetractableTo| 30))))
                               '((|guessRat|
                                  ((|Mapping| (|List| #1#)
                                              (|List|
@@ -644,9 +645,9 @@
                                              (|List| (|GuessOption|)))
                                   (|Symbol|)))
                                 (AND
-                                 (|has| (|Polynomial| 6) (|RetractableTo| 13))
+                                 (|has| (|Polynomial| 6) (|RetractableTo| 30))
                                  (|has| (|Fraction| (|Polynomial| 6))
-                                        (|RetractableTo| 13))))
+                                        (|RetractableTo| 30))))
                               '((|guessADE|
                                  ((|Mapping| (|List| #1#)
                                              (|List|
@@ -654,9 +655,9 @@
                                              (|List| (|GuessOption|)))
                                   (|Symbol|)))
                                 (AND
-                                 (|has| (|Polynomial| 6) (|RetractableTo| 13))
+                                 (|has| (|Polynomial| 6) (|RetractableTo| 30))
                                  (|has| (|Fraction| (|Polynomial| 6))
-                                        (|RetractableTo| 13))))
+                                        (|RetractableTo| 30))))
                               '((|guessHolo|
                                  ((|Mapping| (|List| #1#)
                                              (|List|
@@ -664,9 +665,9 @@
                                              (|List| (|GuessOption|)))
                                   (|Symbol|)))
                                 (AND
-                                 (|has| (|Polynomial| 6) (|RetractableTo| 13))
+                                 (|has| (|Polynomial| 6) (|RetractableTo| 30))
                                  (|has| (|Fraction| (|Polynomial| 6))
-                                        (|RetractableTo| 13)))))
+                                        (|RetractableTo| 30)))))
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 11 '(1 9 7 8 10 1 9 8 7 11)))))
            '|lookupIncomplete|)) 

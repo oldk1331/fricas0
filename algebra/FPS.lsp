@@ -83,5 +83,3 @@
                                                         (|arbitraryExponent|))))))
                                             NIL NIL NIL))))
            (SETELT #1# 0 '(|FloatingPointSystem|))))) 
-
-(MAKEPROP '|FloatingPointSystem| 'NILADIC T) 

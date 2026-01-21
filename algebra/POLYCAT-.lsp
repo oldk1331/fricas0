@@ -1697,7 +1697,7 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|local| |#4|) (|Equation| 6) (0 . |lhs|)
               (|Union| 9 '#1="failed") (5 . |retractIfCan|) (10 . |retract|)
-              (15 . |rhs|) (|List| 9) (|List| %) (20 . |eval|) (|List| 240)
+              (15 . |rhs|) (|List| 9) (|List| %) (20 . |eval|) (|List| 246)
               (27 . |eval|) (33 . |monomials|) (|Union| 17 '#2="failed")
               |POLYCAT-;isPlus;SU;2| (38 . |variables|) (|Boolean|)
               (43 . |monomial?|) (48 . |One|) (|Factored| 6) (52 . |One|)
@@ -1722,7 +1722,7 @@
               (219 . |discriminant|) (225 . |primitiveMonomials|) (|List| 6)
               (230 . |concat|) (235 . |removeDuplicates!|) (|Integer|)
               (|Vector| 7) (240 . |minIndex|) (245 . |coefficient|)
-              (|List| 241) (|Matrix| 7) (251 . |matrix|) (|List| 76)
+              (|List| 245) (|Matrix| 7) (251 . |matrix|) (|List| 76)
               (|Matrix| 6) (256 . |listOfLists|) (261 . |degree|)
               (266 . |vertConcat|) (|Matrix| %) (272 . |reducedSystem|)
               (|Vector| 6) (277 . |entries|) (282 . |concat|) (288 . |concat|)
@@ -1787,10 +1787,10 @@
               (|PolynomialCategoryLifting| 8 9 7 6 225) (800 . |map|)
               (807 . |convert|) (|HashState|) (812 . |hashUpdate!|)
               (818 . |hashUpdate!|) (824 . |hashUpdate!|) (830 . |hashUpdate!|)
-              (836 . |ground|) (841 . |hashUpdate!|) (|Equation| %) (|List| 7)
-              (|Matrix| 79)
-              (|Record| (|:| |mat| 242) (|:| |vec| (|Vector| 79)))
-              (|Fraction| 79) (|Union| 244 '#1#) (|Union| 79 '#1#))
+              (836 . |ground|) (841 . |hashUpdate!|) (|Union| 79 '#1#)
+              (|Union| 242 '#1#) (|Fraction| 79)
+              (|Record| (|:| |mat| 244) (|:| |vec| (|Vector| 79)))
+              (|Matrix| 79) (|List| 7) (|Equation| %))
            '#(|totalDegreeSorted| 847 |totalDegree| 853 |squareFreePart| 864
               |squareFree| 869 |solveLinearPolynomialEquation| 874 |smaller?|
               880 |retractIfCan| 886 |retract| 891 |resultant| 896
@@ -2007,20 +2007,20 @@
                                               7 233 233 0 234 2 9 233 233 0 235
                                               2 30 233 233 0 236 2 6 233 233 0
                                               237 1 45 6 0 238 2 0 233 233 0
-                                              239 2 0 30 0 16 67 2 0 30 0 16 70
-                                              1 0 30 0 63 1 0 0 0 171 1 0 114 0
-                                              165 2 0 104 105 43 106 2 0 25 0 0
-                                              189 1 0 12 0 53 1 0 9 0 52 3 0 0
-                                              0 0 9 72 2 0 97 91 98 99 1 0 84
-                                              91 92 2 0 0 0 9 182 1 0 0 0 179 3
-                                              0 194 0 191 194 195 3 0 200 0 197
-                                              200 201 3 0 160 0 0 9 162 1 0 22
+                                              239 2 0 30 0 16 67 1 0 30 0 63 2
+                                              0 30 0 16 70 1 0 0 0 171 1 0 114
+                                              0 165 2 0 104 105 43 106 2 0 25 0
+                                              0 189 1 0 12 0 53 1 0 9 0 52 3 0
+                                              0 0 0 9 72 1 0 84 91 92 2 0 97 91
+                                              98 99 1 0 0 0 179 2 0 0 0 9 182 3
+                                              0 200 0 197 200 201 3 0 194 0 191
+                                              194 195 3 0 160 0 0 9 162 1 0 22
                                               0 37 1 0 22 0 23 1 0 41 0 42 2 0
                                               233 233 0 239 2 0 43 43 43 123 1
                                               0 110 43 112 1 0 110 43 111 1 0
                                               114 0 115 2 0 0 0 19 20 2 0 0 0 9
-                                              74 1 0 191 0 215 1 0 225 0 232 1
-                                              0 197 0 224 2 0 0 0 9 173 1 0 150
-                                              91 155 3 0 0 0 16 48 50 3 0 0 0 9
-                                              30 47 1 0 145 0 157)))))
+                                              74 1 0 197 0 224 1 0 225 0 232 1
+                                              0 191 0 215 2 0 0 0 9 173 1 0 150
+                                              91 155 3 0 0 0 9 30 47 3 0 0 0 16
+                                              48 50 1 0 145 0 157)))))
            '|lookupComplete|)) 

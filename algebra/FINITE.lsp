@@ -27,5 +27,3 @@
                                               ((|enumerate| ((|List| %))) T))
                                             NIL NIL NIL))))
            (SETELT #1# 0 '(|Finite|))))) 
-
-(MAKEPROP '|Finite| 'NILADIC T) 

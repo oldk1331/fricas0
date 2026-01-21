@@ -393,8 +393,8 @@
               (180 . <) (186 . |sqrt|) (191 . |abs|) (196 . |rational?|)
               (201 . |rational?|) (|Fraction| 34) (206 . |rational|)
               (211 . |rational|) (|Union| 74 '#1="failed")
-              (216 . |rationalIfCan|) (|List| 54) (|List| 8)
-              (|Union| 34 '#2="failed") (|PositiveInteger|))
+              (216 . |rationalIfCan|) (|PositiveInteger|)
+              (|Union| 34 '#2="failed") (|List| 54) (|List| 8))
            '#(|zero?| 221 |retractIfCan| 226 |retract| 231 |rationalIfCan| 236
               |rational?| 241 |rational| 246 |one?| 251 |norm| 256 |map| 261
               |inv| 267 |differentiate| 272 |convert| 278 |conjugate| 283
@@ -507,9 +507,9 @@
                                               1 0 74 0 76 1 0 24 0 44 1 0 7 0
                                               23 2 0 0 18 0 19 1 0 0 0 61 2 0 0
                                               0 18 37 1 0 62 0 67 1 0 0 0 17 1
-                                              0 0 7 39 1 0 0 34 41 1 0 50 0 57
+                                              0 50 0 57 1 0 0 34 41 1 0 0 7 39
                                               0 0 8 10 1 0 7 0 71 2 0 24 0 0 26
-                                              2 0 24 0 0 69 2 0 0 0 0 30 1 0 0
-                                              0 31 2 0 0 0 0 28 2 0 0 7 0 33 2
-                                              0 0 34 0 36)))))
+                                              2 0 24 0 0 69 1 0 0 0 31 2 0 0 0
+                                              0 30 2 0 0 0 0 28 2 0 0 34 0 36 2
+                                              0 0 7 0 33)))))
            '|lookupComplete|)) 

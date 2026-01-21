@@ -1169,7 +1169,7 @@
           (#1# (PROGN (|putValue| |t| |obj|) (LIST |defaultMode|)))))))))))
 
 ; interpRewriteRule(t, id) ==
-;   null get(id,'isInterpreterRule,$e) => NIL
+;   null get0(id, 'isInterpreterRule, $e) => NIL
 ;   (ms:= selectLocalMms(t,id,nil,nil)) and (ms:=evalForm(t,id,nil,ms)) =>
 ;     ms
 ;   nil
@@ -1177,7 +1177,7 @@
 (DEFUN |interpRewriteRule| (|t| |id|)
   (PROG (|ms|)
     (RETURN
-     (COND ((NULL (|get| |id| '|isInterpreterRule| |$e|)) NIL)
+     (COND ((NULL (|get0| |id| '|isInterpreterRule| |$e|)) NIL)
            ((AND (SETQ |ms| (|selectLocalMms| |t| |id| NIL NIL))
                  (SETQ |ms| (|evalForm| |t| |id| NIL |ms|)))
             |ms|)
@@ -1448,6 +1448,8 @@
 ;   (opName ~= "elt") and (opName ~= "apply") and
 ;     isEltable(op, argl, #argl) and (u := bottomUpElt t) => u
 ;
+;   $noEvalTypeMsg => spadThrow()
+;
 ;   amsl := printableArgModeSetList()
 ;   opName1 :=
 ;     opName0 = $immediateDataSymbol =>
@@ -1590,6 +1592,7 @@
                      (|isEltable| |op| |argl| (LENGTH |argl|))
                      (SETQ |u| (|bottomUpElt| |t|)))
                 |u|)
+               (|$noEvalTypeMsg| (|spadThrow|))
                (#1#
                 (PROGN
                  (SETQ |amsl| (|printableArgModeSetList|))

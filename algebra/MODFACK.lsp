@@ -1,9 +1,9 @@
 
 (DECLAIM (NOTINLINE |ModularFactorizationK;|)) 
 
-(DEFUN |ModularFactorizationK| (#1=#:G14)
+(DEFUN |ModularFactorizationK| (#1=#:G16)
   (SPROG NIL
-         (PROG (#2=#:G15)
+         (PROG (#2=#:G17)
            (RETURN
             (COND
              ((LETT #2#
@@ -37,18 +37,18 @@
 (MAKEPROP '|ModularFactorizationK| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL
-              (|ModularFactorizationGeneral| 8
+              (|ModularFactorizationGeneral| 10
                                              (|PrimitiveTwoDimensionalArray| 6)
-                                             9
-                                             (|Record| (|:| |mod_data| 9)
-                                                       (|:| |p_mod| 8))
+                                             11
+                                             (|Record| (|:| |mod_data| 11)
+                                                       (|:| |p_mod| 10))
                                              (|ModularFactorizationTools3| 6))
-              (|local| |#1|) (|List| 8) (|PrimitiveArray| 6)
+              (|local| |#1|) (|Mapping| 13)
+              (|Record| (|:| |poly| 10) (|:| |degree| (|NonNegativeInteger|))
+                        (|:| |separate_factors| 7))
+              (|List| 8) (|PrimitiveArray| 6)
               (|Record| (|:| |i_mod| (|Integer|)) (|:| |deg| (|Integer|)))
-              (|Boolean|) (|Mapping| 7)
-              (|Record| (|:| |poly| 8) (|:| |degree| (|NonNegativeInteger|))
-                        (|:| |separate_factors| 11))
-              (|List| 12))
+              (|Boolean|) (|List| 10))
            '#() 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

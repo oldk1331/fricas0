@@ -367,7 +367,7 @@
 ;   a isnt [c,:r] => b
 ;   b isnt [d,:s] => a
 ;   c=d => [c,:ordUnion(r,s)]
-;   ?ORDER(c, d) => [c, :ordUnion(r, b)]
+;   lt_sexp(c, d) => [c, :ordUnion(r, b)]
 ;   [d,:ordUnion(s,a)]
 
 (DEFUN |ordUnion| (|a| |b|)
@@ -383,7 +383,7 @@
              (PROGN (SETQ |d| (CAR |b|)) (SETQ |s| (CDR |b|)) #1#)))
        |a|)
       ((EQUAL |c| |d|) (CONS |c| (|ordUnion| |r| |s|)))
-      ((?ORDER |c| |d|) (CONS |c| (|ordUnion| |r| |b|)))
+      ((|lt_sexp| |c| |d|) (CONS |c| (|ordUnion| |r| |b|)))
       (#1# (CONS |d| (|ordUnion| |s| |a|)))))))
 
 ; ordIntersection(a,b) ==

@@ -429,10 +429,6 @@
            ('T (SETQ |n| (+ |n| 1)))))))
       |n|))))
 
-; DEFVAR($f)
-
-(DEFVAR |$f|)
-
 ; DEFVAR($floatok)
 
 (DEFVAR |$floatok|)
@@ -529,25 +525,24 @@
 ;      if npNull s
 ;      then false
 ;      else
-;        $f:= first s
+;        f := first s
 ;        $r:= rest s
-;        $ln := rest $f
-;        $linepos:=CAAR $f
+;        $ln := rest(f)
+;        $linepos := CAAR(f)
 ;        $n := skip_whitespace($ln, 0) -- spaces at beginning
 ;        $sz :=# $ln
 ;        true
 
 (DEFUN |nextline| (|s|)
-  (PROG ()
+  (PROG (|f|)
     (RETURN
      (COND ((|npNull| |s|) NIL)
-           ('T (SETQ |$f| (CAR |s|)) (SETQ |$r| (CDR |s|))
-            (SETQ |$ln| (CDR |$f|)) (SETQ |$linepos| (CAAR |$f|))
+           ('T (SETQ |f| (CAR |s|)) (SETQ |$r| (CDR |s|))
+            (SETQ |$ln| (CDR |f|)) (SETQ |$linepos| (CAAR |f|))
             (SETQ |$n| (|skip_whitespace| |$ln| 0)) (SETQ |$sz| (LENGTH |$ln|))
             T)))))
 
 ; lineoftoks(s)==
-;    $f: local:=nil
 ;    $r:local :=nil
 ;    $ln:local :=nil
 ;    $linepos:local:=nil
@@ -577,11 +572,10 @@
 ;           cons([[toks,s]],$r)
 
 (DEFUN |lineoftoks| (|s|)
-  (PROG (|$floatok| |$sz| |$n| |$linepos| |$ln| |$r| |$f| |tok| |b| |a| |toks|)
-    (DECLARE (SPECIAL |$floatok| |$sz| |$n| |$linepos| |$ln| |$r| |$f|))
+  (PROG (|$floatok| |$sz| |$n| |$linepos| |$ln| |$r| |tok| |b| |a| |toks|)
+    (DECLARE (SPECIAL |$floatok| |$sz| |$n| |$linepos| |$ln| |$r|))
     (RETURN
      (PROGN
-      (SETQ |$f| NIL)
       (SETQ |$r| NIL)
       (SETQ |$ln| NIL)
       (SETQ |$linepos| NIL)

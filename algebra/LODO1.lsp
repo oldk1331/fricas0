@@ -229,69 +229,71 @@
           (LIST
            '#(NIL NIL NIL NIL NIL
               (|LinearOrdinaryDifferentialOperator| 6 (NRTEVAL (ELT % 7)))
-              (|local| |#1|) (0 . |differentiate|)
-              (|Record| (|:| |mat| 12) (|:| |vec| (|Vector| 11))) (|Matrix| %)
-              (|Vector| %) (|Integer|) (|Matrix| 11) (|Boolean|)
-              (|NonNegativeInteger|) (|Union| % '"failed") (|PositiveInteger|)
+              (|local| |#1|) (0 . |differentiate|) (|Boolean|) (|String|)
+              (|OutputForm|) (|PositiveInteger|)
+              (|Record| (|:| |k| 14) (|:| |c| 6)) (|List| 12)
+              (|NonNegativeInteger|) (|Mapping| 6 6) (|List| %) (|List| 6)
+              (|List| 14) (|Union| 6 '#1="failed") (|Mapping| 14 14)
+              (|List| 22) (|SingletonAsOrderedSet|) (|Union| 22 '"failed")
+              (|Matrix| 26) (|Matrix| %) (|Integer|)
+              (|Record| (|:| |mat| 24) (|:| |vec| (|Vector| 26))) (|Vector| %)
+              (|Union| % '"failed")
               (|Record| (|:| |unit| %) (|:| |canonical| %) (|:| |associate| %))
-              (|Fraction| 11) (|Record| (|:| |k| 14) (|:| |c| 6)) (|List| 19)
-              (|Mapping| 6 14)
+              (|Fraction| 26) (|Mapping| 6 14)
+              (|Record| (|:| |quotient| %) (|:| |remainder| %))
+              (|Record| (|:| |coef1| %) (|:| |coef2| %) (|:| |generator| %))
               (|Record| (|:| |generator| %) (|:| |coef1| %) (|:| |coef2| %)
                         (|:| |coefu| %) (|:| |coefv| %))
-              (|Record| (|:| |coef1| %) (|:| |coef2| %) (|:| |generator| %))
-              (|Record| (|:| |quotient| %) (|:| |remainder| %))
-              (|Union| 18 '#1="failed") (|Union| 11 '#1#) (|Matrix| 6)
-              (|Record| (|:| |mat| 27) (|:| |vec| (|Vector| 6))) (|List| %)
-              (|List| 31) (|SingletonAsOrderedSet|) (|List| 14)
-              (|Union| 31 '"failed") (|Mapping| 14 14) (|Union| 6 '#1#)
-              (|List| 6) (|Mapping| 6 6) (|OutputForm|) (|String|))
+              (|Union| 31 '#1#) (|Union| 26 '#1#)
+              (|Record| (|:| |mat| 39) (|:| |vec| (|Vector| 6))) (|Matrix| 6))
            '#() 'NIL
            (CONS
             (|makeByteWordVec2| 26
-                                '(0 0 0 0 0 1 2 3 4 5 11 0 1 11 13 5 0 0 1 5 10
-                                  0 0 0 1 10 20 10 0 0 0 0 0 1 1 20 11 12 26 13
-                                  13 0 0 25 13 0 0 0 9 0 0 6 7 0 0 0 0 4 6 7 8
-                                  10))
+                                '(0 0 0 0 0 5 4 3 2 1 11 5 13 11 1 0 10 5 1 0 0
+                                  10 20 10 1 0 0 0 11 20 1 1 0 0 0 0 0 12 13 13
+                                  26 13 25 0 0 9 0 0 0 7 6 0 0 10 8 7 6 4 0 0 0
+                                  0))
             (CONS
              '#(|LinearOrdinaryDifferentialOperatorCategory&|
                 |UnivariateSkewPolynomialCategory&|
                 |MaybeSkewPolynomialCategory&| |FiniteAbelianMonoidRing&|
-                |AbelianMonoidRing&| |Algebra&| NIL NIL |EntireRing&|
-                |Algebra&| NIL |FreeModuleCategory&| |NonAssociativeAlgebra&|
-                |Rng&| NIL |NonAssociativeAlgebra&| NIL NIL |Module&| |Module&|
-                |FullyLinearlyExplicitOver&| NIL NIL NIL NIL NIL NIL
-                |NonAssociativeRing&| NIL NIL NIL NIL NIL NIL NIL NIL
-                |NonAssociativeRng&| |AbelianGroup&| NIL NIL NIL
-                |NonAssociativeSemiRng&| NIL |AbelianMonoid&| |MagmaWithUnit&|
-                |FullyRetractableTo&| |Magma&| |AbelianSemiGroup&| NIL
-                |RetractableTo&| |SetCategory&| |RetractableTo&|
-                |RetractableTo&| NIL NIL |BasicType&| NIL NIL NIL NIL NIL NIL)
+                |AbelianMonoidRing&| |Algebra&| |EntireRing&| NIL NIL
+                |Algebra&| NIL |NonAssociativeAlgebra&| NIL |Rng&|
+                |NonAssociativeAlgebra&| |FreeModuleCategory&|
+                |FullyLinearlyExplicitOver&| |Module&| |Module&| NIL NIL
+                |NonAssociativeRing&| NIL NIL NIL NIL NIL NIL
+                |NonAssociativeRng&| NIL NIL NIL NIL NIL NIL NIL NIL
+                |AbelianGroup&| NIL NIL NIL |MagmaWithUnit&| |AbelianMonoid&|
+                NIL |NonAssociativeSemiRng&| NIL |AbelianSemiGroup&| |Magma&|
+                |FullyRetractableTo&| |RetractableTo&| |RetractableTo&|
+                |SetCategory&| |RetractableTo&| NIL NIL NIL NIL NIL NIL
+                |BasicType&| NIL NIL)
              (CONS
               '#((|LinearOrdinaryDifferentialOperatorCategory| 6)
                  (|UnivariateSkewPolynomialCategory| 6)
-                 (|MaybeSkewPolynomialCategory| 6 14 31)
+                 (|MaybeSkewPolynomialCategory| 6 14 22)
                  (|FiniteAbelianMonoidRing| 6 14) (|AbelianMonoidRing| 6 14)
-                 (|Algebra| 18) (|CharacteristicNonZero|)
-                 (|CharacteristicZero|) (|EntireRing|) (|Algebra| 6) (|Ring|)
-                 (|FreeModuleCategory| 6 14) (|NonAssociativeAlgebra| 18)
-                 (|Rng|) (|SemiRing|) (|NonAssociativeAlgebra| 6) (|SemiRng|)
-                 (|IndexedDirectProductCategory| 6 14) (|Module| 18)
-                 (|Module| 6) (|FullyLinearlyExplicitOver| 6)
-                 (|IndexedProductCategory| 6 14) (|BiModule| 6 6)
-                 (|BiModule| $$ $$) (|BiModule| 18 18)
-                 (|LinearlyExplicitOver| 6) (|LinearlyExplicitOver| 11)
-                 (|NonAssociativeRing|) (|AbelianProductCategory| 6)
-                 (|LeftModule| 6) (|RightModule| 6) (|RightModule| $$)
-                 (|LeftModule| $$) (|LeftModule| 18) (|RightModule| 18)
-                 (|RightModule| 11) (|NonAssociativeRng|) (|AbelianGroup|)
-                 (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
-                 (|Monoid|) (|NonAssociativeSemiRng|) (|SemiGroup|)
-                 (|AbelianMonoid|) (|MagmaWithUnit|) (|FullyRetractableTo| 6)
-                 (|Magma|) (|AbelianSemiGroup|) (|Comparable|)
-                 (|RetractableTo| 6) (|SetCategory|) (|RetractableTo| 18)
-                 (|RetractableTo| 11) (|Eltable| 6 6) (|CoercibleFrom| 6)
-                 (|BasicType|) (|CoercibleTo| 38) (|noZeroDivisors|)
-                 (|CoercibleFrom| 18) (|CoercibleFrom| 11)
-                 (|canonicalUnitNormal|) (|unitsKnown|))
+                 (|Algebra| 6) (|EntireRing|) (|CharacteristicZero|)
+                 (|CharacteristicNonZero|) (|Algebra| 31) (|Ring|)
+                 (|NonAssociativeAlgebra| 6) (|SemiRing|) (|Rng|)
+                 (|NonAssociativeAlgebra| 31) (|FreeModuleCategory| 6 14)
+                 (|FullyLinearlyExplicitOver| 6) (|Module| 6) (|Module| 31)
+                 (|IndexedDirectProductCategory| 6 14) (|SemiRng|)
+                 (|NonAssociativeRing|) (|LinearlyExplicitOver| 26)
+                 (|LinearlyExplicitOver| 6) (|BiModule| 31 31)
+                 (|BiModule| $$ $$) (|BiModule| 6 6)
+                 (|IndexedProductCategory| 6 14) (|NonAssociativeRng|)
+                 (|RightModule| 26) (|RightModule| 31) (|LeftModule| 31)
+                 (|LeftModule| $$) (|RightModule| $$) (|RightModule| 6)
+                 (|LeftModule| 6) (|AbelianProductCategory| 6) (|AbelianGroup|)
+                 (|Monoid|) (|NonAssociativeSemiRing|)
+                 (|CancellationAbelianMonoid|) (|MagmaWithUnit|)
+                 (|AbelianMonoid|) (|SemiGroup|) (|NonAssociativeSemiRng|)
+                 (|Comparable|) (|AbelianSemiGroup|) (|Magma|)
+                 (|FullyRetractableTo| 6) (|RetractableTo| 26)
+                 (|RetractableTo| 31) (|SetCategory|) (|RetractableTo| 6)
+                 (|unitsKnown|) (|canonicalUnitNormal|) (|CoercibleFrom| 26)
+                 (|CoercibleFrom| 31) (|noZeroDivisors|) (|CoercibleTo| 10)
+                 (|BasicType|) (|CoercibleFrom| 6) (|Eltable| 6 6))
               (|makeByteWordVec2| 7 '(1 6 0 0 7)))))
            '|lookupIncomplete|)) 

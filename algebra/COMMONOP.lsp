@@ -1,6 +1,6 @@
 
 (SDEFUN |COMMONOP;operator;SBo;1| ((|s| (|Symbol|)) (% (|BasicOperator|)))
-        (SPROG ((#1=#:G23 NIL) (#2=#:G24 NIL) (#3=#:G25 NIL) (|op| NIL))
+        (SPROG ((#1=#:G15 NIL) (#2=#:G16 NIL) (#3=#:G17 NIL) (|op| NIL))
                (SEQ
                 (EXIT
                  (SEQ (COND ((QREFELT % 6) (|COMMONOP;startUp| NIL %)))
@@ -20,8 +20,8 @@
                                         (PROGN
                                          (LETT #2#
                                                (SPADCALL |op| (QREFELT % 161)))
-                                         (GO #4=#:G22)))
-                                  (GO #5=#:G20))))))
+                                         (GO #4=#:G14)))
+                                  (GO #5=#:G12))))))
                              (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
                        #5# (EXIT #1#))
                       (EXIT (SPADCALL |s| (QREFELT % 43)))))
@@ -616,5 +616,3 @@
                                               208 2 9 0 0 7 209 0 210 0 211 1 0
                                               9 7 162)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|CommonOperators| 'NILADIC T) 

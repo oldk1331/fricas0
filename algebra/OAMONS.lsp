@@ -16,5 +16,3 @@
                             '(((|sup| (% % %)) T) ((|inf| (% % %)) T)) NIL NIL
                             NIL)))
            (SETELT #1# 0 '(|OrderedAbelianMonoidSup|))))) 
-
-(MAKEPROP '|OrderedAbelianMonoidSup| 'NILADIC T) 

@@ -45,8 +45,8 @@
               (|Union| 10 '"failed") (0 . |generator|) (|Boolean|)
               |FDIVCAT-;principal?;SB;1| (5 . *) (|Fraction| 8) (11 . |coerce|)
               (16 . |coerce|) (21 . -) (27 . |divisor|)
-              |FDIVCAT-;divisor;R3UPFS;2| (|Integer|)
-              (|FractionalIdeal| 8 16 9 10))
+              |FDIVCAT-;divisor;R3UPFS;2| (|FractionalIdeal| 8 16 9 10)
+              (|Integer|))
            '#(|principal?| 34 |divisor| 39) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

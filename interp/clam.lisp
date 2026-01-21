@@ -340,7 +340,7 @@
       (CLRHASH |$ConstructorCache|)))))
 
 ; clearConstructorCache(cname) ==
-;   (kind := GETDATABASE(cname,'CONSTRUCTORKIND)) =>
+;   (kind := get_database(cname, 'CONSTRUCTORKIND)) =>
 ;     kind = 'category => clearCategoryCache cname
 ;     HREM($ConstructorCache,cname)
 
@@ -348,7 +348,7 @@
   (PROG (|kind|)
     (RETURN
      (COND
-      ((SETQ |kind| (GETDATABASE |cname| 'CONSTRUCTORKIND))
+      ((SETQ |kind| (|get_database| |cname| 'CONSTRUCTORKIND))
        (IDENTITY
         (COND ((EQ |kind| '|category|) (|clearCategoryCache| |cname|))
               ('T (HREM |$ConstructorCache| |cname|)))))))))
@@ -362,7 +362,7 @@
 
 ; clearCategoryCaches() ==
 ;   for name in allConstructors() repeat
-;     if GETDATABASE(name,'CONSTRUCTORKIND) = 'category then
+;     if get_database(name, 'CONSTRUCTORKIND) = 'category then
 ;       if BOUNDP(cacheName := INTERNL1(PNAME(name), '";AL"))
 ;             then SET(cacheName,nil)
 ;     if BOUNDP(cacheName := INTERNL1(PNAME(name), '";CAT"))
@@ -379,7 +379,7 @@
           ('T
            (PROGN
             (COND
-             ((EQ (GETDATABASE |name| 'CONSTRUCTORKIND) '|category|)
+             ((EQ (|get_database| |name| 'CONSTRUCTORKIND) '|category|)
               (COND
                ((BOUNDP (SETQ |cacheName| (INTERNL1 (PNAME |name|) ";AL")))
                 (SET |cacheName| NIL)))))

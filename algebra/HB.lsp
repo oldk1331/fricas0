@@ -202,5 +202,3 @@
                                               6 0 6 17 2 0 6 6 6 7 4 0 8 6 6 6
                                               6 9 2 0 11 18 18 19)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|HallBasis| 'NILADIC T) 

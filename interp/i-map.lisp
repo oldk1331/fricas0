@@ -3,6 +3,10 @@
 
 (IN-PACKAGE "BOOT")
 
+; $insideCompileBodyIfTrue := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$insideCompileBodyIfTrue| NIL))
+
 ; DEFPARAMETER($mapTarget, nil)
 
 (DEFPARAMETER |$mapTarget| NIL)
@@ -26,6 +30,10 @@
 ; DEFPARAMETER($definingMap, NIL)
 
 (DEFPARAMETER |$definingMap| NIL)
+
+; DEFPARAMETER($ClearBodyToken, GENSYM('"ClearBodyToken"))
+
+(DEFPARAMETER |$ClearBodyToken| (GENSYM "ClearBodyToken"))
 
 ; makeInternalMapName(userName,numArgs,numMms,extraPart) ==
 ;   name := CONCAT('"*",STRINGIMAGE numArgs,'";",
@@ -96,14 +104,14 @@
   (PROG () (RETURN (AND (CONSP |x|) (EQ (CAR |x|) 'SPADMAP)))))
 
 ; isMap x ==
-;   y := get(x,'value,$InteractiveFrame) =>
+;   y := getI(x, 'value) =>
 ;     objVal y is ['SPADMAP, :.] => x
 
 (DEFUN |isMap| (|x|)
   (PROG (|y| |ISTMP#1|)
     (RETURN
      (COND
-      ((SETQ |y| (|get| |x| '|value| |$InteractiveFrame|))
+      ((SETQ |y| (|getI| |x| '|value|))
        (IDENTITY
         (COND
          ((PROGN
@@ -126,7 +134,7 @@
 ;     -- this is a function definition. If it has been declared
 ;     -- previously, make sure it is Mapping.
 ;     op := first lhs
-;     (oldMode := get(op,'mode,$e)) and oldMode isnt ['Mapping,:.] =>
+;     (oldMode := get0(op, 'mode, $e)) and oldMode isnt ['Mapping, :.] =>
 ;       throwKeyedMsg("S2IM0001",[op,oldMode])
 ;     putHist(op,'isInterpreterRule,false,$e)
 ;     putHist(op,'isInterpreterFunction,true,$e)
@@ -165,7 +173,7 @@
 ;
 ;   -- if map is declared, check that signature arg count is the
 ;   -- same as what is given.
-;   if get(op,'mode,$e) is ['Mapping,.,:mapargs] then
+;   if get0(op, 'mode, $e) is ['Mapping, ., :mapargs] then
 ;     EQCAR(rhs,'rules) =>
 ;       0 ~= (numargs := # rest lhs) =>
 ;         throwKeyedMsg("S2IM0027",[numargs,op])
@@ -205,7 +213,7 @@
         (SETQ |lhs| (LIST |lhs|)))
        (#2='T (SETQ |op| (CAR |lhs|))
         (COND
-         ((AND (SETQ |oldMode| (|get| |op| '|mode| |$e|))
+         ((AND (SETQ |oldMode| (|get0| |op| '|mode| |$e|))
                (NOT (AND (CONSP |oldMode|) (EQ (CAR |oldMode|) '|Mapping|))))
           (|throwKeyedMsg| 'S2IM0001 (LIST |op| |oldMode|)))
          (#2#
@@ -258,7 +266,7 @@
           (|someDecs| (|throwKeyedMsg| 'S2IM0007 (LIST |op|))))
          (COND
           ((PROGN
-            (SETQ |ISTMP#1| (|get| |op| '|mode| |$e|))
+            (SETQ |ISTMP#1| (|get0| |op| '|mode| |$e|))
             (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) '|Mapping|)
                  (PROGN
                   (SETQ |ISTMP#2| (CDR |ISTMP#1|))
@@ -310,14 +318,14 @@
 ;             [:argPredList, sublisNQ($sl, pred)]; argPredList), "and")
 ;   body := sublisNQ($sl, rhs)
 ;   oldMap :=
-;     (obj := get(op,'value,$InteractiveFrame)) => objVal obj
+;     (obj := getI(op, 'value)) => objVal(obj)
 ;     NIL
 ;   newMap := augmentMap(op,argList,finalPred,body,oldMap)
 ;   null newMap =>
 ;     sayRemoveFunctionOrValue op
 ;     putHist(op,'alias,nil,$e)
-;     ""      -- clears value--- see return from addDefMap in tree2Atree1
-;   if get(op,'isInterpreterRule,$e) then type := ['RuleCalled,op]
+;     $ClearBodyToken      -- see return from addDefMap in tree2Atree1
+;   if get0(op, 'isInterpreterRule, $e) then type := ['RuleCalled, op]
 ;   else type := ['FunctionCalled,op]
 ;   recursive :=
 ;     depthOfRecursion(op,newMap) = 0 => false
@@ -392,21 +400,19 @@
                '|and|))
       (SETQ |body| (|sublisNQ| |$sl| |rhs|))
       (SETQ |oldMap|
-              (COND
-               ((SETQ |obj| (|get| |op| '|value| |$InteractiveFrame|))
-                (|objVal| |obj|))
-               (#1# NIL)))
+              (COND ((SETQ |obj| (|getI| |op| '|value|)) (|objVal| |obj|))
+                    (#1# NIL)))
       (SETQ |newMap| (|augmentMap| |op| |argList| |finalPred| |body| |oldMap|))
       (COND
        ((NULL |newMap|)
         (PROGN
          (|sayRemoveFunctionOrValue| |op|)
          (|putHist| |op| '|alias| NIL |$e|)
-         '||))
+         |$ClearBodyToken|))
        (#1#
         (PROGN
          (COND
-          ((|get| |op| '|isInterpreterRule| |$e|)
+          ((|get0| |op| '|isInterpreterRule| |$e|)
            (SETQ |type| (LIST '|RuleCalled| |op|)))
           (#1# (SETQ |type| (LIST '|FunctionCalled| |op|))))
          (SETQ |recursive|
@@ -418,10 +424,10 @@
 ; augmentMap(op,args,pred,body,oldMap) ==
 ;   pattern:= makePattern(args,pred)
 ;   newMap:=deleteMap(op,pattern,oldMap)
-;   body="" =>
+;   body = $ClearBodyToken =>
 ;     if newMap=oldMap then
 ;       sayMSG ['"   Cannot find part of",:bright op,'"to delete."]
-;     newMap  --just delete rule if body is 
+;     newMap  --just delete rule if body is $ClearBodyToken
 ;   entry:= [pattern,:body]
 ;   resultMap:=
 ;     newMap is ["SPADMAP", :tail] => ["SPADMAP", :tail, entry]
@@ -435,7 +441,7 @@
       (SETQ |pattern| (|makePattern| |args| |pred|))
       (SETQ |newMap| (|deleteMap| |op| |pattern| |oldMap|))
       (COND
-       ((EQ |body| '||)
+       ((EQUAL |body| |$ClearBodyToken|)
         (PROGN
          (COND
           ((EQUAL |newMap| |oldMap|)
@@ -495,7 +501,7 @@
 ;   null body => nil
 ;   IDENTP body =>
 ;     isSharpVarWithNum body => nil
-;     body="" => nil
+;     body = $ClearBodyToken => nil
 ;     [body]
 ;   body is ["WRAPPED",:.] => nil
 ;   (body is ["COLLECT",:itl,body1]) or (body is ['REPEAT,:itl,body1]) =>
@@ -516,7 +522,8 @@
     (RETURN
      (COND ((NULL |body|) NIL)
            ((IDENTP |body|)
-            (COND ((|isSharpVarWithNum| |body|) NIL) ((EQ |body| '||) NIL)
+            (COND ((|isSharpVarWithNum| |body|) NIL)
+                  ((EQUAL |body| |$ClearBodyToken|) NIL)
                   (#1='T (LIST |body|))))
            ((AND (CONSP |body|) (EQ (CAR |body|) 'WRAPPED)) NIL)
            ((OR
@@ -718,8 +725,8 @@
 ; mkMapAlias(op,argl) ==
 ;   u:= mkAliasList argl
 ;   newAlias :=
-;     alias:= get(op,"alias",$e) => [(y => y; x) for x in alias for y in u]
-;     u
+;       alias := get0(op, "alias", $e) => [(y => y; x) for x in alias for y in u]
+;       u
 ;   $e:= putHist(op,"alias",newAlias,$e)
 
 (DEFUN |mkMapAlias| (|op| |argl|)
@@ -729,7 +736,7 @@
       (SETQ |u| (|mkAliasList| |argl|))
       (SETQ |newAlias|
               (COND
-               ((SETQ |alias| (|get| |op| '|alias| |$e|))
+               ((SETQ |alias| (|get0| |op| '|alias| |$e|))
                 ((LAMBDA (|bfVar#21| |bfVar#19| |x| |bfVar#20| |y|)
                    (LOOP
                     (COND
@@ -1439,7 +1446,7 @@
 ;   $mapTarget      : local := tar
 ;   $interpOnly: local := NIL
 ;   $mapName : local := op.0
-;   if get($mapName,'recursive,$e) then
+;   if get0($mapName, 'recursive, $e) then
 ;     argTypes := [f t for t in argTypes] where
 ;       f x ==
 ;         isEqualOrSubDomain(x,$Integer) => $Integer
@@ -1487,7 +1494,7 @@
       (SETQ |$interpOnly| NIL)
       (SETQ |$mapName| (ELT |op| 0))
       (COND
-       ((|get| |$mapName| '|recursive| |$e|)
+       ((|get0| |$mapName| '|recursive| |$e|)
         (SETQ |argTypes|
                 ((LAMBDA (|bfVar#38| |bfVar#37| |t|)
                    (LOOP
@@ -1704,7 +1711,7 @@
 ;   -- interpret-code handler for maps.  Recursively calls the interpreter
 ;   --   on the body of the map.
 ;   not $genValue =>
-;     get(opName,'mode,$e) isnt ['Mapping,:sig] =>
+;     get0(opName, 'mode, $e) isnt ['Mapping, :sig] =>
 ;       compFailure  ['"   Cannot compile map:",:bright opName]
 ;     arglCode := ['LIST,:[argCode for arg in argl for argName in
 ;       $FormalMapVariableList]] where argCode ==
@@ -1725,7 +1732,7 @@
        (COND
         ((NOT
           (PROGN
-           (SETQ |ISTMP#1| (|get| |opName| '|mode| |$e|))
+           (SETQ |ISTMP#1| (|get0| |opName| '|mode| |$e|))
            (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) '|Mapping|)
                 (PROGN (SETQ |sig| (CDR |ISTMP#1|)) #1='T))))
          (|compFailure| (CONS "   Cannot compile map:" (|bright| |opName|))))
@@ -1773,7 +1780,7 @@
       (#1# (|rewriteMap0| |op| |opName| |argl|))))))
 
 ; putBodyInEnv(opName, numArgs) ==
-;   val := get(opName, 'value, $e)
+;   val := get0(opName, 'value, $e)
 ;   val is [., 'SPADMAP, :bod] =>
 ;     $e := putHist(opName, 'mapBody, combineMapParts
 ;       mapDefsWithCorrectArgCount(numArgs, bod), $e)
@@ -1783,7 +1790,7 @@
   (PROG (|val| |ISTMP#1| |bod|)
     (RETURN
      (PROGN
-      (SETQ |val| (|get| |opName| '|value| |$e|))
+      (SETQ |val| (|get0| |opName| '|value| |$e|))
       (COND
        ((AND (CONSP |val|)
              (PROGN
@@ -1806,13 +1813,13 @@
 ; rewriteMap0(op,opName,argl) ==
 ;   -- $genValue case of map rewriting
 ;   putBodyInEnv(opName, #argl)
-;   if (s := get(opName,'mode,$e)) then
+;   if (s := get0(opName, 'mode, $e)) then
 ;     tar := CADR s
 ;     argTypes := CDDR s
 ;   else
 ;     tar:= nil
 ;     argTypes:= nil
-;   get(opName,'mode,$e) is ['Mapping,tar,:argTypes]
+;   get0(opName, 'mode, $e) is ['Mapping, tar, :argTypes]
 ;   $env: local := [[NIL]]
 ;   for arg in argl
 ;     for var in $FormalMapVariableList repeat
@@ -1824,9 +1831,9 @@
 ;           coerceInteractive(getValue arg,t)
 ;       else
 ;         val:= getValue arg
-;       $env:=put(var,'value,val,$env)
-;       if VECP arg then $env := put(var,'name,getUnname arg,$env)
-;       (m := getMode arg) => $env := put(var,'mode,m,$env)
+;       $env := putIntSymTab(var, 'value, val, $env)
+;       if VECP(arg) then $env := putIntSymTab(var, 'name, getUnname(arg), $env)
+;       (m := getMode(arg)) => $env := putIntSymTab(var, 'mode, m, $env)
 ;   null (val:= interpMap(opName,tar)) =>
 ;     throwKeyedMsg("S2IM0010",[opName])
 ;   putValue(op,val)
@@ -1840,10 +1847,10 @@
      (PROGN
       (|putBodyInEnv| |opName| (LENGTH |argl|))
       (COND
-       ((SETQ |s| (|get| |opName| '|mode| |$e|)) (SETQ |tar| (CADR |s|))
+       ((SETQ |s| (|get0| |opName| '|mode| |$e|)) (SETQ |tar| (CADR |s|))
         (SETQ |argTypes| (CDDR |s|)))
        (#1='T (SETQ |tar| NIL) (SETQ |argTypes| NIL)))
-      (SETQ |ISTMP#1| (|get| |opName| '|mode| |$e|))
+      (SETQ |ISTMP#1| (|get0| |opName| '|mode| |$e|))
       (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) '|Mapping|)
            (PROGN
             (SETQ |ISTMP#2| (CDR |ISTMP#1|))
@@ -1870,13 +1877,15 @@
                          (|getValue| |arg|))
                         (#1# (|coerceInteractive| (|getValue| |arg|) |t|)))))
               (#1# (SETQ |val| (|getValue| |arg|))))
-             (SETQ |$env| (|put| |var| '|value| |val| |$env|))
+             (SETQ |$env| (|putIntSymTab| |var| '|value| |val| |$env|))
              (COND
               ((VECP |arg|)
-               (SETQ |$env| (|put| |var| '|name| (|getUnname| |arg|) |$env|))))
+               (SETQ |$env|
+                       (|putIntSymTab| |var| '|name| (|getUnname| |arg|)
+                        |$env|))))
              (COND
               ((SETQ |m| (|getMode| |arg|))
-               (SETQ |$env| (|put| |var| '|mode| |m| |$env|)))))))
+               (SETQ |$env| (|putIntSymTab| |var| '|mode| |m| |$env|)))))))
           (SETQ |bfVar#53| (CDR |bfVar#53|))
           (SETQ |bfVar#54| (CDR |bfVar#54|))))
        |argl| NIL |$FormalMapVariableList| NIL)
@@ -1913,9 +1922,9 @@
 ;           coerceInteractive(evArg,t)
 ;       else
 ;         val:= evArg
-;       $env:=put(var,'value,val,$env)
-;       if VECP arg then $env := put(var,'name,getUnname arg,$env)
-;       (m := getMode arg) => $env := put(var,'mode,m,$env)
+;       $env := putIntSymTab(var, 'value, val, $env)
+;       if VECP(arg) then $env := putIntSymTab(var, 'name, getUnname(arg), $env)
+;       (m := getMode arg) => $env := putIntSymTab(var, 'mode, m, $env)
 ;   val:= interpMap(opName,tar)
 ;   removeBodyFromEnv(opName)
 ;   objValUnwrap(val)
@@ -1960,13 +1969,15 @@
                         ((AND (CONSP |t|) (EQ (CAR |t|) '|Mapping|)) |evArg|)
                         (#1# (|coerceInteractive| |evArg| |t|)))))
               (#1# (SETQ |val| |evArg|)))
-             (SETQ |$env| (|put| |var| '|value| |val| |$env|))
+             (SETQ |$env| (|putIntSymTab| |var| '|value| |val| |$env|))
              (COND
               ((VECP |arg|)
-               (SETQ |$env| (|put| |var| '|name| (|getUnname| |arg|) |$env|))))
+               (SETQ |$env|
+                       (|putIntSymTab| |var| '|name| (|getUnname| |arg|)
+                        |$env|))))
              (COND
               ((SETQ |m| (|getMode| |arg|))
-               (SETQ |$env| (|put| |var| '|mode| |m| |$env|)))))))
+               (SETQ |$env| (|putIntSymTab| |var| '|mode| |m| |$env|)))))))
           (SETQ |bfVar#56| (CDR |bfVar#56|))
           (SETQ |bfVar#57| (CDR |bfVar#57|))
           (SETQ |bfVar#58| (CDR |bfVar#58|))))
@@ -1981,10 +1992,10 @@
 ;   $interpMapTag : local := nil
 ;   $interpOnly : local := true
 ;   $localVars : local := NIL
-;   for lvar in get(opName,'localVars,$e) repeat mkLocalVar(opName,lvar)
+;   for lvar in get0(opName, 'localVars, $e) repeat mkLocalVar(opName, lvar)
 ;   $mapName : local := opName
 ;   $mapTarget : local := tar
-;   body:= get(opName,'mapBody,$e)
+;   body:= get0(opName, 'mapBody, $e)
 ;   savedTimerStack := COPY $timedNameStack
 ;   catchName := mapCatchName $mapName
 ;   c := CATCH(catchName, interpret1(body,tar,nil))
@@ -2013,10 +2024,10 @@
             (RETURN NIL))
            (#1='T (|mkLocalVar| |opName| |lvar|)))
           (SETQ |bfVar#59| (CDR |bfVar#59|))))
-       (|get| |opName| '|localVars| |$e|) NIL)
+       (|get0| |opName| '|localVars| |$e|) NIL)
       (SETQ |$mapName| |opName|)
       (SETQ |$mapTarget| |tar|)
-      (SETQ |body| (|get| |opName| '|mapBody| |$e|))
+      (SETQ |body| (|get0| |opName| '|mapBody| |$e|))
       (SETQ |savedTimerStack| (COPY |$timedNameStack|))
       (SETQ |catchName| (|mapCatchName| |$mapName|))
       (SETQ |c| (CATCH |catchName| (|interpret1| |body| |tar| NIL)))
@@ -2033,7 +2044,7 @@
 ;   opName := getUnname op
 ;   $mapList:=[opName,:$mapList]
 ;   $mapTarget := first sig
-;   (mmS:= get(opName,'localModemap,$e)) and
+;   (mmS := get0(opName, 'localModemap, $e)) and
 ;     (mm:= or/[mm for (mm:=[[.,:mmSig],:.]) in mmS | mmSig=sig]) =>
 ;       compileCoerceMap(opName,argTypes,mm)
 ;   -- The declared map needs to be compiled
@@ -2051,7 +2062,7 @@
       (SETQ |$mapList| (CONS |opName| |$mapList|))
       (SETQ |$mapTarget| (CAR |sig|))
       (COND
-       ((AND (SETQ |mmS| (|get| |opName| '|localModemap| |$e|))
+       ((AND (SETQ |mmS| (|get0| |opName| '|localModemap| |$e|))
              (SETQ |mm|
                      ((LAMBDA (|bfVar#61| |bfVar#60| |mm|)
                         (LOOP
@@ -2090,7 +2101,7 @@
 ;   $env:local:= [[NIL]]
 ;   parms := [var for var in $FormalMapVariableList for m in rest sig]
 ;   for m in rest sig for var in parms repeat
-;     $env:= put(var,'mode,m,$env)
+;       $env := putIntSymTab(var, 'mode, m, $env)
 ;   body:= getMapBody(op,mapDef)
 ;   for lvar in parms repeat mkLocalVar($mapName,lvar)
 ;   for lvar in getLocalVars(op,body) repeat mkLocalVar($mapName,lvar)
@@ -2129,7 +2140,7 @@
            ((OR (ATOM |bfVar#65|) (PROGN (SETQ |m| (CAR |bfVar#65|)) NIL)
                 (ATOM |bfVar#66|) (PROGN (SETQ |var| (CAR |bfVar#66|)) NIL))
             (RETURN NIL))
-           (#1# (SETQ |$env| (|put| |var| '|mode| |m| |$env|))))
+           (#1# (SETQ |$env| (|putIntSymTab| |var| '|mode| |m| |$env|))))
           (SETQ |bfVar#65| (CDR |bfVar#65|))
           (SETQ |bfVar#66| (CDR |bfVar#66|))))
        (CDR |sig|) NIL |parms| NIL)
@@ -2161,7 +2172,7 @@
 ;   -- saves the generated code and some other information about the
 ;   -- function
 ;   codeInfo := VECTOR(op,code,sig,name,parms,isRecursive)
-;   allCode := [codeInfo,:get(op,'generatedCode,$e)]
+;   allCode := [codeInfo, :get0(op, 'generatedCode, $e)]
 ;   $e := putHist(op,'generatedCode,allCode,$e)
 ;   op
 
@@ -2170,13 +2181,13 @@
     (RETURN
      (PROGN
       (SETQ |codeInfo| (VECTOR |op| |code| |sig| |name| |parms| |isRecursive|))
-      (SETQ |allCode| (CONS |codeInfo| (|get| |op| '|generatedCode| |$e|)))
+      (SETQ |allCode| (CONS |codeInfo| (|get0| |op| '|generatedCode| |$e|)))
       (SETQ |$e| (|putHist| |op| '|generatedCode| |allCode| |$e|))
       |op|))))
 
 ; makeLocalModemap(op,sig) ==
 ;   -- create a local modemap for op with sig, and put it into $e
-;   if (currentMms := get(op,'localModemap,$e)) then
+;   if (currentMms := get0(op, 'localModemap, $e)) then
 ;     untraceMapSubNames [CADAR currentMms]
 ;   newName := makeInternalMapName(op,#sig-1,1+#currentMms,NIL)
 ;   newMm := [['local,:sig],newName,nil]
@@ -2189,7 +2200,7 @@
     (RETURN
      (PROGN
       (COND
-       ((SETQ |currentMms| (|get| |op| '|localModemap| |$e|))
+       ((SETQ |currentMms| (|get0| |op| '|localModemap| |$e|))
         (|untraceMapSubNames| (LIST (CADAR |currentMms|)))))
       (SETQ |newName|
               (|makeInternalMapName| |op| (- (LENGTH |sig|) 1)
@@ -2201,13 +2212,13 @@
 
 ; genMapCode(op,body,sig,fnName,parms,isRecursive) ==
 ;   -- calls the lisp compiler on the body of a map
-;   if lmm:= get(op,'localModemap,$InteractiveFrame) then
+;   if lmm := getI(op, 'localModemap) then
 ;     untraceMapSubNames [CADAR lmm]
 ;   op0 :=
 ;     (n := isSharpVarWithNum op) =>
 ;         STRCONC('"<argument ",object2String n,'">")
 ;     op
-;   if get(op,'isInterpreterRule,$e) then
+;   if get0(op, 'isInterpreterRule, $e) then
 ;     sayKeyedMsg("S2IM0014", [op0, (PAIRP sig => prefix2String first sig;
 ;                                    '"?")])
 ;   else sayKeyedMsg("S2IM0015",[op0,formatSignature sig])
@@ -2232,7 +2243,7 @@
     (RETURN
      (PROGN
       (COND
-       ((SETQ |lmm| (|get| |op| '|localModemap| |$InteractiveFrame|))
+       ((SETQ |lmm| (|getI| |op| '|localModemap|))
         (|untraceMapSubNames| (LIST (CADAR |lmm|)))))
       (SETQ |op0|
               (COND
@@ -2240,7 +2251,7 @@
                 (STRCONC "<argument " (|object2String| |n|) ">"))
                (#1='T |op|)))
       (COND
-       ((|get| |op| '|isInterpreterRule| |$e|)
+       ((|get0| |op| '|isInterpreterRule| |$e|)
         (|sayKeyedMsg| 'S2IM0014
          (LIST |op0|
                (COND ((CONSP |sig|) (|prefix2String| (CAR |sig|)))
@@ -2386,7 +2397,7 @@
 ;       0
 ;     op in first(opList) => argc
 ;     op=opName => 1 + argc
-;     (obj := get(op, 'value, $e)) and objVal obj is ['SPADMAP, :mapDef] =>
+;     (obj := get0(op, 'value, $e)) and objVal(obj) is ['SPADMAP, :mapDef] =>
 ;       opList.0 := [op, :first(opList)]
 ;       mapRecurDepth(opName, opList, getMapBody(op, mapDef))
 ;         + argc
@@ -2423,7 +2434,7 @@
                            (#1# 0)))
              (COND ((|member| |op| (CAR |opList|)) |argc|)
                    ((EQUAL |op| |opName|) (+ 1 |argc|))
-                   ((AND (SETQ |obj| (|get| |op| '|value| |$e|))
+                   ((AND (SETQ |obj| (|get0| |op| '|value| |$e|))
                          (PROGN
                           (SETQ |ISTMP#1| (|objVal| |obj|))
                           (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) 'SPADMAP)
@@ -2447,8 +2458,8 @@
 ;   $mapList := [op,:$mapList]
 ;   parms:=[var for var in $FormalMapVariableList for m in argTypes]
 ;   for m in argTypes for var in parms repeat
-;     put(var,'autoDeclare,'T,$env)
-;     put(var,'mode,m,$env)
+;       putIntSymTab(var, 'autoDeclare, 'T, $env)
+;       putIntSymTab(var, 'mode, m, $env)
 ;   body:= getMapBody(op,mapDef)
 ;   for lvar in parms repeat mkLocalVar($mapName,lvar)
 ;   for lvar in getLocalVars(op,body) repeat mkLocalVar($mapName,lvar)
@@ -2487,8 +2498,8 @@
             (RETURN NIL))
            (#1#
             (PROGN
-             (|put| |var| '|autoDeclare| 'T |$env|)
-             (|put| |var| '|mode| |m| |$env|))))
+             (|putIntSymTab| |var| '|autoDeclare| 'T |$env|)
+             (|putIntSymTab| |var| '|mode| |m| |$env|))))
           (SETQ |bfVar#83| (CDR |bfVar#83|))
           (SETQ |bfVar#84| (CDR |bfVar#84|))))
        |argTypes| NIL |parms| NIL)
@@ -2618,8 +2629,8 @@
 
 ; saveDependentMapInfo(op,opList) ==
 ;   not (op in opList) =>
-;     lmml := [[op, :get(op, 'localModemap, $e)]]
-;     gcl := [[op, :get(op, 'generatedCode, $e)]]
+;     lmml := [[op, :get0(op, 'localModemap, $e)]]
+;     gcl := [[op, :get0(op, 'generatedCode, $e)]]
 ;     for [dep1,dep2] in getFlag("$dependencies") | dep1=op repeat
 ;       [lmml', :gcl'] := saveDependentMapInfo(dep2, [op, :opList])
 ;       lmms := nconc(lmml', lmml)
@@ -2633,8 +2644,8 @@
      (COND
       ((NULL (|member| |op| |opList|))
        (PROGN
-        (SETQ |lmml| (LIST (CONS |op| (|get| |op| '|localModemap| |$e|))))
-        (SETQ |gcl| (LIST (CONS |op| (|get| |op| '|generatedCode| |$e|))))
+        (SETQ |lmml| (LIST (CONS |op| (|get0| |op| '|localModemap| |$e|))))
+        (SETQ |gcl| (LIST (CONS |op| (|get0| |op| '|generatedCode| |$e|))))
         ((LAMBDA (|bfVar#91| |bfVar#90|)
            (LOOP
             (COND
@@ -2791,12 +2802,12 @@
 ; expandRecursiveBody(alreadyExpanded, body) ==
 ;   -- replaces calls to other maps with their bodies
 ;   atom body =>
-;     (obj := get(body, 'value, $e)) and objVal obj is ['SPADMAP, :mapDef] and
+;     (obj := get0(body, 'value, $e)) and objVal(obj) is ['SPADMAP, :mapDef] and
 ;       ((numMapArgs mapDef) = 0) => getMapBody(body,mapDef)
 ;     body
 ;   body is [op,:argl] =>
 ;     not (op in alreadyExpanded) =>
-;       (obj := get(op, 'value, $e)) and objVal obj is ['SPADMAP, :mapDef] =>
+;       (obj := get0(op, 'value, $e)) and objVal(obj) is ['SPADMAP, :mapDef] =>
 ;         newBody:= getMapBody(op,mapDef)
 ;         for arg in argl for var in $FormalMapVariableList repeat
 ;             newBody := substitute(arg, var, newBody)
@@ -2812,7 +2823,7 @@
      (COND
       ((ATOM |body|)
        (COND
-        ((AND (SETQ |obj| (|get| |body| '|value| |$e|))
+        ((AND (SETQ |obj| (|get0| |body| '|value| |$e|))
               (PROGN
                (SETQ |ISTMP#1| (|objVal| |obj|))
                (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) 'SPADMAP)
@@ -2825,7 +2836,7 @@
        (COND
         ((NULL (|member| |op| |alreadyExpanded|))
          (COND
-          ((AND (SETQ |obj| (|get| |op| '|value| |$e|))
+          ((AND (SETQ |obj| (|get0| |op| '|value| |$e|))
                 (PROGN
                  (SETQ |ISTMP#1| (|objVal| |obj|))
                  (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) 'SPADMAP)
@@ -3596,23 +3607,23 @@
 
 ; getMapBody(op,mapDef) ==
 ;   -- looks in $e for a map body; if not found it computes then stores it
-;   get(op,'mapBody,$e) or
+;   get0(op, 'mapBody, $e) or
 ;     combineMapParts mapDef
 
 (DEFUN |getMapBody| (|op| |mapDef|)
   (PROG ()
-    (RETURN (OR (|get| |op| '|mapBody| |$e|) (|combineMapParts| |mapDef|)))))
+    (RETURN (OR (|get0| |op| '|mapBody| |$e|) (|combineMapParts| |mapDef|)))))
 
 ; getLocalVars(op,body) ==
 ;   -- looks in $e for local vars; if not found, computes then stores them
-;   get(op,'localVars,$e) or
+;   get0(op, 'localVars, $e) or
 ;     $e:= putHist(op,'localVars,lv:=findLocalVars(op,body),$e)
 ;     lv
 
 (DEFUN |getLocalVars| (|op| |body|)
   (PROG (|lv|)
     (RETURN
-     (OR (|get| |op| '|localVars| |$e|)
+     (OR (|get0| |op| '|localVars| |$e|)
          (PROGN
           (SETQ |$e|
                   (|putHist| |op| '|localVars|

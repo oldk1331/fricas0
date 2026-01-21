@@ -36,5 +36,3 @@
                                                T))
                                             NIL NIL NIL))))
            (SETELT #1# 0 '(|PlottableSpaceCurveCategory|))))) 
-
-(MAKEPROP '|PlottableSpaceCurveCategory| 'NILADIC T) 

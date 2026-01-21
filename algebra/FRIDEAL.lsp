@@ -754,12 +754,12 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|Group&| NIL NIL |MagmaWithUnit&| |Magma&| |SetCategory&|
-                     NIL NIL |BasicType&| NIL)
+                  '#(|Group&| NIL |MagmaWithUnit&| NIL |Magma&| |SetCategory&|
+                     NIL |BasicType&| NIL NIL)
                   (CONS
-                   '#((|Group|) (|Monoid|) (|SemiGroup|) (|MagmaWithUnit|)
-                      (|Magma|) (|SetCategory|) (|unitsKnown|)
-                      (|TwoSidedRecip|) (|BasicType|) (|CoercibleTo| 127))
+                   '#((|Group|) (|Monoid|) (|MagmaWithUnit|) (|SemiGroup|)
+                      (|Magma|) (|SetCategory|) (|CoercibleTo| 127)
+                      (|BasicType|) (|TwoSidedRecip|) (|unitsKnown|))
                    (|makeByteWordVec2| 141
                                        '(0 6 0 12 0 9 0 13 1 17 0 0 18 1 9 19 0
                                          20 2 17 19 0 19 21 1 9 0 19 22 2 8 0 7
@@ -790,14 +790,14 @@
                                          131 1 6 127 0 132 2 127 0 0 0 133 2
                                          127 0 0 0 134 0 7 0 136 2 9 0 0 0 137
                                          0 9 0 138 2 9 0 57 0 139 2 0 32 0 0 1
-                                         0 0 0 1 1 0 69 0 1 2 0 0 0 23 1 2 0 0
-                                         0 49 1 1 0 69 0 1 2 0 9 23 14 68 1 0
+                                         0 0 0 1 1 0 69 0 1 2 0 0 0 49 1 2 0 0
+                                         0 23 1 1 0 69 0 1 2 0 9 23 14 68 1 0
                                          32 0 1 1 0 14 0 15 1 0 7 0 67 1 0 0 0
-                                         140 1 0 69 0 1 2 0 0 0 23 1 2 0 0 0 49
+                                         140 1 0 69 0 1 2 0 0 0 49 1 2 0 0 0 23
                                          1 1 0 141 0 1 1 0 0 0 107 1 0 0 14 106
                                          1 0 6 0 16 2 0 0 0 0 1 2 0 0 0 0 1 1 0
-                                         127 0 135 1 0 14 0 130 2 0 0 0 57 124
-                                         2 0 0 0 23 1 2 0 0 0 49 1 0 0 0 11 2 0
+                                         127 0 135 1 0 14 0 130 2 0 0 0 49 1 2
+                                         0 0 0 23 1 2 0 0 0 57 124 0 0 0 11 2 0
                                          32 0 0 37 2 0 0 0 0 1 2 0 0 0 0
                                          123)))))
            '|lookupComplete|)) 

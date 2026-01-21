@@ -682,7 +682,7 @@
               (237 . |sqrt|) (242 . |abs|) (247 . |rational?|)
               (252 . |rational?|) (|Fraction| 26) (257 . |rational|)
               (262 . |rational|) (|Union| 89 '#1="failed")
-              (267 . |rationalIfCan|) (|Union| 26 '#2="failed") (|Matrix| 7))
+              (267 . |rationalIfCan|) (|Matrix| 7) (|Union| 26 '#2="failed"))
            '#(|zero?| 272 |retractIfCan| 277 |retract| 282 |represents| 287
               |rationalIfCan| 292 |rational?| 297 |rational| 302 |rank| 307
               |norm| 311 |map| 316 |inv| 322 |coordinates| 327 |convert| 332
@@ -787,10 +787,10 @@
                                               0 0 22 29 1 0 92 0 93 1 0 47 0 87
                                               1 0 89 0 91 0 0 11 12 1 0 7 0 46
                                               2 0 0 42 0 43 1 0 0 0 76 1 0 22 0
-                                              24 1 0 77 0 82 1 0 0 0 41 1 0 0
-                                              26 57 1 0 0 7 55 1 0 64 0 71 0 0
-                                              8 10 0 0 38 39 1 0 7 0 86 2 0 47
-                                              0 0 49 2 0 47 0 0 84 1 0 0 0 51 2
-                                              0 0 0 0 50 2 0 0 7 0 52 2 0 0 26
-                                              0 54)))))
+                                              24 1 0 77 0 82 1 0 0 0 41 1 0 64
+                                              0 71 1 0 0 7 55 1 0 0 26 57 0 0 8
+                                              10 0 0 38 39 1 0 7 0 86 2 0 47 0
+                                              0 49 2 0 47 0 0 84 1 0 0 0 51 2 0
+                                              0 0 0 50 2 0 0 26 0 54 2 0 0 7 0
+                                              52)))))
            '|lookupComplete|)) 

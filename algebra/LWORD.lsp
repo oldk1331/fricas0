@@ -365,8 +365,8 @@
               (112 . |sort|) (|Integer|) (117 . |setelt!|) (124 . |elt|)
               (130 . |right|) (135 . =) (|Mapping| 10 $$ $$) (141 . |sort!|)
               (|OneDimensionalArray| 16) |LWORD;LyndonWordsList1;LPiOda;10|
-              (147 . |append|) |LWORD;LyndonWordsList;LPiL;11|
-              (|Union| 6 '"failed") (|String|))
+              (147 . |append|) |LWORD;LyndonWordsList;LPiL;11| (|String|)
+              (|Union| 6 '"failed"))
            '#(~= 153 |varList| 159 |smaller?| 164 |right| 170 |retractable?|
               175 |retractIfCan| 180 |retract| 185 |min| 190 |max| 196
               |lyndonIfCan| 202 |lyndon?| 207 |lyndon| 212 |lexico| 217
@@ -376,12 +376,12 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|OrderedSet&| NIL |SetCategory&| |RetractableTo&|
-                     |BasicType&| NIL |PartialOrder&| NIL)
+                  '#(|OrderedSet&| NIL |RetractableTo&| |SetCategory&| NIL
+                     |PartialOrder&| NIL |BasicType&|)
                   (CONS
-                   '#((|OrderedSet|) (|Comparable|) (|SetCategory|)
-                      (|RetractableTo| 6) (|BasicType|) (|CoercibleFrom| 6)
-                      (|PartialOrder|) (|CoercibleTo| 39))
+                   '#((|OrderedSet|) (|Comparable|) (|RetractableTo| 6)
+                      (|SetCategory|) (|CoercibleTo| 39) (|PartialOrder|)
+                      (|CoercibleFrom| 6) (|BasicType|))
                    (|makeByteWordVec2| 60
                                        '(0 8 0 9 2 8 10 0 0 11 1 8 0 0 12 2 8
                                          10 0 0 13 2 8 10 0 0 14 1 19 18 0 20 1
@@ -394,11 +394,11 @@
                                          48 50 1 0 0 0 51 2 0 10 0 0 52 2 19 0
                                          53 0 54 2 19 0 0 0 57 2 0 10 0 0 1 1 0
                                          46 0 1 2 0 10 0 0 1 1 0 0 0 51 1 0 10
-                                         0 1 1 0 59 0 1 1 0 6 0 1 2 0 0 0 0 1 2
+                                         0 1 1 0 60 0 1 1 0 6 0 1 2 0 0 0 0 1 2
                                          0 0 0 0 1 1 0 22 8 23 1 0 10 8 15 1 0
                                          0 8 24 2 0 10 0 0 29 1 0 35 0 36 1 0 0
-                                         0 1 1 0 60 0 1 1 0 16 8 17 1 0 5 0 43
-                                         1 0 8 0 38 1 0 0 6 33 1 0 39 0 42 2 0
+                                         0 1 1 0 59 0 1 1 0 16 8 17 1 0 39 0 42
+                                         1 0 0 6 33 1 0 8 0 38 1 0 5 0 43 2 0
                                          55 46 35 56 2 0 16 46 35 58 2 0 10 0 0
                                          1 2 0 10 0 0 1 2 0 10 0 0 52 2 0 10 0
                                          0 1 2 0 10 0 0 37)))))

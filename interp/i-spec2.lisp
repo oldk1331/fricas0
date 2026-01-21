@@ -25,7 +25,7 @@
 ;     null mapOp =>
 ;       keyedSystemError("S2GE0016",['"upDEF",'"bad map definition"])
 ;     mapOp := first mapOp
-;   put(mapOp,'value,v,$e)
+;   putIntSymTab(mapOp, 'value, v, $e)
 ;   putValue(op,objNew(voidValue(), $Void))
 ;   putModeSet(op,[$Void])
 
@@ -65,7 +65,7 @@
                (|keyedSystemError| 'S2GE0016
                 (LIST "upDEF" "bad map definition")))
               (#1# (SETQ |mapOp| (CAR |mapOp|))))))
-           (|put| |mapOp| '|value| |v| |$e|)
+           (|putIntSymTab| |mapOp| '|value| |v| |$e|)
            (|putValue| |op| (|objNew| (|voidValue|) |$Void|))
            (|putModeSet| |op| (LIST |$Void|)))))))))))
 
@@ -512,7 +512,7 @@
 
 ; uphas t ==
 ;   t isnt [op,type,prop] => nil
-;   -- handler for category and attribute queries
+;   -- handler for category queries
 ;   type :=
 ;     isLocalVar(type) => ['unabbrev, type]
 ;     MKQ unabbrev type
@@ -918,9 +918,9 @@
 ;   -- Puts the modes for the pattern variables into $env
 ;   m isnt ['List,um] => throwKeyedMsg("S2IS0030",NIL)
 ;   for pvar in pattern repeat
-;       IDENTP pvar => put(pvar, 'mode, um, $env)
-;       pvar is ['_:, var] => put(var, 'mode, m, $env)
-;       pvar is ['_=, var] => put(var, 'mode, um, $env)
+;       IDENTP(pvar) => putIntSymTab(pvar, 'mode, um, $env)
+;       pvar is ['_:, var] => putIntSymTab(var, 'mode, m, $env)
+;       pvar is ['_=, var] => putIntSymTab(var, 'mode, um, $env)
 ;       putPvarModes(pvar, um)
 
 (DEFUN |putPvarModes| (|pattern| |m|)
@@ -941,20 +941,21 @@
             ((OR (ATOM |bfVar#11|) (PROGN (SETQ |pvar| (CAR |bfVar#11|)) NIL))
              (RETURN NIL))
             (#1#
-             (COND ((IDENTP |pvar|) (|put| |pvar| '|mode| |um| |$env|))
-                   ((AND (CONSP |pvar|) (EQ (CAR |pvar|) '|:|)
-                         (PROGN
-                          (SETQ |ISTMP#1| (CDR |pvar|))
-                          (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
-                               (PROGN (SETQ |var| (CAR |ISTMP#1|)) #1#))))
-                    (|put| |var| '|mode| |m| |$env|))
-                   ((AND (CONSP |pvar|) (EQ (CAR |pvar|) '=)
-                         (PROGN
-                          (SETQ |ISTMP#1| (CDR |pvar|))
-                          (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
-                               (PROGN (SETQ |var| (CAR |ISTMP#1|)) #1#))))
-                    (|put| |var| '|mode| |um| |$env|))
-                   (#1# (|putPvarModes| |pvar| |um|)))))
+             (COND
+              ((IDENTP |pvar|) (|putIntSymTab| |pvar| '|mode| |um| |$env|))
+              ((AND (CONSP |pvar|) (EQ (CAR |pvar|) '|:|)
+                    (PROGN
+                     (SETQ |ISTMP#1| (CDR |pvar|))
+                     (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
+                          (PROGN (SETQ |var| (CAR |ISTMP#1|)) #1#))))
+               (|putIntSymTab| |var| '|mode| |m| |$env|))
+              ((AND (CONSP |pvar|) (EQ (CAR |pvar|) '=)
+                    (PROGN
+                     (SETQ |ISTMP#1| (CDR |pvar|))
+                     (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
+                          (PROGN (SETQ |var| (CAR |ISTMP#1|)) #1#))))
+               (|putIntSymTab| |var| '|mode| |um| |$env|))
+              (#1# (|putPvarModes| |pvar| |um|)))))
            (SETQ |bfVar#11| (CDR |bfVar#11|))))
         |pattern| NIL))))))
 
@@ -1106,7 +1107,7 @@
 ;   pattern:= removeConstruct pattern
 ;   not ((valueAlist:=isPatternMatch(value,pattern))='failed) =>
 ;     for [id,:value] in valueAlist repeat
-;       evalLETchangeValue(id,objNewWrap(value,get(id,'mode,$env)))
+;       evalLETchangeValue(id, objNewWrap(value, get0(id, 'mode, $env)))
 ;     true
 ;   false
 
@@ -1133,7 +1134,7 @@
                      (SETQ |value| (CDR |bfVar#16|))
                      #1#)
                     (|evalLETchangeValue| |id|
-                     (|objNewWrap| |value| (|get| |id| '|mode| |$env|))))))
+                     (|objNewWrap| |value| (|get0| |id| '|mode| |$env|))))))
              (SETQ |bfVar#17| (CDR |bfVar#17|))))
           |valueAlist| NIL)
          T))
@@ -1373,10 +1374,10 @@
 ;   (IDENTP var) and not (var in '(true false elt QUOTE)) =>
 ;     var ~= (var' := unabbrev(var)) =>  -- constructor abbreviation
 ;       throwKeyedMsg("S2IS0028",[var,var'])
-;     if get(var,'isInterpreterFunction,$e) then
+;     if get0(var, 'isInterpreterFunction, $e) then
 ;       putHist(var,'isInterpreterFunction,false,$e)
 ;       sayKeyedMsg("S2IS0049",['"Function",var])
-;     else if get(var,'isInterpreterRule,$e) then
+;     else if get0(var, 'isInterpreterRule, $e) then
 ;       putHist(var,'isInterpreterRule,false,$e)
 ;       sayKeyedMsg("S2IS0049",['"Rule",var])
 ;     not isTupleForm(rhs) and (m := isType rhs) => upLETtype(op,lhs,m)
@@ -1441,10 +1442,10 @@
               (#1#
                (PROGN
                 (COND
-                 ((|get| |var| '|isInterpreterFunction| |$e|)
+                 ((|get0| |var| '|isInterpreterFunction| |$e|)
                   (|putHist| |var| '|isInterpreterFunction| NIL |$e|)
                   (|sayKeyedMsg| 'S2IS0049 (LIST "Function" |var|)))
-                 ((|get| |var| '|isInterpreterRule| |$e|)
+                 ((|get0| |var| '|isInterpreterRule| |$e|)
                   (|putHist| |var| '|isInterpreterRule| NIL |$e|)
                   (|sayKeyedMsg| 'S2IS0049 (LIST "Rule" |var|))))
                 (COND
@@ -1500,7 +1501,7 @@
 ;   $useConvertForCoercions: local := true
 ;   v' := (v:= getValue rhs)
 ;   ((not getMode lhs) and (getModeSet rhs is [.])) or
-;     get(getUnname lhs,'autoDeclare,$env) =>
+;     get0(getUnname(lhs), 'autoDeclare, $env) =>
 ;       v:=
 ;         $genValue => v
 ;         objNew(wrapped2Quote objVal v,objMode v)
@@ -1540,7 +1541,7 @@
               (PROGN
                (SETQ |ISTMP#1| (|getModeSet| |rhs|))
                (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL))))
-         (|get| (|getUnname| |lhs|) '|autoDeclare| |$env|))
+         (|get0| (|getUnname| |lhs|) '|autoDeclare| |$env|))
         (PROGN
          (SETQ |v|
                  (COND (|$genValue| |v|)
@@ -1601,25 +1602,27 @@
 ;     code:=
 ;       isLocalVar(name) =>
 ;         om := objMode(value)
-;         dm := get(name,'mode,$env)
+;         dm := get0(name, 'mode, $env)
 ;         dm and not ((om = dm) or isSubDomain(om,dm) or
 ;           isSubDomain(dm,om)) =>
 ;             compFailure ['"   The type of the local variable",
 ;               :bright name,'"has changed in the computation."]
-;         if dm and isSubDomain(dm,om) then put(name,'mode,om,$env)
+;         if dm and isSubDomain(dm, om) then
+;             putIntSymTab(name, 'mode, om, $env)
 ;         ['LET,name,objVal value,$mapName]
 ;                -- $mapName is set in analyzeMap
 ;       om := objMode value
-;       dm := get(name, 'mode, $env) or objMode(get(name, 'value, $e))
+;       dm := get0(name, 'mode, $env) or objMode(get0(name, 'value, $e))
 ;       dm and (null $compilingMap) and not(om = dm) and not(isSubDomain(om, dm)) =>
 ;         THROW('loopCompiler,'tryInterpOnly)
 ;       ['unwrap,['evalLETchangeValue,MKQ name,
 ;         objNewCode(['wrap,objVal value],objMode value)]]
 ;     value:= objNew(code,objMode value)
 ;     isLocalVar(name) =>
-;       if not get(name,'mode,$env) then put(name,'autoDeclare,'T,$env)
-;       put(name,'mode,objMode(value),$env)
-;     put(name,'automode,objMode(value),$env)
+;         if not(get0(name, 'mode, $env)) then
+;             putIntSymTab(name, 'autoDeclare, 'T, $env)
+;         putIntSymTab(name, 'mode, objMode(value), $env)
+;     putIntSymTab(name, 'automode, objMode(value), $env)
 ;   $genValue and evalLETchangeValue(name,value)
 ;   putValue(lhs,value)
 
@@ -1635,7 +1638,7 @@
                  ((|isLocalVar| |name|)
                   (PROGN
                    (SETQ |om| (|objMode| |value|))
-                   (SETQ |dm| (|get| |name| '|mode| |$env|))
+                   (SETQ |dm| (|get0| |name| '|mode| |$env|))
                    (COND
                     ((AND |dm|
                           (NULL
@@ -1650,14 +1653,14 @@
                      (PROGN
                       (COND
                        ((AND |dm| (|isSubDomain| |dm| |om|))
-                        (|put| |name| '|mode| |om| |$env|)))
+                        (|putIntSymTab| |name| '|mode| |om| |$env|)))
                       (LIST 'LET |name| (|objVal| |value|) |$mapName|))))))
                  (#1#
                   (PROGN
                    (SETQ |om| (|objMode| |value|))
                    (SETQ |dm|
-                           (OR (|get| |name| '|mode| |$env|)
-                               (|objMode| (|get| |name| '|value| |$e|))))
+                           (OR (|get0| |name| '|mode| |$env|)
+                               (|objMode| (|get0| |name| '|value| |$e|))))
                    (COND
                     ((AND |dm| (NULL |$compilingMap|) (NULL (EQUAL |om| |dm|))
                           (NULL (|isSubDomain| |om| |dm|)))
@@ -1673,10 +1676,11 @@
          ((|isLocalVar| |name|)
           (PROGN
            (COND
-            ((NULL (|get| |name| '|mode| |$env|))
-             (|put| |name| '|autoDeclare| 'T |$env|)))
-           (|put| |name| '|mode| (|objMode| |value|) |$env|)))
-         (#1# (|put| |name| '|automode| (|objMode| |value|) |$env|)))))
+            ((NULL (|get0| |name| '|mode| |$env|))
+             (|putIntSymTab| |name| '|autoDeclare| 'T |$env|)))
+           (|putIntSymTab| |name| '|mode| (|objMode| |value|) |$env|)))
+         (#1#
+          (|putIntSymTab| |name| '|automode| (|objMode| |value|) |$env|)))))
       (AND |$genValue| (|evalLETchangeValue| |name| |value|))
       (|putValue| |lhs| |value|)))))
 
@@ -1735,9 +1739,9 @@
 ;   --  maps if its type changes from its last value
 ;   localEnv := PAIRP $env
 ;   clearCompilationsFlag :=
-;     val:= (localEnv and get(name,'value,$env)) or get(name,'value,$e)
+;     val := (localEnv and get0(name, 'value, $env)) or get0(name, 'value, $e)
 ;     null val =>
-;       not ((localEnv and get(name,'mode,$env)) or get(name,'mode,$e))
+;         not ((localEnv and get0(name, 'mode, $env)) or get0(name, 'mode, $e))
 ;     objMode val ~= objMode(value)
 ;   if clearCompilationsFlag then
 ;     clearDependencies(name)
@@ -1754,13 +1758,13 @@
       (SETQ |clearCompilationsFlag|
               (PROGN
                (SETQ |val|
-                       (OR (AND |localEnv| (|get| |name| '|value| |$env|))
-                           (|get| |name| '|value| |$e|)))
+                       (OR (AND |localEnv| (|get0| |name| '|value| |$env|))
+                           (|get0| |name| '|value| |$e|)))
                (COND
                 ((NULL |val|)
                  (NULL
-                  (OR (AND |localEnv| (|get| |name| '|mode| |$env|))
-                      (|get| |name| '|mode| |$e|))))
+                  (OR (AND |localEnv| (|get0| |name| '|mode| |$env|))
+                      (|get0| |name| '|mode| |$e|))))
                 (#1='T (NOT (EQUAL (|objMode| |val|) (|objMode| |value|)))))))
       (COND (|clearCompilationsFlag| (|clearDependencies| |name|)))
       (COND
@@ -2160,7 +2164,7 @@
 ;     else if categoryForm?(type) then '(Category)
 ;          else '(Type)
 ;   val:= objNew(type,mode)
-;   if isLocalVar(opName) then put(opName,'value,val,$env)
+;   if isLocalVar(opName) then putIntSymTab(opName, 'value, val, $env)
 ;   else putHist(opName,'value,val,$e)
 ;   putValue(op,val)
 ;   -- have to fix the following
@@ -2194,8 +2198,10 @@
                        ((|categoryForm?| |type|) '(|Category|))
                        (#1# '(|Type|))))
          (SETQ |val| (|objNew| |type| |mode|))
-         (COND ((|isLocalVar| |opName|) (|put| |opName| '|value| |val| |$env|))
-               (#1# (|putHist| |opName| '|value| |val| |$e|)))
+         (COND
+          ((|isLocalVar| |opName|)
+           (|putIntSymTab| |opName| '|value| |val| |$env|))
+          (#1# (|putHist| |opName| '|value| |val| |$e|)))
          (|putValue| |op| |val|)
          (|putModeSet| |op| (LIST |mode|)))))))))
 
@@ -2203,19 +2209,19 @@
 ; -- Special function for binding an interpreter variable from within algebra
 ; -- code.  Does not do the assignment and returns nil, if the variable is
 ; -- already assigned
-;   val := get(symbol, 'value, $e) => nil
+;   val := get0(symbol, 'value, $e) => nil
 ;   obj := objNew(wrap value, devaluate domain)
-;   put(symbol, 'value, obj, $e)
+;   putIntSymTab(symbol, 'value, obj, $e)
 ;   true
 
 (DEFUN |assignSymbol| (|symbol| |value| |domain|)
   (PROG (|val| |obj|)
     (RETURN
-     (COND ((SETQ |val| (|get| |symbol| '|value| |$e|)) NIL)
+     (COND ((SETQ |val| (|get0| |symbol| '|value| |$e|)) NIL)
            ('T
             (PROGN
              (SETQ |obj| (|objNew| (|wrap| |value|) (|devaluate| |domain|)))
-             (|put| |symbol| '|value| |obj| |$e|)
+             (|putIntSymTab| |symbol| '|value| |obj| |$e|)
              T))))))
 
 ; getInterpMacroNames() ==
@@ -2266,9 +2272,9 @@
 ;   -- look in local and then global environment for a macro
 ;   null IDENTP name => NIL
 ;   name in $specialOps => NIL
-;   (m := get("--macros--",name,$env)) => m
-;   (m := get("--macros--",name,$e))   => m
-;   (m := get("--macros--",name,$InteractiveFrame))   => m
+;   (m := get0("--macros--", name, $env)) => m
+;   (m := get0("--macros--", name, $e))   => m
+;   (m := getI("--macros--", name))   => m
 ;   -- $InterpreterMacroAlist will probably be phased out soon
 ;   (sv := assoc(name, $InterpreterMacroAlist)) => CONS(NIL, rest sv)
 ;   NIL
@@ -2277,16 +2283,16 @@
   (PROG (|m| |sv|)
     (RETURN
      (COND ((NULL (IDENTP |name|)) NIL) ((|member| |name| |$specialOps|) NIL)
-           ((SETQ |m| (|get| '|--macros--| |name| |$env|)) |m|)
-           ((SETQ |m| (|get| '|--macros--| |name| |$e|)) |m|)
-           ((SETQ |m| (|get| '|--macros--| |name| |$InteractiveFrame|)) |m|)
+           ((SETQ |m| (|get0| '|--macros--| |name| |$env|)) |m|)
+           ((SETQ |m| (|get0| '|--macros--| |name| |$e|)) |m|)
+           ((SETQ |m| (|getI| '|--macros--| |name|)) |m|)
            ((SETQ |sv| (|assoc| |name| |$InterpreterMacroAlist|))
             (CONS NIL (CDR |sv|)))
            ('T NIL)))))
 
 ; upQUOTE t ==
 ;   t isnt [op,expr] => NIL
-;   ms:= list
+;   ms:= LIST
 ;     m:= getBasicMode expr => m
 ;     IDENTP expr =>
 ; --    $useSymbolNotVariable => $Symbol
@@ -2958,7 +2964,7 @@
 ;   --  to indicate the required type of the result
 ;   emptyAtree exp
 ;   for i in indexList for val in indexVals for type in indexTypes repeat
-;     put(i,'value,objNewWrap(val,type),$env)
+;       putIntSymTab(i, 'value, objNewWrap(val, type), $env)
 ;   bottomUp exp
 ;   v:= getValue exp
 ;   val :=
@@ -2981,7 +2987,8 @@
                 (ATOM |bfVar#67|) (PROGN (SETQ |val| (CAR |bfVar#67|)) NIL)
                 (ATOM |bfVar#68|) (PROGN (SETQ |type| (CAR |bfVar#68|)) NIL))
             (RETURN NIL))
-           (#1='T (|put| |i| '|value| (|objNewWrap| |val| |type|) |$env|)))
+           (#1='T
+            (|putIntSymTab| |i| '|value| (|objNewWrap| |val| |type|) |$env|)))
           (SETQ |bfVar#66| (CDR |bfVar#66|))
           (SETQ |bfVar#67| (CDR |bfVar#67|))
           (SETQ |bfVar#68| (CDR |bfVar#68|))))

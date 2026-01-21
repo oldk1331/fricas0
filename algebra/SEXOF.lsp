@@ -240,10 +240,10 @@
               |car| 188 |atom?| 193 = 198 |#| 204)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0))
-                 (CONS '#(NIL |SetCategory&| |Hashable&| |BasicType&| NIL)
+                 (CONS '#(NIL |Hashable&| |SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SExpressionCategory| 6 7 8 9) (|SetCategory|)
-                           (|Hashable|) (|BasicType|) (|CoercibleTo| 14))
+                        '#((|SExpressionCategory| 6 7 8 9) (|Hashable|)
+                           (|SetCategory|) (|CoercibleTo| 14) (|BasicType|))
                         (|makeByteWordVec2| 59
                                             '(1 14 0 13 15 1 14 0 17 18 2 23 0
                                               0 0 24 1 14 0 13 25 1 14 0 0 26 1
@@ -254,10 +254,10 @@
                                               36 1 0 11 0 12 1 0 11 0 37 1 0 17
                                               0 1 1 0 11 0 39 1 0 8 0 44 2 0 57
                                               57 0 58 1 0 59 0 1 1 0 11 0 40 1
-                                              0 9 0 43 2 0 11 0 0 35 2 0 0 0 55
-                                              56 2 0 0 0 51 54 1 0 13 0 21 1 0
-                                              0 8 48 1 0 0 9 49 1 0 0 6 46 1 0
-                                              0 7 47 1 0 0 13 45 1 0 14 0 22 1
-                                              0 0 0 20 1 0 0 0 50 1 0 11 0 19 2
-                                              0 11 0 0 34 1 0 51 0 52)))))
+                                              0 9 0 43 2 0 11 0 0 35 2 0 0 0 51
+                                              54 2 0 0 0 55 56 1 0 13 0 21 1 0
+                                              0 13 45 1 0 0 7 47 1 0 0 6 46 1 0
+                                              0 9 49 1 0 0 8 48 1 0 14 0 22 1 0
+                                              0 0 20 1 0 0 0 50 1 0 11 0 19 2 0
+                                              11 0 0 34 1 0 51 0 52)))))
            '|lookupComplete|)) 

@@ -12,5 +12,3 @@
              (LETT #1#
                    (|Join| (|NonAssociativeSemiRing|) (|SemiRng|) (|Monoid|)))
            (SETELT #1# 0 '(|SemiRing|))))) 
-
-(MAKEPROP '|SemiRing| 'NILADIC T) 

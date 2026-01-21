@@ -340,8 +340,8 @@
               (|Commutator|) (98 . |mkcomm|) (103 . |mkcomm|) (109 . =)
               (|OutputForm|) (115 . |coerce|) (120 . |coerce|) (125 . |coerce|)
               (130 . *) (136 . |coerce|) |FNLA;shallowExpand;%Of;9| (141 . +)
-              |FNLA;deepExpand;%Of;10| (|PositiveInteger|)
-              (|Union| % '"failed") (|String|))
+              |FNLA;deepExpand;%Of;10| (|String|) (|PositiveInteger|)
+              (|Union| % '"failed"))
            '#(~= 147 |zero?| 153 |subtractIfCan| 158 |shallowExpand| 164
               |sample| 169 |rightPower| 173 |plenaryPower| 179 |opposite?| 185
               |leftPower| 191 |latex| 197 |generator| 202 |dimension| 207
@@ -350,18 +350,17 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|NonAssociativeAlgebra&| |Module&| NIL
-                     |NonAssociativeRng&| NIL NIL |AbelianGroup&| NIL
-                     |NonAssociativeSemiRng&| |AbelianMonoid&|
-                     |AbelianSemiGroup&| |Magma&| |SetCategory&| |BasicType&|
-                     NIL)
+                  '#(|NonAssociativeAlgebra&| |Module&| NIL NIL NIL
+                     |NonAssociativeRng&| |AbelianGroup&| NIL |AbelianMonoid&|
+                     |NonAssociativeSemiRng&| |Magma&| |AbelianSemiGroup&|
+                     |SetCategory&| NIL |BasicType&|)
                   (CONS
                    '#((|NonAssociativeAlgebra| 8) (|Module| 8) (|BiModule| 8 8)
-                      (|NonAssociativeRng|) (|RightModule| 8) (|LeftModule| 8)
+                      (|LeftModule| 8) (|RightModule| 8) (|NonAssociativeRng|)
                       (|AbelianGroup|) (|CancellationAbelianMonoid|)
-                      (|NonAssociativeSemiRng|) (|AbelianMonoid|)
-                      (|AbelianSemiGroup|) (|Magma|) (|SetCategory|)
-                      (|BasicType|) (|CoercibleTo| 43))
+                      (|AbelianMonoid|) (|NonAssociativeSemiRng|) (|Magma|)
+                      (|AbelianSemiGroup|) (|SetCategory|) (|CoercibleTo| 43)
+                      (|BasicType|))
                    (|makeByteWordVec2| 54
                                        '(2 12 10 11 11 13 2 10 16 0 17 18 2 16
                                          17 0 17 19 0 0 0 20 1 21 0 17 22 0 8 0
@@ -373,13 +372,13 @@
                                          8 27 0 0 42 1 21 43 0 44 1 39 43 0 45
                                          1 8 43 0 46 2 43 0 0 0 47 1 11 43 0 48
                                          2 43 0 0 0 50 2 0 27 0 0 1 1 0 27 0 1
-                                         2 0 53 0 0 1 1 0 43 0 49 0 0 0 1 2 0 0
-                                         0 52 1 2 0 0 0 52 1 2 0 27 0 0 1 2 0 0
-                                         0 52 1 1 0 54 0 1 1 0 0 11 26 0 0 11
+                                         2 0 54 0 0 1 1 0 43 0 49 0 0 0 1 2 0 0
+                                         0 53 1 2 0 0 0 53 1 2 0 27 0 0 1 2 0 0
+                                         0 53 1 1 0 52 0 1 1 0 0 11 26 0 0 11
                                          15 1 0 43 0 51 2 0 0 0 0 1 1 0 43 0 1
-                                         3 0 0 0 0 0 1 2 0 0 0 0 1 2 0 0 0 52 1
-                                         0 0 0 20 2 0 27 0 0 28 2 0 0 0 0 36 1
-                                         0 0 0 34 2 0 0 0 0 37 2 0 0 0 8 1 2 0
-                                         0 8 0 33 2 0 0 11 0 1 2 0 0 17 0 1 2 0
-                                         0 0 0 38 2 0 0 52 0 1)))))
+                                         3 0 0 0 0 0 1 2 0 0 0 0 1 2 0 0 0 53 1
+                                         0 0 0 20 2 0 27 0 0 28 1 0 0 0 34 2 0
+                                         0 0 0 36 2 0 0 0 0 37 2 0 0 53 0 1 2 0
+                                         0 0 0 38 2 0 0 17 0 1 2 0 0 11 0 1 2 0
+                                         0 8 0 33 2 0 0 0 8 1)))))
            '|lookupComplete|)) 

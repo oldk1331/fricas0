@@ -82,7 +82,7 @@
 
 (DEFUN |Boolean| ()
   (SPROG NIL
-         (PROG (#1=#:G286)
+         (PROG (#1=#:G284)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Boolean|))
@@ -123,8 +123,8 @@
               |BOOLEAN;index;Pi%;18| |BOOLEAN;lookup;%Pi;19|
               |BOOLEAN;random;%;20| (|Symbol|) (|InputForm|) (0 . |convert|)
               |BOOLEAN;convert;%If;21| (|String|) (|OutputForm|)
-              (5 . |message|) |BOOLEAN;coerce;%Of;22| (|HashState|)
-              (|SingleInteger|) (|List| %))
+              (5 . |message|) |BOOLEAN;coerce;%Of;22| (|List| %)
+              (|SingleInteger|) (|HashState|))
            '#(~= 10 ~ 16 |xor| 21 |true| 27 |test| 31 |smaller?| 36 |size| 42
               |random| 46 |or| 50 |not| 56 |nor| 61 |nand| 67 |min| 73 |max| 79
               |lookup| 85 |latex| 90 |index| 95 |implies| 100 |hashUpdate!| 106
@@ -134,17 +134,17 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|Logic&| NIL NIL NIL |OrderedSet&| NIL NIL NIL |Finite&|
-                     NIL NIL NIL |Hashable&| |SetCategory&| NIL |BasicType&|
-                     |PartialOrder&| NIL)
+                  '#(|Logic&| NIL NIL NIL |Finite&| NIL NIL NIL |OrderedSet&|
+                     NIL NIL NIL |SetCategory&| |Hashable&| NIL |PartialOrder&|
+                     |BasicType&| NIL)
                   (CONS
                    '#((|Logic|) (|BoundedDistributiveLattice|)
-                      (|DistributiveLattice|) (|BoundedLattice|) (|OrderedSet|)
-                      (|Lattice|) (|BoundedJoinSemilattice|)
-                      (|BoundedMeetSemilattice|) (|Finite|) (|Comparable|)
-                      (|JoinSemilattice|) (|MeetSemilattice|) (|Hashable|)
-                      (|SetCategory|) (|ConvertibleTo| 29) (|BasicType|)
-                      (|PartialOrder|) (|CoercibleTo| 33))
+                      (|BoundedLattice|) (|DistributiveLattice|) (|Finite|)
+                      (|BoundedMeetSemilattice|) (|BoundedJoinSemilattice|)
+                      (|Lattice|) (|OrderedSet|) (|MeetSemilattice|)
+                      (|JoinSemilattice|) (|Comparable|) (|SetCategory|)
+                      (|Hashable|) (|CoercibleTo| 33) (|PartialOrder|)
+                      (|BasicType|) (|ConvertibleTo| 29))
                    (|makeByteWordVec2| 38
                                        '(1 29 0 28 30 1 33 0 32 34 2 0 6 0 0 1
                                          1 0 0 0 11 2 0 0 0 0 16 0 0 0 8 1 0 6
@@ -152,11 +152,9 @@
                                          0 0 0 14 1 0 0 0 10 2 0 0 0 0 17 2 0 0
                                          0 0 18 2 0 0 0 0 1 2 0 0 0 0 1 1 0 24
                                          0 26 1 0 32 0 1 1 0 0 24 25 2 0 0 0 0
-                                         20 2 0 36 36 0 1 1 0 37 0 1 0 0 0 9 0
-                                         0 38 1 1 0 29 0 31 1 0 33 0 35 2 0 0 0
+                                         20 2 0 38 38 0 1 1 0 37 0 1 0 0 0 9 0
+                                         0 36 1 1 0 29 0 31 1 0 33 0 35 2 0 0 0
                                          0 12 0 0 0 1 2 0 0 0 0 15 0 0 0 1 2 0
                                          6 0 0 1 2 0 6 0 0 1 2 0 6 0 0 19 2 0 6
                                          0 0 1 2 0 6 0 0 21 2 0 0 0 0 13)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|Boolean| 'NILADIC T) 

@@ -41,7 +41,7 @@
         (SETELT_I32 |x| |i| |s|)) 
 
 (SDEFUN |I32VEC;fill!;%I%;9| ((|x| (%)) (|s| (|Integer|)) (% (%)))
-        (SPROG ((#1=#:G2490 NIL) (|i| NIL))
+        (SPROG ((#1=#:G2494 NIL) (|i| NIL))
                (SEQ
                 (SEQ (LETT |i| 0) (LETT #1# (|sub_SI| (QV_LEN_I32 |x|) 1)) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -53,7 +53,7 @@
 
 (DEFUN |I32Vector| ()
   (SPROG NIL
-         (PROG (#1=#:G2502)
+         (PROG (#1=#:G2506)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|I32Vector|))
@@ -70,7 +70,7 @@
 
 (DEFUN |I32Vector;| ()
   (SPROG
-   ((|dv$| NIL) (% NIL) (#1=#:G2500 NIL) (#2=#:G2499 NIL) (#3=#:G2498 NIL)
+   ((|dv$| NIL) (% NIL) (#1=#:G2504 NIL) (#2=#:G2503 NIL) (#3=#:G2502 NIL)
     (|pv$| NIL))
    (PROGN
     (LETT |dv$| '(|I32Vector|))
@@ -180,11 +180,11 @@
               (|Integer|) |I32VEC;minIndex;%I;2| |I32VEC;empty;%;3|
               |I32VEC;new;NniI%;4| |I32VEC;qelt;%2I;5| |I32VEC;elt;%2I;6|
               |I32VEC;qsetelt!;%3I;7| |I32VEC;setelt!;%3I;8|
-              |I32VEC;fill!;%I%;9| (|List| 8) (|List| 19) (|Equation| 8)
-              (|Mapping| 8 8 8) (|Boolean|) (|SingleInteger|) (|HashState|)
-              (|Mapping| 21 8 8) (|OutputForm|) (|String|) (|InputForm|)
-              (|Mapping| 21 8) (|UniversalSegment| 8) (|Void|) (|Mapping| 8 8)
-              (|List| %) (|Union| 8 '"failed"))
+              |I32VEC;fill!;%I%;9| (|Boolean|) (|Mapping| 8 8) (|List| 8)
+              (|Union| 8 '"failed") (|Mapping| 17 8) (|UniversalSegment| 8)
+              (|List| %) (|Mapping| 8 8 8) (|Mapping| 17 8 8) (|HashState|)
+              (|SingleInteger|) (|Equation| 8) (|List| 28) (|OutputForm|)
+              (|String|) (|Void|) (|InputForm|))
            '#(~= 0 |trim| 6 |swap!| 12 |sorted?| 19 |sort!| 30 |sort| 41
               |smaller?| 52 |size?| 58 |setelt!| 64 |select| 78 |sample| 84
               |rightTrim| 88 |reverse!| 94 |reverse| 99 |removeDuplicates| 104
@@ -201,53 +201,51 @@
            'NIL
            (CONS
             (|makeByteWordVec2| 12
-                                '(0 0 0 0 0 1 0 6 0 0 8 9 2 0 0 0 0 0 8 12 1 10
-                                  3))
+                                '(0 0 0 1 0 0 6 0 2 9 8 0 0 3 10 1 12 8 0 0 0 0
+                                  0))
             (CONS
              '#(|OneDimensionalArrayAggregate&| NIL |LinearAggregate&|
-                |IndexedAggregate&| |Collection&| |OrderedSet&|
-                |HomogeneousAggregate&| NIL |Aggregate&| |EltableAggregate&|
-                |Evalable&| |SetCategory&| |Hashable&| NIL NIL NIL NIL NIL
-                |InnerEvalable&| NIL |PartialOrder&| |BasicType&| NIL)
+                |OrderedSet&| |Collection&| |IndexedAggregate&| NIL
+                |HomogeneousAggregate&| |Hashable&| |SetCategory&| |Evalable&|
+                |EltableAggregate&| |Aggregate&| NIL |BasicType&|
+                |PartialOrder&| NIL |InnerEvalable&| NIL NIL NIL NIL NIL)
              (CONS
               '#((|OneDimensionalArrayAggregate| 8) (|FiniteLinearAggregate| 8)
-                 (|LinearAggregate| 8) (|IndexedAggregate| 8 8)
-                 (|Collection| 8) (|OrderedSet|) (|HomogeneousAggregate| 8)
-                 (|Comparable|) (|Aggregate|) (|EltableAggregate| 8 8)
-                 (|Evalable| 8) (|SetCategory|) (|Hashable|)
-                 (|shallowlyMutable|) (|finiteAggregate|) (|Eltable| 29 $$)
-                 (|Type|) (|Eltable| 8 8) (|InnerEvalable| 8 8)
-                 (|CoercibleTo| 25) (|PartialOrder|) (|BasicType|)
-                 (|ConvertibleTo| 27))
+                 (|LinearAggregate| 8) (|OrderedSet|) (|Collection| 8)
+                 (|IndexedAggregate| 8 8) (|Comparable|)
+                 (|HomogeneousAggregate| 8) (|Hashable|) (|SetCategory|)
+                 (|Evalable| 8) (|EltableAggregate| 8 8) (|Aggregate|)
+                 (|ConvertibleTo| 33) (|BasicType|) (|PartialOrder|)
+                 (|CoercibleTo| 30) (|InnerEvalable| 8 8) (|Eltable| 8 8)
+                 (|Type|) (|Eltable| 22 $$) (|finiteAggregate|)
+                 (|shallowlyMutable|))
               (|makeByteWordVec2| 33
-                                  '(2 23 21 0 0 1 2 15 0 0 8 1 3 13 30 0 8 8 1
-                                    1 18 21 0 1 2 14 21 24 0 1 1 17 0 0 1 2 16
-                                    0 24 0 1 1 18 0 0 1 2 14 0 24 0 1 2 19 21 0
-                                    0 1 2 0 21 0 6 1 3 13 8 0 29 8 1 3 13 8 0 8
-                                    8 15 2 14 0 28 0 1 0 0 0 1 2 15 0 0 8 1 1
+                                  '(2 23 17 0 0 1 2 15 0 0 8 1 3 13 32 0 8 8 1
+                                    1 18 17 0 1 2 14 17 25 0 1 2 16 0 25 0 1 1
+                                    17 0 0 1 1 18 0 0 1 2 14 0 25 0 1 2 19 17 0
+                                    0 1 2 0 17 0 6 1 3 13 8 0 8 8 15 3 13 8 0
+                                    22 8 1 2 14 0 21 0 1 0 0 0 1 2 15 0 0 8 1 1
                                     16 0 0 1 1 14 0 0 1 1 15 0 0 1 2 15 0 8 0 1
-                                    2 14 0 28 0 1 4 15 8 20 0 8 8 1 2 14 8 20 0
-                                    1 3 14 8 20 0 8 1 3 13 8 0 8 8 14 2 0 8 0 8
-                                    12 2 15 8 8 0 1 3 15 8 8 0 8 1 2 14 8 28 0
-                                    1 1 14 17 0 1 2 0 0 6 8 11 2 0 21 0 6 1 1 1
-                                    8 0 9 2 18 0 0 0 1 1 18 8 0 1 2 18 0 0 0 1
-                                    3 14 0 24 0 0 1 1 14 17 0 1 2 15 21 8 0 1 1
-                                    1 8 0 1 2 18 0 0 0 1 1 18 8 0 1 2 14 8 24 0
-                                    1 2 13 0 31 0 1 3 0 0 20 0 0 1 2 0 0 31 0 1
-                                    2 0 21 0 6 1 2 15 0 0 8 1 1 20 26 0 1 3 0 0
-                                    0 0 8 1 3 0 0 8 0 8 1 1 0 17 0 1 2 0 21 8 0
-                                    1 2 22 23 23 0 1 1 22 22 0 1 1 1 8 0 1 2 0
-                                    0 0 6 1 2 0 33 28 0 1 2 13 0 0 8 16 2 14 21
-                                    28 0 1 3 8 0 0 8 8 1 3 8 0 0 17 17 1 2 8 0
-                                    0 18 1 2 8 0 0 19 1 2 0 21 0 0 1 2 15 21 8
-                                    0 1 1 0 17 0 1 1 0 21 0 1 0 0 0 10 2 0 0 0
-                                    29 1 2 0 8 0 8 13 3 0 8 0 8 8 1 2 0 0 0 29
-                                    1 2 0 0 0 8 1 2 15 6 8 0 1 2 14 6 28 0 1 3
-                                    16 0 0 0 8 1 1 0 0 0 1 1 3 27 0 1 1 0 0 17
-                                    1 1 0 0 32 1 2 0 0 8 0 1 2 0 0 0 0 1 2 0 0
-                                    0 8 1 1 21 25 0 1 2 14 21 28 0 1 2 18 21 0
-                                    0 1 2 18 21 0 0 1 2 23 21 0 0 1 2 18 21 0 0
-                                    1 2 18 21 0 0 1 1 14 6 0 7)))))
+                                    2 14 0 21 0 1 4 15 8 24 0 8 8 1 3 14 8 24 0
+                                    8 1 2 14 8 24 0 1 3 13 8 0 8 8 14 2 0 8 0 8
+                                    12 3 15 8 8 0 8 1 2 15 8 8 0 1 2 14 8 21 0
+                                    1 1 14 19 0 1 2 0 0 6 8 11 2 0 17 0 6 1 1 1
+                                    8 0 9 1 18 8 0 1 2 18 0 0 0 1 2 18 0 0 0 1
+                                    3 14 0 25 0 0 1 1 14 19 0 1 2 15 17 8 0 1 1
+                                    1 8 0 1 1 18 8 0 1 2 18 0 0 0 1 2 14 8 25 0
+                                    1 2 13 0 18 0 1 2 0 0 18 0 1 3 0 0 24 0 0 1
+                                    2 0 17 0 6 1 2 15 0 0 8 1 1 20 31 0 1 3 0 0
+                                    8 0 8 1 3 0 0 0 0 8 1 1 0 19 0 1 2 0 17 8 0
+                                    1 2 22 26 26 0 1 1 22 27 0 1 2 0 0 0 6 1 1
+                                    1 8 0 1 2 0 20 21 0 1 2 13 0 0 8 16 2 14 17
+                                    21 0 1 2 8 0 0 28 1 2 8 0 0 29 1 3 8 0 0 19
+                                    19 1 3 8 0 0 8 8 1 2 0 17 0 0 1 2 15 17 8 0
+                                    1 1 0 19 0 1 1 0 17 0 1 0 0 0 10 3 0 8 0 8
+                                    8 1 2 0 8 0 8 13 2 0 0 0 22 1 2 0 0 0 8 1 2
+                                    0 0 0 22 1 2 15 6 8 0 1 2 14 6 21 0 1 3 16
+                                    0 0 0 8 1 1 0 0 0 1 1 3 33 0 1 1 0 0 19 1 2
+                                    0 0 0 8 1 2 0 0 0 0 1 2 0 0 8 0 1 1 0 0 23
+                                    1 1 21 30 0 1 2 14 17 21 0 1 2 18 17 0 0 1
+                                    2 18 17 0 0 1 2 23 17 0 0 1 2 18 17 0 0 1 2
+                                    18 17 0 0 1 1 14 6 0 7)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|I32Vector| 'NILADIC T) 

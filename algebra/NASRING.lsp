@@ -14,5 +14,3 @@
                    (|Join| (|NonAssociativeSemiRng|) (|AbelianMonoid|)
                            (|MagmaWithUnit|)))
            (SETELT #1# 0 '(|NonAssociativeSemiRing|))))) 
-
-(MAKEPROP '|NonAssociativeSemiRing| 'NILADIC T) 

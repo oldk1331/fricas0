@@ -65,5 +65,3 @@
                                             '(1 7 0 6 8 1 9 7 7 10 1 0 7 6
                                               11)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|SimplifyAlgebraicNumberConvertPackage| 'NILADIC T) 

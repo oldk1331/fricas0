@@ -191,27 +191,27 @@
               |ORDCOMP;coerce;%Of;9| (|SingleInteger|)
               |ORDCOMP;whatInfinity;%Si;10| (45 . |xor|) (51 . =)
               |ORDCOMP;=;2%B;11| (57 . -) (62 . -) (67 . +) (73 . +) (79 . <)
-              (85 . <) (91 . |rational?|) (|Fraction| 48) (96 . |rational|)
+              (85 . <) (91 . |rational?|) (|Fraction| 50) (96 . |rational|)
               (101 . |rational|) (|Union| 43 '"failed") (106 . |rationalIfCan|)
-              (|Integer|) (|Union| 48 '"failed") (|String|))
+              (|String|) (|Union| 50 '"failed") (|Integer|))
            '#(~= 111 |whatInfinity| 117 |smaller?| 122 |retractIfCan| 128
               |retract| 143 |rationalIfCan| 158 |rational?| 163 |rational| 168
               |plusInfinity| 173 |minusInfinity| 177 |min| 181 |max| 187
               |latex| 193 |infinite?| 198 |finite?| 203 |convert| 208 |coerce|
               213 >= 233 > 239 = 245 <= 251 < 257 - 263 + 268)
            'NIL
-           (CONS (|makeByteWordVec2| 4 '(4 0 4 0 0 1 2 0 0 0 1 2 3 4))
+           (CONS (|makeByteWordVec2| 4 '(4 4 0 2 1 0 0 4 3 2 1 0 0 0))
                  (CONS
-                  '#(|OrderedSet&| |FullyRetractableTo&| NIL |SetCategory&|
-                     |RetractableTo&| |RetractableTo&| |RetractableTo&|
-                     |BasicType&| NIL NIL NIL NIL NIL |PartialOrder&|)
+                  '#(|OrderedSet&| NIL |FullyRetractableTo&| |RetractableTo&|
+                     |RetractableTo&| |RetractableTo&| |SetCategory&|
+                     |PartialOrder&| NIL NIL NIL NIL NIL |BasicType&|)
                   (CONS
-                   '#((|OrderedSet|) (|FullyRetractableTo| 6) (|Comparable|)
-                      (|SetCategory|) (|RetractableTo| 6) (|RetractableTo| 43)
-                      (|RetractableTo| 48) (|BasicType|) (|CoercibleFrom| 6)
-                      (|CoercibleTo| 24) (|CoercibleFrom| 43)
-                      (|CoercibleFrom| 48) (|ConvertibleTo| 8)
-                      (|PartialOrder|))
+                   '#((|OrderedSet|) (|Comparable|) (|FullyRetractableTo| 6)
+                      (|RetractableTo| 50) (|RetractableTo| 43)
+                      (|RetractableTo| 6) (|SetCategory|) (|PartialOrder|)
+                      (|ConvertibleTo| 8) (|CoercibleFrom| 50)
+                      (|CoercibleFrom| 43) (|CoercibleTo| 24)
+                      (|CoercibleFrom| 6) (|BasicType|))
                    (|makeByteWordVec2| 50
                                        '(1 6 8 0 9 1 8 0 10 11 1 8 0 12 13 1 0
                                          8 0 14 1 6 24 0 25 1 10 24 0 26 0 24 0
@@ -220,14 +220,14 @@
                                          37 2 6 0 0 0 38 2 0 0 0 0 39 2 6 17 0
                                          0 40 2 0 17 0 0 41 1 0 17 0 42 1 6 43
                                          0 44 1 0 43 0 45 1 0 46 0 47 2 0 17 0
-                                         0 1 1 0 31 0 32 2 4 17 0 0 1 1 1 46 0
-                                         1 1 2 49 0 1 1 0 22 0 23 1 1 43 0 1 1
-                                         2 48 0 1 1 0 6 0 16 1 7 46 0 47 1 7 17
+                                         0 1 1 0 31 0 32 2 4 17 0 0 1 1 0 22 0
+                                         23 1 1 46 0 1 1 2 49 0 1 1 0 6 0 16 1
+                                         1 43 0 1 1 2 50 0 1 1 7 46 0 47 1 7 17
                                          0 42 1 7 43 0 45 0 0 0 20 0 0 0 21 2 4
-                                         0 0 0 1 2 4 0 0 0 1 1 0 50 0 1 1 0 17
-                                         0 19 1 0 17 0 18 1 3 8 0 14 1 1 0 43 1
-                                         1 2 0 48 1 1 0 0 6 15 1 0 24 0 30 2 4
-                                         17 0 0 1 2 4 17 0 0 1 2 0 17 0 0 35 2
-                                         4 17 0 0 1 2 4 17 0 0 41 1 6 0 0 37 2
-                                         5 0 0 0 39)))))
+                                         0 0 0 1 2 4 0 0 0 1 1 0 48 0 1 1 0 17
+                                         0 19 1 0 17 0 18 1 3 8 0 14 1 0 24 0
+                                         30 1 0 0 6 15 1 1 0 43 1 1 2 0 50 1 2
+                                         4 17 0 0 1 2 4 17 0 0 1 2 0 17 0 0 35
+                                         2 4 17 0 0 1 2 4 17 0 0 41 1 6 0 0 37
+                                         2 5 0 0 0 39)))))
            '|lookupComplete|)) 

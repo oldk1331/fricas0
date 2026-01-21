@@ -27,5 +27,3 @@
                                T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|FieldOfPrimeCharacteristic|))))) 
-
-(MAKEPROP '|FieldOfPrimeCharacteristic| 'NILADIC T) 

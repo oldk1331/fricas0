@@ -232,15 +232,15 @@
                     (|:| |poly| (|List| (|SparseUnivariatePolynomial| F)))
                     (|:| |prim| (|SparseUnivariatePolynomial| F)))))
         (SPROG
-         ((#1=#:G129 NIL) (#2=#:G130 NIL)
+         ((#1=#:G121 NIL) (#2=#:G122 NIL)
           (|ltt| (|List| (|SparseUnivariatePolynomial| F)))
           (|tt| (|Union| (|List| (|SparseUnivariatePolynomial| F)) "failed"))
-          (#3=#:G119 NIL) (#4=#:G118 #5=(|Polynomial| F)) (#6=#:G120 #5#)
-          (#7=#:G133 NIL) (|c| NIL) (#8=#:G134 NIL) (|t| NIL)
+          (#3=#:G111 NIL) (#4=#:G110 #5=(|Polynomial| F)) (#6=#:G112 #5#)
+          (#7=#:G125 NIL) (|c| NIL) (#8=#:G126 NIL) (|t| NIL)
           (|cf| (|List| (|Integer|))) (|i| NIL) (|n| (|NonNegativeInteger|))
           (|w| (|Polynomial| F)) (|elim| (|List| (|Symbol|)))
-          (|vv| (|List| (|Polynomial| F))) (#9=#:G132 NIL) (|v| NIL)
-          (#10=#:G131 NIL))
+          (|vv| (|List| (|Polynomial| F))) (#9=#:G124 NIL) (|v| NIL)
+          (#10=#:G123 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -325,17 +325,17 @@
                                           (LETT #2#
                                                 (VECTOR |cf| (CDR |ltt|)
                                                         (|SPADfirst| |ltt|)))
-                                          (GO #11=#:G128)))))
-                             (GO #12=#:G125)))))))
+                                          (GO #11=#:G120)))))
+                             (GO #12=#:G117)))))))
                    #12# (EXIT #1#))
                   (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL)))))
           #11# (EXIT #2#)))) 
 
 (DECLAIM (NOTINLINE |PrimitiveElement;|)) 
 
-(DEFUN |PrimitiveElement| (#1=#:G135)
+(DEFUN |PrimitiveElement| (#1=#:G127)
   (SPROG NIL
-         (PROG (#2=#:G136)
+         (PROG (#2=#:G128)
            (RETURN
             (COND
              ((LETT #2#
@@ -444,7 +444,7 @@
                                               8 0 49 3 8 51 0 0 0 52 0 8 0 53 2
                                               45 11 0 25 54 2 8 0 0 0 55 1 8 0
                                               0 56 2 8 0 0 0 57 2 16 0 0 10 58
-                                              2 11 0 0 0 59 2 60 22 22 16 61 4
-                                              0 40 11 10 11 10 41 3 0 21 22 16
-                                              10 23 2 0 21 22 16 24)))))
+                                              2 11 0 0 0 59 2 60 22 22 16 61 2
+                                              0 21 22 16 24 3 0 21 22 16 10 23
+                                              4 0 40 11 10 11 10 41)))))
            '|lookupComplete|)) 

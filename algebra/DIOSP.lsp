@@ -445,5 +445,3 @@
                                               11 0 17 11 41 1 19 0 0 42 2 43 0
                                               0 0 44 1 0 24 7 25)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|DiophantineSolutionPackage| 'NILADIC T) 

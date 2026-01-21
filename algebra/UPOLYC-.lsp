@@ -1124,7 +1124,7 @@
               (32 . |eval|) (|List| 7) |UPOLYC-;eval;SLLS;7| (39 . |elt|)
               (45 . |coerce|) |UPOLYC-;eval;SSaosRS;8| (|Equation| 6)
               (50 . |lhs|) (|Union| 12 '#1="failed") (55 . |mainVariable|)
-              (60 . |rhs|) (|List| 194) |UPOLYC-;eval;SLS;9|
+              (60 . |rhs|) (|List| 195) |UPOLYC-;eval;SLS;9|
               |UPOLYC-;mainVariable;SU;10| (65 . |minimumDegree|)
               |UPOLYC-;minimumDegree;SSaosNni;11|
               |UPOLYC-;minimumDegree;SLL;12| (70 . +) (|Mapping| 10 10)
@@ -1187,9 +1187,9 @@
               (602 . |euclideanSize|) (607 . |inv|) (612 . *)
               (|Record| (|:| |quotient| %) (|:| |remainder| %))
               (618 . |divide|) (624 . ~=) (|Fraction| 101) (630 . |coerce|)
-              (635 . |inv|) (640 . *) (646 . |integrate|) (|List| 193)
-              (|Symbol|) (|Equation| %) (|Union| 187 '#5="failed")
-              (|Union| 101 '#5#) (|OutputForm|))
+              (635 . |inv|) (640 . *) (646 . |integrate|) (|OutputForm|)
+              (|Union| 101 '#5="failed") (|Union| 187 '#5#) (|Equation| %)
+              (|List| 197) (|Symbol|))
            '#(|vectorise| 651 |variables| 657 |unvectorise| 662 |unmakeSUP| 667
               |totalDegree| 672 |squareFreePolynomial| 678 |squareFreePart| 683
               |squareFree| 688 |solveLinearPolynomialEquation| 693 |separate|
@@ -1508,18 +1508,18 @@
                                               7 0 108 2 0 0 0 0 136 2 0 0 0 0
                                               145 2 0 146 0 0 147 2 0 10 0 0
                                               163 1 0 113 0 115 3 0 0 0 12 10
-                                              46 2 0 10 0 12 41 2 0 19 0 14 42
+                                              46 2 0 19 0 14 42 2 0 10 0 12 41
                                               1 0 51 0 58 1 0 34 0 39 1 0 0 0
                                               191 0 0 0 112 2 0 74 74 74 175 1
                                               0 78 74 81 1 0 78 74 79 1 0 82 0
-                                              99 2 0 0 0 37 38 3 0 0 0 12 0 25
-                                              3 0 0 0 14 22 23 3 0 0 0 14 27 28
-                                              3 0 0 0 12 7 31 1 0 10 0 181 2 0
-                                              139 0 139 162 2 0 7 139 7 180 2 0
-                                              139 139 139 143 2 0 184 0 0 185 1
-                                              0 0 0 130 2 0 0 0 125 129 3 0 0 0
-                                              125 0 126 2 0 0 0 12 132 2 0 10 0
-                                              12 16 2 0 19 0 14 20 2 0 0 0 12
-                                              117 2 0 150 139 0 151 2 0 113 0 0
-                                              155 1 0 0 12 50)))))
+                                              99 3 0 0 0 12 7 31 3 0 0 0 14 27
+                                              28 3 0 0 0 14 22 23 3 0 0 0 12 0
+                                              25 2 0 0 0 37 38 1 0 10 0 181 2 0
+                                              139 139 139 143 2 0 7 139 7 180 2
+                                              0 139 0 139 162 2 0 184 0 0 185 2
+                                              0 0 0 12 132 3 0 0 0 125 0 126 2
+                                              0 0 0 125 129 1 0 0 0 130 2 0 19
+                                              0 14 20 2 0 10 0 12 16 2 0 0 0 12
+                                              117 2 0 113 0 0 155 2 0 150 139 0
+                                              151 1 0 0 12 50)))))
            '|lookupComplete|)) 

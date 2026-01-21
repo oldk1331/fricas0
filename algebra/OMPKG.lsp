@@ -121,5 +121,3 @@
                                               0 11 7 23 1 0 11 7 21 1 0 11 14
                                               15 1 0 24 7 26 0 0 24 25)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|OpenMathPackage| 'NILADIC T) 

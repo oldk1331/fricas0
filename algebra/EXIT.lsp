@@ -47,12 +47,10 @@
               (|Boolean|) |EXIT;=;2%B;2| (|String|))
            '#(~= 0 |latex| 6 |coerce| 11 = 16) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 6))
+                        '#((|SetCategory|) (|CoercibleTo| 6) (|BasicType|))
                         (|makeByteWordVec2| 10
                                             '(2 0 8 0 0 1 1 0 10 0 1 1 0 6 0 7
                                               2 0 8 0 0 9)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|Exit| 'NILADIC T) 

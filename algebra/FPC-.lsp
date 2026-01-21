@@ -39,6 +39,6 @@
                               '((|primeFrobenius| (|#1| |#1|)) T))
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 11
-                                            '(0 6 7 8 2 6 0 0 7 9 1 0 0 0 10 2
-                                              0 0 0 7 11)))))
+                                            '(0 6 7 8 2 6 0 0 7 9 2 0 0 0 7 11
+                                              1 0 0 0 10)))))
            '|lookupComplete|)) 

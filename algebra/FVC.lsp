@@ -24,5 +24,3 @@
                                T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|FortranVectorCategory|))))) 
-
-(MAKEPROP '|FortranVectorCategory| 'NILADIC T) 

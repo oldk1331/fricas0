@@ -2818,5 +2818,3 @@
                                               52 62 62 76 76 85 1 0 115 0 142 1
                                               0 143 0 154)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|PlaneAlgebraicCurvePlot| 'NILADIC T) 

@@ -45,9 +45,9 @@
               |ULSCCAT-;zero?;SB;1| (10 . |taylor|) |ULSCCAT-;retract;SUTS;2|
               (|Union| 8 '"failed") (15 . |taylorIfCan|)
               |ULSCCAT-;retractIfCan;SU;3| (|Stream| 7) (20 . |series|)
-              (|Integer|) (25 . |laurent|) |ULSCCAT-;laurent;ISS;4| (|Symbol|)
-              (|Union| 23 '#1="failed") (|Union| 26 '#1#) (|Fraction| 20)
-              (|Union| 20 '#1#))
+              (|Integer|) (25 . |laurent|) |ULSCCAT-;laurent;ISS;4|
+              (|Union| 20 '#1="failed") (|Fraction| 20) (|Union| 24 '#1#)
+              (|Union| 27 '#1#) (|Symbol|))
            '#(|zero?| 31 |retractIfCan| 36 |retract| 41 |laurent| 46) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

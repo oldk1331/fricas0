@@ -137,41 +137,41 @@
               (42 . +) (48 . *) |LO;+;3%;8| (|Integer|) (54 . *) |LO;*;I2%;9|
               (60 . =) |LO;*;R2%;10| (66 . |zero?|) |LO;/;%R%;11| |LO;/;MR%;12|
               (|OutputForm|) (71 . |coerce|) (76 . |coerce|) (81 . /)
-              |LO;coerce;%Of;13| (|Union| % '"failed") (|NonNegativeInteger|)
-              (|PositiveInteger|) (|String|))
+              |LO;coerce;%Of;13| (|String|) (|PositiveInteger|)
+              (|Union| % '"failed") (|NonNegativeInteger|))
            '#(~= 87 |zero?| 93 |subtractIfCan| 98 |smaller?| 104 |sample| 110
               |opposite?| 114 |numer| 120 |min| 125 |max| 131 |latex| 137
               |denom| 142 |coerce| 147 |Zero| 152 >= 156 > 162 = 168 <= 174 <
               180 / 186 - 198 + 209 * 215)
            'NIL
-           (CONS (|makeByteWordVec2| 3 '(0 0 1 0 0 1 1 3 1 3 1 2 0 1 0 0 0 1))
+           (CONS (|makeByteWordVec2| 3 '(0 1 0 1 0 0 3 1 3 1 2 1 1 0 0 1 0 0))
                  (CONS
-                  '#(|Module&| NIL NIL NIL NIL NIL NIL |AbelianGroup&| NIL NIL
-                     |OrderedSet&| |AbelianMonoid&| |AbelianSemiGroup&| NIL
-                     |SetCategory&| |BasicType&| NIL |PartialOrder&|)
+                  '#(|Module&| NIL NIL NIL NIL NIL |AbelianGroup&| NIL NIL NIL
+                     |AbelianMonoid&| |OrderedSet&| NIL |AbelianSemiGroup&|
+                     |SetCategory&| |PartialOrder&| NIL |BasicType&|)
                   (CONS
-                   '#((|Module| 7) (|BiModule| 7 7) (|OrderedAbelianGroup|)
-                      (|LeftModule| 7) (|RightModule| 7)
-                      (|OrderedCancellationAbelianMonoid|)
-                      (|OrderedAbelianMonoid|) (|AbelianGroup|)
-                      (|OrderedAbelianSemiGroup|) (|CancellationAbelianMonoid|)
-                      (|OrderedSet|) (|AbelianMonoid|) (|AbelianSemiGroup|)
-                      (|Comparable|) (|SetCategory|) (|BasicType|)
-                      (|CoercibleTo| 35) (|PartialOrder|))
+                   '#((|Module| 7) (|OrderedAbelianGroup|) (|BiModule| 7 7)
+                      (|OrderedCancellationAbelianMonoid|) (|RightModule| 7)
+                      (|LeftModule| 7) (|AbelianGroup|)
+                      (|OrderedAbelianMonoid|) (|CancellationAbelianMonoid|)
+                      (|OrderedAbelianSemiGroup|) (|AbelianMonoid|)
+                      (|OrderedSet|) (|Comparable|) (|AbelianSemiGroup|)
+                      (|SetCategory|) (|PartialOrder|) (|CoercibleTo| 35)
+                      (|BasicType|))
                    (|makeByteWordVec2| 43
                                        '(0 6 0 10 0 7 0 11 1 6 12 0 13 1 6 0 0
                                          15 2 6 0 7 0 17 2 6 12 0 0 18 2 6 12 0
                                          0 22 2 0 12 0 0 23 2 6 0 0 0 24 2 7 0
                                          0 0 25 2 6 0 27 0 28 2 7 12 0 0 30 1 7
                                          12 0 32 1 6 35 0 36 1 7 35 0 37 2 35 0
-                                         0 0 38 2 0 12 0 0 1 1 4 12 0 14 2 3 40
+                                         0 0 38 2 0 12 0 0 1 1 4 12 0 14 2 3 42
                                          0 0 1 2 1 12 0 0 1 0 4 0 1 2 4 12 0 0
                                          1 1 0 6 0 20 2 1 0 0 0 1 2 1 0 0 0 1 1
-                                         0 43 0 1 1 0 7 0 21 1 0 35 0 39 0 4 0
+                                         0 40 0 1 1 0 7 0 21 1 0 35 0 39 0 4 0
                                          9 2 1 12 0 0 1 2 1 12 0 0 1 2 0 12 0 0
-                                         19 2 1 12 0 0 1 2 1 12 0 0 23 2 0 0 6
-                                         7 34 2 0 0 0 7 33 1 3 0 0 16 2 3 0 0 0
-                                         1 2 0 0 0 0 26 2 3 0 27 0 29 2 4 0 41
-                                         0 1 2 0 0 0 7 1 2 0 0 7 0 31 2 0 0 42
+                                         19 2 1 12 0 0 1 2 1 12 0 0 23 2 0 0 0
+                                         7 33 2 0 0 6 7 34 2 3 0 0 0 1 1 3 0 0
+                                         16 2 0 0 0 0 26 2 0 0 41 0 1 2 0 0 7 0
+                                         31 2 0 0 0 7 1 2 3 0 27 0 29 2 4 0 43
                                          0 1)))))
            '|lookupComplete|)) 

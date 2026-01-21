@@ -383,73 +383,6 @@
 (DEFUN |stringize| (|s|)
   (PROG () (RETURN (COND ((STRINGP |s|) |s|) ('T (PRINC-TO-STRING |s|))))))
 
-; htQuote s ==
-; -- wrap quotes around a piece of hyperTeX
-;   iht '"_""
-;   iht s
-;   iht '"_""
-
-(DEFUN |htQuote| (|s|)
-  (PROG () (RETURN (PROGN (|iht| "\"") (|iht| |s|) (|iht| "\"")))))
-
-; htProcessToggleButtons buttons ==
-;   iht '"\newline\indent{5}\beginitems "
-;   for [message, info, defaultValue, buttonName] in buttons repeat
-;     if NULL LASSOC(buttonName, htpInputAreaAlist $curPage) then
-;       setUpDefault(buttonName, ['button, defaultValue])
-;     iht ['"\item{\em\inputbox[", htpLabelDefault($curPage, buttonName), '"]{",
-;          buttonName, '"}{\htbmfile{pick}}{\htbmfile{unpick}}\space{}"]
-;     bcIssueHt message
-;     iht '"\space{}}"
-;     bcIssueHt info
-;   iht '"\enditems\indent{0} "
-
-(DEFUN |htProcessToggleButtons| (|buttons|)
-  (PROG (|message| |ISTMP#1| |info| |ISTMP#2| |defaultValue| |ISTMP#3|
-         |buttonName|)
-    (RETURN
-     (PROGN
-      (|iht| "\\newline\\indent{5}\\beginitems ")
-      ((LAMBDA (|bfVar#3| |bfVar#2|)
-         (LOOP
-          (COND
-           ((OR (ATOM |bfVar#3|) (PROGN (SETQ |bfVar#2| (CAR |bfVar#3|)) NIL))
-            (RETURN NIL))
-           (#1='T
-            (AND (CONSP |bfVar#2|)
-                 (PROGN
-                  (SETQ |message| (CAR |bfVar#2|))
-                  (SETQ |ISTMP#1| (CDR |bfVar#2|))
-                  (AND (CONSP |ISTMP#1|)
-                       (PROGN
-                        (SETQ |info| (CAR |ISTMP#1|))
-                        (SETQ |ISTMP#2| (CDR |ISTMP#1|))
-                        (AND (CONSP |ISTMP#2|)
-                             (PROGN
-                              (SETQ |defaultValue| (CAR |ISTMP#2|))
-                              (SETQ |ISTMP#3| (CDR |ISTMP#2|))
-                              (AND (CONSP |ISTMP#3|) (EQ (CDR |ISTMP#3|) NIL)
-                                   (PROGN
-                                    (SETQ |buttonName| (CAR |ISTMP#3|))
-                                    #1#)))))))
-                 (PROGN
-                  (COND
-                   ((NULL
-                     (LASSOC |buttonName| (|htpInputAreaAlist| |$curPage|)))
-                    (|setUpDefault| |buttonName|
-                     (LIST '|button| |defaultValue|))))
-                  (|iht|
-                   (LIST "\\item{\\em\\inputbox["
-                         (|htpLabelDefault| |$curPage| |buttonName|) "]{"
-                         |buttonName|
-                         "}{\\htbmfile{pick}}{\\htbmfile{unpick}}\\space{}"))
-                  (|bcIssueHt| |message|)
-                  (|iht| "\\space{}}")
-                  (|bcIssueHt| |info|)))))
-          (SETQ |bfVar#3| (CDR |bfVar#3|))))
-       |buttons| NIL)
-      (|iht| "\\enditems\\indent{0} ")))))
-
 ; htProcessBcButtons buttons ==
 ;   for [defaultValue, buttonName] in buttons repeat
 ;     if NULL LASSOC(buttonName, htpInputAreaAlist $curPage) then
@@ -463,16 +396,16 @@
 (DEFUN |htProcessBcButtons| (|buttons|)
   (PROG (|defaultValue| |ISTMP#1| |buttonName| |k|)
     (RETURN
-     ((LAMBDA (|bfVar#5| |bfVar#4|)
+     ((LAMBDA (|bfVar#3| |bfVar#2|)
         (LOOP
          (COND
-          ((OR (ATOM |bfVar#5|) (PROGN (SETQ |bfVar#4| (CAR |bfVar#5|)) NIL))
+          ((OR (ATOM |bfVar#3|) (PROGN (SETQ |bfVar#2| (CAR |bfVar#3|)) NIL))
            (RETURN NIL))
           (#1='T
-           (AND (CONSP |bfVar#4|)
+           (AND (CONSP |bfVar#2|)
                 (PROGN
-                 (SETQ |defaultValue| (CAR |bfVar#4|))
-                 (SETQ |ISTMP#1| (CDR |bfVar#4|))
+                 (SETQ |defaultValue| (CAR |bfVar#2|))
+                 (SETQ |ISTMP#1| (CDR |bfVar#2|))
                  (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
                       (PROGN (SETQ |buttonName| (CAR |ISTMP#1|)) #1#)))
                 (PROGN
@@ -490,7 +423,7 @@
                                (|htpLabelDefault| |$curPage| |buttonName|) "]{"
                                |buttonName|
                                "}{\\htbmfile{pick}}{\\htbmfile{unpick}}"))))))))
-         (SETQ |bfVar#5| (CDR |bfVar#5|))))
+         (SETQ |bfVar#3| (CDR |bfVar#3|))))
       |buttons| NIL))))
 
 ; bcSadFaces() ==
@@ -527,16 +460,16 @@
       (|iht| "\\newline\\indent{")
       (|iht| (|stringize| |indent|))
       (|iht| "}\\beginitems")
-      ((LAMBDA (|bfVar#7| |bfVar#6|)
+      ((LAMBDA (|bfVar#5| |bfVar#4|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#7|) (PROGN (SETQ |bfVar#6| (CAR |bfVar#7|)) NIL))
+           ((OR (ATOM |bfVar#5|) (PROGN (SETQ |bfVar#4| (CAR |bfVar#5|)) NIL))
             (RETURN NIL))
            (#1='T
-            (AND (CONSP |bfVar#6|)
+            (AND (CONSP |bfVar#4|)
                  (PROGN
-                  (SETQ |message| (CAR |bfVar#6|))
-                  (SETQ |ISTMP#1| (CDR |bfVar#6|))
+                  (SETQ |message| (CAR |bfVar#4|))
+                  (SETQ |ISTMP#1| (CDR |bfVar#4|))
                   (AND (CONSP |ISTMP#1|)
                        (PROGN
                         (SETQ |info| (CAR |ISTMP#1|))
@@ -555,7 +488,7 @@
                    (|mkCurryFun| |func| |value|))
                   (|iht| (LIST "]\\space{}"))
                   (|bcIssueHt| |info|)))))
-          (SETQ |bfVar#7| (CDR |bfVar#7|))))
+          (SETQ |bfVar#5| (CDR |bfVar#5|))))
        |links| NIL)
       (|iht| "\\enditems\\indent{0} ")))))
 
@@ -569,19 +502,19 @@
   (PROG (|y| |r|)
     (RETURN
      (LIST
-      ((LAMBDA (|bfVar#9| |bfVar#8|)
+      ((LAMBDA (|bfVar#7| |bfVar#6|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#8|) (EQUAL |x| |y|))
-            (RETURN (NREVERSE |bfVar#9|)))
+           ((OR (ATOM |bfVar#6|) (EQUAL |x| |y|))
+            (RETURN (NREVERSE |bfVar#7|)))
            (#1='T
-            (AND (CONSP |bfVar#8|)
+            (AND (CONSP |bfVar#6|)
                  (PROGN
-                  (SETQ |y| (CAR |bfVar#8|))
-                  (SETQ |r| (CDR |bfVar#8|))
+                  (SETQ |y| (CAR |bfVar#6|))
+                  (SETQ |r| (CDR |bfVar#6|))
                   #1#)
-                 (SETQ |bfVar#9| (CONS |y| |bfVar#9|)))))
-          (SETQ |bfVar#8| (CDR |bfVar#8|))))
+                 (SETQ |bfVar#7| (CONS |y| |bfVar#7|)))))
+          (SETQ |bfVar#6| (CDR |bfVar#6|))))
        NIL |u|)
       |r|))))
 
@@ -621,13 +554,13 @@
 ;     bcIssueHt info
 ;   iht '"\enditems\indent{0} "
 
-(DEFUN |htRadioButtons| (|bfVar#12|)
+(DEFUN |htRadioButtons| (|bfVar#10|)
   (PROG (|groupName| |buttons| |boxesName| |defaultValue| |message| |ISTMP#1|
          |info| |ISTMP#2| |buttonName|)
     (RETURN
      (PROGN
-      (SETQ |groupName| (CAR |bfVar#12|))
-      (SETQ |buttons| (CDR |bfVar#12|))
+      (SETQ |groupName| (CAR |bfVar#10|))
+      (SETQ |buttons| (CDR |bfVar#10|))
       (|htpSetRadioButtonAlist| |$curPage|
        (CONS (CONS |groupName| (|buttonNames| |buttons|))
              (|htpRadioButtonAlist| |$curPage|)))
@@ -636,17 +569,16 @@
        (LIST "\\newline\\indent{5}\\radioboxes{" |boxesName|
              "}{\\htbmfile{pick}}{\\htbmfile{unpick}}\\beginitems "))
       (SETQ |defaultValue| "1")
-      ((LAMBDA (|bfVar#11| |bfVar#10|)
+      ((LAMBDA (|bfVar#9| |bfVar#8|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#11|)
-                (PROGN (SETQ |bfVar#10| (CAR |bfVar#11|)) NIL))
+           ((OR (ATOM |bfVar#9|) (PROGN (SETQ |bfVar#8| (CAR |bfVar#9|)) NIL))
             (RETURN NIL))
            (#1='T
-            (AND (CONSP |bfVar#10|)
+            (AND (CONSP |bfVar#8|)
                  (PROGN
-                  (SETQ |message| (CAR |bfVar#10|))
-                  (SETQ |ISTMP#1| (CDR |bfVar#10|))
+                  (SETQ |message| (CAR |bfVar#8|))
+                  (SETQ |ISTMP#1| (CDR |bfVar#8|))
                   (AND (CONSP |ISTMP#1|)
                        (PROGN
                         (SETQ |info| (CAR |ISTMP#1|))
@@ -669,7 +601,7 @@
                   (|bcIssueHt| |message|)
                   (|iht| "\\space{}}")
                   (|bcIssueHt| |info|)))))
-          (SETQ |bfVar#11| (CDR |bfVar#11|))))
+          (SETQ |bfVar#9| (CDR |bfVar#9|))))
        |buttons| NIL)
       (|iht| "\\enditems\\indent{0} ")))))
 
@@ -690,13 +622,13 @@
 ;     iht '"\space{}}"
 ;     bcIssueHt info
 
-(DEFUN |htBcRadioButtons| (|bfVar#15|)
+(DEFUN |htBcRadioButtons| (|bfVar#13|)
   (PROG (|groupName| |buttons| |boxesName| |defaultValue| |message| |ISTMP#1|
          |info| |ISTMP#2| |buttonName|)
     (RETURN
      (PROGN
-      (SETQ |groupName| (CAR |bfVar#15|))
-      (SETQ |buttons| (CDR |bfVar#15|))
+      (SETQ |groupName| (CAR |bfVar#13|))
+      (SETQ |buttons| (CDR |bfVar#13|))
       (|htpSetRadioButtonAlist| |$curPage|
        (CONS (CONS |groupName| (|buttonNames| |buttons|))
              (|htpRadioButtonAlist| |$curPage|)))
@@ -705,17 +637,17 @@
        (LIST "\\radioboxes{" |boxesName|
              "}{\\htbmfile{pick}}{\\htbmfile{unpick}} "))
       (SETQ |defaultValue| "1")
-      ((LAMBDA (|bfVar#14| |bfVar#13|)
+      ((LAMBDA (|bfVar#12| |bfVar#11|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#14|)
-                (PROGN (SETQ |bfVar#13| (CAR |bfVar#14|)) NIL))
+           ((OR (ATOM |bfVar#12|)
+                (PROGN (SETQ |bfVar#11| (CAR |bfVar#12|)) NIL))
             (RETURN NIL))
            (#1='T
-            (AND (CONSP |bfVar#13|)
+            (AND (CONSP |bfVar#11|)
                  (PROGN
-                  (SETQ |message| (CAR |bfVar#13|))
-                  (SETQ |ISTMP#1| (CDR |bfVar#13|))
+                  (SETQ |message| (CAR |bfVar#11|))
+                  (SETQ |ISTMP#1| (CDR |bfVar#11|))
                   (AND (CONSP |ISTMP#1|)
                        (PROGN
                         (SETQ |info| (CAR |ISTMP#1|))
@@ -738,7 +670,7 @@
                   (|bcIssueHt| |message|)
                   (|iht| "\\space{}}")
                   (|bcIssueHt| |info|)))))
-          (SETQ |bfVar#14| (CDR |bfVar#14|))))
+          (SETQ |bfVar#12| (CDR |bfVar#12|))))
        |buttons| NIL)))))
 
 ; buttonNames buttons ==
@@ -747,23 +679,23 @@
 (DEFUN |buttonNames| (|buttons|)
   (PROG (|ISTMP#1| |ISTMP#2| |buttonName|)
     (RETURN
-     ((LAMBDA (|bfVar#18| |bfVar#17| |bfVar#16|)
+     ((LAMBDA (|bfVar#16| |bfVar#15| |bfVar#14|)
         (LOOP
          (COND
-          ((OR (ATOM |bfVar#17|)
-               (PROGN (SETQ |bfVar#16| (CAR |bfVar#17|)) NIL))
-           (RETURN (NREVERSE |bfVar#18|)))
+          ((OR (ATOM |bfVar#15|)
+               (PROGN (SETQ |bfVar#14| (CAR |bfVar#15|)) NIL))
+           (RETURN (NREVERSE |bfVar#16|)))
           (#1='T
-           (AND (CONSP |bfVar#16|)
+           (AND (CONSP |bfVar#14|)
                 (PROGN
-                 (SETQ |ISTMP#1| (CDR |bfVar#16|))
+                 (SETQ |ISTMP#1| (CDR |bfVar#14|))
                  (AND (CONSP |ISTMP#1|)
                       (PROGN
                        (SETQ |ISTMP#2| (CDR |ISTMP#1|))
                        (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
                             (PROGN (SETQ |buttonName| (CAR |ISTMP#2|)) #1#)))))
-                (SETQ |bfVar#18| (CONS |buttonName| |bfVar#18|)))))
-         (SETQ |bfVar#17| (CDR |bfVar#17|))))
+                (SETQ |bfVar#16| (CONS |buttonName| |bfVar#16|)))))
+         (SETQ |bfVar#15| (CDR |bfVar#15|))))
       NIL |buttons| NIL))))
 
 ; htInputStrings strings ==
@@ -790,17 +722,17 @@
     (RETURN
      (PROGN
       (|iht| "\\newline\\indent{5}\\beginitems ")
-      ((LAMBDA (|bfVar#20| |bfVar#19|)
+      ((LAMBDA (|bfVar#18| |bfVar#17|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#20|)
-                (PROGN (SETQ |bfVar#19| (CAR |bfVar#20|)) NIL))
+           ((OR (ATOM |bfVar#18|)
+                (PROGN (SETQ |bfVar#17| (CAR |bfVar#18|)) NIL))
             (RETURN NIL))
            (#1='T
-            (AND (CONSP |bfVar#19|)
+            (AND (CONSP |bfVar#17|)
                  (PROGN
-                  (SETQ |mess1| (CAR |bfVar#19|))
-                  (SETQ |ISTMP#1| (CDR |bfVar#19|))
+                  (SETQ |mess1| (CAR |bfVar#17|))
+                  (SETQ |ISTMP#1| (CDR |bfVar#17|))
                   (AND (CONSP |ISTMP#1|)
                        (PROGN
                         (SETQ |mess2| (CAR |ISTMP#1|))
@@ -842,7 +774,7 @@
                    (LIST "\\inputstring{" |stringName| "}{" |numChars| "}{"
                          (|htpLabelDefault| |$curPage| |stringName|) "} "))
                   (|bcIssueHt| |mess2|)))))
-          (SETQ |bfVar#20| (CDR |bfVar#20|))))
+          (SETQ |bfVar#18| (CDR |bfVar#18|))))
        |strings| NIL)
       (|iht| "\\enditems\\indent{0}\\newline ")))))
 
@@ -944,20 +876,20 @@
   (PROG (|pvar| |replace|)
     (RETURN
      (PROGN
-      ((LAMBDA (|bfVar#22| |bfVar#21|)
+      ((LAMBDA (|bfVar#20| |bfVar#19|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#22|)
-                (PROGN (SETQ |bfVar#21| (CAR |bfVar#22|)) NIL))
+           ((OR (ATOM |bfVar#20|)
+                (PROGN (SETQ |bfVar#19| (CAR |bfVar#20|)) NIL))
             (RETURN NIL))
            (#1='T
-            (AND (CONSP |bfVar#21|)
+            (AND (CONSP |bfVar#19|)
                  (PROGN
-                  (SETQ |pvar| (CAR |bfVar#21|))
-                  (SETQ |replace| (CDR |bfVar#21|))
+                  (SETQ |pvar| (CAR |bfVar#19|))
+                  (SETQ |replace| (CDR |bfVar#19|))
                   #1#)
                  (SETQ |l| (|substitute| |replace| |pvar| |l|)))))
-          (SETQ |bfVar#22| (CDR |bfVar#22|))))
+          (SETQ |bfVar#20| (CDR |bfVar#20|))))
        |substAlist| NIL)
       |l|))))
 
@@ -968,18 +900,18 @@
 (DEFUN |computeDomainVariableAlist| ()
   (PROG (|pvar|)
     (RETURN
-     ((LAMBDA (|bfVar#25| |bfVar#24| |bfVar#23|)
+     ((LAMBDA (|bfVar#23| |bfVar#22| |bfVar#21|)
         (LOOP
          (COND
-          ((OR (ATOM |bfVar#24|)
-               (PROGN (SETQ |bfVar#23| (CAR |bfVar#24|)) NIL))
-           (RETURN (NREVERSE |bfVar#25|)))
+          ((OR (ATOM |bfVar#22|)
+               (PROGN (SETQ |bfVar#21| (CAR |bfVar#22|)) NIL))
+           (RETURN (NREVERSE |bfVar#23|)))
           (#1='T
-           (AND (CONSP |bfVar#23|) (PROGN (SETQ |pvar| (CDR |bfVar#23|)) #1#)
-                (SETQ |bfVar#25|
+           (AND (CONSP |bfVar#21|) (PROGN (SETQ |pvar| (CDR |bfVar#21|)) #1#)
+                (SETQ |bfVar#23|
                         (CONS (CONS |pvar| (|pvarCondList| |pvar|))
-                              |bfVar#25|)))))
-         (SETQ |bfVar#24| (CDR |bfVar#24|))))
+                              |bfVar#23|)))))
+         (SETQ |bfVar#22| (CDR |bfVar#22|))))
       NIL (|htpDomainPvarSubstList| |$curPage|) NIL))))
 
 ; pvarCondList pvar ==
@@ -1034,93 +966,17 @@
     (RETURN
      (COND ((NULL (LISTP |pattern|)) NIL)
            (#1='T
-            ((LAMBDA (|bfVar#27| |bfVar#26| |pvar|)
+            ((LAMBDA (|bfVar#25| |bfVar#24| |pvar|)
                (LOOP
                 (COND
-                 ((OR (ATOM |bfVar#26|)
-                      (PROGN (SETQ |pvar| (CAR |bfVar#26|)) NIL))
-                  (RETURN (NREVERSE |bfVar#27|)))
+                 ((OR (ATOM |bfVar#24|)
+                      (PROGN (SETQ |pvar| (CAR |bfVar#24|)) NIL))
+                  (RETURN (NREVERSE |bfVar#25|)))
                  (#1#
                   (AND (|member| |pvar| |$PatternVariableList|)
-                       (SETQ |bfVar#27| (CONS |pvar| |bfVar#27|)))))
-                (SETQ |bfVar#26| (CDR |bfVar#26|))))
+                       (SETQ |bfVar#25| (CONS |pvar| |bfVar#25|)))))
+                (SETQ |bfVar#24| (CDR |bfVar#24|))))
              NIL (CDR |pattern|) NIL))))))
-
-; htMakeTemplates(templateList, numLabels) ==
-;   templateList := [templateParts template for template in templateList]
-;   [[substLabel(i, template) for template in templateList]
-;     for i in 1..numLabels] where substLabel(i, template) ==
-;       PAIRP template =>
-;         INTERN CONCAT(first template, PRINC_-TO_-STRING i, rest template)
-;       template
-
-(DEFUN |htMakeTemplates| (|templateList| |numLabels|)
-  (PROG ()
-    (RETURN
-     (PROGN
-      (SETQ |templateList|
-              ((LAMBDA (|bfVar#29| |bfVar#28| |template|)
-                 (LOOP
-                  (COND
-                   ((OR (ATOM |bfVar#28|)
-                        (PROGN (SETQ |template| (CAR |bfVar#28|)) NIL))
-                    (RETURN (NREVERSE |bfVar#29|)))
-                   (#1='T
-                    (SETQ |bfVar#29|
-                            (CONS (|templateParts| |template|) |bfVar#29|))))
-                  (SETQ |bfVar#28| (CDR |bfVar#28|))))
-               NIL |templateList| NIL))
-      ((LAMBDA (|bfVar#32| |i|)
-         (LOOP
-          (COND ((> |i| |numLabels|) (RETURN (NREVERSE |bfVar#32|)))
-                (#1#
-                 (SETQ |bfVar#32|
-                         (CONS
-                          ((LAMBDA (|bfVar#31| |bfVar#30| |template|)
-                             (LOOP
-                              (COND
-                               ((OR (ATOM |bfVar#30|)
-                                    (PROGN
-                                     (SETQ |template| (CAR |bfVar#30|))
-                                     NIL))
-                                (RETURN (NREVERSE |bfVar#31|)))
-                               (#1#
-                                (SETQ |bfVar#31|
-                                        (CONS
-                                         (|htMakeTemplates,substLabel| |i|
-                                          |template|)
-                                         |bfVar#31|))))
-                              (SETQ |bfVar#30| (CDR |bfVar#30|))))
-                           NIL |templateList| NIL)
-                          |bfVar#32|))))
-          (SETQ |i| (+ |i| 1))))
-       NIL 1)))))
-(DEFUN |htMakeTemplates,substLabel| (|i| |template|)
-  (PROG ()
-    (RETURN
-     (COND
-      ((CONSP |template|)
-       (INTERN
-        (CONCAT (CAR |template|) (PRINC-TO-STRING |i|) (CDR |template|))))
-      ('T |template|)))))
-
-; templateParts template ==
-;   NULL STRINGP template => template
-;   i := SEARCH('"%l", template)
-;   null i => template
-;   [SUBSEQ(template, 0, i), : SUBSEQ(template, i+2)]
-
-(DEFUN |templateParts| (|template|)
-  (PROG (|i|)
-    (RETURN
-     (COND ((NULL (STRINGP |template|)) |template|)
-           (#1='T
-            (PROGN
-             (SETQ |i| (SEARCH "%l" |template|))
-             (COND ((NULL |i|) |template|)
-                   (#1#
-                    (CONS (SUBSEQ |template| 0 |i|)
-                          (SUBSEQ |template| (+ |i| 2)))))))))))
 
 ; htMakeDoneButton(message, func) ==
 ;   bcHt '"\newline\vspace{1}\centerline{"
@@ -1155,12 +1011,12 @@
 ;
 ;   iht '"} "
 
-(DEFUN |htProcessDoneButton| (|bfVar#33|)
+(DEFUN |htProcessDoneButton| (|bfVar#26|)
   (PROG (|label| |func|)
     (RETURN
      (PROGN
-      (SETQ |label| (CAR |bfVar#33|))
-      (SETQ |func| (CADR |bfVar#33|))
+      (SETQ |label| (CAR |bfVar#26|))
+      (SETQ |func| (CADR |bfVar#26|))
       (|iht| "\\newline\\vspace{1}\\centerline{")
       (COND
        ((EQUAL |label| "Continue")
@@ -1191,17 +1047,17 @@
       (|bcHt|
        (LIST |htCommand| "{" |message| "}{(|htDoneButton| '|" |func|
              "| (PROGN "))
-      ((LAMBDA (|bfVar#35| |bfVar#34|)
+      ((LAMBDA (|bfVar#28| |bfVar#27|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#35|)
-                (PROGN (SETQ |bfVar#34| (CAR |bfVar#35|)) NIL))
+           ((OR (ATOM |bfVar#28|)
+                (PROGN (SETQ |bfVar#27| (CAR |bfVar#28|)) NIL))
             (RETURN NIL))
            (#1='T
-            (AND (CONSP |bfVar#34|)
+            (AND (CONSP |bfVar#27|)
                  (PROGN
-                  (SETQ |id| (CAR |bfVar#34|))
-                  (SETQ |ISTMP#1| (CDR |bfVar#34|))
+                  (SETQ |id| (CAR |bfVar#27|))
+                  (SETQ |ISTMP#1| (CDR |bfVar#27|))
                   (AND (CONSP |ISTMP#1|)
                        (PROGN
                         (SETQ |ISTMP#2| (CDR |ISTMP#1|))
@@ -1224,7 +1080,7 @@
                     (|bcHt| (LIST "\"\\stringvalue{" |id| "}\"")))
                    (#1# (|bcHt| (LIST "\"\\boxvalue{" |id| "}\""))))
                   (|bcHt| ") ")))))
-          (SETQ |bfVar#35| (CDR |bfVar#35|))))
+          (SETQ |bfVar#28| (CDR |bfVar#28|))))
        (|htpInputAreaAlist| |$curPage|) NIL)
       (|bcHt| (LIST (|htpName| |$curPage|) "))} "))))))
 
@@ -1236,12 +1092,12 @@
 ;   iht '"\vspace{2}{Select \  \UpButton{} \  to go back one page.}"
 ;   iht '"\newline{Select \  \ExitButton{QuitPage} \  to remove this window.}"
 
-(DEFUN |htProcessDoitButton| (|bfVar#36|)
+(DEFUN |htProcessDoitButton| (|bfVar#29|)
   (PROG (|label| |command| |func| |fun|)
     (RETURN
      (PROGN
-      (SETQ |label| (CAR |bfVar#36|))
-      (SETQ |command| (CADR . #1=(|bfVar#36|)))
+      (SETQ |label| (CAR |bfVar#29|))
+      (SETQ |command| (CADR . #1=(|bfVar#29|)))
       (SETQ |func| (CADDR . #1#))
       (SETQ |fun| (|mkCurryFun| |func| (LIST |command|)))
       (|iht| "\\newline\\vspace{1}\\centerline{")
@@ -1338,10 +1194,10 @@
     (RETURN
      (PROGN
       (SETQ |errorCondition| NIL)
-      ((LAMBDA (|bfVar#37| |entry|)
+      ((LAMBDA (|bfVar#30| |entry|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#37|) (PROGN (SETQ |entry| (CAR |bfVar#37|)) NIL))
+           ((OR (ATOM |bfVar#30|) (PROGN (SETQ |entry| (CAR |bfVar#30|)) NIL))
             (RETURN NIL))
            (#1='T
             (AND (CONSP |entry|)
@@ -1409,7 +1265,7 @@
                       (#1#
                        (|htpSetLabelSpadValue| |htPage| |stringName|
                         |val|))))))))))
-          (SETQ |bfVar#37| (CDR |bfVar#37|))))
+          (SETQ |bfVar#30| (CDR |bfVar#30|))))
        (|htpInputAreaAlist| |htPage|) NIL)
       |errorCondition|))))
 

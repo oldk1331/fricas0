@@ -415,10 +415,9 @@
               (122 . |coerce|) (127 . |coerce|) (132 . |coerce|)
               (137 . |tensor|) (143 . =) (149 . *) (155 . +)
               (|Mapping| 44 44 44) (|List| 44) (161 . |reduce|)
-              |TENSOR;coerce;%Of;5| (|NonNegativeInteger|)
-              (|Union| % '"failed") (|Integer|) (|PositiveInteger|)
-              (|Mapping| 6 12) (|Mapping| 6 6) (|List| 12) (|List| 6)
-              (|List| %) (|String|))
+              |TENSOR;coerce;%Of;5| (|String|) (|PositiveInteger|) (|List| %)
+              (|List| 6) (|List| 12) (|Mapping| 6 6) (|NonNegativeInteger|)
+              (|Union| % '"failed") (|Integer|) (|Mapping| 6 12))
            '#(~= 167 |zero?| 173 |tensor| 178 |support| 184 |subtractIfCan| 189
               |smaller?| 195 |sample| 201 |rightRecip| 205 |rightPower| 210
               |reductum| 222 |recip| 227 |plenaryPower| 232 |opposite?| 238
@@ -434,33 +433,34 @@
            'NIL
            (CONS
             (|makeByteWordVec2| 11
-                                '(6 1 6 7 0 0 7 5 7 6 0 0 7 6 0 0 7 7 0 0 0 7 5
-                                  7 2 4 7 7 3 7 7 5 0 11 5 0 8 0 0 7 8))
+                                '(6 6 1 7 6 7 5 7 0 0 6 7 0 0 7 7 0 0 7 5 7 0 0
+                                  0 2 7 7 4 5 7 7 3 5 11 0 8 0 8 7 0 0))
             (CONS
-             '#(NIL |Algebra&| |Algebra&| NIL NIL |FreeModuleCategory&| NIL
-                |NonAssociativeAlgebra&| |Rng&| |NonAssociativeAlgebra&|
-                |Module&| NIL NIL |Module&| NIL NIL |NonAssociativeRing&| NIL
-                NIL NIL NIL NIL |NonAssociativeRng&| NIL |AbelianGroup&| NIL
-                NIL NIL |AbelianMonoid&| |MagmaWithUnit&| NIL
-                |NonAssociativeSemiRng&| |AbelianSemiGroup&| NIL |Magma&|
-                |SetCategory&| NIL |BasicType&| NIL NIL NIL)
+             '#(NIL |Algebra&| |Algebra&| NIL |NonAssociativeAlgebra&| |Rng&|
+                |NonAssociativeAlgebra&| NIL |FreeModuleCategory&| NIL
+                |Module&| NIL NIL |Module&| NIL |NonAssociativeRing&| NIL NIL
+                NIL |NonAssociativeRng&| NIL NIL NIL NIL |AbelianGroup&| NIL
+                NIL NIL |NonAssociativeSemiRng&| NIL |MagmaWithUnit&|
+                |AbelianMonoid&| |Magma&| NIL |AbelianSemiGroup&| NIL
+                |SetCategory&| NIL NIL NIL |BasicType&|)
              (CONS
-              '#((|CommutativeRing|) (|Algebra| 6) (|Algebra| $$) (|Ring|)
-                 (|TensorProductCategory| 6 9 10)
-                 (|FreeModuleCategory| 6 (|Product| 7 8)) (|SemiRing|)
-                 (|NonAssociativeAlgebra| 6) (|Rng|)
-                 (|NonAssociativeAlgebra| $$) (|Module| 6)
-                 (|IndexedDirectProductCategory| 6 (|Product| 7 8)) (|SemiRng|)
-                 (|Module| $$) (|IndexedProductCategory| 6 (|Product| 7 8))
-                 (|BiModule| 6 6) (|NonAssociativeRing|) (|BiModule| $$ $$)
-                 (|AbelianProductCategory| 6) (|LeftModule| 6)
-                 (|RightModule| 6) (|RightModule| $$) (|NonAssociativeRng|)
-                 (|LeftModule| $$) (|AbelianGroup|)
-                 (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
-                 (|Monoid|) (|AbelianMonoid|) (|MagmaWithUnit|) (|SemiGroup|)
-                 (|NonAssociativeSemiRng|) (|AbelianSemiGroup|) (|Comparable|)
-                 (|Magma|) (|SetCategory|) (|CommutativeStar|) (|BasicType|)
-                 (|CoercibleTo| 44) (|unitsKnown|) (|TwoSidedRecip|))
+              '#((|CommutativeRing|) (|Algebra| $$) (|Algebra| 6) (|Ring|)
+                 (|NonAssociativeAlgebra| $$) (|Rng|)
+                 (|NonAssociativeAlgebra| 6) (|SemiRing|)
+                 (|FreeModuleCategory| 6 (|Product| 7 8))
+                 (|TensorProductCategory| 6 9 10) (|Module| $$) (|SemiRng|)
+                 (|IndexedDirectProductCategory| 6 (|Product| 7 8))
+                 (|Module| 6) (|BiModule| $$ $$) (|NonAssociativeRing|)
+                 (|BiModule| 6 6) (|IndexedProductCategory| 6 (|Product| 7 8))
+                 (|LeftModule| $$) (|NonAssociativeRng|) (|RightModule| $$)
+                 (|RightModule| 6) (|LeftModule| 6)
+                 (|AbelianProductCategory| 6) (|AbelianGroup|) (|Monoid|)
+                 (|NonAssociativeSemiRing|) (|CancellationAbelianMonoid|)
+                 (|NonAssociativeSemiRng|) (|SemiGroup|) (|MagmaWithUnit|)
+                 (|AbelianMonoid|) (|Magma|) (|Comparable|)
+                 (|AbelianSemiGroup|) (|CommutativeStar|) (|SetCategory|)
+                 (|TwoSidedRecip|) (|unitsKnown|) (|CoercibleTo| 44)
+                 (|BasicType|))
               (|makeByteWordVec2| 65
                                   '(2 12 11 0 0 13 1 9 11 0 14 0 0 0 15 1 10 11
                                     0 16 1 9 18 0 19 1 10 21 0 22 2 12 0 7 8 23
@@ -472,20 +472,20 @@
                                     0 46 1 8 44 0 47 2 44 0 0 0 48 2 6 11 0 0
                                     49 2 44 0 0 0 50 2 44 0 0 0 51 2 53 44 52 0
                                     54 2 0 11 0 0 1 1 12 11 0 42 2 0 0 9 10 28
-                                    1 0 62 0 1 2 4 57 0 0 1 2 11 11 0 0 1 0 12
-                                    0 1 1 7 57 0 1 2 7 0 0 56 1 2 5 0 0 59 1 1
-                                    10 0 0 1 1 7 57 0 1 2 5 0 0 59 1 2 12 11 0
-                                    0 1 1 7 11 0 1 1 0 56 0 1 1 0 64 0 1 1 0 11
+                                    1 0 60 0 1 2 4 63 0 0 1 2 11 11 0 0 1 0 12
+                                    0 1 1 7 63 0 1 2 7 0 0 62 1 2 5 0 0 57 1 1
+                                    10 0 0 1 1 7 63 0 1 2 5 0 0 57 1 2 12 11 0
+                                    0 1 1 7 11 0 1 1 0 62 0 1 1 0 58 0 1 1 0 11
                                     0 1 2 0 0 6 12 1 2 0 0 61 0 1 1 0 26 0 29 2
-                                    9 6 60 0 1 1 7 57 0 1 2 7 0 0 56 1 2 5 0 0
-                                    59 1 1 10 25 0 1 1 10 12 0 1 1 10 0 0 1 1
-                                    10 6 0 1 1 0 65 0 1 1 10 0 26 27 1 0 0 26
-                                    37 2 5 0 0 0 1 1 1 0 6 1 1 6 0 0 1 1 7 0 58
-                                    1 1 0 44 0 55 1 0 63 0 1 2 0 6 0 12 1 0 7
-                                    56 1 3 5 0 0 0 0 1 2 5 0 0 0 1 2 7 11 0 0 1
-                                    2 7 0 0 56 1 2 5 0 0 59 1 0 12 0 15 0 7 0
-                                    41 2 0 11 0 0 1 2 2 0 0 0 1 1 2 0 0 1 2 0 0
-                                    0 0 1 2 2 0 58 0 1 2 12 0 56 0 1 2 5 0 0 0
-                                    38 2 0 0 6 0 1 2 0 0 0 6 1 2 0 0 59 0
+                                    9 6 65 0 1 1 7 63 0 1 2 7 0 0 62 1 2 5 0 0
+                                    57 1 1 10 25 0 1 1 10 12 0 1 1 10 0 0 1 1
+                                    10 6 0 1 1 0 56 0 1 1 10 0 26 27 1 0 0 26
+                                    37 2 5 0 0 0 1 1 0 44 0 55 1 1 0 6 1 1 6 0
+                                    0 1 1 7 0 64 1 1 0 59 0 1 2 0 6 0 12 1 0 7
+                                    62 1 3 5 0 0 0 0 1 2 5 0 0 0 1 2 7 11 0 0 1
+                                    2 7 0 0 62 1 2 5 0 0 57 1 0 12 0 15 0 7 0
+                                    41 2 0 11 0 0 1 1 2 0 0 1 2 2 0 0 0 1 2 0 0
+                                    0 0 1 2 0 0 57 0 1 2 0 0 0 6 1 2 0 0 6 0 1
+                                    2 5 0 0 0 38 2 2 0 64 0 1 2 12 0 62 0
                                     1)))))
            '|lookupComplete|)) 

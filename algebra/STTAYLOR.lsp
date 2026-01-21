@@ -1018,7 +1018,7 @@
 (SDEFUN |STTAYLOR;multisect;2I2S;43|
         ((|b| (|Integer|)) (|a| (|Integer|)) (|x| (|Stream| A))
          (% (|Stream| A)))
-        (SPROG ((#1=#:G400 NIL))
+        (SPROG ((#1=#:G392 NIL))
                (|STTAYLOR;ms| (+ |a| |b|) 0
                 (SPADCALL |x|
                           (PROG1 (LETT #1# |a|)
@@ -1203,10 +1203,10 @@
 (SDEFUN |STTAYLOR;powern;F2S;55|
         ((|rn| (|Fraction| (|Integer|))) (|x| (|Stream| A)) (% (|Stream| A)))
         (SPROG
-         ((|power| (|Stream| A)) (#1=#:G463 NIL) (#2=#:G457 NIL)
+         ((|power| (|Stream| A)) (#1=#:G455 NIL) (#2=#:G449 NIL)
           (|num| (|Integer|)) (|invCo| (|Union| A "failed")) (|co| (A))
-          (|ord| (|Union| (|Integer|) "failed")) (#3=#:G472 NIL)
-          (|order| (|Integer|)) (#4=#:G473 NIL) (|n| NIL))
+          (|ord| (|Union| (|Integer|) "failed")) (#3=#:G464 NIL)
+          (|order| (|Integer|)) (#4=#:G465 NIL) (|n| NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |order| 0)
@@ -1219,7 +1219,7 @@
                           ((SPADCALL |x| (QREFELT % 10))
                            (PROGN
                             (LETT #4# (|STTAYLOR;zro| %))
-                            (GO #5=#:G471)))
+                            (GO #5=#:G463)))
                           ((NULL
                             (SPADCALL (SPADCALL |x| (QREFELT % 13))
                                       (QREFELT % 25)))
@@ -1227,7 +1227,7 @@
                                 (EXIT
                                  (PROGN
                                   (LETT #3# |$NoValue|)
-                                  (GO #6=#:G445)))))
+                                  (GO #6=#:G437)))))
                           ('T
                            (SEQ (LETT |x| (SPADCALL |x| (QREFELT % 11)))
                                 (EXIT
@@ -1451,9 +1451,9 @@
 
 (DECLAIM (NOTINLINE |StreamTaylorSeriesOperations;|)) 
 
-(DEFUN |StreamTaylorSeriesOperations| (#1=#:G497)
+(DEFUN |StreamTaylorSeriesOperations| (#1=#:G489)
   (SPROG NIL
-         (PROG (#2=#:G498)
+         (PROG (#2=#:G490)
            (RETURN
             (COND
              ((LETT #2#
@@ -1747,7 +1747,7 @@
                                               7 78 2 0 33 7 7 34 1 0 7 7 105 2
                                               0 7 7 6 83 1 0 7 7 74 2 0 7 7 7
                                               84 1 0 7 6 79 1 0 7 90 97 2 0 7 7
-                                              7 35 2 0 7 7 7 23 1 0 7 7 21 2 0
-                                              7 7 7 17 2 0 7 7 7 71 2 0 7 7 6
-                                              28 2 0 7 6 7 27)))))
+                                              7 35 1 0 7 7 21 2 0 7 7 7 23 2 0
+                                              7 7 7 17 2 0 7 6 7 27 2 0 7 7 6
+                                              28 2 0 7 7 7 71)))))
            '|lookupComplete|)) 

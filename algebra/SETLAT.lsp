@@ -11,8 +11,8 @@
 
 (SDEFUN |SETLAT;complement;2%;4| ((|a| (%)) (% (%)))
         (SPROG
-         ((|r| (|List| S)) (|contains| (|Boolean|)) (#1=#:G27 NIL) (|c| NIL)
-          (#2=#:G26 NIL) (|b| NIL))
+         ((|r| (|List| S)) (|contains| (|Boolean|)) (#1=#:G19 NIL) (|c| NIL)
+          (#2=#:G18 NIL) (|b| NIL))
          (SEQ (LETT |r| NIL)
               (SEQ (LETT |b| NIL) (LETT #2# (QREFELT % 7)) G190
                    (COND
@@ -38,8 +38,8 @@
 
 (SDEFUN |SETLAT;complement;%L%;5| ((|a| (%)) (|pseudoTop| (|List| S)) (% (%)))
         (SPROG
-         ((|r| (|List| S)) (|contains| (|Boolean|)) (#1=#:G36 NIL) (|c| NIL)
-          (#2=#:G35 NIL) (|b| NIL))
+         ((|r| (|List| S)) (|contains| (|Boolean|)) (#1=#:G28 NIL) (|c| NIL)
+          (#2=#:G27 NIL) (|b| NIL))
          (SEQ (LETT |r| NIL)
               (SEQ (LETT |b| NIL) (LETT #2# |pseudoTop|) G190
                    (COND
@@ -76,7 +76,7 @@
 
 (SDEFUN |SETLAT;coerce;%Of;9| ((|s| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|oup| (|List| (|OutputForm|))) (#1=#:G47 NIL) (|x| NIL) (|inp| (%)))
+         ((|oup| (|List| (|OutputForm|))) (#1=#:G39 NIL) (|x| NIL) (|inp| (%)))
          (SEQ (LETT |inp| |s|) (LETT |oup| NIL)
               (SEQ (LETT |x| NIL) (LETT #1# |inp|) G190
                    (COND
@@ -92,9 +92,9 @@
 
 (DECLAIM (NOTINLINE |SubsetLattice;|)) 
 
-(DEFUN |SubsetLattice| (&REST #1=#:G48)
+(DEFUN |SubsetLattice| (&REST #1=#:G40)
   (SPROG NIL
-         (PROG (#2=#:G49)
+         (PROG (#2=#:G41)
            (RETURN
             (COND
              ((LETT #2#
@@ -141,16 +141,16 @@
               |\\/| 72 = 78 |/\\| 84)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0))
-                 (CONS '#(NIL NIL NIL |SetCategory&| |BasicType&| NIL)
+                 (CONS '#(NIL NIL NIL |SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|Lattice|) (|MeetSemilattice|) (|JoinSemilattice|)
-                           (|SetCategory|) (|BasicType|) (|CoercibleTo| 22))
+                        '#((|Lattice|) (|JoinSemilattice|) (|MeetSemilattice|)
+                           (|SetCategory|) (|CoercibleTo| 22) (|BasicType|))
                         (|makeByteWordVec2| 29
                                             '(2 9 0 0 0 11 2 9 0 0 0 13 2 6 15
                                               0 0 16 2 9 0 0 6 17 1 6 22 0 23 2
                                               24 0 0 22 25 1 22 0 26 27 2 0 15
-                                              0 0 21 1 0 0 9 10 1 0 29 0 1 1 0
-                                              0 0 18 2 0 0 0 9 19 1 0 22 0 28 2
+                                              0 0 21 1 0 0 9 10 1 0 29 0 1 2 0
+                                              0 0 9 19 1 0 0 0 18 1 0 22 0 28 2
                                               0 0 0 0 14 2 0 15 0 0 20 2 0 0 0
                                               0 12)))))
            '|lookupComplete|)) 

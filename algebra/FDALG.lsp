@@ -5542,9 +5542,9 @@
               |FDALG;rank;%Nni;172| |FDALG;zero?;%B;173| |FDALG;=;2%B;174|
               |FDALG;coerce;%Xdp;175| (|Record| (|:| |k| 29) (|:| |c| 7))
               (|List| 341) (931 . |listOfTerms|) |FDALG;coerce;Xdp%;176|
-              (|Fraction| 43) (|Union| % '"failed")
+              (|String|) (|Union| % '"failed")
               (|Record| (|:| |unit| %) (|:| |canonical| %) (|:| |associate| %))
-              (|String|))
+              (|Fraction| 43))
            '#(~= 936 |zero?| 942 |vector| 954 |variables| 964 |unitNormal| 969
               |unitCanonical| 974 |unit?| 979 |transformationMatrix| 984
               |transformRows!| 989 |transformColumns!| 995 |toggleDebugOutput|
@@ -5590,27 +5590,27 @@
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
             (CONS
-             '#(|DivisionRing&| |EntireRing&| |Algebra&| |Algebra&| NIL
-                |NonAssociativeAlgebra&| |NonAssociativeAlgebra&| |Rng&| NIL
-                |Module&| |Module&| NIL NIL NIL |NonAssociativeRing&| NIL NIL
-                NIL NIL NIL |NonAssociativeRng&| NIL NIL |AbelianGroup&| NIL
-                NIL NIL NIL |MagmaWithUnit&| |NonAssociativeSemiRng&|
-                |AbelianMonoid&| |Magma&| |AbelianSemiGroup&| |SetCategory&|
-                NIL NIL NIL |BasicType&| NIL)
+             '#(|DivisionRing&| |Algebra&| |Algebra&| |EntireRing&| NIL NIL
+                |Rng&| |NonAssociativeAlgebra&| |NonAssociativeAlgebra&| NIL
+                |Module&| |Module&| NIL |NonAssociativeRing&| NIL NIL NIL NIL
+                |NonAssociativeRng&| NIL NIL NIL NIL |AbelianGroup&| NIL NIL
+                NIL |AbelianMonoid&| |NonAssociativeSemiRng&| |MagmaWithUnit&|
+                NIL |AbelianSemiGroup&| |Magma&| |SetCategory&| NIL
+                |BasicType&| NIL NIL NIL)
              (CONS
-              '#((|DivisionRing|) (|EntireRing|) (|Algebra| 7) (|Algebra| 345)
-                 (|Ring|) (|NonAssociativeAlgebra| 7)
-                 (|NonAssociativeAlgebra| 345) (|Rng|) (|SemiRing|)
-                 (|Module| 7) (|Module| 345) (|SemiRng|) (|BiModule| 7 7)
-                 (|BiModule| 345 345) (|NonAssociativeRing|) (|BiModule| $$ $$)
-                 (|RightModule| 7) (|LeftModule| 7) (|RightModule| 345)
-                 (|LeftModule| 345) (|NonAssociativeRng|) (|RightModule| $$)
-                 (|LeftModule| $$) (|AbelianGroup|) (|Monoid|)
-                 (|NonAssociativeSemiRing|) (|CancellationAbelianMonoid|)
-                 (|SemiGroup|) (|MagmaWithUnit|) (|NonAssociativeSemiRng|)
-                 (|AbelianMonoid|) (|Magma|) (|AbelianSemiGroup|)
-                 (|SetCategory|) (|TwoSidedRecip|) (|noZeroDivisors|)
-                 (|unitsKnown|) (|BasicType|) (|CoercibleTo| 170))
+              '#((|DivisionRing|) (|Algebra| 348) (|Algebra| 7) (|EntireRing|)
+                 (|Ring|) (|SemiRing|) (|Rng|) (|NonAssociativeAlgebra| 348)
+                 (|NonAssociativeAlgebra| 7) (|SemiRng|) (|Module| 348)
+                 (|Module| 7) (|BiModule| $$ $$) (|NonAssociativeRing|)
+                 (|BiModule| 348 348) (|BiModule| 7 7) (|LeftModule| $$)
+                 (|RightModule| $$) (|NonAssociativeRng|) (|LeftModule| 348)
+                 (|RightModule| 348) (|LeftModule| 7) (|RightModule| 7)
+                 (|AbelianGroup|) (|CancellationAbelianMonoid|)
+                 (|NonAssociativeSemiRing|) (|Monoid|) (|AbelianMonoid|)
+                 (|NonAssociativeSemiRng|) (|MagmaWithUnit|) (|SemiGroup|)
+                 (|AbelianSemiGroup|) (|Magma|) (|SetCategory|)
+                 (|CoercibleTo| 170) (|BasicType|) (|unitsKnown|)
+                 (|noZeroDivisors|) (|TwoSidedRecip|))
               (|makeByteWordVec2| 348
                                   '(0 7 9 10 4 12 7 0 9 9 9 13 0 7 0 15 3 12 16
                                     0 9 9 17 5 12 7 0 9 9 9 7 18 6 12 19 0 9 9
@@ -5670,61 +5670,61 @@
                                     0 295 2 285 288 0 43 297 3 12 277 285 16
                                     277 298 1 277 0 0 299 1 7 0 43 308 0 288 0
                                     335 2 288 23 0 0 336 1 89 342 0 343 2 0 23
-                                    0 0 1 3 0 23 0 9 9 79 1 0 23 0 338 1 0 106
-                                    0 107 1 0 19 0 104 1 0 33 0 87 1 0 347 0 1
-                                    1 0 0 0 1 1 0 23 0 1 1 0 19 0 203 2 0 0 0
-                                    19 201 2 0 0 0 19 199 1 0 0 0 67 1 0 0 0 70
-                                    3 0 0 0 9 9 131 3 0 0 0 9 9 116 3 0 0 0 9 9
-                                    130 1 0 241 0 244 2 0 346 0 0 1 2 0 106 0 9
-                                    223 1 0 106 0 216 4 0 89 0 9 9 89 103 3 0 7
-                                    0 9 7 97 2 0 0 0 9 324 2 0 0 0 7 230 1 0 23
-                                    0 81 3 0 23 0 9 9 78 0 0 0 1 1 0 225 0 229
-                                    1 0 346 0 1 2 0 0 0 9 1 2 0 0 0 321 1 3 0 0
-                                    0 9 9 304 1 0 167 0 1 2 0 0 0 9 274 1 0 197
-                                    0 198 3 0 0 0 27 27 142 1 0 23 0 83 4 0 156
-                                    0 9 9 275 331 6 0 277 0 9 9 9 23 23 334 6 0
-                                    285 0 9 9 9 23 23 333 6 0 285 0 9 9 9 23 23
-                                    332 1 0 23 0 155 1 0 0 0 280 2 0 0 0 9 300
-                                    1 0 0 0 326 2 0 0 0 23 323 1 0 346 0 1 2 0
-                                    170 0 23 268 1 0 170 0 270 1 0 9 0 337 6 0
-                                    23 0 9 9 9 9 29 149 6 0 23 0 9 9 9 9 9 148
-                                    5 0 23 0 9 9 9 9 146 3 0 0 0 9 9 115 3 0 0
-                                    0 9 9 129 3 0 23 0 9 9 77 2 0 0 9 33 35 1 0
-                                    0 9 32 3 0 89 0 9 9 95 4 0 0 0 9 9 7 118 4
-                                    0 0 0 9 9 7 134 1 0 23 0 85 1 0 89 0 217 2
-                                    0 0 0 321 1 1 0 12 0 113 2 0 23 0 0 1 1 0
-                                    23 0 1 1 0 0 0 210 1 0 0 0 211 1 0 0 0 212
-                                    1 0 0 0 213 1 0 0 0 302 2 0 0 29 7 59 1 0 0
-                                    7 52 2 0 0 12 33 41 1 0 23 0 72 3 0 0 0 9 7
-                                    125 2 0 0 0 0 307 3 0 0 0 9 7 127 2 0 0 0 0
-                                    236 1 0 0 0 305 1 0 23 0 71 2 0 19 0 29 108
-                                    1 0 106 0 109 1 0 106 0 191 1 0 195 0 196 1
-                                    0 346 0 1 2 0 0 0 9 1 2 0 0 0 321 1 3 0 0 0
-                                    9 9 303 1 0 167 0 264 2 0 0 0 9 273 1 0 348
-                                    0 1 1 0 0 0 238 1 0 0 0 265 1 0 0 0 237 1 0
-                                    0 0 325 1 0 0 0 327 2 0 27 9 9 28 3 0 0 0
-                                    27 27 145 1 0 241 0 242 2 0 241 0 9 279 4 0
-                                    156 0 9 9 275 284 3 0 277 0 9 9 278 3 0 285
-                                    0 9 9 296 3 0 285 0 9 9 287 1 0 241 0 283 1
-                                    0 0 0 301 2 0 346 0 0 1 1 0 0 0 65 1 0 0 0
-                                    68 3 0 89 0 9 9 96 2 0 7 0 9 88 2 0 170 0
-                                    179 180 2 0 170 0 170 178 1 0 0 0 66 1 0 0
-                                    0 69 1 0 9 0 86 2 0 0 0 7 62 1 0 0 0 51 2 0
-                                    0 0 0 1 1 0 225 0 227 1 0 89 0 340 1 0 0 89
-                                    344 1 0 0 29 63 1 0 0 7 64 1 0 0 345 1 1 0
-                                    0 43 1 1 0 170 0 272 0 0 9 11 1 0 150 0 153
-                                    7 0 156 0 27 27 23 27 27 23 165 5 0 156 0
-                                    27 27 27 27 166 3 0 0 0 0 0 1 2 0 23 0 0 1
-                                    2 0 0 0 33 112 2 0 0 0 0 1 2 0 23 0 0 1 1 0
-                                    170 0 189 4 0 0 0 9 9 7 120 4 0 0 0 9 9 7
-                                    123 2 0 0 0 0 306 4 0 0 0 9 9 7 121 4 0 0 0
-                                    9 9 7 133 2 0 0 0 0 234 2 0 0 0 43 330 2 0
-                                    0 0 9 1 2 0 0 0 321 322 0 0 0 49 0 0 0 14 2
-                                    0 23 0 0 339 2 0 0 7 0 328 2 0 0 0 0 329 2
-                                    0 0 0 7 320 2 0 0 7 0 316 2 0 0 0 7 314 1 0
-                                    0 0 313 2 0 0 0 0 318 2 0 0 7 0 317 2 0 0 0
-                                    7 315 2 0 0 0 0 319 2 0 0 0 19 200 2 0 0 19
-                                    0 202 2 0 0 7 0 310 2 0 0 0 7 311 2 0 0 345
-                                    0 1 2 0 0 0 345 1 2 0 0 9 0 1 2 0 0 43 0
-                                    309 2 0 0 0 0 312 2 0 0 321 0 1)))))
+                                    0 0 1 1 0 23 0 338 3 0 23 0 9 9 79 1 0 19 0
+                                    104 1 0 106 0 107 1 0 33 0 87 1 0 347 0 1 1
+                                    0 0 0 1 1 0 23 0 1 1 0 19 0 203 2 0 0 0 19
+                                    201 2 0 0 0 19 199 1 0 0 0 67 1 0 0 0 70 3
+                                    0 0 0 9 9 131 3 0 0 0 9 9 116 3 0 0 0 9 9
+                                    130 1 0 241 0 244 2 0 346 0 0 1 1 0 106 0
+                                    216 2 0 106 0 9 223 3 0 7 0 9 7 97 4 0 89 0
+                                    9 9 89 103 2 0 0 0 9 324 2 0 0 0 7 230 3 0
+                                    23 0 9 9 78 1 0 23 0 81 0 0 0 1 1 0 225 0
+                                    229 1 0 346 0 1 2 0 0 0 321 1 2 0 0 0 9 1 3
+                                    0 0 0 9 9 304 1 0 167 0 1 2 0 0 0 9 274 1 0
+                                    197 0 198 3 0 0 0 27 27 142 1 0 23 0 83 4 0
+                                    156 0 9 9 275 331 6 0 277 0 9 9 9 23 23 334
+                                    6 0 285 0 9 9 9 23 23 333 6 0 285 0 9 9 9
+                                    23 23 332 1 0 23 0 155 2 0 0 0 9 300 1 0 0
+                                    0 280 2 0 0 0 23 323 1 0 0 0 326 1 0 346 0
+                                    1 2 0 170 0 23 268 1 0 170 0 270 1 0 9 0
+                                    337 5 0 23 0 9 9 9 9 146 6 0 23 0 9 9 9 9 9
+                                    148 6 0 23 0 9 9 9 9 29 149 3 0 0 0 9 9 115
+                                    3 0 0 0 9 9 129 3 0 23 0 9 9 77 1 0 0 9 32
+                                    2 0 0 9 33 35 3 0 89 0 9 9 95 4 0 0 0 9 9 7
+                                    118 4 0 0 0 9 9 7 134 1 0 23 0 85 1 0 89 0
+                                    217 2 0 0 0 321 1 1 0 12 0 113 2 0 23 0 0 1
+                                    1 0 23 0 1 1 0 0 0 210 1 0 0 0 211 1 0 0 0
+                                    212 1 0 0 0 213 1 0 0 0 302 2 0 0 12 33 41
+                                    1 0 0 7 52 2 0 0 29 7 59 1 0 23 0 72 3 0 0
+                                    0 9 7 125 2 0 0 0 0 307 3 0 0 0 9 7 127 2 0
+                                    0 0 0 236 1 0 0 0 305 1 0 23 0 71 1 0 106 0
+                                    109 2 0 19 0 29 108 1 0 195 0 196 1 0 106 0
+                                    191 1 0 346 0 1 2 0 0 0 321 1 2 0 0 0 9 1 3
+                                    0 0 0 9 9 303 1 0 167 0 264 2 0 0 0 9 273 1
+                                    0 345 0 1 1 0 0 0 238 1 0 0 0 265 1 0 0 0
+                                    237 1 0 0 0 325 1 0 0 0 327 2 0 27 9 9 28 3
+                                    0 0 0 27 27 145 1 0 241 0 242 2 0 241 0 9
+                                    279 4 0 156 0 9 9 275 284 3 0 277 0 9 9 278
+                                    3 0 285 0 9 9 296 3 0 285 0 9 9 287 1 0 241
+                                    0 283 1 0 0 0 301 2 0 346 0 0 1 1 0 0 0 65
+                                    1 0 0 0 68 2 0 7 0 9 88 3 0 89 0 9 9 96 2 0
+                                    170 0 170 178 2 0 170 0 179 180 1 0 0 0 66
+                                    1 0 0 0 69 1 0 9 0 86 1 0 0 0 51 2 0 0 0 7
+                                    62 2 0 0 0 0 1 1 0 225 0 227 1 0 170 0 272
+                                    1 0 0 43 1 1 0 0 348 1 1 0 0 7 64 1 0 0 29
+                                    63 1 0 0 89 344 1 0 89 0 340 0 0 9 11 1 0
+                                    150 0 153 5 0 156 0 27 27 27 27 166 7 0 156
+                                    0 27 27 23 27 27 23 165 3 0 0 0 0 0 1 2 0
+                                    23 0 0 1 2 0 0 0 33 112 2 0 0 0 0 1 2 0 23
+                                    0 0 1 1 0 170 0 189 4 0 0 0 9 9 7 120 4 0 0
+                                    0 9 9 7 123 2 0 0 0 0 306 4 0 0 0 9 9 7 121
+                                    4 0 0 0 9 9 7 133 2 0 0 0 0 234 2 0 0 0 321
+                                    322 2 0 0 0 9 1 2 0 0 0 43 330 0 0 0 49 0 0
+                                    0 14 2 0 23 0 0 339 2 0 0 0 7 320 2 0 0 0 0
+                                    329 2 0 0 7 0 328 2 0 0 0 0 318 1 0 0 0 313
+                                    2 0 0 0 7 314 2 0 0 7 0 316 2 0 0 0 0 319 2
+                                    0 0 0 7 315 2 0 0 7 0 317 2 0 0 321 0 1 2 0
+                                    0 0 0 312 2 0 0 43 0 309 2 0 0 9 0 1 2 0 0
+                                    0 348 1 2 0 0 348 0 1 2 0 0 0 7 311 2 0 0 7
+                                    0 310 2 0 0 19 0 202 2 0 0 0 19 200)))))
            '|lookupComplete|)) 

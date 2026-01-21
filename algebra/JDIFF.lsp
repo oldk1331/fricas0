@@ -341,13 +341,13 @@
            (CONS (|makeByteWordVec2| 3 '(0 0 0 0 1 1 3 0 0 0 0))
                  (CONS
                   '#(|Module&| NIL NIL NIL |AbelianGroup&| NIL |AbelianMonoid&|
-                     |AbelianSemiGroup&| |SetCategory&| |BasicType&| NIL)
+                     |AbelianSemiGroup&| |SetCategory&| NIL |BasicType&|)
                   (CONS
-                   '#((|Module| 7) (|BiModule| 7 7) (|LeftModule| 7)
-                      (|RightModule| 7) (|AbelianGroup|)
+                   '#((|Module| 7) (|BiModule| 7 7) (|RightModule| 7)
+                      (|LeftModule| 7) (|AbelianGroup|)
                       (|CancellationAbelianMonoid|) (|AbelianMonoid|)
-                      (|AbelianSemiGroup|) (|SetCategory|) (|BasicType|)
-                      (|CoercibleTo| 22))
+                      (|AbelianSemiGroup|) (|SetCategory|) (|CoercibleTo| 22)
+                      (|BasicType|))
                    (|makeByteWordVec2| 68
                                        '(0 7 0 9 1 6 0 11 12 1 6 0 11 14 2 6 0
                                          11 16 17 1 7 19 0 20 1 22 0 21 23 1 6
@@ -363,10 +363,10 @@
                                          0 1 0 2 0 1 2 2 19 0 0 1 2 0 0 61 0 1
                                          1 0 21 0 1 2 0 7 0 61 65 1 0 37 0 39 1
                                          0 0 11 13 1 0 0 11 15 2 0 0 11 16 18 1
-                                         0 0 7 60 1 0 0 6 10 1 0 0 0 44 2 0 7
+                                         0 0 6 10 1 0 0 7 60 1 0 0 0 44 2 0 7
                                          61 0 66 1 0 22 0 33 1 0 34 0 36 2 0 7
-                                         0 6 43 0 2 0 45 2 0 19 0 0 1 2 1 0 0 0
-                                         1 1 1 0 0 48 2 0 0 0 0 55 2 1 0 40 0 1
-                                         2 2 0 68 0 1 2 0 0 0 7 1 2 0 0 7 0 57
-                                         2 0 0 11 0 1)))))
+                                         0 6 43 0 2 0 45 2 0 19 0 0 1 1 1 0 0
+                                         48 2 1 0 0 0 1 2 0 0 0 0 55 2 0 0 11 0
+                                         1 2 0 0 7 0 57 2 0 0 0 7 1 2 1 0 40 0
+                                         1 2 2 0 68 0 1)))))
            '|lookupComplete|)) 

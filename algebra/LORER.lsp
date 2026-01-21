@@ -19,5 +19,3 @@
                                T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|LeftOreRing|))))) 
-
-(MAKEPROP '|LeftOreRing| 'NILADIC T) 

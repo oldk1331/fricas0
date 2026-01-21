@@ -78,7 +78,7 @@
 
 (SDEFUN |NGROEB;gbasis| ((|Pol| (|List| |Dpol|)) (% (|List| |Dpol|)))
         (SPROG
-         ((#1=#:G91 NIL) (|x| NIL) (#2=#:G90 NIL) (|redPols| (|List| |Dpol|))
+         ((#1=#:G83 NIL) (|x| NIL) (#2=#:G82 NIL) (|redPols| (|List| |Dpol|))
           (|basPols|
            (|List|
             (|Record| (|:| |totdeg| (|NonNegativeInteger|))
@@ -88,13 +88,13 @@
             #3=(|Record| (|:| |lcmfij| |Expon|)
                          (|:| |totdeg| (|NonNegativeInteger|))
                          (|:| |poli| |Dpol|) (|:| |polj| |Dpol|))))
-          (D1 (|List| #3#)) (#4=#:G89 NIL) (#5=#:G88 NIL) (#6=#:G83 NIL)
-          (#7=#:G82 NIL) (|h| (|Dpol|)) (|s| (|Dpol|))
+          (D1 (|List| #3#)) (#4=#:G81 NIL) (#5=#:G80 NIL) (#6=#:G75 NIL)
+          (#7=#:G74 NIL) (|h| (|Dpol|)) (|s| (|Dpol|))
           (D0
            (|Record| (|:| |lcmfij| |Expon|)
                      (|:| |totdeg| (|NonNegativeInteger|)) (|:| |poli| |Dpol|)
                      (|:| |polj| |Dpol|)))
-          (#8=#:G87 NIL) (#9=#:G86 NIL) (#10=#:G85 NIL) (#11=#:G84 NIL)
+          (#8=#:G79 NIL) (#9=#:G78 NIL) (#10=#:G77 NIL) (#11=#:G76 NIL)
           (|toth| (|NonNegativeInteger|)) (|Pol1| (|List| |Dpol|)))
          (SEQ
           (LETT |Pol1|
@@ -166,7 +166,7 @@
                                      (|spadConstant| % 35) (QREFELT % 38))
                            (SEQ (LETT D NIL)
                                 (LETT |basPols| (|NGROEB;updatF| |h| 0 NIL %))
-                                (EXIT (PROGN (LETT #6# 1) (GO #13=#:G77)))))
+                                (EXIT (PROGN (LETT #6# 1) (GO #13=#:G69)))))
                           ('T
                            (SEQ
                             (LETT D1
@@ -250,7 +250,7 @@
          (% (|Dpol|)))
         (SPROG
          ((|cc| (|Record| (|:| |co1| |Dom|) (|:| |co2| |Dom|))) (|fj| (|Dpol|))
-          (#1=#:G100 NIL) (|fi| (|Dpol|)) (|Tij| (|Expon|)))
+          (#1=#:G92 NIL) (|fi| (|Dpol|)) (|Tij| (|Expon|)))
          (SEQ (LETT |Tij| (QVELT |p| 0)) (LETT |fi| (QVELT |p| 2))
               (LETT |fj| (QVELT |p| 3))
               (LETT |fi|
@@ -475,9 +475,9 @@
 
 (DECLAIM (NOTINLINE |NGroebnerPackage;|)) 
 
-(DEFUN |NGroebnerPackage| (&REST #1=#:G145)
+(DEFUN |NGroebnerPackage| (&REST #1=#:G137)
   (SPROG NIL
-         (PROG (#2=#:G146)
+         (PROG (#2=#:G138)
            (RETURN
             (COND
              ((LETT #2#

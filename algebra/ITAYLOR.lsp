@@ -199,9 +199,9 @@
               (|NonNegativeInteger|) |ITAYLOR;^;%Nni%;17|
               (97 . |characteristic|) |ITAYLOR;characteristic;Nni;18|
               |ITAYLOR;pole?;%B;19| (101 . |zero?|) |ITAYLOR;order;%2Nni;21|
-              |ITAYLOR;order;%Nni;23|
-              (|Record| (|:| |unit| %) (|:| |canonical| %) (|:| |associate| %))
-              (|String|) (|OutputForm|))
+              |ITAYLOR;order;%Nni;23| (|OutputForm|) (|String|)
+              (|Record| (|:| |unit| %) (|:| |canonical| %)
+                        (|:| |associate| %)))
            '#(~= 106 |zero?| 112 |unitNormal| 117 |unitCanonical| 122 |unit?|
               127 |subtractIfCan| 132 |series| 138 |sample| 143 |rightRecip|
               147 |rightPower| 152 |recip| 164 |pole?| 169 |plenaryPower| 174
@@ -213,27 +213,27 @@
            'NIL
            (CONS
             (|makeByteWordVec2| 1
-                                '(1 1 1 1 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 1 0 0 0 1 1))
+                                '(1 1 1 1 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                                  0 0 1 0 1 1 0 0 0))
             (CONS
-             '#(NIL NIL |Algebra&| |EntireRing&| NIL |Rng&| NIL
-                |NonAssociativeAlgebra&| NIL |Module&| |NonAssociativeRing&|
-                NIL |NonAssociativeRng&| NIL NIL |AbelianGroup&| NIL NIL NIL
-                NIL |MagmaWithUnit&| |NonAssociativeSemiRng&| |AbelianMonoid&|
-                |Magma&| |AbelianSemiGroup&| |SetCategory&| NIL NIL
-                |BasicType&| NIL NIL NIL)
+             '#(NIL NIL |EntireRing&| |Algebra&| NIL |NonAssociativeAlgebra&|
+                NIL |Rng&| |Module&| NIL NIL |NonAssociativeRing&| NIL NIL
+                |NonAssociativeRng&| |AbelianGroup&| NIL NIL NIL
+                |AbelianMonoid&| |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL
+                |AbelianSemiGroup&| |Magma&| NIL |SetCategory&| NIL NIL NIL
+                |BasicType&| NIL)
              (CONS
-              '#((|IntegralDomain|) (|CommutativeRing|) (|Algebra| $$)
-                 (|EntireRing|) (|Ring|) (|Rng|) (|SemiRing|)
-                 (|NonAssociativeAlgebra| $$) (|SemiRng|) (|Module| $$)
-                 (|NonAssociativeRing|) (|BiModule| $$ $$)
-                 (|NonAssociativeRng|) (|RightModule| $$) (|LeftModule| $$)
-                 (|AbelianGroup|) (|Monoid|) (|NonAssociativeSemiRing|)
-                 (|CancellationAbelianMonoid|) (|SemiGroup|) (|MagmaWithUnit|)
-                 (|NonAssociativeSemiRng|) (|AbelianMonoid|) (|Magma|)
-                 (|AbelianSemiGroup|) (|SetCategory|) (|CommutativeStar|)
-                 (|unitsKnown|) (|BasicType|) (|CoercibleTo| 58)
-                 (|TwoSidedRecip|) (|noZeroDivisors|))
+              '#((|IntegralDomain|) (|CommutativeRing|) (|EntireRing|)
+                 (|Algebra| $$) (|Ring|) (|NonAssociativeAlgebra| $$)
+                 (|SemiRing|) (|Rng|) (|Module| $$) (|SemiRng|)
+                 (|BiModule| $$ $$) (|NonAssociativeRing|) (|LeftModule| $$)
+                 (|RightModule| $$) (|NonAssociativeRng|) (|AbelianGroup|)
+                 (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
+                 (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
+                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|) (|Magma|)
+                 (|CommutativeStar|) (|SetCategory|) (|noZeroDivisors|)
+                 (|TwoSidedRecip|) (|CoercibleTo| 56) (|BasicType|)
+                 (|unitsKnown|))
               (|makeByteWordVec2| 58
                                   '(0 6 0 11 1 12 8 6 13 0 6 0 15 1 7 17 0 18 1
                                     7 6 0 19 2 6 17 0 0 20 1 8 0 0 21 2 12 8 8
@@ -241,18 +241,18 @@
                                     29 1 6 0 31 32 2 12 8 6 8 33 2 12 8 8 6 35
                                     1 12 39 8 40 2 12 39 8 8 43 2 0 41 0 0 44 2
                                     46 2 2 45 47 0 6 48 50 1 6 17 0 53 2 0 17 0
-                                    0 1 1 0 17 0 1 1 1 56 0 1 1 1 0 0 1 1 1 17
+                                    0 1 1 0 17 0 1 1 1 58 0 1 1 1 0 0 1 1 1 17
                                     0 1 2 0 41 0 0 1 1 0 0 8 9 0 0 0 1 1 0 41 0
-                                    1 2 0 0 0 48 1 2 0 0 0 45 1 1 0 41 0 42 1 0
-                                    17 0 52 2 1 0 0 45 1 2 0 48 0 48 54 1 0 48
-                                    0 55 2 0 17 0 0 1 1 0 17 0 1 1 0 41 0 1 2 0
-                                    0 0 48 1 2 0 0 0 45 1 1 0 57 0 1 2 1 41 0 0
-                                    44 2 0 0 0 0 1 1 1 0 0 1 1 0 0 31 1 1 0 58
-                                    0 1 1 0 8 0 23 0 0 48 51 3 0 0 0 0 0 1 2 1
-                                    17 0 0 1 2 0 0 0 0 1 2 0 17 0 0 1 2 0 0 0
-                                    48 49 2 0 0 0 45 1 0 0 0 10 0 0 0 14 2 0 17
-                                    0 0 22 2 0 0 0 0 16 1 0 0 0 30 2 0 0 0 0 25
-                                    2 0 0 0 31 36 2 0 0 6 0 37 2 0 0 0 6 38 2 0
-                                    0 48 0 1 2 0 0 31 0 34 2 0 0 0 0 28 2 0 0
-                                    45 0 1)))))
+                                    1 2 0 0 0 45 1 2 0 0 0 48 1 1 0 41 0 42 1 0
+                                    17 0 52 2 1 0 0 45 1 1 0 48 0 55 2 0 48 0
+                                    48 54 2 0 17 0 0 1 1 0 17 0 1 1 0 41 0 1 2
+                                    0 0 0 45 1 2 0 0 0 48 1 1 0 57 0 1 2 1 41 0
+                                    0 44 2 0 0 0 0 1 1 0 56 0 1 1 0 0 31 1 1 1
+                                    0 0 1 1 0 8 0 23 0 0 48 51 3 0 0 0 0 0 1 2
+                                    1 17 0 0 1 2 0 0 0 0 1 2 0 17 0 0 1 2 0 0 0
+                                    45 1 2 0 0 0 48 49 0 0 0 10 0 0 0 14 2 0 17
+                                    0 0 22 1 0 0 0 30 2 0 0 0 0 16 2 0 0 0 0 25
+                                    2 0 0 45 0 1 2 0 0 0 0 28 2 0 0 31 0 34 2 0
+                                    0 48 0 1 2 0 0 0 6 38 2 0 0 6 0 37 2 0 0 0
+                                    31 36)))))
            '|lookupComplete|)) 

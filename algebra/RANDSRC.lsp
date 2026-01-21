@@ -76,8 +76,6 @@
                                    '((|seed| ((|Integer|))) T))
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 15
-                                            '(0 0 9 11 0 0 9 14 1 0 12 9 13 0 0
-                                              9 10 1 0 9 9 15)))))
+                                            '(0 0 9 11 0 0 9 14 1 0 12 9 13 1 0
+                                              9 9 15 0 0 9 10)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|RandomNumberSource| 'NILADIC T) 

@@ -983,5 +983,3 @@
                                               16 17 38 39 1 0 16 17 44 2 0 16
                                               17 38 42 1 0 16 23 49)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|UnittestCount| 'NILADIC T) 

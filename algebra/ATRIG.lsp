@@ -20,5 +20,3 @@
                        ((|atan| (% %)) T))
                      NIL NIL NIL)))
            (SETELT #1# 0 '(|ArcTrigonometricFunctionCategory|))))) 
-
-(MAKEPROP '|ArcTrigonometricFunctionCategory| 'NILADIC T) 

@@ -27,5 +27,3 @@
                               ((|new| (% (|String|) (|String|) (|String|))) T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|FileNameCategory|))))) 
-
-(MAKEPROP '|FileNameCategory| 'NILADIC T) 

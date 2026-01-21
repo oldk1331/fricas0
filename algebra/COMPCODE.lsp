@@ -322,5 +322,3 @@
                                               0 41 5 0 42 28 7 7 7 7 45 4 0 42
                                               43 7 7 7 44)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|compCode| 'NILADIC T) 

@@ -578,5 +578,3 @@
                                               17 66 1 0 13 13 32 1 0 46 46 59 1
                                               0 63 17 64)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|RadicalEigenPackage| 'NILADIC T) 

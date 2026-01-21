@@ -15,5 +15,3 @@
                                    (|Join| (|ConvertibleTo| '#2#)
                                            (|ConvertibleTo| '#3#))))
            (SETELT #1# 0 '(|RealConstant|))))) 
-
-(MAKEPROP '|RealConstant| 'NILADIC T) 

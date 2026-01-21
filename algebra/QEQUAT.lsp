@@ -65,5 +65,3 @@
                                                    16 2 0 0 8 10 14 1 0 7 0
                                                    13)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|QueryEquation| 'NILADIC T) 

@@ -17,5 +17,3 @@
                                T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|Hashable|))))) 
-
-(MAKEPROP '|Hashable| 'NILADIC T) 

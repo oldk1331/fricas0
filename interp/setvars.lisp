@@ -878,7 +878,7 @@
            (SETQ |bfVar#10| (CDR |bfVar#10|))))
         |arg| NIL))))))
 
-; setExposeAddConstr arg ==
+; setExposeAddConstr2(arg, noquiet) ==
 ;   (null arg) =>
 ;     centerAndHighlight ('"The constructor Option",$LINELENGTH,
 ;       specialChar 'hbar)
@@ -888,18 +888,20 @@
 ;     x := unabbrev x
 ;     if PAIRP x then x := QCAR x
 ;     -- if the constructor is known, we know what type it is
-;     null GETDATABASE(x,'CONSTRUCTORKIND) =>
+;     null(get_database(x, 'CONSTRUCTORKIND)) =>
 ;       sayKeyedMsg("S2IZ0049J",[x])
 ;     member(x,$localExposureData.1) =>
-;       sayKeyedMsg("S2IZ0049K",[x,$interpreterFrameName])
+;         if noquiet then
+;             sayKeyedMsg("S2IZ0049K", [x, $interpreterFrameName])
 ;     -- if the constructor is explicitly hidden, then remove that
 ;     if member(x,$localExposureData.2) then
 ;       $localExposureData.2 := delete(x,$localExposureData.2)
 ;     $localExposureData.1 := MSORT cons(x,$localExposureData.1)
 ;     clearClams()
-;     sayKeyedMsg("S2IZ0049P",[x,$interpreterFrameName])
+;     if noquiet then
+;         sayKeyedMsg("S2IZ0049P", [x, $interpreterFrameName])
 
-(DEFUN |setExposeAddConstr| (|arg|)
+(DEFUN |setExposeAddConstr2| (|arg| |noquiet|)
   (PROG ()
     (RETURN
      (COND
@@ -919,10 +921,13 @@
               (SETQ |x| (|unabbrev| |x|))
               (COND ((CONSP |x|) (SETQ |x| (QCAR |x|))))
               (COND
-               ((NULL (GETDATABASE |x| 'CONSTRUCTORKIND))
+               ((NULL (|get_database| |x| 'CONSTRUCTORKIND))
                 (|sayKeyedMsg| 'S2IZ0049J (LIST |x|)))
                ((|member| |x| (ELT |$localExposureData| 1))
-                (|sayKeyedMsg| 'S2IZ0049K (LIST |x| |$interpreterFrameName|)))
+                (COND
+                 (|noquiet|
+                  (|sayKeyedMsg| 'S2IZ0049K
+                   (LIST |x| |$interpreterFrameName|)))))
                (#1#
                 (PROGN
                  (COND
@@ -932,10 +937,18 @@
                  (SETF (ELT |$localExposureData| 1)
                          (MSORT (CONS |x| (ELT |$localExposureData| 1))))
                  (|clearClams|)
-                 (|sayKeyedMsg| 'S2IZ0049P
-                  (LIST |x| |$interpreterFrameName|))))))))
+                 (COND
+                  (|noquiet|
+                   (|sayKeyedMsg| 'S2IZ0049P
+                    (LIST |x| |$interpreterFrameName|))))))))))
            (SETQ |bfVar#13| (CDR |bfVar#13|))))
         |arg| NIL))))))
+
+; setExposeAddConstr(arg) ==
+;     setExposeAddConstr2(arg, true)
+
+(DEFUN |setExposeAddConstr| (|arg|)
+  (PROG () (RETURN (|setExposeAddConstr2| |arg| T))))
 
 ; setExposeDrop arg ==
 ;   (null arg) =>
@@ -1054,7 +1067,7 @@
 ;     x := unabbrev x
 ;     if PAIRP x then x := QCAR x
 ;     -- if the constructor is known, we know what type it is
-;     null GETDATABASE(x,'CONSTRUCTORKIND) =>
+;     null(get_database(x, 'CONSTRUCTORKIND)) =>
 ;       sayKeyedMsg("S2IZ0049J",[x])
 ;     member(x,$localExposureData.2) =>
 ;       sayKeyedMsg("S2IZ0049O",[x,$interpreterFrameName])
@@ -1088,7 +1101,7 @@
               (SETQ |x| (|unabbrev| |x|))
               (COND ((CONSP |x|) (SETQ |x| (QCAR |x|))))
               (COND
-               ((NULL (GETDATABASE |x| 'CONSTRUCTORKIND))
+               ((NULL (|get_database| |x| 'CONSTRUCTORKIND))
                 (|sayKeyedMsg| 'S2IZ0049J (LIST |x|)))
                ((|member| |x| (ELT |$localExposureData| 2))
                 (|sayKeyedMsg| 'S2IZ0049O (LIST |x| |$interpreterFrameName|)))

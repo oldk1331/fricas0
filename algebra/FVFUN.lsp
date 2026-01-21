@@ -73,5 +73,3 @@
                                T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|FortranVectorFunctionCategory|))))) 
-
-(MAKEPROP '|FortranVectorFunctionCategory| 'NILADIC T) 

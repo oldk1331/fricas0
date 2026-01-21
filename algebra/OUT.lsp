@@ -1,6 +1,6 @@
 
 (SDEFUN |OUT;output;OfV;1| ((|e| (|OutputForm|)) (% (|Void|)))
-        (SEQ (|mathprint| |e|) (EXIT (SPADCALL (QREFELT % 7))))) 
+        (SEQ (|mathprint2| |e|) (EXIT (SPADCALL (QREFELT % 7))))) 
 
 (SDEFUN |OUT;output;SV;2| ((|s| (|String|)) (% (|Void|)))
         (SPADCALL |s| (QREFELT % 9))) 
@@ -91,9 +91,7 @@
                         (|makeByteWordVec2| 24
                                             '(0 6 0 7 1 8 0 12 13 1 17 15 16 18
                                               1 17 10 16 19 1 8 0 10 20 1 16 8
-                                              0 21 1 8 0 12 22 1 0 6 23 24 1 0
-                                              6 8 9 1 0 6 10 11 2 0 6 10 8
-                                              14)))))
+                                              0 21 1 8 0 12 22 1 0 6 23 24 2 0
+                                              6 10 8 14 1 0 6 10 11 1 0 6 8
+                                              9)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|OutputPackage| 'NILADIC T) 

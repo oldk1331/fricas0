@@ -372,8 +372,8 @@
               (92 . |weight|) (|NoneFunctions1| 27) (97 . |coerce|)
               (|NoneFunctions1| 14) (102 . |coerce|) (|Integer|)
               (107 . |coerce|) (112 . |coerce|) (|List| 48) (117 . |concat!|)
-              (123 . |kernel|) |IJB;coerce;%E;15| (|Union| % '"failed")
-              (|Union| % '"0") (|List| 44) (|String|))
+              (123 . |kernel|) |IJB;coerce;%E;15| (|String|) (|List| 44)
+              (|Union| % '"0") (|Union| % '"failed"))
            '#(~= 129 |weight| 135 |variables| 140 |type| 151 |smaller?| 156
               |setNotation| 162 |repeatedIndex| 167 |r2m| 172 |order| 177
               |one?| 182 |numIndVar| 187 |numDepVar| 191 |name| 195
@@ -385,12 +385,12 @@
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|JetBundleCategory&| |OrderedSet&| NIL |SetCategory&|
-                     |BasicType&| NIL |PartialOrder&| NIL)
+                  '#(|JetBundleCategory&| |OrderedSet&| NIL |SetCategory&| NIL
+                     |PartialOrder&| NIL |BasicType&|)
                   (CONS
                    '#((|JetBundleCategory|) (|OrderedSet|) (|Comparable|)
-                      (|SetCategory|) (|BasicType|) (|CoercibleTo| 48)
-                      (|PartialOrder|) (|CoercibleTo| 34))
+                      (|SetCategory|) (|CoercibleTo| 34) (|PartialOrder|)
+                      (|CoercibleTo| 48) (|BasicType|))
                    (|makeByteWordVec2| 73
                                        '(2 15 13 14 0 16 1 11 0 0 19 1 11 27 0
                                          28 2 27 13 0 0 29 1 22 34 0 35 2 14 0
@@ -401,19 +401,19 @@
                                          57 1 0 27 0 58 1 59 54 27 60 1 61 54
                                          14 62 1 48 0 63 64 1 48 0 14 65 2 66 0
                                          0 0 67 2 48 0 50 39 68 2 0 13 0 0 1 1
-                                         0 27 0 58 1 0 39 27 1 2 0 39 27 22 1 1
+                                         0 27 0 58 2 0 39 27 22 1 1 0 39 27 1 1
                                          0 14 0 24 2 0 13 0 0 1 1 0 14 14 17 1
                                          0 44 0 45 1 0 20 44 1 1 0 27 0 1 1 0
                                          13 0 1 0 0 22 32 0 0 22 33 1 0 14 0 47
                                          1 0 20 0 21 2 0 0 0 0 1 2 0 0 0 0 1 1
-                                         0 44 20 1 1 0 73 0 1 2 0 70 0 22 1 2 0
+                                         0 44 20 1 1 0 70 0 1 2 0 73 0 22 1 2 0
                                          0 0 22 1 1 0 22 0 23 0 0 14 18 1 0 27
-                                         27 1 1 0 27 27 1 2 0 71 0 22 1 2 0 20
-                                         0 0 1 1 0 48 0 69 1 0 34 0 1 1 0 27 0
-                                         1 1 0 27 20 1 1 0 72 20 1 0 0 0 1 1 0
-                                         0 22 25 0 0 0 1 1 0 0 22 26 2 0 0 22
-                                         44 1 2 0 0 22 20 30 1 0 0 27 1 1 0 0
-                                         20 1 2 0 0 22 27 1 2 0 0 22 20 1 0 0 0
-                                         31 2 0 13 0 0 1 2 0 13 0 0 1 2 0 13 0
-                                         0 1 2 0 13 0 0 1 2 0 13 0 0 1)))))
+                                         27 1 1 0 27 27 1 2 0 72 0 22 1 2 0 20
+                                         0 0 1 1 0 34 0 1 1 0 48 0 69 1 0 27 20
+                                         1 1 0 27 0 1 1 0 71 20 1 1 0 0 22 25 0
+                                         0 0 1 1 0 0 22 26 0 0 0 1 2 0 0 22 44
+                                         1 2 0 0 22 20 30 2 0 0 22 20 1 2 0 0
+                                         22 27 1 1 0 0 20 1 1 0 0 27 1 0 0 0 31
+                                         2 0 13 0 0 1 2 0 13 0 0 1 2 0 13 0 0 1
+                                         2 0 13 0 0 1 2 0 13 0 0 1)))))
            '|lookupComplete|)) 

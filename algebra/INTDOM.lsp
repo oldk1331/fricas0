@@ -11,5 +11,3 @@
   (SPROG ((#1=#:G1 NIL))
          (PROG1 (LETT #1# (|Join| (|CommutativeRing|) (|EntireRing|)))
            (SETELT #1# 0 '(|IntegralDomain|))))) 
-
-(MAKEPROP '|IntegralDomain| 'NILADIC T) 

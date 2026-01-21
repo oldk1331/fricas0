@@ -17,5 +17,3 @@
                               ((|coerce| (% (|Integer|))) T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|NonAssociativeRing|))))) 
-
-(MAKEPROP '|NonAssociativeRing| 'NILADIC T) 

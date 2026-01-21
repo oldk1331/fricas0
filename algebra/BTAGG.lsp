@@ -23,5 +23,3 @@
                                               ((|xor| (% % %)) T))
                                             NIL NIL NIL))))
            (SETELT #1# 0 '(|BitAggregate|))))) 
-
-(MAKEPROP '|BitAggregate| 'NILADIC T) 

@@ -127,9 +127,9 @@
               |domainOf| 57 |dom| 62 |coerce| 67 |any| 72 = 78)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 12))
+                        '#((|SetCategory|) (|CoercibleTo| 12) (|BasicType|))
                         (|makeByteWordVec2| 30
                                             '(2 10 14 0 0 15 1 18 0 17 19 1 10
                                               14 0 23 1 24 0 12 25 1 12 0 21 26
@@ -139,5 +139,3 @@
                                               0 12 0 29 2 0 0 10 8 30 2 0 14 0
                                               0 16)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|Any| 'NILADIC T) 

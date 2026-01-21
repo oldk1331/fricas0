@@ -659,7 +659,7 @@
 ;               for [.,stag,s] in sargl for [.,atag,a] in argl]
 ;       MEMQ(op,'(Union Mapping QUOTE)) =>
 ;          and/[lazyMatchArg(s,a,dollar,domain) for s in sargl for a in argl]
-;       coSig := GETDATABASE(op,'COSIG)
+;       coSig := get_database(op, 'COSIG)
 ;       NULL coSig => error ['"bad Constructor op", op]
 ;       and/[lazyMatchArg2(s,a,dollar,domain,flag)
 ;            for s in sargl for a in argl for flag in rest coSig]
@@ -738,7 +738,7 @@
           T |sargl| NIL |argl| NIL))
         (#1#
          (PROGN
-          (SETQ |coSig| (GETDATABASE |op| 'COSIG))
+          (SETQ |coSig| (|get_database| |op| 'COSIG))
           (COND ((NULL |coSig|) (|error| (LIST "bad Constructor op" |op|)))
                 (#1#
                  ((LAMBDA
@@ -800,7 +800,7 @@
 
 ; lazyMatchArgDollarCheck(s,d,dollarName,domainName) ==
 ;   #s ~= #d => nil
-;   scoSig := GETDATABASE(opOf s,'COSIG) or return nil
+;   scoSig := get_database(opOf(s), 'COSIG) or return nil
 ;   if MEMQ(opOf s, '(Union Mapping Record)) then
 ;      scoSig := [true for x in s]
 ;   and/[fn for x in rest s for arg in rest d for xt in rest scoSig] where
@@ -821,7 +821,7 @@
            (#1='T
             (PROGN
              (SETQ |scoSig|
-                     (OR (GETDATABASE (|opOf| |s|) 'COSIG) (RETURN NIL)))
+                     (OR (|get_database| (|opOf| |s|) 'COSIG) (RETURN NIL)))
              (COND
               ((MEMQ (|opOf| |s|) '(|Union| |Mapping| |Record|))
                (SETQ |scoSig|
@@ -992,7 +992,7 @@
 ;   MEMQ(functorName, '(Union Mapping)) =>
 ;           [functorName,:[newExpandLocalTypeArgs(a,dollar,domain,true) for a in argl]]
 ;   functorName = 'QUOTE => [functorName,:argl]
-;   coSig := GETDATABASE(functorName,'COSIG)
+;   coSig := get_database(functorName, 'COSIG)
 ;   NULL coSig => error ['"bad functorName", functorName]
 ;   [functorName,:[newExpandLocalTypeArgs(a,dollar,domain,flag)
 ;         for a in argl for flag in rest coSig]]
@@ -1053,7 +1053,7 @@
        ((EQ |functorName| 'QUOTE) (CONS |functorName| |argl|))
        (#1#
         (PROGN
-         (SETQ |coSig| (GETDATABASE |functorName| 'COSIG))
+         (SETQ |coSig| (|get_database| |functorName| 'COSIG))
          (COND
           ((NULL |coSig|) (|error| (LIST "bad functorName" |functorName|)))
           (#1#
@@ -1147,7 +1147,7 @@
 ;   domform is [dom,:.] and dom in '(Union Record Mapping Enumeration) =>
 ;     ofCategory(domform, catOrAtt)
 ;   catOrAtt = '(Type) => true
-;   GETDATABASE(opOf domform, 'ASHARP?) => fn(domform,catOrAtt) where
+;   get_database(opOf(domform), 'ASHARP?) => fn(domform, catOrAtt) where
 ;   -- atom (infovec := getInfovec opOf domform) => fn(domform,catOrAtt) where
 ;     fn(a,b) ==
 ;       categoryForm?(a) => assoc(b, ancestors_of_cat(a, nil))
@@ -1163,29 +1163,29 @@
 ;   null isAtom and op = 'Join =>
 ;     and/[newHasTest(domform,x) for x in rest catOrAtt]
 ; -- we will refuse to say yes for 'Cat has Cat'
-; --GETDATABASE(opOf domform,'CONSTRUCTORKIND) = 'category => throwKeyedMsg("S2IS0025",NIL)
+; --get_database(opOf domform,'CONSTRUCTORKIND) = 'category => throwKeyedMsg("S2IS0025",NIL)
 ; -- on second thoughts we won't!
 ;   catOrAtt is [":", fun, ["Mapping", :sig1]] =>
 ;       evaluateType ["Mapping", :sig1] is ["Mapping", :sig2]  =>
 ;          not(null(HasSignature(domform, [fun, sig2])))
 ;       systemError '"strange Mapping type in newHasTest"
-;   GETDATABASE(opOf domform,'CONSTRUCTORKIND) = 'category =>
+;   get_database(opOf(domform), 'CONSTRUCTORKIND) = 'category =>
 ;       domform = catOrAtt => 'T
 ;       for [aCat, :cond] in ancestors_of_cat(domform, NIL)
 ;            | aCat = catOrAtt  repeat
-;          return evalCond cond where
-;            evalCond x ==
+;          return evalCond(cond, domform, catOrAtt) where
+;            evalCond(x, domform, catOrAtt) ==
 ;              ATOM x => x
 ;              [pred,:l] := x
 ;              pred = 'has =>
-;                   l is [ w1,['ATTRIBUTE,w2]] =>
-;                        BREAK()
-;                        newHasTest(w1,w2)
 ;                   l is [ w1, ['SIGNATURE, :w2]] =>
 ;                       compiledLookup(first w2, CADR w2, eval mkEvalable w1)
-;                   newHasTest(first  l ,first rest l)
-;              pred = 'OR => or/[evalCond i for i in l]
-;              pred = 'AND => and/[evalCond i for i in l]
+;                   l is ['%, new_cat] =>
+;                       new_cat = catOrAtt => nil
+;                       newHasTest(domform, new_cat)
+;                   newHasTest(first  l, first rest l)
+;              pred = 'OR => or/[evalCond(i, domform, catOrAtt) for i in l]
+;              pred = 'AND => and/[evalCond(i, domform, catOrAtt) for i in l]
 ;              x
 ;   null isAtom and constructor? op  =>
 ;     domain := eval mkEvalable domform
@@ -1201,7 +1201,7 @@
                  (|member| |dom| '(|Union| |Record| |Mapping| |Enumeration|)))
             (|ofCategory| |domform| |catOrAtt|))
            ((EQUAL |catOrAtt| '(|Type|)) T)
-           ((GETDATABASE (|opOf| |domform|) 'ASHARP?)
+           ((|get_database| (|opOf| |domform|) 'ASHARP?)
             (|newHasTest,fn| |domform| |catOrAtt|))
            (#1#
             (PROGN
@@ -1243,7 +1243,7 @@
                        (PROGN (SETQ |sig2| (CDR |ISTMP#1|)) #1#)))
                  (NULL (NULL (|HasSignature| |domform| (LIST |fun| |sig2|)))))
                 (#1# (|systemError| "strange Mapping type in newHasTest"))))
-              ((EQ (GETDATABASE (|opOf| |domform|) 'CONSTRUCTORKIND)
+              ((EQ (|get_database| (|opOf| |domform|) 'CONSTRUCTORKIND)
                    '|category|)
                (COND ((EQUAL |domform| |catOrAtt|) 'T)
                      (#1#
@@ -1260,7 +1260,9 @@
                                   (SETQ |cond| (CDR |bfVar#38|))
                                   #1#)
                                  (EQUAL |aCat| |catOrAtt|)
-                                 (RETURN (|newHasTest,evalCond| |cond|)))))
+                                 (RETURN
+                                  (|newHasTest,evalCond| |cond| |domform|
+                                   |catOrAtt|)))))
                           (SETQ |bfVar#39| (CDR |bfVar#39|))))
                        (|ancestors_of_cat| |domform| NIL) NIL))))
               ((AND (NULL |isAtom|) (|constructor?| |op|))
@@ -1268,8 +1270,8 @@
                 (SETQ |domain| (|eval| (|mkEvalable| |domform|)))
                 (|newHasCategory| |domain| |catOrAtt|)))
               (#1# (|systemError| "newHasTest expects category form")))))))))
-(DEFUN |newHasTest,evalCond| (|x|)
-  (PROG (|pred| |l| |w1| |ISTMP#1| |ISTMP#2| |ISTMP#3| |w2|)
+(DEFUN |newHasTest,evalCond| (|x| |domform| |catOrAtt|)
+  (PROG (|pred| |l| |w1| |ISTMP#1| |ISTMP#2| |w2| |new_cat|)
     (RETURN
      (COND ((ATOM |x|) |x|)
            (#1='T
@@ -1287,27 +1289,17 @@
                             (PROGN
                              (SETQ |ISTMP#2| (CAR |ISTMP#1|))
                              (AND (CONSP |ISTMP#2|)
-                                  (EQ (CAR |ISTMP#2|) 'ATTRIBUTE)
-                                  (PROGN
-                                   (SETQ |ISTMP#3| (CDR |ISTMP#2|))
-                                   (AND (CONSP |ISTMP#3|)
-                                        (EQ (CDR |ISTMP#3|) NIL)
-                                        (PROGN
-                                         (SETQ |w2| (CAR |ISTMP#3|))
-                                         #1#))))))))
-                 (PROGN (BREAK) (|newHasTest| |w1| |w2|)))
-                ((AND (CONSP |l|)
-                      (PROGN
-                       (SETQ |w1| (CAR |l|))
-                       (SETQ |ISTMP#1| (CDR |l|))
-                       (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
-                            (PROGN
-                             (SETQ |ISTMP#2| (CAR |ISTMP#1|))
-                             (AND (CONSP |ISTMP#2|)
                                   (EQ (CAR |ISTMP#2|) 'SIGNATURE)
                                   (PROGN (SETQ |w2| (CDR |ISTMP#2|)) #1#))))))
                  (|compiledLookup| (CAR |w2|) (CADR |w2|)
                   (|eval| (|mkEvalable| |w1|))))
+                ((AND (CONSP |l|) (EQ (CAR |l|) '%)
+                      (PROGN
+                       (SETQ |ISTMP#1| (CDR |l|))
+                       (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
+                            (PROGN (SETQ |new_cat| (CAR |ISTMP#1|)) #1#))))
+                 (COND ((EQUAL |new_cat| |catOrAtt|) NIL)
+                       (#1# (|newHasTest| |domform| |new_cat|))))
                 (#1# (|newHasTest| (CAR |l|) (CAR (CDR |l|))))))
               ((EQ |pred| 'OR)
                ((LAMBDA (|bfVar#41| |bfVar#40| |i|)
@@ -1318,7 +1310,8 @@
                      (RETURN |bfVar#41|))
                     (#1#
                      (PROGN
-                      (SETQ |bfVar#41| (|newHasTest,evalCond| |i|))
+                      (SETQ |bfVar#41|
+                              (|newHasTest,evalCond| |i| |domform| |catOrAtt|))
                       (COND (|bfVar#41| (RETURN |bfVar#41|))))))
                    (SETQ |bfVar#40| (CDR |bfVar#40|))))
                 NIL |l| NIL))
@@ -1331,7 +1324,8 @@
                      (RETURN |bfVar#43|))
                     (#1#
                      (PROGN
-                      (SETQ |bfVar#43| (|newHasTest,evalCond| |i|))
+                      (SETQ |bfVar#43|
+                              (|newHasTest,evalCond| |i| |domform| |catOrAtt|))
                       (COND ((NOT |bfVar#43|) (RETURN NIL))))))
                    (SETQ |bfVar#42| (CDR |bfVar#42|))))
                 T |l| NIL))
@@ -1396,7 +1390,7 @@
 ;   dollar :=
 ;     VECP dom => devaluate dom
 ;     devaluateList dom
-;   sayBrightly concat(prefix,form2String dollar)
+;   sayBrightly concat(prefix, '" ", form2String dollar)
 ;   $monitorNewWorld := true
 
 (DEFUN |sayLooking1| (|prefix| |dom|)
@@ -1407,7 +1401,7 @@
       (SETQ |dollar|
               (COND ((VECP |dom|) (|devaluate| |dom|))
                     ('T (|devaluateList| |dom|))))
-      (|sayBrightly| (|concat| |prefix| (|form2String| |dollar|)))
+      (|sayBrightly| (|concat| |prefix| " " (|form2String| |dollar|)))
       (SETQ |$monitorNewWorld| T)))))
 
 ; cc() == -- don't remove this function

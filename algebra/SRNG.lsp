@@ -12,5 +12,3 @@
                    (|Join| (|NonAssociativeSemiRng|) (|BiModule| '% '%)
                            (|SemiGroup|)))
            (SETELT #1# 0 '(|SemiRng|))))) 
-
-(MAKEPROP '|SemiRng| 'NILADIC T) 

@@ -24,5 +24,3 @@
                               ((|fresnelC| (% %)) T))
                             NIL NIL NIL)))
            (SETELT #1# 0 '(|LiouvillianFunctionCategory|))))) 
-
-(MAKEPROP '|LiouvillianFunctionCategory| 'NILADIC T) 

@@ -385,5 +385,3 @@
                                                    15 48 4 0 38 10 27 18 15
                                                    39)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|ModularAlgebraicGcdTools2| 'NILADIC T) 

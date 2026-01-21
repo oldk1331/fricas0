@@ -442,8 +442,8 @@
               (|Record| (|:| |generator| %) (|:| |coef1| %) (|:| |coef2| %)
                         (|:| |coefu| %) (|:| |coefv| %))
               (211 . |right_ext_ext_GCD|) (217 . |right_ext_ext_GCD|)
-              (|Integer|) (|Union| 64 '#2="failed") (|Union| 61 '#2#)
-              (|Fraction| 61) (|OutputForm|) (|PositiveInteger|))
+              (|PositiveInteger|) (|OutputForm|) (|Fraction| 66)
+              (|Union| 66 '#2="failed") (|Union| 63 '#2#) (|Integer|))
            '#(|right_ext_ext_GCD| 223 |rightRemainder| 229 |rightQuotient| 235
               |rightLcm| 241 |rightGcd| 247 |rightExtendedGcd| 253
               |rightExactQuotient| 259 |retractIfCan| 265 |primitivePart| 270

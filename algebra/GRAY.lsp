@@ -90,5 +90,3 @@
                                               0 7 7 11 2 6 7 0 7 14 2 0 8 8 12
                                               15 1 0 8 12 13)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|GrayCode| 'NILADIC T) 

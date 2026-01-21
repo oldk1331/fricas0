@@ -153,5 +153,3 @@
                                               6 28 1 0 30 33 1 1 0 30 33 1 2 0
                                               30 6 33 1)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|RandomIntegerDistributions| 'NILADIC T) 

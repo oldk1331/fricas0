@@ -8,10 +8,10 @@
         (T (SETQ |FormatterCategory;AL| (|FormatterCategory;|))))) 
 
 (DEFUN |FormatterCategory;| ()
-  (SPROG ((#1=#:G33 NIL))
+  (SPROG ((#1=#:G34 NIL))
          (PROG1
              (LETT #1#
-                   (|subst_in_cat| '(#2=#:G32) (LIST '(|OutputForm|))
+                   (|subst_in_cat| '(#2=#:G33) (LIST '(|OutputForm|))
                                    (|Join| (|CoercibleTo| '#2#)
                                            (|mkCategory|
                                             '(((|defaultPrologue|
@@ -45,6 +45,10 @@
                                                T)
                                               ((|formatFunctionSymbol|
                                                 ((|OutputBox|) (|String|)))
+                                               T)
+                                              ((|formatFunction|
+                                                ((|OutputBox|) (|OutputBox|)
+                                                 (|List| (|OutputBox|))))
                                                T)
                                               ((|operatorHandlers|
                                                 ((|OperatorHandlers|
@@ -104,6 +108,17 @@
                                                              (|OutputForm|)))))
                                                T)
                                               ((|prefix|
+                                                ((|Mapping| (|OutputBox|)
+                                                            (|Integer|)
+                                                            (|List|
+                                                             (|OutputForm|)))
+                                                 (|String|) (|Integer|)
+                                                 (|Mapping| (|OutputBox|)
+                                                            (|Integer|)
+                                                            (|List|
+                                                             (|OutputForm|)))))
+                                               T)
+                                              ((|function|
                                                 ((|Mapping| (|OutputBox|)
                                                             (|Integer|)
                                                             (|List|
@@ -340,5 +355,3 @@
                                                T))
                                             NIL NIL NIL))))
            (SETELT #1# 0 '(|FormatterCategory|))))) 
-
-(MAKEPROP '|FormatterCategory| 'NILADIC T) 

@@ -703,5 +703,3 @@
                                               7 7 7 50 1 0 7 7 33 1 0 11 7
                                               47)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|IntegerNumberTheoryFunctions| 'NILADIC T) 

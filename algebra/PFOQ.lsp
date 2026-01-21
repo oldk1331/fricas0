@@ -62,7 +62,7 @@
         (SPROG
          ((|gf|
            (|Join| (|FiniteFieldCategory|) (|FiniteAlgebraicExtensionField| %)
-                   (|ConvertibleTo| (|Integer|))
+                   (|ConvertibleTo| (|Integer|)) (|Canonical|)
                    (CATEGORY |domain| (SIGNATURE |sqrt| (% %))
                     (SIGNATURE |quadraticNonResidue| (%))))))
          (SEQ (LETT |gf| (|InnerPrimeField| |p|))

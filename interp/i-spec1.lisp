@@ -220,8 +220,8 @@
 ;   $env := [[new_contour1, :first($env)]]
 ;
 ;   for m in rest types for var in vars repeat
-;     $env:= put(var,'mode,m,$env)
-;     mkLocalVar($mapName,var)
+;       $env := putIntSymTab(var, 'mode, m, $env)
+;       mkLocalVar($mapName, var)
 ;   old_locals := $localVars
 ;   new_contour2 := []
 ;   for lvar in getLocalVars($mapName,body) repeat
@@ -295,7 +295,7 @@
             (RETURN NIL))
            (#1#
             (PROGN
-             (SETQ |$env| (|put| |var| '|mode| |m| |$env|))
+             (SETQ |$env| (|putIntSymTab| |var| '|mode| |m| |$env|))
              (|mkLocalVar| |$mapName| |var|))))
           (SETQ |bfVar#11| (CDR |bfVar#11|))
           (SETQ |bfVar#12| (CDR |bfVar#12|))))
@@ -332,7 +332,7 @@
 ;   arglCode := ['LIST,:[argCode for type in rest types for var in vars]]
 ;     where argCode == ['putValueValue,['mkAtreeNode,MKQ var],
 ;       objNewCode(['wrap,var],type)]
-;   put($mapName,'mapBody,oldBody,$e)
+;   putIntSymTab($mapName, 'mapBody, oldBody, $e)
 ;   body := ['rewriteMap1,MKQ $mapName,arglCode,MKQ types]
 ;   compileADEFBody(t,vars,types,body,first types)
 
@@ -367,7 +367,7 @@
                           (SETQ |bfVar#14| (CDR |bfVar#14|))
                           (SETQ |bfVar#15| (CDR |bfVar#15|))))
                        NIL (CDR |types|) NIL |vars| NIL)))
-        (|put| |$mapName| '|mapBody| |oldBody| |$e|)
+        (|putIntSymTab| |$mapName| '|mapBody| |oldBody| |$e|)
         (SETQ |body|
                 (LIST '|rewriteMap1| (MKQ |$mapName|) |arglCode|
                       (MKQ |types|)))
@@ -1506,7 +1506,7 @@
 ;     iter is ['STEP,index,lower,step,:upperList] =>
 ;       upLoopIterSTEP(index,lower,step,upperList)
 ;       -- following is an optimization
-;       typeIsASmallInteger(get(index,'mode,$env)) =>
+;       typeIsASmallInteger(get0(index, 'mode, $env)) =>
 ;         RPLACA(iter,'ISTEP)
 ;     throwKeyedMsg('"Malformed iterator")
 
@@ -1563,7 +1563,7 @@
              (PROGN
               (|upLoopIterSTEP| |index| |lower| |step| |upperList|)
               (COND
-               ((|typeIsASmallInteger| (|get| |index| '|mode| |$env|))
+               ((|typeIsASmallInteger| (|get0| |index| '|mode| |$env|))
                 (RPLACA |iter| 'ISTEP)))))
             (#1# (|throwKeyedMsg| "Malformed iterator")))))
          (SETQ |bfVar#32| (CDR |bfVar#32|))))
@@ -1595,7 +1595,7 @@
 ;     RPLACD(iter, rest newIter)
 ;
 ;   iterMs isnt [['List,ud]] => throwKeyedMsg("S2IS0006",[index])
-;   put(index,'mode,ud,$env)
+;   putIntSymTab(index, 'mode, ud, $env)
 ;   mkLocalVar('"the iterator expression",index)
 
 (DEFUN |upLoopIterIN| (|iter| |index| |s|)
@@ -1660,7 +1660,7 @@
            (|throwKeyedMsg| 'S2IS0006 (LIST |index|)))
           (#1#
            (PROGN
-            (|put| |index| '|mode| |ud| |$env|)
+            (|putIntSymTab| |index| '|mode| |ud| |$env|)
             (|mkLocalVar| "the iterator expression" |index|)))))))))))
 
 ; upLoopIterSTEP(index,lower,step,upperList) ==
@@ -1680,7 +1680,7 @@
 ;   if utype then types := [utype, :types]
 ;   else types := [stype, :types]
 ;   type := resolveTypeListAny REMDUP types
-;   put(index,'mode,type,$env)
+;   putIntSymTab(index, 'mode, type, $env)
 ;   mkLocalVar('"the iterator expression",index)
 
 (DEFUN |upLoopIterSTEP| (|index| |lower| |step| |upperList|)
@@ -1727,7 +1727,7 @@
                    (COND (|utype| (SETQ |types| (CONS |utype| |types|)))
                          (#1# (SETQ |types| (CONS |stype| |types|))))
                    (SETQ |type| (|resolveTypeListAny| (REMDUP |types|)))
-                   (|put| |index| '|mode| |type| |$env|)
+                   (|putIntSymTab| |index| '|mode| |type| |$env|)
                    (|mkLocalVar| "the iterator expression" |index|)))))))))))))
 
 ; evalCOLLECT(op,[:itrl,body],m) ==
@@ -1783,7 +1783,8 @@
 ;       getArgValue(step, $SingleInteger),
 ;         :[getArgValue(upper, $SingleInteger) for upper in upperList]]
 ;   itr is ['IN,index,s] =>
-;     ['IN,getUnname index,getArgValue(s,['List,get(index,'mode,$env)])]
+;       ['IN, getUnname(index),
+;        getArgValue(s, ['List, get0(index, 'mode, $env)])]
 ;   (itr is [x,pred]) and (x in '(WHILE UNTIL SUCHTHAT)) =>
 ;     [x,getArgValue(pred,$Boolean)]
 
@@ -1875,7 +1876,7 @@
                         (PROGN (SETQ |s| (CAR |ISTMP#2|)) #1#))))))
        (LIST 'IN (|getUnname| |index|)
              (|getArgValue| |s|
-              (LIST '|List| (|get| |index| '|mode| |$env|)))))
+              (LIST '|List| (|get0| |index| '|mode| |$env|)))))
       ((AND (CONSP |itr|)
             (PROGN
              (SETQ |x| (CAR |itr|))
@@ -2153,7 +2154,7 @@
 ;   --  elements in list in $collectTypeList.
 ;   emptyAtree exp
 ;   for i in indexList for val in indexVals for type in indexTypes repeat
-;     put(i,'value,objNewWrap(val,type),$env)
+;       putIntSymTab(i, 'value, objNewWrap(val, type), $env)
 ;   [m]:=bottomUp exp
 ;   $collectTypeList:=
 ;     null $collectTypeList => [rm:=m]
@@ -2176,7 +2177,8 @@
                 (ATOM |bfVar#53|) (PROGN (SETQ |val| (CAR |bfVar#53|)) NIL)
                 (ATOM |bfVar#54|) (PROGN (SETQ |type| (CAR |bfVar#54|)) NIL))
             (RETURN NIL))
-           (#1='T (|put| |i| '|value| (|objNewWrap| |val| |type|) |$env|)))
+           (#1='T
+            (|putIntSymTab| |i| '|value| (|objNewWrap| |val| |type|) |$env|)))
           (SETQ |bfVar#52| (CDR |bfVar#52|))
           (SETQ |bfVar#53| (CDR |bfVar#53|))
           (SETQ |bfVar#54| (CDR |bfVar#54|))))
@@ -2374,7 +2376,7 @@
 ;   (iterMs isnt [['List,ud]]) and (iterMs isnt [['Stream,ud]])
 ;     and (iterMs isnt [['InfinitTuple, ud]]) =>
 ;       throwKeyedMsg("S2IS0006",[index])
-;   put(index,'mode,ud,$env)
+;   putIntSymTab(index, 'mode, ud, $env)
 ;   mkLocalVar('"the iterator expression",index)
 ;   s :=
 ;     iterMs is [['List,ud],:.] =>
@@ -2453,7 +2455,7 @@
         (|throwKeyedMsg| 'S2IS0006 (LIST |index|)))
        (#1#
         (PROGN
-         (|put| |index| '|mode| |ud| |$env|)
+         (|putIntSymTab| |index| '|mode| |ud| |$env|)
          (|mkLocalVar| "the iterator expression" |index|)
          (SETQ |s|
                  (COND
@@ -2487,7 +2489,7 @@
 ;     null isEqualOrSubDomain(IFCAR bottomUpUseSubdomain(upper),
 ;       $Integer) => throwKeyedMsg("S2IS0007",['"upper"])
 ;
-;   put(index,'mode,type := resolveTT(ltype,stype),$env)
+;   putIntSymTab(index, 'mode, type := resolveTT(ltype, stype), $env)
 ;   null type => throwKeyedMsg("S2IS0010", nil)
 ;   mkLocalVar('"the iterator expression",index)
 ;
@@ -2540,8 +2542,8 @@
                 (IDENTITY (|throwKeyedMsg| 'S2IS0007 (LIST "upper")))))))
             (SETQ |bfVar#58| (CDR |bfVar#58|))))
          |upperList| NIL)
-        (|put| |index| '|mode| (SETQ |type| (|resolveTT| |ltype| |stype|))
-         |$env|)
+        (|putIntSymTab| |index| '|mode|
+         (SETQ |type| (|resolveTT| |ltype| |stype|)) |$env|)
         (COND ((NULL |type|) (|throwKeyedMsg| 'S2IS0010 NIL))
               (#1#
                (PROGN
@@ -2702,7 +2704,7 @@
 ;   mode := objMode getValue s
 ;   mode isnt ['Stream, indMode] and mode isnt ['InfiniteTuple, indMode] =>
 ;     keyedSystemError('"S2GE0016", '("mkIterFun" "bad stream index type"))
-;   put(index,'mode,indMode,$env)
+;   putIntSymTab(index, 'mode, indMode, $env)
 ;   mkLocalVar($mapName,index)
 ;   [m]:=bottomUpCompile funBody
 ;   mapMode := ['Mapping,m,indMode]
@@ -2742,7 +2744,7 @@
         (|keyedSystemError| "S2GE0016" '("mkIterFun" "bad stream index type")))
        (#1#
         (PROGN
-         (|put| |index| '|mode| |indMode| |$env|)
+         (|putIntSymTab| |index| '|mode| |indMode| |$env|)
          (|mkLocalVar| |$mapName| |index|)
          (SETQ |LETTMP#1| (|bottomUpCompile| |funBody|))
          (SETQ |m| (CAR |LETTMP#1|))
@@ -3220,7 +3222,7 @@
 ;   numVars:= #$indexVars
 ;   for [var,:.] in $indexVars repeat
 ;     funBody := subVecNodes(mkIterVarSub(var,numVars),var,funBody)
-;   put($index,'mode,zipType,$env)
+;   putIntSymTab($index, 'mode, zipType, $env)
 ;   mkLocalVar($mapName,$index)
 ;   [m]:=bottomUpCompile funBody
 ;   mapMode := ['Mapping,m,zipType]
@@ -3254,7 +3256,7 @@
                           |funBody|)))))
           (SETQ |bfVar#73| (CDR |bfVar#73|))))
        |$indexVars| NIL)
-      (|put| |$index| '|mode| |zipType| |$env|)
+      (|putIntSymTab| |$index| '|mode| |zipType| |$env|)
       (|mkLocalVar| |$mapName| |$index|)
       (SETQ |LETTMP#1| (|bottomUpCompile| |funBody|))
       (SETQ |m| (CAR |LETTMP#1|))
@@ -4210,11 +4212,11 @@
 ;   not IDENTP(var) =>
 ;     throwKeyedMsg("S2IS0016",[STRINGIMAGE var])
 ;   var in '(% %%) => throwKeyedMsg("S2IS0050",[var])
-;   if get(var,'isInterpreterFunction,$e) then
+;   if get0(var, 'isInterpreterFunction, $e) then
 ;     mode isnt ['Mapping,.,:args] =>
 ;       throwKeyedMsg("S2IS0017",[var,mode])
 ;     -- validate that the new declaration has the defined # of args
-;     mapval := objVal get(var,'value,$e)
+;     mapval := objVal(get0(var, 'value, $e))
 ;     -- mapval looks like '(SPADMAP (args . defn))
 ;     margs := CAADR mapval
 ;     -- if one args, margs is not a pair, just #1 or NIL
@@ -4226,14 +4228,14 @@
 ;     nargs ~= #args => throwKeyedMsg("S2IM0008",[var])
 ;   if $compilingMap then mkLocalVar($mapName,var)
 ;   else clearDependencies(var)
-;   isLocalVar(var) => put(var,'mode,mode,$env)
+;   isLocalVar(var) => putIntSymTab(var, 'mode, mode, $env)
 ;   mode is ['Mapping,:.] => declareMap(var,mode)
-;   v := get(var,'value,$e) =>
+;   v := get0(var, 'value, $e) =>
 ;     -- only allow this if either
 ;     --   - value already has given type
 ;     --   - new mode is same as old declared mode
 ;     objMode(v) = mode => putHist(var,'mode,mode,$e)
-;     mode = get(var,'mode,$e) => NIL   -- nothing to do
+;     mode = get0(var, 'mode, $e) => NIL   -- nothing to do
 ;     throwKeyedMsg("S2IS0052",[var,mode])
 ;   putHist(var,'mode,mode,$e)
 
@@ -4262,7 +4264,7 @@
        (#1#
         (PROGN
          (COND
-          ((|get| |var| '|isInterpreterFunction| |$e|)
+          ((|get0| |var| '|isInterpreterFunction| |$e|)
            (COND
             ((NOT
               (AND (CONSP |mode|) (EQ (CAR |mode|) '|Mapping|)
@@ -4273,7 +4275,7 @@
              (|throwKeyedMsg| 'S2IS0017 (LIST |var| |mode|)))
             (#1#
              (PROGN
-              (SETQ |mapval| (|objVal| (|get| |var| '|value| |$e|)))
+              (SETQ |mapval| (|objVal| (|get0| |var| '|value| |$e|)))
               (SETQ |margs| (CAADR |mapval|))
               (SETQ |nargs|
                       (COND ((NULL |margs|) 0)
@@ -4284,22 +4286,23 @@
                 (|throwKeyedMsg| 'S2IM0008 (LIST |var|)))))))))
          (COND (|$compilingMap| (|mkLocalVar| |$mapName| |var|))
                (#1# (|clearDependencies| |var|)))
-         (COND ((|isLocalVar| |var|) (|put| |var| '|mode| |mode| |$env|))
-               ((AND (CONSP |mode|) (EQ (CAR |mode|) '|Mapping|))
-                (|declareMap| |var| |mode|))
-               ((SETQ |v| (|get| |var| '|value| |$e|))
-                (COND
-                 ((EQUAL (|objMode| |v|) |mode|)
-                  (|putHist| |var| '|mode| |mode| |$e|))
-                 ((EQUAL |mode| (|get| |var| '|mode| |$e|)) NIL)
-                 (#1# (|throwKeyedMsg| 'S2IS0052 (LIST |var| |mode|)))))
-               (#1# (|putHist| |var| '|mode| |mode| |$e|))))))))))
+         (COND
+          ((|isLocalVar| |var|) (|putIntSymTab| |var| '|mode| |mode| |$env|))
+          ((AND (CONSP |mode|) (EQ (CAR |mode|) '|Mapping|))
+           (|declareMap| |var| |mode|))
+          ((SETQ |v| (|get0| |var| '|value| |$e|))
+           (COND
+            ((EQUAL (|objMode| |v|) |mode|)
+             (|putHist| |var| '|mode| |mode| |$e|))
+            ((EQUAL |mode| (|get0| |var| '|mode| |$e|)) NIL)
+            (#1# (|throwKeyedMsg| 'S2IS0052 (LIST |var| |mode|)))))
+          (#1# (|putHist| |var| '|mode| |mode| |$e|))))))))))
 
 ; declareMap(var,mode) ==
 ;   -- declare a Mapping property
-;   (v := get(var, 'value, $e)) and objVal(v) isnt ['SPADMAP, :.] =>
+;   (v := get0(var, 'value, $e)) and objVal(v) isnt ['SPADMAP, :.] =>
 ;       objMode(v) = mode => putHist(var, 'mode, mode, $e)
-;       mode = get(var, 'mode, $e) => nil
+;       mode = get0(var, 'mode, $e) => nil
 ;       throwKeyedMsg("S2IS0019", [var])
 ;   isPartialMode mode => throwKeyedMsg("S2IM0004",NIL)
 ;   putHist(var,'mode,mode,$e)
@@ -4308,14 +4311,14 @@
   (PROG (|v| |ISTMP#1|)
     (RETURN
      (COND
-      ((AND (SETQ |v| (|get| |var| '|value| |$e|))
+      ((AND (SETQ |v| (|get0| |var| '|value| |$e|))
             (NOT
              (PROGN
               (SETQ |ISTMP#1| (|objVal| |v|))
               (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) 'SPADMAP)))))
        (COND
         ((EQUAL (|objMode| |v|) |mode|) (|putHist| |var| '|mode| |mode| |$e|))
-        ((EQUAL |mode| (|get| |var| '|mode| |$e|)) NIL)
+        ((EQUAL |mode| (|get0| |var| '|mode| |$e|)) NIL)
         (#1='T (|throwKeyedMsg| 'S2IS0019 (LIST |var|)))))
       ((|isPartialMode| |mode|) (|throwKeyedMsg| 'S2IM0004 NIL))
       (#1# (|putHist| |var| '|mode| |mode| |$e|))))))
@@ -4406,11 +4409,11 @@
 ; isDomainValuedVariable form ==
 ;   -- returns the value of form if form is a variable with a type value
 ;   IDENTP form and (val := (
-;     get(form,'value,$InteractiveFrame) or _
-;     (PAIRP($env) and get(form,'value,$env)) or _
-;     (PAIRP($e) and get(form,'value,$e)))) and _
+;       getI(form, 'value) or _
+;       (PAIRP($env) and get0(form,'value,$env)) or _
+;       (PAIRP($e) and get0(form,'value,$e)))) and _
 ;       categoryForm?(objMode(val)) =>
-;         objValUnwrap(val)
+;           objValUnwrap(val)
 ;   nil
 
 (DEFUN |isDomainValuedVariable| (|form|)
@@ -4419,9 +4422,9 @@
      (COND
       ((AND (IDENTP |form|)
             (SETQ |val|
-                    (OR (|get| |form| '|value| |$InteractiveFrame|)
-                        (AND (CONSP |$env|) (|get| |form| '|value| |$env|))
-                        (AND (CONSP |$e|) (|get| |form| '|value| |$e|))))
+                    (OR (|getI| |form| '|value|)
+                        (AND (CONSP |$env|) (|get0| |form| '|value| |$env|))
+                        (AND (CONSP |$e|) (|get0| |form| '|value| |$e|))))
             (|categoryForm?| (|objMode| |val|)))
        (|objValUnwrap| |val|))
       ('T NIL)))))

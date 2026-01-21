@@ -306,5 +306,3 @@
                                               36 37 1 0 19 36 38 2 0 19 36 36
                                               41 2 0 19 36 36 39)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|RandomFloatDistributions| 'NILADIC T) 

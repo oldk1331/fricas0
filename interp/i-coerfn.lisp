@@ -5105,11 +5105,11 @@
 ; insertAlist(a,b,l) ==
 ;   null l => [[a,:b]]
 ;   a = l.0.0 => (rplac(CDAR l, b); l)
-;   _?ORDER(l.0.0,a) => [[a,:b],:l]
+;   lt_sexp(l.0.0, a) => [[a,:b],:l]
 ;   (fn(a,b,l);l) where fn(a,b,l) ==
 ;     null rest l => rplac(rest l, [[a, :b]])
 ;     a = l.1.0 => rplac(rest(l.1), b)
-;     _?ORDER(l.1.0, a) => rplac(rest l, [[a, :b], :rest l])
+;     lt_sexp(l.1.0, a) => rplac(rest l, [[a, :b], :rest l])
 ;     fn(a, b, rest l)
 
 (DEFUN |insertAlist| (|a| |b| |l|)
@@ -5118,14 +5118,14 @@
      (COND ((NULL |l|) (LIST (CONS |a| |b|)))
            ((EQUAL |a| (ELT (ELT |l| 0) 0))
             (PROGN (|rplac| (CDAR |l|) |b|) |l|))
-           ((?ORDER (ELT (ELT |l| 0) 0) |a|) (CONS (CONS |a| |b|) |l|))
+           ((|lt_sexp| (ELT (ELT |l| 0) 0) |a|) (CONS (CONS |a| |b|) |l|))
            ('T (PROGN (|insertAlist,fn| |a| |b| |l|) |l|))))))
 (DEFUN |insertAlist,fn| (|a| |b| |l|)
   (PROG ()
     (RETURN
      (COND ((NULL (CDR |l|)) (|rplac| (CDR |l|) (LIST (CONS |a| |b|))))
            ((EQUAL |a| (ELT (ELT |l| 1) 0)) (|rplac| (CDR (ELT |l| 1)) |b|))
-           ((?ORDER (ELT (ELT |l| 1) 0) |a|)
+           ((|lt_sexp| (ELT (ELT |l| 1) 0) |a|)
             (|rplac| (CDR |l|) (CONS (CONS |a| |b|) (CDR |l|))))
            ('T (|insertAlist,fn| |a| |b| (CDR |l|)))))))
 

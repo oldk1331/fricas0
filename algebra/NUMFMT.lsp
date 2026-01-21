@@ -448,5 +448,3 @@
                                               7 23 1 0 44 7 48 1 0 7 44 49 2 0
                                               7 28 28 56 1 0 7 44 45)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|NumberFormats| 'NILADIC T) 

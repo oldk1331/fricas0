@@ -71,5 +71,3 @@
                                               9 7 7 14 1 0 7 6 15 1 0 7 6 13 1
                                               0 7 6 11)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|PatternMatchAssertions| 'NILADIC T) 

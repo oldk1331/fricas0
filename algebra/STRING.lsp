@@ -38,7 +38,7 @@
 
 (DEFUN |String| ()
   (SPROG NIL
-         (PROG (#1=#:G1981)
+         (PROG (#1=#:G1979)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|String|))
@@ -53,7 +53,7 @@
                 (COND ((NOT #1#) (HREM |$ConstructorCache| '|String|)))))))))) 
 
 (DEFUN |String;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (#1=#:G1979 NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (#1=#:G1977 NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|String|))
           (LETT % (GETREFV 40))
@@ -119,47 +119,45 @@
 (MAKEPROP '|String| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL (|IndexedString| (NRTEVAL 1)) (|Integer|)
-              |STRING;ucodeToString;I%;1| (|List| 29) |STRING;uentries;%L;2|
+              |STRING;ucodeToString;I%;1| (|List| 37) |STRING;uentries;%L;2|
               |STRING;string;I%;3| (|Void|) (|OpenMathDevice|)
               (0 . |OMputObject|) (|String|) (5 . |OMputString|)
               (11 . |OMputEndObject|) (|Boolean|) |STRING;OMwrite;Omd%BV;4|
               (|InputForm|) |STRING;convert;%If;5| (|Character|)
-              |STRING;qelt;%IC;6| |STRING;qsetelt!;%I2C;7| (|List| 21)
-              (|List| 26) (|Equation| 21) (|Mapping| 21 21 21)
-              (|NonNegativeInteger|) (|SingleInteger|) (|HashState|)
-              (|Mapping| 17 21 21) (|Mapping| 17 21) (|UniversalSegment| 6)
-              (|Mapping| 21 21) (|OutputForm|) (|CharacterClass|) (|List| %)
-              (|Union| 21 '"failed") (|List| 6))
+              |STRING;qelt;%IC;6| |STRING;qsetelt!;%I2C;7|
+              (|NonNegativeInteger|) (|Mapping| 21 21) (|List| 21) (|List| 6)
+              (|Union| 21 '"failed") (|Mapping| 17 21) (|UniversalSegment| 6)
+              (|Mapping| 21 21 21) (|List| %) (|CharacterClass|) (|OutputForm|)
+              (|Mapping| 17 21 21) (|HashState|) (|SingleInteger|)
+              (|Equation| 21) (|List| 38))
            '#(|uentries| 16 |ucodeToString| 21 |string| 26 |qsetelt!| 31 |qelt|
               38 |convert| 44 |OMwrite| 49)
            'NIL
            (CONS
             (|makeByteWordVec2| 8
-                                '(0 0 0 0 0 0 0 2 0 8 0 0 0 1 3 0 0 0 0 0 0 0 0
-                                  1 2 4))
+                                '(0 0 0 0 0 2 0 0 8 0 3 1 0 0 0 4 2 1 0 0 0 0 0
+                                  0 0 0))
             (CONS
              '#(NIL |StringAggregate&| |OneDimensionalArrayAggregate&| NIL
-                |LinearAggregate&| |IndexedAggregate&| |Collection&|
-                |OrderedSet&| |HomogeneousAggregate&| NIL |SetCategory&|
-                |Aggregate&| |EltableAggregate&| |Evalable&| |Hashable&|
-                |OpenMath&| NIL |BasicType&| NIL NIL NIL NIL NIL
-                |InnerEvalable&| |PartialOrder&| NIL)
+                |LinearAggregate&| |OrderedSet&| |Collection&|
+                |IndexedAggregate&| NIL |HomogeneousAggregate&| |Hashable&|
+                |Evalable&| |EltableAggregate&| |Aggregate&| |SetCategory&| NIL
+                |PartialOrder&| |InnerEvalable&| NIL NIL NIL NIL NIL
+                |BasicType&| NIL |OpenMath&|)
              (CONS
               '#((|StringCategory|) (|StringAggregate|)
                  (|OneDimensionalArrayAggregate| 21)
                  (|FiniteLinearAggregate| 21) (|LinearAggregate| 21)
-                 (|IndexedAggregate| 6 21) (|Collection| 21) (|OrderedSet|)
-                 (|HomogeneousAggregate| 21) (|Comparable|) (|SetCategory|)
-                 (|Aggregate|) (|EltableAggregate| 6 21) (|Evalable| 21)
-                 (|Hashable|) (|OpenMath|) (|CoercibleTo| 35) (|BasicType|)
-                 (|shallowlyMutable|) (|finiteAggregate|) (|Eltable| 33 $$)
-                 (|Type|) (|Eltable| 6 21) (|InnerEvalable| 21 21)
-                 (|PartialOrder|) (|ConvertibleTo| 19))
+                 (|OrderedSet|) (|Collection| 21) (|IndexedAggregate| 6 21)
+                 (|Comparable|) (|HomogeneousAggregate| 21) (|Hashable|)
+                 (|Evalable| 21) (|EltableAggregate| 6 21) (|Aggregate|)
+                 (|SetCategory|) (|ConvertibleTo| 19) (|PartialOrder|)
+                 (|InnerEvalable| 21 21) (|Eltable| 6 21) (|Type|)
+                 (|Eltable| 30 $$) (|finiteAggregate|) (|shallowlyMutable|)
+                 (|BasicType|) (|CoercibleTo| 34) (|OpenMath|))
               (|makeByteWordVec2| 23
                                   '(1 12 11 0 13 2 12 11 0 14 15 1 12 11 0 16 1
                                     0 8 0 9 1 0 0 6 7 1 0 0 6 10 3 9 21 0 6 21
                                     23 2 0 21 0 6 22 1 4 19 0 20 3 0 11 12 0 17
                                     18)))))
            '|lookupIncomplete|)) 
-
-(MAKEPROP '|String| 'NILADIC T) 

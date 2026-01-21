@@ -100,11 +100,11 @@
            '#(~= 54 |variable| 60 |segment| 65 |latex| 70 |equation| 75
               |convert| 81 |coerce| 86 = 91)
            'NIL
-           (CONS (|makeByteWordVec2| 2 '(2 0 1 2 2))
-                 (CONS '#(|SetCategory&| NIL NIL |BasicType&| NIL)
+           (CONS (|makeByteWordVec2| 2 '(2 2 2 1 0))
+                 (CONS '#(|SetCategory&| NIL |BasicType&| NIL NIL)
                        (CONS
-                        '#((|SetCategory|) (|Type|) (|ConvertibleTo| 21)
-                           (|BasicType|) (|CoercibleTo| 16))
+                        '#((|SetCategory|) (|CoercibleTo| 16) (|BasicType|)
+                           (|ConvertibleTo| 21) (|Type|))
                         (|makeByteWordVec2| 28
                                             '(2 9 13 0 0 14 2 0 13 0 0 15 1 8
                                               16 0 17 1 9 16 0 18 2 16 0 0 0 19

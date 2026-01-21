@@ -2,7 +2,7 @@
 (SDEFUN |SIMPC;simplicialComplex;LNniL%;1|
         ((|v| (|List| VS)) (|numPoints| (|NonNegativeInteger|))
          (|fs| (|List| (|List| (|NonNegativeInteger|)))) (% (%)))
-        (SPROG ((|res| (|List| (|OrientedFacet|))) (#1=#:G47 NIL) (|f| NIL))
+        (SPROG ((|res| (|List| (|OrientedFacet|))) (#1=#:G39 NIL) (|f| NIL))
                (SEQ (LETT |res| NIL)
                     (SEQ (LETT |f| NIL) (LETT #1# |fs|) G190
                          (COND
@@ -22,8 +22,8 @@
          (% (%)))
         (SPROG
          ((|numPoints| (|NonNegativeInteger|)) (|m| (|NonNegativeInteger|))
-          (#1=#:G56 NIL) (|fac| NIL) (|facs| (|List| (|OrientedFacet|)))
-          (#2=#:G55 NIL) (|f| NIL))
+          (#1=#:G48 NIL) (|fac| NIL) (|facs| (|List| (|OrientedFacet|)))
+          (#2=#:G47 NIL) (|f| NIL))
          (SEQ (LETT |facs| NIL)
               (SEQ (LETT |f| NIL) (LETT #2# |fs|) G190
                    (COND
@@ -1314,9 +1314,9 @@
               566 |boundary| 571 |addSimplex| 576 |addImpliedFaces| 582 = 587)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 28))
+                        '#((|SetCategory|) (|CoercibleTo| 28) (|BasicType|))
                         (|makeByteWordVec2| 143
                                             '(2 10 0 8 9 11 2 12 0 0 10 13 1 10
                                               15 0 18 0 6 0 20 1 28 0 27 29 1
@@ -1352,15 +1352,15 @@
                                               24 0 8 24 137 1 28 0 49 139 1 28
                                               0 0 140 2 28 0 0 0 141 2 0 24 0 0
                                               1 2 0 0 0 10 75 1 0 0 0 65 3 0 0
-                                              0 0 24 85 1 0 22 23 26 2 0 22 23
-                                              24 25 1 0 0 14 21 3 0 0 14 15 16
-                                              17 2 0 0 14 16 19 2 0 0 0 15 81 2
+                                              0 0 24 85 2 0 22 23 24 25 1 0 22
+                                              23 26 2 0 0 14 16 19 3 0 0 14 15
+                                              16 17 1 0 0 14 21 2 0 0 0 15 81 2
                                               0 0 0 0 130 1 0 96 0 97 1 0 15 0
                                               61 2 0 0 0 0 86 1 0 15 0 59 2 0 0
                                               0 0 82 2 0 0 0 10 77 1 0 27 0 1 1
-                                              0 110 0 112 1 0 34 0 63 3 0 98 0
-                                              24 24 99 1 0 98 0 100 2 0 0 0 15
-                                              79 1 0 23 0 143 1 0 28 0 142 1 0
+                                              0 110 0 112 1 0 34 0 63 1 0 98 0
+                                              100 3 0 98 0 24 24 99 2 0 0 0 15
+                                              79 1 0 28 0 142 1 0 23 0 143 1 0
                                               110 0 114 1 0 107 0 109 1 0 104 0
                                               106 1 0 0 0 73 2 0 0 0 10 58 1 0
                                               34 0 71 2 0 24 0 0 138)))))

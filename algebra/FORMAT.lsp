@@ -186,16 +186,16 @@
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
                  (CONS '#(NIL NIL NIL)
                        (CONS
-                        '#((|OutputFormatterCategory|) (|CoercibleTo| 7)
-                           (|CoercibleFrom| 7))
+                        '#((|CoercibleFrom| 7) (|CoercibleTo| 7)
+                           (|OutputFormatterCategory|))
                         (|makeByteWordVec2| 40
                                             '(1 13 15 0 16 1 6 13 22 23 1 6 13
                                               22 24 0 13 0 32 1 34 7 7 35 1 6
                                               13 7 36 0 6 38 39 2 0 13 0 13 29
                                               2 0 13 0 13 31 2 0 13 0 13 30 2 0
                                               27 26 26 28 1 0 13 0 14 0 0 38 40
-                                              0 0 0 33 2 0 0 7 10 11 1 0 0 7 8
-                                              1 0 13 0 17 1 0 13 0 18 1 0 19 0
-                                              20 2 0 0 7 10 12 1 0 0 7 9 1 0 7
-                                              0 21)))))
+                                              0 0 0 33 2 0 0 7 10 11 1 0 13 0
+                                              17 1 0 0 7 8 1 0 13 0 18 1 0 19 0
+                                              20 2 0 0 7 10 12 1 0 7 0 21 1 0 0
+                                              7 9)))))
            '|lookupComplete|)) 

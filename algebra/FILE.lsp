@@ -151,17 +151,17 @@
               |close!| 101 = 106)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0))
-                 (CONS '#(NIL |SetCategory&| |BasicType&| NIL)
+                 (CONS '#(NIL |SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|FileCategory| 9 6) (|SetCategory|) (|BasicType|)
-                           (|CoercibleTo| 11))
+                        '#((|FileCategory| 9 6) (|SetCategory|)
+                           (|CoercibleTo| 11) (|BasicType|))
                         (|makeByteWordVec2| 32
                                             '(1 9 8 0 10 1 12 11 0 13 1 9 11 0
                                               14 1 9 12 0 15 1 9 8 0 16 2 9 8 0
                                               0 17 2 12 8 0 0 28 2 0 8 0 0 1 2
                                               0 6 0 6 32 2 0 0 0 12 24 1 0 30 0
-                                              31 1 0 6 0 29 1 0 0 9 21 2 0 0 9
-                                              12 20 1 0 9 0 26 1 0 12 0 1 1 0
-                                              12 0 27 1 0 22 0 23 1 0 11 0 19 1
-                                              0 0 0 25 2 0 8 0 0 18)))))
+                                              31 1 0 6 0 29 2 0 0 9 12 20 1 0 0
+                                              9 21 1 0 9 0 26 1 0 12 0 1 1 0 12
+                                              0 27 1 0 22 0 23 1 0 11 0 19 1 0
+                                              0 0 25 2 0 8 0 0 18)))))
            '|lookupComplete|)) 

@@ -137,18 +137,18 @@
               103 = 113 - 119 + 125)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 28))
+                        '#((|SetCategory|) (|CoercibleTo| 28) (|BasicType|))
                         (|makeByteWordVec2| 39
                                             '(2 6 9 0 10 11 1 13 0 12 14 1 16
                                               10 0 17 1 16 9 0 18 2 7 0 0 0 20
                                               1 7 0 0 21 1 7 0 0 23 1 5 0 0 24
                                               2 25 5 5 5 26 1 29 28 0 30 1 6 32
                                               0 33 1 6 32 0 35 2 0 39 0 0 1 1 0
-                                              9 0 1 3 0 32 0 37 37 38 1 0 32 0
-                                              36 2 0 13 0 10 15 2 0 0 0 16 19 1
-                                              0 32 0 34 1 0 0 5 8 1 0 28 0 31 2
+                                              9 0 1 1 0 32 0 36 3 0 32 0 37 37
+                                              38 2 0 0 0 16 19 2 0 13 0 10 15 1
+                                              0 32 0 34 1 0 28 0 31 1 0 0 5 8 2
                                               0 39 0 0 1 2 0 0 0 0 27 2 0 0 0 0
                                               22)))))
            '|lookupComplete|)) 

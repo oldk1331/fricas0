@@ -6,7 +6,7 @@
 
 (SDEFUN |BITST;starts;S%;2| ((|str| (|String|)) (% (%)))
         (SPROG
-         ((|res| (|List| (|Boolean|))) (#1=#:G29 NIL) (|c| NIL)
+         ((|res| (|List| (|Boolean|))) (#1=#:G21 NIL) (|c| NIL)
           (|cs| (|List| (|Character|))))
          (SEQ (LETT |res| NIL) (LETT |cs| (SPADCALL |str| (QREFELT % 11)))
               (SEQ (LETT |c| NIL) (LETT #1# |cs|) G190
@@ -139,19 +139,17 @@
            '#(~= 56 |starts| 62 |latex| 72 |coerce| 77 |\\/| 82 = 88 |/\\| 94)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0))
-                 (CONS '#(NIL NIL NIL |SetCategory&| |BasicType&| NIL)
+                 (CONS '#(NIL NIL NIL |SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|Lattice|) (|MeetSemilattice|) (|JoinSemilattice|)
-                           (|SetCategory|) (|BasicType|) (|CoercibleTo| 26))
+                        '#((|Lattice|) (|JoinSemilattice|) (|MeetSemilattice|)
+                           (|SetCategory|) (|CoercibleTo| 26) (|BasicType|))
                         (|makeByteWordVec2| 33
                                             '(1 10 9 0 11 2 7 0 0 12 13 2 15 0
                                               0 0 16 2 19 12 0 0 20 2 6 7 0 21
                                               22 2 7 12 0 0 23 1 26 0 10 27 2
                                               28 0 0 26 29 1 26 0 30 31 1 26 0
-                                              30 32 2 0 12 0 0 25 1 0 0 7 8 1 0
-                                              0 10 14 1 0 10 0 1 1 0 26 0 33 2
+                                              30 32 2 0 12 0 0 25 1 0 0 10 14 1
+                                              0 0 7 8 1 0 10 0 1 1 0 26 0 33 2
                                               0 0 0 0 18 2 0 12 0 0 24 2 0 0 0
                                               0 17)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|BitStreamFrame| 'NILADIC T) 

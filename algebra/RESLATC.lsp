@@ -58,6 +58,6 @@
                                    '((|coerce| (|#1| (|Exit|))) T))
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 11
-                                            '(0 7 0 8 1 0 6 10 11 1 0 7 6
-                                              9)))))
+                                            '(0 7 0 8 1 0 7 6 9 1 0 6 10
+                                              11)))))
            '|lookupComplete|)) 

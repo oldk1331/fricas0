@@ -81,14 +81,12 @@
               |COMM;coerce;%Of;4| (|List| %) (10 . |bracket|) (|String|))
            '#(~= 15 |mkcomm| 21 |latex| 32 |coerce| 37 = 42) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 15))
+                        '#((|SetCategory|) (|CoercibleTo| 15) (|BasicType|))
                         (|makeByteWordVec2| 20
                                             '(1 11 0 10 12 1 11 15 0 16 1 15 0
-                                              18 19 2 0 8 0 0 1 2 0 0 0 0 14 1
-                                              0 0 10 13 1 0 20 0 1 1 0 15 0 17
-                                              2 0 8 0 0 9)))))
+                                              18 19 2 0 8 0 0 1 1 0 0 10 13 2 0
+                                              0 0 0 14 1 0 20 0 1 1 0 15 0 17 2
+                                              0 8 0 0 9)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|Commutator| 'NILADIC T) 

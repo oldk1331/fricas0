@@ -3,6 +3,30 @@
 
 (IN-PACKAGE "BOOT")
 
+; $fromSpadTrace := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$fromSpadTrace| NIL))
+
+; $mapSubNameAlist := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$mapSubNameAlist| NIL))
+
+; $mathTrace := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$mathTrace| NIL))
+
+; $mathTraceList := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$mathTraceList| NIL))
+
+; $tracedSpadModemap := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$tracedSpadModemap| NIL))
+
+; $traceletFunctions := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$traceletFunctions| NIL))
+
 ; DEFPARAMETER($traceNoisely, NIL)  -- give trace and untrace messages
 
 (DEFPARAMETER |$traceNoisely| NIL)
@@ -1084,7 +1108,7 @@
       |funNames| NIL))))
 
 ; getMapSig(mapName,subName) ==
-;   lmms:= get(mapName,'localModemap,$InteractiveFrame) =>
+;   lmms := getI(mapName, 'localModemap) =>
 ;     for mm in lmms until sig repeat
 ;       CADR mm = subName => sig:= CDAR mm
 ;     sig
@@ -1093,7 +1117,7 @@
   (PROG (|lmms| |sig|)
     (RETURN
      (COND
-      ((SETQ |lmms| (|get| |mapName| '|localModemap| |$InteractiveFrame|))
+      ((SETQ |lmms| (|getI| |mapName| '|localModemap|))
        (IDENTITY
         (PROGN
          ((LAMBDA (|bfVar#15| |mm| |bfVar#16|)
@@ -1454,7 +1478,8 @@
       NIL |options| NIL))))
 
 ; domainToGenvar x ==
-;   (y:= unabbrevAndLoad x) and GETDATABASE(opOf y,'CONSTRUCTORKIND) = 'domain =>
+;   (y := unabbrevAndLoad(x)) and
+;             get_database(opOf(y), 'CONSTRUCTORKIND) = 'domain =>
 ;     g:= genDomainTraceName y
 ;     SET(g,evalDomain y)
 ;     g
@@ -1464,7 +1489,7 @@
     (RETURN
      (COND
       ((AND (SETQ |y| (|unabbrevAndLoad| |x|))
-            (EQ (GETDATABASE (|opOf| |y|) 'CONSTRUCTORKIND) '|domain|))
+            (EQ (|get_database| (|opOf| |y|) 'CONSTRUCTORKIND) '|domain|))
        (IDENTITY
         (PROGN
          (SETQ |g| (|genDomainTraceName| |y|))
@@ -1549,7 +1574,7 @@
 
 ; transTraceItem x ==
 ;   atom x =>
-;     (value:=get(x,"value",$InteractiveFrame)) and
+;     (value := getI(x, "value")) and
 ;       (objMode value in '((Mode) (Type) (Category))) =>
 ;         x := objVal value
 ;         (y:= domainToGenvar x) => y
@@ -1571,7 +1596,7 @@
      (COND
       ((ATOM |x|)
        (COND
-        ((AND (SETQ |value| (|get| |x| '|value| |$InteractiveFrame|))
+        ((AND (SETQ |value| (|getI| |x| '|value|))
               (|member| (|objMode| |value|) '((|Mode|) (|Type|) (|Category|))))
          (PROGN
           (SETQ |x| (|objVal| |value|))
@@ -1777,7 +1802,7 @@
 ; getMapSubNames(l) ==
 ;   subs:= nil
 ;   for mapName in l repeat
-;     lmm:= get(mapName,'localModemap,$InteractiveFrame) =>
+;     lmm := getI(mapName, 'localModemap) =>
 ;       subs:= APPEND([[mapName,:CADR mm] for mm in lmm],subs)
 ;   union(subs, getPreviousMapSubNames UNIONQ($trace_names,
 ;     $lastUntraced))
@@ -1795,8 +1820,7 @@
             (RETURN NIL))
            (#1='T
             (COND
-             ((SETQ |lmm|
-                      (|get| |mapName| '|localModemap| |$InteractiveFrame|))
+             ((SETQ |lmm| (|getI| |mapName| '|localModemap|))
               (IDENTITY
                (SETQ |subs|
                        (APPEND
@@ -1821,7 +1845,7 @@
 ; getPreviousMapSubNames(traceNames) ==
 ;   subs:= nil
 ;   for mapName in ASSOCLEFT CAAR $InteractiveFrame repeat
-;     lmm:= get(mapName,'localModemap,$InteractiveFrame) =>
+;     lmm := getI(mapName, 'localModemap) =>
 ;       MEMQ(CADAR lmm,traceNames) =>
 ;         for mm in lmm repeat
 ;           subs:= [[mapName,:CADR mm],:subs]
@@ -1840,8 +1864,7 @@
             (RETURN NIL))
            (#1='T
             (COND
-             ((SETQ |lmm|
-                      (|get| |mapName| '|localModemap| |$InteractiveFrame|))
+             ((SETQ |lmm| (|getI| |mapName| '|localModemap|))
               (IDENTITY
                (COND
                 ((MEMQ (CADAR |lmm|) |traceNames|)
@@ -1876,33 +1899,32 @@
   (PROG (|y|) (RETURN (COND ((SETQ |y| (|rassoc| |x| |subs|)) |y|) ('T |x|)))))
 
 ; isUncompiledMap(x) ==
-;   y:= get(x,'value,$InteractiveFrame) =>
-;     (CAAR y) = 'SPADMAP and null get(x,'localModemap,$InteractiveFrame)
+;   y := getI(x, 'value) =>
+;     (CAAR y) = 'SPADMAP and null getI(x, 'localModemap)
 
 (DEFUN |isUncompiledMap| (|x|)
   (PROG (|y|)
     (RETURN
      (COND
-      ((SETQ |y| (|get| |x| '|value| |$InteractiveFrame|))
+      ((SETQ |y| (|getI| |x| '|value|))
        (IDENTITY
-        (AND (EQ (CAAR |y|) 'SPADMAP)
-             (NULL (|get| |x| '|localModemap| |$InteractiveFrame|)))))))))
+        (AND (EQ (CAAR |y|) 'SPADMAP) (NULL (|getI| |x| '|localModemap|)))))))))
 
 ; isInterpOnlyMap(map) ==
-;   x:= get(map,'localModemap,$InteractiveFrame) =>
+;   x := getI(map, 'localModemap) =>
 ;     (CAAAR x) = 'interpOnly
 
 (DEFUN |isInterpOnlyMap| (|map|)
   (PROG (|x|)
     (RETURN
      (COND
-      ((SETQ |x| (|get| |map| '|localModemap| |$InteractiveFrame|))
+      ((SETQ |x| (|getI| |map| '|localModemap|))
        (IDENTITY (EQ (CAAAR |x|) '|interpOnly|)))))))
 
 ; augmentTraceNames(l,mapSubNames) ==
 ;   res:= nil
 ;   for traceName in l repeat
-;     mml:= get(traceName,'localModemap,$InteractiveFrame) =>
+;     mml := getI(traceName, 'localModemap) =>
 ;       res:= APPEND([CADR mm for mm in mml],res)
 ;     res:= [traceName,:res]
 ;   res
@@ -1920,8 +1942,7 @@
             (RETURN NIL))
            (#1='T
             (COND
-             ((SETQ |mml|
-                      (|get| |traceName| '|localModemap| |$InteractiveFrame|))
+             ((SETQ |mml| (|getI| |traceName| '|localModemap|))
               (SETQ |res|
                       (APPEND
                        ((LAMBDA (|bfVar#55| |bfVar#54| |mm|)
@@ -2681,7 +2702,7 @@
 
 ; getAliasIfTracedMapParameter(x,currentFunction) ==
 ;   isSharpVarWithNum x =>
-;     aliasList:= get(currentFunction,'alias,$InteractiveFrame) =>
+;     aliasList := getI(currentFunction, 'alias) =>
 ;       aliasList.(STRING2PINT_-N(SUBSTRING(PNAME x,1,NIL),1)-1)
 ;   x
 
@@ -2691,15 +2712,14 @@
      (COND
       ((|isSharpVarWithNum| |x|)
        (COND
-        ((SETQ |aliasList|
-                 (|get| |currentFunction| '|alias| |$InteractiveFrame|))
+        ((SETQ |aliasList| (|getI| |currentFunction| '|alias|))
          (IDENTITY
           (ELT |aliasList|
                (- (STRING2PINT-N (SUBSTRING (PNAME |x|) 1 NIL) 1) 1))))))
       ('T |x|)))))
 
 ; getBpiNameIfTracedMap(name) ==
-;   lmm:= get(name,'localModemap,$InteractiveFrame) =>
+;   lmm := getI(name, 'localModemap) =>
 ;       MEMQ(bpiName := CADAR lmm, $trace_names) => bpiName
 ;   name
 
@@ -2707,7 +2727,7 @@
   (PROG (|lmm| |bpiName|)
     (RETURN
      (COND
-      ((SETQ |lmm| (|get| |name| '|localModemap| |$InteractiveFrame|))
+      ((SETQ |lmm| (|getI| |name| '|localModemap|))
        (COND
         ((MEMQ (SETQ |bpiName| (CADAR |lmm|)) |$trace_names|)
          (IDENTITY |bpiName|))))
@@ -3167,7 +3187,7 @@
 ; _?t() ==
 ;   null $trace_names => sayMSG bright '"nothing is traced"
 ;   for x in $trace_names | atom x and not IS_GENVAR x repeat
-;     if llm:= get(x,'localModemap,$InteractiveFrame) then
+;     if llm := getI(x, 'localModemap) then
 ;       x:= (LIST (CADAR llm))
 ;     sayMSG ['"Function",:bright rassocSub(x,$mapSubNameAlist),'"traced"]
 ;   for x in $trace_names | x is [d, :l] and isDomainOrPackage d repeat
@@ -3194,9 +3214,7 @@
                    (AND (ATOM |x|) (NULL (IS_GENVAR |x|))
                         (PROGN
                          (COND
-                          ((SETQ |llm|
-                                   (|get| |x| '|localModemap|
-                                    |$InteractiveFrame|))
+                          ((SETQ |llm| (|getI| |x| '|localModemap|))
                            (SETQ |x| (LIST (CADAR |llm|)))))
                          (|sayMSG|
                           (CONS "Function"

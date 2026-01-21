@@ -22,7 +22,7 @@
 
 (SDEFUN |MATRIX;swapRows!;%2I%;5|
         ((|x| (%)) (|i1| #1=(|Integer|)) (|i2| #1#) (% (%)))
-        (SPROG ((|t2| (R)) (|t1| (R)) (#2=#:G2186 NIL) (|j| NIL))
+        (SPROG ((|t2| (R)) (|t1| (R)) (#2=#:G2190 NIL) (|j| NIL))
                (SEQ
                 (COND
                  ((OR (< |i1| (SPADCALL |x| (QREFELT % 8)))
@@ -46,7 +46,7 @@
 
 (SDEFUN |MATRIX;copy;2%;6| ((|m| (%)) (% (%)))
         (SPROG
-         ((#1=#:G2194 NIL) (|j| NIL) (#2=#:G2193 NIL) (|i| NIL) (|ans| (%)))
+         ((#1=#:G2198 NIL) (|j| NIL) (#2=#:G2197 NIL) (|i| NIL) (|ans| (%)))
          (SEQ (LETT |ans| (MAKE_MATRIX (ANROWS |m|) (ANCOLS |m|)))
               (SEQ (LETT |i| (SPADCALL |m| (QREFELT % 8)))
                    (LETT #2# (SPADCALL |m| (QREFELT % 12))) G190
@@ -91,8 +91,8 @@
 
 (SDEFUN |MATRIX;diagonalMatrix;V%;15| ((|v| (|Vector| R)) (% (%)))
         (SPROG
-         ((#1=#:G2216 NIL) (|i| NIL) (#2=#:G2217 NIL) (|j| NIL)
-          (#3=#:G2218 NIL) (|k| NIL) (|ans| (%)) (|n| (|NonNegativeInteger|)))
+         ((#1=#:G2220 NIL) (|i| NIL) (#2=#:G2221 NIL) (|j| NIL)
+          (#3=#:G2222 NIL) (|k| NIL) (|ans| (%)) (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (QVSIZE |v|))
               (LETT |ans| (SPADCALL |n| |n| (QREFELT % 37)))
               (SEQ (LETT |k| (SPADCALL |v| (QREFELT % 39)))
@@ -120,9 +120,9 @@
 
 (DECLAIM (NOTINLINE |Matrix;|)) 
 
-(DEFUN |Matrix| (#1=#:G2231)
+(DEFUN |Matrix| (#1=#:G2235)
   (SPROG NIL
-         (PROG (#2=#:G2232)
+         (PROG (#2=#:G2236)
            (RETURN
             (COND
              ((LETT #2#
@@ -137,7 +137,7 @@
 
 (DEFUN |Matrix;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G2228 NIL) (#2=#:G2229 NIL) (#3=#:G2230 NIL) (% NIL)
+   ((|pv$| NIL) (#1=#:G2232 NIL) (#2=#:G2233 NIL) (#3=#:G2234 NIL) (% NIL)
     (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -276,14 +276,14 @@
               (75 . |inverse|) (80 . |invertIfCan|) (85 . |invertIfCan|)
               (90 . |zero|) (|Vector| 6) (96 . |minIndex|)
               |MATRIX;diagonalMatrix;V%;15| (|Symbol|) (|InputForm|)
-              (101 . |convert|) (|List| 51) (106 . |listOfLists|)
+              (101 . |convert|) (|List| 52) (106 . |listOfLists|)
               (111 . |convert|) (|List| %) (116 . |convert|) (121 . |convert|)
-              (|Boolean|) (|List| 6) (|Equation| 6) (|List| 52)
-              (|Mapping| 50 6 6) (|Mapping| 50 6) (|OutputForm|) (|HashState|)
-              (|SingleInteger|) (|String|) (|Void|) (|List| 66)
-              (|Union| 6 '"one") (|Mapping| 6 7 7) (|Mapping| 6 6 6)
-              (|List| 47) (|List| 23) (|Mapping| 6 6) (|PositiveInteger|)
-              (|List| 70) (|Segment| 7) (|List| 7))
+              (|Boolean|) (|Mapping| 6 6) (|List| 6) (|List| 7) (|Segment| 7)
+              (|List| 54) (|List| 47) (|List| 23) (|PositiveInteger|)
+              (|Mapping| 6 6 6) (|Mapping| 6 7 7) (|Void|) (|List| 57)
+              (|Union| 6 '"one") (|List| 65) (|Equation| 6) (|Mapping| 50 6)
+              (|Mapping| 50 6 6) (|OutputForm|) (|SingleInteger|) (|HashState|)
+              (|String|))
            '#(|zero| 126 |swapRows!| 132 |rowEchelon| 139 |rank| 144 |qsetelt!|
               149 |qelt| 157 |nullity| 164 |nullSpace| 169 |minordet| 174
               |minRowIndex| 179 |minColIndex| 184 |maxRowIndex| 189
@@ -291,21 +291,21 @@
               209 |diagonalMatrix| 214 |determinant| 219 |copy| 224 |convert|
               229)
            'NIL
-           (CONS (|makeByteWordVec2| 19 '(0 0 0 1 0 19 7 2 0 0 0 19 11 8 3))
+           (CONS (|makeByteWordVec2| 19 '(0 0 1 0 2 7 19 0 3 8 11 19 0 0 0))
                  (CONS
-                  '#(|MatrixCategory&| |TwoDimensionalArrayCategory&|
-                     |HomogeneousAggregate&| NIL |Aggregate&| |Evalable&|
-                     |SetCategory&| |Hashable&| NIL NIL NIL |InnerEvalable&|
-                     NIL |BasicType&| NIL)
+                  '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL
+                     |HomogeneousAggregate&| |Hashable&| |SetCategory&|
+                     |Evalable&| |Aggregate&| NIL |BasicType&| NIL
+                     |InnerEvalable&| NIL NIL NIL)
                   (CONS
                    '#((|MatrixCategory| 6 (|Vector| 6) (|Vector| 6))
                       (|TwoDimensionalArrayCategory| 6 (|Vector| 6)
                                                      (|Vector| 6))
-                      (|HomogeneousAggregate| 6) (|Comparable|) (|Aggregate|)
-                      (|Evalable| 6) (|SetCategory|) (|Hashable|) (|Type|)
-                      (|finiteAggregate|) (|shallowlyMutable|)
-                      (|InnerEvalable| 6 6) (|CoercibleTo| 56) (|BasicType|)
-                      (|ConvertibleTo| 42))
+                      (|Comparable|) (|HomogeneousAggregate| 6) (|Hashable|)
+                      (|SetCategory|) (|Evalable| 6) (|Aggregate|)
+                      (|ConvertibleTo| 42) (|BasicType|) (|CoercibleTo| 68)
+                      (|InnerEvalable| 6 6) (|shallowlyMutable|)
+                      (|finiteAggregate|) (|Type|))
                    (|makeByteWordVec2| 49
                                        '(1 0 7 0 12 1 0 7 0 13 1 16 6 2 17 1 0
                                          6 0 18 1 16 6 2 19 1 0 6 0 20 1 16 2 2

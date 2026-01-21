@@ -88,16 +88,14 @@
               52 |dark| 57 |coerce| 62 |bright| 72 = 77)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL)
+                 (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|) (|CoercibleTo| 18))
+                        '#((|SetCategory|) (|CoercibleTo| 18) (|BasicType|))
                         (|makeByteWordVec2| 26
                                             '(1 18 0 17 19 1 7 18 0 20 2 21 17
                                               0 14 22 1 18 0 23 24 2 0 26 0 0 1
                                               1 0 14 0 15 1 0 0 7 11 1 0 0 7 12
                                               1 0 17 0 1 1 0 7 0 13 1 0 0 7 9 1
-                                              0 0 7 8 1 0 0 7 16 1 0 18 0 25 1
+                                              0 0 7 8 1 0 18 0 25 1 0 0 7 16 1
                                               0 0 7 10 2 0 26 0 0 1)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|Palette| 'NILADIC T) 

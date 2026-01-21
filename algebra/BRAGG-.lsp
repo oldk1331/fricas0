@@ -48,7 +48,7 @@
 
 (SDEFUN |BRAGG-;aggCount|
         ((|x| (A)) (|k| (|NonNegativeInteger|)) (% (|NonNegativeInteger|)))
-        (SPROG ((#1=#:G82 NIL) (|y| NIL))
+        (SPROG ((#1=#:G74 NIL) (|y| NIL))
                (SEQ
                 (COND ((SPADCALL |x| (QREFELT % 15)) 0)
                       ('T
@@ -72,7 +72,7 @@
                             (EXIT |k|))))))) 
 
 (SDEFUN |BRAGG-;node?;2AB;9| ((|u| (A)) (|v| (A)) (% (|Boolean|)))
-        (SPROG ((#1=#:G88 NIL))
+        (SPROG ((#1=#:G80 NIL))
                (SEQ
                 (EXIT
                  (COND ((SPADCALL |v| (QREFELT % 15)) NIL)
@@ -84,7 +84,7 @@
                                      (QREFELT % 34))
                            (SPADCALL |u| (SPADCALL |v| (QREFELT % 11))
                                      (QREFELT % 34)))
-                          (PROGN (LETT #1# 'T) (GO #2=#:G87)))
+                          (PROGN (LETT #1# 'T) (GO #2=#:G79)))
                          ('T NIL)))))
                 #2# (EXIT #1#)))) 
 
@@ -156,7 +156,7 @@
               ('T (|BRAGG-;isCycle?| |x| NIL %)))) 
 
 (SDEFUN |BRAGG-;isCycle?| ((|x| (A)) (|acc| (|List| A)) (% (|Boolean|)))
-        (SPROG ((#1=#:G115 NIL) (#2=#:G116 NIL) (#3=#:G117 NIL) (|y| NIL))
+        (SPROG ((#1=#:G107 NIL) (#2=#:G108 NIL) (#3=#:G109 NIL) (|y| NIL))
                (SEQ
                 (EXIT
                  (COND ((SPADCALL |x| (QREFELT % 15)) NIL)
@@ -181,8 +181,8 @@
                                        (LETT #1#
                                              (PROGN
                                               (LETT #2# 'T)
-                                              (GO #4=#:G114)))
-                                       (GO #5=#:G110))))))))
+                                              (GO #4=#:G106)))
+                                       (GO #5=#:G102))))))))
                                 (LETT #3# (CDR #3#)) (GO G190) G191
                                 (EXIT NIL)))
                           #5# (EXIT #1#))
@@ -190,7 +190,7 @@
                 #4# (EXIT #2#)))) 
 
 (SDEFUN |BRAGG-;eqMember?| ((|y| (A)) (|l| (|List| A)) (% (|Boolean|)))
-        (SPROG ((#1=#:G123 NIL) (#2=#:G124 NIL) (#3=#:G125 NIL) (|x| NIL))
+        (SPROG ((#1=#:G115 NIL) (#2=#:G116 NIL) (#3=#:G117 NIL) (|x| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -205,8 +205,8 @@
                            (COND
                             ((SPADCALL |x| |y| (QREFELT % 48))
                              (PROGN
-                              (LETT #1# (PROGN (LETT #2# 'T) (GO #4=#:G122)))
-                              (GO #5=#:G120))))))
+                              (LETT #1# (PROGN (LETT #2# 'T) (GO #4=#:G114)))
+                              (GO #5=#:G112))))))
                          (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
                    #5# (EXIT #1#))
                   (EXIT NIL)))
@@ -322,11 +322,11 @@
                                               43 1 6 41 0 44 1 41 0 23 45 1 0
                                               41 0 46 2 6 14 0 0 48 2 6 0 0 0
                                               49 3 0 0 0 9 0 50 2 6 0 0 0 51 3
-                                              0 0 0 12 0 52 3 0 0 0 9 0 50 3 0
-                                              0 0 12 0 52 1 0 23 0 27 2 0 14 0
-                                              0 35 2 0 14 7 0 39 1 0 19 0 22 1
-                                              0 14 0 16 2 0 0 0 9 10 2 0 0 0 12
-                                              13 1 0 14 0 47 1 0 41 0 46 1 0 23
+                                              0 0 0 12 0 52 3 0 0 0 12 0 52 3 0
+                                              0 0 9 0 50 1 0 23 0 27 2 0 14 0 0
+                                              35 2 0 14 7 0 39 1 0 19 0 22 1 0
+                                              14 0 16 2 0 0 0 12 13 2 0 0 0 9
+                                              10 1 0 14 0 47 1 0 41 0 46 1 0 23
                                               0 28 2 0 14 0 0 37 1 0 29 0
                                               30)))))
            '|lookupComplete|)) 

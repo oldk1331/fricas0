@@ -543,5 +543,3 @@
                                               36 1 0 6 8 64 1 0 6 8 63 1 0 14 8
                                               49)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|PolynomialNumberTheoryFunctions| 'NILADIC T) 

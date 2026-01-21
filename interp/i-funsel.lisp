@@ -3,6 +3,10 @@
 
 (IN-PACKAGE "BOOT")
 
+; $domPvar := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$domPvar| NIL))
+
 ; sayFunctionSelection(op,args,target,dc,func) ==
 ;   $abbreviateTypes : local := true
 ;   startTimingProcess 'debug
@@ -392,7 +396,7 @@
 ;       x is ['Record,:l] =>
 ;         a' := append(reverse [CADDR s for s in l],a')
 ;       x is ['FunctionCalled,name] =>
-;         (xm := get(name,'mode,$e)) and not isPartialMode xm =>
+;         (xm := get0(name, 'mode, $e)) and not(isPartialMode(xm)) =>
 ;           a' := cons(xm,a')
 ;     a := append(a,REMDUP a')
 ;     a := [x for x in a | PAIRP(x)]
@@ -615,7 +619,7 @@
                                           (SETQ |name| (CAR |ISTMP#1|))
                                           #1#))))
                               (COND
-                               ((AND (SETQ |xm| (|get| |name| '|mode| |$e|))
+                               ((AND (SETQ |xm| (|get0| |name| '|mode| |$e|))
                                      (NULL (|isPartialMode| |xm|)))
                                 (IDENTITY (SETQ |a'| (CONS |xm| |a'|)))))))))
                      (SETQ |bfVar#10| (CDR |bfVar#10|))))
@@ -1448,7 +1452,7 @@
 ;   [f(a,opname) for a in l] where
 ;     f(x,op) ==
 ;       x is ['FunctionCalled,g] and op ~= 'name =>
-;         m := get(g,'mode,$e) =>
+;         m := get0(g, 'mode, $e) =>
 ;           m is ['Mapping,:.] => m
 ;           x
 ;         x
@@ -1480,7 +1484,7 @@
                   (PROGN (SETQ |g| (CAR |ISTMP#1|)) #1='T)))
             (NOT (EQ |op| '|name|)))
        (COND
-        ((SETQ |m| (|get| |g| '|mode| |$e|))
+        ((SETQ |m| (|get0| |g| '|mode| |$e|))
          (COND ((AND (CONSP |m|) (EQ (CAR |m|) '|Mapping|)) |m|) (#1# |x|)))
         (#1# |x|)))
       (#1# |x|)))))
@@ -1744,14 +1748,14 @@
 ; getLocalMms(name,types,tar) ==
 ;   -- looks for exact or subsumed local modemap in $e
 ;   mmS := NIL
-;   for  (mm:=[dcSig,:.]) in get(name,'localModemap,$e) repeat
+;   for  (mm := [dcSig, : .]) in get0(name, 'localModemap, $e) repeat
 ;     -- check format and destructure
 ;     dcSig isnt [dc,result,:args] => NIL
 ;     -- make number of args is correct
 ;     #types ~= #args => NIL
 ;     -- check for equal or subsumed arguments
 ;     subsume := (not $useIntegerSubdomain) or (tar = result) or
-;       get(name,'recursive,$e)
+;       get0(name, 'recursive, $e)
 ;     acceptableArgs :=
 ;       and/[f(b,a,subsume) for a in args for b in types] where
 ;         f(x,y,subsume) ==
@@ -1796,7 +1800,7 @@
                     (SETQ |subsume|
                             (OR (NULL |$useIntegerSubdomain|)
                                 (EQUAL |tar| |result|)
-                                (|get| |name| '|recursive| |$e|)))
+                                (|get0| |name| '|recursive| |$e|)))
                     (SETQ |acceptableArgs|
                             ((LAMBDA (|bfVar#31| |bfVar#29| |a| |bfVar#30| |b|)
                                (LOOP
@@ -1822,7 +1826,7 @@
                        (#1# NIL)))
                      (#1# (SETQ |mmS| (CONS |mm| |mmS|))))))))))
           (SETQ |bfVar#28| (CDR |bfVar#28|))))
-       (|get| |name| '|localModemap| |$e|) NIL)
+       (|get0| |name| '|localModemap| |$e|) NIL)
       (NREVERSE |mmS|)))))
 (DEFUN |getLocalMms,f| (|x| |y| |subsume|)
   (PROG ()
@@ -1963,7 +1967,7 @@
 ;     b:= 'T
 ;     p:= CONS(m := mmCost(sig, cond, tar, args1, args2), mm)
 ;     mS:=
-;       null mS => list p
+;       null mS => [p]
 ;       m < CAAR mS => CONS(p,mS)
 ;       S:= mS
 ;       until b repeat
@@ -2984,7 +2988,7 @@
 ; constructSubst(d) ==
 ;   -- constructs a substitution which substitutes d for $
 ;   -- and the arguments of d for #1, #2 ..
-;   SL := list(CONS('%, d))
+;   SL := [CONS('%, d)]
 ;   for x in rest d for v in $FormalMapVariableList repeat
 ;     SL:= CONS(CONS(v,x),SL)
 ;   SL
@@ -3019,7 +3023,7 @@
 ;     type := getDomainFromMm mm
 ;     null type => bad := cons(mm,bad)
 ;     if PAIRP type then type := first type
-;     GETDATABASE(type,'CONSTRUCTORKIND) = 'category => bad := cons(mm,bad)
+;     get_database(type, 'CONSTRUCTORKIND) = 'category => bad := cons(mm, bad)
 ;     name := object2String type
 ;     found := nil
 ;     for n in names while not found repeat
@@ -3051,7 +3055,8 @@
                       (PROGN
                        (COND ((CONSP |type|) (SETQ |type| (CAR |type|))))
                        (COND
-                        ((EQ (GETDATABASE |type| 'CONSTRUCTORKIND) '|category|)
+                        ((EQ (|get_database| |type| 'CONSTRUCTORKIND)
+                             '|category|)
                          (SETQ |bad| (CONS |mm| |bad|)))
                         (#1#
                          (PROGN
@@ -3499,21 +3504,26 @@
 ;   --if $Coerce is NIL, tar has to be the same as the computed target type
 ;   mS:= NIL
 ;   for st in evalMmStack mmC repeat
-;     SL:= evalMmCond(op,sig,st)
-;     not EQ(SL,'failed) =>
-;       SL := fixUpTypeArgs SL
-;       sig:= [subCopy(deepSubCopy(x,SL),$Subst) for x in sig]
-;       not containsVars sig =>
-;         isFreeFunctionFromMmCond mmC and (m := evalMmFreeFunction(op,tar,sig,mmC)) =>
-;            mS:= nconc(m,mS)
-;         "or"/[not isValidType(arg) for arg in sig] => nil
-;         [dc,t,:args]:= sig
-;         $Coerce or null tar or tar=t =>
-;           mS:= nconc(findFunctionInDomain(op,dc,t,args,args,NIL,'T),mS)
+;       SL := evalMmCond(op, sig, st)
+;       not EQ(SL, 'failed) =>
+;           SL := fixUpTypeArgs SL
+;           nsig := [subCopy(deepSubCopy(x, SL), $Subst) for x in sig]
+;           not(containsVars(nsig)) =>
+;               isFreeFunctionFromMmCond(mmC) and
+;                 (m := evalMmFreeFunction(op, tar, nsig, mmC)) =>
+;                   mS:= nconc(m,mS)
+;               "or"/[not isValidType(arg) for arg in nsig] => nil
+;               [dc, t, :args] := nsig
+;               $Coerce or null(tar) or tar = t =>
+;                   mS := nconc(findFunctionInDomain(op, dc, t, args,
+;                                                    args, false, 'T), mS)
+;   if $reportBottomUpFlag and mS then
+;       sayMSG(['"found good modemap for: ",op])
+;       sayNewModemap([sig, mmC])
 ;   mS
 
 (DEFUN |evalMm| (|op| |tar| |sig| |mmC|)
-  (PROG (|mS| SL |m| |dc| |t| |args|)
+  (PROG (|mS| SL |nsig| |m| |dc| |t| |args|)
     (RETURN
      (PROGN
       (SETQ |mS| NIL)
@@ -3529,7 +3539,7 @@
               ((NULL (EQ SL '|failed|))
                (PROGN
                 (SETQ SL (|fixUpTypeArgs| SL))
-                (SETQ |sig|
+                (SETQ |nsig|
                         ((LAMBDA (|bfVar#88| |bfVar#87| |x|)
                            (LOOP
                             (COND
@@ -3545,11 +3555,11 @@
                             (SETQ |bfVar#87| (CDR |bfVar#87|))))
                          NIL |sig| NIL))
                 (COND
-                 ((NULL (|containsVars| |sig|))
+                 ((NULL (|containsVars| |nsig|))
                   (COND
                    ((AND (|isFreeFunctionFromMmCond| |mmC|)
                          (SETQ |m|
-                                 (|evalMmFreeFunction| |op| |tar| |sig|
+                                 (|evalMmFreeFunction| |op| |tar| |nsig|
                                   |mmC|)))
                     (SETQ |mS| (NCONC |m| |mS|)))
                    (((LAMBDA (|bfVar#90| |bfVar#89| |arg|)
@@ -3563,12 +3573,12 @@
                            (SETQ |bfVar#90| (NULL (|isValidType| |arg|)))
                            (COND (|bfVar#90| (RETURN |bfVar#90|))))))
                         (SETQ |bfVar#89| (CDR |bfVar#89|))))
-                     NIL |sig| NIL)
+                     NIL |nsig| NIL)
                     NIL)
                    (#1#
                     (PROGN
-                     (SETQ |dc| (CAR |sig|))
-                     (SETQ |t| (CADR . #2=(|sig|)))
+                     (SETQ |dc| (CAR |nsig|))
+                     (SETQ |t| (CADR . #2=(|nsig|)))
                      (SETQ |args| (CDDR . #2#))
                      (COND
                       ((OR |$Coerce| (NULL |tar|) (EQUAL |tar| |t|))
@@ -3579,6 +3589,10 @@
                                 |mS|)))))))))))))))
           (SETQ |bfVar#86| (CDR |bfVar#86|))))
        (|evalMmStack| |mmC|) NIL)
+      (COND
+       ((AND |$reportBottomUpFlag| |mS|)
+        (|sayMSG| (LIST "found good modemap for: " |op|))
+        (|sayNewModemap| (LIST |sig| |mmC|))))
       |mS|))))
 
 ; evalMmFreeFunction(op,tar,sig,mmC) ==
@@ -3978,7 +3992,7 @@
 ;   -- if needed.
 ;   t1 isnt [con1, :args1] or t2 isnt [con2, :args2] => t2
 ;   con1 ~= con2 => t2
-;   coSig := rest GETDATABASE(first t1, 'COSIG)
+;   coSig := rest(get_database(first(t1), 'COSIG))
 ;   and/coSig => t2
 ;   csub1 := constructSubst t1
 ;   csub2 := constructSubst t2
@@ -4008,7 +4022,7 @@
       ((NOT (EQUAL |con1| |con2|)) |t2|)
       (#1#
        (PROGN
-        (SETQ |coSig| (CDR (GETDATABASE (CAR |t1|) 'COSIG)))
+        (SETQ |coSig| (CDR (|get_database| (CAR |t1|) 'COSIG)))
         (COND
          (((LAMBDA (|bfVar#107| |bfVar#109| |bfVar#108|)
              (LOOP
@@ -5724,7 +5738,7 @@
 ;   -- calls this and should possibly fail in some cases.
 ;   cat := subCopy(cat, SL)
 ;   c := first cat
-;   d := GETDATABASE(c, 'DEFAULTDOMAIN)
+;   d := get_database(c, 'DEFAULTDOMAIN)
 ;   d => [d, :rest cat]
 ;   cat is [c] =>
 ;     c = 'Field => $RationalNumber
@@ -5754,7 +5768,7 @@
      (PROGN
       (SETQ |cat| (|subCopy| |cat| SL))
       (SETQ |c| (CAR |cat|))
-      (SETQ |d| (GETDATABASE |c| 'DEFAULTDOMAIN))
+      (SETQ |d| (|get_database| |c| 'DEFAULTDOMAIN))
       (COND (|d| (CONS |d| (CDR |cat|)))
             ((AND (CONSP |cat|) (EQ (CDR |cat|) NIL)
                   (PROGN (SETQ |c| (CAR |cat|)) #1='T))

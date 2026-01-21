@@ -663,12 +663,12 @@
            (|List| (|List| (|DistributedMultivariatePolynomial| |lv| F))))
           (|tfact|
            #1=(|List| (|HomogeneousDistributedMultivariatePolynomial| |lv| F)))
-          (#2=#:G185 NIL)
+          (#2=#:G177 NIL)
           (|lfact|
            (|List|
             (|List| (|HomogeneousDistributedMultivariatePolynomial| |lv| F))))
-          (#3=#:G184 NIL) (|ff| NIL) (#4=#:G183 NIL) (#5=#:G182 NIL)
-          (|llf| NIL) (#6=#:G181 NIL) (#7=#:G177 NIL)
+          (#3=#:G176 NIL) (|ff| NIL) (#4=#:G175 NIL) (#5=#:G174 NIL)
+          (|llf| NIL) (#6=#:G173 NIL) (#7=#:G169 NIL)
           (|llfact|
            (|List|
             (|Factored|
@@ -677,13 +677,13 @@
            (|Factored|
             (|HomogeneousDistributedMultivariatePolynomial| |lv| F)))
           (|g| (|HomogeneousDistributedMultivariatePolynomial| |lv| F))
-          (#8=#:G180 NIL) (|x| NIL)
+          (#8=#:G172 NIL) (|x| NIL)
           (|basis|
            (|List| (|HomogeneousDistributedMultivariatePolynomial| |lv| F)))
           (|leq1| #1#)
           (|lnp|
            (|List| (|HomogeneousDistributedMultivariatePolynomial| |lv| F)))
-          (#9=#:G179 NIL) (|f| NIL) (#10=#:G178 NIL))
+          (#9=#:G171 NIL) (|f| NIL) (#10=#:G170 NIL))
          (SEQ
           (LETT |lnp|
                 (PROGN
@@ -802,9 +802,9 @@
 
 (DECLAIM (NOTINLINE |GroebnerSolve;|)) 
 
-(DEFUN |GroebnerSolve| (&REST #1=#:G197)
+(DEFUN |GroebnerSolve| (&REST #1=#:G189)
   (SPROG NIL
-         (PROG (#2=#:G198)
+         (PROG (#2=#:G190)
            (RETURN
             (COND
              ((LETT #2#

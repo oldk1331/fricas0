@@ -182,9 +182,9 @@
               |FGROUP;mapGen;M2%;9| (|OutputForm|) (54 . *) (60 . ^)
               (|Mapping| 33 33 33) (66 . |outputForm|) |FGROUP;coerce;%Of;10|
               (74 . =) (80 . |makeMulti|) (85 . |setlast!|) (91 . |concat!|)
-              |FGROUP;*;3%;11| (97 . |smaller?|) (103 . |smaller?|)
-              (|NonNegativeInteger|) (|Union| 6 '"failed")
-              (|Union| % '"failed") (|PositiveInteger|) (|String|))
+              |FGROUP;*;3%;11| (97 . |smaller?|) (103 . |smaller?|) (|String|)
+              (|PositiveInteger|) (|Union| % '"failed") (|NonNegativeInteger|)
+              (|Union| 6 '"failed"))
            '#(~= 109 |smaller?| 115 |size| 121 |sample| 126 |rightRecip| 130
               |rightPower| 135 |retractIfCan| 147 |retract| 152 |recip| 157
               |one?| 162 |nthFactor| 167 |nthExpon| 173 |mapGen| 179 |mapExpon|
@@ -192,16 +192,16 @@
               |factors| 218 |conjugate| 223 |commutator| 229 |coerce| 235 ^ 245
               |One| 269 = 273 / 279 * 285)
            'NIL
-           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 1 0 0 0 0 0 0 0))
+           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 1 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|Group&| NIL NIL |MagmaWithUnit&| |Magma&| NIL
-                     |RetractableTo&| |SetCategory&| NIL NIL NIL |BasicType&|
+                  '#(|Group&| NIL |MagmaWithUnit&| NIL NIL |Magma&|
+                     |SetCategory&| |RetractableTo&| NIL |BasicType&| NIL NIL
                      NIL)
                   (CONS
-                   '#((|Group|) (|Monoid|) (|SemiGroup|) (|MagmaWithUnit|)
-                      (|Magma|) (|Comparable|) (|RetractableTo| 6)
-                      (|SetCategory|) (|CoercibleFrom| 6) (|unitsKnown|)
-                      (|TwoSidedRecip|) (|BasicType|) (|CoercibleTo| 33))
+                   '#((|Group|) (|Monoid|) (|MagmaWithUnit|) (|SemiGroup|)
+                      (|Comparable|) (|Magma|) (|SetCategory|)
+                      (|RetractableTo| 6) (|CoercibleTo| 33) (|BasicType|)
+                      (|TwoSidedRecip|) (|unitsKnown|) (|CoercibleFrom| 6))
                    (|makeByteWordVec2| 50
                                        '(0 8 0 9 1 8 11 0 12 2 8 0 6 15 16 2 8
                                          0 0 6 18 2 8 0 6 0 20 1 15 0 0 22 1 8
@@ -210,15 +210,15 @@
                                          8 33 0 36 36 15 37 2 6 13 0 0 39 1 8 0
                                          11 40 2 11 10 0 10 41 2 11 0 0 0 42 2
                                          6 13 0 0 44 2 0 13 0 0 45 2 0 13 0 0 1
-                                         2 1 13 0 0 45 1 0 46 0 1 0 0 0 1 1 0
-                                         48 0 1 2 0 0 0 46 1 2 0 0 0 49 1 1 0
-                                         47 0 1 1 0 6 0 1 1 0 48 0 1 1 0 13 0
+                                         2 1 13 0 0 45 1 0 49 0 1 0 0 0 1 1 0
+                                         48 0 1 2 0 0 0 47 1 2 0 0 0 49 1 1 0
+                                         50 0 1 1 0 6 0 1 1 0 48 0 1 1 0 13 0
                                          14 2 0 6 0 15 1 2 0 15 0 15 1 2 0 0 30
                                          0 32 2 0 0 23 0 24 1 0 48 0 1 2 0 0 0
-                                         46 1 2 0 0 0 49 1 1 0 50 0 1 1 0 0 0
+                                         47 1 2 0 0 0 49 1 1 0 46 0 1 1 0 0 0
                                          26 1 0 11 0 28 2 0 0 0 0 1 2 0 0 0 0 1
-                                         1 0 0 6 1 1 0 33 0 38 2 0 0 6 15 17 2
-                                         0 0 0 15 1 2 0 0 0 46 1 2 0 0 0 49 1 0
+                                         1 0 33 0 38 1 0 0 6 1 2 0 0 0 47 1 2 0
+                                         0 0 49 1 2 0 0 0 15 1 2 0 0 6 15 17 0
                                          0 0 7 2 0 13 0 0 1 2 0 0 0 0 1 2 0 0 0
-                                         6 19 2 0 0 6 0 21 2 0 0 0 0 43)))))
+                                         0 43 2 0 0 6 0 21 2 0 0 0 6 19)))))
            '|lookupComplete|)) 

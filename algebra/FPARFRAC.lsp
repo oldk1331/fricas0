@@ -574,10 +574,10 @@
               |coerce| 461 D 466 = 477 + 483)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0))
-                 (CONS '#(|SetCategory&| |BasicType&| NIL NIL)
+                 (CONS '#(|SetCategory&| NIL NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|BasicType|)
-                           (|ConvertibleTo| (|Fraction| 7)) (|CoercibleTo| 18))
+                        '#((|SetCategory|) (|CoercibleTo| 18)
+                           (|ConvertibleTo| (|Fraction| 7)) (|BasicType|))
                         (|makeByteWordVec2| 129
                                             '(0 9 0 10 0 6 0 12 0 7 0 13 2 15 0
                                               9 14 16 1 9 18 0 19 0 6 0 21 0 7
@@ -611,9 +611,9 @@
                                               18 0 0 0 125 2 18 0 0 0 126 2 18
                                               0 0 0 127 2 18 0 0 0 128 2 0 115
                                               0 0 1 1 0 7 0 36 1 0 129 0 1 1 0
-                                              0 43 85 1 0 30 0 37 2 0 0 0 14 34
-                                              1 0 0 0 32 1 0 43 0 46 1 0 0 30
-                                              31 1 0 18 0 118 2 0 0 0 14 35 1 0
-                                              0 0 33 2 0 115 0 0 1 2 0 0 7 0
+                                              0 43 85 1 0 30 0 37 1 0 0 0 32 2
+                                              0 0 0 14 34 1 0 43 0 46 1 0 0 30
+                                              31 1 0 18 0 118 1 0 0 0 33 2 0 0
+                                              0 14 35 2 0 115 0 0 1 2 0 0 7 0
                                               39)))))
            '|lookupComplete|)) 

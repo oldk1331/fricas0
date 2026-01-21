@@ -26,7 +26,7 @@
 (MAKEPROP '|Module&| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (0 . *)
-              (6 . *) (|Integer|) (|NonNegativeInteger|) (|PositiveInteger|))
+              (6 . *) (|PositiveInteger|) (|NonNegativeInteger|) (|Integer|))
            '#(* 12) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

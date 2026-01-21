@@ -1,11 +1,4 @@
 
-(SETQ |$CategoryFrame|
-        (|put| #1='|NonNegativeInteger| '|SuperDomain| #2='(|Integer|)
-               (|put| #2# #3='|SubDomain|
-                      (CONS '(|NonNegativeInteger| >= |#1| 0)
-                            (DELASC #1# (|get| #2# #3# |$CategoryFrame|)))
-                      |$CategoryFrame|))) 
-
 (PUT '|NNI;sup;3%;1| '|SPADreplace| 'MAX) 
 
 (SDEFUN |NNI;sup;3%;1| ((|x| (%)) (|y| (%)) (% (%))) (MAX |x| |y|)) 
@@ -33,7 +26,7 @@
 
 (DEFUN |NonNegativeInteger| ()
   (SPROG NIL
-         (PROG (#1=#:G1646)
+         (PROG (#1=#:G1644)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|NonNegativeInteger|))
@@ -67,10 +60,10 @@
           (LIST
            '#(NIL NIL NIL NIL NIL (|Integer|) |NNI;sup;3%;1| |NNI;inf;3%;2|
               |NNI;shift;%I%;3| |NNI;qcoerce;I%;4| (|Union| % '"failed")
-              |NNI;subtractIfCan;2%U;5|
-              (|Record| (|:| |quotient| %) (|:| |remainder| %)) (|InputForm|)
-              (|SingleInteger|) (|PositiveInteger|) (|HashState|)
-              (|NonNegativeInteger|) (|Boolean|) (|String|) (|OutputForm|))
+              |NNI;subtractIfCan;2%U;5| (|Boolean|) (|OutputForm|) (|String|)
+              (|PositiveInteger|) (|NonNegativeInteger|) (|HashState|)
+              (|SingleInteger|) (|InputForm|)
+              (|Record| (|:| |quotient| %) (|:| |remainder| %)))
            '#(~= 0 |zero?| 6 |sup| 11 |subtractIfCan| 17 |smaller?| 23 |shift|
               29 |sample| 35 |rightRecip| 39 |rightPower| 44 |rem| 56 |recip|
               62 |random| 67 |quo| 72 |qcoerce| 78 |opposite?| 83 |one?| 89
@@ -85,37 +78,35 @@
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0 0 0 0 0))
             (CONS
-             '#(NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL |OrderedSet&|
-                NIL |MagmaWithUnit&| |NonAssociativeSemiRng&| |AbelianMonoid&|
-                NIL |Magma&| |AbelianSemiGroup&| NIL |Hashable&| |SetCategory&|
-                NIL NIL |BasicType&| |PartialOrder&| NIL)
+             '#(NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL
+                |AbelianMonoid&| |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL
+                |OrderedSet&| |AbelianSemiGroup&| |Magma&| NIL |SetCategory&|
+                |Hashable&| NIL NIL |PartialOrder&| |BasicType&| NIL NIL)
              (CONS
-              '#((|SemiRing|) (|SemiRng|) (|OrderedAbelianMonoidSup|)
-                 (|BiModule| $$ $$) (|OrderedCancellationAbelianMonoid|)
-                 (|RightModule| $$) (|LeftModule| $$) (|OrderedAbelianMonoid|)
-                 (|OrderedAbelianSemiGroup|) (|Monoid|)
-                 (|NonAssociativeSemiRing|) (|CancellationAbelianMonoid|)
-                 (|OrderedSet|) (|SemiGroup|) (|MagmaWithUnit|)
-                 (|NonAssociativeSemiRng|) (|AbelianMonoid|) (|Comparable|)
-                 (|Magma|) (|AbelianSemiGroup|) (|CommutativeStar|)
-                 (|Hashable|) (|SetCategory|) (|ConvertibleTo| 13)
-                 (|TwoSidedRecip|) (|BasicType|) (|PartialOrder|)
-                 (|CoercibleTo| 20))
+              '#((|SemiRing|) (|SemiRng|) (|BiModule| $$ $$)
+                 (|OrderedAbelianMonoidSup|) (|LeftModule| $$)
+                 (|RightModule| $$) (|OrderedCancellationAbelianMonoid|)
+                 (|OrderedAbelianMonoid|) (|CancellationAbelianMonoid|)
+                 (|NonAssociativeSemiRing|) (|Monoid|)
+                 (|OrderedAbelianSemiGroup|) (|AbelianMonoid|)
+                 (|NonAssociativeSemiRng|) (|MagmaWithUnit|) (|SemiGroup|)
+                 (|OrderedSet|) (|AbelianSemiGroup|) (|Magma|) (|Comparable|)
+                 (|SetCategory|) (|Hashable|) (|CommutativeStar|)
+                 (|CoercibleTo| 13) (|PartialOrder|) (|BasicType|)
+                 (|TwoSidedRecip|) (|ConvertibleTo| 19))
               (|makeByteWordVec2| 20
-                                  '(2 0 18 0 0 1 1 0 18 0 1 2 0 0 0 0 6 2 0 10
-                                    0 0 11 2 0 18 0 0 1 2 0 0 0 5 8 0 0 0 1 1 0
-                                    10 0 1 2 0 0 0 15 1 2 0 0 0 17 1 2 0 0 0 0
+                                  '(2 0 12 0 0 1 1 0 12 0 1 2 0 0 0 0 6 2 0 10
+                                    0 0 11 2 0 12 0 0 1 2 0 0 0 5 8 0 0 0 1 1 0
+                                    10 0 1 2 0 0 0 16 1 2 0 0 0 15 1 2 0 0 0 0
                                     1 1 0 10 0 1 1 0 0 0 1 2 0 0 0 0 1 1 0 0 5
-                                    9 2 0 18 0 0 1 1 0 18 0 1 2 0 0 0 0 1 2 0 0
-                                    0 0 1 1 0 10 0 1 2 0 0 0 15 1 2 0 0 0 17 1
-                                    1 0 19 0 1 2 0 0 0 0 7 2 0 16 16 0 1 1 0 14
-                                    0 1 2 0 0 0 0 1 2 0 10 0 0 1 2 0 12 0 0 1 1
-                                    0 13 0 1 1 0 20 0 1 2 0 0 0 0 1 2 0 0 0 15
-                                    1 2 0 0 0 17 1 0 0 0 1 0 0 0 1 2 0 18 0 0 1
-                                    2 0 18 0 0 1 2 0 18 0 0 1 2 0 18 0 0 1 2 0
-                                    18 0 0 1 1 1 0 0 1 2 1 0 0 0 1 2 0 0 0 0 1
-                                    2 1 0 5 0 1 2 0 0 0 0 1 2 0 0 17 0 1 2 0 0
-                                    15 0 1)))))
+                                    9 2 0 12 0 0 1 1 0 12 0 1 2 0 0 0 0 1 2 0 0
+                                    0 0 1 1 0 10 0 1 2 0 0 0 16 1 2 0 0 0 15 1
+                                    1 0 14 0 1 2 0 0 0 0 7 2 0 17 17 0 1 1 0 18
+                                    0 1 2 0 0 0 0 1 2 0 10 0 0 1 2 0 20 0 0 1 1
+                                    0 19 0 1 1 0 13 0 1 2 0 0 0 0 1 2 0 0 0 16
+                                    1 2 0 0 0 15 1 0 0 0 1 0 0 0 1 2 0 12 0 0 1
+                                    2 0 12 0 0 1 2 0 12 0 0 1 2 0 12 0 0 1 2 0
+                                    12 0 0 1 2 1 0 0 0 1 1 1 0 0 1 2 0 0 0 0 1
+                                    2 0 0 15 0 1 2 0 0 16 0 1 2 0 0 0 0 1 2 1 0
+                                    5 0 1)))))
            '|lookupComplete|)) 
-
-(MAKEPROP '|NonNegativeInteger| 'NILADIC T) 

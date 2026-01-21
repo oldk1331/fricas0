@@ -12,5 +12,3 @@
          (PROG1
              (LETT #1# (|Join| (|OrderedAbelianSemiGroup|) (|AbelianMonoid|)))
            (SETELT #1# 0 '(|OrderedAbelianMonoid|))))) 
-
-(MAKEPROP '|OrderedAbelianMonoid| 'NILADIC T) 

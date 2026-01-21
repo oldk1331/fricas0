@@ -396,11 +396,11 @@
 (SDEFUN |SEM;extract;%2I%;20|
         ((A (%)) (|i1| (|Integer|)) (|i2| (|Integer|)) (% (%)))
         (SPROG
-         ((|newInds| (|List| C)) (#1=#:G218 NIL) (|i| NIL)
+         ((|newInds| (|List| C)) (#1=#:G210 NIL) (|i| NIL)
           (|resRows|
            (|Vector|
             (|Record| (|:| |Indices| (|List| C)) (|:| |Entries| (|List| D)))))
-          (|nr| (|NonNegativeInteger|)) (#2=#:G210 NIL))
+          (|nr| (|NonNegativeInteger|)) (#2=#:G202 NIL))
          (SEQ
           (LETT |nr|
                 (PROG1 (LETT #2# (+ (- |i2| |i1|) 1))
@@ -427,7 +427,7 @@
 
 (SDEFUN |SEM;join;3%;21| ((A1 (%)) (A2 (%)) (% (%)))
         (SPROG
-         ((#1=#:G234 NIL) (|l| NIL) (#2=#:G233 NIL)
+         ((#1=#:G226 NIL) (|l| NIL) (#2=#:G225 NIL)
           (|newRows|
            (|Vector|
             (|Record| (|:| |Indices| (|List| C)) (|:| |Entries| (|List| D)))))
@@ -462,7 +462,7 @@
         (SPROG
          ((|r2|
            #1=(|Record| (|:| |Indices| (|List| C)) (|:| |Entries| (|List| D))))
-          (|r1| #1#) (#2=#:G241 NIL) (|i| NIL) (|res| (%))
+          (|r1| #1#) (#2=#:G233 NIL) (|i| NIL) (|res| (%))
           (|newInds| (|List| C)))
          (SEQ
           (COND
@@ -494,7 +494,7 @@
           (|ri| (|List| C))
           (|r|
            (|Record| (|:| |Indices| (|List| C)) (|:| |Entries| (|List| D))))
-          (#1=#:G261 NIL) (|i| NIL) (RA (%)) (LA (%)) (|linds| (|List| C))
+          (#1=#:G253 NIL) (|i| NIL) (RA (%)) (LA (%)) (|linds| (|List| C))
           (|rinds| (|List| C)))
          (SEQ (LETT |rinds| (SPADCALL A (QREFELT % 23))) (LETT |linds| NIL)
               (SEQ G190
@@ -574,10 +574,10 @@
          (% (|Record| (|:| |Indices| (|List| C)) (|:| |Entries| (|List| D)))))
         (SPROG
          ((|resE| (|List| D)) (|resI| (|List| C)) (|lent2| (|List| D))
-          (|lind2| (|List| C)) (|sum| (D)) (#1=#:G309 NIL) (|c1| NIL)
-          (#2=#:G310 NIL) (|e1| NIL) (#3=#:G308 NIL) (|e2| NIL) (#4=#:G307 NIL)
-          (|lent1| (|List| D)) (#5=#:G306 NIL) (#6=#:G305 NIL) (#7=#:G304 NIL)
-          (#8=#:G303 NIL) (#9=#:G302 NIL) (#10=#:G301 NIL))
+          (|lind2| (|List| C)) (|sum| (D)) (#1=#:G301 NIL) (|c1| NIL)
+          (#2=#:G302 NIL) (|e1| NIL) (#3=#:G300 NIL) (|e2| NIL) (#4=#:G299 NIL)
+          (|lent1| (|List| D)) (#5=#:G298 NIL) (#6=#:G297 NIL) (#7=#:G296 NIL)
+          (#8=#:G295 NIL) (#9=#:G294 NIL) (#10=#:G293 NIL))
          (SEQ
           (COND
            ((NULL (QCAR |r1|))
@@ -736,7 +736,7 @@
         ((A (%))
          (% (|Record| (|:| |Indices| (|List| C)) (|:| |Entries| (|List| D)))))
         (SPROG
-         ((|resE| (|List| D)) (|resI| (|List| C)) (#1=#:G321 NIL) (|r| NIL))
+         ((|resE| (|List| D)) (|resI| (|List| C)) (#1=#:G313 NIL) (|r| NIL))
          (SEQ (LETT |resI| NIL) (LETT |resE| NIL)
               (SEQ (LETT |r| NIL)
                    (LETT #1# (SPADCALL (QVELT A 3) (QREFELT % 43))) G190
@@ -762,19 +762,19 @@
                     (|:| |Pivots| (|List| D))
                     (|:| |Rank| (|NonNegativeInteger|)))))
         (SPROG
-         ((|rk| (|NonNegativeInteger|)) (#1=#:G389 NIL) (|l| NIL)
-          (#2=#:G388 NIL) (|f| (D)) (#3=#:G387 NIL)
+         ((|rk| (|NonNegativeInteger|)) (#1=#:G381 NIL) (|l| NIL)
+          (#2=#:G380 NIL) (|f| (D)) (#3=#:G379 NIL)
           (|r|
            #4=(|Record| (|:| |Indices| (|List| C)) (|:| |Entries| (|List| D))))
-          (|c| (D)) (#5=#:G386 NIL) (|j| NIL) (|pr| #4#) (|Pivs| (|List| D))
+          (|c| (D)) (#5=#:G378 NIL) (|j| NIL) (|pr| #4#) (|Pivs| (|List| D))
           (|piv| (D)) (|pivrow| (|NonNegativeInteger|))
           (|pivlen| #6=(|NonNegativeInteger|)) (|k| (|Integer|)) (|len| #6#)
-          (#7=#:G385 NIL) (|pivind| (C)) (#8=#:G343 NIL)
-          (|finished?| #9=(|Boolean|)) (#10=#:G383 NIL) (|i| NIL)
-          (#11=#:G384 NIL) (|oldr| #4#) (|sorted?| #9#) (|newr| #4#)
-          (#12=#:G382 NIL) (#13=#:G381 NIL) (|changed?| #9#) (#14=#:G380 NIL)
-          (|LTr| (|Matrix| D)) (#15=#:G377 NIL) (#16=#:G379 NIL)
-          (#17=#:G378 NIL) (A (%)))
+          (#7=#:G377 NIL) (|pivind| (C)) (#8=#:G335 NIL)
+          (|finished?| #9=(|Boolean|)) (#10=#:G375 NIL) (|i| NIL)
+          (#11=#:G376 NIL) (|oldr| #4#) (|sorted?| #9#) (|newr| #4#)
+          (#12=#:G374 NIL) (#13=#:G373 NIL) (|changed?| #9#) (#14=#:G372 NIL)
+          (|LTr| (|Matrix| D)) (#15=#:G369 NIL) (#16=#:G371 NIL)
+          (#17=#:G370 NIL) (A (%)))
          (SEQ (LETT A (SPADCALL AA (QREFELT % 52)))
               (LETT |LTr|
                     (SPADCALL
@@ -1024,8 +1024,8 @@
 
 (SDEFUN |SEM;randomGCD| ((|le| (|List| D)) (% (D)))
         (SPROG
-         ((|l| (|List| D)) (|tmp| (|Union| D "failed")) (#1=#:G418 NIL)
-          (|e| NIL) (|h| (D)) (|g| (D)) (#2=#:G417 NIL) (|f| (D)))
+         ((|l| (|List| D)) (|tmp| (|Union| D "failed")) (#1=#:G410 NIL)
+          (|e| NIL) (|h| (D)) (|g| (D)) (#2=#:G409 NIL) (|f| (D)))
          (SEQ
           (EXIT
            (COND
@@ -1043,7 +1043,7 @@
                           ((SPADCALL (|SPADfirst| |l|) (QREFELT % 77))
                            (PROGN
                             (LETT #2# (|spadConstant| % 9))
-                            (GO #4=#:G416)))
+                            (GO #4=#:G408)))
                           ('T
                            (SEQ
                             (LETT |f|
@@ -1115,8 +1115,8 @@
                          (|Record| (|:| |Indices| (|List| C))
                                    (|:| |Entries| (|List| D)))))))
         (SPROG
-         ((|le| (|List| D)) (#1=#:G430 NIL) (#2=#:G438 NIL) (|e| NIL)
-          (#3=#:G437 NIL) (|g| (D)))
+         ((|le| (|List| D)) (#1=#:G422 NIL) (#2=#:G430 NIL) (|e| NIL)
+          (#3=#:G429 NIL) (|g| (D)))
          (SEQ (LETT |le| (QCDR |r|))
               (EXIT
                (COND
@@ -1170,12 +1170,12 @@
                     (|:| |Pivots| (|List| D))
                     (|:| |Rank| (|NonNegativeInteger|)))))
         (SPROG
-         ((|rk| (|NonNegativeInteger|)) (#1=#:G516 NIL) (|l| NIL)
-          (#2=#:G515 NIL) (|fd| (|Fraction| D)) (#3=#:G514 NIL)
+         ((|rk| (|NonNegativeInteger|)) (#1=#:G508 NIL) (|l| NIL)
+          (#2=#:G507 NIL) (|fd| (|Fraction| D)) (#3=#:G506 NIL)
           (|r|
            #4=(|Record| (|:| |Indices| (|List| C)) (|:| |Entries| (|List| D))))
-          (|c| (D)) (#5=#:G513 NIL) (|j| NIL) (|pr| #4#) (|Pivs| (|List| D))
-          (|piv| (D)) (#6=#:G512 NIL) (|q| (|Fraction| D))
+          (|c| (D)) (#5=#:G505 NIL) (|j| NIL) (|pr| #4#) (|Pivs| (|List| D))
+          (|piv| (D)) (#6=#:G504 NIL) (|q| (|Fraction| D))
           (|tmp|
            (|Record| (|:| GCD D)
                      (|:| |Row|
@@ -1183,12 +1183,12 @@
                                     (|:| |Entries| (|List| D))))))
           (|pivrow| (|NonNegativeInteger|))
           (|pivlen| #7=(|NonNegativeInteger|)) (|k| (|Integer|)) (|len| #7#)
-          (#8=#:G511 NIL) (|pivind| (C)) (#9=#:G464 NIL)
-          (|finished?| #10=(|Boolean|)) (#11=#:G509 NIL) (|i| NIL)
-          (#12=#:G510 NIL) (|oldr| #4#) (|sorted?| #10#) (|newr| #4#)
-          (#13=#:G508 NIL) (#14=#:G507 NIL) (|changed?| #10#) (#15=#:G506 NIL)
-          (|LTr| (|Matrix| (|Fraction| D))) (#16=#:G503 NIL) (#17=#:G505 NIL)
-          (#18=#:G504 NIL) (A (%)))
+          (#8=#:G503 NIL) (|pivind| (C)) (#9=#:G456 NIL)
+          (|finished?| #10=(|Boolean|)) (#11=#:G501 NIL) (|i| NIL)
+          (#12=#:G502 NIL) (|oldr| #4#) (|sorted?| #10#) (|newr| #4#)
+          (#13=#:G500 NIL) (#14=#:G499 NIL) (|changed?| #10#) (#15=#:G498 NIL)
+          (|LTr| (|Matrix| (|Fraction| D))) (#16=#:G495 NIL) (#17=#:G497 NIL)
+          (#18=#:G496 NIL) (A (%)))
          (SEQ (LETT A (SPADCALL AA (QREFELT % 52)))
               (LETT |LTr|
                     (SPADCALL
@@ -1467,9 +1467,9 @@
         (SPROG
          ((|r|
            (|Record| (|:| |Indices| (|List| C)) (|:| |Entries| (|List| D))))
-          (#1=#:G545 NIL) (|k| NIL) (#2=#:G544 NIL) (#3=#:G543 NIL)
-          (|inds| (|List| C)) (#4=#:G542 NIL) (|i| NIL) (|tmp| (|Vector| D))
-          (#5=#:G541 NIL) (|c| NIL) (|res| (%)) (|rlen| (|NonNegativeInteger|))
+          (#1=#:G537 NIL) (|k| NIL) (#2=#:G536 NIL) (#3=#:G535 NIL)
+          (|inds| (|List| C)) (#4=#:G534 NIL) (|i| NIL) (|tmp| (|Vector| D))
+          (#5=#:G533 NIL) (|c| NIL) (|res| (%)) (|rlen| (|NonNegativeInteger|))
           (A (%)))
          (SEQ
           (COND
@@ -1593,9 +1593,9 @@
         (SPROG
          ((|r|
            (|Record| (|:| |Indices| (|List| C)) (|:| |Entries| (|List| D))))
-          (#1=#:G583 NIL) (|k| NIL) (|d| (|Union| D "failed")) (#2=#:G582 NIL)
-          (#3=#:G581 NIL) (|inds| (|List| C)) (#4=#:G580 NIL) (|i| NIL)
-          (|tmp| (|Vector| (|Fraction| D))) (#5=#:G579 NIL) (|c| NIL)
+          (#1=#:G575 NIL) (|k| NIL) (|d| (|Union| D "failed")) (#2=#:G574 NIL)
+          (#3=#:G573 NIL) (|inds| (|List| C)) (#4=#:G572 NIL) (|i| NIL)
+          (|tmp| (|Vector| (|Fraction| D))) (#5=#:G571 NIL) (|c| NIL)
           (|res| (%)) (|rlen| (|NonNegativeInteger|)) (A (%)))
          (SEQ
           (COND
@@ -1707,9 +1707,9 @@
 
 (DECLAIM (NOTINLINE |SparseEchelonMatrix;|)) 
 
-(DEFUN |SparseEchelonMatrix| (&REST #1=#:G585)
+(DEFUN |SparseEchelonMatrix| (&REST #1=#:G577)
   (SPROG NIL
-         (PROG (#2=#:G586)
+         (PROG (#2=#:G578)
            (RETURN
             (COND
              ((LETT #2#
@@ -1728,7 +1728,7 @@
 
 (DEFUN |SparseEchelonMatrix;| (|#1| |#2|)
   (SPROG
-   ((|i| NIL) (#1=#:G584 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL)
+   ((|i| NIL) (#1=#:G576 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL)
     (DV$1 NIL))
    (SEQ
     (PROGN
@@ -1835,8 +1835,8 @@
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
                  (CONS '#(NIL NIL NIL)
                        (CONS
-                        '#((|CoercibleTo| 47) (|shallowlyMutable|)
-                           (|finiteAggregate|))
+                        '#((|finiteAggregate|) (|shallowlyMutable|)
+                           (|CoercibleTo| 47))
                         (|makeByteWordVec2| 121
                                             '(0 7 0 9 2 6 15 0 0 16 1 21 0 0 22
                                               0 27 0 28 2 21 25 6 0 33 0 7 0 34
@@ -1863,8 +1863,8 @@
                                               0 116 2 100 0 0 7 117 2 100 0 0 0
                                               118 1 100 119 0 120 2 0 0 103 0
                                               121 2 0 27 0 58 60 4 0 27 0 25 6
-                                              7 40 4 0 27 0 25 21 30 31 3 0 27
-                                              0 25 24 29 1 1 93 93 94 1 0 91 0
+                                              7 40 3 0 27 0 25 24 29 4 0 27 0
+                                              25 21 30 31 1 1 93 93 94 1 0 91 0
                                               92 2 0 24 0 25 26 2 0 27 0 58 59
                                               1 1 111 0 112 1 0 24 0 85 2 0 83
                                               0 25 84 1 0 18 0 20 2 0 0 21 25
@@ -1872,7 +1872,7 @@
                                               75 0 6 76 2 0 0 0 0 73 3 0 0 0 25
                                               25 69 3 0 7 0 25 6 36 1 0 27 0 56
                                               2 0 27 0 25 61 1 0 0 0 52 2 0 27
-                                              0 24 66 1 0 47 0 50 1 0 45 0 46 2
-                                              0 27 0 24 68 1 0 21 0 23 2 2 0
-                                              103 0 121 2 0 0 45 0 113)))))
+                                              0 24 66 1 0 45 0 46 1 0 47 0 50 2
+                                              0 27 0 24 68 1 0 21 0 23 2 0 0 45
+                                              0 113 2 2 0 103 0 121)))))
            '|lookupComplete|)) 
