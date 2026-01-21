@@ -5,7 +5,6 @@
 (load "interp/foam_l")
 ;;;
 (load "interp/util")
-(load "interp/interp-proclaims.lisp")
 ;;;
 (load "interp/macros")
 (load "interp/setq")
@@ -25,7 +24,7 @@
 (load "interp/g-opt")
 (load "interp/g-timer")
 (load "interp/g-util")
-(load "interp/hypertex")
+(load "interp/gdata")
 (load "interp/i-analy")
 (load "interp/i-coerce")
 (load "interp/i-coerfn")
@@ -59,6 +58,7 @@
 (load "interp/posit")
 (load "interp/ptrees")
 (load "interp/rulesets")
+(load "interp/s_supp")
 (load "interp/scan")
 (load "interp/serror")
 (load "interp/server")

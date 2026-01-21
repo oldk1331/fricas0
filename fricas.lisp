@@ -3,8 +3,8 @@
 (in-package :boot)
 (setq |$spadroot| ".")
 (defvar |$defaultMsgDatabaseName| "msgs/s2-us.msgs")
-(defvar |$build_version| "Common Lisp - 1.3.10")
-(defvar |$build_date| "Thu Jan 11 2024")
+(defvar |$build_version| "Common Lisp - 1.3.11")
+(defvar |$build_date| "Sun Jun 30 2024")
 (defvar |$lisp_id_string| (concatenate 'string (lisp-implementation-type) " " (lisp-implementation-version)))
 
 
@@ -36,11 +36,10 @@
 (setq |$operation_hash| (make-hash-table))
 
 
- (|compressOpen| t)
- (|interpOpen| t)
- (|categoryOpen| t)
- (|operationOpen| t)
- (|browseOpen| t)
+ (|open_interp_db| t)
+ (|open_category_db| t)
+ (|open_operation_db| t)
+ (|open_browse_db| t)
 
 
 (let ((*debugger-hook*
