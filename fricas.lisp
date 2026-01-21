@@ -3,8 +3,8 @@
 (in-package :boot)
 (setq |$spadroot| ".")
 (defvar |$defaultMsgDatabaseName| "msgs/s2-us.msgs")
-(defvar |$build_version| "Common Lisp - 1.3.11")
-(defvar |$build_date| "Sun Jun 30 2024")
+(defvar |$build_version| "Common Lisp - 1.3.12")
+(defvar |$build_date| "Wed Jun 4 2025")
 (defvar |$lisp_id_string| (concatenate 'string (lisp-implementation-type) " " (lisp-implementation-version)))
 
 
