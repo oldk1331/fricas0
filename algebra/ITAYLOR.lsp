@@ -15,7 +15,7 @@
 
 (SDEFUN |ITAYLOR;=;2%B;5| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
         (SPROG
-         ((|st| (|Stream| |Coef|)) (#1=#:G23 NIL) (#2=#:G24 NIL) (|i| NIL)
+         ((|st| (|Stream| |Coef|)) (#1=#:G16 NIL) (#2=#:G17 NIL) (|i| NIL)
           (|n| (|Integer|)))
          (SEQ
           (EXIT
@@ -28,7 +28,7 @@
                   (EXIT
                    (COND
                     ((SPADCALL |st| (QREFELT % 18))
-                     (PROGN (LETT #1# 'T) (GO #3=#:G22)))
+                     (PROGN (LETT #1# 'T) (GO #3=#:G15)))
                     ((SPADCALL (SPADCALL |st| (QREFELT % 19))
                                (|spadConstant| % 11) (QREFELT % 20))
                      (PROGN (LETT #1# NIL) (GO #3#)))
@@ -88,7 +88,7 @@
                        ('T (CONS 0 (SPADCALL (QCDR |quot|) (QREFELT % 9))))))))) 
 
 (SDEFUN |ITAYLOR;^;%Nni%;17| ((|x| (%)) (|n| (|NonNegativeInteger|)) (% (%)))
-        (SPROG ((#1=#:G55 NIL))
+        (SPROG ((#1=#:G47 NIL))
                (COND ((EQL |n| 0) (|spadConstant| % 14))
                      ('T
                       (SPADCALL |x|
@@ -136,23 +136,6 @@
 
 (DECLAIM (NOTINLINE |InnerTaylorSeries;|)) 
 
-(DEFUN |InnerTaylorSeries| (#1=#:G68)
-  (SPROG NIL
-         (PROG (#2=#:G69)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|InnerTaylorSeries|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|InnerTaylorSeries;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|InnerTaylorSeries|)))))))))) 
-
 (DEFUN |InnerTaylorSeries;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -177,6 +160,23 @@
             (QSETREFV % 44
                       (CONS (|dispatchFunction| |ITAYLOR;exquo;2%U;16|) %))))
           %))) 
+
+(DEFUN |InnerTaylorSeries| (#1=#:G60)
+  (SPROG NIL
+         (PROG (#2=#:G61)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|InnerTaylorSeries|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|InnerTaylorSeries;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|InnerTaylorSeries|)))))))))) 
 
 (MAKEPROP '|InnerTaylorSeries| '|infovec|
           (LIST

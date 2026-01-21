@@ -11,7 +11,7 @@
 (SDEFUN |RETSOL;LEQQ2F|
         ((|l| (|List| (|Equation| (|Fraction| (|Polynomial| Q)))))
          (% (|List| (|Equation| (|Fraction| (|Polynomial| R))))))
-        (SPROG ((#1=#:G18 NIL) (|eq| NIL) (#2=#:G17 NIL))
+        (SPROG ((#1=#:G6 NIL) (|eq| NIL) (#2=#:G5 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -37,8 +37,8 @@
         ((|lp| (|List| (|Polynomial| R))) (|lv| (|List| (|Symbol|)))
          (% (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
         (SPROG
-         ((#1=#:G31 NIL) (|l| NIL) (#2=#:G30 NIL) (#3=#:G29 NIL) (|p| NIL)
-          (#4=#:G28 NIL)
+         ((#1=#:G19 NIL) (|l| NIL) (#2=#:G18 NIL) (#3=#:G17 NIL) (|p| NIL)
+          (#4=#:G16 NIL)
           (|u| (|Union| (|List| (|Fraction| (|Polynomial| Q))) "failed")))
          (SEQ (LETT |u| (|RETSOL;QIfCan| |lp| %))
               (EXIT
@@ -75,8 +75,8 @@
         ((|l| (|List| (|Polynomial| R)))
          (% (|Union| (|List| (|Fraction| (|Polynomial| Q))) "failed")))
         (SPROG
-         ((|ans| (|List| (|Fraction| (|Polynomial| Q)))) (#1=#:G46 NIL)
-          (|u| (|Union| (|Fraction| (|Polynomial| Q)) "failed")) (#2=#:G47 NIL)
+         ((|ans| (|List| (|Fraction| (|Polynomial| Q)))) (#1=#:G31 NIL)
+          (|u| (|Union| (|Fraction| (|Polynomial| Q)) "failed")) (#2=#:G32 NIL)
           (|p| NIL))
          (SEQ
           (EXIT
@@ -91,7 +91,7 @@
                             ((QEQCAR |u| 1)
                              (PROGN
                               (LETT #1# (CONS 1 "failed"))
-                              (GO #3=#:G45)))
+                              (GO #3=#:G30)))
                             ('T (LETT |ans| (CONS (QCDR |u|) |ans|))))))
                      (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                 (EXIT (CONS 0 |ans|))))
@@ -102,7 +102,7 @@
          (% (|Union| (|Fraction| (|Polynomial| Q)) #1="failed")))
         (SPROG
          ((|up| (|SparseUnivariatePolynomial| (|Polynomial| R)))
-          (|ans| (|Fraction| (|Polynomial| Q))) (#2=#:G67 NIL)
+          (|ans| (|Fraction| (|Polynomial| Q))) (#2=#:G50 NIL)
           (|v| (|Union| (|Fraction| (|Polynomial| Q)) #1#)) (|s| (|Symbol|))
           (|r| (|Union| Q "failed")) (|u| (|Union| (|Symbol|) "failed")))
          (SEQ
@@ -142,7 +142,7 @@
                             ((QEQCAR |v| 1)
                              (PROGN
                               (LETT #2# (CONS 1 "failed"))
-                              (GO #4=#:G66)))
+                              (GO #4=#:G49)))
                             ('T
                              (SEQ
                               (LETT |ans|
@@ -164,25 +164,6 @@
 
 (DECLAIM (NOTINLINE |RetractSolvePackage;|)) 
 
-(DEFUN |RetractSolvePackage| (&REST #1=#:G68)
-  (SPROG NIL
-         (PROG (#2=#:G69)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|RetractSolvePackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |RetractSolvePackage;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|RetractSolvePackage|)))))))))) 
-
 (DEFUN |RetractSolvePackage;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -199,6 +180,25 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |RetractSolvePackage| (&REST #1=#:G51)
+  (SPROG NIL
+         (PROG (#2=#:G52)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|RetractSolvePackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |RetractSolvePackage;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|RetractSolvePackage|)))))))))) 
 
 (MAKEPROP '|RetractSolvePackage| '|infovec|
           (LIST

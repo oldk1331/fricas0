@@ -3,7 +3,7 @@
         ((|dim| (|NonNegativeInteger|)) (% (|FiniteSimplicialComplex| VS)))
         (SPROG
          ((|vs1| (|List| VS)) (|v1| (|List| (|List| (|NonNegativeInteger|))))
-          (#1=#:G16 NIL) (|n| NIL) (#2=#:G15 NIL))
+          (#1=#:G5 NIL) (|n| NIL) (#2=#:G4 NIL))
          (SEQ
           (LETT |v1|
                 (LIST
@@ -93,9 +93,24 @@
 
 (DECLAIM (NOTINLINE |SimplicialComplexFactory;|)) 
 
-(DEFUN |SimplicialComplexFactory| (#1=#:G33)
+(DEFUN |SimplicialComplexFactory;| (|#1|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT |dv$| (LIST '|SimplicialComplexFactory| DV$1))
+          (LETT % (GETREFV 23))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|SimplicialComplexFactory|
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |SimplicialComplexFactory| (#1=#:G22)
   (SPROG NIL
-         (PROG (#2=#:G34)
+         (PROG (#2=#:G23)
            (RETURN
             (COND
              ((LETT #2#
@@ -111,21 +126,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|SimplicialComplexFactory|)))))))))) 
-
-(DEFUN |SimplicialComplexFactory;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT |dv$| (LIST '|SimplicialComplexFactory| DV$1))
-          (LETT % (GETREFV 23))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|SimplicialComplexFactory|
-                      (LIST DV$1) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|SimplicialComplexFactory| '|infovec|
           (LIST

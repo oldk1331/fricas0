@@ -68,22 +68,6 @@
 
 (DECLAIM (NOTINLINE |Localize;|)) 
 
-(DEFUN |Localize| (&REST #1=#:G35)
-  (SPROG NIL
-         (PROG (#2=#:G36)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|Localize|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |Localize;|) #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Localize|)))))))))) 
-
 (DEFUN |Localize;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -126,6 +110,22 @@
            ((|testBitVector| |pv$| 1)
             (QSETREFV % 23 (CONS (|dispatchFunction| |LO;<;2%B;7|) %))))
           %))) 
+
+(DEFUN |Localize| (&REST #1=#:G29)
+  (SPROG NIL
+         (PROG (#2=#:G30)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|Localize|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |Localize;|) #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Localize|)))))))))) 
 
 (MAKEPROP '|Localize| '|infovec|
           (LIST

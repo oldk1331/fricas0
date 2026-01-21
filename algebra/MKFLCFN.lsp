@@ -158,8 +158,8 @@
         ((|l| (|List| (|InputForm|)))
          (% (|Union| (|List| (|InputForm|)) "failed")))
         (SPROG
-         ((|ans| (|List| (|InputForm|))) (#1=#:G75 NIL)
-          (|u| (|Union| (|InputForm|) "failed")) (#2=#:G76 NIL) (|s| NIL))
+         ((|ans| (|List| (|InputForm|))) (#1=#:G57 NIL)
+          (|u| (|Union| (|InputForm|) "failed")) (#2=#:G58 NIL) (|s| NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |ans| NIL)
@@ -173,7 +173,7 @@
                             ((QEQCAR |u| 1)
                              (PROGN
                               (LETT #1# (CONS 1 "failed"))
-                              (GO #3=#:G74)))
+                              (GO #3=#:G56)))
                             ('T (LETT |ans| (CONS (QCDR |u|) |ans|))))))
                      (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                 (EXIT (CONS 0 (NREVERSE |ans|)))))
@@ -265,25 +265,6 @@
 
 (DECLAIM (NOTINLINE |MakeFloatCompiledFunction;|)) 
 
-(DEFUN |MakeFloatCompiledFunction| (#1=#:G107)
-  (SPROG NIL
-         (PROG (#2=#:G108)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|MakeFloatCompiledFunction|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|MakeFloatCompiledFunction;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|MakeFloatCompiledFunction|)))))))))) 
-
 (DEFUN |MakeFloatCompiledFunction;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -310,6 +291,25 @@
                             (QREFELT % 11)))
                      (QREFELT % 11)))
           %))) 
+
+(DEFUN |MakeFloatCompiledFunction| (#1=#:G77)
+  (SPROG NIL
+         (PROG (#2=#:G78)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|MakeFloatCompiledFunction|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|MakeFloatCompiledFunction;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|MakeFloatCompiledFunction|)))))))))) 
 
 (MAKEPROP '|MakeFloatCompiledFunction| '|infovec|
           (LIST

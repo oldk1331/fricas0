@@ -4,30 +4,11 @@
 
 (DECLAIM (NOTINLINE |OrderedDirectProduct;|)) 
 
-(DEFUN |OrderedDirectProduct| (&REST #1=#:G46)
-  (SPROG NIL
-         (PROG (#2=#:G47)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(NIL T NIL))
-                     (HGET |$ConstructorCache| '|OrderedDirectProduct|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |OrderedDirectProduct;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|OrderedDirectProduct|)))))))))) 
-
 (DEFUN |OrderedDirectProduct;| (|#1| |#2| |#3|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G36 NIL) (#2=#:G37 NIL) (#3=#:G38 NIL) (#4=#:G39 NIL)
-    (#5=#:G40 NIL) (#6=#:G42 NIL) (#7=#:G41 NIL) (#8=#:G43 NIL) (#9=#:G44 NIL)
-    (#10=#:G45 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+   ((|pv$| NIL) (#1=#:G18 NIL) (#2=#:G19 NIL) (#3=#:G20 NIL) (#4=#:G21 NIL)
+    (#5=#:G22 NIL) (#6=#:G24 NIL) (#7=#:G23 NIL) (#8=#:G25 NIL) (#9=#:G26 NIL)
+    (#10=#:G27 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 |#1|)
     (LETT DV$2 (|devaluate| |#2|))
@@ -534,6 +515,25 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 9 (|Vector| |#2|))
     %))) 
+
+(DEFUN |OrderedDirectProduct| (&REST #1=#:G28)
+  (SPROG NIL
+         (PROG (#2=#:G29)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(NIL T NIL))
+                     (HGET |$ConstructorCache| '|OrderedDirectProduct|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |OrderedDirectProduct;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|OrderedDirectProduct|)))))))))) 
 
 (MAKEPROP '|OrderedDirectProduct| '|infovec|
           (LIST

@@ -14,9 +14,9 @@
         ((|content| (|ILogic|)) (|numb| (|NonNegativeInteger|))
          (% (|List| (|String|))))
         (SPROG
-         ((|resStr| (|String|)) (|notfst| (|Boolean|)) (#1=#:G28 NIL)
+         ((|resStr| (|String|)) (|notfst| (|Boolean|)) (#1=#:G17 NIL)
           (|thisTerm| NIL) (|resType| (|ILogic|))
-          (|deduct| (|List| (|ILogic|))) (#2=#:G27 NIL)
+          (|deduct| (|List| (|ILogic|))) (#2=#:G16 NIL)
           (|fac| (|List| (|ILogic|))))
          (SEQ
           (EXIT
@@ -30,7 +30,7 @@
                            (LIST "  -- error"
                                  (SPADCALL |content| (QREFELT % 11)))
                            (QREFELT % 8))))
-                   (GO #3=#:G26))))
+                   (GO #3=#:G15))))
                 (LETT |deduct| (SPADCALL |fac| (QREFELT % 12)))
                 (COND ((NULL |deduct|) (LETT |deduct| |fac|)))
                 (LETT |resType| (|SPADfirst| |deduct|))
@@ -78,7 +78,7 @@
          (% (|String|)))
         (SPROG
          ((|s| (|String|)) (|ch| (|List| (|Lambda| (|Typed|))))
-          (|boundL2| (|List| (|String|))) (|varName| (|String|)) (#1=#:G53 NIL)
+          (|boundL2| (|List| (|String|))) (|varName| (|String|)) (#1=#:G32 NIL)
           (|i| (|NonNegativeInteger|)))
          (SEQ
           (EXIT
@@ -92,7 +92,7 @@
                           ((<= |i| (LENGTH |boundL|))
                            (PROGN
                             (LETT #1# (SPADCALL |boundL| |i| (QREFELT % 21)))
-                            (GO #2=#:G52))))))
+                            (GO #2=#:G31))))))
                        (EXIT (LETT |s| (STRINGIMAGE (- |i| 1)))))))
                 (COND
                  ((SPADCALL |n| (QREFELT % 22))
@@ -144,7 +144,7 @@
         ((|content| (|Lambda| (|Typed|))) (|numb| (|NonNegativeInteger|))
          (% (|List| (|String|))))
         (SPROG
-         ((#1=#:G58 NIL) (|lhst| (|String|)) (|lhsn| (|String|))
+         ((#1=#:G37 NIL) (|lhst| (|String|)) (|lhsn| (|String|))
           (|lhs| (|String|)) (|var| (|Typed|)) (|sl| (|List| (|String|))))
          (SEQ
           (EXIT
@@ -169,7 +169,7 @@
                                          (SPADCALL |content| (QREFELT % 27)))
                                         (LIST |lhsn|) %))
                                  (QREFELT % 8))))
-                         (GO #2=#:G57))))))
+                         (GO #2=#:G36))))))
                 (EXIT |sl|)))
           #2# (EXIT #1#)))) 
 
@@ -181,8 +181,8 @@
         ((|content| (|List| (|ILogic|))) (|filename| (|String|))
          (|shortName| (|String|)) (|longName| (|String|)) (% (|Void|)))
         (SPROG
-         ((#1=#:G68 NIL) (|line| NIL) (|lines| (|List| (|String|)))
-          (|fnNum| (|NonNegativeInteger|)) (#2=#:G67 NIL) (|thisEq| NIL)
+         ((#1=#:G47 NIL) (|line| NIL) (|lines| (|List| (|String|)))
+          (|fnNum| (|NonNegativeInteger|)) (#2=#:G46 NIL) (|thisEq| NIL)
           (|f1| (|TextFile|)))
          (SEQ
           (LETT |f1|
@@ -216,8 +216,8 @@
          (|shortName| (|String|)) (|longName| (|String|))
          (|catName| (|String|)) (% (|Void|)))
         (SPROG
-         ((#1=#:G77 NIL) (|line| NIL) (|lines| (|List| (|String|)))
-          (|fnNum| (|NonNegativeInteger|)) (#2=#:G76 NIL) (|thisEq| NIL)
+         ((#1=#:G56 NIL) (|line| NIL) (|lines| (|List| (|String|)))
+          (|fnNum| (|NonNegativeInteger|)) (#2=#:G55 NIL) (|thisEq| NIL)
           (|f1| (|TextFile|)))
          (SEQ
           (LETT |f1|
@@ -251,9 +251,21 @@
 
 (DECLAIM (NOTINLINE |compCode;|)) 
 
+(DEFUN |compCode;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|compCode|))
+          (LETT % (GETREFV 46))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|compCode| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |compCode| ()
   (SPROG NIL
-         (PROG (#1=#:G79)
+         (PROG (#1=#:G58)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|compCode|))
@@ -266,18 +278,6 @@
                              (LIST (CONS NIL (CONS 1 (|compCode;|))))))
                     (LETT #1# T))
                 (COND ((NOT #1#) (HREM |$ConstructorCache| '|compCode|)))))))))) 
-
-(DEFUN |compCode;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|compCode|))
-          (LETT % (GETREFV 46))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|compCode| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|compCode| '|infovec|
           (LIST

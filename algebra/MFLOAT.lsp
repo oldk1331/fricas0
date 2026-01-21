@@ -222,7 +222,7 @@
                   ('T (CONS 1 "failed"))))))) 
 
 (SDEFUN |MFLOAT;retract;%I;19| ((|u| (%)) (% (|Integer|)))
-        (SPROG ((#1=#:G119 NIL) (|result| (|Union| (|Integer|) "failed")))
+        (SPROG ((#1=#:G101 NIL) (|result| (|Union| (|Integer|) "failed")))
                (SEQ (LETT |result| (SPADCALL |u| (QREFELT % 68)))
                     (EXIT
                      (COND
@@ -419,23 +419,6 @@
 
 (DECLAIM (NOTINLINE |MachineFloat;|)) 
 
-(DEFUN |MachineFloat| ()
-  (SPROG NIL
-         (PROG (#1=#:G214)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|MachineFloat|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|MachineFloat|
-                             (LIST (CONS NIL (CONS 1 (|MachineFloat;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#) (HREM |$ConstructorCache| '|MachineFloat|)))))))))) 
-
 (DEFUN |MachineFloat;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -461,6 +444,23 @@
           (QSETREFV % 11 53)
           (QSETREFV % 12 (EXPT (QREFELT % 8) (QREFELT % 11)))
           %))) 
+
+(DEFUN |MachineFloat| ()
+  (SPROG NIL
+         (PROG (#1=#:G182)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|MachineFloat|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|MachineFloat|
+                             (LIST (CONS NIL (CONS 1 (|MachineFloat;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#) (HREM |$ConstructorCache| '|MachineFloat|)))))))))) 
 
 (MAKEPROP '|MachineFloat| '|infovec|
           (LIST

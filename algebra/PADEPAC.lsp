@@ -38,25 +38,6 @@
 
 (DECLAIM (NOTINLINE |PadeApproximantPackage;|)) 
 
-(DEFUN |PadeApproximantPackage| (&REST #1=#:G26)
-  (SPROG NIL
-         (PROG (#2=#:G27)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T NIL NIL))
-                     (HGET |$ConstructorCache| '|PadeApproximantPackage|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |PadeApproximantPackage;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|PadeApproximantPackage|)))))))))) 
-
 (DEFUN |PadeApproximantPackage;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -80,6 +61,25 @@
                                                                   |#3|)
                                         (|UnivariatePolynomial| |#2| |#1|)))
           %))) 
+
+(DEFUN |PadeApproximantPackage| (&REST #1=#:G10)
+  (SPROG NIL
+         (PROG (#2=#:G11)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T NIL NIL))
+                     (HGET |$ConstructorCache| '|PadeApproximantPackage|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |PadeApproximantPackage;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|PadeApproximantPackage|)))))))))) 
 
 (MAKEPROP '|PadeApproximantPackage| '|infovec|
           (LIST

@@ -7,30 +7,11 @@
 
 (DECLAIM (NOTINLINE |UnivariatePolynomial;|)) 
 
-(DEFUN |UnivariatePolynomial| (&REST #1=#:G92)
-  (SPROG NIL
-         (PROG (#2=#:G93)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T))
-                                               (HGET |$ConstructorCache|
-                                                     '|UnivariatePolynomial|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |UnivariatePolynomial;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|UnivariatePolynomial|)))))))))) 
-
 (DEFUN |UnivariatePolynomial;| (|#1| |#2|)
   (SPROG
-   ((#1=#:G91 NIL) (|pv$| NIL) (#2=#:G82 NIL) (#3=#:G84 NIL) (#4=#:G83 NIL)
-    (#5=#:G85 NIL) (#6=#:G86 NIL) (#7=#:G87 NIL) (#8=#:G88 NIL) (#9=#:G89 NIL)
-    (#10=#:G90 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+   ((#1=#:G62 NIL) (|pv$| NIL) (#2=#:G53 NIL) (#3=#:G55 NIL) (#4=#:G54 NIL)
+    (#5=#:G56 NIL) (#6=#:G57 NIL) (#7=#:G58 NIL) (#8=#:G59 NIL) (#9=#:G60 NIL)
+    (#10=#:G61 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 |#1|)
     (LETT DV$2 (|devaluate| |#2|))
@@ -708,6 +689,25 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 8 (|SparseUnivariatePolynomial| |#2|))
     %))) 
+
+(DEFUN |UnivariatePolynomial| (&REST #1=#:G63)
+  (SPROG NIL
+         (PROG (#2=#:G64)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T))
+                                               (HGET |$ConstructorCache|
+                                                     '|UnivariatePolynomial|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |UnivariatePolynomial;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|UnivariatePolynomial|)))))))))) 
 
 (MAKEPROP '|UnivariatePolynomial| '|infovec|
           (LIST

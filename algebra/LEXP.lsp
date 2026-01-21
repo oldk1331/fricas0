@@ -6,8 +6,8 @@
           (|List| (|Record| (|:| |k| (|LyndonWord| |VarSet|)) (|:| |c| R))))
          (% (|List| (|Equation| R))))
         (SPROG
-         ((|r| (R)) (|c2| (R)) (|u2| #1#) (|c1| (R)) (|u1| #1#) (#2=#:G36 NIL)
-          (|t| NIL) (#3=#:G35 NIL) (#4=#:G34 NIL) (#5=#:G33 NIL))
+         ((|r| (R)) (|c2| (R)) (|u2| #1#) (|c1| (R)) (|u1| #1#) (#2=#:G20 NIL)
+          (|t| NIL) (#3=#:G19 NIL) (#4=#:G18 NIL) (#5=#:G17 NIL))
          (SEQ
           (COND
            ((NULL |l1|)
@@ -100,8 +100,8 @@
         (SPROG
          ((|lt|
            (|List| (|Record| (|:| |k| (|LyndonWord| |VarSet|)) (|:| |c| R))))
-          (#1=#:G51 NIL) (|l| (|Union| (|LyndonWord| |VarSet|) #2="failed"))
-          (#3=#:G60 NIL) (|t| NIL) (#4=#:G59 NIL))
+          (#1=#:G33 NIL) (|l| (|Union| (|LyndonWord| |VarSet|) #2="failed"))
+          (#3=#:G42 NIL) (|t| NIL) (#4=#:G41 NIL))
          (SEQ
           (LETT |lt|
                 (PROGN
@@ -139,7 +139,7 @@
                            (QREFELT % 39))))))) 
 
 (SDEFUN |LEXP;*;3%;6| ((|x| (%)) (|y| (%)) (% (%)))
-        (SPROG ((#1=#:G62 NIL))
+        (SPROG ((#1=#:G44 NIL))
                (SPADCALL |x| |y|
                          (PROG1 (LETT #1# (QREFELT % 8))
                            (|check_subtype2| (>= #1# 0) '(|NonNegativeInteger|)
@@ -147,7 +147,7 @@
                          (QREFELT % 41)))) 
 
 (SDEFUN |LEXP;exp;Lp%;7| ((|p| (|LiePolynomial| |VarSet| R)) (% (%)))
-        (SPROG ((#1=#:G65 NIL))
+        (SPROG ((#1=#:G47 NIL))
                (SPADCALL (SPADCALL |p| (QREFELT % 44))
                          (PROG1 (LETT #1# (QREFELT % 8))
                            (|check_subtype2| (>= #1# 0) '(|NonNegativeInteger|)
@@ -155,7 +155,7 @@
                          (QREFELT % 45)))) 
 
 (SDEFUN |LEXP;log;%Lp;8| ((|p| (%)) (% (|LiePolynomial| |VarSet| R)))
-        (SPROG ((#1=#:G72 NIL) (#2=#:G70 NIL))
+        (SPROG ((#1=#:G54 NIL) (#2=#:G52 NIL))
                (PROG2
                    (LETT #1#
                          (SPADCALL
@@ -176,7 +176,7 @@
 
 (SDEFUN |LEXP;coerce;%Of;9| ((|p| (%)) (% (|OutputForm|)))
         (SPROG
-         ((#1=#:G84 NIL) (|t| NIL) (#2=#:G83 NIL)
+         ((#1=#:G66 NIL) (|t| NIL) (#2=#:G65 NIL)
           (|lt|
            (|List| (|Record| (|:| |k| (|LyndonWord| |VarSet|)) (|:| |c| R)))))
          (SEQ
@@ -203,7 +203,7 @@
 
 (SDEFUN |LEXP;LyndonBasis;LL;10|
         ((|lv| (|List| |VarSet|)) (% (|List| (|LiePolynomial| |VarSet| R))))
-        (SPROG ((#1=#:G89 NIL) (|l| NIL) (#2=#:G88 NIL))
+        (SPROG ((#1=#:G71 NIL) (|l| NIL) (#2=#:G70 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -230,7 +230,7 @@
            (|List|
             (|Record| (|:| |k| (|PoincareBirkhoffWittLyndonBasis| |VarSet|))
                       (|:| |c| R))))
-          (#1=#:G98 NIL) (|t| NIL) (#2=#:G97 NIL))
+          (#1=#:G80 NIL) (|t| NIL) (#2=#:G79 NIL))
          (SEQ
           (COND
            ((SPADCALL |x| (|spadConstant| % 51) (QREFELT % 52))
@@ -264,25 +264,6 @@
 
 (DECLAIM (NOTINLINE |LieExponentials;|)) 
 
-(DEFUN |LieExponentials| (&REST #1=#:G104)
-  (SPROG NIL
-         (PROG (#2=#:G105)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T T NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|LieExponentials|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |LieExponentials;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|LieExponentials|)))))))))) 
-
 (DEFUN |LieExponentials;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -302,6 +283,25 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 9 (|XPBWPolynomial| |#1| |#2|))
           %))) 
+
+(DEFUN |LieExponentials| (&REST #1=#:G84)
+  (SPROG NIL
+         (PROG (#2=#:G85)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T T NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|LieExponentials|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |LieExponentials;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|LieExponentials|)))))))))) 
 
 (MAKEPROP '|LieExponentials| '|infovec|
           (LIST

@@ -1,6 +1,6 @@
 
 (SDEFUN |DPMM;*;R2%;1| ((|r| (R)) (|x| (%)) (% (%)))
-        (SPROG ((#1=#:G12 NIL) (#2=#:G14 NIL) (|i| NIL) (#3=#:G13 NIL))
+        (SPROG ((#1=#:G3 NIL) (#2=#:G5 NIL) (|i| NIL) (#3=#:G4 NIL))
                (SEQ
                 (PROGN
                  (LETT #3# (GETREFV #4=(QREFELT % 6)))
@@ -18,8 +18,8 @@
 
 (SDEFUN |DPMM;*;M2%;2| ((|m| (M)) (|x| (%)) (% (%)))
         (SPROG
-         ((#1=#:G17 NIL) (#2=#:G16 (S)) (#3=#:G18 (S)) (#4=#:G24 NIL) (|j| NIL)
-          (#5=#:G21 NIL) (#6=#:G23 NIL) (|i| NIL) (#7=#:G22 NIL))
+         ((#1=#:G8 NIL) (#2=#:G7 (S)) (#3=#:G9 (S)) (#4=#:G15 NIL) (|j| NIL)
+          (#5=#:G12 NIL) (#6=#:G14 NIL) (|i| NIL) (#7=#:G13 NIL))
          (SEQ
           (PROGN
            (LETT #7# (GETREFV #8=(QREFELT % 6)))
@@ -55,31 +55,11 @@
 
 (DECLAIM (NOTINLINE |DirectProductMatrixModule;|)) 
 
-(DEFUN |DirectProductMatrixModule| (&REST #1=#:G61)
-  (SPROG NIL
-         (PROG (#2=#:G62)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(NIL T T T))
-                     (HGET |$ConstructorCache| '|DirectProductMatrixModule|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |DirectProductMatrixModule;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|DirectProductMatrixModule|)))))))))) 
-
 (DEFUN |DirectProductMatrixModule;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G51 NIL) (#2=#:G52 NIL) (#3=#:G53 NIL) (#4=#:G55 NIL)
-    (#5=#:G54 NIL) (#6=#:G56 NIL) (#7=#:G57 NIL) (#8=#:G58 NIL) (#9=#:G59 NIL)
-    (#10=#:G60 NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
+   ((|pv$| NIL) (#1=#:G33 NIL) (#2=#:G34 NIL) (#3=#:G35 NIL) (#4=#:G37 NIL)
+    (#5=#:G36 NIL) (#6=#:G38 NIL) (#7=#:G39 NIL) (#8=#:G40 NIL) (#9=#:G41 NIL)
+    (#10=#:G42 NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 |#1|)
@@ -536,6 +516,26 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 10 (|Vector| |#4|))
     %))) 
+
+(DEFUN |DirectProductMatrixModule| (&REST #1=#:G43)
+  (SPROG NIL
+         (PROG (#2=#:G44)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(NIL T T T))
+                     (HGET |$ConstructorCache| '|DirectProductMatrixModule|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |DirectProductMatrixModule;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|DirectProductMatrixModule|)))))))))) 
 
 (MAKEPROP '|DirectProductMatrixModule| '|infovec|
           (LIST

@@ -2,7 +2,7 @@
 (SDEFUN |PATRES2;map;MPmrPmr;1|
         ((|f| (|Mapping| B A)) (|r| (|PatternMatchResult| R A))
          (% (|PatternMatchResult| R B)))
-        (SPROG ((#1=#:G14 NIL) (|rec| NIL) (#2=#:G13 NIL))
+        (SPROG ((#1=#:G9 NIL) (|rec| NIL) (#2=#:G8 NIL))
                (SEQ
                 (COND ((SPADCALL |r| (QREFELT % 11)) (SPADCALL (QREFELT % 13)))
                       ('T
@@ -28,27 +28,6 @@
 
 (DECLAIM (NOTINLINE |PatternMatchResultFunctions2;|)) 
 
-(DEFUN |PatternMatchResultFunctions2| (&REST #1=#:G15)
-  (SPROG NIL
-         (PROG (#2=#:G16)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PatternMatchResultFunctions2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |PatternMatchResultFunctions2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|PatternMatchResultFunctions2|)))))))))) 
-
 (DEFUN |PatternMatchResultFunctions2;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -67,6 +46,27 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |PatternMatchResultFunctions2| (&REST #1=#:G10)
+  (SPROG NIL
+         (PROG (#2=#:G11)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PatternMatchResultFunctions2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |PatternMatchResultFunctions2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|PatternMatchResultFunctions2|)))))))))) 
 
 (MAKEPROP '|PatternMatchResultFunctions2| '|infovec|
           (LIST

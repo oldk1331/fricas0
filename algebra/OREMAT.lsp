@@ -8,22 +8,22 @@
           (|Record| (|:| |mat| (|Matrix| LO))
                     (|:| |vecs| (|List| (|Vector| F))))))
         (SPROG
-         ((|i| (|Integer|)) (#1=#:G77 NIL) (|w| NIL) (#2=#:G76 NIL) (|k1| NIL)
+         ((|i| (|Integer|)) (#1=#:G65 NIL) (|w| NIL) (#2=#:G64 NIL) (|k1| NIL)
           (|r| (LO)) (|q| (LO))
           (|#G18| (|Record| (|:| |quotient| LO) (|:| |remainder| LO)))
-          (#3=#:G63 NIL) (|mkj| (LO)) (#4=#:G75 NIL) (|k| NIL) (|elf2| (F))
-          (|elf1| (F)) (#5=#:G74 NIL) (|el2| (LO)) (|el1| (LO)) (#6=#:G73 NIL)
+          (#3=#:G51 NIL) (|mkj| (LO)) (#4=#:G63 NIL) (|k| NIL) (|elf2| (F))
+          (|elf1| (F)) (#5=#:G62 NIL) (|el2| (LO)) (|el1| (LO)) (#6=#:G61 NIL)
           (|v| (LO)) (|u| (LO)) (|d| (LO)) (|c| (LO)) (|mij| (LO))
           (|#G14|
            (|Record| (|:| |generator| LO) (|:| |coef1| LO) (|:| |coef2| LO)
                      (|:| |coefu| LO) (|:| |coefv| LO)))
-          (#7=#:G72 NIL) (#8=#:G71 NIL) (|mm| (|Matrix| LO)) (#9=#:G64 NIL)
+          (#7=#:G60 NIL) (#8=#:G59 NIL) (|mm| (|Matrix| LO)) (#9=#:G52 NIL)
           (|dpiv| (|Integer|)) (|pivk| (|Integer|))
-          (|dp1| (|NonNegativeInteger|)) (#10=#:G70 NIL) (#11=#:G65 NIL)
-          (#12=#:G69 NIL) (|j| NIL) (#13=#:G68 NIL)
+          (|dp1| (|NonNegativeInteger|)) (#10=#:G58 NIL) (#11=#:G53 NIL)
+          (#12=#:G57 NIL) (|j| NIL) (#13=#:G56 NIL)
           (|nr| (|NonNegativeInteger|)) (|nc| (|NonNegativeInteger|))
-          (|lw| (|List| (|Vector| F))) (#14=#:G67 NIL) (|vv| NIL)
-          (#15=#:G66 NIL))
+          (|lw| (|List| (|Vector| F))) (#14=#:G55 NIL) (|vv| NIL)
+          (#15=#:G54 NIL))
          (SEQ (LETT |mm| (SPADCALL |m| (QREFELT % 15)))
               (LETT |lw|
                     (PROGN
@@ -60,7 +60,7 @@
                        (SEQ
                         (COND
                          ((> |i| |nr|)
-                          (PROGN (LETT #11# |$NoValue|) (GO #16=#:G60))))
+                          (PROGN (LETT #11# |$NoValue|) (GO #16=#:G48))))
                         (LETT |pivk| -1) (LETT |dpiv| -1)
                         (SEQ (LETT |k| |i|) (LETT #10# |nr|) G190
                              (COND ((> |k| #10#) (GO G191)))
@@ -84,7 +84,7 @@
                         (EXIT
                          (COND
                           ((EQL |dpiv| -1)
-                           (PROGN (LETT #9# |$NoValue|) (GO #17=#:G27)))
+                           (PROGN (LETT #9# |$NoValue|) (GO #17=#:G17)))
                           ('T
                            (SEQ
                             (LETT |mm|
@@ -208,7 +208,7 @@
                                       (QREFELT % 25))
                                      (PROGN
                                       (LETT #3# |$NoValue|)
-                                      (GO #18=#:G49)))
+                                      (GO #18=#:G37)))
                                     ('T
                                      (SEQ
                                       (PROGN
@@ -291,29 +291,29 @@
             (|:| |basis| (|List| (|Vector| F))))
            "failed")))
         (SPROG
-         ((#4=#:G182 NIL) (|ba| NIL) (#5=#:G183 NIL) (#6=#:G181 NIL)
+         ((#4=#:G168 NIL) (|ba| NIL) (#5=#:G169 NIL) (#6=#:G167 NIL)
           (|bvl| (|List| (|Vector| F))) (|cba| (|List| #7=(|Vector| F)))
           (|cb| (|List| #7#)) (|ncba| (|List| (|Vector| F)))
           (|na| (|Vector| F)) (|ncb| (|List| (|Vector| F))) (|bv| #7#)
-          (#8=#:G180 NIL) (|k| NIL) (|nbcv2| #7#) (#9=#:G179 NIL) (|nbcv1| #7#)
-          (#10=#:G177 NIL) (|j| NIL) (#11=#:G178 NIL) (|slj| NIL)
-          (|nsl2| (|List| F)) (|nbvl| (|List| (|Vector| F))) (#12=#:G176 NIL)
-          (|nbcv| #7#) (#13=#:G148 NIL) (#14=#:G147 NIL)
-          (|nrl1| (|NonNegativeInteger|)) (#15=#:G175 NIL) (#16=#:G174 NIL)
-          (|ss| (F)) (#17=#:G173 NIL) (|slk| NIL) (#18=#:G172 NIL)
+          (#8=#:G166 NIL) (|k| NIL) (|nbcv2| #7#) (#9=#:G165 NIL) (|nbcv1| #7#)
+          (#10=#:G163 NIL) (|j| NIL) (#11=#:G164 NIL) (|slj| NIL)
+          (|nsl2| (|List| F)) (|nbvl| (|List| (|Vector| F))) (#12=#:G162 NIL)
+          (|nbcv| #7#) (#13=#:G134 NIL) (#14=#:G133 NIL)
+          (|nrl1| (|NonNegativeInteger|)) (#15=#:G161 NIL) (#16=#:G160 NIL)
+          (|ss| (F)) (#17=#:G159 NIL) (|slk| NIL) (#18=#:G158 NIL)
           (|noff| (|NonNegativeInteger|)) (|cm2| (|Matrix| F))
-          (|cm1| (|Matrix| F)) (#19=#:G171 NIL) (|ncv| NIL) (#20=#:G170 NIL)
-          (|nsl1| (|List| F)) (#21=#:G169 NIL) (|pr| NIL) (#22=#:G168 NIL)
-          (|ncvl| (|List| #3#)) (#23=#:G167 NIL) (#24=#:G166 NIL)
-          (|nrl| (|NonNegativeInteger|)) (|prl| #2#) (#25=#:G165 NIL)
+          (|cm1| (|Matrix| F)) (#19=#:G157 NIL) (|ncv| NIL) (#20=#:G156 NIL)
+          (|nsl1| (|List| F)) (#21=#:G155 NIL) (|pr| NIL) (#22=#:G154 NIL)
+          (|ncvl| (|List| #3#)) (#23=#:G153 NIL) (#24=#:G152 NIL)
+          (|nrl| (|NonNegativeInteger|)) (|prl| #2#) (#25=#:G151 NIL)
           (|be| NIL) (|resi| #1#) (|lvi| (|List| F)) (|lvi2| (|List| F))
-          (|vvi| (F)) (#26=#:G164 NIL) (#27=#:G162 NIL) (#28=#:G163 NIL)
-          (|lvi1| (|List| F)) (#29=#:G161 NIL) (#30=#:G160 NIL)
+          (|vvi| (F)) (#26=#:G150 NIL) (#27=#:G148 NIL) (#28=#:G149 NIL)
+          (|lvi1| (|List| F)) (#29=#:G147 NIL) (#30=#:G146 NIL)
           (|nbas| #31=(|NonNegativeInteger|)) (|nlvi| (|NonNegativeInteger|))
-          (#32=#:G159 NIL) (#33=#:G158 NIL) (|lvi0| (|List| F))
-          (#34=#:G157 NIL) (|v| NIL) (#35=#:G156 NIL) (#36=#:G149 NIL)
-          (|i| NIL) (#37=#:G154 NIL) (#38=#:G155 NIL) (#39=#:G153 NIL)
-          (#40=#:G152 NIL) (#41=#:G151 NIL) (#42=#:G150 NIL) (|n| #31#)
+          (#32=#:G145 NIL) (#33=#:G144 NIL) (|lvi0| (|List| F))
+          (#34=#:G143 NIL) (|v| NIL) (#35=#:G142 NIL) (#36=#:G135 NIL)
+          (|i| NIL) (#37=#:G140 NIL) (#38=#:G141 NIL) (#39=#:G139 NIL)
+          (#40=#:G138 NIL) (#41=#:G137 NIL) (#42=#:G136 NIL) (|n| #31#)
           (|nr| (|NonNegativeInteger|)) (|nc| (|NonNegativeInteger|)))
          (SEQ
           (EXIT
@@ -382,7 +382,7 @@
                                        (|spadConstant| % 9) (QREFELT % 41))
                                       (PROGN
                                        (LETT #36# (CONS 1 "failed"))
-                                       (GO #43=#:G146)))
+                                       (GO #43=#:G132)))
                                      ('T
                                       (SEQ
                                        (LETT |lvi0|
@@ -692,7 +692,7 @@
                                                             (PROGN
                                                              (LETT #14# 1)
                                                              (GO
-                                                              #44=#:G125))))))))
+                                                              #44=#:G111))))))))
                                                       (LETT |k| (|inc_SI| |k|))
                                                       (GO G190) G191
                                                       (EXIT NIL)))
@@ -703,7 +703,7 @@
                                                             (QREFELT % 20))
                                                   (PROGN
                                                    (LETT #13# 1)
-                                                   (GO #45=#:G130)))
+                                                   (GO #45=#:G116)))
                                                  ('T
                                                   (SEQ
                                                    (LETT |nbcv|
@@ -883,9 +883,26 @@
 
 (DECLAIM (NOTINLINE |OrePolynomialMatrixOperations;|)) 
 
-(DEFUN |OrePolynomialMatrixOperations| (&REST #1=#:G198)
+(DEFUN |OrePolynomialMatrixOperations;| (|#1| |#2|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT DV$2 (|devaluate| |#2|))
+          (LETT |dv$| (LIST '|OrePolynomialMatrixOperations| DV$1 DV$2))
+          (LETT % (GETREFV 68))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|OrePolynomialMatrixOperations|
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |OrePolynomialMatrixOperations| (&REST #1=#:G184)
   (SPROG NIL
-         (PROG (#2=#:G199)
+         (PROG (#2=#:G185)
            (RETURN
             (COND
              ((LETT #2#
@@ -903,23 +920,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|OrePolynomialMatrixOperations|)))))))))) 
-
-(DEFUN |OrePolynomialMatrixOperations;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT DV$2 (|devaluate| |#2|))
-          (LETT |dv$| (LIST '|OrePolynomialMatrixOperations| DV$1 DV$2))
-          (LETT % (GETREFV 68))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|OrePolynomialMatrixOperations|
-                      (LIST DV$1 DV$2) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (QSETREFV % 7 |#2|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|OrePolynomialMatrixOperations| '|infovec|
           (LIST

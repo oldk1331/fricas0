@@ -15,27 +15,6 @@
 
 (DECLAIM (NOTINLINE |FiniteSetAggregateFunctions2;|)) 
 
-(DEFUN |FiniteSetAggregateFunctions2| (&REST #1=#:G13)
-  (SPROG NIL
-         (PROG (#2=#:G14)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|FiniteSetAggregateFunctions2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |FiniteSetAggregateFunctions2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|FiniteSetAggregateFunctions2|)))))))))) 
-
 (DEFUN |FiniteSetAggregateFunctions2;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -58,6 +37,27 @@
     (QSETREFV % 9 |#4|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |FiniteSetAggregateFunctions2| (&REST #1=#:G8)
+  (SPROG NIL
+         (PROG (#2=#:G9)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|FiniteSetAggregateFunctions2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |FiniteSetAggregateFunctions2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|FiniteSetAggregateFunctions2|)))))))))) 
 
 (MAKEPROP '|FiniteSetAggregateFunctions2| '|infovec|
           (LIST

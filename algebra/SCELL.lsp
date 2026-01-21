@@ -30,7 +30,7 @@
         (SPROG
          ((|new_left| (|TheField|)) (|new_right| (|TheField|))
           (|lr| (|List| |TheField|)) (|sg| (|Integer|)) (|nbe| (|TheField|))
-          (#1=#:G48 NIL) (|ll| (|List| |TheField|)) (|middle| (|TheField|)))
+          (#1=#:G31 NIL) (|ll| (|List| |TheField|)) (|middle| (|TheField|)))
          (SEQ
           (EXIT
            (SEQ
@@ -57,7 +57,7 @@
                                        (LETT #1#
                                              (|SCELL;separate| (REVERSE |ll|)
                                               |left| |middle| %))
-                                       (GO #3=#:G47)))
+                                       (GO #3=#:G30)))
                                      ('T
                                       (SEQ (LETT |nbe| (|SPADfirst| |lr|))
                                            (LETT |sg|
@@ -190,10 +190,10 @@
         ((|lp| (|List| |ThePols|)) (|var| (|Symbol|)) (% (|List| %)))
         (SPROG
          ((|l1| (|List| |TheField|)) (|res| (|List| %))
-          (|l| #1=(|List| |TheField|)) (#2=#:G57 NIL) (#3=#:G56 #1#)
-          (#4=#:G58 #1#) (#5=#:G69 NIL) (|p| NIL) (|b| (|TheField|))
-          (#6=#:G54 NIL) (#7=#:G53 (|TheField|)) (#8=#:G55 (|TheField|))
-          (#9=#:G68 NIL) (|lp1| (|List| |ThePols|)))
+          (|l| #1=(|List| |TheField|)) (#2=#:G40 NIL) (#3=#:G39 #1#)
+          (#4=#:G41 #1#) (#5=#:G51 NIL) (|p| NIL) (|b| (|TheField|))
+          (#6=#:G37 NIL) (#7=#:G36 (|TheField|)) (#8=#:G38 (|TheField|))
+          (#9=#:G50 NIL) (|lp1| (|List| |ThePols|)))
          (SEQ (LETT |lp1| (SPADCALL |lp| (QREFELT % 39)))
               (EXIT
                (COND
@@ -276,23 +276,6 @@
 
 (DECLAIM (NOTINLINE |SimpleCell;|)) 
 
-(DEFUN |SimpleCell| (&REST #1=#:G70)
-  (SPROG NIL
-         (PROG (#2=#:G71)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|SimpleCell|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |SimpleCell;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|SimpleCell|)))))))))) 
-
 (DEFUN |SimpleCell;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -313,6 +296,23 @@
                               (|:| |hasDim| (|Boolean|))
                               (|:| |varOf| (|Symbol|))))
           %))) 
+
+(DEFUN |SimpleCell| (&REST #1=#:G52)
+  (SPROG NIL
+         (PROG (#2=#:G53)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|SimpleCell|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |SimpleCell;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|SimpleCell|)))))))))) 
 
 (MAKEPROP '|SimpleCell| '|infovec|
           (LIST

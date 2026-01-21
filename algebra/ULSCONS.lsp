@@ -37,7 +37,7 @@
         (SPADCALL (SPADCALL |i| (QREFELT % 22)) (QREFELT % 21))) 
 
 (SDEFUN |ULSCONS;taylorIfCan;%U;12| ((|uls| (%)) (% (|Union| UTS "failed")))
-        (SPROG ((#1=#:G69 NIL) (|n| (|Integer|)))
+        (SPROG ((#1=#:G63 NIL) (|n| (|Integer|)))
                (SEQ (LETT |n| (|ULSCONS;getExpon| |uls| %))
                     (EXIT
                      (COND
@@ -219,7 +219,7 @@
                      ('T |x|)))) 
 
 (SDEFUN |ULSCONS;=;2%B;23| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
-        (SPROG ((#1=#:G141 NIL) (#2=#:G132 NIL) (|expDiff| (|Integer|)))
+        (SPROG ((#1=#:G131 NIL) (#2=#:G122 NIL) (|expDiff| (|Integer|)))
                (SEQ
                 (COND ((EQ |x| |y|) 'T)
                       (#3='T
@@ -269,7 +269,7 @@
                              (EXIT (< (SPADCALL |x| (QREFELT % 12)) 0))))))))) 
 
 (SDEFUN |ULSCONS;+;3%;25| ((|x| (%)) (|y| (%)) (% (%)))
-        (SPROG ((#1=#:G158 NIL) (#2=#:G154 NIL) (|n| (|Integer|)))
+        (SPROG ((#1=#:G148 NIL) (#2=#:G144 NIL) (|n| (|Integer|)))
                (SEQ
                 (LETT |n|
                       (- (|ULSCONS;getExpon| |x| %)
@@ -308,7 +308,7 @@
                              (QREFELT % 10)))))))) 
 
 (SDEFUN |ULSCONS;-;3%;26| ((|x| (%)) (|y| (%)) (% (%)))
-        (SPROG ((#1=#:G169 NIL) (#2=#:G165 NIL) (|n| (|Integer|)))
+        (SPROG ((#1=#:G159 NIL) (#2=#:G155 NIL) (|n| (|Integer|)))
                (SEQ
                 (LETT |n|
                       (- (|ULSCONS;getExpon| |x| %)
@@ -382,7 +382,7 @@
 
 (SDEFUN |ULSCONS;elt;3%;30| ((|uls1| (%)) (|uls2| (%)) (% (%)))
         (SPROG
-         ((#1=#:G199 NIL) (|uts1| (UTS)) (|recipr| (|Union| % "failed"))
+         ((#1=#:G189 NIL) (|uts1| (UTS)) (|recipr| (|Union| % "failed"))
           (|deg| (|Integer|)) (|uts2| (UTS)) (|uts| (|Union| UTS "failed")))
          (SEQ (LETT |uts| (SPADCALL |uls2| (QREFELT % 30)))
               (EXIT
@@ -449,7 +449,7 @@
 (SDEFUN |ULSCONS;eval;%CoefS;31|
         ((|uls| (%)) (|r| (|Coef|)) (% (|Stream| |Coef|)))
         (SPROG
-         ((#1=#:G218 NIL) (#2=#:G211 NIL) (|recipr| (|Union| |Coef| "failed"))
+         ((#1=#:G208 NIL) (#2=#:G201 NIL) (|recipr| (|Union| |Coef| "failed"))
           (|n| (|Integer|)) (|uts| (UTS)))
          (SEQ
           (SEQ (LETT |n| (|ULSCONS;getExpon| |uls| %))
@@ -499,7 +499,7 @@
 
 (SDEFUN |ULSCONS;coefficient;%ICoef;34|
         ((|x| (%)) (|n| (|Integer|)) (% (|Coef|)))
-        (SPROG ((#1=#:G227 NIL) (|a| (|Integer|)))
+        (SPROG ((#1=#:G217 NIL) (|a| (|Integer|)))
                (SEQ (LETT |a| (- |n| (|ULSCONS;getExpon| |x| %)))
                     (EXIT
                      (COND
@@ -520,7 +520,7 @@
            (SPADCALL (|ULSCONS;getUTS| |x| %) (QREFELT % 89)))) 
 
 (SDEFUN |ULSCONS;order;%2I;37| ((|x| (%)) (|n| #1=(|Integer|)) (% #1#))
-        (SPROG ((#2=#:G234 NIL) (|m| (|Integer|)) (|e| (|Integer|)))
+        (SPROG ((#2=#:G224 NIL) (|m| (|Integer|)) (|e| (|Integer|)))
                (SEQ (LETT |m| (- |n| (LETT |e| (|ULSCONS;getExpon| |x| %))))
                     (EXIT
                      (COND ((< |m| 0) |n|)
@@ -534,7 +534,7 @@
                                          (QREFELT % 91))))))))) 
 
 (SDEFUN |ULSCONS;truncate;%I%;38| ((|x| (%)) (|n| (|Integer|)) (% (%)))
-        (SPROG ((#1=#:G238 NIL) (|m| (|Integer|)) (|e| (|Integer|)))
+        (SPROG ((#1=#:G228 NIL) (|m| (|Integer|)) (|e| (|Integer|)))
                (SEQ (LETT |m| (- |n| (LETT |e| (|ULSCONS;getExpon| |x| %))))
                     (EXIT
                      (COND ((< |m| 0) (|spadConstant| % 13))
@@ -552,7 +552,7 @@
 (SDEFUN |ULSCONS;truncate;%2I%;39|
         ((|x| (%)) (|n1| #1=(|Integer|)) (|n2| #1#) (% (%)))
         (SPROG
-         ((#2=#:G244 NIL) (#3=#:G243 NIL) (|m1| (|Integer|)) (|e| (|Integer|))
+         ((#2=#:G234 NIL) (#3=#:G233 NIL) (|m1| (|Integer|)) (|e| (|Integer|))
           (|#G61| #1#) (|#G60| #1#))
          (SEQ
           (COND
@@ -582,10 +582,10 @@
 (SDEFUN |ULSCONS;rationalFunction;%IF;40|
         ((|x| (%)) (|n| (|Integer|)) (% (|Fraction| (|Polynomial| |Coef|))))
         (SPROG
-         ((#1=#:G256 NIL) (#2=#:G255 NIL)
+         ((#1=#:G243 NIL) (#2=#:G242 NIL)
           (|c| (|Fraction| (|Polynomial| |Coef|)))
           (|v| (|Fraction| (|Polynomial| |Coef|)))
-          (|poly| (|Fraction| (|Polynomial| |Coef|))) (#3=#:G251 NIL)
+          (|poly| (|Fraction| (|Polynomial| |Coef|))) (#3=#:G238 NIL)
           (|m| (|Integer|)) (|e| (|Integer|)))
          (SEQ (LETT |m| (- |n| (LETT |e| (|ULSCONS;getExpon| |x| %))))
               (EXIT
@@ -644,11 +644,11 @@
         ((|x| (%)) (|n1| #1=(|Integer|)) (|n2| #1#)
          (% (|Fraction| (|Polynomial| |Coef|))))
         (SPROG
-         ((#2=#:G269 NIL) (#3=#:G268 NIL)
+         ((#2=#:G256 NIL) (#3=#:G255 NIL)
           (|c| (|Fraction| (|Polynomial| |Coef|)))
           (|v| (|Fraction| (|Polynomial| |Coef|)))
-          (|poly| (|Fraction| (|Polynomial| |Coef|))) (#4=#:G264 NIL)
-          (#5=#:G263 NIL) (|m1| (|Integer|)) (|e| (|Integer|)) (|#G68| #1#)
+          (|poly| (|Fraction| (|Polynomial| |Coef|))) (#4=#:G251 NIL)
+          (#5=#:G250 NIL) (|m1| (|Integer|)) (|e| (|Integer|)) (|#G68| #1#)
           (|#G67| #1#))
          (SEQ
           (COND
@@ -742,7 +742,7 @@
 (SDEFUN |ULSCONS;approximate;%ICoef;43|
         ((|x| (%)) (|n| (|Integer|)) (% (|Coef|)))
         (SPROG
-         ((|app| (|Coef|)) (#1=#:G285 NIL) (|m| (|Integer|)) (|e| (|Integer|)))
+         ((|app| (|Coef|)) (#1=#:G272 NIL) (|m| (|Integer|)) (|e| (|Integer|)))
          (SEQ (LETT |m| (- |n| (LETT |e| (|ULSCONS;getExpon| |x| %))))
               (EXIT
                (COND ((< |m| 0) (|spadConstant| % 14))
@@ -775,7 +775,7 @@
                   (QREFELT % 10))) 
 
 (SDEFUN |ULSCONS;extend;%I%;45| ((|x| (%)) (|n| (|Integer|)) (% (%)))
-        (SPROG ((#1=#:G291 NIL) (|m| (|Integer|)) (|e| (|Integer|)))
+        (SPROG ((#1=#:G278 NIL) (|m| (|Integer|)) (|e| (|Integer|)))
                (SEQ (LETT |e| (|ULSCONS;getExpon| |x| %))
                     (LETT |m| (- |n| |e|))
                     (EXIT
@@ -873,8 +873,8 @@
 
 (SDEFUN |ULSCONS;^;%I%;54| ((|x| (%)) (|n| (|Integer|)) (% (%)))
         (SPROG
-         ((|minusN| (|NonNegativeInteger|)) (#1=#:G333 NIL) (|xInv| (%))
-          (#2=#:G332 NIL))
+         ((|minusN| (|NonNegativeInteger|)) (#1=#:G309 NIL) (|xInv| (%))
+          (#2=#:G308 NIL))
          (SEQ
           (COND ((ZEROP |n|) (|spadConstant| % 16))
                 ((> |n| 0)
@@ -941,7 +941,7 @@
                                     (#1# (|ULSCONS;getUTS| |x| %))))))))))) 
 
 (SDEFUN |ULSCONS;denom;%UTS;61| ((|x| (%)) (% (UTS)))
-        (SPROG ((#1=#:G356 NIL) (|n| (|Integer|)))
+        (SPROG ((#1=#:G332 NIL) (|n| (|Integer|)))
                (SEQ (LETT |n| (SPADCALL |x| (QREFELT % 12)))
                     (EXIT
                      (COND ((>= |n| 0) (|spadConstant| % 17))
@@ -1147,7 +1147,7 @@
          (% (|OutputForm|)))
         (SPROG
          ((|l| (|List| (|OutputForm|))) (|uu1| (|Stream| |Coef|)) (|n| NIL)
-          (#1=#:G441 NIL) (|count| (|NonNegativeInteger|)))
+          (#1=#:G417 NIL) (|count| (|NonNegativeInteger|)))
          (SEQ (LETT |l| NIL)
               (EXIT
                (COND
@@ -1263,33 +1263,11 @@
 
 (DECLAIM (NOTINLINE |UnivariateLaurentSeriesConstructor;|)) 
 
-(DEFUN |UnivariateLaurentSeriesConstructor| (&REST #1=#:G504)
-  (SPROG NIL
-         (PROG (#2=#:G505)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|UnivariateLaurentSeriesConstructor|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |UnivariateLaurentSeriesConstructor;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|UnivariateLaurentSeriesConstructor|)))))))))) 
-
 (DEFUN |UnivariateLaurentSeriesConstructor;| (|#1| |#2|)
   (SPROG
-   ((#1=#:G503 NIL) (|pv$| NIL) (#2=#:G492 NIL) (#3=#:G493 NIL) (#4=#:G495 NIL)
-    (#5=#:G496 NIL) (#6=#:G497 NIL) (#7=#:G498 NIL) (#8=#:G499 NIL)
-    (#9=#:G501 NIL) (#10=#:G502 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+   ((#1=#:G463 NIL) (|pv$| NIL) (#2=#:G452 NIL) (#3=#:G453 NIL) (#4=#:G455 NIL)
+    (#5=#:G456 NIL) (#6=#:G457 NIL) (#7=#:G458 NIL) (#8=#:G459 NIL)
+    (#9=#:G461 NIL) (#10=#:G462 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -1840,6 +1818,28 @@
                         (CONS (|dispatchFunction| |ULSCONS;integrate;%S%;94|)
                               %))))))))))))
     %))) 
+
+(DEFUN |UnivariateLaurentSeriesConstructor| (&REST #1=#:G464)
+  (SPROG NIL
+         (PROG (#2=#:G465)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|UnivariateLaurentSeriesConstructor|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |UnivariateLaurentSeriesConstructor;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|UnivariateLaurentSeriesConstructor|)))))))))) 
 
 (MAKEPROP '|UnivariateLaurentSeriesConstructor| '|infovec|
           (LIST

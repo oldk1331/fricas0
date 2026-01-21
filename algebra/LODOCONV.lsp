@@ -4,7 +4,7 @@
          (% (|LinearOrdinaryDifferentialOperator3| |Coeff| |Ab| R)))
         (SPROG
          ((|l3| (|LinearOrdinaryDifferentialOperator3| |Coeff| |Ab| R))
-          (#1=#:G14 NIL))
+          (#1=#:G2 NIL))
          (SEQ (LETT |l3| (|spadConstant| % 10))
               (SEQ G190
                    (COND
@@ -80,25 +80,6 @@
 
 (DECLAIM (NOTINLINE |LODOConvertions;|)) 
 
-(DEFUN |LODOConvertions| (&REST #1=#:G25)
-  (SPROG NIL
-         (PROG (#2=#:G26)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|LODOConvertions|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |LODOConvertions;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|LODOConvertions|)))))))))) 
-
 (DEFUN |LODOConvertions;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -117,6 +98,25 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |LODOConvertions| (&REST #1=#:G13)
+  (SPROG NIL
+         (PROG (#2=#:G14)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|LODOConvertions|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |LODOConvertions;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|LODOConvertions|)))))))))) 
 
 (MAKEPROP '|LODOConvertions| '|infovec|
           (LIST

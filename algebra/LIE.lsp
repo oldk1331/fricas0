@@ -16,25 +16,6 @@
 
 (DECLAIM (NOTINLINE |AssociatedLieAlgebra;|)) 
 
-(DEFUN |AssociatedLieAlgebra| (&REST #1=#:G30)
-  (SPROG NIL
-         (PROG (#2=#:G31)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|AssociatedLieAlgebra|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |AssociatedLieAlgebra;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|AssociatedLieAlgebra|)))))))))) 
-
 (DEFUN |AssociatedLieAlgebra;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -133,6 +114,25 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 8 |#2|)
           %))) 
+
+(DEFUN |AssociatedLieAlgebra| (&REST #1=#:G13)
+  (SPROG NIL
+         (PROG (#2=#:G14)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|AssociatedLieAlgebra|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |AssociatedLieAlgebra;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|AssociatedLieAlgebra|)))))))))) 
 
 (MAKEPROP '|AssociatedLieAlgebra| '|infovec|
           (LIST

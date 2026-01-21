@@ -4,8 +4,8 @@
          (|bsm| (|Matrix| (|Float|))) (|mu| (|Matrix| (|Float|)))
          (|nbs| (|Vector| (|Float|))) (|v1| (|Vector| (|Float|))) (% (|Void|)))
         (SPROG
-         ((#1=#:G33 NIL) (|i| NIL) (#2=#:G32 NIL) (|v2| (|Vector| (|Float|)))
-          (#3=#:G31 NIL) (|j| NIL) (#4=#:G30 NIL))
+         ((#1=#:G16 NIL) (|i| NIL) (#2=#:G15 NIL) (|v2| (|Vector| (|Float|)))
+          (#3=#:G14 NIL) (|j| NIL) (#4=#:G13 NIL))
          (SEQ (SPADCALL |mu| |k| |k| (|spadConstant| % 7) (QREFELT % 10))
               (SEQ (LETT |i| 1) (LETT #4# N) G190
                    (COND ((|greater_SI| |i| #4#) (GO G191)))
@@ -57,12 +57,12 @@
         ((L (|Matrix| (|Integer|))) (N (|NonNegativeInteger|))
          (% (|Matrix| (|Integer|))))
         (SPROG
-         ((|k| (|NonNegativeInteger|)) (|tmp| (|Float|)) (#1=#:G68 NIL)
-          (|i| NIL) (#2=#:G67 NIL) (|v2i| #3=(|Float|)) (|v1i| #4=(|Float|))
-          (#5=#:G66 NIL) (|m| #6=(|Float|)) (|nv2| #6#) (|nv1| #4#)
-          (|k1| (|Integer|)) (|del1| #3#) (#7=#:G65 NIL) (#8=#:G64 NIL)
+         ((|k| (|NonNegativeInteger|)) (|tmp| (|Float|)) (#1=#:G50 NIL)
+          (|i| NIL) (#2=#:G49 NIL) (|v2i| #3=(|Float|)) (|v1i| #4=(|Float|))
+          (#5=#:G48 NIL) (|m| #6=(|Float|)) (|nv2| #6#) (|nv1| #4#)
+          (|k1| (|Integer|)) (|del1| #3#) (#7=#:G47 NIL) (#8=#:G46 NIL)
           (|q| (|Integer|)) (|j| NIL) (|kmax| (|Integer|))
-          (|iters| (|Integer|)) (#9=#:G63 NIL) (|v1| #10=(|Vector| (|Float|)))
+          (|iters| (|Integer|)) (#9=#:G45 NIL) (|v1| #10=(|Vector| (|Float|)))
           (|delta| (|Float|)) (|bm| (|Matrix| (|Integer|)))
           (|mu| #11=(|Matrix| (|Float|))) (|nbs| #10#) (|bsm| #11#)
           (|cols| (|NonNegativeInteger|)) (|n| (|NonNegativeInteger|)))
@@ -271,9 +271,9 @@
           (|Record| (|:| |lll| (|Matrix| (|Integer|)))
                     (|:| |trf| (|Matrix| (|Integer|))))))
         (SPROG
-         ((#1=#:G89 NIL) (|j| NIL) (#2=#:G88 NIL) (#3=#:G87 NIL) (|i| NIL)
+         ((#1=#:G71 NIL) (|j| NIL) (#2=#:G70 NIL) (#3=#:G69 NIL) (|i| NIL)
           (|t| #4=(|Matrix| (|Integer|))) (|l| #4#)
-          (|m| (|Matrix| (|Integer|))) (#5=#:G86 NIL) (#6=#:G85 NIL) (LE #4#)
+          (|m| (|Matrix| (|Integer|))) (#5=#:G68 NIL) (#6=#:G67 NIL) (LE #4#)
           (|cols| (|NonNegativeInteger|)) (N (|NonNegativeInteger|))
           (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (ANROWS L)) (LETT N (ANCOLS L)) (LETT |cols| (+ N |n|))
@@ -323,8 +323,8 @@
         ((|la| (|List| (|Float|))) (|k| (|NonNegativeInteger|))
          (% (|List| (|Integer|))))
         (SPROG
-         ((#1=#:G101 NIL) (|i| NIL) (#2=#:G100 NIL)
-          (|res| (|Matrix| (|Integer|))) (#3=#:G98 NIL) (#4=#:G99 NIL)
+         ((#1=#:G83 NIL) (|i| NIL) (#2=#:G82 NIL)
+          (|res| (|Matrix| (|Integer|))) (#3=#:G80 NIL) (#4=#:G81 NIL)
           (|a| NIL) (|tenk| (|NonNegativeInteger|))
           (|m| (|Matrix| (|Integer|))) (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (LENGTH |la|))
@@ -363,9 +363,21 @@
 
 (DECLAIM (NOTINLINE |LLLReduction;|)) 
 
+(DEFUN |LLLReduction;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|LLLReduction|))
+          (LETT % (GETREFV 46))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|LLLReduction| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |LLLReduction| ()
   (SPROG NIL
-         (PROG (#1=#:G103)
+         (PROG (#1=#:G85)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|LLLReduction|))
@@ -379,18 +391,6 @@
                     (LETT #1# T))
                 (COND
                  ((NOT #1#) (HREM |$ConstructorCache| '|LLLReduction|)))))))))) 
-
-(DEFUN |LLLReduction;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|LLLReduction|))
-          (LETT % (GETREFV 46))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|LLLReduction| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|LLLReduction| '|infovec|
           (LIST

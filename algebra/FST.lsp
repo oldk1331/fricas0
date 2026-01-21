@@ -96,25 +96,6 @@
 
 (DECLAIM (NOTINLINE |FortranScalarType;|)) 
 
-(DEFUN |FortranScalarType| ()
-  (SPROG NIL
-         (PROG (#1=#:G75)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|FortranScalarType|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|FortranScalarType|
-                             (LIST
-                              (CONS NIL (CONS 1 (|FortranScalarType;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#)
-                  (HREM |$ConstructorCache| '|FortranScalarType|)))))))))) 
-
 (DEFUN |FortranScalarType;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -138,6 +119,25 @@
           (QSETREFV % 9 '|double complex|)
           (QSETREFV % 10 '|DOUBLE COMPLEX|)
           %))) 
+
+(DEFUN |FortranScalarType| ()
+  (SPROG NIL
+         (PROG (#1=#:G57)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|FortranScalarType|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|FortranScalarType|
+                             (LIST
+                              (CONS NIL (CONS 1 (|FortranScalarType;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#)
+                  (HREM |$ConstructorCache| '|FortranScalarType|)))))))))) 
 
 (MAKEPROP '|FortranScalarType| '|infovec|
           (LIST

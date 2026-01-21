@@ -12,21 +12,6 @@
 
 (DECLAIM (NOTINLINE |Variable;|)) 
 
-(DEFUN |Variable| (#1=#:G19)
-  (SPROG NIL
-         (PROG (#2=#:G20)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|Variable|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Variable;| #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Variable|)))))))))) 
-
 (DEFUN |Variable;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -40,6 +25,21 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |Variable| (#1=#:G4)
+  (SPROG NIL
+         (PROG (#2=#:G5)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|Variable|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Variable;| #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Variable|)))))))))) 
 
 (MAKEPROP '|Variable| '|infovec|
           (LIST

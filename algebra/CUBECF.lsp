@@ -4,8 +4,8 @@
          (% (|FiniteCubicalComplex| (|Integer|))))
         (SPROG
          ((|r| (ASIMP)) (|vs1| (|List| (|Integer|)))
-          (|v1| (|List| (|List| (|List| (|Integer|))))) (#1=#:G17 NIL)
-          (|n| NIL) (#2=#:G16 NIL)
+          (|v1| (|List| (|List| (|List| (|Integer|))))) (#1=#:G6 NIL) (|n| NIL)
+          (#2=#:G5 NIL)
           (ASIMP
            (|Join| (|SetCategory|)
                    (CATEGORY |domain|
@@ -215,9 +215,22 @@
 
 (DECLAIM (NOTINLINE |CubicalComplexFactory;|)) 
 
+(DEFUN |CubicalComplexFactory;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|CubicalComplexFactory|))
+          (LETT % (GETREFV 17))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|CubicalComplexFactory| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |CubicalComplexFactory| ()
   (SPROG NIL
-         (PROG (#1=#:G29)
+         (PROG (#1=#:G17)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|CubicalComplexFactory|))
@@ -233,19 +246,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|CubicalComplexFactory|)))))))))) 
-
-(DEFUN |CubicalComplexFactory;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|CubicalComplexFactory|))
-          (LETT % (GETREFV 17))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|CubicalComplexFactory| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|CubicalComplexFactory| '|infovec|
           (LIST

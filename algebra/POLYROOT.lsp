@@ -5,8 +5,8 @@
           (|Record| (|:| |exponent| (|NonNegativeInteger|))
                     (|:| |coef| (|Integer|)) (|:| |radicand| (|Integer|)))))
         (SPROG
-         ((#1=#:G30 NIL) (#2=#:G29 #3=(|Integer|)) (#4=#:G31 #3#)
-          (#5=#:G34 NIL) (#6=#:G1 NIL)
+         ((#1=#:G12 NIL) (#2=#:G11 #3=(|Integer|)) (#4=#:G13 #3#)
+          (#5=#:G16 NIL) (#6=#:G0 NIL)
           (|s|
            (|Record| (|:| |exponent| (|NonNegativeInteger|))
                      (|:| |coef| (|Integer|)) (|:| |radicand| (|List| #3#)))))
@@ -45,7 +45,7 @@
           (|Record| (|:| |exponent| (|NonNegativeInteger|))
                     (|:| |coef| (|Integer|)))))
         (SPROG
-         ((#1=#:G44 NIL) (|p| (|Integer|)) (|nn| (|Integer|)) (|e| (|Integer|))
+         ((#1=#:G26 NIL) (|p| (|Integer|)) (|nn| (|Integer|)) (|e| (|Integer|))
           (|ru| (|Union| (|Integer|) "failed")))
          (SEQ
           (COND ((EQL |x| 1) (CONS 1 1))
@@ -111,7 +111,7 @@
           (|Record| (|:| |exponent| (|NonNegativeInteger|)) (|:| |coef| F)
                     (|:| |radicand| F))))
         (SPROG
-         ((|m| (|NonNegativeInteger|)) (#1=#:G59 NIL)
+         ((|m| (|NonNegativeInteger|)) (#1=#:G36 NIL)
           (|sd|
            #2=(|Record| (|:| |exponent| (|NonNegativeInteger|)) (|:| |coef| F)
                         (|:| |radicand| F)))
@@ -141,7 +141,7 @@
           (|Record| (|:| |exponent| (|NonNegativeInteger|)) (|:| |coef| F)
                     (|:| |radicand| F))))
         (SPROG
-         ((|m| (|NonNegativeInteger|)) (#1=#:G65 NIL)
+         ((|m| (|NonNegativeInteger|)) (#1=#:G42 NIL)
           (|sd|
            #2=(|Record| (|:| |exponent| (|NonNegativeInteger|))
                         (|:| |coef| (|Integer|)) (|:| |radicand| (|Integer|))))
@@ -213,7 +213,7 @@
 (SDEFUN |POLYROOT;rsplit|
         ((|l| (|List| P)) (% (|Record| (|:| |coef| R) (|:| |poly| P))))
         (SPROG
-         ((|r| (R)) (|p| (P)) (|u| (|Union| R "failed")) (#1=#:G91 NIL)
+         ((|r| (R)) (|p| (P)) (|u| (|Union| R "failed")) (#1=#:G68 NIL)
           (|q| NIL))
          (SEQ (LETT |r| (|spadConstant| % 11)) (LETT |p| (|spadConstant| % 12))
               (SEQ (LETT |q| NIL) (LETT #1# |l|) G190
@@ -237,13 +237,13 @@
           (|Record| (|:| |exponent| (|NonNegativeInteger|)) (|:| |coef| P)
                     (|:| |radicand| (|List| P)))))
         (SPROG
-         ((|rad2| (|List| P)) (#1=#:G110 NIL) (|ri| NIL) (#2=#:G109 NIL)
+         ((|rad2| (|List| P)) (#1=#:G87 NIL) (|ri| NIL) (#2=#:G86 NIL)
           (|e2| (|NonNegativeInteger|)) (|e| (|NonNegativeInteger|))
           (|l| (|Integer|))
           (|rec2|
            (|Record| (|:| |exponent| (|NonNegativeInteger|)) (|:| |coef| P)
                      (|:| |radicand| (|List| P))))
-          (#3=#:G99 NIL) (|xu| (|Union| P #4="failed")) (|cp| (P))
+          (#3=#:G76 NIL) (|xu| (|Union| P #4="failed")) (|cp| (P))
           (|rec|
            (|Record| (|:| |exponent| (|NonNegativeInteger|))
                      (|:| |coef| (|Integer|))))
@@ -360,7 +360,7 @@
           (|Record| (|:| |exponent| (|NonNegativeInteger|)) (|:| |coef| F)
                     (|:| |radicand| F))))
         (SPROG
-         ((|m| (|NonNegativeInteger|)) (#1=#:G117 NIL)
+         ((|m| (|NonNegativeInteger|)) (#1=#:G94 NIL)
           (|rd|
            #2=(|Record| (|:| |exponent| (|NonNegativeInteger|)) (|:| |coef| F)
                         (|:| |radicand| F)))
@@ -425,25 +425,6 @@
 
 (DECLAIM (NOTINLINE |PolynomialRoots;|)) 
 
-(DEFUN |PolynomialRoots| (&REST #1=#:G120)
-  (SPROG NIL
-         (PROG (#2=#:G121)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PolynomialRoots|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |PolynomialRoots;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|PolynomialRoots|)))))))))) 
-
 (DEFUN |PolynomialRoots;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -497,6 +478,25 @@
        (QSETREFV % 69
                  (CONS (|dispatchFunction| |POLYROOT;froot;FNniR;12|) %)))))
     %))) 
+
+(DEFUN |PolynomialRoots| (&REST #1=#:G97)
+  (SPROG NIL
+         (PROG (#2=#:G98)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PolynomialRoots|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |PolynomialRoots;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|PolynomialRoots|)))))))))) 
 
 (MAKEPROP '|PolynomialRoots| '|infovec|
           (LIST

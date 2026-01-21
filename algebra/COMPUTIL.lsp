@@ -1,7 +1,7 @@
 
 (SDEFUN |COMPUTIL;Ski2Lambda| ((|s| (|SKICombinators| UT)) (% (|Lambda| UT)))
         (SPROG
-         ((#1=#:G63 NIL) (|s2| #2=(|String|)) (|c112| #3=(|SKICombinators| UT))
+         ((#1=#:G49 NIL) (|s2| #2=(|String|)) (|c112| #3=(|SKICombinators| UT))
           (|c111| #4=(|SKICombinators| UT))
           (|subsubnodes2| #5=(|List| (|SKICombinators| UT))) (|c12| #3#)
           (|c11| #4#) (|subsubnodes| #5#) (|s1| #2#) (|c2| #3#) (|c1| #4#)
@@ -32,7 +32,7 @@
                                (SPADCALL (LIST "\\" |strVar| ".0")
                                          (QREFELT % 19))
                                (QREFELT % 21)))
-                        (GO #7=#:G62))))))
+                        (GO #7=#:G48))))))
                (COND
                 ((SPADCALL |s| (QREFELT % 22))
                  (SEQ
@@ -255,7 +255,7 @@
 (SDEFUN |COMPUTIL;lambdaOverSki|
         ((|var| (UT)) (|sk| (|SKICombinators| UT)) (% (|SKICombinators| UT)))
         (SPROG
-         ((#1=#:G74 NIL) (|right| (|SKICombinators| UT))
+         ((#1=#:G60 NIL) (|right| (|SKICombinators| UT))
           (|left| (|SKICombinators| UT)) (|ch| (|List| (|SKICombinators| UT))))
          (SEQ
           (EXIT
@@ -285,7 +285,7 @@
                     (LETT #1#
                           (SPADCALL (SPADCALL (QREFELT % 36)) |sk|
                                     (QREFELT % 37)))
-                    (GO #2=#:G73))))))
+                    (GO #2=#:G59))))))
                (SPADCALL
                 (SPADCALL
                  (SPADCALL
@@ -380,7 +380,7 @@
 (SDEFUN |COMPUTIL;coerce;LSkic;4|
         ((|lam| (|Lambda| UT)) (% (|SKICombinators| UT)))
         (SPROG
-         ((#1=#:G91 NIL) (|c32| #2=(|Lambda| UT)) (|c31| #3=(|Lambda| UT))
+         ((#1=#:G77 NIL) (|c32| #2=(|Lambda| UT)) (|c31| #3=(|Lambda| UT))
           (|ch3| #4=(|List| (|Lambda| UT))) (|cxx| (|Lambda| UT)) (|c33| #3#)
           (|s3| (UT)) (|c3| #3#) (|lamUn| (|Lambda| UT)) (|c2| #2#) (|c1| #3#)
           (|ch| #4#))
@@ -406,7 +406,7 @@
                         (SPADCALL (SPADCALL |lam| (QREFELT % 42))
                                   (QREFELT % 43))
                         (QREFELT % 44)))
-                 (GO #5=#:G90))))))
+                 (GO #5=#:G76))))))
             (COND
              ((SPADCALL |lam| (QREFELT % 45))
               (SEQ (LETT |ch| (SPADCALL |lam| (QREFELT % 46)))
@@ -562,7 +562,7 @@
 
 (SDEFUN |COMPUTIL;coerce;SkicIl;5| ((|s| (|SKICombinators| UT)) (% (|ILogic|)))
         (SPROG
-         ((#1=#:G110 NIL) (|bc| #2=(|ILogic|)) (|ac| #2#) (|ab| #2#)
+         ((#1=#:G96 NIL) (|bc| #2=(|ILogic|)) (|ac| #2#) (|ab| #2#)
           (|c| #3=(|ILogic|)) (|b| #3#) (|a| #3#)
           (|c112| #4=(|SKICombinators| UT)) (|c111| #5=(|SKICombinators| UT))
           (|subsubnodes2| #6=(|List| (|SKICombinators| UT))) (|c12| #4#)
@@ -587,7 +587,7 @@
                   (EXIT
                    (PROGN
                     (LETT #1# (SPADCALL |a| |a| (QREFELT % 57)))
-                    (GO #7=#:G109))))))
+                    (GO #7=#:G95))))))
                (COND
                 ((SPADCALL |s| (QREFELT % 22))
                  (SEQ
@@ -714,21 +714,6 @@
 
 (DECLAIM (NOTINLINE |compUtil;|)) 
 
-(DEFUN |compUtil| (#1=#:G111)
-  (SPROG NIL
-         (PROG (#2=#:G112)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|compUtil|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|compUtil;| #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|compUtil|)))))))))) 
-
 (DEFUN |compUtil;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -743,6 +728,21 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 7 0)
           %))) 
+
+(DEFUN |compUtil| (#1=#:G97)
+  (SPROG NIL
+         (PROG (#2=#:G98)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|compUtil|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|compUtil;| #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|compUtil|)))))))))) 
 
 (MAKEPROP '|compUtil| '|infovec|
           (LIST

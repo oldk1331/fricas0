@@ -29,7 +29,7 @@
                                (QREFELT % 19) (QREFELT % 23)))))) 
 
 (SDEFUN |DIRRING;coerce;%S;6!0| ((|n| NIL) (|f| NIL))
-        (SPROG ((#1=#:G27 NIL))
+        (SPROG ((#1=#:G21 NIL))
                (SPADCALL
                 (PROG1 (LETT #1# |n|)
                   (|check_subtype2| (> #1# 0) '(|PositiveInteger|) '(|Integer|)
@@ -136,8 +136,8 @@
           (RETURN
            (PROGN
             (SPROG
-             ((#1=#:G89 NIL) (#2=#:G88 NIL) (#3=#:G93 NIL) (|d| NIL)
-              (#4=#:G92 NIL))
+             ((#1=#:G79 NIL) (#2=#:G78 NIL) (#3=#:G83 NIL) (|d| NIL)
+              (#4=#:G82 NIL))
              (SEQ
               (SPADCALL (ELT % 35)
                         (PROGN
@@ -184,8 +184,8 @@
 (SDEFUN |DIRRING;qrecip|
         ((|f| (%)) (|f1inv| (|Coef|)) (|n| (|PositiveInteger|)) (% (|Coef|)))
         (SPROG
-         ((#1=#:G114 NIL) (#2=#:G113 NIL) (#3=#:G119 NIL) (|d| NIL)
-          (#4=#:G118 NIL))
+         ((#1=#:G104 NIL) (#2=#:G103 NIL) (#3=#:G109 NIL) (|d| NIL)
+          (#4=#:G108 NIL))
          (SEQ
           (COND ((EQL |n| 1) |f1inv|)
                 ('T
@@ -266,15 +266,15 @@
 (SDEFUN |DIRRING;multiplicative?;%PiB;20|
         ((|a| (%)) (|n| (|PositiveInteger|)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G176 NIL) (#2=#:G170 NIL) (|rl| (|List| |Coef|))
-          (#3=#:G146 NIL) (#4=#:G145 NIL) (#5=#:G179 NIL) (|f| NIL)
-          (#6=#:G178 NIL)
+         ((#1=#:G155 NIL) (#2=#:G149 NIL) (|rl| (|List| |Coef|))
+          (#3=#:G125 NIL) (#4=#:G124 NIL) (#5=#:G158 NIL) (|f| NIL)
+          (#6=#:G157 NIL)
           (|fl|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| (|Integer|))
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (#7=#:G177 NIL) (|i| NIL))
+          (#7=#:G156 NIL) (|i| NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -328,7 +328,7 @@
                      (SEQ
                       (SPADCALL (SPADCALL |i| (QREFELT % 66)) (QREFELT % 69))
                       (SPADCALL (SPADCALL |rl| (QREFELT % 70)) (QREFELT % 69))
-                      (EXIT (PROGN (LETT #1# NIL) (GO #8=#:G175))))))))
+                      (EXIT (PROGN (LETT #1# NIL) (GO #8=#:G154))))))))
                  (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
             (EXIT 'T)))
           #8# (EXIT #1#)))) 
@@ -336,15 +336,15 @@
 (SDEFUN |DIRRING;additive?;%PiB;21|
         ((|a| (%)) (|n| (|PositiveInteger|)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G214 NIL) (#2=#:G208 NIL) (|rl| (|List| |Coef|))
-          (#3=#:G184 NIL) (#4=#:G183 NIL) (#5=#:G217 NIL) (|f| NIL)
-          (#6=#:G216 NIL)
+         ((#1=#:G193 NIL) (#2=#:G187 NIL) (|rl| (|List| |Coef|))
+          (#3=#:G163 NIL) (#4=#:G162 NIL) (#5=#:G196 NIL) (|f| NIL)
+          (#6=#:G195 NIL)
           (|fl|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| (|Integer|))
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (#7=#:G215 NIL) (|i| NIL))
+          (#7=#:G194 NIL) (|i| NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -398,28 +398,12 @@
                      (SEQ
                       (SPADCALL (SPADCALL |i| (QREFELT % 66)) (QREFELT % 69))
                       (SPADCALL (SPADCALL |rl| (QREFELT % 70)) (QREFELT % 69))
-                      (EXIT (PROGN (LETT #1# NIL) (GO #8=#:G213))))))))
+                      (EXIT (PROGN (LETT #1# NIL) (GO #8=#:G192))))))))
                  (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
             (EXIT 'T)))
           #8# (EXIT #1#)))) 
 
 (DECLAIM (NOTINLINE |DirichletRing;|)) 
-
-(DEFUN |DirichletRing| (#1=#:G219)
-  (SPROG NIL
-         (PROG (#2=#:G220)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|DirichletRing|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|DirichletRing;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|DirichletRing|)))))))))) 
 
 (DEFUN |DirichletRing;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
@@ -444,6 +428,22 @@
                      (|:| |function| (|Mapping| |#1| (|PositiveInteger|)))))
           (QSETREFV % 19 (SPADCALL 1 (QREFELT % 18)))
           %))) 
+
+(DEFUN |DirichletRing| (#1=#:G198)
+  (SPROG NIL
+         (PROG (#2=#:G199)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|DirichletRing|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|DirichletRing;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|DirichletRing|)))))))))) 
 
 (MAKEPROP '|DirichletRing| '|infovec|
           (LIST

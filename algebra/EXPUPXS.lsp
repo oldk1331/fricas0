@@ -61,34 +61,10 @@
 
 (DECLAIM (NOTINLINE |ExponentialOfUnivariatePuiseuxSeries;|)) 
 
-(DEFUN |ExponentialOfUnivariatePuiseuxSeries| (&REST #1=#:G69)
-  (SPROG NIL
-         (PROG (#2=#:G70)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T NIL NIL))
-                     (HGET |$ConstructorCache|
-                           '|ExponentialOfUnivariatePuiseuxSeries|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function| |ExponentialOfUnivariatePuiseuxSeries;|)
-                       #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|ExponentialOfUnivariatePuiseuxSeries|)))))))))) 
-
 (DEFUN |ExponentialOfUnivariatePuiseuxSeries;| (|#1| |#2| |#3|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G62 NIL) (#2=#:G63 NIL) (#3=#:G64 NIL) (#4=#:G65 NIL)
-    (#5=#:G67 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+   ((|pv$| NIL) (#1=#:G35 NIL) (#2=#:G36 NIL) (#3=#:G37 NIL) (#4=#:G38 NIL)
+    (#5=#:G40 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 |#2|)
@@ -328,6 +304,30 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 9 (|UnivariatePuiseuxSeries| |#1| |#2| |#3|))
     %))) 
+
+(DEFUN |ExponentialOfUnivariatePuiseuxSeries| (&REST #1=#:G42)
+  (SPROG NIL
+         (PROG (#2=#:G43)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T NIL NIL))
+                     (HGET |$ConstructorCache|
+                           '|ExponentialOfUnivariatePuiseuxSeries|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function| |ExponentialOfUnivariatePuiseuxSeries;|)
+                       #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|ExponentialOfUnivariatePuiseuxSeries|)))))))))) 
 
 (MAKEPROP '|ExponentialOfUnivariatePuiseuxSeries| '|infovec|
           (LIST

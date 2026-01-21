@@ -1,7 +1,7 @@
 
 (SDEFUN |FFINTBAS;squaredFactors| ((|px| (R)) (% (R)))
         (SPROG
-         ((#1=#:G23 NIL) (#2=#:G22 (R)) (#3=#:G24 (R)) (#4=#:G31 NIL)
+         ((#1=#:G9 NIL) (#2=#:G8 (R)) (#3=#:G10 (R)) (#4=#:G13 NIL)
           (|ffe| NIL))
          (SEQ
           (PROGN
@@ -30,7 +30,7 @@
           (|Record| (|:| |basis| (|Matrix| R)) (|:| |basisDen| R)
                     (|:| |basisInv| (|Matrix| R)))))
         (SPROG
-         ((#1=#:G38 NIL) (#2=#:G50 NIL) (|oldIndex| (R)) (|indexChange| (R))
+         ((#1=#:G18 NIL) (#2=#:G26 NIL) (|oldIndex| (R)) (|indexChange| (R))
           (|rbinv| #3=(|Matrix| R)) (|rbden| (R)) (|rb| #3#) (|g| (R))
           (|index| (R)) (|idinv| (|Matrix| R)) (|id| (|Matrix| R))
           (|disc0| (R)) (|tfm0| (|Matrix| R)) (|n| (|PositiveInteger|)))
@@ -112,7 +112,7 @@
                          (EXIT
                           (PROGN
                            (LETT #2# (VECTOR |rb| |rbden| |rbinv|))
-                           (GO #5=#:G49)))))
+                           (GO #5=#:G25)))))
                        (EXIT
                         (LETT |tfm|
                               (PROG2
@@ -185,26 +185,6 @@
 
 (DECLAIM (NOTINLINE |FunctionFieldIntegralBasis;|)) 
 
-(DEFUN |FunctionFieldIntegralBasis| (&REST #1=#:G63)
-  (SPROG NIL
-         (PROG (#2=#:G64)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|FunctionFieldIntegralBasis|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |FunctionFieldIntegralBasis;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|FunctionFieldIntegralBasis|)))))))))) 
-
 (DEFUN |FunctionFieldIntegralBasis;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -223,6 +203,26 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |FunctionFieldIntegralBasis| (&REST #1=#:G39)
+  (SPROG NIL
+         (PROG (#2=#:G40)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|FunctionFieldIntegralBasis|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |FunctionFieldIntegralBasis;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|FunctionFieldIntegralBasis|)))))))))) 
 
 (MAKEPROP '|FunctionFieldIntegralBasis| '|infovec|
           (LIST

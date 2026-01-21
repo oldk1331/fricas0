@@ -18,7 +18,7 @@
                   (QREFELT % 20))) 
 
 (SDEFUN |GB;groebner;2L;3| ((|Pol| (|List| |Dpol|)) (% (|List| |Dpol|)))
-        (SPROG ((#1=#:G20 NIL) (|x| NIL) (#2=#:G19 NIL))
+        (SPROG ((#1=#:G10 NIL) (|x| NIL) (#2=#:G9 NIL))
                (SEQ
                 (COND ((SPADCALL |Pol| NIL (QREFELT % 22)) |Pol|)
                       (#3='T
@@ -56,7 +56,7 @@
 
 (SDEFUN |GB;groebner;LSL;4|
         ((|Pol| (|List| |Dpol|)) (|xx1| (|String|)) (% (|List| |Dpol|)))
-        (SPROG ((#1=#:G31 NIL) (|x| NIL) (#2=#:G30 NIL))
+        (SPROG ((#1=#:G19 NIL) (|x| NIL) (#2=#:G18 NIL))
                (SEQ
                 (COND ((SPADCALL |Pol| NIL (QREFELT % 22)) |Pol|)
                       (#3='T
@@ -117,7 +117,7 @@
 (SDEFUN |GB;groebner;L2SL;5|
         ((|Pol| (|List| |Dpol|)) (|xx1| (|String|)) (|xx2| (|String|))
          (% (|List| |Dpol|)))
-        (SPROG ((#1=#:G43 NIL) (|x| NIL) (#2=#:G42 NIL))
+        (SPROG ((#1=#:G31 NIL) (|x| NIL) (#2=#:G30 NIL))
                (SEQ
                 (COND ((SPADCALL |Pol| NIL (QREFELT % 22)) |Pol|)
                       (#3='T
@@ -226,25 +226,6 @@
 
 (DECLAIM (NOTINLINE |GroebnerPackage;|)) 
 
-(DEFUN |GroebnerPackage| (&REST #1=#:G44)
-  (SPROG NIL
-         (PROG (#2=#:G45)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|GroebnerPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |GroebnerPackage;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|GroebnerPackage|)))))))))) 
-
 (DEFUN |GroebnerPackage;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -274,6 +255,25 @@
                        (CONS (|dispatchFunction| |GB;normalForm;DpolLDpol;2|)
                              %)))))
           %))) 
+
+(DEFUN |GroebnerPackage| (&REST #1=#:G32)
+  (SPROG NIL
+         (PROG (#2=#:G33)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|GroebnerPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |GroebnerPackage;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|GroebnerPackage|)))))))))) 
 
 (MAKEPROP '|GroebnerPackage| '|infovec|
           (LIST

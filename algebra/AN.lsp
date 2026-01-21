@@ -28,7 +28,7 @@
          (%
           #2=(|Record| (|:| |num| (|SparseUnivariatePolynomial| %))
                        (|:| |den| %))))
-        (SPROG ((#3=#:G42 NIL) (|rec| #2#) (|zz| #1#) (|dd| (%)))
+        (SPROG ((#3=#:G21 NIL) (|rec| #2#) (|zz| #1#) (|dd| (%)))
                (SEQ
                 (EXIT
                  (SEQ (LETT |zz| |z|)
@@ -61,7 +61,7 @@
                                         (CONS (QCAR |rec|)
                                               (SPADCALL (QCDR |rec|) |dd|
                                                         (QREFELT % 45))))
-                                  (GO #4=#:G41))))))))
+                                  (GO #4=#:G20))))))))
                            NIL (GO G190) G191 (EXIT NIL))
                       (EXIT (CONS |z| (|spadConstant| % 40)))))
                 #4# (EXIT #3#)))) 
@@ -153,7 +153,7 @@
                          (SPADCALL |d| |p| (QREFELT % 84)) (QREFELT % 62)))))) 
 
 (SDEFUN |AN;norm;%L%;13| ((|z| (%)) (|l| (|List| (|Kernel| %))) (% (%)))
-        (SPROG ((#1=#:G70 NIL) (|k| NIL))
+        (SPROG ((#1=#:G45 NIL) (|k| NIL))
                (SEQ
                 (SEQ (LETT |k| NIL) (LETT #1# |l|) G190
                      (COND
@@ -197,7 +197,7 @@
 (SDEFUN |AN;norm;SupLSup;15|
         ((|z| (|SparseUnivariatePolynomial| %)) (|l| (|List| (|Kernel| %)))
          (% (|SparseUnivariatePolynomial| %)))
-        (SPROG ((#1=#:G78 NIL) (|k| NIL))
+        (SPROG ((#1=#:G53 NIL) (|k| NIL))
                (SEQ
                 (SEQ (LETT |k| NIL) (LETT #1# |l|) G190
                      (COND
@@ -225,24 +225,6 @@
 
 (DECLAIM (NOTINLINE |AlgebraicNumber;|)) 
 
-(DEFUN |AlgebraicNumber| ()
-  (SPROG NIL
-         (PROG (#1=#:G136)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|AlgebraicNumber|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|AlgebraicNumber|
-                             (LIST (CONS NIL (CONS 1 (|AlgebraicNumber;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#)
-                  (HREM |$ConstructorCache| '|AlgebraicNumber|)))))))))) 
-
 (DEFUN |AlgebraicNumber;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -261,6 +243,24 @@
           (QSETREFV % 6 (|Expression| (|Integer|)))
           (QSETREFV % 7 '|%alg|)
           %))) 
+
+(DEFUN |AlgebraicNumber| ()
+  (SPROG NIL
+         (PROG (#1=#:G98)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|AlgebraicNumber|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|AlgebraicNumber|
+                             (LIST (CONS NIL (CONS 1 (|AlgebraicNumber;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#)
+                  (HREM |$ConstructorCache| '|AlgebraicNumber|)))))))))) 
 
 (MAKEPROP '|AlgebraicNumber| '|infovec|
           (LIST
@@ -296,7 +296,7 @@
               (|Mapping| 32 $$) (|SparseUnivariatePolynomialFunctions2| $$ 32)
               (213 . |map|) (|CommuteUnivariatePolynomialCategory| $$ 32 88)
               (219 . |swap|) (224 . |resultant|) (230 . /) |AN;norm;SupKSup;14|
-              (|BasicOperator|) (|ExpressionSpace&| $$) (236 . |belong?|)
+              (|BasicOperator|) (|ExpressionSpace2&| $$ 47) (236 . |belong?|)
               (|Symbol|) (241 . |has?|) |AN;belong?;BoB;16| (|InputForm|)
               (247 . |convert|) (|InputFormFunctions1| $$)
               (252 . |coerceToType|) |AN;convert;%If;17| (|Float|)
@@ -352,7 +352,7 @@
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0))
+                                  0 0 0))
             (CONS
              '#(|AlgebraicallyClosedField&| |Field&| |EuclideanDomain&|
                 |PolynomialFactorizationExplicit&| NIL
@@ -361,9 +361,9 @@
                 |DifferentialRing&| NIL |Rng&| NIL |NonAssociativeAlgebra&|
                 |NonAssociativeAlgebra&| NIL |Module&| |Module&|
                 |NonAssociativeRing&| NIL NIL NIL NIL |NonAssociativeRng&| NIL
-                NIL NIL NIL NIL |AbelianGroup&| NIL NIL NIL
+                NIL NIL NIL NIL |AbelianGroup&| NIL NIL NIL NIL
                 |NonAssociativeSemiRng&| |AbelianMonoid&| |MagmaWithUnit&| NIL
-                |ExpressionSpace&| |AbelianSemiGroup&| |Magma&| NIL
+                |ExpressionSpace2&| |AbelianSemiGroup&| |Magma&| NIL
                 |RetractableTo&| |Evalable&| |SetCategory&| NIL
                 |RetractableTo&| |RetractableTo&| NIL NIL NIL |InnerEvalable&|
                 |InnerEvalable&| |BasicType&| NIL NIL NIL NIL NIL
@@ -383,18 +383,19 @@
                  (|RightModule| $$) (|LeftModule| $$) (|LeftModule| 12)
                  (|RightModule| 11) (|RightModule| 12) (|AbelianGroup|)
                  (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
-                 (|Monoid|) (|NonAssociativeSemiRng|) (|AbelianMonoid|)
-                 (|MagmaWithUnit|) (|SemiGroup|) (|ExpressionSpace|)
-                 (|AbelianSemiGroup|) (|Magma|) (|Comparable|)
-                 (|RetractableTo| 47) (|Evalable| $$) (|SetCategory|)
-                 (|CommutativeStar|) (|RetractableTo| 11) (|RetractableTo| 12)
-                 (|RealConstant|) (|CoercibleTo| 132) (|CoercibleFrom| 47)
-                 (|InnerEvalable| 47 $$) (|InnerEvalable| $$ $$) (|BasicType|)
-                 (|unitsKnown|) (|TwoSidedRecip|) (|noZeroDivisors|)
-                 (|canonicalUnitNormal|) (|canonicalsClosed|)
-                 (|RadicalCategory|) (|CoercibleFrom| 11) (|CoercibleFrom| 12)
-                 (|ConvertibleTo| 116) (|ConvertibleTo| 108)
-                 (|ConvertibleTo| 124) (|ConvertibleTo| 103))
+                 (|Monoid|) (|ExpressionSpace|) (|NonAssociativeSemiRng|)
+                 (|AbelianMonoid|) (|MagmaWithUnit|) (|SemiGroup|)
+                 (|ExpressionSpace2| 47) (|AbelianSemiGroup|) (|Magma|)
+                 (|Comparable|) (|RetractableTo| 47) (|Evalable| $$)
+                 (|SetCategory|) (|CommutativeStar|) (|RetractableTo| 11)
+                 (|RetractableTo| 12) (|RealConstant|) (|CoercibleTo| 132)
+                 (|CoercibleFrom| 47) (|InnerEvalable| 47 $$)
+                 (|InnerEvalable| $$ $$) (|BasicType|) (|unitsKnown|)
+                 (|TwoSidedRecip|) (|noZeroDivisors|) (|canonicalUnitNormal|)
+                 (|canonicalsClosed|) (|RadicalCategory|) (|CoercibleFrom| 11)
+                 (|CoercibleFrom| 12) (|ConvertibleTo| 116)
+                 (|ConvertibleTo| 108) (|ConvertibleTo| 124)
+                 (|ConvertibleTo| 103))
               (|makeByteWordVec2| 161
                                   '(1 6 8 9 10 1 12 0 11 13 2 16 14 15 8 17 2 6
                                     19 9 20 21 2 24 22 15 23 25 1 28 5 5 29 0 0

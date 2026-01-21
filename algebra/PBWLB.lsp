@@ -8,8 +8,8 @@
 
 (SDEFUN |PBWLB;varList;%L;3| ((|x| (%)) (% (|List| |VarSet|)))
         (SPROG
-         ((|le| #1=(|List| |VarSet|)) (#2=#:G20 NIL) (#3=#:G19 #1#)
-          (#4=#:G21 #1#) (#5=#:G24 NIL) (|l| NIL))
+         ((|le| #1=(|List| |VarSet|)) (#2=#:G12 NIL) (#3=#:G11 #1#)
+          (#4=#:G13 #1#) (#5=#:G16 NIL) (|l| NIL))
          (SEQ
           (COND ((NULL |x|) NIL)
                 (#6='T
@@ -60,7 +60,7 @@
                          (SPADCALL (CDR |x|) (QREFELT % 27)) (QREFELT % 28))))) 
 
 (SDEFUN |PBWLB;coerce;%Of;10| ((|x| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G39 NIL) (|l| NIL) (#2=#:G38 NIL))
+        (SPROG ((#1=#:G31 NIL) (|l| NIL) (#2=#:G30 NIL))
                (SEQ
                 (COND ((NULL |x|) (SPADCALL 1 (QREFELT % 31)))
                       ('T
@@ -98,8 +98,8 @@
 
 (SDEFUN |PBWLB;length;%Nni;14| ((|x| (%)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((#1=#:G56 NIL) (|n| #2=(|Integer|)) (#3=#:G54 NIL) (#4=#:G53 #2#)
-          (#5=#:G55 #2#) (#6=#:G59 NIL) (|l| NIL))
+         ((#1=#:G47 NIL) (|n| #2=(|Integer|)) (#3=#:G45 NIL) (#4=#:G44 #2#)
+          (#5=#:G46 #2#) (#6=#:G50 NIL) (|l| NIL))
          (SEQ
           (LETT |n|
                 (PROGN
@@ -139,25 +139,6 @@
 
 (DECLAIM (NOTINLINE |PoincareBirkhoffWittLyndonBasis;|)) 
 
-(DEFUN |PoincareBirkhoffWittLyndonBasis| (#1=#:G66)
-  (SPROG NIL
-         (PROG (#2=#:G67)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|PoincareBirkhoffWittLyndonBasis|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|PoincareBirkhoffWittLyndonBasis;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|PoincareBirkhoffWittLyndonBasis|)))))))))) 
-
 (DEFUN |PoincareBirkhoffWittLyndonBasis;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -173,6 +154,25 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 7 (|List| (|LyndonWord| |#1|)))
           %))) 
+
+(DEFUN |PoincareBirkhoffWittLyndonBasis| (#1=#:G57)
+  (SPROG NIL
+         (PROG (#2=#:G58)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|PoincareBirkhoffWittLyndonBasis|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|PoincareBirkhoffWittLyndonBasis;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|PoincareBirkhoffWittLyndonBasis|)))))))))) 
 
 (MAKEPROP '|PoincareBirkhoffWittLyndonBasis| '|infovec|
           (LIST

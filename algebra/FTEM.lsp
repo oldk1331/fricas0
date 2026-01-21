@@ -46,7 +46,7 @@
 
 (SDEFUN |FTEM;processTemplate;2Fn;7| ((|tp| (|FileName|)) (% (|FileName|)))
         (SPROG
-         ((|active| #1=(|Boolean|)) (|line| (|String|)) (#2=#:G34 NIL)
+         ((|active| #1=(|Boolean|)) (|line| (|String|)) (#2=#:G24 NIL)
           (|endInput| #1#) (|fp| (|TextFile|)))
          (SEQ (LETT |fp| (SPADCALL |tp| "input" (QREFELT % 28)))
               (LETT |active| 'T) (LETT |endInput| NIL)
@@ -73,7 +73,7 @@
                                   ((NULL (SPADCALL |line| (QREFELT % 22)))
                                    (PROGN
                                     (LETT #2# (SPADCALL |line| (QREFELT % 31)))
-                                    (GO #3=#:G24)))))
+                                    (GO #3=#:G18)))))
                                 #3# (EXIT #2#)))))))
                       ('T
                        (SEQ (LETT |line| (SPADCALL |fp| (QREFELT % 18)))
@@ -95,9 +95,22 @@
 
 (DECLAIM (NOTINLINE |FortranTemplate;|)) 
 
+(DEFUN |FortranTemplate;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|FortranTemplate|))
+          (LETT % (GETREFV 38))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|FortranTemplate| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 6 (|TextFile|))
+          %))) 
+
 (DEFUN |FortranTemplate| ()
   (SPROG NIL
-         (PROG (#1=#:G36)
+         (PROG (#1=#:G26)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|FortranTemplate|))
@@ -112,19 +125,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|FortranTemplate|)))))))))) 
-
-(DEFUN |FortranTemplate;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|FortranTemplate|))
-          (LETT % (GETREFV 38))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|FortranTemplate| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 6 (|TextFile|))
-          %))) 
 
 (MAKEPROP '|FortranTemplate| '|infovec|
           (LIST

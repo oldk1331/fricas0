@@ -12,7 +12,7 @@
 (SDEFUN |NORMPK;outputArgs;2SPTSV;3|
         ((|s1| (|String|)) (|s2| (|String|)) (|p| (P)) (|ts| (TS))
          (% (|Void|)))
-        (SPROG ((#1=#:G41 NIL) (|q| NIL) (|lp| (|List| P)))
+        (SPROG ((#1=#:G31 NIL) (|q| NIL) (|lp| (|List| P)))
                (SEQ
                 (COND
                  ((NULL (SPADCALL |s1| (QREFELT % 19)))
@@ -85,7 +85,7 @@
          ((|pd| (P)) (|pn| (P)) (|k| (|Fraction| R)) (|dp| (R)) (|cd| (R))
           (|dn| (R)) (|cn| (R))
           (|remd| #1=(|Record| (|:| |rnum| R) (|:| |polnum| P) (|:| |den| R)))
-          (|remn| #1#) (|d| (P)) (|n| (P)) (|#G28| (P)) (#2=#:G52 NIL)
+          (|remn| #1#) (|d| (P)) (|n| (P)) (|#G28| (P)) (#2=#:G42 NIL)
           (|#G27| (P)) (|g| (P))
           (|hesrg| (|Record| (|:| |gcd| P) (|:| |coef1| P))) (|ts_v| (P))
           (|v| (V)))
@@ -141,7 +141,7 @@
         (SPROG
          ((|r| (P)) (|ip| (P)) (|mp| (P)) (|tp| (P))
           (|qr| (|Record| (|:| |num| P) (|:| |den| P))) (|ts_v| (P))
-          (#1=#:G72 NIL) (|v| (V)) (|vp| (V)))
+          (#1=#:G56 NIL) (|v| (V)) (|vp| (V)))
          (SEQ
           (COND
            ((OR (SPADCALL |ts| (QREFELT % 58)) (SPADCALL |p| (QREFELT % 59)))
@@ -231,7 +231,7 @@
          (% (|List| (|Record| (|:| |val| P) (|:| |tower| TS)))))
         (SPROG
          ((|lpwt| (|List| (|Record| (|:| |val| P) (|:| |tower| TS)))) (|q| (P))
-          (|us| (TS)) (#1=#:G100 NIL) (|bwt| NIL)
+          (|us| (TS)) (#1=#:G84 NIL) (|bwt| NIL)
           (|lbwt|
            (|List| (|Record| (|:| |val| (|Boolean|)) (|:| |tower| TS)))))
          (SEQ
@@ -242,7 +242,7 @@
                   (SPADCALL (SPADCALL |p| (QREFELT % 62)) |ts| (QREFELT % 63))
                   (QREFELT % 59))
                  (|error|
-                  "in normalize$NORMPK: init(#1) reduces to 0 w.r.t. #2"))
+                  "in normalize$NORMPK: init(#1) reduces to 0 with respect to #2"))
                 ('T
                  (SEQ (LETT |lbwt| (SPADCALL |p| |ts| (QREFELT % 15)))
                       (LETT |lpwt| NIL)
@@ -278,25 +278,6 @@
                       (EXIT |lpwt|))))))) 
 
 (DECLAIM (NOTINLINE |NormalizationPackage;|)) 
-
-(DEFUN |NormalizationPackage| (&REST #1=#:G101)
-  (SPROG NIL
-         (PROG (#2=#:G102)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|NormalizationPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |NormalizationPackage;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|NormalizationPackage|)))))))))) 
 
 (DEFUN |NormalizationPackage;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
@@ -346,6 +327,25 @@
       (QSETREFV % 34
                 (CONS (|dispatchFunction| |NORMPK;outputArgs;2SPTSV;5|) %))))
     %))) 
+
+(DEFUN |NormalizationPackage| (&REST #1=#:G85)
+  (SPROG NIL
+         (PROG (#2=#:G86)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|NormalizationPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |NormalizationPackage;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|NormalizationPackage|)))))))))) 
 
 (MAKEPROP '|NormalizationPackage| '|infovec|
           (LIST

@@ -11,7 +11,7 @@
         (SPADCALL |e| |n| (QREFELT % 11))) 
 
 (SDEFUN |FORMAT;display;%V;4| ((|f| (%)) (% (|Void|)))
-        (SPROG ((#1=#:G22 NIL) (|s| NIL) (#2=#:G21 NIL) (#3=#:G20 NIL))
+        (SPROG ((#1=#:G14 NIL) (|s| NIL) (#2=#:G13 NIL) (#3=#:G12 NIL))
                (SEQ
                 (SEQ (LETT |s| NIL)
                      (LETT #3#
@@ -132,22 +132,6 @@
 
 (DECLAIM (NOTINLINE |Formatter;|)) 
 
-(DEFUN |Formatter| (#1=#:G52)
-  (SPROG NIL
-         (PROG (#2=#:G53)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|Formatter|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Formatter;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|Formatter|)))))))))) 
-
 (DEFUN |Formatter;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -162,6 +146,22 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 25 (CONS (ELT % 23) (ELT % 24)))
           %))) 
+
+(DEFUN |Formatter| (#1=#:G44)
+  (SPROG NIL
+         (PROG (#2=#:G45)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|Formatter|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Formatter;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|Formatter|)))))))))) 
 
 (MAKEPROP '|Formatter| '|infovec|
           (LIST

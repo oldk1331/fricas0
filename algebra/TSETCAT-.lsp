@@ -1,6 +1,6 @@
 
 (SDEFUN |TSETCAT-;=;2SB;1| ((|ts| (S)) (|us| (S)) (% (|Boolean|)))
-        (SPROG ((#1=#:G87 NIL) (#2=#:G84 NIL))
+        (SPROG ((#1=#:G75 NIL) (#2=#:G72 NIL))
                (COND
                 ((SPADCALL |ts| (QREFELT % 12)) (SPADCALL |us| (QREFELT % 12)))
                 ((OR (SPADCALL |us| (QREFELT % 12))
@@ -30,7 +30,7 @@
                   (QREFELT % 18)))))) 
 
 (SDEFUN |TSETCAT-;infRittWu?;2SB;2| ((|ts| (S)) (|us| (S)) (% (|Boolean|)))
-        (SPROG ((|v| (V)) (|q| (P)) (#1=#:G95 NIL) (|p| (P)))
+        (SPROG ((|v| (V)) (|q| (P)) (#1=#:G83 NIL) (|p| (P)))
                (SEQ
                 (COND
                  ((SPADCALL |us| (QREFELT % 12))
@@ -278,7 +278,7 @@
 (SDEFUN |TSETCAT-;reduce;PSMMP;13|
         ((|p| (P)) (|ts| (S)) (|redOp| (|Mapping| P P P))
          (|redOp?| (|Mapping| (|Boolean|) P P)) (% (P)))
-        (SPROG ((#1=#:G210 NIL) (|reductor| (P)) (#2=#:G207 NIL) (|ts0| (S)))
+        (SPROG ((#1=#:G197 NIL) (|reductor| (P)) (#2=#:G194 NIL) (|ts0| (S)))
                (SEQ
                 (COND
                  ((OR (SPADCALL |ts| (QREFELT % 12))
@@ -384,7 +384,7 @@
 
 (SDEFUN |TSETCAT-;removeZero;PSP;18| ((|p| (P)) (|ts| (S)) (% (P)))
         (SPROG
-         ((|q| (P)) (#1=#:G267 NIL) (#2=#:G255 NIL) (|ts_v-| (S)) (|v| (V)))
+         ((|q| (P)) (#1=#:G253 NIL) (#2=#:G242 NIL) (|ts_v-| (S)) (|v| (V)))
          (SEQ
           (EXIT
            (COND
@@ -412,7 +412,7 @@
                      (EXIT
                       (COND
                        ((SPADCALL |q| (QREFELT % 31))
-                        (PROGN (LETT #1# |q|) (GO #3=#:G266)))
+                        (PROGN (LETT #1# |q|) (GO #3=#:G252)))
                        ((SPADCALL (SPADCALL |q| |ts_v-| (QREFELT % 84))
                                   (QREFELT % 31))
                         (PROGN (LETT #1# (|spadConstant| % 85)) (GO #3#))))))))
@@ -488,7 +488,7 @@
         (SPADCALL |ts| (ELT % 103) (QREFELT % 98))) 
 
 (SDEFUN |TSETCAT-;mvar;SV;25| ((|ts| (S)) (% (V)))
-        (SPROG ((#1=#:G294 NIL))
+        (SPROG ((#1=#:G280 NIL))
                (COND
                 ((SPADCALL |ts| (QREFELT % 12))
                  (|error| "Error from TSETCAT in mvar : #1 is empty"))
@@ -541,7 +541,7 @@
         (SPADCALL (ELT % 22) (SPADCALL |ts| (QREFELT % 28)) (QREFELT % 36))) 
 
 (SDEFUN |TSETCAT-;algebraicVariables;SL;30| ((|ts| (S)) (% (|List| V)))
-        (SPROG ((#1=#:G329 NIL) (|p| NIL) (#2=#:G328 NIL))
+        (SPROG ((#1=#:G315 NIL) (|p| NIL) (#2=#:G314 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -678,7 +678,7 @@
 
 (SDEFUN |TSETCAT-;coHeight;SNni;39| ((|ts| (S)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((#1=#:G384 NIL) (|m| (|NonNegativeInteger|))
+         ((#1=#:G370 NIL) (|m| (|NonNegativeInteger|))
           (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (SPADCALL (QREFELT % 125)))
               (LETT |m| (LENGTH (SPADCALL |ts| (QREFELT % 28))))

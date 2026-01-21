@@ -8,7 +8,7 @@
 
 (SDEFUN |EXPRODE;k2exquo| ((|k| (|Kernel| F)) (% (F)))
         (SPROG
-         ((#1=#:G20 NIL) (|f| NIL) (#2=#:G19 NIL) (|op| (|BasicOperator|)))
+         ((#1=#:G15 NIL) (|f| NIL) (#2=#:G14 NIL) (|op| (|BasicOperator|)))
          (SEQ
           (COND
            ((SPADCALL (LETT |op| (SPADCALL |k| (QREFELT % 19))) '|%diff|
@@ -81,7 +81,7 @@
          ('T (|error| "Improper initial value")))) 
 
 (SDEFUN |EXPRODE;findCompat| ((|yx| (F)) (|l| (|List| (|Equation| F))) (% (F)))
-        (SPROG ((#1=#:G48 NIL) (#2=#:G49 NIL) (#3=#:G50 NIL) (|eq| NIL))
+        (SPROG ((#1=#:G31 NIL) (#2=#:G32 NIL) (#3=#:G33 NIL) (|eq| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -100,8 +100,8 @@
                               (LETT #1#
                                     (PROGN
                                      (LETT #2# (SPADCALL |eq| (QREFELT % 55)))
-                                     (GO #4=#:G47)))
-                              (GO #5=#:G45))))))
+                                     (GO #4=#:G30)))
+                              (GO #5=#:G28))))))
                          (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
                    #5# (EXIT #1#))
                   (EXIT (|error| "Improper initial value"))))
@@ -109,7 +109,7 @@
 
 (SDEFUN |EXPRODE;findEq|
         ((|k| (|Kernel| F)) (|x| (|Symbol|)) (|sys| (|List| F)) (% (F)))
-        (SPROG ((#1=#:G56 NIL) (#2=#:G57 NIL) (#3=#:G58 NIL) (|eq| NIL))
+        (SPROG ((#1=#:G39 NIL) (#2=#:G40 NIL) (#3=#:G41 NIL) (|eq| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -130,8 +130,8 @@
                             ((SPADCALL |k| (SPADCALL |eq| (QREFELT % 60))
                                        (QREFELT % 62))
                              (PROGN
-                              (LETT #1# (PROGN (LETT #2# |eq|) (GO #4=#:G55)))
-                              (GO #5=#:G53))))))
+                              (LETT #1# (PROGN (LETT #2# |eq|) (GO #4=#:G38)))
+                              (GO #5=#:G36))))))
                          (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
                    #5# (EXIT #1#))
                   (EXIT (|error| "Improper differential equation"))))
@@ -153,7 +153,7 @@
          (|x| (|Symbol|)) (|sy| (F)) (|n| (|NonNegativeInteger|)) (% (F)))
         (SPROG
          ((|lv| (|List| F)) (|m| (F)) (|l| (|List| (|Kernel| F))) (|f| (F))
-          (#1=#:G68 NIL) (|i| NIL))
+          (#1=#:G49 NIL) (|i| NIL))
          (SEQ
           (COND ((ZEROP |n|) (|error| "No initial value(s) given"))
                 ('T
@@ -206,7 +206,7 @@
 
 (SDEFUN |EXPRODE;checkSystem|
         ((|diffeq| (F)) (|yx| (|List| (|Kernel| F))) (|lv| (|List| F)) (% (F)))
-        (SPROG ((#1=#:G74 NIL) (#2=#:G75 NIL) (#3=#:G76 NIL) (|k| NIL))
+        (SPROG ((#1=#:G55 NIL) (#2=#:G56 NIL) (#3=#:G57 NIL) (|k| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -231,8 +231,8 @@
                                               %)
                                              |yx| |lv| (QREFELT % 63))
                                             %))
-                                     (GO #4=#:G73)))
-                              (GO #5=#:G71))))))
+                                     (GO #4=#:G54)))
+                              (GO #5=#:G52))))))
                          (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
                    #5# (EXIT #1#))
                   (EXIT (|spadConstant| % 68))))
@@ -241,7 +241,7 @@
 (SDEFUN |EXPRODE;seriesSolve;LLELA;13|
         ((|l| (|List| (|Equation| F))) (|y| (|List| (|BasicOperator|)))
          (|eqx| (|Equation| F)) (|eqy| (|List| (|Equation| F))) (% (|Any|)))
-        (SPROG ((#1=#:G81 NIL) (|deq| NIL) (#2=#:G80 NIL))
+        (SPROG ((#1=#:G62 NIL) (|deq| NIL) (#2=#:G61 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -265,7 +265,7 @@
 (SDEFUN |EXPRODE;seriesSolve;LLELA;14|
         ((|l| (|List| (|Equation| F))) (|y| (|List| (|BasicOperator|)))
          (|eqx| (|Equation| F)) (|y0| (|List| F)) (% (|Any|)))
-        (SPROG ((#1=#:G88 NIL) (|deq| NIL) (#2=#:G87 NIL))
+        (SPROG ((#1=#:G69 NIL) (|deq| NIL) (#2=#:G68 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -289,7 +289,7 @@
 (SDEFUN |EXPRODE;seriesSolve;LLELA;15|
         ((|l| (|List| F)) (|ly| (|List| (|BasicOperator|)))
          (|eqx| (|Equation| F)) (|eqy| (|List| (|Equation| F))) (% (|Any|)))
-        (SPROG ((#1=#:G93 NIL) (|y| NIL) (#2=#:G92 NIL))
+        (SPROG ((#1=#:G74 NIL) (|y| NIL) (#2=#:G73 NIL))
                (SEQ
                 (SPADCALL |l| |ly| |eqx|
                           (PROGN
@@ -349,7 +349,7 @@
          (|y0| (F)) (% (|Any|)))
         (SPROG
          ((|center| (F)) (|f| (F)) (|yx| (|Kernel| F)) (|sy| (|Symbol|))
-          (|x| (|Symbol|)) (#1=#:G99 NIL))
+          (|x| (|Symbol|)) (#1=#:G80 NIL))
          (SEQ
           (LETT |x|
                 (PROG2
@@ -425,7 +425,7 @@
          (|y0| (|List| F)) (% (|Any|)))
         (SPROG
          ((|center| (F)) (|f| (F)) (|yx| (|Kernel| F)) (|sy| (|Symbol|))
-          (|x| (|Symbol|)) (#1=#:G106 NIL))
+          (|x| (|Symbol|)) (#1=#:G86 NIL))
          (SEQ
           (LETT |x|
                 (PROG2
@@ -505,13 +505,13 @@
         ((|sys| (|List| F)) (|ly| (|List| (|BasicOperator|)))
          (|eqx| (|Equation| F)) (|l0| (|List| F)) (% (|Any|)))
         (SPROG
-         ((#1=#:G143 NIL) (|f| NIL) (#2=#:G142 NIL) (|center| (F))
-          (|l| (|List| F)) (#3=#:G141 NIL) (|eq| NIL) (#4=#:G140 NIL)
-          (#5=#:G139 NIL) (|k| NIL) (#6=#:G138 NIL) (|lelt| (|List| F))
-          (|m| (F)) (#7=#:G137 NIL) (#8=#:G136 NIL)
-          (|yx| (|List| (|Kernel| F))) (#9=#:G135 NIL) (|y| NIL)
-          (#10=#:G134 NIL) (|fsy| (F)) (|sy| (|Symbol|)) (|x| (|Symbol|))
-          (#11=#:G117 NIL) (|kx| (|Kernel| F)))
+         ((#1=#:G118 NIL) (|f| NIL) (#2=#:G117 NIL) (|center| (F))
+          (|l| (|List| F)) (#3=#:G116 NIL) (|eq| NIL) (#4=#:G115 NIL)
+          (#5=#:G114 NIL) (|k| NIL) (#6=#:G113 NIL) (|lelt| (|List| F))
+          (|m| (F)) (#7=#:G112 NIL) (#8=#:G111 NIL)
+          (|yx| (|List| (|Kernel| F))) (#9=#:G110 NIL) (|y| NIL)
+          (#10=#:G109 NIL) (|fsy| (F)) (|sy| (|Symbol|)) (|x| (|Symbol|))
+          (#11=#:G92 NIL) (|kx| (|Kernel| F)))
          (SEQ
           (LETT |x|
                 (PROG2
@@ -678,26 +678,6 @@
 
 (DECLAIM (NOTINLINE |ExpressionSpaceODESolver;|)) 
 
-(DEFUN |ExpressionSpaceODESolver| (&REST #1=#:G144)
-  (SPROG NIL
-         (PROG (#2=#:G145)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ExpressionSpaceODESolver|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ExpressionSpaceODESolver;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|ExpressionSpaceODESolver|)))))))))) 
-
 (DEFUN |ExpressionSpaceODESolver;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -718,6 +698,26 @@
           (QSETREFV % 13 (SPADCALL '|integer| (QREFELT % 10)))
           (QSETREFV % 14 (|HasCategory| |#1| '(|IntegerNumberSystem|)))
           %))) 
+
+(DEFUN |ExpressionSpaceODESolver| (&REST #1=#:G119)
+  (SPROG NIL
+         (PROG (#2=#:G120)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ExpressionSpaceODESolver|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ExpressionSpaceODESolver;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|ExpressionSpaceODESolver|)))))))))) 
 
 (MAKEPROP '|ExpressionSpaceODESolver| '|infovec|
           (LIST

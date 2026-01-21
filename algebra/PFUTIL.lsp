@@ -3,7 +3,7 @@
         ((|nn| (UP)) (|dens| (|List| UP)) (% (|List| UP)))
         (SPROG
          ((|ru| (|Union| (|List| UP) "failed")) (|sdeg| (|Integer|))
-          (#1=#:G19 NIL) (|den| NIL))
+          (#1=#:G11 NIL) (|den| NIL))
          (SEQ
           (COND
            ((NULL |dens|)
@@ -28,26 +28,6 @@
 
 (DECLAIM (NOTINLINE |PartialFractionUtilities;|)) 
 
-(DEFUN |PartialFractionUtilities| (&REST #1=#:G20)
-  (SPROG NIL
-         (PROG (#2=#:G21)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PartialFractionUtilities|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |PartialFractionUtilities;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|PartialFractionUtilities|)))))))))) 
-
 (DEFUN |PartialFractionUtilities;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -64,6 +44,26 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |PartialFractionUtilities| (&REST #1=#:G12)
+  (SPROG NIL
+         (PROG (#2=#:G13)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PartialFractionUtilities|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |PartialFractionUtilities;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|PartialFractionUtilities|)))))))))) 
 
 (MAKEPROP '|PartialFractionUtilities| '|infovec|
           (LIST

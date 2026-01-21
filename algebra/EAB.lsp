@@ -9,7 +9,7 @@
               ('T (> (|SPADfirst| |x|) (|SPADfirst| |y|))))) 
 
 (SDEFUN |EAB;coerce;L%;3| ((|li| (|List| (|Integer|))) (% (%)))
-        (SPROG ((#1=#:G27 NIL) (|x| NIL))
+        (SPROG ((#1=#:G19 NIL) (|x| NIL))
                (SEQ
                 (SEQ (LETT |x| NIL) (LETT #1# |li|) G190
                      (COND
@@ -27,8 +27,8 @@
 
 (SDEFUN |EAB;degree;%Nni;4| ((|x| (%)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((#1=#:G35 NIL) (#2=#:G33 NIL) (#3=#:G32 #4=(|Integer|))
-          (#5=#:G34 #4#) (#6=#:G37 NIL) (#7=#:G1 NIL))
+         ((#1=#:G26 NIL) (#2=#:G24 NIL) (#3=#:G23 #4=(|Integer|))
+          (#5=#:G25 #4#) (#6=#:G28 NIL) (#7=#:G0 NIL))
          (SEQ
           (PROG1
               (LETT #1#
@@ -54,7 +54,7 @@
         (SPADCALL |x| (QREFELT % 17))) 
 
 (SDEFUN |EAB;Nul;Nni%;6| ((|n| (|NonNegativeInteger|)) (% (%)))
-        (SPROG ((#1=#:G45 NIL) (|i| NIL) (#2=#:G44 NIL))
+        (SPROG ((#1=#:G34 NIL) (|i| NIL) (#2=#:G33 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -69,9 +69,22 @@
 
 (DECLAIM (NOTINLINE |ExtAlgBasis;|)) 
 
+(DEFUN |ExtAlgBasis;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|ExtAlgBasis|))
+          (LETT % (GETREFV 24))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|ExtAlgBasis| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 6 (|List| (|Integer|)))
+          %))) 
+
 (DEFUN |ExtAlgBasis| ()
   (SPROG NIL
-         (PROG (#1=#:G48)
+         (PROG (#1=#:G37)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ExtAlgBasis|))
@@ -85,19 +98,6 @@
                     (LETT #1# T))
                 (COND
                  ((NOT #1#) (HREM |$ConstructorCache| '|ExtAlgBasis|)))))))))) 
-
-(DEFUN |ExtAlgBasis;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|ExtAlgBasis|))
-          (LETT % (GETREFV 24))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|ExtAlgBasis| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 6 (|List| (|Integer|)))
-          %))) 
 
 (MAKEPROP '|ExtAlgBasis| '|infovec|
           (LIST

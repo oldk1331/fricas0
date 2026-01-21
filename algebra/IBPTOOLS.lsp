@@ -50,7 +50,7 @@
 (SDEFUN |IBPTOOLS;mapUnivariateIfCan;MSupU;3|
         ((|f| (|Mapping| #1=(|Union| K "failed") L))
          (|poly| (|SparseUnivariatePolynomial| L)) (% (|Union| R "failed")))
-        (SPROG ((|ans| (R)) (#2=#:G44 NIL) (|lc| #1#))
+        (SPROG ((|ans| (R)) (#2=#:G38 NIL) (|lc| #1#))
                (SEQ
                 (EXIT
                  (SEQ (LETT |ans| (|spadConstant| % 10))
@@ -67,7 +67,7 @@
                               ((QEQCAR |lc| 1)
                                (PROGN
                                 (LETT #2# (CONS 1 "failed"))
-                                (GO #3=#:G43)))
+                                (GO #3=#:G37)))
                               ('T
                                (SEQ
                                 (LETT |ans|
@@ -90,8 +90,8 @@
          (|mat| (|Matrix| (|SparseUnivariatePolynomial| L)))
          (% (|Union| (|Matrix| R) "failed")))
         (SPROG
-         ((#1=#:G68 NIL) (|poly| (|Union| R "failed")) (#2=#:G70 NIL) (|j| NIL)
-          (#3=#:G69 NIL) (|i| NIL) (|matOut| (|Matrix| R))
+         ((#1=#:G59 NIL) (|poly| (|Union| R "failed")) (#2=#:G61 NIL) (|j| NIL)
+          (#3=#:G60 NIL) (|i| NIL) (|matOut| (|Matrix| R))
           (|n| (|NonNegativeInteger|)) (|m| (|NonNegativeInteger|)))
          (SEQ
           (EXIT
@@ -112,7 +112,7 @@
                                ((QEQCAR |poly| 1)
                                 (PROGN
                                  (LETT #1# (CONS 1 "failed"))
-                                 (GO #4=#:G67)))
+                                 (GO #4=#:G58)))
                                ('T
                                 (QSETAREF2O |matOut| |i| |j| (QCDR |poly|) 1
                                             1)))))
@@ -148,27 +148,6 @@
 
 (DECLAIM (NOTINLINE |IntegralBasisPolynomialTools;|)) 
 
-(DEFUN |IntegralBasisPolynomialTools| (&REST #1=#:G78)
-  (SPROG NIL
-         (PROG (#2=#:G79)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|IntegralBasisPolynomialTools|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |IntegralBasisPolynomialTools;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|IntegralBasisPolynomialTools|)))))))))) 
-
 (DEFUN |IntegralBasisPolynomialTools;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -191,6 +170,27 @@
     (QSETREFV % 9 |#4|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |IntegralBasisPolynomialTools| (&REST #1=#:G69)
+  (SPROG NIL
+         (PROG (#2=#:G70)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|IntegralBasisPolynomialTools|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |IntegralBasisPolynomialTools;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|IntegralBasisPolynomialTools|)))))))))) 
 
 (MAKEPROP '|IntegralBasisPolynomialTools| '|infovec|
           (LIST

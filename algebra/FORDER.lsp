@@ -1,7 +1,7 @@
 
 (SDEFUN |FORDER;order;FdNni;1|
         ((|d| (|FiniteDivisor| F UP UPUP R)) (% (|NonNegativeInteger|)))
-        (SPROG ((|dd| (|FiniteDivisor| F UP UPUP R)) (#1=#:G14 NIL) (|i| NIL))
+        (SPROG ((|dd| (|FiniteDivisor| F UP UPUP R)) (#1=#:G6 NIL) (|i| NIL))
                (SEQ
                 (EXIT
                  (SEQ (LETT |dd| (LETT |d| (SPADCALL |d| (QREFELT % 11))))
@@ -11,7 +11,7 @@
                              (EXIT
                               (COND
                                ((SPADCALL |dd| (QREFELT % 13))
-                                (PROGN (LETT #1# |i|) (GO #2=#:G13)))
+                                (PROGN (LETT #1# |i|) (GO #2=#:G5)))
                                ('T
                                 (LETT |dd|
                                       (SPADCALL
@@ -22,25 +22,6 @@
                 #2# (EXIT #1#)))) 
 
 (DECLAIM (NOTINLINE |FindOrderFinite;|)) 
-
-(DEFUN |FindOrderFinite| (&REST #1=#:G15)
-  (SPROG NIL
-         (PROG (#2=#:G16)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|FindOrderFinite|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |FindOrderFinite;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|FindOrderFinite|)))))))))) 
 
 (DEFUN |FindOrderFinite;| (|#1| |#2| |#3| |#4|)
   (SPROG
@@ -64,6 +45,25 @@
     (QSETREFV % 9 |#4|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |FindOrderFinite| (&REST #1=#:G7)
+  (SPROG NIL
+         (PROG (#2=#:G8)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|FindOrderFinite|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |FindOrderFinite;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|FindOrderFinite|)))))))))) 
 
 (MAKEPROP '|FindOrderFinite| '|infovec|
           (LIST

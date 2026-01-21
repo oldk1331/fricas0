@@ -108,7 +108,7 @@
                        (EXIT (SPADCALL (ELT % 59) |l| (QREFELT % 61))))))))) 
 
 (SDEFUN |LAUPOL;coefficient;%IR;23| ((|p| (%)) (|n| (|Integer|)) (% (R)))
-        (SPROG ((#1=#:G65 NIL) (|m| (|Integer|)))
+        (SPROG ((#1=#:G51 NIL) (|m| (|Integer|)))
                (SEQ (LETT |m| (- |n| (SPADCALL |p| (QREFELT % 19))))
                     (EXIT
                      (COND ((< |m| 0) (|spadConstant| % 10))
@@ -172,7 +172,7 @@
                                    (- (SPADCALL |p| (QREFELT % 19))) %)))))))) 
 
 (SDEFUN |LAUPOL;+;3%;28| ((|p| (%)) (|q| (%)) (% (%)))
-        (SPROG ((#1=#:G87 NIL) (#2=#:G86 NIL) (|d| (|Integer|)))
+        (SPROG ((#1=#:G73 NIL) (#2=#:G72 NIL) (|d| (|Integer|)))
                (SEQ
                 (COND ((SPADCALL |q| (QREFELT % 52)) |p|)
                       ((SPADCALL |p| (QREFELT % 52)) |q|)
@@ -220,7 +220,7 @@
                             %)))))))))) 
 
 (SDEFUN |LAUPOL;mkgpol| ((|n| (|Integer|)) (|p| (UP)) (% (%)))
-        (SPROG ((#1=#:G93 NIL) (|d| (|NonNegativeInteger|)))
+        (SPROG ((#1=#:G79 NIL) (|d| (|NonNegativeInteger|)))
                (SEQ
                 (COND ((SPADCALL |p| (QREFELT % 47)) (|spadConstant| % 9))
                       ('T
@@ -260,7 +260,7 @@
                                (QCDR |r|) %)))))))) 
 
 (SDEFUN |LAUPOL;retractIfCan;%U;31| ((|p| (%)) (% (|Union| UP "failed")))
-        (SPROG ((#1=#:G110 NIL))
+        (SPROG ((#1=#:G96 NIL))
                (COND
                 ((< (SPADCALL |p| (QREFELT % 19)) 0)
                  (|error| "Not retractable"))
@@ -295,8 +295,8 @@
          (% (|Record| (|:| |polyPart| %) (|:| |fracPart| (|Fraction| UP)))))
         (SPROG
          ((|qr| (|Record| (|:| |quotient| UP) (|:| |remainder| UP)))
-          (|bc| (|Record| (|:| |coef1| UP) (|:| |coef2| UP))) (#1=#:G130 NIL)
-          (|q| (UP)) (#2=#:G126 NIL) (|tn| (UP)) (|n| (|NonNegativeInteger|)))
+          (|bc| (|Record| (|:| |coef1| UP) (|:| |coef2| UP))) (#1=#:G116 NIL)
+          (|q| (UP)) (#2=#:G112 NIL) (|tn| (UP)) (|n| (|NonNegativeInteger|)))
          (SEQ
           (LETT |n|
                 (SPADCALL (LETT |q| (SPADCALL |f| (QREFELT % 88)))
@@ -341,7 +341,7 @@
          (% (|Record| (|:| |quotient| %) (|:| |remainder| %))))
         (SPROG
          ((|qr| (|Record| (|:| |quotient| UP) (|:| |remainder| UP)))
-          (#1=#:G141 NIL) (|c| (|Integer|)))
+          (#1=#:G127 NIL) (|c| (|Integer|)))
          (SEQ
           (LETT |c|
                 (MIN (SPADCALL |p| (QREFELT % 19))
@@ -393,25 +393,6 @@
                           (QCDR (QCDR |bc|)) %))))))))) 
 
 (DECLAIM (NOTINLINE |LaurentPolynomial;|)) 
-
-(DEFUN |LaurentPolynomial| (&REST #1=#:G171)
-  (SPROG NIL
-         (PROG (#2=#:G172)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|LaurentPolynomial|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |LaurentPolynomial;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|LaurentPolynomial|)))))))))) 
 
 (DEFUN |LaurentPolynomial;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
@@ -467,6 +448,25 @@
                         (|dispatchFunction| |LAUPOL;extendedEuclidean;3%U;37|)
                         %)))))
           %))) 
+
+(DEFUN |LaurentPolynomial| (&REST #1=#:G156)
+  (SPROG NIL
+         (PROG (#2=#:G157)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|LaurentPolynomial|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |LaurentPolynomial;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|LaurentPolynomial|)))))))))) 
 
 (MAKEPROP '|LaurentPolynomial| '|infovec|
           (LIST

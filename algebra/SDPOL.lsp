@@ -1,30 +1,10 @@
 
 (DECLAIM (NOTINLINE |SequentialDifferentialPolynomial;|)) 
 
-(DEFUN |SequentialDifferentialPolynomial| (#1=#:G88)
-  (SPROG NIL
-         (PROG (#2=#:G89)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|SequentialDifferentialPolynomial|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|SequentialDifferentialPolynomial;| #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|SequentialDifferentialPolynomial|)))))))))) 
-
 (DEFUN |SequentialDifferentialPolynomial;| (|#1|)
   (SPROG
-   ((#1=#:G87 NIL) (|pv$| NIL) (#2=#:G80 NIL) (#3=#:G81 NIL) (#4=#:G82 NIL)
-    (#5=#:G83 NIL) (#6=#:G84 NIL) (#7=#:G85 NIL) (#8=#:G86 NIL) (% NIL)
+   ((#1=#:G54 NIL) (|pv$| NIL) (#2=#:G47 NIL) (#3=#:G48 NIL) (#4=#:G49 NIL)
+    (#5=#:G50 NIL) (#6=#:G51 NIL) (#7=#:G52 NIL) (#8=#:G53 NIL) (% NIL)
     (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -627,6 +607,26 @@
      (|augmentPredVector| % 4398046511104))
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |SequentialDifferentialPolynomial| (#1=#:G55)
+  (SPROG NIL
+         (PROG (#2=#:G56)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|SequentialDifferentialPolynomial|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|SequentialDifferentialPolynomial;| #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|SequentialDifferentialPolynomial|)))))))))) 
 
 (MAKEPROP '|SequentialDifferentialPolynomial| '|infovec|
           (LIST

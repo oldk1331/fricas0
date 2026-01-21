@@ -57,8 +57,8 @@
 
 (SDEFUN |SOLVEFOR;solve;UPL;4| ((|u| (UP)) (% (|List| F)))
         (SPROG
-         ((|ls| (|List| F)) (#1=#:G60 NIL) (|i| NIL) (|lsf| (|List| F))
-          (#2=#:G59 NIL) (|f| NIL))
+         ((|ls| (|List| F)) (#1=#:G23 NIL) (|i| NIL) (|lsf| (|List| F))
+          (#2=#:G22 NIL) (|f| NIL))
          (SEQ (LETT |ls| NIL)
               (SEQ (LETT |f| NIL)
                    (LETT #2#
@@ -254,9 +254,9 @@
 (SDEFUN |SOLVEFOR;cubic;4FL;18|
         ((|c3| (F)) (|c2| (F)) (|c1| (F)) (|c0| (F)) (% (|List| F)))
         (SPROG
-         ((#1=#:G107 NIL) (|u| NIL) (#2=#:G106 NIL) (S (F)) (D (F)) (R (F))
-          (Q (F)) (#3=#:G105 NIL) (#4=#:G104 NIL) (P (F)) (#5=#:G103 NIL)
-          (#6=#:G102 NIL) (|a3| (F)) (|a2| (F)) (|a1| (F)))
+         ((#1=#:G70 NIL) (|u| NIL) (#2=#:G69 NIL) (S (F)) (D (F)) (R (F))
+          (Q (F)) (#3=#:G68 NIL) (#4=#:G67 NIL) (P (F)) (#5=#:G66 NIL)
+          (#6=#:G65 NIL) (|a3| (F)) (|a2| (F)) (|a1| (F)))
          (SEQ (|SOLVEFOR;needLcoef| |c3| %) (|SOLVEFOR;needChar0| %)
               (EXIT
                (COND
@@ -508,7 +508,7 @@
 (SDEFUN |SOLVEFOR;quartic;5FL;20|
         ((|c4| (F)) (|c3| (F)) (|c2| (F)) (|c1| (F)) (|c0| (F)) (% (|List| F)))
         (SPROG
-         ((#1=#:G120 NIL) (|s| NIL) (#2=#:G119 NIL) (|slist| (|List| F))
+         ((#1=#:G83 NIL) (|s| NIL) (#2=#:G82 NIL) (|slist| (|List| F))
           (|rt| (F)) (|t0| (F)) (|r| (F)) (|q| (F)) (|p| (F)) (|a4| (F))
           (|a3| (F)) (|a2| (F)) (|a1| (F)))
          (SEQ (|SOLVEFOR;needLcoef| |c4| %) (|SOLVEFOR;needChar0| %)
@@ -790,26 +790,6 @@
 
 (DECLAIM (NOTINLINE |PolynomialSolveByFormulas;|)) 
 
-(DEFUN |PolynomialSolveByFormulas| (&REST #1=#:G125)
-  (SPROG NIL
-         (PROG (#2=#:G126)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PolynomialSolveByFormulas|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |PolynomialSolveByFormulas;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|PolynomialSolveByFormulas|)))))))))) 
-
 (DEFUN |PolynomialSolveByFormulas;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -837,6 +817,26 @@
                                (QREFELT % 60))
                      (SPADCALL 2 (QREFELT % 61)) (QREFELT % 54)))
           %))) 
+
+(DEFUN |PolynomialSolveByFormulas| (&REST #1=#:G88)
+  (SPROG NIL
+         (PROG (#2=#:G89)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PolynomialSolveByFormulas|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |PolynomialSolveByFormulas;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|PolynomialSolveByFormulas|)))))))))) 
 
 (MAKEPROP '|PolynomialSolveByFormulas| '|infovec|
           (LIST

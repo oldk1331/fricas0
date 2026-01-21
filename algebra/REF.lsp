@@ -27,22 +27,6 @@
 
 (DECLAIM (NOTINLINE |Reference;|)) 
 
-(DEFUN |Reference| (#1=#:G1859)
-  (SPROG NIL
-         (PROG (#2=#:G1860)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|Reference|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Reference;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|Reference|)))))))))) 
-
 (DEFUN |Reference;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -65,6 +49,22 @@
            ((|testBitVector| |pv$| 1)
             (QSETREFV % 21 (CONS (|dispatchFunction| |REF;coerce;%Of;7|) %))))
           %))) 
+
+(DEFUN |Reference| (#1=#:G1782)
+  (SPROG NIL
+         (PROG (#2=#:G1783)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|Reference|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Reference;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|Reference|)))))))))) 
 
 (MAKEPROP '|Reference| '|infovec|
           (LIST

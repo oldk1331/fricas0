@@ -14,23 +14,6 @@
 
 (DECLAIM (NOTINLINE |ParametricSurface;|)) 
 
-(DEFUN |ParametricSurface| (#1=#:G11)
-  (SPROG NIL
-         (PROG (#2=#:G12)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|ParametricSurface|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|ParametricSurface;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|ParametricSurface|)))))))))) 
-
 (DEFUN |ParametricSurface;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -48,6 +31,23 @@
                     (|Record| (|:| |xCoord| |#1|) (|:| |yCoord| |#1|)
                               (|:| |zCoord| |#1|)))
           %))) 
+
+(DEFUN |ParametricSurface| (#1=#:G5)
+  (SPROG NIL
+         (PROG (#2=#:G6)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|ParametricSurface|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|ParametricSurface;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|ParametricSurface|)))))))))) 
 
 (MAKEPROP '|ParametricSurface| '|infovec|
           (LIST

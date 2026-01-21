@@ -2,10 +2,10 @@
 (SDEFUN |IRURPK;checkRur;TSLB;1|
         ((|ts| (TS)) (|lts| (|List| TS)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G48 NIL) (#2=#:G49 NIL) (|rems| (|List| P)) (#3=#:G52 NIL)
-          (|p| NIL) (#4=#:G51 NIL) (|dlts| (|NonNegativeInteger|))
-          (#5=#:G50 NIL) (|us| NIL) (|lp| (|List| P))
-          (|dts| (|NonNegativeInteger|)) (|z| (V)) (|f0| (P)) (#6=#:G31 NIL))
+         ((#1=#:G39 NIL) (#2=#:G40 NIL) (|rems| (|List| P)) (#3=#:G43 NIL)
+          (|p| NIL) (#4=#:G42 NIL) (|dlts| (|NonNegativeInteger|))
+          (#5=#:G41 NIL) (|us| NIL) (|lp| (|List| P))
+          (|dts| (|NonNegativeInteger|)) (|z| (V)) (|f0| (P)) (#6=#:G26 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -50,8 +50,8 @@
                                    (SPADCALL (SPADCALL |us| (QREFELT % 25))
                                              (QREFELT % 28))
                                    (EXIT
-                                    (PROGN (LETT #2# NIL) (GO #7=#:G47)))))
-                            (GO #8=#:G44)))))))
+                                    (PROGN (LETT #2# NIL) (GO #7=#:G38)))))
+                            (GO #8=#:G35)))))))
                   #8# (EXIT #1#))
                  (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
             (EXIT (EQL |dts| |dlts|))))
@@ -73,7 +73,7 @@
         (SPROG
          ((|toSave|
            (|List| (|Record| (|:| |val| (|List| P)) (|:| |tower| TS))))
-          (|newf0| (P)) (#1=#:G70 NIL) (|ff1| NIL) (|newf1| (P)) (|x1| (V))
+          (|newf0| (P)) (#1=#:G61 NIL) (|ff1| NIL) (|newf1| (P)) (|x1| (V))
           (|lp| (|List| P)) (|f1| (P)) (|z| (V)) (|f0| (P)))
          (SEQ
           (COND
@@ -153,7 +153,7 @@
 (SDEFUN |IRURPK;makeMonic|
         ((|z| (V)) (|c| (P)) (|r| (P)) (|ts| (TS)) (|s| (P))
          (|univ?| (|Boolean|)) (% (TS)))
-        (SPROG ((|newts| (TS)) (|p| (P)) (#1=#:G79 NIL) (|lp| (|List| P)))
+        (SPROG ((|newts| (TS)) (|p| (P)) (#1=#:G70 NIL) (|lp| (|List| P)))
                (SEQ (LETT |lp| (SPADCALL |ts| (QREFELT % 18)))
                     (LETT |lp| (SPADCALL (ELT % 35) |lp| (QREFELT % 37)))
                     (LETT |newts| (|IRURPK;convert| |r| 'T %))
@@ -190,13 +190,13 @@
            (|List|
             (|Record| (|:| |pol| P) (|:| |gap| #1=(|Integer|))
                       (|:| |tower| TS))))
-          (|toSave| (|List| TS)) (#2=#:G110 NIL) (#3=#:G112 NIL) (|fr| NIL)
+          (|toSave| (|List| TS)) (#2=#:G101 NIL) (#3=#:G103 NIL) (|fr| NIL)
           (|r| (P)) (|h| (P)) (|s| (P)) (|prs| (|List| P)) (|q| (P)) (|f| (P))
           (|c| (P)) (|lambda| (|Integer|)) (|f0| (P)) (|#G35| (TS))
           (|#G34| #1#) (|#G33| (P))
           (|wip|
            (|Record| (|:| |pol| P) (|:| |gap| (|Integer|)) (|:| |tower| TS)))
-          (|z| (V)) (#4=#:G82 NIL))
+          (|z| (V)) (#4=#:G73 NIL))
          (SEQ
           (LETT |f0|
                 (PROG2 (LETT #4# (SPADCALL |ts| (QREFELT % 12)))
@@ -287,7 +287,7 @@
                              (EXIT
                               (COND
                                ((SPADCALL |fr| (QREFELT % 67))
-                                (PROGN (LETT #2# |$NoValue|) (GO #7=#:G97)))
+                                (PROGN (LETT #2# |$NoValue|) (GO #7=#:G88)))
                                ('T
                                 (LETT |toSave|
                                       (CONS
@@ -315,7 +315,7 @@
         (SPROG
          ((|toSee| (|List| (|Record| (|:| |val| (|List| P)) (|:| |tower| TS))))
           (|wip| (|Record| (|:| |val| (|List| P)) (|:| |tower| TS)))
-          (#1=#:G129 NIL) (|lts| (|List| TS)) (|p| (P)) (|xi| (V))
+          (#1=#:G120 NIL) (|lts| (|List| TS)) (|p| (P)) (|xi| (V))
           (|lp| (|List| P)) (|toSave| (|List| TS)))
          (SEQ (LETT |toSee| (|IRURPK;prepareRur| |ts| %)) (LETT |toSave| NIL)
               (SEQ G190 (COND ((NULL (NULL (NULL |toSee|))) (GO G191)))
@@ -378,30 +378,6 @@
 
 (DECLAIM (NOTINLINE |InternalRationalUnivariateRepresentationPackage;|)) 
 
-(DEFUN |InternalRationalUnivariateRepresentationPackage| (&REST #1=#:G130)
-  (SPROG NIL
-         (PROG (#2=#:G131)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|InternalRationalUnivariateRepresentationPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function|
-                        |InternalRationalUnivariateRepresentationPackage;|)
-                       #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|InternalRationalUnivariateRepresentationPackage|)))))))))) 
-
 (DEFUN |InternalRationalUnivariateRepresentationPackage;|
        (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
@@ -430,6 +406,30 @@
     (QSETREFV % 10 |#5|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |InternalRationalUnivariateRepresentationPackage| (&REST #1=#:G121)
+  (SPROG NIL
+         (PROG (#2=#:G122)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|InternalRationalUnivariateRepresentationPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function|
+                        |InternalRationalUnivariateRepresentationPackage;|)
+                       #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|InternalRationalUnivariateRepresentationPackage|)))))))))) 
 
 (MAKEPROP '|InternalRationalUnivariateRepresentationPackage| '|infovec|
           (LIST

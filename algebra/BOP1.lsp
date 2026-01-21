@@ -130,7 +130,7 @@
 
 (SDEFUN |BOP1;constantOpIfCan;BoU;13|
         ((|op| (|BasicOperator|)) (% (|Union| A "failed")))
-        (SPROG ((#1=#:G238 NIL) (|u| (|Union| (|None|) "failed")))
+        (SPROG ((#1=#:G229 NIL) (|u| (|Union| (|None|) "failed")))
                (SEQ
                 (EXIT
                  (SEQ
@@ -143,7 +143,7 @@
                        ((QEQCAR |u| 0)
                         (PROGN
                          (LETT #1# (CONS 0 (QCDR |u|)))
-                         (GO #2=#:G236))))))))
+                         (GO #2=#:G227))))))))
                   (EXIT (CONS 1 "failed"))))
                 #2# (EXIT #1#)))) 
 
@@ -164,24 +164,6 @@
         (|BOP1;constOp| |a| %)) 
 
 (DECLAIM (NOTINLINE |BasicOperatorFunctions1;|)) 
-
-(DEFUN |BasicOperatorFunctions1| (#1=#:G242)
-  (SPROG NIL
-         (PROG (#2=#:G243)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|BasicOperatorFunctions1|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|BasicOperatorFunctions1;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|BasicOperatorFunctions1|)))))))))) 
 
 (DEFUN |BasicOperatorFunctions1;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
@@ -224,6 +206,24 @@
                       (CONS (|dispatchFunction| |BOP1;constantOperator;ABo;15|)
                             %))))
           %))) 
+
+(DEFUN |BasicOperatorFunctions1| (#1=#:G233)
+  (SPROG NIL
+         (PROG (#2=#:G234)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|BasicOperatorFunctions1|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|BasicOperatorFunctions1;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|BasicOperatorFunctions1|)))))))))) 
 
 (MAKEPROP '|BasicOperatorFunctions1| '|infovec|
           (LIST

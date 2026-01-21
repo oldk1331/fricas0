@@ -8,17 +8,16 @@
                      (|Float|)))
          (% (|Void|)))
         (SPROG
-         ((#3=#:G71 NIL) (|i| NIL) (#4=#:G67 NIL) (|x| #2#) (#5=#:G70 NIL)
-          (#6=#:G69 NIL) (|iter| NIL) (#7=#:G68 NIL)
+         ((#3=#:G46 NIL) (|i| NIL) (#4=#:G42 NIL) (|x| #2#) (#5=#:G45 NIL)
+          (#6=#:G44 NIL) (|iter| NIL) (#7=#:G43 NIL)
           (|outlist| (|List| (|OutputForm|))) (|m| #1#) (|tiny| (|Float|))
           (|step|
            (|Record| (|:| |to_try| (|Float|)) (|:| |did| (|Float|))
                      (|:| |next| (|Float|))))
-          (|t6| #8=(|Vector| (|Float|))) (#9=#:G28 NIL) (|t5| #8#)
-          (#10=#:G26 NIL) (|t4| #8#) (#11=#:G24 NIL) (|t3| #8#) (#12=#:G22 NIL)
-          (|t2| #8#) (#13=#:G20 NIL) (|t1| #8#) (#14=#:G18 NIL) (|dydx| #8#)
-          (#15=#:G16 NIL) (|yscal| #8#) (#16=#:G14 NIL) (|y| #8#)
-          (#17=#:G11 NIL))
+          (|t6| #8=(|Vector| (|Float|))) (#9=#:G21 NIL) (|t5| #8#)
+          (#10=#:G19 NIL) (|t4| #8#) (#11=#:G17 NIL) (|t3| #8#) (#12=#:G15 NIL)
+          (|t2| #8#) (#13=#:G13 NIL) (|t1| #8#) (#14=#:G11 NIL) (|dydx| #8#)
+          (#15=#:G9 NIL) (|yscal| #8#) (#16=#:G7 NIL) (|y| #8#) (#17=#:G5 NIL))
          (SEQ
           (LETT |y|
                 (MAKEARR1
@@ -136,7 +135,7 @@
                        ((SPADCALL (SPADCALL |x| |x2| (QREFELT % 21))
                                   (SPADCALL 0 0 10 (QREFELT % 10))
                                   (QREFELT % 26))
-                        (PROGN (LETT #4# 1) (GO #18=#:G51))))
+                        (PROGN (LETT #4# 1) (GO #18=#:G34))))
                       (EXIT (QSETVELT |step| 0 (QVELT |step| 2))))
                  (LETT |iter| (|inc_SI| |iter|)) (GO G190) G191 (EXIT NIL)))
            #18# (EXIT #4#))
@@ -176,10 +175,10 @@
                      (|Float|)))
          (% (|Void|)))
         (SPROG
-         ((|t7| #1=(|Vector| (|Float|))) (#2=#:G86 NIL) (|t6| #1#)
-          (#3=#:G84 NIL) (|t5| #1#) (#4=#:G82 NIL) (|t4| #1#) (#5=#:G80 NIL)
-          (|t3| #1#) (#6=#:G78 NIL) (|t2| #1#) (#7=#:G76 NIL) (|t1| #1#)
-          (#8=#:G74 NIL))
+         ((|t7| #1=(|Vector| (|Float|))) (#2=#:G61 NIL) (|t6| #1#)
+          (#3=#:G59 NIL) (|t5| #1#) (#4=#:G57 NIL) (|t4| #1#) (#5=#:G55 NIL)
+          (|t3| #1#) (#6=#:G53 NIL) (|t2| #1#) (#7=#:G51 NIL) (|t1| #1#)
+          (#8=#:G49 NIL))
          (SEQ
           (LETT |t1|
                 (MAKEARR1
@@ -267,9 +266,9 @@
          (|dysav| (|Vector| (|Float|))) (|ytemp| (|Vector| (|Float|)))
          (% (|Void|)))
         (SPROG
-         ((#4=#:G126 NIL) (|i| NIL) (#5=#:G123 NIL) (|h| #3#)
-          (|errmax| #6=(|Float|)) (#7=#:G125 NIL) (|hh| (|Float|))
-          (#8=#:G124 NIL) (|m| #1#) (|errcon| #6#) (|shrink| #9=(|Float|))
+         ((#4=#:G101 NIL) (|i| NIL) (#5=#:G98 NIL) (|h| #3#)
+          (|errmax| #6=(|Float|)) (#7=#:G100 NIL) (|hh| (|Float|))
+          (#8=#:G99 NIL) (|m| #1#) (|errcon| #6#) (|shrink| #9=(|Float|))
           (|grow| #9#) (|safety| #6#) (|fcor| (|Float|)) (|xsav| #2#))
          (SEQ (LETT |xsav| |x|) (LETT |h| (QVELT |step| 0))
               (LETT |fcor|
@@ -356,7 +355,7 @@
                                ('T
                                 (QSETVELT |step| 2
                                           (SPADCALL 4 |h| (QREFELT % 48)))))
-                              (EXIT (PROGN (LETT #5# 1) (GO #10=#:G118))))))))
+                              (EXIT (PROGN (LETT #5# 1) (GO #10=#:G93))))))))
                      NIL (GO G190) G191 (EXIT NIL)))
                #10# (EXIT #5#))
               (EXIT
@@ -382,10 +381,10 @@
                      (|Float|)))
          (% (|Void|)))
         (SPROG
-         ((|x| #1#) (#2=#:G143 NIL) (|i| NIL) (|h| (|Float|))
-          (|dydx| #3=(|Vector| (|Float|))) (#4=#:G134 NIL) (|dym| #3#)
-          (#5=#:G132 NIL) (|dyt| #3#) (#6=#:G130 NIL) (|yt| #3#)
-          (#7=#:G128 NIL))
+         ((|x| #1#) (#2=#:G118 NIL) (|i| NIL) (|h| (|Float|))
+          (|dydx| #3=(|Vector| (|Float|))) (#4=#:G109 NIL) (|dym| #3#)
+          (#5=#:G107 NIL) (|dyt| #3#) (#6=#:G105 NIL) (|yt| #3#)
+          (#7=#:G103 NIL))
          (SEQ
           (LETT |yt|
                 (MAKEARR1
@@ -432,9 +431,9 @@
                      (|Float|)))
          (% (|Void|)))
         (SPROG
-         ((|t4| #1=(|Vector| (|Float|))) (#2=#:G151 NIL) (|t3| #1#)
-          (#3=#:G149 NIL) (|t2| #1#) (#4=#:G147 NIL) (|t1| #1#)
-          (#5=#:G145 NIL))
+         ((|t4| #1=(|Vector| (|Float|))) (#2=#:G126 NIL) (|t3| #1#)
+          (#3=#:G124 NIL) (|t2| #1#) (#4=#:G122 NIL) (|t1| #1#)
+          (#5=#:G120 NIL))
          (SEQ
           (LETT |t1|
                 (MAKEARR1
@@ -488,8 +487,8 @@
          (|yt| (|Vector| (|Float|))) (|dyt| (|Vector| (|Float|)))
          (|dym| (|Vector| (|Float|))) (% (|Void|)))
         (SPROG
-         ((#2=#:G176 NIL) (|i| NIL) (#3=#:G175 NIL) (#4=#:G174 NIL)
-          (#5=#:G173 NIL) (|m| #1#) (|xh| (|Float|)) (|h6| (|Float|))
+         ((#2=#:G151 NIL) (|i| NIL) (#3=#:G150 NIL) (#4=#:G149 NIL)
+          (#5=#:G148 NIL) (|m| #1#) (|xh| (|Float|)) (|h6| (|Float|))
           (|hh| (|Float|)))
          (SEQ
           (LETT |hh|
@@ -574,9 +573,22 @@
 
 (DECLAIM (NOTINLINE |NumericalOrdinaryDifferentialEquations;|)) 
 
+(DEFUN |NumericalOrdinaryDifferentialEquations;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|NumericalOrdinaryDifferentialEquations|))
+          (LETT % (GETREFV 53))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache|
+                      '|NumericalOrdinaryDifferentialEquations| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |NumericalOrdinaryDifferentialEquations| ()
   (SPROG NIL
-         (PROG (#1=#:G178)
+         (PROG (#1=#:G153)
            (RETURN
             (COND
              ((LETT #1#
@@ -598,19 +610,6 @@
                  ((NOT #1#)
                   (HREM |$ConstructorCache|
                         '|NumericalOrdinaryDifferentialEquations|)))))))))) 
-
-(DEFUN |NumericalOrdinaryDifferentialEquations;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|NumericalOrdinaryDifferentialEquations|))
-          (LETT % (GETREFV 53))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache|
-                      '|NumericalOrdinaryDifferentialEquations| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|NumericalOrdinaryDifferentialEquations| '|infovec|
           (LIST

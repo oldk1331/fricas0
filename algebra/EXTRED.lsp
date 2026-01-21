@@ -25,7 +25,7 @@
 
 (SDEFUN |EXTRED;cancelGcd|
         ((|c1| (C)) (|c2| (C)) (% (|Record| (|:| |co1| C) (|:| |co2| C))))
-        (SPROG ((#1=#:G14 NIL) (|g| (C)))
+        (SPROG ((#1=#:G13 NIL) (|g| (C)))
                (SEQ (LETT |g| (SPADCALL |c1| |c2| (QREFELT % 9)))
                     (EXIT
                      (CONS
@@ -60,7 +60,7 @@
          (%
           (|Record| (|:| |poly| R) (|:| |repr| (|Vector| R)) (|:| |mult| C))))
         (SPROG
-         ((#2=#:G42 NIL) (|bas| #1#) (|f2| (R)) (|f1| (C)) (|a| (C))
+         ((#2=#:G33 NIL) (|bas| #1#) (|f2| (R)) (|f1| (C)) (|a| (C))
           (|l| (|Record| (|:| |llcm_res| C) (|:| |coeff1| C) (|:| |coeff2| C)))
           (|ee| (|Union| E "failed")) (|pb| (R))
           (|b|
@@ -138,7 +138,7 @@
                           (EXIT (LETT |bas| |basis|))))
                         ('T (LETT |bas| (CDR |bas|))))))
                  NIL (GO G190) G191 (EXIT NIL))
-            (EXIT (PROGN (LETT #2# |z|) (GO #3=#:G41)))))
+            (EXIT (PROGN (LETT #2# |z|) (GO #3=#:G32)))))
           #3# (EXIT #2#)))) 
 
 (SDEFUN |EXTRED;tailReduce|
@@ -194,7 +194,7 @@
            (|List|
             (|Record| (|:| |poly| R) (|:| |repr| (|Vector| R))
                       (|:| |mult| C))))
-          (#1=#:G60 NIL) (|b| NIL) (#2=#:G61 NIL) (|i| NIL) (#3=#:G59 NIL)
+          (#1=#:G48 NIL) (|b| NIL) (#2=#:G49 NIL) (|i| NIL) (#3=#:G47 NIL)
           (|n| (|NonNegativeInteger|)))
          (SEQ
           (COND
@@ -228,27 +228,6 @@
 
 (DECLAIM (NOTINLINE |ExtendedPolynomialReduction;|)) 
 
-(DEFUN |ExtendedPolynomialReduction| (&REST #1=#:G62)
-  (SPROG NIL
-         (PROG (#2=#:G63)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ExtendedPolynomialReduction|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |ExtendedPolynomialReduction;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|ExtendedPolynomialReduction|)))))))))) 
-
 (DEFUN |ExtendedPolynomialReduction;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -267,6 +246,27 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |ExtendedPolynomialReduction| (&REST #1=#:G50)
+  (SPROG NIL
+         (PROG (#2=#:G51)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ExtendedPolynomialReduction|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |ExtendedPolynomialReduction;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|ExtendedPolynomialReduction|)))))))))) 
 
 (MAKEPROP '|ExtendedPolynomialReduction| '|infovec|
           (LIST

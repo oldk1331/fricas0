@@ -3,7 +3,7 @@
         ((|s| (%)) (|a| #1=(|NonNegativeInteger|)) (|b| #1#)
          (% (|NonNegativeInteger|)))
         (SPROG
-         ((#2=#:G6 NIL) (|res| (|Union| (|NonNegativeInteger|) "failed")))
+         ((#2=#:G1 NIL) (|res| (|Union| (|NonNegativeInteger|) "failed")))
          (SEQ (LETT |res| (SPADCALL |s| |a| |b| (QREFELT % 9)))
               (COND
                ((SPADCALL |res| (CONS 1 "failed") (QREFELT % 11))
@@ -19,7 +19,7 @@
         ((|s| (%)) (|a| #1=(|NonNegativeInteger|)) (|b| #1#)
          (% (|NonNegativeInteger|)))
         (SPROG
-         ((#2=#:G11 NIL) (|res| (|Union| (|NonNegativeInteger|) "failed")))
+         ((#2=#:G6 NIL) (|res| (|Union| (|NonNegativeInteger|) "failed")))
          (SEQ (LETT |res| (SPADCALL |s| |a| |b| (QREFELT % 13)))
               (COND
                ((SPADCALL |res| (CONS 1 "failed") (QREFELT % 11))
@@ -32,22 +32,6 @@
                                  #2#)))))) 
 
 (DECLAIM (NOTINLINE |FiniteBiCPO;|)) 
-
-(DEFUN |FiniteBiCPO| (#1=#:G27)
-  (SPROG NIL
-         (PROG (#2=#:G28)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|FiniteBiCPO|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|FiniteBiCPO;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|FiniteBiCPO|)))))))))) 
 
 (DEFUN |FiniteBiCPO;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
@@ -64,17 +48,33 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
+(DEFUN |FiniteBiCPO| (#1=#:G15)
+  (SPROG NIL
+         (PROG (#2=#:G16)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|FiniteBiCPO|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|FiniteBiCPO;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|FiniteBiCPO|)))))))))) 
+
 (MAKEPROP '|FiniteBiCPO| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL (|FinitePoset| 6) (|local| |#1|)
               (|Union| 8 '"failed") (|NonNegativeInteger|) (0 . |joinIfCan|)
               (|Boolean|) (7 . =) |FBICPO;join;%3Nni;1| (13 . |meetIfCan|)
-              |FBICPO;meet;%3Nni;2| (|String|) (|OutputForm|)
+              |FBICPO;meet;%3Nni;2| (|OutputForm|) (|String|)
               (|Record| (|:| |value| 6) (|:| |posX| 8) (|:| |posY| 8))
-              (|Record| (|:| |name| 15) (|:| |arrType| 8) (|:| |fromOb| 8)
+              (|Record| (|:| |name| 16) (|:| |arrType| 8) (|:| |fromOb| 8)
                         (|:| |toOb| 8) (|:| |xOffset| 24) (|:| |yOffset| 24)
                         (|:| |map| 19))
-              (|List| 8) (|List| 17) (|List| 18) (|DirectedGraph| %) (|List| 6)
+              (|List| 8) (|List| 17) (|DirectedGraph| %) (|List| 18) (|List| 6)
               (|Integer|) (|Tree| 24) (|List| 25) (|List| (|Loop|))
               (|Matrix| 24) (|Matrix| 8) (|Void|) (|Scene| (|SCartesian| '2))
               (|List| %) (|List| (|List| 10)) (|Mapping| 10 6 6)
@@ -87,7 +87,7 @@
                   (CONS
                    '#((|BiCPO| 6) (|CoDcpo| 6) (|Dcpo| 6) (|Poset| 6)
                       (|Preorder| 6) (|FiniteGraph| 6) (|SetCategory|)
-                      (|CoercibleTo| 16) (|BasicType|))
+                      (|CoercibleTo| 15) (|BasicType|))
                    (|makeByteWordVec2| 14
                                        '(3 0 7 0 8 8 9 2 7 10 0 0 11 3 0 7 0 8
                                          8 13 3 0 7 0 8 8 13 3 0 8 0 8 8 14 3 0

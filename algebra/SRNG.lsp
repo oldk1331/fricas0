@@ -6,7 +6,7 @@
 (DEFUN |SemiRng| () (COND (|SemiRng;AL|) (T (SETQ |SemiRng;AL| (|SemiRng;|))))) 
 
 (DEFUN |SemiRng;| ()
-  (SPROG ((#1=#:G1 NIL))
+  (SPROG ((#1=#:G0 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|NonAssociativeSemiRng|) (|BiModule| '% '%)

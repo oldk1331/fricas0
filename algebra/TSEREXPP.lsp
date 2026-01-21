@@ -2,7 +2,7 @@
 (SDEFUN |TSEREXPP;rescale|
         ((|p| (UPS)) (|r0| (|Fraction| (|Integer|)))
          (|rn| (|Fraction| (|Integer|))) (% (ULS)))
-        (SPROG ((|s| (|PositiveInteger|)) (#1=#:G10 NIL))
+        (SPROG ((|s| (|PositiveInteger|)) (#1=#:G0 NIL))
                (SEQ
                 (LETT |s|
                       (PROG1
@@ -20,11 +20,11 @@
           (|Record| (|:| |laus| (|List| ULS))
                     (|:| |rpow| (|Fraction| (|Integer|))))))
         (SPROG
-         ((#1=#:G91 NIL) (|p| NIL) (#2=#:G92 NIL) (|r| NIL) (#3=#:G90 NIL)
-          (|rn| (|Fraction| (|Integer|))) (#4=#:G89 NIL) (#5=#:G88 NIL)
-          (#6=#:G87 NIL) (#7=#:G86 NIL)
-          (|lr| (|List| (|Fraction| (|Integer|)))) (#8=#:G85 NIL)
-          (#9=#:G84 NIL))
+         ((#1=#:G77 NIL) (|p| NIL) (#2=#:G78 NIL) (|r| NIL) (#3=#:G76 NIL)
+          (|rn| (|Fraction| (|Integer|))) (#4=#:G75 NIL) (#5=#:G74 NIL)
+          (#6=#:G73 NIL) (#7=#:G72 NIL)
+          (|lr| (|List| (|Fraction| (|Integer|)))) (#8=#:G71 NIL)
+          (#9=#:G70 NIL))
          (SEQ
           (LETT |lr|
                 (PROGN
@@ -136,27 +136,6 @@
 
 (DECLAIM (NOTINLINE |TaylorSeriesExpansionPuiseux;|)) 
 
-(DEFUN |TaylorSeriesExpansionPuiseux| (&REST #1=#:G102)
-  (SPROG NIL
-         (PROG (#2=#:G103)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|TaylorSeriesExpansionPuiseux|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |TaylorSeriesExpansionPuiseux;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|TaylorSeriesExpansionPuiseux|)))))))))) 
-
 (DEFUN |TaylorSeriesExpansionPuiseux;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -179,6 +158,27 @@
     (QSETREFV % 9 |#4|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |TaylorSeriesExpansionPuiseux| (&REST #1=#:G88)
+  (SPROG NIL
+         (PROG (#2=#:G89)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|TaylorSeriesExpansionPuiseux|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |TaylorSeriesExpansionPuiseux;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|TaylorSeriesExpansionPuiseux|)))))))))) 
 
 (MAKEPROP '|TaylorSeriesExpansionPuiseux| '|infovec|
           (LIST

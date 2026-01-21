@@ -42,23 +42,6 @@
 
 (DECLAIM (NOTINLINE |Commutator;|)) 
 
-(DEFUN |Commutator| ()
-  (SPROG NIL
-         (PROG (#1=#:G25)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|Commutator|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|Commutator|
-                             (LIST (CONS NIL (CONS 1 (|Commutator;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#) (HREM |$ConstructorCache| '|Commutator|)))))))))) 
-
 (DEFUN |Commutator;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -72,6 +55,23 @@
           (QSETREFV % 6 (|Record| (|:| |left| %) (|:| |right| %)))
           (QSETREFV % 7 (|Union| (|OrdSetInts|) (QREFELT % 6)))
           %))) 
+
+(DEFUN |Commutator| ()
+  (SPROG NIL
+         (PROG (#1=#:G17)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|Commutator|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|Commutator|
+                             (LIST (CONS NIL (CONS 1 (|Commutator;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#) (HREM |$ConstructorCache| '|Commutator|)))))))))) 
 
 (MAKEPROP '|Commutator| '|infovec|
           (LIST

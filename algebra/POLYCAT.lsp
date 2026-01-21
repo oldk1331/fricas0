@@ -6,8 +6,8 @@
 (DEFPARAMETER |PolynomialCategory;AL| 'NIL) 
 
 (DEFUN |PolynomialCategory| (|t#1| |t#2| |t#3|)
-  (LET (#1=#:G27
-        (#2=#:G28
+  (LET (#1=#:G26
+        (#2=#:G27
          (LIST (|devaluate| |t#1|) (|devaluate| |t#2|) (|devaluate| |t#3|))))
     (COND ((SETQ #1# (|assoc| #2# |PolynomialCategory;AL|)) (CDR #1#))
           (T
@@ -18,7 +18,7 @@
            #1#)))) 
 
 (DEFUN |PolynomialCategory;| (|t#1| |t#2| |t#3|)
-  (SPROG ((#1=#:G26 NIL))
+  (SPROG ((#1=#:G25 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3|)

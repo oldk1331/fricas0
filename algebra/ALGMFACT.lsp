@@ -29,25 +29,6 @@
 
 (DECLAIM (NOTINLINE |AlgebraicMultFact;|)) 
 
-(DEFUN |AlgebraicMultFact| (&REST #1=#:G20)
-  (SPROG NIL
-         (PROG (#2=#:G21)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|AlgebraicMultFact|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |AlgebraicMultFact;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|AlgebraicMultFact|)))))))))) 
-
 (DEFUN |AlgebraicMultFact;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -69,6 +50,25 @@
                     (|AlgFactor|
                      (|SparseUnivariatePolynomial| (|AlgebraicNumber|))))
           %))) 
+
+(DEFUN |AlgebraicMultFact| (&REST #1=#:G4)
+  (SPROG NIL
+         (PROG (#2=#:G5)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|AlgebraicMultFact|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |AlgebraicMultFact;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|AlgebraicMultFact|)))))))))) 
 
 (MAKEPROP '|AlgebraicMultFact| '|infovec|
           (LIST

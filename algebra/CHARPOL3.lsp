@@ -3,11 +3,11 @@
         ((|m| (|Matrix| R)) (|ld| (|List| R))
          (% (|SparseUnivariatePolynomial| (|Fraction| R))))
         (SPROG
-         ((#1=#:G27 NIL) (|j| NIL) (#2=#:G28 NIL) (|di| NIL)
+         ((#1=#:G10 NIL) (|j| NIL) (#2=#:G11 NIL) (|di| NIL)
           (|m1| (|SparseUnivariatePolynomial| (|Fraction| R)))
           (|res| (|SparseUnivariatePolynomial| (|Fraction| R)))
           (|cor| (|Fraction| R)) (|m1v| (|Fraction| R)) (|i_f| (|Fraction| R))
-          (|d1| (R)) (#3=#:G26 NIL) (|i| NIL) (|v| (|SingletonAsOrderedSet|))
+          (|d1| (R)) (#3=#:G9 NIL) (|i| NIL) (|v| (|SingletonAsOrderedSet|))
           (A1 (|Matrix| R)) (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (ANCOLS |m|))
               (EXIT
@@ -77,7 +77,7 @@
         ((|m| (|Matrix| R)) (% (|SparseUnivariatePolynomial| R)))
         (SPROG
          ((|p1| (|SparseUnivariatePolynomial| (|Fraction| R)))
-          (|ld| (|List| R)) (#1=#:G35 NIL) (|i| NIL) (#2=#:G34 NIL))
+          (|ld| (|List| R)) (#1=#:G18 NIL) (|i| NIL) (#2=#:G17 NIL))
          (SEQ
           (LETT |ld|
                 (PROGN
@@ -94,9 +94,9 @@
         ((|m| (|Matrix| (|Fraction| R)))
          (% (|Record| (|:| |mr| (|Matrix| R)) (|:| |rd| (|List| R)))))
         (SPROG
-         ((|g1| (R)) (#1=#:G42 NIL) (|a| (|Fraction| R)) (#2=#:G52 NIL)
+         ((|g1| (R)) (#1=#:G25 NIL) (|a| (|Fraction| R)) (#2=#:G35 NIL)
           (|j| NIL) (|lg| (|List| R)) (|g| (R)) (|lr| (|List| R))
-          (#3=#:G51 NIL) (#4=#:G50 NIL) (|i| NIL) (B (|Matrix| R))
+          (#3=#:G34 NIL) (#4=#:G33 NIL) (|i| NIL) (B (|Matrix| R))
           (|k| (|NonNegativeInteger|)) (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (ANROWS |m|)) (LETT |k| (ANCOLS |m|)) (LETT |lg| NIL)
               (LETT B (MAKE_MATRIX1 |n| |n| (|spadConstant| % 43)))
@@ -110,11 +110,11 @@
                                (LETT |lr|
                                      (CONS
                                       (SPADCALL (QAREF2O |m| |i| |j| 1 1)
-                                                (QREFELT % 44))
+                                                (QREFELT % 45))
                                       |lr|))))
                              (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                              (EXIT NIL))
-                        (LETT |g| (SPADCALL |lr| (QREFELT % 46)))
+                        (LETT |g| (SPADCALL |lr| (QREFELT % 47)))
                         (LETT |lg| (CONS |g| |lg|))
                         (EXIT
                          (SEQ (LETT |j| 1) (LETT #2# |k|) G190
@@ -126,8 +126,8 @@
                                                    (SPADCALL |g|
                                                              (SPADCALL |a|
                                                                        (QREFELT
-                                                                        % 44))
-                                                             (QREFELT % 48)))
+                                                                        % 45))
+                                                             (QREFELT % 49)))
                                              (QCDR #1#)
                                            (|check_union2| (QEQCAR #1# 0)
                                                            (QREFELT % 6)
@@ -140,8 +140,8 @@
                                                 (SPADCALL |g1|
                                                           (SPADCALL |a|
                                                                     (QREFELT %
-                                                                             49))
-                                                          (QREFELT % 50))
+                                                                             50))
+                                                          (QREFELT % 51))
                                                 1 1)))
                               (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                               (EXIT NIL))))
@@ -161,9 +161,9 @@
            |#G15|)
           (LETT |det1| (SPADCALL B (QREFELT % 17)))
           (LETT |d|
-                (SPADCALL (ELT % 50) |lg| (|spadConstant| % 28)
-                          (QREFELT % 53)))
-          (EXIT (SPADCALL |det1| |d| (QREFELT % 54)))))) 
+                (SPADCALL (ELT % 51) |lg| (|spadConstant| % 28)
+                          (QREFELT % 54)))
+          (EXIT (SPADCALL |det1| |d| (QREFELT % 55)))))) 
 
 (SDEFUN |CHARPOL3;char_pol_via_den_interpolation;MSup;5|
         ((|m| (|Matrix| (|Fraction| R)))
@@ -182,14 +182,14 @@
           (LETT |res1| (|CHARPOL3;char_pol_via_interpolation0| B |lg| %))
           (LETT |d|
                 (SPADCALL
-                 (SPADCALL (ELT % 50) |lg| (|spadConstant| % 28)
-                           (QREFELT % 53))
+                 (SPADCALL (ELT % 51) |lg| (|spadConstant| % 28)
+                           (QREFELT % 54))
                  (QREFELT % 21)))
           (EXIT
            (SPADCALL
             (CONS #'|CHARPOL3;char_pol_via_den_interpolation;MSup;5!0|
                   (VECTOR % |d|))
-            |res1| (QREFELT % 58)))))) 
+            |res1| (QREFELT % 59)))))) 
 
 (SDEFUN |CHARPOL3;char_pol_via_den_interpolation;MSup;5!0| ((|c| NIL) ($$ NIL))
         (PROG (|d| %)
@@ -199,9 +199,42 @@
 
 (DECLAIM (NOTINLINE |CharacteristicPolynomial3;|)) 
 
-(DEFUN |CharacteristicPolynomial3| (#1=#:G62)
+(DEFUN |CharacteristicPolynomial3;| (|#1|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT |dv$| (LIST '|CharacteristicPolynomial3| DV$1))
+          (LETT % (GETREFV 61))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3
+                    (LETT |pv$|
+                          (|buildPredVector| 0 0
+                                             (LIST
+                                              (|HasCategory| |#1|
+                                                             '(|GcdDomain|))))))
+          (|haddProp| |$ConstructorCache| '|CharacteristicPolynomial3|
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          (COND
+           ((|testBitVector| |pv$| 1)
+            (PROGN
+             (QSETREFV % 57
+                       (CONS
+                        (|dispatchFunction|
+                         |CHARPOL3;det_via_common_denominator;MF;4|)
+                        %))
+             (QSETREFV % 60
+                       (CONS
+                        (|dispatchFunction|
+                         |CHARPOL3;char_pol_via_den_interpolation;MSup;5|)
+                        %)))))
+          %))) 
+
+(DEFUN |CharacteristicPolynomial3| (#1=#:G45)
   (SPROG NIL
-         (PROG (#2=#:G63)
+         (PROG (#2=#:G46)
            (RETURN
             (COND
              ((LETT #2#
@@ -218,39 +251,6 @@
                   (HREM |$ConstructorCache|
                         '|CharacteristicPolynomial3|)))))))))) 
 
-(DEFUN |CharacteristicPolynomial3;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT |dv$| (LIST '|CharacteristicPolynomial3| DV$1))
-          (LETT % (GETREFV 60))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3
-                    (LETT |pv$|
-                          (|buildPredVector| 0 0
-                                             (LIST
-                                              (|HasCategory| |#1|
-                                                             '(|GcdDomain|))))))
-          (|haddProp| |$ConstructorCache| '|CharacteristicPolynomial3|
-                      (LIST DV$1) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (SETF |pv$| (QREFELT % 3))
-          (COND
-           ((|testBitVector| |pv$| 1)
-            (PROGN
-             (QSETREFV % 56
-                       (CONS
-                        (|dispatchFunction|
-                         |CHARPOL3;det_via_common_denominator;MF;4|)
-                        %))
-             (QSETREFV % 59
-                       (CONS
-                        (|dispatchFunction|
-                         |CHARPOL3;char_pol_via_den_interpolation;MSup;5|)
-                        %)))))
-          %))) 
-
 (MAKEPROP '|CharacteristicPolynomial3| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|Boolean|)
@@ -265,14 +265,14 @@
               (|Mapping| 6 20)
               (|UnivariatePolynomialCategoryFunctions2| 20 12 6 38)
               (131 . |map|) |CHARPOL3;char_pol_via_interpolation;MSup;2|
-              (137 . |Zero|) (141 . |denom|) (|List| %) (146 . |lcm|)
-              (|Union| % '"failed") (151 . |exquo|) (157 . |numer|) (162 . *)
-              (|Mapping| 6 6 6) (|List| 6) (168 . |reduce|) (175 . /)
-              (|Matrix| 20) (181 . |det_via_common_denominator|)
-              (|Mapping| 20 20) (186 . |map|)
-              (192 . |char_pol_via_den_interpolation|))
-           '#(|det_via_common_denominator| 197 |char_pol_via_interpolation| 202
-              |char_pol_via_den_interpolation| 207)
+              (137 . |Zero|) (141 . |Zero|) (145 . |denom|) (|List| %)
+              (150 . |lcm|) (|Union| % '"failed") (155 . |exquo|)
+              (161 . |numer|) (166 . *) (|Mapping| 6 6 6) (|List| 6)
+              (172 . |reduce|) (179 . /) (|Matrix| 20)
+              (185 . |det_via_common_denominator|) (|Mapping| 20 20)
+              (190 . |map|) (196 . |char_pol_via_den_interpolation|))
+           '#(|det_via_common_denominator| 201 |char_pol_via_interpolation| 206
+              |char_pol_via_den_interpolation| 211)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -294,7 +294,7 @@
                                   (|Matrix| (|Fraction| |#1|))))
                                 (|has| 6 (|GcdDomain|))))
                              (LIST) NIL NIL)))
-                        (|makeByteWordVec2| 59
+                        (|makeByteWordVec2| 60
                                             '(2 8 7 0 0 9 1 10 0 0 11 0 12 0 13
                                               0 12 0 14 0 15 0 16 1 10 6 0 17 1
                                               6 0 18 19 1 20 0 6 21 3 12 0 0 15
@@ -305,10 +305,10 @@
                                               32 2 12 0 0 0 33 3 10 6 0 18 18
                                               34 2 6 0 0 0 35 4 10 6 0 18 18 6
                                               36 1 20 6 0 37 2 40 38 39 12 41 0
-                                              6 0 43 1 20 6 0 44 1 6 0 45 46 2
-                                              6 47 0 0 48 1 20 6 0 49 2 6 0 0 0
-                                              50 3 52 6 51 0 6 53 2 20 0 6 6 54
-                                              1 0 20 55 56 2 12 0 57 0 58 1 0
-                                              12 55 59 1 1 20 55 56 1 0 38 10
-                                              42 1 1 12 55 59)))))
+                                              6 0 43 0 20 0 44 1 20 6 0 45 1 6
+                                              0 46 47 2 6 48 0 0 49 1 20 6 0 50
+                                              2 6 0 0 0 51 3 53 6 52 0 6 54 2
+                                              20 0 6 6 55 1 0 20 56 57 2 12 0
+                                              58 0 59 1 0 12 56 60 1 1 20 56 57
+                                              1 0 38 10 42 1 1 12 56 60)))))
            '|lookupComplete|)) 

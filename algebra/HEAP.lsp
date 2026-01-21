@@ -6,7 +6,7 @@
 
 (SDEFUN |HEAP;siftUp|
         ((|r| (%)) (|i| (|Integer|)) (|n| (|Integer|)) (% (|Void|)))
-        (SPROG ((#1=#:G24 NIL) (|j| #2=(|Integer|)) (|k| #2#) (|t| (S)))
+        (SPROG ((#1=#:G14 NIL) (|j| #2=(|Integer|)) (|k| #2#) (|t| (S)))
                (SEQ (LETT |t| (SPADCALL |r| |i| (QREFELT % 14)))
                     (EXIT
                      (SEQ
@@ -36,7 +36,7 @@
                                            (QREFELT % 17))
                                  (SPADCALL |r| |j| |t| (QREFELT % 17))
                                  (EXIT (LETT |i| |j|))))
-                               ('T (PROGN (LETT #1# 1) (GO #3=#:G21))))))
+                               ('T (PROGN (LETT #1# 1) (GO #3=#:G11))))))
                             NIL (GO G190) G191 (EXIT NIL)))
                       #3# (EXIT #1#)))))) 
 
@@ -59,7 +59,7 @@
                                               (EXIT |t|)))))))))))) 
 
 (SDEFUN |HEAP;insert!;S2%;5| ((|x| (S)) (|r| (%)) (% (%)))
-        (SPROG ((|j| (|Integer|)) (#1=#:G35 NIL) (|i| (|Integer|)))
+        (SPROG ((|j| (|Integer|)) (#1=#:G25 NIL) (|i| (|Integer|)))
                (SEQ (LETT |j| (SPADCALL |r| (QREFELT % 19)))
                     (LETT |r| (SPADCALL |r| |x| (QREFELT % 22)))
                     (SEQ
@@ -69,7 +69,7 @@
                                 (COND
                                  ((SPADCALL (SPADCALL |r| |i| (QREFELT % 14))
                                             |x| (QREFELT % 23))
-                                  (PROGN (LETT #1# 1) (GO #2=#:G32))))
+                                  (PROGN (LETT #1# 1) (GO #2=#:G22))))
                                 (SPADCALL |r| |j|
                                           (SPADCALL |r| |i| (QREFELT % 14))
                                           (QREFELT % 17))
@@ -104,24 +104,9 @@
 
 (DECLAIM (NOTINLINE |Heap;|)) 
 
-(DEFUN |Heap| (#1=#:G59)
-  (SPROG NIL
-         (PROG (#2=#:G60)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|Heap|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Heap;| #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Heap|)))))))))) 
-
 (DEFUN |Heap;| (|#1|)
   (SPROG
-   ((#1=#:G58 NIL) (|pv$| NIL) (#2=#:G55 NIL) (#3=#:G56 NIL) (#4=#:G57 NIL)
+   ((#1=#:G46 NIL) (|pv$| NIL) (#2=#:G43 NIL) (#3=#:G44 NIL) (#4=#:G45 NIL)
     (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -176,6 +161,21 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 7 (|IndexedFlexibleArray| |#1| 0))
     %))) 
+
+(DEFUN |Heap| (#1=#:G47)
+  (SPROG NIL
+         (PROG (#2=#:G48)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|Heap|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Heap;| #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Heap|)))))))))) 
 
 (MAKEPROP '|Heap| '|infovec|
           (LIST

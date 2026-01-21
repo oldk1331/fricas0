@@ -1,6 +1,6 @@
 
 (SDEFUN |DPMO;*;R2%;1| ((|r| (R)) (|x| (%)) (% (%)))
-        (SPROG ((#1=#:G11 NIL) (#2=#:G13 NIL) (|i| NIL) (#3=#:G12 NIL))
+        (SPROG ((#1=#:G3 NIL) (#2=#:G5 NIL) (|i| NIL) (#3=#:G4 NIL))
                (SEQ
                 (PROGN
                  (LETT #3# (GETREFV #4=(QREFELT % 6)))
@@ -18,30 +18,11 @@
 
 (DECLAIM (NOTINLINE |DirectProductModule;|)) 
 
-(DEFUN |DirectProductModule| (&REST #1=#:G51)
-  (SPROG NIL
-         (PROG (#2=#:G52)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T T))
-                                               (HGET |$ConstructorCache|
-                                                     '|DirectProductModule|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |DirectProductModule;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|DirectProductModule|)))))))))) 
-
 (DEFUN |DirectProductModule;| (|#1| |#2| |#3|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G41 NIL) (#2=#:G42 NIL) (#3=#:G43 NIL) (#4=#:G45 NIL)
-    (#5=#:G44 NIL) (#6=#:G46 NIL) (#7=#:G47 NIL) (#8=#:G48 NIL) (#9=#:G49 NIL)
-    (#10=#:G50 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+   ((|pv$| NIL) (#1=#:G23 NIL) (#2=#:G24 NIL) (#3=#:G25 NIL) (#4=#:G27 NIL)
+    (#5=#:G26 NIL) (#6=#:G28 NIL) (#7=#:G29 NIL) (#8=#:G30 NIL) (#9=#:G31 NIL)
+    (#10=#:G32 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 |#1|)
     (LETT DV$2 (|devaluate| |#2|))
@@ -485,6 +466,25 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 9 (|Vector| |#3|))
     %))) 
+
+(DEFUN |DirectProductModule| (&REST #1=#:G33)
+  (SPROG NIL
+         (PROG (#2=#:G34)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T T))
+                                               (HGET |$ConstructorCache|
+                                                     '|DirectProductModule|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |DirectProductModule;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|DirectProductModule|)))))))))) 
 
 (MAKEPROP '|DirectProductModule| '|infovec|
           (LIST

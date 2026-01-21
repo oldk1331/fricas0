@@ -130,7 +130,7 @@
 (SDEFUN |RECLOS;allRootsOf;SupL;8|
         ((|pol| (|SparseUnivariatePolynomial| %)) (% (|List| %)))
         (SPROG
-         ((|res| (|List| %)) (|o| (|OutputForm|)) (#1=#:G102 NIL) (|term| NIL)
+         ((|res| (|List| %)) (|o| (|OutputForm|)) (#1=#:G80 NIL) (|term| NIL)
           (|liste|
            (|List|
             (|RightOpenIntervalRootCharacterization| %
@@ -509,22 +509,6 @@
 
 (DECLAIM (NOTINLINE |RealClosure;|)) 
 
-(DEFUN |RealClosure| (#1=#:G242)
-  (SPROG NIL
-         (PROG (#2=#:G243)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|RealClosure|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|RealClosure;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|RealClosure|)))))))))) 
-
 (DEFUN |RealClosure;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -566,6 +550,22 @@
           (QSETREFV % 9 1)
           (QSETREFV % 12 (SPADCALL (QREFELT % 11)))
           %))) 
+
+(DEFUN |RealClosure| (#1=#:G208)
+  (SPROG NIL
+         (PROG (#2=#:G209)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|RealClosure|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|RealClosure;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|RealClosure|)))))))))) 
 
 (MAKEPROP '|RealClosure| '|infovec|
           (LIST

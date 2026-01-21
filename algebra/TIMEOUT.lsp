@@ -7,23 +7,6 @@
 
 (DECLAIM (NOTINLINE |TimeoutPackage;|)) 
 
-(DEFUN |TimeoutPackage| (#1=#:G12)
-  (SPROG NIL
-         (PROG (#2=#:G13)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|TimeoutPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|TimeoutPackage;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|TimeoutPackage|)))))))))) 
-
 (DEFUN |TimeoutPackage;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -38,6 +21,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |TimeoutPackage| (#1=#:G8)
+  (SPROG NIL
+         (PROG (#2=#:G9)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|TimeoutPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|TimeoutPackage;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|TimeoutPackage|)))))))))) 
 
 (MAKEPROP '|TimeoutPackage| '|infovec|
           (LIST

@@ -6,7 +6,7 @@
 (SDEFUN |BALFACT;balSqfr1|
         ((|a| (UP)) (|n| (|NonNegativeInteger|)) (|b| (UP))
          (% (|Factored| UP)))
-        (SPROG ((#1=#:G23 NIL) (|fa| (|Factored| UP)) (|g| (UP)))
+        (SPROG ((#1=#:G5 NIL) (|fa| (|Factored| UP)) (|g| (UP)))
                (SEQ (LETT |g| (SPADCALL |a| |b| (QREFELT % 12)))
                     (LETT |fa|
                           (SPADCALL
@@ -46,8 +46,8 @@
         ((|a| (UP)) (|n| (|NonNegativeInteger|)) (|l| (|List| UP))
          (% (|Factored| UP)))
         (SPROG
-         ((#1=#:G30 NIL) (#2=#:G29 #3=(|Factored| UP)) (#4=#:G31 #3#)
-          (#5=#:G34 NIL) (|f| NIL) (|b| (UP)))
+         ((#1=#:G11 NIL) (#2=#:G10 #3=(|Factored| UP)) (#4=#:G12 #3#)
+          (#5=#:G15 NIL) (|f| NIL) (|b| (UP)))
          (SEQ (LETT |b| (|SPADfirst| |l|))
               (EXIT
                (COND ((NULL (CDR |l|)) (|BALFACT;balSqfr1| |a| |n| |b| %))
@@ -79,8 +79,8 @@
 (SDEFUN |BALFACT;balancedFactorisation;UPLF;4|
         ((|a| (UP)) (|l| (|List| UP)) (% (|Factored| UP)))
         (SPROG
-         ((#1=#:G38 NIL) (#2=#:G37 #3=(|Factored| UP)) (#4=#:G39 #3#)
-          (#5=#:G43 NIL) (|f| NIL) (|sa| (|Factored| UP)) (|ll| (|List| UP)))
+         ((#1=#:G19 NIL) (#2=#:G18 #3=(|Factored| UP)) (#4=#:G20 #3#)
+          (#5=#:G24 NIL) (|f| NIL) (|sa| (|Factored| UP)) (|ll| (|List| UP)))
          (SEQ
           (COND
            ((NULL
@@ -127,25 +127,6 @@
 
 (DECLAIM (NOTINLINE |BalancedFactorisation;|)) 
 
-(DEFUN |BalancedFactorisation| (&REST #1=#:G44)
-  (SPROG NIL
-         (PROG (#2=#:G45)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|BalancedFactorisation|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |BalancedFactorisation;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|BalancedFactorisation|)))))))))) 
-
 (DEFUN |BalancedFactorisation;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -162,6 +143,25 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |BalancedFactorisation| (&REST #1=#:G25)
+  (SPROG NIL
+         (PROG (#2=#:G26)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|BalancedFactorisation|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |BalancedFactorisation;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|BalancedFactorisation|)))))))))) 
 
 (MAKEPROP '|BalancedFactorisation| '|infovec|
           (LIST

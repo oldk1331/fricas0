@@ -39,23 +39,6 @@
 
 (DECLAIM (NOTINLINE |ResidueRing;|)) 
 
-(DEFUN |ResidueRing| (&REST #1=#:G27)
-  (SPROG NIL
-         (PROG (#2=#:G28)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T T T T NIL))
-                     (HGET |$ConstructorCache| '|ResidueRing|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ResidueRing;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|ResidueRing|)))))))))) 
-
 (DEFUN |ResidueRing;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -87,12 +70,29 @@
     (COND ((QREFELT % 19) (|error| "the residue ring is the zero ring")))
     %))) 
 
+(DEFUN |ResidueRing| (&REST #1=#:G17)
+  (SPROG NIL
+         (PROG (#2=#:G18)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T T T T NIL))
+                     (HGET |$ConstructorCache| '|ResidueRing|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ResidueRing;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|ResidueRing|)))))))))) 
+
 (MAKEPROP '|ResidueRing| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|local| |#4|) (|local| |#5|) '|Rep| (|List| 9)
               (|GroebnerPackage| 6 7 9) (0 . |groebner|) '|relations|
-              (5 . |One|) (|Boolean|) (9 . =) '#:G1 (15 . |Zero|)
+              (5 . |One|) (|Boolean|) (9 . =) '#:G0 (15 . |Zero|)
               (CONS IDENTITY
                     (FUNCALL (|dispatchFunction| |RESRING;Zero;%;1|) %))
               (19 . |One|)

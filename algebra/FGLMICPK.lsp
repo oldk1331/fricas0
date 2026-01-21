@@ -5,9 +5,9 @@
          (% (|Boolean|)))
         (SPROG
          ((|lv| (|List| (|OrderedVariableList| |ls|)))
-          (|x| (|OrderedVariableList| |ls|)) (#1=#:G19 NIL)
+          (|x| (|OrderedVariableList| |ls|)) (#1=#:G8 NIL)
           (|m| (|HomogeneousDistributedMultivariatePolynomial| |ls| R))
-          (#2=#:G33 NIL) (|q2| NIL) (#3=#:G32 NIL) (|s| NIL) (#4=#:G31 NIL))
+          (#2=#:G21 NIL) (|q2| NIL) (#3=#:G20 NIL) (|s| NIL) (#4=#:G19 NIL))
          (SEQ (LETT |lq2| (SPADCALL |lq2| (QREFELT % 10)))
               (EXIT
                (COND
@@ -76,7 +76,7 @@
         (SPROG
          ((|lq2|
            (|List| (|HomogeneousDistributedMultivariatePolynomial| |ls| R)))
-          (#1=#:G42 NIL) (|q1| NIL) (#2=#:G41 NIL))
+          (#1=#:G27 NIL) (|q1| NIL) (#2=#:G26 NIL))
          (SEQ
           (LETT |lq2|
                 (PROGN
@@ -96,11 +96,11 @@
         ((|lq1| (|List| (|Polynomial| R)))
          (% (|Union| (|List| (|Polynomial| R)) "failed")))
         (SPROG
-         ((#1=#:G60 NIL) (|q3| NIL) (#2=#:G59 NIL)
+         ((#1=#:G44 NIL) (|q3| NIL) (#2=#:G43 NIL)
           (|lq3| (|List| (|DistributedMultivariatePolynomial| |ls| R)))
           (|lq2|
            (|List| (|HomogeneousDistributedMultivariatePolynomial| |ls| R)))
-          (#3=#:G58 NIL) (|q1| NIL) (#4=#:G57 NIL))
+          (#3=#:G42 NIL) (|q1| NIL) (#4=#:G41 NIL))
          (SEQ
           (LETT |lq2|
                 (PROGN
@@ -135,13 +135,13 @@
 (SDEFUN |FGLMICPK;groebner;2L;4|
         ((|lq1| (|List| (|Polynomial| R))) (% (|List| (|Polynomial| R))))
         (SPROG
-         ((#1=#:G81 NIL) (|q3| NIL) (#2=#:G80 NIL)
+         ((#1=#:G64 NIL) (|q3| NIL) (#2=#:G63 NIL)
           (|lq3| (|List| (|DistributedMultivariatePolynomial| |ls| R)))
-          (#3=#:G79 NIL) (#4=#:G78 NIL) (#5=#:G77 NIL) (|q1| NIL)
-          (#6=#:G76 NIL)
+          (#3=#:G62 NIL) (#4=#:G61 NIL) (#5=#:G60 NIL) (|q1| NIL)
+          (#6=#:G59 NIL)
           (|lq2|
            (|List| (|HomogeneousDistributedMultivariatePolynomial| |ls| R)))
-          (#7=#:G75 NIL) (#8=#:G74 NIL))
+          (#7=#:G58 NIL) (#8=#:G57 NIL))
          (SEQ
           (LETT |lq2|
                 (PROGN
@@ -200,25 +200,6 @@
 
 (DECLAIM (NOTINLINE |FGLMIfCanPackage;|)) 
 
-(DEFUN |FGLMIfCanPackage| (&REST #1=#:G82)
-  (SPROG NIL
-         (PROG (#2=#:G83)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|FGLMIfCanPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |FGLMIfCanPackage;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|FGLMIfCanPackage|)))))))))) 
-
 (DEFUN |FGLMIfCanPackage;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -235,6 +216,25 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |FGLMIfCanPackage| (&REST #1=#:G65)
+  (SPROG NIL
+         (PROG (#2=#:G66)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|FGLMIfCanPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |FGLMIfCanPackage;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|FGLMIfCanPackage|)))))))))) 
 
 (MAKEPROP '|FGLMIfCanPackage| '|infovec|
           (LIST

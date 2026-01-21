@@ -35,7 +35,7 @@
                   (QREFELT % 40))) 
 
 (SDEFUN |ITRIGMNP;KG2F| ((|k| (|Kernel| FG)) (% (F)))
-        (SPROG ((#1=#:G79 NIL) (|a| NIL) (#2=#:G78 NIL))
+        (SPROG ((#1=#:G57 NIL) (|a| NIL) (#2=#:G56 NIL))
                (SEQ
                 (SPADCALL
                  (SPADCALL (SPADCALL |k| (QREFELT % 44)) (QREFELT % 45))
@@ -55,7 +55,7 @@
 
 (SDEFUN |ITRIGMNP;KF2FG| ((|k| (|Kernel| F)) (% (FG)))
         (SPROG
-         ((#1=#:G98 NIL) (|a| NIL) (#2=#:G97 NIL) (|op| (|BasicOperator|))
+         ((#1=#:G68 NIL) (|a| NIL) (#2=#:G67 NIL) (|op| (|BasicOperator|))
           (|akl| (|List| F)))
          (SEQ (LETT |akl| (SPADCALL |k| (QREFELT % 52)))
               (LETT |op| (SPADCALL |k| (QREFELT % 53)))
@@ -90,8 +90,8 @@
 (SDEFUN |ITRIGMNP;ker2explogs|
         ((|k| (|Kernel| FG)) (|l| (|List| (|Kernel| FG))) (% (FG)))
         (SPROG
-         ((|e| (FG)) (|z| (FG)) (|args| (|List| FG)) (#1=#:G116 NIL) (|a| NIL)
-          (#2=#:G115 NIL) (|kf| (FG)))
+         ((|e| (FG)) (|z| (FG)) (|args| (|List| FG)) (#1=#:G86 NIL) (|a| NIL)
+          (#2=#:G85 NIL) (|kf| (FG)))
          (SEQ (LETT |kf| (SPADCALL |k| (QREFELT % 64)))
               (EXIT
                (COND
@@ -286,10 +286,10 @@
         ((|op| (|BasicOperator|)) (|arg| (|List| (|Complex| F)))
          (% (|Complex| F)))
         (SPROG
-         ((#1=#:G183 NIL) (|x| NIL) (#2=#:G182 NIL) (#3=#:G181 NIL)
-          (#4=#:G180 NIL) (|a| (|Complex| F)) (#5=#:G179 NIL) (#6=#:G178 NIL)
-          (#7=#:G136 NIL) (#8=#:G135 #9=(|Boolean|)) (#10=#:G137 #9#)
-          (#11=#:G177 NIL))
+         ((#1=#:G149 NIL) (|x| NIL) (#2=#:G148 NIL) (#3=#:G147 NIL)
+          (#4=#:G146 NIL) (|a| (|Complex| F)) (#5=#:G145 NIL) (#6=#:G144 NIL)
+          (#7=#:G104 NIL) (#8=#:G103 #9=(|Boolean|)) (#10=#:G105 #9#)
+          (#11=#:G143 NIL))
          (SEQ
           (COND
            ((PROGN
@@ -467,8 +467,8 @@
           (|den|
            #2=(|SparseUnivariatePolynomial|
                (|SparseMultivariatePolynomial| (|Complex| R) (|Kernel| FG))))
-          (|num| #2#) (|arg| (|List| (|Complex| F))) (#3=#:G201 NIL) (|x| NIL)
-          (#4=#:G200 NIL) (|op| (|BasicOperator|)) (|k| (|Kernel| FG))
+          (|num| #2#) (|arg| (|List| (|Complex| F))) (#3=#:G166 NIL) (|x| NIL)
+          (#4=#:G165 NIL) (|op| (|BasicOperator|)) (|k| (|Kernel| FG))
           (|m| (|Union| (|Kernel| FG) "failed"))
           (|df| (|SparseMultivariatePolynomial| (|Complex| R) (|Kernel| FG)))
           (|nf| (|SparseMultivariatePolynomial| (|Complex| R) (|Kernel| FG))))
@@ -620,28 +620,6 @@
 
 (DECLAIM (NOTINLINE |InnerTrigonometricManipulations;|)) 
 
-(DEFUN |InnerTrigonometricManipulations| (&REST #1=#:G216)
-  (SPROG NIL
-         (PROG (#2=#:G217)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|InnerTrigonometricManipulations|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |InnerTrigonometricManipulations;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|InnerTrigonometricManipulations|)))))))))) 
-
 (DEFUN |InnerTrigonometricManipulations;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -679,6 +657,28 @@
                       (CONS (|dispatchFunction| |ITRIGMNP;do_liou;BoLC;12|)
                             %))))
           %))) 
+
+(DEFUN |InnerTrigonometricManipulations| (&REST #1=#:G181)
+  (SPROG NIL
+         (PROG (#2=#:G182)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|InnerTrigonometricManipulations|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |InnerTrigonometricManipulations;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|InnerTrigonometricManipulations|)))))))))) 
 
 (MAKEPROP '|InnerTrigonometricManipulations| '|infovec|
           (LIST

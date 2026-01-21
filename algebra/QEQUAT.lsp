@@ -18,23 +18,6 @@
 
 (DECLAIM (NOTINLINE |QueryEquation;|)) 
 
-(DEFUN |QueryEquation| ()
-  (SPROG NIL
-         (PROG (#1=#:G22)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|QueryEquation|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|QueryEquation|
-                             (LIST (CONS NIL (CONS 1 (|QueryEquation;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#) (HREM |$ConstructorCache| '|QueryEquation|)))))))))) 
-
 (DEFUN |QueryEquation;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -48,6 +31,23 @@
           (QSETREFV % 6
                     (|Record| (|:| |var| (|Symbol|)) (|:| |val| (|String|))))
           %))) 
+
+(DEFUN |QueryEquation| ()
+  (SPROG NIL
+         (PROG (#1=#:G7)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|QueryEquation|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|QueryEquation|
+                             (LIST (CONS NIL (CONS 1 (|QueryEquation;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#) (HREM |$ConstructorCache| '|QueryEquation|)))))))))) 
 
 (MAKEPROP '|QueryEquation| '|infovec|
           (LIST

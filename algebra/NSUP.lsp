@@ -31,7 +31,7 @@
 
 (SDEFUN |NSUP;monicModulo;3%;6| ((|x| (%)) (|y| (%)) (% (%)))
         (SPROG
-         ((#1=#:G59 NIL)
+         ((#1=#:G49 NIL)
           (|xx|
            #2=(|List| (|Record| (|:| |k| (|NonNegativeInteger|)) (|:| |c| R))))
           (|u| (|Union| (|NonNegativeInteger|) "failed"))
@@ -69,7 +69,7 @@
                                          ((QEQCAR |u| 1)
                                           (PROGN
                                            (LETT #1# 1)
-                                           (GO #4=#:G53))))))
+                                           (GO #4=#:G43))))))
                                       (LETT |xx|
                                             (|NSUP;rep|
                                              (SPADCALL
@@ -92,7 +92,7 @@
           (|Record| (|:| |polnum| %) (|:| |polden| R)
                     (|:| |power| (|NonNegativeInteger|)))))
         (SPROG
-         ((#1=#:G74 NIL) (|pow| (|NonNegativeInteger|))
+         ((#1=#:G64 NIL) (|pow| (|NonNegativeInteger|))
           (|xx|
            #2=(|List| (|Record| (|:| |k| (|NonNegativeInteger|)) (|:| |c| R))))
           (|u| (|Union| (|NonNegativeInteger|) "failed"))
@@ -127,7 +127,7 @@
                                          ((QEQCAR |u| 1)
                                           (PROGN
                                            (LETT #1# 1)
-                                           (GO #4=#:G67))))))
+                                           (GO #4=#:G57))))))
                                       (LETT |xx|
                                             (|NSUP;rep|
                                              (SPADCALL
@@ -152,7 +152,7 @@
 
 (SDEFUN |NSUP;lazyPseudoRemainder;3%;8| ((|x| (%)) (|y| (%)) (% (%)))
         (SPROG
-         ((#1=#:G89 NIL)
+         ((#1=#:G79 NIL)
           (|xx|
            #2=(|List| (|Record| (|:| |k| (|NonNegativeInteger|)) (|:| |c| R))))
           (|u| (|Union| (|NonNegativeInteger|) "failed"))
@@ -193,7 +193,7 @@
                                   (EXIT
                                    (COND
                                     ((QEQCAR |u| 1)
-                                     (PROGN (LETT #1# 1) (GO #4=#:G81))))))
+                                     (PROGN (LETT #1# 1) (GO #4=#:G71))))))
                                  (LETT |xx|
                                        (|NSUP;rep|
                                         (SPADCALL
@@ -217,7 +217,7 @@
           (|Record| (|:| |coef| R) (|:| |gap| (|NonNegativeInteger|))
                     (|:| |quotient| %) (|:| |remainder| %))))
         (SPROG
-         ((#1=#:G106 NIL) (|pow| (|NonNegativeInteger|)) (#2=#:G94 NIL)
+         ((#1=#:G96 NIL) (|pow| (|NonNegativeInteger|)) (#2=#:G84 NIL)
           (|xx|
            #3=(|List| (|Record| (|:| |k| (|NonNegativeInteger|)) (|:| |c| R))))
           (|qq|
@@ -261,7 +261,7 @@
                           (EXIT
                            (COND
                             ((QEQCAR |u| 1)
-                             (PROGN (LETT #1# 1) (GO #5=#:G99))))))
+                             (PROGN (LETT #1# 1) (GO #5=#:G89))))))
                          (LETT |qq|
                                (CONS
                                 (CONS (QCDR |u|) (QCDR (|SPADfirst| |xx|)))
@@ -296,7 +296,7 @@
 
 (SDEFUN |NSUP;lazyPseudoQuotient;3%;10| ((|x| (%)) (|y| (%)) (% (%)))
         (SPROG
-         ((#1=#:G121 NIL)
+         ((#1=#:G111 NIL)
           (|xx|
            #2=(|List| (|Record| (|:| |k| (|NonNegativeInteger|)) (|:| |c| R))))
           (|qq|
@@ -329,7 +329,7 @@
                           (EXIT
                            (COND
                             ((QEQCAR |u| 1)
-                             (PROGN (LETT #1# 1) (GO #3=#:G115))))))
+                             (PROGN (LETT #1# 1) (GO #3=#:G105))))))
                          (LETT |qq|
                                (CONS
                                 (CONS (QCDR |u|) (QCDR (|SPADfirst| |xx|)))
@@ -408,30 +408,11 @@
 
 (DECLAIM (NOTINLINE |NewSparseUnivariatePolynomial;|)) 
 
-(DEFUN |NewSparseUnivariatePolynomial| (#1=#:G231)
-  (SPROG NIL
-         (PROG (#2=#:G232)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|NewSparseUnivariatePolynomial|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|NewSparseUnivariatePolynomial;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|NewSparseUnivariatePolynomial|)))))))))) 
-
 (DEFUN |NewSparseUnivariatePolynomial;| (|#1|)
   (SPROG
-   ((#1=#:G230 NIL) (|pv$| NIL) (#2=#:G221 NIL) (#3=#:G223 NIL) (#4=#:G222 NIL)
-    (#5=#:G224 NIL) (#6=#:G225 NIL) (#7=#:G226 NIL) (#8=#:G227 NIL)
-    (#9=#:G228 NIL) (#10=#:G229 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+   ((#1=#:G201 NIL) (|pv$| NIL) (#2=#:G192 NIL) (#3=#:G194 NIL) (#4=#:G193 NIL)
+    (#5=#:G195 NIL) (#6=#:G196 NIL) (#7=#:G197 NIL) (#8=#:G198 NIL)
+    (#9=#:G199 NIL) (#10=#:G200 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT |dv$| (LIST '|NewSparseUnivariatePolynomial| DV$1))
@@ -1138,6 +1119,25 @@
                    |NSUP;halfExtendedSubResultantGcd2;2%R;20|)
                   %)))))
     %))) 
+
+(DEFUN |NewSparseUnivariatePolynomial| (#1=#:G202)
+  (SPROG NIL
+         (PROG (#2=#:G203)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|NewSparseUnivariatePolynomial|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|NewSparseUnivariatePolynomial;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|NewSparseUnivariatePolynomial|)))))))))) 
 
 (MAKEPROP '|NewSparseUnivariatePolynomial| '|infovec|
           (LIST

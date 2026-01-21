@@ -36,15 +36,15 @@
          (|pp| (|SparseUnivariatePolynomial| R))
          (% (|Union| (|List| (|SparseUnivariatePolynomial| R)) "failed")))
         (SPROG
-         ((#1=#:G39 NIL)
+         ((#1=#:G25 NIL)
           (|vv| (|Union| (|SparseUnivariatePolynomial| R) "failed"))
-          (#2=#:G43 NIL) (|v| NIL) (#3=#:G42 NIL)
+          (#2=#:G29 NIL) (|v| NIL) (#3=#:G28 NIL)
           (|ans|
            (|Union| (|List| (|SparseUnivariatePolynomial| (|Fraction| R)))
                     "failed"))
           (|pF| (|SparseUnivariatePolynomial| (|Fraction| R)))
           (|lpF| (|List| (|SparseUnivariatePolynomial| (|Fraction| R))))
-          (#4=#:G41 NIL) (|u| NIL) (#5=#:G40 NIL))
+          (#4=#:G27 NIL) (|u| NIL) (#5=#:G26 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -87,7 +87,7 @@
                                             ((QEQCAR |vv| 1)
                                              (PROGN
                                               (LETT #1# (CONS 1 "failed"))
-                                              (GO #6=#:G38)))
+                                              (GO #6=#:G24)))
                                             ('T (QCDR |vv|)))))
                                          #3#))))
                                 (LETT #2# (CDR #2#)) (GO G190) G191
@@ -95,26 +95,6 @@
           #6# (EXIT #1#)))) 
 
 (DECLAIM (NOTINLINE |LinearPolynomialEquationByFractions;|)) 
-
-(DEFUN |LinearPolynomialEquationByFractions| (#1=#:G44)
-  (SPROG NIL
-         (PROG (#2=#:G45)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|LinearPolynomialEquationByFractions|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|LinearPolynomialEquationByFractions;| #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|LinearPolynomialEquationByFractions|)))))))))) 
 
 (DEFUN |LinearPolynomialEquationByFractions;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
@@ -131,6 +111,26 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |LinearPolynomialEquationByFractions| (#1=#:G30)
+  (SPROG NIL
+         (PROG (#2=#:G31)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|LinearPolynomialEquationByFractions|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|LinearPolynomialEquationByFractions;| #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|LinearPolynomialEquationByFractions|)))))))))) 
 
 (MAKEPROP '|LinearPolynomialEquationByFractions| '|infovec|
           (LIST

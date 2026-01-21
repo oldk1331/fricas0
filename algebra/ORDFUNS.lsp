@@ -1,7 +1,7 @@
 
 (SDEFUN |ORDFUNS;pureLex;2VB;1|
         ((|v1| (|Vector| S)) (|v2| (|Vector| S)) (% (|Boolean|)))
-        (SPROG ((#1=#:G19 NIL) (#2=#:G20 NIL) (|i| NIL))
+        (SPROG ((#1=#:G12 NIL) (#2=#:G13 NIL) (|i| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -11,7 +11,7 @@
                         (COND
                          ((SPADCALL (QAREF1O |v1| |i| 1) (QAREF1O |v2| |i| 1)
                                     (QREFELT % 10))
-                          (PROGN (LETT #1# 'T) (GO #3=#:G18))))
+                          (PROGN (LETT #1# 'T) (GO #3=#:G11))))
                         (EXIT
                          (COND
                           ((SPADCALL (QAREF1O |v2| |i| 1) (QAREF1O |v1| |i| 1)
@@ -24,8 +24,8 @@
 (SDEFUN |ORDFUNS;totalLex;2VB;2|
         ((|v1| (|Vector| S)) (|v2| (|Vector| S)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G31 NIL) (#2=#:G33 NIL) (|i| NIL) (|n2| (S)) (|n1| (S))
-          (#3=#:G32 NIL))
+         ((#1=#:G24 NIL) (#2=#:G26 NIL) (|i| NIL) (|n2| (S)) (|n1| (S))
+          (#3=#:G25 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |n1| (|spadConstant| % 13))
@@ -52,7 +52,7 @@
                                (COND
                                 ((SPADCALL (QAREF1O |v1| |i| 1)
                                            (QAREF1O |v2| |i| 1) (QREFELT % 10))
-                                 (PROGN (LETT #1# 'T) (GO #4=#:G30))))
+                                 (PROGN (LETT #1# 'T) (GO #4=#:G23))))
                                (EXIT
                                 (COND
                                  ((SPADCALL (QAREF1O |v2| |i| 1)
@@ -66,7 +66,7 @@
 
 (SDEFUN |ORDFUNS;reverseLex;2VB;3|
         ((|v1| (|Vector| S)) (|v2| (|Vector| S)) (% (|Boolean|)))
-        (SPROG ((#1=#:G44 NIL) (|i| NIL) (|n2| (S)) (|n1| (S)) (#2=#:G45 NIL))
+        (SPROG ((#1=#:G37 NIL) (|i| NIL) (|n2| (S)) (|n1| (S)) (#2=#:G38 NIL))
                (SEQ
                 (EXIT
                  (SEQ (LETT |n1| (|spadConstant| % 13))
@@ -94,7 +94,7 @@
                                       ((SPADCALL (QAREF1O |v2| |i| 1)
                                                  (QAREF1O |v1| |i| 1)
                                                  (QREFELT % 10))
-                                       (PROGN (LETT #1# 'T) (GO #3=#:G43))))
+                                       (PROGN (LETT #1# 'T) (GO #3=#:G36))))
                                      (EXIT
                                       (COND
                                        ((SPADCALL (QAREF1O |v1| |i| 1)
@@ -107,25 +107,6 @@
                 #3# (EXIT #1#)))) 
 
 (DECLAIM (NOTINLINE |OrderingFunctions;|)) 
-
-(DEFUN |OrderingFunctions| (&REST #1=#:G46)
-  (SPROG NIL
-         (PROG (#2=#:G47)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T))
-                                               (HGET |$ConstructorCache|
-                                                     '|OrderingFunctions|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |OrderingFunctions;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|OrderingFunctions|)))))))))) 
 
 (DEFUN |OrderingFunctions;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
@@ -144,6 +125,25 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 8 |#1|)
           %))) 
+
+(DEFUN |OrderingFunctions| (&REST #1=#:G39)
+  (SPROG NIL
+         (PROG (#2=#:G40)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T))
+                                               (HGET |$ConstructorCache|
+                                                     '|OrderingFunctions|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |OrderingFunctions;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|OrderingFunctions|)))))))))) 
 
 (MAKEPROP '|OrderingFunctions| '|infovec|
           (LIST

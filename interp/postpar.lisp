@@ -518,7 +518,6 @@
   (PROG () (RETURN (CONS '|@Tuple| (|postFlatten| |u| '|,|)))))
 
 ; postDef [defOp,lhs,rhs] ==
-; --+
 ;   lhs is ["macro",name] => postMDef ["==>",name,rhs]
 ;
 ;   recordHeaderDocumentation nil

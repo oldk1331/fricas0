@@ -3,7 +3,7 @@
         ((|v| (|Vector| D)) (M (|Matrix| (|SparseUnivariatePolynomial| D)))
          (% (|Matrix| (|SparseUnivariatePolynomial| D))))
         (SPROG
-         ((#1=#:G24 NIL) (|j| NIL) (#2=#:G23 NIL) (|i| NIL)
+         ((#1=#:G7 NIL) (|j| NIL) (#2=#:G6 NIL) (|i| NIL)
           (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (QVSIZE |v|))
               (SEQ (LETT |i| 1) (LETT #2# |n|) G190
@@ -33,7 +33,7 @@
          (% (|Matrix| (|SparseUnivariatePolynomial| D))))
         (SPROG
          ((M (|Matrix| (|SparseUnivariatePolynomial| D)))
-          (|c| (|List| (|Fraction| D))) (#1=#:G35 NIL) (|i| NIL)
+          (|c| (|List| (|Fraction| D))) (#1=#:G17 NIL) (|i| NIL)
           (|den| (|Vector| D)) (|g| (|Vector| V)) (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (QVSIZE |f|))
               (LETT |g| (MAKEARR1 |n| (|spadConstant| % 18)))
@@ -71,28 +71,6 @@
 
 (DECLAIM (NOTINLINE |FractionFreeFastGaussianFractions;|)) 
 
-(DEFUN |FractionFreeFastGaussianFractions| (&REST #1=#:G36)
-  (SPROG NIL
-         (PROG (#2=#:G37)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|FractionFreeFastGaussianFractions|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |FractionFreeFastGaussianFractions;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|FractionFreeFastGaussianFractions|)))))))))) 
-
 (DEFUN |FractionFreeFastGaussianFractions;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -112,6 +90,28 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |FractionFreeFastGaussianFractions| (&REST #1=#:G18)
+  (SPROG NIL
+         (PROG (#2=#:G19)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|FractionFreeFastGaussianFractions|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |FractionFreeFastGaussianFractions;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|FractionFreeFastGaussianFractions|)))))))))) 
 
 (MAKEPROP '|FractionFreeFastGaussianFractions| '|infovec|
           (LIST

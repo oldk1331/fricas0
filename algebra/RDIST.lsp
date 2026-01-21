@@ -3,10 +3,10 @@
         ((|lvw| (|List| (|Record| (|:| |value| S) (|:| |weight| (|Integer|)))))
          (% (|Mapping| S)))
         (SPROG
-         ((|totwt| (|Integer|)) (#1=#:G27 NIL) (|k| NIL) (#2=#:G28 NIL)
+         ((|totwt| (|Integer|)) (#1=#:G16 NIL) (|k| NIL) (#2=#:G17 NIL)
           (|i| NIL) (|wv| (|Vector| (|Integer|))) (|kv| (|Vector| S))
           (|n| (|NonNegativeInteger|)) (|kl| (|List| S)) (|w| (|Integer|))
-          (|u| (|Union| (|Integer|) "failed")) (#3=#:G26 NIL) (|r| NIL)
+          (|u| (|Union| (|Integer|) "failed")) (#3=#:G15 NIL) (|r| NIL)
           (|t| (|Table| S (|Integer|))))
          (SEQ (LETT |t| (SPADCALL (QREFELT % 8)))
               (SEQ (LETT |r| NIL) (LETT #3# |lvw|) G190
@@ -94,23 +94,6 @@
 
 (DECLAIM (NOTINLINE |RandomDistributions;|)) 
 
-(DEFUN |RandomDistributions| (#1=#:G45)
-  (SPROG NIL
-         (PROG (#2=#:G46)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|RandomDistributions|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|RandomDistributions;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|RandomDistributions|)))))))))) 
-
 (DEFUN |RandomDistributions;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -125,6 +108,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |RandomDistributions| (#1=#:G34)
+  (SPROG NIL
+         (PROG (#2=#:G35)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|RandomDistributions|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|RandomDistributions;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|RandomDistributions|)))))))))) 
 
 (MAKEPROP '|RandomDistributions| '|infovec|
           (LIST

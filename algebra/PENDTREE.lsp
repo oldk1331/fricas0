@@ -47,25 +47,9 @@
 
 (DECLAIM (NOTINLINE |PendantTree;|)) 
 
-(DEFUN |PendantTree| (#1=#:G32)
-  (SPROG NIL
-         (PROG (#2=#:G33)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|PendantTree|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|PendantTree;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|PendantTree|)))))))))) 
-
 (DEFUN |PendantTree;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G30 NIL) (#2=#:G31 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+   ((|pv$| NIL) (#1=#:G20 NIL) (#2=#:G21 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT |dv$| (LIST '|PendantTree| DV$1))
@@ -115,6 +99,22 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 7 (|Tree| |#1|))
     %))) 
+
+(DEFUN |PendantTree| (#1=#:G22)
+  (SPROG NIL
+         (PROG (#2=#:G23)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|PendantTree|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|PendantTree;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|PendantTree|)))))))))) 
 
 (MAKEPROP '|PendantTree| '|infovec|
           (LIST

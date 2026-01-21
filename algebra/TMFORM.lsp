@@ -468,7 +468,7 @@
                       (#1# (QCDR |res|))))))) 
 
 (SDEFUN |TMFORM;utf2cork| ((|str| (|String|)) (% (|String|)))
-        (SPROG ((#1=#:G117 NIL) (|i| NIL) (#2=#:G116 NIL))
+        (SPROG ((#1=#:G105 NIL) (|i| NIL) (#2=#:G104 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -820,7 +820,7 @@
 (SDEFUN |TMFORM;formatIntBody|
         ((|body| (|OutputForm|)) (|opPrec| (|Integer|)) (% (|String|)))
         (SPROG
-         ((#1=#:G193 NIL) (|bvarS| (|String|))
+         ((#1=#:G166 NIL) (|bvarS| (|String|))
           (|bvarL| #2=(|List| (|OutputForm|))) (|bvar| (|OutputForm|))
           (|bodyL| #2#))
          (SEQ
@@ -867,7 +867,7 @@
                                                     " \"*<mathd>" |bvarS|
                                                     "\")")
                                               (QREFELT % 41)))
-                                       (GO #3=#:G192))))))))))))))))))))
+                                       (GO #3=#:G165))))))))))))))))))))
             (EXIT (|TMFORM;formatExpr| |body| |opPrec| %))))
           #3# (EXIT #1#)))) 
 
@@ -1017,7 +1017,7 @@
         ((|op| (|Symbol|)) (|sep| (|String|)) (|opprec| (|Integer|))
          (|args| (|List| (|OutputForm|))) (|prec| (|Integer|)) (% (|String|)))
         (SPROG
-         ((|s| (|String|)) (|l| (|List| (|String|))) (#1=#:G225 NIL) (|a| NIL)
+         ((|s| (|String|)) (|l| (|List| (|String|))) (#1=#:G198 NIL) (|a| NIL)
           (|opPrec| (|Integer|)) (|ops| (|String|)) (|p| (|Integer|)))
          (SEQ
           (COND ((NULL |args|) "")
@@ -1145,7 +1145,7 @@
          ((|op| #1=(|Symbol|)) (|nargs| (|Integer|))
           (|args| (|List| (|OutputForm|))) (|opf| (|OutputForm|))
           (|i| (|Integer|)) (|len| (|Integer|)) (|str| (|String|))
-          (#2=#:G264 NIL) (|es| #1#) (|nstr| (|String|))
+          (#2=#:G237 NIL) (|es| #1#) (|nstr| (|String|))
           (|intSplitLen| (|Integer|)))
          (SEQ
           (EXIT
@@ -1223,7 +1223,7 @@
                              (EXIT
                               (COND
                                ((EQUAL |es| '|%pi|)
-                                (PROGN (LETT #2# "<mathpi>") (GO #4=#:G263)))
+                                (PROGN (LETT #2# "<mathpi>") (GO #4=#:G236)))
                                ((EQUAL |es| '|%e|)
                                 (PROGN (LETT #2# "<mathe>") (GO #4#)))
                                ((EQUAL |es| '|%i|)
@@ -1348,23 +1348,6 @@
 
 (DECLAIM (NOTINLINE |TexmacsFormat;|)) 
 
-(DEFUN |TexmacsFormat| ()
-  (SPROG NIL
-         (PROG (#1=#:G266)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|TexmacsFormat|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|TexmacsFormat|
-                             (LIST (CONS NIL (CONS 1 (|TexmacsFormat;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#) (HREM |$ConstructorCache| '|TexmacsFormat|)))))))))) 
-
 (DEFUN |TexmacsFormat;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -1405,6 +1388,23 @@
                           "\"arcsin\"" "\"arctan\"" "\"erf\"" "\"<cdots>\""
                           "\"$\"" "\"<infty>\"" "\"<Gamma>\""))
           %))) 
+
+(DEFUN |TexmacsFormat| ()
+  (SPROG NIL
+         (PROG (#1=#:G239)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|TexmacsFormat|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|TexmacsFormat|
+                             (LIST (CONS NIL (CONS 1 (|TexmacsFormat;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#) (HREM |$ConstructorCache| '|TexmacsFormat|)))))))))) 
 
 (MAKEPROP '|TexmacsFormat| '|infovec|
           (LIST

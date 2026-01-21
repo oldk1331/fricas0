@@ -15,7 +15,7 @@
               ((> |n| (QUOTIENT2 |Modulus| 2)) (- |n| |Modulus|)) ('T |n|))) 
 
 (SDEFUN |HEUGCD;height| ((|f| (BP)) (% (|PositiveInteger|)))
-        (SPROG ((|k| (|PositiveInteger|)) (#1=#:G30 NIL))
+        (SPROG ((|k| (|PositiveInteger|)) (#1=#:G24 NIL))
                (SEQ (LETT |k| 1)
                     (SEQ G190
                          (COND
@@ -60,7 +60,7 @@
 (SDEFUN |HEUGCD;smallest_to_front|
         ((|l| (|List| (|Integer|))) (% (|List| (|Integer|))))
         (SPROG
-         ((|ress| (|List| (|Integer|))) (|smallest| (|Integer|)) (#1=#:G51 NIL)
+         ((|ress| (|List| (|Integer|))) (|smallest| (|Integer|)) (#1=#:G39 NIL)
           (|p| NIL))
          (SEQ (LETT |ress| NIL) (LETT |smallest| (|SPADfirst| |l|))
               (SEQ (LETT |p| NIL) (LETT #1# (CDR |l|)) G190
@@ -78,7 +78,7 @@
               (EXIT (CONS |smallest| |ress|))))) 
 
 (SDEFUN |HEUGCD;lintgcd;LI;7| ((|lval| (|List| (|Integer|))) (% (|Integer|)))
-        (SPROG ((|val| (|Integer|)) (#1=#:G58 NIL) (|val1| NIL))
+        (SPROG ((|val| (|Integer|)) (#1=#:G46 NIL) (|val1| NIL))
                (SEQ
                 (COND ((NULL |lval|) 0) ((SPADCALL 1 |lval| (QREFELT % 24)) 1)
                       ('T
@@ -97,7 +97,7 @@
                             (EXIT |val|))))))) 
 
 (SDEFUN |HEUGCD;content;LL;8| ((|listf| (|List| BP)) (% (|List| (|Integer|))))
-        (SPROG ((#1=#:G63 NIL) (|f| NIL) (#2=#:G62 NIL))
+        (SPROG ((#1=#:G51 NIL) (|f| NIL) (#2=#:G50 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -119,8 +119,8 @@
         ((|listf| (|List| BP))
          (% (|List| (|Record| (|:| |cont| (|Integer|)) (|:| |prim| BP)))))
         (SPROG
-         ((#1=#:G67 NIL) (|c| (|Integer|)) (#2=#:G72 NIL) (|f| NIL)
-          (#3=#:G71 NIL))
+         ((#1=#:G55 NIL) (|c| (|Integer|)) (#2=#:G60 NIL) (|f| NIL)
+          (#3=#:G59 NIL))
          (SEQ
           (PROGN
            (LETT #3# NIL)
@@ -147,10 +147,10 @@
         ((|listdeg| (|List| (|NonNegativeInteger|))) (|listf| (|List| BP))
          (% (|List| BP)))
         (SPROG
-         ((#1=#:G90 NIL) (|lcf| NIL) (#2=#:G89 NIL) (|d| (|Integer|))
-          (|lclistf| (|List| (|Integer|))) (#3=#:G88 NIL) (|f| NIL)
-          (#4=#:G87 NIL) (#5=#:G76 NIL) (#6=#:G75 #7=(|Boolean|))
-          (#8=#:G77 #7#) (#9=#:G86 NIL) (|n| NIL) (|lind| (|List| BP)))
+         ((#1=#:G78 NIL) (|lcf| NIL) (#2=#:G77 NIL) (|d| (|Integer|))
+          (|lclistf| (|List| (|Integer|))) (#3=#:G76 NIL) (|f| NIL)
+          (#4=#:G75 NIL) (#5=#:G64 NIL) (#6=#:G63 #7=(|Boolean|))
+          (#8=#:G65 #7#) (#9=#:G74 NIL) (|n| NIL) (|lind| (|List| BP)))
          (SEQ
           (LETT |lind|
                 (SPADCALL (CONS (|function| |HEUGCD;constNotZero|) %) |listf|
@@ -217,8 +217,8 @@
 (SDEFUN |HEUGCD;testDivide|
         ((|listf| (|List| BP)) (|g| (BP)) (% (|Union| (|List| BP) "failed")))
         (SPROG
-         ((|result| (|List| BP)) (#1=#:G103 NIL) (|f1| (|Union| BP "failed"))
-          (#2=#:G104 NIL) (|f| NIL))
+         ((|result| (|List| BP)) (#1=#:G91 NIL) (|f1| (|Union| BP "failed"))
+          (#2=#:G92 NIL) (|f| NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |result| NIL)
@@ -233,7 +233,7 @@
                              ((QEQCAR |f1| 1)
                               (PROGN
                                (LETT #1# (CONS 1 "failed"))
-                               (GO #3=#:G102))))))
+                               (GO #3=#:G90))))))
                       (EXIT (LETT |result| (CONS (QCDR |f1|) |result|))))
                      (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                 (EXIT (CONS 0 (NREVERSE |result|)))))
@@ -243,8 +243,8 @@
         ((|listdeg| (|List| (|NonNegativeInteger|))) (|listf| (|List| BP))
          (% (|List| BP)))
         (SPROG
-         ((|result| (|List| BP)) (#1=#:G127 NIL) (|f1| (|Union| BP "failed"))
-          (#2=#:G128 NIL) (|f| NIL) (|g| (BP)) (|n| (|Integer|)))
+         ((|result| (|List| BP)) (#1=#:G107 NIL) (|f1| (|Union| BP "failed"))
+          (#2=#:G108 NIL) (|f| NIL) (|g| (BP)) (|n| (|Integer|)))
          (SEQ
           (EXIT
            (SEQ (LETT |n| (SPADCALL 1 |listdeg| (QREFELT % 39)))
@@ -261,7 +261,7 @@
                              ((QEQCAR |f1| 1)
                               (PROGN
                                (LETT #1# (CONS (|spadConstant| % 22) |listf|))
-                               (GO #3=#:G126))))))
+                               (GO #3=#:G106))))))
                       (EXIT (LETT |result| (CONS (QCDR |f1|) |result|))))
                      (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                 (EXIT (REVERSE |result|))))
@@ -274,17 +274,17 @@
 
 (SDEFUN |HEUGCD;localgcd| ((|listf| (|List| BP)) (% (|List| BP)))
         (SPROG
-         ((#1=#:G147 NIL) (#2=#:G172 NIL) (|f| NIL) (#3=#:G171 NIL) (|gg| (BP))
-          (|answr| (|PositiveInteger|)) (#4=#:G157 NIL)
-          (|nvalue| (|NonNegativeInteger|)) (#5=#:G165 NIL)
+         ((#1=#:G127 NIL) (#2=#:G148 NIL) (|f| NIL) (#3=#:G147 NIL) (|gg| (BP))
+          (|answr| (|PositiveInteger|)) (#4=#:G133 NIL)
+          (|nvalue| (|NonNegativeInteger|)) (#5=#:G141 NIL)
           (|result| (|List| BP)) (|flag| (|Boolean|))
-          (|f1| (|Union| BP "failed")) (#6=#:G170 NIL) (|d| (BP))
+          (|f1| (|Union| BP "failed")) (#6=#:G146 NIL) (|d| (BP))
           (|contd| (|Integer|)) (|dd| (BP)) (|dval| (|Integer|))
-          (|listval| (|List| (|Integer|))) (#7=#:G169 NIL) (#8=#:G168 NIL)
-          (|k| NIL) (|minf| (BP)) (#9=#:G141 NIL) (#10=#:G140 (BP))
-          (#11=#:G142 (BP)) (#12=#:G167 NIL) (|hgt| #13=(|PositiveInteger|))
-          (#14=#:G137 NIL) (#15=#:G136 #13#) (#16=#:G138 #13#)
-          (#17=#:G166 NIL))
+          (|listval| (|List| (|Integer|))) (#7=#:G145 NIL) (#8=#:G144 NIL)
+          (|k| NIL) (|minf| (BP)) (#9=#:G121 NIL) (#10=#:G120 (BP))
+          (#11=#:G122 (BP)) (#12=#:G143 NIL) (|hgt| #13=(|PositiveInteger|))
+          (#14=#:G117 NIL) (#15=#:G116 #13#) (#16=#:G118 #13#)
+          (#17=#:G142 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -385,7 +385,7 @@
                             (|flag|
                              (PROGN
                               (LETT #5# (REVERSE |result|))
-                              (GO #20=#:G164))))
+                              (GO #20=#:G140))))
                            (LETT |nvalue|
                                  (QUOTIENT2 (* |answr| 832040) 317811))
                            (COND
@@ -433,19 +433,19 @@
         ((|flag| (|Union| "gcdprim" "gcd" "gcdcofactprim" "gcdcofact"))
          (|listf| (|List| BP)) (% (|List| BP)))
         (SPROG
-         ((|ans| (|List| BP)) (#1=#:G226 NIL) (|p| NIL) (#2=#:G227 NIL)
-          (|q| NIL) (#3=#:G225 NIL) (|result| (BP)) (|#G53| (|List| BP))
-          (|#G52| (BP)) (#4=#:G214 NIL) (|fa| #5=(|U32Vector|)) (|ga| #5#)
-          (#6=#:G213 NIL) (|lcg| (|Integer|)) (#7=#:G224 NIL) (|g| NIL)
+         ((|ans| (|List| BP)) (#1=#:G201 NIL) (|p| NIL) (#2=#:G202 NIL)
+          (|q| NIL) (#3=#:G200 NIL) (|result| (BP)) (|#G53| (|List| BP))
+          (|#G52| (BP)) (#4=#:G189 NIL) (|fa| #5=(|U32Vector|)) (|ga| #5#)
+          (#6=#:G188 NIL) (|lcg| (|Integer|)) (#7=#:G199 NIL) (|g| NIL)
           (|f| (BP)) (|listdeg| (|List| (|NonNegativeInteger|)))
-          (#8=#:G223 NIL) (#9=#:G222 NIL) (|minpol| (BP)) (#10=#:G221 NIL)
-          (|term| NIL) (#11=#:G220 NIL) (|contgcd| (|Integer|))
-          (|Cgcd| (|List| (|Integer|))) (#12=#:G219 NIL) (#13=#:G218 NIL)
+          (#8=#:G198 NIL) (#9=#:G197 NIL) (|minpol| (BP)) (#10=#:G196 NIL)
+          (|term| NIL) (#11=#:G195 NIL) (|contgcd| (|Integer|))
+          (|Cgcd| (|List| (|Integer|))) (#12=#:G194 NIL) (#13=#:G193 NIL)
           (|contlistf|
            (|List| (|Record| (|:| |cont| (|Integer|)) (|:| |prim| BP))))
-          (#14=#:G183 NIL) (#15=#:G217 NIL) (#16=#:G216 NIL) (|minpol1| (BP))
-          (|mdeg| #17=(|NonNegativeInteger|)) (#18=#:G179 NIL)
-          (#19=#:G178 #17#) (#20=#:G180 #17#) (#21=#:G215 NIL)
+          (#14=#:G159 NIL) (#15=#:G192 NIL) (#16=#:G191 NIL) (|minpol1| (BP))
+          (|mdeg| #17=(|NonNegativeInteger|)) (#18=#:G155 NIL)
+          (#19=#:G154 #17#) (#20=#:G156 #17#) (#21=#:G190 NIL)
           (|nlf| (|NonNegativeInteger|)))
          (SEQ
           (EXIT
@@ -609,7 +609,7 @@
                                          (SPADCALL |lcg| (QREFELT % 7)
                                                    (QREFELT % 49))
                                          0)
-                                        (PROGN (LETT #6# 1) (GO #23=#:G203))))
+                                        (PROGN (LETT #6# 1) (GO #23=#:G178))))
                                       (LETT |ga|
                                             (SPADCALL
                                              (SPADCALL |g| (QREFELT % 51))
@@ -622,7 +622,7 @@
                                         ((EQL (SPADCALL |fa| (QREFELT % 56)) 0)
                                          (PROGN
                                           (LETT #4# (CONS |minpol| |listf|))
-                                          (GO #24=#:G212))))))
+                                          (GO #24=#:G187))))))
                                      (LETT #7# (CDR #7#)) (GO G190) G191
                                      (EXIT NIL)))
                                #23# (EXIT #6#))))))
@@ -683,21 +683,6 @@
 
 (DECLAIM (NOTINLINE |HeuGcd;|)) 
 
-(DEFUN |HeuGcd| (#1=#:G252)
-  (SPROG NIL
-         (PROG (#2=#:G253)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|HeuGcd|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|HeuGcd;| #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|HeuGcd|)))))))))) 
-
 (DEFUN |HeuGcd;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -716,6 +701,21 @@
                                        (CONS (|function| |HEUGCD;myNextPrime|)
                                              %)))
           %))) 
+
+(DEFUN |HeuGcd| (#1=#:G227)
+  (SPROG NIL
+         (PROG (#2=#:G228)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|HeuGcd|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|HeuGcd;| #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|HeuGcd|)))))))))) 
 
 (MAKEPROP '|HeuGcd| '|infovec|
           (LIST

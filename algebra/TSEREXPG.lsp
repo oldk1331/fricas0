@@ -110,7 +110,7 @@
           (RETURN
            (PROGN
             (SPROG
-             ((#1=#:G45 NIL) (|s| NIL) (#2=#:G46 NIL) (|a| NIL) (#3=#:G44 NIL))
+             ((#1=#:G32 NIL) (|s| NIL) (#2=#:G33 NIL) (|a| NIL) (#3=#:G31 NIL))
              (SEQ
               (SPADCALL (ELT % 44)
                         (PROGN
@@ -163,28 +163,6 @@
 
 (DECLAIM (NOTINLINE |TaylorSeriesExpansionGeneralized;|)) 
 
-(DEFUN |TaylorSeriesExpansionGeneralized| (&REST #1=#:G55)
-  (SPROG NIL
-         (PROG (#2=#:G56)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|TaylorSeriesExpansionGeneralized|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |TaylorSeriesExpansionGeneralized;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|TaylorSeriesExpansionGeneralized|)))))))))) 
-
 (DEFUN |TaylorSeriesExpansionGeneralized;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -207,6 +185,28 @@
     (QSETREFV % 9 |#4|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |TaylorSeriesExpansionGeneralized| (&REST #1=#:G42)
+  (SPROG NIL
+         (PROG (#2=#:G43)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|TaylorSeriesExpansionGeneralized|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |TaylorSeriesExpansionGeneralized;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|TaylorSeriesExpansionGeneralized|)))))))))) 
 
 (MAKEPROP '|TaylorSeriesExpansionGeneralized| '|infovec|
           (LIST

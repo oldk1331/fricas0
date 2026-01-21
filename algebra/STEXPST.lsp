@@ -95,9 +95,26 @@
 
 (DECLAIM (NOTINLINE |StreamExponentialSeriesTranscendentalFunctions;|)) 
 
-(DEFUN |StreamExponentialSeriesTranscendentalFunctions| (#1=#:G24)
+(DEFUN |StreamExponentialSeriesTranscendentalFunctions;| (|#1|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT |dv$|
+                (LIST '|StreamExponentialSeriesTranscendentalFunctions| DV$1))
+          (LETT % (GETREFV 30))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache|
+                      '|StreamExponentialSeriesTranscendentalFunctions|
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |StreamExponentialSeriesTranscendentalFunctions| (#1=#:G14)
   (SPROG NIL
-         (PROG (#2=#:G25)
+         (PROG (#2=#:G15)
            (RETURN
             (COND
              ((LETT #2#
@@ -115,23 +132,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|StreamExponentialSeriesTranscendentalFunctions|)))))))))) 
-
-(DEFUN |StreamExponentialSeriesTranscendentalFunctions;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT |dv$|
-                (LIST '|StreamExponentialSeriesTranscendentalFunctions| DV$1))
-          (LETT % (GETREFV 30))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache|
-                      '|StreamExponentialSeriesTranscendentalFunctions|
-                      (LIST DV$1) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|StreamExponentialSeriesTranscendentalFunctions| '|infovec|
           (LIST

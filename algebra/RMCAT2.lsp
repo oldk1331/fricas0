@@ -1,8 +1,8 @@
 
 (SDEFUN |RMCAT2;map;MM1M2;1| ((|f| (|Mapping| R2 R1)) (|mat| (M1)) (% (M2)))
         (SPROG
-         ((#1=#:G17 NIL) (|j| NIL) (#2=#:G18 NIL) (|l| NIL) (#3=#:G15 NIL)
-          (|i| NIL) (#4=#:G16 NIL) (|k| NIL) (|ans| (M2)))
+         ((#1=#:G9 NIL) (|j| NIL) (#2=#:G10 NIL) (|l| NIL) (#3=#:G7 NIL)
+          (|i| NIL) (#4=#:G8 NIL) (|k| NIL) (|ans| (M2)))
          (SEQ
           (LETT |ans|
                 (MAKE_MATRIX1 (QREFELT % 6) (QREFELT % 7)
@@ -34,7 +34,7 @@
 
 (SDEFUN |RMCAT2;reduce;MM12R2;2|
         ((|f| (|Mapping| R2 R1 R2)) (|mat| (M1)) (|ident| (R2)) (% (R2)))
-        (SPROG ((|s| (R2)) (#1=#:G27 NIL) (|j| NIL) (#2=#:G26 NIL) (|i| NIL))
+        (SPROG ((|s| (R2)) (#1=#:G19 NIL) (|j| NIL) (#2=#:G18 NIL) (|i| NIL))
                (SEQ (LETT |s| |ident|)
                     (SEQ (LETT |i| (SPADCALL |mat| (QREFELT % 18)))
                          (LETT #2# (SPADCALL |mat| (QREFELT % 19))) G190
@@ -57,29 +57,6 @@
                     (EXIT |s|)))) 
 
 (DECLAIM (NOTINLINE |RectangularMatrixCategoryFunctions2;|)) 
-
-(DEFUN |RectangularMatrixCategoryFunctions2| (&REST #1=#:G28)
-  (SPROG NIL
-         (PROG (#2=#:G29)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(NIL NIL T T T T T T T T))
-                     (HGET |$ConstructorCache|
-                           '|RectangularMatrixCategoryFunctions2|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function| |RectangularMatrixCategoryFunctions2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|RectangularMatrixCategoryFunctions2|)))))))))) 
 
 (DEFUN |RectangularMatrixCategoryFunctions2;|
        (|#1| |#2| |#3| |#4| |#5| |#6| |#7| |#8| |#9| |#10|)
@@ -120,6 +97,29 @@
     (QSETREFV % 15 |#10|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |RectangularMatrixCategoryFunctions2| (&REST #1=#:G20)
+  (SPROG NIL
+         (PROG (#2=#:G21)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(NIL NIL T T T T T T T T))
+                     (HGET |$ConstructorCache|
+                           '|RectangularMatrixCategoryFunctions2|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function| |RectangularMatrixCategoryFunctions2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|RectangularMatrixCategoryFunctions2|)))))))))) 
 
 (MAKEPROP '|RectangularMatrixCategoryFunctions2| '|infovec|
           (LIST

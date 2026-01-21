@@ -1,23 +1,6 @@
 
 (DECLAIM (NOTINLINE |GuessInteger;|)) 
 
-(DEFUN |GuessInteger| ()
-  (SPROG NIL
-         (PROG (#1=#:G32)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|GuessInteger|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|GuessInteger|
-                             (LIST (CONS NIL (CONS 1 (|GuessInteger;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#) (HREM |$ConstructorCache| '|GuessInteger|)))))))))) 
-
 (DEFUN |GuessInteger;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -39,6 +22,23 @@
           (|stuffDomainSlots| %)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |GuessInteger| ()
+  (SPROG NIL
+         (PROG (#1=#:G19)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|GuessInteger|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|GuessInteger|
+                             (LIST (CONS NIL (CONS 1 (|GuessInteger;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#) (HREM |$ConstructorCache| '|GuessInteger|)))))))))) 
 
 (MAKEPROP '|GuessInteger| '|infovec|
           (LIST

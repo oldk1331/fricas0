@@ -44,22 +44,6 @@
 
 (DECLAIM (NOTINLINE |Palette;|)) 
 
-(DEFUN |Palette| ()
-  (SPROG NIL
-         (PROG (#1=#:G31)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|Palette|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|Palette|
-                             (LIST (CONS NIL (CONS 1 (|Palette;|))))))
-                    (LETT #1# T))
-                (COND ((NOT #1#) (HREM |$ConstructorCache| '|Palette|)))))))))) 
-
 (DEFUN |Palette;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -74,6 +58,22 @@
                     (|Record| (|:| |shadeField| (|Integer|))
                               (|:| |hueField| (|Color|))))
           %))) 
+
+(DEFUN |Palette| ()
+  (SPROG NIL
+         (PROG (#1=#:G13)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|Palette|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|Palette|
+                             (LIST (CONS NIL (CONS 1 (|Palette;|))))))
+                    (LETT #1# T))
+                (COND ((NOT #1#) (HREM |$ConstructorCache| '|Palette|)))))))))) 
 
 (MAKEPROP '|Palette| '|infovec|
           (LIST

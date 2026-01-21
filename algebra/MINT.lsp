@@ -36,9 +36,22 @@
 
 (DECLAIM (NOTINLINE |MachineInteger;|)) 
 
+(DEFUN |MachineInteger;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|MachineInteger|))
+          (LETT % (GETREFV 45))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|MachineInteger| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 6 (EXPT 2 32))
+          %))) 
+
 (DEFUN |MachineInteger| ()
   (SPROG NIL
-         (PROG (#1=#:G68)
+         (PROG (#1=#:G36)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|MachineInteger|))
@@ -53,19 +66,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|MachineInteger|)))))))))) 
-
-(DEFUN |MachineInteger;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|MachineInteger|))
-          (LETT % (GETREFV 45))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|MachineInteger| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 6 (EXPT 2 32))
-          %))) 
 
 (MAKEPROP '|MachineInteger| '|infovec|
           (LIST

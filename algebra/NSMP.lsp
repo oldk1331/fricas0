@@ -195,9 +195,9 @@
 
 (SDEFUN |NSMP;prem;3%;19| ((|a| (%)) (|b| (%)) (% (%)))
         (SPROG
-         ((#1=#:G153 NIL) (|test| (|Integer|)) (|delta| (|Integer|))
-          (|term| (%)) (#2=#:G146 NIL) (#3=#:G157 NIL) (|r| (D))
-          (#4=#:G132 NIL) (|lcb| (%)) (|db| (|NonNegativeInteger|)))
+         ((#1=#:G139 NIL) (|test| (|Integer|)) (|delta| (|Integer|))
+          (|term| (%)) (#2=#:G132 NIL) (#3=#:G143 NIL) (|r| (D))
+          (#4=#:G118 NIL) (|lcb| (%)) (|db| (|NonNegativeInteger|)))
          (SEQ
           (EXIT
            (COND ((QEQCAR |b| 0) (|error| "in prem$NSMP: ground? #2"))
@@ -234,7 +234,7 @@
                              ((SPADCALL |r| (QREFELT % 26))
                               (PROGN
                                (LETT #3# (SPADCALL |r| (QREFELT % 27)))
-                               (GO #6=#:G156)))
+                               (GO #6=#:G142)))
                              (#5# (CONS 1 (CONS (QCAR (QCDR |a|)) |r|)))))))
                          (#5#
                           (SEQ
@@ -307,7 +307,7 @@
 
 (SDEFUN |NSMP;lazyPrem;3%;22| ((|a| (%)) (|b| (%)) (% (%)))
         (SPROG
-         ((|test| (|Integer|)) (|term| (%)) (#1=#:G173 NIL) (|lcb| (%))
+         ((|test| (|Integer|)) (|term| (%)) (#1=#:G159 NIL) (|lcb| (%))
           (|db| (|NonNegativeInteger|)))
          (SEQ
           (COND ((QEQCAR |b| 0) (|error| "in lazyPrem$NSMP: ground? #2"))
@@ -364,7 +364,7 @@
 
 (SDEFUN |NSMP;lazyPquo;3%;23| ((|a| (%)) (|b| (%)) (% (%)))
         (SPROG
-         ((|test| (|Integer|)) (|q| (%)) (|term| (%)) (#1=#:G186 NIL)
+         ((|test| (|Integer|)) (|q| (%)) (|term| (%)) (#1=#:G172 NIL)
           (|lcb| (%)) (|db| (|NonNegativeInteger|)))
          (SEQ
           (COND ((QEQCAR |b| 0) (|error| "in lazyPquo$NSMP: #2 is constant"))
@@ -434,8 +434,8 @@
           (|Record| (|:| |coef| %) (|:| |gap| (|NonNegativeInteger|))
                     (|:| |quotient| %) (|:| |remainder| %))))
         (SPROG
-         ((#1=#:G206 NIL) (|test| (|Integer|)) (|delta| (|Integer|)) (|q| (%))
-          (|term| (%)) (#2=#:G202 NIL) (|lcb| (%))
+         ((#1=#:G192 NIL) (|test| (|Integer|)) (|delta| (|Integer|)) (|q| (%))
+          (|term| (%)) (#2=#:G188 NIL) (|lcb| (%))
           (|db| (|NonNegativeInteger|))
           (|cgqr|
            (|Record| (|:| |coef| %) (|:| |gap| (|NonNegativeInteger|))
@@ -512,7 +512,7 @@
                     (|:| |power| (|NonNegativeInteger|)))))
         (SPROG
          ((|test| (|Integer|)) (|pow| (|NonNegativeInteger|)) (|term| (%))
-          (#1=#:G220 NIL) (|db| (|NonNegativeInteger|))
+          (#1=#:G206 NIL) (|db| (|NonNegativeInteger|))
           (|lrc|
            (|Record| (|:| |polnum| D) (|:| |polden| %)
                      (|:| |power| (|NonNegativeInteger|))))
@@ -591,7 +591,7 @@
 
 (SDEFUN |NSMP;LazardQuotient2;3%Nni%;28|
         ((|p| (%)) (|a| (%)) (|b| (%)) (|n| (|NonNegativeInteger|)) (% (%)))
-        (SPROG ((|c| (%)) (#1=#:G236 NIL))
+        (SPROG ((|c| (%)) (#1=#:G222 NIL))
                (SEQ
                 (COND ((ZEROP |n|) (|error| "in LazardQuotient2$NSMP: bad #4"))
                       ((EQL |n| 1) |p|)
@@ -712,7 +712,7 @@
             (SPADCALL (QCDR (QCDR |a|)) (QCDR (QCDR |b|)) (QREFELT % 101))))))) 
 
 (SDEFUN |NSMP;subResultantChain;2%L;35| ((|a| (%)) (|b| (%)) (% (|List| %)))
-        (SPROG ((#1=#:G283 NIL) (|up| NIL) (#2=#:G282 NIL))
+        (SPROG ((#1=#:G269 NIL) (|up| NIL) (#2=#:G268 NIL))
                (SEQ
                 (COND
                  ((OR (QEQCAR |a| 0) (QEQCAR |b| 0))
@@ -801,7 +801,7 @@
           (RETURN (PROGN (SPADCALL |a1| |b| (QREFELT % 110)))))) 
 
 (SDEFUN |NSMP;exactQuotient;%R%;39| ((|a| (%)) (|b| (R)) (% (%)))
-        (SPROG ((#1=#:G299 NIL))
+        (SPROG ((#1=#:G285 NIL))
                (COND
                 ((SPADCALL |b| (QCDR (|spadConstant| % 35)) (QREFELT % 107))
                  |a|)
@@ -828,7 +828,7 @@
           (RETURN (PROGN (SPADCALL |a1| |b| (QREFELT % 109)))))) 
 
 (SDEFUN |NSMP;exactQuotient!;%R%;40| ((|a| (%)) (|b| (R)) (% (%)))
-        (SPROG ((#1=#:G308 NIL))
+        (SPROG ((#1=#:G294 NIL))
                (SEQ
                 (COND
                  ((SPADCALL |b| (QCDR (|spadConstant| % 35)) (QREFELT % 107))
@@ -922,33 +922,11 @@
 
 (DECLAIM (NOTINLINE |NewSparseMultivariatePolynomial;|)) 
 
-(DEFUN |NewSparseMultivariatePolynomial| (&REST #1=#:G397)
-  (SPROG NIL
-         (PROG (#2=#:G398)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|NewSparseMultivariatePolynomial|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |NewSparseMultivariatePolynomial;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|NewSparseMultivariatePolynomial|)))))))))) 
-
 (DEFUN |NewSparseMultivariatePolynomial;| (|#1| |#2|)
   (SPROG
-   ((#1=#:G396 NIL) (|pv$| NIL) (#2=#:G386 NIL) (#3=#:G388 NIL) (#4=#:G387 NIL)
-    (#5=#:G389 NIL) (#6=#:G390 NIL) (#7=#:G391 NIL) (#8=#:G392 NIL)
-    (#9=#:G393 NIL) (#10=#:G394 NIL) (#11=#:G395 NIL) (% NIL) (|dv$| NIL)
+   ((#1=#:G360 NIL) (|pv$| NIL) (#2=#:G350 NIL) (#3=#:G352 NIL) (#4=#:G351 NIL)
+    (#5=#:G353 NIL) (#6=#:G354 NIL) (#7=#:G355 NIL) (#8=#:G356 NIL)
+    (#9=#:G357 NIL) (#10=#:G358 NIL) (#11=#:G359 NIL) (% NIL) (|dv$| NIL)
     (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -1568,6 +1546,28 @@
        (QSETREFV % 117
                  (CONS (|dispatchFunction| |NSMP;primitivePart!;2%;44|) %)))))
     %))) 
+
+(DEFUN |NewSparseMultivariatePolynomial| (&REST #1=#:G361)
+  (SPROG NIL
+         (PROG (#2=#:G362)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|NewSparseMultivariatePolynomial|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |NewSparseMultivariatePolynomial;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|NewSparseMultivariatePolynomial|)))))))))) 
 
 (MAKEPROP '|NewSparseMultivariatePolynomial| '|infovec|
           (LIST

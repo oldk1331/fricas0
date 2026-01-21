@@ -7,7 +7,7 @@
   (COND (|CachableSet;AL|) (T (SETQ |CachableSet;AL| (|CachableSet;|))))) 
 
 (DEFUN |CachableSet;| ()
-  (SPROG ((#1=#:G1 NIL))
+  (SPROG ((#1=#:G0 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|SetCategory|)

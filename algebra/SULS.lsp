@@ -81,7 +81,7 @@
 
 (SDEFUN |SULS;denom;%Suts;15|
         ((|uls| (%)) (% (|SparseUnivariateTaylorSeries| |Coef| |var| |cen|)))
-        (SPROG ((#1=#:G47 NIL))
+        (SPROG ((#1=#:G41 NIL))
                (SPADCALL (|spadConstant| % 15)
                          (PROG1
                              (LETT #1# (- (SPADCALL |uls| 0 (QREFELT % 24))))
@@ -126,7 +126,7 @@
 
 (SDEFUN |SULS;elt;3%;23| ((|uls1| (%)) (|uls2| (%)) (% (%)))
         (SPROG
-         ((#1=#:G78 NIL) (|uls3| (%)) (|recipr| (|Union| % "failed"))
+         ((#1=#:G68 NIL) (|uls3| (%)) (|recipr| (|Union| % "failed"))
           (|ord| (|Integer|)))
          (SEQ
           (COND
@@ -160,10 +160,10 @@
 (SDEFUN |SULS;rationalFunction;%IF;24|
         ((|uls| (%)) (|n| (|Integer|)) (% (|Fraction| (|Polynomial| |Coef|))))
         (SPROG
-         ((#1=#:G92 NIL) (|c| (|Fraction| (|Polynomial| |Coef|)))
+         ((#1=#:G79 NIL) (|c| (|Fraction| (|Polynomial| |Coef|)))
           (|v| (|Fraction| (|Polynomial| |Coef|)))
-          (|poly| (|Fraction| (|Polynomial| |Coef|))) (#2=#:G91 NIL)
-          (|m| (|Integer|)) (#3=#:G88 NIL) (|e| (|Integer|)))
+          (|poly| (|Fraction| (|Polynomial| |Coef|))) (#2=#:G78 NIL)
+          (|m| (|Integer|)) (#3=#:G75 NIL) (|e| (|Integer|)))
          (SEQ
           (COND
            ((ZEROP (LETT |e| (SPADCALL |uls| 0 (QREFELT % 24))))
@@ -339,7 +339,7 @@
 
 (SDEFUN |SULS;coerce;%Of;57| ((|uls| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|degr| (|Integer|)) (#1=#:G138 NIL) (|count| (|NonNegativeInteger|))
+         ((|degr| (|Integer|)) (#1=#:G125 NIL) (|count| (|NonNegativeInteger|))
           (|nx| (|Union| (|Integer|) "failed"))
           (|st| (|Stream| (|Record| (|:| |k| (|Integer|)) (|:| |c| |Coef|)))))
          (SEQ (LETT |st| (SPADCALL |uls| (QREFELT % 136)))
@@ -378,33 +378,11 @@
 
 (DECLAIM (NOTINLINE |SparseUnivariateLaurentSeries;|)) 
 
-(DEFUN |SparseUnivariateLaurentSeries| (&REST #1=#:G211)
-  (SPROG NIL
-         (PROG (#2=#:G212)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T NIL NIL))
-                     (HGET |$ConstructorCache|
-                           '|SparseUnivariateLaurentSeries|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |SparseUnivariateLaurentSeries;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|SparseUnivariateLaurentSeries|)))))))))) 
-
 (DEFUN |SparseUnivariateLaurentSeries;| (|#1| |#2| |#3|)
   (SPROG
-   ((#1=#:G210 NIL) (|pv$| NIL) (#2=#:G199 NIL) (#3=#:G200 NIL) (#4=#:G202 NIL)
-    (#5=#:G203 NIL) (#6=#:G204 NIL) (#7=#:G205 NIL) (#8=#:G206 NIL)
-    (#9=#:G208 NIL) (#10=#:G209 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL)
+   ((#1=#:G176 NIL) (|pv$| NIL) (#2=#:G165 NIL) (#3=#:G166 NIL) (#4=#:G168 NIL)
+    (#5=#:G169 NIL) (#6=#:G170 NIL) (#7=#:G171 NIL) (#8=#:G172 NIL)
+    (#9=#:G174 NIL) (#10=#:G175 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -1004,6 +982,28 @@
          (QSETREFV % 128 (CONS (|dispatchFunction| |SULS;^;%F%;55|) %)))
         ('T (QSETREFV % 128 (CONS (|dispatchFunction| |SULS;^;%F%;56|) %)))))))
     %))) 
+
+(DEFUN |SparseUnivariateLaurentSeries| (&REST #1=#:G177)
+  (SPROG NIL
+         (PROG (#2=#:G178)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T NIL NIL))
+                     (HGET |$ConstructorCache|
+                           '|SparseUnivariateLaurentSeries|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |SparseUnivariateLaurentSeries;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|SparseUnivariateLaurentSeries|)))))))))) 
 
 (MAKEPROP '|SparseUnivariateLaurentSeries| '|infovec|
           (LIST

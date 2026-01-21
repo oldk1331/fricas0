@@ -8,26 +8,8 @@
 
 (DECLAIM (NOTINLINE |DecimalExpansion;|)) 
 
-(DEFUN |DecimalExpansion| ()
-  (SPROG NIL
-         (PROG (#1=#:G69)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|DecimalExpansion|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|DecimalExpansion|
-                             (LIST (CONS NIL (CONS 1 (|DecimalExpansion;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#)
-                  (HREM |$ConstructorCache| '|DecimalExpansion|)))))))))) 
-
 (DEFUN |DecimalExpansion;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (#1=#:G67 NIL) (|pv$| NIL))
+  (SPROG ((|dv$| NIL) (% NIL) (#1=#:G34 NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|DecimalExpansion|))
           (LETT % (GETREFV 53))
@@ -123,6 +105,24 @@
            (|augmentPredVector| % 67108864))
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |DecimalExpansion| ()
+  (SPROG NIL
+         (PROG (#1=#:G36)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|DecimalExpansion|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|DecimalExpansion|
+                             (LIST (CONS NIL (CONS 1 (|DecimalExpansion;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#)
+                  (HREM |$ConstructorCache| '|DecimalExpansion|)))))))))) 
 
 (MAKEPROP '|DecimalExpansion| '|infovec|
           (LIST

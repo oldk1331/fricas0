@@ -15,7 +15,7 @@
 
 (SDEFUN |HOAGG-;any?;MAB;3|
         ((|f| (|Mapping| (|Boolean|) S)) (|c| (A)) (% (|Boolean|)))
-        (SPROG ((#1=#:G36 NIL) (#2=#:G37 NIL) (|x| NIL))
+        (SPROG ((#1=#:G21 NIL) (#2=#:G22 NIL) (|x| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -28,14 +28,14 @@
                         (EXIT
                          (COND
                           ((SPADCALL |x| |f|)
-                           (PROGN (LETT #1# 'T) (GO #3=#:G35))))))
+                           (PROGN (LETT #1# 'T) (GO #3=#:G20))))))
                        (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                   (EXIT NIL)))
                 #3# (EXIT #1#)))) 
 
 (SDEFUN |HOAGG-;every?;MAB;4|
         ((|f| (|Mapping| (|Boolean|) S)) (|c| (A)) (% (|Boolean|)))
-        (SPROG ((#1=#:G43 NIL) (#2=#:G44 NIL) (|x| NIL))
+        (SPROG ((#1=#:G28 NIL) (#2=#:G29 NIL) (|x| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -48,7 +48,7 @@
                         (EXIT
                          (COND
                           ((NULL (SPADCALL |x| |f|))
-                           (PROGN (LETT #1# NIL) (GO #3=#:G42))))))
+                           (PROGN (LETT #1# NIL) (GO #3=#:G27))))))
                        (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                   (EXIT 'T)))
                 #3# (EXIT #1#)))) 
@@ -56,8 +56,8 @@
 (SDEFUN |HOAGG-;count;MANni;5|
         ((|f| (|Mapping| (|Boolean|) S)) (|c| (A)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((#1=#:G46 NIL) (#2=#:G45 #3=(|NonNegativeInteger|)) (#4=#:G47 #3#)
-          (#5=#:G49 NIL) (|x| NIL))
+         ((#1=#:G31 NIL) (#2=#:G30 #3=(|NonNegativeInteger|)) (#4=#:G32 #3#)
+          (#5=#:G34 NIL) (|x| NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -80,7 +80,7 @@
 
 (SDEFUN |HOAGG-;max;MAS;7|
         ((|p| (|Mapping| (|Boolean|) S S)) (|u| (A)) (% (S)))
-        (SPROG ((|r| (S)) (#1=#:G58 NIL) (|x| NIL) (|l| (|List| S)))
+        (SPROG ((|r| (S)) (#1=#:G43 NIL) (|x| NIL) (|l| (|List| S)))
                (SEQ
                 (COND
                  ((SPADCALL |u| (QREFELT % 23)) (|error| "empty aggregate"))
@@ -131,7 +131,7 @@
 
 (SDEFUN |HOAGG-;=;2AB;12| ((|x| (A)) (|y| (A)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G71 NIL) (#2=#:G72 NIL) (|a| NIL) (#3=#:G73 NIL) (|b| NIL))
+         ((#1=#:G56 NIL) (#2=#:G57 NIL) (|a| NIL) (#3=#:G58 NIL) (|b| NIL))
          (SEQ
           (EXIT
            (COND
@@ -149,14 +149,14 @@
                     (EXIT
                      (COND
                       ((SPADCALL |a| |b| (QREFELT % 37))
-                       (PROGN (LETT #1# NIL) (GO #4=#:G70))))))
+                       (PROGN (LETT #1# NIL) (GO #4=#:G55))))))
                    (LETT #2# (PROG1 (CDR #2#) (LETT #3# (CDR #3#)))) (GO G190)
                    G191 (EXIT NIL))
               (EXIT 'T)))))
           #4# (EXIT #1#)))) 
 
 (SDEFUN |HOAGG-;coerce;AOf;13| ((|x| (A)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G78 NIL) (|a| NIL) (#2=#:G77 NIL))
+        (SPROG ((#1=#:G63 NIL) (|a| NIL) (#2=#:G62 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN

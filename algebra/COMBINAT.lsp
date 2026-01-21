@@ -1,8 +1,8 @@
 
 (SDEFUN |COMBINAT;partition;2I;1| ((|n| (I)) (% (I)))
         (SPROG
-         ((|s| (I)) (|t| (I)) (#1=#:G42 NIL) (|u| (|Integer|))
-          (|l| (|Integer|)) (|k| NIL) (#2=#:G43 NIL) (|i| NIL) (#3=#:G22 NIL)
+         ((|s| (I)) (|t| (I)) (#1=#:G29 NIL) (|u| (|Integer|))
+          (|l| (|Integer|)) (|k| NIL) (#2=#:G30 NIL) (|i| NIL) (#3=#:G16 NIL)
           (|m| (|NonNegativeInteger|)))
          (SEQ
           (COND
@@ -52,7 +52,7 @@
                                          ((> |l| |i|)
                                           (PROGN
                                            (LETT #1# |$NoValue|)
-                                           (GO #5=#:G35)))
+                                           (GO #5=#:G22)))
                                          ('T
                                           (SEQ (LETT |u| (+ |l| |k|))
                                                (LETT |t|
@@ -113,10 +113,10 @@
 
 (SDEFUN |COMBINAT;distinct_partition;2I;2| ((|n| (I)) (% (I)))
         (SPROG
-         ((|s| (I)) (|t| (I)) (#1=#:G57 NIL) (|u| (|Integer|))
-          (|l| (|Integer|)) (|l1| (|Integer|)) (|k| NIL) (#2=#:G58 NIL)
+         ((|s| (I)) (|t| (I)) (#1=#:G44 NIL) (|u| (|Integer|))
+          (|l| (|Integer|)) (|l1| (|Integer|)) (|k| NIL) (#2=#:G45 NIL)
           (|i| NIL) (Q (|IndexedOneDimensionalArray| I (|Zero|)))
-          (#3=#:G44 NIL) (|nz| (|Integer|)))
+          (#3=#:G31 NIL) (|nz| (|Integer|)))
          (SEQ (LETT |nz| (SPADCALL |n| (QREFELT % 26)))
               (EXIT
                (COND
@@ -154,7 +154,7 @@
                                           ((> |l| |i|)
                                            (PROGN
                                             (LETT #1# |$NoValue|)
-                                            (GO #4=#:G51)))
+                                            (GO #4=#:G38)))
                                           ('T
                                            (SEQ (LETT |u| (+ |l| |k|))
                                                 (LETT |t|
@@ -209,7 +209,7 @@
 
 (SDEFUN |COMBINAT;factorial;2I;3| ((|n| (I)) (% (I)))
         (SPROG
-         ((|f| (I)) (|t| (I)) (#1=#:G66 NIL) (|k| NIL) (|s| (I))
+         ((|f| (I)) (|t| (I)) (#1=#:G53 NIL) (|k| NIL) (|s| (I))
           (|#G10| (|Record| (|:| |Fn| I) (|:| |Fv| I))))
          (SEQ
           (COND
@@ -250,8 +250,8 @@
 
 (SDEFUN |COMBINAT;binomial;3I;4| ((|n| (I)) (|m| (I)) (% (I)))
         (SPROG
-         ((|b| (I)) (#1=#:G79 NIL) (|k| NIL) (|s| (I)) (|#G20| (I))
-          (|#G19| (I)) (#2=#:G78 NIL) (|#G18| (I)) (|#G17| (I)))
+         ((|b| (I)) (#1=#:G66 NIL) (|k| NIL) (|s| (I)) (|#G20| (I))
+          (|#G19| (I)) (#2=#:G65 NIL) (|#G18| (I)) (|#G17| (I)))
          (SEQ
           (EXIT
            (COND
@@ -293,7 +293,7 @@
                      (EXIT
                       (PROGN
                        (LETT #2# (QSETVELT (QREFELT % 10) 2 |b|))
-                       (GO #4=#:G77)))))
+                       (GO #4=#:G64)))))
                    ((SPADCALL |m| (QVELT (QREFELT % 10) 1) (QREFELT % 48))
                     (SEQ (LETT |s| (QVELT (QREFELT % 10) 1))
                          (EXIT (LETT |b| (QVELT (QREFELT % 10) 2)))))
@@ -329,9 +329,9 @@
 
 (SDEFUN |COMBINAT;multinomial;ILI;5| ((|n| (I)) (|m| (|List| I)) (% (I)))
         (SPROG
-         ((|s| (I)) (#1=#:G98 NIL) (|t| NIL) (#2=#:G87 NIL) (#3=#:G86 (I))
-          (#4=#:G88 (I)) (#5=#:G97 NIL) (#6=#:G1 NIL) (#7=#:G94 NIL)
-          (#8=#:G95 NIL) (#9=#:G96 NIL))
+         ((|s| (I)) (#1=#:G81 NIL) (|t| NIL) (#2=#:G70 NIL) (#3=#:G69 (I))
+          (#4=#:G71 (I)) (#5=#:G80 NIL) (#6=#:G0 NIL) (#7=#:G77 NIL)
+          (#8=#:G78 NIL) (#9=#:G79 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -349,8 +349,8 @@
                         (LETT #7#
                               (PROGN
                                (LETT #8# (|spadConstant| % 7))
-                               (GO #10=#:G93)))
-                        (GO #11=#:G85))))))
+                               (GO #10=#:G76)))
+                        (GO #11=#:G68))))))
                    (LETT #9# (CDR #9#)) (GO G190) G191 (EXIT NIL)))
              #11# (EXIT #7#))
             (EXIT
@@ -395,7 +395,7 @@
           #10# (EXIT #8#)))) 
 
 (SDEFUN |COMBINAT;permutation;3I;6| ((|n| (I)) (|m| (I)) (% (I)))
-        (SPROG ((|p| (I)) (|t| (I)) (#1=#:G104 NIL) (|k| NIL))
+        (SPROG ((|p| (I)) (|t| (I)) (#1=#:G87 NIL) (|k| NIL))
                (SEQ
                 (COND
                  ((OR (SPADCALL |m| (|spadConstant| % 7) (QREFELT % 24))
@@ -426,8 +426,8 @@
 
 (SDEFUN |COMBINAT;stirling1;3I;7| ((|n| (I)) (|m| (I)) (% (I)))
         (SPROG
-         ((#1=#:G108 NIL) (#2=#:G113 NIL) (|k| NIL)
-          (|x| (|SparseUnivariatePolynomial| I)) (#3=#:G105 NIL))
+         ((#1=#:G91 NIL) (#2=#:G96 NIL) (|k| NIL)
+          (|x| (|SparseUnivariatePolynomial| I)) (#3=#:G88 NIL))
          (SEQ
           (COND
            ((OR
@@ -478,7 +478,7 @@
                                (QREFELT % 52))))))))))) 
 
 (SDEFUN |COMBINAT;stirling2;3I;8| ((|n| (I)) (|m| (I)) (% (I)))
-        (SPROG ((|t| (I)) (#1=#:G117 NIL) (|s| (I)) (#2=#:G122 NIL) (|k| NIL))
+        (SPROG ((|t| (I)) (#1=#:G100 NIL) (|s| (I)) (#2=#:G105 NIL) (|k| NIL))
                (SEQ
                 (COND
                  ((OR
@@ -533,7 +533,7 @@
                               (QREFELT % 47))))))))) 
 
 (SDEFUN |COMBINAT;catalan;2I;9| ((|n| (I)) (% (I)))
-        (SPROG ((#1=#:G124 NIL))
+        (SPROG ((#1=#:G107 NIL))
                (PROG2
                    (LETT #1#
                          (SPADCALL
@@ -546,25 +546,6 @@
                                  (|Union| (QREFELT % 6) "failed") #1#)))) 
 
 (DECLAIM (NOTINLINE |IntegerCombinatoricFunctions;|)) 
-
-(DEFUN |IntegerCombinatoricFunctions| (#1=#:G127)
-  (SPROG NIL
-         (PROG (#2=#:G128)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|IntegerCombinatoricFunctions|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|IntegerCombinatoricFunctions;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|IntegerCombinatoricFunctions|)))))))))) 
 
 (DEFUN |IntegerCombinatoricFunctions;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
@@ -586,6 +567,25 @@
           (QSETREFV % 13 (CONS (|spadConstant| % 7) (|spadConstant| % 12)))
           (QSETREFV % 18 (SPADCALL 1 (|spadConstant| % 8) (QREFELT % 17)))
           %))) 
+
+(DEFUN |IntegerCombinatoricFunctions| (#1=#:G110)
+  (SPROG NIL
+         (PROG (#2=#:G111)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|IntegerCombinatoricFunctions|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|IntegerCombinatoricFunctions;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|IntegerCombinatoricFunctions|)))))))))) 
 
 (MAKEPROP '|IntegerCombinatoricFunctions| '|infovec|
           (LIST

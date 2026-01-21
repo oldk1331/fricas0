@@ -1,7 +1,7 @@
 
 (SDEFUN |POLVECF;degree;PaI;1| ((|v| (|PrimitiveArray| K)) (% (|Integer|)))
         (SPROG
-         ((#1=#:G15 NIL) (#2=#:G16 NIL) (|i| NIL) (|n| (|NonNegativeInteger|)))
+         ((#1=#:G8 NIL) (#2=#:G9 NIL) (|i| NIL) (|n| (|NonNegativeInteger|)))
          (SEQ
           (EXIT
            (SEQ (LETT |n| (QVSIZE |v|))
@@ -15,8 +15,8 @@
                             (SPADCALL (QAREF1 |v| |i|) (|spadConstant| % 8)
                                       (QREFELT % 10)))
                            (PROGN
-                            (LETT #1# (PROGN (LETT #2# |i|) (GO #3=#:G14)))
-                            (GO #4=#:G12))))))
+                            (LETT #1# (PROGN (LETT #2# |i|) (GO #3=#:G7)))
+                            (GO #4=#:G5))))))
                        (LETT |i| (+ |i| -1)) (GO G190) G191 (EXIT NIL)))
                  #4# (EXIT #1#))
                 (EXIT -1)))
@@ -47,7 +47,7 @@
 (SDEFUN |POLVECF;pa_to_sup;PaSup;3|
         ((|v| (|PrimitiveArray| K)) (% (|SparseUnivariatePolynomial| K)))
         (SPROG
-         ((|res| (|SparseUnivariatePolynomial| K)) (#1=#:G29 NIL) (|i| NIL)
+         ((|res| (|SparseUnivariatePolynomial| K)) (#1=#:G21 NIL) (|i| NIL)
           (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (QVSIZE |v|)) (LETT |res| (|spadConstant| % 22))
               (SEQ (LETT |i| 0) (LETT #1# (- |n| 1)) G190
@@ -63,9 +63,24 @@
 
 (DECLAIM (NOTINLINE |VectorPolynomialOperationsF;|)) 
 
-(DEFUN |VectorPolynomialOperationsF| (#1=#:G30)
+(DEFUN |VectorPolynomialOperationsF;| (|#1|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT |dv$| (LIST '|VectorPolynomialOperationsF| DV$1))
+          (LETT % (GETREFV 26))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|VectorPolynomialOperationsF|
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |VectorPolynomialOperationsF| (#1=#:G22)
   (SPROG NIL
-         (PROG (#2=#:G31)
+         (PROG (#2=#:G23)
            (RETURN
             (COND
              ((LETT #2#
@@ -81,21 +96,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|VectorPolynomialOperationsF|)))))))))) 
-
-(DEFUN |VectorPolynomialOperationsF;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT |dv$| (LIST '|VectorPolynomialOperationsF| DV$1))
-          (LETT % (GETREFV 26))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|VectorPolynomialOperationsF|
-                      (LIST DV$1) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|VectorPolynomialOperationsF| '|infovec|
           (LIST

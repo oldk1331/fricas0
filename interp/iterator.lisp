@@ -204,7 +204,6 @@
 ;             -- then we've boobed. JHD 26.July.1990
 ;           $NoValueMode
 ;         [body',m',e']:=
-;           -- (m1:= listOrVectorElementMode targetMode) and comp(body,m1,e) or
 ;             comp(body, bodyMode, e) or return nil
 ;         if $iterate_count > 0 then
 ;             body' := ['CATCH, first($iterate_tag), body']
@@ -821,7 +820,6 @@
 
 ; modeIsAggregateOf(ListOrVector,m,e) ==
 ;   m is [ =ListOrVector,R] => [m,R]
-; --m = '$EmptyMode => [m,m] I don't think this is correct, breaks POLY +
 ;   m is ["Union",:l] =>
 ;     mList:= [pair for m' in l | (pair:= modeIsAggregateOf(ListOrVector,m',e))]
 ;     1=#mList => first mList

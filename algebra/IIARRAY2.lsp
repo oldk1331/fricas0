@@ -67,7 +67,7 @@
 
 (SDEFUN |IIARRAY2;hashUpdate!;Hs%Hs;14|
         ((|s| (|HashState|)) (|m| (%)) (% (|HashState|)))
-        (SPROG ((#1=#:G2299 NIL) (|j| NIL) (#2=#:G2298 NIL) (|i| NIL))
+        (SPROG ((#1=#:G2216 NIL) (|j| NIL) (#2=#:G2215 NIL) (|i| NIL))
                (SEQ
                 (SEQ (LETT |i| (SPADCALL |m| (QREFELT % 16)))
                      (LETT #2# (SPADCALL |m| (QREFELT % 19))) G190
@@ -90,32 +90,9 @@
 
 (DECLAIM (NOTINLINE |InnerIndexedTwoDimensionalArray;|)) 
 
-(DEFUN |InnerIndexedTwoDimensionalArray| (&REST #1=#:G2307)
-  (SPROG NIL
-         (PROG (#2=#:G2308)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T NIL NIL T T))
-                     (HGET |$ConstructorCache|
-                           '|InnerIndexedTwoDimensionalArray|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |InnerIndexedTwoDimensionalArray;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|InnerIndexedTwoDimensionalArray|)))))))))) 
-
 (DEFUN |InnerIndexedTwoDimensionalArray;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G2304 NIL) (#2=#:G2305 NIL) (% NIL) (|dv$| NIL)
+   ((|pv$| NIL) (#1=#:G2221 NIL) (#2=#:G2222 NIL) (% NIL) (|dv$| NIL)
     (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -202,6 +179,29 @@
                 (CONS (|dispatchFunction| |IIARRAY2;hashUpdate!;Hs%Hs;14|)
                       %))))
     %))) 
+
+(DEFUN |InnerIndexedTwoDimensionalArray| (&REST #1=#:G2224)
+  (SPROG NIL
+         (PROG (#2=#:G2225)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T NIL NIL T T))
+                     (HGET |$ConstructorCache|
+                           '|InnerIndexedTwoDimensionalArray|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |InnerIndexedTwoDimensionalArray;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|InnerIndexedTwoDimensionalArray|)))))))))) 
 
 (MAKEPROP '|InnerIndexedTwoDimensionalArray| '|infovec|
           (LIST

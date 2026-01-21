@@ -216,14 +216,14 @@
                           (|List| (|Record| (|:| |real| F) (|:| |imag| F)))))
            "failed")))
         (SPROG
-         ((#1=#:G142 NIL) (|su| (|Union| (|Integer|) "failed")) (|t2| (F))
+         ((#1=#:G101 NIL) (|su| (|Union| (|Integer|) "failed")) (|t2| (F))
           (|t1| (F)) (|del| (F)) (|b2| (F)) (|a2| (F)) (|s1| (|Integer|))
           (|r1| (F)) (|f2| #2=(|SparseUnivariatePolynomial| F))
           (|f1| #3=(|SparseUnivariatePolynomial| F))
           (|#G29| (|SparseUnivariatePolynomial| F)) (|#G28| #2#)
-          (#4=#:G141 NIL) (|cnt| (|Integer|)) (|cc| (F)) (#5=#:G145 NIL)
-          (|flf| (|List| (|SparseUnivariatePolynomial| F))) (#6=#:G144 NIL)
-          (|i| NIL) (#7=#:G143 NIL) (|fac| NIL)
+          (#4=#:G100 NIL) (|cnt| (|Integer|)) (|cc| (F)) (#5=#:G104 NIL)
+          (|flf| (|List| (|SparseUnivariatePolynomial| F))) (#6=#:G103 NIL)
+          (|i| NIL) (#7=#:G102 NIL) (|fac| NIL)
           (|fl|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
@@ -300,7 +300,7 @@
                                        ((QEQCAR |su| 1)
                                         (PROGN
                                          (LETT #1# (CONS 1 "failed"))
-                                         (GO #8=#:G140)))
+                                         (GO #8=#:G99)))
                                        ((< (QCDR |su|) 0)
                                         (SEQ (LETT |cnt| (+ |cnt| 1))
                                              (EXIT
@@ -308,7 +308,7 @@
                                                ((> |cnt| 1)
                                                 (PROGN
                                                  (LETT #4# |$NoValue|)
-                                                 (GO #9=#:G111)))
+                                                 (GO #9=#:G72)))
                                                ('T (LETT |r1| |cc|))))))))))
                                    #9# (EXIT #4#))
                                   (LETT #5# (CDR #5#)) (GO G190) G191
@@ -623,7 +623,7 @@
         (SPROG
          ((|cl| (|List| (|Record| (|:| |real| F) (|:| |imag| F))))
           (|cp| (|Record| (|:| |real| F) (|:| |imag| F))) (|rl| (|List| F))
-          (#1=#:G182 NIL) (|r| NIL)
+          (#1=#:G141 NIL) (|r| NIL)
           (|r1|
            (|Record| (|:| |reals| (|List| F))
                      (|:| |complexes|
@@ -690,7 +690,7 @@
                           (|List| (|Record| (|:| |real| F) (|:| |imag| F)))))
            "failed")))
         (SPROG
-         ((#1=#:G205 NIL) (|r3| (F)) (|r2| (F))
+         ((#1=#:G164 NIL) (|r3| (F)) (|r2| (F))
           (|su| (|Union| (|Integer|) "failed")) (|x2| (F)) (|x1| (F))
           (|r1| (F)) (|si| (|Integer|)) (|del| (F)) (|c| (F)) (|b| (F))
           (|a| (F)) (|rp| (|SparseUnivariatePolynomial| F)) (|a0| (F))
@@ -985,7 +985,7 @@
                                                                            %
                                                                            52)))
                                                                         NIL)))))))))))))))))
-                                             (GO #3=#:G198))))))
+                                             (GO #3=#:G157))))))
                                     (EXIT (SPADCALL |p| |a0| (QREFELT % 67)))))
                                   #3# (EXIT #1#)))))))
                    (#2# (SPADCALL |p| |a0| (QREFELT % 67))))))))))) 
@@ -1009,7 +1009,7 @@
         ((|p| (|SparseUnivariatePolynomial| F))
          (% (|Union| (|List| F) "failed")))
         (SPROG
-         ((|res| (|List| F)) (#1=#:G220 NIL) (|c1| NIL)
+         ((|res| (|List| F)) (#1=#:G179 NIL) (|c1| NIL)
           (|r1|
            (|Record| (|:| |reals| (|List| F))
                      (|:| |complexes|
@@ -1054,24 +1054,6 @@
 
 (DECLAIM (NOTINLINE |RootUtilities;|)) 
 
-(DEFUN |RootUtilities| (&REST #1=#:G221)
-  (SPROG NIL
-         (PROG (#2=#:G222)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|RootUtilities|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |RootUtilities;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|RootUtilities|)))))))))) 
-
 (DEFUN |RootUtilities;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -1111,6 +1093,24 @@
                        (CONS (|dispatchFunction| |ROOTUT;my_root3;2F;11|)
                              %)))))
           %))) 
+
+(DEFUN |RootUtilities| (&REST #1=#:G180)
+  (SPROG NIL
+         (PROG (#2=#:G181)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|RootUtilities|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |RootUtilities;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|RootUtilities|)))))))))) 
 
 (MAKEPROP '|RootUtilities| '|infovec|
           (LIST

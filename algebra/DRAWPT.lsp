@@ -13,7 +13,7 @@
         ((|lx| (|List| (|DoubleFloat|))) (|ly| (|List| (|DoubleFloat|)))
          (|l| (|List| (|DrawOption|))) (% (|TwoDimensionalViewport|)))
         (SPROG
-         ((#1=#:G18 NIL) (|x| NIL) (#2=#:G19 NIL) (|y| NIL) (#3=#:G17 NIL))
+         ((#1=#:G10 NIL) (|x| NIL) (#2=#:G11 NIL) (|y| NIL) (#3=#:G9 NIL))
          (SEQ
           (SPADCALL
            (PROGN
@@ -144,9 +144,22 @@
 
 (DECLAIM (NOTINLINE |TopLevelDrawFunctionsForPoints;|)) 
 
+(DEFUN |TopLevelDrawFunctionsForPoints;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|TopLevelDrawFunctionsForPoints|))
+          (LETT % (GETREFV 31))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|TopLevelDrawFunctionsForPoints| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |TopLevelDrawFunctionsForPoints| ()
   (SPROG NIL
-         (PROG (#1=#:G54)
+         (PROG (#1=#:G27)
            (RETURN
             (COND
              ((LETT #1#
@@ -168,19 +181,6 @@
                  ((NOT #1#)
                   (HREM |$ConstructorCache|
                         '|TopLevelDrawFunctionsForPoints|)))))))))) 
-
-(DEFUN |TopLevelDrawFunctionsForPoints;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|TopLevelDrawFunctionsForPoints|))
-          (LETT % (GETREFV 31))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|TopLevelDrawFunctionsForPoints| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|TopLevelDrawFunctionsForPoints| '|infovec|
           (LIST

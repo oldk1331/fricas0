@@ -41,28 +41,6 @@
 
 (DECLAIM (NOTINLINE |GeneralizedMultivariateFactorize;|)) 
 
-(DEFUN |GeneralizedMultivariateFactorize| (&REST #1=#:G20)
-  (SPROG NIL
-         (PROG (#2=#:G21)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|GeneralizedMultivariateFactorize|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |GeneralizedMultivariateFactorize;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|GeneralizedMultivariateFactorize|)))))))))) 
-
 (DEFUN |GeneralizedMultivariateFactorize;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -88,6 +66,28 @@
     (QSETREFV % 10 |#5|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |GeneralizedMultivariateFactorize| (&REST #1=#:G3)
+  (SPROG NIL
+         (PROG (#2=#:G4)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|GeneralizedMultivariateFactorize|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |GeneralizedMultivariateFactorize;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|GeneralizedMultivariateFactorize|)))))))))) 
 
 (MAKEPROP '|GeneralizedMultivariateFactorize| '|infovec|
           (LIST

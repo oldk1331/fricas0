@@ -32,16 +32,16 @@
 
 (SDEFUN |MPCPF;factor;PPRF;2| ((|p| (PPR)) (% (|Factored| PPR)))
         (SPROG
-         ((#1=#:G48 NIL) (#2=#:G47 #3=(|Factored| PPR)) (#4=#:G49 #3#)
-          (#5=#:G59 NIL) (|ff| NIL) (|fcont| (PPR))
+         ((#1=#:G26 NIL) (#2=#:G25 #3=(|Factored| PPR)) (#4=#:G27 #3#)
+          (#5=#:G37 NIL) (|ff| NIL) (|fcont| (PPR))
           (|ffact|
            (|List|
             (|Record| (|:| |irr| PPR) (|:| |pow| (|NonNegativeInteger|)))))
-          (#6=#:G58 NIL) (|u| NIL) (#7=#:G57 NIL)
+          (#6=#:G36 NIL) (|u| NIL) (#7=#:G35 NIL)
           (|flist| (|Factored| (|Polynomial| R))) (|g| (|Polynomial| R))
-          (|nvals| (|List| (|Polynomial| R))) (#8=#:G56 NIL) (|nv| NIL)
-          (#9=#:G55 NIL) (|nvars| (|List| (|Symbol|))) (#10=#:G54 NIL)
-          (|v| NIL) (#11=#:G53 NIL) (|vars| (|List| OV)) (#12=#:G31 NIL)
+          (|nvals| (|List| (|Polynomial| R))) (#8=#:G34 NIL) (|nv| NIL)
+          (#9=#:G33 NIL) (|nvars| (|List| (|Symbol|))) (#10=#:G32 NIL)
+          (|v| NIL) (#11=#:G31 NIL) (|vars| (|List| OV)) (#12=#:G9 NIL)
           (|c| (|Polynomial| R)))
          (SEQ
           (COND ((SPADCALL |p| (QREFELT % 27)) (SPADCALL |p| 1 (QREFELT % 32)))
@@ -144,25 +144,6 @@
 
 (DECLAIM (NOTINLINE |MPolyCatPolyFactorizer;|)) 
 
-(DEFUN |MPolyCatPolyFactorizer| (&REST #1=#:G60)
-  (SPROG NIL
-         (PROG (#2=#:G61)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|MPolyCatPolyFactorizer|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |MPolyCatPolyFactorizer;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|MPolyCatPolyFactorizer|)))))))))) 
-
 (DEFUN |MPolyCatPolyFactorizer;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -185,6 +166,25 @@
     (QSETREFV % 9 |#4|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |MPolyCatPolyFactorizer| (&REST #1=#:G38)
+  (SPROG NIL
+         (PROG (#2=#:G39)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|MPolyCatPolyFactorizer|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |MPolyCatPolyFactorizer;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|MPolyCatPolyFactorizer|)))))))))) 
 
 (MAKEPROP '|MPolyCatPolyFactorizer| '|infovec|
           (LIST

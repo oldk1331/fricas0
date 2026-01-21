@@ -1,22 +1,22 @@
 
 (SDEFUN |NORMRETR;normFactors;ExtPL;1| ((|p| (|ExtP|)) (% (|List| |ExtP|)))
-        (SPROG
-         ((|facs| (|List| |ExtP|)) (#1=#:G18 NIL) (#2=#:G19 NIL) (|i| NIL))
-         (SEQ
-          (EXIT
-           (SEQ (LETT |facs| (LIST |p|))
-                (SEQ (LETT |i| 1) (LETT #2# (- (QREFELT % 10) 1)) G190
-                     (COND ((|greater_SI| |i| #2#) (GO G191)))
-                     (SEQ
-                      (EXIT
-                       (COND
-                        ((SPADCALL (LETT |p| (SPADCALL |p| (QREFELT % 11)))
-                                   |facs| (QREFELT % 14))
-                         (PROGN (LETT #1# |facs|) (GO #3=#:G17)))
-                        ('T (LETT |facs| (CONS |p| |facs|))))))
-                     (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
-                (EXIT |facs|)))
-          #3# (EXIT #1#)))) 
+        (SPROG ((|facs| (|List| |ExtP|)) (#1=#:G6 NIL) (#2=#:G7 NIL) (|i| NIL))
+               (SEQ
+                (EXIT
+                 (SEQ (LETT |facs| (LIST |p|))
+                      (SEQ (LETT |i| 1) (LETT #2# (- (QREFELT % 10) 1)) G190
+                           (COND ((|greater_SI| |i| #2#) (GO G191)))
+                           (SEQ
+                            (EXIT
+                             (COND
+                              ((SPADCALL
+                                (LETT |p| (SPADCALL |p| (QREFELT % 11))) |facs|
+                                (QREFELT % 14))
+                               (PROGN (LETT #1# |facs|) (GO #3=#:G5)))
+                              ('T (LETT |facs| (CONS |p| |facs|))))))
+                           (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
+                      (EXIT |facs|)))
+                #3# (EXIT #1#)))) 
 
 (SDEFUN |NORMRETR;Frobenius;2ExtP;2| ((|ff| (|ExtP|)) (% (|ExtP|)))
         (SPROG ((|fft| (|ExtP|)))
@@ -52,7 +52,7 @@
          ((|fft|
            (|SparseUnivariatePolynomial| (|SparseUnivariatePolynomial| F)))
           (|lc| (|SUEx|)) (|plc| (|SparseUnivariatePolynomial| F))
-          (#1=#:G45 NIL) (|retlc| (|Union| F "failed")) (|lclc| (|ExtF|)))
+          (#1=#:G32 NIL) (|retlc| (|Union| F "failed")) (|lclc| (|ExtF|)))
          (SEQ
           (EXIT
            (SEQ (LETT |fft| (|spadConstant| % 28))
@@ -77,7 +77,7 @@
                                   ((QEQCAR |retlc| 1)
                                    (PROGN
                                     (LETT #1# (CONS 1 "failed"))
-                                    (GO #2=#:G44)))
+                                    (GO #2=#:G31)))
                                   ('T
                                    (SEQ
                                     (LETT |plc|
@@ -107,25 +107,6 @@
 
 (DECLAIM (NOTINLINE |NormRetractPackage;|)) 
 
-(DEFUN |NormRetractPackage| (&REST #1=#:G46)
-  (SPROG NIL
-         (PROG (#2=#:G47)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T T T T NIL))
-                     (HGET |$ConstructorCache| '|NormRetractPackage|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |NormRetractPackage;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|NormRetractPackage|)))))))))) 
-
 (DEFUN |NormRetractPackage;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -150,6 +131,25 @@
     (QSETREFV % 10 |#5|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |NormRetractPackage| (&REST #1=#:G33)
+  (SPROG NIL
+         (PROG (#2=#:G34)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T T T T NIL))
+                     (HGET |$ConstructorCache| '|NormRetractPackage|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |NormRetractPackage;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|NormRetractPackage|)))))))))) 
 
 (MAKEPROP '|NormRetractPackage| '|infovec|
           (LIST

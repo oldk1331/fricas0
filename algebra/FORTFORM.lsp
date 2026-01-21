@@ -39,9 +39,22 @@
 
 (DECLAIM (NOTINLINE |FortranFormat;|)) 
 
+(DEFUN |FortranFormat;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|FortranFormat|))
+          (LETT % (GETREFV 30))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|FortranFormat| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 6 (|OutputForm|))
+          %))) 
+
 (DEFUN |FortranFormat| ()
   (SPROG NIL
-         (PROG (#1=#:G31)
+         (PROG (#1=#:G16)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|FortranFormat|))
@@ -55,19 +68,6 @@
                     (LETT #1# T))
                 (COND
                  ((NOT #1#) (HREM |$ConstructorCache| '|FortranFormat|)))))))))) 
-
-(DEFUN |FortranFormat;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|FortranFormat|))
-          (LETT % (GETREFV 30))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|FortranFormat| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 6 (|OutputForm|))
-          %))) 
 
 (MAKEPROP '|FortranFormat| '|infovec|
           (LIST

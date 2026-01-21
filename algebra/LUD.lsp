@@ -5,10 +5,10 @@
           (|Record| (|:| LU (|Matrix| D)) (|:| |Perm| (|Vector| (|Integer|)))
                     (|:| |Pivots| (|List| D)))))
         (SPROG
-         ((#1=#:G48 NIL) (|k| NIL) (|d| (D)) (|Pivs| (|List| D))
-          (|i0| (|Integer|)) (|s| (D)) (#2=#:G47 NIL) (#3=#:G46 NIL) (|i| NIL)
-          (#4=#:G45 NIL) (#5=#:G44 NIL) (#6=#:G43 NIL) (|j| NIL)
-          (|PermV| (|Vector| (|Integer|))) (#7=#:G13 NIL) (|maxC| (|Integer|))
+         ((#1=#:G35 NIL) (|k| NIL) (|d| (D)) (|Pivs| (|List| D))
+          (|i0| (|Integer|)) (|s| (D)) (#2=#:G34 NIL) (#3=#:G33 NIL) (|i| NIL)
+          (#4=#:G32 NIL) (#5=#:G31 NIL) (#6=#:G30 NIL) (|j| NIL)
+          (|PermV| (|Vector| (|Integer|))) (#7=#:G7 NIL) (|maxC| (|Integer|))
           (|minC| (|Integer|)) (|maxR| (|Integer|)) (|minR| (|Integer|))
           (A (|Matrix| D)))
          (SEQ (LETT A (SPADCALL AA (QREFELT % 8))) (LETT |minR| (PROGN A 1))
@@ -114,8 +114,8 @@
         ((LU (|Matrix| D)) (|Perm| (|Vector| (|Integer|))) (XX (|Vector| D))
          (% (|Vector| D)))
         (SPROG
-         ((|s| (D)) (#1=#:G66 NIL) (|j| NIL) (#2=#:G65 NIL) (|i| NIL)
-          (|ii| (|Integer|)) (#3=#:G64 NIL) (|ip| (|Integer|)) (#4=#:G63 NIL)
+         ((|s| (D)) (#1=#:G53 NIL) (|j| NIL) (#2=#:G52 NIL) (|i| NIL)
+          (|ii| (|Integer|)) (#3=#:G51 NIL) (|ip| (|Integer|)) (#4=#:G50 NIL)
           (|maxR| (|Integer|)) (|minR| (|Integer|)) (X (|Vector| D)))
          (SEQ (LETT X (SPADCALL XX (QREFELT % 24))) (LETT |minR| (PROGN LU 1))
               (LETT |maxR| (SPADCALL LU (QREFELT % 10)))
@@ -180,7 +180,7 @@
         ((A (|Matrix| D))
          (% (|Record| (|:| |Inv| (|Matrix| D)) (|:| |Pivots| (|List| D)))))
         (SPROG
-         ((|res| (|Matrix| D)) (|v| (|Vector| D)) (#1=#:G75 NIL) (|i| NIL)
+         ((|res| (|Matrix| D)) (|v| (|Vector| D)) (#1=#:G62 NIL) (|i| NIL)
           (|n| (|NonNegativeInteger|))
           (|Alu|
            (|Record| (|:| LU (|Matrix| D)) (|:| |Perm| (|Vector| (|Integer|)))
@@ -204,23 +204,6 @@
 
 (DECLAIM (NOTINLINE |LUDecomposition;|)) 
 
-(DEFUN |LUDecomposition| (#1=#:G76)
-  (SPROG NIL
-         (PROG (#2=#:G77)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|LUDecomposition|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|LUDecomposition;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|LUDecomposition|)))))))))) 
-
 (DEFUN |LUDecomposition;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -235,6 +218,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |LUDecomposition| (#1=#:G63)
+  (SPROG NIL
+         (PROG (#2=#:G64)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|LUDecomposition|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|LUDecomposition;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|LUDecomposition|)))))))))) 
 
 (MAKEPROP '|LUDecomposition| '|infovec|
           (LIST

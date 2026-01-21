@@ -32,9 +32,23 @@
 
 (DECLAIM (NOTINLINE |GraphicsDefaults;|)) 
 
+(DEFUN |GraphicsDefaults;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|GraphicsDefaults|))
+          (LETT % (GETREFV 31))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|GraphicsDefaults| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 6 'T)
+          (QSETREFV % 7 NIL)
+          %))) 
+
 (DEFUN |GraphicsDefaults| ()
   (SPROG NIL
-         (PROG (#1=#:G17)
+         (PROG (#1=#:G13)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|GraphicsDefaults|))
@@ -49,20 +63,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|GraphicsDefaults|)))))))))) 
-
-(DEFUN |GraphicsDefaults;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|GraphicsDefaults|))
-          (LETT % (GETREFV 31))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|GraphicsDefaults| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 6 'T)
-          (QSETREFV % 7 NIL)
-          %))) 
 
 (MAKEPROP '|GraphicsDefaults| '|infovec|
           (LIST

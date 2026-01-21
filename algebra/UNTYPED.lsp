@@ -27,7 +27,7 @@
           (|r|
            (|Record| (|:| |rft| (|ILogic|))
                      (|:| |pout| (|NonNegativeInteger|))))
-          (|ch| (|Character|)) (#1=#:G26 NIL) (|vnm| (|String|)))
+          (|ch| (|Character|)) (#1=#:G19 NIL) (|vnm| (|String|)))
          (SEQ
           (EXIT
            (SEQ (LETT |vnm| "") (LETT |pt| |pin|)
@@ -41,7 +41,7 @@
                             (PROGN
                              (LETT #1#
                                    (CONS (SPADCALL |vnm| (QREFELT % 8)) |pt|))
-                             (GO #2=#:G25))))
+                             (GO #2=#:G18))))
                           (EXIT (LETT |ch| (STR_ELT1 |t1| |pt|))))
                      NIL (GO G190) G191 (EXIT NIL))
                 (COND
@@ -64,22 +64,6 @@
 
 (DECLAIM (NOTINLINE |Untyped;|)) 
 
-(DEFUN |Untyped| ()
-  (SPROG NIL
-         (PROG (#1=#:G34)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|Untyped|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|Untyped|
-                             (LIST (CONS NIL (CONS 1 (|Untyped;|))))))
-                    (LETT #1# T))
-                (COND ((NOT #1#) (HREM |$ConstructorCache| '|Untyped|)))))))))) 
-
 (DEFUN |Untyped;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -92,6 +76,22 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 6 (|Record| (|:| |nme| (|String|))))
           %))) 
+
+(DEFUN |Untyped| ()
+  (SPROG NIL
+         (PROG (#1=#:G27)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|Untyped|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|Untyped|
+                             (LIST (CONS NIL (CONS 1 (|Untyped;|))))))
+                    (LETT #1# T))
+                (COND ((NOT #1#) (HREM |$ConstructorCache| '|Untyped|)))))))))) 
 
 (MAKEPROP '|Untyped| '|infovec|
           (LIST

@@ -70,7 +70,7 @@
               ((EQL |n| 0) (|spadConstant| % 9)) ('T |x|))) 
 
 (SDEFUN |CARD;^;3%;12| ((|x| (%)) (|y| (%)) (% (%)))
-        (SPROG ((#1=#:G69 NIL))
+        (SPROG ((#1=#:G53 NIL))
                (COND
                 ((SPADCALL |y| (|spadConstant| % 9) (QREFELT % 25))
                  (|spadConstant| % 8))
@@ -98,7 +98,7 @@
 (SDEFUN |CARD;countable?;%B;14| ((|x| (%)) (% (|Boolean|))) (< (QCAR |x|) 1)) 
 
 (SDEFUN |CARD;retract;%Nni;15| ((|x| (%)) (% (|NonNegativeInteger|)))
-        (SPROG ((#1=#:G78 NIL))
+        (SPROG ((#1=#:G62 NIL))
                (COND
                 ((SPADCALL |x| (QREFELT % 24))
                  (PROG1 (LETT #1# (QCDR |x|))
@@ -108,7 +108,7 @@
 
 (SDEFUN |CARD;retractIfCan;%U;16|
         ((|x| (%)) (% (|Union| (|NonNegativeInteger|) "failed")))
-        (SPROG ((#1=#:G84 NIL))
+        (SPROG ((#1=#:G68 NIL))
                (COND
                 ((SPADCALL |x| (QREFELT % 24))
                  (CONS 0
@@ -124,24 +124,6 @@
         ((|b| (|Boolean|)) (% (|Boolean|))) (SETELT % 7 |b|)) 
 
 (DECLAIM (NOTINLINE |CardinalNumber;|)) 
-
-(DEFUN |CardinalNumber| ()
-  (SPROG NIL
-         (PROG (#1=#:G94)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|CardinalNumber|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|CardinalNumber|
-                             (LIST (CONS NIL (CONS 1 (|CardinalNumber;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#)
-                  (HREM |$ConstructorCache| '|CardinalNumber|)))))))))) 
 
 (DEFUN |CardinalNumber;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
@@ -159,6 +141,24 @@
           (QSETREFV % 7 NIL)
           (QSETREFV % 16 (SPADCALL '|Aleph| (QREFELT % 15)))
           %))) 
+
+(DEFUN |CardinalNumber| ()
+  (SPROG NIL
+         (PROG (#1=#:G77)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|CardinalNumber|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|CardinalNumber|
+                             (LIST (CONS NIL (CONS 1 (|CardinalNumber;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#)
+                  (HREM |$ConstructorCache| '|CardinalNumber|)))))))))) 
 
 (MAKEPROP '|CardinalNumber| '|infovec|
           (LIST

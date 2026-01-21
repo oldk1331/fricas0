@@ -8,9 +8,9 @@
 
 (SDEFUN |SQMATRIX;matrix;L%;4| ((|l| (|List| (|List| R))) (% (%)))
         (SPROG
-         ((#1=#:G35 NIL) (|j| NIL) (#2=#:G36 NIL) (|r| NIL) (#3=#:G33 NIL)
-          (|i| NIL) (#4=#:G34 NIL) (|ll| NIL) (|ans| (|Matrix| R))
-          (#5=#:G31 NIL) (#6=#:G32 NIL))
+         ((#1=#:G22 NIL) (|j| NIL) (#2=#:G23 NIL) (|r| NIL) (#3=#:G20 NIL)
+          (|i| NIL) (#4=#:G21 NIL) (|ll| NIL) (|ans| (|Matrix| R))
+          (#5=#:G18 NIL) (#6=#:G19 NIL))
          (SEQ
           (COND
            ((SPADCALL (LENGTH |l|) (QREFELT % 6) (QREFELT % 19))
@@ -29,7 +29,7 @@
                        ((SPADCALL (LENGTH |ll|) (QREFELT % 6) (QREFELT % 19))
                         (PROGN
                          (LETT #5# (|error| "matrix: wrong number of columns"))
-                         (GO #7=#:G21))))))
+                         (GO #7=#:G10))))))
                     (LETT #6# (CDR #6#)) (GO G190) G191 (EXIT NIL)))
               #7# (EXIT #5#))
              (LETT |ans|
@@ -111,7 +111,7 @@
 
 (SDEFUN |SQMATRIX;columnSpace;%L;18|
         ((|x| (%)) (% (|List| (|DirectProduct| |ndim| R))))
-        (SPROG ((#1=#:G58 NIL) (|c| NIL) (#2=#:G57 NIL))
+        (SPROG ((#1=#:G45 NIL) (|c| NIL) (#2=#:G44 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -134,7 +134,7 @@
 
 (SDEFUN |SQMATRIX;nullSpace;%L;21|
         ((|x| (%)) (% (|List| (|DirectProduct| |ndim| R))))
-        (SPROG ((#1=#:G65 NIL) (|c| NIL) (#2=#:G64 NIL))
+        (SPROG ((#1=#:G52 NIL) (|c| NIL) (#2=#:G51 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -177,26 +177,9 @@
 
 (DECLAIM (NOTINLINE |SquareMatrix;|)) 
 
-(DEFUN |SquareMatrix| (&REST #1=#:G116)
-  (SPROG NIL
-         (PROG (#2=#:G117)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T))
-                                               (HGET |$ConstructorCache|
-                                                     '|SquareMatrix|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |SquareMatrix;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|SquareMatrix|)))))))))) 
-
 (DEFUN |SquareMatrix;| (|#1| |#2|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G111 NIL) (#2=#:G113 NIL) (#3=#:G112 NIL) (#4=#:G115 NIL)
+   ((|pv$| NIL) (#1=#:G90 NIL) (#2=#:G92 NIL) (#3=#:G91 NIL) (#4=#:G94 NIL)
     (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 |#1|)
@@ -450,6 +433,23 @@
      ((|testBitVector| |pv$| 26)
       (QSETREFV % 78 (CONS (|dispatchFunction| |SQMATRIX;convert;%If;26|) %))))
     %))) 
+
+(DEFUN |SquareMatrix| (&REST #1=#:G95)
+  (SPROG NIL
+         (PROG (#2=#:G96)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T))
+                                               (HGET |$ConstructorCache|
+                                                     '|SquareMatrix|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |SquareMatrix;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|SquareMatrix|)))))))))) 
 
 (MAKEPROP '|SquareMatrix| '|infovec|
           (LIST

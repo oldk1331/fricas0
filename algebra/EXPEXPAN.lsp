@@ -105,7 +105,7 @@
          (|den| (|UnivariatePuiseuxSeries| FE |var| |cen|))
          (% (|Union| (|OrderedCompletion| FE) "failed")))
         (SPROG
-         ((#1=#:G70 NIL) (|sig| (|Union| (|Integer|) "failed")) (|coef| (FE))
+         ((#1=#:G48 NIL) (|sig| (|Union| (|Integer|) "failed")) (|coef| (FE))
           (|ord| (|Fraction| (|Integer|)))
           (|series| (|UnivariatePuiseuxSeries| FE |var| |cen|)))
          (SEQ
@@ -135,7 +135,7 @@
                                   ((QEQCAR |sig| 1)
                                    (PROGN
                                     (LETT #1# (CONS 1 "failed"))
-                                    (GO #3=#:G69)))
+                                    (GO #3=#:G47)))
                                   ((EQL (QCDR |sig|) 1)
                                    (CONS 0 (SPADCALL (QREFELT % 54))))
                                   (#2#
@@ -149,7 +149,7 @@
          (|den| (|UnivariatePuiseuxSeries| FE |var| |cen|))
          (% (|Union| (|OrderedCompletion| FE) "failed")))
         (SPROG
-         ((#1=#:G83 NIL) (|sig| (|Union| (|Integer|) "failed")) (|cc| (FE))
+         ((#1=#:G61 NIL) (|sig| (|Union| (|Integer|) "failed")) (|cc| (FE))
           (|denOrd| #2=(|Fraction| (|Integer|))) (|numOrd| #2#))
          (SEQ
           (EXIT
@@ -186,7 +186,7 @@
                                   ((QEQCAR |sig| 1)
                                    (PROGN
                                     (LETT #1# (CONS 1 "failed"))
-                                    (GO #4=#:G82)))
+                                    (GO #4=#:G60)))
                                   ((EQL (QCDR |sig|) 1)
                                    (CONS 0 (SPADCALL (QREFELT % 54))))
                                   (#3#
@@ -198,7 +198,7 @@
 (SDEFUN |EXPEXPAN;limitPlus;%U;10|
         ((|f| (%)) (% (|Union| (|OrderedCompletion| FE) "failed")))
         (SPROG
-         ((#1=#:G109 NIL) (|sig| (|Union| (|Integer|) "failed"))
+         ((#1=#:G85 NIL) (|sig| (|Union| (|Integer|) "failed"))
           (|expCoef| (FE))
           (|exponDiff| (|ExponentialOfUnivariatePuiseuxSeries| FE |var| |cen|))
           (|denCoef| #2=(|UnivariatePuiseuxSeries| FE |var| |cen|))
@@ -329,7 +329,7 @@
                                                ((QEQCAR |sig| 1)
                                                 (PROGN
                                                  (LETT #1# (CONS 1 "failed"))
-                                                 (GO #7=#:G108)))
+                                                 (GO #7=#:G84)))
                                                ((EQL (QCDR |sig|) -1)
                                                 (CONS 0
                                                       (SPADCALL
@@ -400,28 +400,9 @@
 
 (DECLAIM (NOTINLINE |ExponentialExpansion;|)) 
 
-(DEFUN |ExponentialExpansion| (&REST #1=#:G157)
-  (SPROG NIL
-         (PROG (#2=#:G158)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T T NIL NIL))
-                     (HGET |$ConstructorCache| '|ExponentialExpansion|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ExponentialExpansion;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|ExponentialExpansion|)))))))))) 
-
 (DEFUN |ExponentialExpansion;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G156 NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
+   ((|pv$| NIL) (#1=#:G116 NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
     (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -606,6 +587,25 @@
                                                                     |#4|)))
     (QSETREFV % 15 (SPADCALL 1000 1 (QREFELT % 14)))
     %))) 
+
+(DEFUN |ExponentialExpansion| (&REST #1=#:G117)
+  (SPROG NIL
+         (PROG (#2=#:G118)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T T NIL NIL))
+                     (HGET |$ConstructorCache| '|ExponentialExpansion|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ExponentialExpansion;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|ExponentialExpansion|)))))))))) 
 
 (MAKEPROP '|ExponentialExpansion| '|infovec|
           (LIST

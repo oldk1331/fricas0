@@ -1,27 +1,8 @@
 
 (DECLAIM (NOTINLINE |FiniteFieldNormalBasis;|)) 
 
-(DEFUN |FiniteFieldNormalBasis| (&REST #1=#:G73)
-  (SPROG NIL
-         (PROG (#2=#:G74)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|FiniteFieldNormalBasis|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |FiniteFieldNormalBasis;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|FiniteFieldNormalBasis|)))))))))) 
-
 (DEFUN |FiniteFieldNormalBasis;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (#1=#:G72 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (#1=#:G42 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT DV$2 |#2|)
@@ -59,6 +40,25 @@
                (|augmentPredVector| % 32))
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |FiniteFieldNormalBasis| (&REST #1=#:G43)
+  (SPROG NIL
+         (PROG (#2=#:G44)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|FiniteFieldNormalBasis|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |FiniteFieldNormalBasis;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|FiniteFieldNormalBasis|)))))))))) 
 
 (MAKEPROP '|FiniteFieldNormalBasis| '|infovec|
           (LIST

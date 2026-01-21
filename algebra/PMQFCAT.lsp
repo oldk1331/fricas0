@@ -8,7 +8,7 @@
            (|Union|
             (|Record| (|:| |num| (|Pattern| S)) (|:| |den| (|Pattern| S)))
             "failed"))
-          (#1=#:G6 NIL) (|r| (|Union| R "failed")))
+          (#1=#:G4 NIL) (|r| (|Union| R "failed")))
          (SEQ
           (COND
            ((SPADCALL |p| (QREFELT % 11))
@@ -41,28 +41,6 @@
 
 (DECLAIM (NOTINLINE |PatternMatchQuotientFieldCategory;|)) 
 
-(DEFUN |PatternMatchQuotientFieldCategory| (&REST #1=#:G17)
-  (SPROG NIL
-         (PROG (#2=#:G18)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PatternMatchQuotientFieldCategory|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |PatternMatchQuotientFieldCategory;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|PatternMatchQuotientFieldCategory|)))))))))) 
-
 (DEFUN |PatternMatchQuotientFieldCategory;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -82,6 +60,28 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |PatternMatchQuotientFieldCategory| (&REST #1=#:G15)
+  (SPROG NIL
+         (PROG (#2=#:G16)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PatternMatchQuotientFieldCategory|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |PatternMatchQuotientFieldCategory;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|PatternMatchQuotientFieldCategory|)))))))))) 
 
 (MAKEPROP '|PatternMatchQuotientFieldCategory| '|infovec|
           (LIST

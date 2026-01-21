@@ -18,8 +18,8 @@
 
 (SDEFUN |XMLEL;outputStructured| ((|rp| (%)) (% (|List| (|String|))))
         (SPROG
-         ((|res| (|List| #1=(|String|))) (#2=#:G35 NIL) (|el| NIL) (|atts| #1#)
-          (#3=#:G34 NIL) (|s| NIL) (#4=#:G33 NIL))
+         ((|res| (|List| #1=(|String|))) (#2=#:G22 NIL) (|el| NIL) (|atts| #1#)
+          (#3=#:G21 NIL) (|s| NIL) (#4=#:G20 NIL))
          (SEQ
           (LETT |atts|
                 (SPADCALL
@@ -65,8 +65,8 @@
 
 (SDEFUN |XMLEL;outputUnstructured| ((|rp| (%)) (% (|List| (|String|))))
         (SPROG
-         ((|res| (|List| #1=(|String|))) (|atts| #1#) (#2=#:G41 NIL) (|s| NIL)
-          (#3=#:G40 NIL))
+         ((|res| (|List| #1=(|String|))) (|atts| #1#) (#2=#:G28 NIL) (|s| NIL)
+          (#3=#:G27 NIL))
          (SEQ
           (LETT |atts|
                 (SPADCALL
@@ -101,8 +101,8 @@
 
 (SDEFUN |XMLEL;outputVRML;%TfV;7| ((|rp| (%)) (|f1| (|TextFile|)) (% (|Void|)))
         (SPROG
-         ((#1=#:G70 NIL) (|el| NIL) (#2=#:G69 NIL) (|att| NIL) (#3=#:G67 NIL)
-          (#4=#:G68 NIL))
+         ((#1=#:G57 NIL) (|el| NIL) (#2=#:G56 NIL) (|att| NIL) (#3=#:G54 NIL)
+          (#4=#:G55 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -115,7 +115,7 @@
                       (GO G191)))
                     (SEQ (EXIT (SPADCALL |el| |f1| (QREFELT % 26))))
                     (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT NIL))
-               (EXIT (PROGN (LETT #3# (|Void|)) (GO #5=#:G66))))))
+               (EXIT (PROGN (LETT #3# (|Void|)) (GO #5=#:G53))))))
             (SPADCALL |f1| (STRCONC (QVELT |rp| 0) "{") (QREFELT % 27))
             (COND
              ((EQUAL (QVELT |rp| 0) "Shape")
@@ -147,23 +147,6 @@
 
 (DECLAIM (NOTINLINE |XmlElement;|)) 
 
-(DEFUN |XmlElement| ()
-  (SPROG NIL
-         (PROG (#1=#:G72)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|XmlElement|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|XmlElement|
-                             (LIST (CONS NIL (CONS 1 (|XmlElement;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#) (HREM |$ConstructorCache| '|XmlElement|)))))))))) 
-
 (DEFUN |XmlElement;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -179,6 +162,23 @@
                               (|:| |a| (|List| (|XmlAttribute|)))
                               (|:| |content| (|String|))))
           %))) 
+
+(DEFUN |XmlElement| ()
+  (SPROG NIL
+         (PROG (#1=#:G59)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|XmlElement|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|XmlElement|
+                             (LIST (CONS NIL (CONS 1 (|XmlElement;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#) (HREM |$ConstructorCache| '|XmlElement|)))))))))) 
 
 (MAKEPROP '|XmlElement| '|infovec|
           (LIST

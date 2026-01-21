@@ -26,24 +26,6 @@
 
 (DECLAIM (NOTINLINE |QuadraticForm;|)) 
 
-(DEFUN |QuadraticForm| (&REST #1=#:G26)
-  (SPROG NIL
-         (PROG (#2=#:G27)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T))
-                                               (HGET |$ConstructorCache|
-                                                     '|QuadraticForm|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |QuadraticForm;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|QuadraticForm|)))))))))) 
-
 (DEFUN |QuadraticForm;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -72,6 +54,24 @@
             (QSETREFV % 25
                       (CONS (|dispatchFunction| |QFORM;convert;%If;4|) %))))
           %))) 
+
+(DEFUN |QuadraticForm| (&REST #1=#:G11)
+  (SPROG NIL
+         (PROG (#2=#:G12)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T))
+                                               (HGET |$ConstructorCache|
+                                                     '|QuadraticForm|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |QuadraticForm;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|QuadraticForm|)))))))))) 
 
 (MAKEPROP '|QuadraticForm| '|infovec|
           (LIST

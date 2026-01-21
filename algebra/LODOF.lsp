@@ -23,8 +23,8 @@
          (|ezfactor| (|Mapping| (|Factored| UP) UP)) (|all?| (|Boolean|))
          (% (|List| (|Fraction| UP))))
         (SPROG
-         ((|sol| (|List| (|Fraction| UP))) (#1=#:G53 NIL) (|f| NIL)
-          (#2=#:G52 NIL))
+         ((|sol| (|List| (|Fraction| UP))) (#1=#:G29 NIL) (|f| NIL)
+          (#2=#:G28 NIL))
          (SEQ
           (LETT |sol|
                 (PROGN
@@ -61,7 +61,7 @@
         (SPROG
          ((|l2n| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP)))
           (|ans| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP)))
-          (#1=#:G62 NIL) (|i| NIL))
+          (#1=#:G35 NIL) (|i| NIL))
          (SEQ (LETT |ans| (|spadConstant| % 33))
               (LETT |l2n| (|spadConstant| % 34))
               (SEQ (LETT |i| 0) (LETT #1# (SPADCALL |l1| (QREFELT % 36))) G190
@@ -85,7 +85,7 @@
          (% (|List| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP)))))
         (SPROG
          ((|q| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP)))
-          (#1=#:G64 NIL))
+          (#1=#:G37 NIL))
          (SEQ
           (LETT |q|
                 (PROG2 (LETT #1# (SPADCALL |l| |r| (QREFELT % 42)))
@@ -142,11 +142,11 @@
          (|ezfactor| (|Mapping| (|Factored| UP) UP)) (|r1?| (|Boolean|))
          (% (|List| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP)))))
         (SPROG
-         ((#1=#:G107 NIL) (#2=#:G108 NIL)
+         ((#1=#:G79 NIL) (#2=#:G80 NIL)
           (|u|
            (|Union| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP))
                     "failed"))
-          (#3=#:G109 NIL) (|i| NIL)
+          (#3=#:G81 NIL) (|i| NIL)
           (|ll| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP)))
           (|n| (|NonNegativeInteger|)))
          (SEQ
@@ -181,8 +181,8 @@
                                                            |ezfactor| NIL %)
                                                           (QCDR |u|)
                                                           (QREFELT % 53)))
-                                                   (GO #4=#:G106)))
-                                            (GO #5=#:G102))))))))
+                                                   (GO #4=#:G78)))
+                                            (GO #5=#:G74))))))))
                                      (EXIT
                                       (COND
                                        ((< (* 2 |i|) |n|)
@@ -244,7 +244,7 @@
 
 (SDEFUN |LODOF;zro|
         ((|p| (UP)) (|ezfactor| (|Mapping| (|Factored| UP) UP)) (% (|List| F)))
-        (SPROG ((#1=#:G133 NIL) (|r| NIL) (#2=#:G132 NIL))
+        (SPROG ((#1=#:G97 NIL) (|r| NIL) (#2=#:G96 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -309,30 +309,6 @@
 
 (DECLAIM (NOTINLINE |LinearOrdinaryDifferentialOperatorFactorizer;|)) 
 
-(DEFUN |LinearOrdinaryDifferentialOperatorFactorizer| (&REST #1=#:G158)
-  (SPROG NIL
-         (PROG (#2=#:G159)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|LinearOrdinaryDifferentialOperatorFactorizer|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function|
-                        |LinearOrdinaryDifferentialOperatorFactorizer;|)
-                       #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|LinearOrdinaryDifferentialOperatorFactorizer|)))))))))) 
-
 (DEFUN |LinearOrdinaryDifferentialOperatorFactorizer;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -378,6 +354,30 @@
                           (CONS (|dispatchFunction| |LODOF;factor1;LodoL;14|)
                                 %))))))))
           %))) 
+
+(DEFUN |LinearOrdinaryDifferentialOperatorFactorizer| (&REST #1=#:G117)
+  (SPROG NIL
+         (PROG (#2=#:G118)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|LinearOrdinaryDifferentialOperatorFactorizer|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function|
+                        |LinearOrdinaryDifferentialOperatorFactorizer;|)
+                       #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|LinearOrdinaryDifferentialOperatorFactorizer|)))))))))) 
 
 (MAKEPROP '|LinearOrdinaryDifferentialOperatorFactorizer| '|infovec|
           (LIST

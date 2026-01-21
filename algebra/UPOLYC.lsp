@@ -6,7 +6,7 @@
 (DEFPARAMETER |UnivariatePolynomialCategory;AL| 'NIL) 
 
 (DEFUN |UnivariatePolynomialCategory| (|t#1|)
-  (LET (#1=#:G49 (#2=#:G50 (|devaluate| |t#1|)))
+  (LET (#1=#:G47 (#2=#:G48 (|devaluate| |t#1|)))
     (COND
      ((SETQ #1# (|assoc| #2# |UnivariatePolynomialCategory;AL|)) (CDR #1#))
      (T
@@ -17,11 +17,11 @@
       #1#)))) 
 
 (DEFUN |UnivariatePolynomialCategory;| (|t#1|)
-  (SPROG ((#1=#:G48 NIL))
+  (SPROG ((#1=#:G46 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
-                                   (|subst_in_cat| '(#2=#:G46 #3=#:G47)
+                                   (|subst_in_cat| '(#2=#:G44 #3=#:G45)
                                                    (LIST
                                                     '(|NonNegativeInteger|)
                                                     '(|SingletonAsOrderedSet|))

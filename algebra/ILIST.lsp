@@ -6,27 +6,10 @@
 
 (DECLAIM (NOTINLINE |IndexedList;|)) 
 
-(DEFUN |IndexedList| (&REST #1=#:G26)
-  (SPROG NIL
-         (PROG (#2=#:G27)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|IndexedList|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |IndexedList;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|IndexedList|)))))))))) 
-
 (DEFUN |IndexedList;| (|#1| |#2|)
   (SPROG
-   ((#1=#:G22 NIL) (#2=#:G23 NIL) (#3=#:G25 NIL) (#4=#:G24 NIL) (|pv$| NIL)
-    (#5=#:G19 NIL) (#6=#:G20 NIL) (#7=#:G21 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL)
+   ((#1=#:G12 NIL) (#2=#:G13 NIL) (#3=#:G15 NIL) (#4=#:G14 NIL) (|pv$| NIL)
+    (#5=#:G9 NIL) (#6=#:G10 NIL) (#7=#:G11 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -110,6 +93,23 @@
     (AND #4# #1# (|augmentPredVector| % 8388608))
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |IndexedList| (&REST #1=#:G16)
+  (SPROG NIL
+         (PROG (#2=#:G17)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|IndexedList|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |IndexedList;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|IndexedList|)))))))))) 
 
 (MAKEPROP '|IndexedList| '|infovec|
           (LIST

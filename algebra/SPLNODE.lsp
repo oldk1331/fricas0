@@ -47,7 +47,7 @@
 (SDEFUN |SPLNODE;construct;LL;11|
         ((|lvt| (|List| (|Record| (|:| |val| V) (|:| |tower| C))))
          (% (|List| %)))
-        (SPROG ((#1=#:G32 NIL) (|vt| NIL) (#2=#:G31 NIL))
+        (SPROG ((#1=#:G27 NIL) (|vt| NIL) (#2=#:G26 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -62,7 +62,7 @@
                       (EXIT (NREVERSE #2#))))))) 
 
 (SDEFUN |SPLNODE;construct;VLL;12| ((|v| (V)) (|lt| (|List| C)) (% (|List| %)))
-        (SPROG ((#1=#:G37 NIL) (|t| NIL) (#2=#:G36 NIL))
+        (SPROG ((#1=#:G32 NIL) (|t| NIL) (#2=#:G31 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -160,24 +160,6 @@
 
 (DECLAIM (NOTINLINE |SplittingNode;|)) 
 
-(DEFUN |SplittingNode| (&REST #1=#:G61)
-  (SPROG NIL
-         (PROG (#2=#:G62)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|SplittingNode|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |SplittingNode;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|SplittingNode|)))))))))) 
-
 (DEFUN |SplittingNode;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -194,6 +176,24 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |SplittingNode| (&REST #1=#:G56)
+  (SPROG NIL
+         (PROG (#2=#:G57)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|SplittingNode|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |SplittingNode;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|SplittingNode|)))))))))) 
 
 (MAKEPROP '|SplittingNode| '|infovec|
           (LIST

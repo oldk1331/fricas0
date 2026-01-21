@@ -2,7 +2,7 @@
 (SDEFUN |CAD;cylindricalDecomposition;LL;1|
         ((|lpols| (|List| (|Polynomial| |TheField|)))
          (% (|List| (|Cell| |TheField|))))
-        (SPROG ((|lv| (|List| (|Symbol|))) (#1=#:G27 NIL) (|pol| NIL))
+        (SPROG ((|lv| (|List| (|Symbol|))) (#1=#:G16 NIL) (|pol| NIL))
                (SEQ (LETT |lv| NIL)
                     (SEQ (LETT |pol| NIL) (LETT #1# |lpols|) G190
                          (COND
@@ -26,19 +26,19 @@
         ((|lpols| (|List| (|Polynomial| |TheField|)))
          (|lvars| (|List| (|Symbol|))) (% (|List| (|Cell| |TheField|))))
         (SPROG
-         ((|res| (|List| (|Cell| |TheField|))) (#1=#:G52 NIL) (|scell| NIL)
-          (#2=#:G51 NIL)
+         ((|res| (|List| (|Cell| |TheField|))) (#1=#:G40 NIL) (|scell| NIL)
+          (#2=#:G39 NIL)
           (|scells|
            (|List|
             (|SimpleCell| |TheField|
                           (|SparseUnivariatePolynomial| |TheField|))))
           (|lspec| (|List| (|SparseUnivariatePolynomial| |TheField|)))
-          (#3=#:G50 NIL) (|cell| NIL)
+          (#3=#:G38 NIL) (|cell| NIL)
           (|previousCad| (|List| (|Cell| |TheField|)))
-          (|lpols1| (|List| (|Polynomial| |TheField|))) (#4=#:G49 NIL)
-          (|pol| NIL) (#5=#:G48 NIL) (#6=#:G47 NIL) (#7=#:G46 NIL)
+          (|lpols1| (|List| (|Polynomial| |TheField|))) (#4=#:G37 NIL)
+          (|pol| NIL) (#5=#:G36 NIL) (#6=#:G35 NIL) (#7=#:G34 NIL)
           (|lp1| (|List| (|SparseUnivariatePolynomial| |TheField|)))
-          (#8=#:G45 NIL) (#9=#:G44 NIL) (|lv| (|List| (|Symbol|)))
+          (#8=#:G33 NIL) (#9=#:G32 NIL) (|lv| (|List| (|Symbol|)))
           (|mv| (|Symbol|)))
          (SEQ
           (COND
@@ -150,7 +150,7 @@
          (% (|List| (|SparseUnivariatePolynomial| |TheField|))))
         (SPROG
          ((|res| (|List| (|SparseUnivariatePolynomial| |TheField|)))
-          (|p1| (|SparseUnivariatePolynomial| |TheField|)) (#1=#:G59 NIL)
+          (|p1| (|SparseUnivariatePolynomial| |TheField|)) (#1=#:G46 NIL)
           (|pol| NIL) (|vl| (|List| (|Symbol|))) (|sp| (|List| |TheField|)))
          (SEQ
           (COND
@@ -179,12 +179,12 @@
         ((|pol| (|SparseUnivariatePolynomial| (|Polynomial| |TheField|)))
          (% (|List| (|Polynomial| |TheField|))))
         (SPROG
-         ((|res| (|List| (|Polynomial| |TheField|))) (#1=#:G65 NIL)
-          (#2=#:G66 NIL) (|c| NIL))
+         ((|res| (|List| (|Polynomial| |TheField|))) (#1=#:G52 NIL)
+          (#2=#:G53 NIL) (|c| NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |res| NIL)
-                (SEQ (LETT |c| NIL) (LETT #2# (SPADCALL |pol| (QREFELT % 46)))
+                (SEQ (LETT |c| NIL) (LETT #2# (SPADCALL |pol| (QREFELT % 45)))
                      G190
                      (COND
                       ((OR (ATOM #2#) (PROGN (LETT |c| (CAR #2#)) NIL))
@@ -193,7 +193,7 @@
                       (EXIT
                        (COND
                         ((SPADCALL |c| (QREFELT % 9))
-                         (PROGN (LETT #1# |res|) (GO #3=#:G64)))
+                         (PROGN (LETT #1# |res|) (GO #3=#:G51)))
                         ('T (LETT |res| (CONS |c| |res|))))))
                      (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                 (EXIT |res|)))
@@ -204,12 +204,12 @@
           (|List| (|SparseUnivariatePolynomial| (|Polynomial| |TheField|))))
          (% (|List| (|Polynomial| |TheField|))))
         (SPROG
-         ((|res| (|List| (|Polynomial| |TheField|))) (#1=#:G78 NIL)
+         ((|res| (|List| (|Polynomial| |TheField|))) (#1=#:G61 NIL)
           (|d| (|Polynomial| |TheField|))
           (|v|
            (|PrimitiveArray|
             (|SparseUnivariatePolynomial| (|Polynomial| |TheField|))))
-          (#2=#:G79 NIL) (|p| NIL))
+          (#2=#:G62 NIL) (|p| NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |res| NIL)
@@ -219,18 +219,18 @@
                        (GO G191)))
                      (SEQ
                       (LETT |v|
-                            (SPADCALL |p| (SPADCALL |p| (QREFELT % 48))
-                                      (QREFELT % 51)))
+                            (SPADCALL |p| (SPADCALL |p| (QREFELT % 47))
+                                      (QREFELT % 50)))
                       (COND
-                       ((NULL (ZEROP (SPADCALL (QAREF1 |v| 0) (QREFELT % 53))))
+                       ((NULL (ZEROP (SPADCALL (QAREF1 |v| 0) (QREFELT % 52))))
                         (EXIT
                          (PROGN
                           (LETT #1# (|error| "Bad discriminant"))
-                          (GO #3=#:G77)))))
-                      (LETT |d| (SPADCALL (QAREF1 |v| 0) (QREFELT % 54)))
+                          (GO #3=#:G60)))))
+                      (LETT |d| (SPADCALL (QAREF1 |v| 0) (QREFELT % 53)))
                       (EXIT
                        (COND
-                        ((SPADCALL |d| (QREFELT % 55))
+                        ((SPADCALL |d| (QREFELT % 54))
                          (PROGN
                           (LETT #1# (|error| "Non Square Free polynomial"))
                           (GO #3#)))
@@ -245,7 +245,7 @@
          (|q| #2=(|SparseUnivariatePolynomial| (|Polynomial| |TheField|)))
          (% (|List| (|Polynomial| |TheField|))))
         (SPROG
-         ((#3=#:G92 NIL) (#4=#:G87 NIL) (|i| NIL) (#5=#:G91 NIL)
+         ((#3=#:G72 NIL) (#4=#:G67 NIL) (|i| NIL) (#5=#:G71 NIL)
           (|v|
            (|PrimitiveArray|
             (|SparseUnivariatePolynomial| (|Polynomial| |TheField|))))
@@ -253,20 +253,20 @@
           (|#G26| #2#) (|#G25| #1#) (|#G24| #2#))
          (SEQ
           (COND
-           ((< (SPADCALL |p| (QREFELT % 53)) (SPADCALL |q| (QREFELT % 53)))
+           ((< (SPADCALL |p| (QREFELT % 52)) (SPADCALL |q| (QREFELT % 52)))
             (PROGN
              (LETT |#G24| |q|)
              (LETT |#G25| |p|)
              (LETT |p| |#G24|)
              (LETT |q| |#G25|))))
           (COND
-           ((EQL (SPADCALL |p| (QREFELT % 53)) (SPADCALL |q| (QREFELT % 53)))
+           ((EQL (SPADCALL |p| (QREFELT % 52)) (SPADCALL |q| (QREFELT % 52)))
             (PROGN
              (LETT |#G26| |q|)
-             (LETT |#G27| (SPADCALL |p| |q| (QREFELT % 57)))
+             (LETT |#G27| (SPADCALL |p| |q| (QREFELT % 56)))
              (LETT |p| |#G26|)
              (LETT |q| |#G27|))))
-          (LETT |v| (SPADCALL |p| |q| (QREFELT % 51)))
+          (LETT |v| (SPADCALL |p| |q| (QREFELT % 50)))
           (EXIT
            (PROGN
             (LETT #5# NIL)
@@ -279,7 +279,7 @@
                  (SEQ
                   (EXIT
                    (LETT #5#
-                         (CONS (SPADCALL (QAREF1 |v| |i|) |i| (QREFELT % 58))
+                         (CONS (SPADCALL (QAREF1 |v| |i|) |i| (QREFELT % 57))
                                #5#))))
                  (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                  (EXIT (NREVERSE #5#)))))))) 
@@ -289,9 +289,9 @@
           #1=(|List| (|SparseUnivariatePolynomial| (|Polynomial| |TheField|))))
          (% (|List| (|Polynomial| |TheField|))))
         (SPROG
-         ((|res| (|List| (|Polynomial| |TheField|))) (#2=#:G102 NIL)
-          (|r| (|Polynomial| |TheField|)) (#3=#:G104 NIL) (|q| NIL)
-          (|laux| #1#) (#4=#:G103 NIL) (|p| NIL))
+         ((|res| (|List| (|Polynomial| |TheField|))) (#2=#:G82 NIL)
+          (|r| (|Polynomial| |TheField|)) (#3=#:G84 NIL) (|q| NIL) (|laux| #1#)
+          (#4=#:G83 NIL) (|p| NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |res| NIL) (LETT |laux| |lpols|)
@@ -309,15 +309,15 @@
                                 (SEQ
                                  (LETT |r|
                                        (|SPADfirst|
-                                        (SPADCALL |p| |q| (QREFELT % 59))))
+                                        (SPADCALL |p| |q| (QREFELT % 58))))
                                  (EXIT
                                   (COND
-                                   ((SPADCALL |r| (QREFELT % 55))
+                                   ((SPADCALL |r| (QREFELT % 54))
                                     (PROGN
                                      (LETT #2#
                                            (|error|
                                             "Non relatively prime polynomials"))
-                                     (GO #5=#:G101)))
+                                     (GO #5=#:G81)))
                                    ((NULL (SPADCALL |r| (QREFELT % 9)))
                                     (LETT |res| (CONS |r| |res|))))))
                                 (LETT #3# (CDR #3#)) (GO G190) G191
@@ -331,7 +331,7 @@
           (|List| (|SparseUnivariatePolynomial| (|Polynomial| |TheField|))))
          (% (|List| (|Polynomial| |TheField|))))
         (SPROG
-         ((|res| (|List| (|Polynomial| |TheField|))) (#1=#:G122 NIL) (|p| NIL)
+         ((|res| (|List| (|Polynomial| |TheField|))) (#1=#:G102 NIL) (|p| NIL)
           (|lsqfrb|
            (|List| (|SparseUnivariatePolynomial| (|Polynomial| |TheField|))))
           (|lp1|
@@ -341,14 +341,14 @@
                       (|SparseUnivariatePolynomial| (|Polynomial| |TheField|))
                       (|SparseUnivariatePolynomial|
                        (|Polynomial| |TheField|))))
-          (#2=#:G121 NIL) (#3=#:G120 NIL) (|c| (|Polynomial| |TheField|))
-          (#4=#:G119 NIL))
+          (#2=#:G101 NIL) (#3=#:G100 NIL) (|c| (|Polynomial| |TheField|))
+          (#4=#:G99 NIL))
          (SEQ (LETT |res| NIL)
               (SEQ (LETT |p| NIL) (LETT #4# |lpols|) G190
                    (COND
                     ((OR (ATOM #4#) (PROGN (LETT |p| (CAR #4#)) NIL))
                      (GO G191)))
-                   (SEQ (LETT |c| (SPADCALL |p| (QREFELT % 61)))
+                   (SEQ (LETT |c| (SPADCALL |p| (QREFELT % 60)))
                         (EXIT
                          (COND ((SPADCALL |c| (QREFELT % 9)) "next p")
                                ('T (LETT |res| (CONS |c| |res|))))))
@@ -363,7 +363,7 @@
                           (SEQ
                            (EXIT
                             (LETT #3#
-                                  (CONS (SPADCALL |p| (QREFELT % 62)) #3#))))
+                                  (CONS (SPADCALL |p| (QREFELT % 61)) #3#))))
                           (LETT #2# (CDR #2#)) (GO G190) G191
                           (EXIT (NREVERSE #3#)))))
               (LETT |f| (CONS #'|CAD;projectionSet;LL;8!0| %))
@@ -377,41 +377,21 @@
                    (SEQ
                     (EXIT
                      (LETT |res|
-                           (SPADCALL |res| (SPADCALL |p| (QREFELT % 47))
+                           (SPADCALL |res| (SPADCALL |p| (QREFELT % 46))
                                      (QREFELT % 68)))))
                    (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
               (LETT |res|
-                    (SPADCALL |res| (SPADCALL |lsqfrb| (QREFELT % 56))
+                    (SPADCALL |res| (SPADCALL |lsqfrb| (QREFELT % 55))
                               (QREFELT % 68)))
               (EXIT
-               (SPADCALL |res| (SPADCALL |lsqfrb| (QREFELT % 60))
+               (SPADCALL |res| (SPADCALL |lsqfrb| (QREFELT % 59))
                          (QREFELT % 68)))))) 
 
 (SDEFUN |CAD;projectionSet;LL;8!0| ((|x1| NIL) (|x2| NIL) (% NIL))
-        (SPADCALL (SPADCALL |x1| (QREFELT % 53)) (SPADCALL |x2| (QREFELT % 53))
+        (SPADCALL (SPADCALL |x1| (QREFELT % 52)) (SPADCALL |x2| (QREFELT % 52))
                   (QREFELT % 63))) 
 
 (DECLAIM (NOTINLINE |CylindricalAlgebraicDecompositionPackage;|)) 
-
-(DEFUN |CylindricalAlgebraicDecompositionPackage| (#1=#:G123)
-  (SPROG NIL
-         (PROG (#2=#:G124)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|CylindricalAlgebraicDecompositionPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|CylindricalAlgebraicDecompositionPackage;| #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|CylindricalAlgebraicDecompositionPackage|)))))))))) 
 
 (DEFUN |CylindricalAlgebraicDecompositionPackage;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
@@ -429,6 +409,26 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
+(DEFUN |CylindricalAlgebraicDecompositionPackage| (#1=#:G103)
+  (SPROG NIL
+         (PROG (#2=#:G104)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|CylindricalAlgebraicDecompositionPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|CylindricalAlgebraicDecompositionPackage;| #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|CylindricalAlgebraicDecompositionPackage|)))))))))) 
+
 (MAKEPROP '|CylindricalAlgebraicDecompositionPackage| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|Boolean|)
@@ -439,25 +439,25 @@
               (|SparseUnivariatePolynomial| 6) (32 . |univariate|) (|List| %)
               (|List| 20) (|Symbol|) (|SimpleCell| 6 20)
               (37 . |allSimpleCells|) (|List| 25) (|Cell| 6) (43 . |makeCell|)
-              (|SparseUnivariatePolynomial| %) (48 . |univariate|) (|List| 45)
+              (|SparseUnivariatePolynomial| %) (48 . |univariate|) (|List| 44)
               |CAD;projectionSet;LL;8| |CAD;specialise;LCL;3| (54 . |makeCell|)
               (60 . |append|) (66 . =) (|List| 6) (72 . |samplePoint|)
               (77 . |variablesOf|) (82 . |eval|) (|NonNegativeInteger|)
-              (89 . |degree|) (94 . |Zero|) (|SparseUnivariatePolynomial| 8)
-              (98 . |coefficients|) |CAD;coefficientSet;SupL;4|
-              (103 . |differentiate|) (|PrimitiveArray| 45)
-              (|SubResultantPackage| 8 45) (108 . |subresultantVector|)
-              (114 . |Zero|) (118 . |degree|) (123 . |leadingCoefficient|)
-              (128 . |zero?|) |CAD;discriminantSet;LL;5|
-              (133 . |pseudoRemainder|) (139 . |coefficient|)
+              (89 . |degree|) (|SparseUnivariatePolynomial| 8)
+              (94 . |coefficients|) |CAD;coefficientSet;SupL;4|
+              (99 . |differentiate|) (|PrimitiveArray| 44)
+              (|SubResultantPackage| 8 44) (104 . |subresultantVector|)
+              (110 . |Zero|) (114 . |degree|) (119 . |leadingCoefficient|)
+              (124 . |zero?|) |CAD;discriminantSet;LL;5|
+              (129 . |pseudoRemainder|) (135 . |coefficient|)
               |CAD;principalSubResultantSet;2SupL;6| |CAD;resultantSet;LL;7|
-              (145 . |content|) (150 . |primitivePart|) (155 . <=)
-              (|Mapping| 7 45 45) (161 . |sort|)
-              (|CylindricalAlgebraicDecompositionUtilities| 8 45)
-              (167 . |squareFreeBasis|) (172 . |append|))
-           '#(|specialise| 178 |resultantSet| 184 |projectionSet| 189
-              |principalSubResultantSet| 194 |discriminantSet| 200
-              |cylindricalDecomposition| 205 |coefficientSet| 216)
+              (141 . |content|) (146 . |primitivePart|) (|Integer|) (151 . <=)
+              (|Mapping| 7 44 44) (157 . |sort|)
+              (|CylindricalAlgebraicDecompositionUtilities| 8 44)
+              (163 . |squareFreeBasis|) (168 . |append|))
+           '#(|specialise| 174 |resultantSet| 180 |projectionSet| 185
+              |principalSubResultantSet| 190 |discriminantSet| 196
+              |cylindricalDecomposition| 201 |coefficientSet| 212)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -516,15 +516,15 @@
                                               26 1 28 0 27 29 2 8 30 0 24 31 2
                                               28 0 25 0 35 2 15 0 0 0 36 2 16 7
                                               0 0 37 1 28 38 0 39 1 28 10 0 40
-                                              3 8 0 0 10 38 41 1 20 42 0 43 0 6
-                                              0 44 1 45 16 0 46 1 45 0 0 48 2
-                                              50 49 45 45 51 0 8 0 52 1 45 42 0
-                                              53 1 45 8 0 54 1 8 7 0 55 2 45 0
-                                              0 0 57 2 45 8 0 42 58 1 45 8 0 61
-                                              1 45 0 0 62 2 42 7 0 0 63 2 32 0
-                                              64 0 65 1 66 32 32 67 2 16 0 0 0
-                                              68 2 0 23 16 28 34 1 0 16 32 60 1
-                                              0 16 32 33 2 0 16 45 45 59 1 0 16
-                                              32 56 1 0 15 16 18 2 0 15 16 10
-                                              17 1 0 16 45 47)))))
+                                              3 8 0 0 10 38 41 1 20 42 0 43 1
+                                              44 16 0 45 1 44 0 0 47 2 49 48 44
+                                              44 50 0 6 0 51 1 44 42 0 52 1 44
+                                              8 0 53 1 8 7 0 54 2 44 0 0 0 56 2
+                                              44 8 0 42 57 1 44 8 0 60 1 44 0 0
+                                              61 2 62 7 0 0 63 2 32 0 64 0 65 1
+                                              66 32 32 67 2 16 0 0 0 68 2 0 23
+                                              16 28 34 1 0 16 32 59 1 0 16 32
+                                              33 2 0 16 44 44 58 1 0 16 32 55 1
+                                              0 15 16 18 2 0 15 16 10 17 1 0 16
+                                              44 46)))))
            '|lookupComplete|)) 

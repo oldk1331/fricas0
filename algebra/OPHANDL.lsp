@@ -31,23 +31,6 @@
 
 (DECLAIM (NOTINLINE |OperatorHandlers;|)) 
 
-(DEFUN |OperatorHandlers| (#1=#:G19)
-  (SPROG NIL
-         (PROG (#2=#:G20)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|OperatorHandlers|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|OperatorHandlers;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|OperatorHandlers|)))))))))) 
-
 (DEFUN |OperatorHandlers;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -62,6 +45,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |OperatorHandlers| (#1=#:G14)
+  (SPROG NIL
+         (PROG (#2=#:G15)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|OperatorHandlers|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|OperatorHandlers;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|OperatorHandlers|)))))))))) 
 
 (MAKEPROP '|OperatorHandlers| '|infovec|
           (LIST

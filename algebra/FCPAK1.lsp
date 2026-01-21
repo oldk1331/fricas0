@@ -147,9 +147,22 @@
 
 (DECLAIM (NOTINLINE |FortranCodePackage1;|)) 
 
+(DEFUN |FortranCodePackage1;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|FortranCodePackage1|))
+          (LETT % (GETREFV 29))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|FortranCodePackage1| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |FortranCodePackage1| ()
   (SPROG NIL
-         (PROG (#1=#:G23)
+         (PROG (#1=#:G11)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|FortranCodePackage1|))
@@ -165,19 +178,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|FortranCodePackage1|)))))))))) 
-
-(DEFUN |FortranCodePackage1;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|FortranCodePackage1|))
-          (LETT % (GETREFV 29))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|FortranCodePackage1| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|FortranCodePackage1| '|infovec|
           (LIST

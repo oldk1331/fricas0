@@ -35,7 +35,7 @@
 (SDEFUN |GTSET;roughUnitIdeal?;%B;11| ((|ts| (%)) (% (|Boolean|))) NIL) 
 
 (SDEFUN |GTSET;coerce;%Of;12| ((|ts| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G37 NIL) (|p| NIL) (#2=#:G36 NIL) (|lp| (|List| P)))
+        (SPROG ((#1=#:G29 NIL) (|p| NIL) (#2=#:G28 NIL) (|lp| (|List| P)))
                (SEQ (LETT |lp| (REVERSE (|GTSET;rep| |ts| %)))
                     (EXIT
                      (SPADCALL
@@ -129,28 +129,9 @@
 
 (DECLAIM (NOTINLINE |GeneralTriangularSet;|)) 
 
-(DEFUN |GeneralTriangularSet| (&REST #1=#:G101)
-  (SPROG NIL
-         (PROG (#2=#:G102)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|GeneralTriangularSet|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |GeneralTriangularSet;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|GeneralTriangularSet|)))))))))) 
-
 (DEFUN |GeneralTriangularSet;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((#1=#:G100 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
+   ((#1=#:G89 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
     (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -192,6 +173,25 @@
     (AND (|HasCategory| |#4| '(|OrderedSet|)) #1# (|augmentPredVector| % 512))
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |GeneralTriangularSet| (&REST #1=#:G90)
+  (SPROG NIL
+         (PROG (#2=#:G91)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|GeneralTriangularSet|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |GeneralTriangularSet;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|GeneralTriangularSet|)))))))))) 
 
 (MAKEPROP '|GeneralTriangularSet| '|infovec|
           (LIST

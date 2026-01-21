@@ -48,25 +48,6 @@
 
 (DECLAIM (NOTINLINE |MatrixCommonDenominator;|)) 
 
-(DEFUN |MatrixCommonDenominator| (&REST #1=#:G23)
-  (SPROG NIL
-         (PROG (#2=#:G24)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|MatrixCommonDenominator|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |MatrixCommonDenominator;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|MatrixCommonDenominator|)))))))))) 
-
 (DEFUN |MatrixCommonDenominator;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -92,6 +73,25 @@
                       (CONS (|dispatchFunction| |MCDEN;commonDenominator;MR;4|)
                             %))))
           %))) 
+
+(DEFUN |MatrixCommonDenominator| (&REST #1=#:G14)
+  (SPROG NIL
+         (PROG (#2=#:G15)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|MatrixCommonDenominator|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |MatrixCommonDenominator;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|MatrixCommonDenominator|)))))))))) 
 
 (MAKEPROP '|MatrixCommonDenominator| '|infovec|
           (LIST

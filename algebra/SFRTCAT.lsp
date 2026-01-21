@@ -6,8 +6,8 @@
 (DEFPARAMETER |SquareFreeRegularTriangularSetCategory;AL| 'NIL) 
 
 (DEFUN |SquareFreeRegularTriangularSetCategory| (|t#1| |t#2| |t#3| |t#4|)
-  (LET (#1=#:G2
-        (#2=#:G3
+  (LET (#1=#:G1
+        (#2=#:G2
          (LIST (|devaluate| |t#1|) (|devaluate| |t#2|) (|devaluate| |t#3|)
                (|devaluate| |t#4|))))
     (COND
@@ -24,7 +24,7 @@
       #1#)))) 
 
 (DEFUN |SquareFreeRegularTriangularSetCategory;| (|t#1| |t#2| |t#3| |t#4|)
-  (SPROG ((#1=#:G1 NIL))
+  (SPROG ((#1=#:G0 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2| |t#3| |t#4|)

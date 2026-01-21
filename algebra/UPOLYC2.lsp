@@ -72,29 +72,6 @@
 
 (DECLAIM (NOTINLINE |UnivariatePolynomialCategoryFunctions2;|)) 
 
-(DEFUN |UnivariatePolynomialCategoryFunctions2| (&REST #1=#:G41)
-  (SPROG NIL
-         (PROG (#2=#:G42)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|UnivariatePolynomialCategoryFunctions2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function| |UnivariatePolynomialCategoryFunctions2;|)
-                       #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|UnivariatePolynomialCategoryFunctions2|)))))))))) 
-
 (DEFUN |UnivariatePolynomialCategoryFunctions2;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -131,10 +108,33 @@
      ('T (QSETREFV % 24 (CONS (|dispatchFunction| |UPOLYC2;map;MPRPS;3|) %))))
     %))) 
 
+(DEFUN |UnivariatePolynomialCategoryFunctions2| (&REST #1=#:G24)
+  (SPROG NIL
+         (PROG (#2=#:G25)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|UnivariatePolynomialCategoryFunctions2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function| |UnivariatePolynomialCategoryFunctions2;|)
+                       #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|UnivariatePolynomialCategoryFunctions2|)))))))))) 
+
 (MAKEPROP '|UnivariatePolynomialCategoryFunctions2| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (|local| |#4|) '|op_of_PS| '#:G1 '|RepPS|
+              (|local| |#3|) (|local| |#4|) '|op_of_PS| '#:G0 '|RepPS|
               (0 . |Zero|) (4 . |Zero|) (|Boolean|) (8 . =)
               (14 . |leadingCoefficient|) (19 . |Zero|) (23 . ~=)
               (|NonNegativeInteger|) (29 . |degree|) (34 . |reductum|)

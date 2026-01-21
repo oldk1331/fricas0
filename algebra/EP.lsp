@@ -35,7 +35,7 @@
           (|Vector|
            (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R)))))
          (|x| (|Symbol|)) (% (|Matrix| (|Fraction| (|Polynomial| R)))))
-        (SPROG ((#1=#:G42 NIL) (|i| NIL) (#2=#:G41 NIL))
+        (SPROG ((#1=#:G17 NIL) (|i| NIL) (#2=#:G16 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -57,11 +57,16 @@
 (SDEFUN |EP;characteristicPolynomial;MSP;5|
         ((|m| (|Matrix| (|Fraction| (|Polynomial| R)))) (|x| (|Symbol|))
          (% (|Polynomial| R)))
-        (SPADCALL
-         (SPADCALL (SPADCALL |m| (QREFELT % 32))
-                   (SPADCALL (SPADCALL |x| (QREFELT % 23)) (QREFELT % 9))
-                   (QREFELT % 24))
-         (QREFELT % 33))) 
+        (SPROG
+         ((|up| (|SparseUnivariatePolynomial| (|Fraction| (|Polynomial| R)))))
+         (SEQ (LETT |up| (SPADCALL |m| (QREFELT % 32)))
+              (EXIT
+               (SPADCALL
+                (SPADCALL |up|
+                          (SPADCALL (SPADCALL |x| (QREFELT % 23))
+                                    (QREFELT % 9))
+                          (QREFELT % 24))
+                (QREFELT % 33)))))) 
 
 (SDEFUN |EP;characteristicPolynomial;MP;6|
         ((|m| (|Matrix| (|Fraction| (|Polynomial| R)))) (% (|Polynomial| R)))
@@ -74,7 +79,7 @@
          (|m| (|Matrix| (|Fraction| (|Polynomial| R))))
          (% (|List| (|Matrix| (|Fraction| (|Polynomial| R))))))
         (SPROG
-         ((#1=#:G56 NIL) (|v| NIL) (#2=#:G55 NIL)
+         ((#1=#:G32 NIL) (|v| NIL) (#2=#:G31 NIL)
           (|res1|
            (|List|
             (|Vector|
@@ -82,7 +87,7 @@
           (|x| (|Symbol|)))
          (SEQ (LETT |x| (|EP;get_x| |a| %))
               (LETT |res1|
-                    (SPADCALL (|EP;Ei_to_EiF| |a| %) |m| (QREFELT % 38)))
+                    (SPADCALL (|EP;Ei_to_EiF| |a| %) |m| (QREFELT % 39)))
               (EXIT
                (PROGN
                 (LETT #2# NIL)
@@ -103,7 +108,7 @@
          (|k| (|NonNegativeInteger|)) (|g| (|NonNegativeInteger|))
          (% (|List| (|Matrix| (|Fraction| (|Polynomial| R))))))
         (SPROG
-         ((#1=#:G65 NIL) (|v| NIL) (#2=#:G64 NIL)
+         ((#1=#:G41 NIL) (|v| NIL) (#2=#:G40 NIL)
           (|res1|
            (|List|
             (|Vector|
@@ -112,7 +117,7 @@
          (SEQ (LETT |x| (|EP;get_x| |a| %))
               (LETT |res1|
                     (SPADCALL (|EP;Ei_to_EiF| |a| %) |m| |k| |g|
-                              (QREFELT % 43)))
+                              (QREFELT % 44)))
               (EXIT
                (PROGN
                 (LETT #2# NIL)
@@ -142,7 +147,7 @@
                      (COND ((EQL |k| |g|) (QVELT |eif| 2))
                            ('T
                             (SPADCALL (QVELT |eif| 0) |m| |k| |g|
-                                      (QREFELT % 44)))))))) 
+                                      (QREFELT % 45)))))))) 
 
 (SDEFUN |EP;EiF_to_Ei|
         ((|a|
@@ -159,10 +164,10 @@
                      (SPADCALL |x|
                                (SPADCALL
                                 (SPADCALL (QCDR |a|)
-                                          (SPADCALL |x| (QREFELT % 47))
+                                          (SPADCALL |x| (QREFELT % 48))
                                           (QREFELT % 24))
                                 (QREFELT % 33))
-                               (QREFELT % 48)))))) 
+                               (QREFELT % 49)))))) 
 
 (SDEFUN |EP;eigenvalues;ML;11|
         ((|m| (|Matrix| (|Fraction| (|Polynomial| R))))
@@ -171,7 +176,7 @@
            (|Union| (|Fraction| (|Polynomial| R))
                     (|SuchThat| (|Symbol|) (|Polynomial| R))))))
         (SPROG
-         ((#1=#:G85 NIL) (|a| NIL) (#2=#:G84 NIL)
+         ((#1=#:G61 NIL) (|a| NIL) (#2=#:G60 NIL)
           (|res1|
            (|List|
             (|Union| (|Fraction| (|Polynomial| R))
@@ -179,7 +184,7 @@
                       (|Fraction| (|Polynomial| R))))))
           (|x| (|Symbol|)))
          (SEQ (LETT |x| (SPADCALL (QREFELT % 21)))
-              (LETT |res1| (SPADCALL |m| (QREFELT % 50)))
+              (LETT |res1| (SPADCALL |m| (QREFELT % 51)))
               (EXIT
                (PROGN
                 (LETT #2# NIL)
@@ -204,8 +209,8 @@
             (|:| |eigvec|
                  (|List| (|Matrix| (|Fraction| (|Polynomial| R)))))))))
         (SPROG
-         ((#1=#:G98 NIL) (|v| NIL) (#2=#:G97 NIL) (#3=#:G96 NIL) (|ri| NIL)
-          (#4=#:G95 NIL)
+         ((#1=#:G74 NIL) (|v| NIL) (#2=#:G73 NIL) (#3=#:G72 NIL) (|ri| NIL)
+          (#4=#:G71 NIL)
           (|res1|
            (|List|
             (|Record|
@@ -221,7 +226,7 @@
                      (|Fraction| (|Polynomial| R)))))))))
           (|x| (|Symbol|)))
          (SEQ (LETT |x| (SPADCALL (QREFELT % 21)))
-              (LETT |res1| (SPADCALL |m| (QREFELT % 55)))
+              (LETT |res1| (SPADCALL |m| (QREFELT % 56)))
               (EXIT
                (PROGN
                 (LETT #4# NIL)
@@ -268,8 +273,8 @@
             (|:| |geneigvec|
                  (|List| (|Matrix| (|Fraction| (|Polynomial| R)))))))))
         (SPROG
-         ((#1=#:G112 NIL) (|v| NIL) (#2=#:G111 NIL) (#3=#:G110 NIL) (|ri| NIL)
-          (#4=#:G109 NIL)
+         ((#1=#:G88 NIL) (|v| NIL) (#2=#:G87 NIL) (#3=#:G86 NIL) (|ri| NIL)
+          (#4=#:G85 NIL)
           (|res1|
            (|List|
             (|Record|
@@ -284,7 +289,7 @@
                      (|Fraction| (|Polynomial| R)))))))))
           (|x| (|Symbol|)))
          (SEQ (LETT |x| (SPADCALL (QREFELT % 21)))
-              (LETT |res1| (SPADCALL |m| (QREFELT % 60)))
+              (LETT |res1| (SPADCALL |m| (QREFELT % 61)))
               (EXIT
                (PROGN
                 (LETT #4# NIL)
@@ -321,28 +326,12 @@
 
 (DECLAIM (NOTINLINE |EigenPackage;|)) 
 
-(DEFUN |EigenPackage| (#1=#:G113)
-  (SPROG NIL
-         (PROG (#2=#:G114)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|EigenPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|EigenPackage;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|EigenPackage|)))))))))) 
-
 (DEFUN |EigenPackage;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|EigenPackage| DV$1))
-          (LETT % (GETREFV 64))
+          (LETT % (GETREFV 65))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3
                     (LETT |pv$|
@@ -360,15 +349,31 @@
            ((|HasCategory| (|Fraction| (|Polynomial| |#1|))
                            '(|PolynomialFactorizationExplicit|))
             (PROGN
-             (QSETREFV % 52
+             (QSETREFV % 53
                        (CONS (|dispatchFunction| |EP;eigenvalues;ML;11|) %))
-             (QSETREFV % 57
+             (QSETREFV % 58
                        (CONS (|dispatchFunction| |EP;eigenvectors;ML;12|) %))
-             (QSETREFV % 63
+             (QSETREFV % 64
                        (CONS
                         (|dispatchFunction| |EP;generalizedEigenvectors;ML;13|)
                         %)))))
           %))) 
+
+(DEFUN |EigenPackage| (#1=#:G89)
+  (SPROG NIL
+         (PROG (#2=#:G90)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|EigenPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|EigenPackage;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|EigenPackage|)))))))))) 
 
 (MAKEPROP '|EigenPackage| '|infovec|
           (LIST
@@ -380,24 +385,24 @@
               (|UnivariatePolynomialCategoryFunctions2| 7 18 8 16) (21 . |map|)
               (27 . |new|) '|dummy| (31 . |coerce|) (36 . |elt|) (|Integer|)
               (|Vector| 16) (42 . |elt|) (|List| (|List| 8)) (|Matrix| 8)
-              (48 . |matrix|) (|InnerEigenPackage| 8)
-              (53 . |characteristicPolynomial|) (58 . |numer|)
+              (48 . |matrix|) (|CharacteristicPolynomial4| 8)
+              (53 . |char_pol_via_berkovitz|) (58 . |numer|)
               |EP;characteristicPolynomial;MSP;5|
               |EP;characteristicPolynomial;MP;6| (|List| 26) (|Union| 8 16)
-              (63 . |eigenvector|) (|List| 29) (|Union| 8 10)
-              |EP;eigenvector;UML;7| (|NonNegativeInteger|)
+              (|InnerEigenPackage| 8) (63 . |eigenvector|) (|List| 29)
+              (|Union| 8 10) |EP;eigenvector;UML;7| (|NonNegativeInteger|)
               (69 . |generalizedEigenvector|)
               |EP;generalizedEigenvector;UM2NniL;8|
-              (|Record| (|:| |eigval| 40) (|:| |eigmult| 42) (|:| |eigvec| 39))
+              (|Record| (|:| |eigval| 41) (|:| |eigmult| 43) (|:| |eigvec| 40))
               |EP;generalizedEigenvector;RML;9| (77 . |coerce|)
-              (82 . |construct|) (|List| 37) (88 . |eigenvalues|) (|List| 40)
+              (82 . |construct|) (|List| 37) (88 . |eigenvalues|) (|List| 41)
               (93 . |eigenvalues|)
-              (|Record| (|:| |eigval| 37) (|:| |eigmult| 42) (|:| |eigvec| 36))
-              (|List| 53) (98 . |eigenvectors|) (|List| 45)
+              (|Record| (|:| |eigval| 37) (|:| |eigmult| 43) (|:| |eigvec| 36))
+              (|List| 54) (98 . |eigenvectors|) (|List| 46)
               (103 . |eigenvectors|)
-              (|Record| (|:| |eigval| 37) (|:| |geneigvec| 36)) (|List| 58)
+              (|Record| (|:| |eigval| 37) (|:| |geneigvec| 36)) (|List| 59)
               (108 . |generalizedEigenvectors|)
-              (|Record| (|:| |eigval| 40) (|:| |geneigvec| 39)) (|List| 61)
+              (|Record| (|:| |eigval| 41) (|:| |geneigvec| 40)) (|List| 62)
               (113 . |generalizedEigenvectors|))
            '#(|generalizedEigenvectors| 118 |generalizedEigenvector| 123
               |eigenvectors| 137 |eigenvector| 142 |eigenvalues| 148
@@ -491,19 +496,19 @@
                                   (|Matrix| (|Fraction| (|Polynomial| |#1|)))))
                                 (|has| 6 (|PolynomialFactorizationExplicit|))))
                              (LIST) NIL NIL)))
-                        (|makeByteWordVec2| 63
+                        (|makeByteWordVec2| 64
                                             '(1 8 0 7 9 1 10 7 0 11 1 10 12 0
                                               13 2 7 14 0 12 15 2 19 16 17 18
                                               20 0 12 0 21 1 7 0 12 23 2 16 8 0
                                               8 24 2 26 16 0 25 27 1 29 0 28 30
-                                              1 31 16 29 32 1 8 7 0 33 2 31 36
-                                              37 29 38 4 31 36 37 29 42 42 43 1
-                                              8 0 12 47 2 10 0 12 7 48 1 31 49
-                                              29 50 1 0 51 29 52 1 31 54 29 55
-                                              1 0 56 29 57 1 31 59 29 60 1 0 62
-                                              29 63 1 1 62 29 63 2 0 39 45 29
-                                              46 4 0 39 40 29 42 42 44 1 1 56
-                                              29 57 2 0 39 40 29 41 1 1 51 29
-                                              52 2 0 7 29 12 34 1 0 7 29
+                                              1 31 16 29 32 1 8 7 0 33 2 38 36
+                                              37 29 39 4 38 36 37 29 43 43 44 1
+                                              8 0 12 48 2 10 0 12 7 49 1 38 50
+                                              29 51 1 0 52 29 53 1 38 55 29 56
+                                              1 0 57 29 58 1 38 60 29 61 1 0 63
+                                              29 64 1 1 63 29 64 2 0 40 46 29
+                                              47 4 0 40 41 29 43 43 45 1 1 57
+                                              29 58 2 0 40 41 29 42 1 1 52 29
+                                              53 2 0 7 29 12 34 1 0 7 29
                                               35)))))
            '|lookupComplete|)) 

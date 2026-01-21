@@ -74,7 +74,7 @@
 (SDEFUN |OREPCTO;apply;C2RAMR;3|
         ((|p| (C)) (|c| (R)) (|x| (R)) (|sigma| (|Automorphism| R))
          (|delta| (|Mapping| R R)) (% (R)))
-        (SPROG ((|xn| (R)) (|w| (R)) (#1=#:G42 NIL) (|i| NIL))
+        (SPROG ((|xn| (R)) (|w| (R)) (#1=#:G34 NIL) (|i| NIL))
                (SEQ (LETT |w| (|spadConstant| % 20)) (LETT |xn| |x|)
                     (SEQ (LETT |i| 0) (LETT #1# (SPADCALL |p| (QREFELT % 12)))
                          G190 (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -101,7 +101,7 @@
          (% (|Record| (|:| |quotient| C) (|:| |remainder| C))))
         (SPROG
          ((|qr| (|Record| (|:| |quotient| C) (|:| |remainder| C))) (|a1| (C))
-          (|q| (C)) (#1=#:G52 NIL)
+          (|q| (C)) (#1=#:G44 NIL)
           (|n| (|Union| (|NonNegativeInteger|) "failed"))
           (|m| (|NonNegativeInteger|)))
          (SEQ
@@ -125,7 +125,7 @@
                     ((QEQCAR |n| 1)
                      (PROGN
                       (LETT #1# (CONS (|spadConstant| % 10) |a|))
-                      (GO #3=#:G49))))))))
+                      (GO #3=#:G41))))))))
                (LETT |q|
                      (SPADCALL
                       (SPADCALL (SPADCALL |sigma| (- |m|) (QREFELT % 33))
@@ -148,7 +148,7 @@
          (% (|Record| (|:| |quotient| C) (|:| |remainder| C))))
         (SPROG
          ((|qr| (|Record| (|:| |quotient| C) (|:| |remainder| C))) (|a1| (C))
-          (|q| (C)) (#1=#:G62 NIL)
+          (|q| (C)) (#1=#:G54 NIL)
           (|n| (|Union| (|NonNegativeInteger|) "failed"))
           (|m| (|NonNegativeInteger|)))
          (SEQ
@@ -173,7 +173,7 @@
                     ((QEQCAR |n| 1)
                      (PROGN
                       (LETT #1# (CONS (|spadConstant| % 10) |a|))
-                      (GO #3=#:G59))))))))
+                      (GO #3=#:G51))))))))
                (LETT |q|
                      (SPADCALL
                       (SPADCALL (SPADCALL |a| (QREFELT % 21))
@@ -195,7 +195,7 @@
 (SDEFUN |OREPCTO;monicLeftDivide;2CAR;6|
         ((|a| (C)) (|b| (C)) (|sigma| (|Automorphism| R))
          (% (|Record| (|:| |quotient| C) (|:| |remainder| C))))
-        (SPROG ((#1=#:G65 NIL) (|u| (R)))
+        (SPROG ((#1=#:G57 NIL) (|u| (R)))
                (COND
                 ((SPADCALL (LETT |u| (SPADCALL |b| (QREFELT % 21)))
                            (QREFELT % 36))
@@ -210,7 +210,7 @@
 (SDEFUN |OREPCTO;monicRightDivide;2CAR;7|
         ((|a| (C)) (|b| (C)) (|sigma| (|Automorphism| R))
          (% (|Record| (|:| |quotient| C) (|:| |remainder| C))))
-        (SPROG ((#1=#:G72 NIL) (|u| (R)))
+        (SPROG ((#1=#:G64 NIL) (|u| (R)))
                (COND
                 ((SPADCALL (LETT |u| (SPADCALL |b| (QREFELT % 21)))
                            (QREFELT % 36))
@@ -235,28 +235,6 @@
          (SPADCALL (SPADCALL |b| (QREFELT % 21)) (QREFELT % 41)) %)) 
 
 (DECLAIM (NOTINLINE |UnivariateSkewPolynomialCategoryOps;|)) 
-
-(DEFUN |UnivariateSkewPolynomialCategoryOps| (&REST #1=#:G80)
-  (SPROG NIL
-         (PROG (#2=#:G81)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|UnivariateSkewPolynomialCategoryOps|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function| |UnivariateSkewPolynomialCategoryOps;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|UnivariateSkewPolynomialCategoryOps|)))))))))) 
 
 (DEFUN |UnivariateSkewPolynomialCategoryOps;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
@@ -301,6 +279,28 @@
                        (CONS (|dispatchFunction| |OREPCTO;rightDivide;2CAR;9|)
                              %)))))
           %))) 
+
+(DEFUN |UnivariateSkewPolynomialCategoryOps| (&REST #1=#:G72)
+  (SPROG NIL
+         (PROG (#2=#:G73)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|UnivariateSkewPolynomialCategoryOps|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function| |UnivariateSkewPolynomialCategoryOps;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|UnivariateSkewPolynomialCategoryOps|)))))))))) 
 
 (MAKEPROP '|UnivariateSkewPolynomialCategoryOps| '|infovec|
           (LIST

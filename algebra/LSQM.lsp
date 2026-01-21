@@ -4,7 +4,7 @@
 
 (SDEFUN |LSQM;conv| ((|v| (|DirectProduct| |n2| R)) (% (|SquareMatrix| |n| R)))
         (SPROG
-         ((|z| (|Integer|)) (#1=#:G25 NIL) (|j| NIL) (#2=#:G24 NIL) (|i| NIL)
+         ((|z| (|Integer|)) (#1=#:G9 NIL) (|j| NIL) (#2=#:G8 NIL) (|i| NIL)
           (|cond| (|Matrix| R)))
          (SEQ
           (LETT |cond|
@@ -28,7 +28,7 @@
 
 (SDEFUN |LSQM;canonical_coordinates| ((|a| (%)) (% (|Vector| R)))
         (SPROG
-         ((|z| (|Integer|)) (#1=#:G34 NIL) (|j| NIL) (#2=#:G33 NIL) (|i| NIL)
+         ((|z| (|Integer|)) (#1=#:G18 NIL) (|j| NIL) (#2=#:G17 NIL) (|i| NIL)
           (|as| (|SquareMatrix| |n| R)) (|res| (|Vector| R)))
          (SEQ (LETT |res| (MAKEARR1 (QREFELT % 9) (|spadConstant| % 13)))
               (LETT |z| 0) (LETT |as| |a|)
@@ -52,8 +52,8 @@
 (SDEFUN |LSQM;coordinates;%VV;4|
         ((|a| (%)) (|b| (|Vector| %)) (% (|Vector| R)))
         (SPROG
-         ((|canonical| (|Boolean|)) (#1=#:G42 NIL) (#2=#:G44 NIL) (|j| NIL)
-          (|bv| (|Vector| R)) (#3=#:G43 NIL) (|i| NIL))
+         ((|canonical| (|Boolean|)) (#1=#:G26 NIL) (#2=#:G28 NIL) (|j| NIL)
+          (|bv| (|Vector| R)) (#3=#:G27 NIL) (|i| NIL))
          (SEQ (LETT |canonical| 'T)
               (SEQ (LETT |i| 1) (LETT #3# (QREFELT % 9)) G190
                    (COND
@@ -77,7 +77,7 @@
                            (EXIT
                             (COND
                              ((EQL |j| |i|)
-                              (PROGN (LETT #1# |$NoValue|) (GO #4=#:G36)))
+                              (PROGN (LETT #1# |$NoValue|) (GO #4=#:G20)))
                              ('T
                               (LETT |canonical|
                                     (COND
@@ -104,7 +104,7 @@
 (SDEFUN |LSQM;basis;V;6| ((% (|Vector| %)))
         (SPROG
          ((|res| (|Vector| %)) (|ldp| (|List| (|DirectProduct| |n2| R)))
-          (#1=#:G49 NIL) (#2=#:G55 NIL) (|i| NIL) (#3=#:G54 NIL))
+          (#1=#:G33 NIL) (#2=#:G39 NIL) (|i| NIL) (#3=#:G38 NIL))
          (SEQ (SETELT % 9 (* (QREFELT % 6) (QREFELT % 6)))
               (LETT |ldp|
                     (PROGN
@@ -138,25 +138,6 @@
 
 (DECLAIM (NOTINLINE |LieSquareMatrix;|)) 
 
-(DEFUN |LieSquareMatrix| (&REST #1=#:G69)
-  (SPROG NIL
-         (PROG (#2=#:G70)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T))
-                                               (HGET |$ConstructorCache|
-                                                     '|LieSquareMatrix|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |LieSquareMatrix;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|LieSquareMatrix|)))))))))) 
-
 (DEFUN |LieSquareMatrix;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -186,6 +167,25 @@
                     (|AssociatedLieAlgebra| |#2| (|SquareMatrix| |#1| |#2|)))
           (QSETREFV % 9 (* |#1| |#1|))
           %))) 
+
+(DEFUN |LieSquareMatrix| (&REST #1=#:G49)
+  (SPROG NIL
+         (PROG (#2=#:G50)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T))
+                                               (HGET |$ConstructorCache|
+                                                     '|LieSquareMatrix|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |LieSquareMatrix;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|LieSquareMatrix|)))))))))) 
 
 (MAKEPROP '|LieSquareMatrix| '|infovec|
           (LIST

@@ -553,10 +553,9 @@
 (DEFUN |MappingPrint| (|x| |dom|) (PROG () (RETURN (|coerceMap2E| |x|))))
 
 ; coerceMap2E(x) ==
-;   -- nrlib domain
-;   ARRAYP rest x => ['theMap, BPINAME first x,
-;     if $testingSystem then 0 else REMAINDER(HASHEQ rest x, 1000)]
-;   -- aldor
+;   -- closure, Spad
+;   ARRAYP(rest(x)) => ['theMap, BPINAME(first(x)), #rest(x)]
+;   -- other
 ;   ['theMap, BPINAME first x]
 
 (DEFUN |coerceMap2E| (|x|)
@@ -564,10 +563,8 @@
     (RETURN
      (COND
       ((ARRAYP (CDR |x|))
-       (LIST '|theMap| (BPINAME (CAR |x|))
-             (COND (|$testingSystem| 0)
-                   (#1='T (REMAINDER (HASHEQ (CDR |x|)) 1000)))))
-      (#1# (LIST '|theMap| (BPINAME (CAR |x|))))))))
+       (LIST '|theMap| (BPINAME (CAR |x|)) (LENGTH (CDR |x|))))
+      ('T (LIST '|theMap| (BPINAME (CAR |x|))))))))
 
 ; Enumeration0(:args) ==
 ;     dom := GETREFV 10

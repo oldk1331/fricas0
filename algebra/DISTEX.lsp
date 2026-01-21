@@ -48,7 +48,7 @@
 
 (SDEFUN |DISTEX;arcsineDistribution;RD;6| ((|a| (R)) (% (|Distribution| R)))
         (SPROG
-         ((|mgf| (|Stream| R)) (#1=#:G25 NIL)
+         ((|mgf| (|Stream| R)) (#1=#:G11 NIL)
           (|half| (|Fraction| (|Integer|))))
          (SEQ
           (LETT |mgf|
@@ -75,23 +75,6 @@
                      (QREFELT % 23)))))) 
 
 (DECLAIM (NOTINLINE |DistributionPackage;|)) 
-
-(DEFUN |DistributionPackage| (#1=#:G29)
-  (SPROG NIL
-         (PROG (#2=#:G30)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|DistributionPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|DistributionPackage;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|DistributionPackage|)))))))))) 
 
 (DEFUN |DistributionPackage;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
@@ -121,6 +104,23 @@
                         (|dispatchFunction| |DISTEX;arcsineDistribution;RD;6|)
                         %)))))
           %))) 
+
+(DEFUN |DistributionPackage| (#1=#:G15)
+  (SPROG NIL
+         (PROG (#2=#:G16)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|DistributionPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|DistributionPackage;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|DistributionPackage|)))))))))) 
 
 (MAKEPROP '|DistributionPackage| '|infovec|
           (LIST

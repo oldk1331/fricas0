@@ -8,7 +8,7 @@
           (|r|
            (|Record| (|:| |polyPart| (|LaurentPolynomial| F UP))
                      (|:| |fracPart| (|Fraction| UP))))
-          (#1=#:G32 NIL) (|i| NIL) (|vf| #2=(|Vector| (|Fraction| UP)))
+          (#1=#:G19 NIL) (|i| NIL) (|vf| #2=(|Vector| (|Fraction| UP)))
           (|vp| #2#) (|n| (|NonNegativeInteger|)) (|v| #3=(|Vector| UP))
           (|d| (UP)) (|c| (|Record| (|:| |num| #3#) (|:| |den| UP))))
          (SEQ (LETT |d| (QCDR (LETT |c| (SPADCALL |f| (QREFELT % 12)))))
@@ -41,7 +41,7 @@
         (SPROG
          ((|fp| (R)) (|ff| (R)) (|w| (|Vector| R))
           (|r| (|Record| (|:| |quotient| UP) (|:| |remainder| UP)))
-          (#1=#:G43 NIL) (|i| NIL) (|vf| #2=(|Vector| (|Fraction| UP)))
+          (#1=#:G30 NIL) (|i| NIL) (|vf| #2=(|Vector| (|Fraction| UP)))
           (|vp| #2#) (|n| (|NonNegativeInteger|)) (|v| #3=(|Vector| UP))
           (|d| (UP)) (|c| (|Record| (|:| |num| #3#) (|:| |den| UP))) (|hh| (R))
           (|h| (|Record| (|:| |answer| R) (|:| |logpart| R))))
@@ -86,7 +86,7 @@
          (%
           (|List|
            (|Record| (|:| |answer| R) (|:| |logpart| R) (|:| |polypart| R)))))
-        (SPROG ((#1=#:G52 NIL) (|f| NIL) (#2=#:G51 NIL))
+        (SPROG ((#1=#:G35 NIL) (|f| NIL) (#2=#:G34 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -100,7 +100,7 @@
                       (EXIT (NREVERSE #2#))))))) 
 
 (SDEFUN |INTALG2;lin_comb2| ((|v| (|Vector| F)) (|lr| (|List| R)) (% (R)))
-        (SPROG ((|res| (R)) (#1=#:G58 NIL) (|i| NIL) (#2=#:G59 NIL) (|r| NIL))
+        (SPROG ((|res| (R)) (#1=#:G40 NIL) (|i| NIL) (#2=#:G41 NIL) (|r| NIL))
                (SEQ (LETT |res| (|spadConstant| % 35))
                     (SEQ (LETT |r| NIL) (LETT #2# |lr|) (LETT |i| 1)
                          (LETT #1# (QVSIZE |v|)) G190
@@ -131,10 +131,10 @@
                     (|:| |logpart| (|Fraction| UP)))))
         (SPROG
          ((|b| (UP)) (|a| (UP))
-          (|#G23| (|Record| (|:| |coef1| UP) (|:| |coef2| UP))) (#1=#:G66 NIL)
+          (|#G23| (|Record| (|:| |coef1| UP) (|:| |coef2| UP))) (#1=#:G48 NIL)
           (|eeu|
            (|Union| (|Record| (|:| |coef1| UP) (|:| |coef2| UP)) #2="failed"))
-          (|d1| (UP)) (#3=#:G62 NIL) (|g| (UP)) (|d0| (UP)))
+          (|d1| (UP)) (#3=#:G44 NIL) (|g| (UP)) (|d0| (UP)))
          (SEQ (LETT |d0| (SPADCALL |lg| (QREFELT % 44)))
               (LETT |g| (SPADCALL |dden| |d0| (QREFELT % 45)))
               (EXIT
@@ -198,7 +198,7 @@
           (|#G29|
            (|Record| (|:| |polypart| (|Fraction| UP))
                      (|:| |logpart| (|Fraction| UP))))
-          (#1=#:G78 NIL) (|p1| NIL) (#2=#:G79 NIL) (|lg1| NIL))
+          (#1=#:G60 NIL) (|p1| NIL) (#2=#:G61 NIL) (|lg1| NIL))
          (SEQ (LETT |pres| NIL) (LETT |lres| NIL)
               (SEQ (LETT |lg1| NIL) (LETT #2# |llog|) (LETT |p1| NIL)
                    (LETT #1# |lup|) G190
@@ -239,25 +239,25 @@
          (|csolve| (|Mapping| (|List| (|Vector| F)) (|Matrix| F)))
          (% (|List| (|Record| (|:| |ratpart| R) (|:| |coeffs| (|Vector| F))))))
         (SPROG
-         ((#4=#:G141 NIL) (|ai| NIL) (#5=#:G142 NIL) (|bv| NIL) (#6=#:G140 NIL)
+         ((#4=#:G119 NIL) (|ai| NIL) (#5=#:G120 NIL) (|bv| NIL) (#6=#:G118 NIL)
           (|ca| (|List| R)) (|cb| (|List| #2#)) (|nca1| (|List| R))
-          (#7=#:G139 NIL) (|be| NIL) (#8=#:G138 NIL) (|wi| (R))
-          (|ncb1| (|List| #9=(|Vector| F))) (#10=#:G137 NIL) (#11=#:G136 NIL)
-          (|res2| #3#) (|lup2| (|List| #12=(|Fraction| UP))) (#13=#:G135 NIL)
-          (#14=#:G134 NIL) (|nca0| (|List| R)) (#15=#:G133 NIL)
-          (#16=#:G132 NIL) (|ncb0| (|List| #9#)) (#17=#:G131 NIL)
-          (#18=#:G130 NIL) (|res1| (|List| (|Vector| F)))
-          (|llog2| (|List| #12#)) (#19=#:G129 NIL) (#20=#:G128 NIL)
+          (#7=#:G117 NIL) (|be| NIL) (#8=#:G116 NIL) (|wi| (R))
+          (|ncb1| (|List| #9=(|Vector| F))) (#10=#:G115 NIL) (#11=#:G114 NIL)
+          (|res2| #3#) (|lup2| (|List| #12=(|Fraction| UP))) (#13=#:G113 NIL)
+          (#14=#:G112 NIL) (|nca0| (|List| R)) (#15=#:G111 NIL)
+          (#16=#:G110 NIL) (|ncb0| (|List| #9#)) (#17=#:G109 NIL)
+          (#18=#:G108 NIL) (|res1| (|List| (|Vector| F)))
+          (|llog2| (|List| #12#)) (#19=#:G107 NIL) (#20=#:G106 NIL)
           (|llog1| (|List| (|Fraction| UP))) (|lup1| (|List| (|Fraction| UP)))
           (|#G46|
            (|Record| (|:| |polypart| (|List| (|Fraction| UP)))
                      (|:| |logpart| (|List| (|Fraction| UP)))))
-          (|llog0| (|List| #21=(|Fraction| UP))) (#22=#:G127 NIL) (|gv| NIL)
-          (#23=#:G126 NIL) (|lup0| (|List| #21#)) (#24=#:G125 NIL) (|pv| NIL)
-          (#25=#:G124 NIL) (|dmi| (|Fraction| UP)) (#26=#:G123 NIL) (|i| NIL)
-          (#27=#:G122 NIL) (|be0| NIL) (#28=#:G121 NIL) (#29=#:G120 NIL)
-          (#30=#:G119 NIL) (|res0| #1#) (|lrf| (|List| (|Fraction| UP)))
-          (#31=#:G117 NIL) (#32=#:G118 NIL) (#33=#:G116 NIL))
+          (|llog0| (|List| #21=(|Fraction| UP))) (#22=#:G105 NIL) (|gv| NIL)
+          (#23=#:G104 NIL) (|lup0| (|List| #21#)) (#24=#:G103 NIL) (|pv| NIL)
+          (#25=#:G102 NIL) (|dmi| (|Fraction| UP)) (#26=#:G101 NIL) (|i| NIL)
+          (#27=#:G100 NIL) (|be0| NIL) (#28=#:G99 NIL) (#29=#:G98 NIL)
+          (#30=#:G97 NIL) (|res0| #1#) (|lrf| (|List| (|Fraction| UP)))
+          (#31=#:G95 NIL) (#32=#:G96 NIL) (#33=#:G94 NIL))
          (SEQ
           (LETT |lrf|
                 (PROGN
@@ -472,7 +472,7 @@
 
 (SDEFUN |INTALG2;R_to_VQF| ((|p| (R)) (% (|Vector| (|Fraction| UP))))
         (SPROG
-         ((#1=#:G148 NIL) (|i| NIL) (|cden| (UP))
+         ((#1=#:G126 NIL) (|i| NIL) (|cden| (UP))
           (|res| (|Vector| (|Fraction| UP))) (|n| (|NonNegativeInteger|))
           (|numv| #2=(|Vector| UP))
           (|c| (|Record| (|:| |num| #2#) (|:| |den| UP))))
@@ -509,11 +509,11 @@
          (|lg| (|List| R))
          (% (|List| (|Record| (|:| |ratpart| R) (|:| |coeffs| (|Vector| F))))))
         (SPROG
-         ((|ca0| (|List| R)) (#1=#:G170 NIL) (|h| NIL) (#2=#:G169 NIL)
+         ((|ca0| (|List| R)) (#1=#:G148 NIL) (|h| NIL) (#2=#:G147 NIL)
           (|dden| (UP))
           (|dm| (|Record| (|:| |num| (|Matrix| UP)) (|:| |den| UP)))
           (|w| (|Vector| R)) (|lgv| (|List| (|Vector| (|Fraction| UP))))
-          (|lpv| (|List| (|Vector| (|Fraction| UP)))) (#3=#:G168 NIL)
+          (|lpv| (|List| (|Vector| (|Fraction| UP)))) (#3=#:G146 NIL)
           (|lh|
            (|List|
             (|Record| (|:| |answer| R) (|:| |logpart| R) (|:| |polypart| R))))
@@ -581,11 +581,11 @@
          (|lg| (|List| R))
          (% (|List| (|Record| (|:| |ratpart| R) (|:| |coeffs| (|Vector| F))))))
         (SPROG
-         ((|ca0| (|List| R)) (#1=#:G192 NIL) (|h| NIL) (#2=#:G191 NIL)
+         ((|ca0| (|List| R)) (#1=#:G170 NIL) (|h| NIL) (#2=#:G169 NIL)
           (|dden| (UP))
           (|dm| (|Record| (|:| |num| (|Matrix| UP)) (|:| |den| UP)))
           (|lgv| (|List| (|Vector| (|Fraction| UP))))
-          (|lpv| (|List| (|Vector| (|Fraction| UP)))) (#3=#:G190 NIL)
+          (|lpv| (|List| (|Vector| (|Fraction| UP)))) (#3=#:G168 NIL)
           (|w| (|Vector| R))
           (|lh|
            (|List|
@@ -642,10 +642,10 @@
          (|lg| (|List| R))
          (% (|List| (|Record| (|:| |ratpart| R) (|:| |coeffs| (|Vector| F))))))
         (SPROG
-         ((#1=#:G212 NIL) (|bv| NIL) (#2=#:G211 NIL) (|ca0| (|List| R))
-          (#3=#:G210 NIL) (|h| NIL) (#4=#:G209 NIL)
+         ((#1=#:G190 NIL) (|bv| NIL) (#2=#:G189 NIL) (|ca0| (|List| R))
+          (#3=#:G188 NIL) (|h| NIL) (#4=#:G187 NIL)
           (|res1| (|List| (|Vector| F))) (|rs1| (|Matrix| (|Fraction| UP)))
-          (|lg1| (|List| R)) (#5=#:G208 NIL) (#6=#:G207 NIL)
+          (|lg1| (|List| R)) (#5=#:G186 NIL) (#6=#:G185 NIL)
           (|lh|
            (|List|
             (|Record| (|:| |answer| R) (|:| |logpart| R) (|:| |polypart| R))))
@@ -729,7 +729,7 @@
          (|lg| (|List| R))
          (% (|List| (|Record| (|:| |ratpart| R) (|:| |coeffs| (|Vector| F))))))
         (SPROG
-         ((#1=#:G238 NIL) (|xx| (|Union| UP "failed")) (|x'| (UP)) (|x| (UP)))
+         ((#1=#:G216 NIL) (|xx| (|Union| UP "failed")) (|x'| (UP)) (|x| (UP)))
          (SEQ
           (LETT |x'|
                 (SPADCALL
@@ -753,30 +753,11 @@
                            (LETT #1#
                                  (|INTALG2;algexpextint| |der| |ext| |rde|
                                   |csolve| |lg| %))
-                           (GO #2=#:G232))))))))
+                           (GO #2=#:G210))))))))
                 (EXIT (|error| "algextint: unhandled case"))))
               #2# (EXIT #1#)))))))) 
 
 (DECLAIM (NOTINLINE |AlgebraicIntegrate2;|)) 
-
-(DEFUN |AlgebraicIntegrate2| (&REST #1=#:G239)
-  (SPROG NIL
-         (PROG (#2=#:G240)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|AlgebraicIntegrate2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |AlgebraicIntegrate2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|AlgebraicIntegrate2|)))))))))) 
 
 (DEFUN |AlgebraicIntegrate2;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
@@ -802,6 +783,25 @@
     (QSETREFV % 10 |#5|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |AlgebraicIntegrate2| (&REST #1=#:G217)
+  (SPROG NIL
+         (PROG (#2=#:G218)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|AlgebraicIntegrate2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |AlgebraicIntegrate2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|AlgebraicIntegrate2|)))))))))) 
 
 (MAKEPROP '|AlgebraicIntegrate2| '|infovec|
           (LIST

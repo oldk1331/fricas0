@@ -3,9 +3,9 @@
         ((|x| (G)) (% (|Permutation| (|Integer|))))
         (SPROG
          ((|p| (|Permutation| (|Integer|))) (|imag| (|List| (|Integer|)))
-          (#1=#:G25 NIL) (|a| NIL) (#2=#:G24 NIL)
-          (|preimag| (|List| (|Integer|))) (#3=#:G23 NIL) (|k| NIL)
-          (#4=#:G22 NIL) (|xall| (|List| G)) (#5=#:G21 NIL) (#6=#:G20 NIL)
+          (#1=#:G13 NIL) (|a| NIL) (#2=#:G12 NIL)
+          (|preimag| (|List| (|Integer|))) (#3=#:G11 NIL) (|k| NIL)
+          (#4=#:G10 NIL) (|xall| (|List| G)) (#5=#:G9 NIL) (#6=#:G8 NIL)
           (|n| (|Integer|)) (|all| (|List| G)))
          (SEQ (LETT |all| (SPADCALL (QREFELT % 8))) (LETT |n| (LENGTH |all|))
               (LETT |xall|
@@ -57,23 +57,6 @@
 
 (DECLAIM (NOTINLINE |FiniteGroupPackage;|)) 
 
-(DEFUN |FiniteGroupPackage| (#1=#:G29)
-  (SPROG NIL
-         (PROG (#2=#:G30)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|FiniteGroupPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|FiniteGroupPackage;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|FiniteGroupPackage|)))))))))) 
-
 (DEFUN |FiniteGroupPackage;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -88,6 +71,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |FiniteGroupPackage| (#1=#:G16)
+  (SPROG NIL
+         (PROG (#2=#:G17)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|FiniteGroupPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|FiniteGroupPackage;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|FiniteGroupPackage|)))))))))) 
 
 (MAKEPROP '|FiniteGroupPackage| '|infovec|
           (LIST

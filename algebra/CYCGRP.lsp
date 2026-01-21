@@ -8,14 +8,12 @@
 (SDEFUN |CYCGRP;per| ((|r| (|Rep|)) (% (%))) |r|) 
 
 (SDEFUN |CYCGRP;coerce;%Of;3| ((|x| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G26 NIL))
+        (SPROG ((#1=#:G9 NIL))
                (SEQ
                 (EXIT
                  (COND
                   ((SPADCALL |x| (QREFELT % 10))
-                   (PROGN
-                    (LETT #1# (SPADCALL 1 (QREFELT % 13)))
-                    (GO #2=#:G25)))
+                   (PROGN (LETT #1# (SPADCALL 1 (QREFELT % 13))) (GO #2=#:G8)))
                   ((EQL (|CYCGRP;rep| |x| %) 1)
                    (PROGN
                     (LETT #1# (SPADCALL (QREFELT % 7) (QREFELT % 15)))
@@ -61,7 +59,7 @@
 (SDEFUN |CYCGRP;size;Nni;13| ((% (|NonNegativeInteger|))) (QREFELT % 6)) 
 
 (SDEFUN |CYCGRP;index;Pi%;14| ((|i| (|PositiveInteger|)) (% (%)))
-        (SPROG ((#1=#:G43 NIL) (|imodn| (%)))
+        (SPROG ((#1=#:G23 NIL) (|imodn| (%)))
                (SEQ
                 (EXIT
                  (COND ((> |i| (QREFELT % 6)) (|error| "out of range"))
@@ -74,7 +72,7 @@
                            ((ZEROP |imodn|)
                             (PROGN
                              (LETT #1# (|spadConstant| % 24))
-                             (GO #3=#:G42)))
+                             (GO #3=#:G22)))
                            (#2# (|CYCGRP;per| |imodn| %))))))))
                 #3# (EXIT #1#)))) 
 
@@ -84,7 +82,7 @@
 (SDEFUN |CYCGRP;random;%;16| ((% (%))) (|CYCGRP;per| (RANDOM (QREFELT % 6)) %)) 
 
 (SDEFUN |CYCGRP;enumerate;L;17| ((% (|List| %)))
-        (SPROG ((#1=#:G50 NIL) (|k| NIL) (#2=#:G49 NIL))
+        (SPROG ((#1=#:G30 NIL) (|k| NIL) (#2=#:G29 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -104,23 +102,6 @@
 
 (DECLAIM (NOTINLINE |CyclicGroup;|)) 
 
-(DEFUN |CyclicGroup| (&REST #1=#:G57)
-  (SPROG NIL
-         (PROG (#2=#:G58)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|CyclicGroup|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |CyclicGroup;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|CyclicGroup|)))))))))) 
-
 (DEFUN |CyclicGroup;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -138,6 +119,23 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 8 (|Integer|))
           %))) 
+
+(DEFUN |CyclicGroup| (&REST #1=#:G37)
+  (SPROG NIL
+         (PROG (#2=#:G38)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|CyclicGroup|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |CyclicGroup;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|CyclicGroup|)))))))))) 
 
 (MAKEPROP '|CyclicGroup| '|infovec|
           (LIST

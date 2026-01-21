@@ -38,9 +38,22 @@
 
 (DECLAIM (NOTINLINE |SpecialOutputPackage;|)) 
 
+(DEFUN |SpecialOutputPackage;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|SpecialOutputPackage|))
+          (LETT % (GETREFV 24))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|SpecialOutputPackage| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |SpecialOutputPackage| ()
   (SPROG NIL
-         (PROG (#1=#:G26)
+         (PROG (#1=#:G11)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|SpecialOutputPackage|))
@@ -56,19 +69,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|SpecialOutputPackage|)))))))))) 
-
-(DEFUN |SpecialOutputPackage;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|SpecialOutputPackage|))
-          (LETT % (GETREFV 24))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|SpecialOutputPackage| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|SpecialOutputPackage| '|infovec|
           (LIST

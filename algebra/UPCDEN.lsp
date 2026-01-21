@@ -1,29 +1,6 @@
 
 (DECLAIM (NOTINLINE |UnivariatePolynomialCommonDenominator;|)) 
 
-(DEFUN |UnivariatePolynomialCommonDenominator| (&REST #1=#:G3)
-  (SPROG NIL
-         (PROG (#2=#:G4)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|UnivariatePolynomialCommonDenominator|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function| |UnivariatePolynomialCommonDenominator;|)
-                       #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|UnivariatePolynomialCommonDenominator|)))))))))) 
-
 (DEFUN |UnivariatePolynomialCommonDenominator;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -44,6 +21,29 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |UnivariatePolynomialCommonDenominator| (&REST #1=#:G1)
+  (SPROG NIL
+         (PROG (#2=#:G2)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|UnivariatePolynomialCommonDenominator|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function| |UnivariatePolynomialCommonDenominator;|)
+                       #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|UnivariatePolynomialCommonDenominator|)))))))))) 
 
 (MAKEPROP '|UnivariatePolynomialCommonDenominator| '|infovec|
           (LIST

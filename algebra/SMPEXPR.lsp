@@ -85,31 +85,11 @@
 
 (DECLAIM (NOTINLINE |SparseMultivariatePolynomialExpressions;|)) 
 
-(DEFUN |SparseMultivariatePolynomialExpressions| (#1=#:G106)
-  (SPROG NIL
-         (PROG (#2=#:G107)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|SparseMultivariatePolynomialExpressions|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|SparseMultivariatePolynomialExpressions;| #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|SparseMultivariatePolynomialExpressions|)))))))))) 
-
 (DEFUN |SparseMultivariatePolynomialExpressions;| (|#1|)
   (SPROG
-   ((#1=#:G105 NIL) (|pv$| NIL) (#2=#:G96 NIL) (#3=#:G98 NIL) (#4=#:G97 NIL)
-    (#5=#:G99 NIL) (#6=#:G100 NIL) (#7=#:G101 NIL) (#8=#:G102 NIL)
-    (#9=#:G103 NIL) (#10=#:G104 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+   ((#1=#:G73 NIL) (|pv$| NIL) (#2=#:G64 NIL) (#3=#:G66 NIL) (#4=#:G65 NIL)
+    (#5=#:G67 NIL) (#6=#:G68 NIL) (#7=#:G69 NIL) (#8=#:G70 NIL) (#9=#:G71 NIL)
+    (#10=#:G72 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT |dv$| (LIST '|SparseMultivariatePolynomialExpressions| DV$1))
@@ -664,6 +644,26 @@
        (QSETREFV % 26 (CONS (|dispatchFunction| |SMPEXPR;cos;2%;5|) %))
        (QSETREFV % 28 (CONS (|dispatchFunction| |SMPEXPR;acos;2%;6|) %)))))
     %))) 
+
+(DEFUN |SparseMultivariatePolynomialExpressions| (#1=#:G74)
+  (SPROG NIL
+         (PROG (#2=#:G75)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|SparseMultivariatePolynomialExpressions|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|SparseMultivariatePolynomialExpressions;| #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|SparseMultivariatePolynomialExpressions|)))))))))) 
 
 (MAKEPROP '|SparseMultivariatePolynomialExpressions| '|infovec|
           (LIST

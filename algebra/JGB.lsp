@@ -71,10 +71,10 @@
 
 (SDEFUN |JGB;groebner;2L;3| ((|lp| (|List| P)) (% (|List| P)))
         (SPROG
-         ((#1=#:G46 NIL) (|dp| NIL) (#2=#:G45 NIL)
+         ((#1=#:G35 NIL) (|dp| NIL) (#2=#:G34 NIL)
           (|gb| (|List| (|DistributedJetBundlePolynomial| R JB LJV E)))
           (|nlp| (|List| (|DistributedJetBundlePolynomial| R JB LJV E)))
-          (#3=#:G44 NIL) (|p| NIL) (#4=#:G43 NIL))
+          (#3=#:G33 NIL) (|p| NIL) (#4=#:G32 NIL))
          (SEQ
           (LETT |nlp|
                 (PROGN
@@ -98,23 +98,6 @@
                  (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT (NREVERSE #2#)))))))) 
 
 (DECLAIM (NOTINLINE |JetGroebner;|)) 
-
-(DEFUN |JetGroebner| (&REST #1=#:G47)
-  (SPROG NIL
-         (PROG (#2=#:G48)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T T NIL T T))
-                     (HGET |$ConstructorCache| '|JetGroebner|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |JetGroebner;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|JetGroebner|)))))))))) 
 
 (DEFUN |JetGroebner;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
@@ -140,6 +123,23 @@
     (QSETREFV % 10 |#5|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |JetGroebner| (&REST #1=#:G36)
+  (SPROG NIL
+         (PROG (#2=#:G37)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T T NIL T T))
+                     (HGET |$ConstructorCache| '|JetGroebner|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |JetGroebner;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|JetGroebner|)))))))))) 
 
 (MAKEPROP '|JetGroebner| '|infovec|
           (LIST

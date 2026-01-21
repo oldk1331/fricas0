@@ -35,7 +35,7 @@
                        ('T (QCDR |u|))))))) 
 
 (SDEFUN |SUMFS;notRF?| ((|f| (F)) (|k| (|Kernel| F)) (% (|Boolean|)))
-        (SPROG ((#1=#:G39 NIL) (#2=#:G40 NIL) (#3=#:G41 NIL) (|kk| NIL))
+        (SPROG ((#1=#:G24 NIL) (#2=#:G25 NIL) (#3=#:G26 NIL) (|kk| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -56,8 +56,8 @@
                              (COND
                               ((QEQCAR (SPADCALL |kk| (QREFELT % 36)) 1)
                                (PROGN
-                                (LETT #1# (PROGN (LETT #2# 'T) (GO #4=#:G38)))
-                                (GO #5=#:G36))))))))
+                                (LETT #1# (PROGN (LETT #2# 'T) (GO #4=#:G23)))
+                                (GO #5=#:G21))))))))
                          (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
                    #5# (EXIT #1#))
                   (EXIT NIL)))
@@ -106,25 +106,6 @@
 
 (DECLAIM (NOTINLINE |FunctionSpaceSum;|)) 
 
-(DEFUN |FunctionSpaceSum| (&REST #1=#:G52)
-  (SPROG NIL
-         (PROG (#2=#:G53)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|FunctionSpaceSum|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |FunctionSpaceSum;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|FunctionSpaceSum|)))))))))) 
-
 (DEFUN |FunctionSpaceSum;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -141,6 +122,25 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |FunctionSpaceSum| (&REST #1=#:G34)
+  (SPROG NIL
+         (PROG (#2=#:G35)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|FunctionSpaceSum|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |FunctionSpaceSum;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|FunctionSpaceSum|)))))))))) 
 
 (MAKEPROP '|FunctionSpaceSum| '|infovec|
           (LIST

@@ -4,10 +4,10 @@
          (% (|Union| (|NonNegativeInteger|) "failed")))
         (SPROG
          ((|a| (M)) (|disclog| (|Integer|)) (|found| (|Boolean|))
-          (|rho| (|Union| (|NonNegativeInteger|) "failed")) (#1=#:G33 NIL)
-          (|i| NIL) (|b| (M)) (|end| (|Integer|)) (#2=#:G32 NIL) (#3=#:G19 NIL)
+          (|rho| (|Union| (|NonNegativeInteger|) "failed")) (#1=#:G25 NIL)
+          (|i| NIL) (|b| (M)) (|end| (|Integer|)) (#2=#:G24 NIL) (#3=#:G11 NIL)
           (|exptable| (|Table| (|PositiveInteger|) (|NonNegativeInteger|)))
-          (|n| (|Integer|)) (|l| (|Integer|)) (#4=#:G31 NIL)
+          (|n| (|Integer|)) (|l| (|Integer|)) (#4=#:G23 NIL)
           (|limit| (|Integer|)))
          (SEQ (LETT |limit| 30)
               (EXIT
@@ -91,9 +91,24 @@
 
 (DECLAIM (NOTINLINE |DiscreteLogarithmPackage;|)) 
 
-(DEFUN |DiscreteLogarithmPackage| (#1=#:G34)
+(DEFUN |DiscreteLogarithmPackage;| (|#1|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT |dv$| (LIST '|DiscreteLogarithmPackage| DV$1))
+          (LETT % (GETREFV 27))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|DiscreteLogarithmPackage|
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |DiscreteLogarithmPackage| (#1=#:G26)
   (SPROG NIL
-         (PROG (#2=#:G35)
+         (PROG (#2=#:G27)
            (RETURN
             (COND
              ((LETT #2#
@@ -109,21 +124,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|DiscreteLogarithmPackage|)))))))))) 
-
-(DEFUN |DiscreteLogarithmPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT |dv$| (LIST '|DiscreteLogarithmPackage| DV$1))
-          (LETT % (GETREFV 27))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|DiscreteLogarithmPackage|
-                      (LIST DV$1) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|DiscreteLogarithmPackage| '|infovec|
           (LIST

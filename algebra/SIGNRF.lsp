@@ -104,8 +104,8 @@
 (SDEFUN |SIGNRF;psign|
         ((|p| (|Polynomial| R)) (% (|Union| (|Integer|) "failed")))
         (SPROG
-         ((|ans| (|Integer|)) (#1=#:G81 NIL)
-          (|u| (|Union| (|Integer|) "failed")) (#2=#:G82 NIL) (|term| NIL)
+         ((|ans| (|Integer|)) (#1=#:G51 NIL)
+          (|u| (|Union| (|Integer|) "failed")) (#2=#:G52 NIL) (|term| NIL)
           (|s| (|Factored| (|Polynomial| R))) (|r| (|Union| R "failed")))
          (SEQ
           (EXIT
@@ -150,7 +150,7 @@
                                                    (PROGN
                                                     (LETT #1#
                                                           (CONS 1 "failed"))
-                                                    (GO #4=#:G80)))
+                                                    (GO #4=#:G50)))
                                                   ('T
                                                    (LETT |ans|
                                                          (* |ans|
@@ -177,8 +177,8 @@
         ((|l| (|List| (|Polynomial| R))) (|s| (|Integer|))
          (% (|Union| (|Integer|) #1="failed")))
         (SPROG
-         ((#2=#:G97 NIL) (#3=#:G98 NIL) (|u| (|Union| (|Integer|) #1#))
-          (#4=#:G99 NIL) (|term| NIL))
+         ((#2=#:G67 NIL) (#3=#:G68 NIL) (|u| (|Union| (|Integer|) #1#))
+          (#4=#:G69 NIL) (|term| NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -190,7 +190,7 @@
                       (EXIT
                        (COND
                         ((QEQCAR |u| 1)
-                         (PROGN (LETT #3# (CONS 1 "failed")) (GO #5=#:G96)))
+                         (PROGN (LETT #3# (CONS 1 "failed")) (GO #5=#:G66)))
                         ('T
                          (SEQ
                           (EXIT
@@ -201,7 +201,7 @@
                                     (PROGN
                                      (LETT #3# (CONS 1 "failed"))
                                      (GO #5#)))
-                              (GO #6=#:G92)))))
+                              (GO #6=#:G62)))))
                           #6# (EXIT #2#))))))
                  (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT NIL))
             (EXIT (CONS 0 |s|))))
@@ -209,7 +209,7 @@
 
 (SDEFUN |SIGNRF;termSign|
         ((|term| (|Polynomial| R)) (% (|Union| (|Integer|) "failed")))
-        (SPROG ((#1=#:G108 NIL) (#2=#:G109 NIL) (#3=#:G110 NIL) (|var| NIL))
+        (SPROG ((#1=#:G78 NIL) (#2=#:G79 NIL) (#3=#:G80 NIL) (|var| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -228,8 +228,8 @@
                               (LETT #1#
                                     (PROGN
                                      (LETT #2# (CONS 1 "failed"))
-                                     (GO #4=#:G107)))
-                              (GO #5=#:G105))))))
+                                     (GO #4=#:G77)))
+                              (GO #5=#:G75))))))
                          (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
                    #5# (EXIT #1#))
                   (EXIT
@@ -238,24 +238,6 @@
                 #4# (EXIT #2#)))) 
 
 (DECLAIM (NOTINLINE |RationalFunctionSign;|)) 
-
-(DEFUN |RationalFunctionSign| (#1=#:G111)
-  (SPROG NIL
-         (PROG (#2=#:G112)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|RationalFunctionSign|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|RationalFunctionSign;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|RationalFunctionSign|)))))))))) 
 
 (DEFUN |RationalFunctionSign;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
@@ -271,6 +253,24 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |RationalFunctionSign| (#1=#:G81)
+  (SPROG NIL
+         (PROG (#2=#:G82)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|RationalFunctionSign|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|RationalFunctionSign;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|RationalFunctionSign|)))))))))) 
 
 (MAKEPROP '|RationalFunctionSign| '|infovec|
           (LIST

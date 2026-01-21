@@ -101,7 +101,7 @@
 
 (SDEFUN |RFDIST;chiSquare1;NniF;7|
         ((|dgfree| (|NonNegativeInteger|)) (% (|Float|)))
-        (SPROG ((|x| (|Float|)) (#1=#:G36 NIL) (|i| NIL))
+        (SPROG ((|x| (|Float|)) (#1=#:G23 NIL) (|i| NIL))
                (SEQ (LETT |x| (|spadConstant| % 21))
                     (SEQ (LETT |i| 1) (LETT #1# (QUOTIENT2 |dgfree| 2)) G190
                          (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -199,9 +199,24 @@
 
 (DECLAIM (NOTINLINE |RandomFloatDistributions;|)) 
 
+(DEFUN |RandomFloatDistributions;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|RandomFloatDistributions|))
+          (LETT % (GETREFV 43))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|RandomFloatDistributions| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 12
+                    (SPADCALL (- (SPADCALL (QREFELT % 8)) 1) (QREFELT % 11)))
+          %))) 
+
 (DEFUN |RandomFloatDistributions| ()
   (SPROG NIL
-         (PROG (#1=#:G55)
+         (PROG (#1=#:G42)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|RandomFloatDistributions|))
@@ -219,21 +234,6 @@
                  ((NOT #1#)
                   (HREM |$ConstructorCache|
                         '|RandomFloatDistributions|)))))))))) 
-
-(DEFUN |RandomFloatDistributions;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|RandomFloatDistributions|))
-          (LETT % (GETREFV 43))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|RandomFloatDistributions| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 12
-                    (SPADCALL (- (SPADCALL (QREFELT % 8)) 1) (QREFELT % 11)))
-          %))) 
 
 (MAKEPROP '|RandomFloatDistributions| '|infovec|
           (LIST

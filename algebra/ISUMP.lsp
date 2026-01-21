@@ -45,9 +45,9 @@
         ((|p| (P)) (|v| (V))
          (% (|Record| (|:| |num| P) (|:| |den| (|Integer|)))))
         (SPROG
-         ((|vp| #1=(|SparseUnivariatePolynomial| P)) (#2=#:G29 NIL)
-          (#3=#:G28 #1#) (#4=#:G30 #1#) (#5=#:G32 NIL) (#6=#:G36 NIL)
-          (|di| NIL) (#7=#:G37 NIL) (|pi| NIL) (|d| (|Integer|))
+         ((|vp| #1=(|SparseUnivariatePolynomial| P)) (#2=#:G14 NIL)
+          (#3=#:G13 #1#) (#4=#:G15 #1#) (#5=#:G17 NIL) (#6=#:G21 NIL)
+          (|di| NIL) (#7=#:G22 NIL) (|pi| NIL) (|d| (|Integer|))
           (|ld| (|List| (|Integer|)))
           (|lp| (|List| (|SparseUnivariatePolynomial| P)))
           (|rec|
@@ -111,23 +111,6 @@
 
 (DECLAIM (NOTINLINE |InnerPolySum;|)) 
 
-(DEFUN |InnerPolySum| (&REST #1=#:G38)
-  (SPROG NIL
-         (PROG (#2=#:G39)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|InnerPolySum|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |InnerPolySum;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|InnerPolySum|)))))))))) 
-
 (DEFUN |InnerPolySum;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -150,6 +133,23 @@
     (QSETREFV % 9 |#4|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |InnerPolySum| (&REST #1=#:G23)
+  (SPROG NIL
+         (PROG (#2=#:G24)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|InnerPolySum|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |InnerPolySum;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|InnerPolySum|)))))))))) 
 
 (MAKEPROP '|InnerPolySum| '|infovec|
           (LIST

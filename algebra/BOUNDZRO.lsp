@@ -10,25 +10,6 @@
 
 (DECLAIM (NOTINLINE |BoundIntegerRoots;|)) 
 
-(DEFUN |BoundIntegerRoots| (&REST #1=#:G6)
-  (SPROG NIL
-         (PROG (#2=#:G7)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|BoundIntegerRoots|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |BoundIntegerRoots;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|BoundIntegerRoots|)))))))))) 
-
 (DEFUN |BoundIntegerRoots;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -54,6 +35,25 @@
                       (CONS (|dispatchFunction| |BOUNDZRO;integerBound;UPI;2|)
                             %))))
           %))) 
+
+(DEFUN |BoundIntegerRoots| (&REST #1=#:G2)
+  (SPROG NIL
+         (PROG (#2=#:G3)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|BoundIntegerRoots|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |BoundIntegerRoots;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|BoundIntegerRoots|)))))))))) 
 
 (MAKEPROP '|BoundIntegerRoots| '|infovec|
           (LIST

@@ -15,7 +15,7 @@
 
 (SDEFUN |TANEXP;tanNa;RIR;3| ((|a| (R)) (|n| (|Integer|)) (% (R)))
         (SPROG
-         ((|t| (|Fraction| (|SparseUnivariatePolynomial| R))) (#1=#:G21 NIL))
+         ((|t| (|Fraction| (|SparseUnivariatePolynomial| R))) (#1=#:G10 NIL))
          (COND ((ZEROP |n|) (|spadConstant| % 16))
                ((MINUSP |n|)
                 (SPADCALL (SPADCALL |a| (- |n|) (QREFELT % 18))
@@ -37,8 +37,8 @@
 
 (SDEFUN |TANEXP;tanSum;LR;4| ((|l| (|List| R)) (% (R)))
         (SPROG
-         ((#1=#:G35 NIL) (#2=#:G34 (R)) (#3=#:G36 (R)) (#4=#:G41 NIL) (|i| NIL)
-          (#5=#:G32 NIL) (#6=#:G31 (R)) (#7=#:G33 (R)) (#8=#:G40 NIL)
+         ((#1=#:G18 NIL) (#2=#:G17 (R)) (#3=#:G19 (R)) (#4=#:G24 NIL) (|i| NIL)
+          (#5=#:G15 NIL) (#6=#:G14 (R)) (#7=#:G16 (R)) (#8=#:G23 NIL)
           (|m| (|Integer|)) (|v| (|Vector| R)))
          (SEQ
           (COND ((NULL |l|) (|spadConstant| % 16))
@@ -106,9 +106,9 @@
         ((|n| (|PositiveInteger|))
          (% (|Fraction| (|SparseUnivariatePolynomial| R))))
         (SPROG
-         ((#1=#:G46 NIL) (#2=#:G45 #3=(|SparseUnivariatePolynomial| R))
-          (#4=#:G47 #3#) (#5=#:G51 NIL) (|i| NIL) (#6=#:G43 NIL) (#7=#:G42 #3#)
-          (#8=#:G44 #3#) (#9=#:G50 NIL) (|m| (|Integer|))
+         ((#1=#:G29 NIL) (#2=#:G28 #3=(|SparseUnivariatePolynomial| R))
+          (#4=#:G30 #3#) (#5=#:G34 NIL) (|i| NIL) (#6=#:G26 NIL) (#7=#:G25 #3#)
+          (#8=#:G27 #3#) (#9=#:G33 NIL) (|m| (|Integer|))
           (|v| (|Vector| (|SparseUnivariatePolynomial| R))))
          (SEQ
           (LETT |m|
@@ -163,23 +163,6 @@
 
 (DECLAIM (NOTINLINE |TangentExpansions;|)) 
 
-(DEFUN |TangentExpansions| (#1=#:G52)
-  (SPROG NIL
-         (PROG (#2=#:G53)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|TangentExpansions|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|TangentExpansions;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|TangentExpansions|)))))))))) 
-
 (DEFUN |TangentExpansions;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -194,6 +177,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |TangentExpansions| (#1=#:G35)
+  (SPROG NIL
+         (PROG (#2=#:G36)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|TangentExpansions|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|TangentExpansions;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|TangentExpansions|)))))))))) 
 
 (MAKEPROP '|TangentExpansions| '|infovec|
           (LIST

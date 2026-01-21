@@ -33,7 +33,7 @@
          (#1# NIL))) 
 
 (SDEFUN |CTRIGMNP;localexplogs| ((|f| (F)) (|g| (F)) (% (F)))
-        (SPROG ((#1=#:G42 NIL) (|k| NIL) (#2=#:G41 NIL))
+        (SPROG ((#1=#:G25 NIL) (|k| NIL) (#2=#:G24 NIL))
                (SEQ
                 (SPADCALL |g|
                           (PROGN
@@ -75,7 +75,7 @@
 
 (SDEFUN |CTRIGMNP;complexElementary;FSF;10|
         ((|f| (F)) (|x| (|Symbol|)) (% (F)))
-        (SPROG ((#1=#:G52 NIL) (|g| (F)) (|k| NIL) (#2=#:G51 NIL))
+        (SPROG ((#1=#:G35 NIL) (|g| (F)) (|k| NIL) (#2=#:G34 NIL))
                (SEQ
                 (COND
                  ((SPADCALL
@@ -115,7 +115,7 @@
             (SPADCALL (SPADCALL |y| (QREFELT % 56)) RTRIG (QREFELT % 48)))))) 
 
 (SDEFUN |CTRIGMNP;complexNormalize;FSF;11| ((|f| (F)) (|x| (|Symbol|)) (% (F)))
-        (SPROG ((#1=#:G60 NIL) (|g| (F)) (|k| NIL) (#2=#:G59 NIL))
+        (SPROG ((#1=#:G43 NIL) (|g| (F)) (|k| NIL) (#2=#:G42 NIL))
                (SEQ
                 (COND
                  ((SPADCALL
@@ -179,9 +179,27 @@
 
 (DECLAIM (NOTINLINE |ComplexTrigonometricManipulations;|)) 
 
-(DEFUN |ComplexTrigonometricManipulations| (&REST #1=#:G66)
+(DEFUN |ComplexTrigonometricManipulations;| (|#1| |#2|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT DV$2 (|devaluate| |#2|))
+          (LETT |dv$| (LIST '|ComplexTrigonometricManipulations| DV$1 DV$2))
+          (LETT % (GETREFV 70))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|ComplexTrigonometricManipulations|
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 8 '|rtrig|)
+          %))) 
+
+(DEFUN |ComplexTrigonometricManipulations| (&REST #1=#:G49)
   (SPROG NIL
-         (PROG (#2=#:G67)
+         (PROG (#2=#:G50)
            (RETURN
             (COND
              ((LETT #2#
@@ -200,24 +218,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|ComplexTrigonometricManipulations|)))))))))) 
-
-(DEFUN |ComplexTrigonometricManipulations;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT DV$2 (|devaluate| |#2|))
-          (LETT |dv$| (LIST '|ComplexTrigonometricManipulations| DV$1 DV$2))
-          (LETT % (GETREFV 70))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|ComplexTrigonometricManipulations|
-                      (LIST DV$1 DV$2) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (QSETREFV % 7 |#2|)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 8 '|rtrig|)
-          %))) 
 
 (MAKEPROP '|ComplexTrigonometricManipulations| '|infovec|
           (LIST

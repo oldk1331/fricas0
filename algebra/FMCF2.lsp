@@ -20,28 +20,6 @@
 
 (DECLAIM (NOTINLINE |FreeModuleCoefficientFunctions2;|)) 
 
-(DEFUN |FreeModuleCoefficientFunctions2| (&REST #1=#:G20)
-  (SPROG NIL
-         (PROG (#2=#:G21)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|FreeModuleCoefficientFunctions2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |FreeModuleCoefficientFunctions2;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|FreeModuleCoefficientFunctions2|)))))))))) 
-
 (DEFUN |FreeModuleCoefficientFunctions2;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -67,6 +45,28 @@
     (QSETREFV % 10 |#5|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |FreeModuleCoefficientFunctions2| (&REST #1=#:G12)
+  (SPROG NIL
+         (PROG (#2=#:G13)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|FreeModuleCoefficientFunctions2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |FreeModuleCoefficientFunctions2;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|FreeModuleCoefficientFunctions2|)))))))))) 
 
 (MAKEPROP '|FreeModuleCoefficientFunctions2| '|infovec|
           (LIST

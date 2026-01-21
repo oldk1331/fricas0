@@ -44,18 +44,18 @@
          (|imagRange| (|Segment| (|DoubleFloat|))) (|arrows?| (|Boolean|))
          (% (|ThreeDimensionalViewport|)))
         (SPROG
-         ((|real| #2=(|DoubleFloat|)) (|imag| #2#) (#3=#:G63 NIL) (|a| NIL)
+         ((|real| #2=(|DoubleFloat|)) (|imag| #2#) (#3=#:G39 NIL) (|a| NIL)
           (|arrow| (|List| (|List| (|Point| (|DoubleFloat|)))))
           (|p2| #4=(|Point| (|DoubleFloat|))) (|len| (|DoubleFloat|))
-          (|p1| #4#) (|arg| (|DoubleFloat|)) (#5=#:G62 NIL) (|j| NIL)
-          (#6=#:G61 NIL) (|i| NIL) (|space| (|ThreeSpace| (|DoubleFloat|)))
+          (|p1| #4#) (|arg| (|DoubleFloat|)) (#5=#:G38 NIL) (|j| NIL)
+          (#6=#:G37 NIL) (|i| NIL) (|space| (|ThreeSpace| (|DoubleFloat|)))
           (|llp| (|List| (|List| (|Point| (|DoubleFloat|)))))
-          (|lp| (|List| (|Point| (|DoubleFloat|)))) (|p| #4#) (#7=#:G60 NIL)
-          (#8=#:G59 NIL) (|z| #1#) (#9=#:G58 NIL) (#10=#:G57 NIL)
+          (|lp| (|List| (|Point| (|DoubleFloat|)))) (|p| #4#) (#7=#:G36 NIL)
+          (#8=#:G35 NIL) (|z| #1#) (#9=#:G34 NIL) (#10=#:G33 NIL)
           (|funTable|
            (|TwoDimensionalArray|
             (|Record| (|:| |rr| (|DoubleFloat|)) (|:| |th| (|DoubleFloat|)))))
-          (#11=#:G23 NIL) (#12=#:G21 NIL) (|delImag| #13=(|DoubleFloat|))
+          (#11=#:G6 NIL) (#12=#:G4 NIL) (|delImag| #13=(|DoubleFloat|))
           (|delReal| #13#))
          (SEQ
           (LETT |delReal|
@@ -194,11 +194,11 @@
          (|imagRange| (|Segment| (|DoubleFloat|)))
          (% (|ThreeDimensionalViewport|)))
         (SPROG
-         ((|real| #2=(|DoubleFloat|)) (|imag| #2#) (#3=#:G76 NIL) (|a| NIL)
+         ((|real| #2=(|DoubleFloat|)) (|imag| #2#) (#3=#:G52 NIL) (|a| NIL)
           (|arrow| (|List| (|List| (|Point| (|DoubleFloat|)))))
           (|p2| #4=(|Point| (|DoubleFloat|))) (|scaleLen| (|DoubleFloat|))
           (|p1| #4#) (|len| (|DoubleFloat|)) (|arg| (|DoubleFloat|)) (|z| #1#)
-          (#5=#:G75 NIL) (|j| NIL) (#6=#:G74 NIL) (|i| NIL)
+          (#5=#:G51 NIL) (|j| NIL) (#6=#:G50 NIL) (|i| NIL)
           (|space| (|ThreeSpace| (|DoubleFloat|)))
           (|delImag| #7=(|DoubleFloat|)) (|delReal| #7#))
          (SEQ
@@ -272,23 +272,6 @@
 
 (DECLAIM (NOTINLINE |DrawComplex;|)) 
 
-(DEFUN |DrawComplex| ()
-  (SPROG NIL
-         (PROG (#1=#:G81)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|DrawComplex|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|DrawComplex|
-                             (LIST (CONS NIL (CONS 1 (|DrawComplex;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#) (HREM |$ConstructorCache| '|DrawComplex|)))))))))) 
-
 (DEFUN |DrawComplex;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -309,6 +292,23 @@
           (QSETREFV % 9 11)
           (QSETREFV % 10 (FLOAT 10 MOST-POSITIVE-DOUBLE-FLOAT))
           %))) 
+
+(DEFUN |DrawComplex| ()
+  (SPROG NIL
+         (PROG (#1=#:G57)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|DrawComplex|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|DrawComplex|
+                             (LIST (CONS NIL (CONS 1 (|DrawComplex;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#) (HREM |$ConstructorCache| '|DrawComplex|)))))))))) 
 
 (MAKEPROP '|DrawComplex| '|infovec|
           (LIST

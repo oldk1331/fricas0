@@ -40,8 +40,8 @@
 (SDEFUN |UDPO;less?;2SU;7|
         ((|a| (S)) (|b| (S)) (% (|Union| (|Boolean|) "failed")))
         (SPROG
-         ((|bb| #1=(|Boolean|)) (#2=#:G47 NIL) (|aa| #1#) (#3=#:G49 NIL)
-          (|x| NIL) (#4=#:G48 NIL))
+         ((|bb| #1=(|Boolean|)) (#2=#:G39 NIL) (|aa| #1#) (#3=#:G41 NIL)
+          (|x| NIL) (#4=#:G40 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -54,7 +54,7 @@
                     ((SPADCALL |x| |a| (QREFELT % 24))
                      (PROGN
                       (LETT #2# (CONS 0 (SPADCALL |a| |b| (QREFELT % 25))))
-                      (GO #5=#:G46)))
+                      (GO #5=#:G38)))
                     ((SPADCALL |x| |b| (QREFELT % 24))
                      (PROGN (LETT #2# (CONS 0 NIL)) (GO #5#))))))
                  (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT NIL))
@@ -90,25 +90,6 @@
 
 (DECLAIM (NOTINLINE |UserDefinedPartialOrdering;|)) 
 
-(DEFUN |UserDefinedPartialOrdering| (#1=#:G53)
-  (SPROG NIL
-         (PROG (#2=#:G54)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|UserDefinedPartialOrdering|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|UserDefinedPartialOrdering;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|UserDefinedPartialOrdering|)))))))))) 
-
 (DEFUN |UserDefinedPartialOrdering;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -136,6 +117,25 @@
              (QSETREFV % 28
                        (CONS (|dispatchFunction| |UDPO;largest;LS;9|) %)))))
           %))) 
+
+(DEFUN |UserDefinedPartialOrdering| (#1=#:G45)
+  (SPROG NIL
+         (PROG (#2=#:G46)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|UserDefinedPartialOrdering|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|UserDefinedPartialOrdering;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|UserDefinedPartialOrdering|)))))))))) 
 
 (MAKEPROP '|UserDefinedPartialOrdering| '|infovec|
           (LIST

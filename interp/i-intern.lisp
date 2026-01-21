@@ -3,14 +3,6 @@
 
 (IN-PACKAGE "BOOT")
 
-; DEFPARAMETER($useParserSrcPos, NIL)
-
-(DEFPARAMETER |$useParserSrcPos| NIL)
-
-; DEFPARAMETER($transferParserSrcPos, NIL)
-
-(DEFPARAMETER |$transferParserSrcPos| NIL)
-
 ; DEFCONST($failure, GENSYM())
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
@@ -38,57 +30,14 @@
   (PROG () (RETURN (|mkAtree1| (|mkAtreeExpandMacros| |x|)))))
 
 ; mkAtreeWithSrcPos(form, posnForm) ==
-;     posnForm and $useParserSrcPos => pf2Atree(posnForm)
 ;     transferSrcPosInfo(posnForm, mkAtree form)
 
 (DEFUN |mkAtreeWithSrcPos| (|form| |posnForm|)
-  (PROG ()
-    (RETURN
-     (COND ((AND |posnForm| |$useParserSrcPos|) (|pf2Atree| |posnForm|))
-           ('T (|transferSrcPosInfo| |posnForm| (|mkAtree| |form|)))))))
+  (PROG () (RETURN (|transferSrcPosInfo| |posnForm| (|mkAtree| |form|)))))
 
-; mkAtree1WithSrcPos(form, posnForm) ==
-;   transferSrcPosInfo(posnForm, mkAtree1 form)
+; transferSrcPosInfo(pf, atree) == atree
 
-(DEFUN |mkAtree1WithSrcPos| (|form| |posnForm|)
-  (PROG () (RETURN (|transferSrcPosInfo| |posnForm| (|mkAtree1| |form|)))))
-
-; mkAtreeNodeWithSrcPos(form, posnForm) ==
-;   transferSrcPosInfo(posnForm, mkAtreeNode form)
-
-(DEFUN |mkAtreeNodeWithSrcPos| (|form| |posnForm|)
-  (PROG () (RETURN (|transferSrcPosInfo| |posnForm| (|mkAtreeNode| |form|)))))
-
-; transferSrcPosInfo(pf, atree) ==
-;     not (pf and $transferParserSrcPos) => atree
-;     pos := pfPosOrNopos(pf)
-;     pfNoPosition?(pos) => atree
-;
-;     -- following is a hack because parser code for getting filename
-;     -- seems wrong.
-;     fn := lnPlaceOfOrigin poGetLineObject(pos)
-;     if NULL fn or fn = '"strings" then fn := '"console"
-;
-;     putSrcPos(atree, fn, pfSourceText(pf), pfLinePosn(pos), pfCharPosn(pos))
-;     atree
-
-(DEFUN |transferSrcPosInfo| (|pf| |atree|)
-  (PROG (|pos| |fn|)
-    (RETURN
-     (COND ((NULL (AND |pf| |$transferParserSrcPos|)) |atree|)
-           (#1='T
-            (PROGN
-             (SETQ |pos| (|pfPosOrNopos| |pf|))
-             (COND ((|pfNoPosition?| |pos|) |atree|)
-                   (#1#
-                    (PROGN
-                     (SETQ |fn| (|lnPlaceOfOrigin| (|poGetLineObject| |pos|)))
-                     (COND
-                      ((OR (NULL |fn|) (EQUAL |fn| "strings"))
-                       (SETQ |fn| "console")))
-                     (|putSrcPos| |atree| |fn| (|pfSourceText| |pf|)
-                      (|pfLinePosn| |pos|) (|pfCharPosn| |pos|))
-                     |atree|)))))))))
+(DEFUN |transferSrcPosInfo| (|pf| |atree|) (PROG () (RETURN |atree|)))
 
 ; mkAtreeExpandMacros x ==
 ;   -- handle macro expansion. if the macros have args we require that
@@ -533,10 +482,6 @@
 ;       lowTest
 ;     mkAtree1 z
 ;   x is ['IF,p,'noBranch,a] => mkAtree1 ['IF,['not,p],a,'noBranch]
-;   x is ['MDEF,sym,junk1,junk2,val] =>
-;     -- new macros look like  macro f ==  or macro f(x) ===
-;     -- so transform into that format
-;     mkAtree1 ['DEF,['macro,sym],junk1,junk2,val]
 ;   x is ["+->",funargs,funbody] =>
 ;     if funbody is [":",body,type] then
 ;       types := [type]
@@ -560,8 +505,6 @@
 ;     [mkAtreeNode 'ADEF,[v.0,:r],if v.2 then v.2 else true,false]
 ;   x is ["where", before, after] =>
 ;     [mkAtreeNode "where", before, mkAtree1 after]
-;   x is ['DEF,['macro,form],.,.,body] =>
-;     [mkAtreeNode 'MDEF,form,body]
 ;   x is ['DEF,a,:r] =>
 ;     r := mkAtreeValueOf r
 ;     a is [op,:arg] =>
@@ -576,15 +519,6 @@
 ;       r := [[first types,:at],:r']
 ;       [mkAtreeNode 'DEF,[[op,:v.0],:r],if v.2 then v.2 else true,false]
 ;     [mkAtreeNode 'DEF,[a,:r],true,false]
-; --x is ['when,y,pred] =>
-; --  y isnt ['DEF,a,:r] =>
-; --    keyedSystemError("S2II0003",['"when",y,'"improper argument form"])
-; --  a is [op,p1,:pr] =>
-; --    null pr => mkAtree1 ['DEF,[op,["|",p1,pred]],:r]
-; --    mkAtree1 ['DEF,[op,["|",['Tuple,p1,:pr],pred]],:r]
-; --  [mkAtreeNode 'DEF, rest y, pred, false]
-; --x is ['otherwise,u] =>
-; --  throwMessage '"   otherwise is no longer supported."
 ;   z :=
 ;     getBasicMode op =>
 ;       v := mkAtreeNode $immediateDataSymbol
@@ -596,9 +530,8 @@
 
 (DEFUN |mkAtree3| (|x| |op| |argl|)
   (PROG (|op1| |ISTMP#1| |axis| |ISTMP#2| |body| |lhs| |ISTMP#3| |rhs| |var|
-         |lb| |ISTMP#4| |ul| |upTest| |lowTest| |z| |p| |a| |sym| |junk1|
-         |junk2| |val| |funargs| |funbody| |type| |types| |v| |arg| |r| |r'|
-         |at| |before| |after| |form| |ISTMP#5| |ISTMP#6|)
+         |lb| |ISTMP#4| |ul| |upTest| |lowTest| |z| |p| |a| |funargs| |funbody|
+         |type| |types| |v| |arg| |r| |r'| |at| |before| |after|)
     (RETURN
      (COND
       ((AND (EQ |op| 'REDUCE) (CONSP |argl|)
@@ -688,26 +621,6 @@
                          (AND (CONSP |ISTMP#3|) (EQ (CDR |ISTMP#3|) NIL)
                               (PROGN (SETQ |a| (CAR |ISTMP#3|)) #1#))))))))
        (|mkAtree1| (LIST 'IF (LIST '|not| |p|) |a| '|noBranch|)))
-      ((AND (CONSP |x|) (EQ (CAR |x|) 'MDEF)
-            (PROGN
-             (SETQ |ISTMP#1| (CDR |x|))
-             (AND (CONSP |ISTMP#1|)
-                  (PROGN
-                   (SETQ |sym| (CAR |ISTMP#1|))
-                   (SETQ |ISTMP#2| (CDR |ISTMP#1|))
-                   (AND (CONSP |ISTMP#2|)
-                        (PROGN
-                         (SETQ |junk1| (CAR |ISTMP#2|))
-                         (SETQ |ISTMP#3| (CDR |ISTMP#2|))
-                         (AND (CONSP |ISTMP#3|)
-                              (PROGN
-                               (SETQ |junk2| (CAR |ISTMP#3|))
-                               (SETQ |ISTMP#4| (CDR |ISTMP#3|))
-                               (AND (CONSP |ISTMP#4|) (EQ (CDR |ISTMP#4|) NIL)
-                                    (PROGN
-                                     (SETQ |val| (CAR |ISTMP#4|))
-                                     #1#))))))))))
-       (|mkAtree1| (LIST 'DEF (LIST '|macro| |sym|) |junk1| |junk2| |val|)))
       ((AND (CONSP |x|) (EQ (CAR |x|) '+->)
             (PROGN
              (SETQ |ISTMP#1| (CDR |x|))
@@ -793,30 +706,6 @@
                    (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
                         (PROGN (SETQ |after| (CAR |ISTMP#2|)) #1#))))))
        (LIST (|mkAtreeNode| '|where|) |before| (|mkAtree1| |after|)))
-      ((AND (CONSP |x|) (EQ (CAR |x|) 'DEF)
-            (PROGN
-             (SETQ |ISTMP#1| (CDR |x|))
-             (AND (CONSP |ISTMP#1|)
-                  (PROGN
-                   (SETQ |ISTMP#2| (CAR |ISTMP#1|))
-                   (AND (CONSP |ISTMP#2|) (EQ (CAR |ISTMP#2|) '|macro|)
-                        (PROGN
-                         (SETQ |ISTMP#3| (CDR |ISTMP#2|))
-                         (AND (CONSP |ISTMP#3|) (EQ (CDR |ISTMP#3|) NIL)
-                              (PROGN (SETQ |form| (CAR |ISTMP#3|)) #1#)))))
-                  (PROGN
-                   (SETQ |ISTMP#4| (CDR |ISTMP#1|))
-                   (AND (CONSP |ISTMP#4|)
-                        (PROGN
-                         (SETQ |ISTMP#5| (CDR |ISTMP#4|))
-                         (AND (CONSP |ISTMP#5|)
-                              (PROGN
-                               (SETQ |ISTMP#6| (CDR |ISTMP#5|))
-                               (AND (CONSP |ISTMP#6|) (EQ (CDR |ISTMP#6|) NIL)
-                                    (PROGN
-                                     (SETQ |body| (CAR |ISTMP#6|))
-                                     #1#))))))))))
-       (LIST (|mkAtreeNode| 'MDEF) |form| |body|))
       ((AND (CONSP |x|) (EQ (CAR |x|) 'DEF)
             (PROGN
              (SETQ |ISTMP#1| (CDR |x|))
@@ -1976,28 +1865,23 @@
 ;         STRINGIMAGE srcPosLine sp, '": ")
 ;     sayBrightly [s, srcPosSource sp]
 ;     col  := srcPosColumn sp
-;     dots :=
-;         col = 0 => '""
-;         fillerSpaces(col, '".")
-;     sayBrightly [fillerSpaces(#s, '" "), dots, '"^"]
+;     dots := filler_chars(col, '".")
+;     sayBrightly([filler_spaces(#s), dots, '"^"])
 ;     true
 
 (DEFUN |srcPosDisplay| (|sp|)
   (PROG (|s| |col| |dots|)
     (RETURN
      (COND ((NULL |sp|) NIL)
-           (#1='T
+           ('T
             (PROGN
              (SETQ |s|
                      (STRCONC "\"" (|srcPosFile| |sp|) "\", line "
                       (STRINGIMAGE (|srcPosLine| |sp|)) ": "))
              (|sayBrightly| (LIST |s| (|srcPosSource| |sp|)))
              (SETQ |col| (|srcPosColumn| |sp|))
-             (SETQ |dots|
-                     (COND ((EQL |col| 0) "")
-                           (#1# (|fillerSpaces| |col| "."))))
-             (|sayBrightly|
-              (LIST (|fillerSpaces| (LENGTH |s|) " ") |dots| "^"))
+             (SETQ |dots| (|filler_chars| |col| "."))
+             (|sayBrightly| (LIST (|filler_spaces| (LENGTH |s|)) |dots| "^"))
              T))))))
 
 ; mkObj(val, mode) == CONS(mode,val)              -- old names

@@ -8,8 +8,8 @@
         ((|p| (|SparseUnivariatePolynomial| F)) (|v| (|Symbol|))
          (% (|Boolean|)))
         (SPROG
-         ((#1=#:G21 NIL) (#2=#:G20 #3=(|Boolean|)) (#4=#:G22 #3#)
-          (#5=#:G24 NIL) (|c| NIL))
+         ((#1=#:G15 NIL) (#2=#:G14 #3=(|Boolean|)) (#4=#:G16 #3#)
+          (#5=#:G18 NIL) (|c| NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -85,11 +85,11 @@
 (SDEFUN |INVLAPLA;iltsqfr|
         ((|r| (|Fraction| (|SparseUnivariatePolynomial| F))) (|t| (F)) (% (F)))
         (SPROG
-         ((#1=#:G61 NIL) (#2=#:G60 (F)) (#3=#:G62 (F)) (#4=#:G68 NIL) (|a| NIL)
-          (#5=#:G69 NIL) (|b| NIL)
-          (|nl| (|List| (|SparseUnivariatePolynomial| F))) (#6=#:G58 NIL)
-          (|ql| (|List| (|SparseUnivariatePolynomial| F))) (#7=#:G67 NIL)
-          (|qq| NIL) (#8=#:G66 NIL) (|q| (|SparseUnivariatePolynomial| F))
+         ((#1=#:G38 NIL) (#2=#:G37 (F)) (#3=#:G39 (F)) (#4=#:G45 NIL) (|a| NIL)
+          (#5=#:G46 NIL) (|b| NIL)
+          (|nl| (|List| (|SparseUnivariatePolynomial| F))) (#6=#:G35 NIL)
+          (|ql| (|List| (|SparseUnivariatePolynomial| F))) (#7=#:G44 NIL)
+          (|qq| NIL) (#8=#:G43 NIL) (|q| (|SparseUnivariatePolynomial| F))
           (|p| (|SparseUnivariatePolynomial| F)))
          (SEQ
           (COND
@@ -156,7 +156,7 @@
         ((|p| (|SparseUnivariatePolynomial| F))
          (|q| (|SparseUnivariatePolynomial| F)) (|t| (F)) (% (F)))
         (SPROG
-         ((#1=#:G79 NIL) (#2=#:G78 (F)) (#3=#:G80 (F)) (#4=#:G85 NIL)
+         ((#1=#:G52 NIL) (#2=#:G51 (F)) (#3=#:G53 (F)) (#4=#:G58 NIL)
           (|root| NIL) (|q1| (|SparseUnivariatePolynomial| F))
           (|roots| (|List| F)) (|alpha| (F)) (|d| (F)) (|b| (F)) (|e| (F))
           (|c| (F)) (|a| (F)) (|cp| (F)))
@@ -270,25 +270,6 @@
 
 (DECLAIM (NOTINLINE |InverseLaplaceTransform;|)) 
 
-(DEFUN |InverseLaplaceTransform| (&REST #1=#:G86)
-  (SPROG NIL
-         (PROG (#2=#:G87)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|InverseLaplaceTransform|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |InverseLaplaceTransform;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|InverseLaplaceTransform|)))))))))) 
-
 (DEFUN |InverseLaplaceTransform;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -309,6 +290,25 @@
                                                         (|SparseUnivariatePolynomial|
                                                          |#2|)))
           %))) 
+
+(DEFUN |InverseLaplaceTransform| (&REST #1=#:G59)
+  (SPROG NIL
+         (PROG (#2=#:G60)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|InverseLaplaceTransform|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |InverseLaplaceTransform;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|InverseLaplaceTransform|)))))))))) 
 
 (MAKEPROP '|InverseLaplaceTransform| '|infovec|
           (LIST

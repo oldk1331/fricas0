@@ -200,25 +200,6 @@
 
 (DECLAIM (NOTINLINE |GenerateUnivariatePowerSeries2;|)) 
 
-(DEFUN |GenerateUnivariatePowerSeries2| (#1=#:G57)
-  (SPROG NIL
-         (PROG (#2=#:G58)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|GenerateUnivariatePowerSeries2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|GenerateUnivariatePowerSeries2;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|GenerateUnivariatePowerSeries2|)))))))))) 
-
 (DEFUN |GenerateUnivariatePowerSeries2;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -287,6 +268,25 @@
                           (|dispatchFunction| |GENUPS2;series;FESEUsFA;14|)
                           %)))))))
           %))) 
+
+(DEFUN |GenerateUnivariatePowerSeries2| (#1=#:G49)
+  (SPROG NIL
+         (PROG (#2=#:G50)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|GenerateUnivariatePowerSeries2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|GenerateUnivariatePowerSeries2;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|GenerateUnivariatePowerSeries2|)))))))))) 
 
 (MAKEPROP '|GenerateUnivariatePowerSeries2| '|infovec|
           (LIST

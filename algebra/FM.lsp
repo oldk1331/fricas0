@@ -8,7 +8,7 @@
 (SDEFUN |FM;per| ((|r| (|Rep|)) (% (%))) |r|) 
 
 (SDEFUN |FM;*;R2%;3| ((|r| (R)) (|x| (%)) (% (%)))
-        (SPROG ((#1=#:G32 NIL) (|u| NIL) (#2=#:G31 NIL))
+        (SPROG ((#1=#:G24 NIL) (|u| NIL) (#2=#:G23 NIL))
                (SEQ
                 (COND ((SPADCALL |r| (QREFELT % 13)) (|spadConstant| % 14))
                       ((SPADCALL |r| (QREFELT % 11) (QREFELT % 15)) |x|)
@@ -31,7 +31,7 @@
                              (EXIT (NREVERSE #2#))))))))) 
 
 (SDEFUN |FM;*;R2%;4| ((|r| (R)) (|x| (%)) (% (%)))
-        (SPROG ((|a| (R)) (#1=#:G40 NIL) (|u| NIL) (#2=#:G39 NIL))
+        (SPROG ((|a| (R)) (#1=#:G30 NIL) (|u| NIL) (#2=#:G29 NIL))
                (SEQ
                 (COND ((SPADCALL |r| (QREFELT % 13)) (|spadConstant| % 14))
                       ((SPADCALL |r| (QREFELT % 11) (QREFELT % 15)) |x|)
@@ -56,7 +56,7 @@
                              (EXIT (NREVERSE #2#))))))))) 
 
 (SDEFUN |FM;*;%R%;5| ((|x| (%)) (|r| (R)) (% (%)))
-        (SPROG ((#1=#:G46 NIL) (|u| NIL) (#2=#:G45 NIL))
+        (SPROG ((#1=#:G36 NIL) (|u| NIL) (#2=#:G35 NIL))
                (SEQ
                 (COND ((SPADCALL |r| (QREFELT % 13)) (|spadConstant| % 14))
                       ((SPADCALL |r| (QREFELT % 11) (QREFELT % 15)) |x|)
@@ -79,7 +79,7 @@
                              (EXIT (NREVERSE #2#))))))))) 
 
 (SDEFUN |FM;*;%R%;6| ((|x| (%)) (|r| (R)) (% (%)))
-        (SPROG ((|a| (R)) (#1=#:G52 NIL) (|u| NIL) (#2=#:G51 NIL))
+        (SPROG ((|a| (R)) (#1=#:G42 NIL) (|u| NIL) (#2=#:G41 NIL))
                (SEQ
                 (COND ((SPADCALL |r| (QREFELT % 13)) (|spadConstant| % 14))
                       ((SPADCALL |r| (QREFELT % 11) (QREFELT % 15)) |x|)
@@ -116,7 +116,7 @@
          ('T (LIST (CONS |s| |r|))))) 
 
 (SDEFUN |FM;coerce;%Of;9| ((|x| (%)) (% (|OutputForm|)))
-        (SPROG ((|le| (|List| (|OutputForm|))) (#1=#:G67 NIL) (|rec| NIL))
+        (SPROG ((|le| (|List| (|OutputForm|))) (#1=#:G57 NIL) (|rec| NIL))
                (SEQ
                 (COND
                  ((NULL |x|) (SPADCALL (|spadConstant| % 10) (QREFELT % 23)))
@@ -148,7 +148,7 @@
                        (EXIT (SPADCALL (ELT % 26) |le| (QREFELT % 29))))))))) 
 
 (SDEFUN |FM;coerce;%Of;10| ((|x| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G84 NIL) (|rec| NIL) (#2=#:G83 NIL))
+        (SPROG ((#1=#:G74 NIL) (|rec| NIL) (#2=#:G73 NIL))
                (SEQ
                 (SPADCALL (ELT % 26)
                           (PROGN
@@ -174,7 +174,7 @@
                           (QREFELT % 29))))) 
 
 (SDEFUN |FM;support;%L;11| ((|x| (%)) (% (|List| S)))
-        (SPROG ((#1=#:G89 NIL) (|t| NIL) (#2=#:G88 NIL))
+        (SPROG ((#1=#:G79 NIL) (|t| NIL) (#2=#:G78 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -187,7 +187,7 @@
                       (EXIT (NREVERSE #2#))))))) 
 
 (SDEFUN |FM;coefficients;%L;12| ((|x| (%)) (% (|List| R)))
-        (SPROG ((#1=#:G94 NIL) (|t| NIL) (#2=#:G93 NIL))
+        (SPROG ((#1=#:G84 NIL) (|t| NIL) (#2=#:G83 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -202,7 +202,7 @@
 (SDEFUN |FM;monom| ((|b| (S)) (|r| (R)) (% (%))) (LIST (CONS |b| |r|))) 
 
 (SDEFUN |FM;monomials;%L;14| ((|x| (%)) (% (|List| %)))
-        (SPROG ((#1=#:G100 NIL) (|t| NIL) (#2=#:G99 NIL))
+        (SPROG ((#1=#:G90 NIL) (|t| NIL) (#2=#:G89 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -246,7 +246,7 @@
               ('T (|spadConstant| % 10)))) 
 
 (SDEFUN |FM;coefficient;%SR;19| ((|x| (%)) (|s| (S)) (% (R)))
-        (SPROG ((#1=#:G125 NIL) (#2=#:G126 NIL) (|t| NIL) (|xr| (|Rep|)))
+        (SPROG ((#1=#:G115 NIL) (#2=#:G116 NIL) (|t| NIL) (|xr| (|Rep|)))
                (SEQ
                 (EXIT
                  (SEQ (LETT |xr| |x|)
@@ -258,13 +258,13 @@
                             (EXIT
                              (COND
                               ((SPADCALL (QCAR |t|) |s| (QREFELT % 47))
-                               (PROGN (LETT #1# (QCDR |t|)) (GO #3=#:G124))))))
+                               (PROGN (LETT #1# (QCDR |t|)) (GO #3=#:G114))))))
                            (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                       (EXIT (|spadConstant| % 10))))
                 #3# (EXIT #1#)))) 
 
 (SDEFUN |FM;linearExtend;M%R;20| ((|f| (|Mapping| R S)) (|x| (%)) (% (R)))
-        (SPROG ((|res| (R)) (#1=#:G133 NIL) (|t| NIL))
+        (SPROG ((|res| (R)) (#1=#:G123 NIL) (|t| NIL))
                (SEQ
                 (COND ((SPADCALL |x| (QREFELT % 48)) (|spadConstant| % 10))
                       ('T
@@ -290,26 +290,9 @@
 
 (DECLAIM (NOTINLINE |FreeModule;|)) 
 
-(DEFUN |FreeModule| (&REST #1=#:G141)
-  (SPROG NIL
-         (PROG (#2=#:G142)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|FreeModule|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |FreeModule;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|FreeModule|)))))))))) 
-
 (DEFUN |FreeModule;| (|#1| |#2|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G140 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+   ((|pv$| NIL) (#1=#:G128 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -442,6 +425,23 @@
        (QSETREFV % 54
                  (CONS (|dispatchFunction| |FM;linearExtend;M%R;20|) %)))))
     %))) 
+
+(DEFUN |FreeModule| (&REST #1=#:G129)
+  (SPROG NIL
+         (PROG (#2=#:G130)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|FreeModule|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |FreeModule;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|FreeModule|)))))))))) 
 
 (MAKEPROP '|FreeModule| '|infovec|
           (LIST

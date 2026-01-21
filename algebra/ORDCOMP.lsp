@@ -101,23 +101,6 @@
 
 (DECLAIM (NOTINLINE |OrderedCompletion;|)) 
 
-(DEFUN |OrderedCompletion| (#1=#:G88)
-  (SPROG NIL
-         (PROG (#2=#:G89)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|OrderedCompletion|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|OrderedCompletion;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|OrderedCompletion|)))))))))) 
-
 (DEFUN |OrderedCompletion;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -177,6 +160,23 @@
                        (CONS (|dispatchFunction| |ORDCOMP;rationalIfCan;%U;17|)
                              %)))))
           %))) 
+
+(DEFUN |OrderedCompletion| (#1=#:G66)
+  (SPROG NIL
+         (PROG (#2=#:G67)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|OrderedCompletion|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|OrderedCompletion;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|OrderedCompletion|)))))))))) 
 
 (MAKEPROP '|OrderedCompletion| '|infovec|
           (LIST

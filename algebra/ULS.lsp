@@ -19,30 +19,11 @@
 
 (DECLAIM (NOTINLINE |UnivariateLaurentSeries;|)) 
 
-(DEFUN |UnivariateLaurentSeries| (&REST #1=#:G102)
-  (SPROG NIL
-         (PROG (#2=#:G103)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T NIL NIL))
-                     (HGET |$ConstructorCache| '|UnivariateLaurentSeries|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |UnivariateLaurentSeries;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|UnivariateLaurentSeries|)))))))))) 
-
 (DEFUN |UnivariateLaurentSeries;| (|#1| |#2| |#3|)
   (SPROG
-   ((#1=#:G101 NIL) (|pv$| NIL) (#2=#:G90 NIL) (#3=#:G91 NIL) (#4=#:G93 NIL)
-    (#5=#:G94 NIL) (#6=#:G95 NIL) (#7=#:G96 NIL) (#8=#:G97 NIL) (#9=#:G99 NIL)
-    (#10=#:G100 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+   ((#1=#:G63 NIL) (|pv$| NIL) (#2=#:G52 NIL) (#3=#:G53 NIL) (#4=#:G55 NIL)
+    (#5=#:G56 NIL) (#6=#:G57 NIL) (#7=#:G58 NIL) (#8=#:G59 NIL) (#9=#:G61 NIL)
+    (#10=#:G62 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 |#2|)
@@ -628,6 +609,25 @@
      ((|testBitVector| |pv$| 37)
       (QSETREFV % 26 (CONS (|dispatchFunction| |ULS;integrate;%V%;5|) %))))
     %))) 
+
+(DEFUN |UnivariateLaurentSeries| (&REST #1=#:G64)
+  (SPROG NIL
+         (PROG (#2=#:G65)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T NIL NIL))
+                     (HGET |$ConstructorCache| '|UnivariateLaurentSeries|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |UnivariateLaurentSeries;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|UnivariateLaurentSeries|)))))))))) 
 
 (MAKEPROP '|UnivariateLaurentSeries| '|infovec|
           (LIST

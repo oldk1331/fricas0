@@ -25,7 +25,7 @@
             (SIGNATURE |retractable?| ((|Boolean|) (|Any|)))
             (SIGNATURE |retract| (#1# (|Any|)))))
           (|uts| (|Union| (|UnivariateTaylorSeries| FE |x| |a|) #2="failed"))
-          (|uls| (|Uls|)) (#3=#:G59 NIL)
+          (|uls| (|Uls|)) (#3=#:G36 NIL)
           (|ans|
            (|Union| (|:| |%series| |Uls|)
                     (|:| |%problem|
@@ -389,7 +389,7 @@
 (SDEFUN |EXPR2UPS;iLaurent|
         ((|fcn| (FE)) (|x| (|Symbol|)) (|a| (FE)) (% (|Any|)))
         (SPROG
-         ((#1=#:G103 NIL)
+         ((#1=#:G77 NIL)
           (|any1|
            (CATEGORY |package|
             (SIGNATURE |coerce|
@@ -719,7 +719,7 @@
 (SDEFUN |EXPR2UPS;iPuiseux|
         ((|fcn| (FE)) (|x| (|Symbol|)) (|a| (FE)) (% (|Any|)))
         (SPROG
-         ((#1=#:G147 NIL)
+         ((#1=#:G114 NIL)
           (|any1|
            (CATEGORY |package|
             (SIGNATURE |coerce|
@@ -1080,7 +1080,7 @@
              ((|Union| #2# . #3=("failed")) . #4=((|Any|))))
             #5=(SIGNATURE |retractable?| ((|Boolean|) (|Any|)))
             (SIGNATURE |retract| (#2# . #6=((|Any|))))))
-          (#7=#:G183 NIL)
+          (#7=#:G150 NIL)
           (|anyone|
            (CATEGORY |package|
             (SIGNATURE |coerce|
@@ -1506,9 +1506,26 @@
 
 (DECLAIM (NOTINLINE |ExpressionToUnivariatePowerSeries;|)) 
 
-(DEFUN |ExpressionToUnivariatePowerSeries| (&REST #1=#:G213)
+(DEFUN |ExpressionToUnivariatePowerSeries;| (|#1| |#2|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT DV$2 (|devaluate| |#2|))
+          (LETT |dv$| (LIST '|ExpressionToUnivariatePowerSeries| DV$1 DV$2))
+          (LETT % (GETREFV 52))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|ExpressionToUnivariatePowerSeries|
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |ExpressionToUnivariatePowerSeries| (&REST #1=#:G180)
   (SPROG NIL
-         (PROG (#2=#:G214)
+         (PROG (#2=#:G181)
            (RETURN
             (COND
              ((LETT #2#
@@ -1527,23 +1544,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|ExpressionToUnivariatePowerSeries|)))))))))) 
-
-(DEFUN |ExpressionToUnivariatePowerSeries;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT DV$2 (|devaluate| |#2|))
-          (LETT |dv$| (LIST '|ExpressionToUnivariatePowerSeries| DV$1 DV$2))
-          (LETT % (GETREFV 52))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|ExpressionToUnivariatePowerSeries|
-                      (LIST DV$1 DV$2) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (QSETREFV % 7 |#2|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|ExpressionToUnivariatePowerSeries| '|infovec|
           (LIST

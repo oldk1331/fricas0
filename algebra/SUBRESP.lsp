@@ -1,7 +1,7 @@
 
 (SDEFUN |SUBRESP;primitivePart;UPRUP;1| ((|p| (UP)) (|q| (R)) (% (UP)))
         (SPROG
-         ((|rec| (|Record| (|:| |coef1| R) (|:| |coef2| R))) (#1=#:G14 NIL))
+         ((|rec| (|Record| (|:| |coef1| R) (|:| |coef2| R))) (#1=#:G12 NIL))
          (SEQ
           (LETT |rec|
                 (PROG2
@@ -39,8 +39,8 @@
 (SDEFUN |SUBRESP;subresultantVector;2UPPa;2|
         ((|p1| (UP)) (|p2| (UP)) (% (|PrimitiveArray| UP)))
         (SPROG
-         ((|n| #1=(|NonNegativeInteger|)) (#2=#:G41 NIL) (|nextn| #1#)
-          (|l| (|List| UP)) (F (UP)) (#3=#:G33 NIL) (#4=#:G28 NIL)
+         ((|n| #1=(|NonNegativeInteger|)) (#2=#:G31 NIL) (|nextn| #1#)
+          (|l| (|List| UP)) (F (UP)) (#3=#:G23 NIL) (#4=#:G18 NIL)
           (|res| (|PrimitiveArray| UP)))
          (SEQ
           (LETT |res|
@@ -148,25 +148,6 @@
 
 (DECLAIM (NOTINLINE |SubResultantPackage;|)) 
 
-(DEFUN |SubResultantPackage| (&REST #1=#:G53)
-  (SPROG NIL
-         (PROG (#2=#:G54)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|SubResultantPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |SubResultantPackage;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|SubResultantPackage|)))))))))) 
-
 (DEFUN |SubResultantPackage;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -194,6 +175,25 @@
                        (|dispatchFunction| |SUBRESP;primitivePart;UPRUP;1|)
                        %))))
           %))) 
+
+(DEFUN |SubResultantPackage| (&REST #1=#:G43)
+  (SPROG NIL
+         (PROG (#2=#:G44)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|SubResultantPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |SubResultantPackage;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|SubResultantPackage|)))))))))) 
 
 (MAKEPROP '|SubResultantPackage| '|infovec|
           (LIST

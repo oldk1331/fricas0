@@ -59,25 +59,6 @@
 
 (DECLAIM (NOTINLINE |StreamFunctions3;|)) 
 
-(DEFUN |StreamFunctions3| (&REST #1=#:G33)
-  (SPROG NIL
-         (PROG (#2=#:G34)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|StreamFunctions3|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |StreamFunctions3;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|StreamFunctions3|)))))))))) 
-
 (DEFUN |StreamFunctions3;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -96,6 +77,25 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |StreamFunctions3| (&REST #1=#:G32)
+  (SPROG NIL
+         (PROG (#2=#:G33)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|StreamFunctions3|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |StreamFunctions3;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|StreamFunctions3|)))))))))) 
 
 (MAKEPROP '|StreamFunctions3| '|infovec|
           (LIST

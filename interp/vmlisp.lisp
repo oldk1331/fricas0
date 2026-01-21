@@ -142,9 +142,10 @@
 ; 14.1 Creation
 
 ;;; needed for SPAD compiler output
-(define-function '|construct| #'list)
+#-gcl(define-function '|construct| #'list)
+#+gcl(define-function '|construct| #'cl::list)
 
-(defun VEC2LIST (vec) (coerce vec 'list))
+(defun VEC2LIST (vec) (coerce vec 'cl::list))
 
 (defun |makeList| (size el) (make-list size :initial-element el) )
 
@@ -289,19 +290,9 @@
 
 (defun GETZEROVEC (n) (MAKE-ARRAY n :initial-element 0))
 
-#-:GCL
 (defun LIST2VEC (list) (coerce list 'vector))
 
 ;;; At least in gcl 2.6.8 coerce is slow, so we roll our own version
-#+:GCL
-(defun LIST2VEC (list)
-    (if (consp list)
-        (let* ((len (length list))
-               (vec (make-array len)))
-             (dotimes (i len)
-                  (setf (aref vec i) (pop list)))
-             vec)
-        (coerce list 'vector)))
 
 
 (define-function 'LIST2REFVEC #'LIST2VEC)
@@ -427,7 +418,7 @@
 ; 17.1 Creation
 
 
-#-AKCL
+#-GCL
 (defun CONCAT (a b &rest l)
    (let ((type (cond ((bit-vector-p a) 'bit-vector) (t 'string))))
       (cond ((eq type 'string)
@@ -435,7 +426,7 @@
              (if l (setq l (mapcar #'string l)))))
       (if l (apply #'concatenate type a b l)
         (concatenate type a b))) )
-#+AKCL
+#+GCL
 (defun CONCAT (a b &rest l)
   (if (bit-vector-p a)
       (if l (apply #'concatenate 'bit-vector a b l)
@@ -445,24 +436,17 @@
 
 (define-function 'STRCONC #'CONCAT)
 
-(defun |make_full_CVEC2|(sint char)
-  (make-string sint :initial-element (if (integerp char)
-                                       (code-char char)
-                                       (character char))))
-
-(defun |make_full_CVEC|(sint) (|make_full_CVEC2| sint #\space))
-
 ; 17.2 Accessing
 
-(defun STRING2ID_N (cvec sint)
-  (if (< sint 1)
+(defun STRING2ID_N (cvec n)
+  (if (< n 1)
       nil
       (let ((start (position-if-not #'(lambda (x) (char= x #\Space)) cvec)))
         (if start
             (let ((end (or (position #\Space cvec :start start) (length cvec))))
-              (if (= sint 1)
+              (if (= n 1)
                   (intern (subseq cvec start end))
-                  (STRING2ID_N (subseq cvec end) (1- sint))))
+                  (STRING2ID_N (subseq cvec end) (1- n))))
             0))))
 
 (defun substring (cvec start length)
@@ -484,7 +468,7 @@
 
 ; In the following, table should be a string:
 
-(defun strposl (table cvec sint item)
+(defun STRPOSL (table cvec sint item)
   (setq cvec (string cvec))
   (if (not item)
       (position table cvec :test #'(lambda (x y) (position y x)) :start sint)
@@ -515,7 +499,7 @@
 ; copying shown here, but would also need to cope with generic sorts
 ; of sequences and unwarranted keyword generality
 
-(defun rplacstr (cvec1 start1 length1 cvec2
+(defun RPLACSTR (cvec1 start1 length1 cvec2
                        &optional start2 length2
                        &aux end1 end2)
   (setq cvec2 (string cvec2))
@@ -555,8 +539,6 @@
 
 (defun |substitute| (new old tree) (subst new old tree :test #'equal))
 
-(define-function 'MSUBSTQ #'subst) ;default test is eql
-
 (defun copy (x) (copy-tree x)) ; not right since should descend vectors
 
 (defun eqsubstlist (new old list) (sublis (mapcar #'cons old new) list))
@@ -564,9 +546,8 @@
 
 ; 24.0 Printing
 
-;(define-function 'prin2cvec #'write-to-string)
 (define-function 'prin2cvec #'princ-to-string)
-;(define-function 'stringimage #'write-to-string)
+
 (define-function 'stringimage #'princ-to-string)
 
 (define-function 'printexp #'princ)
@@ -629,10 +610,9 @@
 
 ; 48.0 Miscellaneous CMS Interactions
 
-(defun CurrentTime ()
-  (multiple-value-bind (sec min hour day month year) (get-decoded-time)
-    (format nil "~2,'0D/~2,'0D/~2,'0D~2,'0D:~2,'0D:~2,'0D"
-            month day (rem year 100) hour min sec)))
+(defun CURRENTTIME ()
+  (multiple-value-bind (sec min hour) (get-decoded-time)
+    (format nil "~2,'0D:~2,'0D:~2,'0D" hour min sec)))
 
 ; 99.0 Ancient Stuff We Decided To Keep
 
@@ -673,8 +653,20 @@
 #+:poplog
 (defun reclaim () nil)
 
+#+gcl
+(defun BPINAME (func)
+  (typecase func
+    (symbol func)
+    ((cons (eql lambda-block) t) (cadr func))
+    (function
+     (cond (#.(fboundp 'function-lambda-expression)
+            (multiple-value-bind (x y z) (function-lambda-expression func)
+              (or (and (symbolp z) (fboundp z) z) func)))
+           ((compiled-function-p func)
+            (system:compiled-function-name func))
+           (func)))))
 
-#+(OR IBCL KCL)
+#+(OR IBCL)
 (defun BPINAME (func)
   (if (functionp func)
       (cond ((symbolp func) func)
@@ -723,8 +715,6 @@
 ;17.6 Miscellaneous
 
 (define-function 'HASHTABLEP #'hash-table-p)
-
-(define-function 'HASHEQ #'sxhash)
 
 ;;; end of moved fragment
 

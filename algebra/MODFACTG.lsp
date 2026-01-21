@@ -12,12 +12,12 @@
          (|k1| (|Integer|)) (|k2| (|Integer|)) (|rdata| (PMD))
          (|res| (|List| PA)) (% (|List| PA)))
         (SPROG
-         ((|xp11| (PA)) (|rdata2| (PMD)) (|rdata1| (PMD)) (#1=#:G41 NIL)
+         ((|xp11| (PA)) (|rdata2| (PMD)) (|rdata1| (PMD)) (#1=#:G29 NIL)
           (|n| #2=(|NonNegativeInteger|)) (|dg| #3=(|NonNegativeInteger|))
           (|dp| #4=(|NonNegativeInteger|)) (|#G23| #2#) (|#G22| #3#) (|g| (PA))
-          (|#G21| (PA)) (|#G20| (PA)) (#5=#:G40 NIL)
+          (|#G21| (PA)) (|#G20| (PA)) (#5=#:G28 NIL)
           (|bad_cnt| (|NonNegativeInteger|)) (|tr1| (PA)) (|tr| (PA))
-          (#6=#:G42 NIL) (|i| NIL) (|kk| (|Integer|)) (|rpol| (PA)) (|l2| #4#)
+          (#6=#:G30 NIL) (|i| NIL) (|kk| (|Integer|)) (|rpol| (PA)) (|l2| #4#)
           (|n0| (|Integer|)) (|pp| (|Integer|)) (|p| (MD)))
          (SEQ
           (EXIT
@@ -78,7 +78,7 @@
                                            (EXIT
                                             (PROGN
                                              (LETT #5# |$NoValue|)
-                                             (GO #7=#:G22)))))))
+                                             (GO #7=#:G13)))))))
                                    (LETT |dp| (- |dp| |dg|))
                                    (LETT |pol|
                                          (SPADCALL |pol| |g| |p|
@@ -107,7 +107,7 @@
                                              ((EQL |dp| |n0|)
                                               (PROGN
                                                (LETT #1# (CONS |pol| |res|))
-                                               (GO #8=#:G39)))
+                                               (GO #8=#:G27)))
                                              ('T
                                               (SEQ
                                                (LETT |rdata|
@@ -180,17 +180,17 @@
            (|List|
             (|Record| (|:| |poly| PA) (|:| |degree| (|NonNegativeInteger|))
                       (|:| |separate_factors| (|Mapping| (|List| PA))))))
-          (|pk| (PA)) (#1=#:G85 NIL) (#2=#:G83 NIL) (#3=#:G84 NIL) (|xp2| (PA))
-          (|xp1| (PA)) (|pmat21| (MMT)) (|pmat11| (MMT)) (#4=#:G89 NIL)
+          (|pk| (PA)) (#1=#:G73 NIL) (#2=#:G71 NIL) (#3=#:G72 NIL) (|xp2| (PA))
+          (|xp1| (PA)) (|pmat21| (MMT)) (|pmat11| (MMT)) (#4=#:G77 NIL)
           (|g1| NIL) (|res1| (|List| PA)) (|xp21| (PA)) (|xp11| (PA))
           (|rdata2| (PMD)) (|rdata1| (PMD)) (|rdata| (PMD))
           (|all_done| (|Boolean|)) (|l11| (|NonNegativeInteger|))
           (|n| #5=(|NonNegativeInteger|)) (|dg| (|Integer|)) (|g| (PA))
-          (|pk1| (PA)) (|i| (|NonNegativeInteger|)) (#6=#:G88 NIL)
-          (#7=#:G87 NIL) (|i1| NIL) (|pmat2| (MMT)) (|#G33| (PA))
+          (|pk1| (PA)) (|i| (|NonNegativeInteger|)) (#6=#:G76 NIL)
+          (#7=#:G75 NIL) (|i1| NIL) (|pmat2| (MMT)) (|#G33| (PA))
           (|#G32| (MMT))
           (|#G31| #8=(|Record| (|:| |matr| MMT) (|:| |poly| PA))) (|pj| (PA))
-          (|lpj| (|List| PA)) (#9=#:G86 NIL) (|k2| (|NonNegativeInteger|))
+          (|lpj| (|List| PA)) (#9=#:G74 NIL) (|k2| (|NonNegativeInteger|))
           (|k1| (|NonNegativeInteger|)) (|n2| (|NonNegativeInteger|))
           (|pmat1| (MMT)) (|#G29| #8#) (|l1| (|NonNegativeInteger|))
           (|l2| (|NonNegativeInteger|)) (|n0| #5#) (|xp| (PA))
@@ -693,8 +693,8 @@
                                                      (LETT #2#
                                                            (PROGN
                                                             (LETT #3# 1)
-                                                            (GO #11=#:G75)))
-                                                     (GO #12=#:G74)))))))
+                                                            (GO #11=#:G63)))
+                                                     (GO #12=#:G62)))))))
                                            #12# (EXIT #2#))
                                           (LETT #6# (CDR #6#)) (GO G190) G191
                                           (EXIT NIL)))
@@ -702,7 +702,7 @@
                                    (EXIT
                                     (COND
                                      ((>= |i| (QUOTIENT2 |n| 2))
-                                      (PROGN (LETT #1# 1) (GO #13=#:G77)))
+                                      (PROGN (LETT #1# 1) (GO #13=#:G65)))
                                      ('T
                                       (LETT |pk|
                                             (COND
@@ -770,7 +770,7 @@
 (SDEFUN |MODFACTG;mfactor;PAMDL;5|
         ((|pol| (PA)) (|prime| (MD)) (% (|List| PA)))
         (SPROG
-         ((#1=#:G99 NIL) (|el| NIL) (#2=#:G98 NIL)
+         ((#1=#:G87 NIL) (|el| NIL) (#2=#:G86 NIL)
           (|rl1|
            (|List|
             (|Record| (|:| |poly| PA) (|:| |degree| (|NonNegativeInteger|))
@@ -809,27 +809,6 @@
 
 (DECLAIM (NOTINLINE |ModularFactorizationGeneral;|)) 
 
-(DEFUN |ModularFactorizationGeneral| (&REST #1=#:G104)
-  (SPROG NIL
-         (PROG (#2=#:G105)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ModularFactorizationGeneral|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |ModularFactorizationGeneral;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|ModularFactorizationGeneral|)))))))))) 
-
 (DEFUN |ModularFactorizationGeneral;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -854,6 +833,27 @@
     (QSETREFV % 10 |#5|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |ModularFactorizationGeneral| (&REST #1=#:G92)
+  (SPROG NIL
+         (PROG (#2=#:G93)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ModularFactorizationGeneral|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |ModularFactorizationGeneral;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|ModularFactorizationGeneral|)))))))))) 
 
 (MAKEPROP '|ModularFactorizationGeneral| '|infovec|
           (LIST

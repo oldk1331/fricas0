@@ -1,6 +1,6 @@
 
 (SDEFUN |UPSQFREE;squareFreePart;2P;1| ((|p| (P)) (% (P)))
-        (SPROG ((#1=#:G15 NIL))
+        (SPROG ((#1=#:G14 NIL))
                (PROG2
                    (LETT #1#
                          (SPADCALL |p|
@@ -13,7 +13,7 @@
 
 (SDEFUN |UPSQFREE;squareFreePart;2P;2| ((|p| (P)) (% (P)))
         (SPROG
-         ((#1=#:G38 NIL) (#2=#:G37 (P)) (#3=#:G39 (P)) (#4=#:G41 NIL) (|f| NIL)
+         ((#1=#:G19 NIL) (#2=#:G18 (P)) (#3=#:G20 (P)) (#4=#:G22 NIL) (|f| NIL)
           (|s| (|Factored| P)))
          (SEQ
           (SPADCALL
@@ -82,14 +82,14 @@
 
 (SDEFUN |UPSQFREE;squareFree;PF;6| ((|p| (P)) (% (|Factored| P)))
         (SPROG
-         ((#1=#:G89 NIL)
+         ((#1=#:G70 NIL)
           (|lffe|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| P)
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (|lcp| (RC)) (#2=#:G81 NIL) (|i| (|NonNegativeInteger|)) (|pi| (P))
-          (|di| (P)) (#3=#:G78 NIL) (|ci| (P)) (|a| (P)) (|c| (P)) (|u| (P))
+          (|lcp| (RC)) (#2=#:G62 NIL) (|i| (|NonNegativeInteger|)) (|pi| (P))
+          (|di| (P)) (#3=#:G59 NIL) (|ci| (P)) (|a| (P)) (|c| (P)) (|u| (P))
           (|#G11|
            (|Record| (|:| |unit| P) (|:| |canonical| P) (|:| |associate| P))))
          (SEQ (LETT |ci| |p|) (LETT |di| (SPADCALL |p| (QREFELT % 8)))
@@ -179,7 +179,7 @@
                                                  (VECTOR (CONS 1 "sqfr") |pi|
                                                          |i|)
                                                  |lffe|)))))
-                                  (GO #5=#:G84)))))))
+                                  (GO #5=#:G65)))))))
                             #5# (EXIT #1#))
                            NIL (GO G190) G191 (EXIT NIL))
                       (EXIT
@@ -193,11 +193,11 @@
                        (|:| |e_list| (|List| (|NonNegativeInteger|))))))
         (SPROG
          ((|res_le| (|List| (|NonNegativeInteger|))) (|res_lf| (|List| P))
-          (#2=#:G125 NIL) (|f| NIL) (#3=#:G126 NIL) (|e| NIL)
+          (#2=#:G106 NIL) (|f| NIL) (#3=#:G107 NIL) (|e| NIL)
           (|le| (|List| (|NonNegativeInteger|))) (|lf| (|List| P))
           (|nle| (|List| (|NonNegativeInteger|))) (|nlf| (|List| P)) (|nf| (P))
-          (|rec_f| (P)) (#4=#:G92 NIL) (|f1| (P)) (#5=#:G123 NIL)
-          (#6=#:G124 NIL) (#7=#:G121 NIL) (#8=#:G122 NIL) (|rec_e| NIL)
+          (|rec_f| (P)) (#4=#:G73 NIL) (|f1| (P)) (#5=#:G104 NIL)
+          (#6=#:G105 NIL) (#7=#:G102 NIL) (#8=#:G103 NIL) (|rec_e| NIL)
           (|rec_el| (|List| (|NonNegativeInteger|))) (|rec_fl| (|List| P))
           (|res1| #1#) (|facs_pow| (P)) (|i| (|NonNegativeInteger|)) (|di| (P))
           (|facs| (P)) (|fac_i| (P)) (|dp| (P)))
@@ -406,7 +406,7 @@
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| P)
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (#1=#:G137 NIL) (|f| NIL) (#2=#:G138 NIL) (|e| NIL)
+          (#1=#:G118 NIL) (|f| NIL) (#2=#:G119 NIL) (|e| NIL)
           (|res1|
            (|Record| (|:| |f_list| (|List| P))
                      (|:| |e_list| (|List| (|NonNegativeInteger|)))))
@@ -444,9 +444,9 @@
            (|List|
             (|Record| (|:| |flag| (|Union| #1# #2# #3# #4#)) (|:| |factor| P)
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (#5=#:G165 NIL) (|ffe| NIL) (#6=#:G164 NIL)
-          (|redSqfr| (|Factored| P)) (#7=#:G148 NIL) (|dunit| (P)) (|pi| (P))
-          (|lc| (RC)) (#8=#:G152 NIL) (|i| (|NonNegativeInteger|)) (|ci| (P))
+          (#5=#:G146 NIL) (|ffe| NIL) (#6=#:G145 NIL)
+          (|redSqfr| (|Factored| P)) (#7=#:G129 NIL) (|dunit| (P)) (|pi| (P))
+          (|lc| (RC)) (#8=#:G133 NIL) (|i| (|NonNegativeInteger|)) (|ci| (P))
           (|di| (P)) (|diprev| (P)) (|a| (P)) (|c| (P)) (|u| (P))
           (|#G24|
            (|Record| (|:| |unit| P) (|:| |canonical| P) (|:| |associate| P))))
@@ -578,28 +578,6 @@
 
 (DECLAIM (NOTINLINE |UnivariatePolynomialSquareFree;|)) 
 
-(DEFUN |UnivariatePolynomialSquareFree| (&REST #1=#:G166)
-  (SPROG NIL
-         (PROG (#2=#:G167)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|UnivariatePolynomialSquareFree|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |UnivariatePolynomialSquareFree;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|UnivariatePolynomialSquareFree|)))))))))) 
-
 (DEFUN |UnivariatePolynomialSquareFree;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -653,6 +631,28 @@
                       (CONS (|dispatchFunction| |UPSQFREE;squareFree;PF;9|)
                             %))))
           %))) 
+
+(DEFUN |UnivariatePolynomialSquareFree| (&REST #1=#:G147)
+  (SPROG NIL
+         (PROG (#2=#:G148)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|UnivariatePolynomialSquareFree|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |UnivariatePolynomialSquareFree;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|UnivariatePolynomialSquareFree|)))))))))) 
 
 (MAKEPROP '|UnivariatePolynomialSquareFree| '|infovec|
           (LIST

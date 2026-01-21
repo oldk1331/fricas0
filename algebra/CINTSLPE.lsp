@@ -6,12 +6,12 @@
         (SPROG
          ((|answer|
            (|Union| (|List| (|SparseUnivariatePolynomial| CR)) "failed"))
-          (#1=#:G20 NIL)
+          (#1=#:G9 NIL)
           (|ans|
            (|Union| (|Vector| (|List| (|SparseUnivariatePolynomial| CR)))
                     #2="failed"))
-          (|deg| #3=(|NonNegativeInteger|)) (#4=#:G17 NIL) (#5=#:G16 #3#)
-          (#6=#:G18 #3#) (#7=#:G33 NIL) (|u| NIL))
+          (|deg| #3=(|NonNegativeInteger|)) (#4=#:G6 NIL) (#5=#:G5 #3#)
+          (#6=#:G7 #3#) (#7=#:G22 NIL) (|u| NIL))
          (SEQ
           (COND
            ((SPADCALL (QREFELT % 8) |lp| (QREFELT % 15))
@@ -89,30 +89,6 @@
 
 (DECLAIM (NOTINLINE |ComplexIntegerSolveLinearPolynomialEquation;|)) 
 
-(DEFUN |ComplexIntegerSolveLinearPolynomialEquation| (&REST #1=#:G34)
-  (SPROG NIL
-         (PROG (#2=#:G35)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ComplexIntegerSolveLinearPolynomialEquation|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function|
-                        |ComplexIntegerSolveLinearPolynomialEquation;|)
-                       #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|ComplexIntegerSolveLinearPolynomialEquation|)))))))))) 
-
 (DEFUN |ComplexIntegerSolveLinearPolynomialEquation;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -135,6 +111,30 @@
           (QSETREFV % 11 (SPADCALL 2 (QREFELT % 10)))
           (QSETREFV % 12 (MAKE-ARRAY 0))
           %))) 
+
+(DEFUN |ComplexIntegerSolveLinearPolynomialEquation| (&REST #1=#:G23)
+  (SPROG NIL
+         (PROG (#2=#:G24)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ComplexIntegerSolveLinearPolynomialEquation|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function|
+                        |ComplexIntegerSolveLinearPolynomialEquation;|)
+                       #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|ComplexIntegerSolveLinearPolynomialEquation|)))))))))) 
 
 (MAKEPROP '|ComplexIntegerSolveLinearPolynomialEquation| '|infovec|
           (LIST

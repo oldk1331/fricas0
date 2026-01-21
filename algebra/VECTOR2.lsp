@@ -15,8 +15,8 @@
         ((|f| (|Mapping| (|Union| B #1="failed") A)) (|a| (|Vector| A))
          (% (|Union| (|Vector| B) "failed")))
         (SPROG
-         ((|res| (|List| B)) (#2=#:G21 NIL) (#3=#:G34 NIL)
-          (|r| (|Union| B #1#)) (#4=#:G35 NIL) (|u| NIL))
+         ((|res| (|List| B)) (#2=#:G13 NIL) (#3=#:G26 NIL)
+          (|r| (|Union| B #1#)) (#4=#:G27 NIL) (|u| NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |res| NIL)
@@ -31,7 +31,7 @@
                             ((SPADCALL |r| (CONS 1 "failed") (QREFELT % 23))
                              (PROGN
                               (LETT #3# (CONS 1 "failed"))
-                              (GO #5=#:G33)))
+                              (GO #5=#:G25)))
                             ('T
                              (LETT |res|
                                    (CONS
@@ -49,25 +49,6 @@
 
 (DECLAIM (NOTINLINE |VectorFunctions2;|)) 
 
-(DEFUN |VectorFunctions2| (&REST #1=#:G36)
-  (SPROG NIL
-         (PROG (#2=#:G37)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|VectorFunctions2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |VectorFunctions2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|VectorFunctions2|)))))))))) 
-
 (DEFUN |VectorFunctions2;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -84,6 +65,25 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |VectorFunctions2| (&REST #1=#:G28)
+  (SPROG NIL
+         (PROG (#2=#:G29)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|VectorFunctions2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |VectorFunctions2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|VectorFunctions2|)))))))))) 
 
 (MAKEPROP '|VectorFunctions2| '|infovec|
           (LIST

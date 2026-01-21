@@ -14,7 +14,7 @@
                        ('T (CONS 0 (QCDR |inv|)))))))) 
 
 (SDEFUN |IMATQF;nullSpace;ML;4| ((|m| (M)) (% (|List| |Col|)))
-        (SPROG ((#1=#:G16 NIL) (|v| NIL) (#2=#:G15 NIL))
+        (SPROG ((#1=#:G11 NIL) (|v| NIL) (#2=#:G10 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -32,28 +32,6 @@
                       (EXIT (NREVERSE #2#))))))) 
 
 (DECLAIM (NOTINLINE |InnerMatrixQuotientFieldFunctions;|)) 
-
-(DEFUN |InnerMatrixQuotientFieldFunctions| (&REST #1=#:G17)
-  (SPROG NIL
-         (PROG (#2=#:G18)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|InnerMatrixQuotientFieldFunctions|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |InnerMatrixQuotientFieldFunctions;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|InnerMatrixQuotientFieldFunctions|)))))))))) 
 
 (DEFUN |InnerMatrixQuotientFieldFunctions;|
        (|#1| |#2| |#3| |#4| |#5| |#6| |#7| |#8|)
@@ -96,6 +74,28 @@
      ((|testBitVector| |pv$| 1)
       (QSETREFV % 29 (CONS (|dispatchFunction| |IMATQF;nullSpace;ML;4|) %))))
     %))) 
+
+(DEFUN |InnerMatrixQuotientFieldFunctions| (&REST #1=#:G12)
+  (SPROG NIL
+         (PROG (#2=#:G13)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|InnerMatrixQuotientFieldFunctions|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |InnerMatrixQuotientFieldFunctions;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|InnerMatrixQuotientFieldFunctions|)))))))))) 
 
 (MAKEPROP '|InnerMatrixQuotientFieldFunctions| '|infovec|
           (LIST

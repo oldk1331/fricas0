@@ -11,26 +11,6 @@
 
 (DECLAIM (NOTINLINE |FunctionSpaceRationalRoots;|)) 
 
-(DEFUN |FunctionSpaceRationalRoots| (&REST #1=#:G12)
-  (SPROG NIL
-         (PROG (#2=#:G13)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|FunctionSpaceRationalRoots|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |FunctionSpaceRationalRoots;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|FunctionSpaceRationalRoots|)))))))))) 
-
 (DEFUN |FunctionSpaceRationalRoots;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -47,6 +27,26 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |FunctionSpaceRationalRoots| (&REST #1=#:G2)
+  (SPROG NIL
+         (PROG (#2=#:G3)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|FunctionSpaceRationalRoots|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |FunctionSpaceRationalRoots;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|FunctionSpaceRationalRoots|)))))))))) 
 
 (MAKEPROP '|FunctionSpaceRationalRoots| '|infovec|
           (LIST

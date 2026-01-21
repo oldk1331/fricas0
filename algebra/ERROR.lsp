@@ -6,7 +6,7 @@
         (|ERROR;doit| (SPADCALL (LIST (QREFELT % 6) |s|) (QREFELT % 10)) %)) 
 
 (SDEFUN |ERROR;error;LE;3| ((|l| (|List| (|String|))) (% (|Exit|)))
-        (SPROG ((|s| (|String|)) (#1=#:G17 NIL) (|x| NIL))
+        (SPROG ((|s| (|String|)) (#1=#:G7 NIL) (|x| NIL))
                (SEQ (LETT |s| (QREFELT % 6))
                     (SEQ (LETT |x| NIL) (LETT #1# |l|) G190
                          (COND
@@ -26,7 +26,7 @@
 
 (SDEFUN |ERROR;error;SLE;5|
         ((|fn| (|String|)) (|l| (|List| (|String|))) (% (|Exit|)))
-        (SPROG ((|s| (|String|)) (#1=#:G23 NIL) (|x| NIL))
+        (SPROG ((|s| (|String|)) (#1=#:G13 NIL) (|x| NIL))
                (SEQ
                 (LETT |s|
                       (SPADCALL (LIST (QREFELT % 7) |fn| ": %d %l")
@@ -44,9 +44,23 @@
 
 (DECLAIM (NOTINLINE |ErrorFunctions;|)) 
 
+(DEFUN |ErrorFunctions;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|ErrorFunctions|))
+          (LETT % (GETREFV 17))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|ErrorFunctions| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 6 "Error signalled from user code: %l ")
+          (QSETREFV % 7 "Error signalled from user code in function %b ")
+          %))) 
+
 (DEFUN |ErrorFunctions| ()
   (SPROG NIL
-         (PROG (#1=#:G25)
+         (PROG (#1=#:G15)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ErrorFunctions|))
@@ -61,20 +75,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|ErrorFunctions|)))))))))) 
-
-(DEFUN |ErrorFunctions;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|ErrorFunctions|))
-          (LETT % (GETREFV 17))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|ErrorFunctions| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 6 "Error signalled from user code: %l ")
-          (QSETREFV % 7 "Error signalled from user code in function %b ")
-          %))) 
 
 (MAKEPROP '|ErrorFunctions| '|infovec|
           (LIST

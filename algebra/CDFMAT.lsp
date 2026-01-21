@@ -65,7 +65,7 @@
         ((|rows| #1=(|NonNegativeInteger|)) (|cols| #1#)
          (|a| (|Complex| (|DoubleFloat|))) (% (%)))
         (SPROG
-         ((#2=#:G2874 NIL) (|j| NIL) (#3=#:G2873 NIL) (|i| NIL) (|res| (%)))
+         ((#2=#:G2770 NIL) (|j| NIL) (#3=#:G2769 NIL) (|i| NIL) (|res| (%)))
          (SEQ (LETT |res| (MAKE_CDOUBLE_MATRIX |rows| |cols|))
               (SEQ (LETT |i| 0) (LETT #3# (- |rows| 1)) G190
                    (COND ((|greater_SI| |i| #3#) (GO G191)))
@@ -81,30 +81,9 @@
 
 (DECLAIM (NOTINLINE |ComplexDoubleFloatMatrix;|)) 
 
-(DEFUN |ComplexDoubleFloatMatrix| ()
-  (SPROG NIL
-         (PROG (#1=#:G2890)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|ComplexDoubleFloatMatrix|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|ComplexDoubleFloatMatrix|
-                             (LIST
-                              (CONS NIL
-                                    (CONS 1 (|ComplexDoubleFloatMatrix;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#)
-                  (HREM |$ConstructorCache|
-                        '|ComplexDoubleFloatMatrix|)))))))))) 
-
 (DEFUN |ComplexDoubleFloatMatrix;| ()
   (SPROG
-   ((|dv$| NIL) (% NIL) (#1=#:G2887 NIL) (#2=#:G2888 NIL) (#3=#:G2886 NIL)
+   ((|dv$| NIL) (% NIL) (#1=#:G2783 NIL) (#2=#:G2784 NIL) (#3=#:G2782 NIL)
     (|pv$| NIL))
    (PROGN
     (LETT |dv$| '(|ComplexDoubleFloatMatrix|))
@@ -213,6 +192,27 @@
      (|augmentPredVector| % 2097152))
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |ComplexDoubleFloatMatrix| ()
+  (SPROG NIL
+         (PROG (#1=#:G2786)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|ComplexDoubleFloatMatrix|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|ComplexDoubleFloatMatrix|
+                             (LIST
+                              (CONS NIL
+                                    (CONS 1 (|ComplexDoubleFloatMatrix;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#)
+                  (HREM |$ConstructorCache|
+                        '|ComplexDoubleFloatMatrix|)))))))))) 
 
 (MAKEPROP '|ComplexDoubleFloatMatrix| '|infovec|
           (LIST

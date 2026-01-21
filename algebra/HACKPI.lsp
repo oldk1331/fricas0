@@ -91,22 +91,6 @@
 
 (DECLAIM (NOTINLINE |PiDomain;|)) 
 
-(DEFUN |PiDomain| ()
-  (SPROG NIL
-         (PROG (#1=#:G85)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|PiDomain|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|PiDomain|
-                             (LIST (CONS NIL (CONS 1 (|PiDomain;|))))))
-                    (LETT #1# T))
-                (COND ((NOT #1#) (HREM |$ConstructorCache| '|PiDomain|)))))))))) 
-
 (DEFUN |PiDomain;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -121,6 +105,22 @@
                     (|Fraction| (|SparseUnivariatePolynomial| (|Integer|))))
           (QSETREFV % 7 '|%pi|)
           %))) 
+
+(DEFUN |PiDomain| ()
+  (SPROG NIL
+         (PROG (#1=#:G47)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|PiDomain|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|PiDomain|
+                             (LIST (CONS NIL (CONS 1 (|PiDomain;|))))))
+                    (LETT #1# T))
+                (COND ((NOT #1#) (HREM |$ConstructorCache| '|PiDomain|)))))))))) 
 
 (MAKEPROP '|PiDomain| '|infovec|
           (LIST

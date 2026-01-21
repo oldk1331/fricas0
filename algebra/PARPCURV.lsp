@@ -12,24 +12,6 @@
 
 (DECLAIM (NOTINLINE |ParametricPlaneCurve;|)) 
 
-(DEFUN |ParametricPlaneCurve| (#1=#:G11)
-  (SPROG NIL
-         (PROG (#2=#:G12)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|ParametricPlaneCurve|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|ParametricPlaneCurve;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|ParametricPlaneCurve|)))))))))) 
-
 (DEFUN |ParametricPlaneCurve;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -45,6 +27,24 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 7 (|Record| (|:| |xCoord| |#1|) (|:| |yCoord| |#1|)))
           %))) 
+
+(DEFUN |ParametricPlaneCurve| (#1=#:G5)
+  (SPROG NIL
+         (PROG (#2=#:G6)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|ParametricPlaneCurve|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|ParametricPlaneCurve;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|ParametricPlaneCurve|)))))))))) 
 
 (MAKEPROP '|ParametricPlaneCurve| '|infovec|
           (LIST

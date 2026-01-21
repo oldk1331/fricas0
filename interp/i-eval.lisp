@@ -483,7 +483,7 @@
 ;     for x in argl for m in ml for argnum in 1.. repeat
 ;       typeList := [v,:typeList] where v ==
 ;         categoryForm?(m) =>
-;           m := evaluateType(MSUBSTQ(x, '%, m))
+;           m := evaluateType(SUBST(x, '%, m))
 ;           evalCategory(x' := (evaluateType x), m) => x'
 ;           throwEvalTypeMsg("S2IE0004",[form])
 ;         m := evaluateType m
@@ -531,8 +531,7 @@
                              (COND
                               ((|categoryForm?| |m|)
                                (PROGN
-                                (SETQ |m|
-                                        (|evaluateType| (MSUBSTQ |x| '% |m|)))
+                                (SETQ |m| (|evaluateType| (SUBST |x| '% |m|)))
                                 (COND
                                  ((|evalCategory|
                                    (SETQ |x'| (|evaluateType| |x|)) |m|)
@@ -710,7 +709,6 @@
 ;         _% : fluid := domain
 ;         ['SPADCALL, :form, fun0]
 ;   not form => nil
-; --  not form => throwKeyedMsg("S2IE0008",[opName])
 ;   form='interpOnly => rewriteMap(op,opName,argl)
 ;   targetType := CADR sig
 ;   if CONTAINED('_#,targetType) then targetType := NRTtypeHack targetType
@@ -1246,7 +1244,6 @@
 ;       $genValue => wrap timedEVALFUN form
 ;       form
 ;     objNew(u,tm)
-; --+
 ;   if $NRTmonitorIfTrue = true then
 ;     sayBrightlyNT ['"Value of ",op.0,'" ===> "]
 ;     pp unwrap u

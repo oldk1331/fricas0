@@ -3,10 +3,6 @@
 
 (IN-PACKAGE "BOOT")
 
-; oldCompilerAutoloadOnceTrigger() == nil
-
-(DEFUN |oldCompilerAutoloadOnceTrigger| () (PROG () (RETURN NIL)))
-
 ; compAtomWithModemap(x, m, e, v) ==
 ;     res := nil
 ;     v1 := nil

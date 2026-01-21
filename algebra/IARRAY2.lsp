@@ -1,29 +1,9 @@
 
 (DECLAIM (NOTINLINE |IndexedTwoDimensionalArray;|)) 
 
-(DEFUN |IndexedTwoDimensionalArray| (&REST #1=#:G19)
-  (SPROG NIL
-         (PROG (#2=#:G20)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T NIL NIL))
-                     (HGET |$ConstructorCache| '|IndexedTwoDimensionalArray|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |IndexedTwoDimensionalArray;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|IndexedTwoDimensionalArray|)))))))))) 
-
 (DEFUN |IndexedTwoDimensionalArray;| (|#1| |#2| |#3|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G16 NIL) (#2=#:G17 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL)
+   ((|pv$| NIL) (#1=#:G4 NIL) (#2=#:G5 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL)
     (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -100,6 +80,26 @@
      (|augmentPredVector| % 16384))
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |IndexedTwoDimensionalArray| (&REST #1=#:G7)
+  (SPROG NIL
+         (PROG (#2=#:G8)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T NIL NIL))
+                     (HGET |$ConstructorCache| '|IndexedTwoDimensionalArray|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |IndexedTwoDimensionalArray;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|IndexedTwoDimensionalArray|)))))))))) 
 
 (MAKEPROP '|IndexedTwoDimensionalArray| '|infovec|
           (LIST

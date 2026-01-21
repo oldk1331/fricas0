@@ -90,7 +90,7 @@
 
 (SDEFUN |SEG;expand;LL;15| ((|ls| (|List| %)) (% (|List| S)))
         (SPROG
-         ((|l| (S)) (|lr| (|List| S)) (|inc| (S)) (|h| (S)) (#1=#:G50 NIL)
+         ((|l| (S)) (|lr| (|List| S)) (|inc| (S)) (|h| (S)) (#1=#:G39 NIL)
           (|s| NIL))
          (SEQ (LETT |lr| NIL)
               (SEQ (LETT |s| NIL) (LETT #1# |ls|) G190
@@ -168,21 +168,6 @@
 
 (DECLAIM (NOTINLINE |Segment;|)) 
 
-(DEFUN |Segment| (#1=#:G61)
-  (SPROG NIL
-         (PROG (#2=#:G62)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|Segment|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Segment;| #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Segment|)))))))))) 
-
 (DEFUN |Segment;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -239,6 +224,21 @@
              (QSETREFV % 50 (CONS (|dispatchFunction| |SEG;expand;%L;16|) %))
              (QSETREFV % 52 (CONS (|dispatchFunction| |SEG;map;M%L;17|) %)))))
           %))) 
+
+(DEFUN |Segment| (#1=#:G50)
+  (SPROG NIL
+         (PROG (#2=#:G51)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|Segment|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Segment;| #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Segment|)))))))))) 
 
 (MAKEPROP '|Segment| '|infovec|
           (LIST

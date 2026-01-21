@@ -2,8 +2,7 @@
 (SDEFUN |EVALCYC;evp|
         ((|fn| (|Mapping| F (|Integer|))) (|pt| (|Partition|)) (% (F)))
         (SPROG
-         ((#1=#:G11 NIL) (#2=#:G10 (F)) (#3=#:G12 (F)) (#4=#:G14 NIL)
-          (|i| NIL))
+         ((#1=#:G1 NIL) (#2=#:G0 (F)) (#3=#:G2 (F)) (#4=#:G4 NIL) (|i| NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -35,24 +34,6 @@
 
 (DECLAIM (NOTINLINE |EvaluateCycleIndicators;|)) 
 
-(DEFUN |EvaluateCycleIndicators| (#1=#:G24)
-  (SPROG NIL
-         (PROG (#2=#:G25)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|EvaluateCycleIndicators|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|EvaluateCycleIndicators;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|EvaluateCycleIndicators|)))))))))) 
-
 (DEFUN |EvaluateCycleIndicators;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -67,6 +48,24 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |EvaluateCycleIndicators| (#1=#:G8)
+  (SPROG NIL
+         (PROG (#2=#:G9)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|EvaluateCycleIndicators|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|EvaluateCycleIndicators;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|EvaluateCycleIndicators|)))))))))) 
 
 (MAKEPROP '|EvaluateCycleIndicators| '|infovec|
           (LIST

@@ -68,24 +68,9 @@
 
 (DECLAIM (NOTINLINE |Stack;|)) 
 
-(DEFUN |Stack| (#1=#:G48)
-  (SPROG NIL
-         (PROG (#2=#:G49)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|Stack|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Stack;| #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Stack|)))))))))) 
-
 (DEFUN |Stack;| (|#1|)
   (SPROG
-   ((#1=#:G47 NIL) (|pv$| NIL) (#2=#:G44 NIL) (#3=#:G45 NIL) (#4=#:G46 NIL)
+   ((#1=#:G36 NIL) (|pv$| NIL) (#2=#:G33 NIL) (#3=#:G34 NIL) (#4=#:G35 NIL)
     (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -144,6 +129,21 @@
       (QSETREFV % 37
                 (CONS (|dispatchFunction| |STACK;hashUpdate!;Hs%Hs;17|) %))))
     %))) 
+
+(DEFUN |Stack| (#1=#:G37)
+  (SPROG NIL
+         (PROG (#2=#:G38)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|Stack|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Stack;| #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Stack|)))))))))) 
 
 (MAKEPROP '|Stack| '|infovec|
           (LIST

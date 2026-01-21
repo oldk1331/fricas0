@@ -6,6 +6,6 @@
 (DEFUN |Lattice| () (COND (|Lattice;AL|) (T (SETQ |Lattice;AL| (|Lattice;|))))) 
 
 (DEFUN |Lattice;| ()
-  (SPROG ((#1=#:G1 NIL))
+  (SPROG ((#1=#:G0 NIL))
          (PROG1 (LETT #1# (|Join| (|MeetSemilattice|) (|JoinSemilattice|)))
            (SETELT #1# 0 '(|Lattice|))))) 

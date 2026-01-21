@@ -148,8 +148,8 @@
 
 (SDEFUN |DIHGRP;enumerate;L;19| ((% (|List| %)))
         (SPROG
-         ((#1=#:G97 NIL) (|k| NIL) (#2=#:G96 NIL) (#3=#:G95 NIL)
-          (#4=#:G94 NIL))
+         ((#1=#:G69 NIL) (|k| NIL) (#2=#:G68 NIL) (#3=#:G67 NIL)
+          (#4=#:G66 NIL))
          (SEQ
           (SPADCALL
            (PROGN
@@ -186,24 +186,6 @@
 
 (DECLAIM (NOTINLINE |DihedralGroup;|)) 
 
-(DEFUN |DihedralGroup| (&REST #1=#:G101)
-  (SPROG NIL
-         (PROG (#2=#:G102)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(NIL NIL NIL))
-                     (HGET |$ConstructorCache| '|DihedralGroup|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |DihedralGroup;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|DihedralGroup|)))))))))) 
-
 (DEFUN |DihedralGroup;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -225,6 +207,24 @@
                     (|Record| (|:| |expa| (|IntegerMod| |#1|))
                               (|:| |expb| (|IntegerMod| 2))))
           %))) 
+
+(DEFUN |DihedralGroup| (&REST #1=#:G73)
+  (SPROG NIL
+         (PROG (#2=#:G74)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(NIL NIL NIL))
+                     (HGET |$ConstructorCache| '|DihedralGroup|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |DihedralGroup;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|DihedralGroup|)))))))))) 
 
 (MAKEPROP '|DihedralGroup| '|infovec|
           (LIST

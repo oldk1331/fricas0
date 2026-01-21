@@ -144,8 +144,6 @@
       NIL (|get| |op| '|modemap| |e|) NIL))))
 
 ; addModemapKnown(op, mc, sig, pred, fn, e) ==
-; --  if knownInfo pred then pred:=true
-; --  that line is handled elsewhere
 ;   $insideCapsuleFunctionIfTrue=true =>
 ;     $CapsuleModemapFrame :=
 ;       addModemap0(op,mc,sig,pred,fn,$CapsuleModemapFrame)
@@ -185,14 +183,12 @@
 ;       id:= INTERN sel
 ;       e := makeLiteral(id, e)
 ;       addModemap1(op,mc,[:lt,id],pred,fn,e)
-;     -- atom sel => systemErrorHere '"addEltModemap"
 ;     addModemap1(op,mc,sig,pred,fn,e)
 ;   op = "setelt!" and sig is [:lt, sel, v] =>
 ;     STRINGP sel =>
 ;       id:= INTERN sel
 ;       e := makeLiteral(id, e)
 ;       addModemap1(op,mc,[:lt,id,v],pred,fn,e)
-;     -- atom sel => systemError '"addEltModemap"
 ;     addModemap1(op,mc,sig,pred,fn,e)
 ;   systemErrorHere '"addEltModemap"
 
@@ -239,9 +235,6 @@
 ; addModemap1(op,mc,sig,pred,fn,e) ==
 ;    --mc is the "mode of computation"; fn the "implementation"
 ;   if mc='Rep then
-; --     if fn is [kind,'Rep,.] and
-;                -- save old sig for NRUNTIME
-; --       (kind = 'ELT or kind = 'CONST) then fn:=[kind,'Rep,sig]
 ;      sig:= substitute("%", 'Rep, sig)
 ;   currentProplist:= getProplist(op,e) or nil
 ;   newModemapList:=
@@ -472,6 +465,39 @@
                    (SETQ |bfVar#9| (CDR |bfVar#9|))))
                 (|stripUnionTags| |dl|) NIL)))
              (|augModemapsFromDomain1| |name| |functorForm| |e|)))))))
+
+; augModemapsFromDomain1(name, functorForm, e) ==
+;     get_oplist_maker(IFCAR(functorForm)) =>
+;         add_builtin_modemaps(name, functorForm, e)
+;     atom(functorForm) and (catform := getmode(functorForm, e)) =>
+;         augModemapsFromCategory(name, functorForm, catform, e)
+;     mappingForm := getmodeOrMapping(IFCAR(functorForm), e) =>
+;         ["Mapping", categoryForm, :.] := mappingForm
+;         catform := substituteCategoryArguments(rest(functorForm), categoryForm)
+;         augModemapsFromCategory(name, functorForm, catform, e)
+;     stackMessage([functorForm, '" is an unknown mode"])
+;     e
+
+(DEFUN |augModemapsFromDomain1| (|name| |functorForm| |e|)
+  (PROG (|catform| |mappingForm| |categoryForm|)
+    (RETURN
+     (COND
+      ((|get_oplist_maker| (IFCAR |functorForm|))
+       (|add_builtin_modemaps| |name| |functorForm| |e|))
+      ((AND (ATOM |functorForm|)
+            (SETQ |catform| (|getmode| |functorForm| |e|)))
+       (|augModemapsFromCategory| |name| |functorForm| |catform| |e|))
+      ((SETQ |mappingForm| (|getmodeOrMapping| (IFCAR |functorForm|) |e|))
+       (PROGN
+        (SETQ |categoryForm| (CADR |mappingForm|))
+        (SETQ |catform|
+                (|substituteCategoryArguments| (CDR |functorForm|)
+                 |categoryForm|))
+        (|augModemapsFromCategory| |name| |functorForm| |catform| |e|)))
+      ('T
+       (PROGN
+        (|stackMessage| (LIST |functorForm| " is an unknown mode"))
+        |e|))))))
 
 ; substituteCategoryArguments(argl,catform) ==
 ;   argl := substitute("$$", "%", argl)

@@ -407,14 +407,15 @@
      (AND (|npListAndRecover| #'|npPPf|) (|npPush| (|pfAppend| (|npPop1|)))))))
 
 ; npPP(f) ==
-;   $npPParg := f
+;   $npPParg : local := f
 ;   npParened function npPPf
 ;     or npPileBracketed function npPPg and
 ;       npPush pfEnSequence npPop1()
 ;         or FUNCALL f
 
 (DEFUN |npPP| (|f|)
-  (PROG ()
+  (PROG (|$npPParg|)
+    (DECLARE (SPECIAL |$npPParg|))
     (RETURN
      (PROGN
       (SETQ |$npPParg| |f|)
@@ -443,13 +444,14 @@
      (AND (|npListAndRecover| #'|npPCff|) (|npPush| (|pfAppend| (|npPop1|)))))))
 
 ; npPC(f) ==
-;   $npPCff := f
+;   $npPCff : local := f
 ;   npPileBracketed function npPCg and
 ;     npPush pfEnSequence npPop1()
 ;       or FUNCALL f
 
 (DEFUN |npPC| (|f|)
-  (PROG ()
+  (PROG (|$npPCff|)
+    (DECLARE (SPECIAL |$npPCff|))
     (RETURN
      (PROGN
       (SETQ |$npPCff| |f|)
@@ -2027,6 +2029,9 @@
 ;                npEqPeek("==") =>
 ;                   npRestore a
 ;                   npDef()
+;                npEqPeek("==>") =>
+;                   npRestore a
+;                   npMDEF()
 ;                npRestore a
 ;                npMacro() or npDefn()
 ;           npTrap()
@@ -2040,6 +2045,7 @@
           (COND
            ((|npStatement|)
             (COND ((|npEqPeek| '==) (PROGN (|npRestore| |a|) (|npDef|)))
+                  ((|npEqPeek| '==>) (PROGN (|npRestore| |a|) (|npMDEF|)))
                   (#1='T
                    (PROGN (|npRestore| |a|) (OR (|npMacro|) (|npDefn|))))))
            (#1# (|npTrap|))))))))

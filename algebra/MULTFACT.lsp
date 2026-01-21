@@ -24,25 +24,6 @@
 
 (DECLAIM (NOTINLINE |MultivariateFactorize;|)) 
 
-(DEFUN |MultivariateFactorize| (&REST #1=#:G36)
-  (SPROG NIL
-         (PROG (#2=#:G37)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|MultivariateFactorize|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |MultivariateFactorize;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|MultivariateFactorize|)))))))))) 
-
 (DEFUN |MultivariateFactorize;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -82,6 +63,25 @@
         (QSETREFV % 13 (CONS (|dispatchFunction| |MULTFACT;factor;PF;5|) %)))))
      ('T (QSETREFV % 13 (CONS (|dispatchFunction| |MULTFACT;factor;PF;6|) %))))
     %))) 
+
+(DEFUN |MultivariateFactorize| (&REST #1=#:G10)
+  (SPROG NIL
+         (PROG (#2=#:G11)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|MultivariateFactorize|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |MultivariateFactorize;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|MultivariateFactorize|)))))))))) 
 
 (MAKEPROP '|MultivariateFactorize| '|infovec|
           (LIST

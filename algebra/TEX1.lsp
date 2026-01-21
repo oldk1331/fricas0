@@ -4,22 +4,6 @@
 
 (DECLAIM (NOTINLINE |TexFormat1;|)) 
 
-(DEFUN |TexFormat1| (#1=#:G2)
-  (SPROG NIL
-         (PROG (#2=#:G3)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|TexFormat1|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|TexFormat1;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|TexFormat1|)))))))))) 
-
 (DEFUN |TexFormat1;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -33,6 +17,22 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |TexFormat1| (#1=#:G1)
+  (SPROG NIL
+         (PROG (#2=#:G2)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|TexFormat1|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|TexFormat1;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|TexFormat1|)))))))))) 
 
 (MAKEPROP '|TexFormat1| '|infovec|
           (LIST

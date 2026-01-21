@@ -1,6 +1,6 @@
 
 (SDEFUN |QALGSET;factorset| ((|y| (|Dpoly|)) (% (|List| |Dpoly|)))
-        (SPROG ((#1=#:G40 NIL) (|j| NIL) (#2=#:G39 NIL))
+        (SPROG ((#1=#:G26 NIL) (|j| NIL) (#2=#:G25 NIL))
                (SEQ
                 (COND ((SPADCALL |y| (QREFELT % 12)) NIL)
                       ('T
@@ -20,12 +20,12 @@
 
 (SDEFUN |QALGSET;simplify;2%;2| ((|x| (%)) (% (%)))
         (SPROG
-         ((#1=#:G58 NIL) (#2=#:G57 (|Dpoly|)) (#3=#:G59 (|Dpoly|))
-          (#4=#:G70 NIL) (#5=#:G2 NIL) (|zro| (|List| |Dpoly|)) (#6=#:G54 NIL)
-          (#7=#:G53 (|Dpoly|)) (#8=#:G55 (|Dpoly|)) (#9=#:G69 NIL)
-          (#10=#:G1 NIL) (#11=#:G68 NIL) (|s| NIL) (#12=#:G67 NIL)
-          (|mset| (|List| (|List| |Dpoly|))) (#13=#:G66 NIL) (#14=#:G65 NIL)
-          (#15=#:G64 NIL) (|p| NIL) (#16=#:G63 NIL) (|nzro| (|List| |Dpoly|))
+         ((#1=#:G41 NIL) (#2=#:G40 (|Dpoly|)) (#3=#:G42 (|Dpoly|))
+          (#4=#:G53 NIL) (#5=#:G1 NIL) (|zro| (|List| |Dpoly|)) (#6=#:G37 NIL)
+          (#7=#:G36 (|Dpoly|)) (#8=#:G38 (|Dpoly|)) (#9=#:G52 NIL)
+          (#10=#:G0 NIL) (#11=#:G51 NIL) (|s| NIL) (#12=#:G50 NIL)
+          (|mset| (|List| (|List| |Dpoly|))) (#13=#:G49 NIL) (#14=#:G48 NIL)
+          (#15=#:G47 NIL) (|p| NIL) (#16=#:G46 NIL) (|nzro| (|List| |Dpoly|))
           (|pnzero| (|Dpoly|)))
          (SEQ
           (COND
@@ -200,7 +200,7 @@
                                          (QREFELT % 56)))))))))))))))) 
 
 (SDEFUN |QALGSET;coerce;%Of;5| ((|x| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G96 NIL) (|f| NIL) (#2=#:G95 NIL))
+        (SPROG ((#1=#:G76 NIL) (|f| NIL) (#2=#:G75 NIL))
                (SEQ
                 (COND
                  ((SPADCALL (QVELT |x| 0) (CONS 0 'T) (QREFELT % 58))
@@ -232,7 +232,7 @@
                    (QREFELT % 67))))))) 
 
 (SDEFUN |QALGSET;empty?;%B;6| ((|x| (%)) (% (|Boolean|)))
-        (SPROG ((#1=#:G98 NIL))
+        (SPROG ((#1=#:G78 NIL))
                (SEQ
                 (COND
                  ((QEQCAR (QVELT |x| 0) 1)
@@ -277,7 +277,7 @@
            (|List|
             (|PolynomialRing| R (|Product| (|NonNegativeInteger|) |Expon|))))
           (|gb| (|List| |Dpoly|)) (|f| (|Union| |Dpoly| "failed"))
-          (#1=#:G144 NIL) (|g| NIL) (#2=#:G143 NIL)
+          (#1=#:G120 NIL) (|g| NIL) (#2=#:G119 NIL)
           (|tp|
            (|PolynomialRing| R (|Product| (|NonNegativeInteger|) |Expon|)))
           (|n0| (|Dpoly|)) (|z0| (|List| |Dpoly|)))
@@ -360,7 +360,7 @@
 
 (SDEFUN |QALGSET;minset|
         ((|lset| (|List| (|List| |Dpoly|))) (% (|List| (|List| |Dpoly|))))
-        (SPROG ((#1=#:G151 NIL) (|s| NIL) (#2=#:G150 NIL))
+        (SPROG ((#1=#:G127 NIL) (|s| NIL) (#2=#:G126 NIL))
                (SEQ
                 (COND ((NULL |lset|) |lset|)
                       ('T
@@ -382,8 +382,8 @@
         ((|p| (|List| |Dpoly|)) (|qlist| (|List| (|List| |Dpoly|)))
          (% (|Boolean|)))
         (SPROG
-         ((#1=#:G153 NIL) (#2=#:G152 #3=(|Boolean|)) (#4=#:G154 #3#)
-          (#5=#:G157 NIL) (|q| NIL))
+         ((#1=#:G129 NIL) (#2=#:G128 #3=(|Boolean|)) (#4=#:G130 #3#)
+          (#5=#:G133 NIL) (|q| NIL))
          (SEQ
           (COND ((NULL |qlist|) NIL)
                 (#6='T
@@ -406,25 +406,6 @@
                   (COND (#1# #2#) (#6# NIL)))))))) 
 
 (DECLAIM (NOTINLINE |QuasiAlgebraicSet;|)) 
-
-(DEFUN |QuasiAlgebraicSet| (&REST #1=#:G158)
-  (SPROG NIL
-         (PROG (#2=#:G159)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|QuasiAlgebraicSet|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |QuasiAlgebraicSet;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|QuasiAlgebraicSet|)))))))))) 
 
 (DEFUN |QuasiAlgebraicSet;| (|#1| |#2| |#3| |#4|)
   (SPROG
@@ -466,6 +447,25 @@
          (QSETREFV % 36
                    (CONS (|dispatchFunction| |QALGSET;simplify;2%;2|) %)))))))
     %))) 
+
+(DEFUN |QuasiAlgebraicSet| (&REST #1=#:G134)
+  (SPROG NIL
+         (PROG (#2=#:G135)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|QuasiAlgebraicSet|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |QuasiAlgebraicSet;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|QuasiAlgebraicSet|)))))))))) 
 
 (MAKEPROP '|QuasiAlgebraicSet| '|infovec|
           (LIST

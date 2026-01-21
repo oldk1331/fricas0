@@ -33,9 +33,21 @@
 
 (DECLAIM (NOTINLINE |RealSolvePackage;|)) 
 
+(DEFUN |RealSolvePackage;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|RealSolvePackage|))
+          (LETT % (GETREFV 37))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|RealSolvePackage| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |RealSolvePackage| ()
   (SPROG NIL
-         (PROG (#1=#:G24)
+         (PROG (#1=#:G8)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|RealSolvePackage|))
@@ -50,18 +62,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|RealSolvePackage|)))))))))) 
-
-(DEFUN |RealSolvePackage;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|RealSolvePackage|))
-          (LETT % (GETREFV 37))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|RealSolvePackage| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|RealSolvePackage| '|infovec|
           (LIST

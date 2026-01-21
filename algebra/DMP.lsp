@@ -1,33 +1,11 @@
 
 (DECLAIM (NOTINLINE |DistributedMultivariatePolynomial;|)) 
 
-(DEFUN |DistributedMultivariatePolynomial| (&REST #1=#:G79)
-  (SPROG NIL
-         (PROG (#2=#:G80)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T))
-                                               (HGET |$ConstructorCache|
-                                                     '|DistributedMultivariatePolynomial|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |DistributedMultivariatePolynomial;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|DistributedMultivariatePolynomial|)))))))))) 
-
 (DEFUN |DistributedMultivariatePolynomial;| (|#1| |#2|)
   (SPROG
-   ((#1=#:G78 NIL) (|pv$| NIL) (#2=#:G69 NIL) (#3=#:G71 NIL) (#4=#:G70 NIL)
-    (#5=#:G72 NIL) (#6=#:G73 NIL) (#7=#:G74 NIL) (#8=#:G75 NIL) (#9=#:G76 NIL)
-    (#10=#:G77 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+   ((#1=#:G47 NIL) (|pv$| NIL) (#2=#:G38 NIL) (#3=#:G40 NIL) (#4=#:G39 NIL)
+    (#5=#:G41 NIL) (#6=#:G42 NIL) (#7=#:G43 NIL) (#8=#:G44 NIL) (#9=#:G45 NIL)
+    (#10=#:G46 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 |#1|)
     (LETT DV$2 (|devaluate| |#2|))
@@ -573,6 +551,28 @@
      (|augmentPredVector| % 36028797018963968))
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |DistributedMultivariatePolynomial| (&REST #1=#:G48)
+  (SPROG NIL
+         (PROG (#2=#:G49)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T))
+                                               (HGET |$ConstructorCache|
+                                                     '|DistributedMultivariatePolynomial|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |DistributedMultivariatePolynomial;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|DistributedMultivariatePolynomial|)))))))))) 
 
 (MAKEPROP '|DistributedMultivariatePolynomial| '|infovec|
           (LIST

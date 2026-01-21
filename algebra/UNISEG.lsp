@@ -199,23 +199,6 @@
 
 (DECLAIM (NOTINLINE |UniversalSegment;|)) 
 
-(DEFUN |UniversalSegment| (#1=#:G100)
-  (SPROG NIL
-         (PROG (#2=#:G101)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|UniversalSegment|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|UniversalSegment;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|UniversalSegment|)))))))))) 
-
 (DEFUN |UniversalSegment;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -276,6 +259,23 @@
              (QSETREFV % 59
                        (CONS (|dispatchFunction| |UNISEG;expand;LS;20|) %)))))
           %))) 
+
+(DEFUN |UniversalSegment| (#1=#:G92)
+  (SPROG NIL
+         (PROG (#2=#:G93)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|UniversalSegment|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|UniversalSegment;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|UniversalSegment|)))))))))) 
 
 (MAKEPROP '|UniversalSegment| '|infovec|
           (LIST

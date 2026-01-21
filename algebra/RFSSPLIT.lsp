@@ -2,7 +2,7 @@
 (SDEFUN |RFSSPLIT;alg_split_root0;FKIL;1|
         ((|f| (F)) (|r| (|Kernel| F)) (|n| (|Integer|)) (% (|List| F)))
         (SPROG
-         ((#1=#:G31 NIL) (|i| NIL) (#2=#:G30 NIL)
+         ((#1=#:G15 NIL) (|i| NIL) (#2=#:G14 NIL)
           (|q| (|SparseUnivariatePolynomial| F)) (|f1| (F)) (|f0| (F))
           (|ef| (F)))
          (SEQ
@@ -61,8 +61,8 @@
          (% (|List| (|List| F))))
         (SPROG
          ((|res| (|List| (|List| F))) (|resi| (|List| F))
-          (|nlf1| #1=(|List| (|List| F))) (|lf1| (|List| F)) (#2=#:G45 NIL)
-          (|pow1| NIL) (|nlf0| #1#) (#3=#:G44 NIL) (|f| NIL) (#4=#:G43 NIL))
+          (|nlf1| #1=(|List| (|List| F))) (|lf1| (|List| F)) (#2=#:G29 NIL)
+          (|pow1| NIL) (|nlf0| #1#) (#3=#:G28 NIL) (|f| NIL) (#4=#:G27 NIL))
          (SEQ
           (LETT |nlf0|
                 (PROGN
@@ -104,13 +104,13 @@
            (|List|
             (|Record| (|:| |funs| (|List| F)) (|:| |nroot| F)
                       (|:| |npow1| (|Integer|)) (|:| |npow2| (|Integer|)))))
-          (|nl| (|List| F)) (#1=#:G82 NIL) (|f1| NIL) (#2=#:G81 NIL)
-          (|nrr| (F)) (|bb2| (F)) (#3=#:G58 NIL) (|bb1| (F)) (|nn| (|Integer|))
+          (|nl| (|List| F)) (#1=#:G58 NIL) (|f1| NIL) (#2=#:G57 NIL)
+          (|nrr| (F)) (|bb2| (F)) (#3=#:G34 NIL) (|bb1| (F)) (|nn| (|Integer|))
           (|np2| (|Integer|)) (|nn2| (|Integer|)) (|g2| #4=(|Integer|))
-          (#5=#:G75 NIL) (#6=#:G79 NIL) (|l2| NIL) (#7=#:G80 NIL) (|pow2| NIL)
+          (#5=#:G51 NIL) (#6=#:G55 NIL) (|l2| NIL) (#7=#:G56 NIL) (|pow2| NIL)
           (|np1| (|Integer|)) (|nn1| (|Integer|)) (|g1| #4#)
-          (|ll2| #8=(|List| (|List| F))) (#9=#:G76 NIL) (#10=#:G77 NIL)
-          (|l1| NIL) (#11=#:G78 NIL) (|pow1| NIL) (|rop| (|BasicOperator|))
+          (|ll2| #8=(|List| (|List| F))) (#9=#:G52 NIL) (#10=#:G53 NIL)
+          (|l1| NIL) (#11=#:G54 NIL) (|pow1| NIL) (|rop| (|BasicOperator|))
           (|ll1| #8#) (|b2| (F)) (|n2| #12=(|Integer|)) (|b1| (F)) (|n1| #12#)
           (|a2| #13=(|List| F)) (|a1| #13#))
          (SEQ (LETT |a1| (SPADCALL |r1| (QREFELT % 40)))
@@ -134,7 +134,7 @@
                      (COND
                       ((SPADCALL (CONS #'|RFSSPLIT;alg_split_roots;L2KL;3!0| %)
                                  |l1| (QREFELT % 49))
-                       (PROGN (LETT #9# |$NoValue|) (GO #14=#:G55)))
+                       (PROGN (LETT #9# |$NoValue|) (GO #14=#:G31)))
                       ('T
                        (SEQ
                         (LETT |ll2|
@@ -172,7 +172,7 @@
                                    (CONS #'|RFSSPLIT;alg_split_roots;L2KL;3!1|
                                          %)
                                    |l2| (QREFELT % 49))
-                                  (PROGN (LETT #5# |$NoValue|) (GO #16=#:G60)))
+                                  (PROGN (LETT #5# |$NoValue|) (GO #16=#:G36)))
                                  ('T
                                   (SEQ (LETT |g2| (GCD |n2| |pow2|))
                                        (LETT |nn2|
@@ -299,23 +299,6 @@
 
 (DECLAIM (NOTINLINE |RootFSSplit;|)) 
 
-(DEFUN |RootFSSplit| (&REST #1=#:G83)
-  (SPROG NIL
-         (PROG (#2=#:G84)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|RootFSSplit|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |RootFSSplit;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|RootFSSplit|)))))))))) 
-
 (DEFUN |RootFSSplit;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -332,6 +315,23 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |RootFSSplit| (&REST #1=#:G59)
+  (SPROG NIL
+         (PROG (#2=#:G60)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|RootFSSplit|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |RootFSSplit;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|RootFSSplit|)))))))))) 
 
 (MAKEPROP '|RootFSSplit| '|infovec|
           (LIST

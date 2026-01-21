@@ -15,7 +15,7 @@
                       ('T NIL)))))) 
 
 (SDEFUN |KDAGG-;keys;SL;3| ((|t| (S)) (% (|List| |Key|)))
-        (SPROG ((#1=#:G35 NIL) (|x| NIL) (#2=#:G34 NIL))
+        (SPROG ((#1=#:G26 NIL) (|x| NIL) (#2=#:G25 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)

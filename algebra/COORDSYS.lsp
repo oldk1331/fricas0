@@ -394,23 +394,6 @@
 
 (DECLAIM (NOTINLINE |CoordinateSystems;|)) 
 
-(DEFUN |CoordinateSystems| (#1=#:G40)
-  (SPROG NIL
-         (PROG (#2=#:G41)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|CoordinateSystems|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|CoordinateSystems;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|CoordinateSystems|)))))))))) 
-
 (DEFUN |CoordinateSystems;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -425,6 +408,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |CoordinateSystems| (#1=#:G34)
+  (SPROG NIL
+         (PROG (#2=#:G35)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|CoordinateSystems|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|CoordinateSystems;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|CoordinateSystems|)))))))))) 
 
 (MAKEPROP '|CoordinateSystems| '|infovec|
           (LIST

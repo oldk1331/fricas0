@@ -1,7 +1,16 @@
 ;;; This file contains portablity and support routines which abstract away
 ;;; differences between Lisp dialects.
 
+#+gcl
+(si::clines "
+#define GCL_SOURCE
+#include \"bsdsignal.c\"
+#include \"cfuns-c.c\"
+#include \"sockio-c.c\"
+")
+
 (in-package "FRICAS-LISP")
+
 #+:cmu
 (progn
      (defvar *saved-terminal-io* *terminal-io*)
@@ -59,7 +68,7 @@ on this message after the fact. The cmpnote function is used nowhere
 else in GCL so stepping on the function call seems best. We're unhappy
 with this hack and will try to convince the GCL crowd to fix this.
 |#
-#+:gcl (defun compiler::cmpnote (&rest x))
+#+gcl(setq compiler::*suppress-compiler-notes* t)
 
 ;;
 #+:openmcl
@@ -69,10 +78,6 @@ with this hack and will try to convince the GCL crowd to fix this.
 (defmethod ccl::process-application-arguments
     ((app ccl::application) error-flag opts args) nil)
 )
-
-;;; Disable argument processing in GCL
-#+:gcl
-(defun system::process-some-args (&rest args) nil)
 
 ;; Save current image on disk as executable and quit.
 (defun save-core-restart (core-image restart)
@@ -202,8 +207,10 @@ with this hack and will try to convince the GCL crowd to fix this.
 
 #-:ecl
 (defun make-program (core-image lisp-files)
-    (load-lisp-files lisp-files)
-    (save-core core-image))
+  #+gcl(setq si::*optimize-maximum-pages* nil)
+  (load-lisp-files lisp-files)
+  #+:gcl(progn (setq si::*code-block-reserve* "")(si::gbc t)(setq si::*code-block-reserve* (make-array 10000000 :element-type (quote character) :static t) si::*optimize-maximum-pages* t))
+  (save-core core-image))
 
 #+:ecl
 (defun make-program (core-image lisp-files)
@@ -226,9 +233,7 @@ with this hack and will try to convince the GCL crowd to fix this.
 ;;; Deleting files ignoring errors
 
 (defun |maybe_delete_file| (file)
-    #-gcl (ignore-errors (delete-file file))
-    ;;; broken, but using gcl it is hard to do better
-    #+gcl (and (probe-file file) (delete-file file))
+  (ignore-errors (delete-file file))
 )
 
 ;;; Chdir function
@@ -310,11 +315,8 @@ with this hack and will try to convince the GCL crowd to fix this.
 
 (defun |load_quietly| (f)
     ;;; (format *error-output* "entered load_quietly ~&")
-    #-:GCL
     (handler-bind ((warning #'muffle-warning))
                   (load f))
-    #+:GCL
-    (load f)
     ;;; (format *error-output* "finished load_quietly ~&")
 )
 
@@ -643,7 +645,7 @@ with this hack and will try to convince the GCL crowd to fix this.
        (sig int))
 
 #-:gcl
-(fricas-foreign-call sock_get_string_buf "sock_get_string_buf" char-*
+(fricas-foreign-call sock_get_string_buf "sock_get_string_buf" int
        (purpose int)
        (buf char-*)
        (len int))
@@ -657,14 +659,14 @@ with this hack and will try to convince the GCL crowd to fix this.
 ;; string with data read from connection, therefore needs address of
 ;; actual string buffer. We use 'sock_get_string_buf_wrapper' to
 ;; resolve the problem
-(SI::clines "int sock_get_string_buf_wrapper(int i, object x, int j)"
-    "{ if (type_of(x)!=t_string) FEwrong_type_argument(sLstring,x);"
-    "  if (x->st.st_fillp<j)"
-    "    FEerror(\"string too small in sock_get_string_buf_wrapper\",0);"
-    "  return sock_get_string_buf(i, x->st.st_self, j); }")
+(SI::clines "fixnum sock_get_string_buf_wrapper(fixnum i, object x, fixnum j)"
+    "{ if (!vectorp(x)) FEerror(\"not a string ->~s<-\",1,x);/*FIXME no stringp, and 2.7.0 only has simple_string*/"
+    "  if (length(x)<j)"
+    "    FEerror(\"string too small in sock_get_string_buf_wrapper ~s\",1,list(3,x,make_fixnum((fixnum)x),make_fixnum(j)));"
+    "  return (fixnum)sock_get_string_buf(i, x->st.st_self, j); }")
 
-(SI::defentry sock_get_string_buf (SI::int SI::object SI::int)
-    (SI::int "sock_get_string_buf_wrapper"))
+(SI::defentry sock_get_string_buf (SI::fixnum SI::object SI::fixnum)
+    (SI::fixnum "sock_get_string_buf_wrapper"))
 
 (defun |sockGetStringFrom| (type)
     (let ((buf (MAKE-STRING 10000)))
@@ -714,7 +716,7 @@ with this hack and will try to convince the GCL crowd to fix this.
 ;;; File and directory support
 ;;; First version contributed by Juergen Weiss.
 
-#+(or :ECL :GCL)
+#+ecl
 (progn
 
   (fricas-foreign-call file_kind "directoryp" int
@@ -724,9 +726,13 @@ with this hack and will try to convince the GCL crowd to fix this.
                    (arg c-string))
 )
 
+(defun |append_directory_name| (dir name)
+  (concatenate 'string (|trim_directory_name| dir) "/"
+	       (if (char= #\/ (char name 0)) (subseq name 1) name)))
+
 (defun |trim_directory_name| (name)
     #+(or :unix :win32)
-    (if (char= (char name (1- (length name))) #\/)
+    (if (when (> (length name) 0) (char= (char name (1- (length name))) #\/))
         (subseq name 0 (1- (length name)))
         name)
     #-(or :unix :win32)
@@ -734,7 +740,7 @@ with this hack and will try to convince the GCL crowd to fix this.
 
 (defun |pad_directory_name| (name)
    #+(or :unix :win32)
-   (if (char= (char name (1- (length name))) #\/)
+   (if (when (> (length name) 0) (char= (char name (1- (length name))) #\/))
        name
        (concatenate 'string name "/"))
    #-(or :unix :win32)
@@ -742,6 +748,9 @@ with this hack and will try to convince the GCL crowd to fix this.
     )
 
 ;;; Make directory
+
+#+gcl
+(defun |makedir| (fname) (si::mkdir fname))
 
 #+(or :abcl :cmu :lispworks :openmcl)
 (defun |makedir| (fname)
@@ -768,6 +777,9 @@ with this hack and will try to convince the GCL crowd to fix this.
                 (find-symbol "UNIX-FILE-KIND" :sb-unix))))
          `(,file-kind-fun ,x)))
 
+#+gcl
+(defun file_kind (fname) (case (si::stat fname) (:directory 1) ((nil) -1) (otherwise 0)))
+
 (defun |file_kind| (filename)
    #+(or :GCL :ecl) (file_kind filename)
    #+:cmu
@@ -787,9 +799,9 @@ with this hack and will try to convince the GCL crowd to fix this.
                      -1))
    #+:clisp (let* ((fname (|trim_directory_name| (namestring filename)))
                    (dname (|pad_directory_name| fname)))
-             (if (ignore-errors (truename dname))
+             (if (ignore-errors (ext:probe-directory dname))
                  1
-                 (if (ignore-errors (truename fname))
+                 (if (ignore-errors (probe-file fname))
                      0
                      -1)))
    #+:abcl
@@ -823,7 +835,8 @@ with this hack and will try to convince the GCL crowd to fix this.
 
 
 (defun |fricas_probe_file| (file)
-#+:GCL (let* ((fk (file_kind (namestring file)))
+#+(or :GCL :clisp)
+       (let* ((fk (|file_kind| (namestring file)))
               (fname (|trim_directory_name| (namestring file)))
               (dname (|pad_directory_name| fname)))
            (cond
@@ -835,10 +848,6 @@ with this hack and will try to convince the GCL crowd to fix this.
 #+:cmu (if (unix:unix-file-kind file) (truename file))
 #+:sbcl (if (sbcl-file-kind file) (truename file))
 #+(or :abcl :ecl :lispworks :openmcl :poplog) (probe-file file)
-#+:clisp(let* ((fname (|trim_directory_name| (namestring file)))
-               (dname (|pad_directory_name| fname)))
-                 (or (ignore-errors (truename dname))
-                     (ignore-errors (truename fname))))
          )
 
 #-:cmu
@@ -912,7 +921,8 @@ with this hack and will try to convince the GCL crowd to fix this.
   (|run_program| "sh" (list "-c" s)))
 
 (defmacro DEFCONST (name value)
-   `(defconstant ,name (if (boundp ',name) (symbol-value ',name) ,value)))
+    (if (not (boundp name))
+        `(DEFCONSTANT ,name ,value)))
 
 #+:cmu
 (defconstant +list-based-union-limit+ 80)
@@ -1133,3 +1143,14 @@ with this hack and will try to convince the GCL crowd to fix this.
 (defun |shoeEVALANDFILEACTQ| (expr)
     `(eval-when (:execute :load-toplevel)
          ,expr))
+
+#+gcl
+(in-package "BOOT")
+#+gcl
+(shadow "LIST")
+#+gcl
+(defmacro list (&rest r &aux (l (length r)))
+  (let ((x (nthcdr (1- call-arguments-limit) r)))
+    (if x `(nconc (cl::list ,@(ldiff r x)) (list ,@x)) `(cl::list ,@r))))
+#+gcl
+(deftype list nil 'cl::list)

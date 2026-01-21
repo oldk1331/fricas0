@@ -59,7 +59,7 @@
          ((|e1|
            (|Record| (|:| |coef1| (|SparseUnivariatePolynomial| GF))
                      (|:| |coef2| (|SparseUnivariatePolynomial| GF))))
-          (#1=#:G59 NIL)
+          (#1=#:G37 NIL)
           (|e|
            (|Union|
             (|Record| (|:| |coef1| (|SparseUnivariatePolynomial| GF))
@@ -134,7 +134,7 @@
         (SPADCALL (QREFELT % 17) (QREFELT % 92))) 
 
 (SDEFUN |FFNBP;basis;PiV;14| ((|n| (|PositiveInteger|)) (% (|Vector| %)))
-        (SPROG ((#1=#:G86 NIL) (|i| NIL) (#2=#:G85 NIL))
+        (SPROG ((#1=#:G63 NIL) (|i| NIL) (#2=#:G62 NIL))
                (SEQ
                 (COND
                  ((SPADCALL (REM (QREFELT % 17) |n|) 0 (QREFELT % 94))
@@ -189,7 +189,7 @@
 (SDEFUN |FFNBP;coerce;%Of;22| ((|x| (%)) (% (|OutputForm|)))
         (SPROG
          ((|r| (|OutputForm|)) (|l| (|List| (|OutputForm|)))
-          (|mon| (|OutputForm|)) (#1=#:G113 NIL) (|i| NIL) (#2=#:G114 NIL)
+          (|mon| (|OutputForm|)) (#1=#:G90 NIL) (|i| NIL) (#2=#:G91 NIL)
           (|b| NIL) (|n| (|PositiveInteger|)))
          (SEQ (LETT |l| NIL) (LETT |n| (QREFELT % 17))
               (EXIT
@@ -252,10 +252,10 @@
 
 (SDEFUN |FFNBP;initializeLog| ((% (|Void|)))
         (SPROG
-         ((#1=#:G138 NIL) (|a| (%)) (#2=#:G144 NIL) (#3=#:G132 NIL) (|i| NIL)
+         ((#1=#:G106 NIL) (|a| (%)) (#2=#:G112 NIL) (#3=#:G100 NIL) (|i| NIL)
           (|tbl| (|Table| (|PositiveInteger|) (|NonNegativeInteger|)))
           (|n| (|Integer|)) (|d| (|Integer|)) (|l| (|Integer|)) (|base| (%))
-          (|fac| (|Integer|)) (#4=#:G143 NIL) (|f| NIL) (|limit| (|Integer|)))
+          (|fac| (|Integer|)) (#4=#:G111 NIL) (|f| NIL) (|limit| (|Integer|)))
          (SEQ (COND ((QREFELT % 15) (|FFNBP;initializeElt| %)))
               (LETT |limit| 30)
               (SEQ (LETT |f| NIL) (LETT #4# (QREFELT % 44)) G190
@@ -320,7 +320,7 @@
          ((|tbl|
            (|Union| (|Table| (|PositiveInteger|) (|NonNegativeInteger|))
                     "failed"))
-          (#1=#:G146 NIL))
+          (#1=#:G114 NIL))
          (SEQ (COND ((QREFELT % 14) (|FFNBP;initializeLog| %)))
               (LETT |tbl|
                     (SPADCALL
@@ -353,7 +353,7 @@
         ((% (|SparseUnivariatePolynomial| GF))) (QREFELT % 20)) 
 
 (SDEFUN |FFNBP;trace;%Pi%;31| ((|a| (%)) (|d| (|PositiveInteger|)) (% (%)))
-        (SPROG ((|erg| (%)) (#1=#:G163 NIL) (|i| NIL) (|v| (%)))
+        (SPROG ((|erg| (%)) (#1=#:G131 NIL) (|i| NIL) (|v| (%)))
                (SEQ (LETT |v| (SPADCALL |a| |d| (QREFELT % 147)))
                     (LETT |erg| |v|)
                     (SEQ (LETT |i| 2) (LETT #1# (QUOTIENT2 (QREFELT % 17) |d|))
@@ -390,7 +390,7 @@
 
 (SDEFUN |FFNBP;basis;V;40| ((% (|Vector| %)))
         (SPROG
-         ((#1=#:G178 NIL) (|e| NIL) (#2=#:G177 NIL)
+         ((#1=#:G146 NIL) (|e| NIL) (#2=#:G145 NIL)
           (|a| (|Vector| (|Vector| GF))))
          (SEQ (LETT |a| (SPADCALL (QREFELT % 17) (QREFELT % 160)))
               (EXIT
@@ -443,7 +443,7 @@
              (EXIT (SPADCALL |a| (QREFELT % 36))))) 
 
 (SDEFUN |FFNBP;inGroundField?;%B;50| ((|x| (%)) (% (|Boolean|)))
-        (SPROG ((#1=#:G205 NIL) (|erg| (|Boolean|)) (#2=#:G206 NIL) (|i| NIL))
+        (SPROG ((#1=#:G173 NIL) (|erg| (|Boolean|)) (#2=#:G174 NIL) (|i| NIL))
                (SEQ (LETT |erg| 'T)
                     (SEQ
                      (EXIT
@@ -458,7 +458,7 @@
                                           (QREFELT % 112)))
                                (PROGN
                                 (LETT #1# (LETT |erg| NIL))
-                                (GO #3=#:G202))))))
+                                (GO #3=#:G170))))))
                            (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                            (EXIT NIL)))
                      #3# (EXIT #1#))
@@ -484,34 +484,10 @@
 
 (DECLAIM (NOTINLINE |FiniteFieldNormalBasisExtensionByPolynomial;|)) 
 
-(DEFUN |FiniteFieldNormalBasisExtensionByPolynomial| (&REST #1=#:G238)
-  (SPROG NIL
-         (PROG (#2=#:G239)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|FiniteFieldNormalBasisExtensionByPolynomial|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function|
-                        |FiniteFieldNormalBasisExtensionByPolynomial;|)
-                       #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|FiniteFieldNormalBasisExtensionByPolynomial|)))))))))) 
-
 (DEFUN |FiniteFieldNormalBasisExtensionByPolynomial;| (|#1| |#2|)
   (SPROG
-   ((#1=#:G37 NIL) (#2=#:G237 NIL) (|i| NIL) (#3=#:G236 NIL) (|qs| NIL)
-    (|pv$| NIL) (#4=#:G235 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+   ((#1=#:G19 NIL) (#2=#:G204 NIL) (|i| NIL) (#3=#:G203 NIL) (|qs| NIL)
+    (|pv$| NIL) (#4=#:G202 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (SEQ
     (PROGN
      (LETT DV$1 (|devaluate| |#1|))
@@ -608,6 +584,30 @@
      (QSETREFV % 48 1)
      (QSETREFV % 51 (SPADCALL (QREFELT % 50)))
      %)))) 
+
+(DEFUN |FiniteFieldNormalBasisExtensionByPolynomial| (&REST #1=#:G205)
+  (SPROG NIL
+         (PROG (#2=#:G206)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|FiniteFieldNormalBasisExtensionByPolynomial|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function|
+                        |FiniteFieldNormalBasisExtensionByPolynomial;|)
+                       #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|FiniteFieldNormalBasisExtensionByPolynomial|)))))))))) 
 
 (MAKEPROP '|FiniteFieldNormalBasisExtensionByPolynomial| '|infovec|
           (LIST

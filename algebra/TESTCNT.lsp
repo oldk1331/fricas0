@@ -296,21 +296,21 @@
 
 (SDEFUN |TESTCNT;statistics;V;15| ((% (|Void|)))
         (SPROG
-         ((#1=#:G156 NIL) (#2=#:G152 NIL) (#3=#:G148 NIL) (#4=#:G144 NIL)
-          (#5=#:G140 NIL) (|stotalTests| #6=(|String|)) (|sfailedTests| #6#)
+         ((#1=#:G139 NIL) (#2=#:G135 NIL) (#3=#:G131 NIL) (#4=#:G127 NIL)
+          (#5=#:G123 NIL) (|stotalTests| #6=(|String|)) (|sfailedTests| #6#)
           (|stotalCases| #6#) (|sfailedCases| #6#)
           (|tsfailedTests| (|Integer|)) (|tstotalTests| (|Integer|))
           (|failedCases| (|Integer|)) (|totalCases| (|Integer|))
-          (#7=#:G172 NIL) (|tstcase| NIL) (#8=#:G171 NIL) (|tstsuite| NIL)
-          (#9=#:G170 NIL) (|f| NIL) (#10=#:G117 NIL) (#11=#:G169 NIL)
-          (#12=#:G168 NIL) (|outstring| (|String|)) (#13=#:G166 NIL) (|o| NIL)
-          (#14=#:G167 NIL) (|i| NIL) (#15=#:G165 NIL) (#16=#:G94 NIL)
-          (#17=#:G164 NIL) (|xfpassedTests| (|Integer|))
+          (#7=#:G155 NIL) (|tstcase| NIL) (#8=#:G154 NIL) (|tstsuite| NIL)
+          (#9=#:G153 NIL) (|f| NIL) (#10=#:G100 NIL) (#11=#:G152 NIL)
+          (#12=#:G151 NIL) (|outstring| (|String|)) (#13=#:G149 NIL) (|o| NIL)
+          (#14=#:G150 NIL) (|i| NIL) (#15=#:G148 NIL) (#16=#:G77 NIL)
+          (#17=#:G147 NIL) (|xfpassedTests| (|Integer|))
           (|xfailedTests| (|Integer|)) (|failedTests| (|Integer|))
           (|totalTests| (|Integer|)) (|xfpassedCases| (|Integer|))
-          (#18=#:G163 NIL) (#19=#:G162 NIL) (#20=#:G161 NIL) (|w| NIL))
+          (#18=#:G146 NIL) (#19=#:G145 NIL) (#20=#:G144 NIL) (|w| NIL))
          (SEQ
-          (SPADCALL (|make_full_CVEC2| (QREFELT % 6) (|STR_to_CHAR| "="))
+          (SPADCALL (|make_string_code| (QREFELT % 6) (|STR_to_CHAR| "="))
                     (QREFELT % 24))
           (SPADCALL "General WARNINGS:" (QREFELT % 24))
           (SPADCALL
@@ -330,7 +330,7 @@
           (COND
            ((> (LENGTH (QREFELT % 13)) 0)
             (SEQ
-             (SPADCALL (|make_full_CVEC2| (QREFELT % 6) (|STR_to_CHAR| "="))
+             (SPADCALL (|make_string_code| (QREFELT % 6) (|STR_to_CHAR| "="))
                        (QREFELT % 24))
              (SPADCALL "WARNINGS:" (QREFELT % 24))
              (EXIT
@@ -382,7 +382,7 @@
                                         (QVELT (QCDR |tstcase|) 3)))))
                          (LETT #18# (CDR #18#)) (GO G190) G191 (EXIT NIL))
                     (SPADCALL
-                     (|make_full_CVEC2| (QREFELT % 6) (|STR_to_CHAR| "="))
+                     (|make_string_code| (QREFELT % 6) (|STR_to_CHAR| "="))
                      (QREFELT % 24))
                     (SPADCALL
                      (SPADCALL "Testsuite: " (QCAR |tstsuite|) (QREFELT % 22))
@@ -420,7 +420,7 @@
                                      (SEQ
                                       (SPADCALL
                                        (SPADCALL "  "
-                                                 (|make_full_CVEC2|
+                                                 (|make_string_code|
                                                   (PROG1
                                                       (LETT #16#
                                                             (- (QREFELT % 6)
@@ -617,7 +617,7 @@
                                       (SEQ
                                        (SPADCALL
                                         (SPADCALL "  "
-                                                  (|make_full_CVEC2|
+                                                  (|make_string_code|
                                                    (PROG1
                                                        (LETT #10#
                                                              (- (QREFELT % 6)
@@ -685,7 +685,7 @@
                                   (EXIT NIL))))))))
                (LETT #19# (CDR #19#)) (GO G190) G191 (EXIT NIL))
           (SPADCALL "" (QREFELT % 52))
-          (SPADCALL (|make_full_CVEC2| (QREFELT % 6) (|STR_to_CHAR| "="))
+          (SPADCALL (|make_string_code| (QREFELT % 6) (|STR_to_CHAR| "="))
                     (QREFELT % 24))
           (SPADCALL
            "testsuite | testcases: failed (total) | tests: failed (total)"
@@ -727,7 +727,7 @@
                      (SPADCALL
                       (SPADCALL (QCAR |tstsuite|)
                                 (SPADCALL
-                                 (|make_full_CVEC2|
+                                 (|make_string_code|
                                   (PROG1
                                       (LETT #5#
                                             (MAX
@@ -738,7 +738,7 @@
                                                       '(|Integer|) #5#))
                                   (|STR_to_CHAR| " "))
                                  (SPADCALL
-                                  (|make_full_CVEC2|
+                                  (|make_string_code|
                                    (PROG1
                                        (LETT #4#
                                              (MAX (- 5 (QCSIZE |sfailedCases|))
@@ -749,7 +749,7 @@
                                    (|STR_to_CHAR| " "))
                                   (SPADCALL |sfailedCases|
                                             (SPADCALL
-                                             (|make_full_CVEC2|
+                                             (|make_string_code|
                                               (PROG1
                                                   (LETT #3#
                                                         (MAX
@@ -766,7 +766,7 @@
                                                        (SPADCALL |stotalCases|
                                                                  (SPADCALL ")"
                                                                            (SPADCALL
-                                                                            (|make_full_CVEC2|
+                                                                            (|make_string_code|
                                                                              (PROG1
                                                                                  (LETT
                                                                                   #2#
@@ -788,7 +788,7 @@
                                                                             (SPADCALL
                                                                              |sfailedTests|
                                                                              (SPADCALL
-                                                                              (|make_full_CVEC2|
+                                                                              (|make_string_code|
                                                                                (PROG1
                                                                                    (LETT
                                                                                     #1#
@@ -840,7 +840,7 @@
                                 (QREFELT % 22))
                       (QREFELT % 24))))
                (LETT #8# (CDR #8#)) (GO G190) G191 (EXIT NIL))
-          (SPADCALL (|make_full_CVEC2| (QREFELT % 6) (|STR_to_CHAR| "="))
+          (SPADCALL (|make_string_code| (QREFELT % 6) (|STR_to_CHAR| "="))
                     (QREFELT % 24))
           (SPADCALL "File summary." (QREFELT % 24))
           (SPADCALL
@@ -863,23 +863,6 @@
 
 (DECLAIM (NOTINLINE |UnittestCount;|)) 
 
-(DEFUN |UnittestCount| ()
-  (SPROG NIL
-         (PROG (#1=#:G174)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|UnittestCount|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|UnittestCount|
-                             (LIST (CONS NIL (CONS 1 (|UnittestCount;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#) (HREM |$ConstructorCache| '|UnittestCount|)))))))))) 
-
 (DEFUN |UnittestCount;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -896,6 +879,23 @@
           (QSETREFV % 14 #1="")
           (QSETREFV % 15 #1#)
           %))) 
+
+(DEFUN |UnittestCount| ()
+  (SPROG NIL
+         (PROG (#1=#:G157)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|UnittestCount|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|UnittestCount|
+                             (LIST (CONS NIL (CONS 1 (|UnittestCount;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#) (HREM |$ConstructorCache| '|UnittestCount|)))))))))) 
 
 (MAKEPROP '|UnittestCount| '|infovec|
           (LIST

@@ -1,23 +1,6 @@
 
 (DECLAIM (NOTINLINE |GuessPolynomial;|)) 
 
-(DEFUN |GuessPolynomial| (#1=#:G34)
-  (SPROG NIL
-         (PROG (#2=#:G35)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|GuessPolynomial|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|GuessPolynomial;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|GuessPolynomial|)))))))))) 
-
 (DEFUN |GuessPolynomial;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -44,6 +27,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |GuessPolynomial| (#1=#:G18)
+  (SPROG NIL
+         (PROG (#2=#:G19)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|GuessPolynomial|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|GuessPolynomial;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|GuessPolynomial|)))))))))) 
 
 (MAKEPROP '|GuessPolynomial| '|infovec|
           (LIST

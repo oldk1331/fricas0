@@ -7,7 +7,7 @@
                         (|:| |basis| (|List| F)))
            L F))
          (% (|Record| (|:| |ltilde| L) (|:| |r| (|Union| L "failed")))))
-        (SPROG ((|rt| (L)) (#3=#:G5 NIL) (|rec| #1#) (|a| (L)))
+        (SPROG ((|rt| (L)) (#3=#:G4 NIL) (|rec| #1#) (|a| (L)))
                (SEQ (LETT |a| (SPADCALL |l| (QREFELT % 8)))
                     (LETT |rec|
                           (SPADCALL |a| (|spadConstant| % 9) |rat_solve|))
@@ -49,25 +49,6 @@
 
 (DECLAIM (NOTINLINE |IntegrateSolutions;|)) 
 
-(DEFUN |IntegrateSolutions| (&REST #1=#:G27)
-  (SPROG NIL
-         (PROG (#2=#:G28)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|IntegrateSolutions|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |IntegrateSolutions;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|IntegrateSolutions|)))))))))) 
-
 (DEFUN |IntegrateSolutions;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -84,6 +65,25 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |IntegrateSolutions| (&REST #1=#:G21)
+  (SPROG NIL
+         (PROG (#2=#:G22)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|IntegrateSolutions|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |IntegrateSolutions;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|IntegrateSolutions|)))))))))) 
 
 (MAKEPROP '|IntegrateSolutions| '|infovec|
           (LIST

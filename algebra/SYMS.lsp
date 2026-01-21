@@ -140,24 +140,6 @@
 
 (DECLAIM (NOTINLINE |TheSymbolTable;|)) 
 
-(DEFUN |TheSymbolTable| ()
-  (SPROG NIL
-         (PROG (#1=#:G65)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|TheSymbolTable|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|TheSymbolTable|
-                             (LIST (CONS NIL (CONS 1 (|TheSymbolTable;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#)
-                  (HREM |$ConstructorCache| '|TheSymbolTable|)))))))))) 
-
 (DEFUN |TheSymbolTable;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -178,6 +160,24 @@
           (QSETREFV % 9 (SPADCALL (QREFELT % 8)))
           (QSETREFV % 10 'MAIN)
           %))) 
+
+(DEFUN |TheSymbolTable| ()
+  (SPROG NIL
+         (PROG (#1=#:G58)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|TheSymbolTable|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|TheSymbolTable|
+                             (LIST (CONS NIL (CONS 1 (|TheSymbolTable;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#)
+                  (HREM |$ConstructorCache| '|TheSymbolTable|)))))))))) 
 
 (MAKEPROP '|TheSymbolTable| '|infovec|
           (LIST

@@ -120,7 +120,7 @@
         ((|listOfThings| (|List| (|String|))) (% (|List| (|String|))))
         (SPROG
          ((|thingsToWrite| (|List| (|String|))) (|writeTypeInt| (|Integer|))
-          (#1=#:G55 NIL) (|aTypeOfFile| NIL))
+          (#1=#:G37 NIL) (|aTypeOfFile| NIL))
          (SEQ (LETT |thingsToWrite| NIL)
               (SEQ (LETT |aTypeOfFile| NIL) (LETT #1# |listOfThings|) G190
                    (COND
@@ -145,25 +145,6 @@
               (EXIT (SPADCALL (QREFELT % 34) |thingsToWrite| (QREFELT % 95)))))) 
 
 (DECLAIM (NOTINLINE |ViewDefaultsPackage;|)) 
-
-(DEFUN |ViewDefaultsPackage| ()
-  (SPROG NIL
-         (PROG (#1=#:G57)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|ViewDefaultsPackage|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|ViewDefaultsPackage|
-                             (LIST
-                              (CONS NIL (CONS 1 (|ViewDefaultsPackage;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#)
-                  (HREM |$ConstructorCache| '|ViewDefaultsPackage|)))))))))) 
 
 (DEFUN |ViewDefaultsPackage;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
@@ -203,6 +184,25 @@
           (QSETREFV % 41 (SPADCALL (|mk_DF| 5 -1) (QREFELT % 40)))
           (QSETREFV % 45 (SPADCALL NIL (QREFELT % 44)))
           %))) 
+
+(DEFUN |ViewDefaultsPackage| ()
+  (SPROG NIL
+         (PROG (#1=#:G39)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|ViewDefaultsPackage|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|ViewDefaultsPackage|
+                             (LIST
+                              (CONS NIL (CONS 1 (|ViewDefaultsPackage;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#)
+                  (HREM |$ConstructorCache| '|ViewDefaultsPackage|)))))))))) 
 
 (MAKEPROP '|ViewDefaultsPackage| '|infovec|
           (LIST

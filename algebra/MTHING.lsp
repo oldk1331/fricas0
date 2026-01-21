@@ -15,7 +15,7 @@
 
 (SDEFUN |MTHING;mergeDifference1|
         ((|x| #1=(|List| S)) (|fy| (S)) (|ry| (|List| S)) (% (|List| S)))
-        (SPROG ((#2=#:G30 NIL) (|frx| (S)) (|rx| #1#))
+        (SPROG ((#2=#:G22 NIL) (|frx| (S)) (|rx| #1#))
                (SEQ
                 (EXIT
                  (SEQ (LETT |rx| |x|)
@@ -32,7 +32,7 @@
                                        (EXIT
                                         (COND
                                          ((NULL |ry|)
-                                          (PROGN (LETT #2# |x|) (GO #3=#:G29)))
+                                          (PROGN (LETT #2# |x|) (GO #3=#:G21)))
                                          ('T
                                           (SEQ (LETT |fy| (|SPADfirst| |ry|))
                                                (EXIT
@@ -58,22 +58,6 @@
 
 (DECLAIM (NOTINLINE |MergeThing;|)) 
 
-(DEFUN |MergeThing| (#1=#:G31)
-  (SPROG NIL
-         (PROG (#2=#:G32)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|MergeThing|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|MergeThing;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|MergeThing|)))))))))) 
-
 (DEFUN |MergeThing;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -87,6 +71,22 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |MergeThing| (#1=#:G23)
+  (SPROG NIL
+         (PROG (#2=#:G24)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|MergeThing|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|MergeThing;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|MergeThing|)))))))))) 
 
 (MAKEPROP '|MergeThing| '|infovec|
           (LIST

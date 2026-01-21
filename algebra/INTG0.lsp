@@ -47,7 +47,7 @@
                      (|:| |radicand| F)))
           (|u1| (F)) (|e2| (|NonNegativeInteger|))
           (|e1| (|NonNegativeInteger|)) (|f1| (|SparseUnivariatePolynomial| F))
-          (#2=#:G62 NIL) (|fac| NIL)
+          (#2=#:G28 NIL) (|fac| NIL)
           (|ff| (|Factored| (|SparseUnivariatePolynomial| F))))
          (SEQ (LETT |ff| (SPADCALL |p| (QREFELT % 33)))
               (LETT |c1| (|spadConstant| % 34))
@@ -99,7 +99,7 @@
           (|fun2c| #2=(|SparseUnivariatePolynomial| F)) (|ppcc| #2#)
           (|c2| (|Fraction| (|Integer|))) (|c1| (|Fraction| (|Integer|)))
           (|fun1| #1#) (|fun1c| #2#) (|fun| (|SparseUnivariatePolynomial| F))
-          (|ppc| (|SparseUnivariatePolynomial| F)) (#3=#:G68 NIL)
+          (|ppc| (|SparseUnivariatePolynomial| F)) (#3=#:G34 NIL)
           (|ppr| (|SparseUnivariatePolynomial| F))
           (|pol1| #4=(|SparseUnivariatePolynomial| F)) (|pol0| #4#)
           (|polu|
@@ -249,7 +249,7 @@
             (|Record| (|:| |scalar| (|Fraction| (|Integer|)))
                       (|:| |coeff| (|SparseUnivariatePolynomial| F))
                       (|:| |logand| (|SparseUnivariatePolynomial| F)))))
-          (#1=#:G136 NIL) (|ll| NIL) (|rp1| (F)) (|rp| (F)))
+          (#1=#:G102 NIL) (|ll| NIL) (|rp1| (F)) (|rp| (F)))
          (SEQ (LETT |rp| (SPADCALL |irf| (QREFELT % 85)))
               (LETT |rp1|
                     (SPADCALL
@@ -280,7 +280,7 @@
 (SDEFUN |INTG0;field_gens|
         ((|y| (|Kernel| F)) (|lf| (|List| F)) (% (|List| F)))
         (SPROG
-         ((|res| (|List| F)) (#1=#:G141 NIL) (#2=#:G142 NIL) (|k| NIL)
+         ((|res| (|List| F)) (#1=#:G107 NIL) (#2=#:G108 NIL) (|k| NIL)
           (|at| (|List| (|Kernel| F))))
          (SEQ (LETT |at| (SPADCALL |lf| (QREFELT % 99))) (LETT |res| NIL)
               (SEQ (LETT |k| NIL) (LETT #2# |at|) G190
@@ -291,7 +291,7 @@
                     (EXIT
                      (COND
                       ((SPADCALL |k| |y| (QREFELT % 100))
-                       (PROGN (LETT #1# |$NoValue|) (GO #3=#:G137)))
+                       (PROGN (LETT #1# |$NoValue|) (GO #3=#:G103)))
                       ('T
                        (LETT |res|
                              (CONS (SPADCALL |k| (QREFELT % 73)) |res|)))))
@@ -597,7 +597,7 @@
          (|z| (|Kernel| F)) (|xx| (F))
          (|dx| (|Fraction| (|SparseUnivariatePolynomial| F))) (|r| (F))
          (% (|Union| F #2#)))
-        (SPROG ((|u| #1#) (#3=#:G173 NIL) (|g1| (F)) (|f1| (F)))
+        (SPROG ((|u| #1#) (#3=#:G139 NIL) (|g1| (F)) (|f1| (F)))
                (SEQ
                 (LETT |f1|
                       (SPADCALL |f| |y|
@@ -655,7 +655,7 @@
          (|den| (F)) (|radi| (|SparseUnivariatePolynomial| F))
          (% (|Union| F #2#)))
         (SPROG
-         ((|u| #1#) (#3=#:G197 NIL)
+         ((|u| #1#) (#3=#:G163 NIL)
           (|pr|
            (|Record| (|:| |diff| F)
                      (|:| |subs|
@@ -699,8 +699,8 @@
           (|Record| (|:| |particular| (|Union| F "failed"))
                     (|:| |basis| (|List| F)))))
         (SPROG
-         ((#1=#:G214 NIL) (|bas| (|List| F)) (#2=#:G224 NIL) (|b| NIL)
-          (#3=#:G223 NIL)
+         ((#1=#:G177 NIL) (|bas| (|List| F)) (#2=#:G187 NIL) (|b| NIL)
+          (#3=#:G186 NIL)
           (|rec|
            (|Record|
             (|:| |particular|
@@ -714,7 +714,7 @@
           (|op|
            (|LinearOrdinaryDifferentialOperator1|
             (|Fraction| (|SparseUnivariatePolynomial| F))))
-          (#5=#:G222 NIL) (|i| NIL)
+          (#5=#:G185 NIL) (|i| NIL)
           (|d|
            (|LinearOrdinaryDifferentialOperator1|
             (|Fraction| (|SparseUnivariatePolynomial| F))))
@@ -805,8 +805,8 @@
           (|Record| (|:| |particular| (|Union| F "failed"))
                     (|:| |basis| (|List| F)))))
         (SPROG
-         ((#1=#:G233 NIL) (|bas| (|List| F)) (#2=#:G242 NIL) (|b| NIL)
-          (#3=#:G241 NIL)
+         ((#1=#:G196 NIL) (|bas| (|List| F)) (#2=#:G205 NIL) (|b| NIL)
+          (#3=#:G204 NIL)
           (|yinv| (|Fraction| (|SparseUnivariatePolynomial| F)))
           (|rec|
            (|Record|
@@ -822,7 +822,7 @@
           (|op|
            (|LinearOrdinaryDifferentialOperator1|
             (|Fraction| (|SparseUnivariatePolynomial| F))))
-          (|c1| (F)) (#5=#:G240 NIL) (|i| NIL) (|y1| (F))
+          (|c1| (F)) (#5=#:G203 NIL) (|i| NIL) (|y1| (F))
           (|d|
            (|LinearOrdinaryDifferentialOperator1|
             (|Fraction| (|SparseUnivariatePolynomial| F)))))
@@ -899,25 +899,6 @@
 
 (DECLAIM (NOTINLINE |GenusZeroIntegration;|)) 
 
-(DEFUN |GenusZeroIntegration| (&REST #1=#:G243)
-  (SPROG NIL
-         (PROG (#2=#:G244)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|GenusZeroIntegration|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |GenusZeroIntegration;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|GenusZeroIntegration|)))))))))) 
-
 (DEFUN |GenusZeroIntegration;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -954,6 +935,25 @@
                        (CONS (|dispatchFunction| |INTG0;palgLODE0;LF3KFFFR;21|)
                              %)))))
           %))) 
+
+(DEFUN |GenusZeroIntegration| (&REST #1=#:G206)
+  (SPROG NIL
+         (PROG (#2=#:G207)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|GenusZeroIntegration|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |GenusZeroIntegration;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|GenusZeroIntegration|)))))))))) 
 
 (MAKEPROP '|GenusZeroIntegration| '|infovec|
           (LIST

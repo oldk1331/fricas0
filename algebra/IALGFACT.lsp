@@ -3,7 +3,7 @@
         ((|f| (|AlPol|)) (|k| (|Integer|))
          (|fact| (|Mapping| (|Factored| UP) UP)) (% (|List| |AlPol|)))
         (SPROG
-         ((#1=#:G28 NIL) (|pp| NIL) (#2=#:G27 NIL) (|pol| (|AlPol|))
+         ((#1=#:G10 NIL) (|pp| NIL) (#2=#:G9 NIL) (|pol| (|AlPol|))
           (|lsols| (|List| |AlPol|)) (|newf| (|AlPol|)))
          (SEQ
           (LETT |pol|
@@ -42,8 +42,8 @@
         ((|f| (|AlPol|)) (|k| (|Integer|))
          (|fact| (|Mapping| (|Factored| UP) UP)) (% (|List| |AlPol|)))
         (SPROG
-         ((|listerm| (|List| |AlPol|)) (|newf| (|AlPol|)) (#1=#:G35 NIL)
-          (|g| (|AlPol|)) (#2=#:G45 NIL) (|pelt| NIL)
+         ((|listerm| (|List| |AlPol|)) (|newf| (|AlPol|)) (#1=#:G17 NIL)
+          (|g| (|AlPol|)) (#2=#:G27 NIL) (|pelt| NIL)
           (|listfact|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
@@ -112,7 +112,7 @@
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| |AlPol|)
                       (|:| |exponent| #1=(|NonNegativeInteger|)))))
-          (#2=#:G62 NIL) (|f1| NIL) (|e1| #1#) (#3=#:G61 NIL) (|sq1| NIL)
+          (#2=#:G44 NIL) (|f1| NIL) (|e1| #1#) (#3=#:G43 NIL) (|sq1| NIL)
           (|sqf| (|Factored| |AlPol|)))
          (SEQ (LETT |sqf| (SPADCALL |f| (QREFELT % 34))) (LETT |fl| NIL)
               (SEQ (LETT |sq1| NIL) (LETT #3# (SPADCALL |sqf| (QREFELT % 38)))
@@ -154,25 +154,6 @@
 
 (DECLAIM (NOTINLINE |InnerAlgFactor;|)) 
 
-(DEFUN |InnerAlgFactor| (&REST #1=#:G69)
-  (SPROG NIL
-         (PROG (#2=#:G70)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|InnerAlgFactor|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |InnerAlgFactor;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|InnerAlgFactor|)))))))))) 
-
 (DEFUN |InnerAlgFactor;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -197,6 +178,25 @@
     (QSETREFV % 44 (SPADCALL (QREFELT % 43)))
     (QSETREFV % 50 (SPADCALL (ELT % 45) (QREFELT % 44) (QREFELT % 49)))
     %))) 
+
+(DEFUN |InnerAlgFactor| (&REST #1=#:G50)
+  (SPROG NIL
+         (PROG (#2=#:G51)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|InnerAlgFactor|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |InnerAlgFactor;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|InnerAlgFactor|)))))))))) 
 
 (MAKEPROP '|InnerAlgFactor| '|infovec|
           (LIST

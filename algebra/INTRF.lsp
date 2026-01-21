@@ -31,9 +31,24 @@
 
 (DECLAIM (NOTINLINE |RationalFunctionIntegration;|)) 
 
-(DEFUN |RationalFunctionIntegration| (#1=#:G19)
+(DEFUN |RationalFunctionIntegration;| (|#1|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT |dv$| (LIST '|RationalFunctionIntegration| DV$1))
+          (LETT % (GETREFV 26))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|RationalFunctionIntegration|
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |RationalFunctionIntegration| (#1=#:G10)
   (SPROG NIL
-         (PROG (#2=#:G20)
+         (PROG (#2=#:G11)
            (RETURN
             (COND
              ((LETT #2#
@@ -49,21 +64,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|RationalFunctionIntegration|)))))))))) 
-
-(DEFUN |RationalFunctionIntegration;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT |dv$| (LIST '|RationalFunctionIntegration| DV$1))
-          (LETT % (GETREFV 26))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|RationalFunctionIntegration|
-                      (LIST DV$1) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|RationalFunctionIntegration| '|infovec|
           (LIST

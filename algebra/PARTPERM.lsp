@@ -33,8 +33,8 @@
 (SDEFUN |PARTPERM;partitions;2IS;3|
         ((M (|Integer|)) (N (|Integer|)) (% (|Stream| (|List| (|Integer|)))))
         (SPROG
-         ((|aaa| (|List| (|Stream| (|List| (|Integer|))))) (#1=#:G36 NIL)
-          (|i| NIL) (#2=#:G35 NIL))
+         ((|aaa| (|List| (|Stream| (|List| (|Integer|))))) (#1=#:G24 NIL)
+          (|i| NIL) (#2=#:G23 NIL))
          (SEQ
           (LETT |aaa|
                 (PROGN
@@ -116,8 +116,8 @@
 (SDEFUN |PARTPERM;nogreq|
         ((|n| (|Integer|)) (|x| (|List| (|Integer|))) (% (|Integer|)))
         (SPROG
-         ((#1=#:G52 NIL) (#2=#:G51 #3=(|Integer|)) (#4=#:G53 #3#)
-          (#5=#:G55 NIL) (|i| NIL))
+         ((#1=#:G40 NIL) (#2=#:G39 #3=(|Integer|)) (#4=#:G41 #3#)
+          (#5=#:G43 NIL) (|i| NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -137,7 +137,7 @@
 
 (SDEFUN |PARTPERM;conjugate;2L;9|
         ((|x| (|List| (|Integer|))) (% (|List| (|Integer|))))
-        (SPROG ((#1=#:G61 NIL) (|i| NIL) (#2=#:G60 NIL))
+        (SPROG ((#1=#:G49 NIL) (|i| NIL) (#2=#:G48 NIL))
                (SEQ
                 (COND ((NULL |x|) NIL)
                       ('T
@@ -210,7 +210,7 @@
 
 (SDEFUN |PARTPERM;rpt|
         ((|n| (|Integer|)) (|m| (|Integer|)) (% (|List| (|Integer|))))
-        (SPROG ((#1=#:G86 NIL) (|i| NIL) (#2=#:G85 NIL))
+        (SPROG ((#1=#:G74 NIL) (|i| NIL) (#2=#:G73 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -235,7 +235,7 @@
 
 (SDEFUN |PARTPERM;sequences;LS;16|
         ((|x| (|List| (|Integer|))) (% (|Stream| (|List| (|Integer|)))))
-        (SPROG ((#1=#:G97 NIL) (|i| NIL) (#2=#:G96 NIL))
+        (SPROG ((#1=#:G85 NIL) (|i| NIL) (#2=#:G84 NIL))
                (SEQ
                 (SPADCALL |x|
                           (PROGN
@@ -249,7 +249,7 @@
 
 (SDEFUN |PARTPERM;permutations;IS;17|
         ((|n| (|Integer|)) (% (|Stream| (|List| (|Integer|)))))
-        (SPROG ((#1=#:G102 NIL) (|i| NIL) (#2=#:G101 NIL))
+        (SPROG ((#1=#:G90 NIL) (|i| NIL) (#2=#:G89 NIL))
                (SEQ
                 (SPADCALL (|PARTPERM;rpt| |n| 1 %)
                           (PROGN
@@ -263,9 +263,22 @@
 
 (DECLAIM (NOTINLINE |PartitionsAndPermutations;|)) 
 
+(DEFUN |PartitionsAndPermutations;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|PartitionsAndPermutations|))
+          (LETT % (GETREFV 45))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|PartitionsAndPermutations| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |PartitionsAndPermutations| ()
   (SPROG NIL
-         (PROG (#1=#:G104)
+         (PROG (#1=#:G92)
            (RETURN
             (COND
              ((LETT #1#
@@ -284,19 +297,6 @@
                  ((NOT #1#)
                   (HREM |$ConstructorCache|
                         '|PartitionsAndPermutations|)))))))))) 
-
-(DEFUN |PartitionsAndPermutations;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|PartitionsAndPermutations|))
-          (LETT % (GETREFV 45))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|PartitionsAndPermutations| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|PartitionsAndPermutations| '|infovec|
           (LIST

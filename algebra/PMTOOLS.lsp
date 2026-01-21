@@ -1,8 +1,8 @@
 
 (SDEFUN |PMTOOLS;negConstant| ((|l| (|List| P)) (% (|Union| P "failed")))
         (SPROG
-         ((#1=#:G52 NIL) (#2=#:G53 NIL) (|r| (|Union| R "failed"))
-          (#3=#:G54 NIL) (|x| NIL))
+         ((#1=#:G46 NIL) (#2=#:G47 NIL) (|r| (|Union| R "failed"))
+          (#3=#:G48 NIL) (|x| NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -23,8 +23,8 @@
                               (LETT #1#
                                     (PROGN
                                      (LETT #2# (CONS 0 |x|))
-                                     (GO #4=#:G51)))
-                              (GO #5=#:G49))))))))
+                                     (GO #4=#:G45)))
+                              (GO #5=#:G43))))))))
                    (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
              #5# (EXIT #1#))
             (EXIT (CONS 1 "failed"))))
@@ -45,7 +45,7 @@
                         (|:| |s| #3=(|List| P)))
            "failed")))
         (SPROG
-         ((|ls| #3#) (#4=#:G67 NIL) (|l| #2#) (|rec| #1#) (#5=#:G68 NIL)
+         ((|ls| #3#) (#4=#:G61 NIL) (|l| #2#) (|rec| #1#) (#5=#:G62 NIL)
           (|p| NIL))
          (SEQ
           (EXIT
@@ -60,7 +60,7 @@
                   (EXIT
                    (COND
                     ((SPADCALL (LETT |l| (QCAR |rec|)) (QREFELT % 20))
-                     (PROGN (LETT #4# (CONS 1 "failed")) (GO #6=#:G66)))
+                     (PROGN (LETT #4# (CONS 1 "failed")) (GO #6=#:G60)))
                     ('T (LETT |ls| (QCDR |rec|))))))
                  (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
             (EXIT (CONS 0 |rec|))))
@@ -107,8 +107,8 @@
 
 (SDEFUN |PMTOOLS;patternMatchTimes;LLPmrMPmr;3!1| ((|l1| NIL) (% NIL))
         (SPROG
-         ((#1=#:G87 NIL) (#2=#:G86 NIL) (#3=#:G88 NIL) (#4=#:G90 NIL)
-          (#5=#:G2 NIL))
+         ((#1=#:G78 NIL) (#2=#:G77 NIL) (#3=#:G79 NIL) (#4=#:G81 NIL)
+          (#5=#:G1 NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -126,8 +126,8 @@
 
 (SDEFUN |PMTOOLS;patternMatchTimes;LLPmrMPmr;3!0| ((|l1| NIL) (% NIL))
         (SPROG
-         ((#1=#:G77 NIL) (#2=#:G76 NIL) (#3=#:G78 NIL) (#4=#:G80 NIL)
-          (#5=#:G1 NIL))
+         ((#1=#:G68 NIL) (#2=#:G67 NIL) (#3=#:G69 NIL) (#4=#:G71 NIL)
+          (#5=#:G0 NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -153,8 +153,8 @@
           (|Record| (|:| |res| (|PatternMatchResult| S P))
                     (|:| |s| (|List| P)))))
         (SPROG
-         ((|l1| (|PatternMatchResult| S P)) (|t| (P)) (#1=#:G108 NIL) (|x| NIL)
-          (#2=#:G107 NIL) (|bad| (|List| P)))
+         ((|l1| (|PatternMatchResult| S P)) (|t| (P)) (#1=#:G99 NIL) (|x| NIL)
+          (#2=#:G98 NIL) (|bad| (|List| P)))
          (SEQ
           (LETT |bad|
                 (COND
@@ -224,7 +224,7 @@
            (|Record| (|:| |pat| (|List| (|Pattern| S))) (|:| |s| (|List| P)))
            "failed")))
         (SPROG
-         ((#1=#:G133 NIL) (|rc| (|Union| (|List| P) "failed")) (#2=#:G134 NIL)
+         ((#1=#:G124 NIL) (|rc| (|Union| (|List| P) "failed")) (#2=#:G125 NIL)
           (|p| NIL))
          (SEQ
           (EXIT
@@ -236,7 +236,7 @@
                       (EXIT
                        (COND
                         ((QEQCAR |rc| 1)
-                         (PROGN (LETT #1# (CONS 1 "failed")) (GO #3=#:G132)))
+                         (PROGN (LETT #1# (CONS 1 "failed")) (GO #3=#:G123)))
                         ((NULL (NULL (QCDR |rc|)))
                          (SEQ (LETT |lp| (SPADCALL |p| |lp| (QREFELT % 27)))
                               (EXIT
@@ -250,8 +250,8 @@
 (SDEFUN |PMTOOLS;selBestGen|
         ((|l| (|List| (|Pattern| S))) (% (|List| (|Pattern| S))))
         (SPROG
-         ((#1=#:G140 NIL) (#2=#:G141 NIL) (|ans| (|List| (|Pattern| S)))
-          (#3=#:G142 NIL) (|p| NIL))
+         ((#1=#:G131 NIL) (#2=#:G132 NIL) (|ans| (|List| (|Pattern| S)))
+          (#3=#:G133 NIL) (|p| NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |ans| NIL)
@@ -273,8 +273,8 @@
                                     (LETT #1#
                                           (PROGN
                                            (LETT #2# |ans|)
-                                           (GO #4=#:G139)))
-                                    (GO #5=#:G136)))))))
+                                           (GO #4=#:G130)))
+                                    (GO #5=#:G127)))))))
                           #5# (EXIT #1#))))))
                      (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
                 (EXIT |ans|)))
@@ -301,7 +301,7 @@
             (|Record| (|:| |pat| (|List| (|Pattern| S))) (|:| |s| (|List| P)))
             "failed"))
           (|l4| #1=(|List| (|Pattern| S))) (|l3| (|List| (|Pattern| S)))
-          (|l2| #1#) (|l1| #1#) (|lpm| #1#) (#2=#:G234 NIL) (|ident| (P)))
+          (|l2| #1#) (|l1| #1#) (|lpm| #1#) (#2=#:G224 NIL) (|ident| (P)))
          (SEQ
           (EXIT
            (SEQ (LETT |ident| (SPADCALL NIL |op|))
@@ -309,7 +309,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |rc| 1)
-                   (PROGN (LETT #2# (SPADCALL (QREFELT % 23))) (GO #3=#:G233)))
+                   (PROGN (LETT #2# (SPADCALL (QREFELT % 23))) (GO #3=#:G223)))
                   (#4='T
                    (SEQ (LETT |lp| (QCAR (QCDR |rc|)))
                         (LETT |ls| (QCDR (QCDR |rc|)))
@@ -512,25 +512,6 @@
 
 (DECLAIM (NOTINLINE |PatternMatchTools;|)) 
 
-(DEFUN |PatternMatchTools| (&REST #1=#:G235)
-  (SPROG NIL
-         (PROG (#2=#:G236)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PatternMatchTools|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |PatternMatchTools;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|PatternMatchTools|)))))))))) 
-
 (DEFUN |PatternMatchTools;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -552,6 +533,25 @@
                     (SPADCALL (SPADCALL (|spadConstant| % 9) (QREFELT % 10))
                               (QREFELT % 12)))
           %))) 
+
+(DEFUN |PatternMatchTools| (&REST #1=#:G225)
+  (SPROG NIL
+         (PROG (#2=#:G226)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PatternMatchTools|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |PatternMatchTools;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|PatternMatchTools|)))))))))) 
 
 (MAKEPROP '|PatternMatchTools| '|infovec|
           (LIST

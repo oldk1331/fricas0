@@ -32,21 +32,6 @@
 
 (DECLAIM (NOTINLINE |TubePlot;|)) 
 
-(DEFUN |TubePlot| (#1=#:G18)
-  (SPROG NIL
-         (PROG (#2=#:G19)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|TubePlot|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|TubePlot;| #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|TubePlot|)))))))))) 
-
 (DEFUN |TubePlot;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -65,6 +50,21 @@
                                    (|List| (|List| (|Point| (|DoubleFloat|)))))
                               (|:| |closedTube?| (|Boolean|))))
           %))) 
+
+(DEFUN |TubePlot| (#1=#:G10)
+  (SPROG NIL
+         (PROG (#2=#:G11)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|TubePlot|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|TubePlot;| #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|TubePlot|)))))))))) 
 
 (MAKEPROP '|TubePlot| '|infovec|
           (LIST

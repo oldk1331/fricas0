@@ -34,8 +34,8 @@
         ((|f| (|Fraction| (|Polynomial| R))) (|x| (|Symbol|))
          (% (|Union| (|Expression| R) (|List| (|Expression| R)))))
         (SPROG
-         ((|l| (|List| (|Expression| R))) (#1=#:G38 NIL) (|g| NIL)
-          (#2=#:G37 NIL))
+         ((|l| (|List| (|Expression| R))) (#1=#:G22 NIL) (|g| NIL)
+          (#2=#:G21 NIL))
          (SEQ
           (LETT |l|
                 (PROGN
@@ -59,25 +59,6 @@
                  ('T (CONS 1 |l|))))))) 
 
 (DECLAIM (NOTINLINE |IntegrationResultRFToFunction;|)) 
-
-(DEFUN |IntegrationResultRFToFunction| (#1=#:G39)
-  (SPROG NIL
-         (PROG (#2=#:G40)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|IntegrationResultRFToFunction|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|IntegrationResultRFToFunction;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|IntegrationResultRFToFunction|)))))))))) 
 
 (DEFUN |IntegrationResultRFToFunction;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
@@ -115,6 +96,25 @@
                          (CONS (|dispatchFunction| |IRRF2F;integrate;FSU;7|)
                                %)))))))
           %))) 
+
+(DEFUN |IntegrationResultRFToFunction| (#1=#:G23)
+  (SPROG NIL
+         (PROG (#2=#:G24)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|IntegrationResultRFToFunction|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|IntegrationResultRFToFunction;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|IntegrationResultRFToFunction|)))))))))) 
 
 (MAKEPROP '|IntegrationResultRFToFunction| '|infovec|
           (LIST

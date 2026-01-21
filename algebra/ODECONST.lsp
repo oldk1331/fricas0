@@ -2,7 +2,7 @@
 (SDEFUN |ODECONST;constDsolve;LFSR;1|
         ((|op| (L)) (|g| (F)) (|x| (|Symbol|))
          (% (|Record| (|:| |particular| F) (|:| |basis| (|List| F)))))
-        (SPROG ((#1=#:G14 NIL) (|b| (|List| F)))
+        (SPROG ((#1=#:G7 NIL) (|b| (|List| F)))
                (SEQ
                 (LETT |b|
                       (|ODECONST;homoBasis| |op| (SPADCALL |x| (QREFELT % 10))
@@ -28,7 +28,7 @@
 
 (SDEFUN |ODECONST;homoBasis| ((|op| (L)) (|x| (F)) (% (|List| F)))
         (SPROG
-         ((|b| (|List| F)) (#1=#:G41 NIL) (|ff| NIL)
+         ((|b| (|List| F)) (#1=#:G20 NIL) (|ff| NIL)
           (|fp| (|Factored| (|SparseUnivariatePolynomial| F)))
           (|p| (|SparseUnivariatePolynomial| F)))
          (SEQ (LETT |p| (|spadConstant| % 21))
@@ -66,8 +66,8 @@
         ((|p| (|SparseUnivariatePolynomial| F)) (|n| (|Integer|)) (|x| (F))
          (% (|List| F)))
         (SPROG
-         ((|xn| (F)) (|l| (|List| F)) (#1=#:G56 NIL) (|f| NIL) (#2=#:G55 NIL)
-          (#3=#:G54 NIL) (|i| NIL) (|ll| (|List| F)))
+         ((|xn| (F)) (|l| (|List| F)) (#1=#:G33 NIL) (|f| NIL) (#2=#:G32 NIL)
+          (#3=#:G31 NIL) (|i| NIL) (|ll| (|List| F)))
          (SEQ (LETT |l| (|ODECONST;basisSqfr| |p| |x| %))
               (EXIT
                (COND ((ZEROP |n|) |l|)
@@ -114,7 +114,7 @@
 (SDEFUN |ODECONST;basisSqfr|
         ((|p| (|SparseUnivariatePolynomial| F)) (|x| (F)) (% (|List| F)))
         (SPROG
-         ((#1=#:G63 NIL) (|a| NIL) (#2=#:G62 NIL) (|d| (|NonNegativeInteger|)))
+         ((#1=#:G39 NIL) (|a| NIL) (#2=#:G38 NIL) (|d| (|NonNegativeInteger|)))
          (SEQ (LETT |d| (SPADCALL |p| (QREFELT % 42)))
               (EXIT
                (COND
@@ -150,7 +150,7 @@
 (SDEFUN |ODECONST;quadSol|
         ((|p| (|SparseUnivariatePolynomial| F)) (|x| (F)) (% (|List| F)))
         (SPROG
-         ((#1=#:G76 NIL) (#2=#:G75 NIL) (#3=#:G74 NIL) (|i| (F)) (|r| (F))
+         ((#1=#:G52 NIL) (#2=#:G51 NIL) (#3=#:G50 NIL) (|i| (F)) (|r| (F))
           (|y| (F)) (|u| (|Union| (|Integer|) "failed")) (|delta| (F))
           (|c| (F)) (|a| (F)) (|b| (F)))
          (SEQ
@@ -200,7 +200,7 @@
                             (SPADCALL (SPADCALL |r| (QREFELT % 49))
                                       (SPADCALL |i| (QREFELT % 64))
                                       (QREFELT % 41))))))
-                   (GO #4=#:G72))))))))
+                   (GO #4=#:G48))))))))
             (EXIT
              (PROGN
               (LETT #2# NIL)
@@ -221,23 +221,6 @@
 
 (DECLAIM (NOTINLINE |ConstantLODE;|)) 
 
-(DEFUN |ConstantLODE| (&REST #1=#:G77)
-  (SPROG NIL
-         (PROG (#2=#:G78)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ConstantLODE|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ConstantLODE;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|ConstantLODE|)))))))))) 
-
 (DEFUN |ConstantLODE;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -256,6 +239,23 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |ConstantLODE| (&REST #1=#:G53)
+  (SPROG NIL
+         (PROG (#2=#:G54)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ConstantLODE|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ConstantLODE;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|ConstantLODE|)))))))))) 
 
 (MAKEPROP '|ConstantLODE| '|infovec|
           (LIST

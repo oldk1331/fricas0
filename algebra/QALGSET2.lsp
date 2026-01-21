@@ -4,7 +4,7 @@
          (%
           (|DistributedMultivariatePolynomial| |newvl|
                                                (|Fraction| (|Integer|)))))
-        (SPROG ((#1=#:G20 NIL))
+        (SPROG ((#1=#:G5 NIL))
                (SPADCALL
                 (PROG2
                     (LETT #1#
@@ -23,7 +23,7 @@
         ((|v| (|OrderedVariableList| |newvl|))
          (%
           (|DistributedMultivariatePolynomial| |vl| (|Fraction| (|Integer|)))))
-        (SPROG ((#1=#:G31 NIL))
+        (SPROG ((#1=#:G9 NIL))
                (COND
                 ((SPADCALL |v| (QREFELT % 14) (QREFELT % 20))
                  (|spadConstant| % 22))
@@ -127,7 +127,7 @@
            (|List|
             (|DistributedMultivariatePolynomial| |newvl|
                                                  (|Fraction| (|Integer|)))))
-          (#1=#:G60 NIL) (|g| NIL) (#2=#:G59 NIL)
+          (#1=#:G36 NIL) (|g| NIL) (#2=#:G35 NIL)
           (|tp|
            (|DistributedMultivariatePolynomial| |newvl|
                                                 (|Fraction| (|Integer|))))
@@ -202,25 +202,8 @@
 
 (DECLAIM (NOTINLINE |QuasiAlgebraicSet2;|)) 
 
-(DEFUN |QuasiAlgebraicSet2| (#1=#:G61)
-  (SPROG NIL
-         (PROG (#2=#:G62)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|QuasiAlgebraicSet2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|QuasiAlgebraicSet2;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|QuasiAlgebraicSet2|)))))))))) 
-
 (DEFUN |QuasiAlgebraicSet2;| (|#1|)
-  (SPROG ((#1=#:G20 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((#1=#:G5 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT |dv$| (LIST '|QuasiAlgebraicSet2| DV$1))
@@ -244,6 +227,23 @@
                                        "failed")
                                       #1#)))
           %))) 
+
+(DEFUN |QuasiAlgebraicSet2| (#1=#:G37)
+  (SPROG NIL
+         (PROG (#2=#:G38)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|QuasiAlgebraicSet2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|QuasiAlgebraicSet2;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|QuasiAlgebraicSet2|)))))))))) 
 
 (MAKEPROP '|QuasiAlgebraicSet2| '|infovec|
           (LIST

@@ -1,6 +1,6 @@
 
 (SDEFUN |FSRED;newReduc;IV;1| ((|n| (|Integer|)) (% (|Void|)))
-        (SPROG ((#1=#:G20 NIL) (|k| NIL))
+        (SPROG ((#1=#:G5 NIL) (|k| NIL))
                (SEQ (SETELT % 12 |n|)
                     (EXIT
                      (SEQ (LETT |k| NIL)
@@ -48,7 +48,7 @@
 
 (SDEFUN |FSRED;bringDown;FF;3| ((|f| (F)) (% (|Fraction| (|Integer|))))
         (SPROG
-         ((#1=#:G44 NIL) (|k| NIL) (#2=#:G43 NIL) (|lk| (|List| (|Kernel| F))))
+         ((#1=#:G24 NIL) (|k| NIL) (#2=#:G23 NIL) (|lk| (|List| (|Kernel| F))))
          (SEQ
           (SPADCALL
            (SPADCALL |f| (LETT |lk| (SPADCALL |f| (QREFELT % 44)))
@@ -85,25 +85,6 @@
 
 (DECLAIM (NOTINLINE |FunctionSpaceReduce;|)) 
 
-(DEFUN |FunctionSpaceReduce| (&REST #1=#:G51)
-  (SPROG NIL
-         (PROG (#2=#:G52)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|FunctionSpaceReduce|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |FunctionSpaceReduce;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|FunctionSpaceReduce|)))))))))) 
-
 (DEFUN |FunctionSpaceReduce;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -123,6 +104,25 @@
           (QSETREFV % 11 (SPADCALL (QREFELT % 10)))
           (QSETREFV % 12 (EXPT 10 6))
           %))) 
+
+(DEFUN |FunctionSpaceReduce| (&REST #1=#:G31)
+  (SPROG NIL
+         (PROG (#2=#:G32)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|FunctionSpaceReduce|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |FunctionSpaceReduce;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|FunctionSpaceReduce|)))))))))) 
 
 (MAKEPROP '|FunctionSpaceReduce| '|infovec|
           (LIST

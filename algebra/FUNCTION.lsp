@@ -10,23 +10,6 @@
 
 (DECLAIM (NOTINLINE |FunctionCalled;|)) 
 
-(DEFUN |FunctionCalled| (#1=#:G4)
-  (SPROG NIL
-         (PROG (#2=#:G5)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|FunctionCalled|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|FunctionCalled;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|FunctionCalled|)))))))))) 
-
 (DEFUN |FunctionCalled;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -41,6 +24,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |FunctionCalled| (#1=#:G3)
+  (SPROG NIL
+         (PROG (#2=#:G4)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|FunctionCalled|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|FunctionCalled;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|FunctionCalled|)))))))))) 
 
 (MAKEPROP '|FunctionCalled| '|infovec|
           (LIST

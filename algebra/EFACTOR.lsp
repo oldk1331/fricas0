@@ -48,11 +48,11 @@
         (SPROG
          ((|res| (|Factored| (|SparseUnivariatePolynomial| F)))
           (|fr2| (|SparseUnivariatePolynomial| F))
-          (|fru| (|SparseUnivariatePolynomial| F)) (#1=#:G60 NIL)
+          (|fru| (|SparseUnivariatePolynomial| F)) (#1=#:G26 NIL)
           (|fr1|
            (|SparseUnivariatePolynomial|
             (|SparseMultivariatePolynomial| R (|Kernel| F))))
-          (#2=#:G61 NIL) (|frec| NIL)
+          (#2=#:G27 NIL) (|frec| NIL)
           (|fres1|
            (|Factored|
             (|SparseUnivariatePolynomial|
@@ -94,7 +94,7 @@
                                     ((< (SPADCALL |fr1| (QREFELT % 53)) 1)
                                      (PROGN
                                       (LETT #1# |$NoValue|)
-                                      (GO #3=#:G45)))
+                                      (GO #3=#:G11)))
                                     ('T
                                      (SEQ
                                       (COND
@@ -134,7 +134,7 @@
          ((|res| (|Factored| (|SparseUnivariatePolynomial| F)))
           (|fr2| (|SparseUnivariatePolynomial| F))
           (|fru| (|SparseUnivariatePolynomial| F)) (|fr1| (|ups|))
-          (#2=#:G95 NIL) (|frec| NIL) (|kf| (F)) (|fres1| (|Factored| |ups|))
+          (#2=#:G54 NIL) (|frec| NIL) (|kf| (F)) (|fres1| (|Factored| |ups|))
           (|p2| (|ups|))
           (|ups|
            (|Join| (|UnivariatePolynomialCategory| |sae|)
@@ -154,7 +154,7 @@
                     (IF (|has| #3# (|Hashable|))
                         (ATTRIBUTE (|Hashable|))
                         |noBranch|))))
-          (|lk2| (|List| #1#)) (#4=#:G94 NIL) (|k| NIL) (#5=#:G93 NIL)
+          (|lk2| (|List| #1#)) (#4=#:G53 NIL) (|k| NIL) (#5=#:G52 NIL)
           (|q| (|SparseUnivariatePolynomial| F)) (|k1| (|Kernel| F))
           (|cnp| (|SparseUnivariatePolynomial| F)) (|cn| (F))
           (|n| (|NonNegativeInteger|)))
@@ -418,26 +418,6 @@
 
 (DECLAIM (NOTINLINE |ExpressionFactorPolynomial;|)) 
 
-(DEFUN |ExpressionFactorPolynomial| (&REST #1=#:G98)
-  (SPROG NIL
-         (PROG (#2=#:G99)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ExpressionFactorPolynomial|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ExpressionFactorPolynomial;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|ExpressionFactorPolynomial|)))))))))) 
-
 (DEFUN |ExpressionFactorPolynomial;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -478,6 +458,26 @@
           (QSETREFV % 22 (SPADCALL (QREFELT % 21)))
           (QSETREFV % 25 (SPADCALL (QREFELT % 22) (QREFELT % 24)))
           %))) 
+
+(DEFUN |ExpressionFactorPolynomial| (&REST #1=#:G57)
+  (SPROG NIL
+         (PROG (#2=#:G58)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ExpressionFactorPolynomial|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ExpressionFactorPolynomial;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|ExpressionFactorPolynomial|)))))))))) 
 
 (MAKEPROP '|ExpressionFactorPolynomial| '|infovec|
           (LIST

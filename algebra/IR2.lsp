@@ -21,8 +21,8 @@
         ((|func| (|Mapping| F E)) (|ir| (|IntegrationResult| E))
          (% (|IntegrationResult| F)))
         (SPROG
-         ((#1=#:G39 NIL) (|g| NIL) (#2=#:G38 NIL) (#3=#:G37 NIL) (|f| NIL)
-          (#4=#:G36 NIL))
+         ((#1=#:G34 NIL) (|g| NIL) (#2=#:G33 NIL) (#3=#:G32 NIL) (|f| NIL)
+          (#4=#:G31 NIL))
          (SEQ
           (SPADCALL (SPADCALL (SPADCALL |ir| (QREFELT % 13)) |func|)
                     (PROGN
@@ -77,7 +77,7 @@
                           (|List|
                            (|Record| (|:| |coeff| F) (|:| |logand| F)))))
            "failed")))
-        (SPROG ((#1=#:G82 NIL) (|f| NIL) (#2=#:G81 NIL))
+        (SPROG ((#1=#:G77 NIL) (|f| NIL) (#2=#:G76 NIL))
                (SEQ
                 (COND ((QEQCAR |u| 1) (CONS 1 "failed"))
                       ('T
@@ -117,9 +117,26 @@
 
 (DECLAIM (NOTINLINE |IntegrationResultFunctions2;|)) 
 
-(DEFUN |IntegrationResultFunctions2| (&REST #1=#:G93)
+(DEFUN |IntegrationResultFunctions2;| (|#1| |#2|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT DV$2 (|devaluate| |#2|))
+          (LETT |dv$| (LIST '|IntegrationResultFunctions2| DV$1 DV$2))
+          (LETT % (GETREFV 43))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|IntegrationResultFunctions2|
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |IntegrationResultFunctions2| (&REST #1=#:G83)
   (SPROG NIL
-         (PROG (#2=#:G94)
+         (PROG (#2=#:G84)
            (RETURN
             (COND
              ((LETT #2#
@@ -137,23 +154,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|IntegrationResultFunctions2|)))))))))) 
-
-(DEFUN |IntegrationResultFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT DV$2 (|devaluate| |#2|))
-          (LETT |dv$| (LIST '|IntegrationResultFunctions2| DV$1 DV$2))
-          (LETT % (GETREFV 43))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|IntegrationResultFunctions2|
-                      (LIST DV$1 DV$2) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (QSETREFV % 7 |#2|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|IntegrationResultFunctions2| '|infovec|
           (LIST

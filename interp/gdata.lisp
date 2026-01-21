@@ -341,10 +341,6 @@
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$sourcefile_ind| 15))
 
-; $parents_ind := 16
-
-(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$parents_ind| 16))
-
 ; make_dbstruct() == GETREFV(17)
 
 (DEFUN |make_dbstruct| () (PROG () (RETURN (GETREFV 17))))
@@ -444,7 +440,6 @@
 ;     dbstruct.$constructorform_ind := POP(db_data)
 ;     dbstruct.$documentation_ind := POP(db_data)
 ;     dbstruct.$predicates_ind := POP(db_data)
-;     dbstruct.$parents_ind := POP(db_data)
 
 (DEFUN |init_dbstruct2| (|db_data|)
   (PROG (|con| |dbstruct|)
@@ -463,8 +458,7 @@
       (SETF (ELT |dbstruct| |$sourcefile_ind|) (POP |db_data|))
       (SETF (ELT |dbstruct| |$constructorform_ind|) (POP |db_data|))
       (SETF (ELT |dbstruct| |$documentation_ind|) (POP |db_data|))
-      (SETF (ELT |dbstruct| |$predicates_ind|) (POP |db_data|))
-      (SETF (ELT |dbstruct| |$parents_ind|) (POP |db_data|))))))
+      (SETF (ELT |dbstruct| |$predicates_ind|) (POP |db_data|))))))
 
 ; browse_open2(stream) ==
 ;     constructors := READ(stream)
@@ -592,7 +586,7 @@
 ;                 ['n, 'DEFAULTDOMAIN], ['n, 'ANCESTORS], _
 ;                 ['n, 'SOURCEFILE], ['n, 'CONSTRUCTORFORM], _
 ;                 ['n, 'CONSTRUCTORARGS], ['p, 'PREDICATES], _
-;                 ['n, 'DOCUMENTATION], ['n, 'PARENTS]]
+;                 ['n, 'DOCUMENTATION]]
 ;     for f_desc in f_descs repeat
 ;         ft := first(f_desc)
 ;         fn := first(rest(f_desc))
@@ -617,8 +611,7 @@
                     (LIST '|n| 'CONSTRUCTOR) (LIST '|n| 'DEFAULTDOMAIN)
                     (LIST '|n| 'ANCESTORS) (LIST '|n| 'SOURCEFILE)
                     (LIST '|n| 'CONSTRUCTORFORM) (LIST '|n| 'CONSTRUCTORARGS)
-                    (LIST '|p| 'PREDICATES) (LIST '|n| 'DOCUMENTATION)
-                    (LIST '|n| 'PARENTS)))
+                    (LIST '|p| 'PREDICATES) (LIST '|n| 'DOCUMENTATION)))
       ((LAMBDA (|bfVar#5| |f_desc|)
          (LOOP
           (COND
@@ -857,8 +850,6 @@
 ;         get_database2(con, key, $predicates_ind, $browse_stream)
 ;     key = 'DOCUMENTATION =>
 ;         get_database2(con, key, $documentation_ind, $browse_stream)
-;     key = 'PARENTS =>
-;         get_database2(con, key, $parents_ind, $browse_stream)
 ;     key = 'USERS =>
 ;         get_database2(con, key, $users_ind, $browse_stream)
 ;     key = 'DEPENDENTS =>
@@ -933,8 +924,6 @@
         (|get_database2| |con| |key| |$predicates_ind| |$browse_stream|))
        ((EQ |key| 'DOCUMENTATION)
         (|get_database2| |con| |key| |$documentation_ind| |$browse_stream|))
-       ((EQ |key| 'PARENTS)
-        (|get_database2| |con| |key| |$parents_ind| |$browse_stream|))
        ((EQ |key| 'USERS)
         (|get_database2| |con| |key| |$users_ind| |$browse_stream|))
        ((EQ |key| 'DEPENDENTS)
@@ -1330,7 +1319,7 @@
 ;             noquiet := false
 ;         FORMAT(true, '"   Ignoring unknown )library option: ~a~%", opt)
 ;
-;     -- IXME: make this _really_ portable
+;     -- FIXME: make this _really_ portable
 ;     thisdir := true_name('"./")
 ;     if make_database? then
 ;         expose := false
@@ -1731,7 +1720,7 @@
 ;     FILE_-POSITION(in_f, READ(in_f))
 ;     alist := READ(in_f)
 ;     -- (setq pos (third (assoc "constructorForm" alist :test #'string=)))
-;     pos := first(rest(fetch_data_from_alist(alist, '"constructorForm")))
+;     pos := first(fetch_data_from_alist(alist, '"constructorForm"))
 ;     FILE_-POSITION(in_f, pos)
 ;     constructorform := READ(in_f)
 ;     key := first(constructorform)
@@ -1770,8 +1759,7 @@
      (PROGN
       (FILE-POSITION |in_f| (READ |in_f|))
       (SETQ |alist| (READ |in_f|))
-      (SETQ |pos|
-              (CAR (CDR (|fetch_data_from_alist| |alist| "constructorForm"))))
+      (SETQ |pos| (CAR (|fetch_data_from_alist| |alist| "constructorForm")))
       (FILE-POSITION |in_f| |pos|)
       (SETQ |constructorform| (READ |in_f|))
       (SETQ |key| (CAR |constructorform|))

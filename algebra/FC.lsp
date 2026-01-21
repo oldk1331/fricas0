@@ -136,7 +136,7 @@
 (SDEFUN |FC;getfortarrayexp1|
         ((|name| (|Symbol|)) (|of| (|OutputForm|))
          (|int_to_floats?| (|Boolean|)) (% (|List| (|String|))))
-        (SPROG ((#1=#:G67 NIL) (|l| (|List| (|String|))))
+        (SPROG ((#1=#:G43 NIL) (|l| (|List| (|String|))))
                (SEQ
                 (LETT |l|
                       (SPADCALL (CONS #'|FC;getfortarrayexp1!0| |name|) |of|
@@ -214,7 +214,7 @@
           (RETURN (PROGN (|FC;fortFormatDo1| |var1| |lo| |hi| |inc| |lab| %))))) 
 
 (SDEFUN |FC;addCommas| ((|l| (|List| (|Symbol|))) (% (|List| (|String|))))
-        (SPROG ((|r| (|List| (|String|))) (#1=#:G83 NIL) (|e| NIL))
+        (SPROG ((|r| (|List| (|String|))) (#1=#:G59 NIL) (|e| NIL))
                (SEQ
                 (COND ((NULL |l|) NIL)
                       ('T
@@ -242,8 +242,8 @@
 
 (SDEFUN |FC;commaSep| ((|l| (|List| (|String|))) (% (|List| (|String|))))
         (SPROG
-         ((#1=#:G98 NIL) (#2=#:G97 #3=(|List| (|String|))) (#4=#:G99 #3#)
-          (#5=#:G101 NIL) (|u| NIL))
+         ((#1=#:G66 NIL) (#2=#:G65 #3=(|List| (|String|))) (#4=#:G67 #3#)
+          (#5=#:G69 NIL) (|u| NIL))
          (SEQ
           (CONS (SPADCALL |l| 1 (QREFELT % 39))
                 (PROGN
@@ -304,7 +304,7 @@
          (QREFELT % 22))) 
 
 (SDEFUN |FC;getPrint| ((|l| (|List| (|OutputForm|))) (% (|List| (|String|))))
-        (SPROG ((|ll| (|List| (|String|))) (#1=#:G114 NIL) (|i| NIL))
+        (SPROG ((|ll| (|List| (|String|))) (#1=#:G82 NIL) (|i| NIL))
                (SEQ (LETT |ll| (LIST "PRINT*"))
                     (SEQ (LETT |i| NIL) (LETT #1# |l|) G190
                          (COND
@@ -321,7 +321,7 @@
                     (EXIT (SPADCALL |ll| (QREFELT % 22)))))) 
 
 (SDEFUN |FC;getBlock| ((|rec| (|List| %)) (% (|List| (|String|))))
-        (SPROG ((|expr| (|List| (|String|))) (#1=#:G119 NIL) (|u| NIL))
+        (SPROG ((|expr| (|List| (|String|))) (#1=#:G87 NIL) (|u| NIL))
                (SEQ (SPADCALL 1 (QREFELT % 41)) (LETT |expr| NIL)
                     (SEQ (LETT |u| NIL) (LETT #1# |rec|) G190
                          (COND
@@ -348,7 +348,7 @@
 
 (SDEFUN |FC;getElseIf| ((|f| (%)) (% (|List| (|String|))))
         (SPROG
-         ((|expr| (|List| (|String|))) (|elseBranch| (%)) (#1=#:G147 NIL)
+         ((|expr| (|List| (|String|))) (|elseBranch| (%)) (#1=#:G115 NIL)
           (|rec|
            (|Union| (|:| |nullBranch| #2="null")
                     (|:| |assignmentBranch|
@@ -772,7 +772,7 @@
                            (QREFELT % 19)))))) 
 
 (SDEFUN |FC;getComment| ((|rec| (|List| (|String|))) (% (|List| (|String|))))
-        (SPROG ((#1=#:G220 NIL) (|c| NIL) (#2=#:G219 NIL))
+        (SPROG ((#1=#:G188 NIL) (|c| NIL) (#2=#:G187 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -825,9 +825,9 @@
 
 (SDEFUN |FC;getCode;%L;36| ((|f| (%)) (% (|List| (|String|))))
         (SPROG
-         ((#1=#:G258 NIL) (#2=#:G259 NIL) (#3=#:G257 NIL) (#4=#:G256 NIL)
-          (#5=#:G255 NIL) (#6=#:G254 NIL) (#7=#:G253 NIL) (#8=#:G252 NIL)
-          (#9=#:G251 NIL) (#10=#:G250 NIL) (#11=#:G249 NIL) (#12=#:G248 NIL)
+         ((#1=#:G226 NIL) (#2=#:G227 NIL) (#3=#:G225 NIL) (#4=#:G224 NIL)
+          (#5=#:G223 NIL) (#6=#:G222 NIL) (#7=#:G221 NIL) (#8=#:G220 NIL)
+          (#9=#:G219 NIL) (#10=#:G218 NIL) (#11=#:G217 NIL) (#12=#:G216 NIL)
           (|rec|
            (|Union| (|:| |nullBranch| #13="null")
                     (|:| |assignmentBranch|
@@ -2235,23 +2235,6 @@
 
 (DECLAIM (NOTINLINE |FortranCode;|)) 
 
-(DEFUN |FortranCode| ()
-  (SPROG NIL
-         (PROG (#1=#:G2243)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|FortranCode|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|FortranCode|
-                             (LIST (CONS NIL (CONS 1 (|FortranCode;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#) (HREM |$ConstructorCache| '|FortranCode|)))))))))) 
-
 (DEFUN |FortranCode;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -2333,6 +2316,23 @@
                                         (|List| (|OutputForm|)))))))
           (QSETREFV % 34 25000)
           %))) 
+
+(DEFUN |FortranCode| ()
+  (SPROG NIL
+         (PROG (#1=#:G2198)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|FortranCode|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|FortranCode|
+                             (LIST (CONS NIL (CONS 1 (|FortranCode;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#) (HREM |$ConstructorCache| '|FortranCode|)))))))))) 
 
 (MAKEPROP '|FortranCode| '|infovec|
           (LIST

@@ -6,7 +6,7 @@
                          (SPADCALL (QCDR |t|) (QREFELT % 12)) (QREFELT % 13))))) 
 
 (SDEFUN |INDE;coerce;%Of;2| ((|x| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G27 NIL) (|t| NIL) (#2=#:G26 NIL))
+        (SPROG ((#1=#:G18 NIL) (|t| NIL) (#2=#:G17 NIL))
                (SEQ
                 (COND ((NULL |x|) (SPADCALL 1 (QREFELT % 15)))
                       ((NULL (CDR |x|)) (|INDE;coerceOF| (|SPADfirst| |x|) %))
@@ -29,23 +29,6 @@
                                  (QREFELT % 19))))))) 
 
 (DECLAIM (NOTINLINE |IndexedExponents;|)) 
-
-(DEFUN |IndexedExponents| (#1=#:G35)
-  (SPROG NIL
-         (PROG (#2=#:G36)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|IndexedExponents|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|IndexedExponents;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|IndexedExponents|)))))))))) 
 
 (DEFUN |IndexedExponents;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
@@ -72,6 +55,23 @@
                     (|Record| (|:| |k| |#1|) (|:| |c| (|NonNegativeInteger|))))
           (QSETREFV % 8 (|List| (QREFELT % 7)))
           %))) 
+
+(DEFUN |IndexedExponents| (#1=#:G25)
+  (SPROG NIL
+         (PROG (#2=#:G26)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|IndexedExponents|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|IndexedExponents;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|IndexedExponents|)))))))))) 
 
 (MAKEPROP '|IndexedExponents| '|infovec|
           (LIST

@@ -56,8 +56,8 @@
 ;   -- starts the interpreter, read in profiles, etc.
 ;   $PrintCompilerMessageIfTrue: local
 ;   setOutputAlgebra "%initialize%"
-;   readSpadProfileIfThere()
-;   evalInlineCode()
+;   CATCH('top_level, (readSpadProfileIfThere();
+;                      evalInlineCode()))
 ;   runspad()
 ;   'EndOfSpad
 
@@ -68,8 +68,8 @@
      (PROGN
       (SETQ |$PrintCompilerMessageIfTrue| NIL)
       (|setOutputAlgebra| '|%initialize%|)
-      (|readSpadProfileIfThere|)
-      (|evalInlineCode|)
+      (CATCH '|top_level|
+        (PROGN (|readSpadProfileIfThere|) (|evalInlineCode|)))
       (|runspad|)
       '|EndOfSpad|))))
 
@@ -264,7 +264,7 @@
 ;         b = [] and #a=0 =>
 ;              princPrompt()
 ;         $DALYMODE and intloopPrefix?('"(",a) =>
-;             intnplisp(a)
+;             nplisp(a)
 ;             princPrompt()
 ;         pfx := stripSpaces intloopPrefix?('")fi",a)
 ;         pfx and ((pfx = '")fi") or (pfx = '")fin")) => return []
@@ -292,7 +292,7 @@
                  (COND ((NULL (STRINGP |a|)) (|leaveScratchpad|))
                        ((AND (NULL |b|) (EQL (LENGTH |a|) 0)) (|princPrompt|))
                        ((AND $DALYMODE (|intloopPrefix?| "(" |a|))
-                        (PROGN (|intnplisp| |a|) (|princPrompt|)))
+                        (PROGN (|nplisp| |a|) (|princPrompt|)))
                        (#1#
                         (PROGN
                          (SETQ |pfx|
@@ -511,12 +511,12 @@
 
 (DEFUN |getParserMacros| () (PROG () (RETURN |$pfMacros|)))
 
-; displayParserMacro m ==
-;    m := ASSQ(m, $pfMacros)
-;    NULL m => nil
-;    pfPrintSrcLines(CADDR(m))
+; display_user_macro(m) ==
+;     m := ASSQ(m, $pfMacros)
+;     NULL m => nil
+;     pfPrintSrcLines(CADDR(m))
 
-(DEFUN |displayParserMacro| (|m|)
+(DEFUN |display_user_macro| (|m|)
   (PROG ()
     (RETURN
      (PROGN

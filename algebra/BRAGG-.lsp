@@ -1,8 +1,8 @@
 
-(SDEFUN |BRAGG-;elt;AleftA;1| ((|x| (A)) (T1 ("left")) (% (A)))
+(SDEFUN |BRAGG-;elt;AleftA;1| ((|x| (A)) (T3 ("left")) (% (A)))
         (SPADCALL |x| (QREFELT % 8))) 
 
-(SDEFUN |BRAGG-;elt;ArightA;2| ((|x| (A)) (T2 ("right")) (% (A)))
+(SDEFUN |BRAGG-;elt;ArightA;2| ((|x| (A)) (T4 ("right")) (% (A)))
         (SPADCALL |x| (QREFELT % 11))) 
 
 (SDEFUN |BRAGG-;leaf?;AB;3| ((|x| (A)) (% (|Boolean|)))
@@ -48,7 +48,7 @@
 
 (SDEFUN |BRAGG-;aggCount|
         ((|x| (A)) (|k| (|NonNegativeInteger|)) (% (|NonNegativeInteger|)))
-        (SPROG ((#1=#:G74 NIL) (|y| NIL))
+        (SPROG ((#1=#:G61 NIL) (|y| NIL))
                (SEQ
                 (COND ((SPADCALL |x| (QREFELT % 15)) 0)
                       ('T
@@ -72,7 +72,7 @@
                             (EXIT |k|))))))) 
 
 (SDEFUN |BRAGG-;node?;2AB;9| ((|u| (A)) (|v| (A)) (% (|Boolean|)))
-        (SPROG ((#1=#:G80 NIL))
+        (SPROG ((#1=#:G67 NIL))
                (SEQ
                 (EXIT
                  (COND ((SPADCALL |v| (QREFELT % 15)) NIL)
@@ -84,7 +84,7 @@
                                      (QREFELT % 34))
                            (SPADCALL |u| (SPADCALL |v| (QREFELT % 11))
                                      (QREFELT % 34)))
-                          (PROGN (LETT #1# 'T) (GO #2=#:G79)))
+                          (PROGN (LETT #1# 'T) (GO #2=#:G66)))
                          ('T NIL)))))
                 #2# (EXIT #1#)))) 
 
@@ -156,7 +156,7 @@
               ('T (|BRAGG-;isCycle?| |x| NIL %)))) 
 
 (SDEFUN |BRAGG-;isCycle?| ((|x| (A)) (|acc| (|List| A)) (% (|Boolean|)))
-        (SPROG ((#1=#:G107 NIL) (#2=#:G108 NIL) (#3=#:G109 NIL) (|y| NIL))
+        (SPROG ((#1=#:G94 NIL) (#2=#:G95 NIL) (#3=#:G96 NIL) (|y| NIL))
                (SEQ
                 (EXIT
                  (COND ((SPADCALL |x| (QREFELT % 15)) NIL)
@@ -181,8 +181,8 @@
                                        (LETT #1#
                                              (PROGN
                                               (LETT #2# 'T)
-                                              (GO #4=#:G106)))
-                                       (GO #5=#:G102))))))))
+                                              (GO #4=#:G93)))
+                                       (GO #5=#:G89))))))))
                                 (LETT #3# (CDR #3#)) (GO G190) G191
                                 (EXIT NIL)))
                           #5# (EXIT #1#))
@@ -190,7 +190,7 @@
                 #4# (EXIT #2#)))) 
 
 (SDEFUN |BRAGG-;eqMember?| ((|y| (A)) (|l| (|List| A)) (% (|Boolean|)))
-        (SPROG ((#1=#:G115 NIL) (#2=#:G116 NIL) (#3=#:G117 NIL) (|x| NIL))
+        (SPROG ((#1=#:G102 NIL) (#2=#:G103 NIL) (#3=#:G104 NIL) (|x| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -205,19 +205,29 @@
                            (COND
                             ((SPADCALL |x| |y| (QREFELT % 48))
                              (PROGN
-                              (LETT #1# (PROGN (LETT #2# 'T) (GO #4=#:G114)))
-                              (GO #5=#:G112))))))
+                              (LETT #1# (PROGN (LETT #2# 'T) (GO #4=#:G101)))
+                              (GO #5=#:G99))))))
                          (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
                    #5# (EXIT #1#))
                   (EXIT NIL)))
                 #4# (EXIT #2#)))) 
 
-(SDEFUN |BRAGG-;setelt!;Aleft2A;16| ((|x| (A)) (T3 ("left")) (|b| (A)) (% (A)))
+(SDEFUN |BRAGG-;setelt!;Aleft2A;16| ((|x| (A)) (T5 ("left")) (|b| (A)) (% (A)))
         (SPADCALL |x| |b| (QREFELT % 49))) 
 
 (SDEFUN |BRAGG-;setelt!;Aright2A;17|
-        ((|x| (A)) (T4 ("right")) (|b| (A)) (% (A)))
+        ((|x| (A)) (T6 ("right")) (|b| (A)) (% (A)))
         (SPADCALL |x| |b| (QREFELT % 51))) 
+
+(SDEFUN |BRAGG-;setchildren!;ALA;18| ((|x| (A)) (|ls| (|List| A)) (% (A)))
+        (SEQ
+         (COND
+          ((NULL (EQL (LENGTH |ls|) 2))
+           (|error| "a binary tree needs 2 children"))
+          ('T
+           (SEQ (SPADCALL |x| (SPADCALL |ls| 1 (QREFELT % 54)) (QREFELT % 49))
+                (SPADCALL |x| (SPADCALL |ls| 2 (QREFELT % 54)) (QREFELT % 51))
+                (EXIT |x|)))))) 
 
 (DECLAIM (NOTINLINE |BinaryRecursiveAggregate&;|)) 
 
@@ -227,7 +237,7 @@
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|BinaryRecursiveAggregate&| DV$1 DV$2))
-          (LETT % (GETREFV 54))
+          (LETT % (GETREFV 57))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3
                     (LETT |pv$|
@@ -265,6 +275,9 @@
                              %))
              (QSETREFV % 52
                        (CONS (|dispatchFunction| |BRAGG-;setelt!;Aright2A;17|)
+                             %))
+             (QSETREFV % 55
+                       (CONS (|dispatchFunction| |BRAGG-;setchildren!;ALA;18|)
                              %)))))
           %))) 
 
@@ -283,10 +296,11 @@
               (109 . |coerce|) (114 . |coerce|) (119 . |bracket|)
               (124 . |coerce|) |BRAGG-;cyclic?;AB;13| (129 . |eq?|)
               (135 . |setleft!|) (141 . |setelt!|) (148 . |setright!|)
-              (154 . |setelt!|) '#3="value")
-           '#(|setelt!| 161 |nodes| 175 |node?| 180 |member?| 186 |leaves| 192
-              |leaf?| 197 |elt| 202 |cyclic?| 214 |coerce| 219 |children| 224 =
-              229 |#| 235)
+              (154 . |setelt!|) (|Integer|) (161 . |elt|)
+              (167 . |setchildren!|) '#3="value")
+           '#(|setelt!| 173 |setchildren!| 187 |nodes| 193 |node?| 198
+              |member?| 204 |leaves| 210 |leaf?| 215 |elt| 220 |cyclic?| 232
+              |coerce| 237 |children| 242 = 247 |#| 253)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -298,6 +312,8 @@
                                    '((|elt| (|#1| |#1| #2#)) T)
                                    '((|elt| (|#1| |#1| #1#)) T)
                                    '((|setelt!| (|#2| |#1| #3# |#2|)) T)
+                                   '((|setchildren!| (|#1| |#1| (|List| |#1|)))
+                                     T)
                                    '((|node?| ((|Boolean|) |#1| |#1|)) T)
                                    '((|leaves| ((|List| |#2|) |#1|)) T)
                                    '((|cyclic?| ((|Boolean|) |#1|)) T)
@@ -310,7 +326,7 @@
                                    '((|member?| ((|Boolean|) |#2| |#1|)) T)
                                    '((|#| ((|NonNegativeInteger|) |#1|)) T))
                              (LIST) NIL NIL)))
-                        (|makeByteWordVec2| 52
+                        (|makeByteWordVec2| 55
                                             '(1 6 0 0 8 1 6 0 0 11 1 6 14 0 15
                                               1 6 14 0 17 1 6 7 0 18 1 6 19 0
                                               20 2 19 0 0 0 21 1 6 23 0 24 2 25
@@ -322,11 +338,12 @@
                                               43 1 6 41 0 44 1 41 0 23 45 1 0
                                               41 0 46 2 6 14 0 0 48 2 6 0 0 0
                                               49 3 0 0 0 9 0 50 2 6 0 0 0 51 3
-                                              0 0 0 12 0 52 3 0 0 0 12 0 52 3 0
-                                              0 0 9 0 50 1 0 23 0 27 2 0 14 0 0
-                                              35 2 0 14 7 0 39 1 0 19 0 22 1 0
-                                              14 0 16 2 0 0 0 12 13 2 0 0 0 9
-                                              10 1 0 14 0 47 1 0 41 0 46 1 0 23
-                                              0 28 2 0 14 0 0 37 1 0 29 0
-                                              30)))))
+                                              0 0 0 12 0 52 2 25 6 0 53 54 2 0
+                                              0 0 23 55 3 0 0 0 12 0 52 3 0 0 0
+                                              9 0 50 2 0 0 0 23 55 1 0 23 0 27
+                                              2 0 14 0 0 35 2 0 14 7 0 39 1 0
+                                              19 0 22 1 0 14 0 16 2 0 0 0 12 13
+                                              2 0 0 0 9 10 1 0 14 0 47 1 0 41 0
+                                              46 1 0 23 0 28 2 0 14 0 0 37 1 0
+                                              29 0 30)))))
            '|lookupComplete|)) 

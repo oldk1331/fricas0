@@ -66,7 +66,7 @@
         ((|z| (|Stream| |Coef|)) (|m| (|Coef|)) (% (|List| (|Stream| |Coef|))))
         (SPROG
          ((|dn1| #1=(|Stream| |Coef|)) (|cn1| #1#) (|sn1| #1#)
-          (|invden| (|Stream| |Coef|)) (#2=#:G29 NIL) (|c1| (|Coef|))
+          (|invden| (|Stream| |Coef|)) (#2=#:G11 NIL) (|c1| (|Coef|))
           (|dn0| (|Coef|)) (|cn0| (|Coef|)) (|sn0| (|Coef|))
           (|scd| (|List| (|Stream| |Coef|))) (|z0| (|Coef|)))
          (SEQ
@@ -382,29 +382,6 @@
 
 (DECLAIM (NOTINLINE |EllipticFunctionsUnivariateTaylorSeries;|)) 
 
-(DEFUN |EllipticFunctionsUnivariateTaylorSeries| (&REST #1=#:G54)
-  (SPROG NIL
-         (PROG (#2=#:G55)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|EllipticFunctionsUnivariateTaylorSeries|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function| |EllipticFunctionsUnivariateTaylorSeries;|)
-                       #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|EllipticFunctionsUnivariateTaylorSeries|)))))))))) 
-
 (DEFUN |EllipticFunctionsUnivariateTaylorSeries;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -446,6 +423,29 @@
                         (|dispatchFunction| |ELFUTS;ellipticPi;UTS2CoefUTS;8|)
                         %)))))
           %))) 
+
+(DEFUN |EllipticFunctionsUnivariateTaylorSeries| (&REST #1=#:G32)
+  (SPROG NIL
+         (PROG (#2=#:G33)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|EllipticFunctionsUnivariateTaylorSeries|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function| |EllipticFunctionsUnivariateTaylorSeries;|)
+                       #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|EllipticFunctionsUnivariateTaylorSeries|)))))))))) 
 
 (MAKEPROP '|EllipticFunctionsUnivariateTaylorSeries| '|infovec|
           (LIST

@@ -1,6 +1,6 @@
 
 (SDEFUN |CSTTOOLS;cycleElt;STU;1| ((|x| (ST)) (% (|Union| ST "failed")))
-        (SPROG ((#1=#:G27 NIL) (#2=#:G28 NIL) (|y| (ST)) (|i| NIL))
+        (SPROG ((#1=#:G20 NIL) (#2=#:G21 NIL) (|y| (ST)) (|i| NIL))
                (SEQ
                 (EXIT
                  (SEQ (LETT |y| |x|)
@@ -13,7 +13,7 @@
                                     (SPADCALL |y| (QREFELT % 10)))
                                 (PROGN
                                  (LETT #2# (CONS 1 "failed"))
-                                 (GO #3=#:G26)))
+                                 (GO #3=#:G19)))
                                ('T
                                 (SEQ (LETT |y| (SPADCALL |y| (QREFELT % 11)))
                                      (COND
@@ -28,7 +28,7 @@
                                                (PROGN
                                                 (LETT #2# (CONS 0 |y|))
                                                 (GO #3#)))
-                                         (GO #4=#:G20)))))))))
+                                         (GO #4=#:G13)))))))))
                              #4# (EXIT #1#))
                             (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                             (EXIT NIL)))))
@@ -36,7 +36,7 @@
 
 (SDEFUN |CSTTOOLS;computeCycleLength;STNni;2|
         ((|cycElt| (ST)) (% (|NonNegativeInteger|)))
-        (SPROG ((#1=#:G34 NIL) (#2=#:G35 NIL) (|y| (ST)) (|i| NIL))
+        (SPROG ((#1=#:G27 NIL) (#2=#:G28 NIL) (|y| (ST)) (|i| NIL))
                (SEQ
                 (EXIT
                  (SEQ (LETT |y| |cycElt|)
@@ -52,8 +52,8 @@
                                        (LETT #1#
                                              (PROGN
                                               (LETT #2# |i|)
-                                              (GO #3=#:G33)))
-                                       (GO #4=#:G30)))))))
+                                              (GO #3=#:G26)))
+                                       (GO #4=#:G23)))))))
                              #4# (EXIT #1#))
                             (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                             (EXIT NIL)))))
@@ -61,7 +61,7 @@
 
 (SDEFUN |CSTTOOLS;computeCycleEntry;3ST;3|
         ((|x| (ST)) (|cycElt| (ST)) (% (ST)))
-        (SPROG ((|y| (ST)) (#1=#:G42 NIL))
+        (SPROG ((|y| (ST)) (#1=#:G35 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -74,7 +74,7 @@
                          (EXIT
                           (COND
                            ((SPADCALL |x| |y| (QREFELT % 12))
-                            (PROGN (LETT #1# |x|) (GO #2=#:G41)))
+                            (PROGN (LETT #1# |x|) (GO #2=#:G34)))
                            ('T
                             (SEQ (LETT |x| (SPADCALL |x| (QREFELT % 11)))
                                  (EXIT
@@ -84,25 +84,6 @@
                 #2# (EXIT #1#)))) 
 
 (DECLAIM (NOTINLINE |CyclicStreamTools;|)) 
-
-(DEFUN |CyclicStreamTools| (&REST #1=#:G43)
-  (SPROG NIL
-         (PROG (#2=#:G44)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|CyclicStreamTools|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |CyclicStreamTools;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|CyclicStreamTools|)))))))))) 
 
 (DEFUN |CyclicStreamTools;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
@@ -120,6 +101,25 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |CyclicStreamTools| (&REST #1=#:G36)
+  (SPROG NIL
+         (PROG (#2=#:G37)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|CyclicStreamTools|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |CyclicStreamTools;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|CyclicStreamTools|)))))))))) 
 
 (MAKEPROP '|CyclicStreamTools| '|infovec|
           (LIST

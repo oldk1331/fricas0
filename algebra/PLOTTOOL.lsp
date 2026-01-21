@@ -32,7 +32,7 @@
          (|f| (|Mapping| #1=(|DoubleFloat|) (|Point| (|DoubleFloat|))))
          (|g| (|Mapping| (|DoubleFloat|) (|DoubleFloat|) (|DoubleFloat|)))
          (% (|DoubleFloat|)))
-        (SPROG ((|m| #1#) (#2=#:G17 NIL) (|p| NIL))
+        (SPROG ((|m| #1#) (#2=#:G6 NIL) (|p| NIL))
                (SEQ (LETT |m| (SPADCALL (|SPADfirst| |l|) |f|))
                     (SEQ (LETT |p| NIL) (LETT #2# (CDR |l|)) G190
                          (COND
@@ -64,7 +64,7 @@
           (|Mapping| #1=(|DoubleFloat|) (|List| (|Point| (|DoubleFloat|)))))
          (|g| (|Mapping| (|DoubleFloat|) (|DoubleFloat|) (|DoubleFloat|)))
          (% (|DoubleFloat|)))
-        (SPROG ((|m| #1#) (#2=#:G36 NIL) (|p| NIL))
+        (SPROG ((|m| #1#) (#2=#:G25 NIL) (|p| NIL))
                (SEQ (LETT |m| (SPADCALL (|SPADfirst| |l|) |f|))
                     (SEQ (LETT |p| NIL) (LETT #2# (CDR |l|)) G190
                          (COND
@@ -119,9 +119,21 @@
 
 (DECLAIM (NOTINLINE |PlotTools;|)) 
 
+(DEFUN |PlotTools;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|PlotTools|))
+          (LETT % (GETREFV 25))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|PlotTools| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |PlotTools| ()
   (SPROG NIL
-         (PROG (#1=#:G53)
+         (PROG (#1=#:G42)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|PlotTools|))
@@ -135,18 +147,6 @@
                     (LETT #1# T))
                 (COND
                  ((NOT #1#) (HREM |$ConstructorCache| '|PlotTools|)))))))))) 
-
-(DEFUN |PlotTools;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|PlotTools|))
-          (LETT % (GETREFV 25))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|PlotTools| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|PlotTools| '|infovec|
           (LIST

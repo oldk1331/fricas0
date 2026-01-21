@@ -6,7 +6,7 @@
         (SPROG
          ((|da| #1=(|NonNegativeInteger|))
           (|q| (|SparseUnivariatePolynomial| (|Integer|)))
-          (|t| (|SparseUnivariatePolynomial| (|Integer|))) (#2=#:G26 NIL)
+          (|t| (|SparseUnivariatePolynomial| (|Integer|))) (#2=#:G16 NIL)
           (|db| #1#))
          (SEQ
           (COND
@@ -43,9 +43,9 @@
          (% (|SparseUnivariatePolynomial| (|Fraction| (|Integer|)))))
         (SPROG
          ((|p| #1=(|SparseUnivariatePolynomial| (|Fraction| (|Integer|))))
-          (|c| (|Fraction| (|Integer|))) (#2=#:G40 NIL)
+          (|c| (|Fraction| (|Integer|))) (#2=#:G27 NIL)
           (|t| (|SparseUnivariatePolynomial| (|Fraction| (|Integer|))))
-          (#3=#:G46 NIL) (|i| NIL) (|s| #4=(|Integer|))
+          (#3=#:G33 NIL) (|i| NIL) (|s| #4=(|Integer|))
           (|#G8|
            (|Record| (|:| |En| (|Integer|))
                      (|:| |Ev|
@@ -105,7 +105,7 @@
          ((|p| #1=(|SparseUnivariatePolynomial| (|Fraction| (|Integer|))))
           (|c| (|Fraction| (|Integer|)))
           (|t| (|SparseUnivariatePolynomial| (|Fraction| (|Integer|))))
-          (#2=#:G54 NIL) (|i| NIL) (|s| #3=(|Integer|))
+          (#2=#:G41 NIL) (|i| NIL) (|s| #3=(|Integer|))
           (|#G15|
            (|Record| (|:| |Bn| (|Integer|))
                      (|:| |Bv|
@@ -150,7 +150,7 @@
 (SDEFUN |PNTHEORY;fixedDivisor;SupI;5|
         ((|a| (|SparseUnivariatePolynomial| (|Integer|))) (% (|Integer|)))
         (SPROG
-         ((|g| (|Integer|)) (#1=#:G59 NIL) (|k| NIL)
+         ((|g| (|Integer|)) (#1=#:G46 NIL) (|k| NIL)
           (|d| (|NonNegativeInteger|)))
          (SEQ (|SparseUnivariatePolynomial| (|Integer|))
               (LETT |d| (SPADCALL |a| (QREFELT % 30)))
@@ -171,7 +171,7 @@
         (SPROG
          ((|q| (|SparseUnivariatePolynomial| (|Integer|)))
           (|p| #1=(|SparseUnivariatePolynomial| (|Integer|))) (|#G28| #1#)
-          (|#G27| (|SparseUnivariatePolynomial| (|Integer|))) (#2=#:G67 NIL)
+          (|#G27| (|SparseUnivariatePolynomial| (|Integer|))) (#2=#:G54 NIL)
           (|k| NIL) (|s| (|Integer|))
           (|#G22|
            (|Record| (|:| |Hn| (|Integer|))
@@ -220,7 +220,7 @@
           (|p| #1=(|SparseUnivariatePolynomial| (|Fraction| (|Integer|))))
           (|#G36| #1#)
           (|#G35| (|SparseUnivariatePolynomial| (|Fraction| (|Integer|))))
-          (|t| (|Integer|)) (#2=#:G76 NIL) (|k| NIL) (|s| (|Integer|))
+          (|t| (|Integer|)) (#2=#:G63 NIL) (|k| NIL) (|s| (|Integer|))
           (|#G30|
            (|Record| (|:| |Pn| (|Integer|))
                      (|:| P1
@@ -273,7 +273,7 @@
          ((|q| (|SparseUnivariatePolynomial| (|Integer|)))
           (|p| #1=(|SparseUnivariatePolynomial| (|Integer|))) (|#G44| #1#)
           (|#G43| (|SparseUnivariatePolynomial| (|Integer|))) (|t| (|Integer|))
-          (#2=#:G85 NIL) (|k| NIL) (|s| (|Integer|))
+          (#2=#:G72 NIL) (|k| NIL) (|s| (|Integer|))
           (|#G38|
            (|Record| (|:| |Ln| (|Integer|))
                      (|:| L1 (|SparseUnivariatePolynomial| (|Integer|)))
@@ -320,7 +320,7 @@
         (SPROG
          ((|q| (|SparseUnivariatePolynomial| (|Integer|)))
           (|p| #1=(|SparseUnivariatePolynomial| (|Integer|))) (|#G52| #1#)
-          (|#G51| (|SparseUnivariatePolynomial| (|Integer|))) (#2=#:G93 NIL)
+          (|#G51| (|SparseUnivariatePolynomial| (|Integer|))) (#2=#:G80 NIL)
           (|k| NIL) (|s| (|Integer|))
           (|#G46|
            (|Record| (|:| |Tn| (|Integer|))
@@ -365,7 +365,7 @@
         (SPROG
          ((|q| (|SparseUnivariatePolynomial| (|Integer|)))
           (|p| #1=(|SparseUnivariatePolynomial| (|Integer|))) (|#G60| #1#)
-          (|#G59| (|SparseUnivariatePolynomial| (|Integer|))) (#2=#:G101 NIL)
+          (|#G59| (|SparseUnivariatePolynomial| (|Integer|))) (#2=#:G88 NIL)
           (|k| NIL) (|s| (|Integer|))
           (|#G54|
            (|Record| (|:| |Un| (|Integer|))
@@ -407,31 +407,6 @@
 
 (DECLAIM (NOTINLINE |PolynomialNumberTheoryFunctions;|)) 
 
-(DEFUN |PolynomialNumberTheoryFunctions| ()
-  (SPROG NIL
-         (PROG (#1=#:G103)
-           (RETURN
-            (COND
-             ((LETT #1#
-                    (HGET |$ConstructorCache|
-                          '|PolynomialNumberTheoryFunctions|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache|
-                             '|PolynomialNumberTheoryFunctions|
-                             (LIST
-                              (CONS NIL
-                                    (CONS 1
-                                          (|PolynomialNumberTheoryFunctions;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#)
-                  (HREM |$ConstructorCache|
-                        '|PolynomialNumberTheoryFunctions|)))))))))) 
-
 (DEFUN |PolynomialNumberTheoryFunctions;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -453,6 +428,31 @@
           (QSETREFV % 24 (VECTOR 0 (|spadConstant| % 7) (QREFELT % 11)))
           (QSETREFV % 25 (VECTOR 0 (|spadConstant| % 7) (|spadConstant| % 17)))
           %))) 
+
+(DEFUN |PolynomialNumberTheoryFunctions| ()
+  (SPROG NIL
+         (PROG (#1=#:G90)
+           (RETURN
+            (COND
+             ((LETT #1#
+                    (HGET |$ConstructorCache|
+                          '|PolynomialNumberTheoryFunctions|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache|
+                             '|PolynomialNumberTheoryFunctions|
+                             (LIST
+                              (CONS NIL
+                                    (CONS 1
+                                          (|PolynomialNumberTheoryFunctions;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#)
+                  (HREM |$ConstructorCache|
+                        '|PolynomialNumberTheoryFunctions|)))))))))) 
 
 (MAKEPROP '|PolynomialNumberTheoryFunctions| '|infovec|
           (LIST

@@ -16,7 +16,7 @@
 
 (SDEFUN |SEQU;apply;%PR;5| ((|mm| (%)) (|pi| (|Partition|)) (% (R)))
         (SPROG
-         ((#1=#:G27 NIL) (|k| NIL) (#2=#:G26 NIL) (|pil| (|List| (|Integer|))))
+         ((#1=#:G19 NIL) (|k| NIL) (#2=#:G18 NIL) (|pil| (|List| (|Integer|))))
          (SEQ (LETT |pil| (SPADCALL |pi| (QREFELT % 18)))
               (EXIT
                (SPADCALL (ELT % 19)
@@ -108,24 +108,9 @@
 
 (DECLAIM (NOTINLINE |Sequence;|)) 
 
-(DEFUN |Sequence| (#1=#:G62)
-  (SPROG NIL
-         (PROG (#2=#:G63)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|Sequence|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Sequence;| #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Sequence|)))))))))) 
-
 (DEFUN |Sequence;| (|#1|)
   (SPROG
-   ((#1=#:G59 NIL) (#2=#:G61 NIL) (#3=#:G60 NIL) (|pv$| NIL) (#4=#:G58 NIL)
+   ((#1=#:G47 NIL) (#2=#:G49 NIL) (#3=#:G48 NIL) (|pv$| NIL) (#4=#:G46 NIL)
     (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -180,6 +165,21 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 7 (|Stream| |#1|))
     %))) 
+
+(DEFUN |Sequence| (#1=#:G50)
+  (SPROG NIL
+         (PROG (#2=#:G51)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|Sequence|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Sequence;| #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Sequence|)))))))))) 
 
 (MAKEPROP '|Sequence| '|infovec|
           (LIST

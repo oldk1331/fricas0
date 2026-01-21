@@ -1,6 +1,6 @@
 
 (SDEFUN |LWORD;lyndon?;FmB;1| ((|w| (|FreeMonoid| |VarSet|)) (% (|Boolean|)))
-        (SPROG ((|f| (|FreeMonoid| |VarSet|)) (#1=#:G20 NIL))
+        (SPROG ((|f| (|FreeMonoid| |VarSet|)) (#1=#:G19 NIL))
                (SEQ
                 (EXIT
                  (COND ((SPADCALL |w| (|spadConstant| % 9) (QREFELT % 11)) NIL)
@@ -16,7 +16,7 @@
                                    (EXIT
                                     (COND
                                      ((NULL (SPADCALL |w| |f| (QREFELT % 14)))
-                                      (PROGN (LETT #1# NIL) (GO #2=#:G19)))
+                                      (PROGN (LETT #1# NIL) (GO #2=#:G18)))
                                      ('T
                                       (LETT |f|
                                             (SPADCALL |f| (QREFELT % 12)))))))
@@ -53,7 +53,7 @@
 (SDEFUN |LWORD;factor1|
         ((|gauche| #1=(|List| %)) (|x| (%)) (|droite| #2=(|List| %))
          (% (|List| %)))
-        (SPROG ((#3=#:G59 NIL) (|g| #1#) (|d| #2#))
+        (SPROG ((#3=#:G40 NIL) (|g| #1#) (|d| #2#))
                (SEQ
                 (EXIT
                  (SEQ (LETT |g| |gauche|) (LETT |d| |droite|)
@@ -97,11 +97,11 @@
                       (EXIT
                        (PROGN
                         (LETT #3# (SPADCALL |x| |d| (QREFELT % 32)))
-                        (GO #4=#:G58)))))
+                        (GO #4=#:G39)))))
                 #4# (EXIT #3#)))) 
 
 (SDEFUN |LWORD;factor;FmL;6| ((|w| (|FreeMonoid| |VarSet|)) (% (|List| %)))
-        (SPROG ((|l| (|List| %)) (#1=#:G65 NIL) (|u| NIL) (#2=#:G64 NIL))
+        (SPROG ((|l| (|List| %)) (#1=#:G46 NIL) (|u| NIL) (#2=#:G45 NIL))
                (SEQ
                 (COND ((SPADCALL |w| (|spadConstant| % 9) (QREFELT % 11)) NIL)
                       ('T
@@ -149,11 +149,11 @@
         ((|vl| (|List| |VarSet|)) (|n| (|PositiveInteger|))
          (% (|OneDimensionalArray| (|List| %))))
         (SPROG
-         ((#1=#:G99 NIL) (|lbase1| (|List| %)) (#2=#:G107 NIL) (|b| NIL)
-          (#3=#:G106 NIL) (|a| NIL) (#4=#:G105 NIL) (|i| NIL) (#5=#:G104 NIL)
-          (#6=#:G103 NIL) (#7=#:G102 NIL) (|ll| NIL) (#8=#:G101 NIL) (|w| NIL)
-          (#9=#:G100 NIL) (|base| (|OneDimensionalArray| (|List| %)))
-          (#10=#:G72 NIL))
+         ((#1=#:G77 NIL) (|lbase1| (|List| %)) (#2=#:G85 NIL) (|b| NIL)
+          (#3=#:G84 NIL) (|a| NIL) (#4=#:G83 NIL) (|i| NIL) (#5=#:G82 NIL)
+          (#6=#:G81 NIL) (#7=#:G80 NIL) (|ll| NIL) (#8=#:G79 NIL) (|w| NIL)
+          (#9=#:G78 NIL) (|base| (|OneDimensionalArray| (|List| %)))
+          (#10=#:G52 NIL))
          (SEQ
           (EXIT
            (COND ((NULL |vl|) (|error| "empty list"))
@@ -291,14 +291,14 @@
                                                   (QREFELT % 54))
                                         (QREFELT % 49))))
                         (LETT |ll| (|inc_SI| |ll|)) (GO G190) G191 (EXIT NIL))
-                   (EXIT (PROGN (LETT #1# |base|) (GO #11=#:G98)))))))
+                   (EXIT (PROGN (LETT #1# |base|) (GO #11=#:G76)))))))
           #11# (EXIT #1#)))) 
 
 (SDEFUN |LWORD;LyndonWordsList;LPiL;11|
         ((|vl| (|List| |VarSet|)) (|n| (|PositiveInteger|)) (% (|List| %)))
         (SPROG
-         ((#1=#:G109 NIL) (#2=#:G108 #3=(|List| %)) (#4=#:G110 #3#)
-          (#5=#:G113 NIL) (|i| NIL) (|v| (|OneDimensionalArray| (|List| %))))
+         ((#1=#:G87 NIL) (#2=#:G86 #3=(|List| %)) (#4=#:G88 #3#) (#5=#:G91 NIL)
+          (|i| NIL) (|v| (|OneDimensionalArray| (|List| %))))
          (SEQ (LETT |v| (SPADCALL |vl| |n| (QREFELT % 56)))
               (EXIT
                (PROGN
@@ -317,22 +317,6 @@
 
 (DECLAIM (NOTINLINE |LyndonWord;|)) 
 
-(DEFUN |LyndonWord| (#1=#:G117)
-  (SPROG NIL
-         (PROG (#2=#:G118)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|LyndonWord|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|LyndonWord;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|LyndonWord|)))))))))) 
-
 (DEFUN |LyndonWord;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -347,6 +331,22 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 7 (|FreeMagma| |#1|))
           %))) 
+
+(DEFUN |LyndonWord| (#1=#:G95)
+  (SPROG NIL
+         (PROG (#2=#:G96)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|LyndonWord|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|LyndonWord;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|LyndonWord|)))))))))) 
 
 (MAKEPROP '|LyndonWord| '|infovec|
           (LIST

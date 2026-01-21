@@ -1,7 +1,7 @@
 
 (SDEFUN |APPLYORE;apply;PM2M;1|
         ((|p| (P)) (|f| (|Mapping| M M)) (|m| (M)) (% (M)))
-        (SPROG ((|mn| (M)) (|w| (M)) (#1=#:G14 NIL) (|i| NIL))
+        (SPROG ((|mn| (M)) (|w| (M)) (#1=#:G6 NIL) (|i| NIL))
                (SEQ (LETT |w| (|spadConstant| % 9)) (LETT |mn| |m|)
                     (SEQ (LETT |i| 0) (LETT #1# (SPADCALL |p| (QREFELT % 11)))
                          G190 (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -17,27 +17,6 @@
                     (EXIT |w|)))) 
 
 (DECLAIM (NOTINLINE |ApplyUnivariateSkewPolynomial;|)) 
-
-(DEFUN |ApplyUnivariateSkewPolynomial| (&REST #1=#:G15)
-  (SPROG NIL
-         (PROG (#2=#:G16)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ApplyUnivariateSkewPolynomial|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |ApplyUnivariateSkewPolynomial;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|ApplyUnivariateSkewPolynomial|)))))))))) 
 
 (DEFUN |ApplyUnivariateSkewPolynomial;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
@@ -57,6 +36,27 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |ApplyUnivariateSkewPolynomial| (&REST #1=#:G7)
+  (SPROG NIL
+         (PROG (#2=#:G8)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ApplyUnivariateSkewPolynomial|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |ApplyUnivariateSkewPolynomial;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|ApplyUnivariateSkewPolynomial|)))))))))) 
 
 (MAKEPROP '|ApplyUnivariateSkewPolynomial| '|infovec|
           (LIST

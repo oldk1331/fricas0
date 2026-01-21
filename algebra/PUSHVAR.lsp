@@ -1,8 +1,8 @@
 
 (SDEFUN |PUSHVAR;pushdown;PPRLPPR;1| ((|g| (PPR)) (|lv| (|List| OV)) (% (PPR)))
         (SPROG
-         ((|vals| (|List| (|Polynomial| R))) (#1=#:G21 NIL) (|x| NIL)
-          (#2=#:G20 NIL))
+         ((|vals| (|List| (|Polynomial| R))) (#1=#:G9 NIL) (|x| NIL)
+          (#2=#:G8 NIL))
          (SEQ
           (LETT |vals|
                 (PROGN
@@ -25,7 +25,7 @@
 
 (SDEFUN |PUSHVAR;map;M2PPR;2|
         ((|f| (|Mapping| PPR (|Polynomial| R))) (|p| (PPR)) (% (PPR)))
-        (SPROG ((|v| (OV)) (#1=#:G23 NIL))
+        (SPROG ((|v| (OV)) (#1=#:G11 NIL))
                (SEQ
                 (COND
                  ((SPADCALL |p| (QREFELT % 23))
@@ -55,7 +55,7 @@
         ((|c| (|Polynomial| R)) (|lv| (|List| OV)) (% (PPR)))
         (SPROG
          ((|uc| (|SparseUnivariatePolynomial| (|Polynomial| R))) (|ppr| (PPR))
-          (|v2| (|Union| OV "failed")) (|v| (|Symbol|)) (#1=#:G42 NIL))
+          (|v2| (|Union| OV "failed")) (|v| (|Symbol|)) (#1=#:G29 NIL))
          (SEQ
           (COND ((SPADCALL |c| (QREFELT % 35)) (SPADCALL |c| (QREFELT % 36)))
                 (#2='T
@@ -132,24 +132,6 @@
 
 (DECLAIM (NOTINLINE |PushVariables;|)) 
 
-(DEFUN |PushVariables| (&REST #1=#:G63)
-  (SPROG NIL
-         (PROG (#2=#:G64)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PushVariables|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |PushVariables;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|PushVariables|)))))))))) 
-
 (DEFUN |PushVariables;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -172,6 +154,24 @@
     (QSETREFV % 9 |#4|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |PushVariables| (&REST #1=#:G49)
+  (SPROG NIL
+         (PROG (#2=#:G50)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PushVariables|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |PushVariables;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|PushVariables|)))))))))) 
 
 (MAKEPROP '|PushVariables| '|infovec|
           (LIST

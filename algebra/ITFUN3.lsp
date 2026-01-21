@@ -16,25 +16,6 @@
 
 (DECLAIM (NOTINLINE |InfiniteTupleFunctions3;|)) 
 
-(DEFUN |InfiniteTupleFunctions3| (&REST #1=#:G10)
-  (SPROG NIL
-         (PROG (#2=#:G11)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|InfiniteTupleFunctions3|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |InfiniteTupleFunctions3;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|InfiniteTupleFunctions3|)))))))))) 
-
 (DEFUN |InfiniteTupleFunctions3;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -53,6 +34,25 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |InfiniteTupleFunctions3| (&REST #1=#:G9)
+  (SPROG NIL
+         (PROG (#2=#:G10)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|InfiniteTupleFunctions3|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |InfiniteTupleFunctions3;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|InfiniteTupleFunctions3|)))))))))) 
 
 (MAKEPROP '|InfiniteTupleFunctions3| '|infovec|
           (LIST

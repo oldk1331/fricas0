@@ -1,7 +1,7 @@
 
 (SDEFUN |PSQFR;pPolRoot| ((|f| (P)) (% (P)))
         (SPROG
-         ((|uf| (|SparseUnivariatePolynomial| P)) (#1=#:G19 NIL)
+         ((|uf| (|SparseUnivariatePolynomial| P)) (#1=#:G9 NIL)
           (|mv| (|VarSet|)) (|lvar| (|List| |VarSet|)))
          (SEQ (LETT |lvar| (SPADCALL |f| (QREFELT % 14)))
               (EXIT
@@ -48,7 +48,7 @@
 
 (SDEFUN |PSQFR;pthPower| ((|f| (P)) (% (|Factored| P)))
         (SPROG
-         ((#1=#:G59 NIL) (|u| NIL) (#2=#:G58 NIL) (#3=#:G57 NIL) (#4=#:G56 NIL)
+         ((#1=#:G39 NIL) (|u| NIL) (#2=#:G38 NIL) (#3=#:G37 NIL) (#4=#:G36 NIL)
           (|psqfr| (|Factored| P)) (|isSq| (|Boolean|)) (|proot| (P))
           (|g| (|Union| P "failed")))
          (SEQ (LETT |proot| (|spadConstant| % 24)) (LETT |isSq| NIL)
@@ -117,10 +117,10 @@
                          (|:| |factor| P)
                          (|:| |exponent| (|NonNegativeInteger|)))))
           (|sqp| #2=(|Factored| P)) (|cont| (P)) (|cont1| (P))
-          (|flistfin1| (|List| #1#)) (#3=#:G91 NIL) (|uu| NIL) (#4=#:G90 NIL)
-          (|listfin1| #2#) (|uexp| (|NonNegativeInteger|)) (#5=#:G89 NIL)
+          (|flistfin1| (|List| #1#)) (#3=#:G63 NIL) (|uu| NIL) (#4=#:G62 NIL)
+          (|listfin1| #2#) (|uexp| (|NonNegativeInteger|)) (#5=#:G61 NIL)
           (|u| NIL) (|squf| (|Factored| (|SparseUnivariatePolynomial| P)))
-          (|uf| (|SparseUnivariatePolynomial| P)) (#6=#:G61 NIL)
+          (|uf| (|SparseUnivariatePolynomial| P)) (#6=#:G41 NIL)
           (|mv| (|VarSet|)))
          (SEQ
           (COND ((NULL |lvar|) (|PSQFR;pthPower| |f| %))
@@ -265,9 +265,9 @@
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| P)
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (#1=#:G113 NIL) (|u| NIL) (#2=#:G112 NIL)
+          (#1=#:G85 NIL) (|u| NIL) (#2=#:G84 NIL)
           (|squp| (|Factored| (|SparseUnivariatePolynomial| P)))
-          (|up| (|SparseUnivariatePolynomial| P)) (#3=#:G97 NIL) (|cont| (P))
+          (|up| (|SparseUnivariatePolynomial| P)) (#3=#:G69 NIL) (|cont| (P))
           (|mv| (|Union| |VarSet| "failed")))
          (SEQ (LETT |mv| (SPADCALL |p| (QREFELT % 55)))
               (EXIT
@@ -337,25 +337,6 @@
 
 (DECLAIM (NOTINLINE |PolynomialSquareFree;|)) 
 
-(DEFUN |PolynomialSquareFree| (&REST #1=#:G114)
-  (SPROG NIL
-         (PROG (#2=#:G115)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PolynomialSquareFree|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |PolynomialSquareFree;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|PolynomialSquareFree|)))))))))) 
-
 (DEFUN |PolynomialSquareFree;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -379,6 +360,25 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 12 (SPADCALL (QREFELT % 11)))
     %))) 
+
+(DEFUN |PolynomialSquareFree| (&REST #1=#:G86)
+  (SPROG NIL
+         (PROG (#2=#:G87)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PolynomialSquareFree|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |PolynomialSquareFree;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|PolynomialSquareFree|)))))))))) 
 
 (MAKEPROP '|PolynomialSquareFree| '|infovec|
           (LIST

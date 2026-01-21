@@ -11,26 +11,10 @@
 
 (DECLAIM (NOTINLINE |Library;|)) 
 
-(DEFUN |Library| ()
-  (SPROG NIL
-         (PROG (#1=#:G77)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|Library|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|Library|
-                             (LIST (CONS NIL (CONS 1 (|Library;|))))))
-                    (LETT #1# T))
-                (COND ((NOT #1#) (HREM |$ConstructorCache| '|Library|)))))))))) 
-
 (DEFUN |Library;| ()
   (SPROG
-   ((|dv$| NIL) (% NIL) (#1=#:G73 NIL) (#2=#:G72 NIL) (|pv$| NIL)
-    (#3=#:G74 NIL) (#4=#:G75 NIL))
+   ((|dv$| NIL) (% NIL) (#1=#:G57 NIL) (#2=#:G56 NIL) (|pv$| NIL)
+    (#3=#:G58 NIL) (#4=#:G59 NIL))
    (PROGN
     (LETT |dv$| '(|Library|))
     (LETT % (GETREFV 41))
@@ -127,6 +111,22 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 6 (|KeyedAccessFile| (|Any|)))
     %))) 
+
+(DEFUN |Library| ()
+  (SPROG NIL
+         (PROG (#1=#:G61)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|Library|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|Library|
+                             (LIST (CONS NIL (CONS 1 (|Library;|))))))
+                    (LETT #1# T))
+                (COND ((NOT #1#) (HREM |$ConstructorCache| '|Library|)))))))))) 
 
 (MAKEPROP '|Library| '|infovec|
           (LIST

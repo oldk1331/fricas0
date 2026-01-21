@@ -24,7 +24,7 @@
            (|Record| (|:| |left| (|Fraction| (|Integer|)))
                      (|:| |right| (|Fraction| (|Integer|))))))
          (% (|List| (|Fraction| (|Integer|)))))
-        (SPROG ((#1=#:G28 NIL) (|x| NIL) (#2=#:G27 NIL))
+        (SPROG ((#1=#:G16 NIL) (|x| NIL) (#2=#:G15 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -40,7 +40,7 @@
 
 (SDEFUN |REAL0;makeSqfr| ((F (|Pol|)) (% (|Pol|)))
         (SPROG
-         ((#1=#:G40 NIL) (#2=#:G39 (|Pol|)) (#3=#:G41 (|Pol|)) (#4=#:G44 NIL)
+         ((#1=#:G19 NIL) (#2=#:G18 (|Pol|)) (#3=#:G20 (|Pol|)) (#4=#:G23 NIL)
           (|s| NIL) (|sqfr| (|Factored| |Pol|)))
          (SEQ (LETT |sqfr| (SPADCALL F (QREFELT % 21)))
               (EXIT
@@ -77,7 +77,7 @@
           (|List|
            (|Record| (|:| |left| (|Fraction| (|Integer|)))
                      (|:| |right| (|Fraction| (|Integer|)))))))
-        (SPROG ((#1=#:G51 NIL) (|int| NIL) (#2=#:G50 NIL))
+        (SPROG ((#1=#:G30 NIL) (|int| NIL) (#2=#:G29 NIL))
                (SEQ (LETT F (|REAL0;makeSqfr| F %))
                     (EXIT
                      (PROGN
@@ -105,13 +105,13 @@
            (|Record| (|:| |left| (|Fraction| (|Integer|)))
                      (|:| |right| (|Fraction| (|Integer|)))))))
         (SPROG
-         ((#1=#:G54 NIL)
+         ((#1=#:G33 NIL)
           (|rint|
            (|Union|
             (|Record| (|:| |left| (|Fraction| (|Integer|)))
                       (|:| |right| (|Fraction| (|Integer|))))
             #2="failed"))
-          (#3=#:G60 NIL) (|int| NIL) (#4=#:G59 NIL))
+          (#3=#:G39 NIL) (|int| NIL) (#4=#:G38 NIL))
          (SEQ (LETT F (|REAL0;makeSqfr| F %))
               (EXIT
                (PROGN
@@ -163,7 +163,7 @@
           (|List|
            (|Record| (|:| |left| (|Fraction| (|Integer|)))
                      (|:| |right| (|Fraction| (|Integer|)))))))
-        (SPROG ((#1=#:G66 NIL) (|int| NIL) (#2=#:G65 NIL))
+        (SPROG ((#1=#:G45 NIL) (|int| NIL) (#2=#:G44 NIL))
                (SEQ (LETT F (|REAL0;makeSqfr| F %))
                     (EXIT
                      (PROGN
@@ -196,7 +196,7 @@
            (|List|
             (|Record| (|:| |left| (|Fraction| (|Integer|)))
                       (|:| |right| (|Fraction| (|Integer|))))))
-          (#1=#:G80 NIL) (|int| NIL) (#2=#:G79 NIL)
+          (#1=#:G58 NIL) (|int| NIL) (#2=#:G57 NIL)
           (|tempF| (|Union| |Pol| "failed"))
           (L
            (|List|
@@ -267,7 +267,7 @@
            (|List|
             (|Record| (|:| |left| (|Fraction| (|Integer|)))
                       (|:| |right| (|Fraction| (|Integer|))))))
-          (#1=#:G86 NIL) (|int| NIL) (#2=#:G85 NIL) (|b| (|Integer|)))
+          (#1=#:G64 NIL) (|int| NIL) (#2=#:G63 NIL) (|b| (|Integer|)))
          (SEQ (LETT |b| (|REAL0;rootBound| F %))
               (LETT F (|REAL0;transMult| |b| F %)) (LETT L (|REAL0;Zero1| F %))
               (EXIT
@@ -301,12 +301,12 @@
            (|List|
             (|Record| (|:| |left| (|Fraction| (|Integer|)))
                       (|:| |right| (|Fraction| (|Integer|))))))
-          (#1=#:G103 NIL) (|int| NIL) (#2=#:G102 NIL)
+          (#1=#:G80 NIL) (|int| NIL) (#2=#:G79 NIL)
           (J
            (|List|
             (|Record| (|:| |left| (|Fraction| (|Integer|)))
                       (|:| |right| (|Fraction| (|Integer|))))))
-          (#3=#:G101 NIL) (#4=#:G100 NIL) (G (|Pol|))
+          (#3=#:G78 NIL) (#4=#:G77 NIL) (G (|Pol|))
           (|tempG| #5=(|Union| |Pol| "failed")) (Q (|Pol|)) (H (|Pol|))
           (|tempH| #5#)
           (L
@@ -463,7 +463,7 @@
 (SDEFUN |REAL0;transMultInv| ((|c| (|Integer|)) (F (|Pol|)) (% (|Pol|)))
         (SPROG
          ((|d| #1=(|NonNegativeInteger|)) (G (|Pol|)) (|cc| (|Integer|))
-          (#2=#:G120 NIL) (|n| #1#))
+          (#2=#:G97 NIL) (|n| #1#))
          (SEQ (LETT |d| (SPADCALL F (QREFELT % 39))) (LETT |cc| 1)
               (LETT G
                     (SPADCALL (SPADCALL F (QREFELT % 48)) |d| (QREFELT % 42)))
@@ -494,8 +494,8 @@
 
 (SDEFUN |REAL0;transAdd1| ((F (|Pol|)) (% (|Pol|)))
         (SPROG
-         ((|ans| (|Pol|)) (#1=#:G137 NIL) (|i| NIL) (#2=#:G136 NIL) (|j| NIL)
-          (#3=#:G135 NIL) (|v| (|Vector| (|Integer|)))
+         ((|ans| (|Pol|)) (#1=#:G112 NIL) (|i| NIL) (#2=#:G111 NIL) (|j| NIL)
+          (#3=#:G110 NIL) (|v| (|Vector| (|Integer|)))
           (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (SPADCALL F (QREFELT % 39)))
               (LETT |v| (SPADCALL F (+ |n| 1) (QREFELT % 53)))
@@ -561,7 +561,7 @@
                     (EXIT G)))) 
 
 (SDEFUN |REAL0;invert| ((F (|Pol|)) (% (|Pol|)))
-        (SPROG ((G (|Pol|)) (#1=#:G146 NIL) (|n| (|NonNegativeInteger|)))
+        (SPROG ((G (|Pol|)) (#1=#:G121 NIL) (|n| (|NonNegativeInteger|)))
                (SEQ (LETT G (|spadConstant| % 35))
                     (LETT |n| (SPADCALL F (QREFELT % 39)))
                     (SEQ G190
@@ -680,7 +680,7 @@
          ((|xfl| (|Boolean|)) (|ad| #1=(|Integer|)) (|an| #2=(|Integer|))
           (|b| (|Fraction| (|Integer|))) (|a| (|Fraction| (|Integer|)))
           (|bd| #1#) (|bn| #2#) (|v| #3=(|Integer|)) (|midd| #1#) (|midn| #2#)
-          (|mid| (|Fraction| (|Integer|))) (|u| #3#) (#4=#:G168 NIL))
+          (|mid| (|Fraction| (|Integer|))) (|u| #3#) (#4=#:G143 NIL))
          (SEQ (LETT |a| (QCAR |int|)) (LETT |b| (QCDR |int|))
               (EXIT
                (COND ((SPADCALL |a| |b| (QREFELT % 58)) (CONS |a| |b|))
@@ -819,23 +819,6 @@
 
 (DECLAIM (NOTINLINE |RealZeroPackage;|)) 
 
-(DEFUN |RealZeroPackage| (#1=#:G184)
-  (SPROG NIL
-         (PROG (#2=#:G185)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|RealZeroPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|RealZeroPackage;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|RealZeroPackage|)))))))))) 
-
 (DEFUN |RealZeroPackage;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -850,6 +833,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |RealZeroPackage| (#1=#:G159)
+  (SPROG NIL
+         (PROG (#2=#:G160)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|RealZeroPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|RealZeroPackage;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|RealZeroPackage|)))))))))) 
 
 (MAKEPROP '|RealZeroPackage| '|infovec|
           (LIST

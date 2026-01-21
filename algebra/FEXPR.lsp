@@ -11,9 +11,9 @@
 (SDEFUN |FEXPR;fixUpSymbols|
         ((|u| (|Expression| R)) (% (|Union| (|Expression| R) "failed")))
         (SPROG
-         ((#1=#:G82 NIL) (|i| NIL) (#2=#:G81 NIL) (|sym| (|Symbol|))
-          (|syms| (|List| (|Symbol|))) (#3=#:G80 NIL) (|s| NIL) (#4=#:G79 NIL)
-          (#5=#:G76 NIL) (#6=#:G77 NIL) (#7=#:G78 NIL))
+         ((#1=#:G65 NIL) (|i| NIL) (#2=#:G64 NIL) (|sym| (|Symbol|))
+          (|syms| (|List| (|Symbol|))) (#3=#:G63 NIL) (|s| NIL) (#4=#:G62 NIL)
+          (#5=#:G59 NIL) (#6=#:G60 NIL) (#7=#:G61 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |syms| (SPADCALL |u| (QREFELT % 18)))
@@ -54,8 +54,8 @@
                                   (LETT #5#
                                         (PROGN
                                          (LETT #6# (CONS 1 "failed"))
-                                         (GO #8=#:G75)))
-                                  (GO #9=#:G47))))))
+                                         (GO #8=#:G58)))
+                                  (GO #9=#:G30))))))
                              (LETT #7# (CDR #7#)) (GO G190) G191 (EXIT NIL)))
                        #9# (EXIT #5#))
                       (COND
@@ -115,7 +115,7 @@
 (SDEFUN |FEXPR;extraSymbols?| ((|u| (|Expression| R)) (% (|Boolean|)))
         (SPROG
          ((|extras| (|List| (|Symbol|))) (|syms| (|List| (|Symbol|)))
-          (#1=#:G88 NIL) (|v| NIL) (#2=#:G87 NIL))
+          (#1=#:G71 NIL) (|v| NIL) (#2=#:G70 NIL))
          (SEQ
           (LETT |syms|
                 (PROGN
@@ -138,10 +138,10 @@
 
 (SDEFUN |FEXPR;checkSymbols| ((|u| (|Expression| R)) (% (|Expression| R)))
         (SPROG
-         ((#1=#:G106 NIL) (|v| NIL) (#2=#:G105 NIL)
+         ((#1=#:G89 NIL) (|v| NIL) (#2=#:G88 NIL)
           (|m| (|Union| (|Expression| R) "failed"))
           (|extras| (|List| (|Symbol|))) (|syms| (|List| (|Symbol|)))
-          (#3=#:G104 NIL) (#4=#:G103 NIL))
+          (#3=#:G87 NIL) (#4=#:G86 NIL))
          (SEQ
           (LETT |syms|
                 (PROGN
@@ -212,7 +212,7 @@
         (SPROG
          ((|extras| (|List| (|Symbol|)))
           (|fortranFunctions| (|List| (|Symbol|))) (|ops| (|List| (|Symbol|)))
-          (#1=#:G117 NIL) (|v| NIL) (#2=#:G116 NIL))
+          (#1=#:G100 NIL) (|v| NIL) (#2=#:G99 NIL))
          (SEQ
           (LETT |ops|
                 (PROGN
@@ -236,10 +236,10 @@
 
 (SDEFUN |FEXPR;checkOperators| ((|u| (|Expression| R)) (% (|Void|)))
         (SPROG
-         ((#1=#:G138 NIL) (|v| NIL) (#2=#:G137 NIL)
+         ((#1=#:G121 NIL) (|v| NIL) (#2=#:G120 NIL)
           (|extras| (|List| (|Symbol|)))
           (|fortranFunctions| (|List| (|Symbol|))) (|ops| (|List| (|Symbol|)))
-          (#3=#:G136 NIL) (#4=#:G135 NIL))
+          (#3=#:G119 NIL) (#4=#:G118 NIL))
          (SEQ
           (LETT |ops|
                 (PROGN
@@ -355,7 +355,7 @@
 
 (SDEFUN |FEXPR;retractIfCan;EU;25|
         ((|u| (|Expression| R)) (% (|Union| % "failed")))
-        (SPROG ((#1=#:G193 NIL) (|m| (|Union| (|Expression| R) "failed")))
+        (SPROG ((#1=#:G168 NIL) (|m| (|Union| (|Expression| R) "failed")))
                (SEQ
                 (EXIT
                  (SEQ
@@ -367,7 +367,7 @@
                            ((QEQCAR |m| 1)
                             (PROGN
                              (LETT #1# (CONS 1 "failed"))
-                             (GO #2=#:G192)))
+                             (GO #2=#:G167)))
                            (#3='T (LETT |u| (QCDR |m|))))))))
                   (EXIT
                    (COND ((|FEXPR;extraOperators?| |u| %) (CONS 1 "failed"))
@@ -407,25 +407,6 @@
                       ('T (QCDR |res|))))))) 
 
 (DECLAIM (NOTINLINE |FortranExpression;|)) 
-
-(DEFUN |FortranExpression| (&REST #1=#:G221)
-  (SPROG NIL
-         (PROG (#2=#:G222)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(NIL NIL T))
-                     (HGET |$ConstructorCache| '|FortranExpression|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |FortranExpression;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|FortranExpression|)))))))))) 
 
 (DEFUN |FortranExpression;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
@@ -495,6 +476,25 @@
                        (CONS (|dispatchFunction| |FEXPR;retract;E%;21|) %)))))
           %))) 
 
+(DEFUN |FortranExpression| (&REST #1=#:G194)
+  (SPROG NIL
+         (PROG (#2=#:G195)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(NIL NIL T))
+                     (HGET |$ConstructorCache| '|FortranExpression|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |FortranExpression;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|FortranExpression|)))))))))) 
+
 (MAKEPROP '|FortranExpression| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL (|Expression| 8) (|local| |#1|)
@@ -549,13 +549,13 @@
            (CONS
             (|makeByteWordVec2| 1
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
+                                  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
             (CONS
              '#(|Algebra&| |PartialDifferentialRing&| NIL |Rng&| NIL
                 |NonAssociativeAlgebra&| NIL |Module&| NIL
                 |NonAssociativeRing&| NIL |NonAssociativeRng&| NIL NIL NIL NIL
-                |AbelianGroup&| NIL NIL NIL |NonAssociativeSemiRng&|
-                |AbelianMonoid&| |MagmaWithUnit&| NIL |ExpressionSpace&|
+                |AbelianGroup&| NIL NIL NIL NIL |NonAssociativeSemiRng&|
+                |AbelianMonoid&| |MagmaWithUnit&| NIL |ExpressionSpace2&|
                 |AbelianSemiGroup&| |Magma&| NIL |RetractableTo&| |Evalable&|
                 |SetCategory&| |RetractableTo&| NIL NIL |InnerEvalable&|
                 |InnerEvalable&| |BasicType&| NIL NIL)
@@ -566,12 +566,13 @@
                  (|BiModule| 8 8) (|NonAssociativeRng|) (|LeftModule| $$)
                  (|RightModule| $$) (|LeftModule| 8) (|RightModule| 8)
                  (|AbelianGroup|) (|CancellationAbelianMonoid|)
-                 (|NonAssociativeSemiRing|) (|Monoid|)
+                 (|NonAssociativeSemiRing|) (|Monoid|) (|ExpressionSpace|)
                  (|NonAssociativeSemiRng|) (|AbelianMonoid|) (|MagmaWithUnit|)
-                 (|SemiGroup|) (|ExpressionSpace|) (|AbelianSemiGroup|)
-                 (|Magma|) (|Comparable|) (|RetractableTo| (|Kernel| $$))
-                 (|Evalable| $$) (|SetCategory|) (|RetractableTo| 8)
-                 (|CoercibleTo| 32) (|CoercibleFrom| (|Kernel| $$))
+                 (|SemiGroup|) (|ExpressionSpace2| (|Kernel| $$))
+                 (|AbelianSemiGroup|) (|Magma|) (|Comparable|)
+                 (|RetractableTo| (|Kernel| $$)) (|Evalable| $$)
+                 (|SetCategory|) (|RetractableTo| 8) (|CoercibleTo| 32)
+                 (|CoercibleFrom| (|Kernel| $$))
                  (|InnerEvalable| (|Kernel| $$) $$) (|InnerEvalable| $$ $$)
                  (|BasicType|) (|unitsKnown|) (|CoercibleFrom| 8))
               (|makeByteWordVec2| 98

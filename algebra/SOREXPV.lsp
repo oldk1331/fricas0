@@ -1,28 +1,9 @@
 
 (DECLAIM (NOTINLINE |SortedExponentVector;|)) 
 
-(DEFUN |SortedExponentVector| ()
-  (SPROG NIL
-         (PROG (#1=#:G2903)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|SortedExponentVector|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|SortedExponentVector|
-                             (LIST
-                              (CONS NIL (CONS 1 (|SortedExponentVector;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#)
-                  (HREM |$ConstructorCache| '|SortedExponentVector|)))))))))) 
-
 (DEFUN |SortedExponentVector;| ()
   (SPROG
-   ((|dv$| NIL) (% NIL) (#1=#:G2901 NIL) (#2=#:G2900 NIL) (#3=#:G2899 NIL)
+   ((|dv$| NIL) (% NIL) (#1=#:G2796 NIL) (#2=#:G2795 NIL) (#3=#:G2794 NIL)
     (|pv$| NIL))
    (PROGN
     (LETT |dv$| '(|SortedExponentVector|))
@@ -125,6 +106,25 @@
      (|augmentPredVector| % 4194304))
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |SortedExponentVector| ()
+  (SPROG NIL
+         (PROG (#1=#:G2798)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|SortedExponentVector|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|SortedExponentVector|
+                             (LIST
+                              (CONS NIL (CONS 1 (|SortedExponentVector;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#)
+                  (HREM |$ConstructorCache| '|SortedExponentVector|)))))))))) 
 
 (MAKEPROP '|SortedExponentVector| '|infovec|
           (LIST

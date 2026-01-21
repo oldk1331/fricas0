@@ -93,22 +93,6 @@
 
 (DECLAIM (NOTINLINE |Color;|)) 
 
-(DEFUN |Color| ()
-  (SPROG NIL
-         (PROG (#1=#:G49)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|Color|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|Color|
-                             (LIST (CONS NIL (CONS 1 (|Color;|))))))
-                    (LETT #1# T))
-                (COND ((NOT #1#) (HREM |$ConstructorCache| '|Color|)))))))))) 
-
 (DEFUN |Color;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -123,6 +107,22 @@
                     (|Record| (|:| |hue| (|Integer|))
                               (|:| |weight| (|DoubleFloat|))))
           %))) 
+
+(DEFUN |Color| ()
+  (SPROG NIL
+         (PROG (#1=#:G30)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|Color|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|Color|
+                             (LIST (CONS NIL (CONS 1 (|Color;|))))))
+                    (LETT #1# T))
+                (COND ((NOT #1#) (HREM |$ConstructorCache| '|Color|)))))))))) 
 
 (MAKEPROP '|Color| '|infovec|
           (LIST

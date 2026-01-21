@@ -58,7 +58,7 @@
          (|l| (|PatternMatchResult| (|Integer|) I))
          (% (|PatternMatchResult| (|Integer|) I)))
         (SPROG
-         ((|r| (|Union| (|Integer|) "failed")) (#1=#:G72 NIL)
+         ((|r| (|Union| (|Integer|) "failed")) (#1=#:G59 NIL)
           (|v| (|Union| I "failed"))
           (|uvr|
            (|Record| (|:| |num| (|Pattern| (|Integer|)))
@@ -187,7 +187,7 @@
                                                                     % 30)
                                                                    %))
                                                             (GO
-                                                             #3=#:G64))))))))))
+                                                             #3=#:G51))))))))))
                                                    (LETT |r|
                                                          (SPADCALL (QCDR |uvr|)
                                                                    (QREFELT %
@@ -215,9 +215,24 @@
 
 (DECLAIM (NOTINLINE |PatternMatchIntegerNumberSystem;|)) 
 
-(DEFUN |PatternMatchIntegerNumberSystem| (#1=#:G73)
+(DEFUN |PatternMatchIntegerNumberSystem;| (|#1|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT |dv$| (LIST '|PatternMatchIntegerNumberSystem| DV$1))
+          (LETT % (GETREFV 49))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|PatternMatchIntegerNumberSystem|
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |PatternMatchIntegerNumberSystem| (#1=#:G60)
   (SPROG NIL
-         (PROG (#2=#:G74)
+         (PROG (#2=#:G61)
            (RETURN
             (COND
              ((LETT #2#
@@ -233,21 +248,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|PatternMatchIntegerNumberSystem|)))))))))) 
-
-(DEFUN |PatternMatchIntegerNumberSystem;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT |dv$| (LIST '|PatternMatchIntegerNumberSystem| DV$1))
-          (LETT % (GETREFV 49))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|PatternMatchIntegerNumberSystem|
-                      (LIST DV$1) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|PatternMatchIntegerNumberSystem| '|infovec|
           (LIST

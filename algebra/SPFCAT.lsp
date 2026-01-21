@@ -8,7 +8,7 @@
         (T (SETQ |SpecialFunctionCategory;AL| (|SpecialFunctionCategory;|))))) 
 
 (DEFUN |SpecialFunctionCategory;| ()
-  (SPROG ((#1=#:G1 NIL))
+  (SPROG ((#1=#:G0 NIL))
          (PROG1
              (LETT #1#
                    (|Join|
@@ -46,8 +46,14 @@
                        ((|jacobiDn| (% % %)) T) ((|jacobiZeta| (% % %)) T)
                        ((|jacobiTheta| (% % %)) T) ((|lerchPhi| (% % % %)) T)
                        ((|riemannZeta| (% %)) T) ((|charlierC| (% % % %)) T)
+                       ((|hahn_p| (% % % % % %)) T) ((|hahnQ| (% % % % % %)) T)
+                       ((|hahnR| (% % % % % %)) T) ((|hahnS| (% % % % % %)) T)
                        ((|hermiteH| (% % %)) T) ((|jacobiP| (% % % % %)) T)
+                       ((|krawtchoukK| (% % % % %)) T)
                        ((|laguerreL| (% % % %)) T) ((|meixnerM| (% % % % %)) T)
+                       ((|meixnerP| (% % % % %)) T)
+                       ((|racahR| (% % % % % % %)) T)
+                       ((|wilsonW| (% % % % % % %)) T)
                        ((|hypergeometricF| (% (|List| %) (|List| %) %))
                         (|has| % (|RetractableTo| (|Integer|))))
                        ((|meijerG|

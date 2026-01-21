@@ -48,23 +48,6 @@
 
 (DECLAIM (NOTINLINE |InfiniteCyclicGroup;|)) 
 
-(DEFUN |InfiniteCyclicGroup| (#1=#:G41)
-  (SPROG NIL
-         (PROG (#2=#:G42)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|InfiniteCyclicGroup|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|InfiniteCyclicGroup;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|InfiniteCyclicGroup|)))))))))) 
-
 (DEFUN |InfiniteCyclicGroup;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -80,6 +63,23 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 7 (|Integer|))
           %))) 
+
+(DEFUN |InfiniteCyclicGroup| (#1=#:G21)
+  (SPROG NIL
+         (PROG (#2=#:G22)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|InfiniteCyclicGroup|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|InfiniteCyclicGroup;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|InfiniteCyclicGroup|)))))))))) 
 
 (MAKEPROP '|InfiniteCyclicGroup| '|infovec|
           (LIST

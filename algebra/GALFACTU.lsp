@@ -6,7 +6,7 @@
         (SPADCALL |p| 1 (QREFELT % 14))) 
 
 (SDEFUN |GALFACTU;norm;UPPiF;3| ((|f| (UP)) (|p| (|PositiveInteger|)) (% (F)))
-        (SPROG ((|n| (F)) (#1=#:G20 NIL) (|c| NIL))
+        (SPROG ((|n| (F)) (#1=#:G10 NIL) (|c| NIL))
                (SEQ (LETT |n| (|spadConstant| % 16))
                     (SEQ (LETT |c| NIL)
                          (LETT #1# (SPADCALL |f| (QREFELT % 18))) G190
@@ -30,7 +30,7 @@
         (SPADCALL |f| 2 (QREFELT % 14))) 
 
 (SDEFUN |GALFACTU;infinityNorm;UPF;5| ((|f| (UP)) (% (F)))
-        (SPROG ((|n| (F)) (#1=#:G26 NIL) (|c| NIL))
+        (SPROG ((|n| (F)) (#1=#:G16 NIL) (|c| NIL))
                (SEQ (LETT |n| (|spadConstant| % 16))
                     (SEQ (LETT |c| NIL)
                          (LETT #1# (SPADCALL |f| (QREFELT % 18))) G190
@@ -123,7 +123,7 @@
 (SDEFUN |GALFACTU;rootBound;UPI;8| ((|p| (UP)) (% (|Integer|)))
         (SPROG
          ((|b4| (F)) (|b3| (F)) (|b2| (F)) (|cl| (F)) (|b1| (F)) (|c| (F))
-          (#1=#:G42 NIL) (#2=#:G48 NIL) (|i| NIL) (|lc| (F))
+          (#1=#:G26 NIL) (#2=#:G32 NIL) (|i| NIL) (|lc| (F))
           (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (SPADCALL |p| (QREFELT % 28)))
               (EXIT
@@ -232,8 +232,8 @@
 (SDEFUN |GALFACTU;bombieriNorm;UPPiF;10|
         ((|f| (UP)) (|p| (|PositiveInteger|)) (% (F)))
         (SPROG
-         ((|b| (F)) (#1=#:G75 NIL) (|dd| (|Integer|)) (#2=#:G58 NIL)
-          (#3=#:G81 NIL) (|i| NIL) (#4=#:G80 NIL) (|d| (|NonNegativeInteger|)))
+         ((|b| (F)) (#1=#:G59 NIL) (|dd| (|Integer|)) (#2=#:G42 NIL)
+          (#3=#:G65 NIL) (|i| NIL) (#4=#:G64 NIL) (|d| (|NonNegativeInteger|)))
          (SEQ
           (EXIT
            (SEQ (LETT |d| (SPADCALL |f| (QREFELT % 28)))
@@ -242,7 +242,7 @@
                        (SPADCALL (SPADCALL |f| 0 (QREFELT % 47))
                                  (QREFELT % 19))
                        (QREFELT % 20)))
-                (COND ((ZEROP |d|) (PROGN (LETT #4# |b|) (GO #5=#:G79)))
+                (COND ((ZEROP |d|) (PROGN (LETT #4# |b|) (GO #5=#:G63)))
                       ('T (LETT |b| (SPADCALL |b| |p| (QREFELT % 21)))))
                 (LETT |b|
                       (SPADCALL |b|
@@ -320,28 +320,6 @@
 
 (DECLAIM (NOTINLINE |GaloisGroupFactorizationUtilities;|)) 
 
-(DEFUN |GaloisGroupFactorizationUtilities| (&REST #1=#:G83)
-  (SPROG NIL
-         (PROG (#2=#:G84)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|GaloisGroupFactorizationUtilities|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |GaloisGroupFactorizationUtilities;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|GaloisGroupFactorizationUtilities|)))))))))) 
-
 (DEFUN |GaloisGroupFactorizationUtilities;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -361,6 +339,28 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |GaloisGroupFactorizationUtilities| (&REST #1=#:G67)
+  (SPROG NIL
+         (PROG (#2=#:G68)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|GaloisGroupFactorizationUtilities|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |GaloisGroupFactorizationUtilities;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|GaloisGroupFactorizationUtilities|)))))))))) 
 
 (MAKEPROP '|GaloisGroupFactorizationUtilities| '|infovec|
           (LIST

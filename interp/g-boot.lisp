@@ -76,6 +76,48 @@
          (#1# (CONS (CONS |pred1| |act1|) |restClauses|)))))
       (#1# (LIST (LIST ''T |clauses|)))))))
 
+; print_and_eval_defun(name, body) ==
+;    EVAL(body)
+;    print_defun(name, body)
+
+(DEFUN |print_and_eval_defun| (|name| |body|)
+  (PROG () (RETURN (PROGN (EVAL |body|) (|print_defun| |name| |body|)))))
+
+; compile_defun(name, body) ==
+;    EVAL(body)
+;    COMPILE(name)
+
+(DEFUN |compile_defun| (|name| |body|)
+  (PROG () (RETURN (PROGN (EVAL |body|) (COMPILE |name|)))))
+
+; comp_and_define(form) ==
+;    COMP0(form, FUNCTION print_and_eval_defun)
+
+(DEFUN |comp_and_define| (|form|)
+  (PROG () (RETURN (COMP0 |form| #'|print_and_eval_defun|))))
+
+; compile_file2(fn, dummy) == COMPILE_-FILE(fn)
+
+(DEFUN |compile_file2| (|fn| |dummy|) (PROG () (RETURN (COMPILE-FILE |fn|))))
+
+; comp_quietly(fn) ==
+;     comp_quietly_using_driver(FUNCTION COMP0, fn)
+
+(DEFUN |comp_quietly| (|fn|)
+  (PROG () (RETURN (|comp_quietly_using_driver| #'COMP0 |fn|))))
+
+; compile_file_quietly(fn) ==
+;     comp_quietly_using_driver(FUNCTION compile_file2, fn)
+
+(DEFUN |compile_file_quietly| (|fn|)
+  (PROG () (RETURN (|comp_quietly_using_driver| #'|compile_file2| |fn|))))
+
+; compile_quietly(fn) ==
+;     comp_quietly_using_driver(FUNCTION COMP370, fn)
+
+(DEFUN |compile_quietly| (|fn|)
+  (PROG () (RETURN (|comp_quietly_using_driver| #'COMP370 |fn|))))
+
 ; COMP_1(x) ==
 ;   [fname, lamex, :.] := x
 ;   $FUNNAME : local := fname
@@ -102,14 +144,15 @@
         (FORMAT T "~&~%;;;     ***       ~S REDEFINED~%" |fname|)))
       (CONS (LIST |fname| |lamex|) $CLOSEDFNS)))))
 
-; COMP_2(args) ==
+; COMP_2(args, comp370_apply) ==
 ;     [name, [type, argl, :bodyl], :junk] := args
 ;     junk => MOAN (FORMAT(nil, '"******pren error in (~S (~S ...) ...)",_
 ;                          name, type))
 ;     type is "SLAM" => BREAK()
 ;     type is 'domain_functor =>
 ;         compHash(name, argl, bodyl, "$ConstructorCache", 'domainEqualList)
-;     type is 'category_functor => compSPADSLAM(name, argl, bodyl)
+;     type is 'category_functor =>
+;         compSPADSLAM(name, argl, bodyl, comp370_apply)
 ;     if type = 'mutable_domain_functor then
 ;         type := 'LAMBDA
 ;     bodyl := [name, [type, argl, :bodyl]]
@@ -117,10 +160,10 @@
 ;     if NULL($COMPILE) then
 ;       SAY '"No Compilation"
 ;     else
-;       COMP370(bodyl)
+;       COMP370(bodyl, comp370_apply)
 ;     name
 
-(DEFUN COMP_2 (|args|)
+(DEFUN COMP_2 (|args| |comp370_apply|)
   (PROG (|name| |type| |argl| |bodyl| |junk|)
     (RETURN
      (PROGN
@@ -137,19 +180,20 @@
        ((EQ |type| '|domain_functor|)
         (|compHash| |name| |argl| |bodyl| '|$ConstructorCache|
          '|domainEqualList|))
-       ((EQ |type| '|category_functor|) (|compSPADSLAM| |name| |argl| |bodyl|))
+       ((EQ |type| '|category_functor|)
+        (|compSPADSLAM| |name| |argl| |bodyl| |comp370_apply|))
        (#2='T
         (PROGN
          (COND ((EQ |type| '|mutable_domain_functor|) (SETQ |type| 'LAMBDA)))
          (SETQ |bodyl| (LIST |name| (CONS |type| (CONS |argl| |bodyl|))))
          (COND (|$PrettyPrint| (PPRINT |bodyl|)))
          (COND ((NULL $COMPILE) (SAY "No Compilation"))
-               (#2# (COMP370 |bodyl|)))
+               (#2# (COMP370 |bodyl| |comp370_apply|)))
          |name|)))))))
 
-; COMP(fun) == [COMP_2 nf for nf in COMP_1(fun)]
+; COMP0(fun, comp370_apply) == [COMP_2(nf, comp370_apply) for nf in COMP_1(fun)]
 
-(DEFUN COMP (|fun|)
+(DEFUN COMP0 (|fun| |comp370_apply|)
   (PROG ()
     (RETURN
      ((LAMBDA (|bfVar#2| |bfVar#1| |nf|)
@@ -157,9 +201,13 @@
          (COND
           ((OR (ATOM |bfVar#1|) (PROGN (SETQ |nf| (CAR |bfVar#1|)) NIL))
            (RETURN (NREVERSE |bfVar#2|)))
-          ('T (SETQ |bfVar#2| (CONS (COMP_2 |nf|) |bfVar#2|))))
+          ('T (SETQ |bfVar#2| (CONS (COMP_2 |nf| |comp370_apply|) |bfVar#2|))))
          (SETQ |bfVar#1| (CDR |bfVar#1|))))
       NIL (COMP_1 |fun|) NIL))))
+
+; COMP(fun) == COMP0(fun, $comp370_apply)
+
+(DEFUN COMP (|fun|) (PROG () (RETURN (COMP0 |fun| |$comp370_apply|))))
 
 ; maybe_devaluate(a, ca) ==
 ;     ca => ["devaluate", a]
@@ -168,7 +216,7 @@
 (DEFUN |maybe_devaluate| (|a| |ca|)
   (PROG () (RETURN (COND (|ca| (LIST '|devaluate| |a|)) ('T |a|)))))
 
-; compSPADSLAM(name, argl, bodyl) ==
+; compSPADSLAM(name, argl, bodyl, comp370_apply) ==
 ;     al := INTERNL1(name, '";AL")
 ;     auxfn := INTERNL1(name, '";")
 ;     if argl then
@@ -198,13 +246,13 @@
 ;     output_lisp_defparameter(al, nil)
 ;     u := [name,lamex]
 ;     if $PrettyPrint then PRETTYPRINT(u)
-;     COMP370(u)
+;     COMP370(u, comp370_apply)
 ;     u := [auxfn, ["LAMBDA", argl, :bodyl]]
 ;     if $PrettyPrint then PRETTYPRINT(u)
-;     COMP370(u)
+;     COMP370(u, comp370_apply)
 ;     name
 
-(DEFUN |compSPADSLAM| (|name| |argl| |bodyl|)
+(DEFUN |compSPADSLAM| (|name| |argl| |bodyl| |comp370_apply|)
   (PROG (|al| |auxfn| |g2| |g3| |argtran| |app| |la1| |la2| |lamex| |u|)
     (RETURN
      (PROGN
@@ -258,10 +306,10 @@
       (|output_lisp_defparameter| |al| NIL)
       (SETQ |u| (LIST |name| |lamex|))
       (COND (|$PrettyPrint| (PRETTYPRINT |u|)))
-      (COMP370 |u|)
+      (COMP370 |u| |comp370_apply|)
       (SETQ |u| (LIST |auxfn| (CONS 'LAMBDA (CONS |argl| |bodyl|))))
       (COND (|$PrettyPrint| (PRETTYPRINT |u|)))
-      (COMP370 |u|)
+      (COMP370 |u| |comp370_apply|)
       |name|))))
 
 ; makeClosedfnName() ==
@@ -1231,7 +1279,7 @@
 
 (DEFPARAMETER |$comp370_apply| NIL)
 
-; COMP370(fn) ==
+; COMP370(fn, comp370_apply) ==
 ;     not(fn is [fname, [ltype, args, :body]]) => BREAK()
 ;     args :=
 ;         NULL(args) => args
@@ -1246,10 +1294,10 @@
 ;             for arg in args]
 ;     defun := if $insideCapsuleFunctionIfTrue then "SDEFUN" else "DEFUN"
 ;     nbody := [defun, fname, args, :body]
-;     if $comp370_apply then
-;         FUNCALL($comp370_apply, fname, nbody)
+;     if comp370_apply then
+;         FUNCALL(comp370_apply, fname, nbody)
 
-(DEFUN COMP370 (|fn|)
+(DEFUN COMP370 (|fn| |comp370_apply|)
   (PROG (|fname| |ISTMP#1| |ISTMP#2| |ltype| |ISTMP#3| |args| |body| |defun|
          |nbody|)
     (RETURN
@@ -1315,8 +1363,7 @@
         (SETQ |defun|
                 (COND (|$insideCapsuleFunctionIfTrue| 'SDEFUN) (#1# 'DEFUN)))
         (SETQ |nbody| (CONS |defun| (CONS |fname| (CONS |args| |body|))))
-        (COND
-         (|$comp370_apply| (FUNCALL |$comp370_apply| |fname| |nbody|)))))))))
+        (COND (|comp370_apply| (FUNCALL |comp370_apply| |fname| |nbody|)))))))))
 
 ; MKPF(l, op) ==
 ;     if MEMQ(op, ["*", "+", "AND", "OR", "PROGN"]) then

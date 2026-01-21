@@ -168,7 +168,6 @@
 ;     ['LIST,:l]
 ;   x is ['PROGN,:l] => ['PROGN,:optFunctorPROGN l]
 ;   x is ['COND,:l] =>
-; --+
 ;     l:=
 ;       [CondClause u for u in l | u and first u] where
 ;         CondClause [pred,:conseq] ==
@@ -1120,7 +1119,6 @@
        ('T |cond|))))))
 
 ; SetFunctionSlots(sig, body, flag, kvec) ==
-; --+
 ;   v := '%
 ;   u := kvec
 ;   if true then
@@ -1234,7 +1232,7 @@
             (#1# NIL))))))
 
 ; LookUpSigSlots(sig,siglist) ==
-; --+ must kill any implementations below of the form (ELT $ NIL)
+; -- must kill any implementations below of the form (ELT $ NIL)
 ;   if $insideCategoryPackageIfTrue then
 ;            sig := substitute('%, CADR($functorForm), sig)
 ;   siglist := $lisplibOperationAlist
@@ -1346,7 +1344,6 @@
 ;       --We are not interested in the principal view
 ;       --The next block allows for the possibility that $principal may
 ;       --have conditional secondary views
-; --+
 ;   null secondaries => '(T)
 ;       --return for packages which generally have no secondary views
 ;   if principal is [op, :.] then
@@ -1405,9 +1402,6 @@
 ;   for u in partList repeat
 ;     for [v,:.] in u repeat
 ;       if not member(v,secondaries) then secondaries:= [v,:secondaries]
-;   --PRETTYPRINT $Conditions
-;   --PRETTYPRINT masterSecondaries
-;   --PRETTYPRINT secondaries
 ;   (list:= [mkNilT member(u,necessarySecondaries) for u in secondaries]) where
 ;     mkNilT u ==
 ;       u => true
@@ -2244,14 +2238,12 @@
                   (|partPessimise| (CDR |a|) |trueconds|)))))))
 
 ; getViewsConditions(u, e) ==
-;
 ;   --returns a list of all the categories that can be views of this one
 ;   --paired with the condition under which they are such views
 ;   [vec, :.] := compMakeCategoryObject(u, e) or
 ;     systemErrorHere '"getViewsConditions"
 ;   views:= [[first u,:CADR u] for u in CADR vec.4]
 ;   null vec.0 =>
-; --+
 ;     null first(vec.4) => views
 ;     [[CAAR vec.4,:true],:views] --*
 ;   [[vec.0,:true],:views] --*

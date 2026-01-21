@@ -23,22 +23,6 @@
 
 (DECLAIM (NOTINLINE |StreamTensor;|)) 
 
-(DEFUN |StreamTensor| (#1=#:G14)
-  (SPROG NIL
-         (PROG (#2=#:G15)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|StreamTensor|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|StreamTensor;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|StreamTensor|)))))))))) 
-
 (DEFUN |StreamTensor;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -53,6 +37,22 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |StreamTensor| (#1=#:G9)
+  (SPROG NIL
+         (PROG (#2=#:G10)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|StreamTensor|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|StreamTensor;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|StreamTensor|)))))))))) 
 
 (MAKEPROP '|StreamTensor| '|infovec|
           (LIST

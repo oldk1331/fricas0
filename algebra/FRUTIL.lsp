@@ -8,8 +8,8 @@
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| R)
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (#2=#:G38 NIL) (|v| NIL) (#3=#:G37 NIL) (|u| (R)) (|fitem| #1#)
-          (#4=#:G36 NIL) (|item| NIL))
+          (#2=#:G19 NIL) (|v| NIL) (#3=#:G18 NIL) (|u| (R)) (|fitem| #1#)
+          (#4=#:G17 NIL) (|item| NIL))
          (SEQ (LETT |u| (SPADCALL |f| (QREFELT % 8))) (LETT |l| NIL)
               (SEQ (LETT |item| NIL) (LETT #4# (SPADCALL |f| (QREFELT % 12)))
                    G190
@@ -60,9 +60,24 @@
 
 (DECLAIM (NOTINLINE |FactoredFunctionUtilities;|)) 
 
-(DEFUN |FactoredFunctionUtilities| (#1=#:G39)
+(DEFUN |FactoredFunctionUtilities;| (|#1|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT |dv$| (LIST '|FactoredFunctionUtilities| DV$1))
+          (LETT % (GETREFV 21))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|FactoredFunctionUtilities|
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |FactoredFunctionUtilities| (#1=#:G20)
   (SPROG NIL
-         (PROG (#2=#:G40)
+         (PROG (#2=#:G21)
            (RETURN
             (COND
              ((LETT #2#
@@ -78,21 +93,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|FactoredFunctionUtilities|)))))))))) 
-
-(DEFUN |FactoredFunctionUtilities;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT |dv$| (LIST '|FactoredFunctionUtilities| DV$1))
-          (LETT % (GETREFV 21))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|FactoredFunctionUtilities|
-                      (LIST DV$1) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|FactoredFunctionUtilities| '|infovec|
           (LIST

@@ -4,7 +4,7 @@
 
 (SDEFUN |ODETOOLS;wronskianMatrix;LNniM;2|
         ((|l| (|List| F)) (|q| (|NonNegativeInteger|)) (% (|Matrix| F)))
-        (SPROG ((|v| (|Vector| F)) (#1=#:G23 NIL) (|i| NIL) (|m| (|Matrix| F)))
+        (SPROG ((|v| (|Vector| F)) (#1=#:G9 NIL) (|i| NIL) (|m| (|Matrix| F)))
                (SEQ (LETT |v| (SPADCALL |l| (QREFELT % 16)))
                     (LETT |m| (SPADCALL |q| (QVSIZE |v|) (QREFELT % 17)))
                     (SEQ (LETT |i| (PROGN |m| 1))
@@ -52,7 +52,7 @@
         ((|op| (LODO)) (|g| (F)) (|b| (|List| F))
          (|integration| (|Mapping| F F)) (% (|Union| F "failed")))
         (SPROG
-         ((|ans| (F)) (#1=#:G46 NIL) (|f| NIL) (|i| NIL) (|s| (|Vector| F))
+         ((|ans| (F)) (#1=#:G31 NIL) (|f| NIL) (|i| NIL) (|s| (|Vector| F))
           (|sol| (|Union| (|Vector| F) "failed")))
          (SEQ
           (COND ((SPADCALL |g| (QREFELT % 33)) (CONS 0 (|spadConstant| % 25)))
@@ -89,22 +89,6 @@
 
 (DECLAIM (NOTINLINE |ODETools;|)) 
 
-(DEFUN |ODETools| (&REST #1=#:G47)
-  (SPROG NIL
-         (PROG (#2=#:G48)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ODETools|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ODETools;|) #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|ODETools|)))))))))) 
-
 (DEFUN |ODETools;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -122,6 +106,22 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 9 (SPADCALL (QREFELT % 8)))
           %))) 
+
+(DEFUN |ODETools| (&REST #1=#:G32)
+  (SPROG NIL
+         (PROG (#2=#:G33)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ODETools|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ODETools;|) #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|ODETools|)))))))))) 
 
 (MAKEPROP '|ODETools| '|infovec|
           (LIST

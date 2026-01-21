@@ -16,7 +16,7 @@
         (SPADCALL (CDR (CDR |jv|)) (QREFELT % 19))) 
 
 (SDEFUN |IJB;index;%Pi;4| ((|jv| (%)) (% (|PositiveInteger|)))
-        (SPROG ((#1=#:G22 NIL))
+        (SPROG ((#1=#:G12 NIL))
                (PROG1 (LETT #1# (|SPADfirst| (CDR |jv|)))
                  (|check_subtype2| (> #1# 0) '(|PositiveInteger|)
                                    '(|NonNegativeInteger|) #1#)))) 
@@ -30,7 +30,7 @@
 
 (SDEFUN |IJB;CheckZeroIndex|
         ((|il| (|List| (|NonNegativeInteger|))) (% (|Boolean|)))
-        (SPROG ((#1=#:G32 NIL) (#2=#:G33 NIL) (|i| NIL))
+        (SPROG ((#1=#:G22 NIL) (#2=#:G23 NIL) (|i| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -42,7 +42,7 @@
                         (EXIT
                          (COND
                           ((NULL (ZEROP |i|))
-                           (PROGN (LETT #1# NIL) (GO #3=#:G31))))))
+                           (PROGN (LETT #1# NIL) (GO #3=#:G21))))))
                        (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                   (EXIT 'T)))
                 #3# (EXIT #1#)))) 
@@ -52,7 +52,7 @@
               ('T (LIST 1 |up|)))) 
 
 (SDEFUN |IJB;U;Pi%;8| ((|up| (|PositiveInteger|)) (% (%)))
-        (SPROG ((#1=#:G41 NIL) (|i| NIL) (#2=#:G40 NIL))
+        (SPROG ((#1=#:G29 NIL) (|i| NIL) (#2=#:G28 NIL))
                (SEQ
                 (COND
                  ((> |up| (QREFELT % 10)) (|error| "Improper upper index"))
@@ -87,8 +87,8 @@
 
 (SDEFUN |IJB;name;%S;13| ((|jv| (%)) (% (|Symbol|)))
         (SPROG
-         ((#1=#:G73 NIL) (|j| NIL) (#2=#:G72 NIL) (#3=#:G71 NIL) (#4=#:G70 NIL)
-          (#5=#:G69 NIL) (|i| NIL) (#6=#:G68 NIL) (#7=#:G67 NIL) (#8=#:G66 NIL)
+         ((#1=#:G54 NIL) (|j| NIL) (#2=#:G53 NIL) (#3=#:G52 NIL) (#4=#:G51 NIL)
+          (#5=#:G50 NIL) (|i| NIL) (#6=#:G49 NIL) (#7=#:G48 NIL) (#8=#:G47 NIL)
           (|jt| (|Symbol|)))
          (SEQ (LETT |jt| (SPADCALL |jv| (QREFELT % 24)))
               (EXIT
@@ -236,8 +236,8 @@
 
 (SDEFUN |IJB;coerce;%E;15| ((|jv| (%)) (% (|Expression| (|Integer|))))
         (SPROG
-         ((|arg| (|List| (|Expression| (|Integer|)))) (#1=#:G87 NIL) (|j| NIL)
-          (#2=#:G86 NIL) (#3=#:G85 NIL) (|i| NIL) (#4=#:G84 NIL)
+         ((|arg| (|List| (|Expression| (|Integer|)))) (#1=#:G67 NIL) (|j| NIL)
+          (#2=#:G66 NIL) (#3=#:G65 NIL) (|i| NIL) (#4=#:G64 NIL)
           (|jop| (|BasicOperator|)) (|tmp| (|None|)) (|opname| (|Symbol|)))
          (SEQ
           (COND
@@ -303,25 +303,6 @@
 
 (DECLAIM (NOTINLINE |IndexedJetBundle;|)) 
 
-(DEFUN |IndexedJetBundle| (&REST #1=#:G94)
-  (SPROG NIL
-         (PROG (#2=#:G95)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(NIL NIL NIL NIL NIL))
-                     (HGET |$ConstructorCache| '|IndexedJetBundle|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |IndexedJetBundle;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|IndexedJetBundle|)))))))))) 
-
 (DEFUN |IndexedJetBundle;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -348,6 +329,25 @@
     (QSETREFV % 11 (|List| (|NonNegativeInteger|)))
     (QSETREFV % 12 '|Repeated|)
     %))) 
+
+(DEFUN |IndexedJetBundle| (&REST #1=#:G74)
+  (SPROG NIL
+         (PROG (#2=#:G75)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(NIL NIL NIL NIL NIL))
+                     (HGET |$ConstructorCache| '|IndexedJetBundle|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |IndexedJetBundle;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|IndexedJetBundle|)))))))))) 
 
 (MAKEPROP '|IndexedJetBundle| '|infovec|
           (LIST

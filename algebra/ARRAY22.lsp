@@ -1,7 +1,7 @@
 
 (SDEFUN |ARRAY22;map;MMAMB;1| ((|f| (|Mapping| B A)) (|m| (MA)) (% (MB)))
         (SPROG
-         ((#1=#:G15 NIL) (|k| NIL) (#2=#:G14 NIL) (|i| NIL) (|res| (MB))
+         ((#1=#:G8 NIL) (|k| NIL) (#2=#:G7 NIL) (|i| NIL) (|res| (MB))
           (|nc| (|NonNegativeInteger|)) (|nr| (|NonNegativeInteger|)))
          (SEQ (LETT |nr| (SPADCALL |m| (QREFELT % 15)))
               (LETT |nc| (SPADCALL |m| (QREFELT % 16)))
@@ -26,27 +26,6 @@
               (EXIT |res|)))) 
 
 (DECLAIM (NOTINLINE |TwoDimensionalArrayFunctions;|)) 
-
-(DEFUN |TwoDimensionalArrayFunctions| (&REST #1=#:G16)
-  (SPROG NIL
-         (PROG (#2=#:G17)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|TwoDimensionalArrayFunctions|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |TwoDimensionalArrayFunctions;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|TwoDimensionalArrayFunctions|)))))))))) 
 
 (DEFUN |TwoDimensionalArrayFunctions;|
        (|#1| |#2| |#3| |#4| |#5| |#6| |#7| |#8|)
@@ -81,6 +60,27 @@
     (QSETREFV % 13 |#8|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |TwoDimensionalArrayFunctions| (&REST #1=#:G9)
+  (SPROG NIL
+         (PROG (#2=#:G10)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|TwoDimensionalArrayFunctions|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |TwoDimensionalArrayFunctions;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|TwoDimensionalArrayFunctions|)))))))))) 
 
 (MAKEPROP '|TwoDimensionalArrayFunctions| '|infovec|
           (LIST

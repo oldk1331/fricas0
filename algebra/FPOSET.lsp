@@ -9,8 +9,8 @@
 (SDEFUN |FPOSET;finitePoset;LM%;2|
         ((|carrier| (|List| S)) (|pred| (|Mapping| (|Boolean|) S S)) (% (%)))
         (SPROG
-         ((|struct1| (|List| (|List| (|Boolean|)))) (#1=#:G18 NIL) (|x| NIL)
-          (#2=#:G17 NIL) (#3=#:G16 NIL) (|y| NIL) (#4=#:G15 NIL))
+         ((|struct1| (|List| (|List| (|Boolean|)))) (#1=#:G13 NIL) (|x| NIL)
+          (#2=#:G12 NIL) (#3=#:G11 NIL) (|y| NIL) (#4=#:G10 NIL))
          (SEQ
           (LETT |struct1|
                 (PROGN
@@ -51,20 +51,29 @@
 (SDEFUN |FPOSET;getArr;%L;4| ((|s| (%)) (% (|List| (|List| (|Boolean|)))))
         (QCDR |s|)) 
 
-(SDEFUN |FPOSET;setVert;%LV;5| ((|s| (%)) (|v| (|List| S)) (% (|Void|)))
-        (SEQ (PROGN (RPLACA |s| |v|) (QCAR |s|))
-             (EXIT (SPADCALL (QREFELT % 16))))) 
-
-(SDEFUN |FPOSET;setArr;%LV;6|
-        ((|s| (%)) (|v| (|List| (|List| (|Boolean|)))) (% (|Void|)))
-        (SEQ (PROGN (RPLACD |s| |v|) (QCDR |s|))
-             (EXIT (SPADCALL (QREFELT % 16))))) 
-
 (DECLAIM (NOTINLINE |FinitePoset;|)) 
 
-(DEFUN |FinitePoset| (#1=#:G39)
+(DEFUN |FinitePoset;| (|#1|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT |dv$| (LIST '|FinitePoset| DV$1))
+          (LETT % (GETREFV 36))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|FinitePoset| (LIST DV$1)
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 7
+                    (|Record| (|:| |set1| (|List| |#1|))
+                              (|:| |struct1| (|List| (|List| (|Boolean|))))))
+          %))) 
+
+(DEFUN |FinitePoset| (#1=#:G23)
   (SPROG NIL
-         (PROG (#2=#:G40)
+         (PROG (#2=#:G24)
            (RETURN
             (COND
              ((LETT #2#
@@ -78,66 +87,45 @@
                 (COND
                  ((NOT #2#) (HREM |$ConstructorCache| '|FinitePoset|)))))))))) 
 
-(DEFUN |FinitePoset;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT |dv$| (LIST '|FinitePoset| DV$1))
-          (LETT % (GETREFV 39))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|FinitePoset| (LIST DV$1)
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 7
-                    (|Record| (|:| |set1| (|List| |#1|))
-                              (|:| |struct1| (|List| (|List| (|Boolean|))))))
-          %))) 
-
 (MAKEPROP '|FinitePoset| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) '|Rep| (|List| 6)
-              (|List| (|List| 19)) |FPOSET;finitePoset;LL%;1|
-              (|Mapping| 19 6 6) |FPOSET;finitePoset;LM%;2|
-              |FPOSET;getVert;%L;3| |FPOSET;getArr;%L;4| (|Void|) (0 . |void|)
-              |FPOSET;setVert;%LV;5| |FPOSET;setArr;%LV;6| (|Boolean|)
-              (|String|) (|OutputForm|)
-              (|Record| (|:| |value| 6) (|:| |posX| 24) (|:| |posY| 24))
-              (|Record| (|:| |name| 20) (|:| |arrType| 24) (|:| |fromOb| 24)
-                        (|:| |toOb| 24) (|:| |xOffset| 29) (|:| |yOffset| 29)
-                        (|:| |map| 25))
-              (|NonNegativeInteger|) (|List| 24) (|List| 22) (|List| 23)
-              (|DirectedGraph| %) (|Integer|) (|List| 31) (|Tree| 29)
-              (|List| (|Loop|)) (|Matrix| 24) (|Matrix| 29)
-              (|Scene| (|SCartesian| '2)) (|List| %) (|Union| 24 '"failed")
-              (|IncidenceAlgebra| 29 6))
-           '#(~= 4 |zetaMatrix| 10 |upperSet| 15 |unit| 20 |terminal| 26
-              |subdiagramSvg| 31 |spanningTreeNode| 39 |spanningTreeArrow| 45
-              |spanningForestNode| 51 |spanningForestArrow| 56 |setVert| 61
-              |setArr| 67 |routeNodes| 73 |routeArrows| 80 |powerSetStructure|
-              87 |outDegree| 92 |opposite| 98 |objectToIndex| 103 |nodeToNode|
-              109 |nodeToArrow| 115 |nodeFromNode| 121 |nodeFromArrow| 127
-              |moebius| 133 |min| 138 |merge| 149 |meetIfCan| 155 |max| 168
-              |mapContra| 179 |map| 188 |lub| 197 |lowerSet| 203 |looseEquals|
-              208 |loopsNodes| 214 |loopsAtNode| 219 |loopsArrows| 225 |le| 230
-              |latex| 237 |laplacianMatrix| 242 |kgraph| 247 |joinIfCan| 253
-              |isGreaterThan?| 266 |isFunctional?| 273 |isFixPoint?| 278
-              |isDirected?| 284 |isDirectSuccessor?| 288 |isChain?| 295
-              |isAntisymmetric?| 300 |isAntiChain?| 305 |isAcyclic?| 310
-              |initial| 315 |indexToObject| 319 |incidenceMatrix| 325
-              |inDegree| 330 |implies| 336 |glb| 343 |getVertices| 349
-              |getVertexIndex| 354 |getVert| 360 |getArrows| 365
-              |getArrowIndex| 370 |getArr| 377 |flatten| 382 |finitePoset| 387
-              |distanceMatrix| 399 |distance| 404 |diagramsSvg| 411
-              |diagramWidth| 418 |diagramSvg| 423 |diagramHeight| 430
-              |deepDiagramSvg| 435 |cycleOpen| 442 |cycleClosed| 448 |createY|
-              454 |createX| 460 |createWidth| 466 |coverMatrix| 471
-              |completeTransitivity| 476 |completeReflexivity| 481 |coerce| 486
-              |arrowsToNode| 491 |arrowsToArrow| 497 |arrowsFromNode| 503
-              |arrowsFromArrow| 509 |arrowName| 515 |adjacencyMatrix| 522
-              |addObject!| 527 |addArrow!| 539 = 577 + 583)
+              (|List| (|List| 15)) |FPOSET;finitePoset;LL%;1|
+              (|Mapping| 15 6 6) |FPOSET;finitePoset;LM%;2|
+              |FPOSET;getVert;%L;3| |FPOSET;getArr;%L;4| (|Boolean|)
+              (|OutputForm|) (|String|)
+              (|Record| (|:| |value| 6) (|:| |posX| 19) (|:| |posY| 19))
+              (|NonNegativeInteger|)
+              (|Record| (|:| |name| 17) (|:| |arrType| 19) (|:| |fromOb| 19)
+                        (|:| |toOb| 19) (|:| |xOffset| 25) (|:| |yOffset| 25)
+                        (|:| |map| 21))
+              (|List| 19) (|List| 18) (|DirectedGraph| %) (|List| 20)
+              (|Integer|) (|Tree| 25) (|List| 26) (|List| (|Loop|))
+              (|Matrix| 25) (|Matrix| 19) (|Void|) (|Scene| (|SCartesian| '2))
+              (|List| %) (|Union| 19 '"failed") (|IncidenceAlgebra| 25 6))
+           '#(~= 0 |zetaMatrix| 6 |upperSet| 11 |unit| 16 |terminal| 22
+              |subdiagramSvg| 27 |spanningTreeNode| 35 |spanningTreeArrow| 41
+              |spanningForestNode| 47 |spanningForestArrow| 52 |routeNodes| 57
+              |routeArrows| 64 |outDegree| 71 |opposite| 77 |objectToIndex| 82
+              |nodeToNode| 88 |nodeToArrow| 94 |nodeFromNode| 100
+              |nodeFromArrow| 106 |moebius| 112 |min| 117 |merge| 128
+              |meetIfCan| 134 |max| 147 |mapContra| 158 |map| 167 |lub| 176
+              |lowerSet| 182 |looseEquals| 187 |loopsNodes| 193 |loopsAtNode|
+              198 |loopsArrows| 204 |le| 209 |latex| 216 |laplacianMatrix| 221
+              |kgraph| 226 |joinIfCan| 232 |isGreaterThan?| 245 |isFunctional?|
+              252 |isFixPoint?| 257 |isDirected?| 263 |isDirectSuccessor?| 267
+              |isChain?| 274 |isAntiChain?| 279 |isAcyclic?| 284 |initial| 289
+              |indexToObject| 293 |incidenceMatrix| 299 |inDegree| 304
+              |implies| 310 |glb| 317 |getVertices| 323 |getVertexIndex| 328
+              |getVert| 334 |getArrows| 339 |getArrowIndex| 344 |getArr| 351
+              |flatten| 356 |finitePoset| 361 |distanceMatrix| 373 |distance|
+              378 |diagramsSvg| 385 |diagramWidth| 392 |diagramSvg| 397
+              |diagramHeight| 404 |deepDiagramSvg| 409 |cycleOpen| 416
+              |cycleClosed| 422 |createY| 428 |createX| 434 |createWidth| 440
+              |coverMatrix| 445 |coerce| 450 |arrowsToNode| 455 |arrowsToArrow|
+              461 |arrowsFromNode| 467 |arrowsFromArrow| 473 |arrowName| 479
+              |adjacencyMatrix| 486 |addObject!| 491 |addObject| 503
+              |addArrow!| 509 |addArrow| 540 = 547 + 553)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0))
                  (CONS
@@ -145,42 +133,40 @@
                      |BasicType&|)
                   (CONS
                    '#((|Poset| 6) (|Preorder| 6) (|FiniteGraph| 6)
-                      (|SetCategory|) (|CoercibleTo| 21) (|BasicType|))
-                   (|makeByteWordVec2| 38
-                                       '(0 15 0 16 2 0 19 0 0 1 1 0 38 0 1 1 0
-                                         0 0 1 2 0 0 8 20 1 1 0 0 6 1 4 0 15 35
-                                         0 19 19 1 2 0 31 0 24 1 2 0 31 0 24 1
-                                         1 0 30 0 1 1 0 30 0 1 2 0 15 0 8 17 2
-                                         0 15 0 9 18 3 0 25 0 24 24 1 3 0 25 0
-                                         24 24 1 1 0 0 6 1 2 0 24 0 24 1 1 0 0
-                                         0 1 2 0 24 0 6 1 2 0 25 0 24 1 2 0 25
-                                         0 24 1 2 0 25 0 24 1 2 0 25 0 24 1 1 0
-                                         38 0 1 1 0 24 0 1 2 0 24 0 25 1 2 0 0
-                                         0 0 1 3 0 37 0 24 24 1 2 0 37 0 25 1 2
-                                         0 24 0 25 1 1 0 24 0 1 5 0 0 0 25 8 29
-                                         29 1 5 0 0 0 25 8 29 29 1 2 0 37 0 25
-                                         1 1 0 0 0 1 2 0 19 0 0 1 1 0 32 0 1 2
-                                         0 32 0 24 1 1 0 32 0 1 3 0 19 0 24 24
-                                         1 1 0 20 0 1 1 0 34 0 1 2 0 0 8 20 1 3
-                                         0 37 0 24 24 1 2 0 37 0 25 1 3 0 19 0
-                                         24 24 1 1 0 19 0 1 2 0 19 0 24 1 0 0
-                                         19 1 3 0 19 0 24 24 1 1 0 19 0 1 1 0
-                                         19 0 1 1 0 19 0 1 1 0 19 0 1 0 0 0 1 2
-                                         0 6 0 24 1 1 0 34 0 1 2 0 24 0 24 1 3
-                                         0 19 0 24 24 1 2 0 37 0 25 1 1 0 26 0
-                                         1 2 0 24 0 6 1 1 0 8 0 13 1 0 27 0 1 3
-                                         0 24 0 24 24 1 1 0 9 0 14 1 0 0 28 1 2
-                                         0 0 8 9 10 2 0 0 8 11 12 1 0 34 0 1 3
-                                         0 29 0 24 24 1 3 0 15 20 36 19 1 1 0
-                                         24 0 1 3 0 15 20 0 19 1 1 0 24 0 1 3 0
-                                         15 20 0 19 1 2 0 0 8 20 1 2 0 0 8 20 1
-                                         2 0 24 24 24 1 2 0 24 24 24 1 1 0 24
-                                         24 1 1 0 38 0 1 1 0 0 0 1 1 0 0 0 1 1
-                                         0 21 0 1 2 0 25 0 24 1 2 0 25 0 24 1 2
-                                         0 25 0 24 1 2 0 25 0 24 1 3 0 20 0 24
-                                         24 1 1 0 33 0 1 2 0 0 0 22 1 2 0 0 0 6
-                                         1 2 0 0 0 23 1 5 0 0 0 20 24 24 25 1 4
-                                         0 0 0 20 24 24 1 4 0 0 0 20 6 6 1 3 0
-                                         0 0 24 24 1 2 0 19 0 0 1 2 0 0 0 0
+                      (|SetCategory|) (|CoercibleTo| 16) (|BasicType|))
+                   (|makeByteWordVec2| 35
+                                       '(2 0 15 0 0 1 1 0 35 0 1 1 0 0 0 1 2 0
+                                         0 8 17 1 1 0 0 6 1 4 0 31 32 0 15 15 1
+                                         2 0 26 0 19 1 2 0 26 0 19 1 1 0 27 0 1
+                                         1 0 27 0 1 3 0 21 0 19 19 1 3 0 21 0
+                                         19 19 1 2 0 19 0 19 1 1 0 0 0 1 2 0 19
+                                         0 6 1 2 0 21 0 19 1 2 0 21 0 19 1 2 0
+                                         21 0 19 1 2 0 21 0 19 1 1 0 35 0 1 2 0
+                                         19 0 21 1 1 0 19 0 1 2 0 0 0 0 1 3 0
+                                         34 0 19 19 1 2 0 34 0 21 1 1 0 19 0 1
+                                         2 0 19 0 21 1 5 0 0 0 21 8 25 25 1 5 0
+                                         0 0 21 8 25 25 1 2 0 34 0 21 1 1 0 0 0
+                                         1 2 0 15 0 0 1 1 0 28 0 1 2 0 28 0 19
+                                         1 1 0 28 0 1 3 0 15 0 6 6 1 1 0 17 0 1
+                                         1 0 29 0 1 2 0 0 8 17 1 3 0 34 0 19 19
+                                         1 2 0 34 0 21 1 3 0 15 0 19 19 1 1 0
+                                         15 0 1 2 0 15 0 19 1 0 0 15 1 3 0 15 0
+                                         19 19 1 1 0 15 0 1 1 0 15 0 1 1 0 15 0
+                                         1 0 0 0 1 2 0 6 0 19 1 1 0 29 0 1 2 0
+                                         19 0 19 1 3 0 15 0 19 19 1 2 0 34 0 21
+                                         1 1 0 22 0 1 2 0 19 0 6 1 1 0 8 0 13 1
+                                         0 24 0 1 3 0 19 0 19 19 1 1 0 9 0 14 1
+                                         0 0 23 1 2 0 0 8 11 12 2 0 0 8 9 10 1
+                                         0 29 0 1 3 0 25 0 19 19 1 3 0 31 17 33
+                                         15 1 1 0 19 0 1 3 0 31 17 0 15 1 1 0
+                                         19 0 1 3 0 31 17 0 15 1 2 0 0 8 17 1 2
+                                         0 0 8 17 1 2 0 19 19 19 1 2 0 19 19 19
+                                         1 1 0 19 19 1 1 0 35 0 1 1 0 16 0 1 2
+                                         0 21 0 19 1 2 0 21 0 19 1 2 0 21 0 19
+                                         1 2 0 21 0 19 1 3 0 17 0 19 19 1 1 0
+                                         30 0 1 2 0 0 0 6 1 2 0 0 0 18 1 2 0 0
+                                         0 6 1 4 0 0 0 17 19 19 1 2 0 0 0 20 1
+                                         5 0 0 0 17 19 19 21 1 4 0 0 0 17 6 6 1
+                                         3 0 0 0 6 6 1 2 0 15 0 0 1 2 0 0 0 0
                                          1)))))
            '|lookupComplete|)) 

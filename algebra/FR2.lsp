@@ -7,7 +7,7 @@
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| S)
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (#1=#:G33 NIL) (|f| NIL) (#2=#:G32 NIL))
+          (#1=#:G15 NIL) (|f| NIL) (#2=#:G14 NIL))
          (SEQ
           (LETT |l|
                 (CONS
@@ -40,7 +40,7 @@
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| S)
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (#1=#:G46 NIL) (|f| NIL) (#2=#:G45 NIL) (|nu| (S)))
+          (#1=#:G28 NIL) (|f| NIL) (#2=#:G27 NIL) (|nu| (S)))
          (SEQ (LETT |nu| (SPADCALL (SPADCALL |u| (QREFELT % 9)) |fn|))
               (LETT |nl|
                     (PROGN
@@ -64,25 +64,6 @@
 
 (DECLAIM (NOTINLINE |FactoredFunctions2;|)) 
 
-(DEFUN |FactoredFunctions2| (&REST #1=#:G47)
-  (SPROG NIL
-         (PROG (#2=#:G48)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|FactoredFunctions2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |FactoredFunctions2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|FactoredFunctions2|)))))))))) 
-
 (DEFUN |FactoredFunctions2;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -99,6 +80,25 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |FactoredFunctions2| (&REST #1=#:G29)
+  (SPROG NIL
+         (PROG (#2=#:G30)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|FactoredFunctions2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |FactoredFunctions2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|FactoredFunctions2|)))))))))) 
 
 (MAKEPROP '|FactoredFunctions2| '|infovec|
           (LIST

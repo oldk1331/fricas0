@@ -62,7 +62,7 @@
           ((QREFELT % 8)
            (SEQ (SETELT % 11 (SPADCALL (QREFELT % 10))) (SETELT % 8 NIL)
                 (SETELT % 12 NIL) (SETELT % 13 NIL)
-                (SETELT % 17 (|make_full_CVEC| 0))
+                (SETELT % 17 (|filler_spaces| 0))
                 (EXIT (SPADCALL (QREFELT % 19)))))
           ('T
            (|error|
@@ -76,7 +76,7 @@
 
 (SDEFUN |TBCMPPK;extractIfCan;KeyU;9|
         ((|k| (|Key|)) (% (|Union| |Entry| "failed")))
-        (SPROG ((#1=#:G33 NIL) (|s| (|Union| |Entry| "failed")))
+        (SPROG ((#1=#:G26 NIL) (|s| (|Union| |Entry| "failed")))
                (SEQ
                 (EXIT
                  (COND
@@ -92,7 +92,7 @@
                             (COND
                              ((QREFELT % 13)
                               (SETELT % 14 (+ (QREFELT % 14) 1))))
-                            (EXIT (PROGN (LETT #1# |s|) (GO #2=#:G32)))))
+                            (EXIT (PROGN (LETT #1# |s|) (GO #2=#:G25)))))
                           (#3='T (CONS 1 "failed"))))))
                   (#3# (CONS 1 "failed"))))
                 #2# (EXIT #1#)))) 
@@ -109,27 +109,6 @@
           ('T (SPADCALL (QREFELT % 19)))))) 
 
 (DECLAIM (NOTINLINE |TabulatedComputationPackage;|)) 
-
-(DEFUN |TabulatedComputationPackage| (&REST #1=#:G36)
-  (SPROG NIL
-         (PROG (#2=#:G37)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|TabulatedComputationPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |TabulatedComputationPackage;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|TabulatedComputationPackage|)))))))))) 
 
 (DEFUN |TabulatedComputationPackage;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
@@ -153,8 +132,29 @@
           (QSETREFV % 14 0)
           (QSETREFV % 15 "o")
           (QSETREFV % 16 "+")
-          (QSETREFV % 17 (|make_full_CVEC| 0))
+          (QSETREFV % 17 (|filler_spaces| 0))
           %))) 
+
+(DEFUN |TabulatedComputationPackage| (&REST #1=#:G29)
+  (SPROG NIL
+         (PROG (#2=#:G30)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|TabulatedComputationPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |TabulatedComputationPackage;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|TabulatedComputationPackage|)))))))))) 
 
 (MAKEPROP '|TabulatedComputationPackage| '|infovec|
           (LIST

@@ -10,7 +10,7 @@
 (SDEFUN |FRIMOD;basis;%V;3| ((|m| (%)) (% (|Vector| A))) |m|) 
 
 (SDEFUN |FRIMOD;rowdiv| ((|r| (|Vector| R)) (|f| (R)) (% (|Vector| F)))
-        (SPROG ((#1=#:G19 NIL) (#2=#:G21 NIL) (|i| NIL) (#3=#:G20 NIL))
+        (SPROG ((#1=#:G7 NIL) (#2=#:G9 NIL) (|i| NIL) (#3=#:G8 NIL))
                (SEQ
                 (PROGN
                  (LETT #3#
@@ -42,8 +42,8 @@
 
 (SDEFUN |FRIMOD;getinvintmat| ((% (|Boolean|)))
         (SPROG
-         ((#1=#:G35 NIL) (|j| NIL) (#2=#:G34 NIL) (|i| NIL) (|m| (|Matrix| F))
-          (#3=#:G26 NIL))
+         ((#1=#:G23 NIL) (|j| NIL) (#2=#:G22 NIL) (|i| NIL) (|m| (|Matrix| F))
+          (#3=#:G14 NIL))
          (SEQ
           (LETT |m|
                 (PROG2 (LETT #3# (SPADCALL (|FRIMOD;intmat| %) (QREFELT % 37)))
@@ -69,7 +69,7 @@
 
 (SDEFUN |FRIMOD;getintmat| ((% (|Boolean|)))
         (SPROG
-         ((#1=#:G43 NIL) (|j| NIL) (#2=#:G42 NIL) (|i| NIL) (|m| (|Matrix| F)))
+         ((#1=#:G31 NIL) (|j| NIL) (#2=#:G30 NIL) (|i| NIL) (|m| (|Matrix| F)))
          (SEQ (LETT |m| (SPADCALL (QREFELT % 10) (QREFELT % 34)))
               (SEQ (LETT |i| (PROGN |m| 1))
                    (LETT #2# (SPADCALL |m| (QREFELT % 38))) G190
@@ -99,7 +99,7 @@
 (SDEFUN |FRIMOD;vectProd|
         ((|v1| (|Vector| A)) (|v2| (|Vector| A)) (% (|Vector| A)))
         (SPROG
-         ((|k| (|Integer|)) (#1=#:G57 NIL) (|j| NIL) (#2=#:G56 NIL) (|i| NIL)
+         ((|k| (|Integer|)) (#1=#:G44 NIL) (|j| NIL) (#2=#:G43 NIL) (|i| NIL)
           (|v| (|Vector| A)))
          (SEQ
           (LETT |k|
@@ -139,7 +139,7 @@
 
 (SDEFUN |FRIMOD;*;3%;14| ((|m1| (%)) (|m2| (%)) (% (%)))
         (SPROG
-         ((|u| (A)) (#1=#:G66 NIL) (|i| NIL) (#2=#:G65 NIL) (|m| (|Matrix| R))
+         ((|u| (A)) (#1=#:G53 NIL) (|i| NIL) (#2=#:G52 NIL) (|m| (|Matrix| R))
           (|cd| (|Record| (|:| |num| (|Matrix| R)) (|:| |den| R))))
          (SEQ
           (LETT |m|
@@ -182,25 +182,6 @@
 
 (DECLAIM (NOTINLINE |FractionalIdealAsModule;|)) 
 
-(DEFUN |FractionalIdealAsModule| (&REST #1=#:G68)
-  (SPROG NIL
-         (PROG (#2=#:G69)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T T T T NIL))
-                     (HGET |$ConstructorCache| '|FractionalIdealAsModule|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |FractionalIdealAsModule;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|FractionalIdealAsModule|)))))))))) 
-
 (DEFUN |FractionalIdealAsModule;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -242,6 +223,25 @@
      ((|testBitVector| |pv$| 1)
       (QSETREFV % 63 (CONS (|dispatchFunction| |FRIMOD;module;Fi%;15|) %))))
     %))) 
+
+(DEFUN |FractionalIdealAsModule| (&REST #1=#:G55)
+  (SPROG NIL
+         (PROG (#2=#:G56)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T T T T NIL))
+                     (HGET |$ConstructorCache| '|FractionalIdealAsModule|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |FractionalIdealAsModule;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|FractionalIdealAsModule|)))))))))) 
 
 (MAKEPROP '|FractionalIdealAsModule| '|infovec|
           (LIST

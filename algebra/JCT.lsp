@@ -27,7 +27,7 @@
           (|tmp|
            (|Record| (|:| |DSys| (|List| (|JetBundleExpression| JB2)))
                      (|:| |JVars| (|List| (|List| JB2)))))
-          (#1=#:G30 NIL) (#2=#:G36 NIL) (|i| NIL)
+          (#1=#:G12 NIL) (#2=#:G18 NIL) (|i| NIL)
           (JM (|SparseEchelonMatrix| JB2 (|JetBundleExpression| JB2)))
           (|ly| (|List| (|JetBundleExpression| JB2))))
          (SEQ (LETT |ly| (SPADCALL |y| (QREFELT % 26)))
@@ -56,9 +56,9 @@
 
 (SDEFUN |JCT;transform;JB1Jbe;4| ((|jv| (JB1)) (% (|JetBundleExpression| JB2)))
         (SPROG
-         ((|res| (|JetBundleExpression| JB2)) (#1=#:G62 NIL) (#2=#:G68 NIL)
-          (#3=#:G70 NIL) (|k| NIL) (#4=#:G69 NIL)
-          (|qint| (|JetBundleExpression| JB2)) (|pint| (JB1)) (#5=#:G47 NIL)
+         ((|res| (|JetBundleExpression| JB2)) (#1=#:G35 NIL) (#2=#:G41 NIL)
+          (#3=#:G43 NIL) (|k| NIL) (#4=#:G42 NIL)
+          (|qint| (|JetBundleExpression| JB2)) (|pint| (JB1)) (#5=#:G24 NIL)
           (|i| (|NonNegativeInteger|)) (|jt| (|Symbol|))
           (|ans| (|Union| (|JetBundleExpression| JB2) "failed")))
          (SEQ
@@ -154,9 +154,9 @@
 (SDEFUN |JCT;transform;JbeJbe;5|
         ((|e1| (|JetBundleExpression| JB1)) (% (|JetBundleExpression| JB2)))
         (SPROG
-         ((|e2| (|JetBundleExpression| JB2)) (#1=#:G79 NIL) (|jv| NIL)
-          (#2=#:G80 NIL) (|je| NIL) (JE (|List| (|JetBundleExpression| JB2)))
-          (#3=#:G78 NIL) (#4=#:G77 NIL) (JV (|List| JB1)))
+         ((|e2| (|JetBundleExpression| JB2)) (#1=#:G52 NIL) (|jv| NIL)
+          (#2=#:G53 NIL) (|je| NIL) (JE (|List| (|JetBundleExpression| JB2)))
+          (#3=#:G51 NIL) (#4=#:G50 NIL) (JV (|List| JB1)))
          (SEQ (LETT JV (SPADCALL |e1| (QREFELT % 62)))
               (LETT JE
                     (PROGN
@@ -196,27 +196,6 @@
 
 (DECLAIM (NOTINLINE |JetCoordinateTransformation;|)) 
 
-(DEFUN |JetCoordinateTransformation| (&REST #1=#:G81)
-  (SPROG NIL
-         (PROG (#2=#:G82)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T T NIL NIL))
-                     (HGET |$ConstructorCache| '|JetCoordinateTransformation|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |JetCoordinateTransformation;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|JetCoordinateTransformation|)))))))))) 
-
 (DEFUN |JetCoordinateTransformation;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -243,6 +222,27 @@
     (QSETREFV % 23 (SPADCALL (QREFELT % 22)))
     (QSETREFV % 41 (SPADCALL (|JCT;jacobi| |#3| %) (QREFELT % 40)))
     %))) 
+
+(DEFUN |JetCoordinateTransformation| (&REST #1=#:G54)
+  (SPROG NIL
+         (PROG (#2=#:G55)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T T NIL NIL))
+                     (HGET |$ConstructorCache| '|JetCoordinateTransformation|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |JetCoordinateTransformation;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|JetCoordinateTransformation|)))))))))) 
 
 (MAKEPROP '|JetCoordinateTransformation| '|infovec|
           (LIST

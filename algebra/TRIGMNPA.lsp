@@ -2,8 +2,8 @@
 (SDEFUN |TRIGMNPA;ker2explogs|
         ((|k| (|Kernel| FG)) (|l| (|List| (|Kernel| FG))) (% (FG)))
         (SPROG
-         ((|e| (FG)) (|z| (FG)) (|args| (|List| FG)) (#1=#:G38 NIL) (|a| NIL)
-          (#2=#:G37 NIL) (|kf| (FG)))
+         ((|e| (FG)) (|z| (FG)) (|args| (|List| FG)) (#1=#:G21 NIL) (|a| NIL)
+          (#2=#:G20 NIL) (|kf| (FG)))
          (SEQ (LETT |kf| (SPADCALL |k| (QREFELT % 13)))
               (EXIT
                (COND
@@ -99,27 +99,6 @@
 
 (DECLAIM (NOTINLINE |TrigonometricManipulationsAux;|)) 
 
-(DEFUN |TrigonometricManipulationsAux| (&REST #1=#:G42)
-  (SPROG NIL
-         (PROG (#2=#:G43)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|TrigonometricManipulationsAux|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |TrigonometricManipulationsAux;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|TrigonometricManipulationsAux|)))))))))) 
-
 (DEFUN |TrigonometricManipulationsAux;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -144,6 +123,27 @@
                      ('T (|error| "G must have imaginary unit"))))
           (QSETREFV % 11 (SPADCALL (QREFELT % 9) (QREFELT % 10)))
           %))) 
+
+(DEFUN |TrigonometricManipulationsAux| (&REST #1=#:G25)
+  (SPROG NIL
+         (PROG (#2=#:G26)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|TrigonometricManipulationsAux|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |TrigonometricManipulationsAux;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|TrigonometricManipulationsAux|)))))))))) 
 
 (MAKEPROP '|TrigonometricManipulationsAux| '|infovec|
           (LIST

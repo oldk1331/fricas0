@@ -95,23 +95,6 @@
 
 (DECLAIM (NOTINLINE |ModularRing;|)) 
 
-(DEFUN |ModularRing| (&REST #1=#:G63)
-  (SPROG NIL
-         (PROG (#2=#:G64)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T T NIL NIL NIL))
-                     (HGET |$ConstructorCache| '|ModularRing|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ModularRing;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|ModularRing|)))))))))) 
-
 (DEFUN |ModularRing;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -137,6 +120,23 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 11 (|Record| (|:| |val| |#1|) (|:| |modulo| |#2|)))
     %))) 
+
+(DEFUN |ModularRing| (&REST #1=#:G57)
+  (SPROG NIL
+         (PROG (#2=#:G58)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T T NIL NIL NIL))
+                     (HGET |$ConstructorCache| '|ModularRing|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ModularRing;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|ModularRing|)))))))))) 
 
 (MAKEPROP '|ModularRing| '|infovec|
           (LIST

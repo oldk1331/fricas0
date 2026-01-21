@@ -6,7 +6,7 @@
 (DEFPARAMETER |Poset;AL| 'NIL) 
 
 (DEFUN |Poset| (|t#1|)
-  (LET (#1=#:G34 (#2=#:G35 (|devaluate| |t#1|)))
+  (LET (#1=#:G28 (#2=#:G29 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |Poset;AL|)) (CDR #1#))
           (T
            (SETQ |Poset;AL|
@@ -14,7 +14,7 @@
            #1#)))) 
 
 (DEFUN |Poset;| (|t#1|)
-  (SPROG ((#1=#:G33 NIL))
+  (SPROG ((#1=#:G27 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -45,28 +45,13 @@
                                                                 (|Boolean|)))
                                                               %))
                                                             T)
-                                                           ((|setVert|
-                                                             ((|Void|) %
-                                                              (|List| |t#1|)))
-                                                            T)
-                                                           ((|setArr|
-                                                             ((|Void|) %
-                                                              (|List|
-                                                               (|List|
-                                                                (|Boolean|)))))
-                                                            T)
-                                                           ((|addObject!|
+                                                           ((|addObject|
                                                              (% % |t#1|))
                                                             T)
-                                                           ((|addArrow!|
-                                                             (% %
-                                                              (|NonNegativeInteger|)
-                                                              (|NonNegativeInteger|)))
+                                                           ((|addArrow|
+                                                             (% % |t#1| |t#1|))
                                                             T)
                                                            ((|opposite| (% %))
-                                                            T)
-                                                           ((|powerSetStructure|
-                                                             (% |t#1|))
                                                             T)
                                                            ((|implies|
                                                              ((|Boolean|) %
@@ -132,15 +117,6 @@
                                                            ((|objectToIndex|
                                                              ((|NonNegativeInteger|)
                                                               % |t#1|))
-                                                            T)
-                                                           ((|completeReflexivity|
-                                                             (% %))
-                                                            T)
-                                                           ((|completeTransitivity|
-                                                             (% %))
-                                                            T)
-                                                           ((|isAntisymmetric?|
-                                                             ((|Boolean|) %))
                                                             T)
                                                            ((|isChain?|
                                                              ((|Boolean|) %))

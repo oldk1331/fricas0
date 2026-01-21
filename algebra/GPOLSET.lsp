@@ -27,8 +27,8 @@
 
 (SDEFUN |GPOLSET;=;2%B;8| ((|ps1| (%)) (|ps2| (%)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G27 NIL) (|p| NIL) (#2=#:G26 NIL) (#3=#:G25 NIL)
-          (#4=#:G24 NIL))
+         ((#1=#:G19 NIL) (|p| NIL) (#2=#:G18 NIL) (#3=#:G17 NIL)
+          (#4=#:G16 NIL))
          (SEQ
           (SPADCALL
            (SPADCALL
@@ -56,7 +56,7 @@
            (QREFELT % 29))))) 
 
 (SDEFUN |GPOLSET;coerce;%Of;9| ((|ps| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G35 NIL) (|p| NIL) (#2=#:G34 NIL) (|lp| (|List| P)))
+        (SPROG ((#1=#:G27 NIL) (|p| NIL) (#2=#:G26 NIL) (|lp| (|List| P)))
                (SEQ
                 (LETT |lp|
                       (SPADCALL (ELT % 31) (SPADCALL |ps| (QREFELT % 14))
@@ -104,28 +104,9 @@
 
 (DECLAIM (NOTINLINE |GeneralPolynomialSet;|)) 
 
-(DEFUN |GeneralPolynomialSet| (&REST #1=#:G60)
-  (SPROG NIL
-         (PROG (#2=#:G61)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|GeneralPolynomialSet|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |GeneralPolynomialSet;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|GeneralPolynomialSet|)))))))))) 
-
 (DEFUN |GeneralPolynomialSet;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((#1=#:G59 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
+   ((#1=#:G50 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
     (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -167,6 +148,25 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 10 (|List| |#4|))
     %))) 
+
+(DEFUN |GeneralPolynomialSet| (&REST #1=#:G51)
+  (SPROG NIL
+         (PROG (#2=#:G52)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|GeneralPolynomialSet|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |GeneralPolynomialSet;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|GeneralPolynomialSet|)))))))))) 
 
 (MAKEPROP '|GeneralPolynomialSet| '|infovec|
           (LIST

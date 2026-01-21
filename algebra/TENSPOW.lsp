@@ -1,8 +1,8 @@
 
 (SDEFUN |TENSPOW;coerce;%Of;1| ((|x| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|le| (|List| (|OutputForm|))) (|ko| (|OutputForm|)) (#1=#:G30 NIL)
-          (|b| NIL) (#2=#:G29 NIL) (#3=#:G28 NIL) (|rec| NIL))
+         ((|le| (|List| (|OutputForm|))) (|ko| (|OutputForm|)) (#1=#:G21 NIL)
+          (|b| NIL) (#2=#:G20 NIL) (#3=#:G19 NIL) (|rec| NIL))
          (SEQ
           (COND
            ((SPADCALL |x| (QREFELT % 11))
@@ -60,7 +60,7 @@
          (% (|List| (|Record| (|:| |k| (|List| B)) (|:| |c| R)))))
         (SPROG
          ((|res| (|List| (|Record| (|:| |k| (|List| B)) (|:| |c| R))))
-          (#1=#:G46 NIL) (|tt| NIL) (#2=#:G45 NIL) (|s1| NIL) (#3=#:G44 NIL)
+          (#1=#:G36 NIL) (|tt| NIL) (#2=#:G35 NIL) (|s1| NIL) (#3=#:G34 NIL)
           (|xr| (|List| M)) (|x1| (M)))
          (SEQ (LETT |x1| (|SPADfirst| |xx|)) (LETT |xr| (CDR |xx|))
               (COND
@@ -111,7 +111,7 @@
 (SDEFUN |TENSPOW;tensor;L%;4| ((|xx| (|List| M)) (% (%)))
         (SPROG
          ((|res| (|List| (|Record| (|:| |k| (|Vector| B)) (|:| |c| R))))
-          (#1=#:G61 NIL) (|tt| NIL))
+          (#1=#:G48 NIL) (|tt| NIL))
          (SEQ
           (COND
            ((NULL (SPADCALL |xx| (QREFELT % 6) (QREFELT % 40)))
@@ -141,9 +141,9 @@
 (SDEFUN |TENSPOW;*;3%;5| ((|x1| (%)) (|x2| (%)) (% (%)))
         (SPROG
          ((|res| (|List| (|Record| (|:| |k| (|Vector| B)) (|:| |c| R))))
-          (#1=#:G79 NIL) (|t| NIL) (|t1t2| (%)) (#2=#:G77 NIL) (|b1| NIL)
-          (#3=#:G78 NIL) (|b2| NIL) (#4=#:G76 NIL) (#5=#:G75 NIL) (|t2| NIL)
-          (#6=#:G74 NIL) (|t1| NIL))
+          (#1=#:G66 NIL) (|t| NIL) (|t1t2| (%)) (#2=#:G64 NIL) (|b1| NIL)
+          (#3=#:G65 NIL) (|b2| NIL) (#4=#:G63 NIL) (#5=#:G62 NIL) (|t2| NIL)
+          (#6=#:G61 NIL) (|t1| NIL))
          (SEQ (LETT |res| NIL)
               (SEQ (LETT |t1| NIL) (LETT #6# (SPADCALL |x1| (QREFELT % 17)))
                    G190
@@ -220,26 +220,9 @@
 
 (DECLAIM (NOTINLINE |TensorPower;|)) 
 
-(DEFUN |TensorPower| (&REST #1=#:G87)
-  (SPROG NIL
-         (PROG (#2=#:G88)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(NIL T T T))
-                     (HGET |$ConstructorCache| '|TensorPower|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |TensorPower;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|TensorPower|)))))))))) 
-
 (DEFUN |TensorPower;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G85 NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
+   ((|pv$| NIL) (#1=#:G72 NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
     (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 |#1|)
@@ -311,6 +294,23 @@
      ((|testBitVector| |pv$| 1)
       (QSETREFV % 51 (CONS (|dispatchFunction| |TENSPOW;*;3%;5|) %))))
     %))) 
+
+(DEFUN |TensorPower| (&REST #1=#:G74)
+  (SPROG NIL
+         (PROG (#2=#:G75)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(NIL T T T))
+                     (HGET |$ConstructorCache| '|TensorPower|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |TensorPower;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|TensorPower|)))))))))) 
 
 (MAKEPROP '|TensorPower| '|infovec|
           (LIST

@@ -40,7 +40,7 @@
         (SETELT_U8 |x| |i| |s|)) 
 
 (SDEFUN |U8VEC;fill!;%I%;9| ((|x| (%)) (|s| (|Integer|)) (% (%)))
-        (SPROG ((#1=#:G2440 NIL) (|i| NIL))
+        (SPROG ((#1=#:G2355 NIL) (|i| NIL))
                (SEQ
                 (SEQ (LETT |i| 0) (LETT #1# (|sub_SI| (QV_LEN_U8 |x|) 1)) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -50,25 +50,9 @@
 
 (DECLAIM (NOTINLINE |U8Vector;|)) 
 
-(DEFUN |U8Vector| ()
-  (SPROG NIL
-         (PROG (#1=#:G2452)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|U8Vector|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|U8Vector|
-                             (LIST (CONS NIL (CONS 1 (|U8Vector;|))))))
-                    (LETT #1# T))
-                (COND ((NOT #1#) (HREM |$ConstructorCache| '|U8Vector|)))))))))) 
-
 (DEFUN |U8Vector;| ()
   (SPROG
-   ((|dv$| NIL) (% NIL) (#1=#:G2450 NIL) (#2=#:G2449 NIL) (#3=#:G2448 NIL)
+   ((|dv$| NIL) (% NIL) (#1=#:G2365 NIL) (#2=#:G2364 NIL) (#3=#:G2363 NIL)
     (|pv$| NIL))
    (PROGN
     (LETT |dv$| '(|U8Vector|))
@@ -171,6 +155,22 @@
      (|augmentPredVector| % 4194304))
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |U8Vector| ()
+  (SPROG NIL
+         (PROG (#1=#:G2367)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|U8Vector|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|U8Vector|
+                             (LIST (CONS NIL (CONS 1 (|U8Vector;|))))))
+                    (LETT #1# T))
+                (COND ((NOT #1#) (HREM |$ConstructorCache| '|U8Vector|)))))))))) 
 
 (MAKEPROP '|U8Vector| '|infovec|
           (LIST

@@ -15,8 +15,8 @@
 
 (SDEFUN |SYMFUNC;symFunc;LV;3| ((|l| (|List| R)) (% (|Vector| R)))
         (SPROG
-         ((#1=#:G14 NIL) (#2=#:G13 #3=(|SparseUnivariatePolynomial| R))
-          (#4=#:G15 #3#) (#5=#:G17 NIL) (|a| NIL))
+         ((#1=#:G3 NIL) (#2=#:G2 #3=(|SparseUnivariatePolynomial| R))
+          (#4=#:G4 #3#) (#5=#:G6 NIL) (|a| NIL))
          (SEQ
           (|SYMFUNC;coef_vect|
            (PROGN
@@ -39,23 +39,6 @@
 
 (DECLAIM (NOTINLINE |SymmetricFunctions;|)) 
 
-(DEFUN |SymmetricFunctions| (#1=#:G18)
-  (SPROG NIL
-         (PROG (#2=#:G19)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|SymmetricFunctions|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|SymmetricFunctions;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|SymmetricFunctions|)))))))))) 
-
 (DEFUN |SymmetricFunctions;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -70,6 +53,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |SymmetricFunctions| (#1=#:G7)
+  (SPROG NIL
+         (PROG (#2=#:G8)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|SymmetricFunctions|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|SymmetricFunctions;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|SymmetricFunctions|)))))))))) 
 
 (MAKEPROP '|SymmetricFunctions| '|infovec|
           (LIST

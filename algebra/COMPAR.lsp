@@ -7,7 +7,7 @@
   (COND (|Comparable;AL|) (T (SETQ |Comparable;AL| (|Comparable;|))))) 
 
 (DEFUN |Comparable;| ()
-  (SPROG ((#1=#:G1 NIL))
+  (SPROG ((#1=#:G0 NIL))
          (PROG1
              (LETT #1#
                    (|Join| (|SetCategory|)

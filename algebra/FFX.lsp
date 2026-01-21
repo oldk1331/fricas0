@@ -1,27 +1,8 @@
 
 (DECLAIM (NOTINLINE |FiniteFieldExtension;|)) 
 
-(DEFUN |FiniteFieldExtension| (&REST #1=#:G66)
-  (SPROG NIL
-         (PROG (#2=#:G67)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|FiniteFieldExtension|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |FiniteFieldExtension;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|FiniteFieldExtension|)))))))))) 
-
 (DEFUN |FiniteFieldExtension;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (#1=#:G65 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (#1=#:G37 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 |#2|)
@@ -54,6 +35,25 @@
                (|augmentPredVector| % 32))
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |FiniteFieldExtension| (&REST #1=#:G38)
+  (SPROG NIL
+         (PROG (#2=#:G39)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|FiniteFieldExtension|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |FiniteFieldExtension;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|FiniteFieldExtension|)))))))))) 
 
 (MAKEPROP '|FiniteFieldExtension| '|infovec|
           (LIST

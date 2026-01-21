@@ -10,7 +10,7 @@
         (SPADCALL (SPADCALL (LIST |s| |e|) (QREFELT % 13)) (QREFELT % 9))) 
 
 (SDEFUN |OUT;outputList;LV;4| ((|l| (|List| (|Any|))) (% (|Void|)))
-        (SPROG ((#1=#:G15 NIL) (|x| NIL) (#2=#:G14 NIL))
+        (SPROG ((#1=#:G10 NIL) (|x| NIL) (#2=#:G9 NIL))
                (SEQ
                 (SPADCALL
                  (SPADCALL
@@ -37,9 +37,21 @@
 
 (DECLAIM (NOTINLINE |OutputPackage;|)) 
 
+(DEFUN |OutputPackage;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|OutputPackage|))
+          (LETT % (GETREFV 25))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|OutputPackage| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |OutputPackage| ()
   (SPROG NIL
-         (PROG (#1=#:G17)
+         (PROG (#1=#:G12)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OutputPackage|))
@@ -53,18 +65,6 @@
                     (LETT #1# T))
                 (COND
                  ((NOT #1#) (HREM |$ConstructorCache| '|OutputPackage|)))))))))) 
-
-(DEFUN |OutputPackage;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|OutputPackage|))
-          (LETT % (GETREFV 25))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|OutputPackage| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|OutputPackage| '|infovec|
           (LIST

@@ -6,10 +6,10 @@
 (DEFUN |Finite| () (COND (|Finite;AL|) (T (SETQ |Finite;AL| (|Finite;|))))) 
 
 (DEFUN |Finite;| ()
-  (SPROG ((#1=#:G2 NIL))
+  (SPROG ((#1=#:G1 NIL))
          (PROG1
              (LETT #1#
-                   (|subst_in_cat| '(#2=#:G1) (LIST '(|InputForm|))
+                   (|subst_in_cat| '(#2=#:G0) (LIST '(|InputForm|))
                                    (|Join| (|SetCategory|)
                                            (|ConvertibleTo| '#2#)
                                            (|Comparable|) (|Hashable|)

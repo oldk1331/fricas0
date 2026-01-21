@@ -5,7 +5,7 @@
 (SDEFUN |EVALAB-;eval;S2LS;2|
         ((|f| (S)) (|xs| (|List| R)) (|vs| (|List| R)) (% (S)))
         (SPROG
-         ((#1=#:G22 NIL) (|x| NIL) (#2=#:G23 NIL) (|v| NIL) (#3=#:G21 NIL))
+         ((#1=#:G13 NIL) (|x| NIL) (#2=#:G14 NIL) (|v| NIL) (#3=#:G12 NIL))
          (SEQ
           (SPADCALL |f|
                     (PROGN

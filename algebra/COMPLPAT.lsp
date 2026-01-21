@@ -13,25 +13,6 @@
 
 (DECLAIM (NOTINLINE |ComplexPattern;|)) 
 
-(DEFUN |ComplexPattern| (&REST #1=#:G5)
-  (SPROG NIL
-         (PROG (#2=#:G6)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ComplexPattern|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ComplexPattern;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|ComplexPattern|)))))))))) 
-
 (DEFUN |ComplexPattern;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -51,6 +32,25 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 13 (SPADCALL '|%i| 'T NIL NIL (QREFELT % 12)))
           %))) 
+
+(DEFUN |ComplexPattern| (&REST #1=#:G3)
+  (SPROG NIL
+         (PROG (#2=#:G4)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ComplexPattern|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ComplexPattern;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|ComplexPattern|)))))))))) 
 
 (MAKEPROP '|ComplexPattern| '|infovec|
           (LIST

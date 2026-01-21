@@ -63,28 +63,9 @@
 
 (DECLAIM (NOTINLINE |PrimitiveTwoDimensionalArray;|)) 
 
-(DEFUN |PrimitiveTwoDimensionalArray| (#1=#:G2671)
-  (SPROG NIL
-         (PROG (#2=#:G2672)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|PrimitiveTwoDimensionalArray|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|PrimitiveTwoDimensionalArray;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|PrimitiveTwoDimensionalArray|)))))))))) 
-
 (DEFUN |PrimitiveTwoDimensionalArray;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G2668 NIL) (#2=#:G2669 NIL) (% NIL) (|dv$| NIL)
+   ((|pv$| NIL) (#1=#:G2579 NIL) (#2=#:G2580 NIL) (% NIL) (|dv$| NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -206,6 +187,25 @@
      (|augmentPredVector| % 4194304))
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |PrimitiveTwoDimensionalArray| (#1=#:G2582)
+  (SPROG NIL
+         (PROG (#2=#:G2583)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|PrimitiveTwoDimensionalArray|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|PrimitiveTwoDimensionalArray;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|PrimitiveTwoDimensionalArray|)))))))))) 
 
 (MAKEPROP '|PrimitiveTwoDimensionalArray| '|infovec|
           (LIST

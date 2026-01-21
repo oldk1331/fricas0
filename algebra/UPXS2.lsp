@@ -9,29 +9,6 @@
 
 (DECLAIM (NOTINLINE |UnivariatePuiseuxSeriesFunctions2;|)) 
 
-(DEFUN |UnivariatePuiseuxSeriesFunctions2| (&REST #1=#:G14)
-  (SPROG NIL
-         (PROG (#2=#:G15)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T T NIL NIL NIL NIL))
-                     (HGET |$ConstructorCache|
-                           '|UnivariatePuiseuxSeriesFunctions2|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |UnivariatePuiseuxSeriesFunctions2;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|UnivariatePuiseuxSeriesFunctions2|)))))))))) 
-
 (DEFUN |UnivariatePuiseuxSeriesFunctions2;| (|#1| |#2| |#3| |#4| |#5| |#6|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$6 NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL)
@@ -60,6 +37,29 @@
     (QSETREFV % 11 |#6|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |UnivariatePuiseuxSeriesFunctions2| (&REST #1=#:G2)
+  (SPROG NIL
+         (PROG (#2=#:G3)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T T NIL NIL NIL NIL))
+                     (HGET |$ConstructorCache|
+                           '|UnivariatePuiseuxSeriesFunctions2|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |UnivariatePuiseuxSeriesFunctions2;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|UnivariatePuiseuxSeriesFunctions2|)))))))))) 
 
 (MAKEPROP '|UnivariatePuiseuxSeriesFunctions2| '|infovec|
           (LIST

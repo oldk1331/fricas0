@@ -2,7 +2,7 @@
 (SDEFUN |TENSPO2;linearExtend;MTpM2;1|
         ((|f| (|Mapping| M2 (|List| B))) (|x| (|TensorPower| |n| R B M1))
          (% (M2)))
-        (SPROG ((|res| (M2)) (#1=#:G18 NIL) (|t| NIL))
+        (SPROG ((|res| (M2)) (#1=#:G7 NIL) (|t| NIL))
                (SEQ (LETT |res| (|spadConstant| % 11))
                     (SEQ (LETT |t| NIL)
                          (LETT #1# (SPADCALL |x| (QREFELT % 15))) G190
@@ -24,25 +24,6 @@
                     (EXIT |res|)))) 
 
 (DECLAIM (NOTINLINE |TensorPowerFunctions2;|)) 
-
-(DEFUN |TensorPowerFunctions2| (&REST #1=#:G19)
-  (SPROG NIL
-         (PROG (#2=#:G20)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(NIL T T T T))
-                     (HGET |$ConstructorCache| '|TensorPowerFunctions2|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |TensorPowerFunctions2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|TensorPowerFunctions2|)))))))))) 
 
 (DEFUN |TensorPowerFunctions2;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
@@ -68,6 +49,25 @@
     (QSETREFV % 10 |#5|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |TensorPowerFunctions2| (&REST #1=#:G8)
+  (SPROG NIL
+         (PROG (#2=#:G9)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(NIL T T T T))
+                     (HGET |$ConstructorCache| '|TensorPowerFunctions2|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |TensorPowerFunctions2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|TensorPowerFunctions2|)))))))))) 
 
 (MAKEPROP '|TensorPowerFunctions2| '|infovec|
           (LIST

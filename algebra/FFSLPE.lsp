@@ -2,10 +2,10 @@
 (SDEFUN |FFSLPE;solveLinearPolynomialEquation;LFPPU;1|
         ((|lp| (|List| FPP)) (|p| (FPP)) (% (|Union| (|List| FPP) "failed")))
         (SPROG
-         ((|answer| (|Union| (|List| FPP) "failed")) (#1=#:G19 NIL)
-          (#2=#:G23 NIL) (|ans| (|Union| (|Vector| (|List| FPP)) #3="failed"))
-          (|deg| #4=(|NonNegativeInteger|)) (#5=#:G16 NIL) (#6=#:G15 #4#)
-          (#7=#:G17 #4#) (#8=#:G36 NIL) (|u| NIL))
+         ((|answer| (|Union| (|List| FPP) "failed")) (#1=#:G10 NIL)
+          (#2=#:G14 NIL) (|ans| (|Union| (|Vector| (|List| FPP)) #3="failed"))
+          (|deg| #4=(|NonNegativeInteger|)) (#5=#:G7 NIL) (#6=#:G6 #4#)
+          (#7=#:G8 #4#) (#8=#:G27 NIL) (|u| NIL))
          (SEQ
           (COND
            ((SPADCALL (QREFELT % 9) |lp| (QREFELT % 18))
@@ -90,29 +90,6 @@
 
 (DECLAIM (NOTINLINE |FiniteFieldSolveLinearPolynomialEquation;|)) 
 
-(DEFUN |FiniteFieldSolveLinearPolynomialEquation| (&REST #1=#:G37)
-  (SPROG NIL
-         (PROG (#2=#:G38)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|FiniteFieldSolveLinearPolynomialEquation|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function| |FiniteFieldSolveLinearPolynomialEquation;|)
-                       #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|FiniteFieldSolveLinearPolynomialEquation|)))))))))) 
-
 (DEFUN |FiniteFieldSolveLinearPolynomialEquation;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -137,6 +114,29 @@
           (QSETREFV % 14 (SPADCALL (|spadConstant| % 10) 1 (QREFELT % 13)))
           (QSETREFV % 15 #())
           %))) 
+
+(DEFUN |FiniteFieldSolveLinearPolynomialEquation| (&REST #1=#:G28)
+  (SPROG NIL
+         (PROG (#2=#:G29)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|FiniteFieldSolveLinearPolynomialEquation|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function| |FiniteFieldSolveLinearPolynomialEquation;|)
+                       #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|FiniteFieldSolveLinearPolynomialEquation|)))))))))) 
 
 (MAKEPROP '|FiniteFieldSolveLinearPolynomialEquation| '|infovec|
           (LIST

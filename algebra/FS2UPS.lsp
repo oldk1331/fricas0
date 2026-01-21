@@ -1,30 +1,6 @@
 
 (DECLAIM (NOTINLINE |FunctionSpaceToUnivariatePowerSeries;|)) 
 
-(DEFUN |FunctionSpaceToUnivariatePowerSeries| (&REST #1=#:G25)
-  (SPROG NIL
-         (PROG (#2=#:G26)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T T T T T T T NIL))
-                     (HGET |$ConstructorCache|
-                           '|FunctionSpaceToUnivariatePowerSeries|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function| |FunctionSpaceToUnivariatePowerSeries;|)
-                       #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|FunctionSpaceToUnivariatePowerSeries|)))))))))) 
-
 (DEFUN |FunctionSpaceToUnivariatePowerSeries;|
        (|#1| |#2| |#3| |#4| |#5| |#6| |#7| |#8|)
   (SPROG
@@ -58,6 +34,30 @@
     (QSETREFV % 13 |#8|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |FunctionSpaceToUnivariatePowerSeries| (&REST #1=#:G12)
+  (SPROG NIL
+         (PROG (#2=#:G13)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T T T T T T T NIL))
+                     (HGET |$ConstructorCache|
+                           '|FunctionSpaceToUnivariatePowerSeries|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function| |FunctionSpaceToUnivariatePowerSeries;|)
+                       #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|FunctionSpaceToUnivariatePowerSeries|)))))))))) 
 
 (MAKEPROP '|FunctionSpaceToUnivariatePowerSeries| '|infovec|
           (LIST

@@ -1,8 +1,8 @@
 
 (SDEFUN |MATCAT2;map;MM1M2;1| ((|f| (|Mapping| R2 R1)) (|m| (M1)) (% (M2)))
         (SPROG
-         ((#1=#:G16 NIL) (|j| NIL) (#2=#:G17 NIL) (|l| NIL) (#3=#:G14 NIL)
-          (|i| NIL) (#4=#:G15 NIL) (|k| NIL) (|ans| (M2)))
+         ((#1=#:G9 NIL) (|j| NIL) (#2=#:G10 NIL) (|l| NIL) (#3=#:G7 NIL)
+          (|i| NIL) (#4=#:G8 NIL) (|k| NIL) (|ans| (M2)))
          (SEQ
           (LETT |ans|
                 (SPADCALL (SPADCALL |m| (QREFELT % 15))
@@ -36,9 +36,9 @@
         ((|f| (|Mapping| (|Union| R2 "failed") R1)) (|m| (M1))
          (% (|Union| M2 "failed")))
         (SPROG
-         ((#1=#:G24 NIL) (#2=#:G38 NIL) (|r| (|Union| R2 #3="failed"))
-          (#4=#:G41 NIL) (|j| NIL) (#5=#:G42 NIL) (|l| NIL) (#6=#:G39 NIL)
-          (|i| NIL) (#7=#:G40 NIL) (|k| NIL) (|ans| (M2)))
+         ((#1=#:G17 NIL) (#2=#:G31 NIL) (|r| (|Union| R2 #3="failed"))
+          (#4=#:G34 NIL) (|j| NIL) (#5=#:G35 NIL) (|l| NIL) (#6=#:G32 NIL)
+          (|i| NIL) (#7=#:G33 NIL) (|k| NIL) (|ans| (M2)))
          (SEQ
           (EXIT
            (SEQ
@@ -65,7 +65,7 @@
                          (EXIT
                           (COND
                            ((SPADCALL |r| (CONS 1 "failed") (QREFELT % 34))
-                            (PROGN (LETT #2# (CONS 1 "failed")) (GO #8=#:G37)))
+                            (PROGN (LETT #2# (CONS 1 "failed")) (GO #8=#:G30)))
                            ('T
                             (SPADCALL |ans| |k| |l|
                                       (PROG2 (LETT #1# |r|)
@@ -85,7 +85,7 @@
 
 (SDEFUN |MATCAT2;reduce;MM12R2;3|
         ((|f| (|Mapping| R2 R1 R2)) (|m| (M1)) (|ident| (R2)) (% (R2)))
-        (SPROG ((|s| (R2)) (#1=#:G51 NIL) (|j| NIL) (#2=#:G50 NIL) (|i| NIL))
+        (SPROG ((|s| (R2)) (#1=#:G44 NIL) (|j| NIL) (#2=#:G43 NIL) (|i| NIL))
                (SEQ (LETT |s| |ident|)
                     (SEQ (LETT |i| (SPADCALL |m| (QREFELT % 20)))
                          (LETT #2# (SPADCALL |m| (QREFELT % 21))) G190
@@ -107,26 +107,6 @@
                     (EXIT |s|)))) 
 
 (DECLAIM (NOTINLINE |MatrixCategoryFunctions2;|)) 
-
-(DEFUN |MatrixCategoryFunctions2| (&REST #1=#:G52)
-  (SPROG NIL
-         (PROG (#2=#:G53)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|MatrixCategoryFunctions2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |MatrixCategoryFunctions2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|MatrixCategoryFunctions2|)))))))))) 
 
 (DEFUN |MatrixCategoryFunctions2;| (|#1| |#2| |#3| |#4| |#5| |#6| |#7| |#8|)
   (SPROG
@@ -160,6 +140,26 @@
     (QSETREFV % 13 |#8|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |MatrixCategoryFunctions2| (&REST #1=#:G45)
+  (SPROG NIL
+         (PROG (#2=#:G46)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|MatrixCategoryFunctions2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |MatrixCategoryFunctions2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|MatrixCategoryFunctions2|)))))))))) 
 
 (MAKEPROP '|MatrixCategoryFunctions2| '|infovec|
           (LIST

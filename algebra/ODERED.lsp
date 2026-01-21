@@ -4,8 +4,8 @@
 
 (SDEFUN |ODERED;get_sys| ((|l| (LO)) (% (|Matrix| L)))
         (SPROG
-         ((|mdi| (|Matrix| L)) (|sys| #1=(|Matrix| L)) (#2=#:G20 NIL) (|i| NIL)
-          (#3=#:G18 NIL) (#4=#:G19 NIL) (|j| NIL) (|md| #1#))
+         ((|mdi| (|Matrix| L)) (|sys| #1=(|Matrix| L)) (#2=#:G12 NIL) (|i| NIL)
+          (#3=#:G10 NIL) (#4=#:G11 NIL) (|j| NIL) (|md| #1#))
          (SEQ
           (LETT |md|
                 (|ODERED;matF2L|
@@ -66,7 +66,7 @@
          (%
           (|Record| (|:| |mat| (|Matrix| L))
                     (|:| |vecs| (|List| (|Vector| F))))))
-        (SPROG ((#1=#:G34 NIL) (|g| NIL) (#2=#:G33 NIL))
+        (SPROG ((#1=#:G22 NIL) (|g| NIL) (#2=#:G21 NIL))
                (SEQ
                 (CONS (|ODERED;get_sys| |l| %)
                       (PROGN
@@ -83,23 +83,6 @@
                             (EXIT (NREVERSE #2#)))))))) 
 
 (DECLAIM (NOTINLINE |ReduceLODE;|)) 
-
-(DEFUN |ReduceLODE| (&REST #1=#:G35)
-  (SPROG NIL
-         (PROG (#2=#:G36)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ReduceLODE|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ReduceLODE;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|ReduceLODE|)))))))))) 
 
 (DEFUN |ReduceLODE;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
@@ -126,6 +109,23 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 12 (SPADCALL (QREFELT % 11)))
     %))) 
+
+(DEFUN |ReduceLODE| (&REST #1=#:G23)
+  (SPROG NIL
+         (PROG (#2=#:G24)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ReduceLODE|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ReduceLODE;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|ReduceLODE|)))))))))) 
 
 (MAKEPROP '|ReduceLODE| '|infovec|
           (LIST

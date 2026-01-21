@@ -13,7 +13,7 @@
 
 (SDEFUN |GOPT;maxSubst;U%;4|
         ((|d| (|Union| (|PositiveInteger|) "arbitrary")) (% (%)))
-        (SPROG ((#1=#:G31 NIL))
+        (SPROG ((#1=#:G25 NIL))
                (COND
                 ((QEQCAR |d| 0)
                  (SPADCALL
@@ -89,7 +89,7 @@
 
 (SDEFUN |GOPT;option;LSU;23|
         ((|l| (|List| %)) (|s| (|Symbol|)) (% (|Union| (|Any|) "failed")))
-        (SPROG ((#1=#:G105 NIL) (#2=#:G106 NIL) (#3=#:G107 NIL) (|x| NIL))
+        (SPROG ((#1=#:G88 NIL) (#2=#:G89 NIL) (#3=#:G90 NIL) (|x| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -107,31 +107,14 @@
                               (LETT #1#
                                     (PROGN
                                      (LETT #2# (CONS 0 (QCDR |x|)))
-                                     (GO #4=#:G104)))
-                              (GO #5=#:G99))))))
+                                     (GO #4=#:G87)))
+                              (GO #5=#:G82))))))
                          (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
                    #5# (EXIT #1#))
                   (EXIT (CONS 1 "failed"))))
                 #4# (EXIT #2#)))) 
 
 (DECLAIM (NOTINLINE |GuessOption;|)) 
-
-(DEFUN |GuessOption| ()
-  (SPROG NIL
-         (PROG (#1=#:G109)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|GuessOption|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|GuessOption|
-                             (LIST (CONS NIL (CONS 1 (|GuessOption;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#) (HREM |$ConstructorCache| '|GuessOption|)))))))))) 
 
 (DEFUN |GuessOption;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
@@ -147,6 +130,23 @@
                     (|Record| (|:| |keyword| (|Symbol|))
                               (|:| |value| (|Any|))))
           %))) 
+
+(DEFUN |GuessOption| ()
+  (SPROG NIL
+         (PROG (#1=#:G92)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|GuessOption|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|GuessOption|
+                             (LIST (CONS NIL (CONS 1 (|GuessOption;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#) (HREM |$ConstructorCache| '|GuessOption|)))))))))) 
 
 (MAKEPROP '|GuessOption| '|infovec|
           (LIST

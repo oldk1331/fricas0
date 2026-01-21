@@ -114,7 +114,7 @@
 
 (SDEFUN |FMTLATEX;formatFunction;ObLOb;14|
         ((|b| #1=(|OutputBox|)) (|lb| (|List| #1#)) (% (|OutputBox|)))
-        (SPROG ((|bx| (|OutputBox|)) (#2=#:G59 NIL) (|a| NIL))
+        (SPROG ((|bx| (|OutputBox|)) (#2=#:G48 NIL) (|a| NIL))
                (SEQ
                 (COND
                  ((NULL |lb|)
@@ -159,7 +159,7 @@
           (LETT |op| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|bargs| NIL) (#1=#:G65 NIL) (|a| NIL) (#2=#:G64 NIL))
+            (SPROG ((|bargs| NIL) (#1=#:G54 NIL) (|a| NIL) (#2=#:G53 NIL))
                    (SEQ
                     (LETT |bargs|
                           (PROGN
@@ -528,7 +528,7 @@
           (RETURN
            (PROGN
             (SPROG
-             ((|b2| NIL) (|lb| NIL) (|o| NIL) (#1=#:G143 NIL) (|a| NIL)
+             ((|b2| NIL) (|lb| NIL) (|o| NIL) (#1=#:G118 NIL) (|a| NIL)
               (|i| NIL) (|b1| NIL))
              (SEQ
               (LETT |b1|
@@ -752,7 +752,7 @@
          (%
           (|OperatorHandlers|
            (|Mapping| (|OutputBox|) (|Integer|) (|List| (|OutputForm|))))))
-        (SPROG ((#1=#:G563 NIL))
+        (SPROG ((#1=#:G538 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -1218,7 +1218,7 @@
                   (SPADCALL |oh| -1 "MATRIX" (SPADCALL "[" "]" (QREFELT % 103))
                             (QREFELT % 106))
                   (SPADCALL |oh| -1 "theMap" (ELT % 69) (QREFELT % 106))
-                  (EXIT (PROGN (LETT #1# |oh|) (GO #4=#:G562)))))
+                  (EXIT (PROGN (LETT #1# |oh|) (GO #4=#:G537)))))
                 #4# (EXIT #1#)))) 
 
 (SDEFUN |FMTLATEX;operatorHandlers;Oh;40|
@@ -1228,23 +1228,6 @@
         (QREFELT % 114)) 
 
 (DECLAIM (NOTINLINE |FormatLaTeX;|)) 
-
-(DEFUN |FormatLaTeX| ()
-  (SPROG NIL
-         (PROG (#1=#:G566)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|FormatLaTeX|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|FormatLaTeX|
-                             (LIST (CONS NIL (CONS 1 (|FormatLaTeX;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#) (HREM |$ConstructorCache| '|FormatLaTeX|)))))))))) 
 
 (DEFUN |FormatLaTeX;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
@@ -1260,6 +1243,23 @@
                     (|FMTLATEX;setOperatorHandlers!| (SPADCALL (QREFELT % 113))
                      %))
           %))) 
+
+(DEFUN |FormatLaTeX| ()
+  (SPROG NIL
+         (PROG (#1=#:G541)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|FormatLaTeX|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|FormatLaTeX|
+                             (LIST (CONS NIL (CONS 1 (|FormatLaTeX;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#) (HREM |$ConstructorCache| '|FormatLaTeX|)))))))))) 
 
 (MAKEPROP '|FormatLaTeX| '|infovec|
           (LIST

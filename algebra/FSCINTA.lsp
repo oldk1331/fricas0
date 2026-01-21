@@ -2,8 +2,8 @@
 (SDEFUN |FSCINTA;internalIntegrate;FGSIr;1|
         ((|f| (FG)) (|x| (|Symbol|)) (% (|IntegrationResult| FG)))
         (SPROG
-         ((|h| (FG)) (#1=#:G23 NIL) (|k| NIL) (#2=#:G22 NIL)
-          (|lt| (|List| #3=(|Kernel| FG))) (#4=#:G21 NIL) (#5=#:G20 NIL)
+         ((|h| (FG)) (#1=#:G15 NIL) (|k| NIL) (#2=#:G14 NIL)
+          (|lt| (|List| #3=(|Kernel| FG))) (#4=#:G13 NIL) (#5=#:G12 NIL)
           (|tg| (|List| #3#)) (|g| (FG)))
          (SEQ
           (LETT |f|
@@ -69,9 +69,27 @@
 
 (DECLAIM (NOTINLINE |FunctionSpaceComplexIntegrationAux;|)) 
 
-(DEFUN |FunctionSpaceComplexIntegrationAux| (&REST #1=#:G24)
+(DEFUN |FunctionSpaceComplexIntegrationAux;| (|#1| |#2|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT DV$2 (|devaluate| |#2|))
+          (LETT |dv$| (LIST '|FunctionSpaceComplexIntegrationAux| DV$1 DV$2))
+          (LETT % (GETREFV 38))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|FunctionSpaceComplexIntegrationAux|
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 8 '|rtrig|)
+          %))) 
+
+(DEFUN |FunctionSpaceComplexIntegrationAux| (&REST #1=#:G16)
   (SPROG NIL
-         (PROG (#2=#:G25)
+         (PROG (#2=#:G17)
            (RETURN
             (COND
              ((LETT #2#
@@ -90,24 +108,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|FunctionSpaceComplexIntegrationAux|)))))))))) 
-
-(DEFUN |FunctionSpaceComplexIntegrationAux;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT DV$2 (|devaluate| |#2|))
-          (LETT |dv$| (LIST '|FunctionSpaceComplexIntegrationAux| DV$1 DV$2))
-          (LETT % (GETREFV 38))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|FunctionSpaceComplexIntegrationAux|
-                      (LIST DV$1 DV$2) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (QSETREFV % 7 |#2|)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 8 '|rtrig|)
-          %))) 
 
 (MAKEPROP '|FunctionSpaceComplexIntegrationAux| '|infovec|
           (LIST

@@ -5,7 +5,7 @@
           (|Record| (|:| |coefvec| (|Vector| (|Fraction| P)))
                     (|:| |reductum| (|Fraction| P)))))
         (SPROG
-         ((|c| (P)) (|u| (|SparseUnivariatePolynomial| P)) (#1=#:G25 NIL)
+         ((|c| (P)) (|u| (|SparseUnivariatePolynomial| P)) (#1=#:G9 NIL)
           (|v| NIL) (|i| NIL) (|coefs| (|Vector| (|Fraction| P))))
          (SEQ (LETT |coefs| (MAKEARR1 (LENGTH |vs|) (|spadConstant| % 11)))
               (SEQ (LETT |i| 1) (LETT |v| NIL) (LETT #1# |vs|) G190
@@ -46,7 +46,7 @@
           (|r|
            (|Record| (|:| |coefvec| (|Vector| (|Fraction| P)))
                      (|:| |reductum| (|Fraction| P))))
-          (#1=#:G35 NIL) (|p| NIL) (|i| NIL) (|v| (|Vector| (|Fraction| P))))
+          (#1=#:G18 NIL) (|p| NIL) (|i| NIL) (|v| (|Vector| (|Fraction| P))))
          (SEQ (LETT |m| (SPADCALL (LENGTH |ps|) (LENGTH |vs|) (QREFELT % 32)))
               (LETT |v| (MAKEARR1 (LENGTH |ps|) (|spadConstant| % 11)))
               (SEQ (LETT |i| 1) (LETT |p| NIL) (LETT #1# |ps|) G190
@@ -85,27 +85,6 @@
 
 (DECLAIM (NOTINLINE |LinearSystemPolynomialPackage;|)) 
 
-(DEFUN |LinearSystemPolynomialPackage| (&REST #1=#:G42)
-  (SPROG NIL
-         (PROG (#2=#:G43)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|LinearSystemPolynomialPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |LinearSystemPolynomialPackage;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|LinearSystemPolynomialPackage|)))))))))) 
-
 (DEFUN |LinearSystemPolynomialPackage;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -128,6 +107,27 @@
     (QSETREFV % 9 |#4|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |LinearSystemPolynomialPackage| (&REST #1=#:G23)
+  (SPROG NIL
+         (PROG (#2=#:G24)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|LinearSystemPolynomialPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |LinearSystemPolynomialPackage;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|LinearSystemPolynomialPackage|)))))))))) 
 
 (MAKEPROP '|LinearSystemPolynomialPackage| '|infovec|
           (LIST

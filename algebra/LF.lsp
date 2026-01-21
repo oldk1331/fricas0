@@ -105,7 +105,7 @@
 
 (SDEFUN |LF;eqint| ((|k1| (|Kernel| F)) (|k2| (|Kernel| F)) (% (|Boolean|)))
         (SPROG
-         ((|res| (|Boolean|)) (#1=#:G88 NIL) (|a2| #2=(|List| F)) (|a1| #2#))
+         ((|res| (|Boolean|)) (#1=#:G61 NIL) (|a2| #2=(|List| F)) (|a1| #2#))
          (SEQ
           (EXIT
            (SEQ (LETT |a1| (SPADCALL |k1| (QREFELT % 70)))
@@ -113,7 +113,7 @@
                 (LETT |res|
                       (SPADCALL (SPADCALL |k1| (QREFELT % 71))
                                 (SPADCALL |k2| (QREFELT % 71)) (QREFELT % 72)))
-                (COND ((NULL |res|) (PROGN (LETT #1# |res|) (GO #3=#:G87))))
+                (COND ((NULL |res|) (PROGN (LETT #1# |res|) (GO #3=#:G60))))
                 (LETT |res| (SPADCALL |a1| |a2| (QREFELT % 73)))
                 (COND (|res| (PROGN (LETT #1# |res|) (GO #3#))))
                 (EXIT
@@ -164,8 +164,8 @@
 
 (SDEFUN |LF;dviint| ((|l| (|List| F)) (|v| (|Symbol|)) (% (F)))
         (SPROG
-         ((|m| (|Integer|)) (|lv| (|List| (|Symbol|))) (#1=#:G110 NIL)
-          (|vf| NIL) (#2=#:G109 NIL) (|lvf| (|List| F))
+         ((|m| (|Integer|)) (|lv| (|List| (|Symbol|))) (#1=#:G79 NIL)
+          (|vf| NIL) (#2=#:G78 NIL) (|lvf| (|List| F))
           (|n| (|NonNegativeInteger|))
           (|nu| (|Union| (|NonNegativeInteger|) "failed")))
          (SEQ (LETT |nu| (SPADCALL (LENGTH |l|) 2 (QREFELT % 83)))
@@ -342,25 +342,6 @@
 
 (DECLAIM (NOTINLINE |LiouvillianFunction;|)) 
 
-(DEFUN |LiouvillianFunction| (&REST #1=#:G214)
-  (SPROG NIL
-         (PROG (#2=#:G215)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|LiouvillianFunction|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |LiouvillianFunction;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|LiouvillianFunction|)))))))))) 
-
 (DEFUN |LiouvillianFunction;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -458,6 +439,25 @@
              (SPADCALL (QREFELT % 18) '|%specialInput|
                        (CONS (|function| |LF;indint|) %) (QREFELT % 125)))))
           %))) 
+
+(DEFUN |LiouvillianFunction| (&REST #1=#:G168)
+  (SPROG NIL
+         (PROG (#2=#:G169)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|LiouvillianFunction|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |LiouvillianFunction;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|LiouvillianFunction|)))))))))) 
 
 (DEFUN |LiouvillianFunction!10| (|z1| %)
   (SPADCALL

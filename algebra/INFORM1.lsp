@@ -32,23 +32,6 @@
 
 (DECLAIM (NOTINLINE |InputFormFunctions1;|)) 
 
-(DEFUN |InputFormFunctions1| (#1=#:G18)
-  (SPROG NIL
-         (PROG (#2=#:G19)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|InputFormFunctions1|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|InputFormFunctions1;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|InputFormFunctions1|)))))))))) 
-
 (DEFUN |InputFormFunctions1;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -64,6 +47,23 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 7 (|typeToInputForm| |#1|))
           %))) 
+
+(DEFUN |InputFormFunctions1| (#1=#:G7)
+  (SPROG NIL
+         (PROG (#2=#:G8)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|InputFormFunctions1|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|InputFormFunctions1;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|InputFormFunctions1|)))))))))) 
 
 (MAKEPROP '|InputFormFunctions1| '|infovec|
           (LIST

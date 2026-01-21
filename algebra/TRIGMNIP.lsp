@@ -22,7 +22,7 @@
           (|Record| (|:| |ker| (|List| (|Kernel| F))) (|:| |val| (|List| F)))))
         (SPROG
          ((|lv| (|List| F)) (|lk| (|List| (|Kernel| F)))
-          (|u| (|Union| F "failed")) (#1=#:G50 NIL) (|k| NIL))
+          (|u| (|Union| F "failed")) (#1=#:G28 NIL) (|k| NIL))
          (SEQ (LETT |lk| NIL) (LETT |lv| NIL)
               (SEQ (LETT |k| NIL) (LETT #1# (SPADCALL |f| (QREFELT % 34))) G190
                    (COND
@@ -39,8 +39,8 @@
 
 (SDEFUN |TRIGMNIP;kcomplex| ((|k| (|Kernel| F)) (% (|Union| F "failed")))
         (SPROG
-         ((#1=#:G70 NIL) (|u| (|Union| (|Integer|) "failed")) (|a| (F))
-          (#2=#:G69 NIL) (|n| (F)) (|arg| (|List| F)) (|op| (|BasicOperator|)))
+         ((#1=#:G46 NIL) (|u| (|Union| (|Integer|) "failed")) (|a| (F))
+          (#2=#:G45 NIL) (|n| (F)) (|arg| (|List| F)) (|op| (|BasicOperator|)))
          (SEQ (LETT |op| (SPADCALL |k| (QREFELT % 36)))
               (EXIT
                (COND
@@ -79,7 +79,7 @@
                                                          (QREFELT % 10))
                                                         |n| (QREFELT % 47))
                                               (QREFELT % 14))))
-                                 (GO #3=#:G62))))))))))
+                                 (GO #3=#:G38))))))))))
                         (EXIT (CONS 1 "failed"))))
                   #3# (EXIT #2#)))
                 ('T
@@ -109,7 +109,7 @@
                                                               (QREFELT % 10))
                                                     (QREFELT % 48))
                                           (QREFELT % 15) (QREFELT % 49))))
-                             (GO #4=#:G66))))))))))
+                             (GO #4=#:G42))))))))))
                     (EXIT (CONS 1 "failed"))))
                   #4# (EXIT #1#)))))))) 
 
@@ -145,7 +145,7 @@
           (RETURN (PROGN (SPADCALL |x| RTRIG (QREFELT % 56)))))) 
 
 (SDEFUN |TRIGMNIP;complexNormalize;FSF;9| ((|f| (F)) (|x| (|Symbol|)) (% (F)))
-        (SPROG ((#1=#:G85 NIL) (|g| (F)) (|k| NIL) (#2=#:G84 NIL))
+        (SPROG ((#1=#:G61 NIL) (|g| (F)) (|k| NIL) (#2=#:G60 NIL))
                (SEQ
                 (COND
                  ((SPADCALL
@@ -215,7 +215,7 @@
 
 (SDEFUN |TRIGMNIP;complexElementary;FSF;11|
         ((|f| (F)) (|x| (|Symbol|)) (% (F)))
-        (SPROG ((#1=#:G99 NIL) (|g| (F)) (|k| NIL) (#2=#:G98 NIL))
+        (SPROG ((#1=#:G75 NIL) (|g| (F)) (|k| NIL) (#2=#:G74 NIL))
                (SEQ
                 (COND
                  ((SPADCALL
@@ -275,7 +275,7 @@
 
 (SDEFUN |TRIGMNIP;localexplogs|
         ((|f| (F)) (|g| (F)) (% (|Expression| (|Complex| R))))
-        (SPROG ((#1=#:G108 NIL) (|k| NIL) (#2=#:G107 NIL))
+        (SPROG ((#1=#:G84 NIL) (|k| NIL) (#2=#:G83 NIL))
                (SEQ
                 (SPADCALL (SPADCALL |g| (QREFELT % 21))
                           (PROGN
@@ -317,26 +317,6 @@
 
 (DECLAIM (NOTINLINE |TrigonometricManipulations;|)) 
 
-(DEFUN |TrigonometricManipulations| (&REST #1=#:G112)
-  (SPROG NIL
-         (PROG (#2=#:G113)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|TrigonometricManipulations|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |TrigonometricManipulations;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|TrigonometricManipulations|)))))))))) 
-
 (DEFUN |TrigonometricManipulations;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -360,6 +340,26 @@
                     (SPADCALL (SPADCALL (QREFELT % 13)) (QREFELT % 12)
                               (QREFELT % 14)))
           %))) 
+
+(DEFUN |TrigonometricManipulations| (&REST #1=#:G88)
+  (SPROG NIL
+         (PROG (#2=#:G89)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|TrigonometricManipulations|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |TrigonometricManipulations;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|TrigonometricManipulations|)))))))))) 
 
 (MAKEPROP '|TrigonometricManipulations| '|infovec|
           (LIST

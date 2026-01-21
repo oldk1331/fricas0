@@ -72,26 +72,6 @@
 
 (DECLAIM (NOTINLINE |NumberTheoreticPolynomialFunctions;|)) 
 
-(DEFUN |NumberTheoreticPolynomialFunctions| (#1=#:G25)
-  (SPROG NIL
-         (PROG (#2=#:G26)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|NumberTheoreticPolynomialFunctions|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|NumberTheoreticPolynomialFunctions;| #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|NumberTheoreticPolynomialFunctions|)))))))))) 
-
 (DEFUN |NumberTheoreticPolynomialFunctions;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -121,6 +101,26 @@
                        (CONS (|dispatchFunction| |NTPOLFN;bernoulliB;Nni2R;3|)
                              %)))))
           %))) 
+
+(DEFUN |NumberTheoreticPolynomialFunctions| (#1=#:G15)
+  (SPROG NIL
+         (PROG (#2=#:G16)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|NumberTheoreticPolynomialFunctions|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|NumberTheoreticPolynomialFunctions;| #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|NumberTheoreticPolynomialFunctions|)))))))))) 
 
 (MAKEPROP '|NumberTheoreticPolynomialFunctions| '|infovec|
           (LIST

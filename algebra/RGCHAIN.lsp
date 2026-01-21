@@ -1,25 +1,8 @@
 
 (DECLAIM (NOTINLINE |RegularChain;|)) 
 
-(DEFUN |RegularChain| (&REST #1=#:G39)
-  (SPROG NIL
-         (PROG (#2=#:G40)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|RegularChain|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |RegularChain;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|RegularChain|)))))))))) 
-
 (DEFUN |RegularChain;| (|#1| |#2|)
-  (SPROG ((#1=#:G38 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((#1=#:G31 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 |#2|)
@@ -93,6 +76,23 @@
                (|augmentPredVector| % 512))
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |RegularChain| (&REST #1=#:G32)
+  (SPROG NIL
+         (PROG (#2=#:G33)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|RegularChain|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |RegularChain;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|RegularChain|)))))))))) 
 
 (MAKEPROP '|RegularChain| '|infovec|
           (LIST

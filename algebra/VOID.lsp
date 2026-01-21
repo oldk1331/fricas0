@@ -8,22 +8,6 @@
 
 (DECLAIM (NOTINLINE |Void;|)) 
 
-(DEFUN |Void| ()
-  (SPROG NIL
-         (PROG (#1=#:G9)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|Void|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|Void|
-                             (LIST (CONS NIL (CONS 1 (|Void;|))))))
-                    (LETT #1# T))
-                (COND ((NOT #1#) (HREM |$ConstructorCache| '|Void|)))))))))) 
-
 (DEFUN |Void;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -36,6 +20,22 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 6 (|String|))
           %))) 
+
+(DEFUN |Void| ()
+  (SPROG NIL
+         (PROG (#1=#:G3)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|Void|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|Void|
+                             (LIST (CONS NIL (CONS 1 (|Void;|))))))
+                    (LETT #1# T))
+                (COND ((NOT #1#) (HREM |$ConstructorCache| '|Void|)))))))))) 
 
 (MAKEPROP '|Void| '|infovec|
           (LIST

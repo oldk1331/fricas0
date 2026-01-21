@@ -3,11 +3,11 @@
         ((|lg| (|List| S)) (|lr| (|List| (|FreeGroup| S)))
          (% (|GroupPresentation|)))
         (SPROG
-         ((#1=#:G30 NIL) (|l| NIL) (#2=#:G29 NIL)
+         ((#1=#:G19 NIL) (|l| NIL) (#2=#:G18 NIL)
           (|nlr| (|List| (|List| (|Integer|)))) (|nr| (|List| (|Integer|)))
-          (#3=#:G28 NIL) (|m| #4=(|Integer|)) (|k| (|Integer|)) (#5=#:G27 NIL)
+          (#3=#:G17 NIL) (|m| #4=(|Integer|)) (|k| (|Integer|)) (#5=#:G16 NIL)
           (|t| NIL) (|fr| (|List| (|Record| (|:| |gen| S) (|:| |exp| #4#))))
-          (#6=#:G26 NIL) (|r| NIL) (|n| (|NonNegativeInteger|)))
+          (#6=#:G15 NIL) (|r| NIL) (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (LENGTH |lg|)) (LETT |nlr| NIL)
               (SEQ (LETT |r| NIL) (LETT #6# |lr|) G190
                    (COND
@@ -62,9 +62,24 @@
 
 (DECLAIM (NOTINLINE |GroupPresentationFunctions1;|)) 
 
-(DEFUN |GroupPresentationFunctions1| (#1=#:G31)
+(DEFUN |GroupPresentationFunctions1;| (|#1|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT |dv$| (LIST '|GroupPresentationFunctions1| DV$1))
+          (LETT % (GETREFV 23))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|GroupPresentationFunctions1|
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |GroupPresentationFunctions1| (#1=#:G20)
   (SPROG NIL
-         (PROG (#2=#:G32)
+         (PROG (#2=#:G21)
            (RETURN
             (COND
              ((LETT #2#
@@ -80,21 +95,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|GroupPresentationFunctions1|)))))))))) 
-
-(DEFUN |GroupPresentationFunctions1;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT |dv$| (LIST '|GroupPresentationFunctions1| DV$1))
-          (LETT % (GETREFV 23))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|GroupPresentationFunctions1|
-                      (LIST DV$1) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|GroupPresentationFunctions1| '|infovec|
           (LIST

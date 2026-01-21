@@ -297,8 +297,8 @@
 
 (SDEFUN |ROIRC;evalOne| ((|p| (|ThePolDom|)) (% (|TheField|)))
         (SPROG
-         ((#1=#:G112 NIL) (#2=#:G111 (|TheField|)) (#3=#:G113 (|TheField|))
-          (#4=#:G115 NIL) (#5=#:G1 NIL))
+         ((#1=#:G102 NIL) (#2=#:G101 (|TheField|)) (#3=#:G103 (|TheField|))
+          (#4=#:G105 NIL) (#5=#:G0 NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -327,7 +327,7 @@
           (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((#1=#:G116 NIL))
+            (SPROG ((#1=#:G106 NIL))
                    (PROG1 (LETT #1# (SPADCALL |d| |z| (QREFELT % 46)))
                      (|check_subtype2| (>= #1# 0) '(|NonNegativeInteger|)
                                        '(|Integer|) #1#))))))) 
@@ -357,9 +357,9 @@
           (|Union| (|Record| (|:| |low| |TheField|) (|:| |high| |TheField|))
                    "failed")))
         (SPROG
-         ((#1=#:G131 NIL) (|o| (|Integer|)) (|vi| (|NonNegativeInteger|))
-          (|lt| (|List| |TheField|)) (#2=#:G135 NIL) (|t| NIL)
-          (|int| (|TheField|)) (|nv| (|NonNegativeInteger|)) (#3=#:G128 NIL))
+         ((#1=#:G121 NIL) (|o| (|Integer|)) (|vi| (|NonNegativeInteger|))
+          (|lt| (|List| |TheField|)) (#2=#:G125 NIL) (|t| NIL)
+          (|int| (|TheField|)) (|nv| (|NonNegativeInteger|)) (#3=#:G118 NIL))
          (SEQ
           (LETT |nv|
                 (PROG1 (LETT #3# (- |vl| |vr|))
@@ -406,9 +406,9 @@
          (%
           (|List| (|Record| (|:| |low| |TheField|) (|:| |high| |TheField|)))))
         (SPROG
-         ((|vi| (|NonNegativeInteger|)) (#1=#:G146 NIL) (|t| NIL)
-          (#2=#:G145 NIL) (|int| (|TheField|)) (|n| (|NonNegativeInteger|))
-          (#3=#:G137 NIL))
+         ((|vi| (|NonNegativeInteger|)) (#1=#:G136 NIL) (|t| NIL)
+          (#2=#:G135 NIL) (|int| (|TheField|)) (|n| (|NonNegativeInteger|))
+          (#3=#:G127 NIL))
          (SEQ
           (COND
            ((SPADCALL |r| |l| (QREFELT % 53))
@@ -458,7 +458,7 @@
         (SPROG
          ((|l2| #1=(|List| |TheField|)) (|l1| #2=(|List| |TheField|))
           (|#G41| #3=(|List| |TheField|)) (|#G40| #3#) (|#G39| #3#)
-          (|#G38| #3#) (#4=#:G153 NIL) (|t| NIL) (|#G36| #1#) (|#G35| #2#)
+          (|#G38| #3#) (#4=#:G143 NIL) (|t| NIL) (|#G36| #1#) (|#G35| #2#)
           (|b| (|TheField|)))
          (SEQ (LETT |b| (|ROIRC;rootBound| (|SPADfirst| |lp|) %))
               (PROGN
@@ -504,7 +504,7 @@
                     "failed"))
           (|l2| #1=(|List| |TheField|)) (|l1| #2=(|List| |TheField|))
           (|#G54| #3=(|List| |TheField|)) (|#G53| #3#) (|#G52| #3#)
-          (|#G51| #3#) (#4=#:G172 NIL) (|t| NIL) (|#G49| #1#) (|#G48| #2#)
+          (|#G51| #3#) (#4=#:G162 NIL) (|t| NIL) (|#G49| #1#) (|#G48| #2#)
           (|b| (|TheField|)) (|ls| (|List| |ThePolDom|)))
          (SEQ (LETT |ls| (SPADCALL |pol| (QREFELT % 58)))
               (LETT |pol| (SPADCALL (|SPADfirst| |ls|) (QREFELT % 59)))
@@ -567,7 +567,7 @@
 
 (SDEFUN |ROIRC;allRootsOf;ThePolDomL;15| ((|pol| (|ThePolDom|)) (% (|List| %)))
         (SPROG
-         ((#1=#:G181 NIL) (|term| NIL) (#2=#:G180 NIL)
+         ((#1=#:G171 NIL) (|term| NIL) (#2=#:G170 NIL)
           (|ls| (|List| |ThePolDom|)))
          (SEQ
           (LETT |ls| (SPADCALL (SPADCALL |pol| (QREFELT % 59)) (QREFELT % 58)))
@@ -597,7 +597,7 @@
                         (EXIT (NREVERSE #2#)))))))))) 
 
 (SDEFUN |ROIRC;hasVarsl| ((|l| (|List| |TheField|)) (% (|Boolean|)))
-        (SPROG ((#1=#:G188 NIL) (#2=#:G189 NIL) (|term| NIL) (|f| (|Integer|)))
+        (SPROG ((#1=#:G178 NIL) (#2=#:G179 NIL) (|term| NIL) (|f| (|Integer|)))
                (SEQ
                 (EXIT
                  (COND ((NULL |l|) NIL)
@@ -615,7 +615,7 @@
                                  ((SPADCALL
                                    (SPADCALL |f| |term| (QREFELT % 66))
                                    (|spadConstant| % 14) (QREFELT % 51))
-                                  (PROGN (LETT #1# 'T) (GO #3=#:G187))))))
+                                  (PROGN (LETT #1# 'T) (GO #3=#:G177))))))
                               (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                          (EXIT NIL)))))
                 #3# (EXIT #1#)))) 
@@ -739,7 +739,7 @@
         ((|toTest| (|ThePolDom|)) (|rootChar| (%))
          (% (|Union| |ThePolDom| #1="failed")))
         (SPROG
-         ((#2=#:G215 NIL) (|newPol| (|ThePolDom|))
+         ((#2=#:G201 NIL) (|newPol| (|ThePolDom|))
           (|r| (|Union| |TheField| "failed")) (|c| (|TheField|)))
          (SEQ
           (LETT |c|
@@ -811,7 +811,7 @@
          ((|d|
            (|Record| (|:| |coef1| |ThePolDom|) (|:| |coef2| |ThePolDom|)
                      (|:| |generator| |ThePolDom|)))
-          (#2=#:G225 NIL) (|c| (|TheField|)) (|newPol| (|ThePolDom|)))
+          (#2=#:G211 NIL) (|c| (|TheField|)) (|newPol| (|ThePolDom|)))
          (SEQ
           (COND
            ((OR (EQL (SPADCALL |toTest| (QREFELT % 12)) 0)
@@ -962,7 +962,7 @@
 (SDEFUN |ROIRC;sign;ThePolDom%I;26|
         ((|toTest| (|ThePolDom|)) (|rootChar| (%)) (% (|Integer|)))
         (SPROG
-         ((|newChar| (%)) (#1=#:G252 NIL) (#2=#:G265 NIL)
+         ((|newChar| (%)) (#1=#:G238 NIL) (#2=#:G251 NIL)
           (|delta| (|ThePolDom|)) (|s| (|Integer|)))
          (SEQ
           (EXIT
@@ -1008,7 +1008,7 @@
                        (QREFELT % 82))
                       (QREFELT % 65))
                      0)
-                    (PROGN (LETT #2# 0) (GO #4=#:G264)))
+                    (PROGN (LETT #2# 0) (GO #4=#:G250)))
                    (#3#
                     (SEQ
                      (QSETVELT |newChar| 2
@@ -1204,29 +1204,6 @@
 
 (DECLAIM (NOTINLINE |RightOpenIntervalRootCharacterization;|)) 
 
-(DEFUN |RightOpenIntervalRootCharacterization| (&REST #1=#:G287)
-  (SPROG NIL
-         (PROG (#2=#:G288)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|RightOpenIntervalRootCharacterization|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function| |RightOpenIntervalRootCharacterization;|)
-                       #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|RightOpenIntervalRootCharacterization|)))))))))) 
-
 (DEFUN |RightOpenIntervalRootCharacterization;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -1248,6 +1225,29 @@
                     (|Record| (|:| |low| |#1|) (|:| |high| |#1|)
                               (|:| |defPol| |#2|)))
           %))) 
+
+(DEFUN |RightOpenIntervalRootCharacterization| (&REST #1=#:G273)
+  (SPROG NIL
+         (PROG (#2=#:G274)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|RightOpenIntervalRootCharacterization|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function| |RightOpenIntervalRootCharacterization;|)
+                       #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|RightOpenIntervalRootCharacterization|)))))))))) 
 
 (MAKEPROP '|RightOpenIntervalRootCharacterization| '|infovec|
           (LIST

@@ -1,8 +1,8 @@
 
 (SDEFUN |BEZOUT;sylvesterMatrix;2UPM;1| ((|p| (UP)) (|q| (UP)) (% (M)))
         (SPROG
-         ((#1=#:G31 NIL) (|i| NIL) (|q0| (UP))
-          (|deg| #2=(|NonNegativeInteger|)) (|coef| (R)) (#3=#:G30 NIL)
+         ((#1=#:G24 NIL) (|i| NIL) (|q0| (UP))
+          (|deg| #2=(|NonNegativeInteger|)) (|coef| (R)) (#3=#:G23 NIL)
           (|p0| (UP)) (|minC| (|Integer|)) (|minR| (|Integer|)) (|sylmat| (M))
           (|n| (|NonNegativeInteger|)) (|n2| #2#) (|n1| #2#))
          (SEQ
@@ -137,11 +137,11 @@
 
 (SDEFUN |BEZOUT;bezoutMatrix;2UPM;4| ((|p| (UP)) (|q| (UP)) (% (M)))
         (SPROG
-         ((#1=#:G146 NIL) (|k| NIL) (#2=#:G145 NIL) (|i| NIL) (|p0| (UP))
-          (|c| (R)) (#3=#:G144 NIL) (|coef| (R))
-          (|deg| #4=(|NonNegativeInteger|)) (|q0| (UP)) (#5=#:G143 NIL)
-          (|bound| #6=(|Integer|)) (#7=#:G142 NIL) (|bezmat| (M))
-          (#8=#:G141 NIL) (#9=#:G140 NIL) (|maxC| (|Integer|))
+         ((#1=#:G134 NIL) (|k| NIL) (#2=#:G133 NIL) (|i| NIL) (|p0| (UP))
+          (|c| (R)) (#3=#:G132 NIL) (|coef| (R))
+          (|deg| #4=(|NonNegativeInteger|)) (|q0| (UP)) (#5=#:G131 NIL)
+          (|bound| #6=(|Integer|)) (#7=#:G130 NIL) (|bezmat| (M))
+          (#8=#:G129 NIL) (#9=#:G128 NIL) (|maxC| (|Integer|))
           (|minC| (|Integer|)) (|minR| (|Integer|)) (|sylmat| (M)) (|m| #6#)
           (|m2| #6#) (|m1| #6#) (|n| (|NonNegativeInteger|)) (|n2| #4#)
           (|n1| #4#))
@@ -373,7 +373,7 @@
 
 (SDEFUN |BEZOUT;subresultant| ((|m| (M)) (|j| (|NonNegativeInteger|)) (% (UP)))
         (SPROG
-         ((#1=#:G148 NIL) (#2=#:G147 (UP)) (#3=#:G149 (UP)) (#4=#:G152 NIL)
+         ((#1=#:G136 NIL) (#2=#:G135 (UP)) (#3=#:G137 (UP)) (#4=#:G140 NIL)
           (|k| NIL) (|x| (UP)))
          (SEQ
           (COND
@@ -405,8 +405,8 @@
 (SDEFUN |BEZOUT;subresultants;2UPIv;6|
         ((|p| (UP)) (|q| (UP)) (% (|IndexedVector| UP (|Zero|))))
         (SPROG
-         ((#1=#:G160 NIL) (|i| NIL) (#2=#:G159 NIL)
-          (|j| (|NonNegativeInteger|)) (#3=#:G153 NIL) (|m| (M))
+         ((#1=#:G148 NIL) (|i| NIL) (#2=#:G147 NIL)
+          (|j| (|NonNegativeInteger|)) (#3=#:G141 NIL) (|m| (M))
           (|mindeg| (|NonNegativeInteger|)))
          (SEQ
           (LETT |mindeg|
@@ -441,7 +441,7 @@
         (SPADCALL (SPADCALL |f| |g| (QREFELT % 47)) (QREFELT % 53))) 
 
 (SDEFUN |BEZOUT;bezoutDiscriminant;UPR;8| ((|f| (UP)) (% (R)))
-        (SPROG ((#1=#:G163 NIL) (|degMod4| (|Integer|)))
+        (SPROG ((#1=#:G151 NIL) (|degMod4| (|Integer|)))
                (SEQ (LETT |degMod4| (REM (SPADCALL |f| (QREFELT % 16)) 4))
                     (COND
                      ((OR (EQL |degMod4| 0) (EQL |degMod4| 1))
@@ -493,23 +493,6 @@
 
 (DECLAIM (NOTINLINE |BezoutMatrix;|)) 
 
-(DEFUN |BezoutMatrix| (&REST #1=#:G170)
-  (SPROG NIL
-         (PROG (#2=#:G171)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|BezoutMatrix|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |BezoutMatrix;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|BezoutMatrix|)))))))))) 
-
 (DEFUN |BezoutMatrix;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -555,6 +538,23 @@
                    (CONS (|dispatchFunction| |BEZOUT;bezoutDiscriminant;UPR;9|)
                          %)))))))
     %))) 
+
+(DEFUN |BezoutMatrix| (&REST #1=#:G158)
+  (SPROG NIL
+         (PROG (#2=#:G159)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|BezoutMatrix|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |BezoutMatrix;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|BezoutMatrix|)))))))))) 
 
 (MAKEPROP '|BezoutMatrix| '|infovec|
           (LIST

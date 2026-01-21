@@ -2,8 +2,8 @@
 (SDEFUN |ORTHPOL;laguerreL;Nni2R;1|
         ((|n| (|NonNegativeInteger|)) (|x| (R)) (% (R)))
         (SPROG
-         ((|p0| (R)) (|p1| (R)) (|#G9| (R)) (|#G8| (R)) (#1=#:G12 NIL)
-          (|i| NIL) (|#G6| (R)) (|#G5| (R)))
+         ((|p0| (R)) (|p1| (R)) (|#G9| (R)) (|#G8| (R)) (#1=#:G4 NIL) (|i| NIL)
+          (|#G6| (R)) (|#G5| (R)))
          (SEQ
           (COND ((EQL |n| 0) (|spadConstant| % 8))
                 ('T
@@ -42,8 +42,8 @@
         ((|m| (|NonNegativeInteger|)) (|n| (|NonNegativeInteger|)) (|x| (R))
          (% (R)))
         (SPROG
-         ((|p1| (R)) (|p0| (R)) (|cx| (|Integer|)) (#1=#:G15 NIL)
-          (#2=#:G21 NIL) (|j| NIL) (|mi| (|Integer|)) (|ni| (|Integer|)))
+         ((|p1| (R)) (|p0| (R)) (|cx| (|Integer|)) (#1=#:G7 NIL) (#2=#:G13 NIL)
+          (|j| NIL) (|mi| (|Integer|)) (|ni| (|Integer|)))
          (SEQ (LETT |ni| |n|) (LETT |mi| |m|)
               (LETT |cx|
                     (*
@@ -76,7 +76,7 @@
 (SDEFUN |ORTHPOL;chebyshevT;Nni2R;3|
         ((|n| (|NonNegativeInteger|)) (|x| (R)) (% (R)))
         (SPROG
-         ((|p0| (R)) (|p1| (R)) (|#G20| (R)) (|#G19| (R)) (#1=#:G26 NIL)
+         ((|p0| (R)) (|p1| (R)) (|#G20| (R)) (|#G19| (R)) (#1=#:G18 NIL)
           (|i| NIL) (|#G17| (R)) (|#G16| (R)))
          (SEQ
           (COND ((EQL |n| 0) (|spadConstant| % 8))
@@ -106,7 +106,7 @@
 (SDEFUN |ORTHPOL;chebyshevU;Nni2R;4|
         ((|n| (|NonNegativeInteger|)) (|x| (R)) (% (R)))
         (SPROG
-         ((|p0| (R)) (|p1| (R)) (|#G27| (R)) (|#G26| (R)) (#1=#:G31 NIL)
+         ((|p0| (R)) (|p1| (R)) (|#G27| (R)) (|#G26| (R)) (#1=#:G23 NIL)
           (|i| NIL) (|#G24| (R)) (|#G23| (R)))
          (SEQ
           (COND ((EQL |n| 0) (|spadConstant| % 8))
@@ -136,7 +136,7 @@
 (SDEFUN |ORTHPOL;hermiteH;Nni2R;5|
         ((|n| (|NonNegativeInteger|)) (|x| (R)) (% (R)))
         (SPROG
-         ((|p0| (R)) (|p1| (R)) (|#G34| (R)) (|#G33| (R)) (#1=#:G36 NIL)
+         ((|p0| (R)) (|p1| (R)) (|#G34| (R)) (|#G33| (R)) (#1=#:G28 NIL)
           (|i| NIL) (|#G31| (R)) (|#G30| (R)))
          (SEQ
           (COND ((EQL |n| 0) (|spadConstant| % 8))
@@ -168,7 +168,7 @@
         ((|n| (|NonNegativeInteger|)) (|x| (R)) (% (R)))
         (SPROG
          ((|p0| (R)) (|p1| (R)) (|#G39| (R)) (|#G38| (R))
-          (|c| (|Fraction| (|Integer|))) (#1=#:G46 NIL) (|i| NIL))
+          (|c| (|Fraction| (|Integer|))) (#1=#:G34 NIL) (|i| NIL))
          (SEQ
           (COND ((EQL |n| 0) (|spadConstant| % 8))
                 ('T
@@ -198,25 +198,6 @@
 
 (DECLAIM (NOTINLINE |OrthogonalPolynomialFunctions;|)) 
 
-(DEFUN |OrthogonalPolynomialFunctions| (#1=#:G47)
-  (SPROG NIL
-         (PROG (#2=#:G48)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|OrthogonalPolynomialFunctions|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|OrthogonalPolynomialFunctions;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|OrthogonalPolynomialFunctions|)))))))))) 
-
 (DEFUN |OrthogonalPolynomialFunctions;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -243,6 +224,25 @@
                       (CONS (|dispatchFunction| |ORTHPOL;legendreP;Nni2R;6|)
                             %))))
           %))) 
+
+(DEFUN |OrthogonalPolynomialFunctions| (#1=#:G35)
+  (SPROG NIL
+         (PROG (#2=#:G36)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|OrthogonalPolynomialFunctions|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|OrthogonalPolynomialFunctions;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|OrthogonalPolynomialFunctions|)))))))))) 
 
 (MAKEPROP '|OrthogonalPolynomialFunctions| '|infovec|
           (LIST

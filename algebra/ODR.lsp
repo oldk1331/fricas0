@@ -22,26 +22,6 @@
 
 (DECLAIM (NOTINLINE |OrdinaryDifferentialRing;|)) 
 
-(DEFUN |OrdinaryDifferentialRing| (&REST #1=#:G45)
-  (SPROG NIL
-         (PROG (#2=#:G46)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T T NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|OrdinaryDifferentialRing|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |OrdinaryDifferentialRing;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|OrdinaryDifferentialRing|)))))))))) 
-
 (DEFUN |OrdinaryDifferentialRing;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -73,6 +53,26 @@
              (QSETREFV % 18 (CONS (|dispatchFunction| |ODR;^;%I%;5|) %))
              (QSETREFV % 20 (CONS (|dispatchFunction| |ODR;inv;2%;6|) %)))))
           %))) 
+
+(DEFUN |OrdinaryDifferentialRing| (&REST #1=#:G21)
+  (SPROG NIL
+         (PROG (#2=#:G22)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T T NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|OrdinaryDifferentialRing|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |OrdinaryDifferentialRing;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|OrdinaryDifferentialRing|)))))))))) 
 
 (MAKEPROP '|OrdinaryDifferentialRing| '|infovec|
           (LIST

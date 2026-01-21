@@ -7,10 +7,10 @@
   (COND (|RealConstant;AL|) (T (SETQ |RealConstant;AL| (|RealConstant;|))))) 
 
 (DEFUN |RealConstant;| ()
-  (SPROG ((#1=#:G7 NIL))
+  (SPROG ((#1=#:G2 NIL))
          (PROG1
              (LETT #1#
-                   (|subst_in_cat| '(#2=#:G5 #3=#:G6)
+                   (|subst_in_cat| '(#2=#:G0 #3=#:G1)
                                    (LIST '(|DoubleFloat|) '(|Float|))
                                    (|Join| (|ConvertibleTo| '#2#)
                                            (|ConvertibleTo| '#3#))))

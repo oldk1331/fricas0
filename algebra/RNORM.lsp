@@ -135,7 +135,7 @@
         (SPROG
          ((|lv| (|List| F)) (|lk| (|List| (|Kernel| F))) (|v| (F)) (|ia| (F))
           (|ra| (F)) (|ll| (|List| F)) (|a1| (F)) (|arg| (|List| F))
-          (|op| (|BasicOperator|)) (#1=#:G73 NIL) (|k| NIL)
+          (|op| (|BasicOperator|)) (#1=#:G50 NIL) (|k| NIL)
           (|lk0| (|List| (|Kernel| F))))
          (SEQ (LETT |lk0| (SPADCALL |c| (QREFELT % 54))) (LETT |lk| NIL)
               (LETT |lv| NIL)
@@ -179,15 +179,15 @@
 
 (SDEFUN |RNORM;try_real;FSF;5| ((|f| (F)) (|x| (|Symbol|)) (% (F)))
         (SPROG
-         ((|res_p| (F)) (|lck1| (|List| F)) (#1=#:G97 NIL) (#2=#:G98 NIL)
-          (|k| (|Kernel| F)) (|a1| (F)) (#3=#:G104 NIL) (|k1| NIL) (|a| (F))
-          (#4=#:G103 NIL) (|lck| (|List| (|Kernel| F))) (|rpp| (F))
-          (#5=#:G99 NIL) (|c| (F)) (|c_den| (F))
+         ((|res_p| (F)) (|lck1| (|List| F)) (#1=#:G74 NIL) (#2=#:G75 NIL)
+          (|k| (|Kernel| F)) (|a1| (F)) (#3=#:G81 NIL) (|k1| NIL) (|a| (F))
+          (#4=#:G80 NIL) (|lck| (|List| (|Kernel| F))) (|rpp| (F))
+          (#5=#:G76 NIL) (|c| (F)) (|c_den| (F))
           (|den_f| (|SparseUnivariatePolynomial| F))
           (|num_f| (|SparseUnivariatePolynomial| F))
           (|fu| (|Fraction| (|SparseUnivariatePolynomial| F)))
-          (|arg| (|List| F)) (|op| (|BasicOperator|)) (#6=#:G102 NIL)
-          (|lk| (|List| (|Kernel| F))) (#7=#:G100 NIL) (#8=#:G101 NIL))
+          (|arg| (|List| F)) (|op| (|BasicOperator|)) (#6=#:G79 NIL)
+          (|lk| (|List| (|Kernel| F))) (#7=#:G77 NIL) (#8=#:G78 NIL))
          (SEQ (LETT |lk| (SPADCALL |f| (QREFELT % 54)))
               (LETT |res_p| (|spadConstant| % 38))
               (SEQ (LETT #8# |lk|) G190
@@ -204,7 +204,7 @@
                                 (SPADCALL (SPADCALL |num_f| (QREFELT % 22)) 1
                                           (QREFELT % 60)))
                             (EXIT
-                             (PROGN (LETT #7# |$NoValue|) (GO #9=#:G74)))))
+                             (PROGN (LETT #7# |$NoValue|) (GO #9=#:G51)))))
                           (LETT |c_den| (SPADCALL |den_f| (QREFELT % 26)))
                           (LETT |c|
                                 (SPADCALL (SPADCALL |num_f| (QREFELT % 26))
@@ -244,7 +244,7 @@
                             (COND
                              ((NULL (EQL (LENGTH |arg|) 1))
                               (EXIT
-                               (PROGN (LETT #5# |$NoValue|) (GO #10=#:G80))))))
+                               (PROGN (LETT #5# |$NoValue|) (GO #10=#:G57))))))
                            ('T (EXIT (PROGN (LETT #5# |$NoValue|) (GO #10#)))))
                           (LETT |fu| (SPADCALL |rpp| |k| (QREFELT % 17)))
                           (LETT |num_f| (SPADCALL |fu| (QREFELT % 20)))
@@ -292,7 +292,7 @@
                                   ((SPADCALL |k| |k1| (QREFELT % 65))
                                    (PROGN
                                     (LETT #2# |$NoValue|)
-                                    (GO #11=#:G92)))
+                                    (GO #11=#:G69)))
                                   ('T
                                    (SEQ
                                     (EXIT
@@ -313,7 +313,7 @@
                                                       (PROGN
                                                        (LETT #2# 1)
                                                        (GO #11#)))))
-                                          (GO #12=#:G91)))))))
+                                          (GO #12=#:G68)))))))
                                     #12# (EXIT #1#))))))
                                (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
                          #11# (EXIT #2#))
@@ -330,26 +330,6 @@
 (SDEFUN |RNORM;try_real;FSF;6| ((|f| (F)) (|x| (|Symbol|)) (% (F))) |f|) 
 
 (DECLAIM (NOTINLINE |RealNormalizationUtilities;|)) 
-
-(DEFUN |RealNormalizationUtilities| (&REST #1=#:G106)
-  (SPROG NIL
-         (PROG (#2=#:G107)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|RealNormalizationUtilities|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |RealNormalizationUtilities;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|RealNormalizationUtilities|)))))))))) 
 
 (DEFUN |RealNormalizationUtilities;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
@@ -379,6 +359,26 @@
             (QSETREFV % 66
                       (CONS (|dispatchFunction| |RNORM;try_real;FSF;6|) %))))
           %))) 
+
+(DEFUN |RealNormalizationUtilities| (&REST #1=#:G83)
+  (SPROG NIL
+         (PROG (#2=#:G84)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|RealNormalizationUtilities|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |RealNormalizationUtilities;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|RealNormalizationUtilities|)))))))))) 
 
 (MAKEPROP '|RealNormalizationUtilities| '|infovec|
           (LIST

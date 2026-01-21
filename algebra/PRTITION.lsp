@@ -37,7 +37,7 @@
                      (SPADCALL |x| (CDR |y|) (QREFELT % 20)))))) 
 
 (SDEFUN |PRTITION;*;Nni2%;8| ((|n| (|NonNegativeInteger|)) (|x| (%)) (% (%)))
-        (SPROG ((#1=#:G47 NIL))
+        (SPROG ((#1=#:G37 NIL))
                (COND ((ZEROP |n|) (|spadConstant| % 7))
                      ('T
                       (SPADCALL |x|
@@ -152,8 +152,8 @@
 
 (SDEFUN |PRTITION;pdct;%I;18| ((|x| (%)) (% (|Integer|)))
         (SPROG
-         ((#1=#:G88 NIL) (#2=#:G87 #3=(|Integer|)) (#4=#:G89 #3#)
-          (#5=#:G91 NIL) (|a| NIL))
+         ((#1=#:G76 NIL) (#2=#:G75 #3=(|Integer|)) (#4=#:G77 #3#)
+          (#5=#:G79 NIL) (|a| NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -176,9 +176,22 @@
 
 (DECLAIM (NOTINLINE |Partition;|)) 
 
+(DEFUN |Partition;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|Partition|))
+          (LETT % (GETREFV 48))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|Partition| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 6 (|List| (|Integer|)))
+          %))) 
+
 (DEFUN |Partition| ()
   (SPROG NIL
-         (PROG (#1=#:G93)
+         (PROG (#1=#:G81)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Partition|))
@@ -192,19 +205,6 @@
                     (LETT #1# T))
                 (COND
                  ((NOT #1#) (HREM |$ConstructorCache| '|Partition|)))))))))) 
-
-(DEFUN |Partition;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|Partition|))
-          (LETT % (GETREFV 48))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|Partition| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 6 (|List| (|Integer|)))
-          %))) 
 
 (MAKEPROP '|Partition| '|infovec|
           (LIST

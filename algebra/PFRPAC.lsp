@@ -20,8 +20,8 @@
         ((|p| (|Polynomial| R)) (|facq| (|Factored| (|Polynomial| R)))
          (|v| (|Symbol|)) (% (|Any|)))
         (SPROG
-         ((|pfup| (|PartialFraction| |up|)) (|nflist| (|fup|)) (#1=#:G34 NIL)
-          (#2=#:G33 (|fup|)) (#3=#:G35 (|fup|)) (#4=#:G43 NIL) (|u| NIL)
+         ((|pfup| (|PartialFraction| |up|)) (|nflist| (|fup|)) (#1=#:G6 NIL)
+          (#2=#:G5 (|fup|)) (#3=#:G7 (|fup|)) (#4=#:G10 NIL) (|u| NIL)
           (|fcont| (|up|))
           (|fup|
            (|Join| (|IntegralDomain|) (|DifferentialExtension| |up|)
@@ -170,24 +170,6 @@
 
 (DECLAIM (NOTINLINE |PartialFractionPackage;|)) 
 
-(DEFUN |PartialFractionPackage| (#1=#:G44)
-  (SPROG NIL
-         (PROG (#2=#:G45)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|PartialFractionPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|PartialFractionPackage;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|PartialFractionPackage|)))))))))) 
-
 (DEFUN |PartialFractionPackage;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -202,6 +184,24 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |PartialFractionPackage| (#1=#:G11)
+  (SPROG NIL
+         (PROG (#2=#:G12)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|PartialFractionPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|PartialFractionPackage;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|PartialFractionPackage|)))))))))) 
 
 (MAKEPROP '|PartialFractionPackage| '|infovec|
           (LIST

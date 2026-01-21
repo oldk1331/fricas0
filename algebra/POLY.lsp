@@ -1,6 +1,6 @@
 
 (SDEFUN |POLY;coerce;%Of;1| ((|p| (%)) (% (|OutputForm|)))
-        (SPROG ((|a| (|Symbol|)) (#1=#:G12 NIL) (|r| (|Union| R "failed")))
+        (SPROG ((|a| (|Symbol|)) (#1=#:G4 NIL) (|r| (|Union| R "failed")))
                (SEQ (LETT |r| (SPADCALL |p| (QREFELT % 8)))
                     (EXIT
                      (COND
@@ -29,27 +29,11 @@
 
 (DECLAIM (NOTINLINE |Polynomial;|)) 
 
-(DEFUN |Polynomial| (#1=#:G89)
-  (SPROG NIL
-         (PROG (#2=#:G90)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|Polynomial|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Polynomial;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|Polynomial|)))))))))) 
-
 (DEFUN |Polynomial;| (|#1|)
   (SPROG
-   ((#1=#:G88 NIL) (|pv$| NIL) (#2=#:G79 NIL) (#3=#:G81 NIL) (#4=#:G80 NIL)
-    (#5=#:G82 NIL) (#6=#:G83 NIL) (#7=#:G84 NIL) (#8=#:G85 NIL) (#9=#:G86 NIL)
-    (#10=#:G87 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+   ((#1=#:G51 NIL) (|pv$| NIL) (#2=#:G42 NIL) (#3=#:G44 NIL) (#4=#:G43 NIL)
+    (#5=#:G45 NIL) (#6=#:G46 NIL) (#7=#:G47 NIL) (#8=#:G48 NIL) (#9=#:G49 NIL)
+    (#10=#:G50 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT |dv$| (LIST '|Polynomial| DV$1))
@@ -592,6 +576,22 @@
      ((|testBitVector| |pv$| 1)
       (QSETREFV % 29 (CONS (|dispatchFunction| |POLY;integrate;%S%;2|) %))))
     %))) 
+
+(DEFUN |Polynomial| (#1=#:G52)
+  (SPROG NIL
+         (PROG (#2=#:G53)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|Polynomial|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Polynomial;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|Polynomial|)))))))))) 
 
 (MAKEPROP '|Polynomial| '|infovec|
           (LIST

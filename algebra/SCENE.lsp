@@ -336,9 +336,9 @@
 (SDEFUN |SCENE;createSceneGrid;DfSb%;44|
         ((|stepSize| (|DoubleFloat|)) (|bb| (|SBoundary| PT)) (% (%)))
         (SPROG
-         ((|ln| (%)) (#1=#:G655 NIL) (|i| NIL) (#2=#:G654 NIL) (|gp| (%))
-          (|stepsy| (|NonNegativeInteger|)) (#3=#:G645 NIL)
-          (|stepsx| (|NonNegativeInteger|)) (#4=#:G644 NIL)
+         ((|ln| (%)) (#1=#:G641 NIL) (|i| NIL) (#2=#:G640 NIL) (|gp| (%))
+          (|stepsy| (|NonNegativeInteger|)) (#3=#:G633 NIL)
+          (|stepsx| (|NonNegativeInteger|)) (#4=#:G632 NIL)
           (|maxy| #5=(|DoubleFloat|)) (|maxx| #6=(|DoubleFloat|)) (|miny| #5#)
           (|minx| #6#))
          (SEQ
@@ -463,9 +463,9 @@
 (SDEFUN |SCENE;createScenePattern1|
         ((|step| (|NonNegativeInteger|)) (|bb| (|SBoundary| PT)) (% (%)))
         (SPROG
-         ((|ln| (%)) (|pts| (|List| PT)) (#1=#:G682 NIL) (|j| NIL)
-          (#2=#:G681 NIL) (#3=#:G680 NIL) (|i| NIL) (|mt2| (%)) (#4=#:G679 NIL)
-          (#5=#:G678 NIL) (#6=#:G677 NIL) (|mt1| (%)) (|gp| (%))
+         ((|ln| (%)) (|pts| (|List| PT)) (#1=#:G667 NIL) (|j| NIL)
+          (#2=#:G666 NIL) (#3=#:G665 NIL) (|i| NIL) (|mt2| (%)) (#4=#:G664 NIL)
+          (#5=#:G663 NIL) (#6=#:G662 NIL) (|mt1| (%)) (|gp| (%))
           (|stepSize| (|DoubleFloat|)) (|maxx| #7=(|DoubleFloat|))
           (|miny| (|DoubleFloat|)) (|minx| #7#))
          (SEQ
@@ -594,8 +594,8 @@
         ((|level| (|NonNegativeInteger|)) (|inLine| (|List| PT))
          (% (|List| PT)))
         (SPROG
-         ((#1=#:G702 NIL) (|res| (|List| PT)) (|lastPt| (PT)) (|midpt| (PT))
-          (#2=#:G705 NIL) (|x| NIL))
+         ((#1=#:G675 NIL) (|res| (|List| PT)) (|lastPt| (PT)) (|midpt| (PT))
+          (#2=#:G678 NIL) (|x| NIL))
          (SEQ
           (COND ((EQL |level| 0) |inLine|)
                 ('T
@@ -637,9 +637,9 @@
 (SDEFUN |SCENE;createScenePattern3|
         ((|level| #1=(|NonNegativeInteger|)) (|bb| (|SBoundary| PT)) (% (%)))
         (SPROG
-         ((|ln| (%)) (|lev2| #1#) (|pts2| (|List| (|List| PT))) (#2=#:G722 NIL)
-          (|l2| NIL) (|pts| (|List| (|List| PT))) (#3=#:G721 NIL) (|j| NIL)
-          (#4=#:G720 NIL) (#5=#:G719 NIL) (|i| NIL) (#6=#:G718 NIL)
+         ((|ln| (%)) (|lev2| #1#) (|pts2| (|List| (|List| PT))) (#2=#:G693 NIL)
+          (|l2| NIL) (|pts| (|List| (|List| PT))) (#3=#:G692 NIL) (|j| NIL)
+          (#4=#:G691 NIL) (#5=#:G690 NIL) (|i| NIL) (#6=#:G689 NIL)
           (|ycoords| (|List| (|List| #7=(|NonNegativeInteger|))))
           (|xcoords| (|List| (|List| #7#))) (|scale| (|DoubleFloat|))
           (|maxx| #8=(|DoubleFloat|)) (|miny| (|DoubleFloat|)) (|minx| #8#))
@@ -727,7 +727,7 @@
 (SDEFUN |SCENE;createScenePattern;SNniSb%;52|
         ((|ptype| (|Symbol|)) (|step| (|NonNegativeInteger|))
          (|bb| (|SBoundary| PT)) (% (%)))
-        (SPROG ((#1=#:G730 NIL))
+        (SPROG ((#1=#:G696 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -735,7 +735,7 @@
                    ((EQUAL |ptype| 'GRID)
                     (PROGN
                      (LETT #1# (|SCENE;createScenePattern1| |step| |bb| %))
-                     (GO #2=#:G729))))
+                     (GO #2=#:G695))))
                   (COND
                    ((EQUAL |ptype| 'SIERPINSKI)
                     (PROGN
@@ -758,7 +758,7 @@
           (|d|
            (|Record| (|:| |quotient| (|Integer|))
                      (|:| |remainder| (|Integer|))))
-          (|pz| (PT)) (#1=#:G756 NIL) (#2=#:G757 NIL) (|x| NIL)
+          (|pz| (PT)) (#1=#:G722 NIL) (#2=#:G723 NIL) (|x| NIL)
           (|stepI| (|Integer|)) (|gp| (%)) (|suffix| (|String|))
           (|zeroes| #3=(|Integer|)) (|maxPrimaryNorm| #4=(|DoubleFloat|))
           (|minPrimaryNorm| #4#) (|divn| (|DoubleFloat|)) (|expStep| #3#)
@@ -1061,7 +1061,7 @@
          ((|lastValid| #1=(|Boolean|)) (|ptStr| (|String|))
           (|thisStr| (|String|)) (|minusy| (|DoubleFloat|))
           (|pntNum| (|NonNegativeInteger|)) (|valid| #1#) (|param2| (PT))
-          (#2=#:G884 NIL) (|param| NIL) (#3=#:G883 NIL) (|line| NIL))
+          (#2=#:G850 NIL) (|param| NIL) (#3=#:G849 NIL) (|line| NIL))
          (SEQ (LETT |ptStr| "") (LETT |lastValid| 'T)
               (SEQ (LETT |line| NIL) (LETT #3# |pts|) G190
                    (COND
@@ -1148,7 +1148,7 @@
         ((|pts| (|Record| (|:| |st| PT) (|:| |en| PT))) (|bb| (|SBoundary| PT))
          (% (|Record| (|:| |st| PT) (|:| |en| PT))))
         (SPROG
-         ((|newend| (PT)) (|newstart| (PT)) (|relpt| (PT)) (#1=#:G890 NIL)
+         ((|newend| (PT)) (|newstart| (PT)) (|relpt| (PT)) (#1=#:G856 NIL)
           (|reductionFactor| (|DoubleFloat|)) (|arrLength| (|DoubleFloat|))
           (|endpt| (PT)) (|startpt| (PT)) (|totalwidth| (|DoubleFloat|)))
          (SEQ
@@ -1163,7 +1163,7 @@
             (LETT |arrLength| (SPADCALL |startpt| |endpt| (QREFELT % 137)))
             (COND
              ((|less_DF| |arrLength| (|mk_DF| 1 -1))
-              (PROGN (LETT #1# |pts|) (GO #2=#:G889))))
+              (PROGN (LETT #1# |pts|) (GO #2=#:G855))))
             (LETT |reductionFactor|
                   (|div_DF| |totalwidth|
                             (|mul_DF| (|mk_DF| 40 0) |arrLength|)))
@@ -1200,8 +1200,8 @@
           (|minusEndy| #1=(|DoubleFloat|)) (|endPoint| (PT))
           (|minusStarty| #1#) (|aline| (|Record| (|:| |st| PT) (|:| |en| PT)))
           (|startPoint| (PT)) (|pntNum| (|NonNegativeInteger|))
-          (|valid| (|Boolean|)) (|param2| (PT)) (#2=#:G909 NIL) (|param| NIL)
-          (#3=#:G908 NIL) (|line| NIL))
+          (|valid| (|Boolean|)) (|param2| (PT)) (#2=#:G875 NIL) (|param| NIL)
+          (#3=#:G874 NIL) (|line| NIL))
          (SEQ (LETT |nodeEles| NIL)
               (SEQ (LETT |line| NIL) (LETT #3# |pts|) G190
                    (COND
@@ -1393,7 +1393,7 @@
          ((|ptStr| (|String|)) (|lastValid| #1=(|Boolean|))
           (|thisStr| (|String|)) (|minusy| (|DoubleFloat|))
           (|pntNum| (|NonNegativeInteger|)) (|valid| #1#) (|param2| (PT))
-          (|param| (PT)) (#2=#:G924 NIL) (|i| NIL) (#3=#:G923 NIL) (|ln| NIL))
+          (|param| (PT)) (#2=#:G890 NIL) (|i| NIL) (#3=#:G889 NIL) (|ln| NIL))
          (SEQ (LETT |ptStr| "") (LETT |lastValid| 'T)
               (SEQ (LETT |ln| NIL) (LETT #3# (QCAR |faces|)) G190
                    (COND
@@ -1473,26 +1473,26 @@
          (% (|XmlElement|)))
         (SPROG
          ((|nodeEles| (|List| (|XmlElement|))) (|xch| (|XmlElement|))
-          (#1=#:G1013 NIL) (|ch| NIL) (|nodeName| (|String|)) (|nde| (%))
+          (#1=#:G979 NIL) (|ch| NIL) (|nodeName| (|String|)) (|nde| (%))
           (|name| #2=(|String|))
-          (|nn| (|Record| (|:| |nme| #2#) (|:| |node| %))) (#3=#:G942 NIL)
-          (#4=#:G943 NIL) (|nodeAtts| (|List| (|XmlAttribute|)))
-          (|linWidth| (|DoubleFloat|)) (#5=#:G940 NIL) (|ptStr| #6=(|String|))
+          (|nn| (|Record| (|:| |nme| #2#) (|:| |node| %))) (#3=#:G908 NIL)
+          (#4=#:G909 NIL) (|nodeAtts| (|List| (|XmlAttribute|)))
+          (|linWidth| (|DoubleFloat|)) (#5=#:G906 NIL) (|ptStr| #6=(|String|))
           (|endPointM| #7=(|DoubleFloat|)) (|startPointM| #7#)
-          (|endPoint| (PT)) (|startPoint| (PT)) (#8=#:G939 NIL)
-          (#9=#:G1011 NIL) (#10=#:G938 NIL) (|bb2| (|SBoundary| PT))
-          (#11=#:G936 NIL) (|clipEn2| (|Boolean|)) (|tran2| (|STransform| PT))
-          (#12=#:G937 NIL) (#13=#:G935 NIL) (|textScale| (|DoubleFloat|))
-          (|y| #7#) (|x| #14=(|DoubleFloat|)) (|param2| (PT))
-          (|nodeAttsTxt| (|List| #15=(|XmlAttribute|))) (#16=#:G1012 NIL)
+          (|endPoint| (PT)) (|startPoint| (PT)) (#8=#:G905 NIL) (#9=#:G977 NIL)
+          (#10=#:G904 NIL) (|bb2| (|SBoundary| PT)) (#11=#:G902 NIL)
+          (|clipEn2| (|Boolean|)) (|tran2| (|STransform| PT)) (#12=#:G903 NIL)
+          (#13=#:G901 NIL) (|textScale| (|DoubleFloat|)) (|y| #7#)
+          (|x| #14=(|DoubleFloat|)) (|param2| (PT))
+          (|nodeAttsTxt| (|List| #15=(|XmlAttribute|))) (#16=#:G978 NIL)
           (|nam| NIL)
           (|mat2|
            (|Record| (|:| |lineWidth| (|DoubleFloat|))
                      (|:| |lineCol| (|String|)) (|:| |fillCol| (|String|))
                      (|:| |matOpacity| (|DoubleFloat|))))
-          (#17=#:G934 NIL) (#18=#:G941 NIL) (|sh| (|String|)) (|sw| (|String|))
+          (#17=#:G900 NIL) (#18=#:G907 NIL) (|sh| (|String|)) (|sw| (|String|))
           (|sy| (|String|)) (|sx| (|String|)) (|ry| #14#) (|rx| #14#)
-          (|r2| (PT)) (#19=#:G933 NIL) (|viewBoxStr| #6#) (|offsety| #7#)
+          (|r2| (PT)) (#19=#:G899 NIL) (|viewBoxStr| #6#) (|offsety| #7#)
           (|offsetx| #7#) (|scale2| (|DoubleFloat|))
           (|maxy| #20=(|DoubleFloat|)) (|maxx| #21=(|DoubleFloat|))
           (|miny| #20#) (|minx| #21#) (|mkr| #22=(|XmlElement|))
@@ -2996,7 +2996,7 @@
                             (LETT #9#
                                   (SPADCALL "g" |nodeEles| |nodeAtts|
                                             (QREFELT % 143)))
-                            (GO #25=#:G1010))))))
+                            (GO #25=#:G976))))))
                        (LETT |param2|
                              (SPADCALL |tran|
                                        (QVELT
@@ -5480,15 +5480,15 @@
          (|useInteger| (|Boolean|)) (|npt| (|SceneNamedPoints| PT))
          (|fontScale| #2=(|DoubleFloat|)) (% #3=(|SBoundary| PT)))
         (SPROG
-         ((|res| (|SBoundary| PT)) (|res2| #3#) (#4=#:G1084 NIL) (|ch| NIL)
-          (#5=#:G1083 NIL) (|p| NIL) (#6=#:G1082 NIL) (|lp| NIL)
-          (|pts2| (|List| (|List| PT))) (#7=#:G1034 NIL) (#8=#:G1081 NIL)
-          (#9=#:G1033 NIL) (|tran2| #1#) (#10=#:G1032 NIL) (|pt2| (PT))
-          (|pt1| (PT)) (#11=#:G1030 NIL) (|w| #12=(|DoubleFloat|)) (|h| #12#)
-          (#13=#:G1078 NIL) (#14=#:G1036 NIL) (#15=#:G1080 NIL)
-          (#16=#:G1079 NIL) (|pts| (|List| (|List| PT))) (#17=#:G1028 NIL)
+         ((|res| (|SBoundary| PT)) (|res2| #3#) (#4=#:G1050 NIL) (|ch| NIL)
+          (#5=#:G1049 NIL) (|p| NIL) (#6=#:G1048 NIL) (|lp| NIL)
+          (|pts2| (|List| (|List| PT))) (#7=#:G1000 NIL) (#8=#:G1047 NIL)
+          (#9=#:G999 NIL) (|tran2| #1#) (#10=#:G998 NIL) (|pt2| (PT))
+          (|pt1| (PT)) (#11=#:G996 NIL) (|w| #12=(|DoubleFloat|)) (|h| #12#)
+          (#13=#:G1044 NIL) (#14=#:G1002 NIL) (#15=#:G1046 NIL)
+          (#16=#:G1045 NIL) (|pts| (|List| (|List| PT))) (#17=#:G994 NIL)
           (|fontScale2| #2#) (|maxx| #18=(|DoubleFloat|)) (|minx| #18#)
-          (|bb2| (|SBoundary| PT)) (#19=#:G1031 NIL))
+          (|bb2| (|SBoundary| PT)) (#19=#:G997 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |res| (SPADCALL (QREFELT % 14)))
@@ -5912,7 +5912,7 @@
                       (LETT #13#
                             (SPADCALL (SPADCALL |tran| |pt1| (QREFELT % 134))
                                       |pt2| (QREFELT % 167)))
-                      (GO #21=#:G1077))))
+                      (GO #21=#:G1043))))
                    (LETT |res|
                          (SPADCALL |res|
                                    (SPADCALL |tran| |pt1| (QREFELT % 134))
@@ -6552,7 +6552,7 @@
          (% (|List| (|String|))))
         (SPROG
          ((|ptStr| (|List| (|String|))) (|thisStr| (|String|)) (|param2| (PT))
-          (#1=#:G1092 NIL) (|param| NIL))
+          (#1=#:G1058 NIL) (|param| NIL))
          (SEQ (LETT |ptStr| NIL)
               (SEQ (LETT |param| NIL) (LETT #1# |pts|) G190
                    (COND
@@ -6583,8 +6583,8 @@
          (|tran| (|STransform| PT)) (|bb| (|SBoundary| PT))
          (% (|List| (|String|))))
         (SPROG
-         ((|ptStr| (|List| (|String|))) (#1=#:G1101 NIL) (|param| NIL)
-          (#2=#:G1100 NIL) (|line| NIL))
+         ((|ptStr| (|List| (|String|))) (#1=#:G1067 NIL) (|param| NIL)
+          (#2=#:G1066 NIL) (|line| NIL))
          (SEQ (LETT |ptStr| NIL)
               (SEQ (LETT |line| NIL) (LETT #2# |pts|) G190
                    (COND
@@ -6638,17 +6638,17 @@
          (|tran| (|STransform| PT)) (|bb| (|SBoundary| PT)) (% (|XmlElement|)))
         (SPROG
          ((|nodeEles| (|List| (|XmlElement|))) (|xch| (|XmlElement|))
-          (#1=#:G1165 NIL) (|ch| NIL) (#2=#:G1163 NIL)
-          (|ifset| #3=(|XmlElement|)) (|coord| #3#) (#4=#:G1117 NIL)
+          (#1=#:G1131 NIL) (|ch| NIL) (#2=#:G1129 NIL)
+          (|ifset| #3=(|XmlElement|)) (|coord| #3#) (#4=#:G1083 NIL)
           (|nodeAtts| (|List| (|XmlAttribute|))) (|ifsR| (|SceneIFS| PT))
-          (|meshR| (|List| (|List| PT))) (#5=#:G1118 NIL) (#6=#:G1112 NIL)
-          (#7=#:G1114 NIL) (|bb2| (|SBoundary| PT)) (#8=#:G1115 NIL)
-          (|tran2| (|STransform| PT)) (#9=#:G1116 NIL)
+          (|meshR| (|List| (|List| PT))) (#5=#:G1084 NIL) (#6=#:G1078 NIL)
+          (#7=#:G1080 NIL) (|bb2| (|SBoundary| PT)) (#8=#:G1081 NIL)
+          (|tran2| (|STransform| PT)) (#9=#:G1082 NIL)
           (|mat2|
            (|Record| (|:| |lineWidth| (|DoubleFloat|))
                      (|:| |lineCol| (|String|)) (|:| |fillCol| (|String|))
                      (|:| |matOpacity| (|DoubleFloat|))))
-          (#10=#:G1113 NIL) (|inner| #3#) (#11=#:G1164 NIL)
+          (#10=#:G1079 NIL) (|inner| #3#) (#11=#:G1130 NIL)
           (|nodeName| (|String|)))
          (SEQ
           (EXIT
@@ -6761,7 +6761,7 @@
                      (LETT #2#
                            (SPADCALL |nodeName| (LIST |inner|) |nodeAtts|
                                      (QREFELT % 143)))
-                     (GO #13=#:G1162))))))
+                     (GO #13=#:G1128))))))
                 (COND
                  ((EQUAL (QVELT |n| 0) 'MATERIAL)
                   (LETT |mat2|
@@ -7636,17 +7636,17 @@
          (|indexNxt| (|Reference| (|NonNegativeInteger|)))
          (|tran| (|STransform| PT)) (|bb| (|SBoundary| PT)) (% (|Void|)))
         (SPROG
-         ((#1=#:G1251 NIL) (|ch| NIL) (#2=#:G1237 NIL)
-          (|i2| (|List| (|List| (|NonNegativeInteger|)))) (#3=#:G1250 NIL)
-          (|j| NIL) (#4=#:G1249 NIL) (#5=#:G1248 NIL) (|k| NIL)
-          (#6=#:G1247 NIL) (|p1| (|List| PT)) (#7=#:G1182 NIL)
-          (|i1| (|List| (|List| (|NonNegativeInteger|)))) (#8=#:G1246 NIL)
-          (#9=#:G1245 NIL) (#10=#:G1244 NIL) (#11=#:G1243 NIL)
+         ((#1=#:G1217 NIL) (|ch| NIL) (#2=#:G1203 NIL)
+          (|i2| (|List| (|List| (|NonNegativeInteger|)))) (#3=#:G1216 NIL)
+          (|j| NIL) (#4=#:G1215 NIL) (#5=#:G1214 NIL) (|k| NIL)
+          (#6=#:G1213 NIL) (|p1| (|List| PT)) (#7=#:G1148 NIL)
+          (|i1| (|List| (|List| (|NonNegativeInteger|)))) (#8=#:G1212 NIL)
+          (#9=#:G1211 NIL) (#10=#:G1210 NIL) (#11=#:G1209 NIL)
           (|ifsR| (|SceneIFS| PT)) (|meshR| (|List| (|List| PT)))
-          (#12=#:G1177 NIL) (#13=#:G1242 NIL) (#14=#:G1241 NIL)
-          (#15=#:G1240 NIL) (#16=#:G1239 NIL) (|bb2| (|SBoundary| PT))
-          (#17=#:G1180 NIL) (|tran2| (|STransform| PT)) (#18=#:G1181 NIL)
-          (#19=#:G1238 NIL) (|mx| (PT)) (|mn| (PT))
+          (#12=#:G1143 NIL) (#13=#:G1208 NIL) (#14=#:G1207 NIL)
+          (#15=#:G1206 NIL) (#16=#:G1205 NIL) (|bb2| (|SBoundary| PT))
+          (#17=#:G1146 NIL) (|tran2| (|STransform| PT)) (#18=#:G1147 NIL)
+          (#19=#:G1204 NIL) (|mx| (PT)) (|mn| (PT))
           (|offsety| #20=(|DoubleFloat|)) (|offsetRequired| (|Boolean|))
           (|offsetx| #20#) (|miny| (|DoubleFloat|)) (|minx| (|DoubleFloat|)))
          (SEQ
@@ -7789,7 +7789,7 @@
                           (SPADCALL |ch| |ptLst| |indexLst| |indexNxt| |tran2|
                                     |bb2| (QREFELT % 179))))
                         (LETT #19# (CDR #19#)) (GO G190) G191 (EXIT NIL))
-                   (EXIT (PROGN (LETT #2# (|Void|)) (GO #22=#:G1236))))))
+                   (EXIT (PROGN (LETT #2# (|Void|)) (GO #22=#:G1202))))))
                 (COND
                  ((EQUAL (QVELT |n| 0) 'TRANSFORM)
                   (SEQ
@@ -8464,8 +8464,8 @@
 (SDEFUN |SCENE;writeObj;%SV;84|
         ((|n| (%)) (|filename| (|String|)) (% (|Void|)))
         (SPROG
-         ((|s| (|String|)) (#1=#:G1263 NIL) (|i| NIL) (#2=#:G1262 NIL)
-          (|row| NIL) (#3=#:G1261 NIL) (|v| NIL) (|f1| (|TextFile|))
+         ((|s| (|String|)) (#1=#:G1229 NIL) (|i| NIL) (#2=#:G1228 NIL)
+          (|row| NIL) (#3=#:G1227 NIL) (|v| NIL) (|f1| (|TextFile|))
           (|defaultBounds| (|SBoundary| PT))
           (|defaultTransform| (|STransform| PT))
           (|indexNxt| (|Reference| (|NonNegativeInteger|)))
@@ -8611,8 +8611,8 @@
          (|numPts| (|NonNegativeInteger|)) (% (%)))
         (SPROG
          ((|branches| (|List| (|List| PT))) (|newl| (|List| PT))
-          (#1=#:G1297 NIL) (|p| NIL) (|p0| (|List| PT))
-          (|t| (|List| (|DoubleFloat|))) (|l| (|DoubleFloat|)) (#2=#:G1296 NIL)
+          (#1=#:G1263 NIL) (|p| NIL) (|p0| (|List| PT))
+          (|t| (|List| (|DoubleFloat|))) (|l| (|DoubleFloat|)) (#2=#:G1262 NIL)
           (|i| NIL) (|s| (|DoubleFloat|)) (|h| (|DoubleFloat|)))
          (SEQ (|SCENE;checkRange| |tRange| %)
               (LETT |l| (SPADCALL |tRange| (QREFELT % 124)))
@@ -8777,7 +8777,7 @@
          (% (%)))
         (SPROG
          ((|p| (|List| PT)) (|t| (|List| (|DoubleFloat|)))
-          (|l| (|DoubleFloat|)) (#1=#:G1337 NIL) (|i| NIL)
+          (|l| (|DoubleFloat|)) (#1=#:G1303 NIL) (|i| NIL)
           (|s| (|DoubleFloat|)) (|h| (|DoubleFloat|))
           (|tRange| (|Segment| (|DoubleFloat|)))
           (|f| (|Mapping| PT (|DoubleFloat|))))
@@ -8978,7 +8978,7 @@
                 (SPADCALL |n| |c| (QREFELT % 18)) (EXIT |c|)))) 
 
 (SDEFUN |SCENE;outputLPoints| ((|ps| (|List| PT)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G1405 NIL))
+        (SPROG ((#1=#:G1371 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -8986,7 +8986,7 @@
                    ((< (LENGTH |ps|) 4)
                     (PROGN
                      (LETT #1# (SPADCALL |ps| (QREFELT % 242)))
-                     (GO #2=#:G1404))))
+                     (GO #2=#:G1370))))
                   (EXIT
                    (SPADCALL
                     (LIST (SPADCALL (|SPADfirst| |ps|) (QREFELT % 243))
@@ -8997,7 +8997,7 @@
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |SCENE;outputLLPoints| ((|ps| (|List| (|List| PT))) (% (|OutputForm|)))
-        (SPROG ((#1=#:G1411 NIL) (#2=#:G1413 NIL) (|x| NIL) (#3=#:G1412 NIL))
+        (SPROG ((#1=#:G1377 NIL) (#2=#:G1379 NIL) (|x| NIL) (#3=#:G1378 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -9021,7 +9021,7 @@
                                   (LETT #2# (CDR #2#)) (GO G190) G191
                                   (EXIT (NREVERSE #3#))))
                             (QREFELT % 246)))
-                     (GO #4=#:G1410))))
+                     (GO #4=#:G1376))))
                   (EXIT
                    (SPADCALL
                     (LIST (|SCENE;outputLPoints| (|SPADfirst| |ps|) %)
@@ -9033,7 +9033,7 @@
 
 (SDEFUN |SCENE;outputLIndexes|
         ((|ps| (|List| (|NonNegativeInteger|))) (% (|OutputForm|)))
-        (SPROG ((#1=#:G1417 NIL))
+        (SPROG ((#1=#:G1383 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -9041,7 +9041,7 @@
                    ((< (SPADCALL |ps| (QREFELT % 98)) 4)
                     (PROGN
                      (LETT #1# (SPADCALL |ps| (QREFELT % 248)))
-                     (GO #2=#:G1416))))
+                     (GO #2=#:G1382))))
                   (EXIT
                    (SPADCALL
                     (LIST (SPADCALL (|SPADfirst| |ps|) (QREFELT % 249))
@@ -9053,7 +9053,7 @@
 
 (SDEFUN |SCENE;outputLLIndexes|
         ((|ps| (|List| (|List| (|NonNegativeInteger|)))) (% (|OutputForm|)))
-        (SPROG ((#1=#:G1423 NIL) (#2=#:G1425 NIL) (|x| NIL) (#3=#:G1424 NIL))
+        (SPROG ((#1=#:G1389 NIL) (#2=#:G1391 NIL) (|x| NIL) (#3=#:G1390 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -9077,7 +9077,7 @@
                                   (LETT #2# (CDR #2#)) (GO G190) G191
                                   (EXIT (NREVERSE #3#))))
                             (QREFELT % 246)))
-                     (GO #4=#:G1422))))
+                     (GO #4=#:G1388))))
                   (EXIT
                    (SPADCALL
                     (LIST (|SCENE;outputLIndexes| (|SPADfirst| |ps|) %)
@@ -9089,18 +9089,18 @@
 
 (SDEFUN |SCENE;coerce;%Of;112| ((|n| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|s| (|OutputForm|)) (|nam| (|SceneNamedPoints| PT)) (#1=#:G1444 NIL)
-          (|nn| (|String|)) (#2=#:G1443 NIL) (|sz| (|DoubleFloat|))
-          (#3=#:G1441 NIL) (|md| (|Symbol|)) (|ofs| (PT)) (|ena| (|String|))
-          (|str| (|String|)) (#4=#:G1440 NIL) (|m| (|Symbol|))
-          (|pts| (|List| (|List| PT))) (|pt| (|List| PT)) (#5=#:G1439 NIL)
-          (|ix| (|List| (|List| (|NonNegativeInteger|)))) (#6=#:G1437 NIL)
-          (|tr| (|STransform| PT)) (#7=#:G1438 NIL) (|npt| (|List| (|String|)))
-          (#8=#:G1436 NIL) (|p| (PT)) (|sz1| (|NonNegativeInteger|))
-          (|t| (|String|)) (|mo| (|DoubleFloat|)) (#9=#:G1435 NIL)
+         ((|s| (|OutputForm|)) (|nam| (|SceneNamedPoints| PT)) (#1=#:G1410 NIL)
+          (|nn| (|String|)) (#2=#:G1409 NIL) (|sz| (|DoubleFloat|))
+          (#3=#:G1407 NIL) (|md| (|Symbol|)) (|ofs| (PT)) (|ena| (|String|))
+          (|str| (|String|)) (#4=#:G1406 NIL) (|m| (|Symbol|))
+          (|pts| (|List| (|List| PT))) (|pt| (|List| PT)) (#5=#:G1405 NIL)
+          (|ix| (|List| (|List| (|NonNegativeInteger|)))) (#6=#:G1403 NIL)
+          (|tr| (|STransform| PT)) (#7=#:G1404 NIL) (|npt| (|List| (|String|)))
+          (#8=#:G1402 NIL) (|p| (PT)) (|sz1| (|NonNegativeInteger|))
+          (|t| (|String|)) (|mo| (|DoubleFloat|)) (#9=#:G1401 NIL)
           (|fc| (|String|)) (|lc| (|String|)) (|lw| (|DoubleFloat|))
-          (|pt2| (PT)) (#10=#:G1442 NIL) (|pt1| (PT)) (|tp| (|Symbol|))
-          (#11=#:G1434 NIL))
+          (|pt2| (PT)) (#10=#:G1408 NIL) (|pt1| (PT)) (|tp| (|Symbol|))
+          (#11=#:G1400 NIL))
          (SEQ (LETT |s| (SPADCALL "scene " (QREFELT % 245)))
               (COND
                ((EQUAL (QVELT |n| 0) 'ROOT)
@@ -11355,21 +11355,6 @@
 
 (DECLAIM (NOTINLINE |Scene;|)) 
 
-(DEFUN |Scene| (#1=#:G1472)
-  (SPROG NIL
-         (PROG (#2=#:G1473)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|Scene|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Scene;| #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Scene|)))))))))) 
-
 (DEFUN |Scene;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -11433,6 +11418,21 @@
                                     (|:| |np| (|SceneNamedPoints| |#1|))
                                     (|:| |empty| "empty")))))
           %))) 
+
+(DEFUN |Scene| (#1=#:G1438)
+  (SPROG NIL
+         (PROG (#2=#:G1439)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|Scene|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Scene;| #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Scene|)))))))))) 
 
 (MAKEPROP '|Scene| '|infovec|
           (LIST

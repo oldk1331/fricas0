@@ -2,7 +2,7 @@
 (SDEFUN |MRF2;map;MMrMr;1|
         ((|fn| (|Mapping| S R)) (|u| (|MonoidRing| R M))
          (% (|MonoidRing| S M)))
-        (SPROG ((|res| (|MonoidRing| S M)) (#1=#:G12 NIL) (|te| NIL))
+        (SPROG ((|res| (|MonoidRing| S M)) (#1=#:G6 NIL) (|te| NIL))
                (SEQ (LETT |res| (|spadConstant| % 10))
                     (SEQ (LETT |te| NIL)
                          (LETT #1# (SPADCALL |u| (QREFELT % 14))) G190
@@ -22,25 +22,6 @@
 
 (DECLAIM (NOTINLINE |MonoidRingFunctions2;|)) 
 
-(DEFUN |MonoidRingFunctions2| (&REST #1=#:G13)
-  (SPROG NIL
-         (PROG (#2=#:G14)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|MonoidRingFunctions2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |MonoidRingFunctions2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|MonoidRingFunctions2|)))))))))) 
-
 (DEFUN |MonoidRingFunctions2;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -59,6 +40,25 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |MonoidRingFunctions2| (&REST #1=#:G7)
+  (SPROG NIL
+         (PROG (#2=#:G8)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|MonoidRingFunctions2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |MonoidRingFunctions2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|MonoidRingFunctions2|)))))))))) 
 
 (MAKEPROP '|MonoidRingFunctions2| '|infovec|
           (LIST

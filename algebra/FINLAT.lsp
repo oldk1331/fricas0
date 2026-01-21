@@ -42,24 +42,6 @@
 
 (DECLAIM (NOTINLINE |FiniteLattice;|)) 
 
-(DEFUN |FiniteLattice| (&REST #1=#:G24)
-  (SPROG NIL
-         (PROG (#2=#:G25)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|FiniteLattice|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |FiniteLattice;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|FiniteLattice|)))))))))) 
-
 (DEFUN |FiniteLattice;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -77,6 +59,24 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 8 (|NonNegativeInteger|))
           %))) 
+
+(DEFUN |FiniteLattice| (&REST #1=#:G12)
+  (SPROG NIL
+         (PROG (#2=#:G13)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|FiniteLattice|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |FiniteLattice;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|FiniteLattice|)))))))))) 
 
 (MAKEPROP '|FiniteLattice| '|infovec|
           (LIST

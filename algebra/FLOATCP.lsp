@@ -14,9 +14,9 @@
          (% (|List| (|List| (|Complex| |Par|)))))
         (SPROG
          ((|lden| (|List| #1=(|Polynomial| (|Complex| (|Integer|)))))
-          (|dp| #1#) (#2=#:G34 NIL) (|p| NIL) (#3=#:G33 NIL)
+          (|dp| #1#) (#2=#:G13 NIL) (|p| NIL) (#3=#:G12 NIL)
           (|lnum| (|List| (|Polynomial| (|Complex| (|Integer|)))))
-          (#4=#:G32 NIL) (#5=#:G31 NIL))
+          (#4=#:G11 NIL) (#5=#:G10 NIL))
          (SEQ
           (LETT |lnum|
                 (PROGN
@@ -52,15 +52,15 @@
          (|eps| (|Par|))
          (% (|List| (|List| (|Equation| (|Polynomial| (|Complex| |Par|)))))))
         (SPROG
-         ((#1=#:G61 NIL) (|x| NIL) (#2=#:G62 NIL) (|r| NIL) (#3=#:G60 NIL)
-          (#4=#:G59 NIL) (|nres| NIL) (#5=#:G58 NIL)
-          (|lv| #6=(|List| (|Symbol|))) (#7=#:G43 NIL) (#8=#:G42 #6#)
-          (#9=#:G44 #6#) (#10=#:G57 NIL) (#11=#:G40 NIL) (#12=#:G39 #6#)
-          (#13=#:G41 #6#) (#14=#:G56 NIL) (|np| NIL)
+         ((#1=#:G40 NIL) (|x| NIL) (#2=#:G41 NIL) (|r| NIL) (#3=#:G39 NIL)
+          (#4=#:G38 NIL) (|nres| NIL) (#5=#:G37 NIL)
+          (|lv| #6=(|List| (|Symbol|))) (#7=#:G22 NIL) (#8=#:G21 #6#)
+          (#9=#:G23 #6#) (#10=#:G36 NIL) (#11=#:G19 NIL) (#12=#:G18 #6#)
+          (#13=#:G20 #6#) (#14=#:G35 NIL) (|np| NIL)
           (|lden| (|List| #15=(|Polynomial| (|Complex| (|Integer|)))))
-          (|dp| #15#) (#16=#:G55 NIL) (|p| NIL) (#17=#:G54 NIL)
+          (|dp| #15#) (#16=#:G34 NIL) (|p| NIL) (#17=#:G33 NIL)
           (|lnum| (|List| (|Polynomial| (|Complex| (|Integer|)))))
-          (#18=#:G53 NIL) (#19=#:G52 NIL))
+          (#18=#:G32 NIL) (#19=#:G31 NIL))
          (SEQ
           (LETT |lnum|
                 (PROGN
@@ -180,17 +180,17 @@
          (|eps| (|Par|))
          (% (|List| (|List| (|Equation| (|Polynomial| (|Complex| |Par|)))))))
         (SPROG
-         ((#1=#:G93 NIL) (|x| NIL) (#2=#:G94 NIL) (|r| NIL) (#3=#:G92 NIL)
-          (#4=#:G91 NIL) (|nres| NIL) (#5=#:G90 NIL)
-          (|lv| #6=(|List| (|Symbol|))) (#7=#:G73 NIL) (#8=#:G72 #6#)
-          (#9=#:G74 #6#) (#10=#:G89 NIL) (#11=#:G70 NIL) (#12=#:G69 #6#)
-          (#13=#:G71 #6#) (#14=#:G88 NIL) (|np| NIL)
+         ((#1=#:G72 NIL) (|x| NIL) (#2=#:G73 NIL) (|r| NIL) (#3=#:G71 NIL)
+          (#4=#:G70 NIL) (|nres| NIL) (#5=#:G69 NIL)
+          (|lv| #6=(|List| (|Symbol|))) (#7=#:G52 NIL) (#8=#:G51 #6#)
+          (#9=#:G53 #6#) (#10=#:G68 NIL) (#11=#:G49 NIL) (#12=#:G48 #6#)
+          (#13=#:G50 #6#) (#14=#:G67 NIL) (|np| NIL)
           (|lden| (|List| #15=(|Polynomial| (|Complex| (|Integer|)))))
-          (|dp| #15#) (#16=#:G87 NIL) (|p| NIL) (#17=#:G86 NIL)
+          (|dp| #15#) (#16=#:G66 NIL) (|p| NIL) (#17=#:G65 NIL)
           (|lnum| (|List| (|Polynomial| (|Complex| (|Integer|)))))
-          (#18=#:G85 NIL) (#19=#:G84 NIL)
+          (#18=#:G64 NIL) (#19=#:G63 NIL)
           (|lp| (|List| (|Fraction| (|Polynomial| (|Complex| (|Integer|))))))
-          (#20=#:G83 NIL) (|ep| NIL) (#21=#:G82 NIL))
+          (#20=#:G62 NIL) (|ep| NIL) (#21=#:G61 NIL))
          (SEQ
           (LETT |lp|
                 (PROGN
@@ -325,7 +325,7 @@
          (|eps| (|Par|))
          (% (|List| (|Equation| (|Polynomial| (|Complex| |Par|))))))
         (SPROG
-         ((#1=#:G104 NIL) (|val| NIL) (#2=#:G103 NIL)
+         ((#1=#:G83 NIL) (|val| NIL) (#2=#:G82 NIL)
           (|x| (|Polynomial| (|Complex| |Par|)))
           (|mvar| (|Union| (|Symbol|) "failed")))
          (SEQ
@@ -368,24 +368,6 @@
 
 (DECLAIM (NOTINLINE |FloatingComplexPackage;|)) 
 
-(DEFUN |FloatingComplexPackage| (#1=#:G106)
-  (SPROG NIL
-         (PROG (#2=#:G107)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|FloatingComplexPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|FloatingComplexPackage;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|FloatingComplexPackage|)))))))))) 
-
 (DEFUN |FloatingComplexPackage;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -400,6 +382,24 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |FloatingComplexPackage| (#1=#:G85)
+  (SPROG NIL
+         (PROG (#2=#:G86)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|FloatingComplexPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|FloatingComplexPackage;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|FloatingComplexPackage|)))))))))) 
 
 (MAKEPROP '|FloatingComplexPackage| '|infovec|
           (LIST

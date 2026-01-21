@@ -1,24 +1,8 @@
 
 (DECLAIM (NOTINLINE |PAdicRational;|)) 
 
-(DEFUN |PAdicRational| (#1=#:G70)
-  (SPROG NIL
-         (PROG (#2=#:G71)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PAdicRational|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|PAdicRational;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|PAdicRational|)))))))))) 
-
 (DEFUN |PAdicRational;| (|#1|)
-  (SPROG ((|pv$| NIL) (#1=#:G69 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (#1=#:G36 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT |dv$| (LIST '|PAdicRational| DV$1))
@@ -147,6 +131,22 @@
            (|augmentPredVector| % 67108864))
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |PAdicRational| (#1=#:G37)
+  (SPROG NIL
+         (PROG (#2=#:G38)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PAdicRational|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|PAdicRational;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|PAdicRational|)))))))))) 
 
 (MAKEPROP '|PAdicRational| '|infovec|
           (LIST

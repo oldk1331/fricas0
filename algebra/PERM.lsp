@@ -9,8 +9,8 @@
 
 (SDEFUN |PERM;rotateCycle| ((|cyc| (|List| S)) (% (|List| S)))
         (SPROG
-         ((#1=#:G54 NIL) (#2=#:G53 NIL) (|minpos| (|Integer|)) (|min| (S))
-          (#3=#:G57 NIL) (|i| NIL))
+         ((#1=#:G33 NIL) (#2=#:G32 NIL) (|minpos| (|Integer|)) (|min| (S))
+          (#3=#:G36 NIL) (|i| NIL))
          (SEQ (LETT |min| (|SPADfirst| |cyc|)) (LETT |minpos| 1)
               (SEQ (LETT |i| 2) (LETT #3# (LENGTH |cyc|)) G190
                    (COND ((|greater_SI| |i| #3#) (GO G191)))
@@ -43,7 +43,7 @@
                        (QREFELT % 19)))))))) 
 
 (SDEFUN |PERM;coerceCycle| ((|lls| (|List| (|List| S))) (% (%)))
-        (SPROG ((|perm| (%)) (#1=#:G62 NIL) (|lists| NIL))
+        (SPROG ((|perm| (%)) (#1=#:G41 NIL) (|lists| NIL))
                (SEQ (LETT |perm| (|spadConstant| % 15))
                     (SEQ (LETT |lists| NIL) (LETT #1# (REVERSE |lls|)) G190
                          (COND
@@ -60,7 +60,7 @@
 (SDEFUN |PERM;smallerCycle?|
         ((|cyca| (|List| S)) (|cycb| (|List| S)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G69 NIL) (#2=#:G70 NIL) (#3=#:G71 NIL) (|i| NIL) (#4=#:G72 NIL)
+         ((#1=#:G48 NIL) (#2=#:G49 NIL) (#3=#:G50 NIL) (|i| NIL) (#4=#:G51 NIL)
           (|j| NIL))
          (SEQ
           (EXIT
@@ -85,8 +85,8 @@
                           (LETT #1#
                                 (PROGN
                                  (LETT #2# (|PERM;smallerElement?| |i| |j| %))
-                                 (GO #5=#:G68)))
-                          (GO #6=#:G65))))))
+                                 (GO #5=#:G47)))
+                          (GO #6=#:G44))))))
                      (LETT #3# (PROG1 (CDR #3#) (LETT #4# (CDR #4#))))
                      (GO G190) G191 (EXIT NIL)))
                #6# (EXIT #1#))
@@ -102,7 +102,7 @@
          (|pb| (|Record| (|:| |cycl| (|List| (|List| S))) (|:| |permut| %)))
          (% (|Boolean|)))
         (SPROG
-         ((#1=#:G80 NIL) (#2=#:G81 NIL) (#3=#:G82 NIL) (|i| NIL) (#4=#:G83 NIL)
+         ((#1=#:G59 NIL) (#2=#:G60 NIL) (#3=#:G61 NIL) (|i| NIL) (#4=#:G62 NIL)
           (|j| NIL))
          (SEQ
           (EXIT
@@ -123,8 +123,8 @@
                         (LETT #1#
                               (PROGN
                                (LETT #2# (|PERM;smallerCycle?| |i| |j| %))
-                               (GO #5=#:G79)))
-                        (GO #6=#:G77))))))
+                               (GO #5=#:G58)))
+                        (GO #6=#:G56))))))
                    (LETT #3# (PROG1 (CDR #3#) (LETT #4# (CDR #4#)))) (GO G190)
                    G191 (EXIT NIL)))
              #6# (EXIT #1#))
@@ -195,7 +195,7 @@
                 ('T |cycles|)))))) 
 
 (SDEFUN |PERM;duplicates?| ((|ls| (|List| S)) (% (|Boolean|)))
-        (SPROG ((|x| (|List| S)) (#1=#:G108 NIL))
+        (SPROG ((|x| (|List| S)) (#1=#:G86 NIL))
                (SEQ
                 (EXIT
                  (SEQ (LETT |x| (SPADCALL |ls| (QREFELT % 32)))
@@ -205,7 +205,7 @@
                              (COND
                               ((SPADCALL (|SPADfirst| |x|) (CDR |x|)
                                          (QREFELT % 33))
-                               (PROGN (LETT #1# 'T) (GO #2=#:G107)))
+                               (PROGN (LETT #1# 'T) (GO #2=#:G85)))
                               ('T (LETT |x| (CDR |x|))))))
                            NIL (GO G190) G191 (EXIT NIL))
                       (EXIT NIL)))
@@ -223,8 +223,8 @@
 (SDEFUN |PERM;coercePreimagesImages;L%;10|
         ((|preImageAndImage| (|List| (|List| S))) (% (%)))
         (SPROG
-         ((|image| (|List| S)) (|preImage| (|List| S)) (#1=#:G118 NIL)
-          (|i| NIL) (#2=#:G119 NIL) (|pi| NIL))
+         ((|image| (|List| S)) (|preImage| (|List| S)) (#1=#:G96 NIL) (|i| NIL)
+          (#2=#:G97 NIL) (|pi| NIL))
          (SEQ (LETT |preImage| NIL) (LETT |image| NIL)
               (SEQ (LETT |pi| NIL)
                    (LETT #2# (SPADCALL |preImageAndImage| 2 (QREFELT % 36)))
@@ -253,7 +253,7 @@
 
 (SDEFUN |PERM;=;2%B;13| ((|p| (%)) (|q| (%)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G131 NIL) (#2=#:G132 NIL) (|pos| (|Integer|)) (#3=#:G133 NIL)
+         ((#1=#:G109 NIL) (#2=#:G110 NIL) (|pos| (|Integer|)) (#3=#:G111 NIL)
           (|i| NIL) (|preimq| #4=(|List| S)) (|preimp| #4#))
          (SEQ
           (EXIT
@@ -272,7 +272,7 @@
                                     |preimq| (QREFELT % 27)))
                     (EXIT
                      (COND
-                      ((EQL |pos| 0) (PROGN (LETT #2# NIL) (GO #5=#:G130)))
+                      ((EQL |pos| 0) (PROGN (LETT #2# NIL) (GO #5=#:G108)))
                       ('T
                        (SEQ
                         (EXIT
@@ -285,7 +285,7 @@
                             (QREFELT % 23))
                            (PROGN
                             (LETT #1# (PROGN (LETT #2# NIL) (GO #5#)))
-                            (GO #6=#:G125)))))
+                            (GO #6=#:G103)))))
                         #6# (EXIT #1#))))))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
               (EXIT 'T)))))
@@ -307,7 +307,7 @@
                 (EXIT |out|)))) 
 
 (SDEFUN |PERM;cyclePartition;%P;15| ((|p| (%)) (% (|Partition|)))
-        (SPROG ((#1=#:G143 NIL) (|c| NIL) (#2=#:G142 NIL))
+        (SPROG ((#1=#:G121 NIL) (|c| NIL) (#2=#:G120 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -323,7 +323,7 @@
                  (QREFELT % 50))))) 
 
 (SDEFUN |PERM;order;%Nni;16| ((|p| (%)) (% (|NonNegativeInteger|)))
-        (SPROG ((#1=#:G144 NIL) (|ord| (|Integer|)))
+        (SPROG ((#1=#:G122 NIL) (|ord| (|Integer|)))
                (SEQ
                 (LETT |ord|
                       (SPADCALL
@@ -351,8 +351,8 @@
 
 (SDEFUN |PERM;<;2%B;20| ((|pa| (%)) (|pb| (%)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G156 NIL) (#2=#:G157 NIL) (#3=#:G158 NIL) (|i| NIL)
-          (#4=#:G159 NIL) (|j| NIL) (|pbcyc| #5=(|List| (|List| S)))
+         ((#1=#:G134 NIL) (#2=#:G135 NIL) (#3=#:G136 NIL) (|i| NIL)
+          (#4=#:G137 NIL) (|j| NIL) (|pbcyc| #5=(|List| (|List| S)))
           (|pacyc| #5#))
          (SEQ
           (EXIT
@@ -374,8 +374,8 @@
                             (LETT #1#
                                   (PROGN
                                    (LETT #2# (|PERM;smallerCycle?| |i| |j| %))
-                                   (GO #6=#:G155)))
-                            (GO #7=#:G153))))))
+                                   (GO #6=#:G133)))
+                            (GO #7=#:G131))))))
                        (LETT #3# (PROG1 (CDR #3#) (LETT #4# (CDR #4#))))
                        (GO G190) G191 (EXIT NIL)))
                  #7# (EXIT #1#))
@@ -390,11 +390,11 @@
 
 (SDEFUN |PERM;sort;2L;23| ((|inList| (|List| %)) (% (|List| %)))
         (SPROG
-         ((|outList| (|List| %)) (#1=#:G174 NIL) (|rec| NIL)
+         ((|outList| (|List| %)) (#1=#:G152 NIL) (|rec| NIL)
           (|ownList|
            (|List|
             (|Record| (|:| |cycl| (|List| (|List| S))) (|:| |permut| %))))
-          (#2=#:G173 NIL) (|sigma| NIL))
+          (#2=#:G151 NIL) (|sigma| NIL))
          (SEQ
           (COND
            ((NULL (|HasCategory| (QREFELT % 6) '(|OrderedSet|)))
@@ -430,8 +430,8 @@
 (SDEFUN |PERM;coerce;%Of;24| ((|p| (%)) (% (|OutputForm|)))
         (SPROG
          ((|outfmL| (|List| (|OutputForm|)))
-          (|outcycL| (|List| (|OutputForm|))) (#1=#:G184 NIL) (|elt| NIL)
-          (#2=#:G183 NIL) (|cycle| NIL) (|cycles| (|List| (|List| S))))
+          (|outcycL| (|List| (|OutputForm|))) (#1=#:G162 NIL) (|elt| NIL)
+          (#2=#:G161 NIL) (|cycle| NIL) (|cycles| (|List| (|List| S))))
          (SEQ (LETT |cycles| (|PERM;coerceToCycle| |p| 'T %))
               (LETT |outfmL| NIL)
               (SEQ (LETT |cycle| NIL) (LETT #2# |cycles|) G190
@@ -478,7 +478,7 @@
 
 (SDEFUN |PERM;coerceListOfPairs;L%;27| ((|loP| (|List| (|List| S))) (% (%)))
         (SPROG
-         ((|im| (|List| S)) (|preim| (|List| S)) (#1=#:G198 NIL) (|pair| NIL))
+         ((|im| (|List| S)) (|preim| (|List| S)) (#1=#:G176 NIL) (|pair| NIL))
          (SEQ (LETT |preim| NIL) (LETT |im| NIL)
               (SEQ (LETT |pair| NIL) (LETT #1# |loP|) G190
                    (COND
@@ -510,7 +510,7 @@
 (SDEFUN |PERM;*;3%;28| ((|q| (%)) (|p| (%)) (% (%)))
         (SPROG
          ((|imOfq| #1=(|List| S)) (|preimOfq| #1#) (|imOfqp| (|List| S))
-          (|preimOfqp| (|List| S)) (|el| (S)) (|j| (|Integer|)) (#2=#:G210 NIL)
+          (|preimOfqp| (|List| S)) (|el| (S)) (|j| (|Integer|)) (#2=#:G188 NIL)
           (|i| NIL) (|imOfp| #3=(|Vector| S)) (|preimOfp| #3#))
          (SEQ
           (LETT |preimOfp|
@@ -586,7 +586,7 @@
 
 (SDEFUN |PERM;coerceImages;L%;34| ((|image| (|List| S)) (% (%)))
         (SPROG
-         ((|preImage| (|List| S)) (#1=#:G222 NIL) (|i| NIL) (#2=#:G221 NIL))
+         ((|preImage| (|List| S)) (#1=#:G200 NIL) (|i| NIL) (#2=#:G199 NIL))
          (SEQ
           (LETT |preImage|
                 (PROGN
@@ -602,8 +602,8 @@
 
 (SDEFUN |PERM;coerceImages;L%;35| ((|image| (|List| S)) (% (%)))
         (SPROG
-         ((|preImage| (|List| S)) (#1=#:G225 NIL) (#2=#:G230 NIL) (|i| NIL)
-          (#3=#:G229 NIL))
+         ((|preImage| (|List| S)) (#1=#:G203 NIL) (#2=#:G208 NIL) (|i| NIL)
+          (#3=#:G207 NIL))
          (SEQ
           (LETT |preImage|
                 (PROGN
@@ -630,7 +630,7 @@
         (SPADCALL (SPADCALL |p| (QREFELT % 40)) (QREFELT % 93))) 
 
 (SDEFUN |PERM;cyclePartition;%P;37| ((|p| (%)) (% (|Partition|)))
-        (SPROG ((|pt| (|Partition|)) (#1=#:G237 NIL) (|c| NIL) (#2=#:G236 NIL))
+        (SPROG ((|pt| (|Partition|)) (#1=#:G215 NIL) (|c| NIL) (#2=#:G214 NIL))
                (SEQ
                 (LETT |pt|
                       (SPADCALL
@@ -658,24 +658,8 @@
 
 (DECLAIM (NOTINLINE |Permutation;|)) 
 
-(DEFUN |Permutation| (#1=#:G242)
-  (SPROG NIL
-         (PROG (#2=#:G243)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|Permutation|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Permutation;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|Permutation|)))))))))) 
-
 (DEFUN |Permutation;| (|#1|)
-  (SPROG ((|pv$| NIL) (#1=#:G241 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (#1=#:G219 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Permutation| DV$1))
@@ -716,6 +700,22 @@
                        (CONS (|dispatchFunction| |PERM;cyclePartition;%P;37|)
                              %)))))
           %))) 
+
+(DEFUN |Permutation| (#1=#:G220)
+  (SPROG NIL
+         (PROG (#2=#:G221)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|Permutation|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Permutation;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|Permutation|)))))))))) 
 
 (MAKEPROP '|Permutation| '|infovec|
           (LIST

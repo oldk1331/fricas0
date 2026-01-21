@@ -1,7 +1,7 @@
 
 (SDEFUN |TS;polynomial;%NniP;1|
         ((|s| (%)) (|n| (|NonNegativeInteger|)) (% (|Polynomial| |Coef|)))
-        (SPROG ((|sum| (|Polynomial| |Coef|)) (#1=#:G17 NIL) (|i| NIL))
+        (SPROG ((|sum| (|Polynomial| |Coef|)) (#1=#:G7 NIL) (|i| NIL))
                (SEQ (LETT |sum| (|spadConstant| % 9))
                     (SEQ (LETT |i| 0) (LETT #1# |n|) G190
                          (COND
@@ -18,25 +18,9 @@
 
 (DECLAIM (NOTINLINE |TaylorSeries;|)) 
 
-(DEFUN |TaylorSeries| (#1=#:G37)
-  (SPROG NIL
-         (PROG (#2=#:G38)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|TaylorSeries|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|TaylorSeries;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|TaylorSeries|)))))))))) 
-
 (DEFUN |TaylorSeries;| (|#1|)
   (SPROG
-   ((#1=#:G36 NIL) (|pv$| NIL) (#2=#:G35 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+   ((#1=#:G17 NIL) (|pv$| NIL) (#2=#:G16 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT |dv$| (LIST '|TaylorSeries| DV$1))
@@ -86,6 +70,22 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 7 (|Stream| (|Polynomial| |#1|)))
     %))) 
+
+(DEFUN |TaylorSeries| (#1=#:G18)
+  (SPROG NIL
+         (PROG (#2=#:G19)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|TaylorSeries|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|TaylorSeries;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|TaylorSeries|)))))))))) 
 
 (MAKEPROP '|TaylorSeries| '|infovec|
           (LIST

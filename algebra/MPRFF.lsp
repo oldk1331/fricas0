@@ -1,13 +1,13 @@
 
 (SDEFUN |MPRFF;factor;PRFF;1| ((|p| (PRF)) (% (|Factored| PRF)))
         (SPROG
-         ((#1=#:G39 NIL) (#2=#:G38 #3=(|Factored| PRF)) (#4=#:G40 #3#)
-          (#5=#:G48 NIL) (|ff| NIL)
+         ((#1=#:G14 NIL) (#2=#:G13 #3=(|Factored| PRF)) (#4=#:G15 #3#)
+          (#5=#:G23 NIL) (|ff| NIL)
           (|ffact|
            (|List|
             (|Record| (|:| |irr| PRF) (|:| |pow| (|NonNegativeInteger|)))))
-          (#6=#:G47 NIL) (#7=#:G46 NIL) (|fcont| (PRF)) (#8=#:G45 NIL)
-          (|x| NIL) (#9=#:G44 NIL) (|u| NIL) (#10=#:G43 NIL)
+          (#6=#:G22 NIL) (#7=#:G21 NIL) (|fcont| (PRF)) (#8=#:G20 NIL)
+          (|x| NIL) (#9=#:G19 NIL) (|u| NIL) (#10=#:G18 NIL)
           (|flist| (|Factored| (|Polynomial| R)))
           (|denp| (|Fraction| (|Polynomial| R))) (|nump| #11=(|Polynomial| R))
           (|tp| (|Record| (|:| |sup| #11#) (|:| |inf| (|Polynomial| R))))
@@ -144,7 +144,7 @@
 
 (SDEFUN |MPRFF;pushup;PRFOVPRF;4| ((|f| (PRF)) (|x| (OV)) (% (PRF)))
         (SPROG
-         ((|g| (|SparseUnivariatePolynomial| PRF)) (|v| (OV)) (#1=#:G59 NIL))
+         ((|g| (|SparseUnivariatePolynomial| PRF)) (|v| (OV)) (#1=#:G33 NIL))
          (SEQ
           (COND
            ((SPADCALL |f| (QREFELT % 41))
@@ -212,7 +212,7 @@
          (%
           (|Record| (|:| |sup| (|Polynomial| R))
                     (|:| |inf| (|Polynomial| R)))))
-        (SPROG ((|g| (|Fraction| (|Polynomial| R))) (#1=#:G79 NIL) (|x| NIL))
+        (SPROG ((|g| (|Fraction| (|Polynomial| R))) (#1=#:G52 NIL) (|x| NIL))
                (SEQ
                 (COND
                  ((SPADCALL |p| (|spadConstant| % 42) (QREFELT % 81))
@@ -233,28 +233,6 @@
                           (SPADCALL |g| (QREFELT % 69)))))))))) 
 
 (DECLAIM (NOTINLINE |MPolyCatRationalFunctionFactorizer;|)) 
-
-(DEFUN |MPolyCatRationalFunctionFactorizer| (&REST #1=#:G80)
-  (SPROG NIL
-         (PROG (#2=#:G81)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|MPolyCatRationalFunctionFactorizer|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |MPolyCatRationalFunctionFactorizer;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|MPolyCatRationalFunctionFactorizer|)))))))))) 
 
 (DEFUN |MPolyCatRationalFunctionFactorizer;| (|#1| |#2| |#3| |#4|)
   (SPROG
@@ -279,6 +257,28 @@
     (QSETREFV % 9 |#4|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |MPolyCatRationalFunctionFactorizer| (&REST #1=#:G53)
+  (SPROG NIL
+         (PROG (#2=#:G54)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|MPolyCatRationalFunctionFactorizer|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |MPolyCatRationalFunctionFactorizer;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|MPolyCatRationalFunctionFactorizer|)))))))))) 
 
 (MAKEPROP '|MPolyCatRationalFunctionFactorizer| '|infovec|
           (LIST

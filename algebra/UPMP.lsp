@@ -1,6 +1,6 @@
 
 (SDEFUN |UPMP;noKaratsuba;3U;1| ((|a| (U)) (|b| (U)) (% (U)))
-        (SPROG ((|res| (U)) (#1=#:G33 NIL) (|u| NIL) (|lu| (|List| U)))
+        (SPROG ((|res| (U)) (#1=#:G23 NIL) (|u| NIL) (|lu| (|List| U)))
                (SEQ
                 (COND ((SPADCALL |a| (QREFELT % 9)) |a|)
                       ((SPADCALL |b| (QREFELT % 9)) |b|)
@@ -83,7 +83,7 @@
         (SPROG
          ((|w| (U)) (|v| (U)) (|u| (U)) (|lb| (U)) (|hb| (U))
           (|rec| (|Record| (|:| |quotient| U) (|:| |remainder| U))) (|la| (U))
-          (|ha| (U)) (#1=#:G42 NIL) (|n| (|NonNegativeInteger|))
+          (|ha| (U)) (#1=#:G32 NIL) (|n| (|NonNegativeInteger|))
           (|d| (|NonNegativeInteger|)) (|db| #2=(|NonNegativeInteger|))
           (|da| #2#))
          (SEQ
@@ -144,9 +144,28 @@
 
 (DECLAIM (NOTINLINE |UnivariatePolynomialMultiplicationPackage;|)) 
 
-(DEFUN |UnivariatePolynomialMultiplicationPackage| (&REST #1=#:G52)
+(DEFUN |UnivariatePolynomialMultiplicationPackage;| (|#1| |#2|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT DV$2 (|devaluate| |#2|))
+          (LETT |dv$|
+                (LIST '|UnivariatePolynomialMultiplicationPackage| DV$1 DV$2))
+          (LETT % (GETREFV 35))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache|
+                      '|UnivariatePolynomialMultiplicationPackage|
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |UnivariatePolynomialMultiplicationPackage| (&REST #1=#:G42)
   (SPROG NIL
-         (PROG (#2=#:G53)
+         (PROG (#2=#:G43)
            (RETURN
             (COND
              ((LETT #2#
@@ -167,25 +186,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|UnivariatePolynomialMultiplicationPackage|)))))))))) 
-
-(DEFUN |UnivariatePolynomialMultiplicationPackage;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT DV$2 (|devaluate| |#2|))
-          (LETT |dv$|
-                (LIST '|UnivariatePolynomialMultiplicationPackage| DV$1 DV$2))
-          (LETT % (GETREFV 35))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache|
-                      '|UnivariatePolynomialMultiplicationPackage|
-                      (LIST DV$1 DV$2) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (QSETREFV % 7 |#2|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|UnivariatePolynomialMultiplicationPackage| '|infovec|
           (LIST

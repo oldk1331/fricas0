@@ -3,7 +3,7 @@
         (SPADCALL (QCAR |s1|) (QCAR |s2|) (QREFELT % 15))) 
 
 (SDEFUN |SETMN;coerce;%Of;2| ((|s| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G34 NIL) (|i| NIL) (#2=#:G33 NIL))
+        (SPROG ((#1=#:G24 NIL) (|i| NIL) (#2=#:G23 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -22,7 +22,7 @@
 
 (SDEFUN |SETMN;reallyEnumerate| ((% (|Vector| %)))
         (SPROG
-         ((#1=#:G40 NIL) (|i| NIL) (#2=#:G42 NIL) (|b| NIL) (#3=#:G41 NIL))
+         ((#1=#:G28 NIL) (|i| NIL) (#2=#:G30 NIL) (|b| NIL) (#3=#:G29 NIL))
          (SEQ
           (PROGN
            (LETT #3#
@@ -56,8 +56,8 @@
         ((|p| (|NonNegativeInteger|)) (|q| (|NonNegativeInteger|))
          (|n| (|PositiveInteger|)) (% (|List| (|Bits|))))
         (SPROG
-         ((#1=#:G62 NIL) (|s| NIL) (|l| (|List| (|Bits|))) (#2=#:G54 NIL)
-          (|q1| (|NonNegativeInteger|)) (#3=#:G53 NIL) (#4=#:G61 NIL) (|i| NIL)
+         ((#1=#:G50 NIL) (|s| NIL) (|l| (|List| (|Bits|))) (#2=#:G42 NIL)
+          (|q1| (|NonNegativeInteger|)) (#3=#:G41 NIL) (#4=#:G49 NIL) (|i| NIL)
           (|b| (|Bits|)))
          (SEQ
           (COND ((OR (ZEROP |p|) (ZEROP |q|)) NIL)
@@ -101,7 +101,7 @@
                                (QREFELT % 35))))))))))) 
 
 (SDEFUN |SETMN;size;Nni;7| ((% (|NonNegativeInteger|)))
-        (SPROG ((#1=#:G63 NIL))
+        (SPROG ((#1=#:G51 NIL))
                (SEQ
                 (COND
                  ((ZEROP (QREFELT % 12))
@@ -116,7 +116,7 @@
                 (EXIT (QREFELT % 12))))) 
 
 (SDEFUN |SETMN;lookup;%Pi;8| ((|s| (%)) (% (|PositiveInteger|)))
-        (SPROG ((#1=#:G70 NIL) (#2=#:G68 NIL))
+        (SPROG ((#1=#:G58 NIL) (#2=#:G56 NIL))
                (SEQ
                 (COND
                  ((SPADCALL (QREFELT % 11) (QREFELT % 28))
@@ -152,7 +152,7 @@
 
 (SDEFUN |SETMN;setOfMinN;L%;10| ((|l| (|List| (|PositiveInteger|))) (% (%)))
         (SPROG
-         ((|count| (|NonNegativeInteger|)) (#1=#:G84 NIL) (|i| NIL)
+         ((|count| (|NonNegativeInteger|)) (#1=#:G72 NIL) (|i| NIL)
           (|s| (|Bits|)))
          (SEQ (LETT |s| (SPADCALL (QREFELT % 7) NIL (QREFELT % 32)))
               (LETT |count| 0)
@@ -194,7 +194,7 @@
 (SDEFUN |SETMN;incrementKthElement;%PiU;12|
         ((|s| (%)) (|k| (|PositiveInteger|)) (% (|Union| % "failed")))
         (SPROG
-         ((#1=#:G101 NIL) (|newb| (|Bits|)) (|i| (|NonNegativeInteger|))
+         ((#1=#:G89 NIL) (|newb| (|Bits|)) (|i| (|NonNegativeInteger|))
           (|found| (|NonNegativeInteger|)) (|b| (|Bits|)))
          (SEQ (LETT |b| (QCAR |s|)) (LETT |found| 0) (LETT |i| 1)
               (SEQ G190 (COND ((NULL (< |found| |k|)) (GO G191)))
@@ -267,25 +267,6 @@
 
 (DECLAIM (NOTINLINE |SetOfMIntegersInOneToN;|)) 
 
-(DEFUN |SetOfMIntegersInOneToN| (&REST #1=#:G126)
-  (SPROG NIL
-         (PROG (#2=#:G127)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|SetOfMIntegersInOneToN|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |SetOfMIntegersInOneToN;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|SetOfMIntegersInOneToN|)))))))))) 
-
 (DEFUN |SetOfMIntegersInOneToN;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -307,6 +288,25 @@
           (QSETREFV % 11 (SPADCALL (QREFELT % 10)))
           (QSETREFV % 12 0)
           %))) 
+
+(DEFUN |SetOfMIntegersInOneToN| (&REST #1=#:G114)
+  (SPROG NIL
+         (PROG (#2=#:G115)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|SetOfMIntegersInOneToN|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |SetOfMIntegersInOneToN;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|SetOfMIntegersInOneToN|)))))))))) 
 
 (MAKEPROP '|SetOfMIntegersInOneToN| '|infovec|
           (LIST

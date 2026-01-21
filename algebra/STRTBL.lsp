@@ -1,25 +1,9 @@
 
 (DECLAIM (NOTINLINE |StringTable;|)) 
 
-(DEFUN |StringTable| (#1=#:G65)
-  (SPROG NIL
-         (PROG (#2=#:G66)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|StringTable|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|StringTable;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|StringTable|)))))))))) 
-
 (DEFUN |StringTable;| (|#1|)
   (SPROG
-   ((#1=#:G64 NIL) (#2=#:G63 NIL) (|pv$| NIL) (#3=#:G61 NIL) (#4=#:G62 NIL)
+   ((#1=#:G58 NIL) (#2=#:G57 NIL) (|pv$| NIL) (#3=#:G55 NIL) (#4=#:G56 NIL)
     (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -130,6 +114,22 @@
          (|augmentPredVector| % 1048576))
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |StringTable| (#1=#:G59)
+  (SPROG NIL
+         (PROG (#2=#:G60)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|StringTable|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|StringTable;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|StringTable|)))))))))) 
 
 (MAKEPROP '|StringTable| '|infovec|
           (LIST

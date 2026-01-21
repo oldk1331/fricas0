@@ -6,7 +6,7 @@
 (SDEFUN |POLUTIL;sylvesterSequence;2ThePolsL;2|
         ((|p1| (|ThePols|)) (|p2| (|ThePols|)) (% (|List| |ThePols|)))
         (SPROG
-         ((|res| (|List| |ThePols|)) (#1=#:G32 NIL) (|term| NIL) (#2=#:G31 NIL)
+         ((|res| (|List| |ThePols|)) (#1=#:G23 NIL) (|term| NIL) (#2=#:G22 NIL)
           (|#G8| (|ThePols|)) (|#G7| (|ThePols|)))
          (SEQ (LETT |res| (LIST |p1|))
               (SEQ G190
@@ -50,9 +50,9 @@
 (SDEFUN |POLUTIL;boundOfCauchy;ThePolsTheField;3|
         ((|p| (|ThePols|)) (% (|TheField|)))
         (SPROG
-         ((#1=#:G36 NIL) (#2=#:G35 (|TheField|)) (#3=#:G37 (|TheField|))
-          (#4=#:G42 NIL) (|t| NIL) (|l| (|List| |TheField|)) (#5=#:G41 NIL)
-          (|term| NIL) (#6=#:G40 NIL) (|c| (|TheField|)))
+         ((#1=#:G27 NIL) (#2=#:G26 (|TheField|)) (#3=#:G28 (|TheField|))
+          (#4=#:G33 NIL) (|t| NIL) (|l| (|List| |TheField|)) (#5=#:G32 NIL)
+          (|term| NIL) (#6=#:G31 NIL) (|c| (|TheField|)))
          (SEQ
           (LETT |c| (SPADCALL (SPADCALL |p| (QREFELT % 22)) (QREFELT % 23)))
           (LETT |l|
@@ -102,7 +102,7 @@
 (SDEFUN |POLUTIL;sturmVariationsOf;LNni;4|
         ((|l| (|List| |TheField|)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((|ll| (|List| |TheField|)) (|ln| (|TheField|)) (#1=#:G50 NIL)
+         ((|ll| (|List| |TheField|)) (|ln| (|TheField|)) (#1=#:G41 NIL)
           (|term| NIL) (|l1| (|TheField|)))
          (SEQ
           (COND
@@ -175,28 +175,6 @@
 
 (DECLAIM (NOTINLINE |RealPolynomialUtilitiesPackage;|)) 
 
-(DEFUN |RealPolynomialUtilitiesPackage| (&REST #1=#:G73)
-  (SPROG NIL
-         (PROG (#2=#:G74)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|RealPolynomialUtilitiesPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |RealPolynomialUtilitiesPackage;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|RealPolynomialUtilitiesPackage|)))))))))) 
-
 (DEFUN |RealPolynomialUtilitiesPackage;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -234,6 +212,28 @@
                         (|dispatchFunction| |POLUTIL;lazyVariations;L2INni;5|)
                         %)))))
           %))) 
+
+(DEFUN |RealPolynomialUtilitiesPackage| (&REST #1=#:G51)
+  (SPROG NIL
+         (PROG (#2=#:G52)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|RealPolynomialUtilitiesPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |RealPolynomialUtilitiesPackage;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|RealPolynomialUtilitiesPackage|)))))))))) 
 
 (MAKEPROP '|RealPolynomialUtilitiesPackage| '|infovec|
           (LIST

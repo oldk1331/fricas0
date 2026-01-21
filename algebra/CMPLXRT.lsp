@@ -2,12 +2,12 @@
 (SDEFUN |CMPLXRT;complexZeros;UPParL;1|
         ((|p| (UP)) (|eps| (|Par|)) (% (|List| (|Complex| |Par|))))
         (SPROG
-         ((|ris| (|List| (|Complex| |Par|))) (#1=#:G52 NIL) (|z| NIL)
-          (#2=#:G51 NIL) (|lz| (|List| (|List| |Par|)))
+         ((|ris| (|List| (|Complex| |Par|))) (#1=#:G12 NIL) (|z| NIL)
+          (#2=#:G11 NIL) (|lz| (|List| (|List| |Par|)))
           (|p2| #3=(|Polynomial| (|Integer|))) (|p1| #3#)
           (|q| (|Polynomial| (|Complex| (|Integer|))))
           (|pp| #4=(|SparseUnivariatePolynomial| (|Complex| (|Integer|))))
-          (#5=#:G50 NIL) (|pf| NIL)
+          (#5=#:G10 NIL) (|pf| NIL)
           (|lpf|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
@@ -71,25 +71,6 @@
 
 (DECLAIM (NOTINLINE |ComplexRootPackage;|)) 
 
-(DEFUN |ComplexRootPackage| (&REST #1=#:G53)
-  (SPROG NIL
-         (PROG (#2=#:G54)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ComplexRootPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ComplexRootPackage;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|ComplexRootPackage|)))))))))) 
-
 (DEFUN |ComplexRootPackage;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -106,6 +87,25 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |ComplexRootPackage| (&REST #1=#:G13)
+  (SPROG NIL
+         (PROG (#2=#:G14)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ComplexRootPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ComplexRootPackage;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|ComplexRootPackage|)))))))))) 
 
 (MAKEPROP '|ComplexRootPackage| '|infovec|
           (LIST

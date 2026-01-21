@@ -43,7 +43,7 @@
 (SDEFUN |LMOPS;reverse!;2%;12| ((|l| (%)) (% (%))) (NREVERSE |l|)) 
 
 (SDEFUN |LMOPS;mapGen;M2%;13| ((|f| (|Mapping| S S)) (|l| (%)) (% (%)))
-        (SPROG ((#1=#:G61 NIL) (|x| NIL) (#2=#:G60 NIL))
+        (SPROG ((#1=#:G44 NIL) (|x| NIL) (#2=#:G43 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -62,7 +62,7 @@
 (SDEFUN |LMOPS;mapExpon;M2%;14| ((|f| (|Mapping| E E)) (|l| (%)) (% (%)))
         (SPROG
          ((|ans| (|List| (|Record| (|:| |gen| S) (|:| |exp| E)))) (|a| (E))
-          (#1=#:G69 NIL) (|x| NIL))
+          (#1=#:G52 NIL) (|x| NIL))
          (SEQ (LETT |ans| NIL)
               (SEQ (LETT |x| NIL) (LETT #1# |l|) G190
                    (COND
@@ -82,7 +82,7 @@
          (|op| (|Mapping| (|OutputForm|) (|OutputForm|) (|OutputForm|)))
          (|opexp| (|Mapping| (|OutputForm|) (|OutputForm|) (|OutputForm|)))
          (|id| (|Integer|)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G80 NIL) (|p| NIL) (#2=#:G79 NIL))
+        (SPROG ((#1=#:G63 NIL) (|p| NIL) (#2=#:G62 NIL))
                (SEQ
                 (COND ((NULL |l|) (SPADCALL |id| (QREFELT % 38)))
                       ('T
@@ -161,24 +161,6 @@
 
 (DECLAIM (NOTINLINE |ListMonoidOps;|)) 
 
-(DEFUN |ListMonoidOps| (&REST #1=#:G104)
-  (SPROG NIL
-         (PROG (#2=#:G105)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T T NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|ListMonoidOps|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ListMonoidOps;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|ListMonoidOps|)))))))))) 
-
 (DEFUN |ListMonoidOps;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -198,6 +180,24 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 9 (|List| (|Record| (|:| |gen| |#1|) (|:| |exp| |#2|))))
           %))) 
+
+(DEFUN |ListMonoidOps| (&REST #1=#:G85)
+  (SPROG NIL
+         (PROG (#2=#:G86)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T T NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|ListMonoidOps|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ListMonoidOps;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|ListMonoidOps|)))))))))) 
 
 (MAKEPROP '|ListMonoidOps| '|infovec|
           (LIST

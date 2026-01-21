@@ -114,7 +114,7 @@
           (RETURN
            (PROGN
             (SPROG
-             ((#1=#:G51 NIL) (|s| NIL) (#2=#:G52 NIL) (|a| NIL) (#3=#:G50 NIL))
+             ((#1=#:G38 NIL) (|s| NIL) (#2=#:G39 NIL) (|a| NIL) (#3=#:G37 NIL))
              (SEQ
               (SPADCALL (ELT % 39)
                         (PROGN
@@ -146,9 +146,26 @@
 
 (DECLAIM (NOTINLINE |TaylorSeriesExpansionTaylor;|)) 
 
-(DEFUN |TaylorSeriesExpansionTaylor| (&REST #1=#:G59)
+(DEFUN |TaylorSeriesExpansionTaylor;| (|#1| |#2|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT DV$2 (|devaluate| |#2|))
+          (LETT |dv$| (LIST '|TaylorSeriesExpansionTaylor| DV$1 DV$2))
+          (LETT % (GETREFV 52))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|TaylorSeriesExpansionTaylor|
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |TaylorSeriesExpansionTaylor| (&REST #1=#:G46)
   (SPROG NIL
-         (PROG (#2=#:G60)
+         (PROG (#2=#:G47)
            (RETURN
             (COND
              ((LETT #2#
@@ -166,23 +183,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|TaylorSeriesExpansionTaylor|)))))))))) 
-
-(DEFUN |TaylorSeriesExpansionTaylor;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT DV$2 (|devaluate| |#2|))
-          (LETT |dv$| (LIST '|TaylorSeriesExpansionTaylor| DV$1 DV$2))
-          (LETT % (GETREFV 52))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|TaylorSeriesExpansionTaylor|
-                      (LIST DV$1 DV$2) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (QSETREFV % 7 |#2|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|TaylorSeriesExpansionTaylor| '|infovec|
           (LIST

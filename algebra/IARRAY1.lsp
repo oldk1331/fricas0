@@ -4,7 +4,7 @@
 (SDEFUN |IARRAY1;#;%Nni;1| ((|x| (%)) (% (|NonNegativeInteger|))) (QVSIZE |x|)) 
 
 (SDEFUN |IARRAY1;fill!;%S%;2| ((|x| (%)) (|s| (S)) (% (%)))
-        (SPROG ((#1=#:G936 NIL) (|i| NIL))
+        (SPROG ((#1=#:G881 NIL) (|i| NIL))
                (SEQ
                 (SEQ (LETT |i| 0) (LETT #1# (QVMAXINDEX |x|)) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -24,7 +24,7 @@
         (MAKEARR1 |n| |s|)) 
 
 (SDEFUN |IARRAY1;map!;M2%;6| ((|f| (|Mapping| S S)) (|s1| (%)) (% (%)))
-        (SPROG ((#1=#:G946 NIL) (|i| NIL) (|n| (|Integer|)))
+        (SPROG ((#1=#:G891 NIL) (|i| NIL) (|n| (|Integer|)))
                (SEQ (LETT |n| (QVMAXINDEX |s1|))
                     (EXIT
                      (COND ((< |n| 0) |s1|)
@@ -42,7 +42,7 @@
                              (EXIT |s1|)))))))) 
 
 (SDEFUN |IARRAY1;map;M2%;7| ((|f| (|Mapping| S S)) (|s1| (%)) (% (%)))
-        (SPROG ((#1=#:G952 NIL) (|i| NIL) (|ss2| (%)) (|n| (|Integer|)))
+        (SPROG ((#1=#:G897 NIL) (|i| NIL) (|ss2| (%)) (|n| (|Integer|)))
                (SEQ (LETT |n| (QVMAXINDEX |s1|))
                     (EXIT
                      (COND ((< |n| 0) |s1|)
@@ -61,7 +61,7 @@
 
 (SDEFUN |IARRAY1;map;M3%;8|
         ((|f| (|Mapping| S S S)) (|a| (%)) (|b| (%)) (% (%)))
-        (SPROG ((#1=#:G959 NIL) (|i| NIL) (|c| (%)) (|maxind| (|Integer|)))
+        (SPROG ((#1=#:G904 NIL) (|i| NIL) (|c| (%)) (|maxind| (|Integer|)))
                (SEQ (LETT |maxind| (MIN (QVMAXINDEX |a|) (QVMAXINDEX |b|)))
                     (EXIT
                      (COND ((< |maxind| 0) (SPADCALL (QREFELT % 13)))
@@ -81,7 +81,7 @@
 
 (SDEFUN |IARRAY1;hashUpdate!;Hs%Hs;9|
         ((|s| (|HashState|)) (|x| (%)) (% (|HashState|)))
-        (SPROG ((#1=#:G964 NIL) (|i| NIL))
+        (SPROG ((#1=#:G909 NIL) (|i| NIL))
                (SEQ
                 (SEQ (LETT |i| 0) (LETT #1# (QVMAXINDEX |x|)) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -161,29 +161,9 @@
 
 (DECLAIM (NOTINLINE |IndexedOneDimensionalArray;|)) 
 
-(DEFUN |IndexedOneDimensionalArray| (&REST #1=#:G1002)
-  (SPROG NIL
-         (PROG (#2=#:G1003)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|IndexedOneDimensionalArray|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |IndexedOneDimensionalArray;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|IndexedOneDimensionalArray|)))))))))) 
-
 (DEFUN |IndexedOneDimensionalArray;| (|#1| |#2|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G999 NIL) (#2=#:G1000 NIL) (#3=#:G1001 NIL) (% NIL)
+   ((|pv$| NIL) (#1=#:G944 NIL) (#2=#:G945 NIL) (#3=#:G946 NIL) (% NIL)
     (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -314,6 +294,26 @@
                  (CONS (|dispatchFunction| |IARRAY1;setelt!;%I2S;22|) %)))))
     %))) 
 
+(DEFUN |IndexedOneDimensionalArray| (&REST #1=#:G947)
+  (SPROG NIL
+         (PROG (#2=#:G948)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|IndexedOneDimensionalArray|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |IndexedOneDimensionalArray;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|IndexedOneDimensionalArray|)))))))))) 
+
 (MAKEPROP '|IndexedOneDimensionalArray| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
@@ -321,7 +321,7 @@
               (|Integer|) |IARRAY1;minIndex;%I;3| |IARRAY1;empty;%;4|
               |IARRAY1;new;NniS%;5| (|Mapping| 6 6) |IARRAY1;map!;M2%;6|
               |IARRAY1;map;M2%;7| (|Mapping| 6 6 6) |IARRAY1;map;M3%;8|
-              (|HashState|) (0 . |hashUpdate!|) (6 . |hashUpdate!|) '#:G930
+              (|HashState|) (0 . |hashUpdate!|) (6 . |hashUpdate!|) '#:G875
               (12 . |qelt|) (18 . |qsetelt!|) (25 . |maxIndex|) (30 . |elt|)
               (36 . |setelt!|) (|Boolean|) (|List| 6) (|List| 11)
               (|Union| 6 '"failed") (|Mapping| 29 6) (|UniversalSegment| 11)

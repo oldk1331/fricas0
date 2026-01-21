@@ -26,7 +26,7 @@
 
 (SDEFUN |OVAR;variable;SU;9| ((|exp| (|Symbol|)) (% (|Union| % "failed")))
         (SPROG
-         ((#1=#:G47 NIL) (#2=#:G40 NIL) (|i| NIL) (#3=#:G48 NIL) (|exp2| NIL))
+         ((#1=#:G20 NIL) (#2=#:G13 NIL) (|i| NIL) (#3=#:G21 NIL) (|exp2| NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -46,7 +46,7 @@
                                                       '(|PositiveInteger|)
                                                       '(|NonNegativeInteger|)
                                                       #2#))))
-                      (GO #4=#:G46))))))
+                      (GO #4=#:G19))))))
                  (LETT |i| (PROG1 (|inc_SI| |i|) (LETT #3# (CDR #3#))))
                  (GO G190) G191 (EXIT NIL))
             (EXIT (CONS 1 "failed"))))
@@ -65,23 +65,6 @@
 
 (DECLAIM (NOTINLINE |OrderedVariableList;|)) 
 
-(DEFUN |OrderedVariableList| (#1=#:G52)
-  (SPROG NIL
-         (PROG (#2=#:G53)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|OrderedVariableList|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|OrderedVariableList;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|OrderedVariableList|)))))))))) 
-
 (DEFUN |OrderedVariableList;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -98,6 +81,23 @@
           (SETELT % 6 (SPADCALL |#1| (QREFELT % 8)))
           (QSETREFV % 9 (|PositiveInteger|))
           %))) 
+
+(DEFUN |OrderedVariableList| (#1=#:G25)
+  (SPROG NIL
+         (PROG (#2=#:G26)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|OrderedVariableList|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|OrderedVariableList;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|OrderedVariableList|)))))))))) 
 
 (MAKEPROP '|OrderedVariableList| '|infovec|
           (LIST

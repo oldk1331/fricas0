@@ -21,12 +21,12 @@
           (|ns| #2#) (|n| (|NonNegativeInteger|))
           (|exps| (|SortedExponentVector|)) (|nexps| (|SortedExponentVector|))
           (|coeffs| (|U32Vector|)) (|ncoeffs| (|U32Vector|))
-          (|nn| (|NonNegativeInteger|)) (#3=#:G37 NIL) (|t0| NIL)
+          (|nn| (|NonNegativeInteger|)) (#3=#:G22 NIL) (|t0| NIL)
           (|polu|
            #4=(|List|
                (|Record| (|:| |k| (|NonNegativeInteger|))
                          (|:| |c| (|Polynomial| (|Integer|))))))
-          (#5=#:G36 NIL)
+          (#5=#:G21 NIL)
           (|polr|
            (|Union| (|Integer|)
                     (|Record| (|:| |v| (|Symbol|)) (|:| |ts| #4#))))
@@ -37,7 +37,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |polr| 0)
-                   (PROGN (LETT #5# (QCDR |polr|)) (GO #6=#:G35)))
+                   (PROGN (LETT #5# (QCDR |polr|)) (GO #6=#:G20)))
                   ('T
                    (SEQ (LETT |polu| (QCDR (QCDR |polr|))) (LETT |i| 0)
                         (LETT |coeffs| (QVELT |pss| 1))
@@ -127,12 +127,12 @@
                                               (|:| |c|
                                                    (|Polynomial|
                                                     (|Integer|)))))))))
-          (#1=#:G63 NIL) (|t0| NIL)
+          (#1=#:G43 NIL) (|t0| NIL)
           (|xu|
            #2=(|List|
                (|Record| (|:| |k| (|NonNegativeInteger|))
                          (|:| |c| (|Polynomial| (|Integer|))))))
-          (#3=#:G62 NIL) (|vx| #4=(|Symbol|))
+          (#3=#:G42 NIL) (|vx| #4=(|Symbol|))
           (|polr|
            (|Union| (|Integer|) (|Record| (|:| |v| #4#) (|:| |ts| #2#)))))
          (SEQ
@@ -140,7 +140,7 @@
            (SEQ (LETT |polr| |pol|)
                 (EXIT
                  (COND
-                  ((QEQCAR |polr| 0) (PROGN (LETT #3# |pol|) (GO #5=#:G61)))
+                  ((QEQCAR |polr| 0) (PROGN (LETT #3# |pol|) (GO #5=#:G41)))
                   (#6='T
                    (SEQ (LETT |vx| (QCAR (QCDR |polr|)))
                         (EXIT
@@ -253,7 +253,7 @@
                                               (|:| |c|
                                                    (|Polynomial|
                                                     (|Integer|)))))))))
-          (#1=#:G94 NIL) (|t0| NIL)
+          (#1=#:G74 NIL) (|t0| NIL)
           (|xu|
            (|List|
             (|Record| (|:| |k| (|NonNegativeInteger|))
@@ -349,12 +349,12 @@
                                               (|:| |c|
                                                    (|Polynomial|
                                                     (|Integer|)))))))))
-          (#2=#:G122 NIL) (|t0| NIL)
+          (#2=#:G98 NIL) (|t0| NIL)
           (|xu|
            (|List|
             (|Record| (|:| |k| (|NonNegativeInteger|))
                       (|:| |c| (|Polynomial| (|Integer|))))))
-          (|vxval| (|Integer|)) (#3=#:G121 NIL) (|vx| (|Symbol|))
+          (|vxval| (|Integer|)) (#3=#:G97 NIL) (|vx| (|Symbol|))
           (|xr|
            (|Union| (|Integer|)
                     (|Record| (|:| |v| (|Symbol|))
@@ -372,7 +372,7 @@
                   ((QEQCAR |xr| 0)
                    (PROGN
                     (LETT #3# (SPADCALL (QCDR |xr|) |p| (QREFELT % 27)))
-                    (GO #4=#:G120)))
+                    (GO #4=#:G96)))
                   (#5='T
                    (SEQ (LETT |vx| (QCAR (QCDR |xr|)))
                         (EXIT
@@ -428,9 +428,22 @@
 
 (DECLAIM (NOTINLINE |PolynomialEvaluationUtilities;|)) 
 
+(DEFUN |PolynomialEvaluationUtilities;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|PolynomialEvaluationUtilities|))
+          (LETT % (GETREFV 38))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|PolynomialEvaluationUtilities| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |PolynomialEvaluationUtilities| ()
   (SPROG NIL
-         (PROG (#1=#:G124)
+         (PROG (#1=#:G100)
            (RETURN
             (COND
              ((LETT #1#
@@ -452,19 +465,6 @@
                  ((NOT #1#)
                   (HREM |$ConstructorCache|
                         '|PolynomialEvaluationUtilities|)))))))))) 
-
-(DEFUN |PolynomialEvaluationUtilities;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|PolynomialEvaluationUtilities|))
-          (LETT % (GETREFV 38))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|PolynomialEvaluationUtilities| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|PolynomialEvaluationUtilities| '|infovec|
           (LIST

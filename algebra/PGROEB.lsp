@@ -3,8 +3,8 @@
         ((|lp| (|List| (|Polynomial| F))) (|lv| (|List| (|Symbol|)))
          (% (|List| (|Polynomial| F))))
         (SPROG
-         ((#1=#:G23 NIL) (|pp| NIL) (#2=#:G22 NIL) (|gb| (|List| |DPoly|))
-          (|b| (|List| |DPoly|)) (#3=#:G21 NIL) (|pol| NIL) (#4=#:G20 NIL)
+         ((#1=#:G9 NIL) (|pp| NIL) (#2=#:G8 NIL) (|gb| (|List| |DPoly|))
+          (|b| (|List| |DPoly|)) (#3=#:G7 NIL) (|pol| NIL) (#4=#:G6 NIL)
           (DP
            (|Join|
             (|DirectProductCategory| (|call| LENGTH |lv|)
@@ -117,8 +117,8 @@
         ((|lp| (|List| (|Polynomial| F))) (|lv| (|List| (|Symbol|)))
          (% (|List| (|Polynomial| F))))
         (SPROG
-         ((#1=#:G35 NIL) (|pp| NIL) (#2=#:G34 NIL) (|gb| (|List| |HDPoly|))
-          (|b| (|List| |HDPoly|)) (#3=#:G33 NIL) (|pol| NIL) (#4=#:G32 NIL)
+         ((#1=#:G19 NIL) (|pp| NIL) (#2=#:G18 NIL) (|gb| (|List| |HDPoly|))
+          (|b| (|List| |HDPoly|)) (#3=#:G17 NIL) (|pol| NIL) (#4=#:G16 NIL)
           (HDP
            (|DirectProductCategory| (|call| LENGTH |lv|)
                                     (|NonNegativeInteger|)))
@@ -229,22 +229,6 @@
 
 (DECLAIM (NOTINLINE |PolyGroebner;|)) 
 
-(DEFUN |PolyGroebner| (#1=#:G36)
-  (SPROG NIL
-         (PROG (#2=#:G37)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|PolyGroebner|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|PolyGroebner;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|PolyGroebner|)))))))))) 
-
 (DEFUN |PolyGroebner;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -259,6 +243,22 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |PolyGroebner| (#1=#:G20)
+  (SPROG NIL
+         (PROG (#2=#:G21)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|PolyGroebner|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|PolyGroebner;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|PolyGroebner|)))))))))) 
 
 (MAKEPROP '|PolyGroebner| '|infovec|
           (LIST

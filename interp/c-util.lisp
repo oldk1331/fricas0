@@ -433,12 +433,9 @@
 ;         pair':= assoc("mode",p') =>
 ;           m'' := unifiable(rest pair, rest pair', ce) => LIST ["mode", :m'']
 ;           stackWarning(['%b,$var,'%d,'"has two modes: "])
-;        --stackWarning ("mode for",'%b,$var,'%d,"introduced conditionally")
 ;         LIST ["conditionalmode",:rest pair]
 ;         --LIST pair
-;        --stackWarning ("mode for",'%b,$var,'%d,"introduced conditionally")
 ;       pair':= assoc("mode",p') => LIST ["conditionalmode",:rest pair']
-;         --LIST pair'
 ;     unifiable(m1, m2, ce) ==
 ;       m1=m2 => m1
 ;         --we may need to add code to coerce up to tagged unions
@@ -1101,8 +1098,6 @@
 ;     false
 ;   (name:= first domain)="Category" => true
 ;   ASSQ(name,domainList) => true
-; --   null rest domain or domainMember(domain,domainList) => true
-; --   false
 ;   isFunctor name => false
 ;   true --is not a functor
 
@@ -1945,7 +1940,6 @@
      (PROGN (SETQ |pp| (MAPCAR #'CONS |fp| |ap|)) (|sublis_vec| |pp| |cv|)))))
 
 ; old2NewModemaps x ==
-; --  [[dcSig,pred] for [dcSig,[pred,:.],:.] in x]
 ;   x is [dcSig,[pred,:.],:.]  =>  [dcSig,pred]
 ;   x
 

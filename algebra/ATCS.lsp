@@ -8,6 +8,6 @@
         (T (SETQ |CommutativeStar;AL| (|CommutativeStar;|))))) 
 
 (DEFUN |CommutativeStar;| ()
-  (SPROG ((#1=#:G1 NIL))
+  (SPROG ((#1=#:G0 NIL))
          (PROG1 (LETT #1# (|Join| (|TwoSidedRecip|)))
            (SETELT #1# 0 '(|CommutativeStar|))))) 

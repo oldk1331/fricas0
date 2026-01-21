@@ -10,9 +10,22 @@
 
 (DECLAIM (NOTINLINE |PatternMatchAssertions;|)) 
 
+(DEFUN |PatternMatchAssertions;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|PatternMatchAssertions|))
+          (LETT % (GETREFV 16))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|PatternMatchAssertions| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |PatternMatchAssertions| ()
   (SPROG NIL
-         (PROG (#1=#:G9)
+         (PROG (#1=#:G4)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|PatternMatchAssertions|))
@@ -29,19 +42,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|PatternMatchAssertions|)))))))))) 
-
-(DEFUN |PatternMatchAssertions;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|PatternMatchAssertions|))
-          (LETT % (GETREFV 16))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|PatternMatchAssertions| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|PatternMatchAssertions| '|infovec|
           (LIST

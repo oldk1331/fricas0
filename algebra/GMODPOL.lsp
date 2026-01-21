@@ -43,25 +43,6 @@
 
 (DECLAIM (NOTINLINE |GeneralModulePolynomial;|)) 
 
-(DEFUN |GeneralModulePolynomial| (&REST #1=#:G44)
-  (SPROG NIL
-         (PROG (#2=#:G45)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(NIL T T T NIL T))
-                     (HGET |$ConstructorCache| '|GeneralModulePolynomial|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |GeneralModulePolynomial;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|GeneralModulePolynomial|)))))))))) 
-
 (DEFUN |GeneralModulePolynomial;| (|#1| |#2| |#3| |#4| |#5| |#6|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$6 NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL)
@@ -109,6 +90,25 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 12 (|FreeModule| |#2| (|ModuleMonomial| |#3| |#4| |#5|)))
     %))) 
+
+(DEFUN |GeneralModulePolynomial| (&REST #1=#:G34)
+  (SPROG NIL
+         (PROG (#2=#:G35)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(NIL T T T NIL T))
+                     (HGET |$ConstructorCache| '|GeneralModulePolynomial|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |GeneralModulePolynomial;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|GeneralModulePolynomial|)))))))))) 
 
 (MAKEPROP '|GeneralModulePolynomial| '|infovec|
           (LIST

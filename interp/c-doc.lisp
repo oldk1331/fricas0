@@ -640,11 +640,9 @@
 ;     u := checkSplit2Words u
 ;     u := checkAddMacros u
 ;     u := checkTexht u
-; --  checkBalance u
 ;     checkArguments u
 ;     if $checkErrorFlag then u := checkFixCommonProblem u
 ;     checkRecordHash u
-; --  u := checkTranVerbatim u
 ;     checkDecorateForHt u
 
 (DEFUN |checkRewrite| (|name| |lines|)
@@ -1802,7 +1800,7 @@
 ;     do
 ;       m := #line
 ;       (k := firstNonBlankPosition line) = -1     => 'skip  --include if blank
-;       k > margin                                 => 'skip  --include if idented
+;       k > margin                                 => 'skip  --include if indented
 ;       not UPPER_-CASE_-P line.k                  => 'skip  --also if not upcased
 ;       (j := charPosition(char '_:,line,k)) = m   => 'skip  --or if not colon, or
 ;       (i := charPosition(char '_ ,line,k+1)) < j => 'skip  --blank before colon
@@ -2996,7 +2994,7 @@
 ;   else if namestring = '"One" then namestring := '"1"
 ;   margin > 0 =>
 ;     s := leftTrim u
-;     STRCONC(fillerSpaces(margin, '" "), checkTransformFirsts(opname, s, 0))
+;     STRCONC(filler_spaces(margin), checkTransformFirsts(opname, s, 0))
 ;   m := MAXINDEX u
 ;   m < 2 => u
 ;   u.0 = $charBack => u
@@ -3065,7 +3063,7 @@
        ((< 0 |margin|)
         (PROGN
          (SETQ |s| (|leftTrim| |u|))
-         (STRCONC (|fillerSpaces| |margin| " ")
+         (STRCONC (|filler_spaces| |margin|)
           (|checkTransformFirsts| |opname| |s| 0))))
        (#1='T
         (PROGN

@@ -14,12 +14,12 @@
         (SPROG
          ((|res3|
            (|List| (|Record| (|:| |ratpart| F) (|:| |coeffs| (|Vector| F)))))
-          (|bv| #1=(|Vector| F)) (|rp| (F)) (|c| (F)) (#2=#:G47 NIL) (|be| NIL)
+          (|bv| #1=(|Vector| F)) (|rp| (F)) (|c| (F)) (#2=#:G25 NIL) (|be| NIL)
           (|ppv| #1#) (|ppa| (F)) (|c1inv| (F)) (|found| (|Boolean|))
           (|be1| (|Record| (|:| |ratpart| F) (|:| |coeffs| (|Vector| F))))
           (|res2|
            (|List| (|Record| (|:| |ratpart| F) (|:| |coeffs| (|Vector| F)))))
-          (#3=#:G46 NIL) (|nn| (|NonNegativeInteger|)))
+          (#3=#:G24 NIL) (|nn| (|NonNegativeInteger|)))
          (SEQ
           (COND ((NULL |ls|) (CONS (CONS 1 "failed") NIL))
                 (#4='T
@@ -87,7 +87,7 @@
                     (#4# (CONS (CONS 1 "failed") NIL)))))))))) 
 
 (SDEFUN |LINCOMB;lin_comb;VLF;2| ((|v| (|Vector| F)) (|lf| (|List| F)) (% (F)))
-        (SPROG ((|res| (F)) (#1=#:G54 NIL) (|i| NIL) (#2=#:G55 NIL) (|f| NIL))
+        (SPROG ((|res| (F)) (#1=#:G30 NIL) (|i| NIL) (#2=#:G31 NIL) (|f| NIL))
                (SEQ (LETT |res| (|spadConstant| % 16))
                     (SEQ (LETT |f| NIL) (LETT #2# |lf|) (LETT |i| 1)
                          (LETT #1# (QVSIZE |v|)) G190
@@ -109,7 +109,7 @@
 
 (SDEFUN |LINCOMB;lin_comb;VLF;3|
         ((|v| (|Vector| (|Fraction| (|Integer|)))) (|lf| (|List| F)) (% (F)))
-        (SPROG ((|res| (F)) (#1=#:G60 NIL) (|i| NIL) (#2=#:G61 NIL) (|f| NIL))
+        (SPROG ((|res| (F)) (#1=#:G36 NIL) (|i| NIL) (#2=#:G37 NIL) (|f| NIL))
                (SEQ (LETT |res| (|spadConstant| % 16))
                     (SEQ (LETT |f| NIL) (LETT #2# |lf|) (LETT |i| 1)
                          (LETT #1# (QVSIZE |v|)) G190
@@ -135,8 +135,8 @@
         ((|u| (|Vector| F)) (|v| (|Vector| F)) (|lw| (|List| (|Vector| F)))
          (% (|Vector| F)))
         (SPROG
-         ((#1=#:G71 NIL) (|j| NIL) (|c| (F)) (#2=#:G69 NIL) (|i| NIL)
-          (#3=#:G70 NIL) (|w| NIL) (|n| (|NonNegativeInteger|))
+         ((#1=#:G47 NIL) (|j| NIL) (|c| (F)) (#2=#:G45 NIL) (|i| NIL)
+          (#3=#:G46 NIL) (|w| NIL) (|n| (|NonNegativeInteger|))
           (|res| (|Vector| F)))
          (SEQ (LETT |res| |v|) (LETT |n| (QVSIZE |res|))
               (SEQ (LETT |w| NIL) (LETT #3# |lw|) (LETT |i| 1)
@@ -178,7 +178,7 @@
         ((|v| (|Vector| F)) (|lf| (|List| (|Fraction| UP)))
          (% (|Fraction| UP)))
         (SPROG
-         ((|res| (|Fraction| UP)) (#1=#:G78 NIL) (|i| NIL) (#2=#:G79 NIL)
+         ((|res| (|Fraction| UP)) (#1=#:G54 NIL) (|i| NIL) (#2=#:G55 NIL)
           (|f| NIL))
          (SEQ (LETT |res| (|spadConstant| % 45))
               (SEQ (LETT |f| NIL) (LETT #2# |lf|) (LETT |i| 1)
@@ -205,7 +205,7 @@
         ((|v| (|Vector| (|Fraction| (|Integer|))))
          (|lg| (|List| (|Fraction| UP))) (% (|Fraction| UP)))
         (SPROG
-         ((|res| (|Fraction| UP)) (#1=#:G84 NIL) (|i| NIL) (#2=#:G85 NIL)
+         ((|res| (|Fraction| UP)) (#1=#:G60 NIL) (|i| NIL) (#2=#:G61 NIL)
           (|g| NIL))
          (SEQ (LETT |res| (|spadConstant| % 45))
               (SEQ (LETT |g| NIL) (LETT #2# |lg|) (LETT |i| 1)
@@ -236,8 +236,8 @@
         ((|v| (|Vector| F)) (|lf| (|List| (|LaurentPolynomial| F UP)))
          (% (|LaurentPolynomial| F UP)))
         (SPROG
-         ((|res| (|LaurentPolynomial| F UP)) (#1=#:G92 NIL) (|i| NIL)
-          (#2=#:G93 NIL) (|f| NIL))
+         ((|res| (|LaurentPolynomial| F UP)) (#1=#:G66 NIL) (|i| NIL)
+          (#2=#:G67 NIL) (|f| NIL))
          (SEQ (LETT |res| (|spadConstant| % 55))
               (SEQ (LETT |f| NIL) (LETT #2# |lf|) (LETT |i| 1)
                    (LETT #1# (QVSIZE |v|)) G190
@@ -261,7 +261,7 @@
 
 (SDEFUN |LINCOMB;lin_comb;VLUP;9|
         ((|v| (|Vector| F)) (|lf| (|List| UP)) (% (UP)))
-        (SPROG ((|res| (UP)) (#1=#:G98 NIL) (|i| NIL) (#2=#:G99 NIL) (|f| NIL))
+        (SPROG ((|res| (UP)) (#1=#:G72 NIL) (|i| NIL) (#2=#:G73 NIL) (|f| NIL))
                (SEQ (LETT |res| (|spadConstant| % 17))
                     (SEQ (LETT |f| NIL) (LETT #2# |lf|) (LETT |i| 1)
                          (LETT #1# (QVSIZE |v|)) G190
@@ -283,26 +283,6 @@
 
 (DECLAIM (NOTINLINE |LinearCombinationUtilities;|)) 
 
-(DEFUN |LinearCombinationUtilities| (&REST #1=#:G100)
-  (SPROG NIL
-         (PROG (#2=#:G101)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|LinearCombinationUtilities|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |LinearCombinationUtilities;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|LinearCombinationUtilities|)))))))))) 
-
 (DEFUN |LinearCombinationUtilities;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -319,6 +299,26 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |LinearCombinationUtilities| (&REST #1=#:G74)
+  (SPROG NIL
+         (PROG (#2=#:G75)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|LinearCombinationUtilities|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |LinearCombinationUtilities;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|LinearCombinationUtilities|)))))))))) 
 
 (MAKEPROP '|LinearCombinationUtilities| '|infovec|
           (LIST

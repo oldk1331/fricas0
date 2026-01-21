@@ -11,23 +11,6 @@
 
 (DECLAIM (NOTINLINE |IntegerRetractions;|)) 
 
-(DEFUN |IntegerRetractions| (#1=#:G13)
-  (SPROG NIL
-         (PROG (#2=#:G14)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|IntegerRetractions|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|IntegerRetractions;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|IntegerRetractions|)))))))))) 
-
 (DEFUN |IntegerRetractions;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -42,6 +25,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |IntegerRetractions| (#1=#:G9)
+  (SPROG NIL
+         (PROG (#2=#:G10)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|IntegerRetractions|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|IntegerRetractions;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|IntegerRetractions|)))))))))) 
 
 (MAKEPROP '|IntegerRetractions| '|infovec|
           (LIST

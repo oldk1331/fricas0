@@ -3,8 +3,8 @@
         ((|p| (UP)) (% (|List| (|Fraction| (|Integer|)))))
         (SPROG
          ((|res| (|List| (|Fraction| (|Integer|))))
-          (|val1r| (|Fraction| (|Integer|))) (#1=#:G36 NIL)
-          (|fac| #2=(|SparseUnivariatePolynomial| (|Integer|))) (#3=#:G39 NIL)
+          (|val1r| (|Fraction| (|Integer|))) (#1=#:G10 NIL)
+          (|fac| #2=(|SparseUnivariatePolynomial| (|Integer|))) (#3=#:G13 NIL)
           (|facr| NIL)
           (|facl|
            (|List|
@@ -14,7 +14,7 @@
           (|ff| (|Factored| (|SparseUnivariatePolynomial| (|Integer|))))
           (|eq2z| (|SparseUnivariatePolynomial| (|Integer|)))
           (|pl2| (|List| (|SparseUnivariatePolynomial| (|Integer|))))
-          (#4=#:G38 NIL) (|i| NIL) (#5=#:G37 NIL)
+          (#4=#:G12 NIL) (|i| NIL) (#5=#:G11 NIL)
           (|vvr| (|Matrix| (|Integer|))) (|vm| (|Matrix| F))
           (|vv| (|Vector| F)) (|nn| (|NonNegativeInteger|)))
          (SEQ (LETT |nn| (+ (SPADCALL |p| (QREFELT % 9)) 1))
@@ -52,7 +52,7 @@
                            (COND
                             ((SPADCALL (SPADCALL |fac| (QREFELT % 35)) 1
                                        (QREFELT % 37))
-                             (PROGN (LETT #1# |$NoValue|) (GO #6=#:G30)))
+                             (PROGN (LETT #1# |$NoValue|) (GO #6=#:G4)))
                             ('T
                              (SEQ
                               (LETT |val1r|
@@ -69,8 +69,8 @@
 
 (SDEFUN |PRROOT;integerBound;UPI;2| ((|p| (UP)) (% (|Integer|)))
         (SPROG
-         ((|res| (|Integer|)) (|q| (|Integer|)) (#1=#:G49 NIL)
-          (|qu| (|Union| (|Integer|) "failed")) (#2=#:G50 NIL) (|r| NIL)
+         ((|res| (|Integer|)) (|q| (|Integer|)) (#1=#:G23 NIL)
+          (|qu| (|Union| (|Integer|) "failed")) (#2=#:G24 NIL) (|r| NIL)
           (|lr| (|List| (|Fraction| (|Integer|)))))
          (SEQ (LETT |lr| (SPADCALL |p| (QREFELT % 45))) (LETT |res| 0)
               (SEQ (LETT |r| NIL) (LETT #2# |lr|) G190
@@ -83,7 +83,7 @@
                           (EXIT
                            (COND
                             ((QEQCAR |qu| 1)
-                             (PROGN (LETT #1# |$NoValue|) (GO #3=#:G40)))
+                             (PROGN (LETT #1# |$NoValue|) (GO #3=#:G14)))
                             ('T
                              (SEQ (LETT |q| (QCDR |qu|))
                                   (EXIT
@@ -94,25 +94,6 @@
               (EXIT |res|)))) 
 
 (DECLAIM (NOTINLINE |PolynomialRationalRoots;|)) 
-
-(DEFUN |PolynomialRationalRoots| (&REST #1=#:G51)
-  (SPROG NIL
-         (PROG (#2=#:G52)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PolynomialRationalRoots|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |PolynomialRationalRoots;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|PolynomialRationalRoots|)))))))))) 
 
 (DEFUN |PolynomialRationalRoots;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
@@ -130,6 +111,25 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |PolynomialRationalRoots| (&REST #1=#:G25)
+  (SPROG NIL
+         (PROG (#2=#:G26)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PolynomialRationalRoots|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |PolynomialRationalRoots;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|PolynomialRationalRoots|)))))))))) 
 
 (MAKEPROP '|PolynomialRationalRoots| '|infovec|
           (LIST

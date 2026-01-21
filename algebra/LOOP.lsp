@@ -4,7 +4,7 @@
          ((|li| #1=(|List| (|NonNegativeInteger|)))
           (|lx| #2=(|List| (|NonNegativeInteger|)))
           (|minValue| (|NonNegativeInteger|)) (|l2| #2#) (|l1| #1#)
-          (#3=#:G26 NIL) (|x| NIL) (#4=#:G25 NIL))
+          (#3=#:G17 NIL) (|x| NIL) (#4=#:G16 NIL))
          (SEQ
           (LETT |li|
                 (PROGN
@@ -43,14 +43,14 @@
 (SDEFUN |LOOP;hash| ((|s| (%)) (% (|SingleInteger|))) 0) 
 
 (SDEFUN |LOOP;=;2%B;4| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
-        (SPROG ((#1=#:G37 NIL) (#2=#:G38 NIL) (|i| NIL))
+        (SPROG ((#1=#:G26 NIL) (#2=#:G27 NIL) (|i| NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((SPADCALL (SPADCALL |x| (QREFELT % 14))
                               (SPADCALL |y| (QREFELT % 14)) (QREFELT % 16))
-                    (PROGN (LETT #1# NIL) (GO #3=#:G36))))
+                    (PROGN (LETT #1# NIL) (GO #3=#:G25))))
                   (SEQ (LETT |i| 1) (LETT #2# (SPADCALL |x| (QREFELT % 14)))
                        G190 (COND ((|greater_SI| |i| #2#) (GO G191)))
                        (SEQ
@@ -65,7 +65,7 @@
 
 (SDEFUN |LOOP;coerce;%Of;5| ((|lp| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|res| (|OutputForm|)) (|x| (|NonNegativeInteger|)) (#1=#:G44 NIL)
+         ((|res| (|OutputForm|)) (|x| (|NonNegativeInteger|)) (#1=#:G33 NIL)
           (|i| NIL))
          (SEQ (LETT |res| (SPADCALL (QREFELT % 19)))
               (SEQ (LETT |i| 1) (LETT #1# (SPADCALL |lp| (QREFELT % 14))) G190
@@ -82,22 +82,6 @@
 
 (DECLAIM (NOTINLINE |Loop;|)) 
 
-(DEFUN |Loop| ()
-  (SPROG NIL
-         (PROG (#1=#:G46)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|Loop|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|Loop|
-                             (LIST (CONS NIL (CONS 1 (|Loop;|))))))
-                    (LETT #1# T))
-                (COND ((NOT #1#) (HREM |$ConstructorCache| '|Loop|)))))))))) 
-
 (DEFUN |Loop;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -110,6 +94,22 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 6 (|PrimitiveArray| (|NonNegativeInteger|)))
           %))) 
+
+(DEFUN |Loop| ()
+  (SPROG NIL
+         (PROG (#1=#:G35)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|Loop|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|Loop|
+                             (LIST (CONS NIL (CONS 1 (|Loop;|))))))
+                    (LETT #1# T))
+                (COND ((NOT #1#) (HREM |$ConstructorCache| '|Loop|)))))))))) 
 
 (MAKEPROP '|Loop| '|infovec|
           (LIST

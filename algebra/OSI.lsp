@@ -21,9 +21,22 @@
 
 (DECLAIM (NOTINLINE |OrdSetInts;|)) 
 
+(DEFUN |OrdSetInts;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|OrdSetInts|))
+          (LETT % (GETREFV 20))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|OrdSetInts| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 6 (|Integer|))
+          %))) 
+
 (DEFUN |OrdSetInts| ()
   (SPROG NIL
-         (PROG (#1=#:G21)
+         (PROG (#1=#:G6)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OrdSetInts|))
@@ -37,19 +50,6 @@
                     (LETT #1# T))
                 (COND
                  ((NOT #1#) (HREM |$ConstructorCache| '|OrdSetInts|)))))))))) 
-
-(DEFUN |OrdSetInts;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|OrdSetInts|))
-          (LETT % (GETREFV 20))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|OrdSetInts| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 6 (|Integer|))
-          %))) 
 
 (MAKEPROP '|OrdSetInts| '|infovec|
           (LIST

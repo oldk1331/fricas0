@@ -28,7 +28,7 @@
 
 (SDEFUN |PMPREDFS;suchThat;FLF;5|
         ((|p| (F)) (|l| (|List| (|Mapping| (|Boolean|) D))) (% (F)))
-        (SPROG ((#1=#:G35 NIL) (|f| NIL) (#2=#:G34 NIL))
+        (SPROG ((#1=#:G20 NIL) (|f| NIL) (#2=#:G19 NIL))
                (SEQ
                 (COND
                  ((QEQCAR (SPADCALL |p| (QREFELT % 30)) 0)
@@ -50,27 +50,6 @@
 
 (DECLAIM (NOTINLINE |FunctionSpaceAttachPredicates;|)) 
 
-(DEFUN |FunctionSpaceAttachPredicates| (&REST #1=#:G36)
-  (SPROG NIL
-         (PROG (#2=#:G37)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|FunctionSpaceAttachPredicates|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |FunctionSpaceAttachPredicates;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|FunctionSpaceAttachPredicates|)))))))))) 
-
 (DEFUN |FunctionSpaceAttachPredicates;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -90,6 +69,27 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 9 '|%pmpredicate|)
           %))) 
+
+(DEFUN |FunctionSpaceAttachPredicates| (&REST #1=#:G21)
+  (SPROG NIL
+         (PROG (#2=#:G22)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|FunctionSpaceAttachPredicates|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |FunctionSpaceAttachPredicates;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|FunctionSpaceAttachPredicates|)))))))))) 
 
 (MAKEPROP '|FunctionSpaceAttachPredicates| '|infovec|
           (LIST

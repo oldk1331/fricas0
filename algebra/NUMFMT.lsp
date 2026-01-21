@@ -71,9 +71,9 @@
 
 (SDEFUN |NUMFMT;FormatRoman;PiS;9| ((|pn| (|PositiveInteger|)) (% (|String|)))
         (SPROG
-         ((|s| (|String|)) (|mm| (|String|)) (#1=#:G83 NIL) (|j| NIL)
-          (#2=#:G82 NIL) (|m0| (|String|)) (#3=#:G81 NIL) (|n| (|Integer|))
-          (|d| (|Integer|)) (|i| NIL) (#4=#:G66 NIL))
+         ((|s| (|String|)) (|mm| (|String|)) (#1=#:G62 NIL) (|j| NIL)
+          (#2=#:G61 NIL) (|m0| (|String|)) (#3=#:G60 NIL) (|n| (|Integer|))
+          (|d| (|Integer|)) (|i| NIL) (#4=#:G45 NIL))
          (SEQ (LETT |n| |pn|) (LETT |d| (+ (REM |n| 10) (QREFELT % 36)))
               (LETT |n| (QUOTIENT2 |n| 10))
               (LETT |s| (QAREF1 (QREFELT % 33) |d|))
@@ -99,7 +99,7 @@
                                                  (LETT |n| (QUOTIENT2 |n| 10))
                                                  (LETT |s|
                                                        (STRCONC
-                                                        (|make_full_CVEC2|
+                                                        (|make_string_code|
                                                          (PROG1 (LETT #4# |d|)
                                                            (|check_subtype2|
                                                             (>= #4# 0)
@@ -138,20 +138,20 @@
                                                                       (LETT #3#
                                                                             |$NoValue|)
                                                                       (GO
-                                                                       #6=#:G67)))
+                                                                       #6=#:G46)))
                                                                     ('T
                                                                      (SEQ
                                                                       (LETT
                                                                        |m0|
                                                                        (STRCONC
-                                                                        (|make_full_CVEC2|
+                                                                        (|make_string_code|
                                                                          |i|
                                                                          (QREFELT
                                                                           %
                                                                           41))
                                                                         (STRCONC
                                                                          "I"
-                                                                         (|make_full_CVEC2|
+                                                                         (|make_string_code|
                                                                           |i|
                                                                           (QREFELT
                                                                            %
@@ -224,9 +224,9 @@
 
 (SDEFUN |NUMFMT;ScanRoman;SPi;10| ((|s| (|String|)) (% (|PositiveInteger|)))
         (SPROG
-         ((#1=#:G97 NIL) (|Max| (|Integer|)) (|tot| (|Integer|))
-          (|n| (|Integer|)) (#2=#:G100 NIL) (|i| (|Integer|))
-          (|c| (|Character|)) (#3=#:G101 NIL) (|k| NIL)
+         ((#1=#:G76 NIL) (|Max| (|Integer|)) (|tot| (|Integer|))
+          (|n| (|Integer|)) (#2=#:G79 NIL) (|i| (|Integer|))
+          (|c| (|Character|)) (#3=#:G80 NIL) (|k| NIL)
           (|nprens| (|PositiveInteger|)))
          (SEQ (LETT |s| (SPADCALL |s| (QREFELT % 50))) (LETT |tot| 0)
               (LETT |Max| 0) (LETT |i| (SPADCALL |s| (QREFELT % 51)))
@@ -242,7 +242,7 @@
                            ((SPADCALL |c| (QREFELT % 42) (QREFELT % 54))
                             (|error|
                              (STRCONC "Improper character in Roman numeral: "
-                                      (|make_full_CVEC2| 1 |c|))))
+                                      (|make_string_code| 1 |c|))))
                            ('T
                             (SEQ (LETT |nprens| 1)
                                  (SEQ G190
@@ -294,7 +294,7 @@
                                                  (LETT #2#
                                                        (|error|
                                                         "Improper Roman numeral: unbalanced ')'"))
-                                                 (GO #4=#:G89)))))))
+                                                 (GO #4=#:G68)))))))
                                            #4# (EXIT #2#))
                                           (LETT |k| (|inc_SI| |k|)) (GO G190)
                                           G191 (EXIT NIL))
@@ -324,23 +324,6 @@
         (|write_to_string_radix| |n| |r|)) 
 
 (DECLAIM (NOTINLINE |NumberFormats;|)) 
-
-(DEFUN |NumberFormats| ()
-  (SPROG NIL
-         (PROG (#1=#:G104)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|NumberFormats|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|NumberFormats|
-                             (LIST (CONS NIL (CONS 1 (|NumberFormats;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#) (HREM |$ConstructorCache| '|NumberFormats|)))))))))) 
 
 (DEFUN |NumberFormats;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
@@ -387,6 +370,23 @@
           (QSETREFV % 42 (|STR_to_CHAR| ")"))
           (QSETREFV % 43 (|STR_to_CHAR| #2#))
           %))) 
+
+(DEFUN |NumberFormats| ()
+  (SPROG NIL
+         (PROG (#1=#:G83)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|NumberFormats|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|NumberFormats|
+                             (LIST (CONS NIL (CONS 1 (|NumberFormats;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#) (HREM |$ConstructorCache| '|NumberFormats|)))))))))) 
 
 (MAKEPROP '|NumberFormats| '|infovec|
           (LIST

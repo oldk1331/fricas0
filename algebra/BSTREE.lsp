@@ -1,6 +1,6 @@
 
 (SDEFUN |BSTREE;binarySearchTree;L%;1| ((|u| (|List| S)) (% (%)))
-        (SPROG ((#1=#:G20 NIL) (|x| NIL) (|tree| (%)))
+        (SPROG ((#1=#:G10 NIL) (|x| NIL) (|tree| (%)))
                (SEQ
                 (COND ((NULL |u|) (SPADCALL (QREFELT % 8)))
                       ('T
@@ -70,26 +70,9 @@
 
 (DECLAIM (NOTINLINE |BinarySearchTree;|)) 
 
-(DEFUN |BinarySearchTree| (#1=#:G44)
-  (SPROG NIL
-         (PROG (#2=#:G45)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|BinarySearchTree|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|BinarySearchTree;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|BinarySearchTree|)))))))))) 
-
 (DEFUN |BinarySearchTree;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G41 NIL) (#2=#:G42 NIL) (#3=#:G43 NIL) (% NIL)
+   ((|pv$| NIL) (#1=#:G28 NIL) (#2=#:G29 NIL) (#3=#:G30 NIL) (% NIL)
     (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -144,6 +127,23 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 7 (|BinaryTree| |#1|))
     %))) 
+
+(DEFUN |BinarySearchTree| (#1=#:G31)
+  (SPROG NIL
+         (PROG (#2=#:G32)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|BinarySearchTree|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|BinarySearchTree;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|BinarySearchTree|)))))))))) 
 
 (MAKEPROP '|BinarySearchTree| '|infovec|
           (LIST

@@ -17,15 +17,15 @@
            (|Union|
             (|Record| (|:| |val| (|Pattern| R)) (|:| |exponent| (|Pattern| R)))
             "failed"))
-          (#1=#:G69 NIL) (#2=#:G68 NIL)
-          (|l| (|Union| (|List| (|Pattern| R)) "failed")) (#3=#:G67 NIL)
-          (#4=#:G66 NIL)
+          (#1=#:G59 NIL) (#2=#:G58 NIL)
+          (|l| (|Union| (|List| (|Pattern| R)) "failed")) (#3=#:G57 NIL)
+          (#4=#:G56 NIL)
           (|vr| (|Record| (|:| |num| (|Pattern| R)) (|:| |den| (|Pattern| R))))
           (|v|
            (|Union|
             (|Record| (|:| |num| (|Pattern| R)) (|:| |den| (|Pattern| R)))
             "failed"))
-          (#5=#:G65 NIL) (#6=#:G64 NIL)
+          (#5=#:G55 NIL) (#6=#:G54 NIL)
           (|ur|
            (|Record| (|:| |op| (|BasicOperator|))
                      (|:| |arg| (|List| (|Pattern| R)))))
@@ -210,25 +210,6 @@
 
 (DECLAIM (NOTINLINE |PatternFunctions2;|)) 
 
-(DEFUN |PatternFunctions2| (&REST #1=#:G70)
-  (SPROG NIL
-         (PROG (#2=#:G71)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PatternFunctions2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |PatternFunctions2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|PatternFunctions2|)))))))))) 
-
 (DEFUN |PatternFunctions2;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -245,6 +226,25 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |PatternFunctions2| (&REST #1=#:G60)
+  (SPROG NIL
+         (PROG (#2=#:G61)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PatternFunctions2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |PatternFunctions2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|PatternFunctions2|)))))))))) 
 
 (MAKEPROP '|PatternFunctions2| '|infovec|
           (LIST

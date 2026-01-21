@@ -15,8 +15,8 @@
 (SDEFUN |PREASSOC;makeMonic|
         ((|op| (L)) (% (|Union| (|PrimitiveArray| R) "failed")))
         (SPROG
-         ((#1=#:G30 NIL) (|u| (|Union| R "failed")) (#2=#:G31 NIL)
-          (#3=#:G22 NIL) (|i| NIL) (|a| (|PrimitiveArray| R))
+         ((#1=#:G21 NIL) (|u| (|Union| R "failed")) (#2=#:G22 NIL)
+          (#3=#:G13 NIL) (|i| NIL) (|a| (|PrimitiveArray| R))
           (|n| (|NonNegativeInteger|)) (|lc| (R)))
          (SEQ
           (EXIT
@@ -38,7 +38,7 @@
                       (EXIT
                        (COND
                         ((QEQCAR |u| 1)
-                         (PROGN (LETT #1# (CONS 1 "failed")) (GO #4=#:G29)))
+                         (PROGN (LETT #1# (CONS 1 "failed")) (GO #4=#:G20)))
                         ('T
                          (QSETAREF1 |a| |i|
                                     (SPADCALL (QCDR |u|) (QREFELT % 22)))))))
@@ -438,9 +438,27 @@
 
 (DECLAIM (NOTINLINE |PrecomputedAssociatedEquations;|)) 
 
-(DEFUN |PrecomputedAssociatedEquations| (&REST #1=#:G59)
+(DEFUN |PrecomputedAssociatedEquations;| (|#1| |#2|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT DV$2 (|devaluate| |#2|))
+          (LETT |dv$| (LIST '|PrecomputedAssociatedEquations| DV$1 DV$2))
+          (LETT % (GETREFV 35))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|PrecomputedAssociatedEquations|
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 9 (SPADCALL (QREFELT % 8)))
+          %))) 
+
+(DEFUN |PrecomputedAssociatedEquations| (&REST #1=#:G46)
   (SPROG NIL
-         (PROG (#2=#:G60)
+         (PROG (#2=#:G47)
            (RETURN
             (COND
              ((LETT #2#
@@ -459,24 +477,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|PrecomputedAssociatedEquations|)))))))))) 
-
-(DEFUN |PrecomputedAssociatedEquations;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT DV$2 (|devaluate| |#2|))
-          (LETT |dv$| (LIST '|PrecomputedAssociatedEquations| DV$1 DV$2))
-          (LETT % (GETREFV 35))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|PrecomputedAssociatedEquations|
-                      (LIST DV$1 DV$2) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (QSETREFV % 7 |#2|)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 9 (SPADCALL (QREFELT % 8)))
-          %))) 
 
 (MAKEPROP '|PrecomputedAssociatedEquations| '|infovec|
           (LIST

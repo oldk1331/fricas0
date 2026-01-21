@@ -7,7 +7,7 @@
                          (|:| |factor| I)
                          (|:| |exponent| (|NonNegativeInteger|)))))
           (|v| (|Union| I "failed")) (|m| (I)) (|x| (|Factored| I)) (|lim| (I))
-          (#2=#:G48 NIL) (#3=#:G49 NIL) (|l| #1#) (|sv| (|Factored| I))
+          (#2=#:G29 NIL) (#3=#:G30 NIL) (|l| #1#) (|sv| (|Factored| I))
           (|rec| NIL) (|u| (I)))
          (SEQ
           (EXIT
@@ -53,7 +53,7 @@
                                 (SPADCALL |u| (SPADCALL |sv| (QREFELT % 24))
                                           (QREFELT % 25))
                                 |l| (QREFELT % 26)))))
-                       (GO #5=#:G46))))))))
+                       (GO #5=#:G27))))))))
             (LETT |lim|
                   (SPADCALL (|spadConstant| % 13)
                             (SPADCALL |m| 3 (QREFELT % 28)) (QREFELT % 29)))
@@ -92,9 +92,9 @@
 
 (SDEFUN |INTFACT;PollardSmallFactor;IU;2| ((|n| (I)) (% (|Union| I "failed")))
         (SPROG
-         ((G (I)) (|x| (I)) (|y| (I)) (#1=#:G85 NIL) (#2=#:G84 NIL) (|i| NIL)
-          (|l| (I)) (|ys| (I)) (#3=#:G83 NIL) (|r| (I)) (|k| (I)) (|q| (I))
-          (#4=#:G82 NIL) (#5=#:G81 NIL) (#6=#:G80 NIL) (#7=#:G79 NIL) (|m| (I))
+         ((G (I)) (|x| (I)) (|y| (I)) (#1=#:G64 NIL) (#2=#:G63 NIL) (|i| NIL)
+          (|l| (I)) (|ys| (I)) (#3=#:G62 NIL) (|r| (I)) (|k| (I)) (|q| (I))
+          (#4=#:G61 NIL) (#5=#:G60 NIL) (#6=#:G59 NIL) (#7=#:G58 NIL) (|m| (I))
           (|x0| (I)))
          (SEQ (LETT |x0| (SPADCALL |n| (QREFELT % 34)))
               (LETT |m| (SPADCALL 100 (QREFELT % 31))) (LETT |y| |x0|)
@@ -258,7 +258,7 @@
                      ('T (CONS 0 G))))))) 
 
 (SDEFUN |INTFACT;PollardSmallFactor20| ((|n| (I)) (% (|Union| I "failed")))
-        (SPROG ((#1=#:G94 NIL) (|r| (|Union| I "failed")) (|i| NIL))
+        (SPROG ((#1=#:G73 NIL) (|r| (|Union| I "failed")) (|i| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -268,7 +268,7 @@
                             (EXIT
                              (COND
                               ((QEQCAR |r| 0)
-                               (PROGN (LETT #1# |r|) (GO #2=#:G93))))))
+                               (PROGN (LETT #1# |r|) (GO #2=#:G72))))))
                        (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                   (EXIT |r|)))
                 #2# (EXIT #1#)))) 
@@ -281,7 +281,7 @@
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| I)
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (|n| (I)) (|m| NIL) (#1=#:G110 NIL) (#2=#:G111 NIL) (|s| NIL)
+          (|n| (I)) (|m| NIL) (#1=#:G89 NIL) (#2=#:G90 NIL) (|s| NIL)
           (|l| (|List| I)))
          (SEQ
           (EXIT
@@ -307,7 +307,7 @@
                      ((SPADCALL |d| |lim| (QREFELT % 15))
                       (PROGN
                        (LETT #1# (SPADCALL |n| |ls| (QREFELT % 26)))
-                       (GO #3=#:G109)))
+                       (GO #3=#:G88)))
                      ('T
                       (SEQ
                        (COND
@@ -535,9 +535,24 @@
 
 (DECLAIM (NOTINLINE |IntegerFactorizationPackage;|)) 
 
-(DEFUN |IntegerFactorizationPackage| (#1=#:G151)
+(DEFUN |IntegerFactorizationPackage;| (|#1|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT |dv$| (LIST '|IntegerFactorizationPackage| DV$1))
+          (LETT % (GETREFV 67))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|IntegerFactorizationPackage|
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |IntegerFactorizationPackage| (#1=#:G130)
   (SPROG NIL
-         (PROG (#2=#:G152)
+         (PROG (#2=#:G131)
            (RETURN
             (COND
              ((LETT #2#
@@ -553,21 +568,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|IntegerFactorizationPackage|)))))))))) 
-
-(DEFUN |IntegerFactorizationPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT |dv$| (LIST '|IntegerFactorizationPackage| DV$1))
-          (LETT % (GETREFV 67))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|IntegerFactorizationPackage|
-                      (LIST DV$1) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|IntegerFactorizationPackage| '|infovec|
           (LIST

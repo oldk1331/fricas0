@@ -55,9 +55,21 @@
 
 (DECLAIM (NOTINLINE |FileName;|)) 
 
+(DEFUN |FileName;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|FileName|))
+          (LETT % (GETREFV 22))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|FileName| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |FileName| ()
   (SPROG NIL
-         (PROG (#1=#:G19)
+         (PROG (#1=#:G13)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|FileName|))
@@ -70,18 +82,6 @@
                              (LIST (CONS NIL (CONS 1 (|FileName;|))))))
                     (LETT #1# T))
                 (COND ((NOT #1#) (HREM |$ConstructorCache| '|FileName|)))))))))) 
-
-(DEFUN |FileName;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|FileName|))
-          (LETT % (GETREFV 22))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|FileName| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|FileName| '|infovec|
           (LIST

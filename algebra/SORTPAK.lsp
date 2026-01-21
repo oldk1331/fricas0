@@ -2,7 +2,7 @@
 (SDEFUN |SORTPAK;bubbleSort!;AMA;1|
         ((|m| (A)) (|f| (|Mapping| (|Boolean|) S S)) (% (A)))
         (SPROG
-         ((#1=#:G20 NIL) (|j| NIL) (#2=#:G19 NIL) (|i| NIL)
+         ((#1=#:G13 NIL) (|j| NIL) (#2=#:G12 NIL) (|i| NIL)
           (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (SPADCALL |m| (QREFELT % 9)))
               (SEQ (LETT |i| 1) (LETT #2# (- |n| 1)) G190
@@ -24,7 +24,7 @@
 
 (SDEFUN |SORTPAK;insertionSort!;AMA;2|
         ((|m| (A)) (|f| (|Mapping| (|Boolean|) S S)) (% (A)))
-        (SPROG ((|j| (|NonNegativeInteger|)) (#1=#:G30 NIL) (|i| NIL))
+        (SPROG ((|j| (|NonNegativeInteger|)) (#1=#:G22 NIL) (|i| NIL))
                (SEQ
                 (SEQ (LETT |i| 2) (LETT #1# (SPADCALL |m| (QREFELT % 9))) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -97,23 +97,6 @@
 
 (DECLAIM (NOTINLINE |SortPackage;|)) 
 
-(DEFUN |SortPackage| (&REST #1=#:G48)
-  (SPROG NIL
-         (PROG (#2=#:G49)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|SortPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |SortPackage;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|SortPackage|)))))))))) 
-
 (DEFUN |SortPackage;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -151,6 +134,23 @@
                       (CONS (|dispatchFunction| |SORTPAK;bubbleSort!;AMA;5|)
                             %))))
           %))) 
+
+(DEFUN |SortPackage| (&REST #1=#:G40)
+  (SPROG NIL
+         (PROG (#2=#:G41)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|SortPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |SortPackage;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|SortPackage|)))))))))) 
 
 (MAKEPROP '|SortPackage| '|infovec|
           (LIST

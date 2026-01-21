@@ -272,7 +272,7 @@
 ;       d :=
 ;           a := MAKE_VEC(256)
 ;           b := MAKE_VEC(1)
-;           QSETVELT(b, 0, make_full_CVEC(0))
+;           QSETVELT(b, 0, filler_spaces(0))
 ;           for i in 0..255 repeat QSETVELT(a, i, b)
 ;           a
 ;       for s in l repeat scanInsert(s,d)
@@ -287,7 +287,7 @@
               (PROGN
                (SETQ |a| (MAKE_VEC 256))
                (SETQ |b| (MAKE_VEC 1))
-               (QSETVELT |b| 0 (|make_full_CVEC| 0))
+               (QSETVELT |b| 0 (|filler_spaces| 0))
                ((LAMBDA (|i|)
                   (LOOP
                    (COND ((> |i| 255) (RETURN NIL))
@@ -729,7 +729,6 @@
 (DEFUN |lfspaces| (|x|) (PROG () (RETURN (LIST '|spaces| |x|))))
 
 ; constoken1(ln, lp, b, n, nb) ==
-; --  [b.0,b.1,cons(lp,n)]
 ;        a:=cons(b.0,b.1)
 ;        if nb then ncPutQ(a, "nonblank", true)
 ;        ncPutQ(a,"posn",cons(lp,n))
@@ -859,7 +858,7 @@
 ;               finish_comment()
 ;           $comment_line := first(rest(rest($linepos)))
 ;           $comment_indent := n
-;           PUSH(CONCAT(make_full_CVEC(n), c_str), $current_comment_block)
+;           PUSH(CONCAT(filler_spaces(n), c_str), $current_comment_block)
 ;       res := lfcomment(n, $linepos, c_str)
 ;       checkEsc()
 ;       res
@@ -876,7 +875,7 @@
         (COND ((NULL (EQUAL |n| |$comment_indent|)) (|finish_comment|)))
         (SETQ |$comment_line| (CAR (CDR (CDR |$linepos|))))
         (SETQ |$comment_indent| |n|)
-        (PUSH (CONCAT (|make_full_CVEC| |n|) |c_str|)
+        (PUSH (CONCAT (|filler_spaces| |n|) |c_str|)
               |$current_comment_block|)))
       (SETQ |res| (|lfcomment| |n| |$linepos| |c_str|))
       (|checkEsc|)

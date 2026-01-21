@@ -34,8 +34,8 @@
 
 (SDEFUN |FAKEPOL;coerce;%Of;3| ((|p| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|ol| (|List| (|OutputForm|))) (#1=#:G48 NIL) (|mon| NIL)
-          (#2=#:G47 NIL)
+         ((|ol| (|List| (|OutputForm|))) (#1=#:G29 NIL) (|mon| NIL)
+          (#2=#:G28 NIL)
           (|cl|
            (|List|
             (|Record| (|:| |deg| (|NonNegativeInteger|))
@@ -114,7 +114,7 @@
                                      (|:| |numer| (|Polynomial| (|Integer|)))
                                      (|:| |denom|
                                           (|Polynomial| (|Integer|))))))))
-          (#4=#:G73 NIL) (#5=#:G74 NIL) (|d1| #6=(|Polynomial| (|Integer|)))
+          (#4=#:G54 NIL) (#5=#:G55 NIL) (|d1| #6=(|Polynomial| (|Integer|)))
           (|n1| #6#) (|c1| #3#) (|pr| (|List| #2#))
           (|r1|
            (|Record| (|:| |deg| (|NonNegativeInteger|))
@@ -140,7 +140,7 @@
                          ((NULL |pr|)
                           (PROGN
                            (LETT #5# (CONS 0 (CONS (QCAR |pr1|) (CDR |res0|))))
-                           (GO #7=#:G72)))
+                           (GO #7=#:G53)))
                          ('T
                           (SEQ (LETT |r1| (|SPADfirst| |pr|))
                                (LETT |pr| (CDR |pr|)) (LETT |c1| (QCDR |r1|))
@@ -155,7 +155,7 @@
                                    (GO #7#)))
                                  ((SPADCALL |n1| (|spadConstant| % 24)
                                             (QREFELT % 29))
-                                  (PROGN (LETT #4# |$NoValue|) (GO #8=#:G62)))
+                                  (PROGN (LETT #4# |$NoValue|) (GO #8=#:G43)))
                                  ('T
                                   (LETT |res1|
                                         (|qset_rest| |res1|
@@ -184,12 +184,12 @@
                               (|Record|
                                (|:| |numer| (|Polynomial| (|Integer|)))
                                (|:| |denom| (|Polynomial| (|Integer|))))))))
-          (#2=#:G90 NIL) (|d1| #3=(|Polynomial| (|Integer|))) (|n1| #3#)
+          (#2=#:G66 NIL) (|d1| #3=(|Polynomial| (|Integer|))) (|n1| #3#)
           (|pr|
            (|SparseUnivariatePolynomial|
             (|Fraction| (|Polynomial| (|Integer|)))))
           (|c1| (|Fraction| (|Polynomial| (|Integer|))))
-          (|d| (|NonNegativeInteger|)) (#4=#:G91 NIL) (|res0| #1#))
+          (|d| (|NonNegativeInteger|)) (#4=#:G67 NIL) (|res0| #1#))
          (SEQ
           (EXIT
            (SEQ (LETT |pr| (QCDR |p|))
@@ -207,7 +207,7 @@
                          ((SPADCALL |pr| (|spadConstant| % 34) (QREFELT % 35))
                           (PROGN
                            (LETT #4# (CONS (QCAR |p|) (CDR |res0|)))
-                           (GO #5=#:G89)))
+                           (GO #5=#:G65)))
                          ('T
                           (SEQ (LETT |d| (SPADCALL |pr| (QREFELT % 36)))
                                (LETT |c1| (SPADCALL |pr| (QREFELT % 38)))
@@ -225,7 +225,7 @@
                                   (|error| "FAKEPOL map PT: division by 0"))
                                  ((SPADCALL |n1| (|spadConstant| % 24)
                                             (QREFELT % 29))
-                                  (PROGN (LETT #2# |$NoValue|) (GO #6=#:G83)))
+                                  (PROGN (LETT #2# |$NoValue|) (GO #6=#:G59)))
                                  ('T
                                   (LETT |res1|
                                         (|qset_rest| |res1|
@@ -253,7 +253,7 @@
                    "failed")))
         (SPROG
          ((|res0| (|SparseUnivariatePolynomial| (|Polynomial| (|Integer|))))
-          (#1=#:G113 NIL) (|c1u| (|Union| (|Polynomial| (|Integer|)) "failed"))
+          (#1=#:G89 NIL) (|c1u| (|Union| (|Polynomial| (|Integer|)) "failed"))
           (|pr|
            (|List|
             (|Record| (|:| |deg| (|NonNegativeInteger|))
@@ -280,7 +280,7 @@
                             ((QEQCAR |c1u| 1)
                              (PROGN
                               (LETT #1# (CONS 1 "failed"))
-                              (GO #2=#:G112)))
+                              (GO #2=#:G88)))
                             ('T
                              (LETT |res0|
                                    (SPADCALL |res0|
@@ -298,7 +298,7 @@
           (|c1|
            #1=(|Record| (|:| |numer| (|Polynomial| (|Integer|)))
                         (|:| |denom| (|Polynomial| (|Integer|)))))
-          (#2=#:G124 NIL) (|r1| NIL)
+          (#2=#:G100 NIL) (|r1| NIL)
           (|pr|
            (|List|
             (|Record| (|:| |deg| (|NonNegativeInteger|)) (|:| |coef| #1#))))
@@ -341,7 +341,7 @@
          ((|res0|
            (|SparseUnivariatePolynomial|
             (|Fraction| (|Polynomial| (|Integer|)))))
-          (|cr| (|Fraction| (|Polynomial| (|Integer|)))) (#1=#:G134 NIL)
+          (|cr| (|Fraction| (|Polynomial| (|Integer|)))) (#1=#:G110 NIL)
           (|n1| #2=(|Polynomial| (|Integer|)))
           (|c1|
            #3=(|Record| (|:| |numer| #2#)
@@ -367,7 +367,7 @@
                            (COND
                             ((SPADCALL |n1| (|spadConstant| % 24)
                                        (QREFELT % 29))
-                             (PROGN (LETT #1# |$NoValue|) (GO #4=#:G126)))
+                             (PROGN (LETT #1# |$NoValue|) (GO #4=#:G102)))
                             ('T
                              (SEQ
                               (LETT |cr|
@@ -386,7 +386,7 @@
         ((|p| (%)) (|ls1| (|List| (|Symbol|))) (|ls2| (|List| (|Symbol|)))
          (% (%)))
         (SPROG
-         ((#1=#:G140 NIL) (#2=#:G141 NIL) (|s1| NIL) (#3=#:G142 NIL) (|s2| NIL)
+         ((#1=#:G116 NIL) (#2=#:G117 NIL) (|s1| NIL) (#3=#:G118 NIL) (|s2| NIL)
           (|v1| (|Symbol|)) (|pr1| (|Rep|)))
          (SEQ
           (EXIT
@@ -403,31 +403,13 @@
                         ((EQUAL |v1| |s1|)
                          (PROGN
                           (LETT #1# (CONS |s2| (QCDR |pr1|)))
-                          (GO #4=#:G139))))))
+                          (GO #4=#:G115))))))
                      (LETT #2# (PROG1 (CDR #2#) (LETT #3# (CDR #3#))))
                      (GO G190) G191 (EXIT NIL))
                 (EXIT |p|)))
           #4# (EXIT #1#)))) 
 
 (DECLAIM (NOTINLINE |FakePolynomial;|)) 
-
-(DEFUN |FakePolynomial| ()
-  (SPROG NIL
-         (PROG (#1=#:G144)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|FakePolynomial|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|FakePolynomial|
-                             (LIST (CONS NIL (CONS 1 (|FakePolynomial;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#)
-                  (HREM |$ConstructorCache| '|FakePolynomial|)))))))))) 
 
 (DEFUN |FakePolynomial;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
@@ -453,6 +435,24 @@
                                                 (|Polynomial|
                                                  (|Integer|))))))))))
           %))) 
+
+(DEFUN |FakePolynomial| ()
+  (SPROG NIL
+         (PROG (#1=#:G120)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|FakePolynomial|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|FakePolynomial|
+                             (LIST (CONS NIL (CONS 1 (|FakePolynomial;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#)
+                  (HREM |$ConstructorCache| '|FakePolynomial|)))))))))) 
 
 (MAKEPROP '|FakePolynomial| '|infovec|
           (LIST

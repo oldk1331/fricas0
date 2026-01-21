@@ -24,9 +24,24 @@
 
 (DECLAIM (NOTINLINE |RandomNumberSource;|)) 
 
+(DEFUN |RandomNumberSource;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|RandomNumberSource|))
+          (LETT % (GETREFV 16))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|RandomNumberSource| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 6 (- (EXPT 2 31) 1))
+          (QSETREFV % 7 1231231231)
+          (QSETREFV % 8 3243232987)
+          %))) 
+
 (DEFUN |RandomNumberSource| ()
   (SPROG NIL
-         (PROG (#1=#:G14)
+         (PROG (#1=#:G8)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|RandomNumberSource|))
@@ -42,21 +57,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|RandomNumberSource|)))))))))) 
-
-(DEFUN |RandomNumberSource;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|RandomNumberSource|))
-          (LETT % (GETREFV 16))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|RandomNumberSource| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 6 (- (EXPT 2 31) 1))
-          (QSETREFV % 7 1231231231)
-          (QSETREFV % 8 3243232987)
-          %))) 
 
 (MAKEPROP '|RandomNumberSource| '|infovec|
           (LIST

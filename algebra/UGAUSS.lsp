@@ -3,10 +3,10 @@
         ((|m| (|Matrix| (|Integer|))) (|pivotsj| (|Vector| (|Integer|)))
          (|pivotsk| (|Vector| (|Integer|))) (% (|Void|)))
         (SPROG
-         ((#1=#:G43 NIL) (|l| NIL) (|pp| (|Integer|)) (#2=#:G42 NIL) (|n| NIL)
-          (|ml| #3=(|Integer|)) (|l0| (|Integer|)) (#4=#:G39 NIL)
-          (#5=#:G38 NIL) (|pv| #3#) (#6=#:G37 NIL) (#7=#:G41 NIL)
-          (#8=#:G40 NIL) (|i| NIL) (|k| (|NonNegativeInteger|))
+         ((#1=#:G34 NIL) (|l| NIL) (|pp| (|Integer|)) (#2=#:G33 NIL) (|n| NIL)
+          (|ml| #3=(|Integer|)) (|l0| (|Integer|)) (#4=#:G30 NIL)
+          (#5=#:G29 NIL) (|pv| #3#) (#6=#:G28 NIL) (#7=#:G32 NIL)
+          (#8=#:G31 NIL) (|i| NIL) (|k| (|NonNegativeInteger|))
           (|j| (|NonNegativeInteger|)))
          (SEQ (LETT |j| (ANROWS |m|)) (LETT |k| (ANCOLS |m|))
               (EXIT
@@ -25,7 +25,7 @@
                                  ((SPADCALL
                                    (SPADCALL |pivotsk| |l| (QREFELT % 8)) 0
                                    (QREFELT % 10))
-                                  (PROGN (LETT #6# |$NoValue|) (GO #9=#:G17)))
+                                  (PROGN (LETT #6# |$NoValue|) (GO #9=#:G9)))
                                  ('T
                                   (SEQ (LETT |pv| (QAREF2O |m| |i| |l| 1 1))
                                        (EXIT
@@ -39,7 +39,7 @@
                                            (EXIT
                                             (PROGN
                                              (LETT #5# |$NoValue|)
-                                             (GO #10=#:G23)))))
+                                             (GO #10=#:G15)))))
                                          ((EQL |pv| -1)
                                           (SEQ
                                            (SPADCALL |pivotsj| |i| |l|
@@ -57,7 +57,7 @@
                        (EXIT
                         (COND
                          ((EQL (SPADCALL |pivotsj| |i| (QREFELT % 8)) 0)
-                          (PROGN (LETT #4# |$NoValue|) (GO #11=#:G14)))
+                          (PROGN (LETT #4# |$NoValue|) (GO #11=#:G8)))
                          ('T
                           (SEQ
                            (LETT |l0| (SPADCALL |pivotsj| |i| (QREFELT % 8)))
@@ -104,10 +104,10 @@
         ((|m| (|Matrix| (|Integer|))) (|pivotsj| (|Vector| (|Integer|)))
          (|pivotsk| (|Vector| (|Integer|))) (% (|Matrix| (|Integer|))))
         (SPROG
-         ((#1=#:G74 NIL) (|l| NIL) (#2=#:G73 NIL) (|pp| (|Integer|))
-          (#3=#:G72 NIL) (|n| NIL) (|ml| #4=(|Integer|)) (|l0| (|Integer|))
-          (#5=#:G69 NIL) (#6=#:G68 NIL) (|pv| #4#) (#7=#:G67 NIL)
-          (#8=#:G71 NIL) (#9=#:G70 NIL) (|i| NIL) (|k| (|NonNegativeInteger|))
+         ((#1=#:G65 NIL) (|l| NIL) (#2=#:G64 NIL) (|pp| (|Integer|))
+          (#3=#:G63 NIL) (|n| NIL) (|ml| #4=(|Integer|)) (|l0| (|Integer|))
+          (#5=#:G60 NIL) (#6=#:G59 NIL) (|pv| #4#) (#7=#:G58 NIL)
+          (#8=#:G62 NIL) (#9=#:G61 NIL) (|i| NIL) (|k| (|NonNegativeInteger|))
           (|j| (|NonNegativeInteger|)) (|m2| (|Matrix| (|Integer|))))
          (SEQ (LETT |m2| (SPADCALL (ANROWS |m|) 1 (QREFELT % 14)))
               (SEQ (LETT |j| (ANROWS |m|)) (LETT |k| (ANCOLS |m|))
@@ -129,7 +129,7 @@
                                         0 (QREFELT % 10))
                                        (PROGN
                                         (LETT #7# |$NoValue|)
-                                        (GO #10=#:G45)))
+                                        (GO #10=#:G36)))
                                       ('T
                                        (SEQ
                                         (LETT |pv| (QAREF2O |m| |i| |l| 1 1))
@@ -144,7 +144,7 @@
                                             (EXIT
                                              (PROGN
                                               (LETT #6# |$NoValue|)
-                                              (GO #11=#:G51)))))
+                                              (GO #11=#:G42)))))
                                           ((EQL |pv| -1)
                                            (SEQ
                                             (SPADCALL |pivotsj| |i| |l|
@@ -162,7 +162,7 @@
                             (EXIT
                              (COND
                               ((EQL (SPADCALL |pivotsj| |i| (QREFELT % 8)) 0)
-                               (PROGN (LETT #5# |$NoValue|) (GO #12=#:G44)))
+                               (PROGN (LETT #5# |$NoValue|) (GO #12=#:G35)))
                               ('T
                                (SEQ
                                 (LETT |l0|
@@ -247,9 +247,9 @@
 (SDEFUN |UGAUSS;pre_smith;2M;4|
         ((|m| (|Matrix| (|Integer|))) (% (|Matrix| (|Integer|))))
         (SPROG
-         ((|l0| #1=(|NonNegativeInteger|)) (#2=#:G95 NIL) (|l| NIL) (|i0| #1#)
-          (#3=#:G94 NIL) (|i| NIL) (|ress| (|Matrix| (|Integer|)))
-          (#4=#:G81 NIL) (#5=#:G80 NIL) (|count| #1#) (#6=#:G93 NIL)
+         ((|l0| #1=(|NonNegativeInteger|)) (#2=#:G86 NIL) (|l| NIL) (|i0| #1#)
+          (#3=#:G85 NIL) (|i| NIL) (|ress| (|Matrix| (|Integer|)))
+          (#4=#:G72 NIL) (#5=#:G71 NIL) (|count| #1#) (#6=#:G84 NIL)
           (|pivotsk| #7=(|Vector| (|Integer|))) (|pivotsj| #7#)
           (|k| (|NonNegativeInteger|)) (|j| (|NonNegativeInteger|)))
          (SEQ (LETT |j| (ANROWS |m|)) (LETT |k| (ANCOLS |m|))
@@ -314,9 +314,22 @@
 
 (DECLAIM (NOTINLINE |UnitGaussianElimination;|)) 
 
+(DEFUN |UnitGaussianElimination;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|UnitGaussianElimination|))
+          (LETT % (GETREFV 20))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|UnitGaussianElimination| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |UnitGaussianElimination| ()
   (SPROG NIL
-         (PROG (#1=#:G97)
+         (PROG (#1=#:G88)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|UnitGaussianElimination|))
@@ -333,19 +346,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|UnitGaussianElimination|)))))))))) 
-
-(DEFUN |UnitGaussianElimination;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|UnitGaussianElimination|))
-          (LETT % (GETREFV 20))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|UnitGaussianElimination| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|UnitGaussianElimination| '|infovec|
           (LIST

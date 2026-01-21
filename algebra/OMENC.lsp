@@ -30,9 +30,22 @@
 
 (DECLAIM (NOTINLINE |OpenMathEncoding;|)) 
 
+(DEFUN |OpenMathEncoding;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|OpenMathEncoding|))
+          (LETT % (GETREFV 17))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|OpenMathEncoding| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 6 (|SingleInteger|))
+          %))) 
+
 (DEFUN |OpenMathEncoding| ()
   (SPROG NIL
-         (PROG (#1=#:G14)
+         (PROG (#1=#:G11)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OpenMathEncoding|))
@@ -47,19 +60,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|OpenMathEncoding|)))))))))) 
-
-(DEFUN |OpenMathEncoding;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|OpenMathEncoding|))
-          (LETT % (GETREFV 17))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|OpenMathEncoding| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 6 (|SingleInteger|))
-          %))) 
 
 (MAKEPROP '|OpenMathEncoding| '|infovec|
           (LIST

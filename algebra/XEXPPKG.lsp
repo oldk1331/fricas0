@@ -3,7 +3,7 @@
         ((|p| (XPOLY)) (|n| (|NonNegativeInteger|)) (% (XPOLY)))
         (SPROG
          ((|k| (|Integer|)) (|s| (XPOLY)) (|k2| (R))
-          (|k1| (|Fraction| (|Integer|))) (#1=#:G20 NIL) (|i| NIL)
+          (|k1| (|Fraction| (|Integer|))) (#1=#:G8 NIL) (|i| NIL)
           (|p1| (XPOLY)))
          (SEQ (LETT |p1| (SPADCALL |p| (|spadConstant| % 10) (QREFELT % 11)))
               (COND
@@ -32,7 +32,7 @@
         ((|p| (XPOLY)) (|n| (|NonNegativeInteger|)) (% (XPOLY)))
         (SPROG
          ((|k| (|Integer|)) (|s| (XPOLY)) (|k2| (R))
-          (|k1| (|Fraction| (|Integer|))) (#1=#:G28 NIL) (|i| NIL))
+          (|k1| (|Fraction| (|Integer|))) (#1=#:G16 NIL) (|i| NIL))
          (SEQ
           (COND
            ((NULL (SPADCALL |p| (QREFELT % 13)))
@@ -76,25 +76,6 @@
 
 (DECLAIM (NOTINLINE |XExponentialPackage;|)) 
 
-(DEFUN |XExponentialPackage| (&REST #1=#:G31)
-  (SPROG NIL
-         (PROG (#2=#:G32)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|XExponentialPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |XExponentialPackage;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|XExponentialPackage|)))))))))) 
-
 (DEFUN |XExponentialPackage;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -113,6 +94,25 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |XExponentialPackage| (&REST #1=#:G19)
+  (SPROG NIL
+         (PROG (#2=#:G20)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|XExponentialPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |XExponentialPackage;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|XExponentialPackage|)))))))))) 
 
 (MAKEPROP '|XExponentialPackage| '|infovec|
           (LIST

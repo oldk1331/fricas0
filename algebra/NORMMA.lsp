@@ -35,25 +35,6 @@
 
 (DECLAIM (NOTINLINE |NormInMonogenicAlgebra;|)) 
 
-(DEFUN |NormInMonogenicAlgebra| (&REST #1=#:G16)
-  (SPROG NIL
-         (PROG (#2=#:G17)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|NormInMonogenicAlgebra|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |NormInMonogenicAlgebra;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|NormInMonogenicAlgebra|)))))))))) 
-
 (DEFUN |NormInMonogenicAlgebra;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -77,6 +58,25 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 16 (|NORMMA;PolR2SUP| (SPADCALL (QREFELT % 15)) %))
     %))) 
+
+(DEFUN |NormInMonogenicAlgebra| (&REST #1=#:G6)
+  (SPROG NIL
+         (PROG (#2=#:G7)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|NormInMonogenicAlgebra|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |NormInMonogenicAlgebra;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|NormInMonogenicAlgebra|)))))))))) 
 
 (MAKEPROP '|NormInMonogenicAlgebra| '|infovec|
           (LIST

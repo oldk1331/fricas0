@@ -22,9 +22,22 @@
 
 (DECLAIM (NOTINLINE |UserDefinedVariableOrdering;|)) 
 
+(DEFUN |UserDefinedVariableOrdering;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|UserDefinedVariableOrdering|))
+          (LETT % (GETREFV 18))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|UserDefinedVariableOrdering| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |UserDefinedVariableOrdering| ()
   (SPROG NIL
-         (PROG (#1=#:G17)
+         (PROG (#1=#:G9)
            (RETURN
             (COND
              ((LETT #1#
@@ -44,19 +57,6 @@
                  ((NOT #1#)
                   (HREM |$ConstructorCache|
                         '|UserDefinedVariableOrdering|)))))))))) 
-
-(DEFUN |UserDefinedVariableOrdering;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|UserDefinedVariableOrdering|))
-          (LETT % (GETREFV 18))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|UserDefinedVariableOrdering| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|UserDefinedVariableOrdering| '|infovec|
           (LIST

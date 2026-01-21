@@ -10,7 +10,7 @@
         (CONS |name| |values|)) 
 
 (SDEFUN |XMLAT;coerce;%S;3| ((|rp| (%)) (% (|String|)))
-        (SPROG ((|val| (|String|)) (#1=#:G19 NIL) (|vn| NIL))
+        (SPROG ((|val| (|String|)) (#1=#:G9 NIL) (|vn| NIL))
                (SEQ (LETT |val| "")
                     (SEQ (LETT |vn| NIL) (LETT #1# (QCDR |rp|)) G190
                          (COND
@@ -34,7 +34,7 @@
                       (QREFELT % 12)))))) 
 
 (SDEFUN |XMLAT;outputVRML;%TfV;4| ((|rp| (%)) (|f1| (|TextFile|)) (% (|Void|)))
-        (SPROG ((|val| (|String|)) (#1=#:G25 NIL) (|vn| NIL))
+        (SPROG ((|val| (|String|)) (#1=#:G15 NIL) (|vn| NIL))
                (SEQ (LETT |val| "")
                     (SEQ (LETT |vn| NIL) (LETT #1# (QCDR |rp|)) G190
                          (COND
@@ -56,23 +56,6 @@
 
 (DECLAIM (NOTINLINE |XmlAttribute;|)) 
 
-(DEFUN |XmlAttribute| ()
-  (SPROG NIL
-         (PROG (#1=#:G27)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|XmlAttribute|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|XmlAttribute|
-                             (LIST (CONS NIL (CONS 1 (|XmlAttribute;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#) (HREM |$ConstructorCache| '|XmlAttribute|)))))))))) 
-
 (DEFUN |XmlAttribute;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -87,6 +70,23 @@
                     (|Record| (|:| |n| (|String|))
                               (|:| |v| (|List| (|String|)))))
           %))) 
+
+(DEFUN |XmlAttribute| ()
+  (SPROG NIL
+         (PROG (#1=#:G17)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|XmlAttribute|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|XmlAttribute|
+                             (LIST (CONS NIL (CONS 1 (|XmlAttribute;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#) (HREM |$ConstructorCache| '|XmlAttribute|)))))))))) 
 
 (MAKEPROP '|XmlAttribute| '|infovec|
           (LIST

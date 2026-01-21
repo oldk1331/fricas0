@@ -13,7 +13,7 @@
          (EXIT (SPADCALL (QREFELT % 18))))) 
 
 (SDEFUN |JLF;emptyDer?| ((|der| (|LazyDer|)) (% (|Boolean|)))
-        (SPROG ((#1=#:G92 NIL))
+        (SPROG ((#1=#:G87 NIL))
                (COND
                 ((OR (SPADCALL (QVELT |der| 1) (CONS 1 '|0|) (QREFELT % 35))
                      (QEQCAR (QVELT |der| 2) 1))
@@ -30,7 +30,7 @@
         (QVELT (SPADCALL |exp| (QREFELT % 37)) 2)) 
 
 (SDEFUN |JLF;extract| ((|exp| (%)) (% (D)))
-        (SPROG ((#1=#:G92 NIL))
+        (SPROG ((#1=#:G87 NIL))
                (PROG2
                    (LETT #1#
                          (QVELT
@@ -318,10 +318,10 @@
 (SDEFUN |JLF;collect;2%;23| ((|exp| (%)) (% (%)))
         (SPROG
          ((|rec| (|RepRec|)) (|newLazy| (|List| (|Reference| |LazyTerm|)))
-          (|res| #1=(|Boolean|)) (|co| (D)) (#2=#:G93 NIL) (|newSharp?| #1#)
+          (|res| #1=(|Boolean|)) (|co| (D)) (#2=#:G88 NIL) (|newSharp?| #1#)
           (|newLD| (JB)) (|newCoeff| #3=(|Union| D %)) (|newEval?| #1#)
-          (|d| (D)) (#4=#:G92 NIL) (|prod| #3#) (|der| (|LazyDer|))
-          (|lt| (|LazyTerm|)) (#5=#:G191 NIL) (|rlt| NIL))
+          (|d| (D)) (#4=#:G87 NIL) (|prod| #3#) (|der| (|LazyDer|))
+          (|lt| (|LazyTerm|)) (#5=#:G179 NIL) (|rlt| NIL))
          (SEQ (LETT |rec| (SPADCALL |exp| (QREFELT % 37)))
               (EXIT
                (COND
@@ -506,8 +506,8 @@
 (SDEFUN |JLF;evalDeriv|
         ((|rder| (|Reference| |LazyDer|)) (% (|Reference| |LazyDer|)))
         (SPROG
-         ((|dfun| (D)) (#1=#:G90 NIL) (#2=#:G89 NIL) (|fun| (D)) (#3=#:G93 NIL)
-          (#4=#:G92 NIL) (|der| (|LazyDer|)))
+         ((|dfun| (D)) (#1=#:G85 NIL) (#2=#:G84 NIL) (|fun| (D)) (#3=#:G88 NIL)
+          (#4=#:G87 NIL) (|der| (|LazyDer|)))
          (SEQ (LETT |der| (SPADCALL |rder| (QREFELT % 44)))
               (EXIT
                (COND ((QVELT |der| 0) |rder|)
@@ -569,7 +569,7 @@
 (SDEFUN |JLF;evalTerm|
         ((|rlt| (|Reference| |LazyTerm|)) (% (|Reference| |LazyTerm|)))
         (SPROG
-         ((|res| (D)) (#1=#:G92 NIL) (|co| (D)) (#2=#:G93 NIL)
+         ((|res| (D)) (#1=#:G87 NIL) (|co| (D)) (#2=#:G88 NIL)
           (|lt| (|LazyTerm|)))
          (SEQ (LETT |lt| (SPADCALL |rlt| (QREFELT % 38)))
               (EXIT
@@ -626,8 +626,8 @@
 (SDEFUN |JLF;eval1;2%;27| ((|exp| (%)) (% (%)))
         (SPROG
          ((|lazy| (|List| (|Reference| |LazyTerm|))) (|ld| (JB))
-          (|rlt| (|Reference| |LazyTerm|)) (|d| (D)) (|co| (D)) (#1=#:G92 NIL)
-          (|rco| (|LazyTerm|)) (#2=#:G222 NIL) (#3=#:G223 NIL)
+          (|rlt| (|Reference| |LazyTerm|)) (|d| (D)) (|co| (D)) (#1=#:G87 NIL)
+          (|rco| (|LazyTerm|)) (#2=#:G210 NIL) (#3=#:G211 NIL)
           (|rec| (|RepRec|)))
          (SEQ
           (EXIT
@@ -685,7 +685,7 @@
                                                            (SPADCALL |d|
                                                                      (QREFELT %
                                                                               62)))
-                                                     (GO #5=#:G221)))
+                                                     (GO #5=#:G209)))
                                                    ('T
                                                     (SEQ
                                                      (LETT |rlt|
@@ -822,7 +822,7 @@
 (SDEFUN |JLF;-;2%;37| ((|x| (%)) (% (%)))
         (SPROG
          ((|resLazy| (|List| (|Reference| |LazyTerm|))) (|lt| (|LazyTerm|))
-          (#1=#:G263 NIL) (|rlt| NIL) (#2=#:G262 NIL) (|rec| (|RepRec|)))
+          (#1=#:G244 NIL) (|rlt| NIL) (#2=#:G243 NIL) (|rec| (|RepRec|)))
          (SEQ (LETT |rec| (SPADCALL |x| (QREFELT % 37)))
               (LETT |resLazy|
                     (PROGN
@@ -905,7 +905,7 @@
 (SDEFUN |JLF;*;I2%;39| ((|i| (|Integer|)) (|x| (%)) (% (%)))
         (SPROG
          ((|resLazy| (|List| (|Reference| |LazyTerm|))) (|lt| (|LazyTerm|))
-          (#1=#:G283 NIL) (|rlt| NIL) (|rec| (|RepRec|)))
+          (#1=#:G264 NIL) (|rlt| NIL) (|rec| (|RepRec|)))
          (SEQ (LETT |rec| (SPADCALL |x| (QREFELT % 37))) (LETT |resLazy| NIL)
               (SEQ (LETT |rlt| NIL) (LETT #1# (QVELT |rec| 5)) G190
                    (COND
@@ -943,7 +943,7 @@
         (SPROG
          ((|resSharp?| (|Boolean|)) (|resLD| (JB)) (|resJV2| #1=(|List| JB))
           (|resJV1| #1#) (|resLazy| (|List| (|Reference| |LazyTerm|)))
-          (#2=#:G302 NIL) (|ylt| NIL) (#3=#:G301 NIL) (|xlt| NIL)
+          (#2=#:G283 NIL) (|ylt| NIL) (#3=#:G282 NIL) (|xlt| NIL)
           (|yrec| (|RepRec|)) (|xrec| (|RepRec|)))
          (SEQ
           (COND
@@ -1108,12 +1108,12 @@
                     (|:| |JVars| (|List| (|List| JB))))))
         (SPROG
          ((LJV (|List| (|List| JB))) (JV (|List| JB)) (|LRes| (|List| %))
-          (|res| (%)) (|djv| (|Union| JB "0")) (#1=#:G362 NIL) (|df| NIL)
-          (#2=#:G363 NIL) (|jv| NIL)
+          (|res| (%)) (|djv| (|Union| JB "0")) (#1=#:G343 NIL) (|df| NIL)
+          (#2=#:G344 NIL) (|jv| NIL)
           (|r|
            (|Record| (|:| |Indices| (|List| JB)) (|:| |Entries| (|List| %))))
-          (#3=#:G360 NIL) (|l| NIL) (#4=#:G361 NIL) (|f| NIL) (#5=#:G359 NIL)
-          (|eq| NIL) (#6=#:G358 NIL) (#7=#:G357 NIL) (#8=#:G356 NIL)
+          (#3=#:G341 NIL) (|l| NIL) (#4=#:G342 NIL) (|f| NIL) (#5=#:G340 NIL)
+          (|eq| NIL) (#6=#:G339 NIL) (#7=#:G338 NIL) (#8=#:G337 NIL)
           (|inds| (|List| JB)))
          (SEQ (LETT |inds| (SPADCALL JM (QREFELT % 117)))
               (EXIT
@@ -1312,25 +1312,25 @@
            (|List|
             (|Record| (|:| |Dep| (|List| (|NonNegativeInteger|)))
                       (|:| |Fun| %))))
-          (#1=#:G458 NIL) (|deq| NIL) (#2=#:G459 NIL) (#3=#:G457 NIL)
+          (#1=#:G439 NIL) (|deq| NIL) (#2=#:G440 NIL) (#3=#:G438 NIL)
           (|newDep| (|List| (|List| (|NonNegativeInteger|))))
-          (|ndep| (|List| (|NonNegativeInteger|))) (#4=#:G456 NIL) (|d| NIL)
-          (#5=#:G455 NIL) (#6=#:G419 NIL) (#7=#:G454 NIL) (|eq| NIL)
-          (#8=#:G453 NIL) (|dep| (|List| (|NonNegativeInteger|)))
+          (|ndep| (|List| (|NonNegativeInteger|))) (#4=#:G437 NIL) (|d| NIL)
+          (#5=#:G436 NIL) (#6=#:G400 NIL) (#7=#:G435 NIL) (|eq| NIL)
+          (#8=#:G434 NIL) (|dep| (|List| (|NonNegativeInteger|)))
           (|tmp|
            (|Record| (|:| |Sys| (|List| D))
                      (|:| JM (|SparseEchelonMatrix| JB D))
                      (|:| |Depend|
                           (|Union| #9="failed"
                                    (|List| (|List| (|NonNegativeInteger|)))))))
-          (|oldDep| (|List| (|List| (|NonNegativeInteger|)))) (#10=#:G452 NIL)
-          (#11=#:G451 NIL) (|sys| (|List| D)) (#12=#:G450 NIL) (#13=#:G449 NIL)
-          (|neweq| (%)) (#14=#:G399 NIL) (#15=#:G448 NIL)
+          (|oldDep| (|List| (|List| (|NonNegativeInteger|)))) (#10=#:G433 NIL)
+          (#11=#:G432 NIL) (|sys| (|List| D)) (#12=#:G431 NIL) (#13=#:G430 NIL)
+          (|neweq| (%)) (#14=#:G380 NIL) (#15=#:G429 NIL)
           (|seq|
            (|Record| (|:| |Dep| (|List| (|NonNegativeInteger|)))
                      (|:| |Fun| %)))
-          (|solvable?| (|Boolean|)) (|s| (|Union| % #9#)) (#16=#:G446 NIL)
-          (#17=#:G447 NIL)
+          (|solvable?| (|Boolean|)) (|s| (|Union| % #9#)) (#16=#:G427 NIL)
+          (#17=#:G428 NIL)
           (|eqLD|
            (|List|
             #18=(|Record| (|:| |Dep| (|List| (|NonNegativeInteger|)))
@@ -1619,17 +1619,17 @@
         (SPROG
          ((|r|
            (|Record| (|:| |Indices| (|List| JB)) (|:| |Entries| (|List| %))))
-          (|tmp| (|SparseEchelonMatrix| JB %)) (#1=#:G489 NIL) (|eq| NIL)
-          (#2=#:G490 NIL) (|dep| NIL) (|i| NIL)
+          (|tmp| (|SparseEchelonMatrix| JB %)) (#1=#:G470 NIL) (|eq| NIL)
+          (#2=#:G471 NIL) (|dep| NIL) (|i| NIL)
           (|resJM| (|SparseEchelonMatrix| JB %)) (|inds| (|List| JB))
-          (|resDep| (|List| (|List| (|NonNegativeInteger|)))) (#3=#:G488 NIL)
-          (|l| NIL) (#4=#:G487 NIL) (|resSys| (|List| %)) (#5=#:G486 NIL)
-          (#6=#:G485 NIL)
+          (|resDep| (|List| (|List| (|NonNegativeInteger|)))) (#3=#:G469 NIL)
+          (|l| NIL) (#4=#:G468 NIL) (|resSys| (|List| %)) (#5=#:G467 NIL)
+          (#6=#:G466 NIL)
           (|sl|
            (|List|
             (|Record| (|:| |Dep| (|List| (|NonNegativeInteger|)))
                       (|:| |Fun| %))))
-          (#7=#:G484 NIL) (|f| NIL) (#8=#:G483 NIL))
+          (#7=#:G465 NIL) (|f| NIL) (#8=#:G464 NIL))
          (SEQ
           (LETT |sl|
                 (PROGN
@@ -1698,9 +1698,9 @@
 (SDEFUN |JLF;reduceMod;3L;58|
         ((|sys1| #1=(|List| %)) (|sys2| #1#) (% (|List| %)))
         (SPROG
-         ((#2=#:G504 NIL) (|d| NIL) (#3=#:G503 NIL) (|sys2D| (|List| D))
-          (#4=#:G502 NIL) (|exp| NIL) (#5=#:G501 NIL) (|sys1D| (|List| D))
-          (#6=#:G500 NIL) (#7=#:G499 NIL))
+         ((#2=#:G485 NIL) (|d| NIL) (#3=#:G484 NIL) (|sys2D| (|List| D))
+          (#4=#:G483 NIL) (|exp| NIL) (#5=#:G482 NIL) (|sys1D| (|List| D))
+          (#6=#:G481 NIL) (#7=#:G480 NIL))
          (SEQ
           (LETT |sys1D|
                 (PROGN
@@ -1747,8 +1747,8 @@
 
 (SDEFUN |JLF;autoReduce;2L;59| ((|sys| (|List| %)) (% (|List| %)))
         (SPROG
-         ((#1=#:G514 NIL) (|d| NIL) (#2=#:G513 NIL) (|sysD| (|List| D))
-          (#3=#:G512 NIL) (|exp| NIL) (#4=#:G511 NIL))
+         ((#1=#:G495 NIL) (|d| NIL) (#2=#:G494 NIL) (|sysD| (|List| D))
+          (#3=#:G493 NIL) (|exp| NIL) (#4=#:G492 NIL))
          (SEQ
           (LETT |sysD|
                 (PROGN
@@ -1778,25 +1778,6 @@
                  (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT (NREVERSE #2#)))))))) 
 
 (DECLAIM (NOTINLINE |JetLazyFunction;|)) 
-
-(DEFUN |JetLazyFunction| (&REST #1=#:G522)
-  (SPROG NIL
-         (PROG (#2=#:G523)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|JetLazyFunction|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |JetLazyFunction;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|JetLazyFunction|)))))))))) 
 
 (DEFUN |JetLazyFunction;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
@@ -1842,6 +1823,25 @@
                                       (SPADCALL (QREFELT % 25) (QREFELT % 29)))
                               (QREFELT % 31)))))
           %))) 
+
+(DEFUN |JetLazyFunction| (&REST #1=#:G502)
+  (SPROG NIL
+         (PROG (#2=#:G503)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|JetLazyFunction|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |JetLazyFunction;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|JetLazyFunction|)))))))))) 
 
 (MAKEPROP '|JetLazyFunction| '|infovec|
           (LIST

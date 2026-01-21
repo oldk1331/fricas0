@@ -19,11 +19,11 @@
          (|ptSize| (|PositiveInteger|)) (|optionsList| (|List| (|DrawOption|)))
          (% (|GraphImage|)))
         (SPROG
-         ((|listOfPointSizes| (|List| (|PositiveInteger|))) (#1=#:G30 NIL)
-          (|i| NIL) (#2=#:G29 NIL) (|listOfLineColors| (|List| (|Palette|)))
-          (#3=#:G28 NIL) (#4=#:G27 NIL)
-          (|listOfPointColors| (|List| (|Palette|))) (#5=#:G26 NIL)
-          (#6=#:G25 NIL) (|len| (|NonNegativeInteger|)))
+         ((|listOfPointSizes| (|List| (|PositiveInteger|))) (#1=#:G15 NIL)
+          (|i| NIL) (#2=#:G14 NIL) (|listOfLineColors| (|List| (|Palette|)))
+          (#3=#:G13 NIL) (#4=#:G12 NIL)
+          (|listOfPointColors| (|List| (|Palette|))) (#5=#:G11 NIL)
+          (#6=#:G10 NIL) (|len| (|NonNegativeInteger|)))
          (SEQ (LETT |len| (LENGTH |listOfListsOfPoints|))
               (LETT |listOfPointColors|
                     (PROGN
@@ -82,9 +82,21 @@
 
 (DECLAIM (NOTINLINE |ViewportPackage;|)) 
 
+(DEFUN |ViewportPackage;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|ViewportPackage|))
+          (LETT % (GETREFV 31))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|ViewportPackage| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |ViewportPackage| ()
   (SPROG NIL
-         (PROG (#1=#:G36)
+         (PROG (#1=#:G21)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ViewportPackage|))
@@ -99,18 +111,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|ViewportPackage|)))))))))) 
-
-(DEFUN |ViewportPackage;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|ViewportPackage|))
-          (LETT % (GETREFV 31))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|ViewportPackage| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|ViewportPackage| '|infovec|
           (LIST

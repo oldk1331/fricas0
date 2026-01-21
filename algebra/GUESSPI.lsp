@@ -1,26 +1,6 @@
 
 (DECLAIM (NOTINLINE |GuessPolynomialInteger;|)) 
 
-(DEFUN |GuessPolynomialInteger| ()
-  (SPROG NIL
-         (PROG (#1=#:G31)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|GuessPolynomialInteger|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|GuessPolynomialInteger|
-                             (LIST
-                              (CONS NIL
-                                    (CONS 1 (|GuessPolynomialInteger;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#)
-                  (HREM |$ConstructorCache| '|GuessPolynomialInteger|)))))))))) 
-
 (DEFUN |GuessPolynomialInteger;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -45,6 +25,26 @@
           (|stuffDomainSlots| %)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |GuessPolynomialInteger| ()
+  (SPROG NIL
+         (PROG (#1=#:G15)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|GuessPolynomialInteger|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|GuessPolynomialInteger|
+                             (LIST
+                              (CONS NIL
+                                    (CONS 1 (|GuessPolynomialInteger;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#)
+                  (HREM |$ConstructorCache| '|GuessPolynomialInteger|)))))))))) 
 
 (MAKEPROP '|GuessPolynomialInteger| '|infovec|
           (LIST

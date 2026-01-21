@@ -19,25 +19,6 @@
 
 (DECLAIM (NOTINLINE |DirectProductFunctions2;|)) 
 
-(DEFUN |DirectProductFunctions2| (&REST #1=#:G14)
-  (SPROG NIL
-         (PROG (#2=#:G15)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T T))
-                                               (HGET |$ConstructorCache|
-                                                     '|DirectProductFunctions2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |DirectProductFunctions2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|DirectProductFunctions2|)))))))))) 
-
 (DEFUN |DirectProductFunctions2;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -56,6 +37,25 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |DirectProductFunctions2| (&REST #1=#:G8)
+  (SPROG NIL
+         (PROG (#2=#:G9)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T T))
+                                               (HGET |$ConstructorCache|
+                                                     '|DirectProductFunctions2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |DirectProductFunctions2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|DirectProductFunctions2|)))))))))) 
 
 (MAKEPROP '|DirectProductFunctions2| '|infovec|
           (LIST

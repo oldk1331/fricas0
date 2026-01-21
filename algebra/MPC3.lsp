@@ -39,25 +39,6 @@
 
 (DECLAIM (NOTINLINE |MPolyCatFunctions3;|)) 
 
-(DEFUN |MPolyCatFunctions3| (&REST #1=#:G17)
-  (SPROG NIL
-         (PROG (#2=#:G18)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|MPolyCatFunctions3|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |MPolyCatFunctions3;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|MPolyCatFunctions3|)))))))))) 
-
 (DEFUN |MPolyCatFunctions3;| (|#1| |#2| |#3| |#4| |#5| |#6| |#7|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL) (DV$4 NIL)
@@ -87,6 +68,25 @@
     (QSETREFV % 12 |#7|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |MPolyCatFunctions3| (&REST #1=#:G11)
+  (SPROG NIL
+         (PROG (#2=#:G12)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|MPolyCatFunctions3|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |MPolyCatFunctions3;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|MPolyCatFunctions3|)))))))))) 
 
 (MAKEPROP '|MPolyCatFunctions3| '|infovec|
           (LIST

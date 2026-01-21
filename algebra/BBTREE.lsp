@@ -1,7 +1,7 @@
 
 (SDEFUN |BBTREE;setleaves!;%L%;1| ((|t| (%)) (|u| (|List| S)) (% (%)))
         (SPROG
-         ((|acc| (|List| S)) (#1=#:G33 NIL) (|i| NIL)
+         ((|acc| (|List| S)) (#1=#:G19 NIL) (|i| NIL)
           (|m| (|NonNegativeInteger|)) (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |n| (LENGTH |u|))
               (EXIT
@@ -146,26 +146,9 @@
 
 (DECLAIM (NOTINLINE |BalancedBinaryTree;|)) 
 
-(DEFUN |BalancedBinaryTree| (#1=#:G93)
-  (SPROG NIL
-         (PROG (#2=#:G94)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|BalancedBinaryTree|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|BalancedBinaryTree;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|BalancedBinaryTree|)))))))))) 
-
 (DEFUN |BalancedBinaryTree;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G90 NIL) (#2=#:G91 NIL) (#3=#:G92 NIL) (% NIL)
+   ((|pv$| NIL) (#1=#:G68 NIL) (#2=#:G69 NIL) (#3=#:G70 NIL) (% NIL)
     (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -221,6 +204,23 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 7 (|BinaryTree| |#1|))
     %))) 
+
+(DEFUN |BalancedBinaryTree| (#1=#:G71)
+  (SPROG NIL
+         (PROG (#2=#:G72)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|BalancedBinaryTree|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|BalancedBinaryTree;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|BalancedBinaryTree|)))))))))) 
 
 (MAKEPROP '|BalancedBinaryTree| '|infovec|
           (LIST

@@ -4,7 +4,7 @@
          (|segbind| (|SegmentBinding| (|Float|))) (|filename| (|String|))
          (|opts| (|List| (|DrawOption|))) (% (|Void|)))
         (SPROG
-         ((#1=#:G25 NIL) (|p| NIL) (#2=#:G24 NIL) (|p1| NIL)
+         ((#1=#:G8 NIL) (|p| NIL) (#2=#:G7 NIL) (|p1| NIL)
           (|p2| (|List| (|List| (|Point| (|DoubleFloat|)))))
           (|f1| (|TextFile|)))
          (SEQ
@@ -54,10 +54,10 @@
         ((|l1| (|List| (|DoubleFloat|))) (|l2| (|List| (|DoubleFloat|)))
          (|filename| (|String|)) (|opts| (|List| (|DrawOption|))) (% (|Void|)))
         (SPROG
-         ((#1=#:G39 NIL) (|p| NIL) (#2=#:G38 NIL) (|p1| NIL)
+         ((#1=#:G22 NIL) (|p| NIL) (#2=#:G21 NIL) (|p1| NIL)
           (|p2| (|List| (|List| (|Point| (|DoubleFloat|)))))
-          (|lp| (|List| (|Point| (|DoubleFloat|)))) (#3=#:G36 NIL) (|x| NIL)
-          (#4=#:G37 NIL) (|y| NIL) (#5=#:G35 NIL) (|f1| (|TextFile|)))
+          (|lp| (|List| (|Point| (|DoubleFloat|)))) (#3=#:G19 NIL) (|x| NIL)
+          (#4=#:G20 NIL) (|y| NIL) (#5=#:G18 NIL) (|f1| (|TextFile|)))
          (SEQ
           (LETT |f1|
                 (SPADCALL (SPADCALL |filename| (QREFELT % 8)) "output"
@@ -136,7 +136,7 @@
          (|segbind2| (|SegmentBinding| (|Float|))) (|filename| (|String|))
          (|opts| (|List| (|DrawOption|))) (% (|Void|)))
         (SPROG
-         ((#1=#:G50 NIL) (|p| NIL) (#2=#:G49 NIL) (|p1| NIL)
+         ((#1=#:G33 NIL) (|p| NIL) (#2=#:G32 NIL) (|p1| NIL)
           (|p2| (|List| (|List| (|Point| (|DoubleFloat|)))))
           (|f1| (|TextFile|)))
          (SEQ
@@ -197,9 +197,21 @@
 
 (DECLAIM (NOTINLINE |GnuDraw;|)) 
 
+(DEFUN |GnuDraw;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|GnuDraw|))
+          (LETT % (GETREFV 51))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|GnuDraw| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |GnuDraw| ()
   (SPROG NIL
-         (PROG (#1=#:G53)
+         (PROG (#1=#:G36)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|GnuDraw|))
@@ -212,18 +224,6 @@
                              (LIST (CONS NIL (CONS 1 (|GnuDraw;|))))))
                     (LETT #1# T))
                 (COND ((NOT #1#) (HREM |$ConstructorCache| '|GnuDraw|)))))))))) 
-
-(DEFUN |GnuDraw;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|GnuDraw|))
-          (LETT % (GETREFV 51))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|GnuDraw| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|GnuDraw| '|infovec|
           (LIST

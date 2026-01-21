@@ -1688,24 +1688,33 @@
 ;   $opIsIs : local := true
 ;   [m] := bottomUp a
 ;   putPvarModes(pattern,m)
-;   object := evalis(op,[a,pattern],m)
+;   a_val :=
+;       $genValue => a
+;       sym := GENSYM()
+;       vv := mkAtreeNode(sym)
+;       putModeSet(vv, [m])
+;       putMode(vv, m)
+;       putValue(vv, [m, :sym])
+;       vv
+;   object := evalis(op, [a_val, pattern], m)
 ;   -- have to change code to return value of a
 ;   failCode :=
 ;     ['spadThrowBrightly,['concat,
 ;       '"   Pattern",['QUOTE,bright form2String pattern],
 ;         '"is not matched in assignment to right-hand side."]]
-;   if $genValue
-;     then
+;   if $genValue then
 ;       null objValUnwrap object => eval failCode
 ;       putValue(op,getValue a)
-;     else
-;       code := ['COND,[objVal object,objVal getValue a],[''T,failCode]]
+;   else
+;       code := ["PROGN",
+;           ["LET", sym, objVal(getValue(a))],
+;           ["COND", [objVal(object), sym], [''T, failCode]]]
 ;       putValue(op,objNew(code,m))
 ;   putModeSet(op,[m])
 
 (DEFUN |upLETWithPatternOnLhs| (|t|)
-  (PROG (|$opIsIs| |code| |failCode| |object| |m| |LETTMP#1| |a| |pattern|
-         |op|)
+  (PROG (|$opIsIs| |code| |failCode| |object| |a_val| |vv| |sym| |m| |LETTMP#1|
+         |a| |pattern| |op|)
     (DECLARE (SPECIAL |$opIsIs|))
     (RETURN
      (PROGN
@@ -1716,7 +1725,17 @@
       (SETQ |LETTMP#1| (|bottomUp| |a|))
       (SETQ |m| (CAR |LETTMP#1|))
       (|putPvarModes| |pattern| |m|)
-      (SETQ |object| (|evalis| |op| (LIST |a| |pattern|) |m|))
+      (SETQ |a_val|
+              (COND (|$genValue| |a|)
+                    (#2='T
+                     (PROGN
+                      (SETQ |sym| (GENSYM))
+                      (SETQ |vv| (|mkAtreeNode| |sym|))
+                      (|putModeSet| |vv| (LIST |m|))
+                      (|putMode| |vv| |m|)
+                      (|putValue| |vv| (CONS |m| |sym|))
+                      |vv|))))
+      (SETQ |object| (|evalis| |op| (LIST |a_val| |pattern|) |m|))
       (SETQ |failCode|
               (LIST '|spadThrowBrightly|
                     (LIST '|concat| "   Pattern"
@@ -1725,12 +1744,12 @@
       (COND
        (|$genValue|
         (COND ((NULL (|objValUnwrap| |object|)) (|eval| |failCode|))
-              (#2='T (|putValue| |op| (|getValue| |a|)))))
+              (#2# (|putValue| |op| (|getValue| |a|)))))
        (#2#
         (SETQ |code|
-                (LIST 'COND
-                      (LIST (|objVal| |object|) (|objVal| (|getValue| |a|)))
-                      (LIST ''T |failCode|)))
+                (LIST 'PROGN (LIST 'LET |sym| (|objVal| (|getValue| |a|)))
+                      (LIST 'COND (LIST (|objVal| |object|) |sym|)
+                            (LIST ''T |failCode|))))
         (|putValue| |op| (|objNew| |code| |m|))))
       (|putModeSet| |op| (LIST |m|))))))
 
@@ -2224,13 +2243,13 @@
              (|putIntSymTab| |symbol| '|value| |obj| |$e|)
              T))))))
 
-; getInterpMacroNames() ==
+; get_builtin_macro_names() ==
 ;   names := [n for [n,:.] in $InterpreterMacroAlist]
 ;   if (e := CAAR $InteractiveFrame) and (m := assoc("--macros--",e)) then
 ;     names := append(names, [n for [n, :.] in rest m])
 ;   MSORT names
 
-(DEFUN |getInterpMacroNames| ()
+(DEFUN |get_builtin_macro_names| ()
   (PROG (|m| |e| |names| |n|)
     (RETURN
      (PROGN
@@ -3375,7 +3394,8 @@
          (|putModeSet| |op| (LIST |defMode|)))))))))
 
 ; uptypeOf form ==
-;   form isnt [op, arg] => NIL
+;   form isnt [op, arg] =>
+;       systemError '"typeOf: 1 argument required"
 ;   if VECP arg then transferPropsToNode(getUnname arg,arg)
 ;   if m := isType(arg) then
 ;     m :=
@@ -3398,7 +3418,7 @@
               (SETQ |ISTMP#1| (CDR |form|))
               (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
                    (PROGN (SETQ |arg| (CAR |ISTMP#1|)) #1='T)))))
-       NIL)
+       (|systemError| "typeOf: 1 argument required"))
       (#1#
        (PROGN
         (COND ((VECP |arg|) (|transferPropsToNode| (|getUnname| |arg|) |arg|)))

@@ -13,9 +13,9 @@
 (SDEFUN |GENMOEBF;generalizedMoebiusFunction;LM%;4|
         ((|xx| (|List| P)) (|z| (|Mapping| R P P)) (% (%)))
         (SPROG
-         ((#1=#:G29 NIL) (|mf| (|Union| (|Matrix| R) "failed"))
-          (|zf| (|Matrix| R)) (#2=#:G33 NIL) (|x| NIL) (#3=#:G32 NIL)
-          (#4=#:G31 NIL) (|y| NIL) (#5=#:G30 NIL) (|xxo| (|List| P)))
+         ((#1=#:G20 NIL) (|mf| (|Union| (|Matrix| R) "failed"))
+          (|zf| (|Matrix| R)) (#2=#:G24 NIL) (|x| NIL) (#3=#:G23 NIL)
+          (#4=#:G22 NIL) (|y| NIL) (#5=#:G21 NIL) (|xxo| (|List| P)))
          (SEQ
           (EXIT
            (SEQ
@@ -64,23 +64,23 @@
                     (PROGN
                      (LETT #1#
                            (|GENMOEBF;per| (VECTOR |zf| (QCDR |mf|) |xxo|) %))
-                     (GO #6=#:G28)))))))
+                     (GO #6=#:G19)))))))
           #6# (EXIT #1#)))) 
 
 (SDEFUN |GENMOEBF;canonicalZeta| ((|pi| (P)) (|si| (P)) (% (R)))
-        (SPROG ((#1=#:G36 NIL))
+        (SPROG ((#1=#:G27 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((SPADCALL |pi| |si| (QREFELT % 12))
-                    (PROGN (LETT #1# (|spadConstant| % 25)) (GO #2=#:G35))))
+                    (PROGN (LETT #1# (|spadConstant| % 25)) (GO #2=#:G26))))
                   (EXIT (|spadConstant| % 17))))
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |GENMOEBF;apply;%2PR;6| ((|mf| (%)) (|x| (P)) (|y| (P)) (% (R)))
         (SPROG
-         ((#1=#:G42 NIL) (|ky| #2=(|Integer|)) (|kx| #2#) (|mfn| (|Matrix| R)))
+         ((#1=#:G33 NIL) (|ky| #2=(|Integer|)) (|kx| #2#) (|mfn| (|Matrix| R)))
          (SEQ
           (EXIT
            (SEQ (LETT |mfn| (QVELT (|GENMOEBF;rep| |mf| %) 1))
@@ -96,7 +96,7 @@
                 (EXIT
                  (PROGN
                   (LETT #1# (SPADCALL |mfn| |ky| |kx| (QREFELT % 28)))
-                  (GO #3=#:G41)))))
+                  (GO #3=#:G32)))))
           #3# (EXIT #1#)))) 
 
 (SDEFUN |GENMOEBF;moebiusMatrix;%M;7| ((|mf| (%)) (% (|Matrix| R)))
@@ -109,28 +109,6 @@
         (SPADCALL "m" (QREFELT % 33))) 
 
 (DECLAIM (NOTINLINE |GeneralizedFiniteMoebiusFunction;|)) 
-
-(DEFUN |GeneralizedFiniteMoebiusFunction| (&REST #1=#:G48)
-  (SPROG NIL
-         (PROG (#2=#:G49)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|GeneralizedFiniteMoebiusFunction|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |GeneralizedFiniteMoebiusFunction;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|GeneralizedFiniteMoebiusFunction|)))))))))) 
 
 (DEFUN |GeneralizedFiniteMoebiusFunction;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
@@ -152,6 +130,28 @@
                               (|:| |mmatrix| (|Matrix| |#2|))
                               (|:| |indices| (|List| |#1|))))
           %))) 
+
+(DEFUN |GeneralizedFiniteMoebiusFunction| (&REST #1=#:G39)
+  (SPROG NIL
+         (PROG (#2=#:G40)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|GeneralizedFiniteMoebiusFunction|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |GeneralizedFiniteMoebiusFunction;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|GeneralizedFiniteMoebiusFunction|)))))))))) 
 
 (MAKEPROP '|GeneralizedFiniteMoebiusFunction| '|infovec|
           (LIST

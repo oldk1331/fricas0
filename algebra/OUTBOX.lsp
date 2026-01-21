@@ -59,8 +59,8 @@
           (RETURN
            (PROGN
             (SPROG
-             ((|newLines| NIL) (#1=#:G40 NIL) (|i| NIL) (#2=#:G39 NIL)
-              (|line| NIL) (#3=#:G38 NIL) (|boxline| NIL) (#4=#:G37 NIL)
+             ((|newLines| NIL) (#1=#:G29 NIL) (|i| NIL) (#2=#:G28 NIL)
+              (|line| NIL) (#3=#:G27 NIL) (|boxline| NIL) (#4=#:G26 NIL)
               (|emptyLine| NIL) (|nd| NIL) (|nh| NIL) (|nw| NIL) (|w| NIL))
              (SEQ (LETT |w| (SPADCALL |box| (QREFELT % 14)))
                   (LETT |nw|
@@ -163,10 +163,10 @@
         ((|lb| (|List| %)) (|h| (|NonNegativeInteger|)) (|adjust| (|Integer|))
          (% (%)))
         (SPROG
-         ((|d| (|Integer|)) (|newLines| (|List| (|String|))) (#1=#:G78 NIL)
-          (|b| NIL) (#2=#:G77 NIL) (#3=#:G64 NIL) (#4=#:G76 NIL) (#5=#:G75 NIL)
-          (#6=#:G53 NIL) (#7=#:G74 NIL) (#8=#:G73 NIL)
-          (|w| (|NonNegativeInteger|)) (#9=#:G72 NIL) (#10=#:G71 NIL))
+         ((|d| (|Integer|)) (|newLines| (|List| (|String|))) (#1=#:G59 NIL)
+          (|b| NIL) (#2=#:G58 NIL) (#3=#:G45 NIL) (#4=#:G57 NIL) (#5=#:G56 NIL)
+          (#6=#:G42 NIL) (#7=#:G55 NIL) (#8=#:G54 NIL)
+          (|w| (|NonNegativeInteger|)) (#9=#:G53 NIL) (#10=#:G52 NIL))
          (SEQ
           (COND ((SPADCALL |lb| (QREFELT % 46)) (SPADCALL (QREFELT % 8)))
                 (#11='T
@@ -295,13 +295,13 @@
 (SDEFUN |OUTBOX;hconcat;L%;13| ((|lb| (|List| %)) (% (%)))
         (SPROG
          ((|newLines| (|List| (|String|))) (|wx| (|NonNegativeInteger|))
-          (#1=#:G111 NIL) (|j| NIL) (|line| (|String|)) (|ix| (|Integer|))
+          (#1=#:G92 NIL) (|j| NIL) (|line| (|String|)) (|ix| (|Integer|))
           (|hb| (|NonNegativeInteger|)) (|wb| (|NonNegativeInteger|))
-          (#2=#:G110 NIL) (|b| NIL) (|newLine| (|String|)) (#3=#:G109 NIL)
+          (#2=#:G91 NIL) (|b| NIL) (|newLine| (|String|)) (#3=#:G90 NIL)
           (|i| NIL) (|emptyLine| (|String|)) (|w| (|NonNegativeInteger|))
-          (#4=#:G108 NIL) (#5=#:G107 NIL) (|d| #6=(|NonNegativeInteger|))
-          (#7=#:G106 NIL) (#8=#:G105 NIL) (|h| #6#) (#9=#:G104 NIL)
-          (#10=#:G103 NIL))
+          (#4=#:G89 NIL) (#5=#:G88 NIL) (|d| #6=(|NonNegativeInteger|))
+          (#7=#:G87 NIL) (#8=#:G86 NIL) (|h| #6#) (#9=#:G85 NIL)
+          (#10=#:G84 NIL))
          (SEQ
           (COND ((SPADCALL |lb| (QREFELT % 46)) (SPADCALL (QREFELT % 8)))
                 ('T
@@ -359,7 +359,7 @@
                                         (EXIT (NREVERSE #5#))))
                                   (QREFELT % 54)))
                   (LETT |emptyLine|
-                        (|make_full_CVEC2| |w| (|STR_to_CHAR| " ")))
+                        (|make_string_code| |w| (|STR_to_CHAR| " ")))
                   (LETT |newLines| NIL)
                   (SEQ (LETT |i| 1) (LETT #3# (+ |h| |d|)) G190
                        (COND ((|greater_SI| |i| #3#) (GO G191)))
@@ -413,9 +413,21 @@
 
 (DECLAIM (NOTINLINE |OutputBox;|)) 
 
+(DEFUN |OutputBox;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|OutputBox|))
+          (LETT % (GETREFV 57))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|OutputBox| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |OutputBox| ()
   (SPROG NIL
-         (PROG (#1=#:G113)
+         (PROG (#1=#:G94)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OutputBox|))
@@ -429,18 +441,6 @@
                     (LETT #1# T))
                 (COND
                  ((NOT #1#) (HREM |$ConstructorCache| '|OutputBox|)))))))))) 
-
-(DEFUN |OutputBox;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|OutputBox|))
-          (LETT % (GETREFV 57))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|OutputBox| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|OutputBox| '|infovec|
           (LIST

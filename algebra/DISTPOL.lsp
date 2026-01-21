@@ -53,7 +53,7 @@
           (LETT % (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((#1=#:G21 NIL))
+            (SPROG ((#1=#:G11 NIL))
                    (SPADCALL |x|
                              (SPADCALL |p|
                                        (PROG1 (LETT #1# |k|)
@@ -64,27 +64,6 @@
                              (QREFELT % 23))))))) 
 
 (DECLAIM (NOTINLINE |DistributionPolynomialPackage;|)) 
-
-(DEFUN |DistributionPolynomialPackage| (&REST #1=#:G25)
-  (SPROG NIL
-         (PROG (#2=#:G26)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|DistributionPolynomialPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |DistributionPolynomialPackage;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|DistributionPolynomialPackage|)))))))))) 
 
 (DEFUN |DistributionPolynomialPackage;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
@@ -104,6 +83,27 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |DistributionPolynomialPackage| (&REST #1=#:G15)
+  (SPROG NIL
+         (PROG (#2=#:G16)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|DistributionPolynomialPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |DistributionPolynomialPackage;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|DistributionPolynomialPackage|)))))))))) 
 
 (MAKEPROP '|DistributionPolynomialPackage| '|infovec|
           (LIST

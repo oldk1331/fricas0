@@ -10,12 +10,12 @@
 
 (SDEFUN |IBITS;coerce;%Of;3| ((|v| (%)) (% (|OutputForm|)))
         (SPROG
-         ((#1=#:G23 NIL) (|i| NIL) (|j| NIL) (|s| (|String|))
+         ((#1=#:G16 NIL) (|i| NIL) (|j| NIL) (|s| (|String|))
           (|f| #2=(|Character|)) (|t| #2#))
          (SEQ (LETT |t| (|STR_to_CHAR| "1")) (LETT |f| (|STR_to_CHAR| "0"))
               (LETT |s|
-                    (|make_full_CVEC2| (SPADCALL |v| (QREFELT % 10))
-                                       (SPADCALL (QREFELT % 12))))
+                    (|make_string_code| (SPADCALL |v| (QREFELT % 10))
+                                        (SPADCALL (QREFELT % 12))))
               (SEQ (LETT |j| (QREFELT % 6))
                    (LETT |i| (SPADCALL |s| (QREFELT % 14)))
                    (LETT #1# (SPADCALL |s| (QREFELT % 15))) G190
@@ -102,24 +102,8 @@
 
 (DECLAIM (NOTINLINE |IndexedBits;|)) 
 
-(DEFUN |IndexedBits| (#1=#:G62)
-  (SPROG NIL
-         (PROG (#2=#:G63)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|IndexedBits|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|IndexedBits;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|IndexedBits|)))))))))) 
-
 (DEFUN |IndexedBits;| (|#1|)
-  (SPROG ((#1=#:G61 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((#1=#:G50 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT |dv$| (LIST '|IndexedBits| DV$1))
@@ -167,6 +151,22 @@
                (|augmentPredVector| % 4096))
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |IndexedBits| (#1=#:G51)
+  (SPROG NIL
+         (PROG (#2=#:G52)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|IndexedBits|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|IndexedBits;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|IndexedBits|)))))))))) 
 
 (MAKEPROP '|IndexedBits| '|infovec|
           (LIST

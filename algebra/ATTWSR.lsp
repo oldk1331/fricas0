@@ -7,6 +7,6 @@
   (COND (|TwoSidedRecip;AL|) (T (SETQ |TwoSidedRecip;AL| (|TwoSidedRecip;|))))) 
 
 (DEFUN |TwoSidedRecip;| ()
-  (SPROG ((#1=#:G1 NIL))
+  (SPROG ((#1=#:G0 NIL))
          (PROG1 (LETT #1# (|Join| (|mkCategory| NIL NIL NIL NIL)))
            (SETELT #1# 0 '(|TwoSidedRecip|))))) 

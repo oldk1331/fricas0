@@ -1,7 +1,7 @@
 
 (SDEFUN |RATFACT;factor;RPF;1| ((|p| (RP)) (% (|Factored| RP)))
         (SPROG
-         ((#1=#:G42 NIL) (|u| NIL) (#2=#:G41 NIL)
+         ((#1=#:G19 NIL) (|u| NIL) (#2=#:G18 NIL)
           (|ffact|
            (|Record| (|:| |contp| (|Integer|))
                      (|:| |factors|
@@ -11,7 +11,7 @@
                                  (|SparseUnivariatePolynomial| (|Integer|)))
                             (|:| |pow| (|NonNegativeInteger|)))))))
           (|ipol| (|SparseUnivariatePolynomial| (|Integer|))) (|pol| (RP))
-          (|pden| (|Integer|)) (#3=#:G40 NIL) (|c| NIL) (#4=#:G39 NIL))
+          (|pden| (|Integer|)) (#3=#:G17 NIL) (|c| NIL) (#4=#:G16 NIL))
          (SEQ
           (COND
            ((SPADCALL |p| (|spadConstant| % 7) (QREFELT % 11))
@@ -62,7 +62,7 @@
 
 (SDEFUN |RATFACT;factorSquareFree;RPF;2| ((|p| (RP)) (% (|Factored| RP)))
         (SPROG
-         ((#1=#:G62 NIL) (|u| NIL) (#2=#:G61 NIL)
+         ((#1=#:G39 NIL) (|u| NIL) (#2=#:G38 NIL)
           (|ffact|
            (|Record| (|:| |contp| (|Integer|))
                      (|:| |factors|
@@ -72,7 +72,7 @@
                                  (|SparseUnivariatePolynomial| (|Integer|)))
                             (|:| |pow| (|NonNegativeInteger|)))))))
           (|ipol| (|SparseUnivariatePolynomial| (|Integer|))) (|pol| (RP))
-          (|pden| (|Integer|)) (#3=#:G60 NIL) (|c| NIL) (#4=#:G59 NIL))
+          (|pden| (|Integer|)) (#3=#:G37 NIL) (|c| NIL) (#4=#:G36 NIL))
          (SEQ
           (COND
            ((SPADCALL |p| (|spadConstant| % 7) (QREFELT % 11))
@@ -123,23 +123,6 @@
 
 (DECLAIM (NOTINLINE |RationalFactorize;|)) 
 
-(DEFUN |RationalFactorize| (#1=#:G63)
-  (SPROG NIL
-         (PROG (#2=#:G64)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|RationalFactorize|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|RationalFactorize;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|RationalFactorize|)))))))))) 
-
 (DEFUN |RationalFactorize;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -154,6 +137,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |RationalFactorize| (#1=#:G40)
+  (SPROG NIL
+         (PROG (#2=#:G41)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|RationalFactorize|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|RationalFactorize;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|RationalFactorize|)))))))))) 
 
 (MAKEPROP '|RationalFactorize| '|infovec|
           (LIST

@@ -21,7 +21,7 @@
            (PROGN
             (SPROG
              ((|x| NIL) (|c| NIL) (|y| NIL) (|ll| NIL) (|n| NIL) (|i| NIL)
-              (#1=#:G56 NIL) (#2=#:G55 NIL) (#3=#:G54 NIL) (|res| NIL)
+              (#1=#:G44 NIL) (#2=#:G43 NIL) (#3=#:G42 NIL) (|res| NIL)
               (|llp| NIL) (|xp| NIL))
              (SEQ
               (EXIT
@@ -34,7 +34,7 @@
                             (SPADCALL |x| (QREFELT % 10)))
                         (PROGN
                          (LETT #2# (SPADCALL (QREFELT % 8)))
-                         (GO #4=#:G53)))
+                         (GO #4=#:G41)))
                        ('T (LETT |x| (SPADCALL |x| (QREFELT % 15))))))
                      ('T
                       (SEQ (LETT |c| (SPADCALL |y| (QREFELT % 16)))
@@ -60,7 +60,7 @@
                                  (PROGN
                                   (LETT #2# (SPADCALL (QREFELT % 8)))
                                   (GO #4#)))
-                                ('T (PROGN (LETT #3# 1) (GO #5=#:G49)))))
+                                ('T (PROGN (LETT #3# 1) (GO #5=#:G37)))))
                               ('T
                                (SEQ
                                 (LETT |res|
@@ -190,9 +190,24 @@
 
 (DECLAIM (NOTINLINE |StreamExponentialSeriesOperations;|)) 
 
-(DEFUN |StreamExponentialSeriesOperations| (#1=#:G80)
+(DEFUN |StreamExponentialSeriesOperations;| (|#1|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT |dv$| (LIST '|StreamExponentialSeriesOperations| DV$1))
+          (LETT % (GETREFV 52))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|StreamExponentialSeriesOperations|
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |StreamExponentialSeriesOperations| (#1=#:G68)
   (SPROG NIL
-         (PROG (#2=#:G81)
+         (PROG (#2=#:G69)
            (RETURN
             (COND
              ((LETT #2#
@@ -209,21 +224,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|StreamExponentialSeriesOperations|)))))))))) 
-
-(DEFUN |StreamExponentialSeriesOperations;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT |dv$| (LIST '|StreamExponentialSeriesOperations| DV$1))
-          (LETT % (GETREFV 52))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|StreamExponentialSeriesOperations|
-                      (LIST DV$1) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|StreamExponentialSeriesOperations| '|infovec|
           (LIST

@@ -44,25 +44,6 @@
 
 (DECLAIM (NOTINLINE |InnerCommonDenominator;|)) 
 
-(DEFUN |InnerCommonDenominator| (&REST #1=#:G28)
-  (SPROG NIL
-         (PROG (#2=#:G29)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|InnerCommonDenominator|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |InnerCommonDenominator;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|InnerCommonDenominator|)))))))))) 
-
 (DEFUN |InnerCommonDenominator;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -92,6 +73,25 @@
       (QSETREFV % 10
                 (CONS (|dispatchFunction| |ICDEN;commonDenominator;BR;4|) %))))
     %))) 
+
+(DEFUN |InnerCommonDenominator| (&REST #1=#:G18)
+  (SPROG NIL
+         (PROG (#2=#:G19)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|InnerCommonDenominator|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |InnerCommonDenominator;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|InnerCommonDenominator|)))))))))) 
 
 (MAKEPROP '|InnerCommonDenominator| '|infovec|
           (LIST

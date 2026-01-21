@@ -73,31 +73,8 @@
 
 (DECLAIM (NOTINLINE |DistributionContinuedFractionPackage;|)) 
 
-(DEFUN |DistributionContinuedFractionPackage| (&REST #1=#:G26)
-  (SPROG NIL
-         (PROG (#2=#:G27)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|DistributionContinuedFractionPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function| |DistributionContinuedFractionPackage;|)
-                       #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|DistributionContinuedFractionPackage|)))))))))) 
-
 (DEFUN |DistributionContinuedFractionPackage;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (#1=#:G25 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (#1=#:G10 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 |#2|)
@@ -136,6 +113,29 @@
                         |DSTCFPG;JContinuedFraction;DUpCf;2|)
                        %))))
           %))) 
+
+(DEFUN |DistributionContinuedFractionPackage| (&REST #1=#:G11)
+  (SPROG NIL
+         (PROG (#2=#:G12)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|DistributionContinuedFractionPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function| |DistributionContinuedFractionPackage;|)
+                       #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|DistributionContinuedFractionPackage|)))))))))) 
 
 (MAKEPROP '|DistributionContinuedFractionPackage| '|infovec|
           (LIST

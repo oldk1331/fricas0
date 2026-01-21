@@ -106,7 +106,7 @@
         ((|n| (|Integer|)) (% (|List| (|List| (|DoubleFloat|)))))
         (SPROG
          ((|ans| (|List| (|List| (|DoubleFloat|)))) (|angle| (|DoubleFloat|))
-          (#1=#:G44 NIL) (|i| NIL) (|theta| (|DoubleFloat|)))
+          (#1=#:G25 NIL) (|i| NIL) (|theta| (|DoubleFloat|)))
          (SEQ (LETT |ans| NIL)
               (LETT |theta|
                     (|div_DF_I|
@@ -160,9 +160,21 @@
 
 (DECLAIM (NOTINLINE |TubePlotTools;|)) 
 
+(DEFUN |TubePlotTools;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|TubePlotTools|))
+          (LETT % (GETREFV 36))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|TubePlotTools| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |TubePlotTools| ()
   (SPROG NIL
-         (PROG (#1=#:G54)
+         (PROG (#1=#:G33)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|TubePlotTools|))
@@ -176,18 +188,6 @@
                     (LETT #1# T))
                 (COND
                  ((NOT #1#) (HREM |$ConstructorCache| '|TubePlotTools|)))))))))) 
-
-(DEFUN |TubePlotTools;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|TubePlotTools|))
-          (LETT % (GETREFV 36))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|TubePlotTools| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|TubePlotTools| '|infovec|
           (LIST

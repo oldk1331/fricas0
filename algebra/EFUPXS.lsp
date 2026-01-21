@@ -576,30 +576,6 @@
 
 (DECLAIM (NOTINLINE |ElementaryFunctionsUnivariatePuiseuxSeries;|)) 
 
-(DEFUN |ElementaryFunctionsUnivariatePuiseuxSeries| (&REST #1=#:G411)
-  (SPROG NIL
-         (PROG (#2=#:G412)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ElementaryFunctionsUnivariatePuiseuxSeries|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function|
-                        |ElementaryFunctionsUnivariatePuiseuxSeries;|)
-                       #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|ElementaryFunctionsUnivariatePuiseuxSeries|)))))))))) 
-
 (DEFUN |ElementaryFunctionsUnivariatePuiseuxSeries;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -633,6 +609,30 @@
      ((|testBitVector| |pv$| 1)
       (QSETREFV % 40 (CONS (|dispatchFunction| |EFUPXS;^;UPXSFUPXS;2|) %))))
     %))) 
+
+(DEFUN |ElementaryFunctionsUnivariatePuiseuxSeries| (&REST #1=#:G399)
+  (SPROG NIL
+         (PROG (#2=#:G400)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ElementaryFunctionsUnivariatePuiseuxSeries|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function|
+                        |ElementaryFunctionsUnivariatePuiseuxSeries;|)
+                       #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|ElementaryFunctionsUnivariatePuiseuxSeries|)))))))))) 
 
 (MAKEPROP '|ElementaryFunctionsUnivariatePuiseuxSeries| '|infovec|
           (LIST

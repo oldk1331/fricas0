@@ -45,17 +45,8 @@ at load time.
 ;;; to the default memory setup to run FriCAS efficiently.
 ;;; This function performs those setup commands.
 #+:GCL
-(defun init-memory-config (&key
-                           (cons 500)
-                           (fixnum 200)
-                           (symbol 500)
-                           (package 8)
-                           (array 400)
-                           (string 500)
-                           (cfun 100)
-                           (cpages 3000)
-                           (rpages 1000)
-                           (hole 2000) )
+(defun init-memory-config (&key cons fixnum symbol package array string
+                            cfun cpages rpages hole)
   ;; initialize GCL memory allocation parameters
   (progn
     (system:allocate 'cons cons)
@@ -70,18 +61,19 @@ at load time.
     (system:set-hole-size hole))
   nil)
 
+#+:GCL
+(defun |resetStackLimits| () (system:reset-stack-limits))
+#-:GCL
+(defun |resetStackLimits| () nil)
+
 #|
 The {\bf build-interpsys} function takes a list of files to load
 into the image ({\bf load-files}).
-Next it takes a set of shell variables, the most important of
-which is the {\bf spad} variable. This is normally set to be the same
-as the final build location. This function is called in the
-src/interp/Makefile.
 
 This function calls {\bf initroot} to set up pathnames we need. Next
 it sets up the lisp system memory (at present only for GCL). Next
 it loads all of the named files, resets a few global state variables,
-loads the databases, sets up autoload triggers and clears out hash tables.
+loads the databases and clears out hash tables.
 After this function is called the image is clean and can be saved.
 |#
 (defun build-interpsys (load-files)
@@ -114,11 +106,12 @@ After this function is called the image is clean and can be saved.
               (if (boundp el)
                   (push (list 'defparameter el (symbol-value el))
                         initforms)))
-          (push `(interpsys-ecl-image-init) initforms)
-          (push `(|fricas_restart|) initforms)
-          (setf initforms (reverse initforms))
-          (push `progn initforms)
-          (setf FRICAS-LISP::*fricas-initial-lisp-forms* initforms)
+          (setf FRICAS-LISP::*fricas-initial-lisp-forms*
+                `(progn
+                   ,@initforms
+                   (interpsys-ecl-image-init)
+                   (|fricas_restart|)
+                   (si:top-level)))
       )
   )
 )
@@ -252,12 +245,9 @@ After this function is called the image is clean and can be saved.
                  (apply cname args))))
 
 (defun |eval|(x)
-    #-:GCL
     (handler-bind ((warning #'muffle-warning)
                    #+:sbcl (sb-ext::compiler-note #'muffle-warning))
             (eval  x))
-    #+:GCL
-    (eval  x)
 )
 
 ;;; For evaluating categories we need to bind %.

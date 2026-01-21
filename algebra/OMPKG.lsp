@@ -46,9 +46,21 @@
 
 (DECLAIM (NOTINLINE |OpenMathPackage;|)) 
 
+(DEFUN |OpenMathPackage;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|OpenMathPackage|))
+          (LETT % (GETREFV 32))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|OpenMathPackage| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |OpenMathPackage| ()
   (SPROG NIL
-         (PROG (#1=#:G25)
+         (PROG (#1=#:G15)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OpenMathPackage|))
@@ -63,18 +75,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|OpenMathPackage|)))))))))) 
-
-(DEFUN |OpenMathPackage;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|OpenMathPackage|))
-          (LETT % (GETREFV 32))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|OpenMathPackage| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|OpenMathPackage| '|infovec|
           (LIST

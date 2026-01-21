@@ -1,6 +1,6 @@
 
 (SDEFUN |EQ;factorAndSplit;%L;1| ((|eq| (%)) (% (|List| %)))
-        (SPROG ((#1=#:G23 NIL) (|rcf| NIL) (#2=#:G22 NIL) (|eq0| (%)))
+        (SPROG ((#1=#:G9 NIL) (|rcf| NIL) (#2=#:G8 NIL) (|eq0| (%)))
                (SEQ
                 (COND
                  ((|HasSignature| (QREFELT % 6)
@@ -232,9 +232,9 @@
 
 (SDEFUN |EQ;factorAndSplit;%L;38| ((|eq| (%)) (% (|List| %)))
         (SPROG
-         ((#1=#:G114 NIL) (|rcf| NIL) (#2=#:G113 NIL)
-          (|p| (|Polynomial| (|Integer|))) (|eq0| (%)) (#3=#:G112 NIL)
-          (#4=#:G111 NIL))
+         ((#1=#:G93 NIL) (|rcf| NIL) (#2=#:G92 NIL)
+          (|p| (|Polynomial| (|Integer|))) (|eq0| (%)) (#3=#:G91 NIL)
+          (#4=#:G90 NIL))
          (SEQ
           (COND
            ((|HasSignature| (QREFELT % 6)
@@ -329,24 +329,9 @@
 
 (DECLAIM (NOTINLINE |Equation;|)) 
 
-(DEFUN |Equation| (#1=#:G131)
-  (SPROG NIL
-         (PROG (#2=#:G132)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|Equation|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Equation;| #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Equation|)))))))))) 
-
 (DEFUN |Equation;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G127 NIL) (#2=#:G128 NIL) (#3=#:G129 NIL) (#4=#:G130 NIL)
+   ((|pv$| NIL) (#1=#:G102 NIL) (#2=#:G103 NIL) (#3=#:G104 NIL) (#4=#:G105 NIL)
     (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -540,6 +525,21 @@
      ((|testBitVector| |pv$| 1)
       (QSETREFV % 96 (CONS (|dispatchFunction| |EQ;convert;%If;43|) %))))
     %))) 
+
+(DEFUN |Equation| (#1=#:G106)
+  (SPROG NIL
+         (PROG (#2=#:G107)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|Equation|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Equation;| #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Equation|)))))))))) 
 
 (MAKEPROP '|Equation| '|infovec|
           (LIST

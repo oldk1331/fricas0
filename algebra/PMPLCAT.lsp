@@ -11,7 +11,7 @@
                      (|PatternMatchResult| S P)))
          (% (|PatternMatchResult| S P)))
         (SPROG
-         ((#1=#:G93 NIL)
+         ((#1=#:G82 NIL)
           (|ex|
            (|Union|
             (|Record| (|:| |var| V) (|:| |exponent| (|NonNegativeInteger|)))
@@ -227,7 +227,7 @@
                                                                   (QCDR |ep|))
                                                                  |l| |vmatch|))
                                                           (GO
-                                                           #5=#:G85))))))))))))
+                                                           #5=#:G74))))))))))))
                                                (EXIT
                                                 (SPADCALL (QREFELT % 41)))))
                                              #5#
@@ -250,8 +250,8 @@
 
 (SDEFUN |PMPLCAT;patternMatch;PPPmrMPmr;2!0| ((|l1| NIL) (% NIL))
         (SPROG
-         ((#1=#:G31 NIL) (#2=#:G30 NIL) (#3=#:G32 NIL) (#4=#:G37 NIL)
-          (#5=#:G1 NIL))
+         ((#1=#:G25 NIL) (#2=#:G24 NIL) (#3=#:G26 NIL) (#4=#:G28 NIL)
+          (#5=#:G0 NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -268,28 +268,6 @@
            (COND (#1# #2#) ('T (|spadConstant| % 31))))))) 
 
 (DECLAIM (NOTINLINE |PatternMatchPolynomialCategory;|)) 
-
-(DEFUN |PatternMatchPolynomialCategory| (&REST #1=#:G94)
-  (SPROG NIL
-         (PROG (#2=#:G95)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PatternMatchPolynomialCategory|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |PatternMatchPolynomialCategory;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|PatternMatchPolynomialCategory|)))))))))) 
 
 (DEFUN |PatternMatchPolynomialCategory;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
@@ -329,6 +307,28 @@
                 (CONS (|dispatchFunction| |PMPLCAT;patternMatch;PP2Pmr;1|)
                       %))))
     %))) 
+
+(DEFUN |PatternMatchPolynomialCategory| (&REST #1=#:G83)
+  (SPROG NIL
+         (PROG (#2=#:G84)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PatternMatchPolynomialCategory|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |PatternMatchPolynomialCategory;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|PatternMatchPolynomialCategory|)))))))))) 
 
 (MAKEPROP '|PatternMatchPolynomialCategory| '|infovec|
           (LIST

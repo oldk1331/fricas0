@@ -13,9 +13,21 @@
 
 (DECLAIM (NOTINLINE |Exit;|)) 
 
+(DEFUN |Exit;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|Exit|))
+          (LETT % (GETREFV 11))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|Exit| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |Exit| ()
   (SPROG NIL
-         (PROG (#1=#:G4)
+         (PROG (#1=#:G3)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Exit|))
@@ -28,18 +40,6 @@
                              (LIST (CONS NIL (CONS 1 (|Exit;|))))))
                     (LETT #1# T))
                 (COND ((NOT #1#) (HREM |$ConstructorCache| '|Exit|)))))))))) 
-
-(DEFUN |Exit;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|Exit|))
-          (LETT % (GETREFV 11))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|Exit| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|Exit| '|infovec|
           (LIST

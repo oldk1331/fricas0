@@ -1,28 +1,9 @@
 
 (DECLAIM (NOTINLINE |UnivariateFormalPowerSeries;|)) 
 
-(DEFUN |UnivariateFormalPowerSeries| (#1=#:G43)
-  (SPROG NIL
-         (PROG (#2=#:G44)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|UnivariateFormalPowerSeries|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|UnivariateFormalPowerSeries;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|UnivariateFormalPowerSeries|)))))))))) 
-
 (DEFUN |UnivariateFormalPowerSeries;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G37 NIL) (#2=#:G38 NIL) (#3=#:G39 NIL) (#4=#:G42 NIL)
+   ((|pv$| NIL) (#1=#:G13 NIL) (#2=#:G14 NIL) (#3=#:G15 NIL) (#4=#:G18 NIL)
     (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -283,6 +264,25 @@
      (|augmentPredVector| % 8589934592))
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |UnivariateFormalPowerSeries| (#1=#:G19)
+  (SPROG NIL
+         (PROG (#2=#:G20)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|UnivariateFormalPowerSeries|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|UnivariateFormalPowerSeries;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|UnivariateFormalPowerSeries|)))))))))) 
 
 (MAKEPROP '|UnivariateFormalPowerSeries| '|infovec|
           (LIST

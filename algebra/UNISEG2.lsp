@@ -18,26 +18,6 @@
 
 (DECLAIM (NOTINLINE |UniversalSegmentFunctions2;|)) 
 
-(DEFUN |UniversalSegmentFunctions2| (&REST #1=#:G7)
-  (SPROG NIL
-         (PROG (#2=#:G8)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|UniversalSegmentFunctions2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |UniversalSegmentFunctions2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|UniversalSegmentFunctions2|)))))))))) 
-
 (DEFUN |UniversalSegmentFunctions2;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -63,6 +43,26 @@
             (QSETREFV % 23
                       (CONS (|dispatchFunction| |UNISEG2;map;MUsS;2|) %))))
           %))) 
+
+(DEFUN |UniversalSegmentFunctions2| (&REST #1=#:G6)
+  (SPROG NIL
+         (PROG (#2=#:G7)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|UniversalSegmentFunctions2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |UniversalSegmentFunctions2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|UniversalSegmentFunctions2|)))))))))) 
 
 (MAKEPROP '|UniversalSegmentFunctions2| '|infovec|
           (LIST

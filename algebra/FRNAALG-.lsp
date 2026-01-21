@@ -4,7 +4,7 @@
          (% (|SparseUnivariatePolynomial| (|Polynomial| R))))
         (SPROG
          ((|res| (|SparseUnivariatePolynomial| (|Polynomial| R)))
-          (#1=#:G43 NIL) (|i| NIL) (|vectorOfCoef| (|Vector| (|Polynomial| R)))
+          (#1=#:G18 NIL) (|i| NIL) (|vectorOfCoef| (|Vector| (|Polynomial| R)))
           (|cond| (|Matrix| (|Polynomial| R))) (|k| (|PositiveInteger|)))
          (SEQ (LETT |k| 1) (LETT |cond| (SPADCALL |x| (QREFELT % 9)))
               (SEQ G190
@@ -37,12 +37,12 @@
         ((|left| (|Boolean|))
          (% (|SparseUnivariatePolynomial| (|Polynomial| R))))
         (SPROG
-         ((|cijk| (R)) (|mxjk| (|Polynomial| R)) (#1=#:G70 NIL) (|k| NIL)
-          (#2=#:G69 NIL) (|j| NIL) (|mo| (|Polynomial| R)) (#3=#:G68 NIL)
+         ((|cijk| (R)) (|mxjk| (|Polynomial| R)) (#1=#:G40 NIL) (|k| NIL)
+          (#2=#:G39 NIL) (|j| NIL) (|mo| (|Polynomial| R)) (#3=#:G38 NIL)
           (|i| NIL) (|mx| #4=(|Matrix| (|Polynomial| R))) (|x| #4#)
-          (|symbolsForCoef| (|Vector| (|Symbol|))) (#5=#:G65 NIL)
-          (#6=#:G67 NIL) (#7=#:G66 NIL) (|listOfNumbers| (|List| (|String|)))
-          (#8=#:G64 NIL) (|q| NIL) (#9=#:G63 NIL)
+          (|symbolsForCoef| (|Vector| (|Symbol|))) (#5=#:G35 NIL)
+          (#6=#:G37 NIL) (#7=#:G36 NIL) (|listOfNumbers| (|List| (|String|)))
+          (#8=#:G34 NIL) (|q| NIL) (#9=#:G33 NIL)
           (|gamma| (|Vector| (|Matrix| R))) (|b| (|Vector| S))
           (|n| (|PositiveInteger|)))
          (SEQ (LETT |n| (SPADCALL (QREFELT % 11)))
@@ -129,8 +129,8 @@
           (|Record| (|:| |particular| (|Union| (|Vector| R) "failed"))
                     (|:| |basis| (|List| (|Vector| R))))))
         (SPROG
-         ((#1=#:G87 NIL) (|j| NIL) (|addOn| (R)) (|z| (|Integer|))
-          (#2=#:G86 NIL) (|i| NIL) (#3=#:G85 NIL) (|k| NIL)
+         ((#1=#:G55 NIL) (|j| NIL) (|addOn| (R)) (|z| (|Integer|))
+          (#2=#:G54 NIL) (|i| NIL) (#3=#:G53 NIL) (|k| NIL)
           (|rhs| (|Vector| R)) (|cond| (|Matrix| R))
           (|gamma| (|Vector| (|Matrix| R))) (|b| (|Vector| S))
           (|n| (|PositiveInteger|)))
@@ -173,65 +173,59 @@
 
 (SDEFUN |FRNAALG-;leftUnit;U;6| ((% (|Union| S "failed")))
         (SPROG
-         ((#1=#:G93 NIL)
+         ((#1=#:G61 NIL)
           (|res|
            (|Record| (|:| |particular| (|Union| (|Vector| R) #2="failed"))
                      (|:| |basis| (|List| (|Vector| R))))))
          (SEQ (LETT |res| (|FRNAALG-;leftUnitsInternal| %))
               (EXIT
-               (COND
-                ((QEQCAR (QCAR |res|) 1)
-                 (SEQ (SPADCALL "this algebra has no left unit" (QREFELT % 60))
-                      (EXIT (CONS 1 "failed"))))
-                ('T
-                 (CONS 0
-                       (SPADCALL
-                        (PROG2 (LETT #1# (QCAR |res|))
-                            (QCDR #1#)
-                          (|check_union2| (QEQCAR #1# 0)
-                                          (|Vector| (QREFELT % 7))
-                                          (|Union| (|Vector| (QREFELT % 7))
-                                                   #2#)
-                                          #1#))
-                        (QREFELT % 61))))))))) 
+               (COND ((QEQCAR (QCAR |res|) 1) (CONS 1 "failed"))
+                     ('T
+                      (CONS 0
+                            (SPADCALL
+                             (PROG2 (LETT #1# (QCAR |res|))
+                                 (QCDR #1#)
+                               (|check_union2| (QEQCAR #1# 0)
+                                               (|Vector| (QREFELT % 7))
+                                               (|Union|
+                                                (|Vector| (QREFELT % 7)) #2#)
+                                               #1#))
+                             (QREFELT % 58))))))))) 
 
 (SDEFUN |FRNAALG-;leftUnits;U;7|
         ((%
           (|Union| (|Record| (|:| |particular| S) (|:| |basis| (|List| S)))
                    "failed")))
         (SPROG
-         ((#1=#:G107 NIL)
+         ((#1=#:G74 NIL)
           (|res|
            (|Record| (|:| |particular| (|Union| (|Vector| R) #2="failed"))
                      (|:| |basis| (|List| (|Vector| R))))))
          (SEQ (LETT |res| (|FRNAALG-;leftUnitsInternal| %))
               (EXIT
-               (COND
-                ((QEQCAR (QCAR |res|) 1)
-                 (SEQ (SPADCALL "this algebra has no left unit" (QREFELT % 60))
-                      (EXIT (CONS 1 "failed"))))
-                ('T
-                 (CONS 0
-                       (CONS
-                        (SPADCALL
-                         (PROG2 (LETT #1# (QCAR |res|))
-                             (QCDR #1#)
-                           (|check_union2| (QEQCAR #1# 0)
-                                           (|Vector| (QREFELT % 7))
-                                           (|Union| (|Vector| (QREFELT % 7))
-                                                    #2#)
-                                           #1#))
-                         (QREFELT % 61))
-                        (SPADCALL (ELT % 61) (QCDR |res|)
-                                  (QREFELT % 68)))))))))) 
+               (COND ((QEQCAR (QCAR |res|) 1) (CONS 1 "failed"))
+                     ('T
+                      (CONS 0
+                            (CONS
+                             (SPADCALL
+                              (PROG2 (LETT #1# (QCAR |res|))
+                                  (QCDR #1#)
+                                (|check_union2| (QEQCAR #1# 0)
+                                                (|Vector| (QREFELT % 7))
+                                                (|Union|
+                                                 (|Vector| (QREFELT % 7)) #2#)
+                                                #1#))
+                              (QREFELT % 58))
+                             (SPADCALL (ELT % 58) (QCDR |res|)
+                                       (QREFELT % 65)))))))))) 
 
 (SDEFUN |FRNAALG-;rightUnitsInternal|
         ((%
           (|Record| (|:| |particular| (|Union| (|Vector| R) "failed"))
                     (|:| |basis| (|List| (|Vector| R))))))
         (SPROG
-         ((#1=#:G129 NIL) (|j| NIL) (|addOn| (R)) (|z| (|Integer|))
-          (#2=#:G128 NIL) (|i| NIL) (#3=#:G127 NIL) (|k| NIL)
+         ((#1=#:G95 NIL) (|j| NIL) (|addOn| (R)) (|z| (|Integer|))
+          (#2=#:G94 NIL) (|i| NIL) (#3=#:G93 NIL) (|k| NIL)
           (|rhs| (|Vector| R)) (|condo| (|Matrix| R))
           (|gamma| (|Vector| (|Matrix| R))) (|b| (|Vector| S))
           (|n| (|PositiveInteger|)))
@@ -274,65 +268,57 @@
 
 (SDEFUN |FRNAALG-;rightUnit;U;9| ((% (|Union| S "failed")))
         (SPROG
-         ((#1=#:G135 NIL)
+         ((#1=#:G101 NIL)
           (|res|
            (|Record| (|:| |particular| (|Union| (|Vector| R) #2="failed"))
                      (|:| |basis| (|List| (|Vector| R))))))
          (SEQ (LETT |res| (|FRNAALG-;rightUnitsInternal| %))
               (EXIT
-               (COND
-                ((QEQCAR (QCAR |res|) 1)
-                 (SEQ
-                  (SPADCALL "this algebra has no right unit" (QREFELT % 60))
-                  (EXIT (CONS 1 "failed"))))
-                ('T
-                 (CONS 0
-                       (SPADCALL
-                        (PROG2 (LETT #1# (QCAR |res|))
-                            (QCDR #1#)
-                          (|check_union2| (QEQCAR #1# 0)
-                                          (|Vector| (QREFELT % 7))
-                                          (|Union| (|Vector| (QREFELT % 7))
-                                                   #2#)
-                                          #1#))
-                        (QREFELT % 61))))))))) 
+               (COND ((QEQCAR (QCAR |res|) 1) (CONS 1 "failed"))
+                     ('T
+                      (CONS 0
+                            (SPADCALL
+                             (PROG2 (LETT #1# (QCAR |res|))
+                                 (QCDR #1#)
+                               (|check_union2| (QEQCAR #1# 0)
+                                               (|Vector| (QREFELT % 7))
+                                               (|Union|
+                                                (|Vector| (QREFELT % 7)) #2#)
+                                               #1#))
+                             (QREFELT % 58))))))))) 
 
 (SDEFUN |FRNAALG-;rightUnits;U;10|
         ((%
           (|Union| (|Record| (|:| |particular| S) (|:| |basis| (|List| S)))
                    "failed")))
         (SPROG
-         ((#1=#:G146 NIL)
+         ((#1=#:G111 NIL)
           (|res|
            (|Record| (|:| |particular| (|Union| (|Vector| R) #2="failed"))
                      (|:| |basis| (|List| (|Vector| R))))))
          (SEQ (LETT |res| (|FRNAALG-;rightUnitsInternal| %))
               (EXIT
-               (COND
-                ((QEQCAR (QCAR |res|) 1)
-                 (SEQ
-                  (SPADCALL "this algebra has no right unit" (QREFELT % 60))
-                  (EXIT (CONS 1 "failed"))))
-                ('T
-                 (CONS 0
-                       (CONS
-                        (SPADCALL
-                         (PROG2 (LETT #1# (QCAR |res|))
-                             (QCDR #1#)
-                           (|check_union2| (QEQCAR #1# 0)
-                                           (|Vector| (QREFELT % 7))
-                                           (|Union| (|Vector| (QREFELT % 7))
-                                                    #2#)
-                                           #1#))
-                         (QREFELT % 61))
-                        (SPADCALL (ELT % 61) (QCDR |res|)
-                                  (QREFELT % 68)))))))))) 
+               (COND ((QEQCAR (QCAR |res|) 1) (CONS 1 "failed"))
+                     ('T
+                      (CONS 0
+                            (CONS
+                             (SPADCALL
+                              (PROG2 (LETT #1# (QCAR |res|))
+                                  (QCDR #1#)
+                                (|check_union2| (QEQCAR #1# 0)
+                                                (|Vector| (QREFELT % 7))
+                                                (|Union|
+                                                 (|Vector| (QREFELT % 7)) #2#)
+                                                #1#))
+                              (QREFELT % 58))
+                             (SPADCALL (ELT % 58) (QCDR |res|)
+                                       (QREFELT % 65)))))))))) 
 
 (SDEFUN |FRNAALG-;unit;U;11| ((% (|Union| S "failed")))
         (SPROG
-         ((|res| (|Union| (|Vector| R) "failed")) (#1=#:G171 NIL) (|j| NIL)
-          (|addOn| (R)) (|z| (|Integer|)) (#2=#:G170 NIL) (|i| NIL)
-          (#3=#:G169 NIL) (|k| NIL) (|u| (|Integer|)) (|rhs| (|Vector| R))
+         ((|res| (|Union| (|Vector| R) "failed")) (#1=#:G134 NIL) (|j| NIL)
+          (|addOn| (R)) (|z| (|Integer|)) (#2=#:G133 NIL) (|i| NIL)
+          (#3=#:G132 NIL) (|k| NIL) (|u| (|Integer|)) (|rhs| (|Vector| R))
           (|cond| (|Matrix| R)) (|gamma| (|Vector| (|Matrix| R)))
           (|b| (|Vector| S)) (|n| (|PositiveInteger|)))
          (SEQ (LETT |n| (SPADCALL (QREFELT % 11)))
@@ -379,51 +365,48 @@
                           (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                           (EXIT NIL))))
                    (LETT |k| (|inc_SI| |k|)) (GO G190) G191 (EXIT NIL))
-              (LETT |res| (SPADCALL |cond| |rhs| (QREFELT % 75)))
+              (LETT |res| (SPADCALL |cond| |rhs| (QREFELT % 72)))
               (EXIT
-               (COND
-                ((QEQCAR |res| 1)
-                 (SEQ (SPADCALL "this algebra has no unit" (QREFELT % 60))
-                      (EXIT (CONS 1 "failed"))))
-                ('T (CONS 0 (SPADCALL (QCDR |res|) (QREFELT % 61))))))))) 
+               (COND ((QEQCAR |res| 1) (CONS 1 "failed"))
+                     ('T (CONS 0 (SPADCALL (QCDR |res|) (QREFELT % 58))))))))) 
 
 (SDEFUN |FRNAALG-;apply;M2S;12| ((|m| (|Matrix| R)) (|a| (S)) (% (S)))
         (SPROG ((|v| (|Vector| R)))
-               (SEQ (LETT |v| (SPADCALL |a| (QREFELT % 77)))
-                    (LETT |v| (SPADCALL |m| |v| (QREFELT % 78)))
-                    (EXIT (SPADCALL |v| (QREFELT % 79)))))) 
+               (SEQ (LETT |v| (SPADCALL |a| (QREFELT % 74)))
+                    (LETT |v| (SPADCALL |m| |v| (QREFELT % 75)))
+                    (EXIT (SPADCALL |v| (QREFELT % 76)))))) 
 
 (SDEFUN |FRNAALG-;structuralConstants;V;13| ((% (|Vector| (|Matrix| R))))
         (SPADCALL (SPADCALL (QREFELT % 29)) (QREFELT % 31))) 
 
 (SDEFUN |FRNAALG-;conditionsForIdempotents;L;14|
         ((% (|List| (|Polynomial| R))))
-        (SPADCALL (SPADCALL (QREFELT % 29)) (QREFELT % 83))) 
+        (SPADCALL (SPADCALL (QREFELT % 29)) (QREFELT % 80))) 
 
 (SDEFUN |FRNAALG-;leftTraceMatrix;M;15| ((% (|Matrix| R)))
-        (SPADCALL (SPADCALL (QREFELT % 29)) (QREFELT % 85))) 
+        (SPADCALL (SPADCALL (QREFELT % 29)) (QREFELT % 82))) 
 
 (SDEFUN |FRNAALG-;rightTraceMatrix;M;16| ((% (|Matrix| R)))
-        (SPADCALL (SPADCALL (QREFELT % 29)) (QREFELT % 87))) 
+        (SPADCALL (SPADCALL (QREFELT % 29)) (QREFELT % 84))) 
 
 (SDEFUN |FRNAALG-;leftDiscriminant;R;17| ((% (R)))
-        (SPADCALL (SPADCALL (QREFELT % 29)) (QREFELT % 89))) 
+        (SPADCALL (SPADCALL (QREFELT % 29)) (QREFELT % 86))) 
 
 (SDEFUN |FRNAALG-;rightDiscriminant;R;18| ((% (R)))
-        (SPADCALL (SPADCALL (QREFELT % 29)) (QREFELT % 91))) 
+        (SPADCALL (SPADCALL (QREFELT % 29)) (QREFELT % 88))) 
 
 (SDEFUN |FRNAALG-;leftRegularRepresentation;SM;19| ((|x| (S)) (% (|Matrix| R)))
-        (SPADCALL |x| (SPADCALL (QREFELT % 29)) (QREFELT % 93))) 
+        (SPADCALL |x| (SPADCALL (QREFELT % 29)) (QREFELT % 90))) 
 
 (SDEFUN |FRNAALG-;rightRegularRepresentation;SM;20|
         ((|x| (S)) (% (|Matrix| R)))
-        (SPADCALL |x| (SPADCALL (QREFELT % 29)) (QREFELT % 95))) 
+        (SPADCALL |x| (SPADCALL (QREFELT % 29)) (QREFELT % 92))) 
 
 (SDEFUN |FRNAALG-;coordinates;SV;21| ((|x| (S)) (% (|Vector| R)))
-        (SPADCALL |x| (SPADCALL (QREFELT % 29)) (QREFELT % 97))) 
+        (SPADCALL |x| (SPADCALL (QREFELT % 29)) (QREFELT % 94))) 
 
 (SDEFUN |FRNAALG-;represents;VS;22| ((|v| (|Vector| R)) (% (S)))
-        (SPADCALL |v| (SPADCALL (QREFELT % 29)) (QREFELT % 99))) 
+        (SPADCALL |v| (SPADCALL (QREFELT % 29)) (QREFELT % 96))) 
 
 (DECLAIM (NOTINLINE |FramedNonAssociativeAlgebra&;|)) 
 
@@ -433,7 +416,7 @@
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$| (LIST '|FramedNonAssociativeAlgebra&| DV$1 DV$2))
-          (LETT % (GETREFV 101))
+          (LETT % (GETREFV 98))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3
                     (LETT |pv$|
@@ -459,20 +442,20 @@
                          |FRNAALG-;rightRankPolynomial;Sup;4|)
                         %))
              NIL
-             (QSETREFV % 63
+             (QSETREFV % 60
                        (CONS (|dispatchFunction| |FRNAALG-;leftUnit;U;6|) %))
-             (QSETREFV % 71
+             (QSETREFV % 68
                        (CONS (|dispatchFunction| |FRNAALG-;leftUnits;U;7|) %))
              NIL
-             (QSETREFV % 72
+             (QSETREFV % 69
                        (CONS (|dispatchFunction| |FRNAALG-;rightUnit;U;9|) %))
-             (QSETREFV % 73
+             (QSETREFV % 70
                        (CONS (|dispatchFunction| |FRNAALG-;rightUnits;U;10|)
                              %)))))
           (COND
            ((|HasCategory| |#2| '(|IntegralDomain|))
             (PROGN
-             (QSETREFV % 76
+             (QSETREFV % 73
                        (CONS (|dispatchFunction| |FRNAALG-;unit;U;11|) %)))))
           %))) 
 
@@ -492,37 +475,36 @@
               (117 . *) (123 . +) (129 . |leftRankPolynomial|)
               (133 . |rightRankPolynomial|) (|Vector| 7) (137 . |setelt!|)
               (144 . |setelt!|) (|Union| 51 '"failed")
-              (|Record| (|:| |particular| 54) (|:| |basis| 66))
-              (|LinearSystemMatrixPackage| 7 51 51 44) (152 . |solve|) (|Void|)
-              (|OutputForm|) (158 . |messagePrint|) (163 . |represents|)
-              (|Union| % '#1="failed") (168 . |leftUnit|) (|List| 6)
-              (|Mapping| 6 51) (|List| 51) (|ListFunctions2| 51 6)
-              (172 . |map|)
+              (|Record| (|:| |particular| 54) (|:| |basis| 63))
+              (|LinearSystemMatrixPackage| 7 51 51 44) (152 . |solve|)
+              (158 . |represents|) (|Union| % '#1="failed") (163 . |leftUnit|)
+              (|List| 6) (|Mapping| 6 51) (|List| 51) (|ListFunctions2| 51 6)
+              (167 . |map|)
               (|Record| (|:| |particular| %) (|:| |basis| (|List| %)))
-              (|Union| 69 '#1#) (178 . |leftUnits|) (182 . |rightUnit|)
-              (186 . |rightUnits|) (|LinearSystemMatrixPackage2| 7)
-              (190 . |solveUniquely|) (196 . |unit|) (200 . |coordinates|)
-              (205 . *) (211 . |convert|) |FRNAALG-;apply;M2S;12|
+              (|Union| 66 '#1#) (173 . |leftUnits|) (177 . |rightUnit|)
+              (181 . |rightUnits|) (|LinearSystemMatrixPackage2| 7)
+              (185 . |solveUniquely|) (191 . |unit|) (195 . |coordinates|)
+              (200 . *) (206 . |convert|) |FRNAALG-;apply;M2S;12|
               |FRNAALG-;structuralConstants;V;13| (|List| 22)
-              (216 . |conditionsForIdempotents|)
+              (211 . |conditionsForIdempotents|)
               |FRNAALG-;conditionsForIdempotents;L;14|
-              (221 . |leftTraceMatrix|) |FRNAALG-;leftTraceMatrix;M;15|
-              (226 . |rightTraceMatrix|) |FRNAALG-;rightTraceMatrix;M;16|
-              (231 . |leftDiscriminant|) |FRNAALG-;leftDiscriminant;R;17|
-              (236 . |rightDiscriminant|) |FRNAALG-;rightDiscriminant;R;18|
-              (241 . |leftRegularRepresentation|)
+              (216 . |leftTraceMatrix|) |FRNAALG-;leftTraceMatrix;M;15|
+              (221 . |rightTraceMatrix|) |FRNAALG-;rightTraceMatrix;M;16|
+              (226 . |leftDiscriminant|) |FRNAALG-;leftDiscriminant;R;17|
+              (231 . |rightDiscriminant|) |FRNAALG-;rightDiscriminant;R;18|
+              (236 . |leftRegularRepresentation|)
               |FRNAALG-;leftRegularRepresentation;SM;19|
-              (247 . |rightRegularRepresentation|)
-              |FRNAALG-;rightRegularRepresentation;SM;20| (253 . |coordinates|)
-              |FRNAALG-;coordinates;SV;21| (259 . |represents|)
+              (242 . |rightRegularRepresentation|)
+              |FRNAALG-;rightRegularRepresentation;SM;20| (248 . |coordinates|)
+              |FRNAALG-;coordinates;SV;21| (254 . |represents|)
               |FRNAALG-;represents;VS;22|)
-           '#(|unit| 265 |structuralConstants| 269 |rightUnits| 273 |rightUnit|
-              277 |rightTraceMatrix| 281 |rightRegularRepresentation| 285
-              |rightRankPolynomial| 290 |rightDiscriminant| 294 |represents|
-              298 |leftUnits| 303 |leftUnit| 307 |leftTraceMatrix| 311
-              |leftRegularRepresentation| 315 |leftRankPolynomial| 320
-              |leftDiscriminant| 324 |coordinates| 328
-              |conditionsForIdempotents| 333 |apply| 337)
+           '#(|unit| 260 |structuralConstants| 264 |rightUnits| 268 |rightUnit|
+              272 |rightTraceMatrix| 276 |rightRegularRepresentation| 280
+              |rightRankPolynomial| 285 |rightDiscriminant| 289 |represents|
+              293 |leftUnits| 298 |leftUnit| 302 |leftTraceMatrix| 306
+              |leftRegularRepresentation| 310 |leftRankPolynomial| 315
+              |leftDiscriminant| 319 |coordinates| 323
+              |conditionsForIdempotents| 328 |apply| 332)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -611,7 +593,7 @@
                                        (|Vector| |#1|)))
                                      T))
                              (LIST) NIL NIL)))
-                        (|makeByteWordVec2| 100
+                        (|makeByteWordVec2| 97
                                             '(1 8 0 0 9 0 6 10 11 1 8 12 0 13 0
                                               7 0 14 0 15 0 16 2 8 0 0 0 17 2 8
                                               0 0 0 18 1 8 19 0 20 0 15 0 21 2
@@ -623,19 +605,19 @@
                                               23 45 3 44 7 0 23 23 46 2 22 0 0
                                               7 47 2 22 0 0 0 48 0 0 15 49 0 0
                                               15 50 3 51 7 0 23 7 52 4 44 7 0
-                                              23 23 7 53 2 56 55 44 51 57 1 59
-                                              58 32 60 1 6 0 51 61 0 0 62 63 2
-                                              67 64 65 66 68 0 0 70 71 0 0 62
-                                              72 0 0 70 73 2 74 54 44 51 75 0 0
-                                              62 76 1 6 51 0 77 2 44 51 0 51 78
-                                              1 6 0 51 79 1 6 82 28 83 1 6 44
-                                              28 85 1 6 44 28 87 1 6 7 28 89 1
-                                              6 7 28 91 2 6 44 0 28 93 2 6 44 0
-                                              28 95 2 6 51 0 28 97 2 6 0 51 28
-                                              99 0 0 62 76 0 0 30 81 0 0 70 73
-                                              0 0 62 72 0 0 44 88 1 0 44 0 96 0
-                                              0 15 50 0 0 7 92 1 0 0 51 100 0 0
-                                              70 71 0 0 62 63 0 0 44 86 1 0 44
-                                              0 94 0 0 15 49 0 0 7 90 1 0 51 0
-                                              98 0 0 82 84 2 0 0 44 0 80)))))
+                                              23 23 7 53 2 56 55 44 51 57 1 6 0
+                                              51 58 0 0 59 60 2 64 61 62 63 65
+                                              0 0 67 68 0 0 59 69 0 0 67 70 2
+                                              71 54 44 51 72 0 0 59 73 1 6 51 0
+                                              74 2 44 51 0 51 75 1 6 0 51 76 1
+                                              6 79 28 80 1 6 44 28 82 1 6 44 28
+                                              84 1 6 7 28 86 1 6 7 28 88 2 6 44
+                                              0 28 90 2 6 44 0 28 92 2 6 51 0
+                                              28 94 2 6 0 51 28 96 0 0 59 73 0
+                                              0 30 78 0 0 67 70 0 0 59 69 0 0
+                                              44 85 1 0 44 0 93 0 0 15 50 0 0 7
+                                              89 1 0 0 51 97 0 0 67 68 0 0 59
+                                              60 0 0 44 83 1 0 44 0 91 0 0 15
+                                              49 0 0 7 87 1 0 51 0 95 0 0 79 81
+                                              2 0 0 44 0 77)))))
            '|lookupComplete|)) 

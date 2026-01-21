@@ -40,22 +40,6 @@
 
 (DECLAIM (NOTINLINE |ToolsForSign;|)) 
 
-(DEFUN |ToolsForSign| (#1=#:G44)
-  (SPROG NIL
-         (PROG (#2=#:G45)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|ToolsForSign|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|ToolsForSign;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|ToolsForSign|)))))))))) 
-
 (DEFUN |ToolsForSign;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -85,6 +69,22 @@
             (QSETREFV % 19
                       (CONS (|dispatchFunction| |TOOLSIGN;sign;RU;5|) %))))
           %))) 
+
+(DEFUN |ToolsForSign| (#1=#:G30)
+  (SPROG NIL
+         (PROG (#2=#:G31)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|ToolsForSign|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|ToolsForSign;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|ToolsForSign|)))))))))) 
 
 (MAKEPROP '|ToolsForSign| '|infovec|
           (LIST

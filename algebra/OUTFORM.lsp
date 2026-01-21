@@ -53,7 +53,7 @@
 
 (SDEFUN |OUTFORM;convert;%If;14| ((|a| (%)) (% (|InputForm|)))
         (SPROG
-         ((#1=#:G1690 NIL) (|b| (|SExpression|)) (|d| (|String|))
+         ((#1=#:G1614 NIL) (|b| (|SExpression|)) (|d| (|String|))
           (|l| (|Integer|)) (|c| (|String|)))
          (SEQ
           (EXIT
@@ -94,7 +94,7 @@
                      ((NULL (SPADCALL |b| (QREFELT % 42)))
                       (PROGN
                        (LETT #1# (SPADCALL |b| (QREFELT % 44)))
-                       (GO #2=#:G1689))))))))
+                       (GO #2=#:G1613))))))))
                 (EXIT
                  (SPADCALL
                   (LIST (SPADCALL 'QUOTE (QREFELT % 45))
@@ -141,7 +141,7 @@
 
 (SDEFUN |OUTFORM;hspace;I%;24| ((|n| (|Integer|)) (% (%)))
         (COND ((EQL |n| 0) (SPADCALL (QREFELT % 14)))
-              ('T (|OUTFORM;sform| (|fillerSpaces| |n| " ") %)))) 
+              ('T (|OUTFORM;sform| (|filler_spaces| |n|) %)))) 
 
 (SDEFUN |OUTFORM;rspace;2I%;25| ((|n| (|Integer|)) (|m| (|Integer|)) (% (%)))
         (COND ((OR (EQL |n| 0) (EQL |m| 0)) (SPADCALL (QREFELT % 14)))
@@ -151,7 +151,7 @@
                          (QREFELT % 57))))) 
 
 (SDEFUN |OUTFORM;matrix;L%;26| ((|ll| (|List| (|List| %))) (% (%)))
-        (SPROG ((|lv| (|List| %)) (#1=#:G1709 NIL) (|l| NIL) (#2=#:G1708 NIL))
+        (SPROG ((|lv| (|List| %)) (#1=#:G1633 NIL) (|l| NIL) (#2=#:G1632 NIL))
                (SEQ
                 (COND ((NULL |ll|) (SPADCALL NIL (QREFELT % 59)))
                       ('T
@@ -191,7 +191,7 @@
 (SDEFUN |OUTFORM;blankSeparate;L%;30| ((|l| (|List| %)) (% (%)))
         (SPROG
          ((|l1| (|List| %)) (|l2| (|List| %)) (|uo| (|OutputForm|))
-          (#1=#:G1719 NIL) (|u| NIL) (|c| (%)))
+          (#1=#:G1643 NIL) (|u| NIL) (|c| (%)))
          (SEQ (LETT |c| (|OUTFORM;eform| 'CONCATB %)) (LETT |l1| NIL)
               (SEQ (LETT |u| NIL) (LETT #1# (SPADCALL |l| (QREFELT % 65))) G190
                    (COND
@@ -342,13 +342,13 @@
         (SPADCALL (LIST (|OUTFORM;eform| 'NOTHING %)) (QREFELT % 19))) 
 
 (SDEFUN |OUTFORM;infix?;%B;68| ((|a| (%)) (% (|Boolean|)))
-        (SPROG ((|e| (%)) (#1=#:G1765 NIL))
+        (SPROG ((|e| (%)) (#1=#:G1689 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (LETT |e|
                         (COND ((IDENTP |a|) |a|) ((STRINGP |a|) (INTERN |a|))
-                              (#2='T (PROGN (LETT #1# NIL) (GO #3=#:G1764)))))
+                              (#2='T (PROGN (LETT #1# NIL) (GO #3=#:G1688)))))
                   (EXIT (COND ((GET |e| 'INFIXOP) 'T) (#2# NIL)))))
                 #3# (EXIT #1#)))) 
 
@@ -402,14 +402,14 @@
 (SDEFUN |OUTFORM;dot;%Nni%;79|
         ((|a| (%)) (|nn| (|NonNegativeInteger|)) (% (%)))
         (SPROG ((|s| (|String|)))
-               (SEQ (LETT |s| (|make_full_CVEC2| |nn| (|STR_to_CHAR| ".")))
+               (SEQ (LETT |s| (|make_string_code| |nn| (|STR_to_CHAR| ".")))
                     (EXIT
                      (SPADCALL |a| (|OUTFORM;sform| |s| %) (QREFELT % 78)))))) 
 
 (SDEFUN |OUTFORM;prime;%Nni%;80|
         ((|a| (%)) (|nn| (|NonNegativeInteger|)) (% (%)))
         (SPROG ((|s| (|String|)))
-               (SEQ (LETT |s| (|make_full_CVEC2| |nn| (|STR_to_CHAR| ",")))
+               (SEQ (LETT |s| (|make_string_code| |nn| (|STR_to_CHAR| ",")))
                     (EXIT
                      (|OUTFORM;add_prime| |a| (|OUTFORM;sform| |s| %) %))))) 
 
@@ -445,7 +445,7 @@
 
 (SDEFUN |OUTFORM;differentiate;%Nni%;91|
         ((|a| (%)) (|nn| (|NonNegativeInteger|)) (% (%)))
-        (SPROG ((|s| (|String|)) (|r| (|String|)) (#1=#:G1797 NIL))
+        (SPROG ((|s| (|String|)) (|r| (|String|)) (#1=#:G1721 NIL))
                (SEQ
                 (COND ((ZEROP |nn|) |a|)
                       ((< |nn| 4) (SPADCALL |a| |nn| (QREFELT % 120)))
@@ -507,9 +507,22 @@
 
 (DECLAIM (NOTINLINE |OutputForm;|)) 
 
+(DEFUN |OutputForm;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|OutputForm|))
+          (LETT % (GETREFV 148))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|OutputForm| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 8 (|SExpression|))
+          %))) 
+
 (DEFUN |OutputForm| ()
   (SPROG NIL
-         (PROG (#1=#:G1812)
+         (PROG (#1=#:G1736)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OutputForm|))
@@ -523,19 +536,6 @@
                     (LETT #1# T))
                 (COND
                  ((NOT #1#) (HREM |$ConstructorCache| '|OutputForm|)))))))))) 
-
-(DEFUN |OutputForm;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|OutputForm|))
-          (LETT % (GETREFV 148))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|OutputForm| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 8 (|SExpression|))
-          %))) 
 
 (MAKEPROP '|OutputForm| '|infovec|
           (LIST

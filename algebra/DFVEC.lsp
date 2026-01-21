@@ -55,7 +55,7 @@
         (DSETELT |x| |i| |s|)) 
 
 (SDEFUN |DFVEC;fill!;%Df%;12| ((|x| (%)) (|s| (|DoubleFloat|)) (% (%)))
-        (SPROG ((#1=#:G2689 NIL) (|i| NIL))
+        (SPROG ((#1=#:G2599 NIL) (|i| NIL))
                (SEQ
                 (SEQ (LETT |i| 0) (LETT #1# (|sub_SI| (DLEN |x|) 1)) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -65,28 +65,9 @@
 
 (DECLAIM (NOTINLINE |DoubleFloatVector;|)) 
 
-(DEFUN |DoubleFloatVector| ()
-  (SPROG NIL
-         (PROG (#1=#:G2701)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|DoubleFloatVector|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|DoubleFloatVector|
-                             (LIST
-                              (CONS NIL (CONS 1 (|DoubleFloatVector;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#)
-                  (HREM |$ConstructorCache| '|DoubleFloatVector|)))))))))) 
-
 (DEFUN |DoubleFloatVector;| ()
   (SPROG
-   ((|dv$| NIL) (% NIL) (#1=#:G2699 NIL) (#2=#:G2698 NIL) (#3=#:G2697 NIL)
+   ((|dv$| NIL) (% NIL) (#1=#:G2609 NIL) (#2=#:G2608 NIL) (#3=#:G2607 NIL)
     (|pv$| NIL))
    (PROGN
     (LETT |dv$| '(|DoubleFloatVector|))
@@ -214,6 +195,25 @@
      (|augmentPredVector| % 1073741824))
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |DoubleFloatVector| ()
+  (SPROG NIL
+         (PROG (#1=#:G2611)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|DoubleFloatVector|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|DoubleFloatVector|
+                             (LIST
+                              (CONS NIL (CONS 1 (|DoubleFloatVector;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#)
+                  (HREM |$ConstructorCache| '|DoubleFloatVector|)))))))))) 
 
 (MAKEPROP '|DoubleFloatVector| '|infovec|
           (LIST

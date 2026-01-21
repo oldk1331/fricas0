@@ -8,10 +8,10 @@
         (T (SETQ |JetBundleCategory;AL| (|JetBundleCategory;|))))) 
 
 (DEFUN |JetBundleCategory;| ()
-  (SPROG ((#1=#:G28 NIL))
+  (SPROG ((#1=#:G23 NIL))
          (PROG1
              (LETT #1#
-                   (|subst_in_cat| '(#2=#:G27)
+                   (|subst_in_cat| '(#2=#:G22)
                                    (LIST '(|Expression| (|Integer|)))
                                    (|Join| (|OrderedSet|) (|CoercibleTo| '#2#)
                                            (|mkCategory|

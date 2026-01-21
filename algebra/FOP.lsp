@@ -51,9 +51,23 @@
 
 (DECLAIM (NOTINLINE |FortranOutputStackPackage;|)) 
 
+(DEFUN |FortranOutputStackPackage;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|FortranOutputStackPackage|))
+          (LETT % (GETREFV 29))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|FortranOutputStackPackage| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 8 (SPADCALL (QREFELT % 7)))
+          %))) 
+
 (DEFUN |FortranOutputStackPackage| ()
   (SPROG NIL
-         (PROG (#1=#:G28)
+         (PROG (#1=#:G18)
            (RETURN
             (COND
              ((LETT #1#
@@ -72,20 +86,6 @@
                  ((NOT #1#)
                   (HREM |$ConstructorCache|
                         '|FortranOutputStackPackage|)))))))))) 
-
-(DEFUN |FortranOutputStackPackage;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|FortranOutputStackPackage|))
-          (LETT % (GETREFV 29))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|FortranOutputStackPackage| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 8 (SPADCALL (QREFELT % 7)))
-          %))) 
 
 (MAKEPROP '|FortranOutputStackPackage| '|infovec|
           (LIST

@@ -239,9 +239,21 @@
 
 (DECLAIM (NOTINLINE |ExpressionTubePlot;|)) 
 
+(DEFUN |ExpressionTubePlot;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|ExpressionTubePlot|))
+          (LETT % (GETREFV 47))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|ExpressionTubePlot| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |ExpressionTubePlot| ()
   (SPROG NIL
-         (PROG (#1=#:G75)
+         (PROG (#1=#:G54)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ExpressionTubePlot|))
@@ -257,18 +269,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|ExpressionTubePlot|)))))))))) 
-
-(DEFUN |ExpressionTubePlot;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|ExpressionTubePlot|))
-          (LETT % (GETREFV 47))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|ExpressionTubePlot| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|ExpressionTubePlot| '|infovec|
           (LIST

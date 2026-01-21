@@ -6,7 +6,7 @@
         (SPROG
          ((|res| (|Integer|)) (|l2| #1=(|SingleInteger|)) (|tp| (|Integer|))
           (|l1| (|SingleInteger|)) (|s1| (|SingleInteger|)) (|dig_val| #1#)
-          (#2=#:G33 NIL) (|i| NIL) (#3=#:G32 NIL) (#4=#:G31 NIL)
+          (#2=#:G21 NIL) (|i| NIL) (#3=#:G20 NIL) (#4=#:G19 NIL)
           (|ten7| (|Integer|)) (|ten| #5=(|SingleInteger|)) (|b| #5#))
          (SEQ (LETT |b| 48) (LETT |ten| 10) (LETT |ten7| 10000000)
               (EXIT
@@ -74,10 +74,10 @@
         (SPROG
          ((|res| (|Integer|)) (|j| (|SingleInteger|))
           (|s1| #1=(|SingleInteger|)) (|dig_val| #2=(|SingleInteger|))
-          (#3=#:G53 NIL) (|i| NIL) (#4=#:G52 NIL) (|k| NIL)
+          (#3=#:G41 NIL) (|i| NIL) (#4=#:G40 NIL) (|k| NIL)
           (|ll| #5=(|SingleInteger|)) (|tpl| (|List| #6=(|Integer|)))
           (|l2l| (|List| #1#)) (|tp| #6#) (|ten7| #6#) (|l2| #2#) (|l20| #2#)
-          (#7=#:G51 NIL) (|ten| #5#) (|l1| (|SingleInteger|)) (|l| #5#)
+          (#7=#:G39 NIL) (|ten| #5#) (|l1| (|SingleInteger|)) (|l| #5#)
           (|b| #5#))
          (SEQ (LETT |b| 48) (LETT |l| (QCSIZE |str|))
               (LETT |l1| (|rem_SI| |l| 7)) (LETT |s1| 0) (LETT |ten| 10)
@@ -147,9 +147,21 @@
 
 (DECLAIM (NOTINLINE |ScanningUtilities;|)) 
 
+(DEFUN |ScanningUtilities;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|ScanningUtilities|))
+          (LETT % (GETREFV 11))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|ScanningUtilities| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |ScanningUtilities| ()
   (SPROG NIL
-         (PROG (#1=#:G55)
+         (PROG (#1=#:G43)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ScanningUtilities|))
@@ -165,18 +177,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|ScanningUtilities|)))))))))) 
-
-(DEFUN |ScanningUtilities;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|ScanningUtilities|))
-          (LETT % (GETREFV 11))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|ScanningUtilities| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|ScanningUtilities| '|infovec|
           (LIST

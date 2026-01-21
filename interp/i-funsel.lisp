@@ -2196,7 +2196,6 @@
 ;   else mm := first mmList
 ;   [sig,slot,:.] := mm
 ;   fun :=
-; --+
 ;       $genValue =>
 ;          compiledLookupCheck(opName,sig,evalDomain dom)
 ;       NRTcompileEvalForm(opName, sig, evalDomain dom)
@@ -2511,7 +2510,7 @@
 ;   x := NIL
 ;   for mm in mms repeat
 ;     [sig,:.] := mm
-;     [res, :args] := MSUBSTQ(dc, "%", sig)
+;     [res, :args] := SUBST(dc, "%", sig)
 ;     args ~= args1 => nil
 ;     x := CONS(mm,x)
 ;   if x then x
@@ -2533,7 +2532,7 @@
                   (#1#
                    (PROGN
                     (SETQ |sig| (CAR |mm|))
-                    (SETQ |LETTMP#1| (MSUBSTQ |dc| '% |sig|))
+                    (SETQ |LETTMP#1| (SUBST |dc| '% |sig|))
                     (SETQ |res| (CAR |LETTMP#1|))
                     (SETQ |args| (CDR |LETTMP#1|))
                     (COND ((NOT (EQUAL |args| |args1|)) NIL)
@@ -2640,7 +2639,6 @@
 ;   dcName := first dc
 ;   not MEMQ(dcName,'(Record Union Enumeration)) => NIL
 ;   fun:= NIL
-;  --  cat := constructorCategory dc
 ;   makeFunc := get_oplist_maker(dcName) or
 ;       systemErrorHere '"findFunctionInCategory"
 ;   [funlist, .] := FUNCALL(makeFunc, "%", dc, $CategoryFrame)
@@ -2955,8 +2953,6 @@
 ;       if b='"failed" then return matchMmSigTar(t1, a)
 ;     $Coerce and
 ;       isPartialMode t1 => resolveTM(t2,t1)
-; -- I think this should be true  -SCM
-; --    true
 ;       canCoerceFrom(t2,t1)
 
 (DEFUN |matchMmSigTar| (|t1| |t2|)
@@ -3282,7 +3278,6 @@
 ;
 ;   if $reportBottomUpFlag then
 ;     sayMSG ['%l,:bright '"Remaining General Modemaps"]
-;   --  for mm in havenots for i in 1.. repeat sayModemapWithNumber(mm,i)
 ;
 ;   if havenots then
 ;     [havesNExact,havesNInexact] := exact?(havenots,tar,args1)
@@ -4207,7 +4202,7 @@
 ;     if not mem then haventvars := cons(s,haventvars)
 ;   null havevars => st
 ;   st := nreverse nconc(haventvars,havevars)
-;   SORT(st, function mmCatComp)
+;   STABLE_-SORT(st, function mmCatComp)
 
 (DEFUN |orderMmCatStack| (|st|)
   (PROG (|vars| |havevars| |haventvars| |cat| |mem|)
@@ -4268,7 +4263,7 @@
                              (SETQ |st|
                                      (NREVERSE
                                       (NCONC |haventvars| |havevars|)))
-                             (SORT |st| #'|mmCatComp|)))))))))))))
+                             (STABLE-SORT |st| #'|mmCatComp|)))))))))))))
 
 ; mmCatComp(c1, c2) ==
 ;   b1 := ASSQ(CADR c1, $Subst)
@@ -4427,7 +4422,6 @@
 ;     (p := ASSQ(dom, SL)) and ((NSL := hasCate(rest p, cat, SL)) ~= 'failed) =>
 ;        NSL
 ;     (p:= ASSQ(dom,$Subst)) or (p := ASSQ(dom, SL)) =>
-; --      S := hasCate(rest p, cat, augmentSub(first p, rest p, copy SL))
 ;       S := hasCate1(rest p, cat, SL, dom)
 ;       not (S='failed) => S
 ;       hasCateSpecial(dom, rest p, cat, SL)
@@ -4541,6 +4535,7 @@
 ;          PrimitiveFunctionCategory SpecialFunctionCategory Evalable
 ;           CombinatorialOpsCategory TranscendentalFunctionCategory
 ;            AlgebraicallyClosedFunctionSpace ExpressionSpace
+;                ExpressionSpace2
 ;              LiouvillianFunctionCategory FunctionSpace))
 ;   alg := member(QCAR cat, '(RadicalCategory AlgebraicallyClosedField))
 ;   fefull := fe or alg or EQCAR(cat, 'CombinatorialFunctionCategory)
@@ -4562,7 +4557,6 @@
 ;         augmentSub(v, d, SL)
 ;       alg =>
 ;         d := '(AlgebraicNumber)
-;         --d := defaultTargetFE $Integer
 ;         augmentSub(v, d, SL)
 ;       'failed
 ;     underDomainOf dom = $ComplexInteger =>
@@ -4592,7 +4586,8 @@
                  |Evalable| |CombinatorialOpsCategory|
                  |TranscendentalFunctionCategory|
                  |AlgebraicallyClosedFunctionSpace| |ExpressionSpace|
-                 |LiouvillianFunctionCategory| |FunctionSpace|)))
+                 |ExpressionSpace2| |LiouvillianFunctionCategory|
+                 |FunctionSpace|)))
       (SETQ |alg|
               (|member| (QCAR |cat|)
                '(|RadicalCategory| |AlgebraicallyClosedField|)))
@@ -4663,7 +4658,7 @@
 ;                            for arg in rest d]]
 ;           SL := augmentSub($domPvar, dom, copy SL)
 ;         z' := [domArg2(a, S, S') for a in z]
-;         S1:= unifyStruct(y,z',copy SL)
+;         S1 := unifyStruct(y, z', copy(SL))
 ;         if not (S1='failed) then S1:=
 ;           atom cond => S1
 ;           ncond := subCopy(cond, S)
@@ -4883,24 +4878,18 @@
 ;   cond is ['AND,:args] =>
 ;     for x in args while not (S='failed) repeat S:=
 ;       x is ['has,a,b] => hasCate(a,b, SL)
-;       -- next line is for an obscure bug in the table
-;       x is [['has,a,b]] => hasCate(a,b, SL)
-;       --'failed
 ;       hasCaty1(x, SL)
 ;     S
 ;   cond is ['OR,:args] =>
 ;     for x in args until not (S='failed) repeat S:=
 ;       x is ['has,a,b] => hasCate(a,b,copy SL)
-;       -- next line is for an obscure bug in the table
-;       x is [['has,a,b]] => hasCate(a,b,copy SL)
-;       --'failed
 ;       hasCaty1(x, copy SL)
 ;     S
 ;   keyedSystemError("S2GE0016",
 ;     ['"hasCaty1",'"unexpected condition from category table"])
 
 (DEFUN |hasCaty1| (|cond| SL)
-  (PROG (|$domPvar| S |ISTMP#3| |args| |b| |ISTMP#2| |a| |ISTMP#1|)
+  (PROG (|$domPvar| S |args| |b| |ISTMP#2| |a| |ISTMP#1|)
     (DECLARE (SPECIAL |$domPvar|))
     (RETURN
      (PROGN
@@ -4942,25 +4931,6 @@
                                                 (SETQ |b| (CAR |ISTMP#2|))
                                                 #1#))))))
                               (|hasCate| |a| |b| SL))
-                             ((AND (CONSP |x|) (EQ (CDR |x|) NIL)
-                                   (PROGN
-                                    (SETQ |ISTMP#1| (CAR |x|))
-                                    (AND (CONSP |ISTMP#1|)
-                                         (EQ (CAR |ISTMP#1|) '|has|)
-                                         (PROGN
-                                          (SETQ |ISTMP#2| (CDR |ISTMP#1|))
-                                          (AND (CONSP |ISTMP#2|)
-                                               (PROGN
-                                                (SETQ |a| (CAR |ISTMP#2|))
-                                                (SETQ |ISTMP#3|
-                                                        (CDR |ISTMP#2|))
-                                                (AND (CONSP |ISTMP#3|)
-                                                     (EQ (CDR |ISTMP#3|) NIL)
-                                                     (PROGN
-                                                      (SETQ |b|
-                                                              (CAR |ISTMP#3|))
-                                                      #1#))))))))
-                              (|hasCate| |a| |b| SL))
                              (#1# (|hasCaty1| |x| SL))))))
                   (SETQ |bfVar#139| (CDR |bfVar#139|))))
                |args| NIL)
@@ -4989,25 +4959,6 @@
                                                (PROGN
                                                 (SETQ |b| (CAR |ISTMP#2|))
                                                 #1#))))))
-                              (|hasCate| |a| |b| (COPY SL)))
-                             ((AND (CONSP |x|) (EQ (CDR |x|) NIL)
-                                   (PROGN
-                                    (SETQ |ISTMP#1| (CAR |x|))
-                                    (AND (CONSP |ISTMP#1|)
-                                         (EQ (CAR |ISTMP#1|) '|has|)
-                                         (PROGN
-                                          (SETQ |ISTMP#2| (CDR |ISTMP#1|))
-                                          (AND (CONSP |ISTMP#2|)
-                                               (PROGN
-                                                (SETQ |a| (CAR |ISTMP#2|))
-                                                (SETQ |ISTMP#3|
-                                                        (CDR |ISTMP#2|))
-                                                (AND (CONSP |ISTMP#3|)
-                                                     (EQ (CDR |ISTMP#3|) NIL)
-                                                     (PROGN
-                                                      (SETQ |b|
-                                                              (CAR |ISTMP#3|))
-                                                      #1#))))))))
                               (|hasCate| |a| |b| (COPY SL)))
                              (#1# (|hasCaty1| |x| (COPY SL)))))))
                   (SETQ |bfVar#140| (CDR |bfVar#140|))
@@ -5479,7 +5430,6 @@
 ;             if (s3 ~= s1) and isPatternVar(s) then SL := augmentSub(s,s3,SL)
 ;             SL
 ;           'failed
-; --        isSubDomain(s,s0) => augmentSub(v,s0,SL)
 ;         'failed
 ;       'failed
 ;     augmentSub(v,s,S)

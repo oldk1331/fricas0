@@ -8,7 +8,7 @@
 
 (SDEFUN |DEQUEUE;extractBottom!;%S;3| ((|d| (%)) (% (S)))
         (SPROG
-         ((|r| (S)) (|q| (|List| S)) (#1=#:G21 NIL) (|n| (|Integer|))
+         ((|r| (S)) (|q| (|List| S)) (#1=#:G9 NIL) (|n| (|Integer|))
           (|p| (|List| S)))
          (SEQ (COND ((SPADCALL |d| (QREFELT % 9)) (|error| "empty dequeue")))
               (LETT |p| (SPADCALL |d| (QREFELT % 11))) (LETT |n| (LENGTH |p|))
@@ -67,24 +67,9 @@
 
 (DECLAIM (NOTINLINE |Dequeue;|)) 
 
-(DEFUN |Dequeue| (#1=#:G51)
-  (SPROG NIL
-         (PROG (#2=#:G52)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|Dequeue|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Dequeue;| #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Dequeue|)))))))))) 
-
 (DEFUN |Dequeue;| (|#1|)
   (SPROG
-   ((#1=#:G50 NIL) (|pv$| NIL) (#2=#:G47 NIL) (#3=#:G48 NIL) (#4=#:G49 NIL)
+   ((#1=#:G36 NIL) (|pv$| NIL) (#2=#:G33 NIL) (#3=#:G34 NIL) (#4=#:G35 NIL)
     (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -139,6 +124,21 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 7 (|Reference| (|List| |#1|)))
     %))) 
+
+(DEFUN |Dequeue| (#1=#:G37)
+  (SPROG NIL
+         (PROG (#2=#:G38)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|Dequeue|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Dequeue;| #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Dequeue|)))))))))) 
 
 (MAKEPROP '|Dequeue| '|infovec|
           (LIST

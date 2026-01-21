@@ -17,31 +17,9 @@
 
 (DECLAIM (NOTINLINE |LinearOrdinaryDifferentialOperator;|)) 
 
-(DEFUN |LinearOrdinaryDifferentialOperator| (&REST #1=#:G63)
-  (SPROG NIL
-         (PROG (#2=#:G64)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|LinearOrdinaryDifferentialOperator|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |LinearOrdinaryDifferentialOperator;|)
-                             #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|LinearOrdinaryDifferentialOperator|)))))))))) 
-
 (DEFUN |LinearOrdinaryDifferentialOperator;| (|#1| |#2|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G60 NIL) (#2=#:G62 NIL) (#3=#:G61 NIL) (% NIL)
+   ((|pv$| NIL) (#1=#:G36 NIL) (#2=#:G38 NIL) (#3=#:G37 NIL) (% NIL)
     (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -256,6 +234,28 @@
                  (CONS (|dispatchFunction| |LODO;symmetricPower;%Nni%;4|) %))
        (QSETREFV % 31 (CONS (|dispatchFunction| |LODO;directSum;3%;5|) %)))))
     %))) 
+
+(DEFUN |LinearOrdinaryDifferentialOperator| (&REST #1=#:G39)
+  (SPROG NIL
+         (PROG (#2=#:G40)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|LinearOrdinaryDifferentialOperator|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |LinearOrdinaryDifferentialOperator;|)
+                             #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|LinearOrdinaryDifferentialOperator|)))))))))) 
 
 (MAKEPROP '|LinearOrdinaryDifferentialOperator| '|infovec|
           (LIST

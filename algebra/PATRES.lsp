@@ -28,8 +28,8 @@
 (SDEFUN |PATRES;satisfy?;%PU;7|
         ((|r| (%)) (|p| (|Pattern| R)) (% (|Union| (|Boolean|) "failed")))
         (SPROG
-         ((|lv| (|List| S)) (#1=#:G59 NIL) (|u| (|Union| S "failed"))
-          (#2=#:G61 NIL) (|v| NIL) (#3=#:G60 NIL)
+         ((|lv| (|List| S)) (#1=#:G48 NIL) (|u| (|Union| S "failed"))
+          (#2=#:G50 NIL) (|v| NIL) (#3=#:G49 NIL)
           (|lr| (|AssociationList| (|Symbol|) S)))
          (SEQ
           (EXIT
@@ -60,7 +60,7 @@
                                                ((QEQCAR |u| 1)
                                                 (PROGN
                                                  (LETT #1# (CONS 1 "failed"))
-                                                 (GO #4=#:G58)))
+                                                 (GO #4=#:G47)))
                                                ('T (QCDR |u|)))))
                                             #3#))))
                                    (LETT #2# (CDR #2#)) (GO G190) G191
@@ -126,25 +126,6 @@
 
 (DECLAIM (NOTINLINE |PatternMatchResult;|)) 
 
-(DEFUN |PatternMatchResult| (&REST #1=#:G95)
-  (SPROG NIL
-         (PROG (#2=#:G96)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PatternMatchResult|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |PatternMatchResult;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|PatternMatchResult|)))))))))) 
-
 (DEFUN |PatternMatchResult;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -162,6 +143,25 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 8 (|Union| (|AssociationList| (|Symbol|) |#2|) "failed"))
           %))) 
+
+(DEFUN |PatternMatchResult| (&REST #1=#:G81)
+  (SPROG NIL
+         (PROG (#2=#:G82)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PatternMatchResult|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |PatternMatchResult;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|PatternMatchResult|)))))))))) 
 
 (MAKEPROP '|PatternMatchResult| '|infovec|
           (LIST

@@ -4,12 +4,12 @@
         (SPROG
          ((|stillToFactor| #1=(|SparseUnivariatePolynomial| F)) (|root| (F))
           (|degSTF| #2=(|NonNegativeInteger|)) (|degh| #2#)
-          (|h| (|SparseUnivariatePolynomial| F)) (#3=#:G42 NIL) (|j| NIL)
+          (|h| (|SparseUnivariatePolynomial| F)) (#3=#:G29 NIL) (|j| NIL)
           (|trModp| (|SparseUnivariatePolynomial| F)) (|beta| (F))
-          (#4=#:G41 NIL) (|i| NIL) (|basispointer| (|Integer|))
+          (#4=#:G28 NIL) (|i| NIL) (|basispointer| (|Integer|))
           (|basis| (|Vector| F))
           (|qexp| (|PrimitiveArray| (|SparseUnivariatePolynomial| GF)))
-          (|p| #1#) (|deg| (|PositiveInteger|)) (#5=#:G12 NIL)
+          (|p| #1#) (|deg| (|PositiveInteger|)) (#5=#:G5 NIL)
           (|sizeGF| (|NonNegativeInteger|)))
          (SEQ (LETT |sizeGF| (SPADCALL (QREFELT % 9)))
               (LETT |deg|
@@ -149,9 +149,26 @@
 
 (DECLAIM (NOTINLINE |FiniteFieldPolynomialPackage2;|)) 
 
-(DEFUN |FiniteFieldPolynomialPackage2| (&REST #1=#:G43)
+(DEFUN |FiniteFieldPolynomialPackage2;| (|#1| |#2|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT DV$2 (|devaluate| |#2|))
+          (LETT |dv$| (LIST '|FiniteFieldPolynomialPackage2| DV$1 DV$2))
+          (LETT % (GETREFV 49))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|FiniteFieldPolynomialPackage2|
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |FiniteFieldPolynomialPackage2| (&REST #1=#:G30)
   (SPROG NIL
-         (PROG (#2=#:G44)
+         (PROG (#2=#:G31)
            (RETURN
             (COND
              ((LETT #2#
@@ -169,23 +186,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|FiniteFieldPolynomialPackage2|)))))))))) 
-
-(DEFUN |FiniteFieldPolynomialPackage2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT DV$2 (|devaluate| |#2|))
-          (LETT |dv$| (LIST '|FiniteFieldPolynomialPackage2| DV$1 DV$2))
-          (LETT % (GETREFV 49))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|FiniteFieldPolynomialPackage2|
-                      (LIST DV$1 DV$2) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (QSETREFV % 7 |#2|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|FiniteFieldPolynomialPackage2| '|infovec|
           (LIST

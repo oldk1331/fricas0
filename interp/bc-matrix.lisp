@@ -7,7 +7,7 @@
 
 (DEFUN |bcMatrix| () (PROG () (RETURN (|bcReadMatrix| NIL))))
 
-; bcReadMatrix exitFunctionOrNil ==
+; bcReadMatrix(exitFunctionOrNil) ==
 ;   page := htInitPage('"Matrix Basic Command", nil)
 ;   htpSetProperty(page,'exitFunction,exitFunctionOrNil)
 ;   htMakePage
@@ -51,7 +51,7 @@
          (|text| . "\\endmenu")))
       (|htShowPage|)))))
 
-; bcInputMatrixByFormula(htPage,junk) ==
+; bcInputMatrixByFormula(htPage, junk) ==
 ;   page := htInitPage('"Basic Matrix Command", htpPropertyList htPage)
 ;   htMakePage '(
 ;     (domainConditions

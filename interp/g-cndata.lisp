@@ -271,7 +271,6 @@
 ;   (r := unabbrevSpecialForms(op,arglist,modeIfTrue)) => r
 ;   (cname := abbreviation? op) or (constructor?(op) and (cname := op)) =>
 ;     (r := unabbrevSpecialForms(cname,arglist,modeIfTrue)) => r
-;     -- ??? if modeIfTrue then loadIfNecessary cname
 ;     [cname,:condUnabbrev(op,arglist,
 ;       getPartialConstructorModemapSig(cname),modeIfTrue)]
 ;   u

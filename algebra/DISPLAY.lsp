@@ -107,7 +107,7 @@
         (QCSIZE |s|)) 
 
 (SDEFUN |DISPLAY;sayLength;LI;11| ((|l| (|List| (|String|))) (% (|Integer|)))
-        (SPROG ((|sum| (|Integer|)) (#1=#:G36 NIL) (|s| NIL))
+        (SPROG ((|sum| (|Integer|)) (#1=#:G24 NIL) (|s| NIL))
                (SEQ (LETT |sum| 0)
                     (SEQ (LETT |s| NIL) (LETT #1# |l|) G190
                          (COND
@@ -128,24 +128,6 @@
 
 (DECLAIM (NOTINLINE |DisplayPackage;|)) 
 
-(DEFUN |DisplayPackage| ()
-  (SPROG NIL
-         (PROG (#1=#:G38)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|DisplayPackage|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|DisplayPackage|
-                             (LIST (CONS NIL (CONS 1 (|DisplayPackage;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#)
-                  (HREM |$ConstructorCache| '|DisplayPackage|)))))))))) 
-
 (DEFUN |DisplayPackage;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -160,6 +142,24 @@
           (QSETREFV % 7 "%d")
           (QSETREFV % 8 "%l")
           %))) 
+
+(DEFUN |DisplayPackage| ()
+  (SPROG NIL
+         (PROG (#1=#:G26)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|DisplayPackage|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|DisplayPackage|
+                             (LIST (CONS NIL (CONS 1 (|DisplayPackage;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#)
+                  (HREM |$ConstructorCache| '|DisplayPackage|)))))))))) 
 
 (MAKEPROP '|DisplayPackage| '|infovec|
           (LIST

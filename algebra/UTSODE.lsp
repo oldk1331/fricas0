@@ -220,8 +220,8 @@
          (|cl| (|List| |Coef|)) (|yl| (|List| (|Stream| |Coef|)))
          (% (|List| (|Stream| |Coef|))))
         (SPROG
-         ((|yil| (|List| (|Stream| |Coef|))) (#1=#:G98 NIL) (|c| NIL)
-          (#2=#:G99 NIL) (|y| NIL) (#3=#:G97 NIL))
+         ((|yil| (|List| (|Stream| |Coef|))) (#1=#:G90 NIL) (|c| NIL)
+          (#2=#:G91 NIL) (|y| NIL) (#3=#:G89 NIL))
          (SEQ
           (LETT |yil|
                 (PROGN
@@ -271,8 +271,8 @@
           (|List| (|Mapping| (|Stream| |Coef|) (|List| (|Stream| |Coef|)))))
          (|c| (|List| (|Stream| |Coef|))) (% (|List| (|Stream| |Coef|))))
         (SPROG
-         ((#1=#:G120 NIL) (|csti| NIL) (#2=#:G121 NIL) (|lsfi| NIL)
-          (#3=#:G119 NIL))
+         ((#1=#:G112 NIL) (|csti| NIL) (#2=#:G113 NIL) (|lsfi| NIL)
+          (#3=#:G111 NIL))
          (SEQ
           (PROGN
            (LETT #3# NIL)
@@ -328,8 +328,8 @@
         ((|cs| (|List| |Coef|)) (|lsts| (|List| (|Mapping| UTS (|List| UTS))))
          (% (|List| UTS)))
         (SPROG
-         ((|stSol| (|List| (|Stream| |Coef|))) (#1=#:G133 NIL) (|lst| NIL)
-          (#2=#:G132 NIL))
+         ((|stSol| (|List| (|Stream| |Coef|))) (#1=#:G125 NIL) (|lst| NIL)
+          (#2=#:G124 NIL))
          (SEQ
           (LETT |stSol|
                 (|UTSODE;iMpsode| |cs|
@@ -350,9 +350,26 @@
 
 (DECLAIM (NOTINLINE |UnivariateTaylorSeriesODESolver;|)) 
 
-(DEFUN |UnivariateTaylorSeriesODESolver| (&REST #1=#:G134)
+(DEFUN |UnivariateTaylorSeriesODESolver;| (|#1| |#2|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT DV$2 (|devaluate| |#2|))
+          (LETT |dv$| (LIST '|UnivariateTaylorSeriesODESolver| DV$1 DV$2))
+          (LETT % (GETREFV 62))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|UnivariateTaylorSeriesODESolver|
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |UnivariateTaylorSeriesODESolver| (&REST #1=#:G126)
   (SPROG NIL
-         (PROG (#2=#:G135)
+         (PROG (#2=#:G127)
            (RETURN
             (COND
              ((LETT #2#
@@ -371,23 +388,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|UnivariateTaylorSeriesODESolver|)))))))))) 
-
-(DEFUN |UnivariateTaylorSeriesODESolver;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT DV$2 (|devaluate| |#2|))
-          (LETT |dv$| (LIST '|UnivariateTaylorSeriesODESolver| DV$1 DV$2))
-          (LETT % (GETREFV 62))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|UnivariateTaylorSeriesODESolver|
-                      (LIST DV$1 DV$2) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (QSETREFV % 7 |#2|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|UnivariateTaylorSeriesODESolver| '|infovec|
           (LIST

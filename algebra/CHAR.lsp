@@ -16,7 +16,7 @@
         (SPADCALL (- |n| 1) (QREFELT % 13))) 
 
 (SDEFUN |CHAR;lookup;%Pi;5| ((|c| (%)) (% (|PositiveInteger|)))
-        (SPROG ((#1=#:G289 NIL))
+        (SPROG ((#1=#:G266 NIL))
                (PROG1 (LETT #1# (+ 1 (SPADCALL |c| (QREFELT % 16))))
                  (|check_subtype2| (> #1# 0) '(|PositiveInteger|) '(|Integer|)
                                    #1#)))) 
@@ -77,9 +77,22 @@
 
 (DECLAIM (NOTINLINE |Character;|)) 
 
+(DEFUN |Character;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|Character|))
+          (LETT % (GETREFV 50))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|Character| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 6 (|SingleInteger|))
+          %))) 
+
 (DEFUN |Character| ()
   (SPROG NIL
-         (PROG (#1=#:G310)
+         (PROG (#1=#:G287)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Character|))
@@ -93,19 +106,6 @@
                     (LETT #1# T))
                 (COND
                  ((NOT #1#) (HREM |$ConstructorCache| '|Character|)))))))))) 
-
-(DEFUN |Character;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|Character|))
-          (LETT % (GETREFV 50))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|Character| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 6 (|SingleInteger|))
-          %))) 
 
 (MAKEPROP '|Character| '|infovec|
           (LIST

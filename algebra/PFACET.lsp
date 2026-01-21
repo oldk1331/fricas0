@@ -26,7 +26,7 @@
 
 (SDEFUN |PFACET;getMaxLeft;%Nni;4| ((|orf| (%)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((|m| (|NonNegativeInteger|)) (#1=#:G34 NIL) (|index| NIL)
+         ((|m| (|NonNegativeInteger|)) (#1=#:G25 NIL) (|index| NIL)
           (|indexes|
            (|List|
             (|Record| (|:| |left| (|NonNegativeInteger|))
@@ -45,7 +45,7 @@
 
 (SDEFUN |PFACET;getMaxRight;%Nni;5| ((|orf| (%)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((|m| (|NonNegativeInteger|)) (#1=#:G42 NIL) (|index| NIL)
+         ((|m| (|NonNegativeInteger|)) (#1=#:G33 NIL) (|index| NIL)
           (|indexes|
            (|List|
             (|Record| (|:| |left| (|NonNegativeInteger|))
@@ -89,7 +89,7 @@
 
 (SDEFUN |PFACET;=;2%B;10| ((|a| (%)) (|b| (%)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G64 NIL) (#2=#:G65 NIL) (|inda| NIL) (#3=#:G66 NIL)
+         ((#1=#:G55 NIL) (#2=#:G56 NIL) (|inda| NIL) (#3=#:G57 NIL)
           (|indb| NIL)
           (|indbs|
            #4=(|List|
@@ -101,7 +101,7 @@
            (SEQ
             (COND
              ((SPADCALL (QCAR |a|) (QCAR |b|) (QREFELT % 24))
-              (PROGN (LETT #1# NIL) (GO #5=#:G63))))
+              (PROGN (LETT #1# NIL) (GO #5=#:G54))))
             (LETT |indas| (SPADCALL |a| (QREFELT % 14)))
             (LETT |indbs| (SPADCALL |b| (QREFELT % 14)))
             (COND
@@ -130,7 +130,7 @@
         (SPROG
          ((|body| (|OutputForm|)) (|elements| (|List| (|OutputForm|)))
           (|element| (|OutputForm|)) (|r| (|NonNegativeInteger|))
-          (|l| (|NonNegativeInteger|)) (#1=#:G76 NIL) (|x| NIL)
+          (|l| (|NonNegativeInteger|)) (#1=#:G67 NIL) (|x| NIL)
           (|prefix| (|OutputForm|)) (|m| (|Integer|)))
          (SEQ (LETT |prefix| (SPADCALL "" (QREFELT % 28)))
               (LETT |m| (QCAR |s|))
@@ -163,23 +163,6 @@
 
 (DECLAIM (NOTINLINE |ProductFacet;|)) 
 
-(DEFUN |ProductFacet| ()
-  (SPROG NIL
-         (PROG (#1=#:G78)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|ProductFacet|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|ProductFacet|
-                             (LIST (CONS NIL (CONS 1 (|ProductFacet;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#) (HREM |$ConstructorCache| '|ProductFacet|)))))))))) 
-
 (DEFUN |ProductFacet;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -198,6 +181,23 @@
                                      (|:| |left| (|NonNegativeInteger|))
                                      (|:| |right| (|NonNegativeInteger|)))))))
           %))) 
+
+(DEFUN |ProductFacet| ()
+  (SPROG NIL
+         (PROG (#1=#:G69)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|ProductFacet|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|ProductFacet|
+                             (LIST (CONS NIL (CONS 1 (|ProductFacet;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#) (HREM |$ConstructorCache| '|ProductFacet|)))))))))) 
 
 (MAKEPROP '|ProductFacet| '|infovec|
           (LIST

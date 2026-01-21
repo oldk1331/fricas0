@@ -497,15 +497,12 @@
 ;         nsig := substitute('%, dc, substitute("$$", "%", sig))
 ;
 ;     -- following hack needed to invert Rep to $ substitution
-; --  if odc = 'Rep and cform is [.,.,osig] then sig:=osig
 ;   newimp := optDeltaEntry(op, nsig, dc, eltOrConst, e) => newimp
 ;   setDifference(listOfBoundVars(dc, e), $functorLocalParameters) ~= [] =>
 ;     ['applyFun,['compiledLookupCheck,MKQ op,
 ;          mkList consSig(nsig, dc, e), consDomainForm(dc, nil, e)]]
 ;   odc := dc
 ;   if null atom dc then dc := substitute("$$", '%, dc)
-;  --   sig := substitute('%, dc, sig)
-;  --   cform := substitute('%, dc, cform)
 ;   opModemapPair :=
 ;     -- force pred to T
 ;     [op, [dc, :[genDeltaSig(x, e) for x in nsig]], ['T,cform]]
@@ -1460,8 +1457,6 @@
 ; --GLOBAL VARIABLES REFERENCED:
 ; --  $QuickCode: compilation flag
 ;
-;   $definition : local := definition
-;
 ;   changeDirectoryInSlot1(base_shell, e)  --this extends $NRTslot1PredicateList
 ;
 ;   --pp '"=================="
@@ -1554,22 +1549,20 @@
 (DEFUN |buildFunctor| (|definition| |sig| |code| |$locals| |base_shell| |e|)
   (DECLARE (SPECIAL |$locals|))
   (PROG (|$devaluateList| |$extraParms| |$epilogue| |$ConstantAssignments|
-         |$MissingFunctionInfo| |$SetFunctions| |$catvecList| $GENNO
-         |$definition| |ans| |codePart3| |codePart1| |slamCode| |slot3Code|
-         |setVector0Code| |createViewCode| |createDomainCode| |devaluate_code|
-         |b| |a| |codePart2| |addargname| |argStuffCode| |storeOperationCode|
+         |$MissingFunctionInfo| |$SetFunctions| |$catvecList| $GENNO |ans|
+         |codePart3| |codePart1| |slamCode| |slot3Code| |setVector0Code|
+         |createViewCode| |createDomainCode| |devaluate_code| |b| |a|
+         |codePart2| |addargname| |argStuffCode| |storeOperationCode|
          |predBitVectorCode2| |predBitVectorCode1| |LETTMP#1| |domname|
          |catNames| |domainShell| |condCats| |catvecListMaker| |argsig|
          |catsig| |oldtime| |args| |name|)
     (DECLARE
      (SPECIAL |$devaluateList| |$extraParms| |$epilogue| |$ConstantAssignments|
-      |$MissingFunctionInfo| |$SetFunctions| |$catvecList| $GENNO
-      |$definition|))
+      |$MissingFunctionInfo| |$SetFunctions| |$catvecList| $GENNO))
     (RETURN
      (PROGN
       (SETQ |name| (CAR |definition|))
       (SETQ |args| (CDR |definition|))
-      (SETQ |$definition| |definition|)
       (|changeDirectoryInSlot1| |base_shell| |e|)
       (SETQ $GENNO 0)
       (SETQ |$catvecList| NIL)
@@ -2243,7 +2236,6 @@
 ;         for p in preds repeat e := deepChaseInferences1(p, e)
 ;         e
 ;     pred is ['OR, pred1, :.] or pred is ['or, pred1, :.] => e
-;     --    deepChaseInferences1(pred1, e)
 ;     pred is 'T or pred is ['NOT, :.] or pred is ['not, :.] => e
 ;     chaseInferences(pred, e)
 

@@ -58,23 +58,6 @@
 
 (DECLAIM (NOTINLINE |OpenMathError;|)) 
 
-(DEFUN |OpenMathError| ()
-  (SPROG NIL
-         (PROG (#1=#:G41)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|OpenMathError|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|OpenMathError|
-                             (LIST (CONS NIL (CONS 1 (|OpenMathError;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#) (HREM |$ConstructorCache| '|OpenMathError|)))))))))) 
-
 (DEFUN |OpenMathError;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -89,6 +72,23 @@
                     (|Record| (|:| |err| (|OpenMathErrorKind|))
                               (|:| |info| (|List| (|Symbol|)))))
           %))) 
+
+(DEFUN |OpenMathError| ()
+  (SPROG NIL
+         (PROG (#1=#:G16)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|OpenMathError|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|OpenMathError|
+                             (LIST (CONS NIL (CONS 1 (|OpenMathError;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#) (HREM |$ConstructorCache| '|OpenMathError|)))))))))) 
 
 (MAKEPROP '|OpenMathError| '|infovec|
           (LIST

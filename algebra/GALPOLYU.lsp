@@ -2,7 +2,7 @@
 (SDEFUN |GALPOLYU;factorsOfDegree;PiFL;1|
         ((|d| (|PositiveInteger|)) (|r| (|Factored| UP)) (% (|List| UP)))
         (SPROG
-         ((|lfact| (|List| UP)) (#1=#:G31 NIL) (|i| NIL) (#2=#:G30 NIL)
+         ((|lfact| (|List| UP)) (#1=#:G10 NIL) (|i| NIL) (#2=#:G9 NIL)
           (|fr| NIL))
          (SEQ (LETT |lfact| NIL)
               (SEQ (LETT |fr| NIL) (LETT #2# (SPADCALL |r| (QREFELT % 12)))
@@ -26,7 +26,7 @@
 
 (SDEFUN |GALPOLYU;factorOfDegree;PiFUP;2|
         ((|d| (|PositiveInteger|)) (|r| (|Factored| UP)) (% (UP)))
-        (SPROG ((#1=#:G38 NIL) (|factor| (UP)) (#2=#:G39 NIL) (|i| NIL))
+        (SPROG ((#1=#:G17 NIL) (|factor| (UP)) (#2=#:G18 NIL) (|i| NIL))
                (SEQ
                 (EXIT
                  (SEQ (LETT |factor| (|spadConstant| % 18))
@@ -41,14 +41,14 @@
                                   ((EQL (SPADCALL |factor| (QREFELT % 14)) |d|)
                                    (PROGN
                                     (LETT #1# |factor|)
-                                    (GO #3=#:G37))))))
+                                    (GO #3=#:G16))))))
                            (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                       (EXIT (|error| "factorOfDegree: Bad arguments"))))
                 #3# (EXIT #1#)))) 
 
 (SDEFUN |GALPOLYU;degreePartition;FM;3|
         ((|r| (|Factored| UP)) (% (|Multiset| (|NonNegativeInteger|))))
-        (SPROG ((#1=#:G45 NIL) (|i| NIL) (#2=#:G44 NIL))
+        (SPROG ((#1=#:G24 NIL) (|i| NIL) (#2=#:G23 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -73,7 +73,7 @@
 
 (SDEFUN |GALPOLYU;reverse;2UP;5| ((|p| (UP)) (% (UP)))
         (SPROG
-         ((|r| (UP)) (#1=#:G48 NIL) (#2=#:G52 NIL) (|i| NIL)
+         ((|r| (UP)) (#1=#:G27 NIL) (#2=#:G31 NIL) (|i| NIL)
           (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |r| (|spadConstant| % 18))
               (LETT |n| (SPADCALL |p| (QREFELT % 14)))
@@ -141,9 +141,26 @@
 
 (DECLAIM (NOTINLINE |GaloisGroupPolynomialUtilities;|)) 
 
-(DEFUN |GaloisGroupPolynomialUtilities| (&REST #1=#:G74)
+(DEFUN |GaloisGroupPolynomialUtilities;| (|#1| |#2|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT DV$2 (|devaluate| |#2|))
+          (LETT |dv$| (LIST '|GaloisGroupPolynomialUtilities| DV$1 DV$2))
+          (LETT % (GETREFV 45))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|GaloisGroupPolynomialUtilities|
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |GaloisGroupPolynomialUtilities| (&REST #1=#:G48)
   (SPROG NIL
-         (PROG (#2=#:G75)
+         (PROG (#2=#:G49)
            (RETURN
             (COND
              ((LETT #2#
@@ -162,23 +179,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|GaloisGroupPolynomialUtilities|)))))))))) 
-
-(DEFUN |GaloisGroupPolynomialUtilities;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT DV$2 (|devaluate| |#2|))
-          (LETT |dv$| (LIST '|GaloisGroupPolynomialUtilities| DV$1 DV$2))
-          (LETT % (GETREFV 45))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|GaloisGroupPolynomialUtilities|
-                      (LIST DV$1 DV$2) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (QSETREFV % 7 |#2|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|GaloisGroupPolynomialUtilities| '|infovec|
           (LIST

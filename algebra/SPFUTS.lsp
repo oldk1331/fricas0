@@ -62,8 +62,8 @@
           (RETURN
            (PROGN
             (SPROG
-             ((|lm| NIL) (|ck_m| NIL) (#1=#:G31 NIL) (|cm| NIL) (#2=#:G30 NIL)
-              (|m| NIL) (#3=#:G29 NIL) (|ss| NIL) (|two| NIL) (|three| NIL)
+             ((|lm| NIL) (|ck_m| NIL) (#1=#:G19 NIL) (|cm| NIL) (#2=#:G18 NIL)
+              (|m| NIL) (#3=#:G17 NIL) (|ss| NIL) (|two| NIL) (|three| NIL)
               (|ck| NIL))
              (SEQ (LETT |lm| (SPADCALL |lcr| (QREFELT % 32)))
                   (LETT |ss| (|spadConstant| % 9))
@@ -192,9 +192,28 @@
 
 (DECLAIM (NOTINLINE |SpecialFunctionUnivariateTaylorSeries;|)) 
 
-(DEFUN |SpecialFunctionUnivariateTaylorSeries| (&REST #1=#:G41)
+(DEFUN |SpecialFunctionUnivariateTaylorSeries;| (|#1| |#2|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT DV$2 (|devaluate| |#2|))
+          (LETT |dv$|
+                (LIST '|SpecialFunctionUnivariateTaylorSeries| DV$1 DV$2))
+          (LETT % (GETREFV 58))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache|
+                      '|SpecialFunctionUnivariateTaylorSeries| (LIST DV$1 DV$2)
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |SpecialFunctionUnivariateTaylorSeries| (&REST #1=#:G29)
   (SPROG NIL
-         (PROG (#2=#:G42)
+         (PROG (#2=#:G30)
            (RETURN
             (COND
              ((LETT #2#
@@ -214,25 +233,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|SpecialFunctionUnivariateTaylorSeries|)))))))))) 
-
-(DEFUN |SpecialFunctionUnivariateTaylorSeries;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT DV$2 (|devaluate| |#2|))
-          (LETT |dv$|
-                (LIST '|SpecialFunctionUnivariateTaylorSeries| DV$1 DV$2))
-          (LETT % (GETREFV 58))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache|
-                      '|SpecialFunctionUnivariateTaylorSeries| (LIST DV$1 DV$2)
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (QSETREFV % 7 |#2|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|SpecialFunctionUnivariateTaylorSeries| '|infovec|
           (LIST

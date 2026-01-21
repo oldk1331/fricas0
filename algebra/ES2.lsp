@@ -1,6 +1,6 @@
 
 (SDEFUN |ES2;map;MKF;1| ((|f| (|Mapping| F E)) (|k| (|Kernel| E)) (% (F)))
-        (SPROG ((#1=#:G10 NIL) (|x| NIL) (#2=#:G9 NIL))
+        (SPROG ((#1=#:G5 NIL) (|x| NIL) (#2=#:G4 NIL))
                (SEQ
                 (SPADCALL
                  (SPADCALL (SPADCALL |k| (QREFELT % 10)) (QREFELT % 11))
@@ -18,26 +18,6 @@
 
 (DECLAIM (NOTINLINE |ExpressionSpaceFunctions2;|)) 
 
-(DEFUN |ExpressionSpaceFunctions2| (&REST #1=#:G11)
-  (SPROG NIL
-         (PROG (#2=#:G12)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ExpressionSpaceFunctions2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ExpressionSpaceFunctions2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|ExpressionSpaceFunctions2|)))))))))) 
-
 (DEFUN |ExpressionSpaceFunctions2;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -54,6 +34,26 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |ExpressionSpaceFunctions2| (&REST #1=#:G6)
+  (SPROG NIL
+         (PROG (#2=#:G7)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ExpressionSpaceFunctions2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ExpressionSpaceFunctions2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|ExpressionSpaceFunctions2|)))))))))) 
 
 (MAKEPROP '|ExpressionSpaceFunctions2| '|infovec|
           (LIST

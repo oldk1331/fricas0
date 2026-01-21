@@ -55,7 +55,7 @@
 
 (SDEFUN |SORD;ordinalAdd;3%;15| ((|o1| (%)) (|o2| (%)) (% (%)))
         (SPROG
-         ((|p2| (|Rep|)) (#1=#:G54 NIL) (|t| NIL) (|p1| (|Rep|))
+         ((|p2| (|Rep|)) (#1=#:G38 NIL) (|t| NIL) (|p1| (|Rep|))
           (|lt| (|List| |Rep|)) (|e| (%)))
          (SEQ (LETT |p1| |o1|) (LETT |p2| |o2|)
               (LETT |e| (SPADCALL |p2| (QREFELT % 39)))
@@ -98,7 +98,7 @@
                     (EXIT (SPADCALL |p| (QREFELT % 29)))))) 
 
 (SDEFUN |SORD;limitPart;2%;17| ((|o| (%)) (% (%)))
-        (SPROG ((#1=#:G60 NIL))
+        (SPROG ((#1=#:G44 NIL))
                (PROG2
                    (LETT #1#
                          (SPADCALL |o|
@@ -251,23 +251,6 @@
 
 (DECLAIM (NOTINLINE |SmallOrdinal;|)) 
 
-(DEFUN |SmallOrdinal| ()
-  (SPROG NIL
-         (PROG (#1=#:G88)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|SmallOrdinal|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|SmallOrdinal|
-                             (LIST (CONS NIL (CONS 1 (|SmallOrdinal;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#) (HREM |$ConstructorCache| '|SmallOrdinal|)))))))))) 
-
 (DEFUN |SmallOrdinal;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -281,6 +264,23 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 6 (|PolynomialRing| (|NonNegativeInteger|) %))
           %))) 
+
+(DEFUN |SmallOrdinal| ()
+  (SPROG NIL
+         (PROG (#1=#:G71)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|SmallOrdinal|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|SmallOrdinal|
+                             (LIST (CONS NIL (CONS 1 (|SmallOrdinal;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#) (HREM |$ConstructorCache| '|SmallOrdinal|)))))))))) 
 
 (MAKEPROP '|SmallOrdinal| '|infovec|
           (LIST

@@ -4,7 +4,7 @@
          (|full| (|Mapping| (|Matrix| (|Integer|)) (|Matrix| (|Integer|))))
          (% (|Matrix| (|Integer|))))
         (SPROG
-         ((#1=#:G18 NIL) (|i| NIL) (|nn2| #2=(|Integer|)) (#3=#:G17 NIL)
+         ((#1=#:G10 NIL) (|i| NIL) (|nn2| #2=(|Integer|)) (#3=#:G9 NIL)
           (|res| (|Matrix| (|Integer|))) (|count| #2#)
           (|nn| (|NonNegativeInteger|)) (|k| (|NonNegativeInteger|))
           (|j| (|NonNegativeInteger|)) (|m3| (|Matrix| (|Integer|)))
@@ -46,11 +46,11 @@
                     (|:| |leftEqMat| (|Matrix| (|Integer|)))
                     (|:| |rightEqMat| (|Matrix| (|Integer|))))))
         (SPROG
-         ((#1=#:G79 NIL) (|n| NIL) (#2=#:G78 NIL) (|pp| (|Integer|))
-          (#3=#:G77 NIL) (|l| NIL) (#4=#:G76 NIL) (#5=#:G75 NIL) (#6=#:G74 NIL)
-          (#7=#:G73 NIL) (|i| NIL) (|m16| #8=(|Matrix| (|Integer|)))
+         ((#1=#:G67 NIL) (|n| NIL) (#2=#:G66 NIL) (|pp| (|Integer|))
+          (#3=#:G65 NIL) (|l| NIL) (#4=#:G64 NIL) (#5=#:G63 NIL) (#6=#:G62 NIL)
+          (#7=#:G61 NIL) (|i| NIL) (|m16| #8=(|Matrix| (|Integer|)))
           (|m15| #9=(|Matrix| (|Integer|))) (|m14| #8#) (|m13| #9#)
-          (#10=#:G71 NIL) (#11=#:G72 NIL) (|m12| (|Matrix| (|Integer|)))
+          (#10=#:G59 NIL) (#11=#:G60 NIL) (|m12| (|Matrix| (|Integer|)))
           (|m11| #12=(|Matrix| (|Integer|))) (|m10| #9#)
           (|m9| #13=(|Matrix| (|Integer|))) (|m8| #12#) (|m7| #9#) (|m6| #13#)
           (|res1|
@@ -60,11 +60,11 @@
           (|m5| #13#) (|count| (|NonNegativeInteger|))
           (|m4| (|Matrix| (|Integer|))) (|m3| (|Matrix| (|Integer|)))
           (|lks| #14=(|List| (|Integer|))) (|ljs| #14#)
-          (|lk0| (|List| (|Integer|))) (#15=#:G70 NIL) (#16=#:G69 NIL)
-          (|lj2| (|List| (|Integer|))) (#17=#:G68 NIL) (#18=#:G67 NIL)
-          (|lj1| (|List| (|Integer|))) (|s| (|Integer|)) (#19=#:G66 NIL)
-          (#20=#:G65 NIL) (|lj0| (|List| (|Integer|))) (#21=#:G64 NIL)
-          (#22=#:G63 NIL) (|m2| (|Matrix| (|Integer|)))
+          (|lk0| (|List| (|Integer|))) (#15=#:G58 NIL) (#16=#:G57 NIL)
+          (|lj2| (|List| (|Integer|))) (#17=#:G56 NIL) (#18=#:G55 NIL)
+          (|lj1| (|List| (|Integer|))) (|s| (|Integer|)) (#19=#:G54 NIL)
+          (#20=#:G53 NIL) (|lj0| (|List| (|Integer|))) (#21=#:G52 NIL)
+          (#22=#:G51 NIL) (|m2| (|Matrix| (|Integer|)))
           (|m1| (|Matrix| (|Integer|))) (|pivotsk| #23=(|Vector| (|Integer|)))
           (|pivotsj| #23#)
           (|res0|
@@ -320,9 +320,22 @@
 
 (DECLAIM (NOTINLINE |IntegerSmithNormalForm;|)) 
 
+(DEFUN |IntegerSmithNormalForm;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|IntegerSmithNormalForm|))
+          (LETT % (GETREFV 41))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|IntegerSmithNormalForm| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |IntegerSmithNormalForm| ()
   (SPROG NIL
-         (PROG (#1=#:G81)
+         (PROG (#1=#:G69)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|IntegerSmithNormalForm|))
@@ -339,19 +352,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|IntegerSmithNormalForm|)))))))))) 
-
-(DEFUN |IntegerSmithNormalForm;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|IntegerSmithNormalForm|))
-          (LETT % (GETREFV 41))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|IntegerSmithNormalForm| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|IntegerSmithNormalForm| '|infovec|
           (LIST

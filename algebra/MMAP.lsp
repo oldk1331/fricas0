@@ -19,23 +19,6 @@
 
 (DECLAIM (NOTINLINE |MultipleMap;|)) 
 
-(DEFUN |MultipleMap| (&REST #1=#:G11)
-  (SPROG NIL
-         (PROG (#2=#:G12)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|MultipleMap|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |MultipleMap;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|MultipleMap|)))))))))) 
-
 (DEFUN |MultipleMap;| (|#1| |#2| |#3| |#4| |#5| |#6|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$6 NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL)
@@ -62,6 +45,23 @@
     (QSETREFV % 11 |#6|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |MultipleMap| (&REST #1=#:G6)
+  (SPROG NIL
+         (PROG (#2=#:G7)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|MultipleMap|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |MultipleMap;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|MultipleMap|)))))))))) 
 
 (MAKEPROP '|MultipleMap| '|infovec|
           (LIST

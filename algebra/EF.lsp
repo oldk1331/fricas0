@@ -149,7 +149,7 @@
               ('T (|error| "Not an elementary operator")))) 
 
 (SDEFUN |EF;dropfun| ((|x| (F)) (% (F)))
-        (SPROG ((#1=#:G234 NIL) (|k| (|Union| (|Kernel| F) "failed")))
+        (SPROG ((#1=#:G224 NIL) (|k| (|Union| (|Kernel| F) "failed")))
                (SEQ
                 (EXIT
                  (SEQ
@@ -160,7 +160,7 @@
                               (NULL (SPADCALL (QCDR |k|) (QREFELT % 99))))
                           (PROGN
                            (LETT #1# (|spadConstant| % 89))
-                           (GO #2=#:G232))))))
+                           (GO #2=#:G222))))))
                   (EXIT (|SPADfirst| (SPADCALL (QCDR |k|) (QREFELT % 99))))))
                 #2# (EXIT #1#)))) 
 
@@ -1331,7 +1331,7 @@
 (SDEFUN |EF;iexp| ((|x| (F)) (% (F)))
         (SPROG
          ((|u| (|Union| F "failed")) (|s3| (F)) (|s2| (F)) (|h| (F)) (|y| (F))
-          (|xi| (F)) (|i| (F)) (#1=#:G460 NIL) (|kx| (|Kernel| F))
+          (|xi| (F)) (|i| (F)) (#1=#:G435 NIL) (|kx| (|Kernel| F))
           (|kxu| (|Union| (|Kernel| F) "failed")))
          (SEQ
           (COND ((SPADCALL |x| (QREFELT % 114)) (|spadConstant| % 48))
@@ -1354,7 +1354,7 @@
                                       (|SPADfirst|
                                        (SPADCALL |kx| (QREFELT % 99)))
                                       |x| (QREFELT % 100)))
-                               (GO #3=#:G456))))))))
+                               (GO #3=#:G431))))))))
                     (COND
                      ((SPADCALL |x| (|spadConstant| % 89) (QREFELT % 125))
                       (COND
@@ -1553,7 +1553,7 @@
 
 (SDEFUN |EF;ilog| ((|x| (F)) (% (F)))
         (SPROG
-         ((#1=#:G484 NIL)
+         ((#1=#:G459 NIL)
           (|den| (|SparseMultivariatePolynomial| R (|Kernel| F)))
           (|num1| (|Boolean|))
           (|num| (|SparseMultivariatePolynomial| R (|Kernel| F))))
@@ -1587,7 +1587,7 @@
                                        (QREFELT % 145))
                                       (QREFELT % 121))
                             (QREFELT % 49)))
-                     (GO #2=#:G482))))))))))
+                     (GO #2=#:G457))))))))))
             (EXIT (SPADCALL (QREFELT % 14) |x| (QREFELT % 121)))))
           #2# (EXIT #1#)))) 
 
@@ -1879,25 +1879,6 @@
 
 (DECLAIM (NOTINLINE |ElementaryFunction;|)) 
 
-(DEFUN |ElementaryFunction| (&REST #1=#:G741)
-  (SPROG NIL
-         (PROG (#2=#:G742)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ElementaryFunction|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ElementaryFunction;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|ElementaryFunction|)))))))))) 
-
 (DEFUN |ElementaryFunction;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -2171,6 +2152,25 @@
           (SPADCALL (QREFELT % 39) (CONS #'|ElementaryFunction!20| %)
                     (QREFELT % 203))
           %))) 
+
+(DEFUN |ElementaryFunction| (&REST #1=#:G716)
+  (SPROG NIL
+         (PROG (#2=#:G717)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ElementaryFunction|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ElementaryFunction;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|ElementaryFunction|)))))))))) 
 
 (DEFUN |ElementaryFunction!20| (|x| %)
   (SPADCALL

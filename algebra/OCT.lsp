@@ -98,24 +98,9 @@
 
 (DECLAIM (NOTINLINE |Octonion;|)) 
 
-(DEFUN |Octonion| (#1=#:G94)
-  (SPROG NIL
-         (PROG (#2=#:G95)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|Octonion|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Octonion;| #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Octonion|)))))))))) 
-
 (DEFUN |Octonion;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G91 NIL) (#2=#:G92 NIL) (#3=#:G93 NIL) (% NIL)
+   ((|pv$| NIL) (#1=#:G69 NIL) (#2=#:G70 NIL) (#3=#:G71 NIL) (% NIL)
     (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -208,6 +193,21 @@
               (|Record| (|:| |e| (|Quaternion| |#1|))
                         (|:| E (|Quaternion| |#1|))))
     %))) 
+
+(DEFUN |Octonion| (#1=#:G72)
+  (SPROG NIL
+         (PROG (#2=#:G73)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|Octonion|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Octonion;| #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Octonion|)))))))))) 
 
 (MAKEPROP '|Octonion| '|infovec|
           (LIST

@@ -39,40 +39,28 @@
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$lisplibOperationAlist| NIL))
 
-; readLib(fn) == rMkIstream(make_filename(fn))
+; readLib(fn) == kaf_open(make_filename(fn), false)
 
 (DEFUN |readLib| (|fn|)
-  (PROG () (RETURN (|rMkIstream| (|make_filename| |fn|)))))
+  (PROG () (RETURN (|kaf_open| (|make_filename| |fn|) NIL))))
 
-; writeLib(fn) == rMkOstream(make_filename(fn))
+; writeLib(fn) == kaf_open(make_filename(fn), true)
 
 (DEFUN |writeLib| (|fn|)
-  (PROG () (RETURN (|rMkOstream| (|make_filename| |fn|)))))
+  (PROG () (RETURN (|kaf_open| (|make_filename| |fn|) T))))
 
-; writeLib0(fn, ft) == rMkOstream(make_filename0(fn, ft))
+; writeLib0(fn, ft) == kaf_open(make_filename0(fn, ft), true)
 
 (DEFUN |writeLib0| (|fn| |ft|)
-  (PROG () (RETURN (|rMkOstream| (|make_filename0| |fn| |ft|)))))
+  (PROG () (RETURN (|kaf_open| (|make_filename0| |fn| |ft|) T))))
 
-; lisplibWrite(prop,val,filename) ==
+; lisplibWrite(prop, val, lib_file) ==
 ;   -- this may someday not write NIL keys, but it will now
 ;   if $LISPLIB then
-;      rwrite(prop,val,filename)
+;      kaf_write(lib_file, prop, val)
 
-(DEFUN |lisplibWrite| (|prop| |val| |filename|)
-  (PROG () (RETURN (COND ($LISPLIB (|rwrite| |prop| |val| |filename|))))))
-
-; rwriteLispForm(key,form) ==
-;   if $LISPLIB then
-;     rwrite( key,form,$libFile)
-;     output_lisp_form(form)
-
-(DEFUN |rwriteLispForm| (|key| |form|)
-  (PROG ()
-    (RETURN
-     (COND
-      ($LISPLIB (|rwrite| |key| |form| |$libFile|)
-       (|output_lisp_form| |form|))))))
+(DEFUN |lisplibWrite| (|prop| |val| |lib_file|)
+  (PROG () (RETURN (COND ($LISPLIB (|kaf_write| |lib_file| |prop| |val|))))))
 
 ; loadLibIfNotLoaded libName ==
 ;   -- replaces old SpadCondLoad
@@ -110,6 +98,7 @@
 
 ; loadLibNoUpdate1(cname, fullLibName) ==
 ;   if $printLoadMsgs then
+;     kind := get_database(cname, 'CONSTRUCTORKIND)
 ;     sayKeyedMsg("S2IL0002", [fullLibName, kind, cname])
 ;   load_quietly(fullLibName)
 ;   clearConstructorCache cname
@@ -117,11 +106,12 @@
 ;   MAKEPROP(cname,'LOADED,fullLibName)
 
 (DEFUN |loadLibNoUpdate1| (|cname| |fullLibName|)
-  (PROG ()
+  (PROG (|kind|)
     (RETURN
      (PROGN
       (COND
        (|$printLoadMsgs|
+        (SETQ |kind| (|get_database| |cname| 'CONSTRUCTORKIND))
         (|sayKeyedMsg| 'S2IL0002 (LIST |fullLibName| |kind| |cname|))))
       (|load_quietly| |fullLibName|)
       (|clearConstructorCache| |cname|)
@@ -364,14 +354,13 @@
 
 ; compDefineLisplib(df:=["DEF",[op,:.],:.],m,e,prefix,fal,fn) ==
 ;   --fn= compDefineCategory OR compDefineFunctor
-;   sayMSG fillerSpaces(72,'"-")
+;   sayMSG(filler_chars(72, '"-"))
 ;   $LISPLIB: local := 'T
 ;   $op: local := op
 ;   $lisplibPredicates: local := NIL -- set by makePredicateBitVector
 ;   $lisplibForm: local := NIL
 ;   $lisplibKind: local := NIL
 ;   $lisplibAbbreviation: local := NIL
-;   $lisplibParents: local := NIL
 ;   $lisplibAncestors: local := NIL
 ;   $lisplibModemap: local := NIL
 ;   $lisplibModemapAlist: local := NIL
@@ -392,13 +381,13 @@
 ;             sayMSG ['"   compiling into ", $spadLibFT, :bright libName],
 ;             res := FUNCALL(fn, df, m, e, prefix, fal),
 ;             sayMSG ['"   finalizing ",$spadLibFT,:bright libName],
-;             finalizeLisplib libName),
+;             finalizeLisplib(libName, $libFile)),
 ;       PROGN(if $compiler_output_stream then CLOSE($compiler_output_stream),
-;             RSHUT $libFile))
+;             kaf_close($libFile)))
 ;   lisplibDoRename(libName)
 ;   compile_lib(make_full_namestring(make_filename0(libName, $spadLibFT)))
 ;   FRESH_-LINE(get_algebra_stream())
-;   sayMSG fillerSpaces(72,'"-")
+;   sayMSG(filler_chars(72, '"-"))
 ;   merge_info_from_objects([get_database(op, 'ABBREVIATION)], [], false)
 ;   $newConlist := [op, :$newConlist]  ---------->  bound in function "compiler"
 ;   if $lisplibKind = 'category
@@ -409,26 +398,24 @@
 (DEFUN |compDefineLisplib| (|df| |m| |e| |prefix| |fal| |fn|)
   (PROG (|$compiler_output_stream| |$lisplibCategory| |$libFile|
          |$lisplibSuperDomain| |$lisplibOperationAlist| |$lisplibModemapAlist|
-         |$lisplibModemap| |$lisplibAncestors| |$lisplibParents|
-         |$lisplibAbbreviation| |$lisplibKind| |$lisplibForm|
-         |$lisplibPredicates| |$op| $LISPLIB |res| |libName| |op|)
+         |$lisplibModemap| |$lisplibAncestors| |$lisplibAbbreviation|
+         |$lisplibKind| |$lisplibForm| |$lisplibPredicates| |$op| $LISPLIB
+         |res| |libName| |op|)
     (DECLARE
      (SPECIAL |$compiler_output_stream| |$lisplibCategory| |$libFile|
       |$lisplibSuperDomain| |$lisplibOperationAlist| |$lisplibModemapAlist|
-      |$lisplibModemap| |$lisplibAncestors| |$lisplibParents|
-      |$lisplibAbbreviation| |$lisplibKind| |$lisplibForm| |$lisplibPredicates|
-      |$op| $LISPLIB))
+      |$lisplibModemap| |$lisplibAncestors| |$lisplibAbbreviation|
+      |$lisplibKind| |$lisplibForm| |$lisplibPredicates| |$op| $LISPLIB))
     (RETURN
      (PROGN
       (SETQ |op| (CAADR |df|))
-      (|sayMSG| (|fillerSpaces| 72 "-"))
+      (|sayMSG| (|filler_chars| 72 "-"))
       (SETQ $LISPLIB 'T)
       (SETQ |$op| |op|)
       (SETQ |$lisplibPredicates| NIL)
       (SETQ |$lisplibForm| NIL)
       (SETQ |$lisplibKind| NIL)
       (SETQ |$lisplibAbbreviation| NIL)
-      (SETQ |$lisplibParents| NIL)
       (SETQ |$lisplibAncestors| NIL)
       (SETQ |$lisplibModemap| NIL)
       (SETQ |$lisplibModemapAlist| NIL)
@@ -452,15 +439,15 @@
            (SETQ |res| (FUNCALL |fn| |df| |m| |e| |prefix| |fal|))
            (|sayMSG|
             (CONS "   finalizing " (CONS |$spadLibFT| (|bright| |libName|))))
-           (|finalizeLisplib| |libName|))
+           (|finalizeLisplib| |libName| |$libFile|))
         (PROGN
          (COND (|$compiler_output_stream| (CLOSE |$compiler_output_stream|)))
-         (RSHUT |$libFile|)))
+         (|kaf_close| |$libFile|)))
       (|lisplibDoRename| |libName|)
       (|compile_lib|
        (|make_full_namestring| (|make_filename0| |libName| |$spadLibFT|)))
       (FRESH-LINE (|get_algebra_stream|))
-      (|sayMSG| (|fillerSpaces| 72 "-"))
+      (|sayMSG| (|filler_chars| 72 "-"))
       (|merge_info_from_objects| (LIST (|get_database| |op| 'ABBREVIATION)) NIL
        NIL)
       (SETQ |$newConlist| (CONS |op| |$newConlist|))
@@ -484,52 +471,50 @@
       (SETQ |$compiler_output_stream|
               (|make_compiler_output_stream| |$libFile| |libName|))))))
 
-; finalizeLisplib libName ==
-;   lisplibWrite('"constructorForm",removeZeroOne $lisplibForm,$libFile)
-;   lisplibWrite('"constructorKind",kind:=removeZeroOne $lisplibKind,$libFile)
-;   lisplibWrite('"constructorModemap",removeZeroOne $lisplibModemap,$libFile)
+; finalizeLisplib(libName, libFile) ==
+;   lisplibWrite('"constructorForm", removeZeroOne($lisplibForm), libFile)
+;   lisplibWrite('"constructorKind", kind:=removeZeroOne $lisplibKind, libFile)
+;   lisplibWrite('"constructorModemap", removeZeroOne($lisplibModemap), libFile)
 ;   $lisplibCategory:= $lisplibCategory or $lisplibModemap.mmTarget
 ;   -- set to target of modemap for package/domain constructors;
 ;   -- to the right-hand sides (the definition) for category constructors
-;   lisplibWrite('"constructorCategory",$lisplibCategory,$libFile)
-;   lisplibWrite('"sourceFile", $edit_file, $libFile)
-;   lisplibWrite('"modemaps",removeZeroOne $lisplibModemapAlist,$libFile)
+;   lisplibWrite('"constructorCategory", $lisplibCategory, libFile)
+;   lisplibWrite('"sourceFile", $edit_file, libFile)
+;   lisplibWrite('"modemaps",removeZeroOne $lisplibModemapAlist, libFile)
 ;   ops := getConstructorOps($lisplibForm, kind)
-;   lisplibWrite('"operationAlist", removeZeroOne ops, $libFile)
-;   lisplibWrite('"superDomain",removeZeroOne $lisplibSuperDomain,$libFile)
-;   lisplibWrite('"predicates",removeZeroOne  $lisplibPredicates,$libFile)
-;   lisplibWrite('"abbreviation",$lisplibAbbreviation,$libFile)
-;   lisplibWrite('"parents",removeZeroOne $lisplibParents,$libFile)
-;   lisplibWrite('"ancestors",removeZeroOne $lisplibAncestors,$libFile)
-;   lisplibWrite('"documentation",finalizeDocumentation(),$libFile)
+;   lisplibWrite('"operationAlist", removeZeroOne(ops), libFile)
+;   lisplibWrite('"superDomain", removeZeroOne($lisplibSuperDomain), libFile)
+;   lisplibWrite('"predicates", removeZeroOne($lisplibPredicates), libFile)
+;   lisplibWrite('"abbreviation", $lisplibAbbreviation, libFile)
+;   lisplibWrite('"ancestors", removeZeroOne($lisplibAncestors), libFile)
+;   lisplibWrite('"documentation", finalizeDocumentation(), libFile)
 
-(DEFUN |finalizeLisplib| (|libName|)
+(DEFUN |finalizeLisplib| (|libName| |libFile|)
   (PROG (|kind| |ops|)
     (RETURN
      (PROGN
       (|lisplibWrite| "constructorForm" (|removeZeroOne| |$lisplibForm|)
-       |$libFile|)
+       |libFile|)
       (|lisplibWrite| "constructorKind"
-       (SETQ |kind| (|removeZeroOne| |$lisplibKind|)) |$libFile|)
+       (SETQ |kind| (|removeZeroOne| |$lisplibKind|)) |libFile|)
       (|lisplibWrite| "constructorModemap" (|removeZeroOne| |$lisplibModemap|)
-       |$libFile|)
+       |libFile|)
       (SETQ |$lisplibCategory|
               (OR |$lisplibCategory| (CADAR |$lisplibModemap|)))
-      (|lisplibWrite| "constructorCategory" |$lisplibCategory| |$libFile|)
-      (|lisplibWrite| "sourceFile" |$edit_file| |$libFile|)
+      (|lisplibWrite| "constructorCategory" |$lisplibCategory| |libFile|)
+      (|lisplibWrite| "sourceFile" |$edit_file| |libFile|)
       (|lisplibWrite| "modemaps" (|removeZeroOne| |$lisplibModemapAlist|)
-       |$libFile|)
+       |libFile|)
       (SETQ |ops| (|getConstructorOps| |$lisplibForm| |kind|))
-      (|lisplibWrite| "operationAlist" (|removeZeroOne| |ops|) |$libFile|)
+      (|lisplibWrite| "operationAlist" (|removeZeroOne| |ops|) |libFile|)
       (|lisplibWrite| "superDomain" (|removeZeroOne| |$lisplibSuperDomain|)
-       |$libFile|)
+       |libFile|)
       (|lisplibWrite| "predicates" (|removeZeroOne| |$lisplibPredicates|)
-       |$libFile|)
-      (|lisplibWrite| "abbreviation" |$lisplibAbbreviation| |$libFile|)
-      (|lisplibWrite| "parents" (|removeZeroOne| |$lisplibParents|) |$libFile|)
+       |libFile|)
+      (|lisplibWrite| "abbreviation" |$lisplibAbbreviation| |libFile|)
       (|lisplibWrite| "ancestors" (|removeZeroOne| |$lisplibAncestors|)
-       |$libFile|)
-      (|lisplibWrite| "documentation" (|finalizeDocumentation|) |$libFile|)))))
+       |libFile|)
+      (|lisplibWrite| "documentation" (|finalizeDocumentation|) |libFile|)))))
 
 ; lisplibDoRename(libName) ==
 ;     replace_lib(make_filename0(libName, '"erlib"),
@@ -732,39 +717,6 @@
        (PROGN (SETQ |sig| (CDAR |mm|)) |sig|))
       ('T NIL)))))
 
-; augModemapsFromDomain1(name,functorForm,e) ==
-;   get_oplist_maker(IFCAR(functorForm)) =>
-;       add_builtin_modemaps(name, functorForm, e)
-;   atom functorForm and (catform:= getmode(functorForm,e)) =>
-;     augModemapsFromCategory(name, functorForm, catform, e)
-;   mappingForm := getmodeOrMapping(IFCAR functorForm, e) =>
-;     ["Mapping", categoryForm, :.] := mappingForm
-;     catform:= substituteCategoryArguments(rest functorForm,categoryForm)
-;     augModemapsFromCategory(name, functorForm, catform, e)
-;   stackMessage [functorForm,'" is an unknown mode"]
-;   e
-
-(DEFUN |augModemapsFromDomain1| (|name| |functorForm| |e|)
-  (PROG (|catform| |mappingForm| |categoryForm|)
-    (RETURN
-     (COND
-      ((|get_oplist_maker| (IFCAR |functorForm|))
-       (|add_builtin_modemaps| |name| |functorForm| |e|))
-      ((AND (ATOM |functorForm|)
-            (SETQ |catform| (|getmode| |functorForm| |e|)))
-       (|augModemapsFromCategory| |name| |functorForm| |catform| |e|))
-      ((SETQ |mappingForm| (|getmodeOrMapping| (IFCAR |functorForm|) |e|))
-       (PROGN
-        (SETQ |categoryForm| (CADR |mappingForm|))
-        (SETQ |catform|
-                (|substituteCategoryArguments| (CDR |functorForm|)
-                 |categoryForm|))
-        (|augModemapsFromCategory| |name| |functorForm| |catform| |e|)))
-      ('T
-       (PROGN
-        (|stackMessage| (LIST |functorForm| " is an unknown mode"))
-        |e|))))))
-
 ; getSlot1FromCategoryForm ([op, :argl]) ==
 ;   u:= eval [op,:MAPCAR('MKQ,TAKE(#argl,$FormalMapVariableList))]
 ;   null VECP u =>
@@ -790,7 +742,7 @@
 ;   c is [op,:argl] =>
 ;     op="Join" =>
 ;         nargs := [mkEvalableCategoryForm(x, e) or return nil for x in argl]
-;         nargs => ["Join", :nargs]
+;         nargs => ["JoinInner", ["LIST", :nargs]]
 ;     op is "DomainSubstitutionMacro" =>
 ;         mkEvalableCategoryForm(CADR argl, e)
 ;     op is "mkCategory" => c
@@ -828,7 +780,7 @@
                                  |bfVar#12|))))
                       (SETQ |bfVar#11| (CDR |bfVar#11|))))
                    NIL |argl| NIL))
-          (COND (|nargs| (CONS '|Join| |nargs|)))))
+          (COND (|nargs| (LIST '|JoinInner| (CONS 'LIST |nargs|))))))
         ((EQ |op| '|DomainSubstitutionMacro|)
          (|mkEvalableCategoryForm| (CADR |argl|) |e|))
         ((EQ |op| '|mkCategory|) |c|)

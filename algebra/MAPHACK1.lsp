@@ -1,7 +1,7 @@
 
 (SDEFUN |MAPHACK1;iter;MNni2A;1|
         ((|g| (|Mapping| A A)) (|n| (|NonNegativeInteger|)) (|x| (A)) (% (A)))
-        (SPROG ((#1=#:G12 NIL) (|i| NIL))
+        (SPROG ((#1=#:G5 NIL) (|i| NIL))
                (SEQ
                 (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -12,7 +12,7 @@
 (SDEFUN |MAPHACK1;recur;MNni2A;2|
         ((|g| (|Mapping| A (|NonNegativeInteger|) A))
          (|n| (|NonNegativeInteger|)) (|x| (A)) (% (A)))
-        (SPROG ((#1=#:G18 NIL) (|i| NIL))
+        (SPROG ((#1=#:G11 NIL) (|i| NIL))
                (SEQ
                 (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -21,25 +21,6 @@
                 (EXIT |x|)))) 
 
 (DECLAIM (NOTINLINE |MappingPackageInternalHacks1;|)) 
-
-(DEFUN |MappingPackageInternalHacks1| (#1=#:G19)
-  (SPROG NIL
-         (PROG (#2=#:G20)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|MappingPackageInternalHacks1|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|MappingPackageInternalHacks1;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|MappingPackageInternalHacks1|)))))))))) 
 
 (DEFUN |MappingPackageInternalHacks1;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
@@ -55,6 +36,25 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |MappingPackageInternalHacks1| (#1=#:G12)
+  (SPROG NIL
+         (PROG (#2=#:G13)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|MappingPackageInternalHacks1|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|MappingPackageInternalHacks1;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|MappingPackageInternalHacks1|)))))))))) 
 
 (MAKEPROP '|MappingPackageInternalHacks1| '|infovec|
           (LIST

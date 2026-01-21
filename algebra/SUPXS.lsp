@@ -78,32 +78,10 @@
 
 (DECLAIM (NOTINLINE |SparseUnivariatePuiseuxSeries;|)) 
 
-(DEFUN |SparseUnivariatePuiseuxSeries| (&REST #1=#:G89)
-  (SPROG NIL
-         (PROG (#2=#:G90)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T NIL NIL))
-                     (HGET |$ConstructorCache|
-                           '|SparseUnivariatePuiseuxSeries|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |SparseUnivariatePuiseuxSeries;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|SparseUnivariatePuiseuxSeries|)))))))))) 
-
 (DEFUN |SparseUnivariatePuiseuxSeries;| (|#1| |#2| |#3|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G82 NIL) (#2=#:G83 NIL) (#3=#:G84 NIL) (#4=#:G85 NIL)
-    (#5=#:G87 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+   ((|pv$| NIL) (#1=#:G54 NIL) (#2=#:G55 NIL) (#3=#:G56 NIL) (#4=#:G57 NIL)
+    (#5=#:G59 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 |#2|)
@@ -389,6 +367,28 @@
      ((|testBitVector| |pv$| 6)
       (QSETREFV % 39 (CONS (|dispatchFunction| |SUPXS;integrate;%V%;8|) %))))
     %))) 
+
+(DEFUN |SparseUnivariatePuiseuxSeries| (&REST #1=#:G61)
+  (SPROG NIL
+         (PROG (#2=#:G62)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T NIL NIL))
+                     (HGET |$ConstructorCache|
+                           '|SparseUnivariatePuiseuxSeries|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |SparseUnivariatePuiseuxSeries;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|SparseUnivariatePuiseuxSeries|)))))))))) 
 
 (MAKEPROP '|SparseUnivariatePuiseuxSeries| '|infovec|
           (LIST

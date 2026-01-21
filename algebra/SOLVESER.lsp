@@ -7,10 +7,10 @@
         (SPROG
          ((|polyvar|
            (|Fraction| (|SparseUnivariatePolynomial| (|Expression| R))))
-          (#1=#:G29 NIL)
+          (#1=#:G5 NIL)
           (|vecti|
            (|Fraction| (|SparseUnivariatePolynomial| (|Expression| R))))
-          (#2=#:G34 NIL) (|i| NIL) (Z (|Symbol|)))
+          (#2=#:G10 NIL) (|i| NIL) (Z (|Symbol|)))
          (SEQ (LETT Z (SPADCALL (QREFELT % 8)))
               (LETT |polyvar| (|spadConstant| % 10))
               (SEQ (LETT |i| 1) (LETT #2# (+ |n| 1)) G190
@@ -47,7 +47,7 @@
          (% (|Fraction| (|SparseUnivariatePolynomial| (|Expression| R)))))
         (SPROG
          ((|newF| (|Fraction| (|SparseUnivariatePolynomial| (|Expression| R))))
-          (#1=#:G44 NIL)
+          (#1=#:G20 NIL)
           (|newF2|
            (|Union| (|SparseUnivariatePolynomial| (|Expression| R)) "failed"))
           (|newF1|
@@ -74,7 +74,7 @@
                            (SPADCALL |g2| (QREFELT % 31))))
                 (LETT N (SPADCALL |degF| |degG| (QREFELT % 33)))
                 (EXIT
-                 (COND ((QEQCAR N 1) (PROGN (LETT #1# |exprf|) (GO #5=#:G43)))
+                 (COND ((QEQCAR N 1) (PROGN (LETT #1# |exprf|) (GO #5=#:G19)))
                        (#6='T
                         (SEQ (LETT |m| (QCDR N))
                              (LETT |newF1|
@@ -108,8 +108,8 @@
           (|Union| (|SparseUnivariatePolynomial| (|Expression| R)) "failed")))
         (SPROG
          ((|resul| (|SparseUnivariatePolynomial| (|Expression| R)))
-          (|solvevarlist| (|Vector| (|Expression| R))) (#1=#:G106 NIL)
-          (#2=#:G111 NIL)
+          (|solvevarlist| (|Vector| (|Expression| R))) (#1=#:G80 NIL)
+          (#2=#:G85 NIL)
           (|solvar|
            (|Record|
             (|:| |particular|
@@ -117,8 +117,8 @@
             (|:| |basis| (|List| (|Vector| (|Expression| R))))))
           (|coeffma| (|Matrix| (|Expression| R)))
           (|vec| (|Vector| (|Expression| R)))
-          (|coeffmat| (|Matrix| (|Expression| R))) (#4=#:G102 NIL)
-          (#5=#:G112 NIL) (|i| NIL))
+          (|coeffmat| (|Matrix| (|Expression| R))) (#4=#:G76 NIL)
+          (#5=#:G86 NIL) (|i| NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -154,7 +154,7 @@
             (EXIT
              (COND
               ((QEQCAR (QCAR |solvar|) 1)
-               (PROGN (LETT #2# (CONS 1 "failed")) (GO #6=#:G110)))
+               (PROGN (LETT #2# (CONS 1 "failed")) (GO #6=#:G84)))
               ('T
                (SEQ
                 (LETT |solvevarlist|
@@ -175,9 +175,24 @@
 
 (DECLAIM (NOTINLINE |TransSolvePackageService;|)) 
 
-(DEFUN |TransSolvePackageService| (#1=#:G113)
+(DEFUN |TransSolvePackageService;| (|#1|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT |dv$| (LIST '|TransSolvePackageService| DV$1))
+          (LETT % (GETREFV 51))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|TransSolvePackageService|
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |TransSolvePackageService| (#1=#:G87)
   (SPROG NIL
-         (PROG (#2=#:G114)
+         (PROG (#2=#:G88)
            (RETURN
             (COND
              ((LETT #2#
@@ -193,21 +208,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|TransSolvePackageService|)))))))))) 
-
-(DEFUN |TransSolvePackageService;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT |dv$| (LIST '|TransSolvePackageService| DV$1))
-          (LETT % (GETREFV 51))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|TransSolvePackageService|
-                      (LIST DV$1) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|TransSolvePackageService| '|infovec|
           (LIST

@@ -1,6 +1,6 @@
 
 (SDEFUN |HDP;<;2%B;1| ((|v1| (%)) (|v2| (%)) (% (|Boolean|)))
-        (SPROG ((#1=#:G20 NIL) (|i| NIL) (|n2| (S)) (|n1| (S)) (#2=#:G21 NIL))
+        (SPROG ((#1=#:G12 NIL) (|i| NIL) (|n2| (S)) (|n1| (S)) (#2=#:G13 NIL))
                (SEQ
                 (EXIT
                  (SEQ (LETT |n1| (|spadConstant| % 9))
@@ -31,7 +31,7 @@
                                         (SPADCALL |v2| |i| (QREFELT % 11))
                                         (SPADCALL |v1| |i| (QREFELT % 11))
                                         (QREFELT % 14))
-                                       (PROGN (LETT #1# 'T) (GO #3=#:G19))))
+                                       (PROGN (LETT #1# 'T) (GO #3=#:G11))))
                                      (EXIT
                                       (COND
                                        ((SPADCALL
@@ -46,31 +46,11 @@
 
 (DECLAIM (NOTINLINE |HomogeneousDirectProduct;|)) 
 
-(DEFUN |HomogeneousDirectProduct| (&REST #1=#:G59)
-  (SPROG NIL
-         (PROG (#2=#:G60)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T))
-                                               (HGET |$ConstructorCache|
-                                                     '|HomogeneousDirectProduct|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |HomogeneousDirectProduct;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|HomogeneousDirectProduct|)))))))))) 
-
 (DEFUN |HomogeneousDirectProduct;| (|#1| |#2|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G49 NIL) (#2=#:G50 NIL) (#3=#:G51 NIL) (#4=#:G52 NIL)
-    (#5=#:G53 NIL) (#6=#:G55 NIL) (#7=#:G54 NIL) (#8=#:G56 NIL) (#9=#:G57 NIL)
-    (#10=#:G58 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+   ((|pv$| NIL) (#1=#:G31 NIL) (#2=#:G32 NIL) (#3=#:G33 NIL) (#4=#:G34 NIL)
+    (#5=#:G35 NIL) (#6=#:G37 NIL) (#7=#:G36 NIL) (#8=#:G38 NIL) (#9=#:G39 NIL)
+    (#10=#:G40 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 |#1|)
     (LETT DV$2 (|devaluate| |#2|))
@@ -575,6 +555,26 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 8 (|Vector| |#2|))
     %))) 
+
+(DEFUN |HomogeneousDirectProduct| (&REST #1=#:G41)
+  (SPROG NIL
+         (PROG (#2=#:G42)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T))
+                                               (HGET |$ConstructorCache|
+                                                     '|HomogeneousDirectProduct|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |HomogeneousDirectProduct;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|HomogeneousDirectProduct|)))))))))) 
 
 (MAKEPROP '|HomogeneousDirectProduct| '|infovec|
           (LIST

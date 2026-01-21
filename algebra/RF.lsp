@@ -46,8 +46,8 @@
          (|l| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))
          (% (|Fraction| (|Polynomial| R))))
         (SPROG
-         ((#1=#:G31 NIL) (|eq| NIL) (#2=#:G30 NIL) (#3=#:G29 NIL)
-          (#4=#:G28 NIL))
+         ((#1=#:G19 NIL) (|eq| NIL) (#2=#:G18 NIL) (#3=#:G17 NIL)
+          (#4=#:G16 NIL))
          (SEQ
           (SPADCALL |x|
                     (PROGN
@@ -104,23 +104,6 @@
 
 (DECLAIM (NOTINLINE |RationalFunction;|)) 
 
-(DEFUN |RationalFunction| (#1=#:G35)
-  (SPROG NIL
-         (PROG (#2=#:G36)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|RationalFunction|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|RationalFunction;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|RationalFunction|)))))))))) 
-
 (DEFUN |RationalFunction;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -135,6 +118,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |RationalFunction| (#1=#:G23)
+  (SPROG NIL
+         (PROG (#2=#:G24)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|RationalFunction|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|RationalFunction;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|RationalFunction|)))))))))) 
 
 (MAKEPROP '|RationalFunction| '|infovec|
           (LIST

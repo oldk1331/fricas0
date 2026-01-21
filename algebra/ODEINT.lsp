@@ -21,7 +21,7 @@
            (|Record| (|:| |coef| (|Fraction| (|Integer|))) (|:| |logand| F))))
          (% (F)))
         (SPROG
-         ((#1=#:G34 NIL) (#2=#:G33 (F)) (#3=#:G35 (F)) (#4=#:G40 NIL) (|r| NIL)
+         ((#1=#:G20 NIL) (#2=#:G19 (F)) (#3=#:G21 (F)) (#4=#:G26 NIL) (|r| NIL)
           (|ll|
            (|List|
             (|Record| (|:| |coef| (|Fraction| (|Integer|))) (|:| |logand| F))))
@@ -85,7 +85,7 @@
            (|Union|
             (|Record| (|:| |coef| (|Fraction| (|Integer|))) (|:| |logand| F))
             "failed"))
-          (#1=#:G61 NIL) (|term| NIL)
+          (#1=#:G44 NIL) (|term| NIL)
           (|l| (|List| #2=(|SparseMultivariatePolynomial| R (|Kernel| F))))
           (|v|
            (|Union| (|List| (|SparseMultivariatePolynomial| R (|Kernel| F)))
@@ -142,8 +142,8 @@
 (SDEFUN |ODEINT;isQ|
         ((|l| (|List| F)) (% (|Union| (|Fraction| (|Integer|)) "failed")))
         (SPROG
-         ((|prod| (|Fraction| (|Integer|))) (#1=#:G70 NIL)
-          (|u| (|Union| (|Fraction| (|Integer|)) "failed")) (#2=#:G71 NIL)
+         ((|prod| (|Fraction| (|Integer|))) (#1=#:G53 NIL)
+          (|u| (|Union| (|Fraction| (|Integer|)) "failed")) (#2=#:G54 NIL)
           (|x| NIL))
          (SEQ
           (EXIT
@@ -158,7 +158,7 @@
                             ((QEQCAR |u| 1)
                              (PROGN
                               (LETT #1# (CONS 1 "failed"))
-                              (GO #3=#:G69)))
+                              (GO #3=#:G52)))
                             ('T
                              (LETT |prod|
                                    (SPADCALL |prod| (QCDR |u|)
@@ -174,7 +174,7 @@
            (|Record| (|:| |coef| (|Fraction| (|Integer|))) (|:| |logand| F))
            "failed")))
         (SPROG
-         ((#1=#:G93 NIL) (#2=#:G92 NIL)
+         ((#1=#:G76 NIL) (#2=#:G75 NIL)
           (|u| (|Union| (|Fraction| (|Integer|)) "failed")) (|l| (|List| F))
           (|v| (|Union| (|List| F) "failed")))
          (SEQ
@@ -224,33 +224,14 @@
                                                                             55))
                                                                   (QREFELT %
                                                                            58))))))
-                                              (GO #3=#:G86))))))))
+                                              (GO #3=#:G69))))))))
                                    (EXIT (CONS 1 "failed"))))
                                  #3# (EXIT #2#)))
-                          (GO #4=#:G89))))))))
+                          (GO #4=#:G72))))))))
                (EXIT (CONS 1 "failed"))))
              #4# (EXIT #1#))))))) 
 
 (DECLAIM (NOTINLINE |ODEIntegration;|)) 
-
-(DEFUN |ODEIntegration| (&REST #1=#:G94)
-  (SPROG NIL
-         (PROG (#2=#:G95)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ODEIntegration|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ODEIntegration;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|ODEIntegration|)))))))))) 
 
 (DEFUN |ODEIntegration;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
@@ -268,6 +249,25 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |ODEIntegration| (&REST #1=#:G77)
+  (SPROG NIL
+         (PROG (#2=#:G78)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ODEIntegration|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ODEIntegration;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|ODEIntegration|)))))))))) 
 
 (MAKEPROP '|ODEIntegration| '|infovec|
           (LIST

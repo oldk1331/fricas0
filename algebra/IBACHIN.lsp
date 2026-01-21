@@ -2,7 +2,7 @@
 (SDEFUN |IBACHIN;applyFrobToMatrix|
         ((|mat| (|Matrix| R)) (|q| (|NonNegativeInteger|)) (% (|Matrix| R)))
         (SPROG
-         ((#1=#:G19 NIL) (|j| NIL) (#2=#:G18 NIL) (|i| NIL)
+         ((#1=#:G11 NIL) (|j| NIL) (#2=#:G10 NIL) (|i| NIL)
           (|ans| (|Matrix| R)) (|n| (|NonNegativeInteger|))
           (|m| (|NonNegativeInteger|)))
          (SEQ (LETT |m| (ANROWS |mat|)) (LETT |n| (ANCOLS |mat|))
@@ -47,7 +47,7 @@
            (|List|
             (|Record| (|:| |basis| (|Matrix| R)) (|:| |basisDen| R)
                       (|:| |basisInv| (|Matrix| R)))))
-          (|newBasis| #1#) (|bDen| (R)) (|bInv| #3#) (|b| #2#) (#4=#:G34 NIL)
+          (|newBasis| #1#) (|bDen| (R)) (|bInv| #3#) (|b| #2#) (#4=#:G22 NIL)
           (|i| NIL))
          (SEQ (LETT |outList| (SPADCALL |bas| (QREFELT % 17)))
               (LETT |b| (QVELT |bas| 0)) (LETT |bInv| (QVELT |bas| 2))
@@ -79,7 +79,7 @@
          (% (|List| (|SparseUnivariatePolynomial| K))))
         (SPROG
          ((|outList| (|List| (|SparseUnivariatePolynomial| K)))
-          (|coef| #1=(|SparseUnivariatePolynomial| K)) (#2=#:G41 NIL) (|i| NIL)
+          (|coef| #1=(|SparseUnivariatePolynomial| K)) (#2=#:G28 NIL) (|i| NIL)
           (|xx| #1#))
          (SEQ (LETT |coef| (SPADCALL |a| 0 (QREFELT % 22)))
               (LETT |xx| (SPADCALL (|spadConstant| % 18) 1 (QREFELT % 22)))
@@ -103,8 +103,8 @@
 (SDEFUN |IBACHIN;basisInfoToPolys|
         ((|mat| (|Matrix| R)) (|lcm| (R)) (|den| (R)) (% (|List| UP)))
         (SPROG
-         ((|outList| (|List| UP)) (|pp| (UP)) (#1=#:G51 NIL) (|j| NIL)
-          (#2=#:G50 NIL) (|i| NIL) (|n1| (|Integer|)) (|n| (|Integer|)))
+         ((|outList| (|List| UP)) (|pp| (UP)) (#1=#:G37 NIL) (|j| NIL)
+          (#2=#:G36 NIL) (|i| NIL) (|n1| (|Integer|)) (|n| (|Integer|)))
          (SEQ (LETT |n| (ANROWS |mat|)) (LETT |n1| (- |n| 1))
               (LETT |outList| NIL)
               (SEQ (LETT |i| 1) (LETT #2# |n|) G190
@@ -137,7 +137,7 @@
            (|Record| (|:| |basis| (|Matrix| R)) (|:| |basisDen| R)
                      (|:| |basisInv| (|Matrix| R)))))
          (|lcm| (R)) (% (|List| (|List| UP))))
-        (SPROG ((#1=#:G57 NIL) (|b| NIL) (#2=#:G56 NIL))
+        (SPROG ((#1=#:G43 NIL) (|b| NIL) (#2=#:G42 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -164,8 +164,8 @@
            (|Record| (|:| |quotient| (|SparseUnivariatePolynomial| R))
                      (|:| |remainder| (|SparseUnivariatePolynomial| R))))
           (|tau| #2=(|SparseUnivariatePolynomial| R)) (|sigma| #2#)
-          (|rhs| (|SparseUnivariatePolynomial| R)) (#3=#:G70 NIL)
-          (|num| (|SparseUnivariatePolynomial| R)) (#4=#:G89 NIL) (|i| NIL)
+          (|rhs| (|SparseUnivariatePolynomial| R)) (#3=#:G49 NIL)
+          (|num| (|SparseUnivariatePolynomial| R)) (#4=#:G68 NIL) (|i| NIL)
           (|t1| #1#) (|s1| #1#) (|tt1| #5=(|SparseUnivariatePolynomial| |sae|))
           (|ss1| #6=(|SparseUnivariatePolynomial| |sae|))
           (|ee|
@@ -368,13 +368,13 @@
         ((|list| (|List| UP)) (|polyList| (|List| UP)) (|i| (|Integer|))
          (|den| (R)) (% (|List| UP)))
         (SPROG
-         ((#1=#:G115 NIL) (|pp| NIL) (#2=#:G114 NIL) (|invPoly| (UP))
+         ((#1=#:G85 NIL) (|pp| NIL) (#2=#:G84 NIL) (|invPoly| (UP))
           (|n| #3=(|NonNegativeInteger|)) (|prime| (R))
           (|factoredDen|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| R) (|:| |exponent| #3#))))
-          (|q| (UP)) (|j| NIL) (|p| (UP)) (#4=#:G113 NIL))
+          (|q| (UP)) (|j| NIL) (|p| (UP)) (#4=#:G83 NIL))
          (SEQ (LETT |q| (|spadConstant| % 36))
               (SEQ (LETT |j| 1) (LETT #4# (- |i| 1)) G190
                    (COND ((|greater_SI| |j| #4#) (GO G191)))
@@ -428,7 +428,7 @@
         ((|polyList| (|List| UP)) (|n| (|NonNegativeInteger|))
          (% (|Matrix| R)))
         (SPROG
-         ((|poly| (UP)) (#1=#:G124 NIL) (|i| NIL) (#2=#:G125 NIL)
+         ((|poly| (UP)) (#1=#:G94 NIL) (|i| NIL) (#2=#:G95 NIL)
           (|mat| (|Matrix| R)))
          (SEQ (LETT |mat| (MAKE_MATRIX1 |n| |n| (|spadConstant| % 10)))
               (SEQ (LETT #2# |polyList|) (LETT |i| 1) (LETT #1# |n|) G190
@@ -467,9 +467,9 @@
         (SPROG
          ((|matInv| (|Matrix| R)) (|mat| (|Matrix| R))
           (|basisPolys| (|List| UP)) (|basisPolyLists| (|List| (|List| UP)))
-          (|polyList| (|List| UP)) (|i| NIL) (#1=#:G149 NIL) (|pList| NIL)
+          (|polyList| (|List| UP)) (|i| NIL) (#1=#:G111 NIL) (|pList| NIL)
           (|factorBasisPolyLists| (|List| (|List| UP))) (|denLCM| (R))
-          (#2=#:G148 NIL) (|base| NIL) (#3=#:G147 NIL))
+          (#2=#:G110 NIL) (|base| NIL) (#3=#:G109 NIL))
          (SEQ
           (LETT |denLCM|
                 (SPADCALL (ELT % 66)
@@ -522,29 +522,6 @@
 
 (DECLAIM (NOTINLINE |ChineseRemainderToolsForIntegralBases;|)) 
 
-(DEFUN |ChineseRemainderToolsForIntegralBases| (&REST #1=#:G150)
-  (SPROG NIL
-         (PROG (#2=#:G151)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ChineseRemainderToolsForIntegralBases|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function| |ChineseRemainderToolsForIntegralBases;|)
-                       #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|ChineseRemainderToolsForIntegralBases|)))))))))) 
-
 (DEFUN |ChineseRemainderToolsForIntegralBases;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -565,6 +542,29 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |ChineseRemainderToolsForIntegralBases| (&REST #1=#:G112)
+  (SPROG NIL
+         (PROG (#2=#:G113)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ChineseRemainderToolsForIntegralBases|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function| |ChineseRemainderToolsForIntegralBases;|)
+                       #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|ChineseRemainderToolsForIntegralBases|)))))))))) 
 
 (MAKEPROP '|ChineseRemainderToolsForIntegralBases| '|infovec|
           (LIST

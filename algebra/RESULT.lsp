@@ -1,6 +1,6 @@
 
 (SDEFUN |RESULT;cleanUpDomainForm| ((|d| (|SExpression|)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G29 NIL) (|u| NIL) (#2=#:G28 NIL))
+        (SPROG ((#1=#:G14 NIL) (|u| NIL) (#2=#:G13 NIL))
                (SEQ
                 (COND
                  ((NULL (SPADCALL |d| (QREFELT % 15)))
@@ -56,7 +56,7 @@
          (QREFELT % 30))) 
 
 (SDEFUN |RESULT;coerce;%Of;4| ((|r| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G42 NIL) (|key| NIL) (#2=#:G41 NIL))
+        (SPROG ((#1=#:G24 NIL) (|key| NIL) (#2=#:G23 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -85,26 +85,10 @@
 
 (DECLAIM (NOTINLINE |Result;|)) 
 
-(DEFUN |Result| ()
-  (SPROG NIL
-         (PROG (#1=#:G104)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|Result|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|Result|
-                             (LIST (CONS NIL (CONS 1 (|Result;|))))))
-                    (LETT #1# T))
-                (COND ((NOT #1#) (HREM |$ConstructorCache| '|Result|)))))))))) 
-
 (DEFUN |Result;| ()
   (SPROG
-   ((|dv$| NIL) (% NIL) (#1=#:G100 NIL) (#2=#:G99 NIL) (|pv$| NIL)
-    (#3=#:G101 NIL) (#4=#:G102 NIL))
+   ((|dv$| NIL) (% NIL) (#1=#:G81 NIL) (#2=#:G80 NIL) (|pv$| NIL)
+    (#3=#:G82 NIL) (#4=#:G83 NIL))
    (PROGN
     (LETT |dv$| '(|Result|))
     (LETT % (GETREFV 59))
@@ -212,6 +196,22 @@
     (QSETREFV % 11 NIL)
     (QSETREFV % 12 NIL)
     %))) 
+
+(DEFUN |Result| ()
+  (SPROG NIL
+         (PROG (#1=#:G85)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|Result|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|Result|
+                             (LIST (CONS NIL (CONS 1 (|Result;|))))))
+                    (LETT #1# T))
+                (COND ((NOT #1#) (HREM |$ConstructorCache| '|Result|)))))))))) 
 
 (MAKEPROP '|Result| '|infovec|
           (LIST

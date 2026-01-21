@@ -10,7 +10,7 @@
         |c|) 
 
 (SDEFUN |CELL;coerce;%Of;2| ((|c| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G19 NIL) (|sc| NIL) (#2=#:G18 NIL))
+        (SPROG ((#1=#:G13 NIL) (|sc| NIL) (#2=#:G12 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -96,21 +96,6 @@
 
 (DECLAIM (NOTINLINE |Cell;|)) 
 
-(DEFUN |Cell| (#1=#:G54)
-  (SPROG NIL
-         (PROG (#2=#:G55)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|Cell|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Cell;| #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Cell|)))))))))) 
-
 (DEFUN |Cell;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -127,6 +112,21 @@
                     (|List|
                      (|SimpleCell| |#1| (|SparseUnivariatePolynomial| |#1|))))
           %))) 
+
+(DEFUN |Cell| (#1=#:G37)
+  (SPROG NIL
+         (PROG (#2=#:G38)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|Cell|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Cell;| #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Cell|)))))))))) 
 
 (MAKEPROP '|Cell| '|infovec|
           (LIST

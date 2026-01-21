@@ -325,26 +325,6 @@
 
 (DECLAIM (NOTINLINE |StreamTranscendentalFunctionsNonCommutative;|)) 
 
-(DEFUN |StreamTranscendentalFunctionsNonCommutative| (#1=#:G119)
-  (SPROG NIL
-         (PROG (#2=#:G120)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|StreamTranscendentalFunctionsNonCommutative|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|StreamTranscendentalFunctionsNonCommutative;| #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|StreamTranscendentalFunctionsNonCommutative|)))))))))) 
-
 (DEFUN |StreamTranscendentalFunctionsNonCommutative;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -364,6 +344,26 @@
           (QSETREFV % 8 "series must have constant coefficient one")
           (QSETREFV % 9 "series expansion has terms of negative degree")
           %))) 
+
+(DEFUN |StreamTranscendentalFunctionsNonCommutative| (#1=#:G113)
+  (SPROG NIL
+         (PROG (#2=#:G114)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|StreamTranscendentalFunctionsNonCommutative|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|StreamTranscendentalFunctionsNonCommutative;| #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|StreamTranscendentalFunctionsNonCommutative|)))))))))) 
 
 (MAKEPROP '|StreamTranscendentalFunctionsNonCommutative| '|infovec|
           (LIST

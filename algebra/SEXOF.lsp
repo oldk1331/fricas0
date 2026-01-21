@@ -1,8 +1,8 @@
 
 (SDEFUN |SEXOF;coerce;%Of;1| ((|b| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|l1| (|List| (|OutputForm|))) (#1=#:G46 NIL) (|l| (|List| %))
-          (|b1| NIL) (#2=#:G45 NIL) (|r| (%)))
+         ((|l1| (|List| (|OutputForm|))) (#1=#:G27 NIL) (|l| (|List| %))
+          (|b1| NIL) (#2=#:G26 NIL) (|r| (%)))
          (SEQ
           (COND ((SPADCALL |b| (QREFELT % 12)) (SPADCALL NIL (QREFELT % 15)))
                 ((SPADCALL |b| (QREFELT % 16)) (SPADCALL |b| (QREFELT % 18)))
@@ -150,7 +150,7 @@
         (SPADCALL (SPADCALL |b| (QREFELT % 21)) |i| (QREFELT % 53))) 
 
 (SDEFUN |SEXOF;elt;%L%;26| ((|b| (%)) (|li| (|List| (|Integer|))) (% (%)))
-        (SPROG ((#1=#:G89 NIL) (|i| NIL))
+        (SPROG ((#1=#:G62 NIL) (|i| NIL))
                (SEQ
                 (SEQ (LETT |i| NIL) (LETT #1# |li|) G190
                      (COND
@@ -169,24 +169,6 @@
         (HASHSTATEUPDATE |hs| (SXHASH |s|))) 
 
 (DECLAIM (NOTINLINE |SExpressionOf;|)) 
-
-(DEFUN |SExpressionOf| (&REST #1=#:G91)
-  (SPROG NIL
-         (PROG (#2=#:G92)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|SExpressionOf|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |SExpressionOf;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|SExpressionOf|)))))))))) 
 
 (DEFUN |SExpressionOf;| (|#1| |#2| |#3| |#4|)
   (SPROG
@@ -211,6 +193,24 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 10 (INTERN "."))
     %))) 
+
+(DEFUN |SExpressionOf| (&REST #1=#:G64)
+  (SPROG NIL
+         (PROG (#2=#:G65)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|SExpressionOf|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |SExpressionOf;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|SExpressionOf|)))))))))) 
 
 (MAKEPROP '|SExpressionOf| '|infovec|
           (LIST

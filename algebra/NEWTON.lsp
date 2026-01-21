@@ -1,7 +1,7 @@
 
 (SDEFUN |NEWTON;differences| ((|yl| (|List| F)) (% (|List| F)))
         (SPROG
-         ((#1=#:G13 NIL) (|y1| NIL) (#2=#:G14 NIL) (|y2| NIL) (#3=#:G12 NIL))
+         ((#1=#:G5 NIL) (|y1| NIL) (#2=#:G6 NIL) (|y2| NIL) (#3=#:G4 NIL))
          (SEQ
           (PROGN
            (LETT #3# NIL)
@@ -20,7 +20,7 @@
 (SDEFUN |NEWTON;newtonAux|
         ((|k| (F)) (|fact| (F)) (|yl| (|List| F))
          (% (|SparseUnivariatePolynomial| F)))
-        (SPROG ((#1=#:G26 NIL))
+        (SPROG ((#1=#:G8 NIL))
                (COND
                 ((NULL (CDR |yl|))
                  (SPADCALL
@@ -59,23 +59,6 @@
 
 (DECLAIM (NOTINLINE |NewtonInterpolation;|)) 
 
-(DEFUN |NewtonInterpolation| (#1=#:G35)
-  (SPROG NIL
-         (PROG (#2=#:G36)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|NewtonInterpolation|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|NewtonInterpolation;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|NewtonInterpolation|)))))))))) 
-
 (DEFUN |NewtonInterpolation;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -91,6 +74,23 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 13 (SPADCALL (|spadConstant| % 8) 1 (QREFELT % 12)))
           %))) 
+
+(DEFUN |NewtonInterpolation| (#1=#:G13)
+  (SPROG NIL
+         (PROG (#2=#:G14)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|NewtonInterpolation|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|NewtonInterpolation;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|NewtonInterpolation|)))))))))) 
 
 (MAKEPROP '|NewtonInterpolation| '|infovec|
           (LIST

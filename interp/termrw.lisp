@@ -109,7 +109,6 @@
 ;   -- t doesn't contain any of the variables of SL
 ;   q:= CONS(v,t)
 ;   null SL => [q]
-; --  for p in SL repeat RPLACD(p, SUBSTQ(t, v, rest p))
 ;   CONS(q,SL)
 
 (DEFUN |augmentSub| (|v| |t| SL)
@@ -125,7 +124,6 @@
 ;   null S1 => S2
 ;   null S2 => S1
 ;   S3 := [p for p in S2 | not ASSQ(first p, S1)]
-; --  for p in S1 repeat S3 := augmentSub(first p, rest p, S3)
 ;   APPEND(S1,S3)
 
 (DEFUN |mergeSubs| (S1 S2)

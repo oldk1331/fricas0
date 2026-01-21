@@ -3,7 +3,7 @@
         ((|s| (|Symbol|)) (|p| (|Pattern| S))
          (|l| (|PatternMatchResult| S (|Symbol|)))
          (% (|PatternMatchResult| S (|Symbol|))))
-        (SPROG ((#1=#:G28 NIL) (|u| (|Union| (|Symbol|) "failed")))
+        (SPROG ((#1=#:G12 NIL) (|u| (|Union| (|Symbol|) "failed")))
                (SEQ
                 (COND
                  ((SPADCALL |p| (QREFELT % 9))
@@ -18,29 +18,12 @@
                             ((QEQCAR |u| 0)
                              (COND
                               ((EQUAL (QCDR |u|) |s|)
-                               (PROGN (LETT #1# |l|) (GO #2=#:G24))))))))
+                               (PROGN (LETT #1# |l|) (GO #2=#:G8))))))))
                      (EXIT (SPADCALL (QREFELT % 16)))))
                    #2# (EXIT #1#)))
                  ('T (SPADCALL (QREFELT % 16))))))) 
 
 (DECLAIM (NOTINLINE |PatternMatchSymbol;|)) 
-
-(DEFUN |PatternMatchSymbol| (#1=#:G29)
-  (SPROG NIL
-         (PROG (#2=#:G30)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|PatternMatchSymbol|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|PatternMatchSymbol;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|PatternMatchSymbol|)))))))))) 
 
 (DEFUN |PatternMatchSymbol;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
@@ -56,6 +39,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |PatternMatchSymbol| (#1=#:G13)
+  (SPROG NIL
+         (PROG (#2=#:G14)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|PatternMatchSymbol|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|PatternMatchSymbol;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|PatternMatchSymbol|)))))))))) 
 
 (MAKEPROP '|PatternMatchSymbol| '|infovec|
           (LIST

@@ -15,9 +15,21 @@
 
 (DECLAIM (NOTINLINE |RadixUtilities;|)) 
 
+(DEFUN |RadixUtilities;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|RadixUtilities|))
+          (LETT % (GETREFV 10))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|RadixUtilities| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |RadixUtilities| ()
   (SPROG NIL
-         (PROG (#1=#:G13)
+         (PROG (#1=#:G2)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|RadixUtilities|))
@@ -32,18 +44,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|RadixUtilities|)))))))))) 
-
-(DEFUN |RadixUtilities;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|RadixUtilities|))
-          (LETT % (GETREFV 10))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|RadixUtilities| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|RadixUtilities| '|infovec|
           (LIST

@@ -2,8 +2,8 @@
 (SDEFUN |PINTERPA;LagrangeInterpolation;2LP;1|
         ((|lx| (|List| F)) (|ly| (|List| F)) (% (P)))
         (SPROG
-         ((|ip| (P)) (|xp| (F)) (|pp| (P)) (#1=#:G24 NIL) (|xj| NIL) (|j| NIL)
-          (#2=#:G22 NIL) (|xi| NIL) (#3=#:G23 NIL) (|yi| NIL) (|i| NIL))
+         ((|ip| (P)) (|xp| (F)) (|pp| (P)) (#1=#:G12 NIL) (|xj| NIL) (|j| NIL)
+          (#2=#:G10 NIL) (|xi| NIL) (#3=#:G11 NIL) (|yi| NIL) (|i| NIL))
          (SEQ
           (COND
            ((SPADCALL (LENGTH |lx|) (LENGTH |ly|) (QREFELT % 10))
@@ -67,9 +67,26 @@
 
 (DECLAIM (NOTINLINE |PolynomialInterpolationAlgorithms;|)) 
 
-(DEFUN |PolynomialInterpolationAlgorithms| (&REST #1=#:G25)
+(DEFUN |PolynomialInterpolationAlgorithms;| (|#1| |#2|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT DV$2 (|devaluate| |#2|))
+          (LETT |dv$| (LIST '|PolynomialInterpolationAlgorithms| DV$1 DV$2))
+          (LETT % (GETREFV 25))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|PolynomialInterpolationAlgorithms|
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |PolynomialInterpolationAlgorithms| (&REST #1=#:G13)
   (SPROG NIL
-         (PROG (#2=#:G26)
+         (PROG (#2=#:G14)
            (RETURN
             (COND
              ((LETT #2#
@@ -88,23 +105,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|PolynomialInterpolationAlgorithms|)))))))))) 
-
-(DEFUN |PolynomialInterpolationAlgorithms;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT DV$2 (|devaluate| |#2|))
-          (LETT |dv$| (LIST '|PolynomialInterpolationAlgorithms| DV$1 DV$2))
-          (LETT % (GETREFV 25))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|PolynomialInterpolationAlgorithms|
-                      (LIST DV$1 DV$2) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (QSETREFV % 7 |#2|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|PolynomialInterpolationAlgorithms| '|infovec|
           (LIST

@@ -5,12 +5,12 @@
           (|Record| (|:| |exponent| (|NonNegativeInteger|)) (|:| |coef| M)
                     (|:| |radicand| (|List| M)))))
         (SPROG
-         ((#1=#:G42 NIL) (|radi| (|List| M)) (|coeff| (M))
+         ((#1=#:G23 NIL) (|radi| (|List| M)) (|coeff| (M))
           (|qr|
            (|Record| (|:| |quotient| (|NonNegativeInteger|))
                      (|:| |remainder| (|NonNegativeInteger|))))
-          (#2=#:G45 NIL) (|term| NIL) (|d| (|NonNegativeInteger|))
-          (#3=#:G32 NIL) (#4=#:G44 NIL) (|t| NIL) (#5=#:G43 NIL)
+          (#2=#:G26 NIL) (|term| NIL) (|d| (|NonNegativeInteger|))
+          (#3=#:G14 NIL) (#4=#:G25 NIL) (|t| NIL) (#5=#:G24 NIL)
           (|lf|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
@@ -78,7 +78,7 @@
                                                           (QCDR |qr|)
                                                           (QREFELT % 20))
                                                 (QREFELT % 23))))
-                          (GO #7=#:G37)))))))
+                          (GO #7=#:G18)))))))
                     #7# (EXIT #1#))
                    (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
               (EXIT (VECTOR |n| |coeff| |radi|))))) 
@@ -88,7 +88,7 @@
          (%
           (|List|
            (|Record| (|:| |coef| (|NonNegativeInteger|)) (|:| |logand| M)))))
-        (SPROG ((#1=#:G54 NIL) (|term| NIL) (#2=#:G53 NIL))
+        (SPROG ((#1=#:G35 NIL) (|term| NIL) (#2=#:G34 NIL))
                (SEQ
                 (CONS (CONS 1 (SPADCALL |ff| (QREFELT % 9)))
                       (PROGN
@@ -110,23 +110,6 @@
 
 (DECLAIM (NOTINLINE |FactoredFunctions;|)) 
 
-(DEFUN |FactoredFunctions| (#1=#:G55)
-  (SPROG NIL
-         (PROG (#2=#:G56)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|FactoredFunctions|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|FactoredFunctions;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|FactoredFunctions|)))))))))) 
-
 (DEFUN |FactoredFunctions;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -141,6 +124,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |FactoredFunctions| (#1=#:G36)
+  (SPROG NIL
+         (PROG (#2=#:G37)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|FactoredFunctions|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|FactoredFunctions;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|FactoredFunctions|)))))))))) 
 
 (MAKEPROP '|FactoredFunctions| '|infovec|
           (LIST

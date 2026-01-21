@@ -194,7 +194,7 @@
 
 ; htShowSetPage(htPage, branch) ==
 ;   setTree := htpProperty(htPage, 'setTree)
-;   $path := [branch,:TAKE(- LASTATOM setTree,$path)]
+;   $path := [branch, :TAKE(- LASTATOM(setTree), $path)]
 ;   setData := assoc(branch, setTree)
 ;   null setData =>
 ;     systemError('"No Set Data")
@@ -303,18 +303,17 @@
 ;   message := setData.setLabel
 ;   bcHt ['"{\em Description: } ", message, '"\newline\vspace{1} "]
 ;   [$htInitial,$htFinal] := setData.setLeaf
-;   if $htFinal = $htInitial + 1
-;     then
+;   if $htFinal = $htInitial + 1 then
 ;       bcHt '"Enter the integer {\em "
 ;       bcHt stringize $htInitial
 ;       bcHt '"} or {\em "
 ;       bcHt stringize $htFinal
 ;       bcHt '"}:"
-;     else if null $htFinal then
+;   else if null $htFinal then
 ;       bcHt '"Enter an integer greater than {\em "
 ;       bcHt stringize ($htInitial - 1)
 ;       bcHt '"}:"
-;     else
+;   else
 ;       bcHt '"Enter an integer between {\em "
 ;       bcHt stringize $htInitial
 ;       bcHt '"} and {\em "
@@ -897,30 +896,11 @@
 (DEFUN |htSetExpose| (|htPage|)
   (PROG () (RETURN (|htSetNotAvailable| |htPage| ")set expose"))))
 
-; htSetKernelProtect htPage ==
-;  htSetNotAvailable(htPage,'")set kernel protect")
-
-(DEFUN |htSetKernelProtect| (|htPage|)
-  (PROG () (RETURN (|htSetNotAvailable| |htPage| ")set kernel protect"))))
-
-; htSetKernelWarn htPage ==
-;  htSetNotAvailable(htPage,'")set kernel warn")
-
-(DEFUN |htSetKernelWarn| (|htPage|)
-  (PROG () (RETURN (|htSetNotAvailable| |htPage| ")set kernel warn"))))
-
 ; htSetOutputCharacters htPage ==
 ;   htSetNotAvailable(htPage,'")set output characters")
 
 (DEFUN |htSetOutputCharacters| (|htPage|)
   (PROG () (RETURN (|htSetNotAvailable| |htPage| ")set output characters"))))
-
-; htSetLinkerArgs htPage ==
-;   htSetNotAvailable(htPage,'")set fortran calling linker")
-
-(DEFUN |htSetLinkerArgs| (|htPage|)
-  (PROG ()
-    (RETURN (|htSetNotAvailable| |htPage| ")set fortran calling linker"))))
 
 ; htSetCache(htPage,:options) ==
 ;   $path := '(functions cache)
@@ -1137,17 +1117,21 @@
       (|htProcessDoitButton| (LIST "Press to Remove Page" "" '|htDoNothing|))
       (|htShowPage|)))))
 
-; htAllOrNum val == bcHt
-;   val = 'all => '"{\em all"
-;   val = 0 => '"{\em no"
-;   STRCONC('"the last {\em ",stringize val)
+; htAllOrNum(val) ==
+;     str :=
+;         val = 'all => '"{\em all"
+;         val = 0 => '"{\em no"
+;         STRCONC('"the last {\em ",stringize val)
+;     bcHt(str)
 
 (DEFUN |htAllOrNum| (|val|)
-  (PROG ()
+  (PROG (|str|)
     (RETURN
-     (|bcHt|
-      (COND ((EQ |val| '|all|) "{\\em all") ((EQL |val| 0) "{\\em no")
-            ('T (STRCONC "the last {\\em " (|stringize| |val|))))))))
+     (PROGN
+      (SETQ |str|
+              (COND ((EQ |val| '|all|) "{\\em all") ((EQL |val| 0) "{\\em no")
+                    ('T (STRCONC "the last {\\em " (|stringize| |val|)))))
+      (|bcHt| |str|)))))
 
 ; htCacheOne names ==
 ;   page := htInitPage(mkSetTitle(),nil)

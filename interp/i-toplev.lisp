@@ -29,15 +29,15 @@
 
 (DEFUN |intUnsetQuiet| () (PROG () (RETURN (SETQ |$QuietCommand_tmp| NIL))))
 
-; $relative_directory_list := '("share/msgs/" "share/spadhelp/")
+; $relative_directory_list := '("share/msgs" "share/spadhelp")
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
-  (SETQ |$relative_directory_list| '("share/msgs/" "share/spadhelp/")))
+  (SETQ |$relative_directory_list| '("share/msgs" "share/spadhelp")))
 
-; $relative_library_directory_list := '("algebra/")
+; $relative_library_directory_list := '("algebra")
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
-  (SETQ |$relative_library_directory_list| '("algebra/")))
+  (SETQ |$relative_library_directory_list| '("algebra")))
 
 ; $directory_list := []
 
@@ -51,10 +51,10 @@
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$spadroot| ""))
 
-; make_absolute_filename(name) == STRCONC($spadroot, '"/", name)
+; make_absolute_filename(name) == append_directory_name($spadroot,name)
 
 (DEFUN |make_absolute_filename| (|name|)
-  (PROG () (RETURN (STRCONC |$spadroot| "/" |name|))))
+  (PROG () (RETURN (|append_directory_name| |$spadroot| |name|))))
 
 ; reroot(dir) ==
 ;     $spadroot := dir
@@ -151,8 +151,8 @@
       (|fricas_restart2|)))))
 
 ; interpsysInitialization(display_messages) ==
-;   -- The function  start  begins the interpreter process, reading in
-;   -- the profile and printing start-up messages.
+;   -- The function "interpsysInitialization" begins the interpreter process,
+;   -- reads in the profile and prints start-up messages.
 ;   $PrintCompilerMessageIfTrue: local := nil
 ;   resetWorkspaceVariables()
 ;   save_displayStartMsgs := $displayStartMsgs
@@ -580,7 +580,7 @@
 ; justifyMyType(t) ==
 ;   len := #t
 ;   len > $LINELENGTH => t
-;   CONCAT(fillerSpaces($LINELENGTH-len, '" "), t)
+;   CONCAT(filler_spaces($LINELENGTH - len), t)
 
 (DEFUN |justifyMyType| (|t|)
   (PROG (|len|)
@@ -588,7 +588,7 @@
      (PROGN
       (SETQ |len| (LENGTH |t|))
       (COND ((< $LINELENGTH |len|) |t|)
-            ('T (CONCAT (|fillerSpaces| (- $LINELENGTH |len|) " ") |t|)))))))
+            ('T (CONCAT (|filler_spaces| (- $LINELENGTH |len|)) |t|)))))))
 
 ; typeTimePrin x ==
 ;   maprinSpecial(x,0,79)

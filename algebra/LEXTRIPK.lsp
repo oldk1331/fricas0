@@ -5,7 +5,7 @@
            (|NewSparseMultivariatePolynomial| R (|OrderedVariableList| |ls|))))
          (% (|List| (|Symbol|))))
         (SPROG
-         ((|truels| (|List| (|Symbol|))) (#1=#:G25 NIL) (#2=#:G34 NIL)
+         ((|truels| (|List| (|Symbol|))) (#1=#:G19 NIL) (#2=#:G25 NIL)
           (|s| NIL) (|lv| (|List| (|OrderedVariableList| |ls|))))
          (SEQ
           (LETT |lv| (SPADCALL (SPADCALL |lp| (QREFELT % 10)) (QREFELT % 12)))
@@ -36,8 +36,8 @@
            (|NewSparseMultivariatePolynomial| R (|OrderedVariableList| |ls|))))
          (% (|Boolean|)))
         (SPROG
-         ((|lq1| (|List| (|Polynomial| R))) (#1=#:G43 NIL) (|p| NIL)
-          (#2=#:G42 NIL)
+         ((|lq1| (|List| (|Polynomial| R))) (#1=#:G31 NIL) (|p| NIL)
+          (#2=#:G30 NIL)
           (|fglmpack|
            (CATEGORY |package|
             (SIGNATURE |zeroDimensional?|
@@ -84,10 +84,10 @@
             (|NewSparseMultivariatePolynomial| R (|OrderedVariableList| |ls|)))
            "failed")))
         (SPROG
-         ((#1=#:G64 NIL) (|q1| NIL) (#2=#:G63 NIL) (#3=#:G60 NIL)
+         ((#1=#:G52 NIL) (|q1| NIL) (#2=#:G51 NIL) (#3=#:G48 NIL)
           (|foo| (|Union| (|List| (|Polynomial| R)) #4="failed"))
-          (|lq1| (|List| (|Polynomial| R))) (#5=#:G62 NIL) (|p| NIL)
-          (#6=#:G61 NIL)
+          (|lq1| (|List| (|Polynomial| R))) (#5=#:G50 NIL) (|p| NIL)
+          (#6=#:G49 NIL)
           (|fglmpack|
            (CATEGORY |package|
             (SIGNATURE |zeroDimensional?|
@@ -136,7 +136,7 @@
                 (EXIT
                  (COND
                   ((QEQCAR |foo| 1)
-                   (PROGN (LETT #3# (CONS 1 "failed")) (GO #7=#:G59)))
+                   (PROGN (LETT #3# (CONS 1 "failed")) (GO #7=#:G47)))
                   ('T
                    (SEQ
                     (LETT |lp|
@@ -166,9 +166,9 @@
            (|NewSparseMultivariatePolynomial| R
                                               (|OrderedVariableList| |ls|)))))
         (SPROG
-         ((#1=#:G74 NIL) (|q1| NIL) (#2=#:G73 NIL)
-          (|lq1| (|List| (|Polynomial| R))) (#3=#:G72 NIL) (|p| NIL)
-          (#4=#:G71 NIL)
+         ((#1=#:G62 NIL) (|q1| NIL) (#2=#:G61 NIL)
+          (|lq1| (|List| (|Polynomial| R))) (#3=#:G60 NIL) (|p| NIL)
+          (#4=#:G59 NIL)
           (|fglmpack|
            (CATEGORY |package|
             (SIGNATURE |zeroDimensional?|
@@ -238,7 +238,7 @@
                                                          (|OrderedVariableList|
                                                           |ls|))))
              (|:| |tower| (|RegularChain| R |ls|)))))
-          (#2=#:G106 NIL)
+          (#2=#:G94 NIL)
           (|newlp|
            (|List|
             (|NewSparseMultivariatePolynomial| R
@@ -502,7 +502,7 @@
                                                      R
                                                      (|OrderedVariableList|
                                                       |ls|)))))))
-          (#2=#:G142 NIL)
+          (#2=#:G130 NIL)
           (|newlp|
            (|List|
             (|NewSparseMultivariatePolynomial| R
@@ -794,25 +794,6 @@
 
 (DECLAIM (NOTINLINE |LexTriangularPackage;|)) 
 
-(DEFUN |LexTriangularPackage| (&REST #1=#:G148)
-  (SPROG NIL
-         (PROG (#2=#:G149)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|LexTriangularPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |LexTriangularPackage;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|LexTriangularPackage|)))))))))) 
-
 (DEFUN |LexTriangularPackage;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -829,6 +810,25 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |LexTriangularPackage| (&REST #1=#:G136)
+  (SPROG NIL
+         (PROG (#2=#:G137)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|LexTriangularPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |LexTriangularPackage;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|LexTriangularPackage|)))))))))) 
 
 (MAKEPROP '|LexTriangularPackage| '|infovec|
           (LIST

@@ -12,7 +12,7 @@
 (SDEFUN |GAUSSFAC;exactquo|
         ((|u| (|Integer|)) (|v| (|Integer|)) (|p| (|Integer|))
          (% (|Union| (|Integer|) "failed")))
-        (SPROG ((#1=#:G21 NIL))
+        (SPROG ((#1=#:G17 NIL))
                (COND ((EQL |p| 0) (SPADCALL |u| |v| (QREFELT % 9)))
                      ((EQL (REM |v| |p|) 0) (CONS 1 "failed"))
                      ('T
@@ -37,9 +37,9 @@
 
 (SDEFUN |GAUSSFAC;findelt| ((|q| (|Integer|)) (% (|Integer|)))
         (SPROG
-         ((|t| (|FMod|)) (|s| (|FMod|)) (#1=#:G52 NIL) (|i| NIL)
+         ((|t| (|FMod|)) (|s| (|FMod|)) (#1=#:G39 NIL) (|i| NIL)
           (|qq1| (|FMod|)) (|r1| (|Union| (|Integer|) "failed"))
-          (|r| #2=(|Integer|)) (#3=#:G16 NIL) (|q1| #2#))
+          (|r| #2=(|Integer|)) (#3=#:G12 NIL) (|q1| #2#))
          (SEQ (LETT |q1| (- |q| 1)) (LETT |r| |q1|)
               (LETT |r1| (SPADCALL |r| 4 (QREFELT % 9)))
               (SEQ G190 (COND ((NULL (NULL (QEQCAR |r1| 1))) (GO G191)))
@@ -98,7 +98,7 @@
                       (|:| |factor| (|Complex| (|Integer|)))
                       (|:| |exponent| (|NonNegativeInteger|)))))
           (|z| #1=(|Complex| (|Integer|))) (|sz| (|List| (|Integer|)))
-          (|unity| #1#) (|exp| (|NonNegativeInteger|)) (#2=#:G104 NIL)
+          (|unity| #1#) (|exp| (|NonNegativeInteger|)) (#2=#:G66 NIL)
           (|term| NIL) (|lfn| (|Factored| (|Integer|))))
          (SEQ (LETT |lfn| (SPADCALL |n| (QREFELT % 29))) (LETT |r| NIL)
               (LETT |unity|
@@ -170,13 +170,13 @@
             (|:| |factor| (|Complex| (|Integer|)))
             (|:| |exponent| (|NonNegativeInteger|))))
           (|g0| (|Complex| (|Integer|))) (|exp| #5=(|NonNegativeInteger|))
-          (|n| (|Integer|)) (#6=#:G126 NIL) (|term| NIL)
+          (|n| (|Integer|)) (#6=#:G88 NIL) (|term| NIL)
           (|factn|
            (|List|
             (|Record| (|:| |flag| (|Union| #1# #2# #3# #4#))
                       (|:| |factor| (|Integer|)) (|:| |exponent| #5#))))
           (|r| #7=(|Factored| (|Complex| (|Integer|)))) (|b| (|Integer|))
-          (#8=#:G16 NIL) (|a| (|Integer|)) (|d| (|Integer|)) (|ris| #7#))
+          (#8=#:G12 NIL) (|a| (|Integer|)) (|d| (|Integer|)) (|ris| #7#))
          (SEQ
           (COND
            ((SPADCALL |m| (|spadConstant| % 45) (QREFELT % 46))
@@ -336,9 +336,28 @@
 
 (DECLAIM (NOTINLINE |GaussianFactorizationPackage;|)) 
 
+(DEFUN |GaussianFactorizationPackage;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|GaussianFactorizationPackage|))
+          (LETT % (GETREFV 63))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|GaussianFactorizationPackage| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 13
+                    (|ModularRing| (|Integer|) (|Integer|)
+                                   (CONS (|function| |GAUSSFAC;reduction|) %)
+                                   (CONS (|function| |GAUSSFAC;merge|) %)
+                                   (CONS (|function| |GAUSSFAC;exactquo|) %)))
+          (QSETREFV % 17 (SPADCALL 1 1 (QREFELT % 16)))
+          %))) 
+
 (DEFUN |GaussianFactorizationPackage| ()
   (SPROG NIL
-         (PROG (#1=#:G136)
+         (PROG (#1=#:G98)
            (RETURN
             (COND
              ((LETT #1#
@@ -359,25 +378,6 @@
                  ((NOT #1#)
                   (HREM |$ConstructorCache|
                         '|GaussianFactorizationPackage|)))))))))) 
-
-(DEFUN |GaussianFactorizationPackage;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|GaussianFactorizationPackage|))
-          (LETT % (GETREFV 63))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|GaussianFactorizationPackage| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 13
-                    (|ModularRing| (|Integer|) (|Integer|)
-                                   (CONS (|function| |GAUSSFAC;reduction|) %)
-                                   (CONS (|function| |GAUSSFAC;merge|) %)
-                                   (CONS (|function| |GAUSSFAC;exactquo|) %)))
-          (QSETREFV % 17 (SPADCALL 1 1 (QREFELT % 16)))
-          %))) 
 
 (MAKEPROP '|GaussianFactorizationPackage| '|infovec|
           (LIST

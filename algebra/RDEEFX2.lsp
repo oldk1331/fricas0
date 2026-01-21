@@ -124,25 +124,6 @@
 
 (DECLAIM (NOTINLINE |ElementaryRischDEX2;|)) 
 
-(DEFUN |ElementaryRischDEX2| (&REST #1=#:G44)
-  (SPROG NIL
-         (PROG (#2=#:G45)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ElementaryRischDEX2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ElementaryRischDEX2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|ElementaryRischDEX2|)))))))))) 
-
 (DEFUN |ElementaryRischDEX2;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -187,6 +168,25 @@
                         (|dispatchFunction| |RDEEFX2;risch_de_ext;I2FSR;6|)
                         %)))))
           %))) 
+
+(DEFUN |ElementaryRischDEX2| (&REST #1=#:G34)
+  (SPROG NIL
+         (PROG (#2=#:G35)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ElementaryRischDEX2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ElementaryRischDEX2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|ElementaryRischDEX2|)))))))))) 
 
 (MAKEPROP '|ElementaryRischDEX2| '|infovec|
           (LIST

@@ -19,12 +19,12 @@
 (SDEFUN |ELINSOL;F_to_LF|
         ((|x| (F)) (|vl| (|List| (|Kernel| F))) (% (|List| F)))
         (SPROG
-         ((#1=#:G48 NIL) (|v| NIL) (#2=#:G47 NIL)
+         ((#1=#:G30 NIL) (|v| NIL) (#2=#:G29 NIL)
           (|nx0| (|SparseMultivariatePolynomial| R (|Kernel| F)))
           (|nx1| (|SparseMultivariatePolynomial| R (|Kernel| F)))
           (|ml| (|List| (|SparseMultivariatePolynomial| R (|Kernel| F))))
-          (#3=#:G45 NIL) (#4=#:G46 NIL) (|c| NIL) (#5=#:G44 NIL)
-          (|res0| (|List| F)) (#6=#:G43 NIL) (#7=#:G42 NIL)
+          (#3=#:G27 NIL) (#4=#:G28 NIL) (|c| NIL) (#5=#:G26 NIL)
+          (|res0| (|List| F)) (#6=#:G25 NIL) (#7=#:G24 NIL)
           (|nx| (|SparseMultivariatePolynomial| R (|Kernel| F))))
          (SEQ (LETT |nx| (SPADCALL |x| (QREFELT % 21)))
               (LETT |res0|
@@ -93,15 +93,15 @@
         ((|eql| (|List| F)) (|vl| (|List| (|Symbol|)))
          (% (|Union| (|List| F) "failed")))
         (SPROG
-         ((#1=#:G65 NIL)
+         ((#1=#:G44 NIL)
           (|ss|
            (|Record| (|:| |particular| (|Union| (|Vector| F) #2="failed"))
                      (|:| |basis| (|List| (|Vector| F)))))
-          (|eqm| (|Matrix| F)) (#3=#:G79 NIL) (|ll| NIL) (#4=#:G78 NIL)
-          (|rh| (|Vector| F)) (#5=#:G77 NIL) (#6=#:G76 NIL)
-          (|eqll| (|List| (|List| F))) (#7=#:G75 NIL) (|p| NIL) (#8=#:G74 NIL)
-          (|coefk| (|List| (|Kernel| F))) (#9=#:G73 NIL) (|c| NIL)
-          (#10=#:G72 NIL))
+          (|eqm| (|Matrix| F)) (#3=#:G58 NIL) (|ll| NIL) (#4=#:G57 NIL)
+          (|rh| (|Vector| F)) (#5=#:G56 NIL) (#6=#:G55 NIL)
+          (|eqll| (|List| (|List| F))) (#7=#:G54 NIL) (|p| NIL) (#8=#:G53 NIL)
+          (|coefk| (|List| (|Kernel| F))) (#9=#:G52 NIL) (|c| NIL)
+          (#10=#:G51 NIL))
          (SEQ
           (LETT |coefk|
                 (PROGN
@@ -175,25 +175,6 @@
 
 (DECLAIM (NOTINLINE |ExpressionLinearSolve;|)) 
 
-(DEFUN |ExpressionLinearSolve| (&REST #1=#:G80)
-  (SPROG NIL
-         (PROG (#2=#:G81)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ExpressionLinearSolve|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ExpressionLinearSolve;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|ExpressionLinearSolve|)))))))))) 
-
 (DEFUN |ExpressionLinearSolve;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -210,6 +191,25 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |ExpressionLinearSolve| (&REST #1=#:G59)
+  (SPROG NIL
+         (PROG (#2=#:G60)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ExpressionLinearSolve|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ExpressionLinearSolve;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|ExpressionLinearSolve|)))))))))) 
 
 (MAKEPROP '|ExpressionLinearSolve| '|infovec|
           (LIST

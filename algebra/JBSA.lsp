@@ -52,30 +52,11 @@
 
 (DECLAIM (NOTINLINE |JetBundleSymAna;|)) 
 
-(DEFUN |JetBundleSymAna| (&REST #1=#:G73)
-  (SPROG NIL
-         (PROG (#2=#:G74)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T NIL NIL))
-                     (HGET |$ConstructorCache| '|JetBundleSymAna|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |JetBundleSymAna;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|JetBundleSymAna|)))))))))) 
-
 (DEFUN |JetBundleSymAna;| (|#1| |#2| |#3|)
   (SPROG
-   ((#1=#:G72 NIL) (|i| NIL) (#2=#:G71 NIL) (#3=#:G70 NIL) (#4=#:G69 NIL)
-    (#5=#:G68 NIL) (|jv| NIL) (#6=#:G67 NIL) (#7=#:G27 NIL) (#8=#:G66 NIL)
-    (#9=#:G65 NIL) (#10=#:G23 NIL) (#11=#:G64 NIL) (#12=#:G63 NIL) (|pv$| NIL)
+   ((#1=#:G54 NIL) (|i| NIL) (#2=#:G53 NIL) (#3=#:G52 NIL) (#4=#:G51 NIL)
+    (#5=#:G50 NIL) (|jv| NIL) (#6=#:G49 NIL) (#7=#:G15 NIL) (#8=#:G48 NIL)
+    (#9=#:G47 NIL) (#10=#:G11 NIL) (#11=#:G46 NIL) (#12=#:G45 NIL) (|pv$| NIL)
     (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
    (SEQ
     (PROGN
@@ -198,6 +179,25 @@
       ('T (SETELT % 22 (SPADCALL (QREFELT % 22) (QCDR |#3|) (QREFELT % 31)))))
      (QSETREFV % 32 (|JetBundle| (QREFELT % 21) (QREFELT % 22)))
      %)))) 
+
+(DEFUN |JetBundleSymAna| (&REST #1=#:G55)
+  (SPROG NIL
+         (PROG (#2=#:G56)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T NIL NIL))
+                     (HGET |$ConstructorCache| '|JetBundleSymAna|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |JetBundleSymAna;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|JetBundleSymAna|)))))))))) 
 
 (MAKEPROP '|JetBundleSymAna| '|infovec|
           (LIST

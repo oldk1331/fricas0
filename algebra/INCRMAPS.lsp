@@ -16,23 +16,6 @@
 
 (DECLAIM (NOTINLINE |IncrementingMaps;|)) 
 
-(DEFUN |IncrementingMaps| (#1=#:G6)
-  (SPROG NIL
-         (PROG (#2=#:G7)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|IncrementingMaps|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|IncrementingMaps;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|IncrementingMaps|)))))))))) 
-
 (DEFUN |IncrementingMaps;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -47,6 +30,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |IncrementingMaps| (#1=#:G5)
+  (SPROG NIL
+         (PROG (#2=#:G6)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|IncrementingMaps|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|IncrementingMaps;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|IncrementingMaps|)))))))))) 
 
 (MAKEPROP '|IncrementingMaps| '|infovec|
           (LIST

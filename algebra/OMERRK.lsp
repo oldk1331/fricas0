@@ -35,25 +35,6 @@
 
 (DECLAIM (NOTINLINE |OpenMathErrorKind;|)) 
 
-(DEFUN |OpenMathErrorKind| ()
-  (SPROG NIL
-         (PROG (#1=#:G39)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|OpenMathErrorKind|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|OpenMathErrorKind|
-                             (LIST
-                              (CONS NIL (CONS 1 (|OpenMathErrorKind;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#)
-                  (HREM |$ConstructorCache| '|OpenMathErrorKind|)))))))))) 
-
 (DEFUN |OpenMathErrorKind;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -70,6 +51,25 @@
                              (|:| |unknownSymbol| "OMUnknownSymbol")
                              (|:| |readError| "OMReadError")))
           %))) 
+
+(DEFUN |OpenMathErrorKind| ()
+  (SPROG NIL
+         (PROG (#1=#:G24)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|OpenMathErrorKind|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|OpenMathErrorKind|
+                             (LIST
+                              (CONS NIL (CONS 1 (|OpenMathErrorKind;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#)
+                  (HREM |$ConstructorCache| '|OpenMathErrorKind|)))))))))) 
 
 (MAKEPROP '|OpenMathErrorKind| '|infovec|
           (LIST

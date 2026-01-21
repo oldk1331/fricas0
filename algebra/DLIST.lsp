@@ -1,12 +1,12 @@
 
-(SDEFUN |DLIST;elt;%unique%;1| ((|x| (%)) (T1 ("unique")) (% (%)))
+(SDEFUN |DLIST;elt;%unique%;1| ((|x| (%)) (T3 ("unique")) (% (%)))
         (SPADCALL |x| (QREFELT % 7))) 
 
-(SDEFUN |DLIST;elt;%sort%;2| ((|x| (%)) (T2 ("sort")) (% (%)))
+(SDEFUN |DLIST;elt;%sort%;2| ((|x| (%)) (T4 ("sort")) (% (%)))
         (SPADCALL |x| (QREFELT % 10))) 
 
 (SDEFUN |DLIST;elt;%countNni;3|
-        ((|x| (%)) (T3 ("count")) (% (|NonNegativeInteger|)))
+        ((|x| (%)) (T5 ("count")) (% (|NonNegativeInteger|)))
         (SPADCALL |x| (QREFELT % 14))) 
 
 (PUT '|DLIST;coerce;L%;4| '|SPADreplace| '(XLAM (|x|) |x|)) 
@@ -25,25 +25,10 @@
 
 (DECLAIM (NOTINLINE |DataList;|)) 
 
-(DEFUN |DataList| (#1=#:G32)
-  (SPROG NIL
-         (PROG (#2=#:G33)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|DataList|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|DataList;| #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|DataList|)))))))))) 
-
 (DEFUN |DataList;| (|#1|)
   (SPROG
-   ((#1=#:G28 NIL) (#2=#:G29 NIL) (#3=#:G31 NIL) (#4=#:G30 NIL) (|pv$| NIL)
-    (#5=#:G25 NIL) (#6=#:G26 NIL) (#7=#:G27 NIL) (% NIL) (|dv$| NIL)
+   ((#1=#:G17 NIL) (#2=#:G18 NIL) (#3=#:G20 NIL) (#4=#:G19 NIL) (|pv$| NIL)
+    (#5=#:G14 NIL) (#6=#:G15 NIL) (#7=#:G16 NIL) (% NIL) (|dv$| NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -125,6 +110,21 @@
     (AND #4# #1# (|augmentPredVector| % 8388608))
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |DataList| (#1=#:G21)
+  (SPROG NIL
+         (PROG (#2=#:G22)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|DataList|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|DataList;| #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|DataList|)))))))))) 
 
 (MAKEPROP '|DataList| '|infovec|
           (LIST

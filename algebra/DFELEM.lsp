@@ -135,9 +135,30 @@
 
 (DECLAIM (NOTINLINE |DoubleFloatElementaryFunctions;|)) 
 
+(DEFUN |DoubleFloatElementaryFunctions;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|DoubleFloatElementaryFunctions|))
+          (LETT % (GETREFV 34))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|DoubleFloatElementaryFunctions| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 6 (|mk_DF| 1 30))
+          (QSETREFV % 7 (FLOAT 2 MOST-POSITIVE-DOUBLE-FLOAT))
+          (QSETREFV % 8 (|div_DF| 1.0 (FLOAT 2 MOST-POSITIVE-DOUBLE-FLOAT)))
+          (QSETREFV % 9
+                    (|div_DF| (FLOAT PI MOST-POSITIVE-DOUBLE-FLOAT)
+                              (FLOAT 2 MOST-POSITIVE-DOUBLE-FLOAT)))
+          (QSETREFV % 10 (FLOAT 4 MOST-POSITIVE-DOUBLE-FLOAT))
+          (QSETREFV % 11 (|div_DF| 1.0 (FLOAT 4 MOST-POSITIVE-DOUBLE-FLOAT)))
+          %))) 
+
 (DEFUN |DoubleFloatElementaryFunctions| ()
   (SPROG NIL
-         (PROG (#1=#:G34)
+         (PROG (#1=#:G16)
            (RETURN
             (COND
              ((LETT #1#
@@ -159,27 +180,6 @@
                  ((NOT #1#)
                   (HREM |$ConstructorCache|
                         '|DoubleFloatElementaryFunctions|)))))))))) 
-
-(DEFUN |DoubleFloatElementaryFunctions;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|DoubleFloatElementaryFunctions|))
-          (LETT % (GETREFV 34))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|DoubleFloatElementaryFunctions| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 6 (|mk_DF| 1 30))
-          (QSETREFV % 7 (FLOAT 2 MOST-POSITIVE-DOUBLE-FLOAT))
-          (QSETREFV % 8 (|div_DF| 1.0 (FLOAT 2 MOST-POSITIVE-DOUBLE-FLOAT)))
-          (QSETREFV % 9
-                    (|div_DF| (FLOAT PI MOST-POSITIVE-DOUBLE-FLOAT)
-                              (FLOAT 2 MOST-POSITIVE-DOUBLE-FLOAT)))
-          (QSETREFV % 10 (FLOAT 4 MOST-POSITIVE-DOUBLE-FLOAT))
-          (QSETREFV % 11 (|div_DF| 1.0 (FLOAT 4 MOST-POSITIVE-DOUBLE-FLOAT)))
-          %))) 
 
 (MAKEPROP '|DoubleFloatElementaryFunctions| '|infovec|
           (LIST

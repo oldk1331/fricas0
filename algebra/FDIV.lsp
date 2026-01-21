@@ -100,7 +100,7 @@
 
 (SDEFUN |FDIV;intReduce| ((|h| (R)) (|b| (UP)) (% (R)))
         (SPROG
-         ((#1=#:G70 NIL) (#2=#:G72 NIL) (|i| NIL) (#3=#:G71 NIL)
+         ((#1=#:G54 NIL) (#2=#:G56 NIL) (|i| NIL) (#3=#:G55 NIL)
           (|v| (|Vector| UP)))
          (SEQ (LETT |v| (QCAR (SPADCALL |h| (QREFELT % 70))))
               (EXIT
@@ -150,7 +150,7 @@
 
 (SDEFUN |FDIV;divisor;2FI%;30| ((|a| (F)) (|b| (F)) (|n| (|Integer|)) (% (%)))
         (SPROG
-         ((|g| (%)) (|m| (|NonNegativeInteger|)) (#1=#:G82 NIL) (#2=#:G81 NIL)
+         ((|g| (%)) (|m| (|NonNegativeInteger|)) (#1=#:G66 NIL) (#2=#:G65 NIL)
           (|d| (UP)))
          (SEQ
           (COND
@@ -275,7 +275,7 @@
 
 (SDEFUN |FDIV;generator;%U;33| ((|d| (%)) (% (|Union| R "failed")))
         (SPROG
-         ((#1=#:G111 NIL) (#2=#:G112 NIL) (#3=#:G113 NIL) (|i| NIL)
+         ((#1=#:G94 NIL) (#2=#:G95 NIL) (#3=#:G96 NIL) (|i| NIL)
           (|bsis| (|Vector| R)))
          (SEQ
           (EXIT
@@ -296,8 +296,8 @@
                                          (CONS 0
                                                (SPADCALL (QAREF1O |bsis| |i| 1)
                                                          (QREFELT % 121))))
-                                   (GO #4=#:G110)))
-                            (GO #5=#:G108))))))
+                                   (GO #4=#:G93)))
+                            (GO #5=#:G91))))))
                        (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL)))
                  #5# (EXIT #1#))
                 (EXIT (CONS 1 "failed"))))
@@ -307,8 +307,8 @@
         ((|d| (%)) (|k| (|Integer|)) (|lp| (|List| UP))
          (% (|Union| R "failed")))
         (SPROG
-         ((#1=#:G122 NIL) (#2=#:G123 NIL) (|kk| (|Integer|)) (|fi| (R))
-          (#3=#:G124 NIL) (|i| NIL) (|bas| (|Vector| R)))
+         ((#1=#:G105 NIL) (#2=#:G106 NIL) (|kk| (|Integer|)) (|fi| (R))
+          (#3=#:G107 NIL) (|i| NIL) (|bas| (|Vector| R)))
          (SEQ
           (EXIT
            (SEQ (LETT |bas| (SPADCALL |d| (QREFELT % 119)))
@@ -331,8 +331,8 @@
                                          (CONS 0
                                                (SPADCALL |fi|
                                                          (QREFELT % 121))))
-                                   (GO #4=#:G121)))
-                            (GO #5=#:G119))))))
+                                   (GO #4=#:G104)))
+                            (GO #5=#:G102))))))
                        (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL)))
                  #5# (EXIT #1#))
                 (EXIT (CONS 1 "failed"))))
@@ -375,24 +375,6 @@
                   (QREFELT % 43)))))) 
 
 (DECLAIM (NOTINLINE |FiniteDivisor;|)) 
-
-(DEFUN |FiniteDivisor| (&REST #1=#:G131)
-  (SPROG NIL
-         (PROG (#2=#:G132)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|FiniteDivisor|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |FiniteDivisor;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|FiniteDivisor|)))))))))) 
 
 (DEFUN |FiniteDivisor;| (|#1| |#2| |#3| |#4|)
   (SPROG
@@ -468,6 +450,24 @@
        (QSETREFV % 126
                  (CONS (|dispatchFunction| |FDIV;lSpaceBasis;%V;35|) %)))))
     %))) 
+
+(DEFUN |FiniteDivisor| (&REST #1=#:G114)
+  (SPROG NIL
+         (PROG (#2=#:G115)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|FiniteDivisor|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |FiniteDivisor;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|FiniteDivisor|)))))))))) 
 
 (MAKEPROP '|FiniteDivisor| '|infovec|
           (LIST

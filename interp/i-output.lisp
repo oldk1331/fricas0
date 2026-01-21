@@ -399,7 +399,6 @@
 ;     makeCharacter 9496,     -- lower right corner  (+)
 ;     makeCharacter 9474,     -- vertical bar
 ;     makeCharacter 9472,     -- horizontal bar      (-)
-;     -- $quadSymbol,      -- APL quad            (?)
 ;     '_?,  -- APL quad
 ;     '_[,      -- left bracket
 ;     '_],      -- right bracket
@@ -523,6 +522,11 @@
 
 (DEFUN |quadSch| () (PROG () (RETURN (PNAME (|specialChar| '|quad|)))))
 
+; hbar_special_char() == PNAME(specialChar('hbar))
+
+(DEFUN |hbar_special_char| ()
+  (PROG () (RETURN (PNAME (|specialChar| '|hbar|)))))
+
 ; isBinaryInfix x ==
 ;     x in '(_= _+ _- _* _/ _*_* _^ "=" "+" "-" "*" "/" "**" "^")
 
@@ -644,7 +648,7 @@
 ;         RPLACSTR(line, x, n := #string, string, 0, n)
 ;         d
 ;   appChar(string, x, y, nconc(d,
-;             [[y, :make_full_CVEC(10 + $LINELENGTH + $MARGIN)]]))
+;             [[y, :filler_spaces(10 + $LINELENGTH + $MARGIN)]]))
 
 (DEFUN |appChar| (|string| |x| |y| |d|)
   (PROG (|line| |n|)
@@ -661,7 +665,7 @@
          (NCONC |d|
                 (LIST
                  (CONS |y|
-                       (|make_full_CVEC|
+                       (|filler_spaces|
                         (+ (+ 10 $LINELENGTH) $MARGIN))))))))))))
 
 ; mathprintWithNumber x ==
@@ -1170,25 +1174,23 @@
          (#1# (|outputMapTran0| |op| (CAR |l|) |alias|)))))))))
 
 ; outputMapTran0(op, argDef, alias) ==
-;   arg := first argDef
-;   def := rest  argDef
-;   [arg',:def'] := simplifyMapPattern(argDef,alias)
-;   arg' := outputTran arg'
-;   if null arg' then arg' := '"()"
-;   ['CONCATB, op, outputTran arg', "==", outputTran def']
+;   [arg, :def] := simplifyMapPattern(argDef,alias)
+;   arg := outputTran(arg)
+;   if null(arg) then arg := '"()"
+;   else if SYMBOLP(arg) then arg := ['PAREN, arg]
+;   ['CONCATB, ['CONCAT, op, arg], "==", outputTran(def)]
 
 (DEFUN |outputMapTran0| (|op| |argDef| |alias|)
-  (PROG (|arg| |def| |LETTMP#1| |arg'| |def'|)
+  (PROG (|LETTMP#1| |arg| |def|)
     (RETURN
      (PROGN
-      (SETQ |arg| (CAR |argDef|))
-      (SETQ |def| (CDR |argDef|))
       (SETQ |LETTMP#1| (|simplifyMapPattern| |argDef| |alias|))
-      (SETQ |arg'| (CAR |LETTMP#1|))
-      (SETQ |def'| (CDR |LETTMP#1|))
-      (SETQ |arg'| (|outputTran| |arg'|))
-      (COND ((NULL |arg'|) (SETQ |arg'| "()")))
-      (LIST 'CONCATB |op| (|outputTran| |arg'|) '== (|outputTran| |def'|))))))
+      (SETQ |arg| (CAR |LETTMP#1|))
+      (SETQ |def| (CDR |LETTMP#1|))
+      (SETQ |arg| (|outputTran| |arg|))
+      (COND ((NULL |arg|) (SETQ |arg| "()"))
+            ((SYMBOLP |arg|) (SETQ |arg| (LIST 'PAREN |arg|))))
+      (LIST 'CONCATB (LIST 'CONCAT |op| |arg|) '== (|outputTran| |def|))))))
 
 ; outputTranReduce ['REDUCE,op,.,body] ==
 ;   ['CONCAT,op,"/",outputTran body]
@@ -2427,7 +2429,6 @@
 ; putWidth u ==
 ;   atom u or u is [[.,:n],:.] and NUMBERP n => u
 ;   op:= keyp u
-; --NUMBERP op => nil
 ;   leftPrec:= getBindingPowerOf("left",u)
 ;   rightPrec:= getBindingPowerOf("right",u)
 ;   [firstEl,:l] := u
@@ -3865,7 +3866,7 @@
                        (CONS '|%l| (CONS (OR |expr| "NIL") NIL)))))))))))
 
 ; outputNumber(start,linelength,num) ==
-;   if start > 1 then blnks := fillerSpaces(start-1,'" ")
+;   if start > 1 then blnks := filler_spaces(start - 1)
 ;   else blnks := '""
 ;   under:='"__"
 ;   firsttime:=(linelength>3)
@@ -3892,7 +3893,7 @@
   (PROG (|blnks| |under| |firsttime|)
     (RETURN
      (PROGN
-      (COND ((< 1 |start|) (SETQ |blnks| (|fillerSpaces| (- |start| 1) " ")))
+      (COND ((< 1 |start|) (SETQ |blnks| (|filler_spaces| (- |start| 1))))
             (#1='T (SETQ |blnks| "")))
       (SETQ |under| "_")
       (SETQ |firsttime| (< 3 |linelength|))
@@ -3923,7 +3924,7 @@
        (#1# (|sayALGEBRA| (LIST |blnks| |num|))))))))
 
 ; outputString(start,linelength,str) ==
-;   if start > 1 then blnks := fillerSpaces(start-1,'" ")
+;   if start > 1 then blnks := filler_spaces(start - 1)
 ;   else blnks := '""
 ;   while SIZE(str) > linelength repeat
 ;     if $collectOutput then
@@ -3941,7 +3942,7 @@
   (PROG (|blnks|)
     (RETURN
      (PROGN
-      (COND ((< 1 |start|) (SETQ |blnks| (|fillerSpaces| (- |start| 1) " ")))
+      (COND ((< 1 |start|) (SETQ |blnks| (|filler_spaces| (- |start| 1))))
             (#1='T (SETQ |blnks| "")))
       ((LAMBDA ()
          (LOOP
@@ -5636,7 +5637,7 @@
                   (COND ((NULL |u|) (RETURN NIL)))))))))))))
 
 ; prnd(start, op) ==
-;   spcs := fillerSpaces(MAX(0,start - 1), '" ")
+;   spcs := filler_spaces(MAX(0, start - 1))
 ;   $collectOutput =>
 ;     string := STRCONC(spcs, op)
 ;     $outputLines := [string, :$outputLines]
@@ -5648,7 +5649,7 @@
   (PROG (|spcs| |string|)
     (RETURN
      (PROGN
-      (SETQ |spcs| (|fillerSpaces| (MAX 0 (- |start| 1)) " "))
+      (SETQ |spcs| (|filler_spaces| (MAX 0 (- |start| 1))))
       (COND
        (|$collectOutput|
         (PROGN

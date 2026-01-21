@@ -607,8 +607,8 @@
           (t (BREAK))))
 
 (defmacro qcsize (x)
- `(the fixnum (length (the #-(or :ecl :gcl)simple-string
-                           #+(or :ecl :gcl)string ,x))))
+  `(the fixnum (length (the #-ecl simple-string
+                            #+ecl string ,x))))
 
 (defmacro qrefelt (vec ind) `(svref ,vec ,ind))
 
@@ -845,3 +845,14 @@
 
 ;;; Support for re-seeding the lisp random number generator.
 (defun SEEDRANDOM () (setf *random-state* (make-random-state t)))
+
+; "failed" union branch, independet of type of union
+(defvar |$spad_failure| (cons 1 "failed"))
+
+(defmacro |trappedSpadEval| (form)
+    `(|trappedSpadEvalUnion| (cons 0 ,form)))
+
+(defmacro |trappedSpadEvalUnion| (form)
+  `(let ((|$BreakMode| '|trapSpadErrors|))
+        (declare (special |$BreakMode|))
+        (CATCH '|trapSpadErrors| ,form)))

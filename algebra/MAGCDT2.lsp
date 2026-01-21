@@ -29,7 +29,7 @@
                     (|:| |sp| (|Integer|))))
          (% (|SortedExponentVector|)))
         (SPROG
-         ((|ii| (|Integer|)) (#2=#:G46 NIL) (|j| NIL) (#3=#:G45 NIL) (|i| NIL)
+         ((|ii| (|Integer|)) (#2=#:G30 NIL) (|j| NIL) (#3=#:G29 NIL) (|i| NIL)
           (|exps| (|SortedExponentVector|)) (|nsize| (|NonNegativeInteger|)))
          (SEQ (LETT |nsize| (* (+ |dg| 1) |msize|))
               (LETT |exps| (GETREFV_U32 (* 2 |nsize|) 0))
@@ -55,8 +55,8 @@
                     (|:| |sp| (|Integer|))))
          (% (|Void|)))
         (SPROG
-         ((|ii| (|Integer|)) (#1=#:G57 NIL) (|j| NIL) (|di| #2=(|Integer|))
-          (|ci| (|U32Vector|)) (#3=#:G56 NIL) (|i| NIL) (|msize| #2#))
+         ((|ii| (|Integer|)) (#1=#:G41 NIL) (|j| NIL) (|di| #2=(|Integer|))
+          (|ci| (|U32Vector|)) (#3=#:G40 NIL) (|i| NIL) (|msize| #2#))
          (SEQ (LETT |msize| (SPADCALL (QVELT |mu| 1) (QREFELT % 22)))
               (EXIT
                (SEQ (LETT |i| 0) (LETT #3# |dg|) G190
@@ -109,7 +109,7 @@
 
 (SDEFUN |MAGCDT2;is_zero?| ((|v| (|U32Vector|)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G75 NIL) (#2=#:G76 NIL) (|i| NIL) (|n| (|NonNegativeInteger|)))
+         ((#1=#:G59 NIL) (#2=#:G60 NIL) (|i| NIL) (|n| (|NonNegativeInteger|)))
          (SEQ
           (EXIT
            (SEQ (LETT |n| (QV_LEN_U32 |v|))
@@ -121,8 +121,8 @@
                          (COND
                           ((SPADCALL (ELT_U32 |v| |i|) 0 (QREFELT % 8))
                            (PROGN
-                            (LETT #1# (PROGN (LETT #2# NIL) (GO #3=#:G74)))
-                            (GO #4=#:G72))))))
+                            (LETT #1# (PROGN (LETT #2# NIL) (GO #3=#:G58)))
+                            (GO #4=#:G56))))))
                        (LETT |i| (+ |i| -1)) (GO G190) G191 (EXIT NIL)))
                  #4# (EXIT #1#))
                 (EXIT 'T)))
@@ -135,7 +135,7 @@
 (SDEFUN |MAGCDT2;degree;PaI;7|
         ((|v| (|PrimitiveArray| (|U32Vector|))) (% (|Integer|)))
         (SPROG
-         ((#1=#:G83 NIL) (#2=#:G84 NIL) (|i| NIL) (|n| (|NonNegativeInteger|)))
+         ((#1=#:G67 NIL) (#2=#:G68 NIL) (|i| NIL) (|n| (|NonNegativeInteger|)))
          (SEQ
           (EXIT
            (SEQ (LETT |n| (QVSIZE |v|))
@@ -147,8 +147,8 @@
                          (COND
                           ((NULL (|MAGCDT2;is_zero?| (QAREF1 |v| |i|) %))
                            (PROGN
-                            (LETT #1# (PROGN (LETT #2# |i|) (GO #3=#:G82)))
-                            (GO #4=#:G80))))))
+                            (LETT #1# (PROGN (LETT #2# |i|) (GO #3=#:G66)))
+                            (GO #4=#:G64))))))
                        (LETT |i| (+ |i| -1)) (GO G190) G191 (EXIT NIL)))
                  #4# (EXIT #1#))
                 (EXIT -1)))
@@ -157,7 +157,7 @@
 (SDEFUN |MAGCDT2;leadingCoefficient|
         ((|v| (|PrimitiveArray| (|U32Vector|))) (% (|U32Vector|)))
         (SPROG
-         ((#1=#:G90 NIL) (#2=#:G91 NIL) (|pp| (|U32Vector|)) (|i| NIL)
+         ((#1=#:G74 NIL) (#2=#:G75 NIL) (|pp| (|U32Vector|)) (|i| NIL)
           (|n| (|NonNegativeInteger|)))
          (SEQ
           (EXIT
@@ -172,8 +172,8 @@
                             (|MAGCDT2;is_zero?| (LETT |pp| (QAREF1 |v| |i|))
                              %))
                            (PROGN
-                            (LETT #1# (PROGN (LETT #2# |pp|) (GO #3=#:G89)))
-                            (GO #4=#:G87))))))
+                            (LETT #1# (PROGN (LETT #2# |pp|) (GO #3=#:G73)))
+                            (GO #4=#:G71))))))
                        (LETT |i| (+ |i| -1)) (GO G190) G191 (EXIT NIL)))
                  #4# (EXIT #1#))
                 (EXIT (GETREFV_U32 1 0))))
@@ -187,7 +187,7 @@
          (% (|Union| (|PrimitiveArray| (|U32Vector|)) "failed")))
         (SPROG
          ((|npp| (|U32Vector|)) (|dnpp| #1=(|Integer|)) (|dpp| #1#)
-          (|pp| (|U32Vector|)) (#2=#:G111 NIL) (|l| NIL)
+          (|pp| (|U32Vector|)) (#2=#:G87 NIL) (|l| NIL)
           (|res| (|PrimitiveArray| (|U32Vector|))) (|dx| (|Integer|))
           (|icl| (|U32Vector|)) (|rr1| (|U32Vector|))
           (|rr| (|List| (|U32Vector|))) (|cl| (|U32Vector|)) (|p| (|Integer|))
@@ -230,8 +230,8 @@
         (SPROG
          ((|npp1| (|U32Vector|)) (|degnpp1| #2=(|Integer|)) (|degpp1| #2#)
           (|pp1| #3=(|U32Vector|)) (|dp2| #2#) (|dp1| #2#) (|pp2| #3#)
-          (|l1| (|NonNegativeInteger|)) (#4=#:G124 NIL) (|l| NIL)
-          (#5=#:G123 NIL) (|del| #6=(|NonNegativeInteger|)) (|p| (|Integer|))
+          (|l1| (|NonNegativeInteger|)) (#4=#:G100 NIL) (|l| NIL)
+          (#5=#:G99 NIL) (|del| #6=(|NonNegativeInteger|)) (|p| (|Integer|))
           (|m| (|U32Vector|)) (|res| (|PrimitiveArray| (|U32Vector|)))
           (|i1| #6#) (|c| #7=(|U32Vector|)) (|cy| #7#) (|j| #8=(|Integer|))
           (|i| #8#))
@@ -305,9 +305,22 @@
 
 (DECLAIM (NOTINLINE |ModularAlgebraicGcdTools2;|)) 
 
+(DEFUN |ModularAlgebraicGcdTools2;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|ModularAlgebraicGcdTools2|))
+          (LETT % (GETREFV 52))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|ModularAlgebraicGcdTools2| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |ModularAlgebraicGcdTools2| ()
   (SPROG NIL
-         (PROG (#1=#:G128)
+         (PROG (#1=#:G104)
            (RETURN
             (COND
              ((LETT #1#
@@ -326,19 +339,6 @@
                  ((NOT #1#)
                   (HREM |$ConstructorCache|
                         '|ModularAlgebraicGcdTools2|)))))))))) 
-
-(DEFUN |ModularAlgebraicGcdTools2;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|ModularAlgebraicGcdTools2|))
-          (LETT % (GETREFV 52))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|ModularAlgebraicGcdTools2| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|ModularAlgebraicGcdTools2| '|infovec|
           (LIST

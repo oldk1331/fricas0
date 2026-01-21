@@ -392,9 +392,24 @@
 
 (DECLAIM (NOTINLINE |RationalFunctionLimitPackage;|)) 
 
-(DEFUN |RationalFunctionLimitPackage| (#1=#:G146)
+(DEFUN |RationalFunctionLimitPackage;| (|#1|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT |dv$| (LIST '|RationalFunctionLimitPackage| DV$1))
+          (LETT % (GETREFV 82))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|RationalFunctionLimitPackage|
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |RationalFunctionLimitPackage| (#1=#:G124)
   (SPROG NIL
-         (PROG (#2=#:G147)
+         (PROG (#2=#:G125)
            (RETURN
             (COND
              ((LETT #2#
@@ -410,21 +425,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|RationalFunctionLimitPackage|)))))))))) 
-
-(DEFUN |RationalFunctionLimitPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT |dv$| (LIST '|RationalFunctionLimitPackage| DV$1))
-          (LETT % (GETREFV 82))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|RationalFunctionLimitPackage|
-                      (LIST DV$1) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|RationalFunctionLimitPackage| '|infovec|
           (LIST

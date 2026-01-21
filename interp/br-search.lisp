@@ -943,7 +943,7 @@
 ;   itemlist := assoc(opname,koOps(conform,nil)) --all operations name "opname"
 ;   null itemlist => systemError [conform,'" has no operation named ",opname]
 ;   opAlist := [itemlist]
-;   dbShowOperationsFromConform(htPage,'"operation",opAlist)
+;   dbShowOperationsFromConform(htPage, opAlist)
 
 (DEFUN |oPageFrom| (|opname| |conname|)
   (PROG (|htPage| |conform| |itemlist| |opAlist|)
@@ -961,7 +961,7 @@
        ('T
         (PROGN
          (SETQ |opAlist| (LIST |itemlist|))
-         (|dbShowOperationsFromConform| |htPage| "operation" |opAlist|))))))))
+         (|dbShowOperationsFromConform| |htPage| |opAlist|))))))))
 
 ; spadType(x) ==  --called by \spadtype{x} from HyperDoc
 ;   s := PNAME x
@@ -984,7 +984,7 @@
       (SETQ |op| (|opOf| |form|))
       (|conPage| |op|)))))
 
-; aokSearch filter ==  genSearch(filter,true)  --"General" from HD (see man0.ht)
+; aokSearch(filter) ==  genSearch(filter, true)
 
 (DEFUN |aokSearch| (|filter|) (PROG () (RETURN (|genSearch| |filter| T))))
 
@@ -1994,6 +1994,7 @@
   (PROG () (RETURN (|conSpecialString2?| |filter| NIL))))
 
 ; conSpecialString2?(filter, secondTime) ==
+;   $ncMsgList : local := []
 ;   parse :=
 ;     words := string2Words filter is [s] => ncParseFromString s
 ;     and/[not member(x,'("and" "or" "not")) for x in words] => ncParseFromString filter
@@ -2008,9 +2009,11 @@
 ;   conSpecialString2?(u, true)
 
 (DEFUN |conSpecialString2?| (|filter| |secondTime|)
-  (PROG (|ISTMP#1| |s| |words| |parse| |form| |u|)
+  (PROG (|$ncMsgList| |u| |form| |parse| |words| |s| |ISTMP#1|)
+    (DECLARE (SPECIAL |$ncMsgList|))
     (RETURN
      (PROGN
+      (SETQ |$ncMsgList| NIL)
       (SETQ |parse|
               (COND
                ((SETQ |words|
@@ -2218,7 +2221,7 @@
 ;     lines := dbScreenForDefaultFunctions lines
 ;   count := #lines
 ;   count = 0 => emptySearchPage(kind, filter, false)
-;   kind = '"operation" => dbShowOperationLines(kind, lines)
+;   kind = '"operation" => dbShowOperationLines(lines)
 ;   dbShowConstructorLines lines
 
 (DEFUN |dbSearch| (|lines| |kind| |filter|)
@@ -2239,7 +2242,7 @@
              (SETQ |count| (LENGTH |lines|))
              (COND ((EQL |count| 0) (|emptySearchPage| |kind| |filter| NIL))
                    ((EQUAL |kind| "operation")
-                    (|dbShowOperationLines| |kind| |lines|))
+                    (|dbShowOperationLines| |lines|))
                    (#1# (|dbShowConstructorLines| |lines|)))))))))
 
 ; dbSearchAbbrev([.,:conlist],kind,filter) ==
@@ -2714,32 +2717,6 @@
                NIL))
       (CLOSE |instream|)
       |lines|))))
-
-; dbGetCommentOrigin line ==
-; --Given a comment line in comdb, returns line in libdb pointing to it
-; --Comment lines have format  [dcpxoa]xxxxxx`ccccc... where
-; --x's give pointer into libdb, c's are comments
-;   firstPart := dbPart(line,1,-1)
-;   key := INTERN SUBSTRING(firstPart,0,1)    --extract this and throw away
-;   address := SUBSTRING(firstPart, 1, nil)   --address in libdb
-;   instream := OPEN grepSource key           --this always returns libdb now
-;   FILE_-POSITION(instream,PARSE_-INTEGER address)
-;   line := read_line instream
-;   CLOSE instream
-;   line
-
-(DEFUN |dbGetCommentOrigin| (|line|)
-  (PROG (|firstPart| |key| |address| |instream|)
-    (RETURN
-     (PROGN
-      (SETQ |firstPart| (|dbPart| |line| 1 (- 1)))
-      (SETQ |key| (INTERN (SUBSTRING |firstPart| 0 1)))
-      (SETQ |address| (SUBSTRING |firstPart| 1 NIL))
-      (SETQ |instream| (OPEN (|grepSource| |key|)))
-      (FILE-POSITION |instream| (PARSE-INTEGER |address|))
-      (SETQ |line| (|read_line| |instream|))
-      (CLOSE |instream|)
-      |line|))))
 
 ; grepSource key ==
 ;   STRINGP(key) => key

@@ -7,10 +7,10 @@
   (COND (|DivisionRing;AL|) (T (SETQ |DivisionRing;AL| (|DivisionRing;|))))) 
 
 (DEFUN |DivisionRing;| ()
-  (SPROG ((#1=#:G11 NIL))
+  (SPROG ((#1=#:G3 NIL))
          (PROG1
              (LETT #1#
-                   (|subst_in_cat| '(#2=#:G10) (LIST '(|Fraction| (|Integer|)))
+                   (|subst_in_cat| '(#2=#:G2) (LIST '(|Fraction| (|Integer|)))
                                    (|Join| (|EntireRing|) (|Algebra| '#2#)
                                            (|TwoSidedRecip|)
                                            (|mkCategory|

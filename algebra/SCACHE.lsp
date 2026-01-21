@@ -1,6 +1,6 @@
 
 (SDEFUN |SCACHE;expandCache| ((|x| (S)) (% (|Void|)))
-        (SPROG ((#1=#:G25 NIL) (|k| NIL) (|ocache| (|PrimitiveArray| S)))
+        (SPROG ((#1=#:G17 NIL) (|k| NIL) (|ocache| (|PrimitiveArray| S)))
                (SEQ
                 (COND
                  ((EQL (QREFELT % 8) (QREFELT % 9))
@@ -20,7 +20,7 @@
 
 (SDEFUN |SCACHE;insertBefore|
         ((|l| (|NonNegativeInteger|)) (|x| (S)) (% (|Void|)))
-        (SPROG ((#1=#:G30 NIL) (|k| NIL) (|vscan| (|PrimitiveArray| S)))
+        (SPROG ((#1=#:G22 NIL) (|k| NIL) (|vscan| (|PrimitiveArray| S)))
                (SEQ (|SCACHE;expandCache| |x| %) (LETT |vscan| (QREFELT % 7))
                     (SEQ (LETT |k| 0) (LETT #1# (- (- (QREFELT % 9) |l|) 1))
                          G190 (COND ((|greater_SI| |k| #1#) (GO G191)))
@@ -38,7 +38,7 @@
         ((|l| (|NonNegativeInteger|)) (|n| (|NonNegativeInteger|))
          (% (|Void|)))
         (SPROG
-         ((|x| (S)) (#1=#:G36 NIL) (|k| NIL) (|vscan| (|PrimitiveArray| S)))
+         ((|x| (S)) (#1=#:G28 NIL) (|k| NIL) (|vscan| (|PrimitiveArray| S)))
          (SEQ (LETT |vscan| (QREFELT % 7))
               (SEQ (LETT |k| |l|) (LETT #1# (- (QREFELT % 9) 1)) G190
                    (COND ((> |k| #1#) (GO G191)))
@@ -51,7 +51,7 @@
 
 (SDEFUN |SCACHE;clearCache;V;4| ((% (|Void|)))
         (SPROG
-         ((|x| (S)) (#1=#:G42 NIL) (|k| NIL) (|vscan| (|PrimitiveArray| S)))
+         ((|x| (S)) (#1=#:G34 NIL) (|k| NIL) (|vscan| (|PrimitiveArray| S)))
          (SEQ (LETT |vscan| (QREFELT % 7))
               (SEQ (LETT |k| 0) (LETT #1# (- (QREFELT % 9) 1)) G190
                    (COND ((|greater_SI| |k| #1#) (GO G191)))
@@ -66,11 +66,10 @@
              (QSETAREF1 (QREFELT % 7) (QREFELT % 9) |x|)
              (SETELT % 9 (+ (QREFELT % 9) 1)) (EXIT (SPADCALL (QREFELT % 11))))) 
 
-(SDEFUN |SCACHE;linearSearch;SMU;6|
-        ((|x| (S)) (|equal?| (|Mapping| (|Boolean|) S))
-         (% (|Union| S "failed")))
+(SDEFUN |SCACHE;linearSearch;MU;6|
+        ((|equal?| (|Mapping| (|Boolean|) S)) (% (|Union| S "failed")))
         (SPROG
-         ((#1=#:G61 NIL) (|k| (|Integer|)) (|vscan| (|PrimitiveArray| S))
+         ((#1=#:G53 NIL) (|k| (|Integer|)) (|vscan| (|PrimitiveArray| S))
           (|y| (S)))
          (SEQ
           (EXIT
@@ -81,7 +80,7 @@
                           (EXIT
                            (COND
                             ((SPADCALL |y| |equal?|)
-                             (PROGN (LETT #1# (CONS 0 |y|)) (GO #2=#:G60)))
+                             (PROGN (LETT #1# (CONS 0 |y|)) (GO #2=#:G52)))
                             ('T
                              (SEQ (LETT |vscan| (QREFELT % 7))
                                   (SEQ G190
@@ -99,7 +98,7 @@
 (SDEFUN |SCACHE;enterInCache;SMS;7|
         ((|x| (S)) (|equal?| (|Mapping| (|Boolean|) S)) (% (S)))
         (SPROG ((|res| (|Union| S "failed")))
-               (SEQ (LETT |res| (SPADCALL |x| |equal?| (QREFELT % 18)))
+               (SEQ (LETT |res| (SPADCALL |equal?| (QREFELT % 18)))
                     (EXIT
                      (COND ((QEQCAR |res| 0) (QCDR |res|))
                            ('T
@@ -112,7 +111,7 @@
          (% (|Union| S "failed")))
         (SPROG
          ((|l| #1=(|Integer|)) (|m| #2=(|Integer|)) (|i| #3=(|Integer|))
-          (|i0| #3#) (|l0| #1#) (|vscan| (|PrimitiveArray| S)) (#4=#:G96 NIL)
+          (|i0| #3#) (|l0| #1#) (|vscan| (|PrimitiveArray| S)) (#4=#:G88 NIL)
           (|cp| (|Integer|)) (|y| (S)) (|has_vm| (|Boolean|)) (|vm| (S))
           (|vl| (S)) (|m0| #2#))
          (SEQ
@@ -144,7 +143,7 @@
                                      ((ZEROP |cp|)
                                       (PROGN
                                        (LETT #4# (CONS 0 |y|))
-                                       (GO #5=#:G95)))
+                                       (GO #5=#:G87)))
                                      ('T
                                       (SEQ (LETT |vscan| (QREFELT % 7))
                                            (COND
@@ -223,7 +222,7 @@
 (SDEFUN |SCACHE;enterInCache;SMS;9|
         ((|x| (S)) (|triage| (|Mapping| (|Integer|) S S)) (% (S)))
         (SPROG
-         ((#1=#:G119 NIL) (|pos| (|NonNegativeInteger|)) (#2=#:G124 NIL)
+         ((#1=#:G111 NIL) (|pos| (|NonNegativeInteger|)) (#2=#:G116 NIL)
           (|l| #3=(|Integer|)) (|m| #4=(|Integer|)) (|i| #5=(|Integer|))
           (|i0| #5#) (|l0| #3#) (|vscan| (|PrimitiveArray| S))
           (|cp| (|Integer|)) (|y| (S)) (|has_vm| (|Boolean|)) (|vm| (S))
@@ -234,7 +233,7 @@
             ((ZEROP (QREFELT % 9))
              (SEQ (SPADCALL |x| 1024 (QREFELT % 14))
                   (|SCACHE;insertAtEnd| |x| %)
-                  (EXIT (PROGN (LETT #2# |x|) (GO #6=#:G123)))))
+                  (EXIT (PROGN (LETT #2# |x|) (GO #6=#:G115)))))
             (#7='T
              (SEQ
               (SEQ (LETT |vscan| (QREFELT % 7)) (LETT |l| -1)
@@ -350,7 +349,7 @@
 (SDEFUN |SCACHE;insertInCache|
         ((|before| (|NonNegativeInteger|)) (|x| (S))
          (|pos| (|NonNegativeInteger|)) (% (S)))
-        (SPROG ((#1=#:G126 NIL) (|y| (S)))
+        (SPROG ((#1=#:G118 NIL) (|y| (S)))
                (SEQ (LETT |y| (QAREF1 (QREFELT % 7) |before|))
                     (COND
                      ((EQL (+ |pos| 1) (SPADCALL |y| (QREFELT % 13)))
@@ -371,22 +370,6 @@
 
 (DECLAIM (NOTINLINE |SortedCache;|)) 
 
-(DEFUN |SortedCache| (#1=#:G129)
-  (SPROG NIL
-         (PROG (#2=#:G130)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|SortedCache|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|SortedCache;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|SortedCache|)))))))))) 
-
 (DEFUN |SortedCache;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -405,17 +388,33 @@
           (QSETREFV % 9 0)
           %))) 
 
+(DEFUN |SortedCache| (#1=#:G121)
+  (SPROG NIL
+         (PROG (#2=#:G122)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|SortedCache|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|SortedCache;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|SortedCache|)))))))))) 
+
 (MAKEPROP '|SortedCache| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) '|cache| '|cache_size|
               '|cache_use| (|Void|) (0 . |void|) (|NonNegativeInteger|)
               (4 . |position|) (9 . |setPosition|) |SCACHE;clearCache;V;4|
               (|Union| 6 '#1="failed") (|Mapping| (|Boolean|) 6)
-              |SCACHE;linearSearch;SMU;6| |SCACHE;enterInCache;SMS;7|
+              |SCACHE;linearSearch;MU;6| |SCACHE;enterInCache;SMS;7|
               (|Mapping| (|Integer|) 6 6) |SCACHE;binarySearch;SMU;8|
               |SCACHE;enterInCache;SMS;9|)
-           '#(|linearSearch| 15 |enterInCache| 21 |clearCache| 33
-              |binarySearch| 37)
+           '#(|linearSearch| 15 |enterInCache| 20 |clearCache| 32
+              |binarySearch| 36)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -427,7 +426,7 @@
                                       (|#1| |#1| (|Mapping| (|Boolean|) |#1|)))
                                      T)
                                    '((|linearSearch|
-                                      ((|Union| |#1| #1#) |#1|
+                                      ((|Union| |#1| #1#)
                                        (|Mapping| (|Boolean|) |#1|)))
                                      T)
                                    '((|enterInCache|
@@ -441,7 +440,7 @@
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 22
                                             '(0 10 0 11 1 6 12 0 13 2 6 10 0 12
-                                              14 2 0 16 6 17 18 2 0 6 6 20 22 2
-                                              0 6 6 17 19 0 0 10 15 2 0 16 6 20
+                                              14 1 0 16 17 18 2 0 6 6 20 22 2 0
+                                              6 6 17 19 0 0 10 15 2 0 16 6 20
                                               21)))))
            '|lookupComplete|)) 

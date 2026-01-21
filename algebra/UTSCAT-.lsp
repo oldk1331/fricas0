@@ -55,7 +55,7 @@
 (SDEFUN |UTSCAT-;coerce;SOf;5| ((|p| (S)) (% (|OutputForm|)))
         (SPROG
          ((|l| (|List| (|OutputForm|))) (|uu| (|Stream| |Coef|))
-          (|uu1| (|Stream| |Coef|)) (|n| NIL) (#1=#:G82 NIL)
+          (|uu1| (|Stream| |Coef|)) (|n| NIL) (#1=#:G62 NIL)
           (|count| (|NonNegativeInteger|)) (|vv| (|OutputForm|))
           (|cen| (|Coef|)) (|var| (|Symbol|)))
          (SEQ

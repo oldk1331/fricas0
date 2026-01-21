@@ -51,7 +51,7 @@
 (SDEFUN |GALUTIL;pascalTriangle;NniIR;5|
         ((|n| (|NonNegativeInteger|)) (|r| (|Integer|)) (% (R)))
         (SPROG
-         ((#1=#:G24 NIL) (#2=#:G23 NIL) (#3=#:G34 NIL) (|j| NIL) (#4=#:G33 NIL)
+         ((#1=#:G16 NIL) (#2=#:G15 NIL) (#3=#:G26 NIL) (|j| NIL) (#4=#:G25 NIL)
           (|i| NIL) (|mq| #5=(|Integer|))
           (|m| (|Record| (|:| |quotient| #5#) (|:| |remainder| (|Integer|))))
           (|d| (|Integer|)))
@@ -178,24 +178,6 @@
 
 (DECLAIM (NOTINLINE |GaloisGroupUtilities;|)) 
 
-(DEFUN |GaloisGroupUtilities| (#1=#:G43)
-  (SPROG NIL
-         (PROG (#2=#:G44)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|GaloisGroupUtilities|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|GaloisGroupUtilities;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|GaloisGroupUtilities|)))))))))) 
-
 (DEFUN |GaloisGroupUtilities;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -233,6 +215,24 @@
           (QSETREFV % 27 3)
           (QSETREFV % 28 216)
           %))) 
+
+(DEFUN |GaloisGroupUtilities| (#1=#:G35)
+  (SPROG NIL
+         (PROG (#2=#:G36)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|GaloisGroupUtilities|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|GaloisGroupUtilities;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|GaloisGroupUtilities|)))))))))) 
 
 (MAKEPROP '|GaloisGroupUtilities| '|infovec|
           (LIST

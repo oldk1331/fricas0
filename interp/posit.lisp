@@ -19,22 +19,6 @@
 
 (DEFUN |pfNoPosition?| (|pos|) (PROG () (RETURN (|poNoPosition?| |pos|))))
 
-; pfSourceText pf ==
-;     lnString poGetLineObject pfPosn pf
-
-(DEFUN |pfSourceText| (|pf|)
-  (PROG () (RETURN (|lnString| (|poGetLineObject| (|pfPosn| |pf|))))))
-
-; pfPosOrNopos pf ==
-;     poIsPos? (pos := pfSourcePosition pf) => pos
-;     poNoPosition()
-
-(DEFUN |pfPosOrNopos| (|pf|)
-  (PROG (|pos|)
-    (RETURN
-     (COND ((|poIsPos?| (SETQ |pos| (|pfSourcePosition| |pf|))) |pos|)
-           ('T (|poNoPosition|))))))
-
 ; poIsPos? pos ==
 ;     PAIRP pos and PAIRP first pos and LENGTH first pos = 5
 

@@ -18,11 +18,11 @@
 
 (SDEFUN |MRATFAC;factor;PF;5| ((|p| (P)) (% (|Factored| P)))
         (SPROG
-         ((#1=#:G42 NIL) (#2=#:G41 #3=(|Factored| P)) (#4=#:G43 #3#)
-          (#5=#:G50 NIL) (|u| NIL)
+         ((#1=#:G16 NIL) (#2=#:G15 #3=(|Factored| P)) (#4=#:G17 #3#)
+          (#5=#:G24 NIL) (|u| NIL)
           (|ffact| (|Factored| (|SparseMultivariatePolynomial| R OV)))
           (|ipol| (|SparseMultivariatePolynomial| R OV)) (|pol| (P))
-          (|pden| (R)) (#6=#:G49 NIL) (|c| NIL) (#7=#:G48 NIL))
+          (|pden| (R)) (#6=#:G23 NIL) (|c| NIL) (#7=#:G22 NIL))
          (SEQ
           (LETT |pden|
                 (SPADCALL
@@ -77,25 +77,6 @@
 
 (DECLAIM (NOTINLINE |MRationalFactorize;|)) 
 
-(DEFUN |MRationalFactorize| (&REST #1=#:G51)
-  (SPROG NIL
-         (PROG (#2=#:G52)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|MRationalFactorize|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |MRationalFactorize;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|MRationalFactorize|)))))))))) 
-
 (DEFUN |MRationalFactorize;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -118,6 +99,25 @@
     (QSETREFV % 9 |#4|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |MRationalFactorize| (&REST #1=#:G25)
+  (SPROG NIL
+         (PROG (#2=#:G26)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|MRationalFactorize|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |MRationalFactorize;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|MRationalFactorize|)))))))))) 
 
 (MAKEPROP '|MRationalFactorize| '|infovec|
           (LIST

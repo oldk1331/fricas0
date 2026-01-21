@@ -99,7 +99,6 @@
 ;   $predListLength :local := LENGTH $NRTslot1PredicateList
 ;   $byteVecAcc: local := nil
 ;   [nam,[addForm,:opList]] := u
-;   --pp opList
 ;   d := [[op, y] for [op, :items] in opList
 ;         | y := makeCompactDirect1(op, items, et)]
 ;   $byteVec := [:$byteVec,:"append"/NREVERSE $byteVecAcc]
@@ -1058,7 +1057,6 @@
 ; hasDefaultPackage catname ==
 ;   defname := INTERN STRCONC(catname,'"&")
 ;   constructor? defname => defname
-; --MEMQ(defname,allConstructors()) => defname
 ;   nil
 
 (DEFUN |hasDefaultPackage| (|catname|)

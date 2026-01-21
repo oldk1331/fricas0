@@ -439,7 +439,7 @@
 ;         (off on)
 ;         off)
 ;        (break $openMathFormat)
-;        ("where TeX output goes (enter {\em console} or a pathname)"
+;        ("where OpenMath output goes (enter {\em console} or a pathname)"
 ;         FILENAME
 ;         $openMathOutputFile
 ;         chkOutputFileName
@@ -743,8 +743,8 @@
        (("create output in OpenMath format" LITERALS |$openMathFormat|
          (|off| |on|) |off|)
         (|break| |$openMathFormat|)
-        ("where TeX output goes (enter {\\em console} or a pathname)" FILENAME
-         |$openMathOutputFile| |chkOutputFileName| "console"))
+        ("where OpenMath output goes (enter {\\em console} or a pathname)"
+         FILENAME |$openMathOutputFile| |chkOutputFileName| "console"))
        NIL)
       (|scripts| "show subscripts,... linearly" |interpreter| LITERALS
        |$linearFormatScripts| (|yes| |no|) |no|)

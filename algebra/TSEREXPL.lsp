@@ -3,7 +3,7 @@
         ((|f| (ULS)) (|lx| (|List| ULS))
          (|ld| (|List| (|Mapping| |Coef| |Coef|))) (% (ULS)))
         (SPROG
-         ((|lxt| (|List| UTS)) (#1=#:G13 NIL) (|x| NIL) (#2=#:G12 NIL)
+         ((|lxt| (|List| UTS)) (#1=#:G5 NIL) (|x| NIL) (#2=#:G4 NIL)
           (|ft| (UTS)))
          (SEQ (LETT |ft| (SPADCALL |f| (QREFELT % 9)))
               (LETT |lxt|
@@ -42,27 +42,6 @@
 
 (DECLAIM (NOTINLINE |TaylorSeriesExpansionLaurent;|)) 
 
-(DEFUN |TaylorSeriesExpansionLaurent| (&REST #1=#:G19)
-  (SPROG NIL
-         (PROG (#2=#:G20)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|TaylorSeriesExpansionLaurent|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |TaylorSeriesExpansionLaurent;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|TaylorSeriesExpansionLaurent|)))))))))) 
-
 (DEFUN |TaylorSeriesExpansionLaurent;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -81,6 +60,27 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |TaylorSeriesExpansionLaurent| (&REST #1=#:G11)
+  (SPROG NIL
+         (PROG (#2=#:G12)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|TaylorSeriesExpansionLaurent|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |TaylorSeriesExpansionLaurent;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|TaylorSeriesExpansionLaurent|)))))))))) 
 
 (MAKEPROP '|TaylorSeriesExpansionLaurent| '|infovec|
           (LIST

@@ -1,7 +1,7 @@
 
 (SDEFUN |DERHAM;totalDifferential;E%;1|
         ((|f| (|Expression| |CoefRing|)) (% (%)))
-        (SPROG ((|divs| (|List| %)) (#1=#:G31 NIL) (|i| NIL) (#2=#:G30 NIL))
+        (SPROG ((|divs| (|List| %)) (#1=#:G10 NIL) (|i| NIL) (#2=#:G9 NIL))
                (SEQ
                 (LETT |divs|
                       (PROGN
@@ -55,7 +55,7 @@
 
 (SDEFUN |DERHAM;displayList| ((|x| (|ExtAlgBasis|)) (% (|OutputForm|)))
         (SPROG
-         ((#1=#:G51 NIL) (|i| NIL) (#2=#:G50 NIL) (|le| (|List| (|Integer|))))
+         ((#1=#:G25 NIL) (|i| NIL) (#2=#:G24 NIL) (|le| (|List| (|Integer|))))
          (SEQ (LETT |le| (SPADCALL |x| (QREFELT % 45)))
               (EXIT
                (SPADCALL (ELT % 47)
@@ -102,7 +102,7 @@
 
 (SDEFUN |DERHAM;coerce;%Of;8| ((|a| (%)) (% (|OutputForm|)))
         (SPROG
-         ((#1=#:G65 NIL) (|t| NIL) (#2=#:G64 NIL)
+         ((#1=#:G38 NIL) (|t| NIL) (#2=#:G37 NIL)
           (|ta|
            (|List|
             (|Record| (|:| |k| (|ExtAlgBasis|))
@@ -140,27 +140,9 @@
 
 (DECLAIM (NOTINLINE |DeRhamComplex;|)) 
 
-(DEFUN |DeRhamComplex| (&REST #1=#:G75)
-  (SPROG NIL
-         (PROG (#2=#:G76)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|DeRhamComplex|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |DeRhamComplex;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|DeRhamComplex|)))))))))) 
-
 (DEFUN |DeRhamComplex;| (|#1| |#2|)
   (SPROG
-   ((#1=#:G74 NIL) (|liv| NIL) (#2=#:G73 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL)
+   ((#1=#:G47 NIL) (|liv| NIL) (#2=#:G46 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL)
     (DV$2 NIL) (DV$1 NIL))
    (SEQ
     (PROGN
@@ -189,6 +171,24 @@
                      (LETT #1# (CDR #1#)) (GO G190) G191
                      (EXIT (NREVERSE #2#)))))
      %)))) 
+
+(DEFUN |DeRhamComplex| (&REST #1=#:G48)
+  (SPROG NIL
+         (PROG (#2=#:G49)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|DeRhamComplex|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |DeRhamComplex;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|DeRhamComplex|)))))))))) 
 
 (MAKEPROP '|DeRhamComplex| '|infovec|
           (LIST

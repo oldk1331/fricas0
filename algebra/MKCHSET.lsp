@@ -69,23 +69,6 @@
 
 (DECLAIM (NOTINLINE |MakeCachableSet;|)) 
 
-(DEFUN |MakeCachableSet| (#1=#:G26)
-  (SPROG NIL
-         (PROG (#2=#:G27)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|MakeCachableSet|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|MakeCachableSet;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|MakeCachableSet|)))))))))) 
-
 (DEFUN |MakeCachableSet;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -104,6 +87,23 @@
                               (|:| |pos| (|NonNegativeInteger|))))
           (SPADCALL (QREFELT % 10))
           %))) 
+
+(DEFUN |MakeCachableSet| (#1=#:G21)
+  (SPROG NIL
+         (PROG (#2=#:G22)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|MakeCachableSet|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|MakeCachableSet;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|MakeCachableSet|)))))))))) 
 
 (MAKEPROP '|MakeCachableSet| '|infovec|
           (LIST

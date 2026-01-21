@@ -8,7 +8,7 @@
                                   "failed"))
                     (|:| |hom| (|List| (|Vector| (|NonNegativeInteger|)))))))
         (SPROG
-         ((|vars| (|List| (|Symbol|))) (#1=#:G45 NIL) (|x| NIL) (#2=#:G44 NIL)
+         ((|vars| (|List| (|Symbol|))) (#1=#:G33 NIL) (|x| NIL) (#2=#:G32 NIL)
           (|ihs| #3=(|List| (|Vector| (|NonNegativeInteger|)))) (|hs| #3#)
           (|sol| (|Vector| (|NonNegativeInteger|)))
           (|graph|
@@ -19,7 +19,7 @@
                             (|:| |is_free| (|Boolean|)))))
             (|:| |dim| (|NonNegativeInteger|)) (|:| |zeroNode| (|Integer|))))
           (|mon| (|List| (|Polynomial| (|Integer|)))) (|c| (|Integer|))
-          (#4=#:G43 NIL) (|n| (|NonNegativeInteger|))
+          (#4=#:G31 NIL) (|n| (|NonNegativeInteger|))
           (|p| (|Polynomial| (|Integer|))))
          (SEQ
           (LETT |p|
@@ -79,10 +79,10 @@
                            (|:| |is_free| (|Boolean|)))))
            (|:| |dim| (|NonNegativeInteger|)) (|:| |zeroNode| (|Integer|)))))
         (SPROG
-         ((#1=#:G62 NIL) (#2=#:G64 NIL) (|i| NIL) (#3=#:G63 NIL)
+         ((#1=#:G48 NIL) (#2=#:G50 NIL) (|i| NIL) (#3=#:G49 NIL)
           (|n| (|Integer|)) (|m| (|Integer|)) (|k| (|NonNegativeInteger|))
-          (|coeffs| (|Vector| (|Integer|))) (#4=#:G61 NIL) (|x| NIL)
-          (#5=#:G60 NIL))
+          (|coeffs| (|Vector| (|Integer|))) (#4=#:G47 NIL) (|x| NIL)
+          (#5=#:G46 NIL))
          (SEQ
           (LETT |coeffs|
                 (SPADCALL
@@ -127,7 +127,7 @@
           (|Record| (|:| |vert| (|Vector| (|Integer|)))
                     (|:| |is_free| (|Boolean|)))))
         (SPROG
-         ((#1=#:G73 NIL) (#2=#:G72 NIL) (#3=#:G74 NIL) (|i| NIL)
+         ((#1=#:G59 NIL) (#2=#:G58 NIL) (#3=#:G60 NIL) (|i| NIL)
           (|v| (|Vector| (|Integer|))))
          (SEQ (LETT |v| (SPADCALL |k| (QREFELT % 34)))
               (SEQ (LETT |i| 1) (LETT #3# |k|) G190
@@ -147,7 +147,7 @@
                                                (SPADCALL |coeffs| |i|
                                                          (QREFELT % 35)))
                                             (QREFELT % 36)))
-                            (GO #4=#:G67)))))
+                            (GO #4=#:G53)))))
                         #4# (EXIT #2#)))
                       ('T
                        (SEQ
@@ -161,7 +161,7 @@
                                                (SPADCALL |coeffs| |i|
                                                          (QREFELT % 35)))
                                             (QREFELT % 36)))
-                            (GO #5=#:G68)))))
+                            (GO #5=#:G54)))))
                         #5# (EXIT #1#))))))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
               (EXIT (CONS |v| 'T))))) 
@@ -180,7 +180,7 @@
         (SPROG
          ((|sols| (|List| (|Vector| (|NonNegativeInteger|))))
           (|s| (|List| (|Vector| (|NonNegativeInteger|))))
-          (|x| (|NonNegativeInteger|)) (#3=#:G90 NIL) (|i| NIL) (|k| #1#)
+          (|x| (|NonNegativeInteger|)) (#3=#:G76 NIL) (|i| NIL) (|k| #1#)
           (|v| #2#)
           (|node|
            (|Record| (|:| |vert| (|Vector| (|Integer|)))
@@ -258,7 +258,7 @@
            (|:| |dim| (|NonNegativeInteger|)) (|:| |zeroNode| (|Integer|))))
          (|flag| (|Boolean|)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G94 NIL) (|x| (|NonNegativeInteger|))
+         ((#1=#:G80 NIL) (|x| (|NonNegativeInteger|))
           (|i| (|NonNegativeInteger|)))
          (SEQ
           (COND
@@ -296,8 +296,8 @@
            (|:| |dim| (|NonNegativeInteger|)) (|:| |zeroNode| (|Integer|))))
          (% (|Boolean|)))
         (SPROG
-         ((#3=#:G111 NIL) (|flag| (|Boolean|)) (#4=#:G101 NIL)
-          (|x| (|NonNegativeInteger|)) (#5=#:G112 NIL) (|i| NIL) (|k| #1#)
+         ((#3=#:G97 NIL) (|flag| (|Boolean|)) (#4=#:G87 NIL)
+          (|x| (|NonNegativeInteger|)) (#5=#:G98 NIL) (|i| NIL) (|k| #1#)
           (|v| #2#)
           (|node|
            (|Record| (|:| |vert| (|Vector| (|Integer|)))
@@ -354,16 +354,29 @@
                                            (EXIT
                                             (SPADCALL |sol| |i| |x|
                                                       (QREFELT % 41)))))))))
-                                (GO #6=#:G106)))))
+                                (GO #6=#:G92)))))
                             #6# (EXIT #3#))))))
                    (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL))
               (EXIT |flag|)))) 
 
 (DECLAIM (NOTINLINE |DiophantineSolutionPackage;|)) 
 
+(DEFUN |DiophantineSolutionPackage;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|DiophantineSolutionPackage|))
+          (LETT % (GETREFV 45))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|DiophantineSolutionPackage| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |DiophantineSolutionPackage| ()
   (SPROG NIL
-         (PROG (#1=#:G114)
+         (PROG (#1=#:G100)
            (RETURN
             (COND
              ((LETT #1#
@@ -383,19 +396,6 @@
                  ((NOT #1#)
                   (HREM |$ConstructorCache|
                         '|DiophantineSolutionPackage|)))))))))) 
-
-(DEFUN |DiophantineSolutionPackage;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|DiophantineSolutionPackage|))
-          (LETT % (GETREFV 45))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|DiophantineSolutionPackage| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|DiophantineSolutionPackage| '|infovec|
           (LIST

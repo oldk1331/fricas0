@@ -118,7 +118,7 @@
 ;     cl:= replaceSharps(cl,form)
 ;     and/[isValid for x in argl for c in cl] where isValid ==
 ;       categoryForm?(c) =>
-;         evalCategory(x, MSUBSTQ(x, '%, c)) and isValidType x
+;           evalCategory(x, SUBST(x, '%, c)) and isValidType(x)
 ;       not(get_database(opOf(x), 'CONSTRUCTORKIND) = 'domain)
 
 (DEFUN |isValidType;| (|form|)
@@ -327,7 +327,7 @@
                                                   ((|categoryForm?| |c|)
                                                    (AND
                                                     (|evalCategory| |x|
-                                                     (MSUBSTQ |x| '% |c|))
+                                                     (SUBST |x| '% |c|))
                                                     (|isValidType| |x|)))
                                                   (#1#
                                                    (NULL
@@ -389,7 +389,6 @@
 ;   $declaredMode : local:= NIL
 ;   $reportBottomUpFlag : local:= NIL
 ;   l := selectMms1(funName,m2,[m1],[m1],NIL)
-;   --  mmS := [[sig,[targ,arg],:pred] for x in l | x is [sig,[.,arg],:pred] and
 ;   mmS := [x for x in l | x is [sig,:.] and hasCorrectTarget(m2,sig) and
 ;            sig is [dc,targ,oarg] and isEqualOrSubDomain(m1,oarg)]
 ;   mmS and first mmS

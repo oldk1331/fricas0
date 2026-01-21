@@ -22,22 +22,6 @@
 
 (DECLAIM (NOTINLINE |Ruleset;|)) 
 
-(DEFUN |Ruleset| (&REST #1=#:G16)
-  (SPROG NIL
-         (PROG (#2=#:G17)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|Ruleset|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |Ruleset;|) #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Ruleset|)))))))))) 
-
 (DEFUN |Ruleset;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -57,6 +41,22 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 9 (|Set| (|RewriteRule| |#1| |#2| |#3|)))
           %))) 
+
+(DEFUN |Ruleset| (&REST #1=#:G6)
+  (SPROG NIL
+         (PROG (#2=#:G7)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|Ruleset|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |Ruleset;|) #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Ruleset|)))))))))) 
 
 (MAKEPROP '|Ruleset| '|infovec|
           (LIST

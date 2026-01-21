@@ -2,7 +2,7 @@
 (SDEFUN |APPRULE;applist|
         ((|lrule| (|List| (|RewriteRule| |Base| R F))) (|arglist| (|List| F))
          (% (|List| F)))
-        (SPROG ((#1=#:G17 NIL) (|arg| NIL) (#2=#:G16 NIL))
+        (SPROG ((#1=#:G12 NIL) (|arg| NIL) (#2=#:G11 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -24,7 +24,7 @@
         (SPROG
          ((|lv| (|List| F)) (|lk| (|List| (|Kernel| F)))
           (|ncr| (|List| (|RewriteRule| |Base| R F)))
-          (|u| (|Union| (|Equation| F) "failed")) (#1=#:G31 NIL) (|r| NIL))
+          (|u| (|Union| (|Equation| F) "failed")) (#1=#:G23 NIL) (|r| NIL))
          (SEQ (LETT |ncr| NIL) (LETT |lk| NIL) (LETT |lv| NIL)
               (SEQ (LETT |r| NIL) (LETT #1# |l|) G190
                    (COND
@@ -52,7 +52,7 @@
 (SDEFUN |APPRULE;applyRules;L2F;3|
         ((|l| (|List| (|RewriteRule| |Base| R F))) (|s| (F)) (% (F)))
         (SPROG
-         ((#1=#:G40 NIL) (|new| (F))
+         ((#1=#:G30 NIL) (|new| (F))
           (|rec|
            (|Record| (|:| |lker| (|List| (|Kernel| F))) (|:| |lval| (|List| F))
                      (|:| |rl| (|List| (|RewriteRule| |Base| R F))))))
@@ -68,7 +68,7 @@
                        (EXIT
                         (COND
                          ((SPADCALL |new| |s| (QREFELT % 18))
-                          (PROGN (LETT #1# |s|) (GO #2=#:G39)))
+                          (PROGN (LETT #1# |s|) (GO #2=#:G29)))
                          ('T (LETT |s| |new|)))))
                       NIL (GO G190) G191 (EXIT NIL)))))
           #2# (EXIT #1#)))) 
@@ -90,7 +90,7 @@
          (|lrule| (|List| (|RewriteRule| |Base| R F))) (|subject| (F))
          (|n| (|PositiveInteger|)) (% (F)))
         (SPROG
-         ((#1=#:G54 NIL) (|k| NIL) (#2=#:G55 NIL) (|v| NIL) (#3=#:G53 NIL)
+         ((#1=#:G42 NIL) (|k| NIL) (#2=#:G43 NIL) (|v| NIL) (#3=#:G41 NIL)
           (|i| NIL))
          (SEQ
           (SEQ (LETT |i| 1) (LETT #3# |n|) G190
@@ -116,7 +116,7 @@
         ((|f| (F)) (|res| (|PatternMatchResult| |Base| F))
          (|l| (|List| (|Symbol|))) (% (F)))
         (SPROG
-         ((|lv| (|List| F)) (|lk| (|List| (|Kernel| F))) (#1=#:G62 NIL)
+         ((|lv| (|List| F)) (|lk| (|List| (|Kernel| F))) (#1=#:G50 NIL)
           (|rec| NIL))
          (SEQ (LETT |lk| NIL) (LETT |lv| NIL)
               (SEQ (LETT |rec| NIL) (LETT #1# (SPADCALL |res| (QREFELT % 27)))
@@ -137,7 +137,7 @@
          (|bad| (|List| (|PatternMatchResult| |Base| F)))
          (% (|PatternMatchResult| |Base| F)))
         (SPROG
-         ((#1=#:G69 NIL) (#2=#:G77 NIL) (|v| NIL) (#3=#:G65 NIL)
+         ((#1=#:G56 NIL) (#2=#:G64 NIL) (|v| NIL) (#3=#:G52 NIL)
           (|u| (|PatternMatchResult| |Base| F)))
          (SEQ
           (COND
@@ -178,7 +178,7 @@
 (SDEFUN |APPRULE;isit|
         ((|subject| (F)) (|pat| (|Pattern| |Base|))
          (% (|PatternMatchResult| |Base| F)))
-        (SPROG ((#1=#:G83 NIL) (|l| (|List| (|Pattern| |Base|))) (|v| NIL))
+        (SPROG ((#1=#:G70 NIL) (|l| (|List| (|Pattern| |Base|))) (|v| NIL))
                (SEQ
                 (COND
                  ((SPADCALL |pat| (QREFELT % 48))
@@ -199,17 +199,17 @@
 (SDEFUN |APPRULE;app|
         ((|lrule| (|List| (|RewriteRule| |Base| R F))) (|subject| (F)) (% (F)))
         (SPROG
-         ((#1=#:G109 NIL) (#2=#:G106 NIL) (#3=#:G104 NIL) (|f| (F))
+         ((#1=#:G96 NIL) (#2=#:G93 NIL) (#3=#:G91 NIL) (|f| (F))
           (|ee| (|Record| (|:| |val| F) (|:| |exponent| (|Integer|))))
           (|e|
            (|Union| (|Record| (|:| |val| F) (|:| |exponent| (|Integer|)))
                     #4="failed"))
-          (#5=#:G97 NIL) (#6=#:G96 (F)) (#7=#:G98 (F)) (#8=#:G120 NIL)
-          (#9=#:G2 NIL) (|l| (|Union| (|List| F) #4#)) (#10=#:G94 NIL)
-          (#11=#:G93 (F)) (#12=#:G95 (F)) (#13=#:G119 NIL) (#14=#:G1 NIL)
-          (|k| (|Union| (|Kernel| F) "failed")) (#15=#:G116 NIL)
-          (#16=#:G117 NIL) (|u| (|PatternMatchResult| |Base| F))
-          (#17=#:G118 NIL) (|r| NIL))
+          (#5=#:G84 NIL) (#6=#:G83 (F)) (#7=#:G85 (F)) (#8=#:G107 NIL)
+          (#9=#:G1 NIL) (|l| (|Union| (|List| F) #4#)) (#10=#:G81 NIL)
+          (#11=#:G80 (F)) (#12=#:G82 (F)) (#13=#:G106 NIL) (#14=#:G0 NIL)
+          (|k| (|Union| (|Kernel| F) "failed")) (#15=#:G103 NIL)
+          (#16=#:G104 NIL) (|u| (|PatternMatchResult| |Base| F))
+          (#17=#:G105 NIL) (|r| NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -235,8 +235,8 @@
                                      (|APPRULE;rewrite|
                                       (SPADCALL |r| (QREFELT % 52)) |u|
                                       (SPADCALL |r| (QREFELT % 54)) %))
-                               (GO #18=#:G115)))
-                        (GO #19=#:G86))))))
+                               (GO #18=#:G102)))
+                        (GO #19=#:G73))))))
                    (LETT #17# (CDR #17#)) (GO G190) G191 (EXIT NIL)))
              #19# (EXIT #15#))
             (LETT |k| (SPADCALL |subject| (QREFELT % 56)))
@@ -352,23 +352,6 @@
 
 (DECLAIM (NOTINLINE |ApplyRules;|)) 
 
-(DEFUN |ApplyRules| (&REST #1=#:G121)
-  (SPROG NIL
-         (PROG (#2=#:G122)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ApplyRules|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ApplyRules;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|ApplyRules|)))))))))) 
-
 (DEFUN |ApplyRules;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -387,6 +370,23 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |ApplyRules| (&REST #1=#:G108)
+  (SPROG NIL
+         (PROG (#2=#:G109)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ApplyRules|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ApplyRules;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|ApplyRules|)))))))))) 
 
 (MAKEPROP '|ApplyRules| '|infovec|
           (LIST

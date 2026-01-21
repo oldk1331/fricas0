@@ -900,10 +900,6 @@
 ;   defaultType := ['Variable,id]
 ;   -- This was meant to stop building silly symbols but had some unfortunate
 ;   -- side effects, like not being able to say e:=foo in the interpreter.  MCD
-; --  defaultType :=
-; --    getModemapsFromDatabase(id,1) =>
-; --      userError ['"Cannot use operation name as a variable: ", id]
-; --    ['Variable, id]
 ;   u := getValue t => --non-cached values MAY be re-evaluated
 ;     tar := getTarget t
 ;     expr:= objVal u
@@ -1403,6 +1399,48 @@
       (COND (|amsl| (SETQ |amsl| (CDR |amsl|))))
       |amsl|))))
 
+; bottomUpRecordElt(t, op, m, argl, env) ==
+;     pl := first(first(env))
+;     not(argl is [x] and VECP(x) and #x = 5 and IDENTP(s := x.0)) => nil
+;     not(member(s, getUnionOrRecordTags(m))) => nil
+;     st := mkAtreeNode(s)
+;     svt := ["Variable", s]
+;     sv := [svt, "WRAPPED", :s]
+;     putModeSet(st, [svt])
+;     putValue(st, sv)
+;     rplac(rest(t), [op, st])
+;     rplac(first(t), mkAtreeNode("elt"))
+;     spl := [s, ["value", :sv]]
+;     $env : local := [[[spl, :pl], :rest(first(env))], :rest(env)]
+;     bottomUp(t)
+
+(DEFUN |bottomUpRecordElt| (|t| |op| |m| |argl| |env|)
+  (PROG (|$env| |spl| |sv| |svt| |st| |s| |x| |pl|)
+    (DECLARE (SPECIAL |$env|))
+    (RETURN
+     (PROGN
+      (SETQ |pl| (CAR (CAR |env|)))
+      (COND
+       ((NULL
+         (AND (CONSP |argl|) (EQ (CDR |argl|) NIL)
+              (PROGN (SETQ |x| (CAR |argl|)) #1='T) (VECP |x|)
+              (EQL (LENGTH |x|) 5) (IDENTP (SETQ |s| (ELT |x| 0)))))
+        NIL)
+       ((NULL (|member| |s| (|getUnionOrRecordTags| |m|))) NIL)
+       (#1#
+        (PROGN
+         (SETQ |st| (|mkAtreeNode| |s|))
+         (SETQ |svt| (LIST '|Variable| |s|))
+         (SETQ |sv| (CONS |svt| (CONS 'WRAPPED |s|)))
+         (|putModeSet| |st| (LIST |svt|))
+         (|putValue| |st| |sv|)
+         (|rplac| (CDR |t|) (LIST |op| |st|))
+         (|rplac| (CAR |t|) (|mkAtreeNode| '|elt|))
+         (SETQ |spl| (LIST |s| (CONS '|value| |sv|)))
+         (SETQ |$env|
+                 (CONS (CONS (CONS |spl| |pl|) (CDR (CAR |env|))) (CDR |env|)))
+         (|bottomUp| |t|))))))))
+
 ; bottomUpForm0(t,op,opName,argl,argModeSetList) ==
 ;   op0 := op
 ;   opName0 := opName
@@ -1422,8 +1460,8 @@
 ;     putModeSet(t,[rtype])
 ;
 ;   m := getModeOrFirstModeSetIfThere op
-;   m is ['Record,:.] and argModeSetList is [[['Variable,x]]] and
-;       member(x,getUnionOrRecordTags m) and (u := bottomUpElt t) => u
+;   (m is ['Record, :.] or m is ['Union, :.]) and
+;       (u := bottomUpRecordElt(t, op, m, argl, $env)) => u
 ;   m is ['Union,:.] and argModeSetList is [[['Variable,x]]] =>
 ;       member(x,getUnionOrRecordTags m) and (u := bottomUpElt t) => u
 ;       not $genValue =>
@@ -1481,7 +1519,7 @@
 
 (DEFUN |bottomUpForm0| (|t| |op| |opName| |argl| |argModeSetList|)
   (PROG (|op0| |opName0| |m| |ISTMP#1| |ISTMP#2| |rargs| |rtype| |code| |val|
-         |ISTMP#3| |x| |u| |amsl| |object| |var| |o| |opName1| |msgKey| |n|)
+         |u| |ISTMP#3| |x| |amsl| |object| |var| |o| |opName1| |msgKey| |n|)
     (RETURN
      (PROGN
       (SETQ |op0| |op|)
@@ -1511,24 +1549,10 @@
              (PROGN
               (SETQ |m| (|getModeOrFirstModeSetIfThere| |op|))
               (COND
-               ((AND (CONSP |m|) (EQ (CAR |m|) '|Record|)
-                     (CONSP |argModeSetList|) (EQ (CDR |argModeSetList|) NIL)
-                     (PROGN
-                      (SETQ |ISTMP#1| (CAR |argModeSetList|))
-                      (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
-                           (PROGN
-                            (SETQ |ISTMP#2| (CAR |ISTMP#1|))
-                            (AND (CONSP |ISTMP#2|)
-                                 (EQ (CAR |ISTMP#2|) '|Variable|)
-                                 (PROGN
-                                  (SETQ |ISTMP#3| (CDR |ISTMP#2|))
-                                  (AND (CONSP |ISTMP#3|)
-                                       (EQ (CDR |ISTMP#3|) NIL)
-                                       (PROGN
-                                        (SETQ |x| (CAR |ISTMP#3|))
-                                        #1#)))))))
-                     (|member| |x| (|getUnionOrRecordTags| |m|))
-                     (SETQ |u| (|bottomUpElt| |t|)))
+               ((AND
+                 (OR (AND (CONSP |m|) (EQ (CAR |m|) '|Record|))
+                     (AND (CONSP |m|) (EQ (CAR |m|) '|Union|)))
+                 (SETQ |u| (|bottomUpRecordElt| |t| |op| |m| |argl| |$env|)))
                 |u|)
                ((AND (CONSP |m|) (EQ (CAR |m|) '|Union|)
                      (CONSP |argModeSetList|) (EQ (CDR |argModeSetList|) NIL)

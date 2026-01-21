@@ -13,8 +13,8 @@
 
 (SDEFUN |IXAGG-;maxIndex;SIndex;4| ((|a| (S)) (% (|Index|)))
         (SPROG
-         ((#1=#:G24 NIL) (#2=#:G23 (|Index|)) (#3=#:G25 (|Index|))
-          (#4=#:G27 NIL) (#5=#:G1 NIL))
+         ((#1=#:G15 NIL) (#2=#:G14 (|Index|)) (#3=#:G16 (|Index|))
+          (#4=#:G18 NIL) (#5=#:G0 NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -32,8 +32,8 @@
 
 (SDEFUN |IXAGG-;minIndex;SIndex;5| ((|a| (S)) (% (|Index|)))
         (SPROG
-         ((#1=#:G29 NIL) (#2=#:G28 (|Index|)) (#3=#:G30 (|Index|))
-          (#4=#:G32 NIL) (#5=#:G2 NIL))
+         ((#1=#:G20 NIL) (#2=#:G19 (|Index|)) (#3=#:G21 (|Index|))
+          (#4=#:G23 NIL) (#5=#:G1 NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -58,7 +58,7 @@
 
 (SDEFUN |IXAGG-;map!;M2S;8|
         ((|f| (|Mapping| |Entry| |Entry|)) (|a| (S)) (% (S)))
-        (SPROG ((#1=#:G40 NIL) (|i| NIL))
+        (SPROG ((#1=#:G31 NIL) (|i| NIL))
                (SEQ
                 (SEQ (LETT |i| NIL) (LETT #1# (SPADCALL |a| (QREFELT % 19)))
                      G190
@@ -75,7 +75,7 @@
                 (EXIT |a|)))) 
 
 (SDEFUN |IXAGG-;fill!;SEntryS;9| ((|a| (S)) (|x| (|Entry|)) (% (S)))
-        (SPROG ((#1=#:G45 NIL) (|i| NIL))
+        (SPROG ((#1=#:G36 NIL) (|i| NIL))
                (SEQ
                 (SEQ (LETT |i| NIL) (LETT #1# (SPADCALL |a| (QREFELT % 19)))
                      G190

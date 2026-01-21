@@ -27,24 +27,24 @@
           (|Matrix|
            (|SparseUnivariatePolynomial| (|Expression| (|Integer|))))))
         (SPROG
-         ((#1=#:G60 NIL) (|j| NIL) (|i1| #2=(|NonNegativeInteger|))
-          (#3=#:G59 NIL) (|i| NIL)
+         ((#1=#:G42 NIL) (|j| NIL) (|i1| #2=(|NonNegativeInteger|))
+          (#3=#:G41 NIL) (|i| NIL)
           (|res|
            (|Matrix|
             (|SparseUnivariatePolynomial| (|Expression| (|Integer|)))))
-          (|n1| #2#) (#4=#:G58 NIL) (|n| (|NonNegativeInteger|))
+          (|n1| #2#) (#4=#:G40 NIL) (|n| (|NonNegativeInteger|))
           (|res1|
            (|Matrix|
             (|SparseUnivariatePolynomial| (|Expression| (|Integer|)))))
-          (C (|List| (|Expression| (|Integer|)))) (#5=#:G57 NIL) (#6=#:G56 NIL)
-          (|vd| (|Vector| (|Integer|))) (#7=#:G55 NIL) (|ei| NIL)
-          (#8=#:G54 NIL)
+          (C (|List| (|Expression| (|Integer|)))) (#5=#:G39 NIL) (#6=#:G38 NIL)
+          (|vd| (|Vector| (|Integer|))) (#7=#:G37 NIL) (|ei| NIL)
+          (#8=#:G36 NIL)
           (|lpp|
            (|List| (|SparseUnivariatePolynomial| (|Expression| (|Integer|)))))
           (|pp| (|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
-          (#9=#:G30 NIL)
+          (#9=#:G12 NIL)
           (|pp1| (|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
-          (#10=#:G53 NIL) (#11=#:G52 NIL) (|v| NIL)
+          (#10=#:G35 NIL) (#11=#:G34 NIL) (|v| NIL)
           (|m| (|NonNegativeInteger|)))
          (SEQ (LETT |m| (QVSIZE (|SPADfirst| |lv|))) (LETT |lpp| NIL)
               (SEQ (LETT |v| NIL) (LETT #11# |lv|) G190
@@ -145,9 +145,22 @@
 
 (DECLAIM (NOTINLINE |VectorHermitePadeSolver;|)) 
 
+(DEFUN |VectorHermitePadeSolver;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|VectorHermitePadeSolver|))
+          (LETT % (GETREFV 40))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|VectorHermitePadeSolver| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |VectorHermitePadeSolver| ()
   (SPROG NIL
-         (PROG (#1=#:G62)
+         (PROG (#1=#:G44)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|VectorHermitePadeSolver|))
@@ -164,19 +177,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|VectorHermitePadeSolver|)))))))))) 
-
-(DEFUN |VectorHermitePadeSolver;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|VectorHermitePadeSolver|))
-          (LETT % (GETREFV 40))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|VectorHermitePadeSolver| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|VectorHermitePadeSolver| '|infovec|
           (LIST

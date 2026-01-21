@@ -39,7 +39,7 @@
 
 (SDEFUN |EMR;rem;3%;2| ((|x| (%)) (|y| (%)) (% (%)))
         (SPROG
-         ((#1=#:G68 NIL) (|xv| (R)) (#2=#:G61 NIL) (|xvl| (R))
+         ((#1=#:G63 NIL) (|xv| (R)) (#2=#:G56 NIL) (|xvl| (R))
           (|d| (|Integer|)) (|dy| (|NonNegativeInteger|)) (|yv| (R))
           (|invlcy| (R)) (|xm| (|Mod|)) (|t| (|Union| |Mod| "failed")))
          (SEQ
@@ -116,7 +116,7 @@
                                                     (QREFELT % 31))
                                           (PROGN
                                            (LETT #1# (CONS |xv| |xm|))
-                                           (GO #3=#:G67))))))))))
+                                           (GO #3=#:G62))))))))))
                                   NIL (GO G190) G191 (EXIT NIL))
                              (EXIT
                               (CONS (SPADCALL |xv| |xm| (QREFELT % 9))
@@ -209,25 +209,6 @@
 
 (DECLAIM (NOTINLINE |EuclideanModularRing;|)) 
 
-(DEFUN |EuclideanModularRing| (&REST #1=#:G114)
-  (SPROG NIL
-         (PROG (#2=#:G115)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T T T NIL NIL NIL))
-                     (HGET |$ConstructorCache| '|EuclideanModularRing|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |EuclideanModularRing;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|EuclideanModularRing|)))))))))) 
-
 (DEFUN |EuclideanModularRing;| (|#1| |#2| |#3| |#4| |#5| |#6|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$6 NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL)
@@ -263,6 +244,25 @@
       (QSETREFV % 35 (CONS (|dispatchFunction| |EMR;rem;3%;2|) %)))
      ('T (QSETREFV % 35 (CONS (|dispatchFunction| |EMR;rem;3%;3|) %))))
     %))) 
+
+(DEFUN |EuclideanModularRing| (&REST #1=#:G103)
+  (SPROG NIL
+         (PROG (#2=#:G104)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T T T NIL NIL NIL))
+                     (HGET |$ConstructorCache| '|EuclideanModularRing|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |EuclideanModularRing;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|EuclideanModularRing|)))))))))) 
 
 (MAKEPROP '|EuclideanModularRing| '|infovec|
           (LIST

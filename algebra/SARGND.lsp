@@ -135,13 +135,13 @@
 (SDEFUN |SARGND;hash| ((|s| (%)) (% (|SingleInteger|))) 0) 
 
 (SDEFUN |SARGND;=;2%B;30| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
-        (SPROG ((#1=#:G79 NIL))
+        (SPROG ((#1=#:G55 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((SPADCALL (QCAR |x|) (QCAR |y|) (QREFELT % 17))
-                    (PROGN (LETT #1# NIL) (GO #2=#:G78))))
+                    (PROGN (LETT #1# NIL) (GO #2=#:G54))))
                   (COND
                    ((SPADCALL (QCDR |x|) (QCDR |y|) (QREFELT % 17))
                     (PROGN (LETT #1# NIL) (GO #2#))))
@@ -169,22 +169,6 @@
 
 (DECLAIM (NOTINLINE |SArgand;|)) 
 
-(DEFUN |SArgand| ()
-  (SPROG NIL
-         (PROG (#1=#:G89)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|SArgand|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|SArgand|
-                             (LIST (CONS NIL (CONS 1 (|SArgand;|))))))
-                    (LETT #1# T))
-                (COND ((NOT #1#) (HREM |$ConstructorCache| '|SArgand|)))))))))) 
-
 (DEFUN |SArgand;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -199,6 +183,22 @@
                     (|Record| (|:| |r| (|DoubleFloat|))
                               (|:| |i| (|DoubleFloat|))))
           %))) 
+
+(DEFUN |SArgand| ()
+  (SPROG NIL
+         (PROG (#1=#:G60)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|SArgand|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|SArgand|
+                             (LIST (CONS NIL (CONS 1 (|SArgand;|))))))
+                    (LETT #1# T))
+                (COND ((NOT #1#) (HREM |$ConstructorCache| '|SArgand|)))))))))) 
 
 (MAKEPROP '|SArgand| '|infovec|
           (LIST

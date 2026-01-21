@@ -1,7 +1,7 @@
 
 (SDEFUN |PRIMES;primes;2IL;1| ((|m| (I)) (|n| (I)) (% (|List| I)))
         (SPROG
-         ((|ll| (|List| I)) (#1=#:G50 NIL) (|k| NIL) (#2=#:G49 NIL) (|m0| (I)))
+         ((|ll| (|List| I)) (#1=#:G38 NIL) (|k| NIL) (#2=#:G37 NIL) (|m0| (I)))
          (SEQ
           (COND
            ((SPADCALL |m| (|spadConstant| % 33) (QREFELT % 35))
@@ -39,7 +39,7 @@
         ((|p| (I)) (|n| (I)) (|nm1| (I)) (|q| (I)) (|k| (|NonNegativeInteger|))
          (% (|Boolean|)))
         (SPROG
-         ((#1=#:G58 NIL) (#2=#:G57 NIL) (|t| (I)) (#3=#:G59 NIL) (|j| NIL))
+         ((#1=#:G46 NIL) (#2=#:G45 NIL) (|t| (I)) (#3=#:G47 NIL) (|j| NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |t| (SPADCALL |p| |q| |n| (QREFELT % 43)))
@@ -58,9 +58,9 @@
                               (COND
                                ((SPADCALL |t| (|spadConstant| % 11)
                                           (QREFELT % 44))
-                                (PROGN (LETT #1# 'T) (GO #4=#:G56)))
+                                (PROGN (LETT #1# 'T) (GO #4=#:G44)))
                                ((SPADCALL |t| |nm1| (QREFELT % 44))
-                                (PROGN (LETT #2# |$NoValue|) (GO #5=#:G53))))))
+                                (PROGN (LETT #2# |$NoValue|) (GO #5=#:G41))))))
                             (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                             (EXIT NIL)))
                       #5# (EXIT #2#))
@@ -75,7 +75,7 @@
         ((|p| (I)) (|n| (I)) (|nm1| (I)) (|q| (I)) (|k| (|NonNegativeInteger|))
          (% (|Boolean|)))
         (SPROG
-         ((#1=#:G68 NIL) (#2=#:G67 NIL) (|t| (I)) (|oldt| (I)) (#3=#:G69 NIL)
+         ((#1=#:G56 NIL) (#2=#:G55 NIL) (|t| (I)) (|oldt| (I)) (#3=#:G57 NIL)
           (|j| NIL))
          (SEQ
           (EXIT
@@ -101,7 +101,7 @@
                                   (COND
                                    ((SPADCALL |t| (|spadConstant| % 11)
                                               (QREFELT % 44))
-                                    (PROGN (LETT #1# 'T) (GO #4=#:G66)))
+                                    (PROGN (LETT #1# 'T) (GO #4=#:G54)))
                                    ((SPADCALL |t| |nm1| (QREFELT % 44))
                                     (SEQ
                                      (SETELT % 28
@@ -117,7 +117,7 @@
                                      (EXIT
                                       (PROGN
                                        (LETT #2# |$NoValue|)
-                                       (GO #5=#:G63))))))))
+                                       (GO #5=#:G51))))))))
                             (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                             (EXIT NIL)))
                       #5# (EXIT #2#))
@@ -132,10 +132,9 @@
 
 (SDEFUN |PRIMES;prime?;IB;4| ((|n| (I)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G112 NIL) (#2=#:G115 NIL) (|probablySafe| (I))
-          (|currPrime| (I)) (#3=#:G114 NIL) (|n9| (I)) (#4=#:G113 NIL)
-          (#5=#:G116 NIL) (|i| NIL) (|mn| (|Integer|)) (|q| (I)) (|k| NIL)
-          (|nm1| (I)))
+         ((#1=#:G92 NIL) (#2=#:G95 NIL) (|probablySafe| (I)) (|currPrime| (I))
+          (#3=#:G94 NIL) (|n9| (I)) (#4=#:G93 NIL) (#5=#:G96 NIL) (|i| NIL)
+          (|mn| (|Integer|)) (|q| (I)) (|k| NIL) (|nm1| (I)))
          (SEQ
           (EXIT
            (SEQ
@@ -181,7 +180,7 @@
                               (SPADCALL 2 (QREFELT % 8)) |n| |nm1| |q| |k| %)
                              (|PRIMES;rabinProvesCompositeSmall|
                               (SPADCALL 3 (QREFELT % 8)) |n| |nm1| |q| |k| %))
-                            (PROGN (LETT #2# NIL) (GO #7=#:G111)))
+                            (PROGN (LETT #2# NIL) (GO #7=#:G91)))
                            ((SPADCALL |n| (QREFELT % 20) (QREFELT % 35))
                             (COND
                              ((OR
@@ -253,7 +252,7 @@
                                                    (PROGN
                                                     (LETT #2# NIL)
                                                     (GO #7#)))
-                                             (GO #8=#:G97))))))
+                                             (GO #8=#:G77))))))
                                         (LETT |i| (+ |i| 1)) (GO G190) G191
                                         (EXIT NIL)))
                                   #8# (EXIT #4#))
@@ -289,7 +288,7 @@
                                         (QREFELT % 60))
                                        (PROGN
                                         (LETT #3# NIL)
-                                        (GO #9=#:G107))))))))
+                                        (GO #9=#:G87))))))))
                                  (LETT |currPrime|
                                        (SPADCALL (QREFELT % 9) (+ |mn| 10)
                                                  (QREFELT % 56)))
@@ -328,7 +327,7 @@
                                                    (PROGN
                                                     (LETT #2# NIL)
                                                     (GO #7#)))
-                                             (GO #10=#:G105)))))))
+                                             (GO #10=#:G85)))))))
                                        #10# (EXIT #1#))
                                       NIL (GO G190) G191 (EXIT NIL))
                                  (EXIT 'T)))
@@ -380,27 +379,9 @@
 
 (DECLAIM (NOTINLINE |IntegerPrimesPackage;|)) 
 
-(DEFUN |IntegerPrimesPackage| (#1=#:G130)
-  (SPROG NIL
-         (PROG (#2=#:G131)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|IntegerPrimesPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|IntegerPrimesPackage;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|IntegerPrimesPackage|)))))))))) 
-
 (DEFUN |IntegerPrimesPackage;| (|#1|)
   (SPROG
-   ((#1=#:G40 NIL) (#2=#:G39 NIL) (#3=#:G41 NIL) (#4=#:G129 NIL) (#5=#:G1 NIL)
+   ((#1=#:G30 NIL) (#2=#:G29 NIL) (#3=#:G31 NIL) (#4=#:G109 NIL) (#5=#:G0 NIL)
     (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
    (SEQ
     (PROGN
@@ -499,6 +480,24 @@
      (QSETREFV % 28 (SPADCALL (QREFELT % 27)))
      (QSETREFV % 32 (SPADCALL 1 0 (QREFELT % 31)))
      %)))) 
+
+(DEFUN |IntegerPrimesPackage| (#1=#:G110)
+  (SPROG NIL
+         (PROG (#2=#:G111)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|IntegerPrimesPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|IntegerPrimesPackage;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|IntegerPrimesPackage|)))))))))) 
 
 (MAKEPROP '|IntegerPrimesPackage| '|infovec|
           (LIST

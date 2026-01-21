@@ -15,26 +15,6 @@
 
 (DECLAIM (NOTINLINE |PrimitiveArrayFunctions2;|)) 
 
-(DEFUN |PrimitiveArrayFunctions2| (&REST #1=#:G9)
-  (SPROG NIL
-         (PROG (#2=#:G10)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PrimitiveArrayFunctions2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |PrimitiveArrayFunctions2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|PrimitiveArrayFunctions2|)))))))))) 
-
 (DEFUN |PrimitiveArrayFunctions2;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -51,6 +31,26 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |PrimitiveArrayFunctions2| (&REST #1=#:G8)
+  (SPROG NIL
+         (PROG (#2=#:G9)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PrimitiveArrayFunctions2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |PrimitiveArrayFunctions2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|PrimitiveArrayFunctions2|)))))))))) 
 
 (MAKEPROP '|PrimitiveArrayFunctions2| '|infovec|
           (LIST

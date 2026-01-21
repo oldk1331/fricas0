@@ -13,8 +13,8 @@
         ((|l| (L)) (|sols| (|List| F))
          (% (|Record| (|:| |eq| L) (|:| |op| (|List| F)))))
         (SPROG
-         ((|rec| (|Record| (|:| |eq| L) (|:| |op| (|List| F)))) (#1=#:G18 NIL)
-          (|s| NIL) (#2=#:G17 NIL) (|neweq| (L)) (|sol| (F)))
+         ((|rec| (|Record| (|:| |eq| L) (|:| |op| (|List| F)))) (#1=#:G10 NIL)
+          (|s| NIL) (#2=#:G9 NIL) (|neweq| (L)) (|sol| (F)))
          (SEQ
           (COND ((NULL |sols|) (CONS |l| NIL))
                 ('T
@@ -79,8 +79,8 @@
 
 (SDEFUN |REDORDER;ReduceOrder;LFL;5| ((|eq| (L)) (|sol| (F)) (% (L)))
         (SPROG
-         ((|ans| (L)) (#1=#:G39 NIL) (#2=#:G34 NIL) (|i| NIL) (|si| (F))
-          (#3=#:G38 NIL) (#4=#:G30 NIL) (|s| (|PrimitiveArray| F))
+         ((|ans| (L)) (#1=#:G27 NIL) (#2=#:G22 NIL) (|i| NIL) (|si| (F))
+          (#3=#:G26 NIL) (#4=#:G18 NIL) (|s| (|PrimitiveArray| F))
           (|n| (|NonNegativeInteger|)))
          (SEQ
           (LETT |s|
@@ -119,25 +119,6 @@
 
 (DECLAIM (NOTINLINE |ReductionOfOrder;|)) 
 
-(DEFUN |ReductionOfOrder| (&REST #1=#:G40)
-  (SPROG NIL
-         (PROG (#2=#:G41)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ReductionOfOrder|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ReductionOfOrder;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|ReductionOfOrder|)))))))))) 
-
 (DEFUN |ReductionOfOrder;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -155,6 +136,25 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 9 (SPADCALL (QREFELT % 8)))
           %))) 
+
+(DEFUN |ReductionOfOrder| (&REST #1=#:G28)
+  (SPROG NIL
+         (PROG (#2=#:G29)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ReductionOfOrder|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ReductionOfOrder;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|ReductionOfOrder|)))))))))) 
 
 (MAKEPROP '|ReductionOfOrder| '|infovec|
           (LIST

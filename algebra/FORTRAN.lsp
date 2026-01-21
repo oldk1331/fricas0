@@ -8,9 +8,9 @@
 
 (SDEFUN |FORTRAN;outputAsFortran;%V;3| ((|p| (%)) (% (|Void|)))
         (SPROG
-         ((#1=#:G48 NIL) (|expr| NIL) (|intrinsics| (|List| (|String|)))
-          (|body| (|List| (|List| (|String|)))) (#2=#:G47 NIL) (|l| NIL)
-          (#3=#:G46 NIL) (|tempName| (|Symbol|)))
+         ((#1=#:G31 NIL) (|expr| NIL) (|intrinsics| (|List| (|String|)))
+          (|body| (|List| (|List| (|String|)))) (#2=#:G30 NIL) (|l| NIL)
+          (#3=#:G29 NIL) (|tempName| (|Symbol|)))
          (SEQ (SPADCALL 25000 (QREFELT % 15)) (LETT |tempName| 'FPTEMP)
               (SPADCALL |tempName| (QREFELT % 19)) (SPADCALL (QREFELT % 21))
               (LETT |body|
@@ -85,10 +85,10 @@
         ((|u| (|Equation| (|Expression| (|MachineInteger|)))) (% (%)))
         (SPROG
          ((|eList| (|List| (|Equation| (|Expression| (|MachineInteger|)))))
-          (#1=#:G80 NIL) (|w| NIL) (#2=#:G81 NIL) (|v| NIL) (#3=#:G79 NIL)
-          (|aeList| (|List| (|Expression| (|MachineInteger|)))) (#4=#:G78 NIL)
-          (#5=#:G77 NIL) (|veList| (|List| (|Expression| (|MachineInteger|))))
-          (#6=#:G76 NIL) (#7=#:G75 NIL) (|vList| (|List| (|Symbol|))))
+          (#1=#:G60 NIL) (|w| NIL) (#2=#:G61 NIL) (|v| NIL) (#3=#:G59 NIL)
+          (|aeList| (|List| (|Expression| (|MachineInteger|)))) (#4=#:G58 NIL)
+          (#5=#:G57 NIL) (|veList| (|List| (|Expression| (|MachineInteger|))))
+          (#6=#:G56 NIL) (#7=#:G55 NIL) (|vList| (|List| (|Symbol|))))
          (SEQ
           (COND
            ((QEQCAR (SPADCALL (SPADCALL |u| (QREFELT % 56)) (QREFELT % 58)) 1)
@@ -168,10 +168,10 @@
         ((|u| (|Equation| (|Expression| (|MachineFloat|)))) (% (%)))
         (SPROG
          ((|eList| (|List| (|Equation| (|Expression| (|MachineFloat|)))))
-          (#1=#:G104 NIL) (|w| NIL) (#2=#:G105 NIL) (|v| NIL) (#3=#:G103 NIL)
-          (|aeList| (|List| (|Expression| (|MachineFloat|)))) (#4=#:G102 NIL)
-          (#5=#:G101 NIL) (|veList| (|List| (|Expression| (|MachineFloat|))))
-          (#6=#:G100 NIL) (#7=#:G99 NIL) (|vList| (|List| (|Symbol|))))
+          (#1=#:G83 NIL) (|w| NIL) (#2=#:G84 NIL) (|v| NIL) (#3=#:G82 NIL)
+          (|aeList| (|List| (|Expression| (|MachineFloat|)))) (#4=#:G81 NIL)
+          (#5=#:G80 NIL) (|veList| (|List| (|Expression| (|MachineFloat|))))
+          (#6=#:G79 NIL) (#7=#:G78 NIL) (|vList| (|List| (|Symbol|))))
          (SEQ
           (COND
            ((QEQCAR (SPADCALL (SPADCALL |u| (QREFELT % 72)) (QREFELT % 73)) 1)
@@ -252,10 +252,10 @@
         ((|u| (|Equation| (|Expression| (|MachineComplex|)))) (% (%)))
         (SPROG
          ((|eList| (|List| (|Equation| (|Expression| (|MachineComplex|)))))
-          (#1=#:G130 NIL) (|w| NIL) (#2=#:G131 NIL) (|v| NIL) (#3=#:G129 NIL)
-          (|aeList| (|List| (|Expression| (|MachineComplex|)))) (#4=#:G128 NIL)
-          (#5=#:G127 NIL) (|veList| (|List| (|Expression| (|MachineComplex|))))
-          (#6=#:G126 NIL) (#7=#:G125 NIL) (|vList| (|List| (|Symbol|))))
+          (#1=#:G106 NIL) (|w| NIL) (#2=#:G107 NIL) (|v| NIL) (#3=#:G105 NIL)
+          (|aeList| (|List| (|Expression| (|MachineComplex|)))) (#4=#:G104 NIL)
+          (#5=#:G103 NIL) (|veList| (|List| (|Expression| (|MachineComplex|))))
+          (#6=#:G102 NIL) (#7=#:G101 NIL) (|vList| (|List| (|Symbol|))))
          (SEQ
           (COND
            ((QEQCAR (SPADCALL (SPADCALL |u| (QREFELT % 84)) (QREFELT % 85)) 1)
@@ -353,10 +353,10 @@
         ((|u| (|Equation| (|Expression| (|Integer|)))) (% (%)))
         (SPROG
          ((|eList| (|List| (|Equation| (|Expression| (|Integer|)))))
-          (#1=#:G159 NIL) (|w| NIL) (#2=#:G160 NIL) (|v| NIL) (#3=#:G158 NIL)
-          (|aeList| (|List| (|Expression| (|Integer|)))) (#4=#:G157 NIL)
-          (#5=#:G156 NIL) (|veList| (|List| (|Expression| (|Integer|))))
-          (#6=#:G155 NIL) (#7=#:G154 NIL) (|vList| (|List| (|Symbol|))))
+          (#1=#:G135 NIL) (|w| NIL) (#2=#:G136 NIL) (|v| NIL) (#3=#:G134 NIL)
+          (|aeList| (|List| (|Expression| (|Integer|)))) (#4=#:G133 NIL)
+          (#5=#:G132 NIL) (|veList| (|List| (|Expression| (|Integer|))))
+          (#6=#:G131 NIL) (#7=#:G130 NIL) (|vList| (|List| (|Symbol|))))
          (SEQ
           (COND
            ((QEQCAR (SPADCALL (SPADCALL |u| (QREFELT % 102)) (QREFELT % 103))
@@ -437,10 +437,10 @@
         ((|u| (|Equation| (|Expression| (|Float|)))) (% (%)))
         (SPROG
          ((|eList| (|List| (|Equation| (|Expression| (|Float|)))))
-          (#1=#:G183 NIL) (|w| NIL) (#2=#:G184 NIL) (|v| NIL) (#3=#:G182 NIL)
-          (|aeList| (|List| (|Expression| (|Float|)))) (#4=#:G181 NIL)
-          (#5=#:G180 NIL) (|veList| (|List| (|Expression| (|Float|))))
-          (#6=#:G179 NIL) (#7=#:G178 NIL) (|vList| (|List| (|Symbol|))))
+          (#1=#:G158 NIL) (|w| NIL) (#2=#:G159 NIL) (|v| NIL) (#3=#:G157 NIL)
+          (|aeList| (|List| (|Expression| (|Float|)))) (#4=#:G156 NIL)
+          (#5=#:G155 NIL) (|veList| (|List| (|Expression| (|Float|))))
+          (#6=#:G154 NIL) (#7=#:G153 NIL) (|vList| (|List| (|Symbol|))))
          (SEQ
           (COND
            ((QEQCAR (SPADCALL (SPADCALL |u| (QREFELT % 114)) (QREFELT % 115))
@@ -522,11 +522,11 @@
         ((|u| (|Equation| (|Expression| (|Complex| (|Float|))))) (% (%)))
         (SPROG
          ((|eList| (|List| (|Equation| (|Expression| (|Complex| (|Float|))))))
-          (#1=#:G211 NIL) (|w| NIL) (#2=#:G212 NIL) (|v| NIL) (#3=#:G210 NIL)
+          (#1=#:G181 NIL) (|w| NIL) (#2=#:G182 NIL) (|v| NIL) (#3=#:G180 NIL)
           (|aeList| (|List| (|Expression| (|Complex| (|Float|)))))
-          (#4=#:G209 NIL) (#5=#:G208 NIL)
+          (#4=#:G179 NIL) (#5=#:G178 NIL)
           (|veList| (|List| (|Expression| (|Complex| (|Float|)))))
-          (#6=#:G207 NIL) (#7=#:G206 NIL) (|vList| (|List| (|Symbol|))))
+          (#6=#:G177 NIL) (#7=#:G176 NIL) (|vList| (|List| (|Symbol|))))
          (SEQ
           (COND
            ((QEQCAR (SPADCALL (SPADCALL |u| (QREFELT % 126)) (QREFELT % 127))
@@ -595,25 +595,6 @@
 
 (DECLAIM (NOTINLINE |FortranProgram;|)) 
 
-(DEFUN |FortranProgram| (&REST #1=#:G213)
-  (SPROG NIL
-         (PROG (#2=#:G214)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(NIL NIL NIL NIL))
-                     (HGET |$ConstructorCache| '|FortranProgram|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |FortranProgram;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|FortranProgram|)))))))))) 
-
 (DEFUN |FortranProgram;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -639,6 +620,25 @@
               (|Record| (|:| |localSymbols| (|SymbolTable|))
                         (|:| |code| (|List| (|FortranCode|)))))
     %))) 
+
+(DEFUN |FortranProgram| (&REST #1=#:G183)
+  (SPROG NIL
+         (PROG (#2=#:G184)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(NIL NIL NIL NIL))
+                     (HGET |$ConstructorCache| '|FortranProgram|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |FortranProgram;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|FortranProgram|)))))))))) 
 
 (MAKEPROP '|FortranProgram| '|infovec|
           (LIST

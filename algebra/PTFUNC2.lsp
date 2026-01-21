@@ -1,7 +1,7 @@
 
 (SDEFUN |PTFUNC2;map;MPP;1|
         ((|mapping| (|Mapping| R2 R1)) (|p| (|Point| R1)) (% (|Point| R2)))
-        (SPROG ((#1=#:G14 NIL) (#2=#:G19 NIL) (|i| NIL) (#3=#:G18 NIL))
+        (SPROG ((#1=#:G2 NIL) (#2=#:G7 NIL) (|i| NIL) (#3=#:G6 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -29,25 +29,6 @@
 
 (DECLAIM (NOTINLINE |PointFunctions2;|)) 
 
-(DEFUN |PointFunctions2| (&REST #1=#:G20)
-  (SPROG NIL
-         (PROG (#2=#:G21)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PointFunctions2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |PointFunctions2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|PointFunctions2|)))))))))) 
-
 (DEFUN |PointFunctions2;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -64,6 +45,25 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |PointFunctions2| (&REST #1=#:G8)
+  (SPROG NIL
+         (PROG (#2=#:G9)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PointFunctions2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |PointFunctions2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|PointFunctions2|)))))))))) 
 
 (MAKEPROP '|PointFunctions2| '|infovec|
           (LIST

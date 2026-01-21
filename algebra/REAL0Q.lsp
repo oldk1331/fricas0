@@ -1,7 +1,7 @@
 
 (SDEFUN |REAL0Q;convert2PolInt|
         ((|f| (|Pol|)) (% (|SparseUnivariatePolynomial| (|Integer|))))
-        (SPROG ((|pden| (|Integer|)) (#1=#:G19 NIL) (|c| NIL) (#2=#:G18 NIL))
+        (SPROG ((|pden| (|Integer|)) (#1=#:G6 NIL) (|c| NIL) (#2=#:G5 NIL))
                (SEQ
                 (LETT |pden|
                       (SPADCALL
@@ -92,23 +92,6 @@
 
 (DECLAIM (NOTINLINE |RealZeroPackageQ;|)) 
 
-(DEFUN |RealZeroPackageQ| (#1=#:G35)
-  (SPROG NIL
-         (PROG (#2=#:G36)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|RealZeroPackageQ|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|RealZeroPackageQ;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|RealZeroPackageQ|)))))))))) 
-
 (DEFUN |RealZeroPackageQ;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -123,6 +106,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |RealZeroPackageQ| (#1=#:G22)
+  (SPROG NIL
+         (PROG (#2=#:G23)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|RealZeroPackageQ|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|RealZeroPackageQ;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|RealZeroPackageQ|)))))))))) 
 
 (MAKEPROP '|RealZeroPackageQ| '|infovec|
           (LIST

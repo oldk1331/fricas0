@@ -6,7 +6,6 @@
 ; reportFunctionCompilation(op,nam,argl,body,isRecursive) ==
 ;   -- for an alternate definition of this function which does not allow
 ;   -- dynamic caching, see SLAMOLD BOOT
-; --+
 ;   $compiledOpNameList := [nam]
 ;   minivectorName := makeInternalMapMinivectorName(nam)
 ;   body := substitute(minivectorName, "$$$", body)
@@ -205,8 +204,8 @@
 ;   lamex:= ['LAMBDA, arg, codeBody]
 ;   mainFunction:= [nam,lamex]
 ;   computeFunction:= [auxfn,['LAMBDA,[:argl, 'envArg],body]]
-;   compileInteractive mainFunction
 ;   compileInteractive computeFunction
+;   compileInteractive mainFunction
 ;   cacheType:= 'hash_-table
 ;   cacheResetCode := ['SETQ, cacheName, ['MAKE_HASHTABLE, ''EQUAL]]
 ;   cacheCountCode:= ['hashCount,cacheName]
@@ -251,8 +250,8 @@
               (LIST |auxfn|
                     (LIST 'LAMBDA (APPEND |argl| (CONS '|envArg| NIL))
                           |body|)))
-      (|compileInteractive| |mainFunction|)
       (|compileInteractive| |computeFunction|)
+      (|compileInteractive| |mainFunction|)
       (SETQ |cacheType| '|hash-table|)
       (SETQ |cacheResetCode|
               (LIST 'SETQ |cacheName| (LIST 'MAKE_HASHTABLE ''EQUAL)))
@@ -712,7 +711,7 @@
 ;   optfn :=
 ;      $InteractiveMode => timedOptimization fn
 ;      fn
-;   result := compQuietly optfn
+;   result := comp_quietly(optfn)
 ;   if $InteractiveMode then stopTimingProcess 'compilation
 ;   result
 
@@ -727,7 +726,7 @@
         (|pp| |fn|)))
       (SETQ |optfn|
               (COND (|$InteractiveMode| (|timedOptimization| |fn|)) ('T |fn|)))
-      (SETQ |result| (|compQuietly| |optfn|))
+      (SETQ |result| (|comp_quietly| |optfn|))
       (COND (|$InteractiveMode| (|stopTimingProcess| '|compilation|)))
       |result|))))
 

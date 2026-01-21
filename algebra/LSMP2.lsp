@@ -16,8 +16,8 @@
         ((|m| (|Matrix| S)) (|v| (|Vector| S))
          (% (|Union| (|Vector| S) "failed")))
         (SPROG
-         ((#1=#:G45 NIL) (|cu| (|Union| S "failed")) (|cq| (|Fraction| S))
-          (#2=#:G46 NIL) (|i| NIL) (|u| (|Vector| S))
+         ((#1=#:G27 NIL) (|cu| (|Union| S "failed")) (|cq| (|Fraction| S))
+          (#2=#:G28 NIL) (|i| NIL) (|u| (|Vector| S))
           (|n| (|NonNegativeInteger|)) (|rp| (|Vector| (|Fraction| S)))
           (|rpu| #3=(|Union| (|Vector| (|Fraction| S)) "failed"))
           (|res|
@@ -47,7 +47,7 @@
                                      ((QEQCAR |cu| 1)
                                       (PROGN
                                        (LETT #1# (CONS 1 "failed"))
-                                       (GO #4=#:G44)))
+                                       (GO #4=#:G26)))
                                      ('T
                                       (SPADCALL |u| |i| (QCDR |cu|)
                                                 (QREFELT % 33))))))
@@ -57,25 +57,6 @@
           #4# (EXIT #1#)))) 
 
 (DECLAIM (NOTINLINE |LinearSystemMatrixPackage2;|)) 
-
-(DEFUN |LinearSystemMatrixPackage2| (#1=#:G47)
-  (SPROG NIL
-         (PROG (#2=#:G48)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|LinearSystemMatrixPackage2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|LinearSystemMatrixPackage2;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|LinearSystemMatrixPackage2|)))))))))) 
 
 (DEFUN |LinearSystemMatrixPackage2;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
@@ -102,6 +83,25 @@
                        (CONS (|dispatchFunction| |LSMP2;solveUniquely;MVU;2|)
                              %)))))
           %))) 
+
+(DEFUN |LinearSystemMatrixPackage2| (#1=#:G29)
+  (SPROG NIL
+         (PROG (#2=#:G30)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|LinearSystemMatrixPackage2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|LinearSystemMatrixPackage2;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|LinearSystemMatrixPackage2|)))))))))) 
 
 (MAKEPROP '|LinearSystemMatrixPackage2| '|infovec|
           (LIST

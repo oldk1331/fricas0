@@ -2,7 +2,7 @@
 (SDEFUN |PDO;adjoint;2%;1| ((|x| (%)) (% (%)))
         (SPROG
          ((|xu| (|Sup|)) (|res| (%)) (|sign| (%)) (|d| (|NonNegativeInteger|))
-          (|v| (|Var|)) (#1=#:G12 NIL))
+          (|v| (|Var|)) (#1=#:G9 NIL))
          (SEQ
           (COND ((SPADCALL |x| (QREFELT % 15)) |x|)
                 ('T
@@ -45,31 +45,10 @@
 
 (DECLAIM (NOTINLINE |PartialDifferentialOperator;|)) 
 
-(DEFUN |PartialDifferentialOperator| (&REST #1=#:G65)
-  (SPROG NIL
-         (PROG (#2=#:G66)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PartialDifferentialOperator|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |PartialDifferentialOperator;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|PartialDifferentialOperator|)))))))))) 
-
 (DEFUN |PartialDifferentialOperator;| (|#1| |#2|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G60 NIL) (#2=#:G61 NIL) (#3=#:G63 NIL) (#4=#:G62 NIL)
-    (#5=#:G64 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+   ((|pv$| NIL) (#1=#:G40 NIL) (#2=#:G41 NIL) (#3=#:G43 NIL) (#4=#:G42 NIL)
+    (#5=#:G44 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -279,6 +258,27 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 13 (|SparseUnivariatePolynomial| %))
     %))) 
+
+(DEFUN |PartialDifferentialOperator| (&REST #1=#:G45)
+  (SPROG NIL
+         (PROG (#2=#:G46)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PartialDifferentialOperator|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |PartialDifferentialOperator;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|PartialDifferentialOperator|)))))))))) 
 
 (MAKEPROP '|PartialDifferentialOperator| '|infovec|
           (LIST

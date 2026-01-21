@@ -413,16 +413,13 @@
 
 ; compDefineCategory1(df is ['DEF, form, sig, body], m, e, prefix, fal) ==
 ;   categoryCapsule :=
-; --+
 ;     body is ['add,cat,capsule] =>
 ;       body := cat
 ;       capsule
 ;     nil
 ;   [d, m, e] := compDefineCategory2(form, sig, body, m, e, prefix, fal)
-; --+ next two lines
 ;   if categoryCapsule and not $bootStrapMode then [.,.,e] :=
 ;     $insideCategoryPackageIfTrue: local := true  --see NRTmakeSlot1
-; -->
 ;     $categoryPredicateList: local :=
 ;         makeCategoryPredicates(form,$lisplibCategory)
 ;     compDefine1(mkCategoryPackage(form, categoryCapsule, e),
@@ -703,7 +700,7 @@
 ;     parForm:= SUBLIS(pairlis,form)
 ;     --Equivalent to the following two lines, we hope
 ;     if null sargl then
-;         lisplibWrite('NILADIC, true, $libFile)
+;         lisplibWrite('"NILADIC", true, $libFile)
 ;
 ; --   6. put modemaps into InteractiveModemapFrame
 ;     $lisplibCategory:= formalBody
@@ -712,8 +709,6 @@
 ;       $lisplibKind:= 'category
 ;       modemap:= [[parForm,:parSignature],[true,op']]
 ;       $lisplibModemap:= modemap
-;       $lisplibParents  :=
-;         getParentsFor($op,$FormalMapVariableList,$lisplibCategory)
 ;       $lisplibAncestors := computeAncestorsOf(sform, nil)
 ;       $lisplibAbbreviation := constructor? $op
 ;       domainShell := eval [op', :MAPCAR('MKQ, sargl)]
@@ -856,15 +851,12 @@
                NIL |argl| NIL |$FormalMapVariableList| NIL))
       (SETQ |parSignature| (SUBLIS |pairlis| |signature'|))
       (SETQ |parForm| (SUBLIS |pairlis| |form|))
-      (COND ((NULL |sargl|) (|lisplibWrite| 'NILADIC T |$libFile|)))
+      (COND ((NULL |sargl|) (|lisplibWrite| "NILADIC" T |$libFile|)))
       (SETQ |$lisplibCategory| |formalBody|)
       (COND
        ($LISPLIB (SETQ |$lisplibForm| |form|) (SETQ |$lisplibKind| '|category|)
         (SETQ |modemap| (LIST (CONS |parForm| |parSignature|) (LIST T |op'|)))
         (SETQ |$lisplibModemap| |modemap|)
-        (SETQ |$lisplibParents|
-                (|getParentsFor| |$op| |$FormalMapVariableList|
-                 |$lisplibCategory|))
         (SETQ |$lisplibAncestors| (|computeAncestorsOf| |sform| NIL))
         (SETQ |$lisplibAbbreviation| (|constructor?| |$op|))
         (SETQ |domainShell| (|eval| (CONS |op'| (MAPCAR 'MKQ |sargl|))))
@@ -903,21 +895,16 @@
        ('T (|compDefineCategory1| |df| |m| |e| |prefix| |fal|)))))))
 
 ; compDefineFunctor(df,m,e,prefix,fal) ==
-;   $domainShell: local -- holds the category of the object being compiled
 ;   $LISPLIB => compDefineLisplib(df,m,e,prefix,fal,'compDefineFunctor1)
 ;   compDefineFunctor1(df,m,e,prefix,fal)
 
 (DEFUN |compDefineFunctor| (|df| |m| |e| |prefix| |fal|)
-  (PROG (|$domainShell|)
-    (DECLARE (SPECIAL |$domainShell|))
+  (PROG ()
     (RETURN
-     (PROGN
-      (SETQ |$domainShell| NIL)
-      (COND
-       ($LISPLIB
-        (|compDefineLisplib| |df| |m| |e| |prefix| |fal|
-         '|compDefineFunctor1|))
-       ('T (|compDefineFunctor1| |df| |m| |e| |prefix| |fal|)))))))
+     (COND
+      ($LISPLIB
+       (|compDefineLisplib| |df| |m| |e| |prefix| |fal| '|compDefineFunctor1|))
+      ('T (|compDefineFunctor1| |df| |m| |e| |prefix| |fal|))))))
 
 ; compDefineFunctor1(df is ['DEF, form, signature, body],
 ;   m, e, $prefix, $formalArgList) ==
@@ -956,7 +943,7 @@
 ;       userError '"cannot produce category object"
 ; --+ copy needed since slot1 is reset; compMake.. can return a cached vector
 ;     base_shell := COPY_-SEQ ds
-;     $domainShell := base_shell
+;     $domainShell : local := base_shell
 ; --+ 7 lines for $NRT follow
 ; -->--these globals used by NRTmakeCategoryAlist, set by NRTsetVector4Part1
 ;     $condAlist: local := nil
@@ -964,7 +951,7 @@
 ; -->>-- next global initialized here, reset by NRTbuildFunctor
 ;     $NRTslot1PredicateList: local := nil
 ;        --this is used below to set $lisplibSlot1 global
-;     $NRTbase: local := 6 -- equals length of $domainShell
+;     $NRTbase: local := 6 -- equals length of domainShell
 ;     $NRTaddForm: local := nil   -- see compAdd; NRTmakeSlot1
 ;     $NRTdeltaLength: local := 0 -- length of $NRTdeltaList
 ;     $NRTdeltaList: local := nil --list of misc. elts used in compiled fncts
@@ -989,7 +976,6 @@
 ; --  domain D in argl,check its signature: if domain, its type is Join(A1,..,An);
 ; --  in this case, D is replaced by D1,..,Dn (gensyms) which are set
 ; --  to the A1,..,An view of D
-; --+
 ;     $functorLocalParameters := argl
 ;     dollar :=
 ;         $insideCategoryPackageIfTrue => first(argl)
@@ -1008,7 +994,7 @@
 ;         'domain_functor
 ;     fun := do_compile(SUBLIS($pairlis, [op', [lamOrSlam, argl, body']]), e)
 ;     --The above statement stops substitutions getting in one another's way
-; --+
+;
 ;     operationAlist := SUBLIS($pairlis,$lisplibOperationAlist)
 ;     if $LISPLIB then
 ;       augmentLisplibModemapsFromFunctor(parForm,operationAlist,parSignature)
@@ -1020,15 +1006,10 @@
 ;       modemap:= [[parForm,:parSignature],[true,op']]
 ;       $lisplibModemap:= modemap
 ;       $lisplibCategory := modemap.mmTarget
-;       $lisplibParents  :=
-;         getParentsFor($op,$FormalMapVariableList,$lisplibCategory)
-;       $lisplibAncestors := computeAncestorsOf(form, nil)
 ;       $lisplibAbbreviation := constructor? $op
 ;     $insideFunctorIfTrue:= false
 ;     if $LISPLIB then
 ;       $lisplibKind:=
-; ------->This next line prohibits changing the KIND once given
-; --------kk := get_database($op, 'CONSTRUCTORKIND) => kk
 ;         target is ["CATEGORY",key,:.] and key~="domain" => 'package
 ;         'domain
 ;       $lisplibForm:= form
@@ -1046,7 +1027,7 @@
 ;       $lisplibOperationAlist:= operationAlist
 ;       $lisplibMissingFunctions:= $CheckVectorList
 ;     if null argl then
-;         lisplibWrite('NILADIC, true, $libFile)
+;         lisplibWrite('"NILADIC", true, $libFile)
 ;     [fun, ['Mapping, :signature'], originale]
 
 (DEFUN |compDefineFunctor1| (|df| |m| |e| |$prefix| |$formalArgList|)
@@ -1054,22 +1035,22 @@
   (PROG (|$byteVec| |$byteAddress| |$lookupFunction| |$functor_cosig1|
          |$functionLocations| |$template| |$NRTdeltaListComp| |$NRTdeltaList|
          |$NRTdeltaLength| |$NRTaddForm| |$NRTbase| |$NRTslot1PredicateList|
-         |$uncondAlist| |$condAlist| |$functorForm| |$mutableDomain| |$op|
-         |$genSDVar| |$insideFunctorIfTrue| |$CheckVectorList|
-         |$functorLocalParameters| |$Representation| |$signature|
-         |$functorStats| |$functionStats| |$addForm| |NRTslot1Info| |key|
-         |ISTMP#1| |modemap| |operationAlist| |fun| |lamOrSlam| |body'| T$
-         |rettype| |op'| |dollar| |parForm| |parSignature| |base_shell| |ds|
-         |LETTMP#1| |target| |signature'| |argl| |originale| |body| |signature|
-         |form|)
+         |$uncondAlist| |$condAlist| |$domainShell| |$functorForm|
+         |$mutableDomain| |$op| |$genSDVar| |$insideFunctorIfTrue|
+         |$CheckVectorList| |$functorLocalParameters| |$Representation|
+         |$signature| |$functorStats| |$functionStats| |$addForm|
+         |NRTslot1Info| |key| |ISTMP#1| |modemap| |operationAlist| |fun|
+         |lamOrSlam| |body'| T$ |rettype| |op'| |dollar| |parForm|
+         |parSignature| |base_shell| |ds| |LETTMP#1| |target| |signature'|
+         |argl| |originale| |body| |signature| |form|)
     (DECLARE
      (SPECIAL |$byteVec| |$byteAddress| |$lookupFunction| |$functor_cosig1|
       |$functionLocations| |$template| |$NRTdeltaListComp| |$NRTdeltaList|
       |$NRTdeltaLength| |$NRTaddForm| |$NRTbase| |$NRTslot1PredicateList|
-      |$uncondAlist| |$condAlist| |$functorForm| |$mutableDomain| |$op|
-      |$genSDVar| |$insideFunctorIfTrue| |$CheckVectorList|
-      |$functorLocalParameters| |$Representation| |$signature| |$functorStats|
-      |$functionStats| |$addForm|))
+      |$uncondAlist| |$condAlist| |$domainShell| |$functorForm|
+      |$mutableDomain| |$op| |$genSDVar| |$insideFunctorIfTrue|
+      |$CheckVectorList| |$functorLocalParameters| |$Representation|
+      |$signature| |$functorStats| |$functionStats| |$addForm|))
     (RETURN
      (PROGN
       (SETQ |form| (CADR . #1=(|df|)))
@@ -1203,10 +1184,6 @@
         (SETQ |modemap| (LIST (CONS |parForm| |parSignature|) (LIST T |op'|)))
         (SETQ |$lisplibModemap| |modemap|)
         (SETQ |$lisplibCategory| (CADAR |modemap|))
-        (SETQ |$lisplibParents|
-                (|getParentsFor| |$op| |$FormalMapVariableList|
-                 |$lisplibCategory|))
-        (SETQ |$lisplibAncestors| (|computeAncestorsOf| |form| NIL))
         (SETQ |$lisplibAbbreviation| (|constructor?| |$op|))))
       (SETQ |$insideFunctorIfTrue| NIL)
       (COND
@@ -1245,7 +1222,7 @@
                  (|getInfovecCode| |NRTslot1Info| |e|)))))
         (SETQ |$lisplibOperationAlist| |operationAlist|)
         (SETQ |$lisplibMissingFunctions| |$CheckVectorList|)))
-      (COND ((NULL |argl|) (|lisplibWrite| 'NILADIC T |$libFile|)))
+      (COND ((NULL |argl|) (|lisplibWrite| "NILADIC" T |$libFile|)))
       (LIST |fun| (CONS '|Mapping| |signature'|) |originale|)))))
 
 ; compFunctorBody(body, m, e, base_shell) ==
@@ -1528,9 +1505,9 @@
 ; genDomainOps(viewName, cat) ==
 ;   oplist := getOperationAlist(viewName, viewName, cat)
 ;   oplist:= substNames(viewName, viewName, oplist)
-;   for [opsig,cond,:.] in oplist repeat
+;   for [opsig, cond, :.] in oplist repeat
 ;     [op, sig] := opsig
-;     $tmp_e:= addModemap(op, viewName, sig, cond, ['ELT, viewName, 0], $tmp_e)
+;     $tmp_e := addModemap(op, viewName, sig, cond, ['ELT, viewName, 0], $tmp_e)
 
 (DEFUN |genDomainOps| (|viewName| |cat|)
   (PROG (|oplist| |opsig| |ISTMP#1| |cond| |op| |sig|)
@@ -1882,14 +1859,10 @@
 ;       getSignature($op,rest signature',e) or return nil
 ;
 ;     --replace ##1,.. in signature by arguments
-; --    pp signature'
-; --  pp '"------after----"
-; --  pp signature'
 ;     e:= giveFormalParametersValues(argl,e)
 ;
 ;     $signatureOfForm:= signature' --this global is bound in compCapsuleItems
-;     $functionLocations := [[[$op, signature']],
-;       :$functionLocations]
+;     $functionLocations := [[[$op, signature']], :$functionLocations]
 ;     e:= addDomain(first signature',e)
 ;
 ;     --4. introduce needed domains into extendedEnv
@@ -1911,7 +1884,7 @@
 ;
 ;     T := CATCH('compCapsuleBody, compOrCroak(body,rettype,e))
 ;            or [$ClearBodyToken, rettype, e]
-; --+
+;
 ;     NRTassignCapsuleFunctionSlot($op, signature', $domainShell, e)
 ;     if $newCompCompare=true then
 ;          SAY '"The old compiler generates:"
@@ -2368,7 +2341,6 @@
 
 ; putInLocalDomainReferences (def := [opName,[lam,varl,body]]) ==
 ;   $elt: local := ($QuickCode => 'QREFELT; 'ELT)
-; --+
 ;   NRTputInTail CDDADR def
 ;   def
 
@@ -2622,7 +2594,7 @@
 ;   auxfn := INTERNL1(fn, '";")
 ;   output_lisp_form(["DECLAIM", ["NOTINLINE", auxfn]])
 ;   if key = 'category_functor
-;       then u := compAndDefine form
+;       then u := comp_and_define(form)
 ;       else u := COMP form
 ;   clearConstructorCache fn      --clear cache for constructor
 ;   first u
@@ -2638,7 +2610,7 @@
       (SETQ |auxfn| (INTERNL1 |fn| ";"))
       (|output_lisp_form| (LIST 'DECLAIM (LIST 'NOTINLINE |auxfn|)))
       (COND
-       ((EQ |key| '|category_functor|) (SETQ |u| (|compAndDefine| |form|)))
+       ((EQ |key| '|category_functor|) (SETQ |u| (|comp_and_define| |form|)))
        ('T (SETQ |u| (COMP |form|))))
       (|clearConstructorCache| |fn|)
       (CAR |u|)))))
@@ -2740,14 +2712,12 @@
 ;      m, e]
 ;   $addFormLhs: local:= addForm
 ;   if addForm is ["SubDomain", domainForm, predicate] then
-; --+
 ;     $NRTaddForm := domainForm
 ;     NRTgetLocalIndex(domainForm, e)
 ;     --need to generate slot for add form since all $ go-get
 ;     --  slots will need to access it
 ;     [$addForm, m1, e] := compSubDomain1(domainForm, predicate, m, e)
 ;   else
-; --+
 ;     $NRTaddForm := addForm
 ;     [$addForm, m1, e]:=
 ;         addForm is ["@Tuple", :.] => BREAK()
@@ -2857,7 +2827,6 @@
 ;   $addForm: local := nil
 ;   $NRTaddForm := domainForm
 ;   [$addForm,.,e]:= compSubDomain1(domainForm,predicate,m,e)
-; --+
 ;   compCapsule(['CAPSULE],m,e)
 
 (DEFUN |compSubDomain| (|bfVar#110| |m| |e|)
@@ -2904,7 +2873,7 @@
       (SETQ |$lisplibSuperDomain| (LIST |domainForm| |predicate|))
       (LIST |domainForm| |m| |e|)))))
 
-; compCapsuleInner(itemList,m,e) ==
+; compCapsuleInner(itemList, m, e) ==
 ;   e:= addInformation(m,e)
 ;            --puts a new 'special' property of $Information
 ;   data:= ["PROGN",:itemList]
@@ -2913,7 +2882,7 @@
 ;   localParList:= $functorLocalParameters
 ;   code:=
 ;     $insideCategoryIfTrue and not $insideCategoryPackageIfTrue => BREAK()
-;     processFunctor($functorForm, $signature, data, localParList, e)
+;     buildFunctor($functorForm, $signature, data, localParList, $domainShell, e)
 ;   [MKPF([code],"PROGN"),m,e]
 
 (DEFUN |compCapsuleInner| (|itemList| |m| |e|)
@@ -2930,18 +2899,9 @@
                      (NULL |$insideCategoryPackageIfTrue|))
                 (BREAK))
                ('T
-                (|processFunctor| |$functorForm| |$signature| |data|
-                 |localParList| |e|))))
+                (|buildFunctor| |$functorForm| |$signature| |data|
+                 |localParList| |$domainShell| |e|))))
       (LIST (MKPF (LIST |code|) 'PROGN) |m| |e|)))))
-
-; processFunctor(form,signature,data,localParList,e) ==
-;   buildFunctor(form, signature, data, localParList, $domainShell, e)
-
-(DEFUN |processFunctor| (|form| |signature| |data| |localParList| |e|)
-  (PROG ()
-    (RETURN
-     (|buildFunctor| |form| |signature| |data| |localParList| |$domainShell|
-      |e|))))
 
 ; compCapsuleItems(itemlist, $predl, e) ==
 ;   $signatureOfForm: local := nil
@@ -3010,9 +2970,6 @@
 ;         -- assignment to Rep may be conditional ...
 ;         $Representation := (get("Rep", 'value, e)).(0)
 ;            --$Representation bound by compDefineFunctor, used in compNoStacking
-; --+
-; --+
-; --+
 ;     code is ['LET, :.] =>
 ;       RPLACA(item,($QuickCode => 'QSETREFV;'SETELT))
 ;       rhsCode:=
@@ -3043,7 +3000,6 @@
 ;         --Note that DescendCode, in CodeDefine, is looking for this
 ;     RPLACD(CADR item,[$signatureOfForm])
 ;       --This is how the signature is updated for buildFunctor to recognise
-; --+
 ;     functionPart:= ['dispatchFunction,t.expr]
 ;     RPLACA(CDDR item,functionPart)
 ;     RPLACD(CDDR item,nil)

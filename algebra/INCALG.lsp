@@ -47,9 +47,9 @@
 
 (SDEFUN |INCALG;*;P2%;7| ((|p| (|Permutation| (|Integer|))) (A (%)) (% (%)))
         (SPROG
-         ((|newA| (|Matrix| R)) (|indic| (|List| (|Integer|))) (#1=#:G48 NIL)
-          (|i| NIL) (#2=#:G47 NIL) (|newindices| (|OneDimensionalArray| S))
-          (#3=#:G46 NIL) (#4=#:G45 NIL) (|n| (|Integer|))
+         ((|newA| (|Matrix| R)) (|indic| (|List| (|Integer|))) (#1=#:G35 NIL)
+          (|i| NIL) (#2=#:G34 NIL) (|newindices| (|OneDimensionalArray| S))
+          (#3=#:G33 NIL) (#4=#:G32 NIL) (|n| (|Integer|))
           (|mp| (|Set| (|Integer|))))
          (SEQ (LETT |mp| (SPADCALL |p| (QREFELT % 26)))
               (LETT |n| (QVSIZE (SPADCALL A (QREFELT % 18))))
@@ -159,25 +159,6 @@
 
 (DECLAIM (NOTINLINE |IncidenceAlgebra;|)) 
 
-(DEFUN |IncidenceAlgebra| (&REST #1=#:G65)
-  (SPROG NIL
-         (PROG (#2=#:G66)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|IncidenceAlgebra|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |IncidenceAlgebra;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|IncidenceAlgebra|)))))))))) 
-
 (DEFUN |IncidenceAlgebra;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -197,6 +178,25 @@
                     (|Record| (|:| |matrix| (|Matrix| |#1|))
                               (|:| |indices| (|OneDimensionalArray| |#2|))))
           %))) 
+
+(DEFUN |IncidenceAlgebra| (&REST #1=#:G52)
+  (SPROG NIL
+         (PROG (#2=#:G53)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|IncidenceAlgebra|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |IncidenceAlgebra;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|IncidenceAlgebra|)))))))))) 
 
 (MAKEPROP '|IncidenceAlgebra| '|infovec|
           (LIST

@@ -286,22 +286,6 @@
 
 (DECLAIM (NOTINLINE |UnittestAux;|)) 
 
-(DEFUN |UnittestAux| (#1=#:G93)
-  (SPROG NIL
-         (PROG (#2=#:G94)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|UnittestAux|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|UnittestAux;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|UnittestAux|)))))))))) 
-
 (DEFUN |UnittestAux;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -378,6 +362,22 @@
                          |TESTAUX;xftestComplexEqualsAux;S2CV;18|)
                         %)))))
           %))) 
+
+(DEFUN |UnittestAux| (#1=#:G78)
+  (SPROG NIL
+         (PROG (#2=#:G79)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|UnittestAux|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|UnittestAux;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|UnittestAux|)))))))))) 
 
 (MAKEPROP '|UnittestAux| '|infovec|
           (LIST

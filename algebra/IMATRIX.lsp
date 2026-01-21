@@ -2,7 +2,7 @@
 (SDEFUN |IMATRIX;swapRows!;%2I%;1|
         ((|x| (%)) (|i1| #1=(|Integer|)) (|i2| #1#) (% (%)))
         (SPROG
-         ((|t2| (R)) (|t1| (R)) (#2=#:G21 NIL) (|j| NIL) (|co| (|Integer|))
+         ((|t2| (R)) (|t1| (R)) (#2=#:G14 NIL) (|j| NIL) (|co| (|Integer|))
           (|ro| (|Integer|)))
          (SEQ
           (COND
@@ -50,27 +50,9 @@
 
 (DECLAIM (NOTINLINE |IndexedMatrix;|)) 
 
-(DEFUN |IndexedMatrix| (&REST #1=#:G51)
-  (SPROG NIL
-         (PROG (#2=#:G52)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(T NIL NIL))
-                     (HGET |$ConstructorCache| '|IndexedMatrix|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |IndexedMatrix;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|IndexedMatrix|)))))))))) 
-
 (DEFUN |IndexedMatrix;| (|#1| |#2| |#3|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G48 NIL) (#2=#:G49 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL)
+   ((|pv$| NIL) (#1=#:G36 NIL) (#2=#:G37 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL)
     (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -177,6 +159,24 @@
      ((|testBitVector| |pv$| 18)
       (QSETREFV % 32 (CONS (|dispatchFunction| |IMATRIX;inverse;%U;8|) %))))
     %))) 
+
+(DEFUN |IndexedMatrix| (&REST #1=#:G39)
+  (SPROG NIL
+         (PROG (#2=#:G40)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(T NIL NIL))
+                     (HGET |$ConstructorCache| '|IndexedMatrix|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |IndexedMatrix;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|IndexedMatrix|)))))))))) 
 
 (MAKEPROP '|IndexedMatrix| '|infovec|
           (LIST

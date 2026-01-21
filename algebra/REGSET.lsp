@@ -35,7 +35,7 @@
 (SDEFUN |REGSET;roughUnitIdeal?;%B;11| ((|ts| (%)) (% (|Boolean|))) NIL) 
 
 (SDEFUN |REGSET;coerce;%Of;12| ((|ts| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G69 NIL) (|p| NIL) (#2=#:G68 NIL) (|lp| (|List| P)))
+        (SPROG ((#1=#:G61 NIL) (|p| NIL) (#2=#:G60 NIL) (|lp| (|List| P)))
                (SEQ (LETT |lp| (REVERSE (|REGSET;rep| |ts| %)))
                     (EXIT
                      (SPADCALL
@@ -161,7 +161,7 @@
 
 (SDEFUN |REGSET;removeZero;P%P;22| ((|p| (P)) (|ts| (%)) (% (P)))
         (SPROG
-         ((|q| (P)) (#1=#:G147 NIL) (#2=#:G134 NIL) (|ts_v-| (%)) (|v| (V)))
+         ((|q| (P)) (#1=#:G135 NIL) (#2=#:G124 NIL) (|ts_v-| (%)) (|v| (V)))
          (SEQ
           (EXIT
            (COND
@@ -189,7 +189,7 @@
                      (EXIT
                       (COND
                        ((SPADCALL |q| (QREFELT % 57))
-                        (PROGN (LETT #1# |q|) (GO #3=#:G146)))
+                        (PROGN (LETT #1# |q|) (GO #3=#:G134)))
                        ((SPADCALL (SPADCALL |q| |ts_v-| (QREFELT % 58))
                                   (QREFELT % 57))
                         (PROGN (LETT #1# (|spadConstant| % 59)) (GO #3#))))))))
@@ -243,8 +243,8 @@
          (|prim?| (|Boolean|)) (|sqfr?| (|Boolean|)) (|extend?| (|Boolean|))
          (% (|List| %)))
         (SPROG
-         ((#1=#:G163 NIL) (|us| NIL) (#2=#:G162 NIL) (|lts| (|List| %))
-          (#3=#:G161 NIL) (|f| NIL) (#4=#:G160 NIL) (|lsfp| (|List| P))
+         ((#1=#:G151 NIL) (|us| NIL) (#2=#:G150 NIL) (|lts| (|List| %))
+          (#3=#:G149 NIL) (|f| NIL) (#4=#:G148 NIL) (|lsfp| (|List| P))
           (|ts_v+| (%)) (|ts_v-| (%)) (|v| (V)))
          (SEQ (LETT |v| (SPADCALL |p| (QREFELT % 32)))
               (LETT |ts_v-| (SPADCALL |ts| |v| (QREFELT % 44)))
@@ -315,7 +315,7 @@
 
 (SDEFUN |REGSET;extend;P%L;27| ((|p| (P)) (|ts| (%)) (% (|List| %)))
         (SPROG
-         ((|lts| (|List| %)) (#1=#:G181 NIL) (|us| NIL) (|split| (|List| %)))
+         ((|lts| (|List| %)) (#1=#:G161 NIL) (|us| NIL) (|split| (|List| %)))
          (SEQ
           (COND
            ((SPADCALL |p| (QREFELT % 49))
@@ -394,7 +394,7 @@
          (SEQ
           (COND
            (|hash?|
-            (SEQ (LETT |e| (|make_full_CVEC| 0))
+            (SEQ (LETT |e| (|filler_spaces| 0))
                  (COND
                   (|info?|
                    (PROGN
@@ -443,7 +443,7 @@
         ((|lp| (|List| P)) (|clos?| (|Boolean|)) (|info?| (|Boolean|))
          (|prep?| (|Boolean|)) (% (|List| %)))
         (SPROG
-         ((|lts| #1=(|List| %)) (#2=#:G222 NIL) (|p| NIL) (|ts| (%))
+         ((|lts| #1=(|List| %)) (#2=#:G200 NIL) (|p| NIL) (|ts| (%))
           (|pp| (|Record| (|:| |val| (|List| P)) (|:| |towers| #1#))))
          (SEQ
           (COND
@@ -511,11 +511,11 @@
         ((|lp| (|List| P)) (|clos?| (|Boolean|)) (|info?| (|Boolean|))
          (% (|Record| (|:| |val| (|List| P)) (|:| |towers| (|List| %)))))
         (SPROG
-         ((#1=#:G284 NIL) (|lp2| (|List| P)) (|lts| (|List| %)) (#2=#:G297 NIL)
-          (|p| NIL) (|lp3| (|List| P)) (#3=#:G296 NIL) (|lp4| (|List| P))
-          (#4=#:G295 NIL) (#5=#:G294 NIL) (#6=#:G293 NIL) (#7=#:G292 NIL)
-          (#8=#:G291 NIL) (#9=#:G290 NIL) (#10=#:G289 NIL) (#11=#:G288 NIL)
-          (#12=#:G287 NIL) (#13=#:G286 NIL) (|lp1| (|List| P)) (#14=#:G285 NIL)
+         ((#1=#:G262 NIL) (|lp2| (|List| P)) (|lts| (|List| %)) (#2=#:G275 NIL)
+          (|p| NIL) (|lp3| (|List| P)) (#3=#:G274 NIL) (|lp4| (|List| P))
+          (#4=#:G273 NIL) (#5=#:G272 NIL) (#6=#:G271 NIL) (#7=#:G270 NIL)
+          (#8=#:G269 NIL) (#9=#:G268 NIL) (#10=#:G267 NIL) (#11=#:G266 NIL)
+          (#12=#:G265 NIL) (#13=#:G264 NIL) (|lp1| (|List| P)) (#14=#:G263 NIL)
           (|ts| (%)))
          (SEQ
           (EXIT
@@ -549,7 +549,7 @@
                                  ((|REGSET;largeSystem?| |lp| %)
                                   (PROGN
                                    (LETT #1# (CONS |lp2| |lts|))
-                                   (GO #16=#:G283)))
+                                   (GO #16=#:G261)))
                                  (#15#
                                   (SEQ
                                    (COND
@@ -798,28 +798,9 @@
 
 (DECLAIM (NOTINLINE |RegularTriangularSet;|)) 
 
-(DEFUN |RegularTriangularSet| (&REST #1=#:G316)
-  (SPROG NIL
-         (PROG (#2=#:G317)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|RegularTriangularSet|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |RegularTriangularSet;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|RegularTriangularSet|)))))))))) 
-
 (DEFUN |RegularTriangularSet;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((#1=#:G315 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
+   ((#1=#:G293 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
     (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -861,6 +842,25 @@
     (AND (|HasCategory| |#4| '(|OrderedSet|)) #1# (|augmentPredVector| % 512))
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |RegularTriangularSet| (&REST #1=#:G294)
+  (SPROG NIL
+         (PROG (#2=#:G295)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|RegularTriangularSet|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |RegularTriangularSet;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|RegularTriangularSet|)))))))))) 
 
 (MAKEPROP '|RegularTriangularSet| '|infovec|
           (LIST

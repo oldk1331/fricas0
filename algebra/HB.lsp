@@ -1,7 +1,7 @@
 
 (SDEFUN |HB;lfunc;3I;1| ((|d| (|Integer|)) (|n| (|Integer|)) (% (|Integer|)))
         (SPROG
-         ((|res| (|Integer|)) (#1=#:G35 NIL) (|sum| (|Integer|)) (#2=#:G38 NIL)
+         ((|res| (|Integer|)) (#1=#:G28 NIL) (|sum| (|Integer|)) (#2=#:G31 NIL)
           (|m| NIL))
          (SEQ
           (COND ((< |n| 0) 0) ((EQL |n| 0) 1) ((EQL |n| 1) |d|)
@@ -42,10 +42,10 @@
         (SPROG
          ((|numComms| #1=(|Integer|)) (|cW| (|Integer|))
           (|leftIndex| (|NonNegativeInteger|)) (|newNumComms| #1#)
-          (#2=#:G74 NIL) (|rightIndex| NIL) (|done| (|Boolean|))
+          (#2=#:G54 NIL) (|rightIndex| NIL) (|done| (|Boolean|))
           (|wt| (|Integer|)) (|firstindex| (|Vector| (|Integer|)))
-          (#3=#:G73 NIL) (|i| NIL) (|v| (|Vector| (|List| (|Integer|))))
-          (#4=#:G47 NIL) (|siz| (|Integer|)) (#5=#:G72 NIL)
+          (#3=#:G53 NIL) (|i| NIL) (|v| (|Vector| (|List| (|Integer|))))
+          (#4=#:G36 NIL) (|siz| (|Integer|)) (#5=#:G52 NIL)
           (|maxweight| (|NonNegativeInteger|)) (|gens| (|NonNegativeInteger|)))
          (SEQ (LETT |gens| |n|) (LETT |maxweight| |c|) (LETT |siz| 0)
               (SEQ (LETT |i| 1) (LETT #5# |maxweight|) G190
@@ -142,9 +142,21 @@
 
 (DECLAIM (NOTINLINE |HallBasis;|)) 
 
+(DEFUN |HallBasis;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|HallBasis|))
+          (LETT % (GETREFV 20))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|HallBasis| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |HallBasis| ()
   (SPROG NIL
-         (PROG (#1=#:G76)
+         (PROG (#1=#:G56)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|HallBasis|))
@@ -158,18 +170,6 @@
                     (LETT #1# T))
                 (COND
                  ((NOT #1#) (HREM |$ConstructorCache| '|HallBasis|)))))))))) 
-
-(DEFUN |HallBasis;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|HallBasis|))
-          (LETT % (GETREFV 20))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|HallBasis| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|HallBasis| '|infovec|
           (LIST

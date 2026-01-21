@@ -4,7 +4,7 @@
          (% (|Record| (|:| |normal| P) (|:| |special| P))))
         (SPROG
          ((|rec1| #1=(|Record| (|:| |normal| P) (|:| |special| P)))
-          (#2=#:G8 NIL) (|pbar| (P)) (|gdif| (P)) (|gder| (P)) (|p1| (P))
+          (#2=#:G6 NIL) (|pbar| (P)) (|gdif| (P)) (|gder| (P)) (|p1| (P))
           (|rec0| #1#) (|up1| (|SparseUnivariatePolynomial| P)) (|p0| (P))
           (|up| (|SparseUnivariatePolynomial| P)) (|v| (|Union| V "failed")))
          (SEQ (LETT |v| (SPADCALL |p| (QREFELT % 10)))
@@ -76,33 +76,13 @@
           (LETT P (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((#1=#:G8 NIL))
+            (SPROG ((#1=#:G6 NIL))
                    (PROG2 (LETT #1# (SPADCALL |x| |p0| (QREFELT % 18)))
                        (QCDR #1#)
                      (|check_union2| (QEQCAR #1# 0) P (|Union| P "failed")
                                      #1#))))))) 
 
 (DECLAIM (NOTINLINE |ParallelIntegrationTools;|)) 
-
-(DEFUN |ParallelIntegrationTools| (&REST #1=#:G29)
-  (SPROG NIL
-         (PROG (#2=#:G30)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|ParallelIntegrationTools|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |ParallelIntegrationTools;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|ParallelIntegrationTools|)))))))))) 
 
 (DEFUN |ParallelIntegrationTools;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
@@ -122,6 +102,26 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |ParallelIntegrationTools| (&REST #1=#:G18)
+  (SPROG NIL
+         (PROG (#2=#:G19)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|ParallelIntegrationTools|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |ParallelIntegrationTools;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|ParallelIntegrationTools|)))))))))) 
 
 (MAKEPROP '|ParallelIntegrationTools| '|infovec|
           (LIST

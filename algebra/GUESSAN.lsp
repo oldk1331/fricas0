@@ -1,25 +1,6 @@
 
 (DECLAIM (NOTINLINE |GuessAlgebraicNumber;|)) 
 
-(DEFUN |GuessAlgebraicNumber| ()
-  (SPROG NIL
-         (PROG (#1=#:G29)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|GuessAlgebraicNumber|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|GuessAlgebraicNumber|
-                             (LIST
-                              (CONS NIL (CONS 1 (|GuessAlgebraicNumber;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#)
-                  (HREM |$ConstructorCache| '|GuessAlgebraicNumber|)))))))))) 
-
 (DEFUN |GuessAlgebraicNumber;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -39,6 +20,25 @@
           (|stuffDomainSlots| %)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |GuessAlgebraicNumber| ()
+  (SPROG NIL
+         (PROG (#1=#:G19)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|GuessAlgebraicNumber|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|GuessAlgebraicNumber|
+                             (LIST
+                              (CONS NIL (CONS 1 (|GuessAlgebraicNumber;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#)
+                  (HREM |$ConstructorCache| '|GuessAlgebraicNumber|)))))))))) 
 
 (MAKEPROP '|GuessAlgebraicNumber| '|infovec|
           (LIST

@@ -87,7 +87,7 @@
 
 (SDEFUN |TABLBUMP;slex;LL;7| ((|ls| (|List| S)) (% (|List| (|List| S))))
         (SPROG
-         ((#1=#:G55 NIL) (|i| NIL) (#2=#:G56 NIL) (|j| NIL) (#3=#:G54 NIL))
+         ((#1=#:G37 NIL) (|i| NIL) (#2=#:G38 NIL) (|j| NIL) (#3=#:G36 NIL))
          (SEQ
           (SPADCALL
            (PROGN
@@ -105,8 +105,8 @@
 
 (SDEFUN |TABLBUMP;inverse;2L;8| ((|ls| (|List| S)) (% (|List| S)))
         (SPROG
-         ((#1=#:G63 NIL) (#2=#:G65 NIL) (|i| NIL) (#3=#:G66 NIL) (|j| NIL)
-          (#4=#:G64 NIL) (|lss| NIL) (#5=#:G62 NIL))
+         ((#1=#:G45 NIL) (#2=#:G47 NIL) (|i| NIL) (#3=#:G48 NIL) (|j| NIL)
+          (#4=#:G46 NIL) (|lss| NIL) (#5=#:G44 NIL))
          (SEQ
           (PROGN
            (LETT #5# NIL)
@@ -215,7 +215,7 @@
 
 (SDEFUN |TABLBUMP;bat1;LL;13|
         ((|llls| (|List| (|List| (|List| S)))) (% (|List| (|List| S))))
-        (SPROG ((#1=#:G87 NIL) (|lls| NIL) (#2=#:G86 NIL))
+        (SPROG ((#1=#:G69 NIL) (|lls| NIL) (#2=#:G68 NIL))
                (SEQ
                 (SPADCALL NIL
                           (PROGN
@@ -237,23 +237,6 @@
 
 (DECLAIM (NOTINLINE |TableauxBumpers;|)) 
 
-(DEFUN |TableauxBumpers| (#1=#:G89)
-  (SPROG NIL
-         (PROG (#2=#:G90)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|TableauxBumpers|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|TableauxBumpers;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|TableauxBumpers|)))))))))) 
-
 (DEFUN |TableauxBumpers;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -268,6 +251,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |TableauxBumpers| (#1=#:G71)
+  (SPROG NIL
+         (PROG (#2=#:G72)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|TableauxBumpers|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|TableauxBumpers;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|TableauxBumpers|)))))))))) 
 
 (MAKEPROP '|TableauxBumpers| '|infovec|
           (LIST

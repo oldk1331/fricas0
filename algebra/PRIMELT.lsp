@@ -10,7 +10,7 @@
 (SDEFUN |PRIMELT;randomInts|
         ((|n| (|NonNegativeInteger|)) (|m| (|NonNegativeInteger|))
          (% (|List| (|Integer|))))
-        (SPROG ((#1=#:G32 NIL) (|i| NIL) (#2=#:G31 NIL))
+        (SPROG ((#1=#:G17 NIL) (|i| NIL) (#2=#:G16 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -51,7 +51,7 @@
           (|Record| (|:| |coef1| (|Integer|)) (|:| |coef2| (|Integer|))
                     (|:| |prim| (|SparseUnivariatePolynomial| F)))))
         (SPROG
-         ((#1=#:G51 NIL) (#2=#:G52 NIL) (|r| (|SparseUnivariatePolynomial| F))
+         ((#1=#:G31 NIL) (#2=#:G32 NIL) (|r| (|SparseUnivariatePolynomial| F))
           (|w| (|Polynomial| F)) (|c| (|Integer|)) (|i| NIL)
           (|b| (|Polynomial| F)) (|u| (|Polynomial| F)))
          (SEQ
@@ -90,8 +90,8 @@
                              (LETT #1#
                                    (PROGN
                                     (LETT #2# (VECTOR 1 |c| |r|))
-                                    (GO #3=#:G50)))
-                             (GO #4=#:G45)))))))))
+                                    (GO #3=#:G30)))
+                             (GO #4=#:G25)))))))))
                      #4# (EXIT #1#))
                     (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL)))))))
           #3# (EXIT #2#)))) 
@@ -99,7 +99,7 @@
 (SDEFUN |PRIMELT;findUniv|
         ((|l| (|List| (|Polynomial| F))) (|v| (|Symbol|)) (|opt| (|Symbol|))
          (% (|Union| (|Polynomial| F) "failed")))
-        (SPROG ((#1=#:G62 NIL) (#2=#:G63 NIL) (#3=#:G64 NIL) (|p| NIL))
+        (SPROG ((#1=#:G42 NIL) (#2=#:G43 NIL) (#3=#:G44 NIL) (|p| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -120,8 +120,8 @@
                                 (LETT #1#
                                       (PROGN
                                        (LETT #2# (CONS 0 |p|))
-                                       (GO #4=#:G61)))
-                                (GO #5=#:G59))))))))
+                                       (GO #4=#:G41)))
+                                (GO #5=#:G39))))))))
                          (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
                    #5# (EXIT #1#))
                   (EXIT (CONS 1 "failed"))))
@@ -138,9 +138,9 @@
             (|Record| (|:| |coef1| (|SparseUnivariatePolynomial| F))
                       (|:| |coef2| (|SparseUnivariatePolynomial| F)))
             "failed"))
-          (#1=#:G100 NIL) (#2=#:G101 NIL)
+          (#1=#:G75 NIL) (#2=#:G76 NIL)
           (|p| (|SparseUnivariatePolynomial| (|Polynomial| F)))
-          (|u| (|Union| (|Polynomial| F) "failed")) (#3=#:G102 NIL) (|v| NIL)
+          (|u| (|Union| (|Polynomial| F) "failed")) (#3=#:G77 NIL) (|v| NIL)
           (|pw| (|SparseUnivariatePolynomial| F)))
          (SEQ
           (EXIT
@@ -175,8 +175,8 @@
                                           (LETT #1#
                                                 (PROGN
                                                  (LETT #2# (CONS 1 "failed"))
-                                                 (GO #4=#:G99)))
-                                          (GO #5=#:G89))))))
+                                                 (GO #4=#:G74)))
+                                          (GO #5=#:G64))))))
                                      (LETT |bc|
                                            (SPADCALL
                                             (SPADCALL
@@ -232,15 +232,15 @@
                     (|:| |poly| (|List| (|SparseUnivariatePolynomial| F)))
                     (|:| |prim| (|SparseUnivariatePolynomial| F)))))
         (SPROG
-         ((#1=#:G121 NIL) (#2=#:G122 NIL)
+         ((#1=#:G96 NIL) (#2=#:G97 NIL)
           (|ltt| (|List| (|SparseUnivariatePolynomial| F)))
           (|tt| (|Union| (|List| (|SparseUnivariatePolynomial| F)) "failed"))
-          (#3=#:G111 NIL) (#4=#:G110 #5=(|Polynomial| F)) (#6=#:G112 #5#)
-          (#7=#:G125 NIL) (|c| NIL) (#8=#:G126 NIL) (|t| NIL)
+          (#3=#:G86 NIL) (#4=#:G85 #5=(|Polynomial| F)) (#6=#:G87 #5#)
+          (#7=#:G100 NIL) (|c| NIL) (#8=#:G101 NIL) (|t| NIL)
           (|cf| (|List| (|Integer|))) (|i| NIL) (|n| (|NonNegativeInteger|))
           (|w| (|Polynomial| F)) (|elim| (|List| (|Symbol|)))
-          (|vv| (|List| (|Polynomial| F))) (#9=#:G124 NIL) (|v| NIL)
-          (#10=#:G123 NIL))
+          (|vv| (|List| (|Polynomial| F))) (#9=#:G99 NIL) (|v| NIL)
+          (#10=#:G98 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -325,30 +325,13 @@
                                           (LETT #2#
                                                 (VECTOR |cf| (CDR |ltt|)
                                                         (|SPADfirst| |ltt|)))
-                                          (GO #11=#:G120)))))
-                             (GO #12=#:G117)))))))
+                                          (GO #11=#:G95)))))
+                             (GO #12=#:G92)))))))
                    #12# (EXIT #1#))
                   (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL)))))
           #11# (EXIT #2#)))) 
 
 (DECLAIM (NOTINLINE |PrimitiveElement;|)) 
-
-(DEFUN |PrimitiveElement| (#1=#:G127)
-  (SPROG NIL
-         (PROG (#2=#:G128)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|PrimitiveElement|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|PrimitiveElement;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|PrimitiveElement|)))))))))) 
 
 (DEFUN |PrimitiveElement;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
@@ -364,6 +347,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |PrimitiveElement| (#1=#:G102)
+  (SPROG NIL
+         (PROG (#2=#:G103)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|PrimitiveElement|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|PrimitiveElement;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|PrimitiveElement|)))))))))) 
 
 (MAKEPROP '|PrimitiveElement| '|infovec|
           (LIST

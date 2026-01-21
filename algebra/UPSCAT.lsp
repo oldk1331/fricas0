@@ -6,7 +6,7 @@
 (DEFPARAMETER |UnivariatePowerSeriesCategory;AL| 'NIL) 
 
 (DEFUN |UnivariatePowerSeriesCategory| (|t#1| |t#2|)
-  (LET (#1=#:G3 (#2=#:G4 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
+  (LET (#1=#:G2 (#2=#:G3 (LIST (|devaluate| |t#1|) (|devaluate| |t#2|))))
     (COND
      ((SETQ #1# (|assoc| #2# |UnivariatePowerSeriesCategory;AL|)) (CDR #1#))
      (T
@@ -18,11 +18,11 @@
       #1#)))) 
 
 (DEFUN |UnivariatePowerSeriesCategory;| (|t#1| |t#2|)
-  (SPROG ((#1=#:G2 NIL))
+  (SPROG ((#1=#:G1 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1| |t#2|) (LIST |t#1| |t#2|)
-                                   (|subst_in_cat| '(#2=#:G1)
+                                   (|subst_in_cat| '(#2=#:G0)
                                                    (LIST
                                                     '(|SingletonAsOrderedSet|))
                                                    (COND

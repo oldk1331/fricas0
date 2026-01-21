@@ -38,7 +38,7 @@
 
 (SDEFUN |FFIELDC-;createPrimitiveElement;S;8| ((% (S)))
         (SPROG
-         ((|found| (|Boolean|)) (|e| (S)) (#1=#:G71 NIL) (|i| NIL)
+         ((|found| (|Boolean|)) (|e| (S)) (#1=#:G46 NIL) (|i| NIL)
           (|start| (|Integer|)) (|sm1| (|PositiveInteger|)))
          (SEQ (LETT |sm1| (- (SPADCALL (QREFELT % 32)) 1))
               (LETT |start|
@@ -63,7 +63,7 @@
 
 (SDEFUN |FFIELDC-;primitive?;SB;9| ((|a| (S)) (% (|Boolean|)))
         (SPROG
-         ((|equalone| (|Boolean|)) (#1=#:G82 NIL) (|exp| NIL) (|q| (|Integer|))
+         ((|equalone| (|Boolean|)) (#1=#:G57 NIL) (|exp| NIL) (|q| (|Integer|))
           (|explist|
            (|List|
             (|Record| (|:| |factor| (|Integer|))
@@ -92,8 +92,8 @@
 (SDEFUN |FFIELDC-;order;SPi;10| ((|e| (S)) (% (|PositiveInteger|)))
         (SPROG
          ((|ord| (|Integer|)) (|goon| (|Boolean|)) (|a| (|Integer|))
-          (#1=#:G93 NIL) (|j| NIL) (|primeDivisor| #2=(|Integer|))
-          (#3=#:G92 NIL) (|rec| NIL)
+          (#1=#:G68 NIL) (|j| NIL) (|primeDivisor| #2=(|Integer|))
+          (#3=#:G67 NIL) (|rec| NIL)
           (|lof|
            (|List|
             (|Record| (|:| |factor| #2#)
@@ -138,11 +138,11 @@
         (SPROG
          ((|a| (S)) (|disclog| (|Integer|)) (|mult| (|Integer|)) (|c| (S))
           (|disc1| (|Integer|)) (|found| (|Boolean|))
-          (|rho| (|Union| (|NonNegativeInteger|) "failed")) (#1=#:G115 NIL)
+          (|rho| (|Union| (|NonNegativeInteger|) "failed")) (#1=#:G90 NIL)
           (|i| NIL) (|end| (|Integer|)) (|n| (|NonNegativeInteger|))
           (|exptable| (|Table| (|PositiveInteger|) (|NonNegativeInteger|)))
-          (|exp| #2=(|Integer|)) (#3=#:G114 NIL) (|t| NIL)
-          (|fac| #4=(|Integer|)) (#5=#:G113 NIL) (|f| NIL) (|groupord| #2#)
+          (|exp| #2=(|Integer|)) (#3=#:G89 NIL) (|t| NIL)
+          (|fac| #4=(|Integer|)) (#5=#:G88 NIL) (|f| NIL) (|groupord| #2#)
           (|gen| (S))
           (|faclist|
            (|List|
@@ -270,10 +270,10 @@
          (% (|Union| (|NonNegativeInteger|) "failed")))
         (SPROG
          ((|a| (S)) (|mult| (|Integer|)) (|disclog| (|Integer|))
-          (|rho| (|Integer|)) (#1=#:G142 NIL)
+          (|rho| (|Integer|)) (#1=#:G113 NIL)
           (|rhoHelp| (|Union| (|NonNegativeInteger|) "failed"))
-          (|exp| (|Integer|)) (#2=#:G144 NIL) (|t| NIL) (|primroot| (S))
-          (|fac| #3=(|Integer|)) (#4=#:G143 NIL) (|f| NIL)
+          (|exp| (|Integer|)) (#2=#:G115 NIL) (|t| NIL) (|primroot| (S))
+          (|fac| #3=(|Integer|)) (#4=#:G114 NIL) (|f| NIL)
           (|faclist|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
@@ -332,7 +332,7 @@
                                        ((QEQCAR |rhoHelp| 1)
                                         (PROGN
                                          (LETT #1# (CONS 1 "failed"))
-                                         (GO #5=#:G141)))
+                                         (GO #5=#:G112)))
                                        ('T
                                         (SEQ
                                          (LETT |rho|

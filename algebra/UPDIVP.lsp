@@ -5,8 +5,8 @@
           (|Union| (|Record| (|:| |quotient| UP) (|:| |remainder| UP))
                    "failed")))
         (SPROG
-         ((|q| (UP)) (|ee| (|NonNegativeInteger|)) (#1=#:G12 NIL)
-          (#2=#:G31 NIL) (|c| (|Union| R "failed"))
+         ((|q| (UP)) (|ee| (|NonNegativeInteger|)) (#1=#:G7 NIL) (#2=#:G25 NIL)
+          (|c| (|Union| R "failed"))
           (|e| (|Union| (|NonNegativeInteger|) #3="failed")) (|lc| (R)))
          (SEQ
           (EXIT
@@ -41,7 +41,7 @@
                                   ((QEQCAR |c| 1)
                                    (PROGN
                                     (LETT #2# (CONS 1 "failed"))
-                                    (GO #5=#:G30)))
+                                    (GO #5=#:G24)))
                                   ('T
                                    (SEQ
                                     (LETT |ee|
@@ -83,9 +83,27 @@
 
 (DECLAIM (NOTINLINE |UnivariatePolynomialDivisionPackage;|)) 
 
-(DEFUN |UnivariatePolynomialDivisionPackage| (&REST #1=#:G32)
+(DEFUN |UnivariatePolynomialDivisionPackage;| (|#1| |#2|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT DV$2 (|devaluate| |#2|))
+          (LETT |dv$| (LIST '|UnivariatePolynomialDivisionPackage| DV$1 DV$2))
+          (LETT % (GETREFV 32))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache|
+                      '|UnivariatePolynomialDivisionPackage| (LIST DV$1 DV$2)
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |UnivariatePolynomialDivisionPackage| (&REST #1=#:G26)
   (SPROG NIL
-         (PROG (#2=#:G33)
+         (PROG (#2=#:G27)
            (RETURN
             (COND
              ((LETT #2#
@@ -104,24 +122,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|UnivariatePolynomialDivisionPackage|)))))))))) 
-
-(DEFUN |UnivariatePolynomialDivisionPackage;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT DV$2 (|devaluate| |#2|))
-          (LETT |dv$| (LIST '|UnivariatePolynomialDivisionPackage| DV$1 DV$2))
-          (LETT % (GETREFV 32))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache|
-                      '|UnivariatePolynomialDivisionPackage| (LIST DV$1 DV$2)
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (QSETREFV % 7 |#2|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|UnivariatePolynomialDivisionPackage| '|infovec|
           (LIST

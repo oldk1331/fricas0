@@ -33,23 +33,6 @@
 
 (DECLAIM (NOTINLINE |SegmentBinding;|)) 
 
-(DEFUN |SegmentBinding| (#1=#:G30)
-  (SPROG NIL
-         (PROG (#2=#:G31)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|SegmentBinding|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|SegmentBinding;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|SegmentBinding|)))))))))) 
-
 (DEFUN |SegmentBinding;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -87,6 +70,23 @@
                        (CONS (|dispatchFunction| |SEGBIND;convert;%If;6|)
                              %)))))
           %))) 
+
+(DEFUN |SegmentBinding| (#1=#:G12)
+  (SPROG NIL
+         (PROG (#2=#:G13)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|SegmentBinding|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|SegmentBinding;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|SegmentBinding|)))))))))) 
 
 (MAKEPROP '|SegmentBinding| '|infovec|
           (LIST

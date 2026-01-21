@@ -37,25 +37,6 @@
 
 (DECLAIM (NOTINLINE |SegmentFunctions2;|)) 
 
-(DEFUN |SegmentFunctions2| (&REST #1=#:G18)
-  (SPROG NIL
-         (PROG (#2=#:G19)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|SegmentFunctions2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |SegmentFunctions2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|SegmentFunctions2|)))))))))) 
-
 (DEFUN |SegmentFunctions2;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -80,6 +61,25 @@
            ((|testBitVector| |pv$| 1)
             (QSETREFV % 25 (CONS (|dispatchFunction| |SEG2;map;MSL;2|) %))))
           %))) 
+
+(DEFUN |SegmentFunctions2| (&REST #1=#:G10)
+  (SPROG NIL
+         (PROG (#2=#:G11)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|SegmentFunctions2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |SegmentFunctions2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|SegmentFunctions2|)))))))))) 
 
 (MAKEPROP '|SegmentFunctions2| '|infovec|
           (LIST

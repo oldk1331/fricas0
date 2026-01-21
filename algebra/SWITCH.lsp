@@ -1,8 +1,8 @@
 
 (SDEFUN |SWITCH;coerce;%Of;1| ((|s| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|ran| (|List| (|OutputForm|))) (#1=#:G29 NIL) (|u| NIL)
-          (#2=#:G28 NIL) (|rat| (|OutputForm|)))
+         ((|ran| (|List| (|OutputForm|))) (#1=#:G19 NIL) (|u| NIL)
+          (#2=#:G18 NIL) (|rat| (|OutputForm|)))
          (SEQ (LETT |rat| (SPADCALL (QCAR |s|) (QREFELT % 12)))
               (LETT |ran|
                     (PROGN
@@ -139,22 +139,6 @@
 
 (DECLAIM (NOTINLINE |Switch;|)) 
 
-(DEFUN |Switch| ()
-  (SPROG NIL
-         (PROG (#1=#:G85)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|Switch|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|Switch|
-                             (LIST (CONS NIL (CONS 1 (|Switch;|))))))
-                    (LETT #1# T))
-                (COND ((NOT #1#) (HREM |$ConstructorCache| '|Switch|)))))))))) 
-
 (DEFUN |Switch;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -177,6 +161,22 @@
                                              (|:| |switch| %))))))
           (QSETREFV % 10 (SPADCALL 'NULL (QREFELT % 9)))
           %))) 
+
+(DEFUN |Switch| ()
+  (SPROG NIL
+         (PROG (#1=#:G75)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|Switch|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|Switch|
+                             (LIST (CONS NIL (CONS 1 (|Switch;|))))))
+                    (LETT #1# T))
+                (COND ((NOT #1#) (HREM |$ConstructorCache| '|Switch|)))))))))) 
 
 (MAKEPROP '|Switch| '|infovec|
           (LIST

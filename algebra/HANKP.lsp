@@ -1,9 +1,9 @@
 
 (SDEFUN |HANKP;HankelMatrix;LM;1| ((|l| (|List| R)) (% (|Matrix| R)))
         (SPROG
-         ((#1=#:G30 NIL) (|x| NIL) (#2=#:G31 NIL) (|i| NIL) (#3=#:G29 NIL)
-          (|lloc| (|List| R)) (#4=#:G28 NIL) (|j| NIL) (#5=#:G27 NIL)
-          (|n| (|Integer|)) (#6=#:G14 NIL))
+         ((#1=#:G17 NIL) (|x| NIL) (#2=#:G18 NIL) (|i| NIL) (#3=#:G16 NIL)
+          (|lloc| (|List| R)) (#4=#:G15 NIL) (|j| NIL) (#5=#:G14 NIL)
+          (|n| (|Integer|)) (#6=#:G3 NIL))
          (SEQ
           (COND ((NULL (ODDP (LENGTH |l|))) (|error| "n must be odd"))
                 ('T
@@ -72,22 +72,6 @@
 
 (DECLAIM (NOTINLINE |HankelPackage;|)) 
 
-(DEFUN |HankelPackage| (#1=#:G32)
-  (SPROG NIL
-         (PROG (#2=#:G33)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|HankelPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|HankelPackage;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|HankelPackage|)))))))))) 
-
 (DEFUN |HankelPackage;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -102,6 +86,22 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |HankelPackage| (#1=#:G19)
+  (SPROG NIL
+         (PROG (#2=#:G20)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|HankelPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|HankelPackage;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|HankelPackage|)))))))))) 
 
 (MAKEPROP '|HankelPackage| '|infovec|
           (LIST

@@ -24,27 +24,8 @@
 
 (DECLAIM (NOTINLINE |AssociatedJordanAlgebra;|)) 
 
-(DEFUN |AssociatedJordanAlgebra| (&REST #1=#:G32)
-  (SPROG NIL
-         (PROG (#2=#:G33)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|AssociatedJordanAlgebra|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |AssociatedJordanAlgebra;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|AssociatedJordanAlgebra|)))))))))) 
-
 (DEFUN |AssociatedJordanAlgebra;| (|#1| |#2|)
-  (SPROG ((#1=#:G3 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((#1=#:G2 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -150,6 +131,25 @@
                       (|check_union2| (QEQCAR #1# 0) #2# (|Union| #2# "failed")
                                       #1#)))
           %))) 
+
+(DEFUN |AssociatedJordanAlgebra| (&REST #1=#:G15)
+  (SPROG NIL
+         (PROG (#2=#:G16)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|AssociatedJordanAlgebra|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |AssociatedJordanAlgebra;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|AssociatedJordanAlgebra|)))))))))) 
 
 (MAKEPROP '|AssociatedJordanAlgebra| '|infovec|
           (LIST

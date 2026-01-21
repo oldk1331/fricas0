@@ -66,25 +66,9 @@
 
 (DECLAIM (NOTINLINE |I8Matrix;|)) 
 
-(DEFUN |I8Matrix| ()
-  (SPROG NIL
-         (PROG (#1=#:G2642)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|I8Matrix|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|I8Matrix|
-                             (LIST (CONS NIL (CONS 1 (|I8Matrix;|))))))
-                    (LETT #1# T))
-                (COND ((NOT #1#) (HREM |$ConstructorCache| '|I8Matrix|)))))))))) 
-
 (DEFUN |I8Matrix;| ()
   (SPROG
-   ((|dv$| NIL) (% NIL) (#1=#:G2639 NIL) (#2=#:G2640 NIL) (#3=#:G2638 NIL)
+   ((|dv$| NIL) (% NIL) (#1=#:G2551 NIL) (#2=#:G2552 NIL) (#3=#:G2550 NIL)
     (|pv$| NIL))
    (PROGN
     (LETT |dv$| '(|I8Matrix|))
@@ -171,6 +155,22 @@
      (|augmentPredVector| % 2097152))
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |I8Matrix| ()
+  (SPROG NIL
+         (PROG (#1=#:G2554)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|I8Matrix|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|I8Matrix|
+                             (LIST (CONS NIL (CONS 1 (|I8Matrix;|))))))
+                    (LETT #1# T))
+                (COND ((NOT #1#) (HREM |$ConstructorCache| '|I8Matrix|)))))))))) 
 
 (MAKEPROP '|I8Matrix| '|infovec|
           (LIST

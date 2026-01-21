@@ -11,7 +11,7 @@
         ((|n| (|NonNegativeInteger|)) (|ls| (|List| S))
          (% (|List| (|OutputForm|))))
         (SPROG
-         ((#1=#:G26 NIL) (|i| NIL) (#2=#:G27 NIL) (|s| NIL)
+         ((#1=#:G7 NIL) (|i| NIL) (#2=#:G8 NIL) (|s| NIL)
           (|v| (|List| (|OutputForm|))))
          (SEQ
           (LETT |v|
@@ -34,8 +34,8 @@
 
 (SDEFUN |TABLEAU;maketab| ((|lls| (|List| (|List| S))) (% (|OutputForm|)))
         (SPROG
-         ((|ll| (|List| (|OutputForm|))) (#1=#:G35 NIL) (|i| NIL)
-          (#2=#:G34 NIL) (|sz| (|NonNegativeInteger|)))
+         ((|ll| (|List| (|OutputForm|))) (#1=#:G16 NIL) (|i| NIL)
+          (#2=#:G15 NIL) (|sz| (|NonNegativeInteger|)))
          (SEQ
           (LETT |ll|
                 (COND ((NULL |lls|) (LIST (SPADCALL (QREFELT % 21))))
@@ -66,21 +66,6 @@
 
 (DECLAIM (NOTINLINE |Tableau;|)) 
 
-(DEFUN |Tableau| (#1=#:G37)
-  (SPROG NIL
-         (PROG (#2=#:G38)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|Tableau|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Tableau;| #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Tableau|)))))))))) 
-
 (DEFUN |Tableau;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -95,6 +80,21 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 7 (|List| (|List| |#1|)))
           %))) 
+
+(DEFUN |Tableau| (#1=#:G18)
+  (SPROG NIL
+         (PROG (#2=#:G19)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|Tableau|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Tableau;| #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Tableau|)))))))))) 
 
 (MAKEPROP '|Tableau| '|infovec|
           (LIST

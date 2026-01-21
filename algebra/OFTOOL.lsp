@@ -120,8 +120,8 @@
          ((|a11| #1=(|OutputForm|)) (|args1| #2=(|List| (|OutputForm|)))
           (|op1| #3=(|OutputForm|)) (|op| #3#) (|a2| (|OutputForm|)) (|a1| #1#)
           (|nargs| (|List| (|OutputForm|))) (|args2| #2#)
-          (|n| (|NonNegativeInteger|)) (|args| #2#) (#4=#:G163 NIL) (|arg| NIL)
-          (#5=#:G162 NIL) (|xi| (|Integer|)))
+          (|n| (|NonNegativeInteger|)) (|args| #2#) (#4=#:G138 NIL) (|arg| NIL)
+          (#5=#:G137 NIL) (|xi| (|Integer|)))
          (SEQ
           (COND ((SPADCALL |x| (QREFELT % 14)) |x|)
                 ((SPADCALL |x| (QREFELT % 13))
@@ -433,9 +433,21 @@
 
 (DECLAIM (NOTINLINE |OutputFormTools;|)) 
 
+(DEFUN |OutputFormTools;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|OutputFormTools|))
+          (LETT % (GETREFV 38))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|OutputFormTools| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |OutputFormTools| ()
   (SPROG NIL
-         (PROG (#1=#:G165)
+         (PROG (#1=#:G140)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OutputFormTools|))
@@ -450,18 +462,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|OutputFormTools|)))))))))) 
-
-(DEFUN |OutputFormTools;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|OutputFormTools|))
-          (LETT % (GETREFV 38))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|OutputFormTools| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|OutputFormTools| '|infovec|
           (LIST

@@ -3,14 +3,14 @@
         ((|a| (|PrimitiveArray| (|None|))) (|k| (|Key|))
          (|h| (|Mapping| (|SingleInteger|) |Key|)) (% (|Integer|)))
         (SPROG
-         ((|q| (|Integer|)) (|mk| (|None|)) (|p| (|Integer|)) (#1=#:G42 NIL)
-          (#2=#:G41 NIL) (|deletedPosition?| (|Boolean|)) (|h2| (|Integer|))
+         ((|q| (|Integer|)) (|mk| (|None|)) (|p| (|Integer|)) (#1=#:G32 NIL)
+          (#2=#:G31 NIL) (|deletedPosition?| (|Boolean|)) (|h2| (|Integer|))
           (|h1| (|Integer|)) (|n| (|Integer|)))
          (SEQ
           (EXIT
            (SEQ (LETT |n| (ASH (QVSIZE |a|) -1)) (LETT |h1| (SPADCALL |k| |h|))
-                (LETT |p| (SPADCALL |h1| |n| (QREFELT % 15)))
-                (LETT |h2| (+ 1 (SPADCALL |h1| (- |n| 2) (QREFELT % 15))))
+                (LETT |p| (REM |h1| |n|))
+                (LETT |h2| (+ 1 (REM |h1| (- |n| 2))))
                 (LETT |mk| (QAREF1 |a| |p|)) (LETT |deletedPosition?| NIL)
                 (SEQ
                  (EXIT
@@ -21,9 +21,9 @@
                          (COND
                           ((EQ |mk| (QREFELT % 9))
                            (SEQ (LETT |deletedPosition?| 'T)
-                                (EXIT (PROGN (LETT #2# 1) (GO #3=#:G28)))))
-                          ((SPADCALL |k| |mk| (QREFELT % 17))
-                           (PROGN (LETT #1# |p|) (GO #4=#:G40)))
+                                (EXIT (PROGN (LETT #2# 1) (GO #3=#:G18)))))
+                          ((SPADCALL |k| |mk| (QREFELT % 15))
+                           (PROGN (LETT #1# |p|) (GO #4=#:G30)))
                           ('T
                            (SEQ (LETT |p| (+ |p| |h2|))
                                 (COND ((>= |p| |n|) (LETT |p| (- |p| |n|))))
@@ -37,7 +37,7 @@
                       (COND
                        ((NULL (EQ |mk| (QREFELT % 9)))
                         (COND
-                         ((SPADCALL |k| |mk| (QREFELT % 17))
+                         ((SPADCALL |k| |mk| (QREFELT % 15))
                           (EXIT
                            (SEQ
                             (SEQ (QSETAREF1 |a| |q| |k|)
@@ -63,7 +63,7 @@
 
 (SDEFUN |XHASHTBL;rehashAux!| ((|x| (%)) (|ix| (|Integer|)) (% (%)))
         (SPROG
-         ((|p| (|Integer|)) (|k| (|Key|)) (|mk| (|None|)) (#1=#:G63 NIL)
+         ((|p| (|Integer|)) (|k| (|Key|)) (|mk| (|None|)) (#1=#:G51 NIL)
           (|i| NIL) (|c| (|PrimitiveArray| (|None|))) (|n| (|Integer|))
           (|a| (|PrimitiveArray| (|None|)))
           (|h| (|Mapping| (|SingleInteger|) |Key|))
@@ -123,12 +123,12 @@
                        (|XHASHTBL;newArr| |n| %) |hashfunction|))))) 
 
 (SDEFUN |XHASHTBL;empty;%;7| ((% (%)))
-        (SPADCALL (|forceLazySlot| (ELT % 21)) (QREFELT % 19))) 
+        (SPADCALL (|forceLazySlot| (ELT % 19)) (QREFELT % 17))) 
 
 (SDEFUN |XHASHTBL;inspect;%R;8|
         ((|x| (%)) (% (|Record| (|:| |key| |Key|) (|:| |entry| |Entry|))))
         (SPROG
-         ((#1=#:G98 NIL) (|mk| (|None|)) (#2=#:G99 NIL) (|i| NIL)
+         ((#1=#:G86 NIL) (|mk| (|None|)) (#2=#:G87 NIL) (|i| NIL)
           (|n| (|Integer|)) (|a| (|PrimitiveArray| (|None|))))
          (SEQ
           (EXIT
@@ -145,13 +145,13 @@
                             (EQ (LETT |mk| (QAREF1 |a| |i|)) (QREFELT % 9)))))
                          (PROGN
                           (LETT #1# (CONS |mk| (QAREF1 |a| (+ |n| |i|))))
-                          (GO #3=#:G97))))))
+                          (GO #3=#:G85))))))
                      (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                 (EXIT (|error| "table must be non-empty"))))
           #3# (EXIT #1#)))) 
 
 (SDEFUN |XHASHTBL;#;%Nni;9| ((|x| (%)) (% (|NonNegativeInteger|)))
-        (SPROG ((#1=#:G101 NIL))
+        (SPROG ((#1=#:G89 NIL))
                (PROG1 (LETT #1# (QVELT |x| 0))
                  (|check_subtype2| (>= #1# 0) '(|NonNegativeInteger|)
                                    '(|Integer|) #1#)))) 
@@ -265,12 +265,12 @@
          (SEQ (LETT |r| |x|)
               (EXIT
                (VECTOR (QVELT |r| 0) (QVELT |r| 1) (QVELT |r| 2) (QVELT |r| 3)
-                       (QVELT |r| 4) (SPADCALL (QVELT |r| 5) (QREFELT % 34))
+                       (QVELT |r| 4) (SPADCALL (QVELT |r| 5) (QREFELT % 32))
                        (QVELT |r| 6)))))) 
 
 (SDEFUN |XHASHTBL;fill!;%Entry%;16| ((|x| (%)) (|e| (|Entry|)) (% (%)))
         (SPROG
-         ((#1=#:G158 NIL) (|i| NIL) (|n| (|NonNegativeInteger|))
+         ((#1=#:G146 NIL) (|i| NIL) (|n| (|NonNegativeInteger|))
           (|a| (|PrimitiveArray| (|None|))))
          (SEQ (LETT |a| (QVELT |x| 5)) (LETT |n| (ASH (QVSIZE |a|) -1))
               (SEQ (LETT |i| 0) (LETT #1# (- |n| 1)) G190
@@ -287,7 +287,7 @@
 (SDEFUN |XHASHTBL;map!;M2%;17|
         ((|f| (|Mapping| |Entry| |Entry|)) (|x| (%)) (% (%)))
         (SPROG
-         ((#1=#:G167 NIL) (|i| NIL) (|n| (|NonNegativeInteger|))
+         ((#1=#:G155 NIL) (|i| NIL) (|n| (|NonNegativeInteger|))
           (|a| (|PrimitiveArray| (|None|))))
          (SEQ (LETT |a| (QVELT |x| 5)) (LETT |n| (ASH (QVSIZE |a|) -1))
               (SEQ (LETT |i| 0) (LETT #1# (- |n| 1)) G190
@@ -304,7 +304,7 @@
 
 (SDEFUN |XHASHTBL;keys;%L;18| ((|x| (%)) (% (|List| |Key|)))
         (SPROG
-         ((|l| (|List| |Key|)) (|mk| (|None|)) (#1=#:G175 NIL) (|i| NIL)
+         ((|l| (|List| |Key|)) (|mk| (|None|)) (#1=#:G163 NIL) (|i| NIL)
           (|a| (|PrimitiveArray| (|None|))))
          (SEQ (LETT |a| (QVELT |x| 5)) (LETT |l| NIL)
               (SEQ (LETT |i| 0) (LETT #1# (- (ASH (QVSIZE |a|) -1) 1)) G190
@@ -323,7 +323,7 @@
 
 (SDEFUN |XHASHTBL;parts;%L;19| ((|x| (%)) (% (|List| |Entry|)))
         (SPROG
-         ((|l| (|List| |Entry|)) (#1=#:G183 NIL) (|i| NIL)
+         ((|l| (|List| |Entry|)) (#1=#:G171 NIL) (|i| NIL)
           (|n| (|NonNegativeInteger|)) (|a| (|PrimitiveArray| (|None|))))
          (SEQ (LETT |a| (QVELT |x| 5)) (LETT |n| (ASH (QVSIZE |a|) -1))
               (LETT |l| NIL)
@@ -343,7 +343,7 @@
          (% (|List| (|Record| (|:| |key| |Key|) (|:| |entry| |Entry|)))))
         (SPROG
          ((|l| (|List| (|Record| (|:| |key| |Key|) (|:| |entry| |Entry|))))
-          (|mk| (|None|)) (#1=#:G193 NIL) (|i| NIL)
+          (|mk| (|None|)) (#1=#:G181 NIL) (|i| NIL)
           (|n| (|NonNegativeInteger|)) (|a| (|PrimitiveArray| (|None|))))
          (SEQ (LETT |a| (QVELT |x| 5)) (LETT |n| (ASH (QVSIZE |a|) -1))
               (LETT |l| NIL)
@@ -369,15 +369,15 @@
 
 (SDEFUN |XHASHTBL;=;2%B;22| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G206 NIL) (#2=#:G207 NIL) (|p| (|Integer|)) (|mk| (|None|))
-          (#3=#:G208 NIL) (|i| NIL) (|h| (|Mapping| (|SingleInteger|) |Key|))
+         ((#1=#:G194 NIL) (#2=#:G195 NIL) (|p| (|Integer|)) (|mk| (|None|))
+          (#3=#:G196 NIL) (|i| NIL) (|h| (|Mapping| (|SingleInteger|) |Key|))
           (|yn| #4=(|NonNegativeInteger|))
           (|ya| #5=(|PrimitiveArray| (|None|))) (|xn| #4#) (|xa| #5#))
          (SEQ
           (EXIT
            (COND
-            ((SPADCALL (SPADCALL |x| (QREFELT % 26))
-                       (SPADCALL |y| (QREFELT % 26)) (QREFELT % 46))
+            ((SPADCALL (SPADCALL |x| (QREFELT % 24))
+                       (SPADCALL |y| (QREFELT % 24)) (QREFELT % 44))
              NIL)
             (#6='T
              (SEQ (LETT |xa| (QVELT |x| 5)) (LETT |xn| (ASH (QVSIZE |xa|) -1))
@@ -399,17 +399,17 @@
                             (LETT |p| (|XHASHTBL;localSearch| |ya| |mk| |h| %))
                             (EXIT
                              (COND
-                              ((< |p| 0) (PROGN (LETT #2# NIL) (GO #7=#:G205)))
+                              ((< |p| 0) (PROGN (LETT #2# NIL) (GO #7=#:G193)))
                               ('T
                                (SEQ
                                 (EXIT
                                  (COND
                                   ((SPADCALL (QAREF1 |xa| (+ |xn| |i|))
                                              (QAREF1 |ya| (+ |yn| |p|))
-                                             (QREFELT % 47))
+                                             (QREFELT % 45))
                                    (PROGN
                                     (LETT #1# (PROGN (LETT #2# NIL) (GO #7#)))
-                                    (GO #8=#:G200)))))
+                                    (GO #8=#:G188)))))
                                 #8# (EXIT #1#))))))))))
                        (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                   (EXIT 'T)))))
@@ -417,32 +417,15 @@
 
 (DECLAIM (NOTINLINE |XHashTable;|)) 
 
-(DEFUN |XHashTable| (&REST #1=#:G260)
-  (SPROG NIL
-         (PROG (#2=#:G261)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|XHashTable|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |XHashTable;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|XHashTable|)))))))))) 
-
 (DEFUN |XHashTable;| (|#1| |#2|)
   (SPROG
-   ((#1=#:G259 NIL) (#2=#:G258 NIL) (|pv$| NIL) (#3=#:G256 NIL) (#4=#:G257 NIL)
+   ((#1=#:G247 NIL) (#2=#:G246 NIL) (|pv$| NIL) (#3=#:G244 NIL) (#4=#:G245 NIL)
     (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
     (LETT |dv$| (LIST '|XHashTable| DV$1 DV$2))
-    (LETT % (GETREFV 65))
+    (LETT % (GETREFV 63))
     (QSETREFV % 0 |dv$|)
     (QSETREFV % 3
               (LETT |pv$|
@@ -560,42 +543,59 @@
                (QREFELT % 12)))
     (COND
      ((|testBitVector| |pv$| 6)
-      (QSETREFV % 48 (CONS (|dispatchFunction| |XHASHTBL;=;2%B;22|) %))))
+      (QSETREFV % 46 (CONS (|dispatchFunction| |XHASHTBL;=;2%B;22|) %))))
     %))) 
+
+(DEFUN |XHashTable| (&REST #1=#:G248)
+  (SPROG NIL
+         (PROG (#2=#:G249)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|XHashTable|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |XHashTable;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|XHashTable|)))))))))) 
 
 (MAKEPROP '|XHashTable| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) 'VACANT
-              'DELETED (|List| 25) (|PrimitiveArray| 25) (0 . |construct|)
-              '|arrayLengths| (|Integer|) (5 . |positiveRemainder|) (|Boolean|)
-              (11 . =) (|Mapping| 20 6) |XHASHTBL;table;M%;6| (|SingleInteger|)
-              (17 . |hash|) |XHASHTBL;empty;%;7|
-              (|Record| (|:| |key| 6) (|:| |entry| 7)) |XHASHTBL;inspect;%R;8|
-              (|NonNegativeInteger|) |XHASHTBL;#;%Nni;9| (|Union| 7 '"failed")
+              'DELETED (|List| 23) (|PrimitiveArray| 23) (0 . |construct|)
+              '|arrayLengths| (|Boolean|) (5 . =) (|Mapping| 18 6)
+              |XHASHTBL;table;M%;6| (|SingleInteger|) (11 . |hash|)
+              |XHASHTBL;empty;%;7| (|Record| (|:| |key| 6) (|:| |entry| 7))
+              |XHASHTBL;inspect;%R;8| (|NonNegativeInteger|)
+              |XHASHTBL;#;%Nni;9| (|Union| 7 '"failed")
               |XHASHTBL;search;Key%U;10| |XHASHTBL;elt;%KeyEntry;11|
               |XHASHTBL;elt;%Key2Entry;12| |XHASHTBL;setelt!;%Key2Entry;13|
               |XHASHTBL;remove!;Key%U;14| (|PrimitiveArray| (|None|))
-              (22 . |copy|) |XHASHTBL;copy;2%;15| |XHASHTBL;fill!;%Entry%;16|
+              (16 . |copy|) |XHASHTBL;copy;2%;15| |XHASHTBL;fill!;%Entry%;16|
               (|Mapping| 7 7) |XHASHTBL;map!;M2%;17| (|List| 6)
               |XHASHTBL;keys;%L;18| (|List| 7) |XHASHTBL;parts;%L;19|
-              (|List| 23) |XHASHTBL;parts;%L;20|
-              |XHASHTBL;removeDuplicates;2%;21| (27 . ~=) (33 . ~=) (39 . =)
-              (|Mapping| 23 23) (|Union| 23 '"failed") (|Mapping| 16 23)
-              (|Mapping| 7 7 7) (|Mapping| 23 23 23) (|Equation| 7) (|List| 54)
-              (|List| 57) (|Equation| 23) (|OutputForm|) (|String|)
-              (|Mapping| 16 23 23) (|Mapping| 16 7 7) (|Mapping| 16 7) (|Void|)
+              (|List| 21) |XHASHTBL;parts;%L;20|
+              |XHASHTBL;removeDuplicates;2%;21| (21 . ~=) (27 . ~=) (33 . =)
+              (|Mapping| 21 21) (|Union| 21 '"failed") (|Mapping| 14 21)
+              (|Mapping| 7 7 7) (|Mapping| 21 21 21) (|Equation| 7) (|List| 52)
+              (|List| 55) (|Equation| 21) (|OutputForm|) (|String|)
+              (|Mapping| 14 21 21) (|Mapping| 14 7 7) (|Mapping| 14 7) (|Void|)
               (|InputForm|))
-           '#(~= 45 |table| 51 |swap!| 65 |size?| 72 |setelt!| 78 |select!| 85
-              |select| 91 |search| 97 |sample| 103 |removeDuplicates| 107
-              |remove!| 112 |remove| 130 |reduce| 142 |qsetelt!| 163 |qelt| 170
-              |parts| 176 |more?| 186 |minIndex| 192 |min| 197 |members| 207
-              |member?| 217 |maxIndex| 229 |max| 234 |map!| 256 |map| 268
-              |less?| 287 |latex| 293 |keys| 298 |key?| 303 |inspect| 309
-              |insert!| 314 |indices| 320 |index?| 325 |first| 331 |find| 336
-              |fill!| 342 |extract!| 348 |every?| 353 |eval| 365 |eq?| 417
-              |entry?| 423 |entries| 429 |empty?| 434 |empty| 439 |elt| 443
-              |dictionary| 456 |count| 465 |copy| 489 |convert| 494 |construct|
-              499 |coerce| 504 |any?| 509 = 521 |#| 527)
+           '#(~= 39 |table| 45 |swap!| 59 |size?| 66 |setelt!| 72 |select!| 79
+              |select| 85 |search| 91 |sample| 97 |removeDuplicates| 101
+              |remove!| 106 |remove| 124 |reduce| 136 |qsetelt!| 157 |qelt| 164
+              |parts| 170 |more?| 180 |minIndex| 186 |min| 191 |members| 201
+              |member?| 211 |maxIndex| 223 |max| 228 |map!| 250 |map| 262
+              |less?| 281 |latex| 287 |keys| 292 |key?| 297 |inspect| 303
+              |insert!| 308 |indices| 314 |index?| 319 |first| 325 |find| 330
+              |fill!| 336 |extract!| 342 |every?| 347 |eval| 359 |eq?| 411
+              |entry?| 417 |entries| 423 |empty?| 428 |empty| 433 |elt| 437
+              |dictionary| 450 |count| 459 |copy| 483 |convert| 488 |construct|
+              493 |coerce| 498 |any?| 503 = 515 |#| 521)
            'NIL
            (CONS
             (|makeByteWordVec2| 13
@@ -621,40 +621,40 @@
                   (|Record| (|:| |key| 6) (|:| |entry| 7)))
                  (|SetCategory|) (|Evalable| 7)
                  (|Evalable| (|Record| (|:| |key| 6) (|:| |entry| 7)))
-                 (|Aggregate|) (|EltableAggregate| 6 7) (|CoercibleTo| 58)
-                 (|BasicType|) (|InnerEvalable| 7 7) (|ConvertibleTo| 64)
+                 (|Aggregate|) (|EltableAggregate| 6 7) (|CoercibleTo| 56)
+                 (|BasicType|) (|InnerEvalable| 7 7) (|ConvertibleTo| 62)
                  (|InnerEvalable| (|Record| (|:| |key| 6) (|:| |entry| 7))
                                   (|Record| (|:| |key| 6) (|:| |entry| 7)))
                  (|shallowlyMutable|) (|Type|) (|Eltable| 6 7)
                  (|finiteAggregate|))
-              (|makeByteWordVec2| 64
-                                  '(1 11 0 10 12 2 14 0 0 0 15 2 6 16 0 0 17 1
-                                    6 20 0 21 1 33 0 0 34 2 25 16 0 0 46 2 7 16
-                                    0 0 47 2 0 16 0 0 48 2 19 16 0 0 1 0 0 0 1
-                                    1 0 0 43 1 1 0 0 18 19 3 21 63 0 6 6 1 2 0
-                                    16 0 25 1 3 0 7 0 6 7 31 2 15 0 51 0 1 2 15
-                                    0 51 0 1 2 0 27 6 0 28 0 0 0 1 1 17 0 0 45
-                                    2 0 27 6 0 32 2 17 0 23 0 1 2 15 0 51 0 1 2
-                                    17 0 23 0 1 2 15 0 51 0 1 4 17 23 53 0 23
-                                    23 1 2 15 23 53 0 1 3 15 23 53 0 23 1 3 21
-                                    7 0 6 7 1 2 0 7 0 6 1 1 15 43 0 44 1 15 41
-                                    0 42 2 0 16 0 25 1 1 4 6 0 1 1 20 7 0 1 1
-                                    16 23 0 1 1 15 43 0 1 1 15 41 0 1 2 18 16 7
-                                    0 1 2 17 16 23 0 1 1 4 6 0 1 1 20 7 0 1 1
-                                    16 23 0 1 2 15 23 60 0 1 2 15 7 61 0 1 2 21
-                                    0 49 0 1 2 21 0 37 0 38 2 0 0 49 0 1 2 0 0
-                                    37 0 1 3 0 0 52 0 0 1 2 0 16 0 25 1 1 12 59
-                                    0 1 1 0 39 0 40 2 0 16 6 0 1 1 0 23 0 24 2
-                                    0 0 23 0 1 1 0 39 0 1 2 0 16 6 0 1 1 4 7 0
-                                    1 2 0 50 51 0 1 2 21 0 0 7 36 1 0 23 0 1 2
-                                    15 16 51 0 1 2 15 16 62 0 1 3 8 0 0 7 7 1 3
-                                    8 0 0 41 41 1 2 8 0 0 54 1 2 8 0 0 55 1 2
-                                    10 0 0 56 1 3 10 0 0 23 23 1 2 10 0 0 57 1
-                                    3 10 0 0 43 43 1 2 0 16 0 0 1 2 18 16 7 0 1
-                                    1 0 41 0 1 1 0 16 0 1 0 0 0 22 2 0 7 0 6 29
-                                    3 0 7 0 6 7 30 1 0 0 43 1 0 0 0 1 2 18 25 7
-                                    0 1 2 17 25 23 0 1 2 15 25 51 0 1 2 15 25
-                                    62 0 1 1 0 0 0 35 1 1 64 0 1 1 0 0 43 1 1 5
-                                    58 0 1 2 15 16 51 0 1 2 15 16 62 0 1 2 19
-                                    16 0 0 48 1 15 25 0 26)))))
+              (|makeByteWordVec2| 62
+                                  '(1 11 0 10 12 2 6 14 0 0 15 1 6 18 0 19 1 31
+                                    0 0 32 2 23 14 0 0 44 2 7 14 0 0 45 2 0 14
+                                    0 0 46 2 19 14 0 0 1 0 0 0 1 1 0 0 41 1 1 0
+                                    0 16 17 3 21 61 0 6 6 1 2 0 14 0 23 1 3 0 7
+                                    0 6 7 29 2 15 0 49 0 1 2 15 0 49 0 1 2 0 25
+                                    6 0 26 0 0 0 1 1 17 0 0 43 2 0 25 6 0 30 2
+                                    17 0 21 0 1 2 15 0 49 0 1 2 17 0 21 0 1 2
+                                    15 0 49 0 1 4 17 21 51 0 21 21 1 2 15 21 51
+                                    0 1 3 15 21 51 0 21 1 3 21 7 0 6 7 1 2 0 7
+                                    0 6 1 1 15 41 0 42 1 15 39 0 40 2 0 14 0 23
+                                    1 1 4 6 0 1 1 20 7 0 1 1 16 21 0 1 1 15 41
+                                    0 1 1 15 39 0 1 2 18 14 7 0 1 2 17 14 21 0
+                                    1 1 4 6 0 1 1 20 7 0 1 1 16 21 0 1 2 15 21
+                                    58 0 1 2 15 7 59 0 1 2 21 0 47 0 1 2 21 0
+                                    35 0 36 2 0 0 47 0 1 2 0 0 35 0 1 3 0 0 50
+                                    0 0 1 2 0 14 0 23 1 1 12 57 0 1 1 0 37 0 38
+                                    2 0 14 6 0 1 1 0 21 0 22 2 0 0 21 0 1 1 0
+                                    37 0 1 2 0 14 6 0 1 1 4 7 0 1 2 0 48 49 0 1
+                                    2 21 0 0 7 34 1 0 21 0 1 2 15 14 49 0 1 2
+                                    15 14 60 0 1 3 8 0 0 7 7 1 3 8 0 0 39 39 1
+                                    2 8 0 0 52 1 2 8 0 0 53 1 2 10 0 0 54 1 3
+                                    10 0 0 21 21 1 2 10 0 0 55 1 3 10 0 0 41 41
+                                    1 2 0 14 0 0 1 2 18 14 7 0 1 1 0 39 0 1 1 0
+                                    14 0 1 0 0 0 20 2 0 7 0 6 27 3 0 7 0 6 7 28
+                                    1 0 0 41 1 0 0 0 1 2 18 23 7 0 1 2 17 23 21
+                                    0 1 2 15 23 49 0 1 2 15 23 60 0 1 1 0 0 0
+                                    33 1 1 62 0 1 1 0 0 41 1 1 5 56 0 1 2 15 14
+                                    49 0 1 2 15 14 60 0 1 2 19 14 0 0 46 1 15
+                                    23 0 24)))))
            '|lookupComplete|)) 

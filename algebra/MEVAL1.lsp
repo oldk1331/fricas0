@@ -27,8 +27,8 @@
         ((|p| (|Polynomial| (|Integer|))) (|ls1| #1=(|List| (|Symbol|)))
          (|ls2| #1#) (% (|Polynomial| (|Integer|))))
         (SPROG
-         ((|lm| (|List| (|Polynomial| (|Integer|)))) (#2=#:G31 NIL) (|v| NIL)
-          (#3=#:G30 NIL))
+         ((|lm| (|List| (|Polynomial| (|Integer|)))) (#2=#:G19 NIL) (|v| NIL)
+          (#3=#:G18 NIL))
          (SEQ
           (LETT |lm|
                 (PROGN
@@ -52,7 +52,7 @@
         ((|p| #1=(|Polynomial| (|Integer|))) (|g| (|Polynomial| (|Integer|)))
          (|lm| (|List| #1#)) (|v| #2=(|Symbol|)) (|ls| (|List| #2#))
          (% (|Boolean|)))
-        (SPROG ((#3=#:G39 NIL) (|m| NIL) (#4=#:G38 NIL))
+        (SPROG ((#3=#:G24 NIL) (|m| NIL) (#4=#:G23 NIL))
                (SEQ
                 (SPADCALL |p| |g|
                           (PROGN
@@ -69,9 +69,21 @@
 
 (DECLAIM (NOTINLINE |ModularEvaluation1;|)) 
 
+(DEFUN |ModularEvaluation1;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|ModularEvaluation1|))
+          (LETT % (GETREFV 33))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|ModularEvaluation1| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |ModularEvaluation1| ()
   (SPROG NIL
-         (PROG (#1=#:G41)
+         (PROG (#1=#:G26)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ModularEvaluation1|))
@@ -87,18 +99,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|ModularEvaluation1|)))))))))) 
-
-(DEFUN |ModularEvaluation1;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|ModularEvaluation1|))
-          (LETT % (GETREFV 33))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|ModularEvaluation1| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|ModularEvaluation1| '|infovec|
           (LIST

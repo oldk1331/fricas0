@@ -11,8 +11,8 @@
 
 (SDEFUN |SETLAT;complement;2%;4| ((|a| (%)) (% (%)))
         (SPROG
-         ((|r| (|List| S)) (|contains| (|Boolean|)) (#1=#:G19 NIL) (|c| NIL)
-          (#2=#:G18 NIL) (|b| NIL))
+         ((|r| (|List| S)) (|contains| (|Boolean|)) (#1=#:G11 NIL) (|c| NIL)
+          (#2=#:G10 NIL) (|b| NIL))
          (SEQ (LETT |r| NIL)
               (SEQ (LETT |b| NIL) (LETT #2# (QREFELT % 7)) G190
                    (COND
@@ -38,8 +38,8 @@
 
 (SDEFUN |SETLAT;complement;%L%;5| ((|a| (%)) (|pseudoTop| (|List| S)) (% (%)))
         (SPROG
-         ((|r| (|List| S)) (|contains| (|Boolean|)) (#1=#:G28 NIL) (|c| NIL)
-          (#2=#:G27 NIL) (|b| NIL))
+         ((|r| (|List| S)) (|contains| (|Boolean|)) (#1=#:G20 NIL) (|c| NIL)
+          (#2=#:G19 NIL) (|b| NIL))
          (SEQ (LETT |r| NIL)
               (SEQ (LETT |b| NIL) (LETT #2# |pseudoTop|) G190
                    (COND
@@ -76,7 +76,7 @@
 
 (SDEFUN |SETLAT;coerce;%Of;9| ((|s| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|oup| (|List| (|OutputForm|))) (#1=#:G39 NIL) (|x| NIL) (|inp| (%)))
+         ((|oup| (|List| (|OutputForm|))) (#1=#:G28 NIL) (|x| NIL) (|inp| (%)))
          (SEQ (LETT |inp| |s|) (LETT |oup| NIL)
               (SEQ (LETT |x| NIL) (LETT #1# |inp|) G190
                    (COND
@@ -91,24 +91,6 @@
               (EXIT (SPADCALL |oup| (QREFELT % 27)))))) 
 
 (DECLAIM (NOTINLINE |SubsetLattice;|)) 
-
-(DEFUN |SubsetLattice| (&REST #1=#:G40)
-  (SPROG NIL
-         (PROG (#2=#:G41)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|SubsetLattice|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |SubsetLattice;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|SubsetLattice|)))))))))) 
 
 (DEFUN |SubsetLattice;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
@@ -127,6 +109,24 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 8 (|List| |#1|))
           %))) 
+
+(DEFUN |SubsetLattice| (&REST #1=#:G29)
+  (SPROG NIL
+         (PROG (#2=#:G30)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|SubsetLattice|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |SubsetLattice;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|SubsetLattice|)))))))))) 
 
 (MAKEPROP '|SubsetLattice| '|infovec|
           (LIST

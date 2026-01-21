@@ -35,7 +35,7 @@
                   (QREFELT % 25))) 
 
 (SDEFUN |FS2;map;MAB;3| ((|f| (|Mapping| S R)) (|x| (A)) (% (B)))
-        (SPROG ((#1=#:G42 NIL))
+        (SPROG ((#1=#:G34 NIL))
                (SPADCALL (|FS2;smpmap| |f| (SPADCALL |x| (QREFELT % 23)) %)
                          (PROG2
                              (LETT #1#
@@ -53,25 +53,6 @@
         (|FS2;smpmap| |f| (SPADCALL |x| (QREFELT % 23)) %)) 
 
 (DECLAIM (NOTINLINE |FunctionSpaceFunctions2;|)) 
-
-(DEFUN |FunctionSpaceFunctions2| (&REST #1=#:G157)
-  (SPROG NIL
-         (PROG (#2=#:G158)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|FunctionSpaceFunctions2|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |FunctionSpaceFunctions2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|FunctionSpaceFunctions2|)))))))))) 
 
 (DEFUN |FunctionSpaceFunctions2;| (|#1| |#2| |#3| |#4|)
   (SPROG
@@ -102,6 +83,25 @@
        ('T (QSETREFV % 11 (CONS (|dispatchFunction| |FS2;map;MAB;3|) %)))))
      ('T (QSETREFV % 11 (CONS (|dispatchFunction| |FS2;map;MAB;4|) %))))
     %))) 
+
+(DEFUN |FunctionSpaceFunctions2| (&REST #1=#:G144)
+  (SPROG NIL
+         (PROG (#2=#:G145)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|FunctionSpaceFunctions2|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |FunctionSpaceFunctions2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|FunctionSpaceFunctions2|)))))))))) 
 
 (MAKEPROP '|FunctionSpaceFunctions2| '|infovec|
           (LIST

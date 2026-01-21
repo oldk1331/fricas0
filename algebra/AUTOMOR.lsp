@@ -69,7 +69,7 @@
 (SDEFUN |AUTOMOR;iterat|
         ((|f| (|Mapping| R R)) (|g| (|Mapping| R R)) (|n| (|Integer|))
          (|r| (R)) (% (R)))
-        (SPROG ((#1=#:G41 NIL) (#2=#:G39 NIL))
+        (SPROG ((#1=#:G36 NIL) (#2=#:G34 NIL))
                (COND
                 ((< |n| 0)
                  (|AUTOMOR;iter| |g|
@@ -86,7 +86,7 @@
 
 (SDEFUN |AUTOMOR;iter|
         ((|f| (|Mapping| R R)) (|n| (|NonNegativeInteger|)) (|r| (R)) (% (R)))
-        (SPROG ((#1=#:G49 NIL) (|i| NIL))
+        (SPROG ((#1=#:G42 NIL) (|i| NIL))
                (SEQ
                 (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -137,22 +137,6 @@
 
 (DECLAIM (NOTINLINE |Automorphism;|)) 
 
-(DEFUN |Automorphism| (#1=#:G61)
-  (SPROG NIL
-         (PROG (#2=#:G62)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|Automorphism|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Automorphism;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|Automorphism|)))))))))) 
-
 (DEFUN |Automorphism;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -168,6 +152,22 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 7 (|Mapping| |#1| |#1| (|Integer|)))
           %))) 
+
+(DEFUN |Automorphism| (#1=#:G53)
+  (SPROG NIL
+         (PROG (#2=#:G54)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|Automorphism|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Automorphism;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|Automorphism|)))))))))) 
 
 (MAKEPROP '|Automorphism| '|infovec|
           (LIST

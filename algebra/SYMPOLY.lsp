@@ -1,8 +1,8 @@
 
 (SDEFUN |SYMPOLY;*;3%;1| ((|p1| (%)) (|p2| (%)) (% (%)))
         (SPROG
-         ((#1=#:G20 NIL) (#2=#:G19 (%)) (#3=#:G21 (%)) (#4=#:G30 NIL)
-          (|t2| NIL) (#5=#:G29 NIL) (#6=#:G28 NIL) (|t1| NIL))
+         ((#1=#:G9 NIL) (#2=#:G8 (%)) (#3=#:G10 (%)) (#4=#:G19 NIL) (|t2| NIL)
+          (#5=#:G18 NIL) (#6=#:G17 NIL) (|t1| NIL))
          (SEQ
           (COND ((OR (NULL |p1|) (NULL |p2|)) (|spadConstant| % 9))
                 ((SPADCALL (QCAR (|SPADfirst| |p1|)) (QREFELT % 12))
@@ -48,8 +48,8 @@
 
 (SDEFUN |SYMPOLY;*;3%;2| ((|p1| (%)) (|p2| (%)) (% (%)))
         (SPROG
-         ((#1=#:G32 NIL) (#2=#:G31 (%)) (#3=#:G33 (%)) (|r| (R)) (#4=#:G46 NIL)
-          (|t2| NIL) (#5=#:G45 NIL) (#6=#:G44 NIL) (|t1| NIL))
+         ((#1=#:G21 NIL) (#2=#:G20 (%)) (#3=#:G22 (%)) (|r| (R)) (#4=#:G31 NIL)
+          (|t2| NIL) (#5=#:G30 NIL) (#6=#:G29 NIL) (|t1| NIL))
          (SEQ
           (COND ((OR (NULL |p1|) (NULL |p2|)) (|spadConstant| % 9))
                 ((SPADCALL (QCAR (|SPADfirst| |p1|)) (QREFELT % 12))
@@ -101,26 +101,9 @@
 
 (DECLAIM (NOTINLINE |SymmetricPolynomial;|)) 
 
-(DEFUN |SymmetricPolynomial| (#1=#:G70)
-  (SPROG NIL
-         (PROG (#2=#:G71)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|SymmetricPolynomial|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|SymmetricPolynomial;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|SymmetricPolynomial|)))))))))) 
-
 (DEFUN |SymmetricPolynomial;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G67 NIL) (#2=#:G68 NIL) (#3=#:G69 NIL) (% NIL)
+   ((|pv$| NIL) (#1=#:G50 NIL) (#2=#:G51 NIL) (#3=#:G52 NIL) (% NIL)
     (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -282,6 +265,23 @@
       (QSETREFV % 20 (CONS (|dispatchFunction| |SYMPOLY;*;3%;1|) %)))
      ('T (QSETREFV % 20 (CONS (|dispatchFunction| |SYMPOLY;*;3%;2|) %))))
     %))) 
+
+(DEFUN |SymmetricPolynomial| (#1=#:G53)
+  (SPROG NIL
+         (PROG (#2=#:G54)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|SymmetricPolynomial|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|SymmetricPolynomial;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|SymmetricPolynomial|)))))))))) 
 
 (MAKEPROP '|SymmetricPolynomial| '|infovec|
           (LIST

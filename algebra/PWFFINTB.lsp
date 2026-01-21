@@ -121,13 +121,13 @@
           (|henselInfo|
            (|Record| (|:| |plist| #11#)
                      (|:| |modulo| (|SparseUnivariatePolynomial| E))))
-          (|deg| (|PositiveInteger|)) (#12=#:G59 NIL)
+          (|deg| (|PositiveInteger|)) (#12=#:G31 NIL)
           (|primaries|
            (|List|
             (|SparseUnivariatePolynomial| (|SparseUnivariatePolynomial| E))))
-          (#13=#:G80 NIL) (|ff| NIL) (#14=#:G79 NIL)
+          (#13=#:G52 NIL) (|ff| NIL) (#14=#:G51 NIL)
           (|redFactors| (|List| (|SparseUnivariatePolynomial| |sae|)))
-          (#15=#:G78 NIL) (|f| NIL) (#16=#:G77 NIL)
+          (#15=#:G50 NIL) (|f| NIL) (#16=#:G49 NIL)
           (|factorListSAE|
            (|List|
             (|Record|
@@ -158,7 +158,7 @@
                         . #8#)
                     (IF (|has| #24# . #9#)
                         . #10#))))
-          (|irrPoly| (|SparseUnivariatePolynomial| K)) (#25=#:G40 NIL)
+          (|irrPoly| (|SparseUnivariatePolynomial| K)) (#25=#:G21 NIL)
           (|r| #26=(|NonNegativeInteger|)) (|disc0| (R)) (|n| #26#))
          (SEQ (LETT |n| (SPADCALL |poly0| (QREFELT % 36)))
               (LETT |disc0| (SPADCALL |poly0| (QREFELT % 37)))
@@ -775,19 +775,19 @@
           (|base|
            (|Record| (|:| |basis| (|Matrix| R)) (|:| |basisDen| R)
                      (|:| |basisInv| (|Matrix| R))))
-          (|degPp| (|NonNegativeInteger|)) (#1=#:G123 NIL) (|pp| NIL)
-          (#2=#:G124 NIL) (|k| NIL) (#3=#:G125 NIL) (|qq| NIL)
+          (|degPp| (|NonNegativeInteger|)) (#1=#:G95 NIL) (|pp| NIL)
+          (#2=#:G96 NIL) (|k| NIL) (#3=#:G97 NIL) (|qq| NIL)
           (|degPrime| (|NonNegativeInteger|)) (|henselFactors| #4=(|List| UP))
           (|henselInfo| (|Record| (|:| |plist| #4#) (|:| |modulo| R)))
-          (|deg| (|PositiveInteger|)) (#5=#:G101 NIL) (|primaries| (|List| UP))
-          (#6=#:G122 NIL) (|ff| NIL) (#7=#:G121 NIL)
+          (|deg| (|PositiveInteger|)) (#5=#:G73 NIL) (|primaries| (|List| UP))
+          (#6=#:G94 NIL) (|ff| NIL) (#7=#:G93 NIL)
           (|redPrimaries| (|List| (|SparseUnivariatePolynomial| |sae|)))
-          (#8=#:G120 NIL) (|f| NIL) (#9=#:G119 NIL)
-          (|expons| (|List| (|NonNegativeInteger|))) (#10=#:G118 NIL)
-          (#11=#:G117 NIL) (|primes| (|List| UP)) (#12=#:G116 NIL)
-          (#13=#:G115 NIL)
+          (#8=#:G92 NIL) (|f| NIL) (#9=#:G91 NIL)
+          (|expons| (|List| (|NonNegativeInteger|))) (#10=#:G90 NIL)
+          (#11=#:G89 NIL) (|primes| (|List| UP)) (#12=#:G88 NIL)
+          (#13=#:G87 NIL)
           (|redPrimes| (|List| (|SparseUnivariatePolynomial| |sae|)))
-          (#14=#:G114 NIL) (#15=#:G113 NIL)
+          (#14=#:G86 NIL) (#15=#:G85 NIL)
           (|factorListSAE|
            (|List|
             (|Record|
@@ -1066,7 +1066,7 @@
 
 (SDEFUN |PWFFINTB;listSquaredFactors| ((|px| (R)) (% (|List| R)))
         (SPROG
-         ((|ans| (|List| R)) (#1=#:G136 NIL) (|f| NIL)
+         ((|ans| (|List| R)) (#1=#:G108 NIL) (|f| NIL)
           (|factored| (|Factored| R)))
          (SEQ (LETT |ans| NIL) (LETT |factored| (SPADCALL |px| (QREFELT % 72)))
               (SEQ (LETT |f| NIL)
@@ -1093,7 +1093,7 @@
           (|lb|
            (|Record| (|:| |basis| #2#) (|:| |basisDen| R)
                      (|:| |basisInv| (|Matrix| R)) (|:| |discr| R)))
-          (#3=#:G145 NIL) (|prime| NIL) (|redDisc| (R)) (|singList| (|List| R))
+          (#3=#:G117 NIL) (|prime| NIL) (|redDisc| (R)) (|singList| (|List| R))
           (|n| (|PositiveInteger|)) (|p| (UP)))
          (SEQ (LETT |p| (SPADCALL (QREFELT % 68)))
               (LETT |disc| (SPADCALL |p| (QREFELT % 37)))
@@ -1142,28 +1142,6 @@
 
 (DECLAIM (NOTINLINE |PAdicWildFunctionFieldIntegralBasis;|)) 
 
-(DEFUN |PAdicWildFunctionFieldIntegralBasis| (&REST #1=#:G146)
-  (SPROG NIL
-         (PROG (#2=#:G147)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PAdicWildFunctionFieldIntegralBasis|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function| |PAdicWildFunctionFieldIntegralBasis;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|PAdicWildFunctionFieldIntegralBasis|)))))))))) 
-
 (DEFUN |PAdicWildFunctionFieldIntegralBasis;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -1187,6 +1165,28 @@
     (QSETREFV % 9 |#4|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |PAdicWildFunctionFieldIntegralBasis| (&REST #1=#:G118)
+  (SPROG NIL
+         (PROG (#2=#:G119)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PAdicWildFunctionFieldIntegralBasis|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function| |PAdicWildFunctionFieldIntegralBasis;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|PAdicWildFunctionFieldIntegralBasis|)))))))))) 
 
 (MAKEPROP '|PAdicWildFunctionFieldIntegralBasis| '|infovec|
           (LIST

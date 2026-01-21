@@ -59,22 +59,6 @@
 
 (DECLAIM (NOTINLINE |TextFile;|)) 
 
-(DEFUN |TextFile| ()
-  (SPROG NIL
-         (PROG (#1=#:G50)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|TextFile|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|TextFile|
-                             (LIST (CONS NIL (CONS 1 (|TextFile;|))))))
-                    (LETT #1# T))
-                (COND ((NOT #1#) (HREM |$ConstructorCache| '|TextFile|)))))))))) 
-
 (DEFUN |TextFile;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -87,9 +71,25 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 6
                     (|Record| (|:| |fileName| (|FileName|))
-                              (|:| |fileState| (|SExpression|))
+                              (|:| |fileState| (|BasicFile|))
                               (|:| |fileIOmode| (|String|))))
           %))) 
+
+(DEFUN |TextFile| ()
+  (SPROG NIL
+         (PROG (#1=#:G44)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|TextFile|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|TextFile|
+                             (LIST (CONS NIL (CONS 1 (|TextFile;|))))))
+                    (LETT #1# T))
+                (COND ((NOT #1#) (HREM |$ConstructorCache| '|TextFile|)))))))))) 
 
 (MAKEPROP '|TextFile| '|infovec|
           (LIST

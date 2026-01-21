@@ -142,22 +142,6 @@
 
 (DECLAIM (NOTINLINE |FreeMagma;|)) 
 
-(DEFUN |FreeMagma| (#1=#:G50)
-  (SPROG NIL
-         (PROG (#2=#:G51)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|FreeMagma|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|FreeMagma;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|FreeMagma|)))))))))) 
-
 (DEFUN |FreeMagma;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -173,6 +157,22 @@
           (QSETREFV % 7 (|Record| (|:| |left| %) (|:| |right| %)))
           (QSETREFV % 8 (|Union| |#1| (QREFELT % 7)))
           %))) 
+
+(DEFUN |FreeMagma| (#1=#:G40)
+  (SPROG NIL
+         (PROG (#2=#:G41)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|FreeMagma|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|FreeMagma;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|FreeMagma|)))))))))) 
 
 (MAKEPROP '|FreeMagma| '|infovec|
           (LIST

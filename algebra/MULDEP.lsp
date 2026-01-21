@@ -10,11 +10,11 @@
          (|q| (|Fraction| (|Integer|)))
          (% (|Union| (|Vector| (|Fraction| (|Integer|))) "failed")))
         (SPROG
-         ((|qv| #1=(|Vector| (|Fraction| (|Integer|)))) (#2=#:G46 NIL)
-          (|i| NIL) (#3=#:G45 NIL) (|m| (|Matrix| (|Fraction| (|Integer|))))
-          (#4=#:G44 NIL) (|j| NIL) (#5=#:G43 NIL) (#6=#:G42 NIL) (#7=#:G41 NIL)
+         ((|qv| #1=(|Vector| (|Fraction| (|Integer|)))) (#2=#:G28 NIL)
+          (|i| NIL) (#3=#:G27 NIL) (|m| (|Matrix| (|Fraction| (|Integer|))))
+          (#4=#:G26 NIL) (|j| NIL) (#5=#:G25 NIL) (#6=#:G24 NIL) (#7=#:G23 NIL)
           (|tm| #8=(|Matrix| (|Integer|)))
-          (|li| (|List| (|NonNegativeInteger|))) (#9=#:G40 NIL) (#10=#:G39 NIL)
+          (|li| (|List| (|NonNegativeInteger|))) (#9=#:G22 NIL) (#10=#:G21 NIL)
           (|k0| (|NonNegativeInteger|)) (|bas| #11=(|Vector| (|Integer|)))
           (|dr| (|Record| (|:| |basis| #11#) (|:| |transform| #8#))) (|v| #1#)
           (|n| (|NonNegativeInteger|)))
@@ -129,9 +129,22 @@
 
 (DECLAIM (NOTINLINE |MultiplicativeDependence;|)) 
 
+(DEFUN |MultiplicativeDependence;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|MultiplicativeDependence|))
+          (LETT % (GETREFV 30))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|MultiplicativeDependence| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |MultiplicativeDependence| ()
   (SPROG NIL
-         (PROG (#1=#:G48)
+         (PROG (#1=#:G30)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|MultiplicativeDependence|))
@@ -149,19 +162,6 @@
                  ((NOT #1#)
                   (HREM |$ConstructorCache|
                         '|MultiplicativeDependence|)))))))))) 
-
-(DEFUN |MultiplicativeDependence;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|MultiplicativeDependence|))
-          (LETT % (GETREFV 30))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|MultiplicativeDependence| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|MultiplicativeDependence| '|infovec|
           (LIST

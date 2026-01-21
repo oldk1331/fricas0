@@ -8,6 +8,6 @@
         (T (SETQ |OrderedAbelianSemiGroup;AL| (|OrderedAbelianSemiGroup;|))))) 
 
 (DEFUN |OrderedAbelianSemiGroup;| ()
-  (SPROG ((#1=#:G1 NIL))
+  (SPROG ((#1=#:G0 NIL))
          (PROG1 (LETT #1# (|Join| (|OrderedSet|) (|AbelianSemiGroup|)))
            (SETELT #1# 0 '(|OrderedAbelianSemiGroup|))))) 

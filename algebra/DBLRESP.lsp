@@ -1,6 +1,6 @@
 
 (SDEFUN |DBLRESP;remove0| ((|p| (UP)) (% (UP)))
-        (SPROG ((#1=#:G6 NIL))
+        (SPROG ((#1=#:G1 NIL))
                (SPADCALL
                 (PROG2
                     (LETT #1#
@@ -28,7 +28,7 @@
 (SDEFUN |DBLRESP;doubleResultant;RMUP;4|
         ((|h| (R)) (|derivation| (|Mapping| UP UP)) (% (UP)))
         (SPROG
-         ((|r| (|SparseUnivariatePolynomial| UP)) (|d| (UP)) (#1=#:G19 NIL)
+         ((|r| (|SparseUnivariatePolynomial| UP)) (|d| (UP)) (#1=#:G9 NIL)
           (|g| (UP)) (|cd| (|Record| (|:| |num| UPUP) (|:| |den| UP))))
          (SEQ
           (LETT |cd| (SPADCALL (SPADCALL |h| (QREFELT % 29)) (QREFELT % 32)))
@@ -75,25 +75,6 @@
 
 (DECLAIM (NOTINLINE |DoubleResultantPackage;|)) 
 
-(DEFUN |DoubleResultantPackage| (&REST #1=#:G25)
-  (SPROG NIL
-         (PROG (#2=#:G26)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|DoubleResultantPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |DoubleResultantPackage;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|DoubleResultantPackage|)))))))))) 
-
 (DEFUN |DoubleResultantPackage;| (|#1| |#2| |#3| |#4|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -116,6 +97,25 @@
     (QSETREFV % 9 |#4|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |DoubleResultantPackage| (&REST #1=#:G14)
+  (SPROG NIL
+         (PROG (#2=#:G15)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|DoubleResultantPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |DoubleResultantPackage;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|DoubleResultantPackage|)))))))))) 
 
 (MAKEPROP '|DoubleResultantPackage| '|infovec|
           (LIST

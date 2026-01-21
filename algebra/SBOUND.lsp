@@ -19,12 +19,12 @@
 
 (SDEFUN |SBOUND;sunion;3%;6| ((|x| (%)) (|y| (%)) (% (%)))
         (SPROG
-         ((|ymax| (PT)) (#1=#:G22 NIL) (|ymin| (PT)) (|xmax| (PT))
-          (|xmin| (PT)) (#2=#:G81 NIL) (|res| (%)) (#3=#:G83 NIL) (|ptr| NIL)
-          (|p| (|List| %)) (#4=#:G23 NIL) (#5=#:G82 NIL))
+         ((|ymax| (PT)) (#1=#:G21 NIL) (|ymin| (PT)) (|xmax| (PT))
+          (|xmin| (PT)) (#2=#:G55 NIL) (|res| (%)) (#3=#:G57 NIL) (|ptr| NIL)
+          (|p| (|List| %)) (#4=#:G22 NIL) (#5=#:G56 NIL))
          (SEQ
           (EXIT
-           (SEQ (COND ((QEQCAR |x| 0) (PROGN (LETT #2# |y|) (GO #6=#:G80))))
+           (SEQ (COND ((QEQCAR |x| 0) (PROGN (LETT #2# |y|) (GO #6=#:G54))))
                 (COND ((QEQCAR |y| 0) (PROGN (LETT #2# |x|) (GO #6#))))
                 (COND
                  ((QEQCAR |x| 2)
@@ -526,8 +526,8 @@
 
 (SDEFUN |SBOUND;extendToPoint;%PT%;7| ((|n| (%)) (|p| (PT)) (% (%)))
         (SPROG
-         ((|xmax| (PT)) (|xmin| (PT)) (#1=#:G96 NIL) (|res| (%)) (#2=#:G97 NIL)
-          (|ptr| NIL) (|pa| (|List| %)) (#3=#:G23 NIL))
+         ((|xmax| (PT)) (|xmin| (PT)) (#1=#:G70 NIL) (|res| (%)) (#2=#:G71 NIL)
+          (|ptr| NIL) (|pa| (|List| %)) (#3=#:G22 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -535,7 +535,7 @@
              ((QEQCAR |n| 0)
               (PROGN
                (LETT #1# (CONS 1 (VECTOR '|box| |p| |p|)))
-               (GO #4=#:G95))))
+               (GO #4=#:G69))))
             (COND
              ((QEQCAR |n| 2)
               (SEQ
@@ -593,12 +593,12 @@
 
 (SDEFUN |SBOUND;containsPoint?;%PTB;8| ((|n| (%)) (|p| (PT)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G22 NIL) (#2=#:G115 NIL) (|rDist| #3=(|DoubleFloat|))
-          (|pDist| #3#) (|pRel| (PT)) (#4=#:G116 NIL) (|sub| NIL)
-          (|pa| (|List| %)) (#5=#:G23 NIL))
+         ((#1=#:G21 NIL) (#2=#:G82 NIL) (|rDist| #3=(|DoubleFloat|))
+          (|pDist| #3#) (|pRel| (PT)) (#4=#:G83 NIL) (|sub| NIL)
+          (|pa| (|List| %)) (#5=#:G22 NIL))
          (SEQ
           (EXIT
-           (SEQ (COND ((QEQCAR |n| 0) (PROGN (LETT #2# NIL) (GO #6=#:G114))))
+           (SEQ (COND ((QEQCAR |n| 0) (PROGN (LETT #2# NIL) (GO #6=#:G81))))
                 (COND
                  ((QEQCAR |n| 2)
                   (SEQ
@@ -875,11 +875,11 @@
         (SPROG
          ((|y| #1=(|DoubleFloat|)) (|x| #1#) (|yp| #2=(|DoubleFloat|))
           (|xp| #3=(|DoubleFloat|)) (|b| #2#) (|a| #3#) (|rad| (PT))
-          (#4=#:G22 NIL) (|pRel| (PT)) (|cent| (PT)) (#5=#:G130 NIL)
+          (#4=#:G21 NIL) (|pRel| (PT)) (|cent| (PT)) (#5=#:G96 NIL)
           (|divisor| (|DoubleFloat|)) (|ab| (|DoubleFloat|)) (|centre| (PT)))
          (SEQ
           (EXIT
-           (SEQ (COND ((QEQCAR |n| 0) (PROGN (LETT #5# |p|) (GO #6=#:G129))))
+           (SEQ (COND ((QEQCAR |n| 0) (PROGN (LETT #5# |p|) (GO #6=#:G95))))
                 (COND
                  ((QEQCAR |n| 2)
                   (|error| "cant compute lineIntersect with compound border")))
@@ -1144,29 +1144,29 @@
 (SDEFUN |SBOUND;isNull?;%B;10| ((|n| (%)) (% (|Boolean|))) (QEQCAR |n| 0)) 
 
 (SDEFUN |SBOUND;isEllipse?;%B;11| ((|n| (%)) (% (|Boolean|)))
-        (SPROG ((#1=#:G139 NIL))
+        (SPROG ((#1=#:G105 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((NULL (QEQCAR |n| 1))
-                    (PROGN (LETT #1# NIL) (GO #2=#:G138))))
+                    (PROGN (LETT #1# NIL) (GO #2=#:G104))))
                   (EXIT (EQUAL (QVELT (CDR |n|) 0) '|ellipoid|))))
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |SBOUND;isBox?;%B;12| ((|n| (%)) (% (|Boolean|)))
-        (SPROG ((#1=#:G147 NIL))
+        (SPROG ((#1=#:G113 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((NULL (QEQCAR |n| 1))
-                    (PROGN (LETT #1# NIL) (GO #2=#:G146))))
+                    (PROGN (LETT #1# NIL) (GO #2=#:G112))))
                   (EXIT (EQUAL (QVELT (CDR |n|) 0) '|box|))))
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |SBOUND;getMin;%PT;13| ((|n| (%)) (% (PT)))
-        (SPROG ((#1=#:G22 NIL) (#2=#:G152 NIL))
+        (SPROG ((#1=#:G21 NIL) (#2=#:G118 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -1236,7 +1236,7 @@
                               2)
                              (QREFELT % 23))
                             (QREFELT % 45)))
-                     (GO #4=#:G151))))
+                     (GO #4=#:G117))))
                   (EXIT
                    (QVELT
                     (PROG2 (LETT #1# |n|)
@@ -1263,7 +1263,7 @@
                 #4# (EXIT #2#)))) 
 
 (SDEFUN |SBOUND;getMax;%PT;14| ((|n| (%)) (% (PT)))
-        (SPROG ((#1=#:G22 NIL) (#2=#:G157 NIL))
+        (SPROG ((#1=#:G21 NIL) (#2=#:G123 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -1333,7 +1333,7 @@
                               2)
                              (QREFELT % 24))
                             (QREFELT % 45)))
-                     (GO #4=#:G156))))
+                     (GO #4=#:G122))))
                   (EXIT
                    (QVELT
                     (PROG2 (LETT #1# |n|)
@@ -1360,7 +1360,7 @@
                 #4# (EXIT #2#)))) 
 
 (SDEFUN |SBOUND;getCentre;%PT;15| ((|n| (%)) (% (PT)))
-        (SPROG ((#1=#:G22 NIL) (#2=#:G162 NIL))
+        (SPROG ((#1=#:G21 NIL) (#2=#:G128 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -1397,7 +1397,7 @@
                                                                    %)))))
                                               #1#))
                             1))
-                     (GO #4=#:G161))))
+                     (GO #4=#:G127))))
                   (EXIT
                    (SPADCALL (|mk_DF| 5 -1)
                              (SPADCALL
@@ -1478,8 +1478,8 @@
 
 (SDEFUN |SBOUND;coerce;%Of;17| ((|n| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|sub| (|OutputForm|)) (#1=#:G176 NIL) (#2=#:G23 NIL) (|x| NIL)
-          (#3=#:G175 NIL) (#4=#:G174 NIL) (#5=#:G22 NIL) (|s| (|OutputForm|))
+         ((|sub| (|OutputForm|)) (#1=#:G142 NIL) (#2=#:G22 NIL) (|x| NIL)
+          (#3=#:G141 NIL) (#4=#:G140 NIL) (#5=#:G21 NIL) (|s| (|OutputForm|))
           (|ty| (|OutputForm|)))
          (SEQ
           (EXIT
@@ -1493,7 +1493,7 @@
                 (LETT |s|
                       (SPADCALL (SPADCALL '|bound | (QREFELT % 51)) |ty|
                                 (QREFELT % 53)))
-                (COND ((QEQCAR |n| 0) (PROGN (LETT #4# |s|) (GO #6=#:G173))))
+                (COND ((QEQCAR |n| 0) (PROGN (LETT #4# |s|) (GO #6=#:G139))))
                 (COND
                  ((QEQCAR |n| 1)
                   (PROGN
@@ -1623,22 +1623,6 @@
 
 (DECLAIM (NOTINLINE |SBoundary;|)) 
 
-(DEFUN |SBoundary| (#1=#:G177)
-  (SPROG NIL
-         (PROG (#2=#:G178)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|SBoundary|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|SBoundary;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|SBoundary|)))))))))) 
-
 (DEFUN |SBoundary;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -1661,6 +1645,22 @@
                                   (|Record| (|:| |ty| (|Symbol|))
                                             (|:| |parts| (|List| %))))))
           %))) 
+
+(DEFUN |SBoundary| (#1=#:G143)
+  (SPROG NIL
+         (PROG (#2=#:G144)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|SBoundary|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|SBoundary;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|SBoundary|)))))))))) 
 
 (MAKEPROP '|SBoundary| '|infovec|
           (LIST

@@ -100,7 +100,6 @@
    (|frame|                          . |interpreter|)
    (|help|                           . |interpreter|)
    (|history|                        . |interpreter|)
-;; (|input|                          . |interpreter|)
    (|lisp|                           . |development|)
    (|library|                        . |interpreter|)
    (|load|                           . |interpreter|)
@@ -206,8 +205,6 @@
   (|canCoerce| |hash| EQUAL |count|)
   (|canCoerceFrom| |hash| EQUAL |count|)
   (|coerceConvertMmSelection| |hash| EQUAL |count|)
-; (|getModemapsFromDatabase| |hash| EQUAL |count|)
-; (|getOperationAlistFromLisplib| |hash| EQUAL |count|)
   (|isLegitimateMode| |hash| EQUAL |count|)
   (|isValidType| |hash| EQUAL |count|)
   (|resolveTT|   |hash| EQUAL |count|)
@@ -216,7 +213,6 @@
   (|findRetractMms| |hash| EQUAL |count|)
   (|getConstantFromDomain|  |hash| EQUAL |count|)
   (|interpLookup| |hash| EQUAL |count|)
-;  (|isSubDomain|   |hash| EQUAL |count|)
 ))
 
 ;; the following symbol holds the canonical "failed" value
@@ -287,6 +283,7 @@
 (SETQ |$DoubleFloat| '(|DoubleFloat|))
 
 (SETQ |$Integer| '(|Integer|))
+(SETQ |$SingleInteger| '(|SingleInteger|))
 (SETQ |$ComplexInteger| (LIST '|Complex| |$Integer|))
 (SETQ |$NonNegativeInteger| '(|NonNegativeInteger|))
 (SETQ |$PositiveInteger| '(|PositiveInteger|))
@@ -296,8 +293,6 @@
 (SETQ |$Void|  '(|Void|))
 (SETQ |$QuotientField| '|Fraction|)
 (SETQ |$FunctionalExpression| '|Expression|)
-(SETQ |$DoubleFloat| '(|DoubleFloat|))
-(SETQ |$SingleInteger| '(|SingleInteger|))
 
 (SETQ |$InteractiveFrame| (LIST (LIST NIL)))
 (SETQ |$DomainsInScope| (LIST NIL))

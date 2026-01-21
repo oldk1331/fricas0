@@ -233,7 +233,7 @@
         (SPROG
          ((|tmp| (|String|)) (|base| (|String|)) (|tmp3| #1=(|String|))
           (|tmp2| #1#) (|tmp1| #1#) (|n| (|NonNegativeInteger|))
-          (#2=#:G183 NIL) (|u| NIL) (#3=#:G182 NIL))
+          (#2=#:G156 NIL) (|u| NIL) (#3=#:G155 NIL))
          (SEQ
           (COND ((EQUAL |op| '|theMap|) "<mtext>theMap(...)</mtext>")
                 ((EQUAL |op| 'AGGLST)
@@ -529,7 +529,7 @@
         ((|args| (|List| (|OutputForm|))) (|prec| (|Integer|)) (% (|String|)))
         (SPROG
          ((|arg2| (|OutputForm|)) (|s| (|String|)) (|commaTest| (|String|))
-          (#1=#:G192 NIL) (|i| NIL) (|commaS| (|String|)))
+          (#1=#:G165 NIL) (|i| NIL) (|commaS| (|String|)))
          (SEQ (LETT |arg2| (SPADCALL |args| (QREFELT % 48)))
               (COND
                ((SPADCALL |arg2| (QREFELT % 52))
@@ -787,7 +787,7 @@
         ((|op| (|Symbol|)) (|sep| (|String|)) (|opprec| (|Integer|))
          (|args| (|List| (|OutputForm|))) (|prec| (|Integer|)) (% (|String|)))
         (SPROG
-         ((|s| (|String|)) (|l| (|List| (|String|))) (#1=#:G231 NIL) (|a| NIL)
+         ((|s| (|String|)) (|l| (|List| (|String|))) (#1=#:G204 NIL) (|a| NIL)
           (|opPrec| (|Integer|)) (|ops| (|String|)) (|p| (|Integer|)))
          (SEQ
           (COND ((NULL |args|) "")
@@ -849,7 +849,7 @@
          ((|op| #1=(|Symbol|)) (|nargs| (|Integer|))
           (|args| (|List| (|OutputForm|))) (|opf| (|OutputForm|))
           (|i| (|Integer|)) (|len| (|Integer|)) (|str| (|String|))
-          (#2=#:G266 NIL) (|es| #1#) (|nstr| (|String|))
+          (#2=#:G239 NIL) (|es| #1#) (|nstr| (|String|))
           (|intSplitLen| (|Integer|)))
          (SEQ
           (EXIT
@@ -932,7 +932,7 @@
                                ((EQUAL |es| '|%pi|)
                                 (PROGN
                                  (LETT #2# "<mi>&#x003C0;</mi>")
-                                 (GO #4=#:G265)))
+                                 (GO #4=#:G238)))
                                ((EQUAL |es| '|%e|)
                                 (PROGN
                                  (LETT #2# "<mi>&#x02147;</mi>")
@@ -1057,23 +1057,6 @@
 
 (DECLAIM (NOTINLINE |MathMLFormat;|)) 
 
-(DEFUN |MathMLFormat| ()
-  (SPROG NIL
-         (PROG (#1=#:G268)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|MathMLFormat|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|MathMLFormat|
-                             (LIST (CONS NIL (CONS 1 (|MathMLFormat;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#) (HREM |$ConstructorCache| '|MathMLFormat|)))))))))) 
-
 (DEFUN |MathMLFormat;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
@@ -1115,6 +1098,23 @@
                           "<mo>$</mo>" "<mo>&#x221E;</mo>"
                           "<mo>&#x0413;</mo>"))
           %))) 
+
+(DEFUN |MathMLFormat| ()
+  (SPROG NIL
+         (PROG (#1=#:G241)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|MathMLFormat|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|MathMLFormat|
+                             (LIST (CONS NIL (CONS 1 (|MathMLFormat;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#) (HREM |$ConstructorCache| '|MathMLFormat|)))))))))) 
 
 (MAKEPROP '|MathMLFormat| '|infovec|
           (LIST

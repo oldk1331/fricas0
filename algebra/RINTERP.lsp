@@ -3,13 +3,13 @@
         ((|xlist| (|List| F)) (|ylist| (|List| F)) (|m| (|NonNegativeInteger|))
          (|k| (|NonNegativeInteger|)) (% (|Fraction| (|Polynomial| F))))
         (SPROG
-         ((|reslist| (|List| (|List| (|Polynomial| F)))) (#1=#:G71 NIL)
-          (|i| NIL) (#2=#:G70 NIL) (#3=#:G69 NIL) (#4=#:G68 NIL)
+         ((|reslist| (|List| (|List| (|Polynomial| F)))) (#1=#:G43 NIL)
+          (|i| NIL) (#2=#:G42 NIL) (#3=#:G41 NIL) (#4=#:G40 NIL)
           (|res| (|List| (|Vector| F))) (|collist| (|List| (|List| F)))
-          (#5=#:G67 NIL) (#6=#:G66 NIL) (#7=#:G65 NIL) (|j| NIL) (#8=#:G64 NIL)
-          (#9=#:G63 NIL) (#10=#:G62 NIL) (|tempvec| (|List| F)) (#11=#:G61 NIL)
-          (#12=#:G60 NIL) (#13=#:G59 NIL) (#14=#:G58 NIL) (#15=#:G57 NIL)
-          (#16=#:G56 NIL))
+          (#5=#:G39 NIL) (#6=#:G38 NIL) (#7=#:G37 NIL) (|j| NIL) (#8=#:G36 NIL)
+          (#9=#:G35 NIL) (#10=#:G34 NIL) (|tempvec| (|List| F)) (#11=#:G33 NIL)
+          (#12=#:G32 NIL) (#13=#:G31 NIL) (#14=#:G30 NIL) (#15=#:G29 NIL)
+          (#16=#:G28 NIL))
          (SEQ
           (COND
            ((SPADCALL (LENGTH |xlist|) (LENGTH |ylist|) (QREFELT % 10))
@@ -171,25 +171,6 @@
 
 (DECLAIM (NOTINLINE |RationalInterpolation;|)) 
 
-(DEFUN |RationalInterpolation| (&REST #1=#:G72)
-  (SPROG NIL
-         (PROG (#2=#:G73)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T))
-                                               (HGET |$ConstructorCache|
-                                                     '|RationalInterpolation|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |RationalInterpolation;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|RationalInterpolation|)))))))))) 
-
 (DEFUN |RationalInterpolation;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -206,6 +187,25 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |RationalInterpolation| (&REST #1=#:G44)
+  (SPROG NIL
+         (PROG (#2=#:G45)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL T))
+                                               (HGET |$ConstructorCache|
+                                                     '|RationalInterpolation|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |RationalInterpolation;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|RationalInterpolation|)))))))))) 
 
 (MAKEPROP '|RationalInterpolation| '|infovec|
           (LIST

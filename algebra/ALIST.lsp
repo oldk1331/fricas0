@@ -17,7 +17,7 @@
         (SPADCALL |t| (QREFELT % 14))) 
 
 (SDEFUN |ALIST;keys;%L;6| ((|t| (%)) (% (|List| |Key|)))
-        (SPROG ((#1=#:G29 NIL) (|k| NIL) (#2=#:G28 NIL))
+        (SPROG ((#1=#:G21 NIL) (|k| NIL) (#2=#:G20 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -65,7 +65,7 @@
 
 (SDEFUN |ALIST;search;Key%U;15|
         ((|k| (|Key|)) (|t| (%)) (% (|Union| |Entry| "failed")))
-        (SPROG ((#1=#:G53 NIL) (#2=#:G54 NIL) (#3=#:G55 NIL) (|r| NIL))
+        (SPROG ((#1=#:G44 NIL) (#2=#:G45 NIL) (#3=#:G46 NIL) (|r| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -84,8 +84,8 @@
                               (LETT #1#
                                     (PROGN
                                      (LETT #2# (CONS 0 (QCDR |r|)))
-                                     (GO #4=#:G52)))
-                              (GO #5=#:G47))))))
+                                     (GO #4=#:G43)))
+                              (GO #5=#:G38))))))
                          (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
                    #5# (EXIT #1#))
                   (EXIT (CONS 1 "failed"))))
@@ -96,7 +96,7 @@
          (%
           (|Union| (|Record| (|:| |key| |Key|) (|:| |entry| |Entry|))
                    "failed")))
-        (SPROG ((#1=#:G67 NIL) (#2=#:G68 NIL) (#3=#:G69 NIL) (|r| NIL))
+        (SPROG ((#1=#:G58 NIL) (#2=#:G59 NIL) (#3=#:G60 NIL) (|r| NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -115,8 +115,8 @@
                               (LETT #1#
                                     (PROGN
                                      (LETT #2# (CONS 0 |r|))
-                                     (GO #4=#:G66)))
-                              (GO #5=#:G61))))))
+                                     (GO #4=#:G57)))
+                              (GO #5=#:G52))))))
                          (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
                    #5# (EXIT #1#))
                   (EXIT (CONS 1 "failed"))))
@@ -176,29 +176,10 @@
 
 (DECLAIM (NOTINLINE |AssociationList;|)) 
 
-(DEFUN |AssociationList| (&REST #1=#:G165)
-  (SPROG NIL
-         (PROG (#2=#:G166)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|AssociationList|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |AssociationList;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|AssociationList|)))))))))) 
-
 (DEFUN |AssociationList;| (|#1| |#2|)
   (SPROG
-   ((#1=#:G162 NIL) (#2=#:G164 NIL) (#3=#:G163 NIL) (|pv$| NIL) (#4=#:G157 NIL)
-    (#5=#:G158 NIL) (#6=#:G159 NIL) (#7=#:G160 NIL) (#8=#:G161 NIL) (% NIL)
+   ((#1=#:G151 NIL) (#2=#:G153 NIL) (#3=#:G152 NIL) (|pv$| NIL) (#4=#:G146 NIL)
+    (#5=#:G147 NIL) (#6=#:G148 NIL) (#7=#:G149 NIL) (#8=#:G150 NIL) (% NIL)
     (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -352,6 +333,25 @@
               (|Reference|
                (|List| (|Record| (|:| |key| |#1|) (|:| |entry| |#2|)))))
     %))) 
+
+(DEFUN |AssociationList| (&REST #1=#:G154)
+  (SPROG NIL
+         (PROG (#2=#:G155)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|AssociationList|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |AssociationList;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|AssociationList|)))))))))) 
 
 (MAKEPROP '|AssociationList| '|infovec|
           (LIST

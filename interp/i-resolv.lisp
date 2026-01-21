@@ -1253,7 +1253,6 @@
 ;   -- does the hard work of looking at conditions on under domains
 ;   -- if null (ut := getUnderModeOf(t)) then ut := last dt
 ;   null (conds := getConditionsForCategoryOnType(t,c)) => NIL
-; --rest(conds) => NIL   -- will handle later
 ;   cond := first conds
 ;   cond isnt [.,['has, pat, c1],:.] => NIL
 ;   rest(c1) => NIL      -- make it simple
@@ -2061,7 +2060,6 @@
 ;   argt0 := argt
 ;   null TL and
 ;     null argm => constructM(ct,argt)
-; --  null argm => NIL
 ;     arg := NIL
 ;     while argt and argm until not tt repeat
 ;       x1 := first argt

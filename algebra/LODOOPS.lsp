@@ -1,8 +1,8 @@
 
 (SDEFUN |LODOOPS;vec2LODO| ((|v| (|Vector| A)) (% (L)))
         (SPROG
-         ((#1=#:G18 NIL) (#2=#:G17 (L)) (#3=#:G19 (L)) (#4=#:G20 NIL)
-          (#5=#:G22 NIL) (|i| NIL))
+         ((#1=#:G2 NIL) (#2=#:G1 (L)) (#3=#:G3 (L)) (#4=#:G4 NIL) (#5=#:G6 NIL)
+          (|i| NIL))
          (SEQ
           (PROGN
            (LETT #1# NIL)
@@ -27,7 +27,7 @@
         ((|l| (L)) (|m| (|NonNegativeInteger|)) (|diff| (|Mapping| A A))
          (% (L)))
         (SPROG
-         ((#1=#:G25 NIL)
+         ((#1=#:G7 NIL)
           (|a|
            (|DifferentialSparseMultivariatePolynomial| A (|Symbol|)
                                                        (|OrderlyDifferentialVariable|
@@ -71,8 +71,8 @@
                                                         (|Symbol|)))))
          (|diff| (|Mapping| A A)) (% (L)))
         (SPROG
-         ((|lu| (|List| #1#)) (#2=#:G45 NIL) (|l| (|List| (|Vector| A)))
-          (|mat| (|Matrix| A)) (#3=#:G46 NIL) (|q| NIL))
+         ((|lu| (|List| #1#)) (#2=#:G26 NIL) (|l| (|List| (|Vector| A)))
+          (|mat| (|Matrix| A)) (#3=#:G27 NIL) (|q| NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |lu| (LIST |u|))
@@ -88,7 +88,7 @@
                         (EXIT
                          (PROGN
                           (LETT #2# (|LODOOPS;vec2LODO| (|SPADfirst| |l|) %))
-                          (GO #4=#:G44)))))
+                          (GO #4=#:G25)))))
                       (LETT |u|
                             (SPADCALL (SPADCALL |u| |diff| (QREFELT % 44))
                                       |lvar| |lval| (QREFELT % 47)))
@@ -209,29 +209,6 @@
 
 (DECLAIM (NOTINLINE |LinearOrdinaryDifferentialOperatorsOps;|)) 
 
-(DEFUN |LinearOrdinaryDifferentialOperatorsOps| (&REST #1=#:G58)
-  (SPROG NIL
-         (PROG (#2=#:G59)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|LinearOrdinaryDifferentialOperatorsOps|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function| |LinearOrdinaryDifferentialOperatorsOps;|)
-                       #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|LinearOrdinaryDifferentialOperatorsOps|)))))))))) 
-
 (DEFUN |LinearOrdinaryDifferentialOperatorsOps;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -252,6 +229,29 @@
           (QSETREFV % 10 (SPADCALL (QREFELT % 9)))
           (QSETREFV % 11 (SPADCALL (QREFELT % 9)))
           %))) 
+
+(DEFUN |LinearOrdinaryDifferentialOperatorsOps| (&REST #1=#:G39)
+  (SPROG NIL
+         (PROG (#2=#:G40)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|LinearOrdinaryDifferentialOperatorsOps|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function| |LinearOrdinaryDifferentialOperatorsOps;|)
+                       #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|LinearOrdinaryDifferentialOperatorsOps|)))))))))) 
 
 (MAKEPROP '|LinearOrdinaryDifferentialOperatorsOps| '|infovec|
           (LIST

@@ -4,8 +4,8 @@
           (|List| (|Mapping| (|List| (|PrimitiveArray| (|PrimeField| |p|))))))
          (|c| (|Integer|)) (% (|List| UP)))
         (SPROG
-         ((|res| (|List| UP)) (#1=#:G23 NIL) (|v| NIL)
-          (|vl| (|List| (|PrimitiveArray| (|PrimeField| |p|)))) (#2=#:G22 NIL)
+         ((|res| (|List| UP)) (#1=#:G10 NIL) (|v| NIL)
+          (|vl| (|List| (|PrimitiveArray| (|PrimeField| |p|)))) (#2=#:G9 NIL)
           (|sf| NIL))
          (SEQ (LETT |res| NIL)
               (SEQ (LETT |sf| NIL) (LETT #2# |sfl|) G190
@@ -32,9 +32,26 @@
 
 (DECLAIM (NOTINLINE |GaloisGroupFactorizerSeparate;|)) 
 
-(DEFUN |GaloisGroupFactorizerSeparate| (&REST #1=#:G24)
+(DEFUN |GaloisGroupFactorizerSeparate;| (|#1| |#2|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 |#1|)
+          (LETT DV$2 (|devaluate| |#2|))
+          (LETT |dv$| (LIST '|GaloisGroupFactorizerSeparate| DV$1 DV$2))
+          (LETT % (GETREFV 19))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|GaloisGroupFactorizerSeparate|
+                      (LIST DV$1 DV$2) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (QSETREFV % 7 |#2|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |GaloisGroupFactorizerSeparate| (&REST #1=#:G11)
   (SPROG NIL
-         (PROG (#2=#:G25)
+         (PROG (#2=#:G12)
            (RETURN
             (COND
              ((LETT #2#
@@ -52,23 +69,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|GaloisGroupFactorizerSeparate|)))))))))) 
-
-(DEFUN |GaloisGroupFactorizerSeparate;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 |#1|)
-          (LETT DV$2 (|devaluate| |#2|))
-          (LETT |dv$| (LIST '|GaloisGroupFactorizerSeparate| DV$1 DV$2))
-          (LETT % (GETREFV 19))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|GaloisGroupFactorizerSeparate|
-                      (LIST DV$1 DV$2) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (QSETREFV % 7 |#2|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|GaloisGroupFactorizerSeparate| '|infovec|
           (LIST

@@ -7,7 +7,7 @@
 (SDEFUN |INTTOOLS;varselect;LSL;2|
         ((|l| (|List| (|Kernel| F))) (|x| (|Symbol|))
          (% (|List| (|Kernel| F))))
-        (SPROG ((#1=#:G27 NIL) (|k| NIL) (#2=#:G26 NIL))
+        (SPROG ((#1=#:G19 NIL) (|k| NIL) (#2=#:G18 NIL))
                (SEQ
                 (PROGN
                  (LETT #2# NIL)
@@ -37,7 +37,7 @@
 
 (SDEFUN |INTTOOLS;vark;LSL;4|
         ((|l| (|List| F)) (|x| (|Symbol|)) (% (|List| (|Kernel| F))))
-        (SPROG ((#1=#:G37 NIL) (|f| NIL) (#2=#:G36 NIL))
+        (SPROG ((#1=#:G29 NIL) (|f| NIL) (#2=#:G28 NIL))
                (SEQ
                 (SPADCALL
                  (SPADCALL (ELT % 10)
@@ -59,7 +59,7 @@
                  |x| (QREFELT % 19))))) 
 
 (SDEFUN |INTTOOLS;kmax;LK;5| ((|l| (|List| (|Kernel| F))) (% (|Kernel| F)))
-        (SPROG ((|ans| (|Kernel| F)) (#1=#:G43 NIL) (|k| NIL))
+        (SPROG ((|ans| (|Kernel| F)) (#1=#:G35 NIL) (|k| NIL))
                (SEQ (LETT |ans| (|SPADfirst| |l|))
                     (SEQ (LETT |k| NIL) (LETT #1# (CDR |l|)) G190
                          (COND
@@ -93,7 +93,7 @@
         ((|f| (F)) (|x| (|Symbol|)) (% (F)))
         (SPROG
          ((|ans| (|SparseMultivariatePolynomial| R (|Kernel| F)))
-          (#1=#:G65 NIL) (|term| NIL)
+          (#1=#:G53 NIL) (|term| NIL)
           (|u|
            (|Union| (|List| (|SparseMultivariatePolynomial| R (|Kernel| F)))
                     "failed"))
@@ -221,8 +221,8 @@
 
 (SDEFUN |INTTOOLS;mkPrim;FSF;11| ((|f| (F)) (|x| (|Symbol|)) (% (F)))
         (SPROG
-         ((#1=#:G97 NIL) (|k| NIL) (#2=#:G96 NIL) (|lg| (|List| (|Kernel| F)))
-          (#3=#:G95 NIL) (#4=#:G94 NIL))
+         ((#1=#:G80 NIL) (|k| NIL) (#2=#:G79 NIL) (|lg| (|List| (|Kernel| F)))
+          (#3=#:G78 NIL) (#4=#:G77 NIL))
          (SEQ
           (LETT |lg|
                 (PROGN
@@ -269,7 +269,7 @@
             (|Record| (|:| |var| (|Kernel| F))
                       (|:| |exponent| (|NonNegativeInteger|)))
             "failed"))
-          (#1=#:G100 NIL))
+          (#1=#:G83 NIL))
          (SEQ
           (LETT |u|
                 (SPADCALL
@@ -302,25 +302,6 @@
                         (SPADCALL (QCAR (QCDR |u|)) (QREFELT % 13))))))))) 
 
 (DECLAIM (NOTINLINE |IntegrationTools;|)) 
-
-(DEFUN |IntegrationTools| (&REST #1=#:G108)
-  (SPROG NIL
-         (PROG (#2=#:G109)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|IntegrationTools|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |IntegrationTools;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|IntegrationTools|)))))))))) 
 
 (DEFUN |IntegrationTools;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
@@ -363,6 +344,25 @@
                          (CONS (|dispatchFunction| |INTTOOLS;mkPrim;FSF;11|)
                                %)))))))
           %))) 
+
+(DEFUN |IntegrationTools| (&REST #1=#:G91)
+  (SPROG NIL
+         (PROG (#2=#:G92)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|IntegrationTools|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |IntegrationTools;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|IntegrationTools|)))))))))) 
 
 (MAKEPROP '|IntegrationTools| '|infovec|
           (LIST

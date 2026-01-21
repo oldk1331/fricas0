@@ -68,28 +68,9 @@
 
 (DECLAIM (NOTINLINE |DoubleFloatMatrix;|)) 
 
-(DEFUN |DoubleFloatMatrix| ()
-  (SPROG NIL
-         (PROG (#1=#:G2730)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|DoubleFloatMatrix|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|DoubleFloatMatrix|
-                             (LIST
-                              (CONS NIL (CONS 1 (|DoubleFloatMatrix;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#)
-                  (HREM |$ConstructorCache| '|DoubleFloatMatrix|)))))))))) 
-
 (DEFUN |DoubleFloatMatrix;| ()
   (SPROG
-   ((|dv$| NIL) (% NIL) (#1=#:G2727 NIL) (#2=#:G2728 NIL) (#3=#:G2726 NIL)
+   ((|dv$| NIL) (% NIL) (#1=#:G2637 NIL) (#2=#:G2638 NIL) (#3=#:G2636 NIL)
     (|pv$| NIL))
    (PROGN
     (LETT |dv$| '(|DoubleFloatMatrix|))
@@ -176,6 +157,25 @@
      (|augmentPredVector| % 2097152))
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |DoubleFloatMatrix| ()
+  (SPROG NIL
+         (PROG (#1=#:G2640)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|DoubleFloatMatrix|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|DoubleFloatMatrix|
+                             (LIST
+                              (CONS NIL (CONS 1 (|DoubleFloatMatrix;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#)
+                  (HREM |$ConstructorCache| '|DoubleFloatMatrix|)))))))))) 
 
 (MAKEPROP '|DoubleFloatMatrix| '|infovec|
           (LIST

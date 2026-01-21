@@ -11,7 +11,7 @@
          (% (|SparseUnivariatePolynomial| F)))
         (SPROG
          ((|nd| (F)) (|cofact| (|SparseUnivariatePolynomial| F))
-          (|cf2| #1=(|SparseUnivariatePolynomial| F)) (#2=#:G25 NIL)
+          (|cf2| #1=(|SparseUnivariatePolynomial| F)) (#2=#:G14 NIL)
           (|ndu| (|Union| (|SparseUnivariatePolynomial| F) #3="failed"))
           (|nd1| (|SparseUnivariatePolynomial| F)) (|cf1| #1#) (|c0| (F))
           (|c1| (F)) (|c2| (F)) (|df| #4=(|SparseUnivariatePolynomial| F))
@@ -256,7 +256,7 @@
 (SDEFUN |POLYCATQ;isTimes;FU;9| ((|f| (F)) (% (|Union| (|List| F) "failed")))
         (SPROG
          ((|d| (F)) (|den| (P)) (|l| (|Union| (|List| F) "failed"))
-          (#1=#:G102 NIL) (|x| NIL) (#2=#:G101 NIL)
+          (#1=#:G87 NIL) (|x| NIL) (#2=#:G86 NIL)
           (|t| (|Union| (|List| P) "failed")) (|num| (P)))
          (SEQ
           (LETT |t|
@@ -300,7 +300,7 @@
 
 (SDEFUN |POLYCATQ;isPlus;FU;10| ((|f| (F)) (% (|Union| (|List| F) "failed")))
         (SPROG
-         ((#1=#:G115 NIL) (|x| NIL) (#2=#:G114 NIL)
+         ((#1=#:G100 NIL) (|x| NIL) (#2=#:G99 NIL)
           (|s| (|Union| (|List| P) "failed")))
          (SEQ
           (COND
@@ -349,28 +349,6 @@
 
 (DECLAIM (NOTINLINE |PolynomialCategoryQuotientFunctions;|)) 
 
-(DEFUN |PolynomialCategoryQuotientFunctions| (&REST #1=#:G122)
-  (SPROG NIL
-         (PROG (#2=#:G123)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PolynomialCategoryQuotientFunctions|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function| |PolynomialCategoryQuotientFunctions;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|PolynomialCategoryQuotientFunctions|)))))))))) 
-
 (DEFUN |PolynomialCategoryQuotientFunctions;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
    ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
@@ -398,6 +376,28 @@
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 19 (SPADCALL (QREFELT % 18)))
     %))) 
+
+(DEFUN |PolynomialCategoryQuotientFunctions| (&REST #1=#:G107)
+  (SPROG NIL
+         (PROG (#2=#:G108)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PolynomialCategoryQuotientFunctions|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function| |PolynomialCategoryQuotientFunctions;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|PolynomialCategoryQuotientFunctions|)))))))))) 
 
 (MAKEPROP '|PolynomialCategoryQuotientFunctions| '|infovec|
           (LIST

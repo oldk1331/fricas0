@@ -1,27 +1,8 @@
 
 (DECLAIM (NOTINLINE |FiniteFieldCyclicGroup;|)) 
 
-(DEFUN |FiniteFieldCyclicGroup| (&REST #1=#:G68)
-  (SPROG NIL
-         (PROG (#2=#:G69)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|FiniteFieldCyclicGroup|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |FiniteFieldCyclicGroup;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|FiniteFieldCyclicGroup|)))))))))) 
-
 (DEFUN |FiniteFieldCyclicGroup;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (#1=#:G67 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (#1=#:G37 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT DV$2 |#2|)
@@ -59,6 +40,25 @@
                (|augmentPredVector| % 32))
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |FiniteFieldCyclicGroup| (&REST #1=#:G38)
+  (SPROG NIL
+         (PROG (#2=#:G39)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|FiniteFieldCyclicGroup|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |FiniteFieldCyclicGroup;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|FiniteFieldCyclicGroup|)))))))))) 
 
 (MAKEPROP '|FiniteFieldCyclicGroup| '|infovec|
           (LIST

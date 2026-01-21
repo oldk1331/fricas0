@@ -7,7 +7,7 @@
 (SDEFUN |CARTEN2;map;MCtCt;2|
         ((|f| (|Mapping| T$ S)) (|s| (|CartesianTensor| |minix| |dim| S))
          (% (|CartesianTensor| |minix| |dim| T$)))
-        (SPROG ((#1=#:G15 NIL) (|e| NIL) (#2=#:G14 NIL))
+        (SPROG ((#1=#:G6 NIL) (|e| NIL) (#2=#:G5 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -23,26 +23,6 @@
                  (QREFELT % 12))))) 
 
 (DECLAIM (NOTINLINE |CartesianTensorFunctions2;|)) 
-
-(DEFUN |CartesianTensorFunctions2| (&REST #1=#:G16)
-  (SPROG NIL
-         (PROG (#2=#:G17)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction|
-                     (|devaluate_sig| #1# '(NIL NIL T T))
-                     (HGET |$ConstructorCache| '|CartesianTensorFunctions2|)
-                     '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |CartesianTensorFunctions2;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|CartesianTensorFunctions2|)))))))))) 
 
 (DEFUN |CartesianTensorFunctions2;| (|#1| |#2| |#3| |#4|)
   (SPROG
@@ -66,6 +46,26 @@
     (QSETREFV % 9 |#4|)
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |CartesianTensorFunctions2| (&REST #1=#:G7)
+  (SPROG NIL
+         (PROG (#2=#:G8)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction|
+                     (|devaluate_sig| #1# '(NIL NIL T T))
+                     (HGET |$ConstructorCache| '|CartesianTensorFunctions2|)
+                     '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |CartesianTensorFunctions2;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|CartesianTensorFunctions2|)))))))))) 
 
 (MAKEPROP '|CartesianTensorFunctions2| '|infovec|
           (LIST

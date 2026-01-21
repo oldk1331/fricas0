@@ -10,7 +10,7 @@
           (|l2| (|Stream| (|SparseMultivariatePolynomialExpressions| F)))
           (|s1| (|Stream| (|Integer|)))
           (|l1| (|Stream| (|SparseMultivariatePolynomialExpressions| F)))
-          (#2=#:G204 NIL) (|e| NIL) (#3=#:G203 NIL))
+          (#2=#:G190 NIL) (|e| NIL) (#3=#:G189 NIL))
          (SEQ
           (LETT |l1|
                 (SPADCALL
@@ -45,7 +45,7 @@
            (PROGN
             (SPROG
              ((|nr| NIL) (|coeff| NIL) (|eq| NIL) (|eqs| NIL) (|vars| NIL)
-              (#1=#:G197 NIL) (|var| NIL) (#2=#:G198 NIL) (|i| NIL)
+              (#1=#:G183 NIL) (|var| NIL) (#2=#:G184 NIL) (|i| NIL)
               (|res| NIL))
              (SEQ
               (LETT |nr| (SPADCALL |st| (|spadConstant| % 59) (QREFELT % 31)))
@@ -228,7 +228,7 @@
               (EXIT |res|))))))) 
 
 (SDEFUN |UTSSOL;seriesSolve;MLUTSF;1!0| ((|i| NIL) (% NIL))
-        (SPROG ((#1=#:G24 NIL))
+        (SPROG ((#1=#:G11 NIL))
                (SPADCALL (|spadConstant| % 19)
                          (SPADCALL (|spadConstant| % 22)
                                    (PROG1 (LETT #1# |i|)
@@ -239,23 +239,6 @@
                          (QREFELT % 25)))) 
 
 (DECLAIM (NOTINLINE |TaylorSolve;|)) 
-
-(DEFUN |TaylorSolve| (&REST #1=#:G205)
-  (SPROG NIL
-         (PROG (#2=#:G206)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|TaylorSolve|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |TaylorSolve;|) #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|TaylorSolve|)))))))))) 
 
 (DEFUN |TaylorSolve;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
@@ -275,6 +258,23 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |TaylorSolve| (&REST #1=#:G191)
+  (SPROG NIL
+         (PROG (#2=#:G192)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|TaylorSolve|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |TaylorSolve;|) #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|TaylorSolve|)))))))))) 
 
 (MAKEPROP '|TaylorSolve| '|infovec|
           (LIST

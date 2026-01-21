@@ -1,6 +1,6 @@
 
 (SDEFUN |POINT;point;L%;1| ((|l| (|List| R)) (% (%)))
-        (SPROG ((#1=#:G17 NIL) (|x| NIL) (|i| NIL) (|pt| (%)))
+        (SPROG ((#1=#:G6 NIL) (|x| NIL) (|i| NIL) (|pt| (%)))
                (SEQ (LETT |pt| (SPADCALL (LENGTH |l|) 'R (QREFELT % 8)))
                     (SEQ (LETT |i| (SPADCALL |pt| (QREFELT % 10)))
                          (LETT |x| NIL) (LETT #1# |l|) G190
@@ -13,7 +13,7 @@
                     (EXIT |pt|)))) 
 
 (SDEFUN |POINT;dimension;%Pi;2| ((|p| (%)) (% (|PositiveInteger|)))
-        (SPROG ((#1=#:G19 NIL))
+        (SPROG ((#1=#:G7 NIL))
                (PROG1 (LETT #1# (SPADCALL |p| (QREFELT % 14)))
                  (|check_subtype2| (> #1# 0) '(|PositiveInteger|)
                                    '(|NonNegativeInteger|) #1#)))) 
@@ -54,24 +54,9 @@
 
 (DECLAIM (NOTINLINE |Point;|)) 
 
-(DEFUN |Point| (#1=#:G38)
-  (SPROG NIL
-         (PROG (#2=#:G39)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|Point|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Point;| #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Point|)))))))))) 
-
 (DEFUN |Point;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G35 NIL) (#2=#:G36 NIL) (#3=#:G37 NIL) (% NIL)
+   ((|pv$| NIL) (#1=#:G22 NIL) (#2=#:G23 NIL) (#3=#:G24 NIL) (% NIL)
     (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -189,6 +174,21 @@
      (|augmentPredVector| % 1073741824))
     (SETF |pv$| (QREFELT % 3))
     %))) 
+
+(DEFUN |Point| (#1=#:G25)
+  (SPROG NIL
+         (PROG (#2=#:G26)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|Point|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Point;| #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Point|)))))))))) 
 
 (MAKEPROP '|Point| '|infovec|
           (LIST

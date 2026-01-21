@@ -378,7 +378,7 @@
           (|Mapping| (|DoubleFloat|) (|DoubleFloat|) (|DoubleFloat|)
                      (|DoubleFloat|)))
          (% (|List| (|List| (|Point| (|DoubleFloat|))))))
-        (SPROG ((#1=#:G106 NIL) (|p| NIL) (#2=#:G105 NIL) (|lp| NIL))
+        (SPROG ((#1=#:G88 NIL) (|p| NIL) (#2=#:G87 NIL) (|lp| NIL))
                (SEQ
                 (SEQ (LETT |lp| NIL) (LETT #2# |llp|) G190
                      (COND
@@ -409,7 +409,7 @@
          (|seg| (|Segment| (|Float|))) (|l| (|List| (|DrawOption|)))
          (% (|ThreeSpace| (|DoubleFloat|))))
         (SPROG
-         ((#1=#:G142 NIL) (|b| NIL)
+         ((#1=#:G124 NIL) (|b| NIL)
           (|br| (|List| (|List| (|Point| (|DoubleFloat|)))))
           (|c3| #2=(|Union| (|Any|) "failed"))
           (|loops| (|List| (|List| (|Point| (|DoubleFloat|)))))
@@ -535,7 +535,7 @@
          (|seg| (|Segment| (|Float|))) (|l| (|List| (|DrawOption|)))
          (% (|ThreeSpace| (|DoubleFloat|))))
         (SPROG
-         ((#1=#:G160 NIL) (|b| NIL)
+         ((#1=#:G142 NIL) (|b| NIL)
           (|br| (|List| (|List| (|Point| (|DoubleFloat|)))))
           (|loops| (|List| (|List| (|Point| (|DoubleFloat|)))))
           (|tub| (|TubePlot| (|Plot3D|))) (|rad| (|DoubleFloat|))
@@ -1091,9 +1091,28 @@
 
 (DECLAIM (NOTINLINE |TopLevelDrawFunctionsForCompiledFunctions;|)) 
 
+(DEFUN |TopLevelDrawFunctionsForCompiledFunctions;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|TopLevelDrawFunctionsForCompiledFunctions|))
+          (LETT % (GETREFV 167))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache|
+                      '|TopLevelDrawFunctionsForCompiledFunctions| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 6
+                    "draw: when specifying function, left hand side must be a variable")
+          (QSETREFV % 7 "draw: range is in interval with only one point")
+          (QSETREFV % 8
+                    "draw: independent variable appears on lhs of function definition")
+          %))) 
+
 (DEFUN |TopLevelDrawFunctionsForCompiledFunctions| ()
   (SPROG NIL
-         (PROG (#1=#:G318)
+         (PROG (#1=#:G300)
            (RETURN
             (COND
              ((LETT #1#
@@ -1115,25 +1134,6 @@
                  ((NOT #1#)
                   (HREM |$ConstructorCache|
                         '|TopLevelDrawFunctionsForCompiledFunctions|)))))))))) 
-
-(DEFUN |TopLevelDrawFunctionsForCompiledFunctions;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|TopLevelDrawFunctionsForCompiledFunctions|))
-          (LETT % (GETREFV 167))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache|
-                      '|TopLevelDrawFunctionsForCompiledFunctions| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 6
-                    "draw: when specifying function, left hand side must be a variable")
-          (QSETREFV % 7 "draw: range is in interval with only one point")
-          (QSETREFV % 8
-                    "draw: independent variable appears on lhs of function definition")
-          %))) 
 
 (MAKEPROP '|TopLevelDrawFunctionsForCompiledFunctions| '|infovec|
           (LIST

@@ -9,7 +9,7 @@
         ((|e| (|OutputForm|)) (|n| (|Integer|)) (% (%))) (CONS |e| |n|)) 
 
 (SDEFUN |FMTOUT;display;%V;3| ((|x| (%)) (% (|Void|)))
-        (SPROG ((#1=#:G14 NIL) (F NIL))
+        (SPROG ((#1=#:G6 NIL) (F NIL))
                (SEQ (LETT F NIL)
                     (LETT #1# (SPADCALL (QREFELT % 9) (QREFELT % 16))) G190
                     (COND
@@ -32,9 +32,22 @@
 
 (DECLAIM (NOTINLINE |FormattedOutput;|)) 
 
+(DEFUN |FormattedOutput;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|FormattedOutput|))
+          (LETT % (GETREFV 18))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|FormattedOutput| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 9 (SPADCALL NIL (QREFELT % 8)))
+          %))) 
+
 (DEFUN |FormattedOutput| ()
   (SPROG NIL
-         (PROG (#1=#:G16)
+         (PROG (#1=#:G8)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|FormattedOutput|))
@@ -49,19 +62,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|FormattedOutput|)))))))))) 
-
-(DEFUN |FormattedOutput;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|FormattedOutput|))
-          (LETT % (GETREFV 18))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|FormattedOutput| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 9 (SPADCALL NIL (QREFELT % 8)))
-          %))) 
 
 (MAKEPROP '|FormattedOutput| '|infovec|
           (LIST

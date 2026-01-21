@@ -170,27 +170,6 @@
 
 (DECLAIM (NOTINLINE |PointsOfFiniteOrderRational;|)) 
 
-(DEFUN |PointsOfFiniteOrderRational| (&REST #1=#:G57)
-  (SPROG NIL
-         (PROG (#2=#:G58)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PointsOfFiniteOrderRational|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY (|function| |PointsOfFiniteOrderRational;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|PointsOfFiniteOrderRational|)))))))))) 
-
 (DEFUN |PointsOfFiniteOrderRational;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -209,6 +188,27 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |PointsOfFiniteOrderRational| (&REST #1=#:G41)
+  (SPROG NIL
+         (PROG (#2=#:G42)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PointsOfFiniteOrderRational|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY (|function| |PointsOfFiniteOrderRational;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|PointsOfFiniteOrderRational|)))))))))) 
 
 (MAKEPROP '|PointsOfFiniteOrderRational| '|infovec|
           (LIST

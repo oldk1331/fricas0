@@ -5,8 +5,7 @@
            (|Record| (|:| |den| (|Integer|)) (|:| |gcdnum| (|Integer|)))))
          (% (|Integer|)))
         (SPROG
-         ((#1=#:G19 NIL) (|p| NIL) (#2=#:G18 NIL) (#3=#:G17 NIL)
-          (#4=#:G16 NIL))
+         ((#1=#:G11 NIL) (|p| NIL) (#2=#:G10 NIL) (#3=#:G9 NIL) (#4=#:G8 NIL))
          (SEQ
           (SPADCALL
            (SPADCALL
@@ -32,7 +31,7 @@
            (QREFELT % 12))))) 
 
 (SDEFUN |PFOTOOLS;badNum;UPUPI;2| ((|p| (UPUP)) (% (|Integer|)))
-        (SPROG ((#1=#:G29 NIL) (|c| NIL) (#2=#:G28 NIL))
+        (SPROG ((#1=#:G17 NIL) (|c| NIL) (#2=#:G16 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -55,7 +54,7 @@
 
 (SDEFUN |PFOTOOLS;polyred;2UPUP;3| ((|r| (UPUP)) (% (UPUP)))
         (SPROG
-         ((|ld| (|List| (|Integer|))) (#1=#:G37 NIL) (|c| NIL) (#2=#:G36 NIL))
+         ((|ld| (|List| (|Integer|))) (#1=#:G23 NIL) (|c| NIL) (#2=#:G22 NIL))
          (SEQ
           (LETT |ld|
                 (PROGN
@@ -80,7 +79,7 @@
         ((|p| (UP))
          (% (|Record| (|:| |den| (|Integer|)) (|:| |gcdnum| (|Integer|)))))
         (SPROG
-         ((#1=#:G45 NIL) (|c| NIL) (#2=#:G44 NIL)
+         ((#1=#:G31 NIL) (|c| NIL) (#2=#:G30 NIL)
           (|cd| (|Record| (|:| |num| UP) (|:| |den| (|Integer|)))))
          (SEQ (LETT |cd| (SPADCALL |p| (QREFELT % 27)))
               (EXIT
@@ -104,7 +103,7 @@
 
 (SDEFUN |PFOTOOLS;getGoodPrime;IPi;5|
         ((|n| (|Integer|)) (% (|PositiveInteger|)))
-        (SPROG ((|p| (|PositiveInteger|)) (#1=#:G47 NIL))
+        (SPROG ((|p| (|PositiveInteger|)) (#1=#:G33 NIL))
                (SEQ (LETT |p| 3)
                     (SEQ G190 (COND ((NULL (ZEROP (REM |n| |p|))) (GO G191)))
                          (SEQ
@@ -119,7 +118,7 @@
                     (EXIT |p|)))) 
 
 (SDEFUN |PFOTOOLS;doubleDisc;UPUPI;6| ((|r| (UPUP)) (% (|Integer|)))
-        (SPROG ((#1=#:G52 NIL) (|d| (UP)))
+        (SPROG ((#1=#:G38 NIL) (|d| (UP)))
                (SEQ
                 (LETT |d|
                       (SPADCALL (SPADCALL |r| (QREFELT % 36)) (QREFELT % 19)))
@@ -141,26 +140,6 @@
 
 (DECLAIM (NOTINLINE |PointsOfFiniteOrderTools;|)) 
 
-(DEFUN |PointsOfFiniteOrderTools| (&REST #1=#:G56)
-  (SPROG NIL
-         (PROG (#2=#:G57)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|PointsOfFiniteOrderTools|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |PointsOfFiniteOrderTools;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|PointsOfFiniteOrderTools|)))))))))) 
-
 (DEFUN |PointsOfFiniteOrderTools;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -177,6 +156,26 @@
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |PointsOfFiniteOrderTools| (&REST #1=#:G42)
+  (SPROG NIL
+         (PROG (#2=#:G43)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|PointsOfFiniteOrderTools|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |PointsOfFiniteOrderTools;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|PointsOfFiniteOrderTools|)))))))))) 
 
 (MAKEPROP '|PointsOfFiniteOrderTools| '|infovec|
           (LIST

@@ -11,23 +11,6 @@
 
 (DECLAIM (NOTINLINE |AttachPredicates;|)) 
 
-(DEFUN |AttachPredicates| (#1=#:G12)
-  (SPROG NIL
-         (PROG (#2=#:G13)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|AttachPredicates|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|AttachPredicates;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|AttachPredicates|)))))))))) 
-
 (DEFUN |AttachPredicates;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -42,6 +25,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |AttachPredicates| (#1=#:G3)
+  (SPROG NIL
+         (PROG (#2=#:G4)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|AttachPredicates|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|AttachPredicates;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|AttachPredicates|)))))))))) 
 
 (MAKEPROP '|AttachPredicates| '|infovec|
           (LIST

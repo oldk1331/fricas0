@@ -2,7 +2,7 @@
 (SDEFUN |GRAY;firstSubsetGray;PiV;1|
         ((|n| (|PositiveInteger|)) (% (|Vector| (|Vector| (|Integer|)))))
         (SPROG
-         ((#1=#:G13 NIL) (|i| NIL) (|vv| (|Vector| (|Vector| (|Integer|)))))
+         ((#1=#:G5 NIL) (|i| NIL) (|vv| (|Vector| (|Vector| (|Integer|)))))
          (SEQ (LETT |vv| (MAKEARR1 2 #()))
               (SPADCALL |vv| 1 (MAKEARR1 |n| 0) (QREFELT % 9))
               (SPADCALL |vv| 2 (MAKEARR1 (+ |n| 1) 1) (QREFELT % 9))
@@ -34,9 +34,21 @@
 
 (DECLAIM (NOTINLINE |GrayCode;|)) 
 
+(DEFUN |GrayCode;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|GrayCode|))
+          (LETT % (GETREFV 16))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|GrayCode| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |GrayCode| ()
   (SPROG NIL
-         (PROG (#1=#:G18)
+         (PROG (#1=#:G10)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|GrayCode|))
@@ -49,18 +61,6 @@
                              (LIST (CONS NIL (CONS 1 (|GrayCode;|))))))
                     (LETT #1# T))
                 (COND ((NOT #1#) (HREM |$ConstructorCache| '|GrayCode|)))))))))) 
-
-(DEFUN |GrayCode;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|GrayCode|))
-          (LETT % (GETREFV 16))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|GrayCode| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|GrayCode| '|infovec|
           (LIST

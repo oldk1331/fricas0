@@ -139,13 +139,13 @@
                     (QREFELT % 31))))) 
 
 (SDEFUN |INTRVL;+;3%;17| ((|a| (%)) (|b| (%)) (% (%)))
-        (SPROG ((#1=#:G113 NIL))
+        (SPROG ((#1=#:G108 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((SPADCALL |a| (QREFELT % 37))
-                    (PROGN (LETT #1# |b|) (GO #2=#:G112)))
+                    (PROGN (LETT #1# |b|) (GO #2=#:G107)))
                    ((SPADCALL |b| (QREFELT % 37))
                     (PROGN (LETT #1# |a|) (GO #2#))))
                   (COND
@@ -169,7 +169,7 @@
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |INTRVL;-;3%;18| ((|a| (%)) (|b| (%)) (% (%)))
-        (SPROG ((#1=#:G118 NIL))
+        (SPROG ((#1=#:G113 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -177,7 +177,7 @@
                    ((SPADCALL |a| (QREFELT % 37))
                     (PROGN
                      (LETT #1# (SPADCALL |b| (QREFELT % 42)))
-                     (GO #2=#:G117)))
+                     (GO #2=#:G112)))
                    ((SPADCALL |b| (QREFELT % 37))
                     (PROGN (LETT #1# |a|) (GO #2#))))
                   (EXIT
@@ -190,13 +190,13 @@
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |INTRVL;*;3%;19| ((|a| (%)) (|b| (%)) (% (%)))
-        (SPROG ((|prods| (|List| R)) (#1=#:G131 NIL))
+        (SPROG ((|prods| (|List| R)) (#1=#:G120 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((SPADCALL |a| (QREFELT % 44))
-                    (PROGN (LETT #1# |b|) (GO #2=#:G130)))
+                    (PROGN (LETT #1# |b|) (GO #2=#:G119)))
                    ((SPADCALL |b| (QREFELT % 44))
                     (PROGN (LETT #1# |a|) (GO #2#))))
                   (COND
@@ -318,7 +318,7 @@
                                     (QREFELT % 26)))))))))) 
 
 (SDEFUN |INTRVL;unit?;%B;29| ((|u| (%)) (% (|Boolean|)))
-        (SPADCALL |u| (|spadConstant| % 33) (QREFELT % 32))) 
+        (NULL (SPADCALL |u| (|spadConstant| % 33) (QREFELT % 32)))) 
 
 (SDEFUN |INTRVL;exquo;2%U;30| ((|u| (%)) (|v| (%)) (% (|Union| % "failed")))
         (SPROG ((|vals| (|List| R)))
@@ -1059,21 +1059,6 @@
 
 (DECLAIM (NOTINLINE |Interval;|)) 
 
-(DEFUN |Interval| (#1=#:G293)
-  (SPROG NIL
-         (PROG (#2=#:G294)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|Interval|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Interval;| #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Interval|)))))))))) 
-
 (DEFUN |Interval;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -1088,6 +1073,21 @@
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 7 (|Record| (|:| |Inf| |#1|) (|:| |Sup| |#1|)))
           %))) 
+
+(DEFUN |Interval| (#1=#:G277)
+  (SPROG NIL
+         (PROG (#2=#:G278)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|Interval|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Interval;| #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Interval|)))))))))) 
 
 (MAKEPROP '|Interval| '|infovec|
           (LIST

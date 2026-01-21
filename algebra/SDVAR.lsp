@@ -23,25 +23,6 @@
 
 (DECLAIM (NOTINLINE |SequentialDifferentialVariable;|)) 
 
-(DEFUN |SequentialDifferentialVariable| (#1=#:G17)
-  (SPROG NIL
-         (PROG (#2=#:G18)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|SequentialDifferentialVariable|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|SequentialDifferentialVariable;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|SequentialDifferentialVariable|)))))))))) 
-
 (DEFUN |SequentialDifferentialVariable;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -59,6 +40,25 @@
                     (|Record| (|:| |var| |#1|)
                               (|:| |ord| (|NonNegativeInteger|))))
           %))) 
+
+(DEFUN |SequentialDifferentialVariable| (#1=#:G12)
+  (SPROG NIL
+         (PROG (#2=#:G13)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|SequentialDifferentialVariable|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|SequentialDifferentialVariable;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|SequentialDifferentialVariable|)))))))))) 
 
 (MAKEPROP '|SequentialDifferentialVariable| '|infovec|
           (LIST

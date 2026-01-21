@@ -11,9 +11,9 @@
            (|List|
             (|Record| (|:| |complexRoots| (|SparseUnivariatePolynomial| R))
                       (|:| |coordinates| (|List| (|Polynomial| R))))))
-          (|lc| (|List| (|Polynomial| R))) (#1=#:G98 NIL) (#2=#:G97 NIL)
-          (|g| (|SparseUnivariatePolynomial| R)) (#3=#:G36 NIL) (#4=#:G96 NIL)
-          (|us| NIL) (#5=#:G95 NIL)
+          (|lc| (|List| (|Polynomial| R))) (#1=#:G78 NIL) (#2=#:G77 NIL)
+          (|g| (|SparseUnivariatePolynomial| R)) (#3=#:G17 NIL) (#4=#:G76 NIL)
+          (|us| NIL) (#5=#:G75 NIL)
           (|lus|
            (|List|
             (|SquareFreeRegularTriangularSet| R
@@ -23,7 +23,7 @@
                                               (|NewSparseMultivariatePolynomial|
                                                R
                                                (|OrderedVariableList| |lv|)))))
-          (#6=#:G94 NIL)
+          (#6=#:G74 NIL)
           (|toSee|
            (|List|
             (|Record|
@@ -47,7 +47,7 @@
            (|List|
             (|NewSparseMultivariatePolynomial| R
                                                (|OrderedVariableList| |lv|))))
-          (#7=#:G93 NIL) (#8=#:G92 NIL)
+          (#7=#:G73 NIL) (#8=#:G72 NIL)
           (|newts|
            (|SquareFreeRegularTriangularSet| R
                                              (|IndexedExponents|
@@ -64,7 +64,7 @@
                                              (|OrderedVariableList| |lv|)
                                              (|NewSparseMultivariatePolynomial|
                                               R (|OrderedVariableList| |lv|))))
-          (#9=#:G91 NIL) (|qwt| NIL)
+          (#9=#:G71 NIL) (|qwt| NIL)
           (|lsfqwt|
            (|List|
             (|Record|
@@ -83,12 +83,12 @@
                                                      R
                                                      (|OrderedVariableList|
                                                       |lv|)))))))
-          (#10=#:G90 NIL) (#11=#:G89 NIL) (#12=#:G88 NIL) (|fq| NIL)
+          (#10=#:G70 NIL) (#11=#:G69 NIL) (#12=#:G68 NIL) (|fq| NIL)
           (|lfq|
            (|List|
             (|NewSparseMultivariatePolynomial| R
                                                (|OrderedVariableList| |lv|))))
-          (#13=#:G48 NIL)
+          (#13=#:G29 NIL)
           (|lq|
            (|List|
             (|NewSparseMultivariatePolynomial| R
@@ -123,7 +123,7 @@
            (|Union|
             (|NewSparseMultivariatePolynomial| R (|OrderedVariableList| |lv|))
             "failed"))
-          (#14=#:G87 NIL) (|p| NIL))
+          (#14=#:G67 NIL) (|p| NIL))
          (SEQ (LETT |lp| (SPADCALL (ELT % 23) |lp| (QREFELT % 26)))
               (EXIT
                (COND ((NULL |lp|) (|error| "rur$RURPACK: #1 is empty"))
@@ -475,31 +475,8 @@
 
 (DECLAIM (NOTINLINE |RationalUnivariateRepresentationPackage;|)) 
 
-(DEFUN |RationalUnivariateRepresentationPackage| (&REST #1=#:G103)
-  (SPROG NIL
-         (PROG (#2=#:G104)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|RationalUnivariateRepresentationPackage|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function| |RationalUnivariateRepresentationPackage;|)
-                       #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|RationalUnivariateRepresentationPackage|)))))))))) 
-
 (DEFUN |RationalUnivariateRepresentationPackage;| (|#1| |#2|)
-  (SPROG ((#1=#:G24 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((#1=#:G9 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 |#2|)
@@ -528,6 +505,29 @@
                                       #1#)))
           (QSETREFV % 20 (SPADCALL (QREFELT % 17) (QREFELT % 19)))
           %))) 
+
+(DEFUN |RationalUnivariateRepresentationPackage| (&REST #1=#:G83)
+  (SPROG NIL
+         (PROG (#2=#:G84)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(T NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|RationalUnivariateRepresentationPackage|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function| |RationalUnivariateRepresentationPackage;|)
+                       #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|RationalUnivariateRepresentationPackage|)))))))))) 
 
 (MAKEPROP '|RationalUnivariateRepresentationPackage| '|infovec|
           (LIST

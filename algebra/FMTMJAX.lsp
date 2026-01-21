@@ -526,9 +526,9 @@
           (RETURN
            (PROGN
             (SPROG
-             ((|bx| NIL) (|tu| NIL) (|tl| NIL) (#1=#:G155 NIL) (|l| NIL)
-              (#2=#:G156 NIL) (|u| NIL) (|bu| NIL) (|lu| NIL) (|bl| NIL)
-              (|ll| NIL) (|b| NIL) (#3=#:G154 NIL) (|a| NIL) (|i| NIL)
+             ((|bx| NIL) (|tu| NIL) (|tl| NIL) (#1=#:G130 NIL) (|l| NIL)
+              (#2=#:G131 NIL) (|u| NIL) (|bu| NIL) (|lu| NIL) (|bl| NIL)
+              (|ll| NIL) (|b| NIL) (#3=#:G129 NIL) (|a| NIL) (|i| NIL)
               (|ba| NIL))
              (SEQ
               (LETT |ba|
@@ -634,7 +634,7 @@
           (RETURN
            (PROGN
             (SPROG
-             ((|b2| NIL) (|r| NIL) (#1=#:G161 NIL) (#2=#:G159 NIL) (|n| NIL)
+             ((|b2| NIL) (|r| NIL) (#1=#:G136 NIL) (#2=#:G134 NIL) (|n| NIL)
               (|b1| NIL))
              (SEQ
               (LETT |b1|
@@ -916,7 +916,7 @@
          (%
           (|OperatorHandlers|
            (|Mapping| (|OutputBox|) (|Integer|) (|List| (|OutputForm|))))))
-        (SPROG ((#1=#:G552 NIL))
+        (SPROG ((#1=#:G527 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -1362,7 +1362,7 @@
                   (SPADCALL |oh| -1 "MATRIX" (SPADCALL "[" "]" (QREFELT % 112))
                             (QREFELT % 115))
                   (SPADCALL |oh| -1 "theMap" (ELT % 65) (QREFELT % 115))
-                  (EXIT (PROGN (LETT #1# |oh|) (GO #4=#:G551)))))
+                  (EXIT (PROGN (LETT #1# |oh|) (GO #4=#:G526)))))
                 #4# (EXIT #1#)))) 
 
 (SDEFUN |FMTMJAX;operatorHandlers;Oh;39|
@@ -1372,23 +1372,6 @@
         (QREFELT % 124)) 
 
 (DECLAIM (NOTINLINE |FormatMathJax;|)) 
-
-(DEFUN |FormatMathJax| ()
-  (SPROG NIL
-         (PROG (#1=#:G555)
-           (RETURN
-            (COND
-             ((LETT #1# (HGET |$ConstructorCache| '|FormatMathJax|))
-              (|CDRwithIncrement| (CDAR #1#)))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (CDDAR
-                       (HPUT |$ConstructorCache| '|FormatMathJax|
-                             (LIST (CONS NIL (CONS 1 (|FormatMathJax;|))))))
-                    (LETT #1# T))
-                (COND
-                 ((NOT #1#) (HREM |$ConstructorCache| '|FormatMathJax|)))))))))) 
 
 (DEFUN |FormatMathJax;| ()
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
@@ -1404,6 +1387,23 @@
                     (|FMTMJAX;setOperatorHandlers!| (SPADCALL (QREFELT % 123))
                      %))
           %))) 
+
+(DEFUN |FormatMathJax| ()
+  (SPROG NIL
+         (PROG (#1=#:G530)
+           (RETURN
+            (COND
+             ((LETT #1# (HGET |$ConstructorCache| '|FormatMathJax|))
+              (|CDRwithIncrement| (CDAR #1#)))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (CDDAR
+                       (HPUT |$ConstructorCache| '|FormatMathJax|
+                             (LIST (CONS NIL (CONS 1 (|FormatMathJax;|))))))
+                    (LETT #1# T))
+                (COND
+                 ((NOT #1#) (HREM |$ConstructorCache| '|FormatMathJax|)))))))))) 
 
 (MAKEPROP '|FormatMathJax| '|infovec|
           (LIST

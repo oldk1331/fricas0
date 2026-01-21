@@ -131,9 +131,21 @@
 
 (DECLAIM (NOTINLINE |Unittest;|)) 
 
+(DEFUN |Unittest;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|Unittest|))
+          (LETT % (GETREFV 37))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|Unittest| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |Unittest| ()
   (SPROG NIL
-         (PROG (#1=#:G53)
+         (PROG (#1=#:G35)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Unittest|))
@@ -146,18 +158,6 @@
                              (LIST (CONS NIL (CONS 1 (|Unittest;|))))))
                     (LETT #1# T))
                 (COND ((NOT #1#) (HREM |$ConstructorCache| '|Unittest|)))))))))) 
-
-(DEFUN |Unittest;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|Unittest|))
-          (LETT % (GETREFV 37))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|Unittest| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|Unittest| '|infovec|
           (LIST

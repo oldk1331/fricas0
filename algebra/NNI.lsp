@@ -24,9 +24,22 @@
 
 (DECLAIM (NOTINLINE |NonNegativeInteger;|)) 
 
+(DEFUN |NonNegativeInteger;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|NonNegativeInteger|))
+          (LETT % (GETREFV 21))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|NonNegativeInteger| NIL (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (AND (|HasCategory| % '(|AbelianGroup|)) (|augmentPredVector| % 1))
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
 (DEFUN |NonNegativeInteger| ()
   (SPROG NIL
-         (PROG (#1=#:G1644)
+         (PROG (#1=#:G1569)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|NonNegativeInteger|))
@@ -42,19 +55,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|NonNegativeInteger|)))))))))) 
-
-(DEFUN |NonNegativeInteger;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|NonNegativeInteger|))
-          (LETT % (GETREFV 21))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|NonNegativeInteger| NIL (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (AND (|HasCategory| % '(|AbelianGroup|)) (|augmentPredVector| % 1))
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|NonNegativeInteger| '|infovec|
           (LIST

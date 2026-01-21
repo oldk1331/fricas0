@@ -66,7 +66,7 @@
 
 (SDEFUN |IPADIC;=;2%B;15| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
         (SPROG
-         ((|st| (|Stream| (|Integer|))) (#1=#:G86 NIL) (#2=#:G87 NIL) (|i| NIL)
+         ((|st| (|Stream| (|Integer|))) (#1=#:G78 NIL) (#2=#:G79 NIL) (|i| NIL)
           (|n| (|Integer|)))
          (SEQ
           (EXIT
@@ -79,7 +79,7 @@
                   (EXIT
                    (COND
                     ((SPADCALL |st| (QREFELT % 30))
-                     (PROGN (LETT #1# 'T) (GO #3=#:G85)))
+                     (PROGN (LETT #1# 'T) (GO #3=#:G77)))
                     ((SPADCALL (SPADCALL |st| (QREFELT % 31)) 0 (QREFELT % 27))
                      (PROGN (LETT #1# NIL) (GO #3#)))
                     ('T (LETT |st| (SPADCALL |st| (QREFELT % 38)))))))
@@ -88,7 +88,7 @@
           #3# (EXIT #1#)))) 
 
 (SDEFUN |IPADIC;order;%Nni;16| ((|x| (%)) (% (|NonNegativeInteger|)))
-        (SPROG ((|st| (%)) (#1=#:G94 NIL) (|i| NIL))
+        (SPROG ((|st| (%)) (#1=#:G86 NIL) (|i| NIL))
                (SEQ
                 (EXIT
                  (SEQ (LETT |st| (|IPADIC;stream| |x| %))
@@ -98,7 +98,7 @@
                             (EXIT
                              (COND
                               ((SPADCALL |st| (QREFELT % 30))
-                               (PROGN (LETT #1# 0) (GO #2=#:G93)))
+                               (PROGN (LETT #1# 0) (GO #2=#:G85)))
                               ((SPADCALL (SPADCALL |st| (QREFELT % 31)) 0
                                          (QREFELT % 27))
                                (PROGN (LETT #1# |i|) (GO #2#)))
@@ -593,7 +593,7 @@
           (LETT |p| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((#1=#:G237 NIL) (|num| NIL) (|digit| NIL))
+            (SPROG ((#1=#:G228 NIL) (|num| NIL) (|digit| NIL))
                    (SEQ
                     (LETT |num|
                           (SPADCALL
@@ -680,7 +680,7 @@
 (SDEFUN |IPADIC;coerce;%Of;43| ((|x| (%)) (% (|OutputForm|)))
         (SPROG
          ((|l| (|List| (|OutputForm|))) (|st| (%)) (|st1| (%)) (|n| NIL)
-          (#1=#:G287 NIL) (|count| (|NonNegativeInteger|)))
+          (#1=#:G265 NIL) (|count| (|NonNegativeInteger|)))
          (SEQ
           (COND
            ((SPADCALL (LETT |st| (|IPADIC;stream| |x| %)) (QREFELT % 30))
@@ -762,25 +762,6 @@
 
 (DECLAIM (NOTINLINE |InnerPAdicInteger;|)) 
 
-(DEFUN |InnerPAdicInteger| (&REST #1=#:G299)
-  (SPROG NIL
-         (PROG (#2=#:G300)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL NIL))
-                                               (HGET |$ConstructorCache|
-                                                     '|InnerPAdicInteger|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |InnerPAdicInteger;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|InnerPAdicInteger|)))))))))) 
-
 (DEFUN |InnerPAdicInteger;| (|#1| |#2|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -799,6 +780,25 @@
           (QSETREFV % 11 (SPADCALL |#1| (QREFELT % 10)))
           (QSETREFV % 12 (|Stream| (|Integer|)))
           %))) 
+
+(DEFUN |InnerPAdicInteger| (&REST #1=#:G277)
+  (SPROG NIL
+         (PROG (#2=#:G278)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluate_sig| #1# '(NIL NIL))
+                                               (HGET |$ConstructorCache|
+                                                     '|InnerPAdicInteger|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |InnerPAdicInteger;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|InnerPAdicInteger|)))))))))) 
 
 (MAKEPROP '|InnerPAdicInteger| '|infovec|
           (LIST

@@ -3550,10 +3550,10 @@
             (COND (|$mathTrace| (TERPRI |$trace_stream|)))
             (PRINMATHOR0 |val| |$trace_stream|)))))))))))
 
-; monitor_blanks(n) == PRINC(make_full_CVEC(n), $trace_stream)
+; monitor_blanks(n) == PRINC(filler_spaces(n), $trace_stream)
 
 (DEFUN |monitor_blanks| (|n|)
-  (PROG () (RETURN (PRINC (|make_full_CVEC| |n|) |$trace_stream|))))
+  (PROG () (RETURN (PRINC (|filler_spaces| |n|) |$trace_stream|))))
 
 ; monitor_get_value(n, fg) ==
 ;     n = 0 =>
@@ -3733,14 +3733,15 @@
            ('T (PRINMATHOR0 |x| |trace_str|))))))
 
 ; PRINMATHOR0(x, trace_str) ==
-;     $mathTrace => maprinSpecial(outputTran2(x), $monitor_depth, 80)
+;     $mathTrace => maprinSpecial(outputTran2(x), $monitor_depth, $LINELENGTH)
 ;     PRIN0(x, trace_str)
 
 (DEFUN PRINMATHOR0 (|x| |trace_str|)
   (PROG ()
     (RETURN
      (COND
-      (|$mathTrace| (|maprinSpecial| (|outputTran2| |x|) |$monitor_depth| 80))
+      (|$mathTrace|
+       (|maprinSpecial| (|outputTran2| |x|) |$monitor_depth| $LINELENGTH))
       ('T (PRIN0 |x| |trace_str|))))))
 
 ; _/TRACELET_-PRINT(X, Y) ==

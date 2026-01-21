@@ -1,6 +1,6 @@
 
 (SDEFUN |PSEUDLIN;inv| ((|m| (|Matrix| K)) (% (|Matrix| K)))
-        (SPROG ((#1=#:G10 NIL))
+        (SPROG ((#1=#:G5 NIL))
                (PROG2 (LETT #1# (SPADCALL |m| (QREFELT % 9)))
                    (QCDR #1#)
                  (|check_union2| (QEQCAR #1# 0) (|Matrix| (QREFELT % 6))
@@ -46,8 +46,8 @@
           (|l|
            (|List|
             (|Record| (|:| C (|Matrix| K)) (|:| |lg| (|List| (|Vector| K))))))
-          (|lv| (|List| (|Vector| K))) (#2=#:G74 NIL) (|k| NIL)
-          (|v| (|Vector| K)) (#3=#:G60 NIL) (#4=#:G73 NIL) (|w| NIL) (|j| #1#)
+          (|lv| (|List| (|Vector| K))) (#2=#:G57 NIL) (|k| NIL)
+          (|v| (|Vector| K)) (#3=#:G45 NIL) (#4=#:G56 NIL) (|w| NIL) (|j| #1#)
           (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |i| 1) (LETT |n| (ANROWS R)) (LETT |l| NIL)
               (SEQ G190 (COND ((NULL (<= |i| |n|)) (GO G191)))
@@ -108,13 +108,13 @@
                     (|:| |Ainv| (|Matrix| K)))))
         (SPROG
          ((|i| (|Integer|)) (|Binv| (|Matrix| K)) (B (|Matrix| K))
-          (E (|Matrix| K)) (#1=#:G117 NIL) (#2=#:G119 NIL) (|k| NIL)
-          (#3=#:G118 NIL)
+          (E (|Matrix| K)) (#1=#:G100 NIL) (#2=#:G102 NIL) (|k| NIL)
+          (#3=#:G101 NIL)
           (|recOfMatrices|
            (|Record| (|:| R (|Matrix| K)) (|:| A (|Matrix| K))
                      (|:| |Ainv| (|Matrix| K))))
-          (|j| (|Integer|)) (#4=#:G116 NIL) (#5=#:G115 NIL) (#6=#:G111 NIL)
-          (#7=#:G112 NIL) (#8=#:G114 NIL) (#9=#:G113 NIL)
+          (|j| (|Integer|)) (#4=#:G99 NIL) (#5=#:G98 NIL) (#6=#:G94 NIL)
+          (#7=#:G95 NIL) (#8=#:G97 NIL) (#9=#:G96 NIL)
           (N (|NonNegativeInteger|)))
          (SEQ
           (EXIT
@@ -136,7 +136,7 @@
                 (LETT |Binv| (SPADCALL B (QREFELT % 35)))
                 (COND
                  ((SPADCALL M (QREFELT % 36))
-                  (PROGN (LETT #6# (VECTOR M B |Binv|)) (GO #10=#:G110))))
+                  (PROGN (LETT #6# (VECTOR M B |Binv|)) (GO #10=#:G93))))
                 (LETT |i| 1)
                 (SEQ G190 (COND ((NULL (< |i| N)) (GO G191)))
                      (SEQ (LETT |j| (+ |i| 1))
@@ -318,8 +318,8 @@
 (SDEFUN |PSEUDLIN;mulMatrix|
         ((N (|Integer|)) (|i| (|Integer|)) (|a| (K)) (% (|Matrix| K)))
         (SPROG
-         ((M (|Matrix| K)) (#1=#:G124 NIL) (#2=#:G126 NIL) (|j| NIL)
-          (#3=#:G125 NIL))
+         ((M (|Matrix| K)) (#1=#:G107 NIL) (#2=#:G109 NIL) (|j| NIL)
+          (#3=#:G108 NIL))
          (SEQ
           (LETT M
                 (SPADCALL
@@ -339,8 +339,8 @@
         ((N (|Integer|)) (|i| (|Integer|)) (|k| (|Integer|)) (|a| (K))
          (% (|Matrix| K)))
         (SPROG
-         ((A (|Matrix| K)) (#1=#:G131 NIL) (#2=#:G133 NIL) (|j| NIL)
-          (#3=#:G132 NIL))
+         ((A (|Matrix| K)) (#1=#:G114 NIL) (#2=#:G116 NIL) (|j| NIL)
+          (#3=#:G115 NIL))
          (SEQ
           (LETT A
                 (SPADCALL
@@ -359,8 +359,8 @@
 (SDEFUN |PSEUDLIN;permutationMatrix|
         ((N (|Integer|)) (|i| (|Integer|)) (|k| (|Integer|)) (% (|Matrix| K)))
         (SPROG
-         ((P (|Matrix| K)) (#1=#:G138 NIL) (#2=#:G140 NIL) (|j| NIL)
-          (#3=#:G139 NIL))
+         ((P (|Matrix| K)) (#1=#:G121 NIL) (#2=#:G123 NIL) (|j| NIL)
+          (#3=#:G122 NIL))
          (SEQ
           (LETT P
                 (SPADCALL
@@ -384,24 +384,6 @@
 
 (DECLAIM (NOTINLINE |PseudoLinearNormalForm;|)) 
 
-(DEFUN |PseudoLinearNormalForm| (#1=#:G141)
-  (SPROG NIL
-         (PROG (#2=#:G142)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|PseudoLinearNormalForm|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (|PseudoLinearNormalForm;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|PseudoLinearNormalForm|)))))))))) 
-
 (DEFUN |PseudoLinearNormalForm;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -416,6 +398,24 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |PseudoLinearNormalForm| (#1=#:G124)
+  (SPROG NIL
+         (PROG (#2=#:G125)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|PseudoLinearNormalForm|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (|PseudoLinearNormalForm;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|PseudoLinearNormalForm|)))))))))) 
 
 (MAKEPROP '|PseudoLinearNormalForm| '|infovec|
           (LIST

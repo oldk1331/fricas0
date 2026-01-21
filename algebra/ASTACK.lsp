@@ -9,7 +9,7 @@
 
 (SDEFUN |ASTACK;coerce;%Of;4| ((|d| (%)) (% (|OutputForm|)))
         (SPROG
-         ((#1=#:G24 NIL) (|i| NIL) (#2=#:G23 NIL) (|n| (|NonNegativeInteger|)))
+         ((#1=#:G13 NIL) (|i| NIL) (#2=#:G12 NIL) (|n| (|NonNegativeInteger|)))
          (SEQ
           (COND ((SPADCALL |d| (QREFELT % 16)) (SPADCALL NIL (QREFELT % 19)))
                 ('T
@@ -82,25 +82,9 @@
 
 (DECLAIM (NOTINLINE |ArrayStack;|)) 
 
-(DEFUN |ArrayStack| (#1=#:G56)
-  (SPROG NIL
-         (PROG (#2=#:G57)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|ArrayStack|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|ArrayStack;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#) (HREM |$ConstructorCache| '|ArrayStack|)))))))))) 
-
 (DEFUN |ArrayStack;| (|#1|)
   (SPROG
-   ((#1=#:G55 NIL) (|pv$| NIL) (#2=#:G52 NIL) (#3=#:G53 NIL) (#4=#:G54 NIL)
+   ((#1=#:G44 NIL) (|pv$| NIL) (#2=#:G41 NIL) (#3=#:G42 NIL) (#4=#:G43 NIL)
     (% NIL) (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -159,6 +143,22 @@
       (QSETREFV % 50
                 (CONS (|dispatchFunction| |ASTACK;hashUpdate!;Hs%Hs;18|) %))))
     %))) 
+
+(DEFUN |ArrayStack| (#1=#:G45)
+  (SPROG NIL
+         (PROG (#2=#:G46)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|ArrayStack|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|ArrayStack;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#) (HREM |$ConstructorCache| '|ArrayStack|)))))))))) 
 
 (MAKEPROP '|ArrayStack| '|infovec|
           (LIST

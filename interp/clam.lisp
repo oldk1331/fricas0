@@ -34,7 +34,7 @@
 ;   g2:= GENSYM()  --value computed by calling function
 ;   returnFoundValue:=
 ;     null argl =>
-;     --  if we have a global hastable, functions with no arguments are
+;     --  if we have a global hashtable, functions with no arguments are
 ;     --  stored in the same format as those with several arguments, e.g.
 ;     --  to cache the value <val> given by f(), the structure
 ;     --  ((nil <count> <val>)) is stored in the cache
@@ -60,14 +60,14 @@
 ;   mainFunction:= [op,lamex]
 ;   computeFunction:= [auxfn,['LAMBDA,argl,:body]]
 ;
-;   -- compile generated function stub
-;   compileInteractive mainFunction
-;
 ;   -- compile main body: this has already been compTran'ed
 ;   if $reportCompilation then
 ;     sayBrightlyI bright '"Generated LISP code for function:"
 ;     pp computeFunction
-;   compileQuietly computeFunction
+;   compile_quietly(computeFunction)
+;
+;   -- compile generated function stub
+;   comp_quietly(mainFunction)
 ;   op
 
 (DEFUN |compHash| (|op| |argl| |body| |cacheName| |eqEtc|)
@@ -164,12 +164,12 @@
       (SETQ |mainFunction| (LIST |op| |lamex|))
       (SETQ |computeFunction|
               (LIST |auxfn| (CONS 'LAMBDA (CONS |argl| |body|))))
-      (|compileInteractive| |mainFunction|)
       (COND
        (|$reportCompilation|
         (|sayBrightlyI| (|bright| "Generated LISP code for function:"))
         (|pp| |computeFunction|)))
-      (|compileQuietly| |computeFunction|)
+      (|compile_quietly| |computeFunction|)
+      (|comp_quietly| |mainFunction|)
       |op|))))
 
 ; devaluate_sig(tl, cl) == [(c => devaluate(t); t) for t in tl for c in cl]
@@ -223,7 +223,6 @@
 
 ; clearClam fn ==
 ;   infovec := GET(fn, 'cacheInfo) or keyedSystemError("S2GE0003", [fn])
-;   -- eval infovec.cacheReset
 ;   ir := infovec.cacheReset
 ;   ir is ["SETQ", var , ['MAKE_HASHTABLE, ["QUOTE", mode]]] =>
 ;      SETF(SYMBOL_-VALUE(var), MAKE_HASHTABLE(mode))
@@ -327,6 +326,7 @@
        |scl| NIL)))))
 
 ; clearConstructorCaches() ==
+;   clearClams()
 ;   clear_sorted_caches()
 ;   clearCategoryCaches()
 ;   CLRHASH $ConstructorCache
@@ -335,6 +335,7 @@
   (PROG ()
     (RETURN
      (PROGN
+      (|clearClams|)
       (|clear_sorted_caches|)
       (|clearCategoryCaches|)
       (CLRHASH |$ConstructorCache|)))))
@@ -354,11 +355,10 @@
               ('T (HREM |$ConstructorCache| |cname|)))))))))
 
 ; clearConstructorAndLisplibCaches() ==
-;   clearClams()
 ;   clearConstructorCaches()
 
 (DEFUN |clearConstructorAndLisplibCaches| ()
-  (PROG () (RETURN (PROGN (|clearClams|) (|clearConstructorCaches|)))))
+  (PROG () (RETURN (|clearConstructorCaches|))))
 
 ; clearCategoryCaches() ==
 ;   for name in allConstructors() repeat
@@ -1358,7 +1358,7 @@
 ; rightJustifyString(x,maxWidth) ==
 ;   size:= entryWidth x
 ;   size > maxWidth => keyedSystemError("S2GE0014",[x])
-;   [fillerSpaces(maxWidth-size,'" "),x]
+;   [filler_spaces(maxWidth - size), x]
 
 (DEFUN |rightJustifyString| (|x| |maxWidth|)
   (PROG (SIZE)
@@ -1366,7 +1366,7 @@
      (PROGN
       (SETQ SIZE (|entryWidth| |x|))
       (COND ((< |maxWidth| SIZE) (|keyedSystemError| 'S2GE0014 (LIST |x|)))
-            ('T (LIST (|fillerSpaces| (- |maxWidth| SIZE) " ") |x|)))))))
+            ('T (LIST (|filler_spaces| (- |maxWidth| SIZE)) |x|)))))))
 
 ; domainEqualList(argl1, argl2) == EQUAL(argl1, argl2)
 

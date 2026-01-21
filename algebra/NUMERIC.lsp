@@ -526,23 +526,8 @@
 
 (DECLAIM (NOTINLINE |Numeric;|)) 
 
-(DEFUN |Numeric| (#1=#:G254)
-  (SPROG NIL
-         (PROG (#2=#:G255)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|Numeric|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|Numeric;| #1#) (LETT #2# T))
-                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Numeric|)))))))))) 
-
 (DEFUN |Numeric;| (|#1|)
-  (SPROG ((|pv$| NIL) (#1=#:G253 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (#1=#:G233 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Numeric| DV$1))
@@ -797,6 +782,21 @@
                             |NUMERIC;complexNumeric;EPiC;51|)
                            %))))))))
           %))) 
+
+(DEFUN |Numeric| (#1=#:G234)
+  (SPROG NIL
+         (PROG (#2=#:G235)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|Numeric|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|Numeric;| #1#) (LETT #2# T))
+                (COND ((NOT #2#) (HREM |$ConstructorCache| '|Numeric|)))))))))) 
 
 (MAKEPROP '|Numeric| '|infovec|
           (LIST

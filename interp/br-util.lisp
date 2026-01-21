@@ -3,10 +3,6 @@
 
 (IN-PACKAGE "BOOT")
 
-; browserAutoloadOnceTrigger() == nil
-
-(DEFUN |browserAutoloadOnceTrigger| () (PROG () (RETURN NIL)))
-
 ; $includeUnexposed? := true   --default setting
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$includeUnexposed?| T))
@@ -95,7 +91,6 @@
 ; $OpViewTable := '(
 ;   (names           "Name"      "Names"           dbShowOpNames)
 ;   (documentation   "Name"      "Names"           dbShowOpDocumentation)
-;   (domains         "Domain"    "Domains"         dbShowOpDomains)
 ;   (signatures      "Signature" "Signatures"      dbShowOpSignatures)
 ;   (parameters      "Form"      "Forms"           dbShowOpParameters)
 ;   (origins         "Origin"    "Origins"         dbShowOpOrigins)
@@ -106,7 +101,6 @@
   (SETQ |$OpViewTable|
           '((|names| "Name" "Names" |dbShowOpNames|)
             (|documentation| "Name" "Names" |dbShowOpDocumentation|)
-            (|domains| "Domain" "Domains" |dbShowOpDomains|)
             (|signatures| "Signature" "Signatures" |dbShowOpSignatures|)
             (|parameters| "Form" "Forms" |dbShowOpParameters|)
             (|origins| "Origin" "Origins" |dbShowOpOrigins|)
@@ -1053,7 +1047,7 @@
        |u| NIL)
       (|htEndTable|)))))
 
-; bcAbbTable u ==
+; bcAbbTable(page, u) ==
 ;   htBeginTable()
 ;   for x in REMDUP u repeat        --allow x to be NIL meaning "no abbreviation"
 ;   -- for x in u repeat    --allow x to be NIL meaning "no abbreviation"
@@ -1063,7 +1057,7 @@
 ;       htSay '"}"
 ;   htEndTable()
 
-(DEFUN |bcAbbTable| (|u|)
+(DEFUN |bcAbbTable| (|page| |u|)
   (PROG (|con| |ISTMP#1| |abb|)
     (RETURN
      (PROGN

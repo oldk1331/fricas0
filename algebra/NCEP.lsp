@@ -29,9 +29,24 @@
 
 (DECLAIM (NOTINLINE |NumericComplexEigenPackage;|)) 
 
-(DEFUN |NumericComplexEigenPackage| (#1=#:G45)
+(DEFUN |NumericComplexEigenPackage;| (|#1|)
+  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+         (PROGN
+          (LETT DV$1 (|devaluate| |#1|))
+          (LETT |dv$| (LIST '|NumericComplexEigenPackage| DV$1))
+          (LETT % (GETREFV 29))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|NumericComplexEigenPackage|
+                      (LIST DV$1) (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (QSETREFV % 6 |#1|)
+          (SETF |pv$| (QREFELT % 3))
+          %))) 
+
+(DEFUN |NumericComplexEigenPackage| (#1=#:G7)
   (SPROG NIL
-         (PROG (#2=#:G46)
+         (PROG (#2=#:G8)
            (RETURN
             (COND
              ((LETT #2#
@@ -47,21 +62,6 @@
                  ((NOT #2#)
                   (HREM |$ConstructorCache|
                         '|NumericComplexEigenPackage|)))))))))) 
-
-(DEFUN |NumericComplexEigenPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
-         (PROGN
-          (LETT DV$1 (|devaluate| |#1|))
-          (LETT |dv$| (LIST '|NumericComplexEigenPackage| DV$1))
-          (LETT % (GETREFV 29))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|NumericComplexEigenPackage|
-                      (LIST DV$1) (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (QSETREFV % 6 |#1|)
-          (SETF |pv$| (QREFELT % 3))
-          %))) 
 
 (MAKEPROP '|NumericComplexEigenPackage| '|infovec|
           (LIST

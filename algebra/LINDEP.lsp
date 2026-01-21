@@ -114,27 +114,8 @@
 
 (DECLAIM (NOTINLINE |LinearDependence;|)) 
 
-(DEFUN |LinearDependence| (&REST #1=#:G81)
-  (SPROG NIL
-         (PROG (#2=#:G82)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|LinearDependence|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |LinearDependence;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|LinearDependence|)))))))))) 
-
 (DEFUN |LinearDependence;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (#1=#:G80 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((|pv$| NIL) (#1=#:G64 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -189,6 +170,25 @@
                         (|dispatchFunction| |LINDEP;particularSolution;MVU;11|)
                         %)))))
           %))) 
+
+(DEFUN |LinearDependence| (&REST #1=#:G65)
+  (SPROG NIL
+         (PROG (#2=#:G66)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|LinearDependence|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |LinearDependence;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|LinearDependence|)))))))))) 
 
 (MAKEPROP '|LinearDependence| '|infovec|
           (LIST

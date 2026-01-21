@@ -1,7 +1,7 @@
 
 (SDEFUN |MATHSYM;greek_str| ((|i| (|Integer|)) (% (|String|)))
         (SPROG
-         ((#1=#:G15 NIL) (|ns| (|String|))
+         ((#1=#:G7 NIL) (|ns| (|String|))
           (|qr|
            (|Record| (|:| |quotient| (|Integer|))
                      (|:| |remainder| (|Integer|)))))
@@ -16,7 +16,7 @@
                            (EXIT
                             (COND
                              ((ZEROP |i|)
-                              (PROGN (LETT #1# |ns|) (GO #2=#:G14))))))
+                              (PROGN (LETT #1# |ns|) (GO #2=#:G6))))))
                       NIL (GO G190) G191 (EXIT NIL)))))
           #2# (EXIT #1#)))) 
 
@@ -131,9 +131,23 @@
 
 (DECLAIM (NOTINLINE |MathematicalSymbols;|)) 
 
+(DEFUN |MathematicalSymbols;| ()
+  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
+         (PROGN
+          (LETT |dv$| '(|MathematicalSymbols|))
+          (LETT % (GETREFV 62))
+          (QSETREFV % 0 |dv$|)
+          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (|haddProp| |$ConstructorCache| '|MathematicalSymbols| NIL
+                      (CONS 1 %))
+          (|stuffDomainSlots| %)
+          (SETF |pv$| (QREFELT % 3))
+          (QSETREFV % 6 0)
+          %))) 
+
 (DEFUN |MathematicalSymbols| ()
   (SPROG NIL
-         (PROG (#1=#:G79)
+         (PROG (#1=#:G62)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|MathematicalSymbols|))
@@ -149,20 +163,6 @@
                 (COND
                  ((NOT #1#)
                   (HREM |$ConstructorCache| '|MathematicalSymbols|)))))))))) 
-
-(DEFUN |MathematicalSymbols;| ()
-  (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
-         (PROGN
-          (LETT |dv$| '(|MathematicalSymbols|))
-          (LETT % (GETREFV 62))
-          (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
-          (|haddProp| |$ConstructorCache| '|MathematicalSymbols| NIL
-                      (CONS 1 %))
-          (|stuffDomainSlots| %)
-          (SETF |pv$| (QREFELT % 3))
-          (QSETREFV % 6 0)
-          %))) 
 
 (MAKEPROP '|MathematicalSymbols| '|infovec|
           (LIST

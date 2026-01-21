@@ -53,11 +53,6 @@
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$repGuys| (LIST '|noRep| '|rep|)))
 
-; $attrCats    := ['$imPrGuys, '$toWhereGuys, '$repGuys]
-
-(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
-  (SETQ |$attrCats| (LIST '|$imPrGuys| '|$toWhereGuys| '|$repGuys|)))
-
 ; $ncMsgList := nil
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$ncMsgList| NIL))
@@ -201,7 +196,7 @@
 ;         posLetter := rest ASSOC(poCharPosn getMsgPos msg, chPosList)
 ;         oldPre := getMsgPrefix msg
 ;         setMsgPrefix (msg,STRCONC(oldPre,_
-;                      make_full_CVEC($preLength - 4 - SIZE oldPre), posLetter))
+;                      filler_spaces($preLength - 4 - SIZE(oldPre)), posLetter))
 ;     leaderMsg := makeLeaderMsg chPosList
 ;     NCONC(msgList,LIST leaderMsg)  --a back cons
 
@@ -224,7 +219,7 @@
              (SETQ |oldPre| (|getMsgPrefix| |msg|))
              (|setMsgPrefix| |msg|
               (STRCONC |oldPre|
-               (|make_full_CVEC| (- (- |$preLength| 4) (SIZE |oldPre|)))
+               (|filler_spaces| (- (- |$preLength| 4) (SIZE |oldPre|)))
                |posLetter|)))))
           (SETQ |bfVar#1| (CDR |bfVar#1|))))
        |msgList| NIL)
@@ -401,14 +396,6 @@
                  (LIST "(from " |charMarker| " up to " |charMarker2| ") "))
          (|setMsgText| |msg| (APPEND |markingText| (|getMsgText| |msg|))))))))))
 
-; rep (c,n)  ==
-;     n > 0 =>
-;       make_full_CVEC2(n, c)
-;     '""
-
-(DEFUN |rep| (|c| |n|)
-  (PROG () (RETURN (COND ((< 0 |n|) (|make_full_CVEC2| |n| |c|)) ('T "")))))
-
 ; From   pos == ['FROM,   pos]
 
 (DEFUN |From| (|pos|) (PROG () (RETURN (LIST 'FROM |pos|))))
@@ -529,7 +516,8 @@
 (DEFUN |getLineText| (|line|) (PROG () (RETURN (CDR |line|))))
 
 ; queueUpErrors(globalNumOfLine,msgList)==
-;     thisPosMsgs  := []
+;     thisPosMsgs := []
+;     notThisPosMsgs := []
 ;     for msg in msgList _
 ;       while thisPosIsLess(getMsgPos msg,globalNumOfLine) repeat
 ;     --these are msgs that refer to positions from earlier compilations
@@ -553,6 +541,7 @@
     (RETURN
      (PROGN
       (SETQ |thisPosMsgs| NIL)
+      (SETQ |notThisPosMsgs| NIL)
       ((LAMBDA (|bfVar#8| |msg|)
          (LOOP
           (COND
@@ -921,17 +910,17 @@
       (#1# 'NONE)))))
 
 ; getPreStL optPre ==
-;     null optPre => [make_full_CVEC(2)]
+;     null optPre => [filler_spaces(2)]
 ;     spses :=
 ;       (extraPlaces := ($preLength - (SIZE optPre) - 3)) > 0 =>
-;         make_full_CVEC(extraPlaces)
+;             filler_spaces(extraPlaces)
 ;       '""
 ;     ['%b, optPre,spses,'":", '%d]
 
 (DEFUN |getPreStL| (|optPre|)
   (PROG (|extraPlaces| |spses|)
     (RETURN
-     (COND ((NULL |optPre|) (LIST (|make_full_CVEC| 2)))
+     (COND ((NULL |optPre|) (LIST (|filler_spaces| 2)))
            (#1='T
             (PROGN
              (SETQ |spses|
@@ -939,7 +928,7 @@
                       ((< 0
                           (SETQ |extraPlaces|
                                   (- (- |$preLength| (SIZE |optPre|)) 3)))
-                       (|make_full_CVEC| |extraPlaces|))
+                       (|filler_spaces| |extraPlaces|))
                       (#1# "")))
              (LIST '|%b| |optPre| |spses| ":" '|%d|)))))))
 
@@ -1051,38 +1040,12 @@
      (|ncPutQ| |msg| |catless|
       (CONS |attr| (IFCDR (ASSQ |catless| (|ncAlist| |msg|))))))))
 
-; whichCat attr ==
-;     found := 'catless
-;     for cat in $attrCats repeat
-;         if ListMember? (attr,EVAL cat) then
-;           found := cat
-;           return found
-;     found
-
-(DEFUN |whichCat| (|attr|)
-  (PROG (|found|)
-    (RETURN
-     (PROGN
-      (SETQ |found| '|catless|)
-      ((LAMBDA (|bfVar#12| |cat|)
-         (LOOP
-          (COND
-           ((OR (ATOM |bfVar#12|) (PROGN (SETQ |cat| (CAR |bfVar#12|)) NIL))
-            (RETURN NIL))
-           ('T
-            (COND
-             ((|ListMember?| |attr| (EVAL |cat|)) (SETQ |found| |cat|)
-              (RETURN |found|)))))
-          (SETQ |bfVar#12| (CDR |bfVar#12|))))
-       |$attrCats| NIL)
-      |found|))))
-
 ; makeLeaderMsg chPosList ==
-;     st := make_full_CVEC($preLength - 3)
+;     st := filler_spaces($preLength - 3)
 ;     oldPos := -1
 ;     for [posNum,:posLetter] in reverse chPosList repeat
-;         st := STRCONC(st, _
-;             rep(char ".", (posNum - oldPos - 1)),posLetter)
+;         st := STRCONC(st, filler_chars((posNum - oldPos - 1), '"."),
+;                       posLetter)
 ;         oldPos := posNum
 ;     ['leader,$nopos,'nokey,NIL,NIL,[st]]
 
@@ -1090,27 +1053,27 @@
   (PROG (|st| |oldPos| |posNum| |posLetter|)
     (RETURN
      (PROGN
-      (SETQ |st| (|make_full_CVEC| (- |$preLength| 3)))
+      (SETQ |st| (|filler_spaces| (- |$preLength| 3)))
       (SETQ |oldPos| (- 1))
-      ((LAMBDA (|bfVar#14| |bfVar#13|)
+      ((LAMBDA (|bfVar#13| |bfVar#12|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#14|)
-                (PROGN (SETQ |bfVar#13| (CAR |bfVar#14|)) NIL))
+           ((OR (ATOM |bfVar#13|)
+                (PROGN (SETQ |bfVar#12| (CAR |bfVar#13|)) NIL))
             (RETURN NIL))
            (#1='T
-            (AND (CONSP |bfVar#13|)
+            (AND (CONSP |bfVar#12|)
                  (PROGN
-                  (SETQ |posNum| (CAR |bfVar#13|))
-                  (SETQ |posLetter| (CDR |bfVar#13|))
+                  (SETQ |posNum| (CAR |bfVar#12|))
+                  (SETQ |posLetter| (CDR |bfVar#12|))
                   #1#)
                  (PROGN
                   (SETQ |st|
                           (STRCONC |st|
-                           (|rep| (|char| '|.|) (- (- |posNum| |oldPos|) 1))
+                           (|filler_chars| (- (- |posNum| |oldPos|) 1) ".")
                            |posLetter|))
                   (SETQ |oldPos| |posNum|)))))
-          (SETQ |bfVar#14| (CDR |bfVar#14|))))
+          (SETQ |bfVar#13| (CDR |bfVar#13|))))
        (REVERSE |chPosList|) NIL)
       (LIST '|leader| |$nopos| '|nokey| NIL NIL (LIST |st|))))))
 
@@ -1120,8 +1083,7 @@
 ;     localNumOfLine  :=
 ;         i := poLinePosn posOfLine
 ;         stNum := STRINGIMAGE i
-;         STRCONC(rep(char " ", ($preLength - 7 - SIZE stNum)),_
-;          stNum)
+;         STRCONC(filler_spaces($preLength - 7 - SIZE stNum), stNum)
 ;     ['line,posOfLine,NIL,NIL, STRCONC('"Line", localNumOfLine),_
 ;         textOfLine]
 
@@ -1135,8 +1097,7 @@
               (PROGN
                (SETQ |i| (|poLinePosn| |posOfLine|))
                (SETQ |stNum| (STRINGIMAGE |i|))
-               (STRCONC
-                (|rep| (|char| '| |) (- (- |$preLength| 7) (SIZE |stNum|)))
+               (STRCONC (|filler_spaces| (- (- |$preLength| 7) (SIZE |stNum|)))
                 |stNum|)))
       (LIST '|line| |posOfLine| NIL NIL (STRCONC "Line" |localNumOfLine|)
             |textOfLine|)))))

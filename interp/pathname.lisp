@@ -29,11 +29,6 @@
 
 (DEFUN |pathnameType| (|p|) (PROG () (RETURN (PATHNAME-TYPE (|pathname| |p|)))))
 
-; pathnameTypeId p == UPCASE object2Identifier pathnameType p
-
-(DEFUN |pathnameTypeId| (|p|)
-  (PROG () (RETURN (UPCASE (|object2Identifier| (|pathnameType| |p|))))))
-
 ; pathnameDirectory p ==
 ;     NAMESTRING MAKE_-PATHNAME(INTERN('"DIRECTORY", '"KEYWORD"),_
 ;                                PATHNAME_-DIRECTORY pathname p)

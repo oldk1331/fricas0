@@ -10,7 +10,7 @@
 (SDEFUN |FMTCAT-;numberOfPrimes;OfI;3| ((|a2| (|OutputForm|)) (% (|Integer|)))
         (SPROG
          ((|aa2| (|List| (|OutputForm|))) (|o2| (|String|))
-          (|opex| (|OutputForm|)) (#1=#:G70 NIL) (#2=#:G71 NIL) (|i| NIL)
+          (|opex| (|OutputForm|)) (#1=#:G52 NIL) (#2=#:G53 NIL) (|i| NIL)
           (|n| (|NonNegativeInteger|)) (|s2| (|String|)))
          (SEQ
           (EXIT
@@ -18,7 +18,7 @@
             ((SPADCALL |a2| (QREFELT % 13))
              (COND
               ((NULL (SPADCALL |a2| (QREFELT % 14)))
-               (PROGN (LETT #1# -1) (GO #3=#:G69)))
+               (PROGN (LETT #1# -1) (GO #3=#:G51)))
               ('T
                (SEQ (LETT |s2| (SPADCALL |a2| (QREFELT % 16)))
                     (LETT |n| (QCSIZE |s2|))
@@ -55,8 +55,8 @@
 
 (SDEFUN |FMTCAT-;float?| ((|s| (|String|)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G101 NIL) (|i| (|Integer|)) (#2=#:G99 NIL) (#3=#:G100 NIL)
-          (|n| (|NonNegativeInteger|)) (#4=#:G102 NIL) (|d| (|Integer|)))
+         ((#1=#:G83 NIL) (|i| (|Integer|)) (#2=#:G81 NIL) (#3=#:G82 NIL)
+          (|n| (|NonNegativeInteger|)) (#4=#:G84 NIL) (|d| (|Integer|)))
          (SEQ
           (EXIT
            (COND
@@ -73,7 +73,7 @@
                       ((NULL
                         (SPADCALL (SPADCALL |s| |i| (QREFELT % 18))
                                   (QREFELT % 34)))
-                       (PROGN (LETT #1# NIL) (GO #6=#:G98))))))
+                       (PROGN (LETT #1# NIL) (GO #6=#:G80))))))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
               (LETT |i| (+ |d| 1)) (LETT |n| (QCSIZE |s|))
               (LETT |s| (COPY-SEQ |s|))
@@ -101,7 +101,7 @@
                          ((NULL
                            (|eql_SI| (SPADCALL |s| |i| (QREFELT % 18))
                                      (SPADCALL (QREFELT % 35))))
-                          (PROGN (LETT #3# |$NoValue|) (GO #7=#:G86))))))
+                          (PROGN (LETT #3# |$NoValue|) (GO #7=#:G68))))))
                       (EXIT (LETT |i| (+ |i| 1))))
                      NIL (GO G190) G191 (EXIT NIL)))
                #7# (EXIT #3#))
@@ -122,7 +122,7 @@
                                        (SPADCALL |s| |i| (QREFELT % 18))
                                        (SPADCALL (QREFELT % 35))
                                        (QREFELT % 19))
-                                      (PROGN (LETT #2# 1) (GO #8=#:G89))))))
+                                      (PROGN (LETT #2# 1) (GO #8=#:G71))))))
                               NIL (GO G190) G191 (EXIT NIL)))
                         #8# (EXIT #2#))
                        (COND
@@ -158,7 +158,7 @@
 
 (SDEFUN |FMTCAT-;formatFunction;ObLOb;10|
         ((|b| (|OutputBox|)) (|lb| (|List| (|OutputBox|))) (% (|OutputBox|)))
-        (SPROG ((|bx| (|OutputBox|)) (#1=#:G113 NIL) (|x| NIL))
+        (SPROG ((|bx| (|OutputBox|)) (#1=#:G95 NIL) (|x| NIL))
                (SEQ
                 (COND
                  ((NULL |lb|)
@@ -193,9 +193,9 @@
 (SDEFUN |FMTCAT-;formatExpression;OfIOb;12|
         ((|expr| (|OutputForm|)) (|prec| (|Integer|)) (% (|OutputBox|)))
         (SPROG
-         ((|bargs| (|List| (|OutputBox|))) (#1=#:G134 NIL) (|a| NIL)
-          (#2=#:G133 NIL) (|op| #3=(|String|)) (|nargs| (|Integer|))
-          (#4=#:G132 NIL) (#5=#:G131 NIL) (|args| (|List| (|OutputForm|)))
+         ((|bargs| (|List| (|OutputBox|))) (#1=#:G116 NIL) (|a| NIL)
+          (#2=#:G115 NIL) (|op| #3=(|String|)) (|nargs| (|Integer|))
+          (#4=#:G114 NIL) (#5=#:G113 NIL) (|args| (|List| (|OutputForm|)))
           (|opex| (|OutputForm|)) (|str| #3#) (|s| (|String|))
           (|operatorData|
            (|OperatorHandlers|
@@ -447,7 +447,7 @@
           (LETT |hh| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|l| NIL) (#1=#:G171 NIL) (|a| NIL) (|sepbox| NIL))
+            (SPROG ((|l| NIL) (#1=#:G152 NIL) (|a| NIL) (|sepbox| NIL))
                    (SEQ
                     (COND
                      ((SPADCALL |args| (QREFELT % 87))
@@ -517,7 +517,7 @@
           (LETT |plus| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|l| NIL) (|sep| NIL) (|a| NIL) (#1=#:G185 NIL))
+            (SPROG ((|l| NIL) (|sep| NIL) (|a| NIL) (#1=#:G166 NIL))
                    (SEQ
                     (COND
                      ((SPADCALL |args| (QREFELT % 87))

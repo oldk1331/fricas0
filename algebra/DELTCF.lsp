@@ -26,7 +26,7 @@
 (SDEFUN |DELTCF;projectiveSpace;IDc;4|
         ((|n| (|Integer|)) (% (|DeltaComplex| VS)))
         (SPROG
-         ((|cl| (|List| (|List| (|List| (|Integer|))))) (#1=#:G24 NIL)
+         ((|cl| (|List| (|List| (|List| (|Integer|))))) (#1=#:G12 NIL)
           (|i| NIL) (|vs1| (|List| VS)))
          (SEQ (LETT |vs1| NIL) (LETT |cl| NIL)
               (SEQ (LETT |i| 1) (LETT #1# |n|) G190
@@ -50,23 +50,6 @@
 
 (DECLAIM (NOTINLINE |DeltaComplexFactory;|)) 
 
-(DEFUN |DeltaComplexFactory| (#1=#:G27)
-  (SPROG NIL
-         (PROG (#2=#:G28)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|DeltaComplexFactory|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|DeltaComplexFactory;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|DeltaComplexFactory|)))))))))) 
-
 (DEFUN |DeltaComplexFactory;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -81,6 +64,23 @@
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |DeltaComplexFactory| (#1=#:G15)
+  (SPROG NIL
+         (PROG (#2=#:G16)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|DeltaComplexFactory|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|DeltaComplexFactory;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|DeltaComplexFactory|)))))))))) 
 
 (MAKEPROP '|DeltaComplexFactory| '|infovec|
           (LIST

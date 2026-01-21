@@ -8,7 +8,7 @@
 (SDEFUN |WUTSET;per| ((|l| (|List| P)) (% (%))) |l|) 
 
 (SDEFUN |WUTSET;removeAssociates| ((|lp| (|List| P)) (% (|List| P)))
-        (SPROG ((#1=#:G32 NIL) (|p| NIL) (#2=#:G31 NIL))
+        (SPROG ((#1=#:G24 NIL) (|p| NIL) (#2=#:G23 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
@@ -31,7 +31,7 @@
           (|Union| (|Record| (|:| |bas| %) (|:| |top| (|List| P)))
                    #1="failed")))
         (SPROG
-         ((|contradiction| (|Boolean|)) (|rs| #2=(|List| P)) (#3=#:G35 NIL)
+         ((|contradiction| (|Boolean|)) (|rs| #2=(|List| P)) (#3=#:G27 NIL)
           (|bs| (%))
           (|rec|
            (|Union| (|Record| (|:| |bas| %) (|:| |top| (|List| P))) "failed"))
@@ -173,7 +173,7 @@
          (|redOp| (|Mapping| P P P)) (% (|Union| % "failed")))
         (SPROG
          ((|qs| #1=(|List| P)) (|contradiction| (|Boolean|)) (|rs| #1#)
-          (#2=#:G35 NIL) (|ms| (%))
+          (#2=#:G27 NIL) (|ms| (%))
           (|rec|
            (|Union| (|Record| (|:| |bas| %) (|:| |top| (|List| P)))
                     #3="failed")))
@@ -296,7 +296,7 @@
         ((|ps| (|List| P)) (|redOp?| (|Mapping| (|Boolean|) P P))
          (|redOp| (|Mapping| P P P)) (% (|List| %)))
         (SPROG
-         ((#1=#:G125 NIL) (|ln| (|List| (|SplittingNode| (|List| P) %)))
+         ((#1=#:G116 NIL) (|ln| (|List| (|SplittingNode| (|List| P) %)))
           (|newps| (|List| P)) (|lics| (|List| P)) (|cs| (%))
           (|charSet?| (|Union| % "failed"))
           (|esl| (|Union| (|SplittingTree| (|List| P) %) #2="failed"))
@@ -420,7 +420,7 @@
 
 (SDEFUN |WUTSET;removeSquares| ((|ts| (%)) (% #1=(|Union| % "failed")))
         (SPROG
-         ((|p| (P)) (|newts| (%)) (|rsts| #1#) (#2=#:G87 NIL) (#3=#:G153 NIL))
+         ((|p| (P)) (|newts| (%)) (|rsts| #1#) (#2=#:G79 NIL) (#3=#:G144 NIL))
          (SEQ
           (COND ((SPADCALL |ts| (QREFELT % 66)) (CONS 0 |ts|))
                 (#4='T
@@ -515,28 +515,9 @@
 
 (DECLAIM (NOTINLINE |WuWenTsunTriangularSet;|)) 
 
-(DEFUN |WuWenTsunTriangularSet| (&REST #1=#:G194)
-  (SPROG NIL
-         (PROG (#2=#:G195)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|WuWenTsunTriangularSet|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1 (APPLY (|function| |WuWenTsunTriangularSet;|) #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|WuWenTsunTriangularSet|)))))))))) 
-
 (DEFUN |WuWenTsunTriangularSet;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((#1=#:G193 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
+   ((#1=#:G183 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
     (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -586,6 +567,25 @@
       (QSETREFV % 87
                 (CONS (|dispatchFunction| |WUTSET;zeroSetSplit;LL;14|) %))))
     %))) 
+
+(DEFUN |WuWenTsunTriangularSet| (&REST #1=#:G184)
+  (SPROG NIL
+         (PROG (#2=#:G185)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|WuWenTsunTriangularSet|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1 (APPLY (|function| |WuWenTsunTriangularSet;|) #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|WuWenTsunTriangularSet|)))))))))) 
 
 (MAKEPROP '|WuWenTsunTriangularSet| '|infovec|
           (LIST

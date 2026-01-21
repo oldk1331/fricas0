@@ -52,23 +52,6 @@
 
 (DECLAIM (NOTINLINE |OnePointCompletion;|)) 
 
-(DEFUN |OnePointCompletion| (#1=#:G59)
-  (SPROG NIL
-         (PROG (#2=#:G60)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
-                                               (HGET |$ConstructorCache|
-                                                     '|OnePointCompletion|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT (PROG1 (|OnePointCompletion;| #1#) (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache| '|OnePointCompletion|)))))))))) 
-
 (DEFUN |OnePointCompletion;| (|#1|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
          (PROGN
@@ -113,6 +96,23 @@
                        (CONS (|dispatchFunction| |ONECOMP;rationalIfCan;%U;12|)
                              %)))))
           %))) 
+
+(DEFUN |OnePointCompletion| (#1=#:G37)
+  (SPROG NIL
+         (PROG (#2=#:G38)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (LIST (|devaluate| #1#))
+                                               (HGET |$ConstructorCache|
+                                                     '|OnePointCompletion|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT (PROG1 (|OnePointCompletion;| #1#) (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache| '|OnePointCompletion|)))))))))) 
 
 (MAKEPROP '|OnePointCompletion| '|infovec|
           (LIST

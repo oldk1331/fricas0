@@ -9,7 +9,7 @@
          (SETQ |PrimitiveFunctionCategory;AL| (|PrimitiveFunctionCategory;|))))) 
 
 (DEFUN |PrimitiveFunctionCategory;| ()
-  (SPROG ((#1=#:G1 NIL))
+  (SPROG ((#1=#:G0 NIL))
          (PROG1
              (LETT #1#
                    (|Join|

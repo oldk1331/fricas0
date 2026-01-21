@@ -5,29 +5,6 @@
 
 (DECLAIM (NOTINLINE |LinearOrdinaryDifferentialOperator3Aux;|)) 
 
-(DEFUN |LinearOrdinaryDifferentialOperator3Aux| (&REST #1=#:G6)
-  (SPROG NIL
-         (PROG (#2=#:G7)
-           (RETURN
-            (COND
-             ((LETT #2#
-                    (|lassocShiftWithFunction| (|devaluateList| #1#)
-                                               (HGET |$ConstructorCache|
-                                                     '|LinearOrdinaryDifferentialOperator3Aux|)
-                                               '|domainEqualList|))
-              (|CDRwithIncrement| #2#))
-             ('T
-              (UNWIND-PROTECT
-                  (PROG1
-                      (APPLY
-                       (|function| |LinearOrdinaryDifferentialOperator3Aux;|)
-                       #1#)
-                    (LETT #2# T))
-                (COND
-                 ((NOT #2#)
-                  (HREM |$ConstructorCache|
-                        '|LinearOrdinaryDifferentialOperator3Aux|)))))))))) 
-
 (DEFUN |LinearOrdinaryDifferentialOperator3Aux;| (|#1| |#2| |#3|)
   (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
          (PROGN
@@ -49,6 +26,29 @@
           (QSETREFV % 8 |#3|)
           (SETF |pv$| (QREFELT % 3))
           %))) 
+
+(DEFUN |LinearOrdinaryDifferentialOperator3Aux| (&REST #1=#:G1)
+  (SPROG NIL
+         (PROG (#2=#:G2)
+           (RETURN
+            (COND
+             ((LETT #2#
+                    (|lassocShiftWithFunction| (|devaluateList| #1#)
+                                               (HGET |$ConstructorCache|
+                                                     '|LinearOrdinaryDifferentialOperator3Aux|)
+                                               '|domainEqualList|))
+              (|CDRwithIncrement| #2#))
+             ('T
+              (UNWIND-PROTECT
+                  (PROG1
+                      (APPLY
+                       (|function| |LinearOrdinaryDifferentialOperator3Aux;|)
+                       #1#)
+                    (LETT #2# T))
+                (COND
+                 ((NOT #2#)
+                  (HREM |$ConstructorCache|
+                        '|LinearOrdinaryDifferentialOperator3Aux|)))))))))) 
 
 (MAKEPROP '|LinearOrdinaryDifferentialOperator3Aux| '|infovec|
           (LIST
