@@ -676,7 +676,7 @@
 
 (SDEFUN |SIMPC;merge;3%;22| ((|a| (%)) (|b| (%)) (% (%)))
         (SPROG ((|res| (%)) (#1=#:G221 NIL) (|x| NIL))
-               (SEQ (LETT |res| (MOVEVEC (MAKE_VEC 3) |a|))
+               (SEQ (LETT |res| (REPLACE (MAKEARR1 3 NIL) |a|))
                     (SEQ (LETT |x| NIL) (LETT #1# (QVELT |b| 2)) G190
                          (COND
                           ((OR (ATOM #1#) (PROGN (LETT |x| (CAR #1#)) NIL))

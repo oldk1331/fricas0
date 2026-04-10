@@ -190,6 +190,13 @@
    `(setf (aref (the (simple-array (,',b_spec ,',nb) (* *)) ,v) ,i ,j)
           ,s))
 
+(defmacro ,(suffixed_name QMAJ_AREF_ nbn) (v i)
+   `(ROW-MAJOR-AREF (the (simple-array (,',b_spec ,',nb) (* *)) ,v) ,i))
+
+(defmacro ,(suffixed_name QMAJ_INDEX_ nbn) (v i j)
+    `(ARRAY-ROW-MAJOR-INDEX (the (simple-array (,',b_spec ,',nb) (* *)) ,v)
+      ,i ,j))
+
 (defmacro ,(suffixed_name ANROWS_ nbn) (v)
     `(array-dimension (the (simple-array (,',b_spec ,',nb) (* *)) ,v) 0))
 
@@ -790,6 +797,16 @@
 
 (defmacro |spadConstant| (dollar n)
  `(SPADCALL (svref ,dollar (the fixnum ,n))))
+
+(defmacro |SpadFun|(id get_expr)
+    `(let ((cnt (car ,id)))
+        (cond
+           ((< cnt 2)
+            (let ((fun1 ,get_expr))
+                 (setf (car ,id) (+ cnt 1))
+                 (setf (cdr ,id) fun1)
+                 fun1))
+            ('T (cdr ,id)))))
 
 (defmacro |SPADfirst| (l)
   (let ((tem (gensym)))

@@ -5369,7 +5369,12 @@
           (LETT |dv$| (LIST '|FreeDivisionAlgebra| DV$1 DV$2))
           (LETT % (GETREFV 349))
           (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (QSETREFV % 3
+                    (LETT |pv$|
+                          (|buildPredVector| 0 0
+                                             (LIST
+                                              (|HasCategory| |#2|
+                                                             '(|CharacteristicZero|))))))
           (|haddProp| |$ConstructorCache| '|FreeDivisionAlgebra|
                       (LIST DV$1 DV$2) (CONS 1 %))
           (|stuffDomainSlots| %)
@@ -5587,10 +5592,10 @@
            'NIL
            (CONS
             (|makeByteWordVec2| 1
-                                '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
+                                '(0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                                  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
             (CONS
-             '#(|DivisionRing&| |Algebra&| |Algebra&| |EntireRing&| NIL NIL
+             '#(|DivisionRing&| NIL |Algebra&| |Algebra&| |EntireRing&| NIL NIL
                 |Rng&| |NonAssociativeAlgebra&| |NonAssociativeAlgebra&| NIL
                 |Module&| |Module&| NIL |NonAssociativeRing&| NIL NIL NIL NIL
                 |NonAssociativeRng&| NIL NIL NIL NIL |AbelianGroup&| NIL NIL
@@ -5598,19 +5603,19 @@
                 NIL |AbelianSemiGroup&| |Magma&| |SetCategory&| NIL
                 |BasicType&| NIL NIL NIL)
              (CONS
-              '#((|DivisionRing|) (|Algebra| 348) (|Algebra| 7) (|EntireRing|)
-                 (|Ring|) (|SemiRing|) (|Rng|) (|NonAssociativeAlgebra| 348)
-                 (|NonAssociativeAlgebra| 7) (|SemiRng|) (|Module| 348)
-                 (|Module| 7) (|BiModule| $$ $$) (|NonAssociativeRing|)
-                 (|BiModule| 348 348) (|BiModule| 7 7) (|LeftModule| $$)
-                 (|RightModule| $$) (|NonAssociativeRng|) (|LeftModule| 348)
-                 (|RightModule| 348) (|LeftModule| 7) (|RightModule| 7)
-                 (|AbelianGroup|) (|CancellationAbelianMonoid|)
-                 (|NonAssociativeSemiRing|) (|Monoid|) (|AbelianMonoid|)
-                 (|NonAssociativeSemiRng|) (|MagmaWithUnit|) (|SemiGroup|)
-                 (|AbelianSemiGroup|) (|Magma|) (|SetCategory|)
-                 (|CoercibleTo| 170) (|BasicType|) (|unitsKnown|)
-                 (|noZeroDivisors|) (|TwoSidedRecip|))
+              '#((|DivisionRing|) (|CharacteristicZero|) (|Algebra| 348)
+                 (|Algebra| 7) (|EntireRing|) (|Ring|) (|SemiRing|) (|Rng|)
+                 (|NonAssociativeAlgebra| 348) (|NonAssociativeAlgebra| 7)
+                 (|SemiRng|) (|Module| 348) (|Module| 7) (|BiModule| $$ $$)
+                 (|NonAssociativeRing|) (|BiModule| 348 348) (|BiModule| 7 7)
+                 (|LeftModule| $$) (|RightModule| $$) (|NonAssociativeRng|)
+                 (|LeftModule| 348) (|RightModule| 348) (|LeftModule| 7)
+                 (|RightModule| 7) (|AbelianGroup|)
+                 (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
+                 (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
+                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|) (|Magma|)
+                 (|SetCategory|) (|CoercibleTo| 170) (|BasicType|)
+                 (|unitsKnown|) (|noZeroDivisors|) (|TwoSidedRecip|))
               (|makeByteWordVec2| 348
                                   '(0 7 9 10 4 12 7 0 9 9 9 13 0 7 0 15 3 12 16
                                     0 9 9 17 5 12 7 0 9 9 9 7 18 6 12 19 0 9 9

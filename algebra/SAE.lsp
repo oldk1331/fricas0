@@ -492,10 +492,6 @@
           (AND (|HasCategory| |#1| '(|FiniteFieldCategory|))
                (|HasCategory| % '(|CharacteristicNonZero|))))
       (|augmentPredVector| % 65536))
-     (AND
-      (OR (|HasCategory| |#1| '(|CharacteristicNonZero|))
-          (AND #7# #5# (|HasCategory| % '(|CharacteristicNonZero|))))
-      (|augmentPredVector| % 131072))
      (SETF |pv$| (QREFELT % 3))
      (QSETREFV % 12 (SPADCALL (SPADCALL |#3| (QREFELT % 9)) (QREFELT % 11)))
      (COND
@@ -783,7 +779,7 @@
                                     84 1 0 35 0 70 1 0 0 35 1 1 0 35 0 1 1 0 7
                                     0 1 1 0 0 7 1 1 6 159 0 1 1 17 143 95 1 2 0
                                     0 0 0 1 1 0 50 0 52 1 0 0 43 47 1 0 0 6 49
-                                    1 0 0 0 1 1 14 0 146 1 1 18 10 0 1 1 2 0 0
+                                    1 0 0 0 1 1 14 0 146 1 1 17 10 0 1 1 2 0 0
                                     1 1 0 7 0 81 0 0 15 74 0 0 79 80 3 0 0 0 0
                                     0 1 2 3 57 0 0 1 2 0 0 0 0 1 2 0 57 0 0 1 2
                                     0 0 0 75 1 2 0 0 0 15 1 2 3 0 0 43 1 0 0 0

@@ -4201,7 +4201,6 @@
                           (|Fraction| (|SparseUnivariatePolynomial| F)))
                      (|:| |u_part| F) (|:| |exponent| (|Integer|))
                      (|:| |shift_part| F) (|:| |a_val| F))))
-         (|denf| (|SparseUnivariatePolynomial| F)) (|gexp| (|Integer|))
          (|k| (|Kernel| F))
          (%
           (|Record| (|:| |ans| F) (|:| |right| F) (|:| |primpart| F)
@@ -4216,8 +4215,7 @@
                      ((NULL |cand_prims|)
                       (SEQ
                        (LETT |cand_prims|
-                             (|RDEEFX;get_prims| (|SPADfirst| |scands|) |denf|
-                              |denf| |gexp| |k| %))
+                             (|RDEEFX;get_prims| (|SPADfirst| |scands|) |k| %))
                        (EXIT (LETT |scands| (CDR |scands|))))))
                     (LETT |a1p|
                           (SPADCALL |a1p|
@@ -4251,7 +4249,6 @@
                           (|Fraction| (|SparseUnivariatePolynomial| F)))
                      (|:| |u_part| F) (|:| |exponent| (|Integer|))
                      (|:| |shift_part| F) (|:| |a_val| F))))
-         (|denf| (|SparseUnivariatePolynomial| F)) (|gexp| (|Integer|))
          (|k| (|Kernel| F)) (|x| (|Symbol|))
          (%
           (|Record| (|:| |ans| F) (|:| |right| F) (|:| |primpart| F)
@@ -4274,7 +4271,7 @@
              (SEQ (LETT |csol| (QCDR |csolu|))
                   (EXIT
                    (|RDEEFX;finish_special_integrate2| |rr1f| |csol| |a1p| |as|
-                    |scands| |denf| |gexp| |k| %))))))))) 
+                    |scands| |k| %))))))))) 
 
 (SDEFUN |RDEEFX;finish_special_integrate!0| ((|c| NIL) ($$ NIL))
         (PROG (|x| %)
@@ -4396,7 +4393,7 @@
                         (MAKEARR1 (LENGTH |scoeffs|) (|spadConstant| % 74)))
                   (EXIT
                    (|RDEEFX;finish_special_integrate2| |g1| (QCDR |part|)
-                    (QCAR |part|) |as| |scands| |denf| |gexp| |k| %))))))))) 
+                    (QCAR |part|) |as| |scands| |k| %))))))))) 
 
 (SDEFUN |RDEEFX;do_spde1|
         ((|rr1| (|Fraction| (|SparseUnivariatePolynomial| F)))
@@ -4586,8 +4583,7 @@
                        (GO G190) G191 (EXIT NIL))
                   (LETT |res3|
                         (|RDEEFX;finish_special_integrate| |rr1f| |a1p| |vs|
-                         |as| |scands| (|spadConstant| % 108) |gexp| |k| |x|
-                         %))
+                         |as| |scands| |k| |x| %))
                   (COND
                    ((NULL (QVELT |res3| 3))
                     (EXIT
@@ -4691,7 +4687,7 @@
             (|:| |particular| (|Union| (|Vector| (|Integer|)) #8="failed"))
             (|:| |basis| (|List| (|Vector| (|Integer|))))))
           (|v2| #9=(|Vector| (|Integer|))) (|m2| #10=(|Matrix| (|Integer|)))
-          (|#G328| (|Record| (|:| |mat| #10#) (|:| |vec| #9#))) (|v1| #1#)
+          (|#G324| (|Record| (|:| |mat| #10#) (|:| |vec| #9#))) (|v1| #1#)
           (|m1| (|Matrix| F)) (#11=#:G985 NIL) (|v| NIL) (#12=#:G984 NIL)
           (|lv| (|List| F)) (|c2| (F)) (|c1| (F)) (|c0| (F)) (|r4| (F))
           (|ulst1| (|List| F)) (|vlst1| (|List| F)) (#13=#:G982 NIL)
@@ -5092,12 +5088,12 @@
                                                            (QREFELT % 61)))
                                                 (QREFELT % 81)))
                                          (PROGN
-                                          (LETT |#G328|
+                                          (LETT |#G324|
                                                 (SPADCALL |m1| |v1|
                                                           (QREFELT % 299)))
-                                          (LETT |m2| (QCAR |#G328|))
-                                          (LETT |v2| (QCDR |#G328|))
-                                          |#G328|)
+                                          (LETT |m2| (QCAR |#G324|))
+                                          (LETT |v2| (QCDR |#G324|))
+                                          |#G324|)
                                          (LETT |sol_rec|
                                                (SPADCALL |m2| |v2|
                                                          (QREFELT % 304)))
@@ -5398,10 +5394,8 @@
                                                            (EXIT
                                                             (|RDEEFX;finish_special_integrate2|
                                                              |r1| |vc| |a1|
-                                                             |as| |cndl|
-                                                             (|spadConstant| %
-                                                                             108)
-                                                             0 |k| %))))))))))
+                                                             |as| |cndl| |k|
+                                                             %))))))))))
                                                    ((OR
                                                      (EQL
                                                       (LENGTH (QCDR |sol_rec|))
@@ -7384,8 +7378,6 @@
                          (|Fraction| (|SparseUnivariatePolynomial| F)))
                     (|:| |u_part| F) (|:| |exponent| (|Integer|))
                     (|:| |shift_part| F) (|:| |a_val| F)))
-         (|denf| (|SparseUnivariatePolynomial| F))
-         (|denf1| (|SparseUnivariatePolynomial| F)) (|gexp| (|Integer|))
          (|k| (|Kernel| F)) (% (|List| F)))
         (SPROG
          ((|res| (|List| F)) (|f1| (F)) (#1=#:G1328 NIL) (|zz| NIL) (|f11| (F))
@@ -7691,7 +7683,7 @@
            (|Mapping| (|SparseUnivariatePolynomial| F)
                       (|SparseUnivariatePolynomial| F)))
           (|gexp| (|Integer|)) (|gden1| (|SparseUnivariatePolynomial| F))
-          (|#G482|
+          (|#G475|
            (|Record| (|:| |radicand| (|SparseUnivariatePolynomial| F))
                      (|:| |exponent| (|Integer|))))
           (|res5|
@@ -8160,12 +8152,12 @@
                                                                        % 46))
                                                             (QREFELT % 49)))
                                             (PROGN
-                                             (LETT |#G482|
+                                             (LETT |#G475|
                                                    (|RDEEFX;gamma_denominator|
                                                     |denf| |k| %))
-                                             (LETT |gden1| (QCAR |#G482|))
-                                             (LETT |gexp| (QCDR |#G482|))
-                                             |#G482|)
+                                             (LETT |gden1| (QCAR |#G475|))
+                                             (LETT |gexp| (QCDR |#G475|))
+                                             |#G475|)
                                             (LETT |derivation2|
                                                   (CONS
                                                    #'|RDEEFX;ei_int;I2FSR;58!3|

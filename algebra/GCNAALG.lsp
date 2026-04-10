@@ -288,7 +288,7 @@
          (SEQ
           (COND
            ((> (QVSIZE |vs|) (SPADCALL |ve| (QREFELT % 95)))
-            (|error| "generic: too little symbols"))
+            (|error| "generic: too few symbols"))
            ('T
             (SEQ
              (LETT |v|

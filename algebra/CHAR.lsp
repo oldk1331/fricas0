@@ -64,10 +64,10 @@
 (SDEFUN |CHAR;char;S%;20| ((|s| (|String|)) (% (%))) (|STR_to_CHAR| |s|)) 
 
 (SDEFUN |CHAR;upperCase;2%;21| ((|c| (%)) (% (%)))
-        (STR_ELT (PNAME (UPCASE (NUM2CHAR (SPADCALL |c| (QREFELT % 16))))) 0)) 
+        (CHAR-CODE (CHAR-UPCASE (CODE-CHAR (SPADCALL |c| (QREFELT % 16)))))) 
 
 (SDEFUN |CHAR;lowerCase;2%;22| ((|c| (%)) (% (%)))
-        (STR_ELT (PNAME (DOWNCASE (NUM2CHAR (SPADCALL |c| (QREFELT % 16))))) 0)) 
+        (CHAR-CODE (CHAR-DOWNCASE (CODE-CHAR (SPADCALL |c| (QREFELT % 16)))))) 
 
 (PUT '|CHAR;hashUpdate!;Hs%Hs;23| '|SPADreplace| 'HASHSTATEUPDATE) 
 

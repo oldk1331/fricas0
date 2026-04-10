@@ -210,7 +210,7 @@
                 (COND
                  ((< |nmin| 2)
                   (SEQ
-                   (SPADCALL "romberg: nmin to small (nmin > 1) nmin = "
+                   (SPADCALL "romberg: nmin too small (nmin > 1) nmin = "
                              (SPADCALL |nmin| (QREFELT % 33)) (QREFELT % 35))
                    (EXIT
                     (PROGN
@@ -365,7 +365,7 @@
                 (COND
                  ((< |nmin| 2)
                   (SEQ
-                   (SPADCALL "simpson: nmin to small (nmin > 1) nmin = "
+                   (SPADCALL "simpson: nmin too small (nmin > 1) nmin = "
                              (SPADCALL |nmin| (QREFELT % 33)) (QREFELT % 35))
                    (EXIT
                     (PROGN
@@ -492,7 +492,7 @@
                 (COND
                  ((< |nmin| 2)
                   (SEQ
-                   (SPADCALL "trapezoidal: nmin to small (nmin > 1) nmin = "
+                   (SPADCALL "trapezoidal: nmin too small (nmin > 1) nmin = "
                              (SPADCALL |nmin| (QREFELT % 33)) (QREFELT % 35))
                    (EXIT
                     (PROGN

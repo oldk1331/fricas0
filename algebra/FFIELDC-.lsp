@@ -463,6 +463,8 @@
                                       ((|Union| (|Vector| |#1|) #2#)
                                        (|Matrix| |#1|)))
                                      T)
+                                   '((|charthRoot| ((|Union| |#1| #2#) |#1|))
+                                     T)
                                    '((|differentiate| (|#1| |#1|)) T)
                                    '((|differentiate|
                                       (|#1| |#1| (|NonNegativeInteger|)))
@@ -478,9 +480,6 @@
                                       ((|OnePointCompletion|
                                         (|PositiveInteger|))
                                        |#1|))
-                                     T)
-                                   '((|charthRoot|
-                                      ((|Union| |#1| "failed") |#1|))
                                      T)
                                    '((|gcdPolynomial|
                                       ((|SparseUnivariatePolynomial| |#1|)

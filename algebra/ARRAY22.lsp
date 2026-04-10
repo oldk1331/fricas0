@@ -1,28 +1,35 @@
 
 (SDEFUN |ARRAY22;map;MMAMB;1| ((|f| (|Mapping| B A)) (|m| (MA)) (% (MB)))
         (SPROG
-         ((#1=#:G8 NIL) (|k| NIL) (#2=#:G7 NIL) (|i| NIL) (|res| (MB))
-          (|nc| (|NonNegativeInteger|)) (|nr| (|NonNegativeInteger|)))
+         ((#1=#:G8 NIL) (|k| NIL) (#2=#:G7 NIL) (|i| NIL)
+          (|mic_res| (|Integer|)) (|mir_res| (|Integer|)) (|mic_m| (|Integer|))
+          (|mir_m| (|Integer|)) (|res| (MB)) (|nc| (|NonNegativeInteger|))
+          (|nr| (|NonNegativeInteger|)))
          (SEQ (LETT |nr| (SPADCALL |m| (QREFELT % 15)))
               (LETT |nc| (SPADCALL |m| (QREFELT % 16)))
               (LETT |res| (SPADCALL |nr| |nc| (QREFELT % 17)))
-              (SEQ (LETT |i| (SPADCALL |m| (QREFELT % 19)))
-                   (LETT #2# (SPADCALL |m| (QREFELT % 20))) G190
-                   (COND ((> |i| #2#) (GO G191)))
+              (LETT |mir_m| (SPADCALL |m| (QREFELT % 19)))
+              (LETT |mic_m| (SPADCALL |m| (QREFELT % 20)))
+              (LETT |mir_res| (SPADCALL |res| (QREFELT % 21)))
+              (LETT |mic_res| (SPADCALL |res| (QREFELT % 22)))
+              (SEQ (LETT |i| 0) (LETT #2# (- |nr| 1)) G190
+                   (COND ((|greater_SI| |i| #2#) (GO G191)))
                    (SEQ
                     (EXIT
-                     (SEQ (LETT |k| (SPADCALL |m| (QREFELT % 21)))
-                          (LETT #1# (SPADCALL |m| (QREFELT % 22))) G190
-                          (COND ((> |k| #1#) (GO G191)))
+                     (SEQ (LETT |k| 0) (LETT #1# (- |nc| 1)) G190
+                          (COND ((|greater_SI| |k| #1#) (GO G191)))
                           (SEQ
                            (EXIT
-                            (SPADCALL |res| |i| |k|
+                            (SPADCALL |res| (+ |i| |mir_res|) (+ |k| |mic_res|)
                                       (SPADCALL
-                                       (SPADCALL |m| |i| |k| (QREFELT % 23))
+                                       (SPADCALL |m| (+ |i| |mir_m|)
+                                                 (+ |k| |mic_m|)
+                                                 (QREFELT % 23))
                                        |f|)
                                       (QREFELT % 24))))
-                          (LETT |k| (+ |k| 1)) (GO G190) G191 (EXIT NIL))))
-                   (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL))
+                          (LETT |k| (|inc_SI| |k|)) (GO G190) G191
+                          (EXIT NIL))))
+                   (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
               (EXIT |res|)))) 
 
 (DECLAIM (NOTINLINE |TwoDimensionalArrayFunctions;|)) 
@@ -88,8 +95,8 @@
               (|local| |#3|) (|local| |#4|) (|local| |#5|) (|local| |#6|)
               (|local| |#7|) (|local| |#8|) (|NonNegativeInteger|)
               (0 . |nrows|) (5 . |ncols|) (10 . |qnew|) (|Integer|)
-              (16 . |minRowIndex|) (21 . |maxRowIndex|) (26 . |minColIndex|)
-              (31 . |maxColIndex|) (36 . |qelt|) (43 . |qsetelt!|)
+              (16 . |minRowIndex|) (21 . |minColIndex|) (26 . |minRowIndex|)
+              (31 . |minColIndex|) (36 . |qelt|) (43 . |qsetelt!|)
               (|Mapping| 10 6) |ARRAY22;map;MMAMB;1|)
            '#(|map| 51) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
@@ -102,8 +109,8 @@
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 26
                                             '(1 9 14 0 15 1 9 14 0 16 2 13 0 14
-                                              14 17 1 9 18 0 19 1 9 18 0 20 1 9
-                                              18 0 21 1 9 18 0 22 3 9 6 0 18 18
-                                              23 4 13 10 0 18 18 10 24 2 0 13
-                                              25 9 26)))))
+                                              14 17 1 9 18 0 19 1 9 18 0 20 1
+                                              13 18 0 21 1 13 18 0 22 3 9 6 0
+                                              18 18 23 4 13 10 0 18 18 10 24 2
+                                              0 13 25 9 26)))))
            '|lookupComplete|)) 

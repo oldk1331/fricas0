@@ -145,9 +145,6 @@
 ; SpadInterpretStream(step_num, source, interactive?) ==
 ;     pile?                    := not interactive?
 ;
-;     $newcompErrorCount: local := 0 -- SMW Feb 2/90.
-;                                    -- Used in highComplete, ncHardError etc.
-;
 ;     $inclAssertions: local := ["AIX", "CommonLisp"] -- Jan 28/90
 ;
 ;
@@ -164,15 +161,11 @@
 ;     []
 
 (DEFUN |SpadInterpretStream| (|step_num| |source| |interactive?|)
-  (PROG (|$ncMsgList| |$erMsgToss| |$lastPos| |$inclAssertions|
-         |$newcompErrorCount| |pile?|)
-    (DECLARE
-     (SPECIAL |$ncMsgList| |$erMsgToss| |$lastPos| |$inclAssertions|
-      |$newcompErrorCount|))
+  (PROG (|$ncMsgList| |$erMsgToss| |$lastPos| |$inclAssertions| |pile?|)
+    (DECLARE (SPECIAL |$ncMsgList| |$erMsgToss| |$lastPos| |$inclAssertions|))
     (RETURN
      (PROGN
       (SETQ |pile?| (NULL |interactive?|))
-      (SETQ |$newcompErrorCount| 0)
       (SETQ |$inclAssertions| (LIST 'AIX '|CommonLisp|))
       (SETQ |$lastPos| |$nopos|)
       (SETQ |$erMsgToss| NIL)
@@ -186,7 +179,6 @@
        ('T (PROGN (|intloopInclude| |source| 0) NIL)))))))
 
 ; interpret_block(code) ==
-;     $newcompErrorCount : local := 0
 ;     $inclAssertions : local := []
 ;     $ncMsgList : local := []
 ;     $erMsgToss : local := false
@@ -197,13 +189,12 @@
 
 (DEFUN |interpret_block| (|code|)
   (PROG (|$EchoLines| |$lastPos| |$erMsgToss| |$ncMsgList| |$inclAssertions|
-         |$newcompErrorCount| |st|)
+         |st|)
     (DECLARE
      (SPECIAL |$EchoLines| |$lastPos| |$erMsgToss| |$ncMsgList|
-      |$inclAssertions| |$newcompErrorCount|))
+      |$inclAssertions|))
     (RETURN
      (PROGN
-      (SETQ |$newcompErrorCount| 0)
       (SETQ |$inclAssertions| NIL)
       (SETQ |$ncMsgList| NIL)
       (SETQ |$erMsgToss| NIL)

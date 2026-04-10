@@ -153,7 +153,6 @@
 ;   $dim:= " >> "
 ;   if $insideCapsuleFunctionIfTrue=true then
 ;     sayBrightly ['"error in function",'%b,$op,'%d,'%l]
-;   --mathprint removeZeroOne mkErrorExpr level
 ;   pp removeZeroOne mkErrorExpr level
 ;   sayBrightly ['"****** level",'%b,level,'%d,'" ******"]
 ;   [x, m, f, $exitModeStack] := $s.(level - 1)
@@ -1520,7 +1519,7 @@
 
 ; unStackWarning msg ==
 ;   if $insideCapsuleFunctionIfTrue then msg:= [$op,": ",:msg]
-;   $warningStack:= EFFACE(msg,$warningStack)
+;   $warningStack:= NREMOVE($warningStack, msg)
 ;   nil
 
 (DEFUN |unStackWarning| (|msg|)
@@ -1530,7 +1529,7 @@
       (COND
        (|$insideCapsuleFunctionIfTrue|
         (SETQ |msg| (CONS |$op| (CONS '|: | |msg|)))))
-      (SETQ |$warningStack| (EFFACE |msg| |$warningStack|))
+      (SETQ |$warningStack| (NREMOVE |$warningStack| |msg|))
       NIL))))
 
 ; stackMessage msg ==
@@ -1895,7 +1894,7 @@
                    NIL (CDR |x|) NIL)))))))
 
 ; sublis_vec(p, e) ==
-;   LIST2REFVEC [suba(p, e.i) for i in 0..MAXINDEX e] where
+;   LIST2VEC [suba(p, e.i) for i in 0..MAXINDEX e] where
 ;     suba(p,e) ==
 ;       STRINGP e => e
 ;       atom e => (y:= ASSQ(e,p) => rest y; e)
@@ -1907,7 +1906,7 @@
 (DEFUN |sublis_vec| (|p| |e|)
   (PROG ()
     (RETURN
-     (LIST2REFVEC
+     (LIST2VEC
       ((LAMBDA (|bfVar#66| |bfVar#65| |i|)
          (LOOP
           (COND ((> |i| |bfVar#65|) (RETURN (NREVERSE |bfVar#66|)))
@@ -1938,109 +1937,3 @@
   (PROG (|pp|)
     (RETURN
      (PROGN (SETQ |pp| (MAPCAR #'CONS |fp| |ap|)) (|sublis_vec| |pp| |cv|)))))
-
-; old2NewModemaps x ==
-;   x is [dcSig,[pred,:.],:.]  =>  [dcSig,pred]
-;   x
-
-(DEFUN |old2NewModemaps| (|x|)
-  (PROG (|dcSig| |ISTMP#1| |ISTMP#2| |pred|)
-    (RETURN
-     (COND
-      ((AND (CONSP |x|)
-            (PROGN
-             (SETQ |dcSig| (CAR |x|))
-             (SETQ |ISTMP#1| (CDR |x|))
-             (AND (CONSP |ISTMP#1|)
-                  (PROGN
-                   (SETQ |ISTMP#2| (CAR |ISTMP#1|))
-                   (AND (CONSP |ISTMP#2|)
-                        (PROGN (SETQ |pred| (CAR |ISTMP#2|)) #1='T))))))
-       (LIST |dcSig| |pred|))
-      (#1# |x|)))))
-
-; displayProplist(x,alist) ==
-;   sayBrightly ['"properties of",'%b,x,'%d,'":"]
-;   fn alist where
-;     fn alist ==
-;       alist is [[prop,:val],:l] =>
-;         if prop="value" then val:= [val.expr,val.mode,'"..."]
-;         sayBrightly ['"   ",'%b,prop,'%d,'": ",val]
-;         fn deleteAssoc(prop,l)
-
-(DEFUN |displayProplist| (|x| |alist|)
-  (PROG ()
-    (RETURN
-     (PROGN
-      (|sayBrightly| (LIST "properties of" '|%b| |x| '|%d| ":"))
-      (|displayProplist,fn| |alist|)))))
-(DEFUN |displayProplist,fn| (|alist|)
-  (PROG (|ISTMP#1| |prop| |val| |l|)
-    (RETURN
-     (COND
-      ((AND (CONSP |alist|)
-            (PROGN
-             (SETQ |ISTMP#1| (CAR |alist|))
-             (AND (CONSP |ISTMP#1|)
-                  (PROGN
-                   (SETQ |prop| (CAR |ISTMP#1|))
-                   (SETQ |val| (CDR |ISTMP#1|))
-                   #1='T)))
-            (PROGN (SETQ |l| (CDR |alist|)) #1#))
-       (IDENTITY
-        (PROGN
-         (COND
-          ((EQ |prop| '|value|)
-           (SETQ |val| (LIST (CAR |val|) (CADR |val|) "..."))))
-         (|sayBrightly| (LIST "   " '|%b| |prop| '|%d| ": " |val|))
-         (|displayProplist,fn| (|deleteAssoc| |prop| |l|)))))))))
-
-; displayModemaps E ==
-;   listOfOperatorsSeenSoFar:= nil
-;   for x in E for i in 1.. repeat
-;     for y in x for j in 1.. repeat
-;       for z in y | null member(first z,listOfOperatorsSeenSoFar) and
-;         (modemaps:= LASSOC("modemap",rest z)) repeat
-;           listOfOperatorsSeenSoFar:= [first z,:listOfOperatorsSeenSoFar]
-;           displayOpModemaps(first z,modemaps)
-
-(DEFUN |displayModemaps| (E)
-  (PROG (|listOfOperatorsSeenSoFar| |modemaps|)
-    (RETURN
-     (PROGN
-      (SETQ |listOfOperatorsSeenSoFar| NIL)
-      ((LAMBDA (|bfVar#67| |x| |i|)
-         (LOOP
-          (COND
-           ((OR (ATOM |bfVar#67|) (PROGN (SETQ |x| (CAR |bfVar#67|)) NIL))
-            (RETURN NIL))
-           (#1='T
-            ((LAMBDA (|bfVar#68| |y| |j|)
-               (LOOP
-                (COND
-                 ((OR (ATOM |bfVar#68|)
-                      (PROGN (SETQ |y| (CAR |bfVar#68|)) NIL))
-                  (RETURN NIL))
-                 (#1#
-                  ((LAMBDA (|bfVar#69| |z|)
-                     (LOOP
-                      (COND
-                       ((OR (ATOM |bfVar#69|)
-                            (PROGN (SETQ |z| (CAR |bfVar#69|)) NIL))
-                        (RETURN NIL))
-                       (#1#
-                        (AND
-                         (NULL (|member| (CAR |z|) |listOfOperatorsSeenSoFar|))
-                         (SETQ |modemaps| (LASSOC '|modemap| (CDR |z|)))
-                         (PROGN
-                          (SETQ |listOfOperatorsSeenSoFar|
-                                  (CONS (CAR |z|) |listOfOperatorsSeenSoFar|))
-                          (|displayOpModemaps| (CAR |z|) |modemaps|)))))
-                      (SETQ |bfVar#69| (CDR |bfVar#69|))))
-                   |y| NIL)))
-                (SETQ |bfVar#68| (CDR |bfVar#68|))
-                (SETQ |j| (+ |j| 1))))
-             |x| NIL 1)))
-          (SETQ |bfVar#67| (CDR |bfVar#67|))
-          (SETQ |i| (+ |i| 1))))
-       E NIL 1)))))

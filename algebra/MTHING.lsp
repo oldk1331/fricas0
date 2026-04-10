@@ -1,60 +1,34 @@
 
 (SDEFUN |MTHING;mergeDifference;3L;1|
         ((|x| (|List| S)) (|y| (|List| S)) (% (|List| S)))
-        (SEQ
-         (COND ((OR (NULL |x|) (NULL |y|)) |x|)
-               ('T
-                (SEQ
-                 (|MTHING;mergeDifference1| |x| (|SPADfirst| |y|) (CDR |y|) %)
-                 (EXIT
-                  (COND
-                   ((SPADCALL (|SPADfirst| |x|) (|SPADfirst| |y|)
-                              (QREFELT % 8))
-                    (CDR |x|))
-                   ('T |x|)))))))) 
-
-(SDEFUN |MTHING;mergeDifference1|
-        ((|x| #1=(|List| S)) (|fy| (S)) (|ry| (|List| S)) (% (|List| S)))
-        (SPROG ((#2=#:G22 NIL) (|frx| (S)) (|rx| #1#))
-               (SEQ
-                (EXIT
-                 (SEQ (LETT |rx| |x|)
-                      (EXIT
-                       (SEQ G190 (COND ((NULL (NULL (NULL |rx|))) (GO G191)))
-                            (SEQ (LETT |rx| (CDR |rx|))
-                                 (LETT |frx| (|SPADfirst| |rx|))
-                                 (SEQ G190
-                                      (COND
-                                       ((NULL
-                                         (SPADCALL |fy| |frx| (QREFELT % 11)))
-                                        (GO G191)))
-                                      (SEQ
-                                       (EXIT
-                                        (COND
-                                         ((NULL |ry|)
-                                          (PROGN (LETT #2# |x|) (GO #3=#:G21)))
-                                         ('T
-                                          (SEQ (LETT |fy| (|SPADfirst| |ry|))
-                                               (EXIT
-                                                (LETT |ry| (CDR |ry|))))))))
-                                      NIL (GO G190) G191 (EXIT NIL))
-                                 (EXIT
-                                  (COND
-                                   ((SPADCALL |frx| |fy| (QREFELT % 8))
-                                    (SEQ
-                                     (SPADCALL |x| '|rest| (CDR |rx|)
-                                               (QREFELT % 13))
-                                     (EXIT
-                                      (COND
-                                       ((NULL |ry|)
-                                        (PROGN (LETT #2# |x|) (GO #3#)))
-                                       ('T
-                                        (SEQ (LETT |fy| (|SPADfirst| |ry|))
-                                             (EXIT
-                                              (LETT |ry| (CDR |ry|)))))))))
-                                   ('T (LETT |x| |rx|)))))
-                            NIL (GO G190) G191 (EXIT NIL)))))
-                #3# (EXIT #2#)))) 
+        (SPROG ((|res| (|List| S)) (#1=#:G13 NIL) (|fy| (S)) (|fx| (S)))
+               (SEQ (LETT |res| NIL)
+                    (SEQ G190
+                         (COND
+                          ((NULL
+                            (COND ((NULL |x|) NIL) ('T (NULL (NULL |y|)))))
+                           (GO G191)))
+                         (SEQ (LETT |fx| (|SPADfirst| |x|))
+                              (LETT |fy| (|SPADfirst| |y|))
+                              (EXIT
+                               (COND
+                                ((SPADCALL |fx| |fy| (QREFELT % 8))
+                                 (SEQ (LETT |res| (CONS |fx| |res|))
+                                      (EXIT (LETT |x| (CDR |x|)))))
+                                ('T
+                                 (SEQ (LETT |y| (CDR |y|))
+                                      (EXIT
+                                       (COND
+                                        ((SPADCALL |fy| |fx| (QREFELT % 9))
+                                         (LETT |x| (CDR |x|))))))))))
+                         NIL (GO G190) G191 (EXIT NIL))
+                    (SEQ (LETT #1# |x|) G190
+                         (COND
+                          ((OR (ATOM #1#) (PROGN (LETT |fx| (CAR #1#)) NIL))
+                           (GO G191)))
+                         (SEQ (EXIT (LETT |res| (CONS |fx| |res|))))
+                         (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+                    (EXIT (NREVERSE |res|))))) 
 
 (DECLAIM (NOTINLINE |MergeThing;|)) 
 
@@ -63,7 +37,7 @@
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|MergeThing| DV$1))
-          (LETT % (GETREFV 14))
+          (LETT % (GETREFV 12))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|MergeThing| (LIST DV$1) (CONS 1 %))
@@ -72,9 +46,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |MergeThing| (#1=#:G23)
+(DEFUN |MergeThing| (#1=#:G14)
   (SPROG NIL
-         (PROG (#2=#:G24)
+         (PROG (#2=#:G15)
            (RETURN
             (COND
              ((LETT #2#
@@ -90,10 +64,9 @@
 
 (MAKEPROP '|MergeThing| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|Boolean|) (0 . =)
-              (|List| 6) |MTHING;mergeDifference;3L;1| (6 . <) '"rest"
-              (12 . |setelt!|))
-           '#(|mergeDifference| 19) 'NIL
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|Boolean|) (0 . <)
+              (6 . =) (|List| 6) |MTHING;mergeDifference;3L;1|)
+           '#(|mergeDifference| 12) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
                        (CONS
@@ -104,7 +77,7 @@
                                  ((|List| |#1|) (|List| |#1|) (|List| |#1|)))
                                 T))
                              (LIST) NIL NIL)))
-                        (|makeByteWordVec2| 13
-                                            '(2 6 7 0 0 8 2 6 7 0 0 11 3 9 0 0
-                                              12 0 13 2 0 9 9 9 10)))))
+                        (|makeByteWordVec2| 11
+                                            '(2 6 7 0 0 8 2 6 7 0 0 9 2 0 10 10
+                                              10 11)))))
            '|lookupComplete|)) 

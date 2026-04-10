@@ -29,25 +29,12 @@
                                                 (|Join|
                                                  (|TwoDimensionalArrayCategory|
                                                   '|t#1| '|t#2| '|t#3|)
+                                                 (|MatrixOperationsCategory|
+                                                  '|t#1| '|t#2| '|t#3|)
                                                  (|shallowlyMutable|)
                                                  (|finiteAggregate|)
                                                  (|mkCategory|
-                                                  '(((|square?|
-                                                      ((|Boolean|) %))
-                                                     T)
-                                                    ((|diagonal?|
-                                                      ((|Boolean|) %))
-                                                     T)
-                                                    ((|symmetric?|
-                                                      ((|Boolean|) %))
-                                                     T)
-                                                    ((|antisymmetric?|
-                                                      ((|Boolean|) %))
-                                                     (|has| |t#1|
-                                                            (|AbelianGroup|)))
-                                                    ((|zero?| ((|Boolean|) %))
-                                                     T)
-                                                    ((|zero|
+                                                  '(((|zero|
                                                       (% (|NonNegativeInteger|)
                                                        (|NonNegativeInteger|)))
                                                      T)
@@ -86,22 +73,6 @@
                                                      T)
                                                     ((|coerce| (% |t#3|)) T)
                                                     ((|transpose| (% |t#2|)) T)
-                                                    ((+ (% % %)) T)
-                                                    ((- (% % %))
-                                                     (|has| |t#1|
-                                                            (|AbelianGroup|)))
-                                                    ((- (% %))
-                                                     (|has| |t#1|
-                                                            (|AbelianGroup|)))
-                                                    ((* (% (|Integer|) %))
-                                                     (|has| |t#1|
-                                                            (|AbelianGroup|)))
-                                                    ((* (% % %))
-                                                     (|has| |t#1| (|SemiRng|)))
-                                                    ((* (% |t#1| %))
-                                                     (|has| |t#1| (|SemiRng|)))
-                                                    ((* (% % |t#1|))
-                                                     (|has| |t#1| (|SemiRng|)))
                                                     ((* (|t#3| % |t#3|))
                                                      (|has| |t#1| (|SemiRng|)))
                                                     ((* (|t#2| |t#2| %))
@@ -116,34 +87,6 @@
                                                       (|has| |t#1| (|Monoid|))
                                                       (|has| |t#1|
                                                              (|SemiRng|))))
-                                                    ((|exquo|
-                                                      ((|Union| % "failed") %
-                                                       |t#1|))
-                                                     (|has| |t#1|
-                                                            (|IntegralDomain|)))
-                                                    ((/ (% % |t#1|))
-                                                     (|has| |t#1| (|Field|)))
-                                                    ((|rowEchelon| (% %))
-                                                     (|has| |t#1|
-                                                            (|EuclideanDomain|)))
-                                                    ((|columnSpace|
-                                                      ((|List| |t#3|) %))
-                                                     (|has| |t#1|
-                                                            (|EuclideanDomain|)))
-                                                    ((|rank|
-                                                      ((|NonNegativeInteger|)
-                                                       %))
-                                                     (|has| |t#1|
-                                                            (|IntegralDomain|)))
-                                                    ((|nullity|
-                                                      ((|NonNegativeInteger|)
-                                                       %))
-                                                     (|has| |t#1|
-                                                            (|IntegralDomain|)))
-                                                    ((|nullSpace|
-                                                      ((|List| |t#3|) %))
-                                                     (|has| |t#1|
-                                                            (|IntegralDomain|)))
                                                     ((|determinant| (|t#1| %))
                                                      (|has| |t#1|
                                                             (|CommutativeRing|)))

@@ -16,7 +16,7 @@
 ;   if property = 'SpaceTotal then statsVec := $statsInfo.1
 ;   otherStatTotal := statsVec.(GET('other, 'index))
 ;   insignificantStat := 0
-;   classStats := GETZEROVEC(1 + # listofclasses)
+;   classStats := MAKEARR1(1 + # listofclasses, 0)
 ;   for [name,class,:ab] in listofnames repeat
 ;     n := statsVec.(GET(name, 'index))
 ;     classStats.class := classStats.class + n
@@ -50,7 +50,7 @@
        ((EQ |property| '|SpaceTotal|) (SETQ |statsVec| (ELT |$statsInfo| 1))))
       (SETQ |otherStatTotal| (ELT |statsVec| (GET '|other| '|index|)))
       (SETQ |insignificantStat| 0)
-      (SETQ |classStats| (GETZEROVEC (+ 1 (LENGTH |listofclasses|))))
+      (SETQ |classStats| (MAKEARR1 (+ 1 (LENGTH |listofclasses|)) 0))
       ((LAMBDA (|bfVar#2| |bfVar#1|)
          (LOOP
           (COND
@@ -288,7 +288,7 @@
 ; initializeTimedStack() ==
 ;   $timedNameStack := '(other)
 ;   len := # $interpreterTimedNames
-;   $statsInfo := VECTOR(GETZEROVEC len, GETZEROVEC len, get_run_time(), _
+;   $statsInfo := VECTOR(MAKEARR1(len, 0), MAKEARR1(len, 0), get_run_time(), _
 ;                        elapsedGcTime(), HEAPELAPSED())
 ;   NIL
 
@@ -299,7 +299,7 @@
       (SETQ |$timedNameStack| '(|other|))
       (SETQ |len| (LENGTH |$interpreterTimedNames|))
       (SETQ |$statsInfo|
-              (VECTOR (GETZEROVEC |len|) (GETZEROVEC |len|) (|get_run_time|)
+              (VECTOR (MAKEARR1 |len| 0) (MAKEARR1 |len| 0) (|get_run_time|)
                       (|elapsedGcTime|) (HEAPELAPSED)))
       NIL))))
 

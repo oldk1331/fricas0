@@ -2683,7 +2683,7 @@
 ;     ['$bootStrapMode, _
 ;         ['VECTOR,mkDomainConstructor functorForm,nil,nil,nil,nil,nil]],
 ;     [''T, ['systemError, ['LIST, ''%b, MKQ first functorForm, ''%d, '"from", _
-;       ''%b,MKQ namestring sourceFile,''%d,'"needs to be compiled"]]]]
+;       ''%b, MKQ(sourceFile), ''%d, '"needs to be compiled"]]]]
 
 (DEFUN |bootStrapError| (|functorForm| |sourceFile|)
   (PROG ()
@@ -2695,8 +2695,8 @@
            (LIST ''T
                  (LIST '|systemError|
                        (LIST 'LIST ''|%b| (MKQ (CAR |functorForm|)) ''|%d|
-                             "from" ''|%b| (MKQ (|namestring| |sourceFile|))
-                             ''|%d| "needs to be compiled")))))))
+                             "from" ''|%b| (MKQ |sourceFile|) ''|%d|
+                             "needs to be compiled")))))))
 
 ; compAdd(['add,$addForm,capsule],m,e) ==
 ;   addForm := $addForm
@@ -2707,7 +2707,7 @@
 ;        ['$bootStrapMode, _
 ;            code],_
 ;        [''T, ['systemError, ['LIST, ''%b, MKQ first $functorForm, ''%d,
-;          '"from", ''%b, MKQ namestring($edit_file), ''%d, _
+;          '"from", ''%b, MKQ($edit_file), ''%d, _
 ;          '"needs to be compiled"]]]],
 ;      m, e]
 ;   $addFormLhs: local:= addForm
@@ -2750,9 +2750,8 @@
                 (LIST ''T
                       (LIST '|systemError|
                             (LIST 'LIST ''|%b| (MKQ (CAR |$functorForm|))
-                                  ''|%d| "from" ''|%b|
-                                  (MKQ (|namestring| |$edit_file|)) ''|%d|
-                                  "needs to be compiled"))))
+                                  ''|%d| "from" ''|%b| (MKQ |$edit_file|)
+                                  ''|%d| "needs to be compiled"))))
           |m| |e|)))
        (#2#
         (PROGN
@@ -3350,9 +3349,6 @@
 ;                 atom y =>
 ;                   isDomainForm(y,e) => LIST y
 ;                   nil
-;                 y is ['LENGTH,y'] =>
-;                   BREAK()
-;                   [y,y']
 ;                 LIST y
 ;           x
 ;         x is ["DomainSubstitutionMacro",pl,body] =>
@@ -3500,16 +3496,10 @@
                        |$Category| |e|))
          (|convert| T$ |m|))))))))
 (DEFUN |compJoin,getParms| (|y| |e|)
-  (PROG (|ISTMP#1| |y'|)
+  (PROG ()
     (RETURN
      (COND
       ((ATOM |y|) (COND ((|isDomainForm| |y| |e|) (LIST |y|)) (#1='T NIL)))
-      ((AND (CONSP |y|) (EQ (CAR |y|) 'LENGTH)
-            (PROGN
-             (SETQ |ISTMP#1| (CDR |y|))
-             (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
-                  (PROGN (SETQ |y'| (CAR |ISTMP#1|)) #1#))))
-       (PROGN (BREAK) (LIST |y| |y'|)))
       (#1# (LIST |y|))))))
 
 ; compForMode(x,m,e) ==

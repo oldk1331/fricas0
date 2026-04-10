@@ -105,14 +105,14 @@
               (|local| |#1|) (0 . |One|) (4 . |One|) (8 . -) (|Boolean|)
               (|String|) (|OutputForm|) (|PositiveInteger|) (|Integer|)
               (|Union| % '"failed") (|NonNegativeInteger|)
-              (|Union| 6 '#1="failed") (|Mapping| 6 6)
-              (|Record| (|:| |mat| 22) (|:| |vec| (|Vector| 6))) (|Matrix| %)
-              (|Vector| %) (|Matrix| 6) (|Fraction| 14) (|InputForm|)
+              (|Union| 6 '#1="failed") (|Mapping| 6 6) (|Matrix| 6)
+              (|Matrix| %) (|Record| (|:| |mat| 19) (|:| |vec| (|Vector| 6)))
+              (|Vector| %) (|Fraction| 14) (|InputForm|)
               (|Record| (|:| |unit| %) (|:| |canonical| %) (|:| |associate| %))
               (|List| 6) (|Equation| 6) (|List| 27) (|Symbol|) (|List| 29)
-              (|Union| 23 '"failed")
-              (|Record| (|:| |mat| 33) (|:| |vec| (|Vector| 14))) (|Matrix| 14)
-              (|List| 16) (|Union| 14 '#1#))
+              (|Union| 23 '"failed") (|Matrix| 14)
+              (|Record| (|:| |mat| 32) (|:| |vec| (|Vector| 14))) (|List| 16)
+              (|Union| 14 '#1#))
            '#(|One| 13) 'NIL
            (CONS
             (|makeByteWordVec2| 15

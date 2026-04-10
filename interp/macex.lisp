@@ -139,7 +139,8 @@
 ; macSubstituteId( replist , pform ) ==
 ;     ex := AlistAssocQ( pfIdSymbol pform , replist )
 ;     ex =>
-;         RPLPAIR(pform, rest ex)
+;         RPLACA(pform, first(rest(ex)))
+;         RPLACD(pform, CDR(rest(ex)))
 ;         pform
 ;     pform
 
@@ -148,8 +149,13 @@
     (RETURN
      (PROGN
       (SETQ |ex| (|AlistAssocQ| (|pfIdSymbol| |pform|) |replist|))
-      (COND (|ex| (PROGN (RPLPAIR |pform| (CDR |ex|)) |pform|))
-            ('T |pform|))))))
+      (COND
+       (|ex|
+        (PROGN
+         (RPLACA |pform| (CAR (CDR |ex|)))
+         (RPLACD |pform| (CDR (CDR |ex|)))
+         |pform|))
+       ('T |pform|))))))
 
 ; macSubstituteOuter( pform ) ==
 ;     mac0SubstituteOuter( macLambdaParameterHandling( [] , pform ) , pform )

@@ -60,7 +60,7 @@
           (EXIT
            (COND
             ((> (SPADCALL (SPADCALL |f| (QREFELT % 28)) (QREFELT % 30)) 0)
-             (|error| "roofOf: variable appears in denom"))
+             (|error| "rootOf: variable appears in denom"))
             ((EQL (SPADCALL |n| (QREFELT % 30)) 0)
              (|error| "rootOf: constant expression"))
             ('T (SPADCALL |n| |x| (QREFELT % 34)))))))) 
@@ -97,7 +97,7 @@
           (EXIT
            (COND
             ((> (SPADCALL (SPADCALL |f| (QREFELT % 28)) (QREFELT % 30)) 0)
-             (|error| "roofsOf: variable appears in denom"))
+             (|error| "rootsOf: variable appears in denom"))
             ((EQL (SPADCALL |n| (QREFELT % 30)) 0) NIL)
             ('T (SPADCALL |n| |x| (QREFELT % 38)))))))) 
 

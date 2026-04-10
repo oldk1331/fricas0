@@ -5167,11 +5167,16 @@
 ;     -- and is a file with file extension .spad.
 ;
 ;     path := first(args)
-;     pathnameType path ~= '"spad" => throwKeyedMsg("S2IZ0082", nil)
-;     not(PROBE_-FILE(path)) => throwKeyedMsg("S2IL0003", [path])
+;     not(has_extention?(path, '"spad")) => throw_msg("S2IZ0082", CONCAT(
+;       '"The FriCAS system compiler can only compile files with file",
+;         '" extension _".spad_"."), nil)
+;     not(PROBE_-FILE(path)) => throw_msg("S2IL0003",
+;             '"The file %1b is needed but does not exist.", [path])
 ;
 ;     $edit_file := path
-;     sayKeyedMsg("S2IZ0038", [path])
+;     say_msg("S2IZ0038",
+;         '"Compiling FriCAS source code from file %1b using system compiler.",
+;           [path])
 ;
 ;     optList :=  '( _
 ;       break _
@@ -5216,7 +5221,9 @@
 ;         fullopt = 'break       => $scanIfTrue := nil
 ;         fullopt = 'vartrace      =>
 ;           $QuickLet  := false
-;         throwKeyedMsg("S2IZ0036",[STRCONC('")",object2String optname)])
+;         throw_msg("S2IZ0036", _
+;   '"%1b is an unknown or unavailable for the %b )compile %d command.",
+;            [STRCONC('")", object2String(optname))])
 ;
 ;     compilerDoit(lib, path)
 ;     extendLocalLibdb $newConlist
@@ -5231,13 +5238,20 @@
      (PROGN
       (SETQ |path| (CAR |args|))
       (COND
-       ((NOT (EQUAL (|pathnameType| |path|) "spad"))
-        (|throwKeyedMsg| 'S2IZ0082 NIL))
-       ((NULL (PROBE-FILE |path|)) (|throwKeyedMsg| 'S2IL0003 (LIST |path|)))
+       ((NULL (|has_extention?| |path| "spad"))
+        (|throw_msg| 'S2IZ0082
+         (CONCAT "The FriCAS system compiler can only compile files with file"
+                 " extension \".spad\".")
+         NIL))
+       ((NULL (PROBE-FILE |path|))
+        (|throw_msg| 'S2IL0003 "The file %1b is needed but does not exist."
+         (LIST |path|)))
        (#1='T
         (PROGN
          (SETQ |$edit_file| |path|)
-         (|sayKeyedMsg| 'S2IZ0038 (LIST |path|))
+         (|say_msg| 'S2IZ0038
+          "Compiling FriCAS source code from file %1b using system compiler."
+          (LIST |path|))
          (SETQ |optList|
                  '(|break| |constructor| |functions| |library| |lisp| |new|
                    |old| |nobreak| |nolibrary| |noquiet| |vartrace| |quiet|))
@@ -5268,7 +5282,8 @@
                  ((EQ |fullopt| '|break|) (SETQ |$scanIfTrue| NIL))
                  ((EQ |fullopt| '|vartrace|) (SETQ |$QuickLet| NIL))
                  (#1#
-                  (|throwKeyedMsg| 'S2IZ0036
+                  (|throw_msg| 'S2IZ0036
+                   "%1b is an unknown or unavailable for the %b )compile %d command."
                    (LIST (STRCONC ")" (|object2String| |optname|)))))))))
              (SETQ |bfVar#171| (CDR |bfVar#171|))))
           |$options| NIL)

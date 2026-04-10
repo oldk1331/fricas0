@@ -223,8 +223,8 @@
                                    '((|characteristic|
                                       ((|NonNegativeInteger|)))
                                      T)
-                                   '((^ (|#1| |#1| (|NonNegativeInteger|))) T)
-                                   '((^ (|#1| |#1| (|PositiveInteger|))) T))
+                                   '((^ (|#1| |#1| (|PositiveInteger|))) T)
+                                   '((^ (|#1| |#1| (|NonNegativeInteger|))) T))
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 71
                                             '(2 6 0 0 7 8 1 6 0 10 11 1 6 0 13

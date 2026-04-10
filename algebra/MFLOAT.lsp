@@ -535,21 +535,21 @@
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0))
+                                  0 0 0 0 0 0))
             (CONS
              '#(|FloatingPointSystem&| |RealNumberSystem&| |Field&|
                 |EuclideanDomain&| |UniqueFactorizationDomain&| NIL
-                |GcdDomain&| NIL NIL NIL NIL |DivisionRing&| |OrderedRing&|
-                |Algebra&| |EntireRing&| |Algebra&| NIL NIL NIL |Rng&|
+                |GcdDomain&| NIL NIL NIL NIL |DivisionRing&| NIL |Algebra&|
+                |EntireRing&| |Algebra&| NIL NIL NIL |Rng&|
                 |NonAssociativeAlgebra&| |NonAssociativeAlgebra&| NIL |Module&|
-                |Module&| |NonAssociativeRing&| NIL NIL NIL NIL
-                |NonAssociativeRng&| NIL NIL NIL NIL |AbelianGroup&| NIL NIL
-                NIL NIL NIL |AbelianMonoid&| |NonAssociativeSemiRng&|
-                |MagmaWithUnit&| NIL |OrderedSet&| |AbelianSemiGroup&| |Magma&|
-                NIL NIL |SetCategory&| NIL NIL |RetractableTo&|
-                |RetractableTo&| |RetractableTo&| NIL |BasicType&| NIL NIL NIL
-                NIL NIL |PartialOrder&| NIL NIL NIL NIL |RadicalCategory&| NIL
-                NIL NIL NIL)
+                |Module&| |NonAssociativeRing&| NIL NIL |OrderedAbelianGroup&|
+                NIL |NonAssociativeRng&| NIL NIL NIL NIL |AbelianGroup&| NIL
+                NIL NIL NIL NIL NIL NIL |AbelianMonoid&|
+                |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL |OrderedSet&|
+                |AbelianSemiGroup&| |Magma&| NIL NIL |SetCategory&| NIL NIL
+                |RetractableTo&| |RetractableTo&| |RetractableTo&| NIL
+                |BasicType&| NIL NIL NIL NIL NIL |PartialOrder&| NIL NIL NIL
+                NIL |RadicalCategory&| NIL NIL NIL NIL)
              (CONS
               '#((|FloatingPointSystem|) (|RealNumberSystem|) (|Field|)
                  (|EuclideanDomain|) (|UniqueFactorizationDomain|)
@@ -564,20 +564,20 @@
                  (|RightModule| $$) (|NonAssociativeRng|) (|LeftModule| $$)
                  (|LeftModule| 18) (|RightModule| 18)
                  (|OrderedCancellationAbelianMonoid|) (|AbelianGroup|)
-                 (|OrderedAbelianMonoid|) (|CancellationAbelianMonoid|)
-                 (|NonAssociativeSemiRing|) (|Monoid|)
-                 (|OrderedAbelianSemiGroup|) (|AbelianMonoid|)
-                 (|NonAssociativeSemiRng|) (|MagmaWithUnit|) (|SemiGroup|)
-                 (|OrderedSet|) (|AbelianSemiGroup|) (|Magma|) (|Comparable|)
-                 (|PatternMatchable| 16) (|SetCategory|) (|CommutativeStar|)
-                 (|RealConstant|) (|RetractableTo| 13) (|RetractableTo| 18)
-                 (|RetractableTo| 16) (|CoercibleTo| 45) (|BasicType|)
-                 (|unitsKnown|) (|TwoSidedRecip|) (|noZeroDivisors|)
-                 (|canonicalUnitNormal|) (|canonicalsClosed|) (|PartialOrder|)
-                 (|ConvertibleTo| 109) (|ConvertibleTo| 16)
-                 (|CoercibleFrom| 13) (|CoercibleFrom| 18) (|RadicalCategory|)
-                 (|ConvertibleTo| 111) (|Approximate|) (|ConvertibleTo| 42)
-                 (|CoercibleFrom| 16))
+                 (|OrderedAbelianMonoid|) (|OrderedMonoid|)
+                 (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
+                 (|Monoid|) (|OrderedAbelianSemiGroup|) (|OrderedSemiGroup|)
+                 (|AbelianMonoid|) (|NonAssociativeSemiRng|) (|MagmaWithUnit|)
+                 (|SemiGroup|) (|OrderedSet|) (|AbelianSemiGroup|) (|Magma|)
+                 (|Comparable|) (|PatternMatchable| 16) (|SetCategory|)
+                 (|CommutativeStar|) (|RealConstant|) (|RetractableTo| 13)
+                 (|RetractableTo| 18) (|RetractableTo| 16) (|CoercibleTo| 45)
+                 (|BasicType|) (|unitsKnown|) (|TwoSidedRecip|)
+                 (|noZeroDivisors|) (|canonicalUnitNormal|)
+                 (|canonicalsClosed|) (|PartialOrder|) (|ConvertibleTo| 109)
+                 (|ConvertibleTo| 16) (|CoercibleFrom| 13) (|CoercibleFrom| 18)
+                 (|RadicalCategory|) (|ConvertibleTo| 111) (|Approximate|)
+                 (|ConvertibleTo| 42) (|CoercibleFrom| 16))
               (|makeByteWordVec2| 111
                                   '(0 16 0 17 2 18 0 13 13 19 2 18 0 0 13 21 2
                                     18 0 13 0 22 1 18 13 0 25 1 13 13 0 27 0 16

@@ -110,14 +110,15 @@
                                                                   (|devaluate|
                                                                    |#1|)))
                                              #2#))
+                                        (|HasCategory| |#1| '(|AbelianMonoid|))
                                         (|HasCategory| |#1| '(|AbelianGroup|))
-                                        (|HasCategory| |#1| '(|SemiRng|))
-                                        (AND (|HasCategory| |#1| '(|Monoid|))
-                                             (|HasCategory| |#1| '(|SemiRng|)))
                                         (|HasCategory| |#1|
                                                        '(|EuclideanDomain|))
                                         (|HasCategory| |#1|
                                                        '(|IntegralDomain|))
+                                        (|HasCategory| |#1| '(|SemiRng|))
+                                        (AND (|HasCategory| |#1| '(|Monoid|))
+                                             (|HasCategory| |#1| '(|SemiRng|)))
                                         (|HasCategory| |#1|
                                                        '(|CommutativeRing|))
                                         (|HasCategory| |#1| '(|Field|))))))
@@ -127,36 +128,37 @@
     (QSETREFV % 6 |#1|)
     (QSETREFV % 7 |#2|)
     (QSETREFV % 8 |#3|)
-    (AND (|HasCategory| % '(|finiteAggregate|)) (|augmentPredVector| % 262144))
+    (AND (|HasCategory| % '(|finiteAggregate|)) (|augmentPredVector| % 524288))
     (AND (|HasCategory| |#1| '(|OrderedSet|))
-         (|HasCategory| % '(|finiteAggregate|)) (|augmentPredVector| % 524288))
-    (AND (|HasCategory| |#1| '(|BasicType|))
          (|HasCategory| % '(|finiteAggregate|))
          (|augmentPredVector| % 1048576))
+    (AND (|HasCategory| |#1| '(|BasicType|))
+         (|HasCategory| % '(|finiteAggregate|))
+         (|augmentPredVector| % 2097152))
     (AND
      (OR
       (AND (|HasCategory| |#1| '(|BasicType|))
            (|HasCategory| % '(|finiteAggregate|)))
       (|HasCategory| |#1| '(|Hashable|)) #2#)
-     (|augmentPredVector| % 2097152))
+     (|augmentPredVector| % 4194304))
     (SETF |pv$| (QREFELT % 3))
     (COND
-     ((|testBitVector| |pv$| 17)
+     ((|testBitVector| |pv$| 18)
       (PROGN
        (QSETREFV % 16 (CONS (|dispatchFunction| |IMATRIX;determinant;%R;2|) %))
        (QSETREFV % 18 (CONS (|dispatchFunction| |IMATRIX;minordet;%R;3|) %)))))
     (COND
-     ((|testBitVector| |pv$| 15)
+     ((|testBitVector| |pv$| 14)
       (QSETREFV % 20 (CONS (|dispatchFunction| |IMATRIX;rowEchelon;2%;4|) %))))
     (COND
-     ((|testBitVector| |pv$| 16)
+     ((|testBitVector| |pv$| 15)
       (PROGN
        (QSETREFV % 23 (CONS (|dispatchFunction| |IMATRIX;rank;%Nni;5|) %))
        (QSETREFV % 25 (CONS (|dispatchFunction| |IMATRIX;nullity;%Nni;6|) %))
        (QSETREFV % 28
                  (CONS (|dispatchFunction| |IMATRIX;nullSpace;%L;7|) %)))))
     (COND
-     ((|testBitVector| |pv$| 18)
+     ((|testBitVector| |pv$| 19)
       (QSETREFV % 32 (CONS (|dispatchFunction| |IMATRIX;inverse;%U;8|) %))))
     %))) 
 
@@ -204,12 +206,12 @@
               |nullSpace| 107 |minordet| 112 |minRowIndex| 117 |maxRowIndex|
               122 |maxColIndex| 127 |inverse| 132 |determinant| 137)
            'NIL
-           (CONS (|makeByteWordVec2| 11 '(0 0 1 0 2 6 9 0 7 11 9 0 0 0))
+           (CONS (|makeByteWordVec2| 11 '(0 0 1 0 2 6 9 0 7 11 9 0 0 0 0))
                  (CONS
                   '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL
                      |HomogeneousAggregate&| |Hashable&| |SetCategory&|
                      |Evalable&| |Aggregate&| |BasicType&| NIL |InnerEvalable&|
-                     NIL NIL NIL)
+                     NIL NIL NIL NIL)
                   (CONS
                    '#((|MatrixCategory| 6 (|IndexedVector| 6 8)
                                         (|IndexedVector| 6 7))
@@ -218,15 +220,18 @@
                       (|Comparable|) (|HomogeneousAggregate| 6) (|Hashable|)
                       (|SetCategory|) (|Evalable| 6) (|Aggregate|)
                       (|BasicType|) (|CoercibleTo| 55) (|InnerEvalable| 6 6)
-                      (|shallowlyMutable|) (|finiteAggregate|) (|Type|))
+                      (|shallowlyMutable|) (|finiteAggregate|)
+                      (|MatrixOperationsCategory| 6 (|IndexedVector| 6 8)
+                                                  (|IndexedVector| 6 7))
+                      (|Type|))
                    (|makeByteWordVec2| 32
                                        '(1 0 9 0 10 1 0 9 0 11 1 0 9 0 12 1 14
                                          6 2 15 1 0 6 0 16 1 14 6 2 17 1 0 6 0
                                          18 1 14 2 2 19 1 0 0 0 20 1 14 21 2 22
                                          1 0 21 0 23 1 14 21 2 24 1 0 21 0 25 1
                                          14 26 2 27 1 0 26 0 28 1 14 29 2 30 1
-                                         0 31 0 32 3 0 0 0 9 9 13 1 15 0 0 20 1
-                                         16 21 0 23 1 16 21 0 25 1 16 26 0 28 1
-                                         17 6 0 18 1 0 9 0 10 1 0 9 0 11 1 0 9
-                                         0 12 1 18 31 0 32 1 17 6 0 16)))))
+                                         0 31 0 32 3 0 0 0 9 9 13 1 14 0 0 20 1
+                                         15 21 0 23 1 15 21 0 25 1 15 26 0 28 1
+                                         18 6 0 18 1 0 9 0 10 1 0 9 0 11 1 0 9
+                                         0 12 1 19 31 0 32 1 18 6 0 16)))))
            '|lookupIncomplete|)) 

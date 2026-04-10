@@ -1393,10 +1393,3 @@
                     ('T (|devaluateList| |dom|))))
       (|sayBrightly| (|concat| |prefix| " " (|form2String| |dollar|)))
       (SETQ |$monitorNewWorld| T)))))
-
-; cc() == -- don't remove this function
-;   clearConstructorCaches()
-;   clearClams()
-
-(DEFUN |cc| ()
-  (PROG () (RETURN (PROGN (|clearConstructorCaches|) (|clearClams|)))))

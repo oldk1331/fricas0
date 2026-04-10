@@ -26,20 +26,6 @@
 (DEFUN |intpart| (|x|)
   (PROG () (RETURN (CAR (MULTIPLE-VALUE-LIST (FLOOR |x|))))))
 
-; negintp(x) ==
-;         if ZEROP IMAGPART(x) and x<0.0 and ZEROP fracpart(x)
-;         then
-;                 true
-;         else
-;                 false
-
-(DEFUN |negintp| (|x|)
-  (PROG ()
-    (RETURN
-     (COND
-      ((AND (ZEROP (IMAGPART |x|)) (< |x| 0.0) (ZEROP (|fracpart| |x|))) T)
-      ('T NIL)))))
-
 ; DEFCONSTANT(dfPi, 3.14159265358979323846264338328)
 
 (DEFCONSTANT |dfPi| 3.141592653589793)
@@ -90,13 +76,6 @@
     (RETURN
      (COND ((< 20 |x|) (|lnrgammaRatapprox| |x|))
            ('T (LOG (|gammaRatapprox| |x|)))))))
-
-; cbeta(z,w) ==
-;         cgamma(z)*cgamma(w)/(cgamma(z+w))
-
-(DEFUN |cbeta| (|z| |w|)
-  (PROG ()
-    (RETURN (/ (* (|cgamma| |z|) (|cgamma| |w|)) (|cgamma| (+ |z| |w|))))))
 
 ; gammaStirling(x) ==
 ;        EXP(r_lngamma(x))
@@ -280,12 +259,6 @@
             ('T (SETQ |result| (|clngamma| |z1| |z2| |z|))
              (SETQ |result| (EXP |result|))))
       |result|))))
-
-; lncgamma(z) ==
-;    clngamma(REALPART z, IMAGPART z, z)
-
-(DEFUN |lncgamma| (|z|)
-  (PROG () (RETURN (|clngamma| (REALPART |z|) (IMAGPART |z|) |z|))))
 
 ; clngamma(z1,z2,z) ==
 ;         --- conjugate of gamma is gamma of conjugate.  map 2nd and 4th quads
@@ -495,441 +468,6 @@
        1 |l| NIL)
       |sum|))))
 
-; $PsiAsymptoticBern := VECTOR(0.0, 0.1666666666666667, -0.03333333333333333, 0.02380952380952381,_
-;               -0.03333333333333333, 0.07575757575757576, -0.2531135531135531, 1.166666666666667,_
-;               -7.092156862745098, 54.97117794486216, -529.1242424242424, 6192.123188405797,_
-;               -86580.25311355311, 1425517.166666667, -27298231.06781609, 601580873.9006424,_
-;               -15116315767.09216, 429614643061.1667, -13711655205088.33, 488332318973593.2,_
-;               -19296579341940070.0,  841693047573682600.0, -40338071854059460000.0)
-
-(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
-  (SETQ |$PsiAsymptoticBern|
-          (VECTOR 0.0 0.16666666666666669 (- 0.03333333333333333)
-                  0.02380952380952381 (- 0.03333333333333333)
-                  0.07575757575757576 (- 0.2531135531135531) 1.1666666666666672
-                  (- 7.092156862745099) 54.97117794486216 (- 529.1242424242424)
-                  6192.123188405797 (- 86580.2531135531) 1425517.166666667
-                  (- 2.729823106781609e7) 6.015808739006424e8
-                  (- 1.5116315767092161e10) 4.2961464306116675e11
-                  (- 1.371165520508833e13) 4.8833231897359325e14
-                  (- 1.929657934194007e16) 8.416930475736827e17
-                  (- 4.033807185405946e19))))
-
-; PsiAsymptotic(n,x) ==
-;         xn := x^n
-;         xnp1 := xn*x
-;         xsq := x*x
-;         xterm := xsq
-;         factterm := r_gamma(n+2)/2.0/r_gamma(float(n+1))
-;         --- initialize to 1/n!
-;         sum := AREF($PsiAsymptoticBern,1)*factterm/xterm
-;         for k in 2..22 repeat
-;                 xterm := xterm * xsq
-;                 if n=0 then factterm := 1.0/float(2*k)
-;                 else if n=1 then factterm := 1
-;                 else factterm := factterm * float(2*k+n-1)*float(2*k+n-2)/(float(2*k)*float(2*k-1))
-;                 sum := sum + AREF($PsiAsymptoticBern,k)*factterm/xterm
-;         PsiEps(n,x) + 1.0/(2.0*xnp1) + 1.0/xn * sum
-
-(DEFUN |PsiAsymptotic| (|n| |x|)
-  (PROG (|xn| |xnp1| |xsq| |xterm| |factterm| |sum|)
-    (RETURN
-     (PROGN
-      (SETQ |xn| (EXPT |x| |n|))
-      (SETQ |xnp1| (* |xn| |x|))
-      (SETQ |xsq| (* |x| |x|))
-      (SETQ |xterm| |xsq|)
-      (SETQ |factterm|
-              (/ (/ (|r_gamma| (+ |n| 2)) 2.0)
-                 (|r_gamma| (|float| (+ |n| 1)))))
-      (SETQ |sum| (/ (* (AREF |$PsiAsymptoticBern| 1) |factterm|) |xterm|))
-      ((LAMBDA (|k|)
-         (LOOP
-          (COND ((> |k| 22) (RETURN NIL))
-                (#1='T
-                 (PROGN
-                  (SETQ |xterm| (* |xterm| |xsq|))
-                  (COND
-                   ((EQL |n| 0) (SETQ |factterm| (/ 1.0 (|float| (* 2 |k|)))))
-                   ((EQL |n| 1) (SETQ |factterm| 1))
-                   (#1#
-                    (SETQ |factterm|
-                            (/
-                             (*
-                              (* |factterm| (|float| (- (+ (* 2 |k|) |n|) 1)))
-                              (|float| (- (+ (* 2 |k|) |n|) 2)))
-                             (* (|float| (* 2 |k|))
-                                (|float| (- (* 2 |k|) 1)))))))
-                  (SETQ |sum|
-                          (+ |sum|
-                             (/ (* (AREF |$PsiAsymptoticBern| |k|) |factterm|)
-                                |xterm|))))))
-          (SETQ |k| (+ |k| 1))))
-       2)
-      (+ (+ (|PsiEps| |n| |x|) (/ 1.0 (* 2.0 |xnp1|)))
-         (* (/ 1.0 |xn|) |sum|))))))
-
-; PsiEps(n,x) ==
-;         if n = 0
-;         then
-;                 result := -LOG(x)
-;         else
-;                 result :=  1.0/(float(n)*(x^n))
-;         result
-
-(DEFUN |PsiEps| (|n| |x|)
-  (PROG (|result|)
-    (RETURN
-     (PROGN
-      (COND ((EQL |n| 0) (SETQ |result| (- (LOG |x|))))
-            ('T (SETQ |result| (/ 1.0 (* (|float| |n|) (EXPT |x| |n|))))))
-      |result|))))
-
-; PsiAsymptoticOrder(n,x,nterms) ==
-;         sum := 0
-;         xterm := 1.0
-;         np1 := n+1
-;         for k in 0..nterms repeat
-;                 xterm := (x+float(k))^np1
-;                 sum := sum + 1.0/xterm
-;         sum
-
-(DEFUN |PsiAsymptoticOrder| (|n| |x| |nterms|)
-  (PROG (|sum| |xterm| |np1|)
-    (RETURN
-     (PROGN
-      (SETQ |sum| 0)
-      (SETQ |xterm| 1.0)
-      (SETQ |np1| (+ |n| 1))
-      ((LAMBDA (|k|)
-         (LOOP
-          (COND ((> |k| |nterms|) (RETURN NIL))
-                ('T
-                 (PROGN
-                  (SETQ |xterm| (EXPT (+ |x| (|float| |k|)) |np1|))
-                  (SETQ |sum| (+ |sum| (/ 1.0 |xterm|))))))
-          (SETQ |k| (+ |k| 1))))
-       0)
-      |sum|))))
-
-; r_psi(n,x) ==
-;         if x<=0.0
-;         then
-;                 if ZEROP fracpart(x)
-;                 then FloatError('"singularity encountered at ~D",x)
-;                 else
-;                         m := MOD(n,2)
-;                         sign := (-1)^m
-;                         if fracpart(x)=.5
-;                         then
-;                                 skipit := 1
-;                         else
-;                                 skipit := 0
-;                         sign*((dfPi^(n + 1))*cotdiffeval(n, dfPi*(-x), skipit)
-;                             + r_psi(n, 1.0 - x))
-;         else if n=0
-;         then
-;                 - rPsiW(n,x)
-;         else
-;                 r_gamma(float(n+1))*rPsiW(n,x)*(-1)^MOD(n+1,2)
-
-(DEFUN |r_psi| (|n| |x|)
-  (PROG (|m| |sign| |skipit|)
-    (RETURN
-     (COND
-      ((NOT (< 0.0 |x|))
-       (COND
-        ((ZEROP (|fracpart| |x|))
-         (|FloatError| "singularity encountered at ~D" |x|))
-        (#1='T (SETQ |m| (MOD |n| 2)) (SETQ |sign| (EXPT (- 1) |m|))
-         (COND ((EQUAL (|fracpart| |x|) 0.5) (SETQ |skipit| 1))
-               (#1# (SETQ |skipit| 0)))
-         (* |sign|
-            (+
-             (* (EXPT |dfPi| (+ |n| 1))
-                (|cotdiffeval| |n| (* |dfPi| (- |x|)) |skipit|))
-             (|r_psi| |n| (- 1.0 |x|)))))))
-      ((EQL |n| 0) (- (|rPsiW| |n| |x|)))
-      (#1#
-       (* (* (|r_gamma| (|float| (+ |n| 1))) (|rPsiW| |n| |x|))
-          (EXPT (- 1) (MOD (+ |n| 1) 2))))))))
-
-; rPsiW(n,x) ==
-;         if (x <=0 or n < 0)
-;         then
-;                 HardError('"rPsiW not implemented for negative n or non-positive x")
-;         nd := 6         -- magic number for number of digits in a word?
-;         alpha := 3.5 + .40*nd
-;         beta := 0.21 + (.008677e-3)*(nd-3) + (.0006038e-4)*(nd-3)^2
-;         xmin := float(FLOOR(alpha + beta*n) + 1)
-;         if n>0
-;         then
-;                 a := MIN(0,1.0/float(n)*LOG(DOUBLE_-FLOAT_-EPSILON/MIN(1.0,x)))
-;                 c := EXP(a)
-;                 if ABS(a) >= 0.001
-;                 then
-;                         fln := x/c*(1.0-c)
-;                 else
-;                         fln := -x*a/c
-;                 bign := FLOOR(fln) + 1
-; --- Amos says to use alternative series for large order if ordinary
-; --- backwards recurrence too expensive
-;                 if (bign < 15) and (xmin > 7.0+x)
-;                 then
-;                         return PsiAsymptoticOrder(n,x,bign)
-;         if x>= xmin
-;         then
-;                 return PsiAsymptotic(n,x)
-; ---ordinary case -- use backwards recursion
-;         PsiBack(n,x,xmin)
-
-(DEFUN |rPsiW| (|n| |x|)
-  (PROG (|nd| |alpha| |beta| |xmin| |a| |c| |fln| |bign|)
-    (RETURN
-     (PROGN
-      (COND
-       ((OR (NOT (< 0 |x|)) (MINUSP |n|))
-        (|HardError|
-         "rPsiW not implemented for negative n or non-positive x")))
-      (SETQ |nd| 6)
-      (SETQ |alpha| (+ 3.5 (* 0.4 |nd|)))
-      (SETQ |beta|
-              (+ (+ 0.21 (* 8.677e-6 (- |nd| 3)))
-                 (* 6.038e-8 (EXPT (- |nd| 3) 2))))
-      (SETQ |xmin| (|float| (+ (FLOOR (+ |alpha| (* |beta| |n|))) 1)))
-      (COND
-       ((< 0 |n|)
-        (SETQ |a|
-                (MIN 0
-                     (* (/ 1.0 (|float| |n|))
-                        (LOG (/ DOUBLE-FLOAT-EPSILON (MIN 1.0 |x|))))))
-        (SETQ |c| (EXP |a|))
-        (COND
-         ((NOT (< (ABS |a|) 0.001)) (SETQ |fln| (* (/ |x| |c|) (- 1.0 |c|))))
-         ('T (SETQ |fln| (- (/ (* |x| |a|) |c|)))))
-        (SETQ |bign| (+ (FLOOR |fln|) 1))
-        (COND
-         ((AND (< |bign| 15) (< (+ 7.0 |x|) |xmin|))
-          (RETURN (|PsiAsymptoticOrder| |n| |x| |bign|))))))
-      (COND ((NOT (< |x| |xmin|)) (RETURN (|PsiAsymptotic| |n| |x|))))
-      (|PsiBack| |n| |x| |xmin|)))))
-
-; PsiBack(n,x,xmin) ==
-;         xintpart := PsiIntpart(x)
-;         x0 := x-xintpart                ---frac part of x
-;         result := PsiAsymptotic(n,x0+xmin+1.0)
-;         for k in xmin..xintpart by -1 repeat
-; --- Why not decrement from x?   See Amos p. 498
-;                 result := result + 1.0/((x0 + float(k))^(n+1))
-;         result
-
-(DEFUN |PsiBack| (|n| |x| |xmin|)
-  (PROG (|xintpart| |x0| |result|)
-    (RETURN
-     (PROGN
-      (SETQ |xintpart| (|PsiIntpart| |x|))
-      (SETQ |x0| (- |x| |xintpart|))
-      (SETQ |result| (|PsiAsymptotic| |n| (+ (+ |x0| |xmin|) 1.0)))
-      ((LAMBDA (|bfVar#8| |k|)
-         (LOOP
-          (COND
-           ((COND ((MINUSP |bfVar#8|) (< |k| |xintpart|))
-                  (T (> |k| |xintpart|)))
-            (RETURN NIL))
-           ('T
-            (SETQ |result|
-                    (+ |result|
-                       (/ 1.0 (EXPT (+ |x0| (|float| |k|)) (+ |n| 1)))))))
-          (SETQ |k| (+ |k| |bfVar#8|))))
-       (- 1) |xmin|)
-      |result|))))
-
-; PsiIntpart(x) ==
-;         if x<0
-;         then
-;                 result :=  -PsiInpart(-x)
-;         else
-;                 result := FLOOR(x)
-;         return result
-
-(DEFUN |PsiIntpart| (|x|)
-  (PROG (|result|)
-    (RETURN
-     (PROGN
-      (COND ((MINUSP |x|) (SETQ |result| (- (|PsiInpart| (- |x|)))))
-            ('T (SETQ |result| (FLOOR |x|))))
-      (RETURN |result|)))))
-
-; cotdiffeval(n,z,skipit) ==
-; ---skip=1 if arg z is known to be an exact multiple of Pi/2
-;         a := MAKE_-ARRAY(n+2)
-;         SETF(AREF(a,0),0.0)
-;         SETF(AREF(a,1),1.0)
-;         for i in 2..n repeat
-;                 SETF(AREF(a,i),0.0)
-;         for l in 1..n repeat
-;                 m := MOD(l+1,2)
-;                 for k in m..l+1 by 2 repeat
-;                         if k<1
-;                         then
-;                                 t1 := 0
-;                         else
-;                                 t1 := -AREF(a,k-1)*(k-1)
-;                         if k>l
-;                         then
-;                                 t2 := 0
-;                         else
-;                                 t2 := -AREF(a,k+1)*(k+1)
-;                         SETF(AREF(a,k), t1+t2)
-;         --- evaluate d^N/dX^N cot(z) via Horner-like rule
-;         v := COT(z)
-;         sq := v^2
-;         s := AREF(a,n+1)
-;         for i in (n-1)..0 by -2 repeat
-;                 s := s*sq + AREF(a,i)
-;         m := MOD(n,2)
-;         if m=0
-;         then
-;                 s := s*v
-;         if skipit=1
-;         then
-;                 if m=0
-;                 then
-;                         return 0
-;                 else
-;                         return AREF(a,0)
-;         else
-;                 return s
-
-(DEFUN |cotdiffeval| (|n| |z| |skipit|)
-  (PROG (|a| |m| |t1| |t2| |v| |sq| |s|)
-    (RETURN
-     (PROGN
-      (SETQ |a| (MAKE-ARRAY (+ |n| 2)))
-      (SETF (AREF |a| 0) 0.0)
-      (SETF (AREF |a| 1) 1.0)
-      ((LAMBDA (|i|)
-         (LOOP
-          (COND ((> |i| |n|) (RETURN NIL)) (#1='T (SETF (AREF |a| |i|) 0.0)))
-          (SETQ |i| (+ |i| 1))))
-       2)
-      ((LAMBDA (|l|)
-         (LOOP
-          (COND ((> |l| |n|) (RETURN NIL))
-                (#1#
-                 (PROGN
-                  (SETQ |m| (MOD (+ |l| 1) 2))
-                  ((LAMBDA (|bfVar#9| |k|)
-                     (LOOP
-                      (COND ((> |k| |bfVar#9|) (RETURN NIL))
-                            (#1#
-                             (PROGN
-                              (COND ((< |k| 1) (SETQ |t1| 0))
-                                    (#1#
-                                     (SETQ |t1|
-                                             (-
-                                              (* (AREF |a| (- |k| 1))
-                                                 (- |k| 1))))))
-                              (COND ((< |l| |k|) (SETQ |t2| 0))
-                                    (#1#
-                                     (SETQ |t2|
-                                             (-
-                                              (* (AREF |a| (+ |k| 1))
-                                                 (+ |k| 1))))))
-                              (SETF (AREF |a| |k|) (+ |t1| |t2|)))))
-                      (SETQ |k| (+ |k| 2))))
-                   (+ |l| 1) |m|))))
-          (SETQ |l| (+ |l| 1))))
-       1)
-      (SETQ |v| (COT |z|))
-      (SETQ |sq| (EXPT |v| 2))
-      (SETQ |s| (AREF |a| (+ |n| 1)))
-      ((LAMBDA (|bfVar#10| |i|)
-         (LOOP
-          (COND
-           ((COND ((MINUSP |bfVar#10|) (< |i| 0)) (T (> |i| 0))) (RETURN NIL))
-           (#1# (SETQ |s| (+ (* |s| |sq|) (AREF |a| |i|)))))
-          (SETQ |i| (+ |i| |bfVar#10|))))
-       (- 2) (- |n| 1))
-      (SETQ |m| (MOD |n| 2))
-      (COND ((EQL |m| 0) (SETQ |s| (* |s| |v|))))
-      (COND
-       ((EQL |skipit| 1)
-        (COND ((EQL |m| 0) (RETURN 0)) (#1# (RETURN (AREF |a| 0)))))
-       (#1# (RETURN |s|)))))))
-
-; cPsi(n,z) ==
-;         x := REALPART(z)
-;         y := IMAGPART(z)
-;         if ZEROP y
-;         then    --- call real function if real
-;                 return r_psi(n, x)
-;         if y<0.0
-;         then    -- if imagpart(z) negative, take conjugate of conjugate
-;                 conjresult := cPsi(n,COMPLEX(x,-y))
-;                 return COMPLEX(REALPART(conjresult),-IMAGPART(conjresult))
-;         nterms := 22
-;         bound := 10.0
-;         if x<0.0 --- and ABS(z)>bound and ABS(y)<bound
-;         then
-;                 FloatError('"Psi implementation can't compute at ~S ",[n,z])
-; ---             return cpsireflect(n,x,y,z)
-;         else if (x>0.0 and ABS(z)>bound ) --- or (x<0.0 and ABS(y)>bound)
-;         then
-;                 return PsiXotic(n,PsiAsymptotic(n,z))
-;         else            --- use recursion formula
-;                 m := CEILING(SQRT(bound*bound - y*y) - x + 1.0)
-;                 result := COMPLEX(0.0,0.0)
-;                 for k in 0..(m-1) repeat
-;                         result := result + 1.0/((z + float(k))^(n+1))
-;                 return PsiXotic(n,result+PsiAsymptotic(n,z+m))
-
-(DEFUN |cPsi| (|n| |z|)
-  (PROG (|x| |y| |conjresult| |nterms| |bound| |m| |result|)
-    (RETURN
-     (PROGN
-      (SETQ |x| (REALPART |z|))
-      (SETQ |y| (IMAGPART |z|))
-      (COND ((ZEROP |y|) (RETURN (|r_psi| |n| |x|))))
-      (COND
-       ((< |y| 0.0) (SETQ |conjresult| (|cPsi| |n| (COMPLEX |x| (- |y|))))
-        (RETURN
-         (COMPLEX (REALPART |conjresult|) (- (IMAGPART |conjresult|))))))
-      (SETQ |nterms| 22)
-      (SETQ |bound| 10.0)
-      (COND
-       ((< |x| 0.0)
-        (|FloatError| "Psi implementation can't compute at ~S "
-         (LIST |n| |z|)))
-       ((AND (< 0.0 |x|) (< |bound| (ABS |z|)))
-        (RETURN (|PsiXotic| |n| (|PsiAsymptotic| |n| |z|))))
-       (#1='T
-        (SETQ |m|
-                (CEILING
-                 (+ (- (SQRT (- (* |bound| |bound|) (* |y| |y|))) |x|) 1.0)))
-        (SETQ |result| (COMPLEX 0.0 0.0))
-        ((LAMBDA (|bfVar#11| |k|)
-           (LOOP
-            (COND ((> |k| |bfVar#11|) (RETURN NIL))
-                  (#1#
-                   (SETQ |result|
-                           (+ |result|
-                              (/ 1.0
-                                 (EXPT (+ |z| (|float| |k|)) (+ |n| 1)))))))
-            (SETQ |k| (+ |k| 1))))
-         (- |m| 1) 0)
-        (RETURN
-         (|PsiXotic| |n| (+ |result| (|PsiAsymptotic| |n| (+ |z| |m|)))))))))))
-
-; PsiXotic(n,result) ==
-;         r_gamma(float(n+1))*(-1)^MOD(n+1,2)*result
-
-(DEFUN |PsiXotic| (|n| |result|)
-  (PROG ()
-    (RETURN
-     (* (* (|r_gamma| (|float| (+ |n| 1))) (EXPT (- 1) (MOD (+ |n| 1) 2)))
-        |result|))))
-
 ; chebf01 (c,z) ==
 ; --- w scale factor so that 0<z/w<1
 ; --- n    n+2 coefficients will be produced stored in an array
@@ -1004,10 +542,10 @@
       (SETF (AREF |arr| |ncount|) |start|)
       (SETQ |x1| |n2|)
       (SETQ |c1| (- 1.0 |c|))
-      ((LAMBDA (|bfVar#12| |ncount|)
+      ((LAMBDA (|bfVar#8| |ncount|)
          (LOOP
           (COND
-           ((COND ((MINUSP |bfVar#12|) (< |ncount| 0)) (T (> |ncount| 0)))
+           ((COND ((MINUSP |bfVar#8|) (< |ncount| 0)) (T (> |ncount| 0)))
             (RETURN NIL))
            (#1='T
             (PROGN
@@ -1023,7 +561,7 @@
              (SETQ |a3| |a2|)
              (SETQ |a2| |a1|)
              (SETQ |a1| (AREF |arr| |ncount|)))))
-          (SETQ |ncount| (+ |ncount| |bfVar#12|))))
+          (SETQ |ncount| (+ |ncount| |bfVar#8|))))
        (- 1) |n|)
       (SETF (AREF |arr| 0) (/ (AREF |arr| 0) 2.0))
       (SETQ |rho| (AREF |arr| 0))
@@ -1048,16 +586,16 @@
       (SETQ |sum| (/ |sum| |rho|))
       (SETQ |b| 0.0)
       (SETQ |temp| 0.0)
-      ((LAMBDA (|bfVar#13| |i|)
+      ((LAMBDA (|bfVar#9| |i|)
          (LOOP
           (COND
-           ((COND ((MINUSP |bfVar#13|) (< |i| 0)) (T (> |i| 0))) (RETURN NIL))
+           ((COND ((MINUSP |bfVar#9|) (< |i| 0)) (T (> |i| 0))) (RETURN NIL))
            (#1#
             (PROGN
              (SETQ |cc| |b|)
              (SETQ |b| |temp|)
              (SETQ |temp| (+ (- |cc|) (AREF |arr| |i|))))))
-          (SETQ |i| (+ |i| |bfVar#13|))))
+          (SETQ |i| (+ |i| |bfVar#9|))))
        (- 1) (+ |n| 1))
       |temp|))))
 
@@ -1117,10 +655,10 @@
       (SETF (AREF |arr| |ncount|) |start|)
       (SETQ |x1| |n2|)
       (SETQ |c1| (- 1.0 |c|))
-      ((LAMBDA (|bfVar#14| |ncount|)
+      ((LAMBDA (|bfVar#10| |ncount|)
          (LOOP
           (COND
-           ((COND ((MINUSP |bfVar#14|) (< |ncount| 0)) (T (> |ncount| 0)))
+           ((COND ((MINUSP |bfVar#10|) (< |ncount| 0)) (T (> |ncount| 0)))
             (RETURN NIL))
            (#1='T
             (PROGN
@@ -1136,7 +674,7 @@
              (SETQ |a3| |a2|)
              (SETQ |a2| |a1|)
              (SETQ |a1| (AREF |arr| |ncount|)))))
-          (SETQ |ncount| (+ |ncount| |bfVar#14|))))
+          (SETQ |ncount| (+ |ncount| |bfVar#10|))))
        (- 1) |n|)
       (SETF (AREF |arr| 0) (/ (AREF |arr| 0) 2.0))
       (SETQ |rho| (AREF |arr| 0))
@@ -1180,16 +718,16 @@
       (SETQ |b| 0)
       (SETQ |temp| 0)
       (SETQ |y| (* 2 (- (* 2 |x|) 1)))
-      ((LAMBDA (|bfVar#15| |i|)
+      ((LAMBDA (|bfVar#11| |i|)
          (LOOP
           (COND
-           ((COND ((MINUSP |bfVar#15|) (< |i| 0)) (T (> |i| 0))) (RETURN NIL))
+           ((COND ((MINUSP |bfVar#11|) (< |i| 0)) (T (> |i| 0))) (RETURN NIL))
            ('T
             (PROGN
              (SETQ |c| |b|)
              (SETQ |b| |temp|)
              (SETQ |temp| (+ (- (* |y| |b|) |c|) (AREF |coefarr| |i|))))))
-          (SETQ |i| (+ |i| |bfVar#15|))))
+          (SETQ |i| (+ |i| |bfVar#11|))))
        (- 1) (+ |n| 1))
       (- |temp| (/ (* |y| |b|) 2))))))
 
@@ -1314,17 +852,17 @@
       (SETQ |w| (MAKE-ARRAY |m|))
       (SETF (AREF |w| (- |m| 1)) (|BesselJAsymptOrder| (- (+ |v| |m|) 1) |z|))
       (SETF (AREF |w| (- |m| 2)) (|BesselJAsymptOrder| (- (+ |v| |m|) 2) |z|))
-      ((LAMBDA (|bfVar#16| |i|)
+      ((LAMBDA (|bfVar#12| |i|)
          (LOOP
           (COND
-           ((COND ((MINUSP |bfVar#16|) (< |i| 0)) (T (> |i| 0))) (RETURN NIL))
+           ((COND ((MINUSP |bfVar#12|) (< |i| 0)) (T (> |i| 0))) (RETURN NIL))
            (#1#
             (SETF (AREF |w| |i|)
                     (-
                      (/ (* (* 2.0 (+ (+ |v| |i|) 1.0)) (AREF |w| (+ |i| 1)))
                         |z|)
                      (AREF |w| (+ |i| 2))))))
-          (SETQ |i| (+ |i| |bfVar#16|))))
+          (SETQ |i| (+ |i| |bfVar#12|))))
        (- 1) (- |m| 3))
       (AREF |w| 0)))))
 
@@ -1492,38 +1030,38 @@
       (SETQ |m| (+ |n| 1))
       (SETQ |xm| (|float| |m|))
       (SETQ |ct1| (* |z2| (+ |xm| |v|)))
-      ((LAMBDA (|bfVar#17| |m|)
+      ((LAMBDA (|bfVar#13| |m|)
          (LOOP
           (COND
-           ((COND ((MINUSP |bfVar#17|) (< |m| 1)) (T (> |m| 1))) (RETURN NIL))
+           ((COND ((MINUSP |bfVar#13|) (< |m| 1)) (T (> |m| 1))) (RETURN NIL))
            (#1#
             (PROGN
              (SETF (AREF |w| |m|)
                      (+ (* (AREF |w| (+ |m| 1)) |ct1|)
                         (* |val| (AREF |w| (+ |m| 2)))))
              (SETQ |ct1| (- |ct1| |z2|)))))
-          (SETQ |m| (+ |m| |bfVar#17|))))
+          (SETQ |m| (+ |m| |bfVar#13|))))
        (- 1) (+ |n| 1))
       (SETQ |m| (+ 1 (FLOOR (/ |n| 2))))
       (SETQ |m2| (- (+ |m| |m|) 1))
       (COND
        ((EQL |v| 0) (SETQ |pn| (AREF |w| (+ |m2| 2)))
-        ((LAMBDA (|bfVar#18| |m2|)
+        ((LAMBDA (|bfVar#14| |m2|)
            (LOOP
             (COND
-             ((COND ((MINUSP |bfVar#18|) (< |m2| 3)) (T (> |m2| 3)))
+             ((COND ((MINUSP |bfVar#14|) (< |m2| 3)) (T (> |m2| 3)))
               (RETURN NIL))
              (#1# (SETQ |pn| (- (AREF |w| |m2|) (* |val| |pn|)))))
-            (SETQ |m2| (+ |m2| |bfVar#18|))))
+            (SETQ |m2| (+ |m2| |bfVar#14|))))
          (- 2) (- (* 2 |m|) 1))
         (SETQ |pn| (- (AREF |w| 1) (* |val| (+ |pn| |pn|)))))
        (#1# (SETQ |v1| (- |v| |one|)) (SETQ |xm| (|float| |m|))
         (SETQ |ct1| (+ (+ |v| |xm|) |xm|))
         (SETQ |pn| (* |ct1| (AREF |w| (+ |m2| 2))))
-        ((LAMBDA (|bfVar#19| |m2|)
+        ((LAMBDA (|bfVar#15| |m2|)
            (LOOP
             (COND
-             ((COND ((MINUSP |bfVar#19|) (< |m2| 3)) (T (> |m2| 3)))
+             ((COND ((MINUSP |bfVar#15|) (< |m2| 3)) (T (> |m2| 3)))
               (RETURN NIL))
              (#1#
               (PROGN
@@ -1532,7 +1070,7 @@
                        (- (* |ct1| (AREF |w| |m2|))
                           (* (/ (* |val| |pn|) |xm|) (+ |v1| |xm|))))
                (SETQ |xm| (- |xm| |one|)))))
-            (SETQ |m2| (+ |m2| |bfVar#19|))))
+            (SETQ |m2| (+ |m2| |bfVar#15|))))
          (- 2) (- (+ |m| |m|) 1))
         (SETQ |pn| (- (AREF |w| 1) (* |val| |pn|)))))
       (SETQ |m1| (+ |n| 2))
@@ -1600,64 +1138,6 @@
        (COS
         (- (- (|BesselasymptB| |mu| |z| |zsqr| |zfth|) (/ (* |pi| |v|) 2.0))
            (/ |pi| 4.0))))))))
-
-; BesselIAsympt(v,z,n) ==
-;         i := COMPLEX(0.0, 1.0)
-;         if (REALPART(z) = 0.0)
-;         then return EXPT(i,v)*BesselJ(v,-IMAGPART(z))
-;         sum1 := 0.0
-;         sum2 := 0.0
-;         fourvsq := 4.0*v^2
-;         two := 2.0
-;         eight := 8.0
-;         term1 := 1.0
-; ---             sum1, sum2, fourvsq,two,i,eight,term1])
-;         for r in 1..n repeat
-;                 term1 := -term1 *(fourvsq-(two*float(r)-1.0)^2)/_
-;                         (float(r)*eight*z)
-;                 sum1 := sum1 + term1
-;                 sum2 := sum2 + ABS(term1)
-;         sqrttwopiz := SQRT(two*dfPi*z)
-;         EXP(z)/sqrttwopiz*(1.0 + sum1 ) +_
-;                 EXP(-(float(n)+.5)*dfPi*i)*EXP(-z)/sqrttwopiz*(1.0+ sum2)
-
-(DEFUN |BesselIAsympt| (|v| |z| |n|)
-  (PROG (|i| |sum1| |sum2| |fourvsq| |two| |eight| |term1| |sqrttwopiz|)
-    (RETURN
-     (PROGN
-      (SETQ |i| (COMPLEX 0.0 1.0))
-      (COND
-       ((EQUAL (REALPART |z|) 0.0)
-        (RETURN (* (EXPT |i| |v|) (|BesselJ| |v| (- (IMAGPART |z|)))))))
-      (SETQ |sum1| 0.0)
-      (SETQ |sum2| 0.0)
-      (SETQ |fourvsq| (* 4.0 (EXPT |v| 2)))
-      (SETQ |two| 2.0)
-      (SETQ |eight| 8.0)
-      (SETQ |term1| 1.0)
-      ((LAMBDA (|r|)
-         (LOOP
-          (COND ((> |r| |n|) (RETURN NIL))
-                ('T
-                 (PROGN
-                  (SETQ |term1|
-                          (-
-                           (/
-                            (* |term1|
-                               (- |fourvsq|
-                                  (EXPT (- (* |two| (|float| |r|)) 1.0) 2)))
-                            (* (* (|float| |r|) |eight|) |z|))))
-                  (SETQ |sum1| (+ |sum1| |term1|))
-                  (SETQ |sum2| (+ |sum2| (ABS |term1|))))))
-          (SETQ |r| (+ |r| 1))))
-       1)
-      (SETQ |sqrttwopiz| (SQRT (* (* |two| |dfPi|) |z|)))
-      (+ (* (/ (EXP |z|) |sqrttwopiz|) (+ 1.0 |sum1|))
-         (*
-          (/
-           (* (EXP (- (* (* (+ (|float| |n|) 0.5) |dfPi|) |i|))) (EXP (- |z|)))
-           |sqrttwopiz|)
-          (+ 1.0 |sum2|)))))))
 
 ; BesselJAsymptOrder(v,z) ==
 ;         sechalpha := z/v
@@ -1748,205 +1228,6 @@
           |ca2|)
          (* (* (* (* (* (* 4.8157949952e12 |v|) |v|) |v|) |v|) |v|) |v|))))))))
 
-; BesselIAsymptOrder(v,vz) ==
-;         z := vz/v
-;         Pi := dfPi
-; ---     Use reflection formula (Atlas, p. 492)  if v not in right half plane;  Is this always accurate?
-;         if REALPART(v)<0.0
-;         then return BesselIAsymptOrder(-v,vz) + 2.0/Pi*SIN(-v*Pi)*BesselKAsymptOrder(-v,vz)
-; ---     Use the reflection formula (Atlas, p. 496) if z not in right half plane;
-;         if REALPART(vz) < 0.0
-;         then return EXPT(-1.0,v)*BesselIAsymptOrder(v,-vz)
-;         vinv := 1.0/v
-;         opzsqroh := SQRT(1.0+z*z)
-;         eta := opzsqroh + LOG(z/(1.0+opzsqroh))
-;         p := 1.0/opzsqroh
-;         p2 := p*p
-;         p4 := p2*p2
-;         u0p := 1.
-;         u1p := 1.0/8.0*p-5.0/24.0*p*p2
-;         u2p := (9.0/128.0+(-77.0/192.0+385.0/1152.0*p2)*p2)*p2
-;         u3p := (75.0/1024.0+(-4563.0/5120.0+(17017.0/9216.0-85085.0/82944.0*p2)_
-;                 *p2)*p2)*p2*p
-;         u4p := (3675.0/32768.0+(-96833.0/40960.0+(144001.0/16384.0+(-7436429.0/663552.0+37182145.0/7962624.0*p2)*p2)*p2)*p2)*p4
-;         u5p := (59535.0/262144.0+(-67608983.0/9175040.0+(250881631.0/5898240.0+(-108313205.0/1179648.0+(5391411025.0/63700992.0-5391411025.0/191102976.0*p2)*p2)*p2)*p2)*p2)*p4*p
-;         hornerresult := horner([u5p,u4p,u3p,u2p,u1p,u0p],vinv)
-;         EXP(v*eta)/(SQRT(2.0*Pi*v)*SQRT(opzsqroh))*hornerresult
-
-(DEFUN |BesselIAsymptOrder| (|v| |vz|)
-  (PROG (|z| |Pi| |vinv| |opzsqroh| |eta| |p| |p2| |p4| |u0p| |u1p| |u2p| |u3p|
-         |u4p| |u5p| |hornerresult|)
-    (RETURN
-     (PROGN
-      (SETQ |z| (/ |vz| |v|))
-      (SETQ |Pi| |dfPi|)
-      (COND
-       ((< (REALPART |v|) 0.0)
-        (RETURN
-         (+ (|BesselIAsymptOrder| (- |v|) |vz|)
-            (* (* (/ 2.0 |Pi|) (SIN (- (* |v| |Pi|))))
-               (|BesselKAsymptOrder| (- |v|) |vz|))))))
-      (COND
-       ((< (REALPART |vz|) 0.0)
-        (RETURN (* (EXPT (- 1.0) |v|) (|BesselIAsymptOrder| |v| (- |vz|))))))
-      (SETQ |vinv| (/ 1.0 |v|))
-      (SETQ |opzsqroh| (SQRT (+ 1.0 (* |z| |z|))))
-      (SETQ |eta| (+ |opzsqroh| (LOG (/ |z| (+ 1.0 |opzsqroh|)))))
-      (SETQ |p| (/ 1.0 |opzsqroh|))
-      (SETQ |p2| (* |p| |p|))
-      (SETQ |p4| (* |p2| |p2|))
-      (SETQ |u0p| 1.0)
-      (SETQ |u1p| (- (* (/ 1.0 8.0) |p|) (* (* (/ 5.0 24.0) |p|) |p2|)))
-      (SETQ |u2p|
-              (*
-               (+ (/ 9.0 128.0)
-                  (* (+ (- (/ 77.0 192.0)) (* (/ 385.0 1152.0) |p2|)) |p2|))
-               |p2|))
-      (SETQ |u3p|
-              (*
-               (*
-                (+ (/ 75.0 1024.0)
-                   (*
-                    (+ (- (/ 4563.0 5120.0))
-                       (* (- (/ 17017.0 9216.0) (* (/ 85085.0 82944.0) |p2|))
-                          |p2|))
-                    |p2|))
-                |p2|)
-               |p|))
-      (SETQ |u4p|
-              (*
-               (+ (/ 3675.0 32768.0)
-                  (*
-                   (+ (- (/ 96833.0 40960.0))
-                      (*
-                       (+ (/ 144001.0 16384.0)
-                          (*
-                           (+ (- (/ 7436429.0 663552.0))
-                              (* (/ 3.7182145e7 7962624.0) |p2|))
-                           |p2|))
-                       |p2|))
-                   |p2|))
-               |p4|))
-      (SETQ |u5p|
-              (*
-               (*
-                (+ (/ 59535.0 262144.0)
-                   (*
-                    (+ (- (/ 6.7608983e7 9175040.0))
-                       (*
-                        (+ (/ 2.50881631e8 5898240.0)
-                           (*
-                            (+ (- (/ 1.08313205e8 1179648.0))
-                               (*
-                                (- (/ 5.391411025e9 6.3700992e7)
-                                   (* (/ 5.391411025e9 1.91102976e8) |p2|))
-                                |p2|))
-                            |p2|))
-                        |p2|))
-                    |p2|))
-                |p4|)
-               |p|))
-      (SETQ |hornerresult|
-              (|horner| (LIST |u5p| |u4p| |u3p| |u2p| |u1p| |u0p|) |vinv|))
-      (*
-       (/ (EXP (* |v| |eta|))
-          (* (SQRT (* (* 2.0 |Pi|) |v|)) (SQRT |opzsqroh|)))
-       |hornerresult|)))))
-
-; BesselKAsymptOrder (v,vz) ==
-;         z := vz/v
-;         vinv := 1.0/v
-;         opzsqroh := SQRT(1.0+z*z)
-;         eta := opzsqroh + LOG(z/(1.0+opzsqroh))
-;         p := 1.0/opzsqroh
-;         p2 := p^2
-;         p4 := p2^2
-;         u0p := 1.
-;         u1p := (1.0/8.0*p-5.0/24.0*p^3)*(-1.0)
-;         u2p := (9.0/128.0+(-77.0/192.0+385.0/1152.0*p2)*p2)*p2
-;         u3p := ((75.0/1024.0+(-4563.0/5120.0+(17017.0/9216.0-85085.0/82944.0*p2)_
-;                 *p2)*p2)*p2*p)*(-1.0)
-;         u4p := (3675.0/32768.0+(-96833.0/40960.0+(144001.0/16384.0+(-7436429.0/663552.0+37182145.0/7962624.0*p2)*p2)*p2)*p2)*p4
-;         u5p := ((59535.0/262144.0+(-67608983.0/9175040.0+(250881631.0/5898240.0+(-108313205.0/1179648.0+(5391411025.0/63700992.0-5391411025.0/191102976.0*p2)*p2)*p2)*p2)*p2)*p4*p)*(-1.0)
-;         hornerresult := horner([u5p,u4p,u3p,u2p,u1p,u0p],vinv)
-;         SQRT(dfPi/(2.0*v))*EXP(-v*eta)/(SQRT(opzsqroh))*hornerresult
-
-(DEFUN |BesselKAsymptOrder| (|v| |vz|)
-  (PROG (|z| |vinv| |opzsqroh| |eta| |p| |p2| |p4| |u0p| |u1p| |u2p| |u3p|
-         |u4p| |u5p| |hornerresult|)
-    (RETURN
-     (PROGN
-      (SETQ |z| (/ |vz| |v|))
-      (SETQ |vinv| (/ 1.0 |v|))
-      (SETQ |opzsqroh| (SQRT (+ 1.0 (* |z| |z|))))
-      (SETQ |eta| (+ |opzsqroh| (LOG (/ |z| (+ 1.0 |opzsqroh|)))))
-      (SETQ |p| (/ 1.0 |opzsqroh|))
-      (SETQ |p2| (EXPT |p| 2))
-      (SETQ |p4| (EXPT |p2| 2))
-      (SETQ |u0p| 1.0)
-      (SETQ |u1p|
-              (* (- (* (/ 1.0 8.0) |p|) (* (/ 5.0 24.0) (EXPT |p| 3)))
-                 (- 1.0)))
-      (SETQ |u2p|
-              (*
-               (+ (/ 9.0 128.0)
-                  (* (+ (- (/ 77.0 192.0)) (* (/ 385.0 1152.0) |p2|)) |p2|))
-               |p2|))
-      (SETQ |u3p|
-              (*
-               (*
-                (*
-                 (+ (/ 75.0 1024.0)
-                    (*
-                     (+ (- (/ 4563.0 5120.0))
-                        (* (- (/ 17017.0 9216.0) (* (/ 85085.0 82944.0) |p2|))
-                           |p2|))
-                     |p2|))
-                 |p2|)
-                |p|)
-               (- 1.0)))
-      (SETQ |u4p|
-              (*
-               (+ (/ 3675.0 32768.0)
-                  (*
-                   (+ (- (/ 96833.0 40960.0))
-                      (*
-                       (+ (/ 144001.0 16384.0)
-                          (*
-                           (+ (- (/ 7436429.0 663552.0))
-                              (* (/ 3.7182145e7 7962624.0) |p2|))
-                           |p2|))
-                       |p2|))
-                   |p2|))
-               |p4|))
-      (SETQ |u5p|
-              (*
-               (*
-                (*
-                 (+ (/ 59535.0 262144.0)
-                    (*
-                     (+ (- (/ 6.7608983e7 9175040.0))
-                        (*
-                         (+ (/ 2.50881631e8 5898240.0)
-                            (*
-                             (+ (- (/ 1.08313205e8 1179648.0))
-                                (*
-                                 (- (/ 5.391411025e9 6.3700992e7)
-                                    (* (/ 5.391411025e9 1.91102976e8) |p2|))
-                                 |p2|))
-                             |p2|))
-                         |p2|))
-                     |p2|))
-                 |p4|)
-                |p|)
-               (- 1.0)))
-      (SETQ |hornerresult|
-              (|horner| (LIST |u5p| |u4p| |u3p| |u2p| |u1p| |u0p|) |vinv|))
-      (*
-       (/ (* (SQRT (/ |dfPi| (* 2.0 |v|))) (EXP (- (* |v| |eta|))))
-          (SQRT |opzsqroh|))
-       |hornerresult|)))))
-
 ; s_to_c(c) == COMPLEX(first c, CDR c)
 
 (DEFUN |s_to_c| (|c|) (PROG () (RETURN (COMPLEX (CAR |c|) (CDR |c|)))))
@@ -1976,20 +1257,6 @@
 ; c_to_rf(c) == COERCE(c_to_r(c), 'DOUBLE_-FLOAT)
 
 (DEFUN |c_to_rf| (|c|) (PROG () (RETURN (COERCE (|c_to_r| |c|) 'DOUBLE-FLOAT))))
-
-; c_lngamma(z) ==  c_to_s(lncgamma(s_to_c z))
-
-(DEFUN |c_lngamma| (|z|)
-  (PROG () (RETURN (|c_to_s| (|lncgamma| (|s_to_c| |z|))))))
-
-; c_gamma(z) ==  c_to_s(cgamma (s_to_c z))
-
-(DEFUN |c_gamma| (|z|) (PROG () (RETURN (|c_to_s| (|cgamma| (|s_to_c| |z|))))))
-
-; c_psi(n, z) == c_to_s(cPsi(n, s_to_c(z)))
-
-(DEFUN |c_psi| (|n| |z|)
-  (PROG () (RETURN (|c_to_s| (|cPsi| |n| (|s_to_c| |z|))))))
 
 ; r_besselj(n, x) == c_to_r(BesselJ(n, x))
 

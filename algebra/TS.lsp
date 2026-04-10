@@ -96,8 +96,8 @@
               (|OutputForm|) (|PositiveInteger|) (|Integer|)
               (|Union| % '"failed") (|List| 23) (|Symbol|) (|List| 15)
               (|IndexedExponents| 23) (|Mapping| 6 6)
-              (|Record| (|:| |k| 25) (|:| |c| 6)) (|List| 27) (|List| 31)
-              (|List| %) (|Equation| %)
+              (|Record| (|:| |k| 25) (|:| |c| 6)) (|List| 27) (|List| %)
+              (|Equation| %) (|List| 30)
               (|Record| (|:| |unit| %) (|:| |canonical| %) (|:| |associate| %))
               (|Fraction| 20) (|Mapping| %))
            '#(~= 25 |zero?| 31 |unitNormal| 36 |unitCanonical| 41 |unit?| 46
@@ -112,12 +112,12 @@
               |exquo| 285 |exp| 291 |eval| 296 |differentiate| 336 |degree| 362
               |csch| 367 |csc| 372 |coth| 377 |cot| 382 |cosh| 387 |cos| 392
               |constructOrdered| 397 |construct| 402 |complete| 407
-              |commutator| 412 |coerce| 418 |coefficient| 453 |charthRoot| 479
-              |characteristic| 484 |atanh| 488 |atan| 493 |associator| 498
-              |associates?| 505 |asinh| 511 |asin| 516 |asech| 521 |asec| 526
-              |antiCommutator| 531 |annihilate?| 537 |acsch| 543 |acsc| 548
-              |acoth| 553 |acot| 558 |acosh| 563 |acos| 568 ^ 573 |Zero| 597
-              |One| 601 D 605 = 631 / 637 - 643 + 654 * 660)
+              |commutator| 412 |coerce| 418 |coefficient| 453 |characteristic|
+              479 |atanh| 483 |atan| 488 |associator| 493 |associates?| 500
+              |asinh| 506 |asin| 511 |asech| 516 |asec| 521 |antiCommutator|
+              526 |annihilate?| 532 |acsch| 538 |acsc| 543 |acoth| 548 |acot|
+              553 |acosh| 558 |acos| 563 ^ 568 |Zero| 592 |One| 596 D 600 = 626
+              / 632 - 638 + 649 * 655)
            'NIL
            (CONS
             (|makeByteWordVec2| 6
@@ -185,8 +185,8 @@
                                     1 1 8 25 0 1 1 0 0 0 1 1 0 6 0 1 1 0 17 0 1
                                     2 1 0 0 23 1 3 1 0 0 23 6 1 3 1 0 34 23 6 1
                                     2 0 0 0 15 1 2 10 21 0 0 1 1 1 0 0 1 3 0 0
-                                    0 23 0 1 2 0 0 0 29 1 3 0 0 0 22 30 1 3 0 0
-                                    0 0 0 1 2 0 0 0 31 1 3 0 0 0 30 30 1 2 0 0
+                                    0 22 29 1 3 0 0 0 23 0 1 2 0 0 0 30 1 2 0 0
+                                    0 31 1 3 0 0 0 29 29 1 3 0 0 0 0 0 1 2 0 0
                                     0 22 1 2 0 0 0 23 1 3 0 0 0 22 24 1 3 0 0 0
                                     23 15 1 1 0 25 0 1 1 1 0 0 1 1 1 0 0 1 1 1
                                     0 0 1 1 1 0 0 1 1 1 0 0 1 1 1 0 0 1 1 8 0
@@ -194,16 +194,15 @@
                                     18 0 1 1 0 0 20 1 1 0 0 23 1 1 0 0 8 1 1 9
                                     0 6 1 1 11 0 0 1 1 1 0 33 1 2 0 6 0 25 1 3
                                     0 0 0 23 15 1 3 0 0 0 22 24 1 2 0 8 0 15 1
-                                    1 3 21 0 1 0 0 15 1 1 1 0 0 1 1 1 0 0 1 3 0
-                                    0 0 0 0 1 2 10 10 0 0 1 1 1 0 0 1 1 1 0 0 1
-                                    1 1 0 0 1 1 1 0 0 1 2 0 0 0 0 1 2 0 10 0 0
+                                    0 0 15 1 1 1 0 0 1 1 1 0 0 1 3 0 0 0 0 0 1
+                                    2 10 10 0 0 1 1 1 0 0 1 1 1 0 0 1 1 1 0 0 1
+                                    1 1 0 0 1 2 0 0 0 0 1 2 0 10 0 0 1 1 1 0 0
                                     1 1 1 0 0 1 1 1 0 0 1 1 1 0 0 1 1 1 0 0 1 1
-                                    1 0 0 1 1 1 0 0 1 2 0 0 0 19 1 2 0 0 0 15 1
-                                    2 1 0 0 0 1 2 1 0 0 33 1 0 0 0 1 0 0 0 1 2
-                                    0 0 0 22 1 2 0 0 0 23 1 3 0 0 0 22 24 1 3 0
-                                    0 0 23 15 1 2 0 10 0 0 1 2 7 0 0 6 1 1 0 0
-                                    0 1 2 0 0 0 0 1 2 0 0 0 0 1 2 0 0 19 0 1 2
-                                    0 0 0 0 1 2 0 0 20 0 1 2 0 0 15 0 1 2 0 0 6
-                                    0 1 2 0 0 0 6 1 2 1 0 0 33 1 2 1 0 33 0
-                                    1)))))
+                                    1 0 0 1 2 0 0 0 19 1 2 0 0 0 15 1 2 1 0 0 0
+                                    1 2 1 0 0 33 1 0 0 0 1 0 0 0 1 2 0 0 0 22 1
+                                    2 0 0 0 23 1 3 0 0 0 22 24 1 3 0 0 0 23 15
+                                    1 2 0 10 0 0 1 2 7 0 0 6 1 1 0 0 0 1 2 0 0
+                                    0 0 1 2 0 0 0 0 1 2 0 0 19 0 1 2 0 0 0 0 1
+                                    2 0 0 20 0 1 2 0 0 15 0 1 2 0 0 0 6 1 2 0 0
+                                    6 0 1 2 1 0 33 0 1 2 1 0 0 33 1)))))
            '|lookupComplete|)) 

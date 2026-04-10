@@ -2161,6 +2161,22 @@
          (#1# 1000))))
       (#1# 1002)))))
 
+; leftBindingPowerOf(x, ind) ==
+;     (y := GET(x, ind)) => ELEMN(y, 3, 0)
+;     0
+
+(DEFUN |leftBindingPowerOf| (|x| |ind|)
+  (PROG (|y|)
+    (RETURN (COND ((SETQ |y| (GET |x| |ind|)) (ELEMN |y| 3 0)) ('T 0)))))
+
+; rightBindingPowerOf(x, ind) ==
+;     (y := GET(x, ind)) => ELEMN(y, 4, 105)
+;     105
+
+(DEFUN |rightBindingPowerOf| (|x| |ind|)
+  (PROG (|y|)
+    (RETURN (COND ((SETQ |y| (GET |x| |ind|)) (ELEMN |y| 4 105)) ('T 105)))))
+
 ; getOpBindingPower(op,LedOrNud,leftOrRight) ==
 ;   if op in '(SLASH OVER) then op := "/"
 ;   not(SYMBOLP(op)) => 1000

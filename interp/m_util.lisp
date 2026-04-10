@@ -42,7 +42,7 @@
 ; kaf_open(name, io?) ==
 ;     full_name :=
 ;         io? => make_full_namestring(name)
-;         make_input_filename(name)
+;         make_input_filename1(name)
 ;     if io? then
 ;         kind := file_kind(full_name)
 ;         if kind = -1 then
@@ -60,7 +60,7 @@
      (PROGN
       (SETQ |full_name|
               (COND (|io?| (|make_full_namestring| |name|))
-                    (#1='T (|make_input_filename| |name|))))
+                    (#1='T (|make_input_filename1| |name|))))
       (COND
        (|io?| (SETQ |kind| (|file_kind| |full_name|))
         (COND ((EQUAL |kind| (- 1)) (|makedir| |full_name|))
@@ -265,3 +265,239 @@
 ; filler_spaces(n) == filler_chars(n, '" ")
 
 (DEFUN |filler_spaces| (|n|) (PROG () (RETURN (|filler_chars| |n| " "))))
+
+; SNAME(s) ==
+;     not(SYMBOLP(s)) => BREAK()
+;     SYMBOL_-NAME(s)
+
+(DEFUN SNAME (|s|)
+  (PROG ()
+    (RETURN (COND ((NULL (SYMBOLP |s|)) (BREAK)) ('T (SYMBOL-NAME |s|))))))
+
+; ext_position(n) ==
+;     k := #n - 1
+;     dot := '".".0
+;     while k >= 0 and not(n.k = dot) repeat
+;         is_dir_sepatator?(n.k) => k := -1
+;         k := k - 1
+;     k
+
+(DEFUN |ext_position| (|n|)
+  (PROG (|k| |dot|)
+    (RETURN
+     (PROGN
+      (SETQ |k| (- (LENGTH |n|) 1))
+      (SETQ |dot| (ELT "." 0))
+      ((LAMBDA ()
+         (LOOP
+          (COND
+           ((NOT (AND (NOT (MINUSP |k|)) (NULL (EQUAL (ELT |n| |k|) |dot|))))
+            (RETURN NIL))
+           (#1='T
+            (COND ((|is_dir_sepatator?| (ELT |n| |k|)) (SETQ |k| (- 1)))
+                  (#1# (SETQ |k| (- |k| 1)))))))))
+      |k|))))
+
+; file_extention(n) ==
+;     k := ext_position(n)
+;     k < 0 => '""
+;     SUBSTRING(n, k + 1, #n - 1 - k)
+
+(DEFUN |file_extention| (|n|)
+  (PROG (|k|)
+    (RETURN
+     (PROGN
+      (SETQ |k| (|ext_position| |n|))
+      (COND ((MINUSP |k|) "")
+            ('T (SUBSTRING |n| (+ |k| 1) (- (- (LENGTH |n|) 1) |k|))))))))
+
+; drop_extention(n) ==
+;     k := ext_position(n)
+;     k < 0 => n
+;     SUBSTRING(n, 0, k)
+
+(DEFUN |drop_extention| (|n|)
+  (PROG (|k|)
+    (RETURN
+     (PROGN
+      (SETQ |k| (|ext_position| |n|))
+      (COND ((MINUSP |k|) |n|) ('T (SUBSTRING |n| 0 |k|)))))))
+
+; has_extention?(s, e) ==
+;     not((m := #e) < (n := #s)) => false
+;     l := n - m
+;     not(s.(l - 1) = '".".0) => false
+;     res := true
+;     for i in 0..(m - 1) while res repeat
+;         res := s.(l + i) = e.i
+;     res
+
+(DEFUN |has_extention?| (|s| |e|)
+  (PROG (|m| |n| |l| |res|)
+    (RETURN
+     (COND ((NULL (< (SETQ |m| (LENGTH |e|)) (SETQ |n| (LENGTH |s|)))) NIL)
+           (#1='T
+            (PROGN
+             (SETQ |l| (- |n| |m|))
+             (COND ((NULL (EQUAL (ELT |s| (- |l| 1)) (ELT "." 0))) NIL)
+                   (#1#
+                    (PROGN
+                     (SETQ |res| T)
+                     ((LAMBDA (|bfVar#1| |i|)
+                        (LOOP
+                         (COND
+                          ((OR (> |i| |bfVar#1|) (NOT |res|)) (RETURN NIL))
+                          (#1#
+                           (SETQ |res|
+                                   (EQUAL (ELT |s| (+ |l| |i|))
+                                          (ELT |e| |i|)))))
+                         (SETQ |i| (+ |i| 1))))
+                      (- |m| 1) 0)
+                     |res|)))))))))
+
+; last_dir_separator(n) ==
+;     k := #n - 1
+;     while k >=0 and not(is_dir_sepatator?(n.k)) repeat
+;         k := k - 1
+;     k
+
+(DEFUN |last_dir_separator| (|n|)
+  (PROG (|k|)
+    (RETURN
+     (PROGN
+      (SETQ |k| (- (LENGTH |n|) 1))
+      ((LAMBDA ()
+         (LOOP
+          (COND
+           ((NOT
+             (AND (NOT (MINUSP |k|))
+                  (NULL (|is_dir_sepatator?| (ELT |n| |k|)))))
+            (RETURN NIL))
+           ('T (SETQ |k| (- |k| 1)))))))
+      |k|))))
+
+; drop_directory_part(n) ==
+;     k := last_dir_separator(n) + 1
+;     SUBSTRING(n, k, #n - k)
+
+(DEFUN |drop_directory_part| (|n|)
+  (PROG (|k|)
+    (RETURN
+     (PROGN
+      (SETQ |k| (+ (|last_dir_separator| |n|) 1))
+      (SUBSTRING |n| |k| (- (LENGTH |n|) |k|))))))
+
+; file_basename(n) ==
+;     k := last_dir_separator(n) + 1
+;     l := ext_position(n)
+;     l < 0 => SUBSTRING(n, k, #n - k)
+;     SUBSTRING(n, k, l - k)
+
+(DEFUN |file_basename| (|n|)
+  (PROG (|k| |l|)
+    (RETURN
+     (PROGN
+      (SETQ |k| (+ (|last_dir_separator| |n|) 1))
+      (SETQ |l| (|ext_position| |n|))
+      (COND ((MINUSP |l|) (SUBSTRING |n| |k| (- (LENGTH |n|) |k|)))
+            ('T (SUBSTRING |n| |k| (- |l| |k|))))))))
+
+; file_directory(n) ==
+;     k := #n - 1
+;     while k >=0 and not(is_dir_sepatator?(n.k)) repeat
+;         k := k - 1
+;     k < 0 => '""
+;     k = 0 => "/"
+;     SUBSTRING(n, 0, k)
+
+(DEFUN |file_directory| (|n|)
+  (PROG (|k|)
+    (RETURN
+     (PROGN
+      (SETQ |k| (- (LENGTH |n|) 1))
+      ((LAMBDA ()
+         (LOOP
+          (COND
+           ((NOT
+             (AND (NOT (MINUSP |k|))
+                  (NULL (|is_dir_sepatator?| (ELT |n| |k|)))))
+            (RETURN NIL))
+           (#1='T (SETQ |k| (- |k| 1)))))))
+      (COND ((MINUSP |k|) "") ((EQL |k| 0) '/) (#1# (SUBSTRING |n| 0 |k|)))))))
+
+; make_filename2(n, e) ==
+;     has_extention?(n, e) => n
+;     CONCAT(n, '".", e)
+
+(DEFUN |make_filename2| (|n| |e|)
+  (PROG ()
+    (RETURN (COND ((|has_extention?| |n| |e|) |n|) ('T (CONCAT |n| "." |e|))))))
+
+; make_input_filename2(n, e) ==
+;     make_input_filename1(make_filename2(n, e))
+
+(DEFUN |make_input_filename2| (|n| |e|)
+  (PROG () (RETURN (|make_input_filename1| (|make_filename2| |n| |e|)))))
+
+; erase_lib0(n, e) == erase_lib(make_filename2(n, e))
+
+(DEFUN |erase_lib0| (|n| |e|)
+  (PROG () (RETURN (|erase_lib| (|make_filename2| |n| |e|)))))
+
+; make_fname(d, n, e) ==
+;     n = '"" => throwMessage '"name part can not be empty"
+;     n :=
+;         e = '"" => n
+;         CONCAT(n, '".", e)
+;     d = '"" => n
+;     n :=
+;         is_dir_sepatator?(n.0) => SUBSTRING(n, 1, #n - 1)
+;         n
+;     is_dir_sepatator?(d.(#d - 1)) => CONCAT(d, n)
+;     CONCAT(d, "/", n)
+
+(DEFUN |make_fname| (|d| |n| |e|)
+  (PROG ()
+    (RETURN
+     (COND ((EQUAL |n| "") (|throwMessage| "name part can not be empty"))
+           (#1='T
+            (PROGN
+             (SETQ |n| (COND ((EQUAL |e| "") |n|) (#1# (CONCAT |n| "." |e|))))
+             (COND ((EQUAL |d| "") |n|)
+                   (#1#
+                    (PROGN
+                     (SETQ |n|
+                             (COND
+                              ((|is_dir_sepatator?| (ELT |n| 0))
+                               (SUBSTRING |n| 1 (- (LENGTH |n|) 1)))
+                              (#1# |n|)))
+                     (COND
+                      ((|is_dir_sepatator?| (ELT |d| (- (LENGTH |d|) 1)))
+                       (CONCAT |d| |n|))
+                      (#1# (CONCAT |d| '/ |n|))))))))))))
+
+; is_system_path?(n) ==
+;     #n < #(sr := $spadroot) => false
+;     res := true
+;     for i in 0..(#sr - 1) while res repeat
+;         res := n.i = sr.i
+;     res
+
+(DEFUN |is_system_path?| (|n|)
+  (PROG (|sr| |res|)
+    (RETURN
+     (COND ((< (LENGTH |n|) (LENGTH (SETQ |sr| |$spadroot|))) NIL)
+           (#1='T
+            (PROGN
+             (SETQ |res| T)
+             ((LAMBDA (|bfVar#2| |i|)
+                (LOOP
+                 (COND ((OR (> |i| |bfVar#2|) (NOT |res|)) (RETURN NIL))
+                       (#1# (SETQ |res| (EQUAL (ELT |n| |i|) (ELT |sr| |i|)))))
+                 (SETQ |i| (+ |i| 1))))
+              (- (LENGTH |sr|) 1) 0)
+             |res|))))))
+
+; delete_file(f) == DELETE_-FILE(f)
+
+(DEFUN |delete_file| (|f|) (PROG () (RETURN (DELETE-FILE |f|))))

@@ -76,7 +76,7 @@
         (SPROG ((|lx| (%)))
                (SEQ
                 (COND
-                 ((QEQCAR |x| 0) (|error| "rest$FreeMagma: inexistant rest"))
+                 ((QEQCAR |x| 0) (|error| "rest$FreeMagma: non-existent rest"))
                  (#1='T
                   (SEQ (LETT |lx| (QCAR (QCDR |x|)))
                        (EXIT

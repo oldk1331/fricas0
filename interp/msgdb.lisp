@@ -19,10 +19,6 @@
 
 (DEFPARAMETER |$testingErrorPrefix| "Daly Bug")
 
-; DEFPARAMETER($texFormatting, false)
-
-(DEFPARAMETER |$texFormatting| NIL)
-
 ; escape_strings(l) ==
 ;     ATOM(l) => l
 ;     res := []
@@ -191,6 +187,7 @@
      (CATCH 'DONE (|handle_input_file| |db_name| #'|cacheKeyedMsg1| NIL)))))
 
 ; getKeyedMsg(key) ==
+;     STRINGP(key) => key
 ;     if not($msg_hash) then
 ;         $msg_hash := MAKE_HASHTABLE('EQ)
 ;         cacheKeyedMsg($defaultMsgDatabaseName)
@@ -199,11 +196,13 @@
 (DEFUN |getKeyedMsg| (|key|)
   (PROG ()
     (RETURN
-     (PROGN
-      (COND
-       ((NULL |$msg_hash|) (SETQ |$msg_hash| (MAKE_HASHTABLE 'EQ))
-        (|cacheKeyedMsg| |$defaultMsgDatabaseName|)))
-      (HGET |$msg_hash| |key|)))))
+     (COND ((STRINGP |key|) |key|)
+           ('T
+            (PROGN
+             (COND
+              ((NULL |$msg_hash|) (SETQ |$msg_hash| (MAKE_HASHTABLE 'EQ))
+               (|cacheKeyedMsg| |$defaultMsgDatabaseName|)))
+             (HGET |$msg_hash| |key|)))))))
 
 ; segmentKeyedMsg(msg) == string2Words msg
 
@@ -669,17 +668,6 @@
               |msg| NIL)
              |msg1|))))))
 
-; operationLink name ==
-;   FORMAT(nil, '"\lispLink{\verb!(|oSearch| _"~a_")!}{~a}",
-;          name,
-;          escapeSpecialChars STRINGIMAGE name)
-
-(DEFUN |operationLink| (|name|)
-  (PROG ()
-    (RETURN
-     (FORMAT NIL "\\lispLink{\\verb!(|oSearch| \"~a\")!}{~a}" |name|
-             (|escapeSpecialChars| (STRINGIMAGE |name|))))))
-
 ; sayPatternMsg(msg,args) ==
 ;   ioHook("startPatternMsg", msg, args)
 ;   msg := segmentKeyedMsg msg
@@ -712,49 +700,23 @@
       (|sayPatternMsg| |key| |args|)
       (|spadThrow|)))))
 
-; say_msg(msg, args) ==
-;     ioHook("say_msg", msg, args)
-;     say_msg_local(msg, args)
-;     ioHook("end_say_msg", msg)
-
-(DEFUN |say_msg| (|msg| |args|)
-  (PROG ()
-    (RETURN
-     (PROGN
-      (|ioHook| '|say_msg| |msg| |args|)
-      (|say_msg_local| |msg| |args|)
-      (|ioHook| '|end_say_msg| |msg|)))))
-
-; throw_msg(msg, args) ==
-;     sayMSG '" "
-;     if $testingSystem then sayMSG $testingErrorPrefix
-;     say_Msg(msg, args)
-;     spadThrow()
-
-(DEFUN |throw_msg| (|msg| |args|)
-  (PROG ()
-    (RETURN
-     (PROGN
-      (|sayMSG| " ")
-      (COND (|$testingSystem| (|sayMSG| |$testingErrorPrefix|)))
-      (|say_Msg| |msg| |args|)
-      (|spadThrow|)))))
-
-; sayKeyedMsg(key,args) ==
-;   $texFormatting: fluid := false
+; say_msg(key, msg, args) ==
 ;   ioHook("startKeyedMsg", key, args)
-;   say_msg_local(getKeyedMsg key, args)
+;   say_msg_local(msg, args)
 ;   ioHook("endOfKeyedMsg", key)
 
-(DEFUN |sayKeyedMsg| (|key| |args|)
-  (PROG (|$texFormatting|)
-    (DECLARE (SPECIAL |$texFormatting|))
+(DEFUN |say_msg| (|key| |msg| |args|)
+  (PROG ()
     (RETURN
      (PROGN
-      (SETQ |$texFormatting| NIL)
       (|ioHook| '|startKeyedMsg| |key| |args|)
-      (|say_msg_local| (|getKeyedMsg| |key|) |args|)
+      (|say_msg_local| |msg| |args|)
       (|ioHook| '|endOfKeyedMsg| |key|)))))
+
+; sayKeyedMsg(key, args) == say_msg(key, getKeyedMsg(key), args)
+
+(DEFUN |sayKeyedMsg| (|key| |args|)
+  (PROG () (RETURN (|say_msg| |key| (|getKeyedMsg| |key|) |args|))))
 
 ; say_msg_local(msg, args) ==
 ;   msg := segmentKeyedMsg msg
@@ -773,14 +735,54 @@
       (COND (|$printMsgsToFile| (|sayMSG2File| |msg'|)))
       (|sayMSG| |msg'|)))))
 
-; throwKeyedErrorMsg(kind,key,args) ==
-;   $noEvalTypeMsg => spadThrow()
-;   sayMSG '" "
-;   if $testingSystem then sayMSG $testingErrorPrefix
-;   sayKeyedMsg(key,args)
-;   spadThrow()
+; throw_error_msg(kind, key, msg, args) == throw_msg(key, msg, args)
+
+(DEFUN |throw_error_msg| (|kind| |key| |msg| |args|)
+  (PROG () (RETURN (|throw_msg| |key| |msg| |args|))))
+
+; throwKeyedErrorMsg(kind, key, args) ==
+;     throw_error_msg(kind, key, getKeyedMsg(key), args)
 
 (DEFUN |throwKeyedErrorMsg| (|kind| |key| |args|)
+  (PROG ()
+    (RETURN (|throw_error_msg| |kind| |key| (|getKeyedMsg| |key|) |args|))))
+
+; throw_msg_pos(key, msg, args, tree) ==
+;     if tree and (sp := getSrcPos(tree)) then
+;         sayMSG '" "
+;         srcPosDisplay(sp)
+;     throw_msg(key, msg, args)
+
+(DEFUN |throw_msg_pos| (|key| |msg| |args| |tree|)
+  (PROG (|sp|)
+    (RETURN
+     (PROGN
+      (COND
+       ((AND |tree| (SETQ |sp| (|getSrcPos| |tree|))) (|sayMSG| " ")
+        (|srcPosDisplay| |sp|)))
+      (|throw_msg| |key| |msg| |args|)))))
+
+; throwKeyedMsgSP(key, args, atree) ==
+;     throw_msg_pos(key, getKeyedMsg(key), args, atree)
+
+(DEFUN |throwKeyedMsgSP| (|key| |args| |atree|)
+  (PROG ()
+    (RETURN (|throw_msg_pos| |key| (|getKeyedMsg| |key|) |args| |atree|))))
+
+; throwKeyedMsg(key, args) ==
+;     throw_msg(key, getKeyedMsg(key), args)
+
+(DEFUN |throwKeyedMsg| (|key| |args|)
+  (PROG () (RETURN (|throw_msg| |key| (|getKeyedMsg| |key|) |args|))))
+
+; throw_msg(key, msg, args) ==
+;     $noEvalTypeMsg => spadThrow()
+;     sayMSG '" "
+;     if $testingSystem then sayMSG $testingErrorPrefix
+;     say_msg(key, msg, args)
+;     spadThrow()
+
+(DEFUN |throw_msg| (|key| |msg| |args|)
   (PROG ()
     (RETURN
      (COND (|$noEvalTypeMsg| (|spadThrow|))
@@ -788,48 +790,8 @@
             (PROGN
              (|sayMSG| " ")
              (COND (|$testingSystem| (|sayMSG| |$testingErrorPrefix|)))
-             (|sayKeyedMsg| |key| |args|)
+             (|say_msg| |key| |msg| |args|)
              (|spadThrow|)))))))
-
-; throwKeyedMsgSP(key,args,atree) ==
-;     if atree and (sp := getSrcPos(atree)) then
-;         sayMSG '" "
-;         srcPosDisplay(sp)
-;     throwKeyedMsg(key,args)
-
-(DEFUN |throwKeyedMsgSP| (|key| |args| |atree|)
-  (PROG (|sp|)
-    (RETURN
-     (PROGN
-      (COND
-       ((AND |atree| (SETQ |sp| (|getSrcPos| |atree|))) (|sayMSG| " ")
-        (|srcPosDisplay| |sp|)))
-      (|throwKeyedMsg| |key| |args|)))))
-
-; throwKeyedMsg(key,args) ==
-;   $noEvalTypeMsg => spadThrow()
-;   throwKeyedMsg1(key, args)
-
-(DEFUN |throwKeyedMsg| (|key| |args|)
-  (PROG ()
-    (RETURN
-     (COND (|$noEvalTypeMsg| (|spadThrow|))
-           ('T (|throwKeyedMsg1| |key| |args|))))))
-
-; throwKeyedMsg1(key,args) ==
-;   sayMSG '" "
-;   if $testingSystem then sayMSG $testingErrorPrefix
-;   sayKeyedMsg(key,args)
-;   spadThrow()
-
-(DEFUN |throwKeyedMsg1| (|key| |args|)
-  (PROG ()
-    (RETURN
-     (PROGN
-      (|sayMSG| " ")
-      (COND (|$testingSystem| (|sayMSG| |$testingErrorPrefix|)))
-      (|sayKeyedMsg| |key| |args|)
-      (|spadThrow|)))))
 
 ; throwListOfKeyedMsgs(descKey,descArgs,l) ==
 ;   -- idea is that descKey and descArgs are the message describing
@@ -874,57 +836,72 @@
        |l| NIL 1)
       (|spadThrow|)))))
 
-; breakKeyedMsg(key,args) ==
-;   sayKeyedMsg(key,args)
-;   handleLispBreakLoop($BreakMode)
+; break_msg(key, msg, args) ==
+;     say_msg(key, msg, args)
+;     handleLispBreakLoop($BreakMode)
 
-(DEFUN |breakKeyedMsg| (|key| |args|)
+(DEFUN |break_msg| (|key| |msg| |args|)
   (PROG ()
     (RETURN
      (PROGN
-      (|sayKeyedMsg| |key| |args|)
+      (|say_msg| |key| |msg| |args|)
       (|handleLispBreakLoop| |$BreakMode|)))))
 
-; keyedSystemError(key,args) ==
-;   keyedSystemError1(key, args)
+; system_error(key, msg, args) ==
+;     say_msg("S2GE0000", '"Internal Error", NIL)
+;     break_msg(key, msg, args)
 
-(DEFUN |keyedSystemError| (|key| |args|)
-  (PROG () (RETURN (|keyedSystemError1| |key| |args|))))
-
-; keyedSystemError1(key,args) ==
-;   sayKeyedMsg("S2GE0000",NIL)
-;   breakKeyedMsg(key,args)
-
-(DEFUN |keyedSystemError1| (|key| |args|)
+(DEFUN |system_error| (|key| |msg| |args|)
   (PROG ()
     (RETURN
-     (PROGN (|sayKeyedMsg| 'S2GE0000 NIL) (|breakKeyedMsg| |key| |args|)))))
+     (PROGN
+      (|say_msg| 'S2GE0000 "Internal Error" NIL)
+      (|break_msg| |key| |msg| |args|)))))
 
-; systemErrorHere functionName ==
-;   keyedSystemError("S2GE0017",[functionName])
+; keyedSystemError(key, args) == system_error(key, getKeyedMsg(key), args)
 
-(DEFUN |systemErrorHere| (|functionName|)
-  (PROG () (RETURN (|keyedSystemError| 'S2GE0017 (LIST |functionName|)))))
+(DEFUN |keyedSystemError| (|key| |args|)
+  (PROG () (RETURN (|system_error| |key| (|getKeyedMsg| |key|) |args|))))
 
-; queryUserKeyedMsg(key,args) ==
+; systemErrorHere(fname) ==
+;     system_error("S2GE0017",
+;                  '"Unexpected error in call to system function %1b", [fname])
+
+(DEFUN |systemErrorHere| (|fname|)
+  (PROG ()
+    (RETURN
+     (|system_error| 'S2GE0017
+      "Unexpected error in call to system function %1b" (LIST |fname|)))))
+
+; queryUserKeyedMsg(key, args) == query_user_msg(key, getKeyedMsg(key), args)
+
+(DEFUN |queryUserKeyedMsg| (|key| |args|)
+  (PROG () (RETURN (|query_user_msg| |key| (|getKeyedMsg| |key|) |args|))))
+
+; query_user_msg(key, msg, args) ==
 ;   -- display message and return reply
 ;   conStream := get_console_input()
-;   sayKeyedMsg(key,args)
+;   say_msg(key, msg, args)
 ;   ioHook("startQueryUser")
 ;   ans := read_line conStream
 ;   ioHook("endOfQueryUser")
 ;   ans
 
-(DEFUN |queryUserKeyedMsg| (|key| |args|)
+(DEFUN |query_user_msg| (|key| |msg| |args|)
   (PROG (|conStream| |ans|)
     (RETURN
      (PROGN
       (SETQ |conStream| (|get_console_input|))
-      (|sayKeyedMsg| |key| |args|)
+      (|say_msg| |key| |msg| |args|)
       (|ioHook| '|startQueryUser|)
       (SETQ |ans| (|read_line| |conStream|))
       (|ioHook| '|endOfQueryUser|)
       |ans|))))
+
+; queryUserKeyedMsg(key, args) == query_user_msg(key, getKeyedMsg(key), args)
+
+(DEFUN |queryUserKeyedMsg| (|key| |args|)
+  (PROG () (RETURN (|query_user_msg| |key| (|getKeyedMsg| |key|) |args|))))
 
 ; flowSegmentedMsg(msg, len, offset) ==
 ;   -- tries to break a sayBrightly-type input msg into multiple
@@ -1074,43 +1051,21 @@
            (|concat| (NREVERSE |nl|))))
          (#1# (|concat| '|%l| |off| |msg|)))))))))
 
-; keyedMsgCompFailure(key,args) ==
+; msg_comp_failure1(key, msg, args, tree) ==
 ;   -- Called when compilation fails in such a way that interpret-code
 ;   --  mode might be of some use.
 ;   not $useCoerceOrCroak =>   THROW('coerceOrCroaker, 'croaked)
 ;   if not($Coerce) and  $reportInterpOnly then
-;     sayKeyedMsg(key,args)
-;     sayKeyedMsg("S2IB0009",NIL)
+;       if tree and  (sp := getSrcPos(tree)) then
+;           sayMSG '" "
+;           srcPosDisplay(sp)
+;       say_msg(key, msg, args)
+;       say_msg("S2IB0009",
+;           '"FriCAS will attempt to step through and interpret the code.", [])
 ;   null $compilingMap => THROW('loopCompiler,'tryInterpOnly)
 ;   THROW('mapCompiler,'tryInterpOnly)
 
-(DEFUN |keyedMsgCompFailure| (|key| |args|)
-  (PROG ()
-    (RETURN
-     (COND ((NULL |$useCoerceOrCroak|) (THROW '|coerceOrCroaker| '|croaked|))
-           (#1='T
-            (PROGN
-             (COND
-              ((AND (NULL |$Coerce|) |$reportInterpOnly|)
-               (|sayKeyedMsg| |key| |args|) (|sayKeyedMsg| 'S2IB0009 NIL)))
-             (COND
-              ((NULL |$compilingMap|) (THROW '|loopCompiler| '|tryInterpOnly|))
-              (#1# (THROW '|mapCompiler| '|tryInterpOnly|)))))))))
-
-; keyedMsgCompFailureSP(key,args,atree) ==
-;   -- Called when compilation fails in such a way that interpret-code
-;   --  mode might be of some use.
-;   not $useCoerceOrCroak =>   THROW('coerceOrCroaker, 'croaked)
-;   if not($Coerce) and  $reportInterpOnly then
-;     if atree and (sp := getSrcPos(atree)) then
-;         sayMSG '" "
-;         srcPosDisplay(sp)
-;     sayKeyedMsg(key,args)
-;     sayKeyedMsg("S2IB0009",NIL)
-;   null $compilingMap => THROW('loopCompiler,'tryInterpOnly)
-;   THROW('mapCompiler,'tryInterpOnly)
-
-(DEFUN |keyedMsgCompFailureSP| (|key| |args| |atree|)
+(DEFUN |msg_comp_failure1| (|key| |msg| |args| |tree|)
   (PROG (|sp|)
     (RETURN
      (COND ((NULL |$useCoerceOrCroak|) (THROW '|coerceOrCroaker| '|croaked|))
@@ -1119,22 +1074,45 @@
              (COND
               ((AND (NULL |$Coerce|) |$reportInterpOnly|)
                (COND
-                ((AND |atree| (SETQ |sp| (|getSrcPos| |atree|))) (|sayMSG| " ")
+                ((AND |tree| (SETQ |sp| (|getSrcPos| |tree|))) (|sayMSG| " ")
                  (|srcPosDisplay| |sp|)))
-               (|sayKeyedMsg| |key| |args|) (|sayKeyedMsg| 'S2IB0009 NIL)))
+               (|say_msg| |key| |msg| |args|)
+               (|say_msg| 'S2IB0009
+                "FriCAS will attempt to step through and interpret the code."
+                NIL)))
              (COND
               ((NULL |$compilingMap|) (THROW '|loopCompiler| '|tryInterpOnly|))
               (#1# (THROW '|mapCompiler| '|tryInterpOnly|)))))))))
+
+; msg_comp_failure(key, msg, args) == msg_comp_failure1(key, msg, args, [])
+
+(DEFUN |msg_comp_failure| (|key| |msg| |args|)
+  (PROG () (RETURN (|msg_comp_failure1| |key| |msg| |args| NIL))))
+
+; keyedMsgCompFailure(key, args) ==
+;     msg_comp_failure(key, getKeyedMsg(key), args)
+
+(DEFUN |keyedMsgCompFailure| (|key| |args|)
+  (PROG () (RETURN (|msg_comp_failure| |key| (|getKeyedMsg| |key|) |args|))))
+
+; keyedMsgCompFailureSP(key, args, atree) ==
+;     msg_comp_failure1(key, getKeyedMsg(key), args, atree)
+
+(DEFUN |keyedMsgCompFailureSP| (|key| |args| |atree|)
+  (PROG ()
+    (RETURN (|msg_comp_failure1| |key| (|getKeyedMsg| |key|) |args| |atree|))))
 
 ; throwKeyedMsgCannotCoerceWithValue(val,t1,t2) ==
 ;   val' :=
 ;      not($genValue) => nil
 ;      coerceInteractive(mkObj(val,t1),$OutputForm)
 ;   if not(isWrapped(val')) then val' := nil
-;   null (val') =>
-;     throwKeyedMsg("S2IC0002",[t1,t2])
+;   null (val') => throw_msg("S2IC0002",
+;         '"Cannot convert the value from type %1bp to %2bp .", [t1, t2])
 ;   val' := objValUnwrap(val')
-;   throwKeyedMsg("S2IC0003",[t1,t2,val'])
+;   throw_msg("S2IC0003",
+;             '"Cannot convert from type %1bp to %2bp for value %3m",
+;             [t1, t2, val'])
 
 (DEFUN |throwKeyedMsgCannotCoerceWithValue| (|val| |t1| |t2|)
   (PROG (|val'|)
@@ -1146,11 +1124,16 @@
                      (|coerceInteractive| (|mkObj| |val| |t1|)
                       |$OutputForm|))))
       (COND ((NULL (|isWrapped| |val'|)) (SETQ |val'| NIL)))
-      (COND ((NULL |val'|) (|throwKeyedMsg| 'S2IC0002 (LIST |t1| |t2|)))
-            (#1#
-             (PROGN
-              (SETQ |val'| (|objValUnwrap| |val'|))
-              (|throwKeyedMsg| 'S2IC0003 (LIST |t1| |t2| |val'|)))))))))
+      (COND
+       ((NULL |val'|)
+        (|throw_msg| 'S2IC0002
+         "Cannot convert the value from type %1bp to %2bp ." (LIST |t1| |t2|)))
+       (#1#
+        (PROGN
+         (SETQ |val'| (|objValUnwrap| |val'|))
+         (|throw_msg| 'S2IC0003
+          "Cannot convert from type %1bp to %2bp for value %3m"
+          (LIST |t1| |t2| |val'|)))))))))
 
 ; bright x == ['"%b", :(PAIRP(x) and NULL rest LASTNODE x => x; [x]), '"%d"]
 
@@ -1203,11 +1186,17 @@
 ;   -- messages displayed when the system starts up
 ;   $LINELENGTH < 60 => NIL
 ;   bar := filler_chars($LINELENGTH, hbar_special_char())
-;   sayKeyedMsg("S2GL0001", [$build_version, $lisp_id_string, $build_date])
+;   say_msg("S2GL0001", CONCAT(
+;       '"%ceon %b FriCAS Computer Algebra System %d %l",
+;       '" Version: %1 built with %2 %l Timestamp: %3 %ceoff"),
+;       [$build_version, $lisp_id_string, $build_date])
 ;   sayMSG bar
-;   sayKeyedMsg("S2GL0018C",NIL)
-;   sayKeyedMsg("S2GL0018D",NIL)
-;   sayKeyedMsg("S2GL0003B",[$opSysName])
+;   say_msg("S2GL0018C",
+;       '"Issue %b )copyright %d to view copyright notices.", nil)
+;   say_msg("S2GL0018D",
+;       '"Issue %b )summary %d for a summary of useful system commands.", nil)
+;   say_msg("S2GL0003B",
+;       '"Issue %b )quit %d to leave FriCAS and return to %1 .", [$opSysName])
 ;   sayMSG bar
 ;   sayMSG '" "
 
@@ -1218,18 +1207,21 @@
            ('T
             (PROGN
              (SETQ |bar| (|filler_chars| $LINELENGTH (|hbar_special_char|)))
-             (|sayKeyedMsg| 'S2GL0001
+             (|say_msg| 'S2GL0001
+              (CONCAT "%ceon %b FriCAS Computer Algebra System %d %l"
+                      " Version: %1 built with %2 %l Timestamp: %3 %ceoff")
               (LIST |$build_version| |$lisp_id_string| |$build_date|))
              (|sayMSG| |bar|)
-             (|sayKeyedMsg| 'S2GL0018C NIL)
-             (|sayKeyedMsg| 'S2GL0018D NIL)
-             (|sayKeyedMsg| 'S2GL0003B (LIST |$opSysName|))
+             (|say_msg| 'S2GL0018C
+              "Issue %b )copyright %d to view copyright notices." NIL)
+             (|say_msg| 'S2GL0018D
+              "Issue %b )summary %d for a summary of useful system commands."
+              NIL)
+             (|say_msg| 'S2GL0003B
+              "Issue %b )quit %d to leave FriCAS and return to %1 ."
+              (LIST |$opSysName|))
              (|sayMSG| |bar|)
              (|sayMSG| " ")))))))
-
-; HELP() == sayKeyedMsg("S2GL0019",NIL)
-
-(DEFUN HELP () (PROG () (RETURN (|sayKeyedMsg| 'S2GL0019 NIL))))
 
 ; brightPrint(x, str) ==
 ;   marg := 0
@@ -2319,7 +2311,7 @@
   (PROG () (RETURN (|say_simple| |x| (|get_formatted_stream|)))))
 
 ; sayMSG2File(msg) ==
-;     file := make_filename0('"spadmsg", '"listing")
+;     file := make_filename2('"spadmsg", '"listing")
 ;     str := MAKE_OUTSTREAM(file)
 ;     sayBrightly1(msg, str)
 ;     SHUT(str)
@@ -2328,7 +2320,7 @@
   (PROG (|file| |str|)
     (RETURN
      (PROGN
-      (SETQ |file| (|make_filename0| "spadmsg" "listing"))
+      (SETQ |file| (|make_filename2| "spadmsg" "listing"))
       (SETQ |str| (MAKE_OUTSTREAM |file|))
       (|sayBrightly1| |msg| |str|)
       (SHUT |str|)))))

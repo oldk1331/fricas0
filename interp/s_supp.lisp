@@ -1,5 +1,10 @@
 (in-package "BOOT")
 
+(defun |find_symbol| (name)
+    (let ((res (FIND-SYMBOL name)))
+        (if res (cons 0 res)
+                |$spad_failure|)))
+
 ; delete key from association list
 (defun |assoc_delete_equal|(al key)
     (delete key al :key #'car :test #'equal))
@@ -94,4 +99,10 @@
 #-:sbcl
 (defun |eval_with_timeout| (f ti) (|error| "unimplemented for this Lisp"))
 
+(defun |is_dir_sepatator?| (c)
+    (cond
+        #+:win32
+        ((equal c #\\) 'T)
+        ((equal c #\/) 'T)
+        (t nil)))
 

@@ -991,11 +991,6 @@
     (AND (|HasCategory| |#1| '(|PolynomialFactorizationExplicit|))
          (|HasCategory| % '(|CharacteristicNonZero|))
          (|augmentPredVector| % 8589934592))
-    (AND
-     (OR (|HasCategory| |#1| '(|CharacteristicNonZero|))
-         (AND (|HasCategory| |#1| '(|PolynomialFactorizationExplicit|))
-              (|HasCategory| % '(|CharacteristicNonZero|))))
-     (|augmentPredVector| % 17179869184))
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 7 (|Record| (|:| |num| |#1|) (|:| |den| |#1|)))
     (COND
@@ -1211,21 +1206,22 @@
             (|makeByteWordVec2| 32
                                 '(0 0 1 0 0 0 6 0 0 6 0 0 0 0 14 13 4 3 0 0 0 0
                                   0 0 0 0 0 0 0 0 0 0 0 15 6 0 0 0 0 0 15 6 0 0
-                                  0 0 0 0 0 6 0 6 0 0 0 8 0 0 0 0 0 26 17 9 30
-                                  0 0 0 18 11 32 32 5 2 0 0 0 0 24 19 25 16 12
-                                  11 10 32 32 7 5 5 28 2 0 0 0 0 0 0 0 0 0))
+                                  0 0 0 0 0 6 6 0 6 6 0 0 0 8 0 0 0 0 0 26 17 9
+                                  30 0 0 0 18 11 32 32 5 2 0 0 0 0 24 19 25 16
+                                  12 11 10 32 32 7 5 5 28 2 0 0 0 0 0 0 0 0 0))
             (CONS
              '#(|QuotientFieldCategory&| |Field&|
                 |PolynomialFactorizationExplicit&| |EuclideanDomain&|
-                |UniqueFactorizationDomain&| NIL NIL |GcdDomain&| NIL
-                |OrderedRing&| NIL NIL |DivisionRing&| |DifferentialExtension&|
+                |UniqueFactorizationDomain&| NIL NIL |GcdDomain&| NIL NIL NIL
+                NIL |DivisionRing&| |DifferentialExtension&|
                 |DifferentialRing&| |PartialDifferentialRing&| NIL NIL
                 |Algebra&| |EntireRing&| |Algebra&| |Algebra&| NIL NIL |Rng&|
                 |NonAssociativeAlgebra&| |NonAssociativeAlgebra&|
                 |NonAssociativeAlgebra&| NIL |Module&| |Module&| |Module&|
-                |FullyLinearlyExplicitOver&| NIL NIL |NonAssociativeRing&| NIL
-                NIL NIL NIL NIL NIL NIL |NonAssociativeRng&| NIL NIL NIL NIL
-                NIL NIL |AbelianGroup&| NIL NIL NIL NIL |OrderedSet&|
+                |FullyLinearlyExplicitOver&| NIL |OrderedAbelianGroup&|
+                |NonAssociativeRing&| NIL NIL NIL NIL NIL NIL NIL
+                |NonAssociativeRng&| NIL NIL NIL NIL NIL NIL NIL
+                |AbelianGroup&| NIL NIL NIL NIL NIL |OrderedSet&|
                 |AbelianMonoid&| |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL
                 NIL NIL NIL NIL NIL |AbelianSemiGroup&| |Magma&|
                 |FullyEvalableOver&| |Hashable&| |Evalable&| |RetractableTo&|
@@ -1253,19 +1249,20 @@
                  (|OrderedCancellationAbelianMonoid|) (|RightModule| $$)
                  (|NonAssociativeRng|) (|LeftModule| $$) (|LeftModule| 68)
                  (|RightModule| 68) (|LeftModule| 6) (|RightModule| 6)
-                 (|OrderedAbelianMonoid|) (|AbelianGroup|)
-                 (|OrderedAbelianSemiGroup|) (|CancellationAbelianMonoid|)
-                 (|NonAssociativeSemiRing|) (|Monoid|) (|OrderedSet|)
-                 (|AbelianMonoid|) (|NonAssociativeSemiRng|) (|MagmaWithUnit|)
-                 (|SemiGroup|) (|FullyPatternMatchable| 6)
-                 (|PatternMatchable| 62) (|PatternMatchable| 165)
-                 (|StepThrough|) (|Comparable|) (|AbelianSemiGroup|) (|Magma|)
-                 (|FullyEvalableOver| 6) (|Hashable|) (|Evalable| 6)
-                 (|RetractableTo| 62) (|RetractableTo| 68) (|RealConstant|)
-                 (|RetractableTo| 157) (|SetCategory|) (|CommutativeStar|)
-                 (|RetractableTo| 6) (|Patternable| 6) (|OpenMath|)
-                 (|Canonical|) (|ConvertibleTo| 151) (|ConvertibleTo| 150)
-                 (|Eltable| 6 $$) (|InnerEvalable| 6 6) (|InnerEvalable| 157 6)
+                 (|OrderedMonoid|) (|OrderedAbelianMonoid|) (|AbelianGroup|)
+                 (|OrderedSemiGroup|) (|OrderedAbelianSemiGroup|)
+                 (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
+                 (|Monoid|) (|OrderedSet|) (|AbelianMonoid|)
+                 (|NonAssociativeSemiRng|) (|MagmaWithUnit|) (|SemiGroup|)
+                 (|FullyPatternMatchable| 6) (|PatternMatchable| 62)
+                 (|PatternMatchable| 165) (|StepThrough|) (|Comparable|)
+                 (|AbelianSemiGroup|) (|Magma|) (|FullyEvalableOver| 6)
+                 (|Hashable|) (|Evalable| 6) (|RetractableTo| 62)
+                 (|RetractableTo| 68) (|RealConstant|) (|RetractableTo| 157)
+                 (|SetCategory|) (|CommutativeStar|) (|RetractableTo| 6)
+                 (|Patternable| 6) (|OpenMath|) (|Canonical|)
+                 (|ConvertibleTo| 151) (|ConvertibleTo| 150) (|Eltable| 6 $$)
+                 (|InnerEvalable| 6 6) (|InnerEvalable| 157 6)
                  (|CoercibleFrom| 62) (|CoercibleFrom| 68) (|PartialOrder|)
                  (|ConvertibleTo| 165) (|ConvertibleTo| 166)
                  (|ConvertibleTo| 149) (|CoercibleFrom| 157)
@@ -1331,7 +1328,7 @@
                                     0 76 1 27 149 0 1 1 16 150 0 1 1 20 151 0 1
                                     1 5 165 0 1 1 5 166 0 1 1 34 111 112 116 2
                                     0 0 0 0 1 1 0 137 0 1 1 0 0 62 1 1 0 0 0 1
-                                    1 0 0 68 1 1 0 0 6 10 1 2 0 157 1 1 35 29 0
+                                    1 0 0 68 1 1 0 0 6 10 1 2 0 157 1 1 34 29 0
                                     102 0 0 82 103 1 23 6 0 37 3 0 0 0 0 0 1 2
                                     0 11 0 0 1 2 0 0 0 0 1 2 0 11 0 0 1 1 6 0 0
                                     1 2 0 0 0 138 1 2 0 0 0 82 126 2 0 0 0 62 1

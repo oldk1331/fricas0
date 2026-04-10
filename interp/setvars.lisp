@@ -1494,10 +1494,12 @@
   (PROG () (RETURN (COND ((CAR |st|) (CLOSE (CDR |st|)))))))
 
 ; try_open(fn, ft, append) ==
-;     if (ptype := pathnameType fn) then
-;         fn := STRCONC(pathnameDirectory fn,pathnameName fn)
+;     fn := PNAME(fn)
+;     ft := PNAME(ft)
+;     if not((ptype := file_extention(fn)) = '"") then
+;         fn := drop_extention(fn)
 ;         ft := ptype
-;     filename := make_full_namestring(make_filename0(fn, ft))
+;     filename := make_full_namestring(make_filename2(fn, ft))
 ;     null filename => [NIL, NIL]
 ;     (testStream := makeStream(append, filename)) => [testStream, filename]
 ;     [NIL, NIL]
@@ -1506,11 +1508,12 @@
   (PROG (|ptype| |filename| |testStream|)
     (RETURN
      (PROGN
+      (SETQ |fn| (PNAME |fn|))
+      (SETQ |ft| (PNAME |ft|))
       (COND
-       ((SETQ |ptype| (|pathnameType| |fn|))
-        (SETQ |fn| (STRCONC (|pathnameDirectory| |fn|) (|pathnameName| |fn|)))
-        (SETQ |ft| |ptype|)))
-      (SETQ |filename| (|make_full_namestring| (|make_filename0| |fn| |ft|)))
+       ((NULL (EQUAL (SETQ |ptype| (|file_extention| |fn|)) ""))
+        (SETQ |fn| (|drop_extention| |fn|)) (SETQ |ft| |ptype|)))
+      (SETQ |filename| (|make_full_namestring| (|make_filename2| |fn| |ft|)))
       (COND ((NULL |filename|) (LIST NIL NIL))
             ((SETQ |testStream| (|makeStream| APPEND |filename|))
              (LIST |testStream| |filename|))
@@ -2072,7 +2075,7 @@
 ;       stream_close($texmacsOutputStream)
 ;       $texmacsOutputStream := testStream
 ;       $texmacsOutputFile := filename
-;       sayKeyedMsg("S2IV0004",['"Texmacs",$texmacsOutputFile])
+;       sayKeyedMsg("S2IV0004",['"TeXmacs",$texmacsOutputFile])
 ;     sayKeyedMsg("S2IV0003",[fn,ft])
 ;
 ;   sayKeyedMsg("S2IV0005",NIL)
@@ -2145,7 +2148,7 @@
               (|stream_close| |$texmacsOutputStream|)
               (SETQ |$texmacsOutputStream| |testStream|)
               (SETQ |$texmacsOutputFile| |filename|)
-              (|sayKeyedMsg| 'S2IV0004 (LIST "Texmacs" |$texmacsOutputFile|))))
+              (|sayKeyedMsg| 'S2IV0004 (LIST "TeXmacs" |$texmacsOutputFile|))))
             (#1# (|sayKeyedMsg| 'S2IV0003 (LIST |fn| |ft|))))))
          (#1#
           (PROGN
@@ -2153,12 +2156,12 @@
            (|describeSetOutputTexmacs|))))))))))
 
 ; describeSetOutputTexmacs() == describeSetOutputU(
-;     '"texmacs", '"Texmacs", '"stmx", false, setOutputTexmacs "%display%")
+;     '"texmacs", '"TeXmacs", '"stmx", false, setOutputTexmacs "%display%")
 
 (DEFUN |describeSetOutputTexmacs| ()
   (PROG ()
     (RETURN
-     (|describeSetOutputU| "texmacs" "Texmacs" "stmx" NIL
+     (|describeSetOutputU| "texmacs" "TeXmacs" "stmx" NIL
       (|setOutputTexmacs| '|%display%|)))))
 
 ; setOutputHtml arg ==

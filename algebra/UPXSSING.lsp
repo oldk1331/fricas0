@@ -1043,10 +1043,10 @@
               |ground?| 418 |ground| 423 |fmecg| 428 |exquo| 436 |dominantTerm|
               448 |degree| 453 |content| 458 |constructOrdered| 463 |construct|
               468 |commutator| 473 |coerce| 479 |coefficients| 504
-              |coefficient| 509 |charthRoot| 515 |characteristic| 520
-              |binomThmExpt| 524 |associator| 531 |associates?| 538
-              |antiCommutator| 544 |annihilate?| 550 ^ 556 |Zero| 568 |One| 572
-              = 576 / 582 - 588 + 599 * 605)
+              |coefficient| 509 |characteristic| 515 |binomThmExpt| 519
+              |associator| 526 |associates?| 533 |antiCommutator| 539
+              |annihilate?| 545 ^ 551 |Zero| 563 |One| 567 = 571 / 577 - 583 +
+              594 * 600)
            'NIL
            (CONS
             (|makeByteWordVec2| 8
@@ -1135,12 +1135,12 @@
                                     24 0 17 1 1 0 55 0 56 1 0 13 0 14 1 13 17 0
                                     1 1 7 0 75 1 1 0 0 75 1 2 0 0 0 0 1 1 0 71
                                     0 1 1 0 0 17 1 1 0 0 0 1 1 0 0 82 1 1 10 0
-                                    34 1 1 0 78 0 1 2 0 17 0 13 1 1 2 24 0 1 0
-                                    0 10 1 3 14 0 0 0 10 1 3 0 0 0 0 0 1 2 0 15
-                                    0 0 1 2 0 0 0 0 1 2 0 15 0 0 1 2 0 0 0 73 1
-                                    2 0 0 0 10 1 0 0 0 1 0 0 0 1 2 0 15 0 0 1 2
-                                    9 0 0 17 1 2 0 0 0 0 1 1 0 0 0 1 2 0 0 0 0
-                                    1 2 0 0 73 0 1 2 0 0 0 0 1 2 0 0 17 0 1 2 0
-                                    0 0 17 1 2 0 0 10 0 1 2 0 0 82 0 1 2 1 0 0
-                                    34 1 2 1 0 34 0 1)))))
+                                    34 1 1 0 78 0 1 2 0 17 0 13 1 0 0 10 1 3 14
+                                    0 0 0 10 1 3 0 0 0 0 0 1 2 0 15 0 0 1 2 0 0
+                                    0 0 1 2 0 15 0 0 1 2 0 0 0 73 1 2 0 0 0 10
+                                    1 0 0 0 1 0 0 0 1 2 0 15 0 0 1 2 9 0 0 17 1
+                                    2 0 0 0 0 1 1 0 0 0 1 2 0 0 0 0 1 2 0 0 73
+                                    0 1 2 0 0 0 0 1 2 0 0 17 0 1 2 0 0 0 17 1 2
+                                    0 0 10 0 1 2 0 0 82 0 1 2 1 0 0 34 1 2 1 0
+                                    34 0 1)))))
            '|lookupComplete|)) 

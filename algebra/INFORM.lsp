@@ -206,7 +206,7 @@
         (COND ((SPADCALL |s| (QREFELT % 46)) (SPADCALL |s| (QREFELT % 47)))
               ((SPADCALL |s| (QREFELT % 48))
                (SPADCALL (SPADCALL |s| (QREFELT % 49)) (QREFELT % 44)))
-              ('T (|error| "strsym: form is neither a string or symbol")))) 
+              ('T (|error| "strsym: form is neither a string nor symbol")))) 
 
 (SDEFUN |INFORM;unparse;%S;16| ((|x| (%)) (% (|String|)))
         (SPROG ((#1=#:G64 NIL) (|a| NIL) (#2=#:G63 NIL) (|s| (%)))

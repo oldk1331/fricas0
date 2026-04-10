@@ -72,7 +72,7 @@
         (SEQ (QSETVELT |viewport| 12 |opts|) (EXIT |viewport|))) 
 
 (SDEFUN |VIEW3D;makeViewport3D;2%;8| ((|viewport| (%)) (% (%)))
-        (|VIEW3D;makeViewport3D0| (MOVEVEC (MAKE_VEC 13) |viewport|) %)) 
+        (|VIEW3D;makeViewport3D0| (REPLACE (MAKEARR1 13 NIL) |viewport|) %)) 
 
 (SDEFUN |VIEW3D;makeViewport3D;TsS%;9|
         ((|space| (|ThreeSpace| (|DoubleFloat|))) (|Title| (|String|)) (% (%)))

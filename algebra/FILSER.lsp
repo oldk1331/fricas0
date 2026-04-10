@@ -170,7 +170,7 @@
                                  (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                                  (EXIT NIL))
                             (EXIT |nd|)))))
-                    (EXIT (|error| "serialize: failed uknown ARRAY"))))
+                    (EXIT (|error| "serialize: failed unknown ARRAY"))))
                   ((SPAD_KERNEL-P |d|)
                    (SEQ
                     (LETT |nd|

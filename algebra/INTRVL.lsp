@@ -75,20 +75,14 @@
                                          (QREFELT % 17)))))
                         (#1# |u|))))))))) 
 
-(SDEFUN |INTRVL;interval;2R%;4| ((|i| (R)) (|s| (R)) (% (%)))
-        (COND
-         ((SPADCALL |i| |s| (QREFELT % 19))
-          (CONS (|INTRVL;roundDown| |s| %) (|INTRVL;roundUp| |i| %)))
-         ('T (CONS (|INTRVL;roundDown| |i| %) (|INTRVL;roundUp| |s| %))))) 
-
-(SDEFUN |INTRVL;interval;R%;5| ((|f| (R)) (% (%)))
-        (COND ((SPADCALL |f| (QREFELT % 9)) (|spadConstant| % 21))
-              ((SPADCALL |f| (QREFELT % 22)) (|spadConstant| % 15))
-              ((QEQCAR (SPADCALL |f| (QREFELT % 24)) 1)
+(SDEFUN |INTRVL;interval;R%;4| ((|f| (R)) (% (%)))
+        (COND ((SPADCALL |f| (QREFELT % 9)) (|spadConstant| % 19))
+              ((SPADCALL |f| (QREFELT % 20)) (|spadConstant| % 15))
+              ((QEQCAR (SPADCALL |f| (QREFELT % 22)) 1)
                (CONS (|INTRVL;roundDown| |f| %) (|INTRVL;roundUp| |f| %)))
               ('T (CONS |f| |f|)))) 
 
-(SDEFUN |INTRVL;qinterval;2R%;6| ((|i| (R)) (|s| (R)) (% (%)))
+(SDEFUN |INTRVL;qinterval;2R%;5| ((|i| (R)) (|s| (R)) (% (%)))
         (CONS (|INTRVL;roundDown| |i| %) (|INTRVL;roundUp| |s| %))) 
 
 (PUT '|INTRVL;exactInterval| '|SPADreplace| 'CONS) 
@@ -101,203 +95,62 @@
 (SDEFUN |INTRVL;exactInfInterval| ((|i| (R)) (|s| (R)) (% (%)))
         (CONS |i| (|INTRVL;roundUp| |s| %))) 
 
-(PUT '|INTRVL;inf;%R;10| '|SPADreplace| 'QCAR) 
+(PUT '|INTRVL;inf;%R;9| '|SPADreplace| 'QCAR) 
 
-(SDEFUN |INTRVL;inf;%R;10| ((|u| (%)) (% (R))) (QCAR |u|)) 
+(SDEFUN |INTRVL;inf;%R;9| ((|u| (%)) (% (R))) (QCAR |u|)) 
 
-(PUT '|INTRVL;sup;%R;11| '|SPADreplace| 'QCDR) 
+(PUT '|INTRVL;sup;%R;10| '|SPADreplace| 'QCDR) 
 
-(SDEFUN |INTRVL;sup;%R;11| ((|u| (%)) (% (R))) (QCDR |u|)) 
+(SDEFUN |INTRVL;sup;%R;10| ((|u| (%)) (% (R))) (QCDR |u|)) 
 
-(SDEFUN |INTRVL;width;%R;12| ((|u| (%)) (% (R)))
-        (SPADCALL (QCDR |u|) (QCAR |u|) (QREFELT % 29))) 
-
-(SDEFUN |INTRVL;contains?;%RB;13| ((|u| (%)) (|f| (R)) (% (|Boolean|)))
+(SDEFUN |INTRVL;<;2%B;11| ((|a| (%)) (|b| (%)) (% (|Boolean|)))
         (COND
-         ((SPADCALL |f| (SPADCALL |u| (QREFELT % 27)) (QREFELT % 19))
-          (SPADCALL |f| (SPADCALL |u| (QREFELT % 28)) (QREFELT % 31)))
-         ('T NIL))) 
-
-(SDEFUN |INTRVL;positive?;%B;14| ((|u| (%)) (% (|Boolean|)))
-        (SPADCALL (SPADCALL |u| (QREFELT % 27)) (|spadConstant| % 33)
-                  (QREFELT % 19))) 
-
-(SDEFUN |INTRVL;negative?;%B;15| ((|u| (%)) (% (|Boolean|)))
-        (SPADCALL (SPADCALL |u| (QREFELT % 28)) (|spadConstant| % 33)
-                  (QREFELT % 31))) 
-
-(SDEFUN |INTRVL;<;2%B;16| ((|a| (%)) (|b| (%)) (% (|Boolean|)))
-        (COND
-         ((SPADCALL (SPADCALL |a| (QREFELT % 27)) (SPADCALL |b| (QREFELT % 27))
-                    (QREFELT % 31))
+         ((SPADCALL (SPADCALL |a| (QREFELT % 25)) (SPADCALL |b| (QREFELT % 25))
+                    (QREFELT % 27))
           'T)
-         ((SPADCALL (SPADCALL |a| (QREFELT % 27)) (SPADCALL |b| (QREFELT % 27))
-                    (QREFELT % 19))
+         ((SPADCALL (SPADCALL |a| (QREFELT % 25)) (SPADCALL |b| (QREFELT % 25))
+                    (QREFELT % 28))
           NIL)
          ('T
-          (SPADCALL (SPADCALL |a| (QREFELT % 28)) (SPADCALL |b| (QREFELT % 28))
-                    (QREFELT % 31))))) 
+          (SPADCALL (SPADCALL |a| (QREFELT % 26)) (SPADCALL |b| (QREFELT % 26))
+                    (QREFELT % 27))))) 
 
-(SDEFUN |INTRVL;+;3%;17| ((|a| (%)) (|b| (%)) (% (%)))
-        (SPROG ((#1=#:G108 NIL))
-               (SEQ
-                (EXIT
-                 (SEQ
-                  (COND
-                   ((SPADCALL |a| (QREFELT % 37))
-                    (PROGN (LETT #1# |b|) (GO #2=#:G107)))
-                   ((SPADCALL |b| (QREFELT % 37))
-                    (PROGN (LETT #1# |a|) (GO #2#))))
-                  (COND
-                   ((SPADCALL |a| |b| (QREFELT % 38))
-                    (PROGN
-                     (LETT #1#
-                           (SPADCALL
-                            (SPADCALL 2 (SPADCALL |a| (QREFELT % 27))
-                                      (QREFELT % 39))
-                            (SPADCALL 2 (SPADCALL |a| (QREFELT % 28))
-                                      (QREFELT % 39))
-                            (QREFELT % 26)))
-                     (GO #2#))))
-                  (EXIT
-                   (SPADCALL
-                    (SPADCALL (SPADCALL |a| (QREFELT % 27))
-                              (SPADCALL |b| (QREFELT % 27)) (QREFELT % 40))
-                    (SPADCALL (SPADCALL |a| (QREFELT % 28))
-                              (SPADCALL |b| (QREFELT % 28)) (QREFELT % 40))
-                    (QREFELT % 26)))))
-                #2# (EXIT #1#)))) 
-
-(SDEFUN |INTRVL;-;3%;18| ((|a| (%)) (|b| (%)) (% (%)))
-        (SPROG ((#1=#:G113 NIL))
-               (SEQ
-                (EXIT
-                 (SEQ
-                  (COND
-                   ((SPADCALL |a| (QREFELT % 37))
-                    (PROGN
-                     (LETT #1# (SPADCALL |b| (QREFELT % 42)))
-                     (GO #2=#:G112)))
-                   ((SPADCALL |b| (QREFELT % 37))
-                    (PROGN (LETT #1# |a|) (GO #2#))))
-                  (EXIT
-                   (SPADCALL
-                    (SPADCALL (SPADCALL |a| (QREFELT % 27))
-                              (SPADCALL |b| (QREFELT % 28)) (QREFELT % 29))
-                    (SPADCALL (SPADCALL |a| (QREFELT % 28))
-                              (SPADCALL |b| (QREFELT % 27)) (QREFELT % 29))
-                    (QREFELT % 26)))))
-                #2# (EXIT #1#)))) 
-
-(SDEFUN |INTRVL;*;3%;19| ((|a| (%)) (|b| (%)) (% (%)))
-        (SPROG ((|prods| (|List| R)) (#1=#:G120 NIL))
-               (SEQ
-                (EXIT
-                 (SEQ
-                  (COND
-                   ((SPADCALL |a| (QREFELT % 44))
-                    (PROGN (LETT #1# |b|) (GO #2=#:G119)))
-                   ((SPADCALL |b| (QREFELT % 44))
-                    (PROGN (LETT #1# |a|) (GO #2#))))
-                  (COND
-                   ((OR (SPADCALL |a| (QREFELT % 37))
-                        (SPADCALL |b| (QREFELT % 37)))
-                    (PROGN (LETT #1# (|spadConstant| % 21)) (GO #2#))))
-                  (LETT |prods|
-                        (SPADCALL
-                         (LIST
-                          (SPADCALL (SPADCALL |a| (QREFELT % 27))
-                                    (SPADCALL |b| (QREFELT % 27))
-                                    (QREFELT % 45))
-                          (SPADCALL (SPADCALL |a| (QREFELT % 28))
-                                    (SPADCALL |b| (QREFELT % 28))
-                                    (QREFELT % 45))
-                          (SPADCALL (SPADCALL |a| (QREFELT % 27))
-                                    (SPADCALL |b| (QREFELT % 28))
-                                    (QREFELT % 45))
-                          (SPADCALL (SPADCALL |a| (QREFELT % 28))
-                                    (SPADCALL |b| (QREFELT % 27))
-                                    (QREFELT % 45)))
-                         (QREFELT % 47)))
-                  (EXIT
-                   (SPADCALL (|SPADfirst| |prods|)
-                             (SPADCALL |prods| (QREFELT % 48))
-                             (QREFELT % 26)))))
-                #2# (EXIT #1#)))) 
-
-(SDEFUN |INTRVL;*;I2%;20| ((|a| (|Integer|)) (|b| (%)) (% (%)))
-        (COND
-         ((> |a| 0)
-          (SPADCALL (SPADCALL |a| (SPADCALL |b| (QREFELT % 27)) (QREFELT % 50))
-                    (SPADCALL |a| (SPADCALL |b| (QREFELT % 28)) (QREFELT % 50))
-                    (QREFELT % 26)))
-         ((< |a| 0)
-          (SPADCALL (SPADCALL |a| (SPADCALL |b| (QREFELT % 28)) (QREFELT % 50))
-                    (SPADCALL |a| (SPADCALL |b| (QREFELT % 27)) (QREFELT % 50))
-                    (QREFELT % 26)))
-         ('T (|spadConstant| % 21)))) 
-
-(SDEFUN |INTRVL;*;Pi2%;21| ((|a| (|PositiveInteger|)) (|b| (%)) (% (%)))
-        (SPADCALL (SPADCALL |a| (SPADCALL |b| (QREFELT % 27)) (QREFELT % 39))
-                  (SPADCALL |a| (SPADCALL |b| (QREFELT % 28)) (QREFELT % 39))
-                  (QREFELT % 26))) 
-
-(SDEFUN |INTRVL;^;%Pi%;22| ((|a| (%)) (|n| (|PositiveInteger|)) (% (%)))
-        (SEQ
-         (COND
-          ((SPADCALL |a| (|spadConstant| % 33) (QREFELT % 32))
-           (COND
-            ((ZEROP (REM |n| 2))
-             (EXIT
-              (SPADCALL (|spadConstant| % 33)
-                        (SPADCALL
-                         (SPADCALL (SPADCALL |a| (QREFELT % 27)) |n|
-                                   (QREFELT % 53))
-                         (SPADCALL (SPADCALL |a| (QREFELT % 28)) |n|
-                                   (QREFELT % 53))
-                         (QREFELT % 54))
-                        (QREFELT % 20)))))))
-         (EXIT
-          (SPADCALL (SPADCALL (SPADCALL |a| (QREFELT % 27)) |n| (QREFELT % 53))
-                    (SPADCALL (SPADCALL |a| (QREFELT % 28)) |n| (QREFELT % 53))
-                    (QREFELT % 20))))) 
-
-(SDEFUN |INTRVL;-;2%;23| ((|a| (%)) (% (%)))
+(SDEFUN |INTRVL;-;2%;12| ((|a| (%)) (% (%)))
         (|INTRVL;exactInterval|
-         (SPADCALL (SPADCALL |a| (QREFELT % 28)) (QREFELT % 56))
-         (SPADCALL (SPADCALL |a| (QREFELT % 27)) (QREFELT % 56)) %)) 
+         (SPADCALL (SPADCALL |a| (QREFELT % 26)) (QREFELT % 30))
+         (SPADCALL (SPADCALL |a| (QREFELT % 25)) (QREFELT % 30)) %)) 
 
-(SDEFUN |INTRVL;=;2%B;24| ((|a| (%)) (|b| (%)) (% (|Boolean|)))
+(SDEFUN |INTRVL;=;2%B;13| ((|a| (%)) (|b| (%)) (% (|Boolean|)))
         (COND
-         ((SPADCALL (SPADCALL |a| (QREFELT % 27)) (SPADCALL |b| (QREFELT % 27))
-                    (QREFELT % 57))
-          (SPADCALL (SPADCALL |a| (QREFELT % 28)) (SPADCALL |b| (QREFELT % 28))
-                    (QREFELT % 57)))
+         ((SPADCALL (SPADCALL |a| (QREFELT % 25)) (SPADCALL |b| (QREFELT % 25))
+                    (QREFELT % 32))
+          (SPADCALL (SPADCALL |a| (QREFELT % 26)) (SPADCALL |b| (QREFELT % 26))
+                    (QREFELT % 32)))
          ('T NIL))) 
 
-(SDEFUN |INTRVL;~=;2%B;25| ((|a| (%)) (|b| (%)) (% (|Boolean|)))
+(SDEFUN |INTRVL;~=;2%B;14| ((|a| (%)) (|b| (%)) (% (|Boolean|)))
         (COND
-         ((SPADCALL (SPADCALL |a| (QREFELT % 27)) (SPADCALL |b| (QREFELT % 27))
-                    (QREFELT % 58))
+         ((SPADCALL (SPADCALL |a| (QREFELT % 25)) (SPADCALL |b| (QREFELT % 25))
+                    (QREFELT % 34))
           'T)
          ('T
-          (SPADCALL (SPADCALL |a| (QREFELT % 28)) (SPADCALL |b| (QREFELT % 28))
-                    (QREFELT % 58))))) 
+          (SPADCALL (SPADCALL |a| (QREFELT % 26)) (SPADCALL |b| (QREFELT % 26))
+                    (QREFELT % 34))))) 
 
-(SDEFUN |INTRVL;One;%;26| ((% (%)))
+(SDEFUN |INTRVL;One;%;15| ((% (%)))
         (SPROG ((|one| (R)))
                (SEQ
                 (LETT |one| (|INTRVL;normaliseFloat| (|spadConstant| % 16) %))
                 (EXIT (CONS |one| |one|))))) 
 
-(SDEFUN |INTRVL;Zero;%;27| ((% (%)))
-        (CONS (|spadConstant| % 33) (|spadConstant| % 33))) 
+(SDEFUN |INTRVL;Zero;%;16| ((% (%)))
+        (CONS (|spadConstant| % 36) (|spadConstant| % 36))) 
 
-(SDEFUN |INTRVL;recip;%U;28| ((|u| (%)) (% (|Union| % "failed")))
+(SDEFUN |INTRVL;recip;%U;17| ((|u| (%)) (% (|Union| % "failed")))
         (SPROG ((|vals| (|List| R)))
                (SEQ
                 (COND
-                 ((SPADCALL |u| (|spadConstant| % 33) (QREFELT % 32))
+                 ((SPADCALL |u| (|spadConstant| % 36) (QREFELT % 37))
                   (CONS 1 "failed"))
                  ('T
                   (SEQ
@@ -305,138 +158,135 @@
                          (SPADCALL
                           (LIST
                            (SPADCALL (|spadConstant| % 16)
-                                     (SPADCALL |u| (QREFELT % 27))
-                                     (QREFELT % 60))
+                                     (SPADCALL |u| (QREFELT % 25))
+                                     (QREFELT % 38))
                            (SPADCALL (|spadConstant| % 16)
-                                     (SPADCALL |u| (QREFELT % 28))
-                                     (QREFELT % 60)))
-                          (QREFELT % 47)))
+                                     (SPADCALL |u| (QREFELT % 26))
+                                     (QREFELT % 38)))
+                          (QREFELT % 40)))
                    (EXIT
                     (CONS 0
                           (SPADCALL (|SPADfirst| |vals|)
-                                    (SPADCALL |vals| (QREFELT % 48))
-                                    (QREFELT % 26)))))))))) 
+                                    (SPADCALL |vals| (QREFELT % 41))
+                                    (QREFELT % 24)))))))))) 
 
-(SDEFUN |INTRVL;unit?;%B;29| ((|u| (%)) (% (|Boolean|)))
-        (NULL (SPADCALL |u| (|spadConstant| % 33) (QREFELT % 32)))) 
-
-(SDEFUN |INTRVL;exquo;2%U;30| ((|u| (%)) (|v| (%)) (% (|Union| % "failed")))
+(SDEFUN |INTRVL;exquo;2%U;18| ((|u| (%)) (|v| (%)) (% (|Union| % "failed")))
         (SPROG ((|vals| (|List| R)))
                (SEQ
                 (COND
-                 ((SPADCALL |v| (|spadConstant| % 33) (QREFELT % 32))
+                 ((SPADCALL |v| (|spadConstant| % 36) (QREFELT % 37))
                   (CONS 1 "failed"))
                  ((OR (SPADCALL |v| (QREFELT % 44))
-                      (SPADCALL |u| (QREFELT % 37)))
+                      (SPADCALL |u| (QREFELT % 45)))
                   (CONS 0 |u|))
-                 ((SPADCALL |u| |v| (QREFELT % 38))
+                 ((SPADCALL |u| |v| (QREFELT % 33))
                   (CONS 0 (|spadConstant| % 15)))
                  (#1='T
                   (COND
-                   ((SPADCALL |u| (SPADCALL |v| (QREFELT % 42)) (QREFELT % 38))
-                    (CONS 0 (SPADCALL (|spadConstant| % 15) (QREFELT % 42))))
+                   ((SPADCALL |u| (SPADCALL |v| (QREFELT % 31)) (QREFELT % 33))
+                    (CONS 0 (SPADCALL (|spadConstant| % 15) (QREFELT % 31))))
                    (#1#
                     (SEQ
                      (LETT |vals|
                            (SPADCALL
                             (LIST
-                             (SPADCALL (SPADCALL |u| (QREFELT % 27))
-                                       (SPADCALL |v| (QREFELT % 27))
-                                       (QREFELT % 60))
-                             (SPADCALL (SPADCALL |u| (QREFELT % 27))
-                                       (SPADCALL |v| (QREFELT % 28))
-                                       (QREFELT % 60))
-                             (SPADCALL (SPADCALL |u| (QREFELT % 28))
-                                       (SPADCALL |v| (QREFELT % 27))
-                                       (QREFELT % 60))
-                             (SPADCALL (SPADCALL |u| (QREFELT % 28))
-                                       (SPADCALL |v| (QREFELT % 28))
-                                       (QREFELT % 60)))
-                            (QREFELT % 47)))
+                             (SPADCALL (SPADCALL |u| (QREFELT % 25))
+                                       (SPADCALL |v| (QREFELT % 25))
+                                       (QREFELT % 38))
+                             (SPADCALL (SPADCALL |u| (QREFELT % 25))
+                                       (SPADCALL |v| (QREFELT % 26))
+                                       (QREFELT % 38))
+                             (SPADCALL (SPADCALL |u| (QREFELT % 26))
+                                       (SPADCALL |v| (QREFELT % 25))
+                                       (QREFELT % 38))
+                             (SPADCALL (SPADCALL |u| (QREFELT % 26))
+                                       (SPADCALL |v| (QREFELT % 26))
+                                       (QREFELT % 38)))
+                            (QREFELT % 40)))
                      (EXIT
                       (CONS 0
                             (SPADCALL (|SPADfirst| |vals|)
-                                      (SPADCALL |vals| (QREFELT % 48))
-                                      (QREFELT % 26)))))))))))) 
+                                      (SPADCALL |vals| (QREFELT % 41))
+                                      (QREFELT % 24)))))))))))) 
 
-(SDEFUN |INTRVL;gcd;3%;31| ((|u| (%)) (|v| (%)) (% (%))) (|spadConstant| % 15)) 
+(SDEFUN |INTRVL;gcd;3%;19| ((|u| (%)) (|v| (%)) (% (%))) (|spadConstant| % 15)) 
 
-(SDEFUN |INTRVL;coerce;I%;32| ((|u| (|Integer|)) (% (%)))
+(SDEFUN |INTRVL;coerce;I%;20| ((|u| (|Integer|)) (% (%)))
         (SPROG ((|ur| (R)))
                (SEQ
                 (LETT |ur|
-                      (|INTRVL;normaliseFloat| (SPADCALL |u| (QREFELT % 66))
+                      (|INTRVL;normaliseFloat| (SPADCALL |u| (QREFELT % 48))
                        %))
                 (EXIT (|INTRVL;exactInterval| |ur| |ur| %))))) 
 
-(SDEFUN |INTRVL;interval;F%;33| ((|u| (|Fraction| (|Integer|))) (% (%)))
+(SDEFUN |INTRVL;interval;F%;21| ((|u| (|Fraction| (|Integer|))) (% (%)))
         (SPROG ((|flt| (R)) (|bin| (|Union| (|Integer|) "failed")))
-               (SEQ (LETT |flt| (SPADCALL |u| (QREFELT % 69)))
+               (SEQ (LETT |flt| (SPADCALL |u| (QREFELT % 51)))
                     (LETT |bin|
                           (SPADCALL
                            (SPADCALL
-                            (SPADCALL (SPADCALL |u| (QREFELT % 70))
-                                      (QREFELT % 72))
-                            (QREFELT % 74))
-                           (QREFELT % 75)))
+                            (SPADCALL (SPADCALL |u| (QREFELT % 52))
+                                      (QREFELT % 54))
+                            (QREFELT % 56))
+                           (QREFELT % 57)))
                     (COND
                      ((QEQCAR |bin| 0)
                       (COND
-                       ((< (INTEGER-LENGTH (SPADCALL |u| (QREFELT % 76)))
+                       ((< (INTEGER-LENGTH (SPADCALL |u| (QREFELT % 58)))
                            (SPADCALL (QREFELT % 11)))
                         (EXIT
                          (SEQ (LETT |flt| (|INTRVL;normaliseFloat| |flt| %))
                               (EXIT
                                (|INTRVL;exactInterval| |flt| |flt| %))))))))
-                    (EXIT (SPADCALL |flt| |flt| (QREFELT % 26)))))) 
+                    (EXIT (SPADCALL |flt| |flt| (QREFELT % 24)))))) 
 
-(SDEFUN |INTRVL;retractIfCan;%U;34|
+(SDEFUN |INTRVL;retractIfCan;%U;22|
         ((|u| (%)) (% (|Union| (|Integer|) "failed")))
         (COND
-         ((NULL (SPADCALL (SPADCALL |u| (QREFELT % 30)) (QREFELT % 9)))
+         ((NULL (SPADCALL (SPADCALL |u| (QREFELT % 60)) (QREFELT % 9)))
           (CONS 1 "failed"))
-         ('T (SPADCALL (SPADCALL |u| (QREFELT % 27)) (QREFELT % 24))))) 
+         ('T (SPADCALL (SPADCALL |u| (QREFELT % 25)) (QREFELT % 22))))) 
 
-(SDEFUN |INTRVL;retract;%I;35| ((|u| (%)) (% (|Integer|)))
+(SDEFUN |INTRVL;retract;%I;23| ((|u| (%)) (% (|Integer|)))
         (COND
-         ((NULL (SPADCALL (SPADCALL |u| (QREFELT % 30)) (QREFELT % 9)))
+         ((NULL (SPADCALL (SPADCALL |u| (QREFELT % 60)) (QREFELT % 9)))
           (|error| "attempt to retract a non-Integer interval to an Integer"))
-         ('T (SPADCALL (SPADCALL |u| (QREFELT % 27)) (QREFELT % 79))))) 
+         ('T (SPADCALL (SPADCALL |u| (QREFELT % 25)) (QREFELT % 62))))) 
 
-(SDEFUN |INTRVL;coerce;%Of;36| ((|u| (%)) (% (|OutputForm|)))
+(SDEFUN |INTRVL;coerce;%Of;24| ((|u| (%)) (% (|OutputForm|)))
         (SPADCALL
-         (LIST (SPADCALL (SPADCALL |u| (QREFELT % 27)) (QREFELT % 82))
-               (SPADCALL (SPADCALL |u| (QREFELT % 28)) (QREFELT % 82)))
-         (QREFELT % 84))) 
+         (LIST (SPADCALL (SPADCALL |u| (QREFELT % 25)) (QREFELT % 65))
+               (SPADCALL (SPADCALL |u| (QREFELT % 26)) (QREFELT % 65)))
+         (QREFELT % 67))) 
 
-(PUT '|INTRVL;characteristic;Nni;37| '|SPADreplace| '(XLAM NIL 0)) 
+(PUT '|INTRVL;characteristic;Nni;25| '|SPADreplace| '(XLAM NIL 0)) 
 
-(SDEFUN |INTRVL;characteristic;Nni;37| ((% (|NonNegativeInteger|))) 0) 
+(SDEFUN |INTRVL;characteristic;Nni;25| ((% (|NonNegativeInteger|))) 0) 
 
-(SDEFUN |INTRVL;pi;%;38| ((% (%)))
-        (SPADCALL (SPADCALL (QREFELT % 88)) (SPADCALL (QREFELT % 88))
-                  (QREFELT % 26))) 
+(SDEFUN |INTRVL;pi;%;26| ((% (%)))
+        (SPADCALL (SPADCALL (QREFELT % 71)) (SPADCALL (QREFELT % 71))
+                  (QREFELT % 24))) 
 
-(SDEFUN |INTRVL;log;2%;39| ((|u| (%)) (% (%)))
+(SDEFUN |INTRVL;log;2%;27| ((|u| (%)) (% (%)))
         (COND
-         ((SPADCALL |u| (QREFELT % 34))
-          (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 27)) (QREFELT % 90))
-                    (SPADCALL (SPADCALL |u| (QREFELT % 28)) (QREFELT % 90))
-                    (QREFELT % 26)))
+         ((SPADCALL |u| (QREFELT % 73))
+          (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 25)) (QREFELT % 74))
+                    (SPADCALL (SPADCALL |u| (QREFELT % 26)) (QREFELT % 74))
+                    (QREFELT % 24)))
          ('T (|error| "negative logs in interval")))) 
 
-(SDEFUN |INTRVL;exp;2%;40| ((|u| (%)) (% (%)))
-        (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 27)) (QREFELT % 92))
-                  (SPADCALL (SPADCALL |u| (QREFELT % 28)) (QREFELT % 92))
-                  (QREFELT % 26))) 
+(SDEFUN |INTRVL;exp;2%;28| ((|u| (%)) (% (%)))
+        (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 25)) (QREFELT % 76))
+                  (SPADCALL (SPADCALL |u| (QREFELT % 26)) (QREFELT % 76))
+                  (QREFELT % 24))) 
 
-(SDEFUN |INTRVL;^;3%;41| ((|u| (%)) (|v| (%)) (% (%)))
+(SDEFUN |INTRVL;^;3%;29| ((|u| (%)) (|v| (%)) (% (%)))
         (SPROG ((|expts| (|List| R)))
                (SEQ
                 (COND
-                 ((SPADCALL |v| (QREFELT % 37))
+                 ((SPADCALL |v| (QREFELT % 45))
                   (COND
-                   ((SPADCALL |u| (QREFELT % 37)) (|error| "0^0 is undefined"))
+                   ((SPADCALL |u| (QREFELT % 45)) (|error| "0^0 is undefined"))
                    (#1='T (|spadConstant| % 15))))
                  ((SPADCALL |u| (QREFELT % 44)) (|spadConstant| % 15))
                  (#1#
@@ -444,23 +294,23 @@
                    (LETT |expts|
                          (SPADCALL
                           (LIST
-                           (SPADCALL (SPADCALL |u| (QREFELT % 27))
-                                     (SPADCALL |v| (QREFELT % 27))
-                                     (QREFELT % 94))
-                           (SPADCALL (SPADCALL |u| (QREFELT % 28))
-                                     (SPADCALL |v| (QREFELT % 28))
-                                     (QREFELT % 94))
-                           (SPADCALL (SPADCALL |u| (QREFELT % 27))
-                                     (SPADCALL |v| (QREFELT % 28))
-                                     (QREFELT % 94))
-                           (SPADCALL (SPADCALL |u| (QREFELT % 28))
-                                     (SPADCALL |v| (QREFELT % 27))
-                                     (QREFELT % 94)))
-                          (QREFELT % 47)))
+                           (SPADCALL (SPADCALL |u| (QREFELT % 25))
+                                     (SPADCALL |v| (QREFELT % 25))
+                                     (QREFELT % 78))
+                           (SPADCALL (SPADCALL |u| (QREFELT % 26))
+                                     (SPADCALL |v| (QREFELT % 26))
+                                     (QREFELT % 78))
+                           (SPADCALL (SPADCALL |u| (QREFELT % 25))
+                                     (SPADCALL |v| (QREFELT % 26))
+                                     (QREFELT % 78))
+                           (SPADCALL (SPADCALL |u| (QREFELT % 26))
+                                     (SPADCALL |v| (QREFELT % 25))
+                                     (QREFELT % 78)))
+                          (QREFELT % 40)))
                    (EXIT
                     (SPADCALL (|SPADfirst| |expts|)
-                              (SPADCALL |expts| (QREFELT % 48))
-                              (QREFELT % 26))))))))) 
+                              (SPADCALL |expts| (QREFELT % 41))
+                              (QREFELT % 24))))))))) 
 
 (SDEFUN |INTRVL;hasTwoPiMultiple|
         ((|offset| (R)) (|ipi| (R)) (|i| (%)) (% (|Boolean|)))
@@ -470,18 +320,18 @@
                       (SPADCALL
                        (SPADCALL
                         (SPADCALL
-                         (SPADCALL (SPADCALL |i| (QREFELT % 27)) |offset|
-                                   (QREFELT % 29))
-                         (SPADCALL 2 |ipi| (QREFELT % 39)) (QREFELT % 60))
-                        (QREFELT % 96))
-                       (QREFELT % 79)))
+                         (SPADCALL (SPADCALL |i| (QREFELT % 25)) |offset|
+                                   (QREFELT % 80))
+                         (SPADCALL 2 |ipi| (QREFELT % 81)) (QREFELT % 38))
+                        (QREFELT % 82))
+                       (QREFELT % 62)))
                 (EXIT
                  (SPADCALL |i|
                            (SPADCALL |offset|
                                      (SPADCALL (* 2 |next|) |ipi|
-                                               (QREFELT % 50))
-                                     (QREFELT % 40))
-                           (QREFELT % 32)))))) 
+                                               (QREFELT % 83))
+                                     (QREFELT % 84))
+                           (QREFELT % 37)))))) 
 
 (SDEFUN |INTRVL;hasPiMultiple|
         ((|offset| (R)) (|ipi| (R)) (|i| (%)) (% (|Boolean|)))
@@ -491,32 +341,32 @@
                       (SPADCALL
                        (SPADCALL
                         (SPADCALL
-                         (SPADCALL (SPADCALL |i| (QREFELT % 27)) |offset|
-                                   (QREFELT % 29))
-                         |ipi| (QREFELT % 60))
-                        (QREFELT % 96))
-                       (QREFELT % 79)))
+                         (SPADCALL (SPADCALL |i| (QREFELT % 25)) |offset|
+                                   (QREFELT % 80))
+                         |ipi| (QREFELT % 38))
+                        (QREFELT % 82))
+                       (QREFELT % 62)))
                 (EXIT
                  (SPADCALL |i|
                            (SPADCALL |offset|
-                                     (SPADCALL |next| |ipi| (QREFELT % 50))
-                                     (QREFELT % 40))
-                           (QREFELT % 32)))))) 
+                                     (SPADCALL |next| |ipi| (QREFELT % 83))
+                                     (QREFELT % 84))
+                           (QREFELT % 37)))))) 
 
-(SDEFUN |INTRVL;sin;2%;44| ((|u| (%)) (% (%)))
+(SDEFUN |INTRVL;sin;2%;32| ((|u| (%)) (% (%)))
         (SPROG
          ((|vals| (|List| R)) (|hasMinusOne?| #1=(|Boolean|)) (|hasOne?| #1#)
           (|ipi| (R)))
-         (SEQ (LETT |ipi| (SPADCALL (QREFELT % 88)))
+         (SEQ (LETT |ipi| (SPADCALL (QREFELT % 71)))
               (LETT |hasOne?|
                     (|INTRVL;hasTwoPiMultiple|
-                     (SPADCALL |ipi| (SPADCALL 2 (QREFELT % 66))
-                               (QREFELT % 60))
+                     (SPADCALL |ipi| (SPADCALL 2 (QREFELT % 48))
+                               (QREFELT % 38))
                      |ipi| |u| %))
               (LETT |hasMinusOne?|
                     (|INTRVL;hasTwoPiMultiple|
-                     (SPADCALL (SPADCALL 3 |ipi| (QREFELT % 39))
-                               (SPADCALL 2 (QREFELT % 66)) (QREFELT % 60))
+                     (SPADCALL (SPADCALL 3 |ipi| (QREFELT % 81))
+                               (SPADCALL 2 (QREFELT % 48)) (QREFELT % 38))
                      |ipi| |u| %))
               (EXIT
                (COND
@@ -524,18 +374,18 @@
                  (COND
                   (|hasMinusOne?|
                    (|INTRVL;exactInterval|
-                    (SPADCALL (|spadConstant| % 16) (QREFELT % 56))
+                    (SPADCALL (|spadConstant| % 16) (QREFELT % 30))
                     (|spadConstant| % 16) %))
                   (#2='T
                    (SEQ
                     (LETT |vals|
                           (SPADCALL
                            (LIST
-                            (SPADCALL (SPADCALL |u| (QREFELT % 27))
-                                      (QREFELT % 97))
-                            (SPADCALL (SPADCALL |u| (QREFELT % 28))
-                                      (QREFELT % 97)))
-                           (QREFELT % 47)))
+                            (SPADCALL (SPADCALL |u| (QREFELT % 25))
+                                      (QREFELT % 85))
+                            (SPADCALL (SPADCALL |u| (QREFELT % 26))
+                                      (QREFELT % 85)))
+                           (QREFELT % 40)))
                     (EXIT
                      (COND
                       (|hasOne?|
@@ -543,22 +393,22 @@
                         (|spadConstant| % 16) %))
                       (|hasMinusOne?|
                        (|INTRVL;exactInfInterval|
-                        (SPADCALL (|spadConstant| % 16) (QREFELT % 56))
-                        (SPADCALL |vals| (QREFELT % 48)) %))
+                        (SPADCALL (|spadConstant| % 16) (QREFELT % 30))
+                        (SPADCALL |vals| (QREFELT % 41)) %))
                       (#2#
                        (SPADCALL (|SPADfirst| |vals|)
-                                 (SPADCALL |vals| (QREFELT % 48))
-                                 (QREFELT % 26)))))))))
+                                 (SPADCALL |vals| (QREFELT % 41))
+                                 (QREFELT % 24)))))))))
                 (#2#
                  (SEQ
                   (LETT |vals|
                         (SPADCALL
                          (LIST
-                          (SPADCALL (SPADCALL |u| (QREFELT % 27))
-                                    (QREFELT % 97))
-                          (SPADCALL (SPADCALL |u| (QREFELT % 28))
-                                    (QREFELT % 97)))
-                         (QREFELT % 47)))
+                          (SPADCALL (SPADCALL |u| (QREFELT % 25))
+                                    (QREFELT % 85))
+                          (SPADCALL (SPADCALL |u| (QREFELT % 26))
+                                    (QREFELT % 85)))
+                         (QREFELT % 40)))
                   (EXIT
                    (COND
                     (|hasOne?|
@@ -566,20 +416,20 @@
                       (|spadConstant| % 16) %))
                     (|hasMinusOne?|
                      (|INTRVL;exactInfInterval|
-                      (SPADCALL (|spadConstant| % 16) (QREFELT % 56))
-                      (SPADCALL |vals| (QREFELT % 48)) %))
+                      (SPADCALL (|spadConstant| % 16) (QREFELT % 30))
+                      (SPADCALL |vals| (QREFELT % 41)) %))
                     (#2#
                      (SPADCALL (|SPADfirst| |vals|)
-                               (SPADCALL |vals| (QREFELT % 48))
-                               (QREFELT % 26)))))))))))) 
+                               (SPADCALL |vals| (QREFELT % 41))
+                               (QREFELT % 24)))))))))))) 
 
-(SDEFUN |INTRVL;cos;2%;45| ((|u| (%)) (% (%)))
+(SDEFUN |INTRVL;cos;2%;33| ((|u| (%)) (% (%)))
         (SPROG
          ((|vals| (|List| R)) (|hasMinusOne?| #1=(|Boolean|)) (|hasOne?| #1#)
           (|ipi| (R)))
-         (SEQ (LETT |ipi| (SPADCALL (QREFELT % 88)))
+         (SEQ (LETT |ipi| (SPADCALL (QREFELT % 71)))
               (LETT |hasOne?|
-                    (|INTRVL;hasTwoPiMultiple| (|spadConstant| % 33) |ipi| |u|
+                    (|INTRVL;hasTwoPiMultiple| (|spadConstant| % 36) |ipi| |u|
                      %))
               (LETT |hasMinusOne?|
                     (|INTRVL;hasTwoPiMultiple| |ipi| |ipi| |u| %))
@@ -589,18 +439,18 @@
                  (COND
                   (|hasMinusOne?|
                    (|INTRVL;exactInterval|
-                    (SPADCALL (|spadConstant| % 16) (QREFELT % 56))
+                    (SPADCALL (|spadConstant| % 16) (QREFELT % 30))
                     (|spadConstant| % 16) %))
                   (#2='T
                    (SEQ
                     (LETT |vals|
                           (SPADCALL
                            (LIST
-                            (SPADCALL (SPADCALL |u| (QREFELT % 27))
-                                      (QREFELT % 99))
-                            (SPADCALL (SPADCALL |u| (QREFELT % 28))
-                                      (QREFELT % 99)))
-                           (QREFELT % 47)))
+                            (SPADCALL (SPADCALL |u| (QREFELT % 25))
+                                      (QREFELT % 87))
+                            (SPADCALL (SPADCALL |u| (QREFELT % 26))
+                                      (QREFELT % 87)))
+                           (QREFELT % 40)))
                     (EXIT
                      (COND
                       (|hasOne?|
@@ -608,22 +458,22 @@
                         (|spadConstant| % 16) %))
                       (|hasMinusOne?|
                        (|INTRVL;exactInfInterval|
-                        (SPADCALL (|spadConstant| % 16) (QREFELT % 56))
-                        (SPADCALL |vals| (QREFELT % 48)) %))
+                        (SPADCALL (|spadConstant| % 16) (QREFELT % 30))
+                        (SPADCALL |vals| (QREFELT % 41)) %))
                       (#2#
                        (SPADCALL (|SPADfirst| |vals|)
-                                 (SPADCALL |vals| (QREFELT % 48))
-                                 (QREFELT % 26)))))))))
+                                 (SPADCALL |vals| (QREFELT % 41))
+                                 (QREFELT % 24)))))))))
                 (#2#
                  (SEQ
                   (LETT |vals|
                         (SPADCALL
                          (LIST
-                          (SPADCALL (SPADCALL |u| (QREFELT % 27))
-                                    (QREFELT % 99))
-                          (SPADCALL (SPADCALL |u| (QREFELT % 28))
-                                    (QREFELT % 99)))
-                         (QREFELT % 47)))
+                          (SPADCALL (SPADCALL |u| (QREFELT % 25))
+                                    (QREFELT % 87))
+                          (SPADCALL (SPADCALL |u| (QREFELT % 26))
+                                    (QREFELT % 87)))
+                         (QREFELT % 40)))
                   (EXIT
                    (COND
                     (|hasOne?|
@@ -631,431 +481,431 @@
                       (|spadConstant| % 16) %))
                     (|hasMinusOne?|
                      (|INTRVL;exactInfInterval|
-                      (SPADCALL (|spadConstant| % 16) (QREFELT % 56))
-                      (SPADCALL |vals| (QREFELT % 48)) %))
+                      (SPADCALL (|spadConstant| % 16) (QREFELT % 30))
+                      (SPADCALL |vals| (QREFELT % 41)) %))
                     (#2#
                      (SPADCALL (|SPADfirst| |vals|)
-                               (SPADCALL |vals| (QREFELT % 48))
-                               (QREFELT % 26)))))))))))) 
+                               (SPADCALL |vals| (QREFELT % 41))
+                               (QREFELT % 24)))))))))))) 
 
-(SDEFUN |INTRVL;tan;2%;46| ((|u| (%)) (% (%)))
+(SDEFUN |INTRVL;tan;2%;34| ((|u| (%)) (% (%)))
         (SPROG ((|hi| (R)) (|lo| (R)) (|ipi| (R)))
-               (SEQ (LETT |ipi| (SPADCALL (QREFELT % 88)))
+               (SEQ (LETT |ipi| (SPADCALL (QREFELT % 71)))
                     (EXIT
                      (COND
-                      ((SPADCALL (SPADCALL |u| (QREFELT % 30)) |ipi|
-                                 (QREFELT % 19))
+                      ((SPADCALL (SPADCALL |u| (QREFELT % 60)) |ipi|
+                                 (QREFELT % 28))
                        (|error| "Interval contains a singularity"))
                       (#1='T
                        (SEQ
                         (LETT |lo|
-                              (SPADCALL (SPADCALL |u| (QREFELT % 27))
-                                        (QREFELT % 101)))
+                              (SPADCALL (SPADCALL |u| (QREFELT % 25))
+                                        (QREFELT % 89)))
                         (LETT |hi|
-                              (SPADCALL (SPADCALL |u| (QREFELT % 28))
-                                        (QREFELT % 101)))
+                              (SPADCALL (SPADCALL |u| (QREFELT % 26))
+                                        (QREFELT % 89)))
                         (EXIT
                          (COND
-                          ((SPADCALL |lo| |hi| (QREFELT % 19))
+                          ((SPADCALL |lo| |hi| (QREFELT % 28))
                            (|error| "Interval contains a singularity"))
-                          (#1# (SPADCALL |lo| |hi| (QREFELT % 26)))))))))))) 
+                          (#1# (SPADCALL |lo| |hi| (QREFELT % 24)))))))))))) 
 
-(SDEFUN |INTRVL;csc;2%;47| ((|u| (%)) (% (%)))
+(SDEFUN |INTRVL;csc;2%;35| ((|u| (%)) (% (%)))
         (SPROG ((|vals| (|List| R)) (|ipi| (R)))
-               (SEQ (LETT |ipi| (SPADCALL (QREFELT % 88)))
+               (SEQ (LETT |ipi| (SPADCALL (QREFELT % 71)))
                     (EXIT
                      (COND
-                      ((SPADCALL (SPADCALL |u| (QREFELT % 30)) |ipi|
-                                 (QREFELT % 19))
+                      ((SPADCALL (SPADCALL |u| (QREFELT % 60)) |ipi|
+                                 (QREFELT % 28))
                        (|error| "Interval contains a singularity"))
                       (#1='T
                        (SEQ
                         (COND
-                         ((|INTRVL;hasPiMultiple| (|spadConstant| % 33) |ipi|
+                         ((|INTRVL;hasPiMultiple| (|spadConstant| % 36) |ipi|
                            |u| %)
                           (|error| "Interval contains a singularity")))
                         (LETT |vals|
                               (SPADCALL
                                (LIST
-                                (SPADCALL (SPADCALL |u| (QREFELT % 27))
-                                          (QREFELT % 103))
-                                (SPADCALL (SPADCALL |u| (QREFELT % 28))
-                                          (QREFELT % 103)))
-                               (QREFELT % 47)))
+                                (SPADCALL (SPADCALL |u| (QREFELT % 25))
+                                          (QREFELT % 91))
+                                (SPADCALL (SPADCALL |u| (QREFELT % 26))
+                                          (QREFELT % 91)))
+                               (QREFELT % 40)))
                         (EXIT
                          (COND
                           ((|INTRVL;hasTwoPiMultiple|
-                            (SPADCALL |ipi| (SPADCALL 2 (QREFELT % 66))
-                                      (QREFELT % 60))
+                            (SPADCALL |ipi| (SPADCALL 2 (QREFELT % 48))
+                                      (QREFELT % 38))
                             |ipi| |u| %)
                            (|INTRVL;exactInfInterval| (|spadConstant| % 16)
-                            (SPADCALL |vals| (QREFELT % 48)) %))
+                            (SPADCALL |vals| (QREFELT % 41)) %))
                           ((|INTRVL;hasTwoPiMultiple|
-                            (SPADCALL (SPADCALL 3 |ipi| (QREFELT % 39))
-                                      (SPADCALL 2 (QREFELT % 66))
-                                      (QREFELT % 60))
+                            (SPADCALL (SPADCALL 3 |ipi| (QREFELT % 81))
+                                      (SPADCALL 2 (QREFELT % 48))
+                                      (QREFELT % 38))
                             |ipi| |u| %)
                            (|INTRVL;exactSupInterval| (|SPADfirst| |vals|)
-                            (SPADCALL (|spadConstant| % 16) (QREFELT % 56)) %))
+                            (SPADCALL (|spadConstant| % 16) (QREFELT % 30)) %))
                           (#1#
                            (SPADCALL (|SPADfirst| |vals|)
-                                     (SPADCALL |vals| (QREFELT % 48))
-                                     (QREFELT % 26)))))))))))) 
+                                     (SPADCALL |vals| (QREFELT % 41))
+                                     (QREFELT % 24)))))))))))) 
 
-(SDEFUN |INTRVL;sec;2%;48| ((|u| (%)) (% (%)))
+(SDEFUN |INTRVL;sec;2%;36| ((|u| (%)) (% (%)))
         (SPROG ((|vals| (|List| R)) (|ipi| (R)))
-               (SEQ (LETT |ipi| (SPADCALL (QREFELT % 88)))
+               (SEQ (LETT |ipi| (SPADCALL (QREFELT % 71)))
                     (EXIT
                      (COND
-                      ((SPADCALL (SPADCALL |u| (QREFELT % 30)) |ipi|
-                                 (QREFELT % 19))
+                      ((SPADCALL (SPADCALL |u| (QREFELT % 60)) |ipi|
+                                 (QREFELT % 28))
                        (|error| "Interval contains a singularity"))
                       (#1='T
                        (SEQ
                         (COND
                          ((|INTRVL;hasPiMultiple|
-                           (SPADCALL |ipi| (SPADCALL 2 (QREFELT % 66))
-                                     (QREFELT % 60))
+                           (SPADCALL |ipi| (SPADCALL 2 (QREFELT % 48))
+                                     (QREFELT % 38))
                            |ipi| |u| %)
                           (|error| "Interval contains a singularity")))
                         (LETT |vals|
                               (SPADCALL
                                (LIST
-                                (SPADCALL (SPADCALL |u| (QREFELT % 27))
-                                          (QREFELT % 105))
-                                (SPADCALL (SPADCALL |u| (QREFELT % 28))
-                                          (QREFELT % 105)))
-                               (QREFELT % 47)))
+                                (SPADCALL (SPADCALL |u| (QREFELT % 25))
+                                          (QREFELT % 93))
+                                (SPADCALL (SPADCALL |u| (QREFELT % 26))
+                                          (QREFELT % 93)))
+                               (QREFELT % 40)))
                         (EXIT
                          (COND
-                          ((|INTRVL;hasTwoPiMultiple| (|spadConstant| % 33)
+                          ((|INTRVL;hasTwoPiMultiple| (|spadConstant| % 36)
                             |ipi| |u| %)
                            (|INTRVL;exactInfInterval| (|spadConstant| % 16)
-                            (SPADCALL |vals| (QREFELT % 48)) %))
+                            (SPADCALL |vals| (QREFELT % 41)) %))
                           ((|INTRVL;hasTwoPiMultiple| |ipi| |ipi| |u| %)
                            (|INTRVL;exactSupInterval| (|SPADfirst| |vals|)
-                            (SPADCALL (|spadConstant| % 16) (QREFELT % 56)) %))
+                            (SPADCALL (|spadConstant| % 16) (QREFELT % 30)) %))
                           (#1#
                            (SPADCALL (|SPADfirst| |vals|)
-                                     (SPADCALL |vals| (QREFELT % 48))
-                                     (QREFELT % 26)))))))))))) 
+                                     (SPADCALL |vals| (QREFELT % 41))
+                                     (QREFELT % 24)))))))))))) 
 
-(SDEFUN |INTRVL;cot;2%;49| ((|u| (%)) (% (%)))
+(SDEFUN |INTRVL;cot;2%;37| ((|u| (%)) (% (%)))
         (SPROG ((|lo| (R)) (|hi| (R)) (|ipi| (R)))
-               (SEQ (LETT |ipi| (SPADCALL (QREFELT % 88)))
+               (SEQ (LETT |ipi| (SPADCALL (QREFELT % 71)))
                     (EXIT
                      (COND
-                      ((SPADCALL (SPADCALL |u| (QREFELT % 30)) |ipi|
-                                 (QREFELT % 19))
+                      ((SPADCALL (SPADCALL |u| (QREFELT % 60)) |ipi|
+                                 (QREFELT % 28))
                        (|error| "Interval contains a singularity"))
                       (#1='T
                        (SEQ
                         (LETT |hi|
-                              (SPADCALL (SPADCALL |u| (QREFELT % 27))
-                                        (QREFELT % 107)))
+                              (SPADCALL (SPADCALL |u| (QREFELT % 25))
+                                        (QREFELT % 95)))
                         (LETT |lo|
-                              (SPADCALL (SPADCALL |u| (QREFELT % 28))
-                                        (QREFELT % 107)))
+                              (SPADCALL (SPADCALL |u| (QREFELT % 26))
+                                        (QREFELT % 95)))
                         (EXIT
                          (COND
-                          ((SPADCALL |lo| |hi| (QREFELT % 19))
+                          ((SPADCALL |lo| |hi| (QREFELT % 28))
                            (|error| "Interval contains a singularity"))
-                          (#1# (SPADCALL |lo| |hi| (QREFELT % 26)))))))))))) 
+                          (#1# (SPADCALL |lo| |hi| (QREFELT % 24)))))))))))) 
 
-(SDEFUN |INTRVL;asin;2%;50| ((|u| (%)) (% (%)))
+(SDEFUN |INTRVL;asin;2%;38| ((|u| (%)) (% (%)))
         (SPROG ((|hi| (R)) (|lo| (R)))
-               (SEQ (LETT |lo| (SPADCALL |u| (QREFELT % 27)))
-                    (LETT |hi| (SPADCALL |u| (QREFELT % 28)))
+               (SEQ (LETT |lo| (SPADCALL |u| (QREFELT % 25)))
+                    (LETT |hi| (SPADCALL |u| (QREFELT % 26)))
                     (COND
                      ((OR
                        (SPADCALL |lo|
                                  (SPADCALL (|spadConstant| % 16)
-                                           (QREFELT % 56))
-                                 (QREFELT % 31))
-                       (SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 19)))
+                                           (QREFELT % 30))
+                                 (QREFELT % 27))
+                       (SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 28)))
                       (|error| "asin only defined on the region -1..1")))
+                    (EXIT
+                     (SPADCALL (SPADCALL |lo| (QREFELT % 97))
+                               (SPADCALL |hi| (QREFELT % 97))
+                               (QREFELT % 24)))))) 
+
+(SDEFUN |INTRVL;acos;2%;39| ((|u| (%)) (% (%)))
+        (SPROG ((|hi| (R)) (|lo| (R)))
+               (SEQ (LETT |lo| (SPADCALL |u| (QREFELT % 25)))
+                    (LETT |hi| (SPADCALL |u| (QREFELT % 26)))
+                    (COND
+                     ((OR
+                       (SPADCALL |lo|
+                                 (SPADCALL (|spadConstant| % 16)
+                                           (QREFELT % 30))
+                                 (QREFELT % 27))
+                       (SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 28)))
+                      (|error| "acos only defined on the region -1..1")))
+                    (EXIT
+                     (SPADCALL (SPADCALL |hi| (QREFELT % 99))
+                               (SPADCALL |lo| (QREFELT % 99))
+                               (QREFELT % 24)))))) 
+
+(SDEFUN |INTRVL;atan;2%;40| ((|u| (%)) (% (%)))
+        (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 25)) (QREFELT % 101))
+                  (SPADCALL (SPADCALL |u| (QREFELT % 26)) (QREFELT % 101))
+                  (QREFELT % 24))) 
+
+(SDEFUN |INTRVL;acot;2%;41| ((|u| (%)) (% (%)))
+        (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 26)) (QREFELT % 103))
+                  (SPADCALL (SPADCALL |u| (QREFELT % 25)) (QREFELT % 103))
+                  (QREFELT % 24))) 
+
+(SDEFUN |INTRVL;acsc;2%;42| ((|u| (%)) (% (%)))
+        (SPROG ((|hi| (R)) (|lo| (R)))
+               (SEQ (LETT |lo| (SPADCALL |u| (QREFELT % 25)))
+                    (LETT |hi| (SPADCALL |u| (QREFELT % 26)))
+                    (COND
+                     ((SPADCALL |lo|
+                                (SPADCALL (|spadConstant| % 16) (QREFELT % 30))
+                                (QREFELT % 105))
+                      (COND
+                       ((SPADCALL |hi|
+                                  (SPADCALL (|spadConstant| % 16)
+                                            (QREFELT % 30))
+                                  (QREFELT % 106))
+                        (|error| #1="acsc not defined on the region -1..1"))
+                       ((SPADCALL |lo| (|spadConstant| % 16) (QREFELT % 105))
+                        (COND
+                         ((SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 106))
+                          (|error| #1#))))))
+                     ((SPADCALL |lo| (|spadConstant| % 16) (QREFELT % 105))
+                      (COND
+                       ((SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 106))
+                        (|error| #1#)))))
+                    (EXIT
+                     (SPADCALL (SPADCALL |hi| (QREFELT % 107))
+                               (SPADCALL |lo| (QREFELT % 107))
+                               (QREFELT % 24)))))) 
+
+(SDEFUN |INTRVL;asec;2%;43| ((|u| (%)) (% (%)))
+        (SPROG ((|hi| (R)) (|lo| (R)))
+               (SEQ (LETT |lo| (SPADCALL |u| (QREFELT % 25)))
+                    (LETT |hi| (SPADCALL |u| (QREFELT % 26)))
+                    (COND
+                     ((SPADCALL |lo|
+                                (SPADCALL (|spadConstant| % 16) (QREFELT % 30))
+                                (QREFELT % 27))
+                      (COND
+                       ((SPADCALL |hi|
+                                  (SPADCALL (|spadConstant| % 16)
+                                            (QREFELT % 30))
+                                  (QREFELT % 28))
+                        (|error| #1="asec not defined on the region -1..1"))
+                       ((SPADCALL |lo| (|spadConstant| % 16) (QREFELT % 27))
+                        (COND
+                         ((SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 28))
+                          (|error| #1#))))))
+                     ((SPADCALL |lo| (|spadConstant| % 16) (QREFELT % 27))
+                      (COND
+                       ((SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 28))
+                        (|error| #1#)))))
                     (EXIT
                      (SPADCALL (SPADCALL |lo| (QREFELT % 109))
                                (SPADCALL |hi| (QREFELT % 109))
-                               (QREFELT % 26)))))) 
+                               (QREFELT % 24)))))) 
 
-(SDEFUN |INTRVL;acos;2%;51| ((|u| (%)) (% (%)))
-        (SPROG ((|hi| (R)) (|lo| (R)))
-               (SEQ (LETT |lo| (SPADCALL |u| (QREFELT % 27)))
-                    (LETT |hi| (SPADCALL |u| (QREFELT % 28)))
-                    (COND
-                     ((OR
-                       (SPADCALL |lo|
-                                 (SPADCALL (|spadConstant| % 16)
-                                           (QREFELT % 56))
-                                 (QREFELT % 31))
-                       (SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 19)))
-                      (|error| "acos only defined on the region -1..1")))
-                    (EXIT
-                     (SPADCALL (SPADCALL |hi| (QREFELT % 111))
-                               (SPADCALL |lo| (QREFELT % 111))
-                               (QREFELT % 26)))))) 
+(SDEFUN |INTRVL;tanh;2%;44| ((|u| (%)) (% (%)))
+        (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 25)) (QREFELT % 111))
+                  (SPADCALL (SPADCALL |u| (QREFELT % 26)) (QREFELT % 111))
+                  (QREFELT % 24))) 
 
-(SDEFUN |INTRVL;atan;2%;52| ((|u| (%)) (% (%)))
-        (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 27)) (QREFELT % 113))
-                  (SPADCALL (SPADCALL |u| (QREFELT % 28)) (QREFELT % 113))
-                  (QREFELT % 26))) 
+(SDEFUN |INTRVL;sinh;2%;45| ((|u| (%)) (% (%)))
+        (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 25)) (QREFELT % 113))
+                  (SPADCALL (SPADCALL |u| (QREFELT % 26)) (QREFELT % 113))
+                  (QREFELT % 24))) 
 
-(SDEFUN |INTRVL;acot;2%;53| ((|u| (%)) (% (%)))
-        (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 28)) (QREFELT % 115))
-                  (SPADCALL (SPADCALL |u| (QREFELT % 27)) (QREFELT % 115))
-                  (QREFELT % 26))) 
-
-(SDEFUN |INTRVL;acsc;2%;54| ((|u| (%)) (% (%)))
-        (SPROG ((|hi| (R)) (|lo| (R)))
-               (SEQ (LETT |lo| (SPADCALL |u| (QREFELT % 27)))
-                    (LETT |hi| (SPADCALL |u| (QREFELT % 28)))
-                    (COND
-                     ((SPADCALL |lo|
-                                (SPADCALL (|spadConstant| % 16) (QREFELT % 56))
-                                (QREFELT % 117))
-                      (COND
-                       ((SPADCALL |hi|
-                                  (SPADCALL (|spadConstant| % 16)
-                                            (QREFELT % 56))
-                                  (QREFELT % 118))
-                        (|error| #1="acsc not defined on the region -1..1"))
-                       ((SPADCALL |lo| (|spadConstant| % 16) (QREFELT % 117))
-                        (COND
-                         ((SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 118))
-                          (|error| #1#))))))
-                     ((SPADCALL |lo| (|spadConstant| % 16) (QREFELT % 117))
-                      (COND
-                       ((SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 118))
-                        (|error| #1#)))))
-                    (EXIT
-                     (SPADCALL (SPADCALL |hi| (QREFELT % 119))
-                               (SPADCALL |lo| (QREFELT % 119))
-                               (QREFELT % 26)))))) 
-
-(SDEFUN |INTRVL;asec;2%;55| ((|u| (%)) (% (%)))
-        (SPROG ((|hi| (R)) (|lo| (R)))
-               (SEQ (LETT |lo| (SPADCALL |u| (QREFELT % 27)))
-                    (LETT |hi| (SPADCALL |u| (QREFELT % 28)))
-                    (COND
-                     ((SPADCALL |lo|
-                                (SPADCALL (|spadConstant| % 16) (QREFELT % 56))
-                                (QREFELT % 31))
-                      (COND
-                       ((SPADCALL |hi|
-                                  (SPADCALL (|spadConstant| % 16)
-                                            (QREFELT % 56))
-                                  (QREFELT % 19))
-                        (|error| #1="asec not defined on the region -1..1"))
-                       ((SPADCALL |lo| (|spadConstant| % 16) (QREFELT % 31))
-                        (COND
-                         ((SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 19))
-                          (|error| #1#))))))
-                     ((SPADCALL |lo| (|spadConstant| % 16) (QREFELT % 31))
-                      (COND
-                       ((SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 19))
-                        (|error| #1#)))))
-                    (EXIT
-                     (SPADCALL (SPADCALL |lo| (QREFELT % 121))
-                               (SPADCALL |hi| (QREFELT % 121))
-                               (QREFELT % 26)))))) 
-
-(SDEFUN |INTRVL;tanh;2%;56| ((|u| (%)) (% (%)))
-        (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 27)) (QREFELT % 123))
-                  (SPADCALL (SPADCALL |u| (QREFELT % 28)) (QREFELT % 123))
-                  (QREFELT % 26))) 
-
-(SDEFUN |INTRVL;sinh;2%;57| ((|u| (%)) (% (%)))
-        (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 27)) (QREFELT % 125))
-                  (SPADCALL (SPADCALL |u| (QREFELT % 28)) (QREFELT % 125))
-                  (QREFELT % 26))) 
-
-(SDEFUN |INTRVL;sech;2%;58| ((|u| (%)) (% (%)))
+(SDEFUN |INTRVL;sech;2%;46| ((|u| (%)) (% (%)))
         (SPROG ((|vals| (|List| R)))
                (SEQ
                 (COND
-                 ((SPADCALL |u| (QREFELT % 35))
+                 ((SPADCALL |u| (QREFELT % 115))
                   (SPADCALL
-                   (SPADCALL (SPADCALL |u| (QREFELT % 27)) (QREFELT % 127))
-                   (SPADCALL (SPADCALL |u| (QREFELT % 28)) (QREFELT % 127))
-                   (QREFELT % 26)))
-                 ((SPADCALL |u| (QREFELT % 34))
+                   (SPADCALL (SPADCALL |u| (QREFELT % 25)) (QREFELT % 116))
+                   (SPADCALL (SPADCALL |u| (QREFELT % 26)) (QREFELT % 116))
+                   (QREFELT % 24)))
+                 ((SPADCALL |u| (QREFELT % 73))
                   (SPADCALL
-                   (SPADCALL (SPADCALL |u| (QREFELT % 28)) (QREFELT % 127))
-                   (SPADCALL (SPADCALL |u| (QREFELT % 27)) (QREFELT % 127))
-                   (QREFELT % 26)))
+                   (SPADCALL (SPADCALL |u| (QREFELT % 26)) (QREFELT % 116))
+                   (SPADCALL (SPADCALL |u| (QREFELT % 25)) (QREFELT % 116))
+                   (QREFELT % 24)))
                  ('T
                   (SEQ
                    (LETT |vals|
                          (SPADCALL
                           (LIST
-                           (SPADCALL (SPADCALL |u| (QREFELT % 27))
-                                     (QREFELT % 127))
-                           (SPADCALL (SPADCALL |u| (QREFELT % 28))
-                                     (QREFELT % 127)))
-                          (QREFELT % 47)))
+                           (SPADCALL (SPADCALL |u| (QREFELT % 25))
+                                     (QREFELT % 116))
+                           (SPADCALL (SPADCALL |u| (QREFELT % 26))
+                                     (QREFELT % 116)))
+                          (QREFELT % 40)))
                    (EXIT
                     (|INTRVL;exactSupInterval| (|SPADfirst| |vals|)
                      (|spadConstant| % 16) %)))))))) 
 
-(SDEFUN |INTRVL;cosh;2%;59| ((|u| (%)) (% (%)))
+(SDEFUN |INTRVL;cosh;2%;47| ((|u| (%)) (% (%)))
         (SPROG ((|vals| (|List| R)))
                (SEQ
                 (COND
-                 ((SPADCALL |u| (QREFELT % 35))
+                 ((SPADCALL |u| (QREFELT % 115))
                   (SPADCALL
-                   (SPADCALL (SPADCALL |u| (QREFELT % 28)) (QREFELT % 129))
-                   (SPADCALL (SPADCALL |u| (QREFELT % 27)) (QREFELT % 129))
-                   (QREFELT % 26)))
-                 ((SPADCALL |u| (QREFELT % 34))
+                   (SPADCALL (SPADCALL |u| (QREFELT % 26)) (QREFELT % 118))
+                   (SPADCALL (SPADCALL |u| (QREFELT % 25)) (QREFELT % 118))
+                   (QREFELT % 24)))
+                 ((SPADCALL |u| (QREFELT % 73))
                   (SPADCALL
-                   (SPADCALL (SPADCALL |u| (QREFELT % 27)) (QREFELT % 129))
-                   (SPADCALL (SPADCALL |u| (QREFELT % 28)) (QREFELT % 129))
-                   (QREFELT % 26)))
+                   (SPADCALL (SPADCALL |u| (QREFELT % 25)) (QREFELT % 118))
+                   (SPADCALL (SPADCALL |u| (QREFELT % 26)) (QREFELT % 118))
+                   (QREFELT % 24)))
                  ('T
                   (SEQ
                    (LETT |vals|
                          (SPADCALL
                           (LIST
-                           (SPADCALL (SPADCALL |u| (QREFELT % 27))
-                                     (QREFELT % 129))
-                           (SPADCALL (SPADCALL |u| (QREFELT % 28))
-                                     (QREFELT % 129)))
-                          (QREFELT % 47)))
+                           (SPADCALL (SPADCALL |u| (QREFELT % 25))
+                                     (QREFELT % 118))
+                           (SPADCALL (SPADCALL |u| (QREFELT % 26))
+                                     (QREFELT % 118)))
+                          (QREFELT % 40)))
                    (EXIT
                     (|INTRVL;exactInfInterval| (|spadConstant| % 16)
-                     (SPADCALL |vals| (QREFELT % 48)) %)))))))) 
+                     (SPADCALL |vals| (QREFELT % 41)) %)))))))) 
 
-(SDEFUN |INTRVL;csch;2%;60| ((|u| (%)) (% (%)))
+(SDEFUN |INTRVL;csch;2%;48| ((|u| (%)) (% (%)))
         (COND
-         ((SPADCALL |u| (|spadConstant| % 33) (QREFELT % 32))
+         ((SPADCALL |u| (|spadConstant| % 36) (QREFELT % 37))
           (|error| "csch: singularity at zero"))
          ('T
-          (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 28)) (QREFELT % 131))
-                    (SPADCALL (SPADCALL |u| (QREFELT % 27)) (QREFELT % 131))
-                    (QREFELT % 26))))) 
+          (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 26)) (QREFELT % 120))
+                    (SPADCALL (SPADCALL |u| (QREFELT % 25)) (QREFELT % 120))
+                    (QREFELT % 24))))) 
 
-(SDEFUN |INTRVL;coth;2%;61| ((|u| (%)) (% (%)))
+(SDEFUN |INTRVL;coth;2%;49| ((|u| (%)) (% (%)))
         (COND
-         ((SPADCALL |u| (|spadConstant| % 33) (QREFELT % 32))
+         ((SPADCALL |u| (|spadConstant| % 36) (QREFELT % 37))
           (|error| "coth: singularity at zero"))
          ('T
-          (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 28)) (QREFELT % 133))
-                    (SPADCALL (SPADCALL |u| (QREFELT % 27)) (QREFELT % 133))
-                    (QREFELT % 26))))) 
+          (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 26)) (QREFELT % 122))
+                    (SPADCALL (SPADCALL |u| (QREFELT % 25)) (QREFELT % 122))
+                    (QREFELT % 24))))) 
 
-(SDEFUN |INTRVL;acosh;2%;62| ((|u| (%)) (% (%)))
+(SDEFUN |INTRVL;acosh;2%;50| ((|u| (%)) (% (%)))
         (COND
-         ((SPADCALL (SPADCALL |u| (QREFELT % 27)) (|spadConstant| % 16)
-                    (QREFELT % 31))
+         ((SPADCALL (SPADCALL |u| (QREFELT % 25)) (|spadConstant| % 16)
+                    (QREFELT % 27))
           (|error| "invalid argument: acosh only defined on the region 1.."))
          ('T
-          (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 27)) (QREFELT % 135))
-                    (SPADCALL (SPADCALL |u| (QREFELT % 28)) (QREFELT % 135))
-                    (QREFELT % 26))))) 
+          (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 25)) (QREFELT % 124))
+                    (SPADCALL (SPADCALL |u| (QREFELT % 26)) (QREFELT % 124))
+                    (QREFELT % 24))))) 
 
-(SDEFUN |INTRVL;acoth;2%;63| ((|u| (%)) (% (%)))
+(SDEFUN |INTRVL;acoth;2%;51| ((|u| (%)) (% (%)))
         (SPROG ((|hi| (R)) (|lo| (R)))
-               (SEQ (LETT |lo| (SPADCALL |u| (QREFELT % 27)))
-                    (LETT |hi| (SPADCALL |u| (QREFELT % 28)))
+               (SEQ (LETT |lo| (SPADCALL |u| (QREFELT % 25)))
+                    (LETT |hi| (SPADCALL |u| (QREFELT % 26)))
                     (COND
                      ((SPADCALL |lo|
-                                (SPADCALL (|spadConstant| % 16) (QREFELT % 56))
-                                (QREFELT % 117))
+                                (SPADCALL (|spadConstant| % 16) (QREFELT % 30))
+                                (QREFELT % 105))
                       (COND
                        ((SPADCALL |hi|
                                   (SPADCALL (|spadConstant| % 16)
-                                            (QREFELT % 56))
-                                  (QREFELT % 118))
+                                            (QREFELT % 30))
+                                  (QREFELT % 106))
                         (|error| #1="acoth not defined on the region -1..1"))
-                       ((SPADCALL |lo| (|spadConstant| % 16) (QREFELT % 117))
+                       ((SPADCALL |lo| (|spadConstant| % 16) (QREFELT % 105))
                         (COND
-                         ((SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 118))
+                         ((SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 106))
                           (|error| #1#))))))
-                     ((SPADCALL |lo| (|spadConstant| % 16) (QREFELT % 117))
+                     ((SPADCALL |lo| (|spadConstant| % 16) (QREFELT % 105))
                       (COND
-                       ((SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 118))
+                       ((SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 106))
                         (|error| #1#)))))
                     (EXIT
-                     (SPADCALL (SPADCALL |hi| (QREFELT % 137))
-                               (SPADCALL |lo| (QREFELT % 137))
-                               (QREFELT % 26)))))) 
+                     (SPADCALL (SPADCALL |hi| (QREFELT % 126))
+                               (SPADCALL |lo| (QREFELT % 126))
+                               (QREFELT % 24)))))) 
 
-(SDEFUN |INTRVL;acsch;2%;64| ((|u| (%)) (% (%)))
+(SDEFUN |INTRVL;acsch;2%;52| ((|u| (%)) (% (%)))
         (COND
-         ((SPADCALL |u| (|spadConstant| % 33) (QREFELT % 32))
+         ((SPADCALL |u| (|spadConstant| % 36) (QREFELT % 37))
           (|error| "acsch: singularity at zero"))
          ('T
-          (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 28)) (QREFELT % 139))
-                    (SPADCALL (SPADCALL |u| (QREFELT % 27)) (QREFELT % 139))
-                    (QREFELT % 26))))) 
+          (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 26)) (QREFELT % 128))
+                    (SPADCALL (SPADCALL |u| (QREFELT % 25)) (QREFELT % 128))
+                    (QREFELT % 24))))) 
 
-(SDEFUN |INTRVL;asech;2%;65| ((|u| (%)) (% (%)))
+(SDEFUN |INTRVL;asech;2%;53| ((|u| (%)) (% (%)))
         (SPROG ((|hi| (R)) (|lo| (R)))
-               (SEQ (LETT |lo| (SPADCALL |u| (QREFELT % 27)))
-                    (LETT |hi| (SPADCALL |u| (QREFELT % 28)))
+               (SEQ (LETT |lo| (SPADCALL |u| (QREFELT % 25)))
+                    (LETT |hi| (SPADCALL |u| (QREFELT % 26)))
                     (COND
-                     ((OR (SPADCALL |lo| (|spadConstant| % 33) (QREFELT % 117))
-                          (SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 19)))
+                     ((OR (SPADCALL |lo| (|spadConstant| % 36) (QREFELT % 105))
+                          (SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 28)))
                       (|error| "asech only defined on the region 0 < x <= 1")))
                     (EXIT
-                     (SPADCALL (SPADCALL |hi| (QREFELT % 141))
-                               (SPADCALL |lo| (QREFELT % 141))
-                               (QREFELT % 26)))))) 
+                     (SPADCALL (SPADCALL |hi| (QREFELT % 130))
+                               (SPADCALL |lo| (QREFELT % 130))
+                               (QREFELT % 24)))))) 
 
-(SDEFUN |INTRVL;asinh;2%;66| ((|u| (%)) (% (%)))
-        (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 27)) (QREFELT % 143))
-                  (SPADCALL (SPADCALL |u| (QREFELT % 28)) (QREFELT % 143))
-                  (QREFELT % 26))) 
+(SDEFUN |INTRVL;asinh;2%;54| ((|u| (%)) (% (%)))
+        (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 25)) (QREFELT % 132))
+                  (SPADCALL (SPADCALL |u| (QREFELT % 26)) (QREFELT % 132))
+                  (QREFELT % 24))) 
 
-(SDEFUN |INTRVL;atanh;2%;67| ((|u| (%)) (% (%)))
+(SDEFUN |INTRVL;atanh;2%;55| ((|u| (%)) (% (%)))
         (SPROG ((|hi| (R)) (|lo| (R)))
-               (SEQ (LETT |lo| (SPADCALL |u| (QREFELT % 27)))
-                    (LETT |hi| (SPADCALL |u| (QREFELT % 28)))
+               (SEQ (LETT |lo| (SPADCALL |u| (QREFELT % 25)))
+                    (LETT |hi| (SPADCALL |u| (QREFELT % 26)))
                     (COND
                      ((OR
                        (SPADCALL |lo|
                                  (SPADCALL (|spadConstant| % 16)
-                                           (QREFELT % 56))
-                                 (QREFELT % 117))
-                       (SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 118)))
+                                           (QREFELT % 30))
+                                 (QREFELT % 105))
+                       (SPADCALL |hi| (|spadConstant| % 16) (QREFELT % 106)))
                       (|error| "atanh only defined on the region -1 < x < 1")))
                     (EXIT
-                     (SPADCALL (SPADCALL |lo| (QREFELT % 145))
-                               (SPADCALL |hi| (QREFELT % 145))
-                               (QREFELT % 26)))))) 
+                     (SPADCALL (SPADCALL |lo| (QREFELT % 134))
+                               (SPADCALL |hi| (QREFELT % 134))
+                               (QREFELT % 24)))))) 
 
-(SDEFUN |INTRVL;^;%F%;68| ((|u| (%)) (|n| (|Fraction| (|Integer|))) (% (%)))
+(SDEFUN |INTRVL;^;%F%;56| ((|u| (%)) (|n| (|Fraction| (|Integer|))) (% (%)))
         (SPROG ((|hi| (R)) (|lo| (R)))
-               (SEQ (LETT |lo| (SPADCALL |u| (QREFELT % 27)))
-                    (LETT |hi| (SPADCALL |u| (QREFELT % 28)))
+               (SEQ (LETT |lo| (SPADCALL |u| (QREFELT % 25)))
+                    (LETT |hi| (SPADCALL |u| (QREFELT % 26)))
                     (EXIT
                      (COND
-                      ((SPADCALL |lo| (|spadConstant| % 33) (QREFELT % 117))
+                      ((SPADCALL |lo| (|spadConstant| % 36) (QREFELT % 105))
                        (COND
-                        ((EVENP (SPADCALL |n| (QREFELT % 70)))
+                        ((EVENP (SPADCALL |n| (QREFELT % 52)))
                          (|error| "fractional power only defined for x > 0"))
-                        ((EVENP (SPADCALL |n| (QREFELT % 76)))
+                        ((EVENP (SPADCALL |n| (QREFELT % 58)))
                          (COND
-                          ((SPADCALL |hi| (|spadConstant| % 33) (QREFELT % 31))
-                           (SPADCALL (|spadConstant| % 33)
-                                     (SPADCALL |lo| |n| (QREFELT % 147))
-                                     (QREFELT % 20)))
+                          ((SPADCALL |hi| (|spadConstant| % 36) (QREFELT % 27))
+                           (SPADCALL (|spadConstant| % 36)
+                                     (SPADCALL |lo| |n| (QREFELT % 136))
+                                     (QREFELT % 137)))
                           (#1='T
-                           (SPADCALL (|spadConstant| % 33)
+                           (SPADCALL (|spadConstant| % 36)
                                      (SPADCALL
-                                      (SPADCALL |lo| |n| (QREFELT % 147))
-                                      (SPADCALL |hi| |n| (QREFELT % 147))
-                                      (QREFELT % 54))
-                                     (QREFELT % 20)))))
+                                      (SPADCALL |lo| |n| (QREFELT % 136))
+                                      (SPADCALL |hi| |n| (QREFELT % 136))
+                                      (QREFELT % 138))
+                                     (QREFELT % 137)))))
                         (#1#
-                         (SPADCALL (SPADCALL |lo| |n| (QREFELT % 147))
-                                   (SPADCALL |hi| |n| (QREFELT % 147))
-                                   (QREFELT % 20)))))
+                         (SPADCALL (SPADCALL |lo| |n| (QREFELT % 136))
+                                   (SPADCALL |hi| |n| (QREFELT % 136))
+                                   (QREFELT % 137)))))
                       (#1#
-                       (SPADCALL (SPADCALL |lo| |n| (QREFELT % 147))
-                                 (SPADCALL |hi| |n| (QREFELT % 147))
-                                 (QREFELT % 20)))))))) 
+                       (SPADCALL (SPADCALL |lo| |n| (QREFELT % 136))
+                                 (SPADCALL |hi| |n| (QREFELT % 136))
+                                 (QREFELT % 137)))))))) 
 
 (DECLAIM (NOTINLINE |Interval;|)) 
 
@@ -1064,9 +914,25 @@
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Interval| DV$1))
-          (LETT % (GETREFV 153))
+          (LETT % (GETREFV 144))
           (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (QSETREFV % 3
+                    (LETT |pv$|
+                          (|buildPredVector| 0 0
+                                             (LIST
+                                              (|HasCategory| |#1|
+                                                             '(|OrderedAbelianMonoid|))
+                                              (|HasCategory| |#1|
+                                                             '(|OrderedAbelianGroup|))
+                                              (AND
+                                               (|HasCategory| |#1|
+                                                              '(|OrderedSemiGroup|))
+                                               (|HasCategory| |#1|
+                                                              '(|SemiRng|)))
+                                              (AND
+                                               (|HasCategory| |#1| '(|Field|))
+                                               (|HasCategory| |#1|
+                                                              '(|OrderedRing|)))))))
           (|haddProp| |$ConstructorCache| '|Interval| (LIST DV$1) (CONS 1 %))
           (|stuffDomainSlots| %)
           (QSETREFV % 6 |#1|)
@@ -1074,9 +940,9 @@
           (QSETREFV % 7 (|Record| (|:| |Inf| |#1|) (|:| |Sup| |#1|)))
           %))) 
 
-(DEFUN |Interval| (#1=#:G277)
+(DEFUN |Interval| (#1=#:G231)
   (SPROG NIL
-         (PROG (#2=#:G278)
+         (PROG (#2=#:G232)
            (RETURN
             (COND
              ((LETT #2#
@@ -1095,81 +961,79 @@
               (0 . |zero?|) (|PositiveInteger|) (5 . |bits|) (|Integer|)
               (9 . |mantissa|) (14 . |exponent|)
               (CONS IDENTITY
-                    (FUNCALL (|dispatchFunction| |INTRVL;One;%;26|) %))
-              (19 . |One|) (23 . |float|) (29 . |base|) (33 . >)
-              |INTRVL;interval;2R%;4|
+                    (FUNCALL (|dispatchFunction| |INTRVL;One;%;15|) %))
+              (19 . |One|) (23 . |float|) (29 . |base|)
               (CONS IDENTITY
-                    (FUNCALL (|dispatchFunction| |INTRVL;Zero;%;27|) %))
-              (39 . |one?|) (|Union| 12 '"failed") (44 . |retractIfCan|)
-              |INTRVL;interval;R%;5| |INTRVL;qinterval;2R%;6|
-              |INTRVL;inf;%R;10| |INTRVL;sup;%R;11| (49 . -)
-              |INTRVL;width;%R;12| (55 . <) |INTRVL;contains?;%RB;13|
-              (61 . |Zero|) |INTRVL;positive?;%B;14| |INTRVL;negative?;%B;15|
-              |INTRVL;<;2%B;16| (65 . |zero?|) |INTRVL;=;2%B;24| (70 . *)
-              (76 . +) |INTRVL;+;3%;17| |INTRVL;-;2%;23| |INTRVL;-;3%;18|
-              (82 . |one?|) (87 . *) (|List| 6) (93 . |sort|) (98 . |last|)
-              |INTRVL;*;3%;19| (103 . *) |INTRVL;*;I2%;20| |INTRVL;*;Pi2%;21|
-              (109 . ^) (115 . |max|) |INTRVL;^;%Pi%;22| (121 . -) (126 . =)
-              (132 . ~=) |INTRVL;~=;2%B;25| (138 . /) (|Union| % '"failed")
-              |INTRVL;recip;%U;28| |INTRVL;unit?;%B;29| |INTRVL;exquo;2%U;30|
-              |INTRVL;gcd;3%;31| (144 . |coerce|) |INTRVL;coerce;I%;32|
-              (|Fraction| 12) (149 . |coerce|) (154 . |denom|) (|Float|)
-              (159 . |coerce|) (164 . |log2|) (168 . |log2|)
-              (173 . |retractIfCan|) (178 . |numer|) |INTRVL;interval;F%;33|
-              |INTRVL;retractIfCan;%U;34| (183 . |retract|)
-              |INTRVL;retract;%I;35| (|OutputForm|) (188 . |coerce|) (|List| %)
-              (193 . |bracket|) |INTRVL;coerce;%Of;36| (|NonNegativeInteger|)
-              |INTRVL;characteristic;Nni;37| (198 . |pi|) |INTRVL;pi;%;38|
-              (202 . |log|) |INTRVL;log;2%;39| (207 . |exp|) |INTRVL;exp;2%;40|
-              (212 . ^) |INTRVL;^;3%;41| (218 . |ceiling|) (223 . |sin|)
-              |INTRVL;sin;2%;44| (228 . |cos|) |INTRVL;cos;2%;45| (233 . |tan|)
-              |INTRVL;tan;2%;46| (238 . |csc|) |INTRVL;csc;2%;47| (243 . |sec|)
-              |INTRVL;sec;2%;48| (248 . |cot|) |INTRVL;cot;2%;49|
-              (253 . |asin|) |INTRVL;asin;2%;50| (258 . |acos|)
-              |INTRVL;acos;2%;51| (263 . |atan|) |INTRVL;atan;2%;52|
-              (268 . |acot|) |INTRVL;acot;2%;53| (273 . <=) (279 . >=)
-              (285 . |acsc|) |INTRVL;acsc;2%;54| (290 . |asec|)
-              |INTRVL;asec;2%;55| (295 . |tanh|) |INTRVL;tanh;2%;56|
-              (300 . |sinh|) |INTRVL;sinh;2%;57| (305 . |sech|)
-              |INTRVL;sech;2%;58| (310 . |cosh|) |INTRVL;cosh;2%;59|
-              (315 . |csch|) |INTRVL;csch;2%;60| (320 . |coth|)
-              |INTRVL;coth;2%;61| (325 . |acosh|) |INTRVL;acosh;2%;62|
-              (330 . |acoth|) |INTRVL;acoth;2%;63| (335 . |acsch|)
-              |INTRVL;acsch;2%;64| (340 . |asech|) |INTRVL;asech;2%;65|
-              (345 . |asinh|) |INTRVL;asinh;2%;66| (350 . |atanh|)
-              |INTRVL;atanh;2%;67| (355 . ^) |INTRVL;^;%F%;68| (|String|)
-              (|Record| (|:| |unit| %) (|:| |canonical| %) (|:| |associate| %))
+                    (FUNCALL (|dispatchFunction| |INTRVL;Zero;%;16|) %))
+              (33 . |one?|) (|Union| 12 '"failed") (38 . |retractIfCan|)
+              |INTRVL;interval;R%;4| |INTRVL;qinterval;2R%;5| |INTRVL;inf;%R;9|
+              |INTRVL;sup;%R;10| (43 . <) (49 . >) |INTRVL;<;2%B;11| (55 . -)
+              |INTRVL;-;2%;12| (60 . =) |INTRVL;=;2%B;13| (66 . ~=)
+              |INTRVL;~=;2%B;14| (72 . |Zero|) (76 . |contains?|) (82 . /)
+              (|List| 6) (88 . |sort|) (93 . |last|) (|Union| % '"failed")
+              |INTRVL;recip;%U;17| (98 . |one?|) (103 . |zero?|)
+              |INTRVL;exquo;2%U;18| |INTRVL;gcd;3%;19| (108 . |coerce|)
+              |INTRVL;coerce;I%;20| (|Fraction| 12) (113 . |coerce|)
+              (118 . |denom|) (|Float|) (123 . |coerce|) (128 . |log2|)
+              (132 . |log2|) (137 . |retractIfCan|) (142 . |numer|)
+              |INTRVL;interval;F%;21| (147 . |width|)
+              |INTRVL;retractIfCan;%U;22| (152 . |retract|)
+              |INTRVL;retract;%I;23| (|OutputForm|) (157 . |coerce|) (|List| %)
+              (162 . |bracket|) |INTRVL;coerce;%Of;24| (|NonNegativeInteger|)
+              |INTRVL;characteristic;Nni;25| (167 . |pi|) |INTRVL;pi;%;26|
+              (171 . |positive?|) (176 . |log|) |INTRVL;log;2%;27|
+              (181 . |exp|) |INTRVL;exp;2%;28| (186 . ^) |INTRVL;^;3%;29|
+              (192 . -) (198 . *) (204 . |ceiling|) (209 . *) (215 . +)
+              (221 . |sin|) |INTRVL;sin;2%;32| (226 . |cos|) |INTRVL;cos;2%;33|
+              (231 . |tan|) |INTRVL;tan;2%;34| (236 . |csc|) |INTRVL;csc;2%;35|
+              (241 . |sec|) |INTRVL;sec;2%;36| (246 . |cot|) |INTRVL;cot;2%;37|
+              (251 . |asin|) |INTRVL;asin;2%;38| (256 . |acos|)
+              |INTRVL;acos;2%;39| (261 . |atan|) |INTRVL;atan;2%;40|
+              (266 . |acot|) |INTRVL;acot;2%;41| (271 . <=) (277 . >=)
+              (283 . |acsc|) |INTRVL;acsc;2%;42| (288 . |asec|)
+              |INTRVL;asec;2%;43| (293 . |tanh|) |INTRVL;tanh;2%;44|
+              (298 . |sinh|) |INTRVL;sinh;2%;45| (303 . |negative?|)
+              (308 . |sech|) |INTRVL;sech;2%;46| (313 . |cosh|)
+              |INTRVL;cosh;2%;47| (318 . |csch|) |INTRVL;csch;2%;48|
+              (323 . |coth|) |INTRVL;coth;2%;49| (328 . |acosh|)
+              |INTRVL;acosh;2%;50| (333 . |acoth|) |INTRVL;acoth;2%;51|
+              (338 . |acsch|) |INTRVL;acsch;2%;52| (343 . |asech|)
+              |INTRVL;asech;2%;53| (348 . |asinh|) |INTRVL;asinh;2%;54|
+              (353 . |atanh|) |INTRVL;atanh;2%;55| (358 . ^) (364 . |interval|)
+              (370 . |max|) |INTRVL;^;%F%;56| (|String|)
+              (|SparseUnivariatePolynomial| %)
               (|Record| (|:| |llcm_res| %) (|:| |coeff1| %) (|:| |coeff2| %))
-              (|SparseUnivariatePolynomial| %))
-           '#(~= 361 |zero?| 367 |width| 372 |unitNormal| 377 |unitCanonical|
-              382 |unit?| 387 |tanh| 392 |tan| 397 |sup| 402 |subtractIfCan|
-              407 |sqrt| 413 |smaller?| 418 |sinh| 424 |sin| 429 |sech| 434
-              |sec| 439 |sample| 444 |rightRecip| 448 |rightPower| 453
-              |retractIfCan| 465 |retract| 470 |recip| 475 |qinterval| 480
-              |positive?| 486 |plenaryPower| 491 |pi| 497 |opposite?| 501
-              |one?| 507 |nthRoot| 512 |negative?| 518 |min| 523 |max| 529
-              |log| 535 |leftRecip| 540 |leftPower| 545 |lcmCoef| 557 |lcm| 563
-              |latex| 574 |interval| 579 |inf| 595 |gcdPolynomial| 600 |gcd|
-              606 |exquo| 617 |exp| 623 |csch| 628 |csc| 633 |coth| 638 |cot|
-              643 |cosh| 648 |cos| 653 |contains?| 658 |commutator| 664
-              |coerce| 670 |characteristic| 685 |atanh| 689 |atan| 694
-              |associator| 699 |associates?| 706 |asinh| 712 |asin| 717 |asech|
-              722 |asec| 727 |antiCommutator| 732 |annihilate?| 738 |acsch| 744
-              |acsc| 749 |acoth| 754 |acot| 759 |acosh| 764 |acos| 769 ^ 774
-              |Zero| 798 |One| 802 >= 806 > 812 = 818 <= 824 < 830 - 836 + 847
-              * 853)
+              (|Record| (|:| |unit| %) (|:| |canonical| %)
+                        (|:| |associate| %)))
+           '#(~= 376 |zero?| 382 |width| 387 |unitNormal| 392 |unitCanonical|
+              397 |unit?| 402 |tanh| 407 |tan| 412 |sup| 417 |subtractIfCan|
+              422 |sqrt| 428 |smaller?| 433 |sinh| 439 |sin| 444 |sech| 449
+              |sec| 454 |sample| 459 |rightRecip| 463 |rightPower| 468
+              |retractIfCan| 480 |retract| 485 |recip| 490 |qinterval| 495
+              |positive?| 501 |plenaryPower| 506 |pi| 512 |opposite?| 516
+              |one?| 522 |nthRoot| 527 |negative?| 533 |min| 538 |max| 544
+              |log| 550 |leftRecip| 555 |leftPower| 560 |lcmCoef| 572 |lcm| 578
+              |latex| 589 |inv| 594 |interval| 599 |inf| 615 |gcdPolynomial|
+              620 |gcd| 626 |exquo| 637 |exp| 643 |error?| 648 |csch| 653 |csc|
+              658 |coth| 663 |cot| 668 |cosh| 673 |cos| 678 |contains?| 683
+              |commutator| 695 |coerce| 701 |characteristic| 721 |atanh| 725
+              |atan| 730 |associator| 735 |associates?| 742 |asinh| 748 |asin|
+              753 |asech| 758 |asec| 763 |antiCommutator| 768 |annihilate?| 774
+              |acsch| 780 |acsc| 785 |acoth| 790 |acot| 795 |acosh| 800 |acos|
+              805 |abs| 810 ^ 815 |Zero| 839 |One| 843 >= 847 > 853 = 859 <=
+              865 < 871 / 877 - 883 + 894 * 906)
            'NIL
            (CONS
             (|makeByteWordVec2| 1
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0))
+                                  0 0 0))
             (CONS
-             '#(NIL |GcdDomain&| NIL NIL NIL |Algebra&| |EntireRing&| NIL NIL
-                |Rng&| |NonAssociativeAlgebra&| NIL |Module&|
-                |NonAssociativeRing&| NIL NIL |NonAssociativeRng&| NIL
-                |AbelianGroup&| NIL NIL NIL |AbelianMonoid&|
-                |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL |OrderedSet&|
+             '#(NIL |GcdDomain&| NIL NIL NIL |Algebra&| |EntireRing&| NIL
+                |AIntervalCategory&| |Rng&| NIL |NonAssociativeAlgebra&| NIL
+                |Module&| |NonAssociativeRing&| NIL |NonAssociativeRng&| NIL
+                NIL |AbelianGroup&| NIL NIL NIL |NonAssociativeSemiRng&|
+                |AbelianMonoid&| |MagmaWithUnit&| NIL |OrderedSet&|
                 |AbelianSemiGroup&| |Magma&| NIL |SetCategory&| NIL
                 |TranscendentalFunctionCategory&| |RetractableTo&| NIL
                 |BasicType&| NIL NIL NIL |PartialOrder&|
@@ -1179,70 +1043,73 @@
                 |RadicalCategory&| NIL NIL)
              (CONS
               '#((|IntervalCategory| 6) (|GcdDomain|) (|IntegralDomain|)
-                 (|LeftOreRing|) (|CommutativeRing|) (|Algebra| $$)
-                 (|EntireRing|) (|Ring|) (|SemiRing|) (|Rng|)
-                 (|NonAssociativeAlgebra| $$) (|SemiRng|) (|Module| $$)
-                 (|NonAssociativeRing|) (|BiModule| $$ $$) (|RightModule| $$)
-                 (|NonAssociativeRng|) (|LeftModule| $$) (|AbelianGroup|)
-                 (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
-                 (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
-                 (|MagmaWithUnit|) (|SemiGroup|) (|OrderedSet|)
-                 (|AbelianSemiGroup|) (|Magma|) (|Comparable|) (|SetCategory|)
-                 (|CommutativeStar|) (|TranscendentalFunctionCategory|)
-                 (|RetractableTo| 12) (|CoercibleTo| 81) (|BasicType|)
-                 (|unitsKnown|) (|TwoSidedRecip|) (|noZeroDivisors|)
-                 (|PartialOrder|) (|TrigonometricFunctionCategory|)
+                 (|CommutativeRing|) (|LeftOreRing|) (|Algebra| $$)
+                 (|EntireRing|) (|Ring|) (|AIntervalCategory| 6) (|Rng|)
+                 (|SemiRing|) (|NonAssociativeAlgebra| $$) (|SemiRng|)
+                 (|Module| $$) (|NonAssociativeRing|) (|BiModule| $$ $$)
+                 (|NonAssociativeRng|) (|RightModule| $$) (|LeftModule| $$)
+                 (|AbelianGroup|) (|CancellationAbelianMonoid|)
+                 (|NonAssociativeSemiRing|) (|Monoid|)
+                 (|NonAssociativeSemiRng|) (|AbelianMonoid|) (|MagmaWithUnit|)
+                 (|SemiGroup|) (|OrderedSet|) (|AbelianSemiGroup|) (|Magma|)
+                 (|Comparable|) (|SetCategory|) (|CommutativeStar|)
+                 (|TranscendentalFunctionCategory|) (|RetractableTo| 12)
+                 (|CoercibleTo| 64) (|BasicType|) (|unitsKnown|)
+                 (|TwoSidedRecip|) (|noZeroDivisors|) (|PartialOrder|)
+                 (|TrigonometricFunctionCategory|)
                  (|ArcTrigonometricFunctionCategory|)
                  (|HyperbolicFunctionCategory|)
                  (|ArcHyperbolicFunctionCategory|)
                  (|ElementaryFunctionCategory|) (|RadicalCategory|)
                  (|CoercibleFrom| 12) (|Approximate|))
-              (|makeByteWordVec2| 152
+              (|makeByteWordVec2| 143
                                   '(1 6 8 0 9 0 6 10 11 1 6 12 0 13 1 6 12 0 14
-                                    0 6 0 16 2 6 0 12 12 17 0 6 10 18 2 6 8 0 0
-                                    19 1 6 8 0 22 1 6 23 0 24 2 6 0 0 0 29 2 6
-                                    8 0 0 31 0 6 0 33 1 0 8 0 37 2 6 0 10 0 39
-                                    2 6 0 0 0 40 1 0 8 0 44 2 6 0 0 0 45 1 46 0
-                                    0 47 1 46 6 0 48 2 6 0 12 0 50 2 6 0 0 10
-                                    53 2 6 0 0 0 54 1 6 0 0 56 2 6 8 0 0 57 2 6
-                                    8 0 0 58 2 6 0 0 0 60 1 6 0 12 66 1 6 0 68
-                                    69 1 68 12 0 70 1 71 0 12 72 0 71 0 73 1 71
-                                    0 0 74 1 71 23 0 75 1 68 12 0 76 1 6 12 0
-                                    79 1 6 81 0 82 1 81 0 83 84 0 6 0 88 1 6 0
-                                    0 90 1 6 0 0 92 2 6 0 0 0 94 1 6 0 0 96 1 6
-                                    0 0 97 1 6 0 0 99 1 6 0 0 101 1 6 0 0 103 1
-                                    6 0 0 105 1 6 0 0 107 1 6 0 0 109 1 6 0 0
-                                    111 1 6 0 0 113 1 6 0 0 115 2 6 8 0 0 117 2
-                                    6 8 0 0 118 1 6 0 0 119 1 6 0 0 121 1 6 0 0
-                                    123 1 6 0 0 125 1 6 0 0 127 1 6 0 0 129 1 6
-                                    0 0 131 1 6 0 0 133 1 6 0 0 135 1 6 0 0 137
-                                    1 6 0 0 139 1 6 0 0 141 1 6 0 0 143 1 6 0 0
-                                    145 2 6 0 0 68 147 2 0 8 0 0 59 1 0 8 0 37
-                                    1 0 6 0 30 1 0 150 0 1 1 0 0 0 1 1 0 8 0 63
-                                    1 0 0 0 124 1 0 0 0 102 1 0 6 0 28 2 0 61 0
-                                    0 1 1 0 0 0 1 2 0 8 0 0 1 1 0 0 0 126 1 0 0
-                                    0 98 1 0 0 0 128 1 0 0 0 106 0 0 0 1 1 0 61
-                                    0 1 2 0 0 0 10 1 2 0 0 0 86 1 1 0 23 0 78 1
-                                    0 12 0 80 1 0 61 0 62 2 0 0 6 6 26 1 0 8 0
-                                    34 2 0 0 0 10 1 0 0 0 89 2 0 8 0 0 1 1 0 8
-                                    0 44 2 0 0 0 12 1 1 0 8 0 35 2 0 0 0 0 1 2
-                                    0 0 0 0 1 1 0 0 0 91 1 0 61 0 1 2 0 0 0 10
-                                    1 2 0 0 0 86 1 2 0 151 0 0 1 1 0 0 83 1 2 0
-                                    0 0 0 1 1 0 149 0 1 2 0 0 6 6 20 1 0 0 6 25
-                                    1 0 0 68 77 1 0 6 0 27 2 0 152 152 152 1 2
-                                    0 0 0 0 65 1 0 0 83 1 2 0 61 0 0 64 1 0 0 0
-                                    93 1 0 0 0 132 1 0 0 0 104 1 0 0 0 134 1 0
-                                    0 0 108 1 0 0 0 130 1 0 0 0 100 2 0 8 0 6
-                                    32 2 0 0 0 0 1 1 0 81 0 85 1 0 0 12 67 1 0
-                                    0 0 1 0 0 86 87 1 0 0 0 146 1 0 0 0 114 3 0
-                                    0 0 0 0 1 2 0 8 0 0 1 1 0 0 0 144 1 0 0 0
-                                    110 1 0 0 0 142 1 0 0 0 122 2 0 0 0 0 1 2 0
-                                    8 0 0 1 1 0 0 0 140 1 0 0 0 120 1 0 0 0 138
-                                    1 0 0 0 116 1 0 0 0 136 1 0 0 0 112 2 0 0 0
-                                    10 55 2 0 0 0 86 1 2 0 0 0 0 95 2 0 0 0 68
-                                    148 0 0 0 21 0 0 0 15 2 0 8 0 0 1 2 0 8 0 0
-                                    1 2 0 8 0 0 38 2 0 8 0 0 1 2 0 8 0 0 36 2 0
-                                    0 0 0 43 1 0 0 0 42 2 0 0 0 0 41 2 0 0 10 0
-                                    52 2 0 0 0 0 49 2 0 0 12 0 51 2 0 0 86 0
-                                    1)))))
+                                    0 6 0 16 2 6 0 12 12 17 0 6 10 18 1 6 8 0
+                                    20 1 6 21 0 22 2 6 8 0 0 27 2 6 8 0 0 28 1
+                                    6 0 0 30 2 6 8 0 0 32 2 6 8 0 0 34 0 6 0 36
+                                    2 0 8 0 6 37 2 6 0 0 0 38 1 39 0 0 40 1 39
+                                    6 0 41 1 0 8 0 44 1 0 8 0 45 1 6 0 12 48 1
+                                    6 0 50 51 1 50 12 0 52 1 53 0 12 54 0 53 0
+                                    55 1 53 0 0 56 1 53 21 0 57 1 50 12 0 58 1
+                                    0 6 0 60 1 6 12 0 62 1 6 64 0 65 1 64 0 66
+                                    67 0 6 0 71 1 0 8 0 73 1 6 0 0 74 1 6 0 0
+                                    76 2 6 0 0 0 78 2 6 0 0 0 80 2 6 0 10 0 81
+                                    1 6 0 0 82 2 6 0 12 0 83 2 6 0 0 0 84 1 6 0
+                                    0 85 1 6 0 0 87 1 6 0 0 89 1 6 0 0 91 1 6 0
+                                    0 93 1 6 0 0 95 1 6 0 0 97 1 6 0 0 99 1 6 0
+                                    0 101 1 6 0 0 103 2 6 8 0 0 105 2 6 8 0 0
+                                    106 1 6 0 0 107 1 6 0 0 109 1 6 0 0 111 1 6
+                                    0 0 113 1 0 8 0 115 1 6 0 0 116 1 6 0 0 118
+                                    1 6 0 0 120 1 6 0 0 122 1 6 0 0 124 1 6 0 0
+                                    126 1 6 0 0 128 1 6 0 0 130 1 6 0 0 132 1 6
+                                    0 0 134 2 6 0 0 50 136 2 0 0 6 6 137 2 6 0
+                                    0 0 138 2 0 8 0 0 35 1 0 8 0 45 1 2 6 0 60
+                                    1 0 143 0 1 1 0 0 0 1 1 0 8 0 1 1 0 0 0 112
+                                    1 0 0 0 90 1 0 6 0 26 2 0 42 0 0 1 1 0 0 0
+                                    1 2 0 8 0 0 1 1 0 0 0 114 1 0 0 0 86 1 0 0
+                                    0 117 1 0 0 0 94 0 0 0 1 1 0 42 0 1 2 0 0 0
+                                    69 1 2 0 0 0 10 1 1 0 21 0 61 1 0 12 0 63 1
+                                    0 42 0 43 2 0 0 6 6 24 1 1 8 0 73 2 0 0 0
+                                    10 1 0 0 0 72 2 0 8 0 0 1 1 0 8 0 44 2 0 0
+                                    0 12 1 1 1 8 0 115 2 0 0 0 0 1 2 0 0 0 0 1
+                                    1 0 0 0 75 1 0 42 0 1 2 0 0 0 69 1 2 0 0 0
+                                    10 1 2 0 142 0 0 1 1 0 0 66 1 2 0 0 0 0 1 1
+                                    0 140 0 1 1 4 0 0 1 2 0 0 6 6 137 1 0 0 6
+                                    23 1 0 0 50 59 1 0 6 0 25 2 0 141 141 141 1
+                                    1 0 0 66 1 2 0 0 0 0 47 2 0 42 0 0 46 1 0 0
+                                    0 77 1 0 8 0 1 1 0 0 0 121 1 0 0 0 92 1 0 0
+                                    0 123 1 0 0 0 96 1 0 0 0 119 1 0 0 0 88 2 0
+                                    8 0 6 37 2 0 8 0 0 1 2 0 0 0 0 1 1 0 64 0
+                                    68 1 0 39 0 1 1 0 0 0 1 1 0 0 12 49 0 0 69
+                                    70 1 0 0 0 135 1 0 0 0 102 3 0 0 0 0 0 1 2
+                                    0 8 0 0 1 1 0 0 0 133 1 0 0 0 98 1 0 0 0
+                                    131 1 0 0 0 110 2 0 0 0 0 1 2 0 8 0 0 1 1 0
+                                    0 0 129 1 0 0 0 108 1 0 0 0 127 1 0 0 0 104
+                                    1 0 0 0 125 1 0 0 0 100 1 2 0 0 1 2 0 0 0
+                                    69 1 2 0 0 0 10 1 2 0 0 0 0 79 2 0 0 0 50
+                                    139 0 0 0 19 0 0 0 15 2 0 8 0 0 1 2 0 8 0 0
+                                    1 2 0 8 0 0 33 2 0 8 0 0 1 2 0 8 0 0 29 2 4
+                                    0 0 0 1 1 0 0 0 31 2 0 0 0 0 1 2 0 0 0 0 1
+                                    2 0 0 0 6 1 2 0 0 10 0 1 2 0 0 69 0 1 2 0 0
+                                    12 0 1 2 0 0 0 0 1 2 3 0 6 0 1)))))
            '|lookupComplete|)) 

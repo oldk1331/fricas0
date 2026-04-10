@@ -99,7 +99,7 @@
                                  "WARNING: options are - redcrit and/or info - "
                                  (QREFELT % 38))
                                 (SPADCALL
-                                 "         you didn't type them correct"
+                                 "         you didn't type them correctly"
                                  (QREFELT % 38))
                                 (SPADCALL "         please try again"
                                           (QREFELT % 38))

@@ -1570,3 +1570,32 @@
                  (SETQ |i| (+ |i| 1))))
               (- |n| 1) 1)
              (COND (|ok| |c|) (#1# NIL))))))))
+
+; MAKE_REASONABLE(s) ==
+;     30 < #s => CONCAT('"expression beginning ", SUBSEG(s, 0, 20))
+;     s
+
+(DEFUN MAKE_REASONABLE (|s|)
+  (PROG ()
+    (RETURN
+     (COND
+      ((< 30 (LENGTH |s|)) (CONCAT "expression beginning " (SUBSEG |s| 0 20)))
+      ('T |s|)))))
+
+; SUBLISLIS(newl, oldl, form) ==
+;     SUBLIS(MAPCAR(FUNCTION CONS, oldl, newl), form)
+
+(DEFUN SUBLISLIS (|newl| |oldl| |form|)
+  (PROG () (RETURN (SUBLIS (MAPCAR #'CONS |oldl| |newl|) |form|))))
+
+; BLANKS(n) ==
+;     for i in 1..n repeat
+;         PRINC(" ")
+
+(DEFUN BLANKS (|n|)
+  (PROG ()
+    (RETURN
+     ((LAMBDA (|i|)
+        (LOOP (COND ((> |i| |n|) (RETURN NIL)) ('T (PRINC '| |)))
+              (SETQ |i| (+ |i| 1))))
+      1))))

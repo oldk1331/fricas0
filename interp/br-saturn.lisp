@@ -591,7 +591,6 @@
 ;   parts := dbXParts(line,7,1)
 ;   [kind,name,nargs,xflag,sig,args,abbrev,comments] := parts
 ;   form := IFCAR options
-;   isFile := null kind
 ;   kind := kind or '"package"
 ;   RPLACA(parts,kind)
 ;   conform         := mkConform(kind,name,args)
@@ -627,8 +626,8 @@
 
 (DEFUN |kPage| (|line| |options|)
   (PROG (|parts| |kind| |name| |nargs| |xflag| |sig| |args| |abbrev| |comments|
-         |form| |isFile| |conform| |conname| |capitalKind| |signature|
-         |constrings| |emString| |heading| |page|)
+         |form| |conform| |conname| |capitalKind| |signature| |constrings|
+         |emString| |heading| |page|)
     (RETURN
      (PROGN
       (SETQ |parts| (|dbXParts| |line| 7 1))
@@ -641,7 +640,6 @@
       (SETQ |abbrev| (CADDR . #3#))
       (SETQ |comments| (CADDDR . #3#))
       (SETQ |form| (IFCAR |options|))
-      (SETQ |isFile| (NULL |kind|))
       (SETQ |kind| (OR |kind| "package"))
       (RPLACA |parts| |kind|)
       (SETQ |conform| (|mkConform| |kind| |name| |args|))
@@ -1506,11 +1504,7 @@
 
 ; displayDomainOp(htPage, which, origin, op, sig, predicate,
 ;                 doc, index, chooseFn, unexposed?, $generalSearch?) ==
-;   $chooseDownCaseOfType : local := true   --see dbGetContrivedForm
 ;   $whereList  : local := nil
-;   $NumberList : local := '(i j k l m n i1 j1 k1 l1 m1 n1 i2 j2 k2 l2 m2 n2 i3 j3 k3 l3 m3 n3 i4 j4 k4 l4 m4 n4 )
-;   $ElementList: local := '(x y z u v w x1 y1 z1 u1 v1 w1 x2 y2 z2 u2 v2 w2 x3 y3 z3 u3 v3 w3 x4 y4 z4 u4 v4 w4 )
-;   $FunctionList:local := '(f g h d e F G H)
 ;   $DomainList:  local := '(D R S E T A B C M N P Q U V W)
 ;   exactlyOneOpSig     := null index
 ;   conform   := htpProperty(htPage,'domname) or htpProperty(htPage,'conform)
@@ -1518,7 +1512,7 @@
 ;   if $generalSearch? then $DomainList := rest $DomainList
 ;   opform :=
 ;     which = '"constructor" => origin
-;     dbGetDisplayFormForOp(op,sig,doc)
+;     dbGetDisplayFormForOp(op, sig, doc)
 ;   htSayStandard('"\newline")
 ;   -----------------------------------------------------------
 ;   if exactlyOneOpSig then
@@ -1660,28 +1654,16 @@
         |chooseFn| |unexposed?| |$generalSearch?|)
   (DECLARE (SPECIAL |$generalSearch?|))
   (PROG (|$displayReturnValue| |$signature| |$conargs| |$conform| |$conlength|
-         |$conkind| |$DomainList| |$FunctionList| |$ElementList| |$NumberList|
-         |$whereList| |$chooseDownCaseOfType| |abbr| |ndoc| |t| |key| |ISTMP#1|
-         |d| |count| |pred| |relatives| |position| |coSig| |symbolsUsed|
-         |tvarlist| |conname| |constring| |n| |ops| |args| |opform| |conform|
-         |exactlyOneOpSig|)
+         |$conkind| |$DomainList| |$whereList| |abbr| |ndoc| |t| |key|
+         |ISTMP#1| |d| |count| |pred| |relatives| |position| |coSig|
+         |symbolsUsed| |tvarlist| |conname| |constring| |n| |ops| |args|
+         |opform| |conform| |exactlyOneOpSig|)
     (DECLARE
      (SPECIAL |$displayReturnValue| |$signature| |$conargs| |$conform|
-      |$conlength| |$conkind| |$DomainList| |$FunctionList| |$ElementList|
-      |$NumberList| |$whereList| |$chooseDownCaseOfType|))
+      |$conlength| |$conkind| |$DomainList| |$whereList|))
     (RETURN
      (PROGN
-      (SETQ |$chooseDownCaseOfType| T)
       (SETQ |$whereList| NIL)
-      (SETQ |$NumberList|
-              '(|i| |j| |k| |l| |m| |n| |i1| |j1| |k1| |l1| |m1| |n1| |i2| |j2|
-                |k2| |l2| |m2| |n2| |i3| |j3| |k3| |l3| |m3| |n3| |i4| |j4|
-                |k4| |l4| |m4| |n4|))
-      (SETQ |$ElementList|
-              '(|x| |y| |z| |u| |v| |w| |x1| |y1| |z1| |u1| |v1| |w1| |x2| |y2|
-                |z2| |u2| |v2| |w2| |x3| |y3| |z3| |u3| |v3| |w3| |x4| |y4|
-                |z4| |u4| |v4| |w4|))
-      (SETQ |$FunctionList| '(|f| |g| |h| |d| |e| F G H))
       (SETQ |$DomainList| '(D R S E T A B C M N P Q U V W))
       (SETQ |exactlyOneOpSig| (NULL |index|))
       (SETQ |conform|

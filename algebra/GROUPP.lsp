@@ -944,8 +944,8 @@
 
 (SDEFUN |GROUPP;isSimpler?| ((|a| (%)) (|b| (%)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G286 NIL) (|relationCompleityB| #2=(|NonNegativeInteger|))
-          (#3=#:G288 NIL) (|rel| NIL) (|relationCompleityA| #2#)
+         ((#1=#:G286 NIL) (|relationComplexityB| #2=(|NonNegativeInteger|))
+          (#3=#:G288 NIL) (|rel| NIL) (|relationComplexityA| #2#)
           (#4=#:G287 NIL) (|relsb| #5=(|List| (|List| (|Integer|))))
           (|gensb| #6=(|PrimitiveArray| (|NonNegativeInteger|))) (|relsa| #5#)
           (|gensa| #6#))
@@ -960,28 +960,28 @@
                 (COND
                  ((< (LENGTH |relsa|) (LENGTH |relsb|))
                   (PROGN (LETT #1# 'T) (GO #7#))))
-                (LETT |relationCompleityA| 0)
+                (LETT |relationComplexityA| 0)
                 (SEQ (LETT |rel| NIL) (LETT #4# |relsa|) G190
                      (COND
                       ((OR (ATOM #4#) (PROGN (LETT |rel| (CAR #4#)) NIL))
                        (GO G191)))
                      (SEQ
                       (EXIT
-                       (LETT |relationCompleityA|
-                             (+ |relationCompleityA| (LENGTH |rel|)))))
+                       (LETT |relationComplexityA|
+                             (+ |relationComplexityA| (LENGTH |rel|)))))
                      (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT NIL))
-                (LETT |relationCompleityB| 0)
+                (LETT |relationComplexityB| 0)
                 (SEQ (LETT |rel| NIL) (LETT #3# |relsb|) G190
                      (COND
                       ((OR (ATOM #3#) (PROGN (LETT |rel| (CAR #3#)) NIL))
                        (GO G191)))
                      (SEQ
                       (EXIT
-                       (LETT |relationCompleityB|
-                             (+ |relationCompleityB| (LENGTH |rel|)))))
+                       (LETT |relationComplexityB|
+                             (+ |relationComplexityB| (LENGTH |rel|)))))
                      (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
                 (COND
-                 ((< |relationCompleityA| |relationCompleityB|)
+                 ((< |relationComplexityA| |relationComplexityB|)
                   (PROGN (LETT #1# 'T) (GO #7#))))
                 (EXIT NIL)))
           #7# (EXIT #1#)))) 
@@ -1350,7 +1350,7 @@
                            NIL (GO G190) G191 (EXIT NIL))
                       (EXIT |pj|))))))) 
 
-(SDEFUN |GROUPP;infer_coincidencies|
+(SDEFUN |GROUPP;infer_coincidences|
         ((|ct| (|TwoDimensionalArray| (|NonNegativeInteger|)))
          (|et| (|OneDimensionalArray| (|NonNegativeInteger|)))
          (|pb| #1=(|NonNegativeInteger|)) (|pe| #2=(|NonNegativeInteger|))
@@ -1406,7 +1406,7 @@
                                            (EXIT
                                             (COND ((EQL |i1| |i2|) "skip")
                                                   ('T
-                                                   (|GROUPP;infer_coincidencies|
+                                                   (|GROUPP;infer_coincidences|
                                                     |ct| |et| |i1| |i2| |trace|
                                                     %)))))))))))))
                 (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL)))))) 
@@ -2198,7 +2198,7 @@
                                                                            %
                                                                            54))))
                                                                        (EXIT
-                                                                        (|GROUPP;infer_coincidencies|
+                                                                        (|GROUPP;infer_coincidences|
                                                                          |ct|
                                                                          |et|
                                                                          |pe|
@@ -2336,7 +2336,7 @@
                                                                            %
                                                                            54))))
                                                                        (EXIT
-                                                                        (|GROUPP;infer_coincidencies|
+                                                                        (|GROUPP;infer_coincidences|
                                                                          |ct|
                                                                          |et|
                                                                          |pb|
@@ -2407,7 +2407,7 @@
                                                              (QREFELT % 42))
                                                             (QREFELT % 54))))
                                                          (EXIT
-                                                          (|GROUPP;infer_coincidencies|
+                                                          (|GROUPP;infer_coincidences|
                                                            |ct| |et| |pb| |pe|
                                                            |trace| %))))))
                                                      ('T

@@ -33,28 +33,14 @@
                                                  (|BiModule| '|t#3| '|t#3|)
                                                  (|HomogeneousAggregate|
                                                   '|t#3|)
+                                                 (|MatrixOperationsCategory|
+                                                  '|t#3| '|t#4| '|t#5|)
                                                  (|finiteAggregate|)
                                                  (|mkCategory|
                                                   '(((|matrix|
                                                       (%
                                                        (|List|
                                                         (|List| |t#3|))))
-                                                     T)
-                                                    ((|square?|
-                                                      ((|Boolean|) %))
-                                                     T)
-                                                    ((|diagonal?|
-                                                      ((|Boolean|) %))
-                                                     T)
-                                                    ((|symmetric?|
-                                                      ((|Boolean|) %))
-                                                     T)
-                                                    ((|antisymmetric?|
-                                                      ((|Boolean|) %))
-                                                     (|has| |t#3|
-                                                            (|AbelianGroup|)))
-                                                    ((|antisymmetric?|
-                                                      ((|Boolean|) %))
                                                      T)
                                                     ((|minRowIndex|
                                                       ((|Integer|) %))
@@ -100,43 +86,10 @@
                                                      T)
                                                     ((|map|
                                                       (%
-                                                       (|Mapping| |t#3| |t#3|)
-                                                       %))
-                                                     T)
-                                                    ((|map|
-                                                      (%
                                                        (|Mapping| |t#3| |t#3|
                                                                   |t#3|)
                                                        % %))
-                                                     T)
-                                                    ((|exquo|
-                                                      ((|Union| % "failed") %
-                                                       |t#3|))
-                                                     (|has| |t#3|
-                                                            (|IntegralDomain|)))
-                                                    ((/ (% % |t#3|))
-                                                     (|has| |t#3| (|Field|)))
-                                                    ((|rowEchelon| (% %))
-                                                     (|has| |t#3|
-                                                            (|EuclideanDomain|)))
-                                                    ((|columnSpace|
-                                                      ((|List| |t#5|) %))
-                                                     (|has| |t#3|
-                                                            (|EuclideanDomain|)))
-                                                    ((|rank|
-                                                      ((|NonNegativeInteger|)
-                                                       %))
-                                                     (|has| |t#3|
-                                                            (|IntegralDomain|)))
-                                                    ((|nullity|
-                                                      ((|NonNegativeInteger|)
-                                                       %))
-                                                     (|has| |t#3|
-                                                            (|IntegralDomain|)))
-                                                    ((|nullSpace|
-                                                      ((|List| |t#5|) %))
-                                                     (|has| |t#3|
-                                                            (|IntegralDomain|))))
+                                                     T))
                                                   '(((|Finite|)
                                                      (|has| |t#3| (|Finite|)))
                                                     ((|Module| |t#3|)

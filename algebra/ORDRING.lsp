@@ -7,14 +7,9 @@
   (COND (|OrderedRing;AL|) (T (SETQ |OrderedRing;AL| (|OrderedRing;|))))) 
 
 (DEFUN |OrderedRing;| ()
-  (SPROG ((#1=#:G6 NIL))
+  (SPROG ((#1=#:G0 NIL))
          (PROG1
              (LETT #1#
-                   (|Join| (|OrderedAbelianGroup|) (|Ring|)
-                           (|CharacteristicZero|)
-                           (|mkCategory|
-                            '(((|positive?| ((|Boolean|) %)) T)
-                              ((|negative?| ((|Boolean|) %)) T)
-                              ((|sign| ((|Integer|) %)) T) ((|abs| (% %)) T))
-                            NIL NIL NIL)))
+                   (|Join| (|OrderedAbelianGroup|) (|OrderedMonoid|) (|Ring|)
+                           (|CharacteristicZero|)))
            (SETELT #1# 0 '(|OrderedRing|))))) 

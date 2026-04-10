@@ -49,10 +49,10 @@
         (SPADCALL (SPADCALL |x| |y| (QREFELT % 20)) (QREFELT % 21))) 
 
 (SDEFUN |DBASE;-;3%;5| ((|x| (%)) (|y| (%)) (% (%)))
-        (SPADCALL (SPADCALL |x| (QREFELT % 24)) |y| (QREFELT % 26))) 
+        (SPADCALL |x| |y| (QREFELT % 24))) 
 
 (SDEFUN |DBASE;coerce;%Of;6| ((|data| (%)) (% (|OutputForm|)))
-        (SPADCALL (LENGTH |data|) (QREFELT % 30))) 
+        (SPADCALL (LENGTH |data|) (QREFELT % 28))) 
 
 (SDEFUN |DBASE;display;%V;7| ((|data| (%)) (% (|Void|)))
         (SPROG ((#1=#:G19 NIL) (|x| NIL))
@@ -60,7 +60,7 @@
                     (COND
                      ((OR (ATOM #1#) (PROGN (LETT |x| (CAR #1#)) NIL))
                       (GO G191)))
-                    (SEQ (EXIT (SPADCALL |x| (QREFELT % 33))))
+                    (SEQ (EXIT (SPADCALL |x| (QREFELT % 31))))
                     (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL)))) 
 
 (SDEFUN |DBASE;fullDisplay;%V;8| ((|data| (%)) (% (|Void|)))
@@ -69,7 +69,7 @@
                     (COND
                      ((OR (ATOM #1#) (PROGN (LETT |x| (CAR #1#)) NIL))
                       (GO G191)))
-                    (SEQ (EXIT (SPADCALL |x| (QREFELT % 35))))
+                    (SEQ (EXIT (SPADCALL |x| (QREFELT % 33))))
                     (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL)))) 
 
 (SDEFUN |DBASE;fullDisplay;%2PiV;9|
@@ -84,7 +84,7 @@
                       (GO G191)))
                     (SEQ
                      (EXIT
-                      (COND ((>= |i| |n|) (SPADCALL |x| (QREFELT % 35))))))
+                      (COND ((>= |i| |n|) (SPADCALL |x| (QREFELT % 33))))))
                     (LETT #1# (PROG1 (CDR #1#) (LETT |i| (|inc_SI| |i|))))
                     (GO G190) G191 (EXIT NIL)))) 
 
@@ -95,7 +95,7 @@
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Database| DV$1))
-          (LETT % (GETREFV 40))
+          (LETT % (GETREFV 38))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|Database| (LIST DV$1) (CONS 1 %))
@@ -127,28 +127,27 @@
               (|DataList| 9) (6 . |coerce|) |DBASE;elt;%SDl;2|
               (|QueryEquation|) (11 . |variable|) (16 . |value|)
               |DBASE;elt;%Qe%;3| (21 . |merge|) (27 . |removeDuplicates!|)
-              |DBASE;+;3%;4| (32 . |copy|) (37 . |copy|) (|MergeThing| 6)
-              (42 . |mergeDifference|) |DBASE;-;3%;5| (|OutputForm|)
-              (|NonNegativeInteger|) (48 . |coerce|) |DBASE;coerce;%Of;6|
-              (|Void|) (53 . |display|) |DBASE;display;%V;7|
-              (58 . |fullDisplay|) |DBASE;fullDisplay;%V;8| (|PositiveInteger|)
+              |DBASE;+;3%;4| (|MergeThing| 6) (32 . |mergeDifference|)
+              |DBASE;-;3%;5| (|OutputForm|) (|NonNegativeInteger|)
+              (38 . |coerce|) |DBASE;coerce;%Of;6| (|Void|) (43 . |display|)
+              |DBASE;display;%V;7| (48 . |fullDisplay|)
+              |DBASE;fullDisplay;%V;8| (|PositiveInteger|)
               |DBASE;fullDisplay;%2PiV;9| (|Boolean|))
-           '#(~= 63 |latex| 69 |fullDisplay| 74 |elt| 86 |display| 98 |coerce|
-              103 = 113 - 119 + 125)
+           '#(~= 53 |latex| 59 |fullDisplay| 64 |elt| 76 |display| 88 |coerce|
+              93 = 103 - 109 + 115)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
                  (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|CoercibleTo| 28) (|BasicType|))
-                        (|makeByteWordVec2| 39
+                        '#((|SetCategory|) (|CoercibleTo| 26) (|BasicType|))
+                        (|makeByteWordVec2| 37
                                             '(2 6 9 0 10 11 1 13 0 12 14 1 16
                                               10 0 17 1 16 9 0 18 2 7 0 0 0 20
-                                              1 7 0 0 21 1 7 0 0 23 1 5 0 0 24
-                                              2 25 5 5 5 26 1 29 28 0 30 1 6 32
-                                              0 33 1 6 32 0 35 2 0 39 0 0 1 1 0
-                                              9 0 1 1 0 32 0 36 3 0 32 0 37 37
-                                              38 2 0 0 0 16 19 2 0 13 0 10 15 1
-                                              0 32 0 34 1 0 28 0 31 1 0 0 5 8 2
-                                              0 39 0 0 1 2 0 0 0 0 27 2 0 0 0 0
-                                              22)))))
+                                              1 7 0 0 21 2 23 5 5 5 24 1 27 26
+                                              0 28 1 6 30 0 31 1 6 30 0 33 2 0
+                                              37 0 0 1 1 0 9 0 1 1 0 30 0 34 3
+                                              0 30 0 35 35 36 2 0 0 0 16 19 2 0
+                                              13 0 10 15 1 0 30 0 32 1 0 26 0
+                                              29 1 0 0 5 8 2 0 37 0 0 1 2 0 0 0
+                                              0 25 2 0 0 0 0 22)))))
            '|lookupComplete|)) 

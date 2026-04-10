@@ -259,12 +259,12 @@
               |hashUpdate!| 509 |hash| 515 |flexible?| 520 |eval| 524
               |enumerate| 564 |elt| 568 |coordinates| 580 |convert| 602
               |conjugate| 617 |conditionsForIdempotents| 622 |commutator| 631
-              |commutative?| 637 |coerce| 641 |charthRoot| 666 |characteristic|
-              671 |basis| 675 |associatorDependence| 679 |associator| 683
-              |associative?| 690 |apply| 694 |antiCommutator| 700
-              |antiCommutative?| 706 |antiAssociative?| 710 |annihilate?| 714
-              |alternative?| 720 |abs| 724 ^ 729 |Zero| 741 |One| 745 >= 749 >
-              755 = 761 <= 767 < 773 - 779 + 790 * 796)
+              |commutative?| 637 |coerce| 641 |characteristic| 666 |basis| 670
+              |associatorDependence| 674 |associator| 678 |associative?| 685
+              |apply| 689 |antiCommutator| 695 |antiCommutative?| 701
+              |antiAssociative?| 705 |annihilate?| 709 |alternative?| 715 |abs|
+              719 ^ 724 |Zero| 736 |One| 740 >= 744 > 750 = 756 <= 762 < 768 -
+              774 + 785 * 791)
            'NIL
            (CONS
             (|makeByteWordVec2| 15
@@ -341,13 +341,13 @@
                                     0 49 47 1 1 0 51 0 1 1 0 0 51 1 1 6 58 0 1
                                     1 0 0 0 1 1 0 48 47 1 0 0 48 1 2 0 0 0 0 1
                                     0 0 31 1 1 0 41 0 1 1 0 0 6 1 1 0 0 10 30 1
-                                    19 0 44 1 1 12 0 55 1 1 3 45 0 1 0 5 46 1 0
-                                    0 47 1 0 14 68 1 3 0 0 0 0 0 1 0 0 31 1 2 0
-                                    0 49 0 1 2 0 0 0 0 1 0 0 31 1 0 0 31 1 2 5
-                                    31 0 0 1 0 0 31 1 1 16 6 0 1 2 0 0 0 43 1 2
-                                    5 0 0 46 1 0 0 0 8 0 5 0 14 2 7 31 0 0 1 2
-                                    7 31 0 0 1 2 0 31 0 0 1 2 7 31 0 0 1 2 7 31
-                                    0 0 1 2 0 0 0 0 1 1 0 0 0 1 2 0 0 0 0 1 2 0
-                                    0 43 0 1 2 0 0 0 0 40 2 0 0 44 0 1 2 0 0 46
-                                    0 1 2 0 0 6 0 1 2 0 0 0 6 1)))))
+                                    19 0 44 1 1 12 0 55 1 0 5 46 1 0 0 47 1 0
+                                    14 68 1 3 0 0 0 0 0 1 0 0 31 1 2 0 0 49 0 1
+                                    2 0 0 0 0 1 0 0 31 1 0 0 31 1 2 5 31 0 0 1
+                                    0 0 31 1 1 16 6 0 1 2 0 0 0 43 1 2 5 0 0 46
+                                    1 0 0 0 8 0 5 0 14 2 7 31 0 0 1 2 7 31 0 0
+                                    1 2 0 31 0 0 1 2 7 31 0 0 1 2 7 31 0 0 1 2
+                                    0 0 0 0 1 1 0 0 0 1 2 0 0 0 0 1 2 0 0 43 0
+                                    1 2 0 0 0 0 40 2 0 0 44 0 1 2 0 0 46 0 1 2
+                                    0 0 6 0 1 2 0 0 0 6 1)))))
            '|lookupComplete|)) 

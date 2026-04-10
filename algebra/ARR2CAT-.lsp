@@ -2115,7 +2115,7 @@
                 ('T
                  (SEQ (LETT |m| (LENGTH |ll|))
                       (LETT |n| (LENGTH (|SPADfirst| |ll|)))
-                      (LETT |a2| (SPADCALL |n| |m| (QREFELT % 37)))
+                      (LETT |a2| (SPADCALL |m| |n| (QREFELT % 37)))
                       (SEQ (LETT |l| NIL) (LETT #4# |ll|)
                            (LETT |i| (SPADCALL |a2| (QREFELT % 11)))
                            (LETT #3# (SPADCALL |a2| (QREFELT % 12))) G190

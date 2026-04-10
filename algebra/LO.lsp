@@ -139,16 +139,18 @@
               (|OutputForm|) (71 . |coerce|) (76 . |coerce|) (81 . /)
               |LO;coerce;%Of;13| (|String|) (|PositiveInteger|)
               (|Union| % '"failed") (|NonNegativeInteger|))
-           '#(~= 87 |zero?| 93 |subtractIfCan| 98 |smaller?| 104 |sample| 110
-              |opposite?| 114 |numer| 120 |min| 125 |max| 131 |latex| 137
-              |denom| 142 |coerce| 147 |Zero| 152 >= 156 > 162 = 168 <= 174 <
-              180 / 186 - 198 + 209 * 215)
+           '#(~= 87 |zero?| 93 |subtractIfCan| 98 |smaller?| 104 |sign| 110
+              |sample| 115 |positive?| 119 |opposite?| 124 |numer| 130
+              |negative?| 135 |min| 140 |max| 146 |latex| 152 |denom| 157
+              |coerce| 162 |abs| 167 |Zero| 172 >= 176 > 182 = 188 <= 194 < 200
+              / 206 - 218 + 229 * 235)
            'NIL
            (CONS (|makeByteWordVec2| 3 '(0 1 0 1 0 0 3 1 3 1 2 1 1 0 0 1 0 0))
                  (CONS
-                  '#(|Module&| NIL NIL NIL NIL NIL |AbelianGroup&| NIL NIL NIL
-                     |AbelianMonoid&| |OrderedSet&| NIL |AbelianSemiGroup&|
-                     |SetCategory&| |PartialOrder&| NIL |BasicType&|)
+                  '#(|Module&| |OrderedAbelianGroup&| NIL NIL NIL NIL
+                     |AbelianGroup&| NIL NIL NIL |AbelianMonoid&| |OrderedSet&|
+                     NIL |AbelianSemiGroup&| |SetCategory&| |PartialOrder&| NIL
+                     |BasicType&|)
                   (CONS
                    '#((|Module| 7) (|OrderedAbelianGroup|) (|BiModule| 7 7)
                       (|OrderedCancellationAbelianMonoid|) (|RightModule| 7)
@@ -165,13 +167,14 @@
                                          0 0 25 2 6 0 27 0 28 2 7 12 0 0 30 1 7
                                          12 0 32 1 6 35 0 36 1 7 35 0 37 2 35 0
                                          0 0 38 2 0 12 0 0 1 1 4 12 0 14 2 3 42
-                                         0 0 1 2 1 12 0 0 1 0 4 0 1 2 4 12 0 0
-                                         1 1 0 6 0 20 2 1 0 0 0 1 2 1 0 0 0 1 1
-                                         0 40 0 1 1 0 7 0 21 1 0 35 0 39 0 4 0
-                                         9 2 1 12 0 0 1 2 1 12 0 0 1 2 0 12 0 0
-                                         19 2 1 12 0 0 1 2 1 12 0 0 23 2 0 0 0
-                                         7 33 2 0 0 6 7 34 2 3 0 0 0 1 1 3 0 0
-                                         16 2 0 0 0 0 26 2 0 0 41 0 1 2 0 0 7 0
-                                         31 2 0 0 0 7 1 2 3 0 27 0 29 2 4 0 43
-                                         0 1)))))
+                                         0 0 1 2 1 12 0 0 1 1 1 27 0 1 0 4 0 1
+                                         1 1 12 0 1 2 4 12 0 0 1 1 0 6 0 20 1 1
+                                         12 0 1 2 1 0 0 0 1 2 1 0 0 0 1 1 0 40
+                                         0 1 1 0 7 0 21 1 0 35 0 39 1 1 0 0 1 0
+                                         4 0 9 2 1 12 0 0 1 2 1 12 0 0 1 2 0 12
+                                         0 0 19 2 1 12 0 0 1 2 1 12 0 0 23 2 0
+                                         0 6 7 34 2 0 0 0 7 33 1 3 0 0 16 2 3 0
+                                         0 0 1 2 0 0 0 0 26 2 0 0 41 0 1 2 0 0
+                                         0 7 1 2 0 0 7 0 31 2 3 0 27 0 29 2 4 0
+                                         43 0 1)))))
            '|lookupComplete|)) 

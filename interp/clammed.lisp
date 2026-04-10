@@ -92,7 +92,9 @@
 ;       and/[isValidType type for [:.,type] in args]
 ;     null (and/[isValidType arg for arg in args]) => NIL
 ;     ((# args) = (# REMDUP args)) => true
-;     sayKeyedMsg("S2IR0005",[form])
+;     say_msg("S2IR0005", CONCAT(
+;         '"The type %1bp is not valid because unions cannot include",
+;         '" the same type more than once."), [form])
 ;     NIL
 ;
 ;   badDoubles := CONS($QuotientField, '(Complex Polynomial Expression))
@@ -218,7 +220,14 @@
                 T |args| NIL))
               NIL)
              ((EQL (LENGTH |args|) (LENGTH (REMDUP |args|))) T)
-             (#1# (PROGN (|sayKeyedMsg| 'S2IR0005 (LIST |form|)) NIL))))
+             (#1#
+              (PROGN
+               (|say_msg| 'S2IR0005
+                (CONCAT
+                 "The type %1bp is not valid because unions cannot include"
+                 " the same type more than once.")
+                (LIST |form|))
+               NIL))))
            (#1#
             (PROGN
              (SETQ |badDoubles|

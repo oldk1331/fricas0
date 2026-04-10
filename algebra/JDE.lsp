@@ -975,7 +975,7 @@
                                   (EXIT (NREVERSE #18#))))
                             NIL NIL 0))
               (LETT |pSys| (LIST |pRec|)) (LETT |pOrd| (LIST (+ |q| 1)))
-              (LETT |lastRec| (MOVEVEC (MAKE_VEC 7) |rec|))
+              (LETT |lastRec| (REPLACE (MAKEARR1 7 NIL) |rec|))
               (QSETVELT |lastRec| 3
                         (PROGN
                          (LETT #16# NIL)
@@ -1120,7 +1120,7 @@
                                (LETT |pSys| (CONS |pRec| |pSys|))
                                (EXIT
                                 (LETT |pOrd| (CONS |lastOrd| |pOrd|))))))))))
-                        (LETT |lastRec| (MOVEVEC (MAKE_VEC 7) |rec|))
+                        (LETT |lastRec| (REPLACE (MAKEARR1 7 NIL) |rec|))
                         (QSETVELT |lastRec| 3
                                   (PROGN
                                    (LETT #3# NIL)

@@ -260,7 +260,7 @@
 
 (DEFUN |SingleInteger| ()
   (SPROG NIL
-         (PROG (#1=#:G1882)
+         (PROG (#1=#:G1881)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|SingleInteger|))
@@ -349,19 +349,19 @@
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0 0 0 0))
+                                  0 0 0 0 0 0 0 0 0))
             (CONS
              '#(|IntegerNumberSystem&| |EuclideanDomain&| NIL
-                |UniqueFactorizationDomain&| |GcdDomain&| NIL NIL NIL NIL
-                |OrderedRing&| |Algebra&| |EntireRing&| NIL |DifferentialRing&|
-                NIL NIL |Rng&| |NonAssociativeAlgebra&| NIL |Module&|
-                |NonAssociativeRing&| NIL NIL NIL |NonAssociativeRng&| NIL NIL
-                |Logic&| |AbelianGroup&| NIL NIL NIL NIL NIL NIL NIL NIL
-                |AbelianMonoid&| |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL
-                |OrderedSet&| NIL NIL NIL |AbelianSemiGroup&| |Magma&| NIL NIL
-                NIL NIL NIL |SetCategory&| NIL |RetractableTo&| NIL |Hashable&|
-                NIL |BasicType&| NIL NIL NIL |PartialOrder&| NIL NIL NIL NIL
-                NIL NIL NIL NIL NIL NIL |OpenMath&| NIL NIL)
+                |UniqueFactorizationDomain&| |GcdDomain&| NIL NIL NIL NIL NIL
+                |Algebra&| |EntireRing&| NIL |DifferentialRing&| NIL NIL |Rng&|
+                |NonAssociativeAlgebra&| NIL |Module&| |NonAssociativeRing&|
+                NIL |OrderedAbelianGroup&| NIL |NonAssociativeRng&| NIL NIL
+                |Logic&| |AbelianGroup&| NIL NIL NIL NIL NIL NIL NIL NIL NIL
+                NIL |AbelianMonoid&| |NonAssociativeSemiRng&| |MagmaWithUnit&|
+                NIL |OrderedSet&| NIL NIL NIL |AbelianSemiGroup&| |Magma&| NIL
+                NIL NIL NIL NIL |SetCategory&| NIL |RetractableTo&| NIL
+                |Hashable&| NIL |BasicType&| NIL NIL NIL |PartialOrder&| NIL
+                NIL NIL NIL NIL NIL NIL NIL NIL NIL |OpenMath&| NIL NIL)
              (CONS
               '#((|IntegerNumberSystem|) (|EuclideanDomain|)
                  (|PrincipalIdealDomain|) (|UniqueFactorizationDomain|)
@@ -374,11 +374,11 @@
                  (|OrderedAbelianGroup|) (|RightModule| $$)
                  (|NonAssociativeRng|) (|LeftModule| $$)
                  (|OrderedCancellationAbelianMonoid|) (|Logic|)
-                 (|AbelianGroup|) (|OrderedAbelianMonoid|)
+                 (|AbelianGroup|) (|OrderedAbelianMonoid|) (|OrderedMonoid|)
                  (|BoundedDistributiveLattice|) (|CancellationAbelianMonoid|)
                  (|NonAssociativeSemiRing|) (|Monoid|)
-                 (|OrderedAbelianSemiGroup|) (|BoundedLattice|)
-                 (|DistributiveLattice|) (|AbelianMonoid|)
+                 (|OrderedAbelianSemiGroup|) (|OrderedSemiGroup|)
+                 (|BoundedLattice|) (|DistributiveLattice|) (|AbelianMonoid|)
                  (|NonAssociativeSemiRng|) (|MagmaWithUnit|) (|SemiGroup|)
                  (|OrderedSet|) (|BoundedMeetSemilattice|)
                  (|BoundedJoinSemilattice|) (|Lattice|) (|AbelianSemiGroup|)

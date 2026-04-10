@@ -18,7 +18,7 @@
                            (QREFELT % 14))
                  (QREFELT % 16))
                 (SPADCALL
-                 (SPADCALL "         you didn't type them correct"
+                 (SPADCALL "         you didn't type them correctly"
                            (QREFELT % 14))
                  (QREFELT % 16))
                 (SPADCALL (SPADCALL "         please try again" (QREFELT % 14))
@@ -68,7 +68,7 @@
                     (QREFELT % 14))
           (QREFELT % 16))
          (SPADCALL
-          (SPADCALL "          you didn't type them correct" (QREFELT % 14))
+          (SPADCALL "          you didn't type them correctly" (QREFELT % 14))
           (QREFELT % 16))
          (SPADCALL (SPADCALL "          please try again " (QREFELT % 14))
                    (QREFELT % 16))

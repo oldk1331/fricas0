@@ -70,7 +70,7 @@
                                                                (QREFELT %
                                                                         12))))
               (|local| |#1|) (|local| |#2|)
-              (|Record| (|:| |value| 31) (|:| |index| 52)) (|Union| 37 38)
+              (|Record| (|:| |value| 31) (|:| |index| 51)) (|Union| 37 38)
               (|PositiveInteger|) (|FiniteFieldFunctions| 31)
               (0 . |createLowComplexityNormalBasis|) (|Boolean|) (|OutputForm|)
               (|String|) (|Integer|) (|Union| % '"failed")
@@ -92,7 +92,7 @@
               (|Union| '"prime" '"polynomial" '"normal" '"cyclic")
               (|Table| 10 18) (|Record| (|:| |factor| 16) (|:| |exponent| 18))
               (|List| 46) (|Factored| 22) (|Union| 50 '#1#) (|List| 22)
-              (|HashState|) (|SingleInteger|))
+              (|SingleInteger|) (|HashState|))
            '#() 'NIL
            (CONS
             (|makeByteWordVec2| 4

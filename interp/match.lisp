@@ -7,32 +7,6 @@
 
 (DEFPARAMETER |$wildCard| (|char| '*))
 
-; maskMatch?(mask,subject) ==
-;   null mask => true
-;   if null STRINGP subject then subject := PNAME subject
-;   or/[match?(pattern,subject) for pattern in mask]
-
-(DEFUN |maskMatch?| (|mask| |subject|)
-  (PROG ()
-    (RETURN
-     (COND ((NULL |mask|) T)
-           (#1='T
-            (PROGN
-             (COND
-              ((NULL (STRINGP |subject|)) (SETQ |subject| (PNAME |subject|))))
-             ((LAMBDA (|bfVar#2| |bfVar#1| |pattern|)
-                (LOOP
-                 (COND
-                  ((OR (ATOM |bfVar#1|)
-                       (PROGN (SETQ |pattern| (CAR |bfVar#1|)) NIL))
-                   (RETURN |bfVar#2|))
-                  (#1#
-                   (PROGN
-                    (SETQ |bfVar#2| (|match?| |pattern| |subject|))
-                    (COND (|bfVar#2| (RETURN |bfVar#2|))))))
-                 (SETQ |bfVar#1| (CDR |bfVar#1|))))
-              NIL |mask| NIL)))))))
-
 ; substring?(part, whole, startpos) ==
 ; --This function should be replaced by STRING<
 ;   np := SIZE part
@@ -49,15 +23,15 @@
       (SETQ |nw| (SIZE |whole|))
       (COND ((< (- |nw| |startpos|) |np|) NIL)
             (#1='T
-             ((LAMBDA (|bfVar#4| |bfVar#3| |ip| |iw|)
+             ((LAMBDA (|bfVar#2| |bfVar#1| |ip| |iw|)
                 (LOOP
-                 (COND ((> |ip| |bfVar#3|) (RETURN |bfVar#4|))
+                 (COND ((> |ip| |bfVar#1|) (RETURN |bfVar#2|))
                        (#1#
                         (PROGN
-                         (SETQ |bfVar#4|
+                         (SETQ |bfVar#2|
                                  (CHAR-EQUAL (ELT |part| |ip|)
                                              (ELT |whole| |iw|)))
-                         (COND ((NOT |bfVar#4|) (RETURN NIL))))))
+                         (COND ((NOT |bfVar#2|) (RETURN NIL))))))
                  (SETQ |ip| (+ |ip| 1))
                  (SETQ |iw| (+ |iw| 1))))
               T (- |np| 1) 0 |startpos|)))))))
@@ -75,29 +49,29 @@
       (SETQ |np| (SIZE |part|))
       (SETQ |nw| (SIZE |whole|))
       (COND
-       (((LAMBDA (|bfVar#8| |bfVar#7| |i|)
+       (((LAMBDA (|bfVar#6| |bfVar#5| |i|)
            (LOOP
-            (COND ((> |i| |bfVar#7|) (RETURN |bfVar#8|))
+            (COND ((> |i| |bfVar#5|) (RETURN |bfVar#6|))
                   (#1='T
                    (PROGN
-                    (SETQ |bfVar#8|
+                    (SETQ |bfVar#6|
                             (AND (SETQ |k| |i|)
-                                 ((LAMBDA (|bfVar#6| |bfVar#5| |ip| |iw|)
+                                 ((LAMBDA (|bfVar#4| |bfVar#3| |ip| |iw|)
                                     (LOOP
                                      (COND
-                                      ((> |ip| |bfVar#5|) (RETURN |bfVar#6|))
+                                      ((> |ip| |bfVar#3|) (RETURN |bfVar#4|))
                                       (#1#
                                        (PROGN
-                                        (SETQ |bfVar#6|
+                                        (SETQ |bfVar#4|
                                                 (CHAR-EQUAL (ELT |part| |ip|)
                                                             (ELT |whole|
                                                                  |iw|)))
                                         (COND
-                                         ((NOT |bfVar#6|) (RETURN NIL))))))
+                                         ((NOT |bfVar#4|) (RETURN NIL))))))
                                      (SETQ |ip| (+ |ip| 1))
                                      (SETQ |iw| (+ |iw| 1))))
                                   T (- |np| 1) 0 |i|)))
-                    (COND (|bfVar#8| (RETURN |bfVar#8|))))))
+                    (COND (|bfVar#6| (RETURN |bfVar#6|))))))
             (SETQ |i| (+ |i| 1))))
          NIL (- |nw| |np|) |startpos|)
         |k|))))))
@@ -120,36 +94,15 @@
             (#1='T
              (PROGN
               (SETQ |k| |startpos|)
-              ((LAMBDA (|bfVar#9| |i|)
+              ((LAMBDA (|bfVar#7| |i|)
                  (LOOP
-                  (COND ((> |i| |bfVar#9|) (RETURN NIL))
+                  (COND ((> |i| |bfVar#7|) (RETURN NIL))
                         (#1#
                          (COND ((EQUAL |c| (ELT |t| |i|)) (RETURN NIL))
                                (#1# (SETQ |k| (+ |k| 1))))))
                   (SETQ |i| (+ |i| 1))))
                (- |n| 1) |startpos|)
               |k|)))))))
-
-; rightCharPosition(c,t,startpos) == --startpos often equals MAXINDEX t (rightmost)
-;   k := startpos
-;   for i in startpos..0 by -1 while c ~= ELT(t,i) repeat (k := k - 1)
-;   k
-
-(DEFUN |rightCharPosition| (|c| |t| |startpos|)
-  (PROG (|k|)
-    (RETURN
-     (PROGN
-      (SETQ |k| |startpos|)
-      ((LAMBDA (|bfVar#10| |i|)
-         (LOOP
-          (COND
-           ((OR (COND ((MINUSP |bfVar#10|) (< |i| 0)) (T (> |i| 0)))
-                (EQUAL |c| (ELT |t| |i|)))
-            (RETURN NIL))
-           ('T (SETQ |k| (- |k| 1))))
-          (SETQ |i| (+ |i| |bfVar#10|))))
-       (- 1) |startpos|)
-      |k|))))
 
 ; stringPosition(s,t,startpos) ==
 ;   n := SIZE t
@@ -203,28 +156,28 @@
              #1='T))
        (COND
         ((EQ |op| '|and|)
-         ((LAMBDA (|bfVar#12| |bfVar#11| |p|)
+         ((LAMBDA (|bfVar#9| |bfVar#8| |p|)
             (LOOP
              (COND
-              ((OR (ATOM |bfVar#11|) (PROGN (SETQ |p| (CAR |bfVar#11|)) NIL))
-               (RETURN |bfVar#12|))
+              ((OR (ATOM |bfVar#8|) (PROGN (SETQ |p| (CAR |bfVar#8|)) NIL))
+               (RETURN |bfVar#9|))
               (#1#
                (PROGN
-                (SETQ |bfVar#12| (|superMatch?| |p| |subject|))
-                (COND ((NOT |bfVar#12|) (RETURN NIL))))))
-             (SETQ |bfVar#11| (CDR |bfVar#11|))))
+                (SETQ |bfVar#9| (|superMatch?| |p| |subject|))
+                (COND ((NOT |bfVar#9|) (RETURN NIL))))))
+             (SETQ |bfVar#8| (CDR |bfVar#8|))))
           T |argl| NIL))
         ((EQ |op| '|or|)
-         ((LAMBDA (|bfVar#14| |bfVar#13| |p|)
+         ((LAMBDA (|bfVar#11| |bfVar#10| |p|)
             (LOOP
              (COND
-              ((OR (ATOM |bfVar#13|) (PROGN (SETQ |p| (CAR |bfVar#13|)) NIL))
-               (RETURN |bfVar#14|))
+              ((OR (ATOM |bfVar#10|) (PROGN (SETQ |p| (CAR |bfVar#10|)) NIL))
+               (RETURN |bfVar#11|))
               (#1#
                (PROGN
-                (SETQ |bfVar#14| (|superMatch?| |p| |subject|))
-                (COND (|bfVar#14| (RETURN |bfVar#14|))))))
-             (SETQ |bfVar#13| (CDR |bfVar#13|))))
+                (SETQ |bfVar#11| (|superMatch?| |p| |subject|))
+                (COND (|bfVar#11| (RETURN |bfVar#11|))))))
+             (SETQ |bfVar#10| (CDR |bfVar#10|))))
           NIL |argl| NIL))
         ((EQ |op| '|not|) (NULL (|superMatch?| (CAR |argl|) |subject|)))
         (#1# (|systemError| "unknown pattern form"))))
@@ -277,19 +230,19 @@
       (SETQ |u| (|patternCheck,pos| (|char| '_) |pattern|))
       (COND ((NULL |u|) |pattern|)
             ((NULL
-              ((LAMBDA (|bfVar#16| |bfVar#15| |i|)
+              ((LAMBDA (|bfVar#13| |bfVar#12| |i|)
                  (LOOP
                   (COND
-                   ((OR (ATOM |bfVar#15|)
-                        (PROGN (SETQ |i| (CAR |bfVar#15|)) NIL))
-                    (RETURN |bfVar#16|))
+                   ((OR (ATOM |bfVar#12|)
+                        (PROGN (SETQ |i| (CAR |bfVar#12|)) NIL))
+                    (RETURN |bfVar#13|))
                    (#1='T
                     (PROGN
-                     (SETQ |bfVar#16|
+                     (SETQ |bfVar#13|
                              (|patternCheck,equal| |pattern| (+ |i| 1)
                               |$wildCard|))
-                     (COND ((NOT |bfVar#16|) (RETURN NIL))))))
-                  (SETQ |bfVar#15| (CDR |bfVar#15|))))
+                     (COND ((NOT |bfVar#13|) (RETURN NIL))))))
+                  (SETQ |bfVar#12| (CDR |bfVar#12|))))
                T |u| NIL))
              (PROGN
               (|sayBrightly|
@@ -352,27 +305,27 @@
 (DEFUN |patternCheck,wild| (|p| |u|)
   (PROG (|c|)
     (RETURN
-     ((LAMBDA (|bfVar#17| |id|)
+     ((LAMBDA (|bfVar#14| |id|)
         (LOOP
          (COND
-          ((OR (ATOM |bfVar#17|) (PROGN (SETQ |id| (CAR |bfVar#17|)) NIL))
+          ((OR (ATOM |bfVar#14|) (PROGN (SETQ |id| (CAR |bfVar#14|)) NIL))
            (RETURN NIL))
           (#1='T
            (PROGN
             (SETQ |c| (|char| |id|))
             (COND
              ((NULL
-               ((LAMBDA (|bfVar#19| |bfVar#18| |i|)
+               ((LAMBDA (|bfVar#16| |bfVar#15| |i|)
                   (LOOP
-                   (COND ((> |i| |bfVar#18|) (RETURN |bfVar#19|))
+                   (COND ((> |i| |bfVar#15|) (RETURN |bfVar#16|))
                          (#1#
                           (PROGN
-                           (SETQ |bfVar#19| (EQUAL (ELT |p| |i|) |c|))
-                           (COND (|bfVar#19| (RETURN |bfVar#19|))))))
+                           (SETQ |bfVar#16| (EQUAL (ELT |p| |i|) |c|))
+                           (COND (|bfVar#16| (RETURN |bfVar#16|))))))
                    (SETQ |i| (+ |i| 1))))
                 NIL (MAXINDEX |p|) 0))
               (RETURN |c|))))))
-         (SETQ |bfVar#17| (CDR |bfVar#17|))))
+         (SETQ |bfVar#14| (CDR |bfVar#14|))))
       |u| NIL))))
 
 ; match?(pattern,subject) ==  --returns index of first character that matches
@@ -467,110 +420,6 @@
 (DEFUN |stringMatches?| (|pattern| |subject|)
   (PROG ()
     (RETURN (COND ((FIXP (|basicMatch?| |pattern| |subject|)) T) ('T NIL)))))
-
-; matchSegment?(pattern,subject,k) ==
-;   matchAnySegment?(pattern,DOWNCASE subject,k,nil)
-
-(DEFUN |matchSegment?| (|pattern| |subject| |k|)
-  (PROG ()
-    (RETURN (|matchAnySegment?| |pattern| (DOWNCASE |subject|) |k| NIL))))
-
-; matchAnySegment?(pattern,target,k,nc) ==  --k = start position; nc=#chars or NIL
-;   n := #pattern
-;   p := charPosition($wildCard,pattern,0)
-;   p = n =>
-;     m := stringPosition(pattern,target,k)
-;     m = #target => nil
-;     null nc => true
-;     m <= k + nc - n
-;   if k ~= 0 and nc then
-;     target := SUBSTRING(target,k,nc)
-;     k := 0
-;   if p ~= 0 then
-;      -- pattern does not begin with a wild card
-;      ans := 0
-;      s := SUBSTRING(pattern,0,p) --[pattern.i for i in 0..p-1]
-;      not substring?(s,target,k) => return false
-;   else if n = 1 then return true
-;   i := p + k  -- starting position for searching the target
-;   q := charPosition($wildCard,pattern,p+1)
-;   ltarget := #target
-;   while q ~= n repeat
-;      s := SUBSTRING(pattern,p+1,q-p-1) --[pattern.i for i in (p+1..q-1)]
-;      i := stringPosition(s,target,i)
-;      if i = ltarget then return (returnFlag := true)
-;      i := i + #s
-;      p := q
-;      q := charPosition($wildCard,pattern,q+1)
-;   returnFlag => false
-;   if p ~= q-1 then
-;      -- pattern does not end with a '&
-;      s := SUBSTRING(pattern,p+1,q-p-1) --[pattern.i for i in (p+1..q-1)]
-;      if not suffix?(s,target) then return false
-;      if null ans then ans := 1  --pattern is a word preceded by a *
-;   true
-
-(DEFUN |matchAnySegment?| (|pattern| |target| |k| |nc|)
-  (PROG (|n| |p| |m| |ans| |s| |i| |q| |ltarget| |returnFlag|)
-    (RETURN
-     (PROGN
-      (SETQ |n| (LENGTH |pattern|))
-      (SETQ |p| (|charPosition| |$wildCard| |pattern| 0))
-      (COND
-       ((EQUAL |p| |n|)
-        (PROGN
-         (SETQ |m| (|stringPosition| |pattern| |target| |k|))
-         (COND ((EQL |m| (LENGTH |target|)) NIL) ((NULL |nc|) T)
-               (#1='T (NOT (< (- (+ |k| |nc|) |n|) |m|))))))
-       (#1#
-        (PROGN
-         (COND
-          ((AND (NOT (EQL |k| 0)) |nc|)
-           (SETQ |target| (SUBSTRING |target| |k| |nc|)) (SETQ |k| 0)))
-         (COND
-          ((NOT (EQL |p| 0)) (SETQ |ans| 0)
-           (SETQ |s| (SUBSTRING |pattern| 0 |p|))
-           (COND ((NULL (|substring?| |s| |target| |k|)) (RETURN NIL))))
-          ((EQL |n| 1) (RETURN T)))
-         (SETQ |i| (+ |p| |k|))
-         (SETQ |q| (|charPosition| |$wildCard| |pattern| (+ |p| 1)))
-         (SETQ |ltarget| (LENGTH |target|))
-         ((LAMBDA ()
-            (LOOP
-             (COND ((EQUAL |q| |n|) (RETURN NIL))
-                   (#1#
-                    (PROGN
-                     (SETQ |s|
-                             (SUBSTRING |pattern| (+ |p| 1) (- (- |q| |p|) 1)))
-                     (SETQ |i| (|stringPosition| |s| |target| |i|))
-                     (COND
-                      ((EQUAL |i| |ltarget|) (RETURN (SETQ |returnFlag| T))))
-                     (SETQ |i| (+ |i| (LENGTH |s|)))
-                     (SETQ |p| |q|)
-                     (SETQ |q|
-                             (|charPosition| |$wildCard| |pattern|
-                              (+ |q| 1)))))))))
-         (COND (|returnFlag| NIL)
-               (#1#
-                (PROGN
-                 (COND
-                  ((NOT (EQUAL |p| (- |q| 1)))
-                   (SETQ |s| (SUBSTRING |pattern| (+ |p| 1) (- (- |q| |p|) 1)))
-                   (COND ((NULL (|suffix?| |s| |target|)) (RETURN NIL)))
-                   (COND ((NULL |ans|) (SETQ |ans| 1)))))
-                 T))))))))))
-
-; infix?(s,t,x) == #s + #t >= #x and prefix?(s,x) and suffix?(t,x)
-
-(DEFUN |infix?| (|s| |t| |x|)
-  (PROG ()
-    (RETURN
-     (AND (NOT (< (+ (LENGTH |s|) (LENGTH |t|)) (LENGTH |x|)))
-          (|prefix?| |s| |x|) (|suffix?| |t| |x|)))))
-
-; prefix?(s,t) == substring?(s,t,0)
-
-(DEFUN |prefix?| (|s| |t|) (PROG () (RETURN (|substring?| |s| |t| 0))))
 
 ; suffix?(s,t) ==
 ;   m := #s; n := #t

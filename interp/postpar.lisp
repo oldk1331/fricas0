@@ -517,7 +517,7 @@
 (DEFUN |comma2Tuple| (|u|)
   (PROG () (RETURN (CONS '|@Tuple| (|postFlatten| |u| '|,|)))))
 
-; postDef [defOp,lhs,rhs] ==
+; postDef([., lhs, rhs]) ==
 ;   lhs is ["macro",name] => postMDef ["==>",name,rhs]
 ;
 ;   recordHeaderDocumentation nil
@@ -540,11 +540,10 @@
 ;   ['DEF, newLhs, typeList, trhs]
 
 (DEFUN |postDef| (|bfVar#21|)
-  (PROG (|defOp| |lhs| |rhs| |ISTMP#1| |name| |LETTMP#1| |form| |targetType|
-         |a| |ISTMP#2| |newLhs| |t| |argTypeList| |typeList| |b| |trhs|)
+  (PROG (|lhs| |rhs| |ISTMP#1| |name| |LETTMP#1| |form| |targetType| |a|
+         |ISTMP#2| |newLhs| |t| |argTypeList| |typeList| |b| |trhs|)
     (RETURN
      (PROGN
-      (SETQ |defOp| (CAR |bfVar#21|))
       (SETQ |lhs| (CADR . #1=(|bfVar#21|)))
       (SETQ |rhs| (CADDR . #1#))
       (COND

@@ -80,17 +80,30 @@
                           (QREFELT % 28))
                 (QVELT |ffe| 2))) 
 
-(SDEFUN |UPSQFREE;squareFree;PF;6| ((|p| (P)) (% (|Factored| P)))
+(SDEFUN |UPSQFREE;BumInSepFFE;2R;6|
+        ((|ffe|
+          (|Record|
+           (|:| |flag| (|Union| #1="nil" #2="sqfr" #3="irred" #4="prime"))
+           (|:| |factor| P) (|:| |exponent| (|NonNegativeInteger|))))
+         (%
+          (|Record| (|:| |flag| (|Union| #1# #2# #3# #4#)) (|:| |factor| P)
+                    (|:| |exponent| (|NonNegativeInteger|)))))
+        (VECTOR (CONS 0 "nil")
+                (SPADCALL (QVELT |ffe| 1) (SPADCALL (QREFELT % 26))
+                          (QREFELT % 28))
+                (QVELT |ffe| 2))) 
+
+(SDEFUN |UPSQFREE;squareFree;PF;7| ((|p| (P)) (% (|Factored| P)))
         (SPROG
-         ((#1=#:G70 NIL)
+         ((#1=#:G77 NIL)
           (|lffe|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| P)
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (|lcp| (RC)) (#2=#:G62 NIL) (|i| (|NonNegativeInteger|)) (|pi| (P))
-          (|di| (P)) (#3=#:G59 NIL) (|ci| (P)) (|a| (P)) (|c| (P)) (|u| (P))
-          (|#G11|
+          (|lcp| (RC)) (#2=#:G69 NIL) (|i| (|NonNegativeInteger|)) (|pi| (P))
+          (|di| (P)) (#3=#:G66 NIL) (|ci| (P)) (|a| (P)) (|c| (P)) (|u| (P))
+          (|#G12|
            (|Record| (|:| |unit| P) (|:| |canonical| P) (|:| |associate| P))))
          (SEQ (LETT |ci| |p|) (LETT |di| (SPADCALL |p| (QREFELT % 8)))
               (LETT |pi| (SPADCALL |ci| |di| (QREFELT % 9)))
@@ -99,11 +112,11 @@
                 ((EQL (SPADCALL |pi| (QREFELT % 30)) 0)
                  (SEQ
                   (PROGN
-                   (LETT |#G11| (SPADCALL |p| (QREFELT % 33)))
-                   (LETT |u| (QVELT |#G11| 0))
-                   (LETT |c| (QVELT |#G11| 1))
-                   (LETT |a| (QVELT |#G11| 2))
-                   |#G11|)
+                   (LETT |#G12| (SPADCALL |p| (QREFELT % 33)))
+                   (LETT |u| (QVELT |#G12| 0))
+                   (LETT |c| (QVELT |#G12| 1))
+                   (LETT |a| (QVELT |#G12| 2))
+                   |#G12|)
                   (EXIT
                    (SPADCALL |u| (LIST (VECTOR (CONS 1 "sqfr") |c| 1))
                              (QREFELT % 35)))))
@@ -179,7 +192,7 @@
                                                  (VECTOR (CONS 1 "sqfr") |pi|
                                                          |i|)
                                                  |lffe|)))))
-                                  (GO #5=#:G65)))))))
+                                  (GO #5=#:G72)))))))
                             #5# (EXIT #1#))
                            NIL (GO G190) G191 (EXIT NIL))
                       (EXIT
@@ -193,11 +206,11 @@
                        (|:| |e_list| (|List| (|NonNegativeInteger|))))))
         (SPROG
          ((|res_le| (|List| (|NonNegativeInteger|))) (|res_lf| (|List| P))
-          (#2=#:G106 NIL) (|f| NIL) (#3=#:G107 NIL) (|e| NIL)
+          (#2=#:G113 NIL) (|f| NIL) (#3=#:G114 NIL) (|e| NIL)
           (|le| (|List| (|NonNegativeInteger|))) (|lf| (|List| P))
           (|nle| (|List| (|NonNegativeInteger|))) (|nlf| (|List| P)) (|nf| (P))
-          (|rec_f| (P)) (#4=#:G73 NIL) (|f1| (P)) (#5=#:G104 NIL)
-          (#6=#:G105 NIL) (#7=#:G102 NIL) (#8=#:G103 NIL) (|rec_e| NIL)
+          (|rec_f| (P)) (#4=#:G80 NIL) (|f1| (P)) (#5=#:G111 NIL)
+          (#6=#:G112 NIL) (#7=#:G109 NIL) (#8=#:G110 NIL) (|rec_e| NIL)
           (|rec_el| (|List| (|NonNegativeInteger|))) (|rec_fl| (|List| P))
           (|res1| #1#) (|facs_pow| (P)) (|i| (|NonNegativeInteger|)) (|di| (P))
           (|facs| (P)) (|fac_i| (P)) (|dp| (P)))
@@ -399,14 +412,14 @@
                        (CONS (NREVERSE |res_lf|)
                              (NREVERSE |res_le|)))))))))))))) 
 
-(SDEFUN |UPSQFREE;squareFree;PF;8| ((|p| (P)) (% (|Factored| P)))
+(SDEFUN |UPSQFREE;squareFree;PF;9| ((|p| (P)) (% (|Factored| P)))
         (SPROG
          ((|fl|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| P)
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (#1=#:G118 NIL) (|f| NIL) (#2=#:G119 NIL) (|e| NIL)
+          (#1=#:G125 NIL) (|f| NIL) (#2=#:G126 NIL) (|e| NIL)
           (|res1|
            (|Record| (|:| |f_list| (|List| P))
                      (|:| |e_list| (|List| (|NonNegativeInteger|)))))
@@ -433,7 +446,7 @@
               (EXIT
                (SPADCALL (SPADCALL |u| (QREFELT % 42)) |fl| (QREFELT % 35)))))) 
 
-(SDEFUN |UPSQFREE;squareFree;PF;9| ((|p| (P)) (% (|Factored| P)))
+(SDEFUN |UPSQFREE;squareFree;PF;10| ((|p| (P)) (% (|Factored| P)))
         (SPROG
          ((|lffe|
            (|List|
@@ -444,11 +457,11 @@
            (|List|
             (|Record| (|:| |flag| (|Union| #1# #2# #3# #4#)) (|:| |factor| P)
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (#5=#:G146 NIL) (|ffe| NIL) (#6=#:G145 NIL)
-          (|redSqfr| (|Factored| P)) (#7=#:G129 NIL) (|dunit| (P)) (|pi| (P))
-          (|lc| (RC)) (#8=#:G133 NIL) (|i| (|NonNegativeInteger|)) (|ci| (P))
+          (#5=#:G153 NIL) (|ffe| NIL) (#6=#:G152 NIL)
+          (|redSqfr| (|Factored| P)) (#7=#:G136 NIL) (|dunit| (P)) (|pi| (P))
+          (|lc| (RC)) (#8=#:G140 NIL) (|i| (|NonNegativeInteger|)) (|ci| (P))
           (|di| (P)) (|diprev| (P)) (|a| (P)) (|c| (P)) (|u| (P))
-          (|#G24|
+          (|#G25|
            (|Record| (|:| |unit| P) (|:| |canonical| P) (|:| |associate| P))))
          (SEQ
           (LETT |ci| (SPADCALL |p| (SPADCALL |p| (QREFELT % 8)) (QREFELT % 9)))
@@ -457,11 +470,11 @@
             ((EQL (SPADCALL |ci| (QREFELT % 30)) 0)
              (SEQ
               (PROGN
-               (LETT |#G24| (SPADCALL |p| (QREFELT % 33)))
-               (LETT |u| (QVELT |#G24| 0))
-               (LETT |c| (QVELT |#G24| 1))
-               (LETT |a| (QVELT |#G24| 2))
-               |#G24|)
+               (LETT |#G25| (SPADCALL |p| (QREFELT % 33)))
+               (LETT |u| (QVELT |#G25| 0))
+               (LETT |c| (QVELT |#G25| 1))
+               (LETT |a| (QVELT |#G25| 2))
+               |#G25|)
               (EXIT
                (SPADCALL |u| (LIST (VECTOR (CONS 1 "sqfr") |c| 1))
                          (QREFELT % 35)))))
@@ -607,34 +620,40 @@
             (QSETREFV % 27
                       (CONS (|dispatchFunction| |UPSQFREE;BumInSepFFE;2R;3|)
                             %)))
-           ((|HasCategory| |#1| '(|CharacteristicNonZero|))
-            (QSETREFV % 27
-                      (CONS (|dispatchFunction| |UPSQFREE;BumInSepFFE;2R;4|)
-                            %)))
+           ((|HasCategory| |#1| '(|PolynomialFactorizationExplicit|))
+            (COND
+             ((|HasCategory| |#1| '(|CharacteristicNonZero|))
+              (QSETREFV % 27
+                        (CONS (|dispatchFunction| |UPSQFREE;BumInSepFFE;2R;4|)
+                              %)))
+             ('T
+              (QSETREFV % 27
+                        (CONS (|dispatchFunction| |UPSQFREE;BumInSepFFE;2R;5|)
+                              %)))))
            ('T
             (QSETREFV % 27
-                      (CONS (|dispatchFunction| |UPSQFREE;BumInSepFFE;2R;5|)
+                      (CONS (|dispatchFunction| |UPSQFREE;BumInSepFFE;2R;6|)
                             %))))
           (COND
            ((|HasCategory| |#1| '(|CharacteristicZero|))
             (QSETREFV % 14
-                      (CONS (|dispatchFunction| |UPSQFREE;squareFree;PF;6|)
+                      (CONS (|dispatchFunction| |UPSQFREE;squareFree;PF;7|)
                             %)))
            ((|HasCategory| |#1| '(|FiniteFieldCategory|))
             (PROGN
              (QSETREFV % 44 (SPADCALL (QREFELT % 43)))
              (QSETREFV % 14
-                       (CONS (|dispatchFunction| |UPSQFREE;squareFree;PF;8|)
+                       (CONS (|dispatchFunction| |UPSQFREE;squareFree;PF;9|)
                              %))))
            ('T
             (QSETREFV % 14
-                      (CONS (|dispatchFunction| |UPSQFREE;squareFree;PF;9|)
+                      (CONS (|dispatchFunction| |UPSQFREE;squareFree;PF;10|)
                             %))))
           %))) 
 
-(DEFUN |UnivariatePolynomialSquareFree| (&REST #1=#:G147)
+(DEFUN |UnivariatePolynomialSquareFree| (&REST #1=#:G154)
   (SPROG NIL
-         (PROG (#2=#:G148)
+         (PROG (#2=#:G155)
            (RETURN
             (COND
              ((LETT #2#

@@ -841,7 +841,7 @@
              (CDR |b|)))))))
 
 ; htMarkTree(tree,n) ==
-;   RPLACD(LASTTAIL tree,n)
+;   RPLACD(LASTNODE(tree), n)
 ;   for branch in tree repeat
 ;     branch.3 = 'TREE => htMarkTree(branch.5,n + 1)
 
@@ -849,7 +849,7 @@
   (PROG ()
     (RETURN
      (PROGN
-      (RPLACD (LASTTAIL |tree|) |n|)
+      (RPLACD (LASTNODE |tree|) |n|)
       ((LAMBDA (|bfVar#11| |branch|)
          (LOOP
           (COND

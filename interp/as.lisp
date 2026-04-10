@@ -26,7 +26,7 @@
 ;   $constantHash := MAKE_HASHTABLE('EQUAL)
 ;   $niladics : local := nil
 ;   $asyFile: local := asyFile
-;   $asFilename: local := STRCONC(PATHNAME_-NAME asyFile,'".as")
+;   $asFilename: local := STRCONC(file_basename(asyFile), '".as")
 ;   asytran asyFile
 ;   conlist := [x for x in HKEYS $conHash | HGET($conHash,x) isnt [.,.,"function",:.]]
 ;   $mmAlist : local :=
@@ -53,7 +53,7 @@
       (SETQ |$constantHash| (MAKE_HASHTABLE 'EQUAL))
       (SETQ |$niladics| NIL)
       (SETQ |$asyFile| |asyFile|)
-      (SETQ |$asFilename| (STRCONC (PATHNAME-NAME |asyFile|) ".as"))
+      (SETQ |$asFilename| (STRCONC (|file_basename| |asyFile|) ".as"))
       (|asytran| |asyFile|)
       (SETQ |conlist|
               ((LAMBDA (|bfVar#2| |bfVar#1| |x|)
@@ -236,7 +236,7 @@
 ;   attributeAlist := REMDUP [:CADR alists,:catAttrs]
 ;   documentation :=
 ;       SUBLISLIS($FormalMapVariableList, IFCDR form, LASSOC(con, $docAlist))
-;   filestring := STRCONC(PATHNAME_-NAME STRINGIMAGE filename,'".as")
+;   filestring := STRCONC(file_basename(STRINGIMAGE(filename)), '".as")
 ;   constantPart := HGET($constantHash,con) and [['constant,:true]]
 ;   niladicPart := MEMQ(con,$niladics) and [['NILADIC,:true]]
 ;   falist := TAKE(#IFCDR form, $FormalMapVariableList)
@@ -322,7 +322,8 @@
                       (SUBLISLIS |$FormalMapVariableList| (IFCDR |form|)
                        (LASSOC |con| |$docAlist|)))
               (SETQ |filestring|
-                      (STRCONC (PATHNAME-NAME (STRINGIMAGE |filename|)) ".as"))
+                      (STRCONC (|file_basename| (STRINGIMAGE |filename|))
+                       ".as"))
               (SETQ |constantPart|
                       (AND (HGET |$constantHash| |con|)
                            (LIST (CONS '|constant| T))))
@@ -3095,9 +3096,6 @@
 ;     pred := asyPredTran
 ;       p is ['Test,t] => t
 ;       p
-; --    x is ['IF,:.] => "append"/[asyCattranOp1('IF, x, [pred,:predlist])]
-; --  This line used to call asyCattranOp1 with too few arguments.  Following
-; --  fix suggested by RDJ.
 ;     x is ['IF,:.] => "append"/[asyCattranOp1(op,y,[pred,:predlist]) for y in x]
 ;     [['IF, asySimpPred(pred,predlist), asyCattranSig(op,x), 'noBranch]]
 ;   [asyCattranSig(op,item)]

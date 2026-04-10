@@ -865,21 +865,22 @@
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0 0 0 0 0 0 0 0 0))
+                                  0 0 0 0 0 0 0 0 0 0 0 0 0 0))
             (CONS
              '#(|FloatingPointSystem&| |RealNumberSystem&| |Field&|
                 |EuclideanDomain&| |UniqueFactorizationDomain&| NIL
-                |GcdDomain&| NIL NIL NIL |DivisionRing&| |OrderedRing&|
-                |Algebra&| |EntireRing&| |Algebra&| NIL |DifferentialRing&| NIL
-                NIL |Rng&| |NonAssociativeAlgebra&| |NonAssociativeAlgebra&|
-                NIL |Module&| |Module&| |NonAssociativeRing&| NIL NIL NIL NIL
-                |NonAssociativeRng&| NIL NIL NIL NIL |AbelianGroup&| NIL NIL
-                NIL NIL NIL |AbelianMonoid&| |NonAssociativeSemiRng&|
-                |MagmaWithUnit&| NIL |OrderedSet&| |AbelianSemiGroup&| |Magma&|
-                NIL NIL |SetCategory&| NIL NIL |RetractableTo&|
-                |RetractableTo&| |TranscendentalFunctionCategory&| |Hashable&|
-                NIL |BasicType&| NIL NIL NIL NIL NIL |PartialOrder&| NIL NIL
-                NIL NIL |RadicalCategory&| NIL NIL NIL |OpenMath&|
+                |GcdDomain&| NIL NIL NIL |DivisionRing&| NIL |Algebra&|
+                |EntireRing&| |Algebra&| NIL |DifferentialRing&| NIL NIL |Rng&|
+                |NonAssociativeAlgebra&| |NonAssociativeAlgebra&| NIL |Module&|
+                |Module&| |NonAssociativeRing&| NIL NIL |OrderedAbelianGroup&|
+                NIL |NonAssociativeRng&| NIL NIL NIL NIL |AbelianGroup&| NIL
+                NIL NIL NIL NIL NIL NIL |AbelianMonoid&|
+                |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL |OrderedSet&|
+                |AbelianSemiGroup&| |Magma&| NIL NIL |SetCategory&| NIL NIL
+                |RetractableTo&| |RetractableTo&|
+                |TranscendentalFunctionCategory&| |Hashable&| NIL |BasicType&|
+                NIL NIL NIL NIL NIL |PartialOrder&| NIL NIL NIL NIL
+                |RadicalCategory&| NIL NIL NIL |OpenMath&|
                 |TrigonometricFunctionCategory&|
                 |ArcTrigonometricFunctionCategory&|
                 |HyperbolicFunctionCategory&| NIL |ElementaryFunctionCategory&|
@@ -898,15 +899,15 @@
                  (|RightModule| $$) (|NonAssociativeRng|) (|LeftModule| $$)
                  (|LeftModule| 157) (|RightModule| 157)
                  (|OrderedCancellationAbelianMonoid|) (|AbelianGroup|)
-                 (|OrderedAbelianMonoid|) (|CancellationAbelianMonoid|)
-                 (|NonAssociativeSemiRing|) (|Monoid|)
-                 (|OrderedAbelianSemiGroup|) (|AbelianMonoid|)
-                 (|NonAssociativeSemiRng|) (|MagmaWithUnit|) (|SemiGroup|)
-                 (|OrderedSet|) (|AbelianSemiGroup|) (|Magma|) (|Comparable|)
-                 (|PatternMatchable| 136) (|SetCategory|) (|CommutativeStar|)
-                 (|RealConstant|) (|RetractableTo| 19) (|RetractableTo| 157)
-                 (|TranscendentalFunctionCategory|) (|Hashable|)
-                 (|CoercibleTo| 35) (|BasicType|) (|unitsKnown|)
+                 (|OrderedAbelianMonoid|) (|OrderedMonoid|)
+                 (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
+                 (|Monoid|) (|OrderedAbelianSemiGroup|) (|OrderedSemiGroup|)
+                 (|AbelianMonoid|) (|NonAssociativeSemiRng|) (|MagmaWithUnit|)
+                 (|SemiGroup|) (|OrderedSet|) (|AbelianSemiGroup|) (|Magma|)
+                 (|Comparable|) (|PatternMatchable| 136) (|SetCategory|)
+                 (|CommutativeStar|) (|RealConstant|) (|RetractableTo| 19)
+                 (|RetractableTo| 157) (|TranscendentalFunctionCategory|)
+                 (|Hashable|) (|CoercibleTo| 35) (|BasicType|) (|unitsKnown|)
                  (|TwoSidedRecip|) (|noZeroDivisors|) (|canonicalUnitNormal|)
                  (|canonicalsClosed|) (|PartialOrder|) (|ConvertibleTo| 12)
                  (|ConvertibleTo| 136) (|CoercibleFrom| 19)

@@ -524,10 +524,9 @@
               |gcdPolynomial| 496 |gcd| 502 |extendedEuclidean| 513 |exquo| 526
               |expressIdealMember| 532 |euclideanSize| 538 |divide| 543
               |differentiate| 549 |degree| 599 |convert| 604 |commutator| 609
-              |coerce| 615 |coefficient| 645 |charthRoot| 651 |characteristic|
-              656 |associator| 660 |associates?| 667 |antiCommutator| 673
-              |annihilate?| 679 ^ 685 |Zero| 697 |One| 701 D 705 = 755 - 761 +
-              772 * 778)
+              |coerce| 615 |coefficient| 645 |characteristic| 651 |associator|
+              655 |associates?| 662 |antiCommutator| 668 |annihilate?| 674 ^
+              680 |Zero| 692 |One| 696 D 700 = 750 - 756 + 767 * 773)
            'NIL
            (CONS
             (|makeByteWordVec2| 7
@@ -602,12 +601,12 @@
                                     2 1 0 0 115 1 1 0 18 0 34 1 0 38 0 42 2 0 0
                                     0 0 1 1 0 53 0 62 1 0 0 18 32 1 0 0 0 1 1 0
                                     0 6 31 1 0 0 7 22 1 3 0 111 1 2 0 6 0 18 63
-                                    1 6 73 0 1 0 0 27 29 3 0 0 0 0 0 1 2 0 15 0
-                                    0 1 2 0 0 0 0 1 2 0 15 0 0 1 2 0 0 0 102 1
-                                    2 0 0 0 27 1 0 0 0 9 0 0 0 12 2 0 0 0 65 1
-                                    3 0 0 0 65 27 1 2 2 0 0 27 1 1 2 0 0 1 3 1
-                                    0 0 113 114 1 3 1 0 0 115 27 1 2 1 0 0 115
-                                    1 2 1 0 0 113 1 2 0 15 0 0 17 1 0 0 0 46 2
-                                    0 0 0 0 1 2 0 0 0 0 76 2 0 0 102 0 1 2 0 0
-                                    0 0 44 2 0 0 18 0 26 2 0 0 27 0 1)))))
+                                    0 0 27 29 3 0 0 0 0 0 1 2 0 15 0 0 1 2 0 0
+                                    0 0 1 2 0 15 0 0 1 2 0 0 0 102 1 2 0 0 0 27
+                                    1 0 0 0 9 0 0 0 12 2 0 0 0 65 1 3 0 0 0 65
+                                    27 1 2 2 0 0 27 1 1 2 0 0 1 3 1 0 0 113 114
+                                    1 3 1 0 0 115 27 1 2 1 0 0 115 1 2 1 0 0
+                                    113 1 2 0 15 0 0 17 1 0 0 0 46 2 0 0 0 0 1
+                                    2 0 0 0 0 76 2 0 0 102 0 1 2 0 0 0 0 44 2 0
+                                    0 18 0 26 2 0 0 27 0 1)))))
            '|lookupComplete|)) 

@@ -13,12 +13,6 @@
 (SDEFUN |HASHSTAT;update!;%Si%;3| ((|hs| (%)) (|i| (|SingleInteger|)) (% (%)))
         (HASHSTATEUPDATE |hs| |i|)) 
 
-(PUT '|HASHSTAT;modulo| '|SPADreplace| 'HASHSTATEMOD) 
-
-(SDEFUN |HASHSTAT;modulo|
-        ((|hs| (%)) (|i| (|SingleInteger|)) (% (|SingleInteger|)))
-        (HASHSTATEMOD |hs| |i|)) 
-
 (DECLAIM (NOTINLINE |HashState;|)) 
 
 (DEFUN |HashState;| ()
@@ -35,7 +29,7 @@
 
 (DEFUN |HashState| ()
   (SPROG NIL
-         (PROG (#1=#:G864)
+         (PROG (#1=#:G863)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|HashState|))

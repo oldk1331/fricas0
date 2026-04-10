@@ -496,7 +496,7 @@
 ;   -- [domain of implementation, target, arg1, arg2, ...]
 ;   -- sameAsTarg is a vector that counts the number of modemaps that
 ;   -- have the corresponding argument equal to the target type
-;   sameAsTarg := GETZEROVEC n
+;   sameAsTarg := MAKEARR1(n, 0)
 ;   numMms := LENGTH ops
 ;   for [.,targ,:argl] in ops repeat
 ;     for arg in argl for i in 0.. repeat
@@ -534,7 +534,7 @@
               NIL (- |n| 1) 0))
             (#1#
              (PROGN
-              (SETQ |sameAsTarg| (GETZEROVEC |n|))
+              (SETQ |sameAsTarg| (MAKEARR1 |n| 0))
               (SETQ |numMms| (LENGTH |ops|))
               ((LAMBDA (|bfVar#14| |bfVar#13|)
                  (LOOP
@@ -866,7 +866,9 @@
 ; bottomUpPredicate(pred, name) ==
 ;   putTarget(pred,$Boolean)
 ;   ms := bottomUp pred
-;   $Boolean ~= first ms => throwKeyedMsg("S2IB0001", [name])
+;   $Boolean ~= first ms => throw_msg("S2IB0001", CONCAT(
+;      '"An expression following %1b must evaluate to a %b Boolean %d",
+;        '" and you have written one that does not."), [name])
 ;   ms
 
 (DEFUN |bottomUpPredicate| (|pred| |name|)
@@ -877,7 +879,10 @@
       (SETQ |ms| (|bottomUp| |pred|))
       (COND
        ((NOT (EQUAL |$Boolean| (CAR |ms|)))
-        (|throwKeyedMsg| 'S2IB0001 (LIST |name|)))
+        (|throw_msg| 'S2IB0001
+         (CONCAT "An expression following %1b must evaluate to a %b Boolean %d"
+                 " and you have written one that does not.")
+         (LIST |name|)))
        ('T |ms|))))))
 
 ; bottomUpCompilePredicate(pred, name) ==
@@ -892,7 +897,8 @@
 
 ; bottomUpIdentifier(t,id) ==
 ;   m := isType t => bottomUpType(t, m)
-;   EQ(id,'noMapVal) => throwKeyedMsg("S2IB0002", NIL)
+;   EQ(id,'noMapVal) => throw_msg("S2IB0002",
+;       '"The function is not defined for given value.", nil)
 ;   EQ(id,'noBranch) =>
 ;     keyedSystemError("S2GE0016",
 ;       ['"bottomUpIdentifier",'"trying to evaluate noBranch"])
@@ -920,7 +926,9 @@
   (PROG (|m| |defaultType| |u| |tar| |expr| |om| |ISTMP#1| |r|)
     (RETURN
      (COND ((SETQ |m| (|isType| |t|)) (|bottomUpType| |t| |m|))
-           ((EQ |id| '|noMapVal|) (|throwKeyedMsg| 'S2IB0002 NIL))
+           ((EQ |id| '|noMapVal|)
+            (|throw_msg| 'S2IB0002
+             "The function is not defined for given value." NIL))
            ((EQ |id| '|noBranch|)
             (|keyedSystemError| 'S2GE0016
              (LIST "bottomUpIdentifier" "trying to evaluate noBranch")))
@@ -977,7 +985,13 @@
 ;
 ;   -- 1. declared mode but no value case
 ;   (m := getMode t) =>
-;     m is ['Mapping,:.] => throwKeyedMsg("S2IB0003",[getUnname t])
+;     m is ['Mapping,:.] => throw_msg("S2IB0003", CONCAT(
+;       '"The user-defined function %1bp cannot be applied as specified. %l",
+;                  '" Possible reasons: %i %l",
+;           '" 1. The function has been declared but not defined. %l",
+;         '" 2. Some arguments are functions, but they are not declared. %l",
+;           '" 3. The function is not being called with the correct number",
+;              '" of arguments. %u"), [getUnname t])
 ;
 ;     -- hmm, try to treat it like target mode or declared mode
 ;     if isPartialMode(m) then m := resolveTM(['Variable,id],m)
@@ -996,7 +1010,9 @@
 ;         putValue(t,val)
 ;         [m]
 ;     -- give up
-;     throwKeyedMsg("S2IB0004", [id, m])
+;     throw_msg("S2IB0004",
+;       '"%1b is declared as being in %2bp but has not been given a value.",
+;         [id, m])
 ;
 ;   -- 2. no value and no mode case
 ;   val := objNewWrap(id,defaultMode)
@@ -1031,7 +1047,15 @@
       ((SETQ |m| (|getMode| |t|))
        (COND
         ((AND (CONSP |m|) (EQ (CAR |m|) '|Mapping|))
-         (|throwKeyedMsg| 'S2IB0003 (LIST (|getUnname| |t|))))
+         (|throw_msg| 'S2IB0003
+          (CONCAT
+           "The user-defined function %1bp cannot be applied as specified. %l"
+           " Possible reasons: %i %l"
+           " 1. The function has been declared but not defined. %l"
+           " 2. Some arguments are functions, but they are not declared. %l"
+           " 3. The function is not being called with the correct number"
+           " of arguments. %u")
+          (LIST (|getUnname| |t|))))
         (#1='T
          (PROGN
           (COND
@@ -1049,7 +1073,10 @@
                          (|coerceInteractive|
                           (|objNewWrap| |id| (LIST '|Variable| |id|)) |m|)))
             (PROGN (|putValue| |t| |val|) (LIST |m|)))
-           (#1# (|throwKeyedMsg| 'S2IB0004 (LIST |id| |m|))))))))
+           (#1#
+            (|throw_msg| 'S2IB0004
+             "%1b is declared as being in %2bp but has not been given a value."
+             (LIST |id| |m|))))))))
       (#1#
        (PROGN
         (SETQ |val| (|objNewWrap| |id| |defaultMode|))
@@ -1671,19 +1698,58 @@
 ;   -- first see if there are ANY ops with this name
 ;
 ;   if nAllMmsWithName = 0 then
-;     sayKeyedMsg("S2IB0008a", [opName])
+;     say_msg("S2IB0008a", CONCAT(
+;       '"There are no library operations named %1b %l",
+;           '" Use HyperDoc Browse or issue",
+;         '" %ceon )what op %1 %ceoff to learn if there is any operation",
+;            '" containing _" %1 _" in its name."), [opName])
 ;   else if nAllExposedMmsWithName = 0 then
-;     nAllMmsWithName = 1 => sayKeyedMsg("S2IB0008b", [opName])
-;     sayKeyedMsg("S2IB0008c", [opName, nAllMmsWithName])
+;     nAllMmsWithName = 1 => say_msg("S2IB0008b", CONCAT(
+;       '"There are no exposed library operations named %1b but there is",
+;           '" one unexposed operation with that name. Use HyperDoc Browse",
+;         '" or issue %ceon )display op %1 %ceoff to learn more about the",
+;           '" available operation."), [opName])
+;     say_msg("S2IB0008c", CONCAT( _
+;       '"There are no exposed library operations named %1b but there are",
+;            '" %2b unexposed operations with that name. Use HyperDoc Browse",
+;         '" or issue %ceon )display op %1 %ceoff to learn more about the",
+;           '" available operations."), [opName, nAllMmsWithName])
 ;   else
 ;     -- now talk about specific arguments
 ;     nAllExposedMmsWithNameAndArgs   := #getModemapsFromDatabase(opName, nArgs)
-;     nAllMmsWithNameAndArgs          := #getAllModemapsFromDatabase(opName, nArgs)
+;     nAllMmsWithNameAndArgs := #getAllModemapsFromDatabase(opName, nArgs)
 ;     nAllMmsWithNameAndArgs = 0 =>
-;         sayKeyedMsg("S2IB0008d", [opName, nArgs, nAllExposedMmsWithName, nAllMmsWithName - nAllExposedMmsWithName])
+;         say_msg("S2IB0008d", CONCAT( _
+;   '"There are no library operations named %1b having %2 argument(s)", _
+;   '" though there are %3 exposed operation(s) and %4 unexposed", _
+;   '" operation(s) having a different number of", _
+;   '" arguments. Use HyperDoc Browse, or issue", _
+;   '" %ceon )what op %1 %ceoff to learn what operations", _
+;   '" contain _" %1 _" in their names, or issue", _
+;   '" %ceon )display op %1 %ceoff to learn more about the available", _
+;   '" operations."), _
+;             [opName, nArgs, nAllExposedMmsWithName,
+;                 nAllMmsWithName - nAllExposedMmsWithName])
 ;     nAllExposedMmsWithNameAndArgs = 0 =>
-;         sayKeyedMsg("S2IB0008e", [opName, nArgs, nAllMmsWithNameAndArgs - nAllExposedMmsWithNameAndArgs])
-;     sayKeyedMsg("S2IB0008f", [opName, nArgs, nAllExposedMmsWithNameAndArgs, nAllMmsWithNameAndArgs - nAllExposedMmsWithNameAndArgs])
+;         say_msg("S2IB0008e", CONCAT( _
+;   '"There are no exposed library operations named %1b having %2", _
+;   '" argument(s) though there are %3 unexposed operation(s) with %2", _
+;   '" argument(s).  Use HyperDoc Browse, or issue", _
+;   '" %ceon )display op %1 %ceoff to learn more about the available", _
+;   '"operations."),
+;             [opName, nArgs,
+;                 nAllMmsWithNameAndArgs - nAllExposedMmsWithNameAndArgs])
+;     say_msg("S2IB0008f", CONCAT( _
+;   '"There are %3 exposed and %4 unexposed", _
+;   '" library operations named %1b having %2 argument(s)", _
+;   '" but none was determined to be applicable.", _
+;   '" Use HyperDoc Browse, or", _
+;   '" issue %ceon )display op %1 %ceoff to learn more about the available", _
+;   '" operations.", _
+;   '" Perhaps package-calling the operation or using coercions on the", _
+;   '" arguments will allow you to apply the operation."),
+;         [opName, nArgs, nAllExposedMmsWithNameAndArgs,
+;             nAllMmsWithNameAndArgs - nAllExposedMmsWithNameAndArgs])
 ;   nil
 
 (DEFUN |sayIntelligentMessageAboutOpAvailability| (|opName| |nArgs|)
@@ -1703,13 +1769,29 @@
                      (LENGTH (|getAllModemapsFromDatabase| |opName| NIL)))
              (COND
               ((EQL |nAllMmsWithName| 0)
-               (|sayKeyedMsg| '|S2IB0008a| (LIST |opName|)))
+               (|say_msg| '|S2IB0008a|
+                (CONCAT "There are no library operations named %1b %l"
+                        " Use HyperDoc Browse or issue"
+                        " %ceon )what op %1 %ceoff to learn if there is any operation"
+                        " containing \" %1 \" in its name.")
+                (LIST |opName|)))
               ((EQL |nAllExposedMmsWithName| 0)
                (COND
                 ((EQL |nAllMmsWithName| 1)
-                 (|sayKeyedMsg| '|S2IB0008b| (LIST |opName|)))
+                 (|say_msg| '|S2IB0008b|
+                  (CONCAT
+                   "There are no exposed library operations named %1b but there is"
+                   " one unexposed operation with that name. Use HyperDoc Browse"
+                   " or issue %ceon )display op %1 %ceoff to learn more about the"
+                   " available operation.")
+                  (LIST |opName|)))
                 (#1#
-                 (|sayKeyedMsg| '|S2IB0008c|
+                 (|say_msg| '|S2IB0008c|
+                  (CONCAT
+                   "There are no exposed library operations named %1b but there are"
+                   " %2b unexposed operations with that name. Use HyperDoc Browse"
+                   " or issue %ceon )display op %1 %ceoff to learn more about the"
+                   " available operations.")
                   (LIST |opName| |nAllMmsWithName|)))))
               (#1#
                (SETQ |nAllExposedMmsWithNameAndArgs|
@@ -1719,16 +1801,39 @@
                         (|getAllModemapsFromDatabase| |opName| |nArgs|)))
                (COND
                 ((EQL |nAllMmsWithNameAndArgs| 0)
-                 (|sayKeyedMsg| '|S2IB0008d|
+                 (|say_msg| '|S2IB0008d|
+                  (CONCAT
+                   "There are no library operations named %1b having %2 argument(s)"
+                   " though there are %3 exposed operation(s) and %4 unexposed"
+                   " operation(s) having a different number of"
+                   " arguments. Use HyperDoc Browse, or issue"
+                   " %ceon )what op %1 %ceoff to learn what operations"
+                   " contain \" %1 \" in their names, or issue"
+                   " %ceon )display op %1 %ceoff to learn more about the available"
+                   " operations.")
                   (LIST |opName| |nArgs| |nAllExposedMmsWithName|
                         (- |nAllMmsWithName| |nAllExposedMmsWithName|))))
                 ((EQL |nAllExposedMmsWithNameAndArgs| 0)
-                 (|sayKeyedMsg| '|S2IB0008e|
+                 (|say_msg| '|S2IB0008e|
+                  (CONCAT
+                   "There are no exposed library operations named %1b having %2"
+                   " argument(s) though there are %3 unexposed operation(s) with %2"
+                   " argument(s).  Use HyperDoc Browse, or issue"
+                   " %ceon )display op %1 %ceoff to learn more about the available"
+                   "operations.")
                   (LIST |opName| |nArgs|
                         (- |nAllMmsWithNameAndArgs|
                            |nAllExposedMmsWithNameAndArgs|))))
                 (#1#
-                 (|sayKeyedMsg| '|S2IB0008f|
+                 (|say_msg| '|S2IB0008f|
+                  (CONCAT "There are %3 exposed and %4 unexposed"
+                          " library operations named %1b having %2 argument(s)"
+                          " but none was determined to be applicable."
+                          " Use HyperDoc Browse, or"
+                          " issue %ceon )display op %1 %ceoff to learn more about the available"
+                          " operations."
+                          " Perhaps package-calling the operation or using coercions on the"
+                          " arguments will allow you to apply the operation.")
                   (LIST |opName| |nArgs| |nAllExposedMmsWithNameAndArgs|
                         (- |nAllMmsWithNameAndArgs|
                            |nAllExposedMmsWithNameAndArgs|)))))))

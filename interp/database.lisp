@@ -1372,86 +1372,61 @@
        |condList| NIL)
       |iff|))))
 
-; getAllModemapsFromDatabase(op,nargs) ==
-;   $getUnexposedOperations: local := true
-;   startTimingProcess 'diskread
-;   ans := getSystemModemaps(op,nargs)
-;   stopTimingProcess 'diskread
-;   ans
+; getAllModemapsFromDatabase(op,nargs) == getSystemModemaps(op, nargs, true)
 
 (DEFUN |getAllModemapsFromDatabase| (|op| |nargs|)
-  (PROG (|$getUnexposedOperations| |ans|)
-    (DECLARE (SPECIAL |$getUnexposedOperations|))
-    (RETURN
-     (PROGN
-      (SETQ |$getUnexposedOperations| T)
-      (|startTimingProcess| '|diskread|)
-      (SETQ |ans| (|getSystemModemaps| |op| |nargs|))
-      (|stopTimingProcess| '|diskread|)
-      |ans|))))
+  (PROG () (RETURN (|getSystemModemaps| |op| |nargs| T))))
 
-; getModemapsFromDatabase(op,nargs) ==
-;   $getUnexposedOperations: local := false
-;   startTimingProcess 'diskread
-;   ans := getSystemModemaps(op,nargs)
-;   stopTimingProcess 'diskread
-;   ans
+; getModemapsFromDatabase(op,nargs) == getSystemModemaps(op, nargs, false)
 
 (DEFUN |getModemapsFromDatabase| (|op| |nargs|)
-  (PROG (|$getUnexposedOperations| |ans|)
-    (DECLARE (SPECIAL |$getUnexposedOperations|))
-    (RETURN
-     (PROGN
-      (SETQ |$getUnexposedOperations| NIL)
-      (|startTimingProcess| '|diskread|)
-      (SETQ |ans| (|getSystemModemaps| |op| |nargs|))
-      (|stopTimingProcess| '|diskread|)
-      |ans|))))
+  (PROG () (RETURN (|getSystemModemaps| |op| |nargs| NIL))))
 
-; getSystemModemaps(op,nargs) ==
-;   mml:= get_database(op, 'OPERATION) =>
-;     mms := NIL
+; getSystemModemaps(op, nargs, include_unexposed?) ==
+;     startTimingProcess('diskread)
+;     mml := get_database(op, 'OPERATION)
+;     mms := []
 ;     for (x := [[.,:sig],.]) in mml repeat
-;       (NUMBERP nargs) and (nargs ~= #QCDR sig) => 'iterate
-;       $getUnexposedOperations or isFreeFunctionFromMm(x) or
-;         isExposedConstructor(getDomainFromMm(x)) => mms := [x,:mms]
-;       'iterate
+;         (NUMBERP nargs) and (nargs ~= #QCDR sig) => 'iterate
+;         if include_unexposed? or isFreeFunctionFromMm(x) or
+;            isExposedConstructor(getDomainFromMm(x)) then mms := [x, :mms]
+;     stopTimingProcess('diskread)
 ;     mms
-;   nil
 
-(DEFUN |getSystemModemaps| (|op| |nargs|)
+(DEFUN |getSystemModemaps| (|op| |nargs| |include_unexposed?|)
   (PROG (|mml| |mms| |ISTMP#1| |sig| |ISTMP#2|)
     (RETURN
-     (COND
-      ((SETQ |mml| (|get_database| |op| 'OPERATION))
-       (PROGN
-        (SETQ |mms| NIL)
-        ((LAMBDA (|bfVar#51| |x|)
-           (LOOP
-            (COND
-             ((OR (ATOM |bfVar#51|) (PROGN (SETQ |x| (CAR |bfVar#51|)) NIL))
-              (RETURN NIL))
-             (#1='T
-              (AND (CONSP |x|)
-                   (PROGN
-                    (SETQ |ISTMP#1| (CAR |x|))
-                    (AND (CONSP |ISTMP#1|)
-                         (PROGN (SETQ |sig| (CDR |ISTMP#1|)) #1#)))
-                   (PROGN
-                    (SETQ |ISTMP#2| (CDR |x|))
-                    (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)))
+     (PROGN
+      (|startTimingProcess| '|diskread|)
+      (SETQ |mml| (|get_database| |op| 'OPERATION))
+      (SETQ |mms| NIL)
+      ((LAMBDA (|bfVar#51| |x|)
+         (LOOP
+          (COND
+           ((OR (ATOM |bfVar#51|) (PROGN (SETQ |x| (CAR |bfVar#51|)) NIL))
+            (RETURN NIL))
+           (#1='T
+            (AND (CONSP |x|)
+                 (PROGN
+                  (SETQ |ISTMP#1| (CAR |x|))
+                  (AND (CONSP |ISTMP#1|)
+                       (PROGN (SETQ |sig| (CDR |ISTMP#1|)) #1#)))
+                 (PROGN
+                  (SETQ |ISTMP#2| (CDR |x|))
+                  (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)))
+                 (COND
+                  ((AND (NUMBERP |nargs|)
+                        (NOT (EQL |nargs| (LENGTH (QCDR |sig|)))))
+                   '|iterate|)
+                  (#1#
                    (COND
-                    ((AND (NUMBERP |nargs|)
-                          (NOT (EQL |nargs| (LENGTH (QCDR |sig|)))))
-                     '|iterate|)
-                    ((OR |$getUnexposedOperations| (|isFreeFunctionFromMm| |x|)
+                    ((OR |include_unexposed?| (|isFreeFunctionFromMm| |x|)
                          (|isExposedConstructor| (|getDomainFromMm| |x|)))
-                     (SETQ |mms| (CONS |x| |mms|)))
-                    (#1# '|iterate|)))))
-            (SETQ |bfVar#51| (CDR |bfVar#51|))))
-         |mml| NIL)
-        |mms|))
-      (#1# NIL)))))
+                     (SETQ |mms| (CONS |x| |mms|)))))))))
+          (SETQ |bfVar#51| (CDR |bfVar#51|))))
+       |mml| NIL)
+      (|stopTimingProcess| '|diskread|)
+      |mms|))))
 
 ; mkAlistOfExplicitCategoryOps target ==
 ;   if target is ['add,a,:l] then
@@ -1789,7 +1764,7 @@
 ;   -- check if it is explicitly exposed
 ;   MEMQ(name,$localExposureData.1) => true
 ;   -- check if it is in an exposed group
-;   found := NIL
+;   found := false
 ;   if null($globalExposureHash) then
 ;       initExposureHash()
 ;   exd := HGET($globalExposureHash, name)
@@ -1823,17 +1798,23 @@
              |found|))))))
 
 ; displayExposedGroups() ==
-;   sayKeyedMsg("S2IZ0049A",[$interpreterFrameName])
-;   if null $localExposureData.0
-;     then centerAndHighlight '"there are no exposed groups"
-;     else for g in $localExposureData.0 repeat
-;       centerAndHighlight g
+;     say_msg("S2IZ0049A", CONCAT(
+;       '"The following groups are explicitly exposed in the current",
+;        '" frame (called %1b ):"), [$interpreterFrameName])
+;     if null($localExposureData.0) then
+;         centerAndHighlight '"there are no exposed groups"
+;     else
+;         for g in $localExposureData.0 repeat
+;             centerAndHighlight g
 
 (DEFUN |displayExposedGroups| ()
   (PROG ()
     (RETURN
      (PROGN
-      (|sayKeyedMsg| 'S2IZ0049A (LIST |$interpreterFrameName|))
+      (|say_msg| 'S2IZ0049A
+       (CONCAT "The following groups are explicitly exposed in the current"
+               " frame (called %1b ):")
+       (LIST |$interpreterFrameName|))
       (COND
        ((NULL (ELT |$localExposureData| 0))
         (|centerAndHighlight| "there are no exposed groups"))
@@ -1848,7 +1829,9 @@
          (ELT |$localExposureData| 0) NIL)))))))
 
 ; displayExposedConstructors() ==
-;   sayKeyedMsg("S2IZ0049B",NIL)
+;   say_msg("S2IZ0049B",
+;     '"The following constructors are explicitly exposed in the current frame:",
+;        nil)
 ;   if null $localExposureData.1
 ;     then centerAndHighlight
 ;       '"there are no explicitly exposed constructors"
@@ -1859,7 +1842,9 @@
   (PROG ()
     (RETURN
      (PROGN
-      (|sayKeyedMsg| 'S2IZ0049B NIL)
+      (|say_msg| 'S2IZ0049B
+       "The following constructors are explicitly exposed in the current frame:"
+       NIL)
       (COND
        ((NULL (ELT |$localExposureData| 1))
         (|centerAndHighlight| "there are no explicitly exposed constructors"))
@@ -1874,7 +1859,9 @@
          (ELT |$localExposureData| 1) NIL)))))))
 
 ; displayHiddenConstructors() ==
-;   sayKeyedMsg("S2IZ0049C",NIL)
+;   say_msg("S2IZ0049C",
+;     '"The following constructors are explicitly hidden in the current frame:",
+;        nil)
 ;   if null $localExposureData.2
 ;     then centerAndHighlight
 ;       '"there are no explicitly hidden constructors"
@@ -1885,7 +1872,9 @@
   (PROG ()
     (RETURN
      (PROGN
-      (|sayKeyedMsg| 'S2IZ0049C NIL)
+      (|say_msg| 'S2IZ0049C
+       "The following constructors are explicitly hidden in the current frame:"
+       NIL)
       (COND
        ((NULL (ELT |$localExposureData| 2))
         (|centerAndHighlight| "there are no explicitly hidden constructors"))

@@ -21,7 +21,6 @@
                                            (|RadicalCategory|)
                                            (|ConvertibleTo| '#4#)
                                            (|PatternMatchable| '#5#)
-                                           (|CharacteristicZero|)
                                            (|mkCategory|
                                             '(((|norm| (% %)) T)
                                               ((|ceiling| (% %)) T)

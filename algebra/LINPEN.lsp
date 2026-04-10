@@ -1568,7 +1568,7 @@
                   (COND
                    ((> (LENGTH |lst|) (LENGTH (QVELT |p| 2)))
                     (|error|
-                     "LINPEN: setelt!(%,i,j,lst) - list of elements to long."))
+                     "LINPEN: setelt!(%,i,j,lst) - list of elements too long."))
                    ('T
                     (SEQ
                      (SEQ (LETT |l| 1) (LETT #1# (LENGTH |lst|)) G190
@@ -1619,7 +1619,7 @@
                 (PROG1 (LETT #2# (- (+ (QVELT |p| 1) 1) |j|))
                   (|check_subtype2| (>= #2# 0) '(|NonNegativeInteger|)
                                     '(|Integer|) #2#))))
-            (|error| "LINPEN: setsubPencil!(%,i,j,%) - pencil to big."))
+            (|error| "LINPEN: setsubPencil!(%,i,j,%) - pencil too big."))
            ((NULL (EQL (LENGTH (QVELT |p| 2)) (LENGTH (QVELT |q| 2))))
             (|error|
              "LINPEN: setsubPencil!(%,i,j,%) - different number of matrices."))

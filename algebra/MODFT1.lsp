@@ -47,7 +47,7 @@
 
 (SDEFUN |MODFT1;random_poly;2IUv;9|
         ((|n| (|Integer|)) (|p| (|Integer|)) (% (|U32Vector|)))
-        (SPROG ((#1=#:G30 NIL) (|i| NIL) (|res| (|U32Vector|)))
+        (SPROG ((#1=#:G28 NIL) (|i| NIL) (|res| (|U32Vector|)))
                (SEQ (LETT |res| (GETREFV_U32 (+ |n| 1) 0))
                     (SEQ (LETT |i| 0) (LETT #1# |n|) G190
                          (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -96,7 +96,7 @@
            #1=(|Record| (|:| |ind| (|NonNegativeInteger|))
                         (|:| |poly| (|U32Vector|))))))
         (SPROG
-         ((|res| (|List| #1#)) (|tmp1| (|U32Vector|)) (#2=#:G49 NIL) (|i| NIL)
+         ((|res| (|List| #1#)) (|tmp1| (|U32Vector|)) (#2=#:G47 NIL) (|i| NIL)
           (|ni| #3=(|Integer|)) (|ii| #3#) (|nn| (|Integer|))
           (|tmp| (|U32Vector|)) (|n1| #3#) (|n| (|NonNegativeInteger|)))
          (SEQ (LETT |pol| (SPADCALL |pol| (QREFELT % 27)))
@@ -135,7 +135,7 @@
 (SDEFUN |MODFT1;copy_slice2|
         ((|np| (|U32Vector|)) (|op| (|U32Vector|)) (|n| (|Integer|))
          (|m| (|Integer|)) (% (|Void|)))
-        (SPROG ((#1=#:G56 NIL) (|i| NIL))
+        (SPROG ((#1=#:G54 NIL) (|i| NIL))
                (SEQ (LETT |i| 0) (LETT #1# (- |m| 1)) G190
                     (COND ((|greater_SI| |i| #1#) (GO G191)))
                     (SEQ
@@ -150,9 +150,9 @@
                      (|:| |poly| (|U32Vector|)))))
          (% (|U32Vector|)))
         (SPROG
-         ((#1=#:G77 NIL) (|i| NIL) (#2=#:G76 NIL) (|n1| #3=(|Integer|))
+         ((#1=#:G75 NIL) (|i| NIL) (#2=#:G74 NIL) (|n1| #3=(|Integer|))
           (|mi| #4=(|Integer|)) (|tmp| (|U32Vector|)) (|mi0| #4#) (|ni| #3#)
-          (|ii| #5=(|NonNegativeInteger|)) (#6=#:G75 NIL) (|ri| NIL) (|n0| #3#)
+          (|ii| #5=(|NonNegativeInteger|)) (#6=#:G73 NIL) (|ri| NIL) (|n0| #3#)
           (|f| (|U32Vector|)) (|p| #5#)
           (|r0|
            (|Record| (|:| |ind| (|NonNegativeInteger|))
@@ -247,7 +247,7 @@
                      (|:| |poly| (|U32Vector|)))))
          (% (|Void|)))
         (SPROG
-         ((#2=#:G83 NIL) (|i| NIL) (|n| #3=(|NonNegativeInteger|)) (|n1| #3#)
+         ((#2=#:G81 NIL) (|i| NIL) (|n| #3=(|NonNegativeInteger|)) (|n1| #3#)
           (|res1| (|U32Vector|)) (|p| #1#)
           (|r0|
            (|Record| (|:| |ind| (|NonNegativeInteger|))
@@ -271,7 +271,7 @@
                      (|:| |poly| (|U32Vector|)))))
          (% (|U32Vector|)))
         (SPROG
-         ((#1=#:G92 NIL) (|has_res| (|Boolean|)) (|res| (|U32Vector|))
+         ((#1=#:G90 NIL) (|has_res| (|Boolean|)) (|res| (|U32Vector|))
           (|pow| (|U32Vector|)) (|m| (|NonNegativeInteger|))
           (|f| (|U32Vector|)) (|p| (|NonNegativeInteger|))
           (|r0|
@@ -302,7 +302,7 @@
                               (EXIT
                                (COND
                                 ((EQL |n| 0)
-                                 (PROGN (LETT #1# |$NoValue|) (GO #2=#:G89)))
+                                 (PROGN (LETT #1# |$NoValue|) (GO #2=#:G87)))
                                 ('T
                                  (|MODFT1;mul_and_red| |pow| |pow| |rdata|
                                   %)))))
@@ -317,95 +317,15 @@
 (SDEFUN |MODFT1;empty_mat?;UmB;20| ((|mat| (|U32Matrix|)) (% (|Boolean|)))
         (SPADCALL |mat| (QREFELT % 41))) 
 
-(SDEFUN |MODFT1;mmul|
-        ((|m1| (|U32Matrix|)) (|m2| (|U32Matrix|)) (|d2| (|Integer|))
-         (|p| (|Integer|)) (% (|U32Matrix|)))
-        (SPROG
-         ((|ss| (|Integer|)) (#1=#:G108 NIL) (|k| NIL) (#2=#:G107 NIL)
-          (|j| NIL) (#3=#:G106 NIL) (|i| NIL) (|res| (|U32Matrix|))
-          (|nr2| (|NonNegativeInteger|)) (|nc1| (|NonNegativeInteger|))
-          (|nr1| (|NonNegativeInteger|)))
-         (SEQ (LETT |nr1| (ANROWS_U32 |m1|)) (LETT |nc1| (ANCOLS_U32 |m1|))
-              (EXIT
-               (COND
-                ((OR (< (ANCOLS_U32 |m2|) |nc1|) (< (ANROWS_U32 |m2|) |d2|))
-                 (|error| "mmul: m2 too small"))
-                ('T
-                 (SEQ (LETT |nr2| |d2|)
-                      (LETT |res| (MAKE_MATRIX1_U32 |nr1| |nr2| 0))
-                      (SEQ (LETT |i| 0) (LETT #3# (- |nr1| 1)) G190
-                           (COND ((|greater_SI| |i| #3#) (GO G191)))
-                           (SEQ
-                            (EXIT
-                             (SEQ (LETT |j| 0) (LETT #2# (- |nr2| 1)) G190
-                                  (COND ((|greater_SI| |j| #2#) (GO G191)))
-                                  (SEQ (LETT |ss| 0)
-                                       (SEQ (LETT |k| 0) (LETT #1# (- |nc1| 1))
-                                            G190
-                                            (COND
-                                             ((|greater_SI| |k| #1#)
-                                              (GO G191)))
-                                            (SEQ
-                                             (EXIT
-                                              (LETT |ss|
-                                                    (QSMULADD64_32
-                                                     (AREF2_U32 |m1| |i| |k|)
-                                                     (AREF2_U32 |m2| |j| |k|)
-                                                     |ss|))))
-                                            (LETT |k| (|inc_SI| |k|)) (GO G190)
-                                            G191 (EXIT NIL))
-                                       (EXIT
-                                        (SETAREF2_U32 |res| |i| |j|
-                                                      (QSMOD64_32 |ss| |p|))))
-                                  (LETT |j| (|inc_SI| |j|)) (GO G190) G191
-                                  (EXIT NIL))))
-                           (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
-                      (EXIT |res|)))))))) 
-
-(SDEFUN |MODFT1;copy_mat_part;UmIUm;22|
+(SDEFUN |MODFT1;copy_mat_part;UmIUm;21|
         ((|m| (|U32Matrix|)) (|nr| (|Integer|)) (% (|U32Matrix|)))
-        (SPROG
-         ((#1=#:G116 NIL) (|j| NIL) (#2=#:G115 NIL) (|i| NIL)
-          (|res| (|U32Matrix|)) (|nc| (|Integer|)))
-         (SEQ (LETT |nc| (MIN (ANCOLS_U32 |m|) |nr|))
-              (LETT |res| (MAKE_MATRIX1_U32 |nr| |nc| 0))
-              (SEQ (LETT |i| 0) (LETT #2# (- |nr| 1)) G190
-                   (COND ((|greater_SI| |i| #2#) (GO G191)))
-                   (SEQ
-                    (EXIT
-                     (SEQ (LETT |j| 0) (LETT #1# (- |nc| 1)) G190
-                          (COND ((|greater_SI| |j| #1#) (GO G191)))
-                          (SEQ
-                           (EXIT
-                            (SETAREF2_U32 |res| |i| |j|
-                                          (AREF2_U32 |m| |i| |j|))))
-                          (LETT |j| (|inc_SI| |j|)) (GO G190) G191
-                          (EXIT NIL))))
-                   (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
-              (EXIT |res|)))) 
+        (SPADCALL |m| |nr| (MIN (ANCOLS_U32 |m|) |nr|) (QREFELT % 44))) 
 
-(SDEFUN |MODFT1;shift_mat!;Um2IV;23|
+(SDEFUN |MODFT1;shift_mat!;Um2IV;22|
         ((|m| (|U32Matrix|)) (|sa| #1=(|Integer|)) (|nr| #1#) (% (|Void|)))
-        (SPROG
-         ((#2=#:G124 NIL) (|j| NIL) (#3=#:G123 NIL) (|i| NIL)
-          (|nc| (|Integer|)))
-         (SEQ (LETT |nc| (MIN (ANCOLS_U32 |m|) |nr|))
-              (EXIT
-               (SEQ (LETT |i| 0) (LETT #3# (- |nr| 1)) G190
-                    (COND ((|greater_SI| |i| #3#) (GO G191)))
-                    (SEQ
-                     (EXIT
-                      (SEQ (LETT |j| 0) (LETT #2# (- |nc| 1)) G190
-                           (COND ((|greater_SI| |j| #2#) (GO G191)))
-                           (SEQ
-                            (EXIT
-                             (SETAREF2_U32 |m| |i| |j|
-                                           (AREF2_U32 |m| (+ |i| |sa|) |j|))))
-                           (LETT |j| (|inc_SI| |j|)) (GO G190) G191
-                           (EXIT NIL))))
-                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL)))))) 
+        (SPADCALL |m| |sa| |nr| (MIN (ANCOLS_U32 |m|) |nr|) (QREFELT % 46))) 
 
-(SDEFUN |MODFT1;trim_mat!;Um2ILV;24|
+(SDEFUN |MODFT1;trim_mat!;Um2ILV;23|
         ((|m| (|U32Matrix|)) (|nr0| #1=(|Integer|)) (|nr1| #1#)
          (|rdata|
           (|List|
@@ -413,8 +333,8 @@
                      (|:| |poly| (|U32Vector|)))))
          (% (|Void|)))
         (SPROG
-         ((#2=#:G138 NIL) (|i| NIL) (|tmp1| (|U32Vector|)) (#3=#:G137 NIL)
-          (#4=#:G136 NIL) (|j| NIL) (|tmp| (|U32Vector|)) (|nc| (|Integer|)))
+         ((#2=#:G108 NIL) (|i| NIL) (|tmp1| (|U32Vector|)) (#3=#:G107 NIL)
+          (#4=#:G106 NIL) (|j| NIL) (|tmp| (|U32Vector|)) (|nc| (|Integer|)))
          (SEQ
           (COND ((< (ANROWS_U32 |m|) |nr0|) (|error| "trim_mat!: m too small"))
                 ('T
@@ -446,7 +366,7 @@
                             (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                             (EXIT NIL))))))))) 
 
-(SDEFUN |MODFT1;split_mat!;Um3I2LV;25|
+(SDEFUN |MODFT1;split_mat!;Um3I2LV;24|
         ((|m| (|U32Matrix|)) (|nr0| #1=(|Integer|)) (|nr1| #1#) (|nr2| #1#)
          (|rdata1|
           #2=(|List|
@@ -454,8 +374,8 @@
                         (|:| |poly| (|U32Vector|)))))
          (|rdata2| #2#) (% (|Void|)))
         (SPROG
-         ((#3=#:G158 NIL) (|i| NIL) (|rtmp| (|U32Vector|)) (#4=#:G157 NIL)
-          (#5=#:G156 NIL) (#6=#:G155 NIL) (|j| NIL) (|tmp2| #7=(|U32Vector|))
+         ((#3=#:G128 NIL) (|i| NIL) (|rtmp| (|U32Vector|)) (#4=#:G127 NIL)
+          (#5=#:G126 NIL) (#6=#:G125 NIL) (|j| NIL) (|tmp2| #7=(|U32Vector|))
           (|tmp1| #7#) (|nc| (|Integer|)))
          (SEQ
           (COND
@@ -508,7 +428,7 @@
                        (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                        (EXIT NIL))))))))) 
 
-(SDEFUN |MODFT1;power_matrix;UvNniLR;26|
+(SDEFUN |MODFT1;power_matrix;UvNniLR;25|
         ((|xp| (|U32Vector|)) (|l| (|NonNegativeInteger|))
          (|rdata|
           (|List|
@@ -516,7 +436,7 @@
                      (|:| |poly| (|U32Vector|)))))
          (% (|Record| (|:| |matr| (|U32Matrix|)) (|:| |poly| (|U32Vector|)))))
         (SPROG
-         ((#1=#:G170 NIL) (|k| NIL) (#2=#:G169 NIL) (|j| NIL)
+         ((#1=#:G140 NIL) (|k| NIL) (#2=#:G139 NIL) (|j| NIL)
           (|n1| (|SingleInteger|)) (|l1| (|Integer|)) (|pow| (|U32Vector|))
           (|pm| (|U32Matrix|)) (|n| (|NonNegativeInteger|)) (|f| (|U32Vector|))
           (|p| (|NonNegativeInteger|))
@@ -542,7 +462,7 @@
                    (LETT |j| (|inc_SI| |j|)) (GO G190) G191 (EXIT NIL))
               (EXIT (CONS |pm| |pow|))))) 
 
-(SDEFUN |MODFT1;modular_compose;UvUmUvNniLUv;27|
+(SDEFUN |MODFT1;modular_compose;UvUmUvNniLUv;26|
         ((|pol| #1=(|U32Vector|)) (|pm| (|U32Matrix|)) (|xp1| #1#)
          (|l1| (|NonNegativeInteger|))
          (|rdata|
@@ -551,9 +471,9 @@
                      (|:| |poly| (|U32Vector|)))))
          (% (|U32Vector|)))
         (SPROG
-         ((#2=#:G188 NIL) (|i| (|SingleInteger|)) (|k| NIL)
+         ((#2=#:G158 NIL) (|i| (|SingleInteger|)) (|k| NIL)
           (|ns1| (|SingleInteger|)) (|res| #3=(|U32Vector|)) (|p1| #3#)
-          (|m2| (|U32Matrix|)) (#4=#:G187 NIL) (#5=#:G186 NIL) (|j| NIL)
+          (|m2| (|U32Matrix|)) (#4=#:G157 NIL) (#5=#:G156 NIL) (|j| NIL)
           (|k1| #6=(|SingleInteger|)) (|l1s| #6#) (|m1| (|U32Matrix|))
           (|l2| #7=(|NonNegativeInteger|)) (|dps1| #6#) (|dp| #7#)
           (|dp0| (|Integer|)) (|ns| #6#) (|n| #7#) (|f| (|U32Vector|))
@@ -590,10 +510,11 @@
                                        (EXIT NIL))))
                                 (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                                 (EXIT NIL))
-                           (LETT |m2| (|MODFT1;mmul| |m1| |pm| |n| |p| %))
+                           (LETT |m2|
+                                 (SPADCALL |m1| |pm| |n| |p| (QREFELT % 53)))
                            (EXIT
                             (COND
-                             ((SPADCALL (ANCOLS_U32 |m2|) |n| (QREFELT % 50))
+                             ((SPADCALL (ANCOLS_U32 |m2|) |n| (QREFELT % 54))
                               (|error|
                                "modular_compose: unexpected dimension of m2"))
                              (#8#
@@ -632,7 +553,7 @@
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|ModularFactorizationTools1|))
-          (LETT % (GETREFV 52))
+          (LETT % (GETREFV 56))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|ModularFactorizationTools1| NIL
@@ -643,7 +564,7 @@
 
 (DEFUN |ModularFactorizationTools1| ()
   (SPROG NIL
-         (PROG (#1=#:G192)
+         (PROG (#1=#:G162)
            (RETURN
             (COND
              ((LETT #1#
@@ -676,47 +597,51 @@
               (19 . |divide!|) |MODFT1;divide!;2UvIUv;10|
               (27 . |vector_add_mul|) |MODFT1;add_poly;2UvIUv;11|
               |MODFT1;sub_poly;2UvIUv;12| (37 . |copy|) (42 . |remainder!|)
-              (|Record| (|:| |ind| 48) (|:| |poly| 9)) (|List| 29)
+              (|Record| (|:| |ind| 51) (|:| |poly| 9)) (|List| 29)
               |MODFT1;ini_rdata;UvIL;13| |MODFT1;get_mod;LI;14|
               (49 . |truncated_mul_add|) (58 . |truncated_mul_add2|)
               |MODFT1;red_pol!;UvLUv;16| (68 . |mul|)
               |MODFT1;mod_exp;UvILUv;18| (|U32Matrix|) |MODFT1;empty_mat;Um;19|
               (|Boolean|) (75 . |empty?|) |MODFT1;empty_mat?;UmB;20|
-              |MODFT1;copy_mat_part;UmIUm;22| |MODFT1;shift_mat!;Um2IV;23|
-              |MODFT1;trim_mat!;Um2ILV;24| |MODFT1;split_mat!;Um3I2LV;25|
+              (|ModularU32MatrixOperations|) (80 . |copy_mat_part|)
+              |MODFT1;copy_mat_part;UmIUm;21| (87 . |shift_mat!|)
+              |MODFT1;shift_mat!;Um2IV;22| |MODFT1;trim_mat!;Um2ILV;23|
+              |MODFT1;split_mat!;Um3I2LV;24|
               (|Record| (|:| |matr| 38) (|:| |poly| 9)) (|NonNegativeInteger|)
-              |MODFT1;power_matrix;UvNniLR;26| (80 . ~=)
-              |MODFT1;modular_compose;UvUmUvNniLUv;27|)
-           '#(|trim_mat!| 86 |sub_poly| 94 |sub1!| 101 |split_mat!| 107
-              |shift_mat!| 117 |red_pol!| 124 |random_poly| 130 |power_matrix|
-              136 |monomial1| 143 |modular_compose| 148 |mod_exp| 157
-              |ini_rdata| 164 |get_mod| 170 |get_extension_degree| 175
-              |get_char| 180 |gcd| 185 |empty_poly| 192 |empty_mat?| 196
-              |empty_mat| 201 |divide!| 205 |degree| 212 |copy_poly| 217
-              |copy_mat_part| 224 |add_poly| 230)
+              |MODFT1;power_matrix;UvNniLR;25| (95 . |mmul|) (103 . ~=)
+              |MODFT1;modular_compose;UvUmUvNniLUv;26|)
+           '#(|trim_mat!| 109 |sub_poly| 117 |sub1!| 124 |split_mat!| 130
+              |shift_mat!| 140 |red_pol!| 147 |random_poly| 153 |power_matrix|
+              159 |monomial1| 166 |modular_compose| 171 |mod_exp| 180
+              |ini_rdata| 187 |get_mod| 193 |get_extension_degree| 198
+              |get_char| 203 |gcd| 208 |empty_poly| 215 |empty_mat?| 219
+              |empty_mat| 224 |divide!| 228 |degree| 235 |copy_poly| 240
+              |copy_mat_part| 247 |add_poly| 253)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
                        (CONS '#((|ModularFactorizationOperations| 9 38 6 30))
-                             (|makeByteWordVec2| 51
+                             (|makeByteWordVec2| 55
                                                  '(1 10 6 9 11 3 10 9 9 9 6 15
                                                    3 10 18 9 9 6 19 4 10 18 9 9
                                                    9 6 22 6 10 18 9 9 6 6 6 6
                                                    24 1 9 0 0 27 3 10 18 9 9 6
                                                    28 5 10 18 9 9 9 6 6 33 6 10
                                                    18 9 9 9 6 6 6 34 3 10 9 9 9
-                                                   6 36 1 38 40 0 41 2 48 40 0
-                                                   0 50 4 0 18 38 6 6 30 45 3 0
+                                                   6 36 1 38 40 0 41 3 43 38 38
+                                                   6 6 44 4 43 18 38 6 6 6 46 4
+                                                   43 38 38 38 6 6 53 2 51 40 0
+                                                   0 54 4 0 18 38 6 6 30 48 3 0
                                                    9 9 9 6 26 2 0 9 9 6 17 6 0
-                                                   18 38 6 6 6 30 30 46 3 0 18
-                                                   38 6 6 44 2 0 9 9 30 35 2 0
-                                                   9 6 6 21 3 0 47 9 48 30 49 1
-                                                   0 9 6 13 5 0 9 9 38 9 48 30
-                                                   51 3 0 9 9 6 30 37 2 0 30 9
+                                                   18 38 6 6 6 30 30 49 3 0 18
+                                                   38 6 6 47 2 0 9 9 30 35 2 0
+                                                   9 6 6 21 3 0 50 9 51 30 52 1
+                                                   0 9 6 13 5 0 9 9 38 9 51 30
+                                                   55 3 0 9 9 6 30 37 2 0 30 9
                                                    6 31 1 0 6 30 32 1 0 6 6 8 1
                                                    0 6 6 7 3 0 9 9 9 6 16 0 0 9
                                                    14 1 0 40 38 42 0 0 38 39 3
                                                    0 9 9 9 6 23 1 0 6 9 12 3 0
-                                                   9 9 6 6 20 2 0 38 38 6 43 3
+                                                   9 9 6 6 20 2 0 38 38 6 45 3
                                                    0 9 9 9 6 25)))))
            '|lookupComplete|)) 

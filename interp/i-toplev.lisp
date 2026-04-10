@@ -259,12 +259,10 @@
 ;   file := getEnv('"FRICAS_INITFILE")
 ;   file = '"" => nil
 ;   efile :=
-;     fn := make_input_filename(file) => fn
-;     file := ['_.fricas, 'input]
-;     fn := make_input_filename(file) => fn
-;     file := ['_.axiom, 'input]
-;     fn := make_input_filename(file) => fn
-;     NIL
+;         file and (fn := make_input_filename1(file)) => fn
+;         fn := make_input_filename2('"_.fricas", '"input") => fn
+;         fn := make_input_filename2('"_.axiom", '"input") => fn
+;         nil
 ;   efile =>
 ;     $edit_file := efile
 ;     read_or_compile(true, efile)
@@ -279,20 +277,15 @@
             (#1='T
              (PROGN
               (SETQ |efile|
-                      (COND ((SETQ |fn| (|make_input_filename| |file|)) |fn|)
-                            (#1#
-                             (PROGN
-                              (SETQ |file| (LIST '|.fricas| '|input|))
-                              (COND
-                               ((SETQ |fn| (|make_input_filename| |file|))
-                                |fn|)
-                               (#1#
-                                (PROGN
-                                 (SETQ |file| (LIST '|.axiom| '|input|))
-                                 (COND
-                                  ((SETQ |fn| (|make_input_filename| |file|))
-                                   |fn|)
-                                  (#1# NIL)))))))))
+                      (COND
+                       ((AND |file|
+                             (SETQ |fn| (|make_input_filename1| |file|)))
+                        |fn|)
+                       ((SETQ |fn| (|make_input_filename2| ".fricas" "input"))
+                        |fn|)
+                       ((SETQ |fn| (|make_input_filename2| ".axiom" "input"))
+                        |fn|)
+                       (#1# NIL)))
               (COND
                (|efile|
                 (PROGN
@@ -598,7 +591,7 @@
 ; printTime() ==
 ;   $collectOutput => nil
 ;   s := makeLongTimeString($interpreterTimedNames, $interpreterTimedClasses)
-;   sayKeyedMsg("S2GL0013", [s])
+;   say_msg("S2GL0013", '"%rjon Time: %1 %rjoff", [s])
 
 (DEFUN |printTime| ()
   (PROG (|s|)
@@ -609,13 +602,13 @@
              (SETQ |s|
                      (|makeLongTimeString| |$interpreterTimedNames|
                       |$interpreterTimedClasses|))
-             (|sayKeyedMsg| 'S2GL0013 (LIST |s|))))))))
+             (|say_msg| 'S2GL0013 "%rjon Time: %1 %rjoff" (LIST |s|))))))))
 
 ; printStorage() ==
 ;   $collectOutput => nil
 ;   storeString :=
 ;     makeLongSpaceString($interpreterTimedNames, $interpreterTimedClasses)
-;   sayKeyedMsg("S2GL0016",[storeString])
+;   say_msg("S2GL0016", '"%rjon Storage: %1 %rjoff", [storeString])
 
 (DEFUN |printStorage| ()
   (PROG (|storeString|)
@@ -626,7 +619,8 @@
              (SETQ |storeString|
                      (|makeLongSpaceString| |$interpreterTimedNames|
                       |$interpreterTimedClasses|))
-             (|sayKeyedMsg| 'S2GL0016 (LIST |storeString|))))))))
+             (|say_msg| 'S2GL0016 "%rjon Storage: %1 %rjoff"
+              (LIST |storeString|))))))))
 
 ; interpretTopLevel(x, posnForm) ==
 ;   --  Top level entry point from processInteractive1.  Sets up catch

@@ -449,7 +449,7 @@
 (SDEFUN |ULSCONS;eval;%CoefS;31|
         ((|uls| (%)) (|r| (|Coef|)) (% (|Stream| |Coef|)))
         (SPROG
-         ((#1=#:G208 NIL) (#2=#:G201 NIL) (|recipr| (|Union| |Coef| "failed"))
+         ((#1=#:G212 NIL) (#2=#:G202 NIL) (|recipr| (|Union| |Coef| "failed"))
           (|n| (|Integer|)) (|uts| (UTS)))
          (SEQ
           (SEQ (LETT |n| (|ULSCONS;getExpon| |uls| %))
@@ -499,7 +499,7 @@
 
 (SDEFUN |ULSCONS;coefficient;%ICoef;34|
         ((|x| (%)) (|n| (|Integer|)) (% (|Coef|)))
-        (SPROG ((#1=#:G217 NIL) (|a| (|Integer|)))
+        (SPROG ((#1=#:G221 NIL) (|a| (|Integer|)))
                (SEQ (LETT |a| (- |n| (|ULSCONS;getExpon| |x| %)))
                     (EXIT
                      (COND
@@ -520,7 +520,7 @@
            (SPADCALL (|ULSCONS;getUTS| |x| %) (QREFELT % 89)))) 
 
 (SDEFUN |ULSCONS;order;%2I;37| ((|x| (%)) (|n| #1=(|Integer|)) (% #1#))
-        (SPROG ((#2=#:G224 NIL) (|m| (|Integer|)) (|e| (|Integer|)))
+        (SPROG ((#2=#:G228 NIL) (|m| (|Integer|)) (|e| (|Integer|)))
                (SEQ (LETT |m| (- |n| (LETT |e| (|ULSCONS;getExpon| |x| %))))
                     (EXIT
                      (COND ((< |m| 0) |n|)
@@ -534,7 +534,7 @@
                                          (QREFELT % 91))))))))) 
 
 (SDEFUN |ULSCONS;truncate;%I%;38| ((|x| (%)) (|n| (|Integer|)) (% (%)))
-        (SPROG ((#1=#:G228 NIL) (|m| (|Integer|)) (|e| (|Integer|)))
+        (SPROG ((#1=#:G232 NIL) (|m| (|Integer|)) (|e| (|Integer|)))
                (SEQ (LETT |m| (- |n| (LETT |e| (|ULSCONS;getExpon| |x| %))))
                     (EXIT
                      (COND ((< |m| 0) (|spadConstant| % 13))
@@ -552,7 +552,7 @@
 (SDEFUN |ULSCONS;truncate;%2I%;39|
         ((|x| (%)) (|n1| #1=(|Integer|)) (|n2| #1#) (% (%)))
         (SPROG
-         ((#2=#:G234 NIL) (#3=#:G233 NIL) (|m1| (|Integer|)) (|e| (|Integer|))
+         ((#2=#:G238 NIL) (#3=#:G237 NIL) (|m1| (|Integer|)) (|e| (|Integer|))
           (|#G61| #1#) (|#G60| #1#))
          (SEQ
           (COND
@@ -582,10 +582,10 @@
 (SDEFUN |ULSCONS;rationalFunction;%IF;40|
         ((|x| (%)) (|n| (|Integer|)) (% (|Fraction| (|Polynomial| |Coef|))))
         (SPROG
-         ((#1=#:G243 NIL) (#2=#:G242 NIL)
+         ((#1=#:G247 NIL) (#2=#:G246 NIL)
           (|c| (|Fraction| (|Polynomial| |Coef|)))
           (|v| (|Fraction| (|Polynomial| |Coef|)))
-          (|poly| (|Fraction| (|Polynomial| |Coef|))) (#3=#:G238 NIL)
+          (|poly| (|Fraction| (|Polynomial| |Coef|))) (#3=#:G242 NIL)
           (|m| (|Integer|)) (|e| (|Integer|)))
          (SEQ (LETT |m| (- |n| (LETT |e| (|ULSCONS;getExpon| |x| %))))
               (EXIT
@@ -644,11 +644,11 @@
         ((|x| (%)) (|n1| #1=(|Integer|)) (|n2| #1#)
          (% (|Fraction| (|Polynomial| |Coef|))))
         (SPROG
-         ((#2=#:G256 NIL) (#3=#:G255 NIL)
+         ((#2=#:G260 NIL) (#3=#:G259 NIL)
           (|c| (|Fraction| (|Polynomial| |Coef|)))
           (|v| (|Fraction| (|Polynomial| |Coef|)))
-          (|poly| (|Fraction| (|Polynomial| |Coef|))) (#4=#:G251 NIL)
-          (#5=#:G250 NIL) (|m1| (|Integer|)) (|e| (|Integer|)) (|#G68| #1#)
+          (|poly| (|Fraction| (|Polynomial| |Coef|))) (#4=#:G255 NIL)
+          (#5=#:G254 NIL) (|m1| (|Integer|)) (|e| (|Integer|)) (|#G68| #1#)
           (|#G67| #1#))
          (SEQ
           (COND
@@ -742,7 +742,7 @@
 (SDEFUN |ULSCONS;approximate;%ICoef;43|
         ((|x| (%)) (|n| (|Integer|)) (% (|Coef|)))
         (SPROG
-         ((|app| (|Coef|)) (#1=#:G272 NIL) (|m| (|Integer|)) (|e| (|Integer|)))
+         ((|app| (|Coef|)) (#1=#:G276 NIL) (|m| (|Integer|)) (|e| (|Integer|)))
          (SEQ (LETT |m| (- |n| (LETT |e| (|ULSCONS;getExpon| |x| %))))
               (EXIT
                (COND ((< |m| 0) (|spadConstant| % 14))
@@ -775,7 +775,7 @@
                   (QREFELT % 10))) 
 
 (SDEFUN |ULSCONS;extend;%I%;45| ((|x| (%)) (|n| (|Integer|)) (% (%)))
-        (SPROG ((#1=#:G278 NIL) (|m| (|Integer|)) (|e| (|Integer|)))
+        (SPROG ((#1=#:G282 NIL) (|m| (|Integer|)) (|e| (|Integer|)))
                (SEQ (LETT |e| (|ULSCONS;getExpon| |x| %))
                     (LETT |m| (- |n| |e|))
                     (EXIT
@@ -873,8 +873,8 @@
 
 (SDEFUN |ULSCONS;^;%I%;54| ((|x| (%)) (|n| (|Integer|)) (% (%)))
         (SPROG
-         ((|minusN| (|NonNegativeInteger|)) (#1=#:G309 NIL) (|xInv| (%))
-          (#2=#:G308 NIL))
+         ((|minusN| (|NonNegativeInteger|)) (#1=#:G313 NIL) (|xInv| (%))
+          (#2=#:G312 NIL))
          (SEQ
           (COND ((ZEROP |n|) (|spadConstant| % 16))
                 ((> |n| 0)
@@ -941,7 +941,7 @@
                                     (#1# (|ULSCONS;getUTS| |x| %))))))))))) 
 
 (SDEFUN |ULSCONS;denom;%UTS;61| ((|x| (%)) (% (UTS)))
-        (SPROG ((#1=#:G332 NIL) (|n| (|Integer|)))
+        (SPROG ((#1=#:G336 NIL) (|n| (|Integer|)))
                (SEQ (LETT |n| (SPADCALL |x| (QREFELT % 12)))
                     (EXIT
                      (COND ((>= |n| 0) (|spadConstant| % 17))
@@ -1147,7 +1147,7 @@
          (% (|OutputForm|)))
         (SPROG
          ((|l| (|List| (|OutputForm|))) (|uu1| (|Stream| |Coef|)) (|n| NIL)
-          (#1=#:G417 NIL) (|count| (|NonNegativeInteger|)))
+          (#1=#:G421 NIL) (|count| (|NonNegativeInteger|)))
          (SEQ (LETT |l| NIL)
               (EXIT
                (COND
@@ -1265,9 +1265,9 @@
 
 (DEFUN |UnivariateLaurentSeriesConstructor;| (|#1| |#2|)
   (SPROG
-   ((#1=#:G463 NIL) (|pv$| NIL) (#2=#:G452 NIL) (#3=#:G453 NIL) (#4=#:G455 NIL)
-    (#5=#:G456 NIL) (#6=#:G457 NIL) (#7=#:G458 NIL) (#8=#:G459 NIL)
-    (#9=#:G461 NIL) (#10=#:G462 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+   ((|pv$| NIL) (#1=#:G456 NIL) (#2=#:G457 NIL) (#3=#:G459 NIL) (#4=#:G460 NIL)
+    (#5=#:G461 NIL) (#6=#:G462 NIL) (#7=#:G464 NIL) (#8=#:G465 NIL) (% NIL)
+    (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -1285,6 +1285,12 @@
                                              (|HasCategory| |#2|
                                                             '(|RetractableTo|
                                                               (|Symbol|))))
+                                        (OR
+                                         (|HasCategory| |#1|
+                                                        '(|CharacteristicNonZero|))
+                                         (AND (|HasCategory| |#1| '(|Field|))
+                                              (|HasCategory| |#2|
+                                                             '(|CharacteristicNonZero|))))
                                         (AND (|HasCategory| |#1| '(|Field|))
                                              (|HasCategory| |#2|
                                                             '(|ConvertibleTo|
@@ -1292,7 +1298,7 @@
                                         (AND (|HasCategory| |#1| '(|Field|))
                                              (|HasCategory| |#2|
                                                             '(|RealConstant|)))
-                                        (LETT #10#
+                                        (LETT #8#
                                               (AND
                                                (|HasCategory| |#1| '(|Field|))
                                                (|HasCategory| |#2|
@@ -1303,7 +1309,7 @@
                                          (AND (|HasCategory| |#1| '(|Field|))
                                               (|HasCategory| |#2|
                                                              '(|CharacteristicZero|)))
-                                         #10#)
+                                         #8#)
                                         (AND (|HasCategory| |#1| '(|Field|))
                                              (|HasCategory| |#2|
                                                             '(|RetractableTo|
@@ -1354,10 +1360,10 @@
                                                               (|Integer|))))
                                         (|HasCategory| (|Integer|)
                                                        '(|Comparable|))
-                                        (LETT #9#
+                                        (LETT #7#
                                               (|HasCategory| |#1|
                                                              '(|CommutativeRing|)))
-                                        (OR #9#
+                                        (OR #7#
                                             (|HasCategory| |#1| '(|Field|)))
                                         (|HasSignature| |#1|
                                                         (LIST '^
@@ -1382,54 +1388,44 @@
                                                                 (|devaluate|
                                                                  |#1|)
                                                                 '(|Symbol|)))))
-                                        (LETT #8#
+                                        (LETT #6#
                                               (|HasCategory| |#1|
                                                              '(|IntegralDomain|)))
-                                        (OR #9# (|HasCategory| |#1| '(|Field|))
-                                            #8#)
+                                        (OR #7# (|HasCategory| |#1| '(|Field|))
+                                            #6#)
                                         (OR (|HasCategory| |#1| '(|Field|))
-                                            #8#)
+                                            #6#)
                                         (AND (|HasCategory| |#1| '(|Field|))
                                              (|HasCategory| |#2|
                                                             '(|Comparable|)))
-                                        (LETT #7#
+                                        (LETT #5#
                                               (AND
                                                (|HasCategory| |#1| '(|Field|))
                                                (|HasCategory| |#2|
                                                               '(|OrderedSet|))))
-                                        (OR #10# #7#)
+                                        (OR #8# #5#)
                                         (OR
                                          (AND (|HasCategory| |#1| '(|Field|))
                                               (|HasCategory| |#2|
                                                              '(|Comparable|)))
-                                         #10# #7#)
-                                        (|HasCategory| |#1|
-                                                       '(|CharacteristicNonZero|))
-                                        (LETT #6#
-                                              (|HasCategory| |#2|
-                                                             '(|CharacteristicNonZero|)))
-                                        (OR
-                                         (|HasCategory| |#1|
-                                                        '(|CharacteristicNonZero|))
-                                         (AND (|HasCategory| |#1| '(|Field|))
-                                              #6#))
-                                        (LETT #5#
+                                         #8# #5#)
+                                        (LETT #4#
                                               (|HasCategory| |#2|
                                                              '(|PolynomialFactorizationExplicit|)))
                                         (AND (|HasCategory| |#1| '(|Field|))
-                                             #5#)
+                                             #4#)
                                         (AND (|HasCategory| |#1| '(|Field|))
                                              (|HasCategory| |#2|
                                                             '(|IntegerNumberSystem|)))
                                         (AND (|HasCategory| |#1| '(|Field|))
                                              (|HasCategory| |#2|
                                                             '(|EuclideanDomain|)))
-                                        (LETT #4#
+                                        (LETT #3#
                                               (|HasCategory| |#1|
                                                              '(|Algebra|
                                                                (|Fraction|
                                                                 (|Integer|)))))
-                                        (OR #4#
+                                        (OR #3#
                                             (AND
                                              (|HasCategory| |#1| '(|Field|))
                                              (|HasCategory| |#2|
@@ -1498,10 +1494,10 @@
                                              (|HasCategory| |#1| '(|Field|))
                                              (|HasCategory| |#2|
                                                             '(|Comparable|)))
-                                            #10# #7#
+                                            #8# #5#
                                             (AND
                                              (|HasCategory| |#1| '(|Field|))
-                                             #5#)
+                                             #4#)
                                             (AND
                                              (|HasCategory| |#1| '(|Field|))
                                              (|HasCategory| |#2|
@@ -1510,7 +1506,7 @@
                                              (|HasCategory| |#1| '(|Field|))
                                              (|HasCategory| |#2|
                                                             '(|StepThrough|))))
-                                        (AND #4#
+                                        (AND #3#
                                              (|HasSignature| |#1|
                                                              (LIST '|integrate|
                                                                    (LIST
@@ -1573,9 +1569,9 @@
                                                                 '(|Integer|)
                                                                 (|devaluate|
                                                                  |#1|)))))
-                                        (LETT #3#
+                                        (LETT #2#
                                               (|HasCategory| |#1| '(|Ring|)))
-                                        (OR #3#
+                                        (OR #2#
                                             (|HasSignature| |#1|
                                                             (LIST '*
                                                                   (LIST
@@ -1584,13 +1580,13 @@
                                                                    '(|Integer|)
                                                                    (|devaluate|
                                                                     |#1|)))))
-                                        (OR #4#
+                                        (OR #3#
                                             (|HasCategory| |#1|
                                                            '(|CharacteristicNonZero|))
                                             (|HasCategory| |#1|
                                                            '(|CharacteristicZero|))
-                                            #9# (|HasCategory| |#1| '(|Field|))
-                                            #8# #3#
+                                            #7# (|HasCategory| |#1| '(|Field|))
+                                            #6# #2#
                                             (|HasSignature| |#1|
                                                             (LIST '*
                                                                   (LIST
@@ -1602,15 +1598,15 @@
                                         (|HasCategory| |#1| '(|AbelianMonoid|))
                                         (|HasCategory| |#1|
                                                        '(|CancellationAbelianMonoid|))
-                                        (LETT #2#
+                                        (LETT #1#
                                               (|HasCategory| |#1|
                                                              '(|AbelianGroup|)))
                                         (OR
-                                         (AND #4#
+                                         (AND #3#
                                               (|HasCategory|
                                                (|Fraction| (|Integer|))
                                                '(|AbelianMonoid|)))
-                                         #2#
+                                         #1#
                                          (|HasCategory| |#1|
                                                         '(|AbelianMonoid|))
                                          (|HasCategory| |#1|
@@ -1623,7 +1619,7 @@
                                                                 '(|Integer|)
                                                                 (|devaluate|
                                                                  |#1|)))))
-                                        (OR #2#
+                                        (OR #1#
                                             (|HasCategory| |#1|
                                                            '(|CancellationAbelianMonoid|))
                                             (|HasSignature| |#1|
@@ -1634,7 +1630,7 @@
                                                                    '(|Integer|)
                                                                    (|devaluate|
                                                                     |#1|)))))
-                                        (OR #2#
+                                        (OR #1#
                                             (|HasSignature| |#1|
                                                             (LIST '*
                                                                   (LIST
@@ -1648,81 +1644,74 @@
     (|stuffDomainSlots| %)
     (QSETREFV % 6 |#1|)
     (QSETREFV % 7 |#2|)
-    (AND #9# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))
-         (|augmentPredVector| % 9007199254740992))
-    (AND
-     (LETT #1#
-           (AND (|HasCategory| |#1| '(|Field|))
-                (|HasCategory| |#2| '(|PolynomialFactorizationExplicit|))
-                (|HasCategory| % '(|CharacteristicNonZero|))))
-     (|augmentPredVector| % 18014398509481984))
-    (AND
-     (OR (|HasCategory| |#1| '(|CharacteristicNonZero|))
-         (AND (|HasCategory| |#1| '(|Field|)) #6#) #1#)
-     (|augmentPredVector| % 36028797018963968))
+    (AND #7# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))
+         (|augmentPredVector| % 2251799813685248))
+    (AND (|HasCategory| |#1| '(|Field|)) #4#
+         (|HasCategory| % '(|CharacteristicNonZero|))
+         (|augmentPredVector| % 4503599627370496))
     (AND
      (OR (|HasCategory| |#1| '(|Field|))
-         (AND #8# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))))
+         (AND #6# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))))
+     (|augmentPredVector| % 9007199254740992))
+    (AND
+     (OR #3# (AND #7# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+         (AND #6# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))))
+     (|augmentPredVector| % 18014398509481984))
+    (AND
+     (OR (AND #7# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+         (|HasCategory| |#1| '(|Field|))
+         (AND #6# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))))
+     (|augmentPredVector| % 36028797018963968))
+    (AND
+     (OR (AND #7# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+         (AND #6# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+         (|HasCategory| |#1| '(|SemiRing|))
+         (|HasSignature| |#1|
+                         (LIST '*
+                               (LIST (|devaluate| |#1|) '(|Integer|)
+                                     (|devaluate| |#1|)))))
      (|augmentPredVector| % 72057594037927936))
     (AND
-     (OR #4# (AND #9# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-         (AND #8# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))))
+     (OR (AND #7# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+         (AND #6# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))) #2#
+         (|HasSignature| |#1|
+                         (LIST '*
+                               (LIST (|devaluate| |#1|) '(|Integer|)
+                                     (|devaluate| |#1|)))))
      (|augmentPredVector| % 144115188075855872))
     (AND
-     (OR (AND #9# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-         (|HasCategory| |#1| '(|Field|))
-         (AND #8# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))))
+     (OR (|HasCategory| |#1| '(|AbelianMonoid|))
+         (AND #7# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+         (AND #6# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+         (|HasCategory| % '(|AbelianMonoid|))
+         (|HasSignature| |#1|
+                         (LIST '*
+                               (LIST (|devaluate| |#1|) '(|Integer|)
+                                     (|devaluate| |#1|)))))
      (|augmentPredVector| % 288230376151711744))
     (AND
-     (OR (AND #9# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-         (AND #8# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-         (|HasCategory| |#1| '(|SemiRing|))
+     (OR (|HasCategory| |#1| '(|CancellationAbelianMonoid|))
+         (AND #7# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+         (AND #6# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+         (|HasCategory| % '(|AbelianGroup|))
          (|HasSignature| |#1|
                          (LIST '*
                                (LIST (|devaluate| |#1|) '(|Integer|)
                                      (|devaluate| |#1|)))))
      (|augmentPredVector| % 576460752303423488))
     (AND
-     (OR (AND #9# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-         (AND #8# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))) #3#
+     (OR #1# (AND #7# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+         (AND #6# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+         (|HasCategory| % '(|AbelianGroup|))
          (|HasSignature| |#1|
                          (LIST '*
                                (LIST (|devaluate| |#1|) '(|Integer|)
                                      (|devaluate| |#1|)))))
      (|augmentPredVector| % 1152921504606846976))
-    (AND
-     (OR (|HasCategory| |#1| '(|AbelianMonoid|))
-         (AND #9# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-         (AND #8# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-         (|HasCategory| % '(|AbelianMonoid|))
-         (|HasSignature| |#1|
-                         (LIST '*
-                               (LIST (|devaluate| |#1|) '(|Integer|)
-                                     (|devaluate| |#1|)))))
-     (|augmentPredVector| % 2305843009213693952))
-    (AND
-     (OR (|HasCategory| |#1| '(|CancellationAbelianMonoid|))
-         (AND #9# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-         (AND #8# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-         (|HasCategory| % '(|AbelianGroup|))
-         (|HasSignature| |#1|
-                         (LIST '*
-                               (LIST (|devaluate| |#1|) '(|Integer|)
-                                     (|devaluate| |#1|)))))
-     (|augmentPredVector| % 4611686018427387904))
-    (AND
-     (OR #2# (AND #9# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-         (AND #8# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-         (|HasCategory| % '(|AbelianGroup|))
-         (|HasSignature| |#1|
-                         (LIST '*
-                               (LIST (|devaluate| |#1|) '(|Integer|)
-                                     (|devaluate| |#1|)))))
-     (|augmentPredVector| % 9223372036854775808))
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 8 (|Record| (|:| |expon| (|Integer|)) (|:| |ps| |#2|)))
     (COND
-     ((|testBitVector| |pv$| 23)
+     ((|testBitVector| |pv$| 24)
       (PROGN
        (QSETREFV % 108
                  (CONS (|dispatchFunction| |ULSCONS;rationalFunction;%IF;40|)
@@ -1735,7 +1724,7 @@
      ((|HasSignature| |#1|
                       (LIST '|coerce| (LIST (|devaluate| |#1|) '(|Symbol|))))
       (COND
-       ((|testBitVector| |pv$| 21)
+       ((|testBitVector| |pv$| 22)
         (QSETREFV % 118
                   (CONS (|dispatchFunction| |ULSCONS;approximate;%ICoef;43|)
                         %))))))
@@ -1759,7 +1748,7 @@
        (QSETREFV % 147
                  (CONS (|dispatchFunction| |ULSCONS;denom;%UTS;61|) %)))))
     (COND
-     ((|testBitVector| |pv$| 37)
+     ((|testBitVector| |pv$| 35)
       (PROGN
        (QSETREFV % 150 (CONS (|dispatchFunction| |ULSCONS;coerce;F%;62|) %))
        (COND
@@ -1819,9 +1808,9 @@
                               %))))))))))))
     %))) 
 
-(DEFUN |UnivariateLaurentSeriesConstructor| (&REST #1=#:G464)
+(DEFUN |UnivariateLaurentSeriesConstructor| (&REST #1=#:G466)
   (SPROG NIL
-         (PROG (#2=#:G465)
+         (PROG (#2=#:G467)
            (RETURN
             (COND
              ((LETT #2#
@@ -1975,14 +1964,14 @@
               2009 * 2015)
            'NIL
            (CONS
-            (|makeByteWordVec2| 53
-                                '(0 2 0 2 0 34 2 0 2 2 0 6 2 0 25 2 6 24 2 2 44
-                                  43 2 7 32 38 25 24 20 47 47 2 38 42 24 20 2 2
-                                  38 24 20 0 13 2 2 6 38 46 0 0 0 13 2 47 2 6
-                                  38 38 0 0 0 0 0 6 53 6 42 42 52 2 28 42 51 0
-                                  0 17 16 2 9 29 0 0 2 11 8 8 5 3 24 38 0 0 2
-                                  15 14 12 11 10 8 8 28 5 5 4 3 46 2 2 25 24 38
-                                  38 38 38 38 38 1 0 0 0 0))
+            (|makeByteWordVec2| 51
+                                '(0 2 0 2 0 32 2 0 2 2 0 7 2 0 26 2 7 25 2 2 42
+                                  41 2 8 4 36 26 25 21 45 45 2 36 40 25 21 2 2
+                                  36 25 21 0 14 2 2 7 36 44 0 0 0 14 2 45 2 7
+                                  36 36 0 0 0 0 0 7 7 51 7 7 40 40 50 2 29 40
+                                  49 0 0 18 17 2 10 30 0 0 2 12 9 9 6 3 25 36 0
+                                  0 2 16 15 13 12 11 9 9 29 6 6 5 3 44 2 2 26
+                                  25 36 36 36 36 36 36 1 0 0 0 0))
             (CONS
              '#(|UnivariateLaurentSeriesConstructorCategory&|
                 |QuotientFieldCategory&| |UnivariateLaurentSeriesCategory&|
@@ -1990,18 +1979,19 @@
                 |EuclideanDomain&| |UnivariatePowerSeriesCategory&|
                 |UniqueFactorizationDomain&| NIL |PowerSeriesCategory&| NIL
                 |GcdDomain&| |AbelianMonoidRing&| NIL |DifferentialExtension&|
-                |OrderedRing&| NIL |DivisionRing&| NIL |DifferentialRing&|
+                NIL NIL |DivisionRing&| NIL |DifferentialRing&|
                 |PartialDifferentialRing&| |Algebra&| NIL NIL |Algebra&|
                 |EntireRing&| |Algebra&| |Algebra&| NIL |Rng&|
                 |NonAssociativeAlgebra&| |NonAssociativeAlgebra&| NIL
                 |NonAssociativeAlgebra&| |NonAssociativeAlgebra&|
                 |FullyLinearlyExplicitOver&| |Module&| |Module&| |Module&|
-                |Module&| NIL NIL NIL NIL NIL NIL |NonAssociativeRing&| NIL NIL
-                NIL NIL NIL |NonAssociativeRng&| NIL NIL NIL NIL NIL NIL NIL
-                NIL NIL NIL |AbelianGroup&| NIL NIL NIL NIL NIL |OrderedSet&|
-                |MagmaWithUnit&| |AbelianMonoid&| NIL |NonAssociativeSemiRng&|
-                NIL NIL |FullyEvalableOver&| NIL NIL |AbelianSemiGroup&|
-                |Magma&| NIL |Evalable&| |RetractableTo&| |RetractableTo&| NIL
+                |Module&| NIL NIL NIL NIL |OrderedAbelianGroup&| NIL
+                |NonAssociativeRing&| NIL NIL NIL NIL NIL |NonAssociativeRng&|
+                NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL |AbelianGroup&| NIL
+                NIL NIL NIL NIL NIL |OrderedSet&| |MagmaWithUnit&|
+                |AbelianMonoid&| NIL |NonAssociativeSemiRng&| NIL NIL
+                |FullyEvalableOver&| NIL NIL |AbelianSemiGroup&| |Magma&| NIL
+                |Evalable&| |RetractableTo&| |RetractableTo&| NIL
                 |RetractableTo&| NIL |TranscendentalFunctionCategory&|
                 |SetCategory&| |RetractableTo&| NIL NIL NIL NIL
                 |InnerEvalable&| |InnerEvalable&| NIL NIL |PartialOrder&| NIL
@@ -2038,8 +2028,9 @@
                  (|OrderedCancellationAbelianMonoid|) (|RightModule| 148)
                  (|LeftModule| 148) (|LeftModule| $$) (|RightModule| $$)
                  (|RightModule| 6) (|LeftModule| 6)
-                 (|AbelianProductCategory| 6) (|OrderedAbelianMonoid|)
-                 (|AbelianGroup|) (|OrderedAbelianSemiGroup|) (|Monoid|)
+                 (|AbelianProductCategory| 6) (|OrderedMonoid|)
+                 (|OrderedAbelianMonoid|) (|AbelianGroup|) (|OrderedSemiGroup|)
+                 (|OrderedAbelianSemiGroup|) (|Monoid|)
                  (|NonAssociativeSemiRing|) (|CancellationAbelianMonoid|)
                  (|FullyPatternMatchable| 7) (|OrderedSet|) (|MagmaWithUnit|)
                  (|AbelianMonoid|) (|SemiGroup|) (|NonAssociativeSemiRng|)
@@ -2116,71 +2107,71 @@
                                     2 33 32 0 0 228 1 33 32 0 229 1 83 219 0
                                     230 2 219 0 0 231 232 2 219 0 0 0 233 2 235
                                     219 234 0 236 2 219 0 0 0 237 1 219 0 0 238
-                                    2 0 32 0 0 1 1 62 32 0 1 1 36 7 0 1 1 0 83
-                                    0 85 1 57 264 0 1 1 57 0 0 1 1 57 32 0 1 2
+                                    2 0 32 0 0 1 1 59 32 0 1 1 34 7 0 1 1 0 83
+                                    0 85 1 54 264 0 1 1 54 0 0 1 1 54 32 0 1 2
                                     0 0 0 9 94 3 0 0 0 9 9 96 1 0 36 0 47 1 0 7
-                                    0 11 1 0 29 0 30 1 0 7 0 31 1 37 0 0 187 1
-                                    37 0 0 163 2 63 72 0 0 1 1 34 255 256 1 1 2
-                                    0 0 1 1 2 266 0 1 1 37 0 0 1 2 34 257 258
-                                    256 1 2 26 32 0 0 1 2 2 32 0 0 1 1 37 0 0
-                                    183 1 37 0 0 159 1 6 9 0 1 1 0 0 36 56 1 37
-                                    0 0 191 1 37 0 0 167 0 62 0 1 1 60 72 0 1 2
-                                    0 0 0 129 1 2 60 0 0 26 1 1 0 29 0 139 1 8
-                                    261 0 1 1 8 262 0 1 1 3 263 0 1 1 0 7 0 138
-                                    1 8 9 0 1 1 8 148 0 1 1 3 83 0 1 1 0 0 0 60
-                                    2 0 0 9 0 24 2 2 0 0 0 1 1 18 0 0 1 2 13
-                                    250 243 251 1 1 13 252 243 1 2 2 274 243
-                                    251 1 1 2 275 243 1 1 60 72 0 74 2 23 97 0
-                                    9 108 3 23 97 0 9 9 110 2 2 0 0 0 1 1 2 272
-                                    231 1 1 2 32 0 1 1 6 32 0 1 1 0 32 0 63 2
-                                    58 0 0 129 1 0 37 0 1 3 16 253 0 245 253 1
-                                    3 17 254 0 246 254 1 1 0 9 0 90 2 0 9 0 9
-                                    92 2 62 32 0 0 1 1 60 32 0 1 1 2 0 0 1 1 2
-                                    7 0 146 2 37 0 0 9 1 1 9 72 0 1 1 6 32 0 1
+                                    0 11 1 0 29 0 30 1 0 7 0 31 1 35 0 0 187 1
+                                    35 0 0 163 2 60 72 0 0 1 1 32 255 256 1 1 2
+                                    0 0 1 1 2 266 0 1 1 35 0 0 1 2 32 257 258
+                                    256 1 2 27 32 0 0 1 2 2 32 0 0 1 1 35 0 0
+                                    183 1 35 0 0 159 1 7 9 0 1 1 0 0 36 56 1 35
+                                    0 0 191 1 35 0 0 167 0 59 0 1 1 57 72 0 1 2
+                                    0 0 0 129 1 2 57 0 0 26 1 1 0 29 0 139 1 9
+                                    261 0 1 1 9 262 0 1 1 3 263 0 1 1 0 7 0 138
+                                    1 9 9 0 1 1 9 148 0 1 1 3 83 0 1 1 0 0 0 60
+                                    2 0 0 9 0 24 2 2 0 0 0 1 1 19 0 0 1 2 14
+                                    250 243 251 1 1 14 252 243 1 2 2 274 243
+                                    251 1 1 2 275 243 1 1 57 72 0 74 2 24 97 0
+                                    9 108 3 24 97 0 9 9 110 2 2 0 0 0 1 1 2 272
+                                    231 1 1 2 32 0 1 1 7 32 0 1 1 0 32 0 63 2
+                                    55 0 0 129 1 0 35 0 1 3 17 253 0 245 253 1
+                                    3 18 254 0 246 254 1 1 0 9 0 90 2 0 9 0 9
+                                    92 2 59 32 0 0 1 1 57 32 0 1 1 2 0 0 1 1 2
+                                    7 0 146 2 35 0 0 9 1 1 10 72 0 1 1 7 32 0 1
                                     2 0 0 0 129 131 2 0 0 126 0 128 2 2 267 231
-                                    0 1 1 0 32 0 1 2 0 0 6 9 19 2 27 0 0 0 1 2
-                                    27 0 0 0 1 2 0 0 123 0 125 2 2 0 276 0 1 1
-                                    37 0 0 157 1 60 72 0 1 2 0 0 0 129 1 2 60 0
-                                    0 26 1 1 18 35 0 1 1 18 9 0 1 1 0 0 0 1 1 0
+                                    0 1 1 0 32 0 1 2 0 0 6 9 19 2 28 0 0 0 1 2
+                                    28 0 0 0 1 2 0 0 123 0 125 2 2 0 276 0 1 1
+                                    35 0 0 157 1 57 72 0 1 2 0 0 0 129 1 2 57 0
+                                    0 26 1 1 19 35 0 1 1 19 9 0 1 1 0 0 0 1 1 0
                                     6 0 1 2 2 273 0 0 1 2 2 0 0 0 1 1 2 0 231 1
                                     2 0 0 9 33 1 2 0 0 9 7 10 1 0 240 0 1 1 2 0
-                                    0 140 2 39 0 0 83 214 1 37 0 0 209 0 9 0 1
+                                    0 140 2 37 0 0 83 214 1 35 0 0 209 0 10 0 1
                                     2 2 256 256 256 1 2 2 0 0 0 1 1 2 0 231 1 1
-                                    36 0 0 1 1 35 7 0 1 1 34 255 256 1 1 34 255
+                                    34 0 0 1 1 33 7 0 1 1 32 255 256 1 1 32 255
                                     256 1 1 2 266 0 1 3 2 269 0 0 0 1 2 2 270 0
-                                    0 1 2 0 0 0 9 122 2 57 72 0 0 112 2 2 267
-                                    231 0 1 1 37 0 0 155 2 11 0 0 247 1 3 11 0
-                                    0 7 7 1 2 11 0 0 248 1 3 11 0 0 249 249 1 3
-                                    10 0 0 83 7 1 3 10 0 0 210 249 1 2 21 33 0
-                                    6 82 1 2 26 0 1 2 0 6 0 9 88 2 12 0 0 7 1 2
-                                    1 0 0 0 76 2 2 271 0 0 1 2 44 0 0 26 1 1 44
-                                    0 0 132 3 43 0 0 83 26 1 3 43 0 0 210 265 1
-                                    2 43 0 0 210 1 2 43 0 0 83 135 2 2 0 0 276
+                                    0 1 2 0 0 0 9 122 2 54 72 0 0 112 2 2 267
+                                    231 0 1 1 35 0 0 155 2 12 0 0 247 1 3 12 0
+                                    0 7 7 1 2 12 0 0 248 1 3 12 0 0 249 249 1 3
+                                    11 0 0 83 7 1 3 11 0 0 210 249 1 2 22 33 0
+                                    6 82 1 2 26 0 1 2 0 6 0 9 88 2 13 0 0 7 1 2
+                                    1 0 0 0 76 2 2 271 0 0 1 2 42 0 0 26 1 1 42
+                                    0 0 132 3 41 0 0 83 26 1 3 41 0 0 210 265 1
+                                    2 41 0 0 210 1 2 41 0 0 83 135 2 2 0 0 276
                                     1 3 2 0 0 276 26 1 1 2 0 0 1 1 2 7 0 147 1
-                                    0 9 0 12 1 37 0 0 193 1 37 0 0 169 1 37 0 0
-                                    189 1 37 0 0 165 1 37 0 0 185 1 37 0 0 161
-                                    1 4 244 0 1 1 14 245 0 1 1 15 246 0 1 1 5
-                                    259 0 1 1 5 260 0 1 1 18 0 241 1 1 0 0 241
-                                    1 1 55 242 243 1 1 0 0 0 120 2 61 0 0 0 1 1
-                                    0 219 0 239 1 0 0 7 20 1 54 0 6 21 1 3 0 83
-                                    1 1 59 0 0 1 1 61 0 9 23 1 37 0 148 150 2 0
-                                    6 0 9 71 1 56 72 0 1 0 61 26 137 1 0 6 0 87
-                                    1 35 7 0 1 1 37 0 0 199 1 37 0 0 175 3 61 0
-                                    0 0 0 1 2 57 32 0 0 1 1 37 0 0 195 1 37 0 0
-                                    171 1 37 0 0 203 1 37 0 0 179 2 22 6 0 9
-                                    118 2 0 0 0 0 1 2 61 32 0 0 1 1 37 0 0 205
-                                    1 37 0 0 181 1 37 0 0 201 1 37 0 0 177 1 37
-                                    0 0 197 1 37 0 0 173 1 6 0 0 1 2 0 0 0 129
-                                    1 2 60 0 0 26 70 2 37 0 0 0 1 2 37 0 0 148
-                                    153 2 2 0 0 9 141 0 62 0 13 0 60 0 16 2 44
-                                    0 0 26 1 1 44 0 0 1 3 43 0 0 83 26 1 3 43 0
-                                    0 210 265 1 2 43 0 0 83 1 2 43 0 0 210 1 2
-                                    2 0 0 276 1 3 2 0 0 276 26 1 2 27 32 0 0 1
-                                    2 27 32 0 0 1 2 0 32 0 0 62 2 27 32 0 0 1 2
-                                    27 32 0 0 1 2 2 0 0 6 1 2 2 0 0 0 144 2 2 0
-                                    7 7 145 2 64 0 0 0 67 1 64 0 0 208 2 0 0 0
+                                    0 9 0 12 1 35 0 0 193 1 35 0 0 169 1 35 0 0
+                                    189 1 35 0 0 165 1 35 0 0 185 1 35 0 0 161
+                                    1 5 244 0 1 1 15 245 0 1 1 16 246 0 1 1 6
+                                    259 0 1 1 6 260 0 1 1 19 0 241 1 1 0 0 241
+                                    1 1 53 242 243 1 1 0 0 0 120 2 58 0 0 0 1 1
+                                    0 219 0 239 1 0 0 7 20 1 52 0 6 21 1 3 0 83
+                                    1 1 56 0 0 1 1 58 0 9 23 1 35 0 148 150 2 0
+                                    6 0 9 71 1 53 72 0 1 0 58 26 137 1 0 6 0 87
+                                    1 33 7 0 1 1 35 0 0 199 1 35 0 0 175 3 58 0
+                                    0 0 0 1 2 54 32 0 0 1 1 35 0 0 195 1 35 0 0
+                                    171 1 35 0 0 203 1 35 0 0 179 2 23 6 0 9
+                                    118 2 0 0 0 0 1 2 58 32 0 0 1 1 35 0 0 205
+                                    1 35 0 0 181 1 35 0 0 201 1 35 0 0 177 1 35
+                                    0 0 197 1 35 0 0 173 1 7 0 0 1 2 0 0 0 129
+                                    1 2 57 0 0 26 70 2 35 0 0 0 1 2 35 0 0 148
+                                    153 2 2 0 0 9 141 0 59 0 13 0 57 0 16 2 42
+                                    0 0 26 1 1 42 0 0 1 3 41 0 0 83 26 1 3 41 0
+                                    0 210 265 1 2 41 0 0 83 1 2 41 0 0 210 1 2
+                                    2 0 0 276 1 3 2 0 0 276 26 1 2 28 32 0 0 1
+                                    2 28 32 0 0 1 2 0 32 0 0 62 2 28 32 0 0 1 2
+                                    28 32 0 0 1 2 2 0 0 6 1 2 2 0 0 0 144 2 2 0
+                                    7 7 145 2 61 0 0 0 67 1 61 0 0 208 2 0 0 0
                                     0 65 2 0 0 129 0 1 2 0 0 0 0 68 2 0 0 6 0
-                                    134 2 0 0 0 6 1 2 13 0 0 9 1 2 64 0 9 0 1 2
-                                    62 0 26 0 1 2 37 0 0 148 1 2 37 0 148 0 1 2
+                                    134 2 0 0 0 6 1 2 14 0 0 9 1 2 61 0 9 0 1 2
+                                    59 0 26 0 1 2 35 0 0 148 1 2 35 0 148 0 1 2
                                     2 0 7 0 142 2 2 0 0 7 143)))))
            '|lookupComplete|)) 

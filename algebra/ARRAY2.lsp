@@ -16,7 +16,7 @@
 
 (DEFUN |TwoDimensionalArray;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G2232 NIL) (#2=#:G2233 NIL) (% NIL) (|dv$| NIL)
+   ((|pv$| NIL) (#1=#:G2231 NIL) (#2=#:G2232 NIL) (% NIL) (|dv$| NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -90,9 +90,9 @@
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
-(DEFUN |TwoDimensionalArray| (#1=#:G2235)
+(DEFUN |TwoDimensionalArray| (#1=#:G2234)
   (SPROG NIL
-         (PROG (#2=#:G2236)
+         (PROG (#2=#:G2235)
            (RETURN
             (COND
              ((LETT #2#

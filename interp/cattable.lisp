@@ -290,7 +290,6 @@
 ;         u is '(QUOTE T) => true
 ;         simpBool u
 ;       op = 'hasArgs => ($hasArgs => $hasArgs = r; pred)
-;       null r and opOf op = 'has => simp first pred
 ;       pred is '(QUOTE T) => true
 ;       op1 := LASSOC(op,'((and . AND)(or . OR)(not . NOT))) => simp [op1,:r]
 ;     pred in '(T etc) => pred
@@ -365,8 +364,6 @@
           ((EQUAL |u| ''T) T) (#1# (|simpBool| |u|))))
         ((EQ |op| '|hasArgs|)
          (COND (|$hasArgs| (EQUAL |$hasArgs| |r|)) (#1# |pred|)))
-        ((AND (NULL |r|) (EQ (|opOf| |op|) '|has|))
-         (|simpHasPred2,simp| (CAR |pred|)))
         ((EQUAL |pred| ''T) T)
         ((SETQ |op1| (LASSOC |op| '((|and| . AND) (|or| . OR) (|not| . NOT))))
          (|simpHasPred2,simp| (CONS |op1| |r|)))))

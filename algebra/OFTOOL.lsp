@@ -350,7 +350,7 @@
                                  (COND
                                   ((SPADCALL |n| 2 (QREFELT % 37))
                                    (|error|
-                                    "precodition: division must have two arguments"))
+                                    "precondition: division must have two arguments"))
                                   (#6#
                                    (SEQ (LETT |a1| (|SPADfirst| |args|))
                                         (LETT |a2|

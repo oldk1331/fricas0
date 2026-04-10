@@ -1085,7 +1085,7 @@
 ; optRECORDCOPY ["RECORDCOPY",name,len] ==
 ;   len=1 => ["LIST",["CAR",name]]
 ;   len=2 => ["CONS",["CAR",name],["CDR",name]]
-;   ["MOVEVEC", ["MAKE_VEC", len], name]
+;   ["REPLACE", ["MAKEARR1", len, nil], name]
 
 (DEFUN |optRECORDCOPY| (|bfVar#8|)
   (PROG (|name| |len|)
@@ -1095,7 +1095,7 @@
       (SETQ |len| (CADDR . #1#))
       (COND ((EQL |len| 1) (LIST 'LIST (LIST 'CAR |name|)))
             ((EQL |len| 2) (LIST 'CONS (LIST 'CAR |name|) (LIST 'CDR |name|)))
-            ('T (LIST 'MOVEVEC (LIST 'MAKE_VEC |len|) |name|)))))))
+            ('T (LIST 'REPLACE (LIST 'MAKEARR1 |len| NIL) |name|)))))))
 
 ; optSuchthat [.,:u] == ["SUCHTHAT",:u]
 

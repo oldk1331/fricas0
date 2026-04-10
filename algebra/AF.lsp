@@ -28,7 +28,7 @@
                    (COND
                     ((> (SPADCALL (SPADCALL |f| (QREFELT % 36)) (QREFELT % 38))
                         0)
-                     (|error| "roofOf: variable appears in denom"))
+                     (|error| "rootOf: variable appears in denom"))
                     (#1#
                      (SPADCALL |n| (SPADCALL |k| (QREFELT % 30))
                                (QREFELT % 31)))))))))))) 
@@ -75,7 +75,7 @@
           (EXIT
            (COND
             ((> (SPADCALL (SPADCALL |f| (QREFELT % 36)) (QREFELT % 38)) 0)
-             (|error| "roofOf: variable appears in denom"))
+             (|error| "rootOf: variable appears in denom"))
             ('T
              (SPADCALL (SPADCALL |f| (QREFELT % 35)) |x| (QREFELT % 31)))))))) 
 
@@ -327,7 +327,7 @@
                  (COND
                   ((> (SPADCALL (SPADCALL |p| (QREFELT % 36)) (QREFELT % 38))
                       0)
-                   (|error| "roofSum: variable appears in denom of p"))
+                   (|error| "rootSum: variable appears in denom of p"))
                   ('T
                    (|AF;root_sum1| (SPADCALL |l| 1 (QREFELT % 73))
                     (SPADCALL |p| (QREFELT % 35)) |x| %))))))) 

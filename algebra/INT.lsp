@@ -267,7 +267,7 @@
 (SDEFUN |INT;factorPolynomial;SupF;59|
         ((|p| (|SparseUnivariatePolynomial| %))
          (% (|Factored| (|SparseUnivariatePolynomial| %))))
-        (SPROG ((#1=#:G1250 NIL) (|pp| (|SparseUnivariatePolynomial| %)))
+        (SPROG ((#1=#:G1249 NIL) (|pp| (|SparseUnivariatePolynomial| %)))
                (SEQ (LETT |pp| (SPADCALL |p| (QREFELT % 106)))
                     (EXIT
                      (COND
@@ -316,7 +316,7 @@
         (COND ((ZEROP |x|) 'T) ('T (ZEROP |y|)))) 
 
 (SDEFUN |INT;powmod;4%;64| ((|x| (%)) (|n| (%)) (|p| (%)) (% (%)))
-        (SPROG ((|z| (%)) (#1=#:G1270 NIL) (|y| (%)))
+        (SPROG ((|z| (%)) (#1=#:G1269 NIL) (|y| (%)))
                (SEQ
                 (EXIT
                  (SEQ
@@ -339,7 +339,7 @@
                                         ((ZEROP (LETT |n| (ASH |n| -1)))
                                          (PROGN
                                           (LETT #1# |y|)
-                                          (GO #2=#:G1269)))
+                                          (GO #2=#:G1268)))
                                         ('T
                                          (LETT |z|
                                                (SPADCALL |z| |z| |p|
@@ -380,7 +380,7 @@
 
 (DEFUN |Integer| ()
   (SPROG NIL
-         (PROG (#1=#:G1296)
+         (PROG (#1=#:G1295)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Integer|))
@@ -486,20 +486,20 @@
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0))
+                                  0 0 0))
             (CONS
              '#(|IntegerNumberSystem&| |EuclideanDomain&|
                 |PolynomialFactorizationExplicit&| NIL
-                |UniqueFactorizationDomain&| |GcdDomain&| NIL NIL NIL NIL
-                |OrderedRing&| |Algebra&| |EntireRing&| NIL |DifferentialRing&|
-                NIL NIL |Rng&| |NonAssociativeAlgebra&| NIL |Module&|
-                |NonAssociativeRing&| NIL NIL NIL NIL |NonAssociativeRng&| NIL
-                NIL NIL |AbelianGroup&| NIL NIL NIL NIL NIL |AbelianMonoid&|
-                |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL |OrderedSet&|
-                |AbelianSemiGroup&| |Magma&| NIL NIL NIL |SetCategory&| NIL
-                |RetractableTo&| NIL |Hashable&| NIL |BasicType&| NIL NIL NIL
-                |PartialOrder&| NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL
-                |OpenMath&| NIL NIL)
+                |UniqueFactorizationDomain&| |GcdDomain&| NIL NIL NIL NIL NIL
+                |Algebra&| |EntireRing&| NIL |DifferentialRing&| NIL NIL |Rng&|
+                |NonAssociativeAlgebra&| NIL |Module&| |NonAssociativeRing&|
+                NIL |OrderedAbelianGroup&| NIL NIL |NonAssociativeRng&| NIL NIL
+                NIL |AbelianGroup&| NIL NIL NIL NIL NIL NIL NIL
+                |AbelianMonoid&| |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL
+                |OrderedSet&| |AbelianSemiGroup&| |Magma&| NIL NIL NIL
+                |SetCategory&| NIL |RetractableTo&| NIL |Hashable&| NIL
+                |BasicType&| NIL NIL NIL |PartialOrder&| NIL NIL NIL NIL NIL
+                NIL NIL NIL NIL NIL |OpenMath&| NIL NIL)
              (CONS
               '#((|IntegerNumberSystem|) (|EuclideanDomain|)
                  (|PolynomialFactorizationExplicit|) (|PrincipalIdealDomain|)
@@ -513,21 +513,21 @@
                  (|LinearlyExplicitOver| 11) (|RightModule| $$)
                  (|NonAssociativeRng|) (|LeftModule| $$)
                  (|OrderedCancellationAbelianMonoid|) (|RightModule| 11)
-                 (|AbelianGroup|) (|OrderedAbelianMonoid|)
+                 (|AbelianGroup|) (|OrderedAbelianMonoid|) (|OrderedMonoid|)
                  (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
-                 (|Monoid|) (|OrderedAbelianSemiGroup|) (|AbelianMonoid|)
-                 (|NonAssociativeSemiRng|) (|MagmaWithUnit|) (|SemiGroup|)
-                 (|OrderedSet|) (|AbelianSemiGroup|) (|Magma|) (|Comparable|)
-                 (|PatternMatchable| 11) (|StepThrough|) (|SetCategory|)
-                 (|CommutativeStar|) (|RetractableTo| 11) (|RealConstant|)
-                 (|Hashable|) (|CoercibleTo| 30) (|BasicType|) (|unitsKnown|)
-                 (|TwoSidedRecip|) (|noZeroDivisors|) (|PartialOrder|)
-                 (|ConvertibleTo| 11) (|CoercibleFrom| 11) (|ConvertibleTo| 44)
-                 (|ConvertibleTo| 140) (|CombinatorialFunctionCategory|)
-                 (|ConvertibleTo| 42) (|ConvertibleTo| 39)
-                 (|canonicalUnitNormal|) (|multiplicativeValuation|)
-                 (|ConvertibleTo| 9) (|OpenMath|) (|Canonical|)
-                 (|canonicalsClosed|))
+                 (|Monoid|) (|OrderedAbelianSemiGroup|) (|OrderedSemiGroup|)
+                 (|AbelianMonoid|) (|NonAssociativeSemiRng|) (|MagmaWithUnit|)
+                 (|SemiGroup|) (|OrderedSet|) (|AbelianSemiGroup|) (|Magma|)
+                 (|Comparable|) (|PatternMatchable| 11) (|StepThrough|)
+                 (|SetCategory|) (|CommutativeStar|) (|RetractableTo| 11)
+                 (|RealConstant|) (|Hashable|) (|CoercibleTo| 30) (|BasicType|)
+                 (|unitsKnown|) (|TwoSidedRecip|) (|noZeroDivisors|)
+                 (|PartialOrder|) (|ConvertibleTo| 11) (|CoercibleFrom| 11)
+                 (|ConvertibleTo| 44) (|ConvertibleTo| 140)
+                 (|CombinatorialFunctionCategory|) (|ConvertibleTo| 42)
+                 (|ConvertibleTo| 39) (|canonicalUnitNormal|)
+                 (|multiplicativeValuation|) (|ConvertibleTo| 9) (|OpenMath|)
+                 (|Canonical|) (|canonicalsClosed|))
               (|makeByteWordVec2| 144
                                   '(1 7 6 0 8 3 7 6 0 9 9 10 2 7 6 0 11 12 1 7
                                     6 0 13 1 7 6 0 14 1 7 6 0 15 1 30 0 11 31 1

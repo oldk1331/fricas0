@@ -330,6 +330,7 @@
 ;   clear_sorted_caches()
 ;   clearCategoryCaches()
 ;   CLRHASH $ConstructorCache
+;   clear_callbacks()
 
 (DEFUN |clearConstructorCaches| ()
   (PROG ()
@@ -338,7 +339,8 @@
       (|clearClams|)
       (|clear_sorted_caches|)
       (|clearCategoryCaches|)
-      (CLRHASH |$ConstructorCache|)))))
+      (CLRHASH |$ConstructorCache|)
+      (|clear_callbacks|)))))
 
 ; clearConstructorCache(cname) ==
 ;   (kind := get_database(cname, 'CONSTRUCTORKIND)) =>
@@ -353,12 +355,6 @@
        (IDENTITY
         (COND ((EQ |kind| '|category|) (|clearCategoryCache| |cname|))
               ('T (HREM |$ConstructorCache| |cname|)))))))))
-
-; clearConstructorAndLisplibCaches() ==
-;   clearConstructorCaches()
-
-(DEFUN |clearConstructorAndLisplibCaches| ()
-  (PROG () (RETURN (|clearConstructorCaches|))))
 
 ; clearCategoryCaches() ==
 ;   for name in allConstructors() repeat
@@ -399,6 +395,17 @@
      (PROGN
       (SETQ |cacheName| (INTERNL1 (PNAME |catName|) ";AL"))
       (SET |cacheName| NIL)))))
+
+; clear_callbacks() ==
+;     $SPADRREAD_fun := [0, nil]
+;     $SPADRWRITE_fun := [0, nil]
+
+(DEFUN |clear_callbacks| ()
+  (PROG ()
+    (RETURN
+     (PROGN
+      (SETQ |$SPADRREAD_fun| (LIST 0 NIL))
+      (SETQ |$SPADRWRITE_fun| (LIST 0 NIL))))))
 
 ; displayHashtable x ==
 ;   l:= NREVERSE SORTBY('CAR,[[opOf HGET(x,key),key] for key in HKEYS x])

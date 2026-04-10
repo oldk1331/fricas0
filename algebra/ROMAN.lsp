@@ -108,14 +108,14 @@
             (|makeByteWordVec2| 1
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
+                                  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
             (CONS
              '#(|IntegerNumberSystem&| |EuclideanDomain&| NIL
-                |UniqueFactorizationDomain&| |GcdDomain&| NIL NIL NIL NIL
-                |OrderedRing&| |Algebra&| |EntireRing&| NIL |DifferentialRing&|
-                NIL NIL |Rng&| |NonAssociativeAlgebra&| NIL |Module&|
-                |NonAssociativeRing&| NIL NIL NIL |NonAssociativeRng&| NIL NIL
-                |AbelianGroup&| NIL NIL NIL NIL NIL |AbelianMonoid&|
+                |UniqueFactorizationDomain&| |GcdDomain&| NIL NIL NIL NIL NIL
+                |Algebra&| |EntireRing&| NIL |DifferentialRing&| NIL NIL |Rng&|
+                |NonAssociativeAlgebra&| NIL |Module&| |NonAssociativeRing&|
+                NIL |OrderedAbelianGroup&| NIL |NonAssociativeRng&| NIL NIL
+                |AbelianGroup&| NIL NIL NIL NIL NIL NIL NIL |AbelianMonoid&|
                 |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL |OrderedSet&|
                 |AbelianSemiGroup&| |Magma&| NIL NIL NIL |SetCategory&| NIL
                 |RetractableTo&| NIL NIL |BasicType&| NIL NIL NIL
@@ -132,20 +132,21 @@
                  (|OrderedAbelianGroup|) (|RightModule| $$)
                  (|NonAssociativeRng|) (|LeftModule| $$)
                  (|OrderedCancellationAbelianMonoid|) (|AbelianGroup|)
-                 (|OrderedAbelianMonoid|) (|CancellationAbelianMonoid|)
-                 (|NonAssociativeSemiRing|) (|Monoid|)
-                 (|OrderedAbelianSemiGroup|) (|AbelianMonoid|)
-                 (|NonAssociativeSemiRng|) (|MagmaWithUnit|) (|SemiGroup|)
-                 (|OrderedSet|) (|AbelianSemiGroup|) (|Magma|) (|Comparable|)
-                 (|PatternMatchable| 5) (|StepThrough|) (|SetCategory|)
-                 (|CommutativeStar|) (|RetractableTo| 5) (|RealConstant|)
-                 (|CoercibleTo| 17) (|BasicType|) (|unitsKnown|)
-                 (|TwoSidedRecip|) (|noZeroDivisors|) (|PartialOrder|)
-                 (|ConvertibleTo| 5) (|CoercibleFrom| 5) (|ConvertibleTo| 40)
-                 (|ConvertibleTo| 42) (|CombinatorialFunctionCategory|)
-                 (|ConvertibleTo| 43) (|ConvertibleTo| 44)
-                 (|canonicalUnitNormal|) (|multiplicativeValuation|)
-                 (|Canonical|) (|canonicalsClosed|))
+                 (|OrderedAbelianMonoid|) (|OrderedMonoid|)
+                 (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
+                 (|Monoid|) (|OrderedAbelianSemiGroup|) (|OrderedSemiGroup|)
+                 (|AbelianMonoid|) (|NonAssociativeSemiRng|) (|MagmaWithUnit|)
+                 (|SemiGroup|) (|OrderedSet|) (|AbelianSemiGroup|) (|Magma|)
+                 (|Comparable|) (|PatternMatchable| 5) (|StepThrough|)
+                 (|SetCategory|) (|CommutativeStar|) (|RetractableTo| 5)
+                 (|RealConstant|) (|CoercibleTo| 17) (|BasicType|)
+                 (|unitsKnown|) (|TwoSidedRecip|) (|noZeroDivisors|)
+                 (|PartialOrder|) (|ConvertibleTo| 5) (|CoercibleFrom| 5)
+                 (|ConvertibleTo| 40) (|ConvertibleTo| 42)
+                 (|CombinatorialFunctionCategory|) (|ConvertibleTo| 43)
+                 (|ConvertibleTo| 44) (|canonicalUnitNormal|)
+                 (|multiplicativeValuation|) (|Canonical|)
+                 (|canonicalsClosed|))
               (|makeByteWordVec2| 46
                                   '(1 0 0 5 6 1 8 11 0 12 1 14 13 11 15 1 0 5 0
                                     16 1 5 17 0 18 1 0 0 0 19 1 17 0 0 21 1 14

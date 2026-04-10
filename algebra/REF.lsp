@@ -50,9 +50,9 @@
             (QSETREFV % 21 (CONS (|dispatchFunction| |REF;coerce;%Of;7|) %))))
           %))) 
 
-(DEFUN |Reference| (#1=#:G1782)
+(DEFUN |Reference| (#1=#:G1781)
   (SPROG NIL
-         (PROG (#2=#:G1783)
+         (PROG (#2=#:G1782)
            (RETURN
             (COND
              ((LETT #2#

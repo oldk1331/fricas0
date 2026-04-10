@@ -47,7 +47,7 @@
           (|multmat| (|Matrix| (|PrimeField| |p|))) (#12=#:G74 NIL)
           (|t1| (|PrimeField| (+ (* |k| |n|) (|One|))))
           (|k| (|NonNegativeInteger|)) (|a| (|Integer|)) (#13=#:G75 NIL)
-          (|p| (|NonNegativeInteger|)) (|q| (|NonNegativeInteger|)))
+          (|p| (|PositiveInteger|)) (|q| (|NonNegativeInteger|)))
          (SEQ (LETT |q| (SPADCALL (QREFELT % 17)))
               (LETT |p| (SPADCALL (QREFELT % 18))) (LETT |k| 0)
               (SEQ (LETT |i| 1) (LETT #13# (- |n| 1)) G190

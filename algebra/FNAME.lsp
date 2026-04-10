@@ -7,32 +7,33 @@
 (SDEFUN |FNAME;coerce;%Of;2| ((|f| (%)) (% (|OutputForm|)))
         (SPADCALL (SPADCALL |f| (QREFELT % 9)) (QREFELT % 11))) 
 
-(PUT '|FNAME;coerce;%S;3| '|SPADreplace| 'NAMESTRING) 
+(PUT '|FNAME;coerce;%S;3| '|SPADreplace| '(XLAM (|f|) |f|)) 
 
-(SDEFUN |FNAME;coerce;%S;3| ((|f| (%)) (% (|String|))) (NAMESTRING |f|)) 
+(SDEFUN |FNAME;coerce;%S;3| ((|f| (%)) (% (|String|))) |f|) 
 
-(PUT '|FNAME;coerce;S%;4| '|SPADreplace| 'PARSE-NAMESTRING) 
+(PUT '|FNAME;coerce;S%;4| '|SPADreplace| '(XLAM (|s|) |s|)) 
 
-(SDEFUN |FNAME;coerce;S%;4| ((|s| (|String|)) (% (%))) (PARSE-NAMESTRING |s|)) 
+(SDEFUN |FNAME;coerce;S%;4| ((|s| (|String|)) (% (%))) |s|) 
 
-(PUT '|FNAME;filename;3S%;5| '|SPADreplace| '|fnameMake|) 
+(PUT '|FNAME;filename;3S%;5| '|SPADreplace| '|make_fname|) 
 
 (SDEFUN |FNAME;filename;3S%;5|
         ((|d| #1=(|String|)) (|n| #1#) (|e| #1#) (% (%)))
-        (|fnameMake| |d| |n| |e|)) 
+        (|make_fname| |d| |n| |e|)) 
 
-(PUT '|FNAME;directory;%S;6| '|SPADreplace| '|fnameDirectory|) 
+(PUT '|FNAME;directory;%S;6| '|SPADreplace| '|file_directory|) 
 
 (SDEFUN |FNAME;directory;%S;6| ((|f| (%)) (% (|String|)))
-        (|fnameDirectory| |f|)) 
+        (|file_directory| |f|)) 
 
-(PUT '|FNAME;name;%S;7| '|SPADreplace| '|fnameName|) 
+(PUT '|FNAME;name;%S;7| '|SPADreplace| '|file_basename|) 
 
-(SDEFUN |FNAME;name;%S;7| ((|f| (%)) (% (|String|))) (|fnameName| |f|)) 
+(SDEFUN |FNAME;name;%S;7| ((|f| (%)) (% (|String|))) (|file_basename| |f|)) 
 
-(PUT '|FNAME;extension;%S;8| '|SPADreplace| '|fnameType|) 
+(PUT '|FNAME;extension;%S;8| '|SPADreplace| '|file_extention|) 
 
-(SDEFUN |FNAME;extension;%S;8| ((|f| (%)) (% (|String|))) (|fnameType| |f|)) 
+(SDEFUN |FNAME;extension;%S;8| ((|f| (%)) (% (|String|)))
+        (|file_extention| |f|)) 
 
 (PUT '|FNAME;exists?;%B;9| '|SPADreplace| '|fnameExists?|) 
 

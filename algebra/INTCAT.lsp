@@ -26,51 +26,23 @@
                                                     ('T
                                                      (LETT
                                                       |IntervalCategory;CAT|
-                                                      (|Join| (|GcdDomain|)
-                                                              (|OrderedSet|)
-                                                              (|TranscendentalFunctionCategory|)
-                                                              (|RadicalCategory|)
-                                                              (|RetractableTo|
-                                                               '#2#)
-                                                              (|Approximate|)
-                                                              (|mkCategory|
-                                                               '(((|interval|
-                                                                   (% |t#1|
-                                                                    |t#1|))
-                                                                  T)
-                                                                 ((|qinterval|
-                                                                   (% |t#1|
-                                                                    |t#1|))
-                                                                  T)
-                                                                 ((|interval|
-                                                                   (% |t#1|))
-                                                                  T)
-                                                                 ((|interval|
-                                                                   (%
-                                                                    (|Fraction|
-                                                                     (|Integer|))))
-                                                                  T)
-                                                                 ((|inf|
-                                                                   (|t#1| %))
-                                                                  T)
-                                                                 ((|sup|
-                                                                   (|t#1| %))
-                                                                  T)
-                                                                 ((|width|
-                                                                   (|t#1| %))
-                                                                  T)
-                                                                 ((|positive?|
-                                                                   ((|Boolean|)
-                                                                    %))
-                                                                  T)
-                                                                 ((|negative?|
-                                                                   ((|Boolean|)
-                                                                    %))
-                                                                  T)
-                                                                 ((|contains?|
-                                                                   ((|Boolean|)
-                                                                    % |t#1|))
-                                                                  T))
-                                                               NIL NIL
-                                                               NIL))))))))
+                                                      (|Join|
+                                                       (|AIntervalCategory|
+                                                        '|t#1|)
+                                                       (|GcdDomain|)
+                                                       (|OrderedSet|)
+                                                       (|TranscendentalFunctionCategory|)
+                                                       (|RadicalCategory|)
+                                                       (|RetractableTo| '#2#)
+                                                       (|Approximate|)
+                                                       (|mkCategory|
+                                                        '(((|interval|
+                                                            (% |t#1|))
+                                                           T)
+                                                          ((|interval|
+                                                            (%
+                                                             (|Fraction|
+                                                              (|Integer|))))
+                                                           T))
+                                                        NIL NIL NIL))))))))
            (SETELT #1# 0 (LIST '|IntervalCategory| |t#1|))))) 

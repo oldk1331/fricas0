@@ -919,9 +919,9 @@
                                  #8#)))))))))
           #25# (EXIT #13#)))) 
 
-(SDEFUN |POLYCAT-;charthRoot;SU;35| ((|p| (S)) (% (|Union| S "failed")))
+(SDEFUN |POLYCAT-;charthRoot;SU;35| ((|p| (S)) (% (|Union| S #1="failed")))
         (SPROG
-         ((|ch| (|NonNegativeInteger|)) (|ans| (|Union| R "failed"))
+         ((|ch| (|NonNegativeInteger|)) (|ans| (|Union| R #1#))
           (|vars| (|List| |VarSet|)))
          (SEQ (LETT |vars| (SPADCALL |p| (QREFELT % 24)))
               (EXIT
@@ -933,9 +933,9 @@
                                   (QREFELT % 156)))
                   (EXIT
                    (COND ((QEQCAR |ans| 1) (CONS 1 "failed"))
-                         (#1='T
+                         (#2='T
                           (CONS 0 (SPADCALL (QCDR |ans|) (QREFELT % 36))))))))
-                (#1#
+                (#2#
                  (SEQ (LETT |ch| (SPADCALL (QREFELT % 142)))
                       (EXIT (|POLYCAT-;charthRootlv| |p| |vars| |ch| %))))))))) 
 
@@ -1597,13 +1597,11 @@
         ((|HasCategory| |#2| '(|CharacteristicNonZero|))
          (PROGN
           (QSETREFV % 155
-                    (CONS (|dispatchFunction| |POLYCAT-;conditionP;MU;34|)
+                    (CONS (|dispatchFunction| |POLYCAT-;conditionP;MU;34|) %))
+          NIL
+          (QSETREFV % 157
+                    (CONS (|dispatchFunction| |POLYCAT-;charthRoot;SU;35|)
                           %))))))))
-    (COND
-     ((|HasCategory| |#2| '(|CharacteristicNonZero|))
-      (PROGN
-       (QSETREFV % 157
-                 (CONS (|dispatchFunction| |POLYCAT-;charthRoot;SU;35|) %)))))
     (COND
      ((|testBitVector| |pv$| 16)
       (QSETREFV % 162

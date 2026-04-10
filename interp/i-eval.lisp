@@ -476,7 +476,9 @@
 ;   [op,:argl]:= form
 ;   constructor? op =>
 ;     null (sig := getConstructorSignature form) =>
-;        throwEvalTypeMsg("S2IE0005",[form])
+;         throw_eval_type_msg("S2IE0005",
+;             '"You cannot now use %1bp in the context you have it.",
+;             [form])
 ;     [.,:ml] := sig
 ;     ml := replaceSharps(ml,form)
 ;     # argl ~= #ml => throwEvalTypeMsg("S2IE0003",[form,form])
@@ -507,7 +509,9 @@
        ((|constructor?| |op|)
         (COND
          ((NULL (SETQ |sig| (|getConstructorSignature| |form|)))
-          (|throwEvalTypeMsg| 'S2IE0005 (LIST |form|)))
+          (|throw_eval_type_msg| 'S2IE0005
+           "You cannot now use %1bp in the context you have it."
+           (LIST |form|)))
          (#1='T
           (PROGN
            (SETQ |ml| (CDR |sig|))
@@ -581,19 +585,25 @@
               (CONS |op| (NREVERSE |typeList|)))))))))
        (#1# (|throwEvalTypeMsg| 'S2IE0007 (LIST |op|))))))))
 
-; throwEvalTypeMsg(msg, args) ==
+; throw_eval_type_msg(key, msg, args) ==
 ;   $justUnparseType : local := true
 ;   $noEvalTypeMsg => spadThrow()
-;   throwKeyedMsg(msg, args)
+;   throw_msg(key, msg, args)
 
-(DEFUN |throwEvalTypeMsg| (|msg| |args|)
+(DEFUN |throw_eval_type_msg| (|key| |msg| |args|)
   (PROG (|$justUnparseType|)
     (DECLARE (SPECIAL |$justUnparseType|))
     (RETURN
      (PROGN
       (SETQ |$justUnparseType| T)
       (COND (|$noEvalTypeMsg| (|spadThrow|))
-            ('T (|throwKeyedMsg| |msg| |args|)))))))
+            ('T (|throw_msg| |key| |msg| |args|)))))))
+
+; throwEvalTypeMsg(key, args) ==
+;     throw_eval_type_msg(key, getKeyedMsg(key), args)
+
+(DEFUN |throwEvalTypeMsg| (|key| |args|)
+  (PROG () (RETURN (|throw_eval_type_msg| |key| (|getKeyedMsg| |key|) |args|))))
 
 ; makeOrdinal i ==
 ;   ('(first second third fourth fifth sixth seventh eighth ninth tenth)).(i-1)

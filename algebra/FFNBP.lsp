@@ -621,7 +621,7 @@
               (CONS IDENTITY
                     (FUNCALL (|dispatchFunction| |FFNBP;Zero;%;36|) %))
               (17 . |Zero|) '|vv| (21 . |One|) (|Integer|) (25 . |setelt!|)
-              (|Void|) (|Record| (|:| |value| 6) (|:| |index| 208))
+              (|Void|) (|Record| (|:| |value| 6) (|:| |index| 207))
               (|Vector| (|List| 31)) (|InnerNormalBasisFieldFunctions| 6)
               (32 . |setFieldInfo|) (|Vector| 6) (38 . |minimalPolynomial|)
               (|NonNegativeInteger|) (43 . |degree|) (48 . ^) (54 . |coerce|)
@@ -691,7 +691,7 @@
               (|Fraction| 28) (|OnePointCompletion| 58)
               (|Union| 97 '#2="failed") (|Matrix| %) (|Union| 37 '"failed")
               (|InputForm|) (|Factored| 193) (|Union| 206 '#2#) (|List| 193)
-              (|HashState|) (|SingleInteger|))
+              (|SingleInteger|) (|HashState|))
            '#(~= 420 |zero?| 426 |unitNormal| 431 |unitCanonical| 436 |unit?|
               441 |transcendent?| 446 |transcendenceDegree| 451 |traceMatrix|
               455 |trace| 464 |tableForDiscreteLogarithm| 475 |subtractIfCan|
@@ -819,8 +819,8 @@
                                     2 78 0 0 79 2 2 0 0 18 66 1 0 189 0 1 2 0 0
                                     0 58 1 2 0 0 0 37 1 2 0 191 0 0 1 1 0 0 192
                                     1 2 0 0 0 0 1 1 0 188 0 1 1 0 0 0 186 0 2 0
-                                    1 1 2 0 58 130 1 0 56 0 105 2 4 207 207 0 1
-                                    1 4 208 0 1 0 0 32 80 0 0 81 84 0 2 0 93 2
+                                    1 1 2 0 58 130 1 0 56 0 105 2 4 208 208 0 1
+                                    1 4 207 0 1 0 0 32 80 0 0 81 84 0 2 0 93 2
                                     0 193 193 193 1 1 0 0 192 1 2 0 0 0 0 1 0 2
                                     123 144 1 2 204 193 1 1 2 204 193 1 1 0 120
                                     0 1 0 0 199 1 0 0 58 145 3 0 73 0 0 0 1 2 0
@@ -832,7 +832,7 @@
                                     103 2 0 81 97 97 1 2 0 35 0 97 1 1 0 35 0 1
                                     1 0 0 35 1 1 2 203 0 1 1 6 200 201 1 2 0 0
                                     0 0 1 1 0 11 0 118 1 0 0 28 1 1 0 0 0 1 1 0
-                                    0 198 1 1 0 0 6 53 1 3 189 0 1 1 2 0 0 1 1
+                                    0 198 1 1 0 0 6 53 1 6 189 0 1 1 2 0 0 1 1
                                     0 18 0 1 0 0 37 150 0 0 97 166 1 2 97 58 98
                                     3 0 0 0 0 0 1 2 0 56 0 0 1 2 0 0 0 0 1 2 0
                                     56 0 0 1 1 0 56 0 1 2 0 0 0 58 1 2 0 0 0 37

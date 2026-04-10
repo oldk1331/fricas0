@@ -3,7 +3,7 @@
         (COND
          ((SPADCALL (QREFELT % 11) (QREFELT % 16))
           (|error|
-           "constructor must no be called with Ring of characteristic 2"))
+           "constructor must not be called with Ring of characteristic 2"))
          ('T
           (SPADCALL
            (SPADCALL (SPADCALL |a| |b| (QREFELT % 17))

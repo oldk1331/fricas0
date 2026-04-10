@@ -370,7 +370,7 @@
          ((SPADCALL |Lv| NIL (QREFELT % 59)) (SPADCALL |n| (QREFELT % 60)))
          ((SPADCALL |n| (QVSIZE (SPADCALL |Lv| 1 (QREFELT % 19)))
                     (QREFELT % 23))
-          (|error| "Inconsistant vector length in complementSpace"))
+          (|error| "Inconsistent vector length in complementSpace"))
          ('T (|VSBASIS;do_complement| |Lv| |n| NIL %)))) 
 
 (SDEFUN |VSBASIS;complementSpace;2%;30| ((B (%)) (% (%)))
@@ -391,7 +391,7 @@
         (COND ((SPADCALL B NIL (QREFELT % 59)) (SPADCALL |n| (QREFELT % 60)))
               ((SPADCALL |n| (QVSIZE (SPADCALL B 1 (QREFELT % 19)))
                          (QREFELT % 23))
-               (|error| "Inconsistant vector length in complementSpace"))
+               (|error| "Inconsistent vector length in complementSpace"))
               ('T (|VSBASIS;do_complement| B |n| 'T %)))) 
 
 (SDEFUN |VSBASIS;member?;V%B;32| ((|v| (|Vector| R)) (B (%)) (% (|Boolean|)))

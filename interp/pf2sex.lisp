@@ -8,6 +8,8 @@
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$dotdot| (INTERN ".." "BOOT")))
 
 ; pf2Sex pf ==
+;   -- This and rule below control output, but this is wrong place,
+;   -- we should do this after evaluation.
 ;   intUnsetQuiet()
 ;   $insideRule:local := false
 ;   $insideApplication: local := false
@@ -77,7 +79,7 @@
 ;     ["WHILE", pf2Sex1 pfWhileCond pf]
 ;   pfSuchthat? pf =>
 ;     $insideRule = 'left =>
-;       keyedSystemError("S2GE0017", ['"pf2Sex1: pfSuchThat"])
+;       systemErrorHere('"pf2Sex1: pfSuchThat")
 ;     ["|", pf2Sex1 pfSuchthatCond pf]
 ;   pfDo? pf =>
 ;     pf2Sex1 pfDoBody pf
@@ -134,7 +136,7 @@
 ;   -- the user to figure out what happened.
 ;   pfAbSynOp(pf) = "command" => tokPart(pf)
 ;
-;   keyedSystemError("S2GE0017", ['"pf2Sex1"])
+;   systemErrorHere('"pf2Sex1")
 
 (DEFUN |pf2Sex1| (|pf|)
   (PROG (|s| |tag| |tagPart| |op| |type| |idList| |args|)
@@ -235,7 +237,7 @@
            ((|pfSuchthat?| |pf|)
             (COND
              ((EQ |$insideRule| '|left|)
-              (|keyedSystemError| 'S2GE0017 (LIST "pf2Sex1: pfSuchThat")))
+              (|systemErrorHere| "pf2Sex1: pfSuchThat"))
              (#1# (LIST '|\|| (|pf2Sex1| (|pfSuchthatCond| |pf|))))))
            ((|pfDo?| |pf|) (|pf2Sex1| (|pfDoBody| |pf|)))
            ((|pfTyped?| |pf|)
@@ -334,7 +336,7 @@
                (LIST '|where| (|pf2Sex1| (|pfWhereExpr| |pf|))
                      (CONS 'SEQ |args|))))))
            ((EQ (|pfAbSynOp| |pf|) '|command|) (|tokPart| |pf|))
-           (#1# (|keyedSystemError| 'S2GE0017 (LIST "pf2Sex1")))))))
+           (#1# (|systemErrorHere| "pf2Sex1"))))))
 
 ; pfLiteral2Sex pf ==
 ;   type := pfLiteralClass pf
@@ -351,7 +353,7 @@
 ;     pfSymbolSymbol pf
 ;   type = 'expression =>
 ;       ["QUOTE", pfLeafToken pf]
-;   keyedSystemError("S2GE0017", ['"pfLiteral2Sex: unexpected form"])
+;   systemErrorHere('"pfLiteral2Sex: unexpected form")
 
 (DEFUN |pfLiteral2Sex| (|pf|)
   (PROG (|type| |s|)
@@ -369,9 +371,7 @@
           (PROGN (SETQ |s| (|pfSymbolSymbol| |pf|)) (LIST 'QUOTE |s|)))
          (#1='T (|pfSymbolSymbol| |pf|))))
        ((EQ |type| '|expression|) (LIST 'QUOTE (|pfLeafToken| |pf|)))
-       (#1#
-        (|keyedSystemError| 'S2GE0017
-         (LIST "pfLiteral2Sex: unexpected form"))))))))
+       (#1# (|systemErrorHere| "pfLiteral2Sex: unexpected form")))))))
 
 ; symEqual(sym, sym2) == EQ(sym, sym2)
 

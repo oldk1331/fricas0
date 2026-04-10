@@ -590,7 +590,7 @@
             (EXIT
              (COND
               ((QEQCAR |rec| 1)
-               (|error| "solveInField: system is underdeterminded"))
+               (|error| "solveInField: system is underdetermined"))
               ('T (QCDR |rec|))))))
           #5# (EXIT #1#)))) 
 

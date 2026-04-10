@@ -80,7 +80,7 @@ with this hack and will try to convince the GCL crowd to fix this.
 )
 
 ;; Save current image on disk as executable and quit.
-(defun save-core-restart (core-image restart)
+(defun save-core-restart (core-image restart save-exec)
 #+:GCL
   (progn
      (if restart
@@ -101,7 +101,7 @@ with this hack and will try to convince the GCL crowd to fix this.
                        (lisp::%top-level))))
         (ext::save-lisp
          (unix::unix-maybe-prepend-current-directory core-image)
-         :init-function top-fun :executable t :print-herald nil))
+         :init-function top-fun :executable save-exec :print-herald nil))
 #+:sbcl
   (let* ((restart-fun
                (if restart
@@ -112,19 +112,23 @@ with this hack and will try to convince the GCL crowd to fix this.
                        (funcall restart-fun)
                        (sb-impl::toplevel-repl nil)))
          (save-options-keyword (find-symbol "SAVE-RUNTIME-OPTIONS" "KEYWORD"))
+         (accept-options-keyword (find-symbol "ACCEPT-RUNTIME-OPTIONS" "KEYWORD"))
          (save-options-arg
-             (if save-options-keyword (list save-options-keyword t) nil))
+             (if save-options-keyword
+                 (list save-options-keyword
+                       (if accept-options-keyword accept-options-keyword t))
+                 nil))
         )
         (uninstall-gmp-multiplication)
         (apply #'sb-ext::save-lisp-and-die
-              (append `(,core-image :toplevel ,top-fun :executable t)
+              (append `(,core-image :toplevel ,top-fun :executable ,save-exec)
                       save-options-arg))
   )
 #+:clisp
   (if restart
-     (ext::saveinitmem core-image :INIT-FUNCTION restart :QUIET t
-         :NORC t :executable t)
-     (ext::saveinitmem core-image :executable t :NORC t :QUIET t))
+     (ext::saveinitmem core-image :executable save-exec :NORC t :QUIET t
+         :INIT-FUNCTION restart)
+     (ext::saveinitmem core-image :executable save-exec :NORC t :QUIET t))
 #+:openmcl
   (let* ((ccl-dir (or *ccl-default-directory*
                  (|getEnv| "CCL_DEFAULT_DIRECTORY")))
@@ -138,7 +142,7 @@ with this hack and will try to convince the GCL crowd to fix this.
                        (ccl::toplevel-loop))))
         (setf *ccl-default-directory* ccl-dir)
         (CCL::save-application core-image :toplevel-function top-fun
-                                       :PREPEND-KERNEL t)
+                                       :PREPEND-KERNEL save-exec)
         (QUIT))
 #+:lispworks
   (progn
@@ -156,7 +160,7 @@ with this hack and will try to convince the GCL crowd to fix this.
 )
 
 (defun save-core (core-image)
-     (save-core-restart core-image nil))
+     (save-core-restart core-image nil t))
 
 ;; Load Lisp files (any LOADable file), given as a list of file names.
 ;; The file names are strings, as appropriate for LOAD.
@@ -209,7 +213,7 @@ with this hack and will try to convince the GCL crowd to fix this.
 (defun make-program (core-image lisp-files)
   #+gcl(setq si::*optimize-maximum-pages* nil)
   (load-lisp-files lisp-files)
-  #+:gcl(progn (setq si::*code-block-reserve* "")(si::gbc t)(setq si::*code-block-reserve* (make-array 10000000 :element-type (quote character) :static t) si::*optimize-maximum-pages* t))
+  #+:gcl(progn (setq si::*code-block-reserve* "")(si::gbc t)(setq si::*code-block-reserve* (make-array 70000000 :element-type (quote character) :static t) si::*optimize-maximum-pages* t))
   (save-core core-image))
 
 #+:ecl
@@ -834,7 +838,7 @@ with this hack and will try to convince the GCL crowd to fix this.
     (|trim_directory_name| directory)))
 
 
-(defun |fricas_probe_file| (file)
+(defun |fricas_probe_file0| (file)
 #+(or :GCL :clisp)
        (let* ((fk (|file_kind| (namestring file)))
               (fname (|trim_directory_name| (namestring file)))
@@ -849,6 +853,11 @@ with this hack and will try to convince the GCL crowd to fix this.
 #+:sbcl (if (sbcl-file-kind file) (truename file))
 #+(or :abcl :ecl :lispworks :openmcl :poplog) (probe-file file)
          )
+
+(defun |fricas_probe_file| (file)
+     (let ((path (|fricas_probe_file0| file)))
+          (if path (namestring path)
+              nil)))
 
 #-:cmu
 (defun relative-to-absolute (name)
@@ -921,8 +930,8 @@ with this hack and will try to convince the GCL crowd to fix this.
   (|run_program| "sh" (list "-c" s)))
 
 (defmacro DEFCONST (name value)
-    (if (not (boundp name))
-        `(DEFCONSTANT ,name ,value)))
+    `(if (not (boundp (quote ,name)))
+        (DEFCONSTANT ,name ,value)))
 
 #+:cmu
 (defconstant +list-based-union-limit+ 80)

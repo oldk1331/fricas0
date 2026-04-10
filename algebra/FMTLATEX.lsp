@@ -1117,18 +1117,18 @@
                                       (QREFELT % 97))
                             (QREFELT % 106))
                   (SPADCALL |oh| 2 "->"
-                            (SPADCALL "\\to " 1001
-                                      (SPADCALL 1001 (QREFELT % 102))
+                            (SPADCALL "\\to " 990
+                                      (SPADCALL 990 (QREFELT % 102))
                                       (QREFELT % 97))
                             (QREFELT % 106))
                   (SPADCALL |oh| 2 "~>"
                             (SPADCALL "\\leadsto " 100
-                                      (SPADCALL 100 (QREFELT % 102))
+                                      (SPADCALL 110 (QREFELT % 102))
                                       (QREFELT % 97))
                             (QREFELT % 106))
                   (SPADCALL |oh| 2 "+->"
                             (SPADCALL "\\mapsto " 100
-                                      (SPADCALL 100 (QREFELT % 102))
+                                      (SPADCALL 110 (QREFELT % 102))
                                       (QREFELT % 97))
                             (QREFELT % 106))
                   (SPADCALL |oh| 2 "|"

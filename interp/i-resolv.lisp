@@ -3,6 +3,10 @@
 
 (IN-PACKAGE "BOOT")
 
+; $resolve_level := 0
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$resolve_level| 0))
+
 ; resolveTypeList u ==
 ;   u is [a,:tail] =>
 ;
@@ -333,12 +337,25 @@
 ;   t1 = '(AlgebraicNumber) and t2 is ['Complex,.] =>
 ;     resolveTT1('(Expression (Integer)), t2)
 ;
-;   t1 = ['AlgebraicNumber] and t2 is ['Polynomial, ['Fraction, ['Integer]]] =>
-;       ['Polynomial, ['AlgebraicNumber]]
+;   t1 = ['AlgebraicNumber] and t2 is ['Polynomial, t3] and
+;       (t4 := resolveTT1(t1, t3)) =>
+;          t4 is ['Expression, .] => t4
+;          ['Polynomial, t4]
 ;
-;   t1 = ['AlgebraicNumber] and
-;     t2 is ['Fraction, ['Polynomial, ['Fraction, ['Integer]]]] =>
-;         ['Fraction, ['Polynomial, ['AlgebraicNumber]]]
+;   t1 = ['AlgebraicNumber] and t2 is ['Fraction, ['Polynomial, t3]] and
+;       (t4 := resolveTT1(t1, t3)) =>
+;          t4 is ['Expression, .] => t4
+;          ['Fraction, ['Polynomial, t4]]
+;
+;   t1 = ['Polynomial, ['AlgebraicNumber]] and t2 is ['Polynomial, t3] and
+;       (t4 := resolveTT1(['AlgebraicNumber], t3)) =>
+;          t4 is ['Expression, .] => t4
+;          ['Polynomial, t4]
+;
+;   t1 = ['Polynomial, ['AlgebraicNumber]] and
+;        t2 is ['Fraction, ['Polynomial, t3]] and (t4 := resolveTT1(t1, t3)) =>
+;          t4 is ['Expression, .] => t4
+;          ['Fraction, ['Polynomial, t4]]
 ;
 ;   t1 is ['SimpleAlgebraicExtension,F,Rep,poly] =>
 ;     t2 = Rep => t1
@@ -366,7 +383,6 @@
 ;       resolveTT1(['UnivariatePolynomial,x,'(Integer)],t2)
 ;     t2 is ['Variable,y] =>
 ;       x = y => t1
-; --    ['OrderedVariableList, MSORT [x,y]]
 ;       $Symbol
 ;     t2 = '(Symbol) => t2
 ;     t2 is ['Polynomial,.] => t2
@@ -432,9 +448,9 @@
 ;   nil
 
 (DEFUN |resolveTTSpecial| (|t1| |t2|)
-  (PROG (|ISTMP#1| |ISTMP#2| |ISTMP#3| |ISTMP#4| |ISTMP#5| |ISTMP#6| F |Rep|
-         |poly| |x| R |t3| |R'| |vl| |y| S |f| |g| |mf| |mg| T$ U |d| |u1| |u2|
-         |dom'| |dom| |op1| |op2| S1 |var1| |cen1| S2 |var2| |cen2|)
+  (PROG (|ISTMP#1| |t3| |t4| |ISTMP#2| |ISTMP#3| F |Rep| |poly| |x| R |R'| |vl|
+         |y| S |f| |g| |mf| |mg| T$ U |d| |u1| |u2| |dom'| |dom| |op1| |op2| S1
+         |var1| |cen1| S2 |var2| |cen2|)
     (RETURN
      (COND
       ((AND
@@ -466,17 +482,15 @@
             (PROGN
              (SETQ |ISTMP#1| (CDR |t2|))
              (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
-                  (PROGN
-                   (SETQ |ISTMP#2| (CAR |ISTMP#1|))
-                   (AND (CONSP |ISTMP#2|) (EQ (CAR |ISTMP#2|) '|Fraction|)
-                        (PROGN
-                         (SETQ |ISTMP#3| (CDR |ISTMP#2|))
-                         (AND (CONSP |ISTMP#3|) (EQ (CDR |ISTMP#3|) NIL)
-                              (PROGN
-                               (SETQ |ISTMP#4| (CAR |ISTMP#3|))
-                               (AND (CONSP |ISTMP#4|) (EQ (CDR |ISTMP#4|) NIL)
-                                    (EQ (CAR |ISTMP#4|) '|Integer|))))))))))
-       (LIST '|Polynomial| (LIST '|AlgebraicNumber|)))
+                  (PROGN (SETQ |t3| (CAR |ISTMP#1|)) #1='T)))
+            (SETQ |t4| (|resolveTT1| |t1| |t3|)))
+       (COND
+        ((AND (CONSP |t4|) (EQ (CAR |t4|) '|Expression|)
+              (PROGN
+               (SETQ |ISTMP#1| (CDR |t4|))
+               (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL))))
+         |t4|)
+        (#1# (LIST '|Polynomial| |t4|))))
       ((AND (EQUAL |t1| (LIST '|AlgebraicNumber|)) (CONSP |t2|)
             (EQ (CAR |t2|) '|Fraction|)
             (PROGN
@@ -488,21 +502,49 @@
                         (PROGN
                          (SETQ |ISTMP#3| (CDR |ISTMP#2|))
                          (AND (CONSP |ISTMP#3|) (EQ (CDR |ISTMP#3|) NIL)
-                              (PROGN
-                               (SETQ |ISTMP#4| (CAR |ISTMP#3|))
-                               (AND (CONSP |ISTMP#4|)
-                                    (EQ (CAR |ISTMP#4|) '|Fraction|)
-                                    (PROGN
-                                     (SETQ |ISTMP#5| (CDR |ISTMP#4|))
-                                     (AND (CONSP |ISTMP#5|)
-                                          (EQ (CDR |ISTMP#5|) NIL)
-                                          (PROGN
-                                           (SETQ |ISTMP#6| (CAR |ISTMP#5|))
-                                           (AND (CONSP |ISTMP#6|)
-                                                (EQ (CDR |ISTMP#6|) NIL)
-                                                (EQ (CAR |ISTMP#6|)
-                                                    '|Integer|))))))))))))))
-       (LIST '|Fraction| (LIST '|Polynomial| (LIST '|AlgebraicNumber|))))
+                              (PROGN (SETQ |t3| (CAR |ISTMP#3|)) #1#)))))))
+            (SETQ |t4| (|resolveTT1| |t1| |t3|)))
+       (COND
+        ((AND (CONSP |t4|) (EQ (CAR |t4|) '|Expression|)
+              (PROGN
+               (SETQ |ISTMP#1| (CDR |t4|))
+               (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL))))
+         |t4|)
+        (#1# (LIST '|Fraction| (LIST '|Polynomial| |t4|)))))
+      ((AND (EQUAL |t1| (LIST '|Polynomial| (LIST '|AlgebraicNumber|)))
+            (CONSP |t2|) (EQ (CAR |t2|) '|Polynomial|)
+            (PROGN
+             (SETQ |ISTMP#1| (CDR |t2|))
+             (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
+                  (PROGN (SETQ |t3| (CAR |ISTMP#1|)) #1#)))
+            (SETQ |t4| (|resolveTT1| (LIST '|AlgebraicNumber|) |t3|)))
+       (COND
+        ((AND (CONSP |t4|) (EQ (CAR |t4|) '|Expression|)
+              (PROGN
+               (SETQ |ISTMP#1| (CDR |t4|))
+               (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL))))
+         |t4|)
+        (#1# (LIST '|Polynomial| |t4|))))
+      ((AND (EQUAL |t1| (LIST '|Polynomial| (LIST '|AlgebraicNumber|)))
+            (CONSP |t2|) (EQ (CAR |t2|) '|Fraction|)
+            (PROGN
+             (SETQ |ISTMP#1| (CDR |t2|))
+             (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
+                  (PROGN
+                   (SETQ |ISTMP#2| (CAR |ISTMP#1|))
+                   (AND (CONSP |ISTMP#2|) (EQ (CAR |ISTMP#2|) '|Polynomial|)
+                        (PROGN
+                         (SETQ |ISTMP#3| (CDR |ISTMP#2|))
+                         (AND (CONSP |ISTMP#3|) (EQ (CDR |ISTMP#3|) NIL)
+                              (PROGN (SETQ |t3| (CAR |ISTMP#3|)) #1#)))))))
+            (SETQ |t4| (|resolveTT1| |t1| |t3|)))
+       (COND
+        ((AND (CONSP |t4|) (EQ (CAR |t4|) '|Expression|)
+              (PROGN
+               (SETQ |ISTMP#1| (CDR |t4|))
+               (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL))))
+         |t4|)
+        (#1# (LIST '|Fraction| (LIST '|Polynomial| |t4|)))))
       ((AND (CONSP |t1|) (EQ (CAR |t1|) '|SimpleAlgebraicExtension|)
             (PROGN
              (SETQ |ISTMP#1| (CDR |t1|))
@@ -515,9 +557,7 @@
                          (SETQ |Rep| (CAR |ISTMP#2|))
                          (SETQ |ISTMP#3| (CDR |ISTMP#2|))
                          (AND (CONSP |ISTMP#3|) (EQ (CDR |ISTMP#3|) NIL)
-                              (PROGN
-                               (SETQ |poly| (CAR |ISTMP#3|))
-                               #1='T))))))))
+                              (PROGN (SETQ |poly| (CAR |ISTMP#3|)) #1#))))))))
        (COND ((EQUAL |t2| |Rep|) |t1|)
              ((AND (CONSP |t2|) (EQ (CAR |t2|) '|UnivariatePolynomial|)
                    (PROGN

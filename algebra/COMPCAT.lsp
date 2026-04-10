@@ -65,6 +65,14 @@
                                                           ((|abs| (% %))
                                                            (|has| |t#1|
                                                                   (|RealNumberSystem|)))
+                                                          ((|sqrt| (% %))
+                                                           (AND
+                                                            (|has| |t#1|
+                                                                   (|RadicalCategory|))
+                                                            (|has| |t#1|
+                                                                   (|OrderedRing|))
+                                                            (|has| |t#1|
+                                                                   (|Field|))))
                                                           ((|argument|
                                                             (|t#1| %))
                                                            (|has| |t#1|

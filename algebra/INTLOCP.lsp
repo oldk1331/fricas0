@@ -480,13 +480,13 @@
             (|makeByteWordVec2| 1
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0 0))
+                                  0 0 0 0 0 0 0))
             (CONS
-             '#(|EuclideanDomain&| NIL |GcdDomain&| NIL NIL |OrderedRing&| NIL
-                |Algebra&| |EntireRing&| NIL NIL NIL |Rng&|
-                |NonAssociativeAlgebra&| NIL |Module&| |NonAssociativeRing&|
-                NIL NIL NIL |NonAssociativeRng&| NIL NIL |AbelianGroup&| NIL
-                NIL NIL NIL NIL |AbelianMonoid&| |NonAssociativeSemiRng&|
+             '#(|EuclideanDomain&| NIL |GcdDomain&| NIL NIL NIL NIL |Algebra&|
+                |EntireRing&| NIL NIL NIL |Rng&| |NonAssociativeAlgebra&| NIL
+                |Module&| |NonAssociativeRing&| NIL |OrderedAbelianGroup&| NIL
+                |NonAssociativeRng&| NIL NIL |AbelianGroup&| NIL NIL NIL NIL
+                NIL NIL NIL |AbelianMonoid&| |NonAssociativeSemiRng&|
                 |MagmaWithUnit&| NIL |OrderedSet&| |AbelianSemiGroup&| |Magma&|
                 NIL |SetCategory&| NIL |RetractableTo&| |RetractableFrom&|
                 |Hashable&| NIL |BasicType&| NIL NIL NIL |PartialOrder&| NIL
@@ -501,16 +501,17 @@
                  (|OrderedAbelianGroup|) (|RightModule| $$)
                  (|NonAssociativeRng|) (|LeftModule| $$)
                  (|OrderedCancellationAbelianMonoid|) (|AbelianGroup|)
-                 (|OrderedAbelianMonoid|) (|CancellationAbelianMonoid|)
-                 (|NonAssociativeSemiRing|) (|Monoid|)
-                 (|OrderedAbelianSemiGroup|) (|AbelianMonoid|)
-                 (|NonAssociativeSemiRng|) (|MagmaWithUnit|) (|SemiGroup|)
-                 (|OrderedSet|) (|AbelianSemiGroup|) (|Magma|) (|Comparable|)
-                 (|SetCategory|) (|CommutativeStar|) (|RetractableTo| 8)
-                 (|RetractableFrom| 16) (|Hashable|) (|CoercibleTo| 30)
-                 (|BasicType|) (|unitsKnown|) (|TwoSidedRecip|)
-                 (|noZeroDivisors|) (|PartialOrder|) (|CoercibleFrom| 8)
-                 (|CoercibleTo| 16) (|canonicalUnitNormal|))
+                 (|OrderedAbelianMonoid|) (|OrderedMonoid|)
+                 (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
+                 (|Monoid|) (|OrderedAbelianSemiGroup|) (|OrderedSemiGroup|)
+                 (|AbelianMonoid|) (|NonAssociativeSemiRng|) (|MagmaWithUnit|)
+                 (|SemiGroup|) (|OrderedSet|) (|AbelianSemiGroup|) (|Magma|)
+                 (|Comparable|) (|SetCategory|) (|CommutativeStar|)
+                 (|RetractableTo| 8) (|RetractableFrom| 16) (|Hashable|)
+                 (|CoercibleTo| 30) (|BasicType|) (|unitsKnown|)
+                 (|TwoSidedRecip|) (|noZeroDivisors|) (|PartialOrder|)
+                 (|CoercibleFrom| 8) (|CoercibleTo| 16)
+                 (|canonicalUnitNormal|))
               (|makeByteWordVec2| 92
                                   '(1 9 7 8 10 2 8 12 0 0 13 1 16 0 8 18 1 16 8
                                     0 20 1 16 8 0 21 2 16 0 14 0 25 2 16 0 8 8

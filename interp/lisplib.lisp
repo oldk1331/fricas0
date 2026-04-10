@@ -7,9 +7,9 @@
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$printLoadMsgs| NIL))
 
-; $spadLibFT := 'NRLIB
+; $spadLibFT := '"NRLIB"
 
-(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$spadLibFT| 'NRLIB))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$spadLibFT| "NRLIB"))
 
 ; $LISPLIB := false
 
@@ -39,20 +39,18 @@
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$lisplibOperationAlist| NIL))
 
-; readLib(fn) == kaf_open(make_filename(fn), false)
+; readLib(fn) == kaf_open(fn, false)
 
-(DEFUN |readLib| (|fn|)
-  (PROG () (RETURN (|kaf_open| (|make_filename| |fn|) NIL))))
+(DEFUN |readLib| (|fn|) (PROG () (RETURN (|kaf_open| |fn| NIL))))
 
-; writeLib(fn) == kaf_open(make_filename(fn), true)
+; writeLib(fn) == kaf_open(fn, true)
 
-(DEFUN |writeLib| (|fn|)
-  (PROG () (RETURN (|kaf_open| (|make_filename| |fn|) T))))
+(DEFUN |writeLib| (|fn|) (PROG () (RETURN (|kaf_open| |fn| T))))
 
-; writeLib0(fn, ft) == kaf_open(make_filename0(fn, ft), true)
+; writeLib0(fn, ft) == kaf_open(make_filename2(fn, ft), true)
 
 (DEFUN |writeLib0| (|fn| |ft|)
-  (PROG () (RETURN (|kaf_open| (|make_filename0| |fn| |ft|) T))))
+  (PROG () (RETURN (|kaf_open| (|make_filename2| |fn| |ft|) T))))
 
 ; lisplibWrite(prop, val, lib_file) ==
 ;   -- this may someday not write NIL keys, but it will now
@@ -75,7 +73,7 @@
 ; loadLib cname ==
 ;   startTimingProcess 'load
 ;   fullLibName := get_database(cname, 'OBJECT) or return nil
-;   systemdir? := isSystemDirectory(fullLibName)
+;   systemdir? := is_system_path?(fullLibName)
 ;   update? := not systemdir?
 ;   loadLibNoUpdate1(cname, fullLibName)
 ;   kind := get_database(cname, 'CONSTRUCTORKIND)
@@ -89,7 +87,7 @@
      (PROGN
       (|startTimingProcess| '|load|)
       (SETQ |fullLibName| (OR (|get_database| |cname| 'OBJECT) (RETURN NIL)))
-      (SETQ |systemdir?| (|isSystemDirectory| |fullLibName|))
+      (SETQ |systemdir?| (|is_system_path?| |fullLibName|))
       (SETQ |update?| (NULL |systemdir?|))
       (|loadLibNoUpdate1| |cname| |fullLibName|)
       (SETQ |kind| (|get_database| |cname| 'CONSTRUCTORKIND))
@@ -99,7 +97,7 @@
 ; loadLibNoUpdate1(cname, fullLibName) ==
 ;   if $printLoadMsgs then
 ;     kind := get_database(cname, 'CONSTRUCTORKIND)
-;     sayKeyedMsg("S2IL0002", [fullLibName, kind, cname])
+;     say_msg("S2IL0002", '"Loading %1 for %2 %3b", [fullLibName, kind, cname])
 ;   load_quietly(fullLibName)
 ;   clearConstructorCache cname
 ;   installConstructor(cname)
@@ -112,7 +110,8 @@
       (COND
        (|$printLoadMsgs|
         (SETQ |kind| (|get_database| |cname| 'CONSTRUCTORKIND))
-        (|sayKeyedMsg| 'S2IL0002 (LIST |fullLibName| |kind| |cname|))))
+        (|say_msg| 'S2IL0002 "Loading %1 for %2 %3b"
+         (LIST |fullLibName| |kind| |cname|))))
       (|load_quietly| |fullLibName|)
       (|clearConstructorCache| |cname|)
       (|installConstructor| |cname|)
@@ -153,7 +152,7 @@
 ;          y = 'category =>
 ;             updateCategoryFrameForCategory u
 ;          updateCategoryFrameForConstructor u
-;       throwKeyedMsg("S2IL0005",[u])
+;       throw_msg("S2IL0005", '"%1bp is not a known type.", [u])
 ;   value
 
 (DEFUN |loadLibIfNecessary| (|u| |mustExist|)
@@ -176,7 +175,9 @@
                  (COND
                   ((EQ |y| '|category|) (|updateCategoryFrameForCategory| |u|))
                   (#1# (|updateCategoryFrameForConstructor| |u|))))
-                (#1# (|throwKeyedMsg| 'S2IL0005 (LIST |u|)))))
+                (#1#
+                 (|throw_msg| 'S2IL0005 "%1bp is not a known type."
+                  (LIST |u|)))))
               (#1# |value|))))))))
 
 ; convertOpAlist2compilerInfo(opalist) ==
@@ -373,19 +374,20 @@
 ;   --will eventually become the "constructorCategory" property in lisplib
 ;   --set in compDefineCategory1 if category, otherwise in finalizeLisplib
 ;   libName := getConstructorAbbreviation op
+;   name := SNAME(libName)
 ;   sayMSG ['"   initializing ",$spadLibFT,:bright libName,
 ;     '"for",:bright op]
 ;   -- following guarantee's compiler output files get closed.
 ;   UNWIND_-PROTECT(
-;       PROGN(initializeLisplib libName,
+;       PROGN(initializeLisplib(name),
 ;             sayMSG ['"   compiling into ", $spadLibFT, :bright libName],
 ;             res := FUNCALL(fn, df, m, e, prefix, fal),
 ;             sayMSG ['"   finalizing ",$spadLibFT,:bright libName],
-;             finalizeLisplib(libName, $libFile)),
+;             finalizeLisplib($libFile)),
 ;       PROGN(if $compiler_output_stream then CLOSE($compiler_output_stream),
 ;             kaf_close($libFile)))
-;   lisplibDoRename(libName)
-;   compile_lib(make_full_namestring(make_filename0(libName, $spadLibFT)))
+;   lisplibDoRename(name)
+;   compile_lib(make_full_namestring(make_filename2(name, $spadLibFT)))
 ;   FRESH_-LINE(get_algebra_stream())
 ;   sayMSG(filler_chars(72, '"-"))
 ;   merge_info_from_objects([get_database(op, 'ABBREVIATION)], [], false)
@@ -400,7 +402,7 @@
          |$lisplibSuperDomain| |$lisplibOperationAlist| |$lisplibModemapAlist|
          |$lisplibModemap| |$lisplibAncestors| |$lisplibAbbreviation|
          |$lisplibKind| |$lisplibForm| |$lisplibPredicates| |$op| $LISPLIB
-         |res| |libName| |op|)
+         |res| |name| |libName| |op|)
     (DECLARE
      (SPECIAL |$compiler_output_stream| |$lisplibCategory| |$libFile|
       |$lisplibSuperDomain| |$lisplibOperationAlist| |$lisplibModemapAlist|
@@ -425,6 +427,7 @@
       (SETQ |$lisplibCategory| NIL)
       (SETQ |$compiler_output_stream| NIL)
       (SETQ |libName| (|getConstructorAbbreviation| |op|))
+      (SETQ |name| (SNAME |libName|))
       (|sayMSG|
        (CONS "   initializing "
              (CONS |$spadLibFT|
@@ -432,20 +435,20 @@
                            (CONS "for" (|bright| |op|))))))
       (UNWIND-PROTECT
           (PROGN
-           (|initializeLisplib| |libName|)
+           (|initializeLisplib| |name|)
            (|sayMSG|
             (CONS "   compiling into "
                   (CONS |$spadLibFT| (|bright| |libName|))))
            (SETQ |res| (FUNCALL |fn| |df| |m| |e| |prefix| |fal|))
            (|sayMSG|
             (CONS "   finalizing " (CONS |$spadLibFT| (|bright| |libName|))))
-           (|finalizeLisplib| |libName| |$libFile|))
+           (|finalizeLisplib| |$libFile|))
         (PROGN
          (COND (|$compiler_output_stream| (CLOSE |$compiler_output_stream|)))
          (|kaf_close| |$libFile|)))
-      (|lisplibDoRename| |libName|)
+      (|lisplibDoRename| |name|)
       (|compile_lib|
-       (|make_full_namestring| (|make_filename0| |libName| |$spadLibFT|)))
+       (|make_full_namestring| (|make_filename2| |name| |$spadLibFT|)))
       (FRESH-LINE (|get_algebra_stream|))
       (|sayMSG| (|filler_chars| 72 "-"))
       (|merge_info_from_objects| (LIST (|get_database| |op| 'ABBREVIATION)) NIL
@@ -471,7 +474,7 @@
       (SETQ |$compiler_output_stream|
               (|make_compiler_output_stream| |$libFile| |libName|))))))
 
-; finalizeLisplib(libName, libFile) ==
+; finalizeLisplib(libFile) ==
 ;   lisplibWrite('"constructorForm", removeZeroOne($lisplibForm), libFile)
 ;   lisplibWrite('"constructorKind", kind:=removeZeroOne $lisplibKind, libFile)
 ;   lisplibWrite('"constructorModemap", removeZeroOne($lisplibModemap), libFile)
@@ -489,7 +492,7 @@
 ;   lisplibWrite('"ancestors", removeZeroOne($lisplibAncestors), libFile)
 ;   lisplibWrite('"documentation", finalizeDocumentation(), libFile)
 
-(DEFUN |finalizeLisplib| (|libName| |libFile|)
+(DEFUN |finalizeLisplib| (|libFile|)
   (PROG (|kind| |ops|)
     (RETURN
      (PROGN
@@ -517,23 +520,27 @@
       (|lisplibWrite| "documentation" (|finalizeDocumentation|) |libFile|)))))
 
 ; lisplibDoRename(libName) ==
-;     replace_lib(make_filename0(libName, '"erlib"),
-;                 make_filename0(libName, $spadLibFT))
+;     replace_lib(make_filename2(libName, '"erlib"),
+;                 make_filename2(libName, $spadLibFT))
 
 (DEFUN |lisplibDoRename| (|libName|)
   (PROG ()
     (RETURN
-     (|replace_lib| (|make_filename0| |libName| "erlib")
-      (|make_filename0| |libName| |$spadLibFT|)))))
+     (|replace_lib| (|make_filename2| |libName| "erlib")
+      (|make_filename2| |libName| |$spadLibFT|)))))
 
 ; lisplibError(cname,fname,type,cn,fn,typ,error) ==
 ;   $bootStrapMode and error = "wrongType" => nil
 ;   sayMSG bright ['"  Illegal ",$spadLibFT]
 ;   error in '(duplicateAbb  wrongType) =>
-;     sayKeyedMsg("S2IL0007",
-;       [[fname,$spadLibFT], type, cname, typ, cn])
+;     say_msg("S2IL0007", CONCAT(
+;         '"%1b claims that its constructor name is the %2 %3b but %3b is",
+;         '" already known to be the %d for %4 %5b .:"),
+;         [[fname,$spadLibFT], type, cname, typ, cn])
 ;   error is 'abbIsName =>
-;     throwKeyedMsg("S2IL0008", [fname, typ, [fn,$spadLibFT]])
+;       throw_msg("S2IL0008",
+;           '"%1b is the name of a %2 constructor from %3b .",
+;           [fname, typ, [fn,$spadLibFT]])
 
 (DEFUN |lisplibError| (|cname| |fname| |type| |cn| |fn| |typ| |error|)
   (PROG ()
@@ -544,10 +551,14 @@
              (|sayMSG| (|bright| (LIST "  Illegal " |$spadLibFT|)))
              (COND
               ((|member| |error| '(|duplicateAbb| |wrongType|))
-               (|sayKeyedMsg| 'S2IL0007
+               (|say_msg| 'S2IL0007
+                (CONCAT
+                 "%1b claims that its constructor name is the %2 %3b but %3b is"
+                 " already known to be the %d for %4 %5b .:")
                 (LIST (LIST |fname| |$spadLibFT|) |type| |cname| |typ| |cn|)))
               ((EQ |error| '|abbIsName|)
-               (|throwKeyedMsg| 'S2IL0008
+               (|throw_msg| 'S2IL0008
+                "%1b is the name of a %2 constructor from %3b ."
                 (LIST |fname| |typ| (LIST |fn| |$spadLibFT|)))))))))))
 
 ; getPartialConstructorModemapSig(c) ==

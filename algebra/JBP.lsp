@@ -537,13 +537,8 @@
           (AND (|HasCategory| |#1| '(|PolynomialFactorizationExplicit|))
                (|HasCategory| % '(|CharacteristicNonZero|))
                (|augmentPredVector| % 536870912))
-          (AND
-           (OR (|HasCategory| |#1| '(|CharacteristicNonZero|))
-               (AND (|HasCategory| |#1| '(|PolynomialFactorizationExplicit|))
-                    (|HasCategory| % '(|CharacteristicNonZero|))))
-           (|augmentPredVector| % 1073741824))
           (AND (|HasCategory| % '(|CommutativeRing|))
-               (|augmentPredVector| % 2147483648))
+               (|augmentPredVector| % 1073741824))
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 8 (|SparseMultivariatePolynomial| |#1| |#2|))
           (COND

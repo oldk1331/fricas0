@@ -9,10 +9,5 @@
 
 (DEFUN |CharacteristicNonZero;| ()
   (SPROG ((#1=#:G0 NIL))
-         (PROG1
-             (LETT #1#
-                   (|Join| (|Ring|)
-                           (|mkCategory|
-                            '(((|charthRoot| ((|Union| % "failed") %)) T)) NIL
-                            NIL NIL)))
+         (PROG1 (LETT #1# (|Join| (|Ring|)))
            (SETELT #1# 0 '(|CharacteristicNonZero|))))) 

@@ -153,7 +153,7 @@
 
 (SDEFUN |INTGEL;fsqrt;2F;3| ((|f| (F)) (% (F)))
         (SPROG
-         ((#1=#:G46 NIL)
+         ((#1=#:G48 NIL)
           (|ur|
            (|Record| (|:| |exponent| (|NonNegativeInteger|)) (|:| |coef| F)
                      (|:| |radicand| F))))
@@ -164,13 +164,13 @@
                  (COND
                   ((SPADCALL (QVELT |ur| 2) (|spadConstant| % 20)
                              (QREFELT % 68))
-                   (PROGN (LETT #1# (QVELT |ur| 1)) (GO #2=#:G45)))
+                   (PROGN (LETT #1# (QVELT |ur| 1)) (GO #2=#:G47)))
                   ('T (SPADCALL |f| (QREFELT % 70)))))))
           #2# (EXIT #1#)))) 
 
 (SDEFUN |INTGEL;fsqrt;2F;4| ((|f| (F)) (% (F)))
         (SPROG
-         ((#1=#:G50 NIL)
+         ((#1=#:G52 NIL)
           (|ur|
            (|Record| (|:| |exponent| (|NonNegativeInteger|)) (|:| |coef| F)
                      (|:| |radicand| F))))
@@ -181,7 +181,7 @@
                  (COND
                   ((SPADCALL (QVELT |ur| 2) (|spadConstant| % 20)
                              (QREFELT % 68))
-                   (PROGN (LETT #1# (QVELT |ur| 1)) (GO #2=#:G49)))
+                   (PROGN (LETT #1# (QVELT |ur| 1)) (GO #2=#:G51)))
                   ('T (SPADCALL |f| (QREFELT % 75)))))))
           #2# (EXIT #1#)))) 
 
@@ -376,10 +376,44 @@
                      (SPADCALL |c3| (|spadConstant| % 33) (QREFELT % 98)))
                  (CONS 1 "failed"))
                 ('T
-                 (CONS 0
-                       (CONS (|spadConstant| % 31)
-                             (|INTGEL;gen_ef4l| |f_var| |f_pol| |cf| |ce|
-                              %))))))))) 
+                 (SEQ
+                  (COND
+                   ((|INTGEL;negative?| |c0| %)
+                    (COND
+                     ((NULL (|INTGEL;negative?| |c4| %))
+                      (EXIT
+                       (SEQ
+                        (LETT |f_pol1|
+                              (SPADCALL
+                               (SPADCALL (SPADCALL |c0| 4 (QREFELT % 23))
+                                         (SPADCALL |c2| 2 (QREFELT % 23))
+                                         (QREFELT % 58))
+                               (SPADCALL |c4| (QREFELT % 41)) (QREFELT % 58)))
+                        (LETT |ans1|
+                              (SPADCALL
+                               (SPADCALL (SPADCALL |ce| |c4| (QREFELT % 57))
+                                         (QREFELT % 41))
+                               (SPADCALL (|spadConstant| % 20) 1
+                                         (QREFELT % 23))
+                               (QREFELT % 97)))
+                        (EXIT
+                         (CONS 0
+                               (CONS |ans1|
+                                     (|INTGEL;gen_ef4l|
+                                      (SPADCALL (|spadConstant| % 20) |f_var|
+                                                (QREFELT % 57))
+                                      |f_pol1| (SPADCALL |cf| (QREFELT % 85))
+                                      (SPADCALL
+                                       (SPADCALL
+                                        (SPADCALL |ce| |c0| (QREFELT % 56))
+                                        |c4| (QREFELT % 57))
+                                       (QREFELT % 85))
+                                      %))))))))))
+                  (EXIT
+                   (CONS 0
+                         (CONS (|spadConstant| % 31)
+                               (|INTGEL;gen_ef4l| |f_var| |f_pol| |cf| |ce|
+                                %))))))))))) 
 
 (SDEFUN |INTGEL;gen_ef;FUP2RU;10|
         ((|f_var| (F)) (|f_pol| (UP)) (|cfr| (R)) (|cer| (R))
@@ -472,9 +506,9 @@
                 (CONS (|dispatchFunction| |INTGEL;gen_ef;FUP2RU;11|) %))))
     %))) 
 
-(DEFUN |GenerateEllipticIntegrals| (&REST #1=#:G88)
+(DEFUN |GenerateEllipticIntegrals| (&REST #1=#:G93)
   (SPROG NIL
-         (PROG (#2=#:G89)
+         (PROG (#2=#:G94)
            (RETURN
             (COND
              ((LETT #2#

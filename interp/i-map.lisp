@@ -2312,7 +2312,7 @@
 ;   body := ['SPADCALL,:argCode,['LIST,['function,imp]]]
 ;   minivectorName := makeInternalMapMinivectorName(name)
 ;   body := SUBST(minivectorName,"$$$",body)
-;   SET(minivectorName,LIST2REFVEC $minivector)
+;   SET(minivectorName, LIST2VEC($minivector))
 ;   compileInteractive [name,['LAMBDA,parms,body]]
 ;   first sig
 
@@ -2374,7 +2374,7 @@
                             (CONS (LIST 'LIST (LIST '|function| |imp|)) NIL))))
       (SETQ |minivectorName| (|makeInternalMapMinivectorName| |name|))
       (SETQ |body| (SUBST |minivectorName| '$$$ |body|))
-      (SET |minivectorName| (LIST2REFVEC |$minivector|))
+      (SET |minivectorName| (LIST2VEC |$minivector|))
       (|compileInteractive| (LIST |name| (LIST 'LAMBDA |parms| |body|)))
       (CAR |sig|)))))
 

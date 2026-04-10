@@ -121,33 +121,7 @@
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$operation_stream_stamp| NIL))
 
-; handle_daase_file2(stream, name, o_stream, o_stamp, display_messages, fun) ==
-;     stamp := READ(stream)
-;     stamp = o_stamp => [stream, o_stamp]
-;     if display_messages then
-;         FORMAT(true, '"   Re-reading ~a.daase", name)
-;     FILE_-POSITION(stream, first(stamp))
-;     FUNCALL(fun, stream)
-;     FORMAT(true, '"~&")
-;     [stream, stamp]
-
-(DEFUN |handle_daase_file2|
-       (|stream| |name| |o_stream| |o_stamp| |display_messages| |fun|)
-  (PROG (|stamp|)
-    (RETURN
-     (PROGN
-      (SETQ |stamp| (READ |stream|))
-      (COND ((EQUAL |stamp| |o_stamp|) (LIST |stream| |o_stamp|))
-            ('T
-             (PROGN
-              (COND
-               (|display_messages| (FORMAT T "   Re-reading ~a.daase" |name|)))
-              (FILE-POSITION |stream| (CAR |stamp|))
-              (FUNCALL |fun| |stream|)
-              (FORMAT T "~&")
-              (LIST |stream| |stamp|))))))))
-
-; handle_daase_file(name, fun, display_messages, o_stream, o_stamp) ==
+; handle_daase_file(name, fun, display_messages, o_stamp) ==
 ;     f_name := full_database_name(STRCONC(name, '".daase"))
 ;     stream := OPEN(f_name)
 ;     stamp := READ(stream)
@@ -159,8 +133,7 @@
 ;     FORMAT(true, '"~&")
 ;     [stream, stamp]
 
-(DEFUN |handle_daase_file|
-       (|name| |fun| |display_messages| |o_stream| |o_stamp|)
+(DEFUN |handle_daase_file| (|name| |fun| |display_messages| |o_stamp|)
   (PROG (|f_name| |stream| |stamp|)
     (RETURN
      (PROGN
@@ -409,8 +382,7 @@
 
 ; open_interp_db(display_messages) ==
 ;     res := handle_daase_file('"interp", function interp_open2,
-;                              display_messages, $interp_stream,
-;                              $interp_stream_stamp)
+;                              display_messages, $interp_stream_stamp)
 ;     $interp_stream := first(res)
 ;     $interp_stream_stamp := first(rest(res))
 
@@ -420,7 +392,7 @@
      (PROGN
       (SETQ |res|
               (|handle_daase_file| "interp" #'|interp_open2| |display_messages|
-               |$interp_stream| |$interp_stream_stamp|))
+               |$interp_stream_stamp|))
       (SETQ |$interp_stream| (CAR |res|))
       (SETQ |$interp_stream_stamp| (CAR (CDR |res|)))))))
 
@@ -481,8 +453,7 @@
 
 ; open_browse_db(display_messages) ==
 ;     res := handle_daase_file('"browse", function browse_open2,
-;                              display_messages, $browse_stream,
-;                              $browse_stream_stamp)
+;                              display_messages, $browse_stream_stamp)
 ;     $browse_stream := first(res)
 ;     $browse_stream_stamp := first(rest(res))
 
@@ -492,7 +463,7 @@
      (PROGN
       (SETQ |res|
               (|handle_daase_file| "browse" #'|browse_open2| |display_messages|
-               |$browse_stream| |$browse_stream_stamp|))
+               |$browse_stream_stamp|))
       (SETQ |$browse_stream| (CAR |res|))
       (SETQ |$browse_stream_stamp| (CAR (CDR |res|)))))))
 
@@ -520,8 +491,7 @@
 
 ; open_category_db(display_messages) ==
 ;     res := handle_daase_file('"category", function category_open2,
-;                              display_messages, $category_stream,
-;                              $category_stream_stamp)
+;                              display_messages, $category_stream_stamp)
 ;     $category_stream := first(res)
 ;     $category_stream_stamp := first(rest(res))
 
@@ -531,7 +501,7 @@
      (PROGN
       (SETQ |res|
               (|handle_daase_file| "category" #'|category_open2|
-               |display_messages| |$category_stream| |$category_stream_stamp|))
+               |display_messages| |$category_stream_stamp|))
       (SETQ |$category_stream| (CAR |res|))
       (SETQ |$category_stream_stamp| (CAR (CDR |res|)))))))
 
@@ -560,8 +530,7 @@
 
 ; open_operation_db(display_messages) ==
 ;     res := handle_daase_file('"operation", function operation_open2,
-;                              display_messages, $operation_stream,
-;                              $operation_stream_stamp)
+;                              display_messages, $operation_stream_stamp)
 ;     $operation_stream := first(res)
 ;     $operation_stream_stamp := first(rest(res))
 
@@ -571,8 +540,7 @@
      (PROGN
       (SETQ |res|
               (|handle_daase_file| "operation" #'|operation_open2|
-               |display_messages| |$operation_stream|
-               |$operation_stream_stamp|))
+               |display_messages| |$operation_stream_stamp|))
       (SETQ |$operation_stream| (CAR |res|))
       (SETQ |$operation_stream_stamp| (CAR (CDR |res|)))))))
 
@@ -718,13 +686,13 @@
 ;         dbstruct.ind := data
 ;     NULL(data) => nil
 ;     if key = 'SOURCEFILE then
-;         if NULL(PATHNAME_-DIRECTORY(data)) and
-;            PATHNAME_-TYPE(data) = '"spad" then
+;         if file_directory(data) = '"" and
+;            has_extention?(data, '"spad") then
 ;             data := STRCONC($spadroot, '"/../../src/algebra/", data)
 ;     if key = 'OBJECT then
 ;         if CONSP(data) then
 ;             data := first(data)
-;         if NULL(PATHNAME_-DIRECTORY(data)) then
+;         if file_directory(data) = '"" then
 ;             data := STRCONC($spadroot, '"/algebra/", data,
 ;                            '".", $lisp_bin_filetype)
 ;     data
@@ -755,8 +723,8 @@
                       (COND
                        ((EQ |key| 'SOURCEFILE)
                         (COND
-                         ((AND (NULL (PATHNAME-DIRECTORY |data|))
-                               (EQUAL (PATHNAME-TYPE |data|) "spad"))
+                         ((AND (EQUAL (|file_directory| |data|) "")
+                               (|has_extention?| |data| "spad"))
                           (SETQ |data|
                                   (STRCONC |$spadroot| "/../../src/algebra/"
                                    |data|))))))
@@ -764,7 +732,7 @@
                        ((EQ |key| 'OBJECT)
                         (COND ((CONSP |data|) (SETQ |data| (CAR |data|))))
                         (COND
-                         ((NULL (PATHNAME-DIRECTORY |data|))
+                         ((EQUAL (|file_directory| |data|) "")
                           (SETQ |data|
                                   (STRCONC |$spadroot| "/algebra/" |data| "."
                                    |$lisp_bin_filetype|))))))
@@ -1076,7 +1044,7 @@
 ;         CONSP(dob) => -- asharp code
 ;             [PATHNAME_-NAME(first(dob)), :rest(dob)]
 ;         not(NULL(dob)) =>
-;             PATHNAME_-NAME(last(PATHNAME_-DIRECTORY(dob)))
+;             file_basename(file_directory(dob))
 ;         '"NIL"
 ;     concategory := dbstruct.$constructorcategory_ind
 ;     if concategory then
@@ -1114,8 +1082,7 @@
       (SETQ |obj|
               (COND
                ((CONSP |dob|) (CONS (PATHNAME-NAME (CAR |dob|)) (CDR |dob|)))
-               ((NULL (NULL |dob|))
-                (PATHNAME-NAME (|last| (PATHNAME-DIRECTORY |dob|))))
+               ((NULL (NULL |dob|)) (|file_basename| (|file_directory| |dob|)))
                (#1='T "NIL")))
       (SETQ |concategory| (ELT |dbstruct| |$constructorcategory_ind|))
       (COND
@@ -1312,7 +1279,9 @@
 ;         op1 = 'dir =>
 ;             dir := first(rest(opt))
 ;             if NULL(dir) then
-;                 sayKeyedMsg('S2IU0002, nil)
+;                 say_msg("S2IU0002", _
+;   '"Ignoring )dir because an explicit directory was not given after )dir.",
+;                    nil)
 ;         op1 = 'noexpose =>
 ;             expose := false
 ;         op1 = 'quiet =>
@@ -1329,9 +1298,10 @@
 ;     asos := []
 ;     if dir then
 ;         CHDIR(STRING(dir))
-;         nrlibs := DIRECTORY('"*.NRLIB/index.KAF")
-;         asys := DIRECTORY('"*.asy")
-;         skipasos := MAPCAN(function PATHNAME_-NAME, asys)
+;         nrlibs := [NAMESTRING(fname) for fname in
+;                    DIRECTORY('"*.NRLIB/index.KAF")]
+;         asys := [NAMESTRING(fname) for fname in DIRECTORY('"*.asy")]
+;         skipasos := MAPCAN(function file_basename, asys)
 ;         -- asos := DIRECTORY('"*.ao)
 ;         CHDIR(thisdir)
 ;
@@ -1347,18 +1317,18 @@
 ;         FORMAT(true, '"   )library cannot find the file ~a.~%", fname)
 ;
 ;     for fname in nreverse(nrlibs) repeat
-;         key := PATHNAME_-NAME(last(PATHNAME_-DIRECTORY(fname)))
-;         object := STRCONC(DIRECTORY_-NAMESTRING(fname), key)
+;         key := file_basename(file_directory(fname))
+;         object := STRCONC(file_directory(fname), "/", key)
 ;         merge_info_from_nrlib(key, fname, object, make_database?, expose,
 ;                               noquiet)
 ;     for fname in nreverse(asys) repeat
-;         object := STRCONC(DIRECTORY_-NAMESTRING(fname), PATHNAME_-NAME(fname))
+;         object := drop_extention(fname)
 ;         merge_info_from_asy(astran(fname), object, only, make_database?,
 ;                             expose, noquiet)
 ;     for fname in nreverse(asos) repeat
-;         object := STRCONC(DIRECTORY_-NAMESTRING(fname), PATHNAME_-NAME(fname))
+;         object := drop_extention(fname)
 ;         ASHARP(fname)
-;         file := astran(STRCONC(PATHNAME_-NAME(fname), ".asy"))
+;         file := astran(STRCONC(file_basename(fname), ".asy"))
 ;         merge_info_from_asy(file, object, only, make-database?, expose,
 ;                             noquiet)
 ;     clearConstructorCaches()
@@ -1384,7 +1354,11 @@
                    ((EQ |op1| '|dir|)
                     (PROGN
                      (SETQ |dir| (CAR (CDR |opt|)))
-                     (COND ((NULL |dir|) (|sayKeyedMsg| 'S2IU0002 NIL)))))
+                     (COND
+                      ((NULL |dir|)
+                       (|say_msg| 'S2IU0002
+                        "Ignoring )dir because an explicit directory was not given after )dir."
+                        NIL)))))
                    ((EQ |op1| '|noexpose|) (SETQ |expose| NIL))
                    ((EQ |op1| '|quiet|) (SETQ |noquiet| NIL))
                    (#1#
@@ -1399,14 +1373,36 @@
       (SETQ |asos| NIL)
       (COND
        (|dir| (CHDIR (STRING |dir|))
-        (SETQ |nrlibs| (DIRECTORY "*.NRLIB/index.KAF"))
-        (SETQ |asys| (DIRECTORY "*.asy"))
-        (SETQ |skipasos| (MAPCAN #'PATHNAME-NAME |asys|)) (CHDIR |thisdir|)))
+        (SETQ |nrlibs|
+                ((LAMBDA (|bfVar#12| |bfVar#11| |fname|)
+                   (LOOP
+                    (COND
+                     ((OR (ATOM |bfVar#11|)
+                          (PROGN (SETQ |fname| (CAR |bfVar#11|)) NIL))
+                      (RETURN (NREVERSE |bfVar#12|)))
+                     (#1#
+                      (SETQ |bfVar#12|
+                              (CONS (NAMESTRING |fname|) |bfVar#12|))))
+                    (SETQ |bfVar#11| (CDR |bfVar#11|))))
+                 NIL (DIRECTORY "*.NRLIB/index.KAF") NIL))
+        (SETQ |asys|
+                ((LAMBDA (|bfVar#14| |bfVar#13| |fname|)
+                   (LOOP
+                    (COND
+                     ((OR (ATOM |bfVar#13|)
+                          (PROGN (SETQ |fname| (CAR |bfVar#13|)) NIL))
+                      (RETURN (NREVERSE |bfVar#14|)))
+                     (#1#
+                      (SETQ |bfVar#14|
+                              (CONS (NAMESTRING |fname|) |bfVar#14|))))
+                    (SETQ |bfVar#13| (CDR |bfVar#13|))))
+                 NIL (DIRECTORY "*.asy") NIL))
+        (SETQ |skipasos| (MAPCAN #'|file_basename| |asys|)) (CHDIR |thisdir|)))
       (SETQ |nr_ext| (STRCONC ".NRLIB/" |$index_filename|))
-      ((LAMBDA (|bfVar#11| |file|)
+      ((LAMBDA (|bfVar#15| |file|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#11|) (PROGN (SETQ |file| (CAR |bfVar#11|)) NIL))
+           ((OR (ATOM |bfVar#15|) (PROGN (SETQ |file| (CAR |bfVar#15|)) NIL))
             (RETURN NIL))
            (#1#
             (PROGN
@@ -1420,50 +1416,47 @@
                (SETQ |asos| (CONS |nf| |asos|)))
               (#1#
                (FORMAT T "   )library cannot find the file ~a.~%" |fname|))))))
-          (SETQ |bfVar#11| (CDR |bfVar#11|))))
+          (SETQ |bfVar#15| (CDR |bfVar#15|))))
        |files| NIL)
-      ((LAMBDA (|bfVar#12| |fname|)
+      ((LAMBDA (|bfVar#16| |fname|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#12|) (PROGN (SETQ |fname| (CAR |bfVar#12|)) NIL))
+           ((OR (ATOM |bfVar#16|) (PROGN (SETQ |fname| (CAR |bfVar#16|)) NIL))
             (RETURN NIL))
            (#1#
             (PROGN
-             (SETQ |key| (PATHNAME-NAME (|last| (PATHNAME-DIRECTORY |fname|))))
-             (SETQ |object| (STRCONC (DIRECTORY-NAMESTRING |fname|) |key|))
+             (SETQ |key| (|file_basename| (|file_directory| |fname|)))
+             (SETQ |object| (STRCONC (|file_directory| |fname|) '/ |key|))
              (|merge_info_from_nrlib| |key| |fname| |object| |make_database?|
               |expose| |noquiet|))))
-          (SETQ |bfVar#12| (CDR |bfVar#12|))))
+          (SETQ |bfVar#16| (CDR |bfVar#16|))))
        (NREVERSE |nrlibs|) NIL)
-      ((LAMBDA (|bfVar#13| |fname|)
+      ((LAMBDA (|bfVar#17| |fname|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#13|) (PROGN (SETQ |fname| (CAR |bfVar#13|)) NIL))
+           ((OR (ATOM |bfVar#17|) (PROGN (SETQ |fname| (CAR |bfVar#17|)) NIL))
             (RETURN NIL))
            (#1#
             (PROGN
-             (SETQ |object|
-                     (STRCONC (DIRECTORY-NAMESTRING |fname|)
-                      (PATHNAME-NAME |fname|)))
+             (SETQ |object| (|drop_extention| |fname|))
              (|merge_info_from_asy| (|astran| |fname|) |object| |only|
               |make_database?| |expose| |noquiet|))))
-          (SETQ |bfVar#13| (CDR |bfVar#13|))))
+          (SETQ |bfVar#17| (CDR |bfVar#17|))))
        (NREVERSE |asys|) NIL)
-      ((LAMBDA (|bfVar#14| |fname|)
+      ((LAMBDA (|bfVar#18| |fname|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#14|) (PROGN (SETQ |fname| (CAR |bfVar#14|)) NIL))
+           ((OR (ATOM |bfVar#18|) (PROGN (SETQ |fname| (CAR |bfVar#18|)) NIL))
             (RETURN NIL))
            (#1#
             (PROGN
-             (SETQ |object|
-                     (STRCONC (DIRECTORY-NAMESTRING |fname|)
-                      (PATHNAME-NAME |fname|)))
+             (SETQ |object| (|drop_extention| |fname|))
              (ASHARP |fname|)
-             (SETQ |file| (|astran| (STRCONC (PATHNAME-NAME |fname|) '|.asy|)))
+             (SETQ |file|
+                     (|astran| (STRCONC (|file_basename| |fname|) '|.asy|)))
              (|merge_info_from_asy| |file| |object| |only|
               (- |make| |database?|) |expose| |noquiet|))))
-          (SETQ |bfVar#14| (CDR |bfVar#14|))))
+          (SETQ |bfVar#18| (CDR |bfVar#18|))))
        (NREVERSE |asos|) NIL)
       (|clearConstructorCaches|)))))
 
@@ -1503,26 +1496,26 @@
       (SETQ |$all_operations| NIL)
       (|make_special_constructors|)
       (|merge_info_from_objects| NIL (LIST (LIST '|dir| (|true_name| "./"))) T)
-      ((LAMBDA (|bfVar#15| |dir|)
+      ((LAMBDA (|bfVar#19| |dir|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#15|) (PROGN (SETQ |dir| (CAR |bfVar#15|)) NIL))
+           ((OR (ATOM |bfVar#19|) (PROGN (SETQ |dir| (CAR |bfVar#19|)) NIL))
             (RETURN NIL))
            (#1='T
             (|merge_info_from_objects| NIL
              (LIST (LIST '|dir| (|true_name| (STRCONC "./~a" |dir|)))) T)))
-          (SETQ |bfVar#15| (CDR |bfVar#15|))))
+          (SETQ |bfVar#19| (CDR |bfVar#19|))))
        |dir_lst| NIL)
       (COND (|br_data| (|save_browser_data|) (|write_browsedb|)))
       (|write_operationdb|)
       (|write_categorydb|)
-      ((LAMBDA (|bfVar#16| |con|)
+      ((LAMBDA (|bfVar#20| |con|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#16|) (PROGN (SETQ |con| (CAR |bfVar#16|)) NIL))
+           ((OR (ATOM |bfVar#20|) (PROGN (SETQ |con| (CAR |bfVar#20|)) NIL))
             (RETURN NIL))
            (#1# (|finish_con_dbstruct| |con|)))
-          (SETQ |bfVar#16| (CDR |bfVar#16|))))
+          (SETQ |bfVar#20| (CDR |bfVar#20|))))
        (|allConstructors|) NIL)
       (|write_interpdb|)
       (|createInitializers|)
@@ -1546,10 +1539,10 @@
   (PROG (|op| |old_map|)
     (RETURN
      (PROGN
-      ((LAMBDA (|bfVar#17| |map|)
+      ((LAMBDA (|bfVar#21| |map|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#17|) (PROGN (SETQ |map| (CAR |bfVar#17|)) NIL))
+           ((OR (ATOM |bfVar#21|) (PROGN (SETQ |map| (CAR |bfVar#21|)) NIL))
             (RETURN NIL))
            (#1='T
             (PROGN
@@ -1557,19 +1550,19 @@
              (SETQ |old_map| (|get_database| |op| 'OPERATION))
              (SETQ |old_map| (NREMOVE |old_map| (CDR |map|)))
              (HPUT |$operation_hash| |op| |old_map|))))
-          (SETQ |bfVar#17| (CDR |bfVar#17|))))
+          (SETQ |bfVar#21| (CDR |bfVar#21|))))
        |old_maps| NIL)
-      ((LAMBDA (|bfVar#18| |map|)
+      ((LAMBDA (|bfVar#22| |map|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#18|) (PROGN (SETQ |map| (CAR |bfVar#18|)) NIL))
+           ((OR (ATOM |bfVar#22|) (PROGN (SETQ |map| (CAR |bfVar#22|)) NIL))
             (RETURN NIL))
            (#1#
             (PROGN
              (SETQ |op| (CAR |map|))
              (SETQ |old_map| (|get_database| |op| 'OPERATION))
              (HPUT |$operation_hash| |op| (CONS (CDR |map|) |old_map|)))))
-          (SETQ |bfVar#18| (CDR |bfVar#18|))))
+          (SETQ |bfVar#22| (CDR |bfVar#22|))))
        (|get_database| |con| 'MODEMAPS) NIL)))))
 
 ; merge_info_from_asy(asy, object, only, make_database?, expose,
@@ -1578,7 +1571,7 @@
 ;     for domain in asy repeat
 ;         key := first(domain)
 ;         alist := rest(domain)
-;         asharp_name := asharp_global_name(PATHNAME_-NAME(object), key,
+;         asharp_name := asharp_global_name(file_basename(object), key,
 ;                                           LASSOC('typeCode, alist))
 ;         #alist < 4 =>
 ;             -- handle toplevel function object
@@ -1623,7 +1616,7 @@
 ;                 set_asharp_autoload_functor(object, cname, asharp_name,
 ;                                             dbstruct.$cosig_ind)
 ;             if noquiet then
-;                 sayKeyedMsg('S2IU0001i, [cname, object])
+;                 sayKeyedMsg("S2IU0001", [cname, object])
 
 (DEFUN |merge_info_from_asy|
        (|asy| |object| |only| |make_database?| |expose| |noquiet|)
@@ -1632,17 +1625,17 @@
     (RETURN
      (PROGN
       (SET-FILE-GETTER |object|)
-      ((LAMBDA (|bfVar#19| |domain|)
+      ((LAMBDA (|bfVar#23| |domain|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#19|) (PROGN (SETQ |domain| (CAR |bfVar#19|)) NIL))
+           ((OR (ATOM |bfVar#23|) (PROGN (SETQ |domain| (CAR |bfVar#23|)) NIL))
             (RETURN NIL))
            (#1='T
             (PROGN
              (SETQ |key| (CAR |domain|))
              (SETQ |alist| (CDR |domain|))
              (SETQ |asharp_name|
-                     (|asharp_global_name| (PATHNAME-NAME |object|) |key|
+                     (|asharp_global_name| (|file_basename| |object|) |key|
                       (LASSOC '|typeCode| |alist|)))
              (COND
               ((< (LENGTH |alist|) 4)
@@ -1687,16 +1680,16 @@
                              (|fetch_data_from_alist| |alist| "ancestors"))))
                    (COND
                     ((EQ |kind| '|domain|)
-                     ((LAMBDA (|bfVar#20| |pair|)
+                     ((LAMBDA (|bfVar#24| |pair|)
                         (LOOP
                          (COND
-                          ((OR (ATOM |bfVar#20|)
-                               (PROGN (SETQ |pair| (CAR |bfVar#20|)) NIL))
+                          ((OR (ATOM |bfVar#24|)
+                               (PROGN (SETQ |pair| (CAR |bfVar#24|)) NIL))
                            (RETURN NIL))
                           (#1#
                            (HPUT |$has_category_hash|
                                  (CONS |cname| (CAAR |pair|)) (CDR |pair|))))
-                         (SETQ |bfVar#20| (CDR |bfVar#20|))))
+                         (SETQ |bfVar#24| (CDR |bfVar#24|))))
                       (|fetch_data_from_alist| |alist| "ancestors") NIL)))
                    (COND
                     (|$InteractiveMode|
@@ -1710,9 +1703,8 @@
                     |asharp_name| (ELT |dbstruct| |$cosig_ind|))))
                  (COND
                   (|noquiet|
-                   (|sayKeyedMsg| '|S2IU0001i|
-                    (LIST |cname| |object|)))))))))))
-          (SETQ |bfVar#19| (CDR |bfVar#19|))))
+                   (|sayKeyedMsg| 'S2IU0001 (LIST |cname| |object|)))))))))))
+          (SETQ |bfVar#23| (CDR |bfVar#23|))))
        |asy| NIL)))))
 
 ; merge_info_from_nrlib1(in_f, key, object, make_database?, expose,
@@ -1728,7 +1720,7 @@
 ;     dbstruct := make_dbstruct()
 ;     PUT(key, 'DATABASE, dbstruct)
 ;     $all_constructors := ADJOIN(key, $all_constructors)
-;     abbrev := INTERN(PATHNAME_-NAME(last(PATHNAME_-DIRECTORY(object))))
+;     abbrev := INTERN(file_basename(file_directory(object)))
 ;     ds := [alist, in_f]
 ;     kind :=
 ;         set_dbstruct(dbstruct, FUNCTION(fetch_data_from_file), ds,
@@ -1767,8 +1759,7 @@
       (SETQ |dbstruct| (|make_dbstruct|))
       (PUT |key| 'DATABASE |dbstruct|)
       (SETQ |$all_constructors| (ADJOIN |key| |$all_constructors|))
-      (SETQ |abbrev|
-              (INTERN (PATHNAME-NAME (|last| (PATHNAME-DIRECTORY |object|)))))
+      (SETQ |abbrev| (INTERN (|file_basename| (|file_directory| |object|))))
       (SETQ |ds| (LIST |alist| |in_f|))
       (SETQ |kind|
               (|set_dbstruct| |dbstruct| #'|fetch_data_from_file| |ds|

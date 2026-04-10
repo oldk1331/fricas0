@@ -130,7 +130,7 @@
                            (EXIT NIL))))
                     (LETT |j| (|inc_SI| |j|)) (GO G190) G191 (EXIT NIL)))))) 
 
-(SDEFUN |POSET-;anitsymmetric?|
+(SDEFUN |POSET-;antisymmetric?|
         ((|mat| (|TwoDimensionalArray| (|Boolean|))) (% (|Boolean|)))
         (SPROG
          ((#1=#:G85 NIL) (#2=#:G84 NIL) (#3=#:G87 NIL) (|j| NIL) (#4=#:G86 NIL)
@@ -173,7 +173,7 @@
               (SPADCALL |mat| |n1| |n2| 'T (QREFELT % 21))
               (|POSET-;transitive_closure!| |mat| %)
               (COND
-               ((NULL (|POSET-;anitsymmetric?| |mat| %))
+               ((NULL (|POSET-;antisymmetric?| |mat| %))
                 (EXIT (|error| "add_arrow: incompatible arrow"))))
               (EXIT
                (SPADCALL (SPADCALL |s| (QREFELT % 9))

@@ -65,7 +65,7 @@
 
 (DEFUN |PrimitiveTwoDimensionalArray;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G2579 NIL) (#2=#:G2580 NIL) (% NIL) (|dv$| NIL)
+   ((|pv$| NIL) (#1=#:G2578 NIL) (#2=#:G2579 NIL) (% NIL) (|dv$| NIL)
     (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -143,15 +143,6 @@
                                         (AND
                                          (|HasCategory| |#1|
                                                         '(|AbelianMonoid|))
-                                         (|HasCategory| |#1| '(|SemiRng|)))
-                                        (AND
-                                         (|HasCategory| |#1|
-                                                        '(|AbelianMonoid|))
-                                         (|HasCategory| |#1| '(|Monoid|))
-                                         (|HasCategory| |#1| '(|SemiRng|)))
-                                        (AND
-                                         (|HasCategory| |#1|
-                                                        '(|AbelianMonoid|))
                                          (|HasCategory| |#1|
                                                         '(|EuclideanDomain|)))
                                         (AND
@@ -159,6 +150,15 @@
                                                         '(|AbelianMonoid|))
                                          (|HasCategory| |#1|
                                                         '(|IntegralDomain|)))
+                                        (AND
+                                         (|HasCategory| |#1|
+                                                        '(|AbelianMonoid|))
+                                         (|HasCategory| |#1| '(|SemiRng|)))
+                                        (AND
+                                         (|HasCategory| |#1|
+                                                        '(|AbelianMonoid|))
+                                         (|HasCategory| |#1| '(|Monoid|))
+                                         (|HasCategory| |#1| '(|SemiRng|)))
                                         (AND
                                          (|HasCategory| |#1|
                                                         '(|AbelianMonoid|))
@@ -188,9 +188,9 @@
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
-(DEFUN |PrimitiveTwoDimensionalArray| (#1=#:G2582)
+(DEFUN |PrimitiveTwoDimensionalArray| (#1=#:G2581)
   (SPROG NIL
-         (PROG (#2=#:G2583)
+         (PROG (#2=#:G2582)
            (RETURN
             (COND
              ((LETT #2#
@@ -245,12 +245,12 @@
               |blockConcat| 721 |array2| 726 |any?| 731 |antisymmetric?| 737 ^
               742 |Pfaffian| 754 = 759 / 765 - 771 + 782 * 788 |#| 824)
            'NIL
-           (CONS (|makeByteWordVec2| 12 '(3 0 1 0 8 2 10 0 12 7 10 0 0 0))
+           (CONS (|makeByteWordVec2| 12 '(3 0 1 0 8 2 10 0 3 12 7 10 0 0 0))
                  (CONS
                   '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL
                      |HomogeneousAggregate&| |SetCategory&| |Hashable&|
-                     |Evalable&| |Aggregate&| NIL |BasicType&| |InnerEvalable&|
-                     NIL NIL NIL)
+                     |Evalable&| |Aggregate&| NIL NIL |BasicType&|
+                     |InnerEvalable&| NIL NIL NIL)
                   (CONS
                    '#((|MatrixCategory| 6 (|PrimitiveArray| 6)
                                         (|PrimitiveArray| 6))
@@ -258,6 +258,8 @@
                                                      (|PrimitiveArray| 6))
                       (|Comparable|) (|HomogeneousAggregate| 6) (|SetCategory|)
                       (|Hashable|) (|Evalable| 6) (|Aggregate|)
+                      (|MatrixOperationsCategory| 6 (|PrimitiveArray| 6)
+                                                  (|PrimitiveArray| 6))
                       (|CoercibleTo| 45) (|BasicType|) (|InnerEvalable| 6 6)
                       (|shallowlyMutable|) (|finiteAggregate|) (|Type|))
                    (|makeByteWordVec2| 48
@@ -274,22 +276,22 @@
                                          0 1 4 0 0 0 28 27 0 1 4 0 0 0 29 28 0
                                          1 4 0 0 0 29 29 0 1 3 0 0 0 7 25 1 3 0
                                          0 0 7 25 1 2 3 0 10 6 1 0 0 0 1 1 0 28
-                                         0 1 1 16 0 0 1 2 0 25 0 7 1 1 17 10 0
+                                         0 1 1 14 0 0 1 2 0 25 0 7 1 1 15 10 0
                                          1 4 0 6 0 7 7 6 17 2 0 0 10 10 20 3 0
-                                         6 0 7 7 15 2 14 0 0 7 1 1 0 26 0 1 1
-                                         17 10 0 1 1 17 35 0 1 1 0 10 0 11 3 0
+                                         6 0 7 7 15 2 16 0 0 7 1 1 0 26 0 1 1
+                                         15 10 0 1 1 15 35 0 1 1 0 10 0 11 3 0
                                          0 10 10 6 21 1 0 10 0 12 2 0 22 0 10 1
                                          1 18 6 0 1 1 0 7 0 8 1 0 7 0 9 1 21 6
                                          0 1 1 20 26 0 1 2 22 22 6 0 1 1 0 7 0
                                          13 1 0 7 0 14 1 21 6 0 1 2 20 6 40 0 1
-                                         1 3 0 24 1 3 3 0 10 10 41 1 2 0 0 23 0
+                                         3 3 0 10 10 41 1 1 3 0 24 1 2 0 0 23 0
                                          1 2 0 0 23 0 1 3 0 0 34 0 0 1 4 0 0 34
                                          0 0 6 1 1 0 24 0 1 2 0 22 0 10 1 1 6
-                                         48 0 1 7 3 42 0 7 43 30 10 10 44 1 2 3
-                                         0 0 0 1 1 3 0 30 1 2 14 0 0 0 1 1 14 0
+                                         48 0 1 7 3 42 0 7 43 30 10 10 44 1 1 3
+                                         0 30 1 2 3 0 0 0 1 2 16 0 0 0 1 1 16 0
                                          30 1 1 19 36 0 1 2 0 30 0 31 1 2 0 30
                                          0 33 1 1 0 0 30 1 2 0 0 0 0 1 2 2 46
-                                         46 0 1 1 2 47 0 1 2 0 0 0 6 1 2 17 36
+                                         46 0 1 1 2 47 0 1 2 0 0 0 6 1 2 15 36
                                          0 6 1 2 20 22 39 0 1 2 9 0 0 37 1 3 9
                                          0 0 6 6 1 2 9 0 0 38 1 3 9 0 0 26 26 1
                                          2 0 22 0 0 1 1 0 22 0 1 0 0 0 19 3 0 6
@@ -300,14 +302,14 @@
                                          0 29 28 1 3 0 0 0 28 29 1 3 0 0 0 29
                                          29 1 1 3 0 26 1 1 3 0 30 1 1 3 22 0 1
                                          1 18 6 0 1 2 22 10 6 0 1 2 20 10 39 0
-                                         1 1 0 0 0 1 1 16 35 0 1 2 0 25 0 7 1 1
+                                         1 1 0 0 0 1 1 14 35 0 1 2 0 25 0 7 1 1
                                          0 28 0 1 1 3 0 25 1 1 11 45 0 1 3 0 32
                                          0 31 31 1 3 0 32 0 33 33 1 1 0 0 32 1
                                          1 0 0 24 1 2 20 22 39 0 1 1 13 22 0 1
-                                         2 19 0 0 7 1 2 15 0 0 10 1 1 18 6 0 1
-                                         2 23 22 0 0 1 2 19 0 0 6 1 1 13 0 0 1
-                                         2 13 0 0 0 1 2 3 0 0 0 1 2 13 0 7 0 1
-                                         2 14 0 0 0 1 2 14 0 0 6 1 2 14 0 6 0 1
-                                         2 14 25 25 0 1 2 14 25 0 25 1 1 20 10
+                                         2 19 0 0 7 1 2 17 0 0 10 1 1 18 6 0 1
+                                         2 23 22 0 0 1 2 19 0 0 6 1 2 13 0 0 0
+                                         1 1 13 0 0 1 2 3 0 0 0 1 2 13 0 7 0 1
+                                         2 16 0 0 0 1 2 16 0 0 6 1 2 16 0 6 0 1
+                                         2 16 25 25 0 1 2 16 25 0 25 1 1 20 10
                                          0 1)))))
            '|lookupComplete|)) 

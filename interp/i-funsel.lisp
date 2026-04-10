@@ -1593,7 +1593,7 @@
 ;   -- if ^0, this indicates that there exists a modemap for the
 ;   -- op that needs a subdomain in that position
 ;   nargs = 0 => NIL
-;   v := GETZEROVEC nargs
+;   v := MAKEARR1(nargs, 0)
 ;   isMap(op) => v
 ;   mms := getModemapsFromDatabase(op,nargs)
 ;   null mms => v
@@ -1612,7 +1612,7 @@
      (COND ((EQL |nargs| 0) NIL)
            (#1='T
             (PROGN
-             (SETQ |v| (GETZEROVEC |nargs|))
+             (SETQ |v| (MAKEARR1 |nargs| 0))
              (COND ((|isMap| |op|) |v|)
                    (#1#
                     (PROGN
@@ -4564,7 +4564,6 @@
 ;       hasCaty(d,cat,augmentSub(v, d, SL))
 ;     (dom = $RationalNumber) and alg =>
 ;       d := '(AlgebraicNumber)
-;       --d := defaultTargetFE $Integer
 ;       augmentSub(v, d, SL)
 ;     fefull =>
 ;       d := defaultTargetFE dom

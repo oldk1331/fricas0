@@ -145,7 +145,7 @@
                  (SPADCALL |outlist| 1 (SPADCALL |nstep| (QREFELT % 31))
                            (QREFELT % 33))
                  (SPADCALL |outlist| 2
-                           (SPADCALL " steps to small, last h = "
+                           (SPADCALL " steps too small, last h = "
                                      (QREFELT % 34))
                            (QREFELT % 33))
                  (SPADCALL |outlist| 3

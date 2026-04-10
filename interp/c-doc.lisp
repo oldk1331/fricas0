@@ -165,20 +165,24 @@
 ;       signatures := [y,:signatures]
 ;     name := first $lisplibForm
 ;     if noHeading or signatures or unusedCommentLineNumbers then
-;       say_msg('"%b Constructor documentation warnings (++ comments): %d", nil)
+;       say_msg("S2CD0001",
+;               '"%b Constructor documentation warnings (++ comments): %d", nil)
 ;       bigcnt := 1
 ;       if noHeading or signatures then
-;         say_msg('"%1 The constructor %2b has missing documentation.",
-;                 [STRCONC(STRINGIMAGE bigcnt,'"."),name])
+;         say_msg("S2CD0002",
+;                 '"%1 The constructor %2b has missing documentation.",
+;                 [STRCONC(STRINGIMAGE(bigcnt), '"."), name])
 ;         bigcnt := bigcnt + 1
 ;         litcnt := 1
 ;         if noHeading then
-;           say_msg('"%x3 %1 The constructor %2b is missing the heading description.",
-;             [STRCONC('"(",STRINGIMAGE litcnt,'")"),name])
+;           say_msg("S2CD0003",
+;             '"%x3 %1 The constructor %2b is missing the heading description.",
+;             [STRCONC('"(", STRINGIMAGE(litcnt), '")"), name])
 ;           litcnt := litcnt + 1
 ;         if signatures then
-;           say_msg('"%x3 %1 The following functions do not have documentation:",
-;                   [STRCONC('"(",STRINGIMAGE litcnt,'")")])
+;           say_msg("S2CD0004",
+;               '"%x3 %1 The following functions do not have documentation:",
+;                   [STRCONC('"(", STRINGIMAGE(litcnt), '")")])
 ;           litcnt := litcnt + 1
 ;           for [op,sig] in signatures repeat
 ;             s := formatOpSignature(op,sig)
@@ -186,7 +190,9 @@
 ;               atom s => ['%x9,s]
 ;               ['%x9,:s]
 ;       if unusedCommentLineNumbers then
-;         say_msg('"%1 The constructor %2b has incorrectly placed documentation.",[STRCONC(STRINGIMAGE bigcnt,'"."),name])
+;         say_msg("S2CD0006",
+;             '"%1 The constructor %2b has incorrectly placed documentation.",
+;                 [STRCONC(STRINGIMAGE(bigcnt), '"."), name])
 ;         for [n,r] in unusedCommentLineNumbers repeat
 ;           sayMSG ['"   ",:bright n,'"   ",r]
 ;   hn([[:fn(sig), :doc] for [sig, :doc] in docList]) where
@@ -267,25 +273,25 @@
                (SETQ |name| (CAR |$lisplibForm|))
                (COND
                 ((OR |noHeading| |signatures| |unusedCommentLineNumbers|)
-                 (|say_msg|
+                 (|say_msg| 'S2CD0001
                   "%b Constructor documentation warnings (++ comments): %d"
                   NIL)
                  (SETQ |bigcnt| 1)
                  (COND
                   ((OR |noHeading| |signatures|)
-                   (|say_msg|
+                   (|say_msg| 'S2CD0002
                     "%1 The constructor %2b has missing documentation."
                     (LIST (STRCONC (STRINGIMAGE |bigcnt|) ".") |name|))
                    (SETQ |bigcnt| (+ |bigcnt| 1)) (SETQ |litcnt| 1)
                    (COND
                     (|noHeading|
-                     (|say_msg|
+                     (|say_msg| 'S2CD0003
                       "%x3 %1 The constructor %2b is missing the heading description."
                       (LIST (STRCONC "(" (STRINGIMAGE |litcnt|) ")") |name|))
                      (SETQ |litcnt| (+ |litcnt| 1))))
                    (COND
                     (|signatures|
-                     (|say_msg|
+                     (|say_msg| 'S2CD0004
                       "%x3 %1 The following functions do not have documentation:"
                       (LIST (STRCONC "(" (STRINGIMAGE |litcnt|) ")")))
                      (SETQ |litcnt| (+ |litcnt| 1))
@@ -314,7 +320,7 @@
                       |signatures| NIL)))))
                  (COND
                   (|unusedCommentLineNumbers|
-                   (|say_msg|
+                   (|say_msg| 'S2CD0006
                     "%1 The constructor %2b has incorrectly placed documentation."
                     (LIST (STRCONC (STRINGIMAGE |bigcnt|) ".") |name|))
                    ((LAMBDA (|bfVar#13| |bfVar#12|)
@@ -412,7 +418,6 @@
 
 ; transDocList($constructorName,doclist) == --returns ((key line)...)
 ; --called ONLY by finalizeDocumentation
-; --if $exposeFlag then messages go to file $outStream; flag=nil by default
 ;   sayBrightly ['"   Processing ",$constructorName,'" for Browser database:"]
 ;   commentList := transDoc($constructorName,doclist)
 ;   acc := nil
@@ -422,7 +427,7 @@
 ;       conEntry := entry
 ;     acc := [entry,:acc]
 ;   conEntry => [conEntry,:acc]
-;   checkDocError1 ['"Missing Description"]
+;   checkDocError ['"Missing Description"]
 ;   acc
 
 (DEFUN |transDocList| (|$constructorName| |doclist|)
@@ -454,7 +459,7 @@
        |commentList| NIL)
       (COND (|conEntry| (CONS |conEntry| |acc|))
             (#1#
-             (PROGN (|checkDocError1| (LIST "Missing Description")) |acc|)))))))
+             (PROGN (|checkDocError| (LIST "Missing Description")) |acc|)))))))
 
 ; transDoc(conname,doclist) ==
 ; --$exposeFlag and not isExposedConstructor conname => nil
@@ -465,7 +470,7 @@
 ;     $attribute? : local := $x is [.,[key]] and key = 'attribute
 ;     null lines =>
 ;       $attribute? => nil
-;       checkDocError1 ['"Not documented!!!!"]
+;       checkDocError ['"Not documented!!!!"]
 ;     u := checkTrim($x,(STRINGP lines => [lines]; $x = 'constructor => first lines; lines))
 ;     $argl : local := nil    --set by checkGetArgs
 ;     longline :=
@@ -515,8 +520,7 @@
                   (COND
                    ((NULL |lines|)
                     (COND (|$attribute?| NIL)
-                          (#1#
-                           (|checkDocError1| (LIST "Not documented!!!!")))))
+                          (#1# (|checkDocError| (LIST "Not documented!!!!")))))
                    (#1#
                     (PROGN
                      (SETQ |u|
@@ -837,7 +841,8 @@
 ;             checkDocError ['"Unknown \spadtype: ", s]
 ;           atom key => 'ok
 ;           checkDocError ['"Wrong number of arguments: ",form2HtString key]
-;       else if member(x,'("\spadop" "\keyword")) and (u := checkLookForLeftBrace IFCDR u) and (u := IFCDR u) then
+;       else if x = '"\spadop" and (u := checkLookForLeftBrace IFCDR u) and
+;               (u := IFCDR u) then
 ;           x := intern checkGetStringBeforeRightBrace u
 ;           not (GETL(x,'Led) or GETL(x,'Nud)) =>
 ;             checkDocError ['"Unknown \spadop: ",x]
@@ -960,7 +965,7 @@
                            (|checkDocError|
                             (LIST "Wrong number of arguments: "
                                   (|form2HtString| |key|)))))))))
-                     ((AND (|member| |x| '("\\spadop" "\\keyword"))
+                     ((AND (EQUAL |x| "\\spadop")
                            (SETQ |u| (|checkLookForLeftBrace| (IFCDR |u|)))
                            (SETQ |u| (IFCDR |u|)))
                       (SETQ |x|
@@ -1957,7 +1962,7 @@
 ;             acc
 ;       x = char '_$ or x = '"$"  => ['"\$",:acc]
 ;       x = char '_% or x = '"%"  => ['"\%",:acc]
-;       x = char '_, or x = '","  => ['",{}",:acc]
+;       x = char '_, or x = '","  => ['",",:acc]
 ;       x = '"\spad" => ['"\spad",:acc]
 ;       STRINGP x and DIGITP x.0 => [x,:acc]
 ;       null spadflag and
@@ -2053,7 +2058,7 @@
                            ((OR (EQUAL |x| (|char| '%)) (EQUAL |x| "%"))
                             (CONS "\\%" |acc|))
                            ((OR (EQUAL |x| (|char| '|,|)) (EQUAL |x| ","))
-                            (CONS ",{}" |acc|))
+                            (CONS "," |acc|))
                            ((EQUAL |x| "\\spad") (CONS "\\spad" |acc|))
                            ((AND (STRINGP |x|) (DIGITP (ELT |x| 0)))
                             (CONS |x| |acc|))
@@ -3309,18 +3314,6 @@
     (RETURN
      (OR (ALPHA-CHAR-P |c|) (DIGITP |c|) (MEMQ |c| |$charIdentifierEndings|)))))
 
-; checkDocError1 u ==
-; --when compiling for documentation, ignore certain errors
-;   BOUNDP '$compileDocumentation and $compileDocumentation => nil
-;   checkDocError u
-
-(DEFUN |checkDocError1| (|u|)
-  (PROG ()
-    (RETURN
-     (COND
-      ((AND (BOUNDP '|$compileDocumentation|) |$compileDocumentation|) NIL)
-      ('T (|checkDocError| |u|))))))
-
 ; checkDocError u ==
 ;   $checkErrorFlag := true
 ;   msg :=
@@ -3330,11 +3323,9 @@
 ;     $constructorName => checkDocMessage u
 ;     u
 ;   if $exposeFlag and $exposeFlagHeading then
-;     sayBrightly1($exposeFlagHeading,$outStream)
 ;     sayBrightly $exposeFlagHeading
 ;     $exposeFlagHeading := nil
 ;   sayBrightly msg
-;   if $exposeFlag then sayBrightly1(msg,$outStream)
 
 (DEFUN |checkDocError| (|u|)
   (PROG (|msg|)
@@ -3349,10 +3340,8 @@
                (|$constructorName| (|checkDocMessage| |u|)) (#1# |u|)))
       (COND
        ((AND |$exposeFlag| |$exposeFlagHeading|)
-        (|sayBrightly1| |$exposeFlagHeading| |$outStream|)
         (|sayBrightly| |$exposeFlagHeading|) (SETQ |$exposeFlagHeading| NIL)))
-      (|sayBrightly| |msg|)
-      (COND (|$exposeFlag| (|sayBrightly1| |msg| |$outStream|)))))))
+      (|sayBrightly| |msg|)))))
 
 ; checkDocMessage u ==
 ;   sourcefile := get_database($constructorName, 'SOURCEFILE)

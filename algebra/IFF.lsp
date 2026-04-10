@@ -84,7 +84,7 @@
               (|Union| '"prime" '"polynomial" '"normal" '"cyclic")
               (|Table| 11 14) (|Record| (|:| |factor| 12) (|:| |exponent| 14))
               (|List| 41) (|Factored| 18) (|Union| 45 '#1#) (|List| 18)
-              (|HashState|) (|SingleInteger|))
+              (|SingleInteger|) (|HashState|))
            '#() 'NIL
            (CONS
             (|makeByteWordVec2| 4

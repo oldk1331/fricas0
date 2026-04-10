@@ -68,7 +68,7 @@
 
 (DEFUN |I16Matrix;| ()
   (SPROG
-   ((|dv$| NIL) (% NIL) (#1=#:G2498 NIL) (#2=#:G2499 NIL) (#3=#:G2497 NIL)
+   ((|dv$| NIL) (% NIL) (#1=#:G2497 NIL) (#2=#:G2498 NIL) (#3=#:G2496 NIL)
     (|pv$| NIL))
    (PROGN
     (LETT |dv$| '(|I16Matrix|))
@@ -122,7 +122,13 @@
                                                                (|OutputForm|))))
                                         (OR #3# #2#)
                                         (|HasCategory| (|Integer|)
+                                                       '(|AbelianMonoid|))
+                                        (|HasCategory| (|Integer|)
                                                        '(|AbelianGroup|))
+                                        (|HasCategory| (|Integer|)
+                                                       '(|EuclideanDomain|))
+                                        (|HasCategory| (|Integer|)
+                                                       '(|IntegralDomain|))
                                         (|HasCategory| (|Integer|)
                                                        '(|SemiRng|))
                                         (AND
@@ -131,34 +137,30 @@
                                          (|HasCategory| (|Integer|)
                                                         '(|SemiRng|)))
                                         (|HasCategory| (|Integer|)
-                                                       '(|EuclideanDomain|))
-                                        (|HasCategory| (|Integer|)
-                                                       '(|IntegralDomain|))
-                                        (|HasCategory| (|Integer|)
                                                        '(|CommutativeRing|))
                                         (|HasCategory| (|Integer|)
                                                        '(|Field|))))))
     (|haddProp| |$ConstructorCache| '|I16Matrix| NIL (CONS 1 %))
     (|stuffDomainSlots| %)
-    (AND (|HasCategory| % '(|finiteAggregate|)) (|augmentPredVector| % 262144))
+    (AND (|HasCategory| % '(|finiteAggregate|)) (|augmentPredVector| % 524288))
     (AND (|HasCategory| % '(|finiteAggregate|))
          (|HasCategory| (|Integer|) '(|OrderedSet|))
-         (|augmentPredVector| % 524288))
+         (|augmentPredVector| % 1048576))
     (AND (|HasCategory| % '(|finiteAggregate|))
          (|HasCategory| (|Integer|) '(|BasicType|))
-         (|augmentPredVector| % 1048576))
+         (|augmentPredVector| % 2097152))
     (AND
      (OR
       (AND (|HasCategory| % '(|finiteAggregate|))
            (|HasCategory| (|Integer|) '(|BasicType|)))
       (|HasCategory| (|Integer|) '(|Hashable|)) #1#)
-     (|augmentPredVector| % 2097152))
+     (|augmentPredVector| % 4194304))
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
 (DEFUN |I16Matrix| ()
   (SPROG NIL
-         (PROG (#1=#:G2501)
+         (PROG (#1=#:G2500)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|I16Matrix|))
@@ -209,25 +211,26 @@
               |blockConcat| 721 |array2| 726 |any?| 731 |antisymmetric?| 737 ^
               742 |Pfaffian| 754 = 759 / 765 - 771 + 782 * 788 |#| 824)
            'NIL
-           (CONS (|makeByteWordVec2| 11 '(0 0 1 0 2 6 9 0 7 11 9 0 0 0))
+           (CONS (|makeByteWordVec2| 11 '(0 0 1 0 2 6 9 0 7 11 9 0 0 0 0))
                  (CONS
                   '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL
                      |HomogeneousAggregate&| |Hashable&| |SetCategory&|
                      |Evalable&| |Aggregate&| |BasicType&| NIL |InnerEvalable&|
-                     NIL NIL NIL)
+                     NIL NIL NIL NIL)
                   (CONS
                    '#((|MatrixCategory| 6 24 24)
                       (|TwoDimensionalArrayCategory| 6 24 24) (|Comparable|)
                       (|HomogeneousAggregate| 6) (|Hashable|) (|SetCategory|)
                       (|Evalable| 6) (|Aggregate|) (|BasicType|)
                       (|CoercibleTo| 40) (|InnerEvalable| 6 6)
-                      (|shallowlyMutable|) (|finiteAggregate|) (|Type|))
+                      (|shallowlyMutable|) (|finiteAggregate|)
+                      (|MatrixOperationsCategory| 6 24 24) (|Type|))
                    (|makeByteWordVec2| 45
-                                       '(2 22 21 0 0 1 1 0 21 0 1 2 0 0 9 9 1 2
-                                         0 28 0 30 1 2 0 28 0 31 1 2 0 0 0 0 1
-                                         1 0 0 28 1 1 0 0 0 1 1 0 0 24 1 1 0 21
-                                         0 1 3 0 0 0 6 6 1 3 0 0 0 6 6 1 5 0 0
-                                         0 6 6 6 6 1 1 0 0 0 1 1 0 21 0 1 2 1
+                                       '(2 23 21 0 0 1 1 12 21 0 1 2 0 0 9 9 1
+                                         2 0 28 0 30 1 2 0 28 0 31 1 2 0 0 0 0
+                                         1 1 0 0 28 1 1 0 0 0 1 1 0 0 24 1 1 0
+                                         21 0 1 3 0 0 0 6 6 1 3 0 0 0 6 6 1 5 0
+                                         0 0 6 6 6 6 1 1 0 0 0 1 1 0 21 0 1 2 1
                                          21 0 0 1 2 0 21 0 9 1 4 0 0 0 6 6 0 1
                                          4 0 0 0 27 6 0 1 4 0 0 0 6 27 0 1 4 0
                                          6 0 6 6 6 17 4 0 0 0 25 6 0 1 4 0 0 0
@@ -236,22 +239,22 @@
                                          0 1 4 0 0 0 27 26 0 1 4 0 0 0 26 27 0
                                          1 4 0 0 0 27 27 0 1 3 0 0 0 6 24 1 3 0
                                          0 0 6 24 1 2 0 0 9 6 1 0 0 0 1 1 0 26
-                                         0 1 1 15 0 0 1 2 0 24 0 6 1 1 16 9 0 1
+                                         0 1 1 14 0 0 1 2 0 24 0 6 1 1 15 9 0 1
                                          4 0 6 0 6 6 6 16 2 0 0 9 9 19 3 0 6 0
-                                         6 6 14 2 13 0 0 6 1 1 0 25 0 1 1 16 9
-                                         0 1 1 16 41 0 1 1 0 9 0 10 3 0 0 9 9 6
-                                         20 1 0 9 0 11 2 0 21 0 9 1 1 17 6 0 1
-                                         1 0 6 0 7 1 0 6 0 8 1 20 6 0 1 1 19 25
-                                         0 1 2 21 21 6 0 1 1 0 6 0 12 1 0 6 0
-                                         13 1 20 6 0 1 2 19 6 39 0 1 1 0 0 23 1
-                                         3 0 0 9 9 32 1 2 0 0 22 0 1 2 0 0 22 0
-                                         1 3 0 0 32 0 0 1 4 0 0 32 0 0 6 1 1 0
-                                         23 0 1 2 0 21 0 9 1 1 5 45 0 1 7 0 33
-                                         0 6 34 28 9 9 35 1 2 0 0 0 0 1 1 0 0
-                                         28 1 2 13 0 0 0 1 1 13 0 28 1 1 18 42
+                                         6 6 14 2 16 0 0 6 1 1 0 25 0 1 1 15 9
+                                         0 1 1 15 41 0 1 1 0 9 0 10 3 0 0 9 9 6
+                                         20 1 0 9 0 11 2 0 21 0 9 1 1 18 6 0 1
+                                         1 0 6 0 7 1 0 6 0 8 1 21 6 0 1 1 20 25
+                                         0 1 2 22 21 6 0 1 1 0 6 0 12 1 0 6 0
+                                         13 1 21 6 0 1 2 20 6 39 0 1 3 0 0 9 9
+                                         32 1 1 0 0 23 1 2 0 0 22 0 1 2 0 0 22
+                                         0 1 3 0 0 32 0 0 1 4 0 0 32 0 0 6 1 1
+                                         0 23 0 1 2 0 21 0 9 1 1 5 45 0 1 7 0
+                                         33 0 6 34 28 9 9 35 1 1 0 0 28 1 2 0 0
+                                         0 0 1 2 16 0 0 0 1 1 16 0 28 1 1 19 42
                                          0 1 2 0 28 0 30 1 2 0 28 0 31 1 2 0 0
                                          0 0 1 1 0 0 28 1 2 2 43 43 0 1 1 2 44
-                                         0 1 2 0 0 0 6 1 2 16 42 0 6 1 2 19 21
+                                         0 1 2 0 0 0 6 1 2 15 42 0 6 1 2 20 21
                                          38 0 1 2 8 0 0 36 1 3 8 0 0 6 6 1 2 8
                                          0 0 37 1 3 8 0 0 25 25 1 2 0 21 0 0 1
                                          1 0 21 0 1 0 0 0 18 3 0 6 0 6 6 15 4 0
@@ -260,15 +263,15 @@
                                          0 0 0 26 25 1 3 0 0 0 25 26 1 3 0 0 0
                                          27 6 1 3 0 0 0 6 27 1 3 0 0 0 27 26 1
                                          3 0 0 0 26 27 1 3 0 0 0 27 27 1 1 0 0
-                                         25 1 1 0 0 28 1 1 0 21 0 1 1 17 6 0 1
-                                         2 21 9 6 0 1 2 19 9 38 0 1 1 0 0 0 1 1
-                                         15 41 0 1 2 0 24 0 6 1 1 0 26 0 1 1 0
+                                         25 1 1 0 0 28 1 1 12 21 0 1 1 18 6 0 1
+                                         2 22 9 6 0 1 2 20 9 38 0 1 1 0 0 0 1 1
+                                         14 41 0 1 2 0 24 0 6 1 1 0 26 0 1 1 0
                                          0 24 1 1 10 40 0 1 3 0 29 0 30 30 1 3
                                          0 29 0 31 31 1 1 0 0 29 1 1 0 0 23 1 2
-                                         19 21 38 0 1 1 12 21 0 1 2 14 0 0 9 1
-                                         2 18 0 0 6 1 1 17 6 0 1 2 22 21 0 0 1
-                                         2 18 0 0 6 1 1 12 0 0 1 2 12 0 0 0 1 2
-                                         0 0 0 0 1 2 12 0 6 0 1 2 13 0 0 0 1 2
-                                         13 0 0 6 1 2 13 0 6 0 1 2 13 24 24 0 1
-                                         2 13 24 0 24 1 1 19 9 0 1)))))
+                                         20 21 38 0 1 1 13 21 0 1 2 17 0 0 9 1
+                                         2 19 0 0 6 1 1 18 6 0 1 2 23 21 0 0 1
+                                         2 19 0 0 6 1 2 13 0 0 0 1 1 13 0 0 1 2
+                                         12 0 0 0 1 2 13 0 6 0 1 2 16 0 0 0 1 2
+                                         16 0 0 6 1 2 16 0 6 0 1 2 16 24 24 0 1
+                                         2 16 24 0 24 1 1 20 9 0 1)))))
            '|lookupComplete|)) 

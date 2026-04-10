@@ -1713,15 +1713,15 @@
                                       (QREFELT % 90))
                             (QREFELT % 138))
                   (SPADCALL |oh| 2 "->"
-                            (SPADCALL "->" 1001 (SPADCALL 1001 (QREFELT % 89))
+                            (SPADCALL " -> " 990 (SPADCALL 990 (QREFELT % 89))
                                       (QREFELT % 90))
                             (QREFELT % 138))
                   (SPADCALL |oh| 2 "~>"
-                            (SPADCALL " ~> " 100 (SPADCALL 100 (QREFELT % 89))
+                            (SPADCALL " ~> " 100 (SPADCALL 110 (QREFELT % 89))
                                       (QREFELT % 90))
                             (QREFELT % 138))
                   (SPADCALL |oh| 2 "+->"
-                            (SPADCALL " +-> " 100 (SPADCALL 100 (QREFELT % 89))
+                            (SPADCALL " +-> " 100 (SPADCALL 110 (QREFELT % 89))
                                       (QREFELT % 90))
                             (QREFELT % 138))
                   (SPADCALL |oh| 2 "|"

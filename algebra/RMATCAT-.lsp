@@ -245,12 +245,6 @@
                     (|buildPredVector| 0 0
                                        (LIST
                                         (|HasCategory| |#4|
-                                                       '(|EuclideanDomain|))
-                                        (|HasCategory| |#4| '(|Field|))
-                                        (|HasCategory| |#4|
-                                                       '(|IntegralDomain|))
-                                        (|HasCategory| |#4| '(|AbelianGroup|))
-                                        (|HasCategory| |#4|
                                                        '(|CommutativeRing|))
                                         (|HasCategory| |#4| '(|Finite|))))))
     (|stuffDomainSlots| %)
@@ -262,14 +256,14 @@
     (QSETREFV % 11 |#6|)
     (SETF |pv$| (QREFELT % 3))
     (COND
-     ((|testBitVector| |pv$| 6)
+     ((|testBitVector| |pv$| 2)
       (PROGN
        (QSETREFV % 14 (CONS (|dispatchFunction| |RMATCAT-;size;Nni;1|) %))
        (QSETREFV % 18 (CONS (|dispatchFunction| |RMATCAT-;random;S;2|) %))
        (QSETREFV % 22 (CONS (|dispatchFunction| |RMATCAT-;lookup;SPi;3|) %))
        (QSETREFV % 24 (CONS (|dispatchFunction| |RMATCAT-;index;PiS;4|) %)))))
     (COND
-     ((|testBitVector| |pv$| 4)
+     ((|HasCategory| |#4| '(|AbelianGroup|))
       (QSETREFV % 45
                 (CONS (|dispatchFunction| |RMATCAT-;antisymmetric?;SB;10|)
                       %))))

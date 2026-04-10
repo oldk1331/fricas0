@@ -24,7 +24,7 @@
 
 (DEFUN |Vector;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G2083 NIL) (#2=#:G2084 NIL) (#3=#:G2085 NIL) (% NIL)
+   ((|pv$| NIL) (#1=#:G2082 NIL) (#2=#:G2083 NIL) (#3=#:G2084 NIL) (% NIL)
     (|dv$| NIL) (DV$1 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
@@ -146,9 +146,9 @@
       (QSETREFV % 20 (CONS (|dispatchFunction| |VECTOR;convert;%If;4|) %))))
     %))) 
 
-(DEFUN |Vector| (#1=#:G2086)
+(DEFUN |Vector| (#1=#:G2085)
   (SPROG NIL
-         (PROG (#2=#:G2087)
+         (PROG (#2=#:G2086)
            (RETURN
             (COND
              ((LETT #2#

@@ -1058,10 +1058,10 @@
               (83 . |coerce|) (88 . |Zero|) (92 . +) (98 . +)
               (|Mapping| 17 17 17) (|List| 17) (104 . |reduce|)
               (111 . |commaSeparate|)
-              (|Record| (|:| (|Integer|) 17) (|:| K 17) (|:| Q 17))
-              (|Table| 52 17) (116 . |dictionary|) '|remember|
-              (|Union| 17 '"failed") (120 . |search|) (126 . |reduce|)
-              (132 . *) |CKP;stirling;4Nni;11| (138 . |setelt!|) (|Integer|)
+              (|Record| (|:| II 17) (|:| K 17) (|:| Q 17)) (|Table| 52 17)
+              (116 . |dictionary|) '|remember| (|Union| 17 '"failed")
+              (120 . |search|) (126 . |reduce|) (132 . *)
+              |CKP;stirling;4Nni;11| (138 . |setelt!|) (|Integer|)
               (145 . |binomial|) |CKP;alpha;Nni2L;12|
               (|SparseUnivariatePolynomial| 67) (151 . |Zero|) (|Fraction| 62)
               (155 . |Zero|) (159 . |qelt|) (165 . /) (171 . +)
