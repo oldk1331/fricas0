@@ -52,7 +52,6 @@
 (load "interp/nrunfast")
 (load "interp/nrungo")
 (load "interp/nrunopt")
-(load "interp/pathname")
 (load "interp/pf2sex")
 (load "interp/pile")
 (load "interp/posit")
@@ -94,6 +93,7 @@
 (load "interp/br-search")
 (load "interp/br-util")
 (load "interp/br-saturn")
+(load "interp/br_sup")
 ;;;
 (load "interp/apply")
 (load "interp/c-doc")
