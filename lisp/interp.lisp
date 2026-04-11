@@ -1,11 +1,8 @@
 (load "interp/vmlisp")
-;;;
 (load "interp/hashcode")
 (load "interp/as")
 (load "interp/foam_l")
-;;;
 (load "interp/util")
-;;;
 (load "interp/macros")
 (load "interp/setq")
 (load "interp/buildom")
@@ -37,7 +34,6 @@
 (load "interp/i-spec2")
 (load "interp/i-syscmd")
 (load "interp/i-toplev")
-;(load "interp/i-util")
 (load "interp/incl")
 (load "interp/interop")
 (load "interp/int-top")
@@ -76,10 +72,7 @@
 (load "interp/setvart")
 (load "interp/s-parser")
 (load "interp/scwrap2")
-;;;
 (load "interp/ax")
-;(load "interp/dq")
-;;;
 (load "interp/bc-matrix")
 (load "interp/bc-misc")
 (load "interp/bc-solve")
@@ -94,7 +87,6 @@
 (load "interp/br-util")
 (load "interp/br-saturn")
 (load "interp/br_sup")
-;;;
 (load "interp/apply")
 (load "interp/c-doc")
 (load "interp/c-util")
