@@ -1801,7 +1801,7 @@
 ; sayLongOperation x ==
 ;   sayWidth x > $LINELENGTH and (splitListOn(x,"if") is [front,back]) =>
 ;     sayBrightly front
-;     BLANKS (6 + # PNAME front.1)
+;     BLANKS(6 + #(PNAME front.1), get_lisp_std_out())
 ;     sayBrightly back
 ;   sayBrightly x
 
@@ -1820,7 +1820,7 @@
                         (PROGN (SETQ |back| (CAR |ISTMP#2|)) #1='T))))))
        (PROGN
         (|sayBrightly| |front|)
-        (BLANKS (+ 6 (LENGTH (PNAME (ELT |front| 1)))))
+        (BLANKS (+ 6 (LENGTH (PNAME (ELT |front| 1)))) (|get_lisp_std_out|))
         (|sayBrightly| |back|)))
       (#1# (|sayBrightly| |x|))))))
 

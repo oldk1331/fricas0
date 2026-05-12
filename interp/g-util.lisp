@@ -1588,14 +1588,14 @@
 (DEFUN SUBLISLIS (|newl| |oldl| |form|)
   (PROG () (RETURN (SUBLIS (MAPCAR #'CONS |oldl| |newl|) |form|))))
 
-; BLANKS(n) ==
+; BLANKS(n, str) ==
 ;     for i in 1..n repeat
-;         PRINC(" ")
+;         PRINC('" ", str)
 
-(DEFUN BLANKS (|n|)
+(DEFUN BLANKS (|n| |str|)
   (PROG ()
     (RETURN
      ((LAMBDA (|i|)
-        (LOOP (COND ((> |i| |n|) (RETURN NIL)) ('T (PRINC '| |)))
+        (LOOP (COND ((> |i| |n|) (RETURN NIL)) ('T (PRINC " " |str|)))
               (SETQ |i| (+ |i| 1))))
       1))))
