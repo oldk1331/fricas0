@@ -17,7 +17,7 @@ Tested so far::
 Note: for SBCL, you can compile the ``interp`` directory before loading fricas.
 This can improve speed greatly.
 
-    sbcl --load lisp/load-lisp.lisp --load lisp/compile-interp.lisp --eval "(exit)"
+    sbcl --load lisp/load-lisp.lisp --load lisp/compile-interp.lisp --eval "(quit)"
     
 The first time - when the interpreter is loaded - you have to compile
 the *algebra*::
