@@ -1,5 +1,24 @@
 (load "lisp/load-lisp.lisp")
 
+(in-package "FRICAS-LISP")
+(setq load-type 'load-ondemand)
+
+(defun load2 (file)
+    (let* ((suffix (pathname-type (compile-file-pathname "foo.lisp")))
+           (basename (string-right-trim "." (string-right-trim (pathname-type file) file)))
+           (bin-file (probe-file (concatenate 'string basename "." suffix)))
+           (lisp-file (or (probe-file (concatenate 'string basename ".lisp"))
+                          (concatenate 'string basename ".lsp")))
+           (bin-newer (and bin-file (> (file-write-date bin-file)
+                                       (file-write-date lisp-file)))))
+      (cond
+        ((eq load-type 'load-ondemand)
+         (load (if bin-newer bin-file lisp-file)))
+        ((eq load-type 'compile-ondemand)
+         (load (if bin-newer bin-file (compile-file lisp-file))))
+        (t (load file))
+        )))
+
 (load "lisp/interp.lisp")
 (in-package :boot)
 (setq |$spadroot| ".")
@@ -13,18 +32,9 @@
 
 (defun gcmsg (x))
 
-(setq load-type "load-ondemand")
-
 (defun |load_quietly| (f)
   (handler-bind ((warning #'muffle-warning))
-    (let ((lsp-file (CONCAT (string-right-trim |$lisp_bin_filetype| f) "lsp")))
-      (cond
-        ((and (boundp 'load-type) (equal load-type "load-ondemand"))
-         (load (if (probe-file f) f lsp-file)))
-        ((and (boundp 'load-type) (equal load-type "compile-ondemand"))
-         (load (if (probe-file f) f (compile-file lsp-file))))
-        (t (load f))
-        ))))
+    (fricas-lisp::load2 f)))
 
 ;;; init
 (|interpsysInitialization| t)
