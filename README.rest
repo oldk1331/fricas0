@@ -6,26 +6,34 @@ Build
 -----
 
 Tested so far::
-    
+
     git clone https://github.com/nilqed/fricas0.git
     cd fricas0
-    
+
+    ccl --load fricas
+    clisp fricas
     ecl -load fricas
     sbcl --load fricas
     java -jar abcl.jar --load fricas
 
 Note: for SBCL, you can compile the ``interp`` directory before loading fricas.
-This can improve speed greatly.
+This can improve speed greatly::
 
-    sbcl --load lisp/load-lisp.lisp --load lisp/compile-interp.lisp --eval "(quit)"
-    
-The first time - when the interpreter is loaded - you have to compile
-the *algebra*::
-    
+    sbcl --eval '(progn (load "lisp/load-lisp.lisp") (load "lisp/compile-interp.lisp") (quit))'
+
+For other Lisps, use ``ecl -eval``, ``clisp -x``, ``ccl --eval``.
+
+The first time - when the interpreter is loaded - you can choose to compile
+the *algebra* directory to gain speedup::
+
     )lisp (load "lisp/compile-algebra.lisp")
-    
+
+Or doing it in command line non-interactively::
+
+    echo ')lisp (load "lisp/compile-algebra.lisp")' | sbcl --dynamic-space-size 4096 --load fricas
+
 Since each of the above mentioned Common Lisp flavours compile to a different
-format (``ecl -> .fas, sbcl -> .fasl, abcl -> .abcl``), you may use the same
+format (``clisp -> .fas, ecl -> .fasc, sbcl -> .fasl, abcl -> .abcl``), you may use the same
 ``fricas0`` folder simultaneously.
 
 Test matrix
