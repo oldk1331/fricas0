@@ -1,4 +1,5 @@
 (load "lisp/load-lisp.lisp")
+
 (load "lisp/interp.lisp")
 (in-package :boot)
 (setq |$spadroot| ".")
@@ -6,10 +7,6 @@
 (defvar |$build_version| "Common Lisp - 1.3.13")
 (defvar |$build_date| "Thu Mar 5 2026")
 (defvar |$lisp_id_string| (concatenate 'string (lisp-implementation-type) " " (lisp-implementation-version)))
-
-
-#+:ABCL
-(defvar |$lisp_bin_filetype| "abcl")  ;;; abcl ~ fasl/fas
 
 #+:SBCL
 (fricas-lisp::set-initial-parameters) ;; this is skipped in fricas-lisp.lisp, why?
