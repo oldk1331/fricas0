@@ -8,9 +8,10 @@
            (basename (string-right-trim "." (string-right-trim (pathname-type file) file)))
            (bin-file (probe-file (concatenate 'string basename "." suffix)))
            (lisp-file (or (probe-file (concatenate 'string basename ".lisp"))
-                          (concatenate 'string basename ".lsp")))
-           (bin-newer (and bin-file (> (file-write-date bin-file)
-                                       (file-write-date lisp-file)))))
+                          (probe-file (concatenate 'string basename ".lsp"))))
+           (bin-file-date (if bin-file (file-write-date bin-file) 0))
+           (lisp-file-date (if lisp-file (file-write-date lisp-file) 0))
+           (bin-newer (> bin-file-date lisp-file-date)))
       (cond
         ((eq load-type 'load-ondemand)
          (load (if bin-newer bin-file lisp-file)))
