@@ -1,0 +1,5 @@
+(require :fricas "/mnt/opt/fricas0/fricas.lisp")
+(require :asdf)
+(asdf:disable-output-translations)
+(push #P"./" asdf:*central-registry*)
+(asdf:operate 'asdf:monolithic-compile-bundle-op :fricas)
