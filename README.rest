@@ -1,3 +1,11 @@
+Notes for ASDF:
+
+put this directory under ~/common-lisp/, then in lisp, do::
+
+    (require "asdf")
+    (require "fricas")
+    (load "fricas2") ;; this gives FriCAS REPL
+
 ===================================
 FriCAS0 -- a pure Common Lisp build
 ===================================
