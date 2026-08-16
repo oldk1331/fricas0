@@ -898,11 +898,6 @@
       (|ioHook| '|endOfQueryUser|)
       |ans|))))
 
-; queryUserKeyedMsg(key, args) == query_user_msg(key, getKeyedMsg(key), args)
-
-(DEFUN |queryUserKeyedMsg| (|key| |args|)
-  (PROG () (RETURN (|query_user_msg| |key| (|getKeyedMsg| |key|) |args|))))
-
 ; flowSegmentedMsg(msg, len, offset) ==
 ;   -- tries to break a sayBrightly-type input msg into multiple
 ;   -- lines, with offset and given length.
