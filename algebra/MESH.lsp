@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MESH;makePt|
         ((|x| (|DoubleFloat|)) (|y| (|DoubleFloat|)) (|z| (|DoubleFloat|))

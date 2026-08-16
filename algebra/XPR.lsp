@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |XPR;One;%;1| ((% (%)))
         (LIST (CONS (|spadConstant| % 9) (|spadConstant| % 10)))) 

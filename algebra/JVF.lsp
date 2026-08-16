@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |JVF;diff;JB%;1| ((|jb| (JB)) (% (%)))
         (CONS (LIST (|spadConstant| % 14)) (LIST |jb|))) 

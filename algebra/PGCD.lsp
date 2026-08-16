@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PGCD;failtest|
         ((|f| (|SparseUnivariatePolynomial| P))

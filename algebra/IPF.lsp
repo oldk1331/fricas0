@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |IPF;twoPower| ((|x| (%)) (% (|NonNegativeInteger|)))
         (SPROG ((|r| (|NonNegativeInteger|)) (|ord| (|NonNegativeInteger|)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SETCAT-;latex;SS;1| ((|s| (S)) (% (|String|)))
         (SPROG

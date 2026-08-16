@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DGRPH;directedGraph;L%;1| ((|objs| (|List| S)) (% (%)))
         (SPROG

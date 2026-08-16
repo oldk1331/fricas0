@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |EXPR2;map;MEE;1|
         ((|f| (|Mapping| S R)) (|r| (|Expression| R)) (% (|Expression| S)))

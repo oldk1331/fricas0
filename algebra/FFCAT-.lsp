@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FFCAT-;Q2RF| ((|q| (|Fraction| F)) (% (|Fraction| UP)))
         (SPADCALL (SPADCALL (SPADCALL |q| (QREFELT % 11)) (QREFELT % 12))

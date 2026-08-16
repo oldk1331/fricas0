@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |XHASHTBL;localSearch|
         ((|a| (|PrimitiveArray| (|None|))) (|k| (|Key|))

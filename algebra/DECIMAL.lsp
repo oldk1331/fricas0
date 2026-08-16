@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DECIMAL;decimal;F%;1| ((|r| (|Fraction| (|Integer|))) (% (%)))
         (SPADCALL |r| (QREFELT % 7))) 

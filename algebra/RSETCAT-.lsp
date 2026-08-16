@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RSETCAT-;purelyAlgebraic?;PSB;1|
         ((|p| (P)) (|ts| (S)) (% (|Boolean|)))

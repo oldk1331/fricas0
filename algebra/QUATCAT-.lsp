@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |QUATCAT-;characteristic;Nni;1| ((% (|NonNegativeInteger|)))
         (SPADCALL (QREFELT % 9))) 

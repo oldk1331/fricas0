@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TEX1;coerce;STf;1| ((|s| (S)) (% (|TexFormat|)))
         (SPADCALL (SPADCALL |s| (QREFELT % 8)) (QREFELT % 10))) 

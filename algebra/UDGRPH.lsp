@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|UDGRPH;isDirected?;B;1| '|SPADreplace| '(XLAM NIL NIL)) 
 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LMDICT;coerce;%Of;1| ((|s| (%)) (% (|OutputForm|)))
         (SPROG ((#1=#:G22 NIL) (|x| NIL) (#2=#:G21 NIL))

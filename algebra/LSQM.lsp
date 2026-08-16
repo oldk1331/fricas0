@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LSQM;convert;Sm%;1| ((|x| (|SquareMatrix| |n| R)) (% (%)))
         (SPADCALL |x| (QREFELT % 11))) 

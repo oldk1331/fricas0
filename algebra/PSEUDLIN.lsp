@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PSEUDLIN;inv| ((|m| (|Matrix| K)) (% (|Matrix| K)))
         (SPROG ((#1=#:G5 NIL))

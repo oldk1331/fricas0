@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |HELLFDIV;Zero;%;1| ((% (%)))
         (SPADCALL (|spadConstant| % 29) (QREFELT % 30))) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DEGRED;degrees|
         ((|u| (|SparseUnivariatePolynomial| R1)) (% (|List| (|Integer|))))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |YSTREAM;Y;MS;1|
         ((|f| (|Mapping| #1=(|Stream| A) (|Stream| A))) (% (|Stream| A)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SMPEXPR;log;2%;1| ((|p| (%)) (% (%)))
         (SEQ

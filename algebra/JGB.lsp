@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |JGB;convert1|
         ((|p| (P)) (% (|DistributedJetBundlePolynomial| R JB LJV E)))

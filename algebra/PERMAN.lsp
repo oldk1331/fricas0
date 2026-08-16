@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PERMAN;permanent3| ((|x| (|SquareMatrix| |n| R)) (% (R)))
         (SPROG

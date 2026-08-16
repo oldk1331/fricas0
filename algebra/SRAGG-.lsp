@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SRAGG-;trim;SCcS;1| ((|s| (S)) (|cc| (|CharacterClass|)) (% (S)))
         (SPADCALL (SPADCALL |s| |cc| (QREFELT % 8)) |cc| (QREFELT % 9))) 

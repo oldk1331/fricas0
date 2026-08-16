@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TEXPARSE;peek_token|
         ((|sr|

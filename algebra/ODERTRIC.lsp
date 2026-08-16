@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ODERTRIC;UP2SUP|
         ((|p| (UP)) (% (|SparseUnivariatePolynomial| (|Polynomial| F))))

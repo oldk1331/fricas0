@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CLINDEP;kmap|
         ((|k| (|Kernel| F)) (|ldmvar| (|List| (|Kernel| F)))

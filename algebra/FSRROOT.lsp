@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FSRROOT;get_rational_roots;FKL;1|
         ((|eq1f| (F)) (|k1| (|Kernel| F))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LSMP1;solve;MVR;1|
         ((|m| (|Matrix| F)) (|c| (|Vector| F))

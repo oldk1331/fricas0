@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MAPPKG1;nullary;AM;1| ((|a| (A)) (% (|Mapping| A)))
         (CONS #'|MAPPKG1;nullary;AM;1!0| |a|)) 

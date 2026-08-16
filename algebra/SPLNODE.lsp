@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|SPLNODE;rep| '|SPADreplace| '(XLAM (|n|) |n|)) 
 

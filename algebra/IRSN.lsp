@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |IRSN;aIdInverse| ((% (|Void|)))
         (SPROG

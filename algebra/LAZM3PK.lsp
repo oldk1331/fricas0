@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LAZM3PK;convert| ((|st| (ST)) (% (TS)))
         (SPROG ((|ts| (TS)) (#1=#:G13 NIL) (|p| NIL) (|lp| (|List| P)))

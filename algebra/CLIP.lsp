@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CLIP;Fnan?| ((|x| (|DoubleFloat|)) (% (|Boolean|)))
         (SPADCALL |x| |x| (QREFELT % 8))) 

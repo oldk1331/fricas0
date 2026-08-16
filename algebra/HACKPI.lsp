@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |HACKPI;pi;%;1| ((% (%)))
         (SPADCALL (SPADCALL 1 1 (QREFELT % 13)) (QREFELT % 14))) 

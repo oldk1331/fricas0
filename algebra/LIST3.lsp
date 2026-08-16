@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LIST3;map;MLLL;1|
         ((|fn| (|Mapping| C A B)) (|la| (|List| A)) (|lb| (|List| B))

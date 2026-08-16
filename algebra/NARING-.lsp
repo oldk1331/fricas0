@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NARING-;coerce;IS;1| ((|n| (|Integer|)) (% (S)))
         (SPADCALL |n| (|spadConstant| % 7) (QREFELT % 9))) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PSCAT-;*;I2S;1| ((|n| (|Integer|)) (|ps| (S)) (% (S)))
         (SPROG NIL

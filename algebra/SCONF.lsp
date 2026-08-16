@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SCONF;spnt;2Df%;1| ((|a| #1=(|DoubleFloat|)) (|b| #1#) (% (%)))
         (SPROG ((|z| (%)) (|inf| (|DoubleFloat|)))

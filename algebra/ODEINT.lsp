@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ODEINT;diff;SM;1| ((|x| (|Symbol|)) (% (|Mapping| F F)))
         (SPROG NIL (CONS #'|ODEINT;diff;SM;1!0| (VECTOR % |x|)))) 

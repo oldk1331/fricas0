@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SEXOF;coerce;%Of;1| ((|b| (%)) (% (|OutputForm|)))
         (SPROG

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |WFFINTBS;listSquaredFactors| ((|px| (R)) (% (|List| R)))
         (SPROG

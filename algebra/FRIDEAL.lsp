@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FRIDEAL;One;%;1| ((% (%)))
         (CONS (VECTOR (|spadConstant| % 13)) (|spadConstant| % 12))) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |OMEXPR;outputOMArith1|
         ((|dev| (|OpenMathDevice|)) (|sym| (|String|))

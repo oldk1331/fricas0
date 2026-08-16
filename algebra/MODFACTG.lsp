@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MODFACTG;floor_sqrt| ((|n| (|Integer|)) (% (|Integer|)))
         (SPROG ((|res| (|Integer|)))

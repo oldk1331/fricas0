@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ODERAT;infOrder| ((|f| (|Fraction| UP)) (% (|Integer|)))
         (- (SPADCALL (SPADCALL |f| (QREFELT % 12)) (QREFELT % 14))

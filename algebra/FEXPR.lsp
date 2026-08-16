@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FEXPR;mkEqn|
         ((|s1| (|Symbol|)) (|s2| (|Symbol|)) (% (|Equation| (|Expression| R))))

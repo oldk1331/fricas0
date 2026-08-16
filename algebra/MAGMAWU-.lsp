@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MAGMAWU-;one?;SB;1| ((|x| (S)) (% (|Boolean|)))
         (SPADCALL |x| (|spadConstant| % 7) (QREFELT % 9))) 

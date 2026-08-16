@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PLOT1;plot;SSSP;1|
         ((|f| (S)) (|x| (|Symbol|)) (|xRange| (|Segment| (|DoubleFloat|)))

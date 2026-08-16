@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |IBPTOOLS;mapUnivariate;MSupR;1|
         ((|f| (|Mapping| K L)) (|poly| (|SparseUnivariatePolynomial| L))

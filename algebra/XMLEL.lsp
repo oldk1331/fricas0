@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|XMLEL;xmlElement;SLL%;1| '|SPADreplace|
      '(XLAM (|name| |elements| |attributes|)

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |QALGSET;factorset| ((|y| (|Dpoly|)) (% (|List| |Dpoly|)))
         (SPROG ((#1=#:G26 NIL) (|j| NIL) (#2=#:G25 NIL))

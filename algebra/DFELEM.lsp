@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DFELEM;log_plus_1;2Df;1| ((|x| (|DoubleFloat|)) (% (|DoubleFloat|)))
         (SPROG ((|x2| (|DoubleFloat|)) (|x1| (|DoubleFloat|)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |WP;changeWeightLevel;NniV;1|
         ((|n| (|NonNegativeInteger|)) (% (|Void|))) (SETELT % 12 |n|)) 

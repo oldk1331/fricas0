@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ISMITH;smith;MMM;1|
         ((|m| (|Matrix| (|Integer|)))

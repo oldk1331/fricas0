@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FFPOLY2;rootOfIrreduciblePoly;SupF;1|
         ((|pf| (|SparseUnivariatePolynomial| GF)) (% (F)))

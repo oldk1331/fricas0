@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TUBETOOL;point;4DfP;1|
         ((|x| (|DoubleFloat|)) (|y| (|DoubleFloat|)) (|z| (|DoubleFloat|))

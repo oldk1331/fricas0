@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RSIMP;str_to_expr| ((|s| (|String|)) (% (|Expression| (|Integer|))))
         (SPROG ((|av| (|Any|)) (|af| (|InputForm|)))

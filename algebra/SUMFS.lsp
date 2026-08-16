@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SUMFS;newk| ((% (|Kernel| F)))
         (SPADCALL (SPADCALL (QREFELT % 9)) (QREFELT % 11))) 

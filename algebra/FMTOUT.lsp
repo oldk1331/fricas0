@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FMTOUT;setFormats!;LV;1|
         ((|l| (|List| (|OutputFormatterCategory|))) (% (|Void|)))

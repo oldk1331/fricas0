@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |HB;lfunc;3I;1| ((|d| (|Integer|)) (|n| (|Integer|)) (% (|Integer|)))
         (SPROG

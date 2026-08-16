@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RFDIST;uniform01;F;1| ((% (|Float|)))
         (SPADCALL (SPADCALL (SPADCALL (QREFELT % 13)) (QREFELT % 11))

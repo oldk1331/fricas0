@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FRNAALG-;min_poly_from_matrix|
         ((|mx| (|Matrix| (|Polynomial| R))) (|x| (|Matrix| (|Polynomial| R)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TANEXP;m1toN| ((|n| (|Integer|)) (% (|Integer|)))
         (COND ((ODDP |n|) -1) ('T 1))) 

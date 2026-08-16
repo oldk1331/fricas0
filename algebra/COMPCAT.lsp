@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (DEFPARAMETER |ComplexCategory;CAT| 'NIL) 
 

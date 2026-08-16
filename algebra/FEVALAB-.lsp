@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FEVALAB-;elt;SRS;1| ((|x| (S)) (|r| (R)) (% (S)))
         (SPROG NIL

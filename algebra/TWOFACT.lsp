@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TWOFACT;pthRoot|
         ((|poly| (|SparseUnivariatePolynomial| F)) (|p| (|NonNegativeInteger|))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|ANON;coerce;%Of;1| '|SPADreplace| '|outputTranAnon|) 
 

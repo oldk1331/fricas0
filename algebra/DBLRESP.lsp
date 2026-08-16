@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DBLRESP;remove0| ((|p| (UP)) (% (UP)))
         (SPROG ((#1=#:G1 NIL))

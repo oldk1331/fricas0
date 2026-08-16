@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ODEEF;solve;EBoSU;1|
         ((|diffeq| (|Equation| F)) (|y| (|BasicOperator|)) (|x| (|Symbol|))

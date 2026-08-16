@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LODEEF;simp_roots| ((|f| (F)) (|la| (|List| F)) (% (F)))
         (SPROG

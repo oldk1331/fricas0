@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NCNTFRAC;cfc| ((|a| (F)) (% (|Stream| (|Integer|))))
         (SPROG NIL

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CCLASS;digit;%;1| ((% (%))) (SPADCALL "0123456789" (QREFELT % 9))) 
 

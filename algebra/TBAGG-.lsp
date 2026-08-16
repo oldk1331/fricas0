@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TBAGG-;table;S;1| ((% (S))) (SPADCALL (QREFELT % 9))) 
 

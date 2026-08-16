@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FFNBP;coerce;GF%;1| ((|v| (GF)) (% (%)))
         (MAKEARR1 (QREFELT % 17) (SPADCALL |v| (QREFELT % 47) (QREFELT % 52)))) 

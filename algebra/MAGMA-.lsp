@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MAGMA-;^;SPiS;1| ((|x| (S)) (|n| (|PositiveInteger|)) (% (S)))
         (SPADCALL |x| |n| (QREFELT % 9))) 

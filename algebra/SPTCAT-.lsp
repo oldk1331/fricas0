@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SPTCAT-;colinearity;2SDf;1| ((|x| (S)) (|y| (S)) (% (|DoubleFloat|)))
         (|div_DF| (|expt_DF_I| (SPADCALL |x| |y| (QREFELT % 8)) 2)

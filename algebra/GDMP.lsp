@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|GDMP;zero?;%B;1| '|SPADreplace| 'NULL) 
 

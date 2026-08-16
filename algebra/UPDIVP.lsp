@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |UPDIVP;divideIfCan;2UPU;1|
         ((|p1| (UP)) (|p2| (UP))

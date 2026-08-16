@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INTG0;kerdiff| ((|sa| (F)) (|a| (F)) (% (|List| (|Kernel| F))))
         (SPADCALL (SPADCALL |sa| (QREFELT % 15)) (SPADCALL |a| (QREFELT % 15))

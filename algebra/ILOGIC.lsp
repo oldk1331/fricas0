@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ILOGIC;proposition;S%;1| ((|s| (|String|)) (% (%)))
         (CONS 1 (LIST |s|))) 

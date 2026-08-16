@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TRIMAT;UpTriBddDenomInv;MRM;1| ((A (M)) (|denom| (R)) (% (M)))
         (SPROG

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DFSFUN2;bernoulli_gamma_series_CDF|
         ((|z| (|Complex| (|DoubleFloat|))) (% (|Complex| (|DoubleFloat|))))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |IMATLIN;rowAllZeroes?| ((|x| (M)) (|i| (|Integer|)) (% (|Boolean|)))
         (SPROG ((#1=#:G22 NIL) (#2=#:G23 NIL) (#3=#:G24 NIL) (|j| NIL))

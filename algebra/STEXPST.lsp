@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |STEXPST;expre|
         ((|r| (|Coef|)) (|e| (|Stream| |Coef|)) (|dx| (|Stream| |Coef|))

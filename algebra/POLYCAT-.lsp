@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |POLYCAT-;eval;SLS;1| ((|p| (S)) (|l| (|List| (|Equation| S))) (% (S)))
         (SPROG

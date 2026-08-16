@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|DROPT;length| '|SPADreplace| 'LENGTH) 
 

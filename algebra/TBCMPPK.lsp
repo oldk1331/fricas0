@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TBCMPPK;initTable!;V;1| ((% (|Void|)))
         (SEQ (SETELT % 8 'T) (SETELT % 11 (SPADCALL (QREFELT % 10)))

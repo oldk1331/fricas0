@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INTHERTR;HermiteIntegrate;FMUPR;1|
         ((|f| (|Fraction| UP)) (|derivation| (|Mapping| UP UP)) (|d0| (UP))

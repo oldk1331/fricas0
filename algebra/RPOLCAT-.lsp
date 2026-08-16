@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RPOLCAT-;coerce;SOf;1| ((|p| (S)) (% (|OutputForm|)))
         (SPROG

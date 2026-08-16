@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |OUT;output;OfV;1| ((|e| (|OutputForm|)) (% (|Void|)))
         (SEQ (|mathprint2| |e|) (EXIT (SPADCALL (QREFELT % 7))))) 

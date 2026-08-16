@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TEXSCAN;at_eos?;RB;1|
         ((|st| (|Record| (|:| |str| (|String|)) (|:| |pos| (|Integer|))))

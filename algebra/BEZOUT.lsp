@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |BEZOUT;sylvesterMatrix;2UPM;1| ((|p| (UP)) (|q| (UP)) (% (M)))
         (SPROG

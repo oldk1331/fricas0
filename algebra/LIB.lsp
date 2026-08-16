@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LIB;library;Fn%;1| ((|f| (|FileName|)) (% (%)))
         (SPADCALL |f| (QREFELT % 8))) 

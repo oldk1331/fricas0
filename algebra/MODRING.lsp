@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|MODRING;modulus;%Mod;1| '|SPADreplace| 'QCDR) 
 

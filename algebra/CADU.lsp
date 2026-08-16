@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CADU;squareFreeBasis;2L;1| ((|lpols| (|List| P)) (% (|List| P)))
         (SPROG ((|sqpol| (P)) (|pol| (P)))

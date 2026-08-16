@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MRATFAC;numer1|
         ((|c| (|Fraction| R)) (% (|SparseMultivariatePolynomial| R OV)))

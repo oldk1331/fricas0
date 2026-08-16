@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PRINT;print;OfV;1| ((|x| (|OutputForm|)) (% (|Void|)))
         (SPADCALL |x| (QREFELT % 8))) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GOPT0;maxLevel;LU;1|
         ((|l| (|List| (|GuessOption|)))

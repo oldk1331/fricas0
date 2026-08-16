@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LSMP;hasSolution?;MColB;1| ((A (M)) (|b| (|Col|)) (% (|Boolean|)))
         (EQL (SPADCALL A (QREFELT % 11))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |STREAM2;mapp|
         ((|f| (|Mapping| B A)) (|x| (|Stream| A)) (% (|Stream| B)))

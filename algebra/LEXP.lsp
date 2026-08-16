@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LEXP;ident|
         ((|l1|

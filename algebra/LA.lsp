@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LA;One;%;1| ((% (%)))
         (SPADCALL (|spadConstant| % 8) (|spadConstant| % 9) (QREFELT % 10))) 

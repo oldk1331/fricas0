@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FFFGF;multiplyRows!|
         ((|v| (|Vector| D)) (M (|Matrix| (|SparseUnivariatePolynomial| D)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FFSLPE;solveLinearPolynomialEquation;LFPPU;1|
         ((|lp| (|List| FPP)) (|p| (FPP)) (% (|Union| (|List| FPP) "failed")))

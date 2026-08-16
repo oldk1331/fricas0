@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TSEREXPP;rescale|
         ((|p| (UPS)) (|r0| (|Fraction| (|Integer|)))

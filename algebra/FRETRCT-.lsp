@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FRETRCT-;coerce;IA;1| ((|n| (|Integer|)) (% (A)))
         (SPADCALL (SPADCALL |n| (QREFELT % 9)) (QREFELT % 10))) 

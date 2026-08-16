@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|SCIFS;indexes;%L;1| '|SPADreplace| 'QCAR) 
 

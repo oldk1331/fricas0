@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INTALG;F2UPR| ((|f| (F)) (% (|SparseUnivariatePolynomial| R)))
         (SPADCALL (|INTALG;F2R| |f| %) (QREFELT % 20))) 

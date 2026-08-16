@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TRMANIP;expandTrigProducts;2F;1| ((|e| (F)) (% (F)))
         (SPADCALL (LIST (QREFELT % 29) (QREFELT % 30) (QREFELT % 31)) |e| 10

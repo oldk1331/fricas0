@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |IDECOMP;convertQF|
         ((|a| (|Fraction| (|Integer|)))

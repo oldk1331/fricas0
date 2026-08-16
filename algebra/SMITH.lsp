@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SMITH;test1|
         ((|sm| (M)) (|b| (|Col|)) (|m1| #1=(|Integer|))

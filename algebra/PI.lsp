@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|PI;qcoerce;I%;1| '|SPADreplace| '(XLAM (|n|) |n|)) 
 

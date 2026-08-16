@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NLINSOL;solveInField;LL;1|
         ((|l| (|List| (|Polynomial| R)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FLIOUFUN;gamma;C;1| ((% (|Complex| (|Float|))))
         (SPROG ((|nbits| (|PositiveInteger|)) (|obits| (|Integer|)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RESULT;cleanUpDomainForm| ((|d| (|SExpression|)) (% (|OutputForm|)))
         (SPROG ((#1=#:G14 NIL) (|u| NIL) (#2=#:G13 NIL))

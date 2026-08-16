@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |IMATQF;qfMat| ((|m| (M)) (% (M2)))
         (SPADCALL (ELT % 14) |m| (QREFELT % 17))) 

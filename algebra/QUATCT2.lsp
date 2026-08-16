@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |QUATCT2;map;MQRQS;1| ((|fn| (|Mapping| S R)) (|u| (QR)) (% (QS)))
         (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 10)) |fn|)

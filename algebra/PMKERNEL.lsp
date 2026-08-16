@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PMKERNEL;patternMatchArg|
         ((|ls| (|List| E)) (|lp| (|List| (|Pattern| S)))

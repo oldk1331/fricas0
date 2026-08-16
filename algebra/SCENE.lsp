@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SCENE;createSceneRoot;Sb%;1| ((|bb| (|SBoundary| PT)) (% (%)))
         (VECTOR 'ROOT NIL (CONS 3 |bb|))) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FDIV2;map;MFdFd;1|
         ((|f| (|Mapping| R2 R1)) (|d| (|FiniteDivisor| R1 UP1 UPUP1 F1))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GUESSEB;ord1|
         ((|x| (|List| (|Integer|))) (|i| (|Integer|)) (% (|Integer|)))

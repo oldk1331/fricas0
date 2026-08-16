@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |M3D;matrixConcat3D;S3%;1|
         ((|dir| (|Symbol|)) (|mat1| (%)) (|mat2| (%)) (% (%)))

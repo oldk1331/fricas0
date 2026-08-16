@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PMASS;constant;SE;1| ((|x| (|Symbol|)) (% (|Expression| (|Integer|))))
         (SPADCALL (SPADCALL |x| (QREFELT % 8)) (QREFELT % 10))) 

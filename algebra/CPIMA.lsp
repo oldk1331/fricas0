@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CPIMA;XtoY| ((Q (|PolR|)) (% (|SparseUnivariatePolynomial| |PolR|)))
         (SPADCALL (CONS #'|CPIMA;XtoY!0| %) Q (QREFELT % 17))) 

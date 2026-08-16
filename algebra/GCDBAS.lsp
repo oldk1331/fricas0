@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GCDBAS;gcdBasis;2V;1| ((|v| (|Vector| R)) (% (|Vector| R)))
         (QCAR (SPADCALL |v| (QREFELT % 9)))) 

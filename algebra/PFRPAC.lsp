@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PFRPAC;partialFraction;FSA;1|
         ((|rf| (|Fraction| (|Polynomial| R))) (|v| (|Symbol|)) (% (|Any|)))

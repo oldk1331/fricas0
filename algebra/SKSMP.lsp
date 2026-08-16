@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SKSMP;D;Var%;1| ((|v| (|Var|)) (% (%)))
         (SPADCALL (|spadConstant| % 10) |v| 1 (QREFELT % 13))) 

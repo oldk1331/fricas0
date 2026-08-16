@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|SAOS;create;%;1| '|SPADreplace| '(XLAM NIL "?")) 
 

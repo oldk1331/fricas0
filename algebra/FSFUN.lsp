@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FSFUN;bernoulli_gamma_series|
         ((|z| (|Complex| (|Float|))) (|n| (|Integer|))

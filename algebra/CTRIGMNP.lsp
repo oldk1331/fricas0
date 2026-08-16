@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CTRIGMNP;real;FE;1| ((|f| (F)) (% (|Expression| R)))
         (SPADCALL (SPADCALL |f| (QREFELT % 10)) (QREFELT % 12))) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PMFS;patternMatch;FP2Pmr;1|
         ((|x| (F)) (|p| (|Pattern| S)) (|l| (|PatternMatchResult| S F))

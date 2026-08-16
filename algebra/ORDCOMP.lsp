@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ORDCOMP;convert;%If;1| ((|x| (%)) (% (|InputForm|)))
         (COND ((QEQCAR |x| 0) (SPADCALL (CDR |x|) (QREFELT % 9)))

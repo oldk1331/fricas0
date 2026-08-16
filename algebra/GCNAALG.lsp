@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GCNAALG;eval|
         ((|rf| (|Fraction| (|Polynomial| R))) (|a| (%))

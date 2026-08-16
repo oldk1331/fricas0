@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|SREGSET;rep| '|SPADreplace| '(XLAM (|s|) |s|)) 
 

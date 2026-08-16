@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CARTEN2;reshape;LCtCt;1|
         ((|l| (|List| T$)) (|s| (|CartesianTensor| |minix| |dim| S))

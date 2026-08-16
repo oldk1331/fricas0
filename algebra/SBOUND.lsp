@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|SBOUND;nullBoundary;%;1| '|SPADreplace| '(XLAM NIL (CONS 0 "none"))) 
 

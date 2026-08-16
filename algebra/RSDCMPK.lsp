@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RSDCMPK;KrullNumber;LLNni;1|
         ((|lp| (|List| P)) (|lts| (|List| TS)) (% (|NonNegativeInteger|)))

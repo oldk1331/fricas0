@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LIMITPS;is_exp_log| ((|fcn| (FE)) (|x| (|Symbol|)) (% (|Boolean|)))
         (SPROG

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INTALG2;exp_hermite1|
         ((|f| (R)) (|der| (|Mapping| UP UP))

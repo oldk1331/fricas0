@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DIVRING-;^;SIS;1| ((|x| (S)) (|n| (|Integer|)) (% (S)))
         (COND ((ZEROP |n|) (|spadConstant| % 7))

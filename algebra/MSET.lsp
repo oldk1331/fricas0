@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MSET;elt| ((|t| (|Table| S (|Integer|))) (|s| (S)) (% (|Integer|)))
         (SPROG ((|a| (|Union| (|Integer|) "failed")))

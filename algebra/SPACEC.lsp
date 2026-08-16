@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (DEFPARAMETER |ThreeSpaceCategory;CAT| 'NIL) 
 

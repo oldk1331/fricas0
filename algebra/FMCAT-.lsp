@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FMCAT-;support;AL;1| ((|p| (A)) (% (|List| S)))
         (SPROG ((#1=#:G16 NIL) (|t| NIL) (#2=#:G15 NIL))

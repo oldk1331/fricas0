@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NTPOLFN;cyclotomic;Nni2R;1|
         ((|k| (|NonNegativeInteger|)) (|x| (R)) (% (R)))

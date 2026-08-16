@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PRROOT;get_rational_roots;UPL;1|
         ((|p| (UP)) (% (|List| (|Fraction| (|Integer|)))))

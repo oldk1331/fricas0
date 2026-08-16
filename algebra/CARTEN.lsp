@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CARTEN;sample;%;1| ((% (%))) (SPADCALL (QREFELT % 13))) 
 

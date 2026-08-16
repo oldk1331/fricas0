@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ARRAY12;map;MOdaOda;1|
         ((|f| (|Mapping| B A)) (|v| (|OneDimensionalArray| A))

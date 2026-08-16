@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |AINTCAT-;interval;2RS;1| ((|i| (R)) (|s| (R)) (% (S)))
         (COND

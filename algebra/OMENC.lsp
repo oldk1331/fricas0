@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|OMENC;=;2%B;1| '|SPADreplace| '|eql_SI|) 
 

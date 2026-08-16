@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SOLVESER;unvectorise;VFIF;1|
         ((|vect| (|Vector| (|Expression| R)))

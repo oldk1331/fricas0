@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LODO2;elt;%2M;1| ((|p| (%)) (|m| (M)) (% (M)))
         (SPADCALL |p| (ELT % 9) |m| (QREFELT % 12))) 

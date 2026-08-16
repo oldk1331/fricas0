@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FC;get_assignment|
         ((|name| (|OutputForm|)) (|e| (|OutputForm|))

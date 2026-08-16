@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FPARFRAC;construct;L%;1|
         ((|l|

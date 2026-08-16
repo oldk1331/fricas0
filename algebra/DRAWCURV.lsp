@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DRAWCURV;drawToScaleRanges|
         ((|xVals| (|Segment| (|Float|))) (|yVals| (|Segment| (|Float|)))

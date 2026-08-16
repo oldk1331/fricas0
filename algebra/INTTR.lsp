@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INTTR;logprmderiv|
         ((|f| (|Fraction| UP)) (|derivation| (|Mapping| UP UP))

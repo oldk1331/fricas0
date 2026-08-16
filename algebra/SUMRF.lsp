@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SUMRF;sum;FSbU;1|
         ((|f| (|Fraction| (|Polynomial| R)))

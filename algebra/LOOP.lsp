@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LOOP;loop;L%;1| ((|lis| (|List| (|NonNegativeInteger|))) (% (%)))
         (SPROG

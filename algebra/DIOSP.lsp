@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DIOSP;dioSolve;ER;1|
         ((|eq| (|Equation| (|Polynomial| (|Integer|))))

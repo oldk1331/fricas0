@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |KDAGG-;key?;KeySB;1| ((|k| (|Key|)) (|t| (S)) (% (|Boolean|)))
         (QEQCAR (SPADCALL |k| |t| (QREFELT % 10)) 0)) 

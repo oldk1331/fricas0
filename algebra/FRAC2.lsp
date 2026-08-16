@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FRAC2;map;MFF;1|
         ((|f| (|Mapping| B A)) (|r| (|Fraction| A)) (% (|Fraction| B)))

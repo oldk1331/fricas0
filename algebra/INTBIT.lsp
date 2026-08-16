@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|INTBIT;bitTruth;INniB;1| '|SPADreplace|
      '(XLAM (|n| |i|) (LOGBITP |i| |n|))) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |STREAM;explicitlyEmpty?;%B;1| ((|x| (%)) (% (|Boolean|)))
         (EQ (SPADCALL |x| (QREFELT % 11)) (QREFELT % 7))) 

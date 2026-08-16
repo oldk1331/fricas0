@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |VECTOR2;scan;MVBV;1|
         ((|f| (|Mapping| B A B)) (|v| (|Vector| A)) (|b| (B)) (% (|Vector| B)))

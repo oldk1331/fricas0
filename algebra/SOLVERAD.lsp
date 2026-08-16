@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SOLVERAD;New| ((|s| (|Expression| R)) (% (|Expression| R)))
         (SPROG ((S (|Expression| R)))

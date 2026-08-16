@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NUMTUBE;colinearity|
         ((|x| (|Point| (|DoubleFloat|))) (|y| (|Point| (|DoubleFloat|)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DIAGG-;dictionary;LA;1| ((|l| (|List| S)) (% (A)))
         (SPROG ((|d| (A)) (#1=#:G15 NIL) (|x| NIL))

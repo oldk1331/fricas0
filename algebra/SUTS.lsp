@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|SUTS;makeTerm| '|SPADreplace| 'CONS) 
 

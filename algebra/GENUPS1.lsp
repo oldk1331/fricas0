@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GENUPS1;genStream|
         ((|f| (|Mapping| R (|Integer|))) (|n| (|Integer|)) (% (|Stream| R)))

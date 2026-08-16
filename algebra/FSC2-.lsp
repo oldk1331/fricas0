@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FSC2-;ground?;SB;1| ((|x| (S)) (% (|Boolean|)))
         (QEQCAR (SPADCALL |x| (QREFELT % 19)) 0)) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DRAWPT;draw;LLTdv;1|
         ((|lp| (|List| (|Point| (|DoubleFloat|))))

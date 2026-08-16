@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PATMATCH;ist|
         ((|s| (|Subject|)) (|p| (|Pat|))

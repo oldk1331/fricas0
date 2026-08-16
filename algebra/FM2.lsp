@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FM2;linearExtend;MM1M2;1| ((|f| (|Mapping| M2 S)) (|x| (M1)) (% (M2)))
         (SPROG ((|res| (M2)) (#1=#:G8 NIL) (|t| NIL))

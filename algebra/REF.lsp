@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|REF;=;2%B;1| '|SPADreplace| 'EQ) 
 

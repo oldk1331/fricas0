@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|MKUCFUNC;func| '|SPADreplace|
      '(XLAM (|name| |x|) (FUNCALL |name| |x| NIL))) 

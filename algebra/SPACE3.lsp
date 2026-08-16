@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SPACE3;convertSpace| ((|space| (%)) (% (%)))
         (SPROG

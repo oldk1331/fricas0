@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FFCAT2;map;MF1F2;1| ((|f| (|Mapping| R2 R1)) (|f1| (F1)) (% (F2)))
         (SPADCALL (SPADCALL |f| (SPADCALL |f1| (QREFELT % 14)) (QREFELT % 17))

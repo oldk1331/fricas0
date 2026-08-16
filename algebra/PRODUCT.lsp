@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PRODUCT;coerce;%Of;1| ((|x| (%)) (% (|OutputForm|)))
         (SPADCALL

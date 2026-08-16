@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FPC-;primeFrobenius;2S;1| ((|a| (S)) (% (S)))
         (SPADCALL |a| (SPADCALL (QREFELT % 8)) (QREFELT % 9))) 

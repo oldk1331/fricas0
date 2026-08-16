@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GSTBL;elt;%KeyEntry;1| ((|t| (%)) (|k| (|Key|)) (% (|Entry|)))
         (SPROG ((|u| (|Union| |Entry| "failed")))

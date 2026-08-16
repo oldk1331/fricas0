@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|UTS;stream| '|SPADreplace| '(XLAM (|x|) |x|)) 
 

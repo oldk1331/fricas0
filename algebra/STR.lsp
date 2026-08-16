@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |STR;qelt|
         ((|m| (%)) (|i| (|Integer|)) (|j| (|Integer|)) (% (|DoubleFloat|)))

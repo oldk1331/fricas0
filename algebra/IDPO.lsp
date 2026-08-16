@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |IDPO;coerce;%Of;1| ((|x| (%)) (% (|OutputForm|)))
         (SPROG ((#1=#:G81 NIL) (|t| NIL) (#2=#:G80 NIL))

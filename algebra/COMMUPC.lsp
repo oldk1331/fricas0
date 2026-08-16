@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |COMMUPC;swap;2UPUP;1| ((|poly| (UPUP)) (% (UPUP)))
         (SPROG ((|ans| (UPUP)))

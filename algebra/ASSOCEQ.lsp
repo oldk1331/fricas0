@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ASSOCEQ;makeMatrix|
         ((|v| (|Vector| (|Matrix| R))) (|n| (|NonNegativeInteger|))

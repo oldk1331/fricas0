@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PLEQN;inconsistent?;LB;1| ((|pl| (|List| GR)) (% (|Boolean|)))
         (SPROG ((#1=#:G39 NIL) (#2=#:G40 NIL) (#3=#:G41 NIL) (|p| NIL))

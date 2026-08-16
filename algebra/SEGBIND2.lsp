@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SEGBIND2;map;MSbSb;1|
         ((|f| (|Mapping| S R)) (|b| (|SegmentBinding| R))

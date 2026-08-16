@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (DEFPARAMETER |IntervalCategory;CAT| 'NIL) 
 

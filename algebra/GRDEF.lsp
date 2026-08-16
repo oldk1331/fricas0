@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GRDEF;clipPointsDefault;B;1| ((% (|Boolean|))) (QREFELT % 6)) 
 

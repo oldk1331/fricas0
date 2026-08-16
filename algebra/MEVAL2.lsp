@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MEVAL2;degree;FpSNni;1|
         ((|p| (|FakePolynomial|)) (|s| (|Symbol|)) (% (|NonNegativeInteger|)))

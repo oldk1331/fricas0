@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LINDEP;aNonZeroSolution|
         ((|m| (|Matrix| S)) (% (|Union| (|Vector| S) "failed")))

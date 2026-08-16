@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DISTPOL;eval;DUPSS;1| ((|x| (|Distribution| R)) (|p| (UPS)) (% (S)))
         (SPROG ((|res| (S)))

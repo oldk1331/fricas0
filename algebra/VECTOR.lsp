@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|VECTOR;qelt;%IR;1| '|SPADreplace| '(XLAM (|x| |i|) (QAREF1O |x| |i| 1))) 
 

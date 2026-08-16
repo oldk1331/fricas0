@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |OREPCTO;times;2CAMC;1|
         ((|x| (C)) (|y| (C)) (|sigma| (|Automorphism| R))

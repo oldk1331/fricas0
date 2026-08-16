@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|TREE;empty?;%B;1| '|SPADreplace| '(XLAM (|t|) (QEQCAR |t| 1))) 
 

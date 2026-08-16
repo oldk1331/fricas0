@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |JFRICAS;setFormatsAux!|
         ((|lf| (|List| (|FormatterCategory|))) (% (|Void|)))

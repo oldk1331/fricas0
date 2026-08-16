@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ITUPLE;stream;MS%;1| ((|f| (|Mapping| S S)) (|x| (S)) (% (%)))
         (SPADCALL |f| |x| (QREFELT % 8))) 

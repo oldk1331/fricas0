@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PMPRED;suchThat;SME;1|
         ((|p| (|Symbol|)) (|f| (|Mapping| (|Boolean|) D))

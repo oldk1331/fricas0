@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|LIST;#;%Nni;1| '|SPADreplace| 'LENGTH) 
 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |UPXSCCA-;zero?;SB;1| ((|x| (S)) (% (|Boolean|)))
         (SPADCALL (SPADCALL |x| (QREFELT % 9)) (QREFELT % 11))) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MATHSYM;greek_str| ((|i| (|Integer|)) (% (|String|)))
         (SPROG

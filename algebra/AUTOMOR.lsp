@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |AUTOMOR;One;%;1| ((% (%))) (CONS (|function| |AUTOMOR;ident|) %)) 
 

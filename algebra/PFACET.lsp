@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|PFACET;productFacet;IL%;1| '|SPADreplace| 'CONS) 
 

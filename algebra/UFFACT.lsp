@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |UFFACT;get_deg_GF| ((% (|PositiveInteger|)))
         (SPROG

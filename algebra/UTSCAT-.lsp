@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |UTSCAT-;zero?;SB;1| ((|x| (S)) (% (|Boolean|)))
         (SPROG ((|coefs| (|Stream| |Coef|)))

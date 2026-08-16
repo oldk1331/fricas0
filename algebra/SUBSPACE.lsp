@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SUBSPACE;leaf?;%B;1| ((|space| (%)) (% (|Boolean|)))
         (SPADCALL (SPADCALL |space| (QREFELT % 11)) (QREFELT % 14))) 

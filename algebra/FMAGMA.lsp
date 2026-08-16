@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FMAGMA;=;2%B;1| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
         (COND

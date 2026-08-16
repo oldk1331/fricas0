@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |BTREE;=;2%B;1| ((|t1| (%)) (|t2| (%)) (% (|Boolean|)))
         (SPADCALL |t1| |t2| (QREFELT % 9))) 

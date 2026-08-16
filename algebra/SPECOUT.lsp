@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SPECOUT;juxtaposeTerms|
         ((|l| (|List| (|OutputForm|))) (% (|OutputForm|)))

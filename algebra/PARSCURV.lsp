@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|PARSCURV;curve;3ComponentFunction%;1| '|SPADreplace| 'VECTOR) 
 

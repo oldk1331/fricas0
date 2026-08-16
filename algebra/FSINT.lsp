@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FSINT;K2KG|
         ((|k| (|Kernel| F)) (% (|Kernel| (|Expression| (|Complex| R)))))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INFPROD0;infiniteProduct;2UTS;1| ((|x| (UTS)) (% (UTS)))
         (SPADCALL |x| 1 1 (QREFELT % 11))) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |QUEUE;enqueue!;S%S;1| ((|e| (S)) (|q| (%)) (% (S)))
         (SEQ

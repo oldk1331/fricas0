@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GPOLSET;construct;L%;1| ((|lp| (|List| P)) (% (%)))
         (SPADCALL |lp| (QREFELT % 12))) 

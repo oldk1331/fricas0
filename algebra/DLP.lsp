@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DLP;shanksDiscLogAlgorithm;2MNniU;1|
         ((|logbase| (M)) (|c| (M)) (|p| (|NonNegativeInteger|))

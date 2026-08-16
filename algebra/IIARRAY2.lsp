@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|IIARRAY2;empty;%;1| '|SPADreplace| '(XLAM NIL (MAKE_MATRIX 0 0))) 
 

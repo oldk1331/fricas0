@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PSETPK;removeAssociates| ((|lp| (|List| P)) (% (|List| P)))
         (SPROG ((#1=#:G106 NIL) (|p| NIL) (#2=#:G105 NIL))

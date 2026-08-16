@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GCDDOM-;lcm;3S;1| ((|x| (S)) (|y| (S)) (% (S)))
         (SPROG ((LCM (|Union| S "failed")))

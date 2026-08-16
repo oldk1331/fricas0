@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NEWTON;differences| ((|yl| (|List| F)) (% (|List| F)))
         (SPROG

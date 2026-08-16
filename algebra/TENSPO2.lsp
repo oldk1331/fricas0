@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TENSPO2;linearExtend;MTpM2;1|
         ((|f| (|Mapping| M2 (|List| B))) (|x| (|TensorPower| |n| R B M1))

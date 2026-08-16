@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FORTFORM;assignable_form?| ((|o| (|OutputForm|)) (% (|Boolean|)))
         (SPROG ((|sop| (|Symbol|)) (|op| (|OutputForm|)))

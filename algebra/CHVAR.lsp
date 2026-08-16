@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CHVAR;eval;UPUP2FUPUP;1|
         ((|p| (UPUP)) (|x| (|Fraction| UP)) (|y| (|Fraction| UP)) (% (UPUP)))

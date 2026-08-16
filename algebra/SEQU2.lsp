@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SEQU2;map;MSS;1|
         ((|f| (|Mapping| R2 R1)) (|x| (|Sequence| R1)) (% (|Sequence| R2)))

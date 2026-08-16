@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INTDEN;li_factors|
         ((|df| (|SparseUnivariatePolynomial| F)) (|k| (|Kernel| F))

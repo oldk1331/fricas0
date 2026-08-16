@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INCRMAPS;increment;M;1| ((% (|Mapping| R R)))
         (CONS #'|INCRMAPS;increment;M;1!0| %)) 

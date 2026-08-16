@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DEQUEUE;bottom;%S;1| ((|d| (%)) (% (S)))
         (COND ((SPADCALL |d| (QREFELT % 9)) (|error| "empty dequeue"))

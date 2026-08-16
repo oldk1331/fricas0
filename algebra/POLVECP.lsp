@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |POLVECP;degree;PaI;1|
         ((|v| (|PrimitiveArray| (|PrimeField| |p|))) (% (|Integer|)))

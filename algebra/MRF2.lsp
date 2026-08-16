@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MRF2;map;MMrMr;1|
         ((|fn| (|Mapping| S R)) (|u| (|MonoidRing| R M))

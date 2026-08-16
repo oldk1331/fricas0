@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LAPLACE;laplace;F2SF;1|
         ((|f| (F)) (|t| (|Symbol|)) (|s| (|Symbol|)) (% (F)))

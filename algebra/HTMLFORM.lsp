@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |HTMLFORM;coerce;OfS;1| ((|expr| (|OutputForm|)) (% (|String|)))
         (SEQ

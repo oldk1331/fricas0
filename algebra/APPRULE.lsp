@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |APPRULE;applist|
         ((|lrule| (|List| (|RewriteRule| |Base| R F))) (|arglist| (|List| F))

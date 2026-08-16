@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NORMMA;PolR2SUP|
         ((|q| (|PolR|)) (% (|SparseUnivariatePolynomial| |PolR|)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FDIVCAT-;principal?;SB;1| ((|d| (S)) (% (|Boolean|)))
         (QEQCAR (SPADCALL |d| (QREFELT % 12)) 0)) 

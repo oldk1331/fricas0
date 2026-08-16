@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|AINTRVL;inf;%R;1| '|SPADreplace| 'QCAR) 
 

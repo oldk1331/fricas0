@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ORDFUNS;pureLex;2VB;1|
         ((|v1| (|Vector| S)) (|v2| (|Vector| S)) (% (|Boolean|)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RANDSRC;randnum;I;1| ((% (|Integer|)))
         (SPROG ((|t| (|Integer|)))

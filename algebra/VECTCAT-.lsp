@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |VECTCAT-;+;3S;1| ((|u| (S)) (|v| (S)) (% (S)))
         (COND

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SUP2;map;MSupSup;1|
         ((|f| (|Mapping| S R)) (|p| (|SparseUnivariatePolynomial| R))

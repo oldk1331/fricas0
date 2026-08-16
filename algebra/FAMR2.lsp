@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FAMR2;map;MA1A2;1| ((|f| (|Mapping| R2 R1)) (|a| (A1)) (% (A2)))
         (COND ((SPADCALL |a| (QREFELT % 12)) (|spadConstant| % 13))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LODO3AUX;delta_deriv;2R;1| ((|x| (R)) (% (R)))
         (SPADCALL (SPADCALL (|spadConstant| % 9) 1 (QREFELT % 11))

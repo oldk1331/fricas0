@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ZLINDEP;linearlyDependentOverZ?;VB;1|
         ((|v| (|Vector| R)) (% (|Boolean|))) (SPADCALL |v| (QREFELT % 10))) 

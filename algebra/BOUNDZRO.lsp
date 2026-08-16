@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |BOUNDZRO;integerBound;UPI;1| ((|p| (UP)) (% (|Integer|)))
         (SPADCALL |p| (QREFELT % 10))) 

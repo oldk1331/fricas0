@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|SEG;SEGMENT;2S%;1| '|SPADreplace| '(XLAM (|a| |b|) (VECTOR |a| |b| 1))) 
 

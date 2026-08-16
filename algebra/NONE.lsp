@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NONE;coerce;%Of;1| ((|none| (%)) (% (|OutputForm|)))
         (SPADCALL "NONE" (QREFELT % 8))) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TSEREXP-;taylor_via_deriv;CoefLLPS;1|
         ((|f| (|Coef|)) (|lx| (|List| PS))

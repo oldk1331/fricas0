@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DPOLCAT-;makeVariable;SM;1|
         ((|s| (S)) (% (|Mapping| A (|NonNegativeInteger|))))

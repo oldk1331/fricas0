@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GALPOLYU;factorsOfDegree;PiFL;1|
         ((|d| (|PositiveInteger|)) (|r| (|Factored| UP)) (% (|List| UP)))

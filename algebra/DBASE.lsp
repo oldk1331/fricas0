@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|DBASE;coerce;L%;1| '|SPADreplace| '(XLAM (|u|) |u|)) 
 

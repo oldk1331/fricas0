@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FSPRMELT;F2P|
         ((|f| (F)) (|l| (|List| (|Symbol|))) (% (|Polynomial| F)))

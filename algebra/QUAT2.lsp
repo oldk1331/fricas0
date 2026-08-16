@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |QUAT2;Zero;%;1| ((% (%)))
         (VECTOR (|spadConstant| % 10) (|spadConstant| % 10)

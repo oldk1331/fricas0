@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |BSTREE;binarySearchTree;L%;1| ((|u| (|List| S)) (% (%)))
         (SPROG ((#1=#:G10 NIL) (|x| NIL) (|tree| (%)))

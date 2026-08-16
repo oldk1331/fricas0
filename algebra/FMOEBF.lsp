@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|FMOEBF;rep| '|SPADreplace| '(XLAM (|x|) |x|)) 
 

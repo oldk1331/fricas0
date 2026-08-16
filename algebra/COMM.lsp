@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |COMM;=;2%B;1| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
         (SPROG ((|yy| (P)) (|xx| (P)))

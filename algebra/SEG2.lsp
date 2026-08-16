@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SEG2;map;MSS;1|
         ((|f| (|Mapping| S R)) (|r| (|Segment| R)) (% (|Segment| S)))

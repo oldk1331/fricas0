@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |KERNEL2;constantKernel;RK;1| ((|r| (R)) (% (|Kernel| S)))
         (SPADCALL (SPADCALL |r| (QREFELT % 10)) NIL 1 (QREFELT % 14))) 

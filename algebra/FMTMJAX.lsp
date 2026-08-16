@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FMTMJAX;coerce;%Of;1| ((|x| (%)) (% (|OutputForm|)))
         (|coerceRe2E| |x|

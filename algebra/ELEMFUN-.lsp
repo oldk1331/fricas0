@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ELEMFUN-;^;3S;1| ((|x| (S)) (|y| (S)) (% (S)))
         (SPADCALL (SPADCALL |y| (SPADCALL |x| (QREFELT % 7)) (QREFELT % 8))

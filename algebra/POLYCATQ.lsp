@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |POLYCATQ;univariate;FVF;1|
         ((|f| (F)) (|x| (V)) (% (|Fraction| (|SparseUnivariatePolynomial| F))))

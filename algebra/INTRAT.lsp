@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INTRAT;infieldint;FU;1|
         ((|f| (|Fraction| UP)) (% (|Union| (|Fraction| UP) "failed")))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |BKAFILE;open;FnS%;1| ((|fn| (|FileName|)) (|mode| (|String|)) (% (%)))
         (COND

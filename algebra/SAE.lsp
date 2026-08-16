@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SAE;size;Nni;1| ((% (|NonNegativeInteger|)))
         (EXPT (SPADCALL (QREFELT % 32)) (QREFELT % 17))) 

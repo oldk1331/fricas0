@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MULTFACT;factor;PF;1| ((|p| (P)) (% (|Factored| P)))
         (SPADCALL |p| (QREFELT % 12))) 

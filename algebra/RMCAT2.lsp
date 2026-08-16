@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RMCAT2;map;MM1M2;1| ((|f| (|Mapping| R2 R1)) (|mat| (M1)) (% (M2)))
         (SPROG

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INMODGCD;reduction;BPRBP;1| ((|u| (BP)) (|p| (R)) (% (BP)))
         (SPROG NIL

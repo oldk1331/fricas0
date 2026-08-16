@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |EQ;factorAndSplit;%L;1| ((|eq| (%)) (% (|List| %)))
         (SPROG ((#1=#:G9 NIL) (|rcf| NIL) (#2=#:G8 NIL) (|eq0| (%)))

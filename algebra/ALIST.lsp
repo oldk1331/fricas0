@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ALIST;dictionary;%;1| ((% (%))) (SPADCALL NIL (QREFELT % 11))) 
 

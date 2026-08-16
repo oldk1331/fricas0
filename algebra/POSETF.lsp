@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |POSETF;addDimensionToObjects|
         ((|a| (|List| (|List| S))) (|newObj| (S)) (% (|List| (|List| S))))

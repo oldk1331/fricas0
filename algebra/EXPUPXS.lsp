@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |EXPUPXS;exponential;Ups%;1|
         ((|f| (|UnivariatePuiseuxSeries| FE |var| |cen|)) (% (%)))

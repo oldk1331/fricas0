@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|OMCONN;OMmakeConn;Si%;1| '|SPADreplace| 'OM-MAKECONN) 
 

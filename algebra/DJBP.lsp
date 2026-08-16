@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DJBP;lookup| ((|jv| (JB)) (% (|NonNegativeInteger|)))
         (SPROG

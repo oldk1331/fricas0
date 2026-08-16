@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SMPCOER;convert_sorted|
         ((|p1|

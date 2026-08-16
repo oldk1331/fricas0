@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |XPFACT;my_degree|
         ((|p| (|XDistributedPolynomial| |vl| F)) (% (|Integer|)))

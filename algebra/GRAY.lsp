@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GRAY;firstSubsetGray;PiV;1|
         ((|n| (|PositiveInteger|)) (% (|Vector| (|Vector| (|Integer|)))))

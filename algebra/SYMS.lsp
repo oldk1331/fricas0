@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SYMS;newEntry| ((% (|Entry|)))
         (VECTOR (SPADCALL (QREFELT % 12)) (CONS 1 "void") NIL)) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FINGRP-;order;SI;1| ((|x| (S)) (% (|Integer|)))
         (SPROG ((|y| (S)) (|k| (|Integer|)))

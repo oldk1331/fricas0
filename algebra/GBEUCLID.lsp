@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GBEUCLID;euclideanGroebner;2L;1|
         ((|Pol| (|List| |Dpol|)) (% (|List| |Dpol|)))

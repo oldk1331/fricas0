@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LOGIC-;T$;S;1| ((% (S))) (|spadConstant| % 7)) 
 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FNLA;dimension;Nni;1| ((% (|NonNegativeInteger|)))
         (QVSIZE (QREFELT % 14))) 

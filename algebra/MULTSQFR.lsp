@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MULTSQFR;next_mod| ((|m| (|Integer|)) (% (|Integer|)))
         (SPROG ((#1=#:G26 NIL))

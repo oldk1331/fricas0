@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RATRET;rational;SF;1| ((|s| (S)) (% (|Fraction| (|Integer|))))
         (SPADCALL |s| (QREFELT % 8))) 

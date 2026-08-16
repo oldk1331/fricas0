@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MHROWRED;nonzero?| ((|v| (|Vector| R)) (% (|Boolean|)))
         (SPADCALL (CONS #'|MHROWRED;nonzero?!0| %) |v| (QREFELT % 12))) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LSMP2;solveUniquely;MVU;1|
         ((|m| (|Matrix| S)) (|v| (|Vector| S))

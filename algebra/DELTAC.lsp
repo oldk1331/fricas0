@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DELTAC;dim1todim0|
         ((|dim1| (|List| (|List| (|Integer|)))) (|n| #1=(|NonNegativeInteger|))

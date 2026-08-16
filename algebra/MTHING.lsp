@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MTHING;mergeDifference;3L;1|
         ((|x| (|List| S)) (|y| (|List| S)) (% (|List| S)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PAN2EXPR;coerce;PE;1|
         ((|p| (|Polynomial| (|AlgebraicNumber|)))

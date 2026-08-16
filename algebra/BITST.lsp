@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|BITST;starts;L%;1| '|SPADreplace| 'LIST) 
 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TEXTFILE;read!;%S;1| ((|f| (%)) (% (|String|)))
         (SPADCALL |f| (QREFELT % 8))) 

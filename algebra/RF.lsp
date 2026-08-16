@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RF;coerce;RF;1| ((|r| (R)) (% (|Fraction| (|Polynomial| R))))
         (SPADCALL (SPADCALL |r| (QREFELT % 8)) (QREFELT % 10))) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|HASHSTAT;new;%;1| '|SPADreplace| '(XLAM NIL HASHSTATEBASIS)) 
 

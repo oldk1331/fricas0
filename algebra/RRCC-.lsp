@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RRCC-;zero?;ThePolsSB;1|
         ((|toTest| (|ThePols|)) (|rootChar| (S)) (% (|Boolean|)))

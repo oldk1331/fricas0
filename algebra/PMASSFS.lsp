@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PMASSFS;mkk| ((|op| (|BasicOperator|)) (% (F)))
         (SPADCALL |op| NIL (QREFELT % 10))) 

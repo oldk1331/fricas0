@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ITFUN3;map;MItItIt;1|
         ((|f| (|Mapping| C A B)) (|s1| (|InfiniteTuple| A))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FLOATRP;makeEq|
         ((|nres| (|List| |Par|)) (|lv| (|List| (|Symbol|)))

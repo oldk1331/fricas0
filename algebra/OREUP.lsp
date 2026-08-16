@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |OREUP;coerce;V%;1| ((|v| (|Variable| |x|)) (% (%)))
         (SPADCALL (|spadConstant| % 14) 1 (QREFELT % 16))) 

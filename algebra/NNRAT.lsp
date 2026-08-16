@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NNRAT;sup;3%;1| ((|x| (%)) (|y| (%)) (% (%)))
         (SPADCALL |x| |y| (QREFELT % 10))) 

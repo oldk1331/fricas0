@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |EFULS;nthRootUTS|
         ((|uts| (UTS)) (|n| (|Integer|)) (% (|Union| UTS "failed")))

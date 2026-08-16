@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GROEBSOL;testPower|
         ((|uf|

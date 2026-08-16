@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MINT;maxint;Pi;1| ((% (|PositiveInteger|))) (QREFELT % 6)) 
 

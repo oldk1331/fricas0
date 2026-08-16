@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |BTOURN;binaryTournament;L%;1| ((|u| (|List| S)) (% (%)))
         (SPROG ((#1=#:G8 NIL) (|x| NIL) (|tree| (%)))

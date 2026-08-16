@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FMT1D;coerce;%Of;1| ((|x| (%)) (% (|OutputForm|)))
         (|coerceRe2E| |x|

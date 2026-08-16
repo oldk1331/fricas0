@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DERHAM;totalDifferential;E%;1|
         ((|f| (|Expression| |CoefRing|)) (% (%)))

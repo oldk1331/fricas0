@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SYMTAB;coerce;%Of;1| ((|t| (%)) (% (|OutputForm|)))
         (SPADCALL |t| (QREFELT % 8))) 

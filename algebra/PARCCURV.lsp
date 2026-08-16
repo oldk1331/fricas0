@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|PARCCURV;complex_curve;VT%;1| '|SPADreplace| '(XLAM (|x|) |x|)) 
 

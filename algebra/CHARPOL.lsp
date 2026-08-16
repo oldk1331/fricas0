@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CHARPOL;characteristicPolynomial;M2R;1|
         ((A (|Matrix| R)) (|v| (R)) (% (R)))

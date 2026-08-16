@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TSEREXPT;stream_taylor|
         ((|f| (|Stream| |Coef|)) (|x| (|Stream| |Coef|))

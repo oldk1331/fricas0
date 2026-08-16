@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |VIEW;graphCurves;LGi;1|
         ((|listOfListsOfPoints| (|List| (|List| (|Point| (|DoubleFloat|)))))

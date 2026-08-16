@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INTSLPE;solveLinearPolynomialEquation;LSupU;1|
         ((|lp| (|List| (|SparseUnivariatePolynomial| (|Integer|))))

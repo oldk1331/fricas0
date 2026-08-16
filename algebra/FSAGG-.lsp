@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FSAGG-;<=;2AB;1| ((|s| (A)) (|t| (A)) (% (|Boolean|)))
         (SPADCALL |s| (SPADCALL |s| |t| (QREFELT % 8)) (QREFELT % 10))) 

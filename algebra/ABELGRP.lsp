@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (DECLAIM (NOTINLINE |AbelianGroup;|)) 
 

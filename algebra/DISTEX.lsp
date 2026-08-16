@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DISTEX;gaussianDistribution;RD;1| ((|a| (R)) (% (|Distribution| R)))
         (SPROG ((|cumu| (|Stream| R)))

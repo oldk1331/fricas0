@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DSMP;retractIfCan;%U;1|
         ((|p| (%)) (% (|Union| (|SparseMultivariatePolynomial| R S) "failed")))

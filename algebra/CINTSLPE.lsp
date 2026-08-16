@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CINTSLPE;solveLinearPolynomialEquation;LSupU;1|
         ((|lp| (|List| (|SparseUnivariatePolynomial| CR)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MAMA;element;M2IM;1|
         ((A (M)) (|r| (|Integer|)) (|c| (|Integer|)) (% (M)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|MKRECORD;makeRecord;ST$R;1| '|SPADreplace| 'CONS) 
 

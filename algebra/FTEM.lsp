@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FTEM;fortranLiteralLine;SV;1| ((|s| (|String|)) (% (|Void|)))
         (SEQ (|sayString| |s| (|get_fortran_stream|))

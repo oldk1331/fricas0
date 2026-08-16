@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TESTUNIT;interpretFunction1|
         ((|f| (|Symbol|)) (|info| (|String|)) (|arg| (|String|)) (% (|Any|)))

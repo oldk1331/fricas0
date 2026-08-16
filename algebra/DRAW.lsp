@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DRAW;makeObject;ExSbLGi;1|
         ((|f| (|Ex|)) (|bind| (|SegmentBinding| (|Float|)))

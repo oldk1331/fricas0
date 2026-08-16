@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CKP;setSimpMode;2Nni;1|
         ((|i| (|NonNegativeInteger|)) (% (|NonNegativeInteger|)))

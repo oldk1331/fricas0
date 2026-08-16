@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |IBITS;minIndex;%I;1| ((|u| (%)) (% (|Integer|))) (QREFELT % 6)) 
 

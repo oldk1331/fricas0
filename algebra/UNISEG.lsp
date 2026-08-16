@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |UNISEG;segment;S%;1| ((|a| (S)) (% (%))) (CONS 0 (CONS |a| 1))) 
 

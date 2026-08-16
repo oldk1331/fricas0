@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NUMFMT;replaceD| ((|c| (|Character|)) (% (|Character|)))
         (COND ((|eql_SI| |c| (|STR_to_CHAR| "D")) (|STR_to_CHAR| "E"))

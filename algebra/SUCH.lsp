@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|SUCH;construct;S1S2%;1| '|SPADreplace| 'CONS) 
 

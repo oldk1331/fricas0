@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DISPLAY;bright;SL;1| ((|s| (|String|)) (% (|List| (|String|))))
         (LIST (QREFELT % 6) |s| (QREFELT % 7))) 

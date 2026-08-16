@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |COMPCODE;genCatHeader|
         ((|shortName| (|String|)) (|longName| (|String|))

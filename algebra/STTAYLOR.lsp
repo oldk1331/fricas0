@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |STTAYLOR;zro| ((% (|Stream| A))) (SPADCALL (QREFELT % 8))) 
 

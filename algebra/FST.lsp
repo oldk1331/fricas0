@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FST;=;2%B;1| ((|u| (%)) (|v| (%)) (% (|Boolean|)))
         (SEQ (COND ((QEQCAR |u| 0) (COND ((QEQCAR |v| 0) (EXIT 'T)))))

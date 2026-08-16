@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RETRACT-;retract;AS;1| ((|s| (A)) (% (S)))
         (SPROG ((|u| (|Union| S "failed")))

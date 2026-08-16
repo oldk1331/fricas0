@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CYCLES;trm|
         ((|pt| (|Partition|))

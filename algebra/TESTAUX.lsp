@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TESTAUX;nPassInc|
         ((|s| (|String|)) (|o| (|List| (|OutputForm|))) (% (|Void|)))

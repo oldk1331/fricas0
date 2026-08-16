@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TEMUTL;stripC| ((|s| (|String|)) (|u| (|String|)) (% (|String|)))
         (SPROG ((|i| (|Integer|)))

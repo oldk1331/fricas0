@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GOPT;maxLevel;U%;1|
         ((|d| (|Union| (|NonNegativeInteger|) "arbitrary")) (% (%)))

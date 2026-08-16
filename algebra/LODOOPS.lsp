@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LODOOPS;vec2LODO| ((|v| (|Vector| A)) (% (L)))
         (SPROG

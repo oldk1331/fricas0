@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RIDIST;uniform;SM;1|
         ((|aTob| (|Segment| (|Integer|))) (% (|Mapping| (|Integer|))))

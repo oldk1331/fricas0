@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PERM;smallerElement?| ((|a| (S)) (|b| (S)) (% (|Boolean|)))
         (COND

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|AGG-;eq?;2SB;1| '|SPADreplace| 'EQ) 
 

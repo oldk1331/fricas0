@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GBINTERN;virtualDegree;DpolNni;1|
         ((|p| (|Dpol|)) (% (|NonNegativeInteger|)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FRNAAF2;map;MARAS;1| ((|fn| (|Mapping| S R)) (|u| (AR)) (% (AS)))
         (SPROG

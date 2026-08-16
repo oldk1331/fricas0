@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PWFFINTB;reducedDiscriminant;UPR;1| ((|f| (UP)) (% (R)))
         (SPROG

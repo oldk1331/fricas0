@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TS;polynomial;%NniP;1|
         ((|s| (%)) (|n| (|NonNegativeInteger|)) (% (|Polynomial| |Coef|)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NAALG-;plenaryPower;SPiS;1|
         ((|a| (S)) (|n| (|PositiveInteger|)) (% (S)))

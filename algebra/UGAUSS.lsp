@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |UGAUSS;pre_gauss0|
         ((|m| (|Matrix| (|Integer|))) (|pivotsj| (|Vector| (|Integer|)))

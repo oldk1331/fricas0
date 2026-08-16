@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RDEEFX2;do_param_RDE;2FLSLU;1|
         ((|f| (F)) (|h| (F)) (|lg| (|List| F)) (|x| (|Symbol|))

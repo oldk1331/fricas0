@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |QALGSET2;f|
         ((|v| (|OrderedVariableList| |vl|))

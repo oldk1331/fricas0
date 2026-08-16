@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RESLATC;coerce;SV;1| ((|s| (S)) (% (|Void|))) (SPADCALL (QREFELT % 8))) 
 

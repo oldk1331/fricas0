@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |OREMAT;rowEchelon;2M;1| ((|m| (|Matrix| LO)) (% (|Matrix| LO)))
         (QCAR (SPADCALL |m| (|spadConstant| % 8) NIL (QREFELT % 13)))) 

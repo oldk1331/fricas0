@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INTRET;integer;SI;1| ((|s| (S)) (% (|Integer|)))
         (SPADCALL |s| (QREFELT % 8))) 

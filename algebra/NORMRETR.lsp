@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NORMRETR;normFactors;ExtPL;1| ((|p| (|ExtP|)) (% (|List| |ExtP|)))
         (SPROG ((|facs| (|List| |ExtP|)) (#1=#:G6 NIL) (#2=#:G7 NIL) (|i| NIL))

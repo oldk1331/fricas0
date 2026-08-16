@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ALGFF;branchPointAtInfinity?;B;1| ((% (|Boolean|)))
         (SEQ (COND ((QREFELT % 10) (|ALGFF;startUp| NIL %)))

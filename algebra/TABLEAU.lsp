@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|TABLEAU;tableau;L%;1| '|SPADreplace| '(XLAM (|lls|) |lls|)) 
 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SHP;delta| ((|int1| (|NonNegativeInteger|)) (% (R)))
         (SPROG ((#1=#:G17 NIL))

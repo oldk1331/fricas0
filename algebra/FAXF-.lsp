@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FAXF-;represents;VS;1| ((|v| (|Vector| F)) (% (S)))
         (SPROG ((|a| (S)) (#1=#:G19 NIL) (|i| NIL) (|b| (|Vector| S)))

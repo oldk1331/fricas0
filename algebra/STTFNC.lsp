@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |STTFNC;exp;2S;1| ((|z| (|Stream| |Coef|)) (% (|Stream| |Coef|)))
         (SPROG ((|expx| (|Stream| |Coef|)))

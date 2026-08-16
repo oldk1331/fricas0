@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ANY1;retractable?;AB;1| ((|a| (|Any|)) (% (|Boolean|)))
         (SPADCALL (SPADCALL |a| (QREFELT % 10)) (QREFELT % 7) (QREFELT % 12))) 

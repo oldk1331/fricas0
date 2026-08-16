@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |URAGG-;elt;AfirstS;1| ((|x| (A)) (T3 ("first")) (% (S)))
         (SPADCALL |x| (QREFELT % 8))) 

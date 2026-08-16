@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PCDEN;commonDenominator;PR;1| ((|p| (P)) (% (R)))
         (SPADCALL (SPADCALL |p| (QREFELT % 12)) (QREFELT % 14))) 

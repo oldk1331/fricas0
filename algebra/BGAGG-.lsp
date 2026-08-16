@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |BGAGG-;construct;LA;1| ((|l| (|List| S)) (% (A)))
         (SPROG ((|x| (A)) (#1=#:G11 NIL) (|s| NIL))

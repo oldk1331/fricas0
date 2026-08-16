@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DISTRO2;mapall;MDD;1|
         ((|f| (|Mapping| R2 R1)) (|x| (|Distribution| R1))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |UPSQFREE;squareFreePart;2P;1| ((|p| (P)) (% (P)))
         (SPROG ((#1=#:G14 NIL))

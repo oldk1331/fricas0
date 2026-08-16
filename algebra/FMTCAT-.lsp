@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|FMTCAT-;minPrecedence;I;1| '|SPADreplace| '(XLAM NIL 0)) 
 

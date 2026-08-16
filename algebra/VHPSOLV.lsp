@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |VHPSOLV;power_action|
         ((|m| (|NonNegativeInteger|))

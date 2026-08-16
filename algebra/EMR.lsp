@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |EMR;divide;2%R;1|
         ((|x| (%)) (|y| (%))

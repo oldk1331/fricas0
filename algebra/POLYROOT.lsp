@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |POLYROOT;zroot|
         ((|x| (|Integer|)) (|n| (|NonNegativeInteger|))

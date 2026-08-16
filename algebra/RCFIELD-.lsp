@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RCFIELD-;sqrt;2S;1| ((|a| (S)) (% (S))) (SPADCALL |a| 2 (QREFELT % 8))) 
 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FPS-;float;2IS;1| ((|ma| (|Integer|)) (|ex| (|Integer|)) (% (S)))
         (SPADCALL |ma| |ex| (SPADCALL (QREFELT % 8)) (QREFELT % 10))) 

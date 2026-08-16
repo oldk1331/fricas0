@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |EAB;=;2%B;1| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
         (SPADCALL |x| |y| (QREFELT % 8))) 

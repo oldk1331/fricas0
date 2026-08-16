@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|INS-;characteristic;Nni;1| '|SPADreplace| '(XLAM NIL 0)) 
 

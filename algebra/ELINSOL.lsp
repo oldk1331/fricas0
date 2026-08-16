@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ELINSOL;lin_coeff|
         ((|x| (|SparseMultivariatePolynomial| R (|Kernel| F)))

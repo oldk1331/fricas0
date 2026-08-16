@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FLAGG2;reduce;MA2R;1|
         ((|fn| (|Mapping| R S R)) (|l| (A)) (|ident| (R)) (% (R)))

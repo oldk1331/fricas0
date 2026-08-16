@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SYMBOL;writeOMSym| ((|dev| (|OpenMathDevice|)) (|x| (%)) (% (|Void|)))
         (COND

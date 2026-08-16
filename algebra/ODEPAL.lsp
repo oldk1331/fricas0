@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ODEPAL;rat_solve|
         ((|l| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP)))

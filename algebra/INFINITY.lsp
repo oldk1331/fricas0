@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INFINITY;infinity;Opc;1| ((% (|OnePointCompletion| (|Integer|))))
         (SPADCALL (QREFELT % 7))) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FR;convert;%If;1| ((|x| (%)) (% (|InputForm|)))
         (SPROG

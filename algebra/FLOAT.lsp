@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FLOAT;writeOMFloat|
         ((|dev| (|OpenMathDevice|)) (|x| (%)) (% (|Void|)))

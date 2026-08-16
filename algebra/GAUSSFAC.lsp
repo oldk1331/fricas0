@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GAUSSFAC;reduction|
         ((|u| (|Integer|)) (|p| (|Integer|)) (% (|Integer|)))

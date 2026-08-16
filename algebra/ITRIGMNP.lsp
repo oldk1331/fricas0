@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ITRIGMNP;GR2F| ((|g| (|Complex| R)) (% (F)))
         (SPADCALL (SPADCALL (SPADCALL |g| (QREFELT % 11)) (QREFELT % 12))

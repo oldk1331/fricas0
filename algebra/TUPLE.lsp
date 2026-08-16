@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TUPLE;coerce;Pa%;1| ((|x| (|PrimitiveArray| S)) (% (%)))
         (CONS (QVSIZE |x|) |x|)) 

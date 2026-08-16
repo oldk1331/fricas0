@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PSETCAT-;elements| ((|ps| (S)) (% (|List| P)))
         (SPROG ((|lp| (|List| P))) (LETT |lp| (SPADCALL |ps| (QREFELT % 12))))) 

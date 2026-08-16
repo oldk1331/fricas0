@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FFP;generator;%;1| ((% (%)))
         (SPADCALL (SPADCALL (|spadConstant| % 30) 1 (QREFELT % 31))

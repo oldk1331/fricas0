@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DEFINTEF;innerint;FS2OcBU;1|
         ((|f| (F)) (|x| (|Symbol|)) (|a| (|OrderedCompletion| F))

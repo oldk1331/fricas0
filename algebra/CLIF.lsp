@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CLIF;characteristic;Nni;1| ((% (|NonNegativeInteger|)))
         (SPADCALL (QREFELT % 22))) 

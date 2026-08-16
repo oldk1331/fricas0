@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CVMP;imbedFP| ((|r| (R)) (% (|Fraction| (|Polynomial| R))))
         (SPADCALL (SPADCALL |r| (QREFELT % 8)) (QREFELT % 10))) 

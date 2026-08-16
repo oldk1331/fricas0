@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TMFORM;CorkFunc| ((% (|HashTable| (|SingleInteger|) (|String|) "EQ")))
         (SPADCALL

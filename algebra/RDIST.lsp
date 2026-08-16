@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RDIST;weighted;LM;1|
         ((|lvw| (|List| (|Record| (|:| |value| S) (|:| |weight| (|Integer|)))))

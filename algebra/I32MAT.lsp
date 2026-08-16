@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|I32MAT;minRowIndex;%I;1| '|SPADreplace| '(XLAM (|x|) 0)) 
 

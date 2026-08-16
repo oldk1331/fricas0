@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |XF-;algebraic?;SB;1| ((|a| (S)) (% (|Boolean|)))
         (NULL (SPADCALL (SPADCALL |a| (QREFELT % 9)) (QREFELT % 11)))) 

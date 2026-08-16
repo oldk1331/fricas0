@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INTTOOLS;union;3L;1|
         ((|l1| (|List| (|Kernel| F))) (|l2| (|List| (|Kernel| F)))

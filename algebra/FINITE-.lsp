@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FINITE-;random;S;1| ((% (S)))
         (SPROG ((#1=#:G6 NIL))

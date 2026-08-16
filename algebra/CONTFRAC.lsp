@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CONTFRAC;reducedForm;2%;1| ((|c| (%)) (% (%)))
         (COND ((QCDR |c|) |c|)

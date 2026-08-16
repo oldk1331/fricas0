@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LPEFRAC;pullback|
         ((|pF| (|SparseUnivariatePolynomial| (|Fraction| R)))

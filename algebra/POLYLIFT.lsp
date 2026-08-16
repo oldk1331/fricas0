@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |POLYLIFT;map;MMPS;1|
         ((|fv| (|Mapping| S |Vars|)) (|fc| (|Mapping| S R)) (|p| (P)) (% (S)))

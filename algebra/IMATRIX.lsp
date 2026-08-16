@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |IMATRIX;swapRows!;%2I%;1|
         ((|x| (%)) (|i1| #1=(|Integer|)) (|i2| #1#) (% (%)))

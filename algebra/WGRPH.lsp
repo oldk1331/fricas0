@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |WGRPH;weightedGraph;L%;1| ((|ob| (|List| S)) (% (%)))
         (SPROG

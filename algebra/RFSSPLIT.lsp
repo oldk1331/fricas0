@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RFSSPLIT;alg_split_root0;FKIL;1|
         ((|f| (F)) (|r| (|Kernel| F)) (|n| (|Integer|)) (% (|List| F)))

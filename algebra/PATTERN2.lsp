@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PATTERN2;map;MPP;1|
         ((|f| (|Mapping| S R)) (|p| (|Pattern| R)) (% (|Pattern| S)))

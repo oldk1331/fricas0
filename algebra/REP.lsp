@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |REP;evalvect|
         ((|vect| (|Matrix| (|Fraction| (|Polynomial| (|Integer|)))))

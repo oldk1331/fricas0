@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TRANFUN-;pi;S;1| ((% (S)))
         (SPADCALL 2 (SPADCALL (|spadConstant| % 7) (QREFELT % 8))

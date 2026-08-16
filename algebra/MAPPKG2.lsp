@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MAPPKG2;const;CM;1| ((|c| (C)) (% (|Mapping| C A)))
         (SPROG NIL (CONS #'|MAPPKG2;const;CM;1!0| (VECTOR % |c|)))) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |KOVACIC;kovacic;3FU;1|
         ((|a0| (|Fraction| UP)) (|a1| (|Fraction| UP)) (|a2| (|Fraction| UP))

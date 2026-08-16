@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|SETLAT;subsetLattice;L%;1| '|SPADreplace| '(XLAM (|obj|) |obj|)) 
 

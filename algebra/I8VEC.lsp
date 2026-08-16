@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|I8VEC;#;%Nni;1| '|SPADreplace| 'QV_LEN_I8) 
 

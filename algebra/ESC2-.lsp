@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ESC2-;box;2S;1| ((|x| (S)) (% (S)))
         (SPADCALL (QREFELT % 14) (LIST |x|) (QREFELT % 16))) 

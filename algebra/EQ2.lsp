@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |EQ2;map;MEE;1|
         ((|fn| (|Mapping| R S)) (|eqn| (|Equation| S)) (% (|Equation| R)))

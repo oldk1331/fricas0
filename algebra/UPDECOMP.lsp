@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |UPDECOMP;rightFactorIfCan0|
         ((|p| (UP)) (|dq| (|NonNegativeInteger|)) (|n| (|NonNegativeInteger|))

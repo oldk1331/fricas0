@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |OMPKG;OMunhandledSymbol;2SE;1|
         ((|u| (|String|)) (|v| (|String|)) (% (|Exit|)))

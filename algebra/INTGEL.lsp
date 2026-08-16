@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INTGEL;R_to_F| ((|f| (R)) (% (|Union| F "failed")))
         (SPROG

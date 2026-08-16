@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DROPT0;adaptive;L2B;1|
         ((|l| (|List| (|DrawOption|))) (|s| (|Boolean|)) (% (|Boolean|)))

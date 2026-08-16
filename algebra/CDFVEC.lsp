@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|CDFVEC;qelt;%IC;1| '|SPADreplace| 'CDELT) 
 

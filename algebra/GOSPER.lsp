@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GOSPER;deg0|
         ((|p| (|SparseMultivariatePolynomial| (|Fraction| (|Integer|)) V))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |XRPOLY;=;2%B;1| ((|p1| (%)) (|p2| (%)) (% (|Boolean|)))
         (COND

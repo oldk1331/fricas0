@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FSRED;newReduc;IV;1| ((|n| (|Integer|)) (% (|Void|)))
         (SPROG ((#1=#:G5 NIL) (|k| NIL))

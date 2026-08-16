@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FLOATCP;complexRoots;FParL;1|
         ((|q| (|Fraction| (|Polynomial| (|Complex| (|Integer|)))))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|SEGBIND;equation;SS%;1| '|SPADreplace| 'CONS) 
 

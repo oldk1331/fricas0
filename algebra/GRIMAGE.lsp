@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GRIMAGE;numberCheck| ((|nums| (|Point| (|DoubleFloat|))) (% (|Void|)))
         (SPROG ((#1=#:G23 NIL) (#2=#:G19 NIL) (#3=#:G24 NIL) (|i| NIL))

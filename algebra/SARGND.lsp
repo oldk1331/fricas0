@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|SARGND;spnt;2Df%;1| '|SPADreplace| 'CONS) 
 

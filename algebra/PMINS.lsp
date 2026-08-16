@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PMINS;patternMatch;IP2Pmr;1|
         ((|x| (I)) (|p| (|Pattern| (|Integer|)))

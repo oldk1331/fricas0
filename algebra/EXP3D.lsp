@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |EXP3D;faceIndex|
         ((|subSp| (|SubSpace| 3 (|DoubleFloat|)))

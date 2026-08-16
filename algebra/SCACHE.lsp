@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SCACHE;expandCache| ((|x| (S)) (% (|Void|)))
         (SPROG ((#1=#:G17 NIL) (|k| NIL) (|ocache| (|PrimitiveArray| S)))

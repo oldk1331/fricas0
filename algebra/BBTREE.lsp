@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |BBTREE;setleaves!;%L%;1| ((|t| (%)) (|u| (|List| S)) (% (%)))
         (SPROG

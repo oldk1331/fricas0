@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |QCMPACK;squareFreeFactors| ((|lp| (|List| P)) (% (|List| P)))
         (SPROG

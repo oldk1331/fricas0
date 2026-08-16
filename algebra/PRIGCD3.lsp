@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PRIGCD3;lcx0;SmpLR;1|
         ((|p| (|SparseMultivariatePolynomial| (|Integer|) (|Symbol|)))

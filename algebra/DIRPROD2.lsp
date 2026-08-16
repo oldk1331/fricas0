@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DIRPROD2;map;MDpDp;1|
         ((|f| (|Mapping| B A)) (|v| (|DirectProduct| |dim| A))

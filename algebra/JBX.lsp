@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |JBX;coerce;JB%;1| ((|jv| (JB)) (% (%)))
         (COND

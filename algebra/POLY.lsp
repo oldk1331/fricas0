@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |POLY;coerce;%Of;1| ((|p| (%)) (% (|OutputForm|)))
         (SPROG ((|a| (|Symbol|)) (#1=#:G4 NIL) (|r| (|Union| R "failed")))

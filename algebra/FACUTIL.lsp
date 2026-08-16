@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FACUTIL;lowerPolynomial;SupSup;1|
         ((|f| (|SparseUnivariatePolynomial| P))

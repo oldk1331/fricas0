@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MKFUNC;function;S2S;1| ((|s| (S)) (|name| (|Symbol|)) (% (|Symbol|)))
         (SPADCALL |s| |name| NIL (QREFELT % 9))) 

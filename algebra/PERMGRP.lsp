@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PERMGRP;shortenWord|
         ((|lw| (|List| (|NonNegativeInteger|))) (|gp| (%))

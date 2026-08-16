@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |VIEW2D;checkViewport| ((|viewport| (%)) (% (|Boolean|)))
         (SPROG ((|i| (|Integer|)))

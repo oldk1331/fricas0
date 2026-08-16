@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |EFGUSER;apply_taylor1|
         ((|ft| (|Mapping| (|Stream| |Coef|) (|Stream| |Coef|))) (|x| (PS))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PNTHEORY;MonicQuotient|
         ((|a| (|SparseUnivariatePolynomial| (|Integer|)))

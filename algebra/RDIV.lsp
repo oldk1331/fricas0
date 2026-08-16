@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RDIV;order;FdUPUPMNni;1|
         ((|d| (|FiniteDivisor| F1 UP UPUP R)) (|pp| (UPUP))

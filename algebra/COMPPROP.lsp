@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|COMPPROP;closed?;%B;1| '|SPADreplace| 'QCAR) 
 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |IBACHIN;applyFrobToMatrix|
         ((|mat| (|Matrix| R)) (|q| (|NonNegativeInteger|)) (% (|Matrix| R)))

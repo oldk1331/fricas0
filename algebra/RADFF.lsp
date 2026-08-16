@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RADFF;discriminant;F;1| ((% (|Fraction| UP)))
         (SEQ (COND ((QREFELT % 17) (|RADFF;startUp| NIL %)))

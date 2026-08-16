@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|CHAR;=;2%B;1| '|SPADreplace| '|eql_SI|) 
 

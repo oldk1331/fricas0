@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ZMOD;size;Nni;1| ((% (|NonNegativeInteger|))) (QREFELT % 6)) 
 

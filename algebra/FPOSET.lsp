@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|FPOSET;finitePoset;LL%;1| '|SPADreplace| 'CONS) 
 

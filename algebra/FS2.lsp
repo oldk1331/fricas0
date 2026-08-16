@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FS2;smpmap|
         ((|fn| (|Mapping| S R))

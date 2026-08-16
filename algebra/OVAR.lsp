@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |OVAR;convert;%S;1| ((|s1| (%)) (% (|Symbol|)))
         (SPADCALL (QREFELT % 6) |s1| (QREFELT % 12))) 

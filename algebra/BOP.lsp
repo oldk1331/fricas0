@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |BOP;is?;%SB;1| ((|op| (%)) (|s| (|Symbol|)) (% (|Boolean|)))
         (EQUAL (SPADCALL |op| (QREFELT % 13)) |s|)) 

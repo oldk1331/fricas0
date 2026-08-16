@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|UPXS;getExpon| '|SPADreplace| 'QCAR) 
 

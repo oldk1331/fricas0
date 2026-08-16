@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|TEXTREE;group;L%;1| '|SPADreplace| '(XLAM (|l|) (CONS 0 |l|))) 
 

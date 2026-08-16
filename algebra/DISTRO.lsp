@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|DISTRO;rep| '|SPADreplace| '(XLAM (|x|) |x|)) 
 

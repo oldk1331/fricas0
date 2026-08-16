@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |COLOR;*;Df2%;1| ((|f| (|DoubleFloat|)) (|c| (%)) (% (%)))
         (COND ((|zero?_DF| |f|) |c|)

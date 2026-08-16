@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MPCPF;push_up|
         ((|p| (|Polynomial| R)) (|nvars| (|List| (|Symbol|)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RDEEFX;top_kernel|
         ((|f| (F)) (|g| (F)) (|x| (|Symbol|)) (% (|Kernel| F)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LPOLY;eval1|
         ((|lw| (|LyndonWord| |VarSet|)) (|v| (|VarSet|)) (|nv| (%)) (% (%)))

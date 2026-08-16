@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MAGCDT2;pack_modulus;LLIU;1|
         ((|lm| (|List| (|Polynomial| (|Integer|)))) (|lvz| (|List| (|Symbol|)))

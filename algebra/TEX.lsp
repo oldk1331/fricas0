@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TEX;getDialect;S;1| ((% (|Symbol|))) (QREFELT % 7)) 
 

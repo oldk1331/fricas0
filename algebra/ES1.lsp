@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ES1;map;MSKS;1|
         ((F2S (|Mapping| S F)) (|prop| (|Symbol|)) (|k| (|Kernel| F)) (% (S)))

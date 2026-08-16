@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PARTPERM;partitions;3IS;1|
         ((M (|Integer|)) (N (|Integer|)) (|n| (|Integer|))

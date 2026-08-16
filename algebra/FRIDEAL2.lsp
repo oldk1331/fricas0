@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FRIDEAL2;fmap| ((|f| (|Mapping| F2 F1)) (|a| (A1)) (% (A2)))
         (SPROG

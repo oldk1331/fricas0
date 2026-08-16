@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LF;Si;2F;1| ((|x| (F)) (% (F)))
         (SPADCALL (QREFELT % 21) |x| (QREFELT % 30))) 

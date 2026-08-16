@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|MSYSCMD;systemCommand;SV;1| '|SPADreplace| '|doSystemCommand|) 
 

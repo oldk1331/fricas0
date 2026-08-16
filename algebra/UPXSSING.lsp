@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |UPXSSING;retractIfCan;%U;1|
         ((|f| (%))

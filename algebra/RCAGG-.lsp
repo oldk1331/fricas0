@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RCAGG-;elt;AvalueS;1| ((|x| (A)) (T3 ("value")) (% (S)))
         (SPADCALL |x| (QREFELT % 8))) 

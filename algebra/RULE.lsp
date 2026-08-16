@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|RULE;pattern;%P;1| '|SPADreplace| '(XLAM (|x|) (QVELT |x| 0))) 
 

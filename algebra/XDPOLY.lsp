@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |XDPOLY;mindegTerm;%R;1|
         ((|p| (%)) (% (|Record| (|:| |k| (|FreeMonoid| |vl|)) (|:| |c| R))))

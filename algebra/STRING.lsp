@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|STRING;ucodeToString;I%;1| '|SPADreplace| 'NUM2USTR) 
 

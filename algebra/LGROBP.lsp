@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LGROBP;reduceRow|
         ((M (|Matrix| F)) (|v| (|Vector| F)) (|lastRow| (|Integer|))

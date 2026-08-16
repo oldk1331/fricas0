@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|PRIMARR;#;%Nni;1| '|SPADreplace| 'QVSIZE) 
 

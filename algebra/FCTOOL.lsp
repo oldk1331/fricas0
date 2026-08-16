@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FCTOOL;newFortranTempVar;S;1| ((% (|Symbol|)))
         (SPROG ((|def_type| (|Symbol|)) (|new_sym| (|Symbol|)))

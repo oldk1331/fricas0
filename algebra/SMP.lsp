@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SMP;Zero;%;1| ((% (%))) (CONS 0 (|spadConstant| % 11))) 
 

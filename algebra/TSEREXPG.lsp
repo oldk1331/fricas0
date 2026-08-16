@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TSEREXPG;stream_taylor|
         ((|f| (UPS)) (|x| (UPS)) (|xn| (UPS)) (|d| (|Mapping| UPS UPS))

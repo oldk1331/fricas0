@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|FINLAT;finiteLattice;Nni%;1| '|SPADreplace| '(XLAM (|index|) |index|)) 
 

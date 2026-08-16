@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NUMQUAD;aromberg;M4F3IR;1|
         ((|func| (|Mapping| F F)) (|a| (F)) (|b| (F)) (|epsrel| (F))

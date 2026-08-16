@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PATLRES;new;%;1| ((% (%)))
         (CONS (SPADCALL (QREFELT % 11)) (SPADCALL (QREFELT % 13)))) 

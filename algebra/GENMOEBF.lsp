@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|GENMOEBF;rep| '|SPADreplace| '(XLAM (|x|) |x|)) 
 

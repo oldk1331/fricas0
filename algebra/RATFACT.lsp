@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RATFACT;factor;RPF;1| ((|p| (RP)) (% (|Factored| RP)))
         (SPROG

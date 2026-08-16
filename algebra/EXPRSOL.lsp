@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |EXPRSOL;replaceDiffs;FBoSF;1|
         ((|expr| (F)) (|op| (|BasicOperator|)) (|sy| (|Symbol|)) (% (F)))

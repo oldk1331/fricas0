@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FLOOPS;plus;3R;1|
         ((|x|

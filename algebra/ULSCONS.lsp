@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|ULSCONS;getExpon| '|SPADreplace| 'QCAR) 
 

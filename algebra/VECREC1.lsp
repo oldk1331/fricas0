@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |VECREC1;empty;2I%;1|
         ((|npoly| (|Integer|)) (|np| (|Integer|)) (% (%)))

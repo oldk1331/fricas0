@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FSCINTA;internalIntegrate;FGSIr;1|
         ((|f| (FG)) (|x| (|Symbol|)) (% (|IntegrationResult| FG)))

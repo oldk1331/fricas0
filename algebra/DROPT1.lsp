@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DROPT1;option;LSU;1|
         ((|l| (|List| (|DrawOption|))) (|s| (|Symbol|))

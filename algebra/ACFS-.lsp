@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ACFS-;rootOf;2S;1| ((|p| (S)) (% (S)))
         (SPROG ((|l| (|List| (|Symbol|))))

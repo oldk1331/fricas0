@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|KERNEL;operator;%Bo;1| '|SPADreplace| 'SPAD_KERNEL-OP) 
 

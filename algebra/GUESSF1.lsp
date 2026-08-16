@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GUESSF1;F2EXPRR;FE;1| ((|p| (F)) (% (|Expression| (|Integer|))))
         (SPADCALL (SPADCALL |p| (QREFELT % 8)) (QREFELT % 10))) 

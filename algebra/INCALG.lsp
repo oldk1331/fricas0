@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INCALG;incidenceAlgebra;MOda%;1|
         ((|Ai| (|Matrix| R)) (|ssa| (|OneDimensionalArray| S)) (% (%)))

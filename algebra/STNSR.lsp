@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |STNSR;tensorMap;SMS;1|
         ((|s| (|Stream| R)) (|f| (|Mapping| (|List| R) R)) (% (|Stream| R)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |BALFACT;balancedFactorisation;2UPF;1|
         ((|a| (UP)) (|b| (UP)) (% (|Factored| UP)))

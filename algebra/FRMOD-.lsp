@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FRMOD-;convert;SV;1| ((|x| (S)) (% (|Vector| R)))
         (SPADCALL |x| (QREFELT % 9))) 

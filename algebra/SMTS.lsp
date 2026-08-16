@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|SMTS;coefficients;%S;1| '|SPADreplace| '(XLAM (|s|) |s|)) 
 

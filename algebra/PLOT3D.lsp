@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PLOT3D;point|
         ((|xx| (|DoubleFloat|)) (|yy| (|DoubleFloat|)) (|zz| (|DoubleFloat|))

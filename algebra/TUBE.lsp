@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|TUBE;getCurve;%Curve;1| '|SPADreplace| '(XLAM (|plot|) (QVELT |plot| 0))) 
 

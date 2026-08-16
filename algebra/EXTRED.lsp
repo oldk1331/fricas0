@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|EXTRED;polynomial| '|SPADreplace| '(XLAM (|x|) (QVELT |x| 0))) 
 

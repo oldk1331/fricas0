@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|INFCG;rep| '|SPADreplace| '(XLAM (|x|) |x|)) 
 

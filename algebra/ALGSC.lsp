@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ALGSC;listOfTerms;%L;1|
         ((|x| (%))

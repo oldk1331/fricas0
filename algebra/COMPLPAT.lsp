@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |COMPLPAT;convert;CSP;1| ((|cs| (CS)) (% (|Pattern| R)))
         (COND

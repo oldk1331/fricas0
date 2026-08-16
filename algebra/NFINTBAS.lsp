@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NFINTBAS;frobMatrix|
         ((|rb| (|Matrix| (|Integer|))) (|rbinv| (|Matrix| (|Integer|)))

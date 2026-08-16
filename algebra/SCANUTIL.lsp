@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SCANUTIL;parse_integer2|
         ((|str| (|String|)) (|i0| (|SingleInteger|)) (|l| (|SingleInteger|))

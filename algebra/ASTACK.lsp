@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ASTACK;#;%Nni;1| ((|s| (%)) (% (|NonNegativeInteger|)))
         (SPADCALL |s| (QREFELT % 9))) 

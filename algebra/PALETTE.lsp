@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|PALETTE;dark;C%;1| '|SPADreplace| '(XLAM (|c|) (CONS 1 |c|))) 
 

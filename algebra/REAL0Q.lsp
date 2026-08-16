@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |REAL0Q;convert2PolInt|
         ((|f| (|Pol|)) (% (|SparseUnivariatePolynomial| (|Integer|))))

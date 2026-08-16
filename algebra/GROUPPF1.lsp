@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GROUPPF1;convert;LLGp;1|
         ((|lg| (|List| S)) (|lr| (|List| (|FreeGroup| S)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RULESET;ruleset;L%;1|
         ((|l| (|List| (|RewriteRule| |Base| R F))) (% (%)))

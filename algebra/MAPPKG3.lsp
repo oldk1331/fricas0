@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MAPPKG3;curryRight;MBM;1|
         ((|fabc| (|Mapping| C A B)) (|b| (B)) (% (|Mapping| C A)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GUESS;guessExpRat;LL;1| ((|list| (|List| F)) (% (|List| EXPRR)))
         (SPADCALL |list| NIL (QREFELT % 15))) 

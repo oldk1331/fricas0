@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |JORDAN;*;3%;1| ((|a| (%)) (|b| (%)) (% (%)))
         (COND

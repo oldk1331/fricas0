@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PFECAT-;charthRoot;SU;1| ((|f| (S)) (% (|Union| S "failed")))
         (SPROG ((|ans| (|Union| (|Vector| S) "failed")) (|m| (|Matrix| S)))

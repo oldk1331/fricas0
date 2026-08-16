@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SETAGG-;symmetricDifference;3A;1| ((|x| (A)) (|y| (A)) (% (A)))
         (SPADCALL (SPADCALL |x| |y| (QREFELT % 8))

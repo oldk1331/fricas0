@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RECLOS;relativeApprox;2%F;1|
         ((|nbe| (%)) (|prec| (%)) (% (|Fraction| (|Integer|))))

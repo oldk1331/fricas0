@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ULSCAT-;laurentTerms|
         ((|n| (|Integer|)) (|st| (|Stream| |Coef|))

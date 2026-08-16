@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FLASORT;quickSort;M2V;1|
         ((|l| (|Mapping| (|Boolean|) S S)) (|r| (V)) (% (V)))

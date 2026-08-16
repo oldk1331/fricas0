@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FCPAK1;zeroVector;SPFc;1|
         ((|fname| (|Symbol|)) (|n| (|Polynomial| (|Integer|)))

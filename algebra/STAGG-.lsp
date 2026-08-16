@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |STAGG-;explicitlyFinite?;AB;1| ((|x| (A)) (% (|Boolean|)))
         (NULL (SPADCALL |x| (QREFELT % 9)))) 

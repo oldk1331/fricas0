@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FLINEXP-;*;SIS;1| ((|x| (S)) (|n| (|Integer|)) (% (S)))
         (SPADCALL |x| (SPADCALL (|spadConstant| % 8) |n| (QREFELT % 10))

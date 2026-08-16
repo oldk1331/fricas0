@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ALGMFACT;factor;PLF;1|
         ((|p| (P)) (|lalg| (|List| (|AlgebraicNumber|))) (% (|Factored| P)))

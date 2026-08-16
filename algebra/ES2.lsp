@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ES2;map;MKF;1| ((|f| (|Mapping| F E)) (|k| (|Kernel| E)) (% (F)))
         (SPROG ((#1=#:G5 NIL) (|x| NIL) (#2=#:G4 NIL))

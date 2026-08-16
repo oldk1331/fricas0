@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|COORDSYS;cartesian;2P;1| '|SPADreplace| '(XLAM (|pt|) |pt|)) 
 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PRIMELT;multi|
         ((|p| (|SparseUnivariatePolynomial| F)) (|v| (|Symbol|))

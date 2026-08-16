@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TYPED;var;S%;1| ((|n| (|String|)) (% (%)))
         (CONS |n| (SPADCALL (QREFELT % 8)))) 

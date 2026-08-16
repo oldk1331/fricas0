@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DFINTTLS;variation|
         ((|p| (|SparseUnivariatePolynomial| F)) (|a| (F))

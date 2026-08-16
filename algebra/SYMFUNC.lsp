@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SYMFUNC;coef_vect|
         ((|p| (|SparseUnivariatePolynomial| R)) (|n| (|NonNegativeInteger|))

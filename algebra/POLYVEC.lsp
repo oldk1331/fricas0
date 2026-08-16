@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |POLYVEC;copy_first;2UvIV;1|
         ((|np| (|U32Vector|)) (|op| (|U32Vector|)) (|n| (|Integer|))

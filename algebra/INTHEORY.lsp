@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INTHEORY;harmonic;IF;1|
         ((|n| (|Integer|)) (% (|Fraction| (|Integer|))))

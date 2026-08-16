@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|CARD;Zero;%;1| '|SPADreplace| '(XLAM NIL (CONS -1 0))) 
 

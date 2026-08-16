@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DHMATRIX;identity;%;1| ((% (%)))
         (SPADCALL

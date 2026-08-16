@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DIRPROD;coerce;%V;1| ((|z| (%)) (% (|Vector| R)))
         (SPADCALL |z| (QREFELT % 9))) 

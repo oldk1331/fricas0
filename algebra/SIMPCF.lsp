@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SIMPCF;sphereSolid;NniFsc;1|
         ((|dim| (|NonNegativeInteger|)) (% (|FiniteSimplicialComplex| VS)))

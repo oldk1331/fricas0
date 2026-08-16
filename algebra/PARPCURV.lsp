@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|PARPCURV;curve;2ComponentFunction%;1| '|SPADreplace| 'CONS) 
 

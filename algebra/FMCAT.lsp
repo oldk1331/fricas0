@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (DEFPARAMETER |FreeModuleCategory;CAT| 'NIL) 
 

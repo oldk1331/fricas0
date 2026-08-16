@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FACTFUNC;nthRoot;FNniR;1|
         ((|ff| (|Factored| M)) (|n| (|NonNegativeInteger|))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |EFSTRUC;realElem| ((|f| (F)) (|l| (|List| (|Symbol|))) (% (F)))
         (SPROG NIL

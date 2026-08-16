@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |AMR-;monomial?;SB;1| ((|x| (S)) (% (|Boolean|)))
         (COND ((SPADCALL |x| (QREFELT % 10)) NIL)

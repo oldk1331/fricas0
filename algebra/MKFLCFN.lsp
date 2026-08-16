@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MKFLCFN;streq?|
         ((|s| (|InputForm|)) (|st| (|String|)) (% (|Boolean|)))

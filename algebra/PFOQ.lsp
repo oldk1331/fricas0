@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PFOQ;torsion?;FdB;1|
         ((|d| (|FiniteDivisor| (|Fraction| (|Integer|)) UP UPUP R))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FINGPKG;permutationRepresentation;GP;1|
         ((|x| (G)) (% (|Permutation| (|Integer|))))

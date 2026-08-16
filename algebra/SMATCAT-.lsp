@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SMATCAT-;positivePower| ((|x| (S)) (|n| (|Integer|)) (% (S)))
         (SPROG ((|y| (S)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|HASHTBL;keys;%L;1| '|SPADreplace| 'HKEYS) 
 

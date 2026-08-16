@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PDOHLP;id_map;VarA;1| ((|v| (|Var|)) (% (|Automorphism| R)))
         (|spadConstant| % 9)) 

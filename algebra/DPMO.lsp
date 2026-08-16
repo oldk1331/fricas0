@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DPMO;*;R2%;1| ((|r| (R)) (|x| (%)) (% (%)))
         (SPROG ((#1=#:G3 NIL) (#2=#:G5 NIL) (|i| NIL) (#3=#:G4 NIL))

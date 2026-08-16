@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SCPKG;matrix2Vector| ((|m| (|Matrix| R)) (% (|Vector| R)))
         (SPROG ((|li| (|List| R)) (|lili| (|List| (|List| R))))

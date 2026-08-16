@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|MODFT1;get_char;2I;1| '|SPADreplace| '(XLAM (|p|) |p|)) 
 

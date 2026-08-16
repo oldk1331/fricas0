@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ODECONST;constDsolve;LFSR;1|
         ((|op| (L)) (|g| (F)) (|x| (|Symbol|))

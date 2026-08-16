@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |AF;belong?;BoB;1| ((|op| (|BasicOperator|)) (% (|Boolean|)))
         (COND ((SPADCALL |op| (QREFELT % 8) (QREFELT % 17)) 'T)

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LALG-;coerce;RS;1| ((|x| (R)) (% (S)))
         (SPADCALL |x| (|spadConstant| % 8) (QREFELT % 9))) 

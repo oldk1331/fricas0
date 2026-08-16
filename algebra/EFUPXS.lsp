@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |EFUPXS;nthRootIfCan;UPXSNniU;1|
         ((|upxs| (UPXS)) (|n| (|NonNegativeInteger|))

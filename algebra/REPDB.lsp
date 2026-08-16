@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |REPDB;double;Pi2S;1| ((|n| (|PositiveInteger|)) (|x| (S)) (% (S)))
         (COND ((EQL |n| 1) |x|)

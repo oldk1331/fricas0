@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |OMSERVER;OMreceive;OmcA;1|
         ((|conn| (|OpenMathConnection|)) (% (|Any|)))

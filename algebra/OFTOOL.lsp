@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|OFTOOL;atom?;OfB;1| '|SPADreplace| 'ATOM) 
 

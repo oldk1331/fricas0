@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MCMPLX;coerce;C%;1| ((|u| (|Complex| (|Float|))) (% (%)))
         (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 8)) (QREFELT % 10))

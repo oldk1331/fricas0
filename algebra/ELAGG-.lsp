@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ELAGG-;delete;AIA;1| ((|x| (A)) (|i| (|Integer|)) (% (A)))
         (SPADCALL (SPADCALL |x| (QREFELT % 8)) |i| (QREFELT % 10))) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FRAC;coerce;S%;1| ((|d| (S)) (% (%))) (CONS |d| (|spadConstant| % 9))) 
 

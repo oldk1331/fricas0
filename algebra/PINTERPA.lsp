@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PINTERPA;LagrangeInterpolation;2LP;1|
         ((|lx| (|List| F)) (|ly| (|List| F)) (% (P)))

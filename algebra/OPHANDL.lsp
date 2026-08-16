@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |OPHANDL;new;%;1| ((% (%))) (SPADCALL (QREFELT % 8))) 
 

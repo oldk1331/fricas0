@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|I32VEC;#;%Nni;1| '|SPADreplace| 'QV_LEN_I32) 
 

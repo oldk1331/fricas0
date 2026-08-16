@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ILIST;minIndex;%I;1| ((|x| (%)) (% (|Integer|))) (QREFELT % 7)) 
 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LODO;coerce;%Of;1| ((|l| (%)) (% (|OutputForm|)))
         (SPADCALL |l| (QREFELT % 16) (QREFELT % 17))) 

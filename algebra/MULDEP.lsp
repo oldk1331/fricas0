@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MULDEP;solveOverQ|
         ((|m| (|Matrix| (|Fraction| (|Integer|))))

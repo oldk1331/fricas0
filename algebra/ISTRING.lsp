@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|ISTRING;new;NniC%;1| '|SPADreplace| '|make_string_code|) 
 

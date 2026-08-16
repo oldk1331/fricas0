@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GPOLCAT-;monomials;SL;1| ((|p| (S)) (% (|List| S)))
         (SPROG ((|ml| (|List| S)))

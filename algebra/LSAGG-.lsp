@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LSAGG-;sort!;M2A;1|
         ((|f| (|Mapping| (|Boolean|) S S)) (|l| (A)) (% (A)))

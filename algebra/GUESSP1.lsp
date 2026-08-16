@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GUESSP1;m1| ((|var| (|Symbol|)) (% (|Expression| (|Integer|))))
         (SPADCALL |var| (QREFELT % 9))) 

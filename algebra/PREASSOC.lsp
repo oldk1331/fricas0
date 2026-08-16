@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PREASSOC;firstUncouplingMatrix;LPiU;1|
         ((|op| (L)) (|m| (|PositiveInteger|))

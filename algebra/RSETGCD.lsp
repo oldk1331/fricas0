@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RSETGCD;startTableGcd!;3SV;1|
         ((|ok| (|String|)) (|ko| (|String|)) (|domainName| (|String|))

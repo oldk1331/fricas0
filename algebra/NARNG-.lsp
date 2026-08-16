@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NARNG-;associator;4S;1| ((|x| (S)) (|y| (S)) (|z| (S)) (% (S)))
         (SPADCALL (SPADCALL (SPADCALL |x| |y| (QREFELT % 7)) |z| (QREFELT % 7))

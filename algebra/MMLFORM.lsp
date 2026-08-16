@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MMLFORM;coerce;OfS;1| ((|expr| (|OutputForm|)) (% (|String|)))
         (SPROG ((|s| (|String|)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DIRPCAT-;coerce;IS;1| ((|n| (|Integer|)) (% (S)))
         (SPADCALL (SPADCALL |n| (QREFELT % 10)) (QREFELT % 11))) 

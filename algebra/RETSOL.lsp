@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RETSOL;PQ2P| ((|p| (|Polynomial| Q)) (% (|Polynomial| R)))
         (SPADCALL (ELT % 8) |p| (QREFELT % 13))) 

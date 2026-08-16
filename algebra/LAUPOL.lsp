@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LAUPOL;Zero;%;1| ((% (%))) (CONS (|spadConstant| % 11) 0)) 
 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FMONOID;One;%;1| ((% (%))) (SPADCALL (QREFELT % 9))) 
 

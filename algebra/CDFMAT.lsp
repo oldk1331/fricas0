@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|CDFMAT;minRowIndex;%I;1| '|SPADreplace| '(XLAM (|x|) 0)) 
 

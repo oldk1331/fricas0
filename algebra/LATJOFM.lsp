@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LATJOFM;proposition| ((|s| (|String|)) (% (%)))
         (LIST (LIST (CONS 1 (LIST |s|))))) 

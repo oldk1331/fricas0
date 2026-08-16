@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FELFUN;rabs;2F;1| ((|r| (|Float|)) (% (|Float|)))
         (SPADCALL |r| (QREFELT % 7))) 

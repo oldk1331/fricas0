@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FFCGP;tableForDiscreteLogarithm;IT;1|
         ((|fac| (|Integer|))

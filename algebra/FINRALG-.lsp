@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FINRALG-;discriminant;VR;1| ((|v| (|Vector| S)) (% (R)))
         (SPADCALL (SPADCALL |v| (QREFELT % 11)) (QREFELT % 12))) 

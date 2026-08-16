@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INDE;coerceOF| ((|t| (|Term|)) (% (|OutputForm|)))
         (COND ((EQL (QCDR |t|) 1) (SPADCALL (QCAR |t|) (QREFELT % 10)))

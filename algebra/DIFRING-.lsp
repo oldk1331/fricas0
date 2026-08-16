@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DIFRING-;D;2S;1| ((|r| (S)) (% (S))) (SPADCALL |r| (QREFELT % 7))) 
 

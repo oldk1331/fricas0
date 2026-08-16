@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |XML;writeXml;XeSV;1|
         ((|content| (|XmlElement|)) (|filename| (|String|)) (% (|Void|)))

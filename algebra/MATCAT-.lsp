@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MATCAT-;square?;SB;1| ((|x| (S)) (% (|Boolean|)))
         (EQL (SPADCALL |x| (QREFELT % 11)) (SPADCALL |x| (QREFELT % 12)))) 

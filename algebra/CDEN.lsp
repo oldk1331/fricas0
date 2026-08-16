@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CDEN;clearDenominator;2A;1| ((|l| (A)) (% (A)))
         (SPROG ((|d| (R)))

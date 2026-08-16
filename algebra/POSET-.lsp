@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |POSET-;addObject;ASA;1| ((|s| (A)) (|n| (S)) (% (A)))
         (SPROG

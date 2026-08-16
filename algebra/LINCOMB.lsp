@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LINCOMB;dehomogenize;LR;1|
         ((|ls|

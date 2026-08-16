@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |POLY2;map;MPP;1|
         ((|f| (|Mapping| S R)) (|p| (|Polynomial| R)) (% (|Polynomial| S)))

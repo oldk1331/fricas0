@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|UNTYPED;var;S%;1| '|SPADreplace| 'LIST) 
 

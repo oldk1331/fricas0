@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|EXPR;belong?;BoB;1| '|SPADreplace| '(XLAM (|op|) 'T)) 
 

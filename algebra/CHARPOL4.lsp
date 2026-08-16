@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CHARPOL4;dot_col_vec|
         ((|m| (|Matrix| R)) (|k| (|Integer|)) (|v| (|Vector| R))

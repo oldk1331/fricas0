@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FINAALG-;leftCharacteristicPolynomial;SSup;1|
         ((|a| (S)) (% (|SparseUnivariatePolynomial| R)))

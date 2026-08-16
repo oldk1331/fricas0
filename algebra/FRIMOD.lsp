@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FRIMOD;One;%;1| ((% (%))) (QREFELT % 10)) 
 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |POLY2UP;univariate;PVUp;1|
         ((|p| (|Polynomial| R)) (|y| (|Variable| |x|))

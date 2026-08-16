@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MAPHACK3;comp;MMAC;1|
         ((|g| (|Mapping| C B)) (|h| (|Mapping| B A)) (|x| (A)) (% (C)))

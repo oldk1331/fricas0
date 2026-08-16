@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|WUTSET;rep| '|SPADreplace| '(XLAM (|s|) |s|)) 
 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FUNCTION;name;%S;1| ((|r| (%)) (% (|Symbol|))) (QREFELT % 6)) 
 

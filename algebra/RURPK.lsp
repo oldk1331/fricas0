@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RURPK;rur;L2BL;1|
         ((|lp| (|List| (|Polynomial| R))) (|univ?| (|Boolean|))

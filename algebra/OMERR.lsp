@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |OMERR;coerce;%Of;1| ((|e| (%)) (% (|OutputForm|)))
         (SPROG ((|infoSize| (|NonNegativeInteger|)))

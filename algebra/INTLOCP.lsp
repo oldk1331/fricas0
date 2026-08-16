@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INTLOCP;split|
         ((|z| #1=(|Integer|))

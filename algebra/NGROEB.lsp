@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NGROEB;lcmCo|
         ((|c1| (|Dom|)) (|c2| (|Dom|))

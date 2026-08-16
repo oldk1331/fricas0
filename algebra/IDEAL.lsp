@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |IDEAL;npoly| ((|f| (|DPoly|)) (% (|newPoly|)))
         (COND

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |BITS;bits;NniB%;1|
         ((|n| (|NonNegativeInteger|)) (|b| (|Boolean|)) (% (%)))

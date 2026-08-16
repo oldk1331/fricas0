@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |BOP1;evaluate;BoMBo;1|
         ((|op| (|BasicOperator|)) (|func| (|Mapping| A A))

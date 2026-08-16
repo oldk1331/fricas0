@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GALUTIL;safeFloor;RI;1| ((|x| (R)) (% (|Integer|)))
         (SPROG ((|shift| (|Integer|)))

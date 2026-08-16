@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |STTAYLO2;zro| ((% (|Stream| M))) (SPADCALL (QREFELT % 9))) 
 

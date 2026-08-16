@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FFIELDC-;differentiate;2S;1| ((|x| (S)) (% (S))) (|spadConstant| % 7)) 
 

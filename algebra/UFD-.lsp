@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |UFD-;squareFreePart;2S;1| ((|x| (S)) (% (S)))
         (SPROG

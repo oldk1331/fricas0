@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ERROR;doit| ((|s| (|String|)) (% (|Exit|)))
         (SEQ (|throwPatternMsg| |s| NIL) (EXIT "exit"))) 

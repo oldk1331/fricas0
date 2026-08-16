@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |BASFILE;open;FnS%;1| ((|fn| (|FileName|)) (|mode| (|String|)) (% (%)))
         (COND

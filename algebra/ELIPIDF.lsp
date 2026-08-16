@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ELIPIDF;rabs| ((|x| (|Complex| (|DoubleFloat|))) (% (|DoubleFloat|)))
         (SPADCALL (SPADCALL |x| (QREFELT % 34)) (QREFELT % 36))) 

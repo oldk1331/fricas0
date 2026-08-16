@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GENMFACT;factor;PF;1| ((|p| (P)) (% (|Factored| P)))
         (SEQ

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |STEXPS;zro| ((% (|Stream| |Coef|))) (SPADCALL (QREFELT % 8))) 
 

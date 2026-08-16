@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|SOLVEFOR;part| '|SPADreplace| '(XLAM (|s|) |s|)) 
 

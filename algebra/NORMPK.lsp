@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NORMPK;normInvertible?;PTSL;1|
         ((|p| (P)) (|ts| (TS))

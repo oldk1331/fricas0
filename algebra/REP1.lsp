@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |REP1;calcCoef|
         ((|beta| (|List| (|Integer|))) (C (|Matrix| (|Integer|)))

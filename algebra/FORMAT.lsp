@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|FORMAT;sayExpr| '|SPADreplace| '|sayFormatted|) 
 

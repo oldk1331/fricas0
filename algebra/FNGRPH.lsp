@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FNGRPH;functionGraph;L%;1| ((|ob| (|List| S)) (% (%)))
         (SPROG

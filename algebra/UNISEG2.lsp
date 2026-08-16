@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |UNISEG2;map;MUsUs;1|
         ((|f| (|Mapping| S R)) (|u| (|UniversalSegment| R))

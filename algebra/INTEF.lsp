@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INTEF;prim?| ((|k| (|Kernel| F)) (|x| (|Symbol|)) (% (|Boolean|)))
         (COND ((SPADCALL |k| '|log| (QREFELT % 13)) 'T)

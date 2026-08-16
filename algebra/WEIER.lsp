@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |WEIER;transback|
         ((|smps| (|Stream| (|TaylorSeries| R)))

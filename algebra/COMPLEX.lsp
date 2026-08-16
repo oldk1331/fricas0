@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |COMPLEX;writeOMComplex|
         ((|dev| (|OpenMathDevice|)) (|x| (%)) (% (|Void|)))

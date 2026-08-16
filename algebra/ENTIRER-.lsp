@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ENTIRER-;unitNormal;SR;1|
         ((|x| (S))

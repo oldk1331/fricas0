@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RDEPAR;get_denom|
         ((|f| (|Fraction| (|SparseUnivariatePolynomial| F)))

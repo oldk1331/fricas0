@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |EVALCYC;evp|
         ((|fn| (|Mapping| F (|Integer|))) (|pt| (|Partition|)) (% (F)))

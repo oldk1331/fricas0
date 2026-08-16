@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LAMBDA;lambda;Nni%;1| ((|n1| (|NonNegativeInteger|)) (% (%)))
         (CONS 0 (LIST |n1|))) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|VOID;void;%;1| '|SPADreplace| '|voidValue|) 
 

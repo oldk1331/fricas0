@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|FNAME;=;2%B;1| '|SPADreplace| 'EQUAL) 
 

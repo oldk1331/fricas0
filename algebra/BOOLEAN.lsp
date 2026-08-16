@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|BOOLEAN;test;2%;1| '|SPADreplace| '(XLAM (|a|) |a|)) 
 

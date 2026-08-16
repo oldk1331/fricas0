@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PATRES2;map;MPmrPmr;1|
         ((|f| (|Mapping| B A)) (|r| (|PatternMatchResult| R A))

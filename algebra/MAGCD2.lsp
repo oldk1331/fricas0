@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MAGCD2;algebraicGcd1a|
         ((|x| (MP)) (|y| (MP)) (|mu| (MD)) (|vx| (|Symbol|))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CHARPOL3;char_pol_via_interpolation0|
         ((|m| (|Matrix| R)) (|ld| (|List| R))

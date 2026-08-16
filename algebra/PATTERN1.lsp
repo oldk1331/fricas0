@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PATTERN1;st|
         ((|p| (|Pattern| R)) (|l| (|List| (|Any|))) (% (|Pattern| R)))

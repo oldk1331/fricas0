@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |REDORDER;localbinom|
         ((|j| (|Integer|)) (|i| (|Integer|)) (% (|Integer|)))

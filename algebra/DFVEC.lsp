@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|DFVEC;qelt;%IDf;1| '|SPADreplace| 'DELT) 
 

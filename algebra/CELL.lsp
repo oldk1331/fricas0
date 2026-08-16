@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|CELL;simpleCells;%L;1| '|SPADreplace| '(XLAM (|c|) |c|)) 
 

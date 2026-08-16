@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GALFACT;useEisensteinCriterion?;B;1| ((% (|Boolean|))) (QREFELT % 11)) 
 

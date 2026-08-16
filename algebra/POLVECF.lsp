@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |POLVECF;degree;PaI;1| ((|v| (|PrimitiveArray| K)) (% (|Integer|)))
         (SPROG

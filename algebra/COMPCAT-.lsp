@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |COMPCAT-;characteristicPolynomial;SSup;1|
         ((|x| (S)) (% (|SparseUnivariatePolynomial| R)))

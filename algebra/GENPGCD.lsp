@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GENPGCD;gcdPolynomial;3Sup;1|
         ((|p1| (|SparseUnivariatePolynomial| P))

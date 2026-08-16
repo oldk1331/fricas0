@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |REP2;blockMultiply|
         ((|a| (|Matrix| R)) (|b| (|Matrix| R)) (|li| (|List| (|Integer|)))

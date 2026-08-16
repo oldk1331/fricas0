@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PICOERCE;coerce;PdE;1| ((|x| (|PiDomain|)) (% (|Expression| R)))
         (SPROG ((|f| (|Fraction| (|SparseUnivariatePolynomial| (|Integer|)))))

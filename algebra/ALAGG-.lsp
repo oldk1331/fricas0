@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ALAGG-;coerce;SOf;1| ((|u| (S)) (% (|OutputForm|)))
         (SPROG

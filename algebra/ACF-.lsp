@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ACF-;zeroOf;SupS;1| ((|p| (|SparseUnivariatePolynomial| S)) (% (S)))
         (SPROG ((|x| (|Symbol|)))

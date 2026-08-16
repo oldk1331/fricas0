@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |UP;coerce;%Of;1| ((|p| (%)) (% (|OutputForm|)))
         (SPADCALL |p| (SPADCALL (QREFELT % 6) (QREFELT % 11)) (QREFELT % 12))) 

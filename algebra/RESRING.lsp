@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RESRING;Zero;%;1| ((% (%))) (|spadConstant| % 20)) 
 

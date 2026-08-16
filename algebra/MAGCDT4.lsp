@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MAGCDT4;FP_to_MP|
         ((|p| (|FakePolynomial|)) (% (|Polynomial| (|Integer|))))

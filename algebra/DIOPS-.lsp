@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DIOPS-;construct;LA;1| ((|l| (|List| S)) (% (A)))
         (SPADCALL |l| (QREFELT % 9))) 

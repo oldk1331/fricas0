@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |VIEWDEF;viewPosDefault;L;1| ((% (|List| (|NonNegativeInteger|))))
         (LIST (SPADCALL (QREFELT % 27) (QREFELT % 46))

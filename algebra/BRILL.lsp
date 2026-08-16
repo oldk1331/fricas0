@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |BRILL;squaredPolynomial| ((|p| (UP)) (% (|Boolean|)))
         (SPROG ((|d| (|NonNegativeInteger|)))

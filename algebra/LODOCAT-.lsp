@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LODOCAT-;D;S;1| ((% (S)))
         (SPADCALL (|spadConstant| % 9) 1 (QREFELT % 11))) 

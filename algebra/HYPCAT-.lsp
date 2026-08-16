@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |HYPCAT-;csch;2S;1| ((|x| (S)) (% (S)))
         (SPROG ((|a| (|Union| S "failed")))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DLIST;elt;%unique%;1| ((|x| (%)) (T3 ("unique")) (% (%)))
         (SPADCALL |x| (QREFELT % 7))) 

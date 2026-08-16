@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |XMLAT;xmlAttribute;2S%;1|
         ((|name| (|String|)) (|value| (|String|)) (% (%)))

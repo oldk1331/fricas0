@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MEVAL1;degree;PSNni;1|
         ((|p| (|Polynomial| (|Integer|))) (|s| (|Symbol|))

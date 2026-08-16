@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ROMAN;roman;I%;1| ((|n| (|Integer|)) (% (%)))
         (SPADCALL |n| (QREFELT % 6))) 

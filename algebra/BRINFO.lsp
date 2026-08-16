@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|BRINFO;sublis_formal;L2Se;1| '|SPADreplace| '|sublisFormal|) 
 

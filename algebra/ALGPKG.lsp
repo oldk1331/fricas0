@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ALGPKG;convVM| ((|v| (|Vector| R)) (% (|Matrix| R)))
         (SPROG

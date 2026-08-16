@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|MRING;rep| '|SPADreplace| '(XLAM (|x|) |x|)) 
 

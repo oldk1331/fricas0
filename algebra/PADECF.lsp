@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PADECF;pade_stream1|
         ((|st0| (|Stream| F)) (|st1| (|Stream| F))

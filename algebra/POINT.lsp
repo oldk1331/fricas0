@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |POINT;point;L%;1| ((|l| (|List| R)) (% (%)))
         (SPROG ((#1=#:G6 NIL) (|x| NIL) (|i| NIL) (|pt| (%)))

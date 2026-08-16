@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PATTERN;coerce;R%;1| ((|r| (R)) (% (%)))
         (|PATTERN;mkPat| 'T (CONS 0 |r|) 0 %)) 

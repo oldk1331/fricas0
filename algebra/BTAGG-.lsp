@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |BTAGG-;not;2S;1| ((|v| (S)) (% (S)))
         (SPADCALL (ELT % 8) |v| (QREFELT % 10))) 

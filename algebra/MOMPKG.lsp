@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MOMPKG;cumulant2moment;2S;1|
         ((|cum| (|Sequence| R)) (% (|Sequence| R)))

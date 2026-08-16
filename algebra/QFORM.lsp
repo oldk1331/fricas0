@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |QFORM;quadraticForm;Sm%;1| ((|m| (|SquareMatrix| |n| K)) (% (%)))
         (COND

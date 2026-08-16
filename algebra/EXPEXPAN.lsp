@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|EXPEXPAN;coeff| '|SPADreplace| '(XLAM (|term|) (QVELT |term| 0))) 
 

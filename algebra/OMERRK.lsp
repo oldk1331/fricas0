@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|OMERRK;OMParseError?;%B;1| '|SPADreplace| '(XLAM (|u|) (QEQCAR |u| 0))) 
 

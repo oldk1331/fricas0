@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |XEXPPKG;log;XPOLYNniXPOLY;1|
         ((|p| (XPOLY)) (|n| (|NonNegativeInteger|)) (% (XPOLY)))

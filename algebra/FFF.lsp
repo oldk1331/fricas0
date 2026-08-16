@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FFF;createLowComplexityNormalBasis;PiU;1|
         ((|n| (|PositiveInteger|))

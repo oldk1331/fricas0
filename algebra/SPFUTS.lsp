@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SPFUTS;lambertW0;2UTS;1| ((|x| (UTS)) (% (UTS)))
         (SPROG ((|dx| (UTS)))

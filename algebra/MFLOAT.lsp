@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MFLOAT;retractIfCan;%U;1|
         ((|u| (%)) (% (|Union| (|Fraction| (|Integer|)) "failed")))

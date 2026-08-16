@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PADE;constInner|
         ((|up| (UP))

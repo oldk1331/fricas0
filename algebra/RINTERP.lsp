@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RINTERP;interpolate;2L2NniF;1|
         ((|xlist| (|List| F)) (|ylist| (|List| F)) (|m| (|NonNegativeInteger|))

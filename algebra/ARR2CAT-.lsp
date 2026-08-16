@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ARR2CAT-;any?;MSB;1|
         ((|f| (|Mapping| (|Boolean|) R)) (|m| (S)) (% (|Boolean|)))

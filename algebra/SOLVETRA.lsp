@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SOLVETRA;solve;EL;1|
         ((|oside| (|Expression| R)) (% (|List| (|Equation| (|Expression| R)))))

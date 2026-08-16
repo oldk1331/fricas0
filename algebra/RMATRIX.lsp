@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RMATRIX;Zero;%;1| ((% (%))) (QREFELT % 10)) 
 

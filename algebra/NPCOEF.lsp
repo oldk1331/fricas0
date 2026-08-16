@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NPCOEF;npcoef;SupLLR;1|
         ((|u| (|SparseUnivariatePolynomial| P)) (|factlist| (|List| BP))

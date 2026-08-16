@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PFR;copypf| ((|a| (%)) (% (%)))
         (CONS (QCAR |a|) (SPADCALL (QCDR |a|) (QREFELT % 10)))) 

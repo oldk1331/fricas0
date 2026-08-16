@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |UPOLYC-;variables;SL;1|
         ((|p| (S)) (% (|List| (|SingletonAsOrderedSet|))))

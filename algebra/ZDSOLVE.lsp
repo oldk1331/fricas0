@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ZDSOLVE;convert;NsmpNsmp;1|
         ((|q|

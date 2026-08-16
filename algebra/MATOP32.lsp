@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MATOP32;q_dot|
         ((|m1| (|U32Matrix|)) (|m2| (|U32Matrix|)) (|row1| (|Integer|))

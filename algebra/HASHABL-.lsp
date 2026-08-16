@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |HASHABL-;hash;SSi;1| ((|s| (S)) (% (|SingleInteger|)))
         (HASHSTATEMAKEFIXNUM (SPADCALL HASHSTATEBASIS |s| (QREFELT % 8)))) 

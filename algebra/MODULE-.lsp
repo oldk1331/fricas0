@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MODULE-;*;SRS;1| ((|x| (S)) (|r| (R)) (% (S)))
         (SPADCALL |r| |x| (QREFELT % 8))) 

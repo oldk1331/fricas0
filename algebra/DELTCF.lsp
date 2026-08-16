@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DELTCF;circle;Dc;1| ((% (|DeltaComplex| VS)))
         (SPROG ((|vs1| (|List| VS)))

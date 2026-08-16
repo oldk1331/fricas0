@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NUMERIC;complexNumericIfCan;PU;1|
         ((|p| (|Polynomial| (|Complex| S)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LWORD;lyndon?;FmB;1| ((|w| (|FreeMonoid| |VarSet|)) (% (|Boolean|)))
         (SPROG ((|f| (|FreeMonoid| |VarSet|)) (#1=#:G19 NIL))

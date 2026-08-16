@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LIMITRF;limit;FEU;1|
         ((|f| (|Fraction| (|Polynomial| R)))

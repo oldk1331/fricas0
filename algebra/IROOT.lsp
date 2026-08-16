@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |IROOT;perfectSquare?;IB;1| ((|a| (I)) (% (|Boolean|)))
         (QEQCAR (SPADCALL |a| (QREFELT % 14)) 0)) 

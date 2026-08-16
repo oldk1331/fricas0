@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |IBATOOL;diagonalProduct;MR;1| ((|m| (|Matrix| R)) (% (R)))
         (SPROG ((|ans| (R)) (#1=#:G14 NIL) (|i| NIL) (#2=#:G15 NIL) (|j| NIL))

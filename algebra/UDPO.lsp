@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |UDPO;userOrdered?;B;1| ((% (|Boolean|)))
         (COND ((NULL (QREFELT % 7)) (NULL (NULL (QREFELT % 8)))) ('T 'T))) 

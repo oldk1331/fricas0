@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DIFEXT-;differentiate;SMNniS;1|
         ((|x| (S)) (|derivation| (|Mapping| R R)) (|n| (|NonNegativeInteger|))

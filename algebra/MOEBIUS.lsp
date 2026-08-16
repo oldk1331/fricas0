@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|MOEBIUS;moebius;4F%;1| '|SPADreplace| 'VECTOR) 
 

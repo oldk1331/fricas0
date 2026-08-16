@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DEFINTRF;integrate;FSbU;1|
         ((|f| (|Fraction| (|Polynomial| R)))

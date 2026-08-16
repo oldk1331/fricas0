@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |UPSCAT-;degree;SExpon;1| ((|f| (S)) (% (|Expon|)))
         (SPADCALL |f| (QREFELT % 9))) 

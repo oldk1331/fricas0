@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |UFPS1;hadamard;3Ufps;1|
         ((|f| (|UnivariateFormalPowerSeries| |Coef|))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |OREPCAT-;coerce;RS;1| ((|x| (R)) (% (S)))
         (SPADCALL |x| 0 (QREFELT % 11))) 

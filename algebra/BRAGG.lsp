@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (DEFPARAMETER |BinaryRecursiveAggregate;CAT| 'NIL) 
 

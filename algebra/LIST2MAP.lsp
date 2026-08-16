@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LIST2MAP;match;LLM;1|
         ((|la| (|List| A)) (|lb| (|List| B)) (% (|Mapping| B A)))

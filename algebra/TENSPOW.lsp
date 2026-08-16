@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TENSPOW;coerce;%Of;1| ((|x| (%)) (% (|OutputForm|)))
         (SPROG

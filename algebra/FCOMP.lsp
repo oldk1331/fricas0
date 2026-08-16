@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FCOMP;sin;E%;1| ((|e| (E)) (% (%))) (CONS 'T |e|)) 
 

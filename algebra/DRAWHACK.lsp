@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DRAWHACK;coerce;SbSb;1|
         ((|s| (|SegmentBinding| (|Expression| R)))

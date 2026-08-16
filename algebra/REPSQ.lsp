@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |REPSQ;expt;SPiS;1| ((|x| (S)) (|n| (|PositiveInteger|)) (% (S)))
         (COND ((EQL |n| 1) |x|)

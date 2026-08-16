@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|OMDEV;OMopenFile;2SOme%;1| '|SPADreplace| 'OM-OPENFILEDEV) 
 

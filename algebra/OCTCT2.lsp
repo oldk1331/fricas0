@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |OCTCT2;map;MOROS;1| ((|fn| (|Mapping| S R)) (|u| (OR)) (% (OS)))
         (SPADCALL (SPADCALL (SPADCALL |u| (QREFELT % 10)) |fn|)

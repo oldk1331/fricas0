@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |GHENSEL;reduceCoef| ((|c| (RP)) (|p| (RP)) (% (RP)))
         (COND ((SPADCALL |p| (QREFELT % 9)) |c|)

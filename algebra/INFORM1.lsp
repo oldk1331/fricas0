@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INFORM1;getType;If;1| ((% (|InputForm|))) (QREFELT % 7)) 
 

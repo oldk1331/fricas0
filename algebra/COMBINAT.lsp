@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |COMBINAT;partition;2I;1| ((|n| (I)) (% (I)))
         (SPROG

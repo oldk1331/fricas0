@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MODHP;VSUPI_to_VPA;VIV;1|
         ((|vps| (|Vector| (|SparseUnivariatePolynomial| (|Integer|))))

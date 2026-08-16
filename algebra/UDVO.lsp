@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |UDVO;setVariableOrder;LV;1| ((|l| (|List| (|Symbol|))) (% (|Void|)))
         (SPADCALL (REVERSE |l|) (QREFELT % 9))) 

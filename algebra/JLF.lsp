@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |JLF;statistics;V;1| ((% (|Void|)))
         (SEQ

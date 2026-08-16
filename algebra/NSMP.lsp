@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NSMP;PSimp| ((|up| (D)) (|mv| (|VarSet|)) (% (%)))
         (COND

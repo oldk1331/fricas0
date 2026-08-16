@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |OPQUERY;get_constructors|
         ((|cl| (|List| (|Symbol|))) (|ck| (|Symbol|))

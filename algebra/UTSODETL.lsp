@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |UTSODETL;UP2UTS;UPUTS;1| ((|p| (UP)) (% (UTS)))
         (SPROG

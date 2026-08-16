@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TENSOR;termgreater?|
         ((|t1| (|Record| (|:| |k| (|Product| B1 B2)) (|:| |c| R)))

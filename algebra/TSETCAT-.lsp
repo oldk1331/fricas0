@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TSETCAT-;=;2SB;1| ((|ts| (S)) (|us| (S)) (% (|Boolean|)))
         (SPROG ((#1=#:G75 NIL) (#2=#:G72 NIL))

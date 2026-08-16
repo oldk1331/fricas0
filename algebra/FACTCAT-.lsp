@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FACTCAT-;empty?;SB;1| ((|orf| (S)) (% (|Boolean|)))
         (SPROG ((#1=#:G9 NIL))

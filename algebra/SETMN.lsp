@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SETMN;=;2%B;1| ((|s1| (%)) (|s2| (%)) (% (|Boolean|)))
         (SPADCALL (QCAR |s1|) (QCAR |s2|) (QREFELT % 15))) 

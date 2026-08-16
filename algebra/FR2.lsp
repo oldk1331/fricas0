@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FR2;map;MFF;1|
         ((|fn| (|Mapping| S R)) (|u| (|Factored| R)) (% (|Factored| S)))

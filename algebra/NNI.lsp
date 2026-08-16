@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|NNI;sup;3%;1| '|SPADreplace| 'MAX) 
 

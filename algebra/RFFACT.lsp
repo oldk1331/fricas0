@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RFFACT;likuniv|
         ((|p| (|Polynomial| (|Integer|))) (|x| (|Symbol|))

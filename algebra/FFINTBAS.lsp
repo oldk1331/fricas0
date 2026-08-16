@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FFINTBAS;squaredFactors| ((|px| (R)) (% (R)))
         (SPROG

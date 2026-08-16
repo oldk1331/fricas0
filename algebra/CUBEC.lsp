@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|CUBEC;cubicalComplex;LL%;1| '|SPADreplace| 'CONS) 
 

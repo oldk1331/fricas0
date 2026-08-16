@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SFQCMPK;squareFreeFactors| ((|lp| (|List| P)) (% (|List| P)))
         (SPROG

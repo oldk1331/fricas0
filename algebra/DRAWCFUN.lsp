@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |DRAWCFUN;drawToScaleRanges|
         ((|xVals| (|Segment| (|DoubleFloat|)))

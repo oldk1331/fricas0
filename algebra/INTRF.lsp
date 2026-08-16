@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INTRF;infieldIntegrate;FSU;1|
         ((|f| (|Fraction| (|Polynomial| F))) (|x| (|Symbol|))

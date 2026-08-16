@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SKICOMB;ski;3%;1| ((|x| (%)) (|y| (%)) (% (%)))
         (CONS 1 (CONS |x| |y|))) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|ODVAR;makeVariable;SNni%;1| '|SPADreplace| 'CONS) 
 

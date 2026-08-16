@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PTPACK;xCoord;PR;1| ((|p| (|Point| R)) (% (R)))
         (SPADCALL |p| 1 (QREFELT % 10))) 

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LISTPKG;splitList;MLR;1|
         ((|f| (|Mapping| (|Boolean|) T$)) (|l| (|List| T$))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |VECREC2;modInverse|
         ((|c| (|Integer|)) (|p| (|Integer|)) (% (|Integer|)))

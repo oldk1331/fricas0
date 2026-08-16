@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |XDPOLYF;hankelIndices;XdpL;1|
         ((|p| (|XDistributedPolynomial| VAR F))

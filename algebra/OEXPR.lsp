@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|OEXPR;retract;E%;1| '|SPADreplace| '(XLAM (|e|) |e|)) 
 

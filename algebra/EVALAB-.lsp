@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |EVALAB-;eval;SES;1| ((|f| (S)) (|eq| (|Equation| R)) (% (S)))
         (SPADCALL |f| (LIST |eq|) (QREFELT % 9))) 

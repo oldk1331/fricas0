@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SCNP;namedPoints;LL%;1|
         ((|ptin| (|List| PT)) (|nmin| (|List| (|String|))) (% (%)))

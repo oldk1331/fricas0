@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |KAFILE;=;2%B;1| ((|f1| (%)) (|f2| (%)) (% (|Boolean|)))
         (SPADCALL (QVELT |f1| 0) (QVELT |f2| 0) (QREFELT % 11))) 

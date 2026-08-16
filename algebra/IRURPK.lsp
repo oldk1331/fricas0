@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |IRURPK;checkRur;TSLB;1|
         ((|ts| (TS)) (|lts| (|List| TS)) (% (|Boolean|)))

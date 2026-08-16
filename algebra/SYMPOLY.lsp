@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SYMPOLY;*;3%;1| ((|p1| (%)) (|p2| (%)) (% (%)))
         (SPROG

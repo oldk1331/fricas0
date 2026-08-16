@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |JCT;num1| ((% (|PositiveInteger|)))
         (COND

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FRAMALG-;traceMatrix;M;1| ((% (|Matrix| R)))
         (SPADCALL (SPADCALL (QREFELT % 10)) (QREFELT % 12))) 

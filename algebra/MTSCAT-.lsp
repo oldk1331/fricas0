@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MTSCAT-;coefficient;SVarNniS;1|
         ((|s| (S)) (|v| (|Var|)) (|n| (|NonNegativeInteger|)) (% (S)))

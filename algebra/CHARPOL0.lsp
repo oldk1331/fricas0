@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CHARPOL0;characteristicPolynomial;MSup;1|
         ((|m| (|Matrix| R)) (% (|SparseUnivariatePolynomial| R)))

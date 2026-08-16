@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FGRPH-;getVertexIndex;ASNni;1|
         ((|s| (A)) (|o| (S)) (% (|NonNegativeInteger|)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CUBECF;sphereSolid;NniFcc;1|
         ((|dim| (|NonNegativeInteger|))

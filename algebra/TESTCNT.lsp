@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |TESTCNT;testsuite;SV;1| ((|s| (|String|)) (% (|Void|)))
         (SEQ (SPADCALL "clear all" (QREFELT % 19))

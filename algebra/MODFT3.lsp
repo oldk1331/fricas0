@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|MODFT3;get_char;RI;1| '|SPADreplace| 'QCAR) 
 

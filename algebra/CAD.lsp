@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CAD;cylindricalDecomposition;LL;1|
         ((|lpols| (|List| (|Polynomial| |TheField|)))

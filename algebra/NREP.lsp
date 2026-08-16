@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |NREP;characteristicPolynomial;MP;1|
         ((|m| (|Matrix| (|Fraction| (|Integer|))))

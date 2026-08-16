@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |INTFACT;squareFree;IF;1| ((|n| (I)) (% (|Factored| I)))
         (SPROG

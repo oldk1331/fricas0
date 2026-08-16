@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PLOTTOOL;drawToScaleRanges|
         ((|xVals| (|Segment| (|DoubleFloat|)))

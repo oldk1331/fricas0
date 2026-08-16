@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |HEUGCD;myNextPrime|
         ((|val| (|Integer|)) (|bound| (|NonNegativeInteger|)) (% (|Integer|)))

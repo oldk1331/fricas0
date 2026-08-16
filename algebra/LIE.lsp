@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LIE;*;3%;1| ((|a| (%)) (|b| (%)) (% (%)))
         (SPADCALL (SPADCALL |a| |b| (QREFELT % 9))

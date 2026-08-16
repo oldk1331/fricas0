@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|OSI;=;2%B;1| '|SPADreplace| 'EQL) 
 

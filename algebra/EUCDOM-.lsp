@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |EUCDOM-;sizeLess?;2SB;1| ((|x| (S)) (|y| (S)) (% (|Boolean|)))
         (COND ((SPADCALL |y| (QREFELT % 8)) NIL)

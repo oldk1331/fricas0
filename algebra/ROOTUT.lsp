@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|ROOTUT;root_pair| '|SPADreplace| 'CONS) 
 

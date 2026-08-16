@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |COMPUTIL;Ski2Lambda| ((|s| (|SKICombinators| UT)) (% (|Lambda| UT)))
         (SPROG

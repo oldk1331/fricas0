@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |STREAM1;concat;SS;1| ((|z| (|Stream| (|Stream| S))) (% (|Stream| S)))
         (SPROG NIL

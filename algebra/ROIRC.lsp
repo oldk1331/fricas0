@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ROIRC;size;%TheField;1| ((|rootCode| (%)) (% (|TheField|)))
         (SPADCALL (QVELT |rootCode| 1) (QVELT |rootCode| 0) (QREFELT % 9))) 

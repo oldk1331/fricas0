@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |AN;reducedSystem;MM;1|
         ((|m| (|Matrix| %)) (% (|Matrix| (|Fraction| (|Integer|)))))

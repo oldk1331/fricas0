@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |IXAGG-;elt;SIndex2Entry;1|
         ((|a| (S)) (|i| (|Index|)) (|x| (|Entry|)) (% (|Entry|)))

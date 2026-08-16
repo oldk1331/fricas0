@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (PUT '|MAPHACK2;arg1;ACA;1| '|SPADreplace| '(XLAM (|a| |c|) |a|)) 
 

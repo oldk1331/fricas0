@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SHDP;lessThanRlex|
         ((|v1| (%)) (|v2| (%)) (|low| (|NonNegativeInteger|))

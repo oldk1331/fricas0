@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |REAL0;negate|
         ((|int|

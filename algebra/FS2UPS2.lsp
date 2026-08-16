@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |FS2UPS2;ratIfCan|
         ((|fcn| (FE)) (% (|Union| (|Fraction| (|Integer|)) "failed")))

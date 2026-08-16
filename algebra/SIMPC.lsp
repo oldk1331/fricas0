@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SIMPC;simplicialComplex;LNniL%;1|
         ((|v| (|List| VS)) (|numPoints| (|NonNegativeInteger|))

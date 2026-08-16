@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LZSTAGG-;=;2AB;1| ((|x| (A)) (|y| (A)) (% (|Boolean|)))
         (SEQ

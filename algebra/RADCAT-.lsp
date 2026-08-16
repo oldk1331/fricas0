@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |RADCAT-;sqrt;2S;1| ((|x| (S)) (% (S)))
         (SPADCALL |x| (SPADCALL (SPADCALL 2 (QREFELT % 9)) (QREFELT % 10))

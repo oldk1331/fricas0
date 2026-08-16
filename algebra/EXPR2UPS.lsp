@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |EXPR2UPS;performSubstitution|
         ((|fcn| (FE)) (|x| (|Symbol|)) (|a| (FE)) (% (FE)))

@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |IJB;setNotation;2S;1| ((|s| (|Symbol|)) (% (|Symbol|)))
         (SPROG ((|t| (|Symbol|)))

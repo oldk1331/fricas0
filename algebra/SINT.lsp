@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |SINT;writeOMSingleInt|
         ((|dev| (|OpenMathDevice|)) (|x| (%)) (% (|Void|)))

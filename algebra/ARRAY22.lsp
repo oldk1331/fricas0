@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |ARRAY22;map;MMAMB;1| ((|f| (|Mapping| B A)) (|m| (MA)) (% (MB)))
         (SPROG

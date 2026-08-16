@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |QEQUAT;coerce;%Of;1| ((|u| (%)) (% (|OutputForm|)))
         (SPADCALL (SPADCALL (QCAR |u|) (QREFELT % 9))

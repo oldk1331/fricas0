@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |CPMATCH;makeComplex| ((|p| (|Polynomial| S)) (% (CS)))
         (SPROG

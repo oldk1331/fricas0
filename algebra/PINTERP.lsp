@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PINTERP;interpolate;Up2LUp;1|
         ((|qx| (|UnivariatePolynomial| |xx| F)) (|lx| (|List| F))

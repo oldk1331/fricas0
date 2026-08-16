@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |MCDEN;clearDenominator;MM;1| ((|m| (|Matrix| Q)) (% (|Matrix| R)))
         (SPROG ((|d| (R)))

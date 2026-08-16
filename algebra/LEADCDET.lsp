@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |LEADCDET;polCase;ZNniLB;1|
         ((|d| (Z)) (|nk| (|NonNegativeInteger|)) (|lval| (|List| Z))

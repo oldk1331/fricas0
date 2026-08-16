@@ -1,3 +1,4 @@
+(in-package "BOOT")
 
 (SDEFUN |PLOT;Fnan?| ((|x| (|DoubleFloat|)) (% (|Boolean|)))
         (SPADCALL |x| |x| (QREFELT % 17))) 
