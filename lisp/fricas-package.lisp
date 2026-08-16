@@ -1,7 +1,6 @@
 ;;; We put this in separate file to avoid problems with compilation.
-(make-package "FRICAS-LISP"
-     :use (list (or (find-package "COMMON-LISP")
-                    "LISP")))
+(defpackage "FRICAS-LISP"
+     (:use :common-lisp))
 #+:sbcl
 (eval-when (:execute :compile-toplevel :load-toplevel)
     (ignore-errors (require "SB-SPROF")))
@@ -25,21 +24,8 @@
 #+:cmu
 (shadow "NUNION" "FRICAS-LISP")
 
-#-gcl
-(shadow "IN-PACKAGE" "FRICAS-LISP")
-#-gcl
-(defmacro IN-PACKAGE (package &rest options)
-  `(COMMON-LISP:IN-PACKAGE ,package))
-
 #+gcl
 (shadow "QUIT")
-
-;;; We use uninterned symbols because at this point we do not
-;;; want to add symbols to FRICAS-LISP
-(let ((#1=#:ls nil))
-    (do-symbols (#2=#:el "FRICAS-LISP") (setf #1# (cons #2# #1#)))
-    (mapcar (lambda (#3=#:x) (export (list #3#))) #1#)
-)
 
 (export '(QUIT CHDIR |getEnv| |getCLArgs| |load_quietly|
           |get_current_directory|
@@ -70,12 +56,12 @@
       (setf *features* (delete :CCL *features*)))
 
 ;;; Package containing Shoe to Lisp translator
-(make-package "BOOTTRAN" :use '("FRICAS-LISP"))
+(defpackage "BOOTTRAN" (:use "FRICAS-LISP" "COMMON-LISP"))
 
 ;;; Main FriCAS package.  The interpreter and the algebra are run
 ;;; after switching to the boot package (in-package "BOOT") so any
 ;;; symbol that the interpreter or algebra uses has to appear here.
-(make-package "BOOT" :use '("FRICAS-LISP"))
+(defpackage "BOOT" (:use "FRICAS-LISP" "COMMON-LISP"))
 
 (in-package "BOOT")
 
@@ -89,7 +75,7 @@
 
 ;;; Package containing support routines for code generated
 ;;; by Aldor compiler.
-(make-package "FOAM" :use '("FRICAS-LISP"))
+(defpackage "FOAM" (:use "FRICAS-LISP" "COMMON-LISP"))
 
 ;;; Package for code output by Aldor.
-(make-package "FOAM-USER" :use '("FRICAS-LISP" "FOAM"))
+(defpackage "FOAM-USER" (:use "FRICAS-LISP" "COMMON-LISP" "FOAM"))

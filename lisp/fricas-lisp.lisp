@@ -43,7 +43,6 @@
   (setq extensions:*intexp-maximum-exponent* (- most-positive-fixnum 64))
   (setf *read-default-float-format* 'double-float))
 
-#-:sbcl
 (eval-when (:execute :load-toplevel)
     (set-initial-parameters))
 
@@ -930,8 +929,8 @@ with this hack and will try to convince the GCL crowd to fix this.
   (|run_program| "sh" (list "-c" s)))
 
 (defmacro DEFCONST (name value)
-    `(if (not (boundp (quote ,name)))
-        (DEFCONSTANT ,name ,value)))
+    `(defconstant ,name
+        (if (boundp ',name) (symbol-value ',name) ,value)))
 
 #+:cmu
 (defconstant +list-based-union-limit+ 80)
