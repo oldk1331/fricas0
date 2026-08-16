@@ -126,32 +126,6 @@
                   (EXIT (SPADCALL "error" (QREFELT % 24)))))
                 #3# (EXIT #1#)))) 
 
-(SDEFUN |LAMBDA;freeVariable?| ((|n| (%)) (|s| (UT)) (% (|Boolean|)))
-        (SPROG ((#1=#:G97 NIL))
-               (SEQ
-                (EXIT
-                 (SEQ
-                  (COND
-                   ((QEQCAR |n| 1)
-                    (COND
-                     ((SPADCALL (CDR |n|) |s| (QREFELT % 26))
-                      (PROGN (LETT #1# NIL) (GO #2=#:G96))))))
-                  (COND
-                   ((QEQCAR |n| 3)
-                    (COND
-                     ((NULL (|LAMBDA;freeVariable?| (QCAR (CDR |n|)) |s| %))
-                      (PROGN (LETT #1# NIL) (GO #2#))))))
-                  (COND
-                   ((QEQCAR |n| 2)
-                    (COND
-                     ((|LAMBDA;freeVariable?| (QCAR (CDR |n|)) |s| %)
-                      (COND
-                       ((NULL (|LAMBDA;freeVariable?| (QCDR (CDR |n|)) |s| %))
-                        (PROGN (LETT #1# NIL) (GO #2#)))))
-                     ('T (PROGN (LETT #1# NIL) (GO #2#))))))
-                  (EXIT 'T)))
-                #2# (EXIT #1#)))) 
-
 (SDEFUN |LAMBDA;freeVariable?|
         ((|n| (%)) (|i| (|NonNegativeInteger|)) (% (|Boolean|)))
         (SPROG ((#1=#:G111 NIL))

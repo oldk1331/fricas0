@@ -40,7 +40,7 @@
 (SDEFUN |NUMFMT;ScanFloatIgnoreSpacesIfCan;SU;6|
         ((|s| (|String|)) (% (|Union| (|Float|) "failed")))
         (SPROG
-         ((|f| (|Integer|)) (|sCheck| (|SExpression|)) (|sex| (|SExpression|)))
+         ((|sex| (|SExpression|)) (|sCheck| (|SExpression|)) (|f| (|Integer|)))
          (SEQ (LETT |s| (|NUMFMT;contract| |s| %))
               (COND ((NULL (|NUMFMT;check| |s| %)) (EXIT (CONS 1 "failed"))))
               (LETT |sex|
@@ -52,17 +52,16 @@
                (COND
                 ((|BooleanEquality|
                   (SPADCALL |sCheck| (QREFELT % 19) (QREFELT % 25)) 'T)
-                 (LETT |f|
-                       (CONS 0
-                             (SPADCALL (SPADCALL |sex| (QREFELT % 26))
-                                       (QREFELT % 26)))))
+                 (CONS 0
+                       (SPADCALL (SPADCALL |sex| (QREFELT % 26))
+                                 (QREFELT % 26))))
                 ((|BooleanEquality|
                   (SPADCALL (SPADCALL |sex| (QREFELT % 26)) (QREFELT % 27)) 'T)
                  (SEQ (LETT |f| (SPADCALL |sex| (QREFELT % 26)))
                       (EXIT (CONS 0 (SPADCALL |f| (QREFELT % 29))))))
                 ('T (CONS 1 "failed"))))))) 
 
-(PUT '|NUMFMT;FormatArabic;PiS;7| '|SPADreplace| 'STRINGIMAGE) 
+(MAKEPROP '|NUMFMT;FormatArabic;PiS;7| '|SPADreplace| 'STRINGIMAGE) 
 
 (SDEFUN |NUMFMT;FormatArabic;PiS;7| ((|n| (|PositiveInteger|)) (% (|String|)))
         (STRINGIMAGE |n|)) 
@@ -72,24 +71,24 @@
 
 (SDEFUN |NUMFMT;FormatRoman;PiS;9| ((|pn| (|PositiveInteger|)) (% (|String|)))
         (SPROG
-         ((|s| (|String|)) (|mm| (|String|)) (#1=#:G62 NIL) (|j| NIL)
-          (#2=#:G61 NIL) (|m0| (|String|)) (#3=#:G60 NIL) (|n| (|Integer|))
-          (|d| (|Integer|)) (|i| NIL) (#4=#:G45 NIL))
+         ((#1=#:G45 NIL) (|i| NIL) (|d| (|Integer|)) (|n| (|Integer|))
+          (#2=#:G60 NIL) (|m0| (|String|)) (#3=#:G61 NIL) (|j| NIL)
+          (#4=#:G62 NIL) (|mm| (|String|)) (|s| (|String|)))
          (SEQ (LETT |n| |pn|) (LETT |d| (+ (REM |n| 10) (QREFELT % 36)))
-              (LETT |n| (QUOTIENT2 |n| 10))
+              (LETT |n| (|quotient_INT| |n| 10))
               (LETT |s| (QAREF1 (QREFELT % 33) |d|))
               (EXIT
                (COND ((ZEROP |n|) |s|)
                      (#5='T
                       (SEQ (LETT |d| (+ (REM |n| 10) (QREFELT % 37)))
-                           (LETT |n| (QUOTIENT2 |n| 10))
+                           (LETT |n| (|quotient_INT| |n| 10))
                            (LETT |s| (STRCONC (QAREF1 (QREFELT % 34) |d|) |s|))
                            (EXIT
                             (COND ((ZEROP |n|) |s|)
                                   (#5#
                                    (SEQ
                                     (LETT |d| (+ (REM |n| 10) (QREFELT % 38)))
-                                    (LETT |n| (QUOTIENT2 |n| 10))
+                                    (LETT |n| (|quotient_INT| |n| 10))
                                     (LETT |s|
                                           (STRCONC (QAREF1 (QREFELT % 35) |d|)
                                                    |s|))
@@ -97,15 +96,16 @@
                                      (COND ((ZEROP |n|) |s|)
                                            (#5#
                                             (SEQ (LETT |d| (REM |n| 10))
-                                                 (LETT |n| (QUOTIENT2 |n| 10))
+                                                 (LETT |n|
+                                                       (|quotient_INT| |n| 10))
                                                  (LETT |s|
                                                        (STRCONC
                                                         (|make_string_code|
-                                                         (PROG1 (LETT #4# |d|)
+                                                         (PROG1 (LETT #1# |d|)
                                                            (|check_subtype2|
-                                                            (>= #4# 0)
+                                                            (>= #1# 0)
                                                             '(|NonNegativeInteger|)
-                                                            '(|Integer|) #4#))
+                                                            '(|Integer|) #1#))
                                                          (QREFELT % 40))
                                                         |s|))
                                                  (EXIT
@@ -128,7 +128,7 @@
                                                                          |n|
                                                                          10))
                                                                   (LETT |n|
-                                                                        (QUOTIENT2
+                                                                        (|quotient_INT|
                                                                          |n|
                                                                          10))
                                                                   (EXIT
@@ -136,7 +136,7 @@
                                                                     ((ZEROP
                                                                       |d|)
                                                                      (PROGN
-                                                                      (LETT #3#
+                                                                      (LETT #2#
                                                                             |$NoValue|)
                                                                       (GO
                                                                        #6=#:G46)))
@@ -162,29 +162,29 @@
                                                                        (SPADCALL
                                                                         (PROGN
                                                                          (LETT
-                                                                          #2#
+                                                                          #3#
                                                                           NIL)
                                                                          (SEQ
                                                                           (LETT
                                                                            |j|
                                                                            1)
                                                                           (LETT
-                                                                           #1#
+                                                                           #4#
                                                                            |d|)
                                                                           G190
                                                                           (COND
                                                                            ((|greater_SI|
                                                                              |j|
-                                                                             #1#)
+                                                                             #4#)
                                                                             (GO
                                                                              G191)))
                                                                           (SEQ
                                                                            (EXIT
                                                                             (LETT
-                                                                             #2#
+                                                                             #3#
                                                                              (CONS
                                                                               |m0|
-                                                                              #2#))))
+                                                                              #3#))))
                                                                           (LETT
                                                                            |j|
                                                                            (|inc_SI|
@@ -194,7 +194,7 @@
                                                                           G191
                                                                           (EXIT
                                                                            (NREVERSE
-                                                                            #2#))))
+                                                                            #3#))))
                                                                         (QREFELT
                                                                          %
                                                                          12)))
@@ -214,7 +214,7 @@
                                                                         (STRCONC
                                                                          |mm|
                                                                          |s|)))))))))
-                                                                #6# (EXIT #3#))
+                                                                #6# (EXIT #2#))
                                                                (LETT |i|
                                                                      (|inc_SI|
                                                                       |i|))
@@ -225,10 +225,10 @@
 
 (SDEFUN |NUMFMT;ScanRoman;SPi;10| ((|s| (|String|)) (% (|PositiveInteger|)))
         (SPROG
-         ((#1=#:G76 NIL) (|Max| (|Integer|)) (|tot| (|Integer|))
-          (|n| (|Integer|)) (#2=#:G79 NIL) (|i| (|Integer|))
-          (|c| (|Character|)) (#3=#:G80 NIL) (|k| NIL)
-          (|nprens| (|PositiveInteger|)))
+         ((|nprens| (|PositiveInteger|)) (|k| NIL) (#1=#:G80 NIL)
+          (|c| (|Character|)) (|i| (|Integer|)) (#2=#:G79 NIL)
+          (|n| (|Integer|)) (|tot| (|Integer|)) (|Max| (|Integer|))
+          (#3=#:G76 NIL))
          (SEQ (LETT |s| (SPADCALL |s| (QREFELT % 50))) (LETT |tot| 0)
               (LETT |Max| 0) (LETT |i| (SPADCALL |s| (QREFELT % 51)))
               (SEQ G190
@@ -271,9 +271,9 @@
                                     (|error| "Improper Roman numeral: (x)"))
                                    ('T
                                     (SEQ
-                                     (SEQ (LETT |k| 1) (LETT #3# |nprens|) G190
+                                     (SEQ (LETT |k| 1) (LETT #1# |nprens|) G190
                                           (COND
-                                           ((OR (|greater_SI| |k| #3#)
+                                           ((OR (|greater_SI| |k| #1#)
                                                 (NULL
                                                  (>= |i|
                                                      (SPADCALL |s|
@@ -314,11 +314,11 @@
                  (|error|
                   (STRCONC "Improper Roman numeral: " (STRINGIMAGE |tot|))))
                 ('T
-                 (PROG1 (LETT #1# |tot|)
-                   (|check_subtype2| (> #1# 0) '(|PositiveInteger|)
-                                     '(|Integer|) #1#)))))))) 
+                 (PROG1 (LETT #3# |tot|)
+                   (|check_subtype2| (> #3# 0) '(|PositiveInteger|)
+                                     '(|Integer|) #3#)))))))) 
 
-(PUT '|NUMFMT;FormatRadix;2IS;11| '|SPADreplace| '|write_to_string_radix|) 
+(MAKEPROP '|NUMFMT;FormatRadix;2IS;11| '|SPADreplace| '|write_to_string_radix|) 
 
 (SDEFUN |NUMFMT;FormatRadix;2IS;11|
         ((|n| (|Integer|)) (|r| (|Integer|)) (% (|String|)))
