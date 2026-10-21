@@ -23,13 +23,9 @@
 (load "lisp/interp.lisp")
 (in-package :boot)
 (setq |$spadroot| ".")
-(defvar |$defaultMsgDatabaseName| "msgs/s2-us.msgs")
-(defvar |$build_version| "Common Lisp - 1.3.13")
-(defvar |$build_date| "Thu Mar 5 2026")
+(defvar |$build_version| "Common Lisp - 1.4.0")
+(defvar |$build_date| "Thu Oct 15 2026")
 (defvar |$lisp_id_string| (concatenate 'string (lisp-implementation-type) " " (lisp-implementation-version)))
-
-#+:SBCL
-(fricas-lisp::set-initial-parameters) ;; this is skipped in fricas-lisp.lisp, why?
 
 (defun gcmsg (x))
 
