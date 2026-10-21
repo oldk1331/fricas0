@@ -4,17 +4,18 @@
          (|l2l| (|List| (|SingleInteger|))) (|tpl| (|List| (|Integer|)))
          (% (|Integer|)))
         (SPROG
-         ((|res| (|Integer|)) (|l2| #1=(|SingleInteger|)) (|tp| (|Integer|))
-          (|l1| (|SingleInteger|)) (|s1| (|SingleInteger|)) (|dig_val| #1#)
-          (#2=#:G21 NIL) (|i| NIL) (#3=#:G20 NIL) (#4=#:G19 NIL)
-          (|ten7| (|Integer|)) (|ten| #5=(|SingleInteger|)) (|b| #5#))
+         ((|b| #1=(|SingleInteger|)) (|ten| #1#) (|ten7| (|Integer|))
+          (#2=#:G19 NIL) (#3=#:G20 NIL) (|i| NIL) (#4=#:G21 NIL)
+          (|dig_val| #5=(|SingleInteger|)) (|s1| (|SingleInteger|))
+          (|l1| (|SingleInteger|)) (|tp| (|Integer|)) (|l2| #5#)
+          (|res| (|Integer|)))
          (SEQ (LETT |b| 48) (LETT |ten| 10) (LETT |ten7| 10000000)
               (EXIT
                (COND
                 ((|eql_SI| |l| 2)
                  (SEQ (LETT |s1| 0)
-                      (SEQ (LETT |i| |i0|) (LETT #4# (|add_SI| |i0| 6)) G190
-                           (COND ((|greater_SI| |i| #4#) (GO G191)))
+                      (SEQ (LETT |i| |i0|) (LETT #2# (|add_SI| |i0| 6)) G190
+                           (COND ((|greater_SI| |i| #2#) (GO G191)))
                            (SEQ
                             (LETT |dig_val|
                                   (|sub_SI| (STR_ELT1 |str| |i|) |b|))
@@ -38,8 +39,8 @@
                       (EXIT (+ (* |ten7| |res|) |s1|))))
                 ((|eql_SI| |l| 1)
                  (SEQ (LETT |s1| 0)
-                      (SEQ (LETT |i| |i0|) (LETT #2# (|add_SI| |i0| 6)) G190
-                           (COND ((|greater_SI| |i| #2#) (GO G191)))
+                      (SEQ (LETT |i| |i0|) (LETT #4# (|add_SI| |i0| 6)) G190
+                           (COND ((|greater_SI| |i| #4#) (GO G191)))
                            (SEQ
                             (LETT |dig_val|
                                   (|sub_SI| (STR_ELT1 |str| |i|) |b|))
@@ -72,17 +73,16 @@
 
 (SDEFUN |SCANUTIL;parse_integer;SI;2| ((|str| (|String|)) (% (|Integer|)))
         (SPROG
-         ((|res| (|Integer|)) (|j| (|SingleInteger|))
-          (|s1| #1=(|SingleInteger|)) (|dig_val| #2=(|SingleInteger|))
-          (#3=#:G41 NIL) (|i| NIL) (#4=#:G40 NIL) (|k| NIL)
-          (|ll| #5=(|SingleInteger|)) (|tpl| (|List| #6=(|Integer|)))
-          (|l2l| (|List| #1#)) (|tp| #6#) (|ten7| #6#) (|l2| #2#) (|l20| #2#)
-          (#7=#:G39 NIL) (|ten| #5#) (|l1| (|SingleInteger|)) (|l| #5#)
-          (|b| #5#))
+         ((|b| #1=(|SingleInteger|)) (|l| #1#) (|l1| (|SingleInteger|))
+          (|ten| #1#) (#2=#:G40 NIL) (|l20| #3=(|SingleInteger|)) (|l2| #3#)
+          (|ten7| #4=(|Integer|)) (|tp| #4#)
+          (|l2l| (|List| #5=(|SingleInteger|))) (|tpl| (|List| #4#)) (|ll| #1#)
+          (|k| NIL) (#6=#:G41 NIL) (|i| NIL) (#7=#:G42 NIL) (|dig_val| #3#)
+          (|s1| #5#) (|j| (|SingleInteger|)) (|res| (|Integer|)))
          (SEQ (LETT |b| 48) (LETT |l| (QCSIZE |str|))
               (LETT |l1| (|rem_SI| |l| 7)) (LETT |s1| 0) (LETT |ten| 10)
-              (SEQ (LETT |i| 1) (LETT #7# |l1|) G190
-                   (COND ((|greater_SI| |i| #7#) (GO G191)))
+              (SEQ (LETT |i| 1) (LETT #2# |l1|) G190
+                   (COND ((|greater_SI| |i| #2#) (GO G191)))
                    (SEQ (LETT |dig_val| (|sub_SI| (STR_ELT1 |str| |i|) |b|))
                         (EXIT
                          (LETT |s1|
@@ -117,13 +117,13 @@
                                         |l2| |l2l| |tpl| %)))))
                              (#8#
                               (SEQ
-                               (SEQ (LETT |k| 1) (LETT #4# |l2|) G190
-                                    (COND ((|greater_SI| |k| #4#) (GO G191)))
+                               (SEQ (LETT |k| 1) (LETT #6# |l2|) G190
+                                    (COND ((|greater_SI| |k| #6#) (GO G191)))
                                     (SEQ (LETT |s1| 0)
                                          (SEQ (LETT |i| |j|)
-                                              (LETT #3# (|add_SI| |j| 6)) G190
+                                              (LETT #7# (|add_SI| |j| 6)) G190
                                               (COND
-                                               ((|greater_SI| |i| #3#)
+                                               ((|greater_SI| |i| #7#)
                                                 (GO G191)))
                                               (SEQ
                                                (LETT |dig_val|
@@ -161,7 +161,7 @@
 
 (DEFUN |ScanningUtilities| ()
   (SPROG NIL
-         (PROG (#1=#:G43)
+         (PROG (#1=#:G44)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ScanningUtilities|))

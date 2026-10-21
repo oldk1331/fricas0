@@ -18,27 +18,27 @@
                   (QREFELT % 20))) 
 
 (SDEFUN |GB;groebner;2L;3| ((|Pol| (|List| |Dpol|)) (% (|List| |Dpol|)))
-        (SPROG ((#1=#:G10 NIL) (|x| NIL) (#2=#:G9 NIL))
+        (SPROG ((#1=#:G11 NIL) (|x| NIL) (#2=#:G12 NIL))
                (SEQ
                 (COND ((SPADCALL |Pol| NIL (QREFELT % 22)) |Pol|)
                       (#3='T
                        (SEQ
                         (LETT |Pol|
                               (PROGN
-                               (LETT #2# NIL)
-                               (SEQ (LETT |x| NIL) (LETT #1# |Pol|) G190
+                               (LETT #1# NIL)
+                               (SEQ (LETT |x| NIL) (LETT #2# |Pol|) G190
                                     (COND
-                                     ((OR (ATOM #1#)
-                                          (PROGN (LETT |x| (CAR #1#)) NIL))
+                                     ((OR (ATOM #2#)
+                                          (PROGN (LETT |x| (CAR #2#)) NIL))
                                       (GO G191)))
                                     (SEQ
                                      (EXIT
                                       (COND
                                        ((SPADCALL |x| (|spadConstant| % 25)
                                                   (QREFELT % 26))
-                                        (LETT #2# (CONS |x| #2#))))))
-                                    (LETT #1# (CDR #1#)) (GO G190) G191
-                                    (EXIT (NREVERSE #2#)))))
+                                        (LETT #1# (CONS |x| #1#))))))
+                                    (LETT #2# (CDR #2#)) (GO G190) G191
+                                    (EXIT (NREVERSE #1#)))))
                         (EXIT
                          (COND
                           ((SPADCALL |Pol| NIL (QREFELT % 22))
@@ -56,27 +56,27 @@
 
 (SDEFUN |GB;groebner;LSL;4|
         ((|Pol| (|List| |Dpol|)) (|xx1| (|String|)) (% (|List| |Dpol|)))
-        (SPROG ((#1=#:G19 NIL) (|x| NIL) (#2=#:G18 NIL))
+        (SPROG ((#1=#:G21 NIL) (|x| NIL) (#2=#:G22 NIL))
                (SEQ
                 (COND ((SPADCALL |Pol| NIL (QREFELT % 22)) |Pol|)
                       (#3='T
                        (SEQ
                         (LETT |Pol|
                               (PROGN
-                               (LETT #2# NIL)
-                               (SEQ (LETT |x| NIL) (LETT #1# |Pol|) G190
+                               (LETT #1# NIL)
+                               (SEQ (LETT |x| NIL) (LETT #2# |Pol|) G190
                                     (COND
-                                     ((OR (ATOM #1#)
-                                          (PROGN (LETT |x| (CAR #1#)) NIL))
+                                     ((OR (ATOM #2#)
+                                          (PROGN (LETT |x| (CAR #2#)) NIL))
                                       (GO G191)))
                                     (SEQ
                                      (EXIT
                                       (COND
                                        ((SPADCALL |x| (|spadConstant| % 25)
                                                   (QREFELT % 26))
-                                        (LETT #2# (CONS |x| #2#))))))
-                                    (LETT #1# (CDR #1#)) (GO G190) G191
-                                    (EXIT (NREVERSE #2#)))))
+                                        (LETT #1# (CONS |x| #1#))))))
+                                    (LETT #2# (CDR #2#)) (GO G190) G191
+                                    (EXIT (NREVERSE #1#)))))
                         (EXIT
                          (COND
                           ((SPADCALL |Pol| NIL (QREFELT % 22))
@@ -117,27 +117,27 @@
 (SDEFUN |GB;groebner;L2SL;5|
         ((|Pol| (|List| |Dpol|)) (|xx1| (|String|)) (|xx2| (|String|))
          (% (|List| |Dpol|)))
-        (SPROG ((#1=#:G31 NIL) (|x| NIL) (#2=#:G30 NIL))
+        (SPROG ((#1=#:G33 NIL) (|x| NIL) (#2=#:G34 NIL))
                (SEQ
                 (COND ((SPADCALL |Pol| NIL (QREFELT % 22)) |Pol|)
                       (#3='T
                        (SEQ
                         (LETT |Pol|
                               (PROGN
-                               (LETT #2# NIL)
-                               (SEQ (LETT |x| NIL) (LETT #1# |Pol|) G190
+                               (LETT #1# NIL)
+                               (SEQ (LETT |x| NIL) (LETT #2# |Pol|) G190
                                     (COND
-                                     ((OR (ATOM #1#)
-                                          (PROGN (LETT |x| (CAR #1#)) NIL))
+                                     ((OR (ATOM #2#)
+                                          (PROGN (LETT |x| (CAR #2#)) NIL))
                                       (GO G191)))
                                     (SEQ
                                      (EXIT
                                       (COND
                                        ((SPADCALL |x| (|spadConstant| % 25)
                                                   (QREFELT % 26))
-                                        (LETT #2# (CONS |x| #2#))))))
-                                    (LETT #1# (CDR #1#)) (GO G190) G191
-                                    (EXIT (NREVERSE #2#)))))
+                                        (LETT #1# (CONS |x| #1#))))))
+                                    (LETT #2# (CDR #2#)) (GO G190) G191
+                                    (EXIT (NREVERSE #1#)))))
                         (EXIT
                          (COND
                           ((SPADCALL |Pol| NIL (QREFELT % 22))
@@ -227,7 +227,7 @@
 (DECLAIM (NOTINLINE |GroebnerPackage;|)) 
 
 (DEFUN |GroebnerPackage;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -256,9 +256,9 @@
                              %)))))
           %))) 
 
-(DEFUN |GroebnerPackage| (&REST #1=#:G32)
+(DEFUN |GroebnerPackage| (&REST #1=#:G35)
   (SPROG NIL
-         (PROG (#2=#:G33)
+         (PROG (#2=#:G36)
            (RETURN
             (COND
              ((LETT #2#
@@ -278,11 +278,11 @@
 (MAKEPROP '|GroebnerPackage| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (0 . |leadingCoefficient|) (5 . |One|) (9 . |One|)
+              (|local| |#3|) (0 . |leadingCoefficient|) (5 . |1|) (9 . |1|)
               (|Boolean|) (13 . =) (19 . |inv|) (24 . *) (|Mapping| 8 8)
               (|List| 8) (30 . |map|) (|GroebnerInternalPackage| 6 7 8)
-              (36 . |redPol|) (42 . |normalForm|) (48 . =) (54 . |Zero|)
-              (58 . |Zero|) (62 . |Zero|) (66 . ~=) (72 . |degree|) (77 . >)
+              (36 . |redPol|) (42 . |normalForm|) (48 . =) (54 . |0|)
+              (58 . |0|) (62 . |0|) (66 . ~=) (72 . |degree|) (77 . >)
               (|Integer|) (83 . |gbasis|) (|Mapping| 12 8 8) (90 . |sort|)
               (96 . |minGbasis|) |GB;groebner;2L;3| (|Void|) (|String|)
               (|OutputForm|) (101 . |messagePrint|) |GB;groebner;LSL;4|

@@ -1,8 +1,8 @@
 
 (SDEFUN |FMCF2;map;MM1M2;1| ((|f| (|Mapping| R2 R1)) (|x| (M1)) (% (M2)))
         (SPROG
-         ((|ry| (|List| (|Record| (|:| |k| S) (|:| |c| R2))))
-          (|rx| (|List| (|Record| (|:| |k| S) (|:| |c| R1)))))
+         ((|rx| (|List| (|Record| (|:| |k| S) (|:| |c| R1))))
+          (|ry| (|List| (|Record| (|:| |k| S) (|:| |c| R2)))))
          (SEQ (LETT |rx| (SPADCALL |x| (QREFELT % 13)))
               (LETT |ry|
                     (SPADCALL (CONS #'|FMCF2;map;MM1M2;1!0| |f|) |rx|
@@ -22,8 +22,8 @@
 
 (DEFUN |FreeModuleCoefficientFunctions2;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -46,9 +46,9 @@
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
-(DEFUN |FreeModuleCoefficientFunctions2| (&REST #1=#:G12)
+(DEFUN |FreeModuleCoefficientFunctions2| (&REST #1=#:G18)
   (SPROG NIL
-         (PROG (#2=#:G13)
+         (PROG (#2=#:G19)
            (RETURN
             (COND
              ((LETT #2#

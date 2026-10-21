@@ -79,6 +79,9 @@
                                                ((|variables|
                                                  ((|List| |t#3|) %))
                                                 T)
+                                               ((|variables|
+                                                 ((|List| |t#3|) % %))
+                                                T)
                                                ((|primitiveMonomials|
                                                  ((|List| %) %))
                                                 (|has| |t#1| (|SemiRing|))))
@@ -87,6 +90,9 @@
                                                 (|has| |t#1| (|Ring|)))
                                                ((|Comparable|)
                                                 (|has| |t#1| (|Comparable|)))
+                                               ((|ComparableRepresentation|)
+                                                (|has| |t#1|
+                                                       (|ComparableRepresentation|)))
                                                ((|canonicalUnitNormal|)
                                                 (|has| |t#1|
                                                        (|canonicalUnitNormal|))))

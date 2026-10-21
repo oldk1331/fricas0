@@ -42,7 +42,7 @@
 (DECLAIM (NOTINLINE |UnivariateLaurentSeriesCategory&;|)) 
 
 (DEFUN |UnivariateLaurentSeriesCategory&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -67,7 +67,7 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (|Boolean|)
               (|Stream| 7) (0 . |empty?|) (|Record| (|:| |k| 18) (|:| |c| 7))
               (|Stream| 11) (5 . |empty|) (9 . |frst|) (14 . |zero?|)
-              (19 . |One|) (23 . |One|) (|Integer|) (27 . |One|) (31 . +)
+              (19 . |1|) (23 . |1|) (|Integer|) (27 . |1|) (31 . +)
               (37 . |rst|) (42 . |concat|) (|Mapping| %) (48 . |delay|)
               (53 . |series|) |ULSCAT-;laurent;ISS;2|)
            '#(|laurent| 58) 'NIL

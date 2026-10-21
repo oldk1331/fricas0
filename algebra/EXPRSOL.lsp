@@ -2,8 +2,8 @@
 (SDEFUN |EXPRSOL;replaceDiffs;FBoSF;1|
         ((|expr| (F)) (|op| (|BasicOperator|)) (|sy| (|Symbol|)) (% (F)))
         (SPROG
-         ((|differentiand| (F)) (|args| (|List| F)) (|arg| (F)) (#1=#:G10 NIL)
-          (|k| NIL) (|lk| (|List| (|Kernel| F))))
+         ((|lk| (|List| (|Kernel| F))) (|k| NIL) (#1=#:G10 NIL) (|arg| (F))
+          (|args| (|List| F)) (|differentiand| (F)))
          (SEQ (LETT |lk| (SPADCALL |expr| (QREFELT % 17)))
               (SEQ (LETT |k| NIL) (LETT #1# |lk|) G190
                    (COND
@@ -70,7 +70,7 @@
 (SDEFUN |EXPRSOL;seriesSolve;FBoSLUTSF;2|
         ((|expr| (F)) (|op| (|BasicOperator|)) (|sy| (|Symbol|))
          (|l| (|List| F)) (% (UTSF)))
-        (SPROG ((|f| (|Mapping| UTSSMPF UTSSMPF UTSSMPF)) (|ex| (F)))
+        (SPROG ((|ex| (F)) (|f| (|Mapping| UTSSMPF UTSSMPF UTSSMPF)))
                (SEQ (LETT |ex| (SPADCALL |expr| |op| |sy| (QREFELT % 28)))
                     (LETT |f|
                           (SPADCALL |ex| (SPADCALL |op| (QREFELT % 25)) |sy|
@@ -96,8 +96,8 @@
 
 (DEFUN |ExpressionSolve;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -120,9 +120,9 @@
     (QSETREFV % 15 (SPADCALL '|coerce| (QREFELT % 12)))
     %))) 
 
-(DEFUN |ExpressionSolve| (&REST #1=#:G14)
+(DEFUN |ExpressionSolve| (&REST #1=#:G16)
   (SPROG NIL
-         (PROG (#2=#:G15)
+         (PROG (#2=#:G17)
            (RETURN
             (COND
              ((LETT #2#
@@ -148,12 +148,12 @@
               (10 . |is?|) (|List| 7) (16 . |argument|) (21 . |coerce|)
               (26 . =) (32 . |name|) (|List| %) (37 . |subst|)
               |EXPRSOL;replaceDiffs;FBoSF;1| (44 . |elt|) (50 . |is?|)
-              (56 . |One|) (60 . |One|) (|Integer|) (64 . |elt|) (|Equation| 7)
+              (56 . |1|) (60 . |1|) (|Integer|) (64 . |elt|) (|Equation| 7)
               (70 . =) (|Equation| %) (76 . |subst|) (82 . |elt|)
               (|Mapping| 9 9 9) (|MakeBinaryCompiledFunction| 7 9 9 9)
               (88 . |compiledFunction|)
-              (|SparseMultivariatePolynomialExpressions| 7) (95 . |One|)
-              (|NonNegativeInteger|) (99 . |One|) (103 . |monomial|)
+              (|SparseMultivariatePolynomialExpressions| 7) (95 . |1|)
+              (|NonNegativeInteger|) (99 . |1|) (103 . |monomial|)
               (|Mapping| 9 9) (|TaylorSolve| 7 8 9) (109 . |seriesSolve|)
               |EXPRSOL;seriesSolve;FBoSLUTSF;2|)
            '#(|seriesSolve| 115 |replaceDiffs| 123) 'NIL

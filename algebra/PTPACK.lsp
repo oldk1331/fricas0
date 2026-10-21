@@ -31,7 +31,7 @@
 (DECLAIM (NOTINLINE |PointPackage;|)) 
 
 (DEFUN |PointPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|PointPackage| DV$1))
@@ -63,7 +63,7 @@
 
 (MAKEPROP '|PointPackage| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |One|) (|Integer|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |1|) (|Integer|)
               (|Point| 6) (4 . |elt|) |PTPACK;xCoord;PR;1| |PTPACK;yCoord;PR;2|
               |PTPACK;zCoord;PR;3| |PTPACK;rCoord;PR;4|
               |PTPACK;thetaCoord;PR;5| |PTPACK;phiCoord;PR;6|

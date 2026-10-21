@@ -28,30 +28,30 @@
 
 (SDEFUN |PMPREDFS;suchThat;FLF;5|
         ((|p| (F)) (|l| (|List| (|Mapping| (|Boolean|) D))) (% (F)))
-        (SPROG ((#1=#:G20 NIL) (|f| NIL) (#2=#:G19 NIL))
+        (SPROG ((#1=#:G28 NIL) (|f| NIL) (#2=#:G29 NIL))
                (SEQ
                 (COND
                  ((QEQCAR (SPADCALL |p| (QREFELT % 30)) 0)
                   (|PMPREDFS;st| (SPADCALL |p| (QREFELT % 32))
                    (PROGN
-                    (LETT #2# NIL)
-                    (SEQ (LETT |f| NIL) (LETT #1# |l|) G190
+                    (LETT #1# NIL)
+                    (SEQ (LETT |f| NIL) (LETT #2# |l|) G190
                          (COND
-                          ((OR (ATOM #1#) (PROGN (LETT |f| (CAR #1#)) NIL))
+                          ((OR (ATOM #2#) (PROGN (LETT |f| (CAR #2#)) NIL))
                            (GO G191)))
                          (SEQ
                           (EXIT
-                           (LETT #2#
-                                 (CONS (SPADCALL |f| (QREFELT % 35)) #2#))))
-                         (LETT #1# (CDR #1#)) (GO G190) G191
-                         (EXIT (NREVERSE #2#))))
+                           (LETT #1#
+                                 (CONS (SPADCALL |f| (QREFELT % 35)) #1#))))
+                         (LETT #2# (CDR #2#)) (GO G190) G191
+                         (EXIT (NREVERSE #1#))))
                    %))
                  ('T (|error| "suchThat must be applied to symbols only")))))) 
 
 (DECLAIM (NOTINLINE |FunctionSpaceAttachPredicates;|)) 
 
 (DEFUN |FunctionSpaceAttachPredicates;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -70,9 +70,9 @@
           (QSETREFV % 9 '|%pmpredicate|)
           %))) 
 
-(DEFUN |FunctionSpaceAttachPredicates| (&REST #1=#:G21)
+(DEFUN |FunctionSpaceAttachPredicates| (&REST #1=#:G30)
   (SPROG NIL
-         (PROG (#2=#:G22)
+         (PROG (#2=#:G31)
            (RETURN
             (COND
              ((LETT #2#

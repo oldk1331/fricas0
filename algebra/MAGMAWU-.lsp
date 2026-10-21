@@ -10,7 +10,7 @@
 
 (SDEFUN |MAGMAWU-;rightPower;SNniS;4|
         ((|a| (S)) (|n| (|NonNegativeInteger|)) (% (S)))
-        (SPROG ((|res| (S)) (#1=#:G19 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G19 NIL) (|res| (S)))
                (SEQ
                 (COND ((ZEROP |n|) (|spadConstant| % 7))
                       ('T
@@ -27,7 +27,7 @@
 
 (SDEFUN |MAGMAWU-;leftPower;SNniS;5|
         ((|a| (S)) (|n| (|NonNegativeInteger|)) (% (S)))
-        (SPROG ((|res| (S)) (#1=#:G25 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G25 NIL) (|res| (S)))
                (SEQ
                 (COND ((ZEROP |n|) (|spadConstant| % 7))
                       ('T
@@ -55,7 +55,7 @@
 (DECLAIM (NOTINLINE |MagmaWithUnit&;|)) 
 
 (DEFUN |MagmaWithUnit&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|MagmaWithUnit&| DV$1))
@@ -77,7 +77,7 @@
 
 (MAKEPROP '|MagmaWithUnit&| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |One|) (|Boolean|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |1|) (|Boolean|)
               (4 . =) |MAGMAWU-;one?;SB;1| |MAGMAWU-;sample;S;2|
               (|PositiveInteger|) (|RepeatedSquaring| 6) (10 . |expt|)
               (|NonNegativeInteger|) |MAGMAWU-;^;SNniS;3| (16 . *)

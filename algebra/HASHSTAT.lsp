@@ -1,14 +1,14 @@
 
-(PUT '|HASHSTAT;new;%;1| '|SPADreplace| '(XLAM NIL HASHSTATEBASIS)) 
+(MAKEPROP '|HASHSTAT;new;%;1| '|SPADreplace| '(XLAM NIL HASHSTATEBASIS)) 
 
 (SDEFUN |HASHSTAT;new;%;1| ((% (%))) HASHSTATEBASIS) 
 
-(PUT '|HASHSTAT;value;%Si;2| '|SPADreplace| 'HASHSTATEMAKEFIXNUM) 
+(MAKEPROP '|HASHSTAT;value;%Si;2| '|SPADreplace| 'HASHSTATEMAKEFIXNUM) 
 
 (SDEFUN |HASHSTAT;value;%Si;2| ((|hs| (%)) (% (|SingleInteger|)))
         (HASHSTATEMAKEFIXNUM |hs|)) 
 
-(PUT '|HASHSTAT;update!;%Si%;3| '|SPADreplace| 'HASHSTATEUPDATE) 
+(MAKEPROP '|HASHSTAT;update!;%Si%;3| '|SPADreplace| 'HASHSTATEUPDATE) 
 
 (SDEFUN |HASHSTAT;update!;%Si%;3| ((|hs| (%)) (|i| (|SingleInteger|)) (% (%)))
         (HASHSTATEUPDATE |hs| |i|)) 
@@ -29,7 +29,7 @@
 
 (DEFUN |HashState| ()
   (SPROG NIL
-         (PROG (#1=#:G863)
+         (PROG (#1=#:G4)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|HashState|))

@@ -4,14 +4,14 @@
 (SDEFUN |FUNCTION;coerce;%Of;2| ((|r| (%)) (% (|OutputForm|)))
         (|outputMapTran| (QREFELT % 6) |r|)) 
 
-(PUT '|FUNCTION;=;2%B;3| '|SPADreplace| '(XLAM (|x| |y|) 'T)) 
+(MAKEPROP '|FUNCTION;=;2%B;3| '|SPADreplace| '(XLAM (|x| |y|) 'T)) 
 
 (SDEFUN |FUNCTION;=;2%B;3| ((|x| (%)) (|y| (%)) (% (|Boolean|))) 'T) 
 
 (DECLAIM (NOTINLINE |FunctionCalled;|)) 
 
 (DEFUN |FunctionCalled;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT |dv$| (LIST '|FunctionCalled| DV$1))

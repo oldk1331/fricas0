@@ -33,20 +33,20 @@
 (SDEFUN |PARTPERM;partitions;2IS;3|
         ((M (|Integer|)) (N (|Integer|)) (% (|Stream| (|List| (|Integer|)))))
         (SPROG
-         ((|aaa| (|List| (|Stream| (|List| (|Integer|))))) (#1=#:G24 NIL)
-          (|i| NIL) (#2=#:G23 NIL))
+         ((#1=#:G24 NIL) (|i| NIL) (#2=#:G25 NIL)
+          (|aaa| (|List| (|Stream| (|List| (|Integer|))))))
          (SEQ
           (LETT |aaa|
                 (PROGN
-                 (LETT #2# NIL)
-                 (SEQ (LETT |i| 0) (LETT #1# (* M N)) G190
-                      (COND ((|greater_SI| |i| #1#) (GO G191)))
+                 (LETT #1# NIL)
+                 (SEQ (LETT |i| 0) (LETT #2# (* M N)) G190
+                      (COND ((|greater_SI| |i| #2#) (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2#
-                              (CONS (SPADCALL M N |i| (QREFELT % 12)) #2#))))
+                        (LETT #1#
+                              (CONS (SPADCALL M N |i| (QREFELT % 12)) #1#))))
                       (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                      (EXIT (NREVERSE #2#)))))
+                      (EXIT (NREVERSE #1#)))))
           (EXIT (SPADCALL (SPADCALL |aaa| (QREFELT % 19)) (QREFELT % 21)))))) 
 
 (SDEFUN |PARTPERM;odd_partitions;3IS;4|
@@ -116,42 +116,42 @@
 (SDEFUN |PARTPERM;nogreq|
         ((|n| (|Integer|)) (|x| (|List| (|Integer|))) (% (|Integer|)))
         (SPROG
-         ((#1=#:G40 NIL) (#2=#:G39 #3=(|Integer|)) (#4=#:G41 #3#)
-          (#5=#:G43 NIL) (|i| NIL))
+         ((|i| NIL) (#1=#:G44 NIL) (#2=#:G42 #3=(|Integer|)) (#4=#:G40 #3#)
+          (#5=#:G41 NIL))
          (SEQ
           (PROGN
-           (LETT #1# NIL)
-           (SEQ (LETT |i| NIL) (LETT #5# |x|) G190
+           (LETT #5# NIL)
+           (SEQ (LETT |i| NIL) (LETT #1# |x|) G190
                 (COND
-                 ((OR (ATOM #5#) (PROGN (LETT |i| (CAR #5#)) NIL)) (GO G191)))
+                 ((OR (ATOM #1#) (PROGN (LETT |i| (CAR #1#)) NIL)) (GO G191)))
                 (SEQ
                  (EXIT
                   (COND
                    ((>= |i| |n|)
                     (PROGN
-                     (LETT #4# 1)
-                     (COND (#1# (LETT #2# (+ #2# #4#)))
-                           ('T (PROGN (LETT #2# #4#) (LETT #1# 'T)))))))))
-                (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
-           (COND (#1# #2#) ('T 0)))))) 
+                     (LETT #2# 1)
+                     (COND (#5# (LETT #4# (+ #4# #2#)))
+                           ('T (PROGN (LETT #4# #2#) (LETT #5# 'T)))))))))
+                (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+           (COND (#5# #4#) ('T 0)))))) 
 
 (SDEFUN |PARTPERM;conjugate;2L;9|
         ((|x| (|List| (|Integer|))) (% (|List| (|Integer|))))
-        (SPROG ((#1=#:G49 NIL) (|i| NIL) (#2=#:G48 NIL))
+        (SPROG ((#1=#:G49 NIL) (|i| NIL) (#2=#:G50 NIL))
                (SEQ
                 (COND ((NULL |x|) NIL)
                       ('T
                        (PROGN
-                        (LETT #2# NIL)
-                        (SEQ (LETT |i| 1) (LETT #1# (|SPADfirst| |x|)) G190
-                             (COND ((|greater_SI| |i| #1#) (GO G191)))
+                        (LETT #1# NIL)
+                        (SEQ (LETT |i| 1) (LETT #2# (|SPADfirst| |x|)) G190
+                             (COND ((|greater_SI| |i| #2#) (GO G191)))
                              (SEQ
                               (EXIT
-                               (LETT #2#
+                               (LETT #1#
                                      (CONS (|PARTPERM;nogreq| |i| |x| %)
-                                           #2#))))
+                                           #1#))))
                              (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                             (EXIT (NREVERSE #2#))))))))) 
+                             (EXIT (NREVERSE #1#))))))))) 
 
 (SDEFUN |PARTPERM;conjugates;2S;10|
         ((|z| (|Stream| (|List| (|Integer|))))
@@ -210,15 +210,15 @@
 
 (SDEFUN |PARTPERM;rpt|
         ((|n| (|Integer|)) (|m| (|Integer|)) (% (|List| (|Integer|))))
-        (SPROG ((#1=#:G74 NIL) (|i| NIL) (#2=#:G73 NIL))
+        (SPROG ((#1=#:G75 NIL) (|i| NIL) (#2=#:G76 NIL))
                (SEQ
                 (PROGN
-                 (LETT #2# NIL)
-                 (SEQ (LETT |i| 1) (LETT #1# |n|) G190
-                      (COND ((|greater_SI| |i| #1#) (GO G191)))
-                      (SEQ (EXIT (LETT #2# (CONS |m| #2#))))
+                 (LETT #1# NIL)
+                 (SEQ (LETT |i| 1) (LETT #2# |n|) G190
+                      (COND ((|greater_SI| |i| #2#) (GO G191)))
+                      (SEQ (EXIT (LETT #1# (CONS |m| #1#))))
                       (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                      (EXIT (NREVERSE #2#))))))) 
+                      (EXIT (NREVERSE #1#))))))) 
 
 (SDEFUN |PARTPERM;zrpt|
         ((|x| (|List| (|Integer|))) (|y| (|List| (|Integer|)))
@@ -235,30 +235,30 @@
 
 (SDEFUN |PARTPERM;sequences;LS;16|
         ((|x| (|List| (|Integer|))) (% (|Stream| (|List| (|Integer|)))))
-        (SPROG ((#1=#:G85 NIL) (|i| NIL) (#2=#:G84 NIL))
+        (SPROG ((#1=#:G88 NIL) (|i| NIL) (#2=#:G89 NIL))
                (SEQ
                 (SPADCALL |x|
                           (PROGN
-                           (LETT #2# NIL)
-                           (SEQ (LETT |i| 0) (LETT #1# (- (LENGTH |x|) 1)) G190
-                                (COND ((|greater_SI| |i| #1#) (GO G191)))
-                                (SEQ (EXIT (LETT #2# (CONS |i| #2#))))
+                           (LETT #1# NIL)
+                           (SEQ (LETT |i| 0) (LETT #2# (- (LENGTH |x|) 1)) G190
+                                (COND ((|greater_SI| |i| #2#) (GO G191)))
+                                (SEQ (EXIT (LETT #1# (CONS |i| #1#))))
                                 (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                                (EXIT (NREVERSE #2#))))
+                                (EXIT (NREVERSE #1#))))
                           (QREFELT % 42))))) 
 
 (SDEFUN |PARTPERM;permutations;IS;17|
         ((|n| (|Integer|)) (% (|Stream| (|List| (|Integer|)))))
-        (SPROG ((#1=#:G90 NIL) (|i| NIL) (#2=#:G89 NIL))
+        (SPROG ((#1=#:G93 NIL) (|i| NIL) (#2=#:G94 NIL))
                (SEQ
                 (SPADCALL (|PARTPERM;rpt| |n| 1 %)
                           (PROGN
-                           (LETT #2# NIL)
-                           (SEQ (LETT |i| 1) (LETT #1# |n|) G190
-                                (COND ((|greater_SI| |i| #1#) (GO G191)))
-                                (SEQ (EXIT (LETT #2# (CONS |i| #2#))))
+                           (LETT #1# NIL)
+                           (SEQ (LETT |i| 1) (LETT #2# |n|) G190
+                                (COND ((|greater_SI| |i| #2#) (GO G191)))
+                                (SEQ (EXIT (LETT #1# (CONS |i| #1#))))
                                 (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                                (EXIT (NREVERSE #2#))))
+                                (EXIT (NREVERSE #1#))))
                           (QREFELT % 42))))) 
 
 (DECLAIM (NOTINLINE |PartitionsAndPermutations;|)) 
@@ -278,7 +278,7 @@
 
 (DEFUN |PartitionsAndPermutations| ()
   (SPROG NIL
-         (PROG (#1=#:G92)
+         (PROG (#1=#:G96)
            (RETURN
             (COND
              ((LETT #1#

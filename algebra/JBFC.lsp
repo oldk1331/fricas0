@@ -30,53 +30,11 @@
                                                       (|Join|
                                                        (|PartialDifferentialRing|
                                                         '#2#)
+                                                       (|JetBundleOperationsCategory|)
                                                        (|GcdDomain|)
                                                        (|RetractableTo| '|t#1|)
                                                        (|mkCategory|
-                                                        '(((X
-                                                            (%
-                                                             (|PositiveInteger|)))
-                                                           T)
-                                                          ((U
-                                                            (%
-                                                             (|PositiveInteger|)))
-                                                           T)
-                                                          ((P
-                                                            (%
-                                                             (|PositiveInteger|)
-                                                             (|List|
-                                                              (|NonNegativeInteger|))))
-                                                           T)
-                                                          ((X (%)) T)
-                                                          ((U (%)) T)
-                                                          ((P
-                                                            (%
-                                                             (|List|
-                                                              (|NonNegativeInteger|))))
-                                                           T)
-                                                          ((P
-                                                            (%
-                                                             (|PositiveInteger|)
-                                                             (|NonNegativeInteger|)))
-                                                           T)
-                                                          ((P
-                                                            (%
-                                                             (|NonNegativeInteger|)))
-                                                           T)
-                                                          ((|setNotation|
-                                                            ((|Void|)
-                                                             (|Symbol|)))
-                                                           T)
-                                                          ((|getNotation|
-                                                            ((|Symbol|)))
-                                                           T)
-                                                          ((|numIndVar|
-                                                            ((|PositiveInteger|)))
-                                                           T)
-                                                          ((|numDepVar|
-                                                            ((|PositiveInteger|)))
-                                                           T)
-                                                          ((|coerce| (% |t#1|))
+                                                        '(((|coerce| (% |t#1|))
                                                            T)
                                                           ((|jetVariables|
                                                             ((|List| |t#1|) %))

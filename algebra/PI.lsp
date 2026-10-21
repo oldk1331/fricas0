@@ -1,5 +1,5 @@
 
-(PUT '|PI;qcoerce;I%;1| '|SPADreplace| '(XLAM (|n|) |n|)) 
+(MAKEPROP '|PI;qcoerce;I%;1| '|SPADreplace| '(XLAM (|n|) |n|)) 
 
 (SDEFUN |PI;qcoerce;I%;1| ((|n| (|Integer|)) (% (%))) |n|) 
 
@@ -14,12 +14,14 @@
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PositiveInteger| NIL (CONS 1 %))
           (|stuffDomainSlots| %)
+          (AND (|HasCategory| % '(|AbelianGroup|)) (|augmentPredVector| % 1))
+          (AND (|HasCategory| % '(|SetWithZero|)) (|augmentPredVector| % 2))
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
 (DEFUN |PositiveInteger| ()
   (SPROG NIL
-         (PROG (#1=#:G1741)
+         (PROG (#1=#:G5)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|PositiveInteger|))
@@ -38,36 +40,40 @@
 (MAKEPROP '|PositiveInteger| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL (|NonNegativeInteger|) (|Integer|)
-              |PI;qcoerce;I%;1| (|Boolean|) (|String|) (|OutputForm|)
-              (|PositiveInteger|) (|Union| % '"failed") (|HashState|)
-              (|InputForm|) (|SingleInteger|))
-           '#(~= 0 |smaller?| 6 |sample| 12 |rightRecip| 16 |rightPower| 21
-              |recip| 33 |qcoerce| 38 |one?| 43 |min| 48 |max| 54 |leftRecip|
-              60 |leftPower| 65 |latex| 77 |hashUpdate!| 82 |hash| 88 |gcd| 93
-              |convert| 99 |coerce| 104 ^ 109 |One| 121 >= 125 > 131 = 137 <=
-              143 < 149 + 155 * 161)
+              |PI;qcoerce;I%;1| (|Boolean|) (|OutputForm|) (|String|)
+              (|PositiveInteger|) (|Union| % '"failed") (|InputForm|)
+              (|SingleInteger|) (|HashState|))
+           '#(~= 0 |smaller?| 6 |sign| 12 |sample| 17 |rightRecip| 21
+              |rightPower| 26 |recip| 38 |qcoerce| 43 |positive?| 48 |one?| 53
+              |negative?| 58 |min| 63 |max| 69 |leftRecip| 75 |leftPower| 80
+              |latex| 92 |hashUpdate!| 97 |hash| 103 |gcd| 108 |convert| 114
+              |coerce| 119 |abs| 124 ^ 129 >= 141 > 147 = 153 <= 159 < 165 |1|
+              171 + 175 * 181)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(NIL NIL NIL NIL |OrderedSet&| NIL |MagmaWithUnit&|
-                     |AbelianSemiGroup&| NIL |Magma&| |SetCategory&| NIL
-                     |Hashable&| NIL |PartialOrder&| |BasicType&| NIL NIL)
+                  '#(|OrderedAbelianSemiGroup&| NIL |OrderedSet&| NIL
+                     |MagmaWithUnit&| NIL NIL |Magma&| NIL |AbelianSemiGroup&|
+                     |SetCategory&| NIL |Hashable&| NIL |BasicType&|
+                     |PartialOrder&| NIL NIL)
                   (CONS
-                   '#((|OrderedMonoid|) (|OrderedSemiGroup|) (|Monoid|)
-                      (|OrderedAbelianSemiGroup|) (|OrderedSet|) (|SemiGroup|)
-                      (|MagmaWithUnit|) (|AbelianSemiGroup|) (|Comparable|)
-                      (|Magma|) (|SetCategory|) (|CommutativeStar|)
-                      (|Hashable|) (|CoercibleTo| 10) (|PartialOrder|)
-                      (|BasicType|) (|TwoSidedRecip|) (|ConvertibleTo| 14))
+                   '#((|OrderedAbelianSemiGroup|) (|OrderedMagma|)
+                      (|OrderedSet|) (|Monoid|) (|MagmaWithUnit|)
+                      (|Comparable|) (|SemiGroup|) (|Magma|)
+                      (|ComparableRepresentation|) (|AbelianSemiGroup|)
+                      (|SetCategory|) (|CommutativeStar|) (|Hashable|)
+                      (|CoercibleTo| 9) (|BasicType|) (|PartialOrder|)
+                      (|TwoSidedRecip|) (|ConvertibleTo| 13))
                    (|makeByteWordVec2| 15
-                                       '(2 0 8 0 0 1 2 0 8 0 0 1 0 0 0 1 1 0 12
-                                         0 1 2 0 0 0 5 1 2 0 0 0 11 1 1 0 12 0
-                                         1 1 0 0 6 7 1 0 8 0 1 2 0 0 0 0 1 2 0
-                                         0 0 0 1 1 0 12 0 1 2 0 0 0 5 1 2 0 0 0
-                                         11 1 1 0 9 0 1 2 0 13 13 0 1 1 0 15 0
-                                         1 2 0 0 0 0 1 1 0 14 0 1 1 0 10 0 1 2
-                                         0 0 0 5 1 2 0 0 0 11 1 0 0 0 1 2 0 8 0
-                                         0 1 2 0 8 0 0 1 2 0 8 0 0 1 2 0 8 0 0
-                                         1 2 0 8 0 0 1 2 0 0 0 0 1 2 0 0 11 0 1
-                                         2 0 0 0 0 1)))))
+                                       '(2 0 8 0 0 1 2 0 8 0 0 1 1 2 6 0 1 0 0
+                                         0 1 1 0 12 0 1 2 0 0 0 11 1 2 0 0 0 5
+                                         1 1 0 12 0 1 1 0 0 6 7 1 2 8 0 1 1 0 8
+                                         0 1 1 2 8 0 1 2 0 0 0 0 1 2 0 0 0 0 1
+                                         1 0 12 0 1 2 0 0 0 11 1 2 0 0 0 5 1 1
+                                         0 10 0 1 2 0 15 15 0 1 1 0 14 0 1 2 0
+                                         0 0 0 1 1 0 13 0 1 1 0 9 0 1 1 1 0 0 1
+                                         2 0 0 0 11 1 2 0 0 0 5 1 2 0 8 0 0 1 2
+                                         0 8 0 0 1 2 0 8 0 0 1 2 0 8 0 0 1 2 0
+                                         8 0 0 1 0 0 0 1 2 0 0 0 0 1 2 0 0 0 0
+                                         1 2 0 0 11 0 1)))))
            '|lookupComplete|)) 

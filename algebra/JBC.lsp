@@ -13,13 +13,10 @@
              (LETT #1#
                    (|subst_in_cat| '(#2=#:G22)
                                    (LIST '(|Expression| (|Integer|)))
-                                   (|Join| (|OrderedSet|) (|CoercibleTo| '#2#)
+                                   (|Join| (|JetBundleOperationsCategory|)
+                                           (|OrderedSet|) (|CoercibleTo| '#2#)
                                            (|mkCategory|
-                                            '(((|setNotation|
-                                                ((|Symbol|) (|Symbol|)))
-                                               T)
-                                              ((|getNotation| ((|Symbol|))) T)
-                                              ((|multiIndex|
+                                            '(((|multiIndex|
                                                 ((|List|
                                                   (|NonNegativeInteger|))
                                                  %))
@@ -80,13 +77,6 @@
                                               ((|integrate|
                                                 (% % (|PositiveInteger|)))
                                                T)
-                                              ((X (% (|PositiveInteger|))) T)
-                                              ((U (% (|PositiveInteger|))) T)
-                                              ((P
-                                                (% (|PositiveInteger|)
-                                                 (|List|
-                                                  (|NonNegativeInteger|))))
-                                               T)
                                               ((|Pm|
                                                 (% (|PositiveInteger|)
                                                  (|List|
@@ -96,20 +86,8 @@
                                                 (% (|PositiveInteger|)
                                                  (|List| (|PositiveInteger|))))
                                                T)
-                                              ((|One| (%) |constant|) T)
+                                              ((|1| (%) |constant|) T)
                                               ((|one?| ((|Boolean|) %)) T)
-                                              ((X (%)) T) ((U (%)) T)
-                                              ((P
-                                                (%
-                                                 (|List|
-                                                  (|NonNegativeInteger|))))
-                                               T)
-                                              ((P
-                                                (% (|PositiveInteger|)
-                                                 (|NonNegativeInteger|)))
-                                               T)
-                                              ((P (% (|NonNegativeInteger|)))
-                                               T)
                                               ((|variables|
                                                 ((|List| %)
                                                  (|NonNegativeInteger|)))
@@ -126,12 +104,6 @@
                                               ((|dimS|
                                                 ((|NonNegativeInteger|)
                                                  (|NonNegativeInteger|)))
-                                               T)
-                                              ((|numIndVar|
-                                                ((|PositiveInteger|)))
-                                               T)
-                                              ((|numDepVar|
-                                                ((|PositiveInteger|)))
                                                T))
                                             NIL NIL NIL))))
            (SETELT #1# 0 '(|JetBundleCategory|))))) 

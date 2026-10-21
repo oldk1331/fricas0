@@ -1,7 +1,7 @@
 
 (SDEFUN |POLTOPOL;variable1|
         ((|xx| (|Symbol|)) (% (|OrderedVariableList| |lv|)))
-        (SPROG ((#1=#:G1 NIL))
+        (SPROG ((#1=#:G4 NIL))
                (PROG2 (LETT #1# (SPADCALL |xx| (QREFELT % 11)))
                    (QCDR #1#)
                  (|check_union2| (QEQCAR #1# 0)
@@ -75,7 +75,7 @@
 (DECLAIM (NOTINLINE |PolToPol;|)) 
 
 (DEFUN |PolToPol;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT DV$2 (|devaluate| |#2|))
@@ -91,9 +91,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |PolToPol| (&REST #1=#:G15)
+(DEFUN |PolToPol| (&REST #1=#:G20)
   (SPROG NIL
-         (PROG (#2=#:G16)
+         (PROG (#2=#:G21)
            (RETURN
             (COND
              ((LETT #2#
@@ -124,8 +124,8 @@
               (|MPolyCatFunctions3| 10 9 36 (|IndexedExponents| 9) 7 23 14)
               (22 . |map|) |POLTOPOL;dmpToP;DmpP;4|
               (|MPolyCatFunctions3| 9 10 (|IndexedExponents| 9) 36 7 14 23)
-              (28 . |map|) |POLTOPOL;pToDmp;PDmp;5| (34 . |Zero|) (38 . |Zero|)
-              (|Boolean|) (42 . =) (48 . |Zero|) (52 . |leadingCoefficient|)
+              (28 . |map|) |POLTOPOL;pToDmp;PDmp;5| (34 . |0|) (38 . |0|)
+              (|Boolean|) (42 . =) (48 . |0|) (52 . |leadingCoefficient|)
               (|DirectProduct| (NRTEVAL (LENGTH (QREFELT % 6)))
                                (|NonNegativeInteger|))
               (57 . |degree|) (|Vector| (|NonNegativeInteger|)) (62 . |coerce|)

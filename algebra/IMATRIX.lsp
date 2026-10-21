@@ -2,8 +2,8 @@
 (SDEFUN |IMATRIX;swapRows!;%2I%;1|
         ((|x| (%)) (|i1| #1=(|Integer|)) (|i2| #1#) (% (%)))
         (SPROG
-         ((|t2| (R)) (|t1| (R)) (#2=#:G14 NIL) (|j| NIL) (|co| (|Integer|))
-          (|ro| (|Integer|)))
+         ((|ro| (|Integer|)) (|co| (|Integer|)) (|j| NIL) (#2=#:G14 NIL)
+          (|t1| (R)) (|t2| (R)))
          (SEQ
           (COND
            ((OR (< |i1| (SPADCALL |x| (QREFELT % 10)))
@@ -52,8 +52,8 @@
 
 (DEFUN |IndexedMatrix;| (|#1| |#2| |#3|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G36 NIL) (#2=#:G37 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL)
-    (DV$2 NIL) (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (#1=#:G40 NIL)
+    (#2=#:G39 NIL) (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 |#2|)
@@ -69,23 +69,23 @@
                                         (|HasCategory| |#1| '(|Hashable|))
                                         (|HasCategory| |#1| '(|OrderedSet|))
                                         (|HasCategory| |#1| '(|BasicType|))
-                                        (LETT #2#
+                                        (LETT #1#
                                               (|HasCategory| |#1|
                                                              '(|SetCategory|)))
                                         (OR
                                          (|HasCategory| |#1| '(|Comparable|))
-                                         #2#)
+                                         #1#)
                                         (OR (|HasCategory| |#1| '(|BasicType|))
                                             (|HasCategory| |#1|
                                                            '(|Comparable|))
                                             (|HasCategory| |#1| '(|Hashable|))
-                                            #2#)
+                                            #1#)
                                         (AND
                                          (|HasCategory| |#1|
                                                         (LIST '|Evalable|
                                                               (|devaluate|
                                                                |#1|)))
-                                         #2#)
+                                         #1#)
                                         (OR
                                          (AND
                                           (|HasCategory| |#1|
@@ -98,18 +98,18 @@
                                                          (LIST '|Evalable|
                                                                (|devaluate|
                                                                 |#1|)))
-                                          #2#))
-                                        (LETT #1#
+                                          #1#))
+                                        (LETT #2#
                                               (|HasCategory| |#1|
                                                              '(|CoercibleTo|
                                                                (|OutputForm|))))
-                                        (OR #1#
+                                        (OR #2#
                                             (AND
                                              (|HasCategory| |#1|
                                                             (LIST '|Evalable|
                                                                   (|devaluate|
                                                                    |#1|)))
-                                             #2#))
+                                             #1#))
                                         (|HasCategory| |#1| '(|AbelianMonoid|))
                                         (|HasCategory| |#1| '(|AbelianGroup|))
                                         (|HasCategory| |#1|
@@ -139,7 +139,7 @@
      (OR
       (AND (|HasCategory| |#1| '(|BasicType|))
            (|HasCategory| % '(|finiteAggregate|)))
-      (|HasCategory| |#1| '(|Hashable|)) #2#)
+      (|HasCategory| |#1| '(|Hashable|)) #1#)
      (|augmentPredVector| % 4194304))
     (SETF |pv$| (QREFELT % 3))
     (COND
@@ -162,9 +162,9 @@
       (QSETREFV % 32 (CONS (|dispatchFunction| |IMATRIX;inverse;%U;8|) %))))
     %))) 
 
-(DEFUN |IndexedMatrix| (&REST #1=#:G39)
+(DEFUN |IndexedMatrix| (&REST #1=#:G42)
   (SPROG NIL
-         (PROG (#2=#:G40)
+         (PROG (#2=#:G43)
            (RETURN
             (COND
              ((LETT #2#
@@ -206,9 +206,9 @@
               |nullSpace| 107 |minordet| 112 |minRowIndex| 117 |maxRowIndex|
               122 |maxColIndex| 127 |inverse| 132 |determinant| 137)
            'NIL
-           (CONS (|makeByteWordVec2| 11 '(0 0 1 0 2 6 9 0 7 11 9 0 0 0 0))
+           (CONS (|makeByteWordVec2| 11 '(0 0 1 1 0 2 6 9 0 7 11 9 0 0 0 0))
                  (CONS
-                  '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL
+                  '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL NIL
                      |HomogeneousAggregate&| |Hashable&| |SetCategory&|
                      |Evalable&| |Aggregate&| |BasicType&| NIL |InnerEvalable&|
                      NIL NIL NIL NIL)
@@ -217,9 +217,10 @@
                                         (|IndexedVector| 6 7))
                       (|TwoDimensionalArrayCategory| 6 (|IndexedVector| 6 8)
                                                      (|IndexedVector| 6 7))
-                      (|Comparable|) (|HomogeneousAggregate| 6) (|Hashable|)
-                      (|SetCategory|) (|Evalable| 6) (|Aggregate|)
-                      (|BasicType|) (|CoercibleTo| 55) (|InnerEvalable| 6 6)
+                      (|Comparable|) (|ComparableRepresentation|)
+                      (|HomogeneousAggregate| 6) (|Hashable|) (|SetCategory|)
+                      (|Evalable| 6) (|Aggregate|) (|BasicType|)
+                      (|CoercibleTo| 55) (|InnerEvalable| 6 6)
                       (|shallowlyMutable|) (|finiteAggregate|)
                       (|MatrixOperationsCategory| 6 (|IndexedVector| 6 8)
                                                   (|IndexedVector| 6 7))

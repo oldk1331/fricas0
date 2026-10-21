@@ -14,23 +14,23 @@
         ((|content| (|ILogic|)) (|numb| (|NonNegativeInteger|))
          (% (|List| (|String|))))
         (SPROG
-         ((|resStr| (|String|)) (|notfst| (|Boolean|)) (#1=#:G17 NIL)
-          (|thisTerm| NIL) (|resType| (|ILogic|))
-          (|deduct| (|List| (|ILogic|))) (#2=#:G16 NIL)
-          (|fac| (|List| (|ILogic|))))
+         ((|fac| (|List| (|ILogic|))) (#1=#:G17 NIL)
+          (|deduct| (|List| (|ILogic|))) (|resType| (|ILogic|))
+          (|thisTerm| NIL) (#2=#:G18 NIL) (|notfst| (|Boolean|))
+          (|resStr| (|String|)))
          (SEQ
           (EXIT
            (SEQ (LETT |fac| (SPADCALL |content| (QREFELT % 10)))
                 (COND
                  ((NULL |fac|)
                   (PROGN
-                   (LETT #2#
+                   (LETT #1#
                          (LIST
                           (SPADCALL
                            (LIST "  -- error"
                                  (SPADCALL |content| (QREFELT % 11)))
                            (QREFELT % 8))))
-                   (GO #3=#:G15))))
+                   (GO #3=#:G16))))
                 (LETT |deduct| (SPADCALL |fac| (QREFELT % 12)))
                 (COND ((NULL |deduct|) (LETT |deduct| |fac|)))
                 (LETT |resType| (|SPADfirst| |deduct|))
@@ -38,9 +38,9 @@
                       (SPADCALL (LIST "  fn" (STRINGIMAGE |numb|) ":(")
                                 (QREFELT % 8)))
                 (LETT |notfst| 'NIL)
-                (SEQ (LETT |thisTerm| NIL) (LETT #1# |fac|) G190
+                (SEQ (LETT |thisTerm| NIL) (LETT #2# |fac|) G190
                      (COND
-                      ((OR (ATOM #1#) (PROGN (LETT |thisTerm| (CAR #1#)) NIL))
+                      ((OR (ATOM #2#) (PROGN (LETT |thisTerm| (CAR #2#)) NIL))
                        (GO G191)))
                      (SEQ
                       (COND (|notfst| (LETT |resStr| (STRCONC |resStr| ","))))
@@ -48,16 +48,16 @@
                             (STRCONC |resStr|
                                      (SPADCALL |thisTerm| (QREFELT % 13))))
                       (EXIT (LETT |notfst| 'T)))
-                     (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+                     (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                 (LETT |resStr|
                       (SPADCALL
                        (LIST |resStr| ") -> "
                              (SPADCALL |resType| (QREFELT % 13)))
                        (QREFELT % 8)))
                 (EXIT (LIST |resStr|))))
-          #3# (EXIT #2#)))) 
+          #3# (EXIT #1#)))) 
 
-(PUT '|COMPCODE;genCatFooter| '|SPADreplace| '(XLAM NIL (LIST "" "@"))) 
+(MAKEPROP '|COMPCODE;genCatFooter| '|SPADreplace| '(XLAM NIL (LIST "" "@"))) 
 
 (SDEFUN |COMPCODE;genCatFooter| ((% (|List| (|String|)))) (LIST "" "@")) 
 
@@ -77,9 +77,9 @@
         ((|n| (|Lambda| (|Typed|))) (|boundL| (|List| (|String|)))
          (% (|String|)))
         (SPROG
-         ((|s| (|String|)) (|ch| (|List| (|Lambda| (|Typed|))))
-          (|boundL2| (|List| (|String|))) (|varName| (|String|)) (#1=#:G32 NIL)
-          (|i| (|NonNegativeInteger|)))
+         ((|i| (|NonNegativeInteger|)) (#1=#:G33 NIL) (|varName| (|String|))
+          (|boundL2| (|List| (|String|))) (|ch| (|List| (|Lambda| (|Typed|))))
+          (|s| (|String|)))
          (SEQ
           (EXIT
            (SEQ (LETT |s| "")
@@ -92,7 +92,7 @@
                           ((<= |i| (LENGTH |boundL|))
                            (PROGN
                             (LETT #1# (SPADCALL |boundL| |i| (QREFELT % 21)))
-                            (GO #2=#:G31))))))
+                            (GO #2=#:G32))))))
                        (EXIT (LETT |s| (STRINGIMAGE (- |i| 1)))))))
                 (COND
                  ((SPADCALL |n| (QREFELT % 22))
@@ -144,8 +144,8 @@
         ((|content| (|Lambda| (|Typed|))) (|numb| (|NonNegativeInteger|))
          (% (|List| (|String|))))
         (SPROG
-         ((#1=#:G37 NIL) (|lhst| (|String|)) (|lhsn| (|String|))
-          (|lhs| (|String|)) (|var| (|Typed|)) (|sl| (|List| (|String|))))
+         ((|sl| (|List| (|String|))) (|var| (|Typed|)) (|lhs| (|String|))
+          (|lhsn| (|String|)) (|lhst| (|String|)) (#1=#:G38 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |sl| (LIST ""))
@@ -169,11 +169,11 @@
                                          (SPADCALL |content| (QREFELT % 27)))
                                         (LIST |lhsn|) %))
                                  (QREFELT % 8))))
-                         (GO #2=#:G36))))))
+                         (GO #2=#:G37))))))
                 (EXIT |sl|)))
           #2# (EXIT #1#)))) 
 
-(PUT '|COMPCODE;genPackageFooter| '|SPADreplace| '(XLAM NIL (LIST "" "@"))) 
+(MAKEPROP '|COMPCODE;genPackageFooter| '|SPADreplace| '(XLAM NIL (LIST "" "@"))) 
 
 (SDEFUN |COMPCODE;genPackageFooter| ((% (|List| (|String|)))) (LIST "" "@")) 
 
@@ -181,18 +181,18 @@
         ((|content| (|List| (|ILogic|))) (|filename| (|String|))
          (|shortName| (|String|)) (|longName| (|String|)) (% (|Void|)))
         (SPROG
-         ((#1=#:G47 NIL) (|line| NIL) (|lines| (|List| (|String|)))
-          (|fnNum| (|NonNegativeInteger|)) (#2=#:G46 NIL) (|thisEq| NIL)
-          (|f1| (|TextFile|)))
+         ((|f1| (|TextFile|)) (|thisEq| NIL) (#1=#:G47 NIL)
+          (|fnNum| (|NonNegativeInteger|)) (|lines| (|List| (|String|)))
+          (|line| NIL) (#2=#:G48 NIL))
          (SEQ
           (LETT |f1|
                 (SPADCALL (SPADCALL |filename| (QREFELT % 36)) "output"
                           (QREFELT % 38)))
           (LETT |lines| (|COMPCODE;genCatHeader| |shortName| |longName| %))
           (LETT |fnNum| 1)
-          (SEQ (LETT |thisEq| NIL) (LETT #2# |content|) G190
+          (SEQ (LETT |thisEq| NIL) (LETT #1# |content|) G190
                (COND
-                ((OR (ATOM #2#) (PROGN (LETT |thisEq| (CAR #2#)) NIL))
+                ((OR (ATOM #1#) (PROGN (LETT |thisEq| (CAR #1#)) NIL))
                  (GO G191)))
                (SEQ
                 (LETT |lines|
@@ -200,15 +200,15 @@
                                 (|COMPCODE;genFuncDeclar| |thisEq| |fnNum| %)
                                 (QREFELT % 39)))
                 (EXIT (LETT |fnNum| (+ |fnNum| 1))))
-               (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+               (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
           (LETT |lines|
                 (SPADCALL |lines| (|COMPCODE;genCatFooter| %) (QREFELT % 39)))
-          (SEQ (LETT |line| NIL) (LETT #1# |lines|) G190
+          (SEQ (LETT |line| NIL) (LETT #2# |lines|) G190
                (COND
-                ((OR (ATOM #1#) (PROGN (LETT |line| (CAR #1#)) NIL))
+                ((OR (ATOM #2#) (PROGN (LETT |line| (CAR #2#)) NIL))
                  (GO G191)))
                (SEQ (EXIT (SPADCALL |f1| |line| (QREFELT % 40))))
-               (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+               (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
           (EXIT (SPADCALL |f1| (QREFELT % 41)))))) 
 
 (SDEFUN |COMPCODE;writePackage;L4SV;9|
@@ -216,9 +216,9 @@
          (|shortName| (|String|)) (|longName| (|String|))
          (|catName| (|String|)) (% (|Void|)))
         (SPROG
-         ((#1=#:G56 NIL) (|line| NIL) (|lines| (|List| (|String|)))
-          (|fnNum| (|NonNegativeInteger|)) (#2=#:G55 NIL) (|thisEq| NIL)
-          (|f1| (|TextFile|)))
+         ((|f1| (|TextFile|)) (|thisEq| NIL) (#1=#:G56 NIL)
+          (|fnNum| (|NonNegativeInteger|)) (|lines| (|List| (|String|)))
+          (|line| NIL) (#2=#:G57 NIL))
          (SEQ
           (LETT |f1|
                 (SPADCALL (SPADCALL |filename| (QREFELT % 36)) "output"
@@ -227,9 +227,9 @@
                 (|COMPCODE;genPackageHeader| |shortName| |longName| |catName|
                  %))
           (LETT |fnNum| 1)
-          (SEQ (LETT |thisEq| NIL) (LETT #2# |content|) G190
+          (SEQ (LETT |thisEq| NIL) (LETT #1# |content|) G190
                (COND
-                ((OR (ATOM #2#) (PROGN (LETT |thisEq| (CAR #2#)) NIL))
+                ((OR (ATOM #1#) (PROGN (LETT |thisEq| (CAR #1#)) NIL))
                  (GO G191)))
                (SEQ
                 (LETT |lines|
@@ -237,16 +237,16 @@
                                 (|COMPCODE;genFuncDefn| |thisEq| |fnNum| %)
                                 (QREFELT % 39)))
                 (EXIT (LETT |fnNum| (+ |fnNum| 1))))
-               (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+               (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
           (LETT |lines|
                 (SPADCALL |lines| (|COMPCODE;genPackageFooter| %)
                           (QREFELT % 39)))
-          (SEQ (LETT |line| NIL) (LETT #1# |lines|) G190
+          (SEQ (LETT |line| NIL) (LETT #2# |lines|) G190
                (COND
-                ((OR (ATOM #1#) (PROGN (LETT |line| (CAR #1#)) NIL))
+                ((OR (ATOM #2#) (PROGN (LETT |line| (CAR #2#)) NIL))
                  (GO G191)))
                (SEQ (EXIT (SPADCALL |f1| |line| (QREFELT % 40))))
-               (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+               (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
           (EXIT (SPADCALL |f1| (QREFELT % 41)))))) 
 
 (DECLAIM (NOTINLINE |compCode;|)) 
@@ -265,7 +265,7 @@
 
 (DEFUN |compCode| ()
   (SPROG NIL
-         (PROG (#1=#:G58)
+         (PROG (#1=#:G59)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|compCode|))

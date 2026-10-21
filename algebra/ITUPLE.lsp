@@ -14,14 +14,14 @@
         ((|f| (|Mapping| (|Boolean|) S)) (|x| (%)) (% (%)))
         (SPADCALL |f| |x| (QREFELT % 15))) 
 
-(PUT '|ITUPLE;construct;%S;5| '|SPADreplace| '(XLAM (|x|) |x|)) 
+(MAKEPROP '|ITUPLE;construct;%S;5| '|SPADreplace| '(XLAM (|x|) |x|)) 
 
 (SDEFUN |ITUPLE;construct;%S;5| ((|x| (%)) (% (|Stream| S))) |x|) 
 
 (DECLAIM (NOTINLINE |InfiniteTuple;|)) 
 
 (DEFUN |InfiniteTuple;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|InfiniteTuple| DV$1))
@@ -35,9 +35,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |InfiniteTuple| (#1=#:G9)
+(DEFUN |InfiniteTuple| (#1=#:G11)
   (SPROG NIL
-         (PROG (#2=#:G10)
+         (PROG (#2=#:G12)
            (RETURN
             (COND
              ((LETT #2#

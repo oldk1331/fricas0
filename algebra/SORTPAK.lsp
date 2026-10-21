@@ -2,15 +2,15 @@
 (SDEFUN |SORTPAK;bubbleSort!;AMA;1|
         ((|m| (A)) (|f| (|Mapping| (|Boolean|) S S)) (% (A)))
         (SPROG
-         ((#1=#:G13 NIL) (|j| NIL) (#2=#:G12 NIL) (|i| NIL)
-          (|n| (|NonNegativeInteger|)))
+         ((|n| (|NonNegativeInteger|)) (|i| NIL) (#1=#:G12 NIL) (|j| NIL)
+          (#2=#:G13 NIL))
          (SEQ (LETT |n| (SPADCALL |m| (QREFELT % 9)))
-              (SEQ (LETT |i| 1) (LETT #2# (- |n| 1)) G190
-                   (COND ((|greater_SI| |i| #2#) (GO G191)))
+              (SEQ (LETT |i| 1) (LETT #1# (- |n| 1)) G190
+                   (COND ((|greater_SI| |i| #1#) (GO G191)))
                    (SEQ
                     (EXIT
-                     (SEQ (LETT |j| |n|) (LETT #1# (+ |i| 1)) G190
-                          (COND ((< |j| #1#) (GO G191)))
+                     (SEQ (LETT |j| |n|) (LETT #2# (+ |i| 1)) G190
+                          (COND ((< |j| #2#) (GO G191)))
                           (SEQ
                            (EXIT
                             (COND
@@ -24,7 +24,7 @@
 
 (SDEFUN |SORTPAK;insertionSort!;AMA;2|
         ((|m| (A)) (|f| (|Mapping| (|Boolean|) S S)) (% (A)))
-        (SPROG ((|j| (|NonNegativeInteger|)) (#1=#:G22 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G22 NIL) (|j| (|NonNegativeInteger|)))
                (SEQ
                 (SEQ (LETT |i| 2) (LETT #1# (SPADCALL |m| (QREFELT % 9))) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -56,7 +56,7 @@
 
 (SDEFUN |SORTPAK;bubbleSort!;AMA;5|
         ((|m| (A)) (|fn| (|Mapping| (|Boolean|) S S)) (% (A)))
-        (SPROG ((|l| (A)) (|x| (S)) (|r| (A)))
+        (SPROG ((|r| (A)) (|x| (S)) (|l| (A)))
                (SEQ
                 (COND ((SPADCALL |m| (QREFELT % 21)) |m|)
                       ('T
@@ -98,7 +98,7 @@
 (DECLAIM (NOTINLINE |SortPackage;|)) 
 
 (DEFUN |SortPackage;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

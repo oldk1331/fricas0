@@ -6,7 +6,17 @@
           (|Union| (|Record| (|:| |ratpart| F) (|:| |coeffs| (|Vector| F)))
                    "failed")))
         (SPROG
-         ((|res1|
+         ((|ext|
+           (|Mapping|
+            (|List| (|Record| (|:| |ratpart| F) (|:| |coeffs| (|Vector| F))))
+            (|List| (|Kernel| F)) (|List| F)))
+          (|logi|
+           (|Mapping|
+            (|Record| (|:| |logands| (|List| F))
+                      (|:| |basis|
+                           (|List| (|Vector| (|Fraction| (|Integer|))))))
+            (|List| (|Kernel| F)) (|List| F)))
+          (|res1|
            (|Record|
             (|:| |particular|
                  (|Union|
@@ -14,17 +24,7 @@
                   "failed"))
             (|:| |basis|
                  (|List|
-                  (|Record| (|:| |ratpart| F) (|:| |coeffs| (|Vector| F)))))))
-          (|logi|
-           (|Mapping|
-            (|Record| (|:| |logands| (|List| F))
-                      (|:| |basis|
-                           (|List| (|Vector| (|Fraction| (|Integer|))))))
-            (|List| (|Kernel| F)) (|List| F)))
-          (|ext|
-           (|Mapping|
-            (|List| (|Record| (|:| |ratpart| F) (|:| |coeffs| (|Vector| F))))
-            (|List| (|Kernel| F)) (|List| F))))
+                  (|Record| (|:| |ratpart| F) (|:| |coeffs| (|Vector| F))))))))
          (SEQ
           (LETT |ext|
                 (CONS #'|RDEEFX2;do_param_RDE;2FLSLU;1!0| (VECTOR % |x|)))
@@ -52,10 +52,10 @@
           (|Record| (|:| |ans| F) (|:| |right| F) (|:| |primpart| F)
                     (|:| |sol?| (|Boolean|)))))
         (SPROG
-         ((|p1| (|Record| (|:| |ratpart| F) (|:| |coeffs| (|Vector| F))))
-          (|part|
+         ((|part|
            (|Union| (|Record| (|:| |ratpart| F) (|:| |coeffs| (|Vector| F)))
-                    "failed")))
+                    "failed"))
+          (|p1| (|Record| (|:| |ratpart| F) (|:| |coeffs| (|Vector| F)))))
          (SEQ (LETT |part| (SPADCALL |f| |g| NIL |x| |lk| (QREFELT % 26)))
               (EXIT
                (COND
@@ -125,7 +125,7 @@
 (DECLAIM (NOTINLINE |ElementaryRischDEX2;|)) 
 
 (DEFUN |ElementaryRischDEX2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -169,9 +169,9 @@
                         %)))))
           %))) 
 
-(DEFUN |ElementaryRischDEX2| (&REST #1=#:G34)
+(DEFUN |ElementaryRischDEX2| (&REST #1=#:G43)
   (SPROG NIL
-         (PROG (#2=#:G35)
+         (PROG (#2=#:G44)
            (RETURN
             (COND
              ((LETT #2#
@@ -196,11 +196,11 @@
               (|ParametricIntegration| 6 7) (0 . |extendedint|)
               (|Record| (|:| |logands| 12)
                         (|:| |basis| (|List| (|Vector| (|Fraction| 21)))))
-              (7 . |logextint|) (14 . |One|) (18 . |One|) (|Union| 8 '"failed")
+              (7 . |logextint|) (14 . |1|) (18 . |1|) (|Union| 8 '"failed")
               (|Record| (|:| |particular| 19) (|:| |basis| 9)) (|Integer|)
               (|Mapping| 9 11 12) (|Mapping| 15 11 12)
               (|ParametricRischDE| 6 7) (22 . |param_rde|)
-              |RDEEFX2;do_param_RDE;2FLSLU;1| (34 . |Zero|) (38 . |Zero|)
+              |RDEEFX2;do_param_RDE;2FLSLU;1| (34 . |0|) (38 . |0|)
               (|Record| (|:| |ans| 7) (|:| |right| 7) (|:| |primpart| 7)
                         (|:| |sol?| (|Boolean|)))
               |RDEEFX2;do_risch_DE;2FSLR;2| (|ElementaryRischDEX| 6 7)

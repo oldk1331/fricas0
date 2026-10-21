@@ -32,7 +32,7 @@
 (DECLAIM (NOTINLINE |EntireRing&;|)) 
 
 (DEFUN |EntireRing&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|EntireRing&| DV$1))
@@ -61,7 +61,7 @@
 
 (MAKEPROP '|EntireRing&| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |One|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |1|)
               (|Record| (|:| |unit| %) (|:| |canonical| %) (|:| |associate| %))
               (4 . |unitNormal|) (9 . |unitNormal|)
               |ENTIRER-;unitCanonical;2S;2| (|Boolean|) (14 . |zero?|)

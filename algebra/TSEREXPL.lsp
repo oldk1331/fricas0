@@ -3,22 +3,22 @@
         ((|f| (ULS)) (|lx| (|List| ULS))
          (|ld| (|List| (|Mapping| |Coef| |Coef|))) (% (ULS)))
         (SPROG
-         ((|lxt| (|List| UTS)) (#1=#:G5 NIL) (|x| NIL) (#2=#:G4 NIL)
-          (|ft| (UTS)))
+         ((|ft| (UTS)) (#1=#:G6 NIL) (|x| NIL) (#2=#:G7 NIL)
+          (|lxt| (|List| UTS)))
          (SEQ (LETT |ft| (SPADCALL |f| (QREFELT % 9)))
               (LETT |lxt|
                     (PROGN
-                     (LETT #2# NIL)
-                     (SEQ (LETT |x| NIL) (LETT #1# |lx|) G190
+                     (LETT #1# NIL)
+                     (SEQ (LETT |x| NIL) (LETT #2# |lx|) G190
                           (COND
-                           ((OR (ATOM #1#) (PROGN (LETT |x| (CAR #1#)) NIL))
+                           ((OR (ATOM #2#) (PROGN (LETT |x| (CAR #2#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #2#
-                                  (CONS (SPADCALL |x| (QREFELT % 9)) #2#))))
-                          (LETT #1# (CDR #1#)) (GO G190) G191
-                          (EXIT (NREVERSE #2#)))))
+                            (LETT #1#
+                                  (CONS (SPADCALL |x| (QREFELT % 9)) #1#))))
+                          (LETT #2# (CDR #2#)) (GO G190) G191
+                          (EXIT (NREVERSE #1#)))))
               (EXIT
                (SPADCALL (SPADCALL |ft| |lxt| |ld| (QREFELT % 14))
                          (QREFELT % 15)))))) 
@@ -43,7 +43,7 @@
 (DECLAIM (NOTINLINE |TaylorSeriesExpansionLaurent;|)) 
 
 (DEFUN |TaylorSeriesExpansionLaurent;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -61,9 +61,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |TaylorSeriesExpansionLaurent| (&REST #1=#:G11)
+(DEFUN |TaylorSeriesExpansionLaurent| (&REST #1=#:G14)
   (SPROG NIL
-         (PROG (#2=#:G12)
+         (PROG (#2=#:G15)
            (RETURN
             (COND
              ((LETT #2#

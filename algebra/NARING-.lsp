@@ -5,7 +5,7 @@
 (DECLAIM (NOTINLINE |NonAssociativeRing&;|)) 
 
 (DEFUN |NonAssociativeRing&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|NonAssociativeRing&| DV$1))
@@ -19,7 +19,7 @@
 
 (MAKEPROP '|NonAssociativeRing&| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |One|) (|Integer|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |1|) (|Integer|)
               (4 . *) |NARING-;coerce;IS;1| (|OutputForm|))
            '#(|coerce| 10) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))

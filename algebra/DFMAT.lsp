@@ -1,18 +1,18 @@
 
-(PUT '|DFMAT;minRowIndex;%I;1| '|SPADreplace| '(XLAM (|x|) 0)) 
+(MAKEPROP '|DFMAT;minRowIndex;%I;1| '|SPADreplace| '(XLAM (|x|) 0)) 
 
 (SDEFUN |DFMAT;minRowIndex;%I;1| ((|x| (%)) (% (|Integer|))) 0) 
 
-(PUT '|DFMAT;minColIndex;%I;2| '|SPADreplace| '(XLAM (|x|) 0)) 
+(MAKEPROP '|DFMAT;minColIndex;%I;2| '|SPADreplace| '(XLAM (|x|) 0)) 
 
 (SDEFUN |DFMAT;minColIndex;%I;2| ((|x| (%)) (% (|Integer|))) 0) 
 
-(PUT '|DFMAT;nrows;%Nni;3| '|SPADreplace| 'DANROWS) 
+(MAKEPROP '|DFMAT;nrows;%Nni;3| '|SPADreplace| 'DANROWS) 
 
 (SDEFUN |DFMAT;nrows;%Nni;3| ((|x| (%)) (% (|NonNegativeInteger|)))
         (DANROWS |x|)) 
 
-(PUT '|DFMAT;ncols;%Nni;4| '|SPADreplace| 'DANCOLS) 
+(MAKEPROP '|DFMAT;ncols;%Nni;4| '|SPADreplace| 'DANCOLS) 
 
 (SDEFUN |DFMAT;ncols;%Nni;4| ((|x| (%)) (% (|NonNegativeInteger|)))
         (DANCOLS |x|)) 
@@ -23,43 +23,44 @@
 (SDEFUN |DFMAT;maxColIndex;%I;6| ((|x| (%)) (% (|Integer|)))
         (- (DANCOLS |x|) 1)) 
 
-(PUT '|DFMAT;qelt;%2IDf;7| '|SPADreplace| 'DAREF2) 
+(MAKEPROP '|DFMAT;qelt;%2IDf;7| '|SPADreplace| 'DAREF2) 
 
 (SDEFUN |DFMAT;qelt;%2IDf;7|
         ((|m| (%)) (|i| #1=(|Integer|)) (|j| #1#) (% (|DoubleFloat|)))
         (DAREF2 |m| |i| |j|)) 
 
-(PUT '|DFMAT;elt;%2IDf;8| '|SPADreplace| 'DAREF2) 
+(MAKEPROP '|DFMAT;elt;%2IDf;8| '|SPADreplace| 'DAREF2) 
 
 (SDEFUN |DFMAT;elt;%2IDf;8|
         ((|m| (%)) (|i| #1=(|Integer|)) (|j| #1#) (% (|DoubleFloat|)))
         (DAREF2 |m| |i| |j|)) 
 
-(PUT '|DFMAT;qsetelt!;%2I2Df;9| '|SPADreplace| 'DSETAREF2) 
+(MAKEPROP '|DFMAT;qsetelt!;%2I2Df;9| '|SPADreplace| 'DSETAREF2) 
 
 (SDEFUN |DFMAT;qsetelt!;%2I2Df;9|
         ((|m| (%)) (|i| #1=(|Integer|)) (|j| #1#) (|r| #2=(|DoubleFloat|))
          (% #2#))
         (DSETAREF2 |m| |i| |j| |r|)) 
 
-(PUT '|DFMAT;setelt!;%2I2Df;10| '|SPADreplace| 'DSETAREF2) 
+(MAKEPROP '|DFMAT;setelt!;%2I2Df;10| '|SPADreplace| 'DSETAREF2) 
 
 (SDEFUN |DFMAT;setelt!;%2I2Df;10|
         ((|m| (%)) (|i| #1=(|Integer|)) (|j| #1#) (|r| #2=(|DoubleFloat|))
          (% #2#))
         (DSETAREF2 |m| |i| |j| |r|)) 
 
-(PUT '|DFMAT;empty;%;11| '|SPADreplace| '(XLAM NIL (MAKE_DOUBLE_MATRIX 0 0))) 
+(MAKEPROP '|DFMAT;empty;%;11| '|SPADreplace|
+          '(XLAM NIL (MAKE_DOUBLE_MATRIX 0 0))) 
 
 (SDEFUN |DFMAT;empty;%;11| ((% (%))) (MAKE_DOUBLE_MATRIX 0 0)) 
 
-(PUT '|DFMAT;qnew;2Nni%;12| '|SPADreplace| 'MAKE_DOUBLE_MATRIX) 
+(MAKEPROP '|DFMAT;qnew;2Nni%;12| '|SPADreplace| 'MAKE_DOUBLE_MATRIX) 
 
 (SDEFUN |DFMAT;qnew;2Nni%;12|
         ((|rows| #1=(|NonNegativeInteger|)) (|cols| #1#) (% (%)))
         (MAKE_DOUBLE_MATRIX |rows| |cols|)) 
 
-(PUT '|DFMAT;new;2NniDf%;13| '|SPADreplace| 'MAKE_DOUBLE_MATRIX1) 
+(MAKEPROP '|DFMAT;new;2NniDf%;13| '|SPADreplace| 'MAKE_DOUBLE_MATRIX1) 
 
 (SDEFUN |DFMAT;new;2NniDf%;13|
         ((|rows| #1=(|NonNegativeInteger|)) (|cols| #1#) (|a| (|DoubleFloat|))
@@ -70,7 +71,7 @@
 
 (DEFUN |DoubleFloatMatrix;| ()
   (SPROG
-   ((|dv$| NIL) (% NIL) (#1=#:G2636 NIL) (#2=#:G2637 NIL) (#3=#:G2635 NIL)
+   ((|dv$| NIL) (% NIL) (#1=#:G25 NIL) (#2=#:G26 NIL) (#3=#:G24 NIL)
     (|pv$| NIL))
    (PROGN
     (LETT |dv$| '(|DoubleFloatMatrix|))
@@ -162,7 +163,7 @@
 
 (DEFUN |DoubleFloatMatrix| ()
   (SPROG NIL
-         (PROG (#1=#:G2639)
+         (PROG (#1=#:G28)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|DoubleFloatMatrix|))
@@ -216,20 +217,21 @@
               |blockConcat| 721 |array2| 726 |any?| 731 |antisymmetric?| 737 ^
               742 |Pfaffian| 754 = 759 / 765 - 771 + 782 * 788 |#| 824)
            'NIL
-           (CONS (|makeByteWordVec2| 11 '(0 0 1 0 2 6 9 0 7 11 9 0 0 0 0))
+           (CONS (|makeByteWordVec2| 11 '(0 0 1 1 0 2 6 9 0 7 11 9 0 0 0 0))
                  (CONS
-                  '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL
+                  '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL NIL
                      |HomogeneousAggregate&| |Hashable&| |SetCategory&|
                      |Evalable&| |Aggregate&| |BasicType&| NIL |InnerEvalable&|
                      NIL NIL NIL NIL)
                   (CONS
                    '#((|MatrixCategory| 14 25 25)
                       (|TwoDimensionalArrayCategory| 14 25 25) (|Comparable|)
-                      (|HomogeneousAggregate| 14) (|Hashable|) (|SetCategory|)
-                      (|Evalable| 14) (|Aggregate|) (|BasicType|)
-                      (|CoercibleTo| 43) (|InnerEvalable| 14 14)
-                      (|shallowlyMutable|) (|finiteAggregate|)
-                      (|MatrixOperationsCategory| 14 25 25) (|Type|))
+                      (|ComparableRepresentation|) (|HomogeneousAggregate| 14)
+                      (|Hashable|) (|SetCategory|) (|Evalable| 14)
+                      (|Aggregate|) (|BasicType|) (|CoercibleTo| 43)
+                      (|InnerEvalable| 14 14) (|shallowlyMutable|)
+                      (|finiteAggregate|) (|MatrixOperationsCategory| 14 25 25)
+                      (|Type|))
                    (|makeByteWordVec2| 48
                                        '(2 23 22 0 0 1 1 12 22 0 1 2 0 0 9 9 1
                                          2 0 30 0 32 1 2 0 30 0 33 1 2 0 0 0 0

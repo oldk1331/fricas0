@@ -4,20 +4,20 @@
           (|List| (|Mapping| (|List| (|PrimitiveArray| (|PrimeField| |p|))))))
          (|c| (|Integer|)) (% (|List| UP)))
         (SPROG
-         ((|res| (|List| UP)) (#1=#:G10 NIL) (|v| NIL)
-          (|vl| (|List| (|PrimitiveArray| (|PrimeField| |p|)))) (#2=#:G9 NIL)
-          (|sf| NIL))
+         ((|sf| NIL) (#1=#:G9 NIL)
+          (|vl| (|List| (|PrimitiveArray| (|PrimeField| |p|)))) (|v| NIL)
+          (#2=#:G10 NIL) (|res| (|List| UP)))
          (SEQ (LETT |res| NIL)
-              (SEQ (LETT |sf| NIL) (LETT #2# |sfl|) G190
+              (SEQ (LETT |sf| NIL) (LETT #1# |sfl|) G190
                    (COND
-                    ((OR (ATOM #2#) (PROGN (LETT |sf| (CAR #2#)) NIL))
+                    ((OR (ATOM #1#) (PROGN (LETT |sf| (CAR #1#)) NIL))
                      (GO G191)))
                    (SEQ (LETT |vl| (SPADCALL |sf|))
                         (EXIT
-                         (SEQ (LETT |v| NIL) (LETT #1# |vl|) G190
+                         (SEQ (LETT |v| NIL) (LETT #2# |vl|) G190
                               (COND
-                               ((OR (ATOM #1#)
-                                    (PROGN (LETT |v| (CAR #1#)) NIL))
+                               ((OR (ATOM #2#)
+                                    (PROGN (LETT |v| (CAR #2#)) NIL))
                                 (GO G191)))
                               (SEQ
                                (EXIT
@@ -26,14 +26,14 @@
                                        (SPADCALL (SPADCALL |v| (QREFELT % 11))
                                                  (QREFELT % 12))
                                        |res|))))
-                              (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))))
-                   (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                              (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))))
+                   (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
               (EXIT (CONS (SPADCALL |c| (QREFELT % 14)) |res|))))) 
 
 (DECLAIM (NOTINLINE |GaloisGroupFactorizerSeparate;|)) 
 
 (DEFUN |GaloisGroupFactorizerSeparate;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT DV$2 (|devaluate| |#2|))

@@ -1,18 +1,18 @@
 
-(PUT '|CARD;Zero;%;1| '|SPADreplace| '(XLAM NIL (CONS -1 0))) 
+(MAKEPROP '|CARD;0;%;1| '|SPADreplace| '(XLAM NIL (CONS -1 0))) 
 
-(SDEFUN |CARD;Zero;%;1| ((% (%))) (CONS -1 0)) 
+(SDEFUN |CARD;0;%;1| ((% (%))) (CONS -1 0)) 
 
-(PUT '|CARD;One;%;2| '|SPADreplace| '(XLAM NIL (CONS -1 1))) 
+(MAKEPROP '|CARD;1;%;2| '|SPADreplace| '(XLAM NIL (CONS -1 1))) 
 
-(SDEFUN |CARD;One;%;2| ((% (%))) (CONS -1 1)) 
+(SDEFUN |CARD;1;%;2| ((% (%))) (CONS -1 1)) 
 
-(PUT '|CARD;coerce;Nni%;3| '|SPADreplace| '(XLAM (|n|) (CONS -1 |n|))) 
+(MAKEPROP '|CARD;coerce;Nni%;3| '|SPADreplace| '(XLAM (|n|) (CONS -1 |n|))) 
 
 (SDEFUN |CARD;coerce;Nni%;3| ((|n| (|NonNegativeInteger|)) (% (%)))
         (CONS -1 |n|)) 
 
-(PUT '|CARD;Aleph;Nni%;4| '|SPADreplace| '(XLAM (|n|) (CONS |n| -1))) 
+(MAKEPROP '|CARD;Aleph;Nni%;4| '|SPADreplace| '(XLAM (|n|) (CONS |n| -1))) 
 
 (SDEFUN |CARD;Aleph;Nni%;4| ((|n| (|NonNegativeInteger|)) (% (%)))
         (CONS |n| -1)) 
@@ -70,7 +70,7 @@
               ((EQL |n| 0) (|spadConstant| % 9)) ('T |x|))) 
 
 (SDEFUN |CARD;^;3%;12| ((|x| (%)) (|y| (%)) (% (%)))
-        (SPROG ((#1=#:G53 NIL))
+        (SPROG ((#1=#:G54 NIL))
                (COND
                 ((SPADCALL |y| (|spadConstant| % 9) (QREFELT % 25))
                  (|spadConstant| % 8))
@@ -98,7 +98,7 @@
 (SDEFUN |CARD;countable?;%B;14| ((|x| (%)) (% (|Boolean|))) (< (QCAR |x|) 1)) 
 
 (SDEFUN |CARD;retract;%Nni;15| ((|x| (%)) (% (|NonNegativeInteger|)))
-        (SPROG ((#1=#:G62 NIL))
+        (SPROG ((#1=#:G63 NIL))
                (COND
                 ((SPADCALL |x| (QREFELT % 24))
                  (PROG1 (LETT #1# (QCDR |x|))
@@ -108,7 +108,7 @@
 
 (SDEFUN |CARD;retractIfCan;%U;16|
         ((|x| (%)) (% (|Union| (|NonNegativeInteger|) "failed")))
-        (SPROG ((#1=#:G68 NIL))
+        (SPROG ((#1=#:G69 NIL))
                (COND
                 ((SPADCALL |x| (QREFELT % 24))
                  (CONS 0
@@ -134,6 +134,7 @@
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|CardinalNumber| NIL (CONS 1 %))
           (|stuffDomainSlots| %)
+          (AND (|HasCategory| % '(|SetWithZero|)) (|augmentPredVector| % 1))
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 6
                     (|Record| (|:| |order| (|Integer|))
@@ -144,7 +145,7 @@
 
 (DEFUN |CardinalNumber| ()
   (SPROG NIL
-         (PROG (#1=#:G77)
+         (PROG (#1=#:G78)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|CardinalNumber|))
@@ -163,8 +164,8 @@
 (MAKEPROP '|CardinalNumber| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL '|Rep| '|GCHypothesis|
-              (CONS IDENTITY (FUNCALL (|dispatchFunction| |CARD;One;%;2|) %))
-              (CONS IDENTITY (FUNCALL (|dispatchFunction| |CARD;Zero;%;1|) %))
+              (CONS IDENTITY (FUNCALL (|dispatchFunction| |CARD;1;%;2|) %))
+              (CONS IDENTITY (FUNCALL (|dispatchFunction| |CARD;0;%;1|) %))
               (|NonNegativeInteger|) |CARD;coerce;Nni%;3| |CARD;Aleph;Nni%;4|
               (|OutputForm|) (|Symbol|) (0 . |coerce|) '|ALEPHexpr| (|Integer|)
               (5 . |coerce|) (|List| %) (10 . |prefix|) |CARD;coerce;%Of;5|
@@ -177,42 +178,43 @@
               |CARD;generalizedContinuumHypothesisAssumed?;B;17|
               |CARD;generalizedContinuumHypothesisAssumed;2B;18| (|String|)
               (|PositiveInteger|))
-           '#(~= 34 |zero?| 40 |smaller?| 45 |sample| 51 |rightRecip| 55
-              |rightPower| 60 |retractIfCan| 72 |retract| 77 |recip| 82
-              |opposite?| 87 |one?| 93 |min| 98 |max| 104 |leftRecip| 110
-              |leftPower| 115 |latex| 127
-              |generalizedContinuumHypothesisAssumed?| 132
-              |generalizedContinuumHypothesisAssumed| 136 |finite?| 141
-              |countable?| 146 |coerce| 151 ^ 161 |Zero| 179 |One| 183 |Aleph|
-              187 >= 192 > 198 = 204 <= 210 < 216 - 222 + 228 * 234)
+           '#(~= 34 |zero?| 40 |smaller?| 45 |sign| 51 |sample| 56 |rightRecip|
+              60 |rightPower| 65 |retractIfCan| 77 |retract| 82 |recip| 87
+              |positive?| 92 |opposite?| 97 |one?| 103 |negative?| 108 |min|
+              113 |max| 119 |leftRecip| 125 |leftPower| 130 |latex| 142
+              |generalizedContinuumHypothesisAssumed?| 147
+              |generalizedContinuumHypothesisAssumed| 151 |finite?| 156
+              |countable?| 161 |coerce| 166 ^ 176 |Aleph| 194 >= 199 > 205 =
+              211 <= 217 < 223 |1| 229 |0| 233 - 237 + 243 * 249)
            'NIL
-           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
+           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(NIL |AbelianMonoid&| NIL |MagmaWithUnit&| |OrderedSet&|
-                     |AbelianSemiGroup&| |Magma&| NIL |SetCategory&|
-                     |RetractableTo&| NIL NIL |PartialOrder&| |BasicType&| NIL
-                     NIL)
+                  '#(NIL |OrderedSet&| |AbelianMonoid&| NIL |MagmaWithUnit&|
+                     NIL |AbelianSemiGroup&| |SetWithZero&| |Magma&| NIL
+                     |SetCategory&| |RetractableTo&| NIL NIL |PartialOrder&|
+                     |BasicType&| NIL NIL)
                   (CONS
-                   '#((|Monoid|) (|AbelianMonoid|) (|SemiGroup|)
-                      (|MagmaWithUnit|) (|OrderedSet|) (|AbelianSemiGroup|)
-                      (|Magma|) (|Comparable|) (|SetCategory|)
-                      (|RetractableTo| 10) (|CommutativeStar|)
+                   '#((|Monoid|) (|OrderedSet|) (|AbelianMonoid|) (|SemiGroup|)
+                      (|MagmaWithUnit|) (|Comparable|) (|AbelianSemiGroup|)
+                      (|SetWithZero|) (|Magma|) (|ComparableRepresentation|)
+                      (|SetCategory|) (|RetractableTo| 10) (|CommutativeStar|)
                       (|CoercibleTo| 13) (|PartialOrder|) (|BasicType|)
                       (|CoercibleFrom| 10) (|TwoSidedRecip|))
                    (|makeByteWordVec2| 42
                                        '(1 14 13 0 15 1 17 13 0 18 2 13 0 0 19
                                          20 2 17 22 0 0 23 2 0 0 0 0 27 2 0 22
                                          0 0 29 2 0 22 0 0 1 1 0 22 0 1 2 0 22
-                                         0 0 1 0 0 0 1 1 0 30 0 1 2 0 0 0 10 1
-                                         2 0 0 0 42 1 1 0 37 0 38 1 0 10 0 36 1
-                                         0 30 0 1 2 0 22 0 0 1 1 0 22 0 1 2 0 0
-                                         0 0 1 2 0 0 0 0 27 1 0 30 0 1 2 0 0 0
-                                         10 1 2 0 0 0 42 1 1 0 41 0 1 0 0 22 39
-                                         1 0 22 22 40 1 0 22 0 24 1 0 22 0 35 1
-                                         0 13 0 21 1 0 0 10 11 2 0 0 0 10 1 2 0
-                                         0 0 42 1 2 0 0 0 0 34 0 0 0 9 0 0 0 8
-                                         1 0 0 10 12 2 0 22 0 0 1 2 0 22 0 0 29
-                                         2 0 22 0 0 25 2 0 22 0 0 1 2 0 22 0 0
-                                         26 2 0 30 0 0 31 2 0 0 0 0 28 2 0 0 10
-                                         0 33 2 0 0 42 0 1 2 0 0 0 0 32)))))
+                                         0 0 1 1 1 17 0 1 0 0 0 1 1 0 30 0 1 2
+                                         0 0 0 10 1 2 0 0 0 42 1 1 0 37 0 38 1
+                                         0 10 0 36 1 0 30 0 1 1 1 22 0 1 2 0 22
+                                         0 0 1 1 0 22 0 1 1 1 22 0 1 2 0 0 0 0
+                                         1 2 0 0 0 0 27 1 0 30 0 1 2 0 0 0 10 1
+                                         2 0 0 0 42 1 1 0 41 0 1 0 0 22 39 1 0
+                                         22 22 40 1 0 22 0 24 1 0 22 0 35 1 0
+                                         13 0 21 1 0 0 10 11 2 0 0 0 10 1 2 0 0
+                                         0 42 1 2 0 0 0 0 34 1 0 0 10 12 2 0 22
+                                         0 0 1 2 0 22 0 0 29 2 0 22 0 0 25 2 0
+                                         22 0 0 1 2 0 22 0 0 26 0 0 0 8 0 0 0 9
+                                         2 0 30 0 0 31 2 0 0 0 0 28 2 0 0 10 0
+                                         33 2 0 0 42 0 1 2 0 0 0 0 32)))))
            '|lookupComplete|)) 

@@ -16,7 +16,7 @@
                     (LIST '(|Integer|) '(|Integer|) '(|InputForm|)
                           '(|Pattern| (|Integer|)) '(|Integer|))
                     (|Join| (|UniqueFactorizationDomain|) (|EuclideanDomain|)
-                            (|OrderedIntegralDomain|) (|DifferentialRing|)
+                            (|OrderedRing|) (|DifferentialRing|)
                             (|ConvertibleTo| '#2#) (|RetractableTo| '#3#)
                             (|ConvertibleTo| '#4#) (|ConvertibleTo| '#5#)
                             (|PatternMatchable| '#6#)

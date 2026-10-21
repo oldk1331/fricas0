@@ -82,8 +82,8 @@
 
 (DEFUN |PowerSeriesCategory&| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -112,7 +112,7 @@
 (MAKEPROP '|PowerSeriesCategory&| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (|local| |#4|) (0 . |Zero|) (|Integer|) (4 . *)
+              (|local| |#3|) (|local| |#4|) (0 . |0|) (|Integer|) (4 . *)
               (|Mapping| 7 7) (10 . |map|) |PSCAT-;*;I2S;1| (|Boolean|)
               (16 . |zero?|) (21 . *) |PSCAT-;*;Coef2S;2| |PSCAT-;*;SCoefS;3|
               (27 . -) |PSCAT-;-;2S;4| (|Fraction| 11) (32 . |zero?|) (37 . *)

@@ -1,5 +1,5 @@
 
-(PUT '|MATSTOR;rep| '|SPADreplace| '(XLAM (|m|) |m|)) 
+(MAKEPROP '|MATSTOR;rep| '|SPADreplace| '(XLAM (|m|) |m|)) 
 
 (SDEFUN |MATSTOR;rep|
         ((|m| (|Matrix| R)) (% (|PrimitiveArray| (|PrimitiveArray| R)))) |m|) 
@@ -7,10 +7,10 @@
 (SDEFUN |MATSTOR;copy!;3M;2|
         ((|c| (|Matrix| R)) (|a| (|Matrix| R)) (% (|Matrix| R)))
         (SPROG
-         ((#1=#:G38 NIL) (|j| NIL) (|cRow| #2=(|PrimitiveArray| R))
-          (|aRow| #2#) (#3=#:G37 NIL) (|i| NIL)
-          (|cc| #4=(|PrimitiveArray| (|PrimitiveArray| R))) (|aa| #4#)
-          (|n| (|NonNegativeInteger|)) (|m| (|NonNegativeInteger|)))
+         ((|m| (|NonNegativeInteger|)) (|n| (|NonNegativeInteger|))
+          (|aa| #1=(|PrimitiveArray| (|PrimitiveArray| R))) (|cc| #1#)
+          (|i| NIL) (#2=#:G37 NIL) (|aRow| #3=(|PrimitiveArray| R))
+          (|cRow| #3#) (|j| NIL) (#4=#:G38 NIL))
          (SEQ (LETT |m| (ANROWS |a|)) (LETT |n| (ANCOLS |a|))
               (COND
                ((EQL (ANROWS |c|) |m|)
@@ -22,13 +22,13 @@
                ('T (EXIT (|error| #5#))))
               (LETT |aa| (|MATSTOR;rep| |a| %))
               (LETT |cc| (|MATSTOR;rep| |c| %))
-              (SEQ (LETT |i| 0) (LETT #3# (- |m| 1)) G190
-                   (COND ((|greater_SI| |i| #3#) (GO G191)))
+              (SEQ (LETT |i| 0) (LETT #2# (- |m| 1)) G190
+                   (COND ((|greater_SI| |i| #2#) (GO G191)))
                    (SEQ (LETT |aRow| (QAREF1 |aa| |i|))
                         (LETT |cRow| (QAREF1 |cc| |i|))
                         (EXIT
-                         (SEQ (LETT |j| 0) (LETT #1# (- |n| 1)) G190
-                              (COND ((|greater_SI| |j| #1#) (GO G191)))
+                         (SEQ (LETT |j| 0) (LETT #4# (- |n| 1)) G190
+                              (COND ((|greater_SI| |j| #4#) (GO G191)))
                               (SEQ
                                (EXIT
                                 (QSETAREF1 |cRow| |j| (QAREF1 |aRow| |j|))))
@@ -41,10 +41,10 @@
         ((|c| (|Matrix| R)) (|a| (|Matrix| R)) (|b| (|Matrix| R))
          (% (|Matrix| R)))
         (SPROG
-         ((#1=#:G51 NIL) (|j| NIL) (|cRow| #2=(|PrimitiveArray| R))
-          (|bRow| #2#) (|aRow| #2#) (#3=#:G50 NIL) (|i| NIL)
-          (|cc| #4=(|PrimitiveArray| (|PrimitiveArray| R))) (|bb| #4#)
-          (|aa| #4#) (|n| (|NonNegativeInteger|)) (|m| (|NonNegativeInteger|)))
+         ((|m| (|NonNegativeInteger|)) (|n| (|NonNegativeInteger|))
+          (|aa| #1=(|PrimitiveArray| (|PrimitiveArray| R))) (|bb| #1#)
+          (|cc| #1#) (|i| NIL) (#2=#:G50 NIL) (|aRow| #3=(|PrimitiveArray| R))
+          (|bRow| #3#) (|cRow| #3#) (|j| NIL) (#4=#:G51 NIL))
          (SEQ (LETT |m| (ANROWS |a|)) (LETT |n| (ANCOLS |a|))
               (COND
                ((EQL (ANROWS |b|) |m|)
@@ -65,14 +65,14 @@
               (LETT |aa| (|MATSTOR;rep| |a| %))
               (LETT |bb| (|MATSTOR;rep| |b| %))
               (LETT |cc| (|MATSTOR;rep| |c| %))
-              (SEQ (LETT |i| 0) (LETT #3# (- |m| 1)) G190
-                   (COND ((|greater_SI| |i| #3#) (GO G191)))
+              (SEQ (LETT |i| 0) (LETT #2# (- |m| 1)) G190
+                   (COND ((|greater_SI| |i| #2#) (GO G191)))
                    (SEQ (LETT |aRow| (QAREF1 |aa| |i|))
                         (LETT |bRow| (QAREF1 |bb| |i|))
                         (LETT |cRow| (QAREF1 |cc| |i|))
                         (EXIT
-                         (SEQ (LETT |j| 0) (LETT #1# (- |n| 1)) G190
-                              (COND ((|greater_SI| |j| #1#) (GO G191)))
+                         (SEQ (LETT |j| 0) (LETT #4# (- |n| 1)) G190
+                              (COND ((|greater_SI| |j| #4#) (GO G191)))
                               (SEQ
                                (EXIT
                                 (QSETAREF1 |cRow| |j|
@@ -87,10 +87,10 @@
 (SDEFUN |MATSTOR;minus!;3M;4|
         ((|c| (|Matrix| R)) (|a| (|Matrix| R)) (% (|Matrix| R)))
         (SPROG
-         ((#1=#:G62 NIL) (|j| NIL) (|cRow| #2=(|PrimitiveArray| R))
-          (|aRow| #2#) (#3=#:G61 NIL) (|i| NIL)
-          (|cc| #4=(|PrimitiveArray| (|PrimitiveArray| R))) (|aa| #4#)
-          (|n| (|NonNegativeInteger|)) (|m| (|NonNegativeInteger|)))
+         ((|m| (|NonNegativeInteger|)) (|n| (|NonNegativeInteger|))
+          (|aa| #1=(|PrimitiveArray| (|PrimitiveArray| R))) (|cc| #1#)
+          (|i| NIL) (#2=#:G61 NIL) (|aRow| #3=(|PrimitiveArray| R))
+          (|cRow| #3#) (|j| NIL) (#4=#:G62 NIL))
          (SEQ (LETT |m| (ANROWS |a|)) (LETT |n| (ANCOLS |a|))
               (COND
                ((EQL (ANROWS |c|) |m|)
@@ -102,13 +102,13 @@
                ('T (EXIT (|error| #5#))))
               (LETT |aa| (|MATSTOR;rep| |a| %))
               (LETT |cc| (|MATSTOR;rep| |c| %))
-              (SEQ (LETT |i| 0) (LETT #3# (- |m| 1)) G190
-                   (COND ((|greater_SI| |i| #3#) (GO G191)))
+              (SEQ (LETT |i| 0) (LETT #2# (- |m| 1)) G190
+                   (COND ((|greater_SI| |i| #2#) (GO G191)))
                    (SEQ (LETT |aRow| (QAREF1 |aa| |i|))
                         (LETT |cRow| (QAREF1 |cc| |i|))
                         (EXIT
-                         (SEQ (LETT |j| 0) (LETT #1# (- |n| 1)) G190
-                              (COND ((|greater_SI| |j| #1#) (GO G191)))
+                         (SEQ (LETT |j| 0) (LETT #4# (- |n| 1)) G190
+                              (COND ((|greater_SI| |j| #4#) (GO G191)))
                               (SEQ
                                (EXIT
                                 (QSETAREF1 |cRow| |j|
@@ -123,10 +123,10 @@
         ((|c| (|Matrix| R)) (|a| (|Matrix| R)) (|b| (|Matrix| R))
          (% (|Matrix| R)))
         (SPROG
-         ((#1=#:G75 NIL) (|j| NIL) (|cRow| #2=(|PrimitiveArray| R))
-          (|bRow| #2#) (|aRow| #2#) (#3=#:G74 NIL) (|i| NIL)
-          (|cc| #4=(|PrimitiveArray| (|PrimitiveArray| R))) (|bb| #4#)
-          (|aa| #4#) (|n| (|NonNegativeInteger|)) (|m| (|NonNegativeInteger|)))
+         ((|m| (|NonNegativeInteger|)) (|n| (|NonNegativeInteger|))
+          (|aa| #1=(|PrimitiveArray| (|PrimitiveArray| R))) (|bb| #1#)
+          (|cc| #1#) (|i| NIL) (#2=#:G74 NIL) (|aRow| #3=(|PrimitiveArray| R))
+          (|bRow| #3#) (|cRow| #3#) (|j| NIL) (#4=#:G75 NIL))
          (SEQ (LETT |m| (ANROWS |a|)) (LETT |n| (ANCOLS |a|))
               (COND
                ((EQL (ANROWS |b|) |m|)
@@ -147,14 +147,14 @@
               (LETT |aa| (|MATSTOR;rep| |a| %))
               (LETT |bb| (|MATSTOR;rep| |b| %))
               (LETT |cc| (|MATSTOR;rep| |c| %))
-              (SEQ (LETT |i| 0) (LETT #3# (- |m| 1)) G190
-                   (COND ((|greater_SI| |i| #3#) (GO G191)))
+              (SEQ (LETT |i| 0) (LETT #2# (- |m| 1)) G190
+                   (COND ((|greater_SI| |i| #2#) (GO G191)))
                    (SEQ (LETT |aRow| (QAREF1 |aa| |i|))
                         (LETT |bRow| (QAREF1 |bb| |i|))
                         (LETT |cRow| (QAREF1 |cc| |i|))
                         (EXIT
-                         (SEQ (LETT |j| 0) (LETT #1# (- |n| 1)) G190
-                              (COND ((|greater_SI| |j| #1#) (GO G191)))
+                         (SEQ (LETT |j| 0) (LETT #4# (- |n| 1)) G190
+                              (COND ((|greater_SI| |j| #4#) (GO G191)))
                               (SEQ
                                (EXIT
                                 (QSETAREF1 |cRow| |j|
@@ -169,10 +169,10 @@
 (SDEFUN |MATSTOR;leftScalarTimes!;MR2M;6|
         ((|c| (|Matrix| R)) (|r| (R)) (|a| (|Matrix| R)) (% (|Matrix| R)))
         (SPROG
-         ((#1=#:G86 NIL) (|j| NIL) (|cRow| #2=(|PrimitiveArray| R))
-          (|aRow| #2#) (#3=#:G85 NIL) (|i| NIL)
-          (|cc| #4=(|PrimitiveArray| (|PrimitiveArray| R))) (|aa| #4#)
-          (|n| (|NonNegativeInteger|)) (|m| (|NonNegativeInteger|)))
+         ((|m| (|NonNegativeInteger|)) (|n| (|NonNegativeInteger|))
+          (|aa| #1=(|PrimitiveArray| (|PrimitiveArray| R))) (|cc| #1#)
+          (|i| NIL) (#2=#:G85 NIL) (|aRow| #3=(|PrimitiveArray| R))
+          (|cRow| #3#) (|j| NIL) (#4=#:G86 NIL))
          (SEQ (LETT |m| (ANROWS |a|)) (LETT |n| (ANCOLS |a|))
               (COND
                ((EQL (ANROWS |c|) |m|)
@@ -184,13 +184,13 @@
                ('T (EXIT (|error| #5#))))
               (LETT |aa| (|MATSTOR;rep| |a| %))
               (LETT |cc| (|MATSTOR;rep| |c| %))
-              (SEQ (LETT |i| 0) (LETT #3# (- |m| 1)) G190
-                   (COND ((|greater_SI| |i| #3#) (GO G191)))
+              (SEQ (LETT |i| 0) (LETT #2# (- |m| 1)) G190
+                   (COND ((|greater_SI| |i| #2#) (GO G191)))
                    (SEQ (LETT |aRow| (QAREF1 |aa| |i|))
                         (LETT |cRow| (QAREF1 |cc| |i|))
                         (EXIT
-                         (SEQ (LETT |j| 0) (LETT #1# (- |n| 1)) G190
-                              (COND ((|greater_SI| |j| #1#) (GO G191)))
+                         (SEQ (LETT |j| 0) (LETT #4# (- |n| 1)) G190
+                              (COND ((|greater_SI| |j| #4#) (GO G191)))
                               (SEQ
                                (EXIT
                                 (QSETAREF1 |cRow| |j|
@@ -204,10 +204,10 @@
 (SDEFUN |MATSTOR;rightScalarTimes!;2MRM;7|
         ((|c| (|Matrix| R)) (|a| (|Matrix| R)) (|r| (R)) (% (|Matrix| R)))
         (SPROG
-         ((#1=#:G97 NIL) (|j| NIL) (|cRow| #2=(|PrimitiveArray| R))
-          (|aRow| #2#) (#3=#:G96 NIL) (|i| NIL)
-          (|cc| #4=(|PrimitiveArray| (|PrimitiveArray| R))) (|aa| #4#)
-          (|n| (|NonNegativeInteger|)) (|m| (|NonNegativeInteger|)))
+         ((|m| (|NonNegativeInteger|)) (|n| (|NonNegativeInteger|))
+          (|aa| #1=(|PrimitiveArray| (|PrimitiveArray| R))) (|cc| #1#)
+          (|i| NIL) (#2=#:G96 NIL) (|aRow| #3=(|PrimitiveArray| R))
+          (|cRow| #3#) (|j| NIL) (#4=#:G97 NIL))
          (SEQ (LETT |m| (ANROWS |a|)) (LETT |n| (ANCOLS |a|))
               (COND
                ((EQL (ANROWS |c|) |m|)
@@ -219,13 +219,13 @@
                ('T (EXIT (|error| #5#))))
               (LETT |aa| (|MATSTOR;rep| |a| %))
               (LETT |cc| (|MATSTOR;rep| |c| %))
-              (SEQ (LETT |i| 0) (LETT #3# (- |m| 1)) G190
-                   (COND ((|greater_SI| |i| #3#) (GO G191)))
+              (SEQ (LETT |i| 0) (LETT #2# (- |m| 1)) G190
+                   (COND ((|greater_SI| |i| #2#) (GO G191)))
                    (SEQ (LETT |aRow| (QAREF1 |aa| |i|))
                         (LETT |cRow| (QAREF1 |cc| |i|))
                         (EXIT
-                         (SEQ (LETT |j| 0) (LETT #1# (- |n| 1)) G190
-                              (COND ((|greater_SI| |j| #1#) (GO G191)))
+                         (SEQ (LETT |j| 0) (LETT #4# (- |n| 1)) G190
+                              (COND ((|greater_SI| |j| #4#) (GO G191)))
                               (SEQ
                                (EXIT
                                 (QSETAREF1 |cRow| |j|
@@ -239,8 +239,8 @@
 (SDEFUN |MATSTOR;copyCol!|
         ((|bCol| (|PrimitiveArray| R))
          (|bb| (|PrimitiveArray| (|PrimitiveArray| R))) (|j| (|Integer|))
-         (|n1| (|Integer|)) (% (|PrimitiveArray| R)))
-        (SPROG ((#1=#:G101 NIL) (|i| NIL))
+         (|n1| (|Integer|)) (% (|Void|)))
+        (SPROG ((|i| NIL) (#1=#:G101 NIL))
                (SEQ (LETT |i| 0) (LETT #1# |n1|) G190
                     (COND ((|greater_SI| |i| #1#) (GO G191)))
                     (SEQ
@@ -252,13 +252,12 @@
         ((|c| (|Matrix| R)) (|a| (|Matrix| R)) (|b| (|Matrix| R))
          (% (|Matrix| R)))
         (SPROG
-         ((|sum| (R)) (#1=#:G117 NIL) (|k| NIL)
-          (|cRow| #2=(|PrimitiveArray| R)) (|aRow| #2#) (#3=#:G116 NIL)
-          (|i| NIL) (#4=#:G115 NIL) (|j| NIL) (|n1| #5=(|Integer|)) (|m1| #5#)
-          (|bCol| (|PrimitiveArray| R))
-          (|cc| #6=(|PrimitiveArray| (|PrimitiveArray| R))) (|bb| #6#)
-          (|aa| #6#) (|p| #7=(|NonNegativeInteger|)) (|n| #7#)
-          (|m| (|NonNegativeInteger|)))
+         ((|m| (|NonNegativeInteger|)) (|n| #1=(|NonNegativeInteger|))
+          (|p| #1#) (|aa| #2=(|PrimitiveArray| (|PrimitiveArray| R)))
+          (|bb| #2#) (|cc| #2#) (|bCol| (|PrimitiveArray| R))
+          (|m1| #3=(|Integer|)) (|n1| #3#) (|j| NIL) (#4=#:G115 NIL) (|i| NIL)
+          (#5=#:G116 NIL) (|aRow| #6=(|PrimitiveArray| R)) (|cRow| #6#)
+          (|k| NIL) (#7=#:G117 NIL) (|sum| (R)))
          (SEQ (LETT |m| (ANROWS |a|)) (LETT |n| (ANCOLS |a|))
               (LETT |p| (ANCOLS |b|))
               (COND
@@ -281,14 +280,14 @@
                    (COND ((|greater_SI| |j| #4#) (GO G191)))
                    (SEQ (|MATSTOR;copyCol!| |bCol| |bb| |j| |n1| %)
                         (EXIT
-                         (SEQ (LETT |i| 0) (LETT #3# |m1|) G190
-                              (COND ((|greater_SI| |i| #3#) (GO G191)))
+                         (SEQ (LETT |i| 0) (LETT #5# |m1|) G190
+                              (COND ((|greater_SI| |i| #5#) (GO G191)))
                               (SEQ (LETT |aRow| (QAREF1 |aa| |i|))
                                    (LETT |cRow| (QAREF1 |cc| |i|))
                                    (LETT |sum| (|spadConstant| % 19))
-                                   (SEQ (LETT |k| 0) (LETT #1# |n1|) G190
+                                   (SEQ (LETT |k| 0) (LETT #7# |n1|) G190
                                         (COND
-                                         ((|greater_SI| |k| #1#) (GO G191)))
+                                         ((|greater_SI| |k| #7#) (GO G191)))
                                         (SEQ
                                          (EXIT
                                           (LETT |sum|
@@ -310,8 +309,8 @@
         ((|a| (|Matrix| R)) (|b| (|Matrix| R)) (|c| (|Matrix| R))
          (|m| (|Matrix| R)) (|p| (|NonNegativeInteger|)) (% (|Matrix| R)))
         (SPROG
-         ((#1=#:G134 NIL) (|flag| (|Boolean|)) (|nn| (|NonNegativeInteger|))
-          (|mm| (|NonNegativeInteger|)))
+         ((|mm| (|NonNegativeInteger|)) (|nn| (|NonNegativeInteger|))
+          (|flag| (|Boolean|)) (#1=#:G134 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |mm| (ANROWS |a|)) (LETT |nn| (ANCOLS |a|))
@@ -362,7 +361,7 @@
                              ((EQL |p| 1)
                               (PROGN (LETT #1# |a|) (GO #6=#:G133)))
                              ('T
-                              (SEQ (LETT |p| (QUOTIENT2 |p| 2))
+                              (SEQ (LETT |p| (|quotient_INT| |p| 2))
                                    (SPADCALL |c| |b| |b| (QREFELT % 20))
                                    (EXIT (SPADCALL |b| |c| (QREFELT % 9))))))))
                           NIL (GO G190) G191 (EXIT NIL)))))
@@ -371,7 +370,7 @@
 
 (SDEFUN |MATSTOR;^;MNniM;11|
         ((|m| (|Matrix| R)) (|n| (|NonNegativeInteger|)) (% (|Matrix| R)))
-        (SPROG ((|c| #1=(|Matrix| R)) (|b| #1#) (|a| #1#))
+        (SPROG ((|a| #1=(|Matrix| R)) (|b| #1#) (|c| #1#))
                (SEQ
                 (COND
                  ((NULL (SPADCALL |m| (QREFELT % 24)))
@@ -386,7 +385,7 @@
 (DECLAIM (NOTINLINE |StorageEfficientMatrixOperations;|)) 
 
 (DEFUN |StorageEfficientMatrixOperations;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|StorageEfficientMatrixOperations| DV$1))
@@ -422,11 +421,11 @@
 
 (MAKEPROP '|StorageEfficientMatrixOperations| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |One|) (|Matrix| 6)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |1|) (|Matrix| 6)
               |MATSTOR;copy!;3M;2| (4 . +) |MATSTOR;plus!;4M;3| (10 . -)
               |MATSTOR;minus!;3M;4| (15 . -) |MATSTOR;minus!;4M;5| (21 . *)
               |MATSTOR;leftScalarTimes!;MR2M;6|
-              |MATSTOR;rightScalarTimes!;2MRM;7| (27 . |Zero|)
+              |MATSTOR;rightScalarTimes!;2MRM;7| (27 . |0|)
               |MATSTOR;times!;4M;9| (|NonNegativeInteger|)
               |MATSTOR;power!;4MNniM;10| (|Boolean|) (31 . |square?|)
               (36 . |copy|) |MATSTOR;^;MNniM;11|)

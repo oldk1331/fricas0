@@ -37,7 +37,7 @@
 
 (SDEFUN |GALUTIL;safetyMargin;2Nni;3|
         ((|n| (|NonNegativeInteger|)) (% (|NonNegativeInteger|)))
-        (SPROG ((|#G7| (|NonNegativeInteger|)) (|#G6| (|NonNegativeInteger|)))
+        (SPROG ((|#G6| (|NonNegativeInteger|)) (|#G7| (|NonNegativeInteger|)))
                (SEQ
                 (PROGN
                  (LETT |#G6| |n|)
@@ -51,10 +51,12 @@
 (SDEFUN |GALUTIL;pascalTriangle;NniIR;5|
         ((|n| (|NonNegativeInteger|)) (|r| (|Integer|)) (% (R)))
         (SPROG
-         ((#1=#:G16 NIL) (#2=#:G15 NIL) (#3=#:G26 NIL) (|j| NIL) (#4=#:G25 NIL)
-          (|i| NIL) (|mq| #5=(|Integer|))
-          (|m| (|Record| (|:| |quotient| #5#) (|:| |remainder| (|Integer|))))
-          (|d| (|Integer|)))
+         ((|d| (|Integer|))
+          (|m|
+           (|Record| (|:| |quotient| #1=(|Integer|))
+                     (|:| |remainder| (|Integer|))))
+          (|mq| #1#) (|i| NIL) (#2=#:G25 NIL) (|j| NIL) (#3=#:G26 NIL)
+          (#4=#:G15 NIL) (#5=#:G16 NIL))
          (SEQ
           (COND ((MINUSP |r|) (|spadConstant| % 12))
                 (#6='T
@@ -67,7 +69,7 @@
                               (SPADCALL (SPADCALL |n| |r| (QREFELT % 32))
                                         (QREFELT % 30)))
                              ((<= |n| (QREFELT % 27))
-                              (SEQ (LETT |m| (DIVIDE2 (- |n| 4) 2))
+                              (SEQ (LETT |m| (|divide_INT| (- |n| 4) 2))
                                    (LETT |mq| (QCAR |m|))
                                    (EXIT
                                     (SPADCALL (QREFELT % 26)
@@ -81,11 +83,12 @@
                              (#6#
                               (SEQ
                                (SEQ (LETT |i| (+ (QREFELT % 27) 1))
-                                    (LETT #4# |n|) G190
-                                    (COND ((> |i| #4#) (GO G191)))
+                                    (LETT #2# |n|) G190
+                                    (COND ((> |i| #2#) (GO G191)))
                                     (SEQ
                                      (SEQ (LETT |j| 2)
-                                          (LETT #3# (QUOTIENT2 |i| 2)) G190
+                                          (LETT #3# (|quotient_INT| |i| 2))
+                                          G190
                                           (COND
                                            ((|greater_SI| |j| #3#) (GO G191)))
                                           (SEQ
@@ -95,28 +98,28 @@
                                                               (SPADCALL
                                                                (SPADCALL
                                                                 (PROG1
-                                                                    (LETT #2#
+                                                                    (LETT #4#
                                                                           (-
                                                                            |i|
                                                                            1))
                                                                   (|check_subtype2|
-                                                                   (>= #2# 0)
+                                                                   (>= #4# 0)
                                                                    '(|NonNegativeInteger|)
                                                                    '(|Integer|)
-                                                                   #2#))
+                                                                   #4#))
                                                                 (- |j| 1)
                                                                 (QREFELT % 29))
                                                                (SPADCALL
                                                                 (PROG1
-                                                                    (LETT #1#
+                                                                    (LETT #5#
                                                                           (-
                                                                            |i|
                                                                            1))
                                                                   (|check_subtype2|
-                                                                   (>= #1# 0)
+                                                                   (>= #5# 0)
                                                                    '(|NonNegativeInteger|)
                                                                    '(|Integer|)
-                                                                   #1#))
+                                                                   #5#))
                                                                 |j|
                                                                 (QREFELT % 29))
                                                                (QREFELT % 15))
@@ -133,9 +136,11 @@
 (SDEFUN |GALUTIL;rangePascalTriangle;2Nni;6|
         ((|n| (|NonNegativeInteger|)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((|#G18| (|NonNegativeInteger|)) (|#G17| (|NonNegativeInteger|))
-          (|dq| #1=(|Integer|))
-          (|d| (|Record| (|:| |quotient| #1#) (|:| |remainder| (|Integer|)))))
+         ((|d|
+           (|Record| (|:| |quotient| #1=(|Integer|))
+                     (|:| |remainder| (|Integer|))))
+          (|dq| #1#) (|#G17| (|NonNegativeInteger|))
+          (|#G18| (|NonNegativeInteger|)))
          (SEQ
           (COND
            ((< |n| (QREFELT % 27))
@@ -151,7 +156,7 @@
                                  (QREFELT % 38)))
                (EXIT (SETELT % 27 3))))
              ('T
-              (SEQ (LETT |d| (DIVIDE2 (- |n| 3) 2)) (LETT |dq| (QCAR |d|))
+              (SEQ (LETT |d| (|divide_INT| (- |n| 3) 2)) (LETT |dq| (QCAR |d|))
                    (SETELT % 26
                            (SPADCALL (QREFELT % 26)
                                      (SPADCALL
@@ -179,7 +184,7 @@
 (DECLAIM (NOTINLINE |GaloisGroupUtilities;|)) 
 
 (DEFUN |GaloisGroupUtilities;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|GaloisGroupUtilities| DV$1))
@@ -238,7 +243,7 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) '|safetymargin|
               (|Integer|) (0 . |order|) (|PositiveInteger|) (5 . |precision|)
-              (9 . |Zero|) (13 . |One|) (17 . |float|) (23 . +) (29 . |floor|)
+              (9 . |0|) (13 . |1|) (17 . |float|) (23 . +) (29 . |floor|)
               (34 . |retract|) (39 . |safeFloor|) (44 . |ceiling|)
               (49 . |safeCeiling|) (|NonNegativeInteger|) (54 . |safetyMargin|)
               (59 . |safetyMargin|) (|FlexibleArray| 6) (63 . |empty|)

@@ -1,18 +1,18 @@
 
-(PUT '|PRIMMAT2;minRowIndex;%I;1| '|SPADreplace| '(XLAM (|x|) 0)) 
+(MAKEPROP '|PRIMMAT2;minRowIndex;%I;1| '|SPADreplace| '(XLAM (|x|) 0)) 
 
 (SDEFUN |PRIMMAT2;minRowIndex;%I;1| ((|x| (%)) (% (|Integer|))) 0) 
 
-(PUT '|PRIMMAT2;minColIndex;%I;2| '|SPADreplace| '(XLAM (|x|) 0)) 
+(MAKEPROP '|PRIMMAT2;minColIndex;%I;2| '|SPADreplace| '(XLAM (|x|) 0)) 
 
 (SDEFUN |PRIMMAT2;minColIndex;%I;2| ((|x| (%)) (% (|Integer|))) 0) 
 
-(PUT '|PRIMMAT2;nrows;%Nni;3| '|SPADreplace| 'ANROWS) 
+(MAKEPROP '|PRIMMAT2;nrows;%Nni;3| '|SPADreplace| 'ANROWS) 
 
 (SDEFUN |PRIMMAT2;nrows;%Nni;3| ((|x| (%)) (% (|NonNegativeInteger|)))
         (ANROWS |x|)) 
 
-(PUT '|PRIMMAT2;ncols;%Nni;4| '|SPADreplace| 'ANCOLS) 
+(MAKEPROP '|PRIMMAT2;ncols;%Nni;4| '|SPADreplace| 'ANCOLS) 
 
 (SDEFUN |PRIMMAT2;ncols;%Nni;4| ((|x| (%)) (% (|NonNegativeInteger|)))
         (ANCOLS |x|)) 
@@ -23,39 +23,39 @@
 (SDEFUN |PRIMMAT2;maxColIndex;%I;6| ((|x| (%)) (% (|Integer|)))
         (- (ANCOLS |x|) 1)) 
 
-(PUT '|PRIMMAT2;qelt;%2IS;7| '|SPADreplace| 'QAREF2) 
+(MAKEPROP '|PRIMMAT2;qelt;%2IS;7| '|SPADreplace| 'QAREF2) 
 
 (SDEFUN |PRIMMAT2;qelt;%2IS;7|
         ((|m| (%)) (|i| #1=(|Integer|)) (|j| #1#) (% (S))) (QAREF2 |m| |i| |j|)) 
 
-(PUT '|PRIMMAT2;elt;%2IS;8| '|SPADreplace| 'QAREF2) 
+(MAKEPROP '|PRIMMAT2;elt;%2IS;8| '|SPADreplace| 'QAREF2) 
 
 (SDEFUN |PRIMMAT2;elt;%2IS;8|
         ((|m| (%)) (|i| #1=(|Integer|)) (|j| #1#) (% (S))) (QAREF2 |m| |i| |j|)) 
 
-(PUT '|PRIMMAT2;qsetelt!;%2I2S;9| '|SPADreplace| 'QSETAREF2) 
+(MAKEPROP '|PRIMMAT2;qsetelt!;%2I2S;9| '|SPADreplace| 'QSETAREF2) 
 
 (SDEFUN |PRIMMAT2;qsetelt!;%2I2S;9|
         ((|m| (%)) (|i| #1=(|Integer|)) (|j| #1#) (|r| (S)) (% (S)))
         (QSETAREF2 |m| |i| |j| |r|)) 
 
-(PUT '|PRIMMAT2;setelt!;%2I2S;10| '|SPADreplace| 'QSETAREF2) 
+(MAKEPROP '|PRIMMAT2;setelt!;%2I2S;10| '|SPADreplace| 'QSETAREF2) 
 
 (SDEFUN |PRIMMAT2;setelt!;%2I2S;10|
         ((|m| (%)) (|i| #1=(|Integer|)) (|j| #1#) (|r| (S)) (% (S)))
         (QSETAREF2 |m| |i| |j| |r|)) 
 
-(PUT '|PRIMMAT2;empty;%;11| '|SPADreplace| '(XLAM NIL (MAKE_MATRIX 0 0))) 
+(MAKEPROP '|PRIMMAT2;empty;%;11| '|SPADreplace| '(XLAM NIL (MAKE_MATRIX 0 0))) 
 
 (SDEFUN |PRIMMAT2;empty;%;11| ((% (%))) (MAKE_MATRIX 0 0)) 
 
-(PUT '|PRIMMAT2;qnew;2Nni%;12| '|SPADreplace| 'MAKE_MATRIX) 
+(MAKEPROP '|PRIMMAT2;qnew;2Nni%;12| '|SPADreplace| 'MAKE_MATRIX) 
 
 (SDEFUN |PRIMMAT2;qnew;2Nni%;12|
         ((|rows| #1=(|NonNegativeInteger|)) (|cols| #1#) (% (%)))
         (MAKE_MATRIX |rows| |cols|)) 
 
-(PUT '|PRIMMAT2;new;2NniS%;13| '|SPADreplace| 'MAKE_MATRIX1) 
+(MAKEPROP '|PRIMMAT2;new;2NniS%;13| '|SPADreplace| 'MAKE_MATRIX1) 
 
 (SDEFUN |PRIMMAT2;new;2NniS%;13|
         ((|rows| #1=(|NonNegativeInteger|)) (|cols| #1#) (|a| (S)) (% (%)))
@@ -65,8 +65,7 @@
 
 (DEFUN |PrimitiveTwoDimensionalArray;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G2578 NIL) (#2=#:G2579 NIL) (% NIL) (|dv$| NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (|dv$| NIL) (% NIL) (#1=#:G25 NIL) (#2=#:G24 NIL) (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT |dv$| (LIST '|PrimitiveTwoDimensionalArray| DV$1))
@@ -81,23 +80,23 @@
                                         (|HasCategory| |#1| '(|AbelianMonoid|))
                                         (|HasCategory| |#1| '(|OrderedSet|))
                                         (|HasCategory| |#1| '(|BasicType|))
-                                        (LETT #2#
+                                        (LETT #1#
                                               (|HasCategory| |#1|
                                                              '(|SetCategory|)))
                                         (OR (|HasCategory| |#1| '(|BasicType|))
                                             (|HasCategory| |#1|
                                                            '(|Comparable|))
                                             (|HasCategory| |#1| '(|Hashable|))
-                                            #2#)
+                                            #1#)
                                         (OR
                                          (|HasCategory| |#1| '(|Comparable|))
-                                         #2#)
+                                         #1#)
                                         (AND
                                          (|HasCategory| |#1|
                                                         (LIST '|Evalable|
                                                               (|devaluate|
                                                                |#1|)))
-                                         #2#)
+                                         #1#)
                                         (OR
                                          (AND
                                           (|HasCategory| |#1|
@@ -117,12 +116,12 @@
                                                          (LIST '|Evalable|
                                                                (|devaluate|
                                                                 |#1|)))
-                                          #2#))
-                                        (LETT #1#
+                                          #1#))
+                                        (LETT #2#
                                               (|HasCategory| |#1|
                                                              '(|CoercibleTo|
                                                                (|OutputForm|))))
-                                        (OR #1#
+                                        (OR #2#
                                             (AND
                                              (|HasCategory| |#1|
                                                             (LIST '|Evalable|
@@ -135,7 +134,7 @@
                                                             (LIST '|Evalable|
                                                                   (|devaluate|
                                                                    |#1|)))
-                                             #2#))
+                                             #1#))
                                         (AND
                                          (|HasCategory| |#1| '(|AbelianGroup|))
                                          (|HasCategory| |#1|
@@ -183,14 +182,14 @@
      (OR
       (AND (|HasCategory| |#1| '(|BasicType|))
            (|HasCategory| % '(|finiteAggregate|)))
-      (|HasCategory| |#1| '(|Hashable|)) #2#)
+      (|HasCategory| |#1| '(|Hashable|)) #1#)
      (|augmentPredVector| % 4194304))
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
-(DEFUN |PrimitiveTwoDimensionalArray| (#1=#:G2581)
+(DEFUN |PrimitiveTwoDimensionalArray| (#1=#:G27)
   (SPROG NIL
-         (PROG (#2=#:G2582)
+         (PROG (#2=#:G28)
            (RETURN
             (COND
              ((LETT #2#
@@ -245,9 +244,9 @@
               |blockConcat| 721 |array2| 726 |any?| 731 |antisymmetric?| 737 ^
               742 |Pfaffian| 754 = 759 / 765 - 771 + 782 * 788 |#| 824)
            'NIL
-           (CONS (|makeByteWordVec2| 12 '(3 0 1 0 8 2 10 0 3 12 7 10 0 0 0))
+           (CONS (|makeByteWordVec2| 12 '(3 0 1 1 0 8 2 10 0 3 12 7 10 0 0 0))
                  (CONS
-                  '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL
+                  '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL NIL
                      |HomogeneousAggregate&| |SetCategory&| |Hashable&|
                      |Evalable&| |Aggregate&| NIL NIL |BasicType&|
                      |InnerEvalable&| NIL NIL NIL)
@@ -256,8 +255,9 @@
                                         (|PrimitiveArray| 6))
                       (|TwoDimensionalArrayCategory| 6 (|PrimitiveArray| 6)
                                                      (|PrimitiveArray| 6))
-                      (|Comparable|) (|HomogeneousAggregate| 6) (|SetCategory|)
-                      (|Hashable|) (|Evalable| 6) (|Aggregate|)
+                      (|Comparable|) (|ComparableRepresentation|)
+                      (|HomogeneousAggregate| 6) (|SetCategory|) (|Hashable|)
+                      (|Evalable| 6) (|Aggregate|)
                       (|MatrixOperationsCategory| 6 (|PrimitiveArray| 6)
                                                   (|PrimitiveArray| 6))
                       (|CoercibleTo| 45) (|BasicType|) (|InnerEvalable| 6 6)

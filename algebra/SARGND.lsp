@@ -1,37 +1,39 @@
 
-(PUT '|SARGND;spnt;2Df%;1| '|SPADreplace| 'CONS) 
+(MAKEPROP '|SARGND;spnt;2Df%;1| '|SPADreplace| 'CONS) 
 
 (SDEFUN |SARGND;spnt;2Df%;1| ((|a| #1=(|DoubleFloat|)) (|b| #1#) (% (%)))
         (CONS |a| |b|)) 
 
-(PUT '|SARGND;spnt;3Df%;2| '|SPADreplace| '(XLAM (|a| |b| |c|) (CONS |a| |b|))) 
+(MAKEPROP '|SARGND;spnt;3Df%;2| '|SPADreplace|
+          '(XLAM (|a| |b| |c|) (CONS |a| |b|))) 
 
 (SDEFUN |SARGND;spnt;3Df%;2|
         ((|a| #1=(|DoubleFloat|)) (|b| #1#) (|c| #1#) (% (%))) (CONS |a| |b|)) 
 
-(PUT '|SARGND;svec;2Df%;3| '|SPADreplace| 'CONS) 
+(MAKEPROP '|SARGND;svec;2Df%;3| '|SPADreplace| 'CONS) 
 
 (SDEFUN |SARGND;svec;2Df%;3| ((|a| #1=(|DoubleFloat|)) (|b| #1#) (% (%)))
         (CONS |a| |b|)) 
 
-(PUT '|SARGND;svec;3Df%;4| '|SPADreplace| '(XLAM (|a| |b| |c|) (CONS |a| |b|))) 
+(MAKEPROP '|SARGND;svec;3Df%;4| '|SPADreplace|
+          '(XLAM (|a| |b| |c|) (CONS |a| |b|))) 
 
 (SDEFUN |SARGND;svec;3Df%;4|
         ((|a| #1=(|DoubleFloat|)) (|b| #1#) (|c| #1#) (% (%))) (CONS |a| |b|)) 
 
 (SDEFUN |SARGND;min;3%;5| ((|a| (%)) (|b| (%)) (% (%)))
-        (SPROG ((|im| #1=(|DoubleFloat|)) (|re| #1#))
+        (SPROG ((|re| #1=(|DoubleFloat|)) (|im| #1#))
                (SEQ (LETT |re| (|min_DF| (QCAR |a|) (QCAR |b|)))
                     (LETT |im| (|min_DF| (QCDR |a|) (QCDR |b|)))
                     (EXIT (CONS |re| |im|))))) 
 
 (SDEFUN |SARGND;max;3%;6| ((|a| (%)) (|b| (%)) (% (%)))
-        (SPROG ((|im| #1=(|DoubleFloat|)) (|re| #1#))
+        (SPROG ((|re| #1=(|DoubleFloat|)) (|im| #1#))
                (SEQ (LETT |re| (|max_DF| (QCAR |a|) (QCAR |b|)))
                     (LETT |im| (|max_DF| (QCDR |a|) (QCDR |b|)))
                     (EXIT (CONS |re| |im|))))) 
 
-(PUT '|SARGND;dimension;%Pi;7| '|SPADreplace| '(XLAM (|p|) 2)) 
+(MAKEPROP '|SARGND;dimension;%Pi;7| '|SPADreplace| '(XLAM (|p|) 2)) 
 
 (SDEFUN |SARGND;dimension;%Pi;7| ((|p| (%)) (% (|PositiveInteger|))) 2) 
 
@@ -64,8 +66,8 @@
         (|add_DF| (|mul_DF| (QCAR |x|) (QCAR |y|))
                   (|mul_DF| (QCDR |x|) (QCDR |y|)))) 
 
-(PUT '|SARGND;perpendicular;3%;13| '|SPADreplace|
-     '(XLAM (|x| |y|) (CONS 0.0 1.0))) 
+(MAKEPROP '|SARGND;perpendicular;3%;13| '|SPADreplace|
+          '(XLAM (|x| |y|) (CONS 0.0 1.0))) 
 
 (SDEFUN |SARGND;perpendicular;3%;13| ((|x| (%)) (|y| (%)) (% (%)))
         (CONS 0.0 1.0)) 
@@ -90,17 +92,17 @@
           NIL)
          ('T (NULL (SPADCALL (QCDR |pt|) (QCDR |mxs|) (QREFELT % 27)))))) 
 
-(PUT '|SARGND;screenCoordX;%Df;18| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|SARGND;screenCoordX;%Df;18| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |SARGND;screenCoordX;%Df;18| ((|pt| (%)) (% (|DoubleFloat|)))
         (QCAR |pt|)) 
 
-(PUT '|SARGND;screenCoordY;%Df;19| '|SPADreplace| 'QCDR) 
+(MAKEPROP '|SARGND;screenCoordY;%Df;19| '|SPADreplace| 'QCDR) 
 
 (SDEFUN |SARGND;screenCoordY;%Df;19| ((|pt| (%)) (% (|DoubleFloat|)))
         (QCDR |pt|)) 
 
-(PUT '|SARGND;screenCoordZ;%Df;20| '|SPADreplace| '(XLAM (|pt|) 0.0)) 
+(MAKEPROP '|SARGND;screenCoordZ;%Df;20| '|SPADreplace| '(XLAM (|pt|) 0.0)) 
 
 (SDEFUN |SARGND;screenCoordZ;%Df;20| ((|pt| (%)) (% (|DoubleFloat|))) 0.0) 
 
@@ -115,11 +117,11 @@
 (SDEFUN |SARGND;toVector;2%;24| ((|p| (%)) (% (%)))
         (CONS (QCAR |p|) (QCDR |p|))) 
 
-(PUT '|SARGND;isPoint?;%B;25| '|SPADreplace| '(XLAM (|p|) 'T)) 
+(MAKEPROP '|SARGND;isPoint?;%B;25| '|SPADreplace| '(XLAM (|p|) 'T)) 
 
 (SDEFUN |SARGND;isPoint?;%B;25| ((|p| (%)) (% (|Boolean|))) 'T) 
 
-(PUT '|SARGND;isVector?;%B;26| '|SPADreplace| '(XLAM (|p|) 'T)) 
+(MAKEPROP '|SARGND;isVector?;%B;26| '|SPADreplace| '(XLAM (|p|) 'T)) 
 
 (SDEFUN |SARGND;isVector?;%B;26| ((|p| (%)) (% (|Boolean|))) 'T) 
 
@@ -130,7 +132,7 @@
         (CONS (SPADCALL |cmpx| (QREFELT % 42))
               (SPADCALL |cmpx| (QREFELT % 43)))) 
 
-(PUT '|SARGND;hash| '|SPADreplace| '(XLAM (|s|) 0)) 
+(MAKEPROP '|SARGND;hash| '|SPADreplace| '(XLAM (|s|) 0)) 
 
 (SDEFUN |SARGND;hash| ((|s| (%)) (% (|SingleInteger|))) 0) 
 
@@ -186,7 +188,7 @@
 
 (DEFUN |SArgand| ()
   (SPROG NIL
-         (PROG (#1=#:G60)
+         (PROG (#1=#:G61)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|SArgand|))

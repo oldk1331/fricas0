@@ -46,8 +46,8 @@
 
 (DEFUN |InnerCommonDenominator;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -74,9 +74,9 @@
                 (CONS (|dispatchFunction| |ICDEN;commonDenominator;BR;4|) %))))
     %))) 
 
-(DEFUN |InnerCommonDenominator| (&REST #1=#:G18)
+(DEFUN |InnerCommonDenominator| (&REST #1=#:G20)
   (SPROG NIL
-         (PROG (#2=#:G19)
+         (PROG (#2=#:G21)
            (RETURN
             (COND
              ((LETT #2#
@@ -102,7 +102,7 @@
               |ICDEN;clearDenominator;BA;1|
               (|Record| (|:| |num| 8) (|:| |den| 6))
               |ICDEN;splitDenominator;BR;2| (28 . |lcm|) (34 . |denom|)
-              (39 . |One|) (|Mapping| 6 6 6) (43 . |reduce|))
+              (39 . |1|) (|Mapping| 6 6 6) (43 . |reduce|))
            '#(|splitDenominator| 50 |commonDenominator| 55 |clearDenominator|
               60)
            'NIL

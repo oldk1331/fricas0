@@ -1,25 +1,25 @@
 
 (SDEFUN |MATCAT2;map;MM1M2;1| ((|f| (|Mapping| R2 R1)) (|m| (M1)) (% (M2)))
         (SPROG
-         ((#1=#:G9 NIL) (|j| NIL) (#2=#:G10 NIL) (|l| NIL) (#3=#:G7 NIL)
-          (|i| NIL) (#4=#:G8 NIL) (|k| NIL) (|ans| (M2)))
+         ((|ans| (M2)) (|k| NIL) (#1=#:G8 NIL) (|i| NIL) (#2=#:G7 NIL)
+          (|l| NIL) (#3=#:G10 NIL) (|j| NIL) (#4=#:G9 NIL))
          (SEQ
           (LETT |ans|
                 (SPADCALL (SPADCALL |m| (QREFELT % 15))
                           (SPADCALL |m| (QREFELT % 16)) (|spadConstant| % 17)
                           (QREFELT % 18)))
           (SEQ (LETT |k| (SPADCALL |ans| (QREFELT % 22)))
-               (LETT #4# (SPADCALL |ans| (QREFELT % 23)))
+               (LETT #1# (SPADCALL |ans| (QREFELT % 23)))
                (LETT |i| (SPADCALL |m| (QREFELT % 20)))
-               (LETT #3# (SPADCALL |m| (QREFELT % 21))) G190
-               (COND ((OR (> |i| #3#) (> |k| #4#)) (GO G191)))
+               (LETT #2# (SPADCALL |m| (QREFELT % 21))) G190
+               (COND ((OR (> |i| #2#) (> |k| #1#)) (GO G191)))
                (SEQ
                 (EXIT
                  (SEQ (LETT |l| (SPADCALL |ans| (QREFELT % 26)))
-                      (LETT #2# (SPADCALL |ans| (QREFELT % 27)))
+                      (LETT #3# (SPADCALL |ans| (QREFELT % 27)))
                       (LETT |j| (SPADCALL |m| (QREFELT % 24)))
-                      (LETT #1# (SPADCALL |m| (QREFELT % 25))) G190
-                      (COND ((OR (> |j| #1#) (> |l| #2#)) (GO G191)))
+                      (LETT #4# (SPADCALL |m| (QREFELT % 25))) G190
+                      (COND ((OR (> |j| #4#) (> |l| #3#)) (GO G191)))
                       (SEQ
                        (EXIT
                         (SPADCALL |ans| |k| |l|
@@ -36,9 +36,9 @@
         ((|f| (|Mapping| (|Union| R2 "failed") R1)) (|m| (M1))
          (% (|Union| M2 "failed")))
         (SPROG
-         ((#1=#:G17 NIL) (#2=#:G31 NIL) (|r| (|Union| R2 #3="failed"))
-          (#4=#:G34 NIL) (|j| NIL) (#5=#:G35 NIL) (|l| NIL) (#6=#:G32 NIL)
-          (|i| NIL) (#7=#:G33 NIL) (|k| NIL) (|ans| (M2)))
+         ((|ans| (M2)) (|k| NIL) (#1=#:G33 NIL) (|i| NIL) (#2=#:G32 NIL)
+          (|l| NIL) (#3=#:G35 NIL) (|j| NIL) (#4=#:G34 NIL)
+          (|r| (|Union| R2 #5="failed")) (#6=#:G31 NIL) (#7=#:G17 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -47,17 +47,17 @@
                             (SPADCALL |m| (QREFELT % 16)) (|spadConstant| % 17)
                             (QREFELT % 18)))
             (SEQ (LETT |k| (SPADCALL |ans| (QREFELT % 22)))
-                 (LETT #7# (SPADCALL |ans| (QREFELT % 23)))
+                 (LETT #1# (SPADCALL |ans| (QREFELT % 23)))
                  (LETT |i| (SPADCALL |m| (QREFELT % 20)))
-                 (LETT #6# (SPADCALL |m| (QREFELT % 21))) G190
-                 (COND ((OR (> |i| #6#) (> |k| #7#)) (GO G191)))
+                 (LETT #2# (SPADCALL |m| (QREFELT % 21))) G190
+                 (COND ((OR (> |i| #2#) (> |k| #1#)) (GO G191)))
                  (SEQ
                   (EXIT
                    (SEQ (LETT |l| (SPADCALL |ans| (QREFELT % 26)))
-                        (LETT #5# (SPADCALL |ans| (QREFELT % 27)))
+                        (LETT #3# (SPADCALL |ans| (QREFELT % 27)))
                         (LETT |j| (SPADCALL |m| (QREFELT % 24)))
                         (LETT #4# (SPADCALL |m| (QREFELT % 25))) G190
-                        (COND ((OR (> |j| #4#) (> |l| #5#)) (GO G191)))
+                        (COND ((OR (> |j| #4#) (> |l| #3#)) (GO G191)))
                         (SEQ
                          (LETT |r|
                                (SPADCALL (SPADCALL |m| |i| |j| (QREFELT % 28))
@@ -65,36 +65,36 @@
                          (EXIT
                           (COND
                            ((SPADCALL |r| (CONS 1 "failed") (QREFELT % 34))
-                            (PROGN (LETT #2# (CONS 1 "failed")) (GO #8=#:G30)))
+                            (PROGN (LETT #6# (CONS 1 "failed")) (GO #8=#:G30)))
                            ('T
                             (SPADCALL |ans| |k| |l|
-                                      (PROG2 (LETT #1# |r|)
-                                          (QCDR #1#)
-                                        (|check_union2| (QEQCAR #1# 0)
+                                      (PROG2 (LETT #7# |r|)
+                                          (QCDR #7#)
+                                        (|check_union2| (QEQCAR #7# 0)
                                                         (QREFELT % 10)
                                                         (|Union| (QREFELT % 10)
-                                                                 #3#)
-                                                        #1#))
+                                                                 #5#)
+                                                        #7#))
                                       (QREFELT % 29))))))
                         (LETT |j| (PROG1 (+ |j| 1) (LETT |l| (+ |l| 1))))
                         (GO G190) G191 (EXIT NIL))))
                  (LETT |i| (PROG1 (+ |i| 1) (LETT |k| (+ |k| 1)))) (GO G190)
                  G191 (EXIT NIL))
             (EXIT (CONS 0 |ans|))))
-          #8# (EXIT #2#)))) 
+          #8# (EXIT #6#)))) 
 
 (SDEFUN |MATCAT2;reduce;MM12R2;3|
         ((|f| (|Mapping| R2 R1 R2)) (|m| (M1)) (|ident| (R2)) (% (R2)))
-        (SPROG ((|s| (R2)) (#1=#:G44 NIL) (|j| NIL) (#2=#:G43 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G43 NIL) (|j| NIL) (#2=#:G44 NIL) (|s| (R2)))
                (SEQ (LETT |s| |ident|)
                     (SEQ (LETT |i| (SPADCALL |m| (QREFELT % 20)))
-                         (LETT #2# (SPADCALL |m| (QREFELT % 21))) G190
-                         (COND ((> |i| #2#) (GO G191)))
+                         (LETT #1# (SPADCALL |m| (QREFELT % 21))) G190
+                         (COND ((> |i| #1#) (GO G191)))
                          (SEQ
                           (EXIT
                            (SEQ (LETT |j| (SPADCALL |m| (QREFELT % 24)))
-                                (LETT #1# (SPADCALL |m| (QREFELT % 25))) G190
-                                (COND ((> |j| #1#) (GO G191)))
+                                (LETT #2# (SPADCALL |m| (QREFELT % 25))) G190
+                                (COND ((> |j| #2#) (GO G191)))
                                 (SEQ
                                  (EXIT
                                   (LETT |s|
@@ -110,8 +110,8 @@
 
 (DEFUN |MatrixCategoryFunctions2;| (|#1| |#2| |#3| |#4| |#5| |#6| |#7| |#8|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$8 NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL)
-    (DV$4 NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (DV$6 NIL)
+    (DV$7 NIL) (DV$8 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -166,12 +166,12 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|local| |#4|) (|local| |#5|) (|local| |#6|)
               (|local| |#7|) (|local| |#8|) (|NonNegativeInteger|)
-              (0 . |nrows|) (5 . |ncols|) (10 . |Zero|) (14 . |new|)
-              (|Integer|) (21 . |minRowIndex|) (26 . |maxRowIndex|)
-              (31 . |minRowIndex|) (36 . |maxRowIndex|) (41 . |minColIndex|)
-              (46 . |maxColIndex|) (51 . |minColIndex|) (56 . |maxColIndex|)
-              (61 . |qelt|) (68 . |qsetelt!|) (|Mapping| 10 6)
-              |MATCAT2;map;MM1M2;1| (|Boolean|) (|Union| 10 '"failed") (76 . =)
+              (0 . |nrows|) (5 . |ncols|) (10 . |0|) (14 . |new|) (|Integer|)
+              (21 . |minRowIndex|) (26 . |maxRowIndex|) (31 . |minRowIndex|)
+              (36 . |maxRowIndex|) (41 . |minColIndex|) (46 . |maxColIndex|)
+              (51 . |minColIndex|) (56 . |maxColIndex|) (61 . |qelt|)
+              (68 . |qsetelt!|) (|Mapping| 10 6) |MATCAT2;map;MM1M2;1|
+              (|Boolean|) (|Union| 10 '"failed") (76 . =)
               (|Union| 13 '"failed") (|Mapping| 33 6) |MATCAT2;map;MM1U;2|
               (|Mapping| 10 6 10) |MATCAT2;reduce;MM12R2;3|)
            '#(|reduce| 82 |map| 89) 'NIL

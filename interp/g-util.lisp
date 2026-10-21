@@ -297,39 +297,6 @@
             ((NULL |t|) (PROGN (RPLACD |y| (CONS |h| |t|)) (RPLACA |y| |x|)))
             ('T (|insertWOC,fn| |x| |t|)))))))
 
-; centerString(text,width,fillchar) ==
-;   wid := entryWidth text
-;   wid >= width => text
-;   f := DIVIDE(width - wid,2)
-;   fill1 := ""
-;   for i in 1..(f.0) repeat
-;     fill1 := STRCONC(fillchar,fill1)
-;   fill2:= fill1
-;   if f.1 ~= 0 then fill1 := STRCONC(fillchar,fill1)
-;   [fill1,text,fill2]
-
-(DEFUN |centerString| (|text| |width| |fillchar|)
-  (PROG (|wid| |f| |fill1| |fill2|)
-    (RETURN
-     (PROGN
-      (SETQ |wid| (|entryWidth| |text|))
-      (COND ((NOT (< |wid| |width|)) |text|)
-            (#1='T
-             (PROGN
-              (SETQ |f| (DIVIDE (- |width| |wid|) 2))
-              (SETQ |fill1| '||)
-              ((LAMBDA (|bfVar#7| |i|)
-                 (LOOP
-                  (COND ((> |i| |bfVar#7|) (RETURN NIL))
-                        (#1# (SETQ |fill1| (STRCONC |fillchar| |fill1|))))
-                  (SETQ |i| (+ |i| 1))))
-               (ELT |f| 0) 1)
-              (SETQ |fill2| |fill1|)
-              (COND
-               ((NOT (EQL (ELT |f| 1) 0))
-                (SETQ |fill1| (STRCONC |fillchar| |fill1|))))
-              (LIST |fill1| |text| |fill2|))))))))
-
 ; stringPrefix?(pref,str) ==
 ;   -- sees if the first #pref letters of str are pref
 ;   -- replaces STRINGPREFIXP
@@ -372,12 +339,12 @@
 ;   null x => concatList y
 ;   concat1(x,concatList y)
 
-(DEFUN |concatList| (|bfVar#8|)
+(DEFUN |concatList| (|bfVar#7|)
   (PROG (|x| |y|)
     (RETURN
      (PROGN
-      (SETQ |x| (CAR |bfVar#8|))
-      (SETQ |y| (CDR |bfVar#8|))
+      (SETQ |x| (CAR |bfVar#7|))
+      (SETQ |y| (CDR |bfVar#7|))
       (COND ((NULL |y|) |x|) ((NULL |x|) (|concatList| |y|))
             ('T (|concat1| |x| (|concatList| |y|))))))))
 
@@ -466,23 +433,6 @@
      (COND ((EQUAL |x| |$Zero|) 0) ((EQUAL |x| |$One|) 1) ((ATOM |x|) |x|)
            ('T
             (CONS (|removeZeroOne| (CAR |x|)) (|removeZeroOne| (CDR |x|))))))))
-
-; removeZeroOneDestructively t ==
-;   -- replace all occurrences of (Zero) and (One) with
-;   -- 0 and 1 destructively
-;   t = $Zero => 0
-;   t = $One => 1
-;   atom t => t
-;   RPLNODE(t,removeZeroOneDestructively first t,
-;     removeZeroOneDestructively rest t)
-
-(DEFUN |removeZeroOneDestructively| (|t|)
-  (PROG ()
-    (RETURN
-     (COND ((EQUAL |t| |$Zero|) 0) ((EQUAL |t| |$One|) 1) ((ATOM |t|) |t|)
-           ('T
-            (RPLNODE |t| (|removeZeroOneDestructively| (CAR |t|))
-             (|removeZeroOneDestructively| (CDR |t|))))))))
 
 ; listSort(pred,list,:optional) ==
 ;    NOT functionp pred => error '"listSort: first arg must be a function"
@@ -591,9 +541,9 @@
       (COND ((|less_SI| |n| 3) (RETURN |p|)))
       (SETQ |l| (|quo_SI| |n| 2))
       (SETQ |t| |p|)
-      ((LAMBDA (|bfVar#9| |i|)
+      ((LAMBDA (|bfVar#8| |i|)
          (LOOP
-          (COND ((> |i| |bfVar#9|) (RETURN NIL)) ('T (SETQ |t| (QCDR |t|))))
+          (COND ((> |i| |bfVar#8|) (RETURN NIL)) ('T (SETQ |t| (QCDR |t|))))
           (SETQ |i| (+ |i| 1))))
        (- |l| 1) 1)
       (SETQ |q| (CDR |t|))
@@ -767,15 +717,15 @@
      (COND
       ((ATOM |e|)
        (PROGN
-        ((LAMBDA (|bfVar#10| |x|)
+        ((LAMBDA (|bfVar#9| |x|)
            (LOOP
             (COND
-             ((OR (ATOM |bfVar#10|) (PROGN (SETQ |x| (CAR |bfVar#10|)) NIL))
+             ((OR (ATOM |bfVar#9|) (PROGN (SETQ |x| (CAR |bfVar#9|)) NIL))
               (RETURN NIL))
              (#1='T
               (COND
                ((EQ (CAR |x|) |e|) (IDENTITY (RETURN (SETQ |e| (CDR |x|))))))))
-            (SETQ |bfVar#10| (CDR |bfVar#10|))))
+            (SETQ |bfVar#9| (CDR |bfVar#9|))))
          |al| NIL)
         |e|))
       ((EQ (SETQ |a| (CAR |e|)) 'QUOTE) |e|)
@@ -827,55 +777,50 @@
   (PROG (|u| |signal|)
     (RETURN
      (PROGN
-      ((LAMBDA (|bfVar#11| |contour|)
+      ((LAMBDA (|bfVar#10| |contour|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#11|)
-                (PROGN (SETQ |contour| (CAR |bfVar#11|)) NIL))
+           ((OR (ATOM |bfVar#10|)
+                (PROGN (SETQ |contour| (CAR |bfVar#10|)) NIL))
             (RETURN NIL))
            ('T
             (COND
              ((SETQ |u| (ASSQ |x| |contour|)) (RETURN (SETQ |signal| |u|))))))
-          (SETQ |bfVar#11| (CDR |bfVar#11|))))
+          (SETQ |bfVar#10| (CDR |bfVar#10|))))
        |currentEnv| NIL)
       (IFCDR |signal|)))))
 
 ; augProplist(proplist,prop,val) ==
-;   $InteractiveMode => augProplistInteractive(proplist,prop,val)
 ;   while (proplist is [[ =prop,:.],:proplist']) repeat proplist:= proplist'
 ;   val=(u:= LASSOC(prop,proplist)) => proplist
 ;   null val =>
-;     null u => proplist
-;     DELLASOS(prop,proplist)
+;         null(u) => proplist
+;         assoc_del(prop, proplist)
 ;   [[prop,:val],:proplist]
 
 (DEFUN |augProplist| (|proplist| |prop| |val|)
   (PROG (|ISTMP#1| |proplist'| |u|)
     (RETURN
-     (COND
-      (|$InteractiveMode| (|augProplistInteractive| |proplist| |prop| |val|))
-      (#1='T
-       (PROGN
-        ((LAMBDA ()
-           (LOOP
-            (COND
-             ((NOT
-               (AND (CONSP |proplist|)
-                    (PROGN
-                     (SETQ |ISTMP#1| (CAR |proplist|))
-                     (AND (CONSP |ISTMP#1|) (EQUAL (CAR |ISTMP#1|) |prop|)))
-                    (PROGN (SETQ |proplist'| (CDR |proplist|)) #1#)))
-              (RETURN NIL))
-             (#1# (SETQ |proplist| |proplist'|))))))
-        (COND ((EQUAL |val| (SETQ |u| (LASSOC |prop| |proplist|))) |proplist|)
-              ((NULL |val|)
-               (COND ((NULL |u|) |proplist|)
-                     (#1# (DELLASOS |prop| |proplist|))))
-              (#1# (CONS (CONS |prop| |val|) |proplist|)))))))))
+     (PROGN
+      ((LAMBDA ()
+         (LOOP
+          (COND
+           ((NOT
+             (AND (CONSP |proplist|)
+                  (PROGN
+                   (SETQ |ISTMP#1| (CAR |proplist|))
+                   (AND (CONSP |ISTMP#1|) (EQUAL (CAR |ISTMP#1|) |prop|)))
+                  (PROGN (SETQ |proplist'| (CDR |proplist|)) #1='T)))
+            (RETURN NIL))
+           (#1# (SETQ |proplist| |proplist'|))))))
+      (COND ((EQUAL |val| (SETQ |u| (LASSOC |prop| |proplist|))) |proplist|)
+            ((NULL |val|)
+             (COND ((NULL |u|) |proplist|)
+                   (#1# (|assoc_del| |prop| |proplist|))))
+            (#1# (CONS (CONS |prop| |val|) |proplist|)))))))
 
 ; augProplistOf(var,prop,val,e) ==
 ;   proplist:= getProplist(var,e)
-;   semchkProplist(var, proplist, prop)
 ;   augProplist(proplist,prop,val)
 
 (DEFUN |augProplistOf| (|var| |prop| |val| |e|)
@@ -883,26 +828,7 @@
     (RETURN
      (PROGN
       (SETQ |proplist| (|getProplist| |var| |e|))
-      (|semchkProplist| |var| |proplist| |prop|)
       (|augProplist| |proplist| |prop| |val|)))))
-
-; semchkProplist(x, proplist, prop) ==
-;   prop="isLiteral" =>
-;     LASSOC("value",proplist) or LASSOC("mode",proplist) => warnLiteral x
-;   MEMQ(prop,'(mode value)) =>
-;     LASSOC("isLiteral",proplist) => warnLiteral x
-
-(DEFUN |semchkProplist| (|x| |proplist| |prop|)
-  (PROG ()
-    (RETURN
-     (COND
-      ((EQ |prop| '|isLiteral|)
-       (COND
-        ((OR (LASSOC '|value| |proplist|) (LASSOC '|mode| |proplist|))
-         (IDENTITY (|warnLiteral| |x|)))))
-      ((MEMQ |prop| '(|mode| |value|))
-       (COND
-        ((LASSOC '|isLiteral| |proplist|) (IDENTITY (|warnLiteral| |x|)))))))))
 
 ; DEFPARAMETER($envHashTable, nil)
 
@@ -913,7 +839,6 @@
 ;   if $envHashTable then
 ;     for u in proplist repeat
 ;       HPUT($envHashTable, [var, CAR u], true)
-;   $InteractiveMode => addBindingInteractive(var,proplist,e)
 ;   if curContour is [[ =var,:.],:.] then curContour:= rest curContour
 ;                  --Previous line should save some space
 ;   [[[lx,:curContour],:tailContour],:tailEnv] where lx:= [var,:proplist]
@@ -930,30 +855,24 @@
              (PROGN
               (COND
                (|$envHashTable|
-                ((LAMBDA (|bfVar#12| |u|)
+                ((LAMBDA (|bfVar#11| |u|)
                    (LOOP
                     (COND
-                     ((OR (ATOM |bfVar#12|)
-                          (PROGN (SETQ |u| (CAR |bfVar#12|)) NIL))
+                     ((OR (ATOM |bfVar#11|)
+                          (PROGN (SETQ |u| (CAR |bfVar#11|)) NIL))
                       (RETURN NIL))
                      (#2# (HPUT |$envHashTable| (LIST |var| (CAR |u|)) T)))
-                    (SETQ |bfVar#12| (CDR |bfVar#12|))))
+                    (SETQ |bfVar#11| (CDR |bfVar#11|))))
                  |proplist| NIL)))
               (COND
-               (|$InteractiveMode|
-                (|addBindingInteractive| |var| |proplist| |e|))
-               (#2#
-                (PROGN
-                 (COND
-                  ((AND (CONSP |curContour|)
-                        (PROGN
-                         (SETQ |ISTMP#1| (CAR |curContour|))
-                         (AND (CONSP |ISTMP#1|)
-                              (EQUAL (CAR |ISTMP#1|) |var|))))
-                   (SETQ |curContour| (CDR |curContour|))))
-                 (SETQ |lx| (CONS |var| |proplist|))
-                 (CONS (CONS (CONS |lx| |curContour|) |tailContour|)
-                       |tailEnv|)))))))))))
+               ((AND (CONSP |curContour|)
+                     (PROGN
+                      (SETQ |ISTMP#1| (CAR |curContour|))
+                      (AND (CONSP |ISTMP#1|) (EQUAL (CAR |ISTMP#1|) |var|))))
+                (SETQ |curContour| (CDR |curContour|))))
+              (SETQ |lx| (CONS |var| |proplist|))
+              (CONS (CONS (CONS |lx| |curContour|) |tailContour|)
+                    |tailEnv|))))))))
 
 ; position(x,l) ==
 ;   posn(x,l,0) where
@@ -986,15 +905,15 @@
     (RETURN
      (PROGN
       (SETQ |r| |u|)
-      ((LAMBDA (|bfVar#13| |x| |bfVar#14| |y|)
+      ((LAMBDA (|bfVar#12| |x| |bfVar#13| |y|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#13|) (PROGN (SETQ |x| (CAR |bfVar#13|)) NIL)
-                (ATOM |bfVar#14|) (PROGN (SETQ |y| (CAR |bfVar#14|)) NIL))
+           ((OR (ATOM |bfVar#12|) (PROGN (SETQ |x| (CAR |bfVar#12|)) NIL)
+                (ATOM |bfVar#13|) (PROGN (SETQ |y| (CAR |bfVar#13|)) NIL))
             (RETURN NIL))
            ('T (SETQ |r| (CDR |r|))))
-          (SETQ |bfVar#13| (CDR |bfVar#13|))
-          (SETQ |bfVar#14| (CDR |bfVar#14|))))
+          (SETQ |bfVar#12| (CDR |bfVar#12|))
+          (SETQ |bfVar#13| (CDR |bfVar#13|))))
        |u| NIL |v| NIL)
       |r|))))
 
@@ -1050,14 +969,14 @@
       (COND ((MINUSP |k|) |s|)
             ((EQUAL (ELT |s| |k|) |$blank|)
              (PROGN
-              ((LAMBDA (|bfVar#15| |i|)
+              ((LAMBDA (|bfVar#14| |i|)
                  (LOOP
                   (COND
-                   ((OR (COND ((MINUSP |bfVar#15|) (< |i| 0)) (T (> |i| 0)))
+                   ((OR (COND ((MINUSP |bfVar#14|) (< |i| 0)) (T (> |i| 0)))
                         (NOT (EQUAL (ELT |s| |i|) |$blank|)))
                     (RETURN NIL))
                    (#1='T (SETQ |j| |i|)))
-                  (SETQ |i| (+ |i| |bfVar#15|))))
+                  (SETQ |i| (+ |i| |bfVar#14|))))
                (- 1) |k|)
               (SUBSTRING |s| 0 |j|)))
             (#1# |s|))))))
@@ -1096,7 +1015,7 @@
 
 ; intern x ==
 ;   STRINGP x =>
-;     DIGITP x.0 => string2Integer x
+;     char_to_digit(x.0) => string2Integer x
 ;     INTERN x
 ;   x
 
@@ -1105,7 +1024,7 @@
     (RETURN
      (COND
       ((STRINGP |x|)
-       (COND ((DIGITP (ELT |x| 0)) (|string2Integer| |x|))
+       (COND ((|char_to_digit| (ELT |x| 0)) (|string2Integer| |x|))
              (#1='T (INTERN |x|))))
       (#1# |x|)))))
 
@@ -1141,13 +1060,13 @@
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$currentSysList|
-          ((LAMBDA (|bfVar#17| |bfVar#16| |x|)
+          ((LAMBDA (|bfVar#16| |bfVar#15| |x|)
              (LOOP
               (COND
-               ((OR (ATOM |bfVar#16|) (PROGN (SETQ |x| (CAR |bfVar#16|)) NIL))
-                (RETURN (NREVERSE |bfVar#17|)))
-               ('T (SETQ |bfVar#17| (CONS (|opOf| |x|) |bfVar#17|))))
-              (SETQ |bfVar#16| (CDR |bfVar#16|))))
+               ((OR (ATOM |bfVar#15|) (PROGN (SETQ |x| (CAR |bfVar#15|)) NIL))
+                (RETURN (NREVERSE |bfVar#16|)))
+               ('T (SETQ |bfVar#16| (CONS (|opOf| |x|) |bfVar#16|))))
+              (SETQ |bfVar#15| (CDR |bfVar#15|))))
            NIL |$htSystemCommands| NIL)))
 
 ; $outStream   := nil
@@ -1482,7 +1401,9 @@
 ;       sayMessage concat ['"   Retrospective determination of slot",'%b,
 ;         slot,'%d,'"of",'%b,:prefix2String domain,'%d]
 ;     APPLY(first ELT(domain', slot), [:u'', rest ELT(domain', slot)])
-;   throwKeyedMsg("S2IF0008",[formatOpSignature(op,sig),domain])
+;   throw_msg("S2IF0008",
+;             '"The function %1b is not defined in the domain %2bp .",
+;             [formatOpSignature(op, sig), domain])
 
 (DEFUN |Undef| (&REST |u|)
   (PROG (|u'| |domain| |slot| |op| |sig| |domain'| |LETTMP#1| |u''|)
@@ -1515,7 +1436,8 @@
          (APPLY (CAR (ELT |domain'| |slot|))
                 (APPEND |u''| (CONS (CDR (ELT |domain'| |slot|)) NIL)))))
        ('T
-        (|throwKeyedMsg| 'S2IF0008
+        (|throw_msg| 'S2IF0008
+         "The function %1b is not defined in the domain %2bp ."
          (LIST (|formatOpSignature| |op| |sig|) |domain|))))))))
 
 ; TruthP x ==
@@ -1545,8 +1467,8 @@
 ;   ok := true
 ;   c := 0
 ;   for i in 1..(n-1) while ok repeat
-;     d := ELT(p,i)
-;     ok := DIGITP d => c := 10*c + DIG2FIX d
+;         d := ELT(p,i)
+;         ok := char_to_digit(d) => c := 10*c + ok
 ;   if ok then c else nil
 
 (DEFUN |isSharpVarWithNum| (|x|)
@@ -1558,15 +1480,15 @@
             (PROGN
              (SETQ |ok| T)
              (SETQ |c| 0)
-             ((LAMBDA (|bfVar#18| |i|)
+             ((LAMBDA (|bfVar#17| |i|)
                 (LOOP
-                 (COND ((OR (> |i| |bfVar#18|) (NOT |ok|)) (RETURN NIL))
+                 (COND ((OR (> |i| |bfVar#17|) (NOT |ok|)) (RETURN NIL))
                        (#1#
                         (PROGN
                          (SETQ |d| (ELT |p| |i|))
                          (COND
-                          ((SETQ |ok| (DIGITP |d|))
-                           (SETQ |c| (+ (* 10 |c|) (DIG2FIX |d|))))))))
+                          ((SETQ |ok| (|char_to_digit| |d|))
+                           (SETQ |c| (+ (* 10 |c|) |ok|)))))))
                  (SETQ |i| (+ |i| 1))))
               (- |n| 1) 1)
              (COND (|ok| |c|) (#1# NIL))))))))
@@ -1599,3 +1521,84 @@
         (LOOP (COND ((> |i| |n|) (RETURN NIL)) ('T (PRINC " " |str|)))
               (SETQ |i| (+ |i| 1))))
       1))))
+
+; mySort(u) == listSort(function GLESSEQP, u)
+
+(DEFUN |mySort| (|u|) (PROG () (RETURN (|listSort| #'GLESSEQP |u|))))
+
+; string2Integer(s) ==
+;     and/[char_to_digit(s.i) for i in 0..MAXINDEX(s)] => PARSE_-INTEGER(s)
+;     nil
+
+(DEFUN |string2Integer| (|s|)
+  (PROG ()
+    (RETURN
+     (COND
+      (((LAMBDA (|bfVar#19| |bfVar#18| |i|)
+          (LOOP
+           (COND ((> |i| |bfVar#18|) (RETURN |bfVar#19|))
+                 (#1='T
+                  (PROGN
+                   (SETQ |bfVar#19| (|char_to_digit| (ELT |s| |i|)))
+                   (COND ((NOT |bfVar#19|) (RETURN NIL))))))
+           (SETQ |i| (+ |i| 1))))
+        T (MAXINDEX |s|) 0)
+       (PARSE-INTEGER |s|))
+      (#1# NIL)))))
+
+; substring?(part, whole, startpos) ==
+; --This function should be replaced by STRING<
+;   np := #part
+;   nw := #whole
+;   np > nw - startpos => false
+;   and/[CHAR_-EQUAL(ELT(part, ip), ELT(whole, iw))
+;       for ip in 0..np-1 for iw in startpos.. ]
+
+(DEFUN |substring?| (|part| |whole| |startpos|)
+  (PROG (|np| |nw|)
+    (RETURN
+     (PROGN
+      (SETQ |np| (LENGTH |part|))
+      (SETQ |nw| (LENGTH |whole|))
+      (COND ((< (- |nw| |startpos|) |np|) NIL)
+            (#1='T
+             ((LAMBDA (|bfVar#21| |bfVar#20| |ip| |iw|)
+                (LOOP
+                 (COND ((> |ip| |bfVar#20|) (RETURN |bfVar#21|))
+                       (#1#
+                        (PROGN
+                         (SETQ |bfVar#21|
+                                 (CHAR-EQUAL (ELT |part| |ip|)
+                                             (ELT |whole| |iw|)))
+                         (COND ((NOT |bfVar#21|) (RETURN NIL))))))
+                 (SETQ |ip| (+ |ip| 1))
+                 (SETQ |iw| (+ |iw| 1))))
+              T (- |np| 1) 0 |startpos|)))))))
+
+; charPosition(c,t,startpos) ==
+;   n := #t
+;   startpos < 0 or startpos > n => n
+;   k:= startpos
+;   for i in startpos .. n-1 repeat
+;     c = ELT(t,i) => return nil
+;     k := k+1
+;   k
+
+(DEFUN |charPosition| (|c| |t| |startpos|)
+  (PROG (|n| |k|)
+    (RETURN
+     (PROGN
+      (SETQ |n| (LENGTH |t|))
+      (COND ((OR (MINUSP |startpos|) (< |n| |startpos|)) |n|)
+            (#1='T
+             (PROGN
+              (SETQ |k| |startpos|)
+              ((LAMBDA (|bfVar#22| |i|)
+                 (LOOP
+                  (COND ((> |i| |bfVar#22|) (RETURN NIL))
+                        (#1#
+                         (COND ((EQUAL |c| (ELT |t| |i|)) (RETURN NIL))
+                               (#1# (SETQ |k| (+ |k| 1))))))
+                  (SETQ |i| (+ |i| 1))))
+               (- |n| 1) |startpos|)
+              |k|)))))))

@@ -3,25 +3,7 @@
         ((|lp| (|List| (|Polynomial| F))) (|lv| (|List| (|Symbol|)))
          (% (|List| (|Polynomial| F))))
         (SPROG
-         ((#1=#:G9 NIL) (|pp| NIL) (#2=#:G8 NIL) (|gb| (|List| |DPoly|))
-          (|b| (|List| |DPoly|)) (#3=#:G7 NIL) (|pol| NIL) (#4=#:G6 NIL)
-          (DP
-           (|Join|
-            (|DirectProductCategory| (|call| LENGTH |lv|)
-                                     #5=(|NonNegativeInteger|))
-            (CATEGORY |package|
-             (IF (|has| #5# (|Hashable|))
-                 (ATTRIBUTE (|Hashable|))
-                 |noBranch|))))
-          (|DPoly|
-           (|Join|
-            (|PolynomialCategory| F
-                                  (|DirectProduct| (|#| |lv|)
-                                                   (|NonNegativeInteger|))
-                                  (|OrderedVariableList| |lv|))
-            (CATEGORY |domain|
-             (SIGNATURE |reorder| (% % (|List| (|Integer|)))))))
-          (PP
+         ((PP
            (CATEGORY |package|
             (SIGNATURE |dmpToHdmp|
              ((|HomogeneousDistributedMultivariatePolynomial| |lv| F)
@@ -38,22 +20,39 @@
             (SIGNATURE |dmpToP|
              ((|Polynomial| F) (|DistributedMultivariatePolynomial| |lv| F)))
             (SIGNATURE |pToDmp|
-             ((|DistributedMultivariatePolynomial| |lv| F)
-              (|Polynomial| F))))))
+             ((|DistributedMultivariatePolynomial| |lv| F) (|Polynomial| F)))))
+          (|DPoly|
+           (|Join|
+            (|PolynomialCategory| F
+                                  (|DirectProduct| (|#| |lv|)
+                                                   (|NonNegativeInteger|))
+                                  (|OrderedVariableList| |lv|))
+            (CATEGORY |domain|
+             (SIGNATURE |reorder| (% % (|List| (|Integer|)))))))
+          (DP
+           (|Join|
+            (|DirectProductCategory| (|call| LENGTH |lv|)
+                                     #1=(|NonNegativeInteger|))
+            (CATEGORY |package|
+             (IF (|has| #1# (|Hashable|))
+                 (ATTRIBUTE (|Hashable|))
+                 |noBranch|))))
+          (#2=#:G6 NIL) (|pol| NIL) (#3=#:G7 NIL) (|b| (|List| |DPoly|))
+          (|gb| (|List| |DPoly|)) (#4=#:G8 NIL) (|pp| NIL) (#5=#:G9 NIL))
          (SEQ (LETT PP (|PolToPol| |lv| (QREFELT % 6)))
               (LETT |DPoly|
                     (|DistributedMultivariatePolynomial| |lv| (QREFELT % 6)))
               (LETT DP (|DirectProduct| (LENGTH |lv|) (|NonNegativeInteger|)))
               (LETT |b|
                     (PROGN
-                     (LETT #4# NIL)
+                     (LETT #2# NIL)
                      (SEQ (LETT |pol| NIL) (LETT #3# |lp|) G190
                           (COND
                            ((OR (ATOM #3#) (PROGN (LETT |pol| (CAR #3#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #4#
+                            (LETT #2#
                                   (CONS
                                    (SPADCALL |pol|
                                              (|compiledLookupCheck| '|pToDmp|
@@ -70,9 +69,9 @@
                                                                        (ELT %
                                                                             6))))
                                                                     PP))
-                                   #4#))))
+                                   #2#))))
                           (LETT #3# (CDR #3#)) (GO G190) G191
-                          (EXIT (NREVERSE #4#)))))
+                          (EXIT (NREVERSE #2#)))))
               (LETT |gb|
                     (SPADCALL |b|
                               (|compiledLookupCheck| '|groebner|
@@ -87,14 +86,14 @@
                                                       (ELT % 6) DP |DPoly|))))
               (EXIT
                (PROGN
-                (LETT #2# NIL)
-                (SEQ (LETT |pp| NIL) (LETT #1# |gb|) G190
+                (LETT #4# NIL)
+                (SEQ (LETT |pp| NIL) (LETT #5# |gb|) G190
                      (COND
-                      ((OR (ATOM #1#) (PROGN (LETT |pp| (CAR #1#)) NIL))
+                      ((OR (ATOM #5#) (PROGN (LETT |pp| (CAR #5#)) NIL))
                        (GO G191)))
                      (SEQ
                       (EXIT
-                       (LETT #2#
+                       (LETT #4#
                              (CONS
                               (SPADCALL |pp|
                                         (|compiledLookupCheck| '|dmpToP|
@@ -109,28 +108,15 @@
                                                                  (|devaluate|
                                                                   (ELT % 6))))
                                                                PP))
-                              #2#))))
-                     (LETT #1# (CDR #1#)) (GO G190) G191
-                     (EXIT (NREVERSE #2#)))))))) 
+                              #4#))))
+                     (LETT #5# (CDR #5#)) (GO G190) G191
+                     (EXIT (NREVERSE #4#)))))))) 
 
 (SDEFUN |PGROEB;totalGroebner;LLL;2|
         ((|lp| (|List| (|Polynomial| F))) (|lv| (|List| (|Symbol|)))
          (% (|List| (|Polynomial| F))))
         (SPROG
-         ((#1=#:G19 NIL) (|pp| NIL) (#2=#:G18 NIL) (|gb| (|List| |HDPoly|))
-          (|b| (|List| |HDPoly|)) (#3=#:G17 NIL) (|pol| NIL) (#4=#:G16 NIL)
-          (HDP
-           (|DirectProductCategory| (|call| LENGTH |lv|)
-                                    (|NonNegativeInteger|)))
-          (|HDPoly|
-           (|Join|
-            (|PolynomialCategory| F
-                                  (|HomogeneousDirectProduct| (|#| |lv|)
-                                                              (|NonNegativeInteger|))
-                                  (|OrderedVariableList| |lv|))
-            (CATEGORY |domain|
-             (SIGNATURE |reorder| (% % (|List| (|Integer|)))))))
-          (PP
+         ((PP
            (CATEGORY |package|
             (SIGNATURE |dmpToHdmp|
              ((|HomogeneousDistributedMultivariatePolynomial| |lv| F)
@@ -147,8 +133,20 @@
             (SIGNATURE |dmpToP|
              ((|Polynomial| F) (|DistributedMultivariatePolynomial| |lv| F)))
             (SIGNATURE |pToDmp|
-             ((|DistributedMultivariatePolynomial| |lv| F)
-              (|Polynomial| F))))))
+             ((|DistributedMultivariatePolynomial| |lv| F) (|Polynomial| F)))))
+          (|HDPoly|
+           (|Join|
+            (|PolynomialCategory| F
+                                  (|HomogeneousDirectProduct| (|#| |lv|)
+                                                              (|NonNegativeInteger|))
+                                  (|OrderedVariableList| |lv|))
+            (CATEGORY |domain|
+             (SIGNATURE |reorder| (% % (|List| (|Integer|)))))))
+          (HDP
+           (|DirectProductCategory| (|call| LENGTH |lv|)
+                                    (|NonNegativeInteger|)))
+          (#1=#:G16 NIL) (|pol| NIL) (#2=#:G17 NIL) (|b| (|List| |HDPoly|))
+          (|gb| (|List| |HDPoly|)) (#3=#:G18 NIL) (|pp| NIL) (#4=#:G19 NIL))
          (SEQ (LETT PP (|PolToPol| |lv| (QREFELT % 6)))
               (LETT |HDPoly|
                     (|HomogeneousDistributedMultivariatePolynomial| |lv|
@@ -159,14 +157,14 @@
                                                 (|NonNegativeInteger|)))
               (LETT |b|
                     (PROGN
-                     (LETT #4# NIL)
-                     (SEQ (LETT |pol| NIL) (LETT #3# |lp|) G190
+                     (LETT #1# NIL)
+                     (SEQ (LETT |pol| NIL) (LETT #2# |lp|) G190
                           (COND
-                           ((OR (ATOM #3#) (PROGN (LETT |pol| (CAR #3#)) NIL))
+                           ((OR (ATOM #2#) (PROGN (LETT |pol| (CAR #2#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #4#
+                            (LETT #1#
                                   (CONS
                                    (SPADCALL |pol|
                                              (|compiledLookupCheck| '|pToHdmp|
@@ -183,9 +181,9 @@
                                                                        (ELT %
                                                                             6))))
                                                                     PP))
-                                   #4#))))
-                          (LETT #3# (CDR #3#)) (GO G190) G191
-                          (EXIT (NREVERSE #4#)))))
+                                   #1#))))
+                          (LETT #2# (CDR #2#)) (GO G190) G191
+                          (EXIT (NREVERSE #1#)))))
               (LETT |gb|
                     (SPADCALL |b|
                               (|compiledLookupCheck| '|groebner|
@@ -201,14 +199,14 @@
                                                       |HDPoly|))))
               (EXIT
                (PROGN
-                (LETT #2# NIL)
-                (SEQ (LETT |pp| NIL) (LETT #1# |gb|) G190
+                (LETT #3# NIL)
+                (SEQ (LETT |pp| NIL) (LETT #4# |gb|) G190
                      (COND
-                      ((OR (ATOM #1#) (PROGN (LETT |pp| (CAR #1#)) NIL))
+                      ((OR (ATOM #4#) (PROGN (LETT |pp| (CAR #4#)) NIL))
                        (GO G191)))
                      (SEQ
                       (EXIT
-                       (LETT #2#
+                       (LETT #3#
                              (CONS
                               (SPADCALL |pp|
                                         (|compiledLookupCheck| '|hdmpToP|
@@ -223,14 +221,14 @@
                                                                  (|devaluate|
                                                                   (ELT % 6))))
                                                                PP))
-                              #2#))))
-                     (LETT #1# (CDR #1#)) (GO G190) G191
-                     (EXIT (NREVERSE #2#)))))))) 
+                              #3#))))
+                     (LETT #4# (CDR #4#)) (GO G190) G191
+                     (EXIT (NREVERSE #3#)))))))) 
 
 (DECLAIM (NOTINLINE |PolyGroebner;|)) 
 
 (DEFUN |PolyGroebner;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|PolyGroebner| DV$1))

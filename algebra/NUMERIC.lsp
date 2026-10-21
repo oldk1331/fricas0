@@ -55,14 +55,14 @@
         ((|p| (|Polynomial| S)) (|n| (|PositiveInteger|))
          (% (|Union| (|Float|) "failed")))
         (SPROG
-         ((|ans| (|Union| (|Float|) "failed")) (|old| (|PositiveInteger|)))
+         ((|old| (|PositiveInteger|)) (|ans| (|Union| (|Float|) "failed")))
          (SEQ (LETT |old| (SPADCALL |n| (QREFELT % 29)))
               (LETT |ans| (SPADCALL |p| (QREFELT % 24)))
               (SPADCALL |old| (QREFELT % 29)) (EXIT |ans|)))) 
 
 (SDEFUN |NUMERIC;numericIfCan;FU;7|
         ((|f| (|Fraction| (|Polynomial| S))) (% (|Union| (|Float|) "failed")))
-        (SPROG ((|den| #1=(|Union| (|Float|) "failed")) (|num| #1#))
+        (SPROG ((|num| #1=(|Union| (|Float|) "failed")) (|den| #1#))
                (SEQ
                 (LETT |num|
                       (SPADCALL (SPADCALL |f| (QREFELT % 32)) (QREFELT % 24)))
@@ -84,7 +84,7 @@
         ((|f| (|Fraction| (|Polynomial| S)))
          (% (|Union| (|Complex| (|Float|)) "failed")))
         (SPROG
-         ((|den| #1=(|Union| (|Complex| (|Float|)) "failed")) (|num| #1#))
+         ((|num| #1=(|Union| (|Complex| (|Float|)) "failed")) (|den| #1#))
          (SEQ
           (LETT |num| (SPADCALL (SPADCALL |f| (QREFELT % 32)) (QREFELT % 26)))
           (EXIT
@@ -105,7 +105,7 @@
         ((|f| (|Fraction| (|Polynomial| S))) (|n| (|PositiveInteger|))
          (% (|Union| (|Complex| (|Float|)) "failed")))
         (SPROG
-         ((|den| #1=(|Union| (|Complex| (|Float|)) "failed")) (|num| #1#))
+         ((|num| #1=(|Union| (|Complex| (|Float|)) "failed")) (|den| #1#))
          (SEQ
           (LETT |num|
                 (SPADCALL (SPADCALL |f| (QREFELT % 32)) |n| (QREFELT % 28)))
@@ -127,7 +127,7 @@
         ((|f| (|Fraction| (|Polynomial| S))) (|n| (|PositiveInteger|))
          (% (|Union| (|Float|) "failed")))
         (SPROG
-         ((|ans| (|Union| (|Float|) "failed")) (|old| (|PositiveInteger|)))
+         ((|old| (|PositiveInteger|)) (|ans| (|Union| (|Float|) "failed")))
          (SEQ (LETT |old| (SPADCALL |n| (QREFELT % 29)))
               (LETT |ans| (SPADCALL |f| (QREFELT % 35)))
               (SPADCALL |old| (QREFELT % 29)) (EXIT |ans|)))) 
@@ -136,7 +136,7 @@
         ((|f| (|Fraction| (|Polynomial| (|Complex| S))))
          (% (|Union| (|Complex| (|Float|)) "failed")))
         (SPROG
-         ((|den| #1=(|Union| (|Complex| (|Float|)) "failed")) (|num| #1#))
+         ((|num| #1=(|Union| (|Complex| (|Float|)) "failed")) (|den| #1#))
          (SEQ
           (LETT |num| (SPADCALL (SPADCALL |f| (QREFELT % 41)) (QREFELT % 14)))
           (EXIT
@@ -158,7 +158,7 @@
          (|n| (|PositiveInteger|))
          (% (|Union| (|Complex| (|Float|)) "failed")))
         (SPROG
-         ((|den| #1=(|Union| (|Complex| (|Float|)) "failed")) (|num| #1#))
+         ((|num| #1=(|Union| (|Complex| (|Float|)) "failed")) (|den| #1#))
          (SEQ
           (LETT |num|
                 (SPADCALL (SPADCALL |f| (QREFELT % 41)) |n| (QREFELT % 17)))
@@ -200,8 +200,8 @@
         ((|x| (|Expression| S)) (|n| (|PositiveInteger|))
          (% (|Union| (|Complex| (|Float|)) "failed")))
         (SPROG
-         ((|ans| (|Union| (|Complex| (|Float|)) "failed"))
-          (|x'| (|Expression| (|Complex| S))) (|old| (|PositiveInteger|)))
+         ((|old| (|PositiveInteger|)) (|x'| (|Expression| (|Complex| S)))
+          (|ans| (|Union| (|Complex| (|Float|)) "failed")))
          (SEQ (LETT |old| (SPADCALL |n| (QREFELT % 29)))
               (LETT |x'| (SPADCALL (ELT % 53) |x| (QREFELT % 57)))
               (LETT |ans| (SPADCALL |x'| (QREFELT % 58)))
@@ -216,9 +216,9 @@
         ((|x| (|Expression| (|Complex| S))) (|n| (|PositiveInteger|))
          (% (|Union| (|Complex| (|Float|)) "failed")))
         (SPROG
-         ((|ans| (|Union| (|Complex| (|Float|)) "failed"))
+         ((|old| (|PositiveInteger|))
           (|x'| (|Expression| (|Complex| (|Float|))))
-          (|old| (|PositiveInteger|)))
+          (|ans| (|Union| (|Complex| (|Float|)) "failed")))
          (SEQ (LETT |old| (SPADCALL |n| (QREFELT % 29)))
               (LETT |x'| (SPADCALL (ELT % 64) |x| (QREFELT % 68)))
               (LETT |ans| (SPADCALL |x'| (QREFELT % 69)))
@@ -238,9 +238,9 @@
         ((|x| (|Expression| (|Complex| S))) (|n| (|PositiveInteger|))
          (% (|Union| (|Complex| (|Float|)) "failed")))
         (SPROG
-         ((|ans| (|Union| (|Complex| (|Float|)) "failed"))
+         ((|old| (|PositiveInteger|))
           (|x'| (|Expression| (|Complex| (|Float|))))
-          (|old| (|PositiveInteger|)))
+          (|ans| (|Union| (|Complex| (|Float|)) "failed")))
          (SEQ (LETT |old| (SPADCALL |n| (QREFELT % 29)))
               (LETT |x'|
                     (SPADCALL (CONS (|function| |NUMERIC;convert|) %) |x|
@@ -256,7 +256,7 @@
 
 (SDEFUN |NUMERIC;complexNumeric;SPiC;24|
         ((|s| (S)) (|n| (|PositiveInteger|)) (% (|Complex| (|Float|))))
-        (SPROG ((|ans| (|Complex| (|Float|))) (|old| (|PositiveInteger|)))
+        (SPROG ((|old| (|PositiveInteger|)) (|ans| (|Complex| (|Float|))))
                (SEQ (LETT |old| (SPADCALL |n| (QREFELT % 29)))
                     (LETT |ans| (SPADCALL |s| (QREFELT % 25)))
                     (SPADCALL |old| (QREFELT % 29)) (EXIT |ans|)))) 
@@ -298,7 +298,7 @@
 (SDEFUN |NUMERIC;complexNumeric;CPiC;30|
         ((|s| (|Complex| S)) (|n| (|PositiveInteger|))
          (% (|Complex| (|Float|))))
-        (SPROG ((|ans| (|Complex| (|Float|))) (|old| (|PositiveInteger|)))
+        (SPROG ((|old| (|PositiveInteger|)) (|ans| (|Complex| (|Float|))))
                (SEQ (LETT |old| (SPADCALL |n| (QREFELT % 29)))
                     (LETT |ans| (SPADCALL |s| (QREFELT % 12)))
                     (SPADCALL |old| (QREFELT % 29)) (EXIT |ans|)))) 
@@ -310,7 +310,7 @@
 (SDEFUN |NUMERIC;complexNumeric;CPiC;32|
         ((|s| (|Complex| S)) (|n| (|PositiveInteger|))
          (% (|Complex| (|Float|))))
-        (SPROG ((|ans| (|Complex| (|Float|))) (|old| (|PositiveInteger|)))
+        (SPROG ((|old| (|PositiveInteger|)) (|ans| (|Complex| (|Float|))))
                (SEQ (LETT |old| (SPADCALL |n| (QREFELT % 29)))
                     (LETT |ans| (SPADCALL |s| (QREFELT % 12)))
                     (SPADCALL |old| (QREFELT % 29)) (EXIT |ans|)))) 
@@ -330,8 +330,8 @@
         ((|s| (|Complex| S)) (|n| (|PositiveInteger|))
          (% (|Complex| (|Float|))))
         (SPROG
-         ((|ans| (|Complex| (|Float|))) (|old| (|PositiveInteger|))
-          (|s'| (|Union| S "failed")))
+         ((|s'| (|Union| S "failed")) (|old| (|PositiveInteger|))
+          (|ans| (|Complex| (|Float|))))
          (SEQ (LETT |s'| (SPADCALL |s| (QREFELT % 78)))
               (EXIT
                (COND
@@ -345,7 +345,7 @@
 
 (SDEFUN |NUMERIC;numeric;SPiF;35|
         ((|s| (S)) (|n| (|PositiveInteger|)) (% (|Float|)))
-        (SPROG ((|ans| (|Float|)) (|old| (|PositiveInteger|)))
+        (SPROG ((|old| (|PositiveInteger|)) (|ans| (|Float|)))
                (SEQ (LETT |old| (SPADCALL |n| (QREFELT % 29)))
                     (LETT |ans| (SPADCALL |s| (QREFELT % 22)))
                     (SPADCALL |old| (QREFELT % 29)) (EXIT |ans|)))) 
@@ -385,7 +385,7 @@
 
 (SDEFUN |NUMERIC;numeric;PPiF;39|
         ((|p| (|Polynomial| S)) (|n| (|PositiveInteger|)) (% (|Float|)))
-        (SPROG ((|ans| (|Float|)) (|old| (|PositiveInteger|)))
+        (SPROG ((|old| (|PositiveInteger|)) (|ans| (|Float|)))
                (SEQ (LETT |old| (SPADCALL |n| (QREFELT % 29)))
                     (LETT |ans| (SPADCALL |p| (QREFELT % 79)))
                     (SPADCALL |old| (QREFELT % 29)) (EXIT |ans|)))) 
@@ -412,7 +412,7 @@
 (SDEFUN |NUMERIC;numeric;FPiF;43|
         ((|f| (|Fraction| (|Polynomial| S))) (|n| (|PositiveInteger|))
          (% (|Float|)))
-        (SPROG ((|ans| (|Float|)) (|old| (|PositiveInteger|)))
+        (SPROG ((|old| (|PositiveInteger|)) (|ans| (|Float|)))
                (SEQ (LETT |old| (SPADCALL |n| (QREFELT % 29)))
                     (LETT |ans| (SPADCALL |f| (QREFELT % 83)))
                     (SPADCALL |old| (QREFELT % 29)) (EXIT |ans|)))) 
@@ -461,8 +461,8 @@
 (SDEFUN |NUMERIC;numeric;EPiF;48|
         ((|x| (|Expression| S)) (|n| (|PositiveInteger|)) (% (|Float|)))
         (SPROG
-         ((|ans| (|Union| (|Float|) "failed")) (|x'| (|Expression| (|Float|)))
-          (|old| (|PositiveInteger|)))
+         ((|old| (|PositiveInteger|)) (|x'| (|Expression| (|Float|)))
+          (|ans| (|Union| (|Float|) "failed")))
          (SEQ (LETT |old| (SPADCALL |n| (QREFELT % 29)))
               (LETT |x'| (SPADCALL (ELT % 45) |x| (QREFELT % 50)))
               (LETT |ans| (SPADCALL |x'| (QREFELT % 51)))
@@ -478,9 +478,9 @@
         ((|x| (|Expression| S)) (|n| (|PositiveInteger|))
          (% (|Complex| (|Float|))))
         (SPROG
-         ((|ans| (|Union| (|Complex| (|Float|)) "failed"))
+         ((|old| (|PositiveInteger|))
           (|x'| (|Expression| (|Complex| (|Float|))))
-          (|old| (|PositiveInteger|)))
+          (|ans| (|Union| (|Complex| (|Float|)) "failed")))
          (SEQ (LETT |old| (SPADCALL |n| (QREFELT % 29)))
               (LETT |x'| (SPADCALL (ELT % 25) |x| (QREFELT % 92)))
               (LETT |ans| (SPADCALL |x'| (QREFELT % 69)))
@@ -510,9 +510,9 @@
         ((|x| (|Expression| (|Complex| S))) (|n| (|PositiveInteger|))
          (% (|Complex| (|Float|))))
         (SPROG
-         ((|ans| (|Union| (|Complex| (|Float|)) "failed"))
+         ((|old| (|PositiveInteger|))
           (|x'| (|Expression| (|Complex| (|Float|))))
-          (|old| (|PositiveInteger|)))
+          (|ans| (|Union| (|Complex| (|Float|)) "failed")))
          (SEQ (LETT |old| (SPADCALL |n| (QREFELT % 29)))
               (LETT |x'| (SPADCALL (ELT % 12) |x| (QREFELT % 68)))
               (LETT |ans| (SPADCALL |x'| (QREFELT % 69)))
@@ -527,7 +527,7 @@
 (DECLAIM (NOTINLINE |Numeric;|)) 
 
 (DEFUN |Numeric;| (|#1|)
-  (SPROG ((|pv$| NIL) (#1=#:G233 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (#1=#:G243 NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Numeric| DV$1))
@@ -783,9 +783,9 @@
                            %))))))))
           %))) 
 
-(DEFUN |Numeric| (#1=#:G234)
+(DEFUN |Numeric| (#1=#:G244)
   (SPROG NIL
-         (PROG (#2=#:G235)
+         (PROG (#2=#:G245)
            (RETURN
             (COND
              ((LETT #2#

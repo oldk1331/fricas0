@@ -4,7 +4,7 @@
 
 (SDEFUN |MAGMA-;rightPower;SPiS;2|
         ((|a| (S)) (|n| (|PositiveInteger|)) (% (S)))
-        (SPROG ((|res| (S)) (#1=#:G29 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G35 NIL) (|res| (S)))
                (SEQ
                 (COND ((EQL |n| 1) |a|)
                       ('T
@@ -20,7 +20,7 @@
                             (EXIT |res|))))))) 
 
 (SDEFUN |MAGMA-;leftPower;SPiS;3| ((|a| (S)) (|n| (|PositiveInteger|)) (% (S)))
-        (SPROG ((|res| (S)) (#1=#:G34 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G40 NIL) (|res| (S)))
                (SEQ
                 (COND ((EQL |n| 1) |a|)
                       ('T
@@ -38,7 +38,7 @@
 (DECLAIM (NOTINLINE |Magma&;|)) 
 
 (DEFUN |Magma&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Magma&| DV$1))

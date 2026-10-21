@@ -1,13 +1,13 @@
 
-(PUT '|SUCH;construct;S1S2%;1| '|SPADreplace| 'CONS) 
+(MAKEPROP '|SUCH;construct;S1S2%;1| '|SPADreplace| 'CONS) 
 
 (SDEFUN |SUCH;construct;S1S2%;1| ((|o| (S1)) (|c| (S2)) (% (%))) (CONS |o| |c|)) 
 
-(PUT '|SUCH;lhs;%S1;2| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|SUCH;lhs;%S1;2| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |SUCH;lhs;%S1;2| ((|st| (%)) (% (S1))) (QCAR |st|)) 
 
-(PUT '|SUCH;rhs;%S2;3| '|SPADreplace| 'QCDR) 
+(MAKEPROP '|SUCH;rhs;%S2;3| '|SPADreplace| 'QCDR) 
 
 (SDEFUN |SUCH;rhs;%S2;3| ((|st| (%)) (% (S2))) (QCDR |st|)) 
 
@@ -19,7 +19,7 @@
 (DECLAIM (NOTINLINE |SuchThat;|)) 
 
 (DEFUN |SuchThat;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -36,9 +36,9 @@
           (QSETREFV % 8 (|Record| (|:| |obj| |#1|) (|:| |cond| |#2|)))
           %))) 
 
-(DEFUN |SuchThat| (&REST #1=#:G7)
+(DEFUN |SuchThat| (&REST #1=#:G8)
   (SPROG NIL
-         (PROG (#2=#:G8)
+         (PROG (#2=#:G9)
            (RETURN
             (COND
              ((LETT #2#

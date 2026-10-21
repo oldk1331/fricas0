@@ -34,7 +34,6 @@
                                                     ((|convert|
                                                       (% (|List| |t#1|)))
                                                      T)
-                                                    ((|cross| (% % %)) T)
                                                     ((|extend|
                                                       (% % (|List| |t#1|)))
                                                      T))

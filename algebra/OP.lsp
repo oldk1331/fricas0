@@ -2,7 +2,7 @@
 (DECLAIM (NOTINLINE |Operator;|)) 
 
 (DEFUN |Operator;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Operator| DV$1))
@@ -15,9 +15,9 @@
                                               (|HasCategory| |#1|
                                                              '(|CommutativeRing|))
                                               (|HasCategory| |#1|
-                                                             '(|CharacteristicNonZero|))
+                                                             '(|CharacteristicZero|))
                                               (|HasCategory| |#1|
-                                                             '(|CharacteristicZero|))))))
+                                                             '(|CharacteristicNonZero|))))))
           (|haddProp| |$ConstructorCache| '|Operator| (LIST DV$1) (CONS 1 %))
           (|stuffDomainSlots| %)
           (QSETREFV % 6 |#1|)
@@ -49,27 +49,29 @@
            '#() 'NIL
            (CONS
             (|makeByteWordVec2| 3
-                                '(3 2 1 0 1 0 0 1 0 1 0 0 1 1 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0 0 0 0 0 0 0 0 0 0))
+                                '(1 0 1 0 0 1 0 1 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0
+                                  0 0 0 0 0 0 3 2 0 0 0 0 0 0))
             (CONS
-             '#(NIL NIL |Algebra&| NIL |NonAssociativeAlgebra&| NIL |Rng&|
-                |Module&| NIL NIL NIL |NonAssociativeRing&| NIL NIL NIL NIL
+             '#(|Algebra&| NIL |NonAssociativeAlgebra&| NIL |Rng&| |Module&|
+                NIL NIL NIL |NonAssociativeRing&| NIL NIL NIL NIL
                 |NonAssociativeRng&| |AbelianGroup&| NIL NIL NIL
                 |AbelianMonoid&| |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL
-                |AbelianSemiGroup&| |Magma&| |SetCategory&| |RetractableTo&|
-                |RetractableTo&| NIL |BasicType&| NIL NIL NIL NIL)
+                |AbelianSemiGroup&| |SetWithZero&| |Magma&| |SetCategory&|
+                |RetractableTo&| |RetractableTo&| NIL NIL NIL |BasicType&| NIL
+                NIL NIL NIL)
              (CONS
-              '#((|CharacteristicZero|) (|CharacteristicNonZero|) (|Algebra| 6)
-                 (|Ring|) (|NonAssociativeAlgebra| 6) (|SemiRing|) (|Rng|)
-                 (|Module| 6) (|SemiRng|) (|BiModule| 6 6) (|BiModule| $$ $$)
-                 (|NonAssociativeRing|) (|RightModule| 6) (|LeftModule| 6)
-                 (|LeftModule| $$) (|RightModule| $$) (|NonAssociativeRng|)
-                 (|AbelianGroup|) (|CancellationAbelianMonoid|)
-                 (|NonAssociativeSemiRing|) (|Monoid|) (|AbelianMonoid|)
-                 (|NonAssociativeSemiRng|) (|MagmaWithUnit|) (|SemiGroup|)
-                 (|AbelianSemiGroup|) (|Magma|) (|SetCategory|)
-                 (|RetractableTo| 6) (|RetractableTo| 16) (|CoercibleTo| 9)
-                 (|BasicType|) (|unitsKnown|) (|CoercibleFrom| 6)
-                 (|CoercibleFrom| 16) (|Eltable| 6 6))
+              '#((|Algebra| 6) (|Ring|) (|NonAssociativeAlgebra| 6)
+                 (|SemiRing|) (|Rng|) (|Module| 6) (|SemiRng|) (|BiModule| 6 6)
+                 (|BiModule| $$ $$) (|NonAssociativeRing|) (|RightModule| 6)
+                 (|LeftModule| 6) (|LeftModule| $$) (|RightModule| $$)
+                 (|NonAssociativeRng|) (|AbelianGroup|)
+                 (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
+                 (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
+                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|)
+                 (|SetWithZero|) (|Magma|) (|SetCategory|) (|RetractableTo| 6)
+                 (|RetractableTo| 16) (|CharacteristicNonZero|)
+                 (|CharacteristicZero|) (|CoercibleTo| 9) (|BasicType|)
+                 (|unitsKnown|) (|CoercibleFrom| 6) (|CoercibleFrom| 16)
+                 (|Eltable| 6 6))
               (|makeByteWordVec2| -999999 'NIL))))
            '|lookupIncomplete|)) 

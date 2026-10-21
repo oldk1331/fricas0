@@ -6,7 +6,7 @@
 (DEFPARAMETER |ComplexCategory;AL| 'NIL) 
 
 (DEFUN |ComplexCategory| (|t#1|)
-  (LET (#1=#:G43 (#2=#:G44 (|devaluate| |t#1|)))
+  (LET (#1=#:G44 (#2=#:G45 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |ComplexCategory;AL|)) (CDR #1#))
           (T
            (SETQ |ComplexCategory;AL|
@@ -15,11 +15,11 @@
            #1#)))) 
 
 (DEFUN |ComplexCategory;| (|t#1|)
-  (SPROG ((#1=#:G42 NIL))
+  (SPROG ((#1=#:G43 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
-                                   (|subst_in_cat| '(#2=#:G41)
+                                   (|subst_in_cat| '(#2=#:G42)
                                                    (LIST
                                                     '(|SparseUnivariatePolynomial|
                                                       |t#1|))
@@ -62,7 +62,7 @@
                                                              % |t#1|))
                                                            (|has| |t#1|
                                                                   (|IntegralDomain|)))
-                                                          ((|abs| (% %))
+                                                          ((|abs| (|t#1| %))
                                                            (|has| |t#1|
                                                                   (|RealNumberSystem|)))
                                                           ((|sqrt| (% %))
@@ -109,6 +109,9 @@
                                                         '(((|Comparable|)
                                                            (|has| |t#1|
                                                                   (|Comparable|)))
+                                                          ((|ComparableRepresentation|)
+                                                           (|has| |t#1|
+                                                                  (|ComparableRepresentation|)))
                                                           ((|IntegralDomain|)
                                                            (|has| |t#1|
                                                                   (|IntegralDomain|)))

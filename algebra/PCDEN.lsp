@@ -45,8 +45,8 @@
 
 (DEFUN |PolynomialCommonDenominator;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -68,9 +68,9 @@
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
-(DEFUN |PolynomialCommonDenominator| (&REST #1=#:G9)
+(DEFUN |PolynomialCommonDenominator| (&REST #1=#:G10)
   (SPROG NIL
-         (PROG (#2=#:G10)
+         (PROG (#2=#:G11)
            (RETURN
             (COND
              ((LETT #2#

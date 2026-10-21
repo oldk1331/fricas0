@@ -145,10 +145,10 @@
                  (LIST |finalCode| |m| |e|)))))))))))
 
 ; $identity_list := [ _
-;    ["+", ["Zero"]], _
-;    ["*", ["One"]], _
-;    ['gcd, ["Zero"]], _
-;    ['lcm, ["One"]], _
+;    ["+", ["0"]], _
+;    ["*", ["1"]], _
+;    ['gcd, ["0"]], _
+;    ['lcm, ["1"]], _
 ;    ['append, ['construct]], _
 ;    ['union, ['construct]], _
 ;    ['strconc, '""], _
@@ -157,8 +157,8 @@
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
   (SETQ |$identity_list|
-          (LIST (LIST '+ (LIST '|Zero|)) (LIST '* (LIST '|One|))
-                (LIST '|gcd| (LIST '|Zero|)) (LIST '|lcm| (LIST '|One|))
+          (LIST (LIST '+ (LIST '|0|)) (LIST '* (LIST '|1|))
+                (LIST '|gcd| (LIST '|0|)) (LIST '|lcm| (LIST '|1|))
                 (LIST '|append| (LIST '|construct|))
                 (LIST '|union| (LIST '|construct|)) (LIST '|strconc| "")
                 (LIST '|and| '|true|) (LIST '|or| '|false|))))

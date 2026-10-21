@@ -1,25 +1,25 @@
 
 (SDEFUN |ES2;map;MKF;1| ((|f| (|Mapping| F E)) (|k| (|Kernel| E)) (% (F)))
-        (SPROG ((#1=#:G5 NIL) (|x| NIL) (#2=#:G4 NIL))
+        (SPROG ((#1=#:G4 NIL) (|x| NIL) (#2=#:G5 NIL))
                (SEQ
                 (SPADCALL
                  (SPADCALL (SPADCALL |k| (QREFELT % 10)) (QREFELT % 11))
                  (PROGN
-                  (LETT #2# NIL)
-                  (SEQ (LETT |x| NIL) (LETT #1# (SPADCALL |k| (QREFELT % 13)))
+                  (LETT #1# NIL)
+                  (SEQ (LETT |x| NIL) (LETT #2# (SPADCALL |k| (QREFELT % 13)))
                        G190
                        (COND
-                        ((OR (ATOM #1#) (PROGN (LETT |x| (CAR #1#)) NIL))
+                        ((OR (ATOM #2#) (PROGN (LETT |x| (CAR #2#)) NIL))
                          (GO G191)))
-                       (SEQ (EXIT (LETT #2# (CONS (SPADCALL |x| |f|) #2#))))
-                       (LETT #1# (CDR #1#)) (GO G190) G191
-                       (EXIT (NREVERSE #2#))))
+                       (SEQ (EXIT (LETT #1# (CONS (SPADCALL |x| |f|) #1#))))
+                       (LETT #2# (CDR #2#)) (GO G190) G191
+                       (EXIT (NREVERSE #1#))))
                  (QREFELT % 15))))) 
 
 (DECLAIM (NOTINLINE |ExpressionSpaceFunctions2;|)) 
 
 (DEFUN |ExpressionSpaceFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

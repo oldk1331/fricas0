@@ -1,12 +1,12 @@
 
 (SDEFUN |IBATOOL;diagonalProduct;MR;1| ((|m| (|Matrix| R)) (% (R)))
-        (SPROG ((|ans| (R)) (#1=#:G14 NIL) (|i| NIL) (#2=#:G15 NIL) (|j| NIL))
+        (SPROG ((|j| NIL) (#1=#:G15 NIL) (|i| NIL) (#2=#:G14 NIL) (|ans| (R)))
                (SEQ (LETT |ans| (|spadConstant| % 9))
                     (SEQ (LETT |j| (PROGN |m| 1))
-                         (LETT #2# (SPADCALL |m| (QREFELT % 13)))
+                         (LETT #1# (SPADCALL |m| (QREFELT % 13)))
                          (LETT |i| (PROGN |m| 1))
-                         (LETT #1# (SPADCALL |m| (QREFELT % 12))) G190
-                         (COND ((OR (> |i| #1#) (> |j| #2#)) (GO G191)))
+                         (LETT #2# (SPADCALL |m| (QREFELT % 12))) G190
+                         (COND ((OR (> |i| #2#) (> |j| #1#)) (GO G191)))
                          (SEQ
                           (EXIT
                            (LETT |ans|
@@ -20,13 +20,13 @@
         ((|mat| (|Matrix| R)) (|sing| (R)) (|n| (|NonNegativeInteger|))
          (% (R)))
         (SPROG
-         ((#1=#:G24 NIL) (|d| (R)) (|mij| (R)) (#2=#:G26 NIL) (|j| NIL)
-          (#3=#:G25 NIL) (|i| NIL))
+         ((|i| NIL) (#1=#:G25 NIL) (|j| NIL) (#2=#:G26 NIL) (|mij| (R))
+          (|d| (R)) (#3=#:G24 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |d| |sing|)
-                (SEQ (LETT |i| 1) (LETT #3# |n|) G190
-                     (COND ((|greater_SI| |i| #3#) (GO G191)))
+                (SEQ (LETT |i| 1) (LETT #1# |n|) G190
+                     (COND ((|greater_SI| |i| #1#) (GO G191)))
                      (SEQ
                       (EXIT
                        (SEQ (LETT |j| |i|) (LETT #2# |n|) G190
@@ -42,23 +42,23 @@
                               (COND
                                ((SPADCALL |d| (|spadConstant| % 9)
                                           (QREFELT % 20))
-                                (PROGN (LETT #1# |d|) (GO #4=#:G23))))))
+                                (PROGN (LETT #3# |d|) (GO #4=#:G23))))))
                             (LETT |j| (+ |j| 1)) (GO G190) G191 (EXIT NIL))))
                      (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                 (EXIT |d|)))
-          #4# (EXIT #1#)))) 
+          #4# (EXIT #3#)))) 
 
 (SDEFUN |IBATOOL;divideIfCan!;2MRIR;3|
         ((|matrix| (|Matrix| R)) (|matrixOut| (|Matrix| R)) (|prime| (R))
          (|n| (|Integer|)) (% (R)))
         (SPROG
-         ((#1=#:G37 NIL) (|a| (|Union| R "failed")) (#2=#:G39 NIL) (|j| NIL)
-          (#3=#:G38 NIL) (|i| NIL))
+         ((|i| NIL) (#1=#:G41 NIL) (|j| NIL) (#2=#:G42 NIL)
+          (|a| (|Union| R "failed")) (#3=#:G40 NIL))
          (SEQ
           (EXIT
            (SEQ
-            (SEQ (LETT |i| 1) (LETT #3# |n|) G190
-                 (COND ((|greater_SI| |i| #3#) (GO G191)))
+            (SEQ (LETT |i| 1) (LETT #1# |n|) G190
+                 (COND ((|greater_SI| |i| #1#) (GO G191)))
                  (SEQ
                   (EXIT
                    (SEQ (LETT |j| |i|) (LETT #2# |n|) G190
@@ -70,18 +70,18 @@
                          (EXIT
                           (COND
                            ((QEQCAR |a| 1)
-                            (PROGN (LETT #1# |prime|) (GO #4=#:G36)))
+                            (PROGN (LETT #3# |prime|) (GO #4=#:G39)))
                            ('T
                             (QSETAREF2O |matrixOut| |i| |j| (QCDR |a|) 1 1)))))
                         (LETT |j| (+ |j| 1)) (GO G190) G191 (EXIT NIL))))
                  (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
             (EXIT (|spadConstant| % 9))))
-          #4# (EXIT #1#)))) 
+          #4# (EXIT #3#)))) 
 
 (SDEFUN |IBATOOL;leastPower;3Nni;4|
         ((|p| #1=(|NonNegativeInteger|)) (|n| (|NonNegativeInteger|))
          (% (|NonNegativeInteger|)))
-        (SPROG ((|q| #1#) (|e| (|NonNegativeInteger|)))
+        (SPROG ((|e| (|NonNegativeInteger|)) (|q| #1#))
                (SEQ (LETT |e| 1) (LETT |q| |p|)
                     (SEQ G190 (COND ((NULL (< |q| |n|)) (GO G191)))
                          (SEQ (LETT |e| (+ |e| 1))
@@ -92,16 +92,16 @@
 (SDEFUN |IBATOOL;idealiserMatrix;3M;5|
         ((|ideal| (|Matrix| R)) (|idealinv| (|Matrix| R)) (% (|Matrix| R)))
         (SPROG
-         ((#1=#:G56 NIL) (|k| NIL) (#2=#:G55 NIL) (|j| NIL) (|m| (|Matrix| R))
-          (|r| (|Matrix| R)) (#3=#:G54 NIL) (|i| NIL) (|v| (|Vector| F))
-          (|mc| (|Integer|)) (|mr| (|Integer|)) (|bigm| (|Matrix| R))
-          (|n| (|PositiveInteger|)))
+         ((|n| (|PositiveInteger|)) (|bigm| (|Matrix| R)) (|mr| (|Integer|))
+          (|mc| (|Integer|)) (|v| (|Vector| F)) (|i| NIL) (#1=#:G57 NIL)
+          (|r| (|Matrix| R)) (|m| (|Matrix| R)) (|j| NIL) (#2=#:G58 NIL)
+          (|k| NIL) (#3=#:G59 NIL))
          (SEQ (LETT |n| (SPADCALL (QREFELT % 28)))
               (LETT |bigm| (SPADCALL (* |n| |n|) |n| (QREFELT % 29)))
               (LETT |mr| (PROGN |bigm| 1)) (LETT |mc| (PROGN |bigm| 1))
               (LETT |v| (SPADCALL (QREFELT % 31)))
-              (SEQ (LETT |i| 0) (LETT #3# (- |n| 1)) G190
-                   (COND ((|greater_SI| |i| #3#) (GO G191)))
+              (SEQ (LETT |i| 0) (LETT #1# (- |n| 1)) G190
+                   (COND ((|greater_SI| |i| #1#) (GO G191)))
                    (SEQ
                     (LETT |r|
                           (SPADCALL
@@ -118,8 +118,8 @@
                           (COND ((|greater_SI| |j| #2#) (GO G191)))
                           (SEQ
                            (EXIT
-                            (SEQ (LETT |k| 0) (LETT #1# (- |n| 1)) G190
-                                 (COND ((|greater_SI| |k| #1#) (GO G191)))
+                            (SEQ (LETT |k| 0) (LETT #3# (- |n| 1)) G190
+                                 (COND ((|greater_SI| |k| #3#) (GO G191)))
                                  (SEQ
                                   (EXIT
                                    (SPADCALL |bigm|
@@ -148,7 +148,7 @@
 (SDEFUN |IBATOOL;idealiser;2MRM;7|
         ((|ideal| (|Matrix| R)) (|idealinv| (|Matrix| R)) (|denom| (R))
          (% (|Matrix| R)))
-        (SPROG ((|bigm| (|Matrix| R)) (#1=#:G60 NIL))
+        (SPROG ((#1=#:G63 NIL) (|bigm| (|Matrix| R)))
                (SEQ
                 (LETT |bigm|
                       (PROG2
@@ -178,9 +178,9 @@
           (|Record| (|:| |basis| #1=(|Matrix| R)) (|:| |basisDen| R)
                     (|:| |basisInv| #2=(|Matrix| R)))))
         (SPROG
-         ((|rbinv| (|Matrix| R)) (|rb| (|Matrix| R)) (|c2| (R)) (|c1| (R))
-          (|den| (R)) (|n| (|NonNegativeInteger|)) (|rbinv2| #2#)
-          (|rbden2| (R)) (|rb2| #1#) (|rbinv1| #2#) (|rbden1| (R)) (|rb1| #1#))
+         ((|rb1| #1#) (|rbden1| (R)) (|rbinv1| #2#) (|rb2| #1#) (|rbden2| (R))
+          (|rbinv2| #2#) (|n| (|Integer|)) (|den| (R)) (|c1| (R)) (|c2| (R))
+          (|rb| (|Matrix| R)) (|rbinv| (|Matrix| R)))
          (SEQ (LETT |rb1| (QVELT |mod1| 0)) (LETT |rbden1| (QVELT |mod1| 1))
               (LETT |rbinv1| (QVELT |mod1| 2)) (LETT |rb2| (QVELT |mod2| 0))
               (LETT |rbden2| (QVELT |mod2| 1)) (LETT |rbinv2| (QVELT |mod2| 2))
@@ -226,7 +226,7 @@
 (DECLAIM (NOTINLINE |IntegralBasisTools;|)) 
 
 (DEFUN |IntegralBasisTools;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -244,9 +244,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |IntegralBasisTools| (&REST #1=#:G77)
+(DEFUN |IntegralBasisTools| (&REST #1=#:G80)
   (SPROG NIL
-         (PROG (#2=#:G78)
+         (PROG (#2=#:G81)
            (RETURN
             (COND
              ((LETT #2#
@@ -266,10 +266,10 @@
 (MAKEPROP '|IntegralBasisTools| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (0 . |One|) (|Integer|) (|Matrix| 6)
+              (|local| |#3|) (0 . |1|) (|Integer|) (|Matrix| 6)
               (4 . |maxRowIndex|) (9 . |maxColIndex|) (14 . *)
               |IBATOOL;diagonalProduct;MR;1| (|Boolean|) (20 . |zero?|)
-              (25 . |gcd|) (31 . |One|) (35 . =) (|NonNegativeInteger|)
+              (25 . |gcd|) (31 . |1|) (35 . =) (|NonNegativeInteger|)
               |IBATOOL;matrixGcd;MRNniR;2| (|Union| % '"failed") (41 . |exquo|)
               |IBATOOL;divideIfCan!;2MRIR;3| |IBATOOL;leastPower;3Nni;4|
               (|PositiveInteger|) (47 . |rank|) (51 . |zero|) (|Vector| %)
@@ -342,7 +342,7 @@
                                               0 34 1 11 0 0 35 2 11 0 0 0 36 4
                                               11 6 0 10 10 6 37 1 39 11 11 40 1
                                               11 0 0 41 2 11 23 0 6 43 2 39 11
-                                              11 6 44 1 11 16 0 46 2 21 16 0 0
+                                              11 6 44 1 11 16 0 46 2 10 16 0 0
                                               47 2 6 0 0 0 48 2 6 0 0 0 49 2 11
                                               0 6 0 50 2 11 0 0 0 51 2 52 11 11
                                               6 53 2 0 54 54 54 55 3 0 6 11 6

@@ -2,7 +2,7 @@
 (DECLAIM (NOTINLINE |PAdicInteger;|)) 
 
 (DEFUN |PAdicInteger;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT |dv$| (LIST '|PAdicInteger| DV$1))
@@ -52,28 +52,28 @@
            (CONS
             (|makeByteWordVec2| 1
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
+                                  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
             (CONS
              '#(NIL |EuclideanDomain&| NIL |GcdDomain&| NIL NIL NIL |Algebra&|
-                |EntireRing&| NIL NIL NIL |Rng&| |NonAssociativeAlgebra&| NIL
+                |EntireRing&| NIL NIL |Rng&| |NonAssociativeAlgebra&| NIL
                 |Module&| |NonAssociativeRing&| NIL NIL |NonAssociativeRng&|
                 NIL |AbelianGroup&| NIL NIL NIL |AbelianMonoid&|
                 |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL
-                |AbelianSemiGroup&| |Magma&| |SetCategory&| NIL NIL
-                |BasicType&| NIL NIL NIL)
+                |AbelianSemiGroup&| |SetWithZero&| |Magma&| |SetCategory&| NIL
+                NIL |BasicType&| NIL NIL NIL NIL)
              (CONS
               '#((|PAdicIntegerCategory| 6) (|EuclideanDomain|)
                  (|PrincipalIdealDomain|) (|GcdDomain|) (|IntegralDomain|)
                  (|LeftOreRing|) (|CommutativeRing|) (|Algebra| $$)
-                 (|EntireRing|) (|CharacteristicZero|) (|Ring|) (|SemiRing|)
-                 (|Rng|) (|NonAssociativeAlgebra| $$) (|SemiRng|) (|Module| $$)
+                 (|EntireRing|) (|Ring|) (|SemiRing|) (|Rng|)
+                 (|NonAssociativeAlgebra| $$) (|SemiRng|) (|Module| $$)
                  (|NonAssociativeRing|) (|BiModule| $$ $$) (|RightModule| $$)
                  (|NonAssociativeRng|) (|LeftModule| $$) (|AbelianGroup|)
                  (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
                  (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
-                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|) (|Magma|)
-                 (|SetCategory|) (|CommutativeStar|) (|CoercibleTo| 8)
-                 (|BasicType|) (|unitsKnown|) (|TwoSidedRecip|)
-                 (|noZeroDivisors|))
+                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|)
+                 (|SetWithZero|) (|Magma|) (|SetCategory|) (|CommutativeStar|)
+                 (|CoercibleTo| 8) (|BasicType|) (|unitsKnown|)
+                 (|TwoSidedRecip|) (|noZeroDivisors|) (|CharacteristicZero|))
               (|makeByteWordVec2| -999999 'NIL))))
            '|lookupIncomplete|)) 

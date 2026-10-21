@@ -29,5 +29,8 @@
                                                          '(((|coerce|
                                                              (% |t#1|))
                                                             T))
-                                                         NIL NIL NIL)))))))
+                                                         '(((|CharacteristicZero|)
+                                                            (|has| |t#1|
+                                                                   (|CharacteristicZero|))))
+                                                         NIL NIL)))))))
            (SETELT #1# 0 (LIST '|Algebra| |t#1|))))) 

@@ -5,8 +5,8 @@
          (|cnt| (|Integer|)) (|s| (|Integer|)) (|p| (|Integer|))
          (% (|Integer|)))
         (SPROG
-         ((|ss| (|U64Int|)) (#1=#:G10 NIL) (|i| NIL) (|kk2| (|Integer|))
-          (|kk1| (|Integer|)) (|cns| (|SingleInteger|)))
+         ((|cns| (|SingleInteger|)) (|kk1| (|Integer|)) (|kk2| (|Integer|))
+          (|i| NIL) (#1=#:G10 NIL) (|ss| (|U64Int|)))
          (SEQ (LETT |cns| |cnt|) (LETT |ss| |s|)
               (LETT |kk1| (QMAJ_INDEX_U32 |m1| |row1| |col1|))
               (LETT |kk2| (QMAJ_INDEX_U32 |m2| |row2| |col2|))
@@ -25,18 +25,18 @@
         ((|m| (|U32Matrix|)) (|ipivs| (|U32Vector|)) (|p| (|Integer|))
          (% (|U32Matrix|)))
         (SPROG
-         ((|s| (|Integer|)) (#1=#:G20 NIL) (|j| NIL) (#2=#:G19 NIL) (|i| NIL)
-          (|im| (|U32Matrix|)) (|nc| (|NonNegativeInteger|)))
+         ((|nc| (|NonNegativeInteger|)) (|im| (|U32Matrix|)) (|i| NIL)
+          (#1=#:G19 NIL) (|j| NIL) (#2=#:G20 NIL) (|s| (|Integer|)))
          (SEQ (LETT |nc| (ANCOLS_U32 |m|))
               (LETT |im| (MAKE_MATRIX1_U32 |nc| |nc| 0))
-              (SEQ (LETT |i| 0) (LETT #2# (- |nc| 1)) G190
-                   (COND ((|greater_SI| |i| #2#) (GO G191)))
+              (SEQ (LETT |i| 0) (LETT #1# (- |nc| 1)) G190
+                   (COND ((|greater_SI| |i| #1#) (GO G191)))
                    (SEQ
                     (SETAREF2_U32 |im| (+ |i| 0) (+ |i| 0)
                                   (ELT_U32 |ipivs| |i|))
                     (EXIT
-                     (SEQ (LETT |j| (+ |i| 1)) (LETT #1# (- |nc| 1)) G190
-                          (COND ((> |j| #1#) (GO G191)))
+                     (SEQ (LETT |j| (+ |i| 1)) (LETT #2# (- |nc| 1)) G190
+                          (COND ((> |j| #2#) (GO G191)))
                           (SEQ
                            (LETT |s|
                                  (|MATOP32;q_dot| |m| |im| (+ |j| 0) (+ |i| 0)
@@ -57,17 +57,17 @@
         ((|m1| (|U32Matrix|)) (|m2| (|U32Matrix|)) (|pa| (|U32Vector|))
          (|p| (|Integer|)) (% (|U32Matrix|)))
         (SPROG
-         ((|s| (|Integer|)) (|kk| (|NonNegativeInteger|)) (#1=#:G29 NIL)
-          (|j| NIL) (#2=#:G28 NIL) (|i| NIL) (|mr| (|U32Matrix|))
-          (|nc1| (|Integer|)) (|nc| (|NonNegativeInteger|)))
+         ((|nc| (|NonNegativeInteger|)) (|nc1| (|Integer|))
+          (|mr| (|U32Matrix|)) (|i| NIL) (#1=#:G28 NIL) (|j| NIL)
+          (#2=#:G29 NIL) (|kk| (|NonNegativeInteger|)) (|s| (|Integer|)))
          (SEQ (LETT |nc| (ANCOLS_U32 |m1|)) (LETT |nc1| (- |nc| 1))
               (LETT |mr| (MAKE_MATRIX1_U32 |nc| |nc| 0))
-              (SEQ (LETT |i| 0) (LETT #2# |nc1|) G190
-                   (COND ((|greater_SI| |i| #2#) (GO G191)))
+              (SEQ (LETT |i| 0) (LETT #1# |nc1|) G190
+                   (COND ((|greater_SI| |i| #1#) (GO G191)))
                    (SEQ
                     (EXIT
-                     (SEQ (LETT |j| 0) (LETT #1# |nc1|) G190
-                          (COND ((|greater_SI| |j| #1#) (GO G191)))
+                     (SEQ (LETT |j| 0) (LETT #2# |nc1|) G190
+                          (COND ((|greater_SI| |j| #2#) (GO G191)))
                           (SEQ (LETT |kk| (MAX |i| |j|)) (LETT |s| 0)
                                (LETT |s|
                                      (|MATOP32;q_dot| |m1| |m2| |i| |j| |kk|
@@ -85,9 +85,9 @@
         ((|m1| (|U32Matrix|)) (|m2| (|U32Matrix|)) (|d2| (|Integer|))
          (|p| (|Integer|)) (% (|U32Matrix|)))
         (SPROG
-         ((|s| (|Integer|)) (#1=#:G40 NIL) (|j| NIL) (#2=#:G39 NIL) (|i| NIL)
-          (|res| (|U32Matrix|)) (|nr2| (|NonNegativeInteger|))
-          (|nc1| (|NonNegativeInteger|)) (|nr1| (|NonNegativeInteger|)))
+         ((|nr1| (|NonNegativeInteger|)) (|nc1| (|NonNegativeInteger|))
+          (|nr2| (|NonNegativeInteger|)) (|res| (|U32Matrix|)) (|i| NIL)
+          (#1=#:G39 NIL) (|j| NIL) (#2=#:G40 NIL) (|s| (|Integer|)))
          (SEQ (LETT |nr1| (ANROWS_U32 |m1|)) (LETT |nc1| (ANCOLS_U32 |m1|))
               (EXIT
                (COND
@@ -96,12 +96,12 @@
                 ('T
                  (SEQ (LETT |nr2| |d2|)
                       (LETT |res| (MAKE_MATRIX1_U32 |nr1| |nr2| 0))
-                      (SEQ (LETT |i| 0) (LETT #2# (- |nr1| 1)) G190
-                           (COND ((|greater_SI| |i| #2#) (GO G191)))
+                      (SEQ (LETT |i| 0) (LETT #1# (- |nr1| 1)) G190
+                           (COND ((|greater_SI| |i| #1#) (GO G191)))
                            (SEQ
                             (EXIT
-                             (SEQ (LETT |j| 0) (LETT #1# (- |nr2| 1)) G190
-                                  (COND ((|greater_SI| |j| #1#) (GO G191)))
+                             (SEQ (LETT |j| 0) (LETT #2# (- |nr2| 1)) G190
+                                  (COND ((|greater_SI| |j| #2#) (GO G191)))
                                   (SEQ (LETT |s| 0)
                                        (LETT |s|
                                              (|MATOP32;q_dot| |m1| |m2| |i| |j|
@@ -116,17 +116,17 @@
         ((|vr| (|U32Vector|)) (|m| (|U32Matrix|)) (|v| (|U32Vector|))
          (|p| (|Integer|)) (% (|Void|)))
         (SPROG
-         ((|kk| (|Integer|)) (|ss| (|Integer|)) (#1=#:G49 NIL) (|j| NIL)
-          (#2=#:G48 NIL) (|i| NIL) (|nc| (|NonNegativeInteger|))
-          (|nr| (|NonNegativeInteger|)))
+         ((|nr| (|NonNegativeInteger|)) (|nc| (|NonNegativeInteger|)) (|i| NIL)
+          (#1=#:G48 NIL) (|j| NIL) (#2=#:G49 NIL) (|ss| (|Integer|))
+          (|kk| (|Integer|)))
          (SEQ (LETT |nr| (QV_LEN_U32 |vr|)) (LETT |nc| (ANCOLS_U32 |m|))
               (LETT |kk| 0)
               (EXIT
-               (SEQ (LETT |i| 0) (LETT #2# (- |nr| 1)) G190
-                    (COND ((|greater_SI| |i| #2#) (GO G191)))
+               (SEQ (LETT |i| 0) (LETT #1# (- |nr| 1)) G190
+                    (COND ((|greater_SI| |i| #1#) (GO G191)))
                     (SEQ (LETT |ss| 0)
-                         (SEQ (LETT |j| 0) (LETT #1# (- |nc| 1)) G190
-                              (COND ((|greater_SI| |j| #1#) (GO G191)))
+                         (SEQ (LETT |j| 0) (LETT #2# (- |nc| 1)) G190
+                              (COND ((|greater_SI| |j| #2#) (GO G191)))
                               (SEQ
                                (EXIT
                                 (LETT |ss|
@@ -143,15 +143,15 @@
         ((|m| (|U32Matrix|)) (|nr| (|Integer|)) (|nc| (|Integer|))
          (% (|U32Matrix|)))
         (SPROG
-         ((#1=#:G57 NIL) (|j| NIL) (#2=#:G56 NIL) (|i| NIL)
-          (|res| (|U32Matrix|)))
+         ((|res| (|U32Matrix|)) (|i| NIL) (#1=#:G56 NIL) (|j| NIL)
+          (#2=#:G57 NIL))
          (SEQ (LETT |res| (MAKE_MATRIX1_U32 |nr| |nc| 0))
-              (SEQ (LETT |i| 0) (LETT #2# (- |nr| 1)) G190
-                   (COND ((|greater_SI| |i| #2#) (GO G191)))
+              (SEQ (LETT |i| 0) (LETT #1# (- |nr| 1)) G190
+                   (COND ((|greater_SI| |i| #1#) (GO G191)))
                    (SEQ
                     (EXIT
-                     (SEQ (LETT |j| 0) (LETT #1# (- |nc| 1)) G190
-                          (COND ((|greater_SI| |j| #1#) (GO G191)))
+                     (SEQ (LETT |j| 0) (LETT #2# (- |nc| 1)) G190
+                          (COND ((|greater_SI| |j| #2#) (GO G191)))
                           (SEQ
                            (EXIT
                             (SETAREF2_U32 |res| |i| |j|
@@ -164,13 +164,13 @@
 (SDEFUN |MATOP32;shift_mat!;Um3IV;7|
         ((|m| (|U32Matrix|)) (|sa| (|Integer|)) (|nr| (|Integer|))
          (|nc| (|Integer|)) (% (|Void|)))
-        (SPROG ((#1=#:G64 NIL) (|j| NIL) (#2=#:G63 NIL) (|i| NIL))
-               (SEQ (LETT |i| 0) (LETT #2# (- |nr| 1)) G190
-                    (COND ((|greater_SI| |i| #2#) (GO G191)))
+        (SPROG ((|i| NIL) (#1=#:G63 NIL) (|j| NIL) (#2=#:G64 NIL))
+               (SEQ (LETT |i| 0) (LETT #1# (- |nr| 1)) G190
+                    (COND ((|greater_SI| |i| #1#) (GO G191)))
                     (SEQ
                      (EXIT
-                      (SEQ (LETT |j| 0) (LETT #1# (- |nc| 1)) G190
-                           (COND ((|greater_SI| |j| #1#) (GO G191)))
+                      (SEQ (LETT |j| 0) (LETT #2# (- |nc| 1)) G190
+                           (COND ((|greater_SI| |j| #2#) (GO G191)))
                            (SEQ
                             (EXIT
                              (SETAREF2_U32 |m| |i| |j|
@@ -183,14 +183,14 @@
         ((|m| (|U32Matrix|)) (|p| (|Integer|))
          (% (|Union| (|U32Matrix|) "failed")))
         (SPROG
-         ((|tlmi| #1=(|U32Matrix|)) (#2=#:G83 NIL) (|j| NIL)
-          (|nc| (|NonNegativeInteger|)) (|upi| #1#) (#3=#:G80 NIL)
-          (#4=#:G81 NIL) (#5=#:G82 NIL) (|pa| #6=(|U32Vector|))
-          (|tup| #7=(|U32Matrix|)) (|ipivs| #8=(|U32Vector|))
-          (|lm| #9=(|U32Matrix|))
-          (|lud|
-           (|Record| (|:| |lpart| #9#) (|:| |upart| #7#) (|:| |udinv| #8#)
-                     (|:| |ppart| #6#))))
+         ((|lud|
+           (|Record| (|:| |lpart| #1=(|U32Matrix|))
+                     (|:| |upart| #2=(|U32Matrix|))
+                     (|:| |udinv| #3=(|U32Vector|))
+                     (|:| |ppart| #4=(|U32Vector|))))
+          (|lm| #1#) (|ipivs| #3#) (|tup| #2#) (|pa| #4#) (#5=#:G83 NIL)
+          (#6=#:G82 NIL) (#7=#:G81 NIL) (|upi| #8=(|U32Matrix|))
+          (|nc| (|NonNegativeInteger|)) (|j| NIL) (#9=#:G84 NIL) (|tlmi| #8#))
          (SEQ
           (EXIT
            (SEQ (LETT |nc| (ANCOLS_U32 |m|))
@@ -213,18 +213,18 @@
                                  (COND
                                   ((EQL (ELT_U32 |ipivs| |j|) 0)
                                    (PROGN
-                                    (LETT #3#
+                                    (LETT #7#
                                           (PROGN
-                                           (LETT #4# (CONS 1 "failed"))
-                                           (GO #10=#:G79)))
-                                    (GO #11=#:G71))))))
+                                           (LETT #6# (CONS 1 "failed"))
+                                           (GO #10=#:G80)))
+                                    (GO #11=#:G72))))))
                                (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                                (EXIT NIL)))
-                         #11# (EXIT #3#))
+                         #11# (EXIT #7#))
                         (LETT |upi| (SPADCALL |tup| |ipivs| |p| (QREFELT % 9)))
                         (LETT |nc| (ANCOLS_U32 |m|))
-                        (SEQ (LETT |j| 0) (LETT #2# (- |nc| 1)) G190
-                             (COND ((|greater_SI| |j| #2#) (GO G191)))
+                        (SEQ (LETT |j| 0) (LETT #9# (- |nc| 1)) G190
+                             (COND ((|greater_SI| |j| #9#) (GO G191)))
                              (SEQ (EXIT (SETELT_U32 |ipivs| |j| 1)))
                              (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                              (EXIT NIL))
@@ -233,13 +233,13 @@
                          (CONS 0
                                (SPADCALL |upi| |tlmi| |pa| |p|
                                          (QREFELT % 10))))))))))
-          #10# (EXIT #4#)))) 
+          #10# (EXIT #6#)))) 
 
 (SDEFUN |MATOP32;swapRows|
         ((|m| (|U32Matrix|)) (|i| (|Integer|)) (|j| (|Integer|)) (% (|Void|)))
         (SPROG
-         ((|tmp| (|Integer|)) (#1=#:G89 NIL) (|k| NIL)
-          (|nc| (|NonNegativeInteger|)))
+         ((|nc| (|NonNegativeInteger|)) (|k| NIL) (#1=#:G90 NIL)
+          (|tmp| (|Integer|)))
          (SEQ (LETT |nc| (ANCOLS_U32 |m|))
               (EXIT
                (SEQ (LETT |k| 0) (LETT #1# (- (+ |nc| 0) 1)) G190
@@ -255,13 +255,14 @@
           (|Record| (|:| |lpart| (|U32Matrix|)) (|:| |upart| (|U32Matrix|))
                     (|:| |udinv| (|U32Vector|)) (|:| |ppart| (|U32Vector|)))))
         (SPROG
-         ((|s| (|Integer|)) (#1=#:G114 NIL) (|j| NIL) (#2=#:G113 NIL)
-          (|ipiv| (|Integer|)) (|i1| #3=(|SingleInteger|)) (|piv| (|Integer|))
-          (|tmpi| (|Integer|)) (|j0| (|SingleInteger|)) (#4=#:G112 NIL)
-          (#5=#:G111 NIL) (|i| NIL) (#6=#:G110 NIL) (|ipivs| #7=(|U32Vector|))
-          (|pa0| #7#) (|um| #8=(|U32Matrix|)) (|lm| #8#) (|nm1| #3#)
-          (|nr1| #3#) (|nc1| #3#) (|nm| (|NonNegativeInteger|))
-          (|nr| (|NonNegativeInteger|)) (|nc| (|NonNegativeInteger|)))
+         ((|nc| (|NonNegativeInteger|)) (|nr| (|NonNegativeInteger|))
+          (|nm| (|NonNegativeInteger|)) (|nc1| #1=(|SingleInteger|))
+          (|nr1| #1#) (|nm1| #1#) (|lm| #2=(|U32Matrix|)) (|um| #2#)
+          (|pa0| #3=(|U32Vector|)) (|ipivs| #3#) (#4=#:G111 NIL) (|i| NIL)
+          (#5=#:G112 NIL) (#6=#:G113 NIL) (|j0| (|SingleInteger|))
+          (|tmpi| (|Integer|)) (|piv| (|Integer|)) (|i1| #1#)
+          (|ipiv| (|Integer|)) (#7=#:G114 NIL) (|j| NIL) (#8=#:G115 NIL)
+          (|s| (|Integer|)))
          (SEQ (LETT |nc| (ANCOLS_U32 |m|)) (LETT |nr| (ANROWS_U32 |m|))
               (LETT |nm| (MIN |nc| |nr|)) (LETT |nc1| (- |nc| 1))
               (LETT |nr1| (- |nr| 1)) (LETT |nm1| (- |nm| 1))
@@ -269,15 +270,15 @@
               (LETT |um| (MAKE_MATRIX1_U32 |nc| |nm| 0))
               (LETT |pa0| (GETREFV_U32 |nr| 0))
               (LETT |ipivs| (GETREFV_U32 |nm| 0))
-              (SEQ (LETT |j| 0) (LETT #6# |nr1|) G190
-                   (COND ((|greater_SI| |j| #6#) (GO G191)))
+              (SEQ (LETT |j| 0) (LETT #4# |nr1|) G190
+                   (COND ((|greater_SI| |j| #4#) (GO G191)))
                    (SEQ (EXIT (SETELT_U32 |pa0| |j| |j|)))
                    (LETT |j| (|inc_SI| |j|)) (GO G190) G191 (EXIT NIL))
               (SEQ (LETT |i| 0) (LETT #5# |nm1|) G190
                    (COND ((|greater_SI| |i| #5#) (GO G191)))
                    (SEQ (LETT |j0| -1)
-                        (SEQ (LETT |j| |i|) (LETT #4# |nr1|) G190
-                             (COND ((> |j| #4#) (GO G191)))
+                        (SEQ (LETT |j| |i|) (LETT #6# |nr1|) G190
+                             (COND ((> |j| #6#) (GO G191)))
                              (SEQ
                               (LETT |s|
                                     (|sub_SI| |p|
@@ -315,8 +316,8 @@
                            (LETT |ipiv| (SPADCALL |piv| |p| (QREFELT % 26)))
                            (SETELT_U32 |ipivs| |i| |ipiv|)
                            (EXIT
-                            (SEQ (LETT |j| |i1|) (LETT #2# |nr1|) G190
-                                 (COND ((|greater_SI| |j| #2#) (GO G191)))
+                            (SEQ (LETT |j| |i1|) (LETT #7# |nr1|) G190
+                                 (COND ((|greater_SI| |j| #7#) (GO G191)))
                                  (SEQ
                                   (EXIT
                                    (SETAREF2_U32 |lm| |j| |i|
@@ -331,8 +332,8 @@
                          ('T (SETELT_U32 |ipivs| |i| 0)))
                         (SETAREF2_U32 |um| |i| |i| |piv|)
                         (EXIT
-                         (SEQ (LETT |j| |i1|) (LETT #1# |nc1|) G190
-                              (COND ((|greater_SI| |j| #1#) (GO G191)))
+                         (SEQ (LETT |j| |i1|) (LETT #8# |nc1|) G190
+                              (COND ((|greater_SI| |j| #8#) (GO G191)))
                               (SEQ
                                (LETT |s|
                                      (|sub_SI| |p|
@@ -368,7 +369,7 @@
 
 (DEFUN |ModularU32MatrixOperations| ()
   (SPROG NIL
-         (PROG (#1=#:G116)
+         (PROG (#1=#:G117)
            (RETURN
             (COND
              ((LETT #1#

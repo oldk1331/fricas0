@@ -6,7 +6,7 @@
 
 (SDEFUN |SEG2;map;MSL;2|
         ((|f| (|Mapping| S R)) (|r| (|Segment| R)) (% (|List| S)))
-        (SPROG ((|l| (R)) (|lr| (|List| S)) (|inc| (R)) (|h| (R)))
+        (SPROG ((|h| (R)) (|inc| (R)) (|lr| (|List| S)) (|l| (R)))
                (SEQ (LETT |lr| NIL) (LETT |l| (SPADCALL |r| (QREFELT % 9)))
                     (LETT |h| (SPADCALL |r| (QREFELT % 10)))
                     (LETT |inc|
@@ -38,7 +38,7 @@
 (DECLAIM (NOTINLINE |SegmentFunctions2;|)) 
 
 (DEFUN |SegmentFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -86,7 +86,7 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|Segment| 6) (0 . |low|) (5 . |high|) (|Segment| 7)
               (10 . SEGMENT) (|Mapping| 7 6) |SEG2;map;MSS;1| (|Integer|)
-              (16 . |incr|) (21 . |coerce|) (26 . |Zero|) (|Boolean|) (30 . >)
+              (16 . |incr|) (21 . |coerce|) (26 . |0|) (|Boolean|) (30 . >)
               (36 . <=) (42 . +) (48 . >=) (|List| 7) (54 . |map|))
            '#(|map| 60) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))

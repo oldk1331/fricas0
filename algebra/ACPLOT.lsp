@@ -17,8 +17,8 @@
         ((|p0| (|Point| (|DoubleFloat|))) (|p1| (|Point| (|DoubleFloat|)))
          (% (|Boolean|)))
         (SPROG
-         ((|y1| #1=(|DoubleFloat|)) (|x1| #2=(|DoubleFloat|)) (|y0| #1#)
-          (|x0| #2#))
+         ((|x0| #1=(|DoubleFloat|)) (|y0| #2=(|DoubleFloat|)) (|x1| #1#)
+          (|y1| #2#))
          (SEQ (LETT |x0| (SPADCALL |p0| (QREFELT % 28)))
               (LETT |y0| (SPADCALL |p0| (QREFELT % 27)))
               (LETT |x1| (SPADCALL |p1| (QREFELT % 28)))
@@ -33,32 +33,32 @@
         ((|pt| (|Point| (|DoubleFloat|)))
          (|pointList| (|List| (|Point| (|DoubleFloat|))))
          (% (|Union| (|Point| (|DoubleFloat|)) "failed")))
-        (SPROG ((#1=#:G87 NIL) (#2=#:G88 NIL) (#3=#:G89 NIL) (|point| NIL))
+        (SPROG ((|point| NIL) (#1=#:G89 NIL) (#2=#:G88 NIL) (#3=#:G87 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (SEQ
                    (EXIT
-                    (SEQ (LETT |point| NIL) (LETT #3# |pointList|) G190
+                    (SEQ (LETT |point| NIL) (LETT #1# |pointList|) G190
                          (COND
-                          ((OR (ATOM #3#) (PROGN (LETT |point| (CAR #3#)) NIL))
+                          ((OR (ATOM #1#) (PROGN (LETT |point| (CAR #1#)) NIL))
                            (GO G191)))
                          (SEQ
                           (EXIT
                            (COND
                             ((|ACPLOT;samePlottedPt?| |pt| |point| %)
                              (PROGN
-                              (LETT #1#
+                              (LETT #3#
                                     (PROGN
                                      (LETT #2# (CONS 0 |point|))
                                      (GO #4=#:G86)))
                               (GO #5=#:G84))))))
-                         (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
-                   #5# (EXIT #1#))
+                         (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL)))
+                   #5# (EXIT #3#))
                   (EXIT (CONS 1 "failed"))))
                 #4# (EXIT #2#)))) 
 
-(PUT '|ACPLOT;makeCorners| '|SPADreplace| 'VECTOR) 
+(MAKEPROP '|ACPLOT;makeCorners| '|SPADreplace| 'VECTOR) 
 
 (SDEFUN |ACPLOT;makeCorners|
         ((|xMinSF| (|DoubleFloat|)) (|xMaxSF| (|DoubleFloat|))
@@ -70,7 +70,8 @@
                     (|:| |maxYVal| (|DoubleFloat|)))))
         (VECTOR |xMinSF| |xMaxSF| |yMinSF| |yMaxSF|)) 
 
-(PUT '|ACPLOT;getXMin| '|SPADreplace| '(XLAM (|corners|) (QVELT |corners| 0))) 
+(MAKEPROP '|ACPLOT;getXMin| '|SPADreplace|
+          '(XLAM (|corners|) (QVELT |corners| 0))) 
 
 (SDEFUN |ACPLOT;getXMin|
         ((|corners|
@@ -81,7 +82,8 @@
          (% (|DoubleFloat|)))
         (QVELT |corners| 0)) 
 
-(PUT '|ACPLOT;getXMax| '|SPADreplace| '(XLAM (|corners|) (QVELT |corners| 1))) 
+(MAKEPROP '|ACPLOT;getXMax| '|SPADreplace|
+          '(XLAM (|corners|) (QVELT |corners| 1))) 
 
 (SDEFUN |ACPLOT;getXMax|
         ((|corners|
@@ -92,7 +94,8 @@
          (% (|DoubleFloat|)))
         (QVELT |corners| 1)) 
 
-(PUT '|ACPLOT;getYMin| '|SPADreplace| '(XLAM (|corners|) (QVELT |corners| 2))) 
+(MAKEPROP '|ACPLOT;getYMin| '|SPADreplace|
+          '(XLAM (|corners|) (QVELT |corners| 2))) 
 
 (SDEFUN |ACPLOT;getYMin|
         ((|corners|
@@ -103,7 +106,8 @@
          (% (|DoubleFloat|)))
         (QVELT |corners| 2)) 
 
-(PUT '|ACPLOT;getYMax| '|SPADreplace| '(XLAM (|corners|) (QVELT |corners| 3))) 
+(MAKEPROP '|ACPLOT;getYMax| '|SPADreplace|
+          '(XLAM (|corners|) (QVELT |corners| 3))) 
 
 (SDEFUN |ACPLOT;getYMax|
         ((|corners|
@@ -159,10 +163,9 @@
          (|y0| (|Fraction| (|Integer|))) (|xMinNF| (|Float|))
          (|xMaxNF| (|Float|)) (% (|List| (|Point| (|DoubleFloat|)))))
         (SPROG
-         ((|pointList| (|List| (|Point| (|DoubleFloat|)))) (#1=#:G115 NIL)
-          (|root| NIL) (|roots| (|List| (|Float|)))
-          (|f| (|Polynomial| (|Fraction| (|Integer|))))
-          (|ySF| (|DoubleFloat|)))
+         ((|ySF| (|DoubleFloat|)) (|f| (|Polynomial| (|Fraction| (|Integer|))))
+          (|roots| (|List| (|Float|))) (|root| NIL) (#1=#:G117 NIL)
+          (|pointList| (|List| (|Point| (|DoubleFloat|)))))
          (SEQ (LETT |pointList| NIL) (LETT |ySF| (|ACPLOT;RNtoSF| |y0| %))
               (LETT |f| (SPADCALL |pRN| |y| |y0| (QREFELT % 63)))
               (LETT |roots| (SPADCALL |f| (QREFELT % 12) (QREFELT % 66)))
@@ -189,10 +192,9 @@
          (|x0| (|Fraction| (|Integer|))) (|yMinNF| (|Float|))
          (|yMaxNF| (|Float|)) (% (|List| (|Point| (|DoubleFloat|)))))
         (SPROG
-         ((|pointList| (|List| (|Point| (|DoubleFloat|)))) (#1=#:G120 NIL)
-          (|root| NIL) (|roots| (|List| (|Float|)))
-          (|f| (|Polynomial| (|Fraction| (|Integer|))))
-          (|xSF| (|DoubleFloat|)))
+         ((|xSF| (|DoubleFloat|)) (|f| (|Polynomial| (|Fraction| (|Integer|))))
+          (|roots| (|List| (|Float|))) (|root| NIL) (#1=#:G122 NIL)
+          (|pointList| (|List| (|Point| (|DoubleFloat|)))))
          (SEQ (LETT |pointList| NIL) (LETT |xSF| (|ACPLOT;RNtoSF| |x0| %))
               (LETT |f| (SPADCALL |pRN| |x| |x0| (QREFELT % 63)))
               (LETT |roots| (SPADCALL |f| (QREFELT % 12) (QREFELT % 66)))
@@ -219,8 +221,8 @@
          (|xMax| (|Float|)) (|yMin| (|Float|)) (|yMax| (|Float|))
          (% (|List| (|Point| (|DoubleFloat|)))))
         (SPROG
-         ((|pointList| (|List| (|Point| (|DoubleFloat|)))) (|yy| (|Float|))
-          (|xx| (|Float|)) (#1=#:G126 NIL) (|point| NIL))
+         ((|point| NIL) (#1=#:G128 NIL) (|xx| (|Float|)) (|yy| (|Float|))
+          (|pointList| (|List| (|Point| (|DoubleFloat|)))))
          (SEQ (LETT |pointList| NIL)
               (SEQ (LETT |point| NIL) (LETT #1# |points|) G190
                    (COND
@@ -249,27 +251,27 @@
 (SDEFUN |ACPLOT;ptsSuchThat?|
         ((|points| (|List| (|List| (|Float|))))
          (|pred| (|Mapping| (|Boolean|) (|List| (|Float|)))) (% (|Boolean|)))
-        (SPROG ((#1=#:G132 NIL) (#2=#:G133 NIL) (|point| NIL))
+        (SPROG ((|point| NIL) (#1=#:G135 NIL) (#2=#:G134 NIL))
                (SEQ
                 (EXIT
                  (SEQ
-                  (SEQ (LETT |point| NIL) (LETT #2# |points|) G190
+                  (SEQ (LETT |point| NIL) (LETT #1# |points|) G190
                        (COND
-                        ((OR (ATOM #2#) (PROGN (LETT |point| (CAR #2#)) NIL))
+                        ((OR (ATOM #1#) (PROGN (LETT |point| (CAR #1#)) NIL))
                          (GO G191)))
                        (SEQ
                         (EXIT
                          (COND
                           ((SPADCALL |point| |pred|)
-                           (PROGN (LETT #1# 'T) (GO #3=#:G131))))))
-                       (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                           (PROGN (LETT #2# 'T) (GO #3=#:G133))))))
+                       (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
                   (EXIT NIL)))
-                #3# (EXIT #1#)))) 
+                #3# (EXIT #2#)))) 
 
 (SDEFUN |ACPLOT;inRect?|
         ((|point| (|List| (|Float|))) (|xMinNF| (|Float|)) (|xMaxNF| (|Float|))
          (|yMinNF| (|Float|)) (|yMaxNF| (|Float|)) (% (|Boolean|)))
-        (SPROG ((|yy| (|Float|)) (|xx| (|Float|)))
+        (SPROG ((|xx| (|Float|)) (|yy| (|Float|)))
                (SEQ (LETT |xx| (|SPADfirst| |point|))
                     (LETT |yy| (SPADCALL |point| (QREFELT % 69)))
                     (EXIT
@@ -287,7 +289,7 @@
 (SDEFUN |ACPLOT;onHorzSeg?|
         ((|point| (|List| (|Float|))) (|xMinNF| (|Float|)) (|xMaxNF| (|Float|))
          (|yNF| (|Float|)) (% (|Boolean|)))
-        (SPROG ((|yy| (|Float|)) (|xx| (|Float|)))
+        (SPROG ((|xx| (|Float|)) (|yy| (|Float|)))
                (SEQ (LETT |xx| (|SPADfirst| |point|))
                     (LETT |yy| (SPADCALL |point| (QREFELT % 69)))
                     (EXIT
@@ -302,7 +304,7 @@
 (SDEFUN |ACPLOT;onVertSeg?|
         ((|point| (|List| (|Float|))) (|yMinNF| (|Float|)) (|yMaxNF| (|Float|))
          (|xNF| (|Float|)) (% (|Boolean|)))
-        (SPROG ((|yy| (|Float|)) (|xx| (|Float|)))
+        (SPROG ((|xx| (|Float|)) (|yy| (|Float|)))
                (SEQ (LETT |xx| (|SPADfirst| |point|))
                     (LETT |yy| (SPADCALL |point| (QREFELT % 69)))
                     (EXIT
@@ -321,9 +323,9 @@
          (|xRN| (|Fraction| (|Integer|))) (|horizInc| (|Fraction| (|Integer|)))
          (% (|Fraction| (|Integer|))))
         (SPROG
-         ((|goo| (|Mapping| (|Boolean|) (|List| (|Float|))))
+         ((|xNewNF| (|Float|)) (|xRtNF| (|Float|)) (|xLftNF| (|Float|))
           (|foo| (|Mapping| (|Boolean|) (|List| (|Float|))))
-          (|xLftNF| (|Float|)) (|xRtNF| (|Float|)) (|xNewNF| (|Float|)))
+          (|goo| (|Mapping| (|Boolean|) (|List| (|Float|)))))
          (SEQ
           (LETT |xNewNF|
                 (SPADCALL |xNF| (|ACPLOT;RNtoNF| |horizInc| %) (QREFELT % 71)))
@@ -380,9 +382,9 @@
          (|yRN| (|Fraction| (|Integer|))) (|vertInc| (|Fraction| (|Integer|)))
          (% (|Fraction| (|Integer|))))
         (SPROG
-         ((|goo| (|Mapping| (|Boolean|) (|List| (|Float|))))
+         ((|yNewNF| (|Float|)) (|yTopNF| (|Float|)) (|yBotNF| (|Float|))
           (|foo| (|Mapping| (|Boolean|) (|List| (|Float|))))
-          (|yBotNF| (|Float|)) (|yTopNF| (|Float|)) (|yNewNF| (|Float|)))
+          (|goo| (|Mapping| (|Boolean|) (|List| (|Float|)))))
          (SEQ
           (LETT |yNewNF|
                 (SPADCALL |yNF| (|ACPLOT;RNtoNF| |vertInc| %) (QREFELT % 71)))
@@ -437,8 +439,9 @@
          (|xRange| (|Segment| (|Fraction| (|Integer|))))
          (|yRange| (|Segment| (|Fraction| (|Integer|)))) (% (%)))
         (SPROG
-         ((|varList| (|List| (|Symbol|))) (|yMax| #1=(|Fraction| (|Integer|)))
-          (|yMin| #2=(|Fraction| (|Integer|))) (|xMax| #1#) (|xMin| #2#))
+         ((|xMin| #1=(|Fraction| (|Integer|)))
+          (|xMax| #2=(|Fraction| (|Integer|))) (|yMin| #1#) (|yMax| #2#)
+          (|varList| (|List| (|Symbol|))))
          (SEQ (LETT |xMin| (SPADCALL |xRange| (QREFELT % 77)))
               (LETT |xMax| (SPADCALL |xRange| (QREFELT % 78)))
               (LETT |yMin| (SPADCALL |yRange| (QREFELT % 77)))
@@ -498,19 +501,19 @@
          (|yMin| (|Fraction| (|Integer|))) (|yMax| (|Fraction| (|Integer|)))
          (|var| (|Symbol|)) (% (%)))
         (SPROG
-         ((|bran| (|List| (|List| (|Point| (|DoubleFloat|)))))
-          (|branch| (|List| #1=(|Point| (|DoubleFloat|))))
-          (|lf| (|List| (|Point| (|DoubleFloat|)))) (|pt2| #1#)
-          (|rt| (|List| (|Point| (|DoubleFloat|)))) (|pt1| #1#) (#2=#:G186 NIL)
-          (|rootSF| NIL) (|xMaxSF| #3=(|DoubleFloat|)) (|xMinSF| #3#)
-          (|bt| (|List| (|Point| (|DoubleFloat|))))
-          (|tp| (|List| (|Point| (|DoubleFloat|)))) (#4=#:G185 NIL)
-          (|yMaxSF| #3#) (|yMinSF| #3#)
-          (|sketchRoots| (|List| (|DoubleFloat|))) (#5=#:G184 NIL) (|root| NIL)
-          (|roots| (|List| (|Float|)))
+         ((|minVal| #1=(|Float|)) (|maxVal| #1#)
+          (|htans| (|List| (|Point| (|DoubleFloat|))))
           (|vtans| (|List| (|Point| (|DoubleFloat|))))
-          (|htans| (|List| (|Point| (|DoubleFloat|)))) (|maxVal| #6=(|Float|))
-          (|minVal| #6#))
+          (|roots| (|List| (|Float|))) (|root| NIL) (#2=#:G187 NIL)
+          (|sketchRoots| (|List| (|DoubleFloat|)))
+          (|yMinSF| #3=(|DoubleFloat|)) (|yMaxSF| #3#) (#4=#:G188 NIL)
+          (|tp| (|List| (|Point| (|DoubleFloat|))))
+          (|bt| (|List| (|Point| (|DoubleFloat|)))) (|xMinSF| #3#)
+          (|xMaxSF| #3#) (|rootSF| NIL) (#5=#:G189 NIL)
+          (|pt1| #6=(|Point| (|DoubleFloat|)))
+          (|rt| (|List| (|Point| (|DoubleFloat|)))) (|pt2| #6#)
+          (|lf| (|List| (|Point| (|DoubleFloat|)))) (|branch| (|List| #6#))
+          (|bran| (|List| (|List| (|Point| (|DoubleFloat|))))))
          (SEQ
           (COND
            ((EQUAL |var| |x|)
@@ -523,9 +526,9 @@
           (LETT |htans| NIL) (LETT |vtans| NIL) (LETT |bran| NIL)
           (LETT |roots| (SPADCALL |p| (QREFELT % 12) (QREFELT % 86)))
           (LETT |sketchRoots| NIL)
-          (SEQ (LETT |root| NIL) (LETT #5# |roots|) G190
+          (SEQ (LETT |root| NIL) (LETT #2# |roots|) G190
                (COND
-                ((OR (ATOM #5#) (PROGN (LETT |root| (CAR #5#)) NIL))
+                ((OR (ATOM #2#) (PROGN (LETT |root| (CAR #2#)) NIL))
                  (GO G191)))
                (SEQ
                 (EXIT
@@ -536,7 +539,7 @@
                      (LETT |sketchRoots|
                            (CONS (|ACPLOT;NFtoSF| |root| %)
                                  |sketchRoots|))))))))
-               (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
+               (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
           (EXIT
            (COND
             ((NULL |sketchRoots|)
@@ -572,10 +575,10 @@
                 (SEQ (LETT |xMinSF| (|ACPLOT;RNtoSF| |xMin| %))
                      (LETT |xMaxSF| (|ACPLOT;RNtoSF| |xMax| %))
                      (EXIT
-                      (SEQ (LETT |rootSF| NIL) (LETT #2# |sketchRoots|) G190
+                      (SEQ (LETT |rootSF| NIL) (LETT #5# |sketchRoots|) G190
                            (COND
-                            ((OR (ATOM #2#)
-                                 (PROGN (LETT |rootSF| (CAR #2#)) NIL))
+                            ((OR (ATOM #5#)
+                                 (PROGN (LETT |rootSF| (CAR #5#)) NIL))
                              (GO G191)))
                            (SEQ
                             (LETT |rt|
@@ -590,7 +593,7 @@
                                    |lf|))
                             (LETT |branch| (LIST |pt1| |pt2|))
                             (EXIT (LETT |bran| (CONS |branch| |bran|))))
-                           (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))))))
+                           (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))))))
               (EXIT
                (VECTOR |p| |x| |y| |xMin| |xMax| |yMin| |yMax|
                        (VECTOR |lf| |rt| |bt| |tp|) |htans| |vtans|
@@ -602,19 +605,18 @@
          (|yMin| (|Fraction| (|Integer|))) (|yMax| (|Fraction| (|Integer|)))
          (% (%)))
         (SPROG
-         ((|bran| (|List| (|List| (|Point| (|DoubleFloat|)))))
-          (|branch| (|List| (|Point| (|DoubleFloat|))))
-          (|rt| (|List| (|Point| (|DoubleFloat|))))
-          (|pt| (|Point| (|DoubleFloat|)))
-          (|lf| (|List| (|Point| (|DoubleFloat|))))
+         ((|xMinSF| #1=(|DoubleFloat|)) (|xMaxSF| #1#) (|yMinSF| #1#)
+          (|yMaxSF| #1#) (|a| (|DoubleFloat|)) (|b| (|DoubleFloat|))
+          (|c| (|DoubleFloat|)) (|htans| (|List| (|Point| (|DoubleFloat|))))
+          (|vtans| (|List| (|Point| (|DoubleFloat|))))
+          (|xBottom| #2=(|DoubleFloat|)) (|xTop| #2#) (|yLeft| #2#)
+          (|yRight| #2#) (|bt| (|List| (|Point| (|DoubleFloat|))))
           (|tp| (|List| (|Point| (|DoubleFloat|))))
-          (|bt| (|List| (|Point| (|DoubleFloat|))))
-          (|yRight| #1=(|DoubleFloat|)) (|yLeft| #1#) (|xTop| #1#)
-          (|xBottom| #1#) (|vtans| (|List| (|Point| (|DoubleFloat|))))
-          (|htans| (|List| (|Point| (|DoubleFloat|)))) (|c| (|DoubleFloat|))
-          (|b| (|DoubleFloat|)) (|a| (|DoubleFloat|))
-          (|yMaxSF| #2=(|DoubleFloat|)) (|yMinSF| #2#) (|xMaxSF| #2#)
-          (|xMinSF| #2#))
+          (|lf| (|List| (|Point| (|DoubleFloat|))))
+          (|pt| (|Point| (|DoubleFloat|)))
+          (|rt| (|List| (|Point| (|DoubleFloat|))))
+          (|branch| (|List| (|Point| (|DoubleFloat|))))
+          (|bran| (|List| (|List| (|Point| (|DoubleFloat|))))))
          (SEQ (LETT |xMinSF| (|ACPLOT;RNtoSF| |xMin| %))
               (LETT |xMaxSF| (|ACPLOT;RNtoSF| |xMax| %))
               (LETT |yMinSF| (|ACPLOT;RNtoSF| |yMin| %))
@@ -697,15 +699,15 @@
 (SDEFUN |ACPLOT;singValBetween?|
         ((|xCurrent| (|DoubleFloat|)) (|xNext| (|DoubleFloat|))
          (|xSingList| (|List| (|DoubleFloat|))) (% (|Boolean|)))
-        (SPROG ((#1=#:G198 NIL) (#2=#:G199 NIL) (#3=#:G200 NIL) (|xVal| NIL))
+        (SPROG ((|xVal| NIL) (#1=#:G203 NIL) (#2=#:G202 NIL) (#3=#:G201 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (SEQ
                    (EXIT
-                    (SEQ (LETT |xVal| NIL) (LETT #3# |xSingList|) G190
+                    (SEQ (LETT |xVal| NIL) (LETT #1# |xSingList|) G190
                          (COND
-                          ((OR (ATOM #3#) (PROGN (LETT |xVal| (CAR #3#)) NIL))
+                          ((OR (ATOM #1#) (PROGN (LETT |xVal| (CAR #1#)) NIL))
                            (GO G191)))
                          (SEQ
                           (EXIT
@@ -714,10 +716,10 @@
                              (COND
                               ((|less_DF| |xVal| |xNext|)
                                (PROGN
-                                (LETT #1# (PROGN (LETT #2# 'T) (GO #4=#:G197)))
-                                (GO #5=#:G195))))))))
-                         (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
-                   #5# (EXIT #1#))
+                                (LETT #3# (PROGN (LETT #2# 'T) (GO #4=#:G200)))
+                                (GO #5=#:G198))))))))
+                         (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL)))
+                   #5# (EXIT #3#))
                   (EXIT NIL)))
                 #4# (EXIT #2#)))) 
 
@@ -734,9 +736,9 @@
                     (|:| |lowerVals| (|List| (|DoubleFloat|)))
                     (|:| |upperVals| (|List| (|DoubleFloat|))))))
         (SPROG
-         ((#2=#:G225 NIL) (|val| #1#) (|nextFrom| #3=(|String|))
-          (|nxt| #4=(|DoubleFloat|)) (|top| #4#) (|bot| #4#)
-          (|currentFrom| #3#) (|current| #4#))
+         ((|current| #2=(|DoubleFloat|)) (|currentFrom| #3=(|String|))
+          (|bot| #2#) (|top| #2#) (|nxt| #2#) (|nextFrom| #3#) (|val| #1#)
+          (#4=#:G228 NIL))
          (SEQ
           (EXIT
            (SEQ G190 NIL
@@ -746,10 +748,10 @@
                    (COND
                     ((NULL |botList|)
                      (PROGN
-                      (LETT #2#
+                      (LETT #4#
                             (VECTOR (SPADCALL |lo| |hi| (QREFELT % 91)) |hi|
                                     NIL NIL))
-                      (GO #5=#:G224)))
+                      (GO #5=#:G227)))
                     ('T
                      (SEQ (LETT |current| (|SPADfirst| |botList|))
                           (LETT |botList| (CDR |botList|))
@@ -777,7 +779,7 @@
                    (COND
                     ((NULL |botList|)
                      (PROGN
-                      (LETT #2#
+                      (LETT #4#
                             (VECTOR (SPADCALL |lo| |hi| (QREFELT % 91)) |hi|
                                     NIL NIL))
                       (GO #5#)))
@@ -808,7 +810,7 @@
                     (COND
                      ((|ACPLOT;singValBetween?| |current| |nxt| |singList| %)
                       (PROGN
-                       (LETT #2#
+                       (LETT #4#
                              (VECTOR (SPADCALL |lo| |current| (QREFELT % 91))
                                      |nxt| |botList| |topList|))
                        (GO #5#)))
@@ -824,19 +826,19 @@
                          ((OR (SPADCALL |val| |minSF| (QREFELT % 89))
                               (SPADCALL |val| |maxSF| (QREFELT % 92)))
                           (PROGN
-                           (LETT #2#
+                           (LETT #4#
                                  (VECTOR
                                   (SPADCALL |lo| |current| (QREFELT % 91))
                                   |nxt| |botList| |topList|))
                            (GO #5#)))))))))
                    ((|ACPLOT;singValBetween?| |current| |nxt| |singList| %)
                     (PROGN
-                     (LETT #2#
+                     (LETT #4#
                            (VECTOR (SPADCALL |lo| |current| (QREFELT % 91))
                                    |nxt| |botList| |topList|))
                      (GO #5#))))))
                 NIL (GO G190) G191 (EXIT NIL)))
-          #5# (EXIT #2#)))) 
+          #5# (EXIT #4#)))) 
 
 (SDEFUN |ACPLOT;makeRatFcnSketch|
         ((|p| (|Polynomial| (|Integer|))) (|x| (|Symbol|)) (|y| (|Symbol|))
@@ -845,43 +847,43 @@
          (|yMin| #3=(|Fraction| (|Integer|)))
          (|yMax| #4=(|Fraction| (|Integer|))) (|depVar| (|Symbol|)) (% (%)))
         (SPROG
-         ((|bran| (|List| (|List| (|Point| (|DoubleFloat|)))))
-          (|curve| (|List| (|Point| (|DoubleFloat|)))) (|RFPlot| (|Plot|))
-          (#5=#:G307 NIL) (|segment| NIL) (#6=#:G298 NIL)
-          (|topList| (|List| (|DoubleFloat|)))
-          (|botList| (|List| (|DoubleFloat|))) (|lo| #7=(|DoubleFloat|))
-          (|segList| (|List| (|Segment| (|DoubleFloat|))))
+         ((|factoredP| (|Factored| (|Polynomial| (|Integer|))))
+          (|dpdx| #5=(|Polynomial| (|Integer|))) (|dpdy| #5#)
+          (|pRN| (|Polynomial| (|Fraction| (|Integer|))))
+          (|xMinSF| #6=(|DoubleFloat|)) (|xMaxSF| #6#) (|yMinSF| #6#)
+          (|yMaxSF| #6#) (|xMinNF| #7=(|Float|)) (|xMaxNF| #7#) (|yMinNF| #7#)
+          (|yMaxNF| #7#) (|num| (|Polynomial| (|Integer|)))
+          (|den| (|Polynomial| (|Integer|)))
+          (|numUPolySF| #8=(|SparseUnivariatePolynomial| (|DoubleFloat|)))
+          (|denUPolySF| #8#) (|f| (|Mapping| (|DoubleFloat|) (|DoubleFloat|)))
+          (|indVarMin| #3#) (|indVarMax| #4#) (|indVarMinNF| #7#)
+          (|indVarMaxNF| #7#) (|indVarMinSF| #6#) (|indVarMaxSF| #6#)
+          (|depVarMin| #1#) (|depVarMax| #2#) (|depVarMinSF| #6#)
+          (|depVarMaxSF| #6#) (|htanPts| #9=(|List| (|List| (|Float|))))
+          (|vtanPts| #9#) (|htans| #10=(|List| (|Point| (|DoubleFloat|))))
+          (|vtans| #10#) (#11=#:G306 NIL) (|singList| (|List| (|DoubleFloat|)))
+          (#12=#:G307 NIL) (|roots| (|List| (|Float|))) (|root| NIL)
+          (#13=#:G308 NIL) (|outList| (|List| (|DoubleFloat|)))
+          (|denUPolyRN|
+           (|SparseUnivariatePolynomial| (|Fraction| (|Integer|))))
+          (|leftVal| #14=(|DoubleFloat|)) (|rightVal| #14#) (#15=#:G309 NIL)
+          (#16=#:G310 NIL) (|lf| (|List| (|Point| (|DoubleFloat|))))
+          (|rt| (|List| (|Point| (|DoubleFloat|)))) (#17=#:G311 NIL)
+          (|bt| (|List| (|Point| (|DoubleFloat|)))) (|val| NIL)
+          (#18=#:G312 NIL) (|tp| (|List| (|Point| (|DoubleFloat|))))
+          (#19=#:G305 NIL) (|bot| #20=(|DoubleFloat|)) (|top| #20#)
+          (|hi| (|DoubleFloat|)) (|minSF| #6#) (|maxSF| #6#)
           (|segInfo|
            (|Record| (|:| |seg| (|Segment| (|DoubleFloat|)))
                      (|:| |left| (|DoubleFloat|))
                      (|:| |lowerVals| (|List| (|DoubleFloat|)))
                      (|:| |upperVals| (|List| (|DoubleFloat|)))))
-          (|maxSF| #7#) (|minSF| #7#) (|hi| (|DoubleFloat|))
-          (|top| #8=(|DoubleFloat|)) (|bot| #8#) (#9=#:G299 NIL)
-          (|tp| (|List| (|Point| (|DoubleFloat|)))) (#10=#:G306 NIL)
-          (|val| NIL) (|bt| (|List| (|Point| (|DoubleFloat|))))
-          (#11=#:G305 NIL) (|rt| (|List| (|Point| (|DoubleFloat|))))
-          (|lf| (|List| (|Point| (|DoubleFloat|)))) (#12=#:G304 NIL)
-          (#13=#:G303 NIL) (|rightVal| #14=(|DoubleFloat|)) (|leftVal| #14#)
-          (|denUPolyRN|
-           (|SparseUnivariatePolynomial| (|Fraction| (|Integer|))))
-          (|outList| (|List| (|DoubleFloat|))) (#15=#:G302 NIL) (|root| NIL)
-          (|roots| (|List| (|Float|))) (#16=#:G301 NIL)
-          (|singList| (|List| (|DoubleFloat|))) (#17=#:G300 NIL)
-          (|vtans| #18=(|List| (|Point| (|DoubleFloat|)))) (|htans| #18#)
-          (|vtanPts| #19=(|List| (|List| (|Float|)))) (|htanPts| #19#)
-          (|depVarMaxSF| #7#) (|depVarMinSF| #7#) (|depVarMax| #2#)
-          (|depVarMin| #1#) (|indVarMaxSF| #7#) (|indVarMinSF| #7#)
-          (|indVarMaxNF| #20=(|Float|)) (|indVarMinNF| #20#) (|indVarMax| #4#)
-          (|indVarMin| #3#) (|f| (|Mapping| (|DoubleFloat|) (|DoubleFloat|)))
-          (|denUPolySF| #21=(|SparseUnivariatePolynomial| (|DoubleFloat|)))
-          (|numUPolySF| #21#) (|den| (|Polynomial| (|Integer|)))
-          (|num| (|Polynomial| (|Integer|))) (|yMaxNF| #20#) (|yMinNF| #20#)
-          (|xMaxNF| #20#) (|xMinNF| #20#) (|yMaxSF| #7#) (|yMinSF| #7#)
-          (|xMaxSF| #7#) (|xMinSF| #7#)
-          (|pRN| (|Polynomial| (|Fraction| (|Integer|))))
-          (|dpdy| #22=(|Polynomial| (|Integer|))) (|dpdx| #22#)
-          (|factoredP| (|Factored| (|Polynomial| (|Integer|)))))
+          (|segList| (|List| (|Segment| (|DoubleFloat|)))) (|lo| #6#)
+          (|botList| (|List| (|DoubleFloat|)))
+          (|topList| (|List| (|DoubleFloat|))) (#21=#:G304 NIL) (|segment| NIL)
+          (#22=#:G313 NIL) (|RFPlot| (|Plot|))
+          (|curve| (|List| (|Point| (|DoubleFloat|))))
+          (|bran| (|List| (|List| (|Point| (|DoubleFloat|))))))
          (SEQ
           (EXIT
            (SEQ (LETT |factoredP| (SPADCALL |p| (QREFELT % 94)))
@@ -958,10 +960,10 @@
                                      (SPADCALL |den| (QREFELT % 12)
                                                (QREFELT % 86)))
                                (LETT |outList| NIL)
-                               (SEQ (LETT |root| NIL) (LETT #17# |roots|) G190
+                               (SEQ (LETT |root| NIL) (LETT #11# |roots|) G190
                                     (COND
-                                     ((OR (ATOM #17#)
-                                          (PROGN (LETT |root| (CAR #17#)) NIL))
+                                     ((OR (ATOM #11#)
+                                          (PROGN (LETT |root| (CAR #11#)) NIL))
                                       (GO G191)))
                                     (SEQ
                                      (EXIT
@@ -975,7 +977,7 @@
                                                 (CONS
                                                  (|ACPLOT;NFtoSF| |root| %)
                                                  |outList|))))))))
-                                    (LETT #17# (CDR #17#)) (GO G190) G191
+                                    (LETT #11# (CDR #11#)) (GO G190) G191
                                     (EXIT NIL))
                                (EXIT
                                 (SPADCALL (ELT % 103) |outList|
@@ -988,10 +990,10 @@
                                                 (QREFELT % 63))
                                       (QREFELT % 12) (QREFELT % 66)))
                                (LETT |outList| NIL)
-                               (SEQ (LETT |root| NIL) (LETT #16# |roots|) G190
+                               (SEQ (LETT |root| NIL) (LETT #12# |roots|) G190
                                     (COND
-                                     ((OR (ATOM #16#)
-                                          (PROGN (LETT |root| (CAR #16#)) NIL))
+                                     ((OR (ATOM #12#)
+                                          (PROGN (LETT |root| (CAR #12#)) NIL))
                                       (GO G191)))
                                     (SEQ
                                      (EXIT
@@ -1005,7 +1007,7 @@
                                                 (CONS
                                                  (|ACPLOT;NFtoSF| |root| %)
                                                  |outList|))))))))
-                                    (LETT #16# (CDR #16#)) (GO G190) G191
+                                    (LETT #12# (CDR #12#)) (GO G190) G191
                                     (EXIT NIL))
                                (EXIT
                                 (SPADCALL (ELT % 103) |outList|
@@ -1018,10 +1020,10 @@
                                                 (QREFELT % 63))
                                       (QREFELT % 12) (QREFELT % 66)))
                                (LETT |outList| NIL)
-                               (SEQ (LETT |root| NIL) (LETT #15# |roots|) G190
+                               (SEQ (LETT |root| NIL) (LETT #13# |roots|) G190
                                     (COND
-                                     ((OR (ATOM #15#)
-                                          (PROGN (LETT |root| (CAR #15#)) NIL))
+                                     ((OR (ATOM #13#)
+                                          (PROGN (LETT |root| (CAR #13#)) NIL))
                                       (GO G191)))
                                     (SEQ
                                      (EXIT
@@ -1035,7 +1037,7 @@
                                                 (CONS
                                                  (|ACPLOT;NFtoSF| |root| %)
                                                  |outList|))))))))
-                                    (LETT #15# (CDR #15#)) (GO G190) G191
+                                    (LETT #13# (CDR #13#)) (GO G190) G191
                                     (EXIT NIL))
                                (EXIT
                                 (SPADCALL (ELT % 103) |outList|
@@ -1080,10 +1082,10 @@
                                      (CONS
                                       (|ACPLOT;makePt| |rightVal| |yMaxSF| %)
                                       |tp|))))))
-                           (SEQ (LETT |val| NIL) (LETT #13# |botList|) G190
+                           (SEQ (LETT |val| NIL) (LETT #15# |botList|) G190
                                 (COND
-                                 ((OR (ATOM #13#)
-                                      (PROGN (LETT |val| (CAR #13#)) NIL))
+                                 ((OR (ATOM #15#)
+                                      (PROGN (LETT |val| (CAR #15#)) NIL))
                                   (GO G191)))
                                 (SEQ
                                  (EXIT
@@ -1091,13 +1093,13 @@
                                         (CONS
                                          (|ACPLOT;makePt| |xMinSF| |val| %)
                                          |lf|))))
-                                (LETT #13# (CDR #13#)) (GO G190) G191
+                                (LETT #15# (CDR #15#)) (GO G190) G191
                                 (EXIT NIL))
                            (EXIT
-                            (SEQ (LETT |val| NIL) (LETT #12# |topList|) G190
+                            (SEQ (LETT |val| NIL) (LETT #16# |topList|) G190
                                  (COND
-                                  ((OR (ATOM #12#)
-                                       (PROGN (LETT |val| (CAR #12#)) NIL))
+                                  ((OR (ATOM #16#)
+                                       (PROGN (LETT |val| (CAR #16#)) NIL))
                                    (GO G191)))
                                  (SEQ
                                   (EXIT
@@ -1105,7 +1107,7 @@
                                          (CONS
                                           (|ACPLOT;makePt| |xMaxSF| |val| %)
                                           |rt|))))
-                                 (LETT #12# (CDR #12#)) (GO G190) G191
+                                 (LETT #16# (CDR #16#)) (GO G190) G191
                                  (EXIT NIL)))))
                          (#23#
                           (SEQ
@@ -1125,10 +1127,10 @@
                                      (CONS
                                       (|ACPLOT;makePt| |xMaxSF| |rightVal| %)
                                       |rt|))))))
-                           (SEQ (LETT |val| NIL) (LETT #11# |botList|) G190
+                           (SEQ (LETT |val| NIL) (LETT #17# |botList|) G190
                                 (COND
-                                 ((OR (ATOM #11#)
-                                      (PROGN (LETT |val| (CAR #11#)) NIL))
+                                 ((OR (ATOM #17#)
+                                      (PROGN (LETT |val| (CAR #17#)) NIL))
                                   (GO G191)))
                                 (SEQ
                                  (EXIT
@@ -1136,13 +1138,13 @@
                                         (CONS
                                          (|ACPLOT;makePt| |val| |yMinSF| %)
                                          |bt|))))
-                                (LETT #11# (CDR #11#)) (GO G190) G191
+                                (LETT #17# (CDR #17#)) (GO G190) G191
                                 (EXIT NIL))
                            (EXIT
-                            (SEQ (LETT |val| NIL) (LETT #10# |topList|) G190
+                            (SEQ (LETT |val| NIL) (LETT #18# |topList|) G190
                                  (COND
-                                  ((OR (ATOM #10#)
-                                       (PROGN (LETT |val| (CAR #10#)) NIL))
+                                  ((OR (ATOM #18#)
+                                       (PROGN (LETT |val| (CAR #18#)) NIL))
                                    (GO G191)))
                                  (SEQ
                                   (EXIT
@@ -1150,7 +1152,7 @@
                                          (CONS
                                           (|ACPLOT;makePt| |val| |yMaxSF| %)
                                           |tp|))))
-                                 (LETT #10# (CDR #10#)) (GO G190) G191
+                                 (LETT #18# (CDR #18#)) (GO G190) G191
                                  (EXIT NIL))))))
                         (LETT |bran| NIL)
                         (COND
@@ -1162,12 +1164,12 @@
                             (COND
                              ((NULL |botList|)
                               (PROGN
-                               (LETT #9#
+                               (LETT #19#
                                      (VECTOR |p| |x| |y| |xMin| |xMax| |yMin|
                                              |yMax|
                                              (VECTOR |lf| |rt| |bt| |tp|)
                                              |htans| |vtans| |bran|))
-                               (GO #24=#:G297)))
+                               (GO #24=#:G303)))
                              (#23#
                               (SEQ (LETT |lo| (|SPADfirst| |botList|))
                                    (EXIT (LETT |botList| (CDR |botList|)))))))
@@ -1192,7 +1194,7 @@
                           (COND
                            ((NULL |botList|)
                             (PROGN
-                             (LETT #9#
+                             (LETT #19#
                                    (VECTOR |p| |x| |y| |xMin| |xMax| |yMin|
                                            |yMax| (VECTOR |lf| |rt| |bt| |tp|)
                                            |htans| |vtans| |bran|))
@@ -1319,14 +1321,14 @@
                                  (COND
                                   ((|eql_DF| |lo| |hi|)
                                    (PROGN
-                                    (LETT #6# |$NoValue|)
-                                    (GO #26=#:G289))))))
+                                    (LETT #21# |$NoValue|)
+                                    (GO #26=#:G293))))))
                                NIL (GO G190) G191 (EXIT NIL)))
-                         #26# (EXIT #6#))
-                        (SEQ (LETT |segment| NIL) (LETT #5# |segList|) G190
+                         #26# (EXIT #21#))
+                        (SEQ (LETT |segment| NIL) (LETT #22# |segList|) G190
                              (COND
-                              ((OR (ATOM #5#)
-                                   (PROGN (LETT |segment| (CAR #5#)) NIL))
+                              ((OR (ATOM #22#)
+                                   (PROGN (LETT |segment| (CAR #22#)) NIL))
                                (GO G191)))
                              (SEQ
                               (LETT |RFPlot|
@@ -1346,12 +1348,12 @@
                                                %)
                                          |curve| (QREFELT % 119))
                                         |bran|))))))
-                             (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
+                             (LETT #22# (CDR #22#)) (GO G190) G191 (EXIT NIL))
                         (EXIT
                          (VECTOR |p| |x| |y| |xMin| |xMax| |yMin| |yMax|
                                  (VECTOR |lf| |rt| |bt| |tp|) |htans| |vtans|
                                  |bran|))))))))
-          #24# (EXIT #9#)))) 
+          #24# (EXIT #19#)))) 
 
 (SDEFUN |ACPLOT;makeRatFcnSketch!0| ((|s| NIL) ($$ NIL))
         (PROG (|numUPolySF| % |denUPolySF|)
@@ -1370,39 +1372,39 @@
          (|yMin| (|Fraction| (|Integer|))) (|yMax| (|Fraction| (|Integer|)))
          (% (%)))
         (SPROG
-         ((|bran| (|List| (|List| (|Point| (|DoubleFloat|)))))
-          (|bdPts|
-           (|Record| (|:| |left| (|List| (|Point| (|DoubleFloat|))))
-                     (|:| |right| (|List| (|Point| (|DoubleFloat|))))
-                     (|:| |bottom| (|List| (|Point| (|DoubleFloat|))))
-                     (|:| |top| (|List| (|Point| (|DoubleFloat|))))))
-          (|tp| #1=(|List| (|Point| (|DoubleFloat|)))) (|bt| #1#)
-          (|rt| #2=(|List| (|Point| (|DoubleFloat|)))) (|lf| #2#)
-          (|pRN| (|Polynomial| (|Fraction| (|Integer|))))
-          (|bound| (|PositiveInteger|)) (|err| #3=(|DoubleFloat|))
-          (|delta| #3#) (|dpdySF| #4=(|Polynomial| (|DoubleFloat|)))
-          (|dpdxSF| #4#) (|pSF| #4#)
+         ((|factoredPol| (|Factored| (|Polynomial| (|Integer|))))
+          (|flist|
+           (|List|
+            (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
+                      (|:| |factor| #1=(|Polynomial| (|Integer|)))
+                      (|:| |exponent| (|NonNegativeInteger|)))))
+          (|p| #1#) (|dpdx| #2=(|Polynomial| (|Integer|))) (|dpdy| #2#)
+          (|singPts| #3=(|List| (|List| (|Float|)))) (|htanPts| #3#)
+          (|vtanPts| #3#) (|critPts| (|List| (|List| (|Float|))))
+          (|hInc| #4=(|Fraction| (|Integer|))) (|vInc| #4#)
+          (|xMinNF| #5=(|Float|)) (|xMaxNF| #5#) (|yMinNF| #5#)
+          (|foo| (|Mapping| (|Boolean|) (|List| (|Float|)))) (|yMaxNF| #5#)
+          (|htans| #6=(|List| (|Point| (|DoubleFloat|)))) (|vtans| #6#)
+          (|crits| (|List| (|Point| (|DoubleFloat|))))
+          (|xMinSF| #7=(|DoubleFloat|)) (|xMaxSF| #7#) (|yMinSF| #7#)
+          (|yMaxSF| #7#)
           (|corners|
            (|Record| (|:| |minXVal| (|DoubleFloat|))
                      (|:| |maxXVal| (|DoubleFloat|))
                      (|:| |minYVal| (|DoubleFloat|))
                      (|:| |maxYVal| (|DoubleFloat|))))
-          (|yMaxSF| #5=(|DoubleFloat|)) (|yMinSF| #5#) (|xMaxSF| #5#)
-          (|xMinSF| #5#) (|crits| (|List| (|Point| (|DoubleFloat|))))
-          (|vtans| #6=(|List| (|Point| (|DoubleFloat|)))) (|htans| #6#)
-          (|yMaxNF| #7=(|Float|))
-          (|foo| (|Mapping| (|Boolean|) (|List| (|Float|)))) (|yMinNF| #7#)
-          (|xMaxNF| #7#) (|xMinNF| #7#) (|vInc| #8=(|Fraction| (|Integer|)))
-          (|hInc| #8#) (|critPts| (|List| (|List| (|Float|))))
-          (|vtanPts| #9=(|List| (|List| (|Float|)))) (|htanPts| #9#)
-          (|singPts| #9#) (|dpdy| #10=(|Polynomial| (|Integer|))) (|dpdx| #10#)
-          (|p| #11=(|Polynomial| (|Integer|)))
-          (|flist|
-           (|List|
-            (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
-                      (|:| |factor| #11#)
-                      (|:| |exponent| (|NonNegativeInteger|)))))
-          (|factoredPol| (|Factored| (|Polynomial| (|Integer|)))))
+          (|pSF| #8=(|Polynomial| (|DoubleFloat|))) (|dpdxSF| #8#)
+          (|dpdySF| #8#) (|delta| #9=(|DoubleFloat|)) (|err| #9#)
+          (|bound| (|PositiveInteger|))
+          (|pRN| (|Polynomial| (|Fraction| (|Integer|))))
+          (|lf| #10=(|List| (|Point| (|DoubleFloat|)))) (|rt| #10#)
+          (|bt| #11=(|List| (|Point| (|DoubleFloat|)))) (|tp| #11#)
+          (|bdPts|
+           (|Record| (|:| |left| (|List| (|Point| (|DoubleFloat|))))
+                     (|:| |right| (|List| (|Point| (|DoubleFloat|))))
+                     (|:| |bottom| (|List| (|Point| (|DoubleFloat|))))
+                     (|:| |top| (|List| (|Point| (|DoubleFloat|))))))
+          (|bran| (|List| (|List| (|Point| (|DoubleFloat|))))))
          (SEQ (LETT |factoredPol| (SPADCALL |pol| (QREFELT % 94)))
               (LETT |flist| (SPADCALL |factoredPol| (QREFELT % 123)))
               (EXIT
@@ -1609,30 +1611,29 @@
 (SDEFUN |ACPLOT;refine;%Df%;34|
         ((|plot| (%)) (|stepFraction| (|DoubleFloat|)) (% (%)))
         (SPROG
-         ((|vtans| (|List| (|Point| (|DoubleFloat|))))
-          (|htans| (|List| (|Point| (|DoubleFloat|))))
-          (|bran| (|List| (|List| (|Point| (|DoubleFloat|)))))
-          (|bdPts|
-           (|Record| (|:| |left| (|List| (|Point| (|DoubleFloat|))))
-                     (|:| |right| (|List| (|Point| (|DoubleFloat|))))
-                     (|:| |bottom| (|List| (|Point| (|DoubleFloat|))))
-                     (|:| |top| (|List| (|Point| (|DoubleFloat|))))))
-          (|crits| (|List| (|Point| (|DoubleFloat|))))
-          (|bound| (|PositiveInteger|)) (|err| (|DoubleFloat|))
-          (|delta| (|DoubleFloat|))
-          (|dpdySF| #1=(|Polynomial| (|DoubleFloat|))) (|dpdxSF| #1#)
-          (|pSF| #1#)
+         ((|p| (|Polynomial| (|Integer|))) (|x| (|Symbol|)) (|y| (|Symbol|))
+          (|dpdx| #1=(|Polynomial| (|Integer|))) (|dpdy| #1#)
+          (|xMin| (|Fraction| (|Integer|))) (|xMax| (|Fraction| (|Integer|)))
+          (|yMin| (|Fraction| (|Integer|))) (|yMax| (|Fraction| (|Integer|)))
+          (|xMinSF| #2=(|DoubleFloat|)) (|xMaxSF| #2#) (|yMinSF| #2#)
+          (|yMaxSF| #2#)
           (|corners|
            (|Record| (|:| |minXVal| (|DoubleFloat|))
                      (|:| |maxXVal| (|DoubleFloat|))
                      (|:| |minYVal| (|DoubleFloat|))
                      (|:| |maxYVal| (|DoubleFloat|))))
-          (|yMaxSF| #2=(|DoubleFloat|)) (|yMinSF| #2#) (|xMaxSF| #2#)
-          (|xMinSF| #2#) (|yMax| (|Fraction| (|Integer|)))
-          (|yMin| (|Fraction| (|Integer|))) (|xMax| (|Fraction| (|Integer|)))
-          (|xMin| (|Fraction| (|Integer|)))
-          (|dpdy| #3=(|Polynomial| (|Integer|))) (|dpdx| #3#) (|y| (|Symbol|))
-          (|x| (|Symbol|)) (|p| (|Polynomial| (|Integer|))))
+          (|pSF| #3=(|Polynomial| (|DoubleFloat|))) (|dpdxSF| #3#)
+          (|dpdySF| #3#) (|delta| (|DoubleFloat|)) (|err| (|DoubleFloat|))
+          (|bound| (|PositiveInteger|))
+          (|crits| (|List| (|Point| (|DoubleFloat|))))
+          (|bdPts|
+           (|Record| (|:| |left| (|List| (|Point| (|DoubleFloat|))))
+                     (|:| |right| (|List| (|Point| (|DoubleFloat|))))
+                     (|:| |bottom| (|List| (|Point| (|DoubleFloat|))))
+                     (|:| |top| (|List| (|Point| (|DoubleFloat|))))))
+          (|bran| (|List| (|List| (|Point| (|DoubleFloat|)))))
+          (|htans| (|List| (|Point| (|DoubleFloat|))))
+          (|vtans| (|List| (|Point| (|DoubleFloat|)))))
          (SEQ (LETT |p| (QVELT |plot| 0)) (LETT |x| (QVELT |plot| 1))
               (LETT |y| (QVELT |plot| 2))
               (LETT |dpdx| (SPADCALL |p| |x| (QREFELT % 96)))
@@ -1693,12 +1694,12 @@
                     (|:| |top| #4=(|List| (|Point| (|DoubleFloat|))))))
          (% (|List| (|List| (|Point| (|DoubleFloat|))))))
         (SPROG
-         ((|bran| (|List| (|List| (|Point| (|DoubleFloat|)))))
-          (|segInfo| (|List| (|List| (|Point| (|DoubleFloat|)))))
-          (|pt| (|Point| (|DoubleFloat|)))
+         ((|lf| #1#) (|rt| #2#) (|tp| #4#) (|bt| #3#)
+          (|p0| (|Point| (|DoubleFloat|)))
           (|bdry| (|List| (|Point| (|DoubleFloat|))))
-          (|p0| (|Point| (|DoubleFloat|))) (|bt| #3#) (|tp| #4#) (|rt| #2#)
-          (|lf| #1#))
+          (|pt| (|Point| (|DoubleFloat|)))
+          (|segInfo| (|List| (|List| (|Point| (|DoubleFloat|)))))
+          (|bran| (|List| (|List| (|Point| (|DoubleFloat|))))))
          (SEQ (LETT |lf| (QVELT |bdPts| 0)) (LETT |rt| (QVELT |bdPts| 1))
               (LETT |tp| (QVELT |bdPts| 3)) (LETT |bt| (QVELT |bdPts| 2))
               (LETT |bdry|
@@ -1742,9 +1743,9 @@
          (|tp| (|List| (|Point| (|DoubleFloat|))))
          (% (|Point| (|DoubleFloat|))))
         (SPROG
-         ((|py| #1=(|DoubleFloat|)) (|px| #1#) (|one| (|DoubleFloat|))
-          (|zero| (|DoubleFloat|)) (|y1| (|DoubleFloat|))
-          (|x1| (|DoubleFloat|)))
+         ((|x1| (|DoubleFloat|)) (|y1| (|DoubleFloat|))
+          (|zero| (|DoubleFloat|)) (|one| (|DoubleFloat|))
+          (|px| #1=(|DoubleFloat|)) (|py| #1#))
          (SEQ (LETT |x1| (SPADCALL |p1| (QREFELT % 28)))
               (LETT |y1| (SPADCALL |p1| (QREFELT % 27))) (LETT |zero| 0.0)
               (LETT |one| 1.0)
@@ -1794,10 +1795,11 @@
          (|bdry| (|List| (|Point| (|DoubleFloat|))))
          (% (|List| (|List| (|Point| (|DoubleFloat|))))))
         (SPROG
-         ((|pointList| (|List| #1#)) (#2=#:G372 NIL)
-          (|p2| #3=(|Point| (|DoubleFloat|)))
-          (|ptInfo| (|Record| (|:| |newPt| #3#) (|:| |type| (|String|))))
-          (|pt1| (|Point| (|DoubleFloat|))) (|pt0| (|Point| (|DoubleFloat|))))
+         ((|pt0| (|Point| (|DoubleFloat|))) (|pt1| (|Point| (|DoubleFloat|)))
+          (|ptInfo|
+           (|Record| (|:| |newPt| #2=(|Point| (|DoubleFloat|)))
+                     (|:| |type| (|String|))))
+          (|p2| #2#) (#3=#:G385 NIL) (|pointList| (|List| #1#)))
          (SEQ
           (EXIT
            (SEQ (LETT |bdry| (SPADCALL |p1| |bdry| (QREFELT % 136)))
@@ -1837,8 +1839,8 @@
                               (LETT |pointList| (CONS |p2| |pointList|))
                               (EXIT
                                (PROGN
-                                (LETT #2# (LIST |pointList| |crits| |bdry|))
-                                (GO #4=#:G371)))))
+                                (LETT #3# (LIST |pointList| |crits| |bdry|))
+                                (GO #4=#:G384)))))
                             ('T
                              (SEQ
                               (COND
@@ -1850,7 +1852,7 @@
                                (LETT |pointList| (CONS |p2| |pointList|))))))))
                          NIL (GO G190) G191 (EXIT NIL))
                     (EXIT (LIST |pointList| |crits| |bdry|))))))))
-          #4# (EXIT #2#)))) 
+          #4# (EXIT #3#)))) 
 
 (SDEFUN |ACPLOT;listPtsOnLoop|
         ((|pSF| (|Polynomial| (|DoubleFloat|)))
@@ -1868,12 +1870,13 @@
          (|bdry| (|List| (|Point| (|DoubleFloat|))))
          (% (|List| (|List| (|Point| (|DoubleFloat|))))))
         (SPROG
-         ((|pointList| (|List| #1#)) (#2=#:G387 NIL)
-          (|p2| #3=(|Point| (|DoubleFloat|)))
-          (|ptInfo| (|Record| (|:| |newPt| #3#) (|:| |type| (|String|))))
-          (|pt1| (|Point| (|DoubleFloat|))) (|pt0| (|Point| (|DoubleFloat|)))
-          (|p0| (|Point| (|DoubleFloat|))) (|y1| (|DoubleFloat|))
-          (|x1| (|DoubleFloat|)))
+         ((|x1| (|DoubleFloat|)) (|y1| (|DoubleFloat|))
+          (|p0| (|Point| (|DoubleFloat|))) (|pt0| (|Point| (|DoubleFloat|)))
+          (|pt1| (|Point| (|DoubleFloat|)))
+          (|ptInfo|
+           (|Record| (|:| |newPt| #2=(|Point| (|DoubleFloat|)))
+                     (|:| |type| (|String|))))
+          (|p2| #2#) (#3=#:G400 NIL) (|pointList| (|List| #1#)))
          (SEQ
           (EXIT
            (SEQ (LETT |x1| (SPADCALL |p1| (QREFELT % 28)))
@@ -1930,14 +1933,14 @@
                                      (LETT |pointList| (CONS |p2| |pointList|))
                                      (EXIT
                                       (PROGN
-                                       (LETT #2#
+                                       (LETT #3#
                                              (LIST |pointList| |crits| |bdry|))
-                                       (GO #5=#:G386))))))))))
+                                       (GO #5=#:G399))))))))))
                               (EXIT
                                (LETT |pointList| (CONS |p2| |pointList|))))))))
                          NIL (GO G190) G191 (EXIT NIL))
                     (EXIT (LIST |pointList| |crits| |bdry|))))))))
-          #5# (EXIT #2#)))) 
+          #5# (EXIT #3#)))) 
 
 (SDEFUN |ACPLOT;computeNextPt|
         ((|pSF| (|Polynomial| (|DoubleFloat|)))
@@ -1958,25 +1961,24 @@
           (|Record| (|:| |newPt| (|Point| (|DoubleFloat|)))
                     (|:| |type| (|String|)))))
         (SPROG
-         ((|critPt| #2=(|Union| (|Point| (|DoubleFloat|)) #3="failed"))
-          (|bdryPt| #2#) (|pt| #4=(|Point| (|DoubleFloat|)))
-          (|x2| #5=(|DoubleFloat|)) (#6=#:G450 NIL)
-          (|x2New| #7=(|Union| (|DoubleFloat|) "failed"))
-          (|f| (|SparseUnivariatePolynomial| (|DoubleFloat|)))
-          (|y2| (|DoubleFloat|)) (|y2New| #7#) (|y2Approx| #5#)
-          (|x2Approx| #5#) (|lookingFor| (|String|)) (|incVar| #1#)
-          (#8=#:G415 NIL) (|critPt2| #2#) (|critPt1| #2#) (|pt2| #4#)
-          (|pt1| #4#) (|x2Temp| #5#) (|y2Temp| #5#) (|yHi| #5#)
-          (|yLo| #9=(|DoubleFloat|))
-          (|yPointList| (|List| (|Point| (|DoubleFloat|)))) (|xHi| #5#)
-          (|xLo| #10=(|DoubleFloat|))
-          (|xPointList| (|List| (|Point| (|DoubleFloat|)))) (|yy| #9#)
-          (|xx| #10#) (#11=#:G451 NIL) (|y2Approxx| #5#) (|x2Approxx| #5#)
-          (|deltaY| #12=(|DoubleFloat|)) (|incVar0| #1#) (|deltaX| #12#)
-          (|py| #13=(|DoubleFloat|)) (|px| #13#) (|y1| #9#) (|x1| #10#)
-          (|y0| #9#) (|x0| #10#) (|yMaxSF| (|DoubleFloat|))
-          (|yMinSF| (|DoubleFloat|)) (|xMaxSF| (|DoubleFloat|))
-          (|xMinSF| (|DoubleFloat|)))
+         ((|xMinSF| (|DoubleFloat|)) (|xMaxSF| (|DoubleFloat|))
+          (|yMinSF| (|DoubleFloat|)) (|yMaxSF| (|DoubleFloat|))
+          (|x0| #2=(|DoubleFloat|)) (|y0| #3=(|DoubleFloat|)) (|x1| #2#)
+          (|y1| #3#) (|px| #4=(|DoubleFloat|)) (|py| #4#)
+          (|deltaX| #5=(|DoubleFloat|)) (|incVar0| #1#) (|deltaY| #5#)
+          (|x2Approxx| #6=(|DoubleFloat|)) (|y2Approxx| #6#) (#7=#:G464 NIL)
+          (|xx| #2#) (|yy| #3#)
+          (|xPointList| (|List| (|Point| (|DoubleFloat|)))) (|xLo| #2#)
+          (|xHi| #6#) (|yPointList| (|List| (|Point| (|DoubleFloat|))))
+          (|yLo| #3#) (|yHi| #6#) (|y2Temp| #6#) (|x2Temp| #6#)
+          (|pt1| #8=(|Point| (|DoubleFloat|))) (|pt2| #8#)
+          (|critPt1| #9=(|Union| (|Point| (|DoubleFloat|)) #10="failed"))
+          (|critPt2| #9#) (#11=#:G428 NIL) (|incVar| #1#)
+          (|lookingFor| (|String|)) (|x2Approx| #6#) (|y2Approx| #6#)
+          (|y2New| #12=(|Union| (|DoubleFloat|) "failed"))
+          (|y2| (|DoubleFloat|))
+          (|f| (|SparseUnivariatePolynomial| (|DoubleFloat|))) (|x2New| #12#)
+          (#13=#:G463 NIL) (|x2| #6#) (|pt| #8#) (|bdryPt| #9#) (|critPt| #9#))
          (SEQ
           (EXIT
            (SEQ (LETT |xMinSF| (|ACPLOT;getXMin| |corners| %))
@@ -2072,9 +2074,9 @@
                  (#14# (SEQ (LETT |yLo| |y2Approx|) (EXIT (LETT |yHi| |y1|)))))
                 (LETT |x2Approxx| |x2Approx|) (LETT |y2Approxx| |y2Approx|)
                 (LETT |xPointList| NIL) (LETT |yPointList| NIL)
-                (SEQ (LETT #11# |crits|) G190
+                (SEQ (LETT #7# |crits|) G190
                      (COND
-                      ((OR (ATOM #11#) (PROGN (LETT |pt| (CAR #11#)) NIL))
+                      ((OR (ATOM #7#) (PROGN (LETT |pt| (CAR #7#)) NIL))
                        (GO G191)))
                      (SEQ (LETT |xx| (SPADCALL |pt| (QREFELT % 28)))
                           (LETT |yy| (SPADCALL |pt| (QREFELT % 27)))
@@ -2127,7 +2129,7 @@
                                         ((|less_DF| |yy| |y1|)
                                          (LETT |yLo| |yy|))
                                         ('T (LETT |yHi| |yy|)))))))))))))
-                     (LETT #11# (CDR #11#)) (GO G190) G191 (EXIT NIL))
+                     (LETT #7# (CDR #7#)) (GO G190) G191 (EXIT NIL))
                 (COND
                  ((NULL (NULL |xPointList|))
                   (COND
@@ -2193,14 +2195,14 @@
                             (COND
                              ((QEQCAR |y2New| 1)
                               (PROGN
-                               (LETT #6#
+                               (LETT #13#
                                      (|ACPLOT;computeNextPt| |pSF| |dpdxSF|
                                       |dpdySF| |x| |y| |p0| |p1| |corners|
                                       (|abs_DF|
                                        (|div_DF_I| (|sub_DF| |x2Approx| |x1|)
                                                    2))
                                       |err| |bound| |crits| |bdry| %))
-                               (GO #15=#:G449)))
+                               (GO #15=#:G462)))
                              (#14#
                               (SEQ
                                (LETT |pt1|
@@ -2224,33 +2226,33 @@
                                        (|abs_DF| (|sub_DF| |x2Temp| |x1|))
                                        (QREFELT % 111))
                                       (PROGN
-                                       (LETT #6# (CONS |pt1| (QREFELT % 16)))
+                                       (LETT #13# (CONS |pt1| (QREFELT % 16)))
                                        (GO #15#)))
                                      (#14#
                                       (PROGN
-                                       (LETT #6# (CONS |pt2| (QREFELT % 16)))
+                                       (LETT #13# (CONS |pt2| (QREFELT % 16)))
                                        (GO #15#)))))))))
                                (EXIT
                                 (COND
                                  ((QEQCAR |critPt1| 1)
                                   (PROGN
-                                   (LETT #6#
+                                   (LETT #13#
                                          (CONS
-                                          (PROG2 (LETT #8# |critPt2|)
-                                              (QCDR #8#)
-                                            (|check_union2| (QEQCAR #8# 0)
+                                          (PROG2 (LETT #11# |critPt2|)
+                                              (QCDR #11#)
+                                            (|check_union2| (QEQCAR #11# 0)
                                                             (|Point|
                                                              (|DoubleFloat|))
                                                             (|Union|
                                                              (|Point|
                                                               (|DoubleFloat|))
-                                                             #3#)
-                                                            #8#))
+                                                             #10#)
+                                                            #11#))
                                           (QREFELT % 18)))
                                    (GO #15#)))
                                  ((QEQCAR |critPt2| 1)
                                   (PROGN
-                                   (LETT #6#
+                                   (LETT #13#
                                          (CONS (QCDR |critPt1|)
                                                (QREFELT % 18)))
                                    (GO #15#)))
@@ -2261,13 +2263,13 @@
                                      (|abs_DF| (|sub_DF| |x2Temp| |x1|))
                                      (QREFELT % 111))
                                     (PROGN
-                                     (LETT #6#
+                                     (LETT #13#
                                            (CONS (QCDR |critPt2|)
                                                  (QREFELT % 18)))
                                      (GO #15#)))
                                    (#14#
                                     (PROGN
-                                     (LETT #6#
+                                     (LETT #13#
                                            (CONS (QCDR |critPt1|)
                                                  (QREFELT % 18)))
                                      (GO #15#)))))))))))))))))
@@ -2315,7 +2317,7 @@
                             (COND
                              ((QEQCAR |x2New| 1)
                               (PROGN
-                               (LETT #6#
+                               (LETT #13#
                                      (|ACPLOT;computeNextPt| |pSF| |dpdxSF|
                                       |dpdySF| |x| |y| |p0| |p1| |corners|
                                       (|abs_DF|
@@ -2346,33 +2348,33 @@
                                        (|abs_DF| (|sub_DF| |y2Temp| |y1|))
                                        (QREFELT % 111))
                                       (PROGN
-                                       (LETT #6# (CONS |pt2| (QREFELT % 16)))
+                                       (LETT #13# (CONS |pt2| (QREFELT % 16)))
                                        (GO #15#)))
                                      (#14#
                                       (PROGN
-                                       (LETT #6# (CONS |pt1| (QREFELT % 16)))
+                                       (LETT #13# (CONS |pt1| (QREFELT % 16)))
                                        (GO #15#)))))))))
                                (EXIT
                                 (COND
                                  ((QEQCAR |critPt1| 1)
                                   (PROGN
-                                   (LETT #6#
+                                   (LETT #13#
                                          (CONS
-                                          (PROG2 (LETT #8# |critPt2|)
-                                              (QCDR #8#)
-                                            (|check_union2| (QEQCAR #8# 0)
+                                          (PROG2 (LETT #11# |critPt2|)
+                                              (QCDR #11#)
+                                            (|check_union2| (QEQCAR #11# 0)
                                                             (|Point|
                                                              (|DoubleFloat|))
                                                             (|Union|
                                                              (|Point|
                                                               (|DoubleFloat|))
-                                                             #3#)
-                                                            #8#))
+                                                             #10#)
+                                                            #11#))
                                           (QREFELT % 18)))
                                    (GO #15#)))
                                  ((QEQCAR |critPt2| 1)
                                   (PROGN
-                                   (LETT #6#
+                                   (LETT #13#
                                          (CONS (QCDR |critPt1|)
                                                (QREFELT % 18)))
                                    (GO #15#)))
@@ -2383,13 +2385,13 @@
                                      (|abs_DF| (|sub_DF| |y2Temp| |y1|))
                                      (QREFELT % 111))
                                     (PROGN
-                                     (LETT #6#
+                                     (LETT #13#
                                            (CONS (QCDR |critPt1|)
                                                  (QREFELT % 18)))
                                      (GO #15#)))
                                    (#14#
                                     (PROGN
-                                     (LETT #6#
+                                     (LETT #13#
                                            (CONS (QCDR |critPt2|)
                                                  (QREFELT % 18)))
                                      (GO #15#))))))))))))))))))))))
@@ -2433,11 +2435,11 @@
                               (COND
                                ((QEQCAR |critPt| 1)
                                 (PROGN
-                                 (LETT #6# (CONS |pt| (QREFELT % 16)))
+                                 (LETT #13# (CONS |pt| (QREFELT % 16)))
                                  (GO #15#)))
                                (#14#
                                 (PROGN
-                                 (LETT #6#
+                                 (LETT #13#
                                        (CONS (QCDR |critPt|) (QREFELT % 18)))
                                  (GO #15#))))))))))))))))))
                 (COND
@@ -2480,11 +2482,11 @@
                               (COND
                                ((QEQCAR |critPt| 1)
                                 (PROGN
-                                 (LETT #6# (CONS |pt| (QREFELT % 16)))
+                                 (LETT #13# (CONS |pt| (QREFELT % 16)))
                                  (GO #15#)))
                                (#14#
                                 (PROGN
-                                 (LETT #6#
+                                 (LETT #13#
                                        (CONS (QCDR |critPt|) (QREFELT % 18)))
                                  (GO #15#))))))))))))))))))
                 (COND
@@ -2500,7 +2502,7 @@
                         (COND
                          ((QEQCAR |y2New| 1)
                           (PROGN
-                           (LETT #6#
+                           (LETT #13#
                                  (|ACPLOT;computeNextPt| |pSF| |dpdxSF|
                                   |dpdySF| |x| |y| |p0| |p1| |corners|
                                   (|abs_DF|
@@ -2520,7 +2522,7 @@
                         (COND
                          ((QEQCAR |x2New| 1)
                           (PROGN
-                           (LETT #6#
+                           (LETT #13#
                                  (|ACPLOT;computeNextPt| |pSF| |dpdxSF|
                                   |dpdySF| |x| |y| |p0| |p1| |corners|
                                   (|abs_DF|
@@ -2546,16 +2548,16 @@
                          (COND ((QEQCAR |critPt| 1) (CONS |pt| (QREFELT % 16)))
                                (#14#
                                 (CONS (QCDR |critPt|) (QREFELT % 18)))))))))))
-          #15# (EXIT #6#)))) 
+          #15# (EXIT #13#)))) 
 
 (SDEFUN |ACPLOT;newtonApprox|
         ((|f| (|SparseUnivariatePolynomial| (|DoubleFloat|)))
          (|a0| #1=(|DoubleFloat|)) (|err| (|DoubleFloat|))
          (|bound| (|PositiveInteger|)) (% (|Union| (|DoubleFloat|) "failed")))
         (SPROG
-         ((|i| (|PositiveInteger|)) (|newApprox| (|DoubleFloat|))
-          (|oldApprox| #1#) (#2=#:G460 NIL)
-          (|Df| (|SparseUnivariatePolynomial| (|DoubleFloat|))))
+         ((|Df| (|SparseUnivariatePolynomial| (|DoubleFloat|))) (#2=#:G473 NIL)
+          (|oldApprox| #1#) (|newApprox| (|DoubleFloat|))
+          (|i| (|PositiveInteger|)))
          (SEQ
           (EXIT
            (SEQ (LETT |Df| (SPADCALL |f| (QREFELT % 141)))
@@ -2576,7 +2578,7 @@
                       (EXIT
                        (COND
                         ((EQL |i| |bound|)
-                         (PROGN (LETT #2# (CONS 1 "failed")) (GO #3=#:G459)))
+                         (PROGN (LETT #2# (CONS 1 "failed")) (GO #3=#:G472)))
                         ('T
                          (SEQ (LETT |oldApprox| |newApprox|)
                               (LETT |newApprox|
@@ -2591,8 +2593,8 @@
                 (EXIT (CONS 0 |newApprox|))))
           #3# (EXIT #2#)))) 
 
-(PUT '|ACPLOT;listBranches;%L;41| '|SPADreplace|
-     '(XLAM (|acplot|) (QVELT |acplot| 10))) 
+(MAKEPROP '|ACPLOT;listBranches;%L;41| '|SPADreplace|
+          '(XLAM (|acplot|) (QVELT |acplot| 10))) 
 
 (SDEFUN |ACPLOT;listBranches;%L;41|
         ((|acplot| (%)) (% (|List| (|List| (|Point| (|DoubleFloat|))))))
@@ -2600,13 +2602,13 @@
 
 (SDEFUN |ACPLOT;coerce;%Of;42| ((|acplot| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|ff| (|OutputForm|)) (|f| (|List| (|OutputForm|)))
-          (|ll| (|List| (|OutputForm|))) (#1=#:G471 NIL) (|p| NIL)
-          (#2=#:G470 NIL) (#3=#:G469 NIL) (|branch| NIL)
-          (|l| (|List| #4=(|OutputForm|))) (|les| #5=(|OutputForm|))
-          (|com| #5#) (|zip| #5#) (|yHi| #4#) (|yLo| (|OutputForm|))
-          (|xHi| (|OutputForm|)) (|xLo| (|OutputForm|)) (|yy| (|OutputForm|))
-          (|xx| (|OutputForm|)) (|pp| (|OutputForm|)))
+         ((|pp| (|OutputForm|)) (|xx| (|OutputForm|)) (|yy| (|OutputForm|))
+          (|xLo| (|OutputForm|)) (|xHi| (|OutputForm|)) (|yLo| (|OutputForm|))
+          (|yHi| #1=(|OutputForm|)) (|zip| #2=(|OutputForm|)) (|com| #2#)
+          (|les| #2#) (|l| (|List| #1#)) (|branch| NIL) (#3=#:G482 NIL)
+          (#4=#:G483 NIL) (|p| NIL) (#5=#:G484 NIL)
+          (|ll| (|List| (|OutputForm|))) (|f| (|List| (|OutputForm|)))
+          (|ff| (|OutputForm|)))
          (SEQ (LETT |pp| (SPADCALL (QVELT |acplot| 0) (QREFELT % 144)))
               (LETT |xx| (SPADCALL (QVELT |acplot| 1) (QREFELT % 145)))
               (LETT |yy| (SPADCALL (QVELT |acplot| 2) (QREFELT % 145)))
@@ -2628,19 +2630,19 @@
                    (SEQ
                     (LETT |ll|
                           (PROGN
-                           (LETT #2# NIL)
-                           (SEQ (LETT |p| NIL) (LETT #1# |branch|) G190
+                           (LETT #4# NIL)
+                           (SEQ (LETT |p| NIL) (LETT #5# |branch|) G190
                                 (COND
-                                 ((OR (ATOM #1#)
-                                      (PROGN (LETT |p| (CAR #1#)) NIL))
+                                 ((OR (ATOM #5#)
+                                      (PROGN (LETT |p| (CAR #5#)) NIL))
                                   (GO G191)))
                                 (SEQ
                                  (EXIT
-                                  (LETT #2#
+                                  (LETT #4#
                                         (CONS (SPADCALL |p| (QREFELT % 149))
-                                              #2#))))
-                                (LETT #1# (CDR #1#)) (GO G190) G191
-                                (EXIT (NREVERSE #2#)))))
+                                              #4#))))
+                                (LETT #5# (CDR #5#)) (GO G190) G191
+                                (EXIT (NREVERSE #4#)))))
                     (EXIT
                      (LETT |f| (CONS (SPADCALL |ll| (QREFELT % 151)) |f|))))
                    (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
@@ -2699,7 +2701,7 @@
 
 (DEFUN |PlaneAlgebraicCurvePlot| ()
   (SPROG NIL
-         (PROG (#1=#:G473)
+         (PROG (#1=#:G486)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|PlaneAlgebraicCurvePlot|))
@@ -2719,17 +2721,17 @@
 
 (MAKEPROP '|PlaneAlgebraicCurvePlot| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL '|Rep| (|Float|) (0 . |One|) (|Integer|)
+           '#(NIL NIL NIL NIL NIL NIL '|Rep| (|Float|) (0 . |1|) (|Integer|)
               (|PositiveInteger|) (4 . |float|) 'EPSILON (|DoubleFloat|)
-              (11 . |float|) 'PLOTERR 'NADA 'BDRY 'CRIT 'BOTTOM 'TOP
-              (18 . |Zero|) (22 . |convert|) (|List| 13) (|Point| 13)
-              (27 . |point|) (|PointPackage| 13) (32 . |yCoord|)
-              (37 . |xCoord|) (|Boolean|) (|Polynomial| 13) (42 . |zero?|)
-              (|SparseUnivariatePolynomial| 13) (47 . |Zero|)
+              (11 . |float|) 'PLOTERR 'NADA 'BDRY 'CRIT 'BOTTOM 'TOP (18 . |0|)
+              (22 . |convert|) (|List| 13) (|Point| 13) (27 . |point|)
+              (|PointPackage| 13) (32 . |yCoord|) (37 . |xCoord|) (|Boolean|)
+              (|Polynomial| 13) (42 . |zero?|)
+              (|SparseUnivariatePolynomial| 13) (47 . |0|)
               (51 . |leadingCoefficient|) (|NonNegativeInteger|)
               (56 . |totalDegree|) (61 . |monomial|) (67 . |reductum|) (72 . +)
               (|Polynomial| 44) (78 . |zero?|)
-              (|SparseUnivariatePolynomial| 44) (83 . |Zero|) (|Fraction| 9)
+              (|SparseUnivariatePolynomial| 44) (83 . |0|) (|Fraction| 9)
               (87 . |leadingCoefficient|) (92 . |totalDegree|)
               (97 . |monomial|) (103 . |reductum|) (108 . +) (114 . |coerce|)
               (|Mapping| 13 9) (|Polynomial| 9) (|PolynomialFunctions2| 9 13)
@@ -2747,7 +2749,7 @@
               (296 . |numberOfFactors|) (301 . |differentiate|) (307 . -)
               (312 . |elt|) (318 . /) (|List| 64) (|List| 52)
               (324 . |realSolve|) (331 . <) (|Mapping| 29 13 13) (337 . |sort|)
-              (343 . |elt|) (349 . |Zero|) (353 . =) (359 . |last|)
+              (343 . |elt|) (349 . |0|) (353 . =) (359 . |last|)
               (364 . |remove|) (370 . >) (|Mapping| 13 13) (|Plot|)
               (376 . |plot|) (|List| 118) (382 . |listBranches|)
               (|Mapping| 24 24) (|List| 24) (387 . |map|)
@@ -2803,7 +2805,7 @@
                                               90 114 1 113 115 0 116 2 118 0
                                               117 0 119 1 93 122 0 123 2 100 0
                                               0 0 124 2 44 0 9 9 125 2 44 0 0 0
-                                              126 2 44 0 44 0 127 1 44 0 0 128
+                                              126 2 44 0 0 44 127 1 44 0 0 128
                                               2 118 0 0 0 129 1 115 118 0 131 1
                                               115 118 0 132 3 30 0 0 80 23 133
                                               1 30 13 0 134 2 118 29 24 0 135 2

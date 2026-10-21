@@ -1,9 +1,9 @@
 
-(PUT '|GTSET;rep| '|SPADreplace| '(XLAM (|s|) |s|)) 
+(MAKEPROP '|GTSET;rep| '|SPADreplace| '(XLAM (|s|) |s|)) 
 
 (SDEFUN |GTSET;rep| ((|s| (%)) (% (|List| P))) |s|) 
 
-(PUT '|GTSET;per| '|SPADreplace| '(XLAM (|l|) |l|)) 
+(MAKEPROP '|GTSET;per| '|SPADreplace| '(XLAM (|l|) |l|)) 
 
 (SDEFUN |GTSET;per| ((|l| (|List| P)) (% (%))) |l|) 
 
@@ -30,27 +30,27 @@
 (SDEFUN |GTSET;member?;P%B;10| ((|p| (P)) (|ts| (%)) (% (|Boolean|)))
         (SPADCALL |p| (|GTSET;rep| |ts| %) (QREFELT % 24))) 
 
-(PUT '|GTSET;roughUnitIdeal?;%B;11| '|SPADreplace| '(XLAM (|ts|) NIL)) 
+(MAKEPROP '|GTSET;roughUnitIdeal?;%B;11| '|SPADreplace| '(XLAM (|ts|) NIL)) 
 
 (SDEFUN |GTSET;roughUnitIdeal?;%B;11| ((|ts| (%)) (% (|Boolean|))) NIL) 
 
 (SDEFUN |GTSET;coerce;%Of;12| ((|ts| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G29 NIL) (|p| NIL) (#2=#:G28 NIL) (|lp| (|List| P)))
+        (SPROG ((|lp| (|List| P)) (#1=#:G29 NIL) (|p| NIL) (#2=#:G30 NIL))
                (SEQ (LETT |lp| (REVERSE (|GTSET;rep| |ts| %)))
                     (EXIT
                      (SPADCALL
                       (PROGN
-                       (LETT #2# NIL)
-                       (SEQ (LETT |p| NIL) (LETT #1# |lp|) G190
+                       (LETT #1# NIL)
+                       (SEQ (LETT |p| NIL) (LETT #2# |lp|) G190
                             (COND
-                             ((OR (ATOM #1#) (PROGN (LETT |p| (CAR #1#)) NIL))
+                             ((OR (ATOM #2#) (PROGN (LETT |p| (CAR #2#)) NIL))
                               (GO G191)))
                             (SEQ
                              (EXIT
-                              (LETT #2#
-                                    (CONS (SPADCALL |p| (QREFELT % 28)) #2#))))
-                            (LETT #1# (CDR #1#)) (GO G190) G191
-                            (EXIT (NREVERSE #2#))))
+                              (LETT #1#
+                                    (CONS (SPADCALL |p| (QREFELT % 28)) #1#))))
+                            (LETT #2# (CDR #2#)) (GO G190) G191
+                            (EXIT (NREVERSE #1#))))
                       (QREFELT % 30)))))) 
 
 (SDEFUN |GTSET;mvar;%V;13| ((|ts| (%)) (% (V)))
@@ -74,7 +74,7 @@
 (SDEFUN |GTSET;coerce;%L;17| ((|ts| (%)) (% (|List| P))) (|GTSET;rep| |ts| %)) 
 
 (SDEFUN |GTSET;collectUpper;%V%;18| ((|ts| (%)) (|v| (V)) (% (%)))
-        (SPROG ((|lp| (|List| P)) (|newlp| (|List| P)))
+        (SPROG ((|newlp| (|List| P)) (|lp| (|List| P)))
                (SEQ
                 (COND ((SPADCALL |ts| (QREFELT % 15)) |ts|)
                       ('T
@@ -131,8 +131,8 @@
 
 (DEFUN |GeneralTriangularSet;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((#1=#:G89 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
-    (DV$2 NIL) (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL)
+    (#1=#:G90 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -174,9 +174,9 @@
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
-(DEFUN |GeneralTriangularSet| (&REST #1=#:G90)
+(DEFUN |GeneralTriangularSet| (&REST #1=#:G91)
   (SPROG NIL
-         (PROG (#2=#:G91)
+         (PROG (#2=#:G92)
            (RETURN
             (COND
              ((LETT #2#

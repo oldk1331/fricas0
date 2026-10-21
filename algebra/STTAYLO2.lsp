@@ -293,7 +293,7 @@
            (PROGN
             (SPROG
              ((|x| NIL) (|c| NIL) (|y| NIL) (|ll| NIL) (|n| NIL) (|i| NIL)
-              (#1=#:G159 NIL) (#2=#:G158 NIL) (#3=#:G157 NIL) (|res| NIL)
+              (#1=#:G165 NIL) (#2=#:G164 NIL) (#3=#:G163 NIL) (|res| NIL)
               (|llp| NIL) (|xp| NIL))
              (SEQ
               (EXIT
@@ -306,7 +306,7 @@
                             (SPADCALL |x| (QREFELT % 56)))
                         (PROGN
                          (LETT #2# (SPADCALL (QREFELT % 9)))
-                         (GO #4=#:G156)))
+                         (GO #4=#:G162)))
                        ('T (LETT |x| (SPADCALL |x| (QREFELT % 61))))))
                      ('T
                       (SEQ (LETT |c| (SPADCALL |y| (QREFELT % 14)))
@@ -355,7 +355,7 @@
                                  (PROGN
                                   (LETT #2# (SPADCALL (QREFELT % 9)))
                                   (GO #4#)))
-                                ('T (PROGN (LETT #3# 1) (GO #5=#:G152)))))
+                                ('T (PROGN (LETT #3# 1) (GO #5=#:G158)))))
                               ('T
                                (SEQ
                                 (LETT |res|
@@ -526,7 +526,7 @@
 
 (SDEFUN |STTAYLO2;multisect;2I2S;24|
         ((|b| #1=(|Integer|)) (|a| #1#) (|x| (|Stream| M)) (% (|Stream| M)))
-        (SPROG ((#2=#:G207 NIL))
+        (SPROG ((#2=#:G215 NIL))
                (|STTAYLO2;ms| (+ |a| |b|) 0
                 (SPADCALL |x|
                           (PROG1 (LETT #2# |a|)
@@ -637,7 +637,7 @@
 (DECLAIM (NOTINLINE |StreamTaylorSeriesOperations2;|)) 
 
 (DEFUN |StreamTaylorSeriesOperations2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -686,9 +686,9 @@
                         %)))))
           %))) 
 
-(DEFUN |StreamTaylorSeriesOperations2| (&REST #1=#:G227)
+(DEFUN |StreamTaylorSeriesOperations2| (&REST #1=#:G235)
   (SPROG NIL
-         (PROG (#2=#:G228)
+         (PROG (#2=#:G236)
            (RETURN
             (COND
              ((LETT #2#
@@ -719,19 +719,18 @@
               (|Stream| 29) (76 . |stream|) (82 . *) (88 . *) (94 . |zero?|)
               (|Mapping| 7 6) (|StreamFunctions2| 6 7) (99 . |map|) (105 . *)
               (111 . |empty?|) (116 . |frst|) (|NonNegativeInteger|)
-              (121 . |rest|) (127 . |One|) (131 . |One|) (135 . +)
-              (141 . |rst|) (|PositiveInteger|) (146 . |One|) (|Stream| 8)
-              (150 . |empty|) (154 . |concat|) (160 . |delay|) (165 . |empty?|)
-              (170 . |frst|) |STTAYLO2;coerce;MS;21| |STTAYLO2;addiag;SS;22|
-              (175 . |compose|) (181 . |rst|) (186 . |mapmult|) (192 . |Zero|)
-              (196 . |Zero|) (200 . *) (|Mapping| 6 6) (206 . |stream|)
-              (|Mapping| 7 7 7) (|StreamFunctions2| 7 7) (212 . |scan|)
-              (219 . |eval|) (|Integer|) (225 . |Zero|) (229 . <) (235 . =)
-              (|List| 7) (241 . |cons|) (247 . |One|) (251 . +)
-              (|SingleInteger|) (257 . |Zero|) (261 . |Zero|) (265 . =)
-              (271 . |first|) (276 . |rest|) (281 . |explicitlyEmpty?|)
-              (286 . |explicitlyEmpty?|) (291 . |One|) (295 . -)
-              |STTAYLO2;*;S2S;14| (|Mapping| 72 72) (|Stream| 72)
+              (121 . |rest|) (127 . |1|) (131 . |1|) (135 . +) (141 . |rst|)
+              (|PositiveInteger|) (146 . |1|) (|Stream| 8) (150 . |empty|)
+              (154 . |concat|) (160 . |delay|) (165 . |empty?|) (170 . |frst|)
+              |STTAYLO2;coerce;MS;21| |STTAYLO2;addiag;SS;22| (175 . |compose|)
+              (181 . |rst|) (186 . |mapmult|) (192 . |0|) (196 . |0|) (200 . *)
+              (|Mapping| 6 6) (206 . |stream|) (|Mapping| 7 7 7)
+              (|StreamFunctions2| 7 7) (212 . |scan|) (219 . |eval|)
+              (|Integer|) (225 . |0|) (229 . <) (235 . =) (|List| 7)
+              (241 . |cons|) (247 . |1|) (251 . +) (|SingleInteger|)
+              (257 . |0|) (261 . |0|) (265 . =) (271 . |first|) (276 . |rest|)
+              (281 . |explicitlyEmpty?|) (286 . |explicitlyEmpty?|) (291 . |1|)
+              (295 . -) |STTAYLO2;*;S2S;14| (|Mapping| 72 72) (|Stream| 72)
               (300 . |stream|) |STTAYLO2;integers;IS;15|
               |STTAYLO2;oddintegers;IS;16| (306 . +) |STTAYLO2;int;RS;17|
               |STTAYLO2;mapmult;S2S;18| (312 . |rest|) |STTAYLO2;deriv;2S;19|

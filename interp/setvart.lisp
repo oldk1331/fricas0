@@ -378,18 +378,8 @@
 ;       interpreter
 ;       FUNCTION
 ;       setOutputAlgebra
-;       (("display output in algebraic form"
-;         LITERALS
-;         $algebraFormat
-;         (off on)
-;         on)
-;        (break $algebraFormat)
-;        ("where algebra printing goes (enter {\em console} or a pathname)?"
-;         FILENAME
-;         $algebraOutputFile
-;         chkOutputFileName
-;         "console"))
-;       NIL)
+;       NIL
+;       htSetOutputPage)
 ;      (characters
 ;       "choose special output character set"
 ;       interpreter
@@ -402,18 +392,8 @@
 ;       interpreter
 ;       FUNCTION
 ;       setOutputFortran
-;       (("create output in FORTRAN format"
-;         LITERALS
-;         $fortranFormat
-;         (off on)
-;         off)
-;        (break $fortranFormat)
-;        ("where FORTRAN output goes (enter {\em console} or a a pathname)"
-;         FILENAME
-;         $fortranOutputFile
-;         chkOutputFileName
-;         "console"))
-;       NIL)
+;       NIL
+;       htSetOutputPage)
 ;      (fraction
 ;       "how fractions are formatted"
 ;       interpreter
@@ -433,18 +413,8 @@
 ;       interpreter
 ;       FUNCTION
 ;       setOutputOpenMath
-;       (("create output in OpenMath format"
-;         LITERALS
-;         $openMathFormat
-;         (off on)
-;         off)
-;        (break $openMathFormat)
-;        ("where OpenMath output goes (enter {\em console} or a pathname)"
-;         FILENAME
-;         $openMathOutputFile
-;         chkOutputFileName
-;         "console"))
-;       NIL)
+;       NIL
+;       htSetOutputPage)
 ;      (scripts
 ;       "show subscripts,... linearly"
 ;       interpreter
@@ -464,86 +434,36 @@
 ;       interpreter
 ;       FUNCTION
 ;       setOutputTex
-;       (("create output in TeX format"
-;         LITERALS
-;         $texFormat
-;         (off on)
-;         off)
-;        (break $texFormat)
-;        ("where TeX output goes (enter {\em console} or a pathname)"
-;         FILENAME
-;         $texOutputFile
-;         chkOutputFileName
-;         "console"))
-;       NIL)
+;       NIL
+;       htSetOutputPage)
 ;      (mathml
 ;       "create output in MathML style"
 ;       interpreter
 ;       FUNCTION
 ;       setOutputMathml
-;       (("create output in MathML format"
-;         LITERALS
-;         $mathmlFormat
-;         (off on)
-;         off)
-;        (break $mathmlFormat)
-;        ("where MathML output goes (enter {\em console} or a pathname)"
-;         FILENAME
-;         $mathmlOutputFile
-;         chkOutputFileName
-;         "console"))
-;       NIL)
+;       NIL
+;       htSetOutputPage)
 ;      (texmacs
 ;       "create output in TeXmacs style"
 ;       interpreter
 ;       FUNCTION
 ;       setOutputTexmacs
-;       (("create output in TeXmacs format"
-;         LITERALS
-;         $texmacsFormat
-;         (off on)
-;         off)
-;        (break $texmacsFormat)
-;        ("where TeXmacs output goes (enter {\em console} or a pathname)"
-;         FILENAME
-;         $texmacsOutputFile
-;         chkOutputFileName
-;         "console"))
-;       NIL)
+;       NIL
+;       htSetOutputPage)
 ;      (html
 ;       "create output in HTML style"
 ;       interpreter
 ;       FUNCTION
 ;       setOutputHtml
-;       (("create output in HTML format"
-;         LITERALS
-;         $htmlFormat
-;         (off on)
-;         off)
-;        (break $htmlFormat)
-;        ("where HTML output goes (enter {\em console} or a pathname)"
-;         FILENAME
-;         $htmlOutputFile
-;         chkOutputFileName
-;         "console"))
-;       NIL)
+;       NIL
+;       htSetOutputPage)
 ;      (formatted
 ;       "create output in formatted style"
 ;       interpreter
 ;       FUNCTION
 ;       setOutputFormatted
-;       (("create output via format engine"
-;         LITERALS
-;         $formattedFormat
-;         (off on)
-;         off)
-;        (break $formattedFormat)
-;        ("where formatted output goes (enter {\em console} or a pathname)"
-;         FILENAME
-;         $formattedOutputFile
-;         chkOutputFileName
-;         "console"))
-;       NIL)
+;       NIL
+;       htSetOutputPage)
 ;  ))
 ;   (quit
 ;    "protected or unprotected quit"
@@ -717,78 +637,31 @@
      ((|abbreviate| "abbreviate type names" |interpreter| LITERALS
        |$abbreviateTypes| (|on| |off|) |off|)
       (|algebra| "display output in algebraic form" |interpreter| FUNCTION
-       |setOutputAlgebra|
-       (("display output in algebraic form" LITERALS |$algebraFormat|
-         (|off| |on|) |on|)
-        (|break| |$algebraFormat|)
-        ("where algebra printing goes (enter {\\em console} or a pathname)?"
-         FILENAME |$algebraOutputFile| |chkOutputFileName| "console"))
-       NIL)
+       |setOutputAlgebra| NIL |htSetOutputPage|)
       (|characters| "choose special output character set" |interpreter|
        FUNCTION |setOutputCharacters| NIL |htSetOutputCharacters|)
       (|fortran| "create output in FORTRAN format" |interpreter| FUNCTION
-       |setOutputFortran|
-       (("create output in FORTRAN format" LITERALS |$fortranFormat|
-         (|off| |on|) |off|)
-        (|break| |$fortranFormat|)
-        ("where FORTRAN output goes (enter {\\em console} or a a pathname)"
-         FILENAME |$fortranOutputFile| |chkOutputFileName| "console"))
-       NIL)
+       |setOutputFortran| NIL |htSetOutputPage|)
       (|fraction| "how fractions are formatted" |interpreter| LITERALS
        |$fractionDisplayType| (|vertical| |horizontal|) |vertical|)
       (|length| "line length of output displays" |interpreter| INTEGER
        $LINELENGTH (10 245) 77)
       (|openmath| "create output in OpenMath style" |interpreter| FUNCTION
-       |setOutputOpenMath|
-       (("create output in OpenMath format" LITERALS |$openMathFormat|
-         (|off| |on|) |off|)
-        (|break| |$openMathFormat|)
-        ("where OpenMath output goes (enter {\\em console} or a pathname)"
-         FILENAME |$openMathOutputFile| |chkOutputFileName| "console"))
-       NIL)
+       |setOutputOpenMath| NIL |htSetOutputPage|)
       (|scripts| "show subscripts,... linearly" |interpreter| LITERALS
        |$linearFormatScripts| (|yes| |no|) |no|)
       (|showeditor| "view output of )show in editor" |interpreter| LITERALS
        |$useEditorForShowOutput| (|on| |off|) |off|)
       (|tex| "create output in TeX style" |interpreter| FUNCTION |setOutputTex|
-       (("create output in TeX format" LITERALS |$texFormat| (|off| |on|)
-         |off|)
-        (|break| |$texFormat|)
-        ("where TeX output goes (enter {\\em console} or a pathname)" FILENAME
-         |$texOutputFile| |chkOutputFileName| "console"))
-       NIL)
+       NIL |htSetOutputPage|)
       (|mathml| "create output in MathML style" |interpreter| FUNCTION
-       |setOutputMathml|
-       (("create output in MathML format" LITERALS |$mathmlFormat| (|off| |on|)
-         |off|)
-        (|break| |$mathmlFormat|)
-        ("where MathML output goes (enter {\\em console} or a pathname)"
-         FILENAME |$mathmlOutputFile| |chkOutputFileName| "console"))
-       NIL)
+       |setOutputMathml| NIL |htSetOutputPage|)
       (|texmacs| "create output in TeXmacs style" |interpreter| FUNCTION
-       |setOutputTexmacs|
-       (("create output in TeXmacs format" LITERALS |$texmacsFormat|
-         (|off| |on|) |off|)
-        (|break| |$texmacsFormat|)
-        ("where TeXmacs output goes (enter {\\em console} or a pathname)"
-         FILENAME |$texmacsOutputFile| |chkOutputFileName| "console"))
-       NIL)
+       |setOutputTexmacs| NIL |htSetOutputPage|)
       (|html| "create output in HTML style" |interpreter| FUNCTION
-       |setOutputHtml|
-       (("create output in HTML format" LITERALS |$htmlFormat| (|off| |on|)
-         |off|)
-        (|break| |$htmlFormat|)
-        ("where HTML output goes (enter {\\em console} or a pathname)" FILENAME
-         |$htmlOutputFile| |chkOutputFileName| "console"))
-       NIL)
+       |setOutputHtml| NIL |htSetOutputPage|)
       (|formatted| "create output in formatted style" |interpreter| FUNCTION
-       |setOutputFormatted|
-       (("create output via format engine" LITERALS |$formattedFormat|
-         (|off| |on|) |off|)
-        (|break| |$formattedFormat|)
-        ("where formatted output goes (enter {\\em console} or a pathname)"
-         FILENAME |$formattedOutputFile| |chkOutputFileName| "console"))
-       NIL)))
+       |setOutputFormatted| NIL |htSetOutputPage|)))
     (|quit| "protected or unprotected quit" |interpreter| LITERALS
      |$quitCommandType| (|protected| |unprotected|) |unprotected|)
     (|streams| "set some options for working with streams" |interpreter| TREE
@@ -810,18 +683,6 @@
        LITERALS |$PrettyPrint| (|on| |off|) |off|)))
     (|userlevel| "operation access level of system user" |interpreter| LITERALS
      |$UserLevel| (|interpreter| |compiler| |development|) |development|)))
-
-; DEFPARAMETER($setOptionNames, [x.0 for x in $setOptions])
-
-(DEFPARAMETER |$setOptionNames|
-  ((LAMBDA (|bfVar#2| |bfVar#1| |x|)
-     (LOOP
-      (COND
-       ((OR (ATOM |bfVar#1|) (PROGN (SETQ |x| (CAR |bfVar#1|)) NIL))
-        (RETURN (NREVERSE |bfVar#2|)))
-       ('T (SETQ |bfVar#2| (CONS (ELT |x| 0) |bfVar#2|))))
-      (SETQ |bfVar#1| (CDR |bfVar#1|))))
-   NIL |$setOptions| NIL))
 
 ; initializeSetVariables $setOptions
 

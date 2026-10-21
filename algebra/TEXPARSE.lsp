@@ -92,17 +92,17 @@
                          (|:| |eos| #5="eos") (|:| |error| #6="error")))))
          (% (|TeXTree|)))
         (SPROG
-         ((#7=#:G15 NIL)
-          (|cr|
-           (|Record| (|:| |name| (|String|))
-                     (|:| |args| (|List| (|TeXTree|)))))
-          (#8=#:G20 NIL)
+         ((|lv| (|List| (|TeXTree|))) (|v| (|TeXTree|))
           (|tok|
            (|Union| (|:| |text| (|String|)) (|:| |lbrace| #1#)
                     (|:| |rbrace| #2#) (|:| |tmath| #3#) (|:| |dmath| #4#)
                     (|:| |macro_name| (|Record| (|:| |name| (|String|))))
                     (|:| |eos| #5#) (|:| |error| #6#)))
-          (|v| (|TeXTree|)) (|lv| (|List| (|TeXTree|))))
+          (#7=#:G20 NIL)
+          (|cr|
+           (|Record| (|:| |name| (|String|))
+                     (|:| |args| (|List| (|TeXTree|)))))
+          (#8=#:G15 NIL))
          (SEQ (LETT |tok| (|TEXPARSE;get_token| |sr| %))
               (EXIT
                (COND
@@ -161,9 +161,9 @@
                   (LETT |cr|
                         (|TEXPARSE;parse_macro| |sr|
                          (QCAR
-                          (PROG2 (LETT #8# |tok|)
-                              (QCDR #8#)
-                            (|check_union2| (QEQCAR #8# 5)
+                          (PROG2 (LETT #7# |tok|)
+                              (QCDR #7#)
+                            (|check_union2| (QEQCAR #7# 5)
                                             (|Record| (|:| |name| (|String|)))
                                             (|Union| (|:| |text| (|String|))
                                                      (|:| |lbrace| #1#)
@@ -176,7 +176,7 @@
                                                                 (|String|))))
                                                      (|:| |eos| #5#)
                                                      (|:| |error| #6#))
-                                            #8#)))
+                                            #7#)))
                          %))
                   (COND
                    ((NULL (NULL (QCDR |cr|)))
@@ -185,9 +185,9 @@
                   (EXIT (SPADCALL (QCAR |cr|) (QCDR |cr|) (QREFELT % 22)))))
                 ((QEQCAR |tok| 0)
                  (SPADCALL
-                  (PROG2 (LETT #7# |tok|)
-                      (QCDR #7#)
-                    (|check_union2| (QEQCAR #7# 0) (|String|)
+                  (PROG2 (LETT #8# |tok|)
+                      (QCDR #8#)
+                    (|check_union2| (QEQCAR #8# 0) (|String|)
                                     (|Union| (|:| |text| (|String|))
                                              (|:| |lbrace| #1#)
                                              (|:| |rbrace| #2#)
@@ -197,7 +197,7 @@
                                                   (|Record|
                                                    (|:| |name| (|String|))))
                                              (|:| |eos| #5#) (|:| |error| #6#))
-                                    #7#))
+                                    #8#))
                   (QREFELT % 23)))))))) 
 
 (SDEFUN |TEXPARSE;parse_items|
@@ -214,16 +214,16 @@
                          (|:| |eos| #5="eos") (|:| |error| #6="error")))))
          (% (|List| (|TeXTree|))))
         (SPROG
-         ((|lv| (|List| (|TeXTree|))) (#7=#:G73 NIL)
-          (|cr|
-           (|Record| (|:| |name| (|String|))
-                     (|:| |args| (|List| (|TeXTree|)))))
-          (|name| (|String|))
-          (|tok|
+         ((|tok|
            (|Union| (|:| |text| (|String|)) (|:| |lbrace| #1#)
                     (|:| |rbrace| #2#) (|:| |tmath| #3#) (|:| |dmath| #4#)
                     (|:| |macro_name| (|Record| (|:| |name| (|String|))))
-                    (|:| |eos| #5#) (|:| |error| #6#))))
+                    (|:| |eos| #5#) (|:| |error| #6#)))
+          (|name| (|String|))
+          (|cr|
+           (|Record| (|:| |name| (|String|))
+                     (|:| |args| (|List| (|TeXTree|)))))
+          (#7=#:G83 NIL) (|lv| (|List| (|TeXTree|))))
          (SEQ
           (EXIT
            (SEQ (LETT |lv| NIL)
@@ -250,7 +250,7 @@
                                      (EXIT
                                       (PROGN
                                        (LETT #7# (NREVERSE |lv|))
-                                       (GO #8=#:G72))))
+                                       (GO #8=#:G82))))
                                     ((OR
                                       (SPADCALL (QVELT |sr| 2) (CONS 1 "tmath")
                                                 (QREFELT % 18))
@@ -286,8 +286,8 @@
           (|Record| (|:| |name| (|String|))
                     (|:| |args| (|List| (|TeXTree|))))))
         (SPROG
-         ((|args| (|List| (|TeXTree|))) (#1=#:G84 NIL) (|i| NIL)
-          (|n| (|Integer|)))
+         ((|n| (|Integer|)) (|i| NIL) (#1=#:G94 NIL)
+          (|args| (|List| (|TeXTree|))))
          (SEQ
           (LETT |n|
                 (COND ((SPADCALL |name| (QREFELT % 24) (QREFELT % 28)) 0)
@@ -309,25 +309,24 @@
 
 (SDEFUN |TEXPARSE;parse;STxt;7| ((|s| (|String|)) (% (|TeXTree|)))
         (SPROG
-         ((|tok|
-           (|Union| (|:| |text| (|String|)) (|:| |lbrace| #1="lbrace")
-                    (|:| |rbrace| #2="rbrace") (|:| |tmath| #3="tmath")
-                    (|:| |dmath| #4="dmath")
-                    (|:| |macro_name| (|Record| (|:| |name| (|String|))))
-                    (|:| |eos| #5="eos") (|:| |error| #6="error")))
-          (|lv| (|List| (|TeXTree|)))
-          (|sr|
+         ((|sr|
            (|Record|
             (|:| |st|
                  (|Record| (|:| |str| (|String|)) (|:| |pos| (|Integer|))))
             (|:| |n_tok| (|SingleInteger|))
             (|:| |tex_mode| (|Union| "normal" "tmath" "dmath"))
             (|:| |next_tok|
-                 (|Union| (|:| |text| (|String|)) (|:| |lbrace| #1#)
-                          (|:| |rbrace| #2#) (|:| |tmath| #3#)
-                          (|:| |dmath| #4#)
+                 (|Union| (|:| |text| (|String|)) (|:| |lbrace| #1="lbrace")
+                          (|:| |rbrace| #2="rbrace") (|:| |tmath| #3="tmath")
+                          (|:| |dmath| #4="dmath")
                           (|:| |macro_name| (|Record| (|:| |name| (|String|))))
-                          (|:| |eos| #5#) (|:| |error| #6#))))))
+                          (|:| |eos| #5="eos") (|:| |error| #6="error")))))
+          (|lv| (|List| (|TeXTree|)))
+          (|tok|
+           (|Union| (|:| |text| (|String|)) (|:| |lbrace| #1#)
+                    (|:| |rbrace| #2#) (|:| |tmath| #3#) (|:| |dmath| #4#)
+                    (|:| |macro_name| (|Record| (|:| |name| (|String|))))
+                    (|:| |eos| #5#) (|:| |error| #6#))))
          (SEQ
           (LETT |sr| (VECTOR (CONS |s| 1) 0 (CONS 0 "normal") (CONS 6 #5#)))
           (LETT |lv| (|TEXPARSE;parse_items| |sr| %))
@@ -341,8 +340,8 @@
 
 (SDEFUN |TEXPARSE;parse;TfTxt;8| ((|f| (|TextFile|)) (% (|TeXTree|)))
         (SPROG
-         ((|s| (|String|)) (|ls| (|List| (|String|))) (#1=#:G103 NIL)
-          (|su| (|Union| (|String|) "failed")) (|nls| (|String|)))
+         ((|nls| (|String|)) (|su| (|Union| (|String|) "failed"))
+          (#1=#:G117 NIL) (|ls| (|List| (|String|))) (|s| (|String|)))
          (SEQ (LETT |ls| NIL)
               (LETT |nls| (|make_string_code| 1 (SPADCALL (QREFELT % 35))))
               (SEQ
@@ -352,7 +351,7 @@
                           (EXIT
                            (COND
                             ((QEQCAR |su| 1)
-                             (PROGN (LETT #1# |$NoValue|) (GO #2=#:G100)))
+                             (PROGN (LETT #1# |$NoValue|) (GO #2=#:G114)))
                             ('T
                              (SEQ (LETT |ls| (CONS (QCDR |su|) |ls|))
                                   (EXIT (LETT |ls| (CONS |nls| |ls|))))))))
@@ -393,7 +392,7 @@
 
 (DEFUN |TexParser| ()
   (SPROG NIL
-         (PROG (#1=#:G105)
+         (PROG (#1=#:G119)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|TexParser|))

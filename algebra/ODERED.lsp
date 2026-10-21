@@ -4,8 +4,8 @@
 
 (SDEFUN |ODERED;get_sys| ((|l| (LO)) (% (|Matrix| L)))
         (SPROG
-         ((|mdi| (|Matrix| L)) (|sys| #1=(|Matrix| L)) (#2=#:G12 NIL) (|i| NIL)
-          (#3=#:G10 NIL) (#4=#:G11 NIL) (|j| NIL) (|md| #1#))
+         ((|md| #1=(|Matrix| L)) (|j| NIL) (#2=#:G13 NIL) (#3=#:G12 NIL)
+          (|i| NIL) (#4=#:G14 NIL) (|sys| #1#) (|mdi| (|Matrix| L)))
          (SEQ
           (LETT |md|
                 (|ODERED;matF2L|
@@ -17,10 +17,10 @@
                   (QREFELT % 24))
                  %))
           (SEQ (LETT |j| (PROGN |md| 1))
-               (LETT #4# (SPADCALL |md| (QREFELT % 27)))
+               (LETT #2# (SPADCALL |md| (QREFELT % 27)))
                (LETT |i| (PROGN |md| 1))
                (LETT #3# (SPADCALL |md| (QREFELT % 26))) G190
-               (COND ((OR (> |i| #3#) (> |j| #4#)) (GO G191)))
+               (COND ((OR (> |i| #3#) (> |j| #2#)) (GO G191)))
                (SEQ
                 (EXIT
                  (SPADCALL |md| |i| |j|
@@ -34,8 +34,8 @@
           (LETT |sys|
                 (|ODERED;matF2L|
                  (SPADCALL (SPADCALL |l| 0 (QREFELT % 35)) (QREFELT % 36)) %))
-          (SEQ (LETT |i| 1) (LETT #2# (SPADCALL |l| (QREFELT % 37))) G190
-               (COND ((|greater_SI| |i| #2#) (GO G191)))
+          (SEQ (LETT |i| 1) (LETT #4# (SPADCALL |l| (QREFELT % 37))) G190
+               (COND ((|greater_SI| |i| #4#) (GO G191)))
                (SEQ
                 (LETT |sys|
                       (SPADCALL |sys|
@@ -66,28 +66,28 @@
          (%
           (|Record| (|:| |mat| (|Matrix| L))
                     (|:| |vecs| (|List| (|Vector| F))))))
-        (SPROG ((#1=#:G22 NIL) (|g| NIL) (#2=#:G21 NIL))
+        (SPROG ((#1=#:G23 NIL) (|g| NIL) (#2=#:G24 NIL))
                (SEQ
                 (CONS (|ODERED;get_sys| |l| %)
                       (PROGN
-                       (LETT #2# NIL)
-                       (SEQ (LETT |g| NIL) (LETT #1# |lg|) G190
+                       (LETT #1# NIL)
+                       (SEQ (LETT |g| NIL) (LETT #2# |lg|) G190
                             (COND
-                             ((OR (ATOM #1#) (PROGN (LETT |g| (CAR #1#)) NIL))
+                             ((OR (ATOM #2#) (PROGN (LETT |g| (CAR #2#)) NIL))
                               (GO G191)))
                             (SEQ
                              (EXIT
-                              (LETT #2#
-                                    (CONS (SPADCALL |g| (QREFELT % 41)) #2#))))
-                            (LETT #1# (CDR #1#)) (GO G190) G191
-                            (EXIT (NREVERSE #2#)))))))) 
+                              (LETT #1#
+                                    (CONS (SPADCALL |g| (QREFELT % 41)) #1#))))
+                            (LETT #2# (CDR #2#)) (GO G190) G191
+                            (EXIT (NREVERSE #1#)))))))) 
 
 (DECLAIM (NOTINLINE |ReduceLODE;|)) 
 
 (DEFUN |ReduceLODE;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -110,9 +110,9 @@
     (QSETREFV % 12 (SPADCALL (QREFELT % 11)))
     %))) 
 
-(DEFUN |ReduceLODE| (&REST #1=#:G23)
+(DEFUN |ReduceLODE| (&REST #1=#:G25)
   (SPROG NIL
-         (PROG (#2=#:G24)
+         (PROG (#2=#:G26)
            (RETURN
             (COND
              ((LETT #2#
@@ -137,11 +137,11 @@
               (9 . |map|) (|Vector| %) (15 . |basis|) (19 . |elt|)
               (|Mapping| 6 6) (25 . |derivationCoordinates|) (31 . |transpose|)
               (|Integer|) (36 . |maxRowIndex|) (41 . |maxColIndex|)
-              (46 . |elt|) (53 . +) (59 . |setelt!|) (67 . |copy|)
-              (72 . |Zero|) (76 . |Zero|) (|NonNegativeInteger|)
-              (80 . |coefficient|) (86 . |regularRepresentation|)
-              (91 . |degree|) (96 . *) (102 . +) (|Vector| 6)
-              (108 . |coordinates|) (|Record| (|:| |mat| 14) (|:| |vec| 40))
+              (46 . |elt|) (53 . +) (59 . |setelt!|) (67 . |copy|) (72 . |0|)
+              (76 . |0|) (|NonNegativeInteger|) (80 . |coefficient|)
+              (86 . |regularRepresentation|) (91 . |degree|) (96 . *) (102 . +)
+              (|Vector| 6) (108 . |coordinates|)
+              (|Record| (|:| |mat| 14) (|:| |vec| 40))
               |ODERED;reduceLODE;LOAR;3|
               (|Record| (|:| |mat| 14) (|:| |vecs| (|List| 40))) (|List| 9)
               |ODERED;reduceLODE;LOLR;4|)

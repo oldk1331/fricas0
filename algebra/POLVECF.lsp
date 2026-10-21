@@ -1,7 +1,7 @@
 
 (SDEFUN |POLVECF;degree;PaI;1| ((|v| (|PrimitiveArray| K)) (% (|Integer|)))
         (SPROG
-         ((#1=#:G8 NIL) (#2=#:G9 NIL) (|i| NIL) (|n| (|NonNegativeInteger|)))
+         ((|n| (|NonNegativeInteger|)) (|i| NIL) (#1=#:G9 NIL) (#2=#:G8 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |n| (QVSIZE |v|))
@@ -15,18 +15,18 @@
                             (SPADCALL (QAREF1 |v| |i|) (|spadConstant| % 8)
                                       (QREFELT % 10)))
                            (PROGN
-                            (LETT #1# (PROGN (LETT #2# |i|) (GO #3=#:G7)))
+                            (LETT #2# (PROGN (LETT #1# |i|) (GO #3=#:G7)))
                             (GO #4=#:G5))))))
                        (LETT |i| (+ |i| -1)) (GO G190) G191 (EXIT NIL)))
-                 #4# (EXIT #1#))
+                 #4# (EXIT #2#))
                 (EXIT -1)))
-          #3# (EXIT #2#)))) 
+          #3# (EXIT #1#)))) 
 
 (SDEFUN |POLVECF;to_mod_pa;SupPa;2|
         ((|s| (|SparseUnivariatePolynomial| K)) (% (|PrimitiveArray| K)))
         (SPROG
-         ((|n| (|NonNegativeInteger|)) (|ncoeffs| (|PrimitiveArray| K))
-          (|n0| (|SingleInteger|)))
+         ((|n0| (|SingleInteger|)) (|ncoeffs| (|PrimitiveArray| K))
+          (|n| (|NonNegativeInteger|)))
          (SEQ
           (COND
            ((SPADCALL |s| (QREFELT % 15)) (MAKEARR1 1 (|spadConstant| % 8)))
@@ -47,8 +47,8 @@
 (SDEFUN |POLVECF;pa_to_sup;PaSup;3|
         ((|v| (|PrimitiveArray| K)) (% (|SparseUnivariatePolynomial| K)))
         (SPROG
-         ((|res| (|SparseUnivariatePolynomial| K)) (#1=#:G21 NIL) (|i| NIL)
-          (|n| (|NonNegativeInteger|)))
+         ((|n| (|NonNegativeInteger|)) (|i| NIL) (#1=#:G21 NIL)
+          (|res| (|SparseUnivariatePolynomial| K)))
          (SEQ (LETT |n| (QVSIZE |v|)) (LETT |res| (|spadConstant| % 22))
               (SEQ (LETT |i| 0) (LETT #1# (- |n| 1)) G190
                    (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -64,7 +64,7 @@
 (DECLAIM (NOTINLINE |VectorPolynomialOperationsF;|)) 
 
 (DEFUN |VectorPolynomialOperationsF;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|VectorPolynomialOperationsF| DV$1))
@@ -99,13 +99,13 @@
 
 (MAKEPROP '|VectorPolynomialOperationsF| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |One|) (4 . |Zero|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |1|) (4 . |0|)
               (|Boolean|) (8 . =) (|Integer|) (|PrimitiveArray| 6)
               |POLVECF;degree;PaI;1| (|SparseUnivariatePolynomial| 6)
-              (14 . |zero?|) (19 . |One|) (|NonNegativeInteger|)
-              (23 . |degree|) (28 . |leadingCoefficient|) (33 . |reductum|)
-              |POLVECF;to_mod_pa;SupPa;2| (38 . |Zero|) (42 . |monomial|)
-              (48 . +) |POLVECF;pa_to_sup;PaSup;3|)
+              (14 . |zero?|) (19 . |1|) (|NonNegativeInteger|) (23 . |degree|)
+              (28 . |leadingCoefficient|) (33 . |reductum|)
+              |POLVECF;to_mod_pa;SupPa;2| (38 . |0|) (42 . |monomial|) (48 . +)
+              |POLVECF;pa_to_sup;PaSup;3|)
            '#(|to_mod_pa| 54 |pa_to_sup| 59 |degree| 64) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

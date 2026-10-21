@@ -38,9 +38,9 @@
 
 (SDEFUN |BTCAT-;distance1| ((|t1| (A)) (|t2| (A)) (% #1=(|Integer|)))
         (SPROG
-         ((#2=#:G31 NIL) (#3=#:G30 #1#) (#4=#:G32 #1#) (#5=#:G38 NIL)
-          (#6=#:G0 NIL) (|u| (|List| #1#)) (|n| #1#) (#7=#:G37 NIL) (|t| NIL)
-          (#8=#:G36 NIL))
+         ((#2=#:G37 NIL) (|t| NIL) (#3=#:G38 NIL) (|n| #1#) (|u| (|List| #1#))
+          (#4=#:G0 NIL) (#5=#:G39 NIL) (#6=#:G33 #1#) (#7=#:G31 #1#)
+          (#8=#:G32 NIL))
          (SEQ
           (COND ((SPADCALL |t1| |t2| (QREFELT % 28)) 0)
                 ((SPADCALL |t2| (QREFELT % 9)) -1)
@@ -48,12 +48,12 @@
                  (SEQ
                   (LETT |u|
                         (PROGN
-                         (LETT #8# NIL)
+                         (LETT #2# NIL)
                          (SEQ (LETT |t| NIL)
-                              (LETT #7# (SPADCALL |t2| (QREFELT % 30))) G190
+                              (LETT #3# (SPADCALL |t2| (QREFELT % 30))) G190
                               (COND
-                               ((OR (ATOM #7#)
-                                    (PROGN (LETT |t| (CAR #7#)) NIL))
+                               ((OR (ATOM #3#)
+                                    (PROGN (LETT |t| (CAR #3#)) NIL))
                                 (GO G191)))
                               (SEQ
                                (EXIT
@@ -61,31 +61,31 @@
                                  ((>=
                                    (LETT |n| (|BTCAT-;distance1| |t1| |t| %))
                                    0)
-                                  (LETT #8# (CONS |n| #8#))))))
-                              (LETT #7# (CDR #7#)) (GO G190) G191
-                              (EXIT (NREVERSE #8#)))))
+                                  (LETT #2# (CONS |n| #2#))))))
+                              (LETT #3# (CDR #3#)) (GO G190) G191
+                              (EXIT (NREVERSE #2#)))))
                   (EXIT
                    (COND
                     ((> (LENGTH |u|) 0)
                      (+ 1
                         (PROGN
-                         (LETT #2# NIL)
-                         (SEQ (LETT #6# NIL) (LETT #5# |u|) G190
+                         (LETT #8# NIL)
+                         (SEQ (LETT #4# NIL) (LETT #5# |u|) G190
                               (COND
                                ((OR (ATOM #5#)
-                                    (PROGN (LETT #6# (CAR #5#)) NIL))
+                                    (PROGN (LETT #4# (CAR #5#)) NIL))
                                 (GO G191)))
                               (SEQ
                                (EXIT
                                 (PROGN
-                                 (LETT #4# #6#)
-                                 (COND (#2# (LETT #3# (MIN #3# #4#)))
+                                 (LETT #6# #4#)
+                                 (COND (#8# (LETT #7# (MIN #7# #6#)))
                                        ('T
                                         (PROGN
-                                         (LETT #3# #4#)
-                                         (LETT #2# 'T)))))))
+                                         (LETT #7# #6#)
+                                         (LETT #8# 'T)))))))
                               (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
-                         (COND (#2# #3#) (#9# (|IdentityError| '|min|))))))
+                         (COND (#8# #7#) (#9# (|IdentityError| '|min|))))))
                     (#9# -1))))))))) 
 
 (SDEFUN |BTCAT-;distance;2AI;6| ((|t1| (A)) (|t2| (A)) (% (|Integer|)))
@@ -114,7 +114,7 @@
 (DECLAIM (NOTINLINE |BinaryTreeCategory&;|)) 
 
 (DEFUN |BinaryTreeCategory&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

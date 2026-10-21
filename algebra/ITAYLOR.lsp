@@ -1,41 +1,41 @@
 
-(PUT '|ITAYLOR;stream| '|SPADreplace| '(XLAM (|x|) |x|)) 
+(MAKEPROP '|ITAYLOR;stream| '|SPADreplace| '(XLAM (|x|) |x|)) 
 
 (SDEFUN |ITAYLOR;stream| ((|x| (%)) (% (|Stream| |Coef|))) |x|) 
 
-(PUT '|ITAYLOR;series;S%;2| '|SPADreplace| '(XLAM (|st|) |st|)) 
+(MAKEPROP '|ITAYLOR;series;S%;2| '|SPADreplace| '(XLAM (|st|) |st|)) 
 
 (SDEFUN |ITAYLOR;series;S%;2| ((|st| (|Stream| |Coef|)) (% (%))) |st|) 
 
-(SDEFUN |ITAYLOR;Zero;%;3| ((% (%)))
+(SDEFUN |ITAYLOR;0;%;3| ((% (%)))
         (SPADCALL (|spadConstant| % 11) (QREFELT % 13))) 
 
-(SDEFUN |ITAYLOR;One;%;4| ((% (%)))
+(SDEFUN |ITAYLOR;1;%;4| ((% (%)))
         (SPADCALL (|spadConstant| % 15) (QREFELT % 13))) 
 
 (SDEFUN |ITAYLOR;=;2%B;5| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
         (SPROG
-         ((|st| (|Stream| |Coef|)) (#1=#:G16 NIL) (#2=#:G17 NIL) (|i| NIL)
-          (|n| (|Integer|)))
+         ((|n| (|Integer|)) (|i| NIL) (#1=#:G17 NIL) (#2=#:G16 NIL)
+          (|st| (|Stream| |Coef|)))
          (SEQ
           (EXIT
            (SEQ
             (LETT |st| (|ITAYLOR;stream| (SPADCALL |x| |y| (QREFELT % 16)) %))
             (LETT |n| |$streamCount|)
-            (SEQ (LETT |i| 0) (LETT #2# |n|) G190
-                 (COND ((|greater_SI| |i| #2#) (GO G191)))
+            (SEQ (LETT |i| 0) (LETT #1# |n|) G190
+                 (COND ((|greater_SI| |i| #1#) (GO G191)))
                  (SEQ
                   (EXIT
                    (COND
                     ((SPADCALL |st| (QREFELT % 18))
-                     (PROGN (LETT #1# 'T) (GO #3=#:G15)))
+                     (PROGN (LETT #2# 'T) (GO #3=#:G15)))
                     ((SPADCALL (SPADCALL |st| (QREFELT % 19))
                                (|spadConstant| % 11) (QREFELT % 20))
-                     (PROGN (LETT #1# NIL) (GO #3#)))
+                     (PROGN (LETT #2# NIL) (GO #3#)))
                     ('T (LETT |st| (SPADCALL |st| (QREFELT % 21)))))))
                  (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
             (EXIT (SPADCALL |st| (QREFELT % 18)))))
-          #3# (EXIT #1#)))) 
+          #3# (EXIT #2#)))) 
 
 (SDEFUN |ITAYLOR;coefficients;%S;6| ((|x| (%)) (% (|Stream| |Coef|)))
         (|ITAYLOR;stream| |x| %)) 
@@ -88,7 +88,7 @@
                        ('T (CONS 0 (SPADCALL (QCDR |quot|) (QREFELT % 9))))))))) 
 
 (SDEFUN |ITAYLOR;^;%Nni%;17| ((|x| (%)) (|n| (|NonNegativeInteger|)) (% (%)))
-        (SPROG ((#1=#:G47 NIL))
+        (SPROG ((#1=#:G50 NIL))
                (COND ((EQL |n| 0) (|spadConstant| % 14))
                      ('T
                       (SPADCALL |x|
@@ -102,7 +102,7 @@
 (SDEFUN |ITAYLOR;characteristic;Nni;18| ((% (|NonNegativeInteger|)))
         (SPADCALL (QREFELT % 50))) 
 
-(PUT '|ITAYLOR;pole?;%B;19| '|SPADreplace| '(XLAM (|x|) NIL)) 
+(MAKEPROP '|ITAYLOR;pole?;%B;19| '|SPADreplace| '(XLAM (|x|) NIL)) 
 
 (SDEFUN |ITAYLOR;pole?;%B;19| ((|x| (%)) (% (|Boolean|))) NIL) 
 
@@ -137,7 +137,7 @@
 (DECLAIM (NOTINLINE |InnerTaylorSeries;|)) 
 
 (DEFUN |InnerTaylorSeries;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|InnerTaylorSeries| DV$1))
@@ -161,9 +161,9 @@
                       (CONS (|dispatchFunction| |ITAYLOR;exquo;2%U;16|) %))))
           %))) 
 
-(DEFUN |InnerTaylorSeries| (#1=#:G60)
+(DEFUN |InnerTaylorSeries| (#1=#:G63)
   (SPROG NIL
-         (PROG (#2=#:G61)
+         (PROG (#2=#:G64)
            (RETURN
             (COND
              ((LETT #2#
@@ -182,12 +182,10 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) '|Rep| (|Stream| 6)
               |ITAYLOR;series;S%;2|
-              (CONS IDENTITY
-                    (FUNCALL (|dispatchFunction| |ITAYLOR;Zero;%;3|) %))
-              (0 . |Zero|) (|StreamTaylorSeriesOperations| 6) (4 . |coerce|)
-              (CONS IDENTITY
-                    (FUNCALL (|dispatchFunction| |ITAYLOR;One;%;4|) %))
-              (9 . |One|) |ITAYLOR;-;3%;8| (|Boolean|) (13 . |empty?|)
+              (CONS IDENTITY (FUNCALL (|dispatchFunction| |ITAYLOR;0;%;3|) %))
+              (0 . |0|) (|StreamTaylorSeriesOperations| 6) (4 . |coerce|)
+              (CONS IDENTITY (FUNCALL (|dispatchFunction| |ITAYLOR;1;%;4|) %))
+              (9 . |1|) |ITAYLOR;-;3%;8| (|Boolean|) (13 . |empty?|)
               (18 . |frst|) (23 . ~=) (29 . |rst|) |ITAYLOR;=;2%B;5|
               |ITAYLOR;coefficients;%S;6| (34 . +) |ITAYLOR;+;3%;7| (40 . -)
               (46 . *) |ITAYLOR;*;3%;9| (52 . -) |ITAYLOR;-;2%;10| (|Integer|)
@@ -208,20 +206,20 @@
               |order| 180 |opposite?| 191 |one?| 197 |leftRecip| 202
               |leftPower| 207 |latex| 219 |exquo| 224 |commutator| 230 |coerce|
               236 |coefficients| 251 |characteristic| 256 |associator| 260
-              |associates?| 267 |antiCommutator| 273 |annihilate?| 279 ^ 285
-              |Zero| 297 |One| 301 = 305 - 311 + 322 * 328)
+              |associates?| 267 |antiCommutator| 273 |annihilate?| 279 ^ 285 =
+              297 |1| 303 |0| 307 - 311 + 322 * 328)
            'NIL
            (CONS
             (|makeByteWordVec2| 1
                                 '(1 1 1 1 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 1 0 1 1 0 0 0))
+                                  0 0 0 1 0 1 1 0 0 0))
             (CONS
              '#(NIL NIL |EntireRing&| |Algebra&| NIL |NonAssociativeAlgebra&|
                 NIL |Rng&| |Module&| NIL NIL |NonAssociativeRing&| NIL NIL
                 |NonAssociativeRng&| |AbelianGroup&| NIL NIL NIL
                 |AbelianMonoid&| |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL
-                |AbelianSemiGroup&| |Magma&| NIL |SetCategory&| NIL NIL NIL
-                |BasicType&| NIL)
+                |AbelianSemiGroup&| |SetWithZero&| |Magma&| NIL |SetCategory&|
+                NIL NIL NIL |BasicType&| NIL)
              (CONS
               '#((|IntegralDomain|) (|CommutativeRing|) (|EntireRing|)
                  (|Algebra| $$) (|Ring|) (|NonAssociativeAlgebra| $$)
@@ -230,10 +228,10 @@
                  (|RightModule| $$) (|NonAssociativeRng|) (|AbelianGroup|)
                  (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
                  (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
-                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|) (|Magma|)
-                 (|CommutativeStar|) (|SetCategory|) (|noZeroDivisors|)
-                 (|TwoSidedRecip|) (|CoercibleTo| 56) (|BasicType|)
-                 (|unitsKnown|))
+                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|)
+                 (|SetWithZero|) (|Magma|) (|CommutativeStar|) (|SetCategory|)
+                 (|noZeroDivisors|) (|TwoSidedRecip|) (|CoercibleTo| 56)
+                 (|BasicType|) (|unitsKnown|))
               (|makeByteWordVec2| 58
                                   '(0 6 0 11 1 12 8 6 13 0 6 0 15 1 7 17 0 18 1
                                     7 6 0 19 2 6 17 0 0 20 1 8 0 0 21 2 12 8 8
@@ -250,8 +248,8 @@
                                     0 44 2 0 0 0 0 1 1 0 56 0 1 1 0 0 31 1 1 1
                                     0 0 1 1 0 8 0 23 0 0 48 51 3 0 0 0 0 0 1 2
                                     1 17 0 0 1 2 0 0 0 0 1 2 0 17 0 0 1 2 0 0 0
-                                    45 1 2 0 0 0 48 49 0 0 0 10 0 0 0 14 2 0 17
-                                    0 0 22 1 0 0 0 30 2 0 0 0 0 16 2 0 0 0 0 25
+                                    45 1 2 0 0 0 48 49 2 0 17 0 0 22 0 0 0 14 0
+                                    0 0 10 1 0 0 0 30 2 0 0 0 0 16 2 0 0 0 0 25
                                     2 0 0 45 0 1 2 0 0 0 0 28 2 0 0 31 0 34 2 0
                                     0 48 0 1 2 0 0 0 6 38 2 0 0 6 0 37 2 0 0 0
                                     31 36)))))

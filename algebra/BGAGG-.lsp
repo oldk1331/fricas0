@@ -1,6 +1,6 @@
 
 (SDEFUN |BGAGG-;construct;LA;1| ((|l| (|List| S)) (% (A)))
-        (SPROG ((|x| (A)) (#1=#:G11 NIL) (|s| NIL))
+        (SPROG ((|s| NIL) (#1=#:G11 NIL) (|x| (A)))
                (SEQ (LETT |x| (SPADCALL (QREFELT % 8)))
                     (SEQ (LETT |s| NIL) (LETT #1# |l|) G190
                          (COND
@@ -14,7 +14,7 @@
 (DECLAIM (NOTINLINE |BagAggregate&;|)) 
 
 (DEFUN |BagAggregate&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

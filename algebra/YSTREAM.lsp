@@ -1,7 +1,7 @@
 
 (SDEFUN |YSTREAM;Y;MS;1|
         ((|f| (|Mapping| #1=(|Stream| A) (|Stream| A))) (% (|Stream| A)))
-        (SPROG ((|j| #1#) (|y| (|Stream| A)))
+        (SPROG ((|y| (|Stream| A)) (|j| #1#))
                (SEQ (LETT |y| (CONS (QREFELT % 7) 0))
                     (LETT |j| (SPADCALL |y| |f|))
                     (RPLACA |y| (SPADCALL |j| (QREFELT % 9)))
@@ -11,34 +11,34 @@
         ((|g| (|Mapping| #1=(|List| (|Stream| A)) (|List| (|Stream| A))))
          (|n| (|Integer|)) (% (|List| (|Stream| A))))
         (SPROG
-         ((#2=#:G13 NIL) (|xi| NIL) (#3=#:G14 NIL) (|ji| NIL) (|j| #1#)
-          (|x| (|List| (|Stream| A))) (#4=#:G12 NIL) (|i| NIL) (#5=#:G11 NIL))
+         ((#2=#:G11 NIL) (|i| NIL) (#3=#:G12 NIL) (|x| (|List| (|Stream| A)))
+          (|j| #1#) (|ji| NIL) (#4=#:G14 NIL) (|xi| NIL) (#5=#:G13 NIL))
          (SEQ
           (LETT |x|
                 (PROGN
-                 (LETT #5# NIL)
-                 (SEQ (LETT |i| 1) (LETT #4# |n|) G190
-                      (COND ((|greater_SI| |i| #4#) (GO G191)))
-                      (SEQ (EXIT (LETT #5# (CONS (CONS (QREFELT % 7) 0) #5#))))
+                 (LETT #2# NIL)
+                 (SEQ (LETT |i| 1) (LETT #3# |n|) G190
+                      (COND ((|greater_SI| |i| #3#) (GO G191)))
+                      (SEQ (EXIT (LETT #2# (CONS (CONS (QREFELT % 7) 0) #2#))))
                       (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                      (EXIT (NREVERSE #5#)))))
+                      (EXIT (NREVERSE #2#)))))
           (LETT |j| (SPADCALL |x| |g|))
-          (SEQ (LETT |ji| NIL) (LETT #3# |j|) (LETT |xi| NIL) (LETT #2# |x|)
+          (SEQ (LETT |ji| NIL) (LETT #4# |j|) (LETT |xi| NIL) (LETT #5# |x|)
                G190
                (COND
-                ((OR (ATOM #2#) (PROGN (LETT |xi| (CAR #2#)) NIL) (ATOM #3#)
-                     (PROGN (LETT |ji| (CAR #3#)) NIL))
+                ((OR (ATOM #5#) (PROGN (LETT |xi| (CAR #5#)) NIL) (ATOM #4#)
+                     (PROGN (LETT |ji| (CAR #4#)) NIL))
                  (GO G191)))
                (SEQ (RPLACA |xi| (SPADCALL |ji| (QREFELT % 9)))
                     (EXIT (RPLACD |xi| (SPADCALL |ji| (QREFELT % 10)))))
-               (LETT #2# (PROG1 (CDR #2#) (LETT #3# (CDR #3#)))) (GO G190) G191
+               (LETT #5# (PROG1 (CDR #5#) (LETT #4# (CDR #4#)))) (GO G190) G191
                (EXIT NIL))
           (EXIT |x|)))) 
 
 (DECLAIM (NOTINLINE |ParadoxicalCombinatorsForStreams;|)) 
 
 (DEFUN |ParadoxicalCombinatorsForStreams;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|ParadoxicalCombinatorsForStreams| DV$1))

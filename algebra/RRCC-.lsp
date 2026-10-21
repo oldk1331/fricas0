@@ -25,11 +25,11 @@
         ((|toInv| (|ThePols|)) (|rootChar| (S))
          (% (|Union| |ThePols| #1="failed")))
         (SPROG
-         ((|d|
+         ((|res| (|Union| |TheField| "failed")) (#2=#:G23 NIL)
+          (|defPol| (|ThePols|))
+          (|d|
            (|Record| (|:| |coef| (|List| |ThePols|))
-                     (|:| |generator| |ThePols|)))
-          (|defPol| (|ThePols|)) (#2=#:G23 NIL)
-          (|res| (|Union| |TheField| "failed")))
+                     (|:| |generator| |ThePols|))))
          (SEQ
           (COND
            ((EQL (SPADCALL |toInv| (QREFELT % 23)) 0)
@@ -71,7 +71,7 @@
 (DECLAIM (NOTINLINE |RealRootCharacterizationCategory&;|)) 
 
 (DEFUN |RealRootCharacterizationCategory&| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

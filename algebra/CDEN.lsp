@@ -69,7 +69,7 @@
 (DECLAIM (NOTINLINE |CommonDenominator;|)) 
 
 (DEFUN |CommonDenominator;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -97,9 +97,9 @@
                             %))))
           %))) 
 
-(DEFUN |CommonDenominator| (&REST #1=#:G17)
+(DEFUN |CommonDenominator| (&REST #1=#:G19)
   (SPROG NIL
-         (PROG (#2=#:G18)
+         (PROG (#2=#:G20)
            (RETURN
             (COND
              ((LETT #2#
@@ -124,7 +124,7 @@
               |CDEN;clearDenominator;2A;1|
               (|Record| (|:| |num| 8) (|:| |den| 6))
               |CDEN;splitDenominator;AR;2| (27 . |lcm|) (33 . |denom|)
-              (38 . |One|) (|Mapping| 7 7 7) (42 . |reduce|) (49 . *))
+              (38 . |1|) (|Mapping| 7 7 7) (42 . |reduce|) (49 . *))
            '#(|splitDenominator| 55 |commonDenominator| 60 |clearDenominator|
               65)
            'NIL

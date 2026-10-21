@@ -5,12 +5,12 @@
           (|Record| (|:| LU (|Matrix| D)) (|:| |Perm| (|Vector| (|Integer|)))
                     (|:| |Pivots| (|List| D)))))
         (SPROG
-         ((#1=#:G35 NIL) (|k| NIL) (|d| (D)) (|Pivs| (|List| D))
-          (|i0| (|Integer|)) (|s| (D)) (#2=#:G34 NIL) (#3=#:G33 NIL) (|i| NIL)
-          (#4=#:G32 NIL) (#5=#:G31 NIL) (#6=#:G30 NIL) (|j| NIL)
-          (|PermV| (|Vector| (|Integer|))) (#7=#:G7 NIL) (|maxC| (|Integer|))
-          (|minC| (|Integer|)) (|maxR| (|Integer|)) (|minR| (|Integer|))
-          (A (|Matrix| D)))
+         ((A (|Matrix| D)) (|minR| (|Integer|)) (|maxR| (|Integer|))
+          (|minC| (|Integer|)) (|maxC| (|Integer|)) (#1=#:G7 NIL)
+          (|PermV| (|Vector| (|Integer|))) (|j| NIL) (#2=#:G30 NIL)
+          (#3=#:G31 NIL) (#4=#:G32 NIL) (|i| NIL) (#5=#:G33 NIL) (#6=#:G34 NIL)
+          (|s| (D)) (|i0| (|Integer|)) (|Pivs| (|List| D)) (|d| (D)) (|k| NIL)
+          (#7=#:G35 NIL))
          (SEQ (LETT A (SPADCALL AA (QREFELT % 8))) (LETT |minR| (PROGN A 1))
               (LETT |maxR| (SPADCALL A (QREFELT % 10)))
               (LETT |minC| (PROGN A 1))
@@ -23,16 +23,16 @@
                  (SEQ
                   (LETT |PermV|
                         (MAKEARR1
-                         (PROG1 (LETT #7# (+ (- |maxR| |minR|) 1))
-                           (|check_subtype2| (>= #7# 0) '(|NonNegativeInteger|)
-                                             '(|Integer|) #7#))
+                         (PROG1 (LETT #1# (+ (- |maxR| |minR|) 1))
+                           (|check_subtype2| (>= #1# 0) '(|NonNegativeInteger|)
+                                             '(|Integer|) #1#))
                          0))
                   (LETT |Pivs| NIL)
-                  (SEQ (LETT |j| |minC|) (LETT #6# |maxC|) G190
-                       (COND ((> |j| #6#) (GO G191)))
+                  (SEQ (LETT |j| |minC|) (LETT #2# |maxC|) G190
+                       (COND ((> |j| #2#) (GO G191)))
                        (SEQ
-                        (SEQ (LETT |i| |minR|) (LETT #5# (- |j| 1)) G190
-                             (COND ((> |i| #5#) (GO G191)))
+                        (SEQ (LETT |i| |minR|) (LETT #3# (- |j| 1)) G190
+                             (COND ((> |i| #3#) (GO G191)))
                              (SEQ (LETT |s| (QAREF2O A |i| |j| 1 1))
                                   (SEQ (LETT |k| |minR|) (LETT #4# (- |i| 1))
                                        G190 (COND ((> |k| #4#) (GO G191)))
@@ -52,11 +52,11 @@
                                   (EXIT (QSETAREF2O A |i| |j| |s| 1 1)))
                              (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL))
                         (LETT |i0| -1)
-                        (SEQ (LETT |i| |j|) (LETT #3# |maxR|) G190
-                             (COND ((> |i| #3#) (GO G191)))
+                        (SEQ (LETT |i| |j|) (LETT #5# |maxR|) G190
+                             (COND ((> |i| #5#) (GO G191)))
                              (SEQ (LETT |s| (QAREF2O A |i| |j| 1 1))
-                                  (SEQ (LETT |k| |minC|) (LETT #2# (- |j| 1))
-                                       G190 (COND ((> |k| #2#) (GO G191)))
+                                  (SEQ (LETT |k| |minC|) (LETT #6# (- |j| 1))
+                                       G190 (COND ((> |k| #6#) (GO G191)))
                                        (SEQ
                                         (EXIT
                                          (LETT |s|
@@ -95,8 +95,8 @@
                                                 (QAREF2O A |j| |j| 1 1)
                                                 (QREFELT % 20)))
                                 (EXIT
-                                 (SEQ (LETT |k| (+ |j| 1)) (LETT #1# |maxR|)
-                                      G190 (COND ((> |k| #1#) (GO G191)))
+                                 (SEQ (LETT |k| (+ |j| 1)) (LETT #7# |maxR|)
+                                      G190 (COND ((> |k| #7#) (GO G191)))
                                       (SEQ
                                        (EXIT
                                         (QSETAREF2O A |k| |j|
@@ -114,9 +114,9 @@
         ((LU (|Matrix| D)) (|Perm| (|Vector| (|Integer|))) (XX (|Vector| D))
          (% (|Vector| D)))
         (SPROG
-         ((|s| (D)) (#1=#:G53 NIL) (|j| NIL) (#2=#:G52 NIL) (|i| NIL)
-          (|ii| (|Integer|)) (#3=#:G51 NIL) (|ip| (|Integer|)) (#4=#:G50 NIL)
-          (|maxR| (|Integer|)) (|minR| (|Integer|)) (X (|Vector| D)))
+         ((X (|Vector| D)) (|minR| (|Integer|)) (|maxR| (|Integer|))
+          (#1=#:G50 NIL) (|ip| (|Integer|)) (#2=#:G51 NIL) (|ii| (|Integer|))
+          (|i| NIL) (#3=#:G52 NIL) (|j| NIL) (#4=#:G53 NIL) (|s| (D)))
          (SEQ (LETT X (SPADCALL XX (QREFELT % 24))) (LETT |minR| (PROGN LU 1))
               (LETT |maxR| (SPADCALL LU (QREFELT % 10)))
               (EXIT
@@ -125,15 +125,15 @@
                  (|error| "Wrong dimensions in LUSolve"))
                 ('T
                  (SEQ (LETT |ii| -1)
-                      (SEQ (LETT |i| |minR|) (LETT #4# |maxR|) G190
-                           (COND ((> |i| #4#) (GO G191)))
+                      (SEQ (LETT |i| |minR|) (LETT #1# |maxR|) G190
+                           (COND ((> |i| #1#) (GO G191)))
                            (SEQ (LETT |ip| (QAREF1O |Perm| |i| 1))
                                 (LETT |s| (QAREF1O X |ip| 1))
                                 (QSETAREF1O X |ip| (QAREF1O X |i| 1) 1)
                                 (COND
                                  ((>= |ii| 0)
-                                  (SEQ (LETT |j| |ii|) (LETT #3# (- |i| 1))
-                                       G190 (COND ((> |j| #3#) (GO G191)))
+                                  (SEQ (LETT |j| |ii|) (LETT #2# (- |i| 1))
+                                       G190 (COND ((> |j| #2#) (GO G191)))
                                        (SEQ
                                         (EXIT
                                          (LETT |s|
@@ -150,11 +150,11 @@
                                   (LETT |ii| |i|)))
                                 (EXIT (QSETAREF1O X |i| |s| 1)))
                            (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL))
-                      (SEQ (LETT |i| |maxR|) (LETT #2# |minR|) G190
-                           (COND ((< |i| #2#) (GO G191)))
+                      (SEQ (LETT |i| |maxR|) (LETT #3# |minR|) G190
+                           (COND ((< |i| #3#) (GO G191)))
                            (SEQ (LETT |s| (QAREF1O X |i| 1))
-                                (SEQ (LETT |j| (+ |i| 1)) (LETT #1# |maxR|)
-                                     G190 (COND ((> |j| #1#) (GO G191)))
+                                (SEQ (LETT |j| (+ |i| 1)) (LETT #4# |maxR|)
+                                     G190 (COND ((> |j| #4#) (GO G191)))
                                      (SEQ
                                       (EXIT
                                        (LETT |s|
@@ -180,11 +180,11 @@
         ((A (|Matrix| D))
          (% (|Record| (|:| |Inv| (|Matrix| D)) (|:| |Pivots| (|List| D)))))
         (SPROG
-         ((|res| (|Matrix| D)) (|v| (|Vector| D)) (#1=#:G62 NIL) (|i| NIL)
-          (|n| (|NonNegativeInteger|))
-          (|Alu|
+         ((|Alu|
            (|Record| (|:| LU (|Matrix| D)) (|:| |Perm| (|Vector| (|Integer|)))
-                     (|:| |Pivots| (|List| D)))))
+                     (|:| |Pivots| (|List| D))))
+          (|n| (|NonNegativeInteger|)) (|i| NIL) (#1=#:G62 NIL)
+          (|v| (|Vector| D)) (|res| (|Matrix| D)))
          (SEQ (LETT |Alu| (SPADCALL A (QREFELT % 22))) (LETT |n| (ANCOLS A))
               (LETT |res| (MAKE_MATRIX1 |n| |n| (|spadConstant| % 18)))
               (SEQ (LETT |i| (PROGN A 1))
@@ -205,7 +205,7 @@
 (DECLAIM (NOTINLINE |LUDecomposition;|)) 
 
 (DEFUN |LUDecomposition;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|LUDecomposition| DV$1))
@@ -240,8 +240,8 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|Matrix| 6) (0 . |copy|)
               (|Integer|) (5 . |maxRowIndex|) (10 . |maxColIndex|) (|Boolean|)
-              (15 . ~=) (21 . |One|) (25 . *) (31 . -) (37 . |zero?|)
-              (42 . |Zero|) (46 . |swapRows!|) (53 . /)
+              (15 . ~=) (21 . |1|) (25 . *) (31 . -) (37 . |zero?|) (42 . |0|)
+              (46 . |swapRows!|) (53 . /)
               (|Record| (|:| LU 7) (|:| |Perm| 25) (|:| |Pivots| (|List| 6)))
               |LUD;LUDecomp;MR;1| (|Vector| 6) (59 . |copy|) (|Vector| 9)
               |LUD;LUSolve;MV2V;2| (64 . |setColumn!|)

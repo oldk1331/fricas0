@@ -2,7 +2,7 @@
 (SDEFUN |TENSPO2;linearExtend;MTpM2;1|
         ((|f| (|Mapping| M2 (|List| B))) (|x| (|TensorPower| |n| R B M1))
          (% (M2)))
-        (SPROG ((|res| (M2)) (#1=#:G7 NIL) (|t| NIL))
+        (SPROG ((|t| NIL) (#1=#:G11 NIL) (|res| (M2)))
                (SEQ (LETT |res| (|spadConstant| % 11))
                     (SEQ (LETT |t| NIL)
                          (LETT #1# (SPADCALL |x| (QREFELT % 15))) G190
@@ -27,8 +27,8 @@
 
 (DEFUN |TensorPowerFunctions2;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 |#1|)
     (LETT DV$2 (|devaluate| |#2|))
@@ -50,9 +50,9 @@
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
-(DEFUN |TensorPowerFunctions2| (&REST #1=#:G8)
+(DEFUN |TensorPowerFunctions2| (&REST #1=#:G12)
   (SPROG NIL
-         (PROG (#2=#:G9)
+         (PROG (#2=#:G13)
            (RETURN
             (COND
              ((LETT #2#
@@ -72,7 +72,7 @@
 (MAKEPROP '|TensorPowerFunctions2| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (|local| |#4|) (|local| |#5|) (0 . |Zero|)
+              (|local| |#3|) (|local| |#4|) (|local| |#5|) (0 . |0|)
               (|Record| (|:| |k| 17) (|:| |c| 7)) (|List| 12)
               (|TensorPower| (NRTEVAL (QREFELT % 6)) 7 8 9) (4 . |listOfTerms|)
               (|List| 8) (|Vector| 8) (9 . |parts|) (14 . *) (20 . +)

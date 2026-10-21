@@ -1,6 +1,6 @@
 
 (SDEFUN |PFECAT-;charthRoot;SU;1| ((|f| (S)) (% (|Union| S "failed")))
-        (SPROG ((|ans| (|Union| (|Vector| S) "failed")) (|m| (|Matrix| S)))
+        (SPROG ((|m| (|Matrix| S)) (|ans| (|Union| (|Vector| S) "failed")))
                (SEQ
                 (COND
                  ((SPADCALL |f| (QREFELT % 8)) (CONS 0 (|spadConstant| % 9)))
@@ -35,7 +35,7 @@
 (DECLAIM (NOTINLINE |PolynomialFactorizationExplicit&;|)) 
 
 (DEFUN |PolynomialFactorizationExplicit&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|PolynomialFactorizationExplicit&| DV$1))
@@ -73,11 +73,11 @@
 (MAKEPROP '|PolynomialFactorizationExplicit&| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|Boolean|) (0 . |zero?|)
-              (5 . |Zero|) (9 . |One|) (13 . -) (|List| (|List| 6))
-              (|Matrix| 6) (18 . |matrix|) (|Union| (|Vector| %) '"failed")
-              (|Matrix| %) (23 . |conditionP|) (|Integer|) (|Vector| 6)
-              (28 . |elt|) (|Union| % '"failed") (34 . |exquo|)
-              (40 . |charthRoot|) (|Union| 25 '"failed") (|List| %)
+              (5 . |0|) (9 . |1|) (13 . -) (|List| (|List| 6)) (|Matrix| 6)
+              (18 . |matrix|) (|Union| (|Vector| %) '"failed") (|Matrix| %)
+              (23 . |conditionP|) (|Integer|) (|Vector| 6) (28 . |elt|)
+              (|Union| % '"failed") (34 . |exquo|) (40 . |charthRoot|)
+              (|Union| 25 '"failed") (|List| %)
               (|SparseUnivariatePolynomial| 6) (45 . |multiEuclidean|)
               (|Union| 29 '#1="failed") (|List| 30)
               (|SparseUnivariatePolynomial| %)

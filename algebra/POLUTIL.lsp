@@ -6,8 +6,8 @@
 (SDEFUN |POLUTIL;sylvesterSequence;2ThePolsL;2|
         ((|p1| (|ThePols|)) (|p2| (|ThePols|)) (% (|List| |ThePols|)))
         (SPROG
-         ((|res| (|List| |ThePols|)) (#1=#:G23 NIL) (|term| NIL) (#2=#:G22 NIL)
-          (|#G8| (|ThePols|)) (|#G7| (|ThePols|)))
+         ((|#G7| (|ThePols|)) (|#G8| (|ThePols|)) (#1=#:G22 NIL) (|term| NIL)
+          (#2=#:G23 NIL) (|res| (|List| |ThePols|)))
          (SEQ (LETT |res| (LIST |p1|))
               (SEQ G190
                    (COND
@@ -30,80 +30,80 @@
                      (EXIT
                       (LETT |res|
                             (PROGN
-                             (LETT #2# NIL)
-                             (SEQ (LETT |term| NIL) (LETT #1# |res|) G190
+                             (LETT #1# NIL)
+                             (SEQ (LETT |term| NIL) (LETT #2# |res|) G190
                                   (COND
-                                   ((OR (ATOM #1#)
-                                        (PROGN (LETT |term| (CAR #1#)) NIL))
+                                   ((OR (ATOM #2#)
+                                        (PROGN (LETT |term| (CAR #2#)) NIL))
                                     (GO G191)))
                                   (SEQ
                                    (EXIT
-                                    (LETT #2#
+                                    (LETT #1#
                                           (CONS
                                            (SPADCALL |term| |p1|
                                                      (QREFELT % 21))
-                                           #2#))))
-                                  (LETT #1# (CDR #1#)) (GO G190) G191
-                                  (EXIT (NREVERSE #2#)))))))))
+                                           #1#))))
+                                  (LETT #2# (CDR #2#)) (GO G190) G191
+                                  (EXIT (NREVERSE #1#)))))))))
               (EXIT (NREVERSE |res|))))) 
 
 (SDEFUN |POLUTIL;boundOfCauchy;ThePolsTheField;3|
         ((|p| (|ThePols|)) (% (|TheField|)))
         (SPROG
-         ((#1=#:G27 NIL) (#2=#:G26 (|TheField|)) (#3=#:G28 (|TheField|))
-          (#4=#:G33 NIL) (|t| NIL) (|l| (|List| |TheField|)) (#5=#:G32 NIL)
-          (|term| NIL) (#6=#:G31 NIL) (|c| (|TheField|)))
+         ((|c| (|TheField|)) (#1=#:G31 NIL) (|term| NIL) (#2=#:G32 NIL)
+          (|l| (|List| |TheField|)) (|t| NIL) (#3=#:G33 NIL)
+          (#4=#:G28 (|TheField|)) (#5=#:G26 (|TheField|)) (#6=#:G27 NIL))
          (SEQ
           (LETT |c| (SPADCALL (SPADCALL |p| (QREFELT % 22)) (QREFELT % 23)))
           (LETT |l|
                 (PROGN
-                 (LETT #6# NIL)
+                 (LETT #1# NIL)
                  (SEQ (LETT |term| NIL)
-                      (LETT #5# (CDR (SPADCALL |p| (QREFELT % 25)))) G190
+                      (LETT #2# (CDR (SPADCALL |p| (QREFELT % 25)))) G190
                       (COND
-                       ((OR (ATOM #5#) (PROGN (LETT |term| (CAR #5#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT |term| (CAR #2#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #6#
+                        (LETT #1#
                               (CONS (SPADCALL |c| |term| (QREFELT % 26))
-                                    #6#))))
-                      (LETT #5# (CDR #5#)) (GO G190) G191
-                      (EXIT (NREVERSE #6#)))))
+                                    #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#)))))
           (EXIT
            (COND ((NULL |l|) (|spadConstant| % 27))
                  (#7='T
                   (SPADCALL (|spadConstant| % 27)
                             (PROGN
-                             (LETT #1# NIL)
-                             (SEQ (LETT |t| NIL) (LETT #4# |l|) G190
+                             (LETT #6# NIL)
+                             (SEQ (LETT |t| NIL) (LETT #3# |l|) G190
                                   (COND
-                                   ((OR (ATOM #4#)
-                                        (PROGN (LETT |t| (CAR #4#)) NIL))
+                                   ((OR (ATOM #3#)
+                                        (PROGN (LETT |t| (CAR #3#)) NIL))
                                     (GO G191)))
                                   (SEQ
                                    (EXIT
                                     (PROGN
-                                     (LETT #3# (SPADCALL |t| (QREFELT % 29)))
+                                     (LETT #4# (SPADCALL |t| (QREFELT % 29)))
                                      (COND
-                                      (#1#
-                                       (LETT #2#
-                                             (SPADCALL #2# #3#
+                                      (#6#
+                                       (LETT #5#
+                                             (SPADCALL #5# #4#
                                                        (QREFELT % 30))))
                                       ('T
                                        (PROGN
-                                        (LETT #2# #3#)
-                                        (LETT #1# 'T)))))))
-                                  (LETT #4# (CDR #4#)) (GO G190) G191
+                                        (LETT #5# #4#)
+                                        (LETT #6# 'T)))))))
+                                  (LETT #3# (CDR #3#)) (GO G190) G191
                                   (EXIT NIL))
-                             (COND (#1# #2#) (#7# (|IdentityError| '|max|))))
+                             (COND (#6# #5#) (#7# (|IdentityError| '|max|))))
                             (QREFELT % 31)))))))) 
 
 (SDEFUN |POLUTIL;sturmVariationsOf;LNni;4|
         ((|l| (|List| |TheField|)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((|ll| (|List| |TheField|)) (|ln| (|TheField|)) (#1=#:G41 NIL)
-          (|term| NIL) (|l1| (|TheField|)))
+         ((|l1| (|TheField|)) (|term| NIL) (#1=#:G41 NIL) (|ln| (|TheField|))
+          (|ll| (|List| |TheField|)))
          (SEQ
           (COND
            ((NULL |l|) (|error| "POLUTIL: sturmVariationsOf: empty list !"))
@@ -176,7 +176,7 @@
 (DECLAIM (NOTINLINE |RealPolynomialUtilitiesPackage;|)) 
 
 (DEFUN |RealPolynomialUtilitiesPackage;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -240,15 +240,14 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (0 . |differentiate|) (|List| 7)
               |POLUTIL;sylvesterSequence;2ThePolsL;2|
-              |POLUTIL;sturmSequence;ThePolsL;1| (5 . |Zero|) (9 . |Zero|)
+              |POLUTIL;sturmSequence;ThePolsL;1| (5 . |0|) (9 . |0|)
               (|Boolean|) (13 . ~=) (19 . |rem|) (25 . -)
               (|NonNegativeInteger|) (30 . |degree|) (35 . |unitCanonical|)
               (40 . |quo|) (46 . |leadingCoefficient|) (51 . |inv|) (|List| 6)
-              (56 . |coefficients|) (61 . *) (67 . |One|) (71 . |One|)
-              (75 . |abs|) (80 . |max|) (86 . +) (92 . |boundOfCauchy|)
-              (97 . |zero?|) (|Integer|) (102 . |sign|)
-              (107 . |lazyVariations|) (114 . |sturmVariationsOf|)
-              (119 . |elt|))
+              (56 . |coefficients|) (61 . *) (67 . |1|) (71 . |1|) (75 . |abs|)
+              (80 . |max|) (86 . +) (92 . |boundOfCauchy|) (97 . |zero?|)
+              (|Integer|) (102 . |sign|) (107 . |lazyVariations|)
+              (114 . |sturmVariationsOf|) (119 . |elt|))
            '#(|sylvesterSequence| 125 |sturmVariationsOf| 131 |sturmSequence|
               136 |lazyVariations| 141 |boundOfCauchy| 148)
            'NIL

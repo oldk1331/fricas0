@@ -62,8 +62,6 @@
 ;                               $relative_directory_list)
 ;     $library_directory_list := MAPCAR(function make_absolute_filename,
 ;                                       $relative_library_directory_list)
-;     $defaultMsgDatabaseName :=
-;         make_absolute_filename('"share/msgs/s2-us.msgs")
 
 (DEFUN |reroot| (|dir|)
   (PROG ()
@@ -74,14 +72,12 @@
               (MAPCAR #'|make_absolute_filename| |$relative_directory_list|))
       (SETQ |$library_directory_list|
               (MAPCAR #'|make_absolute_filename|
-                      |$relative_library_directory_list|))
-      (SETQ |$defaultMsgDatabaseName|
-              (|make_absolute_filename| "share/msgs/s2-us.msgs"))))))
+                      |$relative_library_directory_list|))))))
 
 ; initroot() ==
 ;     spadroot := getEnv('"FRICAS")
 ;     if not(spadroot) then
-;         bin_parent_dir := STRCONC(DIRECTORY_-NAMESTRING(first(getCLArgs())),
+;         bin_parent_dir := STRCONC(file_directory(first(getCLArgs())),
 ;                                   '"/../")
 ;         if fricas_probe_file(STRCONC(bin_parent_dir, '"algebra/interp.daase"))
 ;         then spadroot := bin_parent_dir
@@ -100,7 +96,7 @@
       (COND
        ((NULL |spadroot|)
         (SETQ |bin_parent_dir|
-                (STRCONC (DIRECTORY-NAMESTRING (CAR (|getCLArgs|))) "/../"))
+                (STRCONC (|file_directory| (CAR (|getCLArgs|))) "/../"))
         (COND
          ((|fricas_probe_file|
            (STRCONC |bin_parent_dir| "algebra/interp.daase"))
@@ -123,14 +119,14 @@
 ;     -- Need to reinitialize various streams because
 ;     -- CLISP closes them when dumping executable
 ;     CUROUTSTREAM := $trace_stream := get_lisp_std_out()
-;     $algebraOutputStream := mkOutputConsoleStream()
-;     $fortranOutputStream := mkOutputConsoleStream()
-;     $mathmlOutputStream := mkOutputConsoleStream()
-;     $texmacsOutputStream := mkOutputConsoleStream()
-;     $htmlOutputStream := mkOutputConsoleStream()
-;     $openMathOutputStream := mkOutputConsoleStream()
-;     $texOutputStream := mkOutputConsoleStream()
-;     $formattedOutputStream := mkOutputConsoleStream()
+;     $algebra_out_rec.$stream_off := make_std_out_stream()
+;     $fortran_out_rec.$stream_off := make_std_out_stream()
+;     $mathml_out_rec.$stream_off := make_std_out_stream()
+;     $texmacs_out_rec.$stream_off := make_std_out_stream()
+;     $html_out_rec.$stream_off := make_std_out_stream()
+;     $openmath_out_rec.$stream_off := make_std_out_stream()
+;     $tex_out_rec.$stream_off := make_std_out_stream()
+;     $formatted_out_rec.$stream_off := make_std_out_stream()
 ;     fricas_init()
 ;     fricas_restart2()
 
@@ -139,14 +135,14 @@
     (RETURN
      (PROGN
       (SETQ CUROUTSTREAM (SETQ |$trace_stream| (|get_lisp_std_out|)))
-      (SETQ |$algebraOutputStream| (|mkOutputConsoleStream|))
-      (SETQ |$fortranOutputStream| (|mkOutputConsoleStream|))
-      (SETQ |$mathmlOutputStream| (|mkOutputConsoleStream|))
-      (SETQ |$texmacsOutputStream| (|mkOutputConsoleStream|))
-      (SETQ |$htmlOutputStream| (|mkOutputConsoleStream|))
-      (SETQ |$openMathOutputStream| (|mkOutputConsoleStream|))
-      (SETQ |$texOutputStream| (|mkOutputConsoleStream|))
-      (SETQ |$formattedOutputStream| (|mkOutputConsoleStream|))
+      (SETF (ELT |$algebra_out_rec| |$stream_off|) (|make_std_out_stream|))
+      (SETF (ELT |$fortran_out_rec| |$stream_off|) (|make_std_out_stream|))
+      (SETF (ELT |$mathml_out_rec| |$stream_off|) (|make_std_out_stream|))
+      (SETF (ELT |$texmacs_out_rec| |$stream_off|) (|make_std_out_stream|))
+      (SETF (ELT |$html_out_rec| |$stream_off|) (|make_std_out_stream|))
+      (SETF (ELT |$openmath_out_rec| |$stream_off|) (|make_std_out_stream|))
+      (SETF (ELT |$tex_out_rec| |$stream_off|) (|make_std_out_stream|))
+      (SETF (ELT |$formatted_out_rec| |$stream_off|) (|make_std_out_stream|))
       (|fricas_init|)
       (|fricas_restart2|)))))
 
@@ -162,27 +158,27 @@
 ;   initNewWorld()
 ;   open_interp_db(display_messages)
 ;   createInitializers()
-;   if $displayStartMsgs then sayKeyedMsg("S2IZ0053",['"interpreter"])
+;   init_msg := '"FriCAS initialization: %1b"
+;   if $displayStartMsgs then say_msg("S2IZ0053", init_msg, ['"interpreter"])
 ;   initializeTimedNames()
 ;   $InteractiveFrame := makeInitialModemapFrame()
 ;   initializeInterpreterFrameRing()
 ;   setOutputAlgebra "%initialize%"
 ;   loadExposureGroupData()
-;   if $displayStartMsgs then sayKeyedMsg("S2IZ0053",['"database"])
-;   mkLowerCaseConTable()
+;   if $displayStartMsgs then say_msg("S2IZ0053", init_msg, ['"database"])
 ;   if not $ruleSetsInitialized then initializeRuleSets()
-;   if $displayStartMsgs then sayKeyedMsg("S2IZ0053",['"constructors"])
+;   if $displayStartMsgs then say_msg("S2IZ0053", init_msg, ['"constructors"])
 ;   makeConstructorsAutoLoad()
 ;   GCMSG(NIL)
 ;   SETQ($IOindex,1)
-;   if $displayStartMsgs then sayKeyedMsg("S2IZ0053",['"history"])
+;   if $displayStartMsgs then say_msg("S2IZ0053", init_msg, ['"history"])
 ;   initHist()
 ;   if $displayStartMsgs then spadStartUpMsgs()
 ;   $superHash := MAKE_HASHTABLE('EQUAL)
 ;   $displayStartMsgs := save_displayStartMsgs
 
 (DEFUN |interpsysInitialization| (|display_messages|)
-  (PROG (|$PrintCompilerMessageIfTrue| |save_displayStartMsgs|)
+  (PROG (|$PrintCompilerMessageIfTrue| |init_msg| |save_displayStartMsgs|)
     (DECLARE (SPECIAL |$PrintCompilerMessageIfTrue|))
     (RETURN
      (PROGN
@@ -196,22 +192,27 @@
       (|initNewWorld|)
       (|open_interp_db| |display_messages|)
       (|createInitializers|)
+      (SETQ |init_msg| "FriCAS initialization: %1b")
       (COND
-       (|$displayStartMsgs| (|sayKeyedMsg| 'S2IZ0053 (LIST "interpreter"))))
+       (|$displayStartMsgs|
+        (|say_msg| 'S2IZ0053 |init_msg| (LIST "interpreter"))))
       (|initializeTimedNames|)
       (SETQ |$InteractiveFrame| (|makeInitialModemapFrame|))
       (|initializeInterpreterFrameRing|)
       (|setOutputAlgebra| '|%initialize%|)
       (|loadExposureGroupData|)
-      (COND (|$displayStartMsgs| (|sayKeyedMsg| 'S2IZ0053 (LIST "database"))))
-      (|mkLowerCaseConTable|)
+      (COND
+       (|$displayStartMsgs|
+        (|say_msg| 'S2IZ0053 |init_msg| (LIST "database"))))
       (COND ((NULL |$ruleSetsInitialized|) (|initializeRuleSets|)))
       (COND
-       (|$displayStartMsgs| (|sayKeyedMsg| 'S2IZ0053 (LIST "constructors"))))
+       (|$displayStartMsgs|
+        (|say_msg| 'S2IZ0053 |init_msg| (LIST "constructors"))))
       (|makeConstructorsAutoLoad|)
       (GCMSG NIL)
       (SETQ |$IOindex| 1)
-      (COND (|$displayStartMsgs| (|sayKeyedMsg| 'S2IZ0053 (LIST "history"))))
+      (COND
+       (|$displayStartMsgs| (|say_msg| 'S2IZ0053 |init_msg| (LIST "history"))))
       (|initHist|)
       (COND (|$displayStartMsgs| (|spadStartUpMsgs|)))
       (SETQ |$superHash| (MAKE_HASHTABLE 'EQUAL))
@@ -300,7 +301,9 @@
 ; processInteractive(form, posnForm) ==
 ;     $timedNameStack : local := NIL
 ;     $statsInfo : local := NIL
-;     initializeTimedStack()
+;     -- no need to collect stats if we are not going to print them.
+;     if $printStorageIfTrue or $printTimeIfTrue then
+;         initializeTimedStack()
 ;     finally(
 ;         object := processInteractive0(form, posnForm),
 ;           while $timedNameStack repeat stopTimingProcess peekTimedName())
@@ -313,7 +316,9 @@
      (PROGN
       (SETQ |$timedNameStack| NIL)
       (SETQ |$statsInfo| NIL)
-      (|initializeTimedStack|)
+      (COND
+       ((OR |$printStorageIfTrue| |$printTimeIfTrue|)
+        (|initializeTimedStack|)))
       (|finally| (SETQ |object| (|processInteractive0| |form| |posnForm|))
        ((LAMBDA ()
           (LOOP
@@ -488,14 +493,17 @@
 ;     m' := objMode x'
 ;     m := ['Union, :[arg for arg in argl | sameUnionBranch(arg, m')], '"..."]
 ;   if $printTypeIfTrue then
+;     type_msg := '"%rjon Type: %1 %rjoff"
 ;     type_string := outputDomainConstructor(m)
 ;     $collectOutput =>
 ;         $outputLines :=
-;             [justifyMyType msgText("S2GL0012", [type_string]), :$outputLines]
-;     sayKeyedMsg("S2GL0012", [type_string])
+;             [justifyMyType msgText(type_msg, [type_string]), :$outputLines]
+;     ioHook("startType")
+;     say_msg_local(type_msg, [type_string])
+;     ioHook("endOfType")
 
 (DEFUN |printType| (|x| |m|)
-  (PROG (|argl| |x'| |m'| |type_string|)
+  (PROG (|argl| |x'| |m'| |type_msg| |type_string|)
     (RETURN
      (PROGN
       (COND
@@ -519,14 +527,20 @@
                         NIL |argl| NIL)
                        (CONS "..." NIL))))))
       (COND
-       (|$printTypeIfTrue| (SETQ |type_string| (|outputDomainConstructor| |m|))
+       (|$printTypeIfTrue| (SETQ |type_msg| "%rjon Type: %1 %rjoff")
+        (SETQ |type_string| (|outputDomainConstructor| |m|))
         (COND
          (|$collectOutput|
           (SETQ |$outputLines|
                   (CONS
-                   (|justifyMyType| (|msgText| 'S2GL0012 (LIST |type_string|)))
+                   (|justifyMyType|
+                    (|msgText| |type_msg| (LIST |type_string|)))
                    |$outputLines|)))
-         (#1# (|sayKeyedMsg| 'S2GL0012 (LIST |type_string|))))))))))
+         (#1#
+          (PROGN
+           (|ioHook| '|startType|)
+           (|say_msg_local| |type_msg| (LIST |type_string|))
+           (|ioHook| '|endOfType|))))))))))
 
 ; sameUnionBranch(uArg, m) ==
 ;   uArg is [":", ., t] => t = m
@@ -547,17 +561,17 @@
        (EQUAL |t| |m|))
       (#1# (EQUAL |uArg| |m|))))))
 
-; msgText(key, args) ==
-;   msg := segmentKeyedMsg getKeyedMsg key
+; msgText(msg, args) ==
+;   msg := segmentKeyedMsg(msg)
 ;   msg := substituteSegmentedMsg(msg,args)
 ;   msg := flowSegmentedMsg(msg,$LINELENGTH,$MARGIN)
 ;   concatenateStringList([STRINGIMAGE x for x in CDAR msg])
 
-(DEFUN |msgText| (|key| |args|)
-  (PROG (|msg|)
+(DEFUN |msgText| (|msg| |args|)
+  (PROG ()
     (RETURN
      (PROGN
-      (SETQ |msg| (|segmentKeyedMsg| (|getKeyedMsg| |key|)))
+      (SETQ |msg| (|segmentKeyedMsg| |msg|))
       (SETQ |msg| (|substituteSegmentedMsg| |msg| |args|))
       (SETQ |msg| (|flowSegmentedMsg| |msg| $LINELENGTH $MARGIN))
       (|concatenateStringList|
@@ -589,38 +603,45 @@
 (DEFUN |typeTimePrin| (|x|) (PROG () (RETURN (|maprinSpecial| |x| 0 79))))
 
 ; printTime() ==
-;   $collectOutput => nil
+;   $collectOutput or null $statsInfo => nil
 ;   s := makeLongTimeString($interpreterTimedNames, $interpreterTimedClasses)
-;   say_msg("S2GL0013", '"%rjon Time: %1 %rjoff", [s])
+;   ioHook("startTime")
+;   say_msg_local('"%rjon Time: %1 %rjoff", [s])
+;   ioHook("endOfTime")
 
 (DEFUN |printTime| ()
   (PROG (|s|)
     (RETURN
-     (COND (|$collectOutput| NIL)
+     (COND ((OR |$collectOutput| (NULL |$statsInfo|)) NIL)
            ('T
             (PROGN
              (SETQ |s|
                      (|makeLongTimeString| |$interpreterTimedNames|
                       |$interpreterTimedClasses|))
-             (|say_msg| 'S2GL0013 "%rjon Time: %1 %rjoff" (LIST |s|))))))))
+             (|ioHook| '|startTime|)
+             (|say_msg_local| "%rjon Time: %1 %rjoff" (LIST |s|))
+             (|ioHook| '|endOfTime|)))))))
 
 ; printStorage() ==
-;   $collectOutput => nil
+;   $collectOutput or null $statsInfo => nil
 ;   storeString :=
 ;     makeLongSpaceString($interpreterTimedNames, $interpreterTimedClasses)
-;   say_msg("S2GL0016", '"%rjon Storage: %1 %rjoff", [storeString])
+;   ioHook("startStorage")
+;   say_msg_local('"%rjon Storage: %1 %rjoff", [storeString])
+;   ioHook("endOfStorage")
 
 (DEFUN |printStorage| ()
   (PROG (|storeString|)
     (RETURN
-     (COND (|$collectOutput| NIL)
+     (COND ((OR |$collectOutput| (NULL |$statsInfo|)) NIL)
            ('T
             (PROGN
              (SETQ |storeString|
                      (|makeLongSpaceString| |$interpreterTimedNames|
                       |$interpreterTimedClasses|))
-             (|say_msg| 'S2GL0016 "%rjon Storage: %1 %rjoff"
-              (LIST |storeString|))))))))
+             (|ioHook| '|startStorage|)
+             (|say_msg_local| "%rjon Storage: %1 %rjoff" (LIST |storeString|))
+             (|ioHook| '|endOfStorage|)))))))
 
 ; interpretTopLevel(x, posnForm) ==
 ;   --  Top level entry point from processInteractive1.  Sets up catch
@@ -706,7 +727,8 @@
 ;   argVal := getArgValue(node, newRootMode)
 ;   argVal and not $genValue => objNew(argVal, newRootMode)
 ;   argVal and (val:=getValue node) => interpret2(val,newRootMode,posnForm)
-;   keyedSystemError("S2IS0053",[x])
+;   system_error("S2IS0053",
+;       '"Interpreter code generation failed for expression %1s", [x])
 
 (DEFUN |interpret1| (|x| |rootMode| |posnForm|)
   (PROG (|node| |modeSet| |newRootMode| |argVal| |val|)
@@ -722,7 +744,10 @@
        ((AND |argVal| (NULL |$genValue|)) (|objNew| |argVal| |newRootMode|))
        ((AND |argVal| (SETQ |val| (|getValue| |node|)))
         (|interpret2| |val| |newRootMode| |posnForm|))
-       (#1# (|keyedSystemError| 'S2IS0053 (LIST |x|))))))))
+       (#1#
+        (|system_error| 'S2IS0053
+         "Interpreter code generation failed for expression %1s"
+         (LIST |x|))))))))
 
 ; interpret2(object,m1,posnForm) ==
 ;   x := objVal object
@@ -733,7 +758,7 @@
 ;     systemErrorHere '"interpret2"
 ;   m1 =>
 ;     if (ans := coerceInteractive(object,m1)) then ans
-;     else throwKeyedMsgCannotCoerceWithValue(x,m,m1)
+;     else throwMsgCannotCoerceWithValue(x, m, m1)
 ;   object
 
 (DEFUN |interpret2| (|object| |m1| |posnForm|)
@@ -752,5 +777,5 @@
          (#1# (|systemErrorHere| "interpret2"))))
        (|m1|
         (COND ((SETQ |ans| (|coerceInteractive| |object| |m1|)) |ans|)
-              (#1# (|throwKeyedMsgCannotCoerceWithValue| |x| |m| |m1|))))
+              (#1# (|throwMsgCannotCoerceWithValue| |x| |m| |m1|))))
        (#1# |object|))))))

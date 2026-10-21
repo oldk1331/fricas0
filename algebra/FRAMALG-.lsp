@@ -16,8 +16,8 @@
 
 (SDEFUN |FRAMALG-;regularRepresentation;SM;6| ((|x| (S)) (% (|Matrix| R)))
         (SPROG
-         ((#1=#:G16 NIL) (|i| NIL) (|j| NIL) (|b| (|Vector| S))
-          (|m| (|Matrix| R)) (|n| (|NonNegativeInteger|)))
+         ((|n| (|NonNegativeInteger|)) (|m| (|Matrix| R)) (|b| (|Vector| S))
+          (|j| NIL) (|i| NIL) (#1=#:G16 NIL))
          (SEQ
           (LETT |m|
                 (MAKE_MATRIX1 (LETT |n| (SPADCALL (QREFELT % 24))) |n|
@@ -39,7 +39,7 @@
 
 (SDEFUN |FRAMALG-;characteristicPolynomial;SUP;7| ((|x| (S)) (% (UP)))
         (SPROG
-         ((|mat1| (|Matrix| UP)) (|mat0| (|Matrix| UP)) (|mat00| (|Matrix| R)))
+         ((|mat00| (|Matrix| R)) (|mat0| (|Matrix| UP)) (|mat1| (|Matrix| UP)))
          (SEQ (LETT |mat00| (SPADCALL |x| (QREFELT % 33)))
               (LETT |mat0| (SPADCALL (ELT % 34) |mat00| (QREFELT % 38)))
               (LETT |mat1|
@@ -52,14 +52,14 @@
 
 (SDEFUN |FRAMALG-;minimalPolynomial;SUP;8| ((|x| (S)) (% (UP)))
         (SPROG
-         ((#1=#:G23 NIL) (#2=#:G22 (UP)) (#3=#:G24 (UP)) (#4=#:G28 NIL)
-          (|i| NIL) (|v| (|Vector| R)) (|y| (S)) (#5=#:G27 NIL)
-          (|m| (|Matrix| R)) (|n| (|PositiveInteger|)))
+         ((|n| (|PositiveInteger|)) (|m| (|Matrix| R)) (#1=#:G28 NIL) (|y| (S))
+          (|v| (|Vector| R)) (|i| NIL) (#2=#:G29 NIL) (#3=#:G25 (UP))
+          (#4=#:G23 (UP)) (#5=#:G24 NIL))
          (SEQ (LETT |y| (|spadConstant| % 39))
               (LETT |n| (SPADCALL (QREFELT % 24)))
               (LETT |m| (SPADCALL |n| (+ |n| 1) (QREFELT % 47)))
-              (SEQ (LETT |i| 1) (LETT #5# (+ |n| 1)) G190
-                   (COND ((|greater_SI| |i| #5#) (GO G191)))
+              (SEQ (LETT |i| 1) (LETT #1# (+ |n| 1)) G190
+                   (COND ((|greater_SI| |i| #1#) (GO G191)))
                    (SEQ
                     (SPADCALL |m| |i| (SPADCALL |y| (QREFELT % 30))
                               (QREFELT % 48))
@@ -68,9 +68,9 @@
               (LETT |v| (|SPADfirst| (SPADCALL |m| (QREFELT % 50))))
               (EXIT
                (PROGN
-                (LETT #1# NIL)
-                (SEQ (LETT |i| 0) (LETT #4# (- (QVSIZE |v|) 1)) G190
-                     (COND ((|greater_SI| |i| #4#) (GO G191)))
+                (LETT #5# NIL)
+                (SEQ (LETT |i| 0) (LETT #2# (- (QVSIZE |v|) 1)) G190
+                     (COND ((|greater_SI| |i| #2#) (GO G191)))
                      (SEQ
                       (EXIT
                        (PROGN
@@ -78,15 +78,15 @@
                               (SPADCALL (SPADCALL |v| (+ |i| 1) (QREFELT % 51))
                                         |i| (QREFELT % 42)))
                         (COND
-                         (#1# (LETT #2# (SPADCALL #2# #3# (QREFELT % 52))))
-                         ('T (PROGN (LETT #2# #3#) (LETT #1# 'T)))))))
+                         (#5# (LETT #4# (SPADCALL #4# #3# (QREFELT % 52))))
+                         ('T (PROGN (LETT #4# #3#) (LETT #5# 'T)))))))
                      (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
-                (COND (#1# #2#) ('T (|spadConstant| % 53)))))))) 
+                (COND (#5# #4#) ('T (|spadConstant| % 53)))))))) 
 
 (DECLAIM (NOTINLINE |FramedAlgebra&;|)) 
 
 (DEFUN |FramedAlgebra&| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -126,18 +126,18 @@
               |FRAMALG-;regularRepresentation;SM;6| (|Vector| 7)
               (20 . |coordinates|) |FRAMALG-;coordinates;SV;4|
               (26 . |represents|) |FRAMALG-;represents;VS;5|
-              (|PositiveInteger|) (32 . |rank|) (36 . |Zero|) (|Integer|)
+              (|PositiveInteger|) (32 . |rank|) (36 . |0|) (|Integer|)
               (|Vector| 6) (40 . |minIndex|) (45 . *) (51 . |coordinates|)
               (56 . |setRow!|) (63 . |transpose|)
               (68 . |regularRepresentation|) (73 . |coerce|) (|Matrix| 8)
               (|Mapping| 8 7)
               (|MatrixCategoryFunctions2| 7 18 18 11 8 (|Vector| 8)
                                           (|Vector| 8) 35)
-              (78 . |map|) (84 . |One|) (88 . |One|) (|NonNegativeInteger|)
+              (78 . |map|) (84 . |1|) (88 . |1|) (|NonNegativeInteger|)
               (92 . |monomial|) (98 . |scalarMatrix|) (104 . -)
               (110 . |determinant|) (115 . |characteristicPolynomial|)
               (120 . |zero|) (126 . |setColumn!|) (|List| 18)
-              (133 . |nullSpace|) (138 . |elt|) (144 . +) (150 . |Zero|)
+              (133 . |nullSpace|) (138 . |elt|) (144 . +) (150 . |0|)
               (154 . |minimalPolynomial|))
            '#(|traceMatrix| 159 |represents| 163 |regularRepresentation| 168
               |minimalPolynomial| 173 |discriminant| 178 |coordinates| 182

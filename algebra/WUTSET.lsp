@@ -1,27 +1,27 @@
 
-(PUT '|WUTSET;rep| '|SPADreplace| '(XLAM (|s|) |s|)) 
+(MAKEPROP '|WUTSET;rep| '|SPADreplace| '(XLAM (|s|) |s|)) 
 
 (SDEFUN |WUTSET;rep| ((|s| (%)) (% (|List| P))) |s|) 
 
-(PUT '|WUTSET;per| '|SPADreplace| '(XLAM (|l|) |l|)) 
+(MAKEPROP '|WUTSET;per| '|SPADreplace| '(XLAM (|l|) |l|)) 
 
 (SDEFUN |WUTSET;per| ((|l| (|List| P)) (% (%))) |l|) 
 
 (SDEFUN |WUTSET;removeAssociates| ((|lp| (|List| P)) (% (|List| P)))
-        (SPROG ((#1=#:G24 NIL) (|p| NIL) (#2=#:G23 NIL))
+        (SPROG ((#1=#:G23 NIL) (|p| NIL) (#2=#:G24 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
-                  (LETT #2# NIL)
-                  (SEQ (LETT |p| NIL) (LETT #1# |lp|) G190
+                  (LETT #1# NIL)
+                  (SEQ (LETT |p| NIL) (LETT #2# |lp|) G190
                        (COND
-                        ((OR (ATOM #1#) (PROGN (LETT |p| (CAR #1#)) NIL))
+                        ((OR (ATOM #2#) (PROGN (LETT |p| (CAR #2#)) NIL))
                          (GO G191)))
                        (SEQ
                         (EXIT
-                         (LETT #2# (CONS (SPADCALL |p| (QREFELT % 10)) #2#))))
-                       (LETT #1# (CDR #1#)) (GO G190) G191
-                       (EXIT (NREVERSE #2#))))
+                         (LETT #1# (CONS (SPADCALL |p| (QREFELT % 10)) #1#))))
+                       (LETT #2# (CDR #2#)) (GO G190) G191
+                       (EXIT (NREVERSE #1#))))
                  (QREFELT % 12))))) 
 
 (SDEFUN |WUTSET;medialSetWithTrace|
@@ -31,11 +31,10 @@
           (|Union| (|Record| (|:| |bas| %) (|:| |top| (|List| P)))
                    #1="failed")))
         (SPROG
-         ((|contradiction| (|Boolean|)) (|rs| #2=(|List| P)) (#3=#:G27 NIL)
-          (|bs| (%))
+         ((|qs| #2=(|List| P))
           (|rec|
            (|Union| (|Record| (|:| |bas| %) (|:| |top| (|List| P))) "failed"))
-          (|qs| #2#))
+          (|bs| (%)) (#3=#:G27 NIL) (|rs| #2#) (|contradiction| (|Boolean|)))
          (SEQ (LETT |qs| (SPADCALL |ps| |redOp?| |redOp| (QREFELT % 16)))
               (LETT |contradiction| (SPADCALL (ELT % 18) |ps| (QREFELT % 20)))
               (EXIT
@@ -172,11 +171,11 @@
         ((|ps| (|List| P)) (|redOp?| (|Mapping| (|Boolean|) P P))
          (|redOp| (|Mapping| P P P)) (% (|Union| % "failed")))
         (SPROG
-         ((|qs| #1=(|List| P)) (|contradiction| (|Boolean|)) (|rs| #1#)
-          (#2=#:G27 NIL) (|ms| (%))
-          (|rec|
+         ((|rec|
            (|Union| (|Record| (|:| |bas| %) (|:| |top| (|List| P)))
-                    #3="failed")))
+                    #1="failed"))
+          (|ms| (%)) (#2=#:G27 NIL) (|rs| #3=(|List| P))
+          (|contradiction| (|Boolean|)) (|qs| #3#))
          (SEQ (LETT |ps| (|WUTSET;removeAssociates| |ps| %))
               (LETT |ps| (SPADCALL (ELT % 35) |ps| (QREFELT % 36)))
               (LETT |contradiction| (SPADCALL (ELT % 18) |ps| (QREFELT % 20)))
@@ -216,7 +215,7 @@
                                                                      (|List|
                                                                       (QREFELT
                                                                        % 9))))
-                                                               #3#)
+                                                               #1#)
                                                               #2#))))
                                      (LETT |qs|
                                            (QCDR
@@ -236,7 +235,7 @@
                                                                      (|List|
                                                                       (QREFELT
                                                                        % 9))))
-                                                               #3#)
+                                                               #1#)
                                                               #2#))))
                                      (LETT |qs|
                                            (SPADCALL |qs| |ms| (QREFELT % 24)))
@@ -296,11 +295,11 @@
         ((|ps| (|List| P)) (|redOp?| (|Mapping| (|Boolean|) P P))
          (|redOp| (|Mapping| P P P)) (% (|List| %)))
         (SPROG
-         ((#1=#:G116 NIL) (|ln| (|List| (|SplittingNode| (|List| P) %)))
-          (|newps| (|List| P)) (|lics| (|List| P)) (|cs| (%))
-          (|charSet?| (|Union| % "failed"))
-          (|esl| (|Union| (|SplittingTree| (|List| P) %) #2="failed"))
-          (|a| (|SplittingTree| (|List| P) %)))
+         ((|a| (|SplittingTree| (|List| P) %))
+          (|esl| (|Union| (|SplittingTree| (|List| P) %) #1="failed"))
+          (|charSet?| (|Union| % "failed")) (|cs| (%)) (|lics| (|List| P))
+          (|newps| (|List| P)) (|ln| (|List| (|SplittingNode| (|List| P) %)))
+          (#2=#:G123 NIL))
          (SEQ
           (LETT |a|
                 (SPADCALL
@@ -314,16 +313,16 @@
                 (LETT |ps|
                       (SPADCALL
                        (SPADCALL
-                        (PROG2 (LETT #1# |esl|)
-                            (QCDR #1#)
-                          (|check_union2| (QEQCAR #1# 0)
+                        (PROG2 (LETT #2# |esl|)
+                            (QCDR #2#)
+                          (|check_union2| (QEQCAR #2# 0)
                                           (|SplittingTree|
                                            (|List| (QREFELT % 9)) %)
                                           (|Union|
                                            (|SplittingTree|
                                             (|List| (QREFELT % 9)) %)
-                                           #2#)
-                                          #1#))
+                                           #1#)
+                                          #2#))
                         (QREFELT % 47))
                        (QREFELT % 48)))
                 (LETT |charSet?|
@@ -342,16 +341,16 @@
                           ((NULL |lics|)
                            (SEQ
                             (SPADCALL
-                             (PROG2 (LETT #1# |esl|)
-                                 (QCDR #1#)
-                               (|check_union2| (QEQCAR #1# 0)
+                             (PROG2 (LETT #2# |esl|)
+                                 (QCDR #2#)
+                               (|check_union2| (QEQCAR #2# 0)
                                                (|SplittingTree|
                                                 (|List| (QREFELT % 9)) %)
                                                (|Union|
                                                 (|SplittingTree|
                                                  (|List| (QREFELT % 9)) %)
-                                                #2#)
-                                               #1#))
+                                                #1#)
+                                               #2#))
                              (SPADCALL |ps| |cs| 'T (QREFELT % 53))
                              (QREFELT % 54))
                             (EXIT (SPADCALL |a| (QREFELT % 55)))))
@@ -383,30 +382,30 @@
                                  NIL (GO G190) G191 (EXIT NIL))
                             (EXIT
                              (SPADCALL
-                              (PROG2 (LETT #1# |esl|)
-                                  (QCDR #1#)
-                                (|check_union2| (QEQCAR #1# 0)
+                              (PROG2 (LETT #2# |esl|)
+                                  (QCDR #2#)
+                                (|check_union2| (QEQCAR #2# 0)
                                                 (|SplittingTree|
                                                  (|List| (QREFELT % 9)) %)
                                                 (|Union|
                                                  (|SplittingTree|
                                                   (|List| (QREFELT % 9)) %)
-                                                 #2#)
-                                                #1#))
+                                                 #1#)
+                                                #2#))
                               |a| |ln| (QREFELT % 59)))))))))
                   ('T
                    (SEQ
                     (SPADCALL
-                     (PROG2 (LETT #1# |esl|)
-                         (QCDR #1#)
-                       (|check_union2| (QEQCAR #1# 0)
+                     (PROG2 (LETT #2# |esl|)
+                         (QCDR #2#)
+                       (|check_union2| (QEQCAR #2# 0)
                                        (|SplittingTree| (|List| (QREFELT % 9))
                                                         %)
                                        (|Union|
                                         (|SplittingTree| (|List| (QREFELT % 9))
                                                          %)
-                                        #2#)
-                                       #1#))
+                                        #1#)
+                                       #2#))
                      (SPADCALL NIL (SPADCALL (QREFELT % 41)) 'T (QREFELT % 53))
                      (QREFELT % 54))
                     (EXIT (SPADCALL |a| (QREFELT % 55))))))))
@@ -420,23 +419,23 @@
 
 (SDEFUN |WUTSET;removeSquares| ((|ts| (%)) (% #1=(|Union| % "failed")))
         (SPROG
-         ((|p| (P)) (|newts| (%)) (|rsts| #1#) (#2=#:G79 NIL) (#3=#:G144 NIL))
+         ((#2=#:G154 NIL) (#3=#:G86 NIL) (|rsts| #1#) (|newts| (%)) (|p| (P)))
          (SEQ
           (COND ((SPADCALL |ts| (QREFELT % 66)) (CONS 0 |ts|))
                 (#4='T
                  (SEQ
                   (LETT |p|
-                        (PROG2 (LETT #3# (SPADCALL |ts| (QREFELT % 68)))
-                            (QCDR #3#)
-                          (|check_union2| (QEQCAR #3# 0) (QREFELT % 9)
+                        (PROG2 (LETT #2# (SPADCALL |ts| (QREFELT % 68)))
+                            (QCDR #2#)
+                          (|check_union2| (QEQCAR #2# 0) (QREFELT % 9)
                                           (|Union| (QREFELT % 9) "failed")
-                                          #3#)))
+                                          #2#)))
                   (LETT |rsts|
                         (|WUTSET;removeSquares|
-                         (PROG2 (LETT #2# (SPADCALL |ts| (QREFELT % 69)))
-                             (QCDR #2#)
-                           (|check_union2| (QEQCAR #2# 0) %
-                                           (|Union| % "failed") #2#))
+                         (PROG2 (LETT #3# (SPADCALL |ts| (QREFELT % 69)))
+                             (QCDR #3#)
+                           (|check_union2| (QEQCAR #3# 0) %
+                                           (|Union| % "failed") #3#))
                          %))
                   (EXIT
                    (COND
@@ -484,8 +483,8 @@
 
 (SDEFUN |WUTSET;zeroSetSplit;LL;13| ((|lp| (|List| P)) (% (|List| %)))
         (SPROG
-         ((|newlts| (|List| %)) (|iic| (|Union| % "failed")) (|lts| (|List| %))
-          (|ts| (%)))
+         ((|ts| (%)) (|lts| (|List| %)) (|iic| (|Union| % "failed"))
+          (|newlts| (|List| %)))
          (SEQ (LETT |lts| (SPADCALL |lp| (ELT % 32) (ELT % 33) (QREFELT % 64)))
               (LETT |lts| (SPADCALL |lts| (QREFELT % 79))) (LETT |newlts| NIL)
               (SEQ G190
@@ -517,8 +516,8 @@
 
 (DEFUN |WuWenTsunTriangularSet;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((#1=#:G183 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
-    (DV$2 NIL) (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL)
+    (#1=#:G194 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -568,9 +567,9 @@
                 (CONS (|dispatchFunction| |WUTSET;zeroSetSplit;LL;14|) %))))
     %))) 
 
-(DEFUN |WuWenTsunTriangularSet| (&REST #1=#:G184)
+(DEFUN |WuWenTsunTriangularSet| (&REST #1=#:G195)
   (SPROG NIL
-         (PROG (#2=#:G185)
+         (PROG (#2=#:G196)
            (RETURN
             (COND
              ((LETT #2#
@@ -597,7 +596,7 @@
               (10 . |rewriteIdealWithQuasiMonicGenerators|) (|Boolean|)
               (17 . |ground?|) (|Mapping| 17 9) (22 . |any?|)
               (|Record| (|:| |bas| %) (|:| |top| 11)) (|Union| 21 '#1="failed")
-              (28 . |basicSet|) (34 . |rewriteIdealWithRemainder|) (40 . |One|)
+              (28 . |basicSet|) (34 . |rewriteIdealWithRemainder|) (40 . |1|)
               (44 . =) (50 . |rewriteSetWithReduction|) (58 . |members|)
               (63 . |concat|) (|Union| % '"failed") |WUTSET;medialSet;LMMU;5|
               (69 . |initiallyReduced?|) (75 . |initiallyReduce|)

@@ -96,6 +96,11 @@
 (DEFUN |eval_defun| (|name| |body|)
   (PROG () (RETURN (EVAL (MACROEXPANDALL |body|)))))
 
+; comp_form(form) ==
+;     COMP0(form, FUNCTION print_defun)
+
+(DEFUN |comp_form| (|form|) (PROG () (RETURN (COMP0 |form| #'|print_defun|))))
+
 ; comp_and_define(form) ==
 ;    COMP0(form, FUNCTION print_and_eval_defun)
 
@@ -172,8 +177,8 @@
 
 ; COMP_2(args, comp370_apply) ==
 ;     [name, [type, argl, :bodyl], :junk] := args
-;     junk => MOAN (FORMAT(nil, '"******pren error in (~S (~S ...) ...)",_
-;                          name, type))
+;     junk => bright_warn([FORMAT(nil, '"******pren error in (~S (~S ...) ...)",
+;                                 name, type)])
 ;     type is "SLAM" => BREAK()
 ;     type is 'domain_functor =>
 ;         compHash(name, argl, bodyl, "$ConstructorCache", 'domainEqualList)
@@ -200,8 +205,9 @@
       (SETQ |junk| (CDDR . #1#))
       (COND
        (|junk|
-        (MOAN
-         (FORMAT NIL "******pren error in (~S (~S ...) ...)" |name| |type|)))
+        (|bright_warn|
+         (LIST
+          (FORMAT NIL "******pren error in (~S (~S ...) ...)" |name| |type|))))
        ((EQ |type| 'SLAM) (BREAK))
        ((EQ |type| '|domain_functor|)
         (|compHash| |name| |argl| |bodyl| '|$ConstructorCache|
@@ -230,10 +236,6 @@
           ('T (SETQ |bfVar#2| (CONS (COMP_2 |nf| |comp370_apply|) |bfVar#2|))))
          (SETQ |bfVar#1| (CDR |bfVar#1|))))
       NIL (COMP_1 |fun|) NIL))))
-
-; COMP(fun) == COMP0(fun, $comp370_apply)
-
-(DEFUN COMP (|fun|) (PROG () (RETURN (COMP0 |fun| |$comp370_apply|))))
 
 ; maybe_devaluate(a, ca) ==
 ;     ca => ["devaluate", a]
@@ -440,7 +442,7 @@
 ;                             first(x3) = "SEQ" or _
 ;                             not(CONTAINED("EXIT", x3))) => x3
 ;         ["SEQ", :xl3]
-;     $locVars := set_difference(REMDUP(NREVERSE($locVars)),
+;     $locVars := SETDIFFERENCE(REMDUP(NREVERSE($locVars)),
 ;                                LISTOFATOMS (x2))
 ;     lvars := $locVars
 ;     x3 :=
@@ -472,8 +474,8 @@
                 |x3|)
                (#2='T (CONS 'SEQ |xl3|))))
       (SETQ |$locVars|
-              (|set_difference| (REMDUP (NREVERSE |$locVars|))
-               (LISTOFATOMS |x2|)))
+              (SETDIFFERENCE (REMDUP (NREVERSE |$locVars|))
+                             (LISTOFATOMS |x2|)))
       (SETQ |lvars| |$locVars|)
       (SETQ |x3|
               (COND
@@ -608,7 +610,7 @@
 ; PUSHLOCVAR(x) ==
 ;     x ~= "$" and SCHAR('"$", 0) = SCHAR(PNAME(x), 0) _
 ;       and (not(SCHAR('",", 0) = SCHAR(PNAME(x), 1)) or BREAK())
-;       and not(DIGITP (SCHAR(PNAME(x), 1))) => nil
+;         and not(char_to_digit(SCHAR(PNAME(x), 1))) => nil
 ;     PUSH(x, $locVars)
 
 (DEFUN PUSHLOCVAR (|x|)
@@ -617,7 +619,7 @@
      (COND
       ((AND (NOT (EQ |x| '$)) (EQUAL (SCHAR "$" 0) (SCHAR (PNAME |x|) 0))
             (OR (NULL (EQUAL (SCHAR "," 0) (SCHAR (PNAME |x|) 1))) (BREAK))
-            (NULL (DIGITP (SCHAR (PNAME |x|) 1))))
+            (NULL (|char_to_digit| (SCHAR (PNAME |x|) 1))))
        NIL)
       ('T (PUSH |x| |$locVars|))))))
 
@@ -928,8 +930,8 @@
 ;         ATOM(X) => BREAK()
 ;         U := rest(X)
 ;         -- A hack to increase the likelihood of small integers
-;         if X is ["STEP", ., i1, i2, :.] and member(i1, '(2 1 0 (One) (Zero)))
-;            and member(i2, '(1 (One))) then X := ["ISTEP", :U]
+;         if X is ["STEP", ., i1, i2, :.] and member(i1, [2, 1, 0, ["1"], ["0"]])
+;            and member(i2, [1, ["1"]]) then X := ["ISTEP", :U]
 ;         op := first(X)
 ;         op = "GSTEP" =>
 ;             [var, empty_form, step_form, init_form] := U
@@ -976,7 +978,7 @@
 ;                             ["greater_SI", var, final]]),
 ;                               :tests]
 ;             vl := [[var, start,
-;                  (member(inc, '(1 (One))) => MK_inc_SI(first(U));
+;                  (member(inc, [1, ["1"]]) => MK_inc_SI(first(U));
 ;                    ["add_SI", var, inc])], :vl]
 ;         op = "ON" =>
 ;             tests := [["ATOM", first(U)], :tests]
@@ -1002,7 +1004,7 @@
 ;         op = "EXIT" =>
 ;             result_expr => BREAK()
 ;             result_expr := first(U)
-;         FAIL()
+;         BREAK()
 ;     expandDO(NREVERSE(vl), MKPF(NREVERSE(tests), "OR"), result_expr,
 ;              seq_opt(["SEQ", ["EXIT", body]]))
 
@@ -1043,8 +1045,8 @@
                                              (PROGN
                                               (SETQ |i2| (CAR |ISTMP#3|))
                                               #1#)))))))
-                           (|member| |i1| '(2 1 0 (|One|) (|Zero|)))
-                           (|member| |i2| '(1 (|One|))))
+                           (|member| |i1| (LIST 2 1 0 (LIST '|1|) (LIST '|0|)))
+                           (|member| |i2| (LIST 1 (LIST '|1|))))
                       (SETQ X (CONS 'ISTEP U))))
                     (SETQ |op| (CAR X))
                     (COND
@@ -1134,7 +1136,7 @@
                                (CONS
                                 (LIST |var| |start|
                                       (COND
-                                       ((|member| |inc| '(1 (|One|)))
+                                       ((|member| |inc| (LIST 1 (LIST '|1|)))
                                         (|MK_inc_SI| (CAR U)))
                                        (#1# (LIST '|add_SI| |var| |inc|))))
                                 |vl|))))
@@ -1178,7 +1180,7 @@
                      ((EQ |op| 'EXIT)
                       (COND (|result_expr| (BREAK))
                             (#1# (SETQ |result_expr| (CAR U)))))
-                     (#1# (FAIL))))))))
+                     (#1# (BREAK))))))))
           (SETQ |bfVar#20| (CDR |bfVar#20|))))
        |conds| NIL)
       (|expandDO| (NREVERSE |vl|) (MKPF (NREVERSE |tests|) 'OR) |result_expr|
@@ -1196,7 +1198,7 @@
 ;             ret_val := ["LIST2VEC", ["COLLECT", :l]]
 ;             return nil -- break loop
 ;         op in '(IN ON) =>
-;             conds := [["SIZE", CADDR(iter)], :conds]
+;             conds := [["LENGTH", CADDR(iter)], :conds]
 ;         op in '(STEP ISTEP) =>
 ;             [., var, start, step, :opt_limit] := iter
 ;             if start = 0 and step = 1 then
@@ -1220,7 +1222,7 @@
 ;         counter_var := GENSYM()
 ;         iters := [["ISTEP", counter_var, 0, 1], :iters]
 ;     lv :=
-;         NULL(conds) => FAIL()
+;         NULL(conds) => BREAK()
 ;         NULL(rest(conds)) => first(conds)
 ;         ["MIN", :conds]
 ;     res := GENSYM()
@@ -1253,7 +1255,7 @@
                 (SETQ |ret_val| (LIST 'LIST2VEC (CONS 'COLLECT |l|)))
                 (RETURN NIL)))
               ((|member| |op| '(IN ON))
-               (SETQ |conds| (CONS (LIST 'SIZE (CADDR |iter|)) |conds|)))
+               (SETQ |conds| (CONS (LIST 'LENGTH (CADDR |iter|)) |conds|)))
               ((|member| |op| '(STEP ISTEP))
                (PROGN
                 (SETQ |var| (CADR . #2=(|iter|)))
@@ -1289,7 +1291,7 @@
                ((NULL |counter_var|) (SETQ |counter_var| (GENSYM))
                 (SETQ |iters| (CONS (LIST 'ISTEP |counter_var| 0 1) |iters|))))
               (SETQ |lv|
-                      (COND ((NULL |conds|) (FAIL))
+                      (COND ((NULL |conds|) (BREAK))
                             ((NULL (CDR |conds|)) (CAR |conds|))
                             (#1# (CONS 'MIN |conds|))))
               (SETQ |res| (GENSYM))
@@ -1300,10 +1302,6 @@
                                    (LIST 'SETELT |res| |counter_var| |body|)
                                    NIL)))
                     |res|))))))))
-
-; DEFPARAMETER($comp370_apply, nil)
-
-(DEFPARAMETER |$comp370_apply| NIL)
 
 ; COMP370(fn, comp370_apply) ==
 ;     not(fn is [fname, [ltype, args, :body]]) => BREAK()

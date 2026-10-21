@@ -50,8 +50,8 @@
 
 (DEFUN |Queue;| (|#1|)
   (SPROG
-   ((#1=#:G33 NIL) (|pv$| NIL) (#2=#:G30 NIL) (#3=#:G31 NIL) (#4=#:G32 NIL)
-    (% NIL) (|dv$| NIL) (DV$1 NIL))
+   ((DV$1 NIL) (|dv$| NIL) (% NIL) (#1=#:G32 NIL) (#2=#:G31 NIL) (#3=#:G30 NIL)
+    (|pv$| NIL) (#4=#:G33 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT |dv$| (LIST '|Queue| DV$1))
@@ -61,7 +61,7 @@
               (LETT |pv$|
                     (|buildPredVector| 0 0
                                        (LIST
-                                        (LETT #4#
+                                        (LETT #1#
                                               (|HasCategory| |#1|
                                                              '(|SetCategory|)))
                                         (AND
@@ -69,38 +69,38 @@
                                                         (LIST '|Evalable|
                                                               (|devaluate|
                                                                |#1|)))
-                                         #4#)
+                                         #1#)
                                         (|HasCategory| |#1|
                                                        '(|ConvertibleTo|
                                                          (|InputForm|)))
                                         (|HasCategory| |#1| '(|Hashable|))
                                         (|HasCategory| |#1| '(|OrderedSet|))
-                                        (LETT #3#
+                                        (LETT #2#
                                               (|HasCategory| |#1|
                                                              '(|CoercibleTo|
                                                                (|OutputForm|))))
-                                        (OR #3#
+                                        (OR #2#
                                             (AND
                                              (|HasCategory| |#1|
                                                             (LIST '|Evalable|
                                                                   (|devaluate|
                                                                    |#1|)))
-                                             #4#))
-                                        (LETT #2#
+                                             #1#))
+                                        (LETT #3#
                                               (|HasCategory| |#1|
                                                              '(|BasicType|)))
-                                        (OR #2#
+                                        (OR #3#
                                             (|HasCategory| |#1| '(|Hashable|))
-                                            #4#)))))
+                                            #1#)))))
     (|haddProp| |$ConstructorCache| '|Queue| (LIST DV$1) (CONS 1 %))
     (|stuffDomainSlots| %)
     (QSETREFV % 6 |#1|)
     (AND (|HasCategory| % '(|shallowlyMutable|)) (|augmentPredVector| % 512))
-    (AND (LETT #1# (|HasCategory| % '(|finiteAggregate|)))
+    (AND (LETT #4# (|HasCategory| % '(|finiteAggregate|)))
          (|augmentPredVector| % 1024))
-    (AND (|HasCategory| |#1| '(|OrderedSet|)) #1# (|augmentPredVector| % 2048))
-    (AND #2# #1# (|augmentPredVector| % 4096))
-    (AND (OR (AND #2# #1#) (|HasCategory| |#1| '(|Hashable|)) #4#)
+    (AND (|HasCategory| |#1| '(|OrderedSet|)) #4# (|augmentPredVector| % 2048))
+    (AND #3# #4# (|augmentPredVector| % 4096))
+    (AND (OR (AND #3# #4#) (|HasCategory| |#1| '(|Hashable|)) #1#)
          (|augmentPredVector| % 8192))
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 7 (|Reference| (|List| |#1|)))

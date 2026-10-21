@@ -1,14 +1,14 @@
 
-(PUT '|SEGBIND;equation;SS%;1| '|SPADreplace| 'CONS) 
+(MAKEPROP '|SEGBIND;equation;SS%;1| '|SPADreplace| 'CONS) 
 
 (SDEFUN |SEGBIND;equation;SS%;1| ((|x| (|Symbol|)) (|s| (|Segment| S)) (% (%)))
         (CONS |x| |s|)) 
 
-(PUT '|SEGBIND;variable;%S;2| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|SEGBIND;variable;%S;2| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |SEGBIND;variable;%S;2| ((|b| (%)) (% (|Symbol|))) (QCAR |b|)) 
 
-(PUT '|SEGBIND;segment;%S;3| '|SPADreplace| 'QCDR) 
+(MAKEPROP '|SEGBIND;segment;%S;3| '|SPADreplace| 'QCDR) 
 
 (SDEFUN |SEGBIND;segment;%S;3| ((|b| (%)) (% (|Segment| S))) (QCDR |b|)) 
 
@@ -34,7 +34,7 @@
 (DECLAIM (NOTINLINE |SegmentBinding;|)) 
 
 (DEFUN |SegmentBinding;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|SegmentBinding| DV$1))
@@ -71,9 +71,9 @@
                              %)))))
           %))) 
 
-(DEFUN |SegmentBinding| (#1=#:G12)
+(DEFUN |SegmentBinding| (#1=#:G13)
   (SPROG NIL
-         (PROG (#2=#:G13)
+         (PROG (#2=#:G14)
            (RETURN
             (COND
              ((LETT #2#

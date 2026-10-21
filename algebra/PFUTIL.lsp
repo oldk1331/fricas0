@@ -2,8 +2,8 @@
 (SDEFUN |PFUTIL;decompose;UP2L;1|
         ((|nn| (UP)) (|dens| (|List| UP)) (% (|List| UP)))
         (SPROG
-         ((|ru| (|Union| (|List| UP) "failed")) (|sdeg| (|Integer|))
-          (#1=#:G11 NIL) (|den| NIL))
+         ((|den| NIL) (#1=#:G14 NIL) (|sdeg| (|Integer|))
+          (|ru| (|Union| (|List| UP) "failed")))
          (SEQ
           (COND
            ((NULL |dens|)
@@ -29,7 +29,7 @@
 (DECLAIM (NOTINLINE |PartialFractionUtilities;|)) 
 
 (DEFUN |PartialFractionUtilities;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -45,9 +45,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |PartialFractionUtilities| (&REST #1=#:G12)
+(DEFUN |PartialFractionUtilities| (&REST #1=#:G15)
   (SPROG NIL
-         (PROG (#2=#:G13)
+         (PROG (#2=#:G16)
            (RETURN
             (COND
              ((LETT #2#
@@ -67,11 +67,10 @@
 
 (MAKEPROP '|PartialFractionUtilities| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (0 . |Zero|) (4 . |Zero|) (|Boolean|) (8 . =)
-              (|NonNegativeInteger|) (14 . |degree|) (|Union| 15 '"failed")
-              (|List| %) (19 . |multiEuclidean|) (|List| 7)
-              |PFUTIL;decompose;UP2L;1|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (0 . |0|)
+              (4 . |0|) (|Boolean|) (8 . =) (|NonNegativeInteger|)
+              (14 . |degree|) (|Union| 15 '"failed") (|List| %)
+              (19 . |multiEuclidean|) (|List| 7) |PFUTIL;decompose;UP2L;1|)
            '#(|decompose| 25) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

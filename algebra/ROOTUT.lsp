@@ -1,5 +1,5 @@
 
-(PUT '|ROOTUT;root_pair| '|SPADreplace| 'CONS) 
+(MAKEPROP '|ROOTUT;root_pair| '|SPADreplace| 'CONS) 
 
 (SDEFUN |ROOTUT;root_pair|
         ((|a| (F)) (|b| (F)) (% (|Record| (|:| |real| F) (|:| |imag| F))))
@@ -7,10 +7,10 @@
 
 (SDEFUN |ROOTUT;root4| ((|a| (F)) (% (F)))
         (SPROG
-         ((|p1| (|SparseUnivariatePolynomial| F))
-          (|rec|
+         ((|rec|
            (|Record| (|:| |exponent| (|NonNegativeInteger|)) (|:| |coef| F)
-                     (|:| |radicand| F))))
+                     (|:| |radicand| F)))
+          (|p1| (|SparseUnivariatePolynomial| F)))
          (SEQ (LETT |rec| (SPADCALL |a| 4 (QREFELT % 19)))
               (LETT |p1|
                     (SPADCALL
@@ -23,14 +23,14 @@
 
 (SDEFUN |ROOTUT;my_sqrt;2F;3| ((|a| (F)) (% (F)))
         (SPROG
-         ((|fr1| #1=(|SparseUnivariatePolynomial| F))
+         ((|p| (|SparseUnivariatePolynomial| F))
+          (|fr| (|Factored| (|SparseUnivariatePolynomial| F)))
           (|fl|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
-                      (|:| |factor| #1#)
+                      (|:| |factor| #1=(|SparseUnivariatePolynomial| F))
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (|fr| (|Factored| (|SparseUnivariatePolynomial| F)))
-          (|p| (|SparseUnivariatePolynomial| F)))
+          (|fr1| #1#))
          (SEQ
           (LETT |p|
                 (SPADCALL (SPADCALL (|spadConstant| % 12) 2 (QREFELT % 21))
@@ -55,14 +55,14 @@
 
 (SDEFUN |ROOTUT;my_root3;2F;4| ((|a| (F)) (% (F)))
         (SPROG
-         ((|fr1| #1=(|SparseUnivariatePolynomial| F))
+         ((|p| (|SparseUnivariatePolynomial| F))
+          (|fr| (|Factored| (|SparseUnivariatePolynomial| F)))
           (|fl|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
-                      (|:| |factor| #1#)
+                      (|:| |factor| #1=(|SparseUnivariatePolynomial| F))
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (|fr| (|Factored| (|SparseUnivariatePolynomial| F)))
-          (|p| (|SparseUnivariatePolynomial| F)))
+          (|fr1| #1#))
          (SEQ
           (LETT |p|
                 (SPADCALL (SPADCALL (|spadConstant| % 12) 3 (QREFELT % 21))
@@ -102,7 +102,7 @@
                      (|:| |complexes|
                           (|List| (|Record| (|:| |real| F) (|:| |imag| F)))))
            "failed")))
-        (SPROG ((|qr| (F)) (|su| (|Union| (|Integer|) "failed")))
+        (SPROG ((|su| (|Union| (|Integer|) "failed")) (|qr| (F)))
                (SEQ (LETT |su| (SPADCALL |q| (QREFELT % 51)))
                     (EXIT
                      (COND ((QEQCAR |su| 1) (CONS 1 "failed"))
@@ -137,14 +137,14 @@
                           (|List| (|Record| (|:| |real| F) (|:| |imag| F)))))
            "failed")))
         (SPROG
-         ((|q2| (F))
+         ((|rr| (F)) (|qq| (F)) (|q1| (F))
           (|res1|
            (|Union|
             (|Record| (|:| |reals| (|List| F))
                       (|:| |complexes|
                            (|List| (|Record| (|:| |real| F) (|:| |imag| F)))))
             "failed"))
-          (|q1| (F)) (|qq| (F)) (|rr| (F)))
+          (|q2| (F)))
          (SEQ (LETT |rr| (SPADCALL |r1| (QREFELT % 42)))
               (LETT |qq|
                     (SPADCALL |r1|
@@ -188,7 +188,7 @@
                      (|:| |complexes|
                           (|List| (|Record| (|:| |real| F) (|:| |imag| F)))))
            "failed")))
-        (SPROG ((|d2| (F)) (|su| (|Union| (|Integer|) "failed")))
+        (SPROG ((|su| (|Union| (|Integer|) "failed")) (|d2| (F)))
                (SEQ (LETT |d2| (SPADCALL |del| (QREFELT % 42)))
                     (LETT |su| (SPADCALL |d2| (QREFELT % 51)))
                     (EXIT
@@ -216,23 +216,22 @@
                           (|List| (|Record| (|:| |real| F) (|:| |imag| F)))))
            "failed")))
         (SPROG
-         ((#1=#:G101 NIL) (|su| (|Union| (|Integer|) "failed")) (|t2| (F))
-          (|t1| (F)) (|del| (F)) (|b2| (F)) (|a2| (F)) (|s1| (|Integer|))
-          (|r1| (F)) (|f2| #2=(|SparseUnivariatePolynomial| F))
-          (|f1| #3=(|SparseUnivariatePolynomial| F))
-          (|#G29| (|SparseUnivariatePolynomial| F)) (|#G28| #2#)
-          (#4=#:G100 NIL) (|cnt| (|Integer|)) (|cc| (F)) (#5=#:G104 NIL)
-          (|flf| (|List| (|SparseUnivariatePolynomial| F))) (#6=#:G103 NIL)
-          (|i| NIL) (#7=#:G102 NIL) (|fac| NIL)
+         ((|a| (F)) (|b| (F)) (|c| (F)) (|xx| (|SparseUnivariatePolynomial| F))
+          (|r| (|SparseUnivariatePolynomial| F))
+          (|fr| (|Factored| (|SparseUnivariatePolynomial| F)))
           (|fl|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
-                      (|:| |factor| #3#)
+                      (|:| |factor| #1=(|SparseUnivariatePolynomial| F))
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (|fr| (|Factored| (|SparseUnivariatePolynomial| F)))
-          (|r| (|SparseUnivariatePolynomial| F))
-          (|xx| (|SparseUnivariatePolynomial| F)) (|c| (F)) (|b| (F))
-          (|a| (F)))
+          (|fac| NIL) (#2=#:G115 NIL) (|i| NIL) (#3=#:G116 NIL)
+          (|flf| (|List| (|SparseUnivariatePolynomial| F))) (#4=#:G117 NIL)
+          (|cc| (F)) (|cnt| (|Integer|)) (#5=#:G113 NIL)
+          (|#G28| #6=(|SparseUnivariatePolynomial| F))
+          (|#G29| (|SparseUnivariatePolynomial| F)) (|f1| #1#) (|f2| #6#)
+          (|r1| (F)) (|s1| (|Integer|)) (|a2| (F)) (|b2| (F)) (|del| (F))
+          (|t1| (F)) (|t2| (F)) (|su| (|Union| (|Integer|) "failed"))
+          (#7=#:G114 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |a| (SPADCALL |p| 2 (QREFELT % 40)))
@@ -265,26 +264,26 @@
                                 (QREFELT % 23)))
                 (LETT |fr| (SPADCALL |r| (QREFELT % 28)))
                 (LETT |fl| (SPADCALL |fr| (QREFELT % 33))) (LETT |flf| NIL)
-                (SEQ (LETT |fac| NIL) (LETT #7# |fl|) G190
+                (SEQ (LETT |fac| NIL) (LETT #2# |fl|) G190
                      (COND
-                      ((OR (ATOM #7#) (PROGN (LETT |fac| (CAR #7#)) NIL))
+                      ((OR (ATOM #2#) (PROGN (LETT |fac| (CAR #2#)) NIL))
                        (GO G191)))
                      (SEQ (LETT |f1| (QVELT |fac| 1))
                           (EXIT
-                           (SEQ (LETT |i| 1) (LETT #6# (QVELT |fac| 2)) G190
-                                (COND ((|greater_SI| |i| #6#) (GO G191)))
+                           (SEQ (LETT |i| 1) (LETT #3# (QVELT |fac| 2)) G190
+                                (COND ((|greater_SI| |i| #3#) (GO G191)))
                                 (SEQ (EXIT (LETT |flf| (CONS |f1| |flf|))))
                                 (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                                 (EXIT NIL))))
-                     (LETT #7# (CDR #7#)) (GO G190) G191 (EXIT NIL))
+                     (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                 (EXIT
                  (COND ((EQL (LENGTH |flf|) 1) (CONS 1 "failed"))
                        ((EQL (LENGTH |flf|) 3)
                         (SEQ (LETT |cnt| 0)
-                             (SEQ (LETT #5# |flf|) G190
+                             (SEQ (LETT #4# |flf|) G190
                                   (COND
-                                   ((OR (ATOM #5#)
-                                        (PROGN (LETT |f1| (CAR #5#)) NIL))
+                                   ((OR (ATOM #4#)
+                                        (PROGN (LETT |f1| (CAR #4#)) NIL))
                                     (GO G191)))
                                   (SEQ
                                    (EXIT
@@ -299,19 +298,19 @@
                                       (COND
                                        ((QEQCAR |su| 1)
                                         (PROGN
-                                         (LETT #1# (CONS 1 "failed"))
-                                         (GO #8=#:G99)))
+                                         (LETT #7# (CONS 1 "failed"))
+                                         (GO #8=#:G112)))
                                        ((< (QCDR |su|) 0)
                                         (SEQ (LETT |cnt| (+ |cnt| 1))
                                              (EXIT
                                               (COND
                                                ((> |cnt| 1)
                                                 (PROGN
-                                                 (LETT #4# |$NoValue|)
-                                                 (GO #9=#:G72)))
+                                                 (LETT #5# |$NoValue|)
+                                                 (GO #9=#:G85)))
                                                ('T (LETT |r1| |cc|))))))))))
-                                   #9# (EXIT #4#))
-                                  (LETT #5# (CDR #5#)) (GO G190) G191
+                                   #9# (EXIT #5#))
+                                  (LETT #4# (CDR #4#)) (GO G190) G191
                                   (EXIT NIL))
                              (EXIT
                               (COND ((EQL |cnt| 0) (|error| "impossible"))
@@ -339,7 +338,7 @@
                              (EXIT
                               (COND
                                ((QEQCAR |su| 1)
-                                (PROGN (LETT #1# (CONS 1 "failed")) (GO #8#)))
+                                (PROGN (LETT #7# (CONS 1 "failed")) (GO #8#)))
                                (#10#
                                 (SEQ (LETT |s1| (QCDR |su|))
                                      (LETT |a2|
@@ -364,7 +363,7 @@
                                           (COND
                                            ((< (QCDR |su|) 0)
                                             (PROGN
-                                             (LETT #1#
+                                             (LETT #7#
                                                    (COND
                                                     ((< 0 |s1|)
                                                      (|ROOTUT;quartic3| |r1|
@@ -411,21 +410,21 @@
                                                  (COND
                                                   ((< 0 (QCDR |su|))
                                                    (PROGN
-                                                    (LETT #1#
+                                                    (LETT #7#
                                                           (|ROOTUT;do_f2| |del|
                                                            |a2| |b2| |a0| |a|
                                                            |b| %))
                                                     (GO #8#)))
                                                   (#10#
                                                    (PROGN
-                                                    (LETT #1#
+                                                    (LETT #7#
                                                           (|ROOTUT;quartic3|
                                                            |r1| |a0| |a| |b|
                                                            %))
                                                     (GO #8#)))))))))
                                             (#10#
                                              (PROGN
-                                              (LETT #1#
+                                              (LETT #7#
                                                     (|ROOTUT;do_f2| |del| |a2|
                                                      |b2| |a0| |a| |b| %))
                                               (GO #8#))))))))))
@@ -435,7 +434,7 @@
                                            (NULL (< 0 (QCDR |su|))))
                                        (EXIT
                                         (PROGN
-                                         (LETT #1# (CONS 1 "failed"))
+                                         (LETT #7# (CONS 1 "failed"))
                                          (GO #8#)))))
                                      (LETT |su|
                                            (SPADCALL
@@ -448,16 +447,16 @@
                                       ((OR (QEQCAR |su| 1)
                                            (NULL (< 0 (QCDR |su|))))
                                        (PROGN
-                                        (LETT #1# (CONS 1 "failed"))
+                                        (LETT #7# (CONS 1 "failed"))
                                         (GO #8#))))
                                      (EXIT
                                       (|ROOTUT;quartic3| |r1| |a0| |a| |b|
                                        %))))))))
                        (#10# (|error| "impossible"))))))
-          #8# (EXIT #1#)))) 
+          #8# (EXIT #7#)))) 
 
-(PUT '|ROOTUT;quartic2;SupFU;9| '|SPADreplace|
-     '(XLAM (|p| |a0|) (CONS 1 "failed"))) 
+(MAKEPROP '|ROOTUT;quartic2;SupFU;9| '|SPADreplace|
+          '(XLAM (|p| |a0|) (CONS 1 "failed"))) 
 
 (SDEFUN |ROOTUT;quartic2;SupFU;9|
         ((|p| (|SparseUnivariatePolynomial| F)) (|a0| (F))
@@ -503,8 +502,8 @@
                           (|List| (|Record| (|:| |real| F) (|:| |imag| F)))))
            "failed")))
         (SPROG
-         ((|su| (|Union| (|Integer|) "failed")) (|r1| (F)) (|a| (F))
-          (|rp| (|SparseUnivariatePolynomial| F)) (|a0| (F)))
+         ((|a0| (F)) (|rp| (|SparseUnivariatePolynomial| F)) (|a| (F))
+          (|r1| (F)) (|su| (|Union| (|Integer|) "failed")))
          (SEQ
           (LETT |p|
                 (SPADCALL
@@ -621,20 +620,20 @@
                           (|List| (|Record| (|:| |real| F) (|:| |imag| F)))))
            "failed")))
         (SPROG
-         ((|cl| (|List| (|Record| (|:| |real| F) (|:| |imag| F))))
-          (|cp| (|Record| (|:| |real| F) (|:| |imag| F))) (|rl| (|List| F))
-          (#1=#:G141 NIL) (|r| NIL)
-          (|r1|
-           (|Record| (|:| |reals| (|List| F))
-                     (|:| |complexes|
-                          (|List| (|Record| (|:| |real| F) (|:| |imag| F))))))
+         ((|pu| (|Union| (|SparseUnivariatePolynomial| F) "failed"))
           (|ru|
            (|Union|
             (|Record| (|:| |reals| (|List| F))
                       (|:| |complexes|
                            (|List| (|Record| (|:| |real| F) (|:| |imag| F)))))
             "failed"))
-          (|pu| (|Union| (|SparseUnivariatePolynomial| F) "failed")))
+          (|r1|
+           (|Record| (|:| |reals| (|List| F))
+                     (|:| |complexes|
+                          (|List| (|Record| (|:| |real| F) (|:| |imag| F))))))
+          (|r| NIL) (#1=#:G157 NIL) (|rl| (|List| F))
+          (|cp| (|Record| (|:| |real| F) (|:| |imag| F)))
+          (|cl| (|List| (|Record| (|:| |real| F) (|:| |imag| F)))))
          (SEQ
           (LETT |pu|
                 (SPADCALL |p| (SPADCALL (|spadConstant| % 12) 1 (QREFELT % 21))
@@ -690,11 +689,11 @@
                           (|List| (|Record| (|:| |real| F) (|:| |imag| F)))))
            "failed")))
         (SPROG
-         ((#1=#:G164 NIL) (|r3| (F)) (|r2| (F))
-          (|su| (|Union| (|Integer|) "failed")) (|x2| (F)) (|x1| (F))
-          (|r1| (F)) (|si| (|Integer|)) (|del| (F)) (|c| (F)) (|b| (F))
-          (|a| (F)) (|rp| (|SparseUnivariatePolynomial| F)) (|a0| (F))
-          (|lc| (F)))
+         ((|lc| (F)) (|a0| (F)) (|rp| (|SparseUnivariatePolynomial| F))
+          (|a| (F)) (|b| (F)) (|c| (F)) (|del| (F)) (|si| (|Integer|))
+          (|r1| (F)) (|x1| (F)) (|x2| (F))
+          (|su| (|Union| (|Integer|) "failed")) (|r2| (F)) (|r3| (F))
+          (#1=#:G180 NIL))
          (SEQ
           (COND
            ((SPADCALL (SPADCALL |p| 0 (QREFELT % 40)) (|spadConstant| % 76)
@@ -985,7 +984,7 @@
                                                                            %
                                                                            52)))
                                                                         NIL)))))))))))))))))
-                                             (GO #3=#:G157))))))
+                                             (GO #3=#:G173))))))
                                     (EXIT (SPADCALL |p| |a0| (QREFELT % 67)))))
                                   #3# (EXIT #1#)))))))
                    (#2# (SPADCALL |p| |a0| (QREFELT % 67))))))))))) 
@@ -1009,17 +1008,17 @@
         ((|p| (|SparseUnivariatePolynomial| F))
          (% (|Union| (|List| F) "failed")))
         (SPROG
-         ((|res| (|List| F)) (#1=#:G179 NIL) (|c1| NIL)
-          (|r1|
-           (|Record| (|:| |reals| (|List| F))
-                     (|:| |complexes|
-                          (|List| (|Record| (|:| |real| F) (|:| |imag| F))))))
-          (|r1u|
+         ((|r1u|
            (|Union|
             (|Record| (|:| |reals| (|List| F))
                       (|:| |complexes|
                            (|List| (|Record| (|:| |real| F) (|:| |imag| F)))))
-            "failed")))
+            "failed"))
+          (|r1|
+           (|Record| (|:| |reals| (|List| F))
+                     (|:| |complexes|
+                          (|List| (|Record| (|:| |real| F) (|:| |imag| F))))))
+          (|c1| NIL) (#1=#:G195 NIL) (|res| (|List| F)))
          (SEQ (LETT |r1u| (SPADCALL |p| (QREFELT % 82)))
               (EXIT
                (COND ((QEQCAR |r1u| 1) (CONS 1 "failed"))
@@ -1055,7 +1054,7 @@
 (DECLAIM (NOTINLINE |RootUtilities;|)) 
 
 (DEFUN |RootUtilities;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -1094,9 +1093,9 @@
                              %)))))
           %))) 
 
-(DEFUN |RootUtilities| (&REST #1=#:G180)
+(DEFUN |RootUtilities| (&REST #1=#:G196)
   (SPROG NIL
-         (PROG (#2=#:G181)
+         (PROG (#2=#:G197)
            (RETURN
             (COND
              ((LETT #2#
@@ -1115,8 +1114,8 @@
 (MAKEPROP '|RootUtilities| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|SingletonAsOrderedSet|) (0 . |create|) '|dummy| (4 . |One|)
-              (8 . |One|) (12 . -) (17 . |sqrt|) '|my_imag|
+              (|SingletonAsOrderedSet|) (0 . |create|) '|dummy| (4 . |1|)
+              (8 . |1|) (12 . -) (17 . |sqrt|) '|my_imag|
               (|Record| (|:| |exponent| 17) (|:| |coef| 7) (|:| |radicand| 7))
               (|NonNegativeInteger|)
               (|PolynomialRoots| (|IndexedExponents| (|Kernel| 7)) (|Kernel| 7)
@@ -1127,9 +1126,9 @@
               (|Union| '"nil" '"sqfr" '"irred" '"prime")
               (|Record| (|:| |flag| 29) (|:| |factor| 20) (|:| |exponent| 17))
               (|List| 30) (|Factored| 20) (61 . |factorList|) (|Integer|)
-              (66 . |elt|) (72 . |degree|) (|Boolean|) (77 . ~=) (83 . |Zero|)
+              (66 . |elt|) (72 . |degree|) (|Boolean|) (77 . ~=) (83 . |0|)
               (87 . |coefficient|) (93 . /) (99 . |my_sqrt|)
-              (|SparseMultivariatePolynomial| 6 (|Kernel| 7)) (104 . |One|)
+              (|SparseMultivariatePolynomial| 6 (|Kernel| 7)) (104 . |1|)
               (|Fraction| 34) (108 . /) (114 . ^) (120 . |my_root3|)
               (|Union| 34 '"failed") (|ElementaryFunctionSign| 6 7)
               (125 . |sign|) (130 . +) (136 . -) (142 . |coerce|)
@@ -1138,9 +1137,9 @@
               (|Record| (|:| |real| 7) (|:| |imag| 7))
               (|Record| (|:| |reals| (|List| 7)) (|:| |complexes| (|List| 64)))
               (|Union| 65 '"failed") (188 . |quartic2|)
-              (194 . |leadingCoefficient|) (199 . |One|) (203 . /)
-              (209 . |One|) (213 . |eval|) (220 . |reductum|) (225 . |ground?|)
-              (230 . |ground|) (235 . |Zero|) (239 . =) (|Union| % '"failed")
+              (194 . |leadingCoefficient|) (199 . |1|) (203 . /) (209 . |1|)
+              (213 . |eval|) (220 . |reductum|) (225 . |ground?|)
+              (230 . |ground|) (235 . |0|) (239 . =) (|Union| % '"failed")
               (245 . |exquo|) (|AlgebraicManipulations| 6 7) (251 . |rootSimp|)
               |ROOTUT;complex_roots;SupU;15| (|Union| (|List| 7) '"failed")
               |ROOTUT;radical_solve;SupU;16|)

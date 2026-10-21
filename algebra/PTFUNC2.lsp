@@ -1,36 +1,36 @@
 
 (SDEFUN |PTFUNC2;map;MPP;1|
         ((|mapping| (|Mapping| R2 R1)) (|p| (|Point| R1)) (% (|Point| R2)))
-        (SPROG ((#1=#:G2 NIL) (#2=#:G7 NIL) (|i| NIL) (#3=#:G6 NIL))
+        (SPROG ((#1=#:G6 NIL) (|i| NIL) (#2=#:G7 NIL) (#3=#:G2 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
-                  (LETT #3# NIL)
+                  (LETT #1# NIL)
                   (SEQ (LETT |i| (SPADCALL |p| (QREFELT % 10)))
                        (LETT #2# (SPADCALL |p| (QREFELT % 11))) G190
                        (COND ((> |i| #2#) (GO G191)))
                        (SEQ
                         (EXIT
-                         (LETT #3#
+                         (LETT #1#
                                (CONS
                                 (SPADCALL
                                  (SPADCALL |p|
-                                           (PROG1 (LETT #1# |i|)
-                                             (|check_subtype2| (> #1# 0)
+                                           (PROG1 (LETT #3# |i|)
+                                             (|check_subtype2| (> #3# 0)
                                                                '(|PositiveInteger|)
                                                                '(|Integer|)
-                                                               #1#))
+                                                               #3#))
                                            (QREFELT % 12))
                                  |mapping|)
-                                #3#))))
+                                #1#))))
                        (LETT |i| (+ |i| 1)) (GO G190) G191
-                       (EXIT (NREVERSE #3#))))
+                       (EXIT (NREVERSE #1#))))
                  (QREFELT % 15))))) 
 
 (DECLAIM (NOTINLINE |PointFunctions2;|)) 
 
 (DEFUN |PointFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

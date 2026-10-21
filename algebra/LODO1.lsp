@@ -3,8 +3,8 @@
 
 (DEFUN |LinearOrdinaryDifferentialOperator1;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G30 NIL) (#2=#:G32 NIL) (#3=#:G31 NIL) (% NIL)
-    (|dv$| NIL) (DV$1 NIL))
+   ((DV$1 NIL) (|dv$| NIL) (% NIL) (#1=#:G34 NIL) (#2=#:G32 NIL) (#3=#:G33 NIL)
+    (#4=#:G31 NIL) (#5=#:G30 NIL) (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT |dv$| (LIST '|LinearOrdinaryDifferentialOperator1| DV$1))
@@ -18,10 +18,19 @@
                                                        '(|Algebra|
                                                          (|Fraction|
                                                           (|Integer|))))
+                                        (OR
+                                         (AND
+                                          (|HasCategory| |#1|
+                                                         '(|Algebra|
+                                                           (|Fraction|
+                                                            (|Integer|))))
+                                          (|HasCategory|
+                                           (|Fraction| (|Integer|))
+                                           '(|CharacteristicZero|)))
+                                         (|HasCategory| |#1|
+                                                        '(|CharacteristicZero|)))
                                         (|HasCategory| |#1|
                                                        '(|CharacteristicNonZero|))
-                                        (|HasCategory| |#1|
-                                                       '(|CharacteristicZero|))
                                         (|HasCategory| |#1| '(|EntireRing|))
                                         (|HasCategory| |#1|
                                                        '(|CommutativeRing|))
@@ -34,17 +43,18 @@
                                                          (|Integer|)))
                                         (|HasCategory| |#1|
                                                        '(|canonicalUnitNormal|))
-                                        (|HasCategory| |#1| '(|Comparable|))
+                                        (LETT #1#
+                                              (|HasCategory| |#1|
+                                                             '(|Comparable|)))
+                                        (OR #1#
+                                            (|HasCategory| |#1|
+                                                           '(|ComparableRepresentation|)))
                                         (|HasCategory| |#1| '(|Ring|))
                                         (OR
                                          (|HasCategory| |#1|
                                                         '(|Algebra|
                                                           (|Fraction|
                                                            (|Integer|))))
-                                         (|HasCategory| |#1|
-                                                        '(|CharacteristicNonZero|))
-                                         (|HasCategory| |#1|
-                                                        '(|CharacteristicZero|))
                                          (|HasCategory| |#1|
                                                         '(|CommutativeRing|))
                                          (|HasCategory| |#1| '(|EntireRing|))
@@ -65,11 +75,18 @@
                                                           (|Fraction|
                                                            (|Integer|)))))
                                         (|HasCategory| |#1| '(|GcdDomain|))
-                                        (LETT #3#
+                                        (OR
+                                         (AND #1#
+                                              (|HasCategory|
+                                               (|NonNegativeInteger|)
+                                               '(|Comparable|)))
+                                         (|HasCategory| |#1|
+                                                        '(|ComparableRepresentation|)))
+                                        (LETT #2#
                                               (|HasCategory| |#1|
                                                              '(|LinearlyExplicitOver|
                                                                (|Integer|))))
-                                        (LETT #2#
+                                        (LETT #3#
                                               (AND
                                                (|HasCategory| |#1|
                                                               '(|LinearlyExplicitOver|
@@ -81,23 +98,29 @@
                                                          '(|Algebra|
                                                            (|Fraction|
                                                             (|Integer|))))
-                                          #3#)
-                                         (AND #3#
-                                              (|HasCategory| |#1|
-                                                             '(|CharacteristicNonZero|)))
-                                         (AND #3#
-                                              (|HasCategory| |#1|
-                                                             '(|CharacteristicZero|)))
-                                         (AND #3#
+                                          #2#)
+                                         (AND #2#
                                               (|HasCategory| |#1|
                                                              '(|CommutativeRing|)))
-                                         #2#)
+                                         #3#)
                                         (|HasCategory| (|Integer|)
                                                        '(|AbelianMonoid|))
-                                        (|HasCategory| |#1| '(|AbelianMonoid|))
+                                        (LETT #4#
+                                              (|HasCategory| |#1|
+                                                             '(|AbelianMonoid|)))
+                                        (OR
+                                         (AND
+                                          (|HasCategory| |#1|
+                                                         '(|Algebra|
+                                                           (|Fraction|
+                                                            (|Integer|))))
+                                          (|HasCategory|
+                                           (|Fraction| (|Integer|))
+                                           '(|AbelianMonoid|)))
+                                         #4#)
                                         (|HasCategory| (|Integer|)
                                                        '(|AbelianGroup|))
-                                        (LETT #1#
+                                        (LETT #5#
                                               (|HasCategory| |#1|
                                                              '(|CancellationAbelianMonoid|)))
                                         (OR
@@ -110,12 +133,10 @@
                                            (|Fraction| (|Integer|))
                                            '(|AbelianMonoid|)))
                                          (|HasCategory| |#1| '(|AbelianGroup|))
-                                         (|HasCategory| |#1|
-                                                        '(|AbelianMonoid|))
-                                         #1#)
+                                         #4# #5#)
                                         (OR
                                          (|HasCategory| |#1| '(|AbelianGroup|))
-                                         #1#)
+                                         #5#)
                                         (|HasCategory| |#1| '(|Field|))))))
     (|haddProp| |$ConstructorCache| '|LinearOrdinaryDifferentialOperator1|
                 (LIST DV$1) (CONS 1 %))
@@ -127,20 +148,20 @@
            (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
       (AND (|HasCategory| |#1| '(|IntegralDomain|))
            (|HasCategory| % '(|VariablesCommuteWithCoefficients|))))
-     (|augmentPredVector| % 134217728))
+     (|augmentPredVector| % 1073741824))
     (AND (|HasCategory| % '(|CommutativeRing|))
-         (|augmentPredVector| % 268435456))
+         (|augmentPredVector| % 2147483648))
     (AND
      (OR (|HasCategory| |#1| '(|EntireRing|))
          (AND (|HasCategory| |#1| '(|IntegralDomain|))
               (|HasCategory| % '(|VariablesCommuteWithCoefficients|))))
-     (|augmentPredVector| % 536870912))
+     (|augmentPredVector| % 4294967296))
     (AND
      (OR (|HasCategory| |#1| '(|Algebra| (|Fraction| (|Integer|))))
          (|HasCategory| |#1| '(|CommutativeRing|))
          (AND (|HasCategory| |#1| '(|IntegralDomain|))
               (|HasCategory| % '(|VariablesCommuteWithCoefficients|))))
-     (|augmentPredVector| % 1073741824))
+     (|augmentPredVector| % 8589934592))
     (AND
      (OR (|HasCategory| |#1| '(|RetractableTo| (|Integer|)))
          (AND (|HasCategory| |#1| '(|CommutativeRing|))
@@ -148,7 +169,7 @@
          (AND (|HasCategory| |#1| '(|IntegralDomain|))
               (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
          (|HasCategory| |#1| '(|Ring|)))
-     (|augmentPredVector| % 2147483648))
+     (|augmentPredVector| % 17179869184))
     (AND
      (OR
       (AND (|HasCategory| |#1| '(|CommutativeRing|))
@@ -156,7 +177,7 @@
       (AND (|HasCategory| |#1| '(|IntegralDomain|))
            (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
       (|HasCategory| |#1| '(|SemiRing|)))
-     (|augmentPredVector| % 4294967296))
+     (|augmentPredVector| % 34359738368))
     (AND
      (OR
       (AND (|HasCategory| |#1| '(|CommutativeRing|))
@@ -164,36 +185,36 @@
       (AND (|HasCategory| |#1| '(|IntegralDomain|))
            (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
       (|HasCategory| |#1| '(|Ring|)))
-     (|augmentPredVector| % 8589934592))
+     (|augmentPredVector| % 68719476736))
     (AND
      (OR
-      (AND #3# (|HasCategory| |#1| '(|Ring|))
+      (AND #2# (|HasCategory| |#1| '(|Ring|))
            (|HasCategory| (|Integer|) '(|AbelianMonoid|)))
-      (|HasCategory| |#1| '(|AbelianMonoid|))
+      #4#
       (AND (|HasCategory| |#1| '(|CommutativeRing|))
            (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
       (AND (|HasCategory| |#1| '(|IntegralDomain|))
            (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
       (|HasCategory| % '(|AbelianMonoid|)))
-     (|augmentPredVector| % 17179869184))
+     (|augmentPredVector| % 137438953472))
     (AND
      (OR
-      (AND #3# (|HasCategory| |#1| '(|Ring|))
+      (AND #2# (|HasCategory| |#1| '(|Ring|))
            (|HasCategory| (|Integer|) '(|AbelianGroup|)))
       (AND (|HasCategory| |#1| '(|AbelianGroup|))
            (|HasCategory| |#1| '(|CommutativeRing|)))
       (AND (|HasCategory| |#1| '(|AbelianGroup|))
            (|HasCategory| |#1| '(|Ring|)))
-      #1#
+      #5#
       (AND (|HasCategory| |#1| '(|CommutativeRing|))
            (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
       (AND (|HasCategory| |#1| '(|IntegralDomain|))
            (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
       (|HasCategory| % '(|AbelianGroup|)))
-     (|augmentPredVector| % 34359738368))
+     (|augmentPredVector| % 274877906944))
     (AND
      (OR
-      (AND #3# (|HasCategory| |#1| '(|Ring|))
+      (AND #2# (|HasCategory| |#1| '(|Ring|))
            (|HasCategory| (|Integer|) '(|AbelianGroup|)))
       (|HasCategory| |#1| '(|AbelianGroup|))
       (AND (|HasCategory| |#1| '(|CommutativeRing|))
@@ -201,13 +222,13 @@
       (AND (|HasCategory| |#1| '(|IntegralDomain|))
            (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
       (|HasCategory| % '(|AbelianGroup|)))
-     (|augmentPredVector| % 68719476736))
+     (|augmentPredVector| % 549755813888))
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
-(DEFUN |LinearOrdinaryDifferentialOperator1| (#1=#:G33)
+(DEFUN |LinearOrdinaryDifferentialOperator1| (#1=#:G35)
   (SPROG NIL
-         (PROG (#2=#:G34)
+         (PROG (#2=#:G36)
            (RETURN
             (COND
              ((LETT #2#
@@ -232,9 +253,9 @@
               (|local| |#1|) (0 . |differentiate|) (|Boolean|) (|String|)
               (|OutputForm|) (|PositiveInteger|)
               (|Record| (|:| |k| 14) (|:| |c| 6)) (|List| 12)
-              (|NonNegativeInteger|) (|Mapping| 6 6) (|List| %) (|List| 6)
-              (|List| 14) (|Union| 6 '#1="failed") (|Mapping| 14 14)
-              (|List| 22) (|SingletonAsOrderedSet|) (|Union| 22 '"failed")
+              (|NonNegativeInteger|) (|Mapping| 6 6) (|List| 14) (|List| %)
+              (|List| 6) (|Union| 6 '#1="failed") (|Mapping| 14 14)
+              (|SingletonAsOrderedSet|) (|List| 21) (|Union| 21 '"failed")
               (|Matrix| 26) (|Matrix| %) (|Integer|)
               (|Record| (|:| |mat| 24) (|:| |vec| (|Vector| 26))) (|Vector| %)
               (|Union| % '"failed")
@@ -248,33 +269,32 @@
               (|Record| (|:| |mat| 39) (|:| |vec| (|Vector| 6))) (|Matrix| 6))
            '#() 'NIL
            (CONS
-            (|makeByteWordVec2| 26
-                                '(0 0 0 0 0 5 4 3 2 1 11 5 13 11 1 0 10 5 1 0 0
-                                  10 20 10 1 0 0 0 11 20 1 1 0 0 0 0 0 12 13 13
-                                  26 13 25 0 0 9 0 0 0 7 6 0 0 10 8 7 6 4 0 0 0
-                                  0))
+            (|makeByteWordVec2| 29
+                                '(0 0 0 0 0 5 4 1 12 5 14 12 1 0 11 5 1 0 0 11
+                                  22 11 1 0 0 0 12 22 1 1 0 0 0 0 0 13 14 14 29
+                                  14 28 9 0 0 25 10 0 0 0 7 6 0 0 11 8 7 6 4 3
+                                  2 0 0 0 0))
             (CONS
              '#(|LinearOrdinaryDifferentialOperatorCategory&|
                 |UnivariateSkewPolynomialCategory&|
                 |MaybeSkewPolynomialCategory&| |FiniteAbelianMonoidRing&|
-                |AbelianMonoidRing&| |Algebra&| |EntireRing&| NIL NIL
-                |Algebra&| NIL |NonAssociativeAlgebra&| NIL |Rng&|
-                |NonAssociativeAlgebra&| |FreeModuleCategory&|
-                |FullyLinearlyExplicitOver&| |Module&| |Module&| NIL NIL
-                |NonAssociativeRing&| NIL NIL NIL NIL NIL NIL
+                |AbelianMonoidRing&| |Algebra&| |EntireRing&| |Algebra&| NIL
+                |NonAssociativeAlgebra&| NIL |Rng&| |NonAssociativeAlgebra&|
+                |FreeModuleCategory&| |FullyLinearlyExplicitOver&| |Module&|
+                |Module&| NIL NIL |NonAssociativeRing&| NIL NIL NIL NIL NIL NIL
                 |NonAssociativeRng&| NIL NIL NIL NIL NIL NIL NIL NIL
                 |AbelianGroup&| NIL NIL NIL |MagmaWithUnit&| |AbelianMonoid&|
-                NIL |NonAssociativeSemiRng&| NIL |AbelianSemiGroup&| |Magma&|
-                |FullyRetractableTo&| |RetractableTo&| |RetractableTo&|
-                |SetCategory&| |RetractableTo&| NIL NIL NIL NIL NIL NIL
-                |BasicType&| NIL NIL)
+                NIL NIL |NonAssociativeSemiRng&| |SetWithZero&| NIL
+                |AbelianSemiGroup&| |Magma&| |FullyRetractableTo&|
+                |RetractableTo&| |RetractableTo&| |SetCategory&|
+                |RetractableTo&| NIL NIL NIL NIL NIL NIL NIL NIL |BasicType&|
+                NIL NIL)
              (CONS
               '#((|LinearOrdinaryDifferentialOperatorCategory| 6)
                  (|UnivariateSkewPolynomialCategory| 6)
-                 (|MaybeSkewPolynomialCategory| 6 14 22)
+                 (|MaybeSkewPolynomialCategory| 6 14 21)
                  (|FiniteAbelianMonoidRing| 6 14) (|AbelianMonoidRing| 6 14)
-                 (|Algebra| 6) (|EntireRing|) (|CharacteristicZero|)
-                 (|CharacteristicNonZero|) (|Algebra| 31) (|Ring|)
+                 (|Algebra| 6) (|EntireRing|) (|Algebra| 31) (|Ring|)
                  (|NonAssociativeAlgebra| 6) (|SemiRing|) (|Rng|)
                  (|NonAssociativeAlgebra| 31) (|FreeModuleCategory| 6 14)
                  (|FullyLinearlyExplicitOver| 6) (|Module| 6) (|Module| 31)
@@ -288,12 +308,15 @@
                  (|LeftModule| 6) (|AbelianProductCategory| 6) (|AbelianGroup|)
                  (|Monoid|) (|NonAssociativeSemiRing|)
                  (|CancellationAbelianMonoid|) (|MagmaWithUnit|)
-                 (|AbelianMonoid|) (|SemiGroup|) (|NonAssociativeSemiRng|)
-                 (|Comparable|) (|AbelianSemiGroup|) (|Magma|)
+                 (|AbelianMonoid|) (|Comparable|) (|SemiGroup|)
+                 (|NonAssociativeSemiRng|) (|SetWithZero|)
+                 (|ComparableRepresentation|) (|AbelianSemiGroup|) (|Magma|)
                  (|FullyRetractableTo| 6) (|RetractableTo| 26)
                  (|RetractableTo| 31) (|SetCategory|) (|RetractableTo| 6)
                  (|unitsKnown|) (|canonicalUnitNormal|) (|CoercibleFrom| 26)
-                 (|CoercibleFrom| 31) (|noZeroDivisors|) (|CoercibleTo| 10)
-                 (|BasicType|) (|CoercibleFrom| 6) (|Eltable| 6 6))
+                 (|CoercibleFrom| 31) (|noZeroDivisors|)
+                 (|CharacteristicNonZero|) (|CharacteristicZero|)
+                 (|CoercibleTo| 10) (|BasicType|) (|CoercibleFrom| 6)
+                 (|Eltable| 6 6))
               (|makeByteWordVec2| 7 '(1 6 0 0 7)))))
            '|lookupIncomplete|)) 

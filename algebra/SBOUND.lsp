@@ -1,5 +1,5 @@
 
-(PUT '|SBOUND;nullBoundary;%;1| '|SPADreplace| '(XLAM NIL (CONS 0 "none"))) 
+(MAKEPROP '|SBOUND;nullBoundary;%;1| '|SPADreplace| '(XLAM NIL (CONS 0 "none"))) 
 
 (SDEFUN |SBOUND;nullBoundary;%;1| ((% (%))) (CONS 0 "none")) 
 
@@ -19,21 +19,21 @@
 
 (SDEFUN |SBOUND;sunion;3%;6| ((|x| (%)) (|y| (%)) (% (%)))
         (SPROG
-         ((|ymax| (PT)) (#1=#:G21 NIL) (|ymin| (PT)) (|xmax| (PT))
-          (|xmin| (PT)) (#2=#:G55 NIL) (|res| (%)) (#3=#:G57 NIL) (|ptr| NIL)
-          (|p| (|List| %)) (#4=#:G22 NIL) (#5=#:G56 NIL))
+         ((#1=#:G57 NIL) (#2=#:G22 NIL) (|p| (|List| %)) (|ptr| NIL)
+          (#3=#:G58 NIL) (|res| (%)) (#4=#:G56 NIL) (|xmin| (PT)) (|xmax| (PT))
+          (|ymin| (PT)) (#5=#:G21 NIL) (|ymax| (PT)))
          (SEQ
           (EXIT
-           (SEQ (COND ((QEQCAR |x| 0) (PROGN (LETT #2# |y|) (GO #6=#:G54))))
-                (COND ((QEQCAR |y| 0) (PROGN (LETT #2# |x|) (GO #6#))))
+           (SEQ (COND ((QEQCAR |x| 0) (PROGN (LETT #4# |y|) (GO #6=#:G55))))
+                (COND ((QEQCAR |y| 0) (PROGN (LETT #4# |x|) (GO #6#))))
                 (COND
                  ((QEQCAR |x| 2)
                   (SEQ
                    (LETT |p|
                          (QCDR
-                          (PROG2 (LETT #4# |x|)
-                              (QCDR #4#)
-                            (|check_union2| (QEQCAR #4# 2)
+                          (PROG2 (LETT #2# |x|)
+                              (QCDR #2#)
+                            (|check_union2| (QEQCAR #2# 2)
                                             (|Record| (|:| |ty| (|Symbol|))
                                                       (|:| |parts| (|List| %)))
                                             (|Union| (|:| |nul| #7="none")
@@ -52,22 +52,22 @@
                                                                 (|Symbol|))
                                                            (|:| |parts|
                                                                 (|List| %)))))
-                                            #4#))))
+                                            #2#))))
                    (COND
                     ((EQL (SPADCALL |p| (QREFELT % 18)) 0)
-                     (PROGN (LETT #2# |y|) (GO #6#))))
+                     (PROGN (LETT #4# |y|) (GO #6#))))
                    (COND
                     ((EQL (SPADCALL |p| (QREFELT % 18)) 1)
                      (PROGN
-                      (LETT #2#
+                      (LETT #4#
                             (SPADCALL (SPADCALL |p| (QREFELT % 19)) |y|
                                       (QREFELT % 20)))
                       (GO #6#))))
                    (LETT |res|
                          (SPADCALL (SPADCALL |p| (QREFELT % 19)) |y|
                                    (QREFELT % 20)))
-                   (SEQ (LETT |ptr| 2) (LETT #5# (SPADCALL |p| (QREFELT % 18)))
-                        G190 (COND ((|greater_SI| |ptr| #5#) (GO G191)))
+                   (SEQ (LETT |ptr| 2) (LETT #1# (SPADCALL |p| (QREFELT % 18)))
+                        G190 (COND ((|greater_SI| |ptr| #1#) (GO G191)))
                         (SEQ
                          (EXIT
                           (LETT |res|
@@ -76,15 +76,15 @@
                                           (QREFELT % 20)))))
                         (LETT |ptr| (|inc_SI| |ptr|)) (GO G190) G191
                         (EXIT NIL))
-                   (EXIT (PROGN (LETT #2# |res|) (GO #6#))))))
+                   (EXIT (PROGN (LETT #4# |res|) (GO #6#))))))
                 (COND
                  ((QEQCAR |y| 2)
                   (SEQ
                    (LETT |p|
                          (QCDR
-                          (PROG2 (LETT #4# |y|)
-                              (QCDR #4#)
-                            (|check_union2| (QEQCAR #4# 2)
+                          (PROG2 (LETT #2# |y|)
+                              (QCDR #2#)
+                            (|check_union2| (QEQCAR #2# 2)
                                             (|Record| (|:| |ty| (|Symbol|))
                                                       (|:| |parts| (|List| %)))
                                             (|Union| (|:| |nul| #7#)
@@ -103,14 +103,14 @@
                                                                 (|Symbol|))
                                                            (|:| |parts|
                                                                 (|List| %)))))
-                                            #4#))))
+                                            #2#))))
                    (COND
                     ((EQL (SPADCALL |p| (QREFELT % 18)) 0)
-                     (PROGN (LETT #2# |x|) (GO #6#))))
+                     (PROGN (LETT #4# |x|) (GO #6#))))
                    (COND
                     ((EQL (SPADCALL |p| (QREFELT % 18)) 1)
                      (PROGN
-                      (LETT #2#
+                      (LETT #4#
                             (SPADCALL (SPADCALL |p| (QREFELT % 19)) |x|
                                       (QREFELT % 20)))
                       (GO #6#))))
@@ -127,12 +127,12 @@
                                           (QREFELT % 20)))))
                         (LETT |ptr| (|inc_SI| |ptr|)) (GO G190) G191
                         (EXIT NIL))
-                   (EXIT (PROGN (LETT #2# |res|) (GO #6#))))))
+                   (EXIT (PROGN (LETT #4# |res|) (GO #6#))))))
                 (LETT |xmin|
                       (QVELT
-                       (PROG2 (LETT #1# |x|)
-                           (QCDR #1#)
-                         (|check_union2| (QEQCAR #1# 1)
+                       (PROG2 (LETT #5# |x|)
+                           (QCDR #5#)
+                         (|check_union2| (QEQCAR #5# 1)
                                          (|Record| (|:| |ty| (|Symbol|))
                                                    (|:| |control1|
                                                         (QREFELT % 6))
@@ -151,13 +151,13 @@
                                                         (|:| |ty| (|Symbol|))
                                                         (|:| |parts|
                                                              (|List| %)))))
-                                         #1#))
+                                         #5#))
                        1))
                 (LETT |xmax|
                       (QVELT
-                       (PROG2 (LETT #1# |x|)
-                           (QCDR #1#)
-                         (|check_union2| (QEQCAR #1# 1)
+                       (PROG2 (LETT #5# |x|)
+                           (QCDR #5#)
+                         (|check_union2| (QEQCAR #5# 1)
                                          (|Record| (|:| |ty| (|Symbol|))
                                                    (|:| |control1|
                                                         (QREFELT % 6))
@@ -176,13 +176,13 @@
                                                         (|:| |ty| (|Symbol|))
                                                         (|:| |parts|
                                                              (|List| %)))))
-                                         #1#))
+                                         #5#))
                        2))
                 (LETT |ymin|
                       (QVELT
-                       (PROG2 (LETT #1# |y|)
-                           (QCDR #1#)
-                         (|check_union2| (QEQCAR #1# 1)
+                       (PROG2 (LETT #5# |y|)
+                           (QCDR #5#)
+                         (|check_union2| (QEQCAR #5# 1)
                                          (|Record| (|:| |ty| (|Symbol|))
                                                    (|:| |control1|
                                                         (QREFELT % 6))
@@ -201,13 +201,13 @@
                                                         (|:| |ty| (|Symbol|))
                                                         (|:| |parts|
                                                              (|List| %)))))
-                                         #1#))
+                                         #5#))
                        1))
                 (LETT |ymax|
                       (QVELT
-                       (PROG2 (LETT #1# |y|)
-                           (QCDR #1#)
-                         (|check_union2| (QEQCAR #1# 1)
+                       (PROG2 (LETT #5# |y|)
+                           (QCDR #5#)
+                         (|check_union2| (QEQCAR #5# 1)
                                          (|Record| (|:| |ty| (|Symbol|))
                                                    (|:| |control1|
                                                         (QREFELT % 6))
@@ -226,14 +226,14 @@
                                                         (|:| |ty| (|Symbol|))
                                                         (|:| |parts|
                                                              (|List| %)))))
-                                         #1#))
+                                         #5#))
                        2))
                 (COND
                  ((EQUAL
                    (QVELT
-                    (PROG2 (LETT #1# |x|)
-                        (QCDR #1#)
-                      (|check_union2| (QEQCAR #1# 1)
+                    (PROG2 (LETT #5# |x|)
+                        (QCDR #5#)
+                      (|check_union2| (QEQCAR #5# 1)
                                       (|Record| (|:| |ty| (|Symbol|))
                                                 (|:| |control1| (QREFELT % 6))
                                                 (|:| |control2| (QREFELT % 6)))
@@ -250,16 +250,16 @@
                                                      (|:| |ty| (|Symbol|))
                                                      (|:| |parts|
                                                           (|List| %)))))
-                                      #1#))
+                                      #5#))
                     0)
                    '|ellipoid|)
                   (SEQ
                    (LETT |xmin|
                          (SPADCALL
                           (QVELT
-                           (PROG2 (LETT #1# |x|)
-                               (QCDR #1#)
-                             (|check_union2| (QEQCAR #1# 1)
+                           (PROG2 (LETT #5# |x|)
+                               (QCDR #5#)
+                             (|check_union2| (QEQCAR #5# 1)
                                              (|Record| (|:| |ty| (|Symbol|))
                                                        (|:| |control1|
                                                             (QREFELT % 6))
@@ -281,12 +281,12 @@
                                                                  (|Symbol|))
                                                             (|:| |parts|
                                                                  (|List| %)))))
-                                             #1#))
+                                             #5#))
                            1)
                           (QVELT
-                           (PROG2 (LETT #1# |x|)
-                               (QCDR #1#)
-                             (|check_union2| (QEQCAR #1# 1)
+                           (PROG2 (LETT #5# |x|)
+                               (QCDR #5#)
+                             (|check_union2| (QEQCAR #5# 1)
                                              (|Record| (|:| |ty| (|Symbol|))
                                                        (|:| |control1|
                                                             (QREFELT % 6))
@@ -308,16 +308,16 @@
                                                                  (|Symbol|))
                                                             (|:| |parts|
                                                                  (|List| %)))))
-                                             #1#))
+                                             #5#))
                            2)
                           (QREFELT % 23)))
                    (EXIT
                     (LETT |xmax|
                           (SPADCALL
                            (QVELT
-                            (PROG2 (LETT #1# |x|)
-                                (QCDR #1#)
-                              (|check_union2| (QEQCAR #1# 1)
+                            (PROG2 (LETT #5# |x|)
+                                (QCDR #5#)
+                              (|check_union2| (QEQCAR #5# 1)
                                               (|Record| (|:| |ty| (|Symbol|))
                                                         (|:| |control1|
                                                              (QREFELT % 6))
@@ -341,12 +341,12 @@
                                                              (|:| |parts|
                                                                   (|List|
                                                                    %)))))
-                                              #1#))
+                                              #5#))
                             1)
                            (QVELT
-                            (PROG2 (LETT #1# |x|)
-                                (QCDR #1#)
-                              (|check_union2| (QEQCAR #1# 1)
+                            (PROG2 (LETT #5# |x|)
+                                (QCDR #5#)
+                              (|check_union2| (QEQCAR #5# 1)
                                               (|Record| (|:| |ty| (|Symbol|))
                                                         (|:| |control1|
                                                              (QREFELT % 6))
@@ -370,15 +370,15 @@
                                                              (|:| |parts|
                                                                   (|List|
                                                                    %)))))
-                                              #1#))
+                                              #5#))
                             2)
                            (QREFELT % 24)))))))
                 (COND
                  ((EQUAL
                    (QVELT
-                    (PROG2 (LETT #1# |y|)
-                        (QCDR #1#)
-                      (|check_union2| (QEQCAR #1# 1)
+                    (PROG2 (LETT #5# |y|)
+                        (QCDR #5#)
+                      (|check_union2| (QEQCAR #5# 1)
                                       (|Record| (|:| |ty| (|Symbol|))
                                                 (|:| |control1| (QREFELT % 6))
                                                 (|:| |control2| (QREFELT % 6)))
@@ -395,16 +395,16 @@
                                                      (|:| |ty| (|Symbol|))
                                                      (|:| |parts|
                                                           (|List| %)))))
-                                      #1#))
+                                      #5#))
                     0)
                    '|ellipoid|)
                   (SEQ
                    (LETT |ymin|
                          (SPADCALL
                           (QVELT
-                           (PROG2 (LETT #1# |y|)
-                               (QCDR #1#)
-                             (|check_union2| (QEQCAR #1# 1)
+                           (PROG2 (LETT #5# |y|)
+                               (QCDR #5#)
+                             (|check_union2| (QEQCAR #5# 1)
                                              (|Record| (|:| |ty| (|Symbol|))
                                                        (|:| |control1|
                                                             (QREFELT % 6))
@@ -426,12 +426,12 @@
                                                                  (|Symbol|))
                                                             (|:| |parts|
                                                                  (|List| %)))))
-                                             #1#))
+                                             #5#))
                            1)
                           (QVELT
-                           (PROG2 (LETT #1# |y|)
-                               (QCDR #1#)
-                             (|check_union2| (QEQCAR #1# 1)
+                           (PROG2 (LETT #5# |y|)
+                               (QCDR #5#)
+                             (|check_union2| (QEQCAR #5# 1)
                                              (|Record| (|:| |ty| (|Symbol|))
                                                        (|:| |control1|
                                                             (QREFELT % 6))
@@ -453,16 +453,16 @@
                                                                  (|Symbol|))
                                                             (|:| |parts|
                                                                  (|List| %)))))
-                                             #1#))
+                                             #5#))
                            2)
                           (QREFELT % 23)))
                    (EXIT
                     (LETT |ymax|
                           (SPADCALL
                            (QVELT
-                            (PROG2 (LETT #1# |y|)
-                                (QCDR #1#)
-                              (|check_union2| (QEQCAR #1# 1)
+                            (PROG2 (LETT #5# |y|)
+                                (QCDR #5#)
+                              (|check_union2| (QEQCAR #5# 1)
                                               (|Record| (|:| |ty| (|Symbol|))
                                                         (|:| |control1|
                                                              (QREFELT % 6))
@@ -486,12 +486,12 @@
                                                              (|:| |parts|
                                                                   (|List|
                                                                    %)))))
-                                              #1#))
+                                              #5#))
                             1)
                            (QVELT
-                            (PROG2 (LETT #1# |y|)
-                                (QCDR #1#)
-                              (|check_union2| (QEQCAR #1# 1)
+                            (PROG2 (LETT #5# |y|)
+                                (QCDR #5#)
+                              (|check_union2| (QEQCAR #5# 1)
                                               (|Record| (|:| |ty| (|Symbol|))
                                                         (|:| |control1|
                                                              (QREFELT % 6))
@@ -515,35 +515,35 @@
                                                              (|:| |parts|
                                                                   (|List|
                                                                    %)))))
-                                              #1#))
+                                              #5#))
                             2)
                            (QREFELT % 24)))))))
                 (EXIT
                  (CONS 1
                        (VECTOR '|box| (SPADCALL |xmin| |ymin| (QREFELT % 9))
                                (SPADCALL |xmax| |ymax| (QREFELT % 10)))))))
-          #6# (EXIT #2#)))) 
+          #6# (EXIT #4#)))) 
 
 (SDEFUN |SBOUND;extendToPoint;%PT%;7| ((|n| (%)) (|p| (PT)) (% (%)))
         (SPROG
-         ((|xmax| (PT)) (|xmin| (PT)) (#1=#:G70 NIL) (|res| (%)) (#2=#:G71 NIL)
-          (|ptr| NIL) (|pa| (|List| %)) (#3=#:G22 NIL))
+         ((#1=#:G22 NIL) (|pa| (|List| %)) (|ptr| NIL) (#2=#:G72 NIL)
+          (|res| (%)) (#3=#:G71 NIL) (|xmin| (PT)) (|xmax| (PT)))
          (SEQ
           (EXIT
            (SEQ
             (COND
              ((QEQCAR |n| 0)
               (PROGN
-               (LETT #1# (CONS 1 (VECTOR '|box| |p| |p|)))
-               (GO #4=#:G69))))
+               (LETT #3# (CONS 1 (VECTOR '|box| |p| |p|)))
+               (GO #4=#:G70))))
             (COND
              ((QEQCAR |n| 2)
               (SEQ
                (LETT |pa|
                      (QCDR
-                      (PROG2 (LETT #3# |n|)
-                          (QCDR #3#)
-                        (|check_union2| (QEQCAR #3# 2)
+                      (PROG2 (LETT #1# |n|)
+                          (QCDR #1#)
+                        (|check_union2| (QEQCAR #1# 2)
                                         (|Record| (|:| |ty| (|Symbol|))
                                                   (|:| |parts| (|List| %)))
                                         (|Union| (|:| |nul| "none")
@@ -559,14 +559,14 @@
                                                        (|:| |ty| (|Symbol|))
                                                        (|:| |parts|
                                                             (|List| %)))))
-                                        #3#))))
+                                        #1#))))
                (COND
                 ((EQL (SPADCALL |pa| (QREFELT % 18)) 0)
-                 (PROGN (LETT #1# (CONS 1 (VECTOR '|box| |p| |p|))) (GO #4#))))
+                 (PROGN (LETT #3# (CONS 1 (VECTOR '|box| |p| |p|))) (GO #4#))))
                (COND
                 ((EQL (SPADCALL |pa| (QREFELT % 18)) 1)
                  (PROGN
-                  (LETT #1#
+                  (LETT #3#
                         (SPADCALL (SPADCALL |pa| (QREFELT % 19)) |p|
                                   (QREFELT % 25)))
                   (GO #4#))))
@@ -582,31 +582,31 @@
                                       (SPADCALL |pa| |ptr| (QREFELT % 22))
                                       (QREFELT % 20)))))
                     (LETT |ptr| (|inc_SI| |ptr|)) (GO G190) G191 (EXIT NIL))
-               (EXIT (PROGN (LETT #1# |res|) (GO #4#))))))
+               (EXIT (PROGN (LETT #3# |res|) (GO #4#))))))
             (LETT |xmin| (SPADCALL |n| (QREFELT % 26)))
             (LETT |xmax| (SPADCALL |n| (QREFELT % 27)))
             (EXIT
              (CONS 1
                    (VECTOR '|box| (SPADCALL |xmin| |p| (QREFELT % 9))
                            (SPADCALL |xmax| |p| (QREFELT % 10)))))))
-          #4# (EXIT #1#)))) 
+          #4# (EXIT #3#)))) 
 
 (SDEFUN |SBOUND;containsPoint?;%PTB;8| ((|n| (%)) (|p| (PT)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G21 NIL) (#2=#:G82 NIL) (|rDist| #3=(|DoubleFloat|))
-          (|pDist| #3#) (|pRel| (PT)) (#4=#:G83 NIL) (|sub| NIL)
-          (|pa| (|List| %)) (#5=#:G22 NIL))
+         ((#1=#:G22 NIL) (|pa| (|List| %)) (|sub| NIL) (#2=#:G84 NIL)
+          (|pRel| (PT)) (|pDist| #3=(|DoubleFloat|)) (|rDist| #3#)
+          (#4=#:G83 NIL) (#5=#:G21 NIL))
          (SEQ
           (EXIT
-           (SEQ (COND ((QEQCAR |n| 0) (PROGN (LETT #2# NIL) (GO #6=#:G81))))
+           (SEQ (COND ((QEQCAR |n| 0) (PROGN (LETT #4# NIL) (GO #6=#:G82))))
                 (COND
                  ((QEQCAR |n| 2)
                   (SEQ
                    (LETT |pa|
                          (QCDR
-                          (PROG2 (LETT #5# |n|)
-                              (QCDR #5#)
-                            (|check_union2| (QEQCAR #5# 2)
+                          (PROG2 (LETT #1# |n|)
+                              (QCDR #1#)
+                            (|check_union2| (QEQCAR #1# 2)
                                             (|Record| (|:| |ty| (|Symbol|))
                                                       (|:| |parts| (|List| %)))
                                             (|Union| (|:| |nul| #7="none")
@@ -625,27 +625,27 @@
                                                                 (|Symbol|))
                                                            (|:| |parts|
                                                                 (|List| %)))))
-                                            #5#))))
-                   (SEQ (LETT |sub| NIL) (LETT #4# |pa|) G190
+                                            #1#))))
+                   (SEQ (LETT |sub| NIL) (LETT #2# |pa|) G190
                         (COND
-                         ((OR (ATOM #4#) (PROGN (LETT |sub| (CAR #4#)) NIL))
+                         ((OR (ATOM #2#) (PROGN (LETT |sub| (CAR #2#)) NIL))
                           (GO G191)))
                         (SEQ
                          (EXIT
                           (COND
                            ((SPADCALL |sub| |p| (QREFELT % 29))
-                            (PROGN (LETT #2# 'T) (GO #6#))))))
-                        (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT NIL))
-                   (EXIT (PROGN (LETT #2# NIL) (GO #6#))))))
+                            (PROGN (LETT #4# 'T) (GO #6#))))))
+                        (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                   (EXIT (PROGN (LETT #4# NIL) (GO #6#))))))
                 (COND
                  ((SPADCALL |n| (QREFELT % 30))
                   (SEQ
                    (LETT |pRel|
                          (SPADCALL
                           (QVELT
-                           (PROG2 (LETT #1# |n|)
-                               (QCDR #1#)
-                             (|check_union2| (QEQCAR #1# 1)
+                           (PROG2 (LETT #5# |n|)
+                               (QCDR #5#)
+                             (|check_union2| (QEQCAR #5# 1)
                                              (|Record| (|:| |ty| (|Symbol|))
                                                        (|:| |control1|
                                                             (QREFELT % 6))
@@ -667,7 +667,7 @@
                                                                  (|Symbol|))
                                                             (|:| |parts|
                                                                  (|List| %)))))
-                                             #1#))
+                                             #5#))
                            1)
                           |p| (QREFELT % 23)))
                    (LETT |pDist|
@@ -681,9 +681,9 @@
                           (|mul_DF|
                            (SPADCALL
                             (QVELT
-                             (PROG2 (LETT #1# |n|)
-                                 (QCDR #1#)
-                               (|check_union2| (QEQCAR #1# 1)
+                             (PROG2 (LETT #5# |n|)
+                                 (QCDR #5#)
+                               (|check_union2| (QEQCAR #5# 1)
                                                (|Record| (|:| |ty| (|Symbol|))
                                                          (|:| |control1|
                                                               (QREFELT % 6))
@@ -707,14 +707,14 @@
                                                               (|:| |parts|
                                                                    (|List|
                                                                     %)))))
-                                               #1#))
+                                               #5#))
                              2)
                             (QREFELT % 32))
                            (SPADCALL
                             (QVELT
-                             (PROG2 (LETT #1# |n|)
-                                 (QCDR #1#)
-                               (|check_union2| (QEQCAR #1# 1)
+                             (PROG2 (LETT #5# |n|)
+                                 (QCDR #5#)
+                               (|check_union2| (QEQCAR #5# 1)
                                                (|Record| (|:| |ty| (|Symbol|))
                                                          (|:| |control1|
                                                               (QREFELT % 6))
@@ -738,15 +738,15 @@
                                                               (|:| |parts|
                                                                    (|List|
                                                                     %)))))
-                                               #1#))
+                                               #5#))
                              2)
                             (QREFELT % 32)))
                           (|mul_DF|
                            (SPADCALL
                             (QVELT
-                             (PROG2 (LETT #1# |n|)
-                                 (QCDR #1#)
-                               (|check_union2| (QEQCAR #1# 1)
+                             (PROG2 (LETT #5# |n|)
+                                 (QCDR #5#)
+                               (|check_union2| (QEQCAR #5# 1)
                                                (|Record| (|:| |ty| (|Symbol|))
                                                          (|:| |control1|
                                                               (QREFELT % 6))
@@ -770,14 +770,14 @@
                                                               (|:| |parts|
                                                                    (|List|
                                                                     %)))))
-                                               #1#))
+                                               #5#))
                              2)
                             (QREFELT % 33))
                            (SPADCALL
                             (QVELT
-                             (PROG2 (LETT #1# |n|)
-                                 (QCDR #1#)
-                               (|check_union2| (QEQCAR #1# 1)
+                             (PROG2 (LETT #5# |n|)
+                                 (QCDR #5#)
+                               (|check_union2| (QEQCAR #5# 1)
                                                (|Record| (|:| |ty| (|Symbol|))
                                                          (|:| |control1|
                                                               (QREFELT % 6))
@@ -801,19 +801,19 @@
                                                               (|:| |parts|
                                                                    (|List|
                                                                     %)))))
-                                               #1#))
+                                               #5#))
                              2)
                             (QREFELT % 33)))))
                    (EXIT
                     (PROGN
-                     (LETT #2# (SPADCALL |rDist| |pDist| (QREFELT % 34)))
+                     (LETT #4# (SPADCALL |rDist| |pDist| (QREFELT % 34)))
                      (GO #6#))))))
                 (EXIT
                  (SPADCALL |p|
                            (QVELT
-                            (PROG2 (LETT #1# |n|)
-                                (QCDR #1#)
-                              (|check_union2| (QEQCAR #1# 1)
+                            (PROG2 (LETT #5# |n|)
+                                (QCDR #5#)
+                              (|check_union2| (QEQCAR #5# 1)
                                               (|Record| (|:| |ty| (|Symbol|))
                                                         (|:| |control1|
                                                              (QREFELT % 6))
@@ -837,12 +837,12 @@
                                                              (|:| |parts|
                                                                   (|List|
                                                                    %)))))
-                                              #1#))
+                                              #5#))
                             1)
                            (QVELT
-                            (PROG2 (LETT #1# |n|)
-                                (QCDR #1#)
-                              (|check_union2| (QEQCAR #1# 1)
+                            (PROG2 (LETT #5# |n|)
+                                (QCDR #5#)
+                              (|check_union2| (QEQCAR #5# 1)
                                               (|Record| (|:| |ty| (|Symbol|))
                                                         (|:| |control1|
                                                              (QREFELT % 6))
@@ -866,20 +866,20 @@
                                                              (|:| |parts|
                                                                   (|List|
                                                                    %)))))
-                                              #1#))
+                                              #5#))
                             2)
                            (QREFELT % 35)))))
-          #6# (EXIT #2#)))) 
+          #6# (EXIT #4#)))) 
 
 (SDEFUN |SBOUND;lineIntersect;%2PT;9| ((|n| (%)) (|p| (PT)) (% (PT)))
         (SPROG
-         ((|y| #1=(|DoubleFloat|)) (|x| #1#) (|yp| #2=(|DoubleFloat|))
-          (|xp| #3=(|DoubleFloat|)) (|b| #2#) (|a| #3#) (|rad| (PT))
-          (#4=#:G21 NIL) (|pRel| (PT)) (|cent| (PT)) (#5=#:G96 NIL)
-          (|divisor| (|DoubleFloat|)) (|ab| (|DoubleFloat|)) (|centre| (PT)))
+         ((|centre| (PT)) (|ab| (|DoubleFloat|)) (|divisor| (|DoubleFloat|))
+          (#1=#:G97 NIL) (|cent| (PT)) (|pRel| (PT)) (#2=#:G21 NIL)
+          (|rad| (PT)) (|a| #3=(|DoubleFloat|)) (|b| #4=(|DoubleFloat|))
+          (|xp| #3#) (|yp| #4#) (|x| #5=(|DoubleFloat|)) (|y| #5#))
          (SEQ
           (EXIT
-           (SEQ (COND ((QEQCAR |n| 0) (PROGN (LETT #5# |p|) (GO #6=#:G95))))
+           (SEQ (COND ((QEQCAR |n| 0) (PROGN (LETT #1# |p|) (GO #6=#:G96))))
                 (COND
                  ((QEQCAR |n| 2)
                   (|error| "cant compute lineIntersect with compound border")))
@@ -888,9 +888,9 @@
                   (SEQ
                    (LETT |centre|
                          (QVELT
-                          (PROG2 (LETT #4# |n|)
-                              (QCDR #4#)
-                            (|check_union2| (QEQCAR #4# 1)
+                          (PROG2 (LETT #2# |n|)
+                              (QCDR #2#)
+                            (|check_union2| (QEQCAR #2# 1)
                                             (|Record| (|:| |ty| (|Symbol|))
                                                       (|:| |control1|
                                                            (QREFELT % 6))
@@ -912,13 +912,13 @@
                                                                 (|Symbol|))
                                                            (|:| |parts|
                                                                 (|List| %)))))
-                                            #4#))
+                                            #2#))
                           1))
                    (LETT |rad|
                          (QVELT
-                          (PROG2 (LETT #4# |n|)
-                              (QCDR #4#)
-                            (|check_union2| (QEQCAR #4# 1)
+                          (PROG2 (LETT #2# |n|)
+                              (QCDR #2#)
+                            (|check_union2| (QEQCAR #2# 1)
                                             (|Record| (|:| |ty| (|Symbol|))
                                                       (|:| |control1|
                                                            (QREFELT % 6))
@@ -940,7 +940,7 @@
                                                                 (|Symbol|))
                                                            (|:| |parts|
                                                                 (|List| %)))))
-                                            #4#))
+                                            #2#))
                           2))
                    (LETT |pRel| (SPADCALL |p| |centre| (QREFELT % 23)))
                    (LETT |a| (SPADCALL |rad| (QREFELT % 32)))
@@ -963,7 +963,7 @@
                                  (|div_DF| (|mul_DF| |ab| |yp|) |divisor|))))))
                    (EXIT
                     (PROGN
-                     (LETT #5#
+                     (LETT #1#
                            (SPADCALL |centre| (SPADCALL |x| |y| (QREFELT % 37))
                                      (QREFELT % 24)))
                      (GO #6#))))))
@@ -971,9 +971,9 @@
                       (SPADCALL (|mk_DF| 5 -1)
                                 (SPADCALL
                                  (QVELT
-                                  (PROG2 (LETT #4# |n|)
-                                      (QCDR #4#)
-                                    (|check_union2| (QEQCAR #4# 1)
+                                  (PROG2 (LETT #2# |n|)
+                                      (QCDR #2#)
+                                    (|check_union2| (QEQCAR #2# 1)
                                                     (|Record|
                                                      (|:| |ty| (|Symbol|))
                                                      (|:| |control1|
@@ -1000,12 +1000,12 @@
                                                                    (|:| |parts|
                                                                         (|List|
                                                                          %)))))
-                                                    #4#))
+                                                    #2#))
                                   1)
                                  (QVELT
-                                  (PROG2 (LETT #4# |n|)
-                                      (QCDR #4#)
-                                    (|check_union2| (QEQCAR #4# 1)
+                                  (PROG2 (LETT #2# |n|)
+                                      (QCDR #2#)
+                                    (|check_union2| (QEQCAR #2# 1)
                                                     (|Record|
                                                      (|:| |ty| (|Symbol|))
                                                      (|:| |control1|
@@ -1032,7 +1032,7 @@
                                                                    (|:| |parts|
                                                                         (|List|
                                                                          %)))))
-                                                    #4#))
+                                                    #2#))
                                   2)
                                  (QREFELT % 24))
                                 (QREFELT % 38)))
@@ -1041,9 +1041,9 @@
                       (SPADCALL (|mk_DF| 5 -1)
                                 (SPADCALL
                                  (QVELT
-                                  (PROG2 (LETT #4# |n|)
-                                      (QCDR #4#)
-                                    (|check_union2| (QEQCAR #4# 1)
+                                  (PROG2 (LETT #2# |n|)
+                                      (QCDR #2#)
+                                    (|check_union2| (QEQCAR #2# 1)
                                                     (|Record|
                                                      (|:| |ty| (|Symbol|))
                                                      (|:| |control1|
@@ -1070,12 +1070,12 @@
                                                                    (|:| |parts|
                                                                         (|List|
                                                                          %)))))
-                                                    #4#))
+                                                    #2#))
                                   2)
                                  (QVELT
-                                  (PROG2 (LETT #4# |n|)
-                                      (QCDR #4#)
-                                    (|check_union2| (QEQCAR #4# 1)
+                                  (PROG2 (LETT #2# |n|)
+                                      (QCDR #2#)
+                                    (|check_union2| (QEQCAR #2# 1)
                                                     (|Record|
                                                      (|:| |ty| (|Symbol|))
                                                      (|:| |control1|
@@ -1102,7 +1102,7 @@
                                                                    (|:| |parts|
                                                                         (|List|
                                                                          %)))))
-                                                    #4#))
+                                                    #2#))
                                   1)
                                  (QREFELT % 23))
                                 (QREFELT % 38)))
@@ -1137,49 +1137,49 @@
                 (EXIT
                  (SPADCALL |cent| (SPADCALL |x| |y| (QREFELT % 37))
                            (QREFELT % 24)))))
-          #6# (EXIT #5#)))) 
+          #6# (EXIT #1#)))) 
 
-(PUT '|SBOUND;isNull?;%B;10| '|SPADreplace| '(XLAM (|n|) (QEQCAR |n| 0))) 
+(MAKEPROP '|SBOUND;isNull?;%B;10| '|SPADreplace| '(XLAM (|n|) (QEQCAR |n| 0))) 
 
 (SDEFUN |SBOUND;isNull?;%B;10| ((|n| (%)) (% (|Boolean|))) (QEQCAR |n| 0)) 
 
 (SDEFUN |SBOUND;isEllipse?;%B;11| ((|n| (%)) (% (|Boolean|)))
-        (SPROG ((#1=#:G105 NIL))
+        (SPROG ((#1=#:G106 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((NULL (QEQCAR |n| 1))
-                    (PROGN (LETT #1# NIL) (GO #2=#:G104))))
+                    (PROGN (LETT #1# NIL) (GO #2=#:G105))))
                   (EXIT (EQUAL (QVELT (CDR |n|) 0) '|ellipoid|))))
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |SBOUND;isBox?;%B;12| ((|n| (%)) (% (|Boolean|)))
-        (SPROG ((#1=#:G113 NIL))
+        (SPROG ((#1=#:G114 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((NULL (QEQCAR |n| 1))
-                    (PROGN (LETT #1# NIL) (GO #2=#:G112))))
+                    (PROGN (LETT #1# NIL) (GO #2=#:G113))))
                   (EXIT (EQUAL (QVELT (CDR |n|) 0) '|box|))))
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |SBOUND;getMin;%PT;13| ((|n| (%)) (% (PT)))
-        (SPROG ((#1=#:G21 NIL) (#2=#:G118 NIL))
+        (SPROG ((#1=#:G119 NIL) (#2=#:G21 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((SPADCALL |n| (QREFELT % 30))
                     (PROGN
-                     (LETT #2#
+                     (LETT #1#
                            (SPADCALL
                             (SPADCALL
                              (QVELT
-                              (PROG2 (LETT #1# |n|)
-                                  (QCDR #1#)
-                                (|check_union2| (QEQCAR #1# 1)
+                              (PROG2 (LETT #2# |n|)
+                                  (QCDR #2#)
+                                (|check_union2| (QEQCAR #2# 1)
                                                 (|Record| (|:| |ty| (|Symbol|))
                                                           (|:| |control1|
                                                                (QREFELT % 6))
@@ -1203,12 +1203,12 @@
                                                                (|:| |parts|
                                                                     (|List|
                                                                      %)))))
-                                                #1#))
+                                                #2#))
                               1)
                              (QVELT
-                              (PROG2 (LETT #1# |n|)
-                                  (QCDR #1#)
-                                (|check_union2| (QEQCAR #1# 1)
+                              (PROG2 (LETT #2# |n|)
+                                  (QCDR #2#)
+                                (|check_union2| (QEQCAR #2# 1)
                                                 (|Record| (|:| |ty| (|Symbol|))
                                                           (|:| |control1|
                                                                (QREFELT % 6))
@@ -1232,16 +1232,16 @@
                                                                (|:| |parts|
                                                                     (|List|
                                                                      %)))))
-                                                #1#))
+                                                #2#))
                               2)
                              (QREFELT % 23))
                             (QREFELT % 45)))
-                     (GO #4=#:G117))))
+                     (GO #4=#:G118))))
                   (EXIT
                    (QVELT
-                    (PROG2 (LETT #1# |n|)
-                        (QCDR #1#)
-                      (|check_union2| (QEQCAR #1# 1)
+                    (PROG2 (LETT #2# |n|)
+                        (QCDR #2#)
+                      (|check_union2| (QEQCAR #2# 1)
                                       (|Record| (|:| |ty| (|Symbol|))
                                                 (|:| |control1| (QREFELT % 6))
                                                 (|:| |control2| (QREFELT % 6)))
@@ -1258,25 +1258,25 @@
                                                      (|:| |ty| (|Symbol|))
                                                      (|:| |parts|
                                                           (|List| %)))))
-                                      #1#))
+                                      #2#))
                     1))))
-                #4# (EXIT #2#)))) 
+                #4# (EXIT #1#)))) 
 
 (SDEFUN |SBOUND;getMax;%PT;14| ((|n| (%)) (% (PT)))
-        (SPROG ((#1=#:G21 NIL) (#2=#:G123 NIL))
+        (SPROG ((#1=#:G124 NIL) (#2=#:G21 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((SPADCALL |n| (QREFELT % 30))
                     (PROGN
-                     (LETT #2#
+                     (LETT #1#
                            (SPADCALL
                             (SPADCALL
                              (QVELT
-                              (PROG2 (LETT #1# |n|)
-                                  (QCDR #1#)
-                                (|check_union2| (QEQCAR #1# 1)
+                              (PROG2 (LETT #2# |n|)
+                                  (QCDR #2#)
+                                (|check_union2| (QEQCAR #2# 1)
                                                 (|Record| (|:| |ty| (|Symbol|))
                                                           (|:| |control1|
                                                                (QREFELT % 6))
@@ -1300,12 +1300,12 @@
                                                                (|:| |parts|
                                                                     (|List|
                                                                      %)))))
-                                                #1#))
+                                                #2#))
                               1)
                              (QVELT
-                              (PROG2 (LETT #1# |n|)
-                                  (QCDR #1#)
-                                (|check_union2| (QEQCAR #1# 1)
+                              (PROG2 (LETT #2# |n|)
+                                  (QCDR #2#)
+                                (|check_union2| (QEQCAR #2# 1)
                                                 (|Record| (|:| |ty| (|Symbol|))
                                                           (|:| |control1|
                                                                (QREFELT % 6))
@@ -1329,16 +1329,16 @@
                                                                (|:| |parts|
                                                                     (|List|
                                                                      %)))))
-                                                #1#))
+                                                #2#))
                               2)
                              (QREFELT % 24))
                             (QREFELT % 45)))
-                     (GO #4=#:G122))))
+                     (GO #4=#:G123))))
                   (EXIT
                    (QVELT
-                    (PROG2 (LETT #1# |n|)
-                        (QCDR #1#)
-                      (|check_union2| (QEQCAR #1# 1)
+                    (PROG2 (LETT #2# |n|)
+                        (QCDR #2#)
+                      (|check_union2| (QEQCAR #2# 1)
                                       (|Record| (|:| |ty| (|Symbol|))
                                                 (|:| |control1| (QREFELT % 6))
                                                 (|:| |control2| (QREFELT % 6)))
@@ -1355,23 +1355,23 @@
                                                      (|:| |ty| (|Symbol|))
                                                      (|:| |parts|
                                                           (|List| %)))))
-                                      #1#))
+                                      #2#))
                     2))))
-                #4# (EXIT #2#)))) 
+                #4# (EXIT #1#)))) 
 
 (SDEFUN |SBOUND;getCentre;%PT;15| ((|n| (%)) (% (PT)))
-        (SPROG ((#1=#:G21 NIL) (#2=#:G128 NIL))
+        (SPROG ((#1=#:G129 NIL) (#2=#:G21 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((SPADCALL |n| (QREFELT % 30))
                     (PROGN
-                     (LETT #2#
+                     (LETT #1#
                            (QVELT
-                            (PROG2 (LETT #1# |n|)
-                                (QCDR #1#)
-                              (|check_union2| (QEQCAR #1# 1)
+                            (PROG2 (LETT #2# |n|)
+                                (QCDR #2#)
+                              (|check_union2| (QEQCAR #2# 1)
                                               (|Record| (|:| |ty| (|Symbol|))
                                                         (|:| |control1|
                                                              (QREFELT % 6))
@@ -1395,16 +1395,16 @@
                                                              (|:| |parts|
                                                                   (|List|
                                                                    %)))))
-                                              #1#))
+                                              #2#))
                             1))
-                     (GO #4=#:G127))))
+                     (GO #4=#:G128))))
                   (EXIT
                    (SPADCALL (|mk_DF| 5 -1)
                              (SPADCALL
                               (QVELT
-                               (PROG2 (LETT #1# |n|)
-                                   (QCDR #1#)
-                                 (|check_union2| (QEQCAR #1# 1)
+                               (PROG2 (LETT #2# |n|)
+                                   (QCDR #2#)
+                                 (|check_union2| (QEQCAR #2# 1)
                                                  (|Record|
                                                   (|:| |ty| (|Symbol|))
                                                   (|:| |control1|
@@ -1429,12 +1429,12 @@
                                                                 (|:| |parts|
                                                                      (|List|
                                                                       %)))))
-                                                 #1#))
+                                                 #2#))
                                1)
                               (QVELT
-                               (PROG2 (LETT #1# |n|)
-                                   (QCDR #1#)
-                                 (|check_union2| (QEQCAR #1# 1)
+                               (PROG2 (LETT #2# |n|)
+                                   (QCDR #2#)
+                                 (|check_union2| (QEQCAR #2# 1)
                                                  (|Record|
                                                   (|:| |ty| (|Symbol|))
                                                   (|:| |control1|
@@ -1459,14 +1459,14 @@
                                                                 (|:| |parts|
                                                                      (|List|
                                                                       %)))))
-                                                 #1#))
+                                                 #2#))
                                2)
                               (QREFELT % 24))
                              (QREFELT % 38)))))
-                #4# (EXIT #2#)))) 
+                #4# (EXIT #1#)))) 
 
 (SDEFUN |SBOUND;link;2%L;16| ((|m| (%)) (|n| (%)) (% (|List| PT)))
-        (SPROG ((|bn| (PT)) (|bm| (PT)))
+        (SPROG ((|bm| (PT)) (|bn| (PT)))
                (SEQ
                 (LETT |bm|
                       (SPADCALL |m| (SPADCALL |n| (QREFELT % 46))
@@ -1478,9 +1478,9 @@
 
 (SDEFUN |SBOUND;coerce;%Of;17| ((|n| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|sub| (|OutputForm|)) (#1=#:G142 NIL) (#2=#:G22 NIL) (|x| NIL)
-          (#3=#:G141 NIL) (#4=#:G140 NIL) (#5=#:G21 NIL) (|s| (|OutputForm|))
-          (|ty| (|OutputForm|)))
+         ((|ty| (|OutputForm|)) (|s| (|OutputForm|)) (#1=#:G21 NIL)
+          (#2=#:G141 NIL) (#3=#:G142 NIL) (|x| NIL) (#4=#:G22 NIL)
+          (#5=#:G143 NIL) (|sub| (|OutputForm|)))
          (SEQ
           (EXIT
            (SEQ (LETT |ty| (SPADCALL '|none | (QREFELT % 51)))
@@ -1493,18 +1493,18 @@
                 (LETT |s|
                       (SPADCALL (SPADCALL '|bound | (QREFELT % 51)) |ty|
                                 (QREFELT % 53)))
-                (COND ((QEQCAR |n| 0) (PROGN (LETT #4# |s|) (GO #6=#:G139))))
+                (COND ((QEQCAR |n| 0) (PROGN (LETT #2# |s|) (GO #6=#:G140))))
                 (COND
                  ((QEQCAR |n| 1)
                   (PROGN
-                   (LETT #4#
+                   (LETT #2#
                          (SPADCALL
                           (LIST |s| (SPADCALL ":" (QREFELT % 55))
                                 (SPADCALL
                                  (QVELT
-                                  (PROG2 (LETT #5# |n|)
-                                      (QCDR #5#)
-                                    (|check_union2| (QEQCAR #5# 1)
+                                  (PROG2 (LETT #1# |n|)
+                                      (QCDR #1#)
+                                    (|check_union2| (QEQCAR #1# 1)
                                                     (|Record|
                                                      (|:| |ty| (|Symbol|))
                                                      (|:| |control1|
@@ -1528,15 +1528,15 @@
                                                                 (|Symbol|))
                                                            (|:| |parts|
                                                                 (|List| %)))))
-                                                    #5#))
+                                                    #1#))
                                   1)
                                  (QREFELT % 56))
                                 (SPADCALL '-> (QREFELT % 51))
                                 (SPADCALL
                                  (QVELT
-                                  (PROG2 (LETT #5# |n|)
-                                      (QCDR #5#)
-                                    (|check_union2| (QEQCAR #5# 1)
+                                  (PROG2 (LETT #1# |n|)
+                                      (QCDR #1#)
+                                    (|check_union2| (QEQCAR #1# 1)
                                                     (|Record|
                                                      (|:| |ty| (|Symbol|))
                                                      (|:| |control1|
@@ -1563,7 +1563,7 @@
                                                                    (|:| |parts|
                                                                         (|List|
                                                                          %)))))
-                                                    #5#))
+                                                    #1#))
                                   2)
                                  (QREFELT % 56)))
                           (QREFELT % 57)))
@@ -1573,11 +1573,11 @@
                        (PROGN
                         (LETT #3# NIL)
                         (SEQ (LETT |x| NIL)
-                             (LETT #1#
+                             (LETT #5#
                                    (QCDR
-                                    (PROG2 (LETT #2# |n|)
-                                        (QCDR #2#)
-                                      (|check_union2| (QEQCAR #2# 2)
+                                    (PROG2 (LETT #4# |n|)
+                                        (QCDR #4#)
+                                      (|check_union2| (QEQCAR #4# 2)
                                                       (|Record|
                                                        (|:| |ty| (|Symbol|))
                                                        (|:| |parts|
@@ -1603,28 +1603,28 @@
                                                                       |parts|
                                                                       (|List|
                                                                        %)))))
-                                                      #2#))))
+                                                      #4#))))
                              G190
                              (COND
-                              ((OR (ATOM #1#) (PROGN (LETT |x| (CAR #1#)) NIL))
+                              ((OR (ATOM #5#) (PROGN (LETT |x| (CAR #5#)) NIL))
                                (GO G191)))
                              (SEQ
                               (EXIT
                                (LETT #3#
                                      (CONS (SPADCALL |x| (QREFELT % 58))
                                            #3#))))
-                             (LETT #1# (CDR #1#)) (GO G190) G191
+                             (LETT #5# (CDR #5#)) (GO G190) G191
                              (EXIT (NREVERSE #3#))))
                        (QREFELT % 59)))
                 (EXIT
                  (SPADCALL (LIST |s| (SPADCALL '|:| (QREFELT % 51)) |sub|)
                            (QREFELT % 57)))))
-          #6# (EXIT #4#)))) 
+          #6# (EXIT #2#)))) 
 
 (DECLAIM (NOTINLINE |SBoundary;|)) 
 
 (DEFUN |SBoundary;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|SBoundary| DV$1))
@@ -1646,9 +1646,9 @@
                                             (|:| |parts| (|List| %))))))
           %))) 
 
-(DEFUN |SBoundary| (#1=#:G143)
+(DEFUN |SBoundary| (#1=#:G144)
   (SPROG NIL
-         (PROG (#2=#:G144)
+         (PROG (#2=#:G145)
            (RETURN
             (COND
              ((LETT #2#
@@ -1674,7 +1674,7 @@
               |SBOUND;getMax;%PT;14| (|Boolean|) |SBOUND;containsPoint?;%PTB;8|
               |SBOUND;isEllipse?;%B;11| (|DoubleFloat|) (40 . |screenCoordX|)
               (45 . |screenCoordY|) (50 . >) (56 . |inBounds?|) (63 . |sqrt|)
-              (68 . |svec|) (74 . *) (|Fraction| 21) (80 . |Zero|) (84 . ~=)
+              (68 . |svec|) (74 . *) (|Fraction| 21) (80 . |0|) (84 . ~=)
               |SBOUND;lineIntersect;%2PT;9| |SBOUND;isNull?;%B;10|
               |SBOUND;isBox?;%B;12| (90 . |toPoint|) |SBOUND;getCentre;%PT;15|
               (|List| 6) |SBOUND;link;2%L;16| (|Symbol|) (|OutputForm|)

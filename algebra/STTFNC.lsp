@@ -159,26 +159,30 @@
                    (EXIT (SPADCALL |atanx| |z| (QREFELT % 23)))))
                  ('T (|error| (STRCONC "atan: " (QREFELT % 7)))))))) 
 
-(PUT '|STTFNC;acos;2S;12| '|SPADreplace|
-     '(XLAM (|z|) (|error| "acos: acos undefined on this coefficient domain"))) 
+(MAKEPROP '|STTFNC;acos;2S;12| '|SPADreplace|
+          '(XLAM (|z|)
+            (|error| "acos: acos undefined on this coefficient domain"))) 
 
 (SDEFUN |STTFNC;acos;2S;12| ((|z| (|Stream| |Coef|)) (% (|Stream| |Coef|)))
         (|error| "acos: acos undefined on this coefficient domain")) 
 
-(PUT '|STTFNC;acot;2S;13| '|SPADreplace|
-     '(XLAM (|z|) (|error| "acot: acot undefined on this coefficient domain"))) 
+(MAKEPROP '|STTFNC;acot;2S;13| '|SPADreplace|
+          '(XLAM (|z|)
+            (|error| "acot: acot undefined on this coefficient domain"))) 
 
 (SDEFUN |STTFNC;acot;2S;13| ((|z| (|Stream| |Coef|)) (% (|Stream| |Coef|)))
         (|error| "acot: acot undefined on this coefficient domain")) 
 
-(PUT '|STTFNC;asec;2S;14| '|SPADreplace|
-     '(XLAM (|z|) (|error| "asec: asec undefined on this coefficient domain"))) 
+(MAKEPROP '|STTFNC;asec;2S;14| '|SPADreplace|
+          '(XLAM (|z|)
+            (|error| "asec: asec undefined on this coefficient domain"))) 
 
 (SDEFUN |STTFNC;asec;2S;14| ((|z| (|Stream| |Coef|)) (% (|Stream| |Coef|)))
         (|error| "asec: asec undefined on this coefficient domain")) 
 
-(PUT '|STTFNC;acsc;2S;15| '|SPADreplace|
-     '(XLAM (|z|) (|error| "acsc: acsc undefined on this coefficient domain"))) 
+(MAKEPROP '|STTFNC;acsc;2S;15| '|SPADreplace|
+          '(XLAM (|z|)
+            (|error| "acsc: acsc undefined on this coefficient domain"))) 
 
 (SDEFUN |STTFNC;acsc;2S;15| ((|z| (|Stream| |Coef|)) (% (|Stream| |Coef|)))
         (|error| "acsc: acsc undefined on this coefficient domain")) 
@@ -295,30 +299,30 @@
                    (EXIT (SPADCALL |atanhx| |z| (QREFELT % 23)))))
                  ('T (|error| (STRCONC "atanh: " (QREFELT % 7)))))))) 
 
-(PUT '|STTFNC;acosh;2S;24| '|SPADreplace|
-     '(XLAM (|z|)
-       (|error| "acosh: acosh undefined on this coefficient domain"))) 
+(MAKEPROP '|STTFNC;acosh;2S;24| '|SPADreplace|
+          '(XLAM (|z|)
+            (|error| "acosh: acosh undefined on this coefficient domain"))) 
 
 (SDEFUN |STTFNC;acosh;2S;24| ((|z| (|Stream| |Coef|)) (% (|Stream| |Coef|)))
         (|error| "acosh: acosh undefined on this coefficient domain")) 
 
-(PUT '|STTFNC;acoth;2S;25| '|SPADreplace|
-     '(XLAM (|z|)
-       (|error| "acoth: acoth undefined on this coefficient domain"))) 
+(MAKEPROP '|STTFNC;acoth;2S;25| '|SPADreplace|
+          '(XLAM (|z|)
+            (|error| "acoth: acoth undefined on this coefficient domain"))) 
 
 (SDEFUN |STTFNC;acoth;2S;25| ((|z| (|Stream| |Coef|)) (% (|Stream| |Coef|)))
         (|error| "acoth: acoth undefined on this coefficient domain")) 
 
-(PUT '|STTFNC;asech;2S;26| '|SPADreplace|
-     '(XLAM (|z|)
-       (|error| "asech: asech undefined on this coefficient domain"))) 
+(MAKEPROP '|STTFNC;asech;2S;26| '|SPADreplace|
+          '(XLAM (|z|)
+            (|error| "asech: asech undefined on this coefficient domain"))) 
 
 (SDEFUN |STTFNC;asech;2S;26| ((|z| (|Stream| |Coef|)) (% (|Stream| |Coef|)))
         (|error| "asech: asech undefined on this coefficient domain")) 
 
-(PUT '|STTFNC;acsch;2S;27| '|SPADreplace|
-     '(XLAM (|z|)
-       (|error| "acsch: acsch undefined on this coefficient domain"))) 
+(MAKEPROP '|STTFNC;acsch;2S;27| '|SPADreplace|
+          '(XLAM (|z|)
+            (|error| "acsch: acsch undefined on this coefficient domain"))) 
 
 (SDEFUN |STTFNC;acsch;2S;27| ((|z| (|Stream| |Coef|)) (% (|Stream| |Coef|)))
         (|error| "acsch: acsch undefined on this coefficient domain")) 
@@ -326,7 +330,7 @@
 (DECLAIM (NOTINLINE |StreamTranscendentalFunctionsNonCommutative;|)) 
 
 (DEFUN |StreamTranscendentalFunctionsNonCommutative;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$|
@@ -345,9 +349,9 @@
           (QSETREFV % 9 "series expansion has terms of negative degree")
           %))) 
 
-(DEFUN |StreamTranscendentalFunctionsNonCommutative| (#1=#:G113)
+(DEFUN |StreamTranscendentalFunctionsNonCommutative| (#1=#:G114)
   (SPROG NIL
-         (PROG (#2=#:G114)
+         (PROG (#2=#:G115)
            (RETURN
             (COND
              ((LETT #2#
@@ -368,9 +372,9 @@
 (MAKEPROP '|StreamTranscendentalFunctionsNonCommutative| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) 'ZERO 'ONE 'NPOWERS
-              (|Boolean|) (|Stream| 6) (0 . |empty?|) (5 . |One|)
+              (|Boolean|) (|Stream| 6) (0 . |empty?|) (5 . |1|)
               (|StreamTaylorSeriesOperations| 6) (9 . |coerce|) (14 . |frst|)
-              (19 . |Zero|) (23 . =) (|Integer|) (29 . |monom|)
+              (19 . |0|) (23 . =) (|Integer|) (29 . |monom|)
               (|StreamTranscendentalFunctions| 6) (35 . |exp|) (40 . |compose|)
               |STTFNC;exp;2S;1| (46 . +) (52 . |log|) (57 . -)
               |STTFNC;log;2S;2| (63 . *) |STTFNC;^;3S;3| (69 . |sin|)

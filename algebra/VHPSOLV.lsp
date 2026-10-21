@@ -27,29 +27,28 @@
           (|Matrix|
            (|SparseUnivariatePolynomial| (|Expression| (|Integer|))))))
         (SPROG
-         ((#1=#:G42 NIL) (|j| NIL) (|i1| #2=(|NonNegativeInteger|))
-          (#3=#:G41 NIL) (|i| NIL)
-          (|res|
-           (|Matrix|
-            (|SparseUnivariatePolynomial| (|Expression| (|Integer|)))))
-          (|n1| #2#) (#4=#:G40 NIL) (|n| (|NonNegativeInteger|))
+         ((|m| (|NonNegativeInteger|)) (|v| NIL) (#1=#:G35 NIL) (#2=#:G36 NIL)
+          (|pp1| (|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
+          (#3=#:G12 NIL)
+          (|pp| (|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
+          (|lpp|
+           (|List| (|SparseUnivariatePolynomial| (|Expression| (|Integer|)))))
+          (#4=#:G37 NIL) (|ei| NIL) (#5=#:G38 NIL)
+          (|vd| (|Vector| (|Integer|))) (#6=#:G39 NIL) (#7=#:G40 NIL)
+          (C (|List| (|Expression| (|Integer|))))
           (|res1|
            (|Matrix|
             (|SparseUnivariatePolynomial| (|Expression| (|Integer|)))))
-          (C (|List| (|Expression| (|Integer|)))) (#5=#:G39 NIL) (#6=#:G38 NIL)
-          (|vd| (|Vector| (|Integer|))) (#7=#:G37 NIL) (|ei| NIL)
-          (#8=#:G36 NIL)
-          (|lpp|
-           (|List| (|SparseUnivariatePolynomial| (|Expression| (|Integer|)))))
-          (|pp| (|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
-          (#9=#:G12 NIL)
-          (|pp1| (|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
-          (#10=#:G35 NIL) (#11=#:G34 NIL) (|v| NIL)
-          (|m| (|NonNegativeInteger|)))
+          (|n| (|NonNegativeInteger|)) (#8=#:G41 NIL)
+          (|n1| #9=(|NonNegativeInteger|))
+          (|res|
+           (|Matrix|
+            (|SparseUnivariatePolynomial| (|Expression| (|Integer|)))))
+          (|i| NIL) (#10=#:G42 NIL) (|i1| #9#) (|j| NIL) (#11=#:G43 NIL))
          (SEQ (LETT |m| (QVSIZE (|SPADfirst| |lv|))) (LETT |lpp| NIL)
-              (SEQ (LETT |v| NIL) (LETT #11# |lv|) G190
+              (SEQ (LETT |v| NIL) (LETT #1# |lv|) G190
                    (COND
-                    ((OR (ATOM #11#) (PROGN (LETT |v| (CAR #11#)) NIL))
+                    ((OR (ATOM #1#) (PROGN (LETT |v| (CAR #1#)) NIL))
                      (GO G191)))
                    (SEQ
                     (EXIT
@@ -59,8 +58,8 @@
                         "hp_solve: vectors must be of the same length"))
                       ('T
                        (SEQ (LETT |pp| (|spadConstant| % 14))
-                            (SEQ (LETT |i| 1) (LETT #10# |m|) G190
-                                 (COND ((|greater_SI| |i| #10#) (GO G191)))
+                            (SEQ (LETT |i| 1) (LETT #2# |m|) G190
+                                 (COND ((|greater_SI| |i| #2#) (GO G191)))
                                  (SEQ
                                   (LETT |pp1|
                                         (SPADCALL
@@ -73,36 +72,36 @@
                                                     (SPADCALL
                                                      (|spadConstant| % 20)
                                                      (PROG1
-                                                         (LETT #9# (- |i| 1))
+                                                         (LETT #3# (- |i| 1))
                                                        (|check_subtype2|
-                                                        (>= #9# 0)
+                                                        (>= #3# 0)
                                                         '(|NonNegativeInteger|)
-                                                        '(|Integer|) #9#))
+                                                        '(|Integer|) #3#))
                                                      (QREFELT % 21))
                                                     |pp1| (QREFELT % 22))
                                                    (QREFELT % 23)))))
                                  (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                                  (EXIT NIL))
                             (EXIT (LETT |lpp| (CONS |pp| |lpp|))))))))
-                   (LETT #11# (CDR #11#)) (GO G190) G191 (EXIT NIL))
+                   (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
               (LETT |lpp| (NREVERSE |lpp|))
               (LETT |vd|
                     (SPADCALL
                      (PROGN
-                      (LETT #8# NIL)
-                      (SEQ (LETT |ei| NIL) (LETT #7# |eta|) G190
+                      (LETT #4# NIL)
+                      (SEQ (LETT |ei| NIL) (LETT #5# |eta|) G190
                            (COND
-                            ((OR (ATOM #7#) (PROGN (LETT |ei| (CAR #7#)) NIL))
+                            ((OR (ATOM #5#) (PROGN (LETT |ei| (CAR #5#)) NIL))
                              (GO G191)))
-                           (SEQ (EXIT (LETT #8# (CONS |ei| #8#))))
-                           (LETT #7# (CDR #7#)) (GO G190) G191
-                           (EXIT (NREVERSE #8#))))
+                           (SEQ (EXIT (LETT #4# (CONS |ei| #4#))))
+                           (LETT #5# (CDR #5#)) (GO G190) G191
+                           (EXIT (NREVERSE #4#))))
                      (QREFELT % 26)))
               (LETT C
                     (PROGN
                      (LETT #6# NIL)
-                     (SEQ (LETT |i| 1) (LETT #5# K) G190
-                          (COND ((|greater_SI| |i| #5#) (GO G191)))
+                     (SEQ (LETT |i| 1) (LETT #7# K) G190
+                          (COND ((|greater_SI| |i| #7#) (GO G191)))
                           (SEQ
                            (EXIT (LETT #6# (CONS (|spadConstant| % 27) #6#))))
                           (LETT |i| (|inc_SI| |i|)) (GO G190) G191
@@ -112,8 +111,8 @@
                               (SPADCALL |lpp| (QREFELT % 29)) |vd| K
                               (QREFELT % 33)))
               (LETT |n| (QVSIZE |vd|)) (LETT |n1| 0)
-              (SEQ (LETT |i| 1) (LETT #4# |n|) G190
-                   (COND ((|greater_SI| |i| #4#) (GO G191)))
+              (SEQ (LETT |i| 1) (LETT #8# |n|) G190
+                   (COND ((|greater_SI| |i| #8#) (GO G191)))
                    (SEQ
                     (EXIT
                      (COND
@@ -122,16 +121,16 @@
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
               (LETT |res| (MAKE_MATRIX1 |n| |n1| (|spadConstant| % 14)))
               (LETT |i1| 0)
-              (SEQ (LETT |i| 1) (LETT #3# |n|) G190
-                   (COND ((|greater_SI| |i| #3#) (GO G191)))
+              (SEQ (LETT |i| 1) (LETT #10# |n|) G190
+                   (COND ((|greater_SI| |i| #10#) (GO G191)))
                    (SEQ
                     (EXIT
                      (COND
                       ((>= (SPADCALL |vd| |i| (QREFELT % 34)) 0)
                        (SEQ (LETT |i1| (+ |i1| 1))
                             (EXIT
-                             (SEQ (LETT |j| 1) (LETT #1# |n|) G190
-                                  (COND ((|greater_SI| |j| #1#) (GO G191)))
+                             (SEQ (LETT |j| 1) (LETT #11# |n|) G190
+                                  (COND ((|greater_SI| |j| #11#) (GO G191)))
                                   (SEQ
                                    (EXIT
                                     (SPADCALL |res| |j| |i1|
@@ -160,7 +159,7 @@
 
 (DEFUN |VectorHermitePadeSolver| ()
   (SPROG NIL
-         (PROG (#1=#:G44)
+         (PROG (#1=#:G45)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|VectorHermitePadeSolver|))
@@ -183,10 +182,10 @@
            '#(NIL NIL NIL NIL NIL NIL (|NonNegativeInteger|) (0 . *)
               (|Expression| 15) (|SparseUnivariatePolynomial| 8)
               (|FractionFreeFastGaussian| 8 9) (6 . |DiffAction|) (|Boolean|)
-              (13 . ~=) (19 . |Zero|) (|Integer|) (|Vector| 9) (23 . |elt|)
-              (29 . |multiplyExponents|) (35 . |One|) (39 . |One|)
+              (13 . ~=) (19 . |0|) (|Integer|) (|Vector| 9) (23 . |elt|)
+              (29 . |multiplyExponents|) (35 . |1|) (39 . |1|)
               (43 . |monomial|) (49 . *) (55 . +) (|List| 15) (|Vector| 15)
-              (61 . |vector|) (66 . |Zero|) (|List| 9) (70 . |vector|)
+              (61 . |vector|) (66 . |0|) (|List| 9) (70 . |vector|)
               (|Matrix| 9) (|List| 8) (|Mapping| 8 6 6 9)
               (75 . |generalInterpolation|) (84 . |elt|) (90 . |elt|)
               (97 . |setelt!|) (|List| 16) (|List| 6)
@@ -211,7 +210,7 @@
                                 T))
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 39
-                                            '(2 6 0 0 0 7 3 10 8 6 6 9 11 2 6
+                                            '(2 6 0 6 0 7 3 10 8 6 6 9 11 2 6
                                               12 0 0 13 0 9 0 14 2 16 9 0 15 17
                                               2 9 0 0 6 18 0 9 0 19 0 8 0 20 2
                                               9 0 8 6 21 2 9 0 0 0 22 2 9 0 0 0

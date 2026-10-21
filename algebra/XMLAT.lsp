@@ -3,14 +3,14 @@
         ((|name| (|String|)) (|value| (|String|)) (% (%)))
         (CONS |name| (LIST |value|))) 
 
-(PUT '|XMLAT;xmlAttribute;SL%;2| '|SPADreplace| 'CONS) 
+(MAKEPROP '|XMLAT;xmlAttribute;SL%;2| '|SPADreplace| 'CONS) 
 
 (SDEFUN |XMLAT;xmlAttribute;SL%;2|
         ((|name| (|String|)) (|values| (|List| (|String|))) (% (%)))
         (CONS |name| |values|)) 
 
 (SDEFUN |XMLAT;coerce;%S;3| ((|rp| (%)) (% (|String|)))
-        (SPROG ((|val| (|String|)) (#1=#:G9 NIL) (|vn| NIL))
+        (SPROG ((|vn| NIL) (#1=#:G10 NIL) (|val| (|String|)))
                (SEQ (LETT |val| "")
                     (SEQ (LETT |vn| NIL) (LETT #1# (QCDR |rp|)) G190
                          (COND
@@ -34,7 +34,7 @@
                       (QREFELT % 12)))))) 
 
 (SDEFUN |XMLAT;outputVRML;%TfV;4| ((|rp| (%)) (|f1| (|TextFile|)) (% (|Void|)))
-        (SPROG ((|val| (|String|)) (#1=#:G15 NIL) (|vn| NIL))
+        (SPROG ((|vn| NIL) (#1=#:G16 NIL) (|val| (|String|)))
                (SEQ (LETT |val| "")
                     (SEQ (LETT |vn| NIL) (LETT #1# (QCDR |rp|)) G190
                          (COND
@@ -73,7 +73,7 @@
 
 (DEFUN |XmlAttribute| ()
   (SPROG NIL
-         (PROG (#1=#:G17)
+         (PROG (#1=#:G18)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|XmlAttribute|))

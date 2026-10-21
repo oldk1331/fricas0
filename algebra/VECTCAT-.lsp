@@ -10,22 +10,22 @@
         (SPADCALL |n| (|spadConstant| % 17) (QREFELT % 18))) 
 
 (SDEFUN |VECTCAT-;zero?;SB;3| ((|y| (S)) (% (|Boolean|)))
-        (SPROG ((#1=#:G22 NIL) (#2=#:G23 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G24 NIL) (#2=#:G23 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (SEQ (LETT |i| (SPADCALL |y| (QREFELT % 20)))
-                       (LETT #2# (SPADCALL |y| (QREFELT % 21))) G190
-                       (COND ((> |i| #2#) (GO G191)))
+                       (LETT #1# (SPADCALL |y| (QREFELT % 21))) G190
+                       (COND ((> |i| #1#) (GO G191)))
                        (SEQ
                         (EXIT
                          (COND
                           ((SPADCALL (SPADCALL |y| |i| (QREFELT % 22))
                                      (|spadConstant| % 17) (QREFELT % 23))
-                           (PROGN (LETT #1# NIL) (GO #3=#:G21))))))
+                           (PROGN (LETT #2# NIL) (GO #3=#:G22))))))
                        (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL))
                   (EXIT 'T)))
-                #3# (EXIT #1#)))) 
+                #3# (EXIT #2#)))) 
 
 (SDEFUN |VECTCAT-;-;2S;4| ((|u| (S)) (% (S)))
         (SPADCALL (ELT % 25) |u| (QREFELT % 27))) 
@@ -68,8 +68,8 @@
 
 (SDEFUN |VECTCAT-;dot;2SR;9| ((|u| (S)) (|v| (S)) (% (R)))
         (SPROG
-         ((#1=#:G33 NIL) (#2=#:G32 (R)) (#3=#:G34 (R)) (#4=#:G37 NIL)
-          (|i| NIL))
+         ((|i| NIL) (#1=#:G39 NIL) (#2=#:G36 (R)) (#3=#:G34 (R))
+          (#4=#:G35 NIL))
          (SEQ
           (COND
            ((SPADCALL (SPADCALL |u| (QREFELT % 9)) (SPADCALL |v| (QREFELT % 9))
@@ -77,55 +77,55 @@
             (|error| "Vectors must be of the same length"))
            (#5='T
             (PROGN
-             (LETT #1# NIL)
+             (LETT #4# NIL)
              (SEQ (LETT |i| (SPADCALL |u| (QREFELT % 20)))
-                  (LETT #4# (SPADCALL |u| (QREFELT % 21))) G190
-                  (COND ((> |i| #4#) (GO G191)))
+                  (LETT #1# (SPADCALL |u| (QREFELT % 21))) G190
+                  (COND ((> |i| #1#) (GO G191)))
                   (SEQ
                    (EXIT
                     (PROGN
-                     (LETT #3#
+                     (LETT #2#
                            (SPADCALL (SPADCALL |u| |i| (QREFELT % 22))
                                      (SPADCALL |v| |i| (QREFELT % 22))
                                      (QREFELT % 34)))
-                     (COND (#1# (LETT #2# (SPADCALL #2# #3# (QREFELT % 13))))
-                           ('T (PROGN (LETT #2# #3#) (LETT #1# 'T)))))))
+                     (COND (#4# (LETT #3# (SPADCALL #3# #2# (QREFELT % 13))))
+                           ('T (PROGN (LETT #3# #2#) (LETT #4# 'T)))))))
                   (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL))
-             (COND (#1# #2#) (#5# (|spadConstant| % 17))))))))) 
+             (COND (#4# #3#) (#5# (|spadConstant| % 17))))))))) 
 
 (SDEFUN |VECTCAT-;outerProduct;2SM;10| ((|u| (S)) (|v| (S)) (% (|Matrix| R)))
         (SPROG
-         ((#1=#:G46 NIL) (|i| NIL) (#2=#:G45 NIL) (#3=#:G44 NIL) (|j| NIL)
-          (#4=#:G43 NIL))
+         ((#1=#:G45 NIL) (|j| NIL) (#2=#:G46 NIL) (#3=#:G47 NIL) (|i| NIL)
+          (#4=#:G48 NIL))
          (SEQ
           (SPADCALL
            (PROGN
-            (LETT #4# NIL)
+            (LETT #1# NIL)
             (SEQ (LETT |j| (SPADCALL |v| (QREFELT % 20)))
-                 (LETT #3# (SPADCALL |v| (QREFELT % 21))) G190
-                 (COND ((> |j| #3#) (GO G191)))
+                 (LETT #2# (SPADCALL |v| (QREFELT % 21))) G190
+                 (COND ((> |j| #2#) (GO G191)))
                  (SEQ
                   (EXIT
-                   (LETT #4#
+                   (LETT #1#
                          (CONS
                           (PROGN
-                           (LETT #2# NIL)
+                           (LETT #3# NIL)
                            (SEQ (LETT |i| (SPADCALL |u| (QREFELT % 20)))
-                                (LETT #1# (SPADCALL |u| (QREFELT % 21))) G190
-                                (COND ((> |i| #1#) (GO G191)))
+                                (LETT #4# (SPADCALL |u| (QREFELT % 21))) G190
+                                (COND ((> |i| #4#) (GO G191)))
                                 (SEQ
                                  (EXIT
-                                  (LETT #2#
+                                  (LETT #3#
                                         (CONS
                                          (SPADCALL
                                           (SPADCALL |u| |i| (QREFELT % 22))
                                           (SPADCALL |v| |j| (QREFELT % 22))
                                           (QREFELT % 34))
-                                         #2#))))
+                                         #3#))))
                                 (LETT |i| (+ |i| 1)) (GO G190) G191
-                                (EXIT (NREVERSE #2#))))
-                          #4#))))
-                 (LETT |j| (+ |j| 1)) (GO G190) G191 (EXIT (NREVERSE #4#))))
+                                (EXIT (NREVERSE #3#))))
+                          #1#))))
+                 (LETT |j| (+ |j| 1)) (GO G190) G191 (EXIT (NREVERSE #1#))))
            (QREFELT % 40))))) 
 
 (SDEFUN |VECTCAT-;cross;3S;11| ((|u| (S)) (|v| (S)) (% (S)))
@@ -162,7 +162,7 @@
 (DECLAIM (NOTINLINE |VectorCategory&;|)) 
 
 (DEFUN |VectorCategory&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -238,7 +238,7 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|NonNegativeInteger|) (0 . |#|) (|Boolean|) (|Integer|) (5 . ~=)
-              (11 . +) (|Mapping| 7 7 7) (17 . |map|) (24 . +) (30 . |Zero|)
+              (11 . +) (|Mapping| 7 7 7) (17 . |map|) (24 . +) (30 . |0|)
               (34 . |new|) (40 . |zero|) (45 . |minIndex|) (50 . |maxIndex|)
               (55 . |qelt|) (61 . ~=) (67 . |zero?|) (72 . -) (|Mapping| 7 7)
               (77 . |map|) (83 . -) (88 . *) (94 . *) (100 . -) (105 . +)

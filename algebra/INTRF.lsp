@@ -32,7 +32,7 @@
 (DECLAIM (NOTINLINE |RationalFunctionIntegration;|)) 
 
 (DEFUN |RationalFunctionIntegration;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RationalFunctionIntegration| DV$1))
@@ -46,9 +46,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |RationalFunctionIntegration| (#1=#:G10)
+(DEFUN |RationalFunctionIntegration| (#1=#:G17)
   (SPROG NIL
-         (PROG (#2=#:G11)
+         (PROG (#2=#:G18)
            (RETURN
             (COND
              ((LETT #2#

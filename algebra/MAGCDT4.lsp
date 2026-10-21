@@ -23,20 +23,20 @@
                      (|:| |sp| (|Integer|)))
            "failed")))
         (SPROG
-         ((|lm2| (|List| (|Polynomial| (|Integer|)))) (#1=#:G17 NIL) (|m| NIL)
-          (#2=#:G16 NIL))
+         ((#1=#:G21 NIL) (|m| NIL) (#2=#:G22 NIL)
+          (|lm2| (|List| (|Polynomial| (|Integer|)))))
          (SEQ
           (LETT |lm2|
                 (PROGN
-                 (LETT #2# NIL)
-                 (SEQ (LETT |m| NIL) (LETT #1# |lm|) G190
+                 (LETT #1# NIL)
+                 (SEQ (LETT |m| NIL) (LETT #2# |lm|) G190
                       (COND
-                       ((OR (ATOM #1#) (PROGN (LETT |m| (CAR #1#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT |m| (CAR #2#)) NIL))
                         (GO G191)))
                       (SEQ
-                       (EXIT (LETT #2# (CONS (|MAGCDT4;FP_to_MP| |m| %) #2#))))
-                      (LETT #1# (CDR #1#)) (GO G190) G191
-                      (EXIT (NREVERSE #2#)))))
+                       (EXIT (LETT #1# (CONS (|MAGCDT4;FP_to_MP| |m| %) #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#)))))
           (EXIT (SPADCALL |lm2| |lvz| |p| (QREFELT % 18)))))) 
 
 (SDEFUN |MAGCDT4;FrP_to_MP|
@@ -50,10 +50,10 @@
                     (|:| |sp| (|Integer|))))
          (% (|Union| (|Polynomial| (|Integer|)) "failed")))
         (SPROG
-         ((|res1|
+         ((|p1| (|SparseUnivariatePolynomial| (|Polynomial| (|Integer|))))
+          (|res1|
            (|Union| (|SparseUnivariatePolynomial| (|Polynomial| (|Integer|)))
-                    "failed"))
-          (|p1| (|SparseUnivariatePolynomial| (|Polynomial| (|Integer|)))))
+                    "failed")))
          (SEQ
           (COND
            ((SPADCALL (QCDR |c|) (|spadConstant| % 21) (QREFELT % 12))
@@ -107,7 +107,7 @@
 
 (DEFUN |ModularAlgebraicGcdTools4| ()
   (SPROG NIL
-         (PROG (#1=#:G39)
+         (PROG (#1=#:G51)
            (RETURN
             (COND
              ((LETT #1#
@@ -131,15 +131,15 @@
           (LIST
            '#(NIL NIL NIL NIL NIL (|ModularAlgebraicGcdTools3|)
               (|Record| (|:| |numer| 9) (|:| |denom| 9)) (|FakePolynomial|)
-              (0 . |ground|) (|Polynomial| 17) (5 . |One|) (|Boolean|) (9 . =)
+              (0 . |ground|) (|Polynomial| 17) (5 . |1|) (|Boolean|) (9 . =)
               (|Record| (|:| |svz| 16) (|:| |sm| 15) (|:| |msizes| (|List| 17))
                         (|:| |sp| 17))
-              (|Union| 13 '#1="failed") (|List| 9) (|List| 34) (|Integer|)
+              (|Union| 13 '"failed") (|List| 9) (|List| 34) (|Integer|)
               (15 . |pack_modulus|) (|List| 7) |MAGCDT4;pack_modulus;LLIU;2|
-              (22 . |Zero|) (|NonNegativeInteger|)
+              (22 . |0|) (|NonNegativeInteger|)
               (|SparseUnivariatePolynomial| 9) (26 . |monomial|)
-              (32 . |coerce|) (37 . +) (|Union| 23 '#1#)
-              (43 . |canonicalIfCan|) (49 . |Zero|) (53 . |coefficient|)
+              (32 . |coerce|) (37 . +) (|Union| 23 '"failed")
+              (43 . |canonicalIfCan|) (49 . |0|) (53 . |coefficient|)
               (|Union| 9 '"failed") (|Mapping| 31 6) (59 . |map|) (|Symbol|)
               |MAGCDT4;MPtoMPT;FpSLRU;4| (|SortedExponentVector|) (|Void|)
               (|U32Vector|))

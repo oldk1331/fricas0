@@ -1,453 +1,696 @@
-;; Copyright (c) 1991-2002, The Numerical ALgorithms Group Ltd.
-;; All rights reserved.
-;;
-;; Redistribution and use in source and binary forms, with or without
-;; modification, are permitted provided that the following conditions are
-;; met:
-;;
-;;     - Redistributions of source code must retain the above copyright
-;;       notice, this list of conditions and the following disclaimer.
-;;
-;;     - Redistributions in binary form must reproduce the above copyright
-;;       notice, this list of conditions and the following disclaimer in
-;;       the documentation and/or other materials provided with the
-;;       distribution.
-;;
-;;     - Neither the name of The Numerical ALgorithms Group Ltd. nor the
-;;       names of its contributors may be used to endorse or promote products
-;;       derived from this software without specific prior written permission.
-;;
-;; THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
-;; IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-;; TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
-;; PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
-;; OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-;; EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-;; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-;; PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-;; LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-;; NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-;; SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-(in-package "BOOT")
+; )package "BOOT"
 
-(setq |$printTimeIfTrue| nil)
+(IN-PACKAGE "BOOT")
 
-;;; In case 'setvart.boot' does not work...
-(setq |$algebraOutputStream| (|mkOutputConsoleStream|))
+; $printTimeIfTrue := false
 
-(defvar |$frameMessages| nil)
-(defvar |$displayStartMsgs| nil)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$printTimeIfTrue| NIL))
 
-(setq |$localVars| ())  ;checked by isType
+; $frameMessages := nil
 
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$frameMessages| NIL))
 
-;; These were originally in SPAD LISP
+; $displayStartMsgs := nil
 
-(SETQ |$mutableDomains| NIL)     ; checked in DEFINE BOOT
-(SETQ |$maxSignatureLineNumber| 0)
-(SETQ |$functionLocations| NIL)
-(SETQ |$globalExposureGroupAlist| NIL)
-(SETQ |$localExposureDataDefault|
-  (VECTOR (LIST '|basic| '|categories|) NIL NIL))
-(SETQ |$localExposureData|
-  (VECTOR (LIST '|basic| '|categories|) NIL NIL))
-(setq |$ReadingFile| NIL)
-;; Used by Spad stream machinery
-(setq |$NonNullStream| "NonNullStream")
-(setq |$NullStream| "NullStream")
-(setq |$UninitializedStream| "UninitializedStream")
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$displayStartMsgs| NIL))
 
-(setq |$Newline| #\Newline)
+; $localVars := []
 
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$localVars| NIL))
 
-(SETQ $SPAD_ERRORS (VECTOR 0 0 0))
-(DEFPARAMETER |$InteractiveMode| T)
+; $UserLevel := 'development
 
-(SETQ |$ruleSetsInitialized| NIL)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$UserLevel| '|development|))
 
-(SETQ |$InterpreterMacroAlist|
-      '((|%i| . (|complex| 0 1))
-        (|%e| . (|exp| 1))
-        (|%pi| . (|pi|))
-        (|SF| . (|DoubleFloat|))
-        (|%infinity| . (|infinity|))
-        (|%plusInfinity| . (|plusInfinity|))
-        (|%minusInfinity| . (|minusInfinity|))))
+; $reportInstantiations := nil
 
-;; Common lisp control variables
-(setq *print-array* nil)
-(setq *print-pretty* t)
-(setq *print-circle* nil)
-(setq *print-escape* nil) ;; so stringimage doesn't escape idents
-;;; FIXME: do we need this?
-#+(and :GCL :IEEE-FLOATING-POINT)
-  (setq system:*print-nans* T)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$reportInstantiations| NIL))
 
-(SETQ |$systemCommands| '(
-;;  COMMAND              USER LEVEL   - )set userlevel
-   (|abbreviations|                  . |compiler|   )
-   (|boot|                           . |development|)
-   (|cd|                             . |interpreter|)
-   (|clear|                          . |interpreter|)
-   (|close|                          . |interpreter|)
-   (|compile|                        . |compiler|   )
-   (|copyright|                      . |interpreter|)
-   (|credits|                        . |interpreter|)
-   (|display|                        . |interpreter|)
-   (|edit|                           . |interpreter|)
-   (|fin|                            . |development|)
-   (|frame|                          . |interpreter|)
-   (|help|                           . |interpreter|)
-   (|history|                        . |interpreter|)
-   (|lisp|                           . |development|)
-   (|library|                        . |interpreter|)
-   (|load|                           . |interpreter|)
-   (|ltrace|                         . |interpreter|)
-   (|nopiles|                        . |interpreter|)
-   (|piles|                          . |interpreter|)
-   (|pquit|                          . |interpreter|)
-   (|quit|                           . |interpreter|)
-   (|read|                           . |interpreter|)
-   (|set|                            . |interpreter|)
-   (|show|                           . |interpreter|)
-   (|spool|                          . |interpreter|)
-   (|summary|                        . |interpreter|)
-   (|synonym|                        . |interpreter|)
-   (|system|                         . |interpreter|)
-   (|trace|                          . |interpreter|)
-   (|undo|                           . |interpreter|)
-   (|what|                           . |interpreter|)
-   (|version|                        . |interpreter|)
- ))
+; $reportEachInstantiation := nil
 
-(SETQ |$noParseCommands| '(
-    |boot|
-    |copyright|
-    |credits|
-    |fin|
-    |lisp|
-    |piles|
-    |pquit|
-    |quit|
-    |suspend|
-    |synonym|
-    |system|
-    |version|
-    ))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$reportEachInstantiation| NIL))
 
-(SETQ |$tokenCommands| '(
-    |abbreviations|
-    |cd|
-    |clear|
-    |close|
-    |compile|
-    |depends|
-    |display|
-    |edit|
-    |frame|
-    |frame|
-    |help|
-    |history|
-    |input|
-    |library|
-    |load|
-    |ltrace|
-    |nopiles|
-    |read|
-    |set|
-    |spool|
-    |undo|
-    |what|
-    |with|
-    ))
+; $reportCounts := nil
 
-;; These were originally in INIT LISP
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$reportCounts| NIL))
 
-(SETQ |$InitialCommandSynonymAlist| '(
-       (|?|          . "what commands")
-       (|apropos|    . "what things")
-       (|cache|      . "set functions cache")
-       (|cl|         . "clear")
-       (|co|         . "compile")
-       (|d|          . "display")
-       (|expose|     . "set expose add constructor")
-       (|fortran|    . "set output fortran")
-       (|h|          . "help")
-       (|hd|         . "system hypertex &")
-       (|kclam|      . "boot clearClams ( )")
-       (|killcaches| . "boot clearConstructorCaches()")
-       (|prompt|     . "set message prompt")
-       (|recurrence| . "set functions recurrence")
-       (|restore|    . "history )restore")
-       (|save|       . "history )save")
-       (|startGraphics|    .  "system $FRICAS/lib/viewman &")
-       (|stopGraphics|     .  "lisp (|sockSendSignal| 2 15)")
-       (|time|       . "set message time")
-       (|storage|    . "set message storage")
-       (|type|       . "set message type")
-       (|unexpose|   . "set expose drop constructor")
-       (|wc|         . "what categories")
-       (|wd|         . "what domains")
-       (|wp|         . "what packages")
-       (|ws|         . "what synonyms")
-))
+; $doNotCompileJustPrint := nil
 
-(SETQ |$CommandSynonymAlist| (COPY |$InitialCommandSynonymAlist|))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$doNotCompileJustPrint| NIL))
+
+; $PrintCompilerMessageIfTrue := true
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$PrintCompilerMessageIfTrue| T))
+
+; $Rep := "$Rep"
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$Rep| '|$Rep|))
+
+; $scanIfTrue := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$scanIfTrue| NIL))
+
+; $Representation := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$Representation| NIL))
+
+; $definition := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$definition| NIL))
+
+; $env := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$env| NIL))
+
+; $e := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$e| NIL))
+
+; $getPutTrace := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$getPutTrace| NIL))
+
+; MAKEPROP("~>", 'Led, ["~>", "~>", 122, 121])
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (PROG () (RETURN (MAKEPROP '~> '|Led| (LIST '~> '~> 122 121)))))
+
+; MAKEPROP('EQUATNUM, 'Nud, ['dummy, 'dummy, 0, 0])
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (PROG () (RETURN (MAKEPROP 'EQUATNUM '|Nud| (LIST '|dummy| '|dummy| 0 0)))))
+
+; MAKEPROP('EQUATNUM, 'Led, ['dummy, 'dummy, 10000, 0])
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (PROG ()
+    (RETURN (MAKEPROP 'EQUATNUM '|Led| (LIST '|dummy| '|dummy| 10000 0)))))
+
+; MAKEPROP('LET, 'Led, [":=", "LET", 125, 124])
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (PROG () (RETURN (MAKEPROP 'LET '|Led| (LIST '|:=| 'LET 125 124)))))
+
+; MAKEPROP('SEGMENT, 'Led, ["..", "SEGMENT", 401, 699, ["boot-Seg"]])
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (PROG ()
+    (RETURN
+     (MAKEPROP 'SEGMENT '|Led|
+      (LIST '|..| 'SEGMENT 401 699 (LIST '|boot-Seg|))))))
+
+; MAKEPROP('SEGMENT, 'isSuffix, true)
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (PROG () (RETURN (MAKEPROP 'SEGMENT '|isSuffix| T))))
+
+; $mutableDomains := []     -- checked in DEFINE BOOT
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$mutableDomains| NIL))
+
+; $maxSignatureLineNumber := 0
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$maxSignatureLineNumber| 0))
+
+; $functionLocations := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$functionLocations| NIL))
+
+; $globalExposureGroupAlist := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$globalExposureGroupAlist| NIL))
+
+; $localExposureDataDefault := VECTOR(['basic, 'categories], [], [])
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$localExposureDataDefault|
+          (VECTOR (LIST '|basic| '|categories|) NIL NIL)))
+
+; $localExposureData := VECTOR(['basic, 'categories], [], [])
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$localExposureData| (VECTOR (LIST '|basic| '|categories|) NIL NIL)))
+
+; $ReadingFile := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$ReadingFile| NIL))
+
+; $NonNullStream := '"NonNullStream"
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$NonNullStream| "NonNullStream"))
+
+; $NullStream := '"NullStream"
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$NullStream| "NullStream"))
+
+; $UninitializedStream := '"UninitializedStream"
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$UninitializedStream| "UninitializedStream"))
+
+; $SPAD_ERRORS  := VECTOR(0, 0, 0)
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ $SPAD_ERRORS (VECTOR 0 0 0)))
+
+; $InteractiveMode := true
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$InteractiveMode| T))
+
+; $ruleSetsInitialized := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$ruleSetsInitialized| NIL))
+
+; $InterpreterMacroAlist := [
+;         ["%i", 'complex, 0, 1],
+;         ["%e", 'exp, 1],
+;         ["%pi", 'pi],
+;         ["SF", 'DoubleFloat],
+;         ["%infinity", 'infinity],
+;         ["%plusInfinity", 'plusInfinity],
+;         ["%minusInfinity", 'minusInfinity]]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$InterpreterMacroAlist|
+          (LIST (LIST '|%i| '|complex| 0 1) (LIST '|%e| '|exp| 1)
+                (LIST '|%pi| '|pi|) (LIST 'SF '|DoubleFloat|)
+                (LIST '|%infinity| '|infinity|)
+                (LIST '|%plusInfinity| '|plusInfinity|)
+                (LIST '|%minusInfinity| '|minusInfinity|))))
+
+; $InitialCommandSynonymAlist := [
+;        ["?",         :'"what commands"],
+;        ["apropos",   :'"what things"],
+;        ["cache",     :'"set functions cache"],
+;        ["cl",        :'"clear"],
+;        ["co",        :'"compile"],
+;        ["d",         :'"display"],
+;        ["expose",    :'"set expose add constructor"],
+;        ["fortran",   :'"set output fortran"],
+;        ["h",         :'"help"],
+;        ["hd",        :'"system hypertex &"],
+;        ["kclam",     :'"boot clearClams ( )"],
+;        ["killcaches",:'"boot clearConstructorCaches()"],
+;        ["prompt",    :'"set message prompt"],
+;        ["recurrence",:'"set functions recurrence"],
+;        ["restore",   :'"history )restore"],
+;        ["save",      :'"history )save"],
+;        ["startGraphics",   :'"system $FRICAS/lib/viewman &"],
+;        ["stopGraphics",    :'"lisp (|sockSendSignal| 2 15)"],
+;        ["time",      :'"set message time"],
+;        ["storage",   :'"set message storage"],
+;        ["type",      :'"set message type"],
+;        ["unexpose",  :'"set expose drop constructor"],
+;        ["wc",        :'"what categories"],
+;        ["wd",        :'"what domains"],
+;        ["wp",        :'"what packages"],
+;        ["ws",        :'"what synonyms"]]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$InitialCommandSynonymAlist|
+          (LIST (CONS '? "what commands") (CONS '|apropos| "what things")
+                (CONS '|cache| "set functions cache") (CONS '|cl| "clear")
+                (CONS '|co| "compile") (CONS '|d| "display")
+                (CONS '|expose| "set expose add constructor")
+                (CONS '|fortran| "set output fortran") (CONS '|h| "help")
+                (CONS '|hd| "system hypertex &")
+                (CONS '|kclam| "boot clearClams ( )")
+                (CONS '|killcaches| "boot clearConstructorCaches()")
+                (CONS '|prompt| "set message prompt")
+                (CONS '|recurrence| "set functions recurrence")
+                (CONS '|restore| "history )restore")
+                (CONS '|save| "history )save")
+                (CONS '|startGraphics| "system $FRICAS/lib/viewman &")
+                (CONS '|stopGraphics| "lisp (|sockSendSignal| 2 15)")
+                (CONS '|time| "set message time")
+                (CONS '|storage| "set message storage")
+                (CONS '|type| "set message type")
+                (CONS '|unexpose| "set expose drop constructor")
+                (CONS '|wc| "what categories") (CONS '|wd| "what domains")
+                (CONS '|wp| "what packages") (CONS '|ws| "what synonyms"))))
+
+; $CommandSynonymAlist := COPY($InitialCommandSynonymAlist)
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$CommandSynonymAlist| (COPY |$InitialCommandSynonymAlist|)))
+
+; DEFPARAMETER($ConstructorCache, MAKE_HASHTABLE('EQ))
 
 (DEFPARAMETER |$ConstructorCache| (MAKE_HASHTABLE 'EQ))
-(SETQ |$instantRecord| (MAKE_HASHTABLE 'EQ))
 
-(SETQ |$useIntegerSubdomain| 'T)
+; $instantRecord := MAKE_HASHTABLE('EQ)
 
-;; See CLAMMED BOOT for defs of following functions
-(SETQ |$clamList| '(
-  (|canCoerce| |hash| EQUAL |count|)
-  (|canCoerceFrom| |hash| EQUAL |count|)
-  (|coerceConvertMmSelection| |hash| EQUAL |count|)
-  (|isLegitimateMode| |hash| EQUAL |count|)
-  (|isValidType| |hash| EQUAL |count|)
-  (|resolveTT|   |hash| EQUAL |count|)
-  (|selectMms1| |hash| EQUAL |count|)
-  (|underDomainOf|   |hash| EQUAL |count|)
-  (|findRetractMms| |hash| EQUAL |count|)
-  (|getConstantFromDomain|  |hash| EQUAL |count|)
-  (|interpLookup| |hash| EQUAL |count|)
-))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$instantRecord| (MAKE_HASHTABLE 'EQ)))
 
-;; the following symbol holds the canonical "failed" value
-(SETQ |$failed| "failed")
+; $useIntegerSubdomain := true
 
-(SETQ |$univariateDomains| '(
-    |UnivariatePolynomial|
-    |UnivariateTaylorSeries|
-    |UnivariateLaurentSeries|
-    |UnivariatePuiseuxSeries|
-    ))
-(SETQ |$multivariateDomains| '(
-    |MultivariatePolynomial|
-    |DistributedMultivariatePolynomial|
-    |HomogeneousDistributedMultivariatePolynomial|
-    |GeneralDistributedMultivariatePolynomial|
-    ))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$useIntegerSubdomain| T))
 
-(SETQ |$Primitives| '(|Union| |Mapping| |Record| |Enumeration|))
+; $clamList := [
+;   ['canCoerce, 'hash, 'EQUAL, 'count],
+;   ['canCoerceFrom, 'hash, 'EQUAL, 'count],
+;   ['coerceConvertMmSelection, 'hash, 'EQUAL, 'count],
+;   ['isLegitimateMode, 'hash, 'EQUAL, 'count],
+;   ['isValidType, 'hash, 'EQUAL, 'count],
+;   ['resolveTT,   'hash, 'EQUAL, 'count],
+;   ['selectMms1, 'hash, 'EQUAL, 'count],
+;   ['underDomainOf, 'hash, 'EQUAL, 'count],
+;   ['findRetractMms, 'hash, 'EQUAL, 'count],
+;   ['getConstantFromDomain, 'hash, 'EQUAL, 'count],
+;   ['interpLookup, 'hash, 'EQUAL, 'count]]
 
-(SETQ |$DomainsWithoutLisplibs| '(
-  CAPSULE |Union| |Record| |SubDomain| |Mapping| |Enumeration| |Mode|))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$clamList|
+          (LIST (LIST '|canCoerce| '|hash| 'EQUAL '|count|)
+                (LIST '|canCoerceFrom| '|hash| 'EQUAL '|count|)
+                (LIST '|coerceConvertMmSelection| '|hash| 'EQUAL '|count|)
+                (LIST '|isLegitimateMode| '|hash| 'EQUAL '|count|)
+                (LIST '|isValidType| '|hash| 'EQUAL '|count|)
+                (LIST '|resolveTT| '|hash| 'EQUAL '|count|)
+                (LIST '|selectMms1| '|hash| 'EQUAL '|count|)
+                (LIST '|underDomainOf| '|hash| 'EQUAL '|count|)
+                (LIST '|findRetractMms| '|hash| 'EQUAL '|count|)
+                (LIST '|getConstantFromDomain| '|hash| 'EQUAL '|count|)
+                (LIST '|interpLookup| '|hash| 'EQUAL '|count|))))
 
-(SETQ |$letAssoc| NIL)
-        ;" used for trace of assignments in SPAD code -- see macro LETT"
-(SETQ |$QuickCode| T)
-         ;" controls generation of QREFELT etc."
-(SETQ |$QuickLet| T)
-         ;" controls generation of LET tracing."
-(SETQ |$domainTraceNameAssoc| NIL)
-        ;"alist of traced domains"
-(SETQ |$tracedMapSignatures| ())
-(SETQ |$highlightAllowed| 'T)
-         ;" used in BRIGHTPRINT and is a )set variable"
+; $failed := '"failed"
 
-(SETQ |$ConstructorNames| '(
-  |SubDomain| |Union| |Record|
-      ))
-           ;" Used in isFunctor test, and compDefine "
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$failed| "failed"))
 
-(SETQ |$SpecialDomainNames| '(
-  |add| CAPSULE |SubDomain| |Union| |Record|
-      ))
-                 ;" Used in isDomainForm, addEmptyCapsuleIfnecessary"
+; $univariateDomains := [
+;     'UnivariatePolynomial,
+;     'UnivariateTaylorSeries,
+;     'UnivariateLaurentSeries,
+;     'UnivariatePuiseuxSeries]
 
-(SETQ |$CategoryNames| '(
-   |Category| |CATEGORY| |RecordCategory| |Join| |EnumerationCategory|
-   |UnionCategory|
-      ))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$univariateDomains|
+          (LIST '|UnivariatePolynomial| '|UnivariateTaylorSeries|
+                '|UnivariateLaurentSeries| '|UnivariatePuiseuxSeries|)))
 
-(SETQ |$printStorageIfTrue| NIL)
-(SETQ |$noEnv| NIL)
+; $multivariateDomains := [
+;     'MultivariatePolynomial,
+;     'DistributedMultivariatePolynomial,
+;     'HomogeneousDistributedMultivariatePolynomial,
+;     'GeneralDistributedMultivariatePolynomial]
 
-(SETQ |$SideEffectFreeFunctionList| '(
-  |null| |case| |Zero| |One| \: |::| |has| |Mapping| |Record| |Union|
-  |Enumeration| |elt| = |>| |>=| |<| |<=| MEMBER |is| |isnt| ATOM
-))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$multivariateDomains|
+          (LIST '|MultivariatePolynomial| '|DistributedMultivariatePolynomial|
+                '|HomogeneousDistributedMultivariatePolynomial|
+                '|GeneralDistributedMultivariatePolynomial|)))
 
-(SETQ |$AnonymousFunction| '(|AnonymousFunction|))
-(SETQ |$Any|   '(|Any|))
-(SETQ |$BFtag| '|:BF:|)
-(SETQ |$Boolean| '(|Boolean|))
-(SETQ |$Category| '(|Category|))
-(SETQ |$Exit|  '(|Exit|))
+; $Primitives := ['Union, 'Mapping, 'Record, 'Enumeration]
 
-(SETQ |$OutputForm| '(|OutputForm|))
-(SETQ |$Float| '(|Float|))
-(SETQ |$DoubleFloat| '(|DoubleFloat|))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$Primitives| (LIST '|Union| '|Mapping| '|Record| '|Enumeration|)))
 
-(SETQ |$Integer| '(|Integer|))
-(SETQ |$SingleInteger| '(|SingleInteger|))
-(SETQ |$ComplexInteger| (LIST '|Complex| |$Integer|))
-(SETQ |$NonNegativeInteger| '(|NonNegativeInteger|))
-(SETQ |$PositiveInteger| '(|PositiveInteger|))
-(SETQ |$RationalNumber| '(|Fraction| (|Integer|)))
-(SETQ |$String| '(|String|))
-(SETQ |$Symbol| '(|Symbol|))
-(SETQ |$Void|  '(|Void|))
-(SETQ |$QuotientField| '|Fraction|)
-(SETQ |$FunctionalExpression| '|Expression|)
+; $DomainsWithoutLisplibs := [
+;   'CAPSULE, 'Union, 'Record, 'SubDomain, 'Mapping, 'Enumeration, 'Mode]
 
-(SETQ |$InteractiveFrame| (LIST (LIST NIL)))
-(SETQ |$DomainsInScope| (LIST NIL))
-(SETQ |$EmptyEnvironment| '((NIL)))
-(SETQ |$EmptyMode| '|$EmptyMode|)
-(SETQ |$NoValue| '|$NoValue|)
-(SETQ |$NoValueMode| '|NoValueMode|)
-(SETQ |$DummyFunctorNames| '(|Mapping|))
-(SETQ |$EmptyVector| (VECTOR))
-(SETQ |$Index| 0)
-(SETQ |$true| ''T)
-(SETQ |$false| NIL)
-(DEFPARAMETER |$suffix| NIL)
-(SETQ |$BasicPredicates| '(INTEGERP STRINGP FLOATP))
-(DEFPARAMETER |$reportCompilation| NIL)
-(DEFPARAMETER |$streamCount| 0)
-(SETQ |$cacheAlist| NIL)
-(SETQ |$cacheCount| 0)
-(SETQ |$reportExitModeStack| NIL)
-(DEFPARAMETER |$prefix| NIL)
-(DEFPARAMETER |$formalArgList| ())
-(SETQ |$FormalMapVariableList|
-  '(|#1| |#2| |#3| |#4| |#5| |#6| |#7| |#8| |#9| |#10|
-    |#11| |#12| |#13| |#14| |#15| |#16| |#17| |#18| |#19| |#20|
-    |#21| |#22| |#23| |#24| |#25| |#26| |#27| |#28| |#29| |#30|
-    |#31| |#32| |#33| |#34| |#35| |#36| |#37| |#38| |#39| |#40|
-    |#41| |#42| |#43| |#44| |#45| |#46| |#47| |#48| |#49| |#50|
-    ))
-(SETQ |$PatternVariableList|
-  '(*1 *2 *3 *4 *5 *6 *7 *8 *9 *10 *11 *12 *13 *14 *15 *16 *17 *18 *19 *20
-  *21 *22 *23 *24 *25 *26 *27 *28 *29 *30 *31 *32 *33 *34 *35 *36 *37 *38 *39 *40
-  *41 *42 *43 *44 *45 *46 *47 *48 *49 *50))
-(SETQ |$ModeVariableList|
-  '(dv$1 dv$2 dv$3 dv$4 dv$5 dv$6 dv$7 dv$8 dv$9 dv$10 dv$11 dv$12 dv$13 dv$14 dv$15
-         dv$16 dv$17 dv$18 dv$19 dv$20))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$DomainsWithoutLisplibs|
+          (LIST 'CAPSULE '|Union| '|Record| '|SubDomain| '|Mapping|
+                '|Enumeration| '|Mode|)))
 
-(SETQ |$TriangleVariableList|
-   '(|t#1| |t#2| |t#3| |t#4| |t#5| |t#6| |t#7| |t#8| |t#9| |t#10|
-     |t#11| |t#12| |t#13| |t#14| |t#15| |t#16| |t#17| |t#18| |t#19| |t#20|
-     |t#21| |t#22| |t#23| |t#24| |t#25| |t#26| |t#27| |t#28| |t#29| |t#30|
-     |t#31| |t#32| |t#33| |t#34| |t#35| |t#36| |t#37| |t#38| |t#39| |t#40|
-     |t#41| |t#42| |t#43| |t#44| |t#45| |t#46| |t#47| |t#48| |t#49| |t#50|))
+; $QuickCode := true -- controls generation of QREFELT etc.
 
-(SETQ |$FormalFunctionParameterList|
-   '(|##1| |##2| |##3| |##4| |##5| |##6| |##7| |##8| |##9| |##10|
-     |##11| |##12| |##13| |##14| |##15|))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$QuickCode| T))
 
-(SETQ |$PrimitiveDomainNames|
-      '(|List| |Integer| |NonNegativeInteger| |PositiveInteger|
-        |SingleInteger| |String| |Boolean|))
-            ;" used in mkCategory to avoid generating vector slots"
-            ;" for primitive domains "
-            ;" also used by putInLocalDomainReferences and optCall"
-(SETQ |$optimizableConstructorNames|
-   '(|List| |Integer| |PositiveInteger| |NonNegativeInteger| |SingleInteger|
-     |String| |Boolean| |Symbol| |DoubleFloat| |PrimitiveArray| |Vector|
-     |Matrix| |OneDimensionalArray| |TwoDimensionalArray| |U32Vector|
-     |U32Matrix| |U16Vector| |U16Matrix| |U8Vector| |U8Matrix|
-     |I32Vector| |I32Matrix| |I16Vector| |I16Matrix| |I8Vector| |I8Matrix|
-     |U64Int| |PrimitiveTwoDimensionalArray|
-     |DoubleFloatVector| |DoubleFloatMatrix| |ComplexDoubleFloatVector|
-     |ComplexDoubleFloatMatrix| |Character| |SortedExponentVector|
-     |HashState| ))
-            ;" used by optCallSpecially"
-(SETQ |$Zero| '(|Zero|))
-(SETQ |$One| '(|One|))
-(SETQ |$NonMentionableDomainNames|
-      '(% |Rep| |Record| |Union| |Mapping| |Enumeration|))
+; $QuickLet := true  -- controls generation of LET tracing.
 
-;"  modemap:==  ( <map> (p e) (p e) ... (p e) )  "
-;"  modemaplist:= ( modemap ... )  "
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$QuickLet| T))
 
-(SETQ |$CategoryFrame| '((NIL)))
+; $domainTraceNameAssoc := []   -- alist of traced domains
 
-(SETQ |$InitialDomainsInScope|
-  '(|$EmptyMode| |$NoValueMode|))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$domainTraceNameAssoc| NIL))
 
-(SETQ |$InitialModemapFrame| '((NIL)))
+; $tracedMapSignatures := false
 
-(SETQ |$NRTaddForm| NIL)
-(SETQ |$NRTdeltaList| NIL)
-(SETQ |$NRTdeltaListComp| NIL)
-(SETQ |$NRTbase| 0)
-(SETQ |$NRTdeltaLength| 0)
-(SETQ |$NRTmonitorIfTrue| NIL)
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$tracedMapSignatures| NIL))
 
+; $highlightAllowed := true
 
-(setq credits '(
-"An alphabetical listing of contributors to AXIOM (to October, 2006):"
-"Cyril Alberga          Roy Adler              Christian Aistleitner"
-"Richard Anderson       George Andrews"
-"Henry Baker            Stephen Balzac         Yurij Baransky"
-"David R. Barton        Gerald Baumgartner     Gilbert Baumslag"
-"Fred Blair             Vladimir Bondarenko    Mark Botch"
-"Alexandre Bouyer       Peter A. Broadbery     Martin Brock"
-"Manuel Bronstein       Florian Bundschuh      Luanne Burns"
-"William Burge"
-"Quentin Carpent        Robert Caviness        Bruce Char"
-"Cheekai Chin           David V. Chudnovsky    Gregory V. Chudnovsky"
-"Josh Cohen             Christophe Conil       Don Coppersmith"
-"George Corliss         Robert Corless         Gary Cornell"
-"Meino Cramer           Claire Di Crescenzo"
-"Timothy Daly Sr.       Timothy Daly Jr.       James H. Davenport"
-"Jean Della Dora        Gabriel Dos Reis       Michael Dewar"
-"Claire DiCrescendo     Sam Dooley             Lionel Ducos"
-"Martin Dunstan         Brian Dupee            Dominique Duval"
-"Robert Edwards         Heow Eide-Goodman      Lars Erickson"
-"Richard Fateman        Bertfried Fauser       Stuart Feldman"
-"Brian Ford             Albrecht Fortenbacher  George Frances"
-"Constantine Frangos    Timothy Freeman        Korrinn Fu"
-"Marc Gaetano           Rudiger Gebauer        Kathy Gerber"
-"Patricia Gianni        Holger Gollan          Teresa Gomez-Diaz"
-"Laureano Gonzalez-Vega Stephen Gortler        Johannes Grabmeier"
-"Matt Grayson           James Griesmer         Vladimir Grinberg"
-"Oswald Gschnitzer      Jocelyn Guidry"
-"Steve Hague            Vilya Harvey           Satoshi Hamaguchi"
-"Martin Hassner         Waldek Hebisch         Ralf Hemmecke"
-"Henderson              Antoine Hersen"
-"Pietro Iglio"
-"Richard Jenks"
-"Kai Kaminski           Grant Keady            Tony Kennedy"
-"Paul Kosinski          Klaus Kusche           Bernhard Kutzler"
-"Larry Lambe            Frederic Lehobey       Michel Levaud"
-"Howard Levy            Rudiger Loos           Michael Lucks"
-"Richard Luczak"
-"Camm Maguire           Bob McElrath           Michael McGettrick"
-"Ian Meikle             David Mentre           Victor S. Miller"
-"Gerard Milmeister      Mohammed Mobarak       H. Michael Moeller"
-"Michael Monagan        Marc Moreno-Maza       Scott Morrison"
-"Mark Murray"
-"William Naylor         C. Andrew Neff         John Nelder"
-"Godfrey Nolan          Arthur Norman          Jinzhong Niu"
-"Michael O'Connor       Kostas Oikonomou"
-"Julian A. Padget       Bill Page              Susan Pelzel"
-"Michel Petitot         Didier Pinchon         Jose Alfredo Portes"
-"Claude Quitte"
-"Norman Ramsey          Michael Richardson     Renaud Rioboo"
-"Jean Rivlin            Nicolas Robidoux       Simon Robinson"
-"Michael Rothstein      Martin Rubey"
-"Philip Santas          Alfred Scheerhorn      William Schelter"
-"Gerhard Schneider      Martin Schoenert       Marshall Schor"
-"Frithjof Schulze       Fritz Schwarz          Nick Simicich"
-"William Sit            Elena Smirnova         Jonathan Steinbach"
-"Christine Sundaresan   Robert Sutor           Moss E. Sweedler"
-"Eugene Surowitz"
-"James Thatcher         Balbir Thomas          Mike Thomas"
-"Dylan Thurston         Barry Trager           Themos T. Tsikas"
-"Gregory Vanuxem"
-"Bernhard Wall          Stephen Watt           Jaap Weel"
-"Juergen Weiss          M. Weller              Mark Wegman"
-"James Wen              Thorsten Werther       Michael Wester"
-"John M. Wiley          Berhard Will           Clifton J. Williamson"
-"Stephen Wilson         Shmuel Winograd        Robert Wisbauer"
-"Sandra Wityak          Waldemar Wiwianka      Knut Wolf"
-"Clifford Yapp          David Yun"
-"Richard Zippel         Evelyn Zoernack        Bruno Zuercher"
-"Dan Zwillinger"
-))
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$highlightAllowed| T))
+
+; $ConstructorNames := ['SubDomain, 'Union, 'Record]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$ConstructorNames| (LIST '|SubDomain| '|Union| '|Record|)))
+
+; $SpecialDomainNames := ["add", 'CAPSULE, 'SubDomain, 'Union, 'Record]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$SpecialDomainNames|
+          (LIST '|add| 'CAPSULE '|SubDomain| '|Union| '|Record|)))
+
+; $CategoryNames := [
+;    'Category, 'CATEGORY, 'RecordCategory, 'Join, 'EnumerationCategory,
+;    'UnionCategory]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$CategoryNames|
+          (LIST '|Category| 'CATEGORY '|RecordCategory| '|Join|
+                '|EnumerationCategory| '|UnionCategory|)))
+
+; $printStorageIfTrue := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$printStorageIfTrue| NIL))
+
+; $noEnv := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$noEnv| NIL))
+
+; $SideEffectFreeFunctionList := [
+;   'null, "case", "0", "1", ":", "::", 'has, 'Mapping, 'Record, 'Union,
+;   'Enumeration, 'elt, "=", ">", ">=", "<", "<=", 'MEMBER, 'is, 'isnt,
+;   'ATOM]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$SideEffectFreeFunctionList|
+          (LIST '|null| '|case| '|0| '|1| '|:| '|::| '|has| '|Mapping|
+                '|Record| '|Union| '|Enumeration| '|elt| '= '> '>= '< '<=
+                'MEMBER '|is| '|isnt| 'ATOM)))
+
+; $AnonymousFunction := ['AnonymousFunction]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$AnonymousFunction| (LIST '|AnonymousFunction|)))
+
+; $Any := ['Any]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$Any| (LIST '|Any|)))
+
+; $BFtag := ":BF:"
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$BFtag| '|:BF:|))
+
+; $Boolean := ['Boolean]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$Boolean| (LIST '|Boolean|)))
+
+; $Category := ['Category]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$Category| (LIST '|Category|)))
+
+; $Exit :=  ['Exit]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$Exit| (LIST '|Exit|)))
+
+; $OutputForm := ['OutputForm]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$OutputForm| (LIST '|OutputForm|)))
+
+; $Float := ['Float]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$Float| (LIST '|Float|)))
+
+; $DoubleFloat := ['DoubleFloat]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$DoubleFloat| (LIST '|DoubleFloat|)))
+
+; $Integer := ['Integer]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$Integer| (LIST '|Integer|)))
+
+; $SingleInteger := ['SingleInteger]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$SingleInteger| (LIST '|SingleInteger|)))
+
+; $ComplexInteger := ['Complex, $Integer]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$ComplexInteger| (LIST '|Complex| |$Integer|)))
+
+; $NonNegativeInteger := ['NonNegativeInteger]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$NonNegativeInteger| (LIST '|NonNegativeInteger|)))
+
+; $PositiveInteger := ['PositiveInteger]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$PositiveInteger| (LIST '|PositiveInteger|)))
+
+; $RationalNumber := ['Fraction, ['Integer]]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$RationalNumber| (LIST '|Fraction| (LIST '|Integer|))))
+
+; $String := ['String]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$String| (LIST '|String|)))
+
+; $Symbol := ['Symbol]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$Symbol| (LIST '|Symbol|)))
+
+; $Void := ['Void]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$Void| (LIST '|Void|)))
+
+; $QuotientField := 'Fraction
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$QuotientField| '|Fraction|))
+
+; $FunctionalExpression := 'Expression
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$FunctionalExpression| '|Expression|))
+
+; $InteractiveFrame := [[[]]]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$InteractiveFrame| (LIST (LIST NIL))))
+
+; $DomainsInScope := [[]]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$DomainsInScope| (LIST NIL)))
+
+; $EmptyEnvironment := [[[]]]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$EmptyEnvironment| (LIST (LIST NIL))))
+
+; $EmptyMode := "$EmptyMode"
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$EmptyMode| '|$EmptyMode|))
+
+; $NoValue := "$NoValue"
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$NoValue| '|$NoValue|))
+
+; $NoValueMode := 'NoValueMode
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$NoValueMode| '|NoValueMode|))
+
+; $DummyFunctorNames := ['Mapping]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$DummyFunctorNames| (LIST '|Mapping|)))
+
+; $EmptyVector := VECTOR()
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$EmptyVector| (VECTOR)))
+
+; $true := ['QUOTE, true]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$true| (LIST 'QUOTE T)))
+
+; $false := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$false| NIL))
+
+; $suffix := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$suffix| NIL))
+
+; $BasicPredicates := '(INTEGERP STRINGP FLOATP)
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$BasicPredicates| '(INTEGERP STRINGP FLOATP)))
+
+; $reportCompilation := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$reportCompilation| NIL))
+
+; $streamCount := 0
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$streamCount| 0))
+
+; $cacheAlist := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$cacheAlist| NIL))
+
+; $cacheCount := 0
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$cacheCount| 0))
+
+; $reportExitModeStack := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$reportExitModeStack| NIL))
+
+; $prefix := nil
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$prefix| NIL))
+
+; $formalArgList := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$formalArgList| NIL))
+
+; $FormalMapVariableList := [
+;     "#1", "#2", "#3", "#4", "#5", "#6", "#7", "#8", "#9", "#10",
+;     "#11", "#12", "#13", "#14", "#15", "#16", "#17", "#18", "#19", "#20",
+;     "#21", "#22", "#23", "#24", "#25", "#26", "#27", "#28", "#29", "#30",
+;     "#31", "#32", "#33", "#34", "#35", "#36", "#37", "#38", "#39", "#40",
+;     "#41", "#42", "#43", "#44", "#45", "#46", "#47", "#48", "#49", "#50"]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$FormalMapVariableList|
+          (LIST '|#1| '|#2| '|#3| '|#4| '|#5| '|#6| '|#7| '|#8| '|#9| '|#10|
+                '|#11| '|#12| '|#13| '|#14| '|#15| '|#16| '|#17| '|#18| '|#19|
+                '|#20| '|#21| '|#22| '|#23| '|#24| '|#25| '|#26| '|#27| '|#28|
+                '|#29| '|#30| '|#31| '|#32| '|#33| '|#34| '|#35| '|#36| '|#37|
+                '|#38| '|#39| '|#40| '|#41| '|#42| '|#43| '|#44| '|#45| '|#46|
+                '|#47| '|#48| '|#49| '|#50|)))
+
+; $PatternVariableList := [
+;     "*1", "*2", "*3", "*4", "*5", "*6", "*7", "*8", "*9", "*10", "*11",
+;     "*12", "*13", "*14", "*15", "*16", "*17", "*18", "*19", "*20", "*21",
+;     "*22", "*23", "*24", "*25", "*26", "*27", "*28", "*29", "*30", "*31",
+;     "*32", "*33", "*34", "*35", "*36", "*37", "*38", "*39", "*40", "*41",
+;     "*42", "*43", "*44", "*45", "*46", "*47", "*48", "*49", "*50"]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$PatternVariableList|
+          (LIST '*1 '*2 '*3 '*4 '*5 '*6 '*7 '*8 '*9 '*10 '*11 '*12 '*13 '*14
+                '*15 '*16 '*17 '*18 '*19 '*20 '*21 '*22 '*23 '*24 '*25 '*26
+                '*27 '*28 '*29 '*30 '*31 '*32 '*33 '*34 '*35 '*36 '*37 '*38
+                '*39 '*40 '*41 '*42 '*43 '*44 '*45 '*46 '*47 '*48 '*49 '*50)))
+
+; $ModeVariableList := [
+;     "DV$1", "DV$2", "DV$3", "DV$4", "DV$5", "DV$6", "DV$7", "DV$8", "DV$9",
+;     "DV$10", "DV$11", "DV$12", "DV$13", "DV$14", "DV$15", "DV$16", "DV$17",
+;     "DV$18", "DV$19", "DV$20"]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$ModeVariableList|
+          (LIST 'DV$1 'DV$2 'DV$3 'DV$4 'DV$5 'DV$6 'DV$7 'DV$8 'DV$9 'DV$10
+                'DV$11 'DV$12 'DV$13 'DV$14 'DV$15 'DV$16 'DV$17 'DV$18 'DV$19
+                'DV$20)))
+
+; $TriangleVariableList := [
+;     "t#1", "t#2", "t#3", "t#4", "t#5", "t#6", "t#7", "t#8", "t#9", "t#10",
+;     "t#11", "t#12", "t#13", "t#14", "t#15", "t#16", "t#17", "t#18",
+;     "t#19", "t#20", "t#21", "t#22", "t#23", "t#24", "t#25", "t#26", "t#27",
+;     "t#28", "t#29", "t#30", "t#31", "t#32", "t#33", "t#34", "t#35", "t#36",
+;     "t#37", "t#38", "t#39", "t#40", "t#41", "t#42", "t#43", "t#44", "t#45",
+;     "t#46", "t#47", "t#48", "t#49", "t#50"]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$TriangleVariableList|
+          (LIST '|t#1| '|t#2| '|t#3| '|t#4| '|t#5| '|t#6| '|t#7| '|t#8| '|t#9|
+                '|t#10| '|t#11| '|t#12| '|t#13| '|t#14| '|t#15| '|t#16| '|t#17|
+                '|t#18| '|t#19| '|t#20| '|t#21| '|t#22| '|t#23| '|t#24| '|t#25|
+                '|t#26| '|t#27| '|t#28| '|t#29| '|t#30| '|t#31| '|t#32| '|t#33|
+                '|t#34| '|t#35| '|t#36| '|t#37| '|t#38| '|t#39| '|t#40| '|t#41|
+                '|t#42| '|t#43| '|t#44| '|t#45| '|t#46| '|t#47| '|t#48| '|t#49|
+                '|t#50|)))
+
+; $FormalFunctionParameterList := [
+;     "##1", "##2", "##3", "##4", "##5", "##6", "##7", "##8", "##9", "##10",
+;     "##11", "##12", "##13", "##14", "##15"]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$FormalFunctionParameterList|
+          (LIST '|##1| '|##2| '|##3| '|##4| '|##5| '|##6| '|##7| '|##8| '|##9|
+                '|##10| '|##11| '|##12| '|##13| '|##14| '|##15|)))
+
+; $PrimitiveDomainNames := [
+;     'List, 'Integer, 'NonNegativeInteger, 'PositiveInteger,
+;     'SingleInteger, 'String, 'Boolean]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$PrimitiveDomainNames|
+          (LIST '|List| '|Integer| '|NonNegativeInteger| '|PositiveInteger|
+                '|SingleInteger| '|String| '|Boolean|)))
+
+; $optimizableConstructorNames := [
+;     'List, 'Integer, 'PositiveInteger, 'NonNegativeInteger, 'SingleInteger,
+;     'String, 'Boolean, 'Symbol, 'DoubleFloat, 'PrimitiveArray, 'Vector,
+;     'Matrix, 'OneDimensionalArray, 'TwoDimensionalArray, 'U32Vector,
+;     'U32Matrix, 'U16Vector, 'U16Matrix, 'U8Vector, 'U8Matrix,
+;     'I32Vector, 'I32Matrix, 'I16Vector, 'I16Matrix, 'I8Vector, 'I8Matrix,
+;     'U64Int, 'PrimitiveTwoDimensionalArray,
+;     'DoubleFloatVector, 'DoubleFloatMatrix, 'ComplexDoubleFloatVector,
+;     'ComplexDoubleFloatMatrix, 'Character, 'SortedExponentVector,
+;     'HashState]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$optimizableConstructorNames|
+          (LIST '|List| '|Integer| '|PositiveInteger| '|NonNegativeInteger|
+                '|SingleInteger| '|String| '|Boolean| '|Symbol| '|DoubleFloat|
+                '|PrimitiveArray| '|Vector| '|Matrix| '|OneDimensionalArray|
+                '|TwoDimensionalArray| '|U32Vector| '|U32Matrix| '|U16Vector|
+                '|U16Matrix| '|U8Vector| '|U8Matrix| '|I32Vector| '|I32Matrix|
+                '|I16Vector| '|I16Matrix| '|I8Vector| '|I8Matrix| '|U64Int|
+                '|PrimitiveTwoDimensionalArray| '|DoubleFloatVector|
+                '|DoubleFloatMatrix| '|ComplexDoubleFloatVector|
+                '|ComplexDoubleFloatMatrix| '|Character|
+                '|SortedExponentVector| '|HashState|)))
+
+; $Zero := ["0"]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$Zero| (LIST '|0|)))
+
+; $One  := ["1"]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$One| (LIST '|1|)))
+
+; $NonMentionableDomainNames := [
+;       "%", 'Rep, 'Record, 'Union, 'Mapping, 'Enumeration]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$NonMentionableDomainNames|
+          (LIST '% '|Rep| '|Record| '|Union| '|Mapping| '|Enumeration|)))
+
+; $CategoryFrame := [[[]]]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$CategoryFrame| (LIST (LIST NIL))))
+
+; $InitialDomainsInScope := ["$EmptyMode", "$NoValueMode"]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$InitialDomainsInScope| (LIST '|$EmptyMode| '|$NoValueMode|)))
+
+; $InitialModemapFrame := [[[]]]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$InitialModemapFrame| (LIST (LIST NIL))))
+
+; $NRTaddForm := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$NRTaddForm| NIL))
+
+; $NRTdeltaList := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$NRTdeltaList| NIL))
+
+; $NRTdeltaListComp := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$NRTdeltaListComp| NIL))
+
+; $NRTbase := 0
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$NRTbase| 0))
+
+; $NRTdeltaLength := 0
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$NRTdeltaLength| 0))
+
+; $NRTmonitorIfTrue := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$NRTmonitorIfTrue| NIL))

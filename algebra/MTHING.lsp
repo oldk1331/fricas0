@@ -1,7 +1,7 @@
 
 (SDEFUN |MTHING;mergeDifference;3L;1|
         ((|x| (|List| S)) (|y| (|List| S)) (% (|List| S)))
-        (SPROG ((|res| (|List| S)) (#1=#:G13 NIL) (|fy| (S)) (|fx| (S)))
+        (SPROG ((|fx| (S)) (|fy| (S)) (#1=#:G13 NIL) (|res| (|List| S)))
                (SEQ (LETT |res| NIL)
                     (SEQ G190
                          (COND
@@ -33,7 +33,7 @@
 (DECLAIM (NOTINLINE |MergeThing;|)) 
 
 (DEFUN |MergeThing;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|MergeThing| DV$1))

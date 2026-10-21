@@ -107,8 +107,8 @@
         ((|f| (|Float|)) (% (|DoubleFloat|)))
         (SPADCALL (QREFELT % 41) (SPADCALL |f| (QREFELT % 82)) (QREFELT % 83))) 
 
-(PUT '|VIEWDEF;viewWriteAvailable;L;24| '|SPADreplace|
-     '(XLAM NIL (LIST "PIXMAP" "BITMAP" "POSTSCRIPT" "IMAGE"))) 
+(MAKEPROP '|VIEWDEF;viewWriteAvailable;L;24| '|SPADreplace|
+          '(XLAM NIL (LIST "PIXMAP" "BITMAP" "POSTSCRIPT" "IMAGE"))) 
 
 (SDEFUN |VIEWDEF;viewWriteAvailable;L;24| ((% (|List| (|String|))))
         (LIST "PIXMAP" "BITMAP" "POSTSCRIPT" "IMAGE")) 
@@ -119,8 +119,8 @@
 (SDEFUN |VIEWDEF;viewWriteDefault;2L;26|
         ((|listOfThings| (|List| (|String|))) (% (|List| (|String|))))
         (SPROG
-         ((|thingsToWrite| (|List| (|String|))) (|writeTypeInt| (|Integer|))
-          (#1=#:G37 NIL) (|aTypeOfFile| NIL))
+         ((|aTypeOfFile| NIL) (#1=#:G38 NIL) (|writeTypeInt| (|Integer|))
+          (|thingsToWrite| (|List| (|String|))))
          (SEQ (LETT |thingsToWrite| NIL)
               (SEQ (LETT |aTypeOfFile| NIL) (LETT #1# |listOfThings|) G190
                    (COND
@@ -187,7 +187,7 @@
 
 (DEFUN |ViewDefaultsPackage| ()
   (SPROG NIL
-         (PROG (#1=#:G39)
+         (PROG (#1=#:G40)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ViewDefaultsPackage|))

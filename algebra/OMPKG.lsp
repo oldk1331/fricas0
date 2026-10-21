@@ -11,7 +11,7 @@
         (SPADCALL (OM-READ |dev|) (QREFELT % 13))) 
 
 (SDEFUN |OMPKG;OMreadFile;SA;3| ((|filename| (|String|)) (% (|Any|)))
-        (SPROG ((|res| (|Any|)) (|dev| (|OpenMathDevice|)))
+        (SPROG ((|dev| (|OpenMathDevice|)) (|res| (|Any|)))
                (SEQ
                 (LETT |dev|
                       (SPADCALL |filename| "r" (SPADCALL (QREFELT % 17))
@@ -20,7 +20,7 @@
                 (SPADCALL |dev| (QREFELT % 20)) (EXIT |res|)))) 
 
 (SDEFUN |OMPKG;OMreadStr;SA;4| ((|str| (|String|)) (% (|Any|)))
-        (SPROG ((|res| (|Any|)) (|dev| (|OpenMathDevice|)) (|strp| (|None|)))
+        (SPROG ((|strp| (|None|)) (|dev| (|OpenMathDevice|)) (|res| (|Any|)))
                (SEQ (LETT |strp| (OM-STRINGTOSTRINGPTR |str|))
                     (LETT |dev|
                           (SPADCALL |strp| (SPADCALL (QREFELT % 17))
@@ -28,11 +28,11 @@
                     (LETT |res| (SPADCALL (OM-READ |dev|) (QREFELT % 13)))
                     (SPADCALL |dev| (QREFELT % 20)) (EXIT |res|)))) 
 
-(PUT '|OMPKG;OMlistCDs;L;5| '|SPADreplace| 'OM-LISTCDS) 
+(MAKEPROP '|OMPKG;OMlistCDs;L;5| '|SPADreplace| 'OM-LISTCDS) 
 
 (SDEFUN |OMPKG;OMlistCDs;L;5| ((% (|List| (|String|)))) (OM-LISTCDS)) 
 
-(PUT '|OMPKG;OMlistSymbols;SL;6| '|SPADreplace| 'OM-LISTSYMBOLS) 
+(MAKEPROP '|OMPKG;OMlistSymbols;SL;6| '|SPADreplace| 'OM-LISTSYMBOLS) 
 
 (SDEFUN |OMPKG;OMlistSymbols;SL;6| ((|cd| (|String|)) (% (|List| (|String|))))
         (OM-LISTSYMBOLS |cd|)) 
@@ -60,7 +60,7 @@
 
 (DEFUN |OpenMathPackage| ()
   (SPROG NIL
-         (PROG (#1=#:G15)
+         (PROG (#1=#:G16)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OpenMathPackage|))

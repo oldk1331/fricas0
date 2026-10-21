@@ -15,32 +15,32 @@
 
 (SDEFUN |SYMFUNC;symFunc;LV;3| ((|l| (|List| R)) (% (|Vector| R)))
         (SPROG
-         ((#1=#:G3 NIL) (#2=#:G2 #3=(|SparseUnivariatePolynomial| R))
-          (#4=#:G4 #3#) (#5=#:G6 NIL) (|a| NIL))
+         ((|a| NIL) (#1=#:G6 NIL) (#2=#:G4 #3=(|SparseUnivariatePolynomial| R))
+          (#4=#:G2 #3#) (#5=#:G3 NIL))
          (SEQ
           (|SYMFUNC;coef_vect|
            (PROGN
-            (LETT #1# NIL)
-            (SEQ (LETT |a| NIL) (LETT #5# |l|) G190
+            (LETT #5# NIL)
+            (SEQ (LETT |a| NIL) (LETT #1# |l|) G190
                  (COND
-                  ((OR (ATOM #5#) (PROGN (LETT |a| (CAR #5#)) NIL)) (GO G191)))
+                  ((OR (ATOM #1#) (PROGN (LETT |a| (CAR #1#)) NIL)) (GO G191)))
                  (SEQ
                   (EXIT
                    (PROGN
-                    (LETT #4#
+                    (LETT #2#
                           (SPADCALL
                            (SPADCALL (|spadConstant| % 12) 1 (QREFELT % 13))
                            (SPADCALL |a| (QREFELT % 14)) (QREFELT % 15)))
-                    (COND (#1# (LETT #2# (SPADCALL #2# #4# (QREFELT % 20))))
-                          ('T (PROGN (LETT #2# #4#) (LETT #1# 'T)))))))
-                 (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
-            (COND (#1# #2#) ('T (|spadConstant| % 19))))
+                    (COND (#5# (LETT #4# (SPADCALL #4# #2# (QREFELT % 20))))
+                          ('T (PROGN (LETT #4# #2#) (LETT #5# 'T)))))))
+                 (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+            (COND (#5# #4#) ('T (|spadConstant| % 19))))
            (LENGTH |l|) %)))) 
 
 (DECLAIM (NOTINLINE |SymmetricFunctions;|)) 
 
 (DEFUN |SymmetricFunctions;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|SymmetricFunctions| DV$1))
@@ -75,9 +75,9 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|Vector| 6)
               (|NonNegativeInteger|) (|SparseUnivariatePolynomial| 6)
-              (0 . |vectorise|) (6 . |reverse!|) (11 . |One|) (15 . |monomial|)
+              (0 . |vectorise|) (6 . |reverse!|) (11 . |1|) (15 . |monomial|)
               (21 . |coerce|) (26 . +) (32 . ^) (|PositiveInteger|)
-              |SYMFUNC;symFunc;RPiV;2| (38 . |One|) (42 . *) (|List| 6)
+              |SYMFUNC;symFunc;RPiV;2| (38 . |1|) (42 . *) (|List| 6)
               |SYMFUNC;symFunc;LV;3|)
            '#(|symFunc| 48) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))

@@ -3,7 +3,7 @@
         ((|p| (UP)) (|x| (R))
          (|rsign| (|Mapping| (|Union| (|Integer|) #1="failed") R))
          (% (|Union| (|Integer|) #1#)))
-        (SPROG ((|ul| #2=(|Union| (|Integer|) #1#)) (|ur| #2#))
+        (SPROG ((|ur| #2=(|Union| (|Integer|) #1#)) (|ul| #2#))
                (SEQ (LETT |ur| (SPADCALL |p| |x| 1 |rsign| (QREFELT % 13)))
                     (EXIT
                      (COND ((QEQCAR |ur| 1) (CONS 1 "failed"))
@@ -23,7 +23,7 @@
         ((|p| (UP)) (|x| (R)) (|dir| (|Integer|))
          (|rsign| (|Mapping| (|Union| (|Integer|) #1="failed") R))
          (% (|Union| (|Integer|) #1#)))
-        (SPROG ((|u| (|Union| (|Integer|) #1#)) (|r| (R)))
+        (SPROG ((|r| (R)) (|u| (|Union| (|Integer|) #1#)))
                (SEQ
                 (COND ((SPADCALL |p| (QREFELT % 16)) (CONS 0 0))
                       ((SPADCALL (LETT |r| (SPADCALL |p| |x| (QREFELT % 17)))
@@ -58,7 +58,7 @@
 (DECLAIM (NOTINLINE |InnerPolySign;|)) 
 
 (DEFUN |InnerPolySign;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -74,9 +74,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |InnerPolySign| (&REST #1=#:G30)
+(DEFUN |InnerPolySign| (&REST #1=#:G34)
   (SPROG NIL
-         (PROG (#2=#:G31)
+         (PROG (#2=#:G35)
            (RETURN
             (COND
              ((LETT #2#
@@ -94,13 +94,12 @@
 
 (MAKEPROP '|InnerPolySign| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (0 . |One|)
-              (4 . |One|) (|Union| 11 '#1="failed") (|Integer|)
-              (|Mapping| 10 6) |INPSIGN;signAround;UPRIMU;2|
-              |INPSIGN;signAround;UPRMU;1| (|Boolean|) (8 . |zero?|)
-              (13 . |elt|) (19 . |zero?|) (24 . |differentiate|)
-              (29 . |leadingCoefficient|) (34 . |Zero|) (38 . |Zero|)
-              (|NonNegativeInteger|) (42 . |degree|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (0 . |1|)
+              (4 . |1|) (|Union| 11 '#1="failed") (|Integer|) (|Mapping| 10 6)
+              |INPSIGN;signAround;UPRIMU;2| |INPSIGN;signAround;UPRMU;1|
+              (|Boolean|) (8 . |zero?|) (13 . |elt|) (19 . |zero?|)
+              (24 . |differentiate|) (29 . |leadingCoefficient|) (34 . |0|)
+              (38 . |0|) (|NonNegativeInteger|) (42 . |degree|)
               |INPSIGN;signAround;UPIMU;3|)
            '#(|signAround| 47) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))

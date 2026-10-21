@@ -1,6 +1,6 @@
 
 (SDEFUN |DBLRESP;remove0| ((|p| (UP)) (% (UP)))
-        (SPROG ((#1=#:G1 NIL))
+        (SPROG ((#1=#:G4 NIL))
                (SPADCALL
                 (PROG2
                     (LETT #1#
@@ -28,8 +28,8 @@
 (SDEFUN |DBLRESP;doubleResultant;RMUP;4|
         ((|h| (R)) (|derivation| (|Mapping| UP UP)) (% (UP)))
         (SPROG
-         ((|r| (|SparseUnivariatePolynomial| UP)) (|d| (UP)) (#1=#:G9 NIL)
-          (|g| (UP)) (|cd| (|Record| (|:| |num| UPUP) (|:| |den| UP))))
+         ((|cd| (|Record| (|:| |num| UPUP) (|:| |den| UP))) (|g| (UP))
+          (#1=#:G15 NIL) (|d| (UP)) (|r| (|SparseUnivariatePolynomial| UP)))
          (SEQ
           (LETT |cd| (SPADCALL (SPADCALL |h| (QREFELT % 29)) (QREFELT % 32)))
           (LETT |d|
@@ -77,8 +77,8 @@
 
 (DEFUN |DoubleResultantPackage;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -98,9 +98,9 @@
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
-(DEFUN |DoubleResultantPackage| (&REST #1=#:G14)
+(DEFUN |DoubleResultantPackage| (&REST #1=#:G20)
   (SPROG NIL
-         (PROG (#2=#:G15)
+         (PROG (#2=#:G21)
            (RETURN
             (COND
              ((LETT #2#
@@ -120,7 +120,7 @@
 (MAKEPROP '|DoubleResultantPackage| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (|local| |#4|) (0 . |One|) (4 . |One|)
+              (|local| |#3|) (|local| |#4|) (0 . |1|) (4 . |1|)
               (|NonNegativeInteger|) (8 . |minimumDegree|) (13 . |monomial|)
               (|Union| % '"failed") (19 . |exquo|) (25 . |primitivePart|)
               (30 . |coerce|) (|SparseUnivariatePolynomial| 7) (|Mapping| 7 6)

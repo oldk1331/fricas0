@@ -13,10 +13,10 @@
          (|sigma| (|Automorphism| R)) (|delta| (|Mapping| R R))
          (% (|Record| (|:| |prod| C) (|:| |yton| C))))
         (SPROG
-         ((|y1| (C)) (|z| (C)) (|b| (R)) (|m| (|NonNegativeInteger|))
-          (|pp| (|Record| (|:| |prod| C) (|:| |yton| C))) (|x1| (C))
-          (|n1| (|NonNegativeInteger|))
-          (|u| (|Union| (|NonNegativeInteger|) "failed")))
+         ((|u| (|Union| (|NonNegativeInteger|) "failed"))
+          (|n1| (|NonNegativeInteger|)) (|x1| (C))
+          (|pp| (|Record| (|:| |prod| C) (|:| |yton| C)))
+          (|m| (|NonNegativeInteger|)) (|b| (R)) (|z| (C)) (|y1| (C)))
          (SEQ (LETT |u| (SPADCALL |n| 1 (QREFELT % 19)))
               (EXIT
                (COND
@@ -74,7 +74,7 @@
 (SDEFUN |OREPCTO;apply;C2RAMR;3|
         ((|p| (C)) (|c| (R)) (|x| (R)) (|sigma| (|Automorphism| R))
          (|delta| (|Mapping| R R)) (% (R)))
-        (SPROG ((|xn| (R)) (|w| (R)) (#1=#:G34 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G37 NIL) (|w| (R)) (|xn| (R)))
                (SEQ (LETT |w| (|spadConstant| % 20)) (LETT |xn| |x|)
                     (SEQ (LETT |i| 0) (LETT #1# (SPADCALL |p| (QREFELT % 12)))
                          G190 (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -100,10 +100,10 @@
         ((|a| (C)) (|b| (C)) (|sigma| (|Automorphism| R)) (|b1| (R))
          (% (|Record| (|:| |quotient| C) (|:| |remainder| C))))
         (SPROG
-         ((|qr| (|Record| (|:| |quotient| C) (|:| |remainder| C))) (|a1| (C))
-          (|q| (C)) (#1=#:G44 NIL)
-          (|n| (|Union| (|NonNegativeInteger|) "failed"))
-          (|m| (|NonNegativeInteger|)))
+         ((|m| (|NonNegativeInteger|))
+          (|n| (|Union| (|NonNegativeInteger|) "failed")) (#1=#:G47 NIL)
+          (|q| (C)) (|a1| (C))
+          (|qr| (|Record| (|:| |quotient| C) (|:| |remainder| C))))
          (SEQ
           (COND
            ((SPADCALL |b| (QREFELT % 9)) (|error| "leftDivide: division by 0"))
@@ -125,7 +125,7 @@
                     ((QEQCAR |n| 1)
                      (PROGN
                       (LETT #1# (CONS (|spadConstant| % 10) |a|))
-                      (GO #3=#:G41))))))))
+                      (GO #3=#:G44))))))))
                (LETT |q|
                      (SPADCALL
                       (SPADCALL (SPADCALL |sigma| (- |m|) (QREFELT % 33))
@@ -147,10 +147,10 @@
         ((|a| (C)) (|b| (C)) (|sigma| (|Automorphism| R)) (|b1| (R))
          (% (|Record| (|:| |quotient| C) (|:| |remainder| C))))
         (SPROG
-         ((|qr| (|Record| (|:| |quotient| C) (|:| |remainder| C))) (|a1| (C))
-          (|q| (C)) (#1=#:G54 NIL)
-          (|n| (|Union| (|NonNegativeInteger|) "failed"))
-          (|m| (|NonNegativeInteger|)))
+         ((|m| (|NonNegativeInteger|))
+          (|n| (|Union| (|NonNegativeInteger|) "failed")) (#1=#:G57 NIL)
+          (|q| (C)) (|a1| (C))
+          (|qr| (|Record| (|:| |quotient| C) (|:| |remainder| C))))
          (SEQ
           (COND
            ((SPADCALL |b| (QREFELT % 9))
@@ -173,7 +173,7 @@
                     ((QEQCAR |n| 1)
                      (PROGN
                       (LETT #1# (CONS (|spadConstant| % 10) |a|))
-                      (GO #3=#:G51))))))))
+                      (GO #3=#:G54))))))))
                (LETT |q|
                      (SPADCALL
                       (SPADCALL (SPADCALL |a| (QREFELT % 21))
@@ -195,7 +195,7 @@
 (SDEFUN |OREPCTO;monicLeftDivide;2CAR;6|
         ((|a| (C)) (|b| (C)) (|sigma| (|Automorphism| R))
          (% (|Record| (|:| |quotient| C) (|:| |remainder| C))))
-        (SPROG ((#1=#:G57 NIL) (|u| (R)))
+        (SPROG ((|u| (R)) (#1=#:G60 NIL))
                (COND
                 ((SPADCALL (LETT |u| (SPADCALL |b| (QREFELT % 21)))
                            (QREFELT % 36))
@@ -210,7 +210,7 @@
 (SDEFUN |OREPCTO;monicRightDivide;2CAR;7|
         ((|a| (C)) (|b| (C)) (|sigma| (|Automorphism| R))
          (% (|Record| (|:| |quotient| C) (|:| |remainder| C))))
-        (SPROG ((#1=#:G64 NIL) (|u| (R)))
+        (SPROG ((|u| (R)) (#1=#:G67 NIL))
                (COND
                 ((SPADCALL (LETT |u| (SPADCALL |b| (QREFELT % 21)))
                            (QREFELT % 36))
@@ -237,7 +237,7 @@
 (DECLAIM (NOTINLINE |UnivariateSkewPolynomialCategoryOps;|)) 
 
 (DEFUN |UnivariateSkewPolynomialCategoryOps;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -280,9 +280,9 @@
                              %)))))
           %))) 
 
-(DEFUN |UnivariateSkewPolynomialCategoryOps| (&REST #1=#:G72)
+(DEFUN |UnivariateSkewPolynomialCategoryOps| (&REST #1=#:G75)
   (SPROG NIL
-         (PROG (#2=#:G73)
+         (PROG (#2=#:G76)
            (RETURN
             (COND
              ((LETT #2#
@@ -305,10 +305,10 @@
 (MAKEPROP '|UnivariateSkewPolynomialCategoryOps| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (|Boolean|)
-              (0 . |zero?|) (5 . |Zero|) (|NonNegativeInteger|) (9 . |degree|)
+              (0 . |zero?|) (5 . |0|) (|NonNegativeInteger|) (9 . |degree|)
               (|Automorphism| 6) (|Mapping| 6 6) |OREPCTO;times;2CAMC;1|
-              (14 . |One|) (18 . |One|) (|Union| % '"failed")
-              (22 . |subtractIfCan|) (28 . |Zero|) (32 . |leadingCoefficient|)
+              (14 . |1|) (18 . |1|) (|Union| % '"failed")
+              (22 . |subtractIfCan|) (28 . |0|) (32 . |leadingCoefficient|)
               (37 . *) (43 . |reductum|) (48 . ~=) (54 . |elt|)
               (60 . |monomial|) (66 . +) (72 . |coefficient|) (78 . *) (84 . +)
               |OREPCTO;apply;C2RAMR;3| (|Integer|) (90 . ^) (96 . *) (102 . -)

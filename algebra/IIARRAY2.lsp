@@ -1,15 +1,15 @@
 
-(PUT '|IIARRAY2;empty;%;1| '|SPADreplace| '(XLAM NIL (MAKE_MATRIX 0 0))) 
+(MAKEPROP '|IIARRAY2;empty;%;1| '|SPADreplace| '(XLAM NIL (MAKE_MATRIX 0 0))) 
 
 (SDEFUN |IIARRAY2;empty;%;1| ((% (%))) (MAKE_MATRIX 0 0)) 
 
-(PUT '|IIARRAY2;qnew;2Nni%;2| '|SPADreplace| 'MAKE_MATRIX) 
+(MAKEPROP '|IIARRAY2;qnew;2Nni%;2| '|SPADreplace| 'MAKE_MATRIX) 
 
 (SDEFUN |IIARRAY2;qnew;2Nni%;2|
         ((|rows| #1=(|NonNegativeInteger|)) (|cols| #1#) (% (%)))
         (MAKE_MATRIX |rows| |cols|)) 
 
-(PUT '|IIARRAY2;new;2NniR%;3| '|SPADreplace| 'MAKE_MATRIX1) 
+(MAKEPROP '|IIARRAY2;new;2NniR%;3| '|SPADreplace| 'MAKE_MATRIX1) 
 
 (SDEFUN |IIARRAY2;new;2NniR%;3|
         ((|rows| #1=(|NonNegativeInteger|)) (|cols| #1#) (|a| (R)) (% (%)))
@@ -25,12 +25,12 @@
 (SDEFUN |IIARRAY2;maxColIndex;%I;7| ((|m| (%)) (% (|Integer|)))
         (- (+ (SPADCALL |m| (QREFELT % 20)) (QREFELT % 8)) 1)) 
 
-(PUT '|IIARRAY2;nrows;%Nni;8| '|SPADreplace| 'ANROWS) 
+(MAKEPROP '|IIARRAY2;nrows;%Nni;8| '|SPADreplace| 'ANROWS) 
 
 (SDEFUN |IIARRAY2;nrows;%Nni;8| ((|m| (%)) (% (|NonNegativeInteger|)))
         (ANROWS |m|)) 
 
-(PUT '|IIARRAY2;ncols;%Nni;9| '|SPADreplace| 'ANCOLS) 
+(MAKEPROP '|IIARRAY2;ncols;%Nni;9| '|SPADreplace| 'ANCOLS) 
 
 (SDEFUN |IIARRAY2;ncols;%Nni;9| ((|m| (%)) (% (|NonNegativeInteger|)))
         (ANCOLS |m|)) 
@@ -67,16 +67,16 @@
 
 (SDEFUN |IIARRAY2;hashUpdate!;Hs%Hs;14|
         ((|s| (|HashState|)) (|m| (%)) (% (|HashState|)))
-        (SPROG ((#1=#:G2215 NIL) (|j| NIL) (#2=#:G2214 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G37 NIL) (|j| NIL) (#2=#:G38 NIL))
                (SEQ
                 (SEQ (LETT |i| (SPADCALL |m| (QREFELT % 16)))
-                     (LETT #2# (SPADCALL |m| (QREFELT % 19))) G190
-                     (COND ((> |i| #2#) (GO G191)))
+                     (LETT #1# (SPADCALL |m| (QREFELT % 19))) G190
+                     (COND ((> |i| #1#) (GO G191)))
                      (SEQ
                       (EXIT
                        (SEQ (LETT |j| (SPADCALL |m| (QREFELT % 17)))
-                            (LETT #1# (SPADCALL |m| (QREFELT % 21))) G190
-                            (COND ((> |j| #1#) (GO G191)))
+                            (LETT #2# (SPADCALL |m| (QREFELT % 21))) G190
+                            (COND ((> |j| #2#) (GO G191)))
                             (SEQ
                              (EXIT
                               (LETT |s|
@@ -92,8 +92,8 @@
 
 (DEFUN |InnerIndexedTwoDimensionalArray;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G2220 NIL) (#2=#:G2221 NIL) (% NIL) (|dv$| NIL)
-    (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (|dv$| NIL) (% NIL)
+    (#1=#:G44 NIL) (#2=#:G43 NIL) (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 |#2|)
@@ -112,23 +112,23 @@
                                         (|HasCategory| |#1| '(|Hashable|))
                                         (|HasCategory| |#1| '(|OrderedSet|))
                                         (|HasCategory| |#1| '(|BasicType|))
-                                        (LETT #2#
+                                        (LETT #1#
                                               (|HasCategory| |#1|
                                                              '(|SetCategory|)))
                                         (OR
                                          (|HasCategory| |#1| '(|Comparable|))
-                                         #2#)
+                                         #1#)
                                         (OR (|HasCategory| |#1| '(|BasicType|))
                                             (|HasCategory| |#1|
                                                            '(|Comparable|))
                                             (|HasCategory| |#1| '(|Hashable|))
-                                            #2#)
+                                            #1#)
                                         (AND
                                          (|HasCategory| |#1|
                                                         (LIST '|Evalable|
                                                               (|devaluate|
                                                                |#1|)))
-                                         #2#)
+                                         #1#)
                                         (OR
                                          (AND
                                           (|HasCategory| |#1|
@@ -141,18 +141,18 @@
                                                          (LIST '|Evalable|
                                                                (|devaluate|
                                                                 |#1|)))
-                                          #2#))
-                                        (LETT #1#
+                                          #1#))
+                                        (LETT #2#
                                               (|HasCategory| |#1|
                                                              '(|CoercibleTo|
                                                                (|OutputForm|))))
-                                        (OR #1#
+                                        (OR #2#
                                             (AND
                                              (|HasCategory| |#1|
                                                             (LIST '|Evalable|
                                                                   (|devaluate|
                                                                    |#1|)))
-                                             #2#))))))
+                                             #1#))))))
     (|haddProp| |$ConstructorCache| '|InnerIndexedTwoDimensionalArray|
                 (LIST DV$1 DV$2 DV$3 DV$4 DV$5) (CONS 1 %))
     (|stuffDomainSlots| %)
@@ -170,7 +170,7 @@
      (OR
       (AND (|HasCategory| |#1| '(|BasicType|))
            (|HasCategory| % '(|finiteAggregate|)))
-      (|HasCategory| |#1| '(|Hashable|)) #2#)
+      (|HasCategory| |#1| '(|Hashable|)) #1#)
      (|augmentPredVector| % 16384))
     (SETF |pv$| (QREFELT % 3))
     (COND
@@ -180,9 +180,9 @@
                       %))))
     %))) 
 
-(DEFUN |InnerIndexedTwoDimensionalArray| (&REST #1=#:G2223)
+(DEFUN |InnerIndexedTwoDimensionalArray| (&REST #1=#:G46)
   (SPROG NIL
-         (PROG (#2=#:G2224)
+         (PROG (#2=#:G47)
            (RETURN
             (COND
              ((LETT #2#
@@ -233,16 +233,17 @@
               |colSlice| 560 |coerce| 565 |blockSplit| 570 |blockConcat| 584
               |array2| 589 |any?| 594 = 600 |#| 606)
            'NIL
-           (CONS (|makeByteWordVec2| 11 '(0 1 0 2 6 9 0 7 11 9 0 0 0))
+           (CONS (|makeByteWordVec2| 11 '(0 1 1 0 2 6 9 0 7 11 9 0 0 0))
                  (CONS
-                  '#(|TwoDimensionalArrayCategory&| NIL |HomogeneousAggregate&|
-                     |Hashable&| |SetCategory&| |Evalable&| |Aggregate&|
-                     |BasicType&| NIL |InnerEvalable&| NIL NIL NIL)
+                  '#(|TwoDimensionalArrayCategory&| NIL NIL
+                     |HomogeneousAggregate&| |Hashable&| |SetCategory&|
+                     |Evalable&| |Aggregate&| |BasicType&| NIL |InnerEvalable&|
+                     NIL NIL NIL)
                   (CONS
                    '#((|TwoDimensionalArrayCategory| 6 9 10) (|Comparable|)
-                      (|HomogeneousAggregate| 6) (|Hashable|) (|SetCategory|)
-                      (|Evalable| 6) (|Aggregate|) (|BasicType|)
-                      (|CoercibleTo| 45) (|InnerEvalable| 6 6)
+                      (|ComparableRepresentation|) (|HomogeneousAggregate| 6)
+                      (|Hashable|) (|SetCategory|) (|Evalable| 6) (|Aggregate|)
+                      (|BasicType|) (|CoercibleTo| 45) (|InnerEvalable| 6 6)
                       (|shallowlyMutable|) (|finiteAggregate|) (|Type|))
                    (|makeByteWordVec2| 47
                                        '(2 6 26 26 0 27 2 0 26 26 0 28 2 15 29

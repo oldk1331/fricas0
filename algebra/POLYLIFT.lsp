@@ -2,12 +2,12 @@
 (SDEFUN |POLYLIFT;map;MMPS;1|
         ((|fv| (|Mapping| S |Vars|)) (|fc| (|Mapping| S R)) (|p| (P)) (% (S)))
         (SPROG
-         ((|ans| (S)) (|pow0| (S)) (|i0| #1=(|NonNegativeInteger|)) (|pow| (S))
-          (|i| #1#) (#2=#:G18 NIL) (|mon| NIL) (|lc0| (S))
-          (|mon0| (|SparseUnivariatePolynomial| P)) (|t| (S))
-          (|ml| (|List| (|SparseUnivariatePolynomial| P)))
+         ((|x1| (|Union| |Vars| "failed"))
           (|up| (|SparseUnivariatePolynomial| P))
-          (|x1| (|Union| |Vars| "failed")))
+          (|ml| (|List| (|SparseUnivariatePolynomial| P))) (|t| (S))
+          (|mon0| (|SparseUnivariatePolynomial| P)) (|lc0| (S)) (|mon| NIL)
+          (#1=#:G23 NIL) (|i| #2=(|NonNegativeInteger|)) (|pow| (S)) (|i0| #2#)
+          (|pow0| (S)) (|ans| (S)))
          (SEQ (LETT |x1| (SPADCALL |p| (QREFELT % 12)))
               (EXIT
                (COND
@@ -29,9 +29,9 @@
                               (LETT |ans|
                                     (SPADCALL |lc0| |pow0| (QREFELT % 28))))))
                        (#3# (LETT |ans| |lc0|)))
-                      (SEQ (LETT |mon| NIL) (LETT #2# (CDR |ml|)) G190
+                      (SEQ (LETT |mon| NIL) (LETT #1# (CDR |ml|)) G190
                            (COND
-                            ((OR (ATOM #2#) (PROGN (LETT |mon| (CAR #2#)) NIL))
+                            ((OR (ATOM #1#) (PROGN (LETT |mon| (CAR #1#)) NIL))
                              (GO G191)))
                            (SEQ (LETT |i| (SPADCALL |mon| (QREFELT % 20)))
                                 (EXIT
@@ -71,14 +71,14 @@
                                                                 (QREFELT % 24))
                                                       |pow| (QREFELT % 28))
                                                      (QREFELT % 29)))))))))
-                           (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                           (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
                       (EXIT |ans|)))))))) 
 
 (SDEFUN |POLYLIFT;map;MMPS;2|
         ((|fv| (|Mapping| S |Vars|)) (|fc| (|Mapping| S R)) (|p| (P)) (% (S)))
         (SPROG
-         ((|up| (|SparseUnivariatePolynomial| P)) (|ans| (S)) (|t| (S))
-          (|x1| (|Union| |Vars| "failed")))
+         ((|x1| (|Union| |Vars| "failed")) (|t| (S)) (|ans| (S))
+          (|up| (|SparseUnivariatePolynomial| P)))
          (SEQ (LETT |x1| (SPADCALL |p| (QREFELT % 12)))
               (EXIT
                (COND
@@ -122,8 +122,8 @@
 
 (DEFUN |PolynomialCategoryLifting;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -149,9 +149,9 @@
      ('T (QSETREFV % 24 (CONS (|dispatchFunction| |POLYLIFT;map;MMPS;2|) %))))
     %))) 
 
-(DEFUN |PolynomialCategoryLifting| (&REST #1=#:G33)
+(DEFUN |PolynomialCategoryLifting| (&REST #1=#:G38)
   (SPROG NIL
-         (PROG (#2=#:G34)
+         (PROG (#2=#:G39)
            (RETURN
             (COND
              ((LETT #2#
@@ -178,8 +178,8 @@
               (10 . |univariate|) (|List| %) (|SparseUnivariatePolynomial| 9)
               (16 . |monomials|) (|NonNegativeInteger|) (21 . |degree|)
               (26 . |leadingCoefficient|) (|Mapping| 10 7) (|Mapping| 10 8)
-              (31 . |map|) (38 . |Zero|) (42 . |Zero|) (46 . ^) (52 . *)
-              (58 . +) (|PositiveInteger|) (64 . ^) (70 . *) (76 . |reductum|)
+              (31 . |map|) (38 . |0|) (42 . |0|) (46 . ^) (52 . *) (58 . +)
+              (|PositiveInteger|) (64 . ^) (70 . *) (76 . |reductum|)
               (|Boolean|) (81 . |zero?|))
            '#(|map| 86) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))

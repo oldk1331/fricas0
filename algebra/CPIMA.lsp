@@ -6,7 +6,7 @@
         (SPADCALL |x| (|spadConstant| % 12) (QREFELT % 13))) 
 
 (SDEFUN |CPIMA;characteristicPolynomial;EPolR;2| ((|x| (E)) (% (|PolR|)))
-        (SPROG ((#1=#:G4 NIL) (|Qx| (|PolR|)))
+        (SPROG ((|Qx| (|PolR|)) (#1=#:G5 NIL))
                (SEQ
                 (EXIT
                  (SEQ (LETT |Qx| (SPADCALL |x| (QREFELT % 24)))
@@ -18,13 +18,13 @@
                                                   (|CPIMA;XtoY| |Qx| %)
                                                   (QREFELT % 25))
                                         (QREFELT % 26)))
-                        (GO #2=#:G3)))))
+                        (GO #2=#:G4)))))
                 #2# (EXIT #1#)))) 
 
 (DECLAIM (NOTINLINE |CharacteristicPolynomialInMonogenicalAlgebra;|)) 
 
 (DEFUN |CharacteristicPolynomialInMonogenicalAlgebra;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -56,9 +56,9 @@
                        %))))
           %))) 
 
-(DEFUN |CharacteristicPolynomialInMonogenicalAlgebra| (&REST #1=#:G5)
+(DEFUN |CharacteristicPolynomialInMonogenicalAlgebra| (&REST #1=#:G6)
   (SPROG NIL
-         (PROG (#2=#:G6)
+         (PROG (#2=#:G7)
            (RETURN
             (COND
              ((LETT #2#
@@ -83,11 +83,11 @@
 (MAKEPROP '|CharacteristicPolynomialInMonogenicalAlgebra| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (0 . |Zero|) (4 . |Zero|) (|NonNegativeInteger|)
-              (8 . |Zero|) (12 . |monomial|) (|SparseUnivariatePolynomial| 7)
+              (|local| |#3|) (0 . |0|) (4 . |0|) (|NonNegativeInteger|)
+              (8 . |0|) (12 . |monomial|) (|SparseUnivariatePolynomial| 7)
               (|Mapping| 7 6)
               (|UnivariatePolynomialCategoryFunctions2| 6 7 7 14) (18 . |map|)
-              (24 . |definingPolynomial|) 'P (28 . |One|) (32 . |One|)
+              (24 . |definingPolynomial|) 'P (28 . |1|) (32 . |1|)
               (36 . |monomial|) 'X (42 . |lift|) (47 . -) (53 . |resultant|)
               (59 . |characteristicPolynomial|))
            '#(|characteristicPolynomial| 64) 'NIL

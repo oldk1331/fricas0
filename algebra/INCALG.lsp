@@ -12,12 +12,12 @@
         ((|Ai| (|Matrix| R)) (|ss| (|List| S)) (% (%)))
         (SPADCALL |Ai| (SPADCALL |ss| (QREFELT % 16)) (QREFELT % 14))) 
 
-(PUT '|INCALG;indices;%Oda;3| '|SPADreplace| 'QCDR) 
+(MAKEPROP '|INCALG;indices;%Oda;3| '|SPADreplace| 'QCDR) 
 
 (SDEFUN |INCALG;indices;%Oda;3| ((A (%)) (% (|OneDimensionalArray| S)))
         (QCDR A)) 
 
-(PUT '|INCALG;matrix;%M;4| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|INCALG;matrix;%M;4| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |INCALG;matrix;%M;4| ((A (%)) (% (|Matrix| R))) (QCAR A)) 
 
@@ -26,7 +26,7 @@
         (SPADCALL (QCAR A) |i| |j| (QREFELT % 20))) 
 
 (SDEFUN |INCALG;apply;%2SR;6| ((A (%)) (|u| (S)) (|v| (S)) (% (R)))
-        (SPROG ((|j| #1=(|Integer|)) (|i| #1#))
+        (SPROG ((|i| #1=(|Integer|)) (|j| #1#))
                (SEQ
                 (LETT |i|
                       (SPADCALL |u| (SPADCALL A (QREFELT % 18))
@@ -47,10 +47,10 @@
 
 (SDEFUN |INCALG;*;P2%;7| ((|p| (|Permutation| (|Integer|))) (A (%)) (% (%)))
         (SPROG
-         ((|newA| (|Matrix| R)) (|indic| (|List| (|Integer|))) (#1=#:G35 NIL)
-          (|i| NIL) (#2=#:G34 NIL) (|newindices| (|OneDimensionalArray| S))
-          (#3=#:G33 NIL) (#4=#:G32 NIL) (|n| (|Integer|))
-          (|mp| (|Set| (|Integer|))))
+         ((|mp| (|Set| (|Integer|))) (|n| (|Integer|)) (#1=#:G32 NIL)
+          (#2=#:G33 NIL) (|newindices| (|OneDimensionalArray| S))
+          (#3=#:G34 NIL) (|i| NIL) (#4=#:G35 NIL)
+          (|indic| (|List| (|Integer|))) (|newA| (|Matrix| R)))
          (SEQ (LETT |mp| (SPADCALL |p| (QREFELT % 26)))
               (LETT |n| (QVSIZE (SPADCALL A (QREFELT % 18))))
               (COND
@@ -60,32 +60,32 @@
               (LETT |newindices|
                     (SPADCALL
                      (PROGN
-                      (LETT #4# NIL)
-                      (SEQ (LETT |i| 1) (LETT #3# |n|) G190
-                           (COND ((|greater_SI| |i| #3#) (GO G191)))
+                      (LETT #1# NIL)
+                      (SEQ (LETT |i| 1) (LETT #2# |n|) G190
+                           (COND ((|greater_SI| |i| #2#) (GO G191)))
                            (SEQ
                             (EXIT
-                             (LETT #4#
+                             (LETT #1#
                                    (CONS
                                     (SPADCALL (SPADCALL A (QREFELT % 18))
                                               (SPADCALL |p| |i| (QREFELT % 29))
                                               (QREFELT % 30))
-                                    #4#))))
+                                    #1#))))
                            (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                           (EXIT (NREVERSE #4#))))
+                           (EXIT (NREVERSE #1#))))
                      (QREFELT % 16)))
               (LETT |indic|
                     (PROGN
-                     (LETT #2# NIL)
-                     (SEQ (LETT |i| 1) (LETT #1# |n|) G190
-                          (COND ((|greater_SI| |i| #1#) (GO G191)))
+                     (LETT #3# NIL)
+                     (SEQ (LETT |i| 1) (LETT #4# |n|) G190
+                          (COND ((|greater_SI| |i| #4#) (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #2#
+                            (LETT #3#
                                   (CONS (SPADCALL |p| |i| (QREFELT % 29))
-                                        #2#))))
+                                        #3#))))
                           (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                          (EXIT (NREVERSE #2#)))))
+                          (EXIT (NREVERSE #3#)))))
               (LETT |newA|
                     (SPADCALL (SPADCALL A (QREFELT % 19)) |indic| |indic|
                               (QREFELT % 32)))
@@ -107,8 +107,8 @@
 
 (SDEFUN |INCALG;+;3%;10| ((A (%)) (B (%)) (% (%)))
         (SPROG
-         ((|Ci| (|Matrix| R)) (|Bind| #1=(|OneDimensionalArray| S))
-          (|Aind| #1#))
+         ((|Aind| #1=(|OneDimensionalArray| S)) (|Bind| #1#)
+          (|Ci| (|Matrix| R)))
          (SEQ (LETT |Aind| (SPADCALL A (QREFELT % 18)))
               (LETT |Bind| (SPADCALL B (QREFELT % 18)))
               (COND
@@ -121,8 +121,8 @@
 
 (SDEFUN |INCALG;*;3%;11| ((A (%)) (B (%)) (% (%)))
         (SPROG
-         ((|Ci| (|Matrix| R)) (|Bind| #1=(|OneDimensionalArray| S))
-          (|Aind| #1#))
+         ((|Aind| #1=(|OneDimensionalArray| S)) (|Bind| #1#)
+          (|Ci| (|Matrix| R)))
          (SEQ (LETT |Aind| (SPADCALL A (QREFELT % 18)))
               (LETT |Bind| (SPADCALL B (QREFELT % 18)))
               (COND
@@ -134,7 +134,7 @@
               (EXIT (SPADCALL |Ci| |Aind| (QREFELT % 14)))))) 
 
 (SDEFUN |INCALG;*;R2%;12| ((|r| (R)) (A (%)) (% (%)))
-        (SPROG ((|Ci| (|Matrix| R)) (|Aind| (|OneDimensionalArray| S)))
+        (SPROG ((|Aind| (|OneDimensionalArray| S)) (|Ci| (|Matrix| R)))
                (SEQ (LETT |Aind| (SPADCALL A (QREFELT % 18)))
                     (LETT |Ci|
                           (SPADCALL |r| (SPADCALL A (QREFELT % 19))
@@ -142,7 +142,7 @@
                     (EXIT (SPADCALL |Ci| |Aind| (QREFELT % 14)))))) 
 
 (SDEFUN |INCALG;*;%R%;13| ((A (%)) (|r| (R)) (% (%)))
-        (SPROG ((|Ci| (|Matrix| R)) (|Aind| (|OneDimensionalArray| S)))
+        (SPROG ((|Aind| (|OneDimensionalArray| S)) (|Ci| (|Matrix| R)))
                (SEQ (LETT |Aind| (SPADCALL A (QREFELT % 18)))
                     (LETT |Ci|
                           (SPADCALL (SPADCALL A (QREFELT % 19)) |r|
@@ -150,7 +150,7 @@
                     (EXIT (SPADCALL |Ci| |Aind| (QREFELT % 14)))))) 
 
 (SDEFUN |INCALG;^;%Nni%;14| ((A (%)) (|n| (|NonNegativeInteger|)) (% (%)))
-        (SPROG ((|Ci| (|Matrix| R)) (|Aind| (|OneDimensionalArray| S)))
+        (SPROG ((|Aind| (|OneDimensionalArray| S)) (|Ci| (|Matrix| R)))
                (SEQ (LETT |Aind| (SPADCALL A (QREFELT % 18)))
                     (LETT |Ci|
                           (SPADCALL (SPADCALL A (QREFELT % 19)) |n|
@@ -160,7 +160,7 @@
 (DECLAIM (NOTINLINE |IncidenceAlgebra;|)) 
 
 (DEFUN |IncidenceAlgebra;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

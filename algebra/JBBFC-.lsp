@@ -1,41 +1,45 @@
 
-(PUT '|JBBFC-;U;PiS;1| '|SPADreplace|
-     '(XLAM (|i|) (|error| "Only functions of independent variables allowed"))) 
+(MAKEPROP '|JBBFC-;U;PiS;1| '|SPADreplace|
+          '(XLAM (|i|)
+            (|error| "Only functions of independent variables allowed"))) 
 
 (SDEFUN |JBBFC-;U;PiS;1| ((|i| (|PositiveInteger|)) (% (S)))
         (|error| "Only functions of independent variables allowed")) 
 
-(PUT '|JBBFC-;U;S;2| '|SPADreplace|
-     '(XLAM NIL (|error| "Only functions of independent variables allowed"))) 
+(MAKEPROP '|JBBFC-;U;S;2| '|SPADreplace|
+          '(XLAM NIL
+            (|error| "Only functions of independent variables allowed"))) 
 
 (SDEFUN |JBBFC-;U;S;2| ((% (S)))
         (|error| "Only functions of independent variables allowed")) 
 
-(PUT '|JBBFC-;P;PiLS;3| '|SPADreplace|
-     '(XLAM (|i| |l|)
-       (|error| "Only functions of independent variables allowed"))) 
+(MAKEPROP '|JBBFC-;P;PiLS;3| '|SPADreplace|
+          '(XLAM (|i| |l|)
+            (|error| "Only functions of independent variables allowed"))) 
 
 (SDEFUN |JBBFC-;P;PiLS;3|
         ((|i| (|PositiveInteger|)) (|l| (|List| (|NonNegativeInteger|)))
          (% (S)))
         (|error| "Only functions of independent variables allowed")) 
 
-(PUT '|JBBFC-;P;LS;4| '|SPADreplace|
-     '(XLAM (|l|) (|error| "Only functions of independent variables allowed"))) 
+(MAKEPROP '|JBBFC-;P;LS;4| '|SPADreplace|
+          '(XLAM (|l|)
+            (|error| "Only functions of independent variables allowed"))) 
 
 (SDEFUN |JBBFC-;P;LS;4| ((|l| (|List| (|NonNegativeInteger|))) (% (S)))
         (|error| "Only functions of independent variables allowed")) 
 
-(PUT '|JBBFC-;P;PiNniS;5| '|SPADreplace|
-     '(XLAM (|i| |l|)
-       (|error| "Only functions of independent variables allowed"))) 
+(MAKEPROP '|JBBFC-;P;PiNniS;5| '|SPADreplace|
+          '(XLAM (|i| |l|)
+            (|error| "Only functions of independent variables allowed"))) 
 
 (SDEFUN |JBBFC-;P;PiNniS;5|
         ((|i| (|PositiveInteger|)) (|l| (|NonNegativeInteger|)) (% (S)))
         (|error| "Only functions of independent variables allowed")) 
 
-(PUT '|JBBFC-;P;NniS;6| '|SPADreplace|
-     '(XLAM (|i|) (|error| "Only functions of independent variables allowed"))) 
+(MAKEPROP '|JBBFC-;P;NniS;6| '|SPADreplace|
+          '(XLAM (|i|)
+            (|error| "Only functions of independent variables allowed"))) 
 
 (SDEFUN |JBBFC-;P;NniS;6| ((|i| (|NonNegativeInteger|)) (% (S)))
         (|error| "Only functions of independent variables allowed")) 
@@ -43,7 +47,7 @@
 (DECLAIM (NOTINLINE |JetBundleBaseFunctionCategory&;|)) 
 
 (DEFUN |JetBundleBaseFunctionCategory&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

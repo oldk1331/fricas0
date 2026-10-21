@@ -1,5 +1,5 @@
 
-(PUT '|SETLAT;subsetLattice;L%;1| '|SPADreplace| '(XLAM (|obj|) |obj|)) 
+(MAKEPROP '|SETLAT;subsetLattice;L%;1| '|SPADreplace| '(XLAM (|obj|) |obj|)) 
 
 (SDEFUN |SETLAT;subsetLattice;L%;1| ((|obj| (|List| S)) (% (%))) |obj|) 
 
@@ -11,63 +11,63 @@
 
 (SDEFUN |SETLAT;complement;2%;4| ((|a| (%)) (% (%)))
         (SPROG
-         ((|r| (|List| S)) (|contains| (|Boolean|)) (#1=#:G11 NIL) (|c| NIL)
-          (#2=#:G10 NIL) (|b| NIL))
+         ((|b| NIL) (#1=#:G10 NIL) (|c| NIL) (#2=#:G11 NIL)
+          (|contains| (|Boolean|)) (|r| (|List| S)))
          (SEQ (LETT |r| NIL)
-              (SEQ (LETT |b| NIL) (LETT #2# (QREFELT % 7)) G190
+              (SEQ (LETT |b| NIL) (LETT #1# (QREFELT % 7)) G190
                    (COND
-                    ((OR (ATOM #2#) (PROGN (LETT |b| (CAR #2#)) NIL))
+                    ((OR (ATOM #1#) (PROGN (LETT |b| (CAR #1#)) NIL))
                      (GO G191)))
                    (SEQ (LETT |contains| NIL)
-                        (SEQ (LETT |c| NIL) (LETT #1# |a|) G190
+                        (SEQ (LETT |c| NIL) (LETT #2# |a|) G190
                              (COND
-                              ((OR (ATOM #1#) (PROGN (LETT |c| (CAR #1#)) NIL))
+                              ((OR (ATOM #2#) (PROGN (LETT |c| (CAR #2#)) NIL))
                                (GO G191)))
                              (SEQ
                               (EXIT
                                (COND
                                 ((SPADCALL |b| |c| (QREFELT % 16))
                                  (LETT |contains| 'T)))))
-                             (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+                             (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                         (EXIT
                          (COND
                           ((NULL |contains|)
                            (LETT |r| (SPADCALL |r| |b| (QREFELT % 17)))))))
-                   (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                   (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
               (EXIT |r|)))) 
 
 (SDEFUN |SETLAT;complement;%L%;5| ((|a| (%)) (|pseudoTop| (|List| S)) (% (%)))
         (SPROG
-         ((|r| (|List| S)) (|contains| (|Boolean|)) (#1=#:G20 NIL) (|c| NIL)
-          (#2=#:G19 NIL) (|b| NIL))
+         ((|b| NIL) (#1=#:G19 NIL) (|c| NIL) (#2=#:G20 NIL)
+          (|contains| (|Boolean|)) (|r| (|List| S)))
          (SEQ (LETT |r| NIL)
-              (SEQ (LETT |b| NIL) (LETT #2# |pseudoTop|) G190
+              (SEQ (LETT |b| NIL) (LETT #1# |pseudoTop|) G190
                    (COND
-                    ((OR (ATOM #2#) (PROGN (LETT |b| (CAR #2#)) NIL))
+                    ((OR (ATOM #1#) (PROGN (LETT |b| (CAR #1#)) NIL))
                      (GO G191)))
                    (SEQ (LETT |contains| NIL)
-                        (SEQ (LETT |c| NIL) (LETT #1# |a|) G190
+                        (SEQ (LETT |c| NIL) (LETT #2# |a|) G190
                              (COND
-                              ((OR (ATOM #1#) (PROGN (LETT |c| (CAR #1#)) NIL))
+                              ((OR (ATOM #2#) (PROGN (LETT |c| (CAR #2#)) NIL))
                                (GO G191)))
                              (SEQ
                               (EXIT
                                (COND
                                 ((SPADCALL |b| |c| (QREFELT % 16))
                                  (LETT |contains| 'T)))))
-                             (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+                             (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                         (EXIT
                          (COND
                           ((NULL |contains|)
                            (LETT |r| (SPADCALL |r| |b| (QREFELT % 17)))))))
-                   (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                   (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
               (EXIT |r|)))) 
 
-(PUT '|SETLAT;hash| '|SPADreplace| '(XLAM (|s|) 0)) 
+(MAKEPROP '|SETLAT;hash| '|SPADreplace| '(XLAM (|s|) 0)) 
 
 (SDEFUN |SETLAT;hash| ((|s| (%)) (% (|SingleInteger|))) 0) 
 
-(PUT '|SETLAT;=;2%B;7| '|SPADreplace| 'EQL) 
+(MAKEPROP '|SETLAT;=;2%B;7| '|SPADreplace| 'EQL) 
 
 (SDEFUN |SETLAT;=;2%B;7| ((|x| (%)) (|y| (%)) (% (|Boolean|))) (EQL |x| |y|)) 
 
@@ -76,7 +76,7 @@
 
 (SDEFUN |SETLAT;coerce;%Of;9| ((|s| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|oup| (|List| (|OutputForm|))) (#1=#:G28 NIL) (|x| NIL) (|inp| (%)))
+         ((|inp| (%)) (|x| NIL) (#1=#:G28 NIL) (|oup| (|List| (|OutputForm|))))
          (SEQ (LETT |inp| |s|) (LETT |oup| NIL)
               (SEQ (LETT |x| NIL) (LETT #1# |inp|) G190
                    (COND
@@ -93,7 +93,7 @@
 (DECLAIM (NOTINLINE |SubsetLattice;|)) 
 
 (DEFUN |SubsetLattice;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 |#2|)

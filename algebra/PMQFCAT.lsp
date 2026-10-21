@@ -3,12 +3,13 @@
         ((|x| (Q)) (|p| (|Pattern| S)) (|l| (|PatternMatchResult| S Q))
          (% (|PatternMatchResult| S Q)))
         (SPROG
-         ((|ur| (|Record| (|:| |num| (|Pattern| S)) (|:| |den| (|Pattern| S))))
+         ((|r| (|Union| R "failed")) (#1=#:G4 NIL)
           (|u|
            (|Union|
             (|Record| (|:| |num| (|Pattern| S)) (|:| |den| (|Pattern| S)))
             "failed"))
-          (#1=#:G4 NIL) (|r| (|Union| R "failed")))
+          (|ur|
+           (|Record| (|:| |num| (|Pattern| S)) (|:| |den| (|Pattern| S)))))
          (SEQ
           (COND
            ((SPADCALL |p| (QREFELT % 11))
@@ -42,7 +43,7 @@
 (DECLAIM (NOTINLINE |PatternMatchQuotientFieldCategory;|)) 
 
 (DEFUN |PatternMatchQuotientFieldCategory;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -61,9 +62,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |PatternMatchQuotientFieldCategory| (&REST #1=#:G15)
+(DEFUN |PatternMatchQuotientFieldCategory| (&REST #1=#:G22)
   (SPROG NIL
-         (PROG (#2=#:G16)
+         (PROG (#2=#:G23)
            (RETURN
             (COND
              ((LETT #2#

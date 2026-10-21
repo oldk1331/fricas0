@@ -1,7 +1,7 @@
 
 (SDEFUN |CPMATCH;makeComplex| ((|p| (|Polynomial| S)) (% (CS)))
         (SPROG
-         ((|rcoef| (S)) (|icoef| (S)) (|up| (|SparseUnivariatePolynomial| S)))
+         ((|up| (|SparseUnivariatePolynomial| S)) (|icoef| (S)) (|rcoef| (S)))
          (SEQ (LETT |up| (SPADCALL |p| (QREFELT % 14)))
               (EXIT
                (COND
@@ -40,7 +40,7 @@
 (DECLAIM (NOTINLINE |ComplexPatternMatch;|)) 
 
 (DEFUN |ComplexPatternMatch;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -72,9 +72,9 @@
                        %))))
           %))) 
 
-(DEFUN |ComplexPatternMatch| (&REST #1=#:G10)
+(DEFUN |ComplexPatternMatch| (&REST #1=#:G12)
   (SPROG NIL
-         (PROG (#2=#:G11)
+         (PROG (#2=#:G13)
            (RETURN
             (COND
              ((LETT #2#

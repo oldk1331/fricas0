@@ -1,7 +1,7 @@
 
 (SDEFUN |APPLYORE;apply;PM2M;1|
         ((|p| (P)) (|f| (|Mapping| M M)) (|m| (M)) (% (M)))
-        (SPROG ((|mn| (M)) (|w| (M)) (#1=#:G6 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G6 NIL) (|w| (M)) (|mn| (M)))
                (SEQ (LETT |w| (|spadConstant| % 9)) (LETT |mn| |m|)
                     (SEQ (LETT |i| 0) (LETT #1# (SPADCALL |p| (QREFELT % 11)))
                          G190 (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -19,7 +19,7 @@
 (DECLAIM (NOTINLINE |ApplyUnivariateSkewPolynomial;|)) 
 
 (DEFUN |ApplyUnivariateSkewPolynomial;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -61,7 +61,7 @@
 (MAKEPROP '|ApplyUnivariateSkewPolynomial| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (0 . |Zero|) (|NonNegativeInteger|) (4 . |degree|)
+              (|local| |#3|) (0 . |0|) (|NonNegativeInteger|) (4 . |degree|)
               (9 . |coefficient|) (15 . *) (21 . +) (|Mapping| 7 7)
               |APPLYORE;apply;PM2M;1|)
            '#(|apply| 27) 'NIL

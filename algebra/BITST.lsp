@@ -1,13 +1,13 @@
 
-(PUT '|BITST;starts;L%;1| '|SPADreplace| 'LIST) 
+(MAKEPROP '|BITST;starts;L%;1| '|SPADreplace| 'LIST) 
 
 (SDEFUN |BITST;starts;L%;1| ((|index| (|List| (|Boolean|))) (% (%)))
         (LIST |index|)) 
 
 (SDEFUN |BITST;starts;S%;2| ((|str| (|String|)) (% (%)))
         (SPROG
-         ((|res| (|List| (|Boolean|))) (#1=#:G11 NIL) (|c| NIL)
-          (|cs| (|List| (|Character|))))
+         ((|cs| (|List| (|Character|))) (|c| NIL) (#1=#:G12 NIL)
+          (|res| (|List| (|Boolean|))))
          (SEQ (LETT |res| NIL) (LETT |cs| (SPADCALL |str| (QREFELT % 11)))
               (SEQ (LETT |c| NIL) (LETT #1# |cs|) G190
                    (COND
@@ -34,46 +34,46 @@
                (SEQ (LETT |res| (SPADCALL |a| |b| (QREFELT % 16)))
                     (EXIT |res|)))) 
 
-(PUT '|BITST;hash| '|SPADreplace| '(XLAM (|s|) 0)) 
+(MAKEPROP '|BITST;hash| '|SPADreplace| '(XLAM (|s|) 0)) 
 
 (SDEFUN |BITST;hash| ((|s| (%)) (% (|SingleInteger|))) 0) 
 
 (SDEFUN |BITST;=;2%B;6| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G23 NIL) (#2=#:G24 NIL) (|i| NIL)
-          (|len| (|NonNegativeInteger|)))
+         ((|len| (|NonNegativeInteger|)) (|i| NIL) (#1=#:G25 NIL)
+          (#2=#:G24 NIL))
          (SEQ
           (EXIT
            (SEQ
             (COND
              ((SPADCALL (LENGTH |x|) (LENGTH |y|) (QREFELT % 20))
-              (PROGN (LETT #1# NIL) (GO #3=#:G22))))
+              (PROGN (LETT #2# NIL) (GO #3=#:G23))))
             (LETT |len| (LENGTH |x|))
-            (SEQ (LETT |i| 1) (LETT #2# |len|) G190
-                 (COND ((|greater_SI| |i| #2#) (GO G191)))
+            (SEQ (LETT |i| 1) (LETT #1# |len|) G190
+                 (COND ((|greater_SI| |i| #1#) (GO G191)))
                  (SEQ
                   (EXIT
                    (COND
                     ((SPADCALL (SPADCALL |x| |i| (QREFELT % 21))
                                (SPADCALL |y| |i| (QREFELT % 21))
                                (QREFELT % 22))
-                     (PROGN (LETT #1# NIL) (GO #3#))))))
+                     (PROGN (LETT #2# NIL) (GO #3#))))))
                  (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
             (EXIT 'T)))
-          #3# (EXIT #1#)))) 
+          #3# (EXIT #2#)))) 
 
 (SDEFUN |BITST;~=;2%B;7| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
         (NULL (SPADCALL |x| |y| (QREFELT % 23)))) 
 
 (SDEFUN |BITST;coerce;%Of;8| ((|s| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|cs| (|List| (|OutputForm|))) (|c| (|OutputForm|))
-          (|r| (|List| #1=(|OutputForm|))) (|ro| #1#) (#2=#:G35 NIL) (|x| NIL)
-          (#3=#:G34 NIL) (|row| NIL))
+         ((|row| NIL) (#1=#:G35 NIL) (|x| NIL) (#2=#:G36 NIL)
+          (|ro| #3=(|OutputForm|)) (|r| (|List| #3#)) (|c| (|OutputForm|))
+          (|cs| (|List| (|OutputForm|))))
          (SEQ (LETT |cs| NIL)
-              (SEQ (LETT |row| NIL) (LETT #3# |s|) G190
+              (SEQ (LETT |row| NIL) (LETT #1# |s|) G190
                    (COND
-                    ((OR (ATOM #3#) (PROGN (LETT |row| (CAR #3#)) NIL))
+                    ((OR (ATOM #1#) (PROGN (LETT |row| (CAR #1#)) NIL))
                      (GO G191)))
                    (SEQ (LETT |r| (LIST (SPADCALL "starts:" (QREFELT % 26))))
                         (SEQ (LETT |x| NIL) (LETT #2# |row|) G190
@@ -90,7 +90,7 @@
                              (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                         (LETT |c| (SPADCALL |r| (QREFELT % 30)))
                         (EXIT (LETT |cs| (SPADCALL |cs| |c| (QREFELT % 28)))))
-                   (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
+                   (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
               (EXIT (SPADCALL |cs| (QREFELT % 31)))))) 
 
 (DECLAIM (NOTINLINE |BitStreamFrame;|)) 
@@ -110,7 +110,7 @@
 
 (DEFUN |BitStreamFrame| ()
   (SPROG NIL
-         (PROG (#1=#:G37)
+         (PROG (#1=#:G38)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|BitStreamFrame|))

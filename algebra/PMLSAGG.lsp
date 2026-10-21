@@ -53,7 +53,7 @@
 (DECLAIM (NOTINLINE |PatternMatchListAggregate;|)) 
 
 (DEFUN |PatternMatchListAggregate;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -71,9 +71,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |PatternMatchListAggregate| (&REST #1=#:G19)
+(DEFUN |PatternMatchListAggregate| (&REST #1=#:G22)
   (SPROG NIL
-         (PROG (#2=#:G20)
+         (PROG (#2=#:G23)
            (RETURN
             (COND
              ((LETT #2#

@@ -3,7 +3,7 @@
         (SPADCALL (SPADCALL (QREFELT % 9)) (QREFELT % 11))) 
 
 (SDEFUN |SUMFS;sum;FSbF;2| ((|x| (F)) (|s| (|SegmentBinding| F)) (% (F)))
-        (SPROG ((|u| (|Union| F "failed")) (|k| (|Kernel| F)))
+        (SPROG ((|k| (|Kernel| F)) (|u| (|Union| F "failed")))
                (SEQ
                 (LETT |k|
                       (SPADCALL (SPADCALL |s| (QREFELT % 13)) (QREFELT % 11)))
@@ -35,16 +35,16 @@
                        ('T (QCDR |u|))))))) 
 
 (SDEFUN |SUMFS;notRF?| ((|f| (F)) (|k| (|Kernel| F)) (% (|Boolean|)))
-        (SPROG ((#1=#:G24 NIL) (#2=#:G25 NIL) (#3=#:G26 NIL) (|kk| NIL))
+        (SPROG ((|kk| NIL) (#1=#:G30 NIL) (#2=#:G29 NIL) (#3=#:G28 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (SEQ
                    (EXIT
                     (SEQ (LETT |kk| NIL)
-                         (LETT #3# (SPADCALL |f| (QREFELT % 30))) G190
+                         (LETT #1# (SPADCALL |f| (QREFELT % 30))) G190
                          (COND
-                          ((OR (ATOM #3#) (PROGN (LETT |kk| (CAR #3#)) NIL))
+                          ((OR (ATOM #1#) (PROGN (LETT |kk| (CAR #1#)) NIL))
                            (GO G191)))
                          (SEQ
                           (EXIT
@@ -56,16 +56,16 @@
                              (COND
                               ((QEQCAR (SPADCALL |kk| (QREFELT % 36)) 1)
                                (PROGN
-                                (LETT #1# (PROGN (LETT #2# 'T) (GO #4=#:G23)))
-                                (GO #5=#:G21))))))))
-                         (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
-                   #5# (EXIT #1#))
+                                (LETT #3# (PROGN (LETT #2# 'T) (GO #4=#:G27)))
+                                (GO #5=#:G25))))))))
+                         (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL)))
+                   #5# (EXIT #3#))
                   (EXIT NIL)))
                 #4# (EXIT #2#)))) 
 
 (SDEFUN |SUMFS;innersum|
         ((|x| (F)) (|k| (|Kernel| F)) (% (|Union| F "failed")))
-        (SPROG ((|u| (|Union| F "failed")) (|f| (F)) (|x1| (F)))
+        (SPROG ((|x1| (F)) (|f| (F)) (|u| (|Union| F "failed")))
                (SEQ
                 (COND
                  ((SPADCALL |x| (QREFELT % 37)) (CONS 0 (|spadConstant| % 38)))
@@ -107,7 +107,7 @@
 (DECLAIM (NOTINLINE |FunctionSpaceSum;|)) 
 
 (DEFUN |FunctionSpaceSum;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -123,9 +123,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |FunctionSpaceSum| (&REST #1=#:G34)
+(DEFUN |FunctionSpaceSum| (&REST #1=#:G42)
   (SPROG NIL
-         (PROG (#2=#:G35)
+         (PROG (#2=#:G43)
            (RETURN
             (COND
              ((LETT #2#
@@ -147,12 +147,12 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (|Symbol|)
               (0 . |new|) (|Kernel| 7) (4 . |kernel|) (|SegmentBinding| 7)
               (9 . |variable|) (|SegmentBinding| %) (14 . |summation|)
-              (20 . |One|) (24 . |One|) (|Segment| 7) (28 . |segment|)
+              (20 . |1|) (24 . |1|) (|Segment| 7) (28 . |segment|)
               (33 . |high|) (38 . +) (|Kernel| %) (44 . |eval|) (51 . |low|)
               (56 . -) |SUMFS;sum;FSbF;2| (62 . |summation|) |SUMFS;sum;FSF;3|
               (|List| 22) (68 . |tower|) (73 . |coerce|) (|Boolean|)
               (|List| 10) (78 . |member?|) (|Union| 8 '"failed")
-              (84 . |symbolIfCan|) (89 . |zero?|) (94 . |Zero|) (98 . /)
+              (84 . |symbolIfCan|) (89 . |zero?|) (94 . |0|) (98 . /)
               (|ElementaryFunctionStructurePackage| 6 7) (104 . |normalize|)
               (|Union| 7 '"failed") (|Mapping| 10)
               (|GosperSummationMethod| (|IndexedExponents| 10) 10 6

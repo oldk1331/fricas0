@@ -393,7 +393,7 @@
                        %))
                 (EXIT |s|)))) 
 
-(PUT '|TMFORM;sayExpr| '|SPADreplace| '|sayTexmacs|) 
+(MAKEPROP '|TMFORM;sayExpr| '|SPADreplace| '|sayTexmacs|) 
 
 (SDEFUN |TMFORM;sayExpr| ((|s| (|String|)) (% (|Void|))) (|sayTexmacs| |s|)) 
 
@@ -413,14 +413,14 @@
              (|TMFORM;sayExpr| |texmacs| %) (|TMFORM;sayExpr| ")" %)
              (EXIT (SPADCALL (QREFELT % 33))))) 
 
-(PUT '|TMFORM;ungroup| '|SPADreplace| '(XLAM (|str|) |str|)) 
+(MAKEPROP '|TMFORM;ungroup| '|SPADreplace| '(XLAM (|str|) |str|)) 
 
 (SDEFUN |TMFORM;ungroup| ((|str| (|String|)) (% (|String|))) |str|) 
 
 (SDEFUN |TMFORM;postcondition| ((|str| (|String|)) (% (|String|)))
         (SPROG
-         ((|uend| #1=(|UniversalSegment| (|Integer|))) (|ustart| #1#)
-          (|pos| (|Integer|)) (|plusminus| (|String|)) (|len| (|Integer|)))
+         ((|len| (|Integer|)) (|plusminus| (|String|)) (|pos| (|Integer|))
+          (|ustart| #1=(|UniversalSegment| (|Integer|))) (|uend| #1#))
          (SEQ (LETT |len| (QCSIZE |str|))
               (LETT |plusminus| "\"+\" (concat \"-\"")
               (LETT |pos| (SPADCALL |plusminus| |str| 1 (QREFELT % 36)))
@@ -453,7 +453,7 @@
         (SPADCALL (LIST "(concat " |str| ")") (QREFELT % 41))) 
 
 (SDEFUN |TMFORM;cork| ((|x| (|SingleInteger|)) (% (|String|)))
-        (SPROG ((|s| (|String|)) (|res| (|Union| (|String|) "failed")))
+        (SPROG ((|res| (|Union| (|String|) "failed")) (|s| (|String|)))
                (SEQ (LETT |res| (SPADCALL |x| (QREFELT % 10) (QREFELT % 44)))
                     (EXIT
                      (COND
@@ -468,18 +468,18 @@
                       (#1# (QCDR |res|))))))) 
 
 (SDEFUN |TMFORM;utf2cork| ((|str| (|String|)) (% (|String|)))
-        (SPROG ((#1=#:G105 NIL) (|i| NIL) (#2=#:G104 NIL))
+        (SPROG ((#1=#:G110 NIL) (|i| NIL) (#2=#:G111 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
-                  (LETT #2# NIL)
-                  (SEQ (LETT |i| NIL) (LETT #1# (UENTRIES |str|)) G190
+                  (LETT #1# NIL)
+                  (SEQ (LETT |i| NIL) (LETT #2# (UENTRIES |str|)) G190
                        (COND
-                        ((OR (ATOM #1#) (PROGN (LETT |i| (CAR #1#)) NIL))
+                        ((OR (ATOM #2#) (PROGN (LETT |i| (CAR #2#)) NIL))
                          (GO G191)))
-                       (SEQ (EXIT (LETT #2# (CONS (|TMFORM;cork| |i| %) #2#))))
-                       (LETT #1# (CDR #1#)) (GO G190) G191
-                       (EXIT (NREVERSE #2#))))
+                       (SEQ (EXIT (LETT #1# (CONS (|TMFORM;cork| |i| %) #1#))))
+                       (LETT #2# (CDR #2#)) (GO G190) G191
+                       (EXIT (NREVERSE #1#))))
                  (QREFELT % 41))))) 
 
 (SDEFUN |TMFORM;addBraces| ((|str| (|String|)) (% (|String|)))
@@ -494,7 +494,7 @@
 (SDEFUN |TMFORM;formatSpecial|
         ((|op| (|Symbol|)) (|args| (|List| (|OutputForm|)))
          (|prec| (|Integer|)) (% (|String|)))
-        (SPROG ((|tmp| (|String|)) (|base| (|String|)))
+        (SPROG ((|base| (|String|)) (|tmp| (|String|)))
                (SEQ
                 (COND ((EQUAL |op| '|theMap|) "(concat \"theMap(...)\")")
                       ((EQUAL |op| 'AGGLST)
@@ -731,9 +731,9 @@
         ((|op| (|Symbol|)) (|args| (|List| (|OutputForm|)))
          (|prec| (|Integer|)) (% (|String|)))
         (SPROG
-         ((|s| (|String|)) (|t1| #1=(|String|)) (|t2| (|String|)) (|body| #1#)
-          (|ops| (|String|)) (|n| (|Integer|)) (|opPrec| (|Integer|))
-          (|p| (|Integer|)))
+         ((|p| (|Integer|)) (|opPrec| (|Integer|)) (|n| (|Integer|))
+          (|ops| (|String|)) (|body| #1=(|String|)) (|t2| (|String|))
+          (|t1| #1#) (|s| (|String|)))
          (SEQ (LETT |p| (SPADCALL |op| (QREFELT % 21) (QREFELT % 56)))
               (EXIT
                (COND ((< |p| 1) (|error| "unknown plex op"))
@@ -820,9 +820,8 @@
 (SDEFUN |TMFORM;formatIntBody|
         ((|body| (|OutputForm|)) (|opPrec| (|Integer|)) (% (|String|)))
         (SPROG
-         ((#1=#:G166 NIL) (|bvarS| (|String|))
-          (|bvarL| #2=(|List| (|OutputForm|))) (|bvar| (|OutputForm|))
-          (|bodyL| #2#))
+         ((|bodyL| #1=(|List| (|OutputForm|))) (|bvar| (|OutputForm|))
+          (|bvarL| #1#) (|bvarS| (|String|)) (#2=#:G172 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -857,7 +856,7 @@
                                             (QREFELT % 54)))
                                      (EXIT
                                       (PROGN
-                                       (LETT #1#
+                                       (LETT #2#
                                              (SPADCALL
                                               (LIST "(concat "
                                                     (|TMFORM;formatExpr|
@@ -867,9 +866,9 @@
                                                     " \"*<mathd>" |bvarS|
                                                     "\")")
                                               (QREFELT % 41)))
-                                       (GO #3=#:G165))))))))))))))))))))
+                                       (GO #3=#:G171))))))))))))))))))))
             (EXIT (|TMFORM;formatExpr| |body| |opPrec| %))))
-          #3# (EXIT #1#)))) 
+          #3# (EXIT #2#)))) 
 
 (SDEFUN |TMFORM;formatMatrix| ((|args| (|List| (|OutputForm|))) (% (|String|)))
         (|TMFORM;group|
@@ -908,7 +907,7 @@
 (SDEFUN |TMFORM;formatUnary|
         ((|op| (|Symbol|)) (|arg| (|OutputForm|)) (|prec| (|Integer|))
          (% (|String|)))
-        (SPROG ((|s| (|String|)) (|opPrec| (|Integer|)) (|p| (|Integer|)))
+        (SPROG ((|p| (|Integer|)) (|opPrec| (|Integer|)) (|s| (|String|)))
                (SEQ (LETT |p| (SPADCALL |op| (QREFELT % 14) (QREFELT % 56)))
                     (EXIT
                      (COND ((< |p| 1) (|error| "unknown unary op"))
@@ -937,8 +936,8 @@
         ((|op| (|Symbol|)) (|args| (|List| (|OutputForm|)))
          (|prec| (|Integer|)) (% (|String|)))
         (SPROG
-         ((|s| (|String|)) (|ops| (|String|)) (|s2| #1=(|String|)) (|s1| #1#)
-          (|opPrec| (|Integer|)) (|p| (|Integer|)))
+         ((|p| (|Integer|)) (|opPrec| (|Integer|)) (|s1| #1=(|String|))
+          (|s2| #1#) (|ops| (|String|)) (|s| (|String|)))
          (SEQ (LETT |p| (SPADCALL |op| (QREFELT % 16) (QREFELT % 56)))
               (EXIT
                (COND ((< |p| 1) (|error| "unknown binary op"))
@@ -1017,8 +1016,8 @@
         ((|op| (|Symbol|)) (|sep| (|String|)) (|opprec| (|Integer|))
          (|args| (|List| (|OutputForm|))) (|prec| (|Integer|)) (% (|String|)))
         (SPROG
-         ((|s| (|String|)) (|l| (|List| (|String|))) (#1=#:G198 NIL) (|a| NIL)
-          (|opPrec| (|Integer|)) (|ops| (|String|)) (|p| (|Integer|)))
+         ((|p| (|Integer|)) (|ops| (|String|)) (|opPrec| (|Integer|)) (|a| NIL)
+          (#1=#:G204 NIL) (|l| (|List| (|String|))) (|s| (|String|)))
          (SEQ
           (COND ((NULL |args|) "")
                 (#2='T
@@ -1142,11 +1141,10 @@
 (SDEFUN |TMFORM;formatExpr|
         ((|expr| (|OutputForm|)) (|prec| (|Integer|)) (% (|String|)))
         (SPROG
-         ((|op| #1=(|Symbol|)) (|nargs| (|Integer|))
-          (|args| (|List| (|OutputForm|))) (|opf| (|OutputForm|))
-          (|i| (|Integer|)) (|len| (|Integer|)) (|str| (|String|))
-          (#2=#:G237 NIL) (|es| #1#) (|nstr| (|String|))
-          (|intSplitLen| (|Integer|)))
+         ((|intSplitLen| (|Integer|)) (|nstr| (|String|)) (|es| #1=(|Symbol|))
+          (#2=#:G243 NIL) (|str| (|String|)) (|len| (|Integer|))
+          (|i| (|Integer|)) (|opf| (|OutputForm|))
+          (|args| (|List| (|OutputForm|))) (|nargs| (|Integer|)) (|op| #1#))
          (SEQ
           (EXIT
            (SEQ (LETT |intSplitLen| 20)
@@ -1223,7 +1221,7 @@
                              (EXIT
                               (COND
                                ((EQUAL |es| '|%pi|)
-                                (PROGN (LETT #2# "<mathpi>") (GO #4=#:G236)))
+                                (PROGN (LETT #2# "<mathpi>") (GO #4=#:G242)))
                                ((EQUAL |es| '|%e|)
                                 (PROGN (LETT #2# "<mathe>") (GO #4#)))
                                ((EQUAL |es| '|%i|)
@@ -1391,7 +1389,7 @@
 
 (DEFUN |TexmacsFormat| ()
   (SPROG NIL
-         (PROG (#1=#:G239)
+         (PROG (#1=#:G245)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|TexmacsFormat|))
@@ -1410,10 +1408,10 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL
               (|Record| (|:| |key| 43) (|:| |entry| 29)) (|List| 6)
-              (|HashTable| 43 29 '"EQ") (0 . |construct|) '|Cork| '|blank|
-              '|maxPrec| '|minPrec| '|unaryOps| '|unaryPrecs| '|binaryOps|
-              '|binaryPrecs| '|naryOps| '|naryPrecs| '|naryNGOps| '|plexOps|
-              '|plexPrecs| '|specialOps| '|specialStrings|
+              (|HashTable| 43 29 (NRTEVAL "EQ")) (0 . |construct|) '|Cork|
+              '|blank| '|maxPrec| '|minPrec| '|unaryOps| '|unaryPrecs|
+              '|binaryOps| '|binaryPrecs| '|naryOps| '|naryPrecs| '|naryNGOps|
+              '|plexOps| '|plexPrecs| '|specialOps| '|specialStrings|
               '|specialStringsInMML| (|OutputForm|) (|OutputFormTools|)
               (5 . |precondition|) (|String|) |TMFORM;coerce;OfS;2|
               |TMFORM;coerceL;OfS;4| (|Void|) (10 . |void|)

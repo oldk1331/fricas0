@@ -1,21 +1,21 @@
 
 (SDEFUN |LOOP;loop;L%;1| ((|lis| (|List| (|NonNegativeInteger|))) (% (%)))
         (SPROG
-         ((|li| #1=(|List| (|NonNegativeInteger|)))
-          (|lx| #2=(|List| (|NonNegativeInteger|)))
-          (|minValue| (|NonNegativeInteger|)) (|l2| #2#) (|l1| #1#)
-          (#3=#:G17 NIL) (|x| NIL) (#4=#:G16 NIL))
+         ((#1=#:G16 NIL) (|x| NIL) (#2=#:G17 NIL)
+          (|l1| #3=(|List| (|NonNegativeInteger|)))
+          (|l2| #4=(|List| (|NonNegativeInteger|)))
+          (|minValue| (|NonNegativeInteger|)) (|lx| #4#) (|li| #3#))
          (SEQ
           (LETT |li|
                 (PROGN
-                 (LETT #4# NIL)
-                 (SEQ (LETT |x| NIL) (LETT #3# |lis|) G190
+                 (LETT #1# NIL)
+                 (SEQ (LETT |x| NIL) (LETT #2# |lis|) G190
                       (COND
-                       ((OR (ATOM #3#) (PROGN (LETT |x| (CAR #3#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT |x| (CAR #2#)) NIL))
                         (GO G191)))
-                      (SEQ (EXIT (LETT #4# (CONS |x| #4#))))
-                      (LETT #3# (CDR #3#)) (GO G190) G191
-                      (EXIT (NREVERSE #4#)))))
+                      (SEQ (EXIT (LETT #1# (CONS |x| #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#)))))
           (EXIT
            (COND ((NULL |li|) (|error| "cannot form empty loop"))
                  ('T
@@ -38,35 +38,35 @@
 (SDEFUN |LOOP;entries;%L;2| ((|lp| (%)) (% (|List| (|NonNegativeInteger|))))
         (SPADCALL |lp| (QREFELT % 11))) 
 
-(PUT '|LOOP;hash| '|SPADreplace| '(XLAM (|s|) 0)) 
+(MAKEPROP '|LOOP;hash| '|SPADreplace| '(XLAM (|s|) 0)) 
 
 (SDEFUN |LOOP;hash| ((|s| (%)) (% (|SingleInteger|))) 0) 
 
 (SDEFUN |LOOP;=;2%B;4| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
-        (SPROG ((#1=#:G26 NIL) (#2=#:G27 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G27 NIL) (#2=#:G26 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((SPADCALL (SPADCALL |x| (QREFELT % 14))
                               (SPADCALL |y| (QREFELT % 14)) (QREFELT % 16))
-                    (PROGN (LETT #1# NIL) (GO #3=#:G25))))
-                  (SEQ (LETT |i| 1) (LETT #2# (SPADCALL |x| (QREFELT % 14)))
-                       G190 (COND ((|greater_SI| |i| #2#) (GO G191)))
+                    (PROGN (LETT #2# NIL) (GO #3=#:G25))))
+                  (SEQ (LETT |i| 1) (LETT #1# (SPADCALL |x| (QREFELT % 14)))
+                       G190 (COND ((|greater_SI| |i| #1#) (GO G191)))
                        (SEQ
                         (EXIT
                          (COND
                           ((SPADCALL (QAREF1 |x| (- |i| 1))
                                      (QAREF1 |y| (- |i| 1)) (QREFELT % 16))
-                           (PROGN (LETT #1# NIL) (GO #3#))))))
+                           (PROGN (LETT #2# NIL) (GO #3#))))))
                        (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                   (EXIT 'T)))
-                #3# (EXIT #1#)))) 
+                #3# (EXIT #2#)))) 
 
 (SDEFUN |LOOP;coerce;%Of;5| ((|lp| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|res| (|OutputForm|)) (|x| (|NonNegativeInteger|)) (#1=#:G33 NIL)
-          (|i| NIL))
+         ((|i| NIL) (#1=#:G33 NIL) (|x| (|NonNegativeInteger|))
+          (|res| (|OutputForm|)))
          (SEQ (LETT |res| (SPADCALL (QREFELT % 19)))
               (SEQ (LETT |i| 1) (LETT #1# (SPADCALL |lp| (QREFELT % 14))) G190
                    (COND ((|greater_SI| |i| #1#) (GO G191)))

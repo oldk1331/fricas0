@@ -1,6 +1,6 @@
 
 (SDEFUN |COMM;=;2%B;1| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
-        (SPROG ((|yy| (P)) (|xx| (P)))
+        (SPROG ((|xx| (P)) (|yy| (P)))
                (SEQ
                 (COND
                  ((QEQCAR |x| 0)

@@ -81,7 +81,7 @@
          (|frep| (|Mapping| (|Void|) (|String|) (|List| (|OutputForm|))))
          (% (|Void|)))
         (SPROG
-         ((|res| (|List| (|OutputForm|))) (|relative| (R)) (|absolute| (R)))
+         ((|absolute| (R)) (|relative| (R)) (|res| (|List| (|OutputForm|))))
          (SEQ
           (LETT |absolute|
                 (SPADCALL (SPADCALL |ex1| |ex2| (QREFELT % 34))
@@ -157,7 +157,7 @@
          (|frep| (|Mapping| (|Void|) (|String|) (|List| (|OutputForm|))))
          (% (|Void|)))
         (SPROG
-         ((|res| (|List| (|OutputForm|))) (|relative| (R)) (|absolute| (R)))
+         ((|absolute| (R)) (|relative| (R)) (|res| (|List| (|OutputForm|))))
          (SEQ
           (LETT |absolute|
                 (SPADCALL (SPADCALL |ex1| |ex2| (QREFELT % 46))
@@ -287,7 +287,7 @@
 (DECLAIM (NOTINLINE |UnittestAux;|)) 
 
 (DEFUN |UnittestAux;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|UnittestAux| DV$1))
@@ -390,11 +390,11 @@
               |TESTAUX;xftestEqualsAux;S2RV;10| (|Integer|) (58 . |coerce|)
               (63 . ^) '|epsilonRelative| '|epsilonAbsolute|
               (69 . |testRelativePrecision|) (74 . |testAbsolutePrecision|)
-              (79 . -) (85 . |norm|) (90 . |zero?|) (95 . |Zero|) (99 . /)
-              (105 . |One|) (109 . >) (115 . |hconcat|) (121 . |concat|)
+              (79 . -) (85 . |norm|) (90 . |zero?|) (95 . |0|) (99 . /)
+              (105 . |1|) (109 . >) (115 . |hconcat|) (121 . |concat|)
               (127 . |testRealEqualsAux|) (134 . |xftestRealEqualsAux|)
               (|Complex| 6) (141 . -) (147 . |norm|) (152 . |zero?|) (157 . /)
-              (163 . |One|) (167 . |coerce|) (172 . |testComplexEqualsAux|)
+              (163 . |1|) (167 . |coerce|) (172 . |testComplexEqualsAux|)
               (179 . |xftestComplexEqualsAux|)
               |TESTAUX;testNotEqualsAux;S2RV;19|
               |TESTAUX;xftestNotEqualsAux;S2RV;20| (186 . |coerce|)

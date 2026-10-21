@@ -2,18 +2,18 @@
 (SDEFUN |SIMPCF;sphereSolid;NniFsc;1|
         ((|dim| (|NonNegativeInteger|)) (% (|FiniteSimplicialComplex| VS)))
         (SPROG
-         ((|vs1| (|List| VS)) (|v1| (|List| (|List| (|NonNegativeInteger|))))
-          (#1=#:G5 NIL) (|n| NIL) (#2=#:G4 NIL))
+         ((#1=#:G4 NIL) (|n| NIL) (#2=#:G5 NIL)
+          (|v1| (|List| (|List| (|NonNegativeInteger|)))) (|vs1| (|List| VS)))
          (SEQ
           (LETT |v1|
                 (LIST
                  (PROGN
-                  (LETT #2# NIL)
-                  (SEQ (LETT |n| 1) (LETT #1# (+ |dim| 1)) G190
-                       (COND ((|greater_SI| |n| #1#) (GO G191)))
-                       (SEQ (EXIT (LETT #2# (CONS |n| #2#))))
+                  (LETT #1# NIL)
+                  (SEQ (LETT |n| 1) (LETT #2# (+ |dim| 1)) G190
+                       (COND ((|greater_SI| |n| #2#) (GO G191)))
+                       (SEQ (EXIT (LETT #1# (CONS |n| #1#))))
                        (LETT |n| (|inc_SI| |n|)) (GO G190) G191
-                       (EXIT (NREVERSE #2#))))))
+                       (EXIT (NREVERSE #1#))))))
           (LETT |vs1| NIL) (EXIT (SPADCALL |vs1| |v1| (QREFELT % 10)))))) 
 
 (SDEFUN |SIMPCF;sphereSurface;NniFsc;2|
@@ -24,13 +24,13 @@
 
 (SDEFUN |SIMPCF;line;Fsc;3| ((% (|FiniteSimplicialComplex| VS)))
         (SPROG
-         ((|vs1| (|List| VS)) (|v1| (|List| (|List| (|NonNegativeInteger|)))))
+         ((|v1| (|List| (|List| (|NonNegativeInteger|)))) (|vs1| (|List| VS)))
          (SEQ (LETT |v1| (LIST (LIST 1 2))) (LETT |vs1| NIL)
               (EXIT (SPADCALL |vs1| |v1| (QREFELT % 10)))))) 
 
 (SDEFUN |SIMPCF;torusSurface;Fsc;4| ((% (|FiniteSimplicialComplex| VS)))
         (SPROG
-         ((|vs1| (|List| VS)) (|v1| (|List| (|List| (|NonNegativeInteger|)))))
+         ((|v1| (|List| (|List| (|NonNegativeInteger|)))) (|vs1| (|List| VS)))
          (SEQ
           (LETT |v1|
                 (LIST (LIST 1 2 3) (LIST 2 3 5) (LIST 2 4 5) (LIST 2 4 7)
@@ -41,7 +41,7 @@
 
 (SDEFUN |SIMPCF;band;Fsc;5| ((% (|FiniteSimplicialComplex| VS)))
         (SPROG
-         ((|vs1| (|List| VS)) (|v1| (|List| (|List| (|NonNegativeInteger|)))))
+         ((|v1| (|List| (|List| (|NonNegativeInteger|)))) (|vs1| (|List| VS)))
          (SEQ
           (LETT |v1|
                 (LIST (LIST 1 2 3) (LIST 1 2 6) (LIST 1 5 6) (LIST 2 3 4)
@@ -50,7 +50,7 @@
 
 (SDEFUN |SIMPCF;moebiusBand;Fsc;6| ((% (|FiniteSimplicialComplex| VS)))
         (SPROG
-         ((|vs1| (|List| VS)) (|v1| (|List| (|List| (|NonNegativeInteger|)))))
+         ((|v1| (|List| (|List| (|NonNegativeInteger|)))) (|vs1| (|List| VS)))
          (SEQ
           (LETT |v1|
                 (LIST (LIST 1 2 3) (LIST 2 3 4) (LIST 3 4 5) (LIST 1 4 5)
@@ -60,7 +60,7 @@
 (SDEFUN |SIMPCF;projectiveSpace;IFsc;7|
         ((|n| (|Integer|)) (% (|FiniteSimplicialComplex| VS)))
         (SPROG
-         ((|vs1| (|List| VS)) (|v1| (|List| (|List| (|NonNegativeInteger|)))))
+         ((|v1| (|List| (|List| (|NonNegativeInteger|)))) (|vs1| (|List| VS)))
          (SEQ
           (LETT |v1|
                 (LIST (LIST 1 2 3) (LIST 1 3 4) (LIST 1 2 6) (LIST 1 5 6)
@@ -70,7 +70,7 @@
 
 (SDEFUN |SIMPCF;kleinBottle;Fsc;8| ((% (|FiniteSimplicialComplex| VS)))
         (SPROG
-         ((|vs1| (|List| VS)) (|v1| (|List| (|List| (|NonNegativeInteger|)))))
+         ((|v1| (|List| (|List| (|NonNegativeInteger|)))) (|vs1| (|List| VS)))
          (SEQ
           (LETT |v1|
                 (LIST (LIST 3 4 8) (LIST 2 3 4) (LIST 2 4 6) (LIST 2 6 8)
@@ -81,7 +81,7 @@
 
 (SDEFUN |SIMPCF;dunceHat;Fsc;9| ((% (|FiniteSimplicialComplex| VS)))
         (SPROG
-         ((|vs1| (|List| VS)) (|v1| (|List| (|List| (|NonNegativeInteger|)))))
+         ((|v1| (|List| (|List| (|NonNegativeInteger|)))) (|vs1| (|List| VS)))
          (SEQ
           (LETT |v1|
                 (LIST (LIST 1 2 8) (LIST 2 3 8) (LIST 3 7 8) (LIST 1 3 7)
@@ -94,7 +94,7 @@
 (DECLAIM (NOTINLINE |SimplicialComplexFactory;|)) 
 
 (DEFUN |SimplicialComplexFactory;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|SimplicialComplexFactory| DV$1))

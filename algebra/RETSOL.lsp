@@ -11,17 +11,17 @@
 (SDEFUN |RETSOL;LEQQ2F|
         ((|l| (|List| (|Equation| (|Fraction| (|Polynomial| Q)))))
          (% (|List| (|Equation| (|Fraction| (|Polynomial| R))))))
-        (SPROG ((#1=#:G6 NIL) (|eq| NIL) (#2=#:G5 NIL))
+        (SPROG ((#1=#:G6 NIL) (|eq| NIL) (#2=#:G7 NIL))
                (SEQ
                 (PROGN
-                 (LETT #2# NIL)
-                 (SEQ (LETT |eq| NIL) (LETT #1# |l|) G190
+                 (LETT #1# NIL)
+                 (SEQ (LETT |eq| NIL) (LETT #2# |l|) G190
                       (COND
-                       ((OR (ATOM #1#) (PROGN (LETT |eq| (CAR #1#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT |eq| (CAR #2#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2#
+                        (LETT #1#
                               (CONS
                                (SPADCALL
                                 (|RETSOL;FQ2F| (SPADCALL |eq| (QREFELT % 20))
@@ -29,82 +29,82 @@
                                 (|RETSOL;FQ2F| (SPADCALL |eq| (QREFELT % 21))
                                  %)
                                 (QREFELT % 23))
-                               #2#))))
-                      (LETT #1# (CDR #1#)) (GO G190) G191
-                      (EXIT (NREVERSE #2#))))))) 
+                               #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#))))))) 
 
 (SDEFUN |RETSOL;solveRetract;LLL;4|
         ((|lp| (|List| (|Polynomial| R))) (|lv| (|List| (|Symbol|)))
          (% (|List| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))))
         (SPROG
-         ((#1=#:G19 NIL) (|l| NIL) (#2=#:G18 NIL) (#3=#:G17 NIL) (|p| NIL)
-          (#4=#:G16 NIL)
-          (|u| (|Union| (|List| (|Fraction| (|Polynomial| Q))) "failed")))
+         ((|u| (|Union| (|List| (|Fraction| (|Polynomial| Q))) "failed"))
+          (#1=#:G17 NIL) (|p| NIL) (#2=#:G18 NIL) (#3=#:G19 NIL) (|l| NIL)
+          (#4=#:G20 NIL))
          (SEQ (LETT |u| (|RETSOL;QIfCan| |lp| %))
               (EXIT
                (COND
                 ((QEQCAR |u| 1)
                  (SPADCALL
                   (PROGN
-                   (LETT #4# NIL)
-                   (SEQ (LETT |p| NIL) (LETT #3# |lp|) G190
+                   (LETT #1# NIL)
+                   (SEQ (LETT |p| NIL) (LETT #2# |lp|) G190
                         (COND
-                         ((OR (ATOM #3#) (PROGN (LETT |p| (CAR #3#)) NIL))
+                         ((OR (ATOM #2#) (PROGN (LETT |p| (CAR #2#)) NIL))
                           (GO G191)))
                         (SEQ
                          (EXIT
-                          (LETT #4# (CONS (SPADCALL |p| (QREFELT % 24)) #4#))))
-                        (LETT #3# (CDR #3#)) (GO G190) G191
-                        (EXIT (NREVERSE #4#))))
+                          (LETT #1# (CONS (SPADCALL |p| (QREFELT % 24)) #1#))))
+                        (LETT #2# (CDR #2#)) (GO G190) G191
+                        (EXIT (NREVERSE #1#))))
                   |lv| (QREFELT % 29)))
                 ('T
                  (PROGN
-                  (LETT #2# NIL)
+                  (LETT #3# NIL)
                   (SEQ (LETT |l| NIL)
-                       (LETT #1# (SPADCALL (QCDR |u|) |lv| (QREFELT % 33)))
+                       (LETT #4# (SPADCALL (QCDR |u|) |lv| (QREFELT % 33)))
                        G190
                        (COND
-                        ((OR (ATOM #1#) (PROGN (LETT |l| (CAR #1#)) NIL))
+                        ((OR (ATOM #4#) (PROGN (LETT |l| (CAR #4#)) NIL))
                          (GO G191)))
                        (SEQ
-                        (EXIT (LETT #2# (CONS (|RETSOL;LEQQ2F| |l| %) #2#))))
-                       (LETT #1# (CDR #1#)) (GO G190) G191
-                       (EXIT (NREVERSE #2#)))))))))) 
+                        (EXIT (LETT #3# (CONS (|RETSOL;LEQQ2F| |l| %) #3#))))
+                       (LETT #4# (CDR #4#)) (GO G190) G191
+                       (EXIT (NREVERSE #3#)))))))))) 
 
 (SDEFUN |RETSOL;QIfCan|
         ((|l| (|List| (|Polynomial| R)))
          (% (|Union| (|List| (|Fraction| (|Polynomial| Q))) "failed")))
         (SPROG
-         ((|ans| (|List| (|Fraction| (|Polynomial| Q)))) (#1=#:G31 NIL)
+         ((|p| NIL) (#1=#:G33 NIL)
           (|u| (|Union| (|Fraction| (|Polynomial| Q)) "failed")) (#2=#:G32 NIL)
-          (|p| NIL))
+          (|ans| (|List| (|Fraction| (|Polynomial| Q)))))
          (SEQ
           (EXIT
            (SEQ (LETT |ans| NIL)
-                (SEQ (LETT |p| NIL) (LETT #2# |l|) G190
+                (SEQ (LETT |p| NIL) (LETT #1# |l|) G190
                      (COND
-                      ((OR (ATOM #2#) (PROGN (LETT |p| (CAR #2#)) NIL))
+                      ((OR (ATOM #1#) (PROGN (LETT |p| (CAR #1#)) NIL))
                        (GO G191)))
                      (SEQ (LETT |u| (|RETSOL;PQIfCan| |p| %))
                           (EXIT
                            (COND
                             ((QEQCAR |u| 1)
                              (PROGN
-                              (LETT #1# (CONS 1 "failed"))
-                              (GO #3=#:G30)))
+                              (LETT #2# (CONS 1 "failed"))
+                              (GO #3=#:G31)))
                             ('T (LETT |ans| (CONS (QCDR |u|) |ans|))))))
-                     (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                     (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
                 (EXIT (CONS 0 |ans|))))
-          #3# (EXIT #1#)))) 
+          #3# (EXIT #2#)))) 
 
 (SDEFUN |RETSOL;PQIfCan|
         ((|p| (|Polynomial| R))
          (% (|Union| (|Fraction| (|Polynomial| Q)) #1="failed")))
         (SPROG
-         ((|up| (|SparseUnivariatePolynomial| (|Polynomial| R)))
-          (|ans| (|Fraction| (|Polynomial| Q))) (#2=#:G50 NIL)
-          (|v| (|Union| (|Fraction| (|Polynomial| Q)) #1#)) (|s| (|Symbol|))
-          (|r| (|Union| Q "failed")) (|u| (|Union| (|Symbol|) "failed")))
+         ((|u| (|Union| (|Symbol|) "failed")) (|r| (|Union| Q "failed"))
+          (|s| (|Symbol|)) (|v| (|Union| (|Fraction| (|Polynomial| Q)) #1#))
+          (#2=#:G57 NIL) (|ans| (|Fraction| (|Polynomial| Q)))
+          (|up| (|SparseUnivariatePolynomial| (|Polynomial| R))))
          (SEQ
           (EXIT
            (SEQ (LETT |u| (SPADCALL |p| (QREFELT % 37)))
@@ -142,7 +142,7 @@
                             ((QEQCAR |v| 1)
                              (PROGN
                               (LETT #2# (CONS 1 "failed"))
-                              (GO #4=#:G49)))
+                              (GO #4=#:G56)))
                             ('T
                              (SEQ
                               (LETT |ans|
@@ -165,7 +165,7 @@
 (DECLAIM (NOTINLINE |RetractSolvePackage;|)) 
 
 (DEFUN |RetractSolvePackage;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -181,9 +181,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |RetractSolvePackage| (&REST #1=#:G51)
+(DEFUN |RetractSolvePackage| (&REST #1=#:G58)
   (SPROG NIL
-         (PROG (#2=#:G52)
+         (PROG (#2=#:G59)
            (RETURN
             (COND
              ((LETT #2#
@@ -214,12 +214,11 @@
               (|Union| 44 '"failed") (60 . |mainVariable|) (65 . |ground|)
               (|Union| 6 '"failed") (70 . |retractIfCan|) (75 . |coerce|)
               (80 . |coerce|) (|SparseUnivariatePolynomial| %) (|Symbol|)
-              (85 . |univariate|) (91 . |Zero|) (95 . |Zero|) (99 . |Zero|)
-              (|SparseUnivariatePolynomial| 9) (103 . |Zero|) (|Boolean|)
-              (107 . ~=) (113 . |leadingCoefficient|) (118 . |One|)
-              (122 . |One|) (|NonNegativeInteger|) (126 . |degree|)
-              (131 . |One|) (135 . |monomial|) (142 . *) (148 . +)
-              (154 . |reductum|))
+              (85 . |univariate|) (91 . |0|) (95 . |0|) (99 . |0|)
+              (|SparseUnivariatePolynomial| 9) (103 . |0|) (|Boolean|)
+              (107 . ~=) (113 . |leadingCoefficient|) (118 . |1|) (122 . |1|)
+              (|NonNegativeInteger|) (126 . |degree|) (131 . |1|)
+              (135 . |monomial|) (142 . *) (148 . +) (154 . |reductum|))
            '#(|solveRetract| 159) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

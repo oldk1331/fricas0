@@ -1,15 +1,15 @@
 
 (SDEFUN |FCOMP;sin;E%;1| ((|e| (E)) (% (%))) (CONS 'T |e|)) 
 
-(PUT '|FCOMP;cos;E%;2| '|SPADreplace| '(XLAM (|e|) (CONS NIL |e|))) 
+(MAKEPROP '|FCOMP;cos;E%;2| '|SPADreplace| '(XLAM (|e|) (CONS NIL |e|))) 
 
 (SDEFUN |FCOMP;cos;E%;2| ((|e| (E)) (% (%))) (CONS NIL |e|)) 
 
-(PUT '|FCOMP;sin?;%B;3| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|FCOMP;sin?;%B;3| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |FCOMP;sin?;%B;3| ((|x| (%)) (% (|Boolean|))) (QCAR |x|)) 
 
-(PUT '|FCOMP;argument;%E;4| '|SPADreplace| 'QCDR) 
+(MAKEPROP '|FCOMP;argument;%E;4| '|SPADreplace| 'QCDR) 
 
 (SDEFUN |FCOMP;argument;%E;4| ((|x| (%)) (% (E))) (QCDR |x|)) 
 
@@ -35,17 +35,18 @@
 (DECLAIM (NOTINLINE |FourierComponent;|)) 
 
 (DEFUN |FourierComponent;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|FourierComponent| DV$1))
-          (LETT % (GETREFV 24))
+          (LETT % (GETREFV 25))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|FourierComponent| (LIST DV$1)
                       (CONS 1 %))
           (|stuffDomainSlots| %)
           (QSETREFV % 6 |#1|)
+          (AND (|HasCategory| % '(|SetWithZero|)) (|augmentPredVector| % 1))
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 7
                     (|Record| (|:| |SinIfTrue| (|Boolean|)) (|:| |arg| |#1|)))
@@ -75,24 +76,26 @@
               |FCOMP;argument;%E;4| (|String|) (|OutputForm|) (0 . |message|)
               (5 . |coerce|) (10 . |bracket|) (15 . |hconcat|)
               |FCOMP;coerce;%Of;5| (21 . =) |FCOMP;=;2%B;6| (27 . <)
-              |FCOMP;<;2%B;7|)
-           '#(~= 33 |smaller?| 39 |sin?| 45 |sin| 50 |min| 55 |max| 61 |latex|
-              67 |cos| 72 |coerce| 77 |argument| 82 >= 87 > 93 = 99 <= 105 <
-              111)
+              |FCOMP;<;2%B;7| (|Integer|))
+           '#(~= 33 |smaller?| 39 |sin?| 45 |sin| 50 |sign| 55 |positive?| 60
+              |negative?| 65 |min| 70 |max| 76 |latex| 82 |cos| 87 |coerce| 92
+              |argument| 97 >= 102 > 108 = 114 <= 120 < 126)
            'NIL
-           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0))
+           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0))
                  (CONS
-                  '#(|OrderedSet&| NIL |SetCategory&| NIL |PartialOrder&|
+                  '#(|OrderedSet&| NIL NIL |SetCategory&| NIL |PartialOrder&|
                      |BasicType&|)
                   (CONS
-                   '#((|OrderedSet|) (|Comparable|) (|SetCategory|)
+                   '#((|OrderedSet|) (|Comparable|)
+                      (|ComparableRepresentation|) (|SetCategory|)
                       (|CoercibleTo| 14) (|PartialOrder|) (|BasicType|))
-                   (|makeByteWordVec2| 23
+                   (|makeByteWordVec2| 24
                                        '(1 14 0 13 15 1 6 14 0 16 1 14 0 0 17 2
                                          14 0 0 0 18 2 6 10 0 0 20 2 6 10 0 0
                                          22 2 0 10 0 0 1 2 0 10 0 0 1 1 0 10 0
-                                         11 1 0 0 6 8 2 0 0 0 0 1 2 0 0 0 0 1 1
-                                         0 13 0 1 1 0 0 6 9 1 0 14 0 19 1 0 6 0
-                                         12 2 0 10 0 0 1 2 0 10 0 0 1 2 0 10 0
-                                         0 21 2 0 10 0 0 1 2 0 10 0 0 23)))))
+                                         11 1 0 0 6 8 1 1 24 0 1 1 1 10 0 1 1 1
+                                         10 0 1 2 0 0 0 0 1 2 0 0 0 0 1 1 0 13
+                                         0 1 1 0 0 6 9 1 0 14 0 19 1 0 6 0 12 2
+                                         0 10 0 0 1 2 0 10 0 0 1 2 0 10 0 0 21
+                                         2 0 10 0 0 1 2 0 10 0 0 23)))))
            '|lookupComplete|)) 

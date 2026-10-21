@@ -33,16 +33,16 @@
          (#1# NIL))) 
 
 (SDEFUN |CTRIGMNP;localexplogs| ((|f| (F)) (|g| (F)) (% (F)))
-        (SPROG ((#1=#:G25 NIL) (|k| NIL) (#2=#:G24 NIL))
+        (SPROG ((#1=#:G27 NIL) (|k| NIL) (#2=#:G28 NIL))
                (SEQ
                 (SPADCALL |g|
                           (PROGN
-                           (LETT #2# NIL)
+                           (LETT #1# NIL)
                            (SEQ (LETT |k| NIL)
-                                (LETT #1# (SPADCALL |f| (QREFELT % 43))) G190
+                                (LETT #2# (SPADCALL |f| (QREFELT % 43))) G190
                                 (COND
-                                 ((OR (ATOM #1#)
-                                      (PROGN (LETT |k| (CAR #1#)) NIL))
+                                 ((OR (ATOM #2#)
+                                      (PROGN (LETT |k| (CAR #2#)) NIL))
                                   (GO G191)))
                                 (SEQ
                                  (EXIT
@@ -50,9 +50,9 @@
                                    ((COND
                                      ((SPADCALL |k| '|tan| (QREFELT % 45)) 'T)
                                      ('T (SPADCALL |k| '|cot| (QREFELT % 45))))
-                                    (LETT #2# (CONS |k| #2#))))))
-                                (LETT #1# (CDR #1#)) (GO G190) G191
-                                (EXIT (NREVERSE #2#))))
+                                    (LETT #1# (CONS |k| #1#))))))
+                                (LETT #2# (CDR #2#)) (GO G190) G191
+                                (EXIT (NREVERSE #1#))))
                           (QREFELT % 46))))) 
 
 (SDEFUN |CTRIGMNP;complexElementary;2F;9| ((|f| (F)) (% (F)))
@@ -75,22 +75,22 @@
 
 (SDEFUN |CTRIGMNP;complexElementary;FSF;10|
         ((|f| (F)) (|x| (|Symbol|)) (% (F)))
-        (SPROG ((#1=#:G35 NIL) (|g| (F)) (|k| NIL) (#2=#:G34 NIL))
+        (SPROG ((#1=#:G38 NIL) (|k| NIL) (|g| (F)) (#2=#:G39 NIL))
                (SEQ
                 (COND
                  ((SPADCALL
                    (CONS #'|CTRIGMNP;complexElementary;FSF;10!0|
                          (VECTOR (QREFELT % 8) %))
                    (PROGN
-                    (LETT #2# NIL)
+                    (LETT #1# NIL)
                     (SEQ (LETT |k| NIL)
-                         (LETT #1#
+                         (LETT #2#
                                (SPADCALL
                                 (LETT |g| (SPADCALL |f| |x| (QREFELT % 57)))
                                 (QREFELT % 43)))
                          G190
                          (COND
-                          ((OR (ATOM #1#) (PROGN (LETT |k| (CAR #1#)) NIL))
+                          ((OR (ATOM #2#) (PROGN (LETT |k| (CAR #2#)) NIL))
                            (GO G191)))
                          (SEQ
                           (EXIT
@@ -99,9 +99,9 @@
                                        (SPADCALL (SPADCALL |k| (QREFELT % 59))
                                                  (QREFELT % 61))
                                        (QREFELT % 62))
-                             (LETT #2# (CONS |k| #2#))))))
-                         (LETT #1# (CDR #1#)) (GO G190) G191
-                         (EXIT (NREVERSE #2#))))
+                             (LETT #1# (CONS |k| #1#))))))
+                         (LETT #2# (CDR #2#)) (GO G190) G191
+                         (EXIT (NREVERSE #1#))))
                    (QREFELT % 63))
                   (|CTRIGMNP;localexplogs| |f| |g| %))
                  ('T |g|))))) 
@@ -115,22 +115,22 @@
             (SPADCALL (SPADCALL |y| (QREFELT % 56)) RTRIG (QREFELT % 48)))))) 
 
 (SDEFUN |CTRIGMNP;complexNormalize;FSF;11| ((|f| (F)) (|x| (|Symbol|)) (% (F)))
-        (SPROG ((#1=#:G43 NIL) (|g| (F)) (|k| NIL) (#2=#:G42 NIL))
+        (SPROG ((#1=#:G47 NIL) (|k| NIL) (|g| (F)) (#2=#:G48 NIL))
                (SEQ
                 (COND
                  ((SPADCALL
                    (CONS #'|CTRIGMNP;complexNormalize;FSF;11!0|
                          (VECTOR (QREFELT % 8) %))
                    (PROGN
-                    (LETT #2# NIL)
+                    (LETT #1# NIL)
                     (SEQ (LETT |k| NIL)
-                         (LETT #1#
+                         (LETT #2#
                                (SPADCALL
                                 (LETT |g| (SPADCALL |f| |x| (QREFELT % 57)))
                                 (QREFELT % 43)))
                          G190
                          (COND
-                          ((OR (ATOM #1#) (PROGN (LETT |k| (CAR #1#)) NIL))
+                          ((OR (ATOM #2#) (PROGN (LETT |k| (CAR #2#)) NIL))
                            (GO G191)))
                          (SEQ
                           (EXIT
@@ -139,9 +139,9 @@
                                        (SPADCALL (SPADCALL |k| (QREFELT % 59))
                                                  (QREFELT % 61))
                                        (QREFELT % 62))
-                             (LETT #2# (CONS |k| #2#))))))
-                         (LETT #1# (CDR #1#)) (GO G190) G191
-                         (EXIT (NREVERSE #2#))))
+                             (LETT #1# (CONS |k| #1#))))))
+                         (LETT #2# (CDR #2#)) (GO G190) G191
+                         (EXIT (NREVERSE #1#))))
                    (QREFELT % 63))
                   (QVELT
                    (SPADCALL (|CTRIGMNP;localexplogs| |f| |g| %) |x|
@@ -158,7 +158,7 @@
             (SPADCALL (SPADCALL |y| (QREFELT % 56)) RTRIG (QREFELT % 48)))))) 
 
 (SDEFUN |CTRIGMNP;complexNormalize;2F;12| ((|f| (F)) (% (F)))
-        (SPROG ((|h| (F)) (|g| (F)))
+        (SPROG ((|g| (F)) (|h| (F)))
                (SEQ (LETT |g| (SPADCALL |f| (QREFELT % 50)))
                     (EXIT
                      (COND
@@ -180,7 +180,7 @@
 (DECLAIM (NOTINLINE |ComplexTrigonometricManipulations;|)) 
 
 (DEFUN |ComplexTrigonometricManipulations;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -197,9 +197,9 @@
           (QSETREFV % 8 '|rtrig|)
           %))) 
 
-(DEFUN |ComplexTrigonometricManipulations| (&REST #1=#:G49)
+(DEFUN |ComplexTrigonometricManipulations| (&REST #1=#:G54)
   (SPROG NIL
-         (PROG (#2=#:G50)
+         (PROG (#2=#:G55)
            (RETURN
             (COND
              ((LETT #2#

@@ -1,20 +1,20 @@
 
-(PUT '|MATRIX;minRowIndex;%I;1| '|SPADreplace| '(XLAM (|x|) 1)) 
+(MAKEPROP '|MATRIX;minRowIndex;%I;1| '|SPADreplace| '(XLAM (|x|) 1)) 
 
 (SDEFUN |MATRIX;minRowIndex;%I;1| ((|x| (%)) (% (|Integer|))) 1) 
 
-(PUT '|MATRIX;minColIndex;%I;2| '|SPADreplace| '(XLAM (|x|) 1)) 
+(MAKEPROP '|MATRIX;minColIndex;%I;2| '|SPADreplace| '(XLAM (|x|) 1)) 
 
 (SDEFUN |MATRIX;minColIndex;%I;2| ((|x| (%)) (% (|Integer|))) 1) 
 
-(PUT '|MATRIX;qelt;%2IR;3| '|SPADreplace|
-     '(XLAM (|m| |i| |j|) (QAREF2O |m| |i| |j| 1 1))) 
+(MAKEPROP '|MATRIX;qelt;%2IR;3| '|SPADreplace|
+          '(XLAM (|m| |i| |j|) (QAREF2O |m| |i| |j| 1 1))) 
 
 (SDEFUN |MATRIX;qelt;%2IR;3| ((|m| (%)) (|i| #1=(|Integer|)) (|j| #1#) (% (R)))
         (QAREF2O |m| |i| |j| 1 1)) 
 
-(PUT '|MATRIX;qsetelt!;%2I2R;4| '|SPADreplace|
-     '(XLAM (|m| |i| |j| |r|) (QSETAREF2O |m| |i| |j| |r| 1 1))) 
+(MAKEPROP '|MATRIX;qsetelt!;%2I2R;4| '|SPADreplace|
+          '(XLAM (|m| |i| |j| |r|) (QSETAREF2O |m| |i| |j| |r| 1 1))) 
 
 (SDEFUN |MATRIX;qsetelt!;%2I2R;4|
         ((|m| (%)) (|i| #1=(|Integer|)) (|j| #1#) (|r| (R)) (% (R)))
@@ -22,19 +22,19 @@
 
 (SDEFUN |MATRIX;swapRows!;%2I%;5|
         ((|x| (%)) (|i1| #1=(|Integer|)) (|i2| #1#) (% (%)))
-        (SPROG ((|t2| (R)) (|t1| (R)) (#2=#:G2107 NIL) (|j| NIL))
+        (SPROG ((|j| NIL) (#2=#:G18 NIL) (|t1| (R)) (|t2| (R)))
                (SEQ
                 (COND
-                 ((OR (< |i1| (SPADCALL |x| (QREFELT % 8)))
+                 ((OR (< |i1| (PROGN |x| 1))
                       (OR (> |i1| (SPADCALL |x| (QREFELT % 12)))
-                          (OR (< |i2| (SPADCALL |x| (QREFELT % 8)))
+                          (OR (< |i2| (PROGN |x| 1))
                               (> |i2| (SPADCALL |x| (QREFELT % 12))))))
                   (|error| "swapRows!: index out of range"))
                  ('T
                   (COND ((EQL |i1| |i2|) |x|)
                         ('T
                          (SEQ
-                          (SEQ (LETT |j| (SPADCALL |x| (QREFELT % 9)))
+                          (SEQ (LETT |j| (PROGN |x| 1))
                                (LETT #2# (SPADCALL |x| (QREFELT % 13))) G190
                                (COND ((> |j| #2#) (GO G191)))
                                (SEQ (LETT |t1| (QAREF2O |x| |i1| |j| 1 1))
@@ -45,25 +45,24 @@
                           (EXIT |x|))))))))) 
 
 (SDEFUN |MATRIX;copy;2%;6| ((|m| (%)) (% (%)))
-        (SPROG
-         ((#1=#:G2115 NIL) (|j| NIL) (#2=#:G2114 NIL) (|i| NIL) (|ans| (%)))
-         (SEQ (LETT |ans| (MAKE_MATRIX (ANROWS |m|) (ANCOLS |m|)))
-              (SEQ (LETT |i| (SPADCALL |m| (QREFELT % 8)))
-                   (LETT #2# (SPADCALL |m| (QREFELT % 12))) G190
-                   (COND ((> |i| #2#) (GO G191)))
-                   (SEQ
-                    (EXIT
-                     (SEQ (LETT |j| (SPADCALL |m| (QREFELT % 9)))
-                          (LETT #1# (SPADCALL |m| (QREFELT % 13))) G190
-                          (COND ((> |j| #1#) (GO G191)))
-                          (SEQ
-                           (EXIT
-                            (SPADCALL |ans| |i| |j|
-                                      (SPADCALL |m| |i| |j| (QREFELT % 10))
-                                      (QREFELT % 11))))
-                          (LETT |j| (+ |j| 1)) (GO G190) G191 (EXIT NIL))))
-                   (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL))
-              (EXIT |ans|)))) 
+        (SPROG ((|ans| (%)) (|i| NIL) (#1=#:G25 NIL) (|j| NIL) (#2=#:G26 NIL))
+               (SEQ (LETT |ans| (MAKE_MATRIX (ANROWS |m|) (ANCOLS |m|)))
+                    (SEQ (LETT |i| (PROGN |m| 1))
+                         (LETT #1# (SPADCALL |m| (QREFELT % 12))) G190
+                         (COND ((> |i| #1#) (GO G191)))
+                         (SEQ
+                          (EXIT
+                           (SEQ (LETT |j| (PROGN |m| 1))
+                                (LETT #2# (SPADCALL |m| (QREFELT % 13))) G190
+                                (COND ((> |j| #2#) (GO G191)))
+                                (SEQ
+                                 (EXIT
+                                  (QSETAREF2O |ans| |i| |j|
+                                              (QAREF2O |m| |i| |j| 1 1) 1 1)))
+                                (LETT |j| (+ |j| 1)) (GO G190) G191
+                                (EXIT NIL))))
+                         (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL))
+                    (EXIT |ans|)))) 
 
 (SDEFUN |MATRIX;determinant;%R;7| ((|x| (%)) (% (R)))
         (SPADCALL |x| (QREFELT % 17))) 
@@ -91,21 +90,18 @@
 
 (SDEFUN |MATRIX;diagonalMatrix;V%;15| ((|v| (|Vector| R)) (% (%)))
         (SPROG
-         ((#1=#:G2137 NIL) (|i| NIL) (#2=#:G2138 NIL) (|j| NIL)
-          (#3=#:G2139 NIL) (|k| NIL) (|ans| (%)) (|n| (|NonNegativeInteger|)))
+         ((|n| (|NonNegativeInteger|)) (|ans| (%)) (|k| NIL) (#1=#:G53 NIL)
+          (|j| NIL) (#2=#:G52 NIL) (|i| NIL) (#3=#:G51 NIL))
          (SEQ (LETT |n| (QVSIZE |v|))
               (LETT |ans| (SPADCALL |n| |n| (QREFELT % 37)))
               (SEQ (LETT |k| (SPADCALL |v| (QREFELT % 39)))
-                   (LETT #3# (QVSIZE |v|))
-                   (LETT |j| (SPADCALL |ans| (QREFELT % 9)))
+                   (LETT #1# (QVSIZE |v|)) (LETT |j| (PROGN |ans| 1))
                    (LETT #2# (SPADCALL |ans| (QREFELT % 13)))
-                   (LETT |i| (SPADCALL |ans| (QREFELT % 8)))
-                   (LETT #1# (SPADCALL |ans| (QREFELT % 12))) G190
-                   (COND ((OR (> |i| #1#) (> |j| #2#) (> |k| #3#)) (GO G191)))
+                   (LETT |i| (PROGN |ans| 1))
+                   (LETT #3# (SPADCALL |ans| (QREFELT % 12))) G190
+                   (COND ((OR (> |i| #3#) (> |j| #2#) (> |k| #1#)) (GO G191)))
                    (SEQ
-                    (EXIT
-                     (SPADCALL |ans| |i| |j| (QAREF1O |v| |k| 1)
-                               (QREFELT % 11))))
+                    (EXIT (QSETAREF2O |ans| |i| |j| (QAREF1O |v| |k| 1) 1 1)))
                    (LETT |i|
                          (PROG1 (+ |i| 1)
                            (LETT |j| (PROG1 (+ |j| 1) (LETT |k| (+ |k| 1))))))
@@ -122,8 +118,8 @@
 
 (DEFUN |Matrix;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G2149 NIL) (#2=#:G2150 NIL) (#3=#:G2151 NIL) (% NIL)
-    (|dv$| NIL) (DV$1 NIL))
+   ((DV$1 NIL) (|dv$| NIL) (% NIL) (#1=#:G65 NIL) (#2=#:G64 NIL) (#3=#:G63 NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT |dv$| (LIST '|Matrix| DV$1))
@@ -140,23 +136,23 @@
                                                          (|InputForm|)))
                                         (|HasCategory| |#1| '(|OrderedSet|))
                                         (|HasCategory| |#1| '(|BasicType|))
-                                        (LETT #3#
+                                        (LETT #1#
                                               (|HasCategory| |#1|
                                                              '(|SetCategory|)))
                                         (OR
                                          (|HasCategory| |#1| '(|Comparable|))
-                                         #3#)
+                                         #1#)
                                         (OR (|HasCategory| |#1| '(|BasicType|))
                                             (|HasCategory| |#1|
                                                            '(|Comparable|))
                                             (|HasCategory| |#1| '(|Hashable|))
-                                            #3#)
+                                            #1#)
                                         (AND
                                          (|HasCategory| |#1|
                                                         (LIST '|Evalable|
                                                               (|devaluate|
                                                                |#1|)))
-                                         #3#)
+                                         #1#)
                                         (LETT #2#
                                               (|HasCategory| |#1|
                                                              '(|CoercibleTo|
@@ -167,7 +163,7 @@
                                                             (LIST '|Evalable|
                                                                   (|devaluate|
                                                                    |#1|)))
-                                             #3#))
+                                             #1#))
                                         (|HasCategory| |#1| '(|AbelianMonoid|))
                                         (|HasCategory| |#1| '(|AbelianGroup|))
                                         (|HasCategory| |#1|
@@ -178,7 +174,7 @@
                                         (|HasCategory| |#1|
                                                        '(|CommutativeRing|))
                                         (|HasCategory| |#1| '(|Field|))
-                                        (LETT #1#
+                                        (LETT #3#
                                               (|HasCategory| |#1|
                                                              '(|IntegralDomain|)))
                                         (OR
@@ -193,13 +189,13 @@
                                                          (LIST '|Evalable|
                                                                (|devaluate|
                                                                 |#1|)))
-                                          #1#)
+                                          #3#)
                                          (AND
                                           (|HasCategory| |#1|
                                                          (LIST '|Evalable|
                                                                (|devaluate|
                                                                 |#1|)))
-                                          #3#))))))
+                                          #1#))))))
     (|haddProp| |$ConstructorCache| '|Matrix| (LIST DV$1) (CONS 1 %))
     (|stuffDomainSlots| %)
     (QSETREFV % 6 |#1|)
@@ -215,7 +211,7 @@
      (OR
       (AND (|HasCategory| |#1| '(|BasicType|))
            (|HasCategory| % '(|finiteAggregate|)))
-      (|HasCategory| |#1| '(|Hashable|)) #3#)
+      (|HasCategory| |#1| '(|Hashable|)) #1#)
      (|augmentPredVector| % 8388608))
     (SETF |pv$| (QREFELT % 3))
     (COND
@@ -245,9 +241,9 @@
       (QSETREFV % 49 (CONS (|dispatchFunction| |MATRIX;convert;%If;16|) %))))
     %))) 
 
-(DEFUN |Matrix| (#1=#:G2152)
+(DEFUN |Matrix| (#1=#:G66)
   (SPROG NIL
-         (PROG (#2=#:G2153)
+         (PROG (#2=#:G67)
            (RETURN
             (COND
              ((LETT #2#
@@ -293,37 +289,36 @@
               209 |diagonalMatrix| 214 |determinant| 219 |copy| 224 |convert|
               229)
            'NIL
-           (CONS (|makeByteWordVec2| 20 '(0 0 1 0 2 7 20 0 3 8 11 20 0 0 0 0))
-                 (CONS
-                  '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL
-                     |HomogeneousAggregate&| |Hashable&| |SetCategory&|
-                     |Evalable&| |Aggregate&| NIL |BasicType&| NIL
-                     |InnerEvalable&| NIL NIL NIL NIL)
-                  (CONS
-                   '#((|MatrixCategory| 6 (|Vector| 6) (|Vector| 6))
-                      (|TwoDimensionalArrayCategory| 6 (|Vector| 6)
-                                                     (|Vector| 6))
-                      (|Comparable|) (|HomogeneousAggregate| 6) (|Hashable|)
-                      (|SetCategory|) (|Evalable| 6) (|Aggregate|)
-                      (|ConvertibleTo| 42) (|BasicType|) (|CoercibleTo| 68)
-                      (|InnerEvalable| 6 6) (|shallowlyMutable|)
-                      (|finiteAggregate|)
-                      (|MatrixOperationsCategory| 6 (|Vector| 6) (|Vector| 6))
-                      (|Type|))
-                   (|makeByteWordVec2| 49
-                                       '(1 0 7 0 12 1 0 7 0 13 1 16 6 2 17 1 0
-                                         6 0 18 1 16 6 2 19 1 0 6 0 20 1 16 2 2
-                                         21 1 0 0 0 22 1 16 23 2 24 1 0 23 0 25
-                                         1 16 23 2 26 1 0 23 0 27 1 16 28 2 29
-                                         1 0 28 0 30 1 16 31 2 32 1 0 33 0 34 1
-                                         16 31 2 35 1 0 33 0 36 2 0 0 23 23 37
-                                         1 38 7 0 39 1 42 0 41 43 1 0 44 0 45 1
-                                         44 42 0 46 1 42 0 47 48 1 0 42 0 49 2
-                                         0 0 23 23 37 3 0 0 0 7 7 14 1 14 0 0
-                                         22 1 19 23 0 25 4 0 6 0 7 7 6 11 3 0 6
-                                         0 7 7 10 1 19 23 0 27 1 19 28 0 30 1
-                                         17 6 0 20 1 0 7 0 8 1 0 7 0 9 1 0 7 0
-                                         12 1 0 7 0 13 1 0 44 0 45 1 19 33 0 36
-                                         1 18 33 0 34 1 0 0 38 40 1 17 6 0 18 1
-                                         0 0 0 15 1 3 42 0 49)))))
+           (CONS
+            (|makeByteWordVec2| 20 '(0 0 1 1 0 2 7 20 0 3 8 11 20 0 0 0 0))
+            (CONS
+             '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL NIL
+                |HomogeneousAggregate&| |Hashable&| |SetCategory&| |Evalable&|
+                |Aggregate&| NIL |BasicType&| NIL |InnerEvalable&| NIL NIL NIL
+                NIL)
+             (CONS
+              '#((|MatrixCategory| 6 (|Vector| 6) (|Vector| 6))
+                 (|TwoDimensionalArrayCategory| 6 (|Vector| 6) (|Vector| 6))
+                 (|Comparable|) (|ComparableRepresentation|)
+                 (|HomogeneousAggregate| 6) (|Hashable|) (|SetCategory|)
+                 (|Evalable| 6) (|Aggregate|) (|ConvertibleTo| 42)
+                 (|BasicType|) (|CoercibleTo| 68) (|InnerEvalable| 6 6)
+                 (|shallowlyMutable|) (|finiteAggregate|)
+                 (|MatrixOperationsCategory| 6 (|Vector| 6) (|Vector| 6))
+                 (|Type|))
+              (|makeByteWordVec2| 49
+                                  '(1 0 7 0 12 1 0 7 0 13 1 16 6 2 17 1 0 6 0
+                                    18 1 16 6 2 19 1 0 6 0 20 1 16 2 2 21 1 0 0
+                                    0 22 1 16 23 2 24 1 0 23 0 25 1 16 23 2 26
+                                    1 0 23 0 27 1 16 28 2 29 1 0 28 0 30 1 16
+                                    31 2 32 1 0 33 0 34 1 16 31 2 35 1 0 33 0
+                                    36 2 0 0 23 23 37 1 38 7 0 39 1 42 0 41 43
+                                    1 0 44 0 45 1 44 42 0 46 1 42 0 47 48 1 0
+                                    42 0 49 2 0 0 23 23 37 3 0 0 0 7 7 14 1 14
+                                    0 0 22 1 19 23 0 25 4 0 6 0 7 7 6 11 3 0 6
+                                    0 7 7 10 1 19 23 0 27 1 19 28 0 30 1 17 6 0
+                                    20 1 0 7 0 8 1 0 7 0 9 1 0 7 0 12 1 0 7 0
+                                    13 1 0 44 0 45 1 19 33 0 36 1 18 33 0 34 1
+                                    0 0 38 40 1 17 6 0 18 1 0 0 0 15 1 3 42 0
+                                    49)))))
            '|lookupIncomplete|)) 

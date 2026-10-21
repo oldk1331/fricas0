@@ -1,29 +1,31 @@
 
-(PUT '|TUBE;getCurve;%Curve;1| '|SPADreplace| '(XLAM (|plot|) (QVELT |plot| 0))) 
+(MAKEPROP '|TUBE;getCurve;%Curve;1| '|SPADreplace|
+          '(XLAM (|plot|) (QVELT |plot| 0))) 
 
 (SDEFUN |TUBE;getCurve;%Curve;1| ((|plot| (%)) (% (|Curve|))) (QVELT |plot| 0)) 
 
-(PUT '|TUBE;listLoops;%L;2| '|SPADreplace| '(XLAM (|plot|) (QVELT |plot| 1))) 
+(MAKEPROP '|TUBE;listLoops;%L;2| '|SPADreplace|
+          '(XLAM (|plot|) (QVELT |plot| 1))) 
 
 (SDEFUN |TUBE;listLoops;%L;2|
         ((|plot| (%)) (% (|List| (|List| (|Point| (|DoubleFloat|))))))
         (QVELT |plot| 1)) 
 
-(PUT '|TUBE;closed?;%B;3| '|SPADreplace| '(XLAM (|plot|) (QVELT |plot| 2))) 
+(MAKEPROP '|TUBE;closed?;%B;3| '|SPADreplace| '(XLAM (|plot|) (QVELT |plot| 2))) 
 
 (SDEFUN |TUBE;closed?;%B;3| ((|plot| (%)) (% (|Boolean|))) (QVELT |plot| 2)) 
 
 (SDEFUN |TUBE;open?;%B;4| ((|plot| (%)) (% (|Boolean|)))
         (NULL (QVELT |plot| 2))) 
 
-(PUT '|TUBE;setClosed;%2B;5| '|SPADreplace|
-     '(XLAM (|plot| |flag|) (QSETVELT |plot| 2 |flag|))) 
+(MAKEPROP '|TUBE;setClosed;%2B;5| '|SPADreplace|
+          '(XLAM (|plot| |flag|) (QSETVELT |plot| 2 |flag|))) 
 
 (SDEFUN |TUBE;setClosed;%2B;5|
         ((|plot| (%)) (|flag| (|Boolean|)) (% (|Boolean|)))
         (QSETVELT |plot| 2 |flag|)) 
 
-(PUT '|TUBE;tube;CurveLB%;6| '|SPADreplace| 'VECTOR) 
+(MAKEPROP '|TUBE;tube;CurveLB%;6| '|SPADreplace| 'VECTOR) 
 
 (SDEFUN |TUBE;tube;CurveLB%;6|
         ((|curve| (|Curve|)) (|ll| (|List| (|List| (|Point| (|DoubleFloat|)))))
@@ -33,7 +35,7 @@
 (DECLAIM (NOTINLINE |TubePlot;|)) 
 
 (DEFUN |TubePlot;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|TubePlot| DV$1))

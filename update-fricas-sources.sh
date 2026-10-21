@@ -1,5 +1,5 @@
-tar xvf fricas-1.3.13-full.tar.bz2 -C /tmp
-export FRICAS_FULL_DIR=/tmp/fricas-1.3.13
+tar xvf fricas-1.4.0-full.tar.bz2 -C /tmp
+export FRICAS_FULL_DIR=/tmp/fricas-1.4.0
 rm -rf ./algebra/
 cp -r $FRICAS_FULL_DIR/pre-generated/src/algebra/ ./
 cp -r $FRICAS_FULL_DIR/pre-generated/target/algebra/* algebra/

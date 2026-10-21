@@ -6,11 +6,11 @@
         (SPADCALL (SPADCALL (SPADCALL |ps| (QREFELT % 14)) (QREFELT % 15))
                   (QREFELT % 13))) 
 
-(PUT '|GPOLSET;empty;%;3| '|SPADreplace| '(XLAM NIL NIL)) 
+(MAKEPROP '|GPOLSET;empty;%;3| '|SPADreplace| '(XLAM NIL NIL)) 
 
 (SDEFUN |GPOLSET;empty;%;3| ((% (%))) NIL) 
 
-(PUT '|GPOLSET;parts;%L;4| '|SPADreplace| '(XLAM (|ps|) |ps|)) 
+(MAKEPROP '|GPOLSET;parts;%L;4| '|SPADreplace| '(XLAM (|ps|) |ps|)) 
 
 (SDEFUN |GPOLSET;parts;%L;4| ((|ps| (%)) (% (|List| P))) |ps|) 
 
@@ -27,36 +27,36 @@
 
 (SDEFUN |GPOLSET;=;2%B;8| ((|ps1| (%)) (|ps2| (%)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G19 NIL) (|p| NIL) (#2=#:G18 NIL) (#3=#:G17 NIL)
-          (#4=#:G16 NIL))
+         ((#1=#:G17 NIL) (#2=#:G18 NIL) (#3=#:G19 NIL) (|p| NIL)
+          (#4=#:G20 NIL))
          (SEQ
           (SPADCALL
            (SPADCALL
             (PROGN
-             (LETT #4# NIL)
-             (SEQ (LETT |p| NIL) (LETT #3# (SPADCALL |ps1| (QREFELT % 18)))
+             (LETT #1# NIL)
+             (SEQ (LETT |p| NIL) (LETT #2# (SPADCALL |ps1| (QREFELT % 18)))
                   G190
                   (COND
-                   ((OR (ATOM #3#) (PROGN (LETT |p| (CAR #3#)) NIL))
+                   ((OR (ATOM #2#) (PROGN (LETT |p| (CAR #2#)) NIL))
                     (GO G191)))
-                  (SEQ (EXIT (LETT #4# (CONS |p| #4#)))) (LETT #3# (CDR #3#))
-                  (GO G190) G191 (EXIT (NREVERSE #4#))))
+                  (SEQ (EXIT (LETT #1# (CONS |p| #1#)))) (LETT #2# (CDR #2#))
+                  (GO G190) G191 (EXIT (NREVERSE #1#))))
             (QREFELT % 28))
            (SPADCALL
             (PROGN
-             (LETT #2# NIL)
-             (SEQ (LETT |p| NIL) (LETT #1# (SPADCALL |ps2| (QREFELT % 18)))
+             (LETT #3# NIL)
+             (SEQ (LETT |p| NIL) (LETT #4# (SPADCALL |ps2| (QREFELT % 18)))
                   G190
                   (COND
-                   ((OR (ATOM #1#) (PROGN (LETT |p| (CAR #1#)) NIL))
+                   ((OR (ATOM #4#) (PROGN (LETT |p| (CAR #4#)) NIL))
                     (GO G191)))
-                  (SEQ (EXIT (LETT #2# (CONS |p| #2#)))) (LETT #1# (CDR #1#))
-                  (GO G190) G191 (EXIT (NREVERSE #2#))))
+                  (SEQ (EXIT (LETT #3# (CONS |p| #3#)))) (LETT #4# (CDR #4#))
+                  (GO G190) G191 (EXIT (NREVERSE #3#))))
             (QREFELT % 28))
            (QREFELT % 29))))) 
 
 (SDEFUN |GPOLSET;coerce;%Of;9| ((|ps| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G27 NIL) (|p| NIL) (#2=#:G26 NIL) (|lp| (|List| P)))
+        (SPROG ((|lp| (|List| P)) (#1=#:G28 NIL) (|p| NIL) (#2=#:G29 NIL))
                (SEQ
                 (LETT |lp|
                       (SPADCALL (ELT % 31) (SPADCALL |ps| (QREFELT % 14))
@@ -64,16 +64,16 @@
                 (EXIT
                  (SPADCALL
                   (PROGN
-                   (LETT #2# NIL)
-                   (SEQ (LETT |p| NIL) (LETT #1# |lp|) G190
+                   (LETT #1# NIL)
+                   (SEQ (LETT |p| NIL) (LETT #2# |lp|) G190
                         (COND
-                         ((OR (ATOM #1#) (PROGN (LETT |p| (CAR #1#)) NIL))
+                         ((OR (ATOM #2#) (PROGN (LETT |p| (CAR #2#)) NIL))
                           (GO G191)))
                         (SEQ
                          (EXIT
-                          (LETT #2# (CONS (SPADCALL |p| (QREFELT % 35)) #2#))))
-                        (LETT #1# (CDR #1#)) (GO G190) G191
-                        (EXIT (NREVERSE #2#))))
+                          (LETT #1# (CONS (SPADCALL |p| (QREFELT % 35)) #1#))))
+                        (LETT #2# (CDR #2#)) (GO G190) G191
+                        (EXIT (NREVERSE #1#))))
                   (QREFELT % 37)))))) 
 
 (SDEFUN |GPOLSET;mvar;%VarSet;10| ((|ps| (%)) (% (|VarSet|)))
@@ -95,7 +95,7 @@
         ((|lp| (|List| P)) (% (|Union| % "failed")))
         (CONS 0 (SPADCALL |lp| (QREFELT % 13)))) 
 
-(PUT '|GPOLSET;coerce;%L;12| '|SPADreplace| '(XLAM (|ps|) |ps|)) 
+(MAKEPROP '|GPOLSET;coerce;%L;12| '|SPADreplace| '(XLAM (|ps|) |ps|)) 
 
 (SDEFUN |GPOLSET;coerce;%L;12| ((|ps| (%)) (% (|List| P))) |ps|) 
 
@@ -106,8 +106,8 @@
 
 (DEFUN |GeneralPolynomialSet;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((#1=#:G50 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
-    (DV$2 NIL) (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL)
+    (#1=#:G53 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -149,9 +149,9 @@
     (QSETREFV % 10 (|List| |#4|))
     %))) 
 
-(DEFUN |GeneralPolynomialSet| (&REST #1=#:G51)
+(DEFUN |GeneralPolynomialSet| (&REST #1=#:G54)
   (SPROG NIL
-         (PROG (#2=#:G52)
+         (PROG (#2=#:G55)
            (RETURN
             (COND
              ((LETT #2#

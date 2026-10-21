@@ -4,7 +4,7 @@
          (%
           (|DistributedMultivariatePolynomial| |newvl|
                                                (|Fraction| (|Integer|)))))
-        (SPROG ((#1=#:G5 NIL))
+        (SPROG ((#1=#:G9 NIL))
                (SPADCALL
                 (PROG2
                     (LETT #1#
@@ -23,7 +23,7 @@
         ((|v| (|OrderedVariableList| |newvl|))
          (%
           (|DistributedMultivariatePolynomial| |vl| (|Fraction| (|Integer|)))))
-        (SPROG ((#1=#:G9 NIL))
+        (SPROG ((#1=#:G13 NIL))
                (COND
                 ((SPADCALL |v| (QREFELT % 14) (QREFELT % 20))
                  (|spadConstant| % 22))
@@ -95,26 +95,23 @@
                                                                     (|Fraction|
                                                                      (|Integer|))))))
         (SPROG
-         ((|y|
-           (|QuasiAlgebraicSet| (|Fraction| (|Integer|))
-                                (|OrderedVariableList| |vl|)
-                                (|DirectProduct| (|#| |vl|)
-                                                 (|NonNegativeInteger|))
-                                (|DistributedMultivariatePolynomial| |vl|
-                                                                     (|Fraction|
-                                                                      (|Integer|)))))
-          (|ngb|
-           (|List|
-            (|DistributedMultivariatePolynomial| |newvl|
-                                                 (|Fraction| (|Integer|)))))
-          (|gb|
+         ((|z0|
            (|List|
             (|DistributedMultivariatePolynomial| |vl|
                                                  (|Fraction| (|Integer|)))))
-          (|k|
-           (|Union|
-            (|DistributedMultivariatePolynomial| |vl| (|Fraction| (|Integer|)))
-            "failed"))
+          (|n0|
+           (|DistributedMultivariatePolynomial| |vl| (|Fraction| (|Integer|))))
+          (|t|
+           (|DistributedMultivariatePolynomial| |newvl|
+                                                (|Fraction| (|Integer|))))
+          (|tp|
+           (|DistributedMultivariatePolynomial| |newvl|
+                                                (|Fraction| (|Integer|))))
+          (#1=#:G49 NIL) (|g| NIL) (#2=#:G50 NIL)
+          (|gen|
+           (|List|
+            (|DistributedMultivariatePolynomial| |newvl|
+                                                 (|Fraction| (|Integer|)))))
           (|id|
            (|PolynomialIdeal| (|Fraction| (|Integer|))
                               (|DirectProduct| (|#| |newvl|)
@@ -123,23 +120,26 @@
                               (|DistributedMultivariatePolynomial| |newvl|
                                                                    (|Fraction|
                                                                     (|Integer|)))))
-          (|gen|
+          (|k|
+           (|Union|
+            (|DistributedMultivariatePolynomial| |vl| (|Fraction| (|Integer|)))
+            "failed"))
+          (|gb|
+           (|List|
+            (|DistributedMultivariatePolynomial| |vl|
+                                                 (|Fraction| (|Integer|)))))
+          (|ngb|
            (|List|
             (|DistributedMultivariatePolynomial| |newvl|
                                                  (|Fraction| (|Integer|)))))
-          (#1=#:G36 NIL) (|g| NIL) (#2=#:G35 NIL)
-          (|tp|
-           (|DistributedMultivariatePolynomial| |newvl|
-                                                (|Fraction| (|Integer|))))
-          (|t|
-           (|DistributedMultivariatePolynomial| |newvl|
-                                                (|Fraction| (|Integer|))))
-          (|n0|
-           (|DistributedMultivariatePolynomial| |vl| (|Fraction| (|Integer|))))
-          (|z0|
-           (|List|
-            (|DistributedMultivariatePolynomial| |vl|
-                                                 (|Fraction| (|Integer|))))))
+          (|y|
+           (|QuasiAlgebraicSet| (|Fraction| (|Integer|))
+                                (|OrderedVariableList| |vl|)
+                                (|DirectProduct| (|#| |vl|)
+                                                 (|NonNegativeInteger|))
+                                (|DistributedMultivariatePolynomial| |vl|
+                                                                     (|Fraction|
+                                                                      (|Integer|))))))
          (SEQ
           (COND
            ((SPADCALL (SPADCALL |x| (QREFELT % 42)) (CONS 0 'T) (QREFELT % 43))
@@ -155,19 +155,19 @@
                  (LETT |gen|
                        (CONS |tp|
                              (PROGN
-                              (LETT #2# NIL)
-                              (SEQ (LETT |g| NIL) (LETT #1# |z0|) G190
+                              (LETT #1# NIL)
+                              (SEQ (LETT |g| NIL) (LETT #2# |z0|) G190
                                    (COND
-                                    ((OR (ATOM #1#)
-                                         (PROGN (LETT |g| (CAR #1#)) NIL))
+                                    ((OR (ATOM #2#)
+                                         (PROGN (LETT |g| (CAR #2#)) NIL))
                                      (GO G191)))
                                    (SEQ
                                     (EXIT
-                                     (LETT #2#
+                                     (LETT #1#
                                            (CONS (|QALGSET2;npoly| |g| %)
-                                                 #2#))))
-                                   (LETT #1# (CDR #1#)) (GO G190) G191
-                                   (EXIT (NREVERSE #2#))))))
+                                                 #1#))))
+                                   (LETT #2# (CDR #2#)) (GO G190) G191
+                                   (EXIT (NREVERSE #1#))))))
                  (LETT |id| (SPADCALL |gen| (QREFELT % 52)))
                  (LETT |ngb|
                        (SPADCALL (SPADCALL |id| (QREFELT % 54))
@@ -203,7 +203,7 @@
 (DECLAIM (NOTINLINE |QuasiAlgebraicSet2;|)) 
 
 (DEFUN |QuasiAlgebraicSet2;| (|#1|)
-  (SPROG ((#1=#:G5 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL) (#1=#:G9 NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT |dv$| (LIST '|QuasiAlgebraicSet2| DV$1))
@@ -228,9 +228,9 @@
                                       #1#)))
           %))) 
 
-(DEFUN |QuasiAlgebraicSet2| (#1=#:G37)
+(DEFUN |QuasiAlgebraicSet2| (#1=#:G51)
   (SPROG NIL
-         (PROG (#2=#:G38)
+         (PROG (#2=#:G52)
            (RETURN
             (COND
              ((LETT #2#
@@ -255,7 +255,7 @@
               (|DistributedMultivariatePolynomial| (NRTEVAL (QREFELT % 10)) 26)
               (14 . |coerce|) (|Boolean|) (19 . =)
               (|DistributedMultivariatePolynomial| (NRTEVAL (QREFELT % 6)) 26)
-              (25 . |Zero|) (29 . |convert|) (34 . |variable|) (39 . |coerce|)
+              (25 . |0|) (29 . |convert|) (34 . |variable|) (39 . |coerce|)
               (|Fraction| (|Integer|)) (44 . |coerce|) (|Mapping| 17 15)
               (|Mapping| 17 26)
               (|PolynomialCategoryLifting|
@@ -276,7 +276,7 @@
                                     (|NonNegativeInteger|))
                                    21)
               (78 . |status|) (83 . =) (|List| 21) (89 . |definingEquations|)
-              (94 . |definingInequation|) (99 . *) (105 . |One|) (109 . -)
+              (94 . |definingInequation|) (99 . *) (105 . |1|) (109 . -)
               (|List| 17)
               (|PolynomialIdeal| 26
                                  (|DirectProduct|

@@ -1,6 +1,6 @@
 
 (SDEFUN |PSEUDLIN;inv| ((|m| (|Matrix| K)) (% (|Matrix| K)))
-        (SPROG ((#1=#:G5 NIL))
+        (SPROG ((#1=#:G8 NIL))
                (PROG2 (LETT #1# (SPADCALL |m| (QREFELT % 9)))
                    (QCDR #1#)
                  (|check_union2| (QEQCAR #1# 0) (|Matrix| (QREFELT % 6))
@@ -42,13 +42,13 @@
           (|List|
            (|Record| (|:| C (|Matrix| K)) (|:| |lg| (|List| (|Vector| K)))))))
         (SPROG
-         ((|i| #1=(|Integer|))
+         ((|n| (|NonNegativeInteger|)) (|j| #1=(|Integer|)) (|w| NIL)
+          (#2=#:G60 NIL) (#3=#:G49 NIL) (|v| (|Vector| K)) (|k| NIL)
+          (#4=#:G61 NIL) (|lv| (|List| (|Vector| K)))
           (|l|
            (|List|
             (|Record| (|:| C (|Matrix| K)) (|:| |lg| (|List| (|Vector| K))))))
-          (|lv| (|List| (|Vector| K))) (#2=#:G57 NIL) (|k| NIL)
-          (|v| (|Vector| K)) (#3=#:G45 NIL) (#4=#:G56 NIL) (|w| NIL) (|j| #1#)
-          (|n| (|NonNegativeInteger|)))
+          (|i| #1#))
          (SEQ (LETT |i| 1) (LETT |n| (ANROWS R)) (LETT |l| NIL)
               (SEQ G190 (COND ((NULL (<= |i| |n|)) (GO G191)))
                    (SEQ (LETT |j| |i|)
@@ -65,9 +65,9 @@
                              (SEQ (EXIT (LETT |j| (+ |j| 1)))) NIL (GO G190)
                              G191 (EXIT NIL))
                         (LETT |lv| NIL)
-                        (SEQ (LETT |w| NIL) (LETT #4# |lw|) G190
+                        (SEQ (LETT |w| NIL) (LETT #2# |lw|) G190
                              (COND
-                              ((OR (ATOM #4#) (PROGN (LETT |w| (CAR #4#)) NIL))
+                              ((OR (ATOM #2#) (PROGN (LETT |w| (CAR #2#)) NIL))
                                (GO G191)))
                              (SEQ
                               (LETT |v|
@@ -77,8 +77,8 @@
                                                          '(|NonNegativeInteger|)
                                                          '(|Integer|) #3#))
                                      (|spadConstant| % 25)))
-                              (SEQ (LETT |k| |i|) (LETT #2# |j|) G190
-                                   (COND ((> |k| #2#) (GO G191)))
+                              (SEQ (LETT |k| |i|) (LETT #4# |j|) G190
+                                   (COND ((> |k| #4#) (GO G191)))
                                    (SEQ
                                     (EXIT
                                      (SPADCALL |v| (+ (- |k| |i|) 1)
@@ -88,7 +88,7 @@
                                    (LETT |k| (+ |k| 1)) (GO G190) G191
                                    (EXIT NIL))
                               (EXIT (LETT |lv| (CONS |v| |lv|))))
-                             (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT NIL))
+                             (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                         (LETT |lv| (NREVERSE |lv|))
                         (LETT |l|
                               (CONS
@@ -107,36 +107,36 @@
           (|Record| (|:| R (|Matrix| K)) (|:| A (|Matrix| K))
                     (|:| |Ainv| (|Matrix| K)))))
         (SPROG
-         ((|i| (|Integer|)) (|Binv| (|Matrix| K)) (B (|Matrix| K))
-          (E (|Matrix| K)) (#1=#:G100 NIL) (#2=#:G102 NIL) (|k| NIL)
-          (#3=#:G101 NIL)
+         ((N (|NonNegativeInteger|)) (#1=#:G100 NIL) (#2=#:G101 NIL)
+          (#3=#:G99 NIL) (#4=#:G98 NIL) (#5=#:G102 NIL) (#6=#:G103 NIL)
+          (|j| (|Integer|))
           (|recOfMatrices|
            (|Record| (|:| R (|Matrix| K)) (|:| A (|Matrix| K))
                      (|:| |Ainv| (|Matrix| K))))
-          (|j| (|Integer|)) (#4=#:G99 NIL) (#5=#:G98 NIL) (#6=#:G94 NIL)
-          (#7=#:G95 NIL) (#8=#:G97 NIL) (#9=#:G96 NIL)
-          (N (|NonNegativeInteger|)))
+          (#7=#:G105 NIL) (|k| NIL) (#8=#:G106 NIL) (#9=#:G104 NIL)
+          (E (|Matrix| K)) (B (|Matrix| K)) (|Binv| (|Matrix| K))
+          (|i| (|Integer|)))
          (SEQ
           (EXIT
            (SEQ (LETT N (ANROWS M))
                 (LETT B
                       (SPADCALL
                        (PROGN
-                        (LETT #9# (GETREFV N))
-                        (SEQ (LETT |k| 1) (LETT #8# N) (LETT #7# 0) G190
-                             (COND ((|greater_SI| |k| #8#) (GO G191)))
+                        (LETT #1# (GETREFV N))
+                        (SEQ (LETT |k| 1) (LETT #2# N) (LETT #3# 0) G190
+                             (COND ((|greater_SI| |k| #2#) (GO G191)))
                              (SEQ
-                              (EXIT (SETELT #9# #7# (|spadConstant| % 20))))
-                             (LETT #7#
-                                   (PROG1 (|inc_SI| #7#)
+                              (EXIT (SETELT #1# #3# (|spadConstant| % 20))))
+                             (LETT #3#
+                                   (PROG1 (|inc_SI| #3#)
                                      (LETT |k| (|inc_SI| |k|))))
                              (GO G190) G191 (EXIT NIL))
-                        #9#)
+                        #1#)
                        (QREFELT % 34)))
                 (LETT |Binv| (SPADCALL B (QREFELT % 35)))
                 (COND
                  ((SPADCALL M (QREFELT % 36))
-                  (PROGN (LETT #6# (VECTOR M B |Binv|)) (GO #10=#:G93))))
+                  (PROGN (LETT #4# (VECTOR M B |Binv|)) (GO #10=#:G97))))
                 (LETT |i| 1)
                 (SEQ G190 (COND ((NULL (< |i| N)) (GO G191)))
                      (SEQ (LETT |j| (+ |i| 1))
@@ -220,8 +220,8 @@
                                    (COND ((< |j| 2) (GO G191)))
                                    (SEQ
                                     (EXIT
-                                     (SEQ (LETT |k| (+ |i| 1)) (LETT #4# N)
-                                          G190 (COND ((> |k| #4#) (GO G191)))
+                                     (SEQ (LETT |k| (+ |i| 1)) (LETT #6# N)
+                                          G190 (COND ((> |k| #6#) (GO G191)))
                                           (SEQ
                                            (LETT E
                                                  (|PSEUDLIN;addMatrix| N |k|
@@ -283,23 +283,23 @@
                                   (LETT E
                                         (SPADCALL
                                          (PROGN
-                                          (LETT #3# (GETREFV N))
-                                          (SEQ (LETT |k| 1) (LETT #2# N)
-                                               (LETT #1# 0) G190
+                                          (LETT #7# (GETREFV N))
+                                          (SEQ (LETT |k| 1) (LETT #8# N)
+                                               (LETT #9# 0) G190
                                                (COND
-                                                ((|greater_SI| |k| #2#)
+                                                ((|greater_SI| |k| #8#)
                                                  (GO G191)))
                                                (SEQ
                                                 (EXIT
-                                                 (SETELT #3# #1#
+                                                 (SETELT #7# #9#
                                                          (|spadConstant| %
                                                                          20))))
-                                               (LETT #1#
-                                                     (PROG1 (|inc_SI| #1#)
+                                               (LETT #9#
+                                                     (PROG1 (|inc_SI| #9#)
                                                        (LETT |k|
                                                              (|inc_SI| |k|))))
                                                (GO G190) G191 (EXIT NIL))
-                                          #3#)
+                                          #7#)
                                          (QREFELT % 34)))
                                   (SPADCALL E (+ |i| 1) (+ |i| 1)
                                             (QVELT |recOfMatrices| 1)
@@ -313,25 +313,25 @@
                                   (EXIT (LETT |i| N)))))))))))
                      NIL (GO G190) G191 (EXIT NIL))
                 (EXIT (VECTOR M B |Binv|))))
-          #10# (EXIT #6#)))) 
+          #10# (EXIT #4#)))) 
 
 (SDEFUN |PSEUDLIN;mulMatrix|
         ((N (|Integer|)) (|i| (|Integer|)) (|a| (K)) (% (|Matrix| K)))
         (SPROG
-         ((M (|Matrix| K)) (#1=#:G107 NIL) (#2=#:G109 NIL) (|j| NIL)
-          (#3=#:G108 NIL))
+         ((#1=#:G112 NIL) (|j| NIL) (#2=#:G113 NIL) (#3=#:G111 NIL)
+          (M (|Matrix| K)))
          (SEQ
           (LETT M
                 (SPADCALL
                  (PROGN
-                  (LETT #3# (GETREFV N))
-                  (SEQ (LETT |j| 1) (LETT #2# N) (LETT #1# 0) G190
+                  (LETT #1# (GETREFV N))
+                  (SEQ (LETT |j| 1) (LETT #2# N) (LETT #3# 0) G190
                        (COND ((|greater_SI| |j| #2#) (GO G191)))
-                       (SEQ (EXIT (SETELT #3# #1# (|spadConstant| % 20))))
-                       (LETT #1#
-                             (PROG1 (|inc_SI| #1#) (LETT |j| (|inc_SI| |j|))))
+                       (SEQ (EXIT (SETELT #1# #3# (|spadConstant| % 20))))
+                       (LETT #3#
+                             (PROG1 (|inc_SI| #3#) (LETT |j| (|inc_SI| |j|))))
                        (GO G190) G191 (EXIT NIL))
-                  #3#)
+                  #1#)
                  (QREFELT % 34)))
           (SPADCALL M |i| |i| |a| (QREFELT % 42)) (EXIT M)))) 
 
@@ -339,40 +339,40 @@
         ((N (|Integer|)) (|i| (|Integer|)) (|k| (|Integer|)) (|a| (K))
          (% (|Matrix| K)))
         (SPROG
-         ((A (|Matrix| K)) (#1=#:G114 NIL) (#2=#:G116 NIL) (|j| NIL)
-          (#3=#:G115 NIL))
+         ((#1=#:G119 NIL) (|j| NIL) (#2=#:G120 NIL) (#3=#:G118 NIL)
+          (A (|Matrix| K)))
          (SEQ
           (LETT A
                 (SPADCALL
                  (PROGN
-                  (LETT #3# (GETREFV N))
-                  (SEQ (LETT |j| 1) (LETT #2# N) (LETT #1# 0) G190
+                  (LETT #1# (GETREFV N))
+                  (SEQ (LETT |j| 1) (LETT #2# N) (LETT #3# 0) G190
                        (COND ((|greater_SI| |j| #2#) (GO G191)))
-                       (SEQ (EXIT (SETELT #3# #1# (|spadConstant| % 20))))
-                       (LETT #1#
-                             (PROG1 (|inc_SI| #1#) (LETT |j| (|inc_SI| |j|))))
+                       (SEQ (EXIT (SETELT #1# #3# (|spadConstant| % 20))))
+                       (LETT #3#
+                             (PROG1 (|inc_SI| #3#) (LETT |j| (|inc_SI| |j|))))
                        (GO G190) G191 (EXIT NIL))
-                  #3#)
+                  #1#)
                  (QREFELT % 34)))
           (SPADCALL A |i| |k| |a| (QREFELT % 42)) (EXIT A)))) 
 
 (SDEFUN |PSEUDLIN;permutationMatrix|
         ((N (|Integer|)) (|i| (|Integer|)) (|k| (|Integer|)) (% (|Matrix| K)))
         (SPROG
-         ((P (|Matrix| K)) (#1=#:G121 NIL) (#2=#:G123 NIL) (|j| NIL)
-          (#3=#:G122 NIL))
+         ((#1=#:G126 NIL) (|j| NIL) (#2=#:G127 NIL) (#3=#:G125 NIL)
+          (P (|Matrix| K)))
          (SEQ
           (LETT P
                 (SPADCALL
                  (PROGN
-                  (LETT #3# (GETREFV N))
-                  (SEQ (LETT |j| 1) (LETT #2# N) (LETT #1# 0) G190
+                  (LETT #1# (GETREFV N))
+                  (SEQ (LETT |j| 1) (LETT #2# N) (LETT #3# 0) G190
                        (COND ((|greater_SI| |j| #2#) (GO G191)))
-                       (SEQ (EXIT (SETELT #3# #1# (|spadConstant| % 20))))
-                       (LETT #1#
-                             (PROG1 (|inc_SI| #1#) (LETT |j| (|inc_SI| |j|))))
+                       (SEQ (EXIT (SETELT #1# #3# (|spadConstant| % 20))))
+                       (LETT #3#
+                             (PROG1 (|inc_SI| #3#) (LETT |j| (|inc_SI| |j|))))
                        (GO G190) G191 (EXIT NIL))
-                  #3#)
+                  #1#)
                  (QREFELT % 34)))
           (SPADCALL P |i| |i|
                     (SPADCALL P |k| |k| (|spadConstant| % 25) (QREFELT % 42))
@@ -385,7 +385,7 @@
 (DECLAIM (NOTINLINE |PseudoLinearNormalForm;|)) 
 
 (DEFUN |PseudoLinearNormalForm;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|PseudoLinearNormalForm| DV$1))
@@ -399,9 +399,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |PseudoLinearNormalForm| (#1=#:G124)
+(DEFUN |PseudoLinearNormalForm| (#1=#:G128)
   (SPROG NIL
-         (PROG (#2=#:G125)
+         (PROG (#2=#:G129)
            (RETURN
             (COND
              ((LETT #2#
@@ -424,12 +424,12 @@
               (|Mapping| 6 6) (11 . |map|) (17 . *) (23 . +)
               |PSEUDLIN;changeBase;2MAMM;2| (29 . |inv|)
               (|Record| (|:| R 8) (|:| A 8) (|:| |Ainv| 8))
-              |PSEUDLIN;normalForm;MAMR;3| (34 . |One|) (|Integer|)
-              (38 . |elt|) (|Boolean|) (45 . =) (51 . |Zero|) (|Vector| 6)
-              (55 . |elt|) (61 . |setelt!|) (68 . |subMatrix|)
+              |PSEUDLIN;normalForm;MAMR;3| (34 . |1|) (|Integer|) (38 . |elt|)
+              (|Boolean|) (45 . =) (51 . |0|) (|Vector| 6) (55 . |elt|)
+              (61 . |setelt!|) (68 . |subMatrix|)
               (|Record| (|:| C 8) (|:| |lg| 32)) (|List| 30) (|List| 26)
               |PSEUDLIN;companionBlocks;MLL;4| (77 . |diagonalMatrix|)
-              (82 . |copy|) (87 . |diagonal?|) (92 . |One|) (96 . ~=)
+              (82 . |copy|) (87 . |diagonal?|) (92 . |1|) (96 . ~=)
               (102 . |inv|) (107 . -) (112 . |setsubMatrix!|)
               (120 . |setelt!|))
            '#(|normalForm| 128 |companionBlocks| 135 |changeBase| 141) 'NIL

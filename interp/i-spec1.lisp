@@ -19,15 +19,37 @@
 
 (DEFUN |voidValue| () (PROG () (RETURN "()")))
 
+; throw_msg_partial_mode(m) == throw_msg("S2IS0058", CONCAT(
+;     '"Partial type declarations are not allowed for anonymous user maps. ",
+;     '"This also means that is you are using a %b +-> %d form in a context ",
+;     '"where the type is to be deduced from target information, the target ",
+;     '"type must not be partial."), [m])
+
+(DEFUN |throw_msg_partial_mode| (|m|)
+  (PROG ()
+    (RETURN
+     (|throw_msg| 'S2IS0058
+      (CONCAT
+       "Partial type declarations are not allowed for anonymous user maps. "
+       "This also means that is you are using a %b +-> %d form in a context "
+       "where the type is to be deduced from target information, the target "
+       "type must not be partial.")
+      (LIST |m|)))))
+
 ; upADEF t ==
 ;   t isnt [.,[vars,types,.,body],pred,.] => NIL
 ;   -- do some checking on what we got
 ;   for var in vars repeat
-;     if not IDENTP(var) then throwKeyedMsg("S2IS0057",[var])
+;       if not(IDENTP(var)) then throw_msg("S2IS0057", CONCAT(
+;           '"All parameters to anonymous user maps must be identifiers,",
+;           '" possibly in combination with declarations and predicates.",
+;           '" Constants are not allowed. The given expression %1b is not",
+;           '" allowed."), [var])
 ;   -- unabbreviate types
 ;   types := [(if t then evaluateType unabbrev t else NIL) for t in types]
 ;   -- we do not allow partial types
-;   if isPartialMode(m := first types) then throwKeyedMsg("S2IS0058",[m])
+;   if isPartialMode(m := first types) then
+;         throw_msg_partial_mode(m)
 ;
 ;   -- we want everything to be declared or nothing. The exception is that
 ;   -- we do not require a target type since we will compute one anyway.
@@ -38,8 +60,13 @@
 ;     types' := rest types
 ;   for type in types' repeat
 ;     if (type and null m) or (m and null type) then
-;       throwKeyedMsg("S2IS0059",NIL)
-;     if isPartialMode type  then throwKeyedMsg("S2IS0058",[type])
+;         throw_msg("S2IS0059", CONCAT(
+;             '"You entered an incomplete signature for an anonymous user",
+;             '" function.  You must either declare the type types of the",
+;             '" rest and all the arguments or you  must declare the types",
+;             '" of none of them."), [])
+;     if isPartialMode type  then
+;             throw_msg_partial_mode(type)
 ;
 ;   $compilingMap : local := true
 ;
@@ -48,7 +75,8 @@
 ;
 ;   tar := getTarget t
 ;   null m and tar is ['Mapping,.,:argTypes] and (#vars = #argTypes) =>
-;     if isPartialMode tar then throwKeyedMsg("S2IS0058",[tar])
+;     if isPartialMode tar then
+;            throw_msg_partial_mode(tar)
 ;     evalTargetedADEF(t,vars,rest tar,body)
 ;   null m => evalUntargetedADEF(t,vars,types,body)
 ;   evalTargetedADEF(t,vars,types,body)
@@ -102,7 +130,13 @@
              (#1#
               (COND
                ((NULL (IDENTP |var|))
-                (|throwKeyedMsg| 'S2IS0057 (LIST |var|))))))
+                (|throw_msg| 'S2IS0057
+                 (CONCAT
+                  "All parameters to anonymous user maps must be identifiers,"
+                  " possibly in combination with declarations and predicates."
+                  " Constants are not allowed. The given expression %1b is not"
+                  " allowed.")
+                 (LIST |var|))))))
             (SETQ |bfVar#1| (CDR |bfVar#1|))))
          |vars| NIL)
         (SETQ |types|
@@ -122,7 +156,7 @@
                  NIL |types| NIL))
         (COND
          ((|isPartialMode| (SETQ |m| (CAR |types|)))
-          (|throwKeyedMsg| 'S2IS0058 (LIST |m|))))
+          (|throw_msg_partial_mode| |m|)))
         (COND
          ((AND (NULL |m|) (CDR |types|)) (SETQ |m| (CAR (CDR |types|)))
           (SETQ |types'| (CDR (CDR |types|))))
@@ -136,10 +170,16 @@
               (PROGN
                (COND
                 ((OR (AND |type| (NULL |m|)) (AND |m| (NULL |type|)))
-                 (|throwKeyedMsg| 'S2IS0059 NIL)))
+                 (|throw_msg| 'S2IS0059
+                  (CONCAT
+                   "You entered an incomplete signature for an anonymous user"
+                   " function.  You must either declare the type types of the"
+                   " rest and all the arguments or you  must declare the types"
+                   " of none of them.")
+                  NIL)))
                (COND
                 ((|isPartialMode| |type|)
-                 (|throwKeyedMsg| 'S2IS0058 (LIST |type|)))))))
+                 (|throw_msg_partial_mode| |type|))))))
             (SETQ |bfVar#4| (CDR |bfVar#4|))))
          |types'| NIL)
         (SETQ |$compilingMap| T)
@@ -155,8 +195,7 @@
                      (PROGN (SETQ |argTypes| (CDR |ISTMP#1|)) #1#)))
                (EQL (LENGTH |vars|) (LENGTH |argTypes|)))
           (PROGN
-           (COND
-            ((|isPartialMode| |tar|) (|throwKeyedMsg| 'S2IS0058 (LIST |tar|))))
+           (COND ((|isPartialMode| |tar|) (|throw_msg_partial_mode| |tar|)))
            (|evalTargetedADEF| |t| |vars| (CDR |tar|) |body|)))
          ((NULL |m|) (|evalUntargetedADEF| |t| |vars| |types| |body|))
          (#1# (|evalTargetedADEF| |t| |vars| |types| |body|)))))))))
@@ -324,8 +363,12 @@
 
 ; mkInterpTargetedADEF(t,vars,types,oldBody) ==
 ;   null first types =>
-;     throwKeyedMsg("S2IS0056",NIL)
-;     throwMessage '"   map result type needed but not present."
+;       throw_msg("S2IS0056", CONCAT(
+;           '"Anonymous user functions created with %b +-> %d that are",
+;           '" processed in interpret-code mode must have result target",
+;           '" information available.  This information is not present so",
+;           '" FriCAS cannot proceed any further.  This may be remedied by",
+;           '" declaring the function."), [])
 ;   arglCode := ['LIST,:[argCode for type in rest types for var in vars]]
 ;     where argCode == ['putValueValue,['mkAtreeNode,MKQ var],
 ;       objNewCode(['wrap,var],type)]
@@ -338,9 +381,13 @@
     (RETURN
      (COND
       ((NULL (CAR |types|))
-       (PROGN
-        (|throwKeyedMsg| 'S2IS0056 NIL)
-        (|throwMessage| "   map result type needed but not present.")))
+       (|throw_msg| 'S2IS0056
+        (CONCAT "Anonymous user functions created with %b +-> %d that are"
+                " processed in interpret-code mode must have result target"
+                " information available.  This information is not present so"
+                " FriCAS cannot proceed any further.  This may be remedied by"
+                " declaring the function.")
+        NIL))
       (#1='T
        (PROGN
         (SETQ |arglCode|
@@ -474,11 +521,13 @@
 
 ; upAlgExtension t ==
 ;   -- handler for algebraic extension declaration.  These are of
-;   --  the form "a | a**2+1", and have the effect that "a" is declared
+;   --  the form "a | a^2+1", and have the effect that "a" is declared
 ;   --  to be a simple algebraic extension, with respect to the given
 ;   --  polynomial, and given the value "a" in this type.
 ;   t isnt [op,var,eq] => nil
-;   null $genValue => throwKeyedMsg("S2IS0001",NIL)
+;   null $genValue => throw_msg("S2IS0001",
+;       '"Cannot compile algebraic extension declarations yet.",
+;       [])
 ;   a := getUnname var
 ;   clearCmdParts ['propert,a]  --clear properties of a
 ;   algExtension:= eq2AlgExtension eq
@@ -489,14 +538,14 @@
 ;   triple:= getValue algExtension
 ;   upmode:= resolveTMOrCroak(objMode(triple),upmode)
 ;   null (T:= coerceInteractive(triple,upmode)) =>
-;     throwKeyedMsgCannotCoerceWithValue(objVal(triple),
-;       objMode(triple),upmode)
+;       throwMsgCannotCoerceWithValue(objVal(triple), objMode(triple), upmode)
 ;   newmode := objMode T
 ;   (field := resolveTCat(CADDR newmode,'(Field))) or
-;     throwKeyedMsg("S2IS0002",[eq])
+;       throw_msg("S2IS0002",
+;                 '"Cannot pass to a field from the domain %1pb .", [eq])
 ;   pd:= ['UnivariatePolynomial,a,field]
 ;   null (canonicalAE:= coerceInteractive(T,pd)) =>
-;     throwKeyedMsgCannotCoerceWithValue(objVal T,objMode T,pd)
+;       throwMsgCannotCoerceWithValue(objVal(T), objMode(T), pd)
 ;   sae:= ['SimpleAlgebraicExtension,field,pd,objValUnwrap canonicalAE]
 ;   saeTypeSynonym := INTERN STRCONC('"SAE",STRINGIMAGE a)
 ;   saeTypeSynonymValue := objNew(sae,'(Type))
@@ -507,7 +556,9 @@
 ;   putHist(a,'value,T2:= objNew(expr,sae),$e)
 ;   clearDependencies(a)
 ;   if $printTypeIfTrue then
-;     sayKeyedMsg("S2IS0003",NIL)
+;     say_msg("S2IS0003", CONCAT(
+;           '"Your statement has resulted in the following assignments and",
+;           '" declaration:"), [])
 ;     sayMSG concat ['%l,'"   ",saeTypeSynonym,'" := ",
 ;       :prefix2String objVal saeTypeSynonymValue]
 ;     sayMSG concat ['"   ",a,'" : ",saeTypeSynonym,'" := ",a]
@@ -533,7 +584,9 @@
                     (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
                          (PROGN (SETQ |eq| (CAR |ISTMP#2|)) #1='T)))))))
        NIL)
-      ((NULL |$genValue|) (|throwKeyedMsg| 'S2IS0001 NIL))
+      ((NULL |$genValue|)
+       (|throw_msg| 'S2IS0001
+        "Cannot compile algebraic extension declarations yet." NIL))
       (#1#
        (PROGN
         (SETQ |a| (|getUnname| |var|))
@@ -547,17 +600,18 @@
         (SETQ |upmode| (|resolveTMOrCroak| (|objMode| |triple|) |upmode|))
         (COND
          ((NULL (SETQ T$ (|coerceInteractive| |triple| |upmode|)))
-          (|throwKeyedMsgCannotCoerceWithValue| (|objVal| |triple|)
+          (|throwMsgCannotCoerceWithValue| (|objVal| |triple|)
            (|objMode| |triple|) |upmode|))
          (#1#
           (PROGN
            (SETQ |newmode| (|objMode| T$))
            (OR (SETQ |field| (|resolveTCat| (CADDR |newmode|) '(|Field|)))
-               (|throwKeyedMsg| 'S2IS0002 (LIST |eq|)))
+               (|throw_msg| 'S2IS0002
+                "Cannot pass to a field from the domain %1pb ." (LIST |eq|)))
            (SETQ |pd| (LIST '|UnivariatePolynomial| |a| |field|))
            (COND
             ((NULL (SETQ |canonicalAE| (|coerceInteractive| T$ |pd|)))
-             (|throwKeyedMsgCannotCoerceWithValue| (|objVal| T$) (|objMode| T$)
+             (|throwMsgCannotCoerceWithValue| (|objVal| T$) (|objMode| T$)
               |pd|))
             (#1#
              (PROGN
@@ -574,7 +628,12 @@
               (|putHist| |a| '|value| (SETQ T2 (|objNew| |expr| |sae|)) |$e|)
               (|clearDependencies| |a|)
               (COND
-               (|$printTypeIfTrue| (|sayKeyedMsg| 'S2IS0003 NIL)
+               (|$printTypeIfTrue|
+                (|say_msg| 'S2IS0003
+                 (CONCAT
+                  "Your statement has resulted in the following assignments and"
+                  " declaration:")
+                 NIL)
                 (|sayMSG|
                  (|concat|
                   (CONS '|%l|
@@ -809,12 +868,28 @@
               (|putValue| |x| (|getValue| |code|))
               (|putModeSet| |x| |ms|)))))))))))))
 
+; err_msg_local_type(obj) == msg_comp_failure("S2IC0006", CONCAT(
+;     '"Cannot compile conversion for types involving local variables.  In",
+;     '" particular, could not compile the expression involving %b :: %1p %d"),
+;     [obj])
+
+(DEFUN |err_msg_local_type| (|obj|)
+  (PROG ()
+    (RETURN
+     (|msg_comp_failure| 'S2IC0006
+      (CONCAT
+       "Cannot compile conversion for types involving local variables.  In"
+       " particular, could not compile the expression involving %b :: %1p %d")
+      (LIST |obj|)))))
+
 ; upcase t ==
 ;   t isnt [op,lhs,rhs] => nil
 ;   bottomUp lhs
 ;   triple := getValue lhs
 ;   objMode(triple) isnt ['Union,:unionDoms] =>
-;     throwKeyedMsg("S2IS0004",NIL)
+;       throw_msg("S2IS0004", CONCAT(
+;           '"%b case %d is only used for Unions and the object on the",
+;           '" left-hand side does not belong to a union."), [])
 ;   if first unionDoms is ['_:,.,.] then
 ;      for i in 0.. for d in unionDoms repeat
 ;         if d is ['_:,=rhs,.] then rhstag := i
@@ -829,7 +904,7 @@
 ;               [''T, false]]
 ;   else
 ;     (not $genValue) and or/[CONTAINED(var,rhs) for var in $localVars] =>
-;         keyedMsgCompFailure("S2IC0006",[rhs])
+;             err_msg_local_type(rhs)
 ;     rhs := evaluateType unabbrev rhs
 ;     $genValue =>
 ;         t' := coerceUnion2Branch triple
@@ -871,7 +946,10 @@
             (SETQ |ISTMP#1| (|objMode| |triple|))
             (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) '|Union|)
                  (PROGN (SETQ |unionDoms| (CDR |ISTMP#1|)) #1#))))
-          (|throwKeyedMsg| 'S2IS0004 NIL))
+          (|throw_msg| 'S2IS0004
+           (CONCAT "%b case %d is only used for Unions and the object on the"
+                   " left-hand side does not belong to a union.")
+           NIL))
          (#1#
           (PROGN
            (COND
@@ -934,7 +1012,7 @@
                          (COND (|bfVar#19| (RETURN |bfVar#19|))))))
                       (SETQ |bfVar#18| (CDR |bfVar#18|))))
                    NIL |$localVars| NIL))
-             (|keyedMsgCompFailure| 'S2IC0006 (LIST |rhs|)))
+             (|err_msg_local_type| |rhs|))
             (#1#
              (PROGN
               (SETQ |rhs| (|evaluateType| (|unabbrev| |rhs|)))
@@ -968,10 +1046,13 @@
 ;   t isnt [op,lhs,rhs] => nil
 ;   -- do not (yet) support local variables on the rhs
 ;   (not $genValue) and or/[CONTAINED(var,rhs) for var in $localVars] =>
-;     keyedMsgCompFailure("S2IC0010",[rhs])
+;       msg_comp_failure("S2IC0010", CONCAT( _
+;     '"Cannot compile target expressions for types involving local variables.",
+;     '"In particular, could not compile the expression involving %b @ %1p %d"),
+;       [rhs])
 ;   $declaredMode: local := NIL
 ;   m:= evaluateType unabbrev rhs
-;   not isLegitimateMode(m,NIL,NIL) => throwKeyedMsg("S2IE0004",[m])
+;   not isLegitimateMode(m, NIL, NIL) => throw_msg_invalid_type(m)
 ;   $declaredMode:= m
 ;   not atom(lhs) and putTarget(lhs,m)
 ;   ms := bottomUp lhs
@@ -1016,14 +1097,18 @@
                    (COND (|bfVar#21| (RETURN |bfVar#21|))))))
                 (SETQ |bfVar#20| (CDR |bfVar#20|))))
              NIL |$localVars| NIL))
-       (|keyedMsgCompFailure| 'S2IC0010 (LIST |rhs|)))
+       (|msg_comp_failure| 'S2IC0010
+        (CONCAT
+         "Cannot compile target expressions for types involving local variables."
+         "In particular, could not compile the expression involving %b @ %1p %d")
+        (LIST |rhs|)))
       (#1#
        (PROGN
         (SETQ |$declaredMode| NIL)
         (SETQ |m| (|evaluateType| (|unabbrev| |rhs|)))
         (COND
          ((NULL (|isLegitimateMode| |m| NIL NIL))
-          (|throwKeyedMsg| 'S2IE0004 (LIST |m|)))
+          (|throw_msg_invalid_type| |m|))
          (#1#
           (PROGN
            (SETQ |$declaredMode| |m|)
@@ -1056,10 +1141,10 @@
 ;   $useConvertForCoercions : local := true
 ;   -- do not (yet) support local variables on the rhs
 ;   (not $genValue) and or/[CONTAINED(var,rhs) for var in $localVars] =>
-;     keyedMsgCompFailure("S2IC0006",[rhs])
+;         err_msg_local_type(rhs)
 ;   $declaredMode: local := NIL
 ;   m := evaluateType unabbrev rhs
-;   not isLegitimateMode(m,NIL,NIL) => throwKeyedMsg("S2IE0004",[m])
+;   not isLegitimateMode(m, NIL, NIL) => throw_msg_invalid_type(m)
 ;   $declaredMode:= m
 ;   -- 05/16/89 (RSS) following line commented out to give correct
 ;   -- semantic difference between :: and @
@@ -1102,14 +1187,14 @@
                       (COND (|bfVar#23| (RETURN |bfVar#23|))))))
                    (SETQ |bfVar#22| (CDR |bfVar#22|))))
                 NIL |$localVars| NIL))
-          (|keyedMsgCompFailure| 'S2IC0006 (LIST |rhs|)))
+          (|err_msg_local_type| |rhs|))
          (#1#
           (PROGN
            (SETQ |$declaredMode| NIL)
            (SETQ |m| (|evaluateType| (|unabbrev| |rhs|)))
            (COND
             ((NULL (|isLegitimateMode| |m| NIL NIL))
-             (|throwKeyedMsg| 'S2IE0004 (LIST |m|)))
+             (|throw_msg_invalid_type| |m|))
             (#1#
              (PROGN
               (SETQ |$declaredMode| |m|)
@@ -1135,10 +1220,10 @@
 ;             resolveTM(['UnivariatePolynomial,objValUnwrap(v),'(Integer)],m)
 ;           resolveTM(t1,m)
 ;         else m
-;     null t2 => throwKeyedMsgCannotCoerceWithValue(e,t1,m)
+;     null(t2) => throwMsgCannotCoerceWithValue(e, t1, m)
 ;     $genValue => coerceOrRetract(v,t2)
 ;     objNew(getArgValue(tree,t2),t2)
-;   val:= value or throwKeyedMsgCannotCoerceWithValue(e,t1,m)
+;   val := value or throwMsgCannotCoerceWithValue(e, t1, m)
 ;   if categoryForm?(m) then
 ;       putValue(op, objNew(devaluate objValUnwrap val, m))
 ;   else
@@ -1173,11 +1258,10 @@
                                (#1# |m|)))
                       (COND
                        ((NULL |t2|)
-                        (|throwKeyedMsgCannotCoerceWithValue| |e| |t1| |m|))
+                        (|throwMsgCannotCoerceWithValue| |e| |t1| |m|))
                        (|$genValue| (|coerceOrRetract| |v| |t2|))
                        (#1# (|objNew| (|getArgValue| |tree| |t2|) |t2|)))))))
-      (SETQ |val|
-              (OR |value| (|throwKeyedMsgCannotCoerceWithValue| |e| |t1| |m|)))
+      (SETQ |val| (OR |value| (|throwMsgCannotCoerceWithValue| |e| |t1| |m|)))
       (COND
        ((|categoryForm?| |m|)
         (|putValue| |op| (|objNew| (|devaluate| (|objValUnwrap| |val|)) |m|)))
@@ -1199,8 +1283,7 @@
 ;     it is ['_|,pred] =>
 ;       [['SUCHTHAT,mkAtree1 pred]]
 ;     it is [op,:.] and (op in '(VALUE UNTIL)) => nil
-;     keyedSystemError("S2GE0016",
-;         ['"transformCollect",'"Unknown type of iterator"])
+;     unexpected_error(['"transformCollect", '"Unknown type of iterator"])
 ;   bodyTree:=mkAtree1 body
 ;   iterList:=NCONC(iterList,[:iterTran2 for it in itrl]) where
 ;     iterTran2 ==
@@ -1211,8 +1294,7 @@
 ;       it is [op,b] and (op in '(UNTIL)) =>
 ;         [[op,mkAtree1 b]]
 ;       it is ['_|,pred] => nil
-;       keyedSystemError("S2GE0016",
-;         ['"transformCollect",'"Unknown type of iterator"])
+;       unexpected_error(['"transformCollect", '"Unknown type of iterator"])
 ;   [:iterList,bodyTree]
 
 (DEFUN |transformCollect| (|bfVar#30|)
@@ -1341,7 +1423,7 @@
                                      (|member| |op| '(VALUE UNTIL)))
                                 NIL)
                                (#1#
-                                (|keyedSystemError| 'S2GE0016
+                                (|unexpected_error|
                                  (LIST "transformCollect"
                                        "Unknown type of iterator")))))
                              |bfVar#25|))))
@@ -1392,7 +1474,7 @@
                                                    #1#))))
                                        NIL)
                                       (#1#
-                                       (|keyedSystemError| 'S2GE0016
+                                       (|unexpected_error|
                                         (LIST "transformCollect"
                                               "Unknown type of iterator")))))
                                     |bfVar#29|))))
@@ -1522,7 +1604,7 @@
 ;       -- following is an optimization
 ;       typeIsASmallInteger(get0(index, 'mode, $env)) =>
 ;         RPLACA(iter,'ISTEP)
-;     throwKeyedMsg('"Malformed iterator")
+;     throw_msg("Malformed", '"Malformed iterator", [])
 
 (DEFUN |upLoopIters| (|itrl|)
   (PROG (|ISTMP#1| |pred| |index| |ISTMP#2| |s| |lower| |ISTMP#3| |step|
@@ -1579,14 +1661,25 @@
               (COND
                ((|typeIsASmallInteger| (|get0| |index| '|mode| |$env|))
                 (RPLACA |iter| 'ISTEP)))))
-            (#1# (|throwKeyedMsg| "Malformed iterator")))))
+            (#1# (|throw_msg| '|Malformed| "Malformed iterator" NIL)))))
          (SETQ |bfVar#32| (CDR |bfVar#32|))))
       |itrl| NIL))))
+
+; throw_msg_index(ind) == throw_msg("S2IS0005",
+;     '"The index variable in an iterator must be a symbol and %1 is not one.",
+;     [ind])
+
+(DEFUN |throw_msg_index| (|ind|)
+  (PROG ()
+    (RETURN
+     (|throw_msg| 'S2IS0005
+      "The index variable in an iterator must be a symbol and %1 is not one."
+      (LIST |ind|)))))
 
 ; upLoopIterIN(iter,index,s) ==
 ;   iterMs := bottomUp s
 ;
-;   null IDENTP index =>  throwKeyedMsg("S2IS0005",[index])
+;   null(IDENTP(index)) =>  throw_msg_index(index)
 ;
 ;   if $genValue and first iterMs is ['Union,:.] then
 ;     v := coerceUnion2Branch getValue s
@@ -1608,7 +1701,7 @@
 ;     RPLACA(iter, first newIter)
 ;     RPLACD(iter, rest newIter)
 ;
-;   iterMs isnt [['List,ud]] => throwKeyedMsg("S2IS0006",[index])
+;   iterMs isnt [['List, ud]] => throw_msg_iter(index)
 ;   putIntSymTab(index, 'mode, ud, $env)
 ;   mkLocalVar('"the iterator expression",index)
 
@@ -1618,79 +1711,93 @@
     (RETURN
      (PROGN
       (SETQ |iterMs| (|bottomUp| |s|))
-      (COND
-       ((NULL (IDENTP |index|)) (|throwKeyedMsg| 'S2IS0005 (LIST |index|)))
-       (#1='T
-        (PROGN
-         (COND
-          ((AND |$genValue|
+      (COND ((NULL (IDENTP |index|)) (|throw_msg_index| |index|))
+            (#1='T
+             (PROGN
+              (COND
+               ((AND |$genValue|
+                     (PROGN
+                      (SETQ |ISTMP#1| (CAR |iterMs|))
+                      (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) '|Union|))))
+                (SETQ |v| (|coerceUnion2Branch| (|getValue| |s|)))
+                (SETQ |m| (|objMode| |v|)) (|putValue| |s| |v|)
+                (|putMode| |s| |m|) (SETQ |iterMs| (LIST |m|))
+                (|putModeSet| |s| |iterMs|)))
+              (COND
+               ((OR
+                 (AND (CONSP |iterMs|) (EQ (CDR |iterMs|) NIL)
+                      (PROGN
+                       (SETQ |ISTMP#1| (CAR |iterMs|))
+                       (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) '|Segment|)
+                            (PROGN
+                             (SETQ |ISTMP#2| (CDR |ISTMP#1|))
+                             (AND (CONSP |ISTMP#2|)
+                                  (EQ (CDR |ISTMP#2|) NIL))))))
+                 (AND (CONSP |iterMs|) (EQ (CDR |iterMs|) NIL)
+                      (PROGN
+                       (SETQ |ISTMP#1| (CAR |iterMs|))
+                       (AND (CONSP |ISTMP#1|)
+                            (EQ (CAR |ISTMP#1|) '|UniversalSegment|)
+                            (PROGN
+                             (SETQ |ISTMP#2| (CDR |ISTMP#1|))
+                             (AND (CONSP |ISTMP#2|)
+                                  (EQ (CDR |ISTMP#2|) NIL)))))))
                 (PROGN
-                 (SETQ |ISTMP#1| (CAR |iterMs|))
-                 (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) '|Union|))))
-           (SETQ |v| (|coerceUnion2Branch| (|getValue| |s|)))
-           (SETQ |m| (|objMode| |v|)) (|putValue| |s| |v|) (|putMode| |s| |m|)
-           (SETQ |iterMs| (LIST |m|)) (|putModeSet| |s| |iterMs|)))
-         (COND
-          ((OR
-            (AND (CONSP |iterMs|) (EQ (CDR |iterMs|) NIL)
-                 (PROGN
-                  (SETQ |ISTMP#1| (CAR |iterMs|))
-                  (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) '|Segment|)
-                       (PROGN
-                        (SETQ |ISTMP#2| (CDR |ISTMP#1|))
-                        (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL))))))
-            (AND (CONSP |iterMs|) (EQ (CDR |iterMs|) NIL)
-                 (PROGN
-                  (SETQ |ISTMP#1| (CAR |iterMs|))
-                  (AND (CONSP |ISTMP#1|)
-                       (EQ (CAR |ISTMP#1|) '|UniversalSegment|)
-                       (PROGN
-                        (SETQ |ISTMP#2| (CDR |ISTMP#1|))
-                        (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)))))))
-           (PROGN
-            (SETQ |lower| (LIST (|mkAtreeNode| '|low|) |s|))
-            (SETQ |step| (LIST (|mkAtreeNode| '|incr|) |s|))
-            (SETQ |upperList|
-                    (COND
-                     ((EQ (CAAR |iterMs|) '|Segment|)
-                      (LIST (LIST (|mkAtreeNode| '|high|) |s|)))
-                     (#1# NIL)))
-            (|upLoopIterSTEP| |index| |lower| |step| |upperList|)
-            (SETQ |newIter|
-                    (CONS 'STEP
-                          (CONS |index|
-                                (CONS |lower| (CONS |step| |upperList|)))))
-            (RPLACA |iter| (CAR |newIter|))
-            (RPLACD |iter| (CDR |newIter|))))
-          ((NOT
-            (AND (CONSP |iterMs|) (EQ (CDR |iterMs|) NIL)
-                 (PROGN
-                  (SETQ |ISTMP#1| (CAR |iterMs|))
-                  (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) '|List|)
-                       (PROGN
-                        (SETQ |ISTMP#2| (CDR |ISTMP#1|))
-                        (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
-                             (PROGN (SETQ |ud| (CAR |ISTMP#2|)) #1#)))))))
-           (|throwKeyedMsg| 'S2IS0006 (LIST |index|)))
-          (#1#
-           (PROGN
-            (|putIntSymTab| |index| '|mode| |ud| |$env|)
-            (|mkLocalVar| "the iterator expression" |index|)))))))))))
+                 (SETQ |lower| (LIST (|mkAtreeNode| '|low|) |s|))
+                 (SETQ |step| (LIST (|mkAtreeNode| '|incr|) |s|))
+                 (SETQ |upperList|
+                         (COND
+                          ((EQ (CAAR |iterMs|) '|Segment|)
+                           (LIST (LIST (|mkAtreeNode| '|high|) |s|)))
+                          (#1# NIL)))
+                 (|upLoopIterSTEP| |index| |lower| |step| |upperList|)
+                 (SETQ |newIter|
+                         (CONS 'STEP
+                               (CONS |index|
+                                     (CONS |lower|
+                                           (CONS |step| |upperList|)))))
+                 (RPLACA |iter| (CAR |newIter|))
+                 (RPLACD |iter| (CDR |newIter|))))
+               ((NOT
+                 (AND (CONSP |iterMs|) (EQ (CDR |iterMs|) NIL)
+                      (PROGN
+                       (SETQ |ISTMP#1| (CAR |iterMs|))
+                       (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) '|List|)
+                            (PROGN
+                             (SETQ |ISTMP#2| (CDR |ISTMP#1|))
+                             (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
+                                  (PROGN (SETQ |ud| (CAR |ISTMP#2|)) #1#)))))))
+                (|throw_msg_iter| |index|))
+               (#1#
+                (PROGN
+                 (|putIntSymTab| |index| '|mode| |ud| |$env|)
+                 (|mkLocalVar| "the iterator expression" |index|)))))))))))
+
+; report_bound(kind) ==
+;     throw_msg("S2IS0007", '"The %1 bound in a loop must be an integer.",
+;               [kind])
+
+(DEFUN |report_bound| (|kind|)
+  (PROG ()
+    (RETURN
+     (|throw_msg| 'S2IS0007 "The %1 bound in a loop must be an integer."
+      (LIST |kind|)))))
 
 ; upLoopIterSTEP(index,lower,step,upperList) ==
-;   null IDENTP index => throwKeyedMsg("S2IS0005",[index])
+;   null(IDENTP(index)) => throw_msg_index(index)
 ;   ltype := IFCAR bottomUpUseSubdomain(lower)
 ;   not (typeIsASmallInteger(ltype) or isEqualOrSubDomain(ltype,$Integer))=>
-;     throwKeyedMsg("S2IS0007",['"lower"])
+;         report_bound('"lower")
 ;   stype := IFCAR bottomUpUseSubdomain(step)
 ;   not (typeIsASmallInteger(stype) or isEqualOrSubDomain(stype,$Integer))=>
-;     throwKeyedMsg("S2IS0008",NIL)
+;       throw_msg("S2IS0008",
+;           '"The step value in a loop must be a constant integer.", [])
 ;   types := [ltype]
 ;   utype := nil
 ;   for upper in upperList repeat
 ;     utype := IFCAR bottomUpUseSubdomain(upper)
 ;     not (typeIsASmallInteger(utype) or isEqualOrSubDomain(utype,$Integer))=>
-;       throwKeyedMsg("S2IS0007",['"upper"])
+;         report_bound('"upper")
 ;   if utype then types := [utype, :types]
 ;   else types := [stype, :types]
 ;   type := resolveTypeListAny REMDUP types
@@ -1700,7 +1807,7 @@
 (DEFUN |upLoopIterSTEP| (|index| |lower| |step| |upperList|)
   (PROG (|ltype| |stype| |types| |utype| |type|)
     (RETURN
-     (COND ((NULL (IDENTP |index|)) (|throwKeyedMsg| 'S2IS0005 (LIST |index|)))
+     (COND ((NULL (IDENTP |index|)) (|throw_msg_index| |index|))
            (#1='T
             (PROGN
              (SETQ |ltype| (IFCAR (|bottomUpUseSubdomain| |lower|)))
@@ -1708,7 +1815,7 @@
               ((NULL
                 (OR (|typeIsASmallInteger| |ltype|)
                     (|isEqualOrSubDomain| |ltype| |$Integer|)))
-               (|throwKeyedMsg| 'S2IS0007 (LIST "lower")))
+               (|report_bound| "lower"))
               (#1#
                (PROGN
                 (SETQ |stype| (IFCAR (|bottomUpUseSubdomain| |step|)))
@@ -1716,7 +1823,8 @@
                  ((NULL
                    (OR (|typeIsASmallInteger| |stype|)
                        (|isEqualOrSubDomain| |stype| |$Integer|)))
-                  (|throwKeyedMsg| 'S2IS0008 NIL))
+                  (|throw_msg| 'S2IS0008
+                   "The step value in a loop must be a constant integer." NIL))
                  (#1#
                   (PROGN
                    (SETQ |types| (LIST |ltype|))
@@ -1735,7 +1843,7 @@
                            ((NULL
                              (OR (|typeIsASmallInteger| |utype|)
                                  (|isEqualOrSubDomain| |utype| |$Integer|)))
-                            (|throwKeyedMsg| 'S2IS0007 (LIST "upper")))))))
+                            (|report_bound| "upper"))))))
                        (SETQ |bfVar#33| (CDR |bfVar#33|))))
                     |upperList| NIL)
                    (COND (|utype| (SETQ |types| (CONS |utype| |types|)))
@@ -1996,7 +2104,9 @@
 ;   itr is ['IN,index,s] =>
 ;     $indexVars:=[getUnname index,:$indexVars]
 ;     [m]:= bottomUp s
-;     m isnt ['List,um] => throwKeyedMsg("S2IS0009",[m])
+;     m isnt ['List, um] => throw_msg("S2IS0009", CONCAT(
+;         '"FriCAS can only iterate over lists now and you supplied an",
+;         '" object of type %1bp ."), [m])
 ;     $indexTypes:=[um,:$indexTypes]
 ;     ['IN,getUnname index,getArgValue(s,m)]
 ;   (itr is [x,pred]) and (x in '(WHILE UNTIL SUCHTHAT)) =>
@@ -2125,7 +2235,10 @@
                  (SETQ |ISTMP#1| (CDR |m|))
                  (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
                       (PROGN (SETQ |um| (CAR |ISTMP#1|)) #1#)))))
-          (|throwKeyedMsg| 'S2IS0009 (LIST |m|)))
+          (|throw_msg| 'S2IS0009
+           (CONCAT "FriCAS can only iterate over lists now and you supplied an"
+                   " object of type %1bp .")
+           (LIST |m|)))
          (#1#
           (PROGN
            (SETQ |$indexTypes| (CONS |um| |$indexTypes|))
@@ -2173,7 +2286,8 @@
 ;   $collectTypeList:=
 ;     null $collectTypeList => [rm:=m]
 ;     [:$collectTypeList,rm:=resolveTT(m,last $collectTypeList)]
-;   null rm => throwKeyedMsg("S2IS0010",NIL)
+;   null(rm) => throw_msg("S2IS0010",
+;         '"Cannot resolve types in collect body.", [])
 ;   value:=
 ;     rm ~= m => coerceInteractive(getValue exp,rm)
 ;     getValue exp
@@ -2208,15 +2322,17 @@
                                       (|resolveTT| |m|
                                        (|last| |$collectTypeList|)))
                               NIL)))))
-      (COND ((NULL |rm|) (|throwKeyedMsg| 'S2IS0010 NIL))
-            (#1#
-             (PROGN
-              (SETQ |value|
-                      (COND
-                       ((NOT (EQUAL |rm| |m|))
-                        (|coerceInteractive| (|getValue| |exp|) |rm|))
-                       (#1# (|getValue| |exp|))))
-              (|objValUnwrap| |value|))))))))
+      (COND
+       ((NULL |rm|)
+        (|throw_msg| 'S2IS0010 "Cannot resolve types in collect body." NIL))
+       (#1#
+        (PROGN
+         (SETQ |value|
+                 (COND
+                  ((NOT (EQUAL |rm| |m|))
+                   (|coerceInteractive| (|getValue| |exp|) |rm|))
+                  (#1# (|getValue| |exp|))))
+         (|objValUnwrap| |value|))))))))
 
 ; isStreamCollect itrl ==
 ;   -- calls bottomUp on iterators and if any of them are streams
@@ -2291,7 +2407,8 @@
 
 ; collectStream(t,op,itrl,body) ==
 ;   v := CATCH('loopCompiler,collectStream1(t,op,itrl,body))
-;   v = 'tryInterpOnly => throwKeyedMsg("S2IS0011",NIL)
+;   v = 'tryInterpOnly => throw_msg("S2IS0011",
+;       '"Interpret-Code mode is not supported for stream bodies.", [])
 ;   v
 
 (DEFUN |collectStream| (|t| |op| |itrl| |body|)
@@ -2301,8 +2418,11 @@
       (SETQ |v|
               (CATCH '|loopCompiler|
                 (|collectStream1| |t| |op| |itrl| |body|)))
-      (COND ((EQ |v| '|tryInterpOnly|) (|throwKeyedMsg| 'S2IS0011 NIL))
-            ('T |v|))))))
+      (COND
+       ((EQ |v| '|tryInterpOnly|)
+        (|throw_msg| 'S2IS0011
+         "Interpret-Code mode is not supported for stream bodies." NIL))
+       ('T |v|))))))
 
 ; collectStream1(t,op,itrl,body) ==
 ;   $indexVars:local := NIL
@@ -2372,6 +2492,20 @@
          (SETQ |bfVar#57| (CDR |bfVar#57|))))
       |itrl| NIL))))
 
+; throw_msg_iter(ind) == throw_msg("S2IS0006", CONCAT(
+;     '"FriCAS cannot iterate with %1b over your form now.  Perhaps ",
+;     '"you should try using a conversion to make sure your form is ",
+;     '"a list or stream, for example."), [ind])
+
+(DEFUN |throw_msg_iter| (|ind|)
+  (PROG ()
+    (RETURN
+     (|throw_msg| 'S2IS0006
+      (CONCAT "FriCAS cannot iterate with %1b over your form now.  Perhaps "
+              "you should try using a conversion to make sure your form is "
+              "a list or stream, for example.")
+      (LIST |ind|)))))
+
 ; upStreamIterIN(iter,index,s) ==
 ;   iterMs := bottomUp s
 ;
@@ -2389,7 +2523,7 @@
 ;
 ;   (iterMs isnt [['List,ud]]) and (iterMs isnt [['Stream,ud]])
 ;     and (iterMs isnt [['InfinitTuple, ud]]) =>
-;       throwKeyedMsg("S2IS0006",[index])
+;             throw_msg_iter(index)
 ;   putIntSymTab(index, 'mode, ud, $env)
 ;   mkLocalVar('"the iterator expression",index)
 ;   s :=
@@ -2466,7 +2600,7 @@
                       (SETQ |ISTMP#2| (CDR |ISTMP#1|))
                       (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
                            (PROGN (SETQ |ud| (CAR |ISTMP#2|)) #1#))))))))
-        (|throwKeyedMsg| 'S2IS0006 (LIST |index|)))
+        (|throw_msg_iter| |index|))
        (#1#
         (PROGN
          (|putIntSymTab| |index| '|mode| |ud| |$env|)
@@ -2496,15 +2630,17 @@
 
 ; upStreamIterSTEP(index,lower,step,upperList) ==
 ;   null isEqualOrSubDomain(ltype := IFCAR bottomUpUseSubdomain(lower),
-;     $Integer) => throwKeyedMsg("S2IS0007",['"lower"])
+;         $Integer) => report_bound('"lower")
 ;   null isEqualOrSubDomain(stype := IFCAR bottomUpUseSubdomain(step),
-;     $Integer) => throwKeyedMsg("S2IS0008",NIL)
+;     $Integer) => throw_msg("S2IS0008",
+;         '"The step value in a loop must be a constant integer.", [])
 ;   for upper in upperList repeat
 ;     null isEqualOrSubDomain(IFCAR bottomUpUseSubdomain(upper),
-;       $Integer) => throwKeyedMsg("S2IS0007",['"upper"])
+;         $Integer) => report_bound('"upper")
 ;
 ;   putIntSymTab(index, 'mode, type := resolveTT(ltype, stype), $env)
-;   null type => throwKeyedMsg("S2IS0010", nil)
+;   null(type) => throw_msg("S2IS0010",
+;         '"Cannot resolve types in collect body.", [])
 ;   mkLocalVar('"the iterator expression",index)
 ;
 ;   s :=
@@ -2535,11 +2671,12 @@
       ((NULL
         (|isEqualOrSubDomain|
          (SETQ |ltype| (IFCAR (|bottomUpUseSubdomain| |lower|))) |$Integer|))
-       (|throwKeyedMsg| 'S2IS0007 (LIST "lower")))
+       (|report_bound| "lower"))
       ((NULL
         (|isEqualOrSubDomain|
          (SETQ |stype| (IFCAR (|bottomUpUseSubdomain| |step|))) |$Integer|))
-       (|throwKeyedMsg| 'S2IS0008 NIL))
+       (|throw_msg| 'S2IS0008
+        "The step value in a loop must be a constant integer." NIL))
       (#1='T
        (PROGN
         ((LAMBDA (|bfVar#58| |upper|)
@@ -2553,53 +2690,51 @@
                ((NULL
                  (|isEqualOrSubDomain| (IFCAR (|bottomUpUseSubdomain| |upper|))
                   |$Integer|))
-                (IDENTITY (|throwKeyedMsg| 'S2IS0007 (LIST "upper")))))))
+                (IDENTITY (|report_bound| "upper"))))))
             (SETQ |bfVar#58| (CDR |bfVar#58|))))
          |upperList| NIL)
         (|putIntSymTab| |index| '|mode|
          (SETQ |type| (|resolveTT| |ltype| |stype|)) |$env|)
-        (COND ((NULL |type|) (|throwKeyedMsg| 'S2IS0010 NIL))
-              (#1#
-               (PROGN
-                (|mkLocalVar| "the iterator expression" |index|)
-                (SETQ |s|
-                        (COND
-                         ((NULL |upperList|)
-                          (PROGN
-                           (SETQ |genFun| '|stream|)
-                           (SETQ |form|
-                                   (LIST (|mkAtreeNode| |genFun|)
-                                         (LIST
-                                          (LIST (|mkAtreeNode| '|Dollar|)
-                                                (LIST '|IncrementingMaps|
-                                                      |type|)
-                                                (|mkAtreeNode| '|incrementBy|))
-                                          |step|)
-                                         |lower|))
-                           (|bottomUp| |form|)
-                           |form|))
-                         (#1#
-                          (PROGN
-                           (SETQ |form|
-                                   (LIST (|mkAtreeNode| 'SEGMENT) |lower|
-                                         (CAR |upperList|)))
-                           (|putTarget| |form| (LIST '|Segment| |type|))
-                           (SETQ |form|
-                                   (LIST (|mkAtreeNode| '|construct|) |form|))
-                           (|putTarget| |form|
-                            (LIST '|List| (LIST '|Segment| |type|)))
-                           (SETQ |form|
-                                   (LIST (|mkAtreeNode| '|expand|) |form|))
-                           (|putTarget| |form| '(|List| (|Integer|)))
-                           (SETQ |form|
-                                   (LIST (|mkAtreeNode| '|pretend|)
-                                         (LIST (|mkAtreeNode| 'COERCE) |form|
-                                               (LIST '|Stream| |$Integer|))
-                                         (LIST '|InfiniteTuple| |$Integer|)))
-                           (|bottomUp| |form|)
-                           |form|))))
-                (SETQ |$indexVars|
-                        (CONS (CONS |index| |s|) |$indexVars|)))))))))))
+        (COND
+         ((NULL |type|)
+          (|throw_msg| 'S2IS0010 "Cannot resolve types in collect body." NIL))
+         (#1#
+          (PROGN
+           (|mkLocalVar| "the iterator expression" |index|)
+           (SETQ |s|
+                   (COND
+                    ((NULL |upperList|)
+                     (PROGN
+                      (SETQ |genFun| '|stream|)
+                      (SETQ |form|
+                              (LIST (|mkAtreeNode| |genFun|)
+                                    (LIST
+                                     (LIST (|mkAtreeNode| '|Dollar|)
+                                           (LIST '|IncrementingMaps| |type|)
+                                           (|mkAtreeNode| '|incrementBy|))
+                                     |step|)
+                                    |lower|))
+                      (|bottomUp| |form|)
+                      |form|))
+                    (#1#
+                     (PROGN
+                      (SETQ |form|
+                              (LIST (|mkAtreeNode| 'SEGMENT) |lower|
+                                    (CAR |upperList|)))
+                      (|putTarget| |form| (LIST '|Segment| |type|))
+                      (SETQ |form| (LIST (|mkAtreeNode| '|construct|) |form|))
+                      (|putTarget| |form|
+                       (LIST '|List| (LIST '|Segment| |type|)))
+                      (SETQ |form| (LIST (|mkAtreeNode| '|expand|) |form|))
+                      (|putTarget| |form| '(|List| (|Integer|)))
+                      (SETQ |form|
+                              (LIST (|mkAtreeNode| '|pretend|)
+                                    (LIST (|mkAtreeNode| 'COERCE) |form|
+                                          (LIST '|Stream| |$Integer|))
+                                    (LIST '|InfiniteTuple| |$Integer|)))
+                      (|bottomUp| |form|)
+                      |form|))))
+           (SETQ |$indexVars| (CONS (CONS |index| |s|) |$indexVars|)))))))))))
 
 ; collectOneStream(t,op,itrl,body) ==
 ;   -- build stream collect for case of iterating over a single stream
@@ -2717,7 +2852,7 @@
 ;   -- transform funBody into a lambda with index as the parameter
 ;   mode := objMode getValue s
 ;   mode isnt ['Stream, indMode] and mode isnt ['InfiniteTuple, indMode] =>
-;     keyedSystemError('"S2GE0016", '("mkIterFun" "bad stream index type"))
+;         unexpected_error( '("mkIterFun" "bad stream index type"))
 ;   putIntSymTab(index, 'mode, indMode, $env)
 ;   mkLocalVar($mapName,index)
 ;   [m]:=bottomUpCompile funBody
@@ -2755,7 +2890,7 @@
                 (SETQ |ISTMP#1| (CDR |mode|))
                 (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
                      (PROGN (SETQ |indMode| (CAR |ISTMP#1|)) #1#))))))
-        (|keyedSystemError| "S2GE0016" '("mkIterFun" "bad stream index type")))
+        (|unexpected_error| '("mkIterFun" "bad stream index type")))
        (#1#
         (PROGN
          (|putIntSymTab| |index| '|mode| |indMode| |$env|)
@@ -3642,10 +3777,20 @@
          (|putModeSet| |op| (LIST (OR |tar| |m|)))))
        (#1# (PROGN (|putValue| |op| |val|) (|putModeSet| |op| (LIST |m|)))))))))
 
+; err_cannot_convert(type) == throw_msg("S2IC0007",
+;     '"Cannot convert an element of the construct to type %1bp .", [type])
+
+(DEFUN |err_cannot_convert| (|type|)
+  (PROG ()
+    (RETURN
+     (|throw_msg| 'S2IC0007
+      "Cannot convert an element of the construct to type %1bp ."
+      (LIST |type|)))))
+
 ; evalInfiniteTupleConstruct(op,l,m,tar) ==
 ;   ['Stream, ud] := m
 ;   code := first [(getArgValue(x,['InfiniteTuple, ud]) or
-;     throwKeyedMsg("S2IC0007",[['InifinteTuple, ud]])) for x in l]
+;         err_cannot_convert(['InifinteTuple, ud])) for x in l]
 ;   val :=
 ;     $genValue => objNewWrap(timedEVALFUN code,m)
 ;     objNew(code,m)
@@ -3675,8 +3820,8 @@
                              (CONS
                               (OR
                                (|getArgValue| |x| (LIST '|InfiniteTuple| |ud|))
-                               (|throwKeyedMsg| 'S2IC0007
-                                (LIST (LIST '|InifinteTuple| |ud|))))
+                               (|err_cannot_convert|
+                                (LIST '|InifinteTuple| |ud|)))
                               |bfVar#87|))))
                    (SETQ |bfVar#86| (CDR |bfVar#86|))))
                 NIL |l| NIL)))
@@ -3695,7 +3840,7 @@
 ; evalconstruct(op,l,m,tar) ==
 ;   [agg,:.,underMode]:= m
 ;   code := ['LIST, :(argCode:=[(getArgValue(x,underMode) or
-;     throwKeyedMsg("S2IC0007",[underMode])) for x in l])]
+;         err_cannot_convert(underMode))  for x in l])]
 ;   val :=
 ;     $genValue => objNewWrap(timedEVALFUN code,m)
 ;     objNew(code,m)
@@ -3727,8 +3872,8 @@
                                   (SETQ |bfVar#89|
                                           (CONS
                                            (OR (|getArgValue| |x| |underMode|)
-                                               (|throwKeyedMsg| 'S2IC0007
-                                                (LIST |underMode|)))
+                                               (|err_cannot_convert|
+                                                |underMode|))
                                            |bfVar#89|))))
                                 (SETQ |bfVar#88| (CDR |bfVar#88|))))
                              NIL |l| NIL))))
@@ -3796,6 +3941,17 @@
                 (SETQ |bfVar#93| (CDR |bfVar#93|))))
              NIL |modeList| NIL |l| NIL))))))
 
+; throw_msg_null(t) == throw_msg("S2IS0013",
+;     '"FriCAS does not understand what you mean when you specify %b ",
+;     '"[] %d as having the type %1bp .", [t])
+
+(DEFUN |throw_msg_null| (|t|)
+  (PROG ()
+    (RETURN
+     (|throw_msg| 'S2IS0013
+      "FriCAS does not understand what you mean when you specify %b "
+      "[] %d as having the type %1bp ." (LIST |t|)))))
+
 ; upNullList(op,l,tar) ==
 ;   -- handler for [] (empty list)
 ;   defMode :=
@@ -3805,7 +3961,7 @@
 ;   val := objNewWrap(NIL,defMode)
 ;   tar and not isPartialMode(tar) =>
 ;     null (val' := coerceInteractive(val,tar)) =>
-;       throwKeyedMsg("S2IS0013",[tar])
+;             throw_msg_null(tar)
 ;     putValue(op,val')
 ;     putModeSet(op,[tar])
 ;   putValue(op,val)
@@ -3832,7 +3988,7 @@
        ((AND |tar| (NULL (|isPartialMode| |tar|)))
         (COND
          ((NULL (SETQ |val'| (|coerceInteractive| |val| |tar|)))
-          (|throwKeyedMsg| 'S2IS0013 (LIST |tar|)))
+          (|throw_msg_null| |tar|))
          (#1#
           (PROGN (|putValue| |op| |val'|) (|putModeSet| |op| (LIST |tar|))))))
        (#1#
@@ -3875,7 +4031,7 @@
 ;     bottomUp(val)
 ;     obj := getValue(val)
 ;     (code := coerceInteractive(obj, tar1)) or
-;         throwKeyedMsgCannotCoerceWithValue(objVal(obj), objMode(obj), tar1)
+;         throwMsgCannotCoerceWithValue(objVal(obj), objMode(obj), tar1)
 ;     code := ["CONS", n, objVal(code)]
 ;     if $genValue then code := wrap(timedEVALFUN(code))
 ;     putValue(op, objNew(code, um))
@@ -3914,7 +4070,7 @@
               (|bottomUp| |val|)
               (SETQ |obj| (|getValue| |val|))
               (OR (SETQ |code| (|coerceInteractive| |obj| |tar1|))
-                  (|throwKeyedMsgCannotCoerceWithValue| (|objVal| |obj|)
+                  (|throwMsgCannotCoerceWithValue| (|objVal| |obj|)
                    (|objMode| |obj|) |tar1|))
               (SETQ |code| (LIST 'CONS |n| (|objVal| |code|)))
               (COND
@@ -3925,14 +4081,17 @@
 ; upTaggedUnionConstruct(op,l,tar) ==
 ;   -- special handler for tagged union constructors
 ;   tar isnt [.,:types] => nil
-;   #l ~= 1 => throwKeyedMsg("S2IS0051",[#l,tar])
+;   #l ~= 1 => throw_msg("S2IS0051", CONCAT(
+;       '"A tagged union construct with %b [ %d and %b ] %d must contain only",
+;       '" one element and you supplied %1b to create an object of type",
+;       '" %2bp."), [#l, tar])
 ;   a1 := first(l)
 ;   a1 is [op1, vtag, val] and is_OPTARG(op1) and (tag := is_tag(vtag)) =>
 ;       up_tagged_construct1(op, tag, val, tar)
 ;   bottomUp(a1)
 ;   obj := getValue(a1)
 ;   (code := coerceInteractive(getValue(a1), tar)) or
-;     throwKeyedMsgCannotCoerceWithValue(objVal obj, objMode obj,tar)
+;         throwMsgCannotCoerceWithValue(objVal(obj), objMode(obj), tar)
 ;   putValue(op,code)
 ;   putModeSet(op,[tar])
 
@@ -3943,7 +4102,12 @@
      (COND
       ((NOT (AND (CONSP |tar|) (PROGN (SETQ |types| (CDR |tar|)) #1='T))) NIL)
       ((NOT (EQL (LENGTH |l|) 1))
-       (|throwKeyedMsg| 'S2IS0051 (LIST (LENGTH |l|) |tar|)))
+       (|throw_msg| 'S2IS0051
+        (CONCAT
+         "A tagged union construct with %b [ %d and %b ] %d must contain only"
+         " one element and you supplied %1b to create an object of type"
+         " %2bp.")
+        (LIST (LENGTH |l|) |tar|)))
       (#1#
        (PROGN
         (SETQ |a1| (CAR |l|))
@@ -3965,7 +4129,7 @@
            (|bottomUp| |a1|)
            (SETQ |obj| (|getValue| |a1|))
            (OR (SETQ |code| (|coerceInteractive| (|getValue| |a1|) |tar|))
-               (|throwKeyedMsgCannotCoerceWithValue| (|objVal| |obj|)
+               (|throwMsgCannotCoerceWithValue| (|objVal| |obj|)
                 (|objMode| |obj|) |tar|))
            (|putValue| |op| |code|)
            (|putModeSet| |op| (LIST |tar|)))))))))))
@@ -3975,7 +4139,7 @@
 ;   tar isnt [.,:types] => nil
 ;   for arg in l repeat bottomUp arg
 ;   argCode :=
-;     [(getArgValue(arg,type) or throwKeyedMsgCannotCoerceWithValue(
+;     [(getArgValue(arg,type) or throwMsgCannotCoerceWithValue(
 ;       objVal getValue arg,objMode getValue arg,type))
 ;         for arg in l for ['_:,.,type] in types]
 ;   len := #l
@@ -4026,7 +4190,7 @@
                            (SETQ |bfVar#100|
                                    (CONS
                                     (OR (|getArgValue| |arg| |type|)
-                                        (|throwKeyedMsgCannotCoerceWithValue|
+                                        (|throwMsgCannotCoerceWithValue|
                                          (|objVal| (|getValue| |arg|))
                                          (|objMode| (|getValue| |arg|))
                                          |type|))
@@ -4048,12 +4212,19 @@
 ; upDeclare t ==
 ;   t isnt  [op,lhs,rhs] => nil
 ;   (not $genValue) and or/[CONTAINED(var,rhs) for var in $localVars] =>
-;     keyedMsgCompFailure("S2IS0014",[lhs])
+;       msg_comp_failure("S2IS0014", CONCAT(
+;           '"Cannot compile the declaration for %1b because its",
+;           '" (possibly partial) type contains a local variable."), [lhs])
 ;   mode := evaluateType unabbrev rhs
-;   mode = $Void => throwKeyedMsgSP("S2IS0015",NIL,op)
-;   not isLegitimateMode(mode,nil,nil) => throwKeyedMsgSP("S2IE0004",[mode],op)
-;   categoryForm?(mode) => throwKeyedMsgSP("S2IE0011",[mode, 'category],op)
-;   packageForm?(mode) => throwKeyedMsgSP("S2IE0011",[mode, 'package],op)
+;   mode = $Void => throw_msg_pos("S2IS0015",
+;       '"An identifier cannot be declared to have type %b Void %d:", [], op)
+;   not isLegitimateMode(mode, nil, nil) =>
+;         throw_msg_invalid_type2(mode, false, op)
+;   err_m := '"%1bp is a %2 , not a domain, and declarations require domains."
+;   categoryForm?(mode) =>
+;         throw_msg_pos("S2IE0011", err_m, [mode, 'category], op)
+;   packageForm?(mode) =>
+;         throw_msg_pos("S2IE0011", err_m, [mode, 'package], op)
 ;   if true then
 ;     lhs is ['free,['Tuple,:vars]] or lhs is ['free,['LISTOF,:vars]] or
 ;       lhs is ['free,:vars] =>
@@ -4068,7 +4239,7 @@
 ;   putModeSet(op,[$Void])
 
 (DEFUN |upDeclare| (|t|)
-  (PROG (|op| |ISTMP#1| |lhs| |ISTMP#2| |rhs| |mode| |vars|)
+  (PROG (|op| |ISTMP#1| |lhs| |ISTMP#2| |rhs| |mode| |err_m| |vars|)
     (RETURN
      (COND
       ((NOT
@@ -4096,107 +4267,120 @@
                    (COND (|bfVar#102| (RETURN |bfVar#102|))))))
                 (SETQ |bfVar#101| (CDR |bfVar#101|))))
              NIL |$localVars| NIL))
-       (|keyedMsgCompFailure| 'S2IS0014 (LIST |lhs|)))
+       (|msg_comp_failure| 'S2IS0014
+        (CONCAT "Cannot compile the declaration for %1b because its"
+                " (possibly partial) type contains a local variable.")
+        (LIST |lhs|)))
       (#1#
        (PROGN
         (SETQ |mode| (|evaluateType| (|unabbrev| |rhs|)))
-        (COND ((EQUAL |mode| |$Void|) (|throwKeyedMsgSP| 'S2IS0015 NIL |op|))
-              ((NULL (|isLegitimateMode| |mode| NIL NIL))
-               (|throwKeyedMsgSP| 'S2IE0004 (LIST |mode|) |op|))
-              ((|categoryForm?| |mode|)
-               (|throwKeyedMsgSP| 'S2IE0011 (LIST |mode| '|category|) |op|))
-              ((|packageForm?| |mode|)
-               (|throwKeyedMsgSP| 'S2IE0011 (LIST |mode| '|package|) |op|))
-              (#1#
-               (PROGN
+        (COND
+         ((EQUAL |mode| |$Void|)
+          (|throw_msg_pos| 'S2IS0015
+           "An identifier cannot be declared to have type %b Void %d:" NIL
+           |op|))
+         ((NULL (|isLegitimateMode| |mode| NIL NIL))
+          (|throw_msg_invalid_type2| |mode| NIL |op|))
+         (#1#
+          (PROGN
+           (SETQ |err_m|
+                   "%1bp is a %2 , not a domain, and declarations require domains.")
+           (COND
+            ((|categoryForm?| |mode|)
+             (|throw_msg_pos| 'S2IE0011 |err_m| (LIST |mode| '|category|)
+              |op|))
+            ((|packageForm?| |mode|)
+             (|throw_msg_pos| 'S2IE0011 |err_m| (LIST |mode| '|package|) |op|))
+            (#1#
+             (PROGN
+              (COND
+               (T
                 (COND
-                 (T
-                  (COND
-                   ((OR
-                     (AND (CONSP |lhs|) (EQ (CAR |lhs|) '|free|)
-                          (PROGN
-                           (SETQ |ISTMP#1| (CDR |lhs|))
-                           (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
-                                (PROGN
-                                 (SETQ |ISTMP#2| (CAR |ISTMP#1|))
-                                 (AND (CONSP |ISTMP#2|)
-                                      (EQ (CAR |ISTMP#2|) '|Tuple|)
-                                      (PROGN
-                                       (SETQ |vars| (CDR |ISTMP#2|))
-                                       #1#))))))
-                     (AND (CONSP |lhs|) (EQ (CAR |lhs|) '|free|)
-                          (PROGN
-                           (SETQ |ISTMP#1| (CDR |lhs|))
-                           (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
-                                (PROGN
-                                 (SETQ |ISTMP#2| (CAR |ISTMP#1|))
-                                 (AND (CONSP |ISTMP#2|)
-                                      (EQ (CAR |ISTMP#2|) 'LISTOF)
-                                      (PROGN
-                                       (SETQ |vars| (CDR |ISTMP#2|))
-                                       #1#))))))
-                     (AND (CONSP |lhs|) (EQ (CAR |lhs|) '|free|)
-                          (PROGN (SETQ |vars| (CDR |lhs|)) #1#)))
-                    ((LAMBDA (|bfVar#103| |var|)
-                       (LOOP
-                        (COND
-                         ((OR (ATOM |bfVar#103|)
-                              (PROGN (SETQ |var| (CAR |bfVar#103|)) NIL))
-                          (RETURN NIL))
-                         (#1# (|declare| (LIST '|free| |var|) |mode|)))
-                        (SETQ |bfVar#103| (CDR |bfVar#103|))))
-                     |vars| NIL))
-                   ((OR
-                     (AND (CONSP |lhs|) (EQ (CAR |lhs|) '|local|)
-                          (PROGN
-                           (SETQ |ISTMP#1| (CDR |lhs|))
-                           (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
-                                (PROGN
-                                 (SETQ |ISTMP#2| (CAR |ISTMP#1|))
-                                 (AND (CONSP |ISTMP#2|)
-                                      (EQ (CAR |ISTMP#2|) '|Tuple|)
-                                      (PROGN
-                                       (SETQ |vars| (CDR |ISTMP#2|))
-                                       #1#))))))
-                     (AND (CONSP |lhs|) (EQ (CAR |lhs|) '|local|)
-                          (PROGN
-                           (SETQ |ISTMP#1| (CDR |lhs|))
-                           (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
-                                (PROGN
-                                 (SETQ |ISTMP#2| (CAR |ISTMP#1|))
-                                 (AND (CONSP |ISTMP#2|)
-                                      (EQ (CAR |ISTMP#2|) 'LISTOF)
-                                      (PROGN
-                                       (SETQ |vars| (CDR |ISTMP#2|))
-                                       #1#))))))
-                     (AND (CONSP |lhs|) (EQ (CAR |lhs|) '|local|)
-                          (PROGN (SETQ |vars| (CDR |lhs|)) #1#)))
-                    ((LAMBDA (|bfVar#104| |var|)
-                       (LOOP
-                        (COND
-                         ((OR (ATOM |bfVar#104|)
-                              (PROGN (SETQ |var| (CAR |bfVar#104|)) NIL))
-                          (RETURN NIL))
-                         (#1# (|declare| (LIST '|local| |var|) |mode|)))
-                        (SETQ |bfVar#104| (CDR |bfVar#104|))))
-                     |vars| NIL))
-                   ((OR
-                     (AND (CONSP |lhs|) (EQ (CAR |lhs|) '|Tuple|)
-                          (PROGN (SETQ |vars| (CDR |lhs|)) #1#))
-                     (AND (CONSP |lhs|) (EQ (CAR |lhs|) 'LISTOF)
-                          (PROGN (SETQ |vars| (CDR |lhs|)) #1#)))
-                    ((LAMBDA (|bfVar#105| |var|)
-                       (LOOP
-                        (COND
-                         ((OR (ATOM |bfVar#105|)
-                              (PROGN (SETQ |var| (CAR |bfVar#105|)) NIL))
-                          (RETURN NIL))
-                         (#1# (|declare| |var| |mode|)))
-                        (SETQ |bfVar#105| (CDR |bfVar#105|))))
-                     |vars| NIL))
-                   (#1# (|declare| |lhs| |mode|)))))
-                (|putValue| |op| (|objNewWrap| (|voidValue|) |$Void|))
-                (|putModeSet| |op| (LIST |$Void|)))))))))))
+                 ((OR
+                   (AND (CONSP |lhs|) (EQ (CAR |lhs|) '|free|)
+                        (PROGN
+                         (SETQ |ISTMP#1| (CDR |lhs|))
+                         (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
+                              (PROGN
+                               (SETQ |ISTMP#2| (CAR |ISTMP#1|))
+                               (AND (CONSP |ISTMP#2|)
+                                    (EQ (CAR |ISTMP#2|) '|Tuple|)
+                                    (PROGN
+                                     (SETQ |vars| (CDR |ISTMP#2|))
+                                     #1#))))))
+                   (AND (CONSP |lhs|) (EQ (CAR |lhs|) '|free|)
+                        (PROGN
+                         (SETQ |ISTMP#1| (CDR |lhs|))
+                         (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
+                              (PROGN
+                               (SETQ |ISTMP#2| (CAR |ISTMP#1|))
+                               (AND (CONSP |ISTMP#2|)
+                                    (EQ (CAR |ISTMP#2|) 'LISTOF)
+                                    (PROGN
+                                     (SETQ |vars| (CDR |ISTMP#2|))
+                                     #1#))))))
+                   (AND (CONSP |lhs|) (EQ (CAR |lhs|) '|free|)
+                        (PROGN (SETQ |vars| (CDR |lhs|)) #1#)))
+                  ((LAMBDA (|bfVar#103| |var|)
+                     (LOOP
+                      (COND
+                       ((OR (ATOM |bfVar#103|)
+                            (PROGN (SETQ |var| (CAR |bfVar#103|)) NIL))
+                        (RETURN NIL))
+                       (#1# (|declare| (LIST '|free| |var|) |mode|)))
+                      (SETQ |bfVar#103| (CDR |bfVar#103|))))
+                   |vars| NIL))
+                 ((OR
+                   (AND (CONSP |lhs|) (EQ (CAR |lhs|) '|local|)
+                        (PROGN
+                         (SETQ |ISTMP#1| (CDR |lhs|))
+                         (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
+                              (PROGN
+                               (SETQ |ISTMP#2| (CAR |ISTMP#1|))
+                               (AND (CONSP |ISTMP#2|)
+                                    (EQ (CAR |ISTMP#2|) '|Tuple|)
+                                    (PROGN
+                                     (SETQ |vars| (CDR |ISTMP#2|))
+                                     #1#))))))
+                   (AND (CONSP |lhs|) (EQ (CAR |lhs|) '|local|)
+                        (PROGN
+                         (SETQ |ISTMP#1| (CDR |lhs|))
+                         (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
+                              (PROGN
+                               (SETQ |ISTMP#2| (CAR |ISTMP#1|))
+                               (AND (CONSP |ISTMP#2|)
+                                    (EQ (CAR |ISTMP#2|) 'LISTOF)
+                                    (PROGN
+                                     (SETQ |vars| (CDR |ISTMP#2|))
+                                     #1#))))))
+                   (AND (CONSP |lhs|) (EQ (CAR |lhs|) '|local|)
+                        (PROGN (SETQ |vars| (CDR |lhs|)) #1#)))
+                  ((LAMBDA (|bfVar#104| |var|)
+                     (LOOP
+                      (COND
+                       ((OR (ATOM |bfVar#104|)
+                            (PROGN (SETQ |var| (CAR |bfVar#104|)) NIL))
+                        (RETURN NIL))
+                       (#1# (|declare| (LIST '|local| |var|) |mode|)))
+                      (SETQ |bfVar#104| (CDR |bfVar#104|))))
+                   |vars| NIL))
+                 ((OR
+                   (AND (CONSP |lhs|) (EQ (CAR |lhs|) '|Tuple|)
+                        (PROGN (SETQ |vars| (CDR |lhs|)) #1#))
+                   (AND (CONSP |lhs|) (EQ (CAR |lhs|) 'LISTOF)
+                        (PROGN (SETQ |vars| (CDR |lhs|)) #1#)))
+                  ((LAMBDA (|bfVar#105| |var|)
+                     (LOOP
+                      (COND
+                       ((OR (ATOM |bfVar#105|)
+                            (PROGN (SETQ |var| (CAR |bfVar#105|)) NIL))
+                        (RETURN NIL))
+                       (#1# (|declare| |var| |mode|)))
+                      (SETQ |bfVar#105| (CDR |bfVar#105|))))
+                   |vars| NIL))
+                 (#1# (|declare| |lhs| |mode|)))))
+              (|putValue| |op| (|objNewWrap| (|voidValue|) |$Void|))
+              (|putModeSet| |op| (LIST |$Void|))))))))))))))
 
 ; declare(var,mode) ==
 ;   -- performs declaration.
@@ -4208,11 +4392,19 @@
 ;     upfreeWithType(v,mode)
 ;     var := v
 ;   not IDENTP(var) =>
-;     throwKeyedMsg("S2IS0016",[STRINGIMAGE var])
-;   var in '(% %%) => throwKeyedMsg("S2IS0050",[var])
+;       throw_msg("S2IS0016",
+;           '"Declarations are only allowed on variables and %1b is not one.",
+;           [STRINGIMAGE var])
+;   var in '(% %%) => throw_msg("S2IS0050", CONCAT(
+;       '"Because of its use for recalling previous results, you cannot use",
+;       '" %1b as a variable name.  In particular, you cannot declare it."),
+;       [var])
 ;   if get0(var, 'isInterpreterFunction, $e) then
 ;     mode isnt ['Mapping,.,:args] =>
-;       throwKeyedMsg("S2IS0017",[var,mode])
+;         throw_msg("S2IS0017", CONCAT(
+;             '"The previous use of %1b as a function is not compatible with",
+;             '" its new declaration as %2bp . If you do not want the old",
+;             '" value, issue %l %b)clear prop %1 %d"), [var, mode])
 ;     -- validate that the new declaration has the defined # of args
 ;     mapval := objVal(get0(var, 'value, $e))
 ;     -- mapval looks like '(SPADMAP (args . defn))
@@ -4223,7 +4415,7 @@
 ;       null margs => 0
 ;       PAIRP margs => -1 + #margs
 ;       1
-;     nargs ~= #args => throwKeyedMsg("S2IM0008",[var])
+;     nargs ~= #args => msg_wrong_arg_number(var)
 ;   if $compilingMap then mkLocalVar($mapName,var)
 ;   else clearDependencies(var)
 ;   isLocalVar(var) => putIntSymTab(var, 'mode, mode, $env)
@@ -4234,7 +4426,10 @@
 ;     --   - new mode is same as old declared mode
 ;     objMode(v) = mode => putHist(var,'mode,mode,$e)
 ;     mode = get0(var, 'mode, $e) => NIL   -- nothing to do
-;     throwKeyedMsg("S2IS0052",[var,mode])
+;     throw_msg("S2IS0052", CONCAT(
+;         '"You cannot declare %1b to be of type %2bp because either the",
+;         '" declared type of %1b or the type of the value of %1b is",
+;         '" different from %2bp ."), [var, mode])
 ;   putHist(var,'mode,mode,$e)
 
 (DEFUN |declare| (|var| |mode|)
@@ -4257,8 +4452,15 @@
         (|upfreeWithType| |v| |mode|) (SETQ |var| |v|)))
       (COND
        ((NULL (IDENTP |var|))
-        (|throwKeyedMsg| 'S2IS0016 (LIST (STRINGIMAGE |var|))))
-       ((|member| |var| '(% %%)) (|throwKeyedMsg| 'S2IS0050 (LIST |var|)))
+        (|throw_msg| 'S2IS0016
+         "Declarations are only allowed on variables and %1b is not one."
+         (LIST (STRINGIMAGE |var|))))
+       ((|member| |var| '(% %%))
+        (|throw_msg| 'S2IS0050
+         (CONCAT
+          "Because of its use for recalling previous results, you cannot use"
+          " %1b as a variable name.  In particular, you cannot declare it.")
+         (LIST |var|)))
        (#1#
         (PROGN
          (COND
@@ -4270,7 +4472,12 @@
                     (SETQ |ISTMP#1| (CDR |mode|))
                     (AND (CONSP |ISTMP#1|)
                          (PROGN (SETQ |args| (CDR |ISTMP#1|)) #1#)))))
-             (|throwKeyedMsg| 'S2IS0017 (LIST |var| |mode|)))
+             (|throw_msg| 'S2IS0017
+              (CONCAT
+               "The previous use of %1b as a function is not compatible with"
+               " its new declaration as %2bp . If you do not want the old"
+               " value, issue %l %b)clear prop %1 %d")
+              (LIST |var| |mode|)))
             (#1#
              (PROGN
               (SETQ |mapval| (|objVal| (|get0| |var| '|value| |$e|)))
@@ -4281,7 +4488,7 @@
                             (#1# 1)))
               (COND
                ((NOT (EQL |nargs| (LENGTH |args|)))
-                (|throwKeyedMsg| 'S2IM0008 (LIST |var|)))))))))
+                (|msg_wrong_arg_number| |var|))))))))
          (COND (|$compilingMap| (|mkLocalVar| |$mapName| |var|))
                (#1# (|clearDependencies| |var|)))
          (COND
@@ -4293,7 +4500,13 @@
             ((EQUAL (|objMode| |v|) |mode|)
              (|putHist| |var| '|mode| |mode| |$e|))
             ((EQUAL |mode| (|get0| |var| '|mode| |$e|)) NIL)
-            (#1# (|throwKeyedMsg| 'S2IS0052 (LIST |var| |mode|)))))
+            (#1#
+             (|throw_msg| 'S2IS0052
+              (CONCAT
+               "You cannot declare %1b to be of type %2bp because either the"
+               " declared type of %1b or the type of the value of %1b is"
+               " different from %2bp .")
+              (LIST |var| |mode|)))))
           (#1# (|putHist| |var| '|mode| |mode| |$e|))))))))))
 
 ; declareMap(var,mode) ==
@@ -4301,8 +4514,10 @@
 ;   (v := get0(var, 'value, $e)) and objVal(v) isnt ['SPADMAP, :.] =>
 ;       objMode(v) = mode => putHist(var, 'mode, mode, $e)
 ;       mode = get0(var, 'mode, $e) => nil
-;       throwKeyedMsg("S2IS0019", [var])
-;   isPartialMode mode => throwKeyedMsg("S2IM0004",NIL)
+;       throw_msg("S2IS0019", CONCAT(
+;           '"Cannot process mapping declaration on %1b since it already",
+;           '" has a value."), [var])
+;   check_partial(mode)
 ;   putHist(var,'mode,mode,$e)
 
 (DEFUN |declareMap| (|var| |mode|)
@@ -4317,9 +4532,15 @@
        (COND
         ((EQUAL (|objMode| |v|) |mode|) (|putHist| |var| '|mode| |mode| |$e|))
         ((EQUAL |mode| (|get0| |var| '|mode| |$e|)) NIL)
-        (#1='T (|throwKeyedMsg| 'S2IS0019 (LIST |var|)))))
-      ((|isPartialMode| |mode|) (|throwKeyedMsg| 'S2IM0004 NIL))
-      (#1# (|putHist| |var| '|mode| |mode| |$e|))))))
+        (#1='T
+         (|throw_msg| 'S2IS0019
+          (CONCAT "Cannot process mapping declaration on %1b since it already"
+                  " has a value.")
+          (LIST |var|)))))
+      (#1#
+       (PROGN
+        (|check_partial| |mode|)
+        (|putHist| |var| '|mode| |mode| |$e|)))))))
 
 ; containsLocalVar(tree) ==
 ;     or/[CONTAINED(var, tree) for var in $localVars] or

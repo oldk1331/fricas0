@@ -10,7 +10,7 @@
 (SDEFUN |FC;format_switch|
         ((|switch1| (|OutputForm|)) (|l| (|List| (|String|)))
          (% (|List| (|List| (|String|)))))
-        (SPROG ((|r| (|List| (|String|))) (|l1| (|List| (|OutputForm|))))
+        (SPROG ((|l1| (|List| (|OutputForm|))) (|r| (|List| (|String|))))
                (SEQ
                 (COND
                  ((LISTP |switch1|)
@@ -35,8 +35,8 @@
         ((|switch1| (|OutputForm|)) (|i| (|Integer|)) (|kind| (|String|))
          (% (|List| (|String|))))
         (SPROG
-         ((|r| NIL) (|#G11| #1=(|List| (|List| (|String|))))
-          (|l| (|List| (|String|))) (|#G10| #1#))
+         ((|#G10| #1=(|List| (|List| (|String|)))) (|l| (|List| (|String|)))
+          (|#G11| #1#) (|r| NIL))
          (SEQ (LETT |l| (LIST ")THEN")) (SPADCALL (- |i|) (QREFELT % 18))
               (PROGN
                (LETT |#G10| (|FC;format_switch| |switch1| |l| %))
@@ -77,8 +77,8 @@
         ((|switch1| (|OutputForm|)) (|lab| (|SingleInteger|))
          (% (|List| (|String|))))
         (SPROG
-         ((|r| NIL) (|#G19| #1=(|List| (|List| (|String|))))
-          (|l| (|List| (|String|))) (|#G18| #1#))
+         ((|#G18| #1=(|List| (|List| (|String|)))) (|l| (|List| (|String|)))
+          (|#G19| #1#) (|r| NIL))
          (SEQ (LETT |l| (LIST ")GOTO " (STRINGIMAGE |lab|)))
               (SPADCALL -8 (QREFELT % 18))
               (PROGN
@@ -111,7 +111,7 @@
 (SDEFUN |FC;fortFormatLabelledIfGoto1|
         ((|switch1| (|OutputForm|)) (|lab1| (|SingleInteger|))
          (|lab2| (|SingleInteger|)) (% (|List| (|String|))))
-        (SPROG ((|l| (|List| (|String|))) (|labString| (|String|)) (|i| NIL))
+        (SPROG ((|i| NIL) (|labString| (|String|)) (|l| (|List| (|String|))))
                (SEQ (LETT |l| (|FC;fortFormatIfGoto1| |switch1| |lab2| %))
                     (LETT |labString| (STRINGIMAGE |lab1|))
                     (SEQ (LETT |i| (QCSIZE |labString|)) G190
@@ -136,7 +136,7 @@
 (SDEFUN |FC;getfortarrayexp1|
         ((|name| (|Symbol|)) (|of| (|OutputForm|))
          (|int_to_floats?| (|Boolean|)) (% (|List| (|String|))))
-        (SPROG ((#1=#:G43 NIL) (|l| (|List| (|String|))))
+        (SPROG ((|l| (|List| (|String|))) (#1=#:G46 NIL))
                (SEQ
                 (LETT |l|
                       (SPADCALL (CONS #'|FC;getfortarrayexp1!0| |name|) |of|
@@ -174,8 +174,8 @@
          (|incr| (|OutputForm|)) (|lab| (|SingleInteger|))
          (% (|List| (|String|))))
         (SPROG
-         ((|il| (|List| (|String|))) (|incl| (|List| (|String|)))
-          (|hil| #1=(|List| (|String|))) (|lol| #1#))
+         ((|lol| #1=(|List| (|String|))) (|hil| #1#)
+          (|incl| (|List| (|String|))) (|il| (|List| (|String|))))
          (SEQ (LETT |lol| (SPADCALL |lo| (QREFELT % 15)))
               (LETT |hil| (SPADCALL |hi| (QREFELT % 15)))
               (LETT |incl|
@@ -214,7 +214,7 @@
           (RETURN (PROGN (|FC;fortFormatDo1| |var1| |lo| |hi| |inc| |lab| %))))) 
 
 (SDEFUN |FC;addCommas| ((|l| (|List| (|Symbol|))) (% (|List| (|String|))))
-        (SPROG ((|r| (|List| (|String|))) (#1=#:G59 NIL) (|e| NIL))
+        (SPROG ((|e| NIL) (#1=#:G62 NIL) (|r| (|List| (|String|))))
                (SEQ
                 (COND ((NULL |l|) NIL)
                       ('T
@@ -242,25 +242,25 @@
 
 (SDEFUN |FC;commaSep| ((|l| (|List| (|String|))) (% (|List| (|String|))))
         (SPROG
-         ((#1=#:G66 NIL) (#2=#:G65 #3=(|List| (|String|))) (#4=#:G67 #3#)
-          (#5=#:G69 NIL) (|u| NIL))
+         ((|u| NIL) (#1=#:G72 NIL) (#2=#:G70 #3=(|List| (|String|)))
+          (#4=#:G68 #3#) (#5=#:G69 NIL))
          (SEQ
           (CONS (SPADCALL |l| 1 (QREFELT % 39))
                 (PROGN
-                 (LETT #1# NIL)
-                 (SEQ (LETT |u| NIL) (LETT #5# (CDR |l|)) G190
+                 (LETT #5# NIL)
+                 (SEQ (LETT |u| NIL) (LETT #1# (CDR |l|)) G190
                       (COND
-                       ((OR (ATOM #5#) (PROGN (LETT |u| (CAR #5#)) NIL))
+                       ((OR (ATOM #1#) (PROGN (LETT |u| (CAR #1#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
                         (PROGN
-                         (LETT #4# (LIST "," |u|))
+                         (LETT #2# (LIST "," |u|))
                          (COND
-                          (#1# (LETT #2# (SPADCALL #2# #4# (QREFELT % 19))))
-                          ('T (PROGN (LETT #2# #4#) (LETT #1# 'T)))))))
-                      (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
-                 (COND (#1# #2#) ('T NIL))))))) 
+                          (#5# (LETT #4# (SPADCALL #4# #2# (QREFELT % 19))))
+                          ('T (PROGN (LETT #4# #2#) (LETT #5# 'T)))))))
+                      (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+                 (COND (#5# #4#) ('T NIL))))))) 
 
 (SDEFUN |FC;getReturn|
         ((|rec|
@@ -270,11 +270,11 @@
                                    (|:| |expr| (|OutputForm|))))))
          (% (|List| (|String|))))
         (SPROG
-         ((|rv| (|OutputForm|))
+         ((|returnToken| (|OutputForm|))
           (|rt|
            (|Record| (|:| |ints2Floats?| (|Boolean|))
                      (|:| |expr| (|OutputForm|))))
-          (|returnToken| (|OutputForm|)))
+          (|rv| (|OutputForm|)))
          (SEQ (LETT |returnToken| (SPADCALL 'RETURN (QREFELT % 8)))
               (EXIT
                (COND ((QCAR |rec|) (SPADCALL |returnToken| NIL (QREFELT % 14)))
@@ -304,7 +304,7 @@
          (QREFELT % 22))) 
 
 (SDEFUN |FC;getPrint| ((|l| (|List| (|OutputForm|))) (% (|List| (|String|))))
-        (SPROG ((|ll| (|List| (|String|))) (#1=#:G82 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G85 NIL) (|ll| (|List| (|String|))))
                (SEQ (LETT |ll| (LIST "PRINT*"))
                     (SEQ (LETT |i| NIL) (LETT #1# |l|) G190
                          (COND
@@ -321,7 +321,7 @@
                     (EXIT (SPADCALL |ll| (QREFELT % 22)))))) 
 
 (SDEFUN |FC;getBlock| ((|rec| (|List| %)) (% (|List| (|String|))))
-        (SPROG ((|expr| (|List| (|String|))) (#1=#:G87 NIL) (|u| NIL))
+        (SPROG ((|u| NIL) (#1=#:G90 NIL) (|expr| (|List| (|String|))))
                (SEQ (SPADCALL 1 (QREFELT % 41)) (LETT |expr| NIL)
                     (SEQ (LETT |u| NIL) (LETT #1# |rec|) G190
                          (COND
@@ -348,9 +348,8 @@
 
 (SDEFUN |FC;getElseIf| ((|f| (%)) (% (|List| (|String|))))
         (SPROG
-         ((|expr| (|List| (|String|))) (|elseBranch| (%)) (#1=#:G115 NIL)
-          (|rec|
-           (|Union| (|:| |nullBranch| #2="null")
+         ((|rec|
+           (|Union| (|:| |nullBranch| #1="null")
                     (|:| |assignmentBranch|
                          (|Record| (|:| |var| (|Symbol|))
                                    (|:| |arrayIndex|
@@ -387,19 +386,20 @@
                     (|:| |commonBranch|
                          (|Record| (|:| |name| (|Symbol|))
                                    (|:| |contents| (|List| (|Symbol|)))))
-                    (|:| |printBranch| (|List| (|OutputForm|))))))
+                    (|:| |printBranch| (|List| (|OutputForm|)))))
+          (#2=#:G156 NIL) (|elseBranch| (%)) (|expr| (|List| (|String|))))
          (SEQ (LETT |rec| (SPADCALL |f| (QREFELT % 54)))
               (LETT |expr|
                     (|FC;fortFormatElseIf|
                      (SPADCALL
                       (QVELT
-                       (PROG2 (LETT #1# |rec|)
-                           (QCDR #1#)
-                         (|check_union2| (QEQCAR #1# 3)
+                       (PROG2 (LETT #2# |rec|)
+                           (QCDR #2#)
+                         (|check_union2| (QEQCAR #2# 3)
                                          (|Record| (|:| |switch| (|Switch|))
                                                    (|:| |thenClause| %)
                                                    (|:| |elseClause| %))
-                                         (|Union| (|:| |nullBranch| #2#)
+                                         (|Union| (|:| |nullBranch| #1#)
                                                   (|:| |assignmentBranch|
                                                        (|Record|
                                                         (|:| |var| (|Symbol|))
@@ -469,7 +469,7 @@
                                                   (|:| |printBranch|
                                                        (|List|
                                                         (|OutputForm|))))
-                                         #1#))
+                                         #2#))
                        0)
                       (QREFELT % 56))
                      %))
@@ -477,15 +477,15 @@
                     (SPADCALL |expr|
                               (|FC;getBody|
                                (QVELT
-                                (PROG2 (LETT #1# |rec|)
-                                    (QCDR #1#)
-                                  (|check_union2| (QEQCAR #1# 3)
+                                (PROG2 (LETT #2# |rec|)
+                                    (QCDR #2#)
+                                  (|check_union2| (QEQCAR #2# 3)
                                                   (|Record|
                                                    (|:| |switch| (|Switch|))
                                                    (|:| |thenClause| %)
                                                    (|:| |elseClause| %))
                                                   (|Union|
-                                                   (|:| |nullBranch| #2#)
+                                                   (|:| |nullBranch| #1#)
                                                    (|:| |assignmentBranch|
                                                         (|Record|
                                                          (|:| |var| (|Symbol|))
@@ -557,19 +557,19 @@
                                                    (|:| |printBranch|
                                                         (|List|
                                                          (|OutputForm|))))
-                                                  #1#))
+                                                  #2#))
                                 1)
                                %)
                               (QREFELT % 19)))
               (LETT |elseBranch|
                     (QVELT
-                     (PROG2 (LETT #1# |rec|)
-                         (QCDR #1#)
-                       (|check_union2| (QEQCAR #1# 3)
+                     (PROG2 (LETT #2# |rec|)
+                         (QCDR #2#)
+                       (|check_union2| (QEQCAR #2# 3)
                                        (|Record| (|:| |switch| (|Switch|))
                                                  (|:| |thenClause| %)
                                                  (|:| |elseClause| %))
-                                       (|Union| (|:| |nullBranch| #2#)
+                                       (|Union| (|:| |nullBranch| #1#)
                                                 (|:| |assignmentBranch|
                                                      (|Record|
                                                       (|:| |var| (|Symbol|))
@@ -633,7 +633,7 @@
                                                             (|Symbol|)))))
                                                 (|:| |printBranch|
                                                      (|List| (|OutputForm|))))
-                                       #1#))
+                                       #2#))
                      2))
               (COND
                ((NULL (QEQCAR (SPADCALL |elseBranch| (QREFELT % 44)) 0))
@@ -657,7 +657,7 @@
 
 (SDEFUN |FC;getContinue| ((|label| (|SingleInteger|)) (% (|List| (|String|))))
         (SPROG
-         ((|sp| (|OutputForm|)) (|cnt| (#1="CONTINUE")) (|lab| (|String|)))
+         ((|lab| (|String|)) (|cnt| (#1="CONTINUE")) (|sp| (|OutputForm|)))
          (SEQ (LETT |lab| (STRINGIMAGE |label|))
               (COND ((> (QCSIZE |lab|) 6) (|error| "Label too big")))
               (LETT |cnt| #1#)
@@ -673,7 +673,7 @@
 (SDEFUN |FC;getRepeat|
         ((|repRec| (|Record| (|:| |switch| (|Switch|)) (|:| |body| %)))
          (% (|List| (|String|))))
-        (SPROG ((|bod| (%)) (|lab| (|SingleInteger|)) (|sw| (|Switch|)))
+        (SPROG ((|sw| (|Switch|)) (|lab| (|SingleInteger|)) (|bod| (%)))
                (SEQ (LETT |sw| (SPADCALL (QCAR |repRec|) (QREFELT % 59)))
                     (LETT |lab| (|FC;newLabel| %)) (LETT |bod| (QCDR |repRec|))
                     (EXIT
@@ -689,9 +689,9 @@
         ((|whileRec| (|Record| (|:| |switch| (|Switch|)) (|:| |body| %)))
          (% (|List| (|String|))))
         (SPROG
-         ((|rl1| (|List| (|List| (|String|)))) (|ig| (|List| (|String|)))
-          (|bod| (%)) (|lab2| #1=(|SingleInteger|)) (|lab1| #1#)
-          (|sw| (|Switch|)))
+         ((|sw| (|Switch|)) (|lab1| #1=(|SingleInteger|)) (|lab2| #1#)
+          (|bod| (%)) (|ig| (|List| (|String|)))
+          (|rl1| (|List| (|List| (|String|)))))
          (SEQ (LETT |sw| (SPADCALL (QCAR |whileRec|) (QREFELT % 59)))
               (LETT |lab1| (|FC;newLabel| %)) (LETT |lab2| (|FC;newLabel| %))
               (LETT |bod| (QCDR |whileRec|))
@@ -721,10 +721,12 @@
                                    (|:| |expr| (|OutputForm|))))))
          (% (|List| (|String|))))
         (SPROG
-         ((|ex| #1=(|OutputForm|))
-          (|ass| (|Record| (|:| |ints2Floats?| (|Boolean|)) (|:| |expr| #1#)))
+         ((|indices| (|List| (|Polynomial| (|Integer|))))
           (|lhs| (|OutputForm|))
-          (|indices| (|List| (|Polynomial| (|Integer|)))))
+          (|ass|
+           (|Record| (|:| |ints2Floats?| (|Boolean|))
+                     (|:| |expr| #1=(|OutputForm|))))
+          (|ex| #1#))
          (SEQ (LETT |indices| (QVELT |rec| 1))
               (LETT |lhs| (SPADCALL (QVELT |rec| 0) (QREFELT % 8)))
               (COND
@@ -741,7 +743,7 @@
           (|Record| (|:| |switch| (|Switch|)) (|:| |thenClause| %)
                     (|:| |elseClause| %)))
          (% (|List| (|String|))))
-        (SPROG ((|expr| (|List| (|String|))) (|elseBranch| (%)))
+        (SPROG ((|elseBranch| (%)) (|expr| (|List| (|String|))))
                (SEQ
                 (LETT |expr|
                       (SPADCALL
@@ -772,17 +774,17 @@
                            (QREFELT % 19)))))) 
 
 (SDEFUN |FC;getComment| ((|rec| (|List| (|String|))) (% (|List| (|String|))))
-        (SPROG ((#1=#:G188 NIL) (|c| NIL) (#2=#:G187 NIL))
+        (SPROG ((#1=#:G229 NIL) (|c| NIL) (#2=#:G230 NIL))
                (SEQ
                 (PROGN
-                 (LETT #2# NIL)
-                 (SEQ (LETT |c| NIL) (LETT #1# |rec|) G190
+                 (LETT #1# NIL)
+                 (SEQ (LETT |c| NIL) (LETT #2# |rec|) G190
                       (COND
-                       ((OR (ATOM #1#) (PROGN (LETT |c| (CAR #1#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT |c| (CAR #2#)) NIL))
                         (GO G191)))
-                      (SEQ (EXIT (LETT #2# (CONS (STRCONC "C     " |c|) #2#))))
-                      (LETT #1# (CDR #1#)) (GO G190) G191
-                      (EXIT (NREVERSE #2#))))))) 
+                      (SEQ (EXIT (LETT #1# (CONS (STRCONC "C     " |c|) #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#))))))) 
 
 (SDEFUN |FC;getCall| ((|rec| (|String|)) (% (|List| (|String|))))
         (SPROG ((|expr| (|String|)))
@@ -800,8 +802,8 @@
            (|:| |span| #2=(|Polynomial| (|Integer|))) (|:| |body| %)))
          (% (|List| (|String|))))
         (SPROG
-         ((|expr| (|List| (|String|))) (|lab| (|SingleInteger|))
-          (|increment| #2#) (|rnge| #1#))
+         ((|rnge| #1#) (|increment| #2#) (|lab| (|SingleInteger|))
+          (|expr| (|List| (|String|))))
          (SEQ (LETT |rnge| (QVELT |rec| 0)) (LETT |increment| (QVELT |rec| 1))
               (LETT |lab| (|FC;newLabel| %))
               (SPADCALL (SPADCALL |rnge| (QREFELT % 69))
@@ -825,11 +827,18 @@
 
 (SDEFUN |FC;getCode;%L;36| ((|f| (%)) (% (|List| (|String|))))
         (SPROG
-         ((#1=#:G226 NIL) (#2=#:G227 NIL) (#3=#:G225 NIL) (#4=#:G224 NIL)
-          (#5=#:G223 NIL) (#6=#:G222 NIL) (#7=#:G221 NIL) (#8=#:G220 NIL)
-          (#9=#:G219 NIL) (#10=#:G218 NIL) (#11=#:G217 NIL) (#12=#:G216 NIL)
+         ((|opp|
+           (|Union| (|:| |Null| "null") (|:| |Assignment| "assignment")
+                    (|:| |Conditional| "conditional") (|:| |Return| "return")
+                    (|:| |Block| "block") (|:| |Comment| "comment")
+                    (|:| |Call| "call") (|:| |For| "for") (|:| |While| "while")
+                    (|:| |Repeat| "repeat") (|:| |Goto| "goto")
+                    (|:| |Continue| "continue")
+                    (|:| |ArrayAssignment| "arrayAssignment")
+                    (|:| |Save| "save") (|:| |Stop| "stop")
+                    (|:| |Common| "common") (|:| |Print| "print")))
           (|rec|
-           (|Union| (|:| |nullBranch| #13="null")
+           (|Union| (|:| |nullBranch| #1="null")
                     (|:| |assignmentBranch|
                          (|Record| (|:| |var| (|Symbol|))
                                    (|:| |arrayIndex|
@@ -867,25 +876,18 @@
                          (|Record| (|:| |name| (|Symbol|))
                                    (|:| |contents| (|List| (|Symbol|)))))
                     (|:| |printBranch| (|List| (|OutputForm|)))))
-          (|opp|
-           (|Union| (|:| |Null| "null") (|:| |Assignment| "assignment")
-                    (|:| |Conditional| "conditional") (|:| |Return| "return")
-                    (|:| |Block| "block") (|:| |Comment| "comment")
-                    (|:| |Call| "call") (|:| |For| "for") (|:| |While| "while")
-                    (|:| |Repeat| "repeat") (|:| |Goto| "goto")
-                    (|:| |Continue| "continue")
-                    (|:| |ArrayAssignment| "arrayAssignment")
-                    (|:| |Save| "save") (|:| |Stop| "stop")
-                    (|:| |Common| "common") (|:| |Print| "print"))))
+          (#2=#:G258 NIL) (#3=#:G259 NIL) (#4=#:G260 NIL) (#5=#:G261 NIL)
+          (#6=#:G262 NIL) (#7=#:G263 NIL) (#8=#:G264 NIL) (#9=#:G265 NIL)
+          (#10=#:G266 NIL) (#11=#:G267 NIL) (#12=#:G269 NIL) (#13=#:G268 NIL))
          (SEQ (LETT |opp| (SPADCALL |f| (QREFELT % 44)))
               (LETT |rec| (SPADCALL |f| (QREFELT % 54)))
               (EXIT
                (COND
                 ((QEQCAR |opp| 1)
                  (|FC;getAssign|
-                  (PROG2 (LETT #12# |rec|)
-                      (QCDR #12#)
-                    (|check_union2| (QEQCAR #12# 1)
+                  (PROG2 (LETT #2# |rec|)
+                      (QCDR #2#)
+                    (|check_union2| (QEQCAR #2# 1)
                                     (|Record| (|:| |var| (|Symbol|))
                                               (|:| |arrayIndex|
                                                    (|List|
@@ -897,7 +899,7 @@
                                                          (|Boolean|))
                                                     (|:| |expr|
                                                          (|OutputForm|)))))
-                                    (|Union| (|:| |nullBranch| #13#)
+                                    (|Union| (|:| |nullBranch| #1#)
                                              (|:| |assignmentBranch|
                                                   (|Record|
                                                    (|:| |var| (|Symbol|))
@@ -958,17 +960,17 @@
                                                         (|List| (|Symbol|)))))
                                              (|:| |printBranch|
                                                   (|List| (|OutputForm|))))
-                                    #12#))
+                                    #2#))
                   %))
                 ((QEQCAR |opp| 12)
                  (|FC;getArrayAssign|
-                  (PROG2 (LETT #11# |rec|)
-                      (QCDR #11#)
-                    (|check_union2| (QEQCAR #11# 2)
+                  (PROG2 (LETT #3# |rec|)
+                      (QCDR #3#)
+                    (|check_union2| (QEQCAR #3# 2)
                                     (|Record| (|:| |var| (|Symbol|))
                                               (|:| |rand| (|OutputForm|))
                                               (|:| |ints2Floats?| (|Boolean|)))
-                                    (|Union| (|:| |nullBranch| #13#)
+                                    (|Union| (|:| |nullBranch| #1#)
                                              (|:| |assignmentBranch|
                                                   (|Record|
                                                    (|:| |var| (|Symbol|))
@@ -1029,17 +1031,17 @@
                                                         (|List| (|Symbol|)))))
                                              (|:| |printBranch|
                                                   (|List| (|OutputForm|))))
-                                    #11#))
+                                    #3#))
                   %))
                 ((QEQCAR |opp| 2)
                  (|FC;getCond|
-                  (PROG2 (LETT #10# |rec|)
-                      (QCDR #10#)
-                    (|check_union2| (QEQCAR #10# 3)
+                  (PROG2 (LETT #4# |rec|)
+                      (QCDR #4#)
+                    (|check_union2| (QEQCAR #4# 3)
                                     (|Record| (|:| |switch| (|Switch|))
                                               (|:| |thenClause| %)
                                               (|:| |elseClause| %))
-                                    (|Union| (|:| |nullBranch| #13#)
+                                    (|Union| (|:| |nullBranch| #1#)
                                              (|:| |assignmentBranch|
                                                   (|Record|
                                                    (|:| |var| (|Symbol|))
@@ -1100,13 +1102,13 @@
                                                         (|List| (|Symbol|)))))
                                              (|:| |printBranch|
                                                   (|List| (|OutputForm|))))
-                                    #10#))
+                                    #4#))
                   %))
                 ((QEQCAR |opp| 3)
                  (|FC;getReturn|
-                  (PROG2 (LETT #9# |rec|)
-                      (QCDR #9#)
-                    (|check_union2| (QEQCAR #9# 4)
+                  (PROG2 (LETT #5# |rec|)
+                      (QCDR #5#)
+                    (|check_union2| (QEQCAR #5# 4)
                                     (|Record| (|:| |empty?| (|Boolean|))
                                               (|:| |value|
                                                    (|Record|
@@ -1114,7 +1116,7 @@
                                                          (|Boolean|))
                                                     (|:| |expr|
                                                          (|OutputForm|)))))
-                                    (|Union| (|:| |nullBranch| #13#)
+                                    (|Union| (|:| |nullBranch| #1#)
                                              (|:| |assignmentBranch|
                                                   (|Record|
                                                    (|:| |var| (|Symbol|))
@@ -1175,14 +1177,14 @@
                                                         (|List| (|Symbol|)))))
                                              (|:| |printBranch|
                                                   (|List| (|OutputForm|))))
-                                    #9#))
+                                    #5#))
                   %))
                 ((QEQCAR |opp| 4)
                  (|FC;getBlock|
-                  (PROG2 (LETT #8# |rec|)
-                      (QCDR #8#)
-                    (|check_union2| (QEQCAR #8# 5) (|List| %)
-                                    (|Union| (|:| |nullBranch| #13#)
+                  (PROG2 (LETT #6# |rec|)
+                      (QCDR #6#)
+                    (|check_union2| (QEQCAR #6# 5) (|List| %)
+                                    (|Union| (|:| |nullBranch| #1#)
                                              (|:| |assignmentBranch|
                                                   (|Record|
                                                    (|:| |var| (|Symbol|))
@@ -1243,14 +1245,14 @@
                                                         (|List| (|Symbol|)))))
                                              (|:| |printBranch|
                                                   (|List| (|OutputForm|))))
-                                    #8#))
+                                    #6#))
                   %))
                 ((QEQCAR |opp| 5)
                  (|FC;getComment|
                   (PROG2 (LETT #7# |rec|)
                       (QCDR #7#)
                     (|check_union2| (QEQCAR #7# 6) (|List| (|String|))
-                                    (|Union| (|:| |nullBranch| #13#)
+                                    (|Union| (|:| |nullBranch| #1#)
                                              (|:| |assignmentBranch|
                                                   (|Record|
                                                    (|:| |var| (|Symbol|))
@@ -1315,10 +1317,10 @@
                   %))
                 ((QEQCAR |opp| 6)
                  (|FC;getCall|
-                  (PROG2 (LETT #6# |rec|)
-                      (QCDR #6#)
-                    (|check_union2| (QEQCAR #6# 7) (|String|)
-                                    (|Union| (|:| |nullBranch| #13#)
+                  (PROG2 (LETT #8# |rec|)
+                      (QCDR #8#)
+                    (|check_union2| (QEQCAR #8# 7) (|String|)
+                                    (|Union| (|:| |nullBranch| #1#)
                                              (|:| |assignmentBranch|
                                                   (|Record|
                                                    (|:| |var| (|Symbol|))
@@ -1379,20 +1381,20 @@
                                                         (|List| (|Symbol|)))))
                                              (|:| |printBranch|
                                                   (|List| (|OutputForm|))))
-                                    #6#))
+                                    #8#))
                   %))
                 ((QEQCAR |opp| 7)
                  (|FC;getFor|
-                  (PROG2 (LETT #5# |rec|)
-                      (QCDR #5#)
-                    (|check_union2| (QEQCAR #5# 8)
+                  (PROG2 (LETT #9# |rec|)
+                      (QCDR #9#)
+                    (|check_union2| (QEQCAR #9# 8)
                                     (|Record|
                                      (|:| |range|
                                           (|SegmentBinding|
                                            (|Polynomial| (|Integer|))))
                                      (|:| |span| (|Polynomial| (|Integer|)))
                                      (|:| |body| %))
-                                    (|Union| (|:| |nullBranch| #13#)
+                                    (|Union| (|:| |nullBranch| #1#)
                                              (|:| |assignmentBranch|
                                                   (|Record|
                                                    (|:| |var| (|Symbol|))
@@ -1453,14 +1455,14 @@
                                                         (|List| (|Symbol|)))))
                                              (|:| |printBranch|
                                                   (|List| (|OutputForm|))))
-                                    #5#))
+                                    #9#))
                   %))
                 ((QEQCAR |opp| 11)
                  (|FC;getContinue|
-                  (PROG2 (LETT #4# |rec|)
-                      (QCDR #4#)
-                    (|check_union2| (QEQCAR #4# 9) (|SingleInteger|)
-                                    (|Union| (|:| |nullBranch| #13#)
+                  (PROG2 (LETT #10# |rec|)
+                      (QCDR #10#)
+                    (|check_union2| (QEQCAR #10# 9) (|SingleInteger|)
+                                    (|Union| (|:| |nullBranch| #1#)
                                              (|:| |assignmentBranch|
                                                   (|Record|
                                                    (|:| |var| (|Symbol|))
@@ -1521,14 +1523,14 @@
                                                         (|List| (|Symbol|)))))
                                              (|:| |printBranch|
                                                   (|List| (|OutputForm|))))
-                                    #4#))
+                                    #10#))
                   %))
                 ((QEQCAR |opp| 10)
                  (|FC;getGoto|
-                  (PROG2 (LETT #4# |rec|)
-                      (QCDR #4#)
-                    (|check_union2| (QEQCAR #4# 9) (|SingleInteger|)
-                                    (|Union| (|:| |nullBranch| #13#)
+                  (PROG2 (LETT #10# |rec|)
+                      (QCDR #10#)
+                    (|check_union2| (QEQCAR #10# 9) (|SingleInteger|)
+                                    (|Union| (|:| |nullBranch| #1#)
                                              (|:| |assignmentBranch|
                                                   (|Record|
                                                    (|:| |var| (|Symbol|))
@@ -1589,16 +1591,16 @@
                                                         (|List| (|Symbol|)))))
                                              (|:| |printBranch|
                                                   (|List| (|OutputForm|))))
-                                    #4#))
+                                    #10#))
                   %))
                 ((QEQCAR |opp| 9)
                  (|FC;getRepeat|
-                  (PROG2 (LETT #3# |rec|)
-                      (QCDR #3#)
-                    (|check_union2| (QEQCAR #3# 10)
+                  (PROG2 (LETT #11# |rec|)
+                      (QCDR #11#)
+                    (|check_union2| (QEQCAR #11# 10)
                                     (|Record| (|:| |switch| (|Switch|))
                                               (|:| |body| %))
-                                    (|Union| (|:| |nullBranch| #13#)
+                                    (|Union| (|:| |nullBranch| #1#)
                                              (|:| |assignmentBranch|
                                                   (|Record|
                                                    (|:| |var| (|Symbol|))
@@ -1659,16 +1661,16 @@
                                                         (|List| (|Symbol|)))))
                                              (|:| |printBranch|
                                                   (|List| (|OutputForm|))))
-                                    #3#))
+                                    #11#))
                   %))
                 ((QEQCAR |opp| 8)
                  (|FC;getWhile|
-                  (PROG2 (LETT #3# |rec|)
-                      (QCDR #3#)
-                    (|check_union2| (QEQCAR #3# 10)
+                  (PROG2 (LETT #11# |rec|)
+                      (QCDR #11#)
+                    (|check_union2| (QEQCAR #11# 10)
                                     (|Record| (|:| |switch| (|Switch|))
                                               (|:| |body| %))
-                                    (|Union| (|:| |nullBranch| #13#)
+                                    (|Union| (|:| |nullBranch| #1#)
                                              (|:| |assignmentBranch|
                                                   (|Record|
                                                    (|:| |var| (|Symbol|))
@@ -1729,16 +1731,16 @@
                                                         (|List| (|Symbol|)))))
                                              (|:| |printBranch|
                                                   (|List| (|OutputForm|))))
-                                    #3#))
+                                    #11#))
                   %))
                 ((QEQCAR |opp| 13) (|FC;getSave| %))
                 ((QEQCAR |opp| 14) (|FC;getStop| %))
                 ((QEQCAR |opp| 16)
                  (|FC;getPrint|
-                  (PROG2 (LETT #2# |rec|)
-                      (QCDR #2#)
-                    (|check_union2| (QEQCAR #2# 12) (|List| (|OutputForm|))
-                                    (|Union| (|:| |nullBranch| #13#)
+                  (PROG2 (LETT #12# |rec|)
+                      (QCDR #12#)
+                    (|check_union2| (QEQCAR #12# 12) (|List| (|OutputForm|))
+                                    (|Union| (|:| |nullBranch| #1#)
                                              (|:| |assignmentBranch|
                                                   (|Record|
                                                    (|:| |var| (|Symbol|))
@@ -1799,17 +1801,17 @@
                                                         (|List| (|Symbol|)))))
                                              (|:| |printBranch|
                                                   (|List| (|OutputForm|))))
-                                    #2#))
+                                    #12#))
                   %))
                 ((QEQCAR |opp| 15)
                  (|FC;getCommon|
-                  (PROG2 (LETT #1# |rec|)
-                      (QCDR #1#)
-                    (|check_union2| (QEQCAR #1# 11)
+                  (PROG2 (LETT #13# |rec|)
+                      (QCDR #13#)
+                    (|check_union2| (QEQCAR #13# 11)
                                     (|Record| (|:| |name| (|Symbol|))
                                               (|:| |contents|
                                                    (|List| (|Symbol|))))
-                                    (|Union| (|:| |nullBranch| #13#)
+                                    (|Union| (|:| |nullBranch| #1#)
                                              (|:| |assignmentBranch|
                                                   (|Record|
                                                    (|:| |var| (|Symbol|))
@@ -1870,7 +1872,7 @@
                                                         (|List| (|Symbol|)))))
                                              (|:| |printBranch|
                                                   (|List| (|OutputForm|))))
-                                    #1#))
+                                    #13#))
                   %))
                 ('T (|error| "Unsupported program construct."))))))) 
 
@@ -1878,7 +1880,7 @@
         (SEQ (SPADCALL (SPADCALL |f| (QREFELT % 42)) (QREFELT % 78))
              (EXIT (SPADCALL (QREFELT % 79))))) 
 
-(PUT '|FC;code;%U;38| '|SPADreplace| 'QCDR) 
+(MAKEPROP '|FC;code;%U;38| '|SPADreplace| 'QCDR) 
 
 (SDEFUN |FC;code;%U;38|
         ((|f| (%))
@@ -1923,7 +1925,7 @@
                    (|:| |printBranch| (|List| (|OutputForm|))))))
         (QCDR |f|)) 
 
-(PUT '|FC;operation;%U;39| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|FC;operation;%U;39| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |FC;operation;%U;39|
         ((|f| (%))
@@ -2319,7 +2321,7 @@
 
 (DEFUN |FortranCode| ()
   (SPROG NIL
-         (PROG (#1=#:G2198)
+         (PROG (#1=#:G2240)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|FortranCode|))
@@ -2346,7 +2348,7 @@
               (|Mapping| 7) (54 . |expression2Fortran1|) (|NonNegativeInteger|)
               (61 . |first|) (67 . |do_with_error_env2|) (73 . |string|) '|Rep|
               '|labelValue| (|SingleInteger|) |FC;setLabelValue;2Si;15|
-              (|Polynomial| 17) (78 . |One|) (82 . |elt|)
+              (|Polynomial| 17) (78 . |1|) (82 . |elt|)
               (88 . |expression2Fortran|) (93 . |indentFortLevel|)
               |FC;getCode;%L;36|
               (|Union| (|:| |Null| '"null") (|:| |Assignment| '"assignment")
@@ -2388,7 +2390,7 @@
               |FC;save;%;42| |FC;printStatement;L%;43| |FC;comment;L%;44|
               (172 . |list|) |FC;comment;S%;45| (177 . |incr|) (182 . |coerce|)
               |FC;forLoop;Sb2%;46| |FC;forLoop;SbP2%;47| |FC;continue;Si%;49|
-              |FC;whileLoop;S2%;50| |FC;repeatUntilLoop;S2%;51| (187 . |Zero|)
+              |FC;whileLoop;S2%;50| |FC;repeatUntilLoop;S2%;51| (187 . |0|)
               |FC;returns;%;52| (|Expression| (|MachineInteger|))
               (191 . |coerce|) |FC;returns;E%;53|
               (|Expression| (|MachineFloat|)) (196 . |coerce|)

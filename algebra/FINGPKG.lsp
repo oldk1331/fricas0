@@ -2,48 +2,48 @@
 (SDEFUN |FINGPKG;permutationRepresentation;GP;1|
         ((|x| (G)) (% (|Permutation| (|Integer|))))
         (SPROG
-         ((|p| (|Permutation| (|Integer|))) (|imag| (|List| (|Integer|)))
-          (#1=#:G13 NIL) (|a| NIL) (#2=#:G12 NIL)
-          (|preimag| (|List| (|Integer|))) (#3=#:G11 NIL) (|k| NIL)
-          (#4=#:G10 NIL) (|xall| (|List| G)) (#5=#:G9 NIL) (#6=#:G8 NIL)
-          (|n| (|Integer|)) (|all| (|List| G)))
+         ((|all| (|List| G)) (|n| (|Integer|)) (#1=#:G8 NIL) (#2=#:G9 NIL)
+          (|xall| (|List| G)) (#3=#:G10 NIL) (|k| NIL) (#4=#:G11 NIL)
+          (|preimag| (|List| (|Integer|))) (#5=#:G12 NIL) (|a| NIL)
+          (#6=#:G13 NIL) (|imag| (|List| (|Integer|)))
+          (|p| (|Permutation| (|Integer|))))
          (SEQ (LETT |all| (SPADCALL (QREFELT % 8))) (LETT |n| (LENGTH |all|))
               (LETT |xall|
                     (PROGN
-                     (LETT #6# NIL)
-                     (SEQ (LETT |a| NIL) (LETT #5# |all|) G190
+                     (LETT #1# NIL)
+                     (SEQ (LETT |a| NIL) (LETT #2# |all|) G190
                           (COND
-                           ((OR (ATOM #5#) (PROGN (LETT |a| (CAR #5#)) NIL))
+                           ((OR (ATOM #2#) (PROGN (LETT |a| (CAR #2#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #6#
+                            (LETT #1#
                                   (CONS (SPADCALL |x| |a| (QREFELT % 9))
-                                        #6#))))
-                          (LETT #5# (CDR #5#)) (GO G190) G191
-                          (EXIT (NREVERSE #6#)))))
+                                        #1#))))
+                          (LETT #2# (CDR #2#)) (GO G190) G191
+                          (EXIT (NREVERSE #1#)))))
               (LETT |preimag|
                     (PROGN
-                     (LETT #4# NIL)
-                     (SEQ (LETT |k| 1) (LETT #3# |n|) G190
-                          (COND ((|greater_SI| |k| #3#) (GO G191)))
-                          (SEQ (EXIT (LETT #4# (CONS |k| #4#))))
+                     (LETT #3# NIL)
+                     (SEQ (LETT |k| 1) (LETT #4# |n|) G190
+                          (COND ((|greater_SI| |k| #4#) (GO G191)))
+                          (SEQ (EXIT (LETT #3# (CONS |k| #3#))))
                           (LETT |k| (|inc_SI| |k|)) (GO G190) G191
-                          (EXIT (NREVERSE #4#)))))
+                          (EXIT (NREVERSE #3#)))))
               (LETT |imag|
                     (PROGN
-                     (LETT #2# NIL)
-                     (SEQ (LETT |a| NIL) (LETT #1# |all|) G190
+                     (LETT #5# NIL)
+                     (SEQ (LETT |a| NIL) (LETT #6# |all|) G190
                           (COND
-                           ((OR (ATOM #1#) (PROGN (LETT |a| (CAR #1#)) NIL))
+                           ((OR (ATOM #6#) (PROGN (LETT |a| (CAR #6#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #2#
+                            (LETT #5#
                                   (CONS (SPADCALL |a| |xall| (QREFELT % 12))
-                                        #2#))))
-                          (LETT #1# (CDR #1#)) (GO G190) G191
-                          (EXIT (NREVERSE #2#)))))
+                                        #5#))))
+                          (LETT #6# (CDR #6#)) (GO G190) G191
+                          (EXIT (NREVERSE #5#)))))
               (EXIT
                (LETT |p| (SPADCALL (LIST |preimag| |imag|) (QREFELT % 15))))))) 
 
@@ -58,7 +58,7 @@
 (DECLAIM (NOTINLINE |FiniteGroupPackage;|)) 
 
 (DEFUN |FiniteGroupPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|FiniteGroupPackage| DV$1))

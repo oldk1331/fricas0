@@ -9,7 +9,7 @@
                        %))
                 (EXIT |s|)))) 
 
-(PUT '|MMLFORM;sayExpr| '|SPADreplace| '|sayMathML|) 
+(MAKEPROP '|MMLFORM;sayExpr| '|SPADreplace| '|sayMathML|) 
 
 (SDEFUN |MMLFORM;sayExpr| ((|s| (|String|)) (% (|Void|))) (|sayMathML| |s|)) 
 
@@ -51,9 +51,9 @@
 
 (SDEFUN |MMLFORM;displayElt| ((|mathML| (|String|)) (% (|Void|)))
         (SPROG
-         ((|u| (|UniversalSegment| (|Integer|))) (|enT| (|Integer|))
-          (|enE| (|Integer|)) (|name| (|String|)) (|length| (|Integer|))
-          (|end| (|Integer|)))
+         ((|end| (|Integer|)) (|length| (|Integer|)) (|name| (|String|))
+          (|enE| (|Integer|)) (|enT| (|Integer|))
+          (|u| (|UniversalSegment| (|Integer|))))
          (SEQ (LETT |end| (QCSIZE |mathML|)) (LETT |length| 60)
               (LETT |name| (|MMLFORM;eltName| 1 |mathML| %))
               (LETT |enE|
@@ -93,8 +93,8 @@
 (SDEFUN |MMLFORM;eltName|
         ((|pos| (|Integer|)) (|mathML| (|String|)) (% (|String|)))
         (SPROG
-         ((|name| (|String|)) (|u| (|UniversalSegment| (|Integer|)))
-          (|i| (|Integer|)))
+         ((|i| (|Integer|)) (|u| (|UniversalSegment| (|Integer|)))
+          (|name| (|String|)))
          (SEQ (LETT |i| (+ |pos| 1))
               (SEQ G190
                    (COND
@@ -111,8 +111,8 @@
         ((|name| (|String|)) (|pos| #1=(|Integer|)) (|mathML| (|String|))
          (% (|Integer|)))
         (SPROG
-         ((|pI| #1#) (|level| (|Integer|)) (|endI| #2=(|Integer|))
-          (|startI| #2#) (|endS| #3=(|String|)) (|startS| #3#))
+         ((|startS| #2=(|String|)) (|endS| #2#) (|startI| #3=(|Integer|))
+          (|endI| #3#) (|level| (|Integer|)) (|pI| #1#))
          (SEQ (LETT |pI| |pos|)
               (LETT |startS| (SPADCALL (LIST "<" |name|) (QREFELT % 44)))
               (LETT |endS| (SPADCALL (LIST "</" |name| ">") (QREFELT % 44)))
@@ -157,8 +157,8 @@
 
 (SDEFUN |MMLFORM;ungroup| ((|str| (|String|)) (% (|String|)))
         (SPROG
-         ((|u| #1=(|UniversalSegment| (|Integer|))) (|u2| #1#) (|u1| #1#)
-          (|rrow| (|String|)) (|lrow| (|String|)) (|len| (|Integer|)))
+         ((|len| (|Integer|)) (|lrow| (|String|)) (|rrow| (|String|))
+          (|u1| #1=(|UniversalSegment| (|Integer|))) (|u2| #1#) (|u| #1#))
          (SEQ (LETT |len| (QCSIZE |str|))
               (EXIT
                (COND ((< |len| 14) |str|)
@@ -184,8 +184,8 @@
 
 (SDEFUN |MMLFORM;postcondition| ((|str| (|String|)) (% (|String|)))
         (SPROG
-         ((|uend| #1=(|UniversalSegment| (|Integer|))) (|ustart| #1#)
-          (|pos| (|Integer|)) (|plusminus| (|String|)) (|len| (|Integer|)))
+         ((|len| (|Integer|)) (|plusminus| (|String|)) (|pos| (|Integer|))
+          (|ustart| #1=(|UniversalSegment| (|Integer|))) (|uend| #1#))
          (SEQ (LETT |len| (QCSIZE |str|))
               (LETT |plusminus| "<mo>+</mo><mo>-</mo>")
               (LETT |pos| (SPADCALL |plusminus| |str| 1 (QREFELT % 45)))
@@ -231,9 +231,9 @@
         ((|op| (|Symbol|)) (|args| (|List| (|OutputForm|)))
          (|prec| (|Integer|)) (% (|String|)))
         (SPROG
-         ((|tmp| (|String|)) (|base| (|String|)) (|tmp3| #1=(|String|))
-          (|tmp2| #1#) (|tmp1| #1#) (|n| (|NonNegativeInteger|))
-          (#2=#:G156 NIL) (|u| NIL) (#3=#:G155 NIL))
+         ((#1=#:G156 NIL) (|u| NIL) (#2=#:G157 NIL)
+          (|n| (|NonNegativeInteger|)) (|tmp1| #3=(|String|)) (|tmp2| #3#)
+          (|tmp3| #3#) (|base| (|String|)) (|tmp| (|String|)))
          (SEQ
           (COND ((EQUAL |op| '|theMap|) "<mtext>theMap(...)</mtext>")
                 ((EQUAL |op| 'AGGLST)
@@ -266,7 +266,7 @@
                      (LIST "<mtable><mtr>"
                            (SPADCALL
                             (PROGN
-                             (LETT #3# NIL)
+                             (LETT #1# NIL)
                              (SEQ (LETT |u| NIL) (LETT #2# |args|) G190
                                   (COND
                                    ((OR (ATOM #2#)
@@ -274,7 +274,7 @@
                                     (GO G191)))
                                   (SEQ
                                    (EXIT
-                                    (LETT #3#
+                                    (LETT #1#
                                           (CONS
                                            (SPADCALL
                                             (LIST "<mtd>"
@@ -282,9 +282,9 @@
                                                    (QREFELT % 8) %)
                                                   "</mtd>")
                                             (QREFELT % 44))
-                                           #3#))))
+                                           #1#))))
                                   (LETT #2# (CDR #2#)) (GO G190) G191
-                                  (EXIT (NREVERSE #3#))))
+                                  (EXIT (NREVERSE #1#))))
                             (QREFELT % 44))
                            "</mtr></mtable>")
                      (QREFELT % 44))
@@ -528,8 +528,8 @@
 (SDEFUN |MMLFORM;formatPrime|
         ((|args| (|List| (|OutputForm|))) (|prec| (|Integer|)) (% (|String|)))
         (SPROG
-         ((|arg2| (|OutputForm|)) (|s| (|String|)) (|commaTest| (|String|))
-          (#1=#:G165 NIL) (|i| NIL) (|commaS| (|String|)))
+         ((|commaS| (|String|)) (|i| NIL) (#1=#:G166 NIL)
+          (|commaTest| (|String|)) (|s| (|String|)) (|arg2| (|OutputForm|)))
          (SEQ (LETT |arg2| (SPADCALL |args| (QREFELT % 48)))
               (COND
                ((SPADCALL |arg2| (QREFELT % 52))
@@ -566,9 +566,9 @@
         ((|op| (|Symbol|)) (|args| (|List| (|OutputForm|)))
          (|prec| (|Integer|)) (% (|String|)))
         (SPROG
-         ((|s| (|String|)) (|t1| #1=(|String|)) (|t2| (|String|)) (|body| #1#)
-          (|ops| (|String|)) (|n| (|Integer|)) (|opPrec| (|Integer|))
-          (|p| (|Integer|)))
+         ((|p| (|Integer|)) (|opPrec| (|Integer|)) (|n| (|Integer|))
+          (|ops| (|String|)) (|body| #1=(|String|)) (|t2| (|String|))
+          (|t1| #1#) (|s| (|String|)))
          (SEQ (LETT |p| (SPADCALL |op| (QREFELT % 16) (QREFELT % 58)))
               (EXIT
                (COND ((< |p| 1) (|error| "unknown plex op"))
@@ -688,7 +688,7 @@
 (SDEFUN |MMLFORM;formatUnary|
         ((|op| (|Symbol|)) (|arg| (|OutputForm|)) (|prec| (|Integer|))
          (% (|String|)))
-        (SPROG ((|s| (|String|)) (|opPrec| (|Integer|)) (|p| (|Integer|)))
+        (SPROG ((|p| (|Integer|)) (|opPrec| (|Integer|)) (|s| (|String|)))
                (SEQ (LETT |p| (SPADCALL |op| (QREFELT % 9) (QREFELT % 58)))
                     (EXIT
                      (COND ((< |p| 1) (|error| "unknown unary op"))
@@ -716,8 +716,8 @@
         ((|op| (|Symbol|)) (|args| (|List| (|OutputForm|)))
          (|prec| (|Integer|)) (% (|String|)))
         (SPROG
-         ((|s| (|String|)) (|ops| (|String|)) (|s2| #1=(|String|)) (|s1| #1#)
-          (|opPrec| (|Integer|)) (|p| (|Integer|)))
+         ((|p| (|Integer|)) (|opPrec| (|Integer|)) (|s1| #1=(|String|))
+          (|s2| #1#) (|ops| (|String|)) (|s| (|String|)))
          (SEQ (LETT |p| (SPADCALL |op| (QREFELT % 11) (QREFELT % 58)))
               (EXIT
                (COND ((< |p| 1) (|error| "unknown binary op"))
@@ -787,8 +787,8 @@
         ((|op| (|Symbol|)) (|sep| (|String|)) (|opprec| (|Integer|))
          (|args| (|List| (|OutputForm|))) (|prec| (|Integer|)) (% (|String|)))
         (SPROG
-         ((|s| (|String|)) (|l| (|List| (|String|))) (#1=#:G204 NIL) (|a| NIL)
-          (|opPrec| (|Integer|)) (|ops| (|String|)) (|p| (|Integer|)))
+         ((|p| (|Integer|)) (|ops| (|String|)) (|opPrec| (|Integer|)) (|a| NIL)
+          (#1=#:G205 NIL) (|l| (|List| (|String|))) (|s| (|String|)))
          (SEQ
           (COND ((NULL |args|) "")
                 (#2='T
@@ -846,11 +846,10 @@
 (SDEFUN |MMLFORM;formatExpr|
         ((|expr| (|OutputForm|)) (|prec| (|Integer|)) (% (|String|)))
         (SPROG
-         ((|op| #1=(|Symbol|)) (|nargs| (|Integer|))
-          (|args| (|List| (|OutputForm|))) (|opf| (|OutputForm|))
-          (|i| (|Integer|)) (|len| (|Integer|)) (|str| (|String|))
-          (#2=#:G239 NIL) (|es| #1#) (|nstr| (|String|))
-          (|intSplitLen| (|Integer|)))
+         ((|intSplitLen| (|Integer|)) (|nstr| (|String|)) (|es| #1=(|Symbol|))
+          (#2=#:G240 NIL) (|str| (|String|)) (|len| (|Integer|))
+          (|i| (|Integer|)) (|opf| (|OutputForm|))
+          (|args| (|List| (|OutputForm|))) (|nargs| (|Integer|)) (|op| #1#))
          (SEQ
           (EXIT
            (SEQ (LETT |intSplitLen| 20)
@@ -932,7 +931,7 @@
                                ((EQUAL |es| '|%pi|)
                                 (PROGN
                                  (LETT #2# "<mi>&#x003C0;</mi>")
-                                 (GO #4=#:G238)))
+                                 (GO #4=#:G239)))
                                ((EQUAL |es| '|%e|)
                                 (PROGN
                                  (LETT #2# "<mi>&#x02147;</mi>")
@@ -1101,7 +1100,7 @@
 
 (DEFUN |MathMLFormat| ()
   (SPROG NIL
-         (PROG (#1=#:G241)
+         (PROG (#1=#:G242)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|MathMLFormat|))

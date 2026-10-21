@@ -50,10 +50,10 @@
          (|bind| (|SegmentBinding| (|Float|))) (|l| (|List| (|DrawOption|)))
          (% (|GraphImage|)))
         (SPROG
-         ((|curve|
+         ((|f| (|Ex|)) (|g| (|Ex|))
+          (|curve|
            (|ParametricPlaneCurve|
-            (|Mapping| (|DoubleFloat|) (|DoubleFloat|))))
-          (|g| (|Ex|)) (|f| (|Ex|)))
+            (|Mapping| (|DoubleFloat|) (|DoubleFloat|)))))
          (SEQ (LETT |f| (SPADCALL |ppc| 1 (QREFELT % 38)))
               (LETT |g| (SPADCALL |ppc| 2 (QREFELT % 38)))
               (LETT |curve|
@@ -71,7 +71,7 @@
         ((|ppc| (|ParametricPlaneCurve| |Ex|))
          (|bind| (|SegmentBinding| (|Float|))) (|l| (|List| (|DrawOption|)))
          (% (|TwoDimensionalViewport|)))
-        (SPROG ((|g| (|GraphImage|)) (|f| (|Ex|)))
+        (SPROG ((|f| (|Ex|)) (|g| (|GraphImage|)))
                (SEQ (LETT |f| (SPADCALL |ppc| 1 (QREFELT % 38)))
                     (LETT |l| (|DRAW;maybe_add_title2D| |f| |l| %))
                     (LETT |g| (SPADCALL |ppc| |bind| |l| (QREFELT % 42)))
@@ -87,12 +87,12 @@
          (|bind| (|SegmentBinding| (|Float|))) (|l| (|List| (|DrawOption|)))
          (% (|GraphImage|)))
         (SPROG
-         ((|curve|
-           (|ParametricPlaneCurve|
-            (|Mapping| (|DoubleFloat|) (|DoubleFloat|))))
+         ((|f| (|Ex|)) (|v| (|Symbol|))
+          (|cfr| (|Mapping| (|DoubleFloat|) (|DoubleFloat|)))
           (|cfi| (|Mapping| (|DoubleFloat|) (|DoubleFloat|)))
-          (|cfr| (|Mapping| (|DoubleFloat|) (|DoubleFloat|))) (|v| (|Symbol|))
-          (|f| (|Ex|)))
+          (|curve|
+           (|ParametricPlaneCurve|
+            (|Mapping| (|DoubleFloat|) (|DoubleFloat|)))))
          (SEQ (LETT |f| (SPADCALL |pcc| (QREFELT % 46)))
               (LETT |v| (SPADCALL |bind| (QREFELT % 9)))
               (LETT |cfr| (SPADCALL |f| |v| (QREFELT % 47)))
@@ -106,7 +106,7 @@
         ((|pcc| (|ParametricComplexCurve| |Ex|))
          (|bind| (|SegmentBinding| (|Float|))) (|l| (|List| (|DrawOption|)))
          (% (|TwoDimensionalViewport|)))
-        (SPROG ((|g| (|GraphImage|)) (|f| (|Ex|)))
+        (SPROG ((|f| (|Ex|)) (|g| (|GraphImage|)))
                (SEQ (LETT |f| (SPADCALL |pcc| (QREFELT % 46)))
                     (LETT |l| (|DRAW;maybe_add_title2D| |f| |l| %))
                     (LETT |g| (SPADCALL |pcc| |bind| |l| (QREFELT % 49)))
@@ -122,11 +122,11 @@
          (|tBind| (|SegmentBinding| (|Float|))) (|l| (|List| (|DrawOption|)))
          (% (|ThreeSpace| (|DoubleFloat|))))
         (SPROG
-         ((|curve|
+         ((|t| (|Symbol|)) (|tSeg| (|Segment| (|Float|))) (|f| (|Ex|))
+          (|g| (|Ex|)) (|h| (|Ex|))
+          (|curve|
            (|ParametricSpaceCurve|
-            (|Mapping| (|DoubleFloat|) (|DoubleFloat|))))
-          (|h| (|Ex|)) (|g| (|Ex|)) (|f| (|Ex|)) (|tSeg| (|Segment| (|Float|)))
-          (|t| (|Symbol|)))
+            (|Mapping| (|DoubleFloat|) (|DoubleFloat|)))))
          (SEQ (LETT |t| (SPADCALL |tBind| (QREFELT % 9)))
               (LETT |tSeg| (SPADCALL |tBind| (QREFELT % 14)))
               (LETT |f| (SPADCALL |psc| 1 (QREFELT % 53)))
@@ -151,11 +151,11 @@
          (|tBind| (|SegmentBinding| (|Float|))) (|l| (|List| (|DrawOption|)))
          (% (|ThreeDimensionalViewport|)))
         (SPROG
-         ((|curve|
+         ((|t| (|Symbol|)) (|tSeg| (|Segment| (|Float|))) (|f| (|Ex|))
+          (|g| (|Ex|)) (|h| (|Ex|))
+          (|curve|
            (|ParametricSpaceCurve|
-            (|Mapping| (|DoubleFloat|) (|DoubleFloat|))))
-          (|h| (|Ex|)) (|g| (|Ex|)) (|f| (|Ex|)) (|tSeg| (|Segment| (|Float|)))
-          (|t| (|Symbol|)))
+            (|Mapping| (|DoubleFloat|) (|DoubleFloat|)))))
          (SEQ (LETT |t| (SPADCALL |tBind| (QREFELT % 9)))
               (LETT |tSeg| (SPADCALL |tBind| (QREFELT % 14)))
               (LETT |f| (SPADCALL |psc| 1 (QREFELT % 53)))
@@ -180,8 +180,8 @@
          (|yBind| (|SegmentBinding| (|Float|))) (|l| (|List| (|DrawOption|)))
          (% (|ThreeSpace| (|DoubleFloat|))))
         (SPROG
-         ((|ySeg| #1=(|Segment| (|Float|))) (|y| #2=(|Symbol|)) (|xSeg| #1#)
-          (|x| #2#))
+         ((|x| #1=(|Symbol|)) (|xSeg| #2=(|Segment| (|Float|))) (|y| #1#)
+          (|ySeg| #2#))
          (SEQ (LETT |l| (|DRAW;maybe_add_title3D| |f| |l| %))
               (LETT |x| (SPADCALL |xBind| (QREFELT % 9)))
               (LETT |xSeg| (SPADCALL |xBind| (QREFELT % 14)))
@@ -202,8 +202,8 @@
          (|yBind| (|SegmentBinding| (|Float|))) (|l| (|List| (|DrawOption|)))
          (% (|ThreeDimensionalViewport|)))
         (SPROG
-         ((|ySeg| #1=(|Segment| (|Float|))) (|y| #2=(|Symbol|)) (|xSeg| #1#)
-          (|x| #2#))
+         ((|x| #1=(|Symbol|)) (|xSeg| #2=(|Segment| (|Float|))) (|y| #1#)
+          (|ySeg| #2#))
          (SEQ (LETT |l| (|DRAW;maybe_add_title3D| |f| |l| %))
               (LETT |x| (SPADCALL |xBind| (QREFELT % 9)))
               (LETT |xSeg| (SPADCALL |xBind| (QREFELT % 14)))
@@ -225,11 +225,11 @@
          (|vBind| (|SegmentBinding| (|Float|))) (|l| (|List| (|DrawOption|)))
          (% (|ThreeSpace| (|DoubleFloat|))))
         (SPROG
-         ((|surf|
+         ((|f| (|Ex|)) (|g| (|Ex|)) (|h| (|Ex|)) (|u| #1=(|Symbol|))
+          (|uSeg| #2=(|Segment| (|Float|))) (|v| #1#) (|vSeg| #2#)
+          (|surf|
            (|ParametricSurface|
-            (|Mapping| (|DoubleFloat|) (|DoubleFloat|) (|DoubleFloat|))))
-          (|vSeg| #1=(|Segment| (|Float|))) (|v| #2=(|Symbol|)) (|uSeg| #1#)
-          (|u| #2#) (|h| (|Ex|)) (|g| (|Ex|)) (|f| (|Ex|)))
+            (|Mapping| (|DoubleFloat|) (|DoubleFloat|) (|DoubleFloat|)))))
          (SEQ (LETT |f| (SPADCALL |s| 1 (QREFELT % 73)))
               (LETT |g| (SPADCALL |s| 2 (QREFELT % 73)))
               (LETT |h| (SPADCALL |s| 3 (QREFELT % 73)))
@@ -258,11 +258,11 @@
          (|vBind| (|SegmentBinding| (|Float|))) (|l| (|List| (|DrawOption|)))
          (% (|ThreeDimensionalViewport|)))
         (SPROG
-         ((|surf|
+         ((|f| (|Ex|)) (|g| (|Ex|)) (|h| (|Ex|)) (|u| #1=(|Symbol|))
+          (|uSeg| #2=(|Segment| (|Float|))) (|v| #1#) (|vSeg| #2#)
+          (|surf|
            (|ParametricSurface|
-            (|Mapping| (|DoubleFloat|) (|DoubleFloat|) (|DoubleFloat|))))
-          (|vSeg| #1=(|Segment| (|Float|))) (|v| #2=(|Symbol|)) (|uSeg| #1#)
-          (|u| #2#) (|h| (|Ex|)) (|g| (|Ex|)) (|f| (|Ex|)))
+            (|Mapping| (|DoubleFloat|) (|DoubleFloat|) (|DoubleFloat|)))))
          (SEQ (LETT |f| (SPADCALL |s| 1 (QREFELT % 73)))
               (LETT |g| (SPADCALL |s| 2 (QREFELT % 73)))
               (LETT |h| (SPADCALL |s| 3 (QREFELT % 73)))
@@ -288,7 +288,7 @@
 (DECLAIM (NOTINLINE |TopLevelDrawFunctions;|)) 
 
 (DEFUN |TopLevelDrawFunctions;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|TopLevelDrawFunctions| DV$1))
@@ -302,9 +302,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |TopLevelDrawFunctions| (#1=#:G69)
+(DEFUN |TopLevelDrawFunctions| (#1=#:G71)
   (SPROG NIL
-         (PROG (#2=#:G70)
+         (PROG (#2=#:G72)
            (RETURN
             (COND
              ((LETT #2#

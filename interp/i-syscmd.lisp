@@ -3,10 +3,6 @@
 
 (IN-PACKAGE "BOOT")
 
-; $newConlist := []
-
-(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$newConlist| NIL))
-
 ; $edit_file := nil
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$edit_file| NIL))
@@ -26,18 +22,6 @@
 ; DEFPARAMETER($compileRecurrence, true)
 
 (DEFPARAMETER |$compileRecurrence| T)
-
-; DEFPARAMETER($SYSCOMMANDS, [first x for x in $systemCommands])
-
-(DEFPARAMETER $SYSCOMMANDS
-  ((LAMBDA (|bfVar#2| |bfVar#1| |x|)
-     (LOOP
-      (COND
-       ((OR (ATOM |bfVar#1|) (PROGN (SETQ |x| (CAR |bfVar#1|)) NIL))
-        (RETURN (NREVERSE |bfVar#2|)))
-       ('T (SETQ |bfVar#2| (CONS (CAR |x|) |bfVar#2|))))
-      (SETQ |bfVar#1| (CDR |bfVar#1|))))
-   NIL |$systemCommands| NIL))
 
 ; DEFPARAMETER($whatOptions, '( _
 ;     operations _
@@ -80,10 +64,85 @@
   '(|abbreviations| |all| |macros| |modes| |names| |operations| |properties|
     |types| |values|))
 
+; $systemCommands := [
+;    ['abbreviations, :'compiler   ], ['boot,          :'development], _
+;    ['cd,            :'interpreter], ['clear,         :'interpreter], _
+;    ['close,         :'interpreter], ['compile,       :'compiler   ], _
+;    ['copyright,     :'interpreter], ['credits,       :'interpreter], _
+;    ['display,       :'interpreter], ['edit,          :'interpreter], _
+;    ['fin,           :'development], ['frame,         :'interpreter], _
+;    ['help,          :'interpreter], ['history,       :'interpreter], _
+;    ['lisp,          :'development], ['library,       :'interpreter], _
+;    ['ltrace,        :'interpreter], _
+;    ['nopiles,       :'interpreter], ['piles,         :'interpreter], _
+;    ['pquit,         :'interpreter], ['quit,          :'interpreter], _
+;    ['read,          :'interpreter], ['set,           :'interpreter], _
+;    ['show,          :'interpreter], ['spool,         :'interpreter], _
+;    ['summary,       :'interpreter], ['synonym,       :'interpreter], _
+;    ['system,        :'interpreter], ['trace,         :'interpreter], _
+;    ['undo,          :'interpreter], ['what,          :'interpreter], _
+;    ['version,       :'interpreter]]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$systemCommands|
+          (LIST (CONS '|abbreviations| '|compiler|)
+                (CONS '|boot| '|development|) (CONS '|cd| '|interpreter|)
+                (CONS '|clear| '|interpreter|) (CONS '|close| '|interpreter|)
+                (CONS '|compile| '|compiler|)
+                (CONS '|copyright| '|interpreter|)
+                (CONS '|credits| '|interpreter|)
+                (CONS '|display| '|interpreter|) (CONS '|edit| '|interpreter|)
+                (CONS '|fin| '|development|) (CONS '|frame| '|interpreter|)
+                (CONS '|help| '|interpreter|) (CONS '|history| '|interpreter|)
+                (CONS '|lisp| '|development|) (CONS '|library| '|interpreter|)
+                (CONS '|ltrace| '|interpreter|)
+                (CONS '|nopiles| '|interpreter|) (CONS '|piles| '|interpreter|)
+                (CONS '|pquit| '|interpreter|) (CONS '|quit| '|interpreter|)
+                (CONS '|read| '|interpreter|) (CONS '|set| '|interpreter|)
+                (CONS '|show| '|interpreter|) (CONS '|spool| '|interpreter|)
+                (CONS '|summary| '|interpreter|)
+                (CONS '|synonym| '|interpreter|)
+                (CONS '|system| '|interpreter|) (CONS '|trace| '|interpreter|)
+                (CONS '|undo| '|interpreter|) (CONS '|what| '|interpreter|)
+                (CONS '|version| '|interpreter|))))
+
+; $SYSCOMMANDS := [first x for x in $systemCommands]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ $SYSCOMMANDS
+          ((LAMBDA (|bfVar#2| |bfVar#1| |x|)
+             (LOOP
+              (COND
+               ((OR (ATOM |bfVar#1|) (PROGN (SETQ |x| (CAR |bfVar#1|)) NIL))
+                (RETURN (NREVERSE |bfVar#2|)))
+               ('T (SETQ |bfVar#2| (CONS (CAR |x|) |bfVar#2|))))
+              (SETQ |bfVar#1| (CDR |bfVar#1|))))
+           NIL |$systemCommands| NIL)))
+
+; $noParseCommands := ['boot, 'copyright, 'credits, 'fin, 'lisp, 'piles,
+;     'pquit, 'quit, 'synonym, 'system, 'version]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$noParseCommands|
+          (LIST '|boot| '|copyright| '|credits| '|fin| '|lisp| '|piles|
+                '|pquit| '|quit| '|synonym| '|system| '|version|)))
+
+; $tokenCommands := ['abbreviations, 'cd, 'clear, 'close, 'compile,
+;     'depends, 'display, 'edit, 'frame, 'help, 'history, 'input, _
+;     'library, 'ltrace, 'nopiles, 'read, 'set, 'spool, 'undo, _
+;     'what, 'with]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$tokenCommands|
+          (LIST '|abbreviations| '|cd| '|clear| '|close| '|compile| '|depends|
+                '|display| '|edit| '|frame| '|help| '|history| '|input|
+                '|library| '|ltrace| '|nopiles| '|read| '|set| '|spool| '|undo|
+                '|what| '|with|)))
+
 ; systemCommand [[op,:argl],:options] ==
 ;   $options: local:= options
 ;   $e:local := $CategoryFrame
-;   fun := selectOptionLC(op,$SYSCOMMANDS,'commandError)
+;   fun := selectOption(op, $SYSCOMMANDS, 'commandError)
 ;   argl and (argl.0 = '_?) and fun ~= 'synonym =>
 ;     helpSpad2Cmd [fun]
 ;   fun := selectOption(fun,commandsForUserLevel $systemCommands,
@@ -100,7 +159,7 @@
       (SETQ |options| (CDR |bfVar#3|))
       (SETQ |$options| |options|)
       (SETQ |$e| |$CategoryFrame|)
-      (SETQ |fun| (|selectOptionLC| |op| $SYSCOMMANDS '|commandError|))
+      (SETQ |fun| (|selectOption| |op| $SYSCOMMANDS '|commandError|))
       (COND
        ((AND |argl| (EQ (ELT |argl| 0) '?) (NOT (EQ |fun| '|synonym|)))
         (|helpSpad2Cmd| (LIST |fun|)))
@@ -147,9 +206,9 @@
 ;   $UserLevel = 'development => l
 ;   nl := NIL
 ;   for syn in reverse l repeat
-;     cmd := STRING2ID_N(rest(syn), 1)
-;     null selectOptionLC(cmd,commandsForUserLevel
-;       $systemCommands,NIL) => nil
+;     cmd := first_symbol(rest(syn))
+;     null(selectOption(cmd, commandsForUserLevel($systemCommands), nil)) =>
+;         nil
 ;     nl := [syn,:nl]
 ;   nl
 
@@ -168,10 +227,10 @@
                    (RETURN NIL))
                   (#1#
                    (PROGN
-                    (SETQ |cmd| (STRING2ID_N (CDR |syn|) 1))
+                    (SETQ |cmd| (|first_symbol| (CDR |syn|)))
                     (COND
                      ((NULL
-                       (|selectOptionLC| |cmd|
+                       (|selectOption| |cmd|
                         (|commandsForUserLevel| |$systemCommands|) NIL))
                       NIL)
                      (#1# (SETQ |nl| (CONS |syn| |nl|)))))))
@@ -194,7 +253,7 @@
            ('T T)))))
 
 ; unAbbreviateKeyword x ==
-;   x' :=selectOptionLC(x,$SYSCOMMANDS,'commandErrorIfAmbiguous)
+;   x' := selectOption(x, $SYSCOMMANDS, 'commandErrorIfAmbiguous)
 ;   if not x' then
 ;     x' := 'system
 ;     SETQ(LINE, CONCAT('")system ", SUBSTRING(LINE, 1, #LINE-1)))
@@ -206,8 +265,7 @@
   (PROG (|x'|)
     (RETURN
      (PROGN
-      (SETQ |x'|
-              (|selectOptionLC| |x| $SYSCOMMANDS '|commandErrorIfAmbiguous|))
+      (SETQ |x'| (|selectOption| |x| $SYSCOMMANDS '|commandErrorIfAmbiguous|))
       (COND
        ((NULL |x'|) (SETQ |x'| '|system|)
         (SETQ LINE (CONCAT ")system " (SUBSTRING LINE 1 (- (LENGTH LINE) 1))))
@@ -242,16 +300,8 @@
        |al| NIL)
       |found|))))
 
-; selectOptionLC(x,l,errorFunction) ==
-;   selectOption(DOWNCASE object2Identifier x,l,errorFunction)
-
-(DEFUN |selectOptionLC| (|x| |l| |errorFunction|)
-  (PROG ()
-    (RETURN
-     (|selectOption| (DOWNCASE (|object2Identifier| |x|)) |l|
-      |errorFunction|))))
-
-; selectOption(x,l,errorFunction) ==
+; selectOption(x, l, errorFunction) ==
+;   x := object2Identifier(x)
 ;   member(x,l) => x                   --exact spellings are always OK
 ;   null IDENTP x =>
 ;     errorFunction => FUNCALL(errorFunction,x,u)
@@ -264,30 +314,32 @@
 (DEFUN |selectOption| (|x| |l| |errorFunction|)
   (PROG (|u| |y|)
     (RETURN
-     (COND ((|member| |x| |l|) |x|)
-           ((NULL (IDENTP |x|))
-            (COND (|errorFunction| (FUNCALL |errorFunction| |x| |u|))
-                  (#1='T NIL)))
-           (#1#
-            (PROGN
-             (SETQ |u|
-                     ((LAMBDA (|bfVar#9| |bfVar#8| |y|)
-                        (LOOP
-                         (COND
-                          ((OR (ATOM |bfVar#8|)
-                               (PROGN (SETQ |y| (CAR |bfVar#8|)) NIL))
-                           (RETURN (NREVERSE |bfVar#9|)))
-                          (#1#
-                           (AND (|stringPrefix?| (PNAME |x|) (PNAME |y|))
-                                (SETQ |bfVar#9| (CONS |y| |bfVar#9|)))))
-                         (SETQ |bfVar#8| (CDR |bfVar#8|))))
-                      NIL |l| NIL))
-             (COND
-              ((AND (CONSP |u|) (EQ (CDR |u|) NIL)
-                    (PROGN (SETQ |y| (CAR |u|)) #1#))
-               |y|)
-              (|errorFunction| (FUNCALL |errorFunction| |x| |u|))
-              (#1# NIL))))))))
+     (PROGN
+      (SETQ |x| (|object2Identifier| |x|))
+      (COND ((|member| |x| |l|) |x|)
+            ((NULL (IDENTP |x|))
+             (COND (|errorFunction| (FUNCALL |errorFunction| |x| |u|))
+                   (#1='T NIL)))
+            (#1#
+             (PROGN
+              (SETQ |u|
+                      ((LAMBDA (|bfVar#9| |bfVar#8| |y|)
+                         (LOOP
+                          (COND
+                           ((OR (ATOM |bfVar#8|)
+                                (PROGN (SETQ |y| (CAR |bfVar#8|)) NIL))
+                            (RETURN (NREVERSE |bfVar#9|)))
+                           (#1#
+                            (AND (|stringPrefix?| (PNAME |x|) (PNAME |y|))
+                                 (SETQ |bfVar#9| (CONS |y| |bfVar#9|)))))
+                          (SETQ |bfVar#8| (CDR |bfVar#8|))))
+                       NIL |l| NIL))
+              (COND
+               ((AND (CONSP |u|) (EQ (CDR |u|) NIL)
+                     (PROGN (SETQ |y| (CAR |u|)) #1#))
+                |y|)
+               (|errorFunction| (FUNCALL |errorFunction| |x| |u|))
+               (#1# NIL)))))))))
 
 ; terminateSystemCommand() ==
 ;     FRESH_-LINE()
@@ -306,10 +358,23 @@
 (DEFUN |optionUserLevelError| (|x| |u|)
   (PROG () (RETURN (|userLevelErrorMessage| '|option| |x| |u|))))
 
+; say_user_level_msg(args) == say_msg("S2IZ0007", CONCAT(
+;     '"Your user access level is %1b and this %2 is therefore not available.",
+;     '" See the %b )set userlevel %d command for more information."), args)
+
+(DEFUN |say_user_level_msg| (|args|)
+  (PROG ()
+    (RETURN
+     (|say_msg| 'S2IZ0007
+      (CONCAT
+       "Your user access level is %1b and this %2 is therefore not available."
+       " See the %b )set userlevel %d command for more information.")
+      |args|))))
+
 ; userLevelErrorMessage(kind,x,u) ==
 ;   null u =>
-;     sayKeyedMsg("S2IZ0007",[$UserLevel,kind])
-;     terminateSystemCommand()
+;         say_user_level_msg([$UserLevel, kind])
+;         terminateSystemCommand()
 ;   commandAmbiguityError(kind,x,u)
 
 (DEFUN |userLevelErrorMessage| (|kind| |x| |u|)
@@ -318,7 +383,7 @@
      (COND
       ((NULL |u|)
        (PROGN
-        (|sayKeyedMsg| 'S2IZ0007 (LIST |$UserLevel| |kind|))
+        (|say_user_level_msg| (LIST |$UserLevel| |kind|))
         (|terminateSystemCommand|)))
       ('T (|commandAmbiguityError| |kind| |x| |u|))))))
 
@@ -344,8 +409,8 @@
 
 ; commandErrorMessage(kind,x,u) ==
 ;   null u =>
-;     sayKeyedMsg("S2IZ0008",[kind,x])
-;     terminateSystemCommand()
+;         say_msg("S2IZ0008", '"No %1 begins with %2b .", [kind, x])
+;         terminateSystemCommand()
 ;   commandAmbiguityError(kind,x,u)
 
 (DEFUN |commandErrorMessage| (|kind| |x| |u|)
@@ -354,12 +419,14 @@
      (COND
       ((NULL |u|)
        (PROGN
-        (|sayKeyedMsg| 'S2IZ0008 (LIST |kind| |x|))
+        (|say_msg| 'S2IZ0008 "No %1 begins with %2b ." (LIST |kind| |x|))
         (|terminateSystemCommand|)))
       ('T (|commandAmbiguityError| |kind| |x| |u|))))))
 
 ; commandAmbiguityError(kind,x,u) ==
-;   sayKeyedMsg("S2IZ0009",[kind,x])
+;   say_msg("S2IZ0009",
+;         '"Your %1 is ambiguous. The following are abbreviated by %2b :",
+;         [kind, x])
 ;   for a in u repeat sayMSG ['"     ",:bright a]
 ;   terminateSystemCommand()
 
@@ -367,7 +434,9 @@
   (PROG ()
     (RETURN
      (PROGN
-      (|sayKeyedMsg| 'S2IZ0009 (LIST |kind| |x|))
+      (|say_msg| 'S2IZ0009
+       "Your %1 is ambiguous. The following are abbreviated by %2b :"
+       (LIST |kind| |x|))
       ((LAMBDA (|bfVar#10| |a|)
          (LOOP
           (COND
@@ -381,7 +450,7 @@
 ; abbreviations l ==
 ;   ioHook("startSysCmd", "abbrev")
 ;   abbreviationsSpad2Cmd l
-;   ioHook("endSysCmd", "abbrev")
+;   ioHook("endOfSysCmd", "abbrev")
 
 (DEFUN |abbreviations| (|l|)
   (PROG ()
@@ -389,7 +458,7 @@
      (PROGN
       (|ioHook| '|startSysCmd| '|abbrev|)
       (|abbreviationsSpad2Cmd| |l|)
-      (|ioHook| '|endSysCmd| '|abbrev|)))))
+      (|ioHook| '|endOfSysCmd| '|abbrev|)))))
 
 ; abbreviationsSpad2Cmd l ==
 ;   null l => helpSpad2Cmd '(abbreviations)
@@ -397,19 +466,22 @@
 ;
 ;   quiet := nil
 ;   for [opt] in $options repeat
-;     opt := selectOptionLC(opt,'(quiet),'optionError)
+;     opt := selectOption(opt, '(quiet), 'optionError)
 ;     opt = 'quiet => quiet := true
 ;
 ;   l is [opt,:al] =>
 ;     key := opOf first al
-;     type := selectOptionLC(opt,abopts,'optionError)
+;     type := selectOption(opt, abopts, 'optionError)
 ;     type is 'query =>
 ;       null al => listConstructorAbbreviations()
 ;       constructor := abbreviation?(key) => abbQuery(constructor)
 ;       abbQuery(key)
 ;     type is 'remove =>
 ;       DELDATABASE(key,'ABBREVIATION)
-;     ODDP SIZE al => sayKeyedMsg("S2IZ0002",[type])
+;     ODDP(#al) => say_msg("S2IZ0002", CONCAT(
+;             '"%1b must be followed by an alternating list of abbreviation(s)",
+;             '" and name(s). Issue %b )abbrev ? %d for more information."),
+;             [type])
 ;     repeat
 ;       null al => return 'fromLoop
 ;       [a,b,:al] := al
@@ -417,7 +489,7 @@
 ;       SETDATABASE(b,'ABBREVIATION,a)
 ;       SETDATABASE(b,'CONSTRUCTORKIND,type)
 ;     null quiet =>
-;       sayKeyedMsg("S2IZ0001",[a,type,opOf b])
+;       say_msg("S2IZ0001", '"%1b abbreviates %b %2 %3 %d", [a, type, opOf(b)])
 ;       nil
 ;   nil
 
@@ -441,7 +513,7 @@
                         (PROGN (SETQ |opt| (CAR |bfVar#11|)) #1#)
                         (PROGN
                          (SETQ |opt|
-                                 (|selectOptionLC| |opt| '(|quiet|)
+                                 (|selectOption| |opt| '(|quiet|)
                                   '|optionError|))
                          (COND ((EQ |opt| '|quiet|) (SETQ |quiet| T)))))))
                  (SETQ |bfVar#12| (CDR |bfVar#12|))))
@@ -451,7 +523,7 @@
                     (PROGN (SETQ |opt| (CAR |l|)) (SETQ |al| (CDR |l|)) #1#))
                (PROGN
                 (SETQ |key| (|opOf| (CAR |al|)))
-                (SETQ |type| (|selectOptionLC| |opt| |abopts| '|optionError|))
+                (SETQ |type| (|selectOption| |opt| |abopts| '|optionError|))
                 (COND
                  ((EQ |type| '|query|)
                   (COND ((NULL |al|) (|listConstructorAbbreviations|))
@@ -459,7 +531,12 @@
                          (|abbQuery| |constructor|))
                         (#1# (|abbQuery| |key|))))
                  ((EQ |type| '|remove|) (DELDATABASE |key| 'ABBREVIATION))
-                 ((ODDP (SIZE |al|)) (|sayKeyedMsg| 'S2IZ0002 (LIST |type|)))
+                 ((ODDP (LENGTH |al|))
+                  (|say_msg| 'S2IZ0002
+                   (CONCAT
+                    "%1b must be followed by an alternating list of abbreviation(s)"
+                    " and name(s). Issue %b )abbrev ? %d for more information.")
+                   (LIST |type|)))
                  (#1#
                   (PROGN
                    ((LAMBDA ()
@@ -481,30 +558,48 @@
                    (COND
                     ((NULL |quiet|)
                      (PROGN
-                      (|sayKeyedMsg| 'S2IZ0001 (LIST |a| |type| (|opOf| |b|)))
+                      (|say_msg| 'S2IZ0001 "%1b abbreviates %b %2 %3 %d"
+                       (LIST |a| |type| (|opOf| |b|)))
                       NIL))))))))
               (#1# NIL))))))))
 
 ; listConstructorAbbreviations() ==
-;   x := UPCASE queryUserKeyedMsg("S2IZ0056",NIL)
-;   MEMQ(STRING2ID_N(x, 1), '(Y YES)) =>
+;   x := query_user_msg("S2IZ0056", CONCAT(
+;         '"You have requested that all abbreviations be displayed. As",
+;         '" there are several hundred abbreviations, please confirm your",
+;         '" request by typing %b y %d or %b yes %d and then pressing %b",
+;         '" Enter %d :"), [])
+;   x =>
 ;     whatSpad2Cmd '(categories)
 ;     whatSpad2Cmd '(domains)
 ;     whatSpad2Cmd '(packages)
-;   sayKeyedMsg("S2IZ0057",NIL)
+;   say_msg("S2IZ0057",  CONCAT(
+;         '"Since you did not respond with %b y %d or %b yes %d the list",
+;         '" of abbreviations will not be displayed."), [])
 
 (DEFUN |listConstructorAbbreviations| ()
   (PROG (|x|)
     (RETURN
      (PROGN
-      (SETQ |x| (UPCASE (|queryUserKeyedMsg| 'S2IZ0056 NIL)))
+      (SETQ |x|
+              (|query_user_msg| 'S2IZ0056
+               (CONCAT
+                "You have requested that all abbreviations be displayed. As"
+                " there are several hundred abbreviations, please confirm your"
+                " request by typing %b y %d or %b yes %d and then pressing %b"
+                " Enter %d :")
+               NIL))
       (COND
-       ((MEMQ (STRING2ID_N |x| 1) '(Y YES))
+       (|x|
         (PROGN
          (|whatSpad2Cmd| '(|categories|))
          (|whatSpad2Cmd| '(|domains|))
          (|whatSpad2Cmd| '(|packages|))))
-       ('T (|sayKeyedMsg| 'S2IZ0057 NIL)))))))
+       ('T
+        (|say_msg| 'S2IZ0057
+         (CONCAT "Since you did not respond with %b y %d or %b yes %d the list"
+                 " of abbreviations will not be displayed.")
+         NIL)))))))
 
 ; cd(args) ==
 ;     dname :=
@@ -513,7 +608,9 @@
 ;         first(args)
 ;     if SYMBOLP(dname) then dname := SYMBOL_-NAME(dname)
 ;     CHDIR(dname)
-;     sayKeyedMsg("S2IZ0070", [get_current_directory()])
+;     say_msg("S2IZ0070",
+;         '"The current FriCAS default directory is %1b",
+;         [get_current_directory()])
 
 (DEFUN |cd| (|args|)
   (PROG (|dname|)
@@ -526,22 +623,41 @@
                ('T (CAR |args|))))
       (COND ((SYMBOLP |dname|) (SETQ |dname| (SYMBOL-NAME |dname|))))
       (CHDIR |dname|)
-      (|sayKeyedMsg| 'S2IZ0070 (LIST (|get_current_directory|)))))))
+      (|say_msg| 'S2IZ0070 "The current FriCAS default directory is %1b"
+       (LIST (|get_current_directory|)))))))
 
 ; clear l == clearSpad2Cmd l
 
 (DEFUN |clear| (|l|) (PROG () (RETURN (|clearSpad2Cmd| |l|))))
 
+; say_clear_msg(args) == say_msg("S2IZ0010", CONCAT(
+;     '"Use %b )clear all %d to clear everything in the workspace.  Use %b",
+;     '" )clear completely %d to clear everything in the workspace and",
+;     '" internal tables.  Other %b )clear %d keyword arguments are %1 %l",
+;     '" or abbreviations thereof.  Issue %b )clear ? %d for more information."),
+;     args)
+
+(DEFUN |say_clear_msg| (|args|)
+  (PROG ()
+    (RETURN
+     (|say_msg| 'S2IZ0010
+      (CONCAT
+       "Use %b )clear all %d to clear everything in the workspace.  Use %b"
+       " )clear completely %d to clear everything in the workspace and"
+       " internal tables.  Other %b )clear %d keyword arguments are %1 %l"
+       " or abbreviations thereof.  Issue %b )clear ? %d for more information.")
+      |args|))))
+
 ; clearSpad2Cmd l ==
 ;   -- new version which changes the environment and updates history
 ;   $clearExcept: local := nil
 ;   if $options then $clearExcept :=
-;     "and"/[selectOptionLC(opt,'(except),'optionError) =
+;     "and"/[selectOption(opt, '(except), 'optionError) =
 ;              'except for [opt,:.] in $options]
 ;   null l =>
 ;     optList:= "append"/[['%l,'"       ",x] for x in $clearOptions]
-;     sayKeyedMsg("S2IZ0010",[optList])
-;   arg := selectOptionLC(first l,'(all completely scaches),NIL)
+;     say_clear_msg([optList])
+;   arg := selectOption(first(l), '(all completely scaches), nil)
 ;   arg = 'all          => clearCmdAll()
 ;   arg = 'completely   => clearCmdCompletely()
 ;   arg = 'scaches      => clear_sorted_caches()
@@ -570,7 +686,7 @@
                            (PROGN
                             (SETQ |bfVar#15|
                                     (EQ
-                                     (|selectOptionLC| |opt| '(|except|)
+                                     (|selectOption| |opt| '(|except|)
                                       '|optionError|)
                                      '|except|))
                             (COND ((NOT |bfVar#15|) (RETURN NIL)))))))
@@ -592,11 +708,11 @@
                                        (LIST '|%l| "       " |x|)))))
                      (SETQ |bfVar#16| (CDR |bfVar#16|))))
                   NIL |$clearOptions| NIL))
-         (|sayKeyedMsg| 'S2IZ0010 (LIST |optList|))))
+         (|say_clear_msg| (LIST |optList|))))
        (#1#
         (PROGN
          (SETQ |arg|
-                 (|selectOptionLC| (CAR |l|) '(|all| |completely| |scaches|)
+                 (|selectOption| (CAR |l|) '(|all| |completely| |scaches|)
                   NIL))
          (COND ((EQ |arg| '|all|) (|clearCmdAll|))
                ((EQ |arg| '|completely|) (|clearCmdCompletely|))
@@ -610,12 +726,14 @@
 ; clearCmdCompletely() ==
 ;   clearCmdAll()
 ;   $localExposureData := COPY_-SEQ $localExposureDataDefault
-;   sayKeyedMsg("S2IZ0013",NIL)
+;   say_msg("S2IZ0013",
+;         '"All %b )browse %d facility databases have been cleared.", [])
 ;   clearClams()
 ;   clearConstructorCaches()
-;   sayKeyedMsg("S2IZ0014",NIL)
+;   say_msg("S2IZ0014",
+;         '"Internally cached functions and constructors have been cleared.", [])
 ;   RECLAIM()
-;   sayKeyedMsg("S2IZ0015",NIL)
+;   say_msg("S2IZ0015", '"%b )clear completely %d is finished.", [])
 ;   NIL
 
 (DEFUN |clearCmdCompletely| ()
@@ -624,12 +742,14 @@
      (PROGN
       (|clearCmdAll|)
       (SETQ |$localExposureData| (COPY-SEQ |$localExposureDataDefault|))
-      (|sayKeyedMsg| 'S2IZ0013 NIL)
+      (|say_msg| 'S2IZ0013
+       "All %b )browse %d facility databases have been cleared." NIL)
       (|clearClams|)
       (|clearConstructorCaches|)
-      (|sayKeyedMsg| 'S2IZ0014 NIL)
+      (|say_msg| 'S2IZ0014
+       "Internally cached functions and constructors have been cleared." NIL)
       (RECLAIM)
-      (|sayKeyedMsg| 'S2IZ0015 NIL)
+      (|say_msg| 'S2IZ0015 "%b )clear completely %d is finished." NIL)
       NIL))))
 
 ; clearCmdAll() ==
@@ -649,8 +769,11 @@
 ;   updateCurrentInterpreterFrame()
 ;   $currentLine := '")clear all"    --restored 3/94; needed for undo (RDJ)
 ;   clearMacroTable()
-;   if $frameMessages then sayKeyedMsg("S2IZ0011",[$interpreterFrameName])
-;   else sayKeyedMsg("S2IZ0012",NIL)
+;   if $frameMessages then say_msg("S2IZ0011", CONCAT(
+;         '"All user variables and function definitions have been cleared",
+;         '" in the current frame ( %1b )."), [$interpreterFrameName])
+;   else say_msg("S2IZ0012",
+;         '"All user variables and function definitions have been cleared.", [])
 
 (DEFUN |clearCmdAll| ()
   (PROG ()
@@ -671,8 +794,15 @@
       (|clearMacroTable|)
       (COND
        (|$frameMessages|
-        (|sayKeyedMsg| 'S2IZ0011 (LIST |$interpreterFrameName|)))
-       (#1# (|sayKeyedMsg| 'S2IZ0012 NIL)))))))
+        (|say_msg| 'S2IZ0011
+         (CONCAT
+          "All user variables and function definitions have been cleared"
+          " in the current frame ( %1b ).")
+         (LIST |$interpreterFrameName|)))
+       (#1#
+        (|say_msg| 'S2IZ0012
+         "All user variables and function definitions have been cleared."
+         NIL)))))))
 
 ; clearCmdExcept(l is [opt,:vl]) ==
 ;   --clears elements of vl of all options EXCEPT opt
@@ -703,7 +833,7 @@
 ; clearCmdParts(l is [opt,:vl]) ==
 ;   -- clears the bindings indicated by opt of all variables in vl
 ;
-;   option:= selectOptionLC(opt,$clearOptions,'optionError)
+;   option:= selectOption(opt, $clearOptions, 'optionError)
 ;   option:= INTERN PNAME option
 ;
 ;   -- the option can be plural but the key in the alist is sometimes
@@ -715,7 +845,10 @@
 ;     option = 'values => 'value
 ;     option
 ;
-;   null vl => sayKeyedMsg("S2IZ0055",NIL)
+;   null vl => say_msg("S2IZ0055", CONCAT(
+;         '"After the property you wish to clear you must give one or more",
+;         '" identifiers or specify %b all %d to clear that property from",
+;         '" everything."), [])
 ;   umacs := get_user_macro_names()
 ;   bmacs := get_builtin_macro_names()
 ;   if vl='(all) then
@@ -753,77 +886,82 @@
      (PROGN
       (SETQ |opt| (CAR |l|))
       (SETQ |vl| (CDR |l|))
-      (SETQ |option| (|selectOptionLC| |opt| |$clearOptions| '|optionError|))
+      (SETQ |option| (|selectOption| |opt| |$clearOptions| '|optionError|))
       (SETQ |option| (INTERN (PNAME |option|)))
       (SETQ |option|
               (COND ((EQ |option| '|types|) '|mode|)
                     ((EQ |option| '|modes|) '|mode|)
                     ((EQ |option| '|values|) '|value|) (#1='T |option|)))
-      (COND ((NULL |vl|) (|sayKeyedMsg| 'S2IZ0055 NIL))
-            (#1#
-             (PROGN
-              (SETQ |umacs| (|get_user_macro_names|))
-              (SETQ |bmacs| (|get_builtin_macro_names|))
-              (COND
-               ((EQUAL |vl| '(|all|))
-                (SETQ |vl| (ASSOCLEFT (CAAR |$InteractiveFrame|)))
-                (SETQ |vl| (REMDUP (APPEND |vl| |umacs|)))))
-              (SETQ |$e| |$InteractiveFrame|)
-              ((LAMBDA (|bfVar#19| |x|)
-                 (LOOP
+      (COND
+       ((NULL |vl|)
+        (|say_msg| 'S2IZ0055
+         (CONCAT
+          "After the property you wish to clear you must give one or more"
+          " identifiers or specify %b all %d to clear that property from"
+          " everything.")
+         NIL))
+       (#1#
+        (PROGN
+         (SETQ |umacs| (|get_user_macro_names|))
+         (SETQ |bmacs| (|get_builtin_macro_names|))
+         (COND
+          ((EQUAL |vl| '(|all|))
+           (SETQ |vl| (ASSOCLEFT (CAAR |$InteractiveFrame|)))
+           (SETQ |vl| (REMDUP (APPEND |vl| |umacs|)))))
+         (SETQ |$e| |$InteractiveFrame|)
+         ((LAMBDA (|bfVar#19| |x|)
+            (LOOP
+             (COND
+              ((OR (ATOM |bfVar#19|) (PROGN (SETQ |x| (CAR |bfVar#19|)) NIL))
+               (RETURN NIL))
+              (#1#
+               (PROGN
+                (|clearDependencies| |x|)
+                (COND
+                 ((AND (EQ |option| '|properties|) (|member| |x| |umacs|))
+                  (|clear_user_macro| |x|))
+                 ((AND (EQ |option| '|properties|) (|member| |x| |bmacs|))
+                  (|sayMessage|
+                   (LIST
+                    "   You cannot clear the definition of the system-defined macro "
+                    (|fixObjectForPrinting| |x|) '|.|))))
+                (COND
+                 ((SETQ |p1| (|assoc| |x| (CAAR |$InteractiveFrame|)))
                   (COND
-                   ((OR (ATOM |bfVar#19|)
-                        (PROGN (SETQ |x| (CAR |bfVar#19|)) NIL))
-                    (RETURN NIL))
-                   (#1#
+                   ((EQ |option| '|properties|)
                     (PROGN
-                     (|clearDependencies| |x|)
                      (COND
-                      ((AND (EQ |option| '|properties|) (|member| |x| |umacs|))
-                       (|clear_user_macro| |x|))
-                      ((AND (EQ |option| '|properties|) (|member| |x| |bmacs|))
-                       (|sayMessage|
-                        (LIST
-                         "   You cannot clear the definition of the system-defined macro "
-                         (|fixObjectForPrinting| |x|) '|.|))))
-                     (COND
-                      ((SETQ |p1| (|assoc| |x| (CAAR |$InteractiveFrame|)))
+                      ((|isMap| |x|)
                        (COND
-                        ((EQ |option| '|properties|)
-                         (PROGN
-                          (COND
-                           ((|isMap| |x|)
-                            (COND
-                             ((SETQ |lm| (|getI| |x| '|localModemap|))
-                              (COND
-                               ((CONSP |lm|)
-                                (IDENTITY
-                                 (|untraceMapSubNames| (LIST (CADAR |lm|)))))))
-                             (#1# NIL))))
-                          ((LAMBDA (|bfVar#20| |p2|)
-                             (LOOP
-                              (COND
-                               ((OR (ATOM |bfVar#20|)
-                                    (PROGN (SETQ |p2| (CAR |bfVar#20|)) NIL))
-                                (RETURN NIL))
-                               (#1#
-                                (PROGN
-                                 (SETQ |prop| (CAR |p2|))
-                                 (|recordOldValue| |x| |prop| (CDR |p2|))
-                                 (|recordNewValue| |x| |prop| NIL))))
-                              (SETQ |bfVar#20| (CDR |bfVar#20|))))
-                           (CDR |p1|) NIL)
-                          (SETF (CAAR |$InteractiveFrame|)
-                                  (|deleteAssoc| |x|
-                                   (CAAR |$InteractiveFrame|)))))
-                        ((SETQ |p2| (|assoc| |option| (CDR |p1|)))
-                         (PROGN
-                          (|recordOldValue| |x| |option| (CDR |p2|))
-                          (|recordNewValue| |x| |option| NIL)
-                          (RPLACD |p2| NIL)))))))))
-                  (SETQ |bfVar#19| (CDR |bfVar#19|))))
-               |vl| NIL)
-              NIL)))))))
+                        ((SETQ |lm| (|getI| |x| '|localModemap|))
+                         (COND
+                          ((CONSP |lm|)
+                           (IDENTITY
+                            (|untraceMapSubNames| (LIST (CADAR |lm|)))))))
+                        (#1# NIL))))
+                     ((LAMBDA (|bfVar#20| |p2|)
+                        (LOOP
+                         (COND
+                          ((OR (ATOM |bfVar#20|)
+                               (PROGN (SETQ |p2| (CAR |bfVar#20|)) NIL))
+                           (RETURN NIL))
+                          (#1#
+                           (PROGN
+                            (SETQ |prop| (CAR |p2|))
+                            (|recordOldValue| |x| |prop| (CDR |p2|))
+                            (|recordNewValue| |x| |prop| NIL))))
+                         (SETQ |bfVar#20| (CDR |bfVar#20|))))
+                      (CDR |p1|) NIL)
+                     (SETF (CAAR |$InteractiveFrame|)
+                             (|deleteAssoc| |x| (CAAR |$InteractiveFrame|)))))
+                   ((SETQ |p2| (|assoc| |option| (CDR |p1|)))
+                    (PROGN
+                     (|recordOldValue| |x| |option| (CDR |p2|))
+                     (|recordNewValue| |x| |option| NIL)
+                     (RPLACD |p2| NIL)))))))))
+             (SETQ |bfVar#19| (CDR |bfVar#19|))))
+          |vl| NIL)
+         NIL)))))))
 
 ; queryClients () ==
 ;   -- Returns the number of active scratchpad clients
@@ -840,23 +978,24 @@
 ; close args ==
 ;   quiet:local:= false
 ;   null $SpadServer =>
-;     throwKeyedMsg("S2IZ0071", [])
+;         throw_msg("S2IZ0071",
+;             '"You cannot close this FriCAS session.", [])
 ;   numClients := queryClients()
 ;   numClients > 1 =>
 ;     sockSendInt($SessionManager, $CloseClient)
 ;     sockSendInt($SessionManager, $currentFrameNum)
 ;     closeInterpreterFrame(NIL)
 ;   for [opt,:.] in $options repeat
-;     fullopt := selectOptionLC(opt, '(quiet), 'optionError)
+;     fullopt := selectOption(opt, '(quiet), 'optionError)
 ;     fullopt = 'quiet   =>
 ;            quiet:=true
 ;   quiet =>
 ;     sockSendInt($SessionManager, $CloseClient)
 ;     sockSendInt($SessionManager, $currentFrameNum)
 ;     closeInterpreterFrame(NIL)
-;   x := UPCASE queryUserKeyedMsg("S2IZ0072", nil)
-;   MEMQ(STRING2ID_N(x, 1), '(YES Y)) =>
-;     QUIT()
+;   x := query_user_msg("S2IZ0072",
+;         '"This is the last FriCAS session.  Do you want to kill FriCAS?", [])
+;   x => QUIT()
 ;   nil
 
 (DEFUN |close| (|args|)
@@ -865,49 +1004,65 @@
     (RETURN
      (PROGN
       (SETQ |quiet| NIL)
-      (COND ((NULL |$SpadServer|) (|throwKeyedMsg| 'S2IZ0071 NIL))
-            (#1='T
-             (PROGN
-              (SETQ |numClients| (|queryClients|))
-              (COND
-               ((< 1 |numClients|)
-                (PROGN
-                 (|sockSendInt| |$SessionManager| |$CloseClient|)
-                 (|sockSendInt| |$SessionManager| |$currentFrameNum|)
-                 (|closeInterpreterFrame| NIL)))
-               (#1#
-                (PROGN
-                 ((LAMBDA (|bfVar#22| |bfVar#21|)
-                    (LOOP
-                     (COND
-                      ((OR (ATOM |bfVar#22|)
-                           (PROGN (SETQ |bfVar#21| (CAR |bfVar#22|)) NIL))
-                       (RETURN NIL))
-                      (#1#
-                       (AND (CONSP |bfVar#21|)
-                            (PROGN (SETQ |opt| (CAR |bfVar#21|)) #1#)
-                            (PROGN
-                             (SETQ |fullopt|
-                                     (|selectOptionLC| |opt| '(|quiet|)
-                                      '|optionError|))
-                             (COND
-                              ((EQ |fullopt| '|quiet|) (SETQ |quiet| T)))))))
-                     (SETQ |bfVar#22| (CDR |bfVar#22|))))
-                  |$options| NIL)
-                 (COND
-                  (|quiet|
-                   (PROGN
-                    (|sockSendInt| |$SessionManager| |$CloseClient|)
-                    (|sockSendInt| |$SessionManager| |$currentFrameNum|)
-                    (|closeInterpreterFrame| NIL)))
-                  (#1#
-                   (PROGN
-                    (SETQ |x| (UPCASE (|queryUserKeyedMsg| 'S2IZ0072 NIL)))
-                    (COND ((MEMQ (STRING2ID_N |x| 1) '(YES Y)) (QUIT))
-                          (#1# NIL)))))))))))))))
+      (COND
+       ((NULL |$SpadServer|)
+        (|throw_msg| 'S2IZ0071 "You cannot close this FriCAS session." NIL))
+       (#1='T
+        (PROGN
+         (SETQ |numClients| (|queryClients|))
+         (COND
+          ((< 1 |numClients|)
+           (PROGN
+            (|sockSendInt| |$SessionManager| |$CloseClient|)
+            (|sockSendInt| |$SessionManager| |$currentFrameNum|)
+            (|closeInterpreterFrame| NIL)))
+          (#1#
+           (PROGN
+            ((LAMBDA (|bfVar#22| |bfVar#21|)
+               (LOOP
+                (COND
+                 ((OR (ATOM |bfVar#22|)
+                      (PROGN (SETQ |bfVar#21| (CAR |bfVar#22|)) NIL))
+                  (RETURN NIL))
+                 (#1#
+                  (AND (CONSP |bfVar#21|)
+                       (PROGN (SETQ |opt| (CAR |bfVar#21|)) #1#)
+                       (PROGN
+                        (SETQ |fullopt|
+                                (|selectOption| |opt| '(|quiet|)
+                                 '|optionError|))
+                        (COND ((EQ |fullopt| '|quiet|) (SETQ |quiet| T)))))))
+                (SETQ |bfVar#22| (CDR |bfVar#22|))))
+             |$options| NIL)
+            (COND
+             (|quiet|
+              (PROGN
+               (|sockSendInt| |$SessionManager| |$CloseClient|)
+               (|sockSendInt| |$SessionManager| |$currentFrameNum|)
+               (|closeInterpreterFrame| NIL)))
+             (#1#
+              (PROGN
+               (SETQ |x|
+                       (|query_user_msg| 'S2IZ0072
+                        "This is the last FriCAS session.  Do you want to kill FriCAS?"
+                        NIL))
+               (COND (|x| (QUIT)) (#1# NIL)))))))))))))))
+
+; must_find_file(af, ft) ==
+;     not(af1 := make_input_filename2(af, ft)) => throw_msg("S2IL0003",
+;         '"The file %1b is needed but does not exist.", [af])
+;     af1
+
+(DEFUN |must_find_file| (|af| |ft|)
+  (PROG (|af1|)
+    (RETURN
+     (COND
+      ((NULL (SETQ |af1| (|make_input_filename2| |af| |ft|)))
+       (|throw_msg| 'S2IL0003 "The file %1b is needed but does not exist."
+        (LIST |af|)))
+      ('T |af1|)))))
 
 ; compile args ==
-;     $newConlist: local := nil    --reset by compDefineLisplib and astran
 ;     null args and null $options and null($edit_file) =>
 ;         helpSpad2Cmd '(compile)
 ;     if null args then args := [$edit_file]
@@ -920,41 +1075,38 @@
 ;     haveOld := nil
 ;     for opt in $options while not (haveNew and haveOld) repeat
 ;         [optname,:optargs] := opt
-;         fullopt := selectOptionLC(optname,optlist,nil)
+;         fullopt := selectOption(optname, optlist, nil)
 ;         fullopt = 'new => haveNew := true
 ;         fullopt = 'constructor => haveOld := true
 ;         fullopt = 'old => haveOld := true
 ;
-;     haveNew and haveOld => throwKeyedMsg("S2IZ0081", nil)
+;     haveNew and haveOld => throw_msg("S2IZ0081", CONCAT(
+;         '"You can only specify one of the %b )new %d and %b )old %d for",
+;         '" the %b )compile %d system command."), [])
 ;
 ;     af  := first(args)
 ;     if SYMBOLP(af) then af := SYMBOL_-NAME(af)
+;     not(STRINGP(af)) => BREAK()
 ;
 ;     afe := file_extention(af)
 ;
 ;     haveNew or afe = '"as" =>
-;         not (af1 := find_file(af, '("as"))) =>
-;             throwKeyedMsg("S2IL0003", [af])
+;         af1 := must_find_file(af, '"as")
 ;         compileAsharpCmd [af1]
 ;     haveOld or afe = '"spad" =>
-;         not (af1 := find_file(af, '("spad"))) =>
-;             throwKeyedMsg("S2IL0003", [af])
+;         af1 := must_find_file(af, '"spad")
 ;         compileSpad2Cmd  [af1]
 ;     afe = '"lsp" =>
-;         not (af1 := find_file(af, '("lsp"))) =>
-;             throwKeyedMsg("S2IL0003", [af])
+;         af1 := must_find_file(af, '"lsp")
 ;         compileAsharpLispCmd [af1]
 ;     afe = '"NRLIB" =>
-;         not (af1 := find_file(af, '("NRLIB"))) =>
-;             throwKeyedMsg("S2IL0003", [af])
+;         af1 := must_find_file(af, '"NRLIB")
 ;         compileSpadLispCmd [af1]
 ;     afe = '"ao" =>
-;         not (af1 := find_file(af, '("ao"))) =>
-;             throwKeyedMsg("S2IL0003", [af])
+;         af1 := must_find_file(af, '"ao")
 ;         compileAsharpCmd [af1]
 ;     afe = '"al" =>    -- archive library of .ao files
-;         not (af1 := find_file(af, '("al"))) =>
-;             throwKeyedMsg("S2IL0003", [af])
+;         af1 := must_find_file(af, '"al")
 ;         compileAsharpArchiveCmd [af1]
 ;
 ;     -- see if we something with the appropriate file extension
@@ -969,88 +1121,151 @@
 ;     afe = '"spad" => compileSpad2Cmd  [af1]
 ;     afe = '"asy" => compileAsharpArchiveCmd [af1]
 ;
-;     throwKeyedMsg("S2IZ0039", nil)
+;     throw_msg("S2IZ0039", CONCAT(
+;         '"Only FriCAS source files with file extensions",
+;         '" %b .as, .ao, .al, %d or %b .spad %d can be compiled."), [])
 
 (DEFUN |compile| (|args|)
-  (PROG (|$newConlist| |af1| |afe| |af| |fullopt| |optargs| |optname| |haveOld|
-         |haveNew| |optlist|)
-    (DECLARE (SPECIAL |$newConlist|))
+  (PROG (|optlist| |haveNew| |haveOld| |optname| |optargs| |fullopt| |af| |afe|
+         |af1|)
     (RETURN
-     (PROGN
-      (SETQ |$newConlist| NIL)
-      (COND
-       ((AND (NULL |args|) (NULL |$options|) (NULL |$edit_file|))
-        (|helpSpad2Cmd| '(|compile|)))
-       (#1='T
-        (PROGN
-         (COND ((NULL |args|) (SETQ |args| (LIST |$edit_file|))))
-         (SETQ |optlist| '(|new| |old| |constructor|))
-         (SETQ |haveNew| NIL)
-         (SETQ |haveOld| NIL)
-         ((LAMBDA (|bfVar#23| |opt|)
-            (LOOP
-             (COND
-              ((OR (ATOM |bfVar#23|) (PROGN (SETQ |opt| (CAR |bfVar#23|)) NIL)
-                   (AND |haveNew| |haveOld|))
-               (RETURN NIL))
-              (#1#
-               (PROGN
-                (SETQ |optname| (CAR |opt|))
-                (SETQ |optargs| (CDR |opt|))
-                (SETQ |fullopt| (|selectOptionLC| |optname| |optlist| NIL))
-                (COND ((EQ |fullopt| '|new|) (SETQ |haveNew| T))
-                      ((EQ |fullopt| '|constructor|) (SETQ |haveOld| T))
-                      ((EQ |fullopt| '|old|) (SETQ |haveOld| T))))))
-             (SETQ |bfVar#23| (CDR |bfVar#23|))))
-          |$options| NIL)
-         (COND ((AND |haveNew| |haveOld|) (|throwKeyedMsg| 'S2IZ0081 NIL))
-               (#1#
-                (PROGN
-                 (SETQ |af| (CAR |args|))
-                 (COND ((SYMBOLP |af|) (SETQ |af| (SYMBOL-NAME |af|))))
-                 (SETQ |afe| (|file_extention| |af|))
-                 (COND
-                  ((OR |haveNew| (EQUAL |afe| "as"))
+     (COND
+      ((AND (NULL |args|) (NULL |$options|) (NULL |$edit_file|))
+       (|helpSpad2Cmd| '(|compile|)))
+      (#1='T
+       (PROGN
+        (COND ((NULL |args|) (SETQ |args| (LIST |$edit_file|))))
+        (SETQ |optlist| '(|new| |old| |constructor|))
+        (SETQ |haveNew| NIL)
+        (SETQ |haveOld| NIL)
+        ((LAMBDA (|bfVar#23| |opt|)
+           (LOOP
+            (COND
+             ((OR (ATOM |bfVar#23|) (PROGN (SETQ |opt| (CAR |bfVar#23|)) NIL)
+                  (AND |haveNew| |haveOld|))
+              (RETURN NIL))
+             (#1#
+              (PROGN
+               (SETQ |optname| (CAR |opt|))
+               (SETQ |optargs| (CDR |opt|))
+               (SETQ |fullopt| (|selectOption| |optname| |optlist| NIL))
+               (COND ((EQ |fullopt| '|new|) (SETQ |haveNew| T))
+                     ((EQ |fullopt| '|constructor|) (SETQ |haveOld| T))
+                     ((EQ |fullopt| '|old|) (SETQ |haveOld| T))))))
+            (SETQ |bfVar#23| (CDR |bfVar#23|))))
+         |$options| NIL)
+        (COND
+         ((AND |haveNew| |haveOld|)
+          (|throw_msg| 'S2IZ0081
+           (CONCAT
+            "You can only specify one of the %b )new %d and %b )old %d for"
+            " the %b )compile %d system command.")
+           NIL))
+         (#1#
+          (PROGN
+           (SETQ |af| (CAR |args|))
+           (COND ((SYMBOLP |af|) (SETQ |af| (SYMBOL-NAME |af|))))
+           (COND ((NULL (STRINGP |af|)) (BREAK))
+                 (#1#
+                  (PROGN
+                   (SETQ |afe| (|file_extention| |af|))
                    (COND
-                    ((NULL (SETQ |af1| (|find_file| |af| '("as"))))
-                     (|throwKeyedMsg| 'S2IL0003 (LIST |af|)))
-                    (#1# (|compileAsharpCmd| (LIST |af1|)))))
-                  ((OR |haveOld| (EQUAL |afe| "spad"))
-                   (COND
-                    ((NULL (SETQ |af1| (|find_file| |af| '("spad"))))
-                     (|throwKeyedMsg| 'S2IL0003 (LIST |af|)))
-                    (#1# (|compileSpad2Cmd| (LIST |af1|)))))
-                  ((EQUAL |afe| "lsp")
-                   (COND
-                    ((NULL (SETQ |af1| (|find_file| |af| '("lsp"))))
-                     (|throwKeyedMsg| 'S2IL0003 (LIST |af|)))
-                    (#1# (|compileAsharpLispCmd| (LIST |af1|)))))
-                  ((EQUAL |afe| "NRLIB")
-                   (COND
-                    ((NULL (SETQ |af1| (|find_file| |af| '("NRLIB"))))
-                     (|throwKeyedMsg| 'S2IL0003 (LIST |af|)))
-                    (#1# (|compileSpadLispCmd| (LIST |af1|)))))
-                  ((EQUAL |afe| "ao")
-                   (COND
-                    ((NULL (SETQ |af1| (|find_file| |af| '("ao"))))
-                     (|throwKeyedMsg| 'S2IL0003 (LIST |af|)))
-                    (#1# (|compileAsharpCmd| (LIST |af1|)))))
-                  ((EQUAL |afe| "al")
-                   (COND
-                    ((NULL (SETQ |af1| (|find_file| |af| '("al"))))
-                     (|throwKeyedMsg| 'S2IL0003 (LIST |af|)))
-                    (#1# (|compileAsharpArchiveCmd| (LIST |af1|)))))
-                  (#1#
-                   (PROGN
-                    (SETQ |af1| (|find_file| |af| '("as" "spad" "ao" "asy")))
-                    (SETQ |afe| (|file_extention| |af1|))
-                    (COND
-                     ((EQUAL |afe| "as") (|compileAsharpCmd| (LIST |af1|)))
-                     ((EQUAL |afe| "ao") (|compileAsharpCmd| (LIST |af1|)))
-                     ((EQUAL |afe| "spad") (|compileSpad2Cmd| (LIST |af1|)))
-                     ((EQUAL |afe| "asy")
-                      (|compileAsharpArchiveCmd| (LIST |af1|)))
-                     (#1# (|throwKeyedMsg| 'S2IZ0039 NIL))))))))))))))))
+                    ((OR |haveNew| (EQUAL |afe| "as"))
+                     (PROGN
+                      (SETQ |af1| (|must_find_file| |af| "as"))
+                      (|compileAsharpCmd| (LIST |af1|))))
+                    ((OR |haveOld| (EQUAL |afe| "spad"))
+                     (PROGN
+                      (SETQ |af1| (|must_find_file| |af| "spad"))
+                      (|compileSpad2Cmd| (LIST |af1|))))
+                    ((EQUAL |afe| "lsp")
+                     (PROGN
+                      (SETQ |af1| (|must_find_file| |af| "lsp"))
+                      (|compileAsharpLispCmd| (LIST |af1|))))
+                    ((EQUAL |afe| "NRLIB")
+                     (PROGN
+                      (SETQ |af1| (|must_find_file| |af| "NRLIB"))
+                      (|compileSpadLispCmd| (LIST |af1|))))
+                    ((EQUAL |afe| "ao")
+                     (PROGN
+                      (SETQ |af1| (|must_find_file| |af| "ao"))
+                      (|compileAsharpCmd| (LIST |af1|))))
+                    ((EQUAL |afe| "al")
+                     (PROGN
+                      (SETQ |af1| (|must_find_file| |af| "al"))
+                      (|compileAsharpArchiveCmd| (LIST |af1|))))
+                    (#1#
+                     (PROGN
+                      (SETQ |af1| (|find_file| |af| '("as" "spad" "ao" "asy")))
+                      (SETQ |afe| (|file_extention| |af1|))
+                      (COND
+                       ((EQUAL |afe| "as") (|compileAsharpCmd| (LIST |af1|)))
+                       ((EQUAL |afe| "ao") (|compileAsharpCmd| (LIST |af1|)))
+                       ((EQUAL |afe| "spad") (|compileSpad2Cmd| (LIST |af1|)))
+                       ((EQUAL |afe| "asy")
+                        (|compileAsharpArchiveCmd| (LIST |af1|)))
+                       (#1#
+                        (|throw_msg| 'S2IZ0039
+                         (CONCAT
+                          "Only FriCAS source files with file extensions"
+                          " %b .as, .ao, .al, %d or %b .spad %d can be compiled.")
+                         NIL))))))))))))))))))
+
+; unknown_compile_option(args) == throw_msg("S2IZ0036",
+;     '"%1b is unknown or unavailable for the %b )compile %d command.",
+;     args)
+
+(DEFUN |unknown_compile_option| (|args|)
+  (PROG ()
+    (RETURN
+     (|throw_msg| 'S2IZ0036
+      "%1b is unknown or unavailable for the %b )compile %d command." |args|))))
+
+; do_compile_lisp(lsp, beQuiet) ==
+;     if can_open?(lsp) then
+;         if not beQuiet then say_msg("S2IZ0089",
+;             '"Compiling Lisp source code from file %1", [lsp])
+;         compile_file_quietly(lsp)
+;     else
+;         say_msg("S2IL0003", '"The file %1b is needed but does not exist.",
+;                 [lsp])
+
+(DEFUN |do_compile_lisp| (|lsp| |beQuiet|)
+  (PROG ()
+    (RETURN
+     (COND
+      ((|can_open?| |lsp|)
+       (COND
+        ((NULL |beQuiet|)
+         (|say_msg| 'S2IZ0089 "Compiling Lisp source code from file %1"
+          (LIST |lsp|))))
+       (|compile_file_quietly| |lsp|))
+      ('T
+       (|say_msg| 'S2IL0003 "The file %1b is needed but does not exist."
+        (LIST |lsp|)))))))
+
+; do_merge_info(doLibrary, beQuiet, path) ==
+;     if doLibrary then
+;         if not(beQuiet) then say_msg("S2IZ0090",
+;             '"Issuing )library command for %1", [file_basename(path)])
+;         merge_info_from_objects([file_basename(path)], [], false)
+;     else if not(beQuiet) then say_msg("S2IZ0084",
+;         '"The )library system command was not called after compilation.", [])
+
+(DEFUN |do_merge_info| (|doLibrary| |beQuiet| |path|)
+  (PROG ()
+    (RETURN
+     (COND
+      (|doLibrary|
+       (COND
+        ((NULL |beQuiet|)
+         (|say_msg| 'S2IZ0090 "Issuing )library command for %1"
+          (LIST (|file_basename| |path|)))))
+       (|merge_info_from_objects| (LIST (|file_basename| |path|)) NIL NIL))
+      ((NULL |beQuiet|)
+       (|say_msg| 'S2IZ0084
+        "The )library system command was not called after compilation."
+        NIL))))))
 
 ; compileAsharpCmd args ==
 ;     compileAsharpCmd1 args
@@ -1065,6 +1280,18 @@
       (|terminateSystemCommand|)
       (|spadPrompt|)))))
 
+; file_must_exist(path) ==
+;     if not(PROBE_-FILE(path)) then throw_msg("S2IL0003",
+;         '"The file %1b is needed but does not exist.", [path])
+
+(DEFUN |file_must_exist| (|path|)
+  (PROG ()
+    (RETURN
+     (COND
+      ((NULL (PROBE-FILE |path|))
+       (|throw_msg| 'S2IL0003 "The file %1b is needed but does not exist."
+        (LIST |path|)))))))
+
 ; compileAsharpCmd1 args ==
 ;     -- Assume we entered from the "compile" function, so args ~= nil
 ;     -- and is a file with file extension .as or .ao
@@ -1072,8 +1299,10 @@
 ;     path := first(args)
 ;     path_ext := file_extention(path)
 ;     (path_ext ~= '"as") and (path_ext ~= '"ao") =>
-;         throwKeyedMsg("S2IZ0083", nil)
-;     not(PROBE_-FILE(path)) => throwKeyedMsg("S2IL0003", [path])
+;         throw_msg("S2IZ0083", CONCAT(
+;             '"The Aldor compiler can only compile files with file extensions",
+;             '" _".as_" or _".ao_"."), [])
+;     file_must_exist(path)
 ;
 ;     $edit_file := path
 ;
@@ -1098,7 +1327,7 @@
 ;
 ;     for opt in $options repeat
 ;         [optname,:optargs] := opt
-;         fullopt := selectOptionLC(optname,optList,nil)
+;         fullopt := selectOption(optname, optList, nil)
 ;
 ;         fullopt = 'new       => nil
 ;         fullopt = 'old  => error '"Internal error: compileAsharpCmd got )old"
@@ -1113,12 +1342,12 @@
 ;         fullopt = 'library   => doLibrary  := true
 ;         fullopt = 'nolibrary => doLibrary  := false
 ;
-;         throwKeyedMsg("S2IZ0036",[STRCONC('")",object2String optname)])
+;         unknown_compile_option([STRCONC('")", object2String(optname))])
 ;
 ;     tempArgs :=
 ;         path_ext = '"ao" =>
 ;             -- want to strip out -Fao
-;             (p := STRPOS('"-Fao", $asharpCmdlineFlags, 0, NIL)) =>
+;             (p := search_str('"-Fao", $asharpCmdlineFlags, 0)) =>
 ;                 p = 0 => SUBSTRING($asharpCmdlineFlags, 5, NIL)
 ;                 STRCONC(SUBSTRING($asharpCmdlineFlags, 0, p), '" ",
 ;                     SUBSTRING($asharpCmdlineFlags, p+5, NIL))
@@ -1138,7 +1367,11 @@
 ;             s
 ;         tempArgs
 ;
-;     if not beQuiet then sayKeyedMsg("S2IZ0038A", [path, asharpArgs])
+;     if not beQuiet then say_msg("S2IZ0038A", CONCAT(
+;         '"Compiling FriCAS source code from file %1b using Aldor compiler",
+;         '" and options %b %ceon %2 %ceoff %d . Use the system command",
+;         '" %b )set compiler args %d to change these options."),
+;         [path, asharpArgs])
 ;
 ;     command :=
 ;        STRCONC(getEnv('"ALDOR_COMPILER"),_
@@ -1147,20 +1380,9 @@
 ;
 ;     if (rc = 0) and doCompileLisp then
 ;         lsp := make_filename2(file_basename(path), '"lsp")
-;         if fnameReadable?(lsp) then
-;             if not beQuiet then sayKeyedMsg("S2IZ0089", [lsp])
-;             compile_file_quietly(lsp)
-;         else
-;             sayKeyedMsg("S2IL0003", [lsp])
+;         do_compile_lisp(lsp, beQuiet)
 ;
-;     if rc = 0 and doLibrary then
-;         -- do we need to worry about where the compilation output went?
-;         if not beQuiet then sayKeyedMsg("S2IZ0090", [file_basename(path)])
-;         withAsharpCmd [file_basename(path)]
-;     else if not beQuiet then
-;         sayKeyedMsg("S2IZ0084", nil)
-;
-;     extendLocalLibdb $newConlist
+;     do_merge_info(rc = 0 and doLibrary, beQuiet, path)
 
 (DEFUN |compileAsharpCmd1| (|args|)
   (PROG (|path| |path_ext| |optList| |beQuiet| |doLibrary| |doCompileLisp|
@@ -1172,10 +1394,14 @@
       (SETQ |path_ext| (|file_extention| |path|))
       (COND
        ((AND (NOT (EQUAL |path_ext| "as")) (NOT (EQUAL |path_ext| "ao")))
-        (|throwKeyedMsg| 'S2IZ0083 NIL))
-       ((NULL (PROBE-FILE |path|)) (|throwKeyedMsg| 'S2IL0003 (LIST |path|)))
+        (|throw_msg| 'S2IZ0083
+         (CONCAT
+          "The Aldor compiler can only compile files with file extensions"
+          " \".as\" or \".ao\".")
+         NIL))
        (#1='T
         (PROGN
+         (|file_must_exist| |path|)
          (SETQ |$edit_file| |path|)
          (SETQ |optList|
                  '(|new| |old| |onlyargs| |moreargs| |quiet| |nolispcompile|
@@ -1194,7 +1420,7 @@
                (PROGN
                 (SETQ |optname| (CAR |opt|))
                 (SETQ |optargs| (CDR |opt|))
-                (SETQ |fullopt| (|selectOptionLC| |optname| |optList| NIL))
+                (SETQ |fullopt| (|selectOption| |optname| |optList| NIL))
                 (COND ((EQ |fullopt| '|new|) NIL)
                       ((EQ |fullopt| '|old|)
                        (|error| "Internal error: compileAsharpCmd got )old"))
@@ -1207,7 +1433,7 @@
                       ((EQ |fullopt| '|library|) (SETQ |doLibrary| T))
                       ((EQ |fullopt| '|nolibrary|) (SETQ |doLibrary| NIL))
                       (#1#
-                       (|throwKeyedMsg| 'S2IZ0036
+                       (|unknown_compile_option|
                         (LIST (STRCONC ")" (|object2String| |optname|)))))))))
              (SETQ |bfVar#24| (CDR |bfVar#24|))))
           |$options| NIL)
@@ -1215,7 +1441,7 @@
                  (COND
                   ((EQUAL |path_ext| "ao")
                    (COND
-                    ((SETQ |p| (STRPOS "-Fao" |$asharpCmdlineFlags| 0 NIL))
+                    ((SETQ |p| (|search_str| "-Fao" |$asharpCmdlineFlags| 0))
                      (COND
                       ((EQL |p| 0) (SUBSTRING |$asharpCmdlineFlags| 5 NIL))
                       (#1#
@@ -1256,7 +1482,12 @@
                   (#1# |tempArgs|)))
          (COND
           ((NULL |beQuiet|)
-           (|sayKeyedMsg| 'S2IZ0038A (LIST |path| |asharpArgs|))))
+           (|say_msg| 'S2IZ0038A
+            (CONCAT
+             "Compiling FriCAS source code from file %1b using Aldor compiler"
+             " and options %b %ceon %2 %ceoff %d . Use the system command"
+             " %b )set compiler args %d to change these options.")
+            (LIST |path| |asharpArgs|))))
          (SETQ |command|
                  (STRCONC (|getEnv| "ALDOR_COMPILER") " " |asharpArgs| " "
                   |path|))
@@ -1264,19 +1495,9 @@
          (COND
           ((AND (EQL |rc| 0) |doCompileLisp|)
            (SETQ |lsp| (|make_filename2| (|file_basename| |path|) "lsp"))
-           (COND
-            ((|fnameReadable?| |lsp|)
-             (COND ((NULL |beQuiet|) (|sayKeyedMsg| 'S2IZ0089 (LIST |lsp|))))
-             (|compile_file_quietly| |lsp|))
-            (#1# (|sayKeyedMsg| 'S2IL0003 (LIST |lsp|))))))
-         (COND
-          ((AND (EQL |rc| 0) |doLibrary|)
-           (COND
-            ((NULL |beQuiet|)
-             (|sayKeyedMsg| 'S2IZ0090 (LIST (|file_basename| |path|)))))
-           (|withAsharpCmd| (LIST (|file_basename| |path|))))
-          ((NULL |beQuiet|) (|sayKeyedMsg| 'S2IZ0084 NIL)))
-         (|extendLocalLibdb| |$newConlist|))))))))
+           (|do_compile_lisp| |lsp| |beQuiet|)))
+         (|do_merge_info| (AND (EQL |rc| 0) |doLibrary|) |beQuiet|
+          |path|))))))))
 
 ; compileAsharpArchiveCmd args ==
 ;     -- Assume we entered from the "compile" function, so args ~= nil
@@ -1284,8 +1505,8 @@
 ;     -- the name is fully qualified.
 ;
 ;     path := first(args)
-;     file_kind(path) ~= 1 =>
-;           throwKeyedMsg("S2IL0003", [path])
+;     file_kind(path) ~= 1 => throw_msg("S2IL0003",
+;         '"The file %1b is needed but does not exist.", [path])
 ;
 ;     -- here is the plan:
 ;     --   1. extract the file name and try to make a directory based
@@ -1298,12 +1519,14 @@
 ;
 ;     dir  := make_filename2(file_basename(path), '"axldir")
 ;     isDir := file_kind(dir)
-;     isDir = 0 =>
-;         throwKeyedMsg("S2IL0027", [dir, path])
+;     rc = 0
 ;
-;     if isDir ~= 1 then
+;     if isDir = -1 then
 ;         rc := makedir(dir)
-;         rc ~= 0 => throwKeyedMsg("S2IL0027", [dir, path])
+;
+;     isDir = 0 or rc ~= 0 => throw_msg("S2IL0027",
+;       '"The directory %1 could not be created. The file %2 was not compiled.",
+;       [dir, path])
 ;
 ;     curDir := get_current_directory()
 ;
@@ -1314,14 +1537,18 @@
 ;     rc := run_command('"ar", ['"x", path])
 ;     rc ~= 0 =>
 ;         cd [curDir]
-;         throwKeyedMsg("S2IL0028", [dir, path])
+;         throw_msg("S2IL0028", CONCAT(
+;             '"Could not unarchive contents of %2 into directory %1.",
+;             '" The file %2 was not compiled."), [dir, path])
 ;
 ;     -- Look for .ao files
 ;
 ;     asos := [NAMESTRING(aso) for aso in DIRECTORY('"*.ao")]
 ;     null asos =>
 ;         cd [curDir]
-;         throwKeyedMsg("S2IL0029", [dir, path])
+;         throw_msg("S2IL0029", CONCAT(
+;             '"No .ao files were found when %2 was unarchived into directory",
+;             '" %1. The file %2 was not compiled."), [dir, path])
 ;
 ;     -- Compile the .ao files
 ;
@@ -1342,20 +1569,21 @@
       (SETQ |path| (CAR |args|))
       (COND
        ((NOT (EQL (|file_kind| |path|) 1))
-        (|throwKeyedMsg| 'S2IL0003 (LIST |path|)))
+        (|throw_msg| 'S2IL0003 "The file %1b is needed but does not exist."
+         (LIST |path|)))
        (#1='T
         (PROGN
          (SETQ |dir| (|make_filename2| (|file_basename| |path|) "axldir"))
          (SETQ |isDir| (|file_kind| |dir|))
+         (EQL |rc| 0)
+         (COND ((EQUAL |isDir| (- 1)) (SETQ |rc| (|makedir| |dir|))))
          (COND
-          ((EQL |isDir| 0) (|throwKeyedMsg| 'S2IL0027 (LIST |dir| |path|)))
+          ((OR (EQL |isDir| 0) (NOT (EQL |rc| 0)))
+           (|throw_msg| 'S2IL0027
+            "The directory %1 could not be created. The file %2 was not compiled."
+            (LIST |dir| |path|)))
           (#1#
            (PROGN
-            (COND
-             ((NOT (EQL |isDir| 1)) (SETQ |rc| (|makedir| |dir|))
-              (COND
-               ((NOT (EQL |rc| 0))
-                (|throwKeyedMsg| 'S2IL0027 (LIST |dir| |path|))))))
             (SETQ |curDir| (|get_current_directory|))
             (|cd| (LIST |dir|))
             (SETQ |rc| (|run_command| "ar" (LIST "x" |path|)))
@@ -1363,7 +1591,10 @@
              ((NOT (EQL |rc| 0))
               (PROGN
                (|cd| (LIST |curDir|))
-               (|throwKeyedMsg| 'S2IL0028 (LIST |dir| |path|))))
+               (|throw_msg| 'S2IL0028
+                (CONCAT "Could not unarchive contents of %2 into directory %1."
+                        " The file %2 was not compiled.")
+                (LIST |dir| |path|))))
              (#1#
               (PROGN
                (SETQ |asos|
@@ -1382,7 +1613,11 @@
                 ((NULL |asos|)
                  (PROGN
                   (|cd| (LIST |curDir|))
-                  (|throwKeyedMsg| 'S2IL0029 (LIST |dir| |path|))))
+                  (|throw_msg| 'S2IL0029
+                   (CONCAT
+                    "No .ao files were found when %2 was unarchived into directory"
+                    " %1. The file %2 was not compiled.")
+                   (LIST |dir| |path|))))
                 (#1#
                  (PROGN
                   ((LAMBDA (|bfVar#29| |aso|)
@@ -1403,7 +1638,7 @@
 ;     -- and is a file with file extension .lsp
 ;
 ;     path := first(args)
-;     not PROBE_-FILE(path) => throwKeyedMsg("S2IL0003", [path])
+;     file_must_exist(path)
 ;
 ;     optList :=  '( _
 ;       quiet _
@@ -1417,7 +1652,7 @@
 ;
 ;     for opt in $options repeat
 ;         [optname,:optargs] := opt
-;         fullopt := selectOptionLC(optname,optList,nil)
+;         fullopt := selectOption(optname, optList, nil)
 ;
 ;         fullopt = 'quiet     => beQuiet := true
 ;         fullopt = 'noquiet   => beQuiet := false
@@ -1425,20 +1660,11 @@
 ;         fullopt = 'library   => doLibrary  := true
 ;         fullopt = 'nolibrary => doLibrary  := false
 ;
-;         throwKeyedMsg("S2IZ0036",[STRCONC('")",object2String optname)])
+;         unknown_compile_option([STRCONC('")", object2String(optname))])
 ;
-;     if fnameReadable?(path) then
-;         if not beQuiet then sayKeyedMsg("S2IZ0089", [path])
-;         compile_file_quietly(path)
-;     else
-;         sayKeyedMsg("S2IL0003", [path])
+;     do_compile_lisp(path, beQuiet)
 ;
-;     if doLibrary then
-;         -- do we need to worry about where the compilation output went?
-;         if not beQuiet then sayKeyedMsg("S2IZ0090", [file_basename(path)])
-;         withAsharpCmd([file_basename(path)])
-;     else if not beQuiet then
-;         sayKeyedMsg("S2IZ0084", nil)
+;     do_merge_info(doLibrary, beQuiet, path)
 ;     terminateSystemCommand()
 ;     spadPrompt()
 
@@ -1447,46 +1673,33 @@
     (RETURN
      (PROGN
       (SETQ |path| (CAR |args|))
-      (COND
-       ((NULL (PROBE-FILE |path|)) (|throwKeyedMsg| 'S2IL0003 (LIST |path|)))
-       (#1='T
-        (PROGN
-         (SETQ |optList| '(|quiet| |noquiet| |library| |nolibrary|))
-         (SETQ |beQuiet| NIL)
-         (SETQ |doLibrary| T)
-         ((LAMBDA (|bfVar#30| |opt|)
-            (LOOP
-             (COND
-              ((OR (ATOM |bfVar#30|) (PROGN (SETQ |opt| (CAR |bfVar#30|)) NIL))
-               (RETURN NIL))
-              (#1#
-               (PROGN
-                (SETQ |optname| (CAR |opt|))
-                (SETQ |optargs| (CDR |opt|))
-                (SETQ |fullopt| (|selectOptionLC| |optname| |optList| NIL))
-                (COND ((EQ |fullopt| '|quiet|) (SETQ |beQuiet| T))
-                      ((EQ |fullopt| '|noquiet|) (SETQ |beQuiet| NIL))
-                      ((EQ |fullopt| '|library|) (SETQ |doLibrary| T))
-                      ((EQ |fullopt| '|nolibrary|) (SETQ |doLibrary| NIL))
-                      (#1#
-                       (|throwKeyedMsg| 'S2IZ0036
-                        (LIST (STRCONC ")" (|object2String| |optname|)))))))))
-             (SETQ |bfVar#30| (CDR |bfVar#30|))))
-          |$options| NIL)
-         (COND
-          ((|fnameReadable?| |path|)
-           (COND ((NULL |beQuiet|) (|sayKeyedMsg| 'S2IZ0089 (LIST |path|))))
-           (|compile_file_quietly| |path|))
-          (#1# (|sayKeyedMsg| 'S2IL0003 (LIST |path|))))
-         (COND
-          (|doLibrary|
-           (COND
-            ((NULL |beQuiet|)
-             (|sayKeyedMsg| 'S2IZ0090 (LIST (|file_basename| |path|)))))
-           (|withAsharpCmd| (LIST (|file_basename| |path|))))
-          ((NULL |beQuiet|) (|sayKeyedMsg| 'S2IZ0084 NIL)))
-         (|terminateSystemCommand|)
-         (|spadPrompt|))))))))
+      (|file_must_exist| |path|)
+      (SETQ |optList| '(|quiet| |noquiet| |library| |nolibrary|))
+      (SETQ |beQuiet| NIL)
+      (SETQ |doLibrary| T)
+      ((LAMBDA (|bfVar#30| |opt|)
+         (LOOP
+          (COND
+           ((OR (ATOM |bfVar#30|) (PROGN (SETQ |opt| (CAR |bfVar#30|)) NIL))
+            (RETURN NIL))
+           (#1='T
+            (PROGN
+             (SETQ |optname| (CAR |opt|))
+             (SETQ |optargs| (CDR |opt|))
+             (SETQ |fullopt| (|selectOption| |optname| |optList| NIL))
+             (COND ((EQ |fullopt| '|quiet|) (SETQ |beQuiet| T))
+                   ((EQ |fullopt| '|noquiet|) (SETQ |beQuiet| NIL))
+                   ((EQ |fullopt| '|library|) (SETQ |doLibrary| T))
+                   ((EQ |fullopt| '|nolibrary|) (SETQ |doLibrary| NIL))
+                   (#1#
+                    (|unknown_compile_option|
+                     (LIST (STRCONC ")" (|object2String| |optname|)))))))))
+          (SETQ |bfVar#30| (CDR |bfVar#30|))))
+       |$options| NIL)
+      (|do_compile_lisp| |path| |beQuiet|)
+      (|do_merge_info| |doLibrary| |beQuiet| |path|)
+      (|terminateSystemCommand|)
+      (|spadPrompt|)))))
 
 ; compileSpadLispCmd args ==
 ;     -- Assume we entered from the "compile" function, so args ~= nil
@@ -1495,7 +1708,7 @@
 ;     libname := first args
 ;     basename := file_basename(libname)
 ;     path := make_fname(libname, basename, '"lsp")
-;     not(PROBE_-FILE(path)) => throwKeyedMsg("S2IL0003", [libname])
+;     file_must_exist(path)
 ;
 ;     optList :=  '( _
 ;       quiet _
@@ -1509,7 +1722,7 @@
 ;
 ;     for opt in $options repeat
 ;         [optname,:optargs] := opt
-;         fullopt := selectOptionLC(optname,optList,nil)
+;         fullopt := selectOption(optname, optList, nil)
 ;
 ;         fullopt = 'quiet     => beQuiet := true
 ;         fullopt = 'noquiet   => beQuiet := false
@@ -1517,20 +1730,12 @@
 ;         fullopt = 'library   => doLibrary  := true
 ;         fullopt = 'nolibrary => doLibrary  := false
 ;
-;         throwKeyedMsg("S2IZ0036",[STRCONC('")",object2String optname)])
+;         unknown_compile_option([STRCONC('")", object2String(optname))])
 ;
-;     if fnameReadable?(path) then
-;         if not beQuiet then sayKeyedMsg("S2IZ0089", [path])
-;         compile_lib_file(path)
-;     else
-;         sayKeyedMsg("S2IL0003", [path])
+;     do_compile_lisp(path, beQuiet)
 ;
-;     if doLibrary then
-;         -- do we need to worry about where the compilation output went?
-;         if not beQuiet then sayKeyedMsg("S2IZ0090", [file_basename(path)])
-;         merge_info_from_objects([file_basename(libname)], [], false)
-;     else if not beQuiet then
-;         sayKeyedMsg("S2IZ0084", nil)
+;     do_merge_info(doLibrary, beQuiet, path)
+;
 ;     terminateSystemCommand()
 ;     spadPrompt()
 
@@ -1542,60 +1747,33 @@
       (SETQ |libname| (CAR |args|))
       (SETQ |basename| (|file_basename| |libname|))
       (SETQ |path| (|make_fname| |libname| |basename| "lsp"))
-      (COND
-       ((NULL (PROBE-FILE |path|))
-        (|throwKeyedMsg| 'S2IL0003 (LIST |libname|)))
-       (#1='T
-        (PROGN
-         (SETQ |optList| '(|quiet| |noquiet| |library| |nolibrary|))
-         (SETQ |beQuiet| NIL)
-         (SETQ |doLibrary| T)
-         ((LAMBDA (|bfVar#31| |opt|)
-            (LOOP
-             (COND
-              ((OR (ATOM |bfVar#31|) (PROGN (SETQ |opt| (CAR |bfVar#31|)) NIL))
-               (RETURN NIL))
-              (#1#
-               (PROGN
-                (SETQ |optname| (CAR |opt|))
-                (SETQ |optargs| (CDR |opt|))
-                (SETQ |fullopt| (|selectOptionLC| |optname| |optList| NIL))
-                (COND ((EQ |fullopt| '|quiet|) (SETQ |beQuiet| T))
-                      ((EQ |fullopt| '|noquiet|) (SETQ |beQuiet| NIL))
-                      ((EQ |fullopt| '|library|) (SETQ |doLibrary| T))
-                      ((EQ |fullopt| '|nolibrary|) (SETQ |doLibrary| NIL))
-                      (#1#
-                       (|throwKeyedMsg| 'S2IZ0036
-                        (LIST (STRCONC ")" (|object2String| |optname|)))))))))
-             (SETQ |bfVar#31| (CDR |bfVar#31|))))
-          |$options| NIL)
-         (COND
-          ((|fnameReadable?| |path|)
-           (COND ((NULL |beQuiet|) (|sayKeyedMsg| 'S2IZ0089 (LIST |path|))))
-           (|compile_lib_file| |path|))
-          (#1# (|sayKeyedMsg| 'S2IL0003 (LIST |path|))))
-         (COND
-          (|doLibrary|
-           (COND
-            ((NULL |beQuiet|)
-             (|sayKeyedMsg| 'S2IZ0090 (LIST (|file_basename| |path|)))))
-           (|merge_info_from_objects| (LIST (|file_basename| |libname|)) NIL
-            NIL))
-          ((NULL |beQuiet|) (|sayKeyedMsg| 'S2IZ0084 NIL)))
-         (|terminateSystemCommand|)
-         (|spadPrompt|))))))))
-
-; withAsharpCmd args ==
-;     $options: local := nil
-;     merge_info_from_objects(args, $options, false)
-
-(DEFUN |withAsharpCmd| (|args|)
-  (PROG (|$options|)
-    (DECLARE (SPECIAL |$options|))
-    (RETURN
-     (PROGN
-      (SETQ |$options| NIL)
-      (|merge_info_from_objects| |args| |$options| NIL)))))
+      (|file_must_exist| |path|)
+      (SETQ |optList| '(|quiet| |noquiet| |library| |nolibrary|))
+      (SETQ |beQuiet| NIL)
+      (SETQ |doLibrary| T)
+      ((LAMBDA (|bfVar#31| |opt|)
+         (LOOP
+          (COND
+           ((OR (ATOM |bfVar#31|) (PROGN (SETQ |opt| (CAR |bfVar#31|)) NIL))
+            (RETURN NIL))
+           (#1='T
+            (PROGN
+             (SETQ |optname| (CAR |opt|))
+             (SETQ |optargs| (CDR |opt|))
+             (SETQ |fullopt| (|selectOption| |optname| |optList| NIL))
+             (COND ((EQ |fullopt| '|quiet|) (SETQ |beQuiet| T))
+                   ((EQ |fullopt| '|noquiet|) (SETQ |beQuiet| NIL))
+                   ((EQ |fullopt| '|library|) (SETQ |doLibrary| T))
+                   ((EQ |fullopt| '|nolibrary|) (SETQ |doLibrary| NIL))
+                   (#1#
+                    (|unknown_compile_option|
+                     (LIST (STRCONC ")" (|object2String| |optname|)))))))))
+          (SETQ |bfVar#31| (CDR |bfVar#31|))))
+       |$options| NIL)
+      (|do_compile_lisp| |path| |beQuiet|)
+      (|do_merge_info| |doLibrary| |beQuiet| |path|)
+      (|terminateSystemCommand|)
+      (|spadPrompt|)))))
 
 ; print_text_stream stream ==
 ;     if stream then
@@ -1628,26 +1806,14 @@
 (DEFUN |copyright| ()
   (PROG () (RETURN (|print_text_file| (STRCONC |$spadroot| "/lib/copyright")))))
 
-; credits() ==
-;  for i in CREDITS repeat
-;   PRINC(i)
-;   TERPRI()
+; credits() == print_text_file STRCONC($spadroot, '"/lib/credits")
 
 (DEFUN |credits| ()
-  (PROG ()
-    (RETURN
-     ((LAMBDA (|bfVar#32| |i|)
-        (LOOP
-         (COND
-          ((OR (ATOM |bfVar#32|) (PROGN (SETQ |i| (CAR |bfVar#32|)) NIL))
-           (RETURN NIL))
-          ('T (PROGN (PRINC |i|) (TERPRI))))
-         (SETQ |bfVar#32| (CDR |bfVar#32|))))
-      CREDITS NIL))))
+  (PROG () (RETURN (|print_text_file| (STRCONC |$spadroot| "/lib/credits")))))
 
 ; display l ==
 ;   ioHook("startSysCmd", "display")
-;   UNWIND_-PROTECT(displaySpad2Cmd l, ioHook("endSysCmd", "display"))
+;   UNWIND_-PROTECT(displaySpad2Cmd l, ioHook("endOfSysCmd", "display"))
 
 (DEFUN |display| (|l|)
   (PROG ()
@@ -1655,12 +1821,12 @@
      (PROGN
       (|ioHook| '|startSysCmd| '|display|)
       (UNWIND-PROTECT (|displaySpad2Cmd| |l|)
-        (|ioHook| '|endSysCmd| '|display|))))))
+        (|ioHook| '|endOfSysCmd| '|display|))))))
 
 ; displaySpad2Cmd l ==
 ;   $e: local := $EmptyEnvironment
 ;   l is [opt,:vl] and opt ~= "?" =>
-;     option := selectOptionLC(opt,$displayOptions,'optionError) =>
+;     option := selectOption(opt, $displayOptions, 'optionError) =>
 ;
 ;       -- the option may be given in the plural but the property in
 ;       -- the alist is sometimes singular
@@ -1704,7 +1870,7 @@
              (NOT (EQ |opt| '?)))
         (COND
          ((SETQ |option|
-                  (|selectOptionLC| |opt| |$displayOptions| '|optionError|))
+                  (|selectOption| |opt| |$displayOptions| '|optionError|))
           (IDENTITY
            (PROGN
             (SETQ |option|
@@ -1720,11 +1886,11 @@
              ((EQ |option| '|abbreviations|)
               (COND ((NULL |vl|) (|listConstructorAbbreviations|))
                     (#1#
-                     ((LAMBDA (|bfVar#33| |v|)
+                     ((LAMBDA (|bfVar#32| |v|)
                         (LOOP
                          (COND
-                          ((OR (ATOM |bfVar#33|)
-                               (PROGN (SETQ |v| (CAR |bfVar#33|)) NIL))
+                          ((OR (ATOM |bfVar#32|)
+                               (PROGN (SETQ |v| (CAR |bfVar#32|)) NIL))
                            (RETURN NIL))
                           (#1#
                            (COND
@@ -1732,7 +1898,7 @@
                                      (|abbreviation?| (|opOf| |v|)))
                              (|abbQuery| |constructor|))
                             (#1# (|abbQuery| (|opOf| |v|))))))
-                         (SETQ |bfVar#33| (CDR |bfVar#33|))))
+                         (SETQ |bfVar#32| (CDR |bfVar#32|))))
                       |vl| NIL))))
              ((EQ |option| '|operations|) (|displayOperations| |vl|))
              ((EQ |option| '|macros|) (|displayMacros| |vl|))
@@ -1741,17 +1907,17 @@
        (#1#
         (PROGN
          (SETQ |optList|
-                 ((LAMBDA (|bfVar#35| |bfVar#34| |x|)
+                 ((LAMBDA (|bfVar#34| |bfVar#33| |x|)
                     (LOOP
                      (COND
-                      ((OR (ATOM |bfVar#34|)
-                           (PROGN (SETQ |x| (CAR |bfVar#34|)) NIL))
-                       (RETURN (NREVERSE |bfVar#35|)))
+                      ((OR (ATOM |bfVar#33|)
+                           (PROGN (SETQ |x| (CAR |bfVar#33|)) NIL))
+                       (RETURN (NREVERSE |bfVar#34|)))
                       (#1#
-                       (SETQ |bfVar#35|
+                       (SETQ |bfVar#34|
                                (APPEND (REVERSE (LIST '|%l| "        " |x|))
-                                       |bfVar#35|))))
-                     (SETQ |bfVar#34| (CDR |bfVar#34|))))
+                                       |bfVar#34|))))
+                     (SETQ |bfVar#33| (CDR |bfVar#33|))))
                   NIL |$displayOptions| NIL))
          (SETQ |msg|
                  (APPEND (|bright| "  )display")
@@ -1810,11 +1976,11 @@
             (#1#
              (PROGN
               (SETQ CAR T)
-              ((LAMBDA (|bfVar#36| |macro|)
+              ((LAMBDA (|bfVar#35| |macro|)
                  (LOOP
                   (COND
-                   ((OR (ATOM |bfVar#36|)
-                        (PROGN (SETQ |macro| (CAR |bfVar#36|)) NIL))
+                   ((OR (ATOM |bfVar#35|)
+                        (PROGN (SETQ |macro| (CAR |bfVar#35|)) NIL))
                     (RETURN NIL))
                    (#1#
                     (COND
@@ -1830,14 +1996,14 @@
                       (|sayBrightly|
                        (LIST "   " '|%b| |macro| '|%d|
                              " is not a known FriCAS macro."))))))
-                  (SETQ |bfVar#36| (CDR |bfVar#36|))))
+                  (SETQ |bfVar#35| (CDR |bfVar#35|))))
                |macros| NIL)
               (SETQ CAR T)
-              ((LAMBDA (|bfVar#37| |macro|)
+              ((LAMBDA (|bfVar#36| |macro|)
                  (LOOP
                   (COND
-                   ((OR (ATOM |bfVar#37|)
-                        (PROGN (SETQ |macro| (CAR |bfVar#37|)) NIL))
+                   ((OR (ATOM |bfVar#36|)
+                        (PROGN (SETQ |macro| (CAR |bfVar#36|)) NIL))
                     (RETURN NIL))
                    (#1#
                     (COND
@@ -1851,7 +2017,7 @@
                                  (LIST '|%l| "System-defined macros:"))
                                 (SETQ CAR NIL)))
                               (|displayMacro| |macro|))))))))
-                  (SETQ |bfVar#37| (CDR |bfVar#37|))))
+                  (SETQ |bfVar#36| (CDR |bfVar#36|))))
                |macros| NIL)
               NIL)))))))
 
@@ -1862,13 +2028,13 @@
   (PROG ()
     (RETURN
      (REMDUP
-      ((LAMBDA (|bfVar#39| |bfVar#38| |mac|)
+      ((LAMBDA (|bfVar#38| |bfVar#37| |mac|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#38|) (PROGN (SETQ |mac| (CAR |bfVar#38|)) NIL))
-            (RETURN (NREVERSE |bfVar#39|)))
-           ('T (SETQ |bfVar#39| (CONS (CAR |mac|) |bfVar#39|))))
-          (SETQ |bfVar#38| (CDR |bfVar#38|))))
+           ((OR (ATOM |bfVar#37|) (PROGN (SETQ |mac| (CAR |bfVar#37|)) NIL))
+            (RETURN (NREVERSE |bfVar#38|)))
+           ('T (SETQ |bfVar#38| (CONS (CAR |mac|) |bfVar#38|))))
+          (SETQ |bfVar#37| (CDR |bfVar#37|))))
        NIL (|getParserMacros|) NIL)))))
 
 ; clear_user_macro(n) ==
@@ -1940,28 +2106,28 @@
       (COND ((NULL |names|) (|sayBrightly| "   * None *"))
             (#1='T
              (|sayAsManyPerLineAsPossible|
-              ((LAMBDA (|bfVar#41| |bfVar#40| |x|)
+              ((LAMBDA (|bfVar#40| |bfVar#39| |x|)
                  (LOOP
                   (COND
-                   ((OR (ATOM |bfVar#40|)
-                        (PROGN (SETQ |x| (CAR |bfVar#40|)) NIL))
-                    (RETURN (NREVERSE |bfVar#41|)))
+                   ((OR (ATOM |bfVar#39|)
+                        (PROGN (SETQ |x| (CAR |bfVar#39|)) NIL))
+                    (RETURN (NREVERSE |bfVar#40|)))
                    (#1#
-                    (SETQ |bfVar#41| (CONS (|object2String| |x|) |bfVar#41|))))
-                  (SETQ |bfVar#40| (CDR |bfVar#40|))))
+                    (SETQ |bfVar#40| (CONS (|object2String| |x|) |bfVar#40|))))
+                  (SETQ |bfVar#39| (CDR |bfVar#39|))))
                NIL |names| NIL))))
       (SETQ |bmacs| (SETDIFFERENCE |bmacs| |umacs|))
       (COND
        (|bmacs|
         (|sayMessage| "Names of System-Defined Objects in the Workspace:")
         (|sayAsManyPerLineAsPossible|
-         ((LAMBDA (|bfVar#43| |bfVar#42| |x|)
+         ((LAMBDA (|bfVar#42| |bfVar#41| |x|)
             (LOOP
              (COND
-              ((OR (ATOM |bfVar#42|) (PROGN (SETQ |x| (CAR |bfVar#42|)) NIL))
-               (RETURN (NREVERSE |bfVar#43|)))
-              (#1# (SETQ |bfVar#43| (CONS (|object2String| |x|) |bfVar#43|))))
-             (SETQ |bfVar#42| (CDR |bfVar#42|))))
+              ((OR (ATOM |bfVar#41|) (PROGN (SETQ |x| (CAR |bfVar#41|)) NIL))
+               (RETURN (NREVERSE |bfVar#42|)))
+              (#1# (SETQ |bfVar#42| (CONS (|object2String| |x|) |bfVar#42|))))
+             (SETQ |bfVar#41| (CDR |bfVar#41|))))
           NIL |bmacs| NIL))))))))
 
 ; getWorkspaceNames() ==
@@ -1972,26 +2138,32 @@
   (PROG (|n|)
     (RETURN
      (NMSORT
-      ((LAMBDA (|bfVar#46| |bfVar#45| |bfVar#44|)
+      ((LAMBDA (|bfVar#45| |bfVar#44| |bfVar#43|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#45|)
-                (PROGN (SETQ |bfVar#44| (CAR |bfVar#45|)) NIL))
-            (RETURN (NREVERSE |bfVar#46|)))
+           ((OR (ATOM |bfVar#44|)
+                (PROGN (SETQ |bfVar#43| (CAR |bfVar#44|)) NIL))
+            (RETURN (NREVERSE |bfVar#45|)))
            (#1='T
-            (AND (CONSP |bfVar#44|) (PROGN (SETQ |n| (CAR |bfVar#44|)) #1#)
+            (AND (CONSP |bfVar#43|) (PROGN (SETQ |n| (CAR |bfVar#43|)) #1#)
                  (NOT (EQ |n| '|--macros--|)) (NOT (EQ |n| '|--flags--|))
-                 (SETQ |bfVar#46| (CONS |n| |bfVar#46|)))))
-          (SETQ |bfVar#45| (CDR |bfVar#45|))))
+                 (SETQ |bfVar#45| (CONS |n| |bfVar#45|)))))
+          (SETQ |bfVar#44| (CDR |bfVar#44|))))
        NIL (CAAR |$InteractiveFrame|) NIL)))))
 
 ; displayOperations l ==
 ;   null l =>
-;     x := UPCASE queryUserKeyedMsg("S2IZ0058",NIL)
-;     if MEMQ(STRING2ID_N(x, 1), '(Y YES))
-;       then for op in allOperations() repeat reportOpSymbol op
-;       else sayKeyedMsg("S2IZ0059",NIL)
-;     nil
+;         x := query_user_msg("S2IZ0058", CONCAT(
+;             '"You have requested that all information about all FriCAS",
+;             '" operations (functions) be displayed.  As there are several",
+;             '" hundred operations, please confirm your request by typing",
+;             '" %b y %d or %b yes %d and then pressing %b Enter %d :"), [])
+;         if x then
+;             for op in allOperations() repeat reportOpSymbol(op)
+;         else say_msg("S2IZ0059", CONCAT(
+;             '"Since you did not respond with %b y %d or %b yes %d the",
+;             '" list of operations will not be displayed."), [])
+;         nil
 ;   for op in l repeat reportOpSymbol op
 
 (DEFUN |displayOperations| (|l|)
@@ -2000,27 +2172,38 @@
      (COND
       ((NULL |l|)
        (PROGN
-        (SETQ |x| (UPCASE (|queryUserKeyedMsg| 'S2IZ0058 NIL)))
+        (SETQ |x|
+                (|query_user_msg| 'S2IZ0058
+                 (CONCAT
+                  "You have requested that all information about all FriCAS"
+                  " operations (functions) be displayed.  As there are several"
+                  " hundred operations, please confirm your request by typing"
+                  " %b y %d or %b yes %d and then pressing %b Enter %d :")
+                 NIL))
         (COND
-         ((MEMQ (STRING2ID_N |x| 1) '(Y YES))
-          ((LAMBDA (|bfVar#47| |op|)
+         (|x|
+          ((LAMBDA (|bfVar#46| |op|)
              (LOOP
               (COND
-               ((OR (ATOM |bfVar#47|) (PROGN (SETQ |op| (CAR |bfVar#47|)) NIL))
+               ((OR (ATOM |bfVar#46|) (PROGN (SETQ |op| (CAR |bfVar#46|)) NIL))
                 (RETURN NIL))
                (#1='T (|reportOpSymbol| |op|)))
-              (SETQ |bfVar#47| (CDR |bfVar#47|))))
+              (SETQ |bfVar#46| (CDR |bfVar#46|))))
            (|allOperations|) NIL))
-         (#1# (|sayKeyedMsg| 'S2IZ0059 NIL)))
+         (#1#
+          (|say_msg| 'S2IZ0059
+           (CONCAT "Since you did not respond with %b y %d or %b yes %d the"
+                   " list of operations will not be displayed.")
+           NIL)))
         NIL))
       (#1#
-       ((LAMBDA (|bfVar#48| |op|)
+       ((LAMBDA (|bfVar#47| |op|)
           (LOOP
            (COND
-            ((OR (ATOM |bfVar#48|) (PROGN (SETQ |op| (CAR |bfVar#48|)) NIL))
+            ((OR (ATOM |bfVar#47|) (PROGN (SETQ |op| (CAR |bfVar#47|)) NIL))
              (RETURN NIL))
             (#1# (|reportOpSymbol| |op|)))
-           (SETQ |bfVar#48| (CDR |bfVar#48|))))
+           (SETQ |bfVar#47| (CDR |bfVar#47|))))
         |l| NIL))))))
 
 ; interpFunctionDepAlists() ==
@@ -2043,17 +2226,17 @@
       (SETQ |deps| (|getFlag| '|$dependencies|))
       (SETQ |$dependentAlist| (LIST (CONS NIL NIL)))
       (SETQ |$dependeeAlist| (LIST (CONS NIL NIL)))
-      ((LAMBDA (|bfVar#50| |bfVar#49|)
+      ((LAMBDA (|bfVar#49| |bfVar#48|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#50|)
-                (PROGN (SETQ |bfVar#49| (CAR |bfVar#50|)) NIL))
+           ((OR (ATOM |bfVar#49|)
+                (PROGN (SETQ |bfVar#48| (CAR |bfVar#49|)) NIL))
             (RETURN NIL))
            (#1='T
-            (AND (CONSP |bfVar#49|)
+            (AND (CONSP |bfVar#48|)
                  (PROGN
-                  (SETQ |dependee| (CAR |bfVar#49|))
-                  (SETQ |ISTMP#1| (CDR |bfVar#49|))
+                  (SETQ |dependee| (CAR |bfVar#48|))
+                  (SETQ |ISTMP#1| (CDR |bfVar#48|))
                   (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
                        (PROGN (SETQ |dependent| (CAR |ISTMP#1|)) #1#)))
                  (PROGN
@@ -2065,7 +2248,7 @@
                           (PUTALIST |$dependeeAlist| |dependent|
                            (CONS |dependee|
                                  (GETALIST |$dependeeAlist| |dependent|))))))))
-          (SETQ |bfVar#50| (CDR |bfVar#50|))))
+          (SETQ |bfVar#49| (CDR |bfVar#49|))))
        |deps| NIL)))))
 
 ; fixObjectForPrinting(v) ==
@@ -2092,10 +2275,14 @@
 ;   macros := REMDUP append(bmacs, umacs)
 ;   if vl is ['all] or null vl then
 ;     vl := MSORT append(getWorkspaceNames(),macros)
-;   if $frameMessages then sayKeyedMsg("S2IZ0065",[$interpreterFrameName])
+;   if $frameMessages then say_msg("S2IZ0065",
+;          '"The name of the current frame is %1b .",
+;         [$interpreterFrameName])
 ;   null vl =>
-;     null $frameMessages => sayKeyedMsg("S2IZ0066",NIL)
-;     sayKeyedMsg("S2IZ0067",[$interpreterFrameName])
+;         null($frameMessages) => say_msg("S2IZ0066",
+;             '"The workspace is empty.", [])
+;         say_msg("S2IZ0067", '"The current frame, %1b , is empty.",
+;                 [$interpreterFrameName])
 ;   interpFunctionDepAlists()
 ;   for v in vl repeat
 ;     isInternalMapName(v) => 'iterate
@@ -2140,7 +2327,8 @@
 ;           val => displayValue(v,val,true)
 ;         sayMSG ['"   ",prop,'":  ",val]
 ;         propsSeen:= [prop,:propsSeen]
-;     sayKeyedMsg("S2IZ0068",[option])
+;     say_msg("S2IZ0068",
+;             '"There is nothing to display for option %1b .", [option])
 ;   terminateSystemCommand()
 
 (DEFUN |displayProperties| (|option| |l|)
@@ -2163,19 +2351,23 @@
         (SETQ |vl| (MSORT (APPEND (|getWorkspaceNames|) |macros|)))))
       (COND
        (|$frameMessages|
-        (|sayKeyedMsg| 'S2IZ0065 (LIST |$interpreterFrameName|))))
+        (|say_msg| 'S2IZ0065 "The name of the current frame is %1b ."
+         (LIST |$interpreterFrameName|))))
       (COND
        ((NULL |vl|)
-        (COND ((NULL |$frameMessages|) (|sayKeyedMsg| 'S2IZ0066 NIL))
-              (#1='T
-               (|sayKeyedMsg| 'S2IZ0067 (LIST |$interpreterFrameName|)))))
+        (COND
+         ((NULL |$frameMessages|)
+          (|say_msg| 'S2IZ0066 "The workspace is empty." NIL))
+         (#1='T
+          (|say_msg| 'S2IZ0067 "The current frame, %1b , is empty."
+           (LIST |$interpreterFrameName|)))))
        (#1#
         (PROGN
          (|interpFunctionDepAlists|)
-         ((LAMBDA (|bfVar#51| |v|)
+         ((LAMBDA (|bfVar#50| |v|)
             (LOOP
              (COND
-              ((OR (ATOM |bfVar#51|) (PROGN (SETQ |v| (CAR |bfVar#51|)) NIL))
+              ((OR (ATOM |bfVar#50|) (PROGN (SETQ |v| (CAR |bfVar#50|)) NIL))
                (RETURN NIL))
               (#1#
                (COND ((|isInternalMapName| |v|) '|iterate|)
@@ -2226,20 +2418,20 @@
                                   (#1#
                                    (PROGN
                                     (SETQ |propsSeen| NIL)
-                                    ((LAMBDA (|bfVar#53| |bfVar#52|)
+                                    ((LAMBDA (|bfVar#52| |bfVar#51|)
                                        (LOOP
                                         (COND
-                                         ((OR (ATOM |bfVar#53|)
+                                         ((OR (ATOM |bfVar#52|)
                                               (PROGN
-                                               (SETQ |bfVar#52|
-                                                       (CAR |bfVar#53|))
+                                               (SETQ |bfVar#51|
+                                                       (CAR |bfVar#52|))
                                                NIL))
                                           (RETURN NIL))
                                          (#1#
-                                          (AND (CONSP |bfVar#52|)
+                                          (AND (CONSP |bfVar#51|)
                                                (PROGN
-                                                (SETQ |prop| (CAR |bfVar#52|))
-                                                (SETQ |val| (CDR |bfVar#52|))
+                                                (SETQ |prop| (CAR |bfVar#51|))
+                                                (SETQ |val| (CDR |bfVar#51|))
                                                 #1#)
                                                (NULL (MEMQ |prop| |propsSeen|))
                                                |val|
@@ -2286,10 +2478,13 @@
                                                   (SETQ |propsSeen|
                                                           (CONS |prop|
                                                                 |propsSeen|))))))))
-                                        (SETQ |bfVar#53| (CDR |bfVar#53|))))
+                                        (SETQ |bfVar#52| (CDR |bfVar#52|))))
                                      |pl| NIL))))))))
-                        (#1# (|sayKeyedMsg| 'S2IZ0068 (LIST |option|)))))))))
-             (SETQ |bfVar#51| (CDR |bfVar#51|))))
+                        (#1#
+                         (|say_msg| 'S2IZ0068
+                          "There is nothing to display for option %1b ."
+                          (LIST |option|)))))))))
+             (SETQ |bfVar#50| (CDR |bfVar#50|))))
           |vl| NIL)
          (|terminateSystemCommand|))))))))
 
@@ -2328,13 +2523,13 @@
           (PROGN
            (|sayMSG| "   The following functions or rules depend on this:")
            (SETQ |msg| (LIST '|%b| "     "))
-           ((LAMBDA (|bfVar#54| |y|)
+           ((LAMBDA (|bfVar#53| |y|)
               (LOOP
                (COND
-                ((OR (ATOM |bfVar#54|) (PROGN (SETQ |y| (CAR |bfVar#54|)) NIL))
+                ((OR (ATOM |bfVar#53|) (PROGN (SETQ |y| (CAR |bfVar#53|)) NIL))
                  (RETURN NIL))
                 (#1# (SETQ |msg| (CONS " " (CONS |y| |msg|)))))
-               (SETQ |bfVar#54| (CDR |bfVar#54|))))
+               (SETQ |bfVar#53| (CDR |bfVar#53|))))
             |dependents| NIL)
            (|sayMSG| (APPEND (NREVERSE |msg|) (CONS '|%d| NIL))))))))
       (COND
@@ -2348,13 +2543,13 @@
           (PROGN
            (|sayMSG| "   This depends on the following functions or rules:")
            (SETQ |msg| (LIST '|%b| "     "))
-           ((LAMBDA (|bfVar#55| |y|)
+           ((LAMBDA (|bfVar#54| |y|)
               (LOOP
                (COND
-                ((OR (ATOM |bfVar#55|) (PROGN (SETQ |y| (CAR |bfVar#55|)) NIL))
+                ((OR (ATOM |bfVar#54|) (PROGN (SETQ |y| (CAR |bfVar#54|)) NIL))
                  (RETURN NIL))
                 (#1# (SETQ |msg| (CONS " " (CONS |y| |msg|)))))
-               (SETQ |bfVar#55| (CDR |bfVar#55|))))
+               (SETQ |bfVar#54| (CDR |bfVar#54|))))
             |dependees| NIL)
            (|sayMSG| (APPEND (NREVERSE |msg|) (CONS '|%d| NIL))))))))))))
 
@@ -2370,13 +2565,13 @@
 (DEFUN |displayModemap| (|v| |val| |giveVariableIfNil|)
   (PROG ()
     (RETURN
-     ((LAMBDA (|bfVar#56| |mm|)
+     ((LAMBDA (|bfVar#55| |mm|)
         (LOOP
          (COND
-          ((OR (ATOM |bfVar#56|) (PROGN (SETQ |mm| (CAR |bfVar#56|)) NIL))
+          ((OR (ATOM |bfVar#55|) (PROGN (SETQ |mm| (CAR |bfVar#55|)) NIL))
            (RETURN NIL))
           ('T (|displayModemap,g| |v| |mm| |giveVariableIfNil|)))
-         (SETQ |bfVar#56| (CDR |bfVar#56|))))
+         (SETQ |bfVar#55| (CDR |bfVar#55|))))
       |val| NIL))))
 (DEFUN |displayModemap,g| (|v| |mm| |giveVariableIfNil|)
   (PROG (|local| |signature| |fn| |varPart| |prefix|)
@@ -2616,11 +2811,11 @@
 ;
 ;   sayBrightly '"Available help topics for system commands are:"
 ;   sayBrightly '""
-;   sayBrightly '" boot   cd     clear    close     compile   display"
-;   sayBrightly '" edit   fin    frame    help      history   library"
-;   sayBrightly '" lisp   load   ltrace   pquit     quit      read"
-;   sayBrightly '" set    show   spool    synonym   system    trace"
-;   sayBrightly '" undo   what"
+;   sayBrightly '" boot   cd      clear    close    compile   display"
+;   sayBrightly '" edit   fin     frame    help     history   library"
+;   sayBrightly '" lisp   ltrace  pquit    quit     read      set"
+;   sayBrightly '" show   spool   synonym  system   trace     undo"
+;   sayBrightly '" what"
 ;   sayBrightly '""
 ;   sayBrightly '"Issue _")help help_" for more information about the help command."
 ;
@@ -2633,11 +2828,11 @@
       (COND ((|newHelpSpad2Cmd| |args|) (RETURN NIL)))
       (|sayBrightly| "Available help topics for system commands are:")
       (|sayBrightly| "")
-      (|sayBrightly| " boot   cd     clear    close     compile   display")
-      (|sayBrightly| " edit   fin    frame    help      history   library")
-      (|sayBrightly| " lisp   load   ltrace   pquit     quit      read")
-      (|sayBrightly| " set    show   spool    synonym   system    trace")
-      (|sayBrightly| " undo   what")
+      (|sayBrightly| " boot   cd      clear    close    compile   display")
+      (|sayBrightly| " edit   fin     frame    help     history   library")
+      (|sayBrightly| " lisp   ltrace  pquit    quit     read      set")
+      (|sayBrightly| " show   spool   synonym  system   trace     undo")
+      (|sayBrightly| " what")
       (|sayBrightly| "")
       (|sayBrightly|
        "Issue \")help help\" for more information about the help command.")
@@ -2646,13 +2841,15 @@
 ; newHelpSpad2Cmd args ==
 ;   if null args then args := ["?"]
 ;   # args > 1 =>
-;     sayKeyedMsg("S2IZ0026",NIL)
+;     say_msg("S2IZ0026",
+;             '"The %b )help %d system command supports at most one argument.",
+;             [])
 ;     true
 ;   sarg := PNAME first args
 ;   if sarg = '"?" then args := ['nullargs]
 ;   else if sarg = '"%" then args := ['history]
 ;        else if sarg = '"%%" then args := ['history]
-;   arg := selectOptionLC(first args,$SYSCOMMANDS,nil)
+;   arg := selectOption(first(args), $SYSCOMMANDS, nil)
 ;   if null arg then arg := first args
 ;
 ;   -- see if new help file exists
@@ -2672,21 +2869,25 @@
     (RETURN
      (PROGN
       (COND ((NULL |args|) (SETQ |args| (LIST '?))))
-      (COND ((< 1 (LENGTH |args|)) (PROGN (|sayKeyedMsg| 'S2IZ0026 NIL) T))
-            (#1='T
-             (PROGN
-              (SETQ |sarg| (PNAME (CAR |args|)))
-              (COND ((EQUAL |sarg| "?") (SETQ |args| (LIST '|nullargs|)))
-                    ((EQUAL |sarg| "%") (SETQ |args| (LIST '|history|)))
-                    ((EQUAL |sarg| "%%") (SETQ |args| (LIST '|history|))))
-              (SETQ |arg| (|selectOptionLC| (CAR |args|) $SYSCOMMANDS NIL))
-              (COND ((NULL |arg|) (SETQ |arg| (CAR |args|))))
-              (SETQ |narg| (PNAME |arg|))
-              (COND
-               ((NULL (SETQ |helpFile| (|make_input_filename2| |narg| "help")))
-                NIL)
-               (|$useFullScreenHelp| (PROGN (|editFile| |helpFile|) T))
-               (#1# (PROGN (|print_text_file| |helpFile|) T))))))))))
+      (COND
+       ((< 1 (LENGTH |args|))
+        (PROGN
+         (|say_msg| 'S2IZ0026
+          "The %b )help %d system command supports at most one argument." NIL)
+         T))
+       (#1='T
+        (PROGN
+         (SETQ |sarg| (PNAME (CAR |args|)))
+         (COND ((EQUAL |sarg| "?") (SETQ |args| (LIST '|nullargs|)))
+               ((EQUAL |sarg| "%") (SETQ |args| (LIST '|history|)))
+               ((EQUAL |sarg| "%%") (SETQ |args| (LIST '|history|))))
+         (SETQ |arg| (|selectOption| (CAR |args|) $SYSCOMMANDS NIL))
+         (COND ((NULL |arg|) (SETQ |arg| (CAR |args|))))
+         (SETQ |narg| (PNAME |arg|))
+         (COND
+          ((NULL (SETQ |helpFile| (|make_input_filename2| |narg| "help"))) NIL)
+          (|$useFullScreenHelp| (PROGN (|editFile| |helpFile|) T))
+          (#1# (PROGN (|print_text_file| |helpFile|) T))))))))))
 
 ; $frameRecord  := nil  --Initial setting for frame record
 
@@ -2709,13 +2910,13 @@
 (DEFUN |frameNames| ()
   (PROG ()
     (RETURN
-     ((LAMBDA (|bfVar#58| |bfVar#57| |f|)
+     ((LAMBDA (|bfVar#57| |bfVar#56| |f|)
         (LOOP
          (COND
-          ((OR (ATOM |bfVar#57|) (PROGN (SETQ |f| (CAR |bfVar#57|)) NIL))
-           (RETURN (NREVERSE |bfVar#58|)))
-          ('T (SETQ |bfVar#58| (CONS (|frameName| |f|) |bfVar#58|))))
-         (SETQ |bfVar#57| (CDR |bfVar#57|))))
+          ((OR (ATOM |bfVar#56|) (PROGN (SETQ |f| (CAR |bfVar#56|)) NIL))
+           (RETURN (NREVERSE |bfVar#57|)))
+          ('T (SETQ |bfVar#57| (CONS (|frameName| |f|) |bfVar#57|))))
+         (SETQ |bfVar#56| (CDR |bfVar#56|))))
       NIL |$interpreterFrameRing| NIL))))
 
 ; frameEnvironment fname ==
@@ -2757,21 +2958,21 @@
 
 ; frameSpad2Cmd args ==
 ;   frameArgs := '(drop import last names new next)
-;   $options => throwKeyedMsg("S2IZ0016",['")frame"])
+;   $options => throw_msg("S2IZ0016",
+;         '"The )frame system command takes arguments but no options.", [])
 ;   null(args) => helpSpad2Cmd ['frame]
-;   arg  := selectOptionLC(first args,frameArgs,'optionError)
+;   arg  := selectOption(first(args), frameArgs, 'optionError)
 ;   args := rest args
 ;   if args is [a] then args := a
 ;   if ATOM args then args := object2Identifier args
-;   arg = 'drop  =>
-;     args and PAIRP(args) => throwKeyedMsg("S2IZ0017",[args])
-;     closeInterpreterFrame(args)
+;   arg = 'drop or arg = 'new =>
+;         args and PAIRP(args) => throw_msg("S2IZ0017",
+;             '"%1b is not a valid frame name.", [args])
+;         arg = 'drop => closeInterpreterFrame(args)
+;         addNewInterpreterFrame(args)
 ;   arg = 'import =>  importFromFrame args
 ;   arg = 'last  =>   previousInterpreterFrame()
 ;   arg = 'names =>   displayFrameNames()
-;   arg = 'new   =>
-;     args and PAIRP(args) => throwKeyedMsg("S2IZ0017",[args])
-;     addNewInterpreterFrame(args)
 ;   arg = 'next  =>   nextInterpreterFrame()
 ;
 ;   NIL
@@ -2781,41 +2982,42 @@
     (RETURN
      (PROGN
       (SETQ |frameArgs| '(|drop| |import| |last| |names| |new| |next|))
-      (COND (|$options| (|throwKeyedMsg| 'S2IZ0016 (LIST ")frame")))
-            ((NULL |args|) (|helpSpad2Cmd| (LIST '|frame|)))
-            (#1='T
-             (PROGN
-              (SETQ |arg|
-                      (|selectOptionLC| (CAR |args|) |frameArgs|
-                       '|optionError|))
-              (SETQ |args| (CDR |args|))
-              (COND
-               ((AND (CONSP |args|) (EQ (CDR |args|) NIL)
-                     (PROGN (SETQ |a| (CAR |args|)) #1#))
-                (SETQ |args| |a|)))
-              (COND ((ATOM |args|) (SETQ |args| (|object2Identifier| |args|))))
-              (COND
-               ((EQ |arg| '|drop|)
-                (COND
-                 ((AND |args| (CONSP |args|))
-                  (|throwKeyedMsg| 'S2IZ0017 (LIST |args|)))
-                 (#1# (|closeInterpreterFrame| |args|))))
-               ((EQ |arg| '|import|) (|importFromFrame| |args|))
-               ((EQ |arg| '|last|) (|previousInterpreterFrame|))
-               ((EQ |arg| '|names|) (|displayFrameNames|))
-               ((EQ |arg| '|new|)
-                (COND
-                 ((AND |args| (CONSP |args|))
-                  (|throwKeyedMsg| 'S2IZ0017 (LIST |args|)))
-                 (#1# (|addNewInterpreterFrame| |args|))))
-               ((EQ |arg| '|next|) (|nextInterpreterFrame|)) (#1# NIL)))))))))
+      (COND
+       (|$options|
+        (|throw_msg| 'S2IZ0016
+         "The )frame system command takes arguments but no options." NIL))
+       ((NULL |args|) (|helpSpad2Cmd| (LIST '|frame|)))
+       (#1='T
+        (PROGN
+         (SETQ |arg| (|selectOption| (CAR |args|) |frameArgs| '|optionError|))
+         (SETQ |args| (CDR |args|))
+         (COND
+          ((AND (CONSP |args|) (EQ (CDR |args|) NIL)
+                (PROGN (SETQ |a| (CAR |args|)) #1#))
+           (SETQ |args| |a|)))
+         (COND ((ATOM |args|) (SETQ |args| (|object2Identifier| |args|))))
+         (COND
+          ((OR (EQ |arg| '|drop|) (EQ |arg| '|new|))
+           (COND
+            ((AND |args| (CONSP |args|))
+             (|throw_msg| 'S2IZ0017 "%1b is not a valid frame name."
+              (LIST |args|)))
+            ((EQ |arg| '|drop|) (|closeInterpreterFrame| |args|))
+            (#1# (|addNewInterpreterFrame| |args|))))
+          ((EQ |arg| '|import|) (|importFromFrame| |args|))
+          ((EQ |arg| '|last|) (|previousInterpreterFrame|))
+          ((EQ |arg| '|names|) (|displayFrameNames|))
+          ((EQ |arg| '|next|) (|nextInterpreterFrame|)) (#1# NIL)))))))))
 
 ; addNewInterpreterFrame(name) ==
-;   null name => throwKeyedMsg("S2IZ0018",NIL)
+;   null name => throw_msg("S2IZ0018",
+;         '"You must provide a name for the new frame.", [])
 ;   updateCurrentInterpreterFrame()
 ;   -- see if we already have one by that name
 ;   for f in $interpreterFrameRing repeat
-;     name = frameName(f) => throwKeyedMsg("S2IZ0019",[name])
+;     name = frameName(f) => throw_msg("S2IZ0019", CONCAT(
+;             '"You cannot use the name %1b for a new frame because an",
+;             '" existing frame already has that name."), [name])
 ;   initHistList()
 ;   $interpreterFrameRing := CONS(emptyInterpreterFrame(name),
 ;     $interpreterFrameRing)
@@ -2825,28 +3027,35 @@
 (DEFUN |addNewInterpreterFrame| (|name|)
   (PROG ()
     (RETURN
-     (COND ((NULL |name|) (|throwKeyedMsg| 'S2IZ0018 NIL))
-           (#1='T
-            (PROGN
-             (|updateCurrentInterpreterFrame|)
-             ((LAMBDA (|bfVar#59| |f|)
-                (LOOP
-                 (COND
-                  ((OR (ATOM |bfVar#59|)
-                       (PROGN (SETQ |f| (CAR |bfVar#59|)) NIL))
-                   (RETURN NIL))
-                  (#1#
-                   (COND
-                    ((EQUAL |name| (|frameName| |f|))
-                     (IDENTITY (|throwKeyedMsg| 'S2IZ0019 (LIST |name|)))))))
-                 (SETQ |bfVar#59| (CDR |bfVar#59|))))
-              |$interpreterFrameRing| NIL)
-             (|initHistList|)
-             (SETQ |$interpreterFrameRing|
-                     (CONS (|emptyInterpreterFrame| |name|)
-                           |$interpreterFrameRing|))
-             (|updateFromCurrentInterpreterFrame|)
-             (|erase_lib| (|histFileName|))))))))
+     (COND
+      ((NULL |name|)
+       (|throw_msg| 'S2IZ0018 "You must provide a name for the new frame."
+        NIL))
+      (#1='T
+       (PROGN
+        (|updateCurrentInterpreterFrame|)
+        ((LAMBDA (|bfVar#58| |f|)
+           (LOOP
+            (COND
+             ((OR (ATOM |bfVar#58|) (PROGN (SETQ |f| (CAR |bfVar#58|)) NIL))
+              (RETURN NIL))
+             (#1#
+              (COND
+               ((EQUAL |name| (|frameName| |f|))
+                (IDENTITY
+                 (|throw_msg| 'S2IZ0019
+                  (CONCAT
+                   "You cannot use the name %1b for a new frame because an"
+                   " existing frame already has that name.")
+                  (LIST |name|)))))))
+            (SETQ |bfVar#58| (CDR |bfVar#58|))))
+         |$interpreterFrameRing| NIL)
+        (|initHistList|)
+        (SETQ |$interpreterFrameRing|
+                (CONS (|emptyInterpreterFrame| |name|)
+                      |$interpreterFrameRing|))
+        (|updateFromCurrentInterpreterFrame|)
+        (|erase_lib| (|histFileName|))))))))
 
 ; emptyInterpreterFrame(name) ==
 ;   LIST(name,                            -- frame name
@@ -2872,8 +3081,14 @@
 ;   -- if name = NIL then it means the current frame
 ;   null rest $interpreterFrameRing =>
 ;     name and (name ~= $interpreterFrameName) =>
-;       throwKeyedMsg("S2IZ0020",[$interpreterFrameName])
-;     throwKeyedMsg("S2IZ0021",NIL)
+;       throw_msg("S2IZ0020", CONCAT(
+;             '"There is only one frame active and therefore that cannot",
+;             '" be closed. Furthermore, the frame name you gave is not the",
+;             '" name of the current frame. The current frame is called %1b ."),
+;             [$interpreterFrameName])
+;     throw_msg("S2IZ0021", CONCAT(
+;         '"The current frame is the only active one.  Issue %b )clear",
+;         '" all %d to clear its contents."), [])
 ;   if null name then $interpreterFrameRing := rest $interpreterFrameRing
 ;   else   -- find the frame
 ;     found := nil
@@ -2881,7 +3096,9 @@
 ;     for f in $interpreterFrameRing repeat
 ;       found or (name ~= frameName(f)) => ifr := CONS(f,ifr)
 ;       found := true
-;     not found => throwKeyedMsg("S2IZ0022",[name])
+;     not found => throw_msg("S2IZ0022", CONCAT(
+;             '"There is no frame called %1b and so your command cannot be",
+;             '" processed."), [name])
 ;     erase_lib(makeHistFileName(name))
 ;     $interpreterFrameRing := nreverse ifr
 ;   updateFromCurrentInterpreterFrame()
@@ -2893,31 +3110,45 @@
       ((NULL (CDR |$interpreterFrameRing|))
        (COND
         ((AND |name| (NOT (EQUAL |name| |$interpreterFrameName|)))
-         (|throwKeyedMsg| 'S2IZ0020 (LIST |$interpreterFrameName|)))
-        (#1='T (|throwKeyedMsg| 'S2IZ0021 NIL))))
+         (|throw_msg| 'S2IZ0020
+          (CONCAT "There is only one frame active and therefore that cannot"
+                  " be closed. Furthermore, the frame name you gave is not the"
+                  " name of the current frame. The current frame is called %1b .")
+          (LIST |$interpreterFrameName|)))
+        (#1='T
+         (|throw_msg| 'S2IZ0021
+          (CONCAT "The current frame is the only active one.  Issue %b )clear"
+                  " all %d to clear its contents.")
+          NIL))))
       (#1#
        (PROGN
         (COND
          ((NULL |name|)
           (SETQ |$interpreterFrameRing| (CDR |$interpreterFrameRing|)))
          (#1# (SETQ |found| NIL) (SETQ |ifr| NIL)
-          ((LAMBDA (|bfVar#60| |f|)
+          ((LAMBDA (|bfVar#59| |f|)
              (LOOP
               (COND
-               ((OR (ATOM |bfVar#60|) (PROGN (SETQ |f| (CAR |bfVar#60|)) NIL))
+               ((OR (ATOM |bfVar#59|) (PROGN (SETQ |f| (CAR |bfVar#59|)) NIL))
                 (RETURN NIL))
                (#1#
                 (COND
                  ((OR |found| (NOT (EQUAL |name| (|frameName| |f|))))
                   (SETQ |ifr| (CONS |f| |ifr|)))
                  (#1# (SETQ |found| T)))))
-              (SETQ |bfVar#60| (CDR |bfVar#60|))))
+              (SETQ |bfVar#59| (CDR |bfVar#59|))))
            |$interpreterFrameRing| NIL)
-          (COND ((NULL |found|) (|throwKeyedMsg| 'S2IZ0022 (LIST |name|)))
-                (#1#
-                 (PROGN
-                  (|erase_lib| (|makeHistFileName| |name|))
-                  (SETQ |$interpreterFrameRing| (NREVERSE |ifr|)))))))
+          (COND
+           ((NULL |found|)
+            (|throw_msg| 'S2IZ0022
+             (CONCAT
+              "There is no frame called %1b and so your command cannot be"
+              " processed.")
+             (LIST |name|)))
+           (#1#
+            (PROGN
+             (|erase_lib| (|makeHistFileName| |name|))
+             (SETQ |$interpreterFrameRing| (NREVERSE |ifr|)))))))
         (|updateFromCurrentInterpreterFrame|)))))))
 
 ; previousInterpreterFrame() ==
@@ -3087,66 +3318,90 @@
     (RETURN
      (PROGN
       (SETQ |val| NIL)
-      ((LAMBDA (|bfVar#61| |frame|)
+      ((LAMBDA (|bfVar#60| |frame|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#61|) (PROGN (SETQ |frame| (CAR |bfVar#61|)) NIL))
+           ((OR (ATOM |bfVar#60|) (PROGN (SETQ |frame| (CAR |bfVar#60|)) NIL))
             (RETURN NIL))
            ('T
             (COND
              ((EQUAL (CAR |frame|) |name|)
               (IDENTITY (PROGN (SETQ |val| |frame|) (RETURN |frame|)))))))
-          (SETQ |bfVar#61| (CDR |bfVar#61|))))
+          (SETQ |bfVar#60| (CDR |bfVar#60|))))
        |$interpreterFrameRing| NIL)
       |val|))))
 
 ; displayFrameNames() ==
 ;   fs := "append"/[ ['%l,'"     ",:bright frameName f] for f in
 ;     $interpreterFrameRing]
-;   sayKeyedMsg("S2IZ0024",[fs])
+;   say_msg("S2IZ0024", CONCAT(
+;         '"The names of the existing frames are: %1 %l",
+;         '" The current frame is the first one listed."), [fs])
 
 (DEFUN |displayFrameNames| ()
   (PROG (|fs|)
     (RETURN
      (PROGN
       (SETQ |fs|
-              ((LAMBDA (|bfVar#63| |bfVar#62| |f|)
+              ((LAMBDA (|bfVar#62| |bfVar#61| |f|)
                  (LOOP
                   (COND
-                   ((OR (ATOM |bfVar#62|)
-                        (PROGN (SETQ |f| (CAR |bfVar#62|)) NIL))
-                    (RETURN |bfVar#63|))
+                   ((OR (ATOM |bfVar#61|)
+                        (PROGN (SETQ |f| (CAR |bfVar#61|)) NIL))
+                    (RETURN |bfVar#62|))
                    ('T
-                    (SETQ |bfVar#63|
-                            (APPEND |bfVar#63|
+                    (SETQ |bfVar#62|
+                            (APPEND |bfVar#62|
                                     (CONS '|%l|
                                           (CONS "     "
                                                 (|bright|
                                                  (|frameName| |f|))))))))
-                  (SETQ |bfVar#62| (CDR |bfVar#62|))))
+                  (SETQ |bfVar#61| (CDR |bfVar#61|))))
                NIL |$interpreterFrameRing| NIL))
-      (|sayKeyedMsg| 'S2IZ0024 (LIST |fs|))))))
+      (|say_msg| 'S2IZ0024
+       (CONCAT "The names of the existing frames are: %1 %l"
+               " The current frame is the first one listed.")
+       (LIST |fs|))))))
 
 ; importFromFrame args ==
 ;   -- args should have the form [frameName,:varNames]
 ;   if args and atom args then args := [args]
-;   null args => throwKeyedMsg("S2IZ0073",NIL)
+;   null args => throw_msg("S2IZ0073", CONCAT(
+;         '"%b )frame import %d must be followed by the frame name. The",
+;         '" names of objects in that frame can then optionally follow the",
+;         '" frame name.  For example, %ceon %b )frame import calculus %d",
+;         '" %ceoff imports all objects in the %b calculus %d frame, and",
+;         '" %ceon %b )frame import calculus epsilon delta %d %ceoff imports",
+;         '" the objects named %b epsilon %d and %b delta %d from the frame",
+;         '" %b calculus %d .  Please note that if the current frame",
+;         '" contained any information about objects with these names, then",
+;         '" that information would be cleared before the import took place."),
+;         [])
 ;   [fname,:args] := args
 ;   not member(fname,frameNames()) =>
-;     throwKeyedMsg("S2IZ0074",[fname])
+;         throw_msg("S2IZ0074", CONCAT(
+;             '"You cannot import anything from the frame %1b because that",
+;             '" is not the name of an existing frame."), [fname])
 ;   fname = frameName first $interpreterFrameRing =>
-;     throwKeyedMsg("S2IZ0075",NIL)
+;         throw_msg("S2IZ0075", CONCAT(
+;             '"You cannot import from the current frame (nor is there a",
+;             '" need!)."), [])
 ;   fenv := frameEnvironment fname
 ;   null args =>
-;     x := UPCASE queryUserKeyedMsg("S2IZ0076",[fname])
-;     MEMQ(STRING2ID_N(x, 1), '(Y YES)) =>
+;     x := query_user_msg("S2IZ0076", CONCAT(
+;             '"User verification required: do you really want to import",
+;             '" everything from the frame %1b ?  If so, please enter",
+;             '" %b y %d or %b yes %d :"), [fname])
+;     x =>
 ;       vars := NIL
 ;       for [v,:props] in CAAR fenv repeat
 ;         v = "--macros" =>
 ;           for [m,:.] in props repeat vars := cons(m,vars)
 ;         vars := cons(v,vars)
 ;       importFromFrame [fname,:vars]
-;     sayKeyedMsg("S2IZ0077",[fname])
+;     say_msg("S2IZ0077",  CONCAT(
+;             '"On your request, FriCAS will not import everything from",
+;             '" frame %1b ."), [fname])
 ;   for v in args repeat
 ;     plist := GETALIST(CAAR fenv,v)
 ;     plist =>
@@ -3156,8 +3411,13 @@
 ;         putHist(v,prop,val,$InteractiveFrame)
 ;     (m := get("--macros--",v,fenv)) =>
 ;       putHist("--macros--",v,m,$InteractiveFrame)
-;     sayKeyedMsg("S2IZ0079",[v,fname])
-;   sayKeyedMsg("S2IZ0078",[fname])
+;     say_msg("S2IZ0079", CONCAT(
+;             '"FriCAS cannot import %1b from frame %2b because it cannot",
+;             '" be found."), [v, fname])
+;   say_msg("S2IZ0078", CONCAT(
+;         '"Import from frame %1b is complete. Please issue %b )display all",
+;         '" %d if you wish to see the contents of the current frame."),
+;         [fname])
 
 (DEFUN |importFromFrame| (|args|)
   (PROG (|LETTMP#1| |fname| |fenv| |x| |vars| |v| |props| |m| |plist| |prop|
@@ -3165,110 +3425,141 @@
     (RETURN
      (PROGN
       (COND ((AND |args| (ATOM |args|)) (SETQ |args| (LIST |args|))))
-      (COND ((NULL |args|) (|throwKeyedMsg| 'S2IZ0073 NIL))
-            (#1='T
-             (PROGN
-              (SETQ |LETTMP#1| |args|)
-              (SETQ |fname| (CAR |LETTMP#1|))
-              (SETQ |args| (CDR |LETTMP#1|))
-              (COND
-               ((NULL (|member| |fname| (|frameNames|)))
-                (|throwKeyedMsg| 'S2IZ0074 (LIST |fname|)))
-               ((EQUAL |fname| (|frameName| (CAR |$interpreterFrameRing|)))
-                (|throwKeyedMsg| 'S2IZ0075 NIL))
-               (#1#
-                (PROGN
-                 (SETQ |fenv| (|frameEnvironment| |fname|))
-                 (COND
-                  ((NULL |args|)
-                   (PROGN
-                    (SETQ |x|
-                            (UPCASE
-                             (|queryUserKeyedMsg| 'S2IZ0076 (LIST |fname|))))
-                    (COND
-                     ((MEMQ (STRING2ID_N |x| 1) '(Y YES))
-                      (PROGN
-                       (SETQ |vars| NIL)
-                       ((LAMBDA (|bfVar#65| |bfVar#64|)
-                          (LOOP
-                           (COND
-                            ((OR (ATOM |bfVar#65|)
-                                 (PROGN
-                                  (SETQ |bfVar#64| (CAR |bfVar#65|))
-                                  NIL))
-                             (RETURN NIL))
-                            (#1#
-                             (AND (CONSP |bfVar#64|)
-                                  (PROGN
-                                   (SETQ |v| (CAR |bfVar#64|))
-                                   (SETQ |props| (CDR |bfVar#64|))
-                                   #1#)
-                                  (COND
-                                   ((EQ |v| '|--macros|)
-                                    ((LAMBDA (|bfVar#67| |bfVar#66|)
-                                       (LOOP
-                                        (COND
-                                         ((OR (ATOM |bfVar#67|)
-                                              (PROGN
-                                               (SETQ |bfVar#66|
-                                                       (CAR |bfVar#67|))
-                                               NIL))
-                                          (RETURN NIL))
-                                         (#1#
-                                          (AND (CONSP |bfVar#66|)
-                                               (PROGN
-                                                (SETQ |m| (CAR |bfVar#66|))
-                                                #1#)
-                                               (SETQ |vars|
-                                                       (CONS |m| |vars|)))))
-                                        (SETQ |bfVar#67| (CDR |bfVar#67|))))
-                                     |props| NIL))
-                                   (#1# (SETQ |vars| (CONS |v| |vars|)))))))
-                           (SETQ |bfVar#65| (CDR |bfVar#65|))))
-                        (CAAR |fenv|) NIL)
-                       (|importFromFrame| (CONS |fname| |vars|))))
-                     (#1# (|sayKeyedMsg| 'S2IZ0077 (LIST |fname|))))))
-                  (#1#
-                   (PROGN
-                    ((LAMBDA (|bfVar#68| |v|)
-                       (LOOP
-                        (COND
-                         ((OR (ATOM |bfVar#68|)
-                              (PROGN (SETQ |v| (CAR |bfVar#68|)) NIL))
-                          (RETURN NIL))
-                         (#1#
-                          (PROGN
-                           (SETQ |plist| (GETALIST (CAAR |fenv|) |v|))
-                           (COND
-                            (|plist|
+      (COND
+       ((NULL |args|)
+        (|throw_msg| 'S2IZ0073
+         (CONCAT "%b )frame import %d must be followed by the frame name. The"
+                 " names of objects in that frame can then optionally follow the"
+                 " frame name.  For example, %ceon %b )frame import calculus %d"
+                 " %ceoff imports all objects in the %b calculus %d frame, and"
+                 " %ceon %b )frame import calculus epsilon delta %d %ceoff imports"
+                 " the objects named %b epsilon %d and %b delta %d from the frame"
+                 " %b calculus %d .  Please note that if the current frame"
+                 " contained any information about objects with these names, then"
+                 " that information would be cleared before the import took place.")
+         NIL))
+       (#1='T
+        (PROGN
+         (SETQ |LETTMP#1| |args|)
+         (SETQ |fname| (CAR |LETTMP#1|))
+         (SETQ |args| (CDR |LETTMP#1|))
+         (COND
+          ((NULL (|member| |fname| (|frameNames|)))
+           (|throw_msg| 'S2IZ0074
+            (CONCAT
+             "You cannot import anything from the frame %1b because that"
+             " is not the name of an existing frame.")
+            (LIST |fname|)))
+          ((EQUAL |fname| (|frameName| (CAR |$interpreterFrameRing|)))
+           (|throw_msg| 'S2IZ0075
+            (CONCAT "You cannot import from the current frame (nor is there a"
+                    " need!).")
+            NIL))
+          (#1#
+           (PROGN
+            (SETQ |fenv| (|frameEnvironment| |fname|))
+            (COND
+             ((NULL |args|)
+              (PROGN
+               (SETQ |x|
+                       (|query_user_msg| 'S2IZ0076
+                        (CONCAT
+                         "User verification required: do you really want to import"
+                         " everything from the frame %1b ?  If so, please enter"
+                         " %b y %d or %b yes %d :")
+                        (LIST |fname|)))
+               (COND
+                (|x|
+                 (PROGN
+                  (SETQ |vars| NIL)
+                  ((LAMBDA (|bfVar#64| |bfVar#63|)
+                     (LOOP
+                      (COND
+                       ((OR (ATOM |bfVar#64|)
+                            (PROGN (SETQ |bfVar#63| (CAR |bfVar#64|)) NIL))
+                        (RETURN NIL))
+                       (#1#
+                        (AND (CONSP |bfVar#63|)
                              (PROGN
-                              (|clearCmdParts| (LIST '|propert| |v|))
-                              ((LAMBDA (|bfVar#70| |bfVar#69|)
-                                 (LOOP
-                                  (COND
-                                   ((OR (ATOM |bfVar#70|)
-                                        (PROGN
-                                         (SETQ |bfVar#69| (CAR |bfVar#70|))
-                                         NIL))
-                                    (RETURN NIL))
-                                   (#1#
-                                    (AND (CONSP |bfVar#69|)
+                              (SETQ |v| (CAR |bfVar#63|))
+                              (SETQ |props| (CDR |bfVar#63|))
+                              #1#)
+                             (COND
+                              ((EQ |v| '|--macros|)
+                               ((LAMBDA (|bfVar#66| |bfVar#65|)
+                                  (LOOP
+                                   (COND
+                                    ((OR (ATOM |bfVar#66|)
                                          (PROGN
-                                          (SETQ |prop| (CAR |bfVar#69|))
-                                          (SETQ |val| (CDR |bfVar#69|))
-                                          #1#)
-                                         (|putHist| |v| |prop| |val|
-                                          |$InteractiveFrame|))))
-                                  (SETQ |bfVar#70| (CDR |bfVar#70|))))
-                               |plist| NIL)))
-                            ((SETQ |m| (|get| '|--macros--| |v| |fenv|))
-                             (|putHist| '|--macros--| |v| |m|
-                              |$InteractiveFrame|))
-                            (#1#
-                             (|sayKeyedMsg| 'S2IZ0079 (LIST |v| |fname|)))))))
-                        (SETQ |bfVar#68| (CDR |bfVar#68|))))
-                     |args| NIL)
-                    (|sayKeyedMsg| 'S2IZ0078 (LIST |fname|)))))))))))))))
+                                          (SETQ |bfVar#65| (CAR |bfVar#66|))
+                                          NIL))
+                                     (RETURN NIL))
+                                    (#1#
+                                     (AND (CONSP |bfVar#65|)
+                                          (PROGN
+                                           (SETQ |m| (CAR |bfVar#65|))
+                                           #1#)
+                                          (SETQ |vars| (CONS |m| |vars|)))))
+                                   (SETQ |bfVar#66| (CDR |bfVar#66|))))
+                                |props| NIL))
+                              (#1# (SETQ |vars| (CONS |v| |vars|)))))))
+                      (SETQ |bfVar#64| (CDR |bfVar#64|))))
+                   (CAAR |fenv|) NIL)
+                  (|importFromFrame| (CONS |fname| |vars|))))
+                (#1#
+                 (|say_msg| 'S2IZ0077
+                  (CONCAT
+                   "On your request, FriCAS will not import everything from"
+                   " frame %1b .")
+                  (LIST |fname|))))))
+             (#1#
+              (PROGN
+               ((LAMBDA (|bfVar#67| |v|)
+                  (LOOP
+                   (COND
+                    ((OR (ATOM |bfVar#67|)
+                         (PROGN (SETQ |v| (CAR |bfVar#67|)) NIL))
+                     (RETURN NIL))
+                    (#1#
+                     (PROGN
+                      (SETQ |plist| (GETALIST (CAAR |fenv|) |v|))
+                      (COND
+                       (|plist|
+                        (PROGN
+                         (|clearCmdParts| (LIST '|propert| |v|))
+                         ((LAMBDA (|bfVar#69| |bfVar#68|)
+                            (LOOP
+                             (COND
+                              ((OR (ATOM |bfVar#69|)
+                                   (PROGN
+                                    (SETQ |bfVar#68| (CAR |bfVar#69|))
+                                    NIL))
+                               (RETURN NIL))
+                              (#1#
+                               (AND (CONSP |bfVar#68|)
+                                    (PROGN
+                                     (SETQ |prop| (CAR |bfVar#68|))
+                                     (SETQ |val| (CDR |bfVar#68|))
+                                     #1#)
+                                    (|putHist| |v| |prop| |val|
+                                     |$InteractiveFrame|))))
+                             (SETQ |bfVar#69| (CDR |bfVar#69|))))
+                          |plist| NIL)))
+                       ((SETQ |m| (|get| '|--macros--| |v| |fenv|))
+                        (|putHist| '|--macros--| |v| |m| |$InteractiveFrame|))
+                       (#1#
+                        (|say_msg| 'S2IZ0079
+                         (CONCAT
+                          "FriCAS cannot import %1b from frame %2b because it cannot"
+                          " be found.")
+                         (LIST |v| |fname|)))))))
+                   (SETQ |bfVar#67| (CDR |bfVar#67|))))
+                |args| NIL)
+               (|say_msg| 'S2IZ0078
+                (CONCAT
+                 "Import from frame %1b is complete. Please issue %b )display all"
+                 " %d if you wish to see the contents of the current frame.")
+                (LIST |fname|)))))))))))))))
 
 ; DEFPARAMETER($historyFileType, '"axh")
 
@@ -3287,14 +3578,22 @@
 (DEFPARAMETER |$useInternalHistoryTable| T)
 
 ; history l ==
-;   l or null $options => sayKeyedMsg("S2IH0006",NIL)
+;   l or null $options => say_msg("S2IH0006", CONCAT(
+;       '"You have not used the correct syntax for the %b history %d command. ",
+;       '"Issue %b )help history %d for more information."), NIL)
 ;   historySpad2Cmd()
 
 (DEFUN |history| (|l|)
   (PROG ()
     (RETURN
-     (COND ((OR |l| (NULL |$options|)) (|sayKeyedMsg| 'S2IH0006 NIL))
-           ('T (|historySpad2Cmd|))))))
+     (COND
+      ((OR |l| (NULL |$options|))
+       (|say_msg| 'S2IH0006
+        (CONCAT
+         "You have not used the correct syntax for the %b history %d command. "
+         "Issue %b )help history %d for more information.")
+        NIL))
+      ('T (|historySpad2Cmd|))))))
 
 ; makeHistFileName(fname) ==
 ;     make_filename2(SNAME(fname), $historyFileType)
@@ -3392,29 +3691,34 @@
 ;   -- and changeHistListLen, and restore last session
 ;   histOptions:=
 ;     '(on off yes no change reset restore write save show file memory)
-;   opts:= [ [selectOptionLC(opt,histOptions,'optionError),:optargs]
+;   opts := [[selectOption(opt, histOptions, 'optionError), :optargs]
 ;     for [opt,:optargs] in $options]
 ;   for [opt,:optargs] in opts repeat
 ;     opt in '(on yes) =>
-;       $HiFiAccess => sayKeyedMsg("S2IH0007",NIL)
+;       $HiFiAccess => say_msg("S2IH0007",
+;           '"The history facility is already on.", NIL)
 ;       $IOindex = 1 =>       -- haven't done anything yet
 ;         $HiFiAccess:= 'T
 ;         initHistList()
-;         sayKeyedMsg("S2IH0008",NIL)
-;       x := UPCASE queryUserKeyedMsg("S2IH0009",NIL)
-;       MEMQ(STRING2ID_N(x, 1), '(Y YES)) =>
+;         say_msg("S2IH0008", '"The history facility is now on.", NIL)
+;       x := query_user_msg("S2IH0009", CONCAT(
+;          '"Turning on the history facility will clear the contents of",
+;          '" the workspace.  Please enter %b y %d or %b yes %d if you really",
+;          '" want to do this:"), [])
+;       x =>
 ;         histFileErase histFileName()
 ;         $HiFiAccess:= 'T
 ;         $options := nil
 ;         clearSpad2Cmd '(all)
-;         sayKeyedMsg("S2IH0008",NIL)
+;         say_msg("S2IH0008", '"The history facility is now on.", NIL)
 ;         initHistList()
-;       sayKeyedMsg("S2IH0010",NIL)
+;       say_msg("S2IH0010", '"The history facility is still off.", NIL)
 ;     opt in '(off no) =>
-;       null $HiFiAccess => sayKeyedMsg("S2IH0011",NIL)
+;       null $HiFiAccess => say_msg("S2IH0011",
+;           '"The history facility is already off.", NIL)
 ;       $HiFiAccess:= NIL
 ;       disableHist()
-;       sayKeyedMsg("S2IH0012",NIL)
+;       say_msg("S2IH0012", '"The history facility is now off.", NIL)
 ;     opt = 'file    => setHistoryCore NIL
 ;     opt = 'memory  => setHistoryCore true
 ;     opt = 'reset   => resetInCoreHist()
@@ -3433,69 +3737,84 @@
               '(|on| |off| |yes| |no| |change| |reset| |restore| |write| |save|
                 |show| |file| |memory|))
       (SETQ |opts|
-              ((LAMBDA (|bfVar#73| |bfVar#72| |bfVar#71|)
+              ((LAMBDA (|bfVar#72| |bfVar#71| |bfVar#70|)
                  (LOOP
                   (COND
-                   ((OR (ATOM |bfVar#72|)
-                        (PROGN (SETQ |bfVar#71| (CAR |bfVar#72|)) NIL))
-                    (RETURN (NREVERSE |bfVar#73|)))
+                   ((OR (ATOM |bfVar#71|)
+                        (PROGN (SETQ |bfVar#70| (CAR |bfVar#71|)) NIL))
+                    (RETURN (NREVERSE |bfVar#72|)))
                    (#1='T
-                    (AND (CONSP |bfVar#71|)
+                    (AND (CONSP |bfVar#70|)
                          (PROGN
-                          (SETQ |opt| (CAR |bfVar#71|))
-                          (SETQ |optargs| (CDR |bfVar#71|))
+                          (SETQ |opt| (CAR |bfVar#70|))
+                          (SETQ |optargs| (CDR |bfVar#70|))
                           #1#)
-                         (SETQ |bfVar#73|
+                         (SETQ |bfVar#72|
                                  (CONS
                                   (CONS
-                                   (|selectOptionLC| |opt| |histOptions|
+                                   (|selectOption| |opt| |histOptions|
                                     '|optionError|)
                                    |optargs|)
-                                  |bfVar#73|)))))
-                  (SETQ |bfVar#72| (CDR |bfVar#72|))))
+                                  |bfVar#72|)))))
+                  (SETQ |bfVar#71| (CDR |bfVar#71|))))
                NIL |$options| NIL))
-      ((LAMBDA (|bfVar#75| |bfVar#74|)
+      ((LAMBDA (|bfVar#74| |bfVar#73|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#75|)
-                (PROGN (SETQ |bfVar#74| (CAR |bfVar#75|)) NIL))
+           ((OR (ATOM |bfVar#74|)
+                (PROGN (SETQ |bfVar#73| (CAR |bfVar#74|)) NIL))
             (RETURN NIL))
            (#1#
-            (AND (CONSP |bfVar#74|)
+            (AND (CONSP |bfVar#73|)
                  (PROGN
-                  (SETQ |opt| (CAR |bfVar#74|))
-                  (SETQ |optargs| (CDR |bfVar#74|))
+                  (SETQ |opt| (CAR |bfVar#73|))
+                  (SETQ |optargs| (CDR |bfVar#73|))
                   #1#)
                  (COND
                   ((|member| |opt| '(|on| |yes|))
-                   (COND (|$HiFiAccess| (|sayKeyedMsg| 'S2IH0007 NIL))
-                         ((EQL |$IOindex| 1)
-                          (PROGN
-                           (SETQ |$HiFiAccess| 'T)
-                           (|initHistList|)
-                           (|sayKeyedMsg| 'S2IH0008 NIL)))
-                         (#1#
-                          (PROGN
-                           (SETQ |x|
-                                   (UPCASE
-                                    (|queryUserKeyedMsg| 'S2IH0009 NIL)))
-                           (COND
-                            ((MEMQ (STRING2ID_N |x| 1) '(Y YES))
-                             (PROGN
-                              (|histFileErase| (|histFileName|))
-                              (SETQ |$HiFiAccess| 'T)
-                              (SETQ |$options| NIL)
-                              (|clearSpad2Cmd| '(|all|))
-                              (|sayKeyedMsg| 'S2IH0008 NIL)
-                              (|initHistList|)))
-                            (#1# (|sayKeyedMsg| 'S2IH0010 NIL)))))))
+                   (COND
+                    (|$HiFiAccess|
+                     (|say_msg| 'S2IH0007 "The history facility is already on."
+                      NIL))
+                    ((EQL |$IOindex| 1)
+                     (PROGN
+                      (SETQ |$HiFiAccess| 'T)
+                      (|initHistList|)
+                      (|say_msg| 'S2IH0008 "The history facility is now on."
+                       NIL)))
+                    (#1#
+                     (PROGN
+                      (SETQ |x|
+                              (|query_user_msg| 'S2IH0009
+                               (CONCAT
+                                "Turning on the history facility will clear the contents of"
+                                " the workspace.  Please enter %b y %d or %b yes %d if you really"
+                                " want to do this:")
+                               NIL))
+                      (COND
+                       (|x|
+                        (PROGN
+                         (|histFileErase| (|histFileName|))
+                         (SETQ |$HiFiAccess| 'T)
+                         (SETQ |$options| NIL)
+                         (|clearSpad2Cmd| '(|all|))
+                         (|say_msg| 'S2IH0008 "The history facility is now on."
+                          NIL)
+                         (|initHistList|)))
+                       (#1#
+                        (|say_msg| 'S2IH0010
+                         "The history facility is still off." NIL)))))))
                   ((|member| |opt| '(|off| |no|))
-                   (COND ((NULL |$HiFiAccess|) (|sayKeyedMsg| 'S2IH0011 NIL))
-                         (#1#
-                          (PROGN
-                           (SETQ |$HiFiAccess| NIL)
-                           (|disableHist|)
-                           (|sayKeyedMsg| 'S2IH0012 NIL)))))
+                   (COND
+                    ((NULL |$HiFiAccess|)
+                     (|say_msg| 'S2IH0011
+                      "The history facility is already off." NIL))
+                    (#1#
+                     (PROGN
+                      (SETQ |$HiFiAccess| NIL)
+                      (|disableHist|)
+                      (|say_msg| 'S2IH0012 "The history facility is now off."
+                       NIL)))))
                   ((EQ |opt| '|file|) (|setHistoryCore| NIL))
                   ((EQ |opt| '|memory|) (|setHistoryCore| T))
                   ((EQ |opt| '|reset|) (|resetInCoreHist|))
@@ -3505,18 +3824,47 @@
                   ((EQ |opt| '|restore|) (|restoreHistory| |optargs|))
                   ((EQ |opt| '|write|)
                    (|writeInputLines| (CAR |optargs|) 1))))))
-          (SETQ |bfVar#75| (CDR |bfVar#75|))))
+          (SETQ |bfVar#74| (CDR |bfVar#74|))))
        |opts| NIL)
       '|done|))))
 
-; setHistoryCore inCore ==
-;   inCore = $useInternalHistoryTable =>
-;     sayKeyedMsg((inCore => "S2IH0030"; "S2IH0029"),NIL)
+; say_file_or_core_msg(in_core?) ==
+;     in_core? => say_msg("S2IH0032", CONCAT(
+;         '"When the history facility is active, history information will be",
+;         '" maintained in memory (and not in an external file)."), nil)
+;     say_msg("S2IH0031", CONCAT(
+;         '"When the history facility is active, history information will be",
+;         '" maintained in a file (and not in an internal table)."), nil)
+
+(DEFUN |say_file_or_core_msg| (|in_core?|)
+  (PROG ()
+    (RETURN
+     (COND
+      (|in_core?|
+       (|say_msg| 'S2IH0032
+        (CONCAT
+         "When the history facility is active, history information will be"
+         " maintained in memory (and not in an external file).")
+        NIL))
+      ('T
+       (|say_msg| 'S2IH0031
+        (CONCAT
+         "When the history facility is active, history information will be"
+         " maintained in a file (and not in an internal table).")
+        NIL))))))
+
+; setHistoryCore in_core? ==
+;   in_core? = $useInternalHistoryTable =>
+;       in_core? => say_msg("S2IH0030", CONCAT(
+;           '"History information is already being maintained in memory",
+;           '" (and not in an external file)."), nil)
+;       say_msg("S2IH0029", CONCAT(
+;           '"History information is already being maintained in an",
+;           '" external file (and not in memory)."), nil)
 ;   not $HiFiAccess =>
-;     $useInternalHistoryTable := inCore
-;     inCore => sayKeyedMsg("S2IH0032",NIL)
-;     sayKeyedMsg("S2IH0031",NIL)
-;   inCore =>
+;     $useInternalHistoryTable := in_core?
+;     say_file_or_core_msg(in_core?)
+;   in_core? =>
 ;     $internalHistoryTable := NIL
 ;     if $IOindex ~= 0 then
 ;       -- actually put something in there
@@ -3526,30 +3874,39 @@
 ;         $internalHistoryTable := CONS([i,:vec],$internalHistoryTable)
 ;       histFileErase histFileName()
 ;     $useInternalHistoryTable := true
-;     sayKeyedMsg("S2IH0032",NIL)
+;     say_file_or_core_msg(true)
 ;   $HiFiAccess:= 'NIL
 ;   histFileErase histFileName()
-;   str := kaf_open(histFileName(), false)
+;   str := kaf_open(histFileName(), true)
 ;   for [n,:rec] in reverse $internalHistoryTable repeat
 ;       SPADRWRITE(str, object2String2(n), rec)
 ;   kaf_close(str)
 ;   $HiFiAccess:= 'T
 ;   $internalHistoryTable := NIL
 ;   $useInternalHistoryTable := NIL
-;   sayKeyedMsg("S2IH0031",NIL)
+;   say_file_or_core_msg(false)
 
-(DEFUN |setHistoryCore| (|inCore|)
+(DEFUN |setHistoryCore| (|in_core?|)
   (PROG (|l| |vec| |str| |n| |rec|)
     (RETURN
      (COND
-      ((EQUAL |inCore| |$useInternalHistoryTable|)
-       (|sayKeyedMsg| (COND (|inCore| 'S2IH0030) (#1='T 'S2IH0029)) NIL))
+      ((EQUAL |in_core?| |$useInternalHistoryTable|)
+       (COND
+        (|in_core?|
+         (|say_msg| 'S2IH0030
+          (CONCAT "History information is already being maintained in memory"
+                  " (and not in an external file).")
+          NIL))
+        (#1='T
+         (|say_msg| 'S2IH0029
+          (CONCAT "History information is already being maintained in an"
+                  " external file (and not in memory).")
+          NIL))))
       ((NULL |$HiFiAccess|)
        (PROGN
-        (SETQ |$useInternalHistoryTable| |inCore|)
-        (COND (|inCore| (|sayKeyedMsg| 'S2IH0032 NIL))
-              (#1# (|sayKeyedMsg| 'S2IH0031 NIL)))))
-      (|inCore|
+        (SETQ |$useInternalHistoryTable| |in_core?|)
+        (|say_file_or_core_msg| |in_core?|)))
+      (|in_core?|
        (PROGN
         (SETQ |$internalHistoryTable| NIL)
         (COND
@@ -3570,45 +3927,47 @@
            1)
           (|histFileErase| (|histFileName|))))
         (SETQ |$useInternalHistoryTable| T)
-        (|sayKeyedMsg| 'S2IH0032 NIL)))
+        (|say_file_or_core_msg| T)))
       (#1#
        (PROGN
         (SETQ |$HiFiAccess| 'NIL)
         (|histFileErase| (|histFileName|))
-        (SETQ |str| (|kaf_open| (|histFileName|) NIL))
-        ((LAMBDA (|bfVar#77| |bfVar#76|)
+        (SETQ |str| (|kaf_open| (|histFileName|) T))
+        ((LAMBDA (|bfVar#76| |bfVar#75|)
            (LOOP
             (COND
-             ((OR (ATOM |bfVar#77|)
-                  (PROGN (SETQ |bfVar#76| (CAR |bfVar#77|)) NIL))
+             ((OR (ATOM |bfVar#76|)
+                  (PROGN (SETQ |bfVar#75| (CAR |bfVar#76|)) NIL))
               (RETURN NIL))
              (#1#
-              (AND (CONSP |bfVar#76|)
+              (AND (CONSP |bfVar#75|)
                    (PROGN
-                    (SETQ |n| (CAR |bfVar#76|))
-                    (SETQ |rec| (CDR |bfVar#76|))
+                    (SETQ |n| (CAR |bfVar#75|))
+                    (SETQ |rec| (CDR |bfVar#75|))
                     #1#)
                    (SPADRWRITE |str| (|object2String2| |n|) |rec|))))
-            (SETQ |bfVar#77| (CDR |bfVar#77|))))
+            (SETQ |bfVar#76| (CDR |bfVar#76|))))
          (REVERSE |$internalHistoryTable|) NIL)
         (|kaf_close| |str|)
         (SETQ |$HiFiAccess| 'T)
         (SETQ |$internalHistoryTable| NIL)
         (SETQ |$useInternalHistoryTable| NIL)
-        (|sayKeyedMsg| 'S2IH0031 NIL)))))))
+        (|say_file_or_core_msg| NIL)))))))
 
 ; writeInputLines(fn,initial) ==
 ;   -- writes all input lines into file histInputFileName()
-;   not $HiFiAccess => sayKeyedMsg("S2IH0013",NIL) -- history not on
-;   null fn =>
-;     throwKeyedMsg("S2IH0038", nil)          -- missing file name
+;   not $HiFiAccess => say_msg("S2IH0013", CONCAT(
+;       '"The history facility is not on, so the .input file containing your",
+;       '" user input cannot be created."), NIL) -- history not on
+;   null(fn) => throw_msg("S2IH0038",
+;       '"You must specify a file name to the history write command.", nil)
 ;   maxn := 72
 ;   breakChars := [char '" ", char '"+"]
 ;   for i in initial..$IOindex - 1 repeat
 ;     vecl := first readHiFi i
 ;     if STRINGP vecl then vecl := [vecl]
 ;     for vec in vecl repeat
-;       n := SIZE vec
+;       n := #vec
 ;       while n > maxn repeat
 ;         -- search backwards for a blank
 ;         done := nil
@@ -3619,7 +3978,7 @@
 ;             lineList := [svec,:lineList]
 ;             done := true
 ;             vec := SUBSTRING(vec,k+1,NIL)
-;             n := SIZE vec
+;             n := #vec
 ;         -- in case we can't find a breaking point
 ;         if not done then n := 0
 ;       lineList := [vec,:lineList]
@@ -3628,103 +3987,105 @@
 ;   inp := MAKE_OUTSTREAM(file)
 ;   for x in removeUndoLines NREVERSE lineList repeat WRITE_-LINE(x,inp)
 ;   -- see file "undo" for definition of removeUndoLines
-;   if fn ~= 'redo then sayKeyedMsg("S2IH0014", [file])
-;   SHUT inp
+;   if fn ~= 'redo then
+;       say_msg("S2IH0014", '"Edit %b %1 %d to see the saved input lines.",
+;               [file])
+;   CLOSE(inp)
 ;   NIL
 
 (DEFUN |writeInputLines| (|fn| |initial|)
   (PROG (|maxn| |breakChars| |vecl| |n| |done| |k| |svec| |lineList| |file|
          |inp|)
     (RETURN
-     (COND ((NULL |$HiFiAccess|) (|sayKeyedMsg| 'S2IH0013 NIL))
-           ((NULL |fn|) (|throwKeyedMsg| 'S2IH0038 NIL))
-           (#1='T
-            (PROGN
-             (SETQ |maxn| 72)
-             (SETQ |breakChars| (LIST (|char| " ") (|char| "+")))
-             ((LAMBDA (|bfVar#78| |i|)
-                (LOOP
-                 (COND ((> |i| |bfVar#78|) (RETURN NIL))
-                       (#1#
-                        (PROGN
-                         (SETQ |vecl| (CAR (|readHiFi| |i|)))
-                         (COND ((STRINGP |vecl|) (SETQ |vecl| (LIST |vecl|))))
-                         ((LAMBDA (|bfVar#79| |vec|)
-                            (LOOP
-                             (COND
-                              ((OR (ATOM |bfVar#79|)
-                                   (PROGN (SETQ |vec| (CAR |bfVar#79|)) NIL))
-                               (RETURN NIL))
-                              (#1#
-                               (PROGN
-                                (SETQ |n| (SIZE |vec|))
-                                ((LAMBDA ()
-                                   (LOOP
-                                    (COND ((NOT (< |maxn| |n|)) (RETURN NIL))
-                                          (#1#
-                                           (PROGN
-                                            (SETQ |done| NIL)
-                                            ((LAMBDA (|j|)
-                                               (LOOP
-                                                (COND
-                                                 ((OR (> |j| |maxn|) |done|)
-                                                  (RETURN NIL))
-                                                 (#1#
-                                                  (PROGN
-                                                   (SETQ |k|
-                                                           (- (+ 1 |maxn|)
-                                                              |j|))
-                                                   (COND
-                                                    ((MEMQ (ELT |vec| |k|)
-                                                           |breakChars|)
-                                                     (PROGN
-                                                      (SETQ |svec|
-                                                              (STRCONC
-                                                               (SUBSTRING |vec|
-                                                                          0
-                                                                          (+
-                                                                           |k|
-                                                                           1))
-                                                               UNDERBAR))
-                                                      (SETQ |lineList|
-                                                              (CONS |svec|
-                                                                    |lineList|))
-                                                      (SETQ |done| T)
-                                                      (SETQ |vec|
-                                                              (SUBSTRING |vec|
-                                                                         (+ |k|
-                                                                            1)
-                                                                         NIL))
-                                                      (SETQ |n|
-                                                              (SIZE
-                                                               |vec|))))))))
-                                                (SETQ |j| (+ |j| 1))))
-                                             1)
-                                            (COND
-                                             ((NULL |done|)
-                                              (SETQ |n| 0)))))))))
-                                (SETQ |lineList| (CONS |vec| |lineList|)))))
-                             (SETQ |bfVar#79| (CDR |bfVar#79|))))
-                          |vecl| NIL))))
-                 (SETQ |i| (+ |i| 1))))
-              (- |$IOindex| 1) |initial|)
-             (SETQ |file| (|histInputFileName| |fn|))
-             (|maybe_delete_file| |file|)
-             (SETQ |inp| (MAKE_OUTSTREAM |file|))
-             ((LAMBDA (|bfVar#80| |x|)
-                (LOOP
-                 (COND
-                  ((OR (ATOM |bfVar#80|)
-                       (PROGN (SETQ |x| (CAR |bfVar#80|)) NIL))
-                   (RETURN NIL))
-                  (#1# (WRITE-LINE |x| |inp|)))
-                 (SETQ |bfVar#80| (CDR |bfVar#80|))))
-              (|removeUndoLines| (NREVERSE |lineList|)) NIL)
-             (COND
-              ((NOT (EQ |fn| '|redo|))
-               (|sayKeyedMsg| 'S2IH0014 (LIST |file|))))
-             (SHUT |inp|)
-             NIL))))))
+     (COND
+      ((NULL |$HiFiAccess|)
+       (|say_msg| 'S2IH0013
+        (CONCAT
+         "The history facility is not on, so the .input file containing your"
+         " user input cannot be created.")
+        NIL))
+      ((NULL |fn|)
+       (|throw_msg| 'S2IH0038
+        "You must specify a file name to the history write command." NIL))
+      (#1='T
+       (PROGN
+        (SETQ |maxn| 72)
+        (SETQ |breakChars| (LIST (|char| " ") (|char| "+")))
+        ((LAMBDA (|bfVar#77| |i|)
+           (LOOP
+            (COND ((> |i| |bfVar#77|) (RETURN NIL))
+                  (#1#
+                   (PROGN
+                    (SETQ |vecl| (CAR (|readHiFi| |i|)))
+                    (COND ((STRINGP |vecl|) (SETQ |vecl| (LIST |vecl|))))
+                    ((LAMBDA (|bfVar#78| |vec|)
+                       (LOOP
+                        (COND
+                         ((OR (ATOM |bfVar#78|)
+                              (PROGN (SETQ |vec| (CAR |bfVar#78|)) NIL))
+                          (RETURN NIL))
+                         (#1#
+                          (PROGN
+                           (SETQ |n| (LENGTH |vec|))
+                           ((LAMBDA ()
+                              (LOOP
+                               (COND ((NOT (< |maxn| |n|)) (RETURN NIL))
+                                     (#1#
+                                      (PROGN
+                                       (SETQ |done| NIL)
+                                       ((LAMBDA (|j|)
+                                          (LOOP
+                                           (COND
+                                            ((OR (> |j| |maxn|) |done|)
+                                             (RETURN NIL))
+                                            (#1#
+                                             (PROGN
+                                              (SETQ |k| (- (+ 1 |maxn|) |j|))
+                                              (COND
+                                               ((MEMQ (ELT |vec| |k|)
+                                                      |breakChars|)
+                                                (PROGN
+                                                 (SETQ |svec|
+                                                         (STRCONC
+                                                          (SUBSTRING |vec| 0
+                                                                     (+ |k| 1))
+                                                          UNDERBAR))
+                                                 (SETQ |lineList|
+                                                         (CONS |svec|
+                                                               |lineList|))
+                                                 (SETQ |done| T)
+                                                 (SETQ |vec|
+                                                         (SUBSTRING |vec|
+                                                                    (+ |k| 1)
+                                                                    NIL))
+                                                 (SETQ |n|
+                                                         (LENGTH |vec|))))))))
+                                           (SETQ |j| (+ |j| 1))))
+                                        1)
+                                       (COND
+                                        ((NULL |done|) (SETQ |n| 0)))))))))
+                           (SETQ |lineList| (CONS |vec| |lineList|)))))
+                        (SETQ |bfVar#78| (CDR |bfVar#78|))))
+                     |vecl| NIL))))
+            (SETQ |i| (+ |i| 1))))
+         (- |$IOindex| 1) |initial|)
+        (SETQ |file| (|histInputFileName| |fn|))
+        (|maybe_delete_file| |file|)
+        (SETQ |inp| (MAKE_OUTSTREAM |file|))
+        ((LAMBDA (|bfVar#79| |x|)
+           (LOOP
+            (COND
+             ((OR (ATOM |bfVar#79|) (PROGN (SETQ |x| (CAR |bfVar#79|)) NIL))
+              (RETURN NIL))
+             (#1# (WRITE-LINE |x| |inp|)))
+            (SETQ |bfVar#79| (CDR |bfVar#79|))))
+         (|removeUndoLines| (NREVERSE |lineList|)) NIL)
+        (COND
+         ((NOT (EQ |fn| '|redo|))
+          (|say_msg| 'S2IH0014 "Edit %b %1 %d to see the saved input lines."
+           (LIST |file|))))
+        (CLOSE |inp|)
+        NIL))))))
 
 ; resetInCoreHist() ==
 ;   -- removes all pointers from $HistList
@@ -3750,7 +4111,9 @@
 
 ; changeHistListLen(n) ==
 ;   -- changes the length of $HistList.  n must be nonnegative
-;   NULL INTEGERP n => sayKeyedMsg("S2IH0015",[n])
+;   not(INTEGERP(n)) or n < 0 => say_msg("S2IH0015", CONCAT(
+;       '"The argument %b n %d for %b )history )change n must be a nonnegative",
+;       '" integer and your argument, %1b , is not one."), [n])
 ;   dif:= n-$HistListLen
 ;   $HistListLen:= n
 ;   l := rest $HistList
@@ -3765,31 +4128,37 @@
 (DEFUN |changeHistListLen| (|n|)
   (PROG (|dif| |l|)
     (RETURN
-     (COND ((NULL (INTEGERP |n|)) (|sayKeyedMsg| 'S2IH0015 (LIST |n|)))
-           (#1='T
-            (PROGN
-             (SETQ |dif| (- |n| |$HistListLen|))
-             (SETQ |$HistListLen| |n|)
-             (SETQ |l| (CDR |$HistList|))
-             (COND
-              ((< 0 |dif|)
-               ((LAMBDA (|i|)
-                  (LOOP
-                   (COND ((> |i| |dif|) (RETURN NIL))
-                         (#1# (SETQ |l| (CONS NIL |l|))))
-                   (SETQ |i| (+ |i| 1))))
-                1)))
-             (COND
-              ((MINUSP |dif|)
-               ((LAMBDA (|bfVar#81| |i|)
-                  (LOOP
-                   (COND ((> |i| |bfVar#81|) (RETURN NIL))
-                         (#1# (SETQ |l| (CDR |l|))))
-                   (SETQ |i| (+ |i| 1))))
-                (- |dif|) 1)
-               (COND ((< |n| |$HistListAct|) (SETQ |$HistListAct| |n|)))))
-             (RPLACD |$HistList| |l|)
-             '|done|))))))
+     (COND
+      ((OR (NULL (INTEGERP |n|)) (MINUSP |n|))
+       (|say_msg| 'S2IH0015
+        (CONCAT
+         "The argument %b n %d for %b )history )change n must be a nonnegative"
+         " integer and your argument, %1b , is not one.")
+        (LIST |n|)))
+      (#1='T
+       (PROGN
+        (SETQ |dif| (- |n| |$HistListLen|))
+        (SETQ |$HistListLen| |n|)
+        (SETQ |l| (CDR |$HistList|))
+        (COND
+         ((< 0 |dif|)
+          ((LAMBDA (|i|)
+             (LOOP
+              (COND ((> |i| |dif|) (RETURN NIL))
+                    (#1# (SETQ |l| (CONS NIL |l|))))
+              (SETQ |i| (+ |i| 1))))
+           1)))
+        (COND
+         ((MINUSP |dif|)
+          ((LAMBDA (|bfVar#80| |i|)
+             (LOOP
+              (COND ((> |i| |bfVar#80|) (RETURN NIL))
+                    (#1# (SETQ |l| (CDR |l|))))
+              (SETQ |i| (+ |i| 1))))
+           (- |dif|) 1)
+          (COND ((< |n| |$HistListAct|) (SETQ |$HistListAct| |n|)))))
+        (RPLACD |$HistList| |l|)
+        '|done|))))))
 
 ; updateHist() ==
 ;   -- updates the history file and calls updateInCoreHist
@@ -3938,7 +4307,8 @@
 ;       vec := rest UNWIND_-PROTECT(readHiFi(n), disableHist())
 ;       val := (p := ASSQ('%, vec)) and (p1 := ASSQ('value, rest p)) and
 ;         rest p1
-;     sayKeyedMsg("S2IH0019",[n])
+;     say_msg("S2IH0019",
+;       '"There is no history file, so value of step %1b is undefined.", [n])
 ;   $InteractiveFrame:= putHist('%,'value,val,$InteractiveFrame)
 ;   updateHist()
 
@@ -3964,7 +4334,10 @@
               (SETQ |val|
                       (AND (SETQ |p| (ASSQ '% |vec|))
                            (SETQ |p1| (ASSQ '|value| (CDR |p|))) (CDR |p1|)))))
-            (#1# (|sayKeyedMsg| 'S2IH0019 (LIST |n|)))))
+            (#1#
+             (|say_msg| 'S2IH0019
+              "There is no history file, so value of step %1b is undefined."
+              (LIST |n|)))))
       (SETQ |$InteractiveFrame|
               (|putHist| '% '|value| |val| |$InteractiveFrame|))
       (|updateHist|)))))
@@ -3982,25 +4355,25 @@
     (RETURN
      (PROGN
       (COND ((NULL (EQUAL (CDR |li|) |$HistList|)) (|undoChanges| (CDR |li|))))
-      ((LAMBDA (|bfVar#82| |p1|)
+      ((LAMBDA (|bfVar#81| |p1|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#82|) (PROGN (SETQ |p1| (CAR |bfVar#82|)) NIL))
+           ((OR (ATOM |bfVar#81|) (PROGN (SETQ |p1| (CAR |bfVar#81|)) NIL))
             (RETURN NIL))
            (#1='T
             (PROGN
              (SETQ |x| (CAR |p1|))
-             ((LAMBDA (|bfVar#83| |p2|)
+             ((LAMBDA (|bfVar#82| |p2|)
                 (LOOP
                  (COND
-                  ((OR (ATOM |bfVar#83|)
-                       (PROGN (SETQ |p2| (CAR |bfVar#83|)) NIL))
+                  ((OR (ATOM |bfVar#82|)
+                       (PROGN (SETQ |p2| (CAR |bfVar#82|)) NIL))
                    (RETURN NIL))
                   (#1#
                    (|putHist| |x| (CAR |p2|) (CDR |p2|) |$InteractiveFrame|)))
-                 (SETQ |bfVar#83| (CDR |bfVar#83|))))
+                 (SETQ |bfVar#82| (CDR |bfVar#82|))))
               (CDR |p1|) NIL))))
-          (SETQ |bfVar#82| (CDR |bfVar#82|))))
+          (SETQ |bfVar#81| (CDR |bfVar#81|))))
        (CAR |li|) NIL)))))
 
 ; undoFromFile(n) ==
@@ -4026,23 +4399,23 @@
   (PROG (|x| |varl| |prop| |val| |vec| |p| |p1|)
     (RETURN
      (PROGN
-      ((LAMBDA (|bfVar#85| |bfVar#84|)
+      ((LAMBDA (|bfVar#84| |bfVar#83|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#85|)
-                (PROGN (SETQ |bfVar#84| (CAR |bfVar#85|)) NIL))
+           ((OR (ATOM |bfVar#84|)
+                (PROGN (SETQ |bfVar#83| (CAR |bfVar#84|)) NIL))
             (RETURN NIL))
            (#1='T
-            (AND (CONSP |bfVar#84|)
+            (AND (CONSP |bfVar#83|)
                  (PROGN
-                  (SETQ |x| (CAR |bfVar#84|))
-                  (SETQ |varl| (CDR |bfVar#84|))
+                  (SETQ |x| (CAR |bfVar#83|))
+                  (SETQ |varl| (CDR |bfVar#83|))
                   #1#)
-                 ((LAMBDA (|bfVar#86| |p|)
+                 ((LAMBDA (|bfVar#85| |p|)
                     (LOOP
                      (COND
-                      ((OR (ATOM |bfVar#86|)
-                           (PROGN (SETQ |p| (CAR |bfVar#86|)) NIL))
+                      ((OR (ATOM |bfVar#85|)
+                           (PROGN (SETQ |p| (CAR |bfVar#85|)) NIL))
                        (RETURN NIL))
                       (#1#
                        (PROGN
@@ -4058,9 +4431,9 @@
                             (|$HiFiAccess|
                              (|recordNewValue| |x| |prop| |val|)))
                            (RPLACD |p| NIL)))))))
-                     (SETQ |bfVar#86| (CDR |bfVar#86|))))
+                     (SETQ |bfVar#85| (CDR |bfVar#85|))))
                   |varl| NIL))))
-          (SETQ |bfVar#85| (CDR |bfVar#85|))))
+          (SETQ |bfVar#84| (CDR |bfVar#84|))))
        (CAAR |$InteractiveFrame|) NIL)
       ((LAMBDA (|i|)
          (LOOP
@@ -4070,28 +4443,28 @@
                   (SETQ |vec|
                           (UNWIND-PROTECT (CDR (|readHiFi| |i|))
                             (|disableHist|)))
-                  ((LAMBDA (|bfVar#87| |p1|)
+                  ((LAMBDA (|bfVar#86| |p1|)
                      (LOOP
                       (COND
-                       ((OR (ATOM |bfVar#87|)
-                            (PROGN (SETQ |p1| (CAR |bfVar#87|)) NIL))
+                       ((OR (ATOM |bfVar#86|)
+                            (PROGN (SETQ |p1| (CAR |bfVar#86|)) NIL))
                         (RETURN NIL))
                        (#1#
                         (PROGN
                          (SETQ |x| (CAR |p1|))
-                         ((LAMBDA (|bfVar#88| |p2|)
+                         ((LAMBDA (|bfVar#87| |p2|)
                             (LOOP
                              (COND
-                              ((OR (ATOM |bfVar#88|)
-                                   (PROGN (SETQ |p2| (CAR |bfVar#88|)) NIL))
+                              ((OR (ATOM |bfVar#87|)
+                                   (PROGN (SETQ |p2| (CAR |bfVar#87|)) NIL))
                                (RETURN NIL))
                               (#1#
                                (SETQ |$InteractiveFrame|
                                        (|putHist| |x| (CAR |p2|) (CDR |p2|)
                                         |$InteractiveFrame|))))
-                             (SETQ |bfVar#88| (CDR |bfVar#88|))))
+                             (SETQ |bfVar#87| (CDR |bfVar#87|))))
                           (CDR |p1|) NIL))))
-                      (SETQ |bfVar#87| (CDR |bfVar#87|))))
+                      (SETQ |bfVar#86| (CDR |bfVar#86|))))
                    |vec| NIL))))
           (SETQ |i| (+ |i| 1))))
        1)
@@ -4103,12 +4476,14 @@
       (|updateHist|)))))
 
 ; saveHistory(fn) ==
-;   not $HiFiAccess => sayKeyedMsg("S2IH0016",NIL)
+;   not $HiFiAccess => say_msg("S2IH0016",
+;       '"The history facility is not on, so no information can be saved.", NIL)
 ;   not $useInternalHistoryTable and
 ;       null(make_input_filename1(histFileName())) =>
-;           sayKeyedMsg("S2IH0022", nil)
-;   null fn =>
-;     throwKeyedMsg("S2IH0037", nil)
+;           say_msg("S2IH0022",
+;                   '"No history information had been saved yet.", nil)
+;   null fn => throw_msg("S2IH0037",
+;       '"You must specify a file name to the history save command.", nil)
 ;   fn := first(fn)
 ;   savefile := makeHistFileName(fn)
 ;   inputfile := histInputFileName(fn)
@@ -4120,71 +4495,88 @@
 ;       for [n,:rec] in reverse $internalHistoryTable repeat
 ;           val_u := SPADRWRITE0(saveStr, object2String2(n), rec)
 ;           first(val_u) = 1 => -- "failed"
-;               sayKeyedMsg("S2IH0035", [n, inputfile]) -- unable to save step
+;               say_msg("S2IH0035", CONCAT( _
+;     '"Can't save the value of step number %1b.  You can re-generate", _
+;     '" this value by running the input file %2b."), [n, inputfile])
 ;       kaf_close(saveStr)
-;   sayKeyedMsg("S2IH0018", [savefile])  -- saved hist file named
+;   say_msg("S2IH0018", '"The saved history file is %1b .", [savefile])
 ;   nil
 
 (DEFUN |saveHistory| (|fn|)
   (PROG (|savefile| |inputfile| |saveStr| |n| |rec| |val_u|)
     (RETURN
-     (COND ((NULL |$HiFiAccess|) (|sayKeyedMsg| 'S2IH0016 NIL))
-           ((AND (NULL |$useInternalHistoryTable|)
-                 (NULL (|make_input_filename1| (|histFileName|))))
-            (|sayKeyedMsg| 'S2IH0022 NIL))
-           ((NULL |fn|) (|throwKeyedMsg| 'S2IH0037 NIL))
-           (#1='T
-            (PROGN
-             (SETQ |fn| (CAR |fn|))
-             (SETQ |savefile| (|makeHistFileName| |fn|))
-             (SETQ |inputfile| (|histInputFileName| |fn|))
-             (|writeInputLines| |fn| 1)
-             (|histFileErase| |savefile|)
-             (COND
-              (|$useInternalHistoryTable|
-               (SETQ |saveStr| (|kaf_open| |savefile| T))
-               ((LAMBDA (|bfVar#90| |bfVar#89|)
-                  (LOOP
-                   (COND
-                    ((OR (ATOM |bfVar#90|)
-                         (PROGN (SETQ |bfVar#89| (CAR |bfVar#90|)) NIL))
-                     (RETURN NIL))
-                    (#1#
-                     (AND (CONSP |bfVar#89|)
-                          (PROGN
-                           (SETQ |n| (CAR |bfVar#89|))
-                           (SETQ |rec| (CDR |bfVar#89|))
-                           #1#)
-                          (PROGN
-                           (SETQ |val_u|
-                                   (SPADRWRITE0 |saveStr|
-                                    (|object2String2| |n|) |rec|))
-                           (COND
-                            ((EQL (CAR |val_u|) 1)
-                             (|sayKeyedMsg| 'S2IH0035
-                              (LIST |n| |inputfile|))))))))
-                   (SETQ |bfVar#90| (CDR |bfVar#90|))))
-                (REVERSE |$internalHistoryTable|) NIL)
-               (|kaf_close| |saveStr|)))
-             (|sayKeyedMsg| 'S2IH0018 (LIST |savefile|))
-             NIL))))))
+     (COND
+      ((NULL |$HiFiAccess|)
+       (|say_msg| 'S2IH0016
+        "The history facility is not on, so no information can be saved." NIL))
+      ((AND (NULL |$useInternalHistoryTable|)
+            (NULL (|make_input_filename1| (|histFileName|))))
+       (|say_msg| 'S2IH0022 "No history information had been saved yet." NIL))
+      ((NULL |fn|)
+       (|throw_msg| 'S2IH0037
+        "You must specify a file name to the history save command." NIL))
+      (#1='T
+       (PROGN
+        (SETQ |fn| (CAR |fn|))
+        (SETQ |savefile| (|makeHistFileName| |fn|))
+        (SETQ |inputfile| (|histInputFileName| |fn|))
+        (|writeInputLines| |fn| 1)
+        (|histFileErase| |savefile|)
+        (COND
+         (|$useInternalHistoryTable| (SETQ |saveStr| (|kaf_open| |savefile| T))
+          ((LAMBDA (|bfVar#89| |bfVar#88|)
+             (LOOP
+              (COND
+               ((OR (ATOM |bfVar#89|)
+                    (PROGN (SETQ |bfVar#88| (CAR |bfVar#89|)) NIL))
+                (RETURN NIL))
+               (#1#
+                (AND (CONSP |bfVar#88|)
+                     (PROGN
+                      (SETQ |n| (CAR |bfVar#88|))
+                      (SETQ |rec| (CDR |bfVar#88|))
+                      #1#)
+                     (PROGN
+                      (SETQ |val_u|
+                              (SPADRWRITE0 |saveStr| (|object2String2| |n|)
+                               |rec|))
+                      (COND
+                       ((EQL (CAR |val_u|) 1)
+                        (|say_msg| 'S2IH0035
+                         (CONCAT
+                          "Can't save the value of step number %1b.  You can re-generate"
+                          " this value by running the input file %2b.")
+                         (LIST |n| |inputfile|))))))))
+              (SETQ |bfVar#89| (CDR |bfVar#89|))))
+           (REVERSE |$internalHistoryTable|) NIL)
+          (|kaf_close| |saveStr|)))
+        (|say_msg| 'S2IH0018 "The saved history file is %1b ."
+         (LIST |savefile|))
+        NIL))))))
 
 ; restoreHistory(fn) ==
 ;   -- uses fn $historyFileType to recover an old session
 ;   -- if fn = NIL, then use $oldHistoryFileName
 ;   if null fn then fn' := $oldHistoryFileName
-;   else if fn is [fn'] and IDENTP(fn') then fn' := fn'
-;        else throwKeyedMsg("S2IH0023",[fn'])
+;   else if fn is [fn'] and IDENTP(fn') then
+;       fn' := fn'
+;   else
+;       throw_msg("S2IH0023",
+;                 '"%1b is not a valid filename for the history file.", [fn'])
 ;   restfile := makeHistFileName(fn')
 ;   null(make_input_filename1(restfile)) =>
-;     sayKeyedMsg("S2IH0024",[restfile]) -- no history file
+;       say_msg("S2IH0024", CONCAT(
+;         '"History information cannot be restored from %1b because the",
+;         '" file does not exist."), [restfile])
 ;
 ;   -- if clear is changed to be undoable, this should be a reset-clear
 ;   $options: local := nil
 ;   clearSpad2Cmd '(all)
 ;   oldInternal := $useInternalHistoryTable
 ;   restoreHistory2(oldInternal, restfile, fn')
-;   sayKeyedMsg("S2IH0025", [restfile])
+;   say_msg("S2IH0025", CONCAT(
+;           '"The workspace has been successfully restored from the history",
+;           '" file %1b ."), [restfile])
 ;   clear_sorted_caches()
 ;   nil
 
@@ -4197,18 +4589,28 @@
             ((AND (CONSP |fn|) (EQ (CDR |fn|) NIL)
                   (PROGN (SETQ |fn'| (CAR |fn|)) #1='T) (IDENTP |fn'|))
              (SETQ |fn'| |fn'|))
-            (#1# (|throwKeyedMsg| 'S2IH0023 (LIST |fn'|))))
+            (#1#
+             (|throw_msg| 'S2IH0023
+              "%1b is not a valid filename for the history file."
+              (LIST |fn'|))))
       (SETQ |restfile| (|makeHistFileName| |fn'|))
       (COND
        ((NULL (|make_input_filename1| |restfile|))
-        (|sayKeyedMsg| 'S2IH0024 (LIST |restfile|)))
+        (|say_msg| 'S2IH0024
+         (CONCAT "History information cannot be restored from %1b because the"
+                 " file does not exist.")
+         (LIST |restfile|)))
        (#1#
         (PROGN
          (SETQ |$options| NIL)
          (|clearSpad2Cmd| '(|all|))
          (SETQ |oldInternal| |$useInternalHistoryTable|)
          (|restoreHistory2| |oldInternal| |restfile| |fn'|)
-         (|sayKeyedMsg| 'S2IH0025 (LIST |restfile|))
+         (|say_msg| 'S2IH0025
+          (CONCAT
+           "The workspace has been successfully restored from the history"
+           " file %1b .")
+          (LIST |restfile|))
          (|clear_sorted_caches|)
          NIL)))))))
 
@@ -4271,41 +4673,41 @@
                     (SETQ |$internalHistoryTable|
                             (CONS (CONS |i| |vec|) |$internalHistoryTable|))))
                   (SETQ LINE (CAR |vec|))
-                  ((LAMBDA (|bfVar#91| |p1|)
+                  ((LAMBDA (|bfVar#90| |p1|)
                      (LOOP
                       (COND
-                       ((OR (ATOM |bfVar#91|)
-                            (PROGN (SETQ |p1| (CAR |bfVar#91|)) NIL))
+                       ((OR (ATOM |bfVar#90|)
+                            (PROGN (SETQ |p1| (CAR |bfVar#90|)) NIL))
                         (RETURN NIL))
                        (#1#
                         (PROGN
                          (SETQ |x| (CAR |p1|))
-                         ((LAMBDA (|bfVar#92| |p2|)
+                         ((LAMBDA (|bfVar#91| |p2|)
                             (LOOP
                              (COND
-                              ((OR (ATOM |bfVar#92|)
-                                   (PROGN (SETQ |p2| (CAR |bfVar#92|)) NIL))
+                              ((OR (ATOM |bfVar#91|)
+                                   (PROGN (SETQ |p2| (CAR |bfVar#91|)) NIL))
                                (RETURN NIL))
                               (#1#
                                (SETQ |$InteractiveFrame|
                                        (|putHist| |x| (CAR |p2|) (CDR |p2|)
                                         |$InteractiveFrame|))))
-                             (SETQ |bfVar#92| (CDR |bfVar#92|))))
+                             (SETQ |bfVar#91| (CDR |bfVar#91|))))
                           (CDR |p1|) NIL))))
-                      (SETQ |bfVar#91| (CDR |bfVar#91|))))
+                      (SETQ |bfVar#90| (CDR |bfVar#90|))))
                    (CDR |vec|) NIL)
                   (|updateInCoreHist|))))
           (SETQ |i| (+ |i| 1))))
        1)
       (SETQ |$e| |$InteractiveFrame|)
-      ((LAMBDA (|bfVar#94| |bfVar#93|)
+      ((LAMBDA (|bfVar#93| |bfVar#92|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#94|)
-                (PROGN (SETQ |bfVar#93| (CAR |bfVar#94|)) NIL))
+           ((OR (ATOM |bfVar#93|)
+                (PROGN (SETQ |bfVar#92| (CAR |bfVar#93|)) NIL))
             (RETURN NIL))
            (#1#
-            (AND (CONSP |bfVar#93|) (PROGN (SETQ |a| (CAR |bfVar#93|)) #1#)
+            (AND (CONSP |bfVar#92|) (PROGN (SETQ |a| (CAR |bfVar#92|)) #1#)
                  (COND
                   ((|getI| |a| '|localModemap|)
                    (IDENTITY
@@ -4313,7 +4715,7 @@
                      (|rempropI| |a| '|localModemap|)
                      (|rempropI| |a| '|localVars|)
                      (|rempropI| |a| '|mapBody|))))))))
-          (SETQ |bfVar#94| (CDR |bfVar#94|))))
+          (SETQ |bfVar#93| (CDR |bfVar#93|))))
        (CAAR |$InteractiveFrame|) NIL)
       (SETQ |$IOindex| (+ |l| 1))
       (SETQ |$useInternalHistoryTable| |oldInternal|)))))
@@ -4331,7 +4733,9 @@
 ;   $printTimeSum: local:= 0
 ;   -- ugh!!! these are needed for timedEvaluateStream
 ;   -- displays the last n steps, default n=20
-;   not $HiFiAccess => sayKeyedMsg("S2IH0026",['show])
+;   not $HiFiAccess => say_msg("S2IH0026", CONCAT(
+;       '"The history facility command %1b cannot be performed because the",
+;       '"history facility is not on."), ['show])
 ;   showInputOrBoth := 'input
 ;   n := 20
 ;   nset := nil
@@ -4343,7 +4747,7 @@
 ;       IFCDR arg => arg1 := CADR arg
 ;       arg1 := NIL
 ;     arg1 =>
-;       arg2 := selectOptionLC(arg1,'(input both),nil)
+;       arg2 := selectOption(arg1, '(input both), nil)
 ;       if arg2
 ;         then ((showInputOrBoth := arg2) = 'both) and (null nset) => n:= 5
 ;         else sayMSG
@@ -4363,41 +4767,46 @@
      (PROGN
       (SETQ |$evalTimePrint| 0)
       (SETQ |$printTimeSum| 0)
-      (COND ((NULL |$HiFiAccess|) (|sayKeyedMsg| 'S2IH0026 (LIST '|show|)))
-            (#1='T
+      (COND
+       ((NULL |$HiFiAccess|)
+        (|say_msg| 'S2IH0026
+         (CONCAT
+          "The history facility command %1b cannot be performed because the"
+          "history facility is not on.")
+         (LIST '|show|)))
+       (#1='T
+        (PROGN
+         (SETQ |showInputOrBoth| '|input|)
+         (SETQ |n| 20)
+         (SETQ |nset| NIL)
+         (COND
+          (|arg| (SETQ |arg1| (CAR |arg|))
+           (COND
+            ((INTEGERP |arg1|) (SETQ |n| |arg1|) (SETQ |nset| T)
+             (COND ((IFCDR |arg|) (SETQ |arg1| (CADR |arg|)))
+                   (#1# (SETQ |arg1| NIL)))))
+           (COND
+            (|arg1|
              (PROGN
-              (SETQ |showInputOrBoth| '|input|)
-              (SETQ |n| 20)
-              (SETQ |nset| NIL)
+              (SETQ |arg2| (|selectOption| |arg1| '(|input| |both|) NIL))
               (COND
-               (|arg| (SETQ |arg1| (CAR |arg|))
+               (|arg2|
                 (COND
-                 ((INTEGERP |arg1|) (SETQ |n| |arg1|) (SETQ |nset| T)
-                  (COND ((IFCDR |arg|) (SETQ |arg1| (CADR |arg|)))
-                        (#1# (SETQ |arg1| NIL)))))
-                (COND
-                 (|arg1|
-                  (PROGN
-                   (SETQ |arg2|
-                           (|selectOptionLC| |arg1| '(|input| |both|) NIL))
-                   (COND
-                    (|arg2|
-                     (COND
-                      ((AND (EQ (SETQ |showInputOrBoth| |arg2|) '|both|)
-                            (NULL |nset|))
-                       (IDENTITY (SETQ |n| 5)))))
-                    (#1#
-                     (|sayMSG|
-                      (|concat| "  " (|bright| |arg1|)
-                       "is an invalid argument.")))))))))
-              (COND ((NOT (< |n| |$IOindex|)) (SETQ |n| (- |$IOindex| 1))))
-              (SETQ |mini| (- |$IOindex| |n|))
-              (SETQ |maxi| (- |$IOindex| 1))
-              (COND
-               ((EQ |showInputOrBoth| '|both|)
-                (UNWIND-PROTECT (|showInOut| |mini| |maxi|)
-                  (|setIOindex| (+ |maxi| 1))))
-               (#1# (|showInput| |mini| |maxi|))))))))))
+                 ((AND (EQ (SETQ |showInputOrBoth| |arg2|) '|both|)
+                       (NULL |nset|))
+                  (IDENTITY (SETQ |n| 5)))))
+               (#1#
+                (|sayMSG|
+                 (|concat| "  " (|bright| |arg1|)
+                  "is an invalid argument.")))))))))
+         (COND ((NOT (< |n| |$IOindex|)) (SETQ |n| (- |$IOindex| 1))))
+         (SETQ |mini| (- |$IOindex| |n|))
+         (SETQ |maxi| (- |$IOindex| 1))
+         (COND
+          ((EQ |showInputOrBoth| '|both|)
+           (UNWIND-PROTECT (|showInOut| |mini| |maxi|)
+             (|setIOindex| (+ |maxi| 1))))
+          (#1# (|showInput| |mini| |maxi|))))))))))
 
 ; setIOindex(n) ==
 ;   -- set $IOindex to n
@@ -4435,14 +4844,14 @@
                   (#1#
                    (PROGN
                     (|sayMSG| (LIST "   [" |ind| "] "))
-                    ((LAMBDA (|bfVar#95| |ln|)
+                    ((LAMBDA (|bfVar#94| |ln|)
                        (LOOP
                         (COND
-                         ((OR (ATOM |bfVar#95|)
-                              (PROGN (SETQ |ln| (CAR |bfVar#95|)) NIL))
+                         ((OR (ATOM |bfVar#94|)
+                              (PROGN (SETQ |ln| (CAR |bfVar#94|)) NIL))
                           (RETURN NIL))
                          (#1# (|sayMSG| (LIST "      " |ln|))))
-                        (SETQ |bfVar#95| (CDR |bfVar#95|))))
+                        (SETQ |bfVar#94| (CDR |bfVar#94|))))
                      |l| NIL)))))))
          (SETQ |ind| (+ |ind| 1))))
       |mini|))))
@@ -4485,14 +4894,18 @@
 ;     n:=
 ;       n < 0 => $IOindex+n
 ;       n
-;     n >= $IOindex => throwKeyedMsg("S2IH0001",[n])
-;     n < 1        => throwKeyedMsg("S2IH0002",[n])
+;     n >= $IOindex => throw_msg("S2IH0001", CONCAT(
+;         '"You have not reached step %1b yet, and so its value cannot be",
+;         '" supplied."), [n])
+;     n < 1 => throw_msg("S2IH0002",
+;         '"Cannot supply value for step %1b because 1 is the first step.", [n])
 ;     vec:= UNWIND_-PROTECT(readHiFi(n),disableHist())
 ;     Alist := ASSQ('%, rest vec) =>
-;       val := rest ASSQ('value, rest Alist) => val
-;       throwKeyedMsg("S2IH0003",[n])
-;     throwKeyedMsg("S2IH0003",[n])
-;   throwKeyedMsg("S2IH0004",NIL)
+;         val := rest ASSQ('value, rest Alist) => val
+;         throw_msg("S2IH0003", '"Step %1b has no value.", [n])
+;     throw_msg("S2IH0003", '"Step %1b has no value.", [n])
+;   throw_msg("S2IH0004",
+;      '"The history facility is not on, so you cannot use %b %% %d .", NIL)
 
 (DEFUN |fetchOutput| (|n|)
   (PROG (|val| |vec| |Alist|)
@@ -4502,8 +4915,16 @@
             (PROGN
              (SETQ |n| (COND ((MINUSP |n|) (+ |$IOindex| |n|)) (#1='T |n|)))
              (COND
-              ((NOT (< |n| |$IOindex|)) (|throwKeyedMsg| 'S2IH0001 (LIST |n|)))
-              ((< |n| 1) (|throwKeyedMsg| 'S2IH0002 (LIST |n|)))
+              ((NOT (< |n| |$IOindex|))
+               (|throw_msg| 'S2IH0001
+                (CONCAT
+                 "You have not reached step %1b yet, and so its value cannot be"
+                 " supplied.")
+                (LIST |n|)))
+              ((< |n| 1)
+               (|throw_msg| 'S2IH0002
+                "Cannot supply value for step %1b because 1 is the first step."
+                (LIST |n|)))
               (#1#
                (PROGN
                 (SETQ |vec| (UNWIND-PROTECT (|readHiFi| |n|) (|disableHist|)))
@@ -4511,16 +4932,24 @@
                  ((SETQ |Alist| (ASSQ '% (CDR |vec|)))
                   (COND
                    ((SETQ |val| (CDR (ASSQ '|value| (CDR |Alist|)))) |val|)
-                   (#1# (|throwKeyedMsg| 'S2IH0003 (LIST |n|)))))
-                 (#1# (|throwKeyedMsg| 'S2IH0003 (LIST |n|)))))))))
-           (#1# (|throwKeyedMsg| 'S2IH0004 NIL))))))
+                   (#1#
+                    (|throw_msg| 'S2IH0003 "Step %1b has no value."
+                     (LIST |n|)))))
+                 (#1#
+                  (|throw_msg| 'S2IH0003 "Step %1b has no value."
+                   (LIST |n|)))))))))
+           (#1#
+            (|throw_msg| 'S2IH0004
+             "The history facility is not on, so you cannot use %b %% %d ."
+             NIL))))))
 
 ; readHiFi(n) ==
 ;   -- reads the file using index n
 ;   if $useInternalHistoryTable
 ;   then
 ;     pair := assoc(n,$internalHistoryTable)
-;     ATOM pair => keyedSystemError("S2IH0034",NIL)
+;     ATOM(pair) => system_error("S2IH0034",
+;           '"Missing element in internal history table.", NIL)
 ;     vec := QCDR pair
 ;   else
 ;     HiFi:= kaf_open(histFileName(), false)
@@ -4535,8 +4964,11 @@
       (COND
        (|$useInternalHistoryTable|
         (SETQ |pair| (|assoc| |n| |$internalHistoryTable|))
-        (COND ((ATOM |pair|) (|keyedSystemError| 'S2IH0034 NIL))
-              (#1='T (SETQ |vec| (QCDR |pair|)))))
+        (COND
+         ((ATOM |pair|)
+          (|system_error| 'S2IH0034
+           "Missing element in internal history table." NIL))
+         (#1='T (SETQ |vec| (QCDR |pair|)))))
        (#1# (SETQ |HiFi| (|kaf_open| (|histFileName|) NIL))
         (SETQ |vec| (SPADRREAD |HiFi| (|object2String2| |n|)))
         (|kaf_close| |HiFi|)))
@@ -4590,20 +5022,20 @@
   (PROG (|x| |a|)
     (RETURN
      (PROGN
-      ((LAMBDA (|bfVar#97| |bfVar#96|)
+      ((LAMBDA (|bfVar#96| |bfVar#95|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#97|)
-                (PROGN (SETQ |bfVar#96| (CAR |bfVar#97|)) NIL))
+           ((OR (ATOM |bfVar#96|)
+                (PROGN (SETQ |bfVar#95| (CAR |bfVar#96|)) NIL))
             (RETURN NIL))
            (#1='T
-            (AND (CONSP |bfVar#96|) (PROGN (SETQ |a| (CAR |bfVar#96|)) #1#)
+            (AND (CONSP |bfVar#95|) (PROGN (SETQ |a| (CAR |bfVar#95|)) #1#)
                  (COND
                   ((SETQ |x| (|getI| |a| '|value|))
                    (|putHist| |a| '|value| |x| |$InteractiveFrame|))
                   ((SETQ |x| (|getI| |a| '|mode|))
                    (|putHist| |a| '|mode| |x| |$InteractiveFrame|))))))
-          (SETQ |bfVar#97| (CDR |bfVar#97|))))
+          (SETQ |bfVar#96| (CDR |bfVar#96|))))
        (CAAR |$InteractiveFrame|) NIL)
       NIL))))
 
@@ -4748,9 +5180,9 @@
            ((VECP |ob|)
             (PROGN
              (HPUT |seen| |ob| T)
-             ((LAMBDA (|bfVar#98| |i|)
+             ((LAMBDA (|bfVar#97| |i|)
                 (LOOP
-                 (COND ((> |i| |bfVar#98|) (RETURN NIL))
+                 (COND ((> |i| |bfVar#97|) (RETURN NIL))
                        (#1='T
                         (|ScanOrPairVec,ScanOrInner| |f| (ELT |ob| |i|)
                          |seen|)))
@@ -4761,9 +5193,9 @@
             (PROGN
              (HPUT |seen| |ob| T)
              (SETQ |n| (ARRAY-TOTAL-SIZE |ob|))
-             ((LAMBDA (|bfVar#99| |i|)
+             ((LAMBDA (|bfVar#98| |i|)
                 (LOOP
-                 (COND ((> |i| |bfVar#99|) (RETURN NIL))
+                 (COND ((> |i| |bfVar#98|) (RETURN NIL))
                        (#1#
                         (|ScanOrPairVec,ScanOrInner| |f|
                          (ROW-MAJOR-AREF |ob| |i|) |seen|)))
@@ -4777,86 +5209,19 @@
            ((FUNCALL |f| |ob|) (THROW '|ScanOrPairVecAnswer| T)) (#1# NIL)))))
 
 ; library(args) ==
-;    $newConlist : local := []
 ;    original_directory := get_current_directory()
 ;    merge_info_from_objects(args, $options, false)
-;    extendLocalLibdb($newConlist)
 ;    CHDIR(original_directory)
 ;    terminateSystemCommand()
 
 (DEFUN |library| (|args|)
-  (PROG (|$newConlist| |original_directory|)
-    (DECLARE (SPECIAL |$newConlist|))
+  (PROG (|original_directory|)
     (RETURN
      (PROGN
-      (SETQ |$newConlist| NIL)
       (SETQ |original_directory| (|get_current_directory|))
       (|merge_info_from_objects| |args| |$options| NIL)
-      (|extendLocalLibdb| |$newConlist|)
       (CHDIR |original_directory|)
       (|terminateSystemCommand|)))))
-
-; load args == loadSpad2Cmd args
-
-(DEFUN |load| (|args|) (PROG () (RETURN (|loadSpad2Cmd| |args|))))
-
-; loadSpad2Cmd args ==
-;     sayKeyedMsg("S2IU0003", nil)
-;     NIL
-
-(DEFUN |loadSpad2Cmd| (|args|)
-  (PROG () (RETURN (PROGN (|sayKeyedMsg| 'S2IU0003 NIL) NIL))))
-
-; reportCount () ==
-;   centerAndHighlight('" Current Count Settings ",$LINELENGTH,specialChar 'hbar)
-;   SAY '" "
-;   sayBrightly [:bright('" cache"), filler_chars(30, '"."), '" ", $cacheCount]
-;   if $cacheAlist then
-;     for [a,:b] in $cacheAlist repeat
-;       aPart:= linearFormatName a
-;       n:= sayBrightlyLength aPart
-;       sayBrightly concat('"     ",aPart,'" ",filler_chars(32 - n, '"."),'" ",b)
-;   SAY '" "
-;   sayBrightly [:bright '" stream",filler_chars(29, '"."), '" ", $streamCount]
-
-(DEFUN |reportCount| ()
-  (PROG (|n| |aPart| |b| |a|)
-    (RETURN
-     (PROGN
-      (|centerAndHighlight| " Current Count Settings " $LINELENGTH
-       (|specialChar| '|hbar|))
-      (SAY " ")
-      (|sayBrightly|
-       (APPEND (|bright| " cache")
-               (CONS (|filler_chars| 30 ".")
-                     (CONS " " (CONS |$cacheCount| NIL)))))
-      (COND
-       (|$cacheAlist|
-        ((LAMBDA (|bfVar#101| |bfVar#100|)
-           (LOOP
-            (COND
-             ((OR (ATOM |bfVar#101|)
-                  (PROGN (SETQ |bfVar#100| (CAR |bfVar#101|)) NIL))
-              (RETURN NIL))
-             (#1='T
-              (AND (CONSP |bfVar#100|)
-                   (PROGN
-                    (SETQ |a| (CAR |bfVar#100|))
-                    (SETQ |b| (CDR |bfVar#100|))
-                    #1#)
-                   (PROGN
-                    (SETQ |aPart| (|linearFormatName| |a|))
-                    (SETQ |n| (|sayBrightlyLength| |aPart|))
-                    (|sayBrightly|
-                     (|concat| "     " |aPart| " "
-                      (|filler_chars| (- 32 |n|) ".") " " |b|))))))
-            (SETQ |bfVar#101| (CDR |bfVar#101|))))
-         |$cacheAlist| NIL)))
-      (SAY " ")
-      (|sayBrightly|
-       (APPEND (|bright| " stream")
-               (CONS (|filler_chars| 29 ".")
-                     (CONS " " (CONS |$streamCount| NIL)))))))))
 
 ; nopiles l == nopilesSpad2Cmd l
 
@@ -4905,9 +5270,13 @@
 
 ; quitSpad2Cmd() ==
 ;   $quitCommandType ~= 'protected => leaveScratchpad()
-;   x := UPCASE queryUserKeyedMsg("S2IZ0031",NIL)
-;   MEMQ(STRING2ID_N(x, 1), '(Y YES)) => leaveScratchpad()
-;   sayKeyedMsg("S2IZ0032",NIL)
+;   x := query_user_msg("S2IZ0031", CONCAT(
+;         '"Please enter %b y %d or %b yes %d if you really want to leave the",
+;         '" interactive environment and return to the operating system:"), [])
+;   x => leaveScratchpad()
+;   say_msg("S2IZ0032", CONCAT(
+;         '"You have chosen to remain in the %b FriCAS %d",
+;         '" interactive environment."), [])
 ;   terminateSystemCommand()
 
 (DEFUN |quitSpad2Cmd| ()
@@ -4916,11 +5285,19 @@
      (COND ((NOT (EQ |$quitCommandType| '|protected|)) (|leaveScratchpad|))
            (#1='T
             (PROGN
-             (SETQ |x| (UPCASE (|queryUserKeyedMsg| 'S2IZ0031 NIL)))
-             (COND ((MEMQ (STRING2ID_N |x| 1) '(Y YES)) (|leaveScratchpad|))
+             (SETQ |x|
+                     (|query_user_msg| 'S2IZ0031
+                      (CONCAT
+                       "Please enter %b y %d or %b yes %d if you really want to leave the"
+                       " interactive environment and return to the operating system:")
+                      NIL))
+             (COND (|x| (|leaveScratchpad|))
                    (#1#
                     (PROGN
-                     (|sayKeyedMsg| 'S2IZ0032 NIL)
+                     (|say_msg| 'S2IZ0032
+                      (CONCAT "You have chosen to remain in the %b FriCAS %d"
+                              " interactive environment.")
+                      NIL)
                      (|terminateSystemCommand|))))))))))
 
 ; leaveScratchpad () == QUIT()
@@ -4949,7 +5326,7 @@
 ;   quiet := nil
 ;   ifthere := nil
 ;   for [opt,:.] in $options repeat
-;     fullopt := selectOptionLC(opt,'(quiet test ifthere),'optionError)
+;     fullopt := selectOption(opt, '(quiet test ifthere), 'optionError)
 ;     fullopt = 'ifthere => ifthere  := true
 ;     fullopt = 'quiet   => quiet := true
 ;
@@ -4967,39 +5344,45 @@
 ;   ll := find_file(l, fileTypes)
 ;   if null ll then
 ;     ifthere => return nil    -- be quiet about it
-;     throwKeyedMsg("S2IL0003", [l])
+;     throw_msg("S2IL0003", '"The file %1b is needed but does not exist.", [l])
 ;   ft := file_extention(ll)
-;   downft := DOWNCASE(ft)
-;   not(member(downft, fileTypes)) =>
+;   not(member(ft, fileTypes)) =>
 ;       fs := l
-;       member(downft, devFTs) => throwKeyedMsg("S2IZ0033",[fs])
-;       throwKeyedMsg("S2IZ0034", [fs])
+;       member(ft, devFTs) => throw_msg("S2IZ0033", CONCAT(
+;             '"You cannot %b )read %d the file %1b because your user-level",
+;             '" is not high enough.  For more information about your",
+;             '" user-level, issue %b )set userlevel %d ."), [fs])
+;       throw_msg("S2IZ0034", CONCAT(
+;             '"You cannot %b )read %d the file %1b because it is not",
+;             '" suitable for reading by FriCAS.  Note that files with",
+;             '" file extension %b .spad %d and %b .as %d can now only be",
+;             '" compiled with the %b )compile %d system command."), [fs])
 ;   do_read(ll, quiet, $nopiles)
 
 (DEFUN |readSpad2Cmd| (|l|)
-  (PROG (|$InteractiveMode| |fs| |downft| |ft| |ll| |fileTypes| |devFTs| |ef|
-         |fullopt| |opt| |ifthere| |quiet|)
+  (PROG (|$InteractiveMode| |fs| |ft| |ll| |fileTypes| |devFTs| |ef| |fullopt|
+         |opt| |ifthere| |quiet|)
     (DECLARE (SPECIAL |$InteractiveMode|))
     (RETURN
      (PROGN
       (SETQ |$InteractiveMode| T)
       (SETQ |quiet| NIL)
       (SETQ |ifthere| NIL)
-      ((LAMBDA (|bfVar#103| |bfVar#102|)
+      ((LAMBDA (|bfVar#100| |bfVar#99|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#103|)
-                (PROGN (SETQ |bfVar#102| (CAR |bfVar#103|)) NIL))
+           ((OR (ATOM |bfVar#100|)
+                (PROGN (SETQ |bfVar#99| (CAR |bfVar#100|)) NIL))
             (RETURN NIL))
            (#1='T
-            (AND (CONSP |bfVar#102|) (PROGN (SETQ |opt| (CAR |bfVar#102|)) #1#)
+            (AND (CONSP |bfVar#99|) (PROGN (SETQ |opt| (CAR |bfVar#99|)) #1#)
                  (PROGN
                   (SETQ |fullopt|
-                          (|selectOptionLC| |opt| '(|quiet| |test| |ifthere|)
+                          (|selectOption| |opt| '(|quiet| |test| |ifthere|)
                            '|optionError|))
                   (COND ((EQ |fullopt| '|ifthere|) (SETQ |ifthere| T))
                         ((EQ |fullopt| '|quiet|) (SETQ |quiet| T)))))))
-          (SETQ |bfVar#103| (CDR |bfVar#103|))))
+          (SETQ |bfVar#100| (CDR |bfVar#100|))))
        |$options| NIL)
       (COND
        ((AND (NULL |l|) (SETQ |ef| |$edit_file|)
@@ -5021,17 +5404,31 @@
               (COND
                ((NULL |ll|)
                 (COND (|ifthere| (RETURN NIL))
-                      (#1# (|throwKeyedMsg| 'S2IL0003 (LIST |l|))))))
+                      (#1#
+                       (|throw_msg| 'S2IL0003
+                        "The file %1b is needed but does not exist."
+                        (LIST |l|))))))
               (SETQ |ft| (|file_extention| |ll|))
-              (SETQ |downft| (DOWNCASE |ft|))
               (COND
-               ((NULL (|member| |downft| |fileTypes|))
+               ((NULL (|member| |ft| |fileTypes|))
                 (PROGN
                  (SETQ |fs| |l|)
                  (COND
-                  ((|member| |downft| |devFTs|)
-                   (|throwKeyedMsg| 'S2IZ0033 (LIST |fs|)))
-                  (#1# (|throwKeyedMsg| 'S2IZ0034 (LIST |fs|))))))
+                  ((|member| |ft| |devFTs|)
+                   (|throw_msg| 'S2IZ0033
+                    (CONCAT
+                     "You cannot %b )read %d the file %1b because your user-level"
+                     " is not high enough.  For more information about your"
+                     " user-level, issue %b )set userlevel %d .")
+                    (LIST |fs|)))
+                  (#1#
+                   (|throw_msg| 'S2IZ0034
+                    (CONCAT
+                     "You cannot %b )read %d the file %1b because it is not"
+                     " suitable for reading by FriCAS.  Note that files with"
+                     " file extension %b .spad %d and %b .as %d can now only be"
+                     " compiled with the %b )compile %d system command.")
+                    (LIST |fs|))))))
                (#1# (|do_read| |ll| |quiet| |$nopiles|))))))))))
 
 ; do_read(ll, quiet, pile_mode) ==
@@ -5090,7 +5487,7 @@
 ; show l ==
 ;   ioHook("startSysCmd", "show")
 ;   showSpad2Cmd l
-;   ioHook("endSysCmd", "show")
+;   ioHook("endOfSysCmd", "show")
 
 (DEFUN |show| (|l|)
   (PROG ()
@@ -5098,7 +5495,131 @@
      (PROGN
       (|ioHook| '|startSysCmd| '|show|)
       (|showSpad2Cmd| |l|)
-      (|ioHook| '|endSysCmd| '|show|)))))
+      (|ioHook| '|endOfSysCmd| '|show|)))))
+
+; show_record_msg() == say_msg("S2IZ0044R", CONCAT(
+;     '"Record(a:A,...,b:B) %l",
+;     '" %b Record %d takes any number of selector-domain pairs as",
+;     '" arguments: %i %l",
+;     '" a, a selector, an element of domain Symbol %l",
+;     '" A, a domain of category SetCategory %l ... %l",
+;     '" b, a selector, an element of domain Symbol %l",
+;     '" B, a domain of category SetCategory %u %l",
+;     '" This constructor is a primitive in FriCAS.",
+;     '" The selectors a,...,b of a Record type must be distinct. %l %l",
+;     '" In order for more information to be displayed about Record,",
+;     '" you must give it specific arguments. For example: %1b %l",
+;     '" You can also use the HyperDoc Browser."),
+;     ['")show Record(a: Integer, b: String)"])
+
+(DEFUN |show_record_msg| ()
+  (PROG ()
+    (RETURN
+     (|say_msg| 'S2IZ0044R
+      (CONCAT "Record(a:A,...,b:B) %l"
+              " %b Record %d takes any number of selector-domain pairs as"
+              " arguments: %i %l"
+              " a, a selector, an element of domain Symbol %l"
+              " A, a domain of category SetCategory %l ... %l"
+              " b, a selector, an element of domain Symbol %l"
+              " B, a domain of category SetCategory %u %l"
+              " This constructor is a primitive in FriCAS."
+              " The selectors a,...,b of a Record type must be distinct. %l %l"
+              " In order for more information to be displayed about Record,"
+              " you must give it specific arguments. For example: %1b %l"
+              " You can also use the HyperDoc Browser.")
+      (LIST ")show Record(a: Integer, b: String)")))))
+
+; show_mapping_msg() == say_msg("S2IZ0044M", CONCAT(
+;     '"Mapping(T, S, ...) %l",
+;     '" %b Mapping %d takes any number of arguments of the form: %i %l",
+;     '" T, a domain of category SetCategory %l",
+;     '" S, a domain of category SetCategory %l ... %u %l",
+;     '" Mapping(T, S, ...) denotes the class of objects which are",
+;     '" mappings from a source domain (S, ...) into a target domain T.",
+;     '" The Mapping constructor can take any number of arguments.",
+;     '" All but the first argument is regarded as part of a source",
+;     '" tuple for the mapping.",
+;     '" For example, Mapping(T, A, B) denotes the",
+;     '" class of mappings from (A, B) into T. %l",
+;     '" This constructor is a primitive in FriCAS.",
+;     '" For more information, use the HyperDoc Browser."), [])
+
+(DEFUN |show_mapping_msg| ()
+  (PROG ()
+    (RETURN
+     (|say_msg| 'S2IZ0044M
+      (CONCAT "Mapping(T, S, ...) %l"
+              " %b Mapping %d takes any number of arguments of the form: %i %l"
+              " T, a domain of category SetCategory %l"
+              " S, a domain of category SetCategory %l ... %u %l"
+              " Mapping(T, S, ...) denotes the class of objects which are"
+              " mappings from a source domain (S, ...) into a target domain T."
+              " The Mapping constructor can take any number of arguments."
+              " All but the first argument is regarded as part of a source"
+              " tuple for the mapping."
+              " For example, Mapping(T, A, B) denotes the"
+              " class of mappings from (A, B) into T. %l"
+              " This constructor is a primitive in FriCAS."
+              " For more information, use the HyperDoc Browser.")
+      NIL))))
+
+; show_union_msg1() == say_msg("S2IZ0045T", CONCAT(
+;     '"Tagged union: Union(a:A, ..., b:B) %l",
+;     '" %b Union %d takes any number of _"tag_"-domain pairs of arguments:",
+;     '" %i %l",
+;     '" a, a tag, an element of domain Symbol %l",
+;     '" A, a domain of category SetCategory %l ... %l",
+;     '" b, a tag, an element of domain Symbol %l",
+;     '" B, a domain of category SetCategory %u %l",
+;     '" This constructor is a primitive in FriCAS.",
+;     '" In tagged Union, tags a, ..., b must be distinct. %l %l",
+;     '" In order for more information to be displayed about Union,",
+;     '" you must give it specific arguments. For example: %1b %l",
+;     '" You can also use the HyperDoc Browser."),
+;     ['")show Union(a: Integer, b: String)"])
+
+(DEFUN |show_union_msg1| ()
+  (PROG ()
+    (RETURN
+     (|say_msg| 'S2IZ0045T
+      (CONCAT "Tagged union: Union(a:A, ..., b:B) %l"
+              " %b Union %d takes any number of \"tag\"-domain pairs of arguments:"
+              " %i %l" " a, a tag, an element of domain Symbol %l"
+              " A, a domain of category SetCategory %l ... %l"
+              " b, a tag, an element of domain Symbol %l"
+              " B, a domain of category SetCategory %u %l"
+              " This constructor is a primitive in FriCAS."
+              " In tagged Union, tags a, ..., b must be distinct. %l %l"
+              " In order for more information to be displayed about Union,"
+              " you must give it specific arguments. For example: %1b %l"
+              " You can also use the HyperDoc Browser.")
+      (LIST ")show Union(a: Integer, b: String)")))))
+
+; show_union_msg2() == say_msg("S2IZ0045U", CONCAT(
+;     '"Untagged union: Union(A, ..., B) %l",
+;     '" %b Union %d takes any number of domain arguments: %i %l",
+;     '" A, a domain of category SetCategory %l ... %l",
+;     '" B, a domain of category SetCategory %u %l",
+;     '" In untagged form of Union, domains A, ..., B must be distinct.",
+;     '" In order for more information to be displayed about Union,",
+;     '" you must give it specific arguments. For example: %1b %l",
+;     '" You can also use the HyperDoc Browser."),
+;     ['")show Union(Integer, String)"])
+
+(DEFUN |show_union_msg2| ()
+  (PROG ()
+    (RETURN
+     (|say_msg| 'S2IZ0045U
+      (CONCAT "Untagged union: Union(A, ..., B) %l"
+              " %b Union %d takes any number of domain arguments: %i %l"
+              " A, a domain of category SetCategory %l ... %l"
+              " B, a domain of category SetCategory %u %l"
+              " In untagged form of Union, domains A, ..., B must be distinct."
+              " In order for more information to be displayed about Union,"
+              " you must give it specific arguments. For example: %1b %l"
+              " You can also use the HyperDoc Browser.")
+      (LIST ")show Union(Integer, String)")))))
 
 ; showSpad2Cmd l ==
 ;   l = [NIL] => helpSpad2Cmd '(show)
@@ -5108,14 +5629,12 @@
 ;   $env : local := $InteractiveFrame
 ;   l is [constr] =>
 ;     constr in '(Union Record Mapping) =>
-;       constr = 'Record =>
-;         sayKeyedMsg("S2IZ0044R",[constr, '")show Record(a: Integer, b: String)"])
-;       constr = 'Mapping =>
-;         sayKeyedMsg("S2IZ0044M",NIL)
-;       sayKeyedMsg("S2IZ0045T",[constr, '")show Union(a: Integer, b: String)"])
-;       sayKeyedMsg("S2IZ0045U",[constr, '")show Union(Integer, String)"])
+;             constr = 'Record => show_record_msg()
+;             constr = 'Mapping => show_mapping_msg()
+;             show_union_msg1()
+;             show_union_msg2()
 ;     constr is ['Mapping, :.] =>
-;       sayKeyedMsg("S2IZ0044M",NIL)
+;             show_mapping_msg()
 ;     reportOperations(constr,constr)
 ;   reportOperations(l,l)
 
@@ -5135,21 +5654,28 @@
                     (PROGN (SETQ |constr| (CAR |l|)) #1#))
                (COND
                 ((|member| |constr| '(|Union| |Record| |Mapping|))
-                 (COND
-                  ((EQ |constr| '|Record|)
-                   (|sayKeyedMsg| 'S2IZ0044R
-                    (LIST |constr| ")show Record(a: Integer, b: String)")))
-                  ((EQ |constr| '|Mapping|) (|sayKeyedMsg| 'S2IZ0044M NIL))
-                  (#1#
-                   (PROGN
-                    (|sayKeyedMsg| 'S2IZ0045T
-                     (LIST |constr| ")show Union(a: Integer, b: String)"))
-                    (|sayKeyedMsg| 'S2IZ0045U
-                     (LIST |constr| ")show Union(Integer, String)"))))))
+                 (COND ((EQ |constr| '|Record|) (|show_record_msg|))
+                       ((EQ |constr| '|Mapping|) (|show_mapping_msg|))
+                       (#1# (PROGN (|show_union_msg1|) (|show_union_msg2|)))))
                 ((AND (CONSP |constr|) (EQ (CAR |constr|) '|Mapping|))
-                 (|sayKeyedMsg| 'S2IZ0044M NIL))
+                 (|show_mapping_msg|))
                 (#1# (|reportOperations| |constr| |constr|))))
               (#1# (|reportOperations| |l| |l|)))))))))
+
+; say_about_say() == say_msg("S2IZ0063", CONCAT(
+;     '"The %b )show %d system command is used to display information about",
+;     '" types or partial types.  For example, %b )show Integer %d will show",
+;     '" information about %b Integer %d ."), [])
+
+(DEFUN |say_about_say| ()
+  (PROG ()
+    (RETURN
+     (|say_msg| 'S2IZ0063
+      (CONCAT
+       "The %b )show %d system command is used to display information about"
+       " types or partial types.  For example, %b )show Integer %d will show"
+       " information about %b Integer %d .")
+      NIL))))
 
 ; reportOperations(oldArg,u) ==
 ;   -- u might be an uppercased version of oldArg
@@ -5159,23 +5685,32 @@
 ;   $resolve_level : local := 15
 ;   null u => nil
 ;   u = "%" =>
-;     sayKeyedMsg("S2IZ0063",NIL)
-;     sayKeyedMsg("S2IZ0064",NIL)
+;         say_about_say()
+;         say_msg("S2IZ0064", CONCAT(
+;             '"%l %b %% %d is a special variable holding the result of",
+;             '" the last computation. Issue %b )display properties %% %d",
+;             '" to see this value."), [])
 ;   u isnt ['Record,:.] and u isnt ['Union,:.] and
 ;     null(isNameOfType u) and u isnt ['typeOf,.] =>
 ;       if ATOM oldArg then oldArg := [oldArg]
-;       sayKeyedMsg("S2IZ0063",NIL)
+;       say_about_say()
 ;       for op in oldArg repeat
-;         sayKeyedMsg("S2IZ0062",[opOf op])
+;                 say_msg("S2IZ0062", CONCAT(
+;                     '"%l %1b is not the name of a known type constructor.",
+;                     '" If you want to see information about any operations",
+;                     '" named %1b, issue %ceon %b )display operations %1 %d",
+;                     '" %ceoff"), [opOf op])
 ;   (v := isDomainValuedVariable u) =>  reportOpsFromUnitDirectly0 v
 ;   unitForm:=
 ;     atom u => opOf unabbrev u
 ;     unabbrev u
 ;   atom unitForm => reportOpsFromLisplib0(unitForm,u)
 ;   unitForm' := evaluateType unitForm
-;   tree := mkAtree removeZeroOneDestructively unitForm
+;   tree := mkAtree(removeZeroOne(unitForm))
 ;   (unitForm' := isType tree) => reportOpsFromUnitDirectly0 unitForm'
-;   sayKeyedMsg("S2IZ0041",[unitForm])
+;   say_msg("S2IZ0041", CONCAT(
+;         '"It is not known what %1bp is, so no information about it can",
+;         '" be displayed."), [unitForm])
 
 (DEFUN |reportOperations| (|oldArg| |u|)
   (PROG (|$resolve_level| |$genValue| |$eval| |$env| |tree| |unitForm'|
@@ -5190,8 +5725,13 @@
       (COND ((NULL |u|) NIL)
             ((EQ |u| '%)
              (PROGN
-              (|sayKeyedMsg| 'S2IZ0063 NIL)
-              (|sayKeyedMsg| 'S2IZ0064 NIL)))
+              (|say_about_say|)
+              (|say_msg| 'S2IZ0064
+               (CONCAT
+                "%l %b %% %d is a special variable holding the result of"
+                " the last computation. Issue %b )display properties %% %d"
+                " to see this value.")
+               NIL)))
             ((AND (NOT (AND (CONSP |u|) (EQ (CAR |u|) '|Record|)))
                   (NOT (AND (CONSP |u|) (EQ (CAR |u|) '|Union|)))
                   (NULL (|isNameOfType| |u|))
@@ -5202,15 +5742,22 @@
                          (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL))))))
              (PROGN
               (COND ((ATOM |oldArg|) (SETQ |oldArg| (LIST |oldArg|))))
-              (|sayKeyedMsg| 'S2IZ0063 NIL)
-              ((LAMBDA (|bfVar#104| |op|)
+              (|say_about_say|)
+              ((LAMBDA (|bfVar#101| |op|)
                  (LOOP
                   (COND
-                   ((OR (ATOM |bfVar#104|)
-                        (PROGN (SETQ |op| (CAR |bfVar#104|)) NIL))
+                   ((OR (ATOM |bfVar#101|)
+                        (PROGN (SETQ |op| (CAR |bfVar#101|)) NIL))
                     (RETURN NIL))
-                   (#1='T (|sayKeyedMsg| 'S2IZ0062 (LIST (|opOf| |op|)))))
-                  (SETQ |bfVar#104| (CDR |bfVar#104|))))
+                   (#1='T
+                    (|say_msg| 'S2IZ0062
+                     (CONCAT
+                      "%l %1b is not the name of a known type constructor."
+                      " If you want to see information about any operations"
+                      " named %1b, issue %ceon %b )display operations %1 %d"
+                      " %ceoff")
+                     (LIST (|opOf| |op|)))))
+                  (SETQ |bfVar#101| (CDR |bfVar#101|))))
                |oldArg| NIL)))
             ((SETQ |v| (|isDomainValuedVariable| |u|))
              (|reportOpsFromUnitDirectly0| |v|))
@@ -5224,12 +5771,16 @@
                (#1#
                 (PROGN
                  (SETQ |unitForm'| (|evaluateType| |unitForm|))
-                 (SETQ |tree|
-                         (|mkAtree| (|removeZeroOneDestructively| |unitForm|)))
+                 (SETQ |tree| (|mkAtree| (|removeZeroOne| |unitForm|)))
                  (COND
                   ((SETQ |unitForm'| (|isType| |tree|))
                    (|reportOpsFromUnitDirectly0| |unitForm'|))
-                  (#1# (|sayKeyedMsg| 'S2IZ0041 (LIST |unitForm|))))))))))))))
+                  (#1#
+                   (|say_msg| 'S2IZ0041
+                    (CONCAT
+                     "It is not known what %1bp is, so no information about it can"
+                     " be displayed.")
+                    (LIST |unitForm|))))))))))))))
 
 ; reportOpsFromUnitDirectly0 D ==
 ;   $useEditorForShowOutput =>
@@ -5248,7 +5799,7 @@
 ;   $sayBrightlyStream : fluid := MAKE_OUTSTREAM(showFile)
 ;   sayShowWarning()
 ;   reportOpsFromUnitDirectly D
-;   SHUT $sayBrightlyStream
+;   CLOSE($sayBrightlyStream)
 ;   editFile showFile
 ;   delete_file(showFile)
 
@@ -5262,7 +5813,7 @@
       (SETQ |$sayBrightlyStream| (MAKE_OUTSTREAM |showFile|))
       (|sayShowWarning|)
       (|reportOpsFromUnitDirectly| D)
-      (SHUT |$sayBrightlyStream|)
+      (CLOSE |$sayBrightlyStream|)
       (|editFile| |showFile|)
       (|delete_file| |showFile|)))))
 
@@ -5303,7 +5854,7 @@
 ;   $sayBrightlyStream : fluid := MAKE_OUTSTREAM(showFile)
 ;   sayShowWarning()
 ;   reportOpsFromLisplib(unitForm,u)
-;   SHUT $sayBrightlyStream
+;   CLOSE($sayBrightlyStream)
 ;   editFile showFile
 ;   delete_file(showFile)
 
@@ -5318,55 +5869,94 @@
       (SETQ |$sayBrightlyStream| (MAKE_OUTSTREAM |showFile|))
       (|sayShowWarning|)
       (|reportOpsFromLisplib| |unitForm| |u|)
-      (SHUT |$sayBrightlyStream|)
+      (CLOSE |$sayBrightlyStream|)
       (|editFile| |showFile|)
       (|delete_file| |showFile|)))))
+
+; $get_operations_fun := [0, nil]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$get_operations_fun| (LIST 0 NIL)))
+
+; $Sig_doc_rec_SE := ['Record, [":", 'signature, ['SExpression]],
+;                              [":", 'condition, ['SExpression]],
+;                              [":", 'origin, ['SExpression]],
+;                              [":", 'documentation, ['String]]]
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$Sig_doc_rec_SE|
+          (LIST '|Record| (LIST '|:| '|signature| (LIST '|SExpression|))
+                (LIST '|:| '|condition| (LIST '|SExpression|))
+                (LIST '|:| '|origin| (LIST '|SExpression|))
+                (LIST '|:| '|documentation| (LIST '|String|)))))
+
+; get_operations(con, dom) ==
+;     fun := SpadFun($get_operations_fun,
+;              getFunctionFromDomain1("operations", '(BrowserInformation),
+;                 ['List, ['Record, [":", 'name, ['Symbol]],
+;                             [":", 'sdl, ['List, $Sig_doc_rec_SE]]]],
+;                 '((SExpression) (SExpression))))
+;     SPADCALL(con, dom, fun)
+
+(DEFUN |get_operations| (|con| |dom|)
+  (PROG (|fun|)
+    (RETURN
+     (PROGN
+      (SETQ |fun|
+              (|SpadFun| |$get_operations_fun|
+               (|getFunctionFromDomain1| '|operations| '(|BrowserInformation|)
+                (LIST '|List|
+                      (LIST '|Record| (LIST '|:| '|name| (LIST '|Symbol|))
+                            (LIST '|:| '|sdl|
+                                  (LIST '|List| |$Sig_doc_rec_SE|))))
+                '((|SExpression|) (|SExpression|)))))
+      (SPADCALL |con| |dom| |fun|)))))
 
 ; get_op_alist(form) ==
 ;     conname := first(form)
 ;     conform := getConstructorForm(conname)
-;     ops := koOps(conform, form)
+;     opl := get_operations(conform, form)
 ;     res := []
-;     for op in ops repeat
-;         [name, :sigs] := op
-;         for sigm in sigs repeat
-;             [sig, cond] := sigm
+;     for opr in opl repeat
+;         [name, :sds] := opr
+;         for sd in sds repeat
+;             sig := sd.0
+;             cond := sd.1
 ;             res := cons([[name, sig], cond], res)
 ;     NREVERSE(res)
 
 (DEFUN |get_op_alist| (|form|)
-  (PROG (|conname| |conform| |ops| |res| |name| |sigs| |sig| |cond|)
+  (PROG (|conname| |conform| |opl| |res| |name| |sds| |sig| |cond|)
     (RETURN
      (PROGN
       (SETQ |conname| (CAR |form|))
       (SETQ |conform| (|getConstructorForm| |conname|))
-      (SETQ |ops| (|koOps| |conform| |form|))
+      (SETQ |opl| (|get_operations| |conform| |form|))
       (SETQ |res| NIL)
-      ((LAMBDA (|bfVar#105| |op|)
+      ((LAMBDA (|bfVar#102| |opr|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#105|) (PROGN (SETQ |op| (CAR |bfVar#105|)) NIL))
+           ((OR (ATOM |bfVar#102|) (PROGN (SETQ |opr| (CAR |bfVar#102|)) NIL))
             (RETURN NIL))
            (#1='T
             (PROGN
-             (SETQ |name| (CAR |op|))
-             (SETQ |sigs| (CDR |op|))
-             ((LAMBDA (|bfVar#106| |sigm|)
+             (SETQ |name| (CAR |opr|))
+             (SETQ |sds| (CDR |opr|))
+             ((LAMBDA (|bfVar#103| |sd|)
                 (LOOP
                  (COND
-                  ((OR (ATOM |bfVar#106|)
-                       (PROGN (SETQ |sigm| (CAR |bfVar#106|)) NIL))
+                  ((OR (ATOM |bfVar#103|)
+                       (PROGN (SETQ |sd| (CAR |bfVar#103|)) NIL))
                    (RETURN NIL))
                   (#1#
                    (PROGN
-                    (SETQ |sig| (CAR |sigm|))
-                    (SETQ |cond| (CADR |sigm|))
+                    (SETQ |sig| (ELT |sd| 0))
+                    (SETQ |cond| (ELT |sd| 1))
                     (SETQ |res|
                             (CONS (LIST (LIST |name| |sig|) |cond|) |res|)))))
-                 (SETQ |bfVar#106| (CDR |bfVar#106|))))
-              |sigs| NIL))))
-          (SETQ |bfVar#105| (CDR |bfVar#105|))))
-       |ops| NIL)
+                 (SETQ |bfVar#103| (CDR |bfVar#103|))))
+              |sds| NIL))))
+          (SETQ |bfVar#102| (CDR |bfVar#102|))))
+       |opl| NIL)
       (NREVERSE |res|)))))
 
 ; reportOpsFromUnitDirectly unitForm ==
@@ -5387,18 +5977,15 @@
 ;       '"exposed in this frame."]
 ;
 ;   for [opt] in $options repeat
-;       opt := selectOptionLC(opt, $showOptions, 'optionError)
+;       opt := selectOption(opt, $showOptions, 'optionError)
 ;       not(opt = 'operations) => "iterate"
 ;       if isRecordOrUnion then
 ;           constructorFunction := get_oplist_maker(top) or
 ;             systemErrorHere '"reportOpsFromUnitDirectly"
-;           [funlist, .] := FUNCALL(constructorFunction, "%", unitForm,
-;                                   $CategoryFrame)
+;           funlist := FUNCALL(constructorFunction, "%", unitForm)
 ;           sigList := [[[a, b], true] for [a, b, c] in funlist]
 ;       else
 ;           sigList := get_op_alist(unitForm)
-;
-;       sigList := REMDUP(MSORT(sigList))
 ;
 ;       ops := nil
 ;
@@ -5415,8 +6002,8 @@
 
 (DEFUN |reportOpsFromUnitDirectly| (|unitForm|)
   (PROG (|a| |isRecordOrUnion| |unit| |top| |argl| |kind| |abb| |verb| |opt|
-         |constructorFunction| |LETTMP#1| |funlist| |ISTMP#1| |b| |ISTMP#2| |c|
-         |sigList| |ops| |numOfNames|)
+         |constructorFunction| |funlist| |ISTMP#1| |b| |ISTMP#2| |c| |sigList|
+         |ops| |numOfNames|)
     (RETURN
      (PROGN
       (SETQ |isRecordOrUnion|
@@ -5441,19 +6028,18 @@
          (CONS " This constructor"
                (APPEND (|bright| |verb|)
                        (CONS "exposed in this frame." NIL))))))
-      ((LAMBDA (|bfVar#108| |bfVar#107|)
+      ((LAMBDA (|bfVar#105| |bfVar#104|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#108|)
-                (PROGN (SETQ |bfVar#107| (CAR |bfVar#108|)) NIL))
+           ((OR (ATOM |bfVar#105|)
+                (PROGN (SETQ |bfVar#104| (CAR |bfVar#105|)) NIL))
             (RETURN NIL))
            (#1#
-            (AND (CONSP |bfVar#107|) (EQ (CDR |bfVar#107|) NIL)
-                 (PROGN (SETQ |opt| (CAR |bfVar#107|)) #1#)
+            (AND (CONSP |bfVar#104|) (EQ (CDR |bfVar#104|) NIL)
+                 (PROGN (SETQ |opt| (CAR |bfVar#104|)) #1#)
                  (PROGN
                   (SETQ |opt|
-                          (|selectOptionLC| |opt| |$showOptions|
-                           '|optionError|))
+                          (|selectOption| |opt| |$showOptions| '|optionError|))
                   (COND ((NULL (EQ |opt| '|operations|)) '|iterate|)
                         (#1#
                          (PROGN
@@ -5463,27 +6049,26 @@
                                     (OR (|get_oplist_maker| |top|)
                                         (|systemErrorHere|
                                          "reportOpsFromUnitDirectly")))
-                            (SETQ |LETTMP#1|
+                            (SETQ |funlist|
                                     (FUNCALL |constructorFunction| '%
-                                             |unitForm| |$CategoryFrame|))
-                            (SETQ |funlist| (CAR |LETTMP#1|))
+                                             |unitForm|))
                             (SETQ |sigList|
                                     ((LAMBDA
-                                         (|bfVar#111| |bfVar#110| |bfVar#109|)
+                                         (|bfVar#108| |bfVar#107| |bfVar#106|)
                                        (LOOP
                                         (COND
-                                         ((OR (ATOM |bfVar#110|)
+                                         ((OR (ATOM |bfVar#107|)
                                               (PROGN
-                                               (SETQ |bfVar#109|
-                                                       (CAR |bfVar#110|))
+                                               (SETQ |bfVar#106|
+                                                       (CAR |bfVar#107|))
                                                NIL))
-                                          (RETURN (NREVERSE |bfVar#111|)))
+                                          (RETURN (NREVERSE |bfVar#108|)))
                                          (#1#
-                                          (AND (CONSP |bfVar#109|)
+                                          (AND (CONSP |bfVar#106|)
                                                (PROGN
-                                                (SETQ |a| (CAR |bfVar#109|))
+                                                (SETQ |a| (CAR |bfVar#106|))
                                                 (SETQ |ISTMP#1|
-                                                        (CDR |bfVar#109|))
+                                                        (CDR |bfVar#106|))
                                                 (AND (CONSP |ISTMP#1|)
                                                      (PROGN
                                                       (SETQ |b|
@@ -5498,63 +6083,63 @@
                                                                     (CAR
                                                                      |ISTMP#2|))
                                                             #1#)))))
-                                               (SETQ |bfVar#111|
+                                               (SETQ |bfVar#108|
                                                        (CONS
                                                         (LIST (LIST |a| |b|) T)
-                                                        |bfVar#111|)))))
-                                        (SETQ |bfVar#110| (CDR |bfVar#110|))))
+                                                        |bfVar#108|)))))
+                                        (SETQ |bfVar#107| (CDR |bfVar#107|))))
                                      NIL |funlist| NIL)))
                            (#1# (SETQ |sigList| (|get_op_alist| |unitForm|))))
-                          (SETQ |sigList| (REMDUP (MSORT |sigList|)))
                           (SETQ |ops| NIL)
                           (SETQ |numOfNames|
                                   (LENGTH
                                    (REMDUP
-                                    ((LAMBDA (|bfVar#113| |bfVar#112| |x|)
+                                    ((LAMBDA (|bfVar#110| |bfVar#109| |x|)
                                        (LOOP
                                         (COND
-                                         ((OR (ATOM |bfVar#112|)
+                                         ((OR (ATOM |bfVar#109|)
                                               (PROGN
-                                               (SETQ |x| (CAR |bfVar#112|))
+                                               (SETQ |x| (CAR |bfVar#109|))
                                                NIL))
-                                          (RETURN (NREVERSE |bfVar#113|)))
+                                          (RETURN (NREVERSE |bfVar#110|)))
                                          (#1#
-                                          (SETQ |bfVar#113|
+                                          (SETQ |bfVar#110|
                                                   (CONS (CAR (CAR |x|))
-                                                        |bfVar#113|))))
-                                        (SETQ |bfVar#112| (CDR |bfVar#112|))))
+                                                        |bfVar#110|))))
+                                        (SETQ |bfVar#109| (CDR |bfVar#109|))))
                                      NIL |sigList| NIL))))
                           (|sayBrightly|
                            (LIST " " |numOfNames| " names for "
                                  (LENGTH |sigList|) " operations in this "
                                  (PNAME |kind|) '|.|))
                           (SETQ |ops|
-                                  ((LAMBDA (|bfVar#115| |bfVar#114| |x|)
+                                  ((LAMBDA (|bfVar#112| |bfVar#111| |x|)
                                      (LOOP
                                       (COND
-                                       ((OR (ATOM |bfVar#114|)
+                                       ((OR (ATOM |bfVar#111|)
                                             (PROGN
-                                             (SETQ |x| (CAR |bfVar#114|))
+                                             (SETQ |x| (CAR |bfVar#111|))
                                              NIL))
-                                        (RETURN (NREVERSE |bfVar#115|)))
+                                        (RETURN (NREVERSE |bfVar#112|)))
                                        (#1#
-                                        (SETQ |bfVar#115|
+                                        (SETQ |bfVar#112|
                                                 (CONS
                                                  (|formatOperationWithPred|
                                                   |x|)
-                                                 |bfVar#115|))))
-                                      (SETQ |bfVar#114| (CDR |bfVar#114|))))
+                                                 |bfVar#112|))))
+                                      (SETQ |bfVar#111| (CDR |bfVar#111|))))
                                    NIL |sigList| NIL))
                           (|centerAndHighlight| "Operations" $LINELENGTH
                            (|specialChar| '|hbar|))
                           (|sayBrightly| "")
                           (|say2PerLine| |ops|))))))))
-          (SETQ |bfVar#108| (CDR |bfVar#108|))))
+          (SETQ |bfVar#105| (CDR |bfVar#105|))))
        |$options| NIL)
       NIL))))
 
 ; reportOpsFromLisplib(op,u) ==
-;   null(fn:= constructor? op) => sayKeyedMsg("S2IZ0054",[u])
+;   null(fn := constructor?(op)) => say_msg("S2IZ0054",
+;         '"%1b is unknown to us, so no information is available.", [u])
 ;   argml :=
 ;     (s := getConstructorSignature op) => IFCDR s
 ;     NIL
@@ -5576,7 +6161,7 @@
 ;     '"exposed in this frame."]
 ;
 ;   for [opt] in $options repeat
-;     opt := selectOptionLC(opt,$showOptions,'optionError)
+;     opt := selectOption(opt, $showOptions, 'optionError)
 ;     opt = 'operations => displayOperationsFromLisplib functorForm
 ;     nil
 
@@ -5586,7 +6171,8 @@
     (RETURN
      (COND
       ((NULL (SETQ |fn| (|constructor?| |op|)))
-       (|sayKeyedMsg| 'S2IZ0054 (LIST |u|)))
+       (|say_msg| 'S2IZ0054
+        "%1b is unknown to us, so no information is available." (LIST |u|)))
       (#1='T
        (PROGN
         (SETQ |argml|
@@ -5606,20 +6192,20 @@
                    (EQSUBSTLIST |argList| |$FormalMapVariableList| |argml|))
            (SETQ |functorFormWithDecl|
                    (CONS |op|
-                         ((LAMBDA (|bfVar#118| |bfVar#116| |a| |bfVar#117| |m|)
+                         ((LAMBDA (|bfVar#115| |bfVar#113| |a| |bfVar#114| |m|)
                             (LOOP
                              (COND
-                              ((OR (ATOM |bfVar#116|)
-                                   (PROGN (SETQ |a| (CAR |bfVar#116|)) NIL)
-                                   (ATOM |bfVar#117|)
-                                   (PROGN (SETQ |m| (CAR |bfVar#117|)) NIL))
-                               (RETURN (NREVERSE |bfVar#118|)))
+                              ((OR (ATOM |bfVar#113|)
+                                   (PROGN (SETQ |a| (CAR |bfVar#113|)) NIL)
+                                   (ATOM |bfVar#114|)
+                                   (PROGN (SETQ |m| (CAR |bfVar#114|)) NIL))
+                               (RETURN (NREVERSE |bfVar#115|)))
                               (#1#
-                               (SETQ |bfVar#118|
+                               (SETQ |bfVar#115|
                                        (CONS (LIST '|:| |a| |m|)
-                                             |bfVar#118|))))
-                             (SETQ |bfVar#116| (CDR |bfVar#116|))
-                             (SETQ |bfVar#117| (CDR |bfVar#117|))))
+                                             |bfVar#115|))))
+                             (SETQ |bfVar#113| (CDR |bfVar#113|))
+                             (SETQ |bfVar#114| (CDR |bfVar#114|))))
                           NIL |argList| NIL |argml| NIL)))
            (|sayBrightly|
             (|concat| (|bright| (|form2StringWithWhere| |functorFormWithDecl|))
@@ -5633,24 +6219,24 @@
             (CONS " This constructor"
                   (APPEND (|bright| |verb|)
                           (CONS "exposed in this frame." NIL))))
-           ((LAMBDA (|bfVar#120| |bfVar#119|)
+           ((LAMBDA (|bfVar#117| |bfVar#116|)
               (LOOP
                (COND
-                ((OR (ATOM |bfVar#120|)
-                     (PROGN (SETQ |bfVar#119| (CAR |bfVar#120|)) NIL))
+                ((OR (ATOM |bfVar#117|)
+                     (PROGN (SETQ |bfVar#116| (CAR |bfVar#117|)) NIL))
                  (RETURN NIL))
                 (#1#
-                 (AND (CONSP |bfVar#119|) (EQ (CDR |bfVar#119|) NIL)
-                      (PROGN (SETQ |opt| (CAR |bfVar#119|)) #1#)
+                 (AND (CONSP |bfVar#116|) (EQ (CDR |bfVar#116|) NIL)
+                      (PROGN (SETQ |opt| (CAR |bfVar#116|)) #1#)
                       (PROGN
                        (SETQ |opt|
-                               (|selectOptionLC| |opt| |$showOptions|
+                               (|selectOption| |opt| |$showOptions|
                                 '|optionError|))
                        (COND
                         ((EQ |opt| '|operations|)
                          (|displayOperationsFromLisplib| |functorForm|))
                         (#1# NIL))))))
-               (SETQ |bfVar#120| (CDR |bfVar#120|))))
+               (SETQ |bfVar#117| (CDR |bfVar#117|))))
             |$options| NIL))))))))))
 
 ; displayOperationsFromLisplib form ==
@@ -5684,16 +6270,16 @@
                         (EQSUBSTLIST |argl| |$FormalMapVariableList|
                          |opList|))))
               (SETQ |ops| NIL)
-              ((LAMBDA (|bfVar#121| |x|)
+              ((LAMBDA (|bfVar#118| |x|)
                  (LOOP
                   (COND
-                   ((OR (ATOM |bfVar#121|)
-                        (PROGN (SETQ |x| (CAR |bfVar#121|)) NIL))
+                   ((OR (ATOM |bfVar#118|)
+                        (PROGN (SETQ |x| (CAR |bfVar#118|)) NIL))
                     (RETURN NIL))
                    (#1#
                     (SETQ |ops|
                             (APPEND |ops| (|formatOperationAlistEntry| |x|)))))
-                  (SETQ |bfVar#121| (CDR |bfVar#121|))))
+                  (SETQ |bfVar#118| (CDR |bfVar#118|))))
                |opl| NIL)
               (|say2PerLine| |ops|)
               NIL)))))))
@@ -5729,7 +6315,7 @@
 
 ; processSynonymLine line ==
 ;   line := STRING_-LEFT_-TRIM('" ", line)
-;   key := STRING2ID_N (line, 1)
+;   key := first_symbol(line)
 ;   value := SUBSTRING(line, # STRINGIMAGE key, nil)
 ;   value := STRING_-LEFT_-TRIM('" ", value)
 ;   [key, :value]
@@ -5739,7 +6325,7 @@
     (RETURN
      (PROGN
       (SETQ |line| (STRING-LEFT-TRIM " " |line|))
-      (SETQ |key| (STRING2ID_N |line| 1))
+      (SETQ |key| (|first_symbol| |line|))
       (SETQ |value| (SUBSTRING |line| (LENGTH (STRINGIMAGE |key|)) NIL))
       (SETQ |value| (STRING-LEFT-TRIM " " |value|))
       (CONS |key| |value|)))))
@@ -5821,38 +6407,38 @@
                      (#1# (SETQ |delta| (CONS '|systemCommand| |delta|))))))
              (SETQ |$frameRecord| (CONS |delta| |$frameRecord|))
              (SETQ |$previousBindings|
-                     ((LAMBDA (|bfVar#125| |bfVar#124| |x|)
+                     ((LAMBDA (|bfVar#122| |bfVar#121| |x|)
                         (LOOP
                          (COND
-                          ((OR (ATOM |bfVar#124|)
-                               (PROGN (SETQ |x| (CAR |bfVar#124|)) NIL))
-                           (RETURN (NREVERSE |bfVar#125|)))
+                          ((OR (ATOM |bfVar#121|)
+                               (PROGN (SETQ |x| (CAR |bfVar#121|)) NIL))
+                           (RETURN (NREVERSE |bfVar#122|)))
                           (#1#
-                           (SETQ |bfVar#125|
+                           (SETQ |bfVar#122|
                                    (CONS
                                     (CONS (CAR |x|)
                                           ((LAMBDA
-                                               (|bfVar#123| |bfVar#122| |y|)
+                                               (|bfVar#120| |bfVar#119| |y|)
                                              (LOOP
                                               (COND
-                                               ((OR (ATOM |bfVar#122|)
+                                               ((OR (ATOM |bfVar#119|)
                                                     (PROGN
                                                      (SETQ |y|
-                                                             (CAR |bfVar#122|))
+                                                             (CAR |bfVar#119|))
                                                      NIL))
                                                 (RETURN
-                                                 (NREVERSE |bfVar#123|)))
+                                                 (NREVERSE |bfVar#120|)))
                                                (#1#
-                                                (SETQ |bfVar#123|
+                                                (SETQ |bfVar#120|
                                                         (CONS
                                                          (CONS (CAR |y|)
                                                                (CDR |y|))
-                                                         |bfVar#123|))))
-                                              (SETQ |bfVar#122|
-                                                      (CDR |bfVar#122|))))
+                                                         |bfVar#120|))))
+                                              (SETQ |bfVar#119|
+                                                      (CDR |bfVar#119|))))
                                            NIL (CDR |x|) NIL))
-                                    |bfVar#125|))))
-                         (SETQ |bfVar#124| (CDR |bfVar#124|))))
+                                    |bfVar#122|))))
+                         (SETQ |bfVar#121| (CDR |bfVar#121|))))
                       NIL (CAAR |$InteractiveFrame|) NIL))
              (CAR |$frameRecord|)))))))
 
@@ -5896,10 +6482,10 @@
          |oldPropval| |r| |res|)
     (RETURN
      (PROGN
-      ((LAMBDA (|bfVar#126| |pair|)
+      ((LAMBDA (|bfVar#123| |pair|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#126|) (PROGN (SETQ |pair| (CAR |bfVar#126|)) NIL))
+           ((OR (ATOM |bfVar#123|) (PROGN (SETQ |pair| (CAR |bfVar#123|)) NIL))
             (RETURN NIL))
            (#1='T
             (AND (CONSP |pair|)
@@ -5915,34 +6501,34 @@
                              (CONS
                               (CONS |name|
                                     ((LAMBDA
-                                         (|bfVar#129| |bfVar#128| |bfVar#127|)
+                                         (|bfVar#126| |bfVar#125| |bfVar#124|)
                                        (LOOP
                                         (COND
-                                         ((OR (ATOM |bfVar#128|)
+                                         ((OR (ATOM |bfVar#125|)
                                               (PROGN
-                                               (SETQ |bfVar#127|
-                                                       (CAR |bfVar#128|))
+                                               (SETQ |bfVar#124|
+                                                       (CAR |bfVar#125|))
                                                NIL))
-                                          (RETURN (NREVERSE |bfVar#129|)))
+                                          (RETURN (NREVERSE |bfVar#126|)))
                                          (#1#
-                                          (AND (CONSP |bfVar#127|)
+                                          (AND (CONSP |bfVar#124|)
                                                (PROGN
-                                                (SETQ |prop| (CAR |bfVar#127|))
+                                                (SETQ |prop| (CAR |bfVar#124|))
                                                 #1#)
-                                               (SETQ |bfVar#129|
+                                               (SETQ |bfVar#126|
                                                        (CONS (LIST |prop|)
-                                                             |bfVar#129|)))))
-                                        (SETQ |bfVar#128| (CDR |bfVar#128|))))
+                                                             |bfVar#126|)))))
+                                        (SETQ |bfVar#125| (CDR |bfVar#125|))))
                                      NIL |proplist| NIL))
                               |acc|)))
                     (#1#
                      (PROGN
                       (SETQ |deltas| NIL)
-                      ((LAMBDA (|bfVar#130| |propval|)
+                      ((LAMBDA (|bfVar#127| |propval|)
                          (LOOP
                           (COND
-                           ((OR (ATOM |bfVar#130|)
-                                (PROGN (SETQ |propval| (CAR |bfVar#130|)) NIL))
+                           ((OR (ATOM |bfVar#127|)
+                                (PROGN (SETQ |propval| (CAR |bfVar#127|)) NIL))
                             (RETURN NIL))
                            (#1#
                             (AND (CONSP |propval|)
@@ -5960,7 +6546,7 @@
                                   (#1#
                                    (SETQ |deltas|
                                            (CONS |oldPropval| |deltas|)))))))
-                          (SETQ |bfVar#130| (CDR |bfVar#130|))))
+                          (SETQ |bfVar#127| (CDR |bfVar#127|))))
                        |proplist| NIL)
                       (COND
                        (|deltas|
@@ -5972,33 +6558,33 @@
                            (CONS
                             (CONS |name|
                                   ((LAMBDA
-                                       (|bfVar#133| |bfVar#132| |bfVar#131|)
+                                       (|bfVar#130| |bfVar#129| |bfVar#128|)
                                      (LOOP
                                       (COND
-                                       ((OR (ATOM |bfVar#132|)
+                                       ((OR (ATOM |bfVar#129|)
                                             (PROGN
-                                             (SETQ |bfVar#131|
-                                                     (CAR |bfVar#132|))
+                                             (SETQ |bfVar#128|
+                                                     (CAR |bfVar#129|))
                                              NIL))
-                                        (RETURN (NREVERSE |bfVar#133|)))
+                                        (RETURN (NREVERSE |bfVar#130|)))
                                        (#1#
-                                        (AND (CONSP |bfVar#131|)
+                                        (AND (CONSP |bfVar#128|)
                                              (PROGN
-                                              (SETQ |prop| (CAR |bfVar#131|))
+                                              (SETQ |prop| (CAR |bfVar#128|))
                                               #1#)
-                                             (SETQ |bfVar#133|
+                                             (SETQ |bfVar#130|
                                                      (CONS (LIST |prop|)
-                                                           |bfVar#133|)))))
-                                      (SETQ |bfVar#132| (CDR |bfVar#132|))))
+                                                           |bfVar#130|)))))
+                                      (SETQ |bfVar#129| (CDR |bfVar#129|))))
                                    NIL |proplist| NIL))
                             |acc|)))))))
-          (SETQ |bfVar#126| (CDR |bfVar#126|))))
+          (SETQ |bfVar#123| (CDR |bfVar#123|))))
        |new| NIL)
-      ((LAMBDA (|bfVar#134| |oldPair|)
+      ((LAMBDA (|bfVar#131| |oldPair|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#134|)
-                (PROGN (SETQ |oldPair| (CAR |bfVar#134|)) NIL))
+           ((OR (ATOM |bfVar#131|)
+                (PROGN (SETQ |oldPair| (CAR |bfVar#131|)) NIL))
             (RETURN NIL))
            (#1#
             (AND (CONSP |oldPair|)
@@ -6009,7 +6595,7 @@
                  (COND
                   ((AND |r| (NULL (QLASSQ |name| |new|)))
                    (IDENTITY (SETQ |acc| (CONS |oldPair| |acc|))))))))
-          (SETQ |bfVar#134| (CDR |bfVar#134|))))
+          (SETQ |bfVar#131| (CDR |bfVar#131|))))
        |old| NIL)
       (SETQ |res| (NREVERSE |acc|))
       (COND ((AND (BOUNDP '|$reportUndo|) |$reportUndo|) (|reportUndo| |res|)))
@@ -6028,43 +6614,43 @@
 (DEFUN |reportUndo| (|acc|)
   (PROG (|name| |proplist| |curproplist| |prop| |value|)
     (RETURN
-     ((LAMBDA (|bfVar#136| |bfVar#135|)
+     ((LAMBDA (|bfVar#133| |bfVar#132|)
         (LOOP
          (COND
-          ((OR (ATOM |bfVar#136|)
-               (PROGN (SETQ |bfVar#135| (CAR |bfVar#136|)) NIL))
+          ((OR (ATOM |bfVar#133|)
+               (PROGN (SETQ |bfVar#132| (CAR |bfVar#133|)) NIL))
            (RETURN NIL))
           (#1='T
-           (AND (CONSP |bfVar#135|)
+           (AND (CONSP |bfVar#132|)
                 (PROGN
-                 (SETQ |name| (CAR |bfVar#135|))
-                 (SETQ |proplist| (CDR |bfVar#135|))
+                 (SETQ |name| (CAR |bfVar#132|))
+                 (SETQ |proplist| (CDR |bfVar#132|))
                  #1#)
                 (PROGN
                  (|sayBrightly|
                   (STRCONC "Properties of " (PNAME |name|) " ::"))
                  (SETQ |curproplist|
                          (LASSOC |name| (CAAR |$InteractiveFrame|)))
-                 ((LAMBDA (|bfVar#138| |bfVar#137|)
+                 ((LAMBDA (|bfVar#135| |bfVar#134|)
                     (LOOP
                      (COND
-                      ((OR (ATOM |bfVar#138|)
-                           (PROGN (SETQ |bfVar#137| (CAR |bfVar#138|)) NIL))
+                      ((OR (ATOM |bfVar#135|)
+                           (PROGN (SETQ |bfVar#134| (CAR |bfVar#135|)) NIL))
                        (RETURN NIL))
                       (#1#
-                       (AND (CONSP |bfVar#137|)
+                       (AND (CONSP |bfVar#134|)
                             (PROGN
-                             (SETQ |prop| (CAR |bfVar#137|))
-                             (SETQ |value| (CDR |bfVar#137|))
+                             (SETQ |prop| (CAR |bfVar#134|))
+                             (SETQ |value| (CDR |bfVar#134|))
                              #1#)
                             (PROGN
                              (|sayBrightlyNT| (LIST "  " |prop| " was: "))
                              (|pp| |value|)
                              (|sayBrightlyNT| (LIST "  " |prop| " is:  "))
                              (|pp| (LASSOC |prop| |curproplist|))))))
-                     (SETQ |bfVar#138| (CDR |bfVar#138|))))
+                     (SETQ |bfVar#135| (CDR |bfVar#135|))))
                   |proplist| NIL)))))
-         (SETQ |bfVar#136| (CDR |bfVar#136|))))
+         (SETQ |bfVar#133| (CDR |bfVar#133|))))
       |acc| NIL))))
 
 ; clearFrame() ==
@@ -6192,11 +6778,11 @@
   (PROG (|name| |changeList| |pairlist| |proplist| |prop| |value| |node|)
     (RETURN
      (PROGN
-      ((LAMBDA (|bfVar#139| |change|)
+      ((LAMBDA (|bfVar#136| |change|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#139|)
-                (PROGN (SETQ |change| (CAR |bfVar#139|)) NIL))
+           ((OR (ATOM |bfVar#136|)
+                (PROGN (SETQ |change| (CAR |bfVar#136|)) NIL))
             (RETURN NIL))
            (#1='T
             (AND (CONSP |change|)
@@ -6212,11 +6798,11 @@
                    ((SETQ |pairlist| (ASSQ |name| |env|))
                     (COND
                      ((SETQ |proplist| (CDR |pairlist|))
-                      ((LAMBDA (|bfVar#140| |pair|)
+                      ((LAMBDA (|bfVar#137| |pair|)
                          (LOOP
                           (COND
-                           ((OR (ATOM |bfVar#140|)
-                                (PROGN (SETQ |pair| (CAR |bfVar#140|)) NIL))
+                           ((OR (ATOM |bfVar#137|)
+                                (PROGN (SETQ |pair| (CAR |bfVar#137|)) NIL))
                             (RETURN NIL))
                            (#1#
                             (AND (CONSP |pair|)
@@ -6233,11 +6819,11 @@
                                             (CONS (CAR |proplist|)
                                                   (CDR |proplist|)))
                                     (RPLACA |proplist| |pair|)))))))
-                          (SETQ |bfVar#140| (CDR |bfVar#140|))))
+                          (SETQ |bfVar#137| (CDR |bfVar#137|))))
                        |changeList| NIL))
                      (#1# (RPLACD |pairlist| |changeList|))))
                    (#1# (SETQ |env| (CONS |change| |env|))))))))
-          (SETQ |bfVar#139| (CDR |bfVar#139|))))
+          (SETQ |bfVar#136| (CDR |bfVar#136|))))
        |changes| NIL)
       |env|))))
 
@@ -6249,11 +6835,11 @@
 (DEFUN |undoLocalModemapHack| (|changeList|)
   (PROG (|name| |value|)
     (RETURN
-     ((LAMBDA (|bfVar#142| |bfVar#141| |pair|)
+     ((LAMBDA (|bfVar#139| |bfVar#138| |pair|)
         (LOOP
          (COND
-          ((OR (ATOM |bfVar#141|) (PROGN (SETQ |pair| (CAR |bfVar#141|)) NIL))
-           (RETURN (NREVERSE |bfVar#142|)))
+          ((OR (ATOM |bfVar#138|) (PROGN (SETQ |pair| (CAR |bfVar#138|)) NIL))
+           (RETURN (NREVERSE |bfVar#139|)))
           (#1='T
            (AND (CONSP |pair|)
                 (PROGN
@@ -6262,8 +6848,8 @@
                  #1#)
                 #2=(COND ((EQ |name| '|localModemap|) (LIST |name|))
                          (#1# |pair|))
-                (SETQ |bfVar#142| (CONS #2# |bfVar#142|)))))
-         (SETQ |bfVar#141| (CDR |bfVar#141|))))
+                (SETQ |bfVar#139| (CONS #2# |bfVar#139|)))))
+         (SETQ |bfVar#138| (CDR |bfVar#138|))))
       NIL |changeList| NIL))))
 
 ; removeUndoLines u == --called by writeInputLines
@@ -6321,30 +6907,30 @@
               (COND ((STRINGP |$currentLine|) (LIST |$currentLine|))
                     (#1='T (REVERSE |$currentLine|))))
       (SETQ |xtra|
-              ((LAMBDA (|bfVar#144| |bfVar#143| |x|)
+              ((LAMBDA (|bfVar#141| |bfVar#140| |x|)
                  (LOOP
                   (COND
-                   ((OR (ATOM |bfVar#143|)
-                        (PROGN (SETQ |x| (CAR |bfVar#143|)) NIL))
-                    (RETURN (NREVERSE |bfVar#144|)))
+                   ((OR (ATOM |bfVar#140|)
+                        (PROGN (SETQ |x| (CAR |bfVar#140|)) NIL))
+                    (RETURN (NREVERSE |bfVar#141|)))
                    (#1#
                     (AND (NULL (|stringPrefix?| ")history" |x|))
-                         (SETQ |bfVar#144| (CONS |x| |bfVar#144|)))))
-                  (SETQ |bfVar#143| (CDR |bfVar#143|))))
+                         (SETQ |bfVar#141| (CONS |x| |bfVar#141|)))))
+                  (SETQ |bfVar#140| (CDR |bfVar#140|))))
                NIL |xtra| NIL))
       (SETQ |u| (APPEND |u| |xtra|))
       (COND
        ((NULL
-         ((LAMBDA (|bfVar#146| |bfVar#145| |x|)
+         ((LAMBDA (|bfVar#143| |bfVar#142| |x|)
             (LOOP
              (COND
-              ((OR (ATOM |bfVar#145|) (PROGN (SETQ |x| (CAR |bfVar#145|)) NIL))
-               (RETURN |bfVar#146|))
+              ((OR (ATOM |bfVar#142|) (PROGN (SETQ |x| (CAR |bfVar#142|)) NIL))
+               (RETURN |bfVar#143|))
               (#1#
                (PROGN
-                (SETQ |bfVar#146| (|stringPrefix?| ")undo" |x|))
-                (COND (|bfVar#146| (RETURN |bfVar#146|))))))
-             (SETQ |bfVar#145| (CDR |bfVar#145|))))
+                (SETQ |bfVar#143| (|stringPrefix?| ")undo" |x|))
+                (COND (|bfVar#143| (RETURN |bfVar#143|))))))
+             (SETQ |bfVar#142| (CDR |bfVar#142|))))
           NIL |u| NIL))
         |u|)
        (#1#
@@ -6418,7 +7004,7 @@
 ; what l ==
 ;   ioHook("startSysCmd", "what")
 ;   whatSpad2Cmd l
-;   ioHook("endSysCmd", "what")
+;   ioHook("endOfSysCmd", "what")
 
 (DEFUN |what| (|l|)
   (PROG ()
@@ -6426,18 +7012,21 @@
      (PROGN
       (|ioHook| '|startSysCmd| '|what|)
       (|whatSpad2Cmd| |l|)
-      (|ioHook| '|endSysCmd| '|what|)))))
+      (|ioHook| '|endOfSysCmd| '|what|)))))
 
 ; whatSpad2Cmd l ==
 ;   $e:local := $EmptyEnvironment
 ;   null l => reportWhatOptions()
 ;   [key0,:args] := l
-;   key := selectOptionLC(key0,$whatOptions,nil)
-;   null key => sayKeyedMsg("S2IZ0043",NIL)
-;   args := [fixpat p for p in args] where
-;     fixpat x ==
-;       x is [x',:.] => DOWNCASE x'
-;       DOWNCASE x
+;   key := selectOption(key0, $whatOptions, nil)
+;   null key => say_msg("S2IZ0043", CONCAT(
+;         '"Your argument is not valid for the %b )what %d system command.",
+;         '"  %l %l Use the %b )show %d system command to display the",
+;         '" operations for a constructor.  Use the %b )display operations",
+;         '" %d system command to see information about an operation.  These",
+;         '" may be abbreviated to %b )sh %d and %b )d op %d , respectively."),
+;         [])
+;   args := [DOWNCASE(STRINGIMAGE(p)) for p in args]
 ;   key = 'things =>
 ;     for opt in $whatOptions repeat
 ;       not MEMQ(opt,'(things)) => whatSpad2Cmd [opt,:args]
@@ -6465,59 +7054,57 @@
              (PROGN
               (SETQ |key0| (CAR |l|))
               (SETQ |args| (CDR |l|))
-              (SETQ |key| (|selectOptionLC| |key0| |$whatOptions| NIL))
-              (COND ((NULL |key|) (|sayKeyedMsg| 'S2IZ0043 NIL))
-                    (#1#
-                     (PROGN
-                      (SETQ |args|
-                              ((LAMBDA (|bfVar#148| |bfVar#147| |p|)
-                                 (LOOP
-                                  (COND
-                                   ((OR (ATOM |bfVar#147|)
-                                        (PROGN
-                                         (SETQ |p| (CAR |bfVar#147|))
-                                         NIL))
-                                    (RETURN (NREVERSE |bfVar#148|)))
-                                   (#1#
-                                    (SETQ |bfVar#148|
-                                            (CONS (|whatSpad2Cmd,fixpat| |p|)
-                                                  |bfVar#148|))))
-                                  (SETQ |bfVar#147| (CDR |bfVar#147|))))
-                               NIL |args| NIL))
-                      (COND
-                       ((EQ |key| '|things|)
-                        ((LAMBDA (|bfVar#149| |opt|)
-                           (LOOP
-                            (COND
-                             ((OR (ATOM |bfVar#149|)
-                                  (PROGN (SETQ |opt| (CAR |bfVar#149|)) NIL))
-                              (RETURN NIL))
-                             (#1#
-                              (COND
-                               ((NULL (MEMQ |opt| '(|things|)))
-                                (IDENTITY
-                                 (|whatSpad2Cmd| (CONS |opt| |args|)))))))
-                            (SETQ |bfVar#149| (CDR |bfVar#149|))))
-                         |$whatOptions| NIL))
-                       ((EQ |key| '|categories|)
-                        (|filterAndFormatConstructors| '|category| "Categories"
-                         |args|))
-                       ((EQ |key| '|commands|) (|whatCommands| |args|))
-                       ((EQ |key| '|domains|)
-                        (|filterAndFormatConstructors| '|domain| "Domains"
-                         |args|))
-                       ((EQ |key| '|operations|) (|apropos| |args|))
-                       ((EQ |key| '|packages|)
-                        (|filterAndFormatConstructors| '|package| "Packages"
-                         |args|))
-                       ((EQ |key| '|synonyms|)
-                        (|printSynonyms| |args|)))))))))))))
-(DEFUN |whatSpad2Cmd,fixpat| (|x|)
-  (PROG (|x'|)
-    (RETURN
-     (COND
-      ((AND (CONSP |x|) (PROGN (SETQ |x'| (CAR |x|)) #1='T)) (DOWNCASE |x'|))
-      (#1# (DOWNCASE |x|))))))
+              (SETQ |key| (|selectOption| |key0| |$whatOptions| NIL))
+              (COND
+               ((NULL |key|)
+                (|say_msg| 'S2IZ0043
+                 (CONCAT
+                  "Your argument is not valid for the %b )what %d system command."
+                  "  %l %l Use the %b )show %d system command to display the"
+                  " operations for a constructor.  Use the %b )display operations"
+                  " %d system command to see information about an operation.  These"
+                  " may be abbreviated to %b )sh %d and %b )d op %d , respectively.")
+                 NIL))
+               (#1#
+                (PROGN
+                 (SETQ |args|
+                         ((LAMBDA (|bfVar#145| |bfVar#144| |p|)
+                            (LOOP
+                             (COND
+                              ((OR (ATOM |bfVar#144|)
+                                   (PROGN (SETQ |p| (CAR |bfVar#144|)) NIL))
+                               (RETURN (NREVERSE |bfVar#145|)))
+                              (#1#
+                               (SETQ |bfVar#145|
+                                       (CONS (DOWNCASE (STRINGIMAGE |p|))
+                                             |bfVar#145|))))
+                             (SETQ |bfVar#144| (CDR |bfVar#144|))))
+                          NIL |args| NIL))
+                 (COND
+                  ((EQ |key| '|things|)
+                   ((LAMBDA (|bfVar#146| |opt|)
+                      (LOOP
+                       (COND
+                        ((OR (ATOM |bfVar#146|)
+                             (PROGN (SETQ |opt| (CAR |bfVar#146|)) NIL))
+                         (RETURN NIL))
+                        (#1#
+                         (COND
+                          ((NULL (MEMQ |opt| '(|things|)))
+                           (IDENTITY (|whatSpad2Cmd| (CONS |opt| |args|)))))))
+                       (SETQ |bfVar#146| (CDR |bfVar#146|))))
+                    |$whatOptions| NIL))
+                  ((EQ |key| '|categories|)
+                   (|filterAndFormatConstructors| '|category| "Categories"
+                    |args|))
+                  ((EQ |key| '|commands|) (|whatCommands| |args|))
+                  ((EQ |key| '|domains|)
+                   (|filterAndFormatConstructors| '|domain| "Domains" |args|))
+                  ((EQ |key| '|operations|) (|apropos| |args|))
+                  ((EQ |key| '|packages|)
+                   (|filterAndFormatConstructors| '|package| "Packages"
+                    |args|))
+                  ((EQ |key| '|synonyms|) (|printSynonyms| |args|)))))))))))))
 
 ; filterAndFormatConstructors(constrType,label,patterns) ==
 ;   centerAndHighlight(label,$LINELENGTH,specialChar 'hbar)
@@ -6574,19 +7161,19 @@
   (PROG ()
     (RETURN
      (MSORT
-      ((LAMBDA (|bfVar#151| |bfVar#150| |con|)
+      ((LAMBDA (|bfVar#148| |bfVar#147| |con|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#150|) (PROGN (SETQ |con| (CAR |bfVar#150|)) NIL))
-            (RETURN (NREVERSE |bfVar#151|)))
+           ((OR (ATOM |bfVar#147|) (PROGN (SETQ |con| (CAR |bfVar#147|)) NIL))
+            (RETURN (NREVERSE |bfVar#148|)))
            ('T
             (AND (EQUAL (|get_database| |con| 'CONSTRUCTORKIND) |constrType|)
-                 (SETQ |bfVar#151|
+                 (SETQ |bfVar#148|
                          (CONS
                           (CONS (|get_database| |con| 'ABBREVIATION)
                                 (STRING |con|))
-                          |bfVar#151|)))))
-          (SETQ |bfVar#150| (CDR |bfVar#150|))))
+                          |bfVar#148|)))))
+          (SETQ |bfVar#147| (CDR |bfVar#147|))))
        NIL (|allConstructors|) NIL)))))
 
 ; apropos l ==
@@ -6598,7 +7185,9 @@
 ;   ops =>
 ;     sayMessage '"Operations whose names satisfy the above pattern(s):"
 ;     sayAsManyPerLineAsPossible MSORT ops
-;     sayKeyedMsg("S2IF0011",[first ops])
+;     say_msg("S2IF0011", CONCAT(
+;        '"%l To get more information about an operation such as %1b, issue",
+;        '" the command %b )display op %1 %d"), [first(ops)])
 ;   sayMessage '"   There are no operations containing those patterns"
 ;   NIL
 
@@ -6610,17 +7199,17 @@
               (COND ((NULL |l|) (|allOperations|))
                     (#1='T
                      (|filterListOfStrings|
-                      ((LAMBDA (|bfVar#153| |bfVar#152| |p|)
+                      ((LAMBDA (|bfVar#150| |bfVar#149| |p|)
                          (LOOP
                           (COND
-                           ((OR (ATOM |bfVar#152|)
-                                (PROGN (SETQ |p| (CAR |bfVar#152|)) NIL))
-                            (RETURN (NREVERSE |bfVar#153|)))
+                           ((OR (ATOM |bfVar#149|)
+                                (PROGN (SETQ |p| (CAR |bfVar#149|)) NIL))
+                            (RETURN (NREVERSE |bfVar#150|)))
                            (#1#
-                            (SETQ |bfVar#153|
+                            (SETQ |bfVar#150|
                                     (CONS (DOWNCASE (STRINGIMAGE |p|))
-                                          |bfVar#153|))))
-                          (SETQ |bfVar#152| (CDR |bfVar#152|))))
+                                          |bfVar#150|))))
+                          (SETQ |bfVar#149| (CDR |bfVar#149|))))
                        NIL |l| NIL)
                       (|allOperations|)))))
       (COND
@@ -6628,7 +7217,11 @@
         (PROGN
          (|sayMessage| "Operations whose names satisfy the above pattern(s):")
          (|sayAsManyPerLineAsPossible| (MSORT |ops|))
-         (|sayKeyedMsg| 'S2IF0011 (LIST (CAR |ops|)))))
+         (|say_msg| 'S2IF0011
+          (CONCAT
+           "%l To get more information about an operation such as %1b, issue"
+           " the command %b )display op %1 %d")
+          (LIST (CAR |ops|)))))
        (#1#
         (PROGN
          (|sayMessage| "   There are no operations containing those patterns")
@@ -6650,22 +7243,22 @@
        (|specialChar| '|hbar|))
       (SETQ |ls|
               (|filterListOfStringsWithFn| |patterns|
-               ((LAMBDA (|bfVar#156| |bfVar#155| |bfVar#154|)
+               ((LAMBDA (|bfVar#153| |bfVar#152| |bfVar#151|)
                   (LOOP
                    (COND
-                    ((OR (ATOM |bfVar#155|)
-                         (PROGN (SETQ |bfVar#154| (CAR |bfVar#155|)) NIL))
-                     (RETURN (NREVERSE |bfVar#156|)))
+                    ((OR (ATOM |bfVar#152|)
+                         (PROGN (SETQ |bfVar#151| (CAR |bfVar#152|)) NIL))
+                     (RETURN (NREVERSE |bfVar#153|)))
                     (#1='T
-                     (AND (CONSP |bfVar#154|)
+                     (AND (CONSP |bfVar#151|)
                           (PROGN
-                           (SETQ |a| (CAR |bfVar#154|))
-                           (SETQ |b| (CDR |bfVar#154|))
+                           (SETQ |a| (CAR |bfVar#151|))
+                           (SETQ |b| (CDR |bfVar#151|))
                            #1#)
-                          (SETQ |bfVar#156|
+                          (SETQ |bfVar#153|
                                   (CONS (CONS (STRINGIMAGE |a|) |b|)
-                                        |bfVar#156|)))))
-                   (SETQ |bfVar#155| (CDR |bfVar#155|))))
+                                        |bfVar#153|)))))
+                   (SETQ |bfVar#152| (CDR |bfVar#152|))))
                 NIL (|synonymsForUserLevel| |$CommandSynonymAlist|) NIL)
                #'CAR))
       (|printLabelledList| |ls| "user" "synonyms" ")" |patterns|)
@@ -6730,17 +7323,17 @@
                                                       (|blankList| |patterns|)
                                                       (CONS '|%d|
                                                             NIL))))))))))))
-        ((LAMBDA (|bfVar#158| |bfVar#157|)
+        ((LAMBDA (|bfVar#155| |bfVar#154|)
            (LOOP
             (COND
-             ((OR (ATOM |bfVar#158|)
-                  (PROGN (SETQ |bfVar#157| (CAR |bfVar#158|)) NIL))
+             ((OR (ATOM |bfVar#155|)
+                  (PROGN (SETQ |bfVar#154| (CAR |bfVar#155|)) NIL))
               (RETURN NIL))
              (#1#
-              (AND (CONSP |bfVar#157|)
+              (AND (CONSP |bfVar#154|)
                    (PROGN
-                    (SETQ |syn| (CAR |bfVar#157|))
-                    (SETQ |comm| (CDR |bfVar#157|))
+                    (SETQ |syn| (CAR |bfVar#154|))
+                    (SETQ |comm| (CDR |bfVar#154|))
                     #1#)
                    (PROGN
                     (COND
@@ -6751,7 +7344,7 @@
                     (|sayBrightly|
                      (|concat| '|%b| |prefix| |syn| '|%d|
                       (|filler_chars| |wid| ".") " " |prefix| |comm|))))))
-            (SETQ |bfVar#158| (CDR |bfVar#158|))))
+            (SETQ |bfVar#155| (CDR |bfVar#155|))))
          |ls| NIL)
         (|sayBrightly| "")))))))
 
@@ -6771,7 +7364,13 @@
 ;     sayAsManyPerLineAsPossible l
 ;     SAY '" "
 ;   patterns => nil  -- don't be so verbose
-;   sayKeyedMsg("S2IZ0046",NIL)
+;   say_msg("S2IZ0046", CONCAT(
+;         '"For more information about individual commands, use the %b",
+;         '" )help %d system command followed by the command name or the",
+;         '" command name followed by a question mark.  Some commands (such",
+;         '" as %b )lisp %d ) may require the %b )help lisp %d format.  For",
+;         '" example, issue %b )help help %d or %b )help %x1 ? %d to find",
+;         '" out more about the help command itself."), [])
 ;   nil
 
 (DEFUN |whatCommands| (|patterns|)
@@ -6784,15 +7383,15 @@
       (|centerAndHighlight| |label| $LINELENGTH (|specialChar| '|hbar|))
       (SETQ |l|
               (|filterListOfStrings| |patterns|
-               ((LAMBDA (|bfVar#160| |bfVar#159| |a|)
+               ((LAMBDA (|bfVar#157| |bfVar#156| |a|)
                   (LOOP
                    (COND
-                    ((OR (ATOM |bfVar#159|)
-                         (PROGN (SETQ |a| (CAR |bfVar#159|)) NIL))
-                     (RETURN (NREVERSE |bfVar#160|)))
+                    ((OR (ATOM |bfVar#156|)
+                         (PROGN (SETQ |a| (CAR |bfVar#156|)) NIL))
+                     (RETURN (NREVERSE |bfVar#157|)))
                     (#1='T
-                     (SETQ |bfVar#160| (CONS (STRINGIMAGE |a|) |bfVar#160|))))
-                   (SETQ |bfVar#159| (CDR |bfVar#159|))))
+                     (SETQ |bfVar#157| (CONS (STRINGIMAGE |a|) |bfVar#157|))))
+                   (SETQ |bfVar#156| (CDR |bfVar#156|))))
                 NIL (|commandsForUserLevel| |$systemCommands|) NIL)))
       (COND
        (|patterns|
@@ -6815,7 +7414,18 @@
                                            (CONS '|%d| NIL)))))))))))
       (COND (|l| (|sayAsManyPerLineAsPossible| |l|) (SAY " ")))
       (COND (|patterns| NIL)
-            (#1# (PROGN (|sayKeyedMsg| 'S2IZ0046 NIL) NIL)))))))
+            (#1#
+             (PROGN
+              (|say_msg| 'S2IZ0046
+               (CONCAT
+                "For more information about individual commands, use the %b"
+                " )help %d system command followed by the command name or the"
+                " command name followed by a question mark.  Some commands (such"
+                " as %b )lisp %d ) may require the %b )help lisp %d format.  For"
+                " example, issue %b )help help %d or %b )help %x1 ? %d to find"
+                " out more about the help command itself.")
+               NIL)
+              NIL)))))))
 
 ; reportWhatOptions() ==
 ;   optList1:= "append"/[['%l,'"        ",x] for x in $whatOptions]
@@ -6829,16 +7439,16 @@
     (RETURN
      (PROGN
       (SETQ |optList1|
-              ((LAMBDA (|bfVar#162| |bfVar#161| |x|)
+              ((LAMBDA (|bfVar#159| |bfVar#158| |x|)
                  (LOOP
                   (COND
-                   ((OR (ATOM |bfVar#161|)
-                        (PROGN (SETQ |x| (CAR |bfVar#161|)) NIL))
-                    (RETURN |bfVar#162|))
+                   ((OR (ATOM |bfVar#158|)
+                        (PROGN (SETQ |x| (CAR |bfVar#158|)) NIL))
+                    (RETURN |bfVar#159|))
                    ('T
-                    (SETQ |bfVar#162|
-                            (APPEND |bfVar#162| (LIST '|%l| "        " |x|)))))
-                  (SETQ |bfVar#161| (CDR |bfVar#161|))))
+                    (SETQ |bfVar#159|
+                            (APPEND |bfVar#159| (LIST '|%l| "        " |x|)))))
+                  (SETQ |bfVar#158| (CDR |bfVar#158|))))
                NIL |$whatOptions| NIL))
       (|sayBrightly|
        (CONS '|%b|
@@ -6883,17 +7493,17 @@
            (#1='T
             (PROGN
              (SETQ |names'| NIL)
-             ((LAMBDA (|bfVar#163| |name|)
+             ((LAMBDA (|bfVar#160| |name|)
                 (LOOP
                  (COND
-                  ((OR (ATOM |bfVar#163|)
-                       (PROGN (SETQ |name| (CAR |bfVar#163|)) NIL))
+                  ((OR (ATOM |bfVar#160|)
+                       (PROGN (SETQ |name| (CAR |bfVar#160|)) NIL))
                    (RETURN NIL))
                   (#1#
                    (COND
                     ((|satisfiesRegularExpressions| |name| |patterns|)
                      (IDENTITY (SETQ |names'| (CONS |name| |names'|)))))))
-                 (SETQ |bfVar#163| (CDR |bfVar#163|))))
+                 (SETQ |bfVar#160| (CDR |bfVar#160|))))
               (REVERSE |names|) NIL)
              |names'|))))))
 
@@ -6916,25 +7526,27 @@
            (#1='T
             (PROGN
              (SETQ |names'| NIL)
-             ((LAMBDA (|bfVar#164| |name|)
+             ((LAMBDA (|bfVar#161| |name|)
                 (LOOP
                  (COND
-                  ((OR (ATOM |bfVar#164|)
-                       (PROGN (SETQ |name| (CAR |bfVar#164|)) NIL))
+                  ((OR (ATOM |bfVar#161|)
+                       (PROGN (SETQ |name| (CAR |bfVar#161|)) NIL))
                    (RETURN NIL))
                   (#1#
                    (COND
                     ((|satisfiesRegularExpressions| (FUNCALL |fn| |name|)
                       |patterns|)
                      (IDENTITY (SETQ |names'| (CONS |name| |names'|)))))))
-                 (SETQ |bfVar#164| (CDR |bfVar#164|))))
+                 (SETQ |bfVar#161| (CDR |bfVar#161|))))
               (REVERSE |names|) NIL)
              |names'|))))))
 
 ; satisfiesRegularExpressions(name,patterns) ==
 ;   -- this is a first cut
 ;   nf := true
-;   dname := DOWNCASE COPY name
+;   if SYMBOLP(name) then
+;       name := PNAME(name)
+;   dname := DOWNCASE(name)
 ;   for pattern in patterns while nf repeat
 ;     -- use @ as a wildcard
 ;     STRPOS(pattern,dname,0,'"@") => nf := nil
@@ -6945,81 +7557,78 @@
     (RETURN
      (PROGN
       (SETQ |nf| T)
-      (SETQ |dname| (DOWNCASE (COPY |name|)))
-      ((LAMBDA (|bfVar#165| |pattern|)
+      (COND ((SYMBOLP |name|) (SETQ |name| (PNAME |name|))))
+      (SETQ |dname| (DOWNCASE |name|))
+      ((LAMBDA (|bfVar#162| |pattern|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#165|)
-                (PROGN (SETQ |pattern| (CAR |bfVar#165|)) NIL) (NOT |nf|))
+           ((OR (ATOM |bfVar#162|)
+                (PROGN (SETQ |pattern| (CAR |bfVar#162|)) NIL) (NOT |nf|))
             (RETURN NIL))
            ('T
             (COND
              ((STRPOS |pattern| |dname| 0 "@") (IDENTITY (SETQ |nf| NIL))))))
-          (SETQ |bfVar#165| (CDR |bfVar#165|))))
+          (SETQ |bfVar#162| (CDR |bfVar#162|))))
        |patterns| NIL)
       (NULL |nf|)))))
 
 ; processSynonyms() ==
-;   p := STRPOS('")",LINE,0,NIL)
+;   p := search_str('")", LINE, 0)
 ;   fill := '""
-;   if p
-;     then
+;   if p then
 ;       line := SUBSTRING(LINE,p,NIL)
 ;       if p > 0 then fill := SUBSTRING(LINE,0,p)
-;     else
+;   else
 ;       p := 0
 ;       line := LINE
-;   to := STRPOS ('" ", line, 1, nil)
+;   to := search_str('" ", line, 1)
 ;   if to then to := to - 1
 ;   synstr := SUBSTRING (line, 1, to)
-;   syn := STRING2ID_N (synstr, 1)
+;   syn := first_symbol(synstr)
 ;   null (fun := LASSOC (syn, $CommandSynonymAlist)) => NIL
-;   to := STRPOS('")",fun,1,NIL)
-;   if to and to ~= SIZE(fun)-1 then
+;   to := search_str('")", fun, 1)
+;   if to and to ~= #fun - 1 then
 ;     opt := STRCONC('" ",SUBSTRING(fun,to,NIL))
 ;     fun := SUBSTRING(fun,0,to-1)
 ;   else opt := '" "
-;   if (SIZE synstr) > (SIZE fun) then
-;     for i in (SIZE fun)..(SIZE synstr) repeat
-;       fun := CONCAT (fun, '" ")
-;   cl := STRCONC(fill,RPLACSTR(line, 1, SIZE synstr, fun),opt)
+;   l_syn := #synstr
+;   l_fun := #fun
+;   fill2 := filler_spaces(l_syn - l_fun)
+;   cl := STRCONC(fill, SUBSTRING(line, 0, 1), fun, fill2,
+;                 SUBSTRING(line, 1 + l_syn, nil), opt)
 ;   SETQ(LINE,cl)
 ;   processSynonyms ()
 
 (DEFUN |processSynonyms| ()
-  (PROG (|cl| |opt| |fun| |syn| |synstr| |to| |line| |fill| |p|)
+  (PROG (|cl| |fill2| |l_fun| |l_syn| |opt| |fun| |syn| |synstr| |to| |line|
+         |fill| |p|)
     (RETURN
      (PROGN
-      (SETQ |p| (STRPOS ")" LINE 0 NIL))
+      (SETQ |p| (|search_str| ")" LINE 0))
       (SETQ |fill| "")
       (COND
        (|p| (SETQ |line| (SUBSTRING LINE |p| NIL))
         (COND ((< 0 |p|) (SETQ |fill| (SUBSTRING LINE 0 |p|)))))
        (#1='T (SETQ |p| 0) (SETQ |line| LINE)))
-      (SETQ |to| (STRPOS " " |line| 1 NIL))
+      (SETQ |to| (|search_str| " " |line| 1))
       (COND (|to| (SETQ |to| (- |to| 1))))
       (SETQ |synstr| (SUBSTRING |line| 1 |to|))
-      (SETQ |syn| (STRING2ID_N |synstr| 1))
+      (SETQ |syn| (|first_symbol| |synstr|))
       (COND ((NULL (SETQ |fun| (LASSOC |syn| |$CommandSynonymAlist|))) NIL)
             (#1#
              (PROGN
-              (SETQ |to| (STRPOS ")" |fun| 1 NIL))
+              (SETQ |to| (|search_str| ")" |fun| 1))
               (COND
-               ((AND |to| (NOT (EQUAL |to| (- (SIZE |fun|) 1))))
+               ((AND |to| (NOT (EQUAL |to| (- (LENGTH |fun|) 1))))
                 (SETQ |opt| (STRCONC " " (SUBSTRING |fun| |to| NIL)))
                 (SETQ |fun| (SUBSTRING |fun| 0 (- |to| 1))))
                (#1# (SETQ |opt| " ")))
-              (COND
-               ((< (SIZE |fun|) (SIZE |synstr|))
-                ((LAMBDA (|bfVar#166| |i|)
-                   (LOOP
-                    (COND ((> |i| |bfVar#166|) (RETURN NIL))
-                          (#1# (SETQ |fun| (CONCAT |fun| " "))))
-                    (SETQ |i| (+ |i| 1))))
-                 (SIZE |synstr|) (SIZE |fun|))))
+              (SETQ |l_syn| (LENGTH |synstr|))
+              (SETQ |l_fun| (LENGTH |fun|))
+              (SETQ |fill2| (|filler_spaces| (- |l_syn| |l_fun|)))
               (SETQ |cl|
-                      (STRCONC |fill| (RPLACSTR |line| 1 (SIZE |synstr|) |fun|)
-                       |opt|))
+                      (STRCONC |fill| (SUBSTRING |line| 0 1) |fun| |fill2|
+                       (SUBSTRING |line| (+ 1 |l_syn|) NIL) |opt|))
               (SETQ LINE |cl|)
               (|processSynonyms|))))))))
 
@@ -7081,23 +7690,29 @@
 (DEFUN |doSystemCommand| (|string|)
   (PROG () (RETURN (CATCH 'SPAD_READER (|doSystemCommand1| |string|)))))
 
+; say_invalid_args() ==
+;     say_msg("S2IV0005", '"Your argument list is not valid.", [])
+;     nil
+
+(DEFUN |say_invalid_args| ()
+  (PROG ()
+    (RETURN
+     (PROGN (|say_msg| 'S2IV0005 "Your argument list is not valid." NIL) NIL))))
+
 ; handleNoParseCommands(unab, string) ==
 ;   string := stripSpaces string
 ;   spaceIndex := SEARCH('" ", string)
 ;   unab = "lisp" =>
 ;     if (null spaceIndex) then
-;       sayKeyedMsg("S2IV0005", NIL)
-;       nil
+;             say_invalid_args()
 ;     else nplisp(stripLisp string)
 ;   unab = "boot" =>
 ;     if (null spaceIndex) then
-;       sayKeyedMsg("S2IV0005", NIL)
-;       nil
+;             say_invalid_args()
 ;     else npboot(SUBSEQ(string, spaceIndex+1))
 ;   unab = "system" =>
 ;     if (null spaceIndex) then
-;       sayKeyedMsg("S2IV0005", NIL)
-;       nil
+;             say_invalid_args()
 ;     else npsystem(unab, string)
 ;   unab = "synonym" =>
 ;     npsynonym(unab, (null spaceIndex => '""; SUBSEQ(string, spaceIndex+1)))
@@ -7109,8 +7724,7 @@
 ;                   pquit    _
 ;                   credits  _
 ;                   copyright )) =>
-;     sayKeyedMsg("S2IV0005", NIL)
-;     nil
+;         say_invalid_args()
 ;   funName := INTERN CONCAT('"np",STRING unab)
 ;   FUNCALL(funName, SUBSEQ(string, spaceIndex+1))
 
@@ -7122,13 +7736,13 @@
       (SETQ |spaceIndex| (SEARCH " " |string|))
       (COND
        ((EQ |unab| '|lisp|)
-        (COND ((NULL |spaceIndex|) (|sayKeyedMsg| 'S2IV0005 NIL) NIL)
+        (COND ((NULL |spaceIndex|) (|say_invalid_args|))
               (#1='T (|nplisp| (|stripLisp| |string|)))))
        ((EQ |unab| '|boot|)
-        (COND ((NULL |spaceIndex|) (|sayKeyedMsg| 'S2IV0005 NIL) NIL)
+        (COND ((NULL |spaceIndex|) (|say_invalid_args|))
               (#1# (|npboot| (SUBSEQ |string| (+ |spaceIndex| 1))))))
        ((EQ |unab| '|system|)
-        (COND ((NULL |spaceIndex|) (|sayKeyedMsg| 'S2IV0005 NIL) NIL)
+        (COND ((NULL |spaceIndex|) (|say_invalid_args|))
               (#1# (|npsystem| |unab| |string|))))
        ((EQ |unab| '|synonym|)
         (|npsynonym| |unab|
@@ -7136,7 +7750,7 @@
                (#1# (SUBSEQ |string| (+ |spaceIndex| 1))))))
        ((NULL |spaceIndex|) (FUNCALL |unab|))
        ((|member| |unab| '(|quit| |fin| |piles| |pquit| |credits| |copyright|))
-        (PROGN (|sayKeyedMsg| 'S2IV0005 NIL) NIL))
+        (|say_invalid_args|))
        (#1#
         (PROGN
          (SETQ |funName| (INTERN (CONCAT "np" (STRING |unab|))))
@@ -7178,9 +7792,9 @@
       (SETQ |found| NIL)
       (SETQ |strIndex| 0)
       (SETQ |lispStr| "lisp")
-      ((LAMBDA (|bfVar#167| |c0| |bfVar#168| |c1|)
+      ((LAMBDA (|bfVar#163| |c0| |bfVar#164| |c1|)
          (LOOP
-          (COND ((OR (> |c0| |bfVar#167|) (> |c1| |bfVar#168|)) (RETURN NIL))
+          (COND ((OR (> |c0| |bfVar#163|) (> |c1| |bfVar#164|)) (RETURN NIL))
                 (#1='T
                  (COND
                   ((NOT
@@ -7207,12 +7821,12 @@
 ; npsystem(unab, str) ==
 ;   spaceIndex := SEARCH('" ", str)
 ;   null spaceIndex =>
-;     sayKeyedMsg("S2IZ0080", [str])
+;         say_msg("S2IZ0080", '"Unknown system command: %1b", [str])
 ;   sysPart := SUBSEQ(str, 0, spaceIndex)
 ;   -- The following is a hack required by the fact that unAbbreviateKeyword
 ;   -- returns the word "system" for unknown words
 ;   null SEARCH(sysPart, STRING unab) =>
-;     sayKeyedMsg("S2IZ0080", [sysPart])
+;         say_msg("S2IZ0080", '"Unknown system command: %1b", [sysPart])
 ;   command := SUBSEQ(str, spaceIndex+1)
 ;   run_shell_command command
 
@@ -7221,17 +7835,20 @@
     (RETURN
      (PROGN
       (SETQ |spaceIndex| (SEARCH " " |str|))
-      (COND ((NULL |spaceIndex|) (|sayKeyedMsg| 'S2IZ0080 (LIST |str|)))
-            (#1='T
-             (PROGN
-              (SETQ |sysPart| (SUBSEQ |str| 0 |spaceIndex|))
-              (COND
-               ((NULL (SEARCH |sysPart| (STRING |unab|)))
-                (|sayKeyedMsg| 'S2IZ0080 (LIST |sysPart|)))
-               (#1#
-                (PROGN
-                 (SETQ |command| (SUBSEQ |str| (+ |spaceIndex| 1)))
-                 (|run_shell_command| |command|)))))))))))
+      (COND
+       ((NULL |spaceIndex|)
+        (|say_msg| 'S2IZ0080 "Unknown system command: %1b" (LIST |str|)))
+       (#1='T
+        (PROGN
+         (SETQ |sysPart| (SUBSEQ |str| 0 |spaceIndex|))
+         (COND
+          ((NULL (SEARCH |sysPart| (STRING |unab|)))
+           (|say_msg| 'S2IZ0080 "Unknown system command: %1b"
+            (LIST |sysPart|)))
+          (#1#
+           (PROGN
+            (SETQ |command| (SUBSEQ |str| (+ |spaceIndex| 1)))
+            (|run_shell_command| |command|)))))))))))
 
 ; npsynonym(unab, str) ==
 ;   npProcessSynonym(str)
@@ -7267,20 +7884,20 @@
 
 ; isIntegerString tok ==
 ;   for i in 0..#tok-1 repeat
-;     val := DIGIT_-CHAR_-P tok.i
-;     not val => return nil
+;         val := char_to_digit(tok.i)
+;         not(val) => return(nil)
 ;   val
 
 (DEFUN |isIntegerString| (|tok|)
   (PROG (|val|)
     (RETURN
      (PROGN
-      ((LAMBDA (|bfVar#169| |i|)
+      ((LAMBDA (|bfVar#165| |i|)
          (LOOP
-          (COND ((> |i| |bfVar#169|) (RETURN NIL))
+          (COND ((> |i| |bfVar#165|) (RETURN NIL))
                 ('T
                  (PROGN
-                  (SETQ |val| (DIGIT-CHAR-P (ELT |tok| |i|)))
+                  (SETQ |val| (|char_to_digit| (ELT |tok| |i|)))
                   (COND ((NULL |val|) (RETURN NIL))))))
           (SETQ |i| (+ |i| 1))))
        (- (LENGTH |tok|) 1) 0)
@@ -7312,9 +7929,9 @@
       (SETQ |inString| NIL)
       (SETQ |blockStart| 0)
       (SETQ |parenCount| 0)
-      ((LAMBDA (|bfVar#170| |i|)
+      ((LAMBDA (|bfVar#166| |i|)
          (LOOP
-          (COND ((> |i| |bfVar#170|) (RETURN NIL))
+          (COND ((> |i| |bfVar#166|) (RETURN NIL))
                 (#1='T
                  (COND
                   ((EQUAL (ELT |str| |i|) (|char| "\""))
@@ -7372,9 +7989,9 @@
       (SETQ |tokenList| NIL)
       (SETQ |tokenStart| 0)
       (SETQ |previousSpace| NIL)
-      ((LAMBDA (|bfVar#171| |i|)
+      ((LAMBDA (|bfVar#167| |i|)
          (LOOP
-          (COND ((> |i| |bfVar#171|) (RETURN NIL))
+          (COND ((> |i| |bfVar#167|) (RETURN NIL))
                 (#1='T
                  (COND
                   ((EQUAL (STRING (ELT |str| |i|)) "\"")
@@ -7409,44 +8026,44 @@
     (RETURN
      (PROGN
       (SETQ |restOptionList|
-              ((LAMBDA (|bfVar#173| |bfVar#172| |opt|)
+              ((LAMBDA (|bfVar#169| |bfVar#168| |opt|)
                  (LOOP
                   (COND
-                   ((OR (ATOM |bfVar#172|)
-                        (PROGN (SETQ |opt| (CAR |bfVar#172|)) NIL))
-                    (RETURN (NREVERSE |bfVar#173|)))
+                   ((OR (ATOM |bfVar#168|)
+                        (PROGN (SETQ |opt| (CAR |bfVar#168|)) NIL))
+                    (RETURN (NREVERSE |bfVar#169|)))
                    (#1='T
-                    (SETQ |bfVar#173|
-                            (CONS (|dumbTokenize| |opt|) |bfVar#173|))))
-                  (SETQ |bfVar#172| (CDR |bfVar#172|))))
+                    (SETQ |bfVar#169|
+                            (CONS (|dumbTokenize| |opt|) |bfVar#169|))))
+                  (SETQ |bfVar#168| (CDR |bfVar#168|))))
                NIL (CDR |optionList|) NIL))
       (SETQ |parcmd|
               (CONS (|parseSystemCmd| (CAR |optionList|))
-                    ((LAMBDA (|bfVar#177| |bfVar#176| |opt|)
+                    ((LAMBDA (|bfVar#173| |bfVar#172| |opt|)
                        (LOOP
                         (COND
-                         ((OR (ATOM |bfVar#176|)
-                              (PROGN (SETQ |opt| (CAR |bfVar#176|)) NIL))
-                          (RETURN (NREVERSE |bfVar#177|)))
+                         ((OR (ATOM |bfVar#172|)
+                              (PROGN (SETQ |opt| (CAR |bfVar#172|)) NIL))
+                          (RETURN (NREVERSE |bfVar#173|)))
                          (#1#
-                          (SETQ |bfVar#177|
+                          (SETQ |bfVar#173|
                                   (CONS
-                                   ((LAMBDA (|bfVar#175| |bfVar#174| |tok|)
+                                   ((LAMBDA (|bfVar#171| |bfVar#170| |tok|)
                                       (LOOP
                                        (COND
-                                        ((OR (ATOM |bfVar#174|)
+                                        ((OR (ATOM |bfVar#170|)
                                              (PROGN
-                                              (SETQ |tok| (CAR |bfVar#174|))
+                                              (SETQ |tok| (CAR |bfVar#170|))
                                               NIL))
-                                         (RETURN (NREVERSE |bfVar#175|)))
+                                         (RETURN (NREVERSE |bfVar#171|)))
                                         (#1#
-                                         (SETQ |bfVar#175|
+                                         (SETQ |bfVar#171|
                                                  (CONS (|tokTran| |tok|)
-                                                       |bfVar#175|))))
-                                       (SETQ |bfVar#174| (CDR |bfVar#174|))))
+                                                       |bfVar#171|))))
+                                       (SETQ |bfVar#170| (CDR |bfVar#170|))))
                                     NIL |opt| NIL)
-                                   |bfVar#177|))))
-                        (SETQ |bfVar#176| (CDR |bfVar#176|))))
+                                   |bfVar#173|))))
+                        (SETQ |bfVar#172| (CDR |bfVar#172|))))
                      NIL |restOptionList| NIL)))
       (|systemCommand| |parcmd|)))))
 
@@ -7474,14 +8091,14 @@
          (SETQ |pform| (|parseFromString| |argString|))
          (LIST |command| |pform|)))
        (#1='T
-        ((LAMBDA (|bfVar#179| |bfVar#178| |tok|)
+        ((LAMBDA (|bfVar#175| |bfVar#174| |tok|)
            (LOOP
             (COND
-             ((OR (ATOM |bfVar#178|)
-                  (PROGN (SETQ |tok| (CAR |bfVar#178|)) NIL))
-              (RETURN (NREVERSE |bfVar#179|)))
-             (#1# (SETQ |bfVar#179| (CONS (|tokTran| |tok|) |bfVar#179|))))
-            (SETQ |bfVar#178| (CDR |bfVar#178|))))
+             ((OR (ATOM |bfVar#174|)
+                  (PROGN (SETQ |tok| (CAR |bfVar#174|)) NIL))
+              (RETURN (NREVERSE |bfVar#175|)))
+             (#1# (SETQ |bfVar#175| (CONS (|tokTran| |tok|) |bfVar#175|))))
+            (SETQ |bfVar#174| (CDR |bfVar#174|))))
          NIL (|dumbTokenize| |opt|) NIL)))))))
 
 ; handleTokensizeSystemCommands(unabr, optionList) ==
@@ -7494,43 +8111,43 @@
     (RETURN
      (PROGN
       (SETQ |optionList|
+              ((LAMBDA (|bfVar#177| |bfVar#176| |opt|)
+                 (LOOP
+                  (COND
+                   ((OR (ATOM |bfVar#176|)
+                        (PROGN (SETQ |opt| (CAR |bfVar#176|)) NIL))
+                    (RETURN (NREVERSE |bfVar#177|)))
+                   (#1='T
+                    (SETQ |bfVar#177|
+                            (CONS (|dumbTokenize| |opt|) |bfVar#177|))))
+                  (SETQ |bfVar#176| (CDR |bfVar#176|))))
+               NIL |optionList| NIL))
+      (SETQ |parcmd|
               ((LAMBDA (|bfVar#181| |bfVar#180| |opt|)
                  (LOOP
                   (COND
                    ((OR (ATOM |bfVar#180|)
                         (PROGN (SETQ |opt| (CAR |bfVar#180|)) NIL))
                     (RETURN (NREVERSE |bfVar#181|)))
-                   (#1='T
-                    (SETQ |bfVar#181|
-                            (CONS (|dumbTokenize| |opt|) |bfVar#181|))))
-                  (SETQ |bfVar#180| (CDR |bfVar#180|))))
-               NIL |optionList| NIL))
-      (SETQ |parcmd|
-              ((LAMBDA (|bfVar#185| |bfVar#184| |opt|)
-                 (LOOP
-                  (COND
-                   ((OR (ATOM |bfVar#184|)
-                        (PROGN (SETQ |opt| (CAR |bfVar#184|)) NIL))
-                    (RETURN (NREVERSE |bfVar#185|)))
                    (#1#
-                    (SETQ |bfVar#185|
+                    (SETQ |bfVar#181|
                             (CONS
-                             ((LAMBDA (|bfVar#183| |bfVar#182| |tok|)
+                             ((LAMBDA (|bfVar#179| |bfVar#178| |tok|)
                                 (LOOP
                                  (COND
-                                  ((OR (ATOM |bfVar#182|)
+                                  ((OR (ATOM |bfVar#178|)
                                        (PROGN
-                                        (SETQ |tok| (CAR |bfVar#182|))
+                                        (SETQ |tok| (CAR |bfVar#178|))
                                         NIL))
-                                   (RETURN (NREVERSE |bfVar#183|)))
+                                   (RETURN (NREVERSE |bfVar#179|)))
                                   (#1#
-                                   (SETQ |bfVar#183|
+                                   (SETQ |bfVar#179|
                                            (CONS (|tokTran| |tok|)
-                                                 |bfVar#183|))))
-                                 (SETQ |bfVar#182| (CDR |bfVar#182|))))
+                                                 |bfVar#179|))))
+                                 (SETQ |bfVar#178| (CDR |bfVar#178|))))
                               NIL |opt| NIL)
-                             |bfVar#185|))))
-                  (SETQ |bfVar#184| (CDR |bfVar#184|))))
+                             |bfVar#181|))))
+                  (SETQ |bfVar#180| (CDR |bfVar#180|))))
                NIL |optionList| NIL))
       (COND (|parcmd| (|tokenSystemCommand| |unabr| |parcmd|)))))))
 

@@ -32,8 +32,8 @@
 
 (SDEFUN |FMTMJAX;texEscapeString| ((|s| (|String|)) (% (|String|)))
         (SPROG
-         ((|str| (|String|)) (|esc| (|String|)) (|c| (|Character|))
-          (|n| (|Integer|)) (|p| (|Integer|)) (|cc| (|CharacterClass|)))
+         ((|cc| (|CharacterClass|)) (|p| (|Integer|)) (|n| (|Integer|))
+          (|c| (|Character|)) (|esc| (|String|)) (|str| (|String|)))
          (SEQ (LETT |cc| (SPADCALL " \\{}$^_%~#&\"" (QREFELT % 17)))
               (LETT |p| (SPADCALL |cc| |s| 1 (QREFELT % 19)))
               (EXIT
@@ -130,8 +130,8 @@
 
 (SDEFUN |FMTMJAX;integralArgument| ((|a| (|OutputForm|)) (% (|OutputForm|)))
         (SPROG
-         ((|op3| (|OutputForm|)) (|op2| #1=(|OutputForm|))
-          (|args| (|List| (|OutputForm|))) (|op| #1#))
+         ((|op| #1=(|OutputForm|)) (|args| (|List| (|OutputForm|))) (|op2| #1#)
+          (|op3| (|OutputForm|)))
          (SEQ
           (COND ((SPADCALL |a| (QREFELT % 36)) |a|)
                 (#2='T
@@ -176,7 +176,7 @@
           (LETT |p| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|bu| NIL) (|bl| NIL) (|ba| NIL) (|a| NIL))
+            (SPROG ((|a| NIL) (|ba| NIL) (|bl| NIL) (|bu| NIL))
                    (SEQ
                     (LETT |bl|
                           (SPADCALL
@@ -220,7 +220,7 @@
           (LETT |s| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|bu| NIL) (|bl| NIL) (|ba| NIL))
+            (SPROG ((|ba| NIL) (|bl| NIL) (|bu| NIL))
                    (SEQ
                     (LETT |bl|
                           (SPADCALL
@@ -267,8 +267,8 @@
         ((|prec| (|Integer|)) (|args| (|List| (|OutputForm|)))
          (% (|OutputBox|)))
         (SPROG
-         ((|p2| (|Integer|)) (|p1| (|Integer|)) (|s| (|String|))
-          (|b| (|OutputBox|)) (|a| (|OutputForm|)))
+         ((|a| (|OutputForm|)) (|b| (|OutputBox|)) (|s| (|String|))
+          (|p1| (|Integer|)) (|p2| (|Integer|)))
          (SEQ (LETT |a| (|SPADfirst| |args|))
               (LETT |s|
                     (SEQ
@@ -350,7 +350,7 @@
           (LETT |h2| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|bn| NIL) (|bx| NIL))
+            (SPROG ((|bx| NIL) (|bn| NIL))
                    (SEQ
                     (LETT |bx|
                           (SPADCALL |p|
@@ -393,7 +393,7 @@
           (RETURN
            (PROGN
             (SPROG
-             ((|s| NIL) (|b| NIL) (|pre| NIL) (|bx| NIL) (|i| NIL) (|v| NIL))
+             ((|v| NIL) (|i| NIL) (|bx| NIL) (|pre| NIL) (|b| NIL) (|s| NIL))
              (SEQ
               (LETT |b|
                     (|FMTMJAX;braceBox|
@@ -456,7 +456,7 @@
           (LETT |p| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|b2| NIL) (|b1| NIL))
+            (SPROG ((|b1| NIL) (|b2| NIL))
                    (SEQ
                     (LETT |b1|
                           (|FMTMJAX;braceBox|
@@ -490,10 +490,10 @@
           (RETURN
            (PROGN
             (SPROG
-             ((|bx| NIL) (|tu| NIL) (|tl| NIL) (#1=#:G126 NIL) (|l| NIL)
-              (#2=#:G127 NIL) (|u| NIL) (|bu| NIL) (|lu| NIL) (|bl| NIL)
-              (|ll| NIL) (|b| NIL) (#3=#:G125 NIL) (|a| NIL) (|i| NIL)
-              (|ba| NIL))
+             ((|ba| NIL) (|i| NIL) (|a| NIL) (#1=#:G126 NIL) (|b| NIL)
+              (|ll| NIL) (|bl| NIL) (|lu| NIL) (|bu| NIL) (|u| NIL)
+              (#2=#:G128 NIL) (|l| NIL) (#3=#:G127 NIL) (|tl| NIL) (|tu| NIL)
+              (|bx| NIL))
              (SEQ
               (LETT |ba|
                     (SPADCALL (SPADCALL |args| (QREFELT % 72)) |p|
@@ -510,9 +510,9 @@
                       (LETT |ll| (SPADCALL (QREFELT % 83)))
                       (LETT |lu| (SPADCALL (QREFELT % 83)))
                       (SEQ (LETT |i| (|spadConstant| % 74)) (LETT |a| NIL)
-                           (LETT #3# |args|) G190
+                           (LETT #1# |args|) G190
                            (COND
-                            ((OR (ATOM #3#) (PROGN (LETT |a| (CAR #3#)) NIL))
+                            ((OR (ATOM #1#) (PROGN (LETT |a| (CAR #1#)) NIL))
                              (GO G191)))
                            (SEQ
                             (LETT |b|
@@ -527,8 +527,8 @@
                               ('T
                                (LETT |lu|
                                      (SPADCALL |b| |lu| (QREFELT % 85)))))))
-                           (LETT #3#
-                                 (PROG1 (CDR #3#) (LETT |i| (|inc_SI| |i|))))
+                           (LETT #1#
+                                 (PROG1 (CDR #1#) (LETT |i| (|inc_SI| |i|))))
                            (GO G190) G191 (EXIT NIL))
                       (COND
                        ((SPADCALL (SPADCALL |args| (QREFELT % 55))
@@ -562,9 +562,9 @@
                       (SEQ (LETT |u| NIL)
                            (LETT #2# (SPADCALL |lu| (QREFELT % 89)))
                            (LETT |l| NIL)
-                           (LETT #1# (SPADCALL |ll| (QREFELT % 89))) G190
+                           (LETT #3# (SPADCALL |ll| (QREFELT % 89))) G190
                            (COND
-                            ((OR (ATOM #1#) (PROGN (LETT |l| (CAR #1#)) NIL)
+                            ((OR (ATOM #3#) (PROGN (LETT |l| (CAR #3#)) NIL)
                                  (ATOM #2#) (PROGN (LETT |u| (CAR #2#)) NIL))
                              (GO G191)))
                            (SEQ
@@ -580,7 +580,7 @@
                              (LETT |bx|
                                    (SPADCALL (LIST |bx| |ba| |tl| |tu|)
                                              (QREFELT % 14)))))
-                           (LETT #1# (PROG1 (CDR #1#) (LETT #2# (CDR #2#))))
+                           (LETT #3# (PROG1 (CDR #3#) (LETT #2# (CDR #2#))))
                            (GO G190) G191 (EXIT NIL))
                       (EXIT
                        (SPADCALL (SPADCALL |p| |prec| (QREFELT % 50)) |bx|
@@ -598,8 +598,8 @@
           (RETURN
            (PROGN
             (SPROG
-             ((|b2| NIL) (|r| NIL) (#1=#:G132 NIL) (#2=#:G130 NIL) (|n| NIL)
-              (|b1| NIL))
+             ((|b1| NIL) (|n| NIL) (#1=#:G131 NIL) (#2=#:G133 NIL) (|r| NIL)
+              (|b2| NIL))
              (SEQ
               (LETT |b1|
                     (SPADCALL
@@ -620,10 +620,10 @@
                     (LETT |b2|
                           (SPADCALL
                            (SPADCALL
-                            (PROG1 (LETT #2# |n|)
-                              (|check_subtype2| (>= #2# 0)
+                            (PROG1 (LETT #1# |n|)
+                              (|check_subtype2| (>= #1# 0)
                                                 '(|NonNegativeInteger|)
-                                                '(|Integer|) #2#))
+                                                '(|Integer|) #1#))
                             (SPADCALL "'" (QREFELT % 26)) (QREFELT % 94))
                            (QREFELT % 10))))
                    ('T
@@ -631,9 +631,9 @@
                      (LETT |r|
                            (SPADCALL
                             (SPADCALL
-                             (PROG1 (LETT #1# |n|)
-                               (|check_subtype2| (> #1# 0) '(|PositiveInteger|)
-                                                 '(|Integer|) #1#))
+                             (PROG1 (LETT #2# |n|)
+                               (|check_subtype2| (> #2# 0) '(|PositiveInteger|)
+                                                 '(|Integer|) #2#))
                              (QREFELT % 97))
                             (QREFELT % 98)))
                      (EXIT
@@ -663,7 +663,7 @@
           (LETT |h2| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|b2| NIL) (|b1| NIL))
+            (SPROG ((|b1| NIL) (|b2| NIL))
                    (SEQ
                     (LETT |b1|
                           (|FMTMJAX;braceBox|
@@ -704,7 +704,7 @@
           (LETT |p| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|b2| NIL) (|b1| NIL))
+            (SPROG ((|b1| NIL) (|b2| NIL))
                    (SEQ
                     (LETT |b1|
                           (SPADCALL (SPADCALL (QREFELT % 47))
@@ -738,7 +738,7 @@
           (LETT |p| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|b| NIL) (|b2| NIL) (|b1| NIL))
+            (SPROG ((|b1| NIL) (|b2| NIL) (|b| NIL))
                    (SEQ
                     (LETT |b1|
                           (|FMTMJAX;braceBox|
@@ -769,7 +769,7 @@
 (SDEFUN |FMTMJAX;binomial;ILOb;31|
         ((|prec| (|Integer|)) (|args| (|List| (|OutputForm|)))
          (% (|OutputBox|)))
-        (SPROG ((|b2| #1=(|OutputBox|)) (|b1| #1#))
+        (SPROG ((|b1| #1=(|OutputBox|)) (|b2| #1#))
                (SEQ
                 (LETT |b1|
                       (SPADCALL (SPADCALL |args| 1 (QREFELT % 43))
@@ -782,7 +782,7 @@
 (SDEFUN |FMTMJAX;zag;ILOb;32|
         ((|prec| (|Integer|)) (|args| (|List| (|OutputForm|)))
          (% (|OutputBox|)))
-        (SPROG ((|b2| #1=(|OutputBox|)) (|b1| #1#))
+        (SPROG ((|b1| #1=(|OutputBox|)) (|b2| #1#))
                (SEQ
                 (LETT |b1|
                       (SPADCALL (SPADCALL |args| 1 (QREFELT % 43))
@@ -812,7 +812,7 @@
           (LETT |h| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|entries| NIL) (|e| NIL) (|b| NIL))
+            (SPROG ((|b| NIL) (|e| NIL) (|entries| NIL))
                    (SEQ
                     (COND
                      ((SPADCALL |args| (QREFELT % 81))
@@ -859,7 +859,7 @@
           (LETT |left| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|matrixtype| NIL) (|h| NIL))
+            (SPROG ((|h| NIL) (|matrixtype| NIL))
                    (SEQ
                     (LETT |h|
                           (SPADCALL (SPADCALL (QREFELT % 47)) (QREFELT % 110)))
@@ -880,7 +880,7 @@
          (%
           (|OperatorHandlers|
            (|Mapping| (|OutputBox|) (|Integer|) (|List| (|OutputForm|))))))
-        (SPROG ((#1=#:G523 NIL))
+        (SPROG ((#1=#:G524 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -1326,7 +1326,7 @@
                   (SPADCALL |oh| -1 "MATRIX" (SPADCALL "[" "]" (QREFELT % 112))
                             (QREFELT % 115))
                   (SPADCALL |oh| -1 "theMap" (ELT % 65) (QREFELT % 115))
-                  (EXIT (PROGN (LETT #1# |oh|) (GO #4=#:G522)))))
+                  (EXIT (PROGN (LETT #1# |oh|) (GO #4=#:G523)))))
                 #4# (EXIT #1#)))) 
 
 (SDEFUN |FMTMJAX;operatorHandlers;Oh;38|
@@ -1354,7 +1354,7 @@
 
 (DEFUN |FormatMathJax| ()
   (SPROG NIL
-         (PROG (#1=#:G526)
+         (PROG (#1=#:G527)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|FormatMathJax|))
@@ -1384,7 +1384,7 @@
               |FMTMJAX;formatFunctionSymbol;SOb;13| (|Boolean|)
               (|OutputFormTools|) (62 . |atom?|) (67 . |operator|) (|Symbol|)
               (72 . |is_symbol?|) (|List| 6) (78 . |arguments|) (83 . ~=)
-              (89 . |elt|) (95 . |coerce|) (100 . |elt|) (106 . |One|)
+              (89 . |elt|) (95 . |coerce|) (100 . |elt|) (106 . |1|)
               (110 . |minPrecedence|) (114 . |formatExpression|)
               (120 . |empty?|) (125 . <) (131 . |parenthesizeIf|)
               (|Mapping| 9 18 40) |FMTMJAX;integral;IM;15| (137 . |empty|)
@@ -1393,15 +1393,15 @@
               (167 . |position|) (173 . |position|) |FMTMJAX;theMap;ILOb;19|
               |FMTMJAX;overbar;I2M;20| |FMTMJAX;box;2M;21| (180 . |bracket|)
               (187 . >) |FMTMJAX;nthRoot;I3M;22| (193 . |string|)
-              (198 . |first|) (|SingleInteger|) (203 . |One|) (207 . |One|)
+              (198 . |first|) (|SingleInteger|) (203 . |1|) (207 . |1|)
               (211 . |rest|) (216 . <) |FMTMJAX;scripts;IM;24| (222 . +)
               |FMTMJAX;subscript;IM;25| (228 . |empty?|) (|List| 9)
               (233 . |empty|) (237 . |odd?|) (242 . |cons|) (248 . |empty|)
               (252 . |reverse!|) (257 . |first|) (262 . |rest|)
-              |FMTMJAX;altsupersub;IM;26| (267 . |numberOfPrimes|)
-              (272 . |Zero|) (276 . |Zero|) (280 . |new|) (|PositiveInteger|)
-              (|NumberFormats|) (286 . |FormatRoman|) (291 . |lowerCase|)
-              (296 . |concat|) |FMTMJAX;prime;IM;27| |FMTMJAX;power;I3M;28|
+              |FMTMJAX;altsupersub;IM;26| (267 . |numberOfPrimes|) (272 . |0|)
+              (276 . |0|) (280 . |new|) (|PositiveInteger|) (|NumberFormats|)
+              (286 . |FormatRoman|) (291 . |lowerCase|) (296 . |concat|)
+              |FMTMJAX;prime;IM;27| |FMTMJAX;power;I3M;28|
               |FMTMJAX;fraction;I3M;29| |FMTMJAX;slash;I3M;30|
               |FMTMJAX;binomial;ILOb;31| |FMTMJAX;zag;ILOb;32| (301 . |nary|)
               |FMTMJAX;environment;3S2M;33| |FMTMJAX;vconcat;2M;34|

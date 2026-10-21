@@ -68,6 +68,13 @@
                                                       (% %))
                                                      (|has| |t#1|
                                                             (|BasicType|)))
+                                                    ((|merge_unique!|
+                                                      (%
+                                                       (|Mapping| (|Boolean|)
+                                                                  |t#1| |t#1|)
+                                                       % %))
+                                                     (|has| |t#1|
+                                                            (|BasicType|)))
                                                     ((|merge!| (% % %))
                                                      (|has| |t#1|
                                                             (|OrderedSet|))))

@@ -73,9 +73,8 @@
         ((|f| (|Mapping| R (|Integer|))) (|x| (|Symbol|)) (|a| (R))
          (|seg| (|UniversalSegment| (|NonNegativeInteger|))) (% (|Any|)))
         (SPROG
-         ((|uts| (|UnivariateTaylorSeries| R |x| |a|))
-          (|n0| #1=(|NonNegativeInteger|)) (|n1| #2=(|NonNegativeInteger|))
-          (|#G19| #1#) (|#G18| #2#))
+         ((|#G18| #1=(|NonNegativeInteger|)) (|#G19| #2=(|NonNegativeInteger|))
+          (|n1| #1#) (|n0| #2#) (|uts| (|UnivariateTaylorSeries| R |x| |a|)))
          (SEQ
           (COND
            ((SPADCALL |seg| (QREFELT % 23))
@@ -172,8 +171,8 @@
         ((|f| (|Mapping| R (|Integer|))) (|x| (|Symbol|)) (|a| (R))
          (|seg| (|UniversalSegment| (|Integer|))) (% (|Any|)))
         (SPROG
-         ((|uts| (|UnivariateTaylorSeries| R |x| |a|)) (|n0| #1=(|Integer|))
-          (|n1| #2=(|Integer|)) (|#G26| #1#) (|#G25| #2#))
+         ((|#G25| #1=(|Integer|)) (|#G26| #2=(|Integer|)) (|n1| #1#) (|n0| #2#)
+          (|uts| (|UnivariateTaylorSeries| R |x| |a|)))
          (SEQ
           (COND
            ((SPADCALL |seg| (QREFELT % 29))
@@ -266,11 +265,12 @@
          (|a| (R)) (|seg| (|UniversalSegment| (|Fraction| (|Integer|))))
          (|r| (|Fraction| (|Integer|))) (% (|Any|)))
         (SPROG
-         ((|uls| (|UnivariateLaurentSeries| R |x| |a|)) (|ulsUnion| (|Any|))
-          (|nn| #1=(|Integer|)) (|n0| #1#) (|q| (|Integer|))
-          (|q2| #2=(|Integer|)) (|p2| #3=(|Integer|)) (|q0| #2#) (|p0| #3#)
-          (|r0| #4=(|Fraction| (|Integer|))) (|n1| #1#) (|q1| #2#) (|p1| #3#)
-          (|r1| #5=(|Fraction| (|Integer|))) (|#G39| #4#) (|#G38| #5#))
+         ((|#G38| #1=(|Fraction| (|Integer|)))
+          (|#G39| #2=(|Fraction| (|Integer|))) (|r1| #1#) (|p1| #3=(|Integer|))
+          (|q1| #4=(|Integer|)) (|n1| #5=(|Integer|)) (|r0| #2#) (|p0| #3#)
+          (|q0| #4#) (|p2| #3#) (|q2| #4#) (|q| (|Integer|)) (|n0| #5#)
+          (|nn| #5#) (|ulsUnion| (|Any|))
+          (|uls| (|UnivariateLaurentSeries| R |x| |a|)))
          (SEQ
           (COND
            ((NULL (SPADCALL |r| (QREFELT % 36)))
@@ -296,9 +296,9 @@
                    (LETT |q|
                          (SPADCALL (SPADCALL |q0| |q1| (QREFELT % 44)) |q2|
                                    (QREFELT % 44)))
-                   (LETT |n0| (* |p0| (QUOTIENT2 |q| |q0|)))
-                   (LETT |n1| (* |p1| (QUOTIENT2 |q| |q1|)))
-                   (LETT |nn| (* |p2| (QUOTIENT2 |q| |q2|)))
+                   (LETT |n0| (* |p0| (|quotient_INT| |q| |q0|)))
+                   (LETT |n1| (* |p1| (|quotient_INT| |q| |q1|)))
+                   (LETT |nn| (* |p2| (|quotient_INT| |q| |q2|)))
                    (LETT |ulsUnion|
                          (SPADCALL
                           (CONS #'|GENUPS1;puiseux;MSRUsFA;8!0|
@@ -352,8 +352,8 @@
                (LETT |p2| (SPADCALL |r| (QREFELT % 42)))
                (LETT |q2| (SPADCALL |r| (QREFELT % 43)))
                (LETT |q| (SPADCALL |q0| |q2| (QREFELT % 44)))
-               (LETT |n0| (* |p0| (QUOTIENT2 |q| |q0|)))
-               (LETT |nn| (* |p2| (QUOTIENT2 |q| |q2|)))
+               (LETT |n0| (* |p0| (|quotient_INT| |q| |q0|)))
+               (LETT |nn| (* |p2| (|quotient_INT| |q| |q2|)))
                (LETT |ulsUnion|
                      (SPADCALL
                       (CONS #'|GENUPS1;puiseux;MSRUsFA;8!1|
@@ -417,7 +417,7 @@
 (DECLAIM (NOTINLINE |GenerateUnivariatePowerSeries1;|)) 
 
 (DEFUN |GenerateUnivariatePowerSeries1;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|GenerateUnivariatePowerSeries1| DV$1))
@@ -431,9 +431,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |GenerateUnivariatePowerSeries1| (#1=#:G44)
+(DEFUN |GenerateUnivariatePowerSeries1| (#1=#:G45)
   (SPROG NIL
-         (PROG (#2=#:G45)
+         (PROG (#2=#:G46)
            (RETURN
             (COND
              ((LETT #2#
@@ -452,17 +452,17 @@
 
 (MAKEPROP '|GenerateUnivariatePowerSeries1| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |One|) (|Integer|)
-              (4 . |One|) (8 . +) (|Stream| 6) (14 . |concat|) (|Mapping| %)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |1|) (|Integer|)
+              (4 . |1|) (8 . +) (|Stream| 6) (14 . |concat|) (|Mapping| %)
               (20 . |delay|) (25 . |empty|) (|Boolean|) (29 . =) (|Any|)
               (|Mapping| 6 8) (|Symbol|) |GENUPS1;taylor;MSRA;4|
               (|UniversalSegment| 24) (35 . |hasHi|) (|NonNegativeInteger|)
               (40 . |low|) (45 . |high|) |GENUPS1;taylor;MSRUsA;5|
               (|UniversalSegment| 8) (50 . |hasHi|) (55 . |low|) (60 . |high|)
-              |GENUPS1;laurent;MSRUsA;6| (|Fraction| 8) (65 . /) (71 . |Zero|)
+              |GENUPS1;laurent;MSRUsA;6| (|Fraction| 8) (65 . /) (71 . |0|)
               (75 . |positive?|) (|UniversalSegment| 33) (80 . |hasHi|)
               (85 . |low|) (90 . |high|) (95 . <) (101 . |numer|)
-              (106 . |denom|) (111 . |lcm|) (117 . |segment|) (123 . |One|)
+              (106 . |denom|) (111 . |lcm|) (117 . |segment|) (123 . |1|)
               (127 . |segment|) (|Mapping| 6 33) |GENUPS1;puiseux;MSRUsFA;8|)
            '#(|taylor| 132 |puiseux| 147 |laurent| 156) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))

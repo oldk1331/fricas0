@@ -34,8 +34,8 @@
 
 (SDEFUN |FMTLATEX;texEscapeString| ((|s| (|String|)) (% (|String|)))
         (SPROG
-         ((|str| (|String|)) (|n| (|Integer|)) (|p| (|Integer|))
-          (|cc| (|CharacterClass|)))
+         ((|cc| (|CharacterClass|)) (|p| (|Integer|)) (|n| (|Integer|))
+          (|str| (|String|)))
          (SEQ (LETT |cc| (SPADCALL " \\{}$^_%~#&" (QREFELT % 18)))
               (LETT |p| (SPADCALL |cc| |s| 1 (QREFELT % 20)))
               (EXIT
@@ -114,7 +114,7 @@
 
 (SDEFUN |FMTLATEX;formatFunction;ObLOb;14|
         ((|b| #1=(|OutputBox|)) (|lb| (|List| #1#)) (% (|OutputBox|)))
-        (SPROG ((|bx| (|OutputBox|)) (#2=#:G48 NIL) (|a| NIL))
+        (SPROG ((|a| NIL) (#2=#:G49 NIL) (|bx| (|OutputBox|)))
                (SEQ
                 (COND
                  ((NULL |lb|)
@@ -159,23 +159,23 @@
           (LETT |op| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|bargs| NIL) (#1=#:G54 NIL) (|a| NIL) (#2=#:G53 NIL))
+            (SPROG ((#1=#:G54 NIL) (|a| NIL) (#2=#:G55 NIL) (|bargs| NIL))
                    (SEQ
                     (LETT |bargs|
                           (PROGN
-                           (LETT #2# NIL)
-                           (SEQ (LETT |a| NIL) (LETT #1# |args|) G190
+                           (LETT #1# NIL)
+                           (SEQ (LETT |a| NIL) (LETT #2# |args|) G190
                                 (COND
-                                 ((OR (ATOM #1#)
-                                      (PROGN (LETT |a| (CAR #1#)) NIL))
+                                 ((OR (ATOM #2#)
+                                      (PROGN (LETT |a| (CAR #2#)) NIL))
                                   (GO G191)))
                                 (SEQ
                                  (EXIT
-                                  (LETT #2#
+                                  (LETT #1#
                                         (CONS (SPADCALL |a| (QREFELT % 36))
-                                              #2#))))
-                                (LETT #1# (CDR #1#)) (GO G190) G191
-                                (EXIT (NREVERSE #2#)))))
+                                              #1#))))
+                                (LETT #2# (CDR #2#)) (GO G190) G191
+                                (EXIT (NREVERSE #1#)))))
                     (EXIT
                      (SPADCALL (SPADCALL |p| |prec| (QREFELT % 38))
                                (SPADCALL (SPADCALL |op| (QREFELT % 12)) |bargs|
@@ -184,8 +184,8 @@
 
 (SDEFUN |FMTLATEX;integralArgument| ((|a| (|OutputForm|)) (% (|OutputForm|)))
         (SPROG
-         ((|op3| (|OutputForm|)) (|op2| #1=(|OutputForm|))
-          (|args| (|List| (|OutputForm|))) (|op| #1#))
+         ((|op| #1=(|OutputForm|)) (|args| (|List| (|OutputForm|))) (|op2| #1#)
+          (|op3| (|OutputForm|)))
          (SEQ
           (COND ((SPADCALL |a| (QREFELT % 43)) |a|)
                 (#2='T
@@ -230,7 +230,7 @@
           (LETT |p| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|bu| NIL) (|bl| NIL) (|ba| NIL) (|a| NIL))
+            (SPROG ((|a| NIL) (|ba| NIL) (|bl| NIL) (|bu| NIL))
                    (SEQ
                     (LETT |bl|
                           (SPADCALL
@@ -274,7 +274,7 @@
           (LETT |s| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|bu| NIL) (|bl| NIL) (|ba| NIL))
+            (SPROG ((|ba| NIL) (|bl| NIL) (|bu| NIL))
                    (SEQ
                     (LETT |bl|
                           (SPADCALL
@@ -321,8 +321,8 @@
         ((|prec| (|Integer|)) (|args| (|List| (|OutputForm|)))
          (% (|OutputBox|)))
         (SPROG
-         ((|p2| (|Integer|)) (|p1| (|Integer|)) (|s| (|String|))
-          (|b| (|OutputBox|)) (|a| (|OutputForm|)))
+         ((|a| (|OutputForm|)) (|b| (|OutputBox|)) (|s| (|String|))
+          (|p1| (|Integer|)) (|p2| (|Integer|)))
          (SEQ (LETT |a| (|SPADfirst| |args|))
               (LETT |s|
                     (SEQ
@@ -402,7 +402,7 @@
           (LETT |h2| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|bn| NIL) (|bx| NIL))
+            (SPROG ((|bx| NIL) (|bn| NIL))
                    (SEQ
                     (LETT |bx|
                           (SPADCALL |p|
@@ -438,7 +438,7 @@
           (LETT |p| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|b| NIL) (|a| NIL) (|i| NIL))
+            (SPROG ((|i| NIL) (|a| NIL) (|b| NIL))
                    (SEQ
                     (LETT |b|
                           (|FMTLATEX;tex1| "\\SCRIPTS"
@@ -499,7 +499,7 @@
           (LETT |p| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|b2| NIL) (|b1| NIL))
+            (SPROG ((|b1| NIL) (|b2| NIL))
                    (SEQ
                     (LETT |b1|
                           (SPADCALL
@@ -528,8 +528,8 @@
           (RETURN
            (PROGN
             (SPROG
-             ((|b2| NIL) (|lb| NIL) (|o| NIL) (#1=#:G118 NIL) (|a| NIL)
-              (|i| NIL) (|b1| NIL))
+             ((|b1| NIL) (|i| NIL) (|a| NIL) (#1=#:G119 NIL) (|o| NIL)
+              (|lb| NIL) (|b2| NIL))
              (SEQ
               (LETT |b1|
                     (SPADCALL (SPADCALL |args| (QREFELT % 75)) |p|
@@ -571,7 +571,7 @@
           (LETT |p| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|b2| NIL) (|b1| NIL))
+            (SPROG ((|b1| NIL) (|b2| NIL))
                    (SEQ
                     (LETT |b1|
                           (SPADCALL
@@ -639,7 +639,7 @@
 (SDEFUN |FMTLATEX;binomial;ILOb;33|
         ((|prec| (|Integer|)) (|args| (|List| (|OutputForm|)))
          (% (|OutputBox|)))
-        (SPROG ((|b2| #1=(|OutputBox|)) (|b1| #1#))
+        (SPROG ((|b1| #1=(|OutputBox|)) (|b2| #1#))
                (SEQ
                 (LETT |b1|
                       (SPADCALL (SPADCALL |args| 1 (QREFELT % 51))
@@ -652,7 +652,7 @@
 (SDEFUN |FMTLATEX;zag;ILOb;34|
         ((|prec| (|Integer|)) (|args| (|List| (|OutputForm|)))
          (% (|OutputBox|)))
-        (SPROG ((|b2| #1=(|OutputBox|)) (|b1| #1#))
+        (SPROG ((|b1| #1=(|OutputBox|)) (|b2| #1#))
                (SEQ
                 (LETT |b1|
                       (SPADCALL (SPADCALL |args| 1 (QREFELT % 51))
@@ -680,7 +680,7 @@
           (LETT |h| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|entries| NIL) (|e| NIL) (|b| NIL))
+            (SPROG ((|b| NIL) (|e| NIL) (|entries| NIL))
                    (SEQ
                     (COND
                      ((SPADCALL |args| (QREFELT % 80))
@@ -752,7 +752,7 @@
          (%
           (|OperatorHandlers|
            (|Mapping| (|OutputBox|) (|Integer|) (|List| (|OutputForm|))))))
-        (SPROG ((#1=#:G538 NIL))
+        (SPROG ((#1=#:G539 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -1218,7 +1218,7 @@
                   (SPADCALL |oh| -1 "MATRIX" (SPADCALL "[" "]" (QREFELT % 103))
                             (QREFELT % 106))
                   (SPADCALL |oh| -1 "theMap" (ELT % 69) (QREFELT % 106))
-                  (EXIT (PROGN (LETT #1# |oh|) (GO #4=#:G537)))))
+                  (EXIT (PROGN (LETT #1# |oh|) (GO #4=#:G538)))))
                 #4# (EXIT #1#)))) 
 
 (SDEFUN |FMTLATEX;operatorHandlers;Oh;40|
@@ -1246,7 +1246,7 @@
 
 (DEFUN |FormatLaTeX| ()
   (SPROG NIL
-         (PROG (#1=#:G541)
+         (PROG (#1=#:G542)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|FormatLaTeX|))
@@ -1278,7 +1278,7 @@
               |FMTLATEX;function;SI2M;15| (|OutputFormTools|) (83 . |atom?|)
               (88 . |operator|) (|Symbol|) (93 . |is_symbol?|) (|List| 6)
               (99 . |arguments|) (|NonNegativeInteger|) (104 . ~=)
-              (110 . |elt|) (116 . |coerce|) (121 . |elt|) (127 . |One|)
+              (110 . |elt|) (116 . |coerce|) (121 . |elt|) (127 . |1|)
               (131 . |minPrecedence|) (135 . |formatExpression|)
               (141 . |empty?|) |FMTLATEX;integral;IM;17| (146 . |#|) (151 . =)
               |FMTLATEX;sum;IM;19| |FMTLATEX;product;IM;20| (157 . |string?|)
@@ -1286,7 +1286,7 @@
               (178 . |position|) |FMTLATEX;theMap;ILOb;21|
               |FMTLATEX;overbar;I2M;22| |FMTLATEX;box;2M;23| (185 . |bracket|)
               (192 . >) |FMTLATEX;nthRoot;I3M;24| (198 . |first|)
-              (203 . |rest|) (|SingleInteger|) (208 . |One|) (212 . |One|)
+              (203 . |rest|) (|SingleInteger|) (208 . |1|) (212 . |1|)
               (216 . |empty?|) (221 . |string|) (226 . =)
               |FMTLATEX;scripts;IM;25| (232 . +) |FMTLATEX;subscript;IM;26|
               (238 . |empty|) (242 . |odd?|) (247 . |cons|) (253 . |reverse!|)

@@ -6,7 +6,7 @@
         (SPADCALL |v| (QREFELT % 11))) 
 
 (SDEFUN |FRMOD-;coordinates;VM;3| ((|v| (|Vector| S)) (% (|Matrix| R)))
-        (SPROG ((#1=#:G13 NIL) (|i| NIL) (|j| NIL) (|m| (|Matrix| R)))
+        (SPROG ((|m| (|Matrix| R)) (|j| NIL) (|i| NIL) (#1=#:G13 NIL))
                (SEQ
                 (LETT |m|
                       (MAKE_MATRIX1 (QVSIZE |v|) (SPADCALL (QREFELT % 14))
@@ -26,17 +26,18 @@
 
 (SDEFUN |FRMOD-;index;PiS;4| ((|i| (|PositiveInteger|)) (% (S)))
         (SPROG
-         ((|l| (|List| R)) (|i1| #1=(|Integer|)) (|ii| (|Integer|))
+         ((|m| (|NonNegativeInteger|)) (|j| NIL) (#1=#:G20 NIL)
           (|#G11|
-           (|Record| (|:| |quotient| (|Integer|)) (|:| |remainder| #1#)))
-          (#2=#:G20 NIL) (|j| NIL) (|m| (|NonNegativeInteger|)))
+           (|Record| (|:| |quotient| (|Integer|))
+                     (|:| |remainder| #2=(|Integer|))))
+          (|ii| (|Integer|)) (|i1| #2#) (|l| (|List| R)))
          (SEQ (LETT |m| (SPADCALL (QREFELT % 24))) (LETT |l| NIL)
               (LETT |ii| (- |i| 1))
-              (SEQ (LETT |j| 1) (LETT #2# (SPADCALL (QREFELT % 14))) G190
-                   (COND ((|greater_SI| |j| #2#) (GO G191)))
+              (SEQ (LETT |j| 1) (LETT #1# (SPADCALL (QREFELT % 14))) G190
+                   (COND ((|greater_SI| |j| #1#) (GO G191)))
                    (SEQ
                     (PROGN
-                     (LETT |#G11| (DIVIDE2 |ii| |m|))
+                     (LETT |#G11| (|divide_INT| |ii| |m|))
                      (LETT |ii| (QCAR |#G11|))
                      (LETT |i1| (QCDR |#G11|))
                      |#G11|)
@@ -48,8 +49,8 @@
 
 (SDEFUN |FRMOD-;lookup;SPi;5| ((|x| (S)) (% (|PositiveInteger|)))
         (SPROG
-         ((|res| (|Integer|)) (#1=#:G25 NIL) (|i| NIL)
-          (|m| (|NonNegativeInteger|)) (|v| (|Vector| R)))
+         ((|v| (|Vector| R)) (|m| (|NonNegativeInteger|)) (|i| NIL)
+          (#1=#:G25 NIL) (|res| (|Integer|)))
          (SEQ (LETT |v| (SPADCALL |x| (QREFELT % 9))) (LETT |res| 0)
               (LETT |m| (SPADCALL (QREFELT % 24)))
               (SEQ (LETT |i| 1) (LETT #1# (SPADCALL (QREFELT % 14))) G190
@@ -69,18 +70,18 @@
         (EXPT (SPADCALL (QREFELT % 24)) (SPADCALL (QREFELT % 14)))) 
 
 (SDEFUN |FRMOD-;random;S;7| ((% (S)))
-        (SPROG ((#1=#:G30 NIL) (#2=#:G32 NIL) (|i| NIL) (#3=#:G31 NIL))
+        (SPROG ((#1=#:G31 NIL) (|i| NIL) (#2=#:G32 NIL) (#3=#:G30 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
-                  (LETT #3# (GETREFV #4=(SPADCALL (QREFELT % 14))))
-                  (SEQ (LETT |i| 1) (LETT #2# #4#) (LETT #1# 0) G190
+                  (LETT #1# (GETREFV #4=(SPADCALL (QREFELT % 14))))
+                  (SEQ (LETT |i| 1) (LETT #2# #4#) (LETT #3# 0) G190
                        (COND ((|greater_SI| |i| #2#) (GO G191)))
-                       (SEQ (EXIT (SETELT #3# #1# (SPADCALL (QREFELT % 33)))))
-                       (LETT #1#
-                             (PROG1 (|inc_SI| #1#) (LETT |i| (|inc_SI| |i|))))
+                       (SEQ (EXIT (SETELT #1# #3# (SPADCALL (QREFELT % 33)))))
+                       (LETT #3#
+                             (PROG1 (|inc_SI| #3#) (LETT |i| (|inc_SI| |i|))))
                        (GO G190) G191 (EXIT NIL))
-                  #3#)
+                  #1#)
                  (QREFELT % 11))))) 
 
 (SDEFUN |FRMOD-;hashUpdate!;HsSHs;8|
@@ -90,7 +91,7 @@
 (DECLAIM (NOTINLINE |FramedModule&;|)) 
 
 (DEFUN |FramedModule&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -130,7 +131,7 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|Vector| 7) (0 . |coordinates|) |FRMOD-;convert;SV;1|
               (5 . |represents|) |FRMOD-;convert;VS;2| (|PositiveInteger|)
-              (10 . |rank|) (14 . |Zero|) (|Integer|) (|Vector| 6)
+              (10 . |rank|) (14 . |0|) (|Integer|) (|Vector| 6)
               (18 . |minIndex|) (|Matrix| 7) (23 . |setRow!|) (|Vector| %)
               |FRMOD-;coordinates;VM;3| (|NonNegativeInteger|) (30 . |size|)
               (34 . |index|) (|List| 7) (39 . |vector|) (44 . |index|)

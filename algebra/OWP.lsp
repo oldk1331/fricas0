@@ -3,8 +3,8 @@
 
 (DEFUN |OrdinaryWeightedPolynomials;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 |#2|)
@@ -19,6 +19,11 @@
                                        (LIST
                                         (|HasCategory| |#1|
                                                        '(|CommutativeRing|))
+                                        (AND
+                                         (|HasCategory| |#1|
+                                                        '(|CharacteristicZero|))
+                                         (|HasCategory| |#1|
+                                                        '(|CommutativeRing|)))
                                         (|HasCategory| |#1| '(|Field|))))))
     (|haddProp| |$ConstructorCache| '|OrdinaryWeightedPolynomials|
                 (LIST DV$1 DV$2 DV$3 DV$4) (CONS 1 %))
@@ -65,16 +70,16 @@
               (|Polynomial| 6) (|Void|))
            '#() 'NIL
            (CONS
-            (|makeByteWordVec2| 1
+            (|makeByteWordVec2| 2
                                 '(1 0 1 0 0 1 0 1 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0 0 0))
+                                  0 0 0 0 2 0 0 0))
             (CONS
              '#(|Algebra&| NIL |NonAssociativeAlgebra&| NIL |Rng&| |Module&|
                 NIL NIL NIL |NonAssociativeRing&| NIL NIL NIL NIL
                 |NonAssociativeRng&| |AbelianGroup&| NIL NIL NIL
                 |AbelianMonoid&| |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL
-                |AbelianSemiGroup&| |Magma&| |SetCategory&| NIL |BasicType&|
-                NIL)
+                |AbelianSemiGroup&| |SetWithZero&| |Magma&| |SetCategory&| NIL
+                NIL |BasicType&| NIL)
              (CONS
               '#((|Algebra| 6) (|Ring|) (|NonAssociativeAlgebra| 6)
                  (|SemiRing|) (|Rng|) (|Module| 6) (|SemiRng|) (|BiModule| 6 6)
@@ -83,8 +88,9 @@
                  (|NonAssociativeRng|) (|AbelianGroup|)
                  (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
                  (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
-                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|) (|Magma|)
-                 (|SetCategory|) (|CoercibleTo| 11) (|BasicType|)
+                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|)
+                 (|SetWithZero|) (|Magma|) (|SetCategory|)
+                 (|CharacteristicZero|) (|CoercibleTo| 11) (|BasicType|)
                  (|unitsKnown|))
               (|makeByteWordVec2| -999999 'NIL))))
            '|lookupIncomplete|)) 

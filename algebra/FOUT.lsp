@@ -26,52 +26,53 @@
           (|Record| (|:| |mantissa| (|Integer|))
                     (|:| |exponent| (|Integer|)))))
         (SPROG
-         ((|dfm1| (|Integer|)) (|r1| #1=(|Integer|)) (|q1| #2=(|Integer|))
-          (|#G8| #3=(|Record| (|:| |quotient| #2#) (|:| |remainder| #1#)))
-          (|e10| #4=(|Integer|)) (#5=#:G60 NIL) (|r| #1#) (|q| #2#) (|#G7| #3#)
-          (#6=#:G56 NIL)
-          (|dm|
-           (|Record| (|:| |mantissa| (|Integer|))
-                     (|:| |exponent| (|Integer|))))
-          (|ldm|
-           (|Record| (|:| |mantissa| (|Integer|))
-                     (|:| |exponent| (|Integer|))))
-          (|le10|
-           #7=(|Record| (|:| |mantissa| (|Integer|))
-                        (|:| |exponent| (|Integer|))))
-          (|n10| #8=(|Integer|)) (#9=#:G54 NIL) (|d10| #8#) (#10=#:G49 NIL)
-          (|ed| #4#)
-          (|l10|
-           (|Record| (|:| |mantissa| (|Integer|))
-                     (|:| |exponent| (|Integer|))))
-          (|lf|
-           (|Record| (|:| |mantissa| (|Integer|))
-                     (|:| |exponent| (|Integer|))))
-          (|le| #7#)
+         ((|ba0| (|Integer|)) (|ea| (|Integer|)) (#1=#:G44 NIL)
+          (|ba1| (|PositiveInteger|)) (#2=#:G46 NIL) (|m| #3=(|Integer|))
+          (|e| (|Integer|))
           (|lm|
            (|Record| (|:| |mantissa| (|Integer|))
                      (|:| |exponent| (|Integer|))))
-          (|e| (|Integer|)) (|m| #8#) (#11=#:G43 NIL)
-          (|ba1| (|PositiveInteger|)) (#12=#:G41 NIL) (|ea| (|Integer|))
-          (|ba0| (|Integer|)))
-         (SEQ (LETT |ba0| (+ (QUOTIENT2 (* |d| 70777) 21306) 1))
+          (|le|
+           #4=(|Record| (|:| |mantissa| (|Integer|))
+                        (|:| |exponent| (|Integer|))))
+          (|lf|
+           (|Record| (|:| |mantissa| (|Integer|))
+                     (|:| |exponent| (|Integer|))))
+          (|l10|
+           (|Record| (|:| |mantissa| (|Integer|))
+                     (|:| |exponent| (|Integer|))))
+          (|ed| #5=(|Integer|)) (#6=#:G52 NIL) (|d10| #3#) (#7=#:G57 NIL)
+          (|n10| #3#) (|le10| #4#)
+          (|ldm|
+           (|Record| (|:| |mantissa| (|Integer|))
+                     (|:| |exponent| (|Integer|))))
+          (|dm|
+           (|Record| (|:| |mantissa| (|Integer|))
+                     (|:| |exponent| (|Integer|))))
+          (#8=#:G58 NIL)
+          (|#G7|
+           #9=(|Record| (|:| |quotient| #10=(|Integer|))
+                        (|:| |remainder| #11=(|Integer|))))
+          (|q| #10#) (|r| #11#) (#12=#:G62 NIL) (|e10| #5#) (|#G8| #9#)
+          (|q1| #10#) (|r1| #11#) (|dfm1| (|Integer|)))
+         (SEQ (LETT |ba0| (+ (|quotient_INT| (* |d| 70777) 21306) 1))
               (LETT |m| (QCAR |f|)) (LETT |e| (QCDR |f|))
               (LETT |ea| (ABS (+ (INTEGER-LENGTH |m|) |e|)))
               (LETT |ba1|
-                    (PROG1 (LETT #12# (+ (+ |ba0| (INTEGER-LENGTH |ea|)) 25))
-                      (|check_subtype2| (> #12# 0) '(|PositiveInteger|)
-                                        '(|Integer|) #12#)))
+                    (PROG1 (LETT #1# (+ (+ |ba0| (INTEGER-LENGTH |ea|)) 25))
+                      (|check_subtype2| (> #1# 0) '(|PositiveInteger|)
+                                        '(|Integer|) #1#)))
               (COND
                ((> (INTEGER-LENGTH |m|) |ba1|)
                 (SEQ (LETT |ed| (- (INTEGER-LENGTH |m|) |ba1|))
                      (LETT |m|
-                           (QUOTIENT2 |m|
-                                      (EXPT 2
-                                            (PROG1 (LETT #11# |ed|)
-                                              (|check_subtype2| (>= #11# 0)
-                                                                '(|NonNegativeInteger|)
-                                                                '(|Integer|)
-                                                                #11#)))))
+                           (|quotient_INT| |m|
+                                           (EXPT 2
+                                                 (PROG1 (LETT #2# |ed|)
+                                                   (|check_subtype2| (>= #2# 0)
+                                                                     '(|NonNegativeInteger|)
+                                                                     '(|Integer|)
+                                                                     #2#)))))
                      (EXIT (LETT |e| (+ |e| |ed|))))))
               (LETT |lm| (SPADCALL (CONS |m| 0) |ba1| (QREFELT % 16)))
               (LETT |le|
@@ -88,20 +89,20 @@
                       (LETT |d10|
                             (* |d10|
                                (EXPT 2
-                                     (PROG1 (LETT #10# |ed|)
-                                       (|check_subtype2| (>= #10# 0)
+                                     (PROG1 (LETT #6# |ed|)
+                                       (|check_subtype2| (>= #6# 0)
                                                          '(|NonNegativeInteger|)
                                                          '(|Integer|)
-                                                         #10#))))))))
+                                                         #6#))))))))
                (#13='T
                 (LETT |n10|
                       (* |n10|
                          (EXPT 2
-                               (PROG1 (LETT #9# |ed|)
-                                 (|check_subtype2| (>= #9# 0)
+                               (PROG1 (LETT #7# |ed|)
+                                 (|check_subtype2| (>= #7# 0)
                                                    '(|NonNegativeInteger|)
-                                                   '(|Integer|) #9#)))))))
-              (LETT |e10| (- (QUOTIENT2 |n10| |d10|) |d|))
+                                                   '(|Integer|) #7#)))))))
+              (LETT |e10| (- (|quotient_INT| |n10| |d10|) |d|))
               (LETT |le10|
                     (SPADCALL (CONS |e10| 0) |l10| |ba1| (QREFELT % 18)))
               (LETT |ldm| (SPADCALL |lf| |le10| |ba1| (QREFELT % 21)))
@@ -112,36 +113,37 @@
                       (SEQ
                        (PROGN
                         (LETT |#G7|
-                              (DIVIDE2 (QCAR |dm|)
-                                       (EXPT 2
-                                             (PROG1
-                                                 (LETT #6#
-                                                       (- (- (QCDR |dm|)) 1))
-                                               (|check_subtype2| (>= #6# 0)
-                                                                 '(|NonNegativeInteger|)
-                                                                 '(|Integer|)
-                                                                 #6#)))))
+                              (|divide_INT| (QCAR |dm|)
+                                            (EXPT 2
+                                                  (PROG1
+                                                      (LETT #8#
+                                                            (- (- (QCDR |dm|))
+                                                               1))
+                                                    (|check_subtype2|
+                                                     (>= #8# 0)
+                                                     '(|NonNegativeInteger|)
+                                                     '(|Integer|) #8#)))))
                         (LETT |q| (QCAR |#G7|))
                         (LETT |r| (QCDR |#G7|))
                         |#G7|)
-                       (LETT |dfm1| (QUOTIENT2 |q| 2))
+                       (LETT |dfm1| (|quotient_INT| |q| 2))
                        (COND
                         ((ODDP |q|)
                          (COND ((> |r| 0) (LETT |dfm1| (+ |dfm1| 1))))))
                        (COND
                         ((>= |dfm1|
                              (EXPT 10
-                                   (PROG1 (LETT #5# |d|)
-                                     (|check_subtype2| (>= #5# 0)
+                                   (PROG1 (LETT #12# |d|)
+                                     (|check_subtype2| (>= #12# 0)
                                                        '(|NonNegativeInteger|)
-                                                       '(|Integer|) #5#))))
+                                                       '(|Integer|) #12#))))
                          (SEQ (LETT |e10| (+ |e10| 1))
                               (PROGN
-                               (LETT |#G8| (DIVIDE2 |q| 10))
+                               (LETT |#G8| (|divide_INT| |q| 10))
                                (LETT |q1| (QCAR |#G8|))
                                (LETT |r1| (QCDR |#G8|))
                                |#G8|)
-                              (LETT |dfm1| (QUOTIENT2 |q1| 2))
+                              (LETT |dfm1| (|quotient_INT| |q1| 2))
                               (EXIT
                                (COND
                                 ((ODDP |q1|)
@@ -159,8 +161,8 @@
                     (|:| |separator| (|Character|))))
          (% (|String|)))
         (SPROG
-         ((|j| (|Integer|)) (#2=#:G75 NIL) (|i| NIL) (|t| (|String|))
-          (#3=#:G67 NIL) (|n| (|Integer|)) (|sp| #1#))
+         ((|sp| #1#) (|n| (|Integer|)) (#2=#:G69 NIL) (|t| (|String|))
+          (|i| NIL) (#3=#:G77 NIL) (|j| (|Integer|)))
          (SEQ (LETT |sp| (QVELT |mr| 3))
               (EXIT
                (COND ((ZEROP |sp|) |s|)
@@ -169,15 +171,17 @@
                            (LETT |t|
                                  (|make_string_code|
                                   (PROG1
-                                      (LETT #3#
-                                            (+ |n| (QUOTIENT2 (- |n| 1) |sp|)))
-                                    (|check_subtype2| (>= #3# 0)
+                                      (LETT #2#
+                                            (+ |n|
+                                               (|quotient_INT| (- |n| 1)
+                                                               |sp|)))
+                                    (|check_subtype2| (>= #2# 0)
                                                       '(|NonNegativeInteger|)
-                                                      '(|Integer|) #3#))
+                                                      '(|Integer|) #2#))
                                   (QVELT |mr| 4)))
                            (LETT |j| 1)
-                           (SEQ (LETT |i| 1) (LETT #2# |n|) G190
-                                (COND ((|greater_SI| |i| #2#) (GO G191)))
+                           (SEQ (LETT |i| 1) (LETT #3# |n|) G190
+                                (COND ((|greater_SI| |i| #3#) (GO G191)))
                                 (SEQ
                                  (SPADCALL |t| |j|
                                            (SPADCALL |s| |i| (QREFELT % 25))
@@ -199,8 +203,8 @@
                     (|:| |separator| (|Character|))))
          (% (|String|)))
         (SPROG
-         ((|j| (|Integer|)) (|i| NIL) (|t| (|String|)) (#2=#:G77 NIL)
-          (|n| (|Integer|)) (|sp| #1#))
+         ((|sp| #1#) (|n| (|Integer|)) (#2=#:G79 NIL) (|t| (|String|))
+          (|i| NIL) (|j| (|Integer|)))
          (SEQ (LETT |sp| (QVELT |mr| 3))
               (EXIT
                (COND ((ZEROP |sp|) |s|)
@@ -210,7 +214,9 @@
                                  (|make_string_code|
                                   (PROG1
                                       (LETT #2#
-                                            (+ |n| (QUOTIENT2 (- |n| 1) |sp|)))
+                                            (+ |n|
+                                               (|quotient_INT| (- |n| 1)
+                                                               |sp|)))
                                     (|check_subtype2| (>= #2# 0)
                                                       '(|NonNegativeInteger|)
                                                       '(|Integer|) #2#))
@@ -233,8 +239,8 @@
 (SDEFUN |FOUT;split_digits|
         ((|s| #1=(|String|)) (|top_digit| (|Integer|)) (% (|List| (|String|))))
         (SPROG
-         ((|s2| #1#) (#2=#:G88 NIL) (|s1| (|String|)) (#3=#:G86 NIL)
-          (|n1| (|NonNegativeInteger|)))
+         ((|n1| (|NonNegativeInteger|)) (#2=#:G88 NIL) (|s1| (|String|))
+          (#3=#:G90 NIL) (|s2| #1#))
          (SEQ (LETT |s2| |s|) (LETT |n1| (QCSIZE |s|))
               (LETT |s1|
                     (COND
@@ -255,10 +261,10 @@
                              (EXIT
                               (STRCONC |s|
                                        (|make_string_code|
-                                        (PROG1 (LETT #3# (- |top_digit| |n1|))
-                                          (|check_subtype2| (>= #3# 0)
+                                        (PROG1 (LETT #2# (- |top_digit| |n1|))
+                                          (|check_subtype2| (>= #2# 0)
                                                             '(|NonNegativeInteger|)
-                                                            '(|Integer|) #3#))
+                                                            '(|Integer|) #2#))
                                         (|STR_to_CHAR| #5="0"))))))))
                      (#4# "0")))
               (COND
@@ -266,9 +272,9 @@
                 (LETT |s2|
                       (STRCONC
                        (|make_string_code|
-                        (PROG1 (LETT #2# (- |top_digit|))
-                          (|check_subtype2| (>= #2# 0) '(|NonNegativeInteger|)
-                                            '(|Integer|) #2#))
+                        (PROG1 (LETT #3# (- |top_digit|))
+                          (|check_subtype2| (>= #3# 0) '(|NonNegativeInteger|)
+                                            '(|Integer|) #3#))
                         (|STR_to_CHAR| #5#))
                        |s2|))))
               (EXIT (LIST |s1| |s2|))))) 
@@ -285,13 +291,13 @@
                     (|:| |separator| (|Character|))))
          (% (|String|)))
         (SPROG
-         ((|s2| (|String|)) (|s1| (|String|)) (|#G24| #3=(|List| (|String|)))
-          (|#G23| #3#) (|s| (|String|)) (|top_digit| (|Integer|))
-          (|n0| (|NonNegativeInteger|)) (|de| #2#) (|dm| #1#)
-          (|#G22|
-           #4=(|Record| (|:| |mantissa| (|Integer|))
+         ((|df|
+           #3=(|Record| (|:| |mantissa| (|Integer|))
                         (|:| |exponent| (|Integer|))))
-          (|df| #4#))
+          (|#G22| #3#) (|dm| #1#) (|de| #2#) (|n0| (|NonNegativeInteger|))
+          (|top_digit| (|Integer|)) (|s| (|String|))
+          (|#G23| #4=(|List| (|String|))) (|#G24| #4#) (|s1| (|String|))
+          (|s2| (|String|)))
          (SEQ (LETT |df| (SPADCALL |f| |d| (QREFELT % 23)))
               (PROGN
                (LETT |#G22| |df|)
@@ -327,16 +333,20 @@
                     (|:| |separator| (|Character|))))
          (% (|String|)))
         (SPROG
-         ((|s2| #1=(|String|)) (#2=#:G124 NIL) (|s1| (|String|))
-          (|nm| #3=(|Integer|)) (#4=#:G122 NIL) (#5=#:G117 NIL)
-          (|#G33| #6=(|List| #1#)) (|#G32| #6#) (|s| (|String|))
-          (|top_digit| #7=(|Integer|)) (|n0| (|NonNegativeInteger|))
-          (|e| #8=(|Integer|)) (|m| #3#) (|d10h| (|NonNegativeInteger|))
-          (|r| #9=(|Integer|)) (|q| #10=(|Integer|))
-          (|#G31| (|Record| (|:| |quotient| #10#) (|:| |remainder| #9#)))
-          (|d10| (|PositiveInteger|)) (#11=#:G112 NIL) (#12=#:G110 NIL)
-          (|top_bit| #7#) (|i| (|Integer|)) (|lb| (|Integer|)) (#13=#:G99 NIL)
-          (|#G30| (|Record| (|:| |mantissa| #3#) (|:| |exponent| #8#))))
+         ((|#G30|
+           (|Record| (|:| |mantissa| #1=(|Integer|))
+                     (|:| |exponent| #2=(|Integer|))))
+          (#3=#:G101 NIL) (|lb| (|Integer|)) (|i| (|Integer|))
+          (|top_bit| #4=(|Integer|)) (#5=#:G112 NIL) (#6=#:G113 NIL)
+          (|d10| (|PositiveInteger|))
+          (|#G31|
+           (|Record| (|:| |quotient| #7=(|Integer|))
+                     (|:| |remainder| #8=(|Integer|))))
+          (|q| #7#) (|r| #8#) (|d10h| (|NonNegativeInteger|)) (|m| #1#)
+          (|e| #2#) (|n0| (|NonNegativeInteger|)) (|top_digit| #4#)
+          (|s| (|String|)) (|#G32| #9=(|List| #10=(|String|))) (|#G33| #9#)
+          (#11=#:G118 NIL) (#12=#:G123 NIL) (|nm| #1#) (|s1| (|String|))
+          (#13=#:G125 NIL) (|s2| #10#))
          (SEQ
           (PROGN
            (LETT |#G30| |f|)
@@ -352,10 +362,10 @@
                              (STRCONC "."
                                       (|FOUT;insert_separators_from_left|
                                        (|make_string_code|
-                                        (PROG1 (LETT #13# |d|)
-                                          (|check_subtype2| (>= #13# 0)
+                                        (PROG1 (LETT #3# |d|)
+                                          (|check_subtype2| (>= #3# 0)
                                                             '(|NonNegativeInteger|)
-                                                            '(|Integer|) #13#))
+                                                            '(|Integer|) #3#))
                                         (|STR_to_CHAR| #15="0"))
                                        |mr| %))))))
             ((< |m| 0)
@@ -401,27 +411,27 @@
                                  (LETT |m|
                                        (* |m|
                                           (EXPT 5
-                                                (PROG1 (LETT #12# |e|)
-                                                  (|check_subtype2| (>= #12# 0)
+                                                (PROG1 (LETT #5# |e|)
+                                                  (|check_subtype2| (>= #5# 0)
                                                                     '(|NonNegativeInteger|)
                                                                     '(|Integer|)
-                                                                    #12#)))))
+                                                                    #5#)))))
                                  (COND
                                   ((> |e| |d|)
                                    (SEQ
                                     (LETT |d10|
                                           (EXPT 10
-                                                (PROG1 (LETT #11# (- |e| |d|))
-                                                  (|check_subtype2| (>= #11# 0)
+                                                (PROG1 (LETT #6# (- |e| |d|))
+                                                  (|check_subtype2| (>= #6# 0)
                                                                     '(|NonNegativeInteger|)
                                                                     '(|Integer|)
-                                                                    #11#))))
+                                                                    #6#))))
                                     (PROGN
-                                     (LETT |#G31| (DIVIDE2 |m| |d10|))
+                                     (LETT |#G31| (|divide_INT| |m| |d10|))
                                      (LETT |q| (QCAR |#G31|))
                                      (LETT |r| (QCDR |#G31|))
                                      |#G31|)
-                                    (LETT |d10h| (QUOTIENT2 |d10| 2))
+                                    (LETT |d10h| (|quotient_INT| |d10| 2))
                                     (LETT |m|
                                           (COND ((< |r| |d10h|) |q|)
                                                 ((> |r| |d10h|) (+ |q| 1))
@@ -458,11 +468,11 @@
                                          (STRCONC |s2|
                                                   (|make_string_code|
                                                    (PROG1
-                                                       (LETT #5# (- |d| |e|))
+                                                       (LETT #11# (- |d| |e|))
                                                      (|check_subtype2|
-                                                      (>= #5# 0)
+                                                      (>= #11# 0)
                                                       '(|NonNegativeInteger|)
-                                                      '(|Integer|) #5#))
+                                                      '(|Integer|) #11#))
                                                    (|STR_to_CHAR| #15#))))))
                                  (LETT |s2|
                                        (|FOUT;insert_separators_from_left| |s2|
@@ -474,10 +484,10 @@
                         (COND ((EQL |e| 0) |m|)
                               (#14#
                                (ASH
-                                (PROG1 (LETT #4# |m|)
-                                  (|check_subtype2| (>= #4# 0)
+                                (PROG1 (LETT #12# |m|)
+                                  (|check_subtype2| (>= #12# 0)
                                                     '(|NonNegativeInteger|)
-                                                    '(|Integer|) #4#))
+                                                    '(|Integer|) #12#))
                                 |e|))))
                   (LETT |s1|
                         (|FOUT;insert_separators_from_right| (STRINGIMAGE |nm|)
@@ -488,11 +498,11 @@
                                (STRCONC "."
                                         (|FOUT;insert_separators_from_left|
                                          (|make_string_code|
-                                          (PROG1 (LETT #2# |d|)
-                                            (|check_subtype2| (>= #2# 0)
+                                          (PROG1 (LETT #13# |d|)
+                                            (|check_subtype2| (>= #13# 0)
                                                               '(|NonNegativeInteger|)
                                                               '(|Integer|)
-                                                              #2#))
+                                                              #13#))
                                           (|STR_to_CHAR| #15#))
                                          |mr| %)))))
                   (EXIT (STRCONC |s1| |s2|))))))))))))) 
@@ -508,12 +518,12 @@
                     (|:| |separator| (|Character|))))
          (% (|String|)))
         (SPROG
-         ((|s| (|String|)) (|n0| (|NonNegativeInteger|)) (|e| (|Integer|))
-          (|m| (|Integer|))
+         ((|es| (|String|))
           (|#G40|
            (|Record| (|:| |mantissa| (|Integer|))
                      (|:| |exponent| (|Integer|))))
-          (|es| (|String|)))
+          (|m| (|Integer|)) (|e| (|Integer|)) (|n0| (|NonNegativeInteger|))
+          (|s| (|String|)))
          (SEQ
           (COND ((EQL (QCAR |f|) 0) "0.0")
                 ((< (QCAR |f|) 0)
@@ -567,14 +577,16 @@
                     (|:| |separator| (|Character|))))
          (% (|String|)))
         (SPROG
-         ((|s2| (|String|)) (|s1| (|String|)) (|es| (|String|))
-          (|#G48| #1=(|List| (|String|))) (|#G47| #1#) (|s| (|String|))
-          (|top_digit| (|Integer|)) (|n0| (|NonNegativeInteger|))
-          (|e| #2=(|Integer|)) (|m| #3=(|Integer|))
+         ((|#G45|
+           (|Record| (|:| |mantissa| #1=(|Integer|))
+                     (|:| |exponent| #2=(|Integer|))))
           (|#G46|
            (|Record| (|:| |mantissa| (|Integer|))
                      (|:| |exponent| (|Integer|))))
-          (|#G45| (|Record| (|:| |mantissa| #3#) (|:| |exponent| #2#))))
+          (|m| #1#) (|e| #2#) (|n0| (|NonNegativeInteger|))
+          (|top_digit| (|Integer|)) (|s| (|String|))
+          (|#G47| #3=(|List| (|String|))) (|#G48| #3#) (|es| (|String|))
+          (|s1| (|String|)) (|s2| (|String|)))
          (SEQ
           (PROGN
            (LETT |#G45| |f|)
@@ -685,7 +697,7 @@
 
 (DEFUN |FloatingPointConvertion| ()
   (SPROG NIL
-         (PROG (#1=#:G157)
+         (PROG (#1=#:G158)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|FloatingPointConvertion|))

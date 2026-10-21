@@ -24,8 +24,8 @@
                                           (LETT |DistributionCategory;CAT|
                                                 (|Join| (|SetCategory|)
                                                         (|mkCategory|
-                                                         '(((|Zero| (%)
-                                                                    |constant|)
+                                                         '(((|0| (%)
+                                                                 |constant|)
                                                             T)
                                                            ((|moment|
                                                              (|t#1| %

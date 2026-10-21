@@ -1,6 +1,6 @@
 
 (SDEFUN |DIAGG-;dictionary;LA;1| ((|l| (|List| S)) (% (A)))
-        (SPROG ((|d| (A)) (#1=#:G15 NIL) (|x| NIL))
+        (SPROG ((|x| NIL) (#1=#:G15 NIL) (|d| (A)))
                (SEQ (LETT |d| (SPADCALL (QREFELT % 8)))
                     (SEQ (LETT |x| NIL) (LETT #1# |l|) G190
                          (COND
@@ -37,7 +37,7 @@
 
 (SDEFUN |DIAGG-;remove!;M2A;4|
         ((|f| (|Mapping| (|Boolean|) S)) (|t| (A)) (% (A)))
-        (SPROG ((#1=#:G33 NIL) (|m| NIL))
+        (SPROG ((|m| NIL) (#1=#:G34 NIL))
                (SEQ
                 (SEQ (LETT |m| NIL) (LETT #1# (SPADCALL |t| (QREFELT % 22)))
                      G190
@@ -55,7 +55,7 @@
 (DECLAIM (NOTINLINE |Dictionary&;|)) 
 
 (DEFUN |Dictionary&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

@@ -15,9 +15,9 @@
 (SDEFUN |PREASSOC;makeMonic|
         ((|op| (L)) (% (|Union| (|PrimitiveArray| R) "failed")))
         (SPROG
-         ((#1=#:G21 NIL) (|u| (|Union| R "failed")) (#2=#:G22 NIL)
-          (#3=#:G13 NIL) (|i| NIL) (|a| (|PrimitiveArray| R))
-          (|n| (|NonNegativeInteger|)) (|lc| (R)))
+         ((|lc| (R)) (|n| (|NonNegativeInteger|)) (|a| (|PrimitiveArray| R))
+          (|i| NIL) (#1=#:G13 NIL) (#2=#:G25 NIL) (|u| (|Union| R "failed"))
+          (#3=#:G24 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |lc| (SPADCALL |op| (QREFELT % 15)))
@@ -26,10 +26,10 @@
                                 (|spadConstant| % 16)))
                 (SEQ (LETT |i| 0)
                      (LETT #2#
-                           (PROG1 (LETT #3# (- |n| 1))
-                             (|check_subtype2| (>= #3# 0)
+                           (PROG1 (LETT #1# (- |n| 1))
+                             (|check_subtype2| (>= #1# 0)
                                                '(|NonNegativeInteger|)
-                                               '(|Integer|) #3#)))
+                                               '(|Integer|) #1#)))
                      G190 (COND ((|greater_SI| |i| #2#) (GO G191)))
                      (SEQ
                       (LETT |u|
@@ -38,18 +38,18 @@
                       (EXIT
                        (COND
                         ((QEQCAR |u| 1)
-                         (PROGN (LETT #1# (CONS 1 "failed")) (GO #4=#:G20)))
+                         (PROGN (LETT #3# (CONS 1 "failed")) (GO #4=#:G23)))
                         ('T
                          (QSETAREF1 |a| |i|
                                     (SPADCALL (QCDR |u|) (QREFELT % 22)))))))
                      (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                 (EXIT (CONS 0 |a|))))
-          #4# (EXIT #1#)))) 
+          #4# (EXIT #3#)))) 
 
 (SDEFUN |PREASSOC;A32| ((|op| (L)) (% (|Union| (|Matrix| R) "failed")))
         (SPROG
-         ((|a| (|PrimitiveArray| R))
-          (|u| (|Union| (|PrimitiveArray| R) "failed")))
+         ((|u| (|Union| (|PrimitiveArray| R) "failed"))
+          (|a| (|PrimitiveArray| R)))
          (SEQ (LETT |u| (|PREASSOC;makeMonic| |op| %))
               (EXIT
                (COND ((QEQCAR |u| 1) (CONS 1 "failed"))
@@ -87,9 +87,9 @@
 
 (SDEFUN |PREASSOC;A42| ((|op| (L)) (% (|Union| (|Matrix| R) "failed")))
         (SPROG
-         ((|i| NIL) (|a''| #1=(|PrimitiveArray| R)) (|a'| #1#)
-          (|a| (|PrimitiveArray| R))
-          (|u| (|Union| (|PrimitiveArray| R) "failed")))
+         ((|u| (|Union| (|PrimitiveArray| R) "failed"))
+          (|a| (|PrimitiveArray| R)) (|a'| #1=(|PrimitiveArray| R)) (|a''| #1#)
+          (|i| NIL))
          (SEQ (LETT |u| (|PREASSOC;makeMonic| |op| %))
               (EXIT
                (COND ((QEQCAR |u| 1) (CONS 1 "failed"))
@@ -439,7 +439,7 @@
 (DECLAIM (NOTINLINE |PrecomputedAssociatedEquations;|)) 
 
 (DEFUN |PrecomputedAssociatedEquations;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -456,9 +456,9 @@
           (QSETREFV % 9 (SPADCALL (QREFELT % 8)))
           %))) 
 
-(DEFUN |PrecomputedAssociatedEquations| (&REST #1=#:G46)
+(DEFUN |PrecomputedAssociatedEquations| (&REST #1=#:G49)
   (SPROG NIL
-         (PROG (#2=#:G47)
+         (PROG (#2=#:G50)
            (RETURN
             (COND
              ((LETT #2#
@@ -484,11 +484,11 @@
               '|diff| (|NonNegativeInteger|) (4 . |degree|)
               (|Union| 31 '#1="failed") (|PositiveInteger|)
               |PREASSOC;firstUncouplingMatrix;LPiU;1|
-              (9 . |leadingCoefficient|) (14 . |Zero|) (18 . |One|)
-              (22 . |One|) (26 . |coefficient|) (|Union| % '"failed")
-              (32 . |exquo|) (38 . -) (43 . |elt|) (49 . *) (55 . +)
-              (61 . |Zero|) (65 . -) (71 . ^) (77 . *) (|List| (|List| 6))
-              (|Matrix| 6) (83 . |matrix|) (|Integer|) (88 . |coerce|))
+              (9 . |leadingCoefficient|) (14 . |0|) (18 . |1|) (22 . |1|)
+              (26 . |coefficient|) (|Union| % '"failed") (32 . |exquo|)
+              (38 . -) (43 . |elt|) (49 . *) (55 . +) (61 . |0|) (65 . -)
+              (71 . ^) (77 . *) (|List| (|List| 6)) (|Matrix| 6)
+              (83 . |matrix|) (|Integer|) (88 . |coerce|))
            '#(|firstUncouplingMatrix| 93) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

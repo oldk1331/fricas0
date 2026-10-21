@@ -63,7 +63,8 @@
 ;     pfLambda? pform =>      -- remove ( identifier . replacement ) from assoclist
 ;         parlist := [ pfTypedId p for p in pf0LambdaArgs pform ] -- extract parameters
 ;         for par in [ pfIdSymbol par for par in parlist ] repeat
-;                 replist := AlistRemoveQ(par,replist)
+;             if pp := ASSOC(par, replist) then
+;                 replist := REMOVE(pp, replist)
 ;         replist
 ;     pfMLambda? pform =>     -- construct assoclist ( identifier . replacement )
 ;         parlist := pf0MLambdaArgs pform  -- extract parameter list
@@ -71,7 +72,7 @@
 ;     for p in pfParts pform repeat macLambdaParameterHandling( replist , p )
 
 (DEFUN |macLambdaParameterHandling| (|replist| |pform|)
-  (PROG (|parlist|)
+  (PROG (|parlist| |pp|)
     (RETURN
      (COND ((|pfLeaf?| |pform|) NIL)
            ((|pfLambda?| |pform|)
@@ -94,7 +95,10 @@
                   ((OR (ATOM |bfVar#5|)
                        (PROGN (SETQ |par| (CAR |bfVar#5|)) NIL))
                    (RETURN NIL))
-                  (#1# (SETQ |replist| (|AlistRemoveQ| |par| |replist|))))
+                  (#1#
+                   (COND
+                    ((SETQ |pp| (ASSOC |par| |replist|))
+                     (SETQ |replist| (REMOVE |pp| |replist|))))))
                  (SETQ |bfVar#5| (CDR |bfVar#5|))))
               ((LAMBDA (|bfVar#4| |bfVar#3| |par|)
                  (LOOP
@@ -137,7 +141,7 @@
              (|pfParts| |pform|) NIL))))))
 
 ; macSubstituteId( replist , pform ) ==
-;     ex := AlistAssocQ( pfIdSymbol pform , replist )
+;     ex := ASSOC(pfIdSymbol(pform), replist)
 ;     ex =>
 ;         RPLACA(pform, first(rest(ex)))
 ;         RPLACD(pform, CDR(rest(ex)))
@@ -148,7 +152,7 @@
   (PROG (|ex|)
     (RETURN
      (PROGN
-      (SETQ |ex| (|AlistAssocQ| (|pfIdSymbol| |pform|) |replist|))
+      (SETQ |ex| (ASSOC (|pfIdSymbol| |pform|) |replist|))
       (COND
        (|ex|
         (PROGN
@@ -210,7 +214,8 @@
 ;     lhs := pfMacroLhs pf
 ;     rhs := pfMacroRhs pf
 ;     not pfId? lhs =>
-;         ncSoftError (pfSourcePosition lhs, 'S2CM0001, [%pform lhs] )
+;         ncSoftError(pfSourcePosition(lhs),
+;             '"%1 is improper for macro definition.  Ignored.", [%pform(lhs)])
 ;         pf
 ;     sy := pfIdSymbol lhs
 ;
@@ -227,7 +232,8 @@
       (COND
        ((NULL (|pfId?| |lhs|))
         (PROGN
-         (|ncSoftError| (|pfSourcePosition| |lhs|) 'S2CM0001
+         (|ncSoftError| (|pfSourcePosition| |lhs|)
+          "%1 is improper for macro definition.  Ignored."
           (LIST (|%pform| |lhs|)))
          |pf|))
        (#1='T
@@ -343,11 +349,12 @@
 ;     body   := pfMLambdaBody  mlambda
 ;     #args ~= #params =>
 ;         pos := pfSourcePosition opf
-;         ncHardError(pos,'S2CM0003, [#params,#args])
+;         ncHardError(pos, '"Expected %1b arguments, but received %2b.",
+;                     [#params, #args])
 ;     for p in params for a in args repeat
 ;         not pfId? p =>
 ;             pos := pfSourcePosition opf
-;             ncHardError(pos, 'S2CM0004, [%pform p])
+;             ncHardError(pos, '"Macro parameter %1f is not an id", [%pform(p)])
 ;         mac0Define(pfIdSymbol p, 'mparam, a)
 ;
 ;     mac0ExpandBody( body , opf, $macActive, $posActive)
@@ -363,7 +370,7 @@
        ((NOT (EQL (LENGTH |args|) (LENGTH |params|)))
         (PROGN
          (SETQ |pos| (|pfSourcePosition| |opf|))
-         (|ncHardError| |pos| 'S2CM0003
+         (|ncHardError| |pos| "Expected %1b arguments, but received %2b."
           (LIST (LENGTH |params|) (LENGTH |args|)))))
        (#1='T
         (PROGN
@@ -378,7 +385,8 @@
                 ((NULL (|pfId?| |p|))
                  (PROGN
                   (SETQ |pos| (|pfSourcePosition| |opf|))
-                  (|ncHardError| |pos| 'S2CM0004 (LIST (|%pform| |p|)))))
+                  (|ncHardError| |pos| "Macro parameter %1f is not an id"
+                   (LIST (|%pform| |p|)))))
                 (#1# (|mac0Define| (|pfIdSymbol| |p|) '|mparam| |a|)))))
              (SETQ |bfVar#13| (CDR |bfVar#13|))
              (SETQ |bfVar#14| (CDR |bfVar#14|))))
@@ -419,8 +427,8 @@
 ;             [sy,st] := got
 ;             st = 'mlambda => CONCAT(PNAME sy, '"(...)")
 ;             PNAME sy
-;     ncSoftError (posn, 'S2CM0005, _
-;        [ [:[n,'"==>"] for n in reverse rnames], fname, %pform body ]  )
+;     ncSoftError(posn, '"Cycle in macro expansion: %l %1y %2 %l.  Left as: %3f",
+;         [[:[n, '"==>"] for n in reverse(rnames)], fname, %pform(body)])
 ;
 ;     body
 
@@ -444,7 +452,8 @@
                NIL |blist| NIL))
       (SETQ |fname| (CAR |LETTMP#1|))
       (SETQ |rnames| (CDR |LETTMP#1|))
-      (|ncSoftError| |posn| 'S2CM0005
+      (|ncSoftError| |posn|
+       "Cycle in macro expansion: %l %1y %2 %l.  Left as: %3f"
        (LIST
         ((LAMBDA (|bfVar#18| |bfVar#17| |n|)
            (LOOP

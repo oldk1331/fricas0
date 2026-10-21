@@ -26,8 +26,8 @@
 
 (DEFUN |MultivariateFactorize;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -64,9 +64,9 @@
      ('T (QSETREFV % 13 (CONS (|dispatchFunction| |MULTFACT;factor;PF;6|) %))))
     %))) 
 
-(DEFUN |MultivariateFactorize| (&REST #1=#:G10)
+(DEFUN |MultivariateFactorize| (&REST #1=#:G11)
   (SPROG NIL
-         (PROG (#2=#:G11)
+         (PROG (#2=#:G12)
            (RETURN
             (COND
              ((LETT #2#

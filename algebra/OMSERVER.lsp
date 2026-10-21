@@ -8,7 +8,7 @@
 
 (SDEFUN |OMSERVER;OMsend;OmcAV;2|
         ((|conn| (|OpenMathConnection|)) (|value| (|Any|)) (% (|Void|)))
-        (SPROG ((#1=#:G13 NIL) (|dev| (|OpenMathDevice|)))
+        (SPROG ((|dev| (|OpenMathDevice|)) (#1=#:G13 NIL))
                (SEQ (LETT |dev| (SPADCALL |conn| (QREFELT % 17)))
                     (SPADCALL |dev| (SPADCALL (QREFELT % 18)) (QREFELT % 12))
                     (EXIT
@@ -41,7 +41,7 @@
 (SDEFUN |OMSERVER;OMserve;2SiV;3|
         ((|portNum| (|SingleInteger|)) (|timeout| (|SingleInteger|))
          (% (|Void|)))
-        (SPROG ((|val| (|Any|)) (|conn| (|OpenMathConnection|)))
+        (SPROG ((|conn| (|OpenMathConnection|)) (|val| (|Any|)))
                (SEQ (LETT |conn| (SPADCALL |timeout| (QREFELT % 45)))
                     (SPADCALL |conn| |portNum| (QREFELT % 46))
                     (EXIT

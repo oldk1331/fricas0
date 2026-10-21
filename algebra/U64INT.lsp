@@ -1,5 +1,5 @@
 
-(PUT '|U64INT;qconvert;I%;1| '|SPADreplace| '(XLAM (|x|) |x|)) 
+(MAKEPROP '|U64INT;qconvert;I%;1| '|SPADreplace| '(XLAM (|x|) |x|)) 
 
 (SDEFUN |U64INT;qconvert;I%;1| ((|x| (|Integer|)) (% (%))) |x|) 
 
@@ -19,7 +19,7 @@
 
 (DEFUN |U64Int| ()
   (SPROG NIL
-         (PROG (#1=#:G2803)
+         (PROG (#1=#:G5)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|U64Int|))
@@ -42,28 +42,27 @@
               |rightPower| 26 |recip| 38 |qconvert| 43 |opposite?| 48 |one?| 54
               |leftRecip| 59 |leftPower| 64 |latex| 76 |commutator| 81 |coerce|
               87 |characteristic| 97 |associator| 101 |antiCommutator| 108
-              |annihilate?| 114 ^ 120 |Zero| 132 |One| 136 = 140 - 146 + 157 *
-              163)
+              |annihilate?| 114 ^ 120 = 132 |1| 138 |0| 142 - 146 + 157 * 163)
            'NIL
            (CONS
             (|makeByteWordVec2| 1
-                                '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                                '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0))
             (CONS
              '#(NIL NIL |Rng&| NIL NIL |NonAssociativeRing&| NIL NIL
                 |NonAssociativeRng&| |AbelianGroup&| NIL NIL NIL
                 |AbelianMonoid&| |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL
-                |AbelianSemiGroup&| |Magma&| |SetCategory&| NIL |BasicType&|
-                NIL)
+                |AbelianSemiGroup&| |SetWithZero&| |Magma&| |SetCategory&| NIL
+                |BasicType&| NIL)
              (CONS
               '#((|Ring|) (|SemiRing|) (|Rng|) (|SemiRng|) (|BiModule| $$ $$)
                  (|NonAssociativeRing|) (|LeftModule| $$) (|RightModule| $$)
                  (|NonAssociativeRng|) (|AbelianGroup|)
                  (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
                  (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
-                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|) (|Magma|)
-                 (|SetCategory|) (|CoercibleTo| 8) (|BasicType|)
-                 (|unitsKnown|))
+                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|)
+                 (|SetWithZero|) (|Magma|) (|SetCategory|) (|CoercibleTo| 8)
+                 (|BasicType|) (|unitsKnown|))
               (|makeByteWordVec2| 12
                                   '(2 0 7 0 0 1 1 0 7 0 1 2 0 11 0 0 1 0 0 0 1
                                     1 0 11 0 1 2 0 0 0 10 1 2 0 0 0 12 1 1 0 11
@@ -71,7 +70,7 @@
                                     0 1 2 0 0 0 10 1 2 0 0 0 12 1 1 0 9 0 1 2 0
                                     0 0 0 1 1 0 8 0 1 1 0 0 5 1 0 0 12 1 3 0 0
                                     0 0 0 1 2 0 0 0 0 1 2 0 7 0 0 1 2 0 0 0 10
-                                    1 2 0 0 0 12 1 0 0 0 1 0 0 0 1 2 0 7 0 0 1
+                                    1 2 0 0 0 12 1 2 0 7 0 0 1 0 0 0 1 0 0 0 1
                                     2 0 0 0 0 1 1 0 0 0 1 2 0 0 0 0 1 2 0 0 10
                                     0 1 2 0 0 0 0 1 2 0 0 5 0 1 2 0 0 12 0
                                     1)))))

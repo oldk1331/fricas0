@@ -5,17 +5,17 @@
           (SPADCALL |up| (QREFELT % 14)))
          ('T (CONS 1 (CONS |mv| |up|))))) 
 
-(PUT '|NSMP;coerce;%Smp;2| '|SPADreplace| '(XLAM (|p|) |p|)) 
+(MAKEPROP '|NSMP;coerce;%Smp;2| '|SPADreplace| '(XLAM (|p|) |p|)) 
 
 (SDEFUN |NSMP;coerce;%Smp;2|
         ((|p| (%)) (% (|SparseMultivariatePolynomial| R |VarSet|))) |p|) 
 
-(PUT '|NSMP;coerce;Smp%;3| '|SPADreplace| '(XLAM (|p|) |p|)) 
+(MAKEPROP '|NSMP;coerce;Smp%;3| '|SPADreplace| '(XLAM (|p|) |p|)) 
 
 (SDEFUN |NSMP;coerce;Smp%;3|
         ((|p| (|SparseMultivariatePolynomial| R |VarSet|)) (% (%))) |p|) 
 
-(PUT '|NSMP;retractIfCan;%U;4| '|SPADreplace| '(XLAM (|p|) (CONS 0 |p|))) 
+(MAKEPROP '|NSMP;retractIfCan;%U;4| '|SPADreplace| '(XLAM (|p|) (CONS 0 |p|))) 
 
 (SDEFUN |NSMP;retractIfCan;%U;4|
         ((|p| (%))
@@ -120,7 +120,7 @@
                      ('T (SPADCALL |p| |x| |d| (QREFELT % 44)))))) 
 
 (SDEFUN |NSMP;localMonicModulo| ((|a| (%)) (|b| (%)) (% (%)))
-        (SPROG ((|mM| (%)) (|m| (D)))
+        (SPROG ((|m| (D)) (|mM| (%)))
                (SEQ
                 (COND
                  ((OR (QEQCAR |a| 0)
@@ -153,7 +153,7 @@
           (RETURN (PROGN (|NSMP;localMonicModulo| |a1| |b| %))))) 
 
 (SDEFUN |NSMP;monicModulo;3%;18| ((|a| (%)) (|b| (%)) (% (%)))
-        (SPROG ((|mM| (%)) (|rec| (|Union| R "failed")) (|r| (R)) (|ib| (%)))
+        (SPROG ((|ib| (%)) (|r| (R)) (|rec| (|Union| R "failed")) (|mM| (%)))
                (SEQ
                 (COND
                  ((QEQCAR |b| 0)
@@ -195,9 +195,9 @@
 
 (SDEFUN |NSMP;prem;3%;19| ((|a| (%)) (|b| (%)) (% (%)))
         (SPROG
-         ((#1=#:G139 NIL) (|test| (|Integer|)) (|delta| (|Integer|))
-          (|term| (%)) (#2=#:G132 NIL) (#3=#:G143 NIL) (|r| (D))
-          (#4=#:G118 NIL) (|lcb| (%)) (|db| (|NonNegativeInteger|)))
+         ((|db| (|NonNegativeInteger|)) (|lcb| (%)) (#1=#:G122 NIL) (|r| (D))
+          (#2=#:G147 NIL) (#3=#:G136 NIL) (|term| (%)) (|delta| (|Integer|))
+          (|test| (|Integer|)) (#4=#:G143 NIL))
          (SEQ
           (EXIT
            (COND ((QEQCAR |b| 0) (|error| "in prem$NSMP: ground? #2"))
@@ -215,10 +215,10 @@
                          (EXIT
                           (SPADCALL
                            (SPADCALL |lcb|
-                                     (PROG1 (LETT #4# |delta|)
-                                       (|check_subtype2| (>= #4# 0)
+                                     (PROG1 (LETT #1# |delta|)
+                                       (|check_subtype2| (>= #1# 0)
                                                          '(|NonNegativeInteger|)
-                                                         '(|Integer|) #4#))
+                                                         '(|Integer|) #1#))
                                      (QREFELT % 61))
                            |a| (QREFELT % 59)))))
                        (EXIT
@@ -233,8 +233,8 @@
                             (COND
                              ((SPADCALL |r| (QREFELT % 26))
                               (PROGN
-                               (LETT #3# (SPADCALL |r| (QREFELT % 27)))
-                               (GO #6=#:G142)))
+                               (LETT #2# (SPADCALL |r| (QREFELT % 27)))
+                               (GO #6=#:G146)))
                              (#5# (CONS 1 (CONS (QCAR (QCDR |a|)) |r|)))))))
                          (#5#
                           (SEQ
@@ -250,10 +250,10 @@
                                         (SPADCALL |a| (QCAR (QCDR |b|))
                                                   (QREFELT % 45))
                                         (QCAR (QCDR |b|))
-                                        (PROG1 (LETT #2# |test|)
-                                          (|check_subtype2| (>= #2# 0)
+                                        (PROG1 (LETT #3# |test|)
+                                          (|check_subtype2| (>= #3# 0)
                                                             '(|NonNegativeInteger|)
-                                                            '(|Integer|) #2#))
+                                                            '(|Integer|) #3#))
                                         (QREFELT % 36)))
                                  (LETT |a|
                                        (SPADCALL
@@ -271,20 +271,20 @@
                            (EXIT
                             (SPADCALL
                              (SPADCALL |lcb|
-                                       (PROG1 (LETT #1# |delta|)
-                                         (|check_subtype2| (>= #1# 0)
+                                       (PROG1 (LETT #4# |delta|)
+                                         (|check_subtype2| (>= #4# 0)
                                                            '(|NonNegativeInteger|)
-                                                           '(|Integer|) #1#))
+                                                           '(|Integer|) #4#))
                                        (QREFELT % 61))
                              |a| (QREFELT % 59)))))))))))
-          #6# (EXIT #3#)))) 
+          #6# (EXIT #2#)))) 
 
 (SDEFUN |NSMP;pquo;3%;20| ((|a| (%)) (|b| (%)) (% (%)))
         (SPROG
-         ((|c| (%))
-          (|cPS|
+         ((|cPS|
            (|Record| (|:| |coef| %) (|:| |gap| (|NonNegativeInteger|))
-                     (|:| |quotient| %) (|:| |remainder| %))))
+                     (|:| |quotient| %) (|:| |remainder| %)))
+          (|c| (%)))
          (SEQ (LETT |cPS| (SPADCALL |a| |b| (QREFELT % 66)))
               (LETT |c|
                     (SPADCALL (QVELT |cPS| 0) (QVELT |cPS| 1) (QREFELT % 61)))
@@ -294,10 +294,10 @@
         ((|a| (%)) (|b| (%))
          (% (|Record| (|:| |quotient| %) (|:| |remainder| %))))
         (SPROG
-         ((|c| (%))
-          (|cPS|
+         ((|cPS|
            (|Record| (|:| |coef| %) (|:| |gap| (|NonNegativeInteger|))
-                     (|:| |quotient| %) (|:| |remainder| %))))
+                     (|:| |quotient| %) (|:| |remainder| %)))
+          (|c| (%)))
          (SEQ (LETT |cPS| (SPADCALL |a| |b| (QREFELT % 66)))
               (LETT |c|
                     (SPADCALL (QVELT |cPS| 0) (QVELT |cPS| 1) (QREFELT % 61)))
@@ -307,8 +307,8 @@
 
 (SDEFUN |NSMP;lazyPrem;3%;22| ((|a| (%)) (|b| (%)) (% (%)))
         (SPROG
-         ((|test| (|Integer|)) (|term| (%)) (#1=#:G159 NIL) (|lcb| (%))
-          (|db| (|NonNegativeInteger|)))
+         ((|db| (|NonNegativeInteger|)) (|lcb| (%)) (#1=#:G164 NIL)
+          (|term| (%)) (|test| (|Integer|)))
          (SEQ
           (COND ((QEQCAR |b| 0) (|error| "in lazyPrem$NSMP: ground? #2"))
                 ((OR (QEQCAR |a| 0)
@@ -364,8 +364,8 @@
 
 (SDEFUN |NSMP;lazyPquo;3%;23| ((|a| (%)) (|b| (%)) (% (%)))
         (SPROG
-         ((|test| (|Integer|)) (|q| (%)) (|term| (%)) (#1=#:G172 NIL)
-          (|lcb| (%)) (|db| (|NonNegativeInteger|)))
+         ((|db| (|NonNegativeInteger|)) (|lcb| (%)) (#1=#:G177 NIL)
+          (|term| (%)) (|q| (%)) (|test| (|Integer|)))
          (SEQ
           (COND ((QEQCAR |b| 0) (|error| "in lazyPquo$NSMP: #2 is constant"))
                 ((OR (QEQCAR |a| 0)
@@ -434,12 +434,12 @@
           (|Record| (|:| |coef| %) (|:| |gap| (|NonNegativeInteger|))
                     (|:| |quotient| %) (|:| |remainder| %))))
         (SPROG
-         ((#1=#:G192 NIL) (|test| (|Integer|)) (|delta| (|Integer|)) (|q| (%))
-          (|term| (%)) (#2=#:G188 NIL) (|lcb| (%))
-          (|db| (|NonNegativeInteger|))
-          (|cgqr|
+         ((|cgqr|
            (|Record| (|:| |coef| %) (|:| |gap| (|NonNegativeInteger|))
-                     (|:| |quotient| D) (|:| |remainder| D))))
+                     (|:| |quotient| D) (|:| |remainder| D)))
+          (|db| (|NonNegativeInteger|)) (|lcb| (%)) (#1=#:G194 NIL)
+          (|term| (%)) (|q| (%)) (|delta| (|Integer|)) (|test| (|Integer|))
+          (#2=#:G198 NIL))
          (SEQ
           (COND
            ((QEQCAR |b| 0)
@@ -477,10 +477,10 @@
                                (SPADCALL
                                 (SPADCALL |a| (QCAR (QCDR |b|)) (QREFELT % 45))
                                 (QCAR (QCDR |b|))
-                                (PROG1 (LETT #2# |test|)
-                                  (|check_subtype2| (>= #2# 0)
+                                (PROG1 (LETT #1# |test|)
+                                  (|check_subtype2| (>= #1# 0)
                                                     '(|NonNegativeInteger|)
-                                                    '(|Integer|) #2#))
+                                                    '(|Integer|) #1#))
                                 (QREFELT % 36)))
                          (LETT |a|
                                (SPADCALL (SPADCALL |lcb| |a| (QREFELT % 59))
@@ -499,10 +499,10 @@
                         NIL (GO G190) G191 (EXIT NIL))
                    (EXIT
                     (VECTOR |lcb|
-                            (PROG1 (LETT #1# |delta|)
-                              (|check_subtype2| (>= #1# 0)
+                            (PROG1 (LETT #2# |delta|)
+                              (|check_subtype2| (>= #2# 0)
                                                 '(|NonNegativeInteger|)
-                                                '(|Integer|) #1#))
+                                                '(|Integer|) #2#))
                             |q| |a|)))))))))) 
 
 (SDEFUN |NSMP;lazyResidueClass;2%R;25|
@@ -511,12 +511,12 @@
           (|Record| (|:| |polnum| %) (|:| |polden| %)
                     (|:| |power| (|NonNegativeInteger|)))))
         (SPROG
-         ((|test| (|Integer|)) (|pow| (|NonNegativeInteger|)) (|term| (%))
-          (#1=#:G206 NIL) (|db| (|NonNegativeInteger|))
+         ((|lcb| (%))
           (|lrc|
            (|Record| (|:| |polnum| D) (|:| |polden| %)
                      (|:| |power| (|NonNegativeInteger|))))
-          (|lcb| (%)))
+          (|db| (|NonNegativeInteger|)) (#1=#:G213 NIL) (|term| (%))
+          (|pow| (|NonNegativeInteger|)) (|test| (|Integer|)))
          (SEQ
           (COND
            ((QEQCAR |b| 0)
@@ -591,7 +591,7 @@
 
 (SDEFUN |NSMP;LazardQuotient2;3%Nni%;28|
         ((|p| (%)) (|a| (%)) (|b| (%)) (|n| (|NonNegativeInteger|)) (% (%)))
-        (SPROG ((|c| (%)) (#1=#:G222 NIL))
+        (SPROG ((#1=#:G229 NIL) (|c| (%)))
                (SEQ
                 (COND ((ZEROP |n|) (|error| "in LazardQuotient2$NSMP: bad #4"))
                       ((EQL |n| 1) |p|)
@@ -712,7 +712,7 @@
             (SPADCALL (QCDR (QCDR |a|)) (QCDR (QCDR |b|)) (QREFELT % 101))))))) 
 
 (SDEFUN |NSMP;subResultantChain;2%L;35| ((|a| (%)) (|b| (%)) (% (|List| %)))
-        (SPROG ((#1=#:G269 NIL) (|up| NIL) (#2=#:G268 NIL))
+        (SPROG ((#1=#:G278 NIL) (|up| NIL) (#2=#:G279 NIL))
                (SEQ
                 (COND
                  ((OR (QEQCAR |a| 0) (QEQCAR |b| 0))
@@ -724,22 +724,22 @@
                     (|error| "subResultantChain$NSMP: mvar(#1) ~= mvar(#2)"))
                    ('T
                     (PROGN
-                     (LETT #2# NIL)
+                     (LETT #1# NIL)
                      (SEQ (LETT |up| NIL)
-                          (LETT #1#
+                          (LETT #2#
                                 (SPADCALL (QCDR (QCDR |a|)) (QCDR (QCDR |b|))
                                           (QREFELT % 103)))
                           G190
                           (COND
-                           ((OR (ATOM #1#) (PROGN (LETT |up| (CAR #1#)) NIL))
+                           ((OR (ATOM #2#) (PROGN (LETT |up| (CAR #2#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #2#
+                            (LETT #1#
                                   (CONS (|NSMP;PSimp| |up| (QCAR (QCDR |a|)) %)
-                                        #2#))))
-                          (LETT #1# (CDR #1#)) (GO G190) G191
-                          (EXIT (NREVERSE #2#))))))))))) 
+                                        #1#))))
+                          (LETT #2# (CDR #2#)) (GO G190) G191
+                          (EXIT (NREVERSE #1#))))))))))) 
 
 (SDEFUN |NSMP;lastSubResultant;3%;36| ((|a| (%)) (|b| (%)) (% (%)))
         (COND
@@ -801,7 +801,7 @@
           (RETURN (PROGN (SPADCALL |a1| |b| (QREFELT % 110)))))) 
 
 (SDEFUN |NSMP;exactQuotient;%R%;39| ((|a| (%)) (|b| (R)) (% (%)))
-        (SPROG ((#1=#:G285 NIL))
+        (SPROG ((#1=#:G295 NIL))
                (COND
                 ((SPADCALL |b| (QCDR (|spadConstant| % 35)) (QREFELT % 107))
                  |a|)
@@ -828,7 +828,7 @@
           (RETURN (PROGN (SPADCALL |a1| |b| (QREFELT % 109)))))) 
 
 (SDEFUN |NSMP;exactQuotient!;%R%;40| ((|a| (%)) (|b| (R)) (% (%)))
-        (SPROG ((#1=#:G294 NIL))
+        (SPROG ((#1=#:G304 NIL))
                (SEQ
                 (COND
                  ((SPADCALL |b| (QCDR (|spadConstant| % 35)) (QREFELT % 107))
@@ -872,7 +872,7 @@
          ('T (|NSMP;localGcd| |r| |p| %)))) 
 
 (SDEFUN |NSMP;content;%R;43| ((|p| (%)) (% (R)))
-        (SPROG ((|up| (D)) (|r| (R)))
+        (SPROG ((|r| (R)) (|up| (D)))
                (SEQ
                 (COND ((QEQCAR |p| 0) (QCDR |p|))
                       ('T
@@ -924,9 +924,10 @@
 
 (DEFUN |NewSparseMultivariatePolynomial;| (|#1| |#2|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G350 NIL) (#2=#:G352 NIL) (#3=#:G351 NIL) (#4=#:G353 NIL)
-    (#5=#:G354 NIL) (#6=#:G355 NIL) (#7=#:G356 NIL) (#8=#:G357 NIL)
-    (#9=#:G358 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (#1=#:G370 NIL) (#2=#:G369 NIL)
+    (#3=#:G368 NIL) (#4=#:G367 NIL) (#5=#:G366 NIL) (#6=#:G365 NIL)
+    (#7=#:G364 NIL) (#8=#:G362 NIL) (#9=#:G363 NIL) (#10=#:G361 NIL)
+    (#11=#:G360 NIL) (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -941,10 +942,19 @@
                                                        '(|Algebra|
                                                          (|Fraction|
                                                           (|Integer|))))
+                                        (OR
+                                         (AND
+                                          (|HasCategory| |#1|
+                                                         '(|Algebra|
+                                                           (|Fraction|
+                                                            (|Integer|))))
+                                          (|HasCategory|
+                                           (|Fraction| (|Integer|))
+                                           '(|CharacteristicZero|)))
+                                         (|HasCategory| |#1|
+                                                        '(|CharacteristicZero|)))
                                         (|HasCategory| |#1|
                                                        '(|CharacteristicNonZero|))
-                                        (|HasCategory| |#1|
-                                                       '(|CharacteristicZero|))
                                         (|HasCategory| |#1| '(|Ring|))
                                         (|HasCategory| |#1|
                                                        '(|CommutativeRing|))
@@ -957,27 +967,32 @@
                                                          (|Integer|)))
                                         (|HasCategory| |#1|
                                                        '(|canonicalUnitNormal|))
-                                        (|HasCategory| |#1| '(|Comparable|))
+                                        (LETT #1#
+                                              (|HasCategory| |#1|
+                                                             '(|Comparable|)))
+                                        (OR #1#
+                                            (|HasCategory| |#1|
+                                                           '(|ComparableRepresentation|)))
                                         (|HasCategory| |#1|
                                                        '(|PolynomialFactorizationExplicit|))
                                         (|HasCategory| |#1| '(|AbelianGroup|))
                                         (|HasCategory| |#1| '(|SemiRing|))
                                         (|HasCategory| |#1| '(|EntireRing|))
-                                        (LETT #9#
+                                        (LETT #2#
                                               (|HasCategory| |#1|
                                                              '(|GcdDomain|)))
                                         (OR
                                          (|HasCategory| |#1|
                                                         '(|CommutativeRing|))
-                                         #9#
+                                         #2#
                                          (|HasCategory| |#1|
                                                         '(|PolynomialFactorizationExplicit|)))
-                                        (OR #9#
+                                        (OR #2#
                                             (|HasCategory| |#1|
                                                            '(|PolynomialFactorizationExplicit|)))
                                         (OR
                                          (|HasCategory| |#1| '(|EntireRing|))
-                                         #9#)
+                                         #2#)
                                         (AND
                                          (|HasCategory| |#1|
                                                         '(|ConvertibleTo|
@@ -1004,39 +1019,42 @@
                                                         '(|RetractableTo|
                                                           (|Fraction|
                                                            (|Integer|)))))
-                                        (LETT #8#
+                                        (OR
+                                         (AND #1#
+                                              (|HasCategory|
+                                               (|IndexedExponents| |#2|)
+                                               '(|Comparable|)))
+                                         (|HasCategory| |#1|
+                                                        '(|ComparableRepresentation|)))
+                                        (LETT #3#
                                               (|HasCategory| |#1|
                                                              '(|IntegralDomain|)))
                                         (OR
                                          (|HasCategory| |#1|
                                                         '(|CommutativeRing|))
-                                         #9# #8#
+                                         #2# #3#
                                          (|HasCategory| |#1|
                                                         '(|PolynomialFactorizationExplicit|)))
-                                        (OR #9# #8#
+                                        (OR #2# #3#
                                             (|HasCategory| |#1|
                                                            '(|PolynomialFactorizationExplicit|)))
                                         (OR
                                          (|HasCategory| |#1|
                                                         '(|CommutativeRing|))
-                                         #9# #8#)
+                                         #2# #3#)
                                         (OR
                                          (|HasCategory| |#1|
                                                         '(|Algebra|
                                                           (|Fraction|
                                                            (|Integer|))))
                                          (|HasCategory| |#1|
-                                                        '(|CharacteristicNonZero|))
-                                         (|HasCategory| |#1|
-                                                        '(|CharacteristicZero|))
-                                         (|HasCategory| |#1|
                                                         '(|CommutativeRing|))
                                          (|HasCategory| |#1| '(|EntireRing|))
-                                         #9# #8#
+                                         #2# #3#
                                          (|HasCategory| |#1|
                                                         '(|PolynomialFactorizationExplicit|))
                                          (|HasCategory| |#1| '(|Ring|)))
-                                        (LETT #7#
+                                        (LETT #4#
                                               (AND
                                                (|HasCategory| |#1|
                                                               '(|PatternMatchable|
@@ -1062,24 +1080,6 @@
                                                          '(|PatternMatchable|
                                                            (|Float|)))
                                           (|HasCategory| |#1|
-                                                         '(|CharacteristicNonZero|))
-                                          (|HasCategory| |#2|
-                                                         '(|PatternMatchable|
-                                                           (|Float|))))
-                                         (AND
-                                          (|HasCategory| |#1|
-                                                         '(|PatternMatchable|
-                                                           (|Float|)))
-                                          (|HasCategory| |#1|
-                                                         '(|CharacteristicZero|))
-                                          (|HasCategory| |#2|
-                                                         '(|PatternMatchable|
-                                                           (|Float|))))
-                                         (AND
-                                          (|HasCategory| |#1|
-                                                         '(|PatternMatchable|
-                                                           (|Float|)))
-                                          (|HasCategory| |#1|
                                                          '(|CommutativeRing|))
                                           (|HasCategory| |#2|
                                                          '(|PatternMatchable|
@@ -1088,7 +1088,7 @@
                                           (|HasCategory| |#1|
                                                          '(|PatternMatchable|
                                                            (|Float|)))
-                                          #9#
+                                          #2#
                                           (|HasCategory| |#2|
                                                          '(|PatternMatchable|
                                                            (|Float|))))
@@ -1101,8 +1101,8 @@
                                           (|HasCategory| |#2|
                                                          '(|PatternMatchable|
                                                            (|Float|))))
-                                         #7#)
-                                        (LETT #6#
+                                         #4#)
+                                        (LETT #5#
                                               (AND
                                                (|HasCategory| |#1|
                                                               '(|PatternMatchable|
@@ -1128,24 +1128,6 @@
                                                          '(|PatternMatchable|
                                                            (|Integer|)))
                                           (|HasCategory| |#1|
-                                                         '(|CharacteristicNonZero|))
-                                          (|HasCategory| |#2|
-                                                         '(|PatternMatchable|
-                                                           (|Integer|))))
-                                         (AND
-                                          (|HasCategory| |#1|
-                                                         '(|PatternMatchable|
-                                                           (|Integer|)))
-                                          (|HasCategory| |#1|
-                                                         '(|CharacteristicZero|))
-                                          (|HasCategory| |#2|
-                                                         '(|PatternMatchable|
-                                                           (|Integer|))))
-                                         (AND
-                                          (|HasCategory| |#1|
-                                                         '(|PatternMatchable|
-                                                           (|Integer|)))
-                                          (|HasCategory| |#1|
                                                          '(|CommutativeRing|))
                                           (|HasCategory| |#2|
                                                          '(|PatternMatchable|
@@ -1154,7 +1136,7 @@
                                           (|HasCategory| |#1|
                                                          '(|PatternMatchable|
                                                            (|Integer|)))
-                                          #9#
+                                          #2#
                                           (|HasCategory| |#2|
                                                          '(|PatternMatchable|
                                                            (|Integer|))))
@@ -1167,8 +1149,8 @@
                                           (|HasCategory| |#2|
                                                          '(|PatternMatchable|
                                                            (|Integer|))))
-                                         #6#)
-                                        (LETT #5#
+                                         #5#)
+                                        (LETT #6#
                                               (AND
                                                (|HasCategory| |#1|
                                                               '(|ConvertibleTo|
@@ -1199,28 +1181,6 @@
                                                            (|Pattern|
                                                             (|Float|))))
                                           (|HasCategory| |#1|
-                                                         '(|CharacteristicNonZero|))
-                                          (|HasCategory| |#2|
-                                                         '(|ConvertibleTo|
-                                                           (|Pattern|
-                                                            (|Float|)))))
-                                         (AND
-                                          (|HasCategory| |#1|
-                                                         '(|ConvertibleTo|
-                                                           (|Pattern|
-                                                            (|Float|))))
-                                          (|HasCategory| |#1|
-                                                         '(|CharacteristicZero|))
-                                          (|HasCategory| |#2|
-                                                         '(|ConvertibleTo|
-                                                           (|Pattern|
-                                                            (|Float|)))))
-                                         (AND
-                                          (|HasCategory| |#1|
-                                                         '(|ConvertibleTo|
-                                                           (|Pattern|
-                                                            (|Float|))))
-                                          (|HasCategory| |#1|
                                                          '(|CommutativeRing|))
                                           (|HasCategory| |#2|
                                                          '(|ConvertibleTo|
@@ -1231,7 +1191,7 @@
                                                          '(|ConvertibleTo|
                                                            (|Pattern|
                                                             (|Float|))))
-                                          #9#
+                                          #2#
                                           (|HasCategory| |#2|
                                                          '(|ConvertibleTo|
                                                            (|Pattern|
@@ -1247,8 +1207,8 @@
                                                          '(|ConvertibleTo|
                                                            (|Pattern|
                                                             (|Float|)))))
-                                         #5#)
-                                        (LETT #4#
+                                         #6#)
+                                        (LETT #7#
                                               (AND
                                                (|HasCategory| |#1|
                                                               '(|ConvertibleTo|
@@ -1279,28 +1239,6 @@
                                                            (|Pattern|
                                                             (|Integer|))))
                                           (|HasCategory| |#1|
-                                                         '(|CharacteristicNonZero|))
-                                          (|HasCategory| |#2|
-                                                         '(|ConvertibleTo|
-                                                           (|Pattern|
-                                                            (|Integer|)))))
-                                         (AND
-                                          (|HasCategory| |#1|
-                                                         '(|ConvertibleTo|
-                                                           (|Pattern|
-                                                            (|Integer|))))
-                                          (|HasCategory| |#1|
-                                                         '(|CharacteristicZero|))
-                                          (|HasCategory| |#2|
-                                                         '(|ConvertibleTo|
-                                                           (|Pattern|
-                                                            (|Integer|)))))
-                                         (AND
-                                          (|HasCategory| |#1|
-                                                         '(|ConvertibleTo|
-                                                           (|Pattern|
-                                                            (|Integer|))))
-                                          (|HasCategory| |#1|
                                                          '(|CommutativeRing|))
                                           (|HasCategory| |#2|
                                                          '(|ConvertibleTo|
@@ -1311,7 +1249,7 @@
                                                          '(|ConvertibleTo|
                                                            (|Pattern|
                                                             (|Integer|))))
-                                          #9#
+                                          #2#
                                           (|HasCategory| |#2|
                                                          '(|ConvertibleTo|
                                                            (|Pattern|
@@ -1327,12 +1265,12 @@
                                                          '(|ConvertibleTo|
                                                            (|Pattern|
                                                             (|Integer|)))))
-                                         #4#)
-                                        (LETT #3#
+                                         #7#)
+                                        (LETT #8#
                                               (|HasCategory| |#1|
                                                              '(|LinearlyExplicitOver|
                                                                (|Integer|))))
-                                        (LETT #2#
+                                        (LETT #9#
                                               (AND
                                                (|HasCategory| |#1|
                                                               '(|LinearlyExplicitOver|
@@ -1344,27 +1282,33 @@
                                                          '(|Algebra|
                                                            (|Fraction|
                                                             (|Integer|))))
-                                          #3#)
-                                         (AND #3#
-                                              (|HasCategory| |#1|
-                                                             '(|CharacteristicNonZero|)))
-                                         (AND #3#
-                                              (|HasCategory| |#1|
-                                                             '(|CharacteristicZero|)))
-                                         (AND #3#
+                                          #8#)
+                                         (AND #8#
                                               (|HasCategory| |#1|
                                                              '(|CommutativeRing|)))
-                                         (AND #3# #9#)
-                                         (AND #3#
+                                         (AND #8# #2#)
+                                         (AND #8#
                                               (|HasCategory| |#1|
                                                              '(|PolynomialFactorizationExplicit|)))
-                                         #2#)
+                                         #9#)
                                         (|HasCategory| (|Integer|)
                                                        '(|AbelianMonoid|))
-                                        (|HasCategory| |#1| '(|AbelianMonoid|))
+                                        (LETT #10#
+                                              (|HasCategory| |#1|
+                                                             '(|AbelianMonoid|)))
+                                        (OR
+                                         (AND
+                                          (|HasCategory| |#1|
+                                                         '(|Algebra|
+                                                           (|Fraction|
+                                                            (|Integer|))))
+                                          (|HasCategory|
+                                           (|Fraction| (|Integer|))
+                                           '(|AbelianMonoid|)))
+                                         #10#)
                                         (|HasCategory| (|Integer|)
                                                        '(|AbelianGroup|))
-                                        (LETT #1#
+                                        (LETT #11#
                                               (|HasCategory| |#1|
                                                              '(|CancellationAbelianMonoid|)))
                                         (OR
@@ -1377,12 +1321,10 @@
                                            (|Fraction| (|Integer|))
                                            '(|AbelianMonoid|)))
                                          (|HasCategory| |#1| '(|AbelianGroup|))
-                                         (|HasCategory| |#1|
-                                                        '(|AbelianMonoid|))
-                                         #1#)
+                                         #10# #11#)
                                         (OR
                                          (|HasCategory| |#1| '(|AbelianGroup|))
-                                         #1#)
+                                         #11#)
                                         (AND
                                          (|HasCategory| |#1|
                                                         '(|Algebra|
@@ -1404,87 +1346,87 @@
     (QSETREFV % 6 |#1|)
     (QSETREFV % 7 |#2|)
     (AND (|HasCategory| % '(|CommutativeRing|))
-         (|augmentPredVector| % 140737488355328))
+         (|augmentPredVector| % 1125899906842624))
     (AND (|HasCategory| |#1| '(|PolynomialFactorizationExplicit|))
          (|HasCategory| % '(|CharacteristicNonZero|))
-         (|augmentPredVector| % 281474976710656))
+         (|augmentPredVector| % 2251799813685248))
     (AND
      (OR (|HasCategory| |#1| '(|EntireRing|))
-         (AND #8# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))))
-     (|augmentPredVector| % 562949953421312))
+         (AND #3# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))))
+     (|augmentPredVector| % 4503599627370496))
     (AND
      (OR (|HasCategory| |#1| '(|Algebra| (|Fraction| (|Integer|))))
          (AND (|HasCategory| |#1| '(|CommutativeRing|))
               (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-         #9# (AND #8# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))))
-     (|augmentPredVector| % 1125899906842624))
-    (AND
-     (OR
-      (AND (|HasCategory| |#1| '(|CommutativeRing|))
-           (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-      #9# (AND #8# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))))
-     (|augmentPredVector| % 2251799813685248))
-    (AND
-     (OR (|HasCategory| |#1| '(|RetractableTo| (|Integer|)))
-         (AND (|HasCategory| |#1| '(|CommutativeRing|))
-              (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-         (AND #8# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-         (|HasCategory| |#1| '(|Ring|)))
-     (|augmentPredVector| % 4503599627370496))
-    (AND
-     (OR
-      (AND (|HasCategory| |#1| '(|CommutativeRing|))
-           (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-      (AND #8# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-      (|HasCategory| |#1| '(|SemiRing|)))
+         #2# (AND #3# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))))
      (|augmentPredVector| % 9007199254740992))
     (AND
      (OR
       (AND (|HasCategory| |#1| '(|CommutativeRing|))
            (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-      (AND #8# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-      (|HasCategory| |#1| '(|Ring|)))
+      #2# (AND #3# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))))
      (|augmentPredVector| % 18014398509481984))
     (AND
-     (OR
-      (AND #3# (|HasCategory| |#1| '(|Ring|))
-           (|HasCategory| (|Integer|) '(|AbelianMonoid|)))
-      (|HasCategory| |#1| '(|AbelianMonoid|))
-      (AND (|HasCategory| |#1| '(|CommutativeRing|))
-           (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-      (AND #8# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-      (|HasCategory| % '(|AbelianMonoid|)))
+     (OR (|HasCategory| |#1| '(|RetractableTo| (|Integer|)))
+         (AND (|HasCategory| |#1| '(|CommutativeRing|))
+              (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+         (AND #3# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+         (|HasCategory| |#1| '(|Ring|)))
      (|augmentPredVector| % 36028797018963968))
     (AND
      (OR
-      (AND #3# (|HasCategory| |#1| '(|Ring|))
+      (AND (|HasCategory| |#1| '(|CommutativeRing|))
+           (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+      (AND #3# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+      (|HasCategory| |#1| '(|SemiRing|)))
+     (|augmentPredVector| % 72057594037927936))
+    (AND
+     (OR
+      (AND (|HasCategory| |#1| '(|CommutativeRing|))
+           (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+      (AND #3# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+      (|HasCategory| |#1| '(|Ring|)))
+     (|augmentPredVector| % 144115188075855872))
+    (AND
+     (OR
+      (AND #8# (|HasCategory| |#1| '(|Ring|))
+           (|HasCategory| (|Integer|) '(|AbelianMonoid|)))
+      #10#
+      (AND (|HasCategory| |#1| '(|CommutativeRing|))
+           (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+      (AND #3# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+      (|HasCategory| % '(|AbelianMonoid|)))
+     (|augmentPredVector| % 288230376151711744))
+    (AND
+     (OR
+      (AND #8# (|HasCategory| |#1| '(|Ring|))
            (|HasCategory| (|Integer|) '(|AbelianGroup|)))
       (AND (|HasCategory| |#1| '(|AbelianGroup|))
            (|HasCategory| |#1| '(|CommutativeRing|)))
       (AND (|HasCategory| |#1| '(|AbelianGroup|))
            (|HasCategory| |#1| '(|Ring|)))
-      #1#
+      #11#
       (AND (|HasCategory| |#1| '(|CommutativeRing|))
            (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-      (AND #8# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+      (AND #3# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
       (|HasCategory| % '(|AbelianGroup|)))
-     (|augmentPredVector| % 72057594037927936))
+     (|augmentPredVector| % 576460752303423488))
     (AND
      (OR
-      (AND #3# (|HasCategory| |#1| '(|Ring|))
+      (AND #8# (|HasCategory| |#1| '(|Ring|))
            (|HasCategory| (|Integer|) '(|AbelianGroup|)))
       (|HasCategory| |#1| '(|AbelianGroup|))
       (AND (|HasCategory| |#1| '(|CommutativeRing|))
            (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
-      (AND #8# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
+      (AND #3# (|HasCategory| % '(|VariablesCommuteWithCoefficients|)))
       (|HasCategory| % '(|AbelianGroup|)))
-     (|augmentPredVector| % 144115188075855872))
+     (|augmentPredVector| % 1152921504606846976))
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 8 (|NewSparseUnivariatePolynomial| %))
     (QSETREFV % 9 (|Record| (|:| |v| |#2|) (|:| |ts| (QREFELT % 8))))
     (QSETREFV % 10 (|Union| |#1| (QREFELT % 9)))
     (COND
-     ((|testBitVector| |pv$| 24)
+     ((|testBitVector| |pv$| 26)
       (PROGN
        (QSETREFV % 82 (|PseudoRemainderSequence| % (QREFELT % 8)))
        (QSETREFV % 85
@@ -1531,7 +1473,7 @@
                     (CONS (|dispatchFunction| |NSMP;exactQuotient!;%R%;40|)
                           %))))))))
     (COND
-     ((|testBitVector| |pv$| 14)
+     ((|testBitVector| |pv$| 15)
       (PROGN
        (QSETREFV % 114 (CONS (|dispatchFunction| |NSMP;gcd;R%R;42|) %))
        (QSETREFV % 113 (CONS (|dispatchFunction| |NSMP;content;%R;43|) %))
@@ -1539,9 +1481,9 @@
                  (CONS (|dispatchFunction| |NSMP;primitivePart!;2%;44|) %)))))
     %))) 
 
-(DEFUN |NewSparseMultivariatePolynomial| (&REST #1=#:G359)
+(DEFUN |NewSparseMultivariatePolynomial| (&REST #1=#:G371)
   (SPROG NIL
-         (PROG (#2=#:G360)
+         (PROG (#2=#:G372)
            (RETURN
             (COND
              ((LETT #2#
@@ -1565,7 +1507,7 @@
           (LIST
            '#(NIL NIL NIL NIL NIL (|SparseMultivariatePolynomial| 6 7)
               (|local| |#1|) (|local| |#2|) 'D '|VPoly| '|Rep|
-              (|NonNegativeInteger|) (0 . |degree|) (5 . |Zero|)
+              (|NonNegativeInteger|) (0 . |degree|) (5 . |0|)
               (9 . |leadingCoefficient|) |NSMP;coerce;%Smp;2|
               |NSMP;coerce;Smp%;3| (|Union| 5 '"failed")
               |NSMP;retractIfCan;%U;4| |NSMP;mvar;%VarSet;5| |NSMP;mdeg;%Nni;6|
@@ -1573,7 +1515,7 @@
               (19 . |reductum|) (|Boolean|) (24 . |ground?|) (29 . |ground|)
               |NSMP;tail;2%;9| (|List| %) |NSMP;iteratedInitials;%L;10|
               (|List| $$) (34 . |cons|) |NSMP;deepestInitial;2%;12|
-              (40 . |zero?|) (45 . |One|) (49 . |monomial|)
+              (40 . |zero?|) (45 . |1|) (49 . |monomial|)
               |NSMP;mainMonomial;2%;13| (56 . |minimumDegree|)
               |NSMP;leastMonomial;2%;14| (61 . |coefficients|)
               |NSMP;mainCoefficients;%L;15| (66 . =) (72 . |degree|)
@@ -1581,7 +1523,7 @@
               (85 . <) (91 . >) (|NewSparseUnivariatePolynomial| $$)
               (|Mapping| $$ $$)
               (|NewSparseUnivariatePolynomialFunctions2| $$ $$) (97 . |map|)
-              (103 . |monicModulo|) (109 . |ground?|) (114 . |One|) (118 . =)
+              (103 . |monicModulo|) (109 . |ground?|) (114 . |1|) (118 . =)
               (124 . |ground|) (|Union| % '"failed") (129 . |recip|) (134 . *)
               |NSMP;monicModulo;3%;18| (140 . ^) (146 . |pseudoRemainder|)
               (152 . -) |NSMP;prem;3%;19|
@@ -1594,7 +1536,7 @@
               |NSMP;lazyPquo;3%;23|
               (|Record| (|:| |coef| $$) (|:| |gap| 11) (|:| |quotient| %)
                         (|:| |remainder| %))
-              (176 . |lazyPseudoDivide|) (182 . |Zero|)
+              (176 . |lazyPseudoDivide|) (182 . |0|)
               (|Record| (|:| |polnum| %) (|:| |polden| $$) (|:| |power| 11))
               (186 . |lazyResidueClass|)
               (|Record| (|:| |polnum| %) (|:| |polden| %) (|:| |power| 11))
@@ -1653,35 +1595,36 @@
               |gcd| 563 |extendedSubResultantGcd| 569 |exquo| 575
               |exactQuotient!| 581 |exactQuotient| 587 |degree| 593
               |deepestInitial| 599 |content| 604 |coerce| 609 |coefficient| 619
-              ^ 626 |Zero| 632 |One| 636 |LazardQuotient2| 640 |LazardQuotient|
-              648 = 655 - 661 + 667 * 673)
+              ^ 626 |LazardQuotient2| 632 |LazardQuotient| 640 = 647 |1| 653
+              |0| 657 - 661 + 667 * 673)
            'NIL
            (CONS
-            (|makeByteWordVec2| 45
-                                '(0 0 10 0 10 0 16 0 26 14 25 4 17 27 15 3 2 1
-                                  28 28 27 12 15 1 0 27 4 5 1 0 0 39 4 4 1 0 0
-                                  0 28 39 1 1 0 0 0 0 0 11 12 12 45 12 44 0 0
-                                  32 30 9 0 0 0 12 12 19 27 7 6 0 0 0 20 20 12
-                                  12 18 36 34 13 27 8 7 6 4 0 0 0 0 0 0 0 0))
+            (|makeByteWordVec2| 48
+                                '(0 0 11 0 11 0 17 0 28 15 27 4 18 29 16 1 30
+                                  30 29 13 16 1 0 29 4 5 1 0 0 41 4 4 1 0 0 0
+                                  30 41 1 1 0 0 0 0 0 12 13 13 48 13 47 9 0 0
+                                  34 32 44 10 0 0 0 13 13 20 29 7 6 0 0 0 21 21
+                                  13 13 19 38 36 14 29 8 7 6 4 3 2 0 0 0 0 0 0
+                                  0 0))
             (CONS
              '#(|RecursivePolynomialCategory&| |PolynomialCategory&|
                 |PolynomialFactorizationExplicit&|
                 |MaybeSkewPolynomialCategory&| |UniqueFactorizationDomain&|
                 |FiniteAbelianMonoidRing&| |GcdDomain&| |AbelianMonoidRing&|
                 NIL NIL NIL |PartialDifferentialRing&| |EntireRing&| |Algebra&|
-                |Algebra&| NIL NIL |Algebra&| NIL |Rng&|
-                |NonAssociativeAlgebra&| NIL |NonAssociativeAlgebra&|
-                |NonAssociativeAlgebra&| |FreeModuleCategory&| |Module&|
-                |FullyLinearlyExplicitOver&| |Module&| |Module&| NIL NIL NIL
-                NIL |NonAssociativeRing&| NIL NIL NIL NIL |NonAssociativeRng&|
-                NIL NIL NIL NIL NIL NIL NIL NIL |AbelianGroup&| NIL NIL NIL
-                |MagmaWithUnit&| |AbelianMonoid&| NIL |NonAssociativeSemiRng&|
-                NIL NIL NIL |AbelianSemiGroup&| |Magma&| |FullyRetractableTo&|
-                |RetractableTo&| |Evalable&| |Hashable&| NIL |RetractableTo&|
-                |RetractableTo&| |SetCategory&| |RetractableTo&|
-                |RetractableTo&| NIL NIL NIL |InnerEvalable&| NIL NIL NIL NIL
-                NIL NIL NIL NIL NIL NIL |BasicType&| NIL |InnerEvalable&|
-                |InnerEvalable&| NIL NIL NIL)
+                |Algebra&| |Algebra&| NIL |Rng&| |NonAssociativeAlgebra&| NIL
+                |NonAssociativeAlgebra&| |NonAssociativeAlgebra&|
+                |FreeModuleCategory&| |Module&| |FullyLinearlyExplicitOver&|
+                |Module&| |Module&| NIL NIL NIL NIL |NonAssociativeRing&| NIL
+                NIL NIL NIL |NonAssociativeRng&| NIL NIL NIL NIL NIL NIL NIL
+                NIL |AbelianGroup&| NIL NIL NIL |MagmaWithUnit&|
+                |AbelianMonoid&| NIL NIL |NonAssociativeSemiRng&| NIL NIL
+                |SetWithZero&| NIL |AbelianSemiGroup&| |Magma&|
+                |FullyRetractableTo&| |RetractableTo&| |Evalable&| |Hashable&|
+                NIL |RetractableTo&| |RetractableTo&| |SetCategory&|
+                |RetractableTo&| |RetractableTo&| NIL NIL NIL |InnerEvalable&|
+                NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL |BasicType&|
+                NIL |InnerEvalable&| |InnerEvalable&| NIL NIL NIL)
              (CONS
               '#((|RecursivePolynomialCategory| 6 (|IndexedExponents| 7) 7)
                  (|PolynomialCategory| 6 (|IndexedExponents| 7) 7)
@@ -1692,10 +1635,9 @@
                  (|GcdDomain|) (|AbelianMonoidRing| 6 (|IndexedExponents| 7))
                  (|IntegralDomain|) (|LeftOreRing|) (|CommutativeRing|)
                  (|PartialDifferentialRing| 7) (|EntireRing|) (|Algebra| $$)
-                 (|Algebra| 6) (|CharacteristicZero|) (|CharacteristicNonZero|)
-                 (|Algebra| 153) (|Ring|) (|Rng|) (|NonAssociativeAlgebra| $$)
-                 (|SemiRing|) (|NonAssociativeAlgebra| 6)
-                 (|NonAssociativeAlgebra| 153)
+                 (|Algebra| 6) (|Algebra| 153) (|Ring|) (|Rng|)
+                 (|NonAssociativeAlgebra| $$) (|SemiRing|)
+                 (|NonAssociativeAlgebra| 6) (|NonAssociativeAlgebra| 153)
                  (|FreeModuleCategory| 6 (|IndexedExponents| 7)) (|Module| $$)
                  (|FullyLinearlyExplicitOver| 6) (|Module| 6) (|Module| 153)
                  (|IndexedDirectProductCategory| 6 (|IndexedExponents| 7))
@@ -1708,9 +1650,10 @@
                  (|RightModule| 6) (|LeftModule| 6)
                  (|AbelianProductCategory| 6) (|AbelianGroup|) (|Monoid|)
                  (|NonAssociativeSemiRing|) (|CancellationAbelianMonoid|)
-                 (|MagmaWithUnit|) (|AbelianMonoid|) (|SemiGroup|)
-                 (|NonAssociativeSemiRng|) (|PatternMatchable| 147)
-                 (|PatternMatchable| (|Float|)) (|Comparable|)
+                 (|MagmaWithUnit|) (|AbelianMonoid|) (|Comparable|)
+                 (|SemiGroup|) (|NonAssociativeSemiRng|)
+                 (|PatternMatchable| 147) (|PatternMatchable| (|Float|))
+                 (|SetWithZero|) (|ComparableRepresentation|)
                  (|AbelianSemiGroup|) (|Magma|) (|FullyRetractableTo| 6)
                  (|RetractableTo| 7) (|Evalable| $$) (|Hashable|)
                  (|CommutativeStar|) (|RetractableTo| 147)
@@ -1722,6 +1665,7 @@
                  (|ConvertibleTo| 143) (|ConvertibleTo| 142) (|noZeroDivisors|)
                  (|TwoSidedRecip|) (|canonicalUnitNormal|)
                  (|CoercibleFrom| 147) (|CoercibleFrom| 153) (|unitsKnown|)
+                 (|CharacteristicNonZero|) (|CharacteristicZero|)
                  (|CoercibleTo| 119) (|BasicType|) (|CoercibleFrom| 6)
                  (|InnerEvalable| 7 6) (|InnerEvalable| 7 $$)
                  (|VariablesCommuteWithCoefficients|)
@@ -1748,21 +1692,21 @@
                                     0 0 0 0 106 2 6 25 0 0 107 2 6 0 0 0 108 2
                                     0 0 0 6 109 2 0 0 0 6 110 2 6 57 0 0 111 2
                                     6 0 0 0 112 1 0 6 0 113 2 0 6 6 0 114 1 8
-                                    25 0 115 1 8 0 0 116 1 0 0 0 117 1 56 25 0
-                                    34 1 0 0 0 28 2 24 0 0 0 91 2 24 29 0 0 104
-                                    1 0 17 0 18 2 24 0 0 0 102 2 0 68 0 0 69 1
-                                    14 0 0 117 2 0 0 0 0 64 2 0 0 0 0 67 4 24 0
+                                    25 0 115 1 8 0 0 116 1 0 0 0 117 1 59 25 0
+                                    34 1 0 0 0 28 2 26 0 0 0 91 2 26 29 0 0 104
+                                    1 0 17 0 18 2 26 0 0 0 102 2 0 68 0 0 69 1
+                                    15 0 0 117 2 0 0 0 0 64 2 0 0 0 0 67 4 26 0
                                     0 0 0 0 88 1 0 7 0 19 3 0 0 0 7 11 36 2 0 0
                                     0 0 60 1 0 11 0 20 1 0 0 0 37 1 0 29 0 41 1
                                     0 0 0 39 2 0 0 0 7 45 2 0 80 0 0 81 2 0 65
-                                    0 0 66 2 0 0 0 0 71 2 0 0 0 0 74 2 24 0 0 0
-                                    106 1 0 29 0 30 1 0 0 0 21 1 0 0 0 23 2 24
-                                    95 0 0 97 2 24 92 0 0 94 1 0 25 0 53 1 0 6
-                                    0 56 2 14 6 6 0 114 2 24 98 0 0 100 2 50 57
-                                    0 0 83 2 24 0 0 6 110 2 24 0 0 6 109 2 0 11
-                                    0 7 43 1 0 0 0 33 1 14 6 0 113 1 0 5 0 15 1
-                                    0 0 5 16 3 0 0 0 7 11 44 2 54 0 0 11 61 0
-                                    56 0 13 0 54 0 35 4 24 0 0 0 0 11 86 3 24 0
-                                    0 0 11 85 2 0 25 0 0 55 2 58 0 0 0 63 2 0 0
-                                    0 0 73 2 0 0 0 0 59)))))
+                                    0 0 66 2 0 0 0 0 71 2 0 0 0 0 74 2 26 0 0 0
+                                    106 1 0 29 0 30 1 0 0 0 21 1 0 0 0 23 2 26
+                                    95 0 0 97 2 26 92 0 0 94 1 0 25 0 53 1 0 6
+                                    0 56 2 15 6 6 0 114 2 26 98 0 0 100 2 53 57
+                                    0 0 83 2 26 0 0 6 110 2 26 0 0 6 109 2 0 11
+                                    0 7 43 1 0 0 0 33 1 15 6 0 113 1 0 5 0 15 1
+                                    0 0 5 16 3 0 0 0 7 11 44 2 57 0 0 11 61 4
+                                    26 0 0 0 0 11 86 3 26 0 0 0 11 85 2 0 25 0
+                                    0 55 0 57 0 35 0 59 0 13 2 61 0 0 0 63 2 0
+                                    0 0 0 73 2 0 0 0 0 59)))))
            '|lookupIncomplete|)) 

@@ -49,7 +49,7 @@
 (DECLAIM (NOTINLINE |MatrixCommonDenominator;|)) 
 
 (DEFUN |MatrixCommonDenominator;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -74,9 +74,9 @@
                             %))))
           %))) 
 
-(DEFUN |MatrixCommonDenominator| (&REST #1=#:G14)
+(DEFUN |MatrixCommonDenominator| (&REST #1=#:G16)
   (SPROG NIL
-         (PROG (#2=#:G15)
+         (PROG (#2=#:G17)
            (RETURN
             (COND
              ((LETT #2#
@@ -104,7 +104,7 @@
               (|Record| (|:| |num| 12) (|:| |den| 6))
               |MCDEN;splitDenominator;MR;2| (22 . |denom|) (|List| 7)
               (27 . |parts|) (|List| 6) (|ListFunctions2| 7 6) (32 . |map|)
-              (|List| %) (38 . |lcm|) (43 . *) (49 . |One|) (|Mapping| 6 6 6)
+              (|List| %) (38 . |lcm|) (43 . *) (49 . |1|) (|Mapping| 6 6 6)
               (53 . |reduce|))
            '#(|splitDenominator| 60 |commonDenominator| 65 |clearDenominator|
               70)

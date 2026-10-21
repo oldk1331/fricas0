@@ -2,70 +2,70 @@
 (SDEFUN |FR2;map;MFF;1|
         ((|fn| (|Mapping| S R)) (|u| (|Factored| R)) (% (|Factored| S)))
         (SPROG
-         ((|l|
+         ((#1=#:G25 NIL) (|f| NIL) (#2=#:G26 NIL)
+          (|l|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| S)
-                      (|:| |exponent| (|NonNegativeInteger|)))))
-          (#1=#:G15 NIL) (|f| NIL) (#2=#:G14 NIL))
+                      (|:| |exponent| (|NonNegativeInteger|))))))
          (SEQ
           (LETT |l|
                 (CONS
                  (VECTOR (CONS 0 "nil")
                          (SPADCALL (SPADCALL |u| (QREFELT % 9)) |fn|) 1)
                  (PROGN
-                  (LETT #2# NIL)
-                  (SEQ (LETT |f| NIL) (LETT #1# (SPADCALL |u| (QREFELT % 13)))
+                  (LETT #1# NIL)
+                  (SEQ (LETT |f| NIL) (LETT #2# (SPADCALL |u| (QREFELT % 13)))
                        G190
                        (COND
-                        ((OR (ATOM #1#) (PROGN (LETT |f| (CAR #1#)) NIL))
+                        ((OR (ATOM #2#) (PROGN (LETT |f| (CAR #2#)) NIL))
                          (GO G191)))
                        (SEQ
                         (EXIT
-                         (LETT #2#
+                         (LETT #1#
                                (CONS
                                 (VECTOR (CONS 0 "nil")
                                         (SPADCALL (QVELT |f| 1) |fn|)
                                         (QVELT |f| 2))
-                                #2#))))
-                       (LETT #1# (CDR #1#)) (GO G190) G191
-                       (EXIT (NREVERSE #2#))))))
+                                #1#))))
+                       (LETT #2# (CDR #2#)) (GO G190) G191
+                       (EXIT (NREVERSE #1#))))))
           (EXIT (SPADCALL (|spadConstant| % 15) |l| (QREFELT % 19)))))) 
 
 (SDEFUN |FR2;map_preserving;MFF;2|
         ((|fn| (|Mapping| S R)) (|u| (|Factored| R)) (% (|Factored| S)))
         (SPROG
-         ((|nl|
+         ((|nu| (S)) (#1=#:G38 NIL) (|f| NIL) (#2=#:G39 NIL)
+          (|nl|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| S)
-                      (|:| |exponent| (|NonNegativeInteger|)))))
-          (#1=#:G28 NIL) (|f| NIL) (#2=#:G27 NIL) (|nu| (S)))
+                      (|:| |exponent| (|NonNegativeInteger|))))))
          (SEQ (LETT |nu| (SPADCALL (SPADCALL |u| (QREFELT % 9)) |fn|))
               (LETT |nl|
                     (PROGN
-                     (LETT #2# NIL)
+                     (LETT #1# NIL)
                      (SEQ (LETT |f| NIL)
-                          (LETT #1# (SPADCALL |u| (QREFELT % 13))) G190
+                          (LETT #2# (SPADCALL |u| (QREFELT % 13))) G190
                           (COND
-                           ((OR (ATOM #1#) (PROGN (LETT |f| (CAR #1#)) NIL))
+                           ((OR (ATOM #2#) (PROGN (LETT |f| (CAR #2#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #2#
+                            (LETT #1#
                                   (CONS
                                    (VECTOR (QVELT |f| 0)
                                            (SPADCALL (QVELT |f| 1) |fn|)
                                            (QVELT |f| 2))
-                                   #2#))))
-                          (LETT #1# (CDR #1#)) (GO G190) G191
-                          (EXIT (NREVERSE #2#)))))
+                                   #1#))))
+                          (LETT #2# (CDR #2#)) (GO G190) G191
+                          (EXIT (NREVERSE #1#)))))
               (EXIT (SPADCALL |nu| |nl| (QREFELT % 19)))))) 
 
 (DECLAIM (NOTINLINE |FactoredFunctions2;|)) 
 
 (DEFUN |FactoredFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -81,9 +81,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |FactoredFunctions2| (&REST #1=#:G29)
+(DEFUN |FactoredFunctions2| (&REST #1=#:G40)
   (SPROG NIL
-         (PROG (#2=#:G30)
+         (PROG (#2=#:G41)
            (RETURN
             (COND
              ((LETT #2#
@@ -107,7 +107,7 @@
               (|Union| '"nil" '"sqfr" '"irred" '"prime")
               (|Record| (|:| |flag| 10) (|:| |factor| 6)
                         (|:| |exponent| (|NonNegativeInteger|)))
-              (|List| 11) (5 . |factorList|) (10 . |One|) (14 . |One|)
+              (|List| 11) (5 . |factorList|) (10 . |1|) (14 . |1|)
               (|Record| (|:| |flag| 10) (|:| |factor| 7)
                         (|:| |exponent| (|NonNegativeInteger|)))
               (|List| 16) (|Factored| 7) (18 . |makeFR|) (|Mapping| 7 6)

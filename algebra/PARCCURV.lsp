@@ -1,16 +1,16 @@
 
-(PUT '|PARCCURV;complex_curve;VT%;1| '|SPADreplace| '(XLAM (|x|) |x|)) 
+(MAKEPROP '|PARCCURV;complex_curve;VT%;1| '|SPADreplace| '(XLAM (|x|) |x|)) 
 
 (SDEFUN |PARCCURV;complex_curve;VT%;1| ((|x| (VT)) (% (%))) |x|) 
 
-(PUT '|PARCCURV;get_value;%VT;2| '|SPADreplace| '(XLAM (|x|) |x|)) 
+(MAKEPROP '|PARCCURV;get_value;%VT;2| '|SPADreplace| '(XLAM (|x|) |x|)) 
 
 (SDEFUN |PARCCURV;get_value;%VT;2| ((|x| (%)) (% (VT))) |x|) 
 
 (DECLAIM (NOTINLINE |ParametricComplexCurve;|)) 
 
 (DEFUN |ParametricComplexCurve;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|ParametricComplexCurve| DV$1))

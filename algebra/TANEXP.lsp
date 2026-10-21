@@ -15,7 +15,7 @@
 
 (SDEFUN |TANEXP;tanNa;RIR;3| ((|a| (R)) (|n| (|Integer|)) (% (R)))
         (SPROG
-         ((|t| (|Fraction| (|SparseUnivariatePolynomial| R))) (#1=#:G10 NIL))
+         ((#1=#:G10 NIL) (|t| (|Fraction| (|SparseUnivariatePolynomial| R))))
          (COND ((ZEROP |n|) (|spadConstant| % 16))
                ((MINUSP |n|)
                 (SPADCALL (SPADCALL |a| (- |n|) (QREFELT % 18))
@@ -37,9 +37,9 @@
 
 (SDEFUN |TANEXP;tanSum;LR;4| ((|l| (|List| R)) (% (R)))
         (SPROG
-         ((#1=#:G18 NIL) (#2=#:G17 (R)) (#3=#:G19 (R)) (#4=#:G24 NIL) (|i| NIL)
-          (#5=#:G15 NIL) (#6=#:G14 (R)) (#7=#:G16 (R)) (#8=#:G23 NIL)
-          (|m| (|Integer|)) (|v| (|Vector| R)))
+         ((|v| (|Vector| R)) (|m| (|Integer|)) (#1=#:G23 NIL) (#2=#:G16 (R))
+          (#3=#:G14 (R)) (#4=#:G15 NIL) (|i| NIL) (#5=#:G24 NIL) (#6=#:G19 (R))
+          (#7=#:G17 (R)) (#8=#:G18 NIL))
          (SEQ
           (COND ((NULL |l|) (|spadConstant| % 16))
                 (#9='T
@@ -50,34 +50,35 @@
                   (EXIT
                    (SPADCALL
                     (PROGN
-                     (LETT #5# NIL)
+                     (LETT #4# NIL)
                      (SEQ (LETT |i| 0)
-                          (LETT #8# (QUOTIENT2 (- (QVSIZE |v|) 1) 2)) G190
-                          (COND ((|greater_SI| |i| #8#) (GO G191)))
+                          (LETT #1# (|quotient_INT| (- (QVSIZE |v|) 1) 2)) G190
+                          (COND ((|greater_SI| |i| #1#) (GO G191)))
                           (SEQ
                            (EXIT
                             (PROGN
-                             (LETT #7#
+                             (LETT #2#
                                    (SPADCALL (|TANEXP;m1toN| |i| %)
                                              (SPADCALL |v| (+ (* 2 |i|) |m|)
                                                        (QREFELT % 27))
                                              (QREFELT % 28)))
                              (COND
-                              (#5#
-                               (LETT #6# (SPADCALL #6# #7# (QREFELT % 29))))
-                              ('T (PROGN (LETT #6# #7#) (LETT #5# 'T)))))))
+                              (#4#
+                               (LETT #3# (SPADCALL #3# #2# (QREFELT % 29))))
+                              ('T (PROGN (LETT #3# #2#) (LETT #4# 'T)))))))
                           (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
-                     (COND (#5# #6#) (#9# (|spadConstant| % 16))))
+                     (COND (#4# #3#) (#9# (|spadConstant| % 16))))
                     (SPADCALL (|spadConstant| % 7)
                               (PROGN
-                               (LETT #1# NIL)
+                               (LETT #8# NIL)
                                (SEQ (LETT |i| 1)
-                                    (LETT #4# (QUOTIENT2 (QVSIZE |v|) 2)) G190
-                                    (COND ((|greater_SI| |i| #4#) (GO G191)))
+                                    (LETT #5# (|quotient_INT| (QVSIZE |v|) 2))
+                                    G190
+                                    (COND ((|greater_SI| |i| #5#) (GO G191)))
                                     (SEQ
                                      (EXIT
                                       (PROGN
-                                       (LETT #3#
+                                       (LETT #6#
                                              (SPADCALL (|TANEXP;m1toN| |i| %)
                                                        (SPADCALL |v|
                                                                  (+
@@ -88,17 +89,17 @@
                                                                           27))
                                                        (QREFELT % 28)))
                                        (COND
-                                        (#1#
-                                         (LETT #2#
-                                               (SPADCALL #2# #3#
+                                        (#8#
+                                         (LETT #7#
+                                               (SPADCALL #7# #6#
                                                          (QREFELT % 29))))
                                         ('T
                                          (PROGN
-                                          (LETT #2# #3#)
-                                          (LETT #1# 'T)))))))
+                                          (LETT #7# #6#)
+                                          (LETT #8# 'T)))))))
                                     (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                                     (EXIT NIL))
-                               (COND (#1# #2#) (#9# (|spadConstant| % 16))))
+                               (COND (#8# #7#) (#9# (|spadConstant| % 16))))
                               (QREFELT % 29))
                     (QREFELT % 21))))))))) 
 
@@ -106,10 +107,10 @@
         ((|n| (|PositiveInteger|))
          (% (|Fraction| (|SparseUnivariatePolynomial| R))))
         (SPROG
-         ((#1=#:G29 NIL) (#2=#:G28 #3=(|SparseUnivariatePolynomial| R))
-          (#4=#:G30 #3#) (#5=#:G34 NIL) (|i| NIL) (#6=#:G26 NIL) (#7=#:G25 #3#)
-          (#8=#:G27 #3#) (#9=#:G33 NIL) (|m| (|Integer|))
-          (|v| (|Vector| (|SparseUnivariatePolynomial| R))))
+         ((|v| (|Vector| (|SparseUnivariatePolynomial| R))) (|m| (|Integer|))
+          (#1=#:G33 NIL) (#2=#:G27 #3=(|SparseUnivariatePolynomial| R))
+          (#4=#:G25 #3#) (#5=#:G26 NIL) (|i| NIL) (#6=#:G34 NIL) (#7=#:G30 #3#)
+          (#8=#:G28 #3#) (#9=#:G29 NIL))
          (SEQ
           (LETT |m|
                 (SPADCALL
@@ -121,30 +122,31 @@
           (EXIT
            (SPADCALL
             (PROGN
-             (LETT #6# NIL)
-             (SEQ (LETT |i| 0) (LETT #9# (QUOTIENT2 (- (QVSIZE |v|) 1) 2)) G190
-                  (COND ((|greater_SI| |i| #9#) (GO G191)))
+             (LETT #5# NIL)
+             (SEQ (LETT |i| 0) (LETT #1# (|quotient_INT| (- (QVSIZE |v|) 1) 2))
+                  G190 (COND ((|greater_SI| |i| #1#) (GO G191)))
                   (SEQ
                    (EXIT
                     (PROGN
-                     (LETT #8#
+                     (LETT #2#
                            (SPADCALL (|TANEXP;m1toN| |i| %)
                                      (SPADCALL |v| (+ (* 2 |i|) |m|)
                                                (QREFELT % 38))
                                      (QREFELT % 39)))
-                     (COND (#6# (LETT #7# (SPADCALL #7# #8# (QREFELT % 40))))
-                           ('T (PROGN (LETT #7# #8#) (LETT #6# 'T)))))))
+                     (COND (#5# (LETT #4# (SPADCALL #4# #2# (QREFELT % 40))))
+                           ('T (PROGN (LETT #4# #2#) (LETT #5# 'T)))))))
                   (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
-             (COND (#6# #7#) (#10='T (|spadConstant| % 41))))
+             (COND (#5# #4#) (#10='T (|spadConstant| % 41))))
             (SPADCALL (|spadConstant| % 42)
                       (PROGN
-                       (LETT #1# NIL)
-                       (SEQ (LETT |i| 1) (LETT #5# (QUOTIENT2 (QVSIZE |v|) 2))
-                            G190 (COND ((|greater_SI| |i| #5#) (GO G191)))
+                       (LETT #9# NIL)
+                       (SEQ (LETT |i| 1)
+                            (LETT #6# (|quotient_INT| (QVSIZE |v|) 2)) G190
+                            (COND ((|greater_SI| |i| #6#) (GO G191)))
                             (SEQ
                              (EXIT
                               (PROGN
-                               (LETT #4#
+                               (LETT #7#
                                      (SPADCALL (|TANEXP;m1toN| |i| %)
                                                (SPADCALL |v|
                                                          (+ (- (* 2 |i|) 1)
@@ -152,19 +154,19 @@
                                                          (QREFELT % 38))
                                                (QREFELT % 39)))
                                (COND
-                                (#1#
-                                 (LETT #2# (SPADCALL #2# #4# (QREFELT % 40))))
-                                ('T (PROGN (LETT #2# #4#) (LETT #1# 'T)))))))
+                                (#9#
+                                 (LETT #8# (SPADCALL #8# #7# (QREFELT % 40))))
+                                ('T (PROGN (LETT #8# #7#) (LETT #9# 'T)))))))
                             (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                             (EXIT NIL))
-                       (COND (#1# #2#) (#10# (|spadConstant| % 41))))
+                       (COND (#9# #8#) (#10# (|spadConstant| % 41))))
                       (QREFELT % 40))
             (QREFELT % 43)))))) 
 
 (DECLAIM (NOTINLINE |TangentExpansions;|)) 
 
 (DEFUN |TangentExpansions;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|TangentExpansions| DV$1))
@@ -197,17 +199,17 @@
 
 (MAKEPROP '|TangentExpansions| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |One|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |1|)
               (|SparseUnivariatePolynomial| 6) (|Fraction| 8) (4 . |denom|)
               (9 . *) (15 . |numer|) (20 . -) (|PositiveInteger|)
-              |TANEXP;tanAn;RPiSup;2| (26 . |Zero|) (|Integer|)
+              |TANEXP;tanAn;RPiSup;2| (26 . |0|) (|Integer|)
               |TANEXP;tanNa;RIR;3| (30 . -) (35 . |elt|) (41 . /) (|Vector| 6)
               (|List| 6) (|SymmetricFunctions| 6) (47 . |symFunc|)
               (52 . |minIndex|) (57 . |elt|) (63 . *) (69 . +)
-              |TANEXP;tanSum;LR;4| (75 . |One|) (|NonNegativeInteger|)
+              |TANEXP;tanSum;LR;4| (75 . |1|) (|NonNegativeInteger|)
               (79 . |monomial|) (|Vector| 8) (|SymmetricFunctions| 8)
               (85 . |symFunc|) (91 . |minIndex|) (96 . |elt|) (102 . *)
-              (108 . +) (114 . |Zero|) (118 . |One|) (122 . /))
+              (108 . +) (114 . |0|) (118 . |1|) (122 . /))
            '#(|tanSum| 128 |tanNa| 133 |tanAn| 139) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

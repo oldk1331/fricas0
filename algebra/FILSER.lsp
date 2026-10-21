@@ -1,11 +1,11 @@
 
-(PUT '|FILSER;l_to_s| '|SPADreplace| '(XLAM (|l|) |l|)) 
+(MAKEPROP '|FILSER;l_to_s| '|SPADreplace| '(XLAM (|l|) |l|)) 
 
 (SDEFUN |FILSER;l_to_s| ((|l| (|List| (|SExpression|))) (% (|SExpression|)))
         |l|) 
 
 (SDEFUN |FILSER;spadClosure?| ((|d| (|None|)) (% (|None|)))
-        (SPROG ((|name| (|None|)) (|fun| (|None|)))
+        (SPROG ((|fun| (|None|)) (|name| (|None|)))
                (SEQ (LETT |fun| (QCAR |d|))
                     (COND ((NULL (FUNCTIONP |fun|)) (EXIT NIL)))
                     (EXIT
@@ -17,8 +17,8 @@
 
 (SDEFUN |FILSER;get_type_tag| ((|lt| (|SExpression|)) (% (|SExpression|)))
         (SPROG
-         ((|res| (|SExpression|)) (|ct| (|SExpression|)) (#1=#:G59 NIL)
-          (|tp| NIL))
+         ((|tp| NIL) (#1=#:G59 NIL) (|ct| (|SExpression|))
+          (|res| (|SExpression|)))
          (SEQ (LETT |res| NIL)
               (SEQ (LETT |tp| NIL) (LETT #1# (QREFELT % 11)) G190
                    (COND
@@ -37,7 +37,7 @@
               (EXIT |res|)))) 
 
 (SDEFUN |FILSER;get_lisp_type| ((|tt| (|Symbol|)) (% (|SExpression|)))
-        (SPROG ((|res| (|SExpression|)) (#1=#:G65 NIL) (|tp| NIL))
+        (SPROG ((|tp| NIL) (#1=#:G66 NIL) (|res| (|SExpression|)))
                (SEQ (LETT |res| 'NIL)
                     (SEQ (LETT |tp| NIL) (LETT #1# (QREFELT % 11)) G190
                          (COND
@@ -56,13 +56,13 @@
         ((|d| (|None|)) (|seen| (|HashTable| (|None|) (|None|) "EQ"))
          (% #1=(|None|)))
         (SPROG
-         ((#2=#:G112 NIL) (|k| NIL) (#3=#:G111 NIL) (|keys| (|List| (|None|)))
-          (|nd| (|None|)) (#4=#:G110 NIL) (|i| NIL)
-          (|nv| #5=(|PrimitiveArray| (|None|))) (|n| (|NonNegativeInteger|))
-          (|dims| (|None|)) (|tt| (|SExpression|)) (#6=#:G109 NIL)
-          (#7=#:G108 NIL) (|noa| #5#) (|oa| (|PrimitiveArray| (|None|)))
-          (|d1| #1#) (|qcdr| (|None|)) (|qcar| (|None|)) (|name| (|None|))
-          (|e| (|None|)))
+         ((|e| (|None|)) (|name| (|None|)) (|qcar| (|None|)) (|qcdr| (|None|))
+          (|d1| #1#) (|oa| (|PrimitiveArray| (|None|)))
+          (|noa| #2=(|PrimitiveArray| (|None|))) (#3=#:G109 NIL)
+          (#4=#:G110 NIL) (|tt| (|SExpression|)) (|dims| (|None|))
+          (|n| (|NonNegativeInteger|)) (|nv| #2#) (|i| NIL) (#5=#:G111 NIL)
+          (|nd| (|None|)) (|keys| (|List| (|None|))) (#6=#:G112 NIL) (|k| NIL)
+          (#7=#:G113 NIL))
          (SEQ
           (COND ((NULL |d|) NIL)
                 ((NULL (NULL (LETT |e| (HGET |seen| |d|)))) |e|)
@@ -113,9 +113,9 @@
                                   (LETT |noa| (MAKEARR1 |n| (QAREF1 |oa| 0)))
                                   (LETT |nd| |noa|)
                                   (SPADCALL |seen| |d| |nd| (QREFELT % 14))
-                                  (SEQ (LETT |i| 0) (LETT #7# (- |n| 1)) G190
+                                  (SEQ (LETT |i| 0) (LETT #3# (- |n| 1)) G190
                                        (COND
-                                        ((|greater_SI| |i| #7#) (GO G191)))
+                                        ((|greater_SI| |i| #3#) (GO G191)))
                                        (SEQ
                                         (EXIT
                                          (QSETAREF1 |noa| |i|
@@ -129,8 +129,8 @@
                    (SEQ (LETT |nd| (MAKE-ARRAY (ARRAY-DIMENSIONS |d|)))
                         (SPADCALL |seen| |d| |nd| (QREFELT % 14))
                         (LETT |n| (ARRAY-TOTAL-SIZE |d|))
-                        (SEQ (LETT |i| 0) (LETT #6# (- |n| 1)) G190
-                             (COND ((|greater_SI| |i| #6#) (GO G191)))
+                        (SEQ (LETT |i| 0) (LETT #4# (- |n| 1)) G190
+                             (COND ((|greater_SI| |i| #4#) (GO G191)))
                              (SEQ
                               (EXIT
                                (SETF (ROW-MAJOR-AREF |nd| |i|)
@@ -159,8 +159,8 @@
                             (LETT |nd|
                                   (LIST 'WRITIFIED!! 'TYARR |tt| |dims| |nv|))
                             (SPADCALL |seen| |d| |nd| (QREFELT % 14))
-                            (SEQ (LETT |i| 0) (LETT #4# (- |n| 1)) G190
-                                 (COND ((|greater_SI| |i| #4#) (GO G191)))
+                            (SEQ (LETT |i| 0) (LETT #5# (- |n| 1)) G190
+                                 (COND ((|greater_SI| |i| #5#) (GO G191)))
                                  (SEQ
                                   (EXIT
                                    (QSETAREF1 |nv| |i|
@@ -194,24 +194,24 @@
                                  (LIST 'HASHTABLE (HASHTABLE_CLASS |d|)
                                        (|FILSER;do_serialize| |keys| |seen| %)
                                        (PROGN
-                                        (LETT #3# NIL)
-                                        (SEQ (LETT |k| NIL) (LETT #2# |keys|)
+                                        (LETT #6# NIL)
+                                        (SEQ (LETT |k| NIL) (LETT #7# |keys|)
                                              G190
                                              (COND
-                                              ((OR (ATOM #2#)
+                                              ((OR (ATOM #7#)
                                                    (PROGN
-                                                    (LETT |k| (CAR #2#))
+                                                    (LETT |k| (CAR #7#))
                                                     NIL))
                                                (GO G191)))
                                              (SEQ
                                               (EXIT
-                                               (LETT #3#
+                                               (LETT #6#
                                                      (CONS
                                                       (|FILSER;do_serialize|
                                                        (HGET |d| |k|) |seen| %)
-                                                      #3#))))
-                                             (LETT #2# (CDR #2#)) (GO G190)
-                                             G191 (EXIT (NREVERSE #3#))))))
+                                                      #6#))))
+                                             (LETT #7# (CDR #7#)) (GO G190)
+                                             G191 (EXIT (NREVERSE #6#))))))
                         (EXIT |nd|)))
                   ((FLOATP |d|)
                    (COND ((EQUAL |d| (READ-FROM-STRING (STRINGIMAGE |d|))) |d|)
@@ -230,13 +230,13 @@
         ((|d| (|None|)) (|seen| (|HashTable| (|None|) (|None|) "EQ"))
          (% #1=(|None|)))
         (SPROG
-         ((|nd| (|None|)) (#2=#:G155 NIL) (|i| NIL) (|n| (|Integer|))
-          (#3=#:G154 NIL) (|noa| (|PrimitiveArray| (|None|)))
-          (|oa| (|PrimitiveArray| (|None|))) (|qcdr| (|None|))
-          (|qcar| (|None|)) (|name| #4=(|Symbol|)) (|vec| #1#) (#5=#:G152 NIL)
-          (|k| NIL) (#6=#:G153 NIL) (#7=#:G151 NIL)
-          (|ov| (|PrimitiveArray| (|None|))) (|lt| (|SExpression|))
-          (|type| #4#) (|dl| (|List| (|SExpression|))) (|e| (|None|)))
+         ((|e| (|None|)) (|dl| (|List| (|SExpression|))) (|type| #2=(|Symbol|))
+          (|lt| (|SExpression|)) (|ov| (|PrimitiveArray| (|None|)))
+          (#3=#:G152 NIL) (#4=#:G154 NIL) (|k| NIL) (#5=#:G153 NIL) (|vec| #1#)
+          (|name| #2#) (|qcar| (|None|)) (|qcdr| (|None|))
+          (|oa| (|PrimitiveArray| (|None|)))
+          (|noa| (|PrimitiveArray| (|None|))) (#6=#:G155 NIL) (|n| (|Integer|))
+          (|i| NIL) (#7=#:G156 NIL) (|nd| (|None|)))
          (SEQ
           (COND ((NULL |d|) NIL)
                 ((NULL (NULL (LETT |e| (HGET |seen| |d|)))) |e|)
@@ -269,10 +269,10 @@
                                      (LETT |ov|
                                            (SPADCALL |dl| 5 (QREFELT % 22)))
                                      (LETT |n| (ARRAY-TOTAL-SIZE |nd|))
-                                     (SEQ (LETT |i| 0) (LETT #7# (- |n| 1))
+                                     (SEQ (LETT |i| 0) (LETT #3# (- |n| 1))
                                           G190
                                           (COND
-                                           ((|greater_SI| |i| #7#) (GO G191)))
+                                           ((|greater_SI| |i| #3#) (GO G191)))
                                           (SEQ
                                            (EXIT
                                             (SETF (ROW-MAJOR-AREF |nd| |i|)
@@ -289,7 +289,7 @@
                                             (SPADCALL |dl| 3 (QREFELT % 22))))
                                      (SPADCALL |seen| |d| |nd| (QREFELT % 14))
                                      (SEQ
-                                      (LETT #6#
+                                      (LETT #4#
                                             (SPADCALL
                                              (SPADCALL |dl| 5 (QREFELT % 22))
                                              (QREFELT % 25)))
@@ -302,8 +302,8 @@
                                       (COND
                                        ((OR (ATOM #5#)
                                             (PROGN (LETT |k| (CAR #5#)) NIL)
-                                            (ATOM #6#)
-                                            (PROGN (LETT |e| (CAR #6#)) NIL))
+                                            (ATOM #4#)
+                                            (PROGN (LETT |e| (CAR #4#)) NIL))
                                         (GO G191)))
                                       (SEQ
                                        (EXIT
@@ -314,7 +314,7 @@
                                                |seen| %))))
                                       (LETT #5#
                                             (PROG1 (CDR #5#)
-                                              (LETT #6# (CDR #6#))))
+                                              (LETT #4# (CDR #4#))))
                                       (GO G190) G191 (EXIT NIL))
                                      (EXIT |nd|)))
                                    ((EQUAL |type| 'DEVALUATED)
@@ -383,9 +383,9 @@
                                   (LETT |noa| (MAKEARR1 |n| (QAREF1 |oa| 0)))
                                   (LETT |nd| |noa|)
                                   (SPADCALL |seen| |d| |nd| (QREFELT % 14))
-                                  (SEQ (LETT |i| 0) (LETT #3# (- |n| 1)) G190
+                                  (SEQ (LETT |i| 0) (LETT #6# (- |n| 1)) G190
                                        (COND
-                                        ((|greater_SI| |i| #3#) (GO G191)))
+                                        ((|greater_SI| |i| #6#) (GO G191)))
                                        (SEQ
                                         (EXIT
                                          (QSETAREF1 |noa| |i|
@@ -399,8 +399,8 @@
                      (SEQ (LETT |nd| (MAKE-ARRAY (ARRAY-DIMENSIONS |d|)))
                           (SPADCALL |seen| |d| |nd| (QREFELT % 14))
                           (LETT |n| (ARRAY-TOTAL-SIZE |d|))
-                          (SEQ (LETT |i| 0) (LETT #2# (- |n| 1)) G190
-                               (COND ((|greater_SI| |i| #2#) (GO G191)))
+                          (SEQ (LETT |i| 0) (LETT #7# (- |n| 1)) G190
+                               (COND ((|greater_SI| |i| #7#) (GO G191)))
                                (SEQ
                                 (EXIT
                                  (SETF (ROW-MAJOR-AREF |nd| |i|)
@@ -481,7 +481,7 @@
 
 (DEFUN |FileSerialization| ()
   (SPROG NIL
-         (PROG (#1=#:G160)
+         (PROG (#1=#:G161)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|FileSerialization|))
@@ -502,7 +502,7 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|Symbol|) (|SExpression|)
               (0 . |convert|) (|Integer|) (5 . |convert|) '|type_tags| (|None|)
-              (|HashTable| 12 12 '"EQ") (10 . |setelt!|) (|Boolean|)
+              (|HashTable| 12 12 (NRTEVAL "EQ")) (10 . |setelt!|) (|Boolean|)
               (|PrimitiveArray| 12) (17 . |empty?|) (22 . |qsetelt!|)
               (29 . |empty|) |FILSER;serialize;2N;6| (|List| 7) (33 . |elt|)
               (39 . |symbol|) (|List| %) (44 . |destruct|) (|String|)

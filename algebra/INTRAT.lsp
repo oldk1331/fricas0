@@ -2,17 +2,17 @@
 (SDEFUN |INTRAT;infieldint;FU;1|
         ((|f| (|Fraction| UP)) (% (|Union| (|Fraction| UP) "failed")))
         (SPROG
-         ((|s1|
-           (|Record| (|:| |ratpart| (|Fraction| UP))
-                     (|:| |coeffs| (|Vector| F))))
+         ((|ext|
+           (|Mapping|
+            (|List| (|Record| (|:| |ratpart| F) (|:| |coeffs| (|Vector| F))))
+            (|List| F)))
           (|rec|
            (|List|
             (|Record| (|:| |ratpart| (|Fraction| UP))
                       (|:| |coeffs| (|Vector| F)))))
-          (|ext|
-           (|Mapping|
-            (|List| (|Record| (|:| |ratpart| F) (|:| |coeffs| (|Vector| F))))
-            (|List| F))))
+          (|s1|
+           (|Record| (|:| |ratpart| (|Fraction| UP))
+                     (|:| |coeffs| (|Vector| F)))))
          (SEQ (LETT |ext| (CONS #'|INTRAT;infieldint;FU;1!0| %))
               (LETT |rec|
                     (SPADCALL (ELT % 15) |ext| (ELT % 12) (LIST |f|)
@@ -35,24 +35,24 @@
                                    (QREFELT % 33))))))))))) 
 
 (SDEFUN |INTRAT;infieldint;FU;1!0| ((|lg| NIL) (% NIL))
-        (SPROG ((#1=#:G10 NIL) (|bv| NIL) (#2=#:G9 NIL) (|r1| NIL))
+        (SPROG ((|r1| NIL) (#1=#:G9 NIL) (|bv| NIL) (#2=#:G10 NIL))
                (SEQ
                 (LETT |r1|
                       (SPADCALL (SPADCALL (LIST |lg|) (QREFELT % 10))
                                 (QREFELT % 12)))
                 (EXIT
                  (PROGN
-                  (LETT #2# NIL)
-                  (SEQ (LETT |bv| NIL) (LETT #1# |r1|) G190
+                  (LETT #1# NIL)
+                  (SEQ (LETT |bv| NIL) (LETT #2# |r1|) G190
                        (COND
-                        ((OR (ATOM #1#) (PROGN (LETT |bv| (CAR #1#)) NIL))
+                        ((OR (ATOM #2#) (PROGN (LETT |bv| (CAR #2#)) NIL))
                          (GO G191)))
                        (SEQ
                         (EXIT
-                         (LETT #2#
-                               (CONS (CONS (|spadConstant| % 13) |bv|) #2#))))
-                       (LETT #1# (CDR #1#)) (GO G190) G191
-                       (EXIT (NREVERSE #2#)))))))) 
+                         (LETT #1#
+                               (CONS (CONS (|spadConstant| % 13) |bv|) #1#))))
+                       (LETT #2# (CDR #2#)) (GO G190) G191
+                       (EXIT (NREVERSE #1#)))))))) 
 
 (SDEFUN |INTRAT;integrate;FIr;2|
         ((|f| (|Fraction| UP)) (% (|IntegrationResult| (|Fraction| UP))))
@@ -72,7 +72,7 @@
 (DECLAIM (NOTINLINE |RationalIntegration;|)) 
 
 (DEFUN |RationalIntegration;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -88,9 +88,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |RationalIntegration| (&REST #1=#:G25)
+(DEFUN |RationalIntegration| (&REST #1=#:G32)
   (SPROG NIL
-         (PROG (#2=#:G26)
+         (PROG (#2=#:G33)
            (RETURN
             (COND
              ((LETT #2#
@@ -111,14 +111,13 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|List| (|List| 6)) (|Matrix| 6) (0 . |matrix|) (|List| 27)
-              (5 . |nullSpace|) (10 . |Zero|) (14 . |Zero|)
-              (18 . |differentiate|)
+              (5 . |nullSpace|) (10 . |0|) (14 . |0|) (18 . |differentiate|)
               (|Record| (|:| |ratpart| 30) (|:| |coeffs| 27)) (|List| 16)
               (|Mapping| 7 7) (|Record| (|:| |ratpart| 6) (|:| |coeffs| 27))
               (|Mapping| (|List| 19) (|List| 6)) (|Mapping| 11 9) (|List| 30)
               (|ParametricTranscendentalIntegration| 6 7) (23 . |primextint|)
-              (31 . |One|) (|Integer|) (|Vector| 6) (35 . |elt|)
-              (41 . |coerce|) (|Fraction| 7) (46 . |coerce|) (51 . /) (57 . -)
+              (31 . |1|) (|Integer|) (|Vector| 6) (35 . |elt|) (41 . |coerce|)
+              (|Fraction| 7) (46 . |coerce|) (51 . /) (57 . -)
               (|Union| 30 '#1="failed") |INTRAT;infieldint;FU;1|
               (|Record| (|:| |ir| 40) (|:| |specpart| 30) (|:| |polypart| 7))
               (|TranscendentalIntegration| 6 7) (62 . |monomialIntegrate|)

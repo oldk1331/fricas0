@@ -5,8 +5,8 @@
 
 (SDEFUN |COLOR;+;3%;2| ((|x| (%)) (|y| (%)) (% (%)))
         (SPROG
-         ((|ans| #1=(|Integer|)) (|offset| (|Integer|)) (|diff| #1#)
-          (|moreThanHalf| (|Boolean|)) (|xHueSmaller| (|Boolean|)) (|c| (%)))
+         ((|c| (%)) (|xHueSmaller| (|Boolean|)) (|moreThanHalf| (|Boolean|))
+          (|diff| #1=(|Integer|)) (|offset| (|Integer|)) (|ans| #1#))
          (SEQ
           (COND
            ((EQL (QCAR |x|) (QCAR |y|))
@@ -19,7 +19,7 @@
              (LETT |diff| (- (QCAR |x|) (QCAR |y|)))
              (SEQ (LETT |xHueSmaller| (< |diff| 0))
                   (EXIT (COND (|xHueSmaller| (LETT |diff| (- |diff|))))))
-             (SEQ (LETT |moreThanHalf| (> |diff| (QUOTIENT2 27 2)))
+             (SEQ (LETT |moreThanHalf| (> |diff| (|quotient_INT| 27 2)))
                   (EXIT (COND (|moreThanHalf| (LETT |diff| (- 27 |diff|))))))
              (LETT |offset|
                    (TRUNCATE
@@ -48,30 +48,30 @@
         (COND ((EQL (QCAR |x|) (QCAR |y|)) (|eql_DF| (QCDR |x|) (QCDR |y|)))
               ('T NIL))) 
 
-(PUT '|COLOR;red;%;4| '|SPADreplace| '(XLAM NIL (CONS 1 1.0))) 
+(MAKEPROP '|COLOR;red;%;4| '|SPADreplace| '(XLAM NIL (CONS 1 1.0))) 
 
 (SDEFUN |COLOR;red;%;4| ((% (%))) (CONS 1 1.0)) 
 
-(PUT '|COLOR;yellow;%;5| '|SPADreplace| '(XLAM NIL (CONS 11 1.0))) 
+(MAKEPROP '|COLOR;yellow;%;5| '|SPADreplace| '(XLAM NIL (CONS 11 1.0))) 
 
 (SDEFUN |COLOR;yellow;%;5| ((% (%))) (CONS 11 1.0)) 
 
-(PUT '|COLOR;green;%;6| '|SPADreplace| '(XLAM NIL (CONS 14 1.0))) 
+(MAKEPROP '|COLOR;green;%;6| '|SPADreplace| '(XLAM NIL (CONS 14 1.0))) 
 
 (SDEFUN |COLOR;green;%;6| ((% (%))) (CONS 14 1.0)) 
 
-(PUT '|COLOR;blue;%;7| '|SPADreplace| '(XLAM NIL (CONS 22 1.0))) 
+(MAKEPROP '|COLOR;blue;%;7| '|SPADreplace| '(XLAM NIL (CONS 22 1.0))) 
 
 (SDEFUN |COLOR;blue;%;7| ((% (%))) (CONS 22 1.0)) 
 
-(PUT '|COLOR;hue;%I;8| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|COLOR;hue;%I;8| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |COLOR;hue;%I;8| ((|c| (%)) (% (|Integer|))) (QCAR |c|)) 
 
 (SDEFUN |COLOR;*;Pi2%;9| ((|i| (|PositiveInteger|)) (|c| (%)) (% (%)))
         (SPADCALL (FLOAT |i| MOST-POSITIVE-DOUBLE-FLOAT) |c| (QREFELT % 8))) 
 
-(PUT '|COLOR;numberOfHues;Pi;10| '|SPADreplace| '(XLAM NIL 27)) 
+(MAKEPROP '|COLOR;numberOfHues;Pi;10| '|SPADreplace| '(XLAM NIL 27)) 
 
 (SDEFUN |COLOR;numberOfHues;Pi;10| ((% (|PositiveInteger|))) 27) 
 
@@ -110,7 +110,7 @@
 
 (DEFUN |Color| ()
   (SPROG NIL
-         (PROG (#1=#:G30)
+         (PROG (#1=#:G31)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Color|))

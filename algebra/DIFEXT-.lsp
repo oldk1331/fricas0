@@ -2,7 +2,7 @@
 (SDEFUN |DIFEXT-;differentiate;SMNniS;1|
         ((|x| (S)) (|derivation| (|Mapping| R R)) (|n| (|NonNegativeInteger|))
          (% (S)))
-        (SPROG ((#1=#:G12 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G13 NIL))
                (SEQ
                 (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -39,7 +39,7 @@
 (DECLAIM (NOTINLINE |DifferentialExtension&;|)) 
 
 (DEFUN |DifferentialExtension&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

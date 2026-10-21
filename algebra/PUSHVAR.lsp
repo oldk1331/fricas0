@@ -1,31 +1,31 @@
 
 (SDEFUN |PUSHVAR;pushdown;PPRLPPR;1| ((|g| (PPR)) (|lv| (|List| OV)) (% (PPR)))
         (SPROG
-         ((|vals| (|List| (|Polynomial| R))) (#1=#:G9 NIL) (|x| NIL)
-          (#2=#:G8 NIL))
+         ((#1=#:G8 NIL) (|x| NIL) (#2=#:G9 NIL)
+          (|vals| (|List| (|Polynomial| R))))
          (SEQ
           (LETT |vals|
                 (PROGN
-                 (LETT #2# NIL)
-                 (SEQ (LETT |x| NIL) (LETT #1# |lv|) G190
+                 (LETT #1# NIL)
+                 (SEQ (LETT |x| NIL) (LETT #2# |lv|) G190
                       (COND
-                       ((OR (ATOM #1#) (PROGN (LETT |x| (CAR #1#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT |x| (CAR #2#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2#
+                        (LETT #1#
                               (CONS
                                (SPADCALL (|spadConstant| % 13)
                                          (SPADCALL |x| (QREFELT % 15)) 1
                                          (QREFELT % 17))
-                               #2#))))
-                      (LETT #1# (CDR #1#)) (GO G190) G191
-                      (EXIT (NREVERSE #2#)))))
+                               #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#)))))
           (EXIT (SPADCALL |g| |lv| |vals| (QREFELT % 20)))))) 
 
 (SDEFUN |PUSHVAR;map;M2PPR;2|
         ((|f| (|Mapping| PPR (|Polynomial| R))) (|p| (PPR)) (% (PPR)))
-        (SPROG ((|v| (OV)) (#1=#:G11 NIL))
+        (SPROG ((#1=#:G14 NIL) (|v| (OV)))
                (SEQ
                 (COND
                  ((SPADCALL |p| (QREFELT % 23))
@@ -54,8 +54,8 @@
 (SDEFUN |PUSHVAR;pushupCoef|
         ((|c| (|Polynomial| R)) (|lv| (|List| OV)) (% (PPR)))
         (SPROG
-         ((|uc| (|SparseUnivariatePolynomial| (|Polynomial| R))) (|ppr| (PPR))
-          (|v2| (|Union| OV "failed")) (|v| (|Symbol|)) (#1=#:G29 NIL))
+         ((#1=#:G37 NIL) (|v| (|Symbol|)) (|v2| (|Union| OV "failed"))
+          (|ppr| (PPR)) (|uc| (|SparseUnivariatePolynomial| (|Polynomial| R))))
          (SEQ
           (COND ((SPADCALL |c| (QREFELT % 35)) (SPADCALL |c| (QREFELT % 36)))
                 (#2='T
@@ -134,8 +134,8 @@
 
 (DEFUN |PushVariables;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -155,9 +155,9 @@
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
-(DEFUN |PushVariables| (&REST #1=#:G49)
+(DEFUN |PushVariables| (&REST #1=#:G60)
   (SPROG NIL
-         (PROG (#2=#:G50)
+         (PROG (#2=#:G61)
            (RETURN
             (COND
              ((LETT #2#
@@ -176,8 +176,8 @@
 (MAKEPROP '|PushVariables| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (|local| |#4|) (0 . |One|) (4 . |One|)
-              (|Polynomial| 6) (8 . |One|) (|Symbol|) (12 . |convert|)
+              (|local| |#3|) (|local| |#4|) (0 . |1|) (4 . |1|)
+              (|Polynomial| 6) (8 . |1|) (|Symbol|) (12 . |convert|)
               (|NonNegativeInteger|) (17 . |monomial|) (|List| 8) (|List| 12)
               (24 . |eval|) |PUSHVAR;pushdown;PPRLPPR;1| (|Boolean|)
               (31 . |ground?|) (36 . |retract|) (|Union| 8 '"failed")
@@ -187,7 +187,7 @@
               (58 . |multivariate|) (64 . |ground?|) (69 . |coerce|)
               (|Union| 14 '"failed") (74 . |mainVariable|)
               (|Union| % '"failed") (79 . |variable|) (84 . |univariate|)
-              (90 . |Zero|) (|SparseUnivariatePolynomial| 12) (94 . |zero?|)
+              (90 . |0|) (|SparseUnivariatePolynomial| 12) (94 . |zero?|)
               (99 . |degree|) (104 . |monomial|) (111 . |leadingCoefficient|)
               (116 . *) (122 . +) (128 . |reductum|) (133 . *)
               |PUSHVAR;pushup;PPRLPPR;4|)

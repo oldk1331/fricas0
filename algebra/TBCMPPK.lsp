@@ -29,7 +29,7 @@
                  "in startStats!()$TBCMPPK: not allowed to use hashtable"))))) 
 
 (SDEFUN |TBCMPPK;printStats!;V;4| ((% (|Void|)))
-        (SPROG ((|n| (|NonNegativeInteger|)) (|title| (|String|)))
+        (SPROG ((|title| (|String|)) (|n| (|NonNegativeInteger|)))
                (SEQ
                 (COND
                  ((QREFELT % 8)
@@ -76,7 +76,7 @@
 
 (SDEFUN |TBCMPPK;extractIfCan;KeyU;9|
         ((|k| (|Key|)) (% (|Union| |Entry| "failed")))
-        (SPROG ((#1=#:G26 NIL) (|s| (|Union| |Entry| "failed")))
+        (SPROG ((|s| (|Union| |Entry| "failed")) (#1=#:G30 NIL))
                (SEQ
                 (EXIT
                  (COND
@@ -92,7 +92,7 @@
                             (COND
                              ((QREFELT % 13)
                               (SETELT % 14 (+ (QREFELT % 14) 1))))
-                            (EXIT (PROGN (LETT #1# |s|) (GO #2=#:G25)))))
+                            (EXIT (PROGN (LETT #1# |s|) (GO #2=#:G29)))))
                           (#3='T (CONS 1 "failed"))))))
                   (#3# (CONS 1 "failed"))))
                 #2# (EXIT #1#)))) 
@@ -111,7 +111,7 @@
 (DECLAIM (NOTINLINE |TabulatedComputationPackage;|)) 
 
 (DEFUN |TabulatedComputationPackage;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -135,9 +135,9 @@
           (QSETREFV % 17 (|filler_spaces| 0))
           %))) 
 
-(DEFUN |TabulatedComputationPackage| (&REST #1=#:G29)
+(DEFUN |TabulatedComputationPackage| (&REST #1=#:G33)
   (SPROG NIL
-         (PROG (#2=#:G30)
+         (PROG (#2=#:G34)
            (RETURN
             (COND
              ((LETT #2#
@@ -159,8 +159,8 @@
 (MAKEPROP '|TabulatedComputationPackage| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) '|table?|
-              (|HashTable| 6 7 '"EQUAL") (0 . |empty|) '|t| '|info?| '|stats?|
-              '|used| '|ok| '|ko| '|domainName| (|Void|) (4 . |void|)
+              (|HashTable| 6 7 (NRTEVAL "EQUAL")) (0 . |empty|) '|t| '|info?|
+              '|stats?| '|used| '|ok| '|ko| '|domainName| (|Void|) (4 . |void|)
               |TBCMPPK;initTable!;V;1| (|Boolean|) (|String|) (8 . |empty?|)
               |TBCMPPK;usingTable?;B;6| |TBCMPPK;printInfo!;2SV;2|
               |TBCMPPK;startStats!;SV;3| (|OutputPackage|) (13 . |output|)

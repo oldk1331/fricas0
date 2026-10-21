@@ -1,17 +1,17 @@
 
-(SDEFUN |AUTOMOR;One;%;1| ((% (%))) (CONS (|function| |AUTOMOR;ident|) %)) 
+(SDEFUN |AUTOMOR;1;%;1| ((% (%))) (CONS (|function| |AUTOMOR;ident|) %)) 
 
-(PUT '|AUTOMOR;err| '|SPADreplace|
-     '(XLAM (|r|) (|error| "Morphism is not invertible"))) 
+(MAKEPROP '|AUTOMOR;err| '|SPADreplace|
+          '(XLAM (|r|) (|error| "Morphism is not invertible"))) 
 
 (SDEFUN |AUTOMOR;err| ((|r| (R)) (% (R)))
         (|error| "Morphism is not invertible")) 
 
-(PUT '|AUTOMOR;ident| '|SPADreplace| '(XLAM (|r| |n|) |r|)) 
+(MAKEPROP '|AUTOMOR;ident| '|SPADreplace| '(XLAM (|r| |n|) |r|)) 
 
 (SDEFUN |AUTOMOR;ident| ((|r| (R)) (|n| (|Integer|)) (% (R))) |r|) 
 
-(PUT '|AUTOMOR;=;2%B;4| '|SPADreplace| 'EQ) 
+(MAKEPROP '|AUTOMOR;=;2%B;4| '|SPADreplace| 'EQ) 
 
 (SDEFUN |AUTOMOR;=;2%B;4| ((|f| (%)) (|g| (%)) (% (|Boolean|))) (EQ |f| |g|)) 
 
@@ -44,7 +44,7 @@
 (SDEFUN |AUTOMOR;coerce;%Of;8| ((|f| (%)) (% (|OutputForm|)))
         (SPADCALL "R -> R" (QREFELT % 19))) 
 
-(PUT '|AUTOMOR;morphism;M%;9| '|SPADreplace| '(XLAM (|f|) |f|)) 
+(MAKEPROP '|AUTOMOR;morphism;M%;9| '|SPADreplace| '(XLAM (|f|) |f|)) 
 
 (SDEFUN |AUTOMOR;morphism;M%;9| ((|f| (|Mapping| R R (|Integer|))) (% (%))) |f|) 
 
@@ -69,24 +69,24 @@
 (SDEFUN |AUTOMOR;iterat|
         ((|f| (|Mapping| R R)) (|g| (|Mapping| R R)) (|n| (|Integer|))
          (|r| (R)) (% (R)))
-        (SPROG ((#1=#:G36 NIL) (#2=#:G34 NIL))
+        (SPROG ((#1=#:G35 NIL) (#2=#:G37 NIL))
                (COND
                 ((< |n| 0)
                  (|AUTOMOR;iter| |g|
-                  (PROG1 (LETT #2# (- |n|))
-                    (|check_subtype2| (>= #2# 0) '(|NonNegativeInteger|)
-                                      '(|Integer|) #2#))
+                  (PROG1 (LETT #1# (- |n|))
+                    (|check_subtype2| (>= #1# 0) '(|NonNegativeInteger|)
+                                      '(|Integer|) #1#))
                   |r| %))
                 ('T
                  (|AUTOMOR;iter| |f|
-                  (PROG1 (LETT #1# |n|)
-                    (|check_subtype2| (>= #1# 0) '(|NonNegativeInteger|)
-                                      '(|Integer|) #1#))
+                  (PROG1 (LETT #2# |n|)
+                    (|check_subtype2| (>= #2# 0) '(|NonNegativeInteger|)
+                                      '(|Integer|) #2#))
                   |r| %))))) 
 
 (SDEFUN |AUTOMOR;iter|
         ((|f| (|Mapping| R R)) (|n| (|NonNegativeInteger|)) (|r| (R)) (% (R)))
-        (SPROG ((#1=#:G42 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G43 NIL))
                (SEQ
                 (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -138,7 +138,7 @@
 (DECLAIM (NOTINLINE |Automorphism;|)) 
 
 (DEFUN |Automorphism;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Automorphism| DV$1))
@@ -153,9 +153,9 @@
           (QSETREFV % 7 (|Mapping| |#1| |#1| (|Integer|)))
           %))) 
 
-(DEFUN |Automorphism| (#1=#:G53)
+(DEFUN |Automorphism| (#1=#:G54)
   (SPROG NIL
-         (PROG (#2=#:G54)
+         (PROG (#2=#:G55)
            (RETURN
             (COND
              ((LETT #2#
@@ -172,19 +172,18 @@
 (MAKEPROP '|Automorphism| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) '|Rep|
-              (CONS IDENTITY
-                    (FUNCALL (|dispatchFunction| |AUTOMOR;One;%;1|) %))
+              (CONS IDENTITY (FUNCALL (|dispatchFunction| |AUTOMOR;1;%;1|) %))
               (|Boolean|) |AUTOMOR;=;2%B;4| |AUTOMOR;elt;%2R;5| (|Integer|)
               (0 . -) |AUTOMOR;inv;2%;6| (5 . *) |AUTOMOR;^;%I%;7| (|String|)
               (|OutputForm|) (11 . |message|) |AUTOMOR;coerce;%Of;8|
               (|Mapping| 6 6 12) |AUTOMOR;morphism;M%;9| (|Mapping| 6 6)
-              |AUTOMOR;morphism;2M%;11| |AUTOMOR;morphism;M%;10| (16 . |Zero|)
+              |AUTOMOR;morphism;2M%;11| |AUTOMOR;morphism;M%;10| (16 . |0|)
               (|PositiveInteger|) (20 . ^) |AUTOMOR;*;3%;15|
               (|Union| % '"failed") (|NonNegativeInteger|))
            '#(~= 26 |sample| 32 |rightRecip| 36 |rightPower| 41 |recip| 53
               |one?| 58 |morphism| 63 |leftRecip| 79 |leftPower| 84 |latex| 96
               |inv| 101 |elt| 106 |conjugate| 112 |commutator| 118 |coerce| 124
-              ^ 129 |One| 147 = 151 / 157 * 163)
+              ^ 129 = 147 |1| 153 / 157 * 163)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0))
                  (CONS
@@ -204,6 +203,6 @@
                                          1 2 0 0 0 27 1 2 0 0 0 31 1 1 0 17 0 1
                                          1 0 0 0 14 2 0 6 0 6 11 2 0 0 0 0 1 2
                                          0 0 0 0 1 1 0 18 0 20 2 0 0 0 27 28 2
-                                         0 0 0 31 1 2 0 0 0 12 16 0 0 0 8 2 0 9
-                                         0 0 10 2 0 0 0 0 1 2 0 0 0 0 29)))))
+                                         0 0 0 31 1 2 0 0 0 12 16 2 0 9 0 0 10
+                                         0 0 0 8 2 0 0 0 0 1 2 0 0 0 0 29)))))
            '|lookupComplete|)) 

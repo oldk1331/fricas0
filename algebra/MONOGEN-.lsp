@@ -20,18 +20,18 @@
         (SPADCALL (SPADCALL |x| (QREFELT % 9)) (QREFELT % 24))) 
 
 (SDEFUN |MONOGEN-;basis;V;7| ((% (|Vector| S)))
-        (SPROG ((#1=#:G22 NIL) (|i| NIL) (#2=#:G21 NIL) (#3=#:G18 NIL))
+        (SPROG ((#1=#:G21 NIL) (#2=#:G24 NIL) (|i| NIL) (#3=#:G25 NIL))
                (SEQ
                 (PROGN
                  (LETT #2#
                        (GETREFV
                         (|inc_SI|
-                         #4=(PROG1 (LETT #3# (- (SPADCALL (QREFELT % 27)) 1))
-                              (|check_subtype2| (>= #3# 0)
+                         #4=(PROG1 (LETT #1# (- (SPADCALL (QREFELT % 27)) 1))
+                              (|check_subtype2| (>= #1# 0)
                                                 '(|NonNegativeInteger|)
-                                                '(|Integer|) #3#)))))
-                 (SEQ (LETT |i| 0) (LETT #1# #4#) G190
-                      (COND ((|greater_SI| |i| #1#) (GO G191)))
+                                                '(|Integer|) #1#)))))
+                 (SEQ (LETT |i| 0) (LETT #3# #4#) G190
+                      (COND ((|greater_SI| |i| #3#) (GO G191)))
                       (SEQ
                        (EXIT
                         (SETELT #2# |i|
@@ -52,7 +52,7 @@
 
 (SDEFUN |MONOGEN-;differentiate;SMS;10|
         ((|x| (S)) (|d| (|Mapping| R R)) (% (S)))
-        (SPROG ((|yprime| (S)) (|p| (UP)))
+        (SPROG ((|p| (UP)) (|yprime| (S)))
                (SEQ (LETT |p| (SPADCALL (QREFELT % 18)))
                     (LETT |yprime|
                           (SPADCALL
@@ -109,7 +109,7 @@
 (DECLAIM (NOTINLINE |MonogenicAlgebra&;|)) 
 
 (DEFUN |MonogenicAlgebra&| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -152,7 +152,7 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (0 . |lift|) |MONOGEN-;convert;SUP;1|
-              (5 . |reduce|) |MONOGEN-;convert;UPS;2| (10 . |One|) (14 . |One|)
+              (5 . |reduce|) |MONOGEN-;convert;UPS;2| (10 . |1|) (14 . |1|)
               (|NonNegativeInteger|) (18 . |monomial|) |MONOGEN-;generator;S;3|
               (24 . |definingPolynomial|) (28 . |resultant|)
               |MONOGEN-;norm;SR;4| (34 . |retract|) |MONOGEN-;retract;SR;5|
@@ -167,7 +167,7 @@
               (80 . |differentiate|) (85 . /) (91 . -) (96 . *) (102 . +)
               (108 . |differentiate|) (114 . |differentiate|) (|Mapping| 6 6)
               (|Vector| 6) (120 . |map|) (|Matrix| 7) (126 . |coordinates|)
-              (132 . |derivationCoordinates|) (138 . |One|)
+              (132 . |derivationCoordinates|) (138 . |1|)
               (|Record| (|:| |coef1| %) (|:| |coef2| %)) (|Union| 55 '"failed")
               (142 . |extendedEuclidean|) (149 . |recip|) (|Vector| 7)
               (|Integer|) (|Union| 60 '#1#) (|Fraction| 60) (|Union| 62 '#1#)

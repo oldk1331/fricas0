@@ -653,7 +653,7 @@
 ;   m := getBasicMode t => [m]
 ;   IDENTP (id := getUnname t) =>
 ;     putModeSet(t,bottomUpIdentifier(t,id))
-;   keyedSystemError("S2GE0016",['"bottomUp",'"unknown object form"])
+;   unexpected_error(['"bottomUp", '"unknown object form"])
 
 (DEFUN |bottomUp| (|t|)
   (PROG (|op| |argl| |tar| |v| |om| |r| |opName| |opVal| |dol| |fn| |u| |nargs|
@@ -795,9 +795,7 @@
       ((SETQ |m| (|getBasicMode| |t|)) (LIST |m|))
       ((IDENTP (SETQ |id| (|getUnname| |t|)))
        (|putModeSet| |t| (|bottomUpIdentifier| |t| |id|)))
-      (#1#
-       (|keyedSystemError| 'S2GE0016
-        (LIST "bottomUp" "unknown object form")))))))
+      (#1# (|unexpected_error| (LIST "bottomUp" "unknown object form")))))))
 
 ; computeTypeWithVariablesTarget(p, q) ==
 ;     polyVarlist(p) or polyVarlist(q) =>
@@ -899,9 +897,8 @@
 ;   m := isType t => bottomUpType(t, m)
 ;   EQ(id,'noMapVal) => throw_msg("S2IB0002",
 ;       '"The function is not defined for given value.", nil)
-;   EQ(id,'noBranch) =>
-;     keyedSystemError("S2GE0016",
-;       ['"bottomUpIdentifier",'"trying to evaluate noBranch"])
+;   EQ(id,'noBranch) => unexpected_error(
+;         ['"bottomUpIdentifier", '"trying to evaluate noBranch"])
 ;   transferPropsToNode(id,t)
 ;   defaultType := ['Variable,id]
 ;   -- This was meant to stop building silly symbols but had some unfortunate
@@ -918,8 +915,8 @@
 ;       bottomUpDefault(t,id,defaultType,getTarget t)
 ;     interpRewriteRule(t, id) or
 ;       (isMapExpr expr and [objMode(u)]) or
-;         keyedSystemError("S2GE0016",
-;           ['"bottomUpIdentifier",'"cannot evaluate identifier"])
+;           unexpected_error(['"bottomUpIdentifier",
+;                             '"cannot evaluate identifier"])
 ;   bottomUpDefault(t,id,defaultType,getTarget t)
 
 (DEFUN |bottomUpIdentifier| (|t| |id|)
@@ -930,7 +927,7 @@
             (|throw_msg| 'S2IB0002
              "The function is not defined for given value." NIL))
            ((EQ |id| '|noBranch|)
-            (|keyedSystemError| 'S2GE0016
+            (|unexpected_error|
              (LIST "bottomUpIdentifier" "trying to evaluate noBranch")))
            (#1='T
             (PROGN
@@ -961,7 +958,7 @@
                  (#1#
                   (OR (|interpRewriteRule| |t| |id|)
                       (AND (|isMapExpr| |expr|) (LIST (|objMode| |u|)))
-                      (|keyedSystemError| 'S2GE0016
+                      (|unexpected_error|
                        (LIST "bottomUpIdentifier"
                              "cannot evaluate identifier")))))))
               (#1#
@@ -1136,7 +1133,8 @@
 ;   tmode and tval and (mdv := objMode tval) =>
 ;     if isPartialMode tmode then
 ;       null (tmode := resolveTM(mdv,tmode)) =>
-;         keyedMsgCompFailure("S2IB0010",NIL)
+;           msg_comp_failure("S2IB0010",
+;              '"Cannot resolve type of value and declared partial type.", [])
 ;     putValue(t,objNew(expr,tmode))
 ;     [tmode]
 ;   tmode or (tval and (tmode := objMode tval)) =>
@@ -1177,7 +1175,10 @@
           ((|isPartialMode| |tmode|)
            (COND
             ((NULL (SETQ |tmode| (|resolveTM| |mdv| |tmode|)))
-             (IDENTITY (|keyedMsgCompFailure| 'S2IB0010 NIL))))))
+             (IDENTITY
+              (|msg_comp_failure| 'S2IB0010
+               "Cannot resolve type of value and declared partial type."
+               NIL))))))
          (|putValue| |t| (|objNew| |expr| |tmode|))
          (LIST |tmode|)))
        ((OR |tmode| (AND |tval| (SETQ |tmode| (|objMode| |tval|))))
@@ -1468,6 +1469,37 @@
                  (CONS (CONS (CONS |spl| |pl|) (CDR (CAR |env|))) (CDR |env|)))
          (|bottomUp| |t|))))))))
 
+; $msg_no_op1 := CONCAT(
+;     '"Cannot find a definition or applicable library operation named ",
+;     '"%1ob with argument type(s) %b %ceon %2P %ceoff %d %l ",
+;     '"Perhaps you should use _"@_" to indicate the required return type, ",
+;     '"or _"$_" to specify which version of the function you need.")
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$msg_no_op1|
+          (CONCAT
+           "Cannot find a definition or applicable library operation named "
+           "%1ob with argument type(s) %b %ceon %2P %ceoff %d %l "
+           "Perhaps you should use \"@\" to indicate the required return type, "
+           "or \"$\" to specify which version of the function you need.")))
+
+; $msg_no_op2 :=
+;     '"Cannot find a no-argument definition or library operation named %1b ."
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$msg_no_op2|
+          "Cannot find a no-argument definition or library operation named %1b ."))
+
+; $msg_no_app := CONCAT(
+;     '"Cannot find application of object of type %1b to argument(s) of ",
+;     '"type(s) %b %ceon %2 %ceoff %d .")
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (SETQ |$msg_no_app|
+          (CONCAT
+           "Cannot find application of object of type %1b to argument(s) of "
+           "type(s) %b %ceon %2 %ceoff %d .")))
+
 ; bottomUpForm0(t,op,opName,argl,argModeSetList) ==
 ;   op0 := op
 ;   opName0 := opName
@@ -1491,12 +1523,10 @@
 ;       (u := bottomUpRecordElt(t, op, m, argl, $env)) => u
 ;   m is ['Union,:.] and argModeSetList is [[['Variable,x]]] =>
 ;       member(x,getUnionOrRecordTags m) and (u := bottomUpElt t) => u
-;       not $genValue =>
-;         amsl := printableArgModeSetList()
-;         throwKeyedMsgSP("S2IB0008",['"the union object",amsl], op)
-;       object := retract getValue op
-;       object = 'failed =>
-;         throwKeyedMsgSP("S2IB0008",['"the union object",amsl], op)
+;       not($genValue) or (object := retract(getValue(op))) = 'failed =>
+;             amsl := printableArgModeSetList()
+;             throw_msg_pos("S2IB0008", $msg_no_op1,
+;                           ['"the union object", amsl], op)
 ;       putModeSet(op,[objMode(object)])
 ;       putValue(op,object)
 ;       (u := bottomUpElt t) => u
@@ -1530,6 +1560,9 @@
 ;     msgKey :=
 ;         null amsl => "S2IB0013"
 ;         "S2IB0012"
+;     msg :=
+;         null(amsl) => '"Cannot find application of object of type %1b ."
+;         $msg_no_app
 ;   else
 ;     msgKey :=
 ;         null amsl => "S2IB0011"
@@ -1537,16 +1570,21 @@
 ;             opName1 := n
 ;             "S2IB0008g"
 ;         "S2IB0008"
+;     msg :=
+;             null(amsl) => $msg_no_op2
+;             isSharpVarWithNum(opName1) => "Unknown problem"
+;             $msg_no_op1
 ;
 ;   sayIntelligentMessageAboutOpAvailability(opName1, #argl)
 ;
 ;   not $genValue =>
-;     keyedMsgCompFailureSP(msgKey,[opName1, amsl], op0)
-;   throwKeyedMsgSP(msgKey,[opName1, amsl], op0)
+;         msg_comp_failure1(msgKey, msg, [opName1, amsl], op0)
+;   throw_msg_pos(msgKey, msg, [opName1, amsl], op0)
 
 (DEFUN |bottomUpForm0| (|t| |op| |opName| |argl| |argModeSetList|)
   (PROG (|op0| |opName0| |m| |ISTMP#1| |ISTMP#2| |rargs| |rtype| |code| |val|
-         |u| |ISTMP#3| |x| |amsl| |object| |var| |o| |opName1| |msgKey| |n|)
+         |u| |ISTMP#3| |x| |object| |amsl| |var| |o| |opName1| |msgKey| |msg|
+         |n|)
     (RETURN
      (PROGN
       (SETQ |op0| |op|)
@@ -1601,26 +1639,21 @@
                  ((AND (|member| |x| (|getUnionOrRecordTags| |m|))
                        (SETQ |u| (|bottomUpElt| |t|)))
                   |u|)
-                 ((NULL |$genValue|)
+                 ((OR (NULL |$genValue|)
+                      (EQ (SETQ |object| (|retract| (|getValue| |op|)))
+                          '|failed|))
                   (PROGN
                    (SETQ |amsl| (|printableArgModeSetList|))
-                   (|throwKeyedMsgSP| 'S2IB0008
+                   (|throw_msg_pos| 'S2IB0008 |$msg_no_op1|
                     (LIST "the union object" |amsl|) |op|)))
                  (#1#
                   (PROGN
-                   (SETQ |object| (|retract| (|getValue| |op|)))
-                   (COND
-                    ((EQ |object| '|failed|)
-                     (|throwKeyedMsgSP| 'S2IB0008
-                      (LIST "the union object" |amsl|) |op|))
-                    (#1#
-                     (PROGN
-                      (|putModeSet| |op| (LIST (|objMode| |object|)))
-                      (|putValue| |op| |object|)
-                      (COND ((SETQ |u| (|bottomUpElt| |t|)) |u|)
-                            (#1#
-                             (|bottomUpForm0| |t| |op| |opName| |argl|
-                              |argModeSetList|))))))))))
+                   (|putModeSet| |op| (LIST (|objMode| |object|)))
+                   (|putValue| |op| |object|)
+                   (COND ((SETQ |u| (|bottomUpElt| |t|)) |u|)
+                         (#1#
+                          (|bottomUpForm0| |t| |op| |opName| |argl|
+                           |argModeSetList|)))))))
                ((AND (NOT (EQ |opName| '|elt|)) (NOT (EQ |opName| '|apply|))
                      (EQL (LENGTH |argl|) 1)
                      (PROGN
@@ -1665,21 +1698,31 @@
                              (|prefix2String| (|objMode| |o|)))
                             (#1# "<unknown type>")))
                    (SETQ |msgKey|
-                           (COND ((NULL |amsl|) 'S2IB0013) (#1# 'S2IB0012))))
+                           (COND ((NULL |amsl|) 'S2IB0013) (#1# 'S2IB0012)))
+                   (SETQ |msg|
+                           (COND
+                            ((NULL |amsl|)
+                             "Cannot find application of object of type %1b .")
+                            (#1# |$msg_no_app|))))
                   (#1#
                    (SETQ |msgKey|
                            (COND ((NULL |amsl|) 'S2IB0011)
                                  ((SETQ |n| (|isSharpVarWithNum| |opName1|))
                                   (PROGN (SETQ |opName1| |n|) '|S2IB0008g|))
-                                 (#1# 'S2IB0008)))))
+                                 (#1# 'S2IB0008)))
+                   (SETQ |msg|
+                           (COND ((NULL |amsl|) |$msg_no_op2|)
+                                 ((|isSharpVarWithNum| |opName1|)
+                                  '|Unknown problem|)
+                                 (#1# |$msg_no_op1|)))))
                  (|sayIntelligentMessageAboutOpAvailability| |opName1|
                   (LENGTH |argl|))
                  (COND
                   ((NULL |$genValue|)
-                   (|keyedMsgCompFailureSP| |msgKey| (LIST |opName1| |amsl|)
+                   (|msg_comp_failure1| |msgKey| |msg| (LIST |opName1| |amsl|)
                     |op0|))
                   (#1#
-                   (|throwKeyedMsgSP| |msgKey| (LIST |opName1| |amsl|)
+                   (|throw_msg_pos| |msgKey| |msg| (LIST |opName1| |amsl|)
                     |op0|)))))))))))))
 
 ; sayIntelligentMessageAboutOpAvailability(opName, nArgs) ==
@@ -1867,16 +1910,17 @@
 ;     val:= fetchOutput(-1)
 ;     putValue(op,val)
 ;     putModeSet(op,[objMode(val)])
+;   err_msg := '"The argument to %b %% %d must be a single integer."
 ;   argl is [t] =>
 ;     i:= getArgValue(t,$Integer) =>
 ;       val:= fetchOutput i
 ;       putValue(op,val)
 ;       putModeSet(op,[objMode(val)])
-;     throwKeyedMsgSP("S2IB0006", NIL, t)
-;   throwKeyedMsgSP("S2IB0006", NIL, op)
+;     throw_msg_pos("S2IB0006", err_msg, [], t)
+;   throw_msg_pos("S2IB0006", err_msg, [], op)
 
 (DEFUN |bottomUpPercent| (|tree|)
-  (PROG (|op| |argl| |val| |t| |i|)
+  (PROG (|op| |argl| |val| |err_msg| |t| |i|)
     (RETURN
      (PROGN
       (SETQ |op| (CAR |tree|))
@@ -1887,16 +1931,20 @@
          (SETQ |val| (|fetchOutput| (- 1)))
          (|putValue| |op| |val|)
          (|putModeSet| |op| (LIST (|objMode| |val|)))))
-       ((AND (CONSP |argl|) (EQ (CDR |argl|) NIL)
-             (PROGN (SETQ |t| (CAR |argl|)) #1='T))
-        (COND
-         ((SETQ |i| (|getArgValue| |t| |$Integer|))
-          (PROGN
-           (SETQ |val| (|fetchOutput| |i|))
-           (|putValue| |op| |val|)
-           (|putModeSet| |op| (LIST (|objMode| |val|)))))
-         (#1# (|throwKeyedMsgSP| 'S2IB0006 NIL |t|))))
-       (#1# (|throwKeyedMsgSP| 'S2IB0006 NIL |op|)))))))
+       (#1='T
+        (PROGN
+         (SETQ |err_msg| "The argument to %b %% %d must be a single integer.")
+         (COND
+          ((AND (CONSP |argl|) (EQ (CDR |argl|) NIL)
+                (PROGN (SETQ |t| (CAR |argl|)) #1#))
+           (COND
+            ((SETQ |i| (|getArgValue| |t| |$Integer|))
+             (PROGN
+              (SETQ |val| (|fetchOutput| |i|))
+              (|putValue| |op| |val|)
+              (|putModeSet| |op| (LIST (|objMode| |val|)))))
+            (#1# (|throw_msg_pos| 'S2IB0006 |err_msg| NIL |t|))))
+          (#1# (|throw_msg_pos| 'S2IB0006 |err_msg| NIL |op|))))))))))
 
 ; bottomUpFormRetract(t,op,opName,argl,amsl) ==
 ;   -- tries to find one argument, which can be pulled back, and calls

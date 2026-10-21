@@ -8,7 +8,7 @@
                   (SPADCALL A (QREFELT % 14)) (QREFELT % 11))) 
 
 (SDEFUN |MAMA;rows;MLM;3| ((A (M)) (|lst| (|List| (|Integer|))) (% (M)))
-        (SPROG ((|ls| (|List| (|Integer|))) (|nc| (|NonNegativeInteger|)))
+        (SPROG ((|nc| (|NonNegativeInteger|)) (|ls| (|List| (|Integer|))))
                (SEQ (LETT |nc| (SPADCALL A (QREFELT % 17)))
                     (EXIT
                      (COND
@@ -32,7 +32,7 @@
                   |c| (QREFELT % 11))) 
 
 (SDEFUN |MAMA;columns;MLM;6| ((A (M)) (|lst| (|List| (|Integer|))) (% (M)))
-        (SPROG ((|ls| (|List| (|Integer|))) (|nr| (|NonNegativeInteger|)))
+        (SPROG ((|nr| (|NonNegativeInteger|)) (|ls| (|List| (|Integer|))))
                (SEQ (LETT |nr| (SPADCALL A (QREFELT % 29)))
                     (EXIT
                      (COND
@@ -55,8 +55,8 @@
         ((B (M)) (A (M)) (|nr| (|NonNegativeInteger|))
          (|nc| (|NonNegativeInteger|)) (|n| (|Integer|)) (% (|Void|)))
         (SPROG
-         ((#1=#:G21 NIL) (|i| NIL) (|sc| (|Integer|)) (|sr| (|Integer|))
-          (|dl| (|Integer|)))
+         ((|dl| (|Integer|)) (|sr| (|Integer|)) (|sc| (|Integer|)) (|i| NIL)
+          (#1=#:G21 NIL))
          (SEQ
           (COND
            ((> |n| (- |nc| 1)) (|error| "requested diagonal out of range"))
@@ -89,7 +89,7 @@
 
 (SDEFUN |MAMA;diagonalMatrix;MIM;9| ((A (M)) (|n| (|Integer|)) (% (M)))
         (SPROG
-         ((B (M)) (|nc| (|NonNegativeInteger|)) (|nr| (|NonNegativeInteger|)))
+         ((|nr| (|NonNegativeInteger|)) (|nc| (|NonNegativeInteger|)) (B (M)))
          (SEQ (LETT |nr| (SPADCALL A (QREFELT % 29)))
               (LETT |nc| (SPADCALL A (QREFELT % 17)))
               (LETT B
@@ -101,8 +101,8 @@
 
 (SDEFUN |MAMA;bandMatrix;MLM;11| ((A (M)) (|ln| (|List| (|Integer|))) (% (M)))
         (SPROG
-         ((#1=#:G29 NIL) (|n| NIL) (B (M)) (|nc| (|NonNegativeInteger|))
-          (|nr| (|NonNegativeInteger|)))
+         ((|nr| (|NonNegativeInteger|)) (|nc| (|NonNegativeInteger|)) (B (M))
+          (|n| NIL) (#1=#:G29 NIL))
          (SEQ (LETT |nr| (SPADCALL A (QREFELT % 29)))
               (LETT |nc| (SPADCALL A (QREFELT % 17)))
               (LETT B
@@ -123,26 +123,26 @@
         ((A (M)) (|lr| (|List| (|Integer|))) (|lc| (|List| (|Integer|)))
          (% (M)))
         (SPROG
-         ((#1=#:G39 NIL) (|j| NIL) (#2=#:G40 NIL) (|jj| NIL) (#3=#:G37 NIL)
-          (|i| NIL) (#4=#:G38 NIL) (|ii| NIL) (|res| (M)) (|minC| (|Integer|))
-          (|minR| (|Integer|)) (|m| #5=(|NonNegativeInteger|)) (|n| #5#))
+         ((|n| #1=(|NonNegativeInteger|)) (|m| #1#) (|minR| (|Integer|))
+          (|minC| (|Integer|)) (|res| (M)) (|ii| NIL) (#2=#:G38 NIL) (|i| NIL)
+          (#3=#:G37 NIL) (|jj| NIL) (#4=#:G40 NIL) (|j| NIL) (#5=#:G39 NIL))
          (SEQ (LETT |n| (LENGTH |lr|)) (LETT |m| (LENGTH |lc|))
               (LETT |minR| (SPADCALL A (QREFELT % 26)))
               (LETT |minC| (SPADCALL A (QREFELT % 13)))
               (LETT |res| (SPADCALL |n| |m| (QREFELT % 18)))
-              (SEQ (LETT |ii| NIL) (LETT #4# |lr|) (LETT |i| 1) (LETT #3# |n|)
+              (SEQ (LETT |ii| NIL) (LETT #2# |lr|) (LETT |i| 1) (LETT #3# |n|)
                    G190
                    (COND
-                    ((OR (|greater_SI| |i| #3#) (ATOM #4#)
-                         (PROGN (LETT |ii| (CAR #4#)) NIL))
+                    ((OR (|greater_SI| |i| #3#) (ATOM #2#)
+                         (PROGN (LETT |ii| (CAR #2#)) NIL))
                      (GO G191)))
                    (SEQ
                     (EXIT
-                     (SEQ (LETT |jj| NIL) (LETT #2# |lc|) (LETT |j| 1)
-                          (LETT #1# |m|) G190
+                     (SEQ (LETT |jj| NIL) (LETT #4# |lc|) (LETT |j| 1)
+                          (LETT #5# |m|) G190
                           (COND
-                           ((OR (|greater_SI| |j| #1#) (ATOM #2#)
-                                (PROGN (LETT |jj| (CAR #2#)) NIL))
+                           ((OR (|greater_SI| |j| #5#) (ATOM #4#)
+                                (PROGN (LETT |jj| (CAR #4#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
@@ -151,9 +151,9 @@
                                       (SPADCALL A |ii| |jj| (QREFELT % 40))
                                       (QREFELT % 33))))
                           (LETT |j|
-                                (PROG1 (|inc_SI| |j|) (LETT #2# (CDR #2#))))
+                                (PROG1 (|inc_SI| |j|) (LETT #4# (CDR #4#))))
                           (GO G190) G191 (EXIT NIL))))
-                   (LETT |i| (PROG1 (|inc_SI| |i|) (LETT #4# (CDR #4#))))
+                   (LETT |i| (PROG1 (|inc_SI| |i|) (LETT #2# (CDR #2#))))
                    (GO G190) G191 (EXIT NIL))
               (EXIT |res|)))) 
 
@@ -167,47 +167,47 @@
 (SDEFUN |MAMA;blockSplit;MLPiL;15|
         ((A (M)) (|lr| (|List| (|NonNegativeInteger|)))
          (|nc| (|PositiveInteger|)) (% (|List| (|List| M))))
-        (SPROG ((#1=#:G46 NIL) (X NIL) (#2=#:G45 NIL))
+        (SPROG ((#1=#:G45 NIL) (X NIL) (#2=#:G46 NIL))
                (SEQ
                 (PROGN
-                 (LETT #2# NIL)
-                 (SEQ (LETT X NIL) (LETT #1# (SPADCALL A |lr| (QREFELT % 46)))
+                 (LETT #1# NIL)
+                 (SEQ (LETT X NIL) (LETT #2# (SPADCALL A |lr| (QREFELT % 46)))
                       G190
                       (COND
-                       ((OR (ATOM #1#) (PROGN (LETT X (CAR #1#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT X (CAR #2#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2#
-                              (CONS (SPADCALL X |nc| (QREFELT % 48)) #2#))))
-                      (LETT #1# (CDR #1#)) (GO G190) G191
-                      (EXIT (NREVERSE #2#))))))) 
+                        (LETT #1#
+                              (CONS (SPADCALL X |nc| (QREFELT % 48)) #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#))))))) 
 
 (SDEFUN |MAMA;blockSplit;MPiLL;16|
         ((A (M)) (|nr| (|PositiveInteger|))
          (|lc| (|List| (|NonNegativeInteger|))) (% (|List| (|List| M))))
-        (SPROG ((#1=#:G51 NIL) (X NIL) (#2=#:G50 NIL))
+        (SPROG ((#1=#:G50 NIL) (X NIL) (#2=#:G51 NIL))
                (SEQ
                 (PROGN
-                 (LETT #2# NIL)
-                 (SEQ (LETT X NIL) (LETT #1# (SPADCALL A |nr| (QREFELT % 51)))
+                 (LETT #1# NIL)
+                 (SEQ (LETT X NIL) (LETT #2# (SPADCALL A |nr| (QREFELT % 51)))
                       G190
                       (COND
-                       ((OR (ATOM #1#) (PROGN (LETT X (CAR #1#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT X (CAR #2#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2#
-                              (CONS (SPADCALL X |lc| (QREFELT % 52)) #2#))))
-                      (LETT #1# (CDR #1#)) (GO G190) G191
-                      (EXIT (NREVERSE #2#))))))) 
+                        (LETT #1#
+                              (CONS (SPADCALL X |lc| (QREFELT % 52)) #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#))))))) 
 
 (DECLAIM (NOTINLINE |MatrixManipulation;|)) 
 
 (DEFUN |MatrixManipulation;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -271,7 +271,7 @@
               (36 . |expand|) |MAMA;subMatrix;M2LM;13| |MAMA;rows;MLM;3|
               |MAMA;rows;MSM;4| (41 . |minRowIndex|) (46 . |maxRowIndex|)
               |MAMA;columnMatrix;MIM;5| (51 . |nrows|) |MAMA;columns;MLM;6|
-              |MAMA;columns;MSM;7| (56 . |elt|) (63 . |qsetelt!|) (71 . |Zero|)
+              |MAMA;columns;MSM;7| (56 . |elt|) (63 . |qsetelt!|) (71 . |0|)
               (75 . |new|) (82 . |diagonalMatrix|) (88 . |diagonalMatrix|)
               (93 . |bandMatrix|) (99 . |bandMatrix|) (105 . |qelt|)
               (112 . |low|) (117 . |high|) |MAMA;subMatrix;M2SM;14| (|List| %)

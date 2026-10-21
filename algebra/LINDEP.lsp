@@ -115,7 +115,7 @@
 (DECLAIM (NOTINLINE |LinearDependence;|)) 
 
 (DEFUN |LinearDependence;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (#1=#:G64 NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (#1=#:G71 NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -171,9 +171,9 @@
                         %)))))
           %))) 
 
-(DEFUN |LinearDependence| (&REST #1=#:G65)
+(DEFUN |LinearDependence| (&REST #1=#:G72)
   (SPROG NIL
-         (PROG (#2=#:G66)
+         (PROG (#2=#:G73)
            (RETURN
             (COND
              ((LETT #2#
@@ -193,9 +193,9 @@
 (MAKEPROP '|LinearDependence| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (|List| 33)
-              (|Matrix| 6) (0 . |nullSpace|) (5 . |One|) (|Integer|)
-              (|Vector| 7) (9 . |minIndex|) (14 . |elt|) (|Boolean|)
-              (20 . |zero?|) (|Matrix| 7) (25 . |transpose|) (|Matrix| %)
+              (|Matrix| 6) (0 . |nullSpace|) (5 . |1|) (|Integer|) (|Vector| 7)
+              (9 . |minIndex|) (14 . |elt|) (|Boolean|) (20 . |zero?|)
+              (|Matrix| 7) (25 . |transpose|) (|Matrix| %)
               (30 . |reducedSystem|) (|NonNegativeInteger|) (35 . |nullity|)
               |LINDEP;linearlyDependent?;VB;2| (|Union| 33 '#1="failed")
               |LINDEP;linearDependence;VU;3|
@@ -203,17 +203,16 @@
               (40 . |solveLinear|) (46 . |solveLinear|)
               (|Record| (|:| |mat| 9) (|:| |vec| 33)) (|Vector| %)
               (52 . |reducedSystem|) (|Vector| 6)
-              (|LinearSystemMatrixPackage| 6 33 33 9) (58 . |solve|)
-              (64 . |Zero|) (68 . |empty?|) (73 . |particularSolution|)
-              (79 . |zero|) (84 . =) (90 . |particularSolution|)
-              (|Union| 52 '#2="failed")
+              (|LinearSystemMatrixPackage| 6 33 33 9) (58 . |solve|) (64 . |0|)
+              (68 . |empty?|) (73 . |particularSolution|) (79 . |zero|)
+              (84 . =) (90 . |particularSolution|) (|Union| 52 '#2="failed")
               (|Record| (|:| |particular| 42) (|:| |basis| (|List| 52)))
               (96 . |solveLinear|) (102 . |solveLinear|) (|Fraction| 6)
               (108 . |coerce|) (|Matrix| 46) (|Mapping| 46 6)
               (|MatrixCategoryFunctions2| 6 33 33 9 46 52 52 48) (113 . |map|)
               (|Vector| 46) (|VectorFunctions2| 6 46) (119 . |map|)
               (|LinearSystemMatrixPackage| 46 52 52 48) (125 . |solve|)
-              (131 . |Zero|) (135 . |particularSolution|)
+              (131 . |0|) (135 . |particularSolution|)
               (141 . |particularSolution|))
            '#(|solveLinear| 147 |particularSolution| 171 |linearlyDependent?|
               195 |linearDependence| 200)

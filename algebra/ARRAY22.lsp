@@ -1,10 +1,10 @@
 
 (SDEFUN |ARRAY22;map;MMAMB;1| ((|f| (|Mapping| B A)) (|m| (MA)) (% (MB)))
         (SPROG
-         ((#1=#:G8 NIL) (|k| NIL) (#2=#:G7 NIL) (|i| NIL)
-          (|mic_res| (|Integer|)) (|mir_res| (|Integer|)) (|mic_m| (|Integer|))
-          (|mir_m| (|Integer|)) (|res| (MB)) (|nc| (|NonNegativeInteger|))
-          (|nr| (|NonNegativeInteger|)))
+         ((|nr| (|NonNegativeInteger|)) (|nc| (|NonNegativeInteger|))
+          (|res| (MB)) (|mir_m| (|Integer|)) (|mic_m| (|Integer|))
+          (|mir_res| (|Integer|)) (|mic_res| (|Integer|)) (|i| NIL)
+          (#1=#:G7 NIL) (|k| NIL) (#2=#:G8 NIL))
          (SEQ (LETT |nr| (SPADCALL |m| (QREFELT % 15)))
               (LETT |nc| (SPADCALL |m| (QREFELT % 16)))
               (LETT |res| (SPADCALL |nr| |nc| (QREFELT % 17)))
@@ -12,12 +12,12 @@
               (LETT |mic_m| (SPADCALL |m| (QREFELT % 20)))
               (LETT |mir_res| (SPADCALL |res| (QREFELT % 21)))
               (LETT |mic_res| (SPADCALL |res| (QREFELT % 22)))
-              (SEQ (LETT |i| 0) (LETT #2# (- |nr| 1)) G190
-                   (COND ((|greater_SI| |i| #2#) (GO G191)))
+              (SEQ (LETT |i| 0) (LETT #1# (- |nr| 1)) G190
+                   (COND ((|greater_SI| |i| #1#) (GO G191)))
                    (SEQ
                     (EXIT
-                     (SEQ (LETT |k| 0) (LETT #1# (- |nc| 1)) G190
-                          (COND ((|greater_SI| |k| #1#) (GO G191)))
+                     (SEQ (LETT |k| 0) (LETT #2# (- |nc| 1)) G190
+                          (COND ((|greater_SI| |k| #2#) (GO G191)))
                           (SEQ
                            (EXIT
                             (SPADCALL |res| (+ |i| |mir_res|) (+ |k| |mic_res|)
@@ -37,8 +37,8 @@
 (DEFUN |TwoDimensionalArrayFunctions;|
        (|#1| |#2| |#3| |#4| |#5| |#6| |#7| |#8|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$8 NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL)
-    (DV$4 NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (DV$6 NIL)
+    (DV$7 NIL) (DV$8 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))

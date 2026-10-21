@@ -7,7 +7,7 @@
 (SDEFUN |RCFIELD-;sqrt;IS;3| ((|a| (|Integer|)) (% (S)))
         (SPADCALL (SPADCALL |a| (QREFELT % 14)) 2 (QREFELT % 8))) 
 
-(PUT '|RCFIELD-;characteristic;Nni;4| '|SPADreplace| '(XLAM NIL 0)) 
+(MAKEPROP '|RCFIELD-;characteristic;Nni;4| '|SPADreplace| '(XLAM NIL 0)) 
 
 (SDEFUN |RCFIELD-;characteristic;Nni;4| ((% (|NonNegativeInteger|))) 0) 
 
@@ -75,7 +75,7 @@
                                           (QREFELT % 40))))))))))) 
 
 (SDEFUN |RCFIELD-;^;SFS;8| ((|x| (S)) (|rn| (|Fraction| (|Integer|))) (% (S)))
-        (SPROG ((#1=#:G48 NIL))
+        (SPROG ((#1=#:G51 NIL))
                (SPADCALL
                 (SPADCALL |x| (SPADCALL |rn| (QREFELT % 44)) (QREFELT % 45))
                 (PROG1 (LETT #1# (SPADCALL |rn| (QREFELT % 46)))
@@ -84,23 +84,23 @@
                 (QREFELT % 8)))) 
 
 (SDEFUN |RCFIELD-;nthRoot;SIS;9| ((|x| (S)) (|n| (|Integer|)) (% (S)))
-        (SPROG ((#1=#:G52 NIL) (#2=#:G50 NIL))
+        (SPROG ((#1=#:G53 NIL) (#2=#:G55 NIL))
                (COND ((ZEROP |n|) |x|)
                      ((MINUSP |n|)
                       (SPADCALL
                        (SPADCALL |x|
-                                 (PROG1 (LETT #2# (- |n|))
-                                   (|check_subtype2| (> #2# 0)
+                                 (PROG1 (LETT #1# (- |n|))
+                                   (|check_subtype2| (> #1# 0)
                                                      '(|PositiveInteger|)
-                                                     '(|Integer|) #2#))
+                                                     '(|Integer|) #1#))
                                  (QREFELT % 8))
                        (QREFELT % 48)))
                      ('T
                       (SPADCALL |x|
-                                (PROG1 (LETT #1# |n|)
-                                  (|check_subtype2| (> #1# 0)
+                                (PROG1 (LETT #2# |n|)
+                                  (|check_subtype2| (> #2# 0)
                                                     '(|PositiveInteger|)
-                                                    '(|Integer|) #1#))
+                                                    '(|Integer|) #2#))
                                 (QREFELT % 8)))))) 
 
 (SDEFUN |RCFIELD-;allRootsOf;SupL;10|
@@ -126,7 +126,7 @@
 (DECLAIM (NOTINLINE |RealClosedField&;|)) 
 
 (DEFUN |RealClosedField&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RealClosedField&| DV$1))
@@ -148,11 +148,10 @@
               (|SparseUnivariatePolynomial| %) (16 . |rootOf|) (|OutputForm|)
               (22 . |rename!|) |RCFIELD-;rootOf;SupPiOfU;5| (|List| %)
               (28 . |allRootsOf|) (|List| 6) (33 . |elt|)
-              |RCFIELD-;rootOf;SupPiU;6| (39 . |One|) (|Boolean|)
-              (43 . |zero?|) (48 . |Zero|) (52 . |one?|)
-              (|SparseUnivariatePolynomial| 6) (57 . |monomial|)
-              (63 . |coerce|) (68 . -) (74 . |coerce|) (79 . |root|)
-              (84 . |rename|) (90 . |coerce|) (95 . |root|)
+              |RCFIELD-;rootOf;SupPiU;6| (39 . |1|) (|Boolean|) (43 . |zero?|)
+              (48 . |0|) (52 . |one?|) (|SparseUnivariatePolynomial| 6)
+              (57 . |monomial|) (63 . |coerce|) (68 . -) (74 . |coerce|)
+              (79 . |root|) (84 . |rename|) (90 . |coerce|) (95 . |root|)
               |RCFIELD-;sqrt;SPiS;7| (101 . |numer|) (106 . ^) (112 . |denom|)
               |RCFIELD-;^;SFS;8| (117 . |inv|) |RCFIELD-;nthRoot;SIS;9|
               (|Mapping| 6 10) (|SparseUnivariatePolynomial| 10)
@@ -223,8 +222,8 @@
                                    '((|characteristic|
                                       ((|NonNegativeInteger|)))
                                      T)
-                                   '((^ (|#1| |#1| (|PositiveInteger|))) T)
-                                   '((^ (|#1| |#1| (|NonNegativeInteger|))) T))
+                                   '((^ (|#1| |#1| (|NonNegativeInteger|))) T)
+                                   '((^ (|#1| |#1| (|PositiveInteger|))) T))
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 71
                                             '(2 6 0 0 7 8 1 6 0 10 11 1 6 0 13

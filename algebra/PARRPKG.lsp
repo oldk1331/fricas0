@@ -3,8 +3,8 @@
         ((|vv| #1=(|List| R)) (|aa| (|Stream| R)) (|bb| (|Stream| R))
          (|cc| (|Stream| R)) (% (|List| R)))
         (SPROG
-         ((|vvnew| (|List| R)) (|vva| (|List| R)) (|vi| (R)) (|vvc| (|List| R))
-          (|vvb| #1#))
+         ((|vvb| #1#) (|vvc| (|List| R)) (|vi| (R)) (|vva| (|List| R))
+          (|vvnew| (|List| R)))
          (SEQ (LETT |vvnew| NIL) (LETT |vva| (CONS (|spadConstant| % 7) |vv|))
               (LETT |aa| (SPADCALL (|spadConstant| % 7) |aa| (QREFELT % 9)))
               (LETT |vvb| |vv|) (LETT |vvc| (CDR |vv|))
@@ -50,8 +50,8 @@
         ((|vv| #1=(|List| R)) (|bb| (|Stream| R)) (|cc| (|Stream| R))
          (% (|List| R)))
         (SPROG
-         ((|vvnew| (|List| R)) (|vva| (|List| R)) (|vi| (R)) (|vvc| (|List| R))
-          (|vvb| #1#))
+         ((|vvb| #1#) (|vvc| (|List| R)) (|vi| (R)) (|vva| (|List| R))
+          (|vvnew| (|List| R)))
          (SEQ (LETT |vvnew| NIL) (LETT |vva| (CONS (|spadConstant| % 7) |vv|))
               (LETT |vvb| |vv|) (LETT |vvc| (CDR |vv|))
               (SEQ G190 (COND ((NULL (NULL (NULL |vvc|))) (GO G191)))
@@ -124,7 +124,7 @@
 (DECLAIM (NOTINLINE |PathArrayPackage;|)) 
 
 (DEFUN |PathArrayPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|PathArrayPackage| DV$1))
@@ -138,9 +138,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |PathArrayPackage| (#1=#:G22)
+(DEFUN |PathArrayPackage| (#1=#:G24)
   (SPROG NIL
-         (PROG (#2=#:G23)
+         (PROG (#2=#:G25)
            (RETURN
             (COND
              ((LETT #2#
@@ -157,9 +157,9 @@
 
 (MAKEPROP '|PathArrayPackage| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |Zero|) (|Stream| 6)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |0|) (|Stream| 6)
               (4 . |cons|) (10 . |first|) (15 . *) (21 . +) (27 . |rest|)
-              (32 . |One|) (|Mapping| 16 16) (|List| 6) (|Stream| 16)
+              (32 . |1|) (|Mapping| 16 16) (|List| 6) (|Stream| 16)
               (36 . |stream|) |PARRPKG;motzkinPathArray;3SS;3|
               |PARRPKG;jacobiPathArray;2SS;4| (42 . |first|) (|Mapping| 6 16)
               (|StreamFunctions2| 16 6) (47 . |map|) |PARRPKG;bottom;SS;5|)

@@ -2,8 +2,8 @@
 (SDEFUN |ORTHPOL;laguerreL;Nni2R;1|
         ((|n| (|NonNegativeInteger|)) (|x| (R)) (% (R)))
         (SPROG
-         ((|p0| (R)) (|p1| (R)) (|#G9| (R)) (|#G8| (R)) (#1=#:G4 NIL) (|i| NIL)
-          (|#G6| (R)) (|#G5| (R)))
+         ((|#G5| (R)) (|#G6| (R)) (|i| NIL) (#1=#:G4 NIL) (|#G8| (R))
+          (|#G9| (R)) (|p1| (R)) (|p0| (R)))
          (SEQ
           (COND ((EQL |n| 0) (|spadConstant| % 8))
                 ('T
@@ -42,28 +42,28 @@
         ((|m| (|NonNegativeInteger|)) (|n| (|NonNegativeInteger|)) (|x| (R))
          (% (R)))
         (SPROG
-         ((|p1| (R)) (|p0| (R)) (|cx| (|Integer|)) (#1=#:G7 NIL) (#2=#:G13 NIL)
-          (|j| NIL) (|mi| (|Integer|)) (|ni| (|Integer|)))
+         ((|ni| (|Integer|)) (|mi| (|Integer|)) (|j| NIL) (#1=#:G13 NIL)
+          (#2=#:G7 NIL) (|cx| (|Integer|)) (|p0| (R)) (|p1| (R)))
          (SEQ (LETT |ni| |n|) (LETT |mi| |m|)
               (LETT |cx|
                     (*
                      (* (EXPT -1 |m|)
-                        (SPADCALL |ni| (- |ni| |mi|) (QREFELT % 21)))
+                        (SPADCALL |ni| (- |ni| |mi|) (QREFELT % 20)))
                      (SPADCALL |ni| (QREFELT % 22))))
               (LETT |p0| (|spadConstant| % 8))
               (LETT |p1| (SPADCALL |cx| (QREFELT % 12)))
-              (SEQ (LETT |j| 1) (LETT #2# (- |ni| |mi|)) G190
-                   (COND ((|greater_SI| |j| #2#) (GO G191)))
+              (SEQ (LETT |j| 1) (LETT #1# (- |ni| |mi|)) G190
+                   (COND ((|greater_SI| |j| #1#) (GO G191)))
                    (SEQ (LETT |cx| (- (* |cx| (+ (- (- |ni| |mi|) |j|) 1))))
                         (LETT |cx|
                               (PROG2
-                                  (LETT #1#
-                                        (SPADCALL |cx| (* (+ |mi| |j|) |j|)
-                                                  (QREFELT % 24)))
-                                  (QCDR #1#)
-                                (|check_union2| (QEQCAR #1# 0) (|Integer|)
+                                  (LETT #2#
+                                        (|exquo_INT| |cx|
+                                                     (* (+ |mi| |j|) |j|)))
+                                  (QCDR #2#)
+                                (|check_union2| (QEQCAR #2# 0) (|Integer|)
                                                 (|Union| (|Integer|) "failed")
-                                                #1#)))
+                                                #2#)))
                         (LETT |p0| (SPADCALL |p0| |x| (QREFELT % 16)))
                         (EXIT
                          (LETT |p1|
@@ -76,8 +76,8 @@
 (SDEFUN |ORTHPOL;chebyshevT;Nni2R;3|
         ((|n| (|NonNegativeInteger|)) (|x| (R)) (% (R)))
         (SPROG
-         ((|p0| (R)) (|p1| (R)) (|#G20| (R)) (|#G19| (R)) (#1=#:G18 NIL)
-          (|i| NIL) (|#G17| (R)) (|#G16| (R)))
+         ((|#G16| (R)) (|#G17| (R)) (|i| NIL) (#1=#:G18 NIL) (|#G19| (R))
+          (|#G20| (R)) (|p1| (R)) (|p0| (R)))
          (SEQ
           (COND ((EQL |n| 0) (|spadConstant| % 8))
                 ('T
@@ -106,8 +106,8 @@
 (SDEFUN |ORTHPOL;chebyshevU;Nni2R;4|
         ((|n| (|NonNegativeInteger|)) (|x| (R)) (% (R)))
         (SPROG
-         ((|p0| (R)) (|p1| (R)) (|#G27| (R)) (|#G26| (R)) (#1=#:G23 NIL)
-          (|i| NIL) (|#G24| (R)) (|#G23| (R)))
+         ((|#G23| (R)) (|#G24| (R)) (|i| NIL) (#1=#:G23 NIL) (|#G26| (R))
+          (|#G27| (R)) (|p1| (R)) (|p0| (R)))
          (SEQ
           (COND ((EQL |n| 0) (|spadConstant| % 8))
                 ('T
@@ -136,8 +136,8 @@
 (SDEFUN |ORTHPOL;hermiteH;Nni2R;5|
         ((|n| (|NonNegativeInteger|)) (|x| (R)) (% (R)))
         (SPROG
-         ((|p0| (R)) (|p1| (R)) (|#G34| (R)) (|#G33| (R)) (#1=#:G28 NIL)
-          (|i| NIL) (|#G31| (R)) (|#G30| (R)))
+         ((|#G30| (R)) (|#G31| (R)) (|i| NIL) (#1=#:G28 NIL) (|#G33| (R))
+          (|#G34| (R)) (|p1| (R)) (|p0| (R)))
          (SEQ
           (COND ((EQL |n| 0) (|spadConstant| % 8))
                 ('T
@@ -167,8 +167,8 @@
 (SDEFUN |ORTHPOL;legendreP;Nni2R;6|
         ((|n| (|NonNegativeInteger|)) (|x| (R)) (% (R)))
         (SPROG
-         ((|p0| (R)) (|p1| (R)) (|#G39| (R)) (|#G38| (R))
-          (|c| (|Fraction| (|Integer|))) (#1=#:G34 NIL) (|i| NIL))
+         ((|i| NIL) (#1=#:G34 NIL) (|c| (|Fraction| (|Integer|))) (|#G38| (R))
+          (|#G39| (R)) (|p1| (R)) (|p0| (R)))
          (SEQ
           (COND ((EQL |n| 0) (|spadConstant| % 8))
                 ('T
@@ -176,7 +176,7 @@
                       (SEQ (LETT |i| 1) (LETT #1# (- |n| 1)) G190
                            (COND ((|greater_SI| |i| #1#) (GO G191)))
                            (SEQ
-                            (LETT |c| (SPADCALL 1 (+ |i| 1) (QREFELT % 30)))
+                            (LETT |c| (SPADCALL 1 (+ |i| 1) (QREFELT % 28)))
                             (EXIT
                              (PROGN
                               (LETT |#G38|
@@ -187,9 +187,9 @@
                                                           (QREFELT % 17))
                                                 |p1| (QREFELT % 16))
                                                (SPADCALL |i| |p0|
-                                                         (QREFELT % 31))
+                                                         (QREFELT % 29))
                                                (QREFELT % 15))
-                                              (QREFELT % 32)))
+                                              (QREFELT % 30)))
                               (LETT |#G39| |p1|)
                               (LETT |p1| |#G38|)
                               (LETT |p0| |#G39|))))
@@ -199,11 +199,11 @@
 (DECLAIM (NOTINLINE |OrthogonalPolynomialFunctions;|)) 
 
 (DEFUN |OrthogonalPolynomialFunctions;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|OrthogonalPolynomialFunctions| DV$1))
-          (LETT % (GETREFV 34))
+          (LETT % (GETREFV 32))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3
                     (LETT |pv$|
@@ -220,7 +220,7 @@
           (SETF |pv$| (QREFELT % 3))
           (COND
            ((|testBitVector| |pv$| 1)
-            (QSETREFV % 33
+            (QSETREFV % 31
                       (CONS (|dispatchFunction| |ORTHPOL;legendreP;Nni2R;6|)
                             %))))
           %))) 
@@ -246,16 +246,16 @@
 
 (MAKEPROP '|OrthogonalPolynomialFunctions| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |Zero|) (4 . |One|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |0|) (4 . |1|)
               (8 . -) (13 . +) (|Integer|) (19 . |coerce|) (|PositiveInteger|)
               (24 . *) (30 . -) (36 . *) (42 . *) (|NonNegativeInteger|)
-              |ORTHPOL;laguerreL;Nni2R;1| (48 . ^) (54 . |binomial|)
-              (60 . |factorial|) (|Union| % '"failed") (65 . |exquo|)
-              |ORTHPOL;laguerreL;2Nni2R;2| |ORTHPOL;chebyshevT;Nni2R;3|
-              |ORTHPOL;chebyshevU;Nni2R;4| |ORTHPOL;hermiteH;Nni2R;5|
-              (|Fraction| 11) (71 . /) (77 . *) (83 . *) (89 . |legendreP|))
-           '#(|legendreP| 95 |laguerreL| 101 |hermiteH| 114 |chebyshevU| 120
-              |chebyshevT| 126)
+              |ORTHPOL;laguerreL;Nni2R;1| (48 . |binomial|) (54 . ^)
+              (60 . |factorial|) |ORTHPOL;laguerreL;2Nni2R;2|
+              |ORTHPOL;chebyshevT;Nni2R;3| |ORTHPOL;chebyshevU;Nni2R;4|
+              |ORTHPOL;hermiteH;Nni2R;5| (|Fraction| 11) (65 . /) (71 . *)
+              (77 . *) (83 . |legendreP|))
+           '#(|legendreP| 89 |laguerreL| 95 |hermiteH| 108 |chebyshevU| 114
+              |chebyshevT| 120)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -280,17 +280,16 @@
                                 T)
                               '((|legendreP|
                                  (|#1| (|NonNegativeInteger|) |#1|))
-                                (|has| 6 (|Algebra| 29))))
+                                (|has| 6 (|Algebra| 27))))
                              (LIST) NIL NIL)))
-                        (|makeByteWordVec2| 33
+                        (|makeByteWordVec2| 31
                                             '(0 6 0 7 0 6 0 8 1 6 0 0 9 2 6 0 0
                                               0 10 1 6 0 11 12 2 6 0 13 0 14 2
                                               6 0 0 0 15 2 6 0 0 0 16 2 6 0 11
-                                              0 17 2 6 0 0 18 20 2 11 0 0 0 21
-                                              1 11 0 0 22 2 11 23 0 0 24 2 29 0
-                                              11 11 30 2 6 0 18 0 31 2 6 0 29 0
-                                              32 2 0 6 18 6 33 2 1 6 18 6 33 3
-                                              0 6 18 18 6 25 2 0 6 18 6 19 2 0
-                                              6 18 6 28 2 0 6 18 6 27 2 0 6 18
-                                              6 26)))))
+                                              0 17 2 11 0 0 0 20 2 6 0 0 18 21
+                                              1 11 0 0 22 2 27 0 11 11 28 2 6 0
+                                              18 0 29 2 6 0 27 0 30 2 0 6 18 6
+                                              31 2 1 6 18 6 31 3 0 6 18 18 6 23
+                                              2 0 6 18 6 19 2 0 6 18 6 26 2 0 6
+                                              18 6 25 2 0 6 18 6 24)))))
            '|lookupComplete|)) 

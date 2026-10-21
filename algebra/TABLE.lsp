@@ -3,8 +3,8 @@
 
 (DEFUN |Table;| (|#1| |#2|)
   (SPROG
-   ((#1=#:G60 NIL) (#2=#:G59 NIL) (|pv$| NIL) (#3=#:G57 NIL) (#4=#:G58 NIL)
-    (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (#1=#:G58 NIL) (#2=#:G57 NIL)
+    (|pv$| NIL) (#3=#:G59 NIL) (#4=#:G60 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -37,7 +37,7 @@
                                                     (|:| |entry| |#2|))
                                           '(|CoercibleTo| (|OutputForm|))))
                                         (|HasCategory| |#2| '(|BasicType|))
-                                        (LETT #4#
+                                        (LETT #1#
                                               (|HasCategory| |#2|
                                                              '(|SetCategory|)))
                                         (AND
@@ -45,8 +45,8 @@
                                                         (LIST '|Evalable|
                                                               (|devaluate|
                                                                |#2|)))
-                                         #4#)
-                                        (LETT #3#
+                                         #1#)
+                                        (LETT #2#
                                               (|HasCategory|
                                                (|Record| (|:| |key| |#1|)
                                                          (|:| |entry| |#2|))
@@ -62,54 +62,54 @@
                                                       (LIST '|:| '|entry|
                                                             (|devaluate|
                                                              |#2|)))))
-                                         #3#)
+                                         #2#)
                                         (OR (|HasCategory| |#2| '(|BasicType|))
-                                            #4#
+                                            #1#
                                             (|HasCategory|
                                              (|Record| (|:| |key| |#1|)
                                                        (|:| |entry| |#2|))
                                              '(|BasicType|))
-                                            #3#)
-                                        (OR #4# #3#)
+                                            #2#)
+                                        (OR #1# #2#)
                                         (OR
                                          (|HasCategory| |#2|
                                                         '(|CoercibleTo|
                                                           (|OutputForm|)))
-                                         #4#
+                                         #1#
                                          (|HasCategory|
                                           (|Record| (|:| |key| |#1|)
                                                     (|:| |entry| |#2|))
                                           '(|CoercibleTo| (|OutputForm|)))
-                                         #3#)
+                                         #2#)
                                         (|HasCategory| |#2|
                                                        '(|OrderedSet|))))))
     (|haddProp| |$ConstructorCache| '|Table| (LIST DV$1 DV$2) (CONS 1 %))
     (|stuffDomainSlots| %)
     (QSETREFV % 6 |#1|)
     (QSETREFV % 7 |#2|)
-    (AND (LETT #2# (|HasCategory| % '(|finiteAggregate|)))
+    (AND (LETT #3# (|HasCategory| % '(|finiteAggregate|)))
          (|augmentPredVector| % 16384))
-    (AND #2#
+    (AND #3#
          (|HasCategory| (|Record| (|:| |key| |#1|) (|:| |entry| |#2|))
                         '(|OrderedSet|))
          (|augmentPredVector| % 32768))
-    (AND #2#
+    (AND #3#
          (|HasCategory| (|Record| (|:| |key| |#1|) (|:| |entry| |#2|))
                         '(|BasicType|))
          (|augmentPredVector| % 65536))
     (AND
-     (LETT #1#
+     (LETT #4#
            (AND (|HasCategory| |#2| '(|BasicType|))
                 (|HasCategory| % '(|finiteAggregate|))))
      (|augmentPredVector| % 131072))
     (AND
-     (OR #1# #4#
-         (AND #2#
+     (OR #4# #1#
+         (AND #3#
               (|HasCategory| (|Record| (|:| |key| |#1|) (|:| |entry| |#2|))
                              '(|BasicType|)))
-         #3#)
+         #2#)
      (|augmentPredVector| % 262144))
-    (AND (|HasCategory| |#2| '(|OrderedSet|)) #2#
+    (AND (|HasCategory| |#2| '(|OrderedSet|)) #3#
          (|augmentPredVector| % 524288))
     (AND (|HasCategory| % '(|shallowlyMutable|))
          (|augmentPredVector| % 1048576))

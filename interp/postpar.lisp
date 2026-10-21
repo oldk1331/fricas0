@@ -395,16 +395,15 @@
                   (|postMakeCons| (CDR |l|))))))))
 
 ; postAtom x ==
-;   x=0 => '(Zero)
-;   x=1 => '(One)
-;   EQ(x,'T) => 'T_$ -- rename T in spad code to T$
+;   x = 0 => ["0"]
+;   x = 1 => ["1"]
 ;   IDENTP x and get_database(x, 'NILADIC) => LIST x
 ;   x
 
 (DEFUN |postAtom| (|x|)
   (PROG ()
     (RETURN
-     (COND ((EQL |x| 0) '(|Zero|)) ((EQL |x| 1) '(|One|)) ((EQ |x| 'T) 'T$)
+     (COND ((EQL |x| 0) (LIST '|0|)) ((EQL |x| 1) (LIST '|1|))
            ((AND (IDENTP |x|) (|get_database| |x| 'NILADIC)) (LIST |x|))
            ('T |x|)))))
 

@@ -5,11 +5,11 @@
          (|v| (|UnivariateTaylorSeries| R |x| |pt|))
          (% (|Union| (|Fraction| (|UnivariatePolynomial| |x| R)) "failed")))
         (SPROG
-         ((|den| (|UnivariatePolynomial| |x| R))
-          (|num| (|UnivariatePolynomial| |x| R))
+         ((|ans|
+           (|Union| (|Fraction| (|UnivariatePolynomial| |x| R)) "failed"))
           (|xpt| (|UnivariatePolynomial| |x| R))
-          (|ans|
-           (|Union| (|Fraction| (|UnivariatePolynomial| |x| R)) "failed")))
+          (|num| (|UnivariatePolynomial| |x| R))
+          (|den| (|UnivariatePolynomial| |x| R)))
          (SEQ (LETT |ans| (SPADCALL |n| |m| |u| |v| (QREFELT % 13)))
               (EXIT
                (COND
@@ -39,7 +39,7 @@
 (DECLAIM (NOTINLINE |PadeApproximantPackage;|)) 
 
 (DEFUN |PadeApproximantPackage;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 |#2|)
@@ -62,9 +62,9 @@
                                         (|UnivariatePolynomial| |#2| |#1|)))
           %))) 
 
-(DEFUN |PadeApproximantPackage| (&REST #1=#:G10)
+(DEFUN |PadeApproximantPackage| (&REST #1=#:G13)
   (SPROG NIL
-         (PROG (#2=#:G11)
+         (PROG (#2=#:G14)
            (RETURN
             (COND
              ((LETT #2#
@@ -88,12 +88,11 @@
               (|NonNegativeInteger|)
               (|UnivariateTaylorSeries| 6 (NRTEVAL (QREFELT % 7))
                                         (NRTEVAL (QREFELT % 8)))
-              (0 . |pade|) (8 . |Zero|) (|Boolean|) (12 . =)
+              (0 . |pade|) (8 . |0|) (|Boolean|) (12 . =)
               (|UnivariatePolynomial| (NRTEVAL (QREFELT % 7)) 6)
-              (|Fraction| 17) (18 . |numer|) (23 . |denom|) (28 . |One|)
+              (|Fraction| 17) (18 . |numer|) (23 . |denom|) (28 . |1|)
               (32 . |monomial|) (38 . -) (44 . |elt|) (50 . /)
-              |PADEPAC;pade;2Nni2UtsU;1| (56 . |One|)
-              |PADEPAC;pade;2NniUtsU;2|)
+              |PADEPAC;pade;2Nni2UtsU;1| (56 . |1|) |PADEPAC;pade;2NniUtsU;2|)
            '#(|pade| 60) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

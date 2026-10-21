@@ -2,8 +2,8 @@
 (SDEFUN |MPC3;map;MPR1PR2;1|
         ((|f| (|Mapping| |Vars2| |Vars1|)) (|p| (PR1)) (% (PR2)))
         (SPROG
-         ((|up| (|SparseUnivariatePolynomial| PR1)) (|ans| (PR2))
-          (|x2| (|Vars2|)) (|c| (R)) (|x1| (|Union| |Vars1| "failed")))
+         ((|x1| (|Union| |Vars1| "failed")) (|c| (R)) (|x2| (|Vars2|))
+          (|ans| (PR2)) (|up| (|SparseUnivariatePolynomial| PR1)))
          (SEQ (LETT |x1| (SPADCALL |p| (QREFELT % 14)))
               (EXIT
                (COND
@@ -41,8 +41,8 @@
 
 (DEFUN |MPolyCatFunctions3;| (|#1| |#2| |#3| |#4| |#5| |#6| |#7|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL) (DV$4 NIL)
-    (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (DV$6 NIL)
+    (DV$7 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -69,9 +69,9 @@
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
-(DEFUN |MPolyCatFunctions3| (&REST #1=#:G11)
+(DEFUN |MPolyCatFunctions3| (&REST #1=#:G15)
   (SPROG NIL
-         (PROG (#2=#:G12)
+         (PROG (#2=#:G16)
            (RETURN
             (COND
              ((LETT #2#
@@ -94,8 +94,8 @@
               (|local| |#3|) (|local| |#4|) (|local| |#5|) (|local| |#6|)
               (|local| |#7|) (|Union| 6 '"failed") (0 . |mainVariable|)
               (5 . |retract|) (10 . |coerce|) (|SparseUnivariatePolynomial| %)
-              (15 . |univariate|) (21 . |Zero|) (25 . |Zero|) (29 . |Zero|)
-              (|SparseUnivariatePolynomial| 11) (33 . |Zero|) (|Boolean|)
+              (15 . |univariate|) (21 . |0|) (25 . |0|) (29 . |0|)
+              (|SparseUnivariatePolynomial| 11) (33 . |0|) (|Boolean|)
               (37 . ~=) (43 . |leadingCoefficient|) (|Mapping| 7 6)
               |MPC3;map;MPR1PR2;1| (|NonNegativeInteger|) (48 . |degree|)
               (53 . |monomial|) (60 . +) (66 . |reductum|))

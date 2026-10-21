@@ -29,8 +29,8 @@
 
 (SDEFUN |ACFS-;zeroOf;SSS;5| ((|p| (S)) (|x| (|Symbol|)) (% (S)))
         (SPROG
-         ((|n| (|SparseUnivariatePolynomial| S))
-          (|f| (|Fraction| (|SparseUnivariatePolynomial| S))))
+         ((|f| (|Fraction| (|SparseUnivariatePolynomial| S)))
+          (|n| (|SparseUnivariatePolynomial| S)))
          (SEQ
           (LETT |n|
                 (SPADCALL
@@ -48,8 +48,8 @@
 
 (SDEFUN |ACFS-;rootOf;SSS;6| ((|p| (S)) (|x| (|Symbol|)) (% (S)))
         (SPROG
-         ((|n| (|SparseUnivariatePolynomial| S))
-          (|f| (|Fraction| (|SparseUnivariatePolynomial| S))))
+         ((|f| (|Fraction| (|SparseUnivariatePolynomial| S)))
+          (|n| (|SparseUnivariatePolynomial| S)))
          (SEQ
           (LETT |n|
                 (SPADCALL
@@ -67,8 +67,8 @@
 
 (SDEFUN |ACFS-;zerosOf;SSL;7| ((|p| (S)) (|x| (|Symbol|)) (% (|List| S)))
         (SPROG
-         ((|n| (|SparseUnivariatePolynomial| S))
-          (|f| (|Fraction| (|SparseUnivariatePolynomial| S))))
+         ((|f| (|Fraction| (|SparseUnivariatePolynomial| S)))
+          (|n| (|SparseUnivariatePolynomial| S)))
          (SEQ
           (LETT |n|
                 (SPADCALL
@@ -85,8 +85,8 @@
 
 (SDEFUN |ACFS-;rootsOf;SSL;8| ((|p| (S)) (|x| (|Symbol|)) (% (|List| S)))
         (SPROG
-         ((|n| (|SparseUnivariatePolynomial| S))
-          (|f| (|Fraction| (|SparseUnivariatePolynomial| S))))
+         ((|f| (|Fraction| (|SparseUnivariatePolynomial| S)))
+          (|n| (|SparseUnivariatePolynomial| S)))
          (SEQ
           (LETT |n|
                 (SPADCALL
@@ -133,7 +133,7 @@
 (DECLAIM (NOTINLINE |AlgebraicallyClosedFunctionSpace&;|)) 
 
 (DEFUN |AlgebraicallyClosedFunctionSpace&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

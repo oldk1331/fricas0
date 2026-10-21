@@ -11,25 +11,25 @@
                      (|PatternMatchResult| S P)))
          (% (|PatternMatchResult| S P)))
         (SPROG
-         ((#1=#:G82 NIL)
-          (|ex|
+         ((|r| (|Union| R #1="failed")) (|v| (|Union| V #1#))
+          (|lx| (|Union| (|List| P) #2="failed"))
+          (|u| (|Union| (|List| (|Pattern| S)) "failed"))
+          (|uu|
            (|Union|
-            (|Record| (|:| |var| V) (|:| |exponent| (|NonNegativeInteger|)))
-            #2="failed"))
+            (|Record| (|:| |val| (|Pattern| S)) (|:| |exponent| (|Pattern| S)))
+            "failed"))
+          (|uur|
+           (|Record| (|:| |val| (|Pattern| S)) (|:| |exponent| (|Pattern| S))))
           (|ep|
            (|Union|
             (|Record| (|:| |val| (|Pattern| S))
                       (|:| |exponent| (|NonNegativeInteger|)))
             "failed"))
-          (|uur|
-           (|Record| (|:| |val| (|Pattern| S)) (|:| |exponent| (|Pattern| S))))
-          (|uu|
+          (|ex|
            (|Union|
-            (|Record| (|:| |val| (|Pattern| S)) (|:| |exponent| (|Pattern| S)))
-            "failed"))
-          (|u| (|Union| (|List| (|Pattern| S)) "failed"))
-          (|lx| (|Union| (|List| P) #2#)) (|v| (|Union| V #3="failed"))
-          (|r| (|Union| R #3#)))
+            (|Record| (|:| |var| V) (|:| |exponent| (|NonNegativeInteger|)))
+            #2#))
+          (#3=#:G106 NIL))
          (SEQ
           (COND
            ((SPADCALL |p| (QREFELT % 19))
@@ -219,7 +219,7 @@
                                                           (QCDR (QCDR |ex|))
                                                           (QCDR (QCDR |ep|)))
                                                          (PROGN
-                                                          (LETT #1#
+                                                          (LETT #3#
                                                                 (SPADCALL
                                                                  (QCAR
                                                                   (QCDR |ex|))
@@ -227,12 +227,12 @@
                                                                   (QCDR |ep|))
                                                                  |l| |vmatch|))
                                                           (GO
-                                                           #5=#:G74))))))))))))
+                                                           #5=#:G98))))))))))))
                                                (EXIT
                                                 (SPADCALL (QREFELT % 41)))))
                                              #5#
                                              (EXIT
-                                              #1#))))))))))))))))))))))))))) 
+                                              #3#))))))))))))))))))))))))))) 
 
 (SDEFUN |PMPLCAT;patternMatch;PPPmrMPmr;2!2|
         ((|p1| NIL) (|p2| NIL) (|p3| NIL) ($$ NIL))
@@ -250,29 +250,29 @@
 
 (SDEFUN |PMPLCAT;patternMatch;PPPmrMPmr;2!0| ((|l1| NIL) (% NIL))
         (SPROG
-         ((#1=#:G25 NIL) (#2=#:G24 NIL) (#3=#:G26 NIL) (#4=#:G28 NIL)
-          (#5=#:G0 NIL))
+         ((#1=#:G0 NIL) (#2=#:G38 NIL) (#3=#:G36 NIL) (#4=#:G34 NIL)
+          (#5=#:G35 NIL))
          (SEQ
           (PROGN
-           (LETT #1# NIL)
-           (SEQ (LETT #5# NIL) (LETT #4# |l1|) G190
+           (LETT #5# NIL)
+           (SEQ (LETT #1# NIL) (LETT #2# |l1|) G190
                 (COND
-                 ((OR (ATOM #4#) (PROGN (LETT #5# (CAR #4#)) NIL)) (GO G191)))
+                 ((OR (ATOM #2#) (PROGN (LETT #1# (CAR #2#)) NIL)) (GO G191)))
                 (SEQ
                  (EXIT
                   (PROGN
-                   (LETT #3# #5#)
-                   (COND (#1# (LETT #2# (SPADCALL #2# #3# (QREFELT % 30))))
-                         ('T (PROGN (LETT #2# #3#) (LETT #1# 'T)))))))
-                (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT NIL))
-           (COND (#1# #2#) ('T (|spadConstant| % 31))))))) 
+                   (LETT #3# #1#)
+                   (COND (#5# (LETT #4# (SPADCALL #4# #3# (QREFELT % 30))))
+                         ('T (PROGN (LETT #4# #3#) (LETT #5# 'T)))))))
+                (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+           (COND (#5# #4#) ('T (|spadConstant| % 31))))))) 
 
 (DECLAIM (NOTINLINE |PatternMatchPolynomialCategory;|)) 
 
 (DEFUN |PatternMatchPolynomialCategory;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -308,9 +308,9 @@
                       %))))
     %))) 
 
-(DEFUN |PatternMatchPolynomialCategory| (&REST #1=#:G83)
+(DEFUN |PatternMatchPolynomialCategory| (&REST #1=#:G107)
   (SPROG NIL
-         (PROG (#2=#:G84)
+         (PROG (#2=#:G108)
            (RETURN
             (COND
              ((LETT #2#
@@ -341,12 +341,12 @@
               (19 . |addMatch|) (|Union| 9 '#1="failed") (26 . |retractIfCan|)
               (|PatternMatchPushDown| 6 9 10) (31 . |patternMatch|)
               (|Union| 8 '#1#) (38 . |retractIfCan|) (|Union| 38 '"failed")
-              (43 . |isPlus|) (48 . |isPlus|) (53 . +) (59 . |Zero|)
-              (|List| 10) (|List| 12) (|Mapping| 10 32) (|Mapping| 11 10 12 11)
+              (43 . |isPlus|) (48 . |isPlus|) (53 . +) (59 . |0|) (|List| 10)
+              (|List| 12) (|Mapping| 10 32) (|Mapping| 11 10 12 11)
               (|PatternMatchTools| 6 9 10) (63 . |patternMatch|) (|List| %)
               (72 . |optpair|) (77 . |failed?|) (82 . |failed|) (86 . |second|)
               (91 . |isTimes|) (96 . |isTimes|) (101 . |patternMatchTimes|)
-              (109 . |One|) (|Record| (|:| |val| %) (|:| |exponent| %))
+              (109 . |1|) (|Record| (|:| |val| %) (|:| |exponent| %))
               (|Union| 47 '"failed") (113 . |isPower|)
               (|Record| (|:| |var| 8) (|:| |exponent| (|NonNegativeInteger|)))
               (|Union| 50 '"failed") (118 . |isExpt|) (|Integer|)

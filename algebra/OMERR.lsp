@@ -41,18 +41,18 @@
                           (SPADCALL "OpenMath read error" (QREFELT % 12)))
                          (#1# (|error| "Malformed OpenMath Error")))))))))) 
 
-(PUT '|OMERR;omError;OmekL%;2| '|SPADreplace| 'CONS) 
+(MAKEPROP '|OMERR;omError;OmekL%;2| '|SPADreplace| 'CONS) 
 
 (SDEFUN |OMERR;omError;OmekL%;2|
         ((|e| (|OpenMathErrorKind|)) (|i| (|List| (|Symbol|))) (% (%)))
         (CONS |e| |i|)) 
 
-(PUT '|OMERR;errorKind;%Omek;3| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|OMERR;errorKind;%Omek;3| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |OMERR;errorKind;%Omek;3| ((|e| (%)) (% (|OpenMathErrorKind|)))
         (QCAR |e|)) 
 
-(PUT '|OMERR;errorInfo;%L;4| '|SPADreplace| 'QCDR) 
+(MAKEPROP '|OMERR;errorInfo;%L;4| '|SPADreplace| 'QCDR) 
 
 (SDEFUN |OMERR;errorInfo;%L;4| ((|e| (%)) (% (|List| (|Symbol|)))) (QCDR |e|)) 
 
@@ -75,7 +75,7 @@
 
 (DEFUN |OpenMathError| ()
   (SPROG NIL
-         (PROG (#1=#:G16)
+         (PROG (#1=#:G17)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OpenMathError|))

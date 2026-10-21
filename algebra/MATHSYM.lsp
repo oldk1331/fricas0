@@ -1,22 +1,23 @@
 
 (SDEFUN |MATHSYM;greek_str| ((|i| (|Integer|)) (% (|String|)))
         (SPROG
-         ((#1=#:G7 NIL) (|ns| (|String|))
-          (|qr|
+         ((|qr|
            (|Record| (|:| |quotient| (|Integer|))
-                     (|:| |remainder| (|Integer|)))))
+                     (|:| |remainder| (|Integer|))))
+          (|ns| (|String|)) (#1=#:G8 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |ns| "")
                 (EXIT
                  (SEQ G190 NIL
-                      (SEQ (LETT |qr| (DIVIDE2 |i| 24)) (LETT |i| (QCAR |qr|))
+                      (SEQ (LETT |qr| (|divide_INT| |i| 24))
+                           (LETT |i| (QCAR |qr|))
                            (LETT |ns|
                                  (STRCONC (NUM2USTR (+ (QCDR |qr|) 946)) |ns|))
                            (EXIT
                             (COND
                              ((ZEROP |i|)
-                              (PROGN (LETT #1# |ns|) (GO #2=#:G6))))))
+                              (PROGN (LETT #1# |ns|) (GO #2=#:G7))))))
                       NIL (GO G190) G191 (EXIT NIL)))))
           #2# (EXIT #1#)))) 
 
@@ -79,7 +80,7 @@
 
 (SDEFUN |MATHSYM;psi;S;28| ((% (|Symbol|))) (|MATHSYM;getUTF| 968 %)) 
 
-(SDEFUN |MATHSYM;omega;S;29| ((% (|Symbol|))) (|MATHSYM;getUTF| 669 %)) 
+(SDEFUN |MATHSYM;omega;S;29| ((% (|Symbol|))) (|MATHSYM;getUTF| 969 %)) 
 
 (SDEFUN |MATHSYM;Alpha;S;30| ((% (|Symbol|))) (|MATHSYM;getUTF| 913 %)) 
 
@@ -147,7 +148,7 @@
 
 (DEFUN |MathematicalSymbols| ()
   (SPROG NIL
-         (PROG (#1=#:G62)
+         (PROG (#1=#:G63)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|MathematicalSymbols|))

@@ -1,5 +1,5 @@
 
-(PUT '|PARPCURV;curve;2ComponentFunction%;1| '|SPADreplace| 'CONS) 
+(MAKEPROP '|PARPCURV;curve;2ComponentFunction%;1| '|SPADreplace| 'CONS) 
 
 (SDEFUN |PARPCURV;curve;2ComponentFunction%;1|
         ((|x| (|ComponentFunction|)) (|y| (|ComponentFunction|)) (% (%)))
@@ -13,7 +13,7 @@
 (DECLAIM (NOTINLINE |ParametricPlaneCurve;|)) 
 
 (DEFUN |ParametricPlaneCurve;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|ParametricPlaneCurve| DV$1))

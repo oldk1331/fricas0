@@ -26,7 +26,7 @@
 ;       a := resolveTT(md,a)
 ;       null a => return nil
 ;     a
-;   throwKeyedMsg("S2IR0002",NIL)
+;   throw_msg("S2IR0002", '"FriCAS cannot handle %b [ ] %d here.", [])
 
 (DEFUN |resolveTypeList| (|u|)
   (PROG (|a| |tail| |ISTMP#1| |v| |allVars|)
@@ -80,7 +80,8 @@
                (SETQ |bfVar#2| (CDR |bfVar#2|))))
             |tail| NIL)
            |a|)))))
-      (#1# (|throwKeyedMsg| 'S2IR0002 NIL))))))
+      (#1#
+       (|throw_msg| 'S2IR0002 "FriCAS cannot handle %b [ ] %d here." NIL))))))
 
 ; resolveTypeListAny tl ==
 ;   rt := resolveTypeList tl
@@ -1255,8 +1256,8 @@
 ;   (t is [t0]) and (sd := getImmediateSuperDomain(t0)) and sd ~= t0 =>
 ;     resolveTCat(sd,c)
 ;
-;   SIZE(td := deconstructT t) ~= 2=> NIL
-;   SIZE(tc := deconstructT c) ~= 2 => NIL
+;   #(td := deconstructT t) ~= 2=> NIL
+;   #(tc := deconstructT c) ~= 2 => NIL
 ;   ut := underDomainOf t
 ;   null isValidType(uc := last tc) => NIL
 ;   null canCoerceFrom(ut,uc) => NIL
@@ -1277,8 +1278,8 @@
                  (SETQ |sd| (|getImmediateSuperDomain| |t0|))
                  (NOT (EQUAL |sd| |t0|)))
             (|resolveTCat| |sd| |c|))
-           ((NOT (EQL (SIZE (SETQ |td| (|deconstructT| |t|))) 2)) NIL)
-           ((NOT (EQL (SIZE (SETQ |tc| (|deconstructT| |c|))) 2)) NIL)
+           ((NOT (EQL (LENGTH (SETQ |td| (|deconstructT| |t|))) 2)) NIL)
+           ((NOT (EQL (LENGTH (SETQ |tc| (|deconstructT| |c|))) 2)) NIL)
            (#1#
             (PROGN
              (SETQ |ut| (|underDomainOf| |t|))
@@ -1514,12 +1515,22 @@
            (#1# NIL)))))
 
 ; resolveTMOrCroak(t,m) ==
-;   resolveTM(t,m) or throwKeyedMsg("S2IR0004",[t,m])
+;     resolveTM(t, m) or throw_msg("S2IR0004", CONCAT(
+;         '"FriCAS is confused by what you input.  It cannot resolve the",
+;         '" type %1bp with the partial type %2bp .",
+;         '" Please make sure you have used the correct syntax."),
+;         [t, m])
 
 (DEFUN |resolveTMOrCroak| (|t| |m|)
   (PROG ()
     (RETURN
-     (OR (|resolveTM| |t| |m|) (|throwKeyedMsg| 'S2IR0004 (LIST |t| |m|))))))
+     (OR (|resolveTM| |t| |m|)
+         (|throw_msg| 'S2IR0004
+          (CONCAT
+           "FriCAS is confused by what you input.  It cannot resolve the"
+           " type %1bp with the partial type %2bp ."
+           " Please make sure you have used the correct syntax.")
+          (LIST |t| |m|))))))
 
 ; resolveTM(t,m) ==
 ;   -- resolves a type with a mode which may be partially specified
@@ -2629,7 +2640,7 @@
 ;   -- otherwise 'T if t1 is lexicographically greater than t2
 ;   EQCAR(t1,$QuotientField) or
 ;     MEMQ(opOf t2,[$QuotientField, 'SimpleAlgebraicExtension]) => NIL
-;     CGREATERP(PRIN2CVEC opOf t1,PRIN2CVEC opOf t2)
+;     CGREATERP(STRINGIMAGE(opOf(t1)), STRINGIMAGE(opOf(t2)))
 
 (DEFUN |compareTT| (|t1| |t2|)
   (PROG ()
@@ -2640,4 +2651,5 @@
                  (LIST |$QuotientField| '|SimpleAlgebraicExtension|))
            NIL)
           ('T
-           (CGREATERP (PRIN2CVEC (|opOf| |t1|)) (PRIN2CVEC (|opOf| |t2|)))))))))
+           (CGREATERP (STRINGIMAGE (|opOf| |t1|))
+            (STRINGIMAGE (|opOf| |t2|)))))))))

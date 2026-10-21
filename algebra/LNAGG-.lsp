@@ -1,15 +1,15 @@
 
 (SDEFUN |LNAGG-;indices;AL;1| ((|a| (A)) (% (|List| (|Integer|))))
-        (SPROG ((#1=#:G14 NIL) (|i| NIL) (#2=#:G13 NIL))
+        (SPROG ((#1=#:G13 NIL) (|i| NIL) (#2=#:G14 NIL))
                (SEQ
                 (PROGN
-                 (LETT #2# NIL)
+                 (LETT #1# NIL)
                  (SEQ (LETT |i| (SPADCALL |a| (QREFELT % 9)))
-                      (LETT #1# (SPADCALL |a| (QREFELT % 10))) G190
-                      (COND ((> |i| #1#) (GO G191)))
-                      (SEQ (EXIT (LETT #2# (CONS |i| #2#))))
+                      (LETT #2# (SPADCALL |a| (QREFELT % 10))) G190
+                      (COND ((> |i| #2#) (GO G191)))
+                      (SEQ (EXIT (LETT #1# (CONS |i| #1#))))
                       (LETT |i| (+ |i| 1)) (GO G190) G191
-                      (EXIT (NREVERSE #2#))))))) 
+                      (EXIT (NREVERSE #1#))))))) 
 
 (SDEFUN |LNAGG-;index?;IAB;2| ((|i| (|Integer|)) (|a| (A)) (% (|Boolean|)))
         (COND
@@ -40,7 +40,7 @@
         (SPADCALL |x| |t| (SPADCALL |t| (QREFELT % 9)) (QREFELT % 29))) 
 
 (SDEFUN |LNAGG-;leftTrim;ASA;9| ((|u| (A)) (|x| (S)) (% (A)))
-        (SPROG ((#1=#:G27 NIL) (|i| NIL) (|n| (|Integer|)))
+        (SPROG ((|n| (|Integer|)) (|i| NIL) (#1=#:G27 NIL))
                (SEQ (LETT |n| (SPADCALL |u| (QREFELT % 10)))
                     (SEQ (LETT |i| (SPADCALL |u| (QREFELT % 9))) (LETT #1# |n|)
                          G190
@@ -57,7 +57,7 @@
                                (QREFELT % 25)))))) 
 
 (SDEFUN |LNAGG-;rightTrim;ASA;10| ((|u| (A)) (|x| (S)) (% (A)))
-        (SPROG ((#1=#:G32 NIL) (|j| NIL) (|mn| (|Integer|)))
+        (SPROG ((|mn| (|Integer|)) (|j| NIL) (#1=#:G32 NIL))
                (SEQ (LETT |mn| (SPADCALL |u| (QREFELT % 9)))
                     (SEQ (LETT |j| (SPADCALL |u| (QREFELT % 10)))
                          (LETT #1# |mn|) G190
@@ -75,22 +75,22 @@
 
 (SDEFUN |LNAGG-;trim;ASA;11| ((|u| (A)) (|x| (S)) (% (A)))
         (SPROG
-         ((#1=#:G40 NIL) (|j| NIL) (#2=#:G39 NIL) (|i| NIL) (|mn| (|Integer|))
-          (|n| (|Integer|)))
+         ((|n| (|Integer|)) (|mn| (|Integer|)) (|i| NIL) (#1=#:G39 NIL)
+          (|j| NIL) (#2=#:G40 NIL))
          (SEQ (LETT |n| (SPADCALL |u| (QREFELT % 10)))
               (LETT |mn| (SPADCALL |u| (QREFELT % 9)))
-              (SEQ (LETT |i| |mn|) (LETT #2# |n|) G190
+              (SEQ (LETT |i| |mn|) (LETT #1# |n|) G190
                    (COND
-                    ((OR (> |i| #2#)
+                    ((OR (> |i| #1#)
                          (NULL
                           (SPADCALL (SPADCALL |u| |i| (QREFELT % 31)) |x|
                                     (QREFELT % 32))))
                      (GO G191)))
                    (SEQ (EXIT 0)) (LETT |i| (+ |i| 1)) (GO G190) G191
                    (EXIT NIL))
-              (SEQ (LETT |j| |n|) (LETT #1# |i|) G190
+              (SEQ (LETT |j| |n|) (LETT #2# |i|) G190
                    (COND
-                    ((OR (< |j| #1#)
+                    ((OR (< |j| #2#)
                          (NULL
                           (SPADCALL (SPADCALL |u| |j| (QREFELT % 31)) |x|
                                     (QREFELT % 32))))
@@ -103,7 +103,7 @@
 
 (SDEFUN |LNAGG-;hashUpdate!;HsAHs;12|
         ((|s| (|HashState|)) (|x| (A)) (% (|HashState|)))
-        (SPROG ((#1=#:G45 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G45 NIL))
                (SEQ
                 (SEQ (LETT |i| (SPADCALL |x| (QREFELT % 9)))
                      (LETT #1# (SPADCALL |x| (QREFELT % 10))) G190
@@ -138,7 +138,7 @@
 (DECLAIM (NOTINLINE |LinearAggregate&;|)) 
 
 (DEFUN |LinearAggregate&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

@@ -52,7 +52,7 @@
         (SPROG NIL
                (SEQ
                 (SPADCALL (CONS #'|SPFUTS;p_re!0| (VECTOR |k| % |lcr|))
-                          (QREFELT % 47))))) 
+                          (QREFELT % 50))))) 
 
 (SDEFUN |SPFUTS;p_re!0| (($$ NIL))
         (PROG (|lcr| % |k|)
@@ -62,8 +62,8 @@
           (RETURN
            (PROGN
             (SPROG
-             ((|lm| NIL) (|ck_m| NIL) (#1=#:G19 NIL) (|cm| NIL) (#2=#:G18 NIL)
-              (|m| NIL) (#3=#:G17 NIL) (|ss| NIL) (|two| NIL) (|three| NIL)
+             ((|lm| NIL) (|ck_m| NIL) (#1=#:G21 NIL) (|cm| NIL) (#2=#:G20 NIL)
+              (|m| NIL) (#3=#:G19 NIL) (|ss| NIL) (|two| NIL) (|three| NIL)
               (|ck| NIL))
              (SEQ (LETT |lm| (SPADCALL |lcr| (QREFELT % 32)))
                   (LETT |ss| (|spadConstant| % 9))
@@ -101,22 +101,22 @@
                                    (SPADCALL
                                     (SPADCALL |k| (|spadConstant| % 18)
                                               (QREFELT % 38))
-                                    |three| (QREFELT % 39))
+                                    |three| (QREFELT % 42))
                                    (QREFELT % 36))
-                                  (QREFELT % 40)))
+                                  (QREFELT % 43)))
                   (EXIT
                    (SPADCALL |ck|
                              (|SPFUTS;p_re|
-                              (SPADCALL |k| (|spadConstant| % 42)
-                                        (QREFELT % 43))
-                              (SPADCALL |ck| |lcr| (QREFELT % 44)) %)
-                             (QREFELT % 45))))))))) 
+                              (SPADCALL |k| (|spadConstant| % 45)
+                                        (QREFELT % 46))
+                              (SPADCALL |ck| |lcr| (QREFELT % 47)) %)
+                             (QREFELT % 48))))))))) 
 
 (SDEFUN |SPFUTS;p_stream|
         ((|g2| (|Coef|)) (|g3| (|Coef|)) (% (|Stream| |Coef|)))
         (SPROG
-         ((|c28| (|Coef|)) (|c20| (|Coef|)) (|c5| (|Coef|)) (|c4| (|Coef|))
-          (|c2| (|Coef|)))
+         ((|c2| (|Coef|)) (|c4| (|Coef|)) (|c5| (|Coef|)) (|c20| (|Coef|))
+          (|c28| (|Coef|)))
          (SEQ
           (LETT |c2|
                 (SPADCALL (|spadConstant| % 18) (|spadConstant| % 18)
@@ -129,17 +129,17 @@
                           (QREFELT % 36)))
           (EXIT
            (SPADCALL (|spadConstant| % 9)
-                     (SPADCALL (SPADCALL |g2| |c20| (QREFELT % 40))
-                               (SPADCALL (SPADCALL |g3| |c28| (QREFELT % 40))
+                     (SPADCALL (SPADCALL |g2| |c20| (QREFELT % 43))
+                               (SPADCALL (SPADCALL |g3| |c28| (QREFELT % 43))
                                          (|SPFUTS;p_re| 4
                                           (LIST
-                                           (SPADCALL |g3| |c28| (QREFELT % 40))
+                                           (SPADCALL |g3| |c28| (QREFELT % 43))
                                            (SPADCALL |g2| |c20|
-                                                     (QREFELT % 40)))
+                                                     (QREFELT % 43)))
                                           %)
-                                         (QREFELT % 45))
-                               (QREFELT % 45))
-                     (QREFELT % 45)))))) 
+                                         (QREFELT % 48))
+                               (QREFELT % 48))
+                     (QREFELT % 48)))))) 
 
 (SDEFUN |SPFUTS;weierstrassP0;2Coef2UTS;5|
         ((|g2| (|Coef|)) (|g3| (|Coef|)) (|x| (UTS)) (% (UTS)))
@@ -148,9 +148,9 @@
 
 (SDEFUN |SPFUTS;weierstrassPPrime0;2Coef2UTS;6|
         ((|g2| (|Coef|)) (|g3| (|Coef|)) (|x| (UTS)) (% (UTS)))
-        (SPADCALL (SPADCALL (+ 1 1) |x| (QREFELT % 49))
+        (SPADCALL (SPADCALL (+ 1 1) |x| (QREFELT % 52))
                   (|SPFUTS;compose|
-                   (SPADCALL (|SPFUTS;p_stream| |g2| |g3| %) (QREFELT % 50))
+                   (SPADCALL (|SPFUTS;p_stream| |g2| |g3| %) (QREFELT % 53))
                    (SPADCALL |x| |x| (QREFELT % 15)) %)
                   (QREFELT % 15))) 
 
@@ -166,40 +166,40 @@
                 (EXIT
                  (SPADCALL
                   (SPADCALL
-                   (SPADCALL (|spadConstant| % 9) |ps2| (QREFELT % 52))
+                   (SPADCALL (|spadConstant| % 9) |ps2| (QREFELT % 55))
                    (QREFELT % 12))
                   (QREFELT % 13)))))) 
 
 (SDEFUN |SPFUTS;weierstrassSigma0;2Coef2UTS;8|
         ((|g2| (|Coef|)) (|g3| (|Coef|)) (|x| (UTS)) (% (UTS)))
         (SPROG
-         ((|lsigma| #1=(|Stream| |Coef|)) (|zs| #1#) (|ps2| (|Stream| |Coef|)))
+         ((|ps2| (|Stream| |Coef|)) (|zs| #1=(|Stream| |Coef|)) (|lsigma| #1#))
          (SEQ
           (LETT |ps2|
                 (SPADCALL (|SPFUTS;p_stream| |g2| |g3| %)
                           (SPADCALL (SPADCALL |x| |x| (QREFELT % 15))
                                     (QREFELT % 22))
                           (QREFELT % 30)))
-          (LETT |zs| (SPADCALL (|spadConstant| % 9) |ps2| (QREFELT % 52)))
+          (LETT |zs| (SPADCALL (|spadConstant| % 9) |ps2| (QREFELT % 55)))
           (LETT |lsigma|
-                (SPADCALL (|spadConstant| % 9) (SPADCALL |zs| (QREFELT % 54))
-                          (QREFELT % 52)))
+                (SPADCALL (|spadConstant| % 9) (SPADCALL |zs| (QREFELT % 57))
+                          (QREFELT % 55)))
           (EXIT
            (SPADCALL |x|
-                     (SPADCALL (SPADCALL |lsigma| (QREFELT % 56))
+                     (SPADCALL (SPADCALL |lsigma| (QREFELT % 59))
                                (QREFELT % 12))
                      (QREFELT % 15)))))) 
 
 (DECLAIM (NOTINLINE |SpecialFunctionUnivariateTaylorSeries;|)) 
 
 (DEFUN |SpecialFunctionUnivariateTaylorSeries;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
           (LETT |dv$|
                 (LIST '|SpecialFunctionUnivariateTaylorSeries| DV$1 DV$2))
-          (LETT % (GETREFV 58))
+          (LETT % (GETREFV 61))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache|
@@ -211,9 +211,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |SpecialFunctionUnivariateTaylorSeries| (&REST #1=#:G29)
+(DEFUN |SpecialFunctionUnivariateTaylorSeries| (&REST #1=#:G32)
   (SPROG NIL
-         (PROG (#2=#:G30)
+         (PROG (#2=#:G33)
            (RETURN
             (COND
              ((LETT #2#
@@ -237,23 +237,24 @@
 (MAKEPROP '|SpecialFunctionUnivariateTaylorSeries| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (0 . |differentiate|) (5 . |Zero|) (9 . |Zero|) (|Stream| 6)
-              (13 . |series|) (18 . -) (23 . |exp|) (28 . *) (34 . |One|)
-              (38 . +) (44 . |One|) (|PositiveInteger|) (48 . |One|) (52 . ^)
+              (0 . |differentiate|) (5 . |0|) (9 . |0|) (|Stream| 6)
+              (13 . |series|) (18 . -) (23 . |exp|) (28 . *) (34 . |1|)
+              (38 . +) (44 . |1|) (|PositiveInteger|) (48 . |1|) (52 . ^)
               (58 . |coefficients|) (|Mapping| 11)
               (|StreamTaylorSeriesOperations| 6) (63 . |lazyIntegrate|)
               (|Mapping| 11 11) (|ParadoxicalCombinatorsForStreams| 6) (69 . Y)
               |SPFUTS;lambertW0;2UTS;1| (74 . |compose|) (|List| 6)
               (80 . |reverse|) (|Integer|) (85 . -) (91 . |rest|) (96 . *)
-              (102 . +) (108 . *) (114 . -) (120 . /) (|SingleInteger|)
-              (126 . |One|) (130 . +) (136 . |cons|) (142 . |concat|)
-              (|Mapping| %) (148 . |delay|) |SPFUTS;weierstrassP0;2Coef2UTS;5|
-              (153 . *) (159 . |deriv|) |SPFUTS;weierstrassPPrime0;2Coef2UTS;6|
-              (164 . |integrate|) |SPFUTS;weierstrassZeta0;2Coef2UTS;7|
-              (170 . -) (|StreamTranscendentalFunctions| 6) (175 . |exp|)
+              (102 . +) (108 . *) (|Fraction| 33) (114 . |1|) (118 . *)
+              (124 . -) (130 . /) (|SingleInteger|) (136 . |1|) (140 . +)
+              (146 . |cons|) (152 . |concat|) (|Mapping| %) (158 . |delay|)
+              |SPFUTS;weierstrassP0;2Coef2UTS;5| (163 . *) (169 . |deriv|)
+              |SPFUTS;weierstrassPPrime0;2Coef2UTS;6| (174 . |integrate|)
+              |SPFUTS;weierstrassZeta0;2Coef2UTS;7| (180 . -)
+              (|StreamTranscendentalFunctions| 6) (185 . |exp|)
               |SPFUTS;weierstrassSigma0;2Coef2UTS;8|)
-           '#(|weierstrassZeta0| 180 |weierstrassSigma0| 187
-              |weierstrassPPrime0| 194 |weierstrassP0| 201 |lambertW0| 208)
+           '#(|weierstrassZeta0| 190 |weierstrassSigma0| 197
+              |weierstrassPPrime0| 204 |weierstrassP0| 211 |lambertW0| 218)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -271,7 +272,7 @@
                                       (|#2| |#1| |#1| |#2|))
                                      T))
                              (LIST) NIL NIL)))
-                        (|makeByteWordVec2| 57
+                        (|makeByteWordVec2| 60
                                             '(1 7 0 0 8 0 6 0 9 0 7 0 10 1 7 0
                                               11 12 1 7 0 0 13 1 7 0 0 14 2 7 0
                                               0 0 15 0 7 0 16 2 7 0 0 0 17 0 6
@@ -280,12 +281,12 @@
                                               26 28 2 24 11 11 11 30 1 31 0 0
                                               32 2 33 0 0 0 34 1 31 0 0 35 2 6
                                               0 0 0 36 2 6 0 0 0 37 2 6 0 33 0
-                                              38 2 6 0 0 0 39 2 6 0 0 0 40 0 41
-                                              0 42 2 33 0 0 0 43 2 31 0 6 0 44
-                                              2 11 0 6 0 45 1 11 0 46 47 2 7 0
-                                              19 0 49 1 24 11 11 50 2 24 11 6
-                                              11 52 1 24 11 11 54 1 55 11 11 56
-                                              3 0 7 6 6 7 53 3 0 7 6 6 7 57 3 0
-                                              7 6 6 7 51 3 0 7 6 6 7 48 1 0 7 7
-                                              29)))))
+                                              38 0 39 0 40 2 39 0 33 0 41 2 6 0
+                                              0 0 42 2 6 0 0 0 43 0 44 0 45 2
+                                              33 0 0 0 46 2 31 0 6 0 47 2 11 0
+                                              6 0 48 1 11 0 49 50 2 7 0 19 0 52
+                                              1 24 11 11 53 2 24 11 6 11 55 1
+                                              24 11 11 57 1 58 11 11 59 3 0 7 6
+                                              6 7 56 3 0 7 6 6 7 60 3 0 7 6 6 7
+                                              54 3 0 7 6 6 7 51 1 0 7 7 29)))))
            '|lookupComplete|)) 

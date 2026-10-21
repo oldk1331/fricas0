@@ -34,7 +34,7 @@
 
 (SDEFUN |DISTPOL;apply;UPSDD;3|
         ((|p| (UPS)) (|x| (|Distribution| R)) (% (|Distribution| S)))
-        (SPROG ((|mompx| (|Stream| S)) (IN (|Stream| (|Integer|))))
+        (SPROG ((IN (|Stream| (|Integer|))) (|mompx| (|Stream| S)))
                (SEQ
                 (LETT IN
                       (SPADCALL (LIST (SPADCALL 1 (QREFELT % 28)))
@@ -66,7 +66,7 @@
 (DECLAIM (NOTINLINE |DistributionPolynomialPackage;|)) 
 
 (DEFUN |DistributionPolynomialPackage;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -84,9 +84,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |DistributionPolynomialPackage| (&REST #1=#:G15)
+(DEFUN |DistributionPolynomialPackage| (&REST #1=#:G16)
   (SPROG NIL
-         (PROG (#2=#:G16)
+         (PROG (#2=#:G17)
            (RETURN
             (COND
              ((LETT #2#
@@ -109,11 +109,11 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|Boolean|) (0 . |ground?|)
-              (5 . |leadingCoefficient|) (10 . |One|) (14 . *) (20 . |Zero|)
+              (5 . |leadingCoefficient|) (10 . |1|) (14 . *) (20 . |0|)
               (24 . |zero?|) (|NonNegativeInteger|) (29 . |degree|)
               (|Distribution| 6) (34 . |moment|) (40 . *) (46 . +)
               (52 . |reductum|) |DISTPOL;eval;DUPSS;1|
-              |DISTPOL;integrate;UPSDS;2| (57 . |One|) (|Integer|)
+              |DISTPOL;integrate;UPSDS;2| (57 . |1|) (|Integer|)
               (|UniversalSegment| 26) (61 . SEGMENT) (|Stream| 26) (|List| %)
               (66 . |expand|) (|PositiveInteger|) (71 . ^) (|Stream| 7)
               (|Mapping| 7 26) (|StreamFunctions2| 26 7) (77 . |map|)

@@ -1,9 +1,9 @@
 
-(PUT '|GENMOEBF;rep| '|SPADreplace| '(XLAM (|x|) |x|)) 
+(MAKEPROP '|GENMOEBF;rep| '|SPADreplace| '(XLAM (|x|) |x|)) 
 
 (SDEFUN |GENMOEBF;rep| ((|x| (%)) (% (|Rep|))) |x|) 
 
-(PUT '|GENMOEBF;per| '|SPADreplace| '(XLAM (|r|) |r|)) 
+(MAKEPROP '|GENMOEBF;per| '|SPADreplace| '(XLAM (|r|) |r|)) 
 
 (SDEFUN |GENMOEBF;per| ((|r| (|Rep|)) (% (%))) |r|) 
 
@@ -13,9 +13,9 @@
 (SDEFUN |GENMOEBF;generalizedMoebiusFunction;LM%;4|
         ((|xx| (|List| P)) (|z| (|Mapping| R P P)) (% (%)))
         (SPROG
-         ((#1=#:G20 NIL) (|mf| (|Union| (|Matrix| R) "failed"))
-          (|zf| (|Matrix| R)) (#2=#:G24 NIL) (|x| NIL) (#3=#:G23 NIL)
-          (#4=#:G22 NIL) (|y| NIL) (#5=#:G21 NIL) (|xxo| (|List| P)))
+         ((|xxo| (|List| P)) (#1=#:G24 NIL) (|y| NIL) (#2=#:G25 NIL)
+          (#3=#:G26 NIL) (|x| NIL) (#4=#:G27 NIL) (|zf| (|Matrix| R))
+          (|mf| (|Union| (|Matrix| R) "failed")) (#5=#:G23 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -25,21 +25,21 @@
             (LETT |zf|
                   (SPADCALL
                    (PROGN
-                    (LETT #5# NIL)
-                    (SEQ (LETT |y| NIL) (LETT #4# |xxo|) G190
+                    (LETT #1# NIL)
+                    (SEQ (LETT |y| NIL) (LETT #2# |xxo|) G190
                          (COND
-                          ((OR (ATOM #4#) (PROGN (LETT |y| (CAR #4#)) NIL))
+                          ((OR (ATOM #2#) (PROGN (LETT |y| (CAR #2#)) NIL))
                            (GO G191)))
                          (SEQ
                           (EXIT
-                           (LETT #5#
+                           (LETT #1#
                                  (CONS
                                   (PROGN
                                    (LETT #3# NIL)
-                                   (SEQ (LETT |x| NIL) (LETT #2# |xxo|) G190
+                                   (SEQ (LETT |x| NIL) (LETT #4# |xxo|) G190
                                         (COND
-                                         ((OR (ATOM #2#)
-                                              (PROGN (LETT |x| (CAR #2#)) NIL))
+                                         ((OR (ATOM #4#)
+                                              (PROGN (LETT |x| (CAR #4#)) NIL))
                                           (GO G191)))
                                         (SEQ
                                          (EXIT
@@ -51,36 +51,36 @@
                                                    (SPADCALL |x| |y| |z|))
                                                   ('T (|spadConstant| % 17)))
                                                  #3#))))
-                                        (LETT #2# (CDR #2#)) (GO G190) G191
+                                        (LETT #4# (CDR #4#)) (GO G190) G191
                                         (EXIT (NREVERSE #3#))))
-                                  #5#))))
-                         (LETT #4# (CDR #4#)) (GO G190) G191
-                         (EXIT (NREVERSE #5#))))
+                                  #1#))))
+                         (LETT #2# (CDR #2#)) (GO G190) G191
+                         (EXIT (NREVERSE #1#))))
                    (QREFELT % 20)))
             (LETT |mf| (SPADCALL |zf| (QREFELT % 22)))
             (EXIT
              (COND ((QEQCAR |mf| 1) (|error| "zeta not invertible"))
                    ('T
                     (PROGN
-                     (LETT #1#
+                     (LETT #5#
                            (|GENMOEBF;per| (VECTOR |zf| (QCDR |mf|) |xxo|) %))
-                     (GO #6=#:G19)))))))
-          #6# (EXIT #1#)))) 
+                     (GO #6=#:G22)))))))
+          #6# (EXIT #5#)))) 
 
 (SDEFUN |GENMOEBF;canonicalZeta| ((|pi| (P)) (|si| (P)) (% (R)))
-        (SPROG ((#1=#:G27 NIL))
+        (SPROG ((#1=#:G30 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((SPADCALL |pi| |si| (QREFELT % 12))
-                    (PROGN (LETT #1# (|spadConstant| % 25)) (GO #2=#:G26))))
+                    (PROGN (LETT #1# (|spadConstant| % 25)) (GO #2=#:G29))))
                   (EXIT (|spadConstant| % 17))))
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |GENMOEBF;apply;%2PR;6| ((|mf| (%)) (|x| (P)) (|y| (P)) (% (R)))
         (SPROG
-         ((#1=#:G33 NIL) (|ky| #2=(|Integer|)) (|kx| #2#) (|mfn| (|Matrix| R)))
+         ((|mfn| (|Matrix| R)) (|kx| #1=(|Integer|)) (|ky| #1#) (#2=#:G35 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |mfn| (QVELT (|GENMOEBF;rep| |mf| %) 1))
@@ -95,9 +95,9 @@
                   (EXIT (|error| "not members"))))
                 (EXIT
                  (PROGN
-                  (LETT #1# (SPADCALL |mfn| |ky| |kx| (QREFELT % 28)))
-                  (GO #3=#:G32)))))
-          #3# (EXIT #1#)))) 
+                  (LETT #2# (SPADCALL |mfn| |ky| |kx| (QREFELT % 28)))
+                  (GO #3=#:G34)))))
+          #3# (EXIT #2#)))) 
 
 (SDEFUN |GENMOEBF;moebiusMatrix;%M;7| ((|mf| (%)) (% (|Matrix| R)))
         (QVELT (|GENMOEBF;rep| |mf| %) 1)) 
@@ -111,7 +111,7 @@
 (DECLAIM (NOTINLINE |GeneralizedFiniteMoebiusFunction;|)) 
 
 (DEFUN |GeneralizedFiniteMoebiusFunction;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -158,10 +158,10 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) '|Rep|
               (|List| 6) |GENMOEBF;members;%L;3| (|Boolean|) (0 . <=)
               (|Mapping| 11 6 6) (|ListPackage| 6) (6 . |topologicalSort|)
-              (12 . |removeDuplicates|) (17 . |Zero|) (|List| (|List| 7))
+              (12 . |removeDuplicates|) (17 . |0|) (|List| (|List| 7))
               (|Matrix| 7) (21 . |matrix|) (|Union| % '"failed")
               (26 . |inverse|) (|Mapping| 7 6 6)
-              |GENMOEBF;generalizedMoebiusFunction;LM%;4| (31 . |One|)
+              |GENMOEBF;generalizedMoebiusFunction;LM%;4| (31 . |1|)
               (|Integer|) (35 . |position|) (41 . |elt|)
               |GENMOEBF;apply;%2PR;6| |GENMOEBF;moebiusMatrix;%M;7| (|String|)
               (|OutputForm|) (48 . |message|))

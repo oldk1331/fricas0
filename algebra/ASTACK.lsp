@@ -9,7 +9,7 @@
 
 (SDEFUN |ASTACK;coerce;%Of;4| ((|d| (%)) (% (|OutputForm|)))
         (SPROG
-         ((#1=#:G13 NIL) (|i| NIL) (#2=#:G12 NIL) (|n| (|NonNegativeInteger|)))
+         ((|n| (|NonNegativeInteger|)) (#1=#:G12 NIL) (|i| NIL) (#2=#:G13 NIL))
          (SEQ
           (COND ((SPADCALL |d| (QREFELT % 16)) (SPADCALL NIL (QREFELT % 19)))
                 ('T
@@ -17,20 +17,20 @@
                       (EXIT
                        (SPADCALL
                         (PROGN
-                         (LETT #2# NIL)
-                         (SEQ (LETT |i| 1) (LETT #1# |n|) G190
-                              (COND ((|greater_SI| |i| #1#) (GO G191)))
+                         (LETT #1# NIL)
+                         (SEQ (LETT |i| 1) (LETT #2# |n|) G190
+                              (COND ((|greater_SI| |i| #2#) (GO G191)))
                               (SEQ
                                (EXIT
-                                (LETT #2#
+                                (LETT #1#
                                       (CONS
                                        (SPADCALL
                                         (SPADCALL |d| (- |n| |i|)
                                                   (QREFELT % 21))
                                         (QREFELT % 22))
-                                       #2#))))
+                                       #1#))))
                               (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                              (EXIT (NREVERSE #2#))))
+                              (EXIT (NREVERSE #1#))))
                         (QREFELT % 24))))))))) 
 
 (SDEFUN |ASTACK;empty?;%B;5| ((|s| (%)) (% (|Boolean|)))
@@ -51,7 +51,7 @@
         (SEQ (SPADCALL |s| |e| (QREFELT % 35)) (EXIT |e|))) 
 
 (SDEFUN |ASTACK;pop!;%S;11| ((|s| (%)) (% (S)))
-        (SPROG ((|r| (S)) (|m| (|Integer|)))
+        (SPROG ((|m| (|Integer|)) (|r| (S)))
                (SEQ
                 (COND ((SPADCALL |s| (QREFELT % 16)) (|error| "empty stack")))
                 (LETT |m| (SPADCALL |s| (QREFELT % 36)))
@@ -84,8 +84,8 @@
 
 (DEFUN |ArrayStack;| (|#1|)
   (SPROG
-   ((#1=#:G44 NIL) (|pv$| NIL) (#2=#:G41 NIL) (#3=#:G42 NIL) (#4=#:G43 NIL)
-    (% NIL) (|dv$| NIL) (DV$1 NIL))
+   ((DV$1 NIL) (|dv$| NIL) (% NIL) (#1=#:G44 NIL) (#2=#:G43 NIL) (#3=#:G42 NIL)
+    (|pv$| NIL) (#4=#:G45 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT |dv$| (LIST '|ArrayStack| DV$1))
@@ -95,7 +95,7 @@
               (LETT |pv$|
                     (|buildPredVector| 0 0
                                        (LIST
-                                        (LETT #4#
+                                        (LETT #1#
                                               (|HasCategory| |#1|
                                                              '(|SetCategory|)))
                                         (AND
@@ -103,38 +103,38 @@
                                                         (LIST '|Evalable|
                                                               (|devaluate|
                                                                |#1|)))
-                                         #4#)
+                                         #1#)
                                         (|HasCategory| |#1|
                                                        '(|ConvertibleTo|
                                                          (|InputForm|)))
                                         (|HasCategory| |#1| '(|Hashable|))
                                         (|HasCategory| |#1| '(|OrderedSet|))
-                                        (LETT #3#
+                                        (LETT #2#
                                               (|HasCategory| |#1|
                                                              '(|CoercibleTo|
                                                                (|OutputForm|))))
-                                        (OR #3#
+                                        (OR #2#
                                             (AND
                                              (|HasCategory| |#1|
                                                             (LIST '|Evalable|
                                                                   (|devaluate|
                                                                    |#1|)))
-                                             #4#))
-                                        (LETT #2#
+                                             #1#))
+                                        (LETT #3#
                                               (|HasCategory| |#1|
                                                              '(|BasicType|)))
-                                        (OR #2#
+                                        (OR #3#
                                             (|HasCategory| |#1| '(|Hashable|))
-                                            #4#)))))
+                                            #1#)))))
     (|haddProp| |$ConstructorCache| '|ArrayStack| (LIST DV$1) (CONS 1 %))
     (|stuffDomainSlots| %)
     (QSETREFV % 6 |#1|)
     (AND (|HasCategory| % '(|shallowlyMutable|)) (|augmentPredVector| % 512))
-    (AND (LETT #1# (|HasCategory| % '(|finiteAggregate|)))
+    (AND (LETT #4# (|HasCategory| % '(|finiteAggregate|)))
          (|augmentPredVector| % 1024))
-    (AND (|HasCategory| |#1| '(|OrderedSet|)) #1# (|augmentPredVector| % 2048))
-    (AND #2# #1# (|augmentPredVector| % 4096))
-    (AND (OR (AND #2# #1#) (|HasCategory| |#1| '(|Hashable|)) #4#)
+    (AND (|HasCategory| |#1| '(|OrderedSet|)) #4# (|augmentPredVector| % 2048))
+    (AND #3# #4# (|augmentPredVector| % 4096))
+    (AND (OR (AND #3# #4#) (|HasCategory| |#1| '(|Hashable|)) #1#)
          (|augmentPredVector| % 8192))
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 7 (|IndexedFlexibleArray| |#1| 0))
@@ -144,9 +144,9 @@
                 (CONS (|dispatchFunction| |ASTACK;hashUpdate!;Hs%Hs;18|) %))))
     %))) 
 
-(DEFUN |ArrayStack| (#1=#:G45)
+(DEFUN |ArrayStack| (#1=#:G46)
   (SPROG NIL
-         (PROG (#2=#:G46)
+         (PROG (#2=#:G47)
            (RETURN
             (COND
              ((LETT #2#

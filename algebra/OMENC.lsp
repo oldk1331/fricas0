@@ -1,5 +1,5 @@
 
-(PUT '|OMENC;=;2%B;1| '|SPADreplace| '|eql_SI|) 
+(MAKEPROP '|OMENC;=;2%B;1| '|SPADreplace| '|eql_SI|) 
 
 (SDEFUN |OMENC;=;2%B;1| ((|u| (%)) (|v| (%)) (% (|Boolean|)))
         (|eql_SI| |u| |v|)) 
@@ -12,19 +12,19 @@
          ((SPADCALL |u| 3 (QREFELT % 8)) (SPADCALL "SGML" (QREFELT % 11)))
          ('T (|error| "Bogus OpenMath Encoding Type")))) 
 
-(PUT '|OMENC;OMencodingUnknown;%;3| '|SPADreplace| '(XLAM NIL 0)) 
+(MAKEPROP '|OMENC;OMencodingUnknown;%;3| '|SPADreplace| '(XLAM NIL 0)) 
 
 (SDEFUN |OMENC;OMencodingUnknown;%;3| ((% (%))) 0) 
 
-(PUT '|OMENC;OMencodingBinary;%;4| '|SPADreplace| '(XLAM NIL 1)) 
+(MAKEPROP '|OMENC;OMencodingBinary;%;4| '|SPADreplace| '(XLAM NIL 1)) 
 
 (SDEFUN |OMENC;OMencodingBinary;%;4| ((% (%))) 1) 
 
-(PUT '|OMENC;OMencodingXML;%;5| '|SPADreplace| '(XLAM NIL 2)) 
+(MAKEPROP '|OMENC;OMencodingXML;%;5| '|SPADreplace| '(XLAM NIL 2)) 
 
 (SDEFUN |OMENC;OMencodingXML;%;5| ((% (%))) 2) 
 
-(PUT '|OMENC;OMencodingSGML;%;6| '|SPADreplace| '(XLAM NIL 3)) 
+(MAKEPROP '|OMENC;OMencodingSGML;%;6| '|SPADreplace| '(XLAM NIL 3)) 
 
 (SDEFUN |OMENC;OMencodingSGML;%;6| ((% (%))) 3) 
 

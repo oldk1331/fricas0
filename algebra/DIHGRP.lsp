@@ -1,9 +1,9 @@
 
-(PUT '|DIHGRP;rep| '|SPADreplace| '(XLAM (|x|) |x|)) 
+(MAKEPROP '|DIHGRP;rep| '|SPADreplace| '(XLAM (|x|) |x|)) 
 
 (SDEFUN |DIHGRP;rep| ((|x| (%)) (% (|Rep|))) |x|) 
 
-(PUT '|DIHGRP;per| '|SPADreplace| '(XLAM (|r|) |r|)) 
+(MAKEPROP '|DIHGRP;per| '|SPADreplace| '(XLAM (|r|) |r|)) 
 
 (SDEFUN |DIHGRP;per| ((|r| (|Rep|)) (% (%))) |r|) 
 
@@ -19,7 +19,7 @@
 (SDEFUN |DIHGRP;exponentb;%I;6| ((|x| (%)) (% (|Integer|)))
         (SPADCALL (SPADCALL |x| (QREFELT % 13)) (QREFELT % 17))) 
 
-(SDEFUN |DIHGRP;One;%;7| ((% (%)))
+(SDEFUN |DIHGRP;1;%;7| ((% (%)))
         (|DIHGRP;per| (CONS (|spadConstant| % 19) (|spadConstant| % 20)) %)) 
 
 (SDEFUN |DIHGRP;one?;%B;8| ((|x| (%)) (% (|Boolean|)))
@@ -87,14 +87,14 @@
          ('T |x|))) 
 
 (SDEFUN |DIHGRP;order;%I;13| ((|x| (%)) (% (|Integer|)))
-        (COND ((SPADCALL |x| (QREFELT % 25)) 0)
+        (COND ((SPADCALL |x| (QREFELT % 25)) 1)
               ((SPADCALL (SPADCALL |x| (QREFELT % 13)) (QREFELT % 45)) 2)
               ('T
-               (QUOTIENT2 (QREFELT % 6)
-                          (GCD
-                           (SPADCALL (SPADCALL |x| (QREFELT % 11))
-                                     (QREFELT % 15))
-                           (QREFELT % 6)))))) 
+               (|quotient_INT| (QREFELT % 6)
+                               (GCD
+                                (SPADCALL (SPADCALL |x| (QREFELT % 11))
+                                          (QREFELT % 15))
+                                (QREFELT % 6)))))) 
 
 (SDEFUN |DIHGRP;=;2%B;14| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
         (COND
@@ -148,46 +148,46 @@
 
 (SDEFUN |DIHGRP;enumerate;L;19| ((% (|List| %)))
         (SPROG
-         ((#1=#:G69 NIL) (|k| NIL) (#2=#:G68 NIL) (#3=#:G67 NIL)
-          (#4=#:G66 NIL))
+         ((#1=#:G65 NIL) (#2=#:G66 NIL) (#3=#:G67 NIL) (|k| NIL)
+          (#4=#:G68 NIL))
          (SEQ
           (SPADCALL
            (PROGN
-            (LETT #4# NIL)
-            (SEQ (LETT |k| 0) (LETT #3# (- (QREFELT % 6) 1)) G190
-                 (COND ((|greater_SI| |k| #3#) (GO G191)))
+            (LETT #1# NIL)
+            (SEQ (LETT |k| 0) (LETT #2# (- (QREFELT % 6) 1)) G190
+                 (COND ((|greater_SI| |k| #2#) (GO G191)))
                  (SEQ
                   (EXIT
-                   (LETT #4#
+                   (LETT #1#
                          (CONS
                           (|DIHGRP;per|
                            (CONS (SPADCALL |k| (QREFELT % 53))
                                  (|spadConstant| % 20))
                            %)
-                          #4#))))
+                          #1#))))
                  (LETT |k| (|inc_SI| |k|)) (GO G190) G191
-                 (EXIT (NREVERSE #4#))))
+                 (EXIT (NREVERSE #1#))))
            (PROGN
-            (LETT #2# NIL)
-            (SEQ (LETT |k| 0) (LETT #1# (- (QREFELT % 6) 1)) G190
-                 (COND ((|greater_SI| |k| #1#) (GO G191)))
+            (LETT #3# NIL)
+            (SEQ (LETT |k| 0) (LETT #4# (- (QREFELT % 6) 1)) G190
+                 (COND ((|greater_SI| |k| #4#) (GO G191)))
                  (SEQ
                   (EXIT
-                   (LETT #2#
+                   (LETT #3#
                          (CONS
                           (|DIHGRP;per|
                            (CONS (SPADCALL |k| (QREFELT % 53))
                                  (|spadConstant| % 36))
                            %)
-                          #2#))))
+                          #3#))))
                  (LETT |k| (|inc_SI| |k|)) (GO G190) G191
-                 (EXIT (NREVERSE #2#))))
+                 (EXIT (NREVERSE #3#))))
            (QREFELT % 58))))) 
 
 (DECLAIM (NOTINLINE |DihedralGroup;|)) 
 
 (DEFUN |DihedralGroup;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT DV$2 |#2|)
@@ -208,9 +208,9 @@
                               (|:| |expb| (|IntegerMod| 2))))
           %))) 
 
-(DEFUN |DihedralGroup| (&REST #1=#:G73)
+(DEFUN |DihedralGroup| (&REST #1=#:G72)
   (SPROG NIL
-         (PROG (#2=#:G74)
+         (PROG (#2=#:G73)
            (RETURN
             (COND
              ((LETT #2#
@@ -230,15 +230,15 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) '|Rep| (|IntegerMod| (NRTEVAL (QREFELT % 6)))
-              |DIHGRP;expa;%Im;3| (|IntegerMod| '2) |DIHGRP;expb;%Im;4|
-              (|Integer|) (0 . |convert|) |DIHGRP;exponenta;%I;5|
-              (5 . |convert|) |DIHGRP;exponentb;%I;6| (10 . |Zero|)
-              (14 . |Zero|)
-              (CONS IDENTITY (FUNCALL (|dispatchFunction| |DIHGRP;One;%;7|) %))
+              |DIHGRP;expa;%Im;3| (|IntegerMod| (NRTEVAL 2))
+              |DIHGRP;expb;%Im;4| (|Integer|) (0 . |convert|)
+              |DIHGRP;exponenta;%I;5| (5 . |convert|) |DIHGRP;exponentb;%I;6|
+              (10 . |0|) (14 . |0|)
+              (CONS IDENTITY (FUNCALL (|dispatchFunction| |DIHGRP;1;%;7|) %))
               (|Boolean|) (18 . |zero?|) (23 . |zero?|) |DIHGRP;one?;%B;8|
               (|OutputForm|) (28 . |coerce|) (|Symbol|) (33 . |coerce|)
               (38 . |one?|) (43 . |coerce|) (48 . ^) (54 . *)
-              |DIHGRP;coerce;%Of;9| (60 . |One|) (64 . |One|) (|List| %)
+              |DIHGRP;coerce;%Of;9| (60 . |1|) (64 . |1|) (|List| %)
               |DIHGRP;generators;L;10| (68 . +) (74 . -) (80 . +)
               |DIHGRP;*;3%;11| (86 . -) |DIHGRP;inv;2%;12| (91 . |one?|)
               |DIHGRP;order;%I;13| (96 . =) (102 . =) |DIHGRP;=;2%B;14|
@@ -254,19 +254,20 @@
               202 |index| 207 |hashUpdate!| 212 |hash| 218 |generators| 223
               |exponentb| 227 |exponenta| 232 |expb| 237 |expa| 242 |enumerate|
               247 |convert| 251 |conjugate| 256 |commutator| 262 |coerce| 268 ^
-              273 |One| 291 = 295 / 301 * 307)
+              273 = 291 |1| 297 / 301 * 307)
            'NIL
-           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
+           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|FiniteGroup&| |Group&| NIL |MagmaWithUnit&| |Finite&| NIL
-                     |Magma&| NIL |SetCategory&| |Hashable&| NIL |BasicType&|
-                     NIL NIL NIL NIL)
+                  '#(|FiniteGroup&| |Group&| |Finite&| NIL |MagmaWithUnit&| NIL
+                     NIL |Magma&| NIL |SetCategory&| |Hashable&| NIL
+                     |BasicType&| NIL NIL NIL NIL)
                   (CONS
-                   '#((|FiniteGroup|) (|Group|) (|Monoid|) (|MagmaWithUnit|)
-                      (|Finite|) (|SemiGroup|) (|Magma|) (|Comparable|)
-                      (|SetCategory|) (|Hashable|) (|CoercibleTo| 26)
-                      (|BasicType|) (|TwoSidedRecip|) (|unitsKnown|)
-                      (|ConvertibleTo| 64) (|FinitelyGenerated|))
+                   '#((|FiniteGroup|) (|Group|) (|Finite|) (|Monoid|)
+                      (|MagmaWithUnit|) (|Comparable|) (|SemiGroup|) (|Magma|)
+                      (|ComparableRepresentation|) (|SetCategory|) (|Hashable|)
+                      (|CoercibleTo| 26) (|BasicType|) (|TwoSidedRecip|)
+                      (|unitsKnown|) (|ConvertibleTo| 64)
+                      (|FinitelyGenerated|))
                    (|makeByteWordVec2| 64
                                        '(1 10 14 0 15 1 12 14 0 17 0 10 0 19 0
                                          12 0 20 1 10 22 0 23 1 12 22 0 24 1 14
@@ -285,7 +286,7 @@
                                          38 1 0 14 0 18 1 0 14 0 16 1 0 12 0 13
                                          1 0 10 0 11 0 0 37 59 1 0 64 0 1 2 0 0
                                          0 0 1 2 0 0 0 0 1 1 0 26 0 34 2 0 0 0
-                                         54 1 2 0 0 0 51 1 2 0 0 0 14 1 0 0 0
-                                         21 2 0 22 0 0 49 2 0 0 0 0 1 2 0 0 0 0
+                                         54 1 2 0 0 0 51 1 2 0 0 0 14 1 2 0 22
+                                         0 0 49 0 0 0 21 2 0 0 0 0 1 2 0 0 0 0
                                          42)))))
            '|lookupComplete|)) 

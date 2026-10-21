@@ -3,13 +3,13 @@
         ((|l| (|List| (|OutputFormatterCategory|))) (% (|Void|)))
         (SPADCALL (QREFELT % 9) |l| (QREFELT % 10))) 
 
-(PUT '|FMTOUT;convert;OfI%;2| '|SPADreplace| 'CONS) 
+(MAKEPROP '|FMTOUT;convert;OfI%;2| '|SPADreplace| 'CONS) 
 
 (SDEFUN |FMTOUT;convert;OfI%;2|
         ((|e| (|OutputForm|)) (|n| (|Integer|)) (% (%))) (CONS |e| |n|)) 
 
 (SDEFUN |FMTOUT;display;%V;3| ((|x| (%)) (% (|Void|)))
-        (SPROG ((#1=#:G6 NIL) (F NIL))
+        (SPROG ((F NIL) (#1=#:G6 NIL))
                (SEQ (LETT F NIL)
                     (LETT #1# (SPADCALL (QREFELT % 9) (QREFELT % 16))) G190
                     (COND

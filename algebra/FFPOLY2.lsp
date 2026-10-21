@@ -2,20 +2,20 @@
 (SDEFUN |FFPOLY2;rootOfIrreduciblePoly;SupF;1|
         ((|pf| (|SparseUnivariatePolynomial| GF)) (% (F)))
         (SPROG
-         ((|stillToFactor| #1=(|SparseUnivariatePolynomial| F)) (|root| (F))
-          (|degSTF| #2=(|NonNegativeInteger|)) (|degh| #2#)
-          (|h| (|SparseUnivariatePolynomial| F)) (#3=#:G29 NIL) (|j| NIL)
-          (|trModp| (|SparseUnivariatePolynomial| F)) (|beta| (F))
-          (#4=#:G28 NIL) (|i| NIL) (|basispointer| (|Integer|))
-          (|basis| (|Vector| F))
+         ((|sizeGF| (|NonNegativeInteger|)) (#1=#:G5 NIL)
+          (|deg| (|PositiveInteger|)) (|p| #2=(|SparseUnivariatePolynomial| F))
           (|qexp| (|PrimitiveArray| (|SparseUnivariatePolynomial| GF)))
-          (|p| #1#) (|deg| (|PositiveInteger|)) (#5=#:G5 NIL)
-          (|sizeGF| (|NonNegativeInteger|)))
+          (|basis| (|Vector| F)) (|basispointer| (|Integer|)) (|i| NIL)
+          (#3=#:G29 NIL) (|beta| (F))
+          (|trModp| (|SparseUnivariatePolynomial| F)) (|j| NIL) (#4=#:G30 NIL)
+          (|h| (|SparseUnivariatePolynomial| F))
+          (|degh| #5=(|NonNegativeInteger|)) (|degSTF| #5#) (|root| (F))
+          (|stillToFactor| #2#))
          (SEQ (LETT |sizeGF| (SPADCALL (QREFELT % 9)))
               (LETT |deg|
-                    (PROG1 (LETT #5# (SPADCALL |pf| (QREFELT % 11)))
-                      (|check_subtype2| (> #5# 0) '(|PositiveInteger|)
-                                        '(|NonNegativeInteger|) #5#)))
+                    (PROG1 (LETT #1# (SPADCALL |pf| (QREFELT % 11)))
+                      (|check_subtype2| (> #1# 0) '(|PositiveInteger|)
+                                        '(|NonNegativeInteger|) #1#)))
               (EXIT
                (COND ((EQL |deg| 0) (|error| "no roots"))
                      ((EQL |deg| 1)
@@ -53,8 +53,8 @@
                                         (SPADCALL (ELT % 17) (QAREF1 |qexp| 0)
                                                   (QREFELT % 22))
                                         |beta| (QREFELT % 35)))
-                                 (SEQ (LETT |i| 1) (LETT #4# (- |deg| 1)) G190
-                                      (COND ((|greater_SI| |i| #4#) (GO G191)))
+                                 (SEQ (LETT |i| 1) (LETT #3# (- |deg| 1)) G190
+                                      (COND ((|greater_SI| |i| #3#) (GO G191)))
                                       (SEQ
                                        (LETT |beta|
                                              (SPADCALL |beta| (QREFELT % 36)))
@@ -76,9 +76,9 @@
                                  (EXIT
                                   (COND
                                    ((> (SPADCALL |trModp| (QREFELT % 39)) 0)
-                                    (SEQ (LETT |j| 1) (LETT #3# |sizeGF|) G190
+                                    (SEQ (LETT |j| 1) (LETT #4# |sizeGF|) G190
                                          (COND
-                                          ((|greater_SI| |j| #3#) (GO G191)))
+                                          ((|greater_SI| |j| #4#) (GO G191)))
                                          (SEQ
                                           (LETT |h|
                                                 (SPADCALL |stillToFactor|
@@ -150,7 +150,7 @@
 (DECLAIM (NOTINLINE |FiniteFieldPolynomialPackage2;|)) 
 
 (DEFUN |FiniteFieldPolynomialPackage2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -166,9 +166,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |FiniteFieldPolynomialPackage2| (&REST #1=#:G30)
+(DEFUN |FiniteFieldPolynomialPackage2| (&REST #1=#:G31)
   (SPROG NIL
-         (PROG (#2=#:G31)
+         (PROG (#2=#:G32)
            (RETURN
             (COND
              ((LETT #2#
@@ -191,8 +191,8 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|NonNegativeInteger|) (0 . |size|)
-              (|SparseUnivariatePolynomial| 7) (4 . |degree|) (9 . |Zero|)
-              (13 . |Zero|) (17 . |One|) (21 . |One|) (25 . |coefficient|)
+              (|SparseUnivariatePolynomial| 7) (4 . |degree|) (9 . |0|)
+              (13 . |0|) (17 . |1|) (21 . |1|) (25 . |coefficient|)
               (31 . |coerce|) (36 . -) (|SparseUnivariatePolynomial| 6)
               (|Mapping| 6 7) (|SparseUnivariatePolynomialFunctions2| 7 6)
               (41 . |map|) (|PrimitiveArray| 10)

@@ -1,6 +1,6 @@
 
 (SDEFUN |BTOURN;binaryTournament;L%;1| ((|u| (|List| S)) (% (%)))
-        (SPROG ((#1=#:G8 NIL) (|x| NIL) (|tree| (%)))
+        (SPROG ((|tree| (%)) (|x| NIL) (#1=#:G8 NIL))
                (SEQ
                 (COND ((NULL |u|) (SPADCALL (QREFELT % 8)))
                       ('T
@@ -36,8 +36,8 @@
 
 (DEFUN |BinaryTournament;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G17 NIL) (#2=#:G18 NIL) (#3=#:G19 NIL) (% NIL)
-    (|dv$| NIL) (DV$1 NIL))
+   ((DV$1 NIL) (|dv$| NIL) (% NIL) (#1=#:G19 NIL) (#2=#:G18 NIL) (#3=#:G17 NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT |dv$| (LIST '|BinaryTournament| DV$1))
@@ -47,7 +47,7 @@
               (LETT |pv$|
                     (|buildPredVector| 0 0
                                        (LIST
-                                        (LETT #3#
+                                        (LETT #1#
                                               (|HasCategory| |#1|
                                                              '(|SetCategory|)))
                                         (AND
@@ -55,7 +55,7 @@
                                                         (LIST '|Evalable|
                                                               (|devaluate|
                                                                |#1|)))
-                                         #3#)
+                                         #1#)
                                         (|HasCategory| |#1| '(|Hashable|))
                                         (|HasCategory| |#1| '(|OrderedSet|))
                                         (LETT #2#
@@ -63,18 +63,18 @@
                                                              '(|BasicType|)))
                                         (OR #2#
                                             (|HasCategory| |#1| '(|Hashable|))
-                                            #3#)
-                                        (LETT #1#
+                                            #1#)
+                                        (LETT #3#
                                               (|HasCategory| |#1|
                                                              '(|CoercibleTo|
                                                                (|OutputForm|))))
-                                        (OR #1#
+                                        (OR #3#
                                             (AND
                                              (|HasCategory| |#1|
                                                             (LIST '|Evalable|
                                                                   (|devaluate|
                                                                    |#1|)))
-                                             #3#))))))
+                                             #1#))))))
     (|haddProp| |$ConstructorCache| '|BinaryTournament| (LIST DV$1) (CONS 1 %))
     (|stuffDomainSlots| %)
     (QSETREFV % 6 |#1|)
@@ -86,7 +86,7 @@
     (AND (|HasCategory| % '(|shallowlyMutable|)) (|augmentPredVector| % 2048))
     (AND
      (OR (AND #2# (|HasCategory| % '(|finiteAggregate|)))
-         (|HasCategory| |#1| '(|Hashable|)) #3#)
+         (|HasCategory| |#1| '(|Hashable|)) #1#)
      (|augmentPredVector| % 4096))
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 7 (|BinaryTree| |#1|))

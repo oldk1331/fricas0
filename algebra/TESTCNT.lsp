@@ -296,19 +296,19 @@
 
 (SDEFUN |TESTCNT;statistics;V;15| ((% (|Void|)))
         (SPROG
-         ((#1=#:G139 NIL) (#2=#:G135 NIL) (#3=#:G131 NIL) (#4=#:G127 NIL)
-          (#5=#:G123 NIL) (|stotalTests| #6=(|String|)) (|sfailedTests| #6#)
-          (|stotalCases| #6#) (|sfailedCases| #6#)
-          (|tsfailedTests| (|Integer|)) (|tstotalTests| (|Integer|))
-          (|failedCases| (|Integer|)) (|totalCases| (|Integer|))
-          (#7=#:G155 NIL) (|tstcase| NIL) (#8=#:G154 NIL) (|tstsuite| NIL)
-          (#9=#:G153 NIL) (|f| NIL) (#10=#:G100 NIL) (#11=#:G152 NIL)
-          (#12=#:G151 NIL) (|outstring| (|String|)) (#13=#:G149 NIL) (|o| NIL)
-          (#14=#:G150 NIL) (|i| NIL) (#15=#:G148 NIL) (#16=#:G77 NIL)
-          (#17=#:G147 NIL) (|xfpassedTests| (|Integer|))
-          (|xfailedTests| (|Integer|)) (|failedTests| (|Integer|))
-          (|totalTests| (|Integer|)) (|xfpassedCases| (|Integer|))
-          (#18=#:G146 NIL) (#19=#:G145 NIL) (#20=#:G144 NIL) (|w| NIL))
+         ((|w| NIL) (#1=#:G152 NIL) (#2=#:G153 NIL) (#3=#:G154 NIL)
+          (|xfpassedCases| (|Integer|)) (|totalTests| (|Integer|))
+          (|failedTests| (|Integer|)) (|xfailedTests| (|Integer|))
+          (|xfpassedTests| (|Integer|)) (#4=#:G155 NIL) (#5=#:G85 NIL)
+          (#6=#:G156 NIL) (|i| NIL) (#7=#:G158 NIL) (|o| NIL) (#8=#:G157 NIL)
+          (|outstring| (|String|)) (#9=#:G159 NIL) (#10=#:G160 NIL)
+          (#11=#:G108 NIL) (|f| NIL) (#12=#:G161 NIL) (|tstsuite| NIL)
+          (#13=#:G162 NIL) (|tstcase| NIL) (#14=#:G163 NIL)
+          (|totalCases| (|Integer|)) (|failedCases| (|Integer|))
+          (|tstotalTests| (|Integer|)) (|tsfailedTests| (|Integer|))
+          (|sfailedCases| #15=(|String|)) (|stotalCases| #15#)
+          (|sfailedTests| #15#) (|stotalTests| #15#) (#16=#:G131 NIL)
+          (#17=#:G135 NIL) (#18=#:G139 NIL) (#19=#:G143 NIL) (#20=#:G147 NIL))
          (SEQ
           (SPADCALL (|make_string_code| (QREFELT % 6) (|STR_to_CHAR| "="))
                     (QREFELT % 24))
@@ -334,31 +334,31 @@
                        (QREFELT % 24))
              (SPADCALL "WARNINGS:" (QREFELT % 24))
              (EXIT
-              (SEQ (LETT |w| NIL) (LETT #20# (REVERSE (QREFELT % 13))) G190
+              (SEQ (LETT |w| NIL) (LETT #1# (REVERSE (QREFELT % 13))) G190
                    (COND
-                    ((OR (ATOM #20#) (PROGN (LETT |w| (CAR #20#)) NIL))
+                    ((OR (ATOM #1#) (PROGN (LETT |w| (CAR #1#)) NIL))
                      (GO G191)))
                    (SEQ (EXIT (SPADCALL |w| (QREFELT % 51))))
-                   (LETT #20# (CDR #20#)) (GO G190) G191 (EXIT NIL))))))
+                   (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))))))
           (SPADCALL "" (QREFELT % 52)) (LETT |totalTests| 0)
           (LETT |failedTests| 0) (LETT |xfailedTests| 0)
           (LETT |xfpassedTests| 0)
           (SEQ (LETT |tstsuite| NIL)
-               (LETT #19# (REVERSE (SPADCALL (QREFELT % 12) (QREFELT % 54))))
+               (LETT #2# (REVERSE (SPADCALL (QREFELT % 12) (QREFELT % 54))))
                G190
                (COND
-                ((OR (ATOM #19#) (PROGN (LETT |tstsuite| (CAR #19#)) NIL))
+                ((OR (ATOM #2#) (PROGN (LETT |tstsuite| (CAR #2#)) NIL))
                  (GO G191)))
                (SEQ (LETT |failedCases| 0) (LETT |xfpassedCases| 0)
                     (LETT |totalCases| 0)
                     (SEQ (LETT |tstcase| NIL)
-                         (LETT #18#
+                         (LETT #3#
                                (REVERSE
                                 (SPADCALL (QCDR |tstsuite|) (QREFELT % 56))))
                          G190
                          (COND
-                          ((OR (ATOM #18#)
-                               (PROGN (LETT |tstcase| (CAR #18#)) NIL))
+                          ((OR (ATOM #3#)
+                               (PROGN (LETT |tstcase| (CAR #3#)) NIL))
                            (GO G191)))
                          (SEQ (LETT |totalCases| (+ |totalCases| 1))
                               (COND
@@ -380,7 +380,7 @@
                                (LETT |xfpassedTests|
                                      (+ |xfpassedTests|
                                         (QVELT (QCDR |tstcase|) 3)))))
-                         (LETT #18# (CDR #18#)) (GO G190) G191 (EXIT NIL))
+                         (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
                     (SPADCALL
                      (|make_string_code| (QREFELT % 6) (|STR_to_CHAR| "="))
                      (QREFELT % 24))
@@ -404,14 +404,14 @@
                            (SPADCALL "  failed testcases were:" (QREFELT % 24))
                            (EXIT
                             (SEQ (LETT |tstcase| NIL)
-                                 (LETT #17#
+                                 (LETT #4#
                                        (REVERSE
                                         (SPADCALL (QCDR |tstsuite|)
                                                   (QREFELT % 56))))
                                  G190
                                  (COND
-                                  ((OR (ATOM #17#)
-                                       (PROGN (LETT |tstcase| (CAR #17#)) NIL))
+                                  ((OR (ATOM #4#)
+                                       (PROGN (LETT |tstcase| (CAR #4#)) NIL))
                                    (GO G191)))
                                  (SEQ
                                   (EXIT
@@ -422,13 +422,13 @@
                                        (SPADCALL "  "
                                                  (|make_string_code|
                                                   (PROG1
-                                                      (LETT #16#
+                                                      (LETT #5#
                                                             (- (QREFELT % 6)
                                                                2))
                                                     (|check_subtype2|
-                                                     (>= #16# 0)
+                                                     (>= #5# 0)
                                                      '(|NonNegativeInteger|)
-                                                     '(|Integer|) #16#))
+                                                     '(|Integer|) #5#))
                                                   (|STR_to_CHAR| "-"))
                                                  (QREFELT % 22))
                                        (QREFELT % 24))
@@ -462,16 +462,16 @@
                                                        (QREFELT % 24))
                                              (EXIT
                                               (SEQ (LETT |f| NIL)
-                                                   (LETT #15#
+                                                   (LETT #6#
                                                          (REVERSE
                                                           (QVELT
                                                            (QCDR |tstcase|)
                                                            6)))
                                                    G190
                                                    (COND
-                                                    ((OR (ATOM #15#)
+                                                    ((OR (ATOM #6#)
                                                          (PROGN
-                                                          (LETT |f| (CAR #15#))
+                                                          (LETT |f| (CAR #6#))
                                                           NIL))
                                                      (GO G191)))
                                                    (SEQ
@@ -494,23 +494,23 @@
                                                      (QREFELT % 24))
                                                     (EXIT
                                                      (SEQ (LETT |i| 1)
-                                                          (LETT #14#
+                                                          (LETT #7#
                                                                 (LENGTH
                                                                  (QVELT |f|
                                                                         2)))
                                                           (LETT |o| NIL)
-                                                          (LETT #13#
+                                                          (LETT #8#
                                                                 (QVELT |f| 2))
                                                           G190
                                                           (COND
-                                                           ((OR (ATOM #13#)
+                                                           ((OR (ATOM #8#)
                                                                 (PROGN
                                                                  (LETT |o|
                                                                        (CAR
-                                                                        #13#))
+                                                                        #8#))
                                                                  NIL)
                                                                 (|greater_SI|
-                                                                 |i| #14#))
+                                                                 |i| #7#))
                                                             (GO G191)))
                                                           (SEQ
                                                            (LETT |outstring|
@@ -533,15 +533,15 @@
                                                               |o|
                                                               (QREFELT % 57))
                                                              (QREFELT % 51))))
-                                                          (LETT #13#
+                                                          (LETT #8#
                                                                 (PROG1
-                                                                    (CDR #13#)
+                                                                    (CDR #8#)
                                                                   (LETT |i|
                                                                         (|inc_SI|
                                                                          |i|))))
                                                           (GO G190) G191
                                                           (EXIT NIL))))
-                                                   (LETT #15# (CDR #15#))
+                                                   (LETT #6# (CDR #6#))
                                                    (GO G190) G191
                                                    (EXIT NIL))))))
                                       (EXIT
@@ -553,17 +553,16 @@
                                                         (QREFELT % 24))
                                               (EXIT
                                                (SEQ (LETT |f| NIL)
-                                                    (LETT #12#
+                                                    (LETT #9#
                                                           (REVERSE
                                                            (QVELT
                                                             (QCDR |tstcase|)
                                                             4)))
                                                     G190
                                                     (COND
-                                                     ((OR (ATOM #12#)
+                                                     ((OR (ATOM #9#)
                                                           (PROGN
-                                                           (LETT |f|
-                                                                 (CAR #12#))
+                                                           (LETT |f| (CAR #9#))
                                                            NIL))
                                                       (GO G191)))
                                                     (SEQ
@@ -585,10 +584,10 @@
                                                                  (QREFELT %
                                                                           22))
                                                        (QREFELT % 24))))
-                                                    (LETT #12# (CDR #12#))
+                                                    (LETT #9# (CDR #9#))
                                                     (GO G190) G191
                                                     (EXIT NIL))))))))))))
-                                 (LETT #17# (CDR #17#)) (GO G190) G191
+                                 (LETT #4# (CDR #4#)) (GO G190) G191
                                  (EXIT NIL))))))
                     (EXIT
                      (COND
@@ -599,15 +598,15 @@
                              (QREFELT % 24))
                             (EXIT
                              (SEQ (LETT |tstcase| NIL)
-                                  (LETT #11#
+                                  (LETT #10#
                                         (REVERSE
                                          (SPADCALL (QCDR |tstsuite|)
                                                    (QREFELT % 56))))
                                   G190
                                   (COND
-                                   ((OR (ATOM #11#)
+                                   ((OR (ATOM #10#)
                                         (PROGN
-                                         (LETT |tstcase| (CAR #11#))
+                                         (LETT |tstcase| (CAR #10#))
                                          NIL))
                                     (GO G191)))
                                   (SEQ
@@ -619,13 +618,13 @@
                                         (SPADCALL "  "
                                                   (|make_string_code|
                                                    (PROG1
-                                                       (LETT #10#
+                                                       (LETT #11#
                                                              (- (QREFELT % 6)
                                                                 2))
                                                      (|check_subtype2|
-                                                      (>= #10# 0)
+                                                      (>= #11# 0)
                                                       '(|NonNegativeInteger|)
-                                                      '(|Integer|) #10#))
+                                                      '(|Integer|) #11#))
                                                    (|STR_to_CHAR| "-"))
                                                   (QREFELT % 22))
                                         (QREFELT % 24))
@@ -644,17 +643,17 @@
                                                 (QREFELT % 24))
                                                (EXIT
                                                 (SEQ (LETT |f| NIL)
-                                                     (LETT #9#
+                                                     (LETT #12#
                                                            (REVERSE
                                                             (QVELT
                                                              (QCDR |tstcase|)
                                                              5)))
                                                      G190
                                                      (COND
-                                                      ((OR (ATOM #9#)
+                                                      ((OR (ATOM #12#)
                                                            (PROGN
                                                             (LETT |f|
-                                                                  (CAR #9#))
+                                                                  (CAR #12#))
                                                             NIL))
                                                        (GO G191)))
                                                      (SEQ
@@ -678,12 +677,12 @@
                                                                   (QREFELT %
                                                                            22))
                                                         (QREFELT % 24))))
-                                                     (LETT #9# (CDR #9#))
+                                                     (LETT #12# (CDR #12#))
                                                      (GO G190) G191
                                                      (EXIT NIL))))))))))))
-                                  (LETT #11# (CDR #11#)) (GO G190) G191
+                                  (LETT #10# (CDR #10#)) (GO G190) G191
                                   (EXIT NIL))))))))
-               (LETT #19# (CDR #19#)) (GO G190) G191 (EXIT NIL))
+               (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
           (SPADCALL "" (QREFELT % 52))
           (SPADCALL (|make_string_code| (QREFELT % 6) (|STR_to_CHAR| "="))
                     (QREFELT % 24))
@@ -691,21 +690,21 @@
            "testsuite | testcases: failed (total) | tests: failed (total)"
            (QREFELT % 24))
           (SEQ (LETT |tstsuite| NIL)
-               (LETT #8# (REVERSE (SPADCALL (QREFELT % 12) (QREFELT % 54))))
+               (LETT #13# (REVERSE (SPADCALL (QREFELT % 12) (QREFELT % 54))))
                G190
                (COND
-                ((OR (ATOM #8#) (PROGN (LETT |tstsuite| (CAR #8#)) NIL))
+                ((OR (ATOM #13#) (PROGN (LETT |tstsuite| (CAR #13#)) NIL))
                  (GO G191)))
                (SEQ (LETT |failedCases| 0) (LETT |totalCases| 0)
                     (LETT |tsfailedTests| 0) (LETT |tstotalTests| 0)
                     (SEQ (LETT |tstcase| NIL)
-                         (LETT #7#
+                         (LETT #14#
                                (REVERSE
                                 (SPADCALL (QCDR |tstsuite|) (QREFELT % 56))))
                          G190
                          (COND
-                          ((OR (ATOM #7#)
-                               (PROGN (LETT |tstcase| (CAR #7#)) NIL))
+                          ((OR (ATOM #14#)
+                               (PROGN (LETT |tstcase| (CAR #14#)) NIL))
                            (GO G191)))
                          (SEQ (LETT |totalCases| (+ |totalCases| 1))
                               (COND
@@ -718,7 +717,7 @@
                                (LETT |tsfailedTests|
                                      (+ |tsfailedTests|
                                         (QVELT (QCDR |tstcase|) 1)))))
-                         (LETT #7# (CDR #7#)) (GO G190) G191 (EXIT NIL))
+                         (LETT #14# (CDR #14#)) (GO G190) G191 (EXIT NIL))
                     (LETT |sfailedCases| (STRINGIMAGE |failedCases|))
                     (LETT |stotalCases| (STRINGIMAGE |totalCases|))
                     (LETT |sfailedTests| (STRINGIMAGE |tsfailedTests|))
@@ -729,38 +728,38 @@
                                 (SPADCALL
                                  (|make_string_code|
                                   (PROG1
-                                      (LETT #5#
+                                      (LETT #16#
                                             (MAX
                                              (- 24 (QCSIZE (QCAR |tstsuite|)))
                                              0))
-                                    (|check_subtype2| (>= #5# 0)
+                                    (|check_subtype2| (>= #16# 0)
                                                       '(|NonNegativeInteger|)
-                                                      '(|Integer|) #5#))
+                                                      '(|Integer|) #16#))
                                   (|STR_to_CHAR| " "))
                                  (SPADCALL
                                   (|make_string_code|
                                    (PROG1
-                                       (LETT #4#
+                                       (LETT #17#
                                              (MAX (- 5 (QCSIZE |sfailedCases|))
                                                   0))
-                                     (|check_subtype2| (>= #4# 0)
+                                     (|check_subtype2| (>= #17# 0)
                                                        '(|NonNegativeInteger|)
-                                                       '(|Integer|) #4#))
+                                                       '(|Integer|) #17#))
                                    (|STR_to_CHAR| " "))
                                   (SPADCALL |sfailedCases|
                                             (SPADCALL
                                              (|make_string_code|
                                               (PROG1
-                                                  (LETT #3#
+                                                  (LETT #18#
                                                         (MAX
                                                          (- 6
                                                             (QCSIZE
                                                              |stotalCases|))
                                                          0))
-                                                (|check_subtype2| (>= #3# 0)
+                                                (|check_subtype2| (>= #18# 0)
                                                                   '(|NonNegativeInteger|)
                                                                   '(|Integer|)
-                                                                  #3#))
+                                                                  #18#))
                                               (|STR_to_CHAR| " "))
                                              (SPADCALL "("
                                                        (SPADCALL |stotalCases|
@@ -769,7 +768,7 @@
                                                                             (|make_string_code|
                                                                              (PROG1
                                                                                  (LETT
-                                                                                  #2#
+                                                                                  #19#
                                                                                   (MAX
                                                                                    (-
                                                                                     16
@@ -778,11 +777,11 @@
                                                                                    0))
                                                                                (|check_subtype2|
                                                                                 (>=
-                                                                                 #2#
+                                                                                 #19#
                                                                                  0)
                                                                                 '(|NonNegativeInteger|)
                                                                                 '(|Integer|)
-                                                                                #2#))
+                                                                                #19#))
                                                                              (|STR_to_CHAR|
                                                                               " "))
                                                                             (SPADCALL
@@ -791,7 +790,7 @@
                                                                               (|make_string_code|
                                                                                (PROG1
                                                                                    (LETT
-                                                                                    #1#
+                                                                                    #20#
                                                                                     (MAX
                                                                                      (-
                                                                                       6
@@ -800,11 +799,11 @@
                                                                                      0))
                                                                                  (|check_subtype2|
                                                                                   (>=
-                                                                                   #1#
+                                                                                   #20#
                                                                                    0)
                                                                                   '(|NonNegativeInteger|)
                                                                                   '(|Integer|)
-                                                                                  #1#))
+                                                                                  #20#))
                                                                                (|STR_to_CHAR|
                                                                                 " "))
                                                                               (SPADCALL
@@ -839,7 +838,7 @@
                                  (QREFELT % 22))
                                 (QREFELT % 22))
                       (QREFELT % 24))))
-               (LETT #8# (CDR #8#)) (GO G190) G191 (EXIT NIL))
+               (LETT #13# (CDR #13#)) (GO G190) G191 (EXIT NIL))
           (SPADCALL (|make_string_code| (QREFELT % 6) (|STR_to_CHAR| "="))
                     (QREFELT % 24))
           (SPADCALL "File summary." (QREFELT % 24))
@@ -882,7 +881,7 @@
 
 (DEFUN |UnittestCount| ()
   (SPROG NIL
-         (PROG (#1=#:G157)
+         (PROG (#1=#:G165)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|UnittestCount|))

@@ -17,7 +17,7 @@
 (DECLAIM (NOTINLINE |InfiniteLambertProduct;|)) 
 
 (DEFUN |InfiniteLambertProduct;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -54,8 +54,8 @@
 
 (MAKEPROP '|InfiniteLambertProduct| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (0 . |One|)
-              (4 . |One|) (|Integer|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (0 . |1|)
+              (4 . |1|) (|Integer|)
               |INFPROD0;generalInfiniteProduct;UTS2IUTS;4|
               |INFPROD0;infiniteProduct;2UTS;1|
               |INFPROD0;evenInfiniteProduct;2UTS;2|

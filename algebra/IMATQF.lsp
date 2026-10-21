@@ -14,30 +14,30 @@
                        ('T (CONS 0 (QCDR |inv|)))))))) 
 
 (SDEFUN |IMATQF;nullSpace;ML;4| ((|m| (M)) (% (|List| |Col|)))
-        (SPROG ((#1=#:G11 NIL) (|v| NIL) (#2=#:G10 NIL))
+        (SPROG ((#1=#:G14 NIL) (|v| NIL) (#2=#:G15 NIL))
                (SEQ
                 (PROGN
-                 (LETT #2# NIL)
+                 (LETT #1# NIL)
                  (SEQ (LETT |v| NIL)
-                      (LETT #1#
+                      (LETT #2#
                             (SPADCALL (|IMATQF;qfMat| |m| %) (QREFELT % 25)))
                       G190
                       (COND
-                       ((OR (ATOM #1#) (PROGN (LETT |v| (CAR #1#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT |v| (CAR #2#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2# (CONS (SPADCALL |v| (QREFELT % 27)) #2#))))
-                      (LETT #1# (CDR #1#)) (GO G190) G191
-                      (EXIT (NREVERSE #2#))))))) 
+                        (LETT #1# (CONS (SPADCALL |v| (QREFELT % 27)) #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#))))))) 
 
 (DECLAIM (NOTINLINE |InnerMatrixQuotientFieldFunctions;|)) 
 
 (DEFUN |InnerMatrixQuotientFieldFunctions;|
        (|#1| |#2| |#3| |#4| |#5| |#6| |#7| |#8|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$8 NIL) (DV$7 NIL) (DV$6 NIL) (DV$5 NIL)
-    (DV$4 NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (DV$6 NIL)
+    (DV$7 NIL) (DV$8 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -75,9 +75,9 @@
       (QSETREFV % 29 (CONS (|dispatchFunction| |IMATQF;nullSpace;ML;4|) %))))
     %))) 
 
-(DEFUN |InnerMatrixQuotientFieldFunctions| (&REST #1=#:G12)
+(DEFUN |InnerMatrixQuotientFieldFunctions| (&REST #1=#:G16)
   (SPROG NIL
-         (PROG (#2=#:G13)
+         (PROG (#2=#:G17)
            (RETURN
             (COND
              ((LETT #2#

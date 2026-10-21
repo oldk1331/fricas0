@@ -8,9 +8,5 @@
 
 (DEFUN |Comparable;| ()
   (SPROG ((#1=#:G0 NIL))
-         (PROG1
-             (LETT #1#
-                   (|Join| (|SetCategory|)
-                           (|mkCategory| '(((|smaller?| ((|Boolean|) % %)) T))
-                                         NIL NIL NIL)))
+         (PROG1 (LETT #1# (|Join| (|ComparableRepresentation|)))
            (SETELT #1# 0 '(|Comparable|))))) 

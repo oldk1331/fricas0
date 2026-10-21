@@ -3,9 +3,9 @@
         ((|a| (|PrimitiveArray| (|None|))) (|k| (|Key|))
          (|h| (|Mapping| (|SingleInteger|) |Key|)) (% (|Integer|)))
         (SPROG
-         ((|q| (|Integer|)) (|mk| (|None|)) (|p| (|Integer|)) (#1=#:G32 NIL)
-          (#2=#:G31 NIL) (|deletedPosition?| (|Boolean|)) (|h2| (|Integer|))
-          (|h1| (|Integer|)) (|n| (|Integer|)))
+         ((|n| (|Integer|)) (|h1| (|Integer|)) (|h2| (|Integer|))
+          (|deletedPosition?| (|Boolean|)) (#1=#:G31 NIL) (#2=#:G32 NIL)
+          (|p| (|Integer|)) (|mk| (|None|)) (|q| (|Integer|)))
          (SEQ
           (EXIT
            (SEQ (LETT |n| (ASH (QVSIZE |a|) -1)) (LETT |h1| (SPADCALL |k| |h|))
@@ -21,15 +21,15 @@
                          (COND
                           ((EQ |mk| (QREFELT % 9))
                            (SEQ (LETT |deletedPosition?| 'T)
-                                (EXIT (PROGN (LETT #2# 1) (GO #3=#:G18)))))
+                                (EXIT (PROGN (LETT #1# 1) (GO #3=#:G18)))))
                           ((SPADCALL |k| |mk| (QREFELT % 15))
-                           (PROGN (LETT #1# |p|) (GO #4=#:G30)))
+                           (PROGN (LETT #2# |p|) (GO #4=#:G30)))
                           ('T
                            (SEQ (LETT |p| (+ |p| |h2|))
                                 (COND ((>= |p| |n|) (LETT |p| (- |p| |n|))))
                                 (EXIT (LETT |mk| (QAREF1 |a| |p|))))))))
                        NIL (GO G190) G191 (EXIT NIL)))
-                 #3# (EXIT #2#))
+                 #3# (EXIT #1#))
                 (LETT |q| |p|)
                 (SEQ G190
                      (COND ((NULL (NULL (EQ |mk| (QREFELT % 8)))) (GO G191)))
@@ -47,7 +47,7 @@
                             (SEQ (QSETAREF1 |a| |p| (QREFELT % 9))
                                  (EXIT
                                   (QSETAREF1 |a| (+ |n| |p|) (QREFELT % 8))))
-                            (EXIT (PROGN (LETT #1# |q|) (GO #4#)))))))))
+                            (EXIT (PROGN (LETT #2# |q|) (GO #4#)))))))))
                       (EXIT
                        (SEQ (LETT |p| (+ |p| |h2|))
                             (COND ((>= |p| |n|) (LETT |p| (- |p| |n|))))
@@ -55,7 +55,7 @@
                      NIL (GO G190) G191 (EXIT NIL))
                 (COND (|deletedPosition?| (LETT |q| (- |q| |n|))))
                 (EXIT (- |q| |n|))))
-          #4# (EXIT #1#)))) 
+          #4# (EXIT #2#)))) 
 
 (SDEFUN |XHASHTBL;newArr|
         ((|n| (|NonNegativeInteger|)) (% (|PrimitiveArray| (|None|))))
@@ -63,10 +63,7 @@
 
 (SDEFUN |XHASHTBL;rehashAux!| ((|x| (%)) (|ix| (|Integer|)) (% (%)))
         (SPROG
-         ((|p| (|Integer|)) (|k| (|Key|)) (|mk| (|None|)) (#1=#:G51 NIL)
-          (|i| NIL) (|c| (|PrimitiveArray| (|None|))) (|n| (|Integer|))
-          (|a| (|PrimitiveArray| (|None|)))
-          (|h| (|Mapping| (|SingleInteger|) |Key|))
+         ((|m| (|NonNegativeInteger|))
           (|r|
            (|Record| (|:| |numOfEntries| (|Integer|))
                      (|:| |maxNumOfEntries| (|Integer|))
@@ -75,7 +72,10 @@
                      (|:| |idx| (|Integer|))
                      (|:| |arr| (|PrimitiveArray| (|None|)))
                      (|:| |hashFunction| (|Mapping| (|SingleInteger|) |Key|))))
-          (|m| (|NonNegativeInteger|)))
+          (|h| (|Mapping| (|SingleInteger|) |Key|))
+          (|a| (|PrimitiveArray| (|None|))) (|n| (|Integer|))
+          (|c| (|PrimitiveArray| (|None|))) (|i| NIL) (#1=#:G51 NIL)
+          (|mk| (|None|)) (|k| (|Key|)) (|p| (|Integer|)))
          (SEQ (LETT |m| (QAREF1 (QREFELT % 13) |ix|)) (LETT |r| |x|)
               (LETT |h| (QVELT |r| 6)) (LETT |a| (QVELT |r| 5))
               (LETT |n| (ASH (QVSIZE |a|) -1))
@@ -101,8 +101,8 @@
                                               (QAREF1 |a| (+ |n| |i|)))))))))))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
               (QSETVELT |r| 5 |c|) (QSETVELT |r| 4 |ix|)
-              (QSETVELT |r| 1 (QUOTIENT2 (* |m| 7) 10)) (QSETVELT |r| 2 0)
-              (QSETVELT |r| 3 (QUOTIENT2 (* |m| 9) 10)) (EXIT |x|)))) 
+              (QSETVELT |r| 1 (|quotient_INT| (* |m| 7) 10)) (QSETVELT |r| 2 0)
+              (QSETVELT |r| 3 (|quotient_INT| (* |m| 9) 10)) (EXIT |x|)))) 
 
 (SDEFUN |XHASHTBL;grow!| ((|x| (%)) (% (%)))
         (|XHASHTBL;rehashAux!| |x| (+ (QVELT |x| 4) 1) %)) 
@@ -113,11 +113,11 @@
 (SDEFUN |XHASHTBL;table;M%;6|
         ((|hashfunction| (|Mapping| (|SingleInteger|) |Key|)) (% (%)))
         (SPROG
-         ((|maxVirtualEntries| (|Integer|)) (|maxEntries| (|Integer|))
-          (|n| (|NonNegativeInteger|)))
+         ((|n| (|NonNegativeInteger|)) (|maxEntries| (|Integer|))
+          (|maxVirtualEntries| (|Integer|)))
          (SEQ (LETT |n| (QAREF1 (QREFELT % 13) 0))
-              (LETT |maxEntries| (QUOTIENT2 (* |n| 7) 10))
-              (LETT |maxVirtualEntries| (QUOTIENT2 (* |n| 9) 10))
+              (LETT |maxEntries| (|quotient_INT| (* |n| 7) 10))
+              (LETT |maxVirtualEntries| (|quotient_INT| (* |n| 9) 10))
               (EXIT
                (VECTOR 0 |maxEntries| 0 |maxVirtualEntries| 0
                        (|XHASHTBL;newArr| |n| %) |hashfunction|))))) 
@@ -128,13 +128,13 @@
 (SDEFUN |XHASHTBL;inspect;%R;8|
         ((|x| (%)) (% (|Record| (|:| |key| |Key|) (|:| |entry| |Entry|))))
         (SPROG
-         ((#1=#:G86 NIL) (|mk| (|None|)) (#2=#:G87 NIL) (|i| NIL)
-          (|n| (|Integer|)) (|a| (|PrimitiveArray| (|None|))))
+         ((|a| (|PrimitiveArray| (|None|))) (|n| (|Integer|)) (|i| NIL)
+          (#1=#:G87 NIL) (|mk| (|None|)) (#2=#:G86 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |a| (QVELT |x| 5)) (LETT |n| (ASH (QVSIZE |a|) -1))
-                (SEQ (LETT |i| 0) (LETT #2# (- |n| 1)) G190
-                     (COND ((|greater_SI| |i| #2#) (GO G191)))
+                (SEQ (LETT |i| 0) (LETT #1# (- |n| 1)) G190
+                     (COND ((|greater_SI| |i| #1#) (GO G191)))
                      (SEQ
                       (EXIT
                        (COND
@@ -144,11 +144,11 @@
                            (NULL
                             (EQ (LETT |mk| (QAREF1 |a| |i|)) (QREFELT % 9)))))
                          (PROGN
-                          (LETT #1# (CONS |mk| (QAREF1 |a| (+ |n| |i|))))
+                          (LETT #2# (CONS |mk| (QAREF1 |a| (+ |n| |i|))))
                           (GO #3=#:G85))))))
                      (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                 (EXIT (|error| "table must be non-empty"))))
-          #3# (EXIT #1#)))) 
+          #3# (EXIT #2#)))) 
 
 (SDEFUN |XHASHTBL;#;%Nni;9| ((|x| (%)) (% (|NonNegativeInteger|)))
         (SPROG ((#1=#:G89 NIL))
@@ -159,8 +159,8 @@
 (SDEFUN |XHASHTBL;search;Key%U;10|
         ((|k| (|Key|)) (|x| (%)) (% (|Union| |Entry| "failed")))
         (SPROG
-         ((|p| (|Integer|)) (|h| (|Mapping| (|SingleInteger|) |Key|))
-          (|a| (|PrimitiveArray| (|None|))))
+         ((|a| (|PrimitiveArray| (|None|)))
+          (|h| (|Mapping| (|SingleInteger|) |Key|)) (|p| (|Integer|)))
          (SEQ (LETT |a| (QVELT |x| 5)) (LETT |h| (QVELT |x| 6))
               (LETT |p| (|XHASHTBL;localSearch| |a| |k| |h| %))
               (EXIT
@@ -170,8 +170,8 @@
 
 (SDEFUN |XHASHTBL;elt;%KeyEntry;11| ((|x| (%)) (|k| (|Key|)) (% (|Entry|)))
         (SPROG
-         ((|p| (|Integer|)) (|h| (|Mapping| (|SingleInteger|) |Key|))
-          (|a| (|PrimitiveArray| (|None|))))
+         ((|a| (|PrimitiveArray| (|None|)))
+          (|h| (|Mapping| (|SingleInteger|) |Key|)) (|p| (|Integer|)))
          (SEQ (LETT |a| (QVELT |x| 5)) (LETT |h| (QVELT |x| 6))
               (LETT |p| (|XHASHTBL;localSearch| |a| |k| |h| %))
               (EXIT
@@ -181,8 +181,8 @@
 (SDEFUN |XHASHTBL;elt;%Key2Entry;12|
         ((|x| (%)) (|k| (|Key|)) (|e| (|Entry|)) (% (|Entry|)))
         (SPROG
-         ((|p| (|Integer|)) (|h| (|Mapping| (|SingleInteger|) |Key|))
-          (|a| (|PrimitiveArray| (|None|))))
+         ((|a| (|PrimitiveArray| (|None|)))
+          (|h| (|Mapping| (|SingleInteger|) |Key|)) (|p| (|Integer|)))
          (SEQ (LETT |a| (QVELT |x| 5)) (LETT |h| (QVELT |x| 6))
               (LETT |p| (|XHASHTBL;localSearch| |a| |k| |h| %))
               (EXIT
@@ -192,7 +192,8 @@
 (SDEFUN |XHASHTBL;setelt!;%Key2Entry;13|
         ((|x| (%)) (|k| (|Key|)) (|e| (|Entry|)) (% (|Entry|)))
         (SPROG
-         ((|p| (|Integer|))
+         ((|a| (|PrimitiveArray| (|None|)))
+          (|h| (|Mapping| (|SingleInteger|) |Key|)) (|n| (|Integer|))
           (|r|
            (|Record| (|:| |numOfEntries| (|Integer|))
                      (|:| |maxNumOfEntries| (|Integer|))
@@ -201,8 +202,7 @@
                      (|:| |idx| (|Integer|))
                      (|:| |arr| (|PrimitiveArray| (|None|)))
                      (|:| |hashFunction| (|Mapping| (|SingleInteger|) |Key|))))
-          (|n| (|Integer|)) (|h| (|Mapping| (|SingleInteger|) |Key|))
-          (|a| (|PrimitiveArray| (|None|))))
+          (|p| (|Integer|)))
          (SEQ
           (COND ((>= (QVELT |x| 0) (QVELT |x| 1)) (|XHASHTBL;grow!| |x| %)))
           (LETT |a| (QVELT |x| 5)) (LETT |h| (QVELT |x| 6))
@@ -234,9 +234,9 @@
 (SDEFUN |XHASHTBL;remove!;Key%U;14|
         ((|k| (|Key|)) (|x| (%)) (% (|Union| |Entry| "failed")))
         (SPROG
-         ((|e| (|Entry|)) (|n| (|Integer|)) (|p| (|Integer|))
-          (|h| (|Mapping| (|SingleInteger|) |Key|))
-          (|a| (|PrimitiveArray| (|None|))))
+         ((|a| (|PrimitiveArray| (|None|)))
+          (|h| (|Mapping| (|SingleInteger|) |Key|)) (|p| (|Integer|))
+          (|n| (|Integer|)) (|e| (|Entry|)))
          (SEQ (LETT |a| (QVELT |x| 5)) (LETT |h| (QVELT |x| 6))
               (LETT |p| (|XHASHTBL;localSearch| |a| |k| |h| %))
               (EXIT
@@ -270,8 +270,8 @@
 
 (SDEFUN |XHASHTBL;fill!;%Entry%;16| ((|x| (%)) (|e| (|Entry|)) (% (%)))
         (SPROG
-         ((#1=#:G146 NIL) (|i| NIL) (|n| (|NonNegativeInteger|))
-          (|a| (|PrimitiveArray| (|None|))))
+         ((|a| (|PrimitiveArray| (|None|))) (|n| (|NonNegativeInteger|))
+          (|i| NIL) (#1=#:G146 NIL))
          (SEQ (LETT |a| (QVELT |x| 5)) (LETT |n| (ASH (QVSIZE |a|) -1))
               (SEQ (LETT |i| 0) (LETT #1# (- |n| 1)) G190
                    (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -287,8 +287,8 @@
 (SDEFUN |XHASHTBL;map!;M2%;17|
         ((|f| (|Mapping| |Entry| |Entry|)) (|x| (%)) (% (%)))
         (SPROG
-         ((#1=#:G155 NIL) (|i| NIL) (|n| (|NonNegativeInteger|))
-          (|a| (|PrimitiveArray| (|None|))))
+         ((|a| (|PrimitiveArray| (|None|))) (|n| (|NonNegativeInteger|))
+          (|i| NIL) (#1=#:G155 NIL))
          (SEQ (LETT |a| (QVELT |x| 5)) (LETT |n| (ASH (QVSIZE |a|) -1))
               (SEQ (LETT |i| 0) (LETT #1# (- |n| 1)) G190
                    (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -304,8 +304,8 @@
 
 (SDEFUN |XHASHTBL;keys;%L;18| ((|x| (%)) (% (|List| |Key|)))
         (SPROG
-         ((|l| (|List| |Key|)) (|mk| (|None|)) (#1=#:G163 NIL) (|i| NIL)
-          (|a| (|PrimitiveArray| (|None|))))
+         ((|a| (|PrimitiveArray| (|None|))) (|i| NIL) (#1=#:G163 NIL)
+          (|mk| (|None|)) (|l| (|List| |Key|)))
          (SEQ (LETT |a| (QVELT |x| 5)) (LETT |l| NIL)
               (SEQ (LETT |i| 0) (LETT #1# (- (ASH (QVSIZE |a|) -1) 1)) G190
                    (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -323,8 +323,8 @@
 
 (SDEFUN |XHASHTBL;parts;%L;19| ((|x| (%)) (% (|List| |Entry|)))
         (SPROG
-         ((|l| (|List| |Entry|)) (#1=#:G171 NIL) (|i| NIL)
-          (|n| (|NonNegativeInteger|)) (|a| (|PrimitiveArray| (|None|))))
+         ((|a| (|PrimitiveArray| (|None|))) (|n| (|NonNegativeInteger|))
+          (|i| NIL) (#1=#:G171 NIL) (|l| (|List| |Entry|)))
          (SEQ (LETT |a| (QVELT |x| 5)) (LETT |n| (ASH (QVSIZE |a|) -1))
               (LETT |l| NIL)
               (SEQ (LETT |i| 0) (LETT #1# (- |n| 1)) G190
@@ -342,9 +342,9 @@
         ((|x| (%))
          (% (|List| (|Record| (|:| |key| |Key|) (|:| |entry| |Entry|)))))
         (SPROG
-         ((|l| (|List| (|Record| (|:| |key| |Key|) (|:| |entry| |Entry|))))
-          (|mk| (|None|)) (#1=#:G181 NIL) (|i| NIL)
-          (|n| (|NonNegativeInteger|)) (|a| (|PrimitiveArray| (|None|))))
+         ((|a| (|PrimitiveArray| (|None|))) (|n| (|NonNegativeInteger|))
+          (|i| NIL) (#1=#:G181 NIL) (|mk| (|None|))
+          (|l| (|List| (|Record| (|:| |key| |Key|) (|:| |entry| |Entry|)))))
          (SEQ (LETT |a| (QVELT |x| 5)) (LETT |n| (ASH (QVSIZE |a|) -1))
               (LETT |l| NIL)
               (SEQ (LETT |i| 0) (LETT #1# (- |n| 1)) G190
@@ -363,16 +363,16 @@
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
               (EXIT |l|)))) 
 
-(PUT '|XHASHTBL;removeDuplicates;2%;21| '|SPADreplace| '(XLAM (|x|) |x|)) 
+(MAKEPROP '|XHASHTBL;removeDuplicates;2%;21| '|SPADreplace| '(XLAM (|x|) |x|)) 
 
 (SDEFUN |XHASHTBL;removeDuplicates;2%;21| ((|x| (%)) (% (%))) |x|) 
 
 (SDEFUN |XHASHTBL;=;2%B;22| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G194 NIL) (#2=#:G195 NIL) (|p| (|Integer|)) (|mk| (|None|))
-          (#3=#:G196 NIL) (|i| NIL) (|h| (|Mapping| (|SingleInteger|) |Key|))
-          (|yn| #4=(|NonNegativeInteger|))
-          (|ya| #5=(|PrimitiveArray| (|None|))) (|xn| #4#) (|xa| #5#))
+         ((|xa| #1=(|PrimitiveArray| (|None|)))
+          (|xn| #2=(|NonNegativeInteger|)) (|ya| #1#) (|yn| #2#)
+          (|h| (|Mapping| (|SingleInteger|) |Key|)) (|i| NIL) (#3=#:G196 NIL)
+          (|mk| (|None|)) (|p| (|Integer|)) (#4=#:G195 NIL) (#5=#:G194 NIL))
          (SEQ
           (EXIT
            (COND
@@ -399,7 +399,7 @@
                             (LETT |p| (|XHASHTBL;localSearch| |ya| |mk| |h| %))
                             (EXIT
                              (COND
-                              ((< |p| 0) (PROGN (LETT #2# NIL) (GO #7=#:G193)))
+                              ((< |p| 0) (PROGN (LETT #4# NIL) (GO #7=#:G193)))
                               ('T
                                (SEQ
                                 (EXIT
@@ -408,19 +408,19 @@
                                              (QAREF1 |ya| (+ |yn| |p|))
                                              (QREFELT % 45))
                                    (PROGN
-                                    (LETT #1# (PROGN (LETT #2# NIL) (GO #7#)))
+                                    (LETT #5# (PROGN (LETT #4# NIL) (GO #7#)))
                                     (GO #8=#:G188)))))
-                                #8# (EXIT #1#))))))))))
+                                #8# (EXIT #5#))))))))))
                        (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                   (EXIT 'T)))))
-          #7# (EXIT #2#)))) 
+          #7# (EXIT #4#)))) 
 
 (DECLAIM (NOTINLINE |XHashTable;|)) 
 
 (DEFUN |XHashTable;| (|#1| |#2|)
   (SPROG
-   ((#1=#:G247 NIL) (#2=#:G246 NIL) (|pv$| NIL) (#3=#:G244 NIL) (#4=#:G245 NIL)
-    (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (#1=#:G245 NIL) (#2=#:G244 NIL)
+    (|pv$| NIL) (#3=#:G246 NIL) (#4=#:G247 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -453,7 +453,7 @@
                                                     (|:| |entry| |#2|))
                                           '(|CoercibleTo| (|OutputForm|))))
                                         (|HasCategory| |#2| '(|BasicType|))
-                                        (LETT #4#
+                                        (LETT #1#
                                               (|HasCategory| |#2|
                                                              '(|SetCategory|)))
                                         (AND
@@ -461,8 +461,8 @@
                                                         (LIST '|Evalable|
                                                               (|devaluate|
                                                                |#2|)))
-                                         #4#)
-                                        (LETT #3#
+                                         #1#)
+                                        (LETT #2#
                                               (|HasCategory|
                                                (|Record| (|:| |key| |#1|)
                                                          (|:| |entry| |#2|))
@@ -478,54 +478,54 @@
                                                       (LIST '|:| '|entry|
                                                             (|devaluate|
                                                              |#2|)))))
-                                         #3#)
+                                         #2#)
                                         (OR (|HasCategory| |#2| '(|BasicType|))
-                                            #4#
+                                            #1#
                                             (|HasCategory|
                                              (|Record| (|:| |key| |#1|)
                                                        (|:| |entry| |#2|))
                                              '(|BasicType|))
-                                            #3#)
-                                        (OR #4# #3#)
+                                            #2#)
+                                        (OR #1# #2#)
                                         (OR
                                          (|HasCategory| |#2|
                                                         '(|CoercibleTo|
                                                           (|OutputForm|)))
-                                         #4#
+                                         #1#
                                          (|HasCategory|
                                           (|Record| (|:| |key| |#1|)
                                                     (|:| |entry| |#2|))
                                           '(|CoercibleTo| (|OutputForm|)))
-                                         #3#)
+                                         #2#)
                                         (|HasCategory| |#2|
                                                        '(|OrderedSet|))))))
     (|haddProp| |$ConstructorCache| '|XHashTable| (LIST DV$1 DV$2) (CONS 1 %))
     (|stuffDomainSlots| %)
     (QSETREFV % 6 |#1|)
     (QSETREFV % 7 |#2|)
-    (AND (LETT #2# (|HasCategory| % '(|finiteAggregate|)))
+    (AND (LETT #3# (|HasCategory| % '(|finiteAggregate|)))
          (|augmentPredVector| % 16384))
-    (AND #2#
+    (AND #3#
          (|HasCategory| (|Record| (|:| |key| |#1|) (|:| |entry| |#2|))
                         '(|OrderedSet|))
          (|augmentPredVector| % 32768))
-    (AND #2#
+    (AND #3#
          (|HasCategory| (|Record| (|:| |key| |#1|) (|:| |entry| |#2|))
                         '(|BasicType|))
          (|augmentPredVector| % 65536))
     (AND
-     (LETT #1#
+     (LETT #4#
            (AND (|HasCategory| |#2| '(|BasicType|))
                 (|HasCategory| % '(|finiteAggregate|))))
      (|augmentPredVector| % 131072))
     (AND
-     (OR #1# #4#
-         (AND #2#
+     (OR #4# #1#
+         (AND #3#
               (|HasCategory| (|Record| (|:| |key| |#1|) (|:| |entry| |#2|))
                              '(|BasicType|)))
-         #3#)
+         #2#)
      (|augmentPredVector| % 262144))
-    (AND (|HasCategory| |#2| '(|OrderedSet|)) #2#
+    (AND (|HasCategory| |#2| '(|OrderedSet|)) #3#
          (|augmentPredVector| % 524288))
     (AND (|HasCategory| % '(|shallowlyMutable|))
          (|augmentPredVector| % 1048576))

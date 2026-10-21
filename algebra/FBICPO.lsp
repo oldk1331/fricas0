@@ -3,7 +3,7 @@
         ((|s| (%)) (|a| #1=(|NonNegativeInteger|)) (|b| #1#)
          (% (|NonNegativeInteger|)))
         (SPROG
-         ((#2=#:G1 NIL) (|res| (|Union| (|NonNegativeInteger|) "failed")))
+         ((|res| (|Union| (|NonNegativeInteger|) "failed")) (#2=#:G1 NIL))
          (SEQ (LETT |res| (SPADCALL |s| |a| |b| (QREFELT % 9)))
               (COND
                ((SPADCALL |res| (CONS 1 "failed") (QREFELT % 11))
@@ -19,7 +19,7 @@
         ((|s| (%)) (|a| #1=(|NonNegativeInteger|)) (|b| #1#)
          (% (|NonNegativeInteger|)))
         (SPROG
-         ((#2=#:G6 NIL) (|res| (|Union| (|NonNegativeInteger|) "failed")))
+         ((|res| (|Union| (|NonNegativeInteger|) "failed")) (#2=#:G9 NIL))
          (SEQ (LETT |res| (SPADCALL |s| |a| |b| (QREFELT % 13)))
               (COND
                ((SPADCALL |res| (CONS 1 "failed") (QREFELT % 11))
@@ -34,7 +34,7 @@
 (DECLAIM (NOTINLINE |FiniteBiCPO;|)) 
 
 (DEFUN |FiniteBiCPO;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|FiniteBiCPO| DV$1))
@@ -48,9 +48,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |FiniteBiCPO| (#1=#:G15)
+(DEFUN |FiniteBiCPO| (#1=#:G18)
   (SPROG NIL
-         (PROG (#2=#:G16)
+         (PROG (#2=#:G19)
            (RETURN
             (COND
              ((LETT #2#
@@ -76,8 +76,9 @@
                         (|:| |map| 19))
               (|List| 8) (|List| 17) (|DirectedGraph| %) (|List| 18) (|List| 6)
               (|Integer|) (|Tree| 24) (|List| 25) (|List| (|Loop|))
-              (|Matrix| 24) (|Matrix| 8) (|Void|) (|Scene| (|SCartesian| '2))
-              (|List| %) (|List| (|List| 10)) (|Mapping| 10 6 6)
+              (|Matrix| 24) (|Matrix| 8) (|Void|)
+              (|Scene| (|SCartesian| (NRTEVAL 2))) (|List| %)
+              (|List| (|List| 10)) (|Mapping| 10 6 6)
               (|IncidenceAlgebra| 24 6))
            '#(|meetIfCan| 20 |meet| 27 |joinIfCan| 34 |join| 41) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0))

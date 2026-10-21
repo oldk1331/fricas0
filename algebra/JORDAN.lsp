@@ -10,22 +10,22 @@
                      (SPADCALL |b| |a| (QREFELT % 17)) (QREFELT % 18))
            (QREFELT % 14) (QREFELT % 19))))) 
 
-(PUT '|JORDAN;coerce;%A;2| '|SPADreplace| '(XLAM (|a|) |a|)) 
+(MAKEPROP '|JORDAN;coerce;%A;2| '|SPADreplace| '(XLAM (|a|) |a|)) 
 
 (SDEFUN |JORDAN;coerce;%A;2| ((|a| (%)) (% (A))) |a|) 
 
-(PUT '|JORDAN;coerce;A%;3| '|SPADreplace| '(XLAM (|a|) |a|)) 
+(MAKEPROP '|JORDAN;coerce;A%;3| '|SPADreplace| '(XLAM (|a|) |a|)) 
 
 (SDEFUN |JORDAN;coerce;A%;3| ((|a| (A)) (% (%))) |a|) 
 
-(PUT '|JORDAN;^;%Pi%;4| '|SPADreplace| '(XLAM (|a| |n|) |a|)) 
+(MAKEPROP '|JORDAN;^;%Pi%;4| '|SPADreplace| '(XLAM (|a| |n|) |a|)) 
 
 (SDEFUN |JORDAN;^;%Pi%;4| ((|a| (%)) (|n| (|PositiveInteger|)) (% (%))) |a|) 
 
 (DECLAIM (NOTINLINE |AssociatedJordanAlgebra;|)) 
 
 (DEFUN |AssociatedJordanAlgebra;| (|#1| |#2|)
-  (SPROG ((#1=#:G2 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL) (#1=#:G5 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -132,9 +132,9 @@
                                       #1#)))
           %))) 
 
-(DEFUN |AssociatedJordanAlgebra| (&REST #1=#:G15)
+(DEFUN |AssociatedJordanAlgebra| (&REST #1=#:G18)
   (SPROG NIL
-         (PROG (#2=#:G16)
+         (PROG (#2=#:G19)
            (RETURN
             (COND
              ((LETT #2#
@@ -154,7 +154,7 @@
 (MAKEPROP '|AssociatedJordanAlgebra| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL (|local| |#2|) (|local| |#1|) (|local| |#2|)
-              '|Rep| (0 . |One|) (4 . +) '|two| (|Union| % '"failed")
+              '|Rep| (0 . |1|) (4 . +) '|two| (|Union| % '"failed")
               (10 . |recip|) '|oneHalf| (|Boolean|) (15 . |zero?|) (20 . *)
               (26 . +) (32 . *) |JORDAN;*;3%;1| |JORDAN;coerce;%A;2|
               |JORDAN;coerce;A%;3| (|PositiveInteger|) |JORDAN;^;%Pi%;4|
@@ -187,31 +187,32 @@
               |commutative?| 394 |coerce| 398 |basis| 413
               |associatorDependence| 417 |associator| 421 |associative?| 428
               |apply| 432 |antiCommutator| 438 |antiCommutative?| 444
-              |antiAssociative?| 448 |alternative?| 452 ^ 456 |Zero| 462 = 466
-              - 472 + 483 * 489)
+              |antiAssociative?| 448 |alternative?| 452 ^ 456 = 462 |0| 468 -
+              472 + 483 * 489)
            'NIL
            (CONS
             (|makeByteWordVec2| 7
-                                '(1 5 0 0 1 0 0 0 0 0 0 2 0 0 2 0 0 7 0 2 4 0 0
-                                  0))
+                                '(1 5 0 0 1 0 0 0 0 0 2 0 2 0 0 2 0 0 0 7 0 2 4
+                                  0 0 0))
             (CONS
              '#(|FramedNonAssociativeAlgebra&|
                 |FiniteRankNonAssociativeAlgebra&| |NonAssociativeAlgebra&|
                 |Module&| |FramedModule&| NIL NIL NIL |NonAssociativeRng&|
-                |AbelianGroup&| NIL |Finite&| |AbelianMonoid&|
+                |AbelianGroup&| |Finite&| NIL NIL |AbelianMonoid&|
                 |NonAssociativeSemiRng&| NIL |Magma&| |AbelianSemiGroup&|
-                |Hashable&| |SetCategory&| NIL NIL NIL |BasicType&| NIL)
+                |SetWithZero&| |Hashable&| |SetCategory&| NIL NIL NIL
+                |BasicType&| NIL)
              (CONS
               '#((|FramedNonAssociativeAlgebra| 6)
                  (|FiniteRankNonAssociativeAlgebra| 6)
                  (|NonAssociativeAlgebra| 6) (|Module| 6) (|FramedModule| 6)
                  (|BiModule| 6 6) (|LeftModule| 6) (|RightModule| 6)
-                 (|NonAssociativeRng|) (|AbelianGroup|)
-                 (|CancellationAbelianMonoid|) (|Finite|) (|AbelianMonoid|)
-                 (|NonAssociativeSemiRng|) (|Comparable|) (|Magma|)
-                 (|AbelianSemiGroup|) (|Hashable|) (|SetCategory|)
-                 (|ConvertibleTo| 30) (|unitsKnown|) (|CoercibleTo| 26)
-                 (|BasicType|) (|CoercibleTo| 7))
+                 (|NonAssociativeRng|) (|AbelianGroup|) (|Finite|)
+                 (|CancellationAbelianMonoid|) (|Comparable|) (|AbelianMonoid|)
+                 (|NonAssociativeSemiRng|) (|ComparableRepresentation|)
+                 (|Magma|) (|AbelianSemiGroup|) (|SetWithZero|) (|Hashable|)
+                 (|SetCategory|) (|ConvertibleTo| 30) (|unitsKnown|)
+                 (|CoercibleTo| 26) (|BasicType|) (|CoercibleTo| 7))
               (|makeByteWordVec2| 42
                                   '(0 6 0 9 2 6 0 0 0 10 1 6 12 0 13 1 6 15 0
                                     16 2 8 0 0 0 17 2 8 0 0 0 18 2 0 0 0 6 19 2
@@ -236,7 +237,7 @@
                                     0 0 0 1 0 3 15 1 1 0 26 0 1 1 0 5 0 21 1 0
                                     0 5 22 0 1 38 1 0 4 35 1 3 0 0 0 0 0 1 0 3
                                     15 1 2 1 0 40 0 1 2 0 0 0 0 1 0 3 15 1 0 3
-                                    15 1 0 3 15 1 2 0 0 0 23 24 0 0 0 1 2 0 15
+                                    15 1 0 3 15 1 2 0 0 0 23 24 2 0 15 0 0 1 0
                                     0 0 1 2 0 0 0 0 1 1 0 0 0 1 2 0 0 0 0 1 2 0
                                     0 23 0 1 2 0 0 0 0 20 2 0 0 27 0 1 2 0 0 28
                                     0 1 2 0 0 6 0 1 2 0 0 0 6 19)))))

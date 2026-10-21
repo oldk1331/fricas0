@@ -1,17 +1,17 @@
 
-(PUT '|OSI;=;2%B;1| '|SPADreplace| 'EQL) 
+(MAKEPROP '|OSI;=;2%B;1| '|SPADreplace| 'EQL) 
 
 (SDEFUN |OSI;=;2%B;1| ((|x| (%)) (|y| (%)) (% (|Boolean|))) (EQL |x| |y|)) 
 
-(PUT '|OSI;<;2%B;2| '|SPADreplace| '<) 
+(MAKEPROP '|OSI;<;2%B;2| '|SPADreplace| '<) 
 
 (SDEFUN |OSI;<;2%B;2| ((|x| (%)) (|y| (%)) (% (|Boolean|))) (< |x| |y|)) 
 
-(PUT '|OSI;coerce;I%;3| '|SPADreplace| '(XLAM (|i|) |i|)) 
+(MAKEPROP '|OSI;coerce;I%;3| '|SPADreplace| '(XLAM (|i|) |i|)) 
 
 (SDEFUN |OSI;coerce;I%;3| ((|i| (|Integer|)) (% (%))) |i|) 
 
-(PUT '|OSI;value;%I;4| '|SPADreplace| '(XLAM (|x|) |x|)) 
+(MAKEPROP '|OSI;value;%I;4| '|SPADreplace| '(XLAM (|x|) |x|)) 
 
 (SDEFUN |OSI;value;%I;4| ((|x| (%)) (% (|Integer|))) |x|) 
 
@@ -30,13 +30,14 @@
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|OrdSetInts| NIL (CONS 1 %))
           (|stuffDomainSlots| %)
+          (AND (|HasCategory| % '(|SetWithZero|)) (|augmentPredVector| % 1))
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 6 (|Integer|))
           %))) 
 
 (DEFUN |OrdSetInts| ()
   (SPROG NIL
-         (PROG (#1=#:G6)
+         (PROG (#1=#:G7)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OrdSetInts|))
@@ -57,21 +58,23 @@
               |OSI;<;2%B;2| (|Integer|) |OSI;coerce;I%;3| |OSI;value;%I;4|
               (|OutputForm|) (|Symbol|) (0 . |coerce|) (5 . |coerce|)
               (10 . |sub|) |OSI;coerce;%Of;5| (|String|))
-           '#(~= 16 |value| 22 |smaller?| 27 |min| 33 |max| 39 |latex| 45
-              |coerce| 50 >= 60 > 66 = 72 <= 78 < 84)
+           '#(~= 16 |value| 22 |smaller?| 27 |sign| 33 |positive?| 38
+              |negative?| 43 |min| 48 |max| 54 |latex| 60 |coerce| 65 >= 75 >
+              81 = 87 <= 93 < 99)
            'NIL
-           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0))
+           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0))
                  (CONS
-                  '#(|OrderedSet&| NIL |SetCategory&| NIL |PartialOrder&|
+                  '#(|OrderedSet&| NIL NIL |SetCategory&| NIL |PartialOrder&|
                      |BasicType&|)
                   (CONS
-                   '#((|OrderedSet|) (|Comparable|) (|SetCategory|)
+                   '#((|OrderedSet|) (|Comparable|)
+                      (|ComparableRepresentation|) (|SetCategory|)
                       (|CoercibleTo| 13) (|PartialOrder|) (|BasicType|))
                    (|makeByteWordVec2| 19
                                        '(1 14 13 0 15 1 6 13 0 16 2 13 0 0 0 17
-                                         2 0 7 0 0 1 1 0 10 0 12 2 0 7 0 0 1 2
-                                         0 0 0 0 1 2 0 0 0 0 1 1 0 19 0 1 1 0
-                                         13 0 18 1 0 0 10 11 2 0 7 0 0 1 2 0 7
-                                         0 0 1 2 0 7 0 0 8 2 0 7 0 0 1 2 0 7 0
-                                         0 9)))))
+                                         2 0 7 0 0 1 1 0 10 0 12 2 0 7 0 0 1 1
+                                         1 10 0 1 1 1 7 0 1 1 1 7 0 1 2 0 0 0 0
+                                         1 2 0 0 0 0 1 1 0 19 0 1 1 0 13 0 18 1
+                                         0 0 10 11 2 0 7 0 0 1 2 0 7 0 0 1 2 0
+                                         7 0 0 8 2 0 7 0 0 1 2 0 7 0 0 9)))))
            '|lookupComplete|)) 

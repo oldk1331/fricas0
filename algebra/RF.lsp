@@ -46,37 +46,37 @@
          (|l| (|List| (|Equation| (|Fraction| (|Polynomial| R)))))
          (% (|Fraction| (|Polynomial| R))))
         (SPROG
-         ((#1=#:G19 NIL) (|eq| NIL) (#2=#:G18 NIL) (#3=#:G17 NIL)
-          (#4=#:G16 NIL))
+         ((#1=#:G19 NIL) (#2=#:G20 NIL) (#3=#:G21 NIL) (|eq| NIL)
+          (#4=#:G22 NIL))
          (SEQ
           (SPADCALL |x|
                     (PROGN
-                     (LETT #4# NIL)
-                     (SEQ (LETT |eq| NIL) (LETT #3# |l|) G190
+                     (LETT #1# NIL)
+                     (SEQ (LETT |eq| NIL) (LETT #2# |l|) G190
                           (COND
-                           ((OR (ATOM #3#) (PROGN (LETT |eq| (CAR #3#)) NIL))
+                           ((OR (ATOM #2#) (PROGN (LETT |eq| (CAR #2#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #4#
+                            (LETT #1#
                                   (CONS
                                    (SPADCALL (SPADCALL |eq| (QREFELT % 35))
                                              (QREFELT % 36))
-                                   #4#))))
-                          (LETT #3# (CDR #3#)) (GO G190) G191
-                          (EXIT (NREVERSE #4#))))
+                                   #1#))))
+                          (LETT #2# (CDR #2#)) (GO G190) G191
+                          (EXIT (NREVERSE #1#))))
                     (PROGN
-                     (LETT #2# NIL)
-                     (SEQ (LETT |eq| NIL) (LETT #1# |l|) G190
+                     (LETT #3# NIL)
+                     (SEQ (LETT |eq| NIL) (LETT #4# |l|) G190
                           (COND
-                           ((OR (ATOM #1#) (PROGN (LETT |eq| (CAR #1#)) NIL))
+                           ((OR (ATOM #4#) (PROGN (LETT |eq| (CAR #4#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #2#
-                                  (CONS (SPADCALL |eq| (QREFELT % 37)) #2#))))
-                          (LETT #1# (CDR #1#)) (GO G190) G191
-                          (EXIT (NREVERSE #2#))))
+                            (LETT #3#
+                                  (CONS (SPADCALL |eq| (QREFELT % 37)) #3#))))
+                          (LETT #4# (CDR #4#)) (GO G190) G191
+                          (EXIT (NREVERSE #3#))))
                     (QREFELT % 26))))) 
 
 (SDEFUN |RF;eval;FLLF;10|
@@ -105,7 +105,7 @@
 (DECLAIM (NOTINLINE |RationalFunction;|)) 
 
 (DEFUN |RationalFunction;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RationalFunction| DV$1))
@@ -119,9 +119,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |RationalFunction| (#1=#:G23)
+(DEFUN |RationalFunction| (#1=#:G28)
   (SPROG NIL
-         (PROG (#2=#:G24)
+         (PROG (#2=#:G29)
            (RETURN
             (COND
              ((LETT #2#

@@ -1,5 +1,6 @@
 
-(PUT '|FINLAT;finiteLattice;Nni%;1| '|SPADreplace| '(XLAM (|index|) |index|)) 
+(MAKEPROP '|FINLAT;finiteLattice;Nni%;1| '|SPADreplace|
+          '(XLAM (|index|) |index|)) 
 
 (SDEFUN |FINLAT;finiteLattice;Nni%;1|
         ((|index| (|NonNegativeInteger|)) (% (%))) |index|) 
@@ -7,7 +8,7 @@
 (SDEFUN |FINLAT;index;Pi%;2| ((|n| (|PositiveInteger|)) (% (%)))
         (SPADCALL (- |n| 1) (QREFELT % 10))) 
 
-(PUT '|FINLAT;lookup;%Pi;3| '|SPADreplace| '(XLAM (|el|) (+ |el| 1))) 
+(MAKEPROP '|FINLAT;lookup;%Pi;3| '|SPADreplace| '(XLAM (|el|) (+ |el| 1))) 
 
 (SDEFUN |FINLAT;lookup;%Pi;3| ((|el| (%)) (% (|PositiveInteger|))) (+ |el| 1)) 
 
@@ -23,7 +24,7 @@
 (SDEFUN |FINLAT;\\/;3%;7| ((|a| (%)) (|b| (%)) (% (%)))
         (SPADCALL (QREFELT % 7) |a| |b| (QREFELT % 22))) 
 
-(PUT '|FINLAT;hash;%Si;8| '|SPADreplace| '(XLAM (|s|) 0)) 
+(MAKEPROP '|FINLAT;hash;%Si;8| '|SPADreplace| '(XLAM (|s|) 0)) 
 
 (SDEFUN |FINLAT;hash;%Si;8| ((|s| (%)) (% (|SingleInteger|))) 0) 
 
@@ -34,7 +35,7 @@
         (NULL (SPADCALL |x| |y| (QREFELT % 27)))) 
 
 (SDEFUN |FINLAT;coerce;%Of;11| ((|s| (%)) (% (|OutputForm|)))
-        (SPROG ((|obj| (S)) (|index| (|NonNegativeInteger|)))
+        (SPROG ((|index| (|NonNegativeInteger|)) (|obj| (S)))
                (SEQ (LETT |index| |s|)
                     (LETT |obj|
                           (SPADCALL (QREFELT % 7) |index| (QREFELT % 29)))
@@ -43,7 +44,7 @@
 (DECLAIM (NOTINLINE |FiniteLattice;|)) 
 
 (DEFUN |FiniteLattice;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 |#2|)
@@ -95,14 +96,15 @@
               |enumerate| 92 |convert| 96 |coerce| 101 |\\/| 106 = 112 |/\\|
               118)
            'NIL
-           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0))
+           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|Finite&| NIL NIL NIL NIL |SetCategory&| |Hashable&| NIL
-                     |BasicType&| NIL)
+                  '#(|Finite&| NIL NIL NIL NIL NIL |SetCategory&| |Hashable&|
+                     NIL |BasicType&| NIL)
                   (CONS
-                   '#((|Finite|) (|Lattice|) (|JoinSemilattice|) (|Comparable|)
-                      (|MeetSemilattice|) (|SetCategory|) (|Hashable|)
-                      (|CoercibleTo| 30) (|BasicType|) (|ConvertibleTo| 36))
+                   '#((|Finite|) (|Comparable|) (|Lattice|) (|JoinSemilattice|)
+                      (|ComparableRepresentation|) (|MeetSemilattice|)
+                      (|SetCategory|) (|Hashable|) (|CoercibleTo| 30)
+                      (|BasicType|) (|ConvertibleTo| 36))
                    (|makeByteWordVec2| 36
                                        '(1 15 14 0 16 2 15 9 0 6 18 3 15 9 0 9
                                          9 20 3 15 9 0 9 9 22 2 15 6 0 9 29 1 6

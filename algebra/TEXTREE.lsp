@@ -1,9 +1,9 @@
 
-(PUT '|TEXTREE;group;L%;1| '|SPADreplace| '(XLAM (|l|) (CONS 0 |l|))) 
+(MAKEPROP '|TEXTREE;group;L%;1| '|SPADreplace| '(XLAM (|l|) (CONS 0 |l|))) 
 
 (SDEFUN |TEXTREE;group;L%;1| ((|l| (|List| %)) (% (%))) (CONS 0 |l|)) 
 
-(PUT '|TEXTREE;group?;%B;2| '|SPADreplace| '(XLAM (|x|) (QEQCAR |x| 0))) 
+(MAKEPROP '|TEXTREE;group?;%B;2| '|SPADreplace| '(XLAM (|x|) (QEQCAR |x| 0))) 
 
 (SDEFUN |TEXTREE;group?;%B;2| ((|x| (%)) (% (|Boolean|))) (QEQCAR |x| 0)) 
 
@@ -24,7 +24,7 @@
 (SDEFUN |TEXTREE;m_call;SL%;4| ((|s| (|String|)) (|args| (|List| %)) (% (%)))
         (CONS 1 (CONS |s| |args|))) 
 
-(PUT '|TEXTREE;m_call?;%B;5| '|SPADreplace| '(XLAM (|x|) (QEQCAR |x| 1))) 
+(MAKEPROP '|TEXTREE;m_call?;%B;5| '|SPADreplace| '(XLAM (|x|) (QEQCAR |x| 1))) 
 
 (SDEFUN |TEXTREE;m_call?;%B;5| ((|x| (%)) (% (|Boolean|))) (QEQCAR |x| 1)) 
 
@@ -46,19 +46,22 @@
                                           (|:| |text| (|String|)))
                                  #1#)))) 
 
-(PUT '|TEXTREE;text_math;2%;7| '|SPADreplace| '(XLAM (|x|) (CONS 2 |x|))) 
+(MAKEPROP '|TEXTREE;text_math;2%;7| '|SPADreplace| '(XLAM (|x|) (CONS 2 |x|))) 
 
 (SDEFUN |TEXTREE;text_math;2%;7| ((|x| (%)) (% (%))) (CONS 2 |x|)) 
 
-(PUT '|TEXTREE;text_math?;%B;8| '|SPADreplace| '(XLAM (|x|) (QEQCAR |x| 2))) 
+(MAKEPROP '|TEXTREE;text_math?;%B;8| '|SPADreplace|
+          '(XLAM (|x|) (QEQCAR |x| 2))) 
 
 (SDEFUN |TEXTREE;text_math?;%B;8| ((|x| (%)) (% (|Boolean|))) (QEQCAR |x| 2)) 
 
-(PUT '|TEXTREE;display_math;2%;9| '|SPADreplace| '(XLAM (|x|) (CONS 3 |x|))) 
+(MAKEPROP '|TEXTREE;display_math;2%;9| '|SPADreplace|
+          '(XLAM (|x|) (CONS 3 |x|))) 
 
 (SDEFUN |TEXTREE;display_math;2%;9| ((|x| (%)) (% (%))) (CONS 3 |x|)) 
 
-(PUT '|TEXTREE;display_math?;%B;10| '|SPADreplace| '(XLAM (|x|) (QEQCAR |x| 3))) 
+(MAKEPROP '|TEXTREE;display_math?;%B;10| '|SPADreplace|
+          '(XLAM (|x|) (QEQCAR |x| 3))) 
 
 (SDEFUN |TEXTREE;display_math?;%B;10| ((|x| (%)) (% (|Boolean|)))
         (QEQCAR |x| 3)) 
@@ -81,11 +84,11 @@
                                                  (|:| |text| (|String|)))
                                         #1#)))))) 
 
-(PUT '|TEXTREE;text;S%;12| '|SPADreplace| '(XLAM (|s|) (CONS 4 |s|))) 
+(MAKEPROP '|TEXTREE;text;S%;12| '|SPADreplace| '(XLAM (|s|) (CONS 4 |s|))) 
 
 (SDEFUN |TEXTREE;text;S%;12| ((|s| (|String|)) (% (%))) (CONS 4 |s|)) 
 
-(PUT '|TEXTREE;text?;%B;13| '|SPADreplace| '(XLAM (|x|) (QEQCAR |x| 4))) 
+(MAKEPROP '|TEXTREE;text?;%B;13| '|SPADreplace| '(XLAM (|x|) (QEQCAR |x| 4))) 
 
 (SDEFUN |TEXTREE;text?;%B;13| ((|x| (%)) (% (|Boolean|))) (QEQCAR |x| 4)) 
 

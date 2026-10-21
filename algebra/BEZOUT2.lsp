@@ -2,7 +2,7 @@
 (DECLAIM (NOTINLINE |BezoutMatrixWrapper;|)) 
 
 (DEFUN |BezoutMatrixWrapper;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -47,7 +47,7 @@
            '#(NIL NIL NIL NIL NIL
               (|BezoutMatrix| 6 7 8 (|Vector| 6) (|Vector| 6)) (|local| |#1|)
               (|local| |#2|) (|Matrix| 6) (|NonNegativeInteger|)
-              (|IndexedVector| 7 '0))
+              (|IndexedVector| 7 (NRTEVAL 0)))
            '#() 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

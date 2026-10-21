@@ -2,54 +2,54 @@
 (SDEFUN |FINITE-;random;S;1| ((% (S)))
         (SPROG ((#1=#:G6 NIL))
                (SPADCALL
-                (PROG1 (LETT #1# (+ 1 (RANDOM (SPADCALL (QREFELT % 9)))))
+                (PROG1 (LETT #1# (+ 1 (RANDOM (SPADCALL (QREFELT % 8)))))
                   (|check_subtype2| (> #1# 0) '(|PositiveInteger|)
                                     '(|NonNegativeInteger|) #1#))
-                (QREFELT % 11)))) 
+                (QREFELT % 10)))) 
 
 (SDEFUN |FINITE-;enumerate;L;2| ((% (|List| S)))
-        (SPROG ((#1=#:G10 NIL) (#2=#:G14 NIL) (|i| NIL) (#3=#:G13 NIL))
+        (SPROG ((#1=#:G13 NIL) (|i| NIL) (#2=#:G14 NIL) (#3=#:G10 NIL))
                (SEQ
                 (PROGN
-                 (LETT #3# NIL)
-                 (SEQ (LETT |i| 1) (LETT #2# (SPADCALL (QREFELT % 9))) G190
+                 (LETT #1# NIL)
+                 (SEQ (LETT |i| 1) (LETT #2# (SPADCALL (QREFELT % 8))) G190
                       (COND ((|greater_SI| |i| #2#) (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #3#
+                        (LETT #1#
                               (CONS
                                (SPADCALL
-                                (PROG1 (LETT #1# |i|)
-                                  (|check_subtype2| (> #1# 0)
+                                (PROG1 (LETT #3# |i|)
+                                  (|check_subtype2| (> #3# 0)
                                                     '(|PositiveInteger|)
                                                     '(|NonNegativeInteger|)
-                                                    #1#))
-                                (QREFELT % 11))
-                               #3#))))
+                                                    #3#))
+                                (QREFELT % 10))
+                               #1#))))
                       (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                      (EXIT (NREVERSE #3#))))))) 
+                      (EXIT (NREVERSE #1#))))))) 
 
 (SDEFUN |FINITE-;convert;SIf;3| ((|x| (S)) (% (|InputForm|)))
         (SPADCALL '|index|
                   (LIST
-                   (SPADCALL (SPADCALL |x| (QREFELT % 15)) (QREFELT % 18)))
-                  (QREFELT % 22))) 
+                   (SPADCALL (SPADCALL |x| (QREFELT % 14)) (QREFELT % 17)))
+                  (QREFELT % 21))) 
 
 (SDEFUN |FINITE-;hashUpdate!;HsSHs;4|
         ((|s| (|HashState|)) (|x| (S)) (% (|HashState|)))
-        (SPADCALL |s| (SPADCALL |x| (QREFELT % 15)) (QREFELT % 25))) 
+        (SPADCALL |s| (SPADCALL |x| (QREFELT % 14)) (QREFELT % 24))) 
 
 (SDEFUN |FINITE-;smaller?;2SB;5| ((|x| (S)) (|y| (S)) (% (|Boolean|)))
-        (< (SPADCALL |x| (QREFELT % 15)) (SPADCALL |y| (QREFELT % 15)))) 
+        (< (SPADCALL |x| (QREFELT % 14)) (SPADCALL |y| (QREFELT % 14)))) 
 
 (DECLAIM (NOTINLINE |Finite&;|)) 
 
 (DEFUN |Finite&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Finite&| DV$1))
-          (LETT % (GETREFV 29))
+          (LETT % (GETREFV 28))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|stuffDomainSlots| %)
@@ -57,23 +57,23 @@
           (SETF |pv$| (QREFELT % 3))
           (COND ((|HasCategory| |#1| '(|OrderedSet|)))
                 ('T
-                 (QSETREFV % 28
+                 (QSETREFV % 27
                            (CONS (|dispatchFunction| |FINITE-;smaller?;2SB;5|)
                                  %))))
           %))) 
 
 (MAKEPROP '|Finite&| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |random|)
-              (|NonNegativeInteger|) (4 . |size|) (|PositiveInteger|)
-              (8 . |index|) |FINITE-;random;S;1| (|List| %)
-              |FINITE-;enumerate;L;2| (13 . |lookup|) (|Integer|) (|InputForm|)
-              (18 . |convert|) (|Symbol|) (|List| 17) (|InputFormFunctions1| 6)
-              (23 . |packageCall|) |FINITE-;convert;SIf;3| (|HashState|)
-              (29 . |hashUpdate!|) |FINITE-;hashUpdate!;HsSHs;4| (|Boolean|)
-              (35 . |smaller?|))
-           '#(|smaller?| 41 |random| 47 |hashUpdate!| 51 |enumerate| 57
-              |convert| 61)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|NonNegativeInteger|)
+              (0 . |size|) (|PositiveInteger|) (4 . |index|)
+              |FINITE-;random;S;1| (|List| %) |FINITE-;enumerate;L;2|
+              (9 . |lookup|) (|Integer|) (|InputForm|) (14 . |convert|)
+              (|Symbol|) (|List| 16) (|InputFormFunctions1| 6)
+              (19 . |packageCall|) |FINITE-;convert;SIf;3| (|HashState|)
+              (25 . |hashUpdate!|) |FINITE-;hashUpdate!;HsSHs;4| (|Boolean|)
+              (31 . |smaller?|))
+           '#(|smaller?| 37 |random| 43 |hashUpdate!| 47 |enumerate| 53
+              |convert| 57)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -88,11 +88,10 @@
                                    '((|smaller?| ((|Boolean|) |#1| |#1|)) T)
                                    '((|convert| ((|InputForm|) |#1|)) T))
                              (LIST) NIL NIL)))
-                        (|makeByteWordVec2| 28
-                                            '(0 6 0 7 0 6 8 9 1 6 0 10 11 1 6
-                                              10 0 15 1 17 0 16 18 2 21 17 19
-                                              20 22 2 16 24 24 0 25 2 0 27 0 0
-                                              28 2 0 27 0 0 28 0 0 0 12 2 0 24
-                                              24 0 26 0 0 13 14 1 0 17 0
-                                              23)))))
+                        (|makeByteWordVec2| 27
+                                            '(0 6 7 8 1 6 0 9 10 1 6 9 0 14 1
+                                              16 0 15 17 2 20 16 18 19 21 2 15
+                                              23 23 0 24 2 0 26 0 0 27 2 0 26 0
+                                              0 27 0 0 0 11 2 0 23 23 0 25 0 0
+                                              12 13 1 0 16 0 22)))))
            '|lookupComplete|)) 

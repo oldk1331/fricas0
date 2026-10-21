@@ -123,7 +123,6 @@
       (CAR (CAR |l|)) NIL))))
 
 ; compTopLevel(x,m,e) ==
-;   $killOptimizeIfTrue: local:= false
 ;   $forceAdd: local:= false
 ;   $compTimeSum: local := 0
 ;   $resolveTimeSum: local := 0
@@ -138,15 +137,12 @@
 ;   FUNCALL(compFun,x,m,e)
 
 (DEFUN |compTopLevel| (|x| |m| |e|)
-  (PROG (|$envHashTable| |$resolveTimeSum| |$compTimeSum| |$forceAdd|
-         |$killOptimizeIfTrue| |mode| |val| |LETTMP#1| |ISTMP#2| |ISTMP#1|
-         |compFun|)
+  (PROG (|$envHashTable| |$resolveTimeSum| |$compTimeSum| |$forceAdd| |mode|
+         |val| |LETTMP#1| |ISTMP#2| |ISTMP#1| |compFun|)
     (DECLARE
-     (SPECIAL |$envHashTable| |$resolveTimeSum| |$compTimeSum| |$forceAdd|
-      |$killOptimizeIfTrue|))
+     (SPECIAL |$envHashTable| |$resolveTimeSum| |$compTimeSum| |$forceAdd|))
     (RETURN
      (PROGN
-      (SETQ |$killOptimizeIfTrue| NIL)
       (SETQ |$forceAdd| NIL)
       (SETQ |$compTimeSum| 0)
       (SETQ |$resolveTimeSum| 0)
@@ -1166,7 +1162,8 @@
 ;   op := first x
 ;   SYMBOLP(op) and (fn := GET(op, "comp_special")) =>
 ;     FUNCALL(fn,x,m,e)
-;   getmode(op, e) is ["Mapping", :ml] and (u := applyMapping(x, m, e, ml)) => u
+;   SYMBOLP(op) and getmode(op, e) is ["Mapping", :ml] and
+;       (u := applyMapping(x, m, e, ml)) => u
 ;   compForm(x,m,e)
 
 (DEFUN |compExpression| (|x| |m| |e|)
@@ -1177,12 +1174,12 @@
       (COND
        ((AND (SYMBOLP |op|) (SETQ |fn| (GET |op| '|comp_special|)))
         (FUNCALL |fn| |x| |m| |e|))
-       ((AND
-         (PROGN
-          (SETQ |ISTMP#1| (|getmode| |op| |e|))
-          (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) '|Mapping|)
-               (PROGN (SETQ |ml| (CDR |ISTMP#1|)) #1='T)))
-         (SETQ |u| (|applyMapping| |x| |m| |e| |ml|)))
+       ((AND (SYMBOLP |op|)
+             (PROGN
+              (SETQ |ISTMP#1| (|getmode| |op| |e|))
+              (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) '|Mapping|)
+                   (PROGN (SETQ |ml| (CDR |ISTMP#1|)) #1='T)))
+             (SETQ |u| (|applyMapping| |x| |m| |e| |ml|)))
         |u|)
        (#1# (|compForm| |x| |m| |e|)))))))
 
@@ -1272,6 +1269,7 @@
 ;     MEMQ(s,$functorLocalParameters) =>
 ;         NRTgetLocalIndex(s, e)
 ;         [s,v.mode,e] --s will be replaced by an ELT form in beforeCompile
+;     s = "T" => ["T$", v.mode, e]
 ;     [s,v.mode,e] --s has been SETQd
 ;   m':= getmode(s,e) =>
 ;     if not member(s,$formalArgList) and not MEMQ(s,$FormalMapVariableList) and
@@ -1298,6 +1296,7 @@
             (COND
              ((MEMQ |s| |$functorLocalParameters|)
               (PROGN (|NRTgetLocalIndex| |s| |e|) (LIST |s| (CADR |v|) |e|)))
+             ((EQ |s| 'T) (LIST 'T$ (CADR |v|) |e|))
              (#1='T (LIST |s| (CADR |v|) |e|))))
            ((SETQ |m'| (|getmode| |s| |e|))
             (PROGN
@@ -1503,9 +1502,9 @@
 ;     -- FIXME: we should handle 0 and 1 in systematic way, instead
 ;     -- of renaming hacks like below
 ;     if op = 0 then
-;         op := "Zero"
+;         op := "0"
 ;     else if op = 1 then
-;         op := "One"
+;         op := "1"
 ;     -- Next clause added JHD 8/Feb/94: the clause after doesn't work
 ;     -- since addDomain refuses to add modemaps from Mapping
 ;     domain=$Float and op="float" and m=$DoubleFloat =>
@@ -1555,8 +1554,7 @@
         (|coerce| T$ |m|)))
       (#1#
        (PROGN
-        (COND ((EQL |op| 0) (SETQ |op| '|Zero|))
-              ((EQL |op| 1) (SETQ |op| '|One|)))
+        (COND ((EQL |op| 0) (SETQ |op| '|0|)) ((EQL |op| 1) (SETQ |op| '|1|)))
         (COND
          ((AND (EQUAL |domain| |$Float|) (EQ |op| '|float|)
                (EQUAL |m| |$DoubleFloat|))
@@ -1606,10 +1604,10 @@
             (#1# NIL)))))))))))
 
 ; try_constant_DF(mant, exp, m, e) ==
-;     if mant = ["Zero"] then mant := 0
-;     if mant = ["One"] then mant := 1
-;     if exp = ["Zero"] then exp := 0
-;     if exp = ["One"] then exp := 1
+;     if mant = ["0"] then mant := 0
+;     if mant = ["1"] then mant := 1
+;     if exp = ["0"] then exp := 0
+;     if exp = ["1"] then exp := 1
 ;     INTEGERP(mant) and INTEGERP(exp) => [["mk_DF", mant, exp], m, e]
 ;     nil
 
@@ -1617,10 +1615,10 @@
   (PROG ()
     (RETURN
      (PROGN
-      (COND ((EQUAL |mant| (LIST '|Zero|)) (SETQ |mant| 0)))
-      (COND ((EQUAL |mant| (LIST '|One|)) (SETQ |mant| 1)))
-      (COND ((EQUAL |exp| (LIST '|Zero|)) (SETQ |exp| 0)))
-      (COND ((EQUAL |exp| (LIST '|One|)) (SETQ |exp| 1)))
+      (COND ((EQUAL |mant| (LIST '|0|)) (SETQ |mant| 0)))
+      (COND ((EQUAL |mant| (LIST '|1|)) (SETQ |mant| 1)))
+      (COND ((EQUAL |exp| (LIST '|0|)) (SETQ |exp| 0)))
+      (COND ((EQUAL |exp| (LIST '|1|)) (SETQ |exp| 1)))
       (COND
        ((AND (INTEGERP |mant|) (INTEGERP |exp|))
         (LIST (LIST '|mk_DF| |mant| |exp|) |m| |e|))
@@ -2038,8 +2036,8 @@
 
 ; substituteIntoFunctorModemap(argl,modemap is [[dc,:sig],:.],e) ==
 ;   #dc~=#sig =>
-;     keyedSystemError("S2GE0016",['"substituteIntoFunctorModemap",
-;       '"Incompatible maps"])
+;         unexpected_error(['"substituteIntoFunctorModemap",
+;                           '"Incompatible maps"])
 ;   #argl=#rest sig =>
 ;                         --here, we actually have a functor form
 ;     sig:= EQSUBSTLIST(argl,rest dc,sig)
@@ -2057,7 +2055,7 @@
       (SETQ |sig| (CDAR . #1#))
       (COND
        ((NOT (EQL (LENGTH |dc|) (LENGTH |sig|)))
-        (|keyedSystemError| 'S2GE0016
+        (|unexpected_error|
          (LIST "substituteIntoFunctorModemap" "Incompatible maps")))
        ((EQL (LENGTH |argl|) (LENGTH (CDR |sig|)))
         (PROGN
@@ -2210,9 +2208,14 @@
         (|stackMessage| (LIST "No mode in assignment to: " |id|)))
        (#1# (|finish_setq_single| T$ |m| |id| |val| |currentProplist|)))))))
 
+; cons_value(v, m) == ["value", v, m, $EmptyEnvironment]
+
+(DEFUN |cons_value| (|v| |m|)
+  (PROG () (RETURN (LIST '|value| |v| |m| |$EmptyEnvironment|))))
+
 ; finish_setq_single(T, m, id, val, currentProplist) ==
 ;   T' := [x, m', e'] := convert(T, m) or return nil
-;   newProplist:= consProplistOf(id,currentProplist,"value",removeEnv [val,:rest T])
+;   newProplist := [cons_value(val, T.mode), :currentProplist]
 ;   e':= (PAIRP id => e'; addBinding(id,newProplist,e'))
 ;   if isDomainForm(val,e') then
 ;     if isDomainInScope(id,e') then
@@ -2225,14 +2228,18 @@
 ;
 ;   if (k := NRTassocIndex(id)) then
 ;       form := ['SETELT, "%", k, x]
-;   else form:=
-;          $QuickLet => ["LET",id,x]
-;          ["LET",id,x,
-;             (isDomainForm(x, e') => ['ELT, id, 0]; first outputComp(id, e'))]
+;   else
+;       id1 :=
+;           id = "T" => "T$"
+;           id
+;       form :=
+;           $QuickLet => ["LET", id1, x]
+;           ["LET", id1, x,
+;              (isDomainForm(x, e') => ['ELT, id, 0]; first outputComp(id, e'))]
 ;   [form,m',e']
 
 (DEFUN |finish_setq_single| (T$ |m| |id| |val| |currentProplist|)
-  (PROG (|LETTMP#1| |x| |m'| |e'| |T'| |newProplist| |k| |form|)
+  (PROG (|LETTMP#1| |x| |m'| |e'| |T'| |newProplist| |k| |form| |id1|)
     (RETURN
      (PROGN
       (SETQ |T'|
@@ -2243,8 +2250,7 @@
                (SETQ |e'| (CADDR . #1#))
                |LETTMP#1|))
       (SETQ |newProplist|
-              (|consProplistOf| |id| |currentProplist| '|value|
-               (|removeEnv| (CONS |val| (CDR T$)))))
+              (CONS (|cons_value| |val| (CADR T$)) |currentProplist|))
       (SETQ |e'|
               (COND ((CONSP |id|) |e'|)
                     (#2='T (|addBinding| |id| |newProplist| |e'|))))
@@ -2260,11 +2266,11 @@
       (COND
        ((SETQ |k| (|NRTassocIndex| |id|))
         (SETQ |form| (LIST 'SETELT '% |k| |x|)))
-       (#2#
+       (#2# (SETQ |id1| (COND ((EQ |id| 'T) 'T$) (#2# |id|)))
         (SETQ |form|
-                (COND (|$QuickLet| (LIST 'LET |id| |x|))
+                (COND (|$QuickLet| (LIST 'LET |id1| |x|))
                       (#2#
-                       (LIST 'LET |id| |x|
+                       (LIST 'LET |id1| |x|
                              (COND
                               ((|isDomainForm| |x| |e'|) (LIST 'ELT |id| 0))
                               (#2# (CAR (|outputComp| |id| |e'|))))))))))
@@ -2359,7 +2365,10 @@
 ;     ass_list := []
 ;     for y in nameList repeat
 ;         e := put(y, "value", [genSomeVariable(), D, $noEnv], e)
-;         ass_list := cons(["LET", y, ["SPADfirst", g2]], ass_list)
+;         y1 :=
+;             y = "T" => "T$"
+;             y
+;         ass_list := cons(["LET", y1, ["SPADfirst", g2]], ass_list)
 ;         ass_list := cons(["LET", g2, ["CDR", g2]], ass_list)
 ;     ass_list := nreverse(rest(ass_list))
 ;     convert([["PROGN",x, x2, :ass_list, g], m', e], m)
@@ -2383,7 +2392,7 @@
 
 (DEFUN |setqMultiple| (|nameList| |val| |m| |e|)
   (PROG (|l| |g| |LETTMP#1| |m1| T$ |x| |m'| |ISTMP#1| D |g2| |x2| |ass_list|
-         |selectorModePairs| |y| |z| |assignList|)
+         |y1| |selectorModePairs| |y| |z| |assignList|)
     (RETURN
      (COND
       ((AND (CONSP |val|) (EQ (CAR |val|) 'CONS) (EQUAL |m| |$NoValueMode|))
@@ -2432,8 +2441,9 @@
                   (SETQ |e|
                           (|put| |y| '|value|
                            (LIST (|genSomeVariable|) D |$noEnv|) |e|))
+                  (SETQ |y1| (COND ((EQ |y| 'T) 'T$) (#1# |y|)))
                   (SETQ |ass_list|
-                          (CONS (LIST 'LET |y| (LIST '|SPADfirst| |g2|))
+                          (CONS (LIST 'LET |y1| (LIST '|SPADfirst| |g2|))
                                 |ass_list|))
                   (SETQ |ass_list|
                           (CONS (LIST 'LET |g2| (LIST 'CDR |g2|))
@@ -3348,7 +3358,7 @@
 ; compSel(form is ["Sel", aDomain, anOp], m, E) ==
 ;   aDomain="Lisp" =>
 ;     [anOp',m,E] where anOp'() == (anOp=$Zero => 0; anOp=$One => 1; anOp)
-;   anOp := (anOp = $Zero => "Zero"; anOp = $One => "One"; anOp)
+;   anOp := (anOp = $Zero => "0"; anOp = $One => "1"; anOp)
 ;   compSel1(aDomain, anOp, [], m, E)
 
 (DEFUN |compSel| (|form| |m| E)
@@ -3366,8 +3376,8 @@
        (#2#
         (PROGN
          (SETQ |anOp|
-                 (COND ((EQUAL |anOp| |$Zero|) '|Zero|)
-                       ((EQUAL |anOp| |$One|) '|One|) (#2# |anOp|)))
+                 (COND ((EQUAL |anOp| |$Zero|) '|0|)
+                       ((EQUAL |anOp| |$One|) '|1|) (#2# |anOp|)))
          (|compSel1| |aDomain| |anOp| NIL |m| E))))))))
 
 ; compHas(pred is ["has", a, b], m, e) ==
@@ -3851,8 +3861,8 @@
 ;   a is ["is",id,m] =>
 ;     IDENTP id and isDomainForm(m,$EmptyEnvironment) =>
 ;          currentProplist:= getProplist(id,e)
-;          [.,.,e] := T := comp(m,$EmptyMode,e) or return nil -- duplicates compIs
-;          newProplist:= consProplistOf(id,currentProplist,"value",[m,:rest removeEnv T])
+;          [., m2, e] := T := comp(m, $EmptyMode,e) or return nil
+;          newProplist:= [cons_value(m, m2), :currentProplist]
 ;          addBinding(id,newProplist,e)
 ;     e
 ;   a is ["case",x,m] and IDENTP x =>
@@ -3860,7 +3870,8 @@
 ;   e
 
 (DEFUN |getSuccessEnvironment| (|a| |e|)
-  (PROG (|ISTMP#1| |x| |ISTMP#2| |m| |id| |currentProplist| T$ |newProplist|)
+  (PROG (|ISTMP#1| |x| |ISTMP#2| |m| |id| |currentProplist| T$ |m2|
+         |newProplist|)
     (RETURN
      (COND
       ((AND (CONSP |a|) (EQ (CAR |a|) '|has|)
@@ -3887,10 +3898,9 @@
          (PROGN
           (SETQ |currentProplist| (|getProplist| |id| |e|))
           (SETQ T$ (OR (|comp| |m| |$EmptyMode| |e|) (RETURN NIL)))
-          (SETQ |e| (CADDR T$))
-          (SETQ |newProplist|
-                  (|consProplistOf| |id| |currentProplist| '|value|
-                   (CONS |m| (CDR (|removeEnv| T$)))))
+          (SETQ |m2| (CADR . #2=(T$)))
+          (SETQ |e| (CADDR . #2#))
+          (SETQ |newProplist| (CONS (|cons_value| |m| |m2|) |currentProplist|))
           (|addBinding| |id| |newProplist| |e|)))
         (#1# |e|)))
       ((AND (CONSP |a|) (EQ (CAR |a|) '|case|)
@@ -4443,8 +4453,7 @@
       (|coerce| T$ |m|)))))
 
 ; coerce(T,m) ==
-;   $InteractiveMode => keyedSystemError("S2GE0016",['"coerce",
-;       '"function coerce called from the interpreter."])
+;   -- FIXME: Hardcoded assumption about Rep
 ;   rplac(CADR(T), substitute("%", $Rep, CADR(T)))
 ;   T':= coerceEasy(T,m) => T'
 ;   T' := constant_coerce(T, m) => T'
@@ -4461,21 +4470,16 @@
 (DEFUN |coerce| (T$ |m|)
   (PROG (|T'|)
     (RETURN
-     (COND
-      (|$InteractiveMode|
-       (|keyedSystemError| 'S2GE0016
-        (LIST "coerce" "function coerce called from the interpreter.")))
-      (#1='T
-       (PROGN
-        (|rplac| (CADR T$) (|substitute| '% |$Rep| (CADR T$)))
-        (COND ((SETQ |T'| (|coerceEasy| T$ |m|)) |T'|)
-              ((SETQ |T'| (|constant_coerce| T$ |m|)) |T'|)
-              ((SETQ |T'| (|coerceSubset| T$ |m|)) |T'|)
-              ((SETQ |T'| (|coerceHard| T$ |m|)) |T'|)
-              ((OR (EQ (CAR T$) '|$fromCoerceable$|)
-                   (|isSomeDomainVariable| |m|))
-               NIL)
-              (#1# (|stackMessage| (|coerce,fn| (CAR T$) (CADR T$) |m|))))))))))
+     (PROGN
+      (|rplac| (CADR T$) (|substitute| '% |$Rep| (CADR T$)))
+      (COND ((SETQ |T'| (|coerceEasy| T$ |m|)) |T'|)
+            ((SETQ |T'| (|constant_coerce| T$ |m|)) |T'|)
+            ((SETQ |T'| (|coerceSubset| T$ |m|)) |T'|)
+            ((SETQ |T'| (|coerceHard| T$ |m|)) |T'|)
+            ((OR (EQ (CAR T$) '|$fromCoerceable$|)
+                 (|isSomeDomainVariable| |m|))
+             NIL)
+            ('T (|stackMessage| (|coerce,fn| (CAR T$) (CADR T$) |m|))))))))
 (DEFUN |coerce,fn| (|x| |m1| |m2|)
   (PROG ()
     (RETURN
@@ -4618,7 +4622,7 @@
 ; isUnionMode2(m, e, pl) ==
 ;   m is ["Union",:.] => m
 ;   (m' := getmode_pl(m, pl)) is ["Mapping", ["UnionCategory", :.]] => CADR m'
-;   -- FIXME: Hardcoded assumprion about Rep
+;   -- FIXME: Hardcoded assumption about Rep
 ;   v :=
 ;       m = "%" => get("Rep", "value", e)
 ;       QLASSQ("value", pl)
@@ -4791,12 +4795,12 @@
 
 ; constant_coerce([x, m, e], m') ==
 ;     m' = $SingleInteger =>
-;         if x = ["Zero"] then x = 0
-;         if x = ["One"] then x = 1
+;         if x = ["0"] then x := 0
+;         if x = ["1"] then x := 1
 ;         not(INTEGERP(x)) => nil
 ;         -- Check if in range of FIXNUM on all supported implementations
 ;         x > 8000000 or x < -8000000 => nil
-;         m = $Integer or m = $PositiveInteger or $NonNegativeInteger =>
+;         m = $Integer or m = $PositiveInteger or m = $NonNegativeInteger =>
 ;             [x, m', e]
 ;         nil
 ;     m' = $DoubleFloat and m = $Float =>
@@ -4816,12 +4820,12 @@
       (COND
        ((EQUAL |m'| |$SingleInteger|)
         (PROGN
-         (COND ((EQUAL |x| (LIST '|Zero|)) (EQL |x| 0)))
-         (COND ((EQUAL |x| (LIST '|One|)) (EQL |x| 1)))
+         (COND ((EQUAL |x| (LIST '|0|)) (SETQ |x| 0)))
+         (COND ((EQUAL |x| (LIST '|1|)) (SETQ |x| 1)))
          (COND ((NULL (INTEGERP |x|)) NIL)
                ((OR (< 8000000 |x|) (< |x| (- 8000000))) NIL)
                ((OR (EQUAL |m| |$Integer|) (EQUAL |m| |$PositiveInteger|)
-                    |$NonNegativeInteger|)
+                    (EQUAL |m| |$NonNegativeInteger|))
                 (LIST |x| |m'| |e|))
                (#2='T NIL))))
        ((AND (EQUAL |m'| |$DoubleFloat|) (EQUAL |m| |$Float|))
@@ -5048,13 +5052,13 @@
 ;   -- of hacks like below
 ;   atom x =>
 ;       x = y => true
-;       x = 0 => y = ["Zero"]
-;       x = 1 => y = ["One"]
+;       x = 0 => y = ["0"]
+;       x = 1 => y = ["1"]
 ;       false
 ;   atom y =>
 ;       x = y => true
-;       y = 0 => x = ["Zero"]
-;       y = 1 => x = ["One"]
+;       y = 0 => x = ["0"]
+;       y = 1 => x = ["1"]
 ;       false
 ;   #x ~=#y => nil
 ;   (and/[modeEqual(u,v) for u in x for v in y])
@@ -5064,11 +5068,11 @@
     (RETURN
      (COND ((EQ |x| |y|) T)
            ((ATOM |x|)
-            (COND ((EQUAL |x| |y|) T) ((EQL |x| 0) (EQUAL |y| (LIST '|Zero|)))
-                  ((EQL |x| 1) (EQUAL |y| (LIST '|One|))) (#1='T NIL)))
+            (COND ((EQUAL |x| |y|) T) ((EQL |x| 0) (EQUAL |y| (LIST '|0|)))
+                  ((EQL |x| 1) (EQUAL |y| (LIST '|1|))) (#1='T NIL)))
            ((ATOM |y|)
-            (COND ((EQUAL |x| |y|) T) ((EQL |y| 0) (EQUAL |x| (LIST '|Zero|)))
-                  ((EQL |y| 1) (EQUAL |x| (LIST '|One|))) (#1# NIL)))
+            (COND ((EQUAL |x| |y|) T) ((EQL |y| 0) (EQUAL |x| (LIST '|0|)))
+                  ((EQL |y| 1) (EQUAL |x| (LIST '|1|))) (#1# NIL)))
            ((NOT (EQL (LENGTH |x|) (LENGTH |y|))) NIL)
            (#1#
             ((LAMBDA (|bfVar#167| |bfVar#165| |u| |bfVar#166| |v|)
@@ -5166,12 +5170,14 @@
 ;     -- Assume we entered from the "compiler" function, so args ~= nil
 ;     -- and is a file with file extension .spad.
 ;
+;     $no_lisp_compile : local := false
+;     $killOptimizeIfTrue : local := false
+;
 ;     path := first(args)
 ;     not(has_extention?(path, '"spad")) => throw_msg("S2IZ0082", CONCAT(
 ;       '"The FriCAS system compiler can only compile files with file",
 ;         '" extension _".spad_"."), nil)
-;     not(PROBE_-FILE(path)) => throw_msg("S2IL0003",
-;             '"The file %1b is needed but does not exist.", [path])
+;     file_must_exist(path)
 ;
 ;     $edit_file := path
 ;     say_msg("S2IZ0038",
@@ -5188,6 +5194,8 @@
 ;       old _
 ;       nobreak _
 ;       nolibrary _
+;       nolispcompile _
+;       noopt _
 ;       noquiet _
 ;       vartrace _
 ;       quiet _
@@ -5206,13 +5214,16 @@
 ;
 ;     for opt in $options repeat
 ;         [optname,:optargs] := opt
-;         fullopt := selectOptionLC(optname,optList,nil)
+;         fullopt := selectOption(optname, optList, nil)
 ;
 ;         fullopt = 'new         => error '"Internal error: compileSpad2Cmd got )new"
 ;         fullopt = 'old         => NIL     -- no opt
 ;
 ;         fullopt = 'library     => lib := true
 ;         fullopt = 'nolibrary   => lib := false
+;
+;         fullopt = 'nolispcompile => $no_lisp_compile := true
+;         fullopt = 'noopt => $killOptimizeIfTrue := true
 ;
 ;         -- Ignore quiet/nonquiet if "constructor" is given.
 ;         fullopt = 'quiet       => "ignored now"
@@ -5221,21 +5232,23 @@
 ;         fullopt = 'break       => $scanIfTrue := nil
 ;         fullopt = 'vartrace      =>
 ;           $QuickLet  := false
-;         throw_msg("S2IZ0036", _
-;   '"%1b is an unknown or unavailable for the %b )compile %d command.",
-;            [STRCONC('")", object2String(optname))])
+;         unknown_compile_option([STRCONC('")", object2String(optname))])
 ;
 ;     compilerDoit(lib, path)
-;     extendLocalLibdb $newConlist
 ;     terminateSystemCommand()
 ;     spadPrompt()
 
 (DEFUN |compileSpad2Cmd| (|args|)
-  (PROG (|$QuickCode| |$QuickLet| |$scanIfTrue| |fullopt| |optargs| |optname|
-         |lib| |optList| |path|)
-    (DECLARE (SPECIAL |$QuickCode| |$QuickLet| |$scanIfTrue|))
+  (PROG (|$QuickCode| |$QuickLet| |$scanIfTrue| |$killOptimizeIfTrue|
+         |$no_lisp_compile| |fullopt| |optargs| |optname| |lib| |optList|
+         |path|)
+    (DECLARE
+     (SPECIAL |$QuickCode| |$QuickLet| |$scanIfTrue| |$killOptimizeIfTrue|
+      |$no_lisp_compile|))
     (RETURN
      (PROGN
+      (SETQ |$no_lisp_compile| NIL)
+      (SETQ |$killOptimizeIfTrue| NIL)
       (SETQ |path| (CAR |args|))
       (COND
        ((NULL (|has_extention?| |path| "spad"))
@@ -5243,18 +5256,17 @@
          (CONCAT "The FriCAS system compiler can only compile files with file"
                  " extension \".spad\".")
          NIL))
-       ((NULL (PROBE-FILE |path|))
-        (|throw_msg| 'S2IL0003 "The file %1b is needed but does not exist."
-         (LIST |path|)))
        (#1='T
         (PROGN
+         (|file_must_exist| |path|)
          (SETQ |$edit_file| |path|)
          (|say_msg| 'S2IZ0038
           "Compiling FriCAS source code from file %1b using system compiler."
           (LIST |path|))
          (SETQ |optList|
                  '(|break| |constructor| |functions| |library| |lisp| |new|
-                   |old| |nobreak| |nolibrary| |noquiet| |vartrace| |quiet|))
+                   |old| |nobreak| |nolibrary| |nolispcompile| |noopt|
+                   |noquiet| |vartrace| |quiet|))
          (SETQ |$scanIfTrue| NIL)
          (SETQ |$QuickLet| T)
          (SETQ |$QuickCode| T)
@@ -5269,39 +5281,34 @@
                (PROGN
                 (SETQ |optname| (CAR |opt|))
                 (SETQ |optargs| (CDR |opt|))
-                (SETQ |fullopt| (|selectOptionLC| |optname| |optList| NIL))
+                (SETQ |fullopt| (|selectOption| |optname| |optList| NIL))
                 (COND
                  ((EQ |fullopt| '|new|)
                   (|error| "Internal error: compileSpad2Cmd got )new"))
                  ((EQ |fullopt| '|old|) NIL)
                  ((EQ |fullopt| '|library|) (SETQ |lib| T))
                  ((EQ |fullopt| '|nolibrary|) (SETQ |lib| NIL))
+                 ((EQ |fullopt| '|nolispcompile|) (SETQ |$no_lisp_compile| T))
+                 ((EQ |fullopt| '|noopt|) (SETQ |$killOptimizeIfTrue| T))
                  ((EQ |fullopt| '|quiet|) '|ignored now|)
                  ((EQ |fullopt| '|noquiet|) '|ignored now|)
                  ((EQ |fullopt| '|nobreak|) (SETQ |$scanIfTrue| T))
                  ((EQ |fullopt| '|break|) (SETQ |$scanIfTrue| NIL))
                  ((EQ |fullopt| '|vartrace|) (SETQ |$QuickLet| NIL))
                  (#1#
-                  (|throw_msg| 'S2IZ0036
-                   "%1b is an unknown or unavailable for the %b )compile %d command."
+                  (|unknown_compile_option|
                    (LIST (STRCONC ")" (|object2String| |optname|)))))))))
              (SETQ |bfVar#171| (CDR |bfVar#171|))))
           |$options| NIL)
          (|compilerDoit| |lib| |path|)
-         (|extendLocalLibdb| |$newConlist|)
          (|terminateSystemCommand|)
          (|spadPrompt|))))))))
 
 ; compilerDoit(lib, path) ==
-;     $InteractiveMode : local := nil
 ;     $LISPLIB : local := lib
 ;     spadCompile(path)
 
 (DEFUN |compilerDoit| (|lib| |path|)
-  (PROG ($LISPLIB |$InteractiveMode|)
-    (DECLARE (SPECIAL $LISPLIB |$InteractiveMode|))
-    (RETURN
-     (PROGN
-      (SETQ |$InteractiveMode| NIL)
-      (SETQ $LISPLIB |lib|)
-      (|spadCompile| |path|)))))
+  (PROG ($LISPLIB)
+    (DECLARE (SPECIAL $LISPLIB))
+    (RETURN (PROGN (SETQ $LISPLIB |lib|) (|spadCompile| |path|)))))

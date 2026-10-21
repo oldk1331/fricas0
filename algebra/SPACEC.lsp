@@ -36,22 +36,12 @@
                                                              ((|NonNegativeInteger|)
                                                               %))
                                                             T)
-                                                           ((|numberOfComposites|
-                                                             ((|NonNegativeInteger|)
-                                                              %))
-                                                            T)
                                                            ((|merge|
                                                              (% (|List| %)))
                                                             T)
                                                            ((|merge| (% % %))
                                                             T)
-                                                           ((|composite|
-                                                             (% (|List| %)))
-                                                            T)
                                                            ((|components|
-                                                             ((|List| %) %))
-                                                            T)
-                                                           ((|composites|
                                                              ((|List| %) %))
                                                             T)
                                                            ((|copy| (% %)) T)

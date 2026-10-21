@@ -15,15 +15,15 @@
         ((|f| (|Mapping| (|Union| B #1="failed") A)) (|a| (|Vector| A))
          (% (|Union| (|Vector| B) "failed")))
         (SPROG
-         ((|res| (|List| B)) (#2=#:G13 NIL) (#3=#:G26 NIL)
-          (|r| (|Union| B #1#)) (#4=#:G27 NIL) (|u| NIL))
+         ((|u| NIL) (#2=#:G29 NIL) (|r| (|Union| B #1#)) (#3=#:G28 NIL)
+          (#4=#:G15 NIL) (|res| (|List| B)))
          (SEQ
           (EXIT
            (SEQ (LETT |res| NIL)
-                (SEQ (LETT |u| NIL) (LETT #4# (SPADCALL |a| (QREFELT % 20)))
+                (SEQ (LETT |u| NIL) (LETT #2# (SPADCALL |a| (QREFELT % 20)))
                      G190
                      (COND
-                      ((OR (ATOM #4#) (PROGN (LETT |u| (CAR #4#)) NIL))
+                      ((OR (ATOM #2#) (PROGN (LETT |u| (CAR #2#)) NIL))
                        (GO G191)))
                      (SEQ (LETT |r| (SPADCALL |u| |f|))
                           (EXIT
@@ -31,26 +31,26 @@
                             ((SPADCALL |r| (CONS 1 "failed") (QREFELT % 23))
                              (PROGN
                               (LETT #3# (CONS 1 "failed"))
-                              (GO #5=#:G25)))
+                              (GO #5=#:G27)))
                             ('T
                              (LETT |res|
                                    (CONS
-                                    (PROG2 (LETT #2# |r|)
-                                        (QCDR #2#)
-                                      (|check_union2| (QEQCAR #2# 0)
+                                    (PROG2 (LETT #4# |r|)
+                                        (QCDR #4#)
+                                      (|check_union2| (QEQCAR #4# 0)
                                                       (QREFELT % 7)
                                                       (|Union| (QREFELT % 7)
                                                                #1#)
-                                                      #2#))
+                                                      #4#))
                                     |res|))))))
-                     (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT NIL))
+                     (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                 (EXIT (CONS 0 (SPADCALL (NREVERSE |res|) (QREFELT % 25))))))
           #5# (EXIT #3#)))) 
 
 (DECLAIM (NOTINLINE |VectorFunctions2;|)) 
 
 (DEFUN |VectorFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -66,9 +66,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |VectorFunctions2| (&REST #1=#:G28)
+(DEFUN |VectorFunctions2| (&REST #1=#:G30)
   (SPROG NIL
-         (PROG (#2=#:G29)
+         (PROG (#2=#:G31)
            (RETURN
             (COND
              ((LETT #2#

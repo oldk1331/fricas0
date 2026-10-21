@@ -13,23 +13,23 @@
         ((|lx| (|List| (|DoubleFloat|))) (|ly| (|List| (|DoubleFloat|)))
          (|l| (|List| (|DrawOption|))) (% (|TwoDimensionalViewport|)))
         (SPROG
-         ((#1=#:G10 NIL) (|x| NIL) (#2=#:G11 NIL) (|y| NIL) (#3=#:G9 NIL))
+         ((#1=#:G9 NIL) (|y| NIL) (#2=#:G11 NIL) (|x| NIL) (#3=#:G10 NIL))
          (SEQ
           (SPADCALL
            (PROGN
-            (LETT #3# NIL)
-            (SEQ (LETT |y| NIL) (LETT #2# |ly|) (LETT |x| NIL) (LETT #1# |lx|)
+            (LETT #1# NIL)
+            (SEQ (LETT |y| NIL) (LETT #2# |ly|) (LETT |x| NIL) (LETT #3# |lx|)
                  G190
                  (COND
-                  ((OR (ATOM #1#) (PROGN (LETT |x| (CAR #1#)) NIL) (ATOM #2#)
+                  ((OR (ATOM #3#) (PROGN (LETT |x| (CAR #3#)) NIL) (ATOM #2#)
                        (PROGN (LETT |y| (CAR #2#)) NIL))
                    (GO G191)))
                  (SEQ
                   (EXIT
-                   (LETT #3#
-                         (CONS (SPADCALL (LIST |x| |y|) (QREFELT % 17)) #3#))))
-                 (LETT #1# (PROG1 (CDR #1#) (LETT #2# (CDR #2#)))) (GO G190)
-                 G191 (EXIT (NREVERSE #3#))))
+                   (LETT #1#
+                         (CONS (SPADCALL (LIST |x| |y|) (QREFELT % 17)) #1#))))
+                 (LETT #3# (PROG1 (CDR #3#) (LETT #2# (CDR #2#)))) (GO G190)
+                 G191 (EXIT (NREVERSE #1#))))
            |l| (QREFELT % 13))))) 
 
 (SDEFUN |DRAWPT;draw;2LTdv;4|
@@ -47,10 +47,10 @@
          (|z| (|List| (|DoubleFloat|))) (|l| (|List| (|DrawOption|)))
          (% (|ThreeDimensionalViewport|)))
         (SPROG
-         ((|points| (|List| (|List| (|Point| (|DoubleFloat|)))))
-          (|row| (|List| (|Point| (|DoubleFloat|)))) (|zval| (|Integer|))
-          (|i| NIL) (|j| NIL) (|zLen| (|Integer|)) (|n| (|Integer|))
-          (|m| (|Integer|)))
+         ((|m| (|Integer|)) (|n| (|Integer|)) (|zLen| (|Integer|)) (|j| NIL)
+          (|i| NIL) (|zval| (|Integer|))
+          (|row| (|List| (|Point| (|DoubleFloat|))))
+          (|points| (|List| (|List| (|Point| (|DoubleFloat|))))))
          (SEQ (LETT |m| (LENGTH |x|))
               (EXIT
                (COND ((ZEROP |m|) (|error| "No X values"))

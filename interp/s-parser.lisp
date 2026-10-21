@@ -236,7 +236,7 @@
 ; parse_token(token) ==
 ;     tok := match_current_token(token, nil)
 ;     not(tok) => nil
-;     symbol := TOKEN_-SYMBOL(tok)
+;     symbol := token_symbol(tok)
 ;     push_reduction(token, COPY_-TREE(symbol))
 ;     advance_token()
 ;     true
@@ -249,7 +249,7 @@
       (COND ((NULL |tok|) NIL)
             ('T
              (PROGN
-              (SETQ |symbol| (TOKEN-SYMBOL |tok|))
+              (SETQ |symbol| (|token_symbol| |tok|))
               (|push_reduction| |token| (COPY-TREE |symbol|))
               (|advance_token|)
               T)))))))
@@ -546,20 +546,13 @@
                         G1)))))))))))))
 
 ; parse_Expression() ==
-;     prior_sym := MAKE_-SYMBOL_-OF PRIOR_-TOKEN
-;     prior_sym :=
-;         SYMBOLP(prior_sym) => prior_sym
-;         nil
-;     parse_Expr
-;      parse_rightBindingPowerOf(prior_sym, $ParseMode)
+;     parse_Expr(parse_rightBindingPowerOf(prior_symbol(), $ParseMode))
 
 (DEFUN |parse_Expression| ()
-  (PROG (|prior_sym|)
+  (PROG ()
     (RETURN
-     (PROGN
-      (SETQ |prior_sym| (MAKE-SYMBOL-OF PRIOR-TOKEN))
-      (SETQ |prior_sym| (COND ((SYMBOLP |prior_sym|) |prior_sym|) ('T NIL)))
-      (|parse_Expr| (|parse_rightBindingPowerOf| |prior_sym| |$ParseMode|))))))
+     (|parse_Expr|
+      (|parse_rightBindingPowerOf| (|prior_symbol|) |$ParseMode|)))))
 
 ; parse_Expr1000() == parse_Expr 1000
 
@@ -645,12 +638,12 @@
 ;     current_symbol() ~= "$" => nil
 ;     not(OR(match_next_token("IDENTIFIER", NIL), next_symbol() = "%",
 ;            next_symbol() = "(")) => nil                     -- )
-;     G1 := COPY_-TOKEN PRIOR_-TOKEN
+;     saved_prior := copy_prior_token()
 ;     not(parse_Qualification()) => nil
-;     SETF(PRIOR_-TOKEN, G1)
+;     set_prior_token(saved_prior)
 
 (DEFUN |parse_TokTail| ()
-  (PROG (G1)
+  (PROG (|saved_prior|)
     (RETURN
      (COND ((NOT (EQ (|current_symbol|) '$)) NIL)
            ((NULL
@@ -659,9 +652,9 @@
             NIL)
            (#1='T
             (PROGN
-             (SETQ G1 (COPY-TOKEN PRIOR-TOKEN))
+             (SETQ |saved_prior| (|copy_prior_token|))
              (COND ((NULL (|parse_Qualification|)) NIL)
-                   (#1# (SETF PRIOR-TOKEN G1)))))))))
+                   (#1# (|set_prior_token| |saved_prior|)))))))))
 
 ; parse_Qualification() ==
 ;     not(match_symbol "$") => nil

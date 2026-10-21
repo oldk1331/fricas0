@@ -29,7 +29,8 @@
         (COND ((QEQCAR |x| 0) (|error| "x has only one entry"))
               ('T (QCDR (QCDR |x|))))) 
 
-(PUT '|FMAGMA;retractable?;%B;5| '|SPADreplace| '(XLAM (|x|) (QEQCAR |x| 0))) 
+(MAKEPROP '|FMAGMA;retractable?;%B;5| '|SPADreplace|
+          '(XLAM (|x|) (QEQCAR |x| 0))) 
 
 (SDEFUN |FMAGMA;retractable?;%B;5| ((|x| (%)) (% (|Boolean|))) (QEQCAR |x| 0)) 
 
@@ -40,7 +41,7 @@
         (COND ((SPADCALL |x| (QREFELT % 19)) (CONS 0 (QCDR |x|)))
               ('T (CONS 1 "failed")))) 
 
-(PUT '|FMAGMA;coerce;VarSet%;8| '|SPADreplace| '(XLAM (|l|) (CONS 0 |l|))) 
+(MAKEPROP '|FMAGMA;coerce;VarSet%;8| '|SPADreplace| '(XLAM (|l|) (CONS 0 |l|))) 
 
 (SDEFUN |FMAGMA;coerce;VarSet%;8| ((|l| (|VarSet|)) (% (%))) (CONS 0 |l|)) 
 
@@ -107,7 +108,7 @@
             (SPADCALL (QCAR (QCDR |x|)) (QCAR (QCDR |y|)) (QREFELT % 40))))))) 
 
 (SDEFUN |FMAGMA;lexico;2%B;17| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
-        (SPROG ((|fy| (|VarSet|)) (|fx| (|VarSet|)))
+        (SPROG ((|fx| (|VarSet|)) (|fy| (|VarSet|)))
                (SEQ
                 (COND
                  ((QEQCAR |x| 0)
@@ -133,7 +134,7 @@
                          (#1# (SPADCALL |fx| |fy| (QREFELT % 39))))))))))) 
 
 (SDEFUN |FMAGMA;<;2%B;18| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
-        (SPROG ((|ly| #1=(|PositiveInteger|)) (|lx| #1#))
+        (SPROG ((|lx| #1=(|PositiveInteger|)) (|ly| #1#))
                (SEQ (LETT |lx| (SPADCALL |x| (QREFELT % 38)))
                     (LETT |ly| (SPADCALL |y| (QREFELT % 38)))
                     (EXIT
@@ -143,16 +144,17 @@
 (DECLAIM (NOTINLINE |FreeMagma;|)) 
 
 (DEFUN |FreeMagma;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|FreeMagma| DV$1))
-          (LETT % (GETREFV 44))
+          (LETT % (GETREFV 45))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|FreeMagma| (LIST DV$1) (CONS 1 %))
           (|stuffDomainSlots| %)
           (QSETREFV % 6 |#1|)
+          (AND (|HasCategory| % '(|SetWithZero|)) (|augmentPredVector| % 1))
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 7 (|Record| (|:| |left| %) (|:| |right| %)))
           (QSETREFV % 8 (|Union| |#1| (QREFELT % 7)))
@@ -187,31 +189,37 @@
               |FMAGMA;coerce;%Of;11| (|List| %) (39 . |bracket|)
               |FMAGMA;*;3%;12| |FMAGMA;first;%VarSet;13| |FMAGMA;rest;2%;14|
               (|PositiveInteger|) |FMAGMA;length;%Pi;15| (44 . <)
-              |FMAGMA;<;2%B;18| (50 . <=) |FMAGMA;lexico;2%B;17| (|String|))
-           '#(~= 56 |varList| 62 |smaller?| 67 |right| 73 |retractable?| 78
-              |retractIfCan| 83 |retract| 88 |rest| 93 |mirror| 98 |min| 103
-              |max| 109 |lexico| 115 |length| 121 |left| 126 |latex| 131
-              |first| 136 |coerce| 141 >= 156 > 162 = 168 <= 174 < 180 * 186)
+              |FMAGMA;<;2%B;18| (50 . <=) |FMAGMA;lexico;2%B;17| (|String|)
+              (|Integer|))
+           '#(~= 56 |varList| 62 |smaller?| 67 |sign| 73 |rightPower| 78
+              |right| 84 |retractable?| 89 |retractIfCan| 94 |retract| 99
+              |rest| 104 |positive?| 109 |negative?| 114 |mirror| 119 |min| 124
+              |max| 130 |lexico| 136 |length| 142 |leftPower| 147 |left| 153
+              |latex| 158 |first| 163 |coerce| 168 ^ 183 >= 189 > 195 = 201 <=
+              207 < 213 * 219)
            'NIL
-           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0))
+           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|OrderedSet&| NIL |RetractableTo&| |SetCategory&| NIL
-                     |PartialOrder&| NIL |BasicType&|)
+                  '#(NIL |OrderedSet&| NIL |Magma&| NIL |SetCategory&|
+                     |RetractableTo&| NIL |PartialOrder&| |BasicType&| NIL)
                   (CONS
-                   '#((|OrderedSet|) (|Comparable|) (|RetractableTo| 6)
-                      (|SetCategory|) (|CoercibleTo| 29) (|PartialOrder|)
-                      (|CoercibleFrom| 6) (|BasicType|))
-                   (|makeByteWordVec2| 43
+                   '#((|OrderedMagma|) (|OrderedSet|) (|Comparable|) (|Magma|)
+                      (|ComparableRepresentation|) (|SetCategory|)
+                      (|RetractableTo| 6) (|CoercibleTo| 29) (|PartialOrder|)
+                      (|BasicType|) (|CoercibleFrom| 6))
+                   (|makeByteWordVec2| 44
                                        '(2 6 9 0 0 10 2 7 9 0 0 11 2 13 0 0 0
                                          15 1 13 0 0 16 1 25 0 6 26 2 25 0 0 0
                                          28 1 6 29 0 30 1 29 0 32 33 2 6 9 0 0
                                          39 2 6 9 0 0 41 2 0 9 0 0 1 1 0 13 0
-                                         14 2 0 9 0 0 1 1 0 0 0 18 1 0 9 0 19 1
-                                         0 21 0 22 1 0 6 0 20 1 0 0 0 36 1 0 0
-                                         0 24 2 0 0 0 0 1 2 0 0 0 0 1 2 0 9 0 0
-                                         42 1 0 37 0 38 1 0 0 0 17 1 0 43 0 1 1
-                                         0 6 0 35 1 0 29 0 31 1 0 0 6 23 1 0 25
-                                         0 27 2 0 9 0 0 1 2 0 9 0 0 1 2 0 9 0 0
-                                         12 2 0 9 0 0 1 2 0 9 0 0 40 2 0 0 0 0
+                                         14 2 0 9 0 0 1 1 1 44 0 1 2 0 0 0 37 1
+                                         1 0 0 0 18 1 0 9 0 19 1 0 21 0 22 1 0
+                                         6 0 20 1 0 0 0 36 1 1 9 0 1 1 1 9 0 1
+                                         1 0 0 0 24 2 0 0 0 0 1 2 0 0 0 0 1 2 0
+                                         9 0 0 42 1 0 37 0 38 2 0 0 0 37 1 1 0
+                                         0 0 17 1 0 43 0 1 1 0 6 0 35 1 0 29 0
+                                         31 1 0 25 0 27 1 0 0 6 23 2 0 0 0 37 1
+                                         2 0 9 0 0 1 2 0 9 0 0 1 2 0 9 0 0 12 2
+                                         0 9 0 0 1 2 0 9 0 0 40 2 0 0 0 0
                                          34)))))
            '|lookupComplete|)) 

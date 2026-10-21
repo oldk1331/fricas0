@@ -466,26 +466,29 @@
 ; --skip over unexposed constructors when checking system files
 ;   $x: local := nil
 ;   rlist := REVERSE doclist
-;   for [$x,:lines] in rlist repeat
-;     $attribute? : local := $x is [.,[key]] and key = 'attribute
+;   for [x, :lines] in rlist repeat
+;     $x := x
+;     $attribute? : local := x is [., [key]] and key = 'attribute
 ;     null lines =>
 ;       $attribute? => nil
 ;       checkDocError ['"Not documented!!!!"]
-;     u := checkTrim($x,(STRINGP lines => [lines]; $x = 'constructor => first lines; lines))
+;     u := checkTrim(x, (STRINGP lines => [lines];
+;                        x = 'constructor => first(lines);
+;                            lines))
 ;     $argl : local := nil    --set by checkGetArgs
 ;     longline :=
-;       $x = 'constructor =>
+;       x = 'constructor =>
 ;         v :=checkExtract('"Description:",u) or u and
 ;               checkExtract('"Description:",
 ;                 [STRCONC('"Description: ",first u),:rest u])
 ;         transformAndRecheckComments('constructor,v or u)
-;       transformAndRecheckComments($x,u)
-;     acc := [[$x,longline],:acc]  --processor assumes a list of lines
+;       transformAndRecheckComments(x, u)
+;     acc := [[x, longline], :acc]  --processor assumes a list of lines
 ;   NREVERSE acc
 
 (DEFUN |transDoc| (|conname| |doclist|)
   (PROG (|$argl| |$attribute?| |$x| |acc| |longline| |v| |u| |key| |ISTMP#2|
-         |ISTMP#1| |lines| |rlist|)
+         |ISTMP#1| |lines| |x| |rlist|)
     (DECLARE (SPECIAL |$argl| |$attribute?| |$x|))
     (RETURN
      (PROGN
@@ -500,14 +503,15 @@
            (#1='T
             (AND (CONSP |bfVar#23|)
                  (PROGN
-                  (SETQ |$x| (CAR |bfVar#23|))
+                  (SETQ |x| (CAR |bfVar#23|))
                   (SETQ |lines| (CDR |bfVar#23|))
                   #1#)
                  (PROGN
+                  (SETQ |$x| |x|)
                   (SETQ |$attribute?|
-                          (AND (CONSP |$x|)
+                          (AND (CONSP |x|)
                                (PROGN
-                                (SETQ |ISTMP#1| (CDR |$x|))
+                                (SETQ |ISTMP#1| (CDR |x|))
                                 (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
                                      (PROGN
                                       (SETQ |ISTMP#2| (CAR |ISTMP#1|))
@@ -524,14 +528,14 @@
                    (#1#
                     (PROGN
                      (SETQ |u|
-                             (|checkTrim| |$x|
+                             (|checkTrim| |x|
                               (COND ((STRINGP |lines|) (LIST |lines|))
-                                    ((EQ |$x| '|constructor|) (CAR |lines|))
+                                    ((EQ |x| '|constructor|) (CAR |lines|))
                                     (#1# |lines|))))
                      (SETQ |$argl| NIL)
                      (SETQ |longline|
                              (COND
-                              ((EQ |$x| '|constructor|)
+                              ((EQ |x| '|constructor|)
                                (PROGN
                                 (SETQ |v|
                                         (OR (|checkExtract| "Description:" |u|)
@@ -543,47 +547,11 @@
                                                    (CDR |u|))))))
                                 (|transformAndRecheckComments| '|constructor|
                                  (OR |v| |u|))))
-                              (#1# (|transformAndRecheckComments| |$x| |u|))))
-                     (SETQ |acc| (CONS (LIST |$x| |longline|) |acc|)))))))))
+                              (#1# (|transformAndRecheckComments| |x| |u|))))
+                     (SETQ |acc| (CONS (LIST |x| |longline|) |acc|)))))))))
           (SETQ |bfVar#24| (CDR |bfVar#24|))))
        |rlist| NIL)
       (NREVERSE |acc|)))))
-
-; checkExtractItemList l ==  --items are separated by commas or end of line
-;   acc := nil               --l is list of remaining lines
-;   while l repeat           --stop when you get to a line with a colon
-;     m := MAXINDEX first l
-;     k := charPosition(char '_:,first l,0)
-;     k <= m => return nil
-;     acc := [first l,:acc]
-;     l := rest l
-;   "STRCONC"/[x for x in NREVERSE acc]
-
-(DEFUN |checkExtractItemList| (|l|)
-  (PROG (|acc| |m| |k|)
-    (RETURN
-     (PROGN
-      (SETQ |acc| NIL)
-      ((LAMBDA ()
-         (LOOP
-          (COND ((NOT |l|) (RETURN NIL))
-                (#1='T
-                 (PROGN
-                  (SETQ |m| (MAXINDEX (CAR |l|)))
-                  (SETQ |k| (|charPosition| (|char| '|:|) (CAR |l|) 0))
-                  (COND ((NOT (< |m| |k|)) (RETURN NIL))
-                        (#1#
-                         (PROGN
-                          (SETQ |acc| (CONS (CAR |l|) |acc|))
-                          (SETQ |l| (CDR |l|)))))))))))
-      ((LAMBDA (|bfVar#26| |bfVar#25| |x|)
-         (LOOP
-          (COND
-           ((OR (ATOM |bfVar#25|) (PROGN (SETQ |x| (CAR |bfVar#25|)) NIL))
-            (RETURN |bfVar#26|))
-           (#1# (SETQ |bfVar#26| (STRCONC |bfVar#26| |x|))))
-          (SETQ |bfVar#25| (CDR |bfVar#25|))))
-       "" (NREVERSE |acc|) NIL)))))
 
 ; transformAndRecheckComments(name,lines) ==
 ;   $checkingXmptex? := false
@@ -596,7 +564,6 @@
 ;   u := checkComments(name,lines)
 ;   $recheckingFlag := true
 ;   checkRewrite(name,[u])
-;   $recheckingFlag := false
 ;   u
 
 (DEFUN |transformAndRecheckComments| (|name| |lines|)
@@ -615,7 +582,6 @@
       (SETQ |u| (|checkComments| |name| |lines|))
       (SETQ |$recheckingFlag| T)
       (|checkRewrite| |name| (LIST |u|))
-      (SETQ |$recheckingFlag| NIL)
       |u|))))
 
 ; checkRewrite(name, lines) ==    --similar to checkComments from c-doc
@@ -661,25 +627,25 @@
       (COND
        (|$checkingXmptex?|
         (SETQ |u|
-                ((LAMBDA (|bfVar#28| |bfVar#27| |x|)
+                ((LAMBDA (|bfVar#26| |bfVar#25| |x|)
                    (LOOP
                     (COND
-                     ((OR (ATOM |bfVar#27|)
-                          (PROGN (SETQ |x| (CAR |bfVar#27|)) NIL))
-                      (RETURN (NREVERSE |bfVar#28|)))
+                     ((OR (ATOM |bfVar#25|)
+                          (PROGN (SETQ |x| (CAR |bfVar#25|)) NIL))
+                      (RETURN (NREVERSE |bfVar#26|)))
                      (#1='T
-                      (SETQ |bfVar#28|
+                      (SETQ |bfVar#26|
                               (CONS (|checkAddIndented| |x| |margin|)
-                                    |bfVar#28|))))
-                    (SETQ |bfVar#27| (CDR |bfVar#27|))))
+                                    |bfVar#26|))))
+                    (SETQ |bfVar#25| (CDR |bfVar#25|))))
                  NIL |u| NIL))))
       (SETQ |$argl| (|checkGetArgs| (CAR |u|)))
       (SETQ |u2| NIL)
       (SETQ |verbatim| NIL)
-      ((LAMBDA (|bfVar#29| |x|)
+      ((LAMBDA (|bfVar#27| |x|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#29|) (PROGN (SETQ |x| (CAR |bfVar#29|)) NIL))
+           ((OR (ATOM |bfVar#27|) (PROGN (SETQ |x| (CAR |bfVar#27|)) NIL))
             (RETURN NIL))
            (#1#
             (PROGN
@@ -693,7 +659,7 @@
               ((AND |w| (EQUAL (CAR |w|) "\\begin{verbatim}"))
                (PROGN (SETQ |verbatim| T) (SETQ |u2| (APPEND |u2| |w|))))
               (#1# (SETQ |u2| (APPEND |u2| |w|)))))))
-          (SETQ |bfVar#29| (CDR |bfVar#29|))))
+          (SETQ |bfVar#27| (CDR |bfVar#27|))))
        |u| NIL)
       (SETQ |u| |u2|)
       (SETQ |u| (|checkAddSpaces| |u|))
@@ -840,7 +806,7 @@
 ;           null (key := checkIsValidType parse) =>
 ;             checkDocError ['"Unknown \spadtype: ", s]
 ;           atom key => 'ok
-;           checkDocError ['"Wrong number of arguments: ",form2HtString key]
+;           checkDocError(['"Wrong number of arguments: ", s])
 ;       else if x = '"\spadop" and (u := checkLookForLeftBrace IFCDR u) and
 ;               (u := IFCDR u) then
 ;           x := intern checkGetStringBeforeRightBrace u
@@ -963,8 +929,7 @@
                           ((ATOM |key|) '|ok|)
                           (#1#
                            (|checkDocError|
-                            (LIST "Wrong number of arguments: "
-                                  (|form2HtString| |key|)))))))))
+                            (LIST "Wrong number of arguments: " |s|))))))))
                      ((AND (EQUAL |x| "\\spadop")
                            (SETQ |u| (|checkLookForLeftBrace| (IFCDR |u|)))
                            (SETQ |u| (IFCDR |u|)))
@@ -1050,20 +1015,20 @@
   (PROG ()
     (RETURN
      (COND ((NOT (EQL (LENGTH |form|) (LENGTH |coSig|))) |form|)
-           (((LAMBDA (|bfVar#32| |bfVar#30| |x| |bfVar#31| |flag|)
+           (((LAMBDA (|bfVar#30| |bfVar#28| |x| |bfVar#29| |flag|)
                (LOOP
                 (COND
-                 ((OR (ATOM |bfVar#30|) (PROGN (SETQ |x| (CAR |bfVar#30|)) NIL)
-                      (ATOM |bfVar#31|)
-                      (PROGN (SETQ |flag| (CAR |bfVar#31|)) NIL))
-                  (RETURN |bfVar#32|))
+                 ((OR (ATOM |bfVar#28|) (PROGN (SETQ |x| (CAR |bfVar#28|)) NIL)
+                      (ATOM |bfVar#29|)
+                      (PROGN (SETQ |flag| (CAR |bfVar#29|)) NIL))
+                  (RETURN |bfVar#30|))
                  (#1='T
                   (AND |flag|
                        (PROGN
-                        (SETQ |bfVar#32| (NULL (|checkIsValidType| |x|)))
-                        (COND (|bfVar#32| (RETURN |bfVar#32|)))))))
-                (SETQ |bfVar#30| (CDR |bfVar#30|))
-                (SETQ |bfVar#31| (CDR |bfVar#31|))))
+                        (SETQ |bfVar#30| (NULL (|checkIsValidType| |x|)))
+                        (COND (|bfVar#30| (RETURN |bfVar#30|)))))))
+                (SETQ |bfVar#28| (CDR |bfVar#28|))
+                (SETQ |bfVar#29| (CDR |bfVar#29|))))
              NIL (CDR |form|) NIL (CDR |coSig|) NIL)
             NIL)
            (#1# '|ok|)))))
@@ -1112,15 +1077,15 @@
                   (COND
                    ((EQUAL |x| |$charRbrace|)
                     (RETURN
-                     ((LAMBDA (|bfVar#33| |bfVar#35| |bfVar#34|)
+                     ((LAMBDA (|bfVar#31| |bfVar#33| |bfVar#32|)
                         (LOOP
                          (COND
-                          ((OR (ATOM |bfVar#35|)
-                               (PROGN (SETQ |bfVar#34| (CAR |bfVar#35|)) NIL))
-                           (RETURN |bfVar#33|))
+                          ((OR (ATOM |bfVar#33|)
+                               (PROGN (SETQ |bfVar#32| (CAR |bfVar#33|)) NIL))
+                           (RETURN |bfVar#31|))
                           (#1#
-                           (SETQ |bfVar#33| (STRCONC |bfVar#33| |bfVar#34|))))
-                         (SETQ |bfVar#35| (CDR |bfVar#35|))))
+                           (SETQ |bfVar#31| (STRCONC |bfVar#31| |bfVar#32|))))
+                         (SETQ |bfVar#33| (CDR |bfVar#33|))))
                       "" (NREVERSE |acc|) NIL)))
                    (#1#
                     (PROGN
@@ -1135,24 +1100,24 @@
 ;    acc := end
 ;  head
 
-(DEFUN |appendOver| (|bfVar#37|)
+(DEFUN |appendOver| (|bfVar#35|)
   (PROG (|head| |tail| |acc| |end|)
     (RETURN
      (PROGN
-      (SETQ |head| (CAR |bfVar#37|))
-      (SETQ |tail| (CDR |bfVar#37|))
+      (SETQ |head| (CAR |bfVar#35|))
+      (SETQ |tail| (CDR |bfVar#35|))
       (SETQ |acc| (LASTNODE |head|))
-      ((LAMBDA (|bfVar#36| |x|)
+      ((LAMBDA (|bfVar#34| |x|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#36|) (PROGN (SETQ |x| (CAR |bfVar#36|)) NIL))
+           ((OR (ATOM |bfVar#34|) (PROGN (SETQ |x| (CAR |bfVar#34|)) NIL))
             (RETURN NIL))
            ('T
             (PROGN
              (SETQ |end| (LASTNODE |x|))
              (RPLACD |acc| |x|)
              (SETQ |acc| |end|))))
-          (SETQ |bfVar#36| (CDR |bfVar#36|))))
+          (SETQ |bfVar#34| (CDR |bfVar#34|))))
        |tail| NIL)
       |head|))))
 
@@ -1320,10 +1285,10 @@
       (SETQ |$argl| (|checkGetArgs| (CAR |u|)))
       (SETQ |u2| NIL)
       (SETQ |verbatim| NIL)
-      ((LAMBDA (|bfVar#38| |x|)
+      ((LAMBDA (|bfVar#36| |x|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#38|) (PROGN (SETQ |x| (CAR |bfVar#38|)) NIL))
+           ((OR (ATOM |bfVar#36|) (PROGN (SETQ |x| (CAR |bfVar#36|)) NIL))
             (RETURN NIL))
            (#1='T
             (PROGN
@@ -1337,7 +1302,7 @@
               ((AND |w| (EQUAL (CAR |w|) "\\begin{verbatim}"))
                (PROGN (SETQ |verbatim| T) (SETQ |u2| (APPEND |u2| |w|))))
               (#1# (SETQ |u2| (APPEND |u2| |w|)))))))
-          (SETQ |bfVar#38| (CDR |bfVar#38|))))
+          (SETQ |bfVar#36| (CDR |bfVar#36|))))
        |u| NIL)
       (SETQ |u| |u2|)
       (SETQ |u| (|checkAddSpaces| |u|))
@@ -1348,14 +1313,14 @@
       (COND (|$checkErrorFlag| (SETQ |u| (|checkFixCommonProblem| |u|))))
       (SETQ |v| (|checkDecorate| |u|))
       (SETQ |res|
-              ((LAMBDA (|bfVar#40| |bfVar#39| |y|)
+              ((LAMBDA (|bfVar#38| |bfVar#37| |y|)
                  (LOOP
                   (COND
-                   ((OR (ATOM |bfVar#39|)
-                        (PROGN (SETQ |y| (CAR |bfVar#39|)) NIL))
-                    (RETURN |bfVar#40|))
-                   (#1# (SETQ |bfVar#40| (STRCONC |bfVar#40| |y|))))
-                  (SETQ |bfVar#39| (CDR |bfVar#39|))))
+                   ((OR (ATOM |bfVar#37|)
+                        (PROGN (SETQ |y| (CAR |bfVar#37|)) NIL))
+                    (RETURN |bfVar#38|))
+                   (#1# (SETQ |bfVar#38| (STRCONC |bfVar#38| |y|))))
+                  (SETQ |bfVar#37| (CDR |bfVar#37|))))
                "" |v| NIL))
       (SETQ |res| (|checkAddPeriod| |res|))
       (COND (|$checkErrorFlag| (|pp| |res|)))
@@ -1387,10 +1352,10 @@
      (PROGN
       (SETQ |verbatim| NIL)
       (SETQ |u2| NIL)
-      ((LAMBDA (|bfVar#41| |x|)
+      ((LAMBDA (|bfVar#39| |x|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#41|) (PROGN (SETQ |x| (CAR |bfVar#41|)) NIL))
+           ((OR (ATOM |bfVar#39|) (PROGN (SETQ |x| (CAR |bfVar#39|)) NIL))
             (RETURN NIL))
            (#1='T
             (PROGN
@@ -1427,7 +1392,7 @@
                                     (STRINGIMAGE (- |k| |margin|)) "}{"
                                     (|checkAddSpaceSegments| |s| 0) "}")
                                    NIL)))))))))))
-          (SETQ |bfVar#41| (CDR |bfVar#41|))))
+          (SETQ |bfVar#39| (CDR |bfVar#39|))))
        |u| NIL)
       |u2|))))
 
@@ -1449,7 +1414,7 @@
                    (#1#
                     (PROGN
                      (SETQ |i| 0)
-                     ((LAMBDA (|bfVar#42|)
+                     ((LAMBDA (|bfVar#40|)
                         (LOOP
                          (COND
                           ((NOT
@@ -1464,8 +1429,8 @@
                                         (PROGN
                                          (SETQ |i| (CAR |ISTMP#2|))
                                          #1#))))))
-                           (RETURN (NREVERSE |bfVar#42|)))
-                          (#1# (SETQ |bfVar#42| (CONS |w| |bfVar#42|))))))
+                           (RETURN (NREVERSE |bfVar#40|)))
+                          (#1# (SETQ |bfVar#40| (CONS |w| |bfVar#40|))))))
                       NIL))))))))))
 
 ; newWordFrom(l,i,m) ==
@@ -1644,9 +1609,9 @@
      (PROGN
       (SETQ |start| (OR (IFCAR |options|) 0))
       (SETQ |k| (- 1))
-      ((LAMBDA (|bfVar#43| |i|)
+      ((LAMBDA (|bfVar#41| |i|)
          (LOOP
-          (COND ((> |i| |bfVar#43|) (RETURN NIL))
+          (COND ((> |i| |bfVar#41|) (RETURN NIL))
                 ('T
                  (COND
                   ((NOT (EQUAL (ELT |x| |i|) |$charBlank|))
@@ -1735,10 +1700,10 @@
     (RETURN
      (PROGN
       (SETQ |s| (LIST (|checkTrim,wherePP| (CAR |lines|))))
-      ((LAMBDA (|bfVar#44| |x|)
+      ((LAMBDA (|bfVar#42| |x|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#44|) (PROGN (SETQ |x| (CAR |bfVar#44|)) NIL))
+           ((OR (ATOM |bfVar#42|) (PROGN (SETQ |x| (CAR |bfVar#42|)) NIL))
             (RETURN NIL))
            (#1='T
             (PROGN
@@ -1747,15 +1712,15 @@
               ((NULL (MEMQ |j| |s|))
                (|checkDocError| (LIST |$x| " has varying indentation levels"))
                (SETQ |s| (CONS |j| |s|)))))))
-          (SETQ |bfVar#44| (CDR |bfVar#44|))))
+          (SETQ |bfVar#42| (CDR |bfVar#42|))))
        (CDR |lines|) NIL)
-      ((LAMBDA (|bfVar#46| |bfVar#45| |y|)
+      ((LAMBDA (|bfVar#44| |bfVar#43| |y|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#45|) (PROGN (SETQ |y| (CAR |bfVar#45|)) NIL))
-            (RETURN (NREVERSE |bfVar#46|)))
-           (#1# (SETQ |bfVar#46| (CONS (|checkTrim,trim| |y|) |bfVar#46|))))
-          (SETQ |bfVar#45| (CDR |bfVar#45|))))
+           ((OR (ATOM |bfVar#43|) (PROGN (SETQ |y| (CAR |bfVar#43|)) NIL))
+            (RETURN (NREVERSE |bfVar#44|)))
+           (#1# (SETQ |bfVar#44| (CONS (|checkTrim,trim| |y|) |bfVar#44|))))
+          (SETQ |bfVar#43| (CDR |bfVar#43|))))
        NIL |lines| NIL)))))
 (DEFUN |checkTrim,wherePP| (|u|)
   (PROG (|k|)
@@ -1841,11 +1806,11 @@
                         (CONS (SUBSTRING |u| (+ |j| 1) NIL) (CDR |lines|)))
                        (#1# (CDR |lines|))))
               (SETQ |acc| NIL)
-              ((LAMBDA (|bfVar#47| |line|)
+              ((LAMBDA (|bfVar#45| |line|)
                  (LOOP
                   (COND
-                   ((OR (ATOM |bfVar#47|)
-                        (PROGN (SETQ |line| (CAR |bfVar#47|)) NIL))
+                   ((OR (ATOM |bfVar#45|)
+                        (PROGN (SETQ |line| (CAR |bfVar#45|)) NIL))
                     (RETURN NIL))
                    (#1#
                     (PROGN
@@ -1870,7 +1835,7 @@
                          '|skip|)
                         (#1# (RETURN NIL)))))
                      (SETQ |acc| (CONS |line| |acc|)))))
-                  (SETQ |bfVar#47| (CDR |bfVar#47|))))
+                  (SETQ |bfVar#45| (CDR |bfVar#45|))))
                |firstLines| NIL)
               (NREVERSE |acc|))))))))
 
@@ -1964,13 +1929,14 @@
 ;       x = char '_% or x = '"%"  => ['"\%",:acc]
 ;       x = char '_, or x = '","  => ['",",:acc]
 ;       x = '"\spad" => ['"\spad",:acc]
-;       STRINGP x and DIGITP x.0 => [x,:acc]
+;       STRINGP(x) and char_to_digit(x.0) => [x, :acc]
 ;       null spadflag and
-;         (CHARP x and ALPHA_-CHAR_-P x and not MEMQ(x,$charExclusions) or
+;         (is_char?(x) and ALPHA_-CHAR_-P(x) and not MEMQ(x,$charExclusions) or
 ;           member(x,$argl)) => [$charRbrace,x,$charLbrace,'"\spad",:acc]
-;       null spadflag and ((STRINGP x and not (x.0 = $charBack) and DIGITP(x.(MAXINDEX x))) or member(x, '("true" "false"))) =>
+;       not(spadflag) and ((STRINGP(x) and not(x.0 = $charBack) and
+;             char_to_digit(x.(MAXINDEX x))) or member(x, '("true" "false"))) =>
 ;         [$charRbrace,x,$charLbrace,'"\spad",:acc]  --wrap x1, alpha3, etc
-;       CHARP x => [checkAddBackSlashes x,:acc]
+;       is_char?(x) => [checkAddBackSlashes x,:acc]
 ;       xcount := #x
 ;       xcount = 3 and x.1 = char 't and x.2 = char 'h =>
 ;         ['"th",$charRbrace,x.0,$charLbrace,'"\spad",:acc]
@@ -2060,11 +2026,11 @@
                            ((OR (EQUAL |x| (|char| '|,|)) (EQUAL |x| ","))
                             (CONS "," |acc|))
                            ((EQUAL |x| "\\spad") (CONS "\\spad" |acc|))
-                           ((AND (STRINGP |x|) (DIGITP (ELT |x| 0)))
+                           ((AND (STRINGP |x|) (|char_to_digit| (ELT |x| 0)))
                             (CONS |x| |acc|))
                            ((AND (NULL |spadflag|)
                                  (OR
-                                  (AND (CHARP |x|) (ALPHA-CHAR-P |x|)
+                                  (AND (|is_char?| |x|) (ALPHA-CHAR-P |x|)
                                        (NULL (MEMQ |x| |$charExclusions|)))
                                   (|member| |x| |$argl|)))
                             (CONS |$charRbrace|
@@ -2075,13 +2041,14 @@
                                  (OR
                                   (AND (STRINGP |x|)
                                        (NULL (EQUAL (ELT |x| 0) |$charBack|))
-                                       (DIGITP (ELT |x| (MAXINDEX |x|))))
+                                       (|char_to_digit|
+                                        (ELT |x| (MAXINDEX |x|))))
                                   (|member| |x| '("true" "false"))))
                             (CONS |$charRbrace|
                                   (CONS |x|
                                         (CONS |$charLbrace|
                                               (CONS "\\spad" |acc|)))))
-                           ((CHARP |x|)
+                           ((|is_char?| |x|)
                             (CONS (|checkAddBackSlashes| |x|) |acc|))
                            (#1#
                             (PROGN
@@ -2134,13 +2101,13 @@
       (SETQ |max| (MAXINDEX |x|))
       (COND ((EQUAL (ELT |x| |max|) (|char| '|y|)) NIL)
             (#1='T
-             ((LAMBDA (|bfVar#48| |i|)
+             ((LAMBDA (|bfVar#46| |i|)
                 (LOOP
-                 (COND ((> |i| |max|) (RETURN |bfVar#48|))
+                 (COND ((> |i| |max|) (RETURN |bfVar#46|))
                        (#1#
                         (PROGN
-                         (SETQ |bfVar#48| (NULL (|isVowel| (ELT |x| |i|))))
-                         (COND ((NOT |bfVar#48|) (RETURN NIL))))))
+                         (SETQ |bfVar#46| (NULL (|isVowel| (ELT |x| |i|))))
+                         (COND ((NOT |bfVar#46|) (RETURN NIL))))))
                  (SETQ |i| (+ |i| 1))))
               T 0)))))))
 
@@ -2157,7 +2124,7 @@
          (EQ |c| (|char| 'U))))))
 
 ; checkAddBackSlashes s ==
-;   (CHARP s and (c := s)) or (#s = 1 and (c := s.0)) =>
+;   (is_char?(s) and (c := s)) or (#s = 1 and (c := s.0)) =>
 ;     MEMQ(c, $charEscapeList) => STRCONC($charBack, c)
 ;     s
 ;   k := 0
@@ -2176,7 +2143,7 @@
   (PROG (|c| |k| |m| |insertIndex| |char|)
     (RETURN
      (COND
-      ((OR (AND (CHARP |s|) (SETQ |c| |s|))
+      ((OR (AND (|is_char?| |s|) (SETQ |c| |s|))
            (AND (EQL (LENGTH |s|) 1) (SETQ |c| (ELT |s| 0))))
        (COND ((MEMQ |c| |$charEscapeList|) (STRCONC |$charBack| |c|))
              (#1='T |s|)))
@@ -2234,11 +2201,11 @@
             (PROGN
              (SETQ |space| |$charBlank|)
              (SETQ |u2| NIL)
-             ((LAMBDA (|i| |bfVar#49| |f|)
+             ((LAMBDA (|i| |bfVar#47| |f|)
                 (LOOP
                  (COND
-                  ((OR (ATOM |bfVar#49|)
-                       (PROGN (SETQ |f| (CAR |bfVar#49|)) NIL))
+                  ((OR (ATOM |bfVar#47|)
+                       (PROGN (SETQ |f| (CAR |bfVar#47|)) NIL))
                    (RETURN NIL))
                   (#1#
                    (PROGN
@@ -2255,7 +2222,7 @@
                       (SETQ |u2| (APPEND |u2| (CONS |space| NIL)))
                       (SETQ |space| |$charBlank|))))))
                  (SETQ |i| (+ |i| 1))
-                 (SETQ |bfVar#49| (CDR |bfVar#49|))))
+                 (SETQ |bfVar#47| (CDR |bfVar#47|))))
               1 |u| NIL)
              |u2|))))))
 
@@ -2303,7 +2270,7 @@
       (NREVERSE |acc|)))))
 
 ; checkIeEgfun x ==
-;   CHARP x => nil
+;   is_char?(x) => nil
 ;   x = '"" => nil
 ;   m := MAXINDEX x
 ;   for k in 0..(m - 3) repeat
@@ -2318,13 +2285,13 @@
 (DEFUN |checkIeEgfun| (|x|)
   (PROG (|m| |key| |firstPart| |result|)
     (RETURN
-     (COND ((CHARP |x|) NIL) ((EQUAL |x| "") NIL)
+     (COND ((|is_char?| |x|) NIL) ((EQUAL |x| "") NIL)
            (#1='T
             (PROGN
              (SETQ |m| (MAXINDEX |x|))
-             ((LAMBDA (|bfVar#50| |k|)
+             ((LAMBDA (|bfVar#48| |k|)
                 (LOOP
-                 (COND ((> |k| |bfVar#50|) (RETURN NIL))
+                 (COND ((> |k| |bfVar#48|) (RETURN NIL))
                        (#1#
                         (COND
                          ((AND (EQUAL (ELT |x| (+ |k| 1)) |$charPeriod|)
@@ -2399,7 +2366,7 @@
       (NREVERSE |acc|)))))
 
 ; checkSplitBrace x ==
-;   CHARP x => [x]
+;   is_char?(x) => [x]
 ;   #x = 1 => [x.0]
 ;   (u := checkSplitBackslash x)
 ;      and rest u  => "append"/[checkSplitBrace y for y in u]
@@ -2413,24 +2380,37 @@
 (DEFUN |checkSplitBrace| (|x|)
   (PROG (|u| |m|)
     (RETURN
-     (COND ((CHARP |x|) (LIST |x|)) ((EQL (LENGTH |x|) 1) (LIST (ELT |x| 0)))
+     (COND ((|is_char?| |x|) (LIST |x|))
+           ((EQL (LENGTH |x|) 1) (LIST (ELT |x| 0)))
            ((AND (SETQ |u| (|checkSplitBackslash| |x|)) (CDR |u|))
-            ((LAMBDA (|bfVar#52| |bfVar#51| |y|)
+            ((LAMBDA (|bfVar#50| |bfVar#49| |y|)
                (LOOP
                 (COND
-                 ((OR (ATOM |bfVar#51|)
-                      (PROGN (SETQ |y| (CAR |bfVar#51|)) NIL))
-                  (RETURN |bfVar#52|))
+                 ((OR (ATOM |bfVar#49|)
+                      (PROGN (SETQ |y| (CAR |bfVar#49|)) NIL))
+                  (RETURN |bfVar#50|))
                  (#1='T
-                  (SETQ |bfVar#52|
-                          (APPEND |bfVar#52| (|checkSplitBrace| |y|)))))
-                (SETQ |bfVar#51| (CDR |bfVar#51|))))
+                  (SETQ |bfVar#50|
+                          (APPEND |bfVar#50| (|checkSplitBrace| |y|)))))
+                (SETQ |bfVar#49| (CDR |bfVar#49|))))
              NIL |u| NIL))
            (#1#
             (PROGN
              (SETQ |m| (MAXINDEX |x|))
              (COND
               ((AND (SETQ |u| (|checkSplitOn| |x|)) (CDR |u|))
+               ((LAMBDA (|bfVar#52| |bfVar#51| |y|)
+                  (LOOP
+                   (COND
+                    ((OR (ATOM |bfVar#51|)
+                         (PROGN (SETQ |y| (CAR |bfVar#51|)) NIL))
+                     (RETURN |bfVar#52|))
+                    (#1#
+                     (SETQ |bfVar#52|
+                             (APPEND |bfVar#52| (|checkSplitBrace| |y|)))))
+                   (SETQ |bfVar#51| (CDR |bfVar#51|))))
+                NIL |u| NIL))
+              ((AND (SETQ |u| (|checkSplitPunctuation| |x|)) (CDR |u|))
                ((LAMBDA (|bfVar#54| |bfVar#53| |y|)
                   (LOOP
                    (COND
@@ -2441,18 +2421,6 @@
                      (SETQ |bfVar#54|
                              (APPEND |bfVar#54| (|checkSplitBrace| |y|)))))
                    (SETQ |bfVar#53| (CDR |bfVar#53|))))
-                NIL |u| NIL))
-              ((AND (SETQ |u| (|checkSplitPunctuation| |x|)) (CDR |u|))
-               ((LAMBDA (|bfVar#56| |bfVar#55| |y|)
-                  (LOOP
-                   (COND
-                    ((OR (ATOM |bfVar#55|)
-                         (PROGN (SETQ |y| (CAR |bfVar#55|)) NIL))
-                     (RETURN |bfVar#56|))
-                    (#1#
-                     (SETQ |bfVar#56|
-                             (APPEND |bfVar#56| (|checkSplitBrace| |y|)))))
-                   (SETQ |bfVar#55| (CDR |bfVar#55|))))
                 NIL |u| NIL))
               (#1# (LIST |x|)))))))))
 
@@ -2504,7 +2472,7 @@
               (#1# (LIST |x|)))))))))
 
 ; checkSplitPunctuation x ==
-;   CHARP x => [x]
+;   is_char?(x) => [x]
 ;   m := MAXINDEX x
 ;   m < 1 => [x]
 ;   lastchar := x.m
@@ -2532,7 +2500,7 @@
 (DEFUN |checkSplitPunctuation| (|x|)
   (PROG (|m| |lastchar| |k| |v| |u|)
     (RETURN
-     (COND ((CHARP |x|) (LIST |x|))
+     (COND ((|is_char?| |x|) (LIST |x|))
            (#1='T
             (PROGN
              (SETQ |m| (MAXINDEX |x|))
@@ -2589,7 +2557,7 @@
                       (#1# (LIST |x|))))))))))))
 
 ; checkSplitOn(x) ==
-;   CHARP x => [x]
+;   is_char?(x) => [x]
 ;   l := $charSplitList
 ;   m := MAXINDEX x
 ;   while l repeat
@@ -2609,7 +2577,7 @@
 (DEFUN |checkSplitOn| (|x|)
   (PROG (|l| |m| |char| |k|)
     (RETURN
-     (COND ((CHARP |x|) (LIST |x|))
+     (COND ((|is_char?| |x|) (LIST |x|))
            (#1='T
             (PROGN
              (SETQ |l| |$charSplitList|)
@@ -2703,15 +2671,15 @@
                   (SETQ |u| (CDR |u|))))))))
       (COND
        (|stack|
-        ((LAMBDA (|bfVar#57| |x|)
+        ((LAMBDA (|bfVar#55| |x|)
            (LOOP
             (COND
-             ((OR (ATOM |bfVar#57|) (PROGN (SETQ |x| (CAR |bfVar#57|)) NIL))
+             ((OR (ATOM |bfVar#55|) (PROGN (SETQ |x| (CAR |bfVar#55|)) NIL))
               (RETURN NIL))
              (#1#
               (|checkDocError|
                (LIST "Missing right " (|checkSayBracket| |x|)))))
-            (SETQ |bfVar#57| (CDR |bfVar#57|))))
+            (SETQ |bfVar#55| (CDR |bfVar#55|))))
          (NREVERSE |stack|) NIL)))
       |u|))))
 
@@ -2968,35 +2936,16 @@
                   (SETQ |u| (CDR |u|))))))))
       |found|))))
 
-; checkInteger s ==
-;   CHARP s => false
-;   s = '"" => false
-;   and/[DIGIT_-CHAR_-P s.i for i in 0..MAXINDEX s]
-
-(DEFUN |checkInteger| (|s|)
-  (PROG ()
-    (RETURN
-     (COND ((CHARP |s|) NIL) ((EQUAL |s| "") NIL)
-           (#1='T
-            ((LAMBDA (|bfVar#59| |bfVar#58| |i|)
-               (LOOP
-                (COND ((> |i| |bfVar#58|) (RETURN |bfVar#59|))
-                      (#1#
-                       (PROGN
-                        (SETQ |bfVar#59| (DIGIT-CHAR-P (ELT |s| |i|)))
-                        (COND ((NOT |bfVar#59|) (RETURN NIL))))))
-                (SETQ |i| (+ |i| 1))))
-             T (MAXINDEX |s|) 0))))))
-
 ; checkTransformFirsts(opname,u,margin) ==
 ; --case 1: \spad{...
 ; --case 2: form(args)
 ; --case 3: form arg
 ; --case 4: op arg
 ; --case 5: arg op arg
-;   namestring := PNAME opname
-;   if namestring = '"Zero" then namestring := '"0"
-;   else if namestring = '"One" then namestring := '"1"
+;   namestring :=
+;       opname = ["0"] => '"0"
+;       opname = ["1"] => '"1"
+;       PNAME(opname)
 ;   margin > 0 =>
 ;     s := leftTrim u
 ;     STRCONC(filler_spaces(margin), checkTransformFirsts(opname, s, 0))
@@ -3061,16 +3010,17 @@
          |p| |l| |n| |prefixOp|)
     (RETURN
      (PROGN
-      (SETQ |namestring| (PNAME |opname|))
-      (COND ((EQUAL |namestring| "Zero") (SETQ |namestring| "0"))
-            ((EQUAL |namestring| "One") (SETQ |namestring| "1")))
+      (SETQ |namestring|
+              (COND ((EQUAL |opname| (LIST '|0|)) "0")
+                    ((EQUAL |opname| (LIST '|1|)) "1")
+                    (#1='T (PNAME |opname|))))
       (COND
        ((< 0 |margin|)
         (PROGN
          (SETQ |s| (|leftTrim| |u|))
          (STRCONC (|filler_spaces| |margin|)
           (|checkTransformFirsts| |opname| |s| 0))))
-       (#1='T
+       (#1#
         (PROGN
          (SETQ |m| (MAXINDEX |u|))
          (COND ((< |m| 2) |u|) ((EQUAL (ELT |u| 0) |$charBack|) |u|)
@@ -3307,12 +3257,13 @@
       (COND ((EQUAL |i| |m|) NIL) (#1# |i|))))))
 
 ; checkAlphabetic c ==
-;   ALPHA_-CHAR_-P c or DIGITP c or MEMQ(c,$charIdentifierEndings)
+;     ALPHA_-CHAR_-P(c) or char_to_digit(c) or MEMQ(c, $charIdentifierEndings)
 
 (DEFUN |checkAlphabetic| (|c|)
   (PROG ()
     (RETURN
-     (OR (ALPHA-CHAR-P |c|) (DIGITP |c|) (MEMQ |c| |$charIdentifierEndings|)))))
+     (OR (ALPHA-CHAR-P |c|) (|char_to_digit| |c|)
+         (MEMQ |c| |$charIdentifierEndings|)))))
 
 ; checkDocError u ==
 ;   $checkErrorFlag := true

@@ -1,8 +1,8 @@
 
 (SDEFUN |SETCAT-;latex;SS;1| ((|s| (S)) (% (|String|)))
         (SPROG
-         ((|sl| (|List| (|String|))) (|tf| (|TexFormat|))
-          (|of| (|OutputForm|)))
+         ((|of| (|OutputForm|)) (|tf| (|TexFormat|))
+          (|sl| (|List| (|String|))))
          (SEQ (LETT |of| (SPADCALL |s| (QREFELT % 8)))
               (LETT |tf| (SPADCALL |of| (QREFELT % 10)))
               (LETT |sl| (SPADCALL |tf| (QREFELT % 12)))
@@ -11,7 +11,7 @@
 (DECLAIM (NOTINLINE |SetCategory&;|)) 
 
 (DEFUN |SetCategory&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|SetCategory&| DV$1))

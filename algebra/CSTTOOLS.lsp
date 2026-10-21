@@ -1,6 +1,6 @@
 
 (SDEFUN |CSTTOOLS;cycleElt;STU;1| ((|x| (ST)) (% (|Union| ST "failed")))
-        (SPROG ((#1=#:G20 NIL) (#2=#:G21 NIL) (|y| (ST)) (|i| NIL))
+        (SPROG ((|i| NIL) (|y| (ST)) (#1=#:G21 NIL) (#2=#:G20 NIL))
                (SEQ
                 (EXIT
                  (SEQ (LETT |y| |x|)
@@ -12,7 +12,7 @@
                                ((OR (SPADCALL |y| (QREFELT % 9))
                                     (SPADCALL |y| (QREFELT % 10)))
                                 (PROGN
-                                 (LETT #2# (CONS 1 "failed"))
+                                 (LETT #1# (CONS 1 "failed"))
                                  (GO #3=#:G19)))
                                ('T
                                 (SEQ (LETT |y| (SPADCALL |y| (QREFELT % 11)))
@@ -24,19 +24,19 @@
                                       (COND
                                        ((SPADCALL |x| |y| (QREFELT % 12))
                                         (PROGN
-                                         (LETT #1#
+                                         (LETT #2#
                                                (PROGN
-                                                (LETT #2# (CONS 0 |y|))
+                                                (LETT #1# (CONS 0 |y|))
                                                 (GO #3#)))
                                          (GO #4=#:G13)))))))))
-                             #4# (EXIT #1#))
+                             #4# (EXIT #2#))
                             (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                             (EXIT NIL)))))
-                #3# (EXIT #2#)))) 
+                #3# (EXIT #1#)))) 
 
 (SDEFUN |CSTTOOLS;computeCycleLength;STNni;2|
         ((|cycElt| (ST)) (% (|NonNegativeInteger|)))
-        (SPROG ((#1=#:G27 NIL) (#2=#:G28 NIL) (|y| (ST)) (|i| NIL))
+        (SPROG ((|i| NIL) (|y| (ST)) (#1=#:G28 NIL) (#2=#:G27 NIL))
                (SEQ
                 (EXIT
                  (SEQ (LETT |y| |cycElt|)
@@ -49,19 +49,19 @@
                                     (COND
                                      ((SPADCALL |y| |cycElt| (QREFELT % 12))
                                       (PROGN
-                                       (LETT #1#
+                                       (LETT #2#
                                              (PROGN
-                                              (LETT #2# |i|)
+                                              (LETT #1# |i|)
                                               (GO #3=#:G26)))
                                        (GO #4=#:G23)))))))
-                             #4# (EXIT #1#))
+                             #4# (EXIT #2#))
                             (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                             (EXIT NIL)))))
-                #3# (EXIT #2#)))) 
+                #3# (EXIT #1#)))) 
 
 (SDEFUN |CSTTOOLS;computeCycleEntry;3ST;3|
         ((|x| (ST)) (|cycElt| (ST)) (% (ST)))
-        (SPROG ((|y| (ST)) (#1=#:G35 NIL))
+        (SPROG ((#1=#:G35 NIL) (|y| (ST)))
                (SEQ
                 (EXIT
                  (SEQ
@@ -86,7 +86,7 @@
 (DECLAIM (NOTINLINE |CyclicStreamTools;|)) 
 
 (DEFUN |CyclicStreamTools;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

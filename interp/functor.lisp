@@ -495,7 +495,8 @@
 ;          then formalArgs:= take(#formalArgModes,$FormalMapVariableList)
 ;                 --argument substitution if parameterized?
 ;
-;          else keyedSystemError("S2OR0001",[opOf base])
+;          else system_error("S2OR0001",
+;                            '"Category or domain %1b not known.", [opOf base])
 ;       DescendCodeAdd1(base, flag, target, formalArgs, formalArgModes, kvec, e)
 ;   for [[[.,:formalArgs],target,:formalArgModes],.] in modemap repeat
 ;       (ans := DescendCodeAdd1(base, flag, target, formalArgs,
@@ -525,7 +526,9 @@
                (SETQ |formalArgs|
                        (TAKE (LENGTH |formalArgModes|)
                         |$FormalMapVariableList|)))
-              (#1# (|keyedSystemError| 'S2OR0001 (LIST (|opOf| |base|)))))
+              (#1#
+               (|system_error| 'S2OR0001 "Category or domain %1b not known."
+                (LIST (|opOf| |base|)))))
              (|DescendCodeAdd1| |base| |flag| |target| |formalArgs|
               |formalArgModes| |kvec| |e|)))
            (#1#
@@ -1140,7 +1143,7 @@
 ;               not $SetFunctions.index=>flag --JHD didn't set $SF on this branch
 ;               ["or",$SetFunctions.index,flag]
 ;       else
-;           keyedSystemError("S2OR0002",[catImplem])
+;           system_error("S2OR0002", '"Unknown implementation: %1s", [catImplem])
 ;   body is ['SETELT,:.] => body
 ;   body is ['QSETREFV,:.] => body
 ;   nil
@@ -1223,7 +1226,8 @@
                                                              |index|)
                                                         |flag|))))))))))))
                       (#1#
-                       (|keyedSystemError| 'S2OR0002 (LIST |catImplem|))))))
+                       (|system_error| 'S2OR0002 "Unknown implementation: %1s"
+                        (LIST |catImplem|))))))
                    (SETQ |bfVar#45| (CDR |bfVar#45|))))
                 (|LookUpSigSlots| |sig| (ELT |u| 1)) NIL)))))
       (COND ((AND (CONSP |body|) (EQ (CAR |body|) 'SETELT)) |body|)
@@ -1267,8 +1271,6 @@
 ;   pat' := SUBSTQ($definition, '%, CADR(pattern))
 ;   sig' := SUBSTQ($definition, '%, CADR(sig))
 ;   sig' = pat' => true
-;   --If we don't have this next test, then we'll recurse in SetFunctionSlots
-;   SourceLevelSubsume(sig',pat') => true
 ;   nil
 
 (DEFUN |SigSlotsMatch| (|sig| |pattern| |implem|)
@@ -1281,8 +1283,7 @@
             (PROGN
              (SETQ |pat'| (SUBSTQ |$definition| '% (CADR |pattern|)))
              (SETQ |sig'| (SUBSTQ |$definition| '% (CADR |sig|)))
-             (COND ((EQUAL |sig'| |pat'|) T)
-                   ((|SourceLevelSubsume| |sig'| |pat'|) T) (#1# NIL))))))))
+             (COND ((EQUAL |sig'| |pat'|) T) (#1# NIL))))))))
 
 ; makeMissingFunctionEntry(alist,i) ==
 ;   tran SUBLIS(alist,$MissingFunctionInfo.i) where
@@ -1380,7 +1381,7 @@
 ;     MinimalPrimary=MaximalPrimary => nil
 ;     MaximalPrimaries := [MaximalPrimary, :first (CatEval MaximalPrimary).4]
 ;     MinimalPrimaries := [MinimalPrimary, :first (CatEval MinimalPrimary).4]
-;     MaximalPrimaries := set_difference(MaximalPrimaries, MinimalPrimaries)
+;     MaximalPrimaries := SETDIFFERENCE(MaximalPrimaries, MinimalPrimaries)
 ;     [[x] for x in MaximalPrimaries]
 ;   (Conditions := Conds(principal, nil)) where
 ;     Conds(code,previous) ==
@@ -1561,9 +1562,8 @@
                                                      |MinimalPrimary|)
                                                     4))))
                                     (SETQ |MaximalPrimaries|
-                                            (|set_difference|
-                                             |MaximalPrimaries|
-                                             |MinimalPrimaries|))
+                                            (SETDIFFERENCE |MaximalPrimaries|
+                                                           |MinimalPrimaries|))
                                     ((LAMBDA (|bfVar#60| |bfVar#59| |x|)
                                        (LOOP
                                         (COND
@@ -2095,6 +2095,9 @@
 ;           res := compHasFormat(u, e)
 ;           HPUT($ICformat_hash, u, res)
 ;           res
+;       u is ['NOT, v] or u is ['not, v] =>
+;           l1 := ICformat(v, e)
+;           ['NOT, l1]
 ;       u is ['AND,:l] or u is ['and,:l] =>
 ;         l:= REMDUP [ICformat(v, e) for [v,:l'] in tails l | not member(v,l')]
 ;              -- we could have duplicates after, even if not before
@@ -2130,7 +2133,7 @@
 ;       systemErrorHere '"ICformat"
 
 (DEFUN |ICformat| (|u| |e|)
-  (PROG (|res| |l| |v| |l'| |l1|)
+  (PROG (|res| |ISTMP#1| |v| |l1| |l| |l'|)
     (RETURN
      (COND ((ATOM |u|) |u|)
            ((AND (CONSP |u|) (EQ (CAR |u|) '|has|))
@@ -2140,6 +2143,18 @@
                     (SETQ |res| (|compHasFormat| |u| |e|))
                     (HPUT |$ICformat_hash| |u| |res|)
                     |res|))))
+           ((OR
+             (AND (CONSP |u|) (EQ (CAR |u|) 'NOT)
+                  (PROGN
+                   (SETQ |ISTMP#1| (CDR |u|))
+                   (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
+                        (PROGN (SETQ |v| (CAR |ISTMP#1|)) #1#))))
+             (AND (CONSP |u|) (EQ (CAR |u|) '|not|)
+                  (PROGN
+                   (SETQ |ISTMP#1| (CDR |u|))
+                   (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
+                        (PROGN (SETQ |v| (CAR |ISTMP#1|)) #1#)))))
+            (PROGN (SETQ |l1| (|ICformat| |v| |e|)) (LIST 'NOT |l1|)))
            ((OR
              (AND (CONSP |u|) (EQ (CAR |u|) 'AND)
                   (PROGN (SETQ |l| (CDR |u|)) #1#))
@@ -2404,7 +2419,7 @@
 
 ; DescendCodeVarAdd(base, flag, kvec, e) ==
 ;    princview := kvec
-;    [SetFunctionSlots(sig, SUBST('ELT,'CONST,implem), flag, kvec) repeat
+;    [SetFunctionSlots(sig, SUBST('ELT,'CONST,implem), flag, kvec)
 ;        for i in 6..MAXINDEX princview |
 ;          princview.i is [sig:=[op,types],:.] and
 ;            LASSOC([base, :SUBST(base, '%, types)], get(op, 'modemap, e)) is

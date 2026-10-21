@@ -1,18 +1,18 @@
 
-(PUT '|I32MAT;minRowIndex;%I;1| '|SPADreplace| '(XLAM (|x|) 0)) 
+(MAKEPROP '|I32MAT;minRowIndex;%I;1| '|SPADreplace| '(XLAM (|x|) 0)) 
 
 (SDEFUN |I32MAT;minRowIndex;%I;1| ((|x| (%)) (% (|Integer|))) 0) 
 
-(PUT '|I32MAT;minColIndex;%I;2| '|SPADreplace| '(XLAM (|x|) 0)) 
+(MAKEPROP '|I32MAT;minColIndex;%I;2| '|SPADreplace| '(XLAM (|x|) 0)) 
 
 (SDEFUN |I32MAT;minColIndex;%I;2| ((|x| (%)) (% (|Integer|))) 0) 
 
-(PUT '|I32MAT;nrows;%Nni;3| '|SPADreplace| 'ANROWS_I32) 
+(MAKEPROP '|I32MAT;nrows;%Nni;3| '|SPADreplace| 'ANROWS_I32) 
 
 (SDEFUN |I32MAT;nrows;%Nni;3| ((|x| (%)) (% (|NonNegativeInteger|)))
         (ANROWS_I32 |x|)) 
 
-(PUT '|I32MAT;ncols;%Nni;4| '|SPADreplace| 'ANCOLS_I32) 
+(MAKEPROP '|I32MAT;ncols;%Nni;4| '|SPADreplace| 'ANCOLS_I32) 
 
 (SDEFUN |I32MAT;ncols;%Nni;4| ((|x| (%)) (% (|NonNegativeInteger|)))
         (ANCOLS_I32 |x|)) 
@@ -23,41 +23,41 @@
 (SDEFUN |I32MAT;maxColIndex;%I;6| ((|x| (%)) (% (|Integer|)))
         (- (ANCOLS_I32 |x|) 1)) 
 
-(PUT '|I32MAT;qelt;%3I;7| '|SPADreplace| 'AREF2_I32) 
+(MAKEPROP '|I32MAT;qelt;%3I;7| '|SPADreplace| 'AREF2_I32) 
 
 (SDEFUN |I32MAT;qelt;%3I;7|
         ((|m| (%)) (|i| #1=(|Integer|)) (|j| #1#) (% (|Integer|)))
         (AREF2_I32 |m| |i| |j|)) 
 
-(PUT '|I32MAT;elt;%3I;8| '|SPADreplace| 'AREF2_I32) 
+(MAKEPROP '|I32MAT;elt;%3I;8| '|SPADreplace| 'AREF2_I32) 
 
 (SDEFUN |I32MAT;elt;%3I;8|
         ((|m| (%)) (|i| #1=(|Integer|)) (|j| #1#) (% (|Integer|)))
         (AREF2_I32 |m| |i| |j|)) 
 
-(PUT '|I32MAT;qsetelt!;%4I;9| '|SPADreplace| 'SETAREF2_I32) 
+(MAKEPROP '|I32MAT;qsetelt!;%4I;9| '|SPADreplace| 'SETAREF2_I32) 
 
 (SDEFUN |I32MAT;qsetelt!;%4I;9|
         ((|m| (%)) (|i| #1=(|Integer|)) (|j| #1#) (|r| #2=(|Integer|)) (% #2#))
         (SETAREF2_I32 |m| |i| |j| |r|)) 
 
-(PUT '|I32MAT;setelt!;%4I;10| '|SPADreplace| 'SETAREF2_I32) 
+(MAKEPROP '|I32MAT;setelt!;%4I;10| '|SPADreplace| 'SETAREF2_I32) 
 
 (SDEFUN |I32MAT;setelt!;%4I;10|
         ((|m| (%)) (|i| #1=(|Integer|)) (|j| #1#) (|r| #2=(|Integer|)) (% #2#))
         (SETAREF2_I32 |m| |i| |j| |r|)) 
 
-(PUT '|I32MAT;empty;%;11| '|SPADreplace| '(XLAM NIL (MAKE_MATRIX_I32 0 0))) 
+(MAKEPROP '|I32MAT;empty;%;11| '|SPADreplace| '(XLAM NIL (MAKE_MATRIX_I32 0 0))) 
 
 (SDEFUN |I32MAT;empty;%;11| ((% (%))) (MAKE_MATRIX_I32 0 0)) 
 
-(PUT '|I32MAT;qnew;2Nni%;12| '|SPADreplace| 'MAKE_MATRIX_I32) 
+(MAKEPROP '|I32MAT;qnew;2Nni%;12| '|SPADreplace| 'MAKE_MATRIX_I32) 
 
 (SDEFUN |I32MAT;qnew;2Nni%;12|
         ((|rows| #1=(|NonNegativeInteger|)) (|cols| #1#) (% (%)))
         (MAKE_MATRIX_I32 |rows| |cols|)) 
 
-(PUT '|I32MAT;new;2NniI%;13| '|SPADreplace| 'MAKE_MATRIX1_I32) 
+(MAKEPROP '|I32MAT;new;2NniI%;13| '|SPADreplace| 'MAKE_MATRIX1_I32) 
 
 (SDEFUN |I32MAT;new;2NniI%;13|
         ((|rows| #1=(|NonNegativeInteger|)) (|cols| #1#) (|a| (|Integer|))
@@ -68,7 +68,7 @@
 
 (DEFUN |I32Matrix;| ()
   (SPROG
-   ((|dv$| NIL) (% NIL) (#1=#:G2444 NIL) (#2=#:G2445 NIL) (#3=#:G2443 NIL)
+   ((|dv$| NIL) (% NIL) (#1=#:G24 NIL) (#2=#:G25 NIL) (#3=#:G23 NIL)
     (|pv$| NIL))
    (PROGN
     (LETT |dv$| '(|I32Matrix|))
@@ -160,7 +160,7 @@
 
 (DEFUN |I32Matrix| ()
   (SPROG NIL
-         (PROG (#1=#:G2447)
+         (PROG (#1=#:G27)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|I32Matrix|))
@@ -211,18 +211,18 @@
               |blockConcat| 721 |array2| 726 |any?| 731 |antisymmetric?| 737 ^
               742 |Pfaffian| 754 = 759 / 765 - 771 + 782 * 788 |#| 824)
            'NIL
-           (CONS (|makeByteWordVec2| 11 '(0 0 1 0 2 6 9 0 7 11 9 0 0 0 0))
+           (CONS (|makeByteWordVec2| 11 '(0 0 1 1 0 2 6 9 0 7 11 9 0 0 0 0))
                  (CONS
-                  '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL
+                  '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL NIL
                      |HomogeneousAggregate&| |Hashable&| |SetCategory&|
                      |Evalable&| |Aggregate&| |BasicType&| NIL |InnerEvalable&|
                      NIL NIL NIL NIL)
                   (CONS
                    '#((|MatrixCategory| 6 24 24)
                       (|TwoDimensionalArrayCategory| 6 24 24) (|Comparable|)
-                      (|HomogeneousAggregate| 6) (|Hashable|) (|SetCategory|)
-                      (|Evalable| 6) (|Aggregate|) (|BasicType|)
-                      (|CoercibleTo| 40) (|InnerEvalable| 6 6)
+                      (|ComparableRepresentation|) (|HomogeneousAggregate| 6)
+                      (|Hashable|) (|SetCategory|) (|Evalable| 6) (|Aggregate|)
+                      (|BasicType|) (|CoercibleTo| 40) (|InnerEvalable| 6 6)
                       (|shallowlyMutable|) (|finiteAggregate|)
                       (|MatrixOperationsCategory| 6 24 24) (|Type|))
                    (|makeByteWordVec2| 45

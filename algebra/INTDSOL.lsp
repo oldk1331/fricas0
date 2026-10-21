@@ -7,7 +7,7 @@
                         (|:| |basis| (|List| F)))
            L F))
          (% (|Record| (|:| |ltilde| L) (|:| |r| (|Union| L "failed")))))
-        (SPROG ((|rt| (L)) (#3=#:G4 NIL) (|rec| #1#) (|a| (L)))
+        (SPROG ((|a| (L)) (|rec| #1#) (#3=#:G4 NIL) (|rt| (L)))
                (SEQ (LETT |a| (SPADCALL |l| (QREFELT % 8)))
                     (LETT |rec|
                           (SPADCALL |a| (|spadConstant| % 9) |rat_solve|))
@@ -50,7 +50,7 @@
 (DECLAIM (NOTINLINE |IntegrateSolutions;|)) 
 
 (DEFUN |IntegrateSolutions;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -88,7 +88,7 @@
 (MAKEPROP '|IntegrateSolutions| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (0 . |adjoint|) (5 . |One|) (9 . |One|) (|NonNegativeInteger|)
+              (0 . |adjoint|) (5 . |1|) (9 . |1|) (|NonNegativeInteger|)
               (13 . |monomial|) (19 . *) (25 . *) (31 . -)
               (37 . |leftQuotient|) (|Union| 7 '#1="failed")
               (|Record| (|:| |ltilde| 7) (|:| |r| 17)) (|Union| 6 '#2="failed")

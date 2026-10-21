@@ -4,7 +4,7 @@
 
 (SDEFUN |FINRALG-;coordinates;2VM;2|
         ((|v| (|Vector| S)) (|b| (|Vector| S)) (% (|Matrix| R)))
-        (SPROG ((#1=#:G12 NIL) (|i| NIL) (|j| NIL) (|m| (|Matrix| R)))
+        (SPROG ((|m| (|Matrix| R)) (|j| NIL) (|i| NIL) (#1=#:G12 NIL))
                (SEQ
                 (LETT |m|
                       (MAKE_MATRIX1 (QVSIZE |v|) (QVSIZE |b|)
@@ -26,50 +26,50 @@
 (SDEFUN |FINRALG-;represents;VVS;3|
         ((|v| (|Vector| R)) (|b| (|Vector| S)) (% (S)))
         (SPROG
-         ((#1=#:G14 NIL) (#2=#:G13 (S)) (#3=#:G15 (S)) (#4=#:G18 NIL) (|i| NIL)
-          (|m| (|Integer|)))
+         ((|m| (|Integer|)) (|i| NIL) (#1=#:G18 NIL) (#2=#:G15 (S))
+          (#3=#:G13 (S)) (#4=#:G14 NIL))
          (SEQ (LETT |m| (- (SPADCALL |v| (QREFELT % 22)) 1))
               (EXIT
                (PROGN
-                (LETT #1# NIL)
-                (SEQ (LETT |i| 1) (LETT #4# (SPADCALL (QREFELT % 24))) G190
-                     (COND ((|greater_SI| |i| #4#) (GO G191)))
+                (LETT #4# NIL)
+                (SEQ (LETT |i| 1) (LETT #1# (SPADCALL (QREFELT % 24))) G190
+                     (COND ((|greater_SI| |i| #1#) (GO G191)))
                      (SEQ
                       (EXIT
                        (PROGN
-                        (LETT #3#
+                        (LETT #2#
                               (SPADCALL
                                (SPADCALL |v| (+ |i| |m|) (QREFELT % 25))
                                (SPADCALL |b| (+ |i| |m|) (QREFELT % 26))
                                (QREFELT % 27)))
                         (COND
-                         (#1# (LETT #2# (SPADCALL #2# #3# (QREFELT % 28))))
-                         ('T (PROGN (LETT #2# #3#) (LETT #1# 'T)))))))
+                         (#4# (LETT #3# (SPADCALL #3# #2# (QREFELT % 28))))
+                         ('T (PROGN (LETT #3# #2#) (LETT #4# 'T)))))))
                      (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
-                (COND (#1# #2#) ('T (|spadConstant| % 29)))))))) 
+                (COND (#4# #3#) ('T (|spadConstant| % 29)))))))) 
 
 (SDEFUN |FINRALG-;traceMatrix;VM;4| ((|v| (|Vector| S)) (% (|Matrix| R)))
         (SPROG
-         ((#1=#:G27 NIL) (|j| NIL) (#2=#:G26 NIL) (#3=#:G25 NIL) (|i| NIL)
-          (#4=#:G24 NIL))
+         ((#1=#:G24 NIL) (|i| NIL) (#2=#:G25 NIL) (#3=#:G26 NIL) (|j| NIL)
+          (#4=#:G27 NIL))
          (SEQ
           (SPADCALL
            (PROGN
-            (LETT #4# NIL)
+            (LETT #1# NIL)
             (SEQ (LETT |i| (SPADCALL |v| (QREFELT % 17)))
-                 (LETT #3# (QVSIZE |v|)) G190 (COND ((> |i| #3#) (GO G191)))
+                 (LETT #2# (QVSIZE |v|)) G190 (COND ((> |i| #2#) (GO G191)))
                  (SEQ
                   (EXIT
-                   (LETT #4#
+                   (LETT #1#
                          (CONS
                           (PROGN
-                           (LETT #2# NIL)
+                           (LETT #3# NIL)
                            (SEQ (LETT |j| (SPADCALL |v| (QREFELT % 17)))
-                                (LETT #1# (QVSIZE |v|)) G190
-                                (COND ((> |j| #1#) (GO G191)))
+                                (LETT #4# (QVSIZE |v|)) G190
+                                (COND ((> |j| #4#) (GO G191)))
                                 (SEQ
                                  (EXIT
-                                  (LETT #2#
+                                  (LETT #3#
                                         (CONS
                                          (SPADCALL
                                           (SPADCALL
@@ -77,27 +77,27 @@
                                            (SPADCALL |v| |j| (QREFELT % 26))
                                            (QREFELT % 31))
                                           (QREFELT % 32))
-                                         #2#))))
+                                         #3#))))
                                 (LETT |j| (+ |j| 1)) (GO G190) G191
-                                (EXIT (NREVERSE #2#))))
-                          #4#))))
-                 (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT (NREVERSE #4#))))
+                                (EXIT (NREVERSE #3#))))
+                          #1#))))
+                 (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT (NREVERSE #1#))))
            (QREFELT % 34))))) 
 
 (SDEFUN |FINRALG-;regularRepresentation;SVM;5|
         ((|x| (S)) (|b| (|Vector| S)) (% (|Matrix| R)))
-        (SPROG ((#1=#:G35 NIL) (|i| NIL) (#2=#:G34 NIL) (|m| (|Integer|)))
+        (SPROG ((|m| (|Integer|)) (#1=#:G34 NIL) (|i| NIL) (#2=#:G35 NIL))
                (SEQ (LETT |m| (- (SPADCALL |b| (QREFELT % 17)) 1))
                     (EXIT
                      (SPADCALL
                       (SPADCALL
                        (PROGN
-                        (LETT #2# NIL)
-                        (SEQ (LETT |i| 1) (LETT #1# (SPADCALL (QREFELT % 24)))
-                             G190 (COND ((|greater_SI| |i| #1#) (GO G191)))
+                        (LETT #1# NIL)
+                        (SEQ (LETT |i| 1) (LETT #2# (SPADCALL (QREFELT % 24)))
+                             G190 (COND ((|greater_SI| |i| #2#) (GO G191)))
                              (SEQ
                               (EXIT
-                               (LETT #2#
+                               (LETT #1#
                                      (CONS
                                       (SPADCALL
                                        (SPADCALL
@@ -107,16 +107,16 @@
                                                   (QREFELT % 31))
                                         |b| (QREFELT % 19))
                                        (QREFELT % 37))
-                                      #2#))))
+                                      #1#))))
                              (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                             (EXIT (NREVERSE #2#))))
+                             (EXIT (NREVERSE #1#))))
                        (QREFELT % 34))
                       (QREFELT % 38)))))) 
 
 (DECLAIM (NOTINLINE |FiniteRankAlgebra&;|)) 
 
 (DEFUN |FiniteRankAlgebra&| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -145,13 +145,13 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|Matrix| 7) (|Vector| %) (0 . |traceMatrix|)
-              (5 . |determinant|) |FINRALG-;discriminant;VR;1| (10 . |Zero|)
+              (5 . |determinant|) |FINRALG-;discriminant;VR;1| (10 . |0|)
               (|Integer|) (|Vector| 6) (14 . |minIndex|) (|Vector| 7)
               (19 . |coordinates|) (25 . |setRow!|)
               |FINRALG-;coordinates;2VM;2| (32 . |minIndex|)
               (|PositiveInteger|) (37 . |rank|) (41 . |elt|) (47 . |elt|)
-              (53 . *) (59 . +) (65 . |Zero|) |FINRALG-;represents;VVS;3|
-              (69 . *) (75 . |trace|) (|List| 36) (80 . |matrix|)
+              (53 . *) (59 . +) (65 . |0|) |FINRALG-;represents;VVS;3| (69 . *)
+              (75 . |trace|) (|List| 36) (80 . |matrix|)
               |FINRALG-;traceMatrix;VM;4| (|List| 7) (85 . |parts|)
               (90 . |transpose|) |FINRALG-;regularRepresentation;SVM;5|)
            '#(|traceMatrix| 95 |represents| 100 |regularRepresentation| 106

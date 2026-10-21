@@ -7,7 +7,7 @@
 (SDEFUN |ILOGIC;logicF;%;3| ((% (%))) (CONS 0 (LIST 'F))) 
 
 (SDEFUN |ILOGIC;~;2%;4| ((|b| (%)) (% (%)))
-        (SPROG ((#1=#:G104 NIL) (|d| (%)) (|c| (%)))
+        (SPROG ((|c| (%)) (|d| (%)) (#1=#:G105 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -15,7 +15,7 @@
                    ((QEQCAR |b| 0)
                     (COND
                      ((EQUAL (QCAR (CDR |b|)) 'T)
-                      (PROGN (LETT #1# (CONS 0 (LIST 'F))) (GO #2=#:G103))))))
+                      (PROGN (LETT #1# (CONS 0 (LIST 'F))) (GO #2=#:G104))))))
                   (COND
                    ((QEQCAR |b| 3)
                     (SEQ (LETT |c| (QCDR (CDR |b|)))
@@ -35,7 +35,7 @@
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |ILOGIC;/\\;3%;5| ((|a| (%)) (|b| (%)) (% (%)))
-        (SPROG ((#1=#:G121 NIL))
+        (SPROG ((#1=#:G122 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -43,7 +43,7 @@
                    ((QEQCAR |a| 0)
                     (COND
                      ((EQUAL (QCAR (CDR |a|)) 'F)
-                      (PROGN (LETT #1# (CONS 0 (LIST 'F))) (GO #2=#:G120))))))
+                      (PROGN (LETT #1# (CONS 0 (LIST 'F))) (GO #2=#:G121))))))
                   (COND
                    ((QEQCAR |b| 0)
                     (COND
@@ -72,7 +72,7 @@
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |ILOGIC;\\/;3%;6| ((|a| (%)) (|b| (%)) (% (%)))
-        (SPROG ((#1=#:G136 NIL))
+        (SPROG ((#1=#:G137 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -80,7 +80,7 @@
                    ((QEQCAR |a| 0)
                     (COND
                      ((EQUAL (QCAR (CDR |a|)) 'T)
-                      (PROGN (LETT #1# (CONS 0 (LIST 'T))) (GO #2=#:G135))))))
+                      (PROGN (LETT #1# (CONS 0 (LIST 'T))) (GO #2=#:G136))))))
                   (COND
                    ((QEQCAR |b| 0)
                     (COND
@@ -103,7 +103,7 @@
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |ILOGIC;implies;3%;7| ((|a| (%)) (|b| (%)) (% (%)))
-        (SPROG ((#1=#:G150 NIL))
+        (SPROG ((#1=#:G151 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -118,28 +118,28 @@
                           ((EQUAL (QCAR (CDR |b|)) 'F)
                            (PROGN
                             (LETT #1# (CONS 0 (LIST 'F)))
-                            (GO #2=#:G149))))))
+                            (GO #2=#:G150))))))
                        (EXIT
                         (PROGN (LETT #1# (CONS 0 (LIST 'T))) (GO #2#))))))))
                   (EXIT (CONS 2 (VECTOR 'IMPLY |a| |b|)))))
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |ILOGIC;redux;2%;8| ((|n| (%)) (% (%)))
-        (SPROG ((#1=#:G164 NIL) (#2=#:G74 NIL))
+        (SPROG ((#1=#:G74 NIL) (#2=#:G165 NIL))
                (SEQ
                 (EXIT
                  (SEQ
-                  (COND ((QEQCAR |n| 0) (PROGN (LETT #1# |n|) (GO #3=#:G163))))
-                  (COND ((QEQCAR |n| 1) (PROGN (LETT #1# |n|) (GO #3#))))
+                  (COND ((QEQCAR |n| 0) (PROGN (LETT #2# |n|) (GO #3=#:G164))))
+                  (COND ((QEQCAR |n| 1) (PROGN (LETT #2# |n|) (GO #3#))))
                   (COND
                    ((QEQCAR |n| 2)
                     (SEQ
                      (COND
                       ((EQUAL
                         (QVELT
-                         (PROG2 (LETT #2# |n|)
-                             (QCDR #2#)
-                           (|check_union2| (QEQCAR #2# 2)
+                         (PROG2 (LETT #1# |n|)
+                             (QCDR #1#)
+                           (|check_union2| (QEQCAR #1# 2)
                                            (|Record| (|:| |typ| (|Symbol|))
                                                      (|:| |c1| %) (|:| |c2| %))
                                            (|Union|
@@ -157,17 +157,17 @@
                                                  (|Record|
                                                   (|:| |typ| (|Symbol|))
                                                   (|:| |c1| %))))
-                                           #2#))
+                                           #1#))
                          0)
                         'IMPLY)
                        (PROGN
-                        (LETT #1#
+                        (LETT #2#
                               (SPADCALL
                                (SPADCALL
                                 (QVELT
-                                 (PROG2 (LETT #2# |n|)
-                                     (QCDR #2#)
-                                   (|check_union2| (QEQCAR #2# 2)
+                                 (PROG2 (LETT #1# |n|)
+                                     (QCDR #1#)
+                                   (|check_union2| (QEQCAR #1# 2)
                                                    (|Record|
                                                     (|:| |typ| (|Symbol|))
                                                     (|:| |c1| %) (|:| |c2| %))
@@ -191,14 +191,14 @@
                                                           (|:| |typ|
                                                                (|Symbol|))
                                                           (|:| |c1| %))))
-                                                   #2#))
+                                                   #1#))
                                  1)
                                 (QREFELT % 19))
                                (SPADCALL
                                 (QVELT
-                                 (PROG2 (LETT #2# |n|)
-                                     (QCDR #2#)
-                                   (|check_union2| (QEQCAR #2# 2)
+                                 (PROG2 (LETT #1# |n|)
+                                     (QCDR #1#)
+                                   (|check_union2| (QEQCAR #1# 2)
                                                    (|Record|
                                                     (|:| |typ| (|Symbol|))
                                                     (|:| |c1| %) (|:| |c2| %))
@@ -222,7 +222,7 @@
                                                           (|:| |typ|
                                                                (|Symbol|))
                                                           (|:| |c1| %))))
-                                                   #2#))
+                                                   #1#))
                                  2)
                                 (QREFELT % 19))
                                (QREFELT % 18)))
@@ -230,9 +230,9 @@
                      (COND
                       ((EQUAL
                         (QVELT
-                         (PROG2 (LETT #2# |n|)
-                             (QCDR #2#)
-                           (|check_union2| (QEQCAR #2# 2)
+                         (PROG2 (LETT #1# |n|)
+                             (QCDR #1#)
+                           (|check_union2| (QEQCAR #1# 2)
                                            (|Record| (|:| |typ| (|Symbol|))
                                                      (|:| |c1| %) (|:| |c2| %))
                                            (|Union|
@@ -250,17 +250,17 @@
                                                  (|Record|
                                                   (|:| |typ| (|Symbol|))
                                                   (|:| |c1| %))))
-                                           #2#))
+                                           #1#))
                          0)
                         'AND)
                        (PROGN
-                        (LETT #1#
+                        (LETT #2#
                               (SPADCALL
                                (SPADCALL
                                 (QVELT
-                                 (PROG2 (LETT #2# |n|)
-                                     (QCDR #2#)
-                                   (|check_union2| (QEQCAR #2# 2)
+                                 (PROG2 (LETT #1# |n|)
+                                     (QCDR #1#)
+                                   (|check_union2| (QEQCAR #1# 2)
                                                    (|Record|
                                                     (|:| |typ| (|Symbol|))
                                                     (|:| |c1| %) (|:| |c2| %))
@@ -284,14 +284,14 @@
                                                           (|:| |typ|
                                                                (|Symbol|))
                                                           (|:| |c1| %))))
-                                                   #2#))
+                                                   #1#))
                                  1)
                                 (QREFELT % 19))
                                (SPADCALL
                                 (QVELT
-                                 (PROG2 (LETT #2# |n|)
-                                     (QCDR #2#)
-                                   (|check_union2| (QEQCAR #2# 2)
+                                 (PROG2 (LETT #1# |n|)
+                                     (QCDR #1#)
+                                   (|check_union2| (QEQCAR #1# 2)
                                                    (|Record|
                                                     (|:| |typ| (|Symbol|))
                                                     (|:| |c1| %) (|:| |c2| %))
@@ -315,7 +315,7 @@
                                                           (|:| |typ|
                                                                (|Symbol|))
                                                           (|:| |c1| %))))
-                                                   #2#))
+                                                   #1#))
                                  2)
                                 (QREFELT % 19))
                                (QREFELT % 14)))
@@ -324,9 +324,9 @@
                       (COND
                        ((EQUAL
                          (QVELT
-                          (PROG2 (LETT #2# |n|)
-                              (QCDR #2#)
-                            (|check_union2| (QEQCAR #2# 2)
+                          (PROG2 (LETT #1# |n|)
+                              (QCDR #1#)
+                            (|check_union2| (QEQCAR #1# 2)
                                             (|Record| (|:| |typ| (|Symbol|))
                                                       (|:| |c1| %)
                                                       (|:| |c2| %))
@@ -345,17 +345,17 @@
                                                   (|Record|
                                                    (|:| |typ| (|Symbol|))
                                                    (|:| |c1| %))))
-                                            #2#))
+                                            #1#))
                           0)
                          'OR)
                         (PROGN
-                         (LETT #1#
+                         (LETT #2#
                                (SPADCALL
                                 (SPADCALL
                                  (QVELT
-                                  (PROG2 (LETT #2# |n|)
-                                      (QCDR #2#)
-                                    (|check_union2| (QEQCAR #2# 2)
+                                  (PROG2 (LETT #1# |n|)
+                                      (QCDR #1#)
+                                    (|check_union2| (QEQCAR #1# 2)
                                                     (|Record|
                                                      (|:| |typ| (|Symbol|))
                                                      (|:| |c1| %) (|:| |c2| %))
@@ -379,14 +379,14 @@
                                                            (|:| |typ|
                                                                 (|Symbol|))
                                                            (|:| |c1| %))))
-                                                    #2#))
+                                                    #1#))
                                   1)
                                  (QREFELT % 19))
                                 (SPADCALL
                                  (QVELT
-                                  (PROG2 (LETT #2# |n|)
-                                      (QCDR #2#)
-                                    (|check_union2| (QEQCAR #2# 2)
+                                  (PROG2 (LETT #1# |n|)
+                                      (QCDR #1#)
+                                    (|check_union2| (QEQCAR #1# 2)
                                                     (|Record|
                                                      (|:| |typ| (|Symbol|))
                                                      (|:| |c1| %) (|:| |c2| %))
@@ -410,7 +410,7 @@
                                                            (|:| |typ|
                                                                 (|Symbol|))
                                                            (|:| |c1| %))))
-                                                    #2#))
+                                                    #1#))
                                   2)
                                  (QREFELT % 19))
                                 (QREFELT % 15)))
@@ -418,28 +418,28 @@
                   (COND
                    ((QEQCAR |n| 3)
                     (PROGN
-                     (LETT #1#
+                     (LETT #2#
                            (SPADCALL (SPADCALL (QCDR (CDR |n|)) (QREFELT % 19))
                                      (QREFELT % 11)))
                      (GO #3#))))
                   (EXIT |n|)))
-                #3# (EXIT #1#)))) 
+                #3# (EXIT #2#)))) 
 
 (SDEFUN |ILOGIC;factor;%L;9| ((|n| (%)) (% (|List| %)))
-        (SPROG ((|ch| (|List| %)) (#1=#:G177 NIL) (#2=#:G74 NIL))
+        (SPROG ((#1=#:G74 NIL) (#2=#:G178 NIL) (|ch| (|List| %)))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((NOT (QEQCAR |n| 2))
-                    (PROGN (LETT #1# (LIST |n|)) (GO #3=#:G176))))
+                    (PROGN (LETT #2# (LIST |n|)) (GO #3=#:G177))))
                   (COND
                    ((NOT
                      (EQUAL
                       (QVELT
-                       (PROG2 (LETT #2# |n|)
-                           (QCDR #2#)
-                         (|check_union2| (QEQCAR #2# 2)
+                       (PROG2 (LETT #1# |n|)
+                           (QCDR #1#)
+                         (|check_union2| (QEQCAR #1# 2)
                                          (|Record| (|:| |typ| (|Symbol|))
                                                    (|:| |c1| %) (|:| |c2| %))
                                          (|Union|
@@ -456,55 +456,55 @@
                                           (|:| |unaryOp|
                                                (|Record| (|:| |typ| (|Symbol|))
                                                          (|:| |c1| %))))
-                                         #2#))
+                                         #1#))
                        0)
                       'AND))
-                    (PROGN (LETT #1# (LIST |n|)) (GO #3#))))
+                    (PROGN (LETT #2# (LIST |n|)) (GO #3#))))
                   (LETT |ch| (SPADCALL |n| (QREFELT % 21)))
                   (EXIT
                    (SPADCALL
                     (SPADCALL (SPADCALL |ch| (QREFELT % 23)) (QREFELT % 24))
                     (SPADCALL (SPADCALL |ch| (QREFELT % 25)) (QREFELT % 24))
                     (QREFELT % 26)))))
-                #3# (EXIT #1#)))) 
+                #3# (EXIT #2#)))) 
 
 (SDEFUN |ILOGIC;removeDup| ((|a| (|List| %)) (|b| (|List| %)) (% (|List| %)))
         (SPROG
-         ((|res| (|List| %)) (|fnd| (|Boolean|)) (#1=#:G186 NIL) (|a1| NIL)
-          (#2=#:G185 NIL) (|b1| NIL))
+         ((|b1| NIL) (#1=#:G186 NIL) (|a1| NIL) (#2=#:G187 NIL)
+          (|fnd| (|Boolean|)) (|res| (|List| %)))
          (SEQ (LETT |res| NIL)
-              (SEQ (LETT |b1| NIL) (LETT #2# |b|) G190
+              (SEQ (LETT |b1| NIL) (LETT #1# |b|) G190
                    (COND
-                    ((OR (ATOM #2#) (PROGN (LETT |b1| (CAR #2#)) NIL))
+                    ((OR (ATOM #1#) (PROGN (LETT |b1| (CAR #1#)) NIL))
                      (GO G191)))
                    (SEQ (LETT |fnd| 'NIL)
-                        (SEQ (LETT |a1| NIL) (LETT #1# |a|) G190
+                        (SEQ (LETT |a1| NIL) (LETT #2# |a|) G190
                              (COND
-                              ((OR (ATOM #1#)
-                                   (PROGN (LETT |a1| (CAR #1#)) NIL))
+                              ((OR (ATOM #2#)
+                                   (PROGN (LETT |a1| (CAR #2#)) NIL))
                                (GO G191)))
                              (SEQ
                               (EXIT
                                (COND
                                 ((SPADCALL |a1| |b1| (QREFELT % 13))
                                  (LETT |fnd| 'T)))))
-                             (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+                             (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                         (EXIT
                          (COND
                           ((NULL |fnd|)
                            (LETT |res|
                                  (SPADCALL |res| |b1| (QREFELT % 27)))))))
-                   (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                   (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
               (EXIT |res|)))) 
 
 (SDEFUN |ILOGIC;deductions1| ((|ln| (|List| %)) (% (|List| %)))
         (SPROG
-         ((|res| (|List| %)) (#1=#:G205 NIL) (|n2| NIL) (|ch| (|List| %))
-          (#2=#:G204 NIL) (|n| NIL))
+         ((|n| NIL) (#1=#:G205 NIL) (|ch| (|List| %)) (|n2| NIL)
+          (#2=#:G206 NIL) (|res| (|List| %)))
          (SEQ (LETT |res| NIL)
-              (SEQ (LETT |n| NIL) (LETT #2# |ln|) G190
+              (SEQ (LETT |n| NIL) (LETT #1# |ln|) G190
                    (COND
-                    ((OR (ATOM #2#) (PROGN (LETT |n| (CAR #2#)) NIL))
+                    ((OR (ATOM #1#) (PROGN (LETT |n| (CAR #1#)) NIL))
                      (GO G191)))
                    (SEQ
                     (EXIT
@@ -514,10 +514,10 @@
                         ((EQUAL (QVELT (CDR |n|) 0) 'IMPLY)
                          (SEQ (LETT |ch| (SPADCALL |n| (QREFELT % 21)))
                               (EXIT
-                               (SEQ (LETT |n2| NIL) (LETT #1# |ln|) G190
+                               (SEQ (LETT |n2| NIL) (LETT #2# |ln|) G190
                                     (COND
-                                     ((OR (ATOM #1#)
-                                          (PROGN (LETT |n2| (CAR #1#)) NIL))
+                                     ((OR (ATOM #2#)
+                                          (PROGN (LETT |n2| (CAR #2#)) NIL))
                                       (GO G191)))
                                     (SEQ
                                      (EXIT
@@ -531,15 +531,15 @@
                                                                   (QREFELT %
                                                                            25))
                                                         (QREFELT % 27)))))))
-                                    (LETT #1# (CDR #1#)) (GO G190) G191
+                                    (LETT #2# (CDR #2#)) (GO G190) G191
                                     (EXIT NIL))))))))))
-                   (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                   (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
               (EXIT |res|)))) 
 
 (SDEFUN |ILOGIC;deductions;2L;12| ((|ln| (|List| %)) (% (|List| %)))
         (SPROG
-         ((|loopbreaker| (|NonNegativeInteger|)) (|emptyres| (|Boolean|))
-          (|res| (|List| %)) (|thisres| (|List| %)) (|allres| (|List| %)))
+         ((|allres| (|List| %)) (|thisres| (|List| %)) (|res| (|List| %))
+          (|emptyres| (|Boolean|)) (|loopbreaker| (|NonNegativeInteger|)))
          (SEQ (LETT |res| NIL) (LETT |thisres| (|ILOGIC;deductions1| |ln| %))
               (LETT |res| (SPADCALL |res| |thisres| (QREFELT % 26)))
               (LETT |emptyres| (SPADCALL |thisres| (QREFELT % 28)))
@@ -560,13 +560,13 @@
               (EXIT |res|)))) 
 
 (SDEFUN |ILOGIC;opType;%S;13| ((|n| (%)) (% (|Symbol|)))
-        (SPROG ((#1=#:G214 NIL))
+        (SPROG ((#1=#:G215 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((QEQCAR |n| 2)
-                    (PROGN (LETT #1# (QVELT (CDR |n|) 0)) (GO #2=#:G213))))
+                    (PROGN (LETT #1# (QVELT (CDR |n|) 0)) (GO #2=#:G214))))
                   (COND ((QEQCAR |n| 3) (PROGN (LETT #1# 'NOT) (GO #2#))))
                   (EXIT 'OTHER)))
                 #2# (EXIT #1#)))) 
@@ -575,7 +575,7 @@
         (COND ((QEQCAR |n| 1) 'T) ('T (QEQCAR |n| 0)))) 
 
 (SDEFUN |ILOGIC;value;%S;15| ((|n| (%)) (% (|Symbol|)))
-        (SPROG ((#1=#:G229 NIL))
+        (SPROG ((#1=#:G230 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -584,7 +584,7 @@
                     (SEQ
                      (COND
                       ((EQUAL (QCAR (CDR |n|)) 'F)
-                       (PROGN (LETT #1# 'F) (GO #2=#:G228))))
+                       (PROGN (LETT #1# 'F) (GO #2=#:G229))))
                      (COND
                       ((EQUAL (QCAR (CDR |n|)) 'T)
                        (PROGN (LETT #1# 'T) (GO #2#))))
@@ -594,28 +594,28 @@
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |ILOGIC;getChildren;%L;16| ((|n| (%)) (% (|List| %)))
-        (SPROG ((#1=#:G235 NIL) (#2=#:G75 NIL))
+        (SPROG ((#1=#:G75 NIL) (#2=#:G236 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (COND
                    ((SPADCALL |n| (QREFELT % 31))
-                    (PROGN (LETT #1# NIL) (GO #3=#:G234))))
+                    (PROGN (LETT #2# NIL) (GO #3=#:G235))))
                   (COND
                    ((QEQCAR |n| 2)
                     (PROGN
-                     (LETT #1# (LIST (QVELT (CDR |n|) 1) (QVELT (CDR |n|) 2)))
+                     (LETT #2# (LIST (QVELT (CDR |n|) 1) (QVELT (CDR |n|) 2)))
                      (GO #3#))))
                   (EXIT
                    (COND
                     ((QEQCAR |n| 3)
                      (PROGN
-                      (LETT #1#
+                      (LETT #2#
                             (LIST
                              (QCDR
-                              (PROG2 (LETT #2# |n|)
-                                  (QCDR #2#)
-                                (|check_union2| (QEQCAR #2# 3)
+                              (PROG2 (LETT #1# |n|)
+                                  (QCDR #1#)
+                                (|check_union2| (QEQCAR #1# 3)
                                                 (|Record|
                                                  (|:| |typ| (|Symbol|))
                                                  (|:| |c1| %))
@@ -635,9 +635,9 @@
                                                       (|Record|
                                                        (|:| |typ| (|Symbol|))
                                                        (|:| |c1| %))))
-                                                #2#)))))
+                                                #1#)))))
                       (GO #3#)))))))
-                #3# (EXIT #1#)))) 
+                #3# (EXIT #2#)))) 
 
 (SDEFUN |ILOGIC;=;2%B;17| ((|a| (%)) (|b| (%)) (% (|Boolean|)))
         (SEQ
@@ -696,8 +696,8 @@
         ((|t1| (|String|)) (|pin| #1=(|NonNegativeInteger|))
          (% (|Record| (|:| |rft| %) (|:| |pout| (|NonNegativeInteger|)))))
         (SPROG
-         ((|p1| #1#) (#2=#:G267 NIL) (|ch| (|Character|)) (|trm| (%))
-          (|r2| (|Record| (|:| |rft| %) (|:| |pout| (|NonNegativeInteger|)))))
+         ((|r2| (|Record| (|:| |rft| %) (|:| |pout| (|NonNegativeInteger|))))
+          (|trm| (%)) (|ch| (|Character|)) (#2=#:G269 NIL) (|p1| #1#))
          (SEQ
           (EXIT
            (SEQ (LETT |p1| |pin|) (LETT |trm| (SPADCALL (QREFELT % 9)))
@@ -706,7 +706,7 @@
                  ((NULL (|eql_SI| |ch| (|STR_to_CHAR| "(")))
                   (SEQ (|error| "bracket term must start with (")
                        (EXIT
-                        (PROGN (LETT #2# (CONS |trm| |p1|)) (GO #3=#:G266))))))
+                        (PROGN (LETT #2# (CONS |trm| |p1|)) (GO #3=#:G268))))))
                 (LETT |p1| (+ |p1| 1))
                 (COND
                  ((> |p1| (SPADCALL |t1| (QREFELT % 34)))
@@ -726,9 +726,9 @@
         ((|t1| (|String|)) (|pin| #1=(|NonNegativeInteger|)) (|firstTerm| (%))
          (% (|Record| (|:| |rft| %) (|:| |pout| (|NonNegativeInteger|)))))
         (SPROG
-         ((|p1| #1#) (|secondTerm| (%))
+         ((|trm| (%)) (|ch| (|Character|)) (#2=#:G276 NIL)
           (|r| (|Record| (|:| |rft| %) (|:| |pout| (|NonNegativeInteger|))))
-          (#2=#:G274 NIL) (|ch| (|Character|)) (|trm| (%)))
+          (|secondTerm| (%)) (|p1| #1#))
          (SEQ
           (EXIT
            (SEQ (LETT |p1| |pin|) (LETT |trm| (SPADCALL (QREFELT % 9)))
@@ -737,7 +737,7 @@
                  ((NULL (|eql_SI| |ch| (|STR_to_CHAR| "/")))
                   (SEQ (|error| "expecting /\\")
                        (EXIT
-                        (PROGN (LETT #2# (CONS |trm| |p1|)) (GO #3=#:G273))))))
+                        (PROGN (LETT #2# (CONS |trm| |p1|)) (GO #3=#:G275))))))
                 (LETT |p1| (+ |p1| 1)) (LETT |ch| (STR_ELT1 |t1| |p1|))
                 (COND
                  ((NULL (|eql_SI| |ch| (|STR_to_CHAR| "\\")))
@@ -755,9 +755,9 @@
         ((|t1| (|String|)) (|pin| #1=(|NonNegativeInteger|)) (|firstTerm| (%))
          (% (|Record| (|:| |rft| %) (|:| |pout| (|NonNegativeInteger|)))))
         (SPROG
-         ((|p1| #1#) (|secondTerm| (%))
+         ((|trm| (%)) (|ch| (|Character|)) (#2=#:G283 NIL)
           (|r| (|Record| (|:| |rft| %) (|:| |pout| (|NonNegativeInteger|))))
-          (#2=#:G281 NIL) (|ch| (|Character|)) (|trm| (%)))
+          (|secondTerm| (%)) (|p1| #1#))
          (SEQ
           (EXIT
            (SEQ (LETT |p1| |pin|) (LETT |trm| (SPADCALL (QREFELT % 9)))
@@ -766,7 +766,7 @@
                  ((NULL (|eql_SI| |ch| (|STR_to_CHAR| "\\")))
                   (SEQ (|error| "expecting \\/")
                        (EXIT
-                        (PROGN (LETT #2# (CONS |trm| |p1|)) (GO #3=#:G280))))))
+                        (PROGN (LETT #2# (CONS |trm| |p1|)) (GO #3=#:G282))))))
                 (LETT |p1| (+ |p1| 1)) (LETT |ch| (STR_ELT1 |t1| |p1|))
                 (COND
                  ((NULL (|eql_SI| |ch| (|STR_to_CHAR| "/")))
@@ -784,9 +784,9 @@
         ((|t1| (|String|)) (|pin| #1=(|NonNegativeInteger|)) (|firstTerm| (%))
          (% (|Record| (|:| |rft| %) (|:| |pout| (|NonNegativeInteger|)))))
         (SPROG
-         ((|p1| #1#) (|secondTerm| (%))
+         ((|trm| (%)) (|ch| (|Character|)) (#2=#:G290 NIL)
           (|r| (|Record| (|:| |rft| %) (|:| |pout| (|NonNegativeInteger|))))
-          (#2=#:G288 NIL) (|ch| (|Character|)) (|trm| (%)))
+          (|secondTerm| (%)) (|p1| #1#))
          (SEQ
           (EXIT
            (SEQ (LETT |p1| |pin|) (LETT |trm| (SPADCALL (QREFELT % 9)))
@@ -795,7 +795,7 @@
                  ((NULL (|eql_SI| |ch| (|STR_to_CHAR| "-")))
                   (SEQ (|error| "expecting ->")
                        (EXIT
-                        (PROGN (LETT #2# (CONS |trm| |p1|)) (GO #3=#:G287))))))
+                        (PROGN (LETT #2# (CONS |trm| |p1|)) (GO #3=#:G289))))))
                 (LETT |p1| (+ |p1| 1)) (LETT |ch| (STR_ELT1 |t1| |p1|))
                 (COND
                  ((NULL (|eql_SI| |ch| (|STR_to_CHAR| ">")))
@@ -813,7 +813,7 @@
         ((|t1| (|String|)) (|pin| #1=(|NonNegativeInteger|))
          (% (|Record| (|:| |rft| %) (|:| |pout| (|NonNegativeInteger|)))))
         (SPROG
-         ((|ch| (|Character|)) (#2=#:G295 NIL) (|pt| #1#) (|vnm| (|String|)))
+         ((|vnm| (|String|)) (|pt| #1#) (#2=#:G297 NIL) (|ch| (|Character|)))
          (SEQ
           (EXIT
            (SEQ (LETT |vnm| "") (LETT |pt| |pin|)
@@ -827,7 +827,7 @@
                             (PROGN
                              (LETT #2#
                                    (CONS (SPADCALL |vnm| (QREFELT % 8)) |pt|))
-                             (GO #3=#:G294))))
+                             (GO #3=#:G296))))
                           (EXIT (LETT |ch| (STR_ELT1 |t1| |pt|))))
                      NIL (GO G190) G191 (EXIT NIL))
                 (EXIT (CONS (SPADCALL |vnm| (QREFELT % 8)) |pt|))))
@@ -837,9 +837,9 @@
         ((|t1| (|String|)) (|pin| (|NonNegativeInteger|))
          (% (|Record| (|:| |rft| %) (|:| |pout| (|NonNegativeInteger|)))))
         (SPROG
-         ((|p1| (|NonNegativeInteger|)) (|res| (%))
+         ((#1=#:G315 NIL) (|ch| (|Character|))
           (|r| (|Record| (|:| |rft| %) (|:| |pout| (|NonNegativeInteger|))))
-          (|ch| (|Character|)) (#1=#:G313 NIL))
+          (|res| (%)) (|p1| (|NonNegativeInteger|)))
          (SEQ
           (EXIT
            (SEQ (LETT |p1| |pin|) (LETT |res| (SPADCALL (QREFELT % 9)))
@@ -852,7 +852,7 @@
                            ((> |p1| (SPADCALL |t1| (QREFELT % 34)))
                             (PROGN
                              (LETT #1# (CONS |res| |p1|))
-                             (GO #2=#:G312))))
+                             (GO #2=#:G314))))
                           (EXIT (LETT |ch| (STR_ELT1 |t1| |p1|))))
                      NIL (GO G190) G191 (EXIT NIL))
                 (LETT |r| (CONS |res| |p1|))
@@ -894,9 +894,9 @@
         ((|t1| (|String|)) (|pin| (|NonNegativeInteger|))
          (% (|Record| (|:| |rft| %) (|:| |pout| (|NonNegativeInteger|)))))
         (SPROG
-         ((|p1| (|NonNegativeInteger|)) (|res| (%))
+         ((#1=#:G324 NIL) (|ch| (|Character|))
           (|r| (|Record| (|:| |rft| %) (|:| |pout| (|NonNegativeInteger|))))
-          (|ch| (|Character|)) (#1=#:G322 NIL))
+          (|res| (%)) (|p1| (|NonNegativeInteger|)))
          (SEQ
           (EXIT
            (SEQ (LETT |p1| |pin|) (LETT |res| (SPADCALL (QREFELT % 9)))
@@ -909,7 +909,7 @@
                            ((> |p1| (SPADCALL |t1| (QREFELT % 34)))
                             (PROGN
                              (LETT #1# (CONS |res| |p1|))
-                             (GO #2=#:G321))))
+                             (GO #2=#:G323))))
                           (EXIT (LETT |ch| (STR_ELT1 |t1| |p1|))))
                      NIL (GO G190) G191 (EXIT NIL))
                 (LETT |r| (CONS |res| |p1|))
@@ -925,8 +925,8 @@
 
 (SDEFUN |ILOGIC;parseIL;S%;25| ((|t1| (|String|)) (% (%)))
         (SPROG
-         ((|r| (|Record| (|:| |rft| %) (|:| |pout| (|NonNegativeInteger|))))
-          (#1=#:G323 NIL))
+         ((#1=#:G325 NIL)
+          (|r| (|Record| (|:| |rft| %) (|:| |pout| (|NonNegativeInteger|)))))
          (SEQ
           (LETT |r|
                 (SPADCALL |t1|
@@ -938,7 +938,7 @@
           (EXIT (QCAR |r|))))) 
 
 (SDEFUN |ILOGIC;toString;%S;26| ((|n| (%)) (% (|String|)))
-        (SPROG ((#1=#:G342 NIL) (#2=#:G74 NIL) (|s1| (|String|)))
+        (SPROG ((|s1| (|String|)) (#1=#:G74 NIL) (#2=#:G344 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -947,23 +947,23 @@
                     (SEQ
                      (COND
                       ((EQUAL (QCAR (CDR |n|)) 'F)
-                       (PROGN (LETT #1# "_|_") (GO #3=#:G341))))
+                       (PROGN (LETT #2# "_|_") (GO #3=#:G343))))
                      (COND
                       ((EQUAL (QCAR (CDR |n|)) 'T)
-                       (PROGN (LETT #1# "T") (GO #3#))))
-                     (EXIT (PROGN (LETT #1# "?") (GO #3#))))))
+                       (PROGN (LETT #2# "T") (GO #3#))))
+                     (EXIT (PROGN (LETT #2# "?") (GO #3#))))))
                   (COND
                    ((QEQCAR |n| 1)
-                    (PROGN (LETT #1# (QCAR (CDR |n|))) (GO #3#))))
+                    (PROGN (LETT #2# (QCAR (CDR |n|))) (GO #3#))))
                   (COND
                    ((QEQCAR |n| 2)
                     (SEQ (LETT |s1| "->")
                          (COND
                           ((EQUAL
                             (QVELT
-                             (PROG2 (LETT #2# |n|)
-                                 (QCDR #2#)
-                               (|check_union2| (QEQCAR #2# 2)
+                             (PROG2 (LETT #1# |n|)
+                                 (QCDR #1#)
+                               (|check_union2| (QEQCAR #1# 2)
                                                (|Record| (|:| |typ| (|Symbol|))
                                                          (|:| |c1| %)
                                                          (|:| |c2| %))
@@ -983,16 +983,16 @@
                                                      (|Record|
                                                       (|:| |typ| (|Symbol|))
                                                       (|:| |c1| %))))
-                                               #2#))
+                                               #1#))
                              0)
                             'AND)
                            (LETT |s1| "/\\")))
                          (COND
                           ((EQUAL
                             (QVELT
-                             (PROG2 (LETT #2# |n|)
-                                 (QCDR #2#)
-                               (|check_union2| (QEQCAR #2# 2)
+                             (PROG2 (LETT #1# |n|)
+                                 (QCDR #1#)
+                               (|check_union2| (QEQCAR #1# 2)
                                                (|Record| (|:| |typ| (|Symbol|))
                                                          (|:| |c1| %)
                                                          (|:| |c2| %))
@@ -1012,20 +1012,20 @@
                                                      (|Record|
                                                       (|:| |typ| (|Symbol|))
                                                       (|:| |c1| %))))
-                                               #2#))
+                                               #1#))
                              0)
                             'OR)
                            (LETT |s1| "\\/")))
                          (EXIT
                           (PROGN
-                           (LETT #1#
+                           (LETT #2#
                                  (SPADCALL
                                   (LIST "("
                                         (SPADCALL
                                          (QVELT
-                                          (PROG2 (LETT #2# |n|)
-                                              (QCDR #2#)
-                                            (|check_union2| (QEQCAR #2# 2)
+                                          (PROG2 (LETT #1# |n|)
+                                              (QCDR #1#)
+                                            (|check_union2| (QEQCAR #1# 2)
                                                             (|Record|
                                                              (|:| |typ|
                                                                   (|Symbol|))
@@ -1053,15 +1053,15 @@
                                                                         (|Symbol|))
                                                                    (|:| |c1|
                                                                         %))))
-                                                            #2#))
+                                                            #1#))
                                           1)
                                          (QREFELT % 45))
                                         |s1|
                                         (SPADCALL
                                          (QVELT
-                                          (PROG2 (LETT #2# |n|)
-                                              (QCDR #2#)
-                                            (|check_union2| (QEQCAR #2# 2)
+                                          (PROG2 (LETT #1# |n|)
+                                              (QCDR #1#)
+                                            (|check_union2| (QEQCAR #1# 2)
                                                             (|Record|
                                                              (|:| |typ|
                                                                   (|Symbol|))
@@ -1089,7 +1089,7 @@
                                                                         (|Symbol|))
                                                                    (|:| |c1|
                                                                         %))))
-                                                            #2#))
+                                                            #1#))
                                           2)
                                          (QREFELT % 45))
                                         ")")
@@ -1098,7 +1098,7 @@
                   (COND
                    ((QEQCAR |n| 3)
                     (PROGN
-                     (LETT #1#
+                     (LETT #2#
                            (SPADCALL
                             (LIST "~("
                                   (SPADCALL (QCDR (CDR |n|)) (QREFELT % 45))
@@ -1106,10 +1106,10 @@
                             (QREFELT % 46)))
                      (GO #3#))))
                   (EXIT (|error| "toString: unexpected representation"))))
-                #3# (EXIT #1#)))) 
+                #3# (EXIT #2#)))) 
 
 (SDEFUN |ILOGIC;toStringUnwrapped;%S;27| ((|n| (%)) (% (|String|)))
-        (SPROG ((#1=#:G359 NIL) (#2=#:G74 NIL) (|s1| (|String|)))
+        (SPROG ((|s1| (|String|)) (#1=#:G74 NIL) (#2=#:G361 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -1118,23 +1118,23 @@
                     (SEQ
                      (COND
                       ((EQUAL (QCAR (CDR |n|)) 'F)
-                       (PROGN (LETT #1# "_|_") (GO #3=#:G358))))
+                       (PROGN (LETT #2# "_|_") (GO #3=#:G360))))
                      (COND
                       ((EQUAL (QCAR (CDR |n|)) 'T)
-                       (PROGN (LETT #1# "T") (GO #3#))))
-                     (EXIT (PROGN (LETT #1# "?") (GO #3#))))))
+                       (PROGN (LETT #2# "T") (GO #3#))))
+                     (EXIT (PROGN (LETT #2# "?") (GO #3#))))))
                   (COND
                    ((QEQCAR |n| 1)
-                    (PROGN (LETT #1# (QCAR (CDR |n|))) (GO #3#))))
+                    (PROGN (LETT #2# (QCAR (CDR |n|))) (GO #3#))))
                   (COND
                    ((QEQCAR |n| 2)
                     (SEQ (LETT |s1| "->")
                          (COND
                           ((EQUAL
                             (QVELT
-                             (PROG2 (LETT #2# |n|)
-                                 (QCDR #2#)
-                               (|check_union2| (QEQCAR #2# 2)
+                             (PROG2 (LETT #1# |n|)
+                                 (QCDR #1#)
+                               (|check_union2| (QEQCAR #1# 2)
                                                (|Record| (|:| |typ| (|Symbol|))
                                                          (|:| |c1| %)
                                                          (|:| |c2| %))
@@ -1154,16 +1154,16 @@
                                                      (|Record|
                                                       (|:| |typ| (|Symbol|))
                                                       (|:| |c1| %))))
-                                               #2#))
+                                               #1#))
                              0)
                             'AND)
                            (LETT |s1| "/\\")))
                          (COND
                           ((EQUAL
                             (QVELT
-                             (PROG2 (LETT #2# |n|)
-                                 (QCDR #2#)
-                               (|check_union2| (QEQCAR #2# 2)
+                             (PROG2 (LETT #1# |n|)
+                                 (QCDR #1#)
+                               (|check_union2| (QEQCAR #1# 2)
                                                (|Record| (|:| |typ| (|Symbol|))
                                                          (|:| |c1| %)
                                                          (|:| |c2| %))
@@ -1183,20 +1183,20 @@
                                                      (|Record|
                                                       (|:| |typ| (|Symbol|))
                                                       (|:| |c1| %))))
-                                               #2#))
+                                               #1#))
                              0)
                             'OR)
                            (LETT |s1| "\\/")))
                          (EXIT
                           (PROGN
-                           (LETT #1#
+                           (LETT #2#
                                  (SPADCALL
                                   (LIST
                                    (SPADCALL
                                     (QVELT
-                                     (PROG2 (LETT #2# |n|)
-                                         (QCDR #2#)
-                                       (|check_union2| (QEQCAR #2# 2)
+                                     (PROG2 (LETT #1# |n|)
+                                         (QCDR #1#)
+                                       (|check_union2| (QEQCAR #1# 2)
                                                        (|Record|
                                                         (|:| |typ| (|Symbol|))
                                                         (|:| |c1| %)
@@ -1221,15 +1221,15 @@
                                                               (|:| |typ|
                                                                    (|Symbol|))
                                                               (|:| |c1| %))))
-                                                       #2#))
+                                                       #1#))
                                      1)
                                     (QREFELT % 45))
                                    |s1|
                                    (SPADCALL
                                     (QVELT
-                                     (PROG2 (LETT #2# |n|)
-                                         (QCDR #2#)
-                                       (|check_union2| (QEQCAR #2# 2)
+                                     (PROG2 (LETT #1# |n|)
+                                         (QCDR #1#)
+                                       (|check_union2| (QEQCAR #1# 2)
                                                        (|Record|
                                                         (|:| |typ| (|Symbol|))
                                                         (|:| |c1| %)
@@ -1254,7 +1254,7 @@
                                                               (|:| |typ|
                                                                    (|Symbol|))
                                                               (|:| |c1| %))))
-                                                       #2#))
+                                                       #1#))
                                      2)
                                     (QREFELT % 45)))
                                   (QREFELT % 46)))
@@ -1262,7 +1262,7 @@
                   (COND
                    ((QEQCAR |n| 3)
                     (PROGN
-                     (LETT #1#
+                     (LETT #2#
                            (SPADCALL
                             (LIST "~("
                                   (SPADCALL (QCDR (CDR |n|)) (QREFELT % 45))
@@ -1271,11 +1271,11 @@
                      (GO #3#))))
                   (EXIT
                    (|error| "toStringUnwrapped: unexpected representation"))))
-                #3# (EXIT #1#)))) 
+                #3# (EXIT #2#)))) 
 
 (SDEFUN |ILOGIC;coerce;%Of;28| ((|n| (%)) (% (|OutputForm|)))
         (SPROG
-         ((#1=#:G75 NIL) (#2=#:G74 NIL) (|s1| (|OutputForm|)) (#3=#:G73 NIL))
+         ((#1=#:G73 NIL) (|s1| (|OutputForm|)) (#2=#:G74 NIL) (#3=#:G75 NIL))
          (SEQ
           (COND
            ((QEQCAR |n| 0)
@@ -1285,9 +1285,9 @@
            ((QEQCAR |n| 1)
             (SPADCALL
              (QCAR
-              (PROG2 (LETT #3# |n|)
-                  (QCDR #3#)
-                (|check_union2| (QEQCAR #3# 1)
+              (PROG2 (LETT #1# |n|)
+                  (QCDR #1#)
+                (|check_union2| (QEQCAR #1# 1)
                                 (|Record| (|:| |str| (|String|)))
                                 (|Union|
                                  (|:| |const|
@@ -1299,7 +1299,7 @@
                                  (|:| |unaryOp|
                                       (|Record| (|:| |typ| (|Symbol|))
                                                 (|:| |c1| %))))
-                                #3#)))
+                                #1#)))
              (QREFELT % 49)))
            ((QEQCAR |n| 2)
             (SEQ (LETT |s1| (SPADCALL "->" (QREFELT % 49)))
@@ -1419,9 +1419,9 @@
              (LIST (SPADCALL "~(" (QREFELT % 49))
                    (SPADCALL
                     (QCDR
-                     (PROG2 (LETT #1# |n|)
-                         (QCDR #1#)
-                       (|check_union2| (QEQCAR #1# 3)
+                     (PROG2 (LETT #3# |n|)
+                         (QCDR #3#)
+                       (|check_union2| (QEQCAR #3# 3)
                                        (|Record| (|:| |typ| (|Symbol|))
                                                  (|:| |c1| %))
                                        (|Union|
@@ -1436,7 +1436,7 @@
                                         (|:| |unaryOp|
                                              (|Record| (|:| |typ| (|Symbol|))
                                                        (|:| |c1| %))))
-                                       #1#)))
+                                       #3#)))
                     (QREFELT % 50))
                    (SPADCALL ")" (QREFELT % 49)))
              (QREFELT % 53)))
@@ -1467,7 +1467,7 @@
 
 (DEFUN |ILogic| ()
   (SPROG NIL
-         (PROG (#1=#:G375)
+         (PROG (#1=#:G377)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ILogic|))
@@ -1504,7 +1504,7 @@
               |redux| 112 |proposition| 117 |parseILTerm| 122 |parseIL2| 128
               |parseIL| 134 |opType| 139 |logicT| 144 |logicF| 148 |latex| 152
               |implies| 157 |getChildren| 163 |factor| 168 |deductions| 173
-              |coerce| 178 |atom?| 183 |_\|_| 188 |\\/| 192 T$ 198 = 202 |/\\|
+              |coerce| 178 |atom?| 183 |_\|_| 188 |\\/| 192 T 198 = 202 |/\\|
               208)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0))

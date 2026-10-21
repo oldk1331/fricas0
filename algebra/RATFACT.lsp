@@ -1,7 +1,8 @@
 
 (SDEFUN |RATFACT;factor;RPF;1| ((|p| (RP)) (% (|Factored| RP)))
         (SPROG
-         ((#1=#:G19 NIL) (|u| NIL) (#2=#:G18 NIL)
+         ((#1=#:G27 NIL) (|c| NIL) (#2=#:G28 NIL) (|pden| (|Integer|))
+          (|pol| (RP)) (|ipol| (|SparseUnivariatePolynomial| (|Integer|)))
           (|ffact|
            (|Record| (|:| |contp| (|Integer|))
                      (|:| |factors|
@@ -10,8 +11,7 @@
                             (|:| |irr|
                                  (|SparseUnivariatePolynomial| (|Integer|)))
                             (|:| |pow| (|NonNegativeInteger|)))))))
-          (|ipol| (|SparseUnivariatePolynomial| (|Integer|))) (|pol| (RP))
-          (|pden| (|Integer|)) (#3=#:G17 NIL) (|c| NIL) (#4=#:G16 NIL))
+          (#3=#:G29 NIL) (|u| NIL) (#4=#:G30 NIL))
          (SEQ
           (COND
            ((SPADCALL |p| (|spadConstant| % 7) (QREFELT % 11))
@@ -21,18 +21,18 @@
              (LETT |pden|
                    (SPADCALL
                     (PROGN
-                     (LETT #4# NIL)
+                     (LETT #1# NIL)
                      (SEQ (LETT |c| NIL)
-                          (LETT #3# (SPADCALL |p| (QREFELT % 13))) G190
+                          (LETT #2# (SPADCALL |p| (QREFELT % 13))) G190
                           (COND
-                           ((OR (ATOM #3#) (PROGN (LETT |c| (CAR #3#)) NIL))
+                           ((OR (ATOM #2#) (PROGN (LETT |c| (CAR #2#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #4#
-                                  (CONS (SPADCALL |c| (QREFELT % 16)) #4#))))
-                          (LETT #3# (CDR #3#)) (GO G190) G191
-                          (EXIT (NREVERSE #4#))))
+                            (LETT #1#
+                                  (CONS (SPADCALL |c| (QREFELT % 16)) #1#))))
+                          (LETT #2# (CDR #2#)) (GO G190) G191
+                          (EXIT (NREVERSE #1#))))
                     (QREFELT % 18)))
              (LETT |pol| (SPADCALL |pden| |p| (QREFELT % 19)))
              (LETT |ipol| (SPADCALL (ELT % 20) |pol| (QREFELT % 24)))
@@ -42,27 +42,28 @@
                (SPADCALL (SPADCALL (QCAR |ffact|) |pden| (QREFELT % 29))
                          (QREFELT % 30))
                (PROGN
-                (LETT #2# NIL)
-                (SEQ (LETT |u| NIL) (LETT #1# (QCDR |ffact|)) G190
+                (LETT #3# NIL)
+                (SEQ (LETT |u| NIL) (LETT #4# (QCDR |ffact|)) G190
                      (COND
-                      ((OR (ATOM #1#) (PROGN (LETT |u| (CAR #1#)) NIL))
+                      ((OR (ATOM #4#) (PROGN (LETT |u| (CAR #4#)) NIL))
                        (GO G191)))
                      (SEQ
                       (EXIT
-                       (LETT #2#
+                       (LETT #3#
                              (CONS
                               (VECTOR (CONS 3 "prime")
                                       (SPADCALL (ELT % 31) (QCAR |u|)
                                                 (QREFELT % 34))
                                       (QCDR |u|))
-                              #2#))))
-                     (LETT #1# (CDR #1#)) (GO G190) G191
-                     (EXIT (NREVERSE #2#))))
+                              #3#))))
+                     (LETT #4# (CDR #4#)) (GO G190) G191
+                     (EXIT (NREVERSE #3#))))
                (QREFELT % 38))))))))) 
 
 (SDEFUN |RATFACT;factorSquareFree;RPF;2| ((|p| (RP)) (% (|Factored| RP)))
         (SPROG
-         ((#1=#:G39 NIL) (|u| NIL) (#2=#:G38 NIL)
+         ((#1=#:G47 NIL) (|c| NIL) (#2=#:G48 NIL) (|pden| (|Integer|))
+          (|pol| (RP)) (|ipol| (|SparseUnivariatePolynomial| (|Integer|)))
           (|ffact|
            (|Record| (|:| |contp| (|Integer|))
                      (|:| |factors|
@@ -71,8 +72,7 @@
                             (|:| |irr|
                                  (|SparseUnivariatePolynomial| (|Integer|)))
                             (|:| |pow| (|NonNegativeInteger|)))))))
-          (|ipol| (|SparseUnivariatePolynomial| (|Integer|))) (|pol| (RP))
-          (|pden| (|Integer|)) (#3=#:G37 NIL) (|c| NIL) (#4=#:G36 NIL))
+          (#3=#:G49 NIL) (|u| NIL) (#4=#:G50 NIL))
          (SEQ
           (COND
            ((SPADCALL |p| (|spadConstant| % 7) (QREFELT % 11))
@@ -82,18 +82,18 @@
              (LETT |pden|
                    (SPADCALL
                     (PROGN
-                     (LETT #4# NIL)
+                     (LETT #1# NIL)
                      (SEQ (LETT |c| NIL)
-                          (LETT #3# (SPADCALL |p| (QREFELT % 13))) G190
+                          (LETT #2# (SPADCALL |p| (QREFELT % 13))) G190
                           (COND
-                           ((OR (ATOM #3#) (PROGN (LETT |c| (CAR #3#)) NIL))
+                           ((OR (ATOM #2#) (PROGN (LETT |c| (CAR #2#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #4#
-                                  (CONS (SPADCALL |c| (QREFELT % 16)) #4#))))
-                          (LETT #3# (CDR #3#)) (GO G190) G191
-                          (EXIT (NREVERSE #4#))))
+                            (LETT #1#
+                                  (CONS (SPADCALL |c| (QREFELT % 16)) #1#))))
+                          (LETT #2# (CDR #2#)) (GO G190) G191
+                          (EXIT (NREVERSE #1#))))
                     (QREFELT % 18)))
              (LETT |pol| (SPADCALL |pden| |p| (QREFELT % 19)))
              (LETT |ipol| (SPADCALL (ELT % 20) |pol| (QREFELT % 24)))
@@ -103,28 +103,28 @@
                (SPADCALL (SPADCALL (QCAR |ffact|) |pden| (QREFELT % 29))
                          (QREFELT % 30))
                (PROGN
-                (LETT #2# NIL)
-                (SEQ (LETT |u| NIL) (LETT #1# (QCDR |ffact|)) G190
+                (LETT #3# NIL)
+                (SEQ (LETT |u| NIL) (LETT #4# (QCDR |ffact|)) G190
                      (COND
-                      ((OR (ATOM #1#) (PROGN (LETT |u| (CAR #1#)) NIL))
+                      ((OR (ATOM #4#) (PROGN (LETT |u| (CAR #4#)) NIL))
                        (GO G191)))
                      (SEQ
                       (EXIT
-                       (LETT #2#
+                       (LETT #3#
                              (CONS
                               (VECTOR (CONS 3 "prime")
                                       (SPADCALL (ELT % 31) (QCAR |u|)
                                                 (QREFELT % 34))
                                       (QCDR |u|))
-                              #2#))))
-                     (LETT #1# (CDR #1#)) (GO G190) G191
-                     (EXIT (NREVERSE #2#))))
+                              #3#))))
+                     (LETT #4# (CDR #4#)) (GO G190) G191
+                     (EXIT (NREVERSE #3#))))
                (QREFELT % 38))))))))) 
 
 (DECLAIM (NOTINLINE |RationalFactorize;|)) 
 
 (DEFUN |RationalFactorize;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RationalFactorize| DV$1))
@@ -138,9 +138,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |RationalFactorize| (#1=#:G40)
+(DEFUN |RationalFactorize| (#1=#:G51)
   (SPROG NIL
-         (PROG (#2=#:G41)
+         (PROG (#2=#:G52)
            (RETURN
             (COND
              ((LETT #2#
@@ -157,10 +157,10 @@
 
 (MAKEPROP '|RationalFactorize| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |Zero|)
-              (|Factored| 6) (4 . |Zero|) (|Boolean|) (8 . =) (|List| 15)
-              (14 . |coefficients|) (|Integer|) (|Fraction| 14) (19 . |denom|)
-              (|List| %) (24 . |lcm|) (29 . *) (35 . |numer|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |0|) (|Factored| 6)
+              (4 . |0|) (|Boolean|) (8 . =) (|List| 15) (14 . |coefficients|)
+              (|Integer|) (|Fraction| 14) (19 . |denom|) (|List| %)
+              (24 . |lcm|) (29 . *) (35 . |numer|)
               (|SparseUnivariatePolynomial| 14) (|Mapping| 14 15)
               (|UnivariatePolynomialCategoryFunctions2| 15 6 14 21)
               (40 . |map|)

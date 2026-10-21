@@ -1,7 +1,7 @@
 
 (SDEFUN |MAPHACK1;iter;MNni2A;1|
         ((|g| (|Mapping| A A)) (|n| (|NonNegativeInteger|)) (|x| (A)) (% (A)))
-        (SPROG ((#1=#:G5 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G5 NIL))
                (SEQ
                 (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -12,7 +12,7 @@
 (SDEFUN |MAPHACK1;recur;MNni2A;2|
         ((|g| (|Mapping| A (|NonNegativeInteger|) A))
          (|n| (|NonNegativeInteger|)) (|x| (A)) (% (A)))
-        (SPROG ((#1=#:G11 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G11 NIL))
                (SEQ
                 (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -23,7 +23,7 @@
 (DECLAIM (NOTINLINE |MappingPackageInternalHacks1;|)) 
 
 (DEFUN |MappingPackageInternalHacks1;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|MappingPackageInternalHacks1| DV$1))

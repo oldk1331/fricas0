@@ -1,21 +1,23 @@
 
-(PUT '|SEG;SEGMENT;2S%;1| '|SPADreplace| '(XLAM (|a| |b|) (VECTOR |a| |b| 1))) 
+(MAKEPROP '|SEG;SEGMENT;2S%;1| '|SPADreplace|
+          '(XLAM (|a| |b|) (VECTOR |a| |b| 1))) 
 
 (SDEFUN |SEG;SEGMENT;2S%;1| ((|a| (S)) (|b| (S)) (% (%))) (VECTOR |a| |b| 1)) 
 
-(PUT '|SEG;low;%S;2| '|SPADreplace| '(XLAM (|s|) (QVELT |s| 0))) 
+(MAKEPROP '|SEG;low;%S;2| '|SPADreplace| '(XLAM (|s|) (QVELT |s| 0))) 
 
 (SDEFUN |SEG;low;%S;2| ((|s| (%)) (% (S))) (QVELT |s| 0)) 
 
-(PUT '|SEG;high;%S;3| '|SPADreplace| '(XLAM (|s|) (QVELT |s| 1))) 
+(MAKEPROP '|SEG;high;%S;3| '|SPADreplace| '(XLAM (|s|) (QVELT |s| 1))) 
 
 (SDEFUN |SEG;high;%S;3| ((|s| (%)) (% (S))) (QVELT |s| 1)) 
 
-(PUT '|SEG;incr;%I;4| '|SPADreplace| '(XLAM (|s|) (QVELT |s| 2))) 
+(MAKEPROP '|SEG;incr;%I;4| '|SPADreplace| '(XLAM (|s|) (QVELT |s| 2))) 
 
 (SDEFUN |SEG;incr;%I;4| ((|s| (%)) (% (|Integer|))) (QVELT |s| 2)) 
 
-(PUT '|SEG;segment;2S%;5| '|SPADreplace| '(XLAM (|a| |b|) (VECTOR |a| |b| 1))) 
+(MAKEPROP '|SEG;segment;2S%;5| '|SPADreplace|
+          '(XLAM (|a| |b|) (VECTOR |a| |b| 1))) 
 
 (SDEFUN |SEG;segment;2S%;5| ((|a| (S)) (|b| (S)) (% (%))) (VECTOR |a| |b| 1)) 
 
@@ -45,7 +47,7 @@
                                   (SPADCALL (QVELT |s| 2) (QREFELT % 23))
                                   (QREFELT % 24)))))))) 
 
-(PUT '|SEG;convert;S%;9| '|SPADreplace| '(XLAM (|a|) (VECTOR |a| |a| 1))) 
+(MAKEPROP '|SEG;convert;S%;9| '|SPADreplace| '(XLAM (|a|) (VECTOR |a| |a| 1))) 
 
 (SDEFUN |SEG;convert;S%;9| ((|a| (S)) (% (%))) (VECTOR |a| |a| 1)) 
 
@@ -90,8 +92,8 @@
 
 (SDEFUN |SEG;expand;LL;15| ((|ls| (|List| %)) (% (|List| S)))
         (SPROG
-         ((|l| (S)) (|lr| (|List| S)) (|inc| (S)) (|h| (S)) (#1=#:G39 NIL)
-          (|s| NIL))
+         ((|s| NIL) (#1=#:G39 NIL) (|h| (S)) (|inc| (S)) (|lr| (|List| S))
+          (|l| (S)))
          (SEQ (LETT |lr| NIL)
               (SEQ (LETT |s| NIL) (LETT #1# |ls|) G190
                    (COND
@@ -137,7 +139,7 @@
         (SPADCALL (LIST |s|) (QREFELT % 49))) 
 
 (SDEFUN |SEG;map;M%L;17| ((|f| (|Mapping| S S)) (|s| (%)) (% (|List| S)))
-        (SPROG ((|l| (S)) (|lr| (|List| S)) (|inc| (S)) (|h| (S)))
+        (SPROG ((|h| (S)) (|inc| (S)) (|lr| (|List| S)) (|l| (S)))
                (SEQ (LETT |lr| NIL) (LETT |l| (SPADCALL |s| (QREFELT % 9)))
                     (LETT |h| (SPADCALL |s| (QREFELT % 10)))
                     (LETT |inc|
@@ -169,7 +171,7 @@
 (DECLAIM (NOTINLINE |Segment;|)) 
 
 (DEFUN |Segment;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Segment| DV$1))
@@ -251,7 +253,7 @@
               (|List| 27) (|InputFormFunctions1| $$) (50 . |packageCall|)
               (56 . |convert|) (61 . |convert|) (66 . +) (72 . +) (78 . +)
               (84 . -) (90 . -) (96 . |reverse|) (101 . |coerce|)
-              (106 . |zero?|) (111 . |Zero|) (115 . >) (121 . <=) (127 . >=)
+              (106 . |zero?|) (111 . |0|) (115 . >) (121 . <=) (127 . >=)
               (|List| 6) (|List| %) (133 . |expand|) (138 . |expand|)
               (|Mapping| 6 6) (143 . |map|))
            '#(~= 149 |segment| 155 |reverse| 161 |map| 166 |low| 172 |latex|

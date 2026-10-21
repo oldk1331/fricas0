@@ -3,7 +3,7 @@
         ((|f| (|Mapping| R2 R1)) (|x| (|Distribution| R1))
          (% (|Distribution| R2)))
         (SPROG
-         ((|bcum2| #1=(|Sequence| R2)) (|fcum2| #1#) (|cum2| #1#) (|mom2| #1#))
+         ((|mom2| #1=(|Sequence| R2)) (|cum2| #1#) (|fcum2| #1#) (|bcum2| #1#))
          (SEQ
           (LETT |mom2|
                 (SPADCALL |f| (SPADCALL |x| (QREFELT % 10)) (QREFELT % 14)))
@@ -21,8 +21,8 @@
 (SDEFUN |DISTRO2;R1_to_R2_coercion;R1R2;3| ((|x| (R1)) (% (R2)))
         (SPADCALL |x| (QREFELT % 23))) 
 
-(PUT '|DISTRO2;R1_to_R2_coercion;R1R2;4| '|SPADreplace|
-     '(XLAM (|x|) (|error| "unimplemented"))) 
+(MAKEPROP '|DISTRO2;R1_to_R2_coercion;R1R2;4| '|SPADreplace|
+          '(XLAM (|x|) (|error| "unimplemented"))) 
 
 (SDEFUN |DISTRO2;R1_to_R2_coercion;R1R2;4| ((|x| (R1)) (% (R2)))
         (|error| "unimplemented")) 
@@ -34,7 +34,7 @@
 (DECLAIM (NOTINLINE |DistributionFunctions2;|)) 
 
 (DEFUN |DistributionFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -72,9 +72,9 @@
                        %))))
           %))) 
 
-(DEFUN |DistributionFunctions2| (&REST #1=#:G11)
+(DEFUN |DistributionFunctions2| (&REST #1=#:G12)
   (SPROG NIL
-         (PROG (#2=#:G12)
+         (PROG (#2=#:G13)
            (RETURN
             (COND
              ((LETT #2#

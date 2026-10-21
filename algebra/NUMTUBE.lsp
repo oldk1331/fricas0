@@ -42,8 +42,8 @@
                     (|:| |norm| (|Point| (|DoubleFloat|)))
                     (|:| |bin| (|Point| (|DoubleFloat|))))))
         (SPROG
-         ((|n| #1=(|Point| (|DoubleFloat|))) (|pol| (|Point| (|DoubleFloat|)))
-          (|t| #1#))
+         ((|t| #1=(|Point| (|DoubleFloat|))) (|pol| (|Point| (|DoubleFloat|)))
+          (|n| #1#))
          (SEQ
           (LETT |t|
                 (SPADCALL (SPADCALL |pr| |pl| (QREFELT % 21)) (QREFELT % 22)))
@@ -59,20 +59,20 @@
                         (|:| |norm| (|Point| (|DoubleFloat|)))
                         (|:| |bin| (|Point| (|DoubleFloat|)))))))
         (SPROG
-         ((|endtriad| #1#) (|n| #2=(|Point| (|DoubleFloat|))) (|t| #2#)
-          (|x|
-           (|Record| (|:| |tang| (|Point| (|DoubleFloat|)))
-                     (|:| |norm| (|Point| (|DoubleFloat|)))
-                     (|:| |bin| (|Point| (|DoubleFloat|)))))
-          (|begtriad| #1#)
+         ((|k| (|NonNegativeInteger|)) (|b| (|Point| (|DoubleFloat|)))
+          (|triad| #1#) (#2=#:G22 NIL) (|pr| NIL) (#3=#:G25 NIL) (|po| NIL)
+          (#4=#:G24 NIL) (|pl| NIL) (#5=#:G23 NIL)
           (|midtriads|
            (|List|
             (|Record| (|:| |tang| (|Point| (|DoubleFloat|)))
                       (|:| |norm| (|Point| (|DoubleFloat|)))
                       (|:| |bin| (|Point| (|DoubleFloat|))))))
-          (#3=#:G22 NIL) (|pl| NIL) (#4=#:G23 NIL) (|po| NIL) (#5=#:G24 NIL)
-          (|pr| NIL) (#6=#:G21 NIL) (|triad| #1#)
-          (|b| (|Point| (|DoubleFloat|))) (|k| (|NonNegativeInteger|)))
+          (|begtriad| #1#)
+          (|x|
+           (|Record| (|:| |tang| (|Point| (|DoubleFloat|)))
+                     (|:| |norm| (|Point| (|DoubleFloat|)))
+                     (|:| |bin| (|Point| (|DoubleFloat|)))))
+          (|t| #6=(|Point| (|DoubleFloat|))) (|n| #6#) (|endtriad| #1#))
          (SEQ (LETT |k| (LENGTH |l|))
               (EXIT
                (COND
@@ -100,32 +100,32 @@
                          (SEQ
                           (LETT |midtriads|
                                 (PROGN
-                                 (LETT #6# NIL)
+                                 (LETT #2# NIL)
                                  (SEQ (LETT |pr| NIL)
-                                      (LETT #5# (CDR (CDR |l|)))
+                                      (LETT #3# (CDR (CDR |l|)))
                                       (LETT |po| NIL) (LETT #4# (CDR |l|))
-                                      (LETT |pl| NIL) (LETT #3# |l|) G190
+                                      (LETT |pl| NIL) (LETT #5# |l|) G190
                                       (COND
-                                       ((OR (ATOM #3#)
-                                            (PROGN (LETT |pl| (CAR #3#)) NIL)
+                                       ((OR (ATOM #5#)
+                                            (PROGN (LETT |pl| (CAR #5#)) NIL)
                                             (ATOM #4#)
                                             (PROGN (LETT |po| (CAR #4#)) NIL)
-                                            (ATOM #5#)
-                                            (PROGN (LETT |pr| (CAR #5#)) NIL))
+                                            (ATOM #3#)
+                                            (PROGN (LETT |pr| (CAR #3#)) NIL))
                                         (GO G191)))
                                       (SEQ
                                        (EXIT
-                                        (LETT #6#
+                                        (LETT #2#
                                               (CONS
                                                (|NUMTUBE;poTriad| |pl| |po|
                                                 |pr| %)
-                                               #6#))))
-                                      (LETT #3#
-                                            (PROG1 (CDR #3#)
+                                               #2#))))
+                                      (LETT #5#
+                                            (PROG1 (CDR #5#)
                                               (LETT #4#
                                                     (PROG1 (CDR #4#)
-                                                      (LETT #5# (CDR #5#))))))
-                                      (GO G190) G191 (EXIT (NREVERSE #6#)))))
+                                                      (LETT #3# (CDR #3#))))))
+                                      (GO G190) G191 (EXIT (NREVERSE #2#)))))
                           (LETT |x| (|SPADfirst| |midtriads|))
                           (LETT |t|
                                 (SPADCALL
@@ -163,21 +163,21 @@
         ((|pts| (|List| (|Point| (|DoubleFloat|)))) (|r| (|DoubleFloat|))
          (|nn| (|Integer|)) (% (|List| (|List| (|Point| (|DoubleFloat|))))))
         (SPROG
-         ((|loops| (|List| (|List| (|Point| (|DoubleFloat|)))))
-          (|b| #1=(|Point| (|DoubleFloat|))) (|n| #2=(|Point| (|DoubleFloat|)))
-          (#3=#:G31 NIL) (|pt| NIL) (#4=#:G32 NIL) (|triad| NIL)
-          (|cosSin| (|List| (|List| (|DoubleFloat|))))
-          (|triads|
+         ((|triads|
            (|List|
-            (|Record| (|:| |tang| (|Point| (|DoubleFloat|))) (|:| |norm| #2#)
-                      (|:| |bin| #1#)))))
+            (|Record| (|:| |tang| (|Point| (|DoubleFloat|)))
+                      (|:| |norm| #1=(|Point| (|DoubleFloat|)))
+                      (|:| |bin| #2=(|Point| (|DoubleFloat|))))))
+          (|cosSin| (|List| (|List| (|DoubleFloat|)))) (|triad| NIL)
+          (#3=#:G33 NIL) (|pt| NIL) (#4=#:G32 NIL) (|n| #1#) (|b| #2#)
+          (|loops| (|List| (|List| (|Point| (|DoubleFloat|))))))
          (SEQ (LETT |triads| (|NUMTUBE;curveTriads| |pts| %))
               (LETT |cosSin| (SPADCALL |nn| (QREFELT % 33))) (LETT |loops| NIL)
-              (SEQ (LETT |triad| NIL) (LETT #4# |triads|) (LETT |pt| NIL)
-                   (LETT #3# |pts|) G190
+              (SEQ (LETT |triad| NIL) (LETT #3# |triads|) (LETT |pt| NIL)
+                   (LETT #4# |pts|) G190
                    (COND
-                    ((OR (ATOM #3#) (PROGN (LETT |pt| (CAR #3#)) NIL)
-                         (ATOM #4#) (PROGN (LETT |triad| (CAR #4#)) NIL))
+                    ((OR (ATOM #4#) (PROGN (LETT |pt| (CAR #4#)) NIL)
+                         (ATOM #3#) (PROGN (LETT |triad| (CAR #3#)) NIL))
                      (GO G191)))
                    (SEQ (LETT |n| (QVELT |triad| 1))
                         (LETT |b| (QVELT |triad| 2))
@@ -187,7 +187,7 @@
                                 (SPADCALL |pt| |n| |b| |r| |cosSin|
                                           (QREFELT % 34))
                                 |loops|))))
-                   (LETT #3# (PROG1 (CDR #3#) (LETT #4# (CDR #4#)))) (GO G190)
+                   (LETT #4# (PROG1 (CDR #4#) (LETT #3# (CDR #3#)))) (GO G190)
                    G191 (EXIT NIL))
               (EXIT (NREVERSE |loops|))))) 
 
@@ -195,8 +195,8 @@
         ((|curve| (|Curve|)) (|r| (|DoubleFloat|)) (|n| (|Integer|))
          (% (|TubePlot| |Curve|)))
         (SPROG
-         ((|loops| (|List| (|List| (|Point| (|DoubleFloat|))))) (#1=#:G37 NIL)
-          (|bran| NIL) (|brans| (|List| (|List| (|Point| (|DoubleFloat|))))))
+         ((|brans| (|List| (|List| (|Point| (|DoubleFloat|))))) (|bran| NIL)
+          (#1=#:G38 NIL) (|loops| (|List| (|List| (|Point| (|DoubleFloat|))))))
          (SEQ
           (COND ((< |n| 3) (|error| "tube: n should be at least 3"))
                 ('T
@@ -220,7 +220,7 @@
 (DECLAIM (NOTINLINE |NumericTubePlot;|)) 
 
 (DEFUN |NumericTubePlot;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|NumericTubePlot| DV$1))
@@ -239,9 +239,9 @@
           (QSETREFV % 15 (QREFELT % 14))
           %))) 
 
-(DEFUN |NumericTubePlot| (#1=#:G38)
+(DEFUN |NumericTubePlot| (#1=#:G39)
   (SPROG NIL
-         (PROG (#2=#:G39)
+         (PROG (#2=#:G40)
            (RETURN
             (COND
              ((LETT #2#

@@ -50,7 +50,7 @@
 (SDEFUN |IBPTOOLS;mapUnivariateIfCan;MSupU;3|
         ((|f| (|Mapping| #1=(|Union| K "failed") L))
          (|poly| (|SparseUnivariatePolynomial| L)) (% (|Union| R "failed")))
-        (SPROG ((|ans| (R)) (#2=#:G38 NIL) (|lc| #1#))
+        (SPROG ((|lc| #1#) (#2=#:G38 NIL) (|ans| (R)))
                (SEQ
                 (EXIT
                  (SEQ (LETT |ans| (|spadConstant| % 10))
@@ -90,15 +90,15 @@
          (|mat| (|Matrix| (|SparseUnivariatePolynomial| L)))
          (% (|Union| (|Matrix| R) "failed")))
         (SPROG
-         ((#1=#:G59 NIL) (|poly| (|Union| R "failed")) (#2=#:G61 NIL) (|j| NIL)
-          (#3=#:G60 NIL) (|i| NIL) (|matOut| (|Matrix| R))
-          (|n| (|NonNegativeInteger|)) (|m| (|NonNegativeInteger|)))
+         ((|m| (|NonNegativeInteger|)) (|n| (|NonNegativeInteger|))
+          (|matOut| (|Matrix| R)) (|i| NIL) (#1=#:G60 NIL) (|j| NIL)
+          (#2=#:G61 NIL) (|poly| (|Union| R "failed")) (#3=#:G59 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |m| (ANROWS |mat|)) (LETT |n| (ANCOLS |mat|))
                 (LETT |matOut| (MAKE_MATRIX1 |m| |n| (|spadConstant| % 10)))
-                (SEQ (LETT |i| 1) (LETT #3# |m|) G190
-                     (COND ((|greater_SI| |i| #3#) (GO G191)))
+                (SEQ (LETT |i| 1) (LETT #1# |m|) G190
+                     (COND ((|greater_SI| |i| #1#) (GO G191)))
                      (SEQ
                       (EXIT
                        (SEQ (LETT |j| 1) (LETT #2# |n|) G190
@@ -111,7 +111,7 @@
                               (COND
                                ((QEQCAR |poly| 1)
                                 (PROGN
-                                 (LETT #1# (CONS 1 "failed"))
+                                 (LETT #3# (CONS 1 "failed"))
                                  (GO #4=#:G58)))
                                ('T
                                 (QSETAREF2O |matOut| |i| |j| (QCDR |poly|) 1
@@ -120,7 +120,7 @@
                             (EXIT NIL))))
                      (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                 (EXIT (CONS 0 |matOut|))))
-          #4# (EXIT #1#)))) 
+          #4# (EXIT #3#)))) 
 
 (SDEFUN |IBPTOOLS;mapBivariate;MUPSup;5|
         ((|f| (|Mapping| L K)) (|poly| (UP))
@@ -150,8 +150,8 @@
 
 (DEFUN |IntegralBasisPolynomialTools;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -195,19 +195,19 @@
 (MAKEPROP '|IntegralBasisPolynomialTools| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (|local| |#4|) (0 . |Zero|) (|Boolean|)
+              (|local| |#3|) (|local| |#4|) (0 . |0|) (|Boolean|)
               (|SparseUnivariatePolynomial| 9) (4 . |zero?|)
               (9 . |leadingCoefficient|) (|NonNegativeInteger|) (14 . |degree|)
               (19 . |monomial|) (25 . +) (31 . |reductum|) (|Mapping| 6 9)
-              |IBPTOOLS;mapUnivariate;MSupR;1| (36 . |Zero|) (40 . |zero?|)
+              |IBPTOOLS;mapUnivariate;MSupR;1| (36 . |0|) (40 . |zero?|)
               (45 . |leadingCoefficient|) (50 . |degree|) (55 . |monomial|)
               (61 . +) (67 . |reductum|) (|Mapping| 9 6)
               |IBPTOOLS;mapUnivariate;MRSup;2| (|Union| 7 '#1="failed")
               (|Union| 6 '#2="failed") (|Mapping| 32 9)
-              |IBPTOOLS;mapUnivariateIfCan;MSupU;3| (72 . |Zero|)
+              |IBPTOOLS;mapUnivariateIfCan;MSupU;3| (72 . |0|)
               (|Union| (|Matrix| 7) '#3="failed") (|Matrix| 12)
               |IBPTOOLS;mapMatrixIfCan;MMU;4| (|SparseUnivariatePolynomial| 12)
-              (76 . |Zero|) (80 . |zero?|) (85 . |leadingCoefficient|)
+              (76 . |0|) (80 . |zero?|) (85 . |leadingCoefficient|)
               (90 . |degree|) (95 . |monomial|) (101 . +) (107 . |reductum|)
               |IBPTOOLS;mapBivariate;MUPSup;5|)
            '#(|mapUnivariateIfCan| 112 |mapUnivariate| 118 |mapMatrixIfCan| 130

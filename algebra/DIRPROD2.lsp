@@ -20,7 +20,7 @@
 (DECLAIM (NOTINLINE |DirectProductFunctions2;|)) 
 
 (DEFUN |DirectProductFunctions2;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT DV$2 (|devaluate| |#2|))
@@ -38,9 +38,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |DirectProductFunctions2| (&REST #1=#:G8)
+(DEFUN |DirectProductFunctions2| (&REST #1=#:G10)
   (SPROG NIL
-         (PROG (#2=#:G9)
+         (PROG (#2=#:G11)
            (RETURN
             (COND
              ((LETT #2#

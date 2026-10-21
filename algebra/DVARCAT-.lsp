@@ -24,7 +24,7 @@
          ('T NIL))) 
 
 (SDEFUN |DVARCAT-;coerce;AOf;6| ((|v| (A)) (% (|OutputForm|)))
-        (SPROG ((|nn| (|Integer|)) (|a| (|OutputForm|)))
+        (SPROG ((|a| (|OutputForm|)) (|nn| (|Integer|)))
                (SEQ
                 (LETT |a|
                       (SPADCALL (SPADCALL |v| (QREFELT % 13)) (QREFELT % 22)))
@@ -52,7 +52,7 @@
 (DECLAIM (NOTINLINE |DifferentialVariableCategory&;|)) 
 
 (DEFUN |DifferentialVariableCategory&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

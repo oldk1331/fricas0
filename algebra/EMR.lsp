@@ -3,8 +3,8 @@
         ((|x| (%)) (|y| (%))
          (% (|Record| (|:| |quotient| %) (|:| |remainder| %))))
         (SPROG
-         ((|r| (|Record| (|:| |quotient| R) (|:| |remainder| R))) (|yv| (R))
-          (|invlcy| (R)) (|xm| (|Mod|)) (|t| (|Union| |Mod| "failed")))
+         ((|t| (|Union| |Mod| "failed")) (|xm| (|Mod|)) (|invlcy| (R))
+          (|yv| (R)) (|r| (|Record| (|:| |quotient| R) (|:| |remainder| R))))
          (SEQ (LETT |t| (SPADCALL (QCDR |x|) (QCDR |y|) (QREFELT % 10)))
               (EXIT
                (COND ((QEQCAR |t| 1) (|error| "incompatible moduli"))
@@ -39,9 +39,9 @@
 
 (SDEFUN |EMR;rem;3%;2| ((|x| (%)) (|y| (%)) (% (%)))
         (SPROG
-         ((#1=#:G63 NIL) (|xv| (R)) (#2=#:G56 NIL) (|xvl| (R))
-          (|d| (|Integer|)) (|dy| (|NonNegativeInteger|)) (|yv| (R))
-          (|invlcy| (R)) (|xm| (|Mod|)) (|t| (|Union| |Mod| "failed")))
+         ((|t| (|Union| |Mod| "failed")) (|xm| (|Mod|)) (|invlcy| (R))
+          (|yv| (R)) (|dy| (|NonNegativeInteger|)) (|d| (|Integer|))
+          (|xvl| (R)) (#1=#:G57 NIL) (|xv| (R)) (#2=#:G64 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |t| (SPADCALL (QCDR |x|) (QCDR |y|) (QREFELT % 10)))
@@ -101,11 +101,11 @@
                                                        (QREFELT % 33)))
                                        (LETT |xv|
                                              (SPADCALL |xv|
-                                                       (PROG1 (LETT #2# |d|)
+                                                       (PROG1 (LETT #1# |d|)
                                                          (|check_subtype2|
-                                                          (>= #2# 0)
+                                                          (>= #1# 0)
                                                           '(|NonNegativeInteger|)
-                                                          '(|Integer|) #2#))
+                                                          '(|Integer|) #1#))
                                                        (SPADCALL |xv|
                                                                  (QREFELT %
                                                                           13))
@@ -115,18 +115,18 @@
                                          ((SPADCALL |xv| (|spadConstant| % 30)
                                                     (QREFELT % 31))
                                           (PROGN
-                                           (LETT #1# (CONS |xv| |xm|))
-                                           (GO #3=#:G62))))))))))
+                                           (LETT #2# (CONS |xv| |xm|))
+                                           (GO #3=#:G63))))))))))
                                   NIL (GO G190) G191 (EXIT NIL))
                              (EXIT
                               (CONS (SPADCALL |xv| |xm| (QREFELT % 9))
                                     |xm|))))))))
-          #3# (EXIT #1#)))) 
+          #3# (EXIT #2#)))) 
 
 (SDEFUN |EMR;rem;3%;3| ((|x| (%)) (|y| (%)) (% (%)))
         (SPROG
-         ((|r| (|Record| (|:| |quotient| R) (|:| |remainder| R))) (|yv| (R))
-          (|invlcy| (R)) (|xm| (|Mod|)) (|t| (|Union| |Mod| "failed")))
+         ((|t| (|Union| |Mod| "failed")) (|xm| (|Mod|)) (|invlcy| (R))
+          (|yv| (R)) (|r| (|Record| (|:| |quotient| R) (|:| |remainder| R))))
          (SEQ (LETT |t| (SPADCALL (QCDR |x|) (QCDR |y|) (QREFELT % 10)))
               (EXIT
                (COND ((QEQCAR |t| 1) (|error| "incompatible moduli"))
@@ -180,7 +180,7 @@
 (SDEFUN |EMR;unitNormal;%R;6|
         ((|x| (%))
          (% (|Record| (|:| |unit| %) (|:| |canonical| %) (|:| |associate| %))))
-        (SPROG ((|invlcx| (%)) (|lcx| (%)))
+        (SPROG ((|lcx| (%)) (|invlcx| (%)))
                (SEQ
                 (COND
                  ((OR (SPADCALL |x| (QREFELT % 37))
@@ -211,8 +211,8 @@
 
 (DEFUN |EuclideanModularRing;| (|#1| |#2| |#3| |#4| |#5| |#6|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$6 NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL)
-    (DV$2 NIL) (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (DV$6 NIL)
+    (|dv$| NIL) (% NIL) (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -245,9 +245,9 @@
      ('T (QSETREFV % 35 (CONS (|dispatchFunction| |EMR;rem;3%;3|) %))))
     %))) 
 
-(DEFUN |EuclideanModularRing| (&REST #1=#:G103)
+(DEFUN |EuclideanModularRing| (&REST #1=#:G104)
   (SPROG NIL
-         (PROG (#2=#:G104)
+         (PROG (#2=#:G105)
            (RETURN
             (COND
              ((LETT #2#
@@ -271,14 +271,14 @@
                              (NRTEVAL (QREFELT % 10)) (NRTEVAL (QREFELT % 11)))
               (|local| |#1|) (|local| |#2|) (|local| |#3|) (|local| |#4|)
               (|local| |#5|) (|local| |#6|) '|Rep| (0 . |leadingCoefficient|)
-              (5 . |One|) (|Boolean|) (9 . =) (15 . |One|) (19 . |coerce|)
+              (5 . |1|) (|Boolean|) (9 . =) (15 . |1|) (19 . |coerce|)
               (24 . |reduce|) (30 . |inv|) (35 . *)
               (|Record| (|:| |quotient| %) (|:| |remainder| %))
               (41 . |monicDivide|) |EMR;divide;2%R;1| (|NonNegativeInteger|)
-              (47 . |degree|) (52 . |leadingMonomial|) (57 . |Zero|)
-              (61 . |Zero|) (65 . |Zero|) (69 . =) (75 . |reductum|) (80 . +)
-              (86 . |fmecg|) (94 . |rem|) |EMR;euclideanSize;%Nni;4|
-              (100 . |zero?|) (105 . |One|) (109 . *) |EMR;unitCanonical;2%;5|
+              (47 . |degree|) (52 . |leadingMonomial|) (57 . |0|) (61 . |0|)
+              (65 . |0|) (69 . =) (75 . |reductum|) (80 . +) (86 . |fmecg|)
+              (94 . |rem|) |EMR;euclideanSize;%Nni;4| (100 . |zero?|)
+              (105 . |1|) (109 . *) |EMR;unitCanonical;2%;5|
               (|Record| (|:| |unit| %) (|:| |canonical| %) (|:| |associate| %))
               |EMR;unitNormal;%R;6| (115 . |elt|) |EMR;elt;%2R;7| (|String|)
               (|OutputForm|) (|PositiveInteger|) (|Integer|)
@@ -290,20 +290,20 @@
               (|Record| (|:| |coef1| %) (|:| |coef2| %) (|:| |generator| %)))
            '#(|zero?| 121 |unitNormal| 126 |unitCanonical| 131 |rem| 136
               |reduce| 142 |inv| 148 |euclideanSize| 153 |elt| 158 |divide| 164
-              |Zero| 170 |One| 174 * 178)
+              |1| 170 |0| 174 * 178)
            'NIL
            (CONS
             (|makeByteWordVec2| 1
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0 0 0 0 0 0 0 0 0 0))
+                                  0 0 0 0 0 0 0 0 0 0 0 0 0 0))
             (CONS
              '#(|EuclideanDomain&| NIL |GcdDomain&| NIL NIL NIL |Algebra&|
                 |EntireRing&| NIL NIL |Rng&| |NonAssociativeAlgebra&| NIL
                 |Module&| |NonAssociativeRing&| NIL NIL |NonAssociativeRng&|
                 NIL |AbelianGroup&| NIL NIL NIL |AbelianMonoid&|
                 |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL
-                |AbelianSemiGroup&| |Magma&| |SetCategory&| NIL NIL
-                |BasicType&| NIL NIL NIL)
+                |AbelianSemiGroup&| |SetWithZero&| |Magma&| |SetCategory&| NIL
+                NIL |BasicType&| NIL NIL NIL)
              (CONS
               '#((|EuclideanDomain|) (|PrincipalIdealDomain|) (|GcdDomain|)
                  (|IntegralDomain|) (|LeftOreRing|) (|CommutativeRing|)
@@ -313,10 +313,10 @@
                  (|NonAssociativeRng|) (|LeftModule| $$) (|AbelianGroup|)
                  (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
                  (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
-                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|) (|Magma|)
-                 (|SetCategory|) (|CommutativeStar|) (|CoercibleTo| 46)
-                 (|BasicType|) (|unitsKnown|) (|TwoSidedRecip|)
-                 (|noZeroDivisors|))
+                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|)
+                 (|SetWithZero|) (|Magma|) (|SetCategory|) (|CommutativeStar|)
+                 (|CoercibleTo| 46) (|BasicType|) (|unitsKnown|)
+                 (|TwoSidedRecip|) (|noZeroDivisors|))
               (|makeByteWordVec2| 44
                                   '(1 7 6 0 13 0 6 0 14 2 6 15 0 0 16 0 7 0 17
                                     1 7 0 6 18 2 0 0 7 8 19 1 0 0 0 20 2 7 0 0
@@ -326,6 +326,6 @@
                                     0 0 35 1 0 15 0 37 0 0 0 38 2 0 0 0 0 39 2
                                     7 0 0 0 43 1 0 15 0 37 1 0 41 0 42 1 0 0 0
                                     40 2 0 0 0 0 35 2 0 0 7 8 19 1 0 0 0 20 1 0
-                                    25 0 36 2 0 7 0 7 44 2 0 22 0 0 24 0 0 0 28
-                                    0 0 0 38 2 0 0 0 0 39)))))
+                                    25 0 36 2 0 7 0 7 44 2 0 22 0 0 24 0 0 0 38
+                                    0 0 0 28 2 0 0 0 0 39)))))
            '|lookupIncomplete|)) 

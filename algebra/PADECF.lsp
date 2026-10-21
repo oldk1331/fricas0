@@ -83,8 +83,8 @@
          (|x| (|UnivariatePolynomial| |xs| F))
          (% (|Stream| (|UnivariatePolynomial| |xs| F))))
         (SPROG
-         ((#1=#:G33 NIL) (|st2| (|Stream| (|UnivariatePolynomial| |xs| F)))
-          (|st1| (|Stream| F)) (|b0| (F)))
+         ((|b0| (F)) (|st1| (|Stream| F))
+          (|st2| (|Stream| (|UnivariatePolynomial| |xs| F))) (#1=#:G34 NIL))
          (SEQ
           (EXIT
            (COND
@@ -111,7 +111,7 @@
                         (LETT #1#
                               (SPADCALL (SPADCALL |b0| (QREFELT % 39)) |st2|
                                         (QREFELT % 34)))
-                        (GO #3=#:G32)))))))))))
+                        (GO #3=#:G33)))))))))))
           #3# (EXIT #1#)))) 
 
 (SDEFUN |PADECF;pade_stream;SUpS;3|
@@ -172,7 +172,7 @@
 (DECLAIM (NOTINLINE |PadeContinuousFraction;|)) 
 
 (DEFUN |PadeContinuousFraction;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 |#2|)
@@ -188,9 +188,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |PadeContinuousFraction| (&REST #1=#:G43)
+(DEFUN |PadeContinuousFraction| (&REST #1=#:G44)
   (SPROG NIL
-         (PROG (#2=#:G44)
+         (PROG (#2=#:G45)
            (RETURN
             (COND
              ((LETT #2#
@@ -210,14 +210,14 @@
 (MAKEPROP '|PadeContinuousFraction| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|NonNegativeInteger|) (0 . |One|) (|Stream| 6)
+              (|NonNegativeInteger|) (0 . |1|) (|Stream| 6)
               (|StreamTaylorSeriesOperations| 6) (4 . -) (|Boolean|)
               (10 . |empty?|) (15 . |rst|) (|Stream| 20) (20 . |empty|)
-              (24 . |frst|) (29 . |Zero|)
-              (|UnivariatePolynomial| (NRTEVAL (QREFELT % 7)) 6) (33 . |Zero|)
-              (37 . =) (43 . |One|) (47 . |One|) (51 . +) (57 . /)
-              (|PositiveInteger|) (63 . |One|) (|Fraction| (|Integer|))
-              (67 . |One|) (71 . *) (77 . ^) (83 . *) (89 . |concat|)
+              (24 . |frst|) (29 . |0|)
+              (|UnivariatePolynomial| (NRTEVAL (QREFELT % 7)) 6) (33 . |0|)
+              (37 . =) (43 . |1|) (47 . |1|) (51 . +) (57 . /)
+              (|PositiveInteger|) (63 . |1|) (|Fraction| (|Integer|))
+              (67 . |1|) (71 . *) (77 . ^) (83 . *) (89 . |concat|)
               (|Mapping| %) (95 . |delay|) (|StreamTaylorSeriesOperations| 20)
               (100 . -) (105 . |coerce|) (|List| 6) (110 . |construct|)
               |PADECF;pade_stream;SUpS;3| |PADECF;pade_stream2;2SUpS;4|

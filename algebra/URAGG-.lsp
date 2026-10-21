@@ -23,7 +23,7 @@
         (SPADCALL (SPADCALL |x| (QREFELT % 22)) (QREFELT % 8))) 
 
 (SDEFUN |URAGG-;first;ANniA;8| ((|x| (A)) (|n| (|NonNegativeInteger|)) (% (A)))
-        (SPROG ((|l| (|List| S)) (|res| (A)) (#1=#:G81 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G81 NIL) (|res| (A)) (|l| (|List| S)))
                (SEQ (LETT |l| NIL)
                     (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                          (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -132,7 +132,7 @@
                            ('T NIL)))))) 
 
 (SDEFUN |URAGG-;tail;2A;17| ((|x| (A)) (% (A)))
-        (SPROG ((|y| (A)) (|k| NIL))
+        (SPROG ((|k| NIL) (|y| (A)))
                (SEQ
                 (COND ((SPADCALL |x| (QREFELT % 20)) (|error| "empty list"))
                       ('T
@@ -156,7 +156,7 @@
                             (EXIT |x|))))))) 
 
 (SDEFUN |URAGG-;findCycle| ((|x| (A)) (% (A)))
-        (SPROG ((|y| (A)) (#1=#:G133 NIL))
+        (SPROG ((#1=#:G133 NIL) (|y| (A)))
                (SEQ
                 (EXIT
                  (SEQ (LETT |y| (SPADCALL |x| (QREFELT % 14)))
@@ -182,7 +182,7 @@
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |URAGG-;cycleTail;2A;19| ((|x| (A)) (% (A)))
-        (SPROG ((|z| (A)) (|y| (A)))
+        (SPROG ((|y| (A)) (|z| (A)))
                (SEQ
                 (COND
                  ((SPADCALL (LETT |y| (LETT |x| (SPADCALL |x| (QREFELT % 41))))
@@ -201,7 +201,7 @@
                        (EXIT |y|))))))) 
 
 (SDEFUN |URAGG-;cycleEntry;2A;20| ((|x| (A)) (% (A)))
-        (SPROG ((|y| (A)) (#1=#:G154 NIL) (|k| NIL) (|z| (A)) (|l| NIL))
+        (SPROG ((|l| NIL) (|z| (A)) (|k| NIL) (#1=#:G154 NIL) (|y| (A)))
                (SEQ
                 (COND ((SPADCALL |x| (QREFELT % 20)) |x|)
                       ((SPADCALL (LETT |y| (|URAGG-;findCycle| |x| %))
@@ -240,7 +240,7 @@
                             (EXIT |x|))))))) 
 
 (SDEFUN |URAGG-;cycleLength;ANni;21| ((|x| (A)) (% (|NonNegativeInteger|)))
-        (SPROG ((|y| (A)) (|k| NIL))
+        (SPROG ((|k| NIL) (|y| (A)))
                (SEQ
                 (COND
                  ((OR (SPADCALL |x| (QREFELT % 20))
@@ -260,7 +260,7 @@
                        (EXIT |k|))))))) 
 
 (SDEFUN |URAGG-;rest;ANniA;22| ((|x| (A)) (|n| (|NonNegativeInteger|)) (% (A)))
-        (SPROG ((#1=#:G167 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G167 NIL))
                (SEQ
                 (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -290,7 +290,7 @@
                 (EXIT |k|)))) 
 
 (SDEFUN |URAGG-;last;ANniA;24| ((|x| (A)) (|n| (|NonNegativeInteger|)) (% (A)))
-        (SPROG ((|xn| (A)) (#1=#:G184 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G184 NIL) (|xn| (A)))
                (SEQ (LETT |xn| |x|)
                     (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                          (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -311,7 +311,7 @@
                     (EXIT (SPADCALL |x| (QREFELT % 47)))))) 
 
 (SDEFUN |URAGG-;=;2AB;25| ((|x| (A)) (|y| (A)) (% (|Boolean|)))
-        (SPROG ((#1=#:G195 NIL) (|k| NIL))
+        (SPROG ((|k| NIL) (#1=#:G195 NIL))
                (SEQ
                 (EXIT
                  (COND ((SPADCALL |x| |y| (QREFELT % 40)) 'T)
@@ -352,7 +352,7 @@
                 #3# (EXIT #1#)))) 
 
 (SDEFUN |URAGG-;node?;2AB;26| ((|u| (A)) (|v| (A)) (% (|Boolean|)))
-        (SPROG ((#1=#:G204 NIL) (|k| NIL))
+        (SPROG ((|k| NIL) (#1=#:G204 NIL))
                (SEQ
                 (EXIT
                  (COND ((SPADCALL |v| (QREFELT % 20)) NIL)
@@ -386,17 +386,19 @@
         ((|x| (A)) (T6 ("first")) (|a| (S)) (% (S)))
         (SPADCALL |x| |a| (QREFELT % 53))) 
 
-(SDEFUN |URAGG-;setelt!;Alast2S;28| ((|x| (A)) (T7 ("last")) (|a| (S)) (% (S)))
+(SDEFUN |URAGG-;setelt!;Alast2S;28|
+        ((|x| (A)) (T11 ("last")) (|a| (S)) (% (S)))
         (SPADCALL |x| |a| (QREFELT % 55))) 
 
-(SDEFUN |URAGG-;setelt!;Arest2A;29| ((|x| (A)) (T8 ("rest")) (|a| (A)) (% (A)))
+(SDEFUN |URAGG-;setelt!;Arest2A;29|
+        ((|x| (A)) (T12 ("rest")) (|a| (A)) (% (A)))
         (SPADCALL |x| |a| (QREFELT % 57))) 
 
 (SDEFUN |URAGG-;concat;3A;30| ((|x| (A)) (|y| (A)) (% (A)))
         (SPADCALL (SPADCALL |x| (QREFELT % 47)) |y| (QREFELT % 59))) 
 
 (SDEFUN |URAGG-;concat!;LA;31| ((|lu| (|List| A)) (% (A)))
-        (SPROG ((|t| (A)) (#1=#:G219 NIL) (|u| NIL) (|res| (A)))
+        (SPROG ((|res| (A)) (|u| NIL) (#1=#:G219 NIL) (|t| (A)))
                (SEQ
                 (SEQ G190
                      (COND
@@ -456,7 +458,7 @@
 
 (SDEFUN |URAGG-;split!;ANniA;37|
         ((|p| (A)) (|n| (|NonNegativeInteger|)) (% (A)))
-        (SPROG ((|q| (A)) (#1=#:G228 NIL))
+        (SPROG ((#1=#:G228 NIL) (|q| (A)))
                (SEQ
                 (COND ((< |n| 1) (|error| "index out of range"))
                       ('T
@@ -473,7 +475,7 @@
                         (EXIT |q|))))))) 
 
 (SDEFUN |URAGG-;cycleSplit!;2A;38| ((|x| (A)) (% (A)))
-        (SPROG ((|z| (A)) (|y| (A)))
+        (SPROG ((|y| (A)) (|z| (A)))
                (SEQ
                 (COND
                  ((OR
@@ -512,7 +514,7 @@
 (DECLAIM (NOTINLINE |UnaryRecursiveAggregate&;|)) 
 
 (DEFUN |UnaryRecursiveAggregate&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

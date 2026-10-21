@@ -3,8 +3,8 @@
         ((|upxs| (UPXS)) (|n| (|NonNegativeInteger|))
          (% (|Union| UPXS #1="failed")))
         (SPROG
-         ((|ulsRoot| (|Union| ULS #1#)) (|uls| (ULS)) (|coef| (|Coef|))
-          (|deg| (|Integer|)) (|r| (|Fraction| (|Integer|))))
+         ((|r| (|Fraction| (|Integer|))) (|deg| (|Integer|)) (|coef| (|Coef|))
+          (|uls| (ULS)) (|ulsRoot| (|Union| ULS #1#)))
          (SEQ
           (COND ((EQL |n| 1) (CONS 0 |upxs|))
                 (#2='T
@@ -53,9 +53,9 @@
 (SDEFUN |EFUPXS;^;UPXSFUPXS;2|
         ((|upxs| (UPXS)) (|q| (|Fraction| (|Integer|))) (% (UPXS)))
         (SPROG
-         ((|ulsPow| (ULS)) (|coef| (|Coef|)) (|deg| (|Integer|)) (|uls| (ULS))
-          (|r| (|Fraction| (|Integer|))) (|den| (|Integer|))
-          (|num| (|Integer|)))
+         ((|num| (|Integer|)) (|den| (|Integer|))
+          (|r| (|Fraction| (|Integer|))) (|uls| (ULS)) (|deg| (|Integer|))
+          (|coef| (|Coef|)) (|ulsPow| (ULS)))
          (SEQ (LETT |num| (SPADCALL |q| (QREFELT % 36)))
               (LETT |den| (SPADCALL |q| (QREFELT % 37)))
               (EXIT
@@ -169,94 +169,78 @@
         ((|upxs| (UPXS)) (% (|Union| UPXS "failed")))
         (|EFUPXS;applyIfCan| (ELT % 71) |upxs| %)) 
 
-(SDEFUN |EFUPXS;asinhIfCan;UPXSU;20|
+(SDEFUN |EFUPXS;atanhIfCan;UPXSU;20|
         ((|upxs| (UPXS)) (% (|Union| UPXS "failed")))
         (|EFUPXS;applyIfCan| (ELT % 73) |upxs| %)) 
 
-(SDEFUN |EFUPXS;acoshIfCan;UPXSU;21|
+(SDEFUN |EFUPXS;acothIfCan;UPXSU;21|
         ((|upxs| (UPXS)) (% (|Union| UPXS "failed")))
         (|EFUPXS;applyIfCan| (ELT % 75) |upxs| %)) 
 
-(SDEFUN |EFUPXS;atanhIfCan;UPXSU;22|
+(SDEFUN |EFUPXS;asinIfCan;UPXSU;22|
         ((|upxs| (UPXS)) (% (|Union| UPXS "failed")))
-        (|EFUPXS;applyIfCan| (ELT % 77) |upxs| %)) 
-
-(SDEFUN |EFUPXS;acothIfCan;UPXSU;23|
-        ((|upxs| (UPXS)) (% (|Union| UPXS "failed")))
-        (|EFUPXS;applyIfCan| (ELT % 79) |upxs| %)) 
-
-(SDEFUN |EFUPXS;asechIfCan;UPXSU;24|
-        ((|upxs| (UPXS)) (% (|Union| UPXS "failed")))
-        (|EFUPXS;applyIfCan| (ELT % 81) |upxs| %)) 
-
-(SDEFUN |EFUPXS;acschIfCan;UPXSU;25|
-        ((|upxs| (UPXS)) (% (|Union| UPXS "failed")))
-        (|EFUPXS;applyIfCan| (ELT % 83) |upxs| %)) 
-
-(SDEFUN |EFUPXS;asinIfCan;UPXSU;26|
-        ((|upxs| (UPXS)) (% (|Union| UPXS "failed")))
-        (SPROG ((|cc| (UPXS)) (|coef| (|Coef|)))
+        (SPROG ((|coef| (|Coef|)) (|cc| (UPXS)))
                (SEQ
                 (COND
                  ((SPADCALL
-                   (SPADCALL |upxs| (|spadConstant| % 87) (QREFELT % 88))
-                   (|spadConstant| % 87) (QREFELT % 89))
+                   (SPADCALL |upxs| (|spadConstant| % 79) (QREFELT % 80))
+                   (|spadConstant| % 79) (QREFELT % 81))
                   (CONS 1 "failed"))
                  (#1='T
                   (SEQ
                    (LETT |coef|
-                         (SPADCALL |upxs| (|spadConstant| % 87)
-                                   (QREFELT % 90)))
+                         (SPADCALL |upxs| (|spadConstant| % 79)
+                                   (QREFELT % 82)))
                    (EXIT
                     (COND
-                     ((SPADCALL |coef| (|spadConstant| % 85) (QREFELT % 91))
+                     ((SPADCALL |coef| (|spadConstant| % 77) (QREFELT % 83))
                       (CONS 0
                             (SPADCALL
                              (SPADCALL
                               (SPADCALL
-                               (SPADCALL (|spadConstant| % 92)
+                               (SPADCALL (|spadConstant| % 84)
                                          (SPADCALL |upxs| |upxs|
                                                    (QREFELT % 33))
-                                         (QREFELT % 93))
-                               (SPADCALL (SPADCALL 1 2 (QREFELT % 94))
-                                         (QREFELT % 95))
-                               (QREFELT % 96))
-                              (SPADCALL |upxs| (QREFELT % 97)) (QREFELT % 33))
-                             (QREFELT % 98))))
+                                         (QREFELT % 85))
+                               (SPADCALL (SPADCALL 1 2 (QREFELT % 86))
+                                         (QREFELT % 87))
+                               (QREFELT % 88))
+                              (SPADCALL |upxs| (QREFELT % 89)) (QREFELT % 33))
+                             (QREFELT % 90))))
                      ((QREFELT % 10)
                       (SEQ
                        (LETT |cc|
-                             (SPADCALL (SPADCALL |coef| (QREFELT % 99))
-                                       (QREFELT % 100)))
+                             (SPADCALL (SPADCALL |coef| (QREFELT % 91))
+                                       (QREFELT % 92)))
                        (EXIT
                         (CONS 0
                               (SPADCALL |cc|
                                         (SPADCALL
                                          (SPADCALL
                                           (SPADCALL
-                                           (SPADCALL (|spadConstant| % 92)
+                                           (SPADCALL (|spadConstant| % 84)
                                                      (SPADCALL |upxs| |upxs|
                                                                (QREFELT % 33))
-                                                     (QREFELT % 93))
+                                                     (QREFELT % 85))
                                            (SPADCALL
-                                            (SPADCALL 1 2 (QREFELT % 94))
-                                            (QREFELT % 95))
-                                           (QREFELT % 96))
-                                          (SPADCALL |upxs| (QREFELT % 97))
+                                            (SPADCALL 1 2 (QREFELT % 86))
+                                            (QREFELT % 87))
+                                           (QREFELT % 88))
+                                          (SPADCALL |upxs| (QREFELT % 89))
                                           (QREFELT % 33))
-                                         (QREFELT % 98))
-                                        (QREFELT % 101))))))
+                                         (QREFELT % 90))
+                                        (QREFELT % 93))))))
                      (#1# (CONS 1 "failed")))))))))) 
 
-(SDEFUN |EFUPXS;acosIfCan;UPXSU;27|
+(SDEFUN |EFUPXS;acosIfCan;UPXSU;23|
         ((|upxs| (UPXS)) (% (|Union| UPXS "failed")))
         (SPROG ((|cc| (UPXS)))
                (SEQ
                 (COND
                  ((OR
                    (SPADCALL
-                    (SPADCALL |upxs| (|spadConstant| % 87) (QREFELT % 88))
-                    (|spadConstant| % 87) (QREFELT % 89))
+                    (SPADCALL |upxs| (|spadConstant| % 79) (QREFELT % 80))
+                    (|spadConstant| % 79) (QREFELT % 81))
                    (NULL (QREFELT % 10)))
                   (CONS 1 "failed"))
                  ('T
@@ -264,10 +248,10 @@
                    (LETT |cc|
                          (SPADCALL
                           (SPADCALL
-                           (SPADCALL |upxs| (|spadConstant| % 87)
-                                     (QREFELT % 90))
-                           (QREFELT % 103))
-                          (QREFELT % 100)))
+                           (SPADCALL |upxs| (|spadConstant| % 79)
+                                     (QREFELT % 82))
+                           (QREFELT % 95))
+                          (QREFELT % 92)))
                    (EXIT
                     (CONS 0
                           (SPADCALL |cc|
@@ -275,134 +259,86 @@
                                      (SPADCALL
                                       (SPADCALL
                                        (SPADCALL
-                                        (SPADCALL (|spadConstant| % 92)
+                                        (SPADCALL (|spadConstant| % 84)
                                                   (SPADCALL |upxs| |upxs|
                                                             (QREFELT % 33))
-                                                  (QREFELT % 93))
-                                        (SPADCALL (SPADCALL 1 2 (QREFELT % 94))
-                                                  (QREFELT % 95))
-                                        (QREFELT % 96))
-                                       (SPADCALL |upxs| (QREFELT % 97))
+                                                  (QREFELT % 85))
+                                        (SPADCALL (SPADCALL 1 2 (QREFELT % 86))
+                                                  (QREFELT % 87))
+                                        (QREFELT % 88))
+                                       (SPADCALL |upxs| (QREFELT % 89))
                                        (QREFELT % 33))
-                                      (QREFELT % 104))
-                                     (QREFELT % 98))
-                                    (QREFELT % 101)))))))))) 
+                                      (QREFELT % 96))
+                                     (QREFELT % 90))
+                                    (QREFELT % 93)))))))))) 
 
-(SDEFUN |EFUPXS;asecIfCan;UPXSU;28|
+(SDEFUN |EFUPXS;asecIfCan;UPXSU;24|
         ((|upxs| (UPXS)) (% (|Union| UPXS "failed")))
-        (SPROG ((|rec| (|Union| UPXS "failed")) (|f| (UPXS)) (|cc| (UPXS)))
+        (SPROG ((|rec| (|Union| UPXS "failed")))
                (SEQ
                 (COND
                  ((OR
                    (SPADCALL
-                    (SPADCALL |upxs| (|spadConstant| % 87) (QREFELT % 88))
-                    (|spadConstant| % 87) (QREFELT % 89))
+                    (SPADCALL |upxs| (|spadConstant| % 98) (QREFELT % 80))
+                    (|spadConstant| % 79) (QREFELT % 99))
                    (NULL (QREFELT % 10)))
                   (CONS 1 "failed"))
                  ('T
-                  (SEQ
-                   (LETT |cc|
-                         (SPADCALL
-                          (SPADCALL
-                           (SPADCALL |upxs| (|spadConstant| % 87)
-                                     (QREFELT % 90))
-                           (QREFELT % 106))
-                          (QREFELT % 100)))
-                   (LETT |f|
-                         (SPADCALL
-                          (SPADCALL
-                           (SPADCALL (SPADCALL |upxs| |upxs| (QREFELT % 33))
-                                     (|spadConstant| % 92) (QREFELT % 93))
-                           (SPADCALL (SPADCALL 1 2 (QREFELT % 94))
-                                     (QREFELT % 95))
-                           (QREFELT % 96))
-                          (SPADCALL |upxs| (QREFELT % 97)) (QREFELT % 33)))
-                   (LETT |rec| (SPADCALL |upxs| (QREFELT % 108)))
-                   (EXIT
-                    (COND ((QEQCAR |rec| 1) (CONS 1 "failed"))
-                          ('T
-                           (CONS 0
-                                 (SPADCALL |cc|
-                                           (SPADCALL
-                                            (SPADCALL |f| (QCDR |rec|)
-                                                      (QREFELT % 33))
-                                            (QREFELT % 98))
-                                           (QREFELT % 101)))))))))))) 
+                  (SEQ (LETT |rec| (SPADCALL |upxs| (QREFELT % 101)))
+                       (EXIT
+                        (COND ((QEQCAR |rec| 1) (CONS 1 "failed"))
+                              ('T
+                               (SPADCALL (QCDR |rec|) (QREFELT % 97))))))))))) 
 
-(SDEFUN |EFUPXS;acscIfCan;UPXSU;29|
+(SDEFUN |EFUPXS;acscIfCan;UPXSU;25|
         ((|upxs| (UPXS)) (% (|Union| UPXS "failed")))
-        (SPROG ((|rec| (|Union| UPXS "failed")) (|f| (UPXS)) (|cc| (UPXS)))
+        (SPROG ((|rec| (|Union| UPXS "failed")))
                (SEQ
                 (COND
                  ((OR
                    (SPADCALL
-                    (SPADCALL |upxs| (|spadConstant| % 87) (QREFELT % 88))
-                    (|spadConstant| % 87) (QREFELT % 89))
+                    (SPADCALL |upxs| (|spadConstant| % 98) (QREFELT % 80))
+                    (|spadConstant| % 79) (QREFELT % 99))
                    (NULL (QREFELT % 10)))
                   (CONS 1 "failed"))
                  ('T
-                  (SEQ
-                   (LETT |cc|
-                         (SPADCALL
-                          (SPADCALL
-                           (SPADCALL |upxs| (|spadConstant| % 87)
-                                     (QREFELT % 90))
-                           (QREFELT % 110))
-                          (QREFELT % 100)))
-                   (LETT |f|
-                         (SPADCALL
-                          (SPADCALL
-                           (SPADCALL
-                            (SPADCALL (SPADCALL |upxs| |upxs| (QREFELT % 33))
-                                      (|spadConstant| % 92) (QREFELT % 93))
-                            (SPADCALL (SPADCALL 1 2 (QREFELT % 94))
-                                      (QREFELT % 95))
-                            (QREFELT % 96))
-                           (SPADCALL |upxs| (QREFELT % 97)) (QREFELT % 33))
-                          (QREFELT % 104)))
-                   (LETT |rec| (SPADCALL |upxs| (QREFELT % 108)))
-                   (EXIT
-                    (COND ((QEQCAR |rec| 1) (CONS 1 "failed"))
-                          ('T
-                           (CONS 0
-                                 (SPADCALL |cc|
-                                           (SPADCALL
-                                            (SPADCALL |f| (QCDR |rec|)
-                                                      (QREFELT % 33))
-                                            (QREFELT % 98))
-                                           (QREFELT % 101)))))))))))) 
+                  (SEQ (LETT |rec| (SPADCALL |upxs| (QREFELT % 101)))
+                       (EXIT
+                        (COND ((QEQCAR |rec| 1) (CONS 1 "failed"))
+                              ('T
+                               (SPADCALL (QCDR |rec|) (QREFELT % 94))))))))))) 
 
-(SDEFUN |EFUPXS;asinhIfCan;UPXSU;30|
+(SDEFUN |EFUPXS;asinhIfCan;UPXSU;26|
         ((|upxs| (UPXS)) (% (|Union| UPXS "failed")))
         (COND
          ((OR
-           (SPADCALL (SPADCALL |upxs| (|spadConstant| % 87) (QREFELT % 88))
-                     (|spadConstant| % 87) (QREFELT % 89))
+           (SPADCALL (SPADCALL |upxs| (|spadConstant| % 79) (QREFELT % 80))
+                     (|spadConstant| % 79) (QREFELT % 81))
            (NULL
             (OR (QREFELT % 10)
                 (SPADCALL
-                 (SPADCALL |upxs| (|spadConstant| % 87) (QREFELT % 90))
-                 (|spadConstant| % 85) (QREFELT % 91)))))
+                 (SPADCALL |upxs| (|spadConstant| % 79) (QREFELT % 82))
+                 (|spadConstant| % 77) (QREFELT % 83)))))
           (CONS 1 "failed"))
          ('T
           (CONS 0
                 (SPADCALL
                  (SPADCALL |upxs|
                            (SPADCALL
-                            (SPADCALL (|spadConstant| % 92)
+                            (SPADCALL (|spadConstant| % 84)
                                       (SPADCALL |upxs| |upxs| (QREFELT % 33))
-                                      (QREFELT % 101))
-                            (SPADCALL 1 2 (QREFELT % 94)) (QREFELT % 96))
-                           (QREFELT % 101))
-                 (QREFELT % 112)))))) 
+                                      (QREFELT % 93))
+                            (SPADCALL 1 2 (QREFELT % 86)) (QREFELT % 88))
+                           (QREFELT % 93))
+                 (QREFELT % 104)))))) 
 
-(SDEFUN |EFUPXS;acoshIfCan;UPXSU;31|
+(SDEFUN |EFUPXS;acoshIfCan;UPXSU;27|
         ((|upxs| (UPXS)) (% (|Union| UPXS "failed")))
         (COND
          ((QREFELT % 10)
           (COND
-           ((SPADCALL (SPADCALL |upxs| (|spadConstant| % 87) (QREFELT % 88))
-                      (|spadConstant| % 87) (QREFELT % 89))
+           ((SPADCALL (SPADCALL |upxs| (|spadConstant| % 79) (QREFELT % 80))
+                      (|spadConstant| % 79) (QREFELT % 81))
             (CONS 1 "failed"))
            (#1='T
             (CONS 0
@@ -410,13 +346,13 @@
                    (SPADCALL |upxs|
                              (SPADCALL
                               (SPADCALL (SPADCALL |upxs| |upxs| (QREFELT % 33))
-                                        (|spadConstant| % 92) (QREFELT % 93))
-                              (SPADCALL 1 2 (QREFELT % 94)) (QREFELT % 96))
-                             (QREFELT % 101))
-                   (QREFELT % 112))))))
+                                        (|spadConstant| % 84) (QREFELT % 85))
+                              (SPADCALL 1 2 (QREFELT % 86)) (QREFELT % 88))
+                             (QREFELT % 93))
+                   (QREFELT % 104))))))
          (#1# (CONS 1 "failed")))) 
 
-(SDEFUN |EFUPXS;asechIfCan;UPXSU;32|
+(SDEFUN |EFUPXS;asechIfCan;UPXSU;28|
         ((|upxs| (UPXS)) (% (|Union| UPXS "failed")))
         (SPROG ((|rec| (|Union| UPXS "failed")))
                (SEQ
@@ -424,64 +360,64 @@
                  ((QREFELT % 10)
                   (COND
                    ((SPADCALL
-                     (SPADCALL |upxs| (|spadConstant| % 87) (QREFELT % 88))
-                     (|spadConstant| % 87) (QREFELT % 89))
+                     (SPADCALL |upxs| (|spadConstant| % 98) (QREFELT % 80))
+                     (|spadConstant| % 79) (QREFELT % 99))
                     (CONS 1 "failed"))
                    (#1='T
-                    (SEQ (LETT |rec| (SPADCALL |upxs| (QREFELT % 108)))
+                    (SEQ (LETT |rec| (SPADCALL |upxs| (QREFELT % 101)))
                          (EXIT
                           (COND ((QEQCAR |rec| 1) (CONS 1 "failed"))
                                 (#1#
                                  (CONS 0
                                        (SPADCALL
                                         (SPADCALL
-                                         (SPADCALL (|spadConstant| % 92)
+                                         (SPADCALL (|spadConstant| % 84)
                                                    (SPADCALL
                                                     (SPADCALL
-                                                     (|spadConstant| % 92)
+                                                     (|spadConstant| % 84)
+                                                     (SPADCALL |upxs| |upxs|
+                                                               (QREFELT % 33))
+                                                     (QREFELT % 85))
+                                                    (SPADCALL 1 2
+                                                              (QREFELT % 86))
+                                                    (QREFELT % 88))
+                                                   (QREFELT % 93))
+                                         (QCDR |rec|) (QREFELT % 33))
+                                        (QREFELT % 104))))))))))
+                 (#1# (CONS 1 "failed")))))) 
+
+(SDEFUN |EFUPXS;acschIfCan;UPXSU;29|
+        ((|upxs| (UPXS)) (% (|Union| UPXS "failed")))
+        (SPROG ((|rec| (|Union| UPXS "failed")))
+               (SEQ
+                (COND
+                 ((QREFELT % 10)
+                  (COND
+                   ((SPADCALL
+                     (SPADCALL |upxs| (|spadConstant| % 98) (QREFELT % 80))
+                     (|spadConstant| % 79) (QREFELT % 99))
+                    (CONS 1 "failed"))
+                   (#1='T
+                    (SEQ (LETT |rec| (SPADCALL |upxs| (QREFELT % 101)))
+                         (EXIT
+                          (COND ((QEQCAR |rec| 1) (CONS 1 "failed"))
+                                (#1#
+                                 (CONS 0
+                                       (SPADCALL
+                                        (SPADCALL
+                                         (SPADCALL (|spadConstant| % 84)
+                                                   (SPADCALL
+                                                    (SPADCALL
+                                                     (|spadConstant| % 84)
                                                      (SPADCALL |upxs| |upxs|
                                                                (QREFELT % 33))
                                                      (QREFELT % 93))
                                                     (SPADCALL 1 2
-                                                              (QREFELT % 94))
-                                                    (QREFELT % 113))
-                                                   (QREFELT % 101))
+                                                              (QREFELT % 86))
+                                                    (QREFELT % 88))
+                                                   (QREFELT % 93))
                                          (QCDR |rec|) (QREFELT % 33))
-                                        (QREFELT % 112))))))))))
-                 (#1# (CONS 1 "failed")))))) 
-
-(SDEFUN |EFUPXS;acschIfCan;UPXSU;33|
-        ((|upxs| (UPXS)) (% (|Union| UPXS "failed")))
-        (SPROG ((|rec| (|Union| UPXS "failed")))
-               (SEQ
-                (COND
-                 ((QREFELT % 10)
-                  (COND
-                   ((SPADCALL
-                     (SPADCALL |upxs| (|spadConstant| % 87) (QREFELT % 88))
-                     (|spadConstant| % 87) (QREFELT % 89))
-                    (CONS 1 "failed"))
-                   (#1='T
-                    (SEQ (LETT |rec| (SPADCALL |upxs| (QREFELT % 108)))
-                         (EXIT
-                          (COND ((QEQCAR |rec| 1) (CONS 1 "failed"))
-                                (#1#
-                                 (CONS 0
-                                       (SPADCALL
-                                        (SPADCALL
-                                         (SPADCALL (|spadConstant| % 92)
-                                                   (SPADCALL
-                                                    (SPADCALL
-                                                     (|spadConstant| % 92)
-                                                     (SPADCALL |upxs| |upxs|
-                                                               (QREFELT % 33))
-                                                     (QREFELT % 101))
-                                                    (SPADCALL 1 2
-                                                              (QREFELT % 94))
-                                                    (QREFELT % 113))
-                                                   (QREFELT % 101))
-                                         (QCDR |rec|) (QREFELT % 33))
-                                        (QREFELT % 112))))))))))
+                                        (QREFELT % 104))))))))))
                  (#1# (CONS 1 "failed")))))) 
 
 (SDEFUN |EFUPXS;applyOrError|
@@ -496,90 +432,90 @@
                         (STRCONC |name| " of function with singularity")))
                       ('T (QCDR |ans|))))))) 
 
-(SDEFUN |EFUPXS;exp;2UPXS;35| ((|upxs| (UPXS)) (% (UPXS)))
+(SDEFUN |EFUPXS;exp;2UPXS;31| ((|upxs| (UPXS)) (% (UPXS)))
         (|EFUPXS;applyOrError| (ELT % 42) "exp" |upxs| %)) 
 
-(SDEFUN |EFUPXS;log;2UPXS;36| ((|upxs| (UPXS)) (% (UPXS)))
+(SDEFUN |EFUPXS;log;2UPXS;32| ((|upxs| (UPXS)) (% (UPXS)))
         (|EFUPXS;applyOrError| (ELT % 44) "log" |upxs| %)) 
 
-(SDEFUN |EFUPXS;sin;2UPXS;37| ((|upxs| (UPXS)) (% (UPXS)))
+(SDEFUN |EFUPXS;sin;2UPXS;33| ((|upxs| (UPXS)) (% (UPXS)))
         (|EFUPXS;applyOrError| (ELT % 46) "sin" |upxs| %)) 
 
-(SDEFUN |EFUPXS;cos;2UPXS;38| ((|upxs| (UPXS)) (% (UPXS)))
+(SDEFUN |EFUPXS;cos;2UPXS;34| ((|upxs| (UPXS)) (% (UPXS)))
         (|EFUPXS;applyOrError| (ELT % 48) "cos" |upxs| %)) 
 
-(SDEFUN |EFUPXS;tan;2UPXS;39| ((|upxs| (UPXS)) (% (UPXS)))
+(SDEFUN |EFUPXS;tan;2UPXS;35| ((|upxs| (UPXS)) (% (UPXS)))
         (|EFUPXS;applyOrError| (ELT % 50) "tan" |upxs| %)) 
 
-(SDEFUN |EFUPXS;cot;2UPXS;40| ((|upxs| (UPXS)) (% (UPXS)))
+(SDEFUN |EFUPXS;cot;2UPXS;36| ((|upxs| (UPXS)) (% (UPXS)))
         (|EFUPXS;applyOrError| (ELT % 52) "cot" |upxs| %)) 
 
-(SDEFUN |EFUPXS;sec;2UPXS;41| ((|upxs| (UPXS)) (% (UPXS)))
+(SDEFUN |EFUPXS;sec;2UPXS;37| ((|upxs| (UPXS)) (% (UPXS)))
         (|EFUPXS;applyOrError| (ELT % 54) "sec" |upxs| %)) 
 
-(SDEFUN |EFUPXS;csc;2UPXS;42| ((|upxs| (UPXS)) (% (UPXS)))
+(SDEFUN |EFUPXS;csc;2UPXS;38| ((|upxs| (UPXS)) (% (UPXS)))
         (|EFUPXS;applyOrError| (ELT % 56) "csc" |upxs| %)) 
 
-(SDEFUN |EFUPXS;asin;2UPXS;43| ((|upxs| (UPXS)) (% (UPXS)))
-        (|EFUPXS;applyOrError| (ELT % 102) "asin" |upxs| %)) 
+(SDEFUN |EFUPXS;asin;2UPXS;39| ((|upxs| (UPXS)) (% (UPXS)))
+        (|EFUPXS;applyOrError| (ELT % 94) "asin" |upxs| %)) 
 
-(SDEFUN |EFUPXS;acos;2UPXS;44| ((|upxs| (UPXS)) (% (UPXS)))
-        (|EFUPXS;applyOrError| (ELT % 105) "acos" |upxs| %)) 
+(SDEFUN |EFUPXS;acos;2UPXS;40| ((|upxs| (UPXS)) (% (UPXS)))
+        (|EFUPXS;applyOrError| (ELT % 97) "acos" |upxs| %)) 
 
-(SDEFUN |EFUPXS;atan;2UPXS;45| ((|upxs| (UPXS)) (% (UPXS)))
+(SDEFUN |EFUPXS;atan;2UPXS;41| ((|upxs| (UPXS)) (% (UPXS)))
         (|EFUPXS;applyOrError| (ELT % 58) "atan" |upxs| %)) 
 
-(SDEFUN |EFUPXS;acot;2UPXS;46| ((|upxs| (UPXS)) (% (UPXS)))
+(SDEFUN |EFUPXS;acot;2UPXS;42| ((|upxs| (UPXS)) (% (UPXS)))
         (|EFUPXS;applyOrError| (ELT % 60) "acot" |upxs| %)) 
 
-(SDEFUN |EFUPXS;asec;2UPXS;47| ((|upxs| (UPXS)) (% (UPXS)))
-        (|EFUPXS;applyOrError| (ELT % 109) "asec" |upxs| %)) 
+(SDEFUN |EFUPXS;asec;2UPXS;43| ((|upxs| (UPXS)) (% (UPXS)))
+        (|EFUPXS;applyOrError| (ELT % 102) "asec" |upxs| %)) 
 
-(SDEFUN |EFUPXS;acsc;2UPXS;48| ((|upxs| (UPXS)) (% (UPXS)))
-        (|EFUPXS;applyOrError| (ELT % 111) "acsc" |upxs| %)) 
+(SDEFUN |EFUPXS;acsc;2UPXS;44| ((|upxs| (UPXS)) (% (UPXS)))
+        (|EFUPXS;applyOrError| (ELT % 103) "acsc" |upxs| %)) 
 
-(SDEFUN |EFUPXS;sinh;2UPXS;49| ((|upxs| (UPXS)) (% (UPXS)))
+(SDEFUN |EFUPXS;sinh;2UPXS;45| ((|upxs| (UPXS)) (% (UPXS)))
         (|EFUPXS;applyOrError| (ELT % 62) "sinh" |upxs| %)) 
 
-(SDEFUN |EFUPXS;cosh;2UPXS;50| ((|upxs| (UPXS)) (% (UPXS)))
+(SDEFUN |EFUPXS;cosh;2UPXS;46| ((|upxs| (UPXS)) (% (UPXS)))
         (|EFUPXS;applyOrError| (ELT % 64) "cosh" |upxs| %)) 
 
-(SDEFUN |EFUPXS;tanh;2UPXS;51| ((|upxs| (UPXS)) (% (UPXS)))
+(SDEFUN |EFUPXS;tanh;2UPXS;47| ((|upxs| (UPXS)) (% (UPXS)))
         (|EFUPXS;applyOrError| (ELT % 66) "tanh" |upxs| %)) 
 
-(SDEFUN |EFUPXS;coth;2UPXS;52| ((|upxs| (UPXS)) (% (UPXS)))
+(SDEFUN |EFUPXS;coth;2UPXS;48| ((|upxs| (UPXS)) (% (UPXS)))
         (|EFUPXS;applyOrError| (ELT % 68) "coth" |upxs| %)) 
 
-(SDEFUN |EFUPXS;sech;2UPXS;53| ((|upxs| (UPXS)) (% (UPXS)))
+(SDEFUN |EFUPXS;sech;2UPXS;49| ((|upxs| (UPXS)) (% (UPXS)))
         (|EFUPXS;applyOrError| (ELT % 70) "sech" |upxs| %)) 
 
-(SDEFUN |EFUPXS;csch;2UPXS;54| ((|upxs| (UPXS)) (% (UPXS)))
+(SDEFUN |EFUPXS;csch;2UPXS;50| ((|upxs| (UPXS)) (% (UPXS)))
         (|EFUPXS;applyOrError| (ELT % 72) "csch" |upxs| %)) 
 
-(SDEFUN |EFUPXS;asinh;2UPXS;55| ((|upxs| (UPXS)) (% (UPXS)))
-        (|EFUPXS;applyOrError| (ELT % 74) "asinh" |upxs| %)) 
+(SDEFUN |EFUPXS;asinh;2UPXS;51| ((|upxs| (UPXS)) (% (UPXS)))
+        (|EFUPXS;applyOrError| (ELT % 105) "asinh" |upxs| %)) 
 
-(SDEFUN |EFUPXS;acosh;2UPXS;56| ((|upxs| (UPXS)) (% (UPXS)))
-        (|EFUPXS;applyOrError| (ELT % 76) "acosh" |upxs| %)) 
+(SDEFUN |EFUPXS;acosh;2UPXS;52| ((|upxs| (UPXS)) (% (UPXS)))
+        (|EFUPXS;applyOrError| (ELT % 106) "acosh" |upxs| %)) 
 
-(SDEFUN |EFUPXS;atanh;2UPXS;57| ((|upxs| (UPXS)) (% (UPXS)))
-        (|EFUPXS;applyOrError| (ELT % 78) "atanh" |upxs| %)) 
+(SDEFUN |EFUPXS;atanh;2UPXS;53| ((|upxs| (UPXS)) (% (UPXS)))
+        (|EFUPXS;applyOrError| (ELT % 74) "atanh" |upxs| %)) 
 
-(SDEFUN |EFUPXS;acoth;2UPXS;58| ((|upxs| (UPXS)) (% (UPXS)))
-        (|EFUPXS;applyOrError| (ELT % 80) "acoth" |upxs| %)) 
+(SDEFUN |EFUPXS;acoth;2UPXS;54| ((|upxs| (UPXS)) (% (UPXS)))
+        (|EFUPXS;applyOrError| (ELT % 76) "acoth" |upxs| %)) 
 
-(SDEFUN |EFUPXS;asech;2UPXS;59| ((|upxs| (UPXS)) (% (UPXS)))
-        (|EFUPXS;applyOrError| (ELT % 82) "asech" |upxs| %)) 
+(SDEFUN |EFUPXS;asech;2UPXS;55| ((|upxs| (UPXS)) (% (UPXS)))
+        (|EFUPXS;applyOrError| (ELT % 107) "asech" |upxs| %)) 
 
-(SDEFUN |EFUPXS;acsch;2UPXS;60| ((|upxs| (UPXS)) (% (UPXS)))
-        (|EFUPXS;applyOrError| (ELT % 84) "acsch" |upxs| %)) 
+(SDEFUN |EFUPXS;acsch;2UPXS;56| ((|upxs| (UPXS)) (% (UPXS)))
+        (|EFUPXS;applyOrError| (ELT % 108) "acsch" |upxs| %)) 
 
 (DECLAIM (NOTINLINE |ElementaryFunctionsUnivariatePuiseuxSeries;|)) 
 
 (DEFUN |ElementaryFunctionsUnivariatePuiseuxSeries;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -588,7 +524,7 @@
     (LETT |dv$|
           (LIST '|ElementaryFunctionsUnivariatePuiseuxSeries| DV$1 DV$2 DV$3
                 DV$4))
-    (LETT % (GETREFV 139))
+    (LETT % (GETREFV 134))
     (QSETREFV % 0 |dv$|)
     (QSETREFV % 3
               (LETT |pv$|
@@ -610,9 +546,9 @@
       (QSETREFV % 40 (CONS (|dispatchFunction| |EFUPXS;^;UPXSFUPXS;2|) %))))
     %))) 
 
-(DEFUN |ElementaryFunctionsUnivariatePuiseuxSeries| (&REST #1=#:G399)
+(DEFUN |ElementaryFunctionsUnivariatePuiseuxSeries| (&REST #1=#:G374)
   (SPROG NIL
-         (PROG (#2=#:G400)
+         (PROG (#2=#:G375)
            (RETURN
             (COND
              ((LETT #2#
@@ -637,7 +573,7 @@
 (MAKEPROP '|ElementaryFunctionsUnivariatePuiseuxSeries| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (|local| |#4|) 'TRANSFCN (0 . |One|) (4 . |One|)
+              (|local| |#3|) (|local| |#4|) 'TRANSFCN (0 . |1|) (4 . |1|)
               (|Fraction| 16) (8 . |rationalPower|) (13 . |laurentRep|)
               (|Integer|) (18 . |degree|) (23 . |coefficient|) (|Boolean|)
               (29 . |zero?|) (34 . |order|) (40 . |monomial|) (46 . *)
@@ -661,50 +597,47 @@
               |EFUPXS;tanhIfCan;UPXSU;16| (191 . |cothIfCan|)
               |EFUPXS;cothIfCan;UPXSU;17| (196 . |sechIfCan|)
               |EFUPXS;sechIfCan;UPXSU;18| (201 . |cschIfCan|)
-              |EFUPXS;cschIfCan;UPXSU;19| (206 . |asinhIfCan|)
-              |EFUPXS;asinhIfCan;UPXSU;30| (211 . |acoshIfCan|)
-              |EFUPXS;acoshIfCan;UPXSU;31| (216 . |atanhIfCan|)
-              |EFUPXS;atanhIfCan;UPXSU;22| (221 . |acothIfCan|)
-              |EFUPXS;acothIfCan;UPXSU;23| (226 . |asechIfCan|)
-              |EFUPXS;asechIfCan;UPXSU;32| (231 . |acschIfCan|)
-              |EFUPXS;acschIfCan;UPXSU;33| (236 . |Zero|) (240 . |Zero|)
-              (244 . |Zero|) (248 . |order|) (254 . <) (260 . |coefficient|)
-              (266 . =) (272 . |One|) (276 . -) (282 . /) (288 . -) (293 . ^)
-              (299 . |differentiate|) (304 . |integrate|) (309 . |asin|)
-              (314 . |coerce|) (319 . +) |EFUPXS;asinIfCan;UPXSU;26|
-              (325 . |acos|) (330 . -) |EFUPXS;acosIfCan;UPXSU;27|
-              (335 . |asec|) (|Union| % '"failed") (340 . |recip|)
-              |EFUPXS;asecIfCan;UPXSU;28| (345 . |acsc|)
-              |EFUPXS;acscIfCan;UPXSU;29| |EFUPXS;log;2UPXS;36| (350 . *)
-              |EFUPXS;exp;2UPXS;35| |EFUPXS;sin;2UPXS;37| |EFUPXS;cos;2UPXS;38|
-              |EFUPXS;tan;2UPXS;39| |EFUPXS;cot;2UPXS;40| |EFUPXS;sec;2UPXS;41|
-              |EFUPXS;csc;2UPXS;42| |EFUPXS;asin;2UPXS;43|
-              |EFUPXS;acos;2UPXS;44| |EFUPXS;atan;2UPXS;45|
-              |EFUPXS;acot;2UPXS;46| |EFUPXS;asec;2UPXS;47|
-              |EFUPXS;acsc;2UPXS;48| |EFUPXS;sinh;2UPXS;49|
-              |EFUPXS;cosh;2UPXS;50| |EFUPXS;tanh;2UPXS;51|
-              |EFUPXS;coth;2UPXS;52| |EFUPXS;sech;2UPXS;53|
-              |EFUPXS;csch;2UPXS;54| |EFUPXS;asinh;2UPXS;55|
-              |EFUPXS;acosh;2UPXS;56| |EFUPXS;atanh;2UPXS;57|
-              |EFUPXS;acoth;2UPXS;58| |EFUPXS;asech;2UPXS;59|
-              |EFUPXS;acsch;2UPXS;60|)
-           '#(|tanhIfCan| 356 |tanh| 361 |tanIfCan| 366 |tan| 371 |sinhIfCan|
-              376 |sinh| 381 |sinIfCan| 386 |sin| 391 |sechIfCan| 396 |sech|
-              401 |secIfCan| 406 |sec| 411 |nthRootIfCan| 416 |logIfCan| 422
-              |log| 427 |expIfCan| 432 |exp| 437 |cschIfCan| 442 |csch| 447
-              |cscIfCan| 452 |csc| 457 |cothIfCan| 462 |coth| 467 |cotIfCan|
-              472 |cot| 477 |coshIfCan| 482 |cosh| 487 |cosIfCan| 492 |cos| 497
-              |atanhIfCan| 502 |atanh| 507 |atanIfCan| 512 |atan| 517
-              |asinhIfCan| 522 |asinh| 527 |asinIfCan| 532 |asin| 537
-              |asechIfCan| 542 |asech| 547 |asecIfCan| 552 |asec| 557
-              |acschIfCan| 562 |acsch| 567 |acscIfCan| 572 |acsc| 577
-              |acothIfCan| 582 |acoth| 587 |acotIfCan| 592 |acot| 597
-              |acoshIfCan| 602 |acosh| 607 |acosIfCan| 612 |acos| 617 ^ 622)
+              |EFUPXS;cschIfCan;UPXSU;19| (206 . |atanhIfCan|)
+              |EFUPXS;atanhIfCan;UPXSU;20| (211 . |acothIfCan|)
+              |EFUPXS;acothIfCan;UPXSU;21| (216 . |0|) (220 . |0|) (224 . |0|)
+              (228 . |order|) (234 . <) (240 . |coefficient|) (246 . =)
+              (252 . |1|) (256 . -) (262 . /) (268 . -) (273 . ^)
+              (279 . |differentiate|) (284 . |integrate|) (289 . |asin|)
+              (294 . |coerce|) (299 . +) |EFUPXS;asinIfCan;UPXSU;22|
+              (305 . |acos|) (310 . -) |EFUPXS;acosIfCan;UPXSU;23| (315 . |1|)
+              (319 . >) (|Union| % '"failed") (325 . |recip|)
+              |EFUPXS;asecIfCan;UPXSU;24| |EFUPXS;acscIfCan;UPXSU;25|
+              |EFUPXS;log;2UPXS;32| |EFUPXS;asinhIfCan;UPXSU;26|
+              |EFUPXS;acoshIfCan;UPXSU;27| |EFUPXS;asechIfCan;UPXSU;28|
+              |EFUPXS;acschIfCan;UPXSU;29| |EFUPXS;exp;2UPXS;31|
+              |EFUPXS;sin;2UPXS;33| |EFUPXS;cos;2UPXS;34| |EFUPXS;tan;2UPXS;35|
+              |EFUPXS;cot;2UPXS;36| |EFUPXS;sec;2UPXS;37| |EFUPXS;csc;2UPXS;38|
+              |EFUPXS;asin;2UPXS;39| |EFUPXS;acos;2UPXS;40|
+              |EFUPXS;atan;2UPXS;41| |EFUPXS;acot;2UPXS;42|
+              |EFUPXS;asec;2UPXS;43| |EFUPXS;acsc;2UPXS;44|
+              |EFUPXS;sinh;2UPXS;45| |EFUPXS;cosh;2UPXS;46|
+              |EFUPXS;tanh;2UPXS;47| |EFUPXS;coth;2UPXS;48|
+              |EFUPXS;sech;2UPXS;49| |EFUPXS;csch;2UPXS;50|
+              |EFUPXS;asinh;2UPXS;51| |EFUPXS;acosh;2UPXS;52|
+              |EFUPXS;atanh;2UPXS;53| |EFUPXS;acoth;2UPXS;54|
+              |EFUPXS;asech;2UPXS;55| |EFUPXS;acsch;2UPXS;56|)
+           '#(|tanhIfCan| 330 |tanh| 335 |tanIfCan| 340 |tan| 345 |sinhIfCan|
+              350 |sinh| 355 |sinIfCan| 360 |sin| 365 |sechIfCan| 370 |sech|
+              375 |secIfCan| 380 |sec| 385 |nthRootIfCan| 390 |logIfCan| 396
+              |log| 401 |expIfCan| 406 |exp| 411 |cschIfCan| 416 |csch| 421
+              |cscIfCan| 426 |csc| 431 |cothIfCan| 436 |coth| 441 |cotIfCan|
+              446 |cot| 451 |coshIfCan| 456 |cosh| 461 |cosIfCan| 466 |cos| 471
+              |atanhIfCan| 476 |atanh| 481 |atanIfCan| 486 |atan| 491
+              |asinhIfCan| 496 |asinh| 501 |asinIfCan| 506 |asin| 511
+              |asechIfCan| 516 |asech| 521 |asecIfCan| 526 |asec| 531
+              |acschIfCan| 536 |acsch| 541 |acscIfCan| 546 |acsc| 551
+              |acothIfCan| 556 |acoth| 561 |acotIfCan| 566 |acot| 571
+              |acoshIfCan| 576 |acosh| 581 |acosIfCan| 586 |acos| 591 ^ 596)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
                        (CONS '#((|PartialTranscendentalFunctions| 8))
-                             (|makeByteWordVec2| 138
+                             (|makeByteWordVec2| 133
                                                  '(0 6 0 11 0 7 0 12 1 8 13 0
                                                    14 1 8 7 0 15 1 7 16 0 17 2
                                                    7 6 0 16 18 1 6 19 0 20 2 7
@@ -712,7 +645,7 @@
                                                    0 0 0 23 2 9 24 7 25 26 2 8
                                                    0 13 7 27 2 13 0 16 0 28 1
                                                    13 0 16 29 1 13 0 0 30 2 13
-                                                   0 13 0 31 2 8 0 6 13 32 2 8
+                                                   0 0 13 31 2 8 0 6 13 32 2 8
                                                    0 0 0 33 1 13 16 0 36 1 13
                                                    16 0 37 2 8 0 0 16 38 2 7 0
                                                    0 13 39 2 0 8 8 13 40 1 9 24
@@ -723,40 +656,38 @@
                                                    9 24 7 61 1 9 24 7 63 1 9 24
                                                    7 65 1 9 24 7 67 1 9 24 7 69
                                                    1 9 24 7 71 1 9 24 7 73 1 9
-                                                   24 7 75 1 9 24 7 77 1 9 24 7
-                                                   79 1 9 24 7 81 1 9 24 7 83 0
-                                                   6 0 85 0 7 0 86 0 13 0 87 2
-                                                   8 13 0 13 88 2 13 19 0 0 89
-                                                   2 8 6 0 13 90 2 6 19 0 0 91
-                                                   0 8 0 92 2 8 0 0 0 93 2 13 0
-                                                   16 16 94 1 13 0 0 95 2 8 0 0
-                                                   13 96 1 8 0 0 97 1 8 0 0 98
-                                                   1 6 0 0 99 1 8 0 6 100 2 8 0
-                                                   0 0 101 1 6 0 0 103 1 8 0 0
-                                                   104 1 6 0 0 106 1 8 107 0
-                                                   108 1 6 0 0 110 2 8 0 0 13
-                                                   113 1 0 34 8 66 1 0 8 8 129
-                                                   1 0 34 8 50 1 0 8 8 117 1 0
-                                                   34 8 62 1 0 8 8 127 1 0 34 8
-                                                   46 1 0 8 8 115 1 0 34 8 70 1
-                                                   0 8 8 131 1 0 34 8 54 1 0 8
-                                                   8 119 2 0 34 8 25 35 1 0 34
-                                                   8 44 1 0 8 8 112 1 0 34 8 42
-                                                   1 0 8 8 114 1 0 34 8 72 1 0
-                                                   8 8 132 1 0 34 8 56 1 0 8 8
-                                                   120 1 0 34 8 68 1 0 8 8 130
-                                                   1 0 34 8 52 1 0 8 8 118 1 0
-                                                   34 8 64 1 0 8 8 128 1 0 34 8
-                                                   48 1 0 8 8 116 1 0 34 8 78 1
-                                                   0 8 8 135 1 0 34 8 58 1 0 8
-                                                   8 123 1 0 34 8 74 1 0 8 8
-                                                   133 1 0 34 8 102 1 0 8 8 121
-                                                   1 0 34 8 82 1 0 8 8 137 1 0
-                                                   34 8 109 1 0 8 8 125 1 0 34
-                                                   8 84 1 0 8 8 138 1 0 34 8
-                                                   111 1 0 8 8 126 1 0 34 8 80
-                                                   1 0 8 8 136 1 0 34 8 60 1 0
-                                                   8 8 124 1 0 34 8 76 1 0 8 8
-                                                   134 1 0 34 8 105 1 0 8 8 122
-                                                   2 1 8 8 13 40)))))
+                                                   24 7 75 0 6 0 77 0 7 0 78 0
+                                                   13 0 79 2 8 13 0 13 80 2 13
+                                                   19 0 0 81 2 8 6 0 13 82 2 6
+                                                   19 0 0 83 0 8 0 84 2 8 0 0 0
+                                                   85 2 13 0 16 16 86 1 13 0 0
+                                                   87 2 8 0 0 13 88 1 8 0 0 89
+                                                   1 8 0 0 90 1 6 0 0 91 1 8 0
+                                                   6 92 2 8 0 0 0 93 1 6 0 0 95
+                                                   1 8 0 0 96 0 13 0 98 2 13 19
+                                                   0 0 99 1 8 100 0 101 1 0 34
+                                                   8 66 1 0 8 8 124 1 0 34 8 50
+                                                   1 0 8 8 112 1 0 34 8 62 1 0
+                                                   8 8 122 1 0 34 8 46 1 0 8 8
+                                                   110 1 0 34 8 70 1 0 8 8 126
+                                                   1 0 34 8 54 1 0 8 8 114 2 0
+                                                   34 8 25 35 1 0 34 8 44 1 0 8
+                                                   8 104 1 0 34 8 42 1 0 8 8
+                                                   109 1 0 34 8 72 1 0 8 8 127
+                                                   1 0 34 8 56 1 0 8 8 115 1 0
+                                                   34 8 68 1 0 8 8 125 1 0 34 8
+                                                   52 1 0 8 8 113 1 0 34 8 64 1
+                                                   0 8 8 123 1 0 34 8 48 1 0 8
+                                                   8 111 1 0 34 8 74 1 0 8 8
+                                                   130 1 0 34 8 58 1 0 8 8 118
+                                                   1 0 34 8 105 1 0 8 8 128 1 0
+                                                   34 8 94 1 0 8 8 116 1 0 34 8
+                                                   107 1 0 8 8 132 1 0 34 8 102
+                                                   1 0 8 8 120 1 0 34 8 108 1 0
+                                                   8 8 133 1 0 34 8 103 1 0 8 8
+                                                   121 1 0 34 8 76 1 0 8 8 131
+                                                   1 0 34 8 60 1 0 8 8 119 1 0
+                                                   34 8 106 1 0 8 8 129 1 0 34
+                                                   8 97 1 0 8 8 117 2 1 8 8 13
+                                                   40)))))
            '|lookupComplete|)) 

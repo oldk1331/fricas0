@@ -7,7 +7,7 @@
 (SDEFUN |FLASORT;siftUp|
         ((|l| (|Mapping| (|Boolean|) S S)) (|r| (V)) (|i| (|Integer|))
          (|n| (|Integer|)) (% (|Void|)))
-        (SPROG ((#1=#:G17 NIL) (|j| #2=(|Integer|)) (|k| #2#) (|t| (S)))
+        (SPROG ((|t| (S)) (|k| #1=(|Integer|)) (|j| #1#) (#2=#:G17 NIL))
                (SEQ (LETT |t| (SPADCALL |r| |i| (QREFELT % 13)))
                     (EXIT
                      (SEQ
@@ -36,13 +36,13 @@
                                            (QREFELT % 14))
                                  (SPADCALL |r| |j| |t| (QREFELT % 14))
                                  (EXIT (LETT |i| |j|))))
-                               ('T (PROGN (LETT #1# 1) (GO #3=#:G14))))))
+                               ('T (PROGN (LETT #2# 1) (GO #3=#:G14))))))
                             NIL (GO G190) G191 (EXIT NIL)))
-                      #3# (EXIT #1#)))))) 
+                      #3# (EXIT #2#)))))) 
 
 (SDEFUN |FLASORT;heapSort;M2V;3|
         ((|l| (|Mapping| (|Boolean|) S S)) (|r| (V)) (% (V)))
-        (SPROG ((|k| NIL) (|n| (|Integer|)))
+        (SPROG ((|n| (|Integer|)) (|k| NIL))
                (SEQ
                 (COND
                  ((NULL (ZEROP (SPADCALL |r| (QREFELT % 9))))
@@ -63,7 +63,7 @@
 (SDEFUN |FLASORT;partition|
         ((|l| (|Mapping| (|Boolean|) S S)) (|r| (V)) (|i| (|Integer|))
          (|j| (|Integer|)) (|k| (|Integer|)) (% (|Integer|)))
-        (SPROG ((|s| (S)) (|t| (S)) (|x| (S)))
+        (SPROG ((|x| (S)) (|t| (S)) (|s| (S)))
                (SEQ (LETT |x| (SPADCALL |r| |k| (QREFELT % 13)))
                     (SEQ G190 (COND ((NULL (<= |i| |j|)) (GO G191)))
                          (SEQ (LETT |t| (SPADCALL |r| |i| (QREFELT % 13)))
@@ -99,7 +99,7 @@
 (SDEFUN |FLASORT;QuickSort|
         ((|l| (|Mapping| (|Boolean|) S S)) (|r| (V)) (|i| (|Integer|))
          (|j| (|Integer|)) (% (V)))
-        (SPROG ((|k| (|Integer|)) (#1=#:G56 NIL) (|n| (|Integer|)))
+        (SPROG ((|n| (|Integer|)) (#1=#:G56 NIL) (|k| (|Integer|)))
                (SEQ
                 (EXIT
                  (SEQ G190 NIL
@@ -134,14 +134,14 @@
 (SDEFUN |FLASORT;shellSort;M2V;6|
         ((|l| (|Mapping| (|Boolean|) S S)) (|r| (V)) (% (V)))
         (SPROG
-         ((|g| (|Integer|)) (|j| (|Integer|)) (#1=#:G70 NIL) (|i| NIL)
-          (|n| (|Integer|)) (|m| (|Integer|)))
+         ((|m| (|Integer|)) (|n| (|Integer|)) (|i| NIL) (#1=#:G70 NIL)
+          (|j| (|Integer|)) (|g| (|Integer|)))
          (SEQ (LETT |m| (SPADCALL |r| (QREFELT % 9)))
               (LETT |n| (SPADCALL |r| (QREFELT % 10))) (LETT |g| 1)
               (SEQ G190 (COND ((NULL (<= |g| (- |n| |m|))) (GO G191)))
                    (SEQ (EXIT (LETT |g| (+ (* 3 |g|) 1)))) NIL (GO G190) G191
                    (EXIT NIL))
-              (LETT |g| (QUOTIENT2 |g| 3))
+              (LETT |g| (|quotient_INT| |g| 3))
               (SEQ G190 (COND ((NULL (> |g| 0)) (GO G191)))
                    (SEQ
                     (SEQ (LETT |i| (+ |m| |g|)) (LETT #1# |n|) G190
@@ -166,14 +166,14 @@
                                      (EXIT (LETT |j| (- |j| |g|))))
                                     NIL (GO G190) G191 (EXIT NIL))))
                          (LETT |i| (+ |i| 1)) (GO G190) G191 (EXIT NIL))
-                    (EXIT (LETT |g| (QUOTIENT2 |g| 3))))
+                    (EXIT (LETT |g| (|quotient_INT| |g| 3))))
                    NIL (GO G190) G191 (EXIT NIL))
               (EXIT |r|)))) 
 
 (DECLAIM (NOTINLINE |FiniteLinearAggregateSort;|)) 
 
 (DEFUN |FiniteLinearAggregateSort| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

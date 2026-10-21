@@ -1,5 +1,5 @@
 
-(PUT '|MSYSCMD;systemCommand;SV;1| '|SPADreplace| '|doSystemCommand|) 
+(MAKEPROP '|MSYSCMD;systemCommand;SV;1| '|SPADreplace| '|doSystemCommand|) 
 
 (SDEFUN |MSYSCMD;systemCommand;SV;1| ((|cmd| (|String|)) (% (|Void|)))
         (|doSystemCommand| |cmd|)) 

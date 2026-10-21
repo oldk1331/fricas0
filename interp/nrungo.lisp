@@ -21,7 +21,7 @@
 ;   fn := compiledLookup(op,sig,dollar)
 ;
 ;   fn = nil =>
-;     keyedSystemError("S2NR0001",[op,formatSignature sig,dollar.0])
+;         report_bad_fun([op, formatSignature(sig), dollar.0])
 ;   fn
 
 (DEFUN |compiledLookupCheck| (|op| |sig| |dollar|)
@@ -31,7 +31,7 @@
       (SETQ |fn| (|compiledLookup| |op| |sig| |dollar|))
       (COND
        ((NULL |fn|)
-        (|keyedSystemError| 'S2NR0001
+        (|report_bad_fun|
          (LIST |op| (|formatSignature| |sig|) (ELT |dollar| 0))))
        ('T |fn|))))))
 
@@ -432,8 +432,7 @@
 ;   -- gives k boundary values, one general term plus possibly an
 ;   -- "out of domain" condition
 ;   pcl := [x for x in pcl | not (x is [''T,:mess] and
-;     (CONTAINED('throwMessage,mess) or
-;       CONTAINED('throwKeyedMsg,mess)))]
+;         CONTAINED('throw_msg, mess))]
 ;   integer := EVAL $Integer
 ;   iequalSlot := compiledLookupCheck("=", '((Boolean) % %), integer)
 ;   lt_slot := compiledLookupCheck("<", '((Boolean) % %), integer)
@@ -460,9 +459,11 @@
 ;   or/[null INTEGERP n for n in specialValues] => false
 ;   minIndex:= "MIN"/specialValues
 ;   not (and/[i=x for i in minIndex..(minIndex+n-1) for x in specialValues]) =>
-;     sayKeyedMsg("S2IX0005",
-;       ["append"/[['" ",sv]  for sv in specialValues]])
-;     return nil
+;         say_msg("S2IX0005", CONCAT(
+;             '"Recurrence relation must give consecutive special values.",
+;             '" Given values are: %l %1"),
+;             ["append"/[['" ",sv]  for sv in specialValues]])
+;         return nil
 ;
 ;   --Determine the order k of the recurrence and index n of first general term
 ;   k:= #specialValues
@@ -489,7 +490,9 @@
 ;           is_op_slot(lt_slot, dom, slot, minivectorName, integer, bf_vec) => m
 ;     return nil
 ;   INTEGERP predOk and predOk ~= n =>
-;     sayKeyedMsg("S2IX0006",[n,m])
+;     say_msg("S2IX0006",
+;       '"Wrong predicate for general term of recurrence: should be %1b not %2b",
+;       [n, m])
 ;     return nil
 ;
 ;   --Check general term for references to just the k previous values
@@ -536,8 +539,7 @@
                        (NULL
                         (AND (CONSP |x|) (EQUAL (CAR |x|) ''T)
                              (PROGN (SETQ |mess| (CDR |x|)) #1#)
-                             (OR (CONTAINED '|throwMessage| |mess|)
-                                 (CONTAINED '|throwKeyedMsg| |mess|))))
+                             (CONTAINED '|throw_msg| |mess|)))
                        (SETQ |bfVar#18| (CONS |x| |bfVar#18|)))))
                     (SETQ |bfVar#17| (CDR |bfVar#17|))))
                  NIL |pcl| NIL))
@@ -682,7 +684,10 @@
                      (SETQ |bfVar#27| (CDR |bfVar#27|))))
                   T (- (+ |minIndex| |n|) 1) |minIndex| |specialValues| NIL))
                 (PROGN
-                 (|sayKeyedMsg| 'S2IX0005
+                 (|say_msg| 'S2IX0005
+                  (CONCAT
+                   "Recurrence relation must give consecutive special values."
+                   " Given values are: %l %1")
                   (LIST
                    ((LAMBDA (|bfVar#30| |bfVar#29| |sv|)
                       (LOOP
@@ -955,7 +960,9 @@
                  (COND
                   ((AND (INTEGERP |predOk|) (NOT (EQUAL |predOk| |n|)))
                    (PROGN
-                    (|sayKeyedMsg| 'S2IX0006 (LIST |n| |m|))
+                    (|say_msg| 'S2IX0006
+                     "Wrong predicate for general term of recurrence: should be %1b not %2b"
+                     (LIST |n| |m|))
                     (RETURN NIL)))
                   (#1#
                    (PROGN

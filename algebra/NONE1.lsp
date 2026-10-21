@@ -1,12 +1,12 @@
 
-(PUT '|NONE1;coerce;SN;1| '|SPADreplace| '(XLAM (|s|) |s|)) 
+(MAKEPROP '|NONE1;coerce;SN;1| '|SPADreplace| '(XLAM (|s|) |s|)) 
 
 (SDEFUN |NONE1;coerce;SN;1| ((|s| (S)) (% (|None|))) |s|) 
 
 (DECLAIM (NOTINLINE |NoneFunctions1;|)) 
 
 (DEFUN |NoneFunctions1;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|NoneFunctions1| DV$1))

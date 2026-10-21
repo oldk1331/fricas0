@@ -1,5 +1,5 @@
 
-(PUT '|EXTRED;polynomial| '|SPADreplace| '(XLAM (|x|) (QVELT |x| 0))) 
+(MAKEPROP '|EXTRED;polynomial| '|SPADreplace| '(XLAM (|x|) (QVELT |x| 0))) 
 
 (SDEFUN |EXTRED;polynomial|
         ((|x|
@@ -7,7 +7,7 @@
          (% (R)))
         (QVELT |x| 0)) 
 
-(PUT '|EXTRED;representation| '|SPADreplace| '(XLAM (|x|) (QVELT |x| 1))) 
+(MAKEPROP '|EXTRED;representation| '|SPADreplace| '(XLAM (|x|) (QVELT |x| 1))) 
 
 (SDEFUN |EXTRED;representation|
         ((|x|
@@ -15,7 +15,7 @@
          (% (|Vector| R)))
         (QVELT |x| 1)) 
 
-(PUT '|EXTRED;multiplier| '|SPADreplace| '(XLAM (|x|) (QVELT |x| 2))) 
+(MAKEPROP '|EXTRED;multiplier| '|SPADreplace| '(XLAM (|x|) (QVELT |x| 2))) 
 
 (SDEFUN |EXTRED;multiplier|
         ((|x|
@@ -25,7 +25,7 @@
 
 (SDEFUN |EXTRED;cancelGcd|
         ((|c1| (C)) (|c2| (C)) (% (|Record| (|:| |co1| C) (|:| |co2| C))))
-        (SPROG ((#1=#:G13 NIL) (|g| (C)))
+        (SPROG ((|g| (C)) (#1=#:G16 NIL))
                (SEQ (LETT |g| (SPADCALL |c1| |c2| (QREFELT % 9)))
                     (EXIT
                      (CONS
@@ -60,14 +60,14 @@
          (%
           (|Record| (|:| |poly| R) (|:| |repr| (|Vector| R)) (|:| |mult| C))))
         (SPROG
-         ((#2=#:G33 NIL) (|bas| #1#) (|f2| (R)) (|f1| (C)) (|a| (C))
-          (|l| (|Record| (|:| |llcm_res| C) (|:| |coeff1| C) (|:| |coeff2| C)))
-          (|ee| (|Union| E "failed")) (|pb| (R))
-          (|b|
+         ((|z|
            (|Record| (|:| |poly| R) (|:| |repr| (|Vector| R)) (|:| |mult| C)))
           (|pz| (R))
-          (|z|
-           (|Record| (|:| |poly| R) (|:| |repr| (|Vector| R)) (|:| |mult| C))))
+          (|b|
+           (|Record| (|:| |poly| R) (|:| |repr| (|Vector| R)) (|:| |mult| C)))
+          (|pb| (R)) (|ee| (|Union| E "failed"))
+          (|l| (|Record| (|:| |llcm_res| C) (|:| |coeff1| C) (|:| |coeff2| C)))
+          (|a| (C)) (|f1| (C)) (|f2| (R)) (|bas| #1#) (#2=#:G38 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -138,7 +138,7 @@
                           (EXIT (LETT |bas| |basis|))))
                         ('T (LETT |bas| (CDR |bas|))))))
                  NIL (GO G190) G191 (EXIT NIL))
-            (EXIT (PROGN (LETT #2# |z|) (GO #3=#:G32)))))
+            (EXIT (PROGN (LETT #2# |z|) (GO #3=#:G37)))))
           #3# (EXIT #2#)))) 
 
 (SDEFUN |EXTRED;tailReduce|
@@ -149,7 +149,7 @@
            (|Record| (|:| |poly| R) (|:| |repr| (|Vector| R)) (|:| |mult| C))))
          (%
           (|Record| (|:| |poly| R) (|:| |repr| (|Vector| R)) (|:| |mult| C))))
-        (SPROG ((|r| (R)) (|m| (C)) (|p| (R)) (|v| (|Vector| R)))
+        (SPROG ((|v| (|Vector| R)) (|p| (R)) (|m| (C)) (|r| (R)))
                (SEQ
                 (COND ((NULL |basis|) |x|)
                       ('T
@@ -188,14 +188,14 @@
          (%
           (|Record| (|:| |poly| R) (|:| |repr| (|Vector| R)) (|:| |mult| C))))
         (SPROG
-         ((|x|
-           (|Record| (|:| |poly| R) (|:| |repr| (|Vector| R)) (|:| |mult| C)))
+         ((|n| (|NonNegativeInteger|)) (#1=#:G52 NIL) (|i| NIL) (#2=#:G54 NIL)
+          (|b| NIL) (#3=#:G53 NIL)
           (|bas|
            (|List|
             (|Record| (|:| |poly| R) (|:| |repr| (|Vector| R))
                       (|:| |mult| C))))
-          (#1=#:G48 NIL) (|b| NIL) (#2=#:G49 NIL) (|i| NIL) (#3=#:G47 NIL)
-          (|n| (|NonNegativeInteger|)))
+          (|x|
+           (|Record| (|:| |poly| R) (|:| |repr| (|Vector| R)) (|:| |mult| C))))
          (SEQ
           (COND
            ((NULL |basis|) (VECTOR |r| (MAKE-ARRAY 0) (|spadConstant| % 15)))
@@ -206,30 +206,30 @@
                                (|spadConstant| % 15)))
                  (LETT |bas|
                        (PROGN
-                        (LETT #3# NIL)
+                        (LETT #1# NIL)
                         (SEQ (LETT |i| 1) (LETT #2# |n|) (LETT |b| NIL)
-                             (LETT #1# |basis|) G190
+                             (LETT #3# |basis|) G190
                              (COND
-                              ((OR (ATOM #1#) (PROGN (LETT |b| (CAR #1#)) NIL)
+                              ((OR (ATOM #3#) (PROGN (LETT |b| (CAR #3#)) NIL)
                                    (|greater_SI| |i| #2#))
                                (GO G191)))
                              (SEQ
                               (EXIT
-                               (LETT #3#
+                               (LETT #1#
                                      (CONS
                                       (|EXTRED;embedBasisElement| |b| |i| |n|
                                        %)
-                                      #3#))))
-                             (LETT #1#
-                                   (PROG1 (CDR #1#) (LETT |i| (|inc_SI| |i|))))
-                             (GO G190) G191 (EXIT (NREVERSE #3#)))))
+                                      #1#))))
+                             (LETT #3#
+                                   (PROG1 (CDR #3#) (LETT |i| (|inc_SI| |i|))))
+                             (GO G190) G191 (EXIT (NREVERSE #1#)))))
                  (LETT |x| (|EXTRED;denominatorFreeTopReduce| |x| |bas| %))
                  (EXIT (|EXTRED;tailReduce| |x| |bas| %)))))))) 
 
 (DECLAIM (NOTINLINE |ExtendedPolynomialReduction;|)) 
 
 (DEFUN |ExtendedPolynomialReduction;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -247,9 +247,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |ExtendedPolynomialReduction| (&REST #1=#:G50)
+(DEFUN |ExtendedPolynomialReduction| (&REST #1=#:G55)
   (SPROG NIL
-         (PROG (#2=#:G51)
+         (PROG (#2=#:G56)
            (RETURN
             (COND
              ((LETT #2#
@@ -272,9 +272,9 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (0 . |gcd|) (|Union| % '"failed") (6 . |exquo|)
-              (12 . |Zero|) (16 . |Zero|) (20 . |Zero|) (24 . |One|)
-              (28 . |One|) (32 . -) (|Integer|) (|Vector| 8) (37 . |setelt!|)
-              (|Boolean|) (44 . |zero?|) (49 . |degree|) (54 . |subtractIfCan|)
+              (12 . |0|) (16 . |0|) (20 . |0|) (24 . |1|) (28 . |1|) (32 . -)
+              (|Integer|) (|Vector| 8) (37 . |setelt!|) (|Boolean|)
+              (44 . |zero?|) (49 . |degree|) (54 . |subtractIfCan|)
               (60 . |leadingCoefficient|)
               (|Record| (|:| |llcm_res| %) (|:| |coeff1| %) (|:| |coeff2| %))
               (65 . |lcmCoef|) (71 . |monomial|) (77 . |reductum|) (82 . *)

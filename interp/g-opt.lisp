@@ -308,10 +308,8 @@
 ; optSPADCALL(form is ['SPADCALL,:argl]) ==
 ;   null $InteractiveMode => form
 ;   -- last arg is function/env, but may be a form
-;   argl is [:argl,fun] =>
-;     fun is ['ELT,dom,slot] =>
-;       optCall ['call,['ELT,dom,slot],:argl]
-;     form
+;   argl is [:argl, fun] and fun is ['ELT, dom, slot] =>
+;       optCall(['call, ['ELT, dom, slot], :argl])
 ;   form
 
 (DEFUN |optSPADCALL| (|form|)
@@ -327,20 +325,17 @@
                    (SETQ |fun| (CAR |ISTMP#1|))
                    (SETQ |argl| (CDR |ISTMP#1|))
                    #1#)
-                  (PROGN (SETQ |argl| (NREVERSE |argl|)) #1#))
-             (COND
-              ((AND (CONSP |fun|) (EQ (CAR |fun|) 'ELT)
-                    (PROGN
-                     (SETQ |ISTMP#1| (CDR |fun|))
-                     (AND (CONSP |ISTMP#1|)
-                          (PROGN
-                           (SETQ |dom| (CAR |ISTMP#1|))
-                           (SETQ |ISTMP#2| (CDR |ISTMP#1|))
-                           (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
-                                (PROGN (SETQ |slot| (CAR |ISTMP#2|)) #1#))))))
-               (|optCall|
-                (CONS '|call| (CONS (LIST 'ELT |dom| |slot|) |argl|))))
-              (#1# |form|)))
+                  (PROGN (SETQ |argl| (NREVERSE |argl|)) #1#) (CONSP |fun|)
+                  (EQ (CAR |fun|) 'ELT)
+                  (PROGN
+                   (SETQ |ISTMP#1| (CDR |fun|))
+                   (AND (CONSP |ISTMP#1|)
+                        (PROGN
+                         (SETQ |dom| (CAR |ISTMP#1|))
+                         (SETQ |ISTMP#2| (CDR |ISTMP#1|))
+                         (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
+                              (PROGN (SETQ |slot| (CAR |ISTMP#2|)) #1#))))))
+             (|optCall| (CONS '|call| (CONS (LIST 'ELT |dom| |slot|) |argl|))))
             (#1# |form|))))))
 
 ; optCall (x is ["call",:u]) ==
@@ -507,8 +502,7 @@
 ;   yval := optCallEval y
 ;   CAAAR x="CONST" =>
 ;     IFCAR yval.n = function Undef =>
-;       keyedSystemError("S2GE0016",['"optSpecialCall",
-;         '"invalid constant"])
+;           unexpected_error(['"optSpecialCall", '"invalid constant"])
 ;     MKQ yval.n
 ;   fn := GETL(compileTimeBindingOf first yval.n,'SPADreplace) =>
 ;     rplac(rest x,CDAR x)
@@ -530,8 +524,7 @@
        ((EQ (CAAAR |x|) 'CONST)
         (COND
          ((EQUAL (IFCAR (ELT |yval| |n|)) #'|Undef|)
-          (|keyedSystemError| 'S2GE0016
-           (LIST "optSpecialCall" "invalid constant")))
+          (|unexpected_error| (LIST "optSpecialCall" "invalid constant")))
          (#1='T (MKQ (ELT |yval| |n|)))))
        ((SETQ |fn|
                 (GETL (|compileTimeBindingOf| (CAR (ELT |yval| |n|)))
@@ -554,8 +547,9 @@
          |x|)))))))
 
 ; compileTimeBindingOf u ==
-;   NULL(name:= BPINAME u)  => keyedSystemError("S2OO0001",[u])
-;   name="Undef" => MOAN '"optimiser found unknown function"
+;   NULL(name:= BPINAME u)  => system_error("S2OO0001",
+;       '"Irregular slot entry: %1s", [u])
+;   name = "Undef" => bright_warn(['"optimiser found unknown function"])
 ;   name
 
 (DEFUN |compileTimeBindingOf| (|u|)
@@ -563,8 +557,9 @@
     (RETURN
      (COND
       ((NULL (SETQ |name| (BPINAME |u|)))
-       (|keyedSystemError| 'S2OO0001 (LIST |u|)))
-      ((EQ |name| '|Undef|) (MOAN "optimiser found unknown function"))
+       (|system_error| 'S2OO0001 "Irregular slot entry: %1s" (LIST |u|)))
+      ((EQ |name| '|Undef|)
+       (|bright_warn| (LIST "optimiser found unknown function")))
       ('T |name|)))))
 
 ; optMkRecord ["mkRecord",:u] ==
@@ -1022,14 +1017,23 @@
        |a|)
       (#1# |l|)))))
 
+; record_error(ind) ==
+;     system_error("S2OO0002", '"Bad index in record optimization: %1b", [ind])
+
+(DEFUN |record_error| (|ind|)
+  (PROG ()
+    (RETURN
+     (|system_error| 'S2OO0002 "Bad index in record optimization: %1b"
+      (LIST |ind|)))))
+
 ; optRECORDELT ["RECORDELT",name,ind,len] ==
 ;   len=1 =>
 ;     ind=0 => ["QCAR",name]
-;     keyedSystemError("S2OO0002",[ind])
+;     record_error(ind)
 ;   len=2 =>
 ;     ind=0 => ["QCAR",name]
 ;     ind=1 => ["QCDR",name]
-;     keyedSystemError("S2OO0002",[ind])
+;     record_error(ind)
 ;   ["QVELT",name,ind]
 
 (DEFUN |optRECORDELT| (|bfVar#6|)
@@ -1042,21 +1046,21 @@
       (COND
        ((EQL |len| 1)
         (COND ((EQL |ind| 0) (LIST 'QCAR |name|))
-              (#2='T (|keyedSystemError| 'S2OO0002 (LIST |ind|)))))
+              (#2='T (|record_error| |ind|))))
        ((EQL |len| 2)
         (COND ((EQL |ind| 0) (LIST 'QCAR |name|))
               ((EQL |ind| 1) (LIST 'QCDR |name|))
-              (#2# (|keyedSystemError| 'S2OO0002 (LIST |ind|)))))
+              (#2# (|record_error| |ind|))))
        (#2# (LIST 'QVELT |name| |ind|)))))))
 
 ; optSETRECORDELT ["SETRECORDELT",name,ind,len,expr] ==
 ;   len=1 =>
 ;     ind=0 => ["PROGN",["RPLACA",name,expr],["QCAR",name]]
-;     keyedSystemError("S2OO0002",[ind])
+;     record_error(ind)
 ;   len=2 =>
 ;     ind=0 => ["PROGN",["RPLACA",name,expr],["QCAR",name]]
 ;     ind=1 => ["PROGN",["RPLACD",name,expr],["QCDR",name]]
-;     keyedSystemError("S2OO0002",[ind])
+;     record_error(ind)
 ;   ["QSETVELT",name,ind,expr]
 
 (DEFUN |optSETRECORDELT| (|bfVar#7|)
@@ -1072,14 +1076,14 @@
         (COND
          ((EQL |ind| 0)
           (LIST 'PROGN (LIST 'RPLACA |name| |expr|) (LIST 'QCAR |name|)))
-         (#2='T (|keyedSystemError| 'S2OO0002 (LIST |ind|)))))
+         (#2='T (|record_error| |ind|))))
        ((EQL |len| 2)
         (COND
          ((EQL |ind| 0)
           (LIST 'PROGN (LIST 'RPLACA |name| |expr|) (LIST 'QCAR |name|)))
          ((EQL |ind| 1)
           (LIST 'PROGN (LIST 'RPLACD |name| |expr|) (LIST 'QCDR |name|)))
-         (#2# (|keyedSystemError| 'S2OO0002 (LIST |ind|)))))
+         (#2# (|record_error| |ind|))))
        (#2# (LIST 'QSETVELT |name| |ind| |expr|)))))))
 
 ; optRECORDCOPY ["RECORDCOPY",name,len] ==

@@ -24,7 +24,7 @@
 (DECLAIM (NOTINLINE |StreamTensor;|)) 
 
 (DEFUN |StreamTensor;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|StreamTensor| DV$1))
@@ -38,9 +38,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |StreamTensor| (#1=#:G9)
+(DEFUN |StreamTensor| (#1=#:G11)
   (SPROG NIL
-         (PROG (#2=#:G10)
+         (PROG (#2=#:G12)
            (RETURN
             (COND
              ((LETT #2#

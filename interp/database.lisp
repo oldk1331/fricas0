@@ -270,14 +270,14 @@
           (SETQ |bfVar#10| (CDR |bfVar#10|))))
        |opAlist| NIL)))))
 
-; saveUsersHashTable() ==
+; saveUsersHashTable(usersTb) ==
 ;   erase_lib('"USERS.DAASE")
 ;   stream:= writeLib('"USERS.DAASE")
-;   for k in MSORT HKEYS $usersTb repeat
-;       kaf_write0(stream, k, HGET($usersTb, k))
+;   for k in MSORT(HKEYS(usersTb)) repeat
+;         kaf_write0(stream, k, HGET(usersTb, k))
 ;   kaf_close(stream)
 
-(DEFUN |saveUsersHashTable| ()
+(DEFUN |saveUsersHashTable| (|usersTb|)
   (PROG (|stream|)
     (RETURN
      (PROGN
@@ -288,19 +288,19 @@
           (COND
            ((OR (ATOM |bfVar#20|) (PROGN (SETQ |k| (CAR |bfVar#20|)) NIL))
             (RETURN NIL))
-           ('T (|kaf_write0| |stream| |k| (HGET |$usersTb| |k|))))
+           ('T (|kaf_write0| |stream| |k| (HGET |usersTb| |k|))))
           (SETQ |bfVar#20| (CDR |bfVar#20|))))
-       (MSORT (HKEYS |$usersTb|)) NIL)
+       (MSORT (HKEYS |usersTb|)) NIL)
       (|kaf_close| |stream|)))))
 
-; saveDependentsHashTable() ==
+; saveDependentsHashTable(depTb) ==
 ;   erase_lib('"DEPENDENTS.DAASE")
 ;   stream:= writeLib('"DEPENDENTS.DAASE")
-;   for k in MSORT HKEYS $depTb repeat
-;       kaf_write0(stream, k, HGET($depTb, k))
+;   for k in MSORT(HKEYS(depTb)) repeat
+;         kaf_write0(stream, k, HGET(depTb, k))
 ;   kaf_close(stream)
 
-(DEFUN |saveDependentsHashTable| ()
+(DEFUN |saveDependentsHashTable| (|depTb|)
   (PROG (|stream|)
     (RETURN
      (PROGN
@@ -311,59 +311,25 @@
           (COND
            ((OR (ATOM |bfVar#21|) (PROGN (SETQ |k| (CAR |bfVar#21|)) NIL))
             (RETURN NIL))
-           ('T (|kaf_write0| |stream| |k| (HGET |$depTb| |k|))))
+           ('T (|kaf_write0| |stream| |k| (HGET |depTb| |k|))))
           (SETQ |bfVar#21| (CDR |bfVar#21|))))
-       (MSORT (HKEYS |$depTb|)) NIL)
+       (MSORT (HKEYS |depTb|)) NIL)
       (|kaf_close| |stream|)))))
 
 ; save_browser_data() ==
-;     buildLibdb([])
-;     dbSplitLibdb()
-;     mkUsersHashTable()
-;     saveUsersHashTable()
-;     mkDependentsHashTable()
-;     saveDependentsHashTable()
+;     usersTb := mkUsersHashTable()
+;     saveUsersHashTable(usersTb)
+;     depTb := mkDependentsHashTable()
+;     saveDependentsHashTable(depTb)
 
 (DEFUN |save_browser_data| ()
-  (PROG ()
+  (PROG (|depTb| |usersTb|)
     (RETURN
      (PROGN
-      (|buildLibdb| NIL)
-      (|dbSplitLibdb|)
-      (|mkUsersHashTable|)
-      (|saveUsersHashTable|)
-      (|mkDependentsHashTable|)
-      (|saveDependentsHashTable|)))))
-
-; getUsersOfConstructor(con) ==
-;   stream := readLib('"USERS.DAASE")
-;   val := kaf_read_list(stream, con)
-;   kaf_close(stream)
-;   val
-
-(DEFUN |getUsersOfConstructor| (|con|)
-  (PROG (|stream| |val|)
-    (RETURN
-     (PROGN
-      (SETQ |stream| (|readLib| "USERS.DAASE"))
-      (SETQ |val| (|kaf_read_list| |stream| |con|))
-      (|kaf_close| |stream|)
-      |val|))))
-
-; getDependentsOfConstructor(con) ==
-;   stream := readLib('"DEPENDENTS.DAASE")
-;   val := kaf_read_list(stream, con)
-;   kaf_close(stream)
-;   val
-
-(DEFUN |getDependentsOfConstructor| (|con|)
-  (PROG (|stream| |val|)
-    (RETURN
-     (PROGN
-      (SETQ |stream| (|readLib| "DEPENDENTS.DAASE"))
-      (SETQ |val| (|kaf_read_list| |stream| |con|))
-      (|kaf_close| |stream|)
-      |val|))))
+      (SETQ |usersTb| (|mkUsersHashTable|))
+      (|saveUsersHashTable| |usersTb|)
+      (SETQ |depTb| (|mkDependentsHashTable|))
+      (|saveDependentsHashTable| |depTb|)))))
 
 ; orderPredicateItems(pred1,sig,skip) ==
 ;   pred:= signatureTran pred1
@@ -1155,8 +1121,8 @@
 ;                "arbitraryPrecision", "canonicalUnitNormal"]))_
 ;              => return opOf cat
 ;   null val =>
-;     keyedSystemError("S2GE0016",
-;       ['"getDomainFromMm",'"Can't find domain in modemap condition"])
+;         unexpected_error(['"getDomainFromMm",
+;                           '"Can't find domain in modemap condition"])
 ;   val
 
 (DEFUN |getDomainFromMm| (|mm|)
@@ -1227,7 +1193,7 @@
                |condList| NIL))
       (COND
        ((NULL |val|)
-        (|keyedSystemError| 'S2GE0016
+        (|unexpected_error|
          (LIST "getDomainFromMm" "Can't find domain in modemap condition")))
        (#1# |val|))))))
 
@@ -1441,15 +1407,14 @@
 ;               atomizeOp op ==
 ;                 atom op => op
 ;                 op is [a] => a
-;                 keyedSystemError("S2GE0016",
+;                 unexpected_error(
 ;                   ['"mkAlistOfExplicitCategoryOps",'"bad signature"])
 ;     opList:= REMDUP ASSOCLEFT u
 ;     [[x,:fn(x,u)] for x in opList] where
 ;       fn(op,u) ==
 ;         u is [[a,:b],:c] => (a=op => [b,:fn(op,c)]; fn(op,c))
 ;   isCategoryForm(target) => nil
-;   keyedSystemError("S2GE0016",
-;     ['"mkAlistOfExplicitCategoryOps",'"bad signature"])
+;   unexpected_error(['"mkAlistOfExplicitCategoryOps", '"bad signature"])
 
 (DEFUN |mkAlistOfExplicitCategoryOps| (|target|)
   (PROG (|ISTMP#1| |a| |l| |op| |ISTMP#2| |sig| |u| |opList|)
@@ -1528,7 +1493,7 @@
           NIL |opList| NIL)))
        ((|isCategoryForm| |target|) NIL)
        (#1#
-        (|keyedSystemError| 'S2GE0016
+        (|unexpected_error|
          (LIST "mkAlistOfExplicitCategoryOps" "bad signature"))))))))
 (DEFUN |mkAlistOfExplicitCategoryOps,fn| (|op| |u|)
   (PROG (|ISTMP#1| |a| |b| |c|)
@@ -1556,7 +1521,7 @@
                  (PROGN (SETQ |a| (CAR |op|)) #1='T))
             |a|)
            (#1#
-            (|keyedSystemError| 'S2GE0016
+            (|unexpected_error|
              (LIST "mkAlistOfExplicitCategoryOps" "bad signature")))))))
 
 ; flattenSignatureList(x) ==
@@ -1653,24 +1618,6 @@
       (COND
        ((|constructor?| |cname|)
         (COND ((GET |cname| 'LOADED) (|clearConstructorCaches|)))))))))
-
-; REMOVER(lst,item) ==
-;   --destructively removes item from lst
-;   not PAIRP lst =>
-;     lst=item => nil
-;     lst
-;   first lst=item => rest lst
-;   RPLNODE(lst,REMOVER(first lst,item),REMOVER(rest lst,item))
-
-(DEFUN REMOVER (|lst| |item|)
-  (PROG ()
-    (RETURN
-     (COND
-      ((NULL (CONSP |lst|)) (COND ((EQUAL |lst| |item|) NIL) (#1='T |lst|)))
-      ((EQUAL (CAR |lst|) |item|) (CDR |lst|))
-      (#1#
-       (RPLNODE |lst| (REMOVER (CAR |lst|) |item|)
-        (REMOVER (CDR |lst|) |item|)))))))
 
 ; allLASSOCs(op,alist) ==
 ;   [value for [key,:value] in alist | key = op]
@@ -1890,7 +1837,6 @@
 
 ; getOperationAlistFromLisplib x ==
 ;     u := get_database(x, 'OPERATIONALIST)
-;     --  u := removeZeroOneDestructively u
 ;     null u => u          -- this can happen for Object
 ;     CAAR u = '_$unique => rest u
 ;     f := addConsDB '(NIL T ELT)

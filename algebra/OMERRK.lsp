@@ -1,19 +1,22 @@
 
-(PUT '|OMERRK;OMParseError?;%B;1| '|SPADreplace| '(XLAM (|u|) (QEQCAR |u| 0))) 
+(MAKEPROP '|OMERRK;OMParseError?;%B;1| '|SPADreplace|
+          '(XLAM (|u|) (QEQCAR |u| 0))) 
 
 (SDEFUN |OMERRK;OMParseError?;%B;1| ((|u| (%)) (% (|Boolean|))) (QEQCAR |u| 0)) 
 
-(PUT '|OMERRK;OMUnknownCD?;%B;2| '|SPADreplace| '(XLAM (|u|) (QEQCAR |u| 1))) 
+(MAKEPROP '|OMERRK;OMUnknownCD?;%B;2| '|SPADreplace|
+          '(XLAM (|u|) (QEQCAR |u| 1))) 
 
 (SDEFUN |OMERRK;OMUnknownCD?;%B;2| ((|u| (%)) (% (|Boolean|))) (QEQCAR |u| 1)) 
 
-(PUT '|OMERRK;OMUnknownSymbol?;%B;3| '|SPADreplace|
-     '(XLAM (|u|) (QEQCAR |u| 2))) 
+(MAKEPROP '|OMERRK;OMUnknownSymbol?;%B;3| '|SPADreplace|
+          '(XLAM (|u|) (QEQCAR |u| 2))) 
 
 (SDEFUN |OMERRK;OMUnknownSymbol?;%B;3| ((|u| (%)) (% (|Boolean|)))
         (QEQCAR |u| 2)) 
 
-(PUT '|OMERRK;OMReadError?;%B;4| '|SPADreplace| '(XLAM (|u|) (QEQCAR |u| 3))) 
+(MAKEPROP '|OMERRK;OMReadError?;%B;4| '|SPADreplace|
+          '(XLAM (|u|) (QEQCAR |u| 3))) 
 
 (SDEFUN |OMERRK;OMReadError?;%B;4| ((|u| (%)) (% (|Boolean|))) (QEQCAR |u| 3)) 
 
@@ -54,7 +57,7 @@
 
 (DEFUN |OpenMathErrorKind| ()
   (SPROG NIL
-         (PROG (#1=#:G24)
+         (PROG (#1=#:G25)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OpenMathErrorKind|))

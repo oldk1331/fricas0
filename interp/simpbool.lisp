@@ -207,7 +207,7 @@
 ;   b = 'false => a
 ;   a = 'true or b = 'true => 'true
 ;   null a => b     --null list means false
-;   a is [c] = coafOrDnf(c,b)
+;   a is [c] => coafOrDnf(c,b)
 ;   coafOrDnf(first a,orDnf(rest a,b))
 
 (DEFUN |orDnf| (|a| |b|)
@@ -215,13 +215,10 @@
     (RETURN
      (COND ((EQ |a| '|false|) |b|) ((EQ |b| '|false|) |a|)
            ((OR (EQ |a| '|true|) (EQ |b| '|true|)) '|true|) ((NULL |a|) |b|)
-           (#1='T
-            (PROGN
-             (EQUAL
-              (AND (CONSP |a|) (EQ (CDR |a|) NIL)
-                   (PROGN (SETQ |c| (CAR |a|)) #1#))
-              (|coafOrDnf| |c| |b|))
-             (|coafOrDnf| (CAR |a|) (|orDnf| (CDR |a|) |b|))))))))
+           ((AND (CONSP |a|) (EQ (CDR |a|) NIL)
+                 (PROGN (SETQ |c| (CAR |a|)) #1='T))
+            (|coafOrDnf| |c| |b|))
+           (#1# (|coafOrDnf| (CAR |a|) (|orDnf| (CDR |a|) |b|)))))))
 
 ; andDnf(a,b) ==                  -- and: (dnf, dnf) -> dnf
 ;   a = 'true => b

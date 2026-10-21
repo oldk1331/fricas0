@@ -9,8 +9,8 @@
   (PROG () (RETURN (STRCONC "{}" |ind| "=" |a| "{}.." |b| "{}"))))
 
 ; bcIndefiniteIntegrate() ==
-;   htInitPage('"Indefinite Integration Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Indefinite Integration Basic Command", nil)
+;   ht_add_to_page(page, '(
 ;      (domainConditions
 ;        (isDomain EM $EmptyMode)
 ;        (isDomain S (String))
@@ -26,15 +26,15 @@
 ;      (text . "Enter the {\em variable of integration}:")
 ;      (text . "\tab{37}")
 ;      (bcStrings (10 x symbol SY))
-;      (doneButton "Continue" bcIndefiniteIntegrateGen))
-;   htShowPage()
+;      (doneButton "Continue" bcIndefiniteIntegrateGen)))
+;   htShowPage1(page)
 
 (DEFUN |bcIndefiniteIntegrate| ()
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Indefinite Integration Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Indefinite Integration Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| S (|String|)) (|isDomain| SY (|Symbol|)))
          (|text| . "\\newline ") (|text| . "\\menuitemstyle{}\\tab{2}")
@@ -46,7 +46,7 @@
          (|text| . "Enter the {\\em variable of integration}:")
          (|text| . "\\tab{37}") (|bcStrings| (10 |x| |symbol| SY))
          (|doneButton| "Continue" |bcIndefiniteIntegrateGen|)))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcIndefiniteIntegrateGen(htPage) ==
 ;     integrand := htpLabelInputString(htPage, 'integrand)
@@ -62,8 +62,8 @@
       (|bcGen| (STRCONC "integrate(" |integrand| "," |var| '|)|))))))
 
 ; bcDefiniteIntegrate() ==
-;   htInitPage('"Definite Integration Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Definite Integration Basic Command", nil)
+;   ht_add_to_page(page, '(
 ;      (domainConditions
 ;        (isDomain EM $EmptyMode)
 ;        (isDomain S (String))
@@ -87,7 +87,7 @@
 ;        ("" "Minus infinity" minusInfinity)
 ;        (""  (
 ;          (text . "A finite point:\tab{15}")
-;          (bcStrings (10 0 from EM . bcOptional))) fromPoint))
+;          (bcStrings (10 0 from EM))) fromPoint))
 ;      (text . "\blankline")
 ;      (text . "\newline ")
 ;      (text . "\menuitemstyle{}\tab{2}")
@@ -96,16 +96,16 @@
 ;        ("" "Plus infinity" plusInfinity)
 ;        ("" (
 ;          (text "A finite point:\tab{15}")
-;          (bcStrings (10 y to EM . bcOptional))) toPoint))
-;      (doneButton "Continue" bcDefiniteIntegrateGen))
-;   htShowPage()
+;          (bcStrings (10 y to EM))) toPoint))
+;      (doneButton "Continue" bcDefiniteIntegrateGen)))
+;   htShowPage1(page)
 
 (DEFUN |bcDefiniteIntegrate| ()
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Definite Integration Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Definite Integration Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| S (|String|)) (|isDomain| SY (|Symbol|)))
          (|text| . "\\newline ") (|text| . "\\menuitemstyle{}\\tab{2}")
@@ -122,18 +122,17 @@
          (|radioButtons| |fromButton| ("" "Minus infinity" |minusInfinity|)
           (""
            ((|text| . "A finite point:\\tab{15}")
-            (|bcStrings| (10 0 |from| EM . |bcOptional|)))
+            (|bcStrings| (10 0 |from| EM)))
            |fromPoint|))
          (|text| . "\\blankline") (|text| . "\\newline ")
          (|text| . "\\menuitemstyle{}\\tab{2}")
          (|text| . "\\indent{2}\\newline Enter {\\em upper limit}:")
          (|radioButtons| |toButton| ("" "Plus infinity" |plusInfinity|)
           (""
-           ((|text| "A finite point:\\tab{15}")
-            (|bcStrings| (10 |y| |to| EM . |bcOptional|)))
+           ((|text| "A finite point:\\tab{15}") (|bcStrings| (10 |y| |to| EM)))
            |toPoint|))
          (|doneButton| "Continue" |bcDefiniteIntegrateGen|)))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcDefiniteIntegrateGen(htPage) ==
 ;     integrand := htpLabelInputString(htPage, 'integrand)
@@ -169,8 +168,8 @@
       (|bcGen| (STRCONC "integrate(" |integrand| "," |varpart| ")"))))))
 
 ; bcSum() ==
-;   htInitPage('"Sum Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Sum Basic Command",nil)
+;   ht_add_to_page(page, '(
 ;     (domainConditions
 ;        (isDomain EM $EmptyMode)
 ;        (isDomain S (String))
@@ -195,15 +194,15 @@
 ;     (text . "\tab{32}{\em To:}")
 ;     (text . "\tab{36}")
 ;     (bcStrings (10  n  last S))
-;     (doneButton "Continue" bcSumGen))
-;   htShowPage()
+;     (doneButton "Continue" bcSumGen)))
+;   htShowPage1(page)
 
 (DEFUN |bcSum| ()
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Sum Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Sum Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| S (|String|)) (|isDomain| SY (|Symbol|)))
          (|text| . "\\newline ") (|text| . "\\menuitemstyle{}\\tab{2}")
@@ -219,7 +218,7 @@
          (|bcStrings| (10 1 |first| S)) (|text| . "\\tab{32}{\\em To:}")
          (|text| . "\\tab{36}") (|bcStrings| (10 |n| |last| S))
          (|doneButton| "Continue" |bcSumGen|)))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcSumGen(htPage) ==
 ;     mand := htpLabelInputString(htPage, 'summand)
@@ -241,8 +240,8 @@
        (STRCONC "sum(" |mand| "," |index| " = " CAR ".." |last| ")"))))))
 
 ; bcProduct() ==
-;   htInitPage('"Product Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Product Basic Command",nil)
+;   ht_add_to_page(page, '(
 ;     (domainConditions
 ;        (isDomain EM $EmptyMode)
 ;        (isDomain S (String))
@@ -255,15 +254,15 @@
 ;     (inputStrings
 ;       ("\newline{\em From:}" "" 10 "1" first  EM)
 ;       ("{\em To:}\space{2}" "" 10  "n" last   EM))
-;     (doneButton "Continue" bcProductGen))
-;   htShowPage()
+;     (doneButton "Continue" bcProductGen)))
+;   htShowPage1(page)
 
 (DEFUN |bcProduct| ()
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Product Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Product Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| S (|String|)) (|isDomain| SY (|Symbol|)))
          (|text|
@@ -276,7 +275,7 @@
          (|inputStrings| ("\\newline{\\em From:}" "" 10 "1" |first| EM)
           ("{\\em To:}\\space{2}" "" 10 "n" |last| EM))
          (|doneButton| "Continue" |bcProductGen|)))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcProductGen(htPage) ==
 ;     mand := htpLabelInputString(htPage, 'mand)
@@ -298,8 +297,8 @@
        (STRCONC "product(" |mand| "," |index| "," CAR "," |last| ")"))))))
 
 ; bcDifferentiate() ==
-;   htInitPage('"Differentiate Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Differentiate Basic Command", nil)
+;   ht_add_to_page(page, '(
 ;     (domainConditions
 ;        (isDomain EM $EmptyMode)
 ;        (isDomain S (String))
@@ -320,16 +319,16 @@
 ;     (text . "\menuitemstyle{}\tab{2}")
 ;     (text . "\newline List the number of {\em times} you want to differentiate with respect to each variable (leave blank if once for each):")
 ;     (text . "\newline\tab{2} ")
-;     (bcStrings (55 "1 2" times S . quoteString)))
-;   htMakeDoneButton('"Continue", 'bcDifferentiateGen)
-;   htShowPage()
+;     (bcStrings (55 "1 2" times S . quoteString))))
+;   htMakeDoneButton(page, '"Continue", 'bcDifferentiateGen)
+;   htShowPage1(page)
 
 (DEFUN |bcDifferentiate| ()
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Differentiate Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Differentiate Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| S (|String|)) (|isDomain| SY (|Symbol|)))
          (|text| . "\\newline ") (|text| . "\\menuitemstyle{}\\tab{2}")
@@ -347,8 +346,8 @@
           . "\\newline List the number of {\\em times} you want to differentiate with respect to each variable (leave blank if once for each):")
          (|text| . "\\newline\\tab{2} ")
          (|bcStrings| (55 "1 2" |times| S . |quoteString|))))
-      (|htMakeDoneButton| "Continue" '|bcDifferentiateGen|)
-      (|htShowPage|)))))
+      (|htMakeDoneButton| |page| "Continue" '|bcDifferentiateGen|)
+      (|htShowPage1| |page|)))))
 
 ; bcDifferentiateGen(htPage) ==
 ;     mand := htpLabelInputString(htPage, 'diffand)
@@ -393,55 +392,51 @@
       (|bcGen| (STRCONC "differentiate(" |mand| "," |varpart| |lastPart|))))))
 
 ; bcDraw() ==
-;   htInitPage('"Draw Basic Command", nil)
-;   bcHt '"What would you like to draw?"
-;   bcHt '"\newline\centerline{{\em Two Dimensional Plots}}\newline"
-;   bcHt '"\lispdownlink{A function of one variable}{(|bcDraw2Dfun|)}"
-;   bcHt '"\space{2}y = f(x)\newline"
-;   bcHt '"\lispdownlink{A parametrically defined curve}{(|bcDraw2Dpar|)}"
-;   bcHt '"\space{2}(x(t), y(t))\newline"
-;   bcHt '"\lispdownlink{A solution to a polynomial equation}{(|bcDraw2DSolve|)}"
-;   bcHt '"\space{2} p(x,y) = 0\newline"
-;   bcHt '"\vspace{1}\newline "
-;   bcHt '"\centerline{{\em Three Dimensional Surfaces}}\newline\newline"
-;   bcHt '"\lispdownlink{A function of two variables}{(|bcDraw3Dfun|)}"
-;   bcHt '"\space{2} z = f(x,y)\newline"
-;   bcHt '"\lispdownlink{A parametrically defined tube}{(|bcDraw3Dpar|)}"
-;   bcHt '"\space{2}(x(t), y(t), z(t))\newline"
-;   bcHt '"\lispdownlink{A parameterically defined surface}{(|bcDraw3Dpar1|)}"
-;   bcHt '"\space{2}(x(u,v), y(u,v), z(u,v))\newline"
-;   htShowPage()
+;   page := htInitPage('"Draw Basic Command", nil)
+;   ht_add_strings(page, ['"What would you like to draw?",
+;       '"\newline\centerline{{\em Two Dimensional Plots}}\newline",
+;       '"\lispdownlink{A function of one variable}{(|bcDraw2Dfun|)}",
+;       '"\space{2}y = f(x)\newline",
+;       '"\lispdownlink{A parametrically defined curve}{(|bcDraw2Dpar|)}",
+;       '"\space{2}(x(t), y(t))\newline",
+;       '"\lispdownlink{A solution to a polynomial equation}{(|bcDraw2DSolve|)}",
+;       '"\space{2} p(x,y) = 0\newline",
+;       '"\vspace{1}\newline ",
+;       '"\centerline{{\em Three Dimensional Surfaces}}\newline\newline",
+;       '"\lispdownlink{A function of two variables}{(|bcDraw3Dfun|)}",
+;       '"\space{2} z = f(x,y)\newline",
+;       '"\lispdownlink{A parametrically defined tube}{(|bcDraw3Dpar|)}",
+;       '"\space{2}(x(t), y(t), z(t))\newline",
+;       '"\lispdownlink{A parameterically defined surface}{(|bcDraw3Dpar1|)}",
+;       '"\space{2}(x(u,v), y(u,v), z(u,v))\newline"])
+;   htShowPage1(page)
 
 (DEFUN |bcDraw| ()
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Draw Basic Command" NIL)
-      (|bcHt| "What would you like to draw?")
-      (|bcHt| "\\newline\\centerline{{\\em Two Dimensional Plots}}\\newline")
-      (|bcHt| "\\lispdownlink{A function of one variable}{(|bcDraw2Dfun|)}")
-      (|bcHt| "\\space{2}y = f(x)\\newline")
-      (|bcHt|
-       "\\lispdownlink{A parametrically defined curve}{(|bcDraw2Dpar|)}")
-      (|bcHt| "\\space{2}(x(t), y(t))\\newline")
-      (|bcHt|
-       "\\lispdownlink{A solution to a polynomial equation}{(|bcDraw2DSolve|)}")
-      (|bcHt| "\\space{2} p(x,y) = 0\\newline")
-      (|bcHt| "\\vspace{1}\\newline ")
-      (|bcHt|
-       "\\centerline{{\\em Three Dimensional Surfaces}}\\newline\\newline")
-      (|bcHt| "\\lispdownlink{A function of two variables}{(|bcDraw3Dfun|)}")
-      (|bcHt| "\\space{2} z = f(x,y)\\newline")
-      (|bcHt| "\\lispdownlink{A parametrically defined tube}{(|bcDraw3Dpar|)}")
-      (|bcHt| "\\space{2}(x(t), y(t), z(t))\\newline")
-      (|bcHt|
-       "\\lispdownlink{A parameterically defined surface}{(|bcDraw3Dpar1|)}")
-      (|bcHt| "\\space{2}(x(u,v), y(u,v), z(u,v))\\newline")
-      (|htShowPage|)))))
+      (SETQ |page| (|htInitPage| "Draw Basic Command" NIL))
+      (|ht_add_strings| |page|
+       (LIST "What would you like to draw?"
+             "\\newline\\centerline{{\\em Two Dimensional Plots}}\\newline"
+             "\\lispdownlink{A function of one variable}{(|bcDraw2Dfun|)}"
+             "\\space{2}y = f(x)\\newline"
+             "\\lispdownlink{A parametrically defined curve}{(|bcDraw2Dpar|)}"
+             "\\space{2}(x(t), y(t))\\newline"
+             "\\lispdownlink{A solution to a polynomial equation}{(|bcDraw2DSolve|)}"
+             "\\space{2} p(x,y) = 0\\newline" "\\vspace{1}\\newline "
+             "\\centerline{{\\em Three Dimensional Surfaces}}\\newline\\newline"
+             "\\lispdownlink{A function of two variables}{(|bcDraw3Dfun|)}"
+             "\\space{2} z = f(x,y)\\newline"
+             "\\lispdownlink{A parametrically defined tube}{(|bcDraw3Dpar|)}"
+             "\\space{2}(x(t), y(t), z(t))\\newline"
+             "\\lispdownlink{A parameterically defined surface}{(|bcDraw3Dpar1|)}"
+             "\\space{2}(x(u,v), y(u,v), z(u,v))\\newline"))
+      (|htShowPage1| |page|)))))
 
 ; bcDraw2Dfun() ==
-;   htInitPage('"Draw Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Draw Basic Command", nil)
+;   ht_add_to_page(page, '(
 ;     (domainConditions
 ;        (isDomain EM $EmptyMode)
 ;        (isDomain F (Float))
@@ -469,15 +464,15 @@
 ;     (bcStrings (15 "y = x*cos(x)" title S))
 ;     (text . "\indent{0}")
 ;     (doneButton "Continue" bcDraw2DfunGen)
-;     (text . "{}"))
-;   htShowPage()
+;     (text . "{}")))
+;   htShowPage1(page)
 
 (DEFUN |bcDraw2Dfun| ()
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Draw Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Draw Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| F (|Float|)) (|isDomain| SY (|Symbol|)))
          (|text| "\\centerline{Drawing {\\em y = f(x)}}\\newline "
@@ -498,7 +493,7 @@
           "Optionally enter a {\\em title} for your curve:")
          (|bcStrings| (15 "y = x*cos(x)" |title| S)) (|text| . "\\indent{0}")
          (|doneButton| "Continue" |bcDraw2DfunGen|) (|text| . "{}")))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcDraw2DfunGen(htPage) ==
 ;     fun := htpLabelInputString(htPage, 'function)
@@ -531,8 +526,8 @@
        ('T (|bcFinish| "draw" |fun| (|bcDrawIt2| |ind| |from1| |to1|))))))))
 
 ; bcDraw2Dpar() ==
-;   htInitPage('"Draw Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Draw Basic Command", nil)
+;   ht_add_to_page(page, '(
 ;     (domainConditions
 ;        (isDomain EM $EmptyMode)
 ;        (isDomain F (Float))
@@ -559,15 +554,15 @@
 ;       "Optionally enter a {\em title} for your curve:")
 ;     (bcStrings (15 "Lissajous" title S))
 ;     (text . "\indent{0}")
-;     (doneButton "Continue" bcDraw2DparGen))
-;   htShowPage()
+;     (doneButton "Continue" bcDraw2DparGen)))
+;   htShowPage1(page)
 
 (DEFUN |bcDraw2Dpar| ()
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Draw Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Draw Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| F (|Float|)) (|isDomain| SY (|Symbol|)))
          (|text|
@@ -590,7 +585,7 @@
           "Optionally enter a {\\em title} for your curve:")
          (|bcStrings| (15 "Lissajous" |title| S)) (|text| . "\\indent{0}")
          (|doneButton| "Continue" |bcDraw2DparGen|)))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcDraw2DparGen(htPage) ==
 ;     fun1 := htpLabelInputString(htPage, 'function1)
@@ -626,8 +621,8 @@
         (|bcFinish| "draw" |curvePart| (|bcDrawIt2| |ind| |from1| |to1|))))))))
 
 ; bcDraw2DSolve() ==
-;   htInitPage('"Draw Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Draw Basic Command", nil)
+;   ht_add_to_page(page, '(
 ;     (domainConditions
 ;        (isDomain EM $EmptyMode)
 ;        (isDomain F (Float))
@@ -655,16 +650,16 @@
 ;       "\indent{0}\vspace{1}\newline\menuitemstyle{}\tab{2} "
 ;       "Optionally enter a {\em title} for your curve:")
 ;     (bcStrings (15 "" title S))
-;     (text . "\indent{0}"))
-;   htMakeDoneButton('"Continue", 'bcDraw2DSolveGen)
-;   htShowPage()
+;     (text . "\indent{0}")))
+;   htMakeDoneButton(page, '"Continue", 'bcDraw2DSolveGen)
+;   htShowPage1(page)
 
 (DEFUN |bcDraw2DSolve| ()
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Draw Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Draw Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| F (|Float|)) (|isDomain| SY (|Symbol|)))
          (|text|
@@ -686,8 +681,8 @@
          (|text| "\\indent{0}\\vspace{1}\\newline\\menuitemstyle{}\\tab{2} "
           "Optionally enter a {\\em title} for your curve:")
          (|bcStrings| (15 "" |title| S)) (|text| . "\\indent{0}")))
-      (|htMakeDoneButton| "Continue" '|bcDraw2DSolveGen|)
-      (|htShowPage|)))))
+      (|htMakeDoneButton| |page| "Continue" '|bcDraw2DSolveGen|)
+      (|htShowPage1| |page|)))))
 
 ; bcDraw2DSolveGen(htPage) ==
 ;     fun := htpLabelInputString(htPage, 'function)
@@ -733,8 +728,8 @@
          |clipPart|)))))))
 
 ; bcDraw3Dfun() ==
-;   htInitPage('"Three Dimensional Draw Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Three Dimensional Draw Basic Command", nil)
+;   ht_add_to_page(page, '(
 ;     (domainConditions
 ;        (isDomain EM $EmptyMode)
 ;        (isDomain F (Float))
@@ -767,15 +762,15 @@
 ;       "Optionally enter a {\em title} for your surface:")
 ;     (bcStrings (15 "" title S))
 ;     (text . "\indent{0}")
-;     (doneButton "Continue" bcDraw3DfunGen))
-;   htShowPage()
+;     (doneButton "Continue" bcDraw3DfunGen)))
+;   htShowPage1(page)
 
 (DEFUN |bcDraw3Dfun| ()
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Three Dimensional Draw Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Three Dimensional Draw Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| F (|Float|)) (|isDomain| SY (|Symbol|)))
          (|text| "\\centerline{Drawing {\\em z = f(x,y)}}\\newline "
@@ -800,7 +795,7 @@
           "Optionally enter a {\\em title} for your surface:")
          (|bcStrings| (15 "" |title| S)) (|text| . "\\indent{0}")
          (|doneButton| "Continue" |bcDraw3DfunGen|)))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcDraw3DfunGen(htPage) ==
 ;     fun := htpLabelInputString(htPage, 'function)
@@ -844,8 +839,8 @@
          (|bcDrawIt2| |ind2| |from2| |to2|))))))))
 
 ; bcDraw3Dpar() ==
-;   htInitPage('"Draw Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Draw Basic Command", nil)
+;   ht_add_to_page(page, '(
 ;     (domainConditions
 ;        (isDomain EM $EmptyMode)
 ;        (isDomain F (Float))
@@ -874,15 +869,15 @@
 ;       "Optionally enter a {\em title} for your surface:")
 ;     (bcStrings (15 "knot" title S))
 ;     (text . "\indent{0}")
-;     (doneButton "Continue" bcDraw3DparGen))
-;   htShowPage()
+;     (doneButton "Continue" bcDraw3DparGen)))
+;   htShowPage1(page)
 
 (DEFUN |bcDraw3Dpar| ()
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Draw Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Draw Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| F (|Float|)) (|isDomain| SY (|Symbol|)))
          (|text| "\\centerline{Drawing a parametrically defined curve:"
@@ -907,7 +902,7 @@
           "Optionally enter a {\\em title} for your surface:")
          (|bcStrings| (15 "knot" |title| S)) (|text| . "\\indent{0}")
          (|doneButton| "Continue" |bcDraw3DparGen|)))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcDraw3DparGen(htPage) ==
 ;     fun1 := htpLabelInputString(htPage, 'function1)
@@ -952,8 +947,8 @@
          |tubePart|)))))))
 
 ; bcDraw3Dpar1() ==
-;   htInitPage('"Draw Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Draw Basic Command", nil)
+;   ht_add_to_page(page, '(
 ;     (domainConditions
 ;        (isDomain EM $EmptyMode)
 ;        (isDomain F (Float))
@@ -992,16 +987,16 @@
 ;       "\indent{0}\newline\menuitemstyle{}\tab{2} "
 ;       "Optionally enter a {\em title} for your surface:")
 ;     (bcStrings (15 "surface" title S))
-;     (text . "\indent{0}"))
-;   htMakeDoneButton('"Continue", 'bcDraw3Dpar1Gen)
-;   htShowPage()
+;     (text . "\indent{0}")))
+;   htMakeDoneButton(page, '"Continue", 'bcDraw3Dpar1Gen)
+;   htShowPage1(page)
 
 (DEFUN |bcDraw3Dpar1| ()
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Draw Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Draw Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| F (|Float|)) (|isDomain| SY (|Symbol|)))
          (|text|
@@ -1029,8 +1024,8 @@
          (|text| "\\indent{0}\\newline\\menuitemstyle{}\\tab{2} "
           "Optionally enter a {\\em title} for your surface:")
          (|bcStrings| (15 "surface" |title| S)) (|text| . "\\indent{0}")))
-      (|htMakeDoneButton| "Continue" '|bcDraw3Dpar1Gen|)
-      (|htShowPage|)))))
+      (|htMakeDoneButton| |page| "Continue" '|bcDraw3Dpar1Gen|)
+      (|htShowPage1| |page|)))))
 
 ; bcDraw3Dpar1Gen(htPage) ==
 ;     fun1 := htpLabelInputString(htPage, 'function1)
@@ -1079,8 +1074,8 @@
        ('T (|bcFinish| "draw" |surfacePart| |r1| |r2|)))))))
 
 ; bcSeries() ==
-;   htInitPage('"Series Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Series Basic Command", nil)
+;   ht_add_to_page(page, '(
 ;     (domainConditions
 ;        (isDomain EM $EmptyMode)
 ;        (isDomain S (String))
@@ -1088,36 +1083,35 @@
 ;    (text .  "Create a series by: ")
 ;    (text . "\beginmenu")
 ;    (text . "\item ")
-;    (bcLinks ("\menuitemstyle{Expansion}" "" bcSeriesExpansion NILl))
+;    (bcLinks ("\menuitemstyle{Expansion}" "" bcSeriesExpansion NIL))
 ;    (text . "\tab{11}Expand a function in a series around a point")
 ;    (text . "\item ")
 ;    (bcLinks ("\menuitemstyle{Formula}"  "" bcSeriesByFormula NIL))
 ;    (text . "\tab{11}Give a formula for the {\em i}'th coefficient")
-;    (text . "\endmenu"))
-;   htShowPage()
+;    (text . "\endmenu")))
+;   htShowPage1(page)
 
 (DEFUN |bcSeries| ()
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Series Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Series Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| S (|String|)) (|isDomain| SY (|Symbol|)))
          (|text| . "Create a series by: ") (|text| . "\\beginmenu")
          (|text| . "\\item ")
-         (|bcLinks|
-          ("\\menuitemstyle{Expansion}" "" |bcSeriesExpansion| |NILl|))
+         (|bcLinks| ("\\menuitemstyle{Expansion}" "" |bcSeriesExpansion| NIL))
          (|text| . "\\tab{11}Expand a function in a series around a point")
          (|text| . "\\item ")
          (|bcLinks| ("\\menuitemstyle{Formula}" "" |bcSeriesByFormula| NIL))
          (|text| . "\\tab{11}Give a formula for the {\\em i}'th coefficient")
          (|text| . "\\endmenu")))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcSeriesExpansion(a, b) ==
-;   htInitPage('"Series Expansion Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Series Expansion Basic Command", nil)
+;   ht_add_to_page(page, '(
 ;     (domainConditions
 ;        (isDomain EM $EmptyMode)
 ;        (isDomain EEM (Expression $EmptyMode))
@@ -1139,16 +1133,16 @@
 ;     (text . "\menuitemstyle{}\tab{2}")
 ;     (text . "Enter the {\em point} about which you want to expand")
 ;     (text . "\tab{49}")
-;     (bcStrings (8 "\%pi/2" point EM)))
-;   htMakeDoneButton('"Continue", 'bcSeriesExpansionGen)
-;   htShowPage()
+;     (bcStrings (8 "\%pi/2" point EM))))
+;   htMakeDoneButton(page, '"Continue", 'bcSeriesExpansionGen)
+;   htShowPage1(page)
 
 (DEFUN |bcSeriesExpansion| (|a| |b|)
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Series Expansion Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Series Expansion Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| EEM (|Expression| |$EmptyMode|))
           (|isDomain| S (|String|)) (|isDomain| SY (|Symbol|)))
@@ -1165,8 +1159,8 @@
          (|text| . "\\menuitemstyle{}\\tab{2}")
          (|text| . "Enter the {\\em point} about which you want to expand")
          (|text| . "\\tab{49}") (|bcStrings| (8 "\\%pi/2" |point| EM))))
-      (|htMakeDoneButton| "Continue" '|bcSeriesExpansionGen|)
-      (|htShowPage|)))))
+      (|htMakeDoneButton| |page| "Continue" '|bcSeriesExpansionGen|)
+      (|htShowPage1| |page|)))))
 
 ; bcSeriesExpansionGen(htPage) ==
 ;     fun := htpLabelInputString(htPage, 'function)
@@ -1184,8 +1178,8 @@
       (|bcFinish| '|series| |fun| (STRCONC |var| " = " |point|))))))
 
 ; bcSeriesByFormula(a, b) ==
-;   htInitPage('"Power Series Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Power Series Basic Command", nil)
+;   ht_add_to_page(page, '(
 ;     (text . "Select the kind of power series you want to create:")
 ;     (text . "\beginmenu")
 ;     (text . "\item ")
@@ -1197,15 +1191,15 @@
 ;     (text . "\item ")
 ;     (bcLinks ("\menuitemstyle{Puiseux Series}" "" bcPuiseuxSeries puiseux))
 ;     (text . "\newline Series where the exponent ranges from an arbitrary {\em rational value} to plus infinity by an arbitrary {\em positive rational number} step size")
-;     (text . "\endmenu"))
-;   htShowPage()
+;     (text . "\endmenu")))
+;   htShowPage1(page)
 
 (DEFUN |bcSeriesByFormula| (|a| |b|)
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Power Series Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Power Series Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|text| . "Select the kind of power series you want to create:")
          (|text| . "\\beginmenu") (|text| . "\\item ")
          (|bcLinks|
@@ -1223,11 +1217,11 @@
          (|text|
           . "\\newline Series where the exponent ranges from an arbitrary {\\em rational value} to plus infinity by an arbitrary {\\em positive rational number} step size")
          (|text| . "\\endmenu")))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcTaylorSeries(a, b) ==
-;   htInitPage('"Taylor Series Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Taylor Series Basic Command", nil)
+;   ht_add_to_page(page, '(
 ;     (domainConditions
 ;        (isDomain EM $EmptyMode)
 ;        (isDomain EEM (Expression $EmptyMode))
@@ -1265,15 +1259,15 @@
 ;     (text . "Enter the {\em step size} (a positive integer)")
 ;     (text . "\tab{49}")
 ;     (bcStrings (8 "1" step PI))
-;     (doneButton "Continue" bcTaylorSeriesGen))
-;   htShowPage()
+;     (doneButton "Continue" bcTaylorSeriesGen)))
+;   htShowPage1(page)
 
 (DEFUN |bcTaylorSeries| (|a| |b|)
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Taylor Series Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Taylor Series Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| EEM (|Expression| |$EmptyMode|))
           (|isDomain| S (|String|)) (|isDomain| SY (|Symbol|)))
@@ -1302,15 +1296,11 @@
          (|text| . "Enter the {\\em step size} (a positive integer)")
          (|text| . "\\tab{49}") (|bcStrings| (8 "1" |step| PI))
          (|doneButton| "Continue" |bcTaylorSeriesGen|)))
-      (|htShowPage|)))))
-
-; bcSeriesByFormulaGen(htPage) == bcNotReady()
-
-(DEFUN |bcSeriesByFormulaGen| (|htPage|) (PROG () (RETURN (|bcNotReady|))))
+      (|htShowPage1| |page|)))))
 
 ; bcLaurentSeries(a, b) ==
-;   htInitPage('"Laurent Series Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Laurent Series Basic Command", nil)
+;   ht_add_to_page(page, '(
 ;     (domainConditions
 ;        (isDomain EM $EmptyMode)
 ;        (isDomain EEM (Expression $EmptyMode))
@@ -1350,15 +1340,15 @@
 ;     (text . "Enter the {\em step size} (a positive integer)")
 ;     (text . "\tab{49}")
 ;     (bcStrings (8 "1" step PI))
-;     (doneButton "Continue" bcLaurentSeriesGen))
-;   htShowPage()
+;     (doneButton "Continue" bcLaurentSeriesGen)))
+;   htShowPage1(page)
 
 (DEFUN |bcLaurentSeries| (|a| |b|)
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Laurent Series Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Laurent Series Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| EEM (|Expression| |$EmptyMode|))
           (|isDomain| S (|String|)) (|isDomain| I (|Integer|))
@@ -1388,18 +1378,18 @@
          (|text| . "Enter the {\\em step size} (a positive integer)")
          (|text| . "\\tab{49}") (|bcStrings| (8 "1" |step| PI))
          (|doneButton| "Continue" |bcLaurentSeriesGen|)))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcPuiseuxSeries(a, b) ==
-;   htInitPage('"Puiseux Series Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Puiseux Series Basic Command",nil)
+;   ht_add_to_page(page, '(
 ;     (domainConditions
 ;        (isDomain EM $EmptyMode)
 ;        (isDomain EEM (Expression $EmptyMode))
 ;        (isDomain S (String))
 ;        (isDomain I (Integer))
 ;        (isDomain PI (PositiveInteger))
-;        (isDOmain RN (Fraction (Integer)))
+;        (isDomain RN (Fraction (Integer)))
 ;        (isDomain SY (Symbol)))
 ;     (text . "\newline ")
 ;     (text . "\menuitemstyle{}\tab{2}")
@@ -1434,20 +1424,20 @@
 ;     (text . "Enter the {\em step size} (a positive rational number)")
 ;     (text . "\tab{51}")
 ;     (bcStrings (6 "2" step RN))
-;     (doneButton "Continue" bcPuiseuxSeriesGen))
-;   htShowPage()
+;     (doneButton "Continue" bcPuiseuxSeriesGen)))
+;   htShowPage1(page)
 
 (DEFUN |bcPuiseuxSeries| (|a| |b|)
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Puiseux Series Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Puiseux Series Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| EEM (|Expression| |$EmptyMode|))
           (|isDomain| S (|String|)) (|isDomain| I (|Integer|))
           (|isDomain| PI (|PositiveInteger|))
-          (|isDOmain| RN (|Fraction| (|Integer|))) (|isDomain| SY (|Symbol|)))
+          (|isDomain| RN (|Fraction| (|Integer|))) (|isDomain| SY (|Symbol|)))
          (|text| . "\\newline ") (|text| . "\\menuitemstyle{}\\tab{2}")
          (|text|
           . "Enter the {\\em formula} for the general coefficient of the series")
@@ -1476,7 +1466,7 @@
          (|text| . "Enter the {\\em step size} (a positive rational number)")
          (|text| . "\\tab{51}") (|bcStrings| (6 "2" |step| RN))
          (|doneButton| "Continue" |bcPuiseuxSeriesGen|)))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcTaylorSeriesGen(htPage) == bcSeriesGen(htPage)
 
@@ -1521,8 +1511,8 @@
        |minPart| |step|)))))
 
 ; bcLimit() ==
-;   htInitPage('"Limit Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Limit Basic Command", nil)
+;   ht_add_to_page(page, '(
 ;    (domainConditions
 ;        (isDomain EM $EmptyMode)
 ;        (isDomain S (String))
@@ -1542,15 +1532,15 @@
 ;    (text . "The limit as the variable approaches a {\em complex} value along any path in the complex plane")
 ;    (text . "\indentrel{-17}")
 ;    (text . "\endmenu")
-;     )
-;   htShowPage()
+;     ))
+;   htShowPage1(page)
 
 (DEFUN |bcLimit| ()
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Limit Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Limit Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| S (|String|)) (|isDomain| SY (|Symbol|)))
          (|text| . "What kind of limit do you want to compute? ")
@@ -1568,11 +1558,11 @@
          (|text|
           . "The limit as the variable approaches a {\\em complex} value along any path in the complex plane")
          (|text| . "\\indentrel{-17}") (|text| . "\\endmenu")))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcRealLimit(a, b) ==
-;   htInitPage('"Real Limit Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Real Limit Basic Command", nil)
+;   ht_add_to_page(page, '(
 ;     (domainConditions
 ;        (isDomain EM $EmptyMode)
 ;        (isDomain S (String))
@@ -1599,15 +1589,15 @@
 ;         (bcStrings (6 0 point F))) finitePoint)
 ;       ("Plus infinity" "" plusInfinity)
 ;       ("Minus infinity" "" minusInfinity))
-;     (doneButton "Continue" bcRealLimitGen))
-;   htShowPage()
+;     (doneButton "Continue" bcRealLimitGen)))
+;   htShowPage1(page)
 
 (DEFUN |bcRealLimit| (|a| |b|)
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Real Limit Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Real Limit Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| S (|String|)) (|isDomain| F (|Float|))
           (|isDomain| SY (|Symbol|)))
@@ -1630,7 +1620,7 @@
           ("Plus infinity" "" |plusInfinity|)
           ("Minus infinity" "" |minusInfinity|))
          (|doneButton| "Continue" |bcRealLimitGen|)))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcRealLimitGen(htPage) ==
 ;   (p := htpButtonValue(htPage, 'location)) ~= 'finitePoint =>
@@ -1641,16 +1631,16 @@
 ;       '"%minusInfinity"
 ;     bcFinish('"limit", fun, STRCONC(var, '" = ", loc))
 ;   page := htInitPage('"Real Limit Basic Command", nil)
-;   htMakePage '(
+;   ht_add_to_page(page, '(
 ;     (text . "Compute the limit")
 ;     (lispLinks
 ;        ("\menuitemstyle{From both directions}" "" bcRealLimitGen1 both)
 ;        ("\menuitemstyle{From the right}" "" bcRealLimitGen1 right)
-;        ("\menuitemstyle{From the left}" "" bcRealLimitGen1 left)))
+;        ("\menuitemstyle{From the left}" "" bcRealLimitGen1 left))))
 ;   htpSetProperty(page,'fun,htpLabelInputString(htPage,'expression))
 ;   htpSetProperty(page,'var,htpLabelInputString(htPage,'variable))
 ;   htpSetProperty(page,'loc,htpLabelInputString(htPage,'point))
-;   htShowPage()
+;   htShowPage1(page)
 
 (DEFUN |bcRealLimitGen| (|htPage|)
   (PROG (|p| |fun| |var| |loc| |page|)
@@ -1668,7 +1658,7 @@
       (#1#
        (PROGN
         (SETQ |page| (|htInitPage| "Real Limit Basic Command" NIL))
-        (|htMakePage|
+        (|ht_add_to_page| |page|
          '((|text| . "Compute the limit")
            (|lispLinks|
             ("\\menuitemstyle{From both directions}" "" |bcRealLimitGen1|
@@ -1681,7 +1671,7 @@
          (|htpLabelInputString| |htPage| '|variable|))
         (|htpSetProperty| |page| '|loc|
          (|htpLabelInputString| |htPage| '|point|))
-        (|htShowPage|)))))))
+        (|htShowPage1| |page|)))))))
 
 ; bcRealLimitGen1(htPage, key) ==
 ;     direction :=
@@ -1708,8 +1698,8 @@
       (|bcFinish| "limit" |fun| |varPart| |direction|)))))
 
 ; bcComplexLimit(a, b) ==
-;   htInitPage('"Complex Limit Basic Command", nil)
-;   htMakePage('(
+;   page := htInitPage('"Complex Limit Basic Command", nil)
+;   ht_add_to_page(page, '(
 ;     (domainConditions
 ;         (isDomain EM $EmptyMode)
 ;        (isDomain S (String))
@@ -1738,14 +1728,14 @@
 ;        (bcStrings (20 0 complex F))) finitePoint)
 ;       ("Complex infinity" "" complexInfinity))
 ;      (doneButton "Continue" bcComplexLimitGen)))
-;   htShowPage()
+;   htShowPage1(page)
 
 (DEFUN |bcComplexLimit| (|a| |b|)
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Complex Limit Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Complex Limit Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| EM |$EmptyMode|)
           (|isDomain| S (|String|)) (|isDomain| F (|Float|))
           (|isDomain| SY (|Symbol|)))
@@ -1769,7 +1759,7 @@
            |finitePoint|)
           ("Complex infinity" "" |complexInfinity|))
          (|doneButton| "Continue" |bcComplexLimitGen|)))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcComplexLimitGen(htPage) ==
 ;     fun := htpLabelInputString(htPage, 'expression)

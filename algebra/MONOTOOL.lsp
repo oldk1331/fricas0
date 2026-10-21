@@ -8,8 +8,8 @@
         ((|p| (UP)) (|derivation| (|Mapping| UP UP))
          (% (|Record| (|:| |normal| UP) (|:| |special| UP))))
         (SPROG
-         ((|rec| (|Record| (|:| |normal| UP) (|:| |special| UP)))
-          (#1=#:G10 NIL) (|pbar| (UP)) (|g| (UP)) (|difp| (UP)) (|derp| (UP)))
+         ((|derp| (UP)) (|difp| (UP)) (|g| (UP)) (|pbar| (UP)) (#1=#:G15 NIL)
+          (|rec| (|Record| (|:| |normal| UP) (|:| |special| UP))))
          (SEQ (LETT |derp| (SPADCALL |p| |derivation|))
               (LETT |difp| (SPADCALL |p| (QREFELT % 14)))
               (EXIT
@@ -66,15 +66,15 @@
           (|Record| (|:| |normal| (|Factored| UP))
                     (|:| |special| (|Factored| UP)))))
         (SPROG
-         ((|n| #1=(|Factored| UP)) (|h| (UP)) (#2=#:G23 NIL) (|s| #1#)
-          (|g| (UP)) (|r| (UP)) (#3=#:G30 NIL) (|rec| NIL)
-          (|q| (|Factored| UP)))
+         ((|q| (|Factored| UP)) (|rec| NIL) (#1=#:G44 NIL) (|r| (UP))
+          (|g| (UP)) (|s| #2=(|Factored| UP)) (#3=#:G37 NIL) (|h| (UP))
+          (|n| #2#))
          (SEQ (LETT |s| (|spadConstant| % 26)) (LETT |n| |s|)
               (LETT |q| (SPADCALL |p| (QREFELT % 28)))
-              (SEQ (LETT |rec| NIL) (LETT #3# (SPADCALL |q| (QREFELT % 32)))
+              (SEQ (LETT |rec| NIL) (LETT #1# (SPADCALL |q| (QREFELT % 32)))
                    G190
                    (COND
-                    ((OR (ATOM #3#) (PROGN (LETT |rec| (CAR #3#)) NIL))
+                    ((OR (ATOM #1#) (PROGN (LETT |rec| (CAR #1#)) NIL))
                      (GO G191)))
                    (SEQ (LETT |r| (QVELT |rec| 1))
                         (LETT |g|
@@ -89,12 +89,12 @@
                                           (QREFELT % 35)))))
                         (LETT |h|
                               (PROG2
-                                  (LETT #2# (SPADCALL |r| |g| (QREFELT % 23)))
-                                  (QCDR #2#)
-                                (|check_union2| (QEQCAR #2# 0) (QREFELT % 7)
+                                  (LETT #3# (SPADCALL |r| |g| (QREFELT % 23)))
+                                  (QCDR #3#)
+                                (|check_union2| (QEQCAR #3# 0) (QREFELT % 7)
                                                 (|Union| (QREFELT % 7)
                                                          "failed")
-                                                #2#)))
+                                                #3#)))
                         (EXIT
                          (COND
                           ((NULL (SPADCALL |h| (QREFELT % 33)))
@@ -103,7 +103,7 @@
                                            (SPADCALL |h| (QVELT |rec| 2)
                                                      (QREFELT % 34))
                                            (QREFELT % 35)))))))
-                   (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
+                   (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
               (EXIT
                (CONS |n|
                      (SPADCALL (SPADCALL |q| (QREFELT % 36)) |s|
@@ -115,9 +115,9 @@
           (|Record| (|:| |poly| UP) (|:| |normal| (|Fraction| UP))
                     (|:| |special| (|Fraction| UP)))))
         (SPROG
-         ((|eeu| (|Record| (|:| |coef1| UP) (|:| |coef2| UP))) (#1=#:G37 NIL)
+         ((|qr| (|Record| (|:| |quotient| UP) (|:| |remainder| UP)))
           (|rec| (|Record| (|:| |normal| UP) (|:| |special| UP)))
-          (|qr| (|Record| (|:| |quotient| UP) (|:| |remainder| UP))))
+          (#1=#:G56 NIL) (|eeu| (|Record| (|:| |coef1| UP) (|:| |coef2| UP))))
          (SEQ
           (LETT |qr|
                 (SPADCALL (SPADCALL |f| (QREFELT % 40))
@@ -147,7 +147,7 @@
 (DECLAIM (NOTINLINE |MonomialExtensionTools;|)) 
 
 (DEFUN |MonomialExtensionTools;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -163,9 +163,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |MonomialExtensionTools| (&REST #1=#:G42)
+(DEFUN |MonomialExtensionTools| (&REST #1=#:G61)
   (SPROG NIL
-         (PROG (#2=#:G43)
+         (PROG (#2=#:G62)
            (RETURN
             (COND
              ((LETT #2#
@@ -188,10 +188,10 @@
               (|Fraction| 7) (0 . |denom|)
               (|Record| (|:| |normal| 7) (|:| |special| 7)) (|Mapping| 7 7)
               |MONOTOOL;split;UPMR;2| |MONOTOOL;normalDenom;FMUP;1|
-              (5 . |differentiate|) (|Boolean|) (10 . =) (16 . |One|)
-              (20 . |One|) (24 . |gcd|) (|NonNegativeInteger|) (30 . |degree|)
+              (5 . |differentiate|) (|Boolean|) (10 . =) (16 . |1|) (20 . |1|)
+              (24 . |gcd|) (|NonNegativeInteger|) (30 . |degree|)
               (|Union| % '"failed") (35 . |exquo|) (41 . *) (|Factored| 7)
-              (47 . |One|) (|Factored| %) (51 . |squareFree|)
+              (47 . |1|) (|Factored| %) (51 . |squareFree|)
               (|Union| '"nil" '"sqfr" '"irred" '"prime")
               (|Record| (|:| |flag| 29) (|:| |factor| 7) (|:| |exponent| 20))
               (|List| 30) (56 . |factorList|) (61 . |ground?|)

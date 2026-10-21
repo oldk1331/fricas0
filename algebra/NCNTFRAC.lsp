@@ -30,7 +30,7 @@
 
 (SDEFUN |NCNTFRAC;continuedFraction;FCf;2|
         ((|a| (F)) (% (|ContinuedFraction| (|Integer|))))
-        (SPROG ((|b| (F)) (|aa| (|Integer|)))
+        (SPROG ((|aa| (|Integer|)) (|b| (F)))
                (SEQ (LETT |aa| (SPADCALL |a| (QREFELT % 8)))
                     (EXIT
                      (COND
@@ -59,7 +59,7 @@
 (DECLAIM (NOTINLINE |NumericContinuedFraction;|)) 
 
 (DEFUN |NumericContinuedFraction;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|NumericContinuedFraction| DV$1))
@@ -73,9 +73,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |NumericContinuedFraction| (#1=#:G13)
+(DEFUN |NumericContinuedFraction| (#1=#:G14)
   (SPROG NIL
-         (PROG (#2=#:G14)
+         (PROG (#2=#:G15)
            (RETURN
             (COND
              ((LETT #2#
@@ -98,8 +98,8 @@
               (0 . |wholePart|) (5 . |coerce|) (10 . -) (|Boolean|)
               (16 . |zero?|) (|Stream| 7) (21 . |empty|) (25 . |concat|)
               (31 . |inv|) (|Mapping| %) (36 . |delay|) (|ContinuedFraction| 7)
-              (41 . |reducedContinuedFraction|) (47 . |negative?|) (52 . |One|)
-              (56 . |One|) (60 . +) |NCNTFRAC;continuedFraction;FCf;2|)
+              (41 . |reducedContinuedFraction|) (47 . |negative?|) (52 . |1|)
+              (56 . |1|) (60 . +) |NCNTFRAC;continuedFraction;FCf;2|)
            '#(|continuedFraction| 66) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

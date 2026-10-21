@@ -4,8 +4,8 @@
          (|s| (|SegmentBinding| (|Fraction| (|Polynomial| R))))
          (% (|Union| (|Fraction| (|Polynomial| R)) (|Expression| R))))
         (SPROG
-         ((|indef| (|Union| (|Fraction| (|Polynomial| R)) "failed"))
-          (|v| (|Symbol|)))
+         ((|v| (|Symbol|))
+          (|indef| (|Union| (|Fraction| (|Polynomial| R)) "failed")))
          (SEQ
           (LETT |indef|
                 (|SUMRF;innersum| |f| (LETT |v| (SPADCALL |s| (QREFELT % 9)))
@@ -48,7 +48,7 @@
 (SDEFUN |SUMRF;sum;PSbF;3|
         ((|p| (|Polynomial| R)) (|s| (|SegmentBinding| (|Polynomial| R)))
          (% (|Fraction| (|Polynomial| R))))
-        (SPROG ((|f| (|Fraction| (|Polynomial| R))) (|v| (|Symbol|)))
+        (SPROG ((|v| (|Symbol|)) (|f| (|Fraction| (|Polynomial| R))))
                (SEQ
                 (LETT |f|
                       (SPADCALL |p| (LETT |v| (SPADCALL |s| (QREFELT % 34)))
@@ -75,9 +75,9 @@
         ((|an| (|Fraction| (|Polynomial| R))) (|n| (|Symbol|))
          (% (|Union| (|Fraction| (|Polynomial| R)) "failed")))
         (SPROG
-         ((|u| (|Union| (|Fraction| (|Polynomial| R)) "failed"))
+         ((|r| (|Union| (|Polynomial| R) "failed"))
           (|an1| (|Fraction| (|Polynomial| R)))
-          (|r| (|Union| (|Polynomial| R) "failed")))
+          (|u| (|Union| (|Fraction| (|Polynomial| R)) "failed")))
          (SEQ (LETT |r| (SPADCALL |an| (QREFELT % 46)))
               (EXIT
                (COND
@@ -125,7 +125,7 @@
 (DECLAIM (NOTINLINE |RationalFunctionSum;|)) 
 
 (DEFUN |RationalFunctionSum;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RationalFunctionSum| DV$1))
@@ -139,9 +139,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |RationalFunctionSum| (#1=#:G33)
+(DEFUN |RationalFunctionSum| (#1=#:G42)
   (SPROG NIL
-         (PROG (#2=#:G34)
+         (PROG (#2=#:G43)
            (RETURN
             (COND
              ((LETT #2#
@@ -162,12 +162,12 @@
               (|SegmentBinding| 10) (0 . |variable|) (|Fraction| 35)
               (|Expression| 6) (5 . |coerce|) (|SegmentBinding| 11)
               (|Mapping| 11 10) (|SegmentBindingFunctions2| 10 11) (10 . |map|)
-              (|SegmentBinding| %) (16 . |summation|) (22 . |One|) (26 . |One|)
+              (|SegmentBinding| %) (16 . |summation|) (22 . |1|) (26 . |1|)
               (|Segment| 10) (30 . |segment|) (35 . |high|) (40 . +)
               (|RationalFunction| 6) (46 . |eval|) (53 . |low|) (58 . -)
               (|Union| 10 11) |SUMRF;sum;FSbU;1| (64 . |summation|)
               |SUMRF;sum;FSU;2| (|SegmentBinding| 35) (70 . |variable|)
-              (|Polynomial| 6) |SUMRF;sum;PSF;5| (75 . |One|) (|Segment| 35)
+              (|Polynomial| 6) |SUMRF;sum;PSF;5| (75 . |1|) (|Segment| 35)
               (79 . |segment|) (84 . |high|) (89 . +) (95 . |coerce|)
               (100 . |low|) |SUMRF;sum;PSbF;3| (|Union| 35 '"failed")
               (105 . |retractIfCan|) (110 . -) (115 . |coerce|) (120 . /)

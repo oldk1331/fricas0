@@ -6,13 +6,13 @@
                     (|:| |logpart| (|Fraction| UP))
                     (|:| |specpart| (|Fraction| UP)) (|:| |polypart| UP))))
         (SPROG
-         ((|qr| (|Record| (|:| |quotient| UP) (|:| |remainder| UP)))
+         ((|rec|
+           (|Record| (|:| |poly| UP) (|:| |normal| (|Fraction| UP))
+                     (|:| |special| (|Fraction| UP))))
           (|hi|
            (|Record| (|:| |answer| (|Fraction| UP)) (|:| |lognum| UP)
                      (|:| |logden| UP)))
-          (|rec|
-           (|Record| (|:| |poly| UP) (|:| |normal| (|Fraction| UP))
-                     (|:| |special| (|Fraction| UP)))))
+          (|qr| (|Record| (|:| |quotient| UP) (|:| |remainder| UP))))
          (SEQ (LETT |rec| (SPADCALL |f| |derivation| (QREFELT % 12)))
               (LETT |hi|
                     (|INTHERTR;normalHermiteIntegrate| (QVELT |rec| 1)
@@ -40,18 +40,18 @@
           (|Record| (|:| |answer| (|Fraction| UP)) (|:| |lognum| UP)
                     (|:| |logden| UP))))
         (SPROG
-         ((|mult| (UP)) (|p| (UP)) (|a| (UP)) (#1=#:G14 NIL) (|qr_rem| (UP))
+         ((|q| (UP)) (|g0| (UP)) (|qhat| (UP)) (|qbar| (UP)) (|g| (UP))
+          (|qbarhat| (UP)) (|qtil| (UP)) (#1=#:G29 NIL)
+          (|bc| (|Record| (|:| |coef1| UP) (|:| |coef2| UP)))
           (|qr| (|Record| (|:| |quotient| UP) (|:| |remainder| UP)))
-          (|bc| (|Record| (|:| |coef1| UP) (|:| |coef2| UP))) (#2=#:G19 NIL)
-          (|qtil| (UP)) (|qbarhat| (UP)) (|g| (UP)) (|qbar| (UP)) (|qhat| (UP))
-          (|g0| (UP)) (|q| (UP)))
+          (|qr_rem| (UP)) (#2=#:G20 NIL) (|a| (UP)) (|p| (UP)) (|mult| (UP)))
          (SEQ (LETT |a| (SPADCALL |f| (QREFELT % 22)))
               (LETT |q| (SPADCALL |f| (QREFELT % 23)))
               (LETT |p| (|spadConstant| % 20))
               (LETT |mult| (|spadConstant| % 24))
               (LETT |qhat|
                     (PROG2
-                        (LETT #1#
+                        (LETT #2#
                               (SPADCALL |q|
                                         (LETT |g0|
                                               (LETT |g|
@@ -61,10 +61,10 @@
                                                                          % 25))
                                                               (QREFELT % 26))))
                                         (QREFELT % 28)))
-                        (QCDR #1#)
-                      (|check_union2| (QEQCAR #1# 0) (QREFELT % 7)
+                        (QCDR #2#)
+                      (|check_union2| (QEQCAR #2# 0) (QREFELT % 7)
                                       (|Union| (QREFELT % 7) #3="failed")
-                                      #1#)))
+                                      #2#)))
               (SEQ G190
                    (COND
                     ((NULL (> (SPADCALL (LETT |qbar| |g|) (QREFELT % 30)) 0))
@@ -72,7 +72,7 @@
                    (SEQ
                     (LETT |qbarhat|
                           (PROG2
-                              (LETT #1#
+                              (LETT #2#
                                     (SPADCALL |qbar|
                                               (LETT |g|
                                                     (SPADCALL |qbar|
@@ -81,29 +81,29 @@
                                                                          % 25))
                                                               (QREFELT % 26)))
                                               (QREFELT % 28)))
-                              (QCDR #1#)
-                            (|check_union2| (QEQCAR #1# 0) (QREFELT % 7)
-                                            (|Union| (QREFELT % 7) #3#) #1#)))
+                              (QCDR #2#)
+                            (|check_union2| (QEQCAR #2# 0) (QREFELT % 7)
+                                            (|Union| (QREFELT % 7) #3#) #2#)))
                     (LETT |qtil|
                           (SPADCALL
                            (PROG2
-                               (LETT #1#
+                               (LETT #2#
                                      (SPADCALL
                                       (SPADCALL |qhat|
                                                 (SPADCALL |qbar| |derivation|)
                                                 (QREFELT % 31))
                                       |qbar| (QREFELT % 28)))
-                               (QCDR #1#)
-                             (|check_union2| (QEQCAR #1# 0) (QREFELT % 7)
-                                             (|Union| (QREFELT % 7) #3#) #1#))
+                               (QCDR #2#)
+                             (|check_union2| (QEQCAR #2# 0) (QREFELT % 7)
+                                             (|Union| (QREFELT % 7) #3#) #2#))
                            (QREFELT % 32)))
                     (LETT |bc|
                           (PROG2
-                              (LETT #2#
+                              (LETT #1#
                                     (SPADCALL |qtil| |qbarhat| |a|
                                               (QREFELT % 35)))
-                              (QCDR #2#)
-                            (|check_union2| (QEQCAR #2# 0)
+                              (QCDR #1#)
+                            (|check_union2| (QEQCAR #1# 0)
                                             (|Record|
                                              (|:| |coef1| (QREFELT % 7))
                                              (|:| |coef2| (QREFELT % 7)))
@@ -112,7 +112,7 @@
                                               (|:| |coef1| (QREFELT % 7))
                                               (|:| |coef2| (QREFELT % 7)))
                                              "failed")
-                                            #2#)))
+                                            #1#)))
                     (LETT |qr| (SPADCALL (QCAR |bc|) |qbarhat| (QREFELT % 14)))
                     (LETT |qr_rem| (QCDR |qr|))
                     (LETT |a|
@@ -126,12 +126,12 @@
                                       (SPADCALL |d0| |qr_rem| (QREFELT % 31))
                                       (QREFELT % 16))
                             (PROG2
-                                (LETT #1#
+                                (LETT #2#
                                       (SPADCALL |qhat| |qbarhat|
                                                 (QREFELT % 28)))
-                                (QCDR #1#)
-                              (|check_union2| (QEQCAR #1# 0) (QREFELT % 7)
-                                              (|Union| (QREFELT % 7) #3#) #1#))
+                                (QCDR #2#)
+                              (|check_union2| (QEQCAR #2# 0) (QREFELT % 7)
+                                              (|Union| (QREFELT % 7) #3#) #2#))
                             (QREFELT % 31))
                            (QREFELT % 36)))
                     (LETT |p|
@@ -146,7 +146,7 @@
 (DECLAIM (NOTINLINE |TranscendentalHermiteIntegration;|)) 
 
 (DEFUN |TranscendentalHermiteIntegration;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -162,9 +162,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |TranscendentalHermiteIntegration| (&REST #1=#:G26)
+(DEFUN |TranscendentalHermiteIntegration| (&REST #1=#:G36)
   (SPROG NIL
-         (PROG (#2=#:G27)
+         (PROG (#2=#:G37)
            (RETURN
             (COND
              ((LETT #2#
@@ -194,9 +194,9 @@
               (12 . /) (18 . +)
               (|Record| (|:| |answer| 9) (|:| |logpart| 9) (|:| |specpart| 9)
                         (|:| |polypart| 7))
-              |INTHERTR;HermiteIntegrate;FMUPR;1| (24 . |Zero|) (28 . |Zero|)
+              |INTHERTR;HermiteIntegrate;FMUPR;1| (24 . |0|) (28 . |0|)
               |INTHERTR;HermiteIntegrate;FMR;2| (32 . |numer|) (37 . |denom|)
-              (42 . |One|) (46 . |differentiate|) (51 . |gcd|)
+              (42 . |1|) (46 . |differentiate|) (51 . |gcd|)
               (|Union| % '"failed") (57 . |exquo|) (|NonNegativeInteger|)
               (63 . |degree|) (68 . *) (74 . -)
               (|Record| (|:| |coef1| %) (|:| |coef2| %)) (|Union| 33 '"failed")

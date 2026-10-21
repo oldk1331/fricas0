@@ -24,7 +24,7 @@
 (SDEFUN |FST;coerce;%S;4| ((|t| (%)) (% (|Symbol|)))
         (COND ((QEQCAR |t| 0) '|real|) ((QEQCAR |t| 1) '|integer|)
               ((QEQCAR |t| 2) '|complex|) ((QEQCAR |t| 3) '|character|)
-              ((QEQCAR |t| 5) (QREFELT % 7)) ((QEQCAR |t| 5) (QREFELT % 9))
+              ((QEQCAR |t| 5) (QREFELT % 7)) ((QEQCAR |t| 6) (QREFELT % 9))
               ('T '|logical|))) 
 
 (SDEFUN |FST;coerce;S%;5| ((|s| (|Symbol|)) (% (%)))
@@ -66,31 +66,32 @@
         (SPADCALL (SPADCALL (SPADCALL |t| (QREFELT % 17)) (QREFELT % 26))
                   (QREFELT % 27))) 
 
-(PUT '|FST;real?;%B;8| '|SPADreplace| '(XLAM (|t|) (QEQCAR |t| 0))) 
+(MAKEPROP '|FST;real?;%B;8| '|SPADreplace| '(XLAM (|t|) (QEQCAR |t| 0))) 
 
 (SDEFUN |FST;real?;%B;8| ((|t| (%)) (% (|Boolean|))) (QEQCAR |t| 0)) 
 
-(PUT '|FST;double?;%B;9| '|SPADreplace| '(XLAM (|t|) (QEQCAR |t| 5))) 
+(MAKEPROP '|FST;double?;%B;9| '|SPADreplace| '(XLAM (|t|) (QEQCAR |t| 5))) 
 
 (SDEFUN |FST;double?;%B;9| ((|t| (%)) (% (|Boolean|))) (QEQCAR |t| 5)) 
 
-(PUT '|FST;logical?;%B;10| '|SPADreplace| '(XLAM (|t|) (QEQCAR |t| 4))) 
+(MAKEPROP '|FST;logical?;%B;10| '|SPADreplace| '(XLAM (|t|) (QEQCAR |t| 4))) 
 
 (SDEFUN |FST;logical?;%B;10| ((|t| (%)) (% (|Boolean|))) (QEQCAR |t| 4)) 
 
-(PUT '|FST;integer?;%B;11| '|SPADreplace| '(XLAM (|t|) (QEQCAR |t| 1))) 
+(MAKEPROP '|FST;integer?;%B;11| '|SPADreplace| '(XLAM (|t|) (QEQCAR |t| 1))) 
 
 (SDEFUN |FST;integer?;%B;11| ((|t| (%)) (% (|Boolean|))) (QEQCAR |t| 1)) 
 
-(PUT '|FST;character?;%B;12| '|SPADreplace| '(XLAM (|t|) (QEQCAR |t| 3))) 
+(MAKEPROP '|FST;character?;%B;12| '|SPADreplace| '(XLAM (|t|) (QEQCAR |t| 3))) 
 
 (SDEFUN |FST;character?;%B;12| ((|t| (%)) (% (|Boolean|))) (QEQCAR |t| 3)) 
 
-(PUT '|FST;complex?;%B;13| '|SPADreplace| '(XLAM (|t|) (QEQCAR |t| 2))) 
+(MAKEPROP '|FST;complex?;%B;13| '|SPADreplace| '(XLAM (|t|) (QEQCAR |t| 2))) 
 
 (SDEFUN |FST;complex?;%B;13| ((|t| (%)) (% (|Boolean|))) (QEQCAR |t| 2)) 
 
-(PUT '|FST;doubleComplex?;%B;14| '|SPADreplace| '(XLAM (|t|) (QEQCAR |t| 6))) 
+(MAKEPROP '|FST;doubleComplex?;%B;14| '|SPADreplace|
+          '(XLAM (|t|) (QEQCAR |t| 6))) 
 
 (SDEFUN |FST;doubleComplex?;%B;14| ((|t| (%)) (% (|Boolean|))) (QEQCAR |t| 6)) 
 
@@ -122,7 +123,7 @@
 
 (DEFUN |FortranScalarType| ()
   (SPROG NIL
-         (PROG (#1=#:G57)
+         (PROG (#1=#:G58)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|FortranScalarType|))

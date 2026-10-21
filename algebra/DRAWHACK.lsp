@@ -7,7 +7,7 @@
 (DECLAIM (NOTINLINE |DrawNumericHack;|)) 
 
 (DEFUN |DrawNumericHack;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|DrawNumericHack| DV$1))
@@ -21,9 +21,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |DrawNumericHack| (#1=#:G2)
+(DEFUN |DrawNumericHack| (#1=#:G3)
   (SPROG NIL
-         (PROG (#2=#:G3)
+         (PROG (#2=#:G4)
            (RETURN
             (COND
              ((LETT #2#

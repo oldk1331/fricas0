@@ -40,32 +40,32 @@
 (SDEFUN |UDPO;less?;2SU;7|
         ((|a| (S)) (|b| (S)) (% (|Union| (|Boolean|) "failed")))
         (SPROG
-         ((|bb| #1=(|Boolean|)) (#2=#:G39 NIL) (|aa| #1#) (#3=#:G41 NIL)
-          (|x| NIL) (#4=#:G40 NIL))
+         ((#1=#:G43 NIL) (|x| NIL) (#2=#:G44 NIL) (|aa| #3=(|Boolean|))
+          (#4=#:G42 NIL) (|bb| #3#))
          (SEQ
           (EXIT
            (SEQ
-            (SEQ (LETT |x| NIL) (LETT #4# (QREFELT % 7)) G190
+            (SEQ (LETT |x| NIL) (LETT #1# (QREFELT % 7)) G190
                  (COND
-                  ((OR (ATOM #4#) (PROGN (LETT |x| (CAR #4#)) NIL)) (GO G191)))
+                  ((OR (ATOM #1#) (PROGN (LETT |x| (CAR #1#)) NIL)) (GO G191)))
                  (SEQ
                   (EXIT
                    (COND
                     ((SPADCALL |x| |a| (QREFELT % 24))
                      (PROGN
-                      (LETT #2# (CONS 0 (SPADCALL |a| |b| (QREFELT % 25))))
-                      (GO #5=#:G38)))
+                      (LETT #4# (CONS 0 (SPADCALL |a| |b| (QREFELT % 25))))
+                      (GO #5=#:G41)))
                     ((SPADCALL |x| |b| (QREFELT % 24))
-                     (PROGN (LETT #2# (CONS 0 NIL)) (GO #5#))))))
-                 (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT NIL))
+                     (PROGN (LETT #4# (CONS 0 NIL)) (GO #5#))))))
+                 (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
             (LETT |aa| (LETT |bb| 'NIL))
-            (SEQ (LETT |x| NIL) (LETT #3# (QREFELT % 8)) G190
+            (SEQ (LETT |x| NIL) (LETT #2# (QREFELT % 8)) G190
                  (COND
-                  ((OR (ATOM #3#) (PROGN (LETT |x| (CAR #3#)) NIL)) (GO G191)))
+                  ((OR (ATOM #2#) (PROGN (LETT |x| (CAR #2#)) NIL)) (GO G191)))
                  (SEQ
                   (COND
                    ((SPADCALL |x| |a| (QREFELT % 24))
-                    (COND (|bb| (PROGN (LETT #2# (CONS 0 NIL)) (GO #5#)))
+                    (COND (|bb| (PROGN (LETT #4# (CONS 0 NIL)) (GO #5#)))
                           ('T (LETT |aa| 'T)))))
                   (EXIT
                    (COND
@@ -73,14 +73,14 @@
                      (COND
                       (|aa|
                        (PROGN
-                        (LETT #2# (CONS 0 (SPADCALL |a| |b| (QREFELT % 25))))
+                        (LETT #4# (CONS 0 (SPADCALL |a| |b| (QREFELT % 25))))
                         (GO #5#)))
                       ('T (LETT |bb| 'T)))))))
-                 (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
+                 (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
             (EXIT
              (COND (|aa| (CONS 0 NIL)) (|bb| (CONS 0 'T))
                    ('T (CONS 1 "failed"))))))
-          #5# (EXIT #2#)))) 
+          #5# (EXIT #4#)))) 
 
 (SDEFUN |UDPO;more?;2SB;8| ((|a| (S)) (|b| (S)) (% (|Boolean|)))
         (NULL (SPADCALL |a| |b| (ELT % 26) (QREFELT % 22)))) 
@@ -91,7 +91,7 @@
 (DECLAIM (NOTINLINE |UserDefinedPartialOrdering;|)) 
 
 (DEFUN |UserDefinedPartialOrdering;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|UserDefinedPartialOrdering| DV$1))
@@ -118,9 +118,9 @@
                        (CONS (|dispatchFunction| |UDPO;largest;LS;9|) %)))))
           %))) 
 
-(DEFUN |UserDefinedPartialOrdering| (#1=#:G45)
+(DEFUN |UserDefinedPartialOrdering| (#1=#:G48)
   (SPROG NIL
-         (PROG (#2=#:G46)
+         (PROG (#2=#:G49)
            (RETURN
             (COND
              ((LETT #2#

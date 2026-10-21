@@ -3,18 +3,18 @@
         ((|f| (|Factored| R)) (|func| (|Mapping| #1=(|Factored| R) R))
          (% (|Factored| R)))
         (SPROG
-         ((|l|
+         ((|item| NIL) (#2=#:G24 NIL) (|fitem| #1#) (|u| (R)) (#3=#:G25 NIL)
+          (|v| NIL) (#4=#:G26 NIL)
+          (|l|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
                       (|:| |factor| R)
-                      (|:| |exponent| (|NonNegativeInteger|)))))
-          (#2=#:G19 NIL) (|v| NIL) (#3=#:G18 NIL) (|u| (R)) (|fitem| #1#)
-          (#4=#:G17 NIL) (|item| NIL))
+                      (|:| |exponent| (|NonNegativeInteger|))))))
          (SEQ (LETT |u| (SPADCALL |f| (QREFELT % 8))) (LETT |l| NIL)
-              (SEQ (LETT |item| NIL) (LETT #4# (SPADCALL |f| (QREFELT % 12)))
+              (SEQ (LETT |item| NIL) (LETT #2# (SPADCALL |f| (QREFELT % 12)))
                    G190
                    (COND
-                    ((OR (ATOM #4#) (PROGN (LETT |item| (CAR #4#)) NIL))
+                    ((OR (ATOM #2#) (PROGN (LETT |item| (CAR #2#)) NIL))
                      (GO G191)))
                    (SEQ (LETT |fitem| (SPADCALL (QVELT |item| 1) |func|))
                         (LETT |u|
@@ -35,13 +35,13 @@
                                   (PROGN
                                    (LETT #3# NIL)
                                    (SEQ (LETT |v| NIL)
-                                        (LETT #2#
+                                        (LETT #4#
                                               (SPADCALL |fitem|
                                                         (QREFELT % 12)))
                                         G190
                                         (COND
-                                         ((OR (ATOM #2#)
-                                              (PROGN (LETT |v| (CAR #2#)) NIL))
+                                         ((OR (ATOM #4#)
+                                              (PROGN (LETT |v| (CAR #4#)) NIL))
                                           (GO G191)))
                                         (SEQ
                                          (EXIT
@@ -52,16 +52,16 @@
                                                          (* (QVELT |v| 2)
                                                             (QVELT |item| 2)))
                                                  #3#))))
-                                        (LETT #2# (CDR #2#)) (GO G190) G191
+                                        (LETT #4# (CDR #4#)) (GO G190) G191
                                         (EXIT (NREVERSE #3#))))
                                   |l| (QREFELT % 17)))))))
-                   (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT NIL))
+                   (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
               (EXIT (SPADCALL |u| |l| (QREFELT % 18)))))) 
 
 (DECLAIM (NOTINLINE |FactoredFunctionUtilities;|)) 
 
 (DEFUN |FactoredFunctionUtilities;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|FactoredFunctionUtilities| DV$1))
@@ -75,9 +75,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |FactoredFunctionUtilities| (#1=#:G20)
+(DEFUN |FactoredFunctionUtilities| (#1=#:G27)
   (SPROG NIL
-         (PROG (#2=#:G21)
+         (PROG (#2=#:G28)
            (RETURN
             (COND
              ((LETT #2#

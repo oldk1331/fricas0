@@ -316,27 +316,37 @@
           (SETQ |bfVar#1| (CDR |bfVar#1|))))
        |lines| NIL)))))
 
-; parseAndEvalToString str ==
-;   $collectOutput:local := true
-;   $outputLines: local := nil
-;   $IOindex: local := nil
-;   v := CATCH('SPAD_READER, CATCH('top_level, parseAndEvalStr str))
-;   v = 'restart => ['"error"]
-;   NREVERSE $outputLines
+; parseAndEvalBlockToHypertex str ==
+;     lines := parseAndEvalBlockToStringEqNum(str)
+;     len := LENGTH lines
+;     sockSendInt($MenuServer, len)
+;     for s in lines repeat
+;         sockSendString($MenuServer, s)
 
-(DEFUN |parseAndEvalToString| (|str|)
-  (PROG (|$IOindex| |$outputLines| |$collectOutput| |v|)
-    (DECLARE (SPECIAL |$IOindex| |$outputLines| |$collectOutput|))
+(DEFUN |parseAndEvalBlockToHypertex| (|str|)
+  (PROG (|lines| |len|)
     (RETURN
      (PROGN
-      (SETQ |$collectOutput| T)
-      (SETQ |$outputLines| NIL)
-      (SETQ |$IOindex| NIL)
-      (SETQ |v|
-              (CATCH 'SPAD_READER
-                (CATCH '|top_level| (|parseAndEvalStr| |str|))))
-      (COND ((EQ |v| '|restart|) (LIST "error"))
-            ('T (NREVERSE |$outputLines|)))))))
+      (SETQ |lines| (|parseAndEvalBlockToStringEqNum| |str|))
+      (SETQ |len| (LENGTH |lines|))
+      (|sockSendInt| |$MenuServer| |len|)
+      ((LAMBDA (|bfVar#2| |s|)
+         (LOOP
+          (COND
+           ((OR (ATOM |bfVar#2|) (PROGN (SETQ |s| (CAR |bfVar#2|)) NIL))
+            (RETURN NIL))
+           ('T (|sockSendString| |$MenuServer| |s|)))
+          (SETQ |bfVar#2| (CDR |bfVar#2|))))
+       |lines| NIL)))))
+
+; parseAndEvalToString str ==
+;     $IOindex: local := nil
+;     parseAndEvalToStringEqNum(str)
+
+(DEFUN |parseAndEvalToString| (|str|)
+  (PROG (|$IOindex|)
+    (DECLARE (SPECIAL |$IOindex|))
+    (RETURN (PROGN (SETQ |$IOindex| NIL) (|parseAndEvalToStringEqNum| |str|)))))
 
 ; parseAndEvalToStringEqNum str ==
 ;   $collectOutput:local := true
@@ -358,16 +368,25 @@
       (COND ((EQ |v| '|restart|) (LIST "error"))
             ('T (NREVERSE |$outputLines|)))))))
 
-; parseAndInterpToString str ==
-;   v := applyWithOutputToString('parseAndEvalStr, [str])
-;   breakIntoLines rest v
+; parseAndEvalBlockToStringEqNum str ==
+;     $collectOutput:local := true
+;     $outputLines: local := nil
+;     v := CATCH('SPAD_READER, CATCH('top_level, interpret_block str))
+;     v = 'restart => ['"error"]
+;     NREVERSE $outputLines
 
-(DEFUN |parseAndInterpToString| (|str|)
-  (PROG (|v|)
+(DEFUN |parseAndEvalBlockToStringEqNum| (|str|)
+  (PROG (|$outputLines| |$collectOutput| |v|)
+    (DECLARE (SPECIAL |$outputLines| |$collectOutput|))
     (RETURN
      (PROGN
-      (SETQ |v| (|applyWithOutputToString| '|parseAndEvalStr| (LIST |str|)))
-      (|breakIntoLines| (CDR |v|))))))
+      (SETQ |$collectOutput| T)
+      (SETQ |$outputLines| NIL)
+      (SETQ |v|
+              (CATCH 'SPAD_READER
+                (CATCH '|top_level| (|interpret_block| |str|))))
+      (COND ((EQ |v| '|restart|) (LIST "error"))
+            ('T (NREVERSE |$outputLines|)))))))
 
 ; parseAndEvalStr string ==
 ;   $InteractiveMode :fluid := true
@@ -402,6 +421,16 @@
         (SETQ |sform| (|ncParseFromString1| |string|))
         (SETQ |$QuietCommand| |$QuietCommand_tmp|)
         (|processInteractive| |sform| NIL)))))))
+
+; DEFCONSTANT($SpadError, 90)
+
+(DEFCONSTANT |$SpadError| 90)
+
+; sendHTErrorSignal() ==
+;     sockSendInt($MenuServer, $SpadError)
+
+(DEFUN |sendHTErrorSignal| ()
+  (PROG () (RETURN (|sockSendInt| |$MenuServer| |$SpadError|))))
 
 ; protectedEVAL x ==
 ;   error := true

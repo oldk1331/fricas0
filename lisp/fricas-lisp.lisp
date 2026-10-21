@@ -1,4 +1,4 @@
-;;; This file contains portablity and support routines which abstract away
+;;; This file contains portability and support routines which abstract away
 ;;; differences between Lisp dialects.
 
 #+gcl
@@ -43,7 +43,6 @@
   (setq extensions:*intexp-maximum-exponent* (- most-positive-fixnum 64))
   (setf *read-default-float-format* 'double-float))
 
-#-:sbcl
 (eval-when (:execute :load-toplevel)
     (set-initial-parameters))
 
@@ -240,54 +239,11 @@ with this hack and will try to convince the GCL crowd to fix this.
   (ignore-errors (delete-file file))
 )
 
-;;; Chdir function
-
-#+:GCL
-(defun CHDIR (dir)
- (system::chdir dir))
-
-#+:cmu
-(defun CHDIR (dir)
- (let ((tdir (probe-file dir)))
-  (cond
-    (tdir
-       (unix::unix-chdir dir)
-       (setq *default-pathname-defaults* tdir))
-     (t nil))))
-
-#+:sbcl
-(eval-when (:execute :compile-toplevel :load-toplevel)
-    (require :sb-posix))
-#+:sbcl
-(defun CHDIR (dir)
- (let ((tdir (probe-file dir)))
-  (cond
-    (tdir
-       #-:win32 (sb-posix::chdir tdir)
-       (setq *default-pathname-defaults* tdir))
-     (t nil))))
-
-#+(and :clisp (or :unix :win32))
-(defun CHDIR (dir)
- (ext::cd dir))
-
-#+:openmcl
-(defun CHDIR (dir)
-  (ccl::%chdir dir))
-
-#+:ecl
-(defun CHDIR (dir)
-   (SI:CHDIR (|pad_directory_name| dir) t))
-
-#+:lispworks
-(defun CHDIR (dir)
-  (hcl:change-directory dir))
-
 ;;; Environment access
 
 (defun |getEnv| (var-name)
   #+:GCL (system::getenv var-name)
-  #+:cmu (cdr (ext::assq (intern var-name "KEYWORD" )  ext:*environment-list*))
+  #+:cmu (cdr (assoc (intern var-name "KEYWORD") ext:*environment-list*))
   #+:sbcl (sb-ext::posix-getenv var-name)
   #+:clisp (ext::getenv var-name)
   #+:openmcl (ccl::getenv var-name)
@@ -610,10 +566,13 @@ with this hack and will try to convince the GCL crowd to fix this.
 
 (foreign-defs
 
-(fricas-foreign-call |writeablep| "writeablep" int
-        (filename c-string))
+(fricas-foreign-call |writablep| "writablep" int
+        (filename c-string)
+        (need_dir int))
 
-#+:fricas_has_remove_directory
+(fricas-foreign-call |makedir| "makedir" int
+        (arg c-string))
+
 (fricas-foreign-call |remove_directory| "remove_directory" int
         (dir_name c-string))
 
@@ -680,41 +639,52 @@ with this hack and will try to convince the GCL crowd to fix this.
 )
 
 #+(and :clisp :ffi)
-(defun |sockGetStringFrom| (purpose)
-    (ffi:with-foreign-object (buf '(ffi:c-array-max ffi:character 10000))
-        (sock_get_string_buf purpose buf 10000)
-        (ffi:foreign-value buf)))
+(defun |sockGetStringFrom0| (purpose)
+  (let ((ret nil))
+    (ffi:with-foreign-object (buf '(ffi:c-array-max ffi:character 2048))
+        (setq ret (sock_get_string_buf purpose buf 2048))
+        (values ret (ffi:foreign-value buf)))))
 
 #+:openmcl
-(defun |sockGetStringFrom| (purpose)
-    (ccl:%stack-block ((buf 10000))
-        (sock_get_string_buf purpose buf 10000)
-        (ccl:%get-cstring buf)))
+(defun |sockGetStringFrom0| (purpose)
+  (let ((ret nil))
+    (ccl:%stack-block ((buf 2048))
+        (setq ret (sock_get_string_buf purpose buf 2048))
+        (values ret (ccl:%get-cstring buf)))))
 
 #+:cmu
-(defun |sockGetStringFrom| (purpose)
-    (alien:with-alien ((buf (alien:array c-call:char 10000)))
-        (sock_get_string_buf purpose (alien:addr (alien:deref buf 0)) 10000)
-        (alien:cast buf c-call:c-string)))
+(defun |sockGetStringFrom0| (purpose)
+  (let ((ret nil))
+    (alien:with-alien ((buf (alien:array c-call:char 2048)))
+        (setq ret (sock_get_string_buf purpose (alien:addr (alien:deref buf 0)) 2048))
+        (values ret (alien:cast buf c-call:c-string)))))
 
 #+:sbcl
-(defun |sockGetStringFrom| (purpose)
-  (sb-alien:with-alien ((buf (sb-alien:array sb-alien:char 10000)))
-    (sock_get_string_buf purpose (sb-alien:addr (sb-alien:deref buf 0)) 10000)
-    (sb-alien:cast buf sb-alien:c-string)))
+(defun |sockGetStringFrom0| (purpose)
+  (let ((ret nil))
+    (sb-alien:with-alien ((buf (sb-alien:array sb-alien:char 2048)))
+      (setq ret (sock_get_string_buf purpose (sb-alien:addr (sb-alien:deref buf 0)) 2048))
+      (values ret (sb-alien:cast buf sb-alien:c-string)))))
 
 #+:ecl
-(defun |sockGetStringFrom| (purpose)
-    (ffi:with-foreign-object (buf '(:array :unsigned-char 10000))
-        (sock_get_string_buf purpose buf 10000)
-        (ffi:convert-from-foreign-string buf)))
+(defun |sockGetStringFrom0| (purpose)
+  (let ((ret nil))
+    (ffi:with-foreign-object (buf '(:array :unsigned-char 2048))
+        (setq ret (sock_get_string_buf purpose buf 2048))
+        (values ret (ffi:convert-from-foreign-string buf)))))
 
 #+:lispworks
-(defun |sockGetStringFrom| (purpose)
-    (fli:with-dynamic-foreign-objects ((buf (:ef-mb-string :limit 10000)))
-        (sock_get_string_buf purpose buf 10000)
-        (fli:convert-from-foreign-string buf)))
+(defun |sockGetStringFrom0| (purpose)
+  (let ((ret nil))
+    (fli:with-dynamic-foreign-objects ((buf (:ef-mb-string :limit 2048)))
+        (setq ret (sock_get_string_buf purpose buf 2048))
+        (values ret (fli:convert-from-foreign-string buf)))))
 
+#-:gcl
+(defun |sockGetStringFrom| (purpose)
+  (multiple-value-bind (ret str) (|sockGetStringFrom0| purpose)
+    (if (= ret 0) str
+        (concatenate 'string str (|sockGetStringFrom| purpose)))))
 
 ;;; -------------------------------------------------------
 ;;; File and directory support
@@ -726,32 +696,94 @@ with this hack and will try to convince the GCL crowd to fix this.
   (fricas-foreign-call file_kind "directoryp" int
                    (arg c-string))
 
-  (fricas-foreign-call |makedir| "makedir" int
-                   (arg c-string))
 )
 
 (defun |append_directory_name| (dir name)
-  (concatenate 'string (|trim_directory_name| dir) "/"
-	       (if (char= #\/ (char name 0)) (subseq name 1) name)))
+    (concatenate 'string
+                 (|pad_directory_name| dir)
+                 (if (and (> (length name) 0) (char= #\/ (char name 0)))
+                     (subseq name 1) name)))
 
 (defun |trim_directory_name| (name)
     #+(or :unix :win32)
-    (if (when (> (length name) 0) (char= (char name (1- (length name))) #\/))
-        (subseq name 0 (1- (length name)))
-        name)
+    (let ((len (1- (length name))))
+      (if (and (> len 0) (char= (char name len) #\/))
+          (subseq name 0 len)
+          name))
     #-(or :unix :win32)
     (error "Not Unix and not Windows, what system it is?"))
 
 (defun |pad_directory_name| (name)
    #+(or :unix :win32)
-   (if (when (> (length name) 0) (char= (char name (1- (length name))) #\/))
+   (if (and (> (length name) 0) (char= (char name (1- (length name))) #\/))
        name
        (concatenate 'string name "/"))
    #-(or :unix :win32)
        (error "Not Unix and not Windows, what system it is?")
     )
 
+;;; Get current directory
+
+(defun |get_current_directory| ()
+  ;; return a string that represents the current working directory,
+  ;; without the trailing slash.
+  #+:abcl
+  (|trim_directory_name| (namestring (truename "")))
+  #+:clisp
+  (|trim_directory_name| (namestring (ext:default-directory)))
+  #+:cmu
+  (nth-value 1 (unix:unix-current-directory))
+  #+:ecl
+  (|trim_directory_name| (namestring (ext:getcwd)))
+  #+:gcl
+  (si:getcwd)
+  #+lispworks
+  (|trim_directory_name| (namestring (hcl:get-working-directory)))
+  #+:openmcl
+  (ccl::current-directory-name)
+  #+:poplog
+  (let ((name (namestring (truename "."))))
+    (|trim_directory_name| (subseq name 0 (1- (length name)))))
+  #+:sbcl
+  (sb-unix:posix-getcwd)
+  #-(or :abcl :clisp :cmu :ecl :gcl :lispworks :openmcl :poplog :sbcl)
+  (error "|get_current_directory| not implemented"))
+
+;;; Chdir function
+
+(defun CHDIR (dir)
+  ;; if current working directory is changed to DIR successfully, return t,
+  ;; otherwise return nil.
+  (ignore-errors
+    #+:clisp
+    (ext:cd dir)
+    #+:cmu
+    (progn
+      (if (not (unix:unix-chdir dir)) (error "CHDIR failed"))
+      (setq *default-pathname-defaults*
+            (pathname (|pad_directory_name| (|get_current_directory|)))))
+    #+:ecl
+    (si:chdir (|pad_directory_name| dir) t)
+    #+:gcl
+    (if (not (system::chdir dir)) (error "CHDIR failed"))
+    #+:lispworks
+    (hcl:change-directory dir)
+    #+:openmcl
+    (if (not (zerop (ccl::%chdir dir))) (error "CHDIR failed"))
+    #+:sbcl
+    (progn
+      (sb-posix:chdir dir)
+      (setq *default-pathname-defaults*
+            (pathname (|pad_directory_name| (|get_current_directory|)))))
+
+    t)
+  #-(or :clisp :cmu :ecl :gcl :lispworks :openmcl :sbcl)
+  (error "CHDIR not implemented"))
+
 ;;; Make directory
+#|
+;; We need consistent return value, for now we just use C version
+;; to ensure this.
 
 #+gcl
 (defun |makedir| (fname) (si::mkdir fname))
@@ -771,7 +803,7 @@ with this hack and will try to convince the GCL crowd to fix this.
   (let ((sym (or (find-symbol "MAKE-DIRECTORY" "EXT")
                  (find-symbol "MAKE-DIR" "EXT"))))
     (funcall sym (|pad_directory_name| (namestring fname)))))
-
+|#
 ;;;
 
 #+:sbcl
@@ -817,26 +849,6 @@ with this hack and will try to convince the GCL crowd to fix this.
            1
          (if (probe-file filename) 0 -1))
 )
-
-#+:cmu
-(defun |get_current_directory| ()
-  (multiple-value-bind (win dir) (unix::unix-current-directory)
-                       (declare (ignore win))  dir))
-
-#+(or :ecl :GCL :sbcl :clisp :openmcl :abcl)
-(defun |get_current_directory| ()
-    (|trim_directory_name| (namestring (truename ""))))
-
-#+:poplog
-(defun |get_current_directory| ()
-   (let ((name (namestring (truename "."))))
-        (|trim_directory_name| (subseq name 0 (1- (length name))))))
-
-#+lispworks
-(defun |get_current_directory| ()
-  (let ((directory (namestring (system:current-directory))))
-    (|trim_directory_name| directory)))
-
 
 (defun |fricas_probe_file0| (file)
 #+(or :GCL :clisp)
@@ -905,28 +917,31 @@ with this hack and will try to convince the GCL crowd to fix this.
     (if exit-code exit-code 0))
   #+:cmu
   (ext:process-exit-code (ext:run-program command arguments :output t))
-  #+:ecl
-  (cadr (multiple-value-list (ext:run-program command arguments :output t)))
+  #+(and :ecl (not :cygwin))
+  (nth-value 1 (ext:run-program command arguments :output t))
   ;; #+:gcl ;; run-process is asynchronous
   ;; (si:run-process command arguments)
   #+:lispworks ;; call-system requires absolute path for "command"
   (system:call-system-showing-output `("/usr/bin/env" ,command ,@arguments))
   #+:openmcl
-  (cadr (multiple-value-list (ccl:external-process-status
-                              (ccl:run-program command arguments :output t))))
+  (nth-value 1 (ccl:external-process-status
+                   (ccl:run-program command arguments
+                                    :output *standard-output*)))
   #+:poplog
   (pop11:sysobey "/usr/bin/env" (cons command arguments))
   #+:sbcl
   (sb-ext:process-exit-code
     (sb-ext:run-program command arguments :search t :output *standard-output*))
-  #+:gcl
+  #+(or :gcl (and :ecl :cygwin))
+  ;; ecl on cygwin has forking issues, see
+  ;; https://gitlab.com/embeddable-common-lisp/ecl/-/merge_requests/216
   (si:system (format nil "~{~a~^ ~}" (cons command arguments)))
 )
 
 (defun |run_shell_command| (s)
-  #+:gcl
+  #+(or :gcl :ecl)
   (si:system s)
-  #-:gcl
+  #-(or :gcl :ecl)
   (|run_program| "sh" (list "-c" s)))
 
 (defmacro DEFCONST (name value)
@@ -1142,6 +1157,24 @@ with this hack and will try to convince the GCL crowd to fix this.
 
 (defun |write_to_string_radix| (int radix)
     (write-to-string int :base radix))
+
+(defun |open_stream| (name direction append?)
+    (let ((dk (cond
+                    ((eq direction '|output|) :output)
+                    ((eq direction '|io|) :io)
+                    (t :input)))
+          (ek  (cond
+                    (append? :append)
+                    ((eq direction '|io|) :overwrite)
+                    (t #+:openmcl :ignored
+                       #-:openmcl :supersede)))
+          (dnk (cond
+                    ((eq direction '|input|) nil)
+                    (t :create))))
+        (open name :direction dk :if-exists ek :if-does-not-exist dnk)))
+
+(defun |open_stream2| (name direction append?)
+    (nth-value 0 (ignore-errors (|open_stream| name direction append?))))
 
 (in-package "BOOTTRAN")
 

@@ -2,12 +2,12 @@
 (SDEFUN |PATLRES;new;%;1| ((% (%)))
         (CONS (SPADCALL (QREFELT % 11)) (SPADCALL (QREFELT % 13)))) 
 
-(PUT '|PATLRES;atoms;%Pmr;2| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|PATLRES;atoms;%Pmr;2| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |PATLRES;atoms;%Pmr;2| ((|r| (%)) (% (|PatternMatchResult| R S)))
         (QCAR |r|)) 
 
-(PUT '|PATLRES;lists;%Pmr;3| '|SPADreplace| 'QCDR) 
+(MAKEPROP '|PATLRES;lists;%Pmr;3| '|SPADreplace| 'QCDR) 
 
 (SDEFUN |PATLRES;lists;%Pmr;3| ((|r| (%)) (% (|PatternMatchResult| R L)))
         (QCDR |r|)) 
@@ -43,7 +43,7 @@
 (DECLAIM (NOTINLINE |PatternMatchListResult;|)) 
 
 (DEFUN |PatternMatchListResult;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

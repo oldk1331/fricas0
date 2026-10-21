@@ -1,8 +1,8 @@
 
 (SDEFUN |FRNAAF2;map;MARAS;1| ((|fn| (|Mapping| S R)) (|u| (AR)) (% (AS)))
         (SPROG
-         ((#1=#:G6 NIL) (#2=#:G8 NIL) (|i| NIL) (#3=#:G7 NIL)
-          (|ba| (|Vector| AS)) (|vs| (|Vector| S)) (|vr| (|Vector| R)))
+         ((|vr| (|Vector| R)) (|vs| (|Vector| S)) (|ba| (|Vector| AS))
+          (#1=#:G8 NIL) (|i| NIL) (#2=#:G9 NIL) (#3=#:G7 NIL))
          (SEQ
           (COND
            ((> (SPADCALL (QREFELT % 11)) (SPADCALL (QREFELT % 12)))
@@ -19,32 +19,32 @@
                          (EXIT
                           (SPADCALL |vs|
                                     (PROGN
-                                     (LETT #3#
+                                     (LETT #1#
                                            (GETREFV
                                             #5=(SPADCALL (QREFELT % 11))))
                                      (SEQ (LETT |i| 1) (LETT #2# #5#)
-                                          (LETT #1# 0) G190
+                                          (LETT #3# 0) G190
                                           (COND
                                            ((|greater_SI| |i| #2#) (GO G191)))
                                           (SEQ
                                            (EXIT
-                                            (SETELT #3# #1#
+                                            (SETELT #1# #3#
                                                     (SPADCALL |ba| |i|
                                                               (QREFELT %
                                                                        24)))))
-                                          (LETT #1#
-                                                (PROG1 (|inc_SI| #1#)
+                                          (LETT #3#
+                                                (PROG1 (|inc_SI| #3#)
                                                   (LETT |i| (|inc_SI| |i|))))
                                           (GO G190) G191 (EXIT NIL))
-                                     #3#)
+                                     #1#)
                                     (QREFELT % 25))))))))))))) 
 
 (DECLAIM (NOTINLINE |FramedNonAssociativeAlgebraFunctions2;|)) 
 
 (DEFUN |FramedNonAssociativeAlgebraFunctions2;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -65,9 +65,9 @@
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
-(DEFUN |FramedNonAssociativeAlgebraFunctions2| (&REST #1=#:G9)
+(DEFUN |FramedNonAssociativeAlgebraFunctions2| (&REST #1=#:G10)
   (SPROG NIL
-         (PROG (#2=#:G10)
+         (PROG (#2=#:G11)
            (RETURN
             (COND
              ((LETT #2#

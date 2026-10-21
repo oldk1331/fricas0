@@ -26,7 +26,7 @@
                   (QREFELT % 14))) 
 
 (SDEFUN |HYPCAT-;cosh;2S;5| ((|x| (S)) (% (S)))
-        (SPROG ((#1=#:G23 NIL) (|e| (S)))
+        (SPROG ((|e| (S)) (#1=#:G26 NIL))
                (SEQ (LETT |e| (SPADCALL |x| (QREFELT % 18)))
                     (EXIT
                      (SPADCALL
@@ -48,7 +48,7 @@
                       (QREFELT % 14)))))) 
 
 (SDEFUN |HYPCAT-;sinh;2S;6| ((|x| (S)) (% (S)))
-        (SPROG ((#1=#:G28 NIL) (|e| (S)))
+        (SPROG ((|e| (S)) (#1=#:G31 NIL))
                (SEQ (LETT |e| (SPADCALL |x| (QREFELT % 18)))
                     (EXIT
                      (SPADCALL
@@ -72,7 +72,7 @@
 (DECLAIM (NOTINLINE |HyperbolicFunctionCategory&;|)) 
 
 (DEFUN |HyperbolicFunctionCategory&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|HyperbolicFunctionCategory&| DV$1))

@@ -184,9 +184,10 @@
 ;         '"    ",:bright '"top     ",'"  to return to top level, or",'%l,_
 ;         '"    ",:bright '"break   ",'"  to enter a LISP break loop.",'%l,_
 ;         '%l,'"   Please enter your choice now:"]
-;       x := STRING2ID_N(queryUser(msgQ), 1)
+;       x := find_symbol(STRING_-TRIM('" ", queryUser(msgQ)))
 ;       x :=
-;         selectOptionLC(x,'(top break continue),NIL)
+;             not(first(x) = 0) => nil
+;             selectOption(rest(x), '(top break continue), nil)
 ;       null x =>
 ;         sayBrightly bright '"  That was not one of your choices!"
 ;         gotIt := NIL
@@ -260,10 +261,14 @@
                                                                            (CONS
                                                                             "   Please enter your choice now:"
                                                                             NIL))))))))))))))))))
-                     (SETQ |x| (STRING2ID_N (|queryUser| |msgQ|) 1))
                      (SETQ |x|
-                             (|selectOptionLC| |x| '(|top| |break| |continue|)
-                              NIL))
+                             (|find_symbol|
+                              (STRING-TRIM " " (|queryUser| |msgQ|))))
+                     (SETQ |x|
+                             (COND ((NULL (EQL (CAR |x|) 0)) NIL)
+                                   (#1#
+                                    (|selectOption| (CDR |x|)
+                                     '(|top| |break| |continue|) NIL))))
                      (COND
                       ((NULL |x|)
                        (PROGN
@@ -338,6 +343,7 @@
   (PROG () (RETURN (|sayErrorly1| |errorLabel| |msg|))))
 
 ; sayErrorly1(errorLabel, msg) ==
+;   ioHook("startErrorMsg")
 ;   sayBrightly '" "
 ;   if $testingSystem then sayMSG $testingErrorPrefix
 ;   sayBrightly ['"   >> ",errorLabel,'":"]
@@ -345,11 +351,13 @@
 ;   msg is ['mathprint, mathexpr] =>
 ;     mathprint mathexpr
 ;   sayBrightly msg
+;   ioHook("endOfErrorMsg")
 
 (DEFUN |sayErrorly1| (|errorLabel| |msg|)
   (PROG (|m| |ISTMP#1| |mathexpr|)
     (RETURN
      (PROGN
+      (|ioHook| '|startErrorMsg|)
       (|sayBrightly| " ")
       (COND (|$testingSystem| (|sayMSG| |$testingErrorPrefix|)))
       (|sayBrightly| (LIST "   >> " |errorLabel| ":"))
@@ -361,7 +369,7 @@
               (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
                    (PROGN (SETQ |mathexpr| (CAR |ISTMP#1|)) #1='T))))
         (|mathprint| |mathexpr|))
-       (#1# (|sayBrightly| |msg|)))))))
+       (#1# (PROGN (|sayBrightly| |msg|) (|ioHook| '|endOfErrorMsg|))))))))
 
 ; systemError(x) == errorSupervisor($SystemError, x)
 

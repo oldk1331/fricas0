@@ -2,8 +2,8 @@
 (SDEFUN |XML;writeXml;XeSV;1|
         ((|content| (|XmlElement|)) (|filename| (|String|)) (% (|Void|)))
         (SPROG
-         ((#1=#:G4 NIL) (|line| NIL) (|lines| (|List| (|String|)))
-          (|s1| (|String|)) (|f1| (|TextFile|)))
+         ((|f1| (|TextFile|)) (|s1| (|String|)) (|lines| (|List| (|String|)))
+          (|line| NIL) (#1=#:G5 NIL))
          (SEQ
           (LETT |f1|
                 (SPADCALL (SPADCALL |filename| (QREFELT % 8)) "output"
@@ -57,7 +57,7 @@
 
 (DEFUN |ExportXml| ()
   (SPROG NIL
-         (PROG (#1=#:G8)
+         (PROG (#1=#:G9)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ExportXml|))

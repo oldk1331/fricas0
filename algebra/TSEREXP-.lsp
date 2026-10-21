@@ -9,8 +9,8 @@
 
 (DEFUN |TaylorSeriesExpansion&| (|#1| |#2| |#3| |#4| |#5| |#6|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$6 NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL)
-    (DV$2 NIL) (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (DV$6 NIL)
+    (|dv$| NIL) (% NIL) (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -36,7 +36,7 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|local| |#4|) (|local| |#5|) (|local| |#6|)
-              (0 . |Zero|) (4 . |monomial|) (|List| 10) (|Mapping| 7 7)
+              (0 . |0|) (4 . |monomial|) (|List| 10) (|Mapping| 7 7)
               (|List| 15) (10 . |taylor_via_deriv|)
               |TSEREXP-;taylor_via_deriv;CoefLLPS;1|)
            '#(|taylor_via_deriv| 17) 'NIL

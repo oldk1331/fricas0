@@ -1,6 +1,6 @@
 
 (SDEFUN |FORTFORM;assignable_form?| ((|o| (|OutputForm|)) (% (|Boolean|)))
-        (SPROG ((|sop| (|Symbol|)) (|op| (|OutputForm|)))
+        (SPROG ((|op| (|OutputForm|)) (|sop| (|Symbol|)))
                (SEQ
                 (COND ((SPADCALL |o| (QREFELT % 10)) 'T)
                       (#1='T
@@ -54,7 +54,7 @@
 
 (DEFUN |FortranFormat| ()
   (SPROG NIL
-         (PROG (#1=#:G16)
+         (PROG (#1=#:G17)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|FortranFormat|))

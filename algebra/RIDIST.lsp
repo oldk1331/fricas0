@@ -10,7 +10,7 @@
           (RETURN
            (PROGN
             (SPROG
-             ((|a| NIL) (|b| NIL) (|l| NIL) (|m| NIL) (#1=#:G12 NIL) (|w| NIL)
+             ((|a| NIL) (|b| NIL) (|l| NIL) (|m| NIL) (#1=#:G10 NIL) (|w| NIL)
               (|mqnext| NIL) (|n| NIL) (|mq| NIL))
              (SEQ (LETT |a| (SPADCALL |aTob| (QREFELT % 8)))
                   (LETT |b| (SPADCALL |aTob| (QREFELT % 9)))
@@ -52,7 +52,7 @@
 (SDEFUN |RIDIST;ridHack1;5I;2|
         ((|mq| (|Integer|)) (|n| (|Integer|)) (|w| (|Integer|))
          (|l| (|Integer|)) (% (|Integer|)))
-        (SPROG ((|r| (|Integer|)) (#1=#:G24 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G22 NIL) (|r| (|Integer|)))
                (SEQ (LETT |r| (SPADCALL |mq| (QREFELT % 32)))
                     (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                          (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -81,7 +81,7 @@
 
 (DEFUN |RandomIntegerDistributions| ()
   (SPROG NIL
-         (PROG (#1=#:G26)
+         (PROG (#1=#:G24)
            (RETURN
             (COND
              ((LETT #1#
@@ -105,13 +105,12 @@
 (MAKEPROP '|RandomIntegerDistributions| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|Integer|) (|Segment| 6) (0 . |low|)
-              (5 . |high|) (10 . |min|) (16 . -) (22 . |abs|) (27 . |One|)
+              (5 . |high|) (10 . |min|) (16 . -) (22 . |abs|) (27 . |1|)
               (31 . +) (|RandomNumberSource|) (37 . |size|) (41 . |length|)
-              (46 . |quo|) (|NonNegativeInteger|) (52 . ^) (58 . |Zero|)
-              (|Boolean|) (62 . >) (|PositiveInteger|) (68 . |One|)
-              (72 . |One|) (76 . +) |RIDIST;ridHack1;5I;2| (82 . ^)
-              (|Mapping| 6) |RIDIST;uniform;SM;1| (88 . |randnum|)
-              (|Fraction| 6))
+              (46 . |quo|) (|NonNegativeInteger|) (52 . ^) (58 . |0|)
+              (|Boolean|) (62 . >) (|PositiveInteger|) (68 . |1|) (72 . |1|)
+              (76 . +) |RIDIST;ridHack1;5I;2| (82 . ^) (|Mapping| 6)
+              |RIDIST;uniform;SM;1| (88 . |randnum|) (|Fraction| 6))
            '#(|uniform| 93 |ridHack1| 98 |poisson| 106 |geometric| 111
               |binomial| 116)
            'NIL

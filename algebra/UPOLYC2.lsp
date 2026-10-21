@@ -1,6 +1,6 @@
 
 (SDEFUN |UPOLYC2;map;MPRPS;1| ((|f| (|Mapping| S R)) (|p| (PR)) (% (PS)))
-        (SPROG ((|ans| (|RepPS|)) (|nc| (S)))
+        (SPROG ((|nc| (S)) (|ans| (|RepPS|)))
                (SEQ (LETT |ans| NIL)
                     (SEQ G190
                          (COND
@@ -24,7 +24,7 @@
                     (EXIT (NREVERSE |ans|))))) 
 
 (SDEFUN |UPOLYC2;map;MPRPS;2| ((|f| (|Mapping| S R)) (|p| (PR)) (% (PS)))
-        (SPROG ((|ans| (|RepPS|)) (|nc| (S)))
+        (SPROG ((|nc| (S)) (|ans| (|RepPS|)))
                (SEQ (LETT |ans| NIL)
                     (SEQ G190
                          (COND
@@ -74,8 +74,8 @@
 
 (DEFUN |UnivariatePolynomialCategoryFunctions2;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -108,9 +108,9 @@
      ('T (QSETREFV % 24 (CONS (|dispatchFunction| |UPOLYC2;map;MPRPS;3|) %))))
     %))) 
 
-(DEFUN |UnivariatePolynomialCategoryFunctions2| (&REST #1=#:G24)
+(DEFUN |UnivariatePolynomialCategoryFunctions2| (&REST #1=#:G27)
   (SPROG NIL
-         (PROG (#2=#:G25)
+         (PROG (#2=#:G28)
            (RETURN
             (COND
              ((LETT #2#
@@ -135,10 +135,10 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|local| |#4|) '|op_of_PS| '#:G0 '|RepPS|
-              (0 . |Zero|) (4 . |Zero|) (|Boolean|) (8 . =)
-              (14 . |leadingCoefficient|) (19 . |Zero|) (23 . ~=)
+              (0 . |0|) (4 . |0|) (|Boolean|) (8 . =)
+              (14 . |leadingCoefficient|) (19 . |0|) (23 . ~=)
               (|NonNegativeInteger|) (29 . |degree|) (34 . |reductum|)
-              (|Mapping| 8 6) (39 . |map|) (45 . |Zero|) (49 . |monomial|)
+              (|Mapping| 8 6) (39 . |map|) (45 . |0|) (49 . |monomial|)
               (55 . +))
            '#(|map| 61) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))

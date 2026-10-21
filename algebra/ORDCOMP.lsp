@@ -8,24 +8,24 @@
                (SPADCALL (LIST (SPADCALL '|minusInfinity| (QREFELT % 11)))
                          (QREFELT % 13))))) 
 
-(PUT '|ORDCOMP;coerce;R%;2| '|SPADreplace| '(XLAM (|r|) (CONS 0 |r|))) 
+(MAKEPROP '|ORDCOMP;coerce;R%;2| '|SPADreplace| '(XLAM (|r|) (CONS 0 |r|))) 
 
 (SDEFUN |ORDCOMP;coerce;R%;2| ((|r| (R)) (% (%))) (CONS 0 |r|)) 
 
 (SDEFUN |ORDCOMP;retract;%R;3| ((|x| (%)) (% (R)))
         (COND ((QEQCAR |x| 0) (CDR |x|)) ('T (|error| "Not finite")))) 
 
-(PUT '|ORDCOMP;finite?;%B;4| '|SPADreplace| '(XLAM (|x|) (QEQCAR |x| 0))) 
+(MAKEPROP '|ORDCOMP;finite?;%B;4| '|SPADreplace| '(XLAM (|x|) (QEQCAR |x| 0))) 
 
 (SDEFUN |ORDCOMP;finite?;%B;4| ((|x| (%)) (% (|Boolean|))) (QEQCAR |x| 0)) 
 
-(PUT '|ORDCOMP;infinite?;%B;5| '|SPADreplace| '(XLAM (|x|) (QEQCAR |x| 1))) 
+(MAKEPROP '|ORDCOMP;infinite?;%B;5| '|SPADreplace| '(XLAM (|x|) (QEQCAR |x| 1))) 
 
 (SDEFUN |ORDCOMP;infinite?;%B;5| ((|x| (%)) (% (|Boolean|))) (QEQCAR |x| 1)) 
 
 (SDEFUN |ORDCOMP;plusInfinity;%;6| ((% (%))) (CONS 1 'T)) 
 
-(PUT '|ORDCOMP;minusInfinity;%;7| '|SPADreplace| '(XLAM NIL (CONS 1 NIL))) 
+(MAKEPROP '|ORDCOMP;minusInfinity;%;7| '|SPADreplace| '(XLAM NIL (CONS 1 NIL))) 
 
 (SDEFUN |ORDCOMP;minusInfinity;%;7| ((% (%))) (CONS 1 NIL)) 
 
@@ -102,7 +102,7 @@
 (DECLAIM (NOTINLINE |OrderedCompletion;|)) 
 
 (DEFUN |OrderedCompletion;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|OrderedCompletion| DV$1))
@@ -134,6 +134,8 @@
                       (CONS 1 %))
           (|stuffDomainSlots| %)
           (QSETREFV % 6 |#1|)
+          (AND (|HasCategory| |#1| '(|OrderedSet|))
+               (|HasCategory| % '(|SetWithZero|)) (|augmentPredVector| % 128))
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 7 (|Union| (|:| |fin| |#1|) (|:| |inf| (|Boolean|))))
           (COND
@@ -161,9 +163,9 @@
                              %)))))
           %))) 
 
-(DEFUN |OrderedCompletion| (#1=#:G66)
+(DEFUN |OrderedCompletion| (#1=#:G67)
   (SPROG NIL
-         (PROG (#2=#:G67)
+         (PROG (#2=#:G68)
            (RETURN
             (COND
              ((LETT #2#
@@ -191,25 +193,28 @@
               |ORDCOMP;coerce;%Of;9| (|SingleInteger|)
               |ORDCOMP;whatInfinity;%Si;10| (45 . |xor|) (51 . =)
               |ORDCOMP;=;2%B;11| (57 . -) (62 . -) (67 . +) (73 . +) (79 . <)
-              (85 . <) (91 . |rational?|) (|Fraction| 50) (96 . |rational|)
+              (85 . <) (91 . |rational?|) (|Fraction| 49) (96 . |rational|)
               (101 . |rational|) (|Union| 43 '"failed") (106 . |rationalIfCan|)
-              (|String|) (|Union| 50 '"failed") (|Integer|))
-           '#(~= 111 |whatInfinity| 117 |smaller?| 122 |retractIfCan| 128
-              |retract| 143 |rationalIfCan| 158 |rational?| 163 |rational| 168
-              |plusInfinity| 173 |minusInfinity| 177 |min| 181 |max| 187
-              |latex| 193 |infinite?| 198 |finite?| 203 |convert| 208 |coerce|
-              213 >= 233 > 239 = 245 <= 251 < 257 - 263 + 268)
+              (|String|) (|Integer|) (|Union| 49 '"failed"))
+           '#(~= 111 |whatInfinity| 117 |smaller?| 122 |sign| 128
+              |retractIfCan| 133 |retract| 148 |rationalIfCan| 163 |rational?|
+              168 |rational| 173 |positive?| 178 |plusInfinity| 183 |negative?|
+              187 |minusInfinity| 192 |min| 196 |max| 202 |latex| 208
+              |infinite?| 213 |finite?| 218 |convert| 223 |coerce| 228 >= 248 >
+              254 = 260 <= 266 < 272 - 278 + 283)
            'NIL
-           (CONS (|makeByteWordVec2| 4 '(4 4 0 2 1 0 0 4 3 2 1 0 0 0))
+           (CONS (|makeByteWordVec2| 4 '(4 4 4 0 2 1 0 0 4 3 2 1 0 0 0))
                  (CONS
-                  '#(|OrderedSet&| NIL |FullyRetractableTo&| |RetractableTo&|
-                     |RetractableTo&| |RetractableTo&| |SetCategory&|
-                     |PartialOrder&| NIL NIL NIL NIL NIL |BasicType&|)
+                  '#(|OrderedSet&| NIL NIL |FullyRetractableTo&|
+                     |RetractableTo&| |RetractableTo&| |RetractableTo&|
+                     |SetCategory&| |PartialOrder&| NIL NIL NIL NIL NIL
+                     |BasicType&|)
                   (CONS
-                   '#((|OrderedSet|) (|Comparable|) (|FullyRetractableTo| 6)
-                      (|RetractableTo| 50) (|RetractableTo| 43)
+                   '#((|OrderedSet|) (|Comparable|)
+                      (|ComparableRepresentation|) (|FullyRetractableTo| 6)
+                      (|RetractableTo| 49) (|RetractableTo| 43)
                       (|RetractableTo| 6) (|SetCategory|) (|PartialOrder|)
-                      (|ConvertibleTo| 8) (|CoercibleFrom| 50)
+                      (|ConvertibleTo| 8) (|CoercibleFrom| 49)
                       (|CoercibleFrom| 43) (|CoercibleTo| 24)
                       (|CoercibleFrom| 6) (|BasicType|))
                    (|makeByteWordVec2| 50
@@ -220,14 +225,15 @@
                                          37 2 6 0 0 0 38 2 0 0 0 0 39 2 6 17 0
                                          0 40 2 0 17 0 0 41 1 0 17 0 42 1 6 43
                                          0 44 1 0 43 0 45 1 0 46 0 47 2 0 17 0
-                                         0 1 1 0 31 0 32 2 4 17 0 0 1 1 0 22 0
-                                         23 1 1 46 0 1 1 2 49 0 1 1 0 6 0 16 1
-                                         1 43 0 1 1 2 50 0 1 1 7 46 0 47 1 7 17
-                                         0 42 1 7 43 0 45 0 0 0 20 0 0 0 21 2 4
-                                         0 0 0 1 2 4 0 0 0 1 1 0 48 0 1 1 0 17
-                                         0 19 1 0 17 0 18 1 3 8 0 14 1 0 24 0
-                                         30 1 0 0 6 15 1 1 0 43 1 1 2 0 50 1 2
-                                         4 17 0 0 1 2 4 17 0 0 1 2 0 17 0 0 35
-                                         2 4 17 0 0 1 2 4 17 0 0 41 1 6 0 0 37
-                                         2 5 0 0 0 39)))))
+                                         0 1 1 0 31 0 32 2 4 17 0 0 1 1 8 49 0
+                                         1 1 0 22 0 23 1 1 46 0 1 1 2 50 0 1 1
+                                         0 6 0 16 1 1 43 0 1 1 2 49 0 1 1 7 46
+                                         0 47 1 7 17 0 42 1 7 43 0 45 1 8 17 0
+                                         1 0 0 0 20 1 8 17 0 1 0 0 0 21 2 4 0 0
+                                         0 1 2 4 0 0 0 1 1 0 48 0 1 1 0 17 0 19
+                                         1 0 17 0 18 1 3 8 0 14 1 0 24 0 30 1 0
+                                         0 6 15 1 1 0 43 1 1 2 0 49 1 2 4 17 0
+                                         0 1 2 4 17 0 0 1 2 0 17 0 0 35 2 4 17
+                                         0 0 1 2 4 17 0 0 41 1 6 0 0 37 2 5 0 0
+                                         0 39)))))
            '|lookupComplete|)) 

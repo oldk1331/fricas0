@@ -1,5 +1,5 @@
 
-(PUT '|FPOSET;finitePoset;LL%;1| '|SPADreplace| 'CONS) 
+(MAKEPROP '|FPOSET;finitePoset;LL%;1| '|SPADreplace| 'CONS) 
 
 (SDEFUN |FPOSET;finitePoset;LL%;1|
         ((|carrier| (|List| S)) (|struct1| (|List| (|List| (|Boolean|))))
@@ -9,44 +9,44 @@
 (SDEFUN |FPOSET;finitePoset;LM%;2|
         ((|carrier| (|List| S)) (|pred| (|Mapping| (|Boolean|) S S)) (% (%)))
         (SPROG
-         ((|struct1| (|List| (|List| (|Boolean|)))) (#1=#:G13 NIL) (|x| NIL)
-          (#2=#:G12 NIL) (#3=#:G11 NIL) (|y| NIL) (#4=#:G10 NIL))
+         ((#1=#:G10 NIL) (|y| NIL) (#2=#:G11 NIL) (#3=#:G12 NIL) (|x| NIL)
+          (#4=#:G13 NIL) (|struct1| (|List| (|List| (|Boolean|)))))
          (SEQ
           (LETT |struct1|
                 (PROGN
-                 (LETT #4# NIL)
-                 (SEQ (LETT |y| NIL) (LETT #3# |carrier|) G190
+                 (LETT #1# NIL)
+                 (SEQ (LETT |y| NIL) (LETT #2# |carrier|) G190
                       (COND
-                       ((OR (ATOM #3#) (PROGN (LETT |y| (CAR #3#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT |y| (CAR #2#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #4#
+                        (LETT #1#
                               (CONS
                                (PROGN
-                                (LETT #2# NIL)
-                                (SEQ (LETT |x| NIL) (LETT #1# |carrier|) G190
+                                (LETT #3# NIL)
+                                (SEQ (LETT |x| NIL) (LETT #4# |carrier|) G190
                                      (COND
-                                      ((OR (ATOM #1#)
-                                           (PROGN (LETT |x| (CAR #1#)) NIL))
+                                      ((OR (ATOM #4#)
+                                           (PROGN (LETT |x| (CAR #4#)) NIL))
                                        (GO G191)))
                                      (SEQ
                                       (EXIT
-                                       (LETT #2#
+                                       (LETT #3#
                                              (CONS (SPADCALL |x| |y| |pred|)
-                                                   #2#))))
-                                     (LETT #1# (CDR #1#)) (GO G190) G191
-                                     (EXIT (NREVERSE #2#))))
-                               #4#))))
-                      (LETT #3# (CDR #3#)) (GO G190) G191
-                      (EXIT (NREVERSE #4#)))))
+                                                   #3#))))
+                                     (LETT #4# (CDR #4#)) (GO G190) G191
+                                     (EXIT (NREVERSE #3#))))
+                               #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#)))))
           (EXIT (CONS |carrier| |struct1|))))) 
 
-(PUT '|FPOSET;getVert;%L;3| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|FPOSET;getVert;%L;3| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |FPOSET;getVert;%L;3| ((|s| (%)) (% (|List| S))) (QCAR |s|)) 
 
-(PUT '|FPOSET;getArr;%L;4| '|SPADreplace| 'QCDR) 
+(MAKEPROP '|FPOSET;getArr;%L;4| '|SPADreplace| 'QCDR) 
 
 (SDEFUN |FPOSET;getArr;%L;4| ((|s| (%)) (% (|List| (|List| (|Boolean|)))))
         (QCDR |s|)) 
@@ -54,7 +54,7 @@
 (DECLAIM (NOTINLINE |FinitePoset;|)) 
 
 (DEFUN |FinitePoset;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|FinitePoset| DV$1))
@@ -101,8 +101,9 @@
                         (|:| |map| 21))
               (|List| 19) (|List| 18) (|DirectedGraph| %) (|List| 20)
               (|Integer|) (|Tree| 25) (|List| 26) (|List| (|Loop|))
-              (|Matrix| 25) (|Matrix| 19) (|Void|) (|Scene| (|SCartesian| '2))
-              (|List| %) (|Union| 19 '"failed") (|IncidenceAlgebra| 25 6))
+              (|Matrix| 25) (|Matrix| 19) (|Void|)
+              (|Scene| (|SCartesian| (NRTEVAL 2))) (|List| %)
+              (|Union| 19 '"failed") (|IncidenceAlgebra| 25 6))
            '#(~= 0 |zetaMatrix| 6 |upperSet| 11 |unit| 16 |terminal| 22
               |subdiagramSvg| 27 |spanningTreeNode| 35 |spanningTreeArrow| 41
               |spanningForestNode| 47 |spanningForestArrow| 52 |routeNodes| 57

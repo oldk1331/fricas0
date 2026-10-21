@@ -3,8 +3,8 @@
         ((|l1| (|LinearOrdinaryDifferentialOperator1| R))
          (% (|LinearOrdinaryDifferentialOperator3| |Coeff| |Ab| R)))
         (SPROG
-         ((|l3| (|LinearOrdinaryDifferentialOperator3| |Coeff| |Ab| R))
-          (#1=#:G2 NIL))
+         ((#1=#:G5 NIL)
+          (|l3| (|LinearOrdinaryDifferentialOperator3| |Coeff| |Ab| R)))
          (SEQ (LETT |l3| (|spadConstant| % 10))
               (SEQ G190
                    (COND
@@ -81,7 +81,7 @@
 (DECLAIM (NOTINLINE |LODOConvertions;|)) 
 
 (DEFUN |LODOConvertions;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -99,9 +99,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |LODOConvertions| (&REST #1=#:G13)
+(DEFUN |LODOConvertions| (&REST #1=#:G16)
   (SPROG NIL
-         (PROG (#2=#:G14)
+         (PROG (#2=#:G17)
            (RETURN
             (COND
              ((LETT #2#
@@ -122,15 +122,15 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|LinearOrdinaryDifferentialOperator3| 6 7 8)
-              (0 . |Zero|) (4 . |Zero|) (8 . |Zero|)
-              (|LinearOrdinaryDifferentialOperator1| 8) (12 . |Zero|)
-              (|Boolean|) (16 . ~=) (22 . |leadingCoefficient|) (27 . |One|)
-              (31 . |One|) (|NonNegativeInteger|) (35 . |monomial|)
-              (41 . |One|) (45 . *) (|Union| % '"failed") (51 . |recip|)
-              (56 . D) (60 . *) (66 . |degree|) (71 . ^) (77 . +)
-              (83 . |reductum|) |LODOCONV;convert;LodoLodo;1| (88 . ~=)
+              (0 . |0|) (4 . |0|) (8 . |0|)
+              (|LinearOrdinaryDifferentialOperator1| 8) (12 . |0|) (|Boolean|)
+              (16 . ~=) (22 . |leadingCoefficient|) (27 . |1|) (31 . |1|)
+              (|NonNegativeInteger|) (35 . |monomial|) (41 . |1|) (45 . *)
+              (|Union| % '"failed") (51 . |recip|) (56 . D) (60 . *)
+              (66 . |degree|) (71 . ^) (77 . +) (83 . |reductum|)
+              |LODOCONV;convert;LodoLodo;1| (88 . ~=)
               (94 . |leadingCoefficient|) (99 . |monomial|)
-              (|Fraction| (|Integer|)) (105 . |One|) (109 . *) (115 . D)
+              (|Fraction| (|Integer|)) (105 . |1|) (109 . *) (115 . D)
               (119 . *) (125 . |degree|) (130 . ^) (136 . +) (142 . |reductum|)
               |LODOCONV;convert;LodoLodo;2|)
            '#(|convert| 147) 'NIL

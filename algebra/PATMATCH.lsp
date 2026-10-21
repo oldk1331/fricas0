@@ -22,58 +22,58 @@
 (SDEFUN |PATMATCH;Is;SubjectPatL;5|
         ((|s| (|Subject|)) (|p| (|Pat|)) (% (|List| (|Equation| |Subject|))))
         (SPROG
-         ((#1=#:G16 NIL) (|rec| NIL) (#2=#:G15 NIL)
-          (|r| (|PatternMatchResult| |Base| |Subject|)))
+         ((|r| (|PatternMatchResult| |Base| |Subject|)) (#1=#:G17 NIL)
+          (|rec| NIL) (#2=#:G18 NIL))
          (SEQ
           (COND
            ((SPADCALL (LETT |r| (|PATMATCH;ist| |s| |p| %)) (QREFELT % 16))
             NIL)
            ('T
             (PROGN
-             (LETT #2# NIL)
-             (SEQ (LETT |rec| NIL) (LETT #1# (SPADCALL |r| (QREFELT % 28)))
+             (LETT #1# NIL)
+             (SEQ (LETT |rec| NIL) (LETT #2# (SPADCALL |r| (QREFELT % 28)))
                   G190
                   (COND
-                   ((OR (ATOM #1#) (PROGN (LETT |rec| (CAR #1#)) NIL))
+                   ((OR (ATOM #2#) (PROGN (LETT |rec| (CAR #2#)) NIL))
                     (GO G191)))
                   (SEQ
                    (EXIT
-                    (LETT #2#
+                    (LETT #1#
                           (CONS
                            (SPADCALL (SPADCALL (QCAR |rec|) (QREFELT % 30))
                                      (QCDR |rec|) (QREFELT % 32))
-                           #2#))))
-                  (LETT #1# (CDR #1#)) (GO G190) G191
-                  (EXIT (NREVERSE #2#))))))))) 
+                           #1#))))
+                  (LETT #2# (CDR #2#)) (GO G190) G191
+                  (EXIT (NREVERSE #1#))))))))) 
 
 (SDEFUN |PATMATCH;Is;SubjectPatL;6|
         ((|s| (|Subject|)) (|p| (|Pat|))
          (% (|List| (|Equation| (|Polynomial| |Subject|)))))
         (SPROG
-         ((#1=#:G23 NIL) (|rec| NIL) (#2=#:G22 NIL)
-          (|r| (|PatternMatchResult| |Base| |Subject|)))
+         ((|r| (|PatternMatchResult| |Base| |Subject|)) (#1=#:G24 NIL)
+          (|rec| NIL) (#2=#:G25 NIL))
          (SEQ
           (COND
            ((SPADCALL (LETT |r| (|PATMATCH;ist| |s| |p| %)) (QREFELT % 16))
             NIL)
            ('T
             (PROGN
-             (LETT #2# NIL)
-             (SEQ (LETT |rec| NIL) (LETT #1# (SPADCALL |r| (QREFELT % 28)))
+             (LETT #1# NIL)
+             (SEQ (LETT |rec| NIL) (LETT #2# (SPADCALL |r| (QREFELT % 28)))
                   G190
                   (COND
-                   ((OR (ATOM #1#) (PROGN (LETT |rec| (CAR #1#)) NIL))
+                   ((OR (ATOM #2#) (PROGN (LETT |rec| (CAR #2#)) NIL))
                     (GO G191)))
                   (SEQ
                    (EXIT
-                    (LETT #2#
+                    (LETT #1#
                           (CONS
                            (SPADCALL (SPADCALL (QCAR |rec|) (QREFELT % 36))
                                      (SPADCALL (QCDR |rec|) (QREFELT % 37))
                                      (QREFELT % 39))
-                           #2#))))
-                  (LETT #1# (CDR #1#)) (GO G190) G191
-                  (EXIT (NREVERSE #2#))))))))) 
+                           #1#))))
+                  (LETT #2# (CDR #2#)) (GO G190) G191
+                  (EXIT (NREVERSE #1#))))))))) 
 
 (SDEFUN |PATMATCH;Is;SubjectPatPmr;7|
         ((|s| (|Subject|)) (|p| (|Pat|))
@@ -84,8 +84,8 @@
 
 (DEFUN |PatternMatch;| (|#1| |#2| |#3|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G25 NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (#1=#:G27 NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -125,9 +125,9 @@
                 (CONS (|dispatchFunction| |PATMATCH;Is;SubjectPatPmr;7|) %))))
     %))) 
 
-(DEFUN |PatternMatch| (&REST #1=#:G26)
+(DEFUN |PatternMatch| (&REST #1=#:G28)
   (SPROG NIL
-         (PROG (#2=#:G27)
+         (PROG (#2=#:G29)
            (RETURN
             (COND
              ((LETT #2#

@@ -7,7 +7,7 @@
 (DECLAIM (NOTINLINE |SequenceFunctions2;|)) 
 
 (DEFUN |SequenceFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -23,9 +23,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |SequenceFunctions2| (&REST #1=#:G2)
+(DEFUN |SequenceFunctions2| (&REST #1=#:G3)
   (SPROG NIL
-         (PROG (#2=#:G3)
+         (PROG (#2=#:G4)
            (RETURN
             (COND
              ((LETT #2#

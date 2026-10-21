@@ -99,10 +99,33 @@
 #-:sbcl
 (defun |eval_with_timeout| (f ti) (|error| "unimplemented for this Lisp"))
 
-(defun |is_dir_sepatator?| (c)
+(defun |is_dir_separator?| (c)
     (cond
         #+:win32
         ((equal c #\\) 'T)
         ((equal c #\/) 'T)
         (t nil)))
 
+(defun |is_absolute_name?| (n)
+    (let ((l (length n)))
+        (cond
+            ;;; #+:win32
+            ((and (> l 1) (equal (aref n 1) #\:)) t)
+            (t (and (> l 0) (|is_dir_separator?| (aref n 0))))
+        )
+    )
+)
+
+(defun |get_lisp_std_out| () *standard-output*)
+
+(defun |get_lisp_error_out| () *error-output*)
+
+(defun |get_lisp_std_in| () *standard-input*)
+
+(defun |char_to_digit|(x) (digit-char-p x))
+
+(defun |search_str| (pat str start)
+       (search pat str :start2 start))
+
+(setf |$sys_assertions| (list '|CommonLisp|
+      #+:unix '|Unix|))

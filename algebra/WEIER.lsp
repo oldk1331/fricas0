@@ -23,7 +23,7 @@
 (SDEFUN |WEIER;streamlikeUniv|
         ((|p| (|SparseUnivariatePolynomial| (|Polynomial| R)))
          (|n| (|NonNegativeInteger|)) (% (|Stream| (|Polynomial| R))))
-        (SPROG ((#1=#:G15 NIL))
+        (SPROG ((#1=#:G17 NIL))
                (COND
                 ((EQL |n| 0)
                  (SPADCALL (SPADCALL |p| 0 (QREFELT % 32))
@@ -119,12 +119,13 @@
         ((|v| (|Symbol|)) (|sts| (|Stream| (|Polynomial| R)))
          (% (|Stream| (|TaylorSeries| R))))
         (SPROG
-         ((|q| (|Stream| (|TaylorSeries| R))) (|f| (|Stream| (|Polynomial| R)))
+         ((|p| (|Stream| (|TaylorSeries| R))) (|a0| NIL)
+          (|b0| (|Polynomial| R)) (#1=#:G67 NIL) (|c| (|Union| R "failed"))
+          (|a| (|NonNegativeInteger|)) (#2=#:G68 NIL)
+          (|b| (|Stream| (|Polynomial| R)))
           (|e| (|Union| (|Stream| (|Polynomial| R)) "failed"))
-          (|b| (|Stream| (|Polynomial| R))) (#1=#:G56 NIL)
-          (|a| (|NonNegativeInteger|)) (|c| (|Union| R "failed"))
-          (#2=#:G55 NIL) (|b0| (|Polynomial| R)) (|a0| NIL)
-          (|p| (|Stream| (|TaylorSeries| R))))
+          (|f| (|Stream| (|Polynomial| R)))
+          (|q| (|Stream| (|TaylorSeries| R))))
          (SEQ (LETT |p| (|WEIER;tp| |v| |sts| %))
               (LETT |b| (SPADCALL |p| (QREFELT % 58)))
               (SEQ
@@ -145,8 +146,8 @@
                                  (SEQ (LETT |b| (SPADCALL |b| (QREFELT % 37)))
                                       (EXIT
                                        (PROGN
-                                        (LETT #2# |$NoValue|)
-                                        (GO #3=#:G39)))))
+                                        (LETT #1# |$NoValue|)
+                                        (GO #3=#:G44)))))
                                 ('T
                                  (SEQ (LETT |c| (SPADCALL |b0| (QREFELT % 61)))
                                       (EXIT
@@ -155,16 +156,16 @@
                                          (SEQ (LETT |a| |a0|)
                                               (EXIT
                                                (PROGN
-                                                (LETT #1# |$NoValue|)
-                                                (GO #4=#:G48)))))
+                                                (LETT #2# |$NoValue|)
+                                                (GO #4=#:G56)))))
                                         ('T
                                          (LETT |b|
                                                (SPADCALL |b|
                                                          (QREFELT %
                                                                   37))))))))))))))
-                      #3# (EXIT #2#))
+                      #3# (EXIT #1#))
                      (LETT |a0| (|inc_SI| |a0|)) (GO G190) G191 (EXIT NIL)))
-               #4# (EXIT #1#))
+               #4# (EXIT #2#))
               (LETT |e| (SPADCALL |b| (QREFELT % 63)))
               (LETT |f|
                     (COND ((QEQCAR |e| 1) (|error| "no reciprocal"))
@@ -220,7 +221,7 @@
 (DECLAIM (NOTINLINE |WeierstrassPreparation;|)) 
 
 (DEFUN |WeierstrassPreparation;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|WeierstrassPreparation| DV$1))
@@ -234,9 +235,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |WeierstrassPreparation| (#1=#:G63)
+(DEFUN |WeierstrassPreparation| (#1=#:G75)
   (SPROG NIL
-         (PROG (#2=#:G64)
+         (PROG (#2=#:G76)
            (RETURN
             (COND
              ((LETT #2#
@@ -256,15 +257,15 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|Boolean|) (|Stream| 21)
               (0 . |empty?|) (|Stream| 14) (|Stream| 10) (5 . |first|)
-              (10 . |empty?|) (|Polynomial| 6) (15 . |Zero|) (19 . |first|)
+              (10 . |empty?|) (|Polynomial| 6) (15 . |0|) (19 . |first|)
               (|Mapping| 14 10) (|StreamFunctions2| 10 14) (24 . |map|)
-              (30 . |One|) (|TaylorSeries| 6) (34 . |One|)
-              (|NonNegativeInteger|) (38 . |One|) (42 . |rest|)
-              (|Mapping| 10 10) (|StreamFunctions2| 10 10) (48 . |map|)
-              (54 . |Zero|) (58 . |Zero|) (|SparseUnivariatePolynomial| 14)
-              (62 . |coefficient|) (68 . |empty|) (72 . |cons|) (78 . |empty?|)
-              (83 . |empty|) (87 . |rest|) (92 . |rst|) (97 . |cons|)
-              (|Mapping| %) (103 . |delay|) (|Stream| 43) (|Integer|)
+              (30 . |1|) (|TaylorSeries| 6) (34 . |1|) (|NonNegativeInteger|)
+              (38 . |1|) (42 . |rest|) (|Mapping| 10 10)
+              (|StreamFunctions2| 10 10) (48 . |map|) (54 . |0|) (58 . |0|)
+              (|SparseUnivariatePolynomial| 14) (62 . |coefficient|)
+              (68 . |empty|) (72 . |cons|) (78 . |empty?|) (83 . |empty|)
+              (87 . |rest|) (92 . |rst|) (97 . |cons|) (|Mapping| %)
+              (103 . |delay|) (|Stream| 43) (|Integer|)
               (|StreamTaylorSeriesOperations| 14) (108 . |integers|)
               (|SparseUnivariatePolynomial| %) (|Symbol|) (113 . |univariate|)
               (|Stream| 31) (|Mapping| 31 14) (|StreamFunctions2| 14 31)
@@ -275,7 +276,7 @@
               (159 . |rest|) (|Mapping| 8 8)
               (|ParadoxicalCombinatorsForStreams| 21) (164 . Y)
               (|StreamTaylorSeriesOperations| 21) (169 . *) (175 . -) (180 . *)
-              (186 . |cons|) (|IndexedExponents| 47) (192 . |Zero|)
+              (186 . |cons|) (|IndexedExponents| 47) (192 . |0|)
               (196 . |coefficient|) (202 . ~=) (|List| 21)
               |WEIER;weierstrass;STsL;12|)
            '#(|weierstrass| 208) 'NIL

@@ -7,7 +7,7 @@
         (SPADCALL |dev| |x| 'T (QREFELT % 13))) 
 
 (SDEFUN |OM-;OMwrite;SBS;3| ((|x| (S)) (|wholeObj| (|Boolean|)) (% (|String|)))
-        (SPROG ((|s| (|String|)) (|dev| (|OpenMathDevice|)) (|sp| (|None|)))
+        (SPROG ((|sp| (|None|)) (|dev| (|OpenMathDevice|)) (|s| (|String|)))
                (SEQ (LETT |s| "") (LETT |sp| (OM-STRINGTOSTRINGPTR |s|))
                     (LETT |dev|
                           (SPADCALL |sp| (SPADCALL (QREFELT % 16))
@@ -19,7 +19,7 @@
 (DECLAIM (NOTINLINE |OpenMath&;|)) 
 
 (DEFUN |OpenMath&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|OpenMath&| DV$1))

@@ -21,34 +21,34 @@
         ((|func| (|Mapping| F E)) (|ir| (|IntegrationResult| E))
          (% (|IntegrationResult| F)))
         (SPROG
-         ((#1=#:G34 NIL) (|g| NIL) (#2=#:G33 NIL) (#3=#:G32 NIL) (|f| NIL)
-          (#4=#:G31 NIL))
+         ((#1=#:G39 NIL) (|f| NIL) (#2=#:G40 NIL) (#3=#:G41 NIL) (|g| NIL)
+          (#4=#:G42 NIL))
          (SEQ
           (SPADCALL (SPADCALL (SPADCALL |ir| (QREFELT % 13)) |func|)
                     (PROGN
-                     (LETT #4# NIL)
+                     (LETT #1# NIL)
                      (SEQ (LETT |f| NIL)
-                          (LETT #3# (SPADCALL |ir| (QREFELT % 16))) G190
+                          (LETT #2# (SPADCALL |ir| (QREFELT % 16))) G190
                           (COND
-                           ((OR (ATOM #3#) (PROGN (LETT |f| (CAR #3#)) NIL))
+                           ((OR (ATOM #2#) (PROGN (LETT |f| (CAR #2#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #4# (CONS (|IR2;LGE2F| |func| |f| %) #4#))))
-                          (LETT #3# (CDR #3#)) (GO G190) G191
-                          (EXIT (NREVERSE #4#))))
+                            (LETT #1# (CONS (|IR2;LGE2F| |func| |f| %) #1#))))
+                          (LETT #2# (CDR #2#)) (GO G190) G191
+                          (EXIT (NREVERSE #1#))))
                     (PROGN
-                     (LETT #2# NIL)
+                     (LETT #3# NIL)
                      (SEQ (LETT |g| NIL)
-                          (LETT #1# (SPADCALL |ir| (QREFELT % 19))) G190
+                          (LETT #4# (SPADCALL |ir| (QREFELT % 19))) G190
                           (COND
-                           ((OR (ATOM #1#) (PROGN (LETT |g| (CAR #1#)) NIL))
+                           ((OR (ATOM #4#) (PROGN (LETT |g| (CAR #4#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #2# (CONS (|IR2;NEE2F| |func| |g| %) #2#))))
-                          (LETT #1# (CDR #1#)) (GO G190) G191
-                          (EXIT (NREVERSE #2#))))
+                            (LETT #3# (CONS (|IR2;NEE2F| |func| |g| %) #3#))))
+                          (LETT #4# (CDR #4#)) (GO G190) G191
+                          (EXIT (NREVERSE #3#))))
                     (QREFELT % 25))))) 
 
 (SDEFUN |IR2;map;MUU;5|
@@ -77,30 +77,30 @@
                           (|List|
                            (|Record| (|:| |coeff| F) (|:| |logand| F)))))
            "failed")))
-        (SPROG ((#1=#:G77 NIL) (|f| NIL) (#2=#:G76 NIL))
+        (SPROG ((#1=#:G84 NIL) (|f| NIL) (#2=#:G85 NIL))
                (SEQ
                 (COND ((QEQCAR |u| 1) (CONS 1 "failed"))
                       ('T
                        (CONS 0
                              (CONS (SPADCALL (QCAR (QCDR |u|)) |func|)
                                    (PROGN
-                                    (LETT #2# NIL)
+                                    (LETT #1# NIL)
                                     (SEQ (LETT |f| NIL)
-                                         (LETT #1# (QCDR (QCDR |u|))) G190
+                                         (LETT #2# (QCDR (QCDR |u|))) G190
                                          (COND
-                                          ((OR (ATOM #1#)
+                                          ((OR (ATOM #2#)
                                                (PROGN
-                                                (LETT |f| (CAR #1#))
+                                                (LETT |f| (CAR #2#))
                                                 NIL))
                                            (GO G191)))
                                          (SEQ
                                           (EXIT
-                                           (LETT #2#
+                                           (LETT #1#
                                                  (CONS
                                                   (|IR2;NLE2F| |func| |f| %)
-                                                  #2#))))
-                                         (LETT #1# (CDR #1#)) (GO G190) G191
-                                         (EXIT (NREVERSE #2#))))))))))) 
+                                                  #1#))))
+                                         (LETT #2# (CDR #2#)) (GO G190) G191
+                                         (EXIT (NREVERSE #1#))))))))))) 
 
 (SDEFUN |IR2;LGE2F|
         ((|func| (|Mapping| F E))
@@ -118,7 +118,7 @@
 (DECLAIM (NOTINLINE |IntegrationResultFunctions2;|)) 
 
 (DEFUN |IntegrationResultFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -134,9 +134,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |IntegrationResultFunctions2| (&REST #1=#:G83)
+(DEFUN |IntegrationResultFunctions2| (&REST #1=#:G91)
   (SPROG NIL
-         (PROG (#2=#:G84)
+         (PROG (#2=#:G92)
            (RETURN
             (COND
              ((LETT #2#

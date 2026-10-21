@@ -3,21 +3,21 @@
         ((|logbase| (M)) (|c| (M)) (|p| (|NonNegativeInteger|))
          (% (|Union| (|NonNegativeInteger|) "failed")))
         (SPROG
-         ((|a| (M)) (|disclog| (|Integer|)) (|found| (|Boolean|))
-          (|rho| (|Union| (|NonNegativeInteger|) "failed")) (#1=#:G25 NIL)
-          (|i| NIL) (|b| (M)) (|end| (|Integer|)) (#2=#:G24 NIL) (#3=#:G11 NIL)
+         ((|limit| (|Integer|)) (#1=#:G27 NIL) (|l| (|Integer|))
+          (|n| (|Integer|))
           (|exptable| (|Table| (|PositiveInteger|) (|NonNegativeInteger|)))
-          (|n| (|Integer|)) (|l| (|Integer|)) (#4=#:G23 NIL)
-          (|limit| (|Integer|)))
+          (#2=#:G11 NIL) (#3=#:G28 NIL) (|end| (|Integer|)) (|b| (M)) (|i| NIL)
+          (#4=#:G29 NIL) (|rho| (|Union| (|NonNegativeInteger|) "failed"))
+          (|found| (|Boolean|)) (|disclog| (|Integer|)) (|a| (M)))
          (SEQ (LETT |limit| 30)
               (EXIT
                (COND
                 ((< |p| |limit|)
                  (SEQ (LETT |a| (|spadConstant| % 7)) (LETT |disclog| 0)
                       (LETT |found| NIL)
-                      (SEQ (LETT |i| 0) (LETT #4# (- |p| 1)) G190
+                      (SEQ (LETT |i| 0) (LETT #1# (- |p| 1)) G190
                            (COND
-                            ((OR (|greater_SI| |i| #4#) (NULL (NULL |found|)))
+                            ((OR (|greater_SI| |i| #1#) (NULL (NULL |found|)))
                              (GO G191)))
                            (SEQ
                             (EXIT
@@ -41,17 +41,18 @@
                 (#5#
                  (SEQ (LETT |l| (INTEGER-LENGTH |p|))
                       (COND
-                       ((ODDP |l|) (LETT |n| (ASH |p| (- (QUOTIENT2 |l| 2)))))
-                       (#5# (LETT |n| (ASH 1 (QUOTIENT2 |l| 2)))))
+                       ((ODDP |l|)
+                        (LETT |n| (ASH |p| (- (|quotient_INT| |l| 2)))))
+                       (#5# (LETT |n| (ASH 1 (|quotient_INT| |l| 2)))))
                       (LETT |a| (|spadConstant| % 7))
                       (LETT |exptable| (SPADCALL (QREFELT % 16)))
                       (SEQ (LETT |i| 0)
-                           (LETT #2#
-                                 (PROG1 (LETT #3# (- |n| 1))
-                                   (|check_subtype2| (>= #3# 0)
+                           (LETT #3#
+                                 (PROG1 (LETT #2# (- |n| 1))
+                                   (|check_subtype2| (>= #2# 0)
                                                      '(|NonNegativeInteger|)
-                                                     '(|Integer|) #3#)))
-                           G190 (COND ((|greater_SI| |i| #2#) (GO G191)))
+                                                     '(|Integer|) #2#)))
+                           G190 (COND ((|greater_SI| |i| #3#) (GO G191)))
                            (SEQ
                             (SPADCALL (CONS (SPADCALL |a| (QREFELT % 18)) |i|)
                                       |exptable| (QREFELT % 20))
@@ -59,12 +60,13 @@
                              (LETT |a|
                                    (SPADCALL |a| |logbase| (QREFELT % 10)))))
                            (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
-                      (LETT |found| NIL) (LETT |end| (QUOTIENT2 (- |p| 1) |n|))
+                      (LETT |found| NIL)
+                      (LETT |end| (|quotient_INT| (- |p| 1) |n|))
                       (LETT |disclog| 0) (LETT |a| |c|)
                       (LETT |b| (SPADCALL |logbase| (- |n|) (QREFELT % 22)))
-                      (SEQ (LETT |i| 0) (LETT #1# |end|) G190
+                      (SEQ (LETT |i| 0) (LETT #4# |end|) G190
                            (COND
-                            ((OR (|greater_SI| |i| #1#) (NULL (NULL |found|)))
+                            ((OR (|greater_SI| |i| #4#) (NULL (NULL |found|)))
                              (GO G191)))
                            (SEQ
                             (LETT |rho|
@@ -92,7 +94,7 @@
 (DECLAIM (NOTINLINE |DiscreteLogarithmPackage;|)) 
 
 (DEFUN |DiscreteLogarithmPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|DiscreteLogarithmPackage| DV$1))
@@ -106,9 +108,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |DiscreteLogarithmPackage| (#1=#:G26)
+(DEFUN |DiscreteLogarithmPackage| (#1=#:G30)
   (SPROG NIL
-         (PROG (#2=#:G27)
+         (PROG (#2=#:G31)
            (RETURN
             (COND
              ((LETT #2#
@@ -127,7 +129,7 @@
 
 (MAKEPROP '|DiscreteLogarithmPackage| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |One|) (|Boolean|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |1|) (|Boolean|)
               (4 . =) (10 . *) (|Void|) (|String|) (|OutputForm|)
               (16 . |messagePrint|) (|Table| 17 25) (21 . |table|)
               (|PositiveInteger|) (25 . |lookup|)

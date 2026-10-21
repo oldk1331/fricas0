@@ -17,7 +17,7 @@
 (DECLAIM (NOTINLINE |IncrementingMaps;|)) 
 
 (DEFUN |IncrementingMaps;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|IncrementingMaps| DV$1))
@@ -50,7 +50,7 @@
 
 (MAKEPROP '|IncrementingMaps| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |One|) (4 . +)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |1|) (4 . +)
               (|Mapping| 6 6) |INCRMAPS;increment;M;1|
               |INCRMAPS;incrementBy;RM;2|)
            '#(|incrementBy| 10 |increment| 15) 'NIL

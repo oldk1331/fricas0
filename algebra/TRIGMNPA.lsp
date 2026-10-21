@@ -2,28 +2,28 @@
 (SDEFUN |TRIGMNPA;ker2explogs|
         ((|k| (|Kernel| FG)) (|l| (|List| (|Kernel| FG))) (% (FG)))
         (SPROG
-         ((|e| (FG)) (|z| (FG)) (|args| (|List| FG)) (#1=#:G21 NIL) (|a| NIL)
-          (#2=#:G20 NIL) (|kf| (FG)))
+         ((|kf| (FG)) (#1=#:G20 NIL) (|a| NIL) (#2=#:G21 NIL)
+          (|args| (|List| FG)) (|z| (FG)) (|e| (FG)))
          (SEQ (LETT |kf| (SPADCALL |k| (QREFELT % 13)))
               (EXIT
                (COND
                 ((NULL
                   (LETT |args|
                         (PROGN
-                         (LETT #2# NIL)
+                         (LETT #1# NIL)
                          (SEQ (LETT |a| NIL)
-                              (LETT #1# (SPADCALL |k| (QREFELT % 16))) G190
+                              (LETT #2# (SPADCALL |k| (QREFELT % 16))) G190
                               (COND
-                               ((OR (ATOM #1#)
-                                    (PROGN (LETT |a| (CAR #1#)) NIL))
+                               ((OR (ATOM #2#)
+                                    (PROGN (LETT |a| (CAR #2#)) NIL))
                                 (GO G191)))
                               (SEQ
                                (EXIT
-                                (LETT #2#
+                                (LETT #1#
                                       (CONS (SPADCALL |a| |l| (QREFELT % 18))
-                                            #2#))))
-                              (LETT #1# (CDR #1#)) (GO G190) G191
-                              (EXIT (NREVERSE #2#))))))
+                                            #1#))))
+                              (LETT #2# (CDR #2#)) (GO G190) G191
+                              (EXIT (NREVERSE #1#))))))
                  |kf|)
                 (#3='T
                  (SEQ (LETT |z| (|SPADfirst| |args|))
@@ -100,7 +100,7 @@
 (DECLAIM (NOTINLINE |TrigonometricManipulationsAux;|)) 
 
 (DEFUN |TrigonometricManipulationsAux;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -124,9 +124,9 @@
           (QSETREFV % 11 (SPADCALL (QREFELT % 9) (QREFELT % 10)))
           %))) 
 
-(DEFUN |TrigonometricManipulationsAux| (&REST #1=#:G25)
+(DEFUN |TrigonometricManipulationsAux| (&REST #1=#:G27)
   (SPROG NIL
-         (PROG (#2=#:G26)
+         (PROG (#2=#:G28)
            (RETURN
             (COND
              ((LETT #2#
@@ -152,8 +152,8 @@
               (9 . |coerce|) (|List| 7) (|Kernel| 7) (14 . |argument|)
               (|List| 15) |TRIGMNPA;trigs2explogs;FGLFG;2| (|Boolean|)
               (|Symbol|) (19 . |is?|) (25 . |member?|) (31 . *) (37 . |exp|)
-              (|Integer|) (42 . ^) (|PositiveInteger|) (48 . *) (54 . |One|)
-              (58 . |One|) (62 . -) (68 . +) (74 . /) (80 . -) (85 . |log|)
+              (|Integer|) (42 . ^) (|PositiveInteger|) (48 . *) (54 . |1|)
+              (58 . |1|) (62 . -) (68 . +) (74 . /) (80 . -) (85 . |log|)
               (90 . |coerce|) (|BasicOperator|) (95 . |operator|) (|List| %)
               (100 . |elt|) (|SparseMultivariatePolynomial| 6 12)
               (106 . |numer|) (111 . |denom|) (|Mapping| 7 15) (|Mapping| 7 6)

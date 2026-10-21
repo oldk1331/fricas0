@@ -10,6 +10,6 @@
   (SPROG ((#1=#:G0 NIL))
          (PROG1
              (LETT #1#
-                   (|Join| (|OrderedAbelianGroup|) (|OrderedMonoid|) (|Ring|)
-                           (|CharacteristicZero|)))
+                   (|Join| (|Ring|) (|OrderedAbelianSemiGroup|)
+                           (|OrderedMagmaWithZero|) (|CharacteristicZero|)))
            (SETELT #1# 0 '(|OrderedRing|))))) 

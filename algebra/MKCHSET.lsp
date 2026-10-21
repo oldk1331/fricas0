@@ -1,5 +1,5 @@
 
-(PUT '|MKCHSET;position;%Nni;1| '|SPADreplace| 'QCDR) 
+(MAKEPROP '|MKCHSET;position;%Nni;1| '|SPADreplace| 'QCDR) 
 
 (SDEFUN |MKCHSET;position;%Nni;1| ((|x| (%)) (% (|NonNegativeInteger|)))
         (QCDR |x|)) 
@@ -9,7 +9,7 @@
         (SEQ (PROGN (RPLACD |x| |n|) (QCDR |x|))
              (EXIT (SPADCALL (QREFELT % 13))))) 
 
-(PUT '|MKCHSET;coerce;%S;3| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|MKCHSET;coerce;%S;3| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |MKCHSET;coerce;%S;3| ((|x| (%)) (% (S))) (QCAR |x|)) 
 
@@ -70,7 +70,7 @@
 (DECLAIM (NOTINLINE |MakeCachableSet;|)) 
 
 (DEFUN |MakeCachableSet;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|MakeCachableSet| DV$1))
@@ -88,9 +88,9 @@
           (SPADCALL (QREFELT % 10))
           %))) 
 
-(DEFUN |MakeCachableSet| (#1=#:G21)
+(DEFUN |MakeCachableSet| (#1=#:G22)
   (SPROG NIL
-         (PROG (#2=#:G22)
+         (PROG (#2=#:G23)
            (RETURN
             (COND
              ((LETT #2#

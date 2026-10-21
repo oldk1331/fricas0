@@ -4,58 +4,54 @@
 (IN-PACKAGE "BOOT")
 
 ; syGeneralErrorHere() ==
-;    pos := tokPosn($tok)
-;    ncSoftError(pos, 'S2CY0002, [])
+;    pos := tokPosn($stok)
+;    ncSoftError(pos, '"Improper syntax.", [])
 
 (DEFUN |syGeneralErrorHere| ()
   (PROG (|pos|)
     (RETURN
      (PROGN
-      (SETQ |pos| (|tokPosn| |$tok|))
-      (|ncSoftError| |pos| 'S2CY0002 NIL)))))
+      (SETQ |pos| (|tokPosn| |$stok|))
+      (|ncSoftError| |pos| "Improper syntax." NIL)))))
 
 ; syIgnoredFromTo(pos1, pos2) ==
 ;   if pfGlobalLinePosn pos1 = pfGlobalLinePosn pos2 then
-;       ncSoftError(position_from_to(pos1, pos2), 'S2CY0005, [])
+;       ncSoftError(position_from_to(pos1, pos2), '"Ignored.", [])
 ;   else
-;       ncSoftError(position_from(pos1), 'S2CY0003, [])
-;       ncSoftError(position_to(pos2), 'S2CY0004, [])
+;       ncSoftError(position_from(pos1), '"Ignored from here", [])
+;       ncSoftError(position_to(pos2), '"to here.", [])
 
 (DEFUN |syIgnoredFromTo| (|pos1| |pos2|)
   (PROG ()
     (RETURN
      (COND
       ((EQUAL (|pfGlobalLinePosn| |pos1|) (|pfGlobalLinePosn| |pos2|))
-       (|ncSoftError| (|position_from_to| |pos1| |pos2|) 'S2CY0005 NIL))
-      ('T (|ncSoftError| (|position_from| |pos1|) 'S2CY0003 NIL)
-       (|ncSoftError| (|position_to| |pos2|) 'S2CY0004 NIL))))))
+       (|ncSoftError| (|position_from_to| |pos1| |pos2|) "Ignored." NIL))
+      ('T (|ncSoftError| (|position_from| |pos1|) "Ignored from here" NIL)
+       (|ncSoftError| (|position_to| |pos2|) "to here." NIL))))))
 
 ; npMissingMate(close,open)==
-;    ncSoftError(tokPosn open, 'S2CY0008, [])
+;    ncSoftError(tokPosn open, '"Missing mate.", [])
 ;    npMissing close
 
 (DEFUN |npMissingMate| (|close| |open|)
   (PROG ()
     (RETURN
      (PROGN
-      (|ncSoftError| (|tokPosn| |open|) 'S2CY0008 NIL)
+      (|ncSoftError| (|tokPosn| |open|) "Missing mate." NIL)
       (|npMissing| |close|)))))
 
 ; npMissing s==
-;    ncSoftError(tokPosn $stok,'S2CY0007, [PNAME s])
+;    ncSoftError(tokPosn($stok), '"Possibly missing a %b %1 %d", [PNAME(s)])
 ;    THROW("TRAPPOINT","TRAPPED")
 
 (DEFUN |npMissing| (|s|)
   (PROG ()
     (RETURN
      (PROGN
-      (|ncSoftError| (|tokPosn| |$stok|) 'S2CY0007 (LIST (PNAME |s|)))
+      (|ncSoftError| (|tokPosn| |$stok|) "Possibly missing a %b %1 %d"
+       (LIST (PNAME |s|)))
       (THROW 'TRAPPOINT 'TRAPPED)))))
-
-; npCompMissing s == npEqKey s or npMissing s
-
-(DEFUN |npCompMissing| (|s|)
-  (PROG () (RETURN (OR (|npEqKey| |s|) (|npMissing| |s|)))))
 
 ; pfSourceStok x==
 ;        if pfLeaf? x
@@ -75,8 +71,7 @@
 ;    EQ(a,'NoToken)=>
 ;          syGeneralErrorHere()
 ;          THROW("TRAPPOINT","TRAPPED")
-;    ncSoftError(tokPosn a, 'S2CY0002, [])
-;    THROW("TRAPPOINT","TRAPPED")
+;    np_trap_form(a)
 
 (DEFUN |npTrapForm| (|x|)
   (PROG (|a|)
@@ -86,21 +81,22 @@
       (COND
        ((EQ |a| '|NoToken|)
         (PROGN (|syGeneralErrorHere|) (THROW 'TRAPPOINT 'TRAPPED)))
-       ('T
-        (PROGN
-         (|ncSoftError| (|tokPosn| |a|) 'S2CY0002 NIL)
-         (THROW 'TRAPPOINT 'TRAPPED))))))))
+       ('T (|np_trap_form| |a|)))))))
 
-; npTrap()==
-;    ncSoftError(tokPosn $stok,'S2CY0002,[])
+; np_trap_form(a) ==
+;    ncSoftError(tokPosn(a), '"Improper syntax.", [])
 ;    THROW("TRAPPOINT","TRAPPED")
 
-(DEFUN |npTrap| ()
+(DEFUN |np_trap_form| (|a|)
   (PROG ()
     (RETURN
      (PROGN
-      (|ncSoftError| (|tokPosn| |$stok|) 'S2CY0002 NIL)
+      (|ncSoftError| (|tokPosn| |a|) "Improper syntax." NIL)
       (THROW 'TRAPPOINT 'TRAPPED)))))
+
+; npTrap()== np_trap_form($stok)
+
+(DEFUN |npTrap| () (PROG () (RETURN (|np_trap_form| |$stok|))))
 
 ; npRecoverTrap()==
 ;   npFirstTok()

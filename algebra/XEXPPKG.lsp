@@ -2,9 +2,9 @@
 (SDEFUN |XEXPPKG;log;XPOLYNniXPOLY;1|
         ((|p| (XPOLY)) (|n| (|NonNegativeInteger|)) (% (XPOLY)))
         (SPROG
-         ((|k| (|Integer|)) (|s| (XPOLY)) (|k2| (R))
-          (|k1| (|Fraction| (|Integer|))) (#1=#:G8 NIL) (|i| NIL)
-          (|p1| (XPOLY)))
+         ((|p1| (XPOLY)) (|i| NIL) (#1=#:G8 NIL)
+          (|k1| (|Fraction| (|Integer|))) (|k2| (R)) (|s| (XPOLY))
+          (|k| (|Integer|)))
          (SEQ (LETT |p1| (SPADCALL |p| (|spadConstant| % 10) (QREFELT % 11)))
               (COND
                ((NULL (SPADCALL |p1| (QREFELT % 13)))
@@ -31,8 +31,8 @@
 (SDEFUN |XEXPPKG;exp;XPOLYNniXPOLY;2|
         ((|p| (XPOLY)) (|n| (|NonNegativeInteger|)) (% (XPOLY)))
         (SPROG
-         ((|k| (|Integer|)) (|s| (XPOLY)) (|k2| (R))
-          (|k1| (|Fraction| (|Integer|))) (#1=#:G16 NIL) (|i| NIL))
+         ((|i| NIL) (#1=#:G16 NIL) (|k1| (|Fraction| (|Integer|))) (|k2| (R))
+          (|s| (XPOLY)) (|k| (|Integer|)))
          (SEQ
           (COND
            ((NULL (SPADCALL |p| (QREFELT % 13)))
@@ -67,7 +67,7 @@
 
 (SDEFUN |XEXPPKG;Hausdorff;2XPOLYNniXPOLY;3|
         ((|p| (XPOLY)) (|q| (XPOLY)) (|n| (|NonNegativeInteger|)) (% (XPOLY)))
-        (SPROG ((|q1| (XPOLY)) (|p1| (XPOLY)))
+        (SPROG ((|p1| (XPOLY)) (|q1| (XPOLY)))
                (SEQ (LETT |p1| (SPADCALL |p| |n| (QREFELT % 28)))
                     (LETT |q1| (SPADCALL |q| |n| (QREFELT % 28)))
                     (EXIT
@@ -77,7 +77,7 @@
 (DECLAIM (NOTINLINE |XExponentialPackage;|)) 
 
 (DEFUN |XExponentialPackage;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -117,12 +117,11 @@
 (MAKEPROP '|XExponentialPackage| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (0 . |One|) (4 . |One|) (8 . -) (|Boolean|)
-              (14 . |quasiRegular?|) (19 . |Zero|) (|Integer|) (|Fraction| 15)
+              (|local| |#3|) (0 . |1|) (4 . |1|) (8 . -) (|Boolean|)
+              (14 . |quasiRegular?|) (19 . |0|) (|Integer|) (|Fraction| 15)
               (23 . /) (29 . *) (|NonNegativeInteger|) (35 . |trunc|)
-              (41 . |coerce|) (46 . *) |XEXPPKG;log;XPOLYNniXPOLY;1|
-              (52 . |Zero|) (56 . =) (62 . *) (68 . +)
-              |XEXPPKG;exp;XPOLYNniXPOLY;2|
+              (41 . |coerce|) (46 . *) |XEXPPKG;log;XPOLYNniXPOLY;1| (52 . |0|)
+              (56 . =) (62 . *) (68 . +) |XEXPPKG;exp;XPOLYNniXPOLY;2|
               |XEXPPKG;Hausdorff;2XPOLYNniXPOLY;3|)
            '#(|log| 74 |exp| 80 |Hausdorff| 86) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))

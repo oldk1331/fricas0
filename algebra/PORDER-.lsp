@@ -14,7 +14,7 @@
 (DECLAIM (NOTINLINE |PartialOrder&;|)) 
 
 (DEFUN |PartialOrder&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|PartialOrder&| DV$1))
@@ -24,13 +24,17 @@
           (|stuffDomainSlots| %)
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
+          (COND ((|HasCategory| |#1| '(|OrderedSet|)))
+                ('T
+                 (QSETREFV % 12
+                           (CONS (|dispatchFunction| |PORDER-;<;2SB;3|) %))))
           %))) 
 
 (MAKEPROP '|PartialOrder&| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|Boolean|) (0 . <=)
-              |PORDER-;>=;2SB;1| (6 . <) |PORDER-;>;2SB;2| |PORDER-;<;2SB;3|)
-           '#(>= 12 > 18 < 24) 'NIL
+              |PORDER-;>=;2SB;1| (6 . <) |PORDER-;>;2SB;2| (12 . <))
+           '#(>= 18 > 24 < 30) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
                        (CONS
@@ -42,6 +46,6 @@
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 12
                                             '(2 6 7 0 0 8 2 6 7 0 0 10 2 0 7 0
-                                              0 9 2 0 7 0 0 11 2 0 7 0 0
-                                              12)))))
+                                              0 12 2 0 7 0 0 9 2 0 7 0 0 11 2 0
+                                              7 0 0 12)))))
            '|lookupComplete|)) 

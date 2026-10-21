@@ -2,9 +2,9 @@
 (SDEFUN |JGB;convert1|
         ((|p| (P)) (% (|DistributedJetBundlePolynomial| R JB LJV E)))
         (SPROG
-         ((|up| (|SparseUnivariatePolynomial| P))
-          (|res| (|DistributedJetBundlePolynomial| R JB LJV E)) (|x| (JB))
-          (|cc| (R)) (|xx| (|Union| JB "failed")))
+         ((|xx| (|Union| JB "failed")) (|cc| (R)) (|x| (JB))
+          (|res| (|DistributedJetBundlePolynomial| R JB LJV E))
+          (|up| (|SparseUnivariatePolynomial| P)))
          (SEQ (LETT |xx| (SPADCALL |p| (QREFELT % 12)))
               (EXIT
                (COND
@@ -38,10 +38,10 @@
 (SDEFUN |JGB;convert2|
         ((|p| (|DistributedJetBundlePolynomial| R JB LJV E)) (% (P)))
         (SPROG
-         ((|up|
+         ((|xx| (|Union| JB "failed")) (|cc| (R)) (|x| (JB)) (|res| (P))
+          (|up|
            (|SparseUnivariatePolynomial|
-            (|DistributedJetBundlePolynomial| R JB LJV E)))
-          (|res| (P)) (|x| (JB)) (|cc| (R)) (|xx| (|Union| JB "failed")))
+            (|DistributedJetBundlePolynomial| R JB LJV E))))
          (SEQ (LETT |xx| (SPADCALL |p| (QREFELT % 30)))
               (EXIT
                (COND
@@ -71,38 +71,38 @@
 
 (SDEFUN |JGB;groebner;2L;3| ((|lp| (|List| P)) (% (|List| P)))
         (SPROG
-         ((#1=#:G35 NIL) (|dp| NIL) (#2=#:G34 NIL)
-          (|gb| (|List| (|DistributedJetBundlePolynomial| R JB LJV E)))
+         ((#1=#:G35 NIL) (|p| NIL) (#2=#:G36 NIL)
           (|nlp| (|List| (|DistributedJetBundlePolynomial| R JB LJV E)))
-          (#3=#:G33 NIL) (|p| NIL) (#4=#:G32 NIL))
+          (|gb| (|List| (|DistributedJetBundlePolynomial| R JB LJV E)))
+          (#3=#:G37 NIL) (|dp| NIL) (#4=#:G38 NIL))
          (SEQ
           (LETT |nlp|
                 (PROGN
-                 (LETT #4# NIL)
-                 (SEQ (LETT |p| NIL) (LETT #3# |lp|) G190
+                 (LETT #1# NIL)
+                 (SEQ (LETT |p| NIL) (LETT #2# |lp|) G190
                       (COND
-                       ((OR (ATOM #3#) (PROGN (LETT |p| (CAR #3#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT |p| (CAR #2#)) NIL))
                         (GO G191)))
-                      (SEQ (EXIT (LETT #4# (CONS (|JGB;convert1| |p| %) #4#))))
-                      (LETT #3# (CDR #3#)) (GO G190) G191
-                      (EXIT (NREVERSE #4#)))))
+                      (SEQ (EXIT (LETT #1# (CONS (|JGB;convert1| |p| %) #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#)))))
           (LETT |gb| (SPADCALL |nlp| (QREFELT % 43)))
           (EXIT
            (PROGN
-            (LETT #2# NIL)
-            (SEQ (LETT |dp| NIL) (LETT #1# |gb|) G190
+            (LETT #3# NIL)
+            (SEQ (LETT |dp| NIL) (LETT #4# |gb|) G190
                  (COND
-                  ((OR (ATOM #1#) (PROGN (LETT |dp| (CAR #1#)) NIL))
+                  ((OR (ATOM #4#) (PROGN (LETT |dp| (CAR #4#)) NIL))
                    (GO G191)))
-                 (SEQ (EXIT (LETT #2# (CONS (|JGB;convert2| |dp| %) #2#))))
-                 (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT (NREVERSE #2#)))))))) 
+                 (SEQ (EXIT (LETT #3# (CONS (|JGB;convert2| |dp| %) #3#))))
+                 (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT (NREVERSE #3#)))))))) 
 
 (DECLAIM (NOTINLINE |JetGroebner;|)) 
 
 (DEFUN |JetGroebner;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -124,9 +124,9 @@
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
-(DEFUN |JetGroebner| (&REST #1=#:G36)
+(DEFUN |JetGroebner| (&REST #1=#:G39)
   (SPROG NIL
-         (PROG (#2=#:G37)
+         (PROG (#2=#:G40)
            (RETURN
             (COND
              ((LETT #2#
@@ -148,16 +148,15 @@
               (|Union| 7 '"failed") (0 . |mainVariable|) (5 . |retract|)
               (|DistributedJetBundlePolynomial| 6 7 (NRTEVAL (QREFELT % 8)) 10)
               (10 . |coerce|) (|Boolean|) (|List| 7) (15 . |member?|)
-              (|SparseUnivariatePolynomial| %) (21 . |univariate|)
-              (27 . |Zero|) (|SparseUnivariatePolynomial| 9) (31 . |zero?|)
+              (|SparseUnivariatePolynomial| %) (21 . |univariate|) (27 . |0|)
+              (|SparseUnivariatePolynomial| 9) (31 . |zero?|)
               (36 . |leadingCoefficient|) (|NonNegativeInteger|)
               (41 . |degree|) (46 . |monomial|) (53 . +) (59 . |reductum|)
               (64 . |mainVariable|) (69 . |retract|) (74 . |coerce|)
-              (79 . |univariate|) (85 . |Zero|)
-              (|SparseUnivariatePolynomial| 14) (89 . |zero?|)
-              (94 . |leadingCoefficient|) (99 . |degree|) (104 . |monomial|)
-              (111 . +) (117 . |reductum|) (|List| %) (122 . |groebner|)
-              (|List| 9) |JGB;groebner;2L;3|)
+              (79 . |univariate|) (85 . |0|) (|SparseUnivariatePolynomial| 14)
+              (89 . |zero?|) (94 . |leadingCoefficient|) (99 . |degree|)
+              (104 . |monomial|) (111 . +) (117 . |reductum|) (|List| %)
+              (122 . |groebner|) (|List| 9) |JGB;groebner;2L;3|)
            '#(|groebner| 127) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

@@ -1,20 +1,20 @@
 
-(PUT '|REF;=;2%B;1| '|SPADreplace| 'EQ) 
+(MAKEPROP '|REF;=;2%B;1| '|SPADreplace| 'EQ) 
 
 (SDEFUN |REF;=;2%B;1| ((|p| (%)) (|q| (%)) (% (|Boolean|))) (EQ |p| |q|)) 
 
-(PUT '|REF;ref;S%;2| '|SPADreplace| 'LIST) 
+(MAKEPROP '|REF;ref;S%;2| '|SPADreplace| 'LIST) 
 
 (SDEFUN |REF;ref;S%;2| ((|v| (S)) (% (%))) (LIST |v|)) 
 
-(PUT '|REF;elt;%S;3| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|REF;elt;%S;3| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |REF;elt;%S;3| ((|p| (%)) (% (S))) (QCAR |p|)) 
 
 (SDEFUN |REF;setelt!;%2S;4| ((|p| (%)) (|v| (S)) (% (S)))
         (PROGN (RPLACA |p| |v|) (QCAR |p|))) 
 
-(PUT '|REF;deref;%S;5| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|REF;deref;%S;5| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |REF;deref;%S;5| ((|p| (%)) (% (S))) (QCAR |p|)) 
 
@@ -28,7 +28,7 @@
 (DECLAIM (NOTINLINE |Reference;|)) 
 
 (DEFUN |Reference;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Reference| DV$1))
@@ -50,9 +50,9 @@
             (QSETREFV % 21 (CONS (|dispatchFunction| |REF;coerce;%Of;7|) %))))
           %))) 
 
-(DEFUN |Reference| (#1=#:G1781)
+(DEFUN |Reference| (#1=#:G9)
   (SPROG NIL
-         (PROG (#2=#:G1782)
+         (PROG (#2=#:G10)
            (RETURN
             (COND
              ((LETT #2#

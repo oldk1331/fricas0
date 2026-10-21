@@ -3,15 +3,15 @@
         ((|m| (F)) (|n| (F)) (|y| (|BasicOperator|)) (|x| (|Symbol|))
          (% (|Union| F #1="failed")))
         (SPROG
-         ((|v| (|Union| (|List| F) "failed"))
+         ((|yx| (F)) (|lk| (|List| (|Kernel| F))) (|lv| (|List| F)) (|d| (F))
+          (|u| (|Union| F #1#)) (|mu| (F)) (|mm| (F)) (|nn| (F))
+          (|k1| (|Kernel| F))
           (|w|
            (|Union|
             (|Record| (|:| |coef1| F) (|:| |coefn| F)
                       (|:| |exponent| (|NonNegativeInteger|)))
             "failed"))
-          (|k1| (|Kernel| F)) (|nn| (F)) (|mm| (F)) (|mu| (F))
-          (|u| (|Union| F #1#)) (|d| (F)) (|lv| (|List| F))
-          (|lk| (|List| (|Kernel| F))) (|yx| (F)))
+          (|v| (|Union| (|List| F) "failed")))
          (SEQ
           (LETT |lk|
                 (LIST
@@ -72,7 +72,7 @@
 (SDEFUN |NODE1;integratingFactor|
         ((|m| (F)) (|n| (F)) (|den| (F)) (|y| (|Symbol|)) (|x| (|Symbol|))
          (% (|Union| F "failed")))
-        (SPROG ((|f| (F)) (|d| (F)))
+        (SPROG ((|d| (F)) (|f| (F)))
                (COND
                 ((SPADCALL
                   (LETT |d|
@@ -117,15 +117,15 @@
                      (|:| |exponent| (|NonNegativeInteger|)))
            "failed")))
         (SPROG
-         ((#1=#:G54 NIL) (|b| (F)) (|a| (F))
-          (|pp|
-           (|SparseUnivariatePolynomial|
-            (|SparseMultivariatePolynomial| R (|Kernel| F))))
-          (|d| (|NonNegativeInteger|))
+         ((|f| (F)) (|r| (F)) (|y| (F))
           (|p|
            (|SparseUnivariatePolynomial|
             (|SparseMultivariatePolynomial| R (|Kernel| F))))
-          (|y| (F)) (|r| (F)) (|f| (F)))
+          (|d| (|NonNegativeInteger|))
+          (|pp|
+           (|SparseUnivariatePolynomial|
+            (|SparseMultivariatePolynomial| R (|Kernel| F))))
+          (|a| (F)) (|b| (F)) (#1=#:G55 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -168,7 +168,7 @@
                                 (SPADCALL (SPADCALL |p| (QREFELT % 57))
                                           (QREFELT % 27)))
                           |y| (QREFELT % 46))))))
-                  (PROGN (LETT #1# (CONS 1 #2="failed")) (GO #3=#:G52)))))))
+                  (PROGN (LETT #1# (CONS 1 #2="failed")) (GO #3=#:G53)))))))
              ('T (EXIT (CONS 1 #2#))))
             (EXIT
              (CONS 0
@@ -183,8 +183,8 @@
          (|y| (|BasicOperator|)) (|x| (|Symbol|)) (|yx| (F))
          (% (|Union| F "failed")))
         (SPROG
-         ((|sol| (|Record| (|:| |particular| F) (|:| |basis| (|List| F))))
-          (#1=#:G61 NIL) (|deq| (F)) (|n1| (|Integer|)))
+         ((|n1| (|Integer|)) (|deq| (F)) (#1=#:G67 NIL)
+          (|sol| (|Record| (|:| |particular| F) (|:| |basis| (|List| F)))))
          (SEQ (LETT |n1| (- 1 (QVELT |rec| 2)))
               (LETT |deq|
                     (SPADCALL
@@ -219,11 +219,11 @@
         ((|m| (F)) (|n| (F)) (|ky| (|Kernel| F))
          (% (|Union| (|List| F) "failed")))
         (SPROG
-         ((|a2| (F)) (|a1| (F)) (|a0| (F))
+         ((|f| (F)) (|q| (F)) (|y| (F))
           (|p|
            (|SparseUnivariatePolynomial|
             (|SparseMultivariatePolynomial| R (|Kernel| F))))
-          (|y| (F)) (|q| (F)) (|f| (F)))
+          (|a0| (F)) (|a1| (F)) (|a2| (F)))
          (SEQ
           (LETT |q|
                 (SPADCALL
@@ -274,8 +274,8 @@
         ((|l| (|List| F)) (|y| (|BasicOperator|)) (|x| (|Symbol|)) (|yx| (F))
          (% (|Union| F "failed")))
         (SPROG
-         ((|gsol| (|Record| (|:| |particular| F) (|:| |basis| (|List| F))))
-          (#1=#:G81 NIL) (|deq| (F)) (|u| (|Union| F "failed")))
+         ((|u| (|Union| F "failed")) (|deq| (F)) (#1=#:G87 NIL)
+          (|gsol| (|Record| (|:| |particular| F) (|:| |basis| (|List| F)))))
          (SEQ (LETT |u| (|NODE1;partSolRiccati| |l| |y| |x| |yx| %))
               (EXIT
                (COND ((QEQCAR |u| 1) (CONS 1 "failed"))
@@ -331,11 +331,11 @@
         ((|l| (|List| F)) (|y| (|BasicOperator|)) (|x| (|Symbol|)) (|yx| (F))
          (% (|Union| F "failed")))
         (SPROG
-         ((#1=#:G99 NIL) (|bas| #2=(|List| F))
+         ((|l3| (F)) (|q0| (F)) (|q1| (F)) (|lineq| (F))
           (|gsol|
-           (|Union| (|Record| (|:| |particular| F) (|:| |basis| #2#)) F
-                    "failed"))
-          (|lineq| (F)) (|q1| (F)) (|q0| (F)) (|l3| (F)))
+           (|Union| (|Record| (|:| |particular| F) (|:| |basis| #1=(|List| F)))
+                    F "failed"))
+          (|bas| #1#) (#2=#:G105 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -361,19 +361,19 @@
                    ((QEQCAR |gsol| 0)
                     (COND
                      ((NULL (LETT |bas| (QCDR (QCDR |gsol|))))
-                      (PROGN (LETT #1# (CONS 1 #3="failed")) (GO #4=#:G97)))))
-                   ('T (PROGN (LETT #1# (CONS 1 #3#)) (GO #4#))))))
+                      (PROGN (LETT #2# (CONS 1 #3="failed")) (GO #4=#:G103)))))
+                   ('T (PROGN (LETT #2# (CONS 1 #3#)) (GO #4#))))))
             (EXIT
              (CONS 0
                    (SPADCALL (SPADCALL (|SPADfirst| |bas|) |x| (QREFELT % 31))
                              (SPADCALL |l3| (|SPADfirst| |bas|) (QREFELT % 28))
                              (QREFELT % 39))))))
-          #4# (EXIT #1#)))) 
+          #4# (EXIT #2#)))) 
 
 (DECLAIM (NOTINLINE |NonLinearFirstOrderODESolver;|)) 
 
 (DEFUN |NonLinearFirstOrderODESolver;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -391,9 +391,9 @@
           (QSETREFV % 13 (SPADCALL (QREFELT % 10) (QREFELT % 12)))
           %))) 
 
-(DEFUN |NonLinearFirstOrderODESolver| (&REST #1=#:G100)
+(DEFUN |NonLinearFirstOrderODESolver| (&REST #1=#:G106)
   (SPROG NIL
-         (PROG (#2=#:G101)
+         (PROG (#2=#:G107)
            (RETURN
             (COND
              ((LETT #2#
@@ -422,17 +422,17 @@
               (37 . |denom|) (|SparseMultivariatePolynomial| 6 11) (42 . |lcm|)
               (48 . |coerce|) (53 . *) (|ODEIntegration| 6 7) (59 . |int|)
               (65 . |differentiate|) (71 . -) (77 . +) (|Union| 7 '#1="failed")
-              |NODE1;solve;2FBoSU;1| (|Boolean|) (83 . |zero?|) (88 . |One|)
-              (92 . /) (98 . |One|) (|List| 8) (102 . |variables|)
+              |NODE1;solve;2FBoSU;1| (|Boolean|) (83 . |zero?|) (88 . |1|)
+              (92 . /) (98 . |1|) (|List| 8) (102 . |variables|)
               (107 . |member?|) (113 . |expint|) (119 . -) (124 . |freeOf?|)
               (130 . |numer|) (|SparseUnivariatePolynomial| %)
               (135 . |univariate|) (|NonNegativeInteger|)
               (|SparseUnivariatePolynomial| 25) (141 . |degree|)
-              (146 . |reductum|) (151 . ~=) (157 . |Zero|) (161 . ~=)
+              (146 . |reductum|) (151 . ~=) (157 . |0|) (161 . ~=)
               (167 . |leadingCoefficient|) (|Integer|) (172 . *)
               (|Record| (|:| |particular| 7) (|:| |basis| 67))
               (|Union| 60 7 '"failed") (|ElementaryFunctionODESolver| 6 7)
-              (178 . |solve|) (185 . ^) (191 . |Zero|) (195 . |coefficient|)
+              (178 . |solve|) (185 . ^) (191 . |0|) (195 . |coefficient|)
               (|List| 7) (201 . |elt|) (|PositiveInteger|) (207 . *)
               (213 . |inv|) (218 . |differentiate|))
            '#(|solve| 225) 'NIL

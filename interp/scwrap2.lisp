@@ -49,10 +49,291 @@
             (|make_BF| (+ (* |int| (EXPT 10 |fraclen|)) |frac|)
              (- |expo| |fraclen|)))))))
 
+; $symbol_off := 0
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$symbol_off| 0))
+
+; $kind_off := 1
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$kind_off| 1))
+
+; $non_blank_off := 2
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$non_blank_off| 2))
+
+; $line_off := 3
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$line_off| 3))
+
+; $char_off := 4
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$char_off| 4))
+
+; $token_count_off := 0
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$token_count_off| 0))
+
+; $prior_off := 1
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$prior_off| 1))
+
+; $current_off := 2
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$current_off| 2))
+
+; $next_off := 3
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$next_off| 3))
+
+; $token_fifo := GETREFV(4)
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$token_fifo| (GETREFV 4)))
+
+; $token_fifo.$token_count_off := 0
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (PROG () (RETURN (SETF (ELT |$token_fifo| |$token_count_off|) 0))))
+
+; $token_fifo.$prior_off := GETREFV(5)
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (PROG () (RETURN (SETF (ELT |$token_fifo| |$prior_off|) (GETREFV 5)))))
+
+; $token_fifo.$current_off := GETREFV(5)
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (PROG () (RETURN (SETF (ELT |$token_fifo| |$current_off|) (GETREFV 5)))))
+
+; $token_fifo.$next_off := GETREFV(5)
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL)
+  (PROG () (RETURN (SETF (ELT |$token_fifo| |$next_off|) (GETREFV 5)))))
+
+; token_install(symbol, kind, non_blank, line_num, char_num, tok) ==
+;     tok.$symbol_off := symbol
+;     tok.$kind_off := kind
+;     tok.$non_blank_off := non_blank
+;     tok.$line_off := line_num
+;     tok.$char_off := char_num
+;     tok
+
+(DEFUN |token_install|
+       (|symbol| |kind| |non_blank| |line_num| |char_num| |tok|)
+  (PROG ()
+    (RETURN
+     (PROGN
+      (SETF (ELT |tok| |$symbol_off|) |symbol|)
+      (SETF (ELT |tok| |$kind_off|) |kind|)
+      (SETF (ELT |tok| |$non_blank_off|) |non_blank|)
+      (SETF (ELT |tok| |$line_off|) |line_num|)
+      (SETF (ELT |tok| |$char_off|) |char_num|)
+      |tok|))))
+
+; empty_token_fifo() ==
+;     $token_fifo.$token_count_off := 0
+;     tok := $token_fifo.$prior_off
+;     tok.$kind_off := nil
+
+(DEFUN |empty_token_fifo| ()
+  (PROG (|tok|)
+    (RETURN
+     (PROGN
+      (SETF (ELT |$token_fifo| |$token_count_off|) 0)
+      (SETQ |tok| (ELT |$token_fifo| |$prior_off|))
+      (SETF (ELT |tok| |$kind_off|) NIL)))))
+
+; print_tok(tok, which, is_was) ==
+;     FORMAT(true, '"The ~a token ~a:~%", which, is_was)
+;     FORMAT(true, '"    ~a ~a ~a line ~a, character ~a~%", tok.$kind_off,
+;            tok.$symbol_off, (tok.$non_blank_off => '"non blank"; '""),
+;            tok.$line_off, tok.$char_off)
+
+(DEFUN |print_tok| (|tok| |which| |is_was|)
+  (PROG ()
+    (RETURN
+     (PROGN
+      (FORMAT T "The ~a token ~a:~%" |which| |is_was|)
+      (FORMAT T "    ~a ~a ~a line ~a, character ~a~%" (ELT |tok| |$kind_off|)
+              (ELT |tok| |$symbol_off|)
+              (COND ((ELT |tok| |$non_blank_off|) "non blank") ('T ""))
+              (ELT |tok| |$line_off|) (ELT |tok| |$char_off|))))))
+
+; show_token_fifo() ==
+;     cnt := $token_fifo.$token_count_off
+;     if not(0 < cnt) then
+;         FORMAT(true, '"~%There are no valid tokens.~%")
+;     else
+;         FORMAT(true, '"~%The number of valid tokens is ~S.~%", cnt)
+;     ptok := $token_fifo.$prior_off
+;     if ptok.$kind_off then
+;         print_tok(ptok, '"prior", '"was")
+;     cnt = 0 => nil
+;     print_tok($token_fifo.$current_off, '"current", '"is")
+;     cnt = 1 => nil
+;     print_tok($token_fifo.$next_off, '"next", '"is")
+
+(DEFUN |show_token_fifo| ()
+  (PROG (|ptok| |cnt|)
+    (RETURN
+     (PROGN
+      (SETQ |cnt| (ELT |$token_fifo| |$token_count_off|))
+      (COND ((NULL (< 0 |cnt|)) (FORMAT T "~%There are no valid tokens.~%"))
+            (#1='T (FORMAT T "~%The number of valid tokens is ~S.~%" |cnt|)))
+      (SETQ |ptok| (ELT |$token_fifo| |$prior_off|))
+      (COND ((ELT |ptok| |$kind_off|) (|print_tok| |ptok| "prior" "was")))
+      (COND ((EQL |cnt| 0) NIL)
+            (#1#
+             (PROGN
+              (|print_tok| (ELT |$token_fifo| |$current_off|) "current" "is")
+              (COND ((EQL |cnt| 1) NIL)
+                    (#1#
+                     (|print_tok| (ELT |$token_fifo| |$next_off|) "next"
+                      "is"))))))))))
+
+; current_token() ==
+;     greater_SI($token_fifo.$token_count_off, 0) => $token_fifo.$current_off
+;     $token_fifo.$token_count_off := 1
+;     ntokreader($token_fifo.$current_off)
+
+(DEFUN |current_token| ()
+  (PROG ()
+    (RETURN
+     (COND
+      ((|greater_SI| (ELT |$token_fifo| |$token_count_off|) 0)
+       (ELT |$token_fifo| |$current_off|))
+      ('T
+       (PROGN
+        (SETF (ELT |$token_fifo| |$token_count_off|) 1)
+        (|ntokreader| (ELT |$token_fifo| |$current_off|))))))))
+
+; next_token() ==
+;     greater_SI($token_fifo.$token_count_off, 1) => $token_fifo.$next_off
+;     current_token()
+;     $token_fifo.$token_count_off := 2
+;     ntokreader($token_fifo.$next_off)
+
+(DEFUN |next_token| ()
+  (PROG ()
+    (RETURN
+     (COND
+      ((|greater_SI| (ELT |$token_fifo| |$token_count_off|) 1)
+       (ELT |$token_fifo| |$next_off|))
+      ('T
+       (PROGN
+        (|current_token|)
+        (SETF (ELT |$token_fifo| |$token_count_off|) 2)
+        (|ntokreader| (ELT |$token_fifo| |$next_off|))))))))
+
+; token_symbol(tok) == tok.$symbol_off
+
+(DEFUN |token_symbol| (|tok|) (PROG () (RETURN (ELT |tok| |$symbol_off|))))
+
+; prior_symbol() ==
+;     tok := $token_fifo.$prior_off
+;     tok.$kind_off => tok.$symbol_off
+;     nil
+
+(DEFUN |prior_symbol| ()
+  (PROG (|tok|)
+    (RETURN
+     (PROGN
+      (SETQ |tok| (ELT |$token_fifo| |$prior_off|))
+      (COND ((ELT |tok| |$kind_off|) (ELT |tok| |$symbol_off|)) ('T NIL))))))
+
+; copy_prior_token() ==
+;     tok := $token_fifo.$prior_off
+;     res := GETREFV(5)
+;     res.$symbol_off := tok.$symbol_off
+;     res.$kind_off := tok.$kind_off
+;     res.$non_blank_off := tok.$non_blank_off
+;     res.$line_off := tok.$line_off
+;     res.$char_off := tok.$char_off
+;     res
+
+(DEFUN |copy_prior_token| ()
+  (PROG (|res| |tok|)
+    (RETURN
+     (PROGN
+      (SETQ |tok| (ELT |$token_fifo| |$prior_off|))
+      (SETQ |res| (GETREFV 5))
+      (SETF (ELT |res| |$symbol_off|) (ELT |tok| |$symbol_off|))
+      (SETF (ELT |res| |$kind_off|) (ELT |tok| |$kind_off|))
+      (SETF (ELT |res| |$non_blank_off|) (ELT |tok| |$non_blank_off|))
+      (SETF (ELT |res| |$line_off|) (ELT |tok| |$line_off|))
+      (SETF (ELT |res| |$char_off|) (ELT |tok| |$char_off|))
+      |res|))))
+
+; set_prior_token(tok) ==
+;     $token_fifo.$prior_off := tok
+
+(DEFUN |set_prior_token| (|tok|)
+  (PROG () (RETURN (SETF (ELT |$token_fifo| |$prior_off|) |tok|))))
+
+; current_symbol() == (current_token()).$symbol_off
+
+(DEFUN |current_symbol| ()
+  (PROG () (RETURN (ELT (|current_token|) |$symbol_off|))))
+
+; next_symbol() == (next_token()).$symbol_off
+
+(DEFUN |next_symbol| () (PROG () (RETURN (ELT (|next_token|) |$symbol_off|))))
+
+; match_token(tok, kind, symbol) ==
+;     not(EQ(tok.$kind_off, kind)) => nil
+;     not(symbol) or EQ(tok.$symbol_off, symbol) => tok
+;     nil
+
+(DEFUN |match_token| (|tok| |kind| |symbol|)
+  (PROG ()
+    (RETURN
+     (COND ((NULL (EQ (ELT |tok| |$kind_off|) |kind|)) NIL)
+           ((OR (NULL |symbol|) (EQ (ELT |tok| |$symbol_off|) |symbol|)) |tok|)
+           ('T NIL)))))
+
+; match_current_token(kind, symbol) ==
+;     match_token(current_token(), kind, symbol)
+
+(DEFUN |match_current_token| (|kind| |symbol|)
+  (PROG () (RETURN (|match_token| (|current_token|) |kind| |symbol|))))
+
+; match_next_token(kind, symbol) ==
+;     match_token(next_token(), kind, symbol)
+
+(DEFUN |match_next_token| (|kind| |symbol|)
+  (PROG () (RETURN (|match_token| (|next_token|) |kind| |symbol|))))
+
+; advance_token() ==
+;     cnt := $token_fifo.$token_count_off
+;     cnt = 0 => current_token()
+;     s_tok := $token_fifo.$prior_off
+;     $token_fifo.$prior_off := $token_fifo.$current_off
+;     $token_fifo.$current_off := $token_fifo.$next_off
+;     $token_fifo.$next_off := s_tok
+;     $token_fifo.$token_count_off := dec_SI(cnt)
+;     if cnt = 1 then
+;         current_token()
+
+(DEFUN |advance_token| ()
+  (PROG (|s_tok| |cnt|)
+    (RETURN
+     (PROGN
+      (SETQ |cnt| (ELT |$token_fifo| |$token_count_off|))
+      (COND ((EQL |cnt| 0) (|current_token|))
+            ('T
+             (PROGN
+              (SETQ |s_tok| (ELT |$token_fifo| |$prior_off|))
+              (SETF (ELT |$token_fifo| |$prior_off|)
+                      (ELT |$token_fifo| |$current_off|))
+              (SETF (ELT |$token_fifo| |$current_off|)
+                      (ELT |$token_fifo| |$next_off|))
+              (SETF (ELT |$token_fifo| |$next_off|) |s_tok|)
+              (SETF (ELT |$token_fifo| |$token_count_off|) (|dec_SI| |cnt|))
+              (COND ((EQL |cnt| 1) (|current_token|))))))))))
+
 ; current_line_number() ==
 ;     tok := current_token()
 ;     tok =>
-;          pos := TOKEN_-LINE_NUM(tok)
+;          pos := tok.$line_off
 ;          pos and INTEGERP(pos) => pos
 ;          nil
 ;     nil
@@ -65,21 +346,18 @@
       (COND
        (|tok|
         (PROGN
-         (SETQ |pos| (TOKEN-LINE_NUM |tok|))
+         (SETQ |pos| (ELT |tok| |$line_off|))
          (COND ((AND |pos| (INTEGERP |pos|)) |pos|) (#1='T NIL))))
        (#1# NIL))))))
 
 ; current_token_is_nonblank() ==
 ;     tok := current_token()
-;     tok => TOKEN_-NONBLANK(tok)
-;     nil
+;     tok.$non_blank_off
 
 (DEFUN |current_token_is_nonblank| ()
   (PROG (|tok|)
     (RETURN
-     (PROGN
-      (SETQ |tok| (|current_token|))
-      (COND (|tok| (TOKEN-NONBLANK |tok|)) ('T NIL))))))
+     (PROGN (SETQ |tok| (|current_token|)) (ELT |tok| |$non_blank_off|)))))
 
 ; spad_syntax_error(wanted, parsing) ==
 ;     FORMAT(true, '"******** Spad syntax error detected ********")
@@ -91,7 +369,7 @@
 ;     if $curent_line then
 ;         FORMAT(true, '"~&The current line is:~%~%~5D> ~A~%~%",
 ;            $curent_line_number, $curent_line)
-;     TOKEN_-STACK_-SHOW()
+;     show_token_fifo()
 ;     THROW('SPAD_READER, nil)
 
 (DEFUN |spad_syntax_error| (|wanted| |parsing|)
@@ -108,7 +386,7 @@
        (|$curent_line|
         (FORMAT T "~&The current line is:~%~%~5D> ~A~%~%" |$curent_line_number|
                 |$curent_line|)))
-      (TOKEN-STACK-SHOW)
+      (|show_token_fifo|)
       (THROW 'SPAD_READER NIL)))))
 
 ; fakeloopInclude(name, n) ==
@@ -180,7 +458,6 @@
 
 ; spadCompile1(name, pile_mode) ==
 ;     $nopiles : local := pile_mode
-;     $comp370_apply : local := FUNCTION print_defun
 ;     $file_apply : local := FUNCTION print_defun
 ;     _*EOF_* : local := false
 ;     $edit_file : local := name
@@ -203,15 +480,14 @@
 (DEFUN |spadCompile1| (|name| |pile_mode|)
   (PROG (|$ncMsgList| |$InteractiveFrame| |$docList| $COMBLOCKLIST
          |$spad_scanner| |$InteractiveMode| |$edit_file| *EOF* |$file_apply|
-         |$comp370_apply| |$nopiles| |res| |a|)
+         |$nopiles| |res| |a|)
     (DECLARE
      (SPECIAL |$ncMsgList| |$InteractiveFrame| |$docList| $COMBLOCKLIST
       |$spad_scanner| |$InteractiveMode| |$edit_file| *EOF* |$file_apply|
-      |$comp370_apply| |$nopiles|))
+      |$nopiles|))
     (RETURN
      (PROGN
       (SETQ |$nopiles| |pile_mode|)
-      (SETQ |$comp370_apply| #'|print_defun|)
       (SETQ |$file_apply| #'|print_defun|)
       (SETQ *EOF* NIL)
       (SETQ |$edit_file| |name|)
@@ -534,7 +810,7 @@
 ;     $maybe_insert_semi := false
 ;     $docList := nil
 ;     finish_comment()
-;     TOKEN_-STACK_-CLEAR()
+;     empty_token_fifo()
 ;     parse_new_expr()
 ;     parseout := pop_stack_1()
 ;     if parseout then S_process(parseout)
@@ -553,7 +829,7 @@
       (SETQ |$maybe_insert_semi| NIL)
       (SETQ |$docList| NIL)
       (|finish_comment|)
-      (TOKEN-STACK-CLEAR)
+      (|empty_token_fifo|)
       (|parse_new_expr|)
       (SETQ |parseout| (|pop_stack_1|))
       (COND (|parseout| (|S_process| |parseout|)))

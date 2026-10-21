@@ -2,21 +2,21 @@
 (SDEFUN |EVALCYC;evp|
         ((|fn| (|Mapping| F (|Integer|))) (|pt| (|Partition|)) (% (F)))
         (SPROG
-         ((#1=#:G1 NIL) (#2=#:G0 (F)) (#3=#:G2 (F)) (#4=#:G4 NIL) (|i| NIL))
+         ((|i| NIL) (#1=#:G4 NIL) (#2=#:G2 (F)) (#3=#:G0 (F)) (#4=#:G1 NIL))
          (SEQ
           (PROGN
-           (LETT #1# NIL)
-           (SEQ (LETT |i| NIL) (LETT #4# (SPADCALL |pt| (QREFELT % 9))) G190
+           (LETT #4# NIL)
+           (SEQ (LETT |i| NIL) (LETT #1# (SPADCALL |pt| (QREFELT % 9))) G190
                 (COND
-                 ((OR (ATOM #4#) (PROGN (LETT |i| (CAR #4#)) NIL)) (GO G191)))
+                 ((OR (ATOM #1#) (PROGN (LETT |i| (CAR #1#)) NIL)) (GO G191)))
                 (SEQ
                  (EXIT
                   (PROGN
-                   (LETT #3# (SPADCALL |i| |fn|))
-                   (COND (#1# (LETT #2# (SPADCALL #2# #3# (QREFELT % 10))))
-                         ('T (PROGN (LETT #2# #3#) (LETT #1# 'T)))))))
-                (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT NIL))
-           (COND (#1# #2#) ('T (|spadConstant| % 11))))))) 
+                   (LETT #2# (SPADCALL |i| |fn|))
+                   (COND (#4# (LETT #3# (SPADCALL #3# #2# (QREFELT % 10))))
+                         ('T (PROGN (LETT #3# #2#) (LETT #4# 'T)))))))
+                (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+           (COND (#4# #3#) ('T (|spadConstant| % 11))))))) 
 
 (SDEFUN |EVALCYC;eval;MSpF;2|
         ((|fn| (|Mapping| F (|Integer|)))
@@ -35,7 +35,7 @@
 (DECLAIM (NOTINLINE |EvaluateCycleIndicators;|)) 
 
 (DEFUN |EvaluateCycleIndicators;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|EvaluateCycleIndicators| DV$1))
@@ -49,9 +49,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |EvaluateCycleIndicators| (#1=#:G8)
+(DEFUN |EvaluateCycleIndicators| (#1=#:G9)
   (SPROG NIL
-         (PROG (#2=#:G9)
+         (PROG (#2=#:G10)
            (RETURN
             (COND
              ((LETT #2#
@@ -70,12 +70,11 @@
 (MAKEPROP '|EvaluateCycleIndicators| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|List| (|Integer|))
-              (|Partition|) (0 . |coerce|) (5 . *) (11 . |One|) (15 . |Zero|)
-              (19 . |Zero|) (|SymmetricPolynomial| 18) (23 . |Zero|)
-              (|Boolean|) (27 . =) (|Fraction| (|Integer|))
-              (33 . |leadingCoefficient|) (38 . |degree|) (43 . *)
-              (49 . |reductum|) (|Mapping| 6 (|Integer|)) |EVALCYC;eval;MSpF;2|
-              (54 . +))
+              (|Partition|) (0 . |coerce|) (5 . *) (11 . |1|) (15 . |0|)
+              (19 . |0|) (|SymmetricPolynomial| 18) (23 . |0|) (|Boolean|)
+              (27 . =) (|Fraction| (|Integer|)) (33 . |leadingCoefficient|)
+              (38 . |degree|) (43 . *) (49 . |reductum|)
+              (|Mapping| 6 (|Integer|)) |EVALCYC;eval;MSpF;2| (54 . +))
            '#(|eval| 60) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

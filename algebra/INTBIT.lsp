@@ -1,6 +1,6 @@
 
-(PUT '|INTBIT;bitTruth;INniB;1| '|SPADreplace|
-     '(XLAM (|n| |i|) (LOGBITP |i| |n|))) 
+(MAKEPROP '|INTBIT;bitTruth;INniB;1| '|SPADreplace|
+          '(XLAM (|n| |i|) (LOGBITP |i| |n|))) 
 
 (SDEFUN |INTBIT;bitTruth;INniB;1|
         ((|n| (|Integer|)) (|i| (|NonNegativeInteger|)) (% (|Boolean|)))

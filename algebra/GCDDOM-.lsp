@@ -29,8 +29,8 @@
          (|p2| (|SparseUnivariatePolynomial| S))
          (% (|SparseUnivariatePolynomial| S)))
         (SPROG
-         ((#1=#:G159 NIL) (|c2| (S)) (|p| (|SparseUnivariatePolynomial| S))
-          (|c1| (S)) (|e1| #2=(|NonNegativeInteger|)) (|e2| #2#))
+         ((|e2| #1=(|NonNegativeInteger|)) (|e1| #1#) (|c1| (S))
+          (|p| (|SparseUnivariatePolynomial| S)) (|c2| (S)) (#2=#:G166 NIL))
          (SEQ
           (COND ((SPADCALL |p1| (QREFELT % 24)) (SPADCALL |p2| (QREFELT % 25)))
                 ((SPADCALL |p2| (QREFELT % 24)) (SPADCALL |p1| (QREFELT % 25)))
@@ -39,70 +39,70 @@
                       (LETT |c2| (SPADCALL |p2| (QREFELT % 26)))
                       (LETT |p1|
                             (PROG2
-                                (LETT #1# (SPADCALL |p1| |c1| (QREFELT % 27)))
-                                (QCDR #1#)
-                              (|check_union2| (QEQCAR #1# 0)
+                                (LETT #2# (SPADCALL |p1| |c1| (QREFELT % 27)))
+                                (QCDR #2#)
+                              (|check_union2| (QEQCAR #2# 0)
                                               (|SparseUnivariatePolynomial|
                                                (QREFELT % 6))
                                               (|Union|
                                                (|SparseUnivariatePolynomial|
                                                 (QREFELT % 6))
                                                #4="failed")
-                                              #1#)))
+                                              #2#)))
                       (LETT |p2|
                             (PROG2
-                                (LETT #1# (SPADCALL |p2| |c2| (QREFELT % 27)))
-                                (QCDR #1#)
-                              (|check_union2| (QEQCAR #1# 0)
+                                (LETT #2# (SPADCALL |p2| |c2| (QREFELT % 27)))
+                                (QCDR #2#)
+                              (|check_union2| (QEQCAR #2# 0)
                                               (|SparseUnivariatePolynomial|
                                                (QREFELT % 6))
                                               (|Union|
                                                (|SparseUnivariatePolynomial|
                                                 (QREFELT % 6))
                                                #4#)
-                                              #1#)))
+                                              #2#)))
                       (SEQ (LETT |e1| (SPADCALL |p1| (QREFELT % 29)))
                            (EXIT
                             (COND
                              ((> |e1| 0)
                               (LETT |p1|
                                     (PROG2
-                                        (LETT #1#
+                                        (LETT #2#
                                               (SPADCALL |p1|
                                                         (SPADCALL
                                                          (|spadConstant| % 16)
                                                          |e1| (QREFELT % 32))
                                                         (QREFELT % 33)))
-                                        (QCDR #1#)
-                                      (|check_union2| (QEQCAR #1# 0)
+                                        (QCDR #2#)
+                                      (|check_union2| (QEQCAR #2# 0)
                                                       (|SparseUnivariatePolynomial|
                                                        (QREFELT % 6))
                                                       (|Union|
                                                        (|SparseUnivariatePolynomial|
                                                         (QREFELT % 6))
                                                        #4#)
-                                                      #1#)))))))
+                                                      #2#)))))))
                       (SEQ (LETT |e2| (SPADCALL |p2| (QREFELT % 29)))
                            (EXIT
                             (COND
                              ((> |e2| 0)
                               (LETT |p2|
                                     (PROG2
-                                        (LETT #1#
+                                        (LETT #2#
                                               (SPADCALL |p2|
                                                         (SPADCALL
                                                          (|spadConstant| % 16)
                                                          |e2| (QREFELT % 32))
                                                         (QREFELT % 33)))
-                                        (QCDR #1#)
-                                      (|check_union2| (QEQCAR #1# 0)
+                                        (QCDR #2#)
+                                      (|check_union2| (QEQCAR #2# 0)
                                                       (|SparseUnivariatePolynomial|
                                                        (QREFELT % 6))
                                                       (|Union|
                                                        (|SparseUnivariatePolynomial|
                                                         (QREFELT % 6))
                                                        #4#)
-                                                      #1#)))))))
+                                                      #2#)))))))
                       (LETT |e1| (MIN |e1| |e2|))
                       (LETT |c1| (SPADCALL |c1| |c2| (QREFELT % 10)))
                       (LETT |p1|
@@ -129,7 +129,7 @@
                                      (SPADCALL |c1|
                                                (SPADCALL
                                                 (PROG2
-                                                    (LETT #1#
+                                                    (LETT #2#
                                                           (SPADCALL
                                                            (SPADCALL |c2| |p|
                                                                      (QREFELT %
@@ -138,16 +138,16 @@
                                                                      (QREFELT %
                                                                               36))
                                                            (QREFELT % 27)))
-                                                    (QCDR #1#)
+                                                    (QCDR #2#)
                                                   (|check_union2|
-                                                   (QEQCAR #1# 0)
+                                                   (QEQCAR #2# 0)
                                                    (|SparseUnivariatePolynomial|
                                                     (QREFELT % 6))
                                                    (|Union|
                                                     (|SparseUnivariatePolynomial|
                                                      (QREFELT % 6))
                                                     #4#)
-                                                   #1#))
+                                                   #2#))
                                                 (QREFELT % 38))
                                                (QREFELT % 37))
                                      (QREFELT % 25)))))))))))
@@ -162,7 +162,7 @@
 (SDEFUN |GCDDOM-;lcmCoef;2SR;5|
         ((|c1| (S)) (|c2| (S))
          (% (|Record| (|:| |llcm_res| S) (|:| |coeff1| S) (|:| |coeff2| S))))
-        (SPROG ((|cc2| (S)) (#1=#:G290 NIL) (|cc1| (S)) (|g| (S)))
+        (SPROG ((|g| (S)) (|cc1| (S)) (#1=#:G297 NIL) (|cc2| (S)))
                (SEQ (LETT |g| (SPADCALL |c1| |c2| (QREFELT % 10)))
                     (LETT |cc1|
                           (PROG2 (LETT #1# (SPADCALL |c2| |g| (QREFELT % 12)))
@@ -182,7 +182,7 @@
 (DECLAIM (NOTINLINE |GcdDomain&;|)) 
 
 (DEFUN |GcdDomain&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|GcdDomain&| DV$1))
@@ -196,15 +196,15 @@
 
 (MAKEPROP '|GcdDomain&| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |Zero|) (|Boolean|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |0|) (|Boolean|)
               (4 . =) (10 . |gcd|) (|Union| % '"failed") (16 . |exquo|)
-              (22 . *) |GCDDOM-;lcm;3S;1| (28 . |lcm|) (34 . |One|)
+              (22 . *) |GCDDOM-;lcm;3S;1| (28 . |lcm|) (34 . |1|)
               (|Mapping| 6 6 6) (|List| 6) (38 . |reduce|) (|List| %)
               |GCDDOM-;lcm;LS;2| |GCDDOM-;gcd;LS;3|
               (|SparseUnivariatePolynomial| 6) (46 . |zero?|)
               (51 . |unitCanonical|) (56 . |content|) (61 . |exquo|)
-              (|NonNegativeInteger|) (67 . |minimumDegree|) (72 . |Zero|)
-              (76 . |One|) (80 . |monomial|) (86 . |exquo|) (92 . |degree|)
+              (|NonNegativeInteger|) (67 . |minimumDegree|) (72 . |0|)
+              (76 . |1|) (80 . |monomial|) (86 . |exquo|) (92 . |degree|)
               (97 . |subResultantGcd|) (103 . |leadingCoefficient|) (108 . *)
               (114 . |primitivePart|) (119 . *)
               (|SparseUnivariatePolynomial| %) |GCDDOM-;gcdPolynomial;3Sup;4|

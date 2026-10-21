@@ -2,34 +2,34 @@
 (SDEFUN |PATRES2;map;MPmrPmr;1|
         ((|f| (|Mapping| B A)) (|r| (|PatternMatchResult| R A))
          (% (|PatternMatchResult| R B)))
-        (SPROG ((#1=#:G9 NIL) (|rec| NIL) (#2=#:G8 NIL))
+        (SPROG ((#1=#:G12 NIL) (|rec| NIL) (#2=#:G13 NIL))
                (SEQ
                 (COND ((SPADCALL |r| (QREFELT % 11)) (SPADCALL (QREFELT % 13)))
                       ('T
                        (SPADCALL
                         (PROGN
-                         (LETT #2# NIL)
+                         (LETT #1# NIL)
                          (SEQ (LETT |rec| NIL)
-                              (LETT #1# (SPADCALL |r| (QREFELT % 16))) G190
+                              (LETT #2# (SPADCALL |r| (QREFELT % 16))) G190
                               (COND
-                               ((OR (ATOM #1#)
-                                    (PROGN (LETT |rec| (CAR #1#)) NIL))
+                               ((OR (ATOM #2#)
+                                    (PROGN (LETT |rec| (CAR #2#)) NIL))
                                 (GO G191)))
                               (SEQ
                                (EXIT
-                                (LETT #2#
+                                (LETT #1#
                                       (CONS
                                        (CONS (QCAR |rec|)
                                              (SPADCALL (QCDR |rec|) |f|))
-                                       #2#))))
-                              (LETT #1# (CDR #1#)) (GO G190) G191
-                              (EXIT (NREVERSE #2#))))
+                                       #1#))))
+                              (LETT #2# (CDR #2#)) (GO G190) G191
+                              (EXIT (NREVERSE #1#))))
                         (QREFELT % 19))))))) 
 
 (DECLAIM (NOTINLINE |PatternMatchResultFunctions2;|)) 
 
 (DEFUN |PatternMatchResultFunctions2;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -47,9 +47,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |PatternMatchResultFunctions2| (&REST #1=#:G10)
+(DEFUN |PatternMatchResultFunctions2| (&REST #1=#:G14)
   (SPROG NIL
-         (PROG (#2=#:G11)
+         (PROG (#2=#:G15)
            (RETURN
             (COND
              ((LETT #2#

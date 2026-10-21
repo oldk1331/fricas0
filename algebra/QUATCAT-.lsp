@@ -147,7 +147,7 @@
          (EXIT (CONS 0 (SPADCALL |x| (QREFELT % 11)))))) 
 
 (SDEFUN |QUATCAT-;coerce;SOf;18| ((|x| (S)) (% (|OutputForm|)))
-        (SPROG ((|part| (|OutputForm|)) (|z| (|OutputForm|)) (|y| (S)))
+        (SPROG ((|y| (S)) (|z| (|OutputForm|)) (|part| (|OutputForm|)))
                (SEQ
                 (COND
                  ((SPADCALL |x| (QREFELT % 49))
@@ -308,7 +308,7 @@
 (DECLAIM (NOTINLINE |QuaternionCategory&;|)) 
 
 (DEFUN |QuaternionCategory&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -380,9 +380,9 @@
               (|Boolean|) (53 . =) |QUATCAT-;=;2SB;5| (59 . +)
               |QUATCAT-;+;3S;6| (65 . -) |QUATCAT-;-;3S;7| |QUATCAT-;-;2S;8|
               (71 . *) |QUATCAT-;*;R2S;9| (|Integer|) (77 . *)
-              |QUATCAT-;*;I2S;10| |QUATCAT-;differentiate;SMS;11| (83 . |Zero|)
+              |QUATCAT-;*;I2S;10| |QUATCAT-;differentiate;SMS;11| (83 . |0|)
               |QUATCAT-;coerce;RS;12| (87 . |coerce|) |QUATCAT-;coerce;IS;13|
-              (92 . |One|) (96 . |zero?|) |QUATCAT-;one?;SB;14|
+              (92 . |1|) (96 . |zero?|) |QUATCAT-;one?;SB;14|
               |QUATCAT-;zero?;SB;15| |QUATCAT-;retract;SR;16|
               (|Union| 7 '"failed") |QUATCAT-;retractIfCan;SU;17|
               (101 . |zero?|) (|OutputForm|) (106 . |coerce|) (111 . |coerce|)
@@ -407,13 +407,13 @@
                         '#((|Join|
                             (|mkCategory|
                              (LIST '((< ((|Boolean|) |#1| |#1|)) T)
+                                   '((|inv| (|#1| |#1|)) T)
                                    '((|coerce| (|#1| (|Fraction| (|Integer|))))
                                      T)
                                    '((* (|#1| |#1| (|Fraction| (|Integer|))))
                                      T)
                                    '((* (|#1| (|Fraction| (|Integer|)) |#1|))
                                      T)
-                                   '((|inv| (|#1| |#1|)) T)
                                    '((|convert| ((|InputForm|) |#1|)) T)
                                    '((|rationalIfCan|
                                       ((|Union| (|Fraction| (|Integer|)) #1#)

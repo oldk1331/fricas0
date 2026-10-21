@@ -6,7 +6,7 @@
 (SDEFUN |BALFACT;balSqfr1|
         ((|a| (UP)) (|n| (|NonNegativeInteger|)) (|b| (UP))
          (% (|Factored| UP)))
-        (SPROG ((#1=#:G5 NIL) (|fa| (|Factored| UP)) (|g| (UP)))
+        (SPROG ((|g| (UP)) (|fa| (|Factored| UP)) (#1=#:G8 NIL))
                (SEQ (LETT |g| (SPADCALL |a| |b| (QREFELT % 12)))
                     (LETT |fa|
                           (SPADCALL
@@ -46,41 +46,41 @@
         ((|a| (UP)) (|n| (|NonNegativeInteger|)) (|l| (|List| UP))
          (% (|Factored| UP)))
         (SPROG
-         ((#1=#:G11 NIL) (#2=#:G10 #3=(|Factored| UP)) (#4=#:G12 #3#)
-          (#5=#:G15 NIL) (|f| NIL) (|b| (UP)))
+         ((|b| (UP)) (|f| NIL) (#1=#:G25 NIL) (#2=#:G22 #3=(|Factored| UP))
+          (#4=#:G20 #3#) (#5=#:G21 NIL))
          (SEQ (LETT |b| (|SPADfirst| |l|))
               (EXIT
                (COND ((NULL (CDR |l|)) (|BALFACT;balSqfr1| |a| |n| |b| %))
                      (#6='T
                       (PROGN
-                       (LETT #1# NIL)
+                       (LETT #5# NIL)
                        (SEQ (LETT |f| NIL)
-                            (LETT #5#
+                            (LETT #1#
                                   (SPADCALL
                                    (|BALFACT;balSqfr| |a| |n| (CDR |l|) %)
                                    (QREFELT % 25)))
                             G190
                             (COND
-                             ((OR (ATOM #5#) (PROGN (LETT |f| (CAR #5#)) NIL))
+                             ((OR (ATOM #1#) (PROGN (LETT |f| (CAR #1#)) NIL))
                               (GO G191)))
                             (SEQ
                              (EXIT
                               (PROGN
-                               (LETT #4#
+                               (LETT #2#
                                      (|BALFACT;balSqfr1| (QVELT |f| 1) |n| |b|
                                       %))
                                (COND
-                                (#1#
-                                 (LETT #2# (SPADCALL #2# #4# (QREFELT % 21))))
-                                ('T (PROGN (LETT #2# #4#) (LETT #1# 'T)))))))
-                            (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
-                       (COND (#1# #2#) (#6# (|spadConstant| % 26)))))))))) 
+                                (#5#
+                                 (LETT #4# (SPADCALL #4# #2# (QREFELT % 21))))
+                                ('T (PROGN (LETT #4# #2#) (LETT #5# 'T)))))))
+                            (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+                       (COND (#5# #4#) (#6# (|spadConstant| % 26)))))))))) 
 
 (SDEFUN |BALFACT;balancedFactorisation;UPLF;4|
         ((|a| (UP)) (|l| (|List| UP)) (% (|Factored| UP)))
         (SPROG
-         ((#1=#:G19 NIL) (#2=#:G18 #3=(|Factored| UP)) (#4=#:G20 #3#)
-          (#5=#:G24 NIL) (|f| NIL) (|sa| (|Factored| UP)) (|ll| (|List| UP)))
+         ((|ll| (|List| UP)) (|sa| (|Factored| UP)) (|f| NIL) (#1=#:G35 NIL)
+          (#2=#:G31 #3=(|Factored| UP)) (#4=#:G29 #3#) (#5=#:G30 NIL))
          (SEQ
           (COND
            ((NULL
@@ -94,32 +94,32 @@
                  (EXIT
                   (SPADCALL (SPADCALL |sa| (QREFELT % 34))
                             (PROGN
-                             (LETT #1# NIL)
+                             (LETT #5# NIL)
                              (SEQ (LETT |f| NIL)
-                                  (LETT #5# (SPADCALL |sa| (QREFELT % 25)))
+                                  (LETT #1# (SPADCALL |sa| (QREFELT % 25)))
                                   G190
                                   (COND
-                                   ((OR (ATOM #5#)
-                                        (PROGN (LETT |f| (CAR #5#)) NIL))
+                                   ((OR (ATOM #1#)
+                                        (PROGN (LETT |f| (CAR #1#)) NIL))
                                     (GO G191)))
                                   (SEQ
                                    (EXIT
                                     (PROGN
-                                     (LETT #4#
+                                     (LETT #2#
                                            (|BALFACT;balSqfr| (QVELT |f| 1)
                                             (QVELT |f| 2) |ll| %))
                                      (COND
-                                      (#1#
-                                       (LETT #2#
-                                             (SPADCALL #2# #4#
+                                      (#5#
+                                       (LETT #4#
+                                             (SPADCALL #4# #2#
                                                        (QREFELT % 21))))
                                       ('T
                                        (PROGN
-                                        (LETT #2# #4#)
-                                        (LETT #1# 'T)))))))
-                                  (LETT #5# (CDR #5#)) (GO G190) G191
+                                        (LETT #4# #2#)
+                                        (LETT #5# 'T)))))))
+                                  (LETT #1# (CDR #1#)) (GO G190) G191
                                   (EXIT NIL))
-                             (COND (#1# #2#) (#6# (|spadConstant| % 26))))
+                             (COND (#5# #4#) (#6# (|spadConstant| % 26))))
                             (QREFELT % 35))))))))) 
 
 (SDEFUN |BALFACT;balancedFactorisation;UPLF;4!0| ((|z1| NIL) (% NIL))
@@ -128,7 +128,7 @@
 (DECLAIM (NOTINLINE |BalancedFactorisation;|)) 
 
 (DEFUN |BalancedFactorisation;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -144,9 +144,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |BalancedFactorisation| (&REST #1=#:G25)
+(DEFUN |BalancedFactorisation| (&REST #1=#:G36)
   (SPROG NIL
-         (PROG (#2=#:G26)
+         (PROG (#2=#:G37)
            (RETURN
             (COND
              ((LETT #2#
@@ -172,9 +172,9 @@
               (12 . |sqfrFactor|) (|Boolean|) (18 . |ground?|) (23 . |order|)
               (29 . ^) (35 . *) (|Union| '"nil" '"sqfr" '"irred" '"prime")
               (|Record| (|:| |flag| 22) (|:| |factor| 7) (|:| |exponent| 15))
-              (|List| 23) (41 . |factorList|) (46 . |One|) (50 . |Zero|)
-              (54 . |Zero|) (58 . ~=) (|Mapping| 17 7) (64 . |select|)
-              (|Factored| %) (70 . |squareFree|) (75 . |unit|) (80 . *))
+              (|List| 23) (41 . |factorList|) (46 . |1|) (50 . |0|) (54 . |0|)
+              (58 . ~=) (|Mapping| 17 7) (64 . |select|) (|Factored| %)
+              (70 . |squareFree|) (75 . |unit|) (80 . *))
            '#(|balancedFactorisation| 86) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

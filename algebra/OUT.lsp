@@ -10,28 +10,28 @@
         (SPADCALL (SPADCALL (LIST |s| |e|) (QREFELT % 13)) (QREFELT % 9))) 
 
 (SDEFUN |OUT;outputList;LV;4| ((|l| (|List| (|Any|))) (% (|Void|)))
-        (SPROG ((#1=#:G10 NIL) (|x| NIL) (#2=#:G9 NIL))
+        (SPROG ((#1=#:G9 NIL) (|x| NIL) (#2=#:G10 NIL))
                (SEQ
                 (SPADCALL
                  (SPADCALL
                   (PROGN
-                   (LETT #2# NIL)
-                   (SEQ (LETT |x| NIL) (LETT #1# |l|) G190
+                   (LETT #1# NIL)
+                   (SEQ (LETT |x| NIL) (LETT #2# |l|) G190
                         (COND
-                         ((OR (ATOM #1#) (PROGN (LETT |x| (CAR #1#)) NIL))
+                         ((OR (ATOM #2#) (PROGN (LETT |x| (CAR #2#)) NIL))
                           (GO G191)))
                         (SEQ
                          (EXIT
-                          (LETT #2#
+                          (LETT #1#
                                 (CONS
                                  (COND
                                   ((SPADCALL |x| (QREFELT % 18))
                                    (SPADCALL (SPADCALL |x| (QREFELT % 19))
                                              (QREFELT % 20)))
                                   ('T (SPADCALL |x| (QREFELT % 21))))
-                                 #2#))))
-                        (LETT #1# (CDR #1#)) (GO G190) G191
-                        (EXIT (NREVERSE #2#))))
+                                 #1#))))
+                        (LETT #2# (CDR #2#)) (GO G190) G191
+                        (EXIT (NREVERSE #1#))))
                   (QREFELT % 22))
                  (QREFELT % 9))))) 
 

@@ -1,5 +1,5 @@
 
-(PUT '|ANON;coerce;%Of;1| '|SPADreplace| '|outputTranAnon|) 
+(MAKEPROP '|ANON;coerce;%Of;1| '|SPADreplace| '|outputTranAnon|) 
 
 (SDEFUN |ANON;coerce;%Of;1| ((|x| (%)) (% (|OutputForm|)))
         (|outputTranAnon| |x|)) 

@@ -1,8 +1,8 @@
 
 (SDEFUN |INTGEL;R_to_F| ((|f| (R)) (% (|Union| F "failed")))
         (SPROG
-         ((|f2| (UP)) (|u2| (|Union| UP "failed")) (|f1| (|Fraction| UP))
-          (|u1| (|Union| (|Fraction| UP) "failed")))
+         ((|u1| (|Union| (|Fraction| UP) "failed")) (|f1| (|Fraction| UP))
+          (|u2| (|Union| UP "failed")) (|f2| (UP)))
          (SEQ (LETT |u1| (SPADCALL |f| (QREFELT % 11)))
               (EXIT
                (COND ((QEQCAR |u1| 1) (CONS 1 "failed"))
@@ -24,9 +24,9 @@
            (|Record| (|:| |f_form| R) (|:| |e_form| R) (|:| |f_var| F)
                      (|:| |f_pol| UP)))))
         (SPROG
-         ((|kx| (F)) (|ee| (R)) (|ef| (R)) (|dx| (R)) (|e_pol| (R))
-          (|e_coeff| (F)) (|nr| (UP)) (|r| (|Fraction| UP)) (|p| (UPUP))
-          (|g| (R)))
+         ((|g| (R)) (|p| (UPUP)) (|r| (|Fraction| UP)) (|nr| (UP))
+          (|e_coeff| (F)) (|e_pol| (R)) (|dx| (R)) (|ef| (R)) (|ee| (R))
+          (|kx| (F)))
          (SEQ
           (COND
            ((QREFELT % 17)
@@ -153,10 +153,10 @@
 
 (SDEFUN |INTGEL;fsqrt;2F;3| ((|f| (F)) (% (F)))
         (SPROG
-         ((#1=#:G48 NIL)
-          (|ur|
+         ((|ur|
            (|Record| (|:| |exponent| (|NonNegativeInteger|)) (|:| |coef| F)
-                     (|:| |radicand| F))))
+                     (|:| |radicand| F)))
+          (#1=#:G59 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |ur| (SPADCALL |f| 2 (QREFELT % 67)))
@@ -164,16 +164,16 @@
                  (COND
                   ((SPADCALL (QVELT |ur| 2) (|spadConstant| % 20)
                              (QREFELT % 68))
-                   (PROGN (LETT #1# (QVELT |ur| 1)) (GO #2=#:G47)))
+                   (PROGN (LETT #1# (QVELT |ur| 1)) (GO #2=#:G58)))
                   ('T (SPADCALL |f| (QREFELT % 70)))))))
           #2# (EXIT #1#)))) 
 
 (SDEFUN |INTGEL;fsqrt;2F;4| ((|f| (F)) (% (F)))
         (SPROG
-         ((#1=#:G52 NIL)
-          (|ur|
+         ((|ur|
            (|Record| (|:| |exponent| (|NonNegativeInteger|)) (|:| |coef| F)
-                     (|:| |radicand| F))))
+                     (|:| |radicand| F)))
+          (#1=#:G63 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |ur| (SPADCALL |f| 2 (QREFELT % 73)))
@@ -181,12 +181,12 @@
                  (COND
                   ((SPADCALL (QVELT |ur| 2) (|spadConstant| % 20)
                              (QREFELT % 68))
-                   (PROGN (LETT #1# (QVELT |ur| 1)) (GO #2=#:G51)))
+                   (PROGN (LETT #1# (QVELT |ur| 1)) (GO #2=#:G62)))
                   ('T (SPADCALL |f| (QREFELT % 75)))))))
           #2# (EXIT #1#)))) 
 
-(PUT '|INTGEL;fsqrt;2F;5| '|SPADreplace|
-     '(XLAM (|f|) (|error| "unimplemented"))) 
+(MAKEPROP '|INTGEL;fsqrt;2F;5| '|SPADreplace|
+          '(XLAM (|f|) (|error| "unimplemented"))) 
 
 (SDEFUN |INTGEL;fsqrt;2F;5| ((|f| (F)) (% (F))) (|error| "unimplemented")) 
 
@@ -202,9 +202,9 @@
 (SDEFUN |INTGEL;gen_ef4l|
         ((|f_var| (F)) (|f_pol| (UP)) (|cf| (F)) (|ce| (F)) (% (F)))
         (SPROG
-         ((|res| (F)) (|et| (F)) (|ft| (F)) (|ca| (F)) (|f_par| (F))
-          (|var| (F)) (|c22| (F)) (|c2| (F)) (|d2| (F)) (|c2a| (F)) (|del| (F))
-          (C (F)) (B (F)) (A (F)))
+         ((A (F)) (B (F)) (C (F)) (|del| (F)) (|c2a| (F)) (|d2| (F)) (|c2| (F))
+          (|c22| (F)) (|var| (F)) (|f_par| (F)) (|ca| (F)) (|ft| (F))
+          (|et| (F)) (|res| (F)))
          (SEQ (LETT A (SPADCALL |f_pol| 0 (QREFELT % 53)))
               (LETT B
                     (SPADCALL (SPADCALL |f_pol| 2 (QREFELT % 53)) A
@@ -264,8 +264,8 @@
 (SDEFUN |INTGEL;gen_ef3|
         ((|f_var| (F)) (|f_pol| (UP)) (|cf| (F)) (|ce| (F)) (% (F)))
         (SPROG
-         ((|fi| (F)) (|p_inv| (F)) (|ca| (F)) (|g3| (F)) (|g2| (F))
-          (|f_pol2| (UP)) (|shift| (F)) (B (F)) (|s| (F)) (A (F)))
+         ((A (F)) (|s| (F)) (B (F)) (|shift| (F)) (|f_pol2| (UP)) (|g2| (F))
+          (|g3| (F)) (|ca| (F)) (|p_inv| (F)) (|fi| (F)))
          (SEQ (LETT A (SPADCALL |f_pol| (QREFELT % 81)))
               (LETT |s| (|spadConstant| % 20))
               (COND
@@ -333,8 +333,8 @@
           (|Union| (|Record| (|:| |result1| (|Fraction| UP)) (|:| |result2| F))
                    "failed")))
         (SPROG
-         ((|ans1| (|Fraction| UP)) (|f_pol1| (UP)) (|c4| (F)) (|c3| (F))
-          (|c2| (F)) (|c1| (F)) (|c0| (F)))
+         ((|c0| (F)) (|c1| (F)) (|c2| (F)) (|c3| (F)) (|c4| (F))
+          (|f_pol1| (UP)) (|ans1| (|Fraction| UP)))
          (SEQ (LETT |c0| (SPADCALL |f_pol| 0 (QREFELT % 53)))
               (LETT |c1| (SPADCALL |f_pol| 1 (QREFELT % 53)))
               (LETT |c2| (SPADCALL |f_pol| 2 (QREFELT % 53)))
@@ -421,7 +421,7 @@
           (|Union| (|Record| (|:| |result1| (|Fraction| UP)) (|:| |result2| F))
                    "failed")))
         (SPROG
-         ((|ce| (F)) (|ceu| #1=(|Union| F "failed")) (|cf| (F)) (|cfu| #1#))
+         ((|cfu| #1=(|Union| F "failed")) (|cf| (F)) (|ceu| #1#) (|ce| (F)))
          (SEQ (LETT |cfu| (|INTGEL;R_to_F| |cfr| %))
               (EXIT
                (COND
@@ -450,9 +450,9 @@
                                  (|error|
                                   "gen_ef: unsupported case"))))))))))))))) 
 
-(PUT '|INTGEL;gen_ef;FUP2RU;11| '|SPADreplace|
-     '(XLAM (|f_var| |f_pol| |cfr| |cer|)
-       (|error| "gen_ef: unimplemented for F"))) 
+(MAKEPROP '|INTGEL;gen_ef;FUP2RU;11| '|SPADreplace|
+          '(XLAM (|f_var| |f_pol| |cfr| |cer|)
+            (|error| "gen_ef: unimplemented for F"))) 
 
 (SDEFUN |INTGEL;gen_ef;FUP2RU;11|
         ((|f_var| (F)) (|f_pol| (UP)) (|cfr| (R)) (|cer| (R))
@@ -465,8 +465,8 @@
 
 (DEFUN |GenerateEllipticIntegrals;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -506,9 +506,9 @@
                 (CONS (|dispatchFunction| |INTGEL;gen_ef;FUP2RU;11|) %))))
     %))) 
 
-(DEFUN |GenerateEllipticIntegrals| (&REST #1=#:G93)
+(DEFUN |GenerateEllipticIntegrals| (&REST #1=#:G107)
   (SPROG NIL
-         (PROG (#2=#:G94)
+         (PROG (#2=#:G108)
            (RETURN
             (COND
              ((LETT #2#
@@ -533,15 +533,15 @@
               (0 . |retractIfCan|) (|Union| 7 '"failed") (|Fraction| 7)
               (5 . |retractIfCan|) (|Union| 6 '#1#) (10 . |retractIfCan|)
               '|good_F| (15 . |generator|) (19 . |definingPolynomial|)
-              (23 . |One|) (27 . |One|) (|NonNegativeInteger|)
-              (31 . |monomial|) (37 . |coerce|) (42 . |coerce|) (47 . |One|)
-              (|Boolean|) (51 . =) (57 . |degree|) (62 . |coefficient|)
-              (68 . |Zero|) (72 . =) (78 . |Zero|) (82 . |Zero|)
-              (86 . |leadingCoefficient|) (91 . /) (97 . -) (102 . |denom|)
-              (107 . ~=) (113 . |numer|) (118 . |coerce|) (123 . |zero?|)
-              (|List| 6) (128 . |coefficients|) (|Mapping| 27 6)
-              (133 . |every?|) (|String|) (|OutputForm|) (139 . |message|)
-              (|Void|) (144 . |print|) (149 . |degree|) (154 . |coefficient|)
+              (23 . |1|) (27 . |1|) (|NonNegativeInteger|) (31 . |monomial|)
+              (37 . |coerce|) (42 . |coerce|) (47 . |1|) (|Boolean|) (51 . =)
+              (57 . |degree|) (62 . |coefficient|) (68 . |0|) (72 . =)
+              (78 . |0|) (82 . |0|) (86 . |leadingCoefficient|) (91 . /)
+              (97 . -) (102 . |denom|) (107 . ~=) (113 . |numer|)
+              (118 . |coerce|) (123 . |zero?|) (|List| 6)
+              (128 . |coefficients|) (|Mapping| 27 6) (133 . |every?|)
+              (|String|) (|OutputForm|) (139 . |message|) (|Void|)
+              (144 . |print|) (149 . |degree|) (154 . |coefficient|)
               (|Integer|) (160 . |coerce|) (165 . *) (171 . /) (177 . +)
               (183 . /) (189 . *)
               (|Record| (|:| |f_form| 9) (|:| |e_form| 9) (|:| |f_var| 6)
@@ -562,7 +562,7 @@
                                  6)
               (217 . |froot|) (|Expression| (|Complex| 54)) (223 . |sqrt|)
               (|Union| 78 '#1#) (228 . |retractIfCan|) (|Fraction| 54)
-              (233 . |Zero|) (237 . <) (243 . |leadingCoefficient|)
+              (233 . |0|) (237 . <) (243 . |leadingCoefficient|)
               (|PositiveInteger|) (248 . ^) (254 . -) (260 . -) (265 . +)
               (271 . |ellipticF|) (277 . |ellipticE|) (|SingletonAsOrderedSet|)
               (283 . |create|) '|d_var| (287 . |eval|) (294 . -) (300 . *)

@@ -2,10 +2,10 @@
 (SDEFUN |FFSLPE;solveLinearPolynomialEquation;LFPPU;1|
         ((|lp| (|List| FPP)) (|p| (FPP)) (% (|Union| (|List| FPP) "failed")))
         (SPROG
-         ((|answer| (|Union| (|List| FPP) "failed")) (#1=#:G10 NIL)
-          (#2=#:G14 NIL) (|ans| (|Union| (|Vector| (|List| FPP)) #3="failed"))
-          (|deg| #4=(|NonNegativeInteger|)) (#5=#:G7 NIL) (#6=#:G6 #4#)
-          (#7=#:G8 #4#) (#8=#:G27 NIL) (|u| NIL))
+         ((|u| NIL) (#1=#:G36 NIL) (#2=#:G8 #3=(|NonNegativeInteger|))
+          (#4=#:G6 #3#) (#5=#:G7 NIL) (|deg| #3#)
+          (|ans| (|Union| (|Vector| (|List| FPP)) #6="failed")) (#7=#:G20 NIL)
+          (#8=#:G10 NIL) (|answer| (|Union| (|List| FPP) "failed")))
          (SEQ
           (COND
            ((SPADCALL (QREFELT % 9) |lp| (QREFELT % 18))
@@ -13,18 +13,18 @@
              (LETT |deg|
                    (PROGN
                     (LETT #5# NIL)
-                    (SEQ (LETT |u| NIL) (LETT #8# |lp|) G190
+                    (SEQ (LETT |u| NIL) (LETT #1# |lp|) G190
                          (COND
-                          ((OR (ATOM #8#) (PROGN (LETT |u| (CAR #8#)) NIL))
+                          ((OR (ATOM #1#) (PROGN (LETT |u| (CAR #1#)) NIL))
                            (GO G191)))
                          (SEQ
                           (EXIT
                            (PROGN
-                            (LETT #7# (SPADCALL |u| (QREFELT % 19)))
-                            (COND (#5# (LETT #6# (+ #6# #7#)))
-                                  ('T (PROGN (LETT #6# #7#) (LETT #5# 'T)))))))
-                         (LETT #8# (CDR #8#)) (GO G190) G191 (EXIT NIL))
-                    (COND (#5# #6#) ('T 0))))
+                            (LETT #2# (SPADCALL |u| (QREFELT % 19)))
+                            (COND (#5# (LETT #4# (+ #4# #2#)))
+                                  ('T (PROGN (LETT #4# #2#) (LETT #5# 'T)))))))
+                         (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+                    (COND (#5# #4#) ('T 0))))
              (LETT |ans| (CONS 1 "failed"))
              (SETELT % 14
                      (SPADCALL
@@ -41,14 +41,14 @@
                       (SEQ
                        (SETELT % 14
                                (PROG2
-                                   (LETT #2#
+                                   (LETT #7#
                                          (SPADCALL (QREFELT % 14)
                                                    (QREFELT % 25)))
-                                   (QCDR #2#)
-                                 (|check_union2| (QEQCAR #2# 0) (QREFELT % 7)
+                                   (QCDR #7#)
+                                 (|check_union2| (QEQCAR #7# 0) (QREFELT % 7)
                                                  (|Union| (QREFELT % 7)
                                                           #9="failed")
-                                                 #2#)))
+                                                 #7#)))
                        (EXIT
                         (SEQ G190
                              (COND
@@ -64,26 +64,26 @@
                               (EXIT
                                (SETELT % 14
                                        (PROG2
-                                           (LETT #2#
+                                           (LETT #7#
                                                  (SPADCALL (QREFELT % 14)
                                                            (QREFELT % 25)))
-                                           (QCDR #2#)
-                                         (|check_union2| (QEQCAR #2# 0)
+                                           (QCDR #7#)
+                                         (|check_union2| (QEQCAR #7# 0)
                                                          (QREFELT % 7)
                                                          (|Union| (QREFELT % 7)
                                                                   #9#)
-                                                         #2#)))))
+                                                         #7#)))))
                              NIL (GO G190) G191 (EXIT NIL))))))))
                   NIL (GO G190) G191 (EXIT NIL))
-             (EXIT
-              (SETELT % 15
-                      (PROG2 (LETT #1# |ans|)
-                          (QCDR #1#)
-                        (|check_union2| (QEQCAR #1# 0)
-                                        (|Vector| (|List| (QREFELT % 8)))
-                                        (|Union|
-                                         (|Vector| (|List| (QREFELT % 8))) #3#)
-                                        #1#)))))))
+             (SETELT % 15
+                     (PROG2 (LETT #8# |ans|)
+                         (QCDR #8#)
+                       (|check_union2| (QEQCAR #8# 0)
+                                       (|Vector| (|List| (QREFELT % 8)))
+                                       (|Union|
+                                        (|Vector| (|List| (QREFELT % 8))) #6#)
+                                       #8#)))
+             (EXIT (SETELT % 9 |lp|)))))
           (LETT |answer|
                 (SPADCALL |p| (QREFELT % 14) (QREFELT % 15) (QREFELT % 31)))
           (EXIT |answer|)))) 
@@ -91,7 +91,7 @@
 (DECLAIM (NOTINLINE |FiniteFieldSolveLinearPolynomialEquation;|)) 
 
 (DEFUN |FiniteFieldSolveLinearPolynomialEquation;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -115,9 +115,9 @@
           (QSETREFV % 15 #())
           %))) 
 
-(DEFUN |FiniteFieldSolveLinearPolynomialEquation| (&REST #1=#:G28)
+(DEFUN |FiniteFieldSolveLinearPolynomialEquation| (&REST #1=#:G37)
   (SPROG NIL
-         (PROG (#2=#:G29)
+         (PROG (#2=#:G38)
            (RETURN
             (COND
              ((LETT #2#
@@ -141,7 +141,7 @@
 (MAKEPROP '|FiniteFieldSolveLinearPolynomialEquation| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) '|oldlp| (0 . |One|) (4 . |One|)
+              (|local| |#3|) '|oldlp| (0 . |1|) (4 . |1|)
               (|NonNegativeInteger|) (8 . |monomial|) '|slpePrime| '|oldtable|
               (|Boolean|) (|List| 8) (14 . ~=) (20 . |degree|) (25 . +)
               (|Union| 30 '"failed") (|GenExEuclid| 7 8) (31 . |tablePow|)

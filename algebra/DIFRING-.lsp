@@ -3,7 +3,7 @@
 
 (SDEFUN |DIFRING-;differentiate;SNniS;2|
         ((|r| (S)) (|n| (|NonNegativeInteger|)) (% (S)))
-        (SPROG ((#1=#:G10 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G10 NIL))
                (SEQ
                 (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -17,7 +17,7 @@
 (DECLAIM (NOTINLINE |DifferentialRing&;|)) 
 
 (DEFUN |DifferentialRing&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|DifferentialRing&| DV$1))

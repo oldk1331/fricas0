@@ -1,12 +1,12 @@
 
 (SDEFUN |COMPUTIL;Ski2Lambda| ((|s| (|SKICombinators| UT)) (% (|Lambda| UT)))
         (SPROG
-         ((#1=#:G49 NIL) (|s2| #2=(|String|)) (|c112| #3=(|SKICombinators| UT))
-          (|c111| #4=(|SKICombinators| UT))
-          (|subsubnodes2| #5=(|List| (|SKICombinators| UT))) (|c12| #3#)
-          (|c11| #4#) (|subsubnodes| #5#) (|s1| #2#) (|c2| #3#) (|c1| #4#)
-          (|subnodes| #5#) (|strVar3| #6=(|String|)) (|strVar2| #6#)
-          (|strVar1| #6#) (|strVar| #6#))
+         ((|strVar| #1=(|String|)) (|strVar1| #1#) (|strVar2| #1#)
+          (|strVar3| #1#) (|subnodes| #2=(|List| (|SKICombinators| UT)))
+          (|c1| #3=(|SKICombinators| UT)) (|c2| #4=(|SKICombinators| UT))
+          (|s1| #5=(|String|)) (|subsubnodes| #2#) (|c11| #3#) (|c12| #4#)
+          (|subsubnodes2| #2#) (|c111| #3#) (|c112| #4#) (|s2| #5#)
+          (#6=#:G50 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -27,12 +27,12 @@
                       (SETELT % 7 (+ (QREFELT % 7) 1))
                       (EXIT
                        (PROGN
-                        (LETT #1#
+                        (LETT #6#
                               (SPADCALL
                                (SPADCALL (LIST "\\" |strVar| ".0")
                                          (QREFELT % 19))
                                (QREFELT % 21)))
-                        (GO #7=#:G48))))))
+                        (GO #7=#:G49))))))
                (COND
                 ((SPADCALL |s| (QREFELT % 22))
                  (SEQ
@@ -54,7 +54,7 @@
                   (SETELT % 7 (+ (QREFELT % 7) 2))
                   (EXIT
                    (PROGN
-                    (LETT #1#
+                    (LETT #6#
                           (SPADCALL
                            (SPADCALL (LIST "\\" |strVar1| ".\\" |strVar2| ".1")
                                      (QREFELT % 19))
@@ -87,7 +87,7 @@
                   (SETELT % 7 (+ (QREFELT % 7) 3))
                   (EXIT
                    (PROGN
-                    (LETT #1#
+                    (LETT #6#
                           (SPADCALL
                            (SPADCALL
                             (LIST "\\" |strVar1| ".\\" |strVar2| ".\\"
@@ -108,7 +108,7 @@
                 (QREFELT % 17))
                (EXIT
                 (PROGN
-                 (LETT #1#
+                 (LETT #6#
                        (SPADCALL (SPADCALL |s| (QREFELT % 24)) (QREFELT % 26)))
                  (GO #7#))))))
             (LETT |subnodes| (SPADCALL |s| (QREFELT % 27)))
@@ -125,7 +125,7 @@
                  (SPADCALL |s| (QREFELT % 31)) (QREFELT % 15))
                 (QREFELT % 17))
                (EXIT
-                (PROGN (LETT #1# (|COMPUTIL;Ski2Lambda| |c2| %)) (GO #7#))))))
+                (PROGN (LETT #6# (|COMPUTIL;Ski2Lambda| |c2| %)) (GO #7#))))))
             (COND
              ((SPADCALL |c1| (QREFELT % 10))
               (SEQ
@@ -150,7 +150,7 @@
                 (QREFELT % 17))
                (EXIT
                 (PROGN
-                 (LETT #1#
+                 (LETT #6#
                        (SPADCALL (|COMPUTIL;Ski2Lambda| |c1| %)
                                  (|COMPUTIL;Ski2Lambda| |c2| %)
                                  (QREFELT % 32)))
@@ -167,7 +167,7 @@
                  (SPADCALL |s| (QREFELT % 31)) (QREFELT % 15))
                 (QREFELT % 17))
                (EXIT
-                (PROGN (LETT #1# (|COMPUTIL;Ski2Lambda| |c12| %)) (GO #7#))))))
+                (PROGN (LETT #6# (|COMPUTIL;Ski2Lambda| |c12| %)) (GO #7#))))))
             (COND
              ((SPADCALL |c11| (QREFELT % 10))
               (SEQ
@@ -192,7 +192,7 @@
                 (QREFELT % 17))
                (EXIT
                 (PROGN
-                 (LETT #1#
+                 (LETT #6#
                        (SPADCALL (|COMPUTIL;Ski2Lambda| |c1| %)
                                  (|COMPUTIL;Ski2Lambda| |c2| %)
                                  (QREFELT % 32)))
@@ -212,7 +212,7 @@
                 (QREFELT % 17))
                (EXIT
                 (PROGN
-                 (LETT #1#
+                 (LETT #6#
                        (SPADCALL
                         (SPADCALL (|COMPUTIL;Ski2Lambda| |c112| %)
                                   (|COMPUTIL;Ski2Lambda| |c2| %)
@@ -244,7 +244,7 @@
             (EXIT
              (SPADCALL (|COMPUTIL;Ski2Lambda| |c1| %)
                        (|COMPUTIL;Ski2Lambda| |c2| %) (QREFELT % 32)))))
-          #7# (EXIT #1#)))) 
+          #7# (EXIT #6#)))) 
 
 (SDEFUN |COMPUTIL;coerce;SkicL;2|
         ((|s| (|SKICombinators| UT)) (% (|Lambda| UT)))
@@ -255,8 +255,8 @@
 (SDEFUN |COMPUTIL;lambdaOverSki|
         ((|var| (UT)) (|sk| (|SKICombinators| UT)) (% (|SKICombinators| UT)))
         (SPROG
-         ((#1=#:G60 NIL) (|right| (|SKICombinators| UT))
-          (|left| (|SKICombinators| UT)) (|ch| (|List| (|SKICombinators| UT))))
+         ((|ch| (|List| (|SKICombinators| UT))) (|left| (|SKICombinators| UT))
+          (|right| (|SKICombinators| UT)) (#1=#:G61 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -285,7 +285,7 @@
                     (LETT #1#
                           (SPADCALL (SPADCALL (QREFELT % 36)) |sk|
                                     (QREFELT % 37)))
-                    (GO #2=#:G59))))))
+                    (GO #2=#:G60))))))
                (SPADCALL
                 (SPADCALL
                  (SPADCALL
@@ -380,10 +380,10 @@
 (SDEFUN |COMPUTIL;coerce;LSkic;4|
         ((|lam| (|Lambda| UT)) (% (|SKICombinators| UT)))
         (SPROG
-         ((#1=#:G77 NIL) (|c32| #2=(|Lambda| UT)) (|c31| #3=(|Lambda| UT))
-          (|ch3| #4=(|List| (|Lambda| UT))) (|cxx| (|Lambda| UT)) (|c33| #3#)
-          (|s3| (UT)) (|c3| #3#) (|lamUn| (|Lambda| UT)) (|c2| #2#) (|c1| #3#)
-          (|ch| #4#))
+         ((|ch| #1=(|List| (|Lambda| UT))) (|c1| #2=(|Lambda| UT))
+          (|c2| #3=(|Lambda| UT)) (|lamUn| (|Lambda| UT)) (|c3| #2#)
+          (|s3| (UT)) (|c33| #2#) (|cxx| (|Lambda| UT)) (|ch3| #1#) (|c31| #2#)
+          (|c32| #3#) (#4=#:G78 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -401,12 +401,12 @@
                 (QREFELT % 17))
                (EXIT
                 (PROGN
-                 (LETT #1#
+                 (LETT #4#
                        (SPADCALL
                         (SPADCALL (SPADCALL |lam| (QREFELT % 42))
                                   (QREFELT % 43))
                         (QREFELT % 44)))
-                 (GO #5=#:G76))))))
+                 (GO #5=#:G77))))))
             (COND
              ((SPADCALL |lam| (QREFELT % 45))
               (SEQ (LETT |ch| (SPADCALL |lam| (QREFELT % 46)))
@@ -430,7 +430,7 @@
                     (QREFELT % 17))
                    (EXIT
                     (PROGN
-                     (LETT #1#
+                     (LETT #4#
                            (SPADCALL (SPADCALL |c1| (QREFELT % 49))
                                      (SPADCALL |c2| (QREFELT % 49))
                                      (QREFELT % 37)))
@@ -455,7 +455,7 @@
                          (QREFELT % 17))
                         (EXIT
                          (PROGN
-                          (LETT #1# (SPADCALL (QREFELT % 38)))
+                          (LETT #4# (SPADCALL (QREFELT % 38)))
                           (GO #5#))))))))
                    (COND
                     ((SPADCALL |lam| (QREFELT % 53))
@@ -472,7 +472,7 @@
                        (QREFELT % 17))
                       (EXIT
                        (PROGN
-                        (LETT #1#
+                        (LETT #4#
                               (SPADCALL (SPADCALL (QREFELT % 36))
                                         (SPADCALL |c3| (QREFELT % 49))
                                         (QREFELT % 37)))
@@ -501,7 +501,7 @@
                        (QREFELT % 17))
                       (EXIT
                        (PROGN
-                        (LETT #1#
+                        (LETT #4#
                               (|COMPUTIL;lambdaOverSki| |s3|
                                (SPADCALL |cxx| (QREFELT % 49)) %))
                         (GO #5#))))))
@@ -540,7 +540,7 @@
                             (QREFELT % 17))
                            (EXIT
                             (PROGN
-                             (LETT #1#
+                             (LETT #4#
                                    (SPADCALL
                                     (SPADCALL (SPADCALL (QREFELT % 39))
                                               (|COMPUTIL;lambdaOverSki| |s3|
@@ -558,16 +558,15 @@
               (SPADCALL |lam| (QREFELT % 41)) (QREFELT % 15))
              (QREFELT % 17))
             (EXIT (SPADCALL (QREFELT % 38)))))
-          #5# (EXIT #1#)))) 
+          #5# (EXIT #4#)))) 
 
 (SDEFUN |COMPUTIL;coerce;SkicIl;5| ((|s| (|SKICombinators| UT)) (% (|ILogic|)))
         (SPROG
-         ((#1=#:G96 NIL) (|bc| #2=(|ILogic|)) (|ac| #2#) (|ab| #2#)
-          (|c| #3=(|ILogic|)) (|b| #3#) (|a| #3#)
-          (|c112| #4=(|SKICombinators| UT)) (|c111| #5=(|SKICombinators| UT))
-          (|subsubnodes2| #6=(|List| (|SKICombinators| UT))) (|c12| #4#)
-          (|c11| #5#) (|subsubnodes| #6#) (|c2| #4#) (|c1| #5#)
-          (|subnodes| #6#))
+         ((|subnodes| #1=(|List| (|SKICombinators| UT)))
+          (|c1| #2=(|SKICombinators| UT)) (|c2| #3=(|SKICombinators| UT))
+          (|subsubnodes| #1#) (|c11| #2#) (|c12| #3#) (|subsubnodes2| #1#)
+          (|c111| #2#) (|c112| #3#) (|a| #4=(|ILogic|)) (|b| #4#) (|c| #4#)
+          (|ab| #5=(|ILogic|)) (|ac| #5#) (|bc| #5#) (#6=#:G97 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -586,8 +585,8 @@
                   (LETT |a| (SPADCALL "x" (QREFELT % 56)))
                   (EXIT
                    (PROGN
-                    (LETT #1# (SPADCALL |a| |a| (QREFELT % 57)))
-                    (GO #7=#:G95))))))
+                    (LETT #6# (SPADCALL |a| |a| (QREFELT % 57)))
+                    (GO #7=#:G96))))))
                (COND
                 ((SPADCALL |s| (QREFELT % 22))
                  (SEQ
@@ -601,7 +600,7 @@
                   (LETT |b| (SPADCALL "y" (QREFELT % 56)))
                   (EXIT
                    (PROGN
-                    (LETT #1#
+                    (LETT #6#
                           (SPADCALL |a| (SPADCALL |b| |a| (QREFELT % 57))
                                     (QREFELT % 57)))
                     (GO #7#))))))
@@ -622,14 +621,14 @@
                   (LETT |bc| (SPADCALL |b| |c| (QREFELT % 57)))
                   (EXIT
                    (PROGN
-                    (LETT #1#
+                    (LETT #6#
                           (SPADCALL (SPADCALL |a| |bc| (QREFELT % 57))
                                     (SPADCALL |ab| |ac| (QREFELT % 57))
                                     (QREFELT % 57)))
                     (GO #7#))))))
                (EXIT
                 (PROGN
-                 (LETT #1#
+                 (LETT #6#
                        (SPADCALL
                         (SPADCALL (SPADCALL |s| (QREFELT % 24)) (QREFELT % 25))
                         (QREFELT % 56)))
@@ -648,12 +647,12 @@
                (LETT |a| (SPADCALL |c1| (QREFELT % 58)))
                (EXIT
                 (PROGN
-                 (LETT #1# (SPADCALL |a| |a| (QREFELT % 57)))
+                 (LETT #6# (SPADCALL |a| |a| (QREFELT % 57)))
                  (GO #7#))))))
             (COND
              ((SPADCALL |c1| (QREFELT % 10))
               (PROGN
-               (LETT #1#
+               (LETT #6#
                      (SPADCALL (SPADCALL |c1| (QREFELT % 58))
                                (SPADCALL |c2| (QREFELT % 58)) (QREFELT % 59)))
                (GO #7#))))
@@ -672,14 +671,14 @@
                (LETT |b| (SPADCALL |c12| (QREFELT % 58)))
                (EXIT
                 (PROGN
-                 (LETT #1#
+                 (LETT #6#
                        (SPADCALL |a| (SPADCALL |b| |a| (QREFELT % 57))
                                  (QREFELT % 57)))
                  (GO #7#))))))
             (COND
              ((SPADCALL |c11| (QREFELT % 10))
               (PROGN
-               (LETT #1#
+               (LETT #6#
                      (SPADCALL (SPADCALL |c1| (QREFELT % 58))
                                (SPADCALL |c2| (QREFELT % 58)) (QREFELT % 59)))
                (GO #7#))))
@@ -702,7 +701,7 @@
                (LETT |bc| (SPADCALL |b| |c| (QREFELT % 57)))
                (EXIT
                 (PROGN
-                 (LETT #1#
+                 (LETT #6#
                        (SPADCALL (SPADCALL |a| |bc| (QREFELT % 57))
                                  (SPADCALL |ab| |ac| (QREFELT % 57))
                                  (QREFELT % 57)))
@@ -710,12 +709,12 @@
             (EXIT
              (SPADCALL (SPADCALL |c1| (QREFELT % 58))
                        (SPADCALL |c2| (QREFELT % 58)) (QREFELT % 59)))))
-          #7# (EXIT #1#)))) 
+          #7# (EXIT #6#)))) 
 
 (DECLAIM (NOTINLINE |compUtil;|)) 
 
 (DEFUN |compUtil;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|compUtil| DV$1))
@@ -729,9 +728,9 @@
           (QSETREFV % 7 0)
           %))) 
 
-(DEFUN |compUtil| (#1=#:G97)
+(DEFUN |compUtil| (#1=#:G98)
   (SPROG NIL
-         (PROG (#2=#:G98)
+         (PROG (#2=#:G99)
            (RETURN
             (COND
              ((LETT #2#

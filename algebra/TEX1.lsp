@@ -5,7 +5,7 @@
 (DECLAIM (NOTINLINE |TexFormat1;|)) 
 
 (DEFUN |TexFormat1;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|TexFormat1| DV$1))

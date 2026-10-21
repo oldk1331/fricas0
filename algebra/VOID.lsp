@@ -1,5 +1,5 @@
 
-(PUT '|VOID;void;%;1| '|SPADreplace| '|voidValue|) 
+(MAKEPROP '|VOID;void;%;1| '|SPADreplace| '|voidValue|) 
 
 (SDEFUN |VOID;void;%;1| ((% (%))) (|voidValue|)) 
 
@@ -23,7 +23,7 @@
 
 (DEFUN |Void| ()
   (SPROG NIL
-         (PROG (#1=#:G3)
+         (PROG (#1=#:G4)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Void|))

@@ -20,7 +20,7 @@
 (DECLAIM (NOTINLINE |FullyLinearlyExplicitOver&;|)) 
 
 (DEFUN |FullyLinearlyExplicitOver&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -56,7 +56,7 @@
 
 (MAKEPROP '|FullyLinearlyExplicitOver&| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (0 . |One|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (0 . |1|)
               (|Integer|) (4 . *) (10 . *) (16 . *) (|Matrix| 7) (|Matrix| %)
               (22 . |reducedSystem|) (|Matrix| 9) (27 . |reducedSystem|)
               (32 . |reducedSystem|)

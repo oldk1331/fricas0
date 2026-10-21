@@ -1,7 +1,7 @@
 
 (SDEFUN |STRANS;STransform1;DUTSR;1| ((|x| (|Distribution| R)) (% (UTSR)))
         (SPROG
-         ((|res| (|Sequence| R)) (|chi| (|Stream| R)) (|mom| (|Stream| R)))
+         ((|mom| (|Stream| R)) (|chi| (|Stream| R)) (|res| (|Sequence| R)))
          (SEQ
           (LETT |mom| (SPADCALL (SPADCALL |x| (QREFELT % 12)) (QREFELT % 14)))
           (EXIT
@@ -23,8 +23,8 @@
 
 (SDEFUN |STRANS;STransform2;DUPSR;2| ((|x| (|Distribution| R)) (% (UPSR)))
         (SPROG
-         ((S2 (ULSR)) (|res2| (UTSR)) (|chi2| (|Stream| R))
-          (|mom2| (|Stream| R)) (|mom| (|Stream| R)))
+         ((|mom| (|Stream| R)) (|mom2| (|Stream| R)) (|chi2| (|Stream| R))
+          (|res2| (UTSR)) (S2 (ULSR)))
          (SEQ
           (LETT |mom| (SPADCALL (SPADCALL |x| (QREFELT % 12)) (QREFELT % 14)))
           (COND
@@ -45,9 +45,9 @@
 
 (SDEFUN |STRANS;STransform;DUPSR;3| ((|x| (|Distribution| R)) (% (UPSR)))
         (SPROG
-         ((S (UTSR)) (|res| (|Sequence| R)) (|chi| #1=(|Stream| R))
-          (|mom| (|Stream| R)) (S2 (ULSR)) (|res2| (UTSR)) (|chi2| #1#)
-          (|mom2| (|Stream| R)))
+         ((|mom2| (|Stream| R)) (|chi2| #1=(|Stream| R)) (|res2| (UTSR))
+          (S2 (ULSR)) (|mom| (|Stream| R)) (|chi| #1#) (|res| (|Sequence| R))
+          (S (UTSR)))
          (SEQ
           (LETT |mom| (SPADCALL (SPADCALL |x| (QREFELT % 12)) (QREFELT % 14)))
           (EXIT
@@ -86,7 +86,7 @@
 
 (SDEFUN |STRANS;distributionBySTransform;UPSRD;4|
         ((S (UPSR)) (% (|Distribution| R)))
-        (SPROG ((|taylS| (UTSR)) (|laurS| (ULSR)))
+        (SPROG ((|laurS| (ULSR)) (|taylS| (UTSR)))
                (SEQ (LETT |laurS| (SPADCALL S (QREFELT % 40)))
                     (LETT |taylS| (SPADCALL |laurS| (QREFELT % 41)))
                     (EXIT
@@ -100,8 +100,8 @@
 
 (DEFUN |STransformPackage;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -145,13 +145,12 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|local| |#4|) (|Sequence| 6) (|Distribution| 6)
               (0 . |moments|) (|Stream| 6) (5 . |stream|) (10 . |first|)
-              (|Boolean|) (15 . |zero?|) (20 . |Zero|) (24 . |Zero|)
-              (28 . |cons|) (|StreamTaylorSeriesOperations| 6) (34 . |revert|)
+              (|Boolean|) (15 . |zero?|) (20 . |0|) (24 . |0|) (28 . |cons|)
+              (|StreamTaylorSeriesOperations| 6) (34 . |revert|)
               (39 . |sequence|) (44 . |rest|) (49 . +) (55 . |series|)
-              |STRANS;STransform1;DUTSR;1| (60 . |One|) (64 . |One|)
-              (|Integer|) (|Fraction| 30) (68 . /) (74 . |powern|)
-              (80 . |laurent|) (86 . +) (92 . |puiseux|)
-              |STRANS;STransform2;DUPSR;2| (98 . |One|)
+              |STRANS;STransform1;DUTSR;1| (60 . |1|) (64 . |1|) (|Integer|)
+              (|Fraction| 30) (68 . /) (74 . |powern|) (80 . |laurent|)
+              (86 . +) (92 . |puiseux|) |STRANS;STransform2;DUPSR;2| (98 . |1|)
               |STRANS;STransform;DUPSR;3| (102 . |laurentRep|)
               (107 . |taylorRep|) (112 . |rationalPower|) (117 . |order|)
               (122 . |coefficients|) (127 . |distributionBySTransform|)

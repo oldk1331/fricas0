@@ -2,7 +2,7 @@
 (SDEFUN |GRAY;firstSubsetGray;PiV;1|
         ((|n| (|PositiveInteger|)) (% (|Vector| (|Vector| (|Integer|)))))
         (SPROG
-         ((#1=#:G5 NIL) (|i| NIL) (|vv| (|Vector| (|Vector| (|Integer|)))))
+         ((|vv| (|Vector| (|Vector| (|Integer|)))) (|i| NIL) (#1=#:G5 NIL))
          (SEQ (LETT |vv| (MAKEARR1 2 #()))
               (SPADCALL |vv| 1 (MAKEARR1 |n| 0) (QREFELT % 9))
               (SPADCALL |vv| 2 (MAKEARR1 (+ |n| 1) 1) (QREFELT % 9))
@@ -19,7 +19,7 @@
         ((|vv| (|Vector| (|Vector| (|Integer|)))) (|n| (|PositiveInteger|))
          (% (|Vector| (|Vector| (|Integer|)))))
         (SPROG
-         ((|c| (|Integer|)) (|lab| #1=(|Vector| (|Integer|))) (|subs| #1#))
+         ((|subs| #1=(|Vector| (|Integer|))) (|lab| #1#) (|c| (|Integer|)))
          (SEQ (LETT |subs| (SPADCALL |vv| 1 (QREFELT % 10)))
               (LETT |lab| (SPADCALL |vv| 2 (QREFELT % 10)))
               (LETT |c| (SPADCALL |lab| 1 (QREFELT % 14)))

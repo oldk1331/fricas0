@@ -9,11 +9,11 @@
          (|ezfactor| (|Mapping| (|Factored| UP) UP))
          (% (|Union| (|SparseUnivariatePolynomial| (|Fraction| UP)) "failed")))
         (SPROG
-         ((|lf|
+         ((|r| (|Fraction| UP))
+          (|lf|
            (|List|
             (|Record| (|:| |factor| UP)
-                      (|:| |exponent| (|NonNegativeInteger|)))))
-          (|r| (|Fraction| UP)))
+                      (|:| |exponent| (|NonNegativeInteger|))))))
          (SEQ (LETT |r| (SPADCALL |a1| 2 (QREFELT % 16)))
               (LETT |r|
                     (SPADCALL |r|
@@ -52,8 +52,8 @@
          (|ezfactor| (|Mapping| (|Factored| UP) UP))
          (% (|Union| (|SparseUnivariatePolynomial| (|Fraction| UP)) "failed")))
         (SPROG
-         ((|b| (|Fraction| UP)) (|sol| (|List| (|Fraction| UP)))
-          (|l2| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP))))
+         ((|l2| (|LinearOrdinaryDifferentialOperator1| (|Fraction| UP)))
+          (|sol| (|List| (|Fraction| UP))) (|b| (|Fraction| UP)))
          (SEQ
           (COND ((|KOVACIC;cannotCase2?| |lf| %) (CONS 1 "failed"))
                 (#1='T
@@ -103,38 +103,38 @@
            (|Record| (|:| |factor| UP)
                      (|:| |exponent| (|NonNegativeInteger|)))))
          (% (|Boolean|)))
-        (SPROG ((#1=#:G37 NIL) (#2=#:G38 NIL) (#3=#:G39 NIL) (|rec| NIL))
+        (SPROG ((|rec| NIL) (#1=#:G47 NIL) (#2=#:G46 NIL) (#3=#:G45 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (SEQ
                    (EXIT
-                    (SEQ (LETT |rec| NIL) (LETT #3# |lf|) G190
+                    (SEQ (LETT |rec| NIL) (LETT #1# |lf|) G190
                          (COND
-                          ((OR (ATOM #3#) (PROGN (LETT |rec| (CAR #3#)) NIL))
+                          ((OR (ATOM #1#) (PROGN (LETT |rec| (CAR #1#)) NIL))
                            (GO G191)))
                          (SEQ
                           (EXIT
                            (COND
                             ((EQL (QCDR |rec|) 2)
                              (PROGN
-                              (LETT #1# (PROGN (LETT #2# NIL) (GO #4=#:G36)))
-                              (GO #5=#:G34)))
+                              (LETT #3# (PROGN (LETT #2# NIL) (GO #4=#:G44)))
+                              (GO #5=#:G42)))
                             ((ODDP (QCDR |rec|))
                              (COND
                               ((> (QCDR |rec|) 2)
                                (PROGN
-                                (LETT #1# (PROGN (LETT #2# NIL) (GO #4#)))
+                                (LETT #3# (PROGN (LETT #2# NIL) (GO #4#)))
                                 (GO #5#))))))))
-                         (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
-                   #5# (EXIT #1#))
+                         (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL)))
+                   #5# (EXIT #3#))
                   (EXIT 'T)))
                 #4# (EXIT #2#)))) 
 
 (DECLAIM (NOTINLINE |Kovacic;|)) 
 
 (DEFUN |Kovacic;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -150,9 +150,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |Kovacic| (&REST #1=#:G40)
+(DEFUN |Kovacic| (&REST #1=#:G48)
   (SPROG NIL
-         (PROG (#2=#:G41)
+         (PROG (#2=#:G49)
            (RETURN
             (COND
              ((LETT #2#
@@ -174,8 +174,8 @@
               |KOVACIC;kovacic;3FU;1| (|PositiveInteger|) (5 . ^) (11 . *)
               (17 . |differentiate|) (22 . *) (28 . +) (34 . -) (40 . /)
               (46 . |denom|) (|Record| (|:| |factor| 7) (|:| |exponent| 31))
-              (|List| 24) (|Factored| 7) (51 . |factors|) (56 . |One|)
-              (60 . |One|) (64 . |One|) (|NonNegativeInteger|)
+              (|List| 24) (|Factored| 7) (51 . |factors|) (56 . |1|) (60 . |1|)
+              (64 . |1|) (|NonNegativeInteger|)
               (|LinearOrdinaryDifferentialOperator1| 11) (68 . |monomial|)
               (74 . -) (80 . |coerce|) (85 . *) (|List| 11)
               (|RationalRicDE| 6 7) (91 . |ricDsolve|)

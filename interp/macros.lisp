@@ -68,6 +68,17 @@
 
 ; End of moved fragment
 
+(setq |$Newline| #\Newline)
+
+;; Common lisp control variables
+(setq *print-array* nil)
+(setq *print-pretty* t)
+(setq *print-circle* nil)
+(setq *print-escape* nil) ;; so stringimage doesn't escape idents
+;;; FIXME: do we need this?
+#+(and :GCL :IEEE-FLOATING-POINT)
+  (setq system:*print-nans* T)
+
 ; 5 PROGRAM STRUCTURE
 
 ; 5.3.2 Declaring Global Variables and Named Constants
@@ -82,7 +93,6 @@
 
 (DEFUN |lt_sexp| (U V)
   "Multiple-type ordering relation."
-;;; Result negated compared to LEXGREATERP and GGREATERP
 ;;;   Order of types: nil number symbol string vector cons"
   (COND ((EQ U V) NIL)
         ((NULL U) T)
@@ -108,14 +118,6 @@
 (defun GLESSEQP (X Y) (|lt_sexp| X Y))
 
 (defun LEXLESSEQP (X Y) (|lt_sexp| X Y))
-
-
-; 10.3 Creating Symbols
-
-(DEFUN IS_GENVAR (X)
-  (AND (IDENTP X)
-       (let ((y (symbol-name x)))
-         (and (char= #\$ (elt y 0)) (> (size y) 1) (digitp (elt y 1))))))
 
 ; 14 SEQUENCES
 
@@ -152,61 +154,9 @@
 
 ; 15.5 Using Lists as Sets
 
-(DEFUN |set_sum| (X Y)
-  (COND ((ATOM Y) X)
-        ((ATOM X) Y)
-        ((MEMBER (CAR X) Y :test #'equal) (|set_sum| (CDR X) Y))
-        ((|set_sum| (CDR X) (CONS (CAR X) Y)))))
-
-(defun |set_difference| (l1 l2) (set-difference l1 l2 :test #'equal))
-
 (defun remdup (l) (remove-duplicates l :test #'equalp))
 
 ; 15.6 Association Lists
-
-(defun DELASC (u v) "Returns a copy of a-list V in which any pair with key U is deleted."
-   (cond ((atom v) nil)
-         ((or (atom (car v))(not (equal u (caar v))))
-          (cons (car v) (DELASC u (cdr v))))
-         ((cdr v))))
-
-(DEFUN ADDASSOC (X Y L)
-  "Put the association list pair (X . Y) into L, erasing any previous association for X"
-  (COND ((ATOM L) (CONS (CONS X Y) L))
-        ((EQUAL X (CAAR L)) (CONS (CONS X Y) (CDR L)))
-        ((CONS (CAR L) (ADDASSOC X Y (CDR L))))))
-
-(DEFUN DELLASOS (U V)
-  "Remove any association pair (U . X) from list V."
-  (COND ((ATOM V) NIL)
-        ((EQUAL U (CAAR V)) (CDR V))
-        ((CONS (CAR V) (DELLASOS U (CDR V))))))
-
-(DEFUN ASSOCLEFT (X)
-  "Returns all the keys of association list X."
-  (if (ATOM X) X (mapcar #'car x)))
-
-(DEFUN ASSOCRIGHT (X)
-  "Returns all the datums of association list X."
-  (if (ATOM X) X (mapcar #'cdr x)))
-
-(DEFUN LASSOC (X Y)
-  "Return the datum associated with key X in association list Y."
-  (PROG ()
-     A  (COND ((ATOM Y) (RETURN NIL))
-              ((EQUAL (CAAR Y) X) (RETURN (CDAR Y))) )
-        (SETQ Y (CDR Y))
-        (GO A)))
-
-(DEFUN |rassoc| (X Y)
-  "Return the datum associated with key X in association list Y."
-  (PROG ()
-     A  (COND ((ATOM Y) (RETURN NIL))
-              ((EQUAL (CDAR Y) X) (RETURN (CAAR Y))) )
-        (SETQ Y (CDR Y))
-        (GO A)))
-
-(defun QLASSQ (p a-list) (cdr (assq p a-list)))
 
 ;;; Operations on Association Sets (AS)
 
@@ -220,17 +170,7 @@
 
 ; 22 INPUT/OUTPUT
 
-; 22.2 Input Functions
-
-; 22.2.1 Input from Character Streams
-
-; 22.3 Output Functions
-
 ; 22.3.1 Output to Character Streams
-
-(defun |get_lisp_std_out| () *standard-output*)
-
-(defun |get_lisp_error_out| () *error-output*)
 
 (defvar |$highlightFontOn| (concat " " |$boldString|)
                      "switch to highlight font")
@@ -253,14 +193,6 @@
   (if (ATOM X)
       (if (NULL X) NIL (progn (PRINC " . ") (MESSAGEPRINT-1 X)))
       (progn (PRINC " ") (MESSAGEPRINT-1 (CAR X)) (MESSAGEPRINT-2 (CDR X)))))
-
-; 24 ERRORS
-
-; 24.2 Specialized Error-Signalling Forms and Macros
-
-(defun MOAN (&rest x) (|sayBrightly| `(|%l| "===> " ,@X |%l|)))
-
-(DEFUN FAIL () (|systemError| '"Antique error (FAIL ENTERED)"))
 
 ; 25 MISCELLANEOUS FEATURES
 
@@ -367,32 +299,6 @@ This function respects intermediate #\Newline characters and drops
     (t
      str)))
 
-;; stream handling for paste-in generation
-
-(defun |applyWithOutputToString| (func args)
-  ;; returns the cons of applying func to args and a string produced
-  ;; from standard-output while executing.
-  (let* ((*standard-output* (make-string-output-stream))
-         (curoutstream *standard-output*)
-         (*error-output* *standard-output*)
-         (|$algebraOutputStream| (CONS NIL *standard-output*))
-        val)
-    (declare (special curoutstream
-                      |$algebraOutputStream|))
-    (setq val (catch 'spad_reader
-                  (apply (symbol-function func) args)))
-    (cons val (get-output-stream-string *standard-output*))))
-
-(defun |breakIntoLines| (str)
-  (let ((bol 0) (eol) (line-list nil))
-    (loop
-     (setq eol (position #\Newline str :start bol))
-     (if (null eol) (return))
-     (if (> eol bol)
-         (setq line-list (cons (subseq str bol eol) line-list)))
-     (setq bol (+ eol 1)))
-    (nreverse line-list)))
-
 ; moved from comp.lisp
 
 ;;; Common Block section
@@ -439,6 +345,20 @@ This function respects intermediate #\Newline characters and drops
   #-(or :clisp :cmu :ecl :openmcl :sbcl :lispworks)
   0)
 
+(defun |current_heap_size| ()
+  #+:clisp
+  (nth-value 0 (sys::%room))
+  #+:cmu
+  (lisp::dynamic-usage)
+  #+:lispworks
+  (getf (system:room-values) :total-allocated)
+  #+:openmcl
+  (nth-value 0 (ccl::%usedbytes))
+  #+:sbcl
+  (sb-kernel:dynamic-usage)
+  #-(or :clisp :cmu :lispworks :openmcl :sbcl)
+  0)
+
 (defun |goGetTracerHelper| (dn f oname alias options modemap)
     (lambda(&rest l)
          (|goGetTracer| l dn f oname alias options modemap)))
@@ -450,32 +370,34 @@ This function respects intermediate #\Newline characters and drops
        (EQL (ELT (PNAME X) 0) #\#)
        (INTEGERP (parse-integer (symbol-name X) :start 1))))
 
-(defun |char_to_digit|(x) (digit-char-p x))
 
-(defun SPADSYSNAMEP (STR)
-  (let (n i j)
-    (AND (SETQ N (MAXINDEX STR))
-         (SETQ I (position #\. STR :start 1))
-         (SETQ J (position #\, STR :start (1+ I)))
-         (do ((k (1+ j) (1+ k)))
-             ((> k n) t)
-           (if (not (digitp (elt str k))) (return nil))))))
+;************************************************************************
+;         SYSTEM COMMANDS
+;************************************************************************
 
-; **********************************************************************
-;            Utility functions for Tracing Package
-; **********************************************************************
+(defun |makeSF| (mantissa exponent)
+  (FLOAT (/ mantissa (expt 2 (- exponent))) 0.0d0))
 
-(MAKEPROP '|coerce| '/TRANSFORM '(& & *))
-(MAKEPROP '|comp| '/TRANSFORM '(& * * &))
-(MAKEPROP '|compIf| '/TRANSFORM '(& * * &))
+;; This is used in the domain Boolean
+(defun |BooleanEquality| (x y) (if x y (null y)))
 
-;  by having no transform for the 3rd argument, it is simply not printed
+;;; (defun |evalSharpOne| (x \#1) (declare (special \#1)) (EVAL x))
+(defun |evalSharpOne| (x |#1|)
+   (declare (special |#1|))
+      (EVAL `(let () (declare (special |#1|)) ,x)))
 
-(MAKEPROP '|compFormWithModemap| '/TRANSFORM '(& * * & *))
+(DEFUN ASSOCIATER (FN LST)
+  (COND ((NULL LST) NIL)
+        ((NULL (CDR LST)) (CAR LST))
+        ((LIST FN (CAR LST) (ASSOCIATER FN (CDR LST))))))
 
-;;; A "resumable" break loop for use in trace etc. Unfortunately this
-;;; only worked for CCL. We need to define a Common Lisp version. For
-;;; now the function is defined but does nothing.
-(defun interrupt (&rest ignore))
+;; function to create byte and half-word vectors in new runtime system 8/90
 
-;;; end of moved fragment
+(defun |makeByteWordVec2| (maxelement initialvalue)
+  (let ((n (cond ((null initialvalue) 7) ('t maxelement))))
+    (make-array (length initialvalue)
+      :element-type (list 'mod (1+ n))
+      :initial-contents initialvalue)))
+
+(defun MAKEPROP (sym ind val) (setf (get sym ind) val))
+

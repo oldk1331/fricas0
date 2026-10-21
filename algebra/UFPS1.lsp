@@ -11,7 +11,7 @@
 (DECLAIM (NOTINLINE |UnivariateFormalPowerSeriesFunctions;|)) 
 
 (DEFUN |UnivariateFormalPowerSeriesFunctions;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|UnivariateFormalPowerSeriesFunctions| DV$1))
@@ -26,9 +26,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |UnivariateFormalPowerSeriesFunctions| (#1=#:G1)
+(DEFUN |UnivariateFormalPowerSeriesFunctions| (#1=#:G2)
   (SPROG NIL
-         (PROG (#2=#:G2)
+         (PROG (#2=#:G3)
            (RETURN
             (COND
              ((LETT #2#

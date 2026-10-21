@@ -219,12 +219,31 @@
 (DEF_SIZED_IOPS 16)
 (DEF_SIZED_IOPS 8)
 
+;;; Integer operations
+
+(defun |divide_INT| (x y)
+    (declare (type integer x y))
+    (multiple-value-bind (q r) (truncate x y) (cons q r)))
+
+(defun |exquo_INT| (x y)
+    (declare (type integer x y))
+    (cond
+        ((= y 0) |$spad_failure|)
+        (t (multiple-value-bind (q r) (truncate x y)
+           (if (= r 0) (cons 0 q) |$spad_failure|)))
+    )
+)
+
+(defun |quotient_INT| (x y)
+    (declare (type integer x y))
+    (multiple-value-bind (q r) (truncate x y) q))
+
 ;;; Modular arithmetic
 
 (deftype machine_int () '(unsigned-byte 64))
 
 ;;; (x*y + z) using 32-bit x and y and 64-bit z and assuming that
-;;; intermediate results fits into 64 bits
+;;; intermediate result fits into 64 bits
 (defmacro QSMULADD64_32 (x y z)
     `(the machine_int
          (+ (the machine_int
@@ -276,7 +295,7 @@
               (go l1))))
 
 (defmacro QMODDOT32 (v1 v2 ind1 ind2 kk s0 p)
-     `(QMODDOT0 ELT32 ,v1 ,v2 ,ind1 ,ind2 ,kk ,s0 ,p))
+     `(QMODDOT0 ELT_U32 ,v1 ,v2 ,ind1 ,ind2 ,kk ,s0 ,p))
 
 ;;; Support for HashState domain.
 ;;; Here the FNV-1a algorithm is employed.
@@ -578,6 +597,12 @@
          (t (error "bad arg to MAKE_HASHTABLE")))
 )
 
+(defun HKEYS (table)
+   (let (keys)
+      (maphash
+        #'(lambda (key val) (declare (ignore val)) (push key keys)) table)
+        keys))
+
 ; Misc operations
 
 (defmacro |qset_first|(l x) `(SETF (CAR (the cons ,l)) ,x))
@@ -829,8 +854,8 @@
 ;;; Used for Record arguments
 (defmacro |:| (tag expr) `(LIST '|:| ,(MKQ tag) ,expr))
 
-(defmacro |Zero|() 0)
-(defmacro |One|() 1)
+(defmacro |0|() 0)
+(defmacro |1|() 1)
 
 ;;; range tests and assertions
 
@@ -863,7 +888,7 @@
 ;;; Support for re-seeding the lisp random number generator.
 (defun SEEDRANDOM () (setf *random-state* (make-random-state t)))
 
-; "failed" union branch, independet of type of union
+; "failed" union branch, independent of type of union
 (defvar |$spad_failure| (cons 1 "failed"))
 
 (defmacro |trappedSpadEval| (form)
@@ -873,3 +898,51 @@
   `(let ((|$BreakMode| '|trapSpadErrors|))
         (declare (special |$BreakMode|))
         (CATCH '|trapSpadErrors| ,form)))
+
+(defmacro WITHOUT_INTERRUPTS (&rest form)
+  `(#+:sbcl sb-sys:without-interrupts
+    #-:sbcl progn
+      ,@form))
+
+(defun FULLGC ()
+    ;; only defined for 4 lisps, the purpose is to recycle weak pointers.
+    #+:cmu
+    (ext:gc :full t)
+    #+:sbcl
+    (sb-ext:gc :full t)
+    #+(or :clisp :ecl)
+    (reclaim))
+
+(defun MAKE_WEAK_POINTER (object)
+    #+(or :clisp :cmu :ecl)
+    (ext:make-weak-pointer object)
+    #+:sbcl
+    (sb-ext:make-weak-pointer object)
+    #-(or :clisp :cmu :ecl :sbcl)
+    object)
+
+(defun WEAK_POINTER_VALUE (weak-pointer)
+    #+(or :clisp :cmu :ecl)
+    (ext:weak-pointer-value weak-pointer)
+    #+:sbcl
+    (sb-ext:weak-pointer-value weak-pointer)
+    #-(or :clisp :cmu :ecl :sbcl)
+    weak-pointer)
+
+(defun COMPACT_WEAK_ARRAY (array size default_element)
+    ;; return the size of array after compact
+    #+(or :clisp :cmu :ecl :sbcl)
+    (progn
+        (dotimes (i size)
+            (setf (aref array i) (MAKE_WEAK_POINTER (aref array i))))
+        (FULLGC)
+        (do ((i 0 (1+ i)) (j 0))
+            ((= i size) j)
+            (multiple-value-bind (value valid)
+                (WEAK_POINTER_VALUE (aref array i))
+              (setf (aref array i) default_element)
+              (if valid (progn (setf (aref array j) value)
+                               (setq j (1+ j)))))))
+
+    #-(or :clisp :cmu :ecl :sbcl)
+    size)

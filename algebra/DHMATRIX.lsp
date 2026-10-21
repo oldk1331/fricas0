@@ -26,7 +26,7 @@
                       (QREFELT % 19)))))) 
 
 (SDEFUN |DHMATRIX;rotatex;R%;3| ((|degree| (R)) (% (%)))
-        (SPROG ((|sinAngle| (R)) (|cosAngle| (R)) (|angle| (R)))
+        (SPROG ((|angle| (R)) (|cosAngle| (R)) (|sinAngle| (R)))
                (SEQ
                 (LETT |angle|
                       (SPADCALL
@@ -50,7 +50,7 @@
                   (QREFELT % 10)))))) 
 
 (SDEFUN |DHMATRIX;rotatey;R%;4| ((|degree| (R)) (% (%)))
-        (SPROG ((|sinAngle| (R)) (|cosAngle| (R)) (|angle| (R)))
+        (SPROG ((|angle| (R)) (|cosAngle| (R)) (|sinAngle| (R)))
                (SEQ
                 (LETT |angle|
                       (SPADCALL
@@ -73,7 +73,7 @@
                   (QREFELT % 10)))))) 
 
 (SDEFUN |DHMATRIX;rotatez;R%;5| ((|degree| (R)) (% (%)))
-        (SPROG ((|sinAngle| (R)) (|cosAngle| (R)) (|angle| (R)))
+        (SPROG ((|angle| (R)) (|cosAngle| (R)) (|sinAngle| (R)))
                (SEQ
                 (LETT |angle|
                       (SPADCALL
@@ -126,7 +126,7 @@
 
 (DEFUN |DenavitHartenbergMatrix;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G22 NIL) (#2=#:G23 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+   ((DV$1 NIL) (|dv$| NIL) (% NIL) (#1=#:G23 NIL) (#2=#:G22 NIL) (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT |dv$| (LIST '|DenavitHartenbergMatrix| DV$1))
@@ -140,23 +140,23 @@
                                         (|HasCategory| |#1| '(|Hashable|))
                                         (|HasCategory| |#1| '(|OrderedSet|))
                                         (|HasCategory| |#1| '(|BasicType|))
-                                        (LETT #2#
+                                        (LETT #1#
                                               (|HasCategory| |#1|
                                                              '(|SetCategory|)))
                                         (OR
                                          (|HasCategory| |#1| '(|Comparable|))
-                                         #2#)
+                                         #1#)
                                         (OR (|HasCategory| |#1| '(|BasicType|))
                                             (|HasCategory| |#1|
                                                            '(|Comparable|))
                                             (|HasCategory| |#1| '(|Hashable|))
-                                            #2#)
+                                            #1#)
                                         (AND
                                          (|HasCategory| |#1|
                                                         (LIST '|Evalable|
                                                               (|devaluate|
                                                                |#1|)))
-                                         #2#)
+                                         #1#)
                                         (OR
                                          (AND
                                           (|HasCategory| |#1|
@@ -169,18 +169,18 @@
                                                          (LIST '|Evalable|
                                                                (|devaluate|
                                                                 |#1|)))
-                                          #2#))
-                                        (LETT #1#
+                                          #1#))
+                                        (LETT #2#
                                               (|HasCategory| |#1|
                                                              '(|CoercibleTo|
                                                                (|OutputForm|))))
-                                        (OR #1#
+                                        (OR #2#
                                             (AND
                                              (|HasCategory| |#1|
                                                             (LIST '|Evalable|
                                                                   (|devaluate|
                                                                    |#1|)))
-                                             #2#))
+                                             #1#))
                                         (|HasCategory| |#1| '(|AbelianMonoid|))
                                         (|HasCategory| |#1| '(|AbelianGroup|))
                                         (|HasCategory| |#1|
@@ -208,7 +208,7 @@
      (OR
       (AND (|HasCategory| |#1| '(|BasicType|))
            (|HasCategory| % '(|finiteAggregate|)))
-      (|HasCategory| |#1| '(|Hashable|)) #2#)
+      (|HasCategory| |#1| '(|Hashable|)) #1#)
      (|augmentPredVector| % 4194304))
     (SETF |pv$| (QREFELT % 3))
     %))) 
@@ -233,8 +233,8 @@
 
 (MAKEPROP '|DenavitHartenbergMatrix| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL (|Matrix| 6) (|local| |#1|) (0 . |One|)
-              (4 . |Zero|) (|List| 17) (8 . |matrix|) |DHMATRIX;identity;%;1|
+           '#(NIL NIL NIL NIL NIL (|Matrix| 6) (|local| |#1|) (0 . |1|)
+              (4 . |0|) (|List| 17) (8 . |matrix|) |DHMATRIX;identity;%;1|
               (|Vector| 6) (13 . |concat|) (19 . *) (|Integer|) (25 . |elt|)
               (|List| 6) (|Point| 6) (31 . |point|) |DHMATRIX;*;%2P;2|
               (36 . |pi|) (40 . *) (46 . |coerce|) (51 . /) (57 . |cos|)
@@ -270,9 +270,9 @@
               |blockConcat| 826 |array2| 831 |any?| 836 |antisymmetric?| 842 ^
               847 |Pfaffian| 859 = 864 / 870 - 876 + 887 * 893 |#| 935)
            'NIL
-           (CONS (|makeByteWordVec2| 11 '(0 0 1 0 2 6 9 0 7 11 9 0 0 0 0))
+           (CONS (|makeByteWordVec2| 11 '(0 0 1 1 0 2 6 9 0 7 11 9 0 0 0 0))
                  (CONS
-                  '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL
+                  '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL NIL
                      |HomogeneousAggregate&| |Hashable&| |SetCategory&|
                      |Evalable&| |Aggregate&| |BasicType&| NIL |InnerEvalable&|
                      NIL NIL NIL NIL)
@@ -280,9 +280,10 @@
                    '#((|MatrixCategory| 6 (|Vector| 6) (|Vector| 6))
                       (|TwoDimensionalArrayCategory| 6 (|Vector| 6)
                                                      (|Vector| 6))
-                      (|Comparable|) (|HomogeneousAggregate| 6) (|Hashable|)
-                      (|SetCategory|) (|Evalable| 6) (|Aggregate|)
-                      (|BasicType|) (|CoercibleTo| 52) (|InnerEvalable| 6 6)
+                      (|Comparable|) (|ComparableRepresentation|)
+                      (|HomogeneousAggregate| 6) (|Hashable|) (|SetCategory|)
+                      (|Evalable| 6) (|Aggregate|) (|BasicType|)
+                      (|CoercibleTo| 52) (|InnerEvalable| 6 6)
                       (|shallowlyMutable|) (|finiteAggregate|)
                       (|MatrixOperationsCategory| 6 (|Vector| 6) (|Vector| 6))
                       (|Type|))

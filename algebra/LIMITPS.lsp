@@ -1,14 +1,14 @@
 
 (SDEFUN |LIMITPS;is_exp_log| ((|fcn| (FE)) (|x| (|Symbol|)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G186 NIL) (#2=#:G185 NIL) (|nm| (|Symbol|)) (#3=#:G187 NIL)
-          (|k| NIL))
+         ((|k| NIL) (#1=#:G188 NIL) (|nm| (|Symbol|)) (#2=#:G186 NIL)
+          (#3=#:G187 NIL))
          (SEQ
           (EXIT
            (SEQ
-            (SEQ (LETT |k| NIL) (LETT #3# (SPADCALL |fcn| (QREFELT % 11))) G190
+            (SEQ (LETT |k| NIL) (LETT #1# (SPADCALL |fcn| (QREFELT % 11))) G190
                  (COND
-                  ((OR (ATOM #3#) (PROGN (LETT |k| (CAR #3#)) NIL)) (GO G191)))
+                  ((OR (ATOM #1#) (PROGN (LETT |k| (CAR #1#)) NIL)) (GO G191)))
                  (SEQ
                   (EXIT
                    (SEQ
@@ -81,11 +81,11 @@
                                   (QREFELT % 19))
                         (|spadConstant| % 8) (QREFELT % 21))
                        (PROGN (LETT #2# |$NoValue|) (GO #4#)))
-                      ('T (PROGN (LETT #1# NIL) (GO #5=#:G184)))))))
+                      ('T (PROGN (LETT #3# NIL) (GO #5=#:G185)))))))
                   #4# (EXIT #2#))
-                 (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
+                 (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
             (EXIT 'T)))
-          #5# (EXIT #1#)))) 
+          #5# (EXIT #3#)))) 
 
 (SDEFUN |LIMITPS;noX?| ((|fcn| (FE)) (|x| (|Symbol|)) (% (|Boolean|)))
         (NULL (SPADCALL |x| (SPADCALL |fcn| (QREFELT % 23)) (QREFELT % 24)))) 
@@ -96,8 +96,8 @@
 (SDEFUN |LIMITPS;firstNonLogPtr|
         ((|fcn| (FE)) (|x| (|Symbol|)) (% (|List| (|Kernel| FE))))
         (SPROG
-         ((|list| (|List| (|Kernel| FE))) (#1=#:G200 NIL)
-          (|ker| (|Kernel| FE)))
+         ((|ker| (|Kernel| FE)) (#1=#:G201 NIL)
+          (|list| (|List| (|Kernel| FE))))
          (SEQ
           (EXIT
            (SEQ (LETT |list| (SPADCALL |fcn| (QREFELT % 25)))
@@ -117,7 +117,7 @@
                                 (EXIT
                                  (PROGN
                                   (LETT #1# |list|)
-                                  (GO #2=#:G199)))))))))
+                                  (GO #2=#:G200)))))))))
                           (EXIT (LETT |list| (CDR |list|))))
                      NIL (GO G190) G191 (EXIT NIL))
                 (EXIT NIL)))
@@ -201,8 +201,8 @@
 (SDEFUN |LIMITPS;leftOrRight|
         ((|fcn| (FE)) (|x| (|Symbol|)) (|limVal| (FE)) (% (|SingleInteger|)))
         (SPROG
-         ((|inf| (|SingleInteger|)) (|val| (|OrderedCompletion| FE))
-          (|value| (|Union| (|OrderedCompletion| FE) "failed")))
+         ((|value| (|Union| (|OrderedCompletion| FE) "failed"))
+          (|val| (|OrderedCompletion| FE)) (|inf| (|SingleInteger|)))
          (SEQ
           (LETT |value|
                 (|LIMITPS;limitPlus|
@@ -225,21 +225,21 @@
         ((|fcn| (FE)) (|x| (|Symbol|))
          (% (|Union| (|OrderedCompletion| FE) #1="failed")))
         (SPROG
-         ((#2=#:G259 NIL) (|den| (FE)) (|num| (FE)) (|finVal| (FE))
-          (|valu| (|Union| FE "failed")) (|val| (|OrderedCompletion| FE))
-          (|fval| (|Union| (|OrderedCompletion| FE) #1#)) (#3=#:G262 NIL)
-          (|k| NIL) (|xkers| (|List| (|Kernel| FE))) (#4=#:G261 NIL)
-          (#5=#:G260 NIL))
+         ((#2=#:G264 NIL) (#3=#:G265 NIL) (|xkers| (|List| (|Kernel| FE)))
+          (|k| NIL) (#4=#:G266 NIL)
+          (|fval| (|Union| (|OrderedCompletion| FE) #1#))
+          (|val| (|OrderedCompletion| FE)) (|valu| (|Union| FE "failed"))
+          (|finVal| (FE)) (|num| (FE)) (|den| (FE)) (#5=#:G263 NIL))
          (SEQ
           (EXIT
            (SEQ
             (LETT |xkers|
                   (PROGN
-                   (LETT #5# NIL)
+                   (LETT #2# NIL)
                    (SEQ (LETT |k| NIL)
-                        (LETT #4# (SPADCALL |fcn| (QREFELT % 25))) G190
+                        (LETT #3# (SPADCALL |fcn| (QREFELT % 25))) G190
                         (COND
-                         ((OR (ATOM #4#) (PROGN (LETT |k| (CAR #4#)) NIL))
+                         ((OR (ATOM #3#) (PROGN (LETT |k| (CAR #3#)) NIL))
                           (GO G191)))
                         (SEQ
                          (EXIT
@@ -248,18 +248,18 @@
                                       (SPADCALL (SPADCALL |k| (QREFELT % 18))
                                                 (QREFELT % 23))
                                       (QREFELT % 24))
-                            (LETT #5# (CONS |k| #5#))))))
-                        (LETT #4# (CDR #4#)) (GO G190) G191
-                        (EXIT (NREVERSE #5#)))))
+                            (LETT #2# (CONS |k| #2#))))))
+                        (LETT #3# (CDR #3#)) (GO G190) G191
+                        (EXIT (NREVERSE #2#)))))
             (EXIT
              (COND
               ((EQL (LENGTH |xkers|) 1) (|LIMITPS;specialLimit1| |fcn| |x| %))
               ('T
                (SEQ (LETT |num| (SPADCALL |fcn| (QREFELT % 35)))
                     (LETT |den| (SPADCALL |fcn| (QREFELT % 36)))
-                    (SEQ (LETT |k| NIL) (LETT #3# |xkers|) G190
+                    (SEQ (LETT |k| NIL) (LETT #4# |xkers|) G190
                          (COND
-                          ((OR (ATOM #3#) (PROGN (LETT |k| (CAR #3#)) NIL))
+                          ((OR (ATOM #4#) (PROGN (LETT |k| (CAR #4#)) NIL))
                            (GO G191)))
                          (SEQ
                           (LETT |fval|
@@ -273,17 +273,17 @@
                                             (QREFELT % 32))
                                   0 (QREFELT % 38)))
                              (PROGN
-                              (LETT #2#
+                              (LETT #5#
                                     (|LIMITPS;specialLimitNormalize| |fcn| |x|
                                      %))
-                              (GO #6=#:G258)))
+                              (GO #6=#:G262)))
                             ('T
                              (SEQ (LETT |valu| (SPADCALL |val| (QREFELT % 40)))
                                   (EXIT
                                    (COND
                                     ((QEQCAR |valu| 1)
                                      (PROGN
-                                      (LETT #2#
+                                      (LETT #5#
                                             (|LIMITPS;specialLimitNormalize|
                                              |fcn| |x| %))
                                       (GO #6#)))
@@ -301,22 +301,27 @@
                                                        (|spadConstant| % 8)
                                                        (QREFELT % 21))
                                              (PROGN
-                                              (LETT #2#
+                                              (LETT #5#
                                                     (|LIMITPS;specialLimitNormalize|
                                                      |fcn| |x| %))
                                               (GO #6#))))))))))))))
-                         (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
+                         (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT NIL))
                     (EXIT
                      (CONS 0
                            (SPADCALL (SPADCALL |num| |den| (QREFELT % 42))
                                      (QREFELT % 43))))))))))
-          #6# (EXIT #2#)))) 
+          #6# (EXIT #5#)))) 
 
 (SDEFUN |LIMITPS;specialLimitNormalize|
         ((|fcn| (FE)) (|x| (|Symbol|))
          (% (|Union| (|OrderedCompletion| FE) #1="failed")))
         (SPROG
-         ((|lim| (|Union| FE "failed")) (|limm| (|OrderedCompletion| FE))
+         ((|nfcn| (FE)) (#2=#:G289 NIL) (#3=#:G290 NIL)
+          (|xkers| (|List| #4=(|Kernel| FE))) (#5=#:G291 NIL) (|k| NIL)
+          (#6=#:G292 NIL) (|expKers| (|List| #4#)) (|expKer| (|Kernel| FE))
+          (|fval| (|Union| (|OrderedCompletion| FE) #1#)) (|vv| (|Symbol|))
+          (|eq| (|Equation| FE)) (|cc| (FE))
+          (|expKerLim| (|OrderedCompletion| FE))
           (|limVal|
            (|Union| (|OrderedCompletion| FE)
                     (|Record|
@@ -325,12 +330,7 @@
                      (|:| |rightHandLimit|
                           (|Union| (|OrderedCompletion| FE) #1#)))
                     "failed"))
-          (|expKerLim| (|OrderedCompletion| FE)) (|cc| (FE))
-          (|eq| (|Equation| FE)) (|vv| (|Symbol|))
-          (|fval| (|Union| (|OrderedCompletion| FE) #1#))
-          (|expKer| (|Kernel| FE)) (|expKers| (|List| #2=(|Kernel| FE)))
-          (#3=#:G288 NIL) (|k| NIL) (#4=#:G287 NIL) (|xkers| (|List| #2#))
-          (#5=#:G286 NIL) (#6=#:G285 NIL) (|nfcn| (FE)))
+          (|limm| (|OrderedCompletion| FE)) (|lim| (|Union| FE "failed")))
          (SEQ (LETT |nfcn| (SPADCALL |fcn| (QREFELT % 45)))
               (EXIT
                (COND
@@ -340,12 +340,12 @@
                  (SEQ
                   (LETT |xkers|
                         (PROGN
-                         (LETT #6# NIL)
+                         (LETT #2# NIL)
                          (SEQ (LETT |k| NIL)
-                              (LETT #5# (SPADCALL |fcn| (QREFELT % 11))) G190
+                              (LETT #3# (SPADCALL |fcn| (QREFELT % 11))) G190
                               (COND
-                               ((OR (ATOM #5#)
-                                    (PROGN (LETT |k| (CAR #5#)) NIL))
+                               ((OR (ATOM #3#)
+                                    (PROGN (LETT |k| (CAR #3#)) NIL))
                                 (GO G191)))
                               (SEQ
                                (EXIT
@@ -355,9 +355,9 @@
                                              (SPADCALL |k| (QREFELT % 18))
                                              (QREFELT % 23))
                                             (QREFELT % 24))
-                                  (LETT #6# (CONS |k| #6#))))))
-                              (LETT #5# (CDR #5#)) (GO G190) G191
-                              (EXIT (NREVERSE #6#)))))
+                                  (LETT #2# (CONS |k| #2#))))))
+                              (LETT #3# (CDR #3#)) (GO G190) G191
+                              (EXIT (NREVERSE #2#)))))
                   (EXIT
                    (COND
                     ((SPADCALL (LENGTH |xkers|) 2 (QREFELT % 48))
@@ -366,19 +366,19 @@
                      (SEQ
                       (LETT |expKers|
                             (PROGN
-                             (LETT #4# NIL)
-                             (SEQ (LETT |k| NIL) (LETT #3# |xkers|) G190
+                             (LETT #5# NIL)
+                             (SEQ (LETT |k| NIL) (LETT #6# |xkers|) G190
                                   (COND
-                                   ((OR (ATOM #3#)
-                                        (PROGN (LETT |k| (CAR #3#)) NIL))
+                                   ((OR (ATOM #6#)
+                                        (PROGN (LETT |k| (CAR #6#)) NIL))
                                     (GO G191)))
                                   (SEQ
                                    (EXIT
                                     (COND
                                      ((SPADCALL |k| '|exp| (QREFELT % 26))
-                                      (LETT #4# (CONS |k| #4#))))))
-                                  (LETT #3# (CDR #3#)) (GO G190) G191
-                                  (EXIT (NREVERSE #4#)))))
+                                      (LETT #5# (CONS |k| #5#))))))
+                                  (LETT #6# (CDR #6#)) (GO G190) G191
+                                  (EXIT (NREVERSE #5#)))))
                       (EXIT
                        (COND
                         ((SPADCALL (LENGTH |expKers|) 1 (QREFELT % 48))
@@ -429,27 +429,27 @@
         ((|fcn| (FE)) (|x| (|Symbol|))
          (% (|Union| (|OrderedCompletion| FE) #1="failed")))
         (SPROG
-         ((|limVal|
+         ((#2=#:G308 NIL) (|k| NIL) (#3=#:G309 NIL)
+          (|xkers| (|List| (|Kernel| FE))) (|ker| (|Kernel| FE))
+          (|vv| (|Symbol|)) (|eq| (|Equation| FE)) (|cc| (FE))
+          (|lim| (|Union| (|OrderedCompletion| FE) #1#))
+          (|argLim| (|OrderedCompletion| FE))
+          (|limVal|
            (|Union| (|OrderedCompletion| FE)
                     (|Record|
                      (|:| |leftHandLimit|
                           (|Union| (|OrderedCompletion| FE) #1#))
                      (|:| |rightHandLimit|
                           (|Union| (|OrderedCompletion| FE) #1#)))
-                    "failed"))
-          (|argLim| (|OrderedCompletion| FE))
-          (|lim| (|Union| (|OrderedCompletion| FE) #1#)) (|cc| (FE))
-          (|eq| (|Equation| FE)) (|vv| (|Symbol|)) (|ker| (|Kernel| FE))
-          (|xkers| (|List| (|Kernel| FE))) (#2=#:G305 NIL) (|k| NIL)
-          (#3=#:G304 NIL))
+                    "failed")))
          (SEQ
           (LETT |xkers|
                 (PROGN
-                 (LETT #3# NIL)
-                 (SEQ (LETT |k| NIL) (LETT #2# (SPADCALL |fcn| (QREFELT % 25)))
+                 (LETT #2# NIL)
+                 (SEQ (LETT |k| NIL) (LETT #3# (SPADCALL |fcn| (QREFELT % 25)))
                       G190
                       (COND
-                       ((OR (ATOM #2#) (PROGN (LETT |k| (CAR #2#)) NIL))
+                       ((OR (ATOM #3#) (PROGN (LETT |k| (CAR #3#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
@@ -458,9 +458,9 @@
                                     (SPADCALL (SPADCALL |k| (QREFELT % 18))
                                               (QREFELT % 23))
                                     (QREFELT % 24))
-                          (LETT #3# (CONS |k| #3#))))))
-                      (LETT #2# (CDR #2#)) (GO G190) G191
-                      (EXIT (NREVERSE #3#)))))
+                          (LETT #2# (CONS |k| #2#))))))
+                      (LETT #3# (CDR #3#)) (GO G190) G191
+                      (EXIT (NREVERSE #2#)))))
           (EXIT
            (COND
             ((SPADCALL (LENGTH |xkers|) 1 (QREFELT % 48)) (CONS 1 "failed"))
@@ -499,7 +499,11 @@
         ((|ker| (|Kernel| FE)) (|x| (|Symbol|))
          (% (|Union| (|OrderedCompletion| FE) #1="failed")))
         (SPROG
-         ((|val| (FE))
+         ((#2=#:G315 NIL) (|li| (FE)) (#3=#:G377 NIL)
+          (|argLim| (|OrderedCompletion| FE)) (|args| (|List| FE)) (|arg| (FE))
+          (|limm| (|Union| (|OrderedCompletion| FE) #1#))
+          (|lim| (|OrderedCompletion| FE)) (|var| (|Symbol|)) (|f| (FE))
+          (|inf| (|SingleInteger|))
           (|kerValue|
            (|Union| (|OrderedCompletion| FE)
                     (|Record|
@@ -508,11 +512,7 @@
                      (|:| |rightHandLimit|
                           (|Union| (|OrderedCompletion| FE) #1#)))
                     "failed"))
-          (|inf| (|SingleInteger|)) (|f| (FE)) (|var| (|Symbol|))
-          (|lim| (|OrderedCompletion| FE))
-          (|limm| (|Union| (|OrderedCompletion| FE) #1#)) (|arg| (FE))
-          (|args| (|List| FE)) (|argLim| (|OrderedCompletion| FE))
-          (#2=#:G373 NIL) (|li| (FE)) (#3=#:G311 NIL))
+          (|val| (FE)))
          (SEQ
           (EXIT
            (COND
@@ -547,22 +547,22 @@
                                                         (SEQ
                                                          (LETT |li|
                                                                (PROG2
-                                                                   (LETT #3#
+                                                                   (LETT #2#
                                                                          (SPADCALL
                                                                           |lim|
                                                                           (QREFELT
                                                                            %
                                                                            40)))
-                                                                   (QCDR #3#)
+                                                                   (QCDR #2#)
                                                                  (|check_union2|
-                                                                  (QEQCAR #3#
+                                                                  (QEQCAR #2#
                                                                           0)
                                                                   (QREFELT % 7)
                                                                   (|Union|
                                                                    (QREFELT %
                                                                             7)
                                                                    "failed")
-                                                                  #3#)))
+                                                                  #2#)))
                                                          (EXIT
                                                           (COND
                                                            ((SPADCALL |li|
@@ -582,11 +582,11 @@
                                                                (QREFELT % 59)))
                                                              (#4#
                                                               (PROGN
-                                                               (LETT #2#
+                                                               (LETT #3#
                                                                      (CONS 1
                                                                            "failed"))
                                                                (GO
-                                                                #5=#:G372)))))
+                                                                #5=#:G376)))))
                                                            (#4#
                                                             (SPADCALL
                                                              (SPADCALL |li|
@@ -869,12 +869,12 @@
                                                "knownValueAtMinusInfinity? true but value unknown"))))
                                            (#4#
                                             (CONS 1 "failed"))))))))))))))))))
-          #5# (EXIT #2#)))) 
+          #5# (EXIT #3#)))) 
 
 (SDEFUN |LIMITPS;logOnlyLimit|
         ((|coef| (FE)) (|x| (|Symbol|))
          (% (|Union| (|OrderedCompletion| FE) "failed")))
-        (SPROG ((|cc| (FE)) (|eq| (|Equation| FE)) (|vv| (|Symbol|)))
+        (SPROG ((|vv| (|Symbol|)) (|eq| (|Equation| FE)) (|cc| (FE)))
                (SEQ (LETT |vv| (SPADCALL (QREFELT % 49)))
                     (LETT |eq|
                           (SPADCALL
@@ -907,8 +907,8 @@
                          (|Union| (|OrderedCompletion| FE) #1#)))
                    "failed")))
         (SPROG
-         ((|u| (|Union| (|OrderedCompletion| FE) #1#)) (|n| (|SingleInteger|))
-          (|xK| (|Kernel| FE)))
+         ((|xK| (|Kernel| FE)) (|n| (|SingleInteger|))
+          (|u| (|Union| (|OrderedCompletion| FE) #1#)))
          (SEQ
           (LETT |xK| (SPADCALL (SPADCALL |x| (QREFELT % 50)) (QREFELT % 71)))
           (LETT |n| (SPADCALL |a| (QREFELT % 32)))
@@ -953,7 +953,7 @@
 (SDEFUN |LIMITPS;locallimitcomplex|
         ((|fcn| (FE)) (|x| (|Symbol|)) (|a| (|OnePointCompletion| FE))
          (% (|Union| (|OnePointCompletion| FE) "failed")))
-        (SPROG ((|g| (|Union| FE "failed")) (|xK| (|Kernel| FE)))
+        (SPROG ((|xK| (|Kernel| FE)) (|g| (|Union| FE "failed")))
                (SEQ
                 (LETT |xK|
                       (SPADCALL (SPADCALL |x| (QREFELT % 50)) (QREFELT % 71)))
@@ -996,8 +996,8 @@
                      (|Symbol|) FE (|String|)))
          (% (|Union| (|OrderedCompletion| FE) #1#)))
         (SPROG
-         ((|a1| (FE)) (|knx| (|Kernel| FE)) (|a| (FE)) (|x| (|Symbol|))
-          (|xx| (|Union| (|Symbol|) "failed")))
+         ((|xx| (|Union| (|Symbol|) "failed")) (|x| (|Symbol|)) (|a| (FE))
+          (|knx| (|Kernel| FE)) (|a1| (FE)))
          (SEQ
           (LETT |xx| (SPADCALL (SPADCALL |eq| (QREFELT % 78)) (QREFELT % 80)))
           (EXIT
@@ -1064,14 +1064,14 @@
          (CONS (|function| |LIMITPS;limit3|) %) %)) 
 
 (SDEFUN |LIMITPS;anyRootsOrAtrigs?| ((|fcn| (FE)) (% (|Boolean|)))
-        (SPROG ((#1=#:G442 NIL) (#2=#:G443 NIL) (#3=#:G444 NIL) (|kernel| NIL))
+        (SPROG ((|kernel| NIL) (#1=#:G454 NIL) (#2=#:G453 NIL) (#3=#:G452 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (SEQ (LETT |kernel| NIL)
-                       (LETT #3# (SPADCALL |fcn| (QREFELT % 11))) G190
+                       (LETT #1# (SPADCALL |fcn| (QREFELT % 11))) G190
                        (COND
-                        ((OR (ATOM #3#) (PROGN (LETT |kernel| (CAR #3#)) NIL))
+                        ((OR (ATOM #1#) (PROGN (LETT |kernel| (CAR #1#)) NIL))
                          (GO G191)))
                        (SEQ
                         (EXIT
@@ -1082,17 +1082,17 @@
                                     (SPADCALL |kernel| '|acos| (QREFELT % 26))
                                     (SPADCALL |kernel| '|asec|
                                               (QREFELT % 26)))))
-                           (PROGN (LETT #2# 'T) (GO #4=#:G441)))
+                           (PROGN (LETT #2# 'T) (GO #4=#:G451)))
                           ('T
                            (SEQ
                             (EXIT
                              (COND
                               ((SPADCALL |kernel| '|acsc| (QREFELT % 26))
                                (PROGN
-                                (LETT #1# (PROGN (LETT #2# 'T) (GO #4#)))
-                                (GO #5=#:G434)))))
-                            #5# (EXIT #1#))))))
-                       (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
+                                (LETT #3# (PROGN (LETT #2# 'T) (GO #4#)))
+                                (GO #5=#:G444)))))
+                            #5# (EXIT #3#))))))
+                       (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
                   (EXIT NIL)))
                 #4# (EXIT #2#)))) 
 
@@ -1100,68 +1100,30 @@
         ((|fcn| (FE)) (|x| (|Symbol|))
          (% (|Union| (|OnePointCompletion| FE) "failed")))
         (SPROG
-         ((|answer| (FE)) (|lim| (FE)) (#1=#:G472 NIL) (|uls| (|Uls|))
-          (|lseries|
-           (|Union| (|:| |%series| |Uls|)
-                    (|:| |%problem|
-                         (|Record| (|:| |func| (|String|))
-                                   (|:| |prob| (|String|))))))
-          (|lpack|
-           (CATEGORY |package|
-            (SIGNATURE |exprToUPS|
-             ((|Union| (|:| |%series| |Uls|)
-                       . #2=((|:| |%problem|
-                                  (|Record| (|:| |func| (|String|))
-                                            (|:| |prob| (|String|))))))
-              FE
-              . #3=((|Boolean|)
-                    (|Union| #4="complex" #5="real: two sides"
-                             #6="real: left side" #7="real: right side"
-                             #8="just do it"))))
-            (SIGNATURE |exprToGenUPS|
-             ((|Union| (|:| |%series| |Uls|)
-                       . #9=((|:| |%problem|
-                                  (|Record| (|:| |func| (|String|))
-                                            (|:| |prob| (|String|))))))
-              FE . #10=((|Boolean|) (|Union| #4# #5# #6# #7# #8#))))
-            (SIGNATURE |exprToPS|
-             ((|Union| (|:| |%series| |Uls|)
-                       . #11=((|:| |%problem|
-                                   (|Record| (|:| |func| (|String|))
-                                             (|:| |prob| (|String|))))))
-              FE #12=(|Boolean|) #13=(|Union| #4# #5# #6# #7# #8#)
-              #14=(|Boolean|) FE))
-            (SIGNATURE |exprToPS|
-             ((|Union| (|:| |%series| |Uls|)
-                       . #15=((|:| |%problem|
-                                   (|Record| (|:| |func| (|String|))
-                                             (|:| |prob| (|String|))))))
-              FE #16=(|Boolean|) #17=(|Union| #4# #5# #6# #7# #8#)
-              #18=(|Boolean|) FE (|Mapping| #19=(|Boolean|) FE)
-              (|Mapping| #20=(|Boolean|) FE) (|Mapping| #21=(|Boolean|) FE)))))
-          (|upxs| (|Upx|))
-          (|pseries|
-           (|Union| (|:| |%series| |Upx|)
-                    (|:| |%problem|
-                         (|Record| (|:| |func| (|String|))
-                                   (|:| |prob| (|String|))))))
-          (|ppack|
-           (CATEGORY |package|
-            (SIGNATURE |exprToUPS|
-             ((|Union| (|:| |%series| |Upx|) . #2#) FE . #3#))
-            (SIGNATURE |exprToGenUPS|
-             ((|Union| (|:| |%series| |Upx|) . #9#) FE . #10#))
-            (SIGNATURE |exprToPS|
-             ((|Union| (|:| |%series| |Upx|) . #11#) FE #12# #13# #14# FE))
-            (SIGNATURE |exprToPS|
-             ((|Union| (|:| |%series| |Upx|) . #15#) FE #16# #17# #18# FE
-              (|Mapping| #19# FE) (|Mapping| #20# FE) (|Mapping| #21# FE)))))
-          (|Upx|
+         ((|Uts|
+           (|Join| (|UnivariateTaylorSeriesCategory| FE)
+                   (CATEGORY |domain|
+                    (SIGNATURE |coerce| (% (|UnivariatePolynomial| |x| FE)))
+                    (SIGNATURE |univariatePolynomial|
+                     ((|UnivariatePolynomial| |x| FE) %
+                      (|NonNegativeInteger|)))
+                    (SIGNATURE |coerce| (% (|Variable| |x|)))
+                    (SIGNATURE |differentiate| (% % (|Variable| |x|)))
+                    (SIGNATURE |lagrange| (% %)) (SIGNATURE |lambert| (% %))
+                    (SIGNATURE |oddlambert| (% %))
+                    (SIGNATURE |evenlambert| (% %))
+                    (SIGNATURE |generalLambert| (% % (|Integer|) (|Integer|)))
+                    (SIGNATURE |revert| (% %))
+                    (SIGNATURE |multisect| (% (|Integer|) (|Integer|) %))
+                    (SIGNATURE |invmultisect| (% (|Integer|) (|Integer|) %))
+                    (IF (|has| FE (|Algebra| (|Fraction| (|Integer|))))
+                        (SIGNATURE |integrate| (% % (|Variable| |x|)))
+                        |noBranch|))))
+          (|Uls|
            (|Join|
-            (|UnivariatePuiseuxSeriesConstructorCategory| FE
-                                                          (|UnivariateLaurentSeries|
+            (|UnivariateLaurentSeriesConstructorCategory| FE
+                                                          (|UnivariateTaylorSeries|
                                                            FE |x| |zeroFE|))
-            (|RetractableTo| (|UnivariateTaylorSeries| FE |x| |zeroFE|))
             (CATEGORY |domain| (SIGNATURE |coerce| (% (|Variable| |x|)))
              (SIGNATURE |differentiate| (% % (|Variable| |x|)))
              (IF (|has| FE (|Algebra| (|Fraction| (|Integer|))))
@@ -1199,35 +1161,73 @@
                     (SIGNATURE |acoth| (|Uls| |Uls|))
                     (SIGNATURE |asech| (|Uls| |Uls|))
                     (SIGNATURE |acsch| (|Uls| |Uls|)))))
-          (|Uls|
+          (|Upx|
            (|Join|
-            (|UnivariateLaurentSeriesConstructorCategory| FE
-                                                          (|UnivariateTaylorSeries|
+            (|UnivariatePuiseuxSeriesConstructorCategory| FE
+                                                          (|UnivariateLaurentSeries|
                                                            FE |x| |zeroFE|))
+            (|RetractableTo| (|UnivariateTaylorSeries| FE |x| |zeroFE|))
             (CATEGORY |domain| (SIGNATURE |coerce| (% (|Variable| |x|)))
              (SIGNATURE |differentiate| (% % (|Variable| |x|)))
              (IF (|has| FE (|Algebra| (|Fraction| (|Integer|))))
                  (SIGNATURE |integrate| (% % (|Variable| |x|)))
                  |noBranch|))))
-          (|Uts|
-           (|Join| (|UnivariateTaylorSeriesCategory| FE)
-                   (CATEGORY |domain|
-                    (SIGNATURE |coerce| (% (|UnivariatePolynomial| |x| FE)))
-                    (SIGNATURE |univariatePolynomial|
-                     ((|UnivariatePolynomial| |x| FE) %
-                      (|NonNegativeInteger|)))
-                    (SIGNATURE |coerce| (% (|Variable| |x|)))
-                    (SIGNATURE |differentiate| (% % (|Variable| |x|)))
-                    (SIGNATURE |lagrange| (% %)) (SIGNATURE |lambert| (% %))
-                    (SIGNATURE |oddlambert| (% %))
-                    (SIGNATURE |evenlambert| (% %))
-                    (SIGNATURE |generalLambert| (% % (|Integer|) (|Integer|)))
-                    (SIGNATURE |revert| (% %))
-                    (SIGNATURE |multisect| (% (|Integer|) (|Integer|) %))
-                    (SIGNATURE |invmultisect| (% (|Integer|) (|Integer|) %))
-                    (IF (|has| FE (|Algebra| (|Fraction| (|Integer|))))
-                        (SIGNATURE |integrate| (% % (|Variable| |x|)))
-                        |noBranch|)))))
+          (|ppack|
+           (CATEGORY |package|
+            (SIGNATURE |exprToUPS|
+             ((|Union| (|:| |%series| |Upx|)
+                       . #1=((|:| |%problem|
+                                  (|Record| (|:| |func| (|String|))
+                                            (|:| |prob| (|String|))))))
+              FE
+              . #2=((|Boolean|)
+                    (|Union| #3="complex" #4="real: two sides"
+                             #5="real: left side" #6="real: right side"
+                             #7="just do it"))))
+            (SIGNATURE |exprToGenUPS|
+             ((|Union| (|:| |%series| |Upx|)
+                       . #8=((|:| |%problem|
+                                  (|Record| (|:| |func| (|String|))
+                                            (|:| |prob| (|String|))))))
+              FE . #9=((|Boolean|) (|Union| #3# #4# #5# #6# #7#))))
+            (SIGNATURE |exprToPS|
+             ((|Union| (|:| |%series| |Upx|)
+                       . #10=((|:| |%problem|
+                                   (|Record| (|:| |func| (|String|))
+                                             (|:| |prob| (|String|))))))
+              FE #11=(|Boolean|) #12=(|Union| #3# #4# #5# #6# #7#)
+              #13=(|Boolean|) FE))
+            (SIGNATURE |exprToPS|
+             ((|Union| (|:| |%series| |Upx|)
+                       . #14=((|:| |%problem|
+                                   (|Record| (|:| |func| (|String|))
+                                             (|:| |prob| (|String|))))))
+              FE #15=(|Boolean|) #16=(|Union| #3# #4# #5# #6# #7#)
+              #17=(|Boolean|) FE (|Mapping| #18=(|Boolean|) FE)
+              (|Mapping| #19=(|Boolean|) FE) (|Mapping| #20=(|Boolean|) FE)))))
+          (|pseries|
+           (|Union| (|:| |%series| |Upx|)
+                    (|:| |%problem|
+                         (|Record| (|:| |func| (|String|))
+                                   (|:| |prob| (|String|))))))
+          (|upxs| (|Upx|))
+          (|lpack|
+           (CATEGORY |package|
+            (SIGNATURE |exprToUPS|
+             ((|Union| (|:| |%series| |Uls|) . #1#) FE . #2#))
+            (SIGNATURE |exprToGenUPS|
+             ((|Union| (|:| |%series| |Uls|) . #8#) FE . #9#))
+            (SIGNATURE |exprToPS|
+             ((|Union| (|:| |%series| |Uls|) . #10#) FE #11# #12# #13# FE))
+            (SIGNATURE |exprToPS|
+             ((|Union| (|:| |%series| |Uls|) . #14#) FE #15# #16# #17# FE
+              (|Mapping| #18# FE) (|Mapping| #19# FE) (|Mapping| #20# FE)))))
+          (|lseries|
+           (|Union| (|:| |%series| |Uls|)
+                    (|:| |%problem|
+                         (|Record| (|:| |func| (|String|))
+                                   (|:| |prob| (|String|))))))
+          (|uls| (|Uls|)) (#21=#:G482 NIL) (|lim| (FE)) (|answer| (FE)))
          (SEQ
           (EXIT
            (SEQ
@@ -1297,7 +1297,9 @@
                        (EXIT
                         (COND
                          ((QEQCAR |pseries| 1)
-                          (PROGN (LETT #1# (CONS 1 "failed")) (GO #27=#:G471)))
+                          (PROGN
+                           (LETT #21# (CONS 1 "failed"))
+                           (GO #27=#:G481)))
                          (#28='T
                           (SEQ
                            (COND
@@ -1334,7 +1336,7 @@
                                                                 '%)
                                                                |Upx|))
                               (PROGN
-                               (LETT #1# (CONS 0 (SPADCALL (QREFELT % 92))))
+                               (LETT #21# (CONS 0 (SPADCALL (QREFELT % 92))))
                                (GO #27#)))
                              (#28#
                               (SPADCALL |upxs| (|spadConstant| % 94)
@@ -1394,7 +1396,7 @@
                        (EXIT
                         (COND
                          ((QEQCAR |lseries| 1)
-                          (PROGN (LETT #1# (CONS 1 "failed")) (GO #27#)))
+                          (PROGN (LETT #21# (CONS 1 "failed")) (GO #27#)))
                          (#28#
                           (SEQ
                            (COND
@@ -1431,7 +1433,7 @@
                                                                 '%)
                                                                |Uls|))
                               (PROGN
-                               (LETT #1# (CONS 0 (SPADCALL (QREFELT % 92))))
+                               (LETT #21# (CONS 0 (SPADCALL (QREFELT % 92))))
                                (GO #27#)))
                              (#28#
                               (SPADCALL |uls| 0
@@ -1455,7 +1457,7 @@
                  (|error| "limit: can't evaluate limit"))
                 (#28# (CONS 0 (SPADCALL |answer| (QREFELT % 95))))))
               (#28# (CONS 0 (SPADCALL |lim| (QREFELT % 95))))))))
-          #27# (EXIT #1#)))) 
+          #27# (EXIT #21#)))) 
 
 (SDEFUN |LIMITPS;okProblem?|
         ((|function| (|String|)) (|problem| (|String|)) (% (|Boolean|)))
@@ -1479,8 +1481,8 @@
                          (|Union| (|OrderedCompletion| FE) #1#)))
                    "failed")))
         (SPROG
-         ((|rtLim| (|OrderedCompletion| FE)) (|si| (|Integer|))
-          (|s| (|Union| (|Integer|) "failed")))
+         ((|s| (|Union| (|Integer|) "failed")) (|si| (|Integer|))
+          (|rtLim| (|OrderedCompletion| FE)))
          (SEQ
           (COND
            ((NULL
@@ -1520,11 +1522,10 @@
         ((|order| (|Fraction| (|Integer|))) (|coef| (FE)) (|x| (|Symbol|))
          (% (|Union| (|OrderedCompletion| FE) #1="failed")))
         (SPROG
-         ((|tti| (|Integer|)) (|tt| #2=(|Union| (|Integer|) "failed"))
-          (|t| (|Integer|)) (|ss| (|Integer|))
-          (|cclim| #3=(|Union| (|OrderedCompletion| FE) #1#))
-          (|lim| (|OrderedCompletion| FE)) (|clim| #3#) (|si| (|Integer|))
-          (|s| #2#))
+         ((|s| #2=(|Union| (|Integer|) "failed")) (|si| (|Integer|))
+          (|clim| #3=(|Union| (|OrderedCompletion| FE) #1#))
+          (|lim| (|OrderedCompletion| FE)) (|cclim| #3#) (|ss| (|Integer|))
+          (|t| (|Integer|)) (|tt| #2#) (|tti| (|Integer|)))
          (SEQ
           (COND
            ((NULL
@@ -1613,69 +1614,30 @@
                          (|Union| (|OrderedCompletion| FE) #1#)))
                    "failed")))
         (SPROG
-         ((|answer| (FE)) (|lim| (|Union| FE "failed")) (#2=#:G548 NIL)
-          (|cl| (FE)) (|ordl| (|Integer|)) (|uls| (|Uls|))
-          (|right| #3=(|Union| (|OrderedCompletion| FE) #1#)) (|left| #3#)
-          (|fcn0| (FE)) (|xK| (|Kernel| FE)) (|problem| #4=(|String|))
-          (|function| #5=(|String|))
-          (|trouble| #6=(|Record| (|:| |func| #5#) (|:| |prob| #4#)))
-          (|lseries|
-           (|Union| (|:| |%series| |Uls|)
-                    (|:| |%problem|
-                         (|Record| (|:| |func| (|String|))
-                                   (|:| |prob| (|String|))))))
-          (|lpack|
-           (CATEGORY |package|
-            (SIGNATURE |exprToUPS|
-             ((|Union| (|:| |%series| |Uls|)
-                       . #7=((|:| |%problem|
-                                  (|Record| (|:| |func| (|String|))
-                                            (|:| |prob| (|String|))))))
-              FE
-              . #8=((|Boolean|)
-                    (|Union| #9="complex" #10="real: two sides"
-                             #11="real: left side" #12="real: right side"
-                             #13="just do it"))))
-            (SIGNATURE |exprToGenUPS|
-             ((|Union| (|:| |%series| |Uls|)
-                       . #14=((|:| |%problem|
-                                   (|Record| (|:| |func| (|String|))
-                                             (|:| |prob| (|String|))))))
-              FE . #15=((|Boolean|) (|Union| #9# #10# #11# #12# #13#))))
-            (SIGNATURE |exprToPS|
-             ((|Union| (|:| |%series| |Uls|)
-                       . #16=((|:| |%problem|
-                                   (|Record| (|:| |func| (|String|))
-                                             (|:| |prob| (|String|))))))
-              FE #17=(|Boolean|) #18=(|Union| #9# #10# #11# #12# #13#)
-              #19=(|Boolean|) FE))
-            (SIGNATURE |exprToPS|
-             ((|Union| (|:| |%series| |Uls|)
-                       . #20=((|:| |%problem|
-                                   (|Record| (|:| |func| (|String|))
-                                             (|:| |prob| (|String|))))))
-              FE #21=(|Boolean|) #22=(|Union| #9# #10# #11# #12# #13#)
-              #23=(|Boolean|) FE (|Mapping| #24=(|Boolean|) FE)
-              (|Mapping| #25=(|Boolean|) FE) (|Mapping| #26=(|Boolean|) FE)))))
-          (|cp| (FE)) (|ordp| (|Fraction| (|Integer|))) (|upxs| (|Upx|))
-          (|pseries| (|Union| (|:| |%series| |Upx|) (|:| |%problem| #6#)))
-          (|ppack|
-           (CATEGORY |package|
-            (SIGNATURE |exprToUPS|
-             ((|Union| (|:| |%series| |Upx|) . #7#) FE . #8#))
-            (SIGNATURE |exprToGenUPS|
-             ((|Union| (|:| |%series| |Upx|) . #14#) FE . #15#))
-            (SIGNATURE |exprToPS|
-             ((|Union| (|:| |%series| |Upx|) . #16#) FE #17# #18# #19# FE))
-            (SIGNATURE |exprToPS|
-             ((|Union| (|:| |%series| |Upx|) . #20#) FE #21# #22# #23# FE
-              (|Mapping| #24# FE) (|Mapping| #25# FE) (|Mapping| #26# FE)))))
-          (|Upx|
+         ((|Uts|
+           (|Join| (|UnivariateTaylorSeriesCategory| FE)
+                   (CATEGORY |domain|
+                    (SIGNATURE |coerce| (% (|UnivariatePolynomial| |x| FE)))
+                    (SIGNATURE |univariatePolynomial|
+                     ((|UnivariatePolynomial| |x| FE) %
+                      (|NonNegativeInteger|)))
+                    (SIGNATURE |coerce| (% (|Variable| |x|)))
+                    (SIGNATURE |differentiate| (% % (|Variable| |x|)))
+                    (SIGNATURE |lagrange| (% %)) (SIGNATURE |lambert| (% %))
+                    (SIGNATURE |oddlambert| (% %))
+                    (SIGNATURE |evenlambert| (% %))
+                    (SIGNATURE |generalLambert| (% % (|Integer|) (|Integer|)))
+                    (SIGNATURE |revert| (% %))
+                    (SIGNATURE |multisect| (% (|Integer|) (|Integer|) %))
+                    (SIGNATURE |invmultisect| (% (|Integer|) (|Integer|) %))
+                    (IF (|has| FE (|Algebra| (|Fraction| (|Integer|))))
+                        (SIGNATURE |integrate| (% % (|Variable| |x|)))
+                        |noBranch|))))
+          (|Uls|
            (|Join|
-            (|UnivariatePuiseuxSeriesConstructorCategory| FE
-                                                          (|UnivariateLaurentSeries|
+            (|UnivariateLaurentSeriesConstructorCategory| FE
+                                                          (|UnivariateTaylorSeries|
                                                            FE |x| |zeroFE|))
-            (|RetractableTo| (|UnivariateTaylorSeries| FE |x| |zeroFE|))
             (CATEGORY |domain| (SIGNATURE |coerce| (% (|Variable| |x|)))
              (SIGNATURE |differentiate| (% % (|Variable| |x|)))
              (IF (|has| FE (|Algebra| (|Fraction| (|Integer|))))
@@ -1713,35 +1675,77 @@
                     (SIGNATURE |acoth| (|Uls| |Uls|))
                     (SIGNATURE |asech| (|Uls| |Uls|))
                     (SIGNATURE |acsch| (|Uls| |Uls|)))))
-          (|Uls|
+          (|Upx|
            (|Join|
-            (|UnivariateLaurentSeriesConstructorCategory| FE
-                                                          (|UnivariateTaylorSeries|
+            (|UnivariatePuiseuxSeriesConstructorCategory| FE
+                                                          (|UnivariateLaurentSeries|
                                                            FE |x| |zeroFE|))
+            (|RetractableTo| (|UnivariateTaylorSeries| FE |x| |zeroFE|))
             (CATEGORY |domain| (SIGNATURE |coerce| (% (|Variable| |x|)))
              (SIGNATURE |differentiate| (% % (|Variable| |x|)))
              (IF (|has| FE (|Algebra| (|Fraction| (|Integer|))))
                  (SIGNATURE |integrate| (% % (|Variable| |x|)))
                  |noBranch|))))
-          (|Uts|
-           (|Join| (|UnivariateTaylorSeriesCategory| FE)
-                   (CATEGORY |domain|
-                    (SIGNATURE |coerce| (% (|UnivariatePolynomial| |x| FE)))
-                    (SIGNATURE |univariatePolynomial|
-                     ((|UnivariatePolynomial| |x| FE) %
-                      (|NonNegativeInteger|)))
-                    (SIGNATURE |coerce| (% (|Variable| |x|)))
-                    (SIGNATURE |differentiate| (% % (|Variable| |x|)))
-                    (SIGNATURE |lagrange| (% %)) (SIGNATURE |lambert| (% %))
-                    (SIGNATURE |oddlambert| (% %))
-                    (SIGNATURE |evenlambert| (% %))
-                    (SIGNATURE |generalLambert| (% % (|Integer|) (|Integer|)))
-                    (SIGNATURE |revert| (% %))
-                    (SIGNATURE |multisect| (% (|Integer|) (|Integer|) %))
-                    (SIGNATURE |invmultisect| (% (|Integer|) (|Integer|) %))
-                    (IF (|has| FE (|Algebra| (|Fraction| (|Integer|))))
-                        (SIGNATURE |integrate| (% % (|Variable| |x|)))
-                        |noBranch|)))))
+          (|ppack|
+           (CATEGORY |package|
+            (SIGNATURE |exprToUPS|
+             ((|Union| (|:| |%series| |Upx|)
+                       . #2=((|:| |%problem|
+                                  (|Record| (|:| |func| (|String|))
+                                            (|:| |prob| (|String|))))))
+              FE
+              . #3=((|Boolean|)
+                    (|Union| #4="complex" #5="real: two sides"
+                             #6="real: left side" #7="real: right side"
+                             #8="just do it"))))
+            (SIGNATURE |exprToGenUPS|
+             ((|Union| (|:| |%series| |Upx|)
+                       . #9=((|:| |%problem|
+                                  (|Record| (|:| |func| (|String|))
+                                            (|:| |prob| (|String|))))))
+              FE . #10=((|Boolean|) (|Union| #4# #5# #6# #7# #8#))))
+            (SIGNATURE |exprToPS|
+             ((|Union| (|:| |%series| |Upx|)
+                       . #11=((|:| |%problem|
+                                   (|Record| (|:| |func| (|String|))
+                                             (|:| |prob| (|String|))))))
+              FE #12=(|Boolean|) #13=(|Union| #4# #5# #6# #7# #8#)
+              #14=(|Boolean|) FE))
+            (SIGNATURE |exprToPS|
+             ((|Union| (|:| |%series| |Upx|)
+                       . #15=((|:| |%problem|
+                                   (|Record| (|:| |func| (|String|))
+                                             (|:| |prob| (|String|))))))
+              FE #16=(|Boolean|) #17=(|Union| #4# #5# #6# #7# #8#)
+              #18=(|Boolean|) FE (|Mapping| #19=(|Boolean|) FE)
+              (|Mapping| #20=(|Boolean|) FE) (|Mapping| #21=(|Boolean|) FE)))))
+          (|pseries|
+           (|Union| (|:| |%series| |Upx|)
+                    (|:| |%problem|
+                         #22=(|Record| (|:| |func| #23=(|String|))
+                                       (|:| |prob| #24=(|String|))))))
+          (|upxs| (|Upx|)) (|ordp| (|Fraction| (|Integer|))) (|cp| (FE))
+          (|lpack|
+           (CATEGORY |package|
+            (SIGNATURE |exprToUPS|
+             ((|Union| (|:| |%series| |Uls|) . #2#) FE . #3#))
+            (SIGNATURE |exprToGenUPS|
+             ((|Union| (|:| |%series| |Uls|) . #9#) FE . #10#))
+            (SIGNATURE |exprToPS|
+             ((|Union| (|:| |%series| |Uls|) . #11#) FE #12# #13# #14# FE))
+            (SIGNATURE |exprToPS|
+             ((|Union| (|:| |%series| |Uls|) . #15#) FE #16# #17# #18# FE
+              (|Mapping| #19# FE) (|Mapping| #20# FE) (|Mapping| #21# FE)))))
+          (|lseries|
+           (|Union| (|:| |%series| |Uls|)
+                    (|:| |%problem|
+                         (|Record| (|:| |func| (|String|))
+                                   (|:| |prob| (|String|))))))
+          (|trouble| #22#) (|function| #23#) (|problem| #24#)
+          (|xK| (|Kernel| FE)) (|fcn0| (FE))
+          (|left| #25=(|Union| (|OrderedCompletion| FE) #1#)) (|right| #25#)
+          (|uls| (|Uls|)) (|ordl| (|Integer|)) (|cl| (FE)) (#26=#:G561 NIL)
+          (|lim| (|Union| FE "failed")) (|answer| (FE)))
          (SEQ
           (EXIT
            (SEQ
@@ -1841,8 +1845,8 @@
                                       ((QEQCAR |right| 1)
                                        (EXIT
                                         (PROGN
-                                         (LETT #2# (CONS 2 "failed"))
-                                         (GO #32=#:G547)))))))
+                                         (LETT #26# (CONS 2 "failed"))
+                                         (GO #32=#:G560)))))))
                                    (COND
                                     ((QEQCAR |left| 0)
                                      (COND
@@ -1852,15 +1856,15 @@
                                                    (QREFELT % 103))
                                          (EXIT
                                           (PROGN
-                                           (LETT #2# (CONS 0 (QCDR |left|)))
+                                           (LETT #26# (CONS 0 (QCDR |left|)))
                                            (GO #32#)))))))))
                                    (EXIT
                                     (PROGN
-                                     (LETT #2# (CONS 1 (CONS |left| |right|)))
+                                     (LETT #26# (CONS 1 (CONS |left| |right|)))
                                      (GO #32#)))))
                                  (#33='T
                                   (PROGN
-                                   (LETT #2# (CONS 2 "failed"))
+                                   (LETT #26# (CONS 2 "failed"))
                                    (GO #32#)))))))
                          (#33#
                           (SEQ
@@ -1920,7 +1924,7 @@
                                                 |Upx|)))
                                (EXIT
                                 (PROGN
-                                 (LETT #2#
+                                 (LETT #26#
                                        (|LIMITPS;poleLimit| |ordp| |cp| |x| %))
                                  (GO #32#)))))
                              (#33#
@@ -2008,7 +2012,7 @@
                                       ((QEQCAR |right| 1)
                                        (EXIT
                                         (PROGN
-                                         (LETT #2# (CONS 2 "failed"))
+                                         (LETT #26# (CONS 2 "failed"))
                                          (GO #32#)))))))
                                    (COND
                                     ((QEQCAR |left| 0)
@@ -2019,15 +2023,15 @@
                                                    (QREFELT % 103))
                                          (EXIT
                                           (PROGN
-                                           (LETT #2# (CONS 0 (QCDR |left|)))
+                                           (LETT #26# (CONS 0 (QCDR |left|)))
                                            (GO #32#)))))))))
                                    (EXIT
                                     (PROGN
-                                     (LETT #2# (CONS 1 (CONS |left| |right|)))
+                                     (LETT #26# (CONS 1 (CONS |left| |right|)))
                                      (GO #32#)))))
                                  (#33#
                                   (PROGN
-                                   (LETT #2# (CONS 2 "failed"))
+                                   (LETT #26# (CONS 2 "failed"))
                                    (GO #32#)))))))
                          (#33#
                           (SEQ
@@ -2083,7 +2087,7 @@
                                                 |Uls|)))
                                (EXIT
                                 (PROGN
-                                 (LETT #2#
+                                 (LETT #26#
                                        (|LIMITPS;poleLimit|
                                         (SPADCALL |ordl| (QREFELT % 104)) |cl|
                                         |x| %))
@@ -2110,18 +2114,13 @@
                       (|error| "limit: can't evaluate limit"))
                      (#33# (CONS 0 (SPADCALL |answer| (QREFELT % 43))))))
                    (#33# (CONS 0 (SPADCALL (QCDR |lim|) (QREFELT % 43))))))))
-          #32# (EXIT #2#)))) 
+          #32# (EXIT #26#)))) 
 
 (SDEFUN |LIMITPS;xxpLimit|
         ((|fcn| (FE)) (|x| (|Symbol|))
          (% (|Union| (|OrderedCompletion| FE) "failed")))
         (SPROG
-         ((|xxp|
-           (|Union|
-            (|:| |%expansion| (|ExponentialExpansion| R FE |x| |zeroFE|))
-            (|:| |%problem|
-                 (|Record| (|:| |func| (|String|)) (|:| |prob| (|String|))))))
-          (|xpack|
+         ((|xpack|
            (CATEGORY |package|
             (SIGNATURE |exprToXXP|
              ((|Union|
@@ -2130,7 +2129,12 @@
                     (|Record| (|:| |func| (|String|))
                               (|:| |prob| (|String|)))))
               FE (|Boolean|)))
-            (SIGNATURE |localAbs| (FE FE)))))
+            (SIGNATURE |localAbs| (FE FE))))
+          (|xxp|
+           (|Union|
+            (|:| |%expansion| (|ExponentialExpansion| R FE |x| |zeroFE|))
+            (|:| |%problem|
+                 (|Record| (|:| |func| (|String|)) (|:| |prob| (|String|)))))))
          (SEQ
           (LETT |xpack|
                 (|FunctionSpaceToExponentialExpansion| (QREFELT % 6)
@@ -2185,67 +2189,30 @@
         ((|fcn| (FE)) (|x| (|Symbol|))
          (% (|Union| (|OrderedCompletion| FE) #1="failed")))
         (SPROG
-         ((|xLim| (|Union| (|OrderedCompletion| FE) #1#)) (|answer| (FE))
-          (|lim| (|Union| FE "failed")) (#2=#:G588 NIL) (|cl| (FE))
-          (|ordl| (|Integer|)) (|uls| (|Uls|)) (|pp| #3=(|String|))
-          (|trouble| #4=(|Record| (|:| |func| (|String|)) (|:| |prob| #3#)))
-          (|lseries|
-           (|Union| (|:| |%series| |Uls|)
-                    (|:| |%problem|
-                         (|Record| (|:| |func| (|String|))
-                                   (|:| |prob| (|String|))))))
-          (|lpack|
-           (CATEGORY |package|
-            (SIGNATURE |exprToUPS|
-             ((|Union| (|:| |%series| |Uls|)
-                       . #5=((|:| |%problem|
-                                  (|Record| (|:| |func| (|String|))
-                                            (|:| |prob| (|String|))))))
-              FE
-              . #6=((|Boolean|)
-                    (|Union| #7="complex" #8="real: two sides"
-                             #9="real: left side" #10="real: right side"
-                             #11="just do it"))))
-            (SIGNATURE |exprToGenUPS|
-             ((|Union| (|:| |%series| |Uls|)
-                       . #12=((|:| |%problem|
-                                   (|Record| (|:| |func| (|String|))
-                                             (|:| |prob| (|String|))))))
-              FE . #13=((|Boolean|) (|Union| #7# #8# #9# #10# #11#))))
-            (SIGNATURE |exprToPS|
-             ((|Union| (|:| |%series| |Uls|)
-                       . #14=((|:| |%problem|
-                                   (|Record| (|:| |func| (|String|))
-                                             (|:| |prob| (|String|))))))
-              FE #15=(|Boolean|) #16=(|Union| #7# #8# #9# #10# #11#)
-              #17=(|Boolean|) FE))
-            (SIGNATURE |exprToPS|
-             ((|Union| (|:| |%series| |Uls|)
-                       . #18=((|:| |%problem|
-                                   (|Record| (|:| |func| (|String|))
-                                             (|:| |prob| (|String|))))))
-              FE #19=(|Boolean|) #20=(|Union| #7# #8# #9# #10# #11#)
-              #21=(|Boolean|) FE (|Mapping| #22=(|Boolean|) FE)
-              (|Mapping| #23=(|Boolean|) FE) (|Mapping| #24=(|Boolean|) FE)))))
-          (|cp| (FE)) (|ordp| (|Fraction| (|Integer|))) (|upxs| (|Upx|))
-          (|pseries| (|Union| (|:| |%series| |Upx|) (|:| |%problem| #4#)))
-          (|ppack|
-           (CATEGORY |package|
-            (SIGNATURE |exprToUPS|
-             ((|Union| (|:| |%series| |Upx|) . #5#) FE . #6#))
-            (SIGNATURE |exprToGenUPS|
-             ((|Union| (|:| |%series| |Upx|) . #12#) FE . #13#))
-            (SIGNATURE |exprToPS|
-             ((|Union| (|:| |%series| |Upx|) . #14#) FE #15# #16# #17# FE))
-            (SIGNATURE |exprToPS|
-             ((|Union| (|:| |%series| |Upx|) . #18#) FE #19# #20# #21# FE
-              (|Mapping| #22# FE) (|Mapping| #23# FE) (|Mapping| #24# FE)))))
-          (|Upx|
+         ((|Uts|
+           (|Join| (|UnivariateTaylorSeriesCategory| FE)
+                   (CATEGORY |domain|
+                    (SIGNATURE |coerce| (% (|UnivariatePolynomial| |x| FE)))
+                    (SIGNATURE |univariatePolynomial|
+                     ((|UnivariatePolynomial| |x| FE) %
+                      (|NonNegativeInteger|)))
+                    (SIGNATURE |coerce| (% (|Variable| |x|)))
+                    (SIGNATURE |differentiate| (% % (|Variable| |x|)))
+                    (SIGNATURE |lagrange| (% %)) (SIGNATURE |lambert| (% %))
+                    (SIGNATURE |oddlambert| (% %))
+                    (SIGNATURE |evenlambert| (% %))
+                    (SIGNATURE |generalLambert| (% % (|Integer|) (|Integer|)))
+                    (SIGNATURE |revert| (% %))
+                    (SIGNATURE |multisect| (% (|Integer|) (|Integer|) %))
+                    (SIGNATURE |invmultisect| (% (|Integer|) (|Integer|) %))
+                    (IF (|has| FE (|Algebra| (|Fraction| (|Integer|))))
+                        (SIGNATURE |integrate| (% % (|Variable| |x|)))
+                        |noBranch|))))
+          (|Uls|
            (|Join|
-            (|UnivariatePuiseuxSeriesConstructorCategory| FE
-                                                          (|UnivariateLaurentSeries|
+            (|UnivariateLaurentSeriesConstructorCategory| FE
+                                                          (|UnivariateTaylorSeries|
                                                            FE |x| |zeroFE|))
-            (|RetractableTo| (|UnivariateTaylorSeries| FE |x| |zeroFE|))
             (CATEGORY |domain| (SIGNATURE |coerce| (% (|Variable| |x|)))
              (SIGNATURE |differentiate| (% % (|Variable| |x|)))
              (IF (|has| FE (|Algebra| (|Fraction| (|Integer|))))
@@ -2283,35 +2250,75 @@
                     (SIGNATURE |acoth| (|Uls| |Uls|))
                     (SIGNATURE |asech| (|Uls| |Uls|))
                     (SIGNATURE |acsch| (|Uls| |Uls|)))))
-          (|Uls|
+          (|Upx|
            (|Join|
-            (|UnivariateLaurentSeriesConstructorCategory| FE
-                                                          (|UnivariateTaylorSeries|
+            (|UnivariatePuiseuxSeriesConstructorCategory| FE
+                                                          (|UnivariateLaurentSeries|
                                                            FE |x| |zeroFE|))
+            (|RetractableTo| (|UnivariateTaylorSeries| FE |x| |zeroFE|))
             (CATEGORY |domain| (SIGNATURE |coerce| (% (|Variable| |x|)))
              (SIGNATURE |differentiate| (% % (|Variable| |x|)))
              (IF (|has| FE (|Algebra| (|Fraction| (|Integer|))))
                  (SIGNATURE |integrate| (% % (|Variable| |x|)))
                  |noBranch|))))
-          (|Uts|
-           (|Join| (|UnivariateTaylorSeriesCategory| FE)
-                   (CATEGORY |domain|
-                    (SIGNATURE |coerce| (% (|UnivariatePolynomial| |x| FE)))
-                    (SIGNATURE |univariatePolynomial|
-                     ((|UnivariatePolynomial| |x| FE) %
-                      (|NonNegativeInteger|)))
-                    (SIGNATURE |coerce| (% (|Variable| |x|)))
-                    (SIGNATURE |differentiate| (% % (|Variable| |x|)))
-                    (SIGNATURE |lagrange| (% %)) (SIGNATURE |lambert| (% %))
-                    (SIGNATURE |oddlambert| (% %))
-                    (SIGNATURE |evenlambert| (% %))
-                    (SIGNATURE |generalLambert| (% % (|Integer|) (|Integer|)))
-                    (SIGNATURE |revert| (% %))
-                    (SIGNATURE |multisect| (% (|Integer|) (|Integer|) %))
-                    (SIGNATURE |invmultisect| (% (|Integer|) (|Integer|) %))
-                    (IF (|has| FE (|Algebra| (|Fraction| (|Integer|))))
-                        (SIGNATURE |integrate| (% % (|Variable| |x|)))
-                        |noBranch|)))))
+          (|ppack|
+           (CATEGORY |package|
+            (SIGNATURE |exprToUPS|
+             ((|Union| (|:| |%series| |Upx|)
+                       . #2=((|:| |%problem|
+                                  (|Record| (|:| |func| (|String|))
+                                            (|:| |prob| (|String|))))))
+              FE
+              . #3=((|Boolean|)
+                    (|Union| #4="complex" #5="real: two sides"
+                             #6="real: left side" #7="real: right side"
+                             #8="just do it"))))
+            (SIGNATURE |exprToGenUPS|
+             ((|Union| (|:| |%series| |Upx|)
+                       . #9=((|:| |%problem|
+                                  (|Record| (|:| |func| (|String|))
+                                            (|:| |prob| (|String|))))))
+              FE . #10=((|Boolean|) (|Union| #4# #5# #6# #7# #8#))))
+            (SIGNATURE |exprToPS|
+             ((|Union| (|:| |%series| |Upx|)
+                       . #11=((|:| |%problem|
+                                   (|Record| (|:| |func| (|String|))
+                                             (|:| |prob| (|String|))))))
+              FE #12=(|Boolean|) #13=(|Union| #4# #5# #6# #7# #8#)
+              #14=(|Boolean|) FE))
+            (SIGNATURE |exprToPS|
+             ((|Union| (|:| |%series| |Upx|)
+                       . #15=((|:| |%problem|
+                                   (|Record| (|:| |func| (|String|))
+                                             (|:| |prob| (|String|))))))
+              FE #16=(|Boolean|) #17=(|Union| #4# #5# #6# #7# #8#)
+              #18=(|Boolean|) FE (|Mapping| #19=(|Boolean|) FE)
+              (|Mapping| #20=(|Boolean|) FE) (|Mapping| #21=(|Boolean|) FE)))))
+          (|pseries|
+           (|Union| (|:| |%series| |Upx|)
+                    (|:| |%problem|
+                         #22=(|Record| (|:| |func| (|String|))
+                                       (|:| |prob| #23=(|String|))))))
+          (|upxs| (|Upx|)) (|ordp| (|Fraction| (|Integer|))) (|cp| (FE))
+          (|lpack|
+           (CATEGORY |package|
+            (SIGNATURE |exprToUPS|
+             ((|Union| (|:| |%series| |Uls|) . #2#) FE . #3#))
+            (SIGNATURE |exprToGenUPS|
+             ((|Union| (|:| |%series| |Uls|) . #9#) FE . #10#))
+            (SIGNATURE |exprToPS|
+             ((|Union| (|:| |%series| |Uls|) . #11#) FE #12# #13# #14# FE))
+            (SIGNATURE |exprToPS|
+             ((|Union| (|:| |%series| |Uls|) . #15#) FE #16# #17# #18# FE
+              (|Mapping| #19# FE) (|Mapping| #20# FE) (|Mapping| #21# FE)))))
+          (|lseries|
+           (|Union| (|:| |%series| |Uls|)
+                    (|:| |%problem|
+                         (|Record| (|:| |func| (|String|))
+                                   (|:| |prob| (|String|))))))
+          (|trouble| #22#) (|pp| #23#) (|uls| (|Uls|)) (|ordl| (|Integer|))
+          (|cl| (FE)) (#24=#:G601 NIL) (|lim| (|Union| FE "failed"))
+          (|answer| (FE)) (|xLim| (|Union| (|OrderedCompletion| FE) #1#)))
          (SEQ
           (EXIT
            (SEQ
@@ -2387,8 +2394,8 @@
                                 (COND
                                  ((EQUAL |pp| "negative leading coefficient")
                                   (PROGN
-                                   (LETT #2# (CONS 1 "failed"))
-                                   (GO #30=#:G587)))
+                                   (LETT #24# (CONS 1 "failed"))
+                                   (GO #30=#:G600)))
                                  (#31='T (CONS 1 "failed"))))))
                          (#31#
                           (SEQ
@@ -2448,7 +2455,7 @@
                                                 |Upx|)))
                                (EXIT
                                 (PROGN
-                                 (LETT #2#
+                                 (LETT #24#
                                        (|LIMITPS;poleLimitPlus| |ordp| |cp| |x|
                                         %))
                                  (GO #30#)))))
@@ -2513,7 +2520,7 @@
                                 (COND
                                  ((EQUAL |pp| "negative leading coefficient")
                                   (PROGN
-                                   (LETT #2# (CONS 1 "failed"))
+                                   (LETT #24# (CONS 1 "failed"))
                                    (GO #30#)))
                                  (#31# (CONS 1 "failed"))))))
                          (#31#
@@ -2570,7 +2577,7 @@
                                                 |Uls|)))
                                (EXIT
                                 (PROGN
-                                 (LETT #2#
+                                 (LETT #24#
                                        (|LIMITPS;poleLimitPlus|
                                         (SPADCALL |ordl| (QREFELT % 104)) |cl|
                                         |x| %))
@@ -2608,7 +2615,7 @@
                         (#31# |xLim|)))))
                 (#31# (CONS 0 (SPADCALL |answer| (QREFELT % 43))))))
               (#31# (CONS 0 (SPADCALL (QCDR |lim|) (QREFELT % 43))))))))
-          #30# (EXIT #2#)))) 
+          #30# (EXIT #24#)))) 
 
 (SDEFUN |LIMITPS;limit1|
         ((|fcn| (FE)) (|eq| (|Equation| (|OrderedCompletion| FE)))
@@ -2631,10 +2638,10 @@
                          (|Union| (|OrderedCompletion| FE) #2#)))
                    #3#)))
         (SPROG
-         ((#4=#:G608 NIL) (|res2| (|Union| (|OrderedCompletion| FE) #2#))
-          (|res1| #1#) (|a1| (FE)) (|knx| (|Kernel| FE))
-          (|ae| #5=(|Union| FE "failed")) (|a| (|OrderedCompletion| FE))
-          (|x| (|Symbol|)) (|xx| (|Union| (|Symbol|) "failed")) (|f| #5#))
+         ((|f| #4=(|Union| FE "failed")) (|xx| (|Union| (|Symbol|) "failed"))
+          (|x| (|Symbol|)) (|a| (|OrderedCompletion| FE)) (|ae| #4#)
+          (|knx| (|Kernel| FE)) (|a1| (FE)) (|res1| #1#)
+          (|res2| (|Union| (|OrderedCompletion| FE) #2#)) (#5=#:G621 NIL))
          (SEQ
           (LETT |f| (SPADCALL (SPADCALL |eq| (QREFELT % 106)) (QREFELT % 40)))
           (EXIT
@@ -2662,7 +2669,7 @@
                                                           (QREFELT % 23))
                                                 (QREFELT % 24))
                                       (PROGN
-                                       (LETT #4#
+                                       (LETT #5#
                                              (SEQ
                                               (LETT |knx|
                                                     (SPADCALL
@@ -2709,9 +2716,9 @@
                                                           (CONS 0
                                                                 (QCDR
                                                                  |res2|)))))))))))
-                                       (GO #7=#:G604))))))))
+                                       (GO #7=#:G617))))))))
                             (EXIT (SPADCALL |fcn| |x| |a| |do_lim|))))
-                      #7# (EXIT #4#)))))))))))) 
+                      #7# (EXIT #5#)))))))))))) 
 
 (SDEFUN |LIMITPS;limit;FEEU;35|
         ((|fcn| (FE)) (|eq| (|Equation| (|OrderedCompletion| FE)))
@@ -2761,10 +2768,11 @@
         ((|fcn| (FE)) (|eq| (|Equation| (|OnePointCompletion| FE)))
          (% (|Union| (|OnePointCompletion| FE) "failed")))
         (SPROG
-         ((#1=#:G645 NIL) (|res2| #2=(|Union| FE "failed"))
-          (|res1| (|Union| (|OnePointCompletion| FE) "failed")) (|a1| (FE))
-          (|knx| (|Kernel| FE)) (|ae| #2#) (|a| (|OnePointCompletion| FE))
-          (|x| (|Symbol|)) (|xx| (|Union| (|Symbol|) "failed")) (|f| #2#))
+         ((|f| #1=(|Union| FE "failed")) (|xx| (|Union| (|Symbol|) "failed"))
+          (|x| (|Symbol|)) (|a| (|OnePointCompletion| FE)) (|ae| #1#)
+          (|knx| (|Kernel| FE)) (|a1| (FE))
+          (|res1| (|Union| (|OnePointCompletion| FE) "failed")) (|res2| #1#)
+          (#2=#:G663 NIL))
          (SEQ
           (LETT |f| (SPADCALL (SPADCALL |eq| (QREFELT % 116)) (QREFELT % 75)))
           (EXIT
@@ -2792,7 +2800,7 @@
                                                           (QREFELT % 23))
                                                 (QREFELT % 24))
                                       (PROGN
-                                       (LETT #1#
+                                       (LETT #2#
                                              (SEQ
                                               (LETT |knx|
                                                     (SPADCALL
@@ -2844,15 +2852,15 @@
                                                                            77))
                                                                  (QREFELT %
                                                                           95))))))))))))
-                                       (GO #4=#:G638))))))))
+                                       (GO #4=#:G656))))))))
                             (EXIT
                              (|LIMITPS;locallimitcomplex| |fcn| |x| |a| %))))
-                      #4# (EXIT #1#)))))))))))) 
+                      #4# (EXIT #2#)))))))))))) 
 
 (DECLAIM (NOTINLINE |PowerSeriesLimitPackage;|)) 
 
 (DEFUN |PowerSeriesLimitPackage;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -2896,9 +2904,9 @@
                       (CONS (|dispatchFunction| |LIMITPS;limit;FEEU;37|) %))))
           %))) 
 
-(DEFUN |PowerSeriesLimitPackage| (&REST #1=#:G646)
+(DEFUN |PowerSeriesLimitPackage| (&REST #1=#:G664)
   (SPROG NIL
-         (PROG (#2=#:G647)
+         (PROG (#2=#:G665)
            (RETURN
             (COND
              ((LETT #2#
@@ -2917,25 +2925,24 @@
 
 (MAKEPROP '|PowerSeriesLimitPackage| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (0 . |Zero|) '|zeroFE| (|List| 17) (4 . |tower|)
-              (|BasicOperator|) (|Kernel| 7) (9 . |operator|) (|Symbol|)
-              (14 . |name|) (|Kernel| %) (19 . |coerce|) (24 . |differentiate|)
-              (|Boolean|) (30 . =) (|List| 15) (36 . |variables|)
-              (41 . |member?|) (47 . |kernels|) (52 . |is?|) (58 . |name|)
-              (63 . -) (69 . |inv|) (|SingleInteger|) (|OrderedCompletion| 7)
-              (74 . |whatInfinity|) (79 . |Zero|) (83 . |One|)
-              (87 . |numerator|) (92 . |denominator|) (|Integer|) (97 . ~=)
-              (|Union| 7 '"failed") (103 . |retractIfCan|) (108 . |eval|)
-              (115 . /) (121 . |coerce|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (0 . |0|)
+              '|zeroFE| (|List| 17) (4 . |tower|) (|BasicOperator|)
+              (|Kernel| 7) (9 . |operator|) (|Symbol|) (14 . |name|)
+              (|Kernel| %) (19 . |coerce|) (24 . |differentiate|) (|Boolean|)
+              (30 . =) (|List| 15) (36 . |variables|) (41 . |member?|)
+              (47 . |kernels|) (52 . |is?|) (58 . |name|) (63 . -) (69 . |inv|)
+              (|SingleInteger|) (|OrderedCompletion| 7) (74 . |whatInfinity|)
+              (79 . |0|) (83 . |1|) (87 . |numerator|) (92 . |denominator|)
+              (|Integer|) (97 . ~=) (|Union| 7 '"failed")
+              (103 . |retractIfCan|) (108 . |eval|) (115 . /) (121 . |coerce|)
               (|ElementaryFunctionStructurePackage| 6 7) (126 . |normalize|)
               (131 . ~=) (|NonNegativeInteger|) (137 . ~=) (143 . |new|)
               (147 . |coerce|) (|Equation| 7) (152 . |equation|) (|Equation| %)
-              (158 . |eval|) (|List| 7) (164 . |argument|) (169 . |One|)
+              (158 . |eval|) (|List| 7) (164 . |argument|) (169 . |1|)
               (173 . -) (178 . |minusInfinity|) (182 . |log|) (187 . |elt|)
               (193 . |retract|) (|LiouvillianFunction| 6 7) (198 . |erf|)
               (203 . |pi|) (207 . |coerce|)
-              (|SparseMultivariatePolynomial| 6 13) (212 . |One|) (216 . -)
+              (|SparseMultivariatePolynomial| 6 13) (212 . |1|) (216 . -)
               (221 . |plusInfinity|) (225 . |retract|) (230 . *) (236 . +)
               (|OnePointCompletion| 7) (242 . |retractIfCan|) (|List| %)
               (247 . |subst|) (254 . |lhs|) (|Union| 15 '"failed")
@@ -2943,7 +2950,7 @@
               (|ToolsForSign| 6) (274 . |direction|) (|Union| 110 '"failed")
               (|Expression| 37) (|MrvLimitPackage|) (279 . |mrv_limit|)
               (|Union| 31 '#1="failed") (287 . |limit|) (294 . |infinity|)
-              (|Fraction| 37) (298 . |Zero|) (302 . |coerce|)
+              (|Fraction| 37) (298 . |0|) (302 . |coerce|)
               (|Union| 37 '"failed") (|ElementaryFunctionSign| 6 7)
               (307 . |sign|) (312 . |numer|) (317 . |denom|) (322 . -)
               (327 . |zero?|) (332 . =) (338 . |coerce|) (|Equation| 31)

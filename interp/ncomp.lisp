@@ -567,6 +567,10 @@
        (|walkWhereList| |name| |def| |env|))
       (#1# (PROGN (|userError| "Parsing error: illegal toplevel form") NIL))))))
 
+; $killOptimizeIfTrue := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$killOptimizeIfTrue| NIL))
+
 ; isNiladic(head1) ==
 ;     SYMBOLP head1 => true
 ;     head1 is [., ["@Tuple"]]
@@ -647,6 +651,84 @@
          (SETQ |bfVar#12| (CDR |bfVar#12|))))
       |$globalDefs| NIL))))
 
+; boo_comp2(def, cat?) ==
+;     $LISPLIB : local := cat?
+;     $file_apply : local := (cat? => FUNCTION print_defun; nil)
+;     $lisplibAbbreviation : local := nil
+;     $lisplibAncestors : local := []
+;     $lisplibCategory : local := nil
+;     $lisplibForm : local := nil
+;     $lisplibKind : local := nil
+;     $lisplibModemap : local := []
+;     $lisplibOperationAlist : local := []
+;     do_comp1(def)
+;     if not(cat?) then
+;         merge_constructor_info()
+
+(DEFUN |boo_comp2| (|def| |cat?|)
+  (PROG (|$lisplibOperationAlist| |$lisplibModemap| |$lisplibKind|
+         |$lisplibForm| |$lisplibCategory| |$lisplibAncestors|
+         |$lisplibAbbreviation| |$file_apply| $LISPLIB)
+    (DECLARE
+     (SPECIAL |$lisplibOperationAlist| |$lisplibModemap| |$lisplibKind|
+      |$lisplibForm| |$lisplibCategory| |$lisplibAncestors|
+      |$lisplibAbbreviation| |$file_apply| $LISPLIB))
+    (RETURN
+     (PROGN
+      (SETQ $LISPLIB |cat?|)
+      (SETQ |$file_apply| (COND (|cat?| #'|print_defun|) ('T NIL)))
+      (SETQ |$lisplibAbbreviation| NIL)
+      (SETQ |$lisplibAncestors| NIL)
+      (SETQ |$lisplibCategory| NIL)
+      (SETQ |$lisplibForm| NIL)
+      (SETQ |$lisplibKind| NIL)
+      (SETQ |$lisplibModemap| NIL)
+      (SETQ |$lisplibOperationAlist| NIL)
+      (|do_comp1| |def|)
+      (COND ((NULL |cat?|) (|merge_constructor_info|)))))))
+
+; $bootstrap_db := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$bootstrap_db| NIL))
+
+; process_globals3() ==
+;     $bootStrapMode : local := true
+;     $bootstrap_db : local := true
+;     $killOptimizeIfTrue : local := true
+;     for def0 in $globalDefs repeat
+;         def := COPY_-TREE(def0)
+;         ["DEF", form, sig, body] := def
+;         boo_comp2(def, sig is [["Category"], :.])
+
+(DEFUN |process_globals3| ()
+  (PROG (|$killOptimizeIfTrue| |$bootstrap_db| |$bootStrapMode| |def| |form|
+         |sig| |body| |ISTMP#1|)
+    (DECLARE (SPECIAL |$killOptimizeIfTrue| |$bootstrap_db| |$bootStrapMode|))
+    (RETURN
+     (PROGN
+      (SETQ |$bootStrapMode| T)
+      (SETQ |$bootstrap_db| T)
+      (SETQ |$killOptimizeIfTrue| T)
+      ((LAMBDA (|bfVar#13| |def0|)
+         (LOOP
+          (COND
+           ((OR (ATOM |bfVar#13|) (PROGN (SETQ |def0| (CAR |bfVar#13|)) NIL))
+            (RETURN NIL))
+           ('T
+            (PROGN
+             (SETQ |def| (COPY-TREE |def0|))
+             (SETQ |form| (CADR . #1=(|def|)))
+             (SETQ |sig| (CADDR . #1#))
+             (SETQ |body| (CADDDR . #1#))
+             (|boo_comp2| |def|
+              (AND (CONSP |sig|)
+                   (PROGN
+                    (SETQ |ISTMP#1| (CAR |sig|))
+                    (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
+                         (EQ (CAR |ISTMP#1|) '|Category|))))))))
+          (SETQ |bfVar#13| (CDR |bfVar#13|))))
+       |$globalDefs| NIL)))))
+
 ; processGlobals () ==
 ;     $InteractiveMode : local := nil
 ;     $globalDefs := REVERSE $globalDefs
@@ -670,6 +752,7 @@
 ;         else
 ;             SAY(['"unhandled target", form])
 ;     boo_comp_cats()
+;     process_globals3()
 
 (DEFUN |processGlobals| ()
   (PROG (|$InteractiveMode| |untypedDefs| |form| |sig| |body| |cosig| |nt|)
@@ -680,23 +763,23 @@
       (SETQ |$globalDefs| (REVERSE |$globalDefs|))
       (|processGlobals1|)
       (SETQ |$globalDefs|
-              ((LAMBDA (|bfVar#14| |bfVar#13| |x|)
+              ((LAMBDA (|bfVar#15| |bfVar#14| |x|)
                  (LOOP
                   (COND
-                   ((OR (ATOM |bfVar#13|)
-                        (PROGN (SETQ |x| (CAR |bfVar#13|)) NIL))
-                    (RETURN (NREVERSE |bfVar#14|)))
+                   ((OR (ATOM |bfVar#14|)
+                        (PROGN (SETQ |x| (CAR |bfVar#14|)) NIL))
+                    (RETURN (NREVERSE |bfVar#15|)))
                    (#1='T
-                    (SETQ |bfVar#14|
+                    (SETQ |bfVar#15|
                             (CONS (|parseTransform| (|postTransform| |x|))
-                                  |bfVar#14|))))
-                  (SETQ |bfVar#13| (CDR |bfVar#13|))))
+                                  |bfVar#15|))))
+                  (SETQ |bfVar#14| (CDR |bfVar#14|))))
                NIL |$globalDefs| NIL))
       (SETQ |untypedDefs| NIL)
-      ((LAMBDA (|bfVar#15| |def|)
+      ((LAMBDA (|bfVar#16| |def|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#15|) (PROGN (SETQ |def| (CAR |bfVar#15|)) NIL))
+           ((OR (ATOM |bfVar#16|) (PROGN (SETQ |def| (CAR |bfVar#16|)) NIL))
             (RETURN NIL))
            (#1#
             (PROGN
@@ -705,29 +788,29 @@
              (SETQ |body| (CADDDR . #2#))
              (SETQ |cosig|
                      (CONS NIL
-                           ((LAMBDA (|bfVar#17| |bfVar#16| |ty|)
+                           ((LAMBDA (|bfVar#18| |bfVar#17| |ty|)
                               (LOOP
                                (COND
-                                ((OR (ATOM |bfVar#16|)
-                                     (PROGN (SETQ |ty| (CAR |bfVar#16|)) NIL))
-                                 (RETURN (NREVERSE |bfVar#17|)))
+                                ((OR (ATOM |bfVar#17|)
+                                     (PROGN (SETQ |ty| (CAR |bfVar#17|)) NIL))
+                                 (RETURN (NREVERSE |bfVar#18|)))
                                 (#1#
-                                 (SETQ |bfVar#17|
+                                 (SETQ |bfVar#18|
                                          (CONS (|categoryForm?| |ty|)
-                                               |bfVar#17|))))
-                               (SETQ |bfVar#16| (CDR |bfVar#16|))))
+                                               |bfVar#18|))))
+                               (SETQ |bfVar#17| (CDR |bfVar#17|))))
                             NIL (CDR |sig|) NIL)))
              (SETDATABASE (CAR |form|) 'COSIG |cosig|)
              (COND
               ((NULL (CAR |sig|))
                (SETQ |untypedDefs| (CONS |def| |untypedDefs|)))
               (#1# (|handleKind| |def|))))))
-          (SETQ |bfVar#15| (CDR |bfVar#15|))))
+          (SETQ |bfVar#16| (CDR |bfVar#16|))))
        |$globalDefs| NIL)
-      ((LAMBDA (|bfVar#18| |def|)
+      ((LAMBDA (|bfVar#19| |def|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#18|) (PROGN (SETQ |def| (CAR |bfVar#18|)) NIL))
+           ((OR (ATOM |bfVar#19|) (PROGN (SETQ |def| (CAR |bfVar#19|)) NIL))
             (RETURN NIL))
            (#1#
             (PROGN
@@ -740,9 +823,10 @@
                (|handleKind|
                 (LIST 'DEF |form| (CONS |nt| (CDR |sig|)) |body|)))
               (#1# (SAY (LIST "unhandled target" |form|)))))))
-          (SETQ |bfVar#18| (CDR |bfVar#18|))))
+          (SETQ |bfVar#19| (CDR |bfVar#19|))))
        |untypedDefs| NIL)
-      (|boo_comp_cats|)))))
+      (|boo_comp_cats|)
+      (|process_globals3|)))))
 
 ; handleKind(df is ['DEF, form, sig, body]) ==
 ;     [op, :argl] := form
@@ -804,19 +888,19 @@
                   (SETQ |body| |cat|)))
                 (SETQ |sargl| (TAKE (LENGTH |argl|) |$TriangleVariableList|))
                 (SETQ |aList|
-                        ((LAMBDA (|bfVar#21| |bfVar#19| |a| |bfVar#20| |sa|)
+                        ((LAMBDA (|bfVar#22| |bfVar#20| |a| |bfVar#21| |sa|)
                            (LOOP
                             (COND
-                             ((OR (ATOM |bfVar#19|)
-                                  (PROGN (SETQ |a| (CAR |bfVar#19|)) NIL)
-                                  (ATOM |bfVar#20|)
-                                  (PROGN (SETQ |sa| (CAR |bfVar#20|)) NIL))
-                              (RETURN (NREVERSE |bfVar#21|)))
+                             ((OR (ATOM |bfVar#20|)
+                                  (PROGN (SETQ |a| (CAR |bfVar#20|)) NIL)
+                                  (ATOM |bfVar#21|)
+                                  (PROGN (SETQ |sa| (CAR |bfVar#21|)) NIL))
+                              (RETURN (NREVERSE |bfVar#22|)))
                              (#2#
-                              (SETQ |bfVar#21|
-                                      (CONS (CONS |a| |sa|) |bfVar#21|))))
-                            (SETQ |bfVar#19| (CDR |bfVar#19|))
-                            (SETQ |bfVar#20| (CDR |bfVar#20|))))
+                              (SETQ |bfVar#22|
+                                      (CONS (CONS |a| |sa|) |bfVar#22|))))
+                            (SETQ |bfVar#20| (CDR |bfVar#20|))
+                            (SETQ |bfVar#21| (CDR |bfVar#21|))))
                          NIL |argl| NIL |sargl| NIL))
                 (SETQ |formalBody| (SUBLIS |aList| |body|))
                 (COND
@@ -827,19 +911,19 @@
                 (SETQ |constructorCategory| |formalBody|))
                (#2# (SETQ |signature'| |sig|)))
               (SETQ |pairlis|
-                      ((LAMBDA (|bfVar#24| |bfVar#22| |a| |bfVar#23| |v|)
+                      ((LAMBDA (|bfVar#25| |bfVar#23| |a| |bfVar#24| |v|)
                          (LOOP
                           (COND
-                           ((OR (ATOM |bfVar#22|)
-                                (PROGN (SETQ |a| (CAR |bfVar#22|)) NIL)
-                                (ATOM |bfVar#23|)
-                                (PROGN (SETQ |v| (CAR |bfVar#23|)) NIL))
-                            (RETURN (NREVERSE |bfVar#24|)))
+                           ((OR (ATOM |bfVar#23|)
+                                (PROGN (SETQ |a| (CAR |bfVar#23|)) NIL)
+                                (ATOM |bfVar#24|)
+                                (PROGN (SETQ |v| (CAR |bfVar#24|)) NIL))
+                            (RETURN (NREVERSE |bfVar#25|)))
                            (#2#
-                            (SETQ |bfVar#24|
-                                    (CONS (CONS |a| |v|) |bfVar#24|))))
-                          (SETQ |bfVar#22| (CDR |bfVar#22|))
-                          (SETQ |bfVar#23| (CDR |bfVar#23|))))
+                            (SETQ |bfVar#25|
+                                    (CONS (CONS |a| |v|) |bfVar#25|))))
+                          (SETQ |bfVar#23| (CDR |bfVar#23|))
+                          (SETQ |bfVar#24| (CDR |bfVar#24|))))
                        NIL |argl| NIL |$FormalMapVariableList| NIL))
               (SETQ |parSignature| (SUBLIS |pairlis| |signature'|))
               (SETQ |parForm| (SUBLIS |pairlis| |form|))
@@ -853,33 +937,38 @@
 ; boo_comp_cats() ==
 ;     $compiler_output_stream := MAKE_-BROADCAST_-STREAM()
 ;     $bootStrapMode : local := true
+;     $previousTime : local := get_run_time()
 ;     SAY(["boo_comp_cats"])
 ;     hcats := []
-;     for def in $globalDefs repeat
+;     for def0 in $globalDefs repeat
+;         def := COPY_-TREE(def0)
 ;         ["DEF", form, sig, body] := def
 ;         if sig is [["Category"], :.] then
 ;             SAY(["doing", form, sig])
 ;             not("and"/[categoryForm? ty for ty in rest(sig)]) =>
 ;                 hcats := cons(def, hcats)
-;             boo_comp1(def)
-;     for def in hcats repeat boo_comp1(def)
+;             do_comp1(def)
+;     for def in hcats repeat do_comp1(def)
 
 (DEFUN |boo_comp_cats| ()
-  (PROG (|$bootStrapMode| |hcats| |form| |sig| |body| |ISTMP#1|)
-    (DECLARE (SPECIAL |$bootStrapMode|))
+  (PROG (|$previousTime| |$bootStrapMode| |hcats| |def| |form| |sig| |body|
+         |ISTMP#1|)
+    (DECLARE (SPECIAL |$previousTime| |$bootStrapMode|))
     (RETURN
      (PROGN
       (SETQ |$compiler_output_stream| (MAKE-BROADCAST-STREAM))
       (SETQ |$bootStrapMode| T)
+      (SETQ |$previousTime| (|get_run_time|))
       (SAY (LIST '|boo_comp_cats|))
       (SETQ |hcats| NIL)
-      ((LAMBDA (|bfVar#25| |def|)
+      ((LAMBDA (|bfVar#26| |def0|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#25|) (PROGN (SETQ |def| (CAR |bfVar#25|)) NIL))
+           ((OR (ATOM |bfVar#26|) (PROGN (SETQ |def0| (CAR |bfVar#26|)) NIL))
             (RETURN NIL))
            (#1='T
             (PROGN
+             (SETQ |def| (COPY-TREE |def0|))
              (SETQ |form| (CADR . #2=(|def|)))
              (SETQ |sig| (CADDR . #2#))
              (SETQ |body| (CADDDR . #2#))
@@ -892,37 +981,33 @@
                (SAY (LIST '|doing| |form| |sig|))
                (COND
                 ((NULL
-                  ((LAMBDA (|bfVar#27| |bfVar#26| |ty|)
+                  ((LAMBDA (|bfVar#28| |bfVar#27| |ty|)
                      (LOOP
                       (COND
-                       ((OR (ATOM |bfVar#26|)
-                            (PROGN (SETQ |ty| (CAR |bfVar#26|)) NIL))
-                        (RETURN |bfVar#27|))
+                       ((OR (ATOM |bfVar#27|)
+                            (PROGN (SETQ |ty| (CAR |bfVar#27|)) NIL))
+                        (RETURN |bfVar#28|))
                        (#1#
                         (PROGN
-                         (SETQ |bfVar#27| (|categoryForm?| |ty|))
-                         (COND ((NOT |bfVar#27|) (RETURN NIL))))))
-                      (SETQ |bfVar#26| (CDR |bfVar#26|))))
+                         (SETQ |bfVar#28| (|categoryForm?| |ty|))
+                         (COND ((NOT |bfVar#28|) (RETURN NIL))))))
+                      (SETQ |bfVar#27| (CDR |bfVar#27|))))
                    T (CDR |sig|) NIL))
                  (SETQ |hcats| (CONS |def| |hcats|)))
-                (#1# (|boo_comp1| |def|))))))))
-          (SETQ |bfVar#25| (CDR |bfVar#25|))))
+                (#1# (|do_comp1| |def|))))))))
+          (SETQ |bfVar#26| (CDR |bfVar#26|))))
        |$globalDefs| NIL)
-      ((LAMBDA (|bfVar#28| |def|)
+      ((LAMBDA (|bfVar#29| |def|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#28|) (PROGN (SETQ |def| (CAR |bfVar#28|)) NIL))
+           ((OR (ATOM |bfVar#29|) (PROGN (SETQ |def| (CAR |bfVar#29|)) NIL))
             (RETURN NIL))
-           (#1# (|boo_comp1| |def|)))
-          (SETQ |bfVar#28| (CDR |bfVar#28|))))
+           (#1# (|do_comp1| |def|)))
+          (SETQ |bfVar#29| (CDR |bfVar#29|))))
        |hcats| NIL)))))
 
-; boo_comp1(x) ==
-;     $Index : local := 0
-;     $MACROASSOC : local := []
+; do_comp1(x) ==
 ;     $compUniquelyIfTrue : local := nil
-;     $postStack : local := nil
-;     $topOp : local := nil
 ;     $semanticErrorStack : local := []
 ;     $warningStack : local := []
 ;     $exitModeStack : local := []
@@ -935,31 +1020,26 @@
 ;     $insideWhereIfTrue : local := false
 ;     $insideCategoryIfTrue : local := false
 ;     $insideCapsuleFunctionIfTrue : local := false
-;     $e : local := $EmptyEnvironment
 ;     $genSDVar : local :=  0
-;     $previousTime : local := get_run_time()
+;     $s : local := nil
 ;     compTopLevel(x, $EmptyMode,  [[[]]])
 ;     if $semanticErrorStack then displaySemanticErrors()
 
-(DEFUN |boo_comp1| (|x|)
-  (PROG (|$previousTime| |$genSDVar| |$e| |$insideCapsuleFunctionIfTrue|
+(DEFUN |do_comp1| (|x|)
+  (PROG (|$s| |$genSDVar| |$insideCapsuleFunctionIfTrue|
          |$insideCategoryIfTrue| |$insideWhereIfTrue| |$insideFunctorIfTrue|
          |$CategoryFrame| |$iterate_count| |$iterate_tag| |$leaveLevelStack|
          |$returnMode| |$exitModeStack| |$warningStack| |$semanticErrorStack|
-         |$topOp| |$postStack| |$compUniquelyIfTrue| $MACROASSOC |$Index|)
+         |$compUniquelyIfTrue|)
     (DECLARE
-     (SPECIAL |$previousTime| |$genSDVar| |$e| |$insideCapsuleFunctionIfTrue|
+     (SPECIAL |$s| |$genSDVar| |$insideCapsuleFunctionIfTrue|
       |$insideCategoryIfTrue| |$insideWhereIfTrue| |$insideFunctorIfTrue|
       |$CategoryFrame| |$iterate_count| |$iterate_tag| |$leaveLevelStack|
       |$returnMode| |$exitModeStack| |$warningStack| |$semanticErrorStack|
-      |$topOp| |$postStack| |$compUniquelyIfTrue| $MACROASSOC |$Index|))
+      |$compUniquelyIfTrue|))
     (RETURN
      (PROGN
-      (SETQ |$Index| 0)
-      (SETQ $MACROASSOC NIL)
       (SETQ |$compUniquelyIfTrue| NIL)
-      (SETQ |$postStack| NIL)
-      (SETQ |$topOp| NIL)
       (SETQ |$semanticErrorStack| NIL)
       (SETQ |$warningStack| NIL)
       (SETQ |$exitModeStack| NIL)
@@ -972,16 +1052,15 @@
       (SETQ |$insideWhereIfTrue| NIL)
       (SETQ |$insideCategoryIfTrue| NIL)
       (SETQ |$insideCapsuleFunctionIfTrue| NIL)
-      (SETQ |$e| |$EmptyEnvironment|)
       (SETQ |$genSDVar| 0)
-      (SETQ |$previousTime| (|get_run_time|))
+      (SETQ |$s| NIL)
       (|compTopLevel| |x| |$EmptyMode| (LIST (LIST NIL)))
       (COND (|$semanticErrorStack| (|displaySemanticErrors|)))))))
 
 ; computeTargetMode(lhs, rhs) ==
 ;     PRETTYPRINT(["computeTargetMode", lhs])
-;     rhs is ['CAPSULE,:.] => MOAN(['"target category of ", lhs,_
-;           '" cannot be determined from definition"],nil)
+;     rhs is ['CAPSULE,:.] => bright_warn([['"target category of ", lhs,
+;           '" cannot be determined from definition"], nil])
 ;     rhs is ['SubDomain,D,:.] => computeTargetMode(lhs,D)
 ;     rhs is ['add,D,['CAPSULE,:.]] => computeTargetMode(lhs,D)
 ;     rhs is ['Record,:l] => ['RecordCategory,:l]
@@ -1008,10 +1087,11 @@
       (PRETTYPRINT (LIST '|computeTargetMode| |lhs|))
       (COND
        ((AND (CONSP |rhs|) (EQ (CAR |rhs|) 'CAPSULE))
-        (MOAN
-         (LIST "target category of " |lhs|
-               " cannot be determined from definition")
-         NIL))
+        (|bright_warn|
+         (LIST
+          (LIST "target category of " |lhs|
+                " cannot be determined from definition")
+          NIL)))
        ((AND (CONSP |rhs|) (EQ (CAR |rhs|) '|SubDomain|)
              (PROGN
               (SETQ |ISTMP#1| (CDR |rhs|))
@@ -1068,18 +1148,18 @@
                                   (EQ (CDR |ISTMP#5|) NIL))))))))
            (PROGN
             (SETQ |pairlis|
-                    ((LAMBDA (|bfVar#31| |bfVar#29| |a| |bfVar#30| |v|)
+                    ((LAMBDA (|bfVar#32| |bfVar#30| |a| |bfVar#31| |v|)
                        (LOOP
                         (COND
-                         ((OR (ATOM |bfVar#29|)
-                              (PROGN (SETQ |a| (CAR |bfVar#29|)) NIL)
-                              (ATOM |bfVar#30|)
-                              (PROGN (SETQ |v| (CAR |bfVar#30|)) NIL))
-                          (RETURN (NREVERSE |bfVar#31|)))
+                         ((OR (ATOM |bfVar#30|)
+                              (PROGN (SETQ |a| (CAR |bfVar#30|)) NIL)
+                              (ATOM |bfVar#31|)
+                              (PROGN (SETQ |v| (CAR |bfVar#31|)) NIL))
+                          (RETURN (NREVERSE |bfVar#32|)))
                          (#1#
-                          (SETQ |bfVar#31| (CONS (CONS |v| |a|) |bfVar#31|))))
-                        (SETQ |bfVar#29| (CDR |bfVar#29|))
-                        (SETQ |bfVar#30| (CDR |bfVar#30|))))
+                          (SETQ |bfVar#32| (CONS (CONS |v| |a|) |bfVar#32|))))
+                        (SETQ |bfVar#30| (CDR |bfVar#30|))
+                        (SETQ |bfVar#31| (CDR |bfVar#31|))))
                      NIL |argl| NIL |$FormalMapVariableList| NIL))
             (SUBLIS |pairlis| |sig|)))
           (#1#
@@ -1105,10 +1185,6 @@
 
 (DEFVAR |$FlatParseOnly| NIL)
 
-; DEFVAR($TranslateOnly, false)
-
-(DEFVAR |$TranslateOnly| NIL)
-
 ; DEFVAR($noEarlyMacroexpand, false)
 
 (DEFVAR |$noEarlyMacroexpand| NIL)
@@ -1126,28 +1202,9 @@
 (DEFVAR |$MacroTable|)
 
 ; S_process(x) ==
-;     $Index : local := 0
-;     $MACROASSOC : local := nil
-;     $compUniquelyIfTrue : local := false
 ;     $postStack : local := nil
 ;     $topOp : local := nil
-;     $semanticErrorStack : local := nil
-;     $warningStack : local := nil
-;     $exitModeStack : local := []
-;     $returnMode : local := $EmptyMode
-;     $leaveLevelStack : local := []
-;     $iterate_tag : local := []
-;     $iterate_count : local := 0
-;     $CategoryFrame : local := [[[]]]
-;     $insideFunctorIfTrue : local := false
-;     $insideWhereIfTrue : local := false
-;     $insideCategoryIfTrue : local := false
-;     $insideCapsuleFunctionIfTrue : local := false
-;     $e : local := $EmptyEnvironment
-;     $genSDVar : local := 0
 ;     $previousTime : local := get_run_time()
-;     $s : local := nil
-;     $x : local := nil
 ;     null(x) => nil
 ;     $SaveParseOnly =>
 ;         x := walkForm(x)
@@ -1160,56 +1217,23 @@
 ;         walkForm x
 ;     null(nform) => nil
 ;     x := parseTransform(postTransform(nform))
-;     $TranslateOnly => $Translation := x
 ;     $postStack =>
 ;         displayPreCompilationErrors()
 ;         userError '"precompilation failed"
 ;     $PrintOnly =>
 ;         FORMAT(true, '"~S   =====>~%", $currentLine)
 ;         PRETTYPRINT(x)
-;     u := compTopLevel(x, $EmptyMode, $InteractiveFrame)
-;     if u then $InteractiveFrame := THIRD(u)
-;     if $semanticErrorStack then displaySemanticErrors()
+;     do_comp1(x)
 ;     TERPRI()
 
 (DEFUN |S_process| (|x|)
-  (PROG (|$x| |$s| |$previousTime| |$genSDVar| |$e|
-         |$insideCapsuleFunctionIfTrue| |$insideCategoryIfTrue|
-         |$insideWhereIfTrue| |$insideFunctorIfTrue| |$CategoryFrame|
-         |$iterate_count| |$iterate_tag| |$leaveLevelStack| |$returnMode|
-         |$exitModeStack| |$warningStack| |$semanticErrorStack| |$topOp|
-         |$postStack| |$compUniquelyIfTrue| $MACROASSOC |$Index| |u| |nform|)
-    (DECLARE
-     (SPECIAL |$x| |$s| |$previousTime| |$genSDVar| |$e|
-      |$insideCapsuleFunctionIfTrue| |$insideCategoryIfTrue|
-      |$insideWhereIfTrue| |$insideFunctorIfTrue| |$CategoryFrame|
-      |$iterate_count| |$iterate_tag| |$leaveLevelStack| |$returnMode|
-      |$exitModeStack| |$warningStack| |$semanticErrorStack| |$topOp|
-      |$postStack| |$compUniquelyIfTrue| $MACROASSOC |$Index|))
+  (PROG (|$previousTime| |$topOp| |$postStack| |nform|)
+    (DECLARE (SPECIAL |$previousTime| |$topOp| |$postStack|))
     (RETURN
      (PROGN
-      (SETQ |$Index| 0)
-      (SETQ $MACROASSOC NIL)
-      (SETQ |$compUniquelyIfTrue| NIL)
       (SETQ |$postStack| NIL)
       (SETQ |$topOp| NIL)
-      (SETQ |$semanticErrorStack| NIL)
-      (SETQ |$warningStack| NIL)
-      (SETQ |$exitModeStack| NIL)
-      (SETQ |$returnMode| |$EmptyMode|)
-      (SETQ |$leaveLevelStack| NIL)
-      (SETQ |$iterate_tag| NIL)
-      (SETQ |$iterate_count| 0)
-      (SETQ |$CategoryFrame| (LIST (LIST NIL)))
-      (SETQ |$insideFunctorIfTrue| NIL)
-      (SETQ |$insideWhereIfTrue| NIL)
-      (SETQ |$insideCategoryIfTrue| NIL)
-      (SETQ |$insideCapsuleFunctionIfTrue| NIL)
-      (SETQ |$e| |$EmptyEnvironment|)
-      (SETQ |$genSDVar| 0)
       (SETQ |$previousTime| (|get_run_time|))
-      (SETQ |$s| NIL)
-      (SETQ |$x| NIL)
       (COND ((NULL |x|) NIL)
             (|$SaveParseOnly|
              (PROGN
@@ -1227,23 +1251,13 @@
                     (#1#
                      (PROGN
                       (SETQ |x| (|parseTransform| (|postTransform| |nform|)))
-                      (COND (|$TranslateOnly| (SETQ |$Translation| |x|))
-                            (|$postStack|
-                             (PROGN
-                              (|displayPreCompilationErrors|)
-                              (|userError| "precompilation failed")))
-                            (|$PrintOnly|
-                             (PROGN
-                              (FORMAT T "~S   =====>~%" |$currentLine|)
-                              (PRETTYPRINT |x|)))
-                            (#1#
-                             (PROGN
-                              (SETQ |u|
-                                      (|compTopLevel| |x| |$EmptyMode|
-                                       |$InteractiveFrame|))
-                              (COND
-                               (|u| (SETQ |$InteractiveFrame| (THIRD |u|))))
-                              (COND
-                               (|$semanticErrorStack|
-                                (|displaySemanticErrors|)))
-                              (TERPRI))))))))))))))
+                      (COND
+                       (|$postStack|
+                        (PROGN
+                         (|displayPreCompilationErrors|)
+                         (|userError| "precompilation failed")))
+                       (|$PrintOnly|
+                        (PROGN
+                         (FORMAT T "~S   =====>~%" |$currentLine|)
+                         (PRETTYPRINT |x|)))
+                       (#1# (PROGN (|do_comp1| |x|) (TERPRI))))))))))))))

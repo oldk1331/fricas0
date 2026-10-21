@@ -1,5 +1,5 @@
 
-(PUT '|INS-;characteristic;Nni;1| '|SPADreplace| '(XLAM NIL 0)) 
+(MAKEPROP '|INS-;characteristic;Nni;1| '|SPADreplace| '(XLAM NIL 0)) 
 
 (SDEFUN |INS-;characteristic;Nni;1| ((% (|NonNegativeInteger|))) 0) 
 
@@ -11,7 +11,7 @@
 (SDEFUN |INS-;positive?;SB;4| ((|x| (S)) (% (|Boolean|)))
         (SPADCALL |x| (|spadConstant| % 9) (QREFELT % 14))) 
 
-(PUT '|INS-;copy;2S;5| '|SPADreplace| '(XLAM (|x|) |x|)) 
+(MAKEPROP '|INS-;copy;2S;5| '|SPADreplace| '(XLAM (|x|) |x|)) 
 
 (SDEFUN |INS-;copy;2S;5| ((|x| (S)) (% (S))) |x|) 
 
@@ -23,23 +23,23 @@
         (SPADCALL (SPADCALL (|spadConstant| % 20) |n| (QREFELT % 18))
                   (QREFELT % 21))) 
 
-(PUT '|INS-;rational?;SB;8| '|SPADreplace| '(XLAM (|x|) 'T)) 
+(MAKEPROP '|INS-;rational?;SB;8| '|SPADreplace| '(XLAM (|x|) 'T)) 
 
 (SDEFUN |INS-;rational?;SB;8| ((|x| (S)) (% (|Boolean|))) 'T) 
 
 (SDEFUN |INS-;euclideanSize;SNni;9| ((|x| (S)) (% (|NonNegativeInteger|)))
-        (SPROG ((#1=#:G32 NIL) (#2=#:G31 NIL))
+        (SPROG ((#1=#:G31 NIL) (#2=#:G32 NIL))
                (COND
                 ((SPADCALL |x| (|spadConstant| % 9) (QREFELT % 24))
                  (|error| "euclideanSize called on zero"))
                 ((SPADCALL |x| (|spadConstant| % 9) (QREFELT % 25))
-                 (PROG1 (LETT #2# (- (SPADCALL |x| (QREFELT % 27))))
-                   (|check_subtype2| (>= #2# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #2#)))
-                ('T
-                 (PROG1 (LETT #1# (SPADCALL |x| (QREFELT % 27)))
+                 (PROG1 (LETT #1# (- (SPADCALL |x| (QREFELT % 27))))
                    (|check_subtype2| (>= #1# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #1#)))))) 
+                                     '(|Integer|) #1#)))
+                ('T
+                 (PROG1 (LETT #2# (SPADCALL |x| (QREFELT % 27)))
+                   (|check_subtype2| (>= #2# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #2#)))))) 
 
 (SDEFUN |INS-;convert;SF;10| ((|x| (S)) (% (|Float|)))
         (SPADCALL (SPADCALL |x| (QREFELT % 27)) (QREFELT % 30))) 
@@ -128,8 +128,8 @@
 
 (SDEFUN |INS-;invmod;3S;28| ((|a| (S)) (|b| (S)) (% (S)))
         (SPROG
-         ((|d1| (S)) (|d| (S)) (|c1| (S)) (|c| (S)) (|r1| (S)) (|r| (S))
-          (|q| (S)))
+         ((|q| (S)) (|r| (S)) (|r1| (S)) (|c| (S)) (|c1| (S)) (|d| (S))
+          (|d1| (S)))
          (SEQ
           (COND
            ((SPADCALL |a| (QREFELT % 81))
@@ -158,7 +158,7 @@
             (#1# (|error| "inverse does not exist"))))))) 
 
 (SDEFUN |INS-;powmod;4S;29| ((|x| (S)) (|n| (S)) (|p| (S)) (% (S)))
-        (SPROG ((|z| (S)) (#1=#:G95 NIL) (|y| (S)))
+        (SPROG ((|y| (S)) (#1=#:G98 NIL) (|z| (S)))
                (SEQ
                 (EXIT
                  (SEQ
@@ -166,8 +166,8 @@
                    ((SPADCALL |x| (QREFELT % 81))
                     (LETT |x| (SPADCALL |x| |p| (QREFELT % 82)))))
                   (EXIT
-                   (COND ((SPADCALL |x| (QREFELT % 61)) (|spadConstant| % 9))
-                         ((SPADCALL |n| (QREFELT % 61)) (|spadConstant| % 20))
+                   (COND ((SPADCALL |n| (QREFELT % 61)) (|spadConstant| % 20))
+                         ((SPADCALL |x| (QREFELT % 61)) (|spadConstant| % 9))
                          ('T
                           (SEQ (LETT |y| (|spadConstant| % 20)) (LETT |z| |x|)
                                (EXIT
@@ -189,7 +189,7 @@
                                                            (QREFELT % 17))
                                                           (QREFELT % 18)))
                                           (QREFELT % 61))
-                                         (PROGN (LETT #1# |y|) (GO #2=#:G94)))
+                                         (PROGN (LETT #1# |y|) (GO #2=#:G97)))
                                         ('T
                                          (LETT |z|
                                                (SPADCALL |z| |z| |p|
@@ -200,7 +200,7 @@
 (DECLAIM (NOTINLINE |IntegerNumberSystem&;|)) 
 
 (DEFUN |IntegerNumberSystem&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|IntegerNumberSystem&| DV$1))
@@ -215,13 +215,13 @@
 (MAKEPROP '|IntegerNumberSystem&| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|NonNegativeInteger|)
-              |INS-;characteristic;Nni;1| (0 . |Zero|)
-              |INS-;differentiate;2S;2| (|Boolean|) (4 . |odd?|)
-              |INS-;even?;SB;3| (9 . >) |INS-;positive?;SB;4| |INS-;copy;2S;5|
-              (15 . -) (20 . |shift|) |INS-;bit?;2SB;6| (26 . |One|)
-              (30 . |dec|) |INS-;mask;2S;7| |INS-;rational?;SB;8| (35 . =)
-              (41 . <) (|Integer|) (47 . |convert|) |INS-;euclideanSize;SNni;9|
-              (|Float|) (52 . |coerce|) |INS-;convert;SF;10| (|DoubleFloat|)
+              |INS-;characteristic;Nni;1| (0 . |0|) |INS-;differentiate;2S;2|
+              (|Boolean|) (4 . |odd?|) |INS-;even?;SB;3| (9 . >)
+              |INS-;positive?;SB;4| |INS-;copy;2S;5| (15 . -) (20 . |shift|)
+              |INS-;bit?;2SB;6| (26 . |1|) (30 . |dec|) |INS-;mask;2S;7|
+              |INS-;rational?;SB;8| (35 . =) (41 . <) (|Integer|)
+              (47 . |convert|) |INS-;euclideanSize;SNni;9| (|Float|)
+              (52 . |coerce|) |INS-;convert;SF;10| (|DoubleFloat|)
               |INS-;convert;SDf;11| (|InputForm|) (57 . |convert|)
               |INS-;convert;SIf;12| |INS-;retract;SI;13| (|Pattern| 26)
               (62 . |coerce|) |INS-;convert;SP;14| (|Factored| 6)

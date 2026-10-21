@@ -22,227 +22,189 @@
                                    (COND (|ExpressionSpace2;CAT|)
                                          ('T
                                           (LETT |ExpressionSpace2;CAT|
-                                                (|Join| (|Comparable|)
-                                                        (|RetractableTo|
-                                                         '|t#1|)
-                                                        (|InnerEvalable| '|t#1|
-                                                                         '%)
-                                                        (|Evalable| '%)
-                                                        (|mkCategory|
-                                                         '(((|elt|
-                                                             (%
-                                                              (|BasicOperator|)
-                                                              %))
-                                                            T)
-                                                           ((|elt|
-                                                             (%
-                                                              (|BasicOperator|)
-                                                              % %))
-                                                            T)
-                                                           ((|elt|
-                                                             (%
-                                                              (|BasicOperator|)
-                                                              % % %))
-                                                            T)
-                                                           ((|elt|
-                                                             (%
-                                                              (|BasicOperator|)
-                                                              % % % %))
-                                                            T)
-                                                           ((|elt|
-                                                             (%
-                                                              (|BasicOperator|)
-                                                              % % % % %))
-                                                            T)
-                                                           ((|elt|
-                                                             (%
-                                                              (|BasicOperator|)
-                                                              % % % % % %))
-                                                            T)
-                                                           ((|elt|
-                                                             (%
-                                                              (|BasicOperator|)
-                                                              % % % % % % %))
-                                                            T)
-                                                           ((|elt|
-                                                             (%
-                                                              (|BasicOperator|)
-                                                              % % % % % % % %))
-                                                            T)
-                                                           ((|elt|
-                                                             (%
-                                                              (|BasicOperator|)
-                                                              % % % % % % % %
-                                                              %))
-                                                            T)
-                                                           ((|elt|
-                                                             (%
-                                                              (|BasicOperator|)
-                                                              (|List| %)))
-                                                            T)
-                                                           ((|subst|
-                                                             (% %
-                                                              (|Equation| %)))
-                                                            T)
-                                                           ((|subst|
-                                                             (% %
-                                                              (|List|
-                                                               (|Equation|
-                                                                %))))
-                                                            T)
-                                                           ((|subst|
-                                                             (% %
-                                                              (|List| |t#1|)
-                                                              (|List| %)))
-                                                            T)
-                                                           ((|box| (% %)) T)
-                                                           ((|paren| (% %)) T)
-                                                           ((|distribute|
-                                                             (% %))
-                                                            T)
-                                                           ((|distribute|
-                                                             (% % %))
-                                                            T)
-                                                           ((|height|
-                                                             ((|NonNegativeInteger|)
-                                                              %))
-                                                            T)
-                                                           ((|mainKernel|
-                                                             ((|Union| |t#1|
-                                                                       "failed")
-                                                              %))
-                                                            T)
-                                                           ((|kernels|
-                                                             ((|List| |t#1|)
-                                                              %))
-                                                            T)
-                                                           ((|kernels|
-                                                             ((|List| |t#1|)
-                                                              (|List| %)))
-                                                            T)
-                                                           ((|tower|
-                                                             ((|List| |t#1|)
-                                                              %))
-                                                            T)
-                                                           ((|tower|
-                                                             ((|List| |t#1|)
-                                                              (|List| %)))
-                                                            T)
-                                                           ((|operators|
-                                                             ((|List|
-                                                               (|BasicOperator|))
-                                                              %))
-                                                            T)
-                                                           ((|operator|
-                                                             ((|BasicOperator|)
-                                                              (|BasicOperator|)))
-                                                            T)
-                                                           ((|belong?|
-                                                             ((|Boolean|)
-                                                              (|BasicOperator|)))
-                                                            T)
-                                                           ((|is?|
-                                                             ((|Boolean|) %
-                                                              (|BasicOperator|)))
-                                                            T)
-                                                           ((|is?|
-                                                             ((|Boolean|) %
-                                                              (|Symbol|)))
-                                                            T)
-                                                           ((|kernel|
-                                                             (%
-                                                              (|BasicOperator|)
-                                                              %))
-                                                            T)
-                                                           ((|kernel|
-                                                             (%
-                                                              (|BasicOperator|)
-                                                              (|List| %)))
-                                                            T)
-                                                           ((|map|
-                                                             (% (|Mapping| % %)
-                                                              |t#1|))
-                                                            T)
-                                                           ((|freeOf?|
-                                                             ((|Boolean|) % %))
-                                                            T)
-                                                           ((|freeOf?|
-                                                             ((|Boolean|) %
-                                                              (|Symbol|)))
-                                                            T)
-                                                           ((|eval|
-                                                             (% %
-                                                              (|List|
-                                                               (|Symbol|))
-                                                              (|List|
-                                                               (|Mapping| %
-                                                                          %))))
-                                                            T)
-                                                           ((|eval|
-                                                             (% %
-                                                              (|List|
-                                                               (|Symbol|))
-                                                              (|List|
-                                                               (|Mapping| %
-                                                                          (|List|
-                                                                           %)))))
-                                                            T)
-                                                           ((|eval|
-                                                             (% % (|Symbol|)
-                                                              (|Mapping| %
-                                                                         (|List|
-                                                                          %))))
-                                                            T)
-                                                           ((|eval|
-                                                             (% % (|Symbol|)
-                                                              (|Mapping| % %)))
-                                                            T)
-                                                           ((|eval|
-                                                             (% %
-                                                              (|List|
-                                                               (|BasicOperator|))
-                                                              (|List|
-                                                               (|Mapping| %
-                                                                          %))))
-                                                            T)
-                                                           ((|eval|
-                                                             (% %
-                                                              (|List|
-                                                               (|BasicOperator|))
-                                                              (|List|
-                                                               (|Mapping| %
-                                                                          (|List|
-                                                                           %)))))
-                                                            T)
-                                                           ((|eval|
-                                                             (% %
-                                                              (|BasicOperator|)
-                                                              (|Mapping| %
-                                                                         (|List|
-                                                                          %))))
-                                                            T)
-                                                           ((|eval|
-                                                             (% %
-                                                              (|BasicOperator|)
-                                                              (|Mapping| % %)))
-                                                            T)
-                                                           ((|minPoly|
-                                                             ((|SparseUnivariatePolynomial|
-                                                               %)
-                                                              |t#1|))
-                                                            (|has| % (|Ring|)))
-                                                           ((|definingPolynomial|
-                                                             (% %))
-                                                            (|has| % (|Ring|)))
-                                                           ((|even?|
-                                                             ((|Boolean|) %))
-                                                            (|has| %
-                                                                   (|RetractableTo|
-                                                                    (|Integer|))))
-                                                           ((|odd?|
-                                                             ((|Boolean|) %))
-                                                            (|has| %
-                                                                   (|RetractableTo|
-                                                                    (|Integer|)))))
-                                                         NIL NIL NIL)))))))
+                                                (|Join|
+                                                 (|ComparableRepresentation|)
+                                                 (|RetractableTo| '|t#1|)
+                                                 (|InnerEvalable| '|t#1| '%)
+                                                 (|Evalable| '%)
+                                                 (|mkCategory|
+                                                  '(((|elt|
+                                                      (% (|BasicOperator|) %))
+                                                     T)
+                                                    ((|elt|
+                                                      (% (|BasicOperator|) %
+                                                       %))
+                                                     T)
+                                                    ((|elt|
+                                                      (% (|BasicOperator|) % %
+                                                       %))
+                                                     T)
+                                                    ((|elt|
+                                                      (% (|BasicOperator|) % %
+                                                       % %))
+                                                     T)
+                                                    ((|elt|
+                                                      (% (|BasicOperator|) % %
+                                                       % % %))
+                                                     T)
+                                                    ((|elt|
+                                                      (% (|BasicOperator|) % %
+                                                       % % % %))
+                                                     T)
+                                                    ((|elt|
+                                                      (% (|BasicOperator|) % %
+                                                       % % % % %))
+                                                     T)
+                                                    ((|elt|
+                                                      (% (|BasicOperator|) % %
+                                                       % % % % % %))
+                                                     T)
+                                                    ((|elt|
+                                                      (% (|BasicOperator|) % %
+                                                       % % % % % % %))
+                                                     T)
+                                                    ((|elt|
+                                                      (% (|BasicOperator|)
+                                                       (|List| %)))
+                                                     T)
+                                                    ((|subst|
+                                                      (% % (|Equation| %)))
+                                                     T)
+                                                    ((|subst|
+                                                      (% %
+                                                       (|List|
+                                                        (|Equation| %))))
+                                                     T)
+                                                    ((|subst|
+                                                      (% % (|List| |t#1|)
+                                                       (|List| %)))
+                                                     T)
+                                                    ((|box| (% %)) T)
+                                                    ((|paren| (% %)) T)
+                                                    ((|distribute| (% %)) T)
+                                                    ((|distribute| (% % %)) T)
+                                                    ((|height|
+                                                      ((|NonNegativeInteger|)
+                                                       %))
+                                                     T)
+                                                    ((|mainKernel|
+                                                      ((|Union| |t#1| "failed")
+                                                       %))
+                                                     T)
+                                                    ((|kernels|
+                                                      ((|List| |t#1|) %))
+                                                     T)
+                                                    ((|kernels|
+                                                      ((|List| |t#1|)
+                                                       (|List| %)))
+                                                     T)
+                                                    ((|tower|
+                                                      ((|List| |t#1|) %))
+                                                     T)
+                                                    ((|tower|
+                                                      ((|List| |t#1|)
+                                                       (|List| %)))
+                                                     T)
+                                                    ((|operators|
+                                                      ((|List|
+                                                        (|BasicOperator|))
+                                                       %))
+                                                     T)
+                                                    ((|operator|
+                                                      ((|BasicOperator|)
+                                                       (|BasicOperator|)))
+                                                     T)
+                                                    ((|belong?|
+                                                      ((|Boolean|)
+                                                       (|BasicOperator|)))
+                                                     T)
+                                                    ((|is?|
+                                                      ((|Boolean|) %
+                                                       (|BasicOperator|)))
+                                                     T)
+                                                    ((|is?|
+                                                      ((|Boolean|) %
+                                                       (|Symbol|)))
+                                                     T)
+                                                    ((|kernel|
+                                                      (% (|BasicOperator|) %))
+                                                     T)
+                                                    ((|kernel|
+                                                      (% (|BasicOperator|)
+                                                       (|List| %)))
+                                                     T)
+                                                    ((|map|
+                                                      (% (|Mapping| % %)
+                                                       |t#1|))
+                                                     T)
+                                                    ((|freeOf?|
+                                                      ((|Boolean|) % %))
+                                                     T)
+                                                    ((|freeOf?|
+                                                      ((|Boolean|) %
+                                                       (|Symbol|)))
+                                                     T)
+                                                    ((|eval|
+                                                      (% % (|List| (|Symbol|))
+                                                       (|List|
+                                                        (|Mapping| % %))))
+                                                     T)
+                                                    ((|eval|
+                                                      (% % (|List| (|Symbol|))
+                                                       (|List|
+                                                        (|Mapping| %
+                                                                   (|List|
+                                                                    %)))))
+                                                     T)
+                                                    ((|eval|
+                                                      (% % (|Symbol|)
+                                                       (|Mapping| %
+                                                                  (|List| %))))
+                                                     T)
+                                                    ((|eval|
+                                                      (% % (|Symbol|)
+                                                       (|Mapping| % %)))
+                                                     T)
+                                                    ((|eval|
+                                                      (% %
+                                                       (|List|
+                                                        (|BasicOperator|))
+                                                       (|List|
+                                                        (|Mapping| % %))))
+                                                     T)
+                                                    ((|eval|
+                                                      (% %
+                                                       (|List|
+                                                        (|BasicOperator|))
+                                                       (|List|
+                                                        (|Mapping| %
+                                                                   (|List|
+                                                                    %)))))
+                                                     T)
+                                                    ((|eval|
+                                                      (% % (|BasicOperator|)
+                                                       (|Mapping| %
+                                                                  (|List| %))))
+                                                     T)
+                                                    ((|eval|
+                                                      (% % (|BasicOperator|)
+                                                       (|Mapping| % %)))
+                                                     T)
+                                                    ((|minPoly|
+                                                      ((|SparseUnivariatePolynomial|
+                                                        %)
+                                                       |t#1|))
+                                                     (|has| % (|Ring|)))
+                                                    ((|definingPolynomial|
+                                                      (% %))
+                                                     (|has| % (|Ring|)))
+                                                    ((|even?| ((|Boolean|) %))
+                                                     (|has| %
+                                                            (|RetractableTo|
+                                                             (|Integer|))))
+                                                    ((|odd?| ((|Boolean|) %))
+                                                     (|has| %
+                                                            (|RetractableTo|
+                                                             (|Integer|)))))
+                                                  NIL NIL NIL)))))))
            (SETELT #1# 0 (LIST '|ExpressionSpace2| |t#1|))))) 

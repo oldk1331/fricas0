@@ -13,7 +13,7 @@
         (COND ((QEQCAR |s| 0) (QCAR (QCDR |s|)))
               ('T (SPADCALL (QCDR |s|) (QREFELT % 16))))) 
 
-(PUT '|UNISEG;hasHi;%B;5| '|SPADreplace| '(XLAM (|s|) (QEQCAR |s| 1))) 
+(MAKEPROP '|UNISEG;hasHi;%B;5| '|SPADreplace| '(XLAM (|s|) (QEQCAR |s| 1))) 
 
 (SDEFUN |UNISEG;hasHi;%B;5| ((|s| (%)) (% (|Boolean|))) (QEQCAR |s| 1)) 
 
@@ -32,7 +32,7 @@
 (SDEFUN |UNISEG;SEGMENT;2S%;9| ((|a| (S)) (|b| (S)) (% (%)))
         (SPADCALL |a| |b| (QREFELT % 11))) 
 
-(PUT '|UNISEG;coerce;S%;10| '|SPADreplace| '(XLAM (|sg|) (CONS 1 |sg|))) 
+(MAKEPROP '|UNISEG;coerce;S%;10| '|SPADreplace| '(XLAM (|sg|) (CONS 1 |sg|))) 
 
 (SDEFUN |UNISEG;coerce;S%;10| ((|sg| (|Segment| S)) (% (%))) (CONS 1 |sg|)) 
 
@@ -57,7 +57,7 @@
 
 (SDEFUN |UNISEG;coerce;%Of;13| ((|s| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|inc| (|Integer|)) (|seg| (|OutputForm|)) (|e| (|OutputForm|)))
+         ((|e| (|OutputForm|)) (|seg| (|OutputForm|)) (|inc| (|Integer|)))
          (SEQ
           (LETT |seg|
                 (SEQ
@@ -137,8 +137,8 @@
 
 (SDEFUN |UNISEG;expand;LS;20| ((|ls| (|List| %)) (% (|Stream| S)))
         (SPROG
-         ((|st| (|Stream| S)) (|s| (%)) (|lb| (|List| (|Segment| S)))
-          (|ns| (|Segment| S)))
+         ((|ns| (|Segment| S)) (|lb| (|List| (|Segment| S))) (|s| (%))
+          (|st| (|Stream| S)))
          (SEQ (LETT |st| (SPADCALL (QREFELT % 64)))
               (EXIT
                (COND ((SPADCALL |ls| (QREFELT % 66)) |st|)
@@ -200,7 +200,7 @@
 (DECLAIM (NOTINLINE |UniversalSegment;|)) 
 
 (DEFUN |UniversalSegment;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|UniversalSegment| DV$1))
@@ -260,9 +260,9 @@
                        (CONS (|dispatchFunction| |UNISEG;expand;LS;20|) %)))))
           %))) 
 
-(DEFUN |UniversalSegment| (#1=#:G92)
+(DEFUN |UniversalSegment| (#1=#:G93)
   (SPROG NIL
-         (PROG (#2=#:G93)
+         (PROG (#2=#:G94)
            (RETURN
             (COND
              ((LETT #2#

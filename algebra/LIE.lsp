@@ -3,11 +3,11 @@
         (SPADCALL (SPADCALL |a| |b| (QREFELT % 9))
                   (SPADCALL |b| |a| (QREFELT % 9)) (QREFELT % 10))) 
 
-(PUT '|LIE;coerce;%A;2| '|SPADreplace| '(XLAM (|a|) |a|)) 
+(MAKEPROP '|LIE;coerce;%A;2| '|SPADreplace| '(XLAM (|a|) |a|)) 
 
 (SDEFUN |LIE;coerce;%A;2| ((|a| (%)) (% (A))) |a|) 
 
-(PUT '|LIE;coerce;A%;3| '|SPADreplace| '(XLAM (|a|) |a|)) 
+(MAKEPROP '|LIE;coerce;A%;3| '|SPADreplace| '(XLAM (|a|) |a|)) 
 
 (SDEFUN |LIE;coerce;A%;3| ((|a| (A)) (% (%))) |a|) 
 
@@ -17,7 +17,7 @@
 (DECLAIM (NOTINLINE |AssociatedLieAlgebra;|)) 
 
 (DEFUN |AssociatedLieAlgebra;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -138,7 +138,7 @@
           (LIST
            '#(NIL NIL NIL NIL NIL (|local| |#2|) (|local| |#1|) (|local| |#2|)
               '|Rep| (0 . *) (6 . -) |LIE;*;3%;1| |LIE;coerce;%A;2|
-              |LIE;coerce;A%;3| (12 . |One|) (16 . |Zero|) (|PositiveInteger|)
+              |LIE;coerce;A%;3| (12 . |1|) (16 . |0|) (|PositiveInteger|)
               |LIE;^;%Pi%;4| (|Boolean|) (|String|) (|OutputForm|) (|Integer|)
               (|Union| % '"failed") (|NonNegativeInteger|)
               (|SparseUnivariatePolynomial| (|Polynomial| 6)) (|InputForm|)
@@ -169,31 +169,32 @@
               |commutative?| 376 |coerce| 380 |basis| 395
               |associatorDependence| 399 |associator| 403 |associative?| 410
               |apply| 414 |antiCommutator| 420 |antiCommutative?| 426
-              |antiAssociative?| 430 |alternative?| 434 ^ 438 |Zero| 444 = 448
-              - 454 + 465 * 471)
+              |antiAssociative?| 430 |alternative?| 434 ^ 438 = 444 |0| 450 -
+              454 + 465 * 471)
            'NIL
            (CONS
             (|makeByteWordVec2| 7
-                                '(1 5 0 0 1 0 0 0 0 0 0 2 0 0 2 0 0 7 0 2 4 0 0
-                                  0))
+                                '(1 5 0 0 1 0 0 0 0 0 2 0 2 0 0 2 0 0 0 7 0 2 4
+                                  0 0 0))
             (CONS
              '#(|FramedNonAssociativeAlgebra&|
                 |FiniteRankNonAssociativeAlgebra&| |NonAssociativeAlgebra&|
                 |Module&| |FramedModule&| NIL NIL NIL |NonAssociativeRng&|
-                |AbelianGroup&| NIL |Finite&| |AbelianMonoid&|
+                |AbelianGroup&| |Finite&| NIL NIL |AbelianMonoid&|
                 |NonAssociativeSemiRng&| NIL |Magma&| |AbelianSemiGroup&|
-                |Hashable&| |SetCategory&| NIL NIL NIL |BasicType&| NIL)
+                |SetWithZero&| |Hashable&| |SetCategory&| NIL NIL NIL
+                |BasicType&| NIL)
              (CONS
               '#((|FramedNonAssociativeAlgebra| 6)
                  (|FiniteRankNonAssociativeAlgebra| 6)
                  (|NonAssociativeAlgebra| 6) (|Module| 6) (|FramedModule| 6)
                  (|BiModule| 6 6) (|LeftModule| 6) (|RightModule| 6)
-                 (|NonAssociativeRng|) (|AbelianGroup|)
-                 (|CancellationAbelianMonoid|) (|Finite|) (|AbelianMonoid|)
-                 (|NonAssociativeSemiRng|) (|Comparable|) (|Magma|)
-                 (|AbelianSemiGroup|) (|Hashable|) (|SetCategory|)
-                 (|ConvertibleTo| 25) (|unitsKnown|) (|CoercibleTo| 20)
-                 (|BasicType|) (|CoercibleTo| 7))
+                 (|NonAssociativeRng|) (|AbelianGroup|) (|Finite|)
+                 (|CancellationAbelianMonoid|) (|Comparable|) (|AbelianMonoid|)
+                 (|NonAssociativeSemiRng|) (|ComparableRepresentation|)
+                 (|Magma|) (|AbelianSemiGroup|) (|SetWithZero|) (|Hashable|)
+                 (|SetCategory|) (|ConvertibleTo| 25) (|unitsKnown|)
+                 (|CoercibleTo| 20) (|BasicType|) (|CoercibleTo| 7))
               (|makeByteWordVec2| 37
                                   '(2 8 0 0 0 9 2 8 0 0 0 10 0 6 0 14 0 0 0 15
                                     2 0 18 0 0 1 1 0 18 0 1 0 4 22 1 2 0 22 0 0
@@ -217,8 +218,8 @@
                                     0 0 0 1 0 3 18 1 1 0 20 0 1 1 0 5 0 12 1 0
                                     0 5 13 0 1 33 1 0 4 30 1 3 0 0 0 0 0 1 0 3
                                     18 1 2 1 0 35 0 1 2 0 0 0 0 1 0 3 18 1 0 3
-                                    18 1 0 3 18 1 2 0 0 0 16 17 0 0 0 15 2 0 18
-                                    0 0 1 2 0 0 0 0 1 1 0 0 0 1 2 0 0 0 0 1 2 0
-                                    0 16 0 1 2 0 0 0 0 11 2 0 0 21 0 1 2 0 0 23
-                                    0 1 2 0 0 6 0 1 2 0 0 0 6 1)))))
+                                    18 1 0 3 18 1 2 0 0 0 16 17 2 0 18 0 0 1 0
+                                    0 0 15 2 0 0 0 0 1 1 0 0 0 1 2 0 0 0 0 1 2
+                                    0 0 16 0 1 2 0 0 0 0 11 2 0 0 21 0 1 2 0 0
+                                    23 0 1 2 0 0 6 0 1 2 0 0 0 6 1)))))
            '|lookupComplete|)) 

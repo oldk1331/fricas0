@@ -2,69 +2,69 @@
 (SDEFUN |GALPOLYU;factorsOfDegree;PiFL;1|
         ((|d| (|PositiveInteger|)) (|r| (|Factored| UP)) (% (|List| UP)))
         (SPROG
-         ((|lfact| (|List| UP)) (#1=#:G10 NIL) (|i| NIL) (#2=#:G9 NIL)
-          (|fr| NIL))
+         ((|fr| NIL) (#1=#:G16 NIL) (|i| NIL) (#2=#:G17 NIL)
+          (|lfact| (|List| UP)))
          (SEQ (LETT |lfact| NIL)
-              (SEQ (LETT |fr| NIL) (LETT #2# (SPADCALL |r| (QREFELT % 12)))
+              (SEQ (LETT |fr| NIL) (LETT #1# (SPADCALL |r| (QREFELT % 12)))
                    G190
                    (COND
-                    ((OR (ATOM #2#) (PROGN (LETT |fr| (CAR #2#)) NIL))
+                    ((OR (ATOM #1#) (PROGN (LETT |fr| (CAR #1#)) NIL))
                      (GO G191)))
                    (SEQ
                     (EXIT
                      (COND
                       ((EQL (SPADCALL (QVELT |fr| 1) (QREFELT % 14)) |d|)
-                       (SEQ (LETT |i| 1) (LETT #1# (QVELT |fr| 2)) G190
-                            (COND ((|greater_SI| |i| #1#) (GO G191)))
+                       (SEQ (LETT |i| 1) (LETT #2# (QVELT |fr| 2)) G190
+                            (COND ((|greater_SI| |i| #2#) (GO G191)))
                             (SEQ
                              (EXIT
                               (LETT |lfact| (CONS (QVELT |fr| 1) |lfact|))))
                             (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                             (EXIT NIL))))))
-                   (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                   (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
               (EXIT |lfact|)))) 
 
 (SDEFUN |GALPOLYU;factorOfDegree;PiFUP;2|
         ((|d| (|PositiveInteger|)) (|r| (|Factored| UP)) (% (UP)))
-        (SPROG ((#1=#:G17 NIL) (|factor| (UP)) (#2=#:G18 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G25 NIL) (|factor| (UP)) (#2=#:G24 NIL))
                (SEQ
                 (EXIT
                  (SEQ (LETT |factor| (|spadConstant| % 18))
                       (SEQ (LETT |i| NIL)
-                           (LETT #2# (SPADCALL |r| (QREFELT % 12))) G190
+                           (LETT #1# (SPADCALL |r| (QREFELT % 12))) G190
                            (COND
-                            ((OR (ATOM #2#) (PROGN (LETT |i| (CAR #2#)) NIL))
+                            ((OR (ATOM #1#) (PROGN (LETT |i| (CAR #1#)) NIL))
                              (GO G191)))
                            (SEQ (LETT |factor| (QVELT |i| 1))
                                 (EXIT
                                  (COND
                                   ((EQL (SPADCALL |factor| (QREFELT % 14)) |d|)
                                    (PROGN
-                                    (LETT #1# |factor|)
-                                    (GO #3=#:G16))))))
-                           (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                                    (LETT #2# |factor|)
+                                    (GO #3=#:G23))))))
+                           (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
                       (EXIT (|error| "factorOfDegree: Bad arguments"))))
-                #3# (EXIT #1#)))) 
+                #3# (EXIT #2#)))) 
 
 (SDEFUN |GALPOLYU;degreePartition;FM;3|
         ((|r| (|Factored| UP)) (% (|Multiset| (|NonNegativeInteger|))))
-        (SPROG ((#1=#:G24 NIL) (|i| NIL) (#2=#:G23 NIL))
+        (SPROG ((#1=#:G30 NIL) (|i| NIL) (#2=#:G31 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
-                  (LETT #2# NIL)
-                  (SEQ (LETT |i| NIL) (LETT #1# (SPADCALL |r| (QREFELT % 12)))
+                  (LETT #1# NIL)
+                  (SEQ (LETT |i| NIL) (LETT #2# (SPADCALL |r| (QREFELT % 12)))
                        G190
                        (COND
-                        ((OR (ATOM #1#) (PROGN (LETT |i| (CAR #1#)) NIL))
+                        ((OR (ATOM #2#) (PROGN (LETT |i| (CAR #2#)) NIL))
                          (GO G191)))
                        (SEQ
                         (EXIT
-                         (LETT #2#
+                         (LETT #1#
                                (CONS (SPADCALL (QVELT |i| 1) (QREFELT % 14))
-                                     #2#))))
-                       (LETT #1# (CDR #1#)) (GO G190) G191
-                       (EXIT (NREVERSE #2#))))
+                                     #1#))))
+                       (LETT #2# (CDR #2#)) (GO G190) G191
+                       (EXIT (NREVERSE #1#))))
                  (QREFELT % 22))))) 
 
 (SDEFUN |GALPOLYU;monic?;UPB;4| ((|p| (UP)) (% (|Boolean|)))
@@ -73,23 +73,23 @@
 
 (SDEFUN |GALPOLYU;reverse;2UP;5| ((|p| (UP)) (% (UP)))
         (SPROG
-         ((|r| (UP)) (#1=#:G27 NIL) (#2=#:G31 NIL) (|i| NIL)
-          (|n| (|NonNegativeInteger|)))
+         ((|n| (|NonNegativeInteger|)) (|i| NIL) (#1=#:G38 NIL) (#2=#:G34 NIL)
+          (|r| (UP)))
          (SEQ (LETT |r| (|spadConstant| % 18))
               (LETT |n| (SPADCALL |p| (QREFELT % 14)))
-              (SEQ (LETT |i| 0) (LETT #2# |n|) G190
-                   (COND ((|greater_SI| |i| #2#) (GO G191)))
+              (SEQ (LETT |i| 0) (LETT #1# |n|) G190
+                   (COND ((|greater_SI| |i| #1#) (GO G191)))
                    (SEQ
                     (EXIT
                      (LETT |r|
                            (SPADCALL |r|
                                      (SPADCALL
                                       (SPADCALL |p|
-                                                (PROG1 (LETT #1# (- |n| |i|))
-                                                  (|check_subtype2| (>= #1# 0)
+                                                (PROG1 (LETT #2# (- |n| |i|))
+                                                  (|check_subtype2| (>= #2# 0)
                                                                     '(|NonNegativeInteger|)
                                                                     '(|Integer|)
-                                                                    #1#))
+                                                                    #2#))
                                                 (QREFELT % 29))
                                       |i| (QREFELT % 30))
                                      (QREFELT % 31)))))
@@ -97,7 +97,7 @@
               (EXIT |r|)))) 
 
 (SDEFUN |GALPOLYU;scaleRoots;UPRUP;6| ((|p| (UP)) (|c| (R)) (% (UP)))
-        (SPROG ((|mc| (R)) (|r| (UP)) (|i| NIL) (|n| (|NonNegativeInteger|)))
+        (SPROG ((|n| (|NonNegativeInteger|)) (|i| NIL) (|r| (UP)) (|mc| (R)))
                (SEQ
                 (COND ((SPADCALL |c| (|spadConstant| % 25) (QREFELT % 27)) |p|)
                       (#1='T
@@ -142,7 +142,7 @@
 (DECLAIM (NOTINLINE |GaloisGroupPolynomialUtilities;|)) 
 
 (DEFUN |GaloisGroupPolynomialUtilities;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -158,9 +158,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |GaloisGroupPolynomialUtilities| (&REST #1=#:G48)
+(DEFUN |GaloisGroupPolynomialUtilities| (&REST #1=#:G56)
   (SPROG NIL
-         (PROG (#2=#:G49)
+         (PROG (#2=#:G57)
            (RETURN
             (COND
              ((LETT #2#
@@ -187,12 +187,12 @@
               (|Record| (|:| |flag| 8) (|:| |factor| 7) (|:| |exponent| 13))
               (|List| 9) (|Factored| 7) (0 . |factorList|)
               (|NonNegativeInteger|) (5 . |degree|) (|List| 7)
-              (|PositiveInteger|) |GALPOLYU;factorsOfDegree;PiFL;1|
-              (10 . |Zero|) |GALPOLYU;factorOfDegree;PiFUP;2| (|List| 13)
-              (|Multiset| 13) (14 . |multiset|) |GALPOLYU;degreePartition;FM;3|
-              (19 . |leadingCoefficient|) (24 . |One|) (|Boolean|) (28 . =)
+              (|PositiveInteger|) |GALPOLYU;factorsOfDegree;PiFL;1| (10 . |0|)
+              |GALPOLYU;factorOfDegree;PiFUP;2| (|List| 13) (|Multiset| 13)
+              (14 . |multiset|) |GALPOLYU;degreePartition;FM;3|
+              (19 . |leadingCoefficient|) (24 . |1|) (|Boolean|) (28 . =)
               |GALPOLYU;monic?;UPB;4| (34 . |coefficient|) (40 . |monomial|)
-              (46 . +) |GALPOLYU;reverse;2UP;5| (52 . |One|) (56 . |zero?|)
+              (46 . +) |GALPOLYU;reverse;2UP;5| (52 . |1|) (56 . |zero?|)
               (61 . *) |GALPOLYU;scaleRoots;UPRUP;6| (67 . |coerce|)
               (|SparseUnivariatePolynomial| 7) (|Mapping| 7 6)
               (|UnivariatePolynomialCategoryFunctions2| 6 7 7 38) (72 . |map|)

@@ -22,7 +22,7 @@
 (DECLAIM (NOTINLINE |PlotFunctions1;|)) 
 
 (DEFUN |PlotFunctions1;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|PlotFunctions1| DV$1))
@@ -36,9 +36,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |PlotFunctions1| (#1=#:G9)
+(DEFUN |PlotFunctions1| (#1=#:G10)
   (SPROG NIL
-         (PROG (#2=#:G10)
+         (PROG (#2=#:G11)
            (RETURN
             (COND
              ((LETT #2#

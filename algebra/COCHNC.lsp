@@ -1,5 +1,5 @@
 
-(PUT '|COCHNC;coChainComplex;L%;1| '|SPADreplace| '(XLAM (|v|) |v|)) 
+(MAKEPROP '|COCHNC;coChainComplex;L%;1| '|SPADreplace| '(XLAM (|v|) |v|)) 
 
 (SDEFUN |COCHNC;coChainComplex;L%;1|
         ((|v| (|List| (|Matrix| (|Integer|)))) (% (%))) |v|) 
@@ -12,17 +12,17 @@
 
 (SDEFUN |COCHNC;validate;%B;3| ((|a| (%)) (% (|Boolean|)))
         (SPROG
-         ((|last| (|Matrix| (|Integer|))) (#1=#:G16 NIL)
-          (|prod| (|Matrix| (|Integer|))) (#2=#:G17 NIL) (|m| NIL)
-          (|len| (|NonNegativeInteger|)))
+         ((|len| (|NonNegativeInteger|)) (|m| NIL) (#1=#:G18 NIL)
+          (|prod| (|Matrix| (|Integer|))) (#2=#:G17 NIL)
+          (|last| (|Matrix| (|Integer|))))
          (SEQ
           (EXIT
            (SEQ (LETT |len| (LENGTH |a|))
-                (COND ((< |len| 2) (PROGN (LETT #1# 'T) (GO #3=#:G15))))
+                (COND ((< |len| 2) (PROGN (LETT #2# 'T) (GO #3=#:G16))))
                 (LETT |last| (|SPADfirst| |a|))
-                (SEQ (LETT |m| NIL) (LETT #2# (CDR |a|)) G190
+                (SEQ (LETT |m| NIL) (LETT #1# (CDR |a|)) G190
                      (COND
-                      ((OR (ATOM #2#) (PROGN (LETT |m| (CAR #2#)) NIL))
+                      ((OR (ATOM #1#) (PROGN (LETT |m| (CAR #1#)) NIL))
                        (GO G191)))
                      (SEQ
                       (COND
@@ -44,7 +44,7 @@
                                      (QREFELT % 25))
                            (QREFELT % 26))
                           (QREFELT % 29))
-                         (EXIT (PROGN (LETT #1# NIL) (GO #3#))))))
+                         (EXIT (PROGN (LETT #2# NIL) (GO #3#))))))
                       (LETT |prod| (SPADCALL |last| |m| (QREFELT % 30)))
                       (COND
                        ((NULL (SPADCALL |prod| (QREFELT % 31)))
@@ -64,40 +64,40 @@
                             (SPADCALL " = " (QREFELT % 24)) (QREFELT % 26))
                            (SPADCALL |prod| (QREFELT % 32)) (QREFELT % 26))
                           (QREFELT % 29))
-                         (EXIT (PROGN (LETT #1# NIL) (GO #3#))))))
+                         (EXIT (PROGN (LETT #2# NIL) (GO #3#))))))
                       (EXIT (LETT |last| |m|)))
-                     (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                     (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
                 (EXIT 'T)))
-          #3# (EXIT #1#)))) 
+          #3# (EXIT #2#)))) 
 
 (SDEFUN |COCHNC;coboundary;%Nni2L;4|
         ((|a| (%)) (|n| (|NonNegativeInteger|)) (|inp| (|List| VS))
          (% (|List| VS)))
         (SPROG
-         ((|res| (|List| VS)) (#1=#:G35 NIL) (|i| NIL) (#2=#:G34 NIL)
-          (|res1| (|List| VS)) (|val| (VS)) (#3=#:G33 NIL) (|v| NIL)
-          (|vs| (|Vector| (|Integer|))) (|m| (|Matrix| (|Integer|)))
-          (|b| (|Vector| (|Integer|))) (|base| (|List| (|Integer|)))
-          (#4=#:G32 NIL) (|x| NIL) (#5=#:G31 NIL) (#6=#:G30 NIL) (|p| NIL)
-          (|inpn| (|NonNegativeInteger|))
-          (|maps| (|List| (|Matrix| (|Integer|)))))
+         ((|maps| (|List| (|Matrix| (|Integer|))))
+          (|inpn| (|NonNegativeInteger|)) (|p| NIL) (#1=#:G31 NIL)
+          (#2=#:G32 NIL) (|x| NIL) (#3=#:G33 NIL) (|base| (|List| (|Integer|)))
+          (|b| (|Vector| (|Integer|))) (|m| (|Matrix| (|Integer|)))
+          (|vs| (|Vector| (|Integer|))) (|v| NIL) (#4=#:G34 NIL) (|val| (VS))
+          (|res1| (|List| VS)) (#5=#:G35 NIL) (|i| NIL) (#6=#:G36 NIL)
+          (|res| (|List| VS)))
          (SEQ (LETT |maps| (REVERSE |a|)) (LETT |res| NIL)
               (LETT |inpn| (LENGTH |inp|))
-              (SEQ (LETT |p| 1) (LETT #6# |inpn|) G190
-                   (COND ((|greater_SI| |p| #6#) (GO G191)))
+              (SEQ (LETT |p| 1) (LETT #1# |inpn|) G190
+                   (COND ((|greater_SI| |p| #1#) (GO G191)))
                    (SEQ
                     (LETT |base|
                           (PROGN
-                           (LETT #5# NIL)
-                           (SEQ (LETT |x| 1) (LETT #4# |inpn|) G190
-                                (COND ((|greater_SI| |x| #4#) (GO G191)))
+                           (LETT #2# NIL)
+                           (SEQ (LETT |x| 1) (LETT #3# |inpn|) G190
+                                (COND ((|greater_SI| |x| #3#) (GO G191)))
                                 (SEQ
                                  (EXIT
-                                  (LETT #5#
+                                  (LETT #2#
                                         (CONS (COND ((EQL |x| |p|) 1) ('T 0))
-                                              #5#))))
+                                              #2#))))
                                 (LETT |x| (|inc_SI| |x|)) (GO G190) G191
-                                (EXIT (NREVERSE #5#)))))
+                                (EXIT (NREVERSE #2#)))))
                     (LETT |b| (SPADCALL |base| (QREFELT % 36)))
                     (LETT |m|
                           (SPADCALL (SPADCALL |maps| |n| (QREFELT % 37))
@@ -105,9 +105,9 @@
                     (LETT |vs| (SPADCALL |b| |m| (QREFELT % 38)))
                     (LETT |res1| NIL)
                     (SEQ (LETT |v| NIL)
-                         (LETT #3# (SPADCALL |vs| (QREFELT % 39))) G190
+                         (LETT #4# (SPADCALL |vs| (QREFELT % 39))) G190
                          (COND
-                          ((OR (ATOM #3#) (PROGN (LETT |v| (CAR #3#)) NIL))
+                          ((OR (ATOM #4#) (PROGN (LETT |v| (CAR #4#)) NIL))
                            (GO G191)))
                          (SEQ (LETT |val| (SPADCALL |inp| |p| (QREFELT % 41)))
                               (COND
@@ -127,20 +127,20 @@
                                  (LETT |res1|
                                        (SPADCALL |res1| |val|
                                                  (QREFELT % 43)))))))
-                         (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
+                         (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT NIL))
                     (EXIT
                      (COND ((NULL |res|) (LETT |res| |res1|))
                            ('T
                             (LETT |res|
                                   (PROGN
-                                   (LETT #2# NIL)
-                                   (SEQ (LETT |i| 1) (LETT #1# (LENGTH |res1|))
+                                   (LETT #5# NIL)
+                                   (SEQ (LETT |i| 1) (LETT #6# (LENGTH |res1|))
                                         G190
                                         (COND
-                                         ((|greater_SI| |i| #1#) (GO G191)))
+                                         ((|greater_SI| |i| #6#) (GO G191)))
                                         (SEQ
                                          (EXIT
-                                          (LETT #2#
+                                          (LETT #5#
                                                 (CONS
                                                  (SPADCALL
                                                   (SPADCALL |res| |i|
@@ -148,17 +148,17 @@
                                                   (SPADCALL |res1| |i|
                                                             (QREFELT % 41))
                                                   (QREFELT % 45))
-                                                 #2#))))
+                                                 #5#))))
                                         (LETT |i| (|inc_SI| |i|)) (GO G190)
-                                        G191 (EXIT (NREVERSE #2#)))))))))
+                                        G191 (EXIT (NREVERSE #5#)))))))))
                    (LETT |p| (|inc_SI| |p|)) (GO G190) G191 (EXIT NIL))
               (EXIT |res|)))) 
 
 (SDEFUN |COCHNC;coHomology;%L;5| ((|a| (%)) (% (|List| (|Homology|))))
         (SPROG
-         ((|prev| (|Matrix| (|Integer|))) (|notFirst| (|Boolean|))
-          (|res| (|List| (|Homology|))) (|m2| (|Homology|)) (#1=#:G42 NIL)
-          (|m1| NIL))
+         ((|m1| NIL) (#1=#:G43 NIL) (|m2| (|Homology|))
+          (|res| (|List| (|Homology|))) (|notFirst| (|Boolean|))
+          (|prev| (|Matrix| (|Integer|))))
          (SEQ (LETT |res| NIL) (LETT |prev| (MAKE_MATRIX 0 0))
               (LETT |notFirst| NIL)
               (SEQ (LETT |m1| NIL) (LETT #1# |a|) G190
@@ -178,27 +178,27 @@
 
 (SDEFUN |COCHNC;coerce;%Of;6| ((|s| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|lst| (|List| (|OutputForm|))) (#1=#:G48 NIL) (|x| NIL)
-          (#2=#:G47 NIL))
+         ((#1=#:G48 NIL) (|x| NIL) (#2=#:G49 NIL)
+          (|lst| (|List| (|OutputForm|))))
          (SEQ
           (LETT |lst|
                 (PROGN
-                 (LETT #2# NIL)
-                 (SEQ (LETT |x| NIL) (LETT #1# |s|) G190
+                 (LETT #1# NIL)
+                 (SEQ (LETT |x| NIL) (LETT #2# |s|) G190
                       (COND
-                       ((OR (ATOM #1#) (PROGN (LETT |x| (CAR #1#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT |x| (CAR #2#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2# (CONS (SPADCALL |x| (QREFELT % 32)) #2#))))
-                      (LETT #1# (CDR #1#)) (GO G190) G191
-                      (EXIT (NREVERSE #2#)))))
+                        (LETT #1# (CONS (SPADCALL |x| (QREFELT % 32)) #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#)))))
           (EXIT (SPADCALL |lst| (QREFELT % 54)))))) 
 
 (DECLAIM (NOTINLINE |CoChainComplex;|)) 
 
 (DEFUN |CoChainComplex;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|CoChainComplex| DV$1))
@@ -213,9 +213,9 @@
           (QSETREFV % 7 (|List| (|Matrix| (|Integer|))))
           %))) 
 
-(DEFUN |CoChainComplex| (#1=#:G49)
+(DEFUN |CoChainComplex| (#1=#:G50)
   (SPROG NIL
-         (PROG (#2=#:G50)
+         (PROG (#2=#:G51)
            (RETURN
             (COND
              ((LETT #2#
@@ -242,7 +242,7 @@
               (48 . |print|) (53 . *) (59 . |zero?|) (64 . |coerce|)
               |COCHNC;validate;%B;3| (|List| 17) (|Vector| 17) (69 . |vector|)
               (74 . |elt|) (80 . *) (86 . |entries|) (|List| 6) (91 . |elt|)
-              (97 . |Zero|) (101 . |concat|) (107 . -) (112 . +)
+              (97 . |0|) (101 . |concat|) (107 . -) (112 . +)
               (|NonNegativeInteger|) |COCHNC;coboundary;%Nni2L;4| (|Homology|)
               (118 . |homologyGroup|) (|List| 48) (124 . |concat|)
               |COCHNC;coHomology;%L;5| (|List| %) (130 . |commaSeparate|)

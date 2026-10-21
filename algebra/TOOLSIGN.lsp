@@ -2,7 +2,8 @@
 (SDEFUN |TOOLSIGN;nonQsign;RU;1| ((|r| (R)) (% (|Union| (|Integer|) "failed")))
         (SPADCALL (SPADCALL |r| (QREFELT % 9)) (QREFELT % 12))) 
 
-(PUT '|TOOLSIGN;nonQsign;RU;2| '|SPADreplace| '(XLAM (|r|) (CONS 1 "failed"))) 
+(MAKEPROP '|TOOLSIGN;nonQsign;RU;2| '|SPADreplace|
+          '(XLAM (|r|) (CONS 1 "failed"))) 
 
 (SDEFUN |TOOLSIGN;nonQsign;RU;2| ((|r| (R)) (% (|Union| (|Integer|) "failed")))
         (CONS 1 "failed")) 
@@ -41,7 +42,7 @@
 (DECLAIM (NOTINLINE |ToolsForSign;|)) 
 
 (DEFUN |ToolsForSign;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|ToolsForSign| DV$1))
@@ -70,9 +71,9 @@
                       (CONS (|dispatchFunction| |TOOLSIGN;sign;RU;5|) %))))
           %))) 
 
-(DEFUN |ToolsForSign| (#1=#:G30)
+(DEFUN |ToolsForSign| (#1=#:G37)
   (SPROG NIL
-         (PROG (#2=#:G31)
+         (PROG (#2=#:G38)
            (RETURN
             (COND
              ((LETT #2#
@@ -93,7 +94,7 @@
               (|ElementaryFunctionSign| 16 8) (5 . |sign|) (10 . |nonQsign|)
               (|Union| 17 '"failed") (15 . |retractIfCan|) (|Integer|)
               (|Fraction| 16) (20 . |sign|) (25 . |sign|) (30 . |retractIfCan|)
-              (35 . |sign|) (|Boolean|) (40 . |zero?|) (45 . |One|) (49 . =)
+              (35 . |sign|) (|Boolean|) (40 . |zero?|) (45 . |1|) (49 . =)
               (55 . -) (|String|) |TOOLSIGN;direction;SI;6|)
            '#(|sign| 60 |nonQsign| 65 |direction| 70) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))

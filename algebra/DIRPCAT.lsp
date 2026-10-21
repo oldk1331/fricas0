@@ -101,9 +101,9 @@
                                                           ((|OrderedSet|)
                                                            (|has| |t#2|
                                                                   (|OrderedSet|)))
-                                                          ((|OrderedAbelianMonoid|)
+                                                          ((|OrderedAbelianSemiGroup|)
                                                            (|has| |t#2|
-                                                                  (|OrderedAbelianMonoid|)))
+                                                                  (|OrderedAbelianSemiGroup|)))
                                                           ((|OrderedAbelianMonoidSup|)
                                                            (|has| |t#2|
                                                                   (|OrderedAbelianMonoidSup|))))

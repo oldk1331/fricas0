@@ -9,9 +9,9 @@
         ((|g| (|Vector| (|Matrix| R)))
          (% (|Vector| (|Matrix| (|Polynomial| R)))))
         (SPROG
-         ((|l| (|List| (|Matrix| (|Polynomial| R))))
-          (|m2| (|Matrix| (|Polynomial| R))) (#1=#:G8 NIL) (|m| NIL)
-          (|lim| (|List| (|Matrix| R))))
+         ((|lim| (|List| (|Matrix| R))) (|m| NIL) (#1=#:G9 NIL)
+          (|m2| (|Matrix| (|Polynomial| R)))
+          (|l| (|List| (|Matrix| (|Polynomial| R)))))
          (SEQ (LETT |lim| (SPADCALL |g| (QREFELT % 13))) (LETT |l| NIL)
               (SEQ (LETT |m| NIL) (LETT #1# |lim|) G190
                    (COND
@@ -29,9 +29,9 @@
         ((|g| (|Vector| (|Matrix| R)))
          (% (|Vector| (|Matrix| (|Fraction| (|Polynomial| R))))))
         (SPROG
-         ((|l| (|List| (|Matrix| (|Fraction| (|Polynomial| R)))))
-          (|m3| (|Matrix| (|Fraction| (|Polynomial| R)))) (#1=#:G15 NIL)
-          (|m| NIL) (|lim| (|List| (|Matrix| R))))
+         ((|lim| (|List| (|Matrix| R))) (|m| NIL) (#1=#:G17 NIL)
+          (|m3| (|Matrix| (|Fraction| (|Polynomial| R))))
+          (|l| (|List| (|Matrix| (|Fraction| (|Polynomial| R))))))
          (SEQ (LETT |lim| (SPADCALL |g| (QREFELT % 13))) (LETT |l| NIL)
               (SEQ (LETT |m| NIL) (LETT #1# |lim|) G190
                    (COND
@@ -48,7 +48,7 @@
 (DECLAIM (NOTINLINE |CoerceVectorMatrixPackage;|)) 
 
 (DEFUN |CoerceVectorMatrixPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|CoerceVectorMatrixPackage| DV$1))
@@ -62,9 +62,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |CoerceVectorMatrixPackage| (#1=#:G16)
+(DEFUN |CoerceVectorMatrixPackage| (#1=#:G18)
   (SPROG NIL
-         (PROG (#2=#:G17)
+         (PROG (#2=#:G19)
            (RETURN
             (COND
              ((LETT #2#

@@ -1,6 +1,6 @@
 
-(PUT '|MKUCFUNC;func| '|SPADreplace|
-     '(XLAM (|name| |x|) (FUNCALL |name| |x| NIL))) 
+(MAKEPROP '|MKUCFUNC;func| '|SPADreplace|
+          '(XLAM (|name| |x|) (FUNCALL |name| |x| NIL))) 
 
 (SDEFUN |MKUCFUNC;func| ((|name| (|Symbol|)) (|x| (D)) (% (I)))
         (FUNCALL |name| |x| NIL)) 
@@ -38,7 +38,7 @@
 (DECLAIM (NOTINLINE |MakeUnaryCompiledFunction;|)) 
 
 (DEFUN |MakeUnaryCompiledFunction;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

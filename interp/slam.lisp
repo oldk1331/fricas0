@@ -3,6 +3,17 @@
 
 (IN-PACKAGE "BOOT")
 
+; report_bad_count(args) == system_error("S2IM0019",
+;     '"Bad cache count ( %1b ) found when trying to compile function %2b .",
+;     args)
+
+(DEFUN |report_bad_count| (|args|)
+  (PROG ()
+    (RETURN
+     (|system_error| 'S2IM0019
+      "Bad cache count ( %1b ) found when trying to compile function %2b ."
+      |args|))))
+
 ; reportFunctionCompilation(op,nam,argl,body,isRecursive) ==
 ;   -- for an alternate definition of this function which does not allow
 ;   -- dynamic caching, see SLAMOLD BOOT
@@ -23,11 +34,11 @@
 ;     nam
 ;   num :=
 ;     FIXP cacheCount =>
-;       cacheCount < 1 =>
-;         keyedSystemError("S2IM0019",[cacheCount,op])
+;       cacheCount < 1 => report_bad_count([cacheCount, op])
 ;       cacheCount
-;     keyedSystemError("S2IM0019",[cacheCount,op])
-;   sayKeyedMsg("S2IX0003",[op,num])
+;     report_bad_count([cacheCount, op])
+;   say_msg("S2IX0003",
+;       '"%1bp will cache %2b most recently computed value(s).", [op, num])
 ;   auxfn := mkAuxiliaryName nam
 ;   g1:= GENSYM()  --argument or argument list
 ;   [arg,computeValue] :=
@@ -111,13 +122,12 @@
                      ((FIXP |cacheCount|)
                       (COND
                        ((< |cacheCount| 1)
-                        (|keyedSystemError| 'S2IM0019
-                         (LIST |cacheCount| |op|)))
+                        (|report_bad_count| (LIST |cacheCount| |op|)))
                        (#1# |cacheCount|)))
-                     (#1#
-                      (|keyedSystemError| 'S2IM0019
-                       (LIST |cacheCount| |op|)))))
-            (|sayKeyedMsg| 'S2IX0003 (LIST |op| |num|))
+                     (#1# (|report_bad_count| (LIST |cacheCount| |op|)))))
+            (|say_msg| 'S2IX0003
+             "%1bp will cache %2b most recently computed value(s)."
+             (LIST |op| |num|))
             (SETQ |auxfn| (|mkAuxiliaryName| |nam|))
             (SETQ |g1| (GENSYM))
             (SETQ |LETTMP#1|
@@ -188,7 +198,8 @@
      (COND ((SETQ |n| (LASSOC |fn| |$cacheAlist|)) |n|) ('T |$cacheCount|)))))
 
 ; reportFunctionCacheAll(op,nam,argl,body) ==
-;   sayKeyedMsg("S2IX0004",[op])
+;   say_msg("S2IX0004",
+;       '"%1bp will cache all previously computed values.", [op])
 ;   auxfn:= mkAuxiliaryName nam
 ;   g1:= GENSYM()  --argument or argument list
 ;   [arg,computeValue] :=
@@ -222,7 +233,8 @@
          |cacheVector|)
     (RETURN
      (PROGN
-      (|sayKeyedMsg| 'S2IX0004 (LIST |op|))
+      (|say_msg| 'S2IX0004 "%1bp will cache all previously computed values."
+       (LIST |op|))
       (SETQ |auxfn| (|mkAuxiliaryName| |nam|))
       (SETQ |g1| (GENSYM))
       (SETQ |LETTMP#1|
@@ -433,7 +445,8 @@
 ;         ['ELT, ['LIST, :initCode], ['sub_SI, n, sharpArg]]]
 ;       phrase5:= ['(QUOTE T),['recurrenceError,MKQ op,sharpArg]]
 ;       ['PROGN,:preset,['COND,phrase1,phrase2,phrase3,phrase4,phrase5]]
-;   sayKeyedMsg("S2IX0001",[op])
+;   say_msg("S2IX0001",
+;           '"Compiling function %1bp as a recurrence relation.", [op])
 ;   compileInteractive computeFunction
 ;   compileInteractive mainFunction
 ;   cacheType:= 'recurrence
@@ -630,7 +643,8 @@
                                     |phrase4| |phrase5|)
                               NIL)))))
       (SETQ |mainFunction| (LIST |nam| (LIST 'LAMBDA |margl| |mbody|)))
-      (|sayKeyedMsg| 'S2IX0001 (LIST |op|))
+      (|say_msg| 'S2IX0001 "Compiling function %1bp as a recurrence relation."
+       (LIST |op|))
       (|compileInteractive| |computeFunction|)
       (|compileInteractive| |mainFunction|)
       (SETQ |cacheType| '|recurrence|)
@@ -655,10 +669,14 @@
 
 (DEFUN |nodeCount| (|x|) (PROG () (RETURN (NUMOFNODES |x|))))
 
-; recurrenceError(op,arg) == throwKeyedMsg("S2IX0002",[op,arg])
+; recurrenceError(op,arg) == throw_msg("S2IX0002",
+;     '"You did not define %1bp for argument %2b .", [op, arg])
 
 (DEFUN |recurrenceError| (|op| |arg|)
-  (PROG () (RETURN (|throwKeyedMsg| 'S2IX0002 (LIST |op| |arg|)))))
+  (PROG ()
+    (RETURN
+     (|throw_msg| 'S2IX0002 "You did not define %1bp for argument %2b ."
+      (LIST |op| |arg|)))))
 
 ; mkCacheVec(op,nam,kind,resetCode,countCode) ==
 ;   [op,nam,kind,resetCode,countCode]
@@ -673,7 +691,7 @@
 ;     $e:= putHist(x,'localModemap,nil,$e)
 ;     $e:= putHist(x,'mapBody,nil,$e)
 ;     $e:= putHist(x,'localVars,nil,$e)
-;     sayKeyedMsg("S2IX0007",[x])
+;     say_msg("S2IX0007", '"Compiled code for %1bp has been cleared.", [x])
 
 (DEFUN |clearCache| (|x|)
   (PROG (|map| |sub|)
@@ -701,33 +719,31 @@
          (SETQ |$e| (|putHist| |x| '|localModemap| NIL |$e|))
          (SETQ |$e| (|putHist| |x| '|mapBody| NIL |$e|))
          (SETQ |$e| (|putHist| |x| '|localVars| NIL |$e|))
-         (|sayKeyedMsg| 'S2IX0007 (LIST |x|)))))))))
+         (|say_msg| 'S2IX0007 "Compiled code for %1bp has been cleared."
+          (LIST |x|)))))))))
 
 ; compileInteractive fn ==
-;   if $InteractiveMode then startTimingProcess 'compilation
+;   startTimingProcess('compilation)
 ;   if $reportCompilation then
 ;     sayBrightlyI bright '"Generated LISP code for function:"
 ;     pp fn
-;   optfn :=
-;      $InteractiveMode => timedOptimization fn
-;      fn
+;   optfn := timedOptimization(fn)
 ;   result := comp_quietly(optfn)
-;   if $InteractiveMode then stopTimingProcess 'compilation
+;   stopTimingProcess('compilation)
 ;   result
 
 (DEFUN |compileInteractive| (|fn|)
   (PROG (|optfn| |result|)
     (RETURN
      (PROGN
-      (COND (|$InteractiveMode| (|startTimingProcess| '|compilation|)))
+      (|startTimingProcess| '|compilation|)
       (COND
        (|$reportCompilation|
         (|sayBrightlyI| (|bright| "Generated LISP code for function:"))
         (|pp| |fn|)))
-      (SETQ |optfn|
-              (COND (|$InteractiveMode| (|timedOptimization| |fn|)) ('T |fn|)))
+      (SETQ |optfn| (|timedOptimization| |fn|))
       (SETQ |result| (|comp_quietly| |optfn|))
-      (COND (|$InteractiveMode| (|stopTimingProcess| '|compilation|)))
+      (|stopTimingProcess| '|compilation|)
       |result|))))
 
 ; clearAllSlams x ==

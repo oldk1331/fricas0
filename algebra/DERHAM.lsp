@@ -1,16 +1,16 @@
 
 (SDEFUN |DERHAM;totalDifferential;E%;1|
         ((|f| (|Expression| |CoefRing|)) (% (%)))
-        (SPROG ((|divs| (|List| %)) (#1=#:G10 NIL) (|i| NIL) (#2=#:G9 NIL))
+        (SPROG ((#1=#:G10 NIL) (|i| NIL) (#2=#:G11 NIL) (|divs| (|List| %)))
                (SEQ
                 (LETT |divs|
                       (PROGN
-                       (LETT #2# NIL)
-                       (SEQ (LETT |i| 1) (LETT #1# (QREFELT % 9)) G190
-                            (COND ((|greater_SI| |i| #1#) (GO G191)))
+                       (LETT #1# NIL)
+                       (SEQ (LETT |i| 1) (LETT #2# (QREFELT % 9)) G190
+                            (COND ((|greater_SI| |i| #2#) (GO G191)))
                             (SEQ
                              (EXIT
-                              (LETT #2#
+                              (LETT #1#
                                     (CONS
                                      (SPADCALL
                                       (SPADCALL |f|
@@ -19,9 +19,9 @@
                                                 (QREFELT % 15))
                                       (SPADCALL |i| (QREFELT % 17))
                                       (QREFELT % 18))
-                                     #2#))))
+                                     #1#))))
                             (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                            (EXIT (NREVERSE #2#)))))
+                            (EXIT (NREVERSE #1#)))))
                 (EXIT (SPADCALL (ELT % 19) |divs| (QREFELT % 22)))))) 
 
 (SDEFUN |DERHAM;termDiff| ((|r| (|Expression| |CoefRing|)) (|e| (%)) (% (%)))
@@ -55,27 +55,27 @@
 
 (SDEFUN |DERHAM;displayList| ((|x| (|ExtAlgBasis|)) (% (|OutputForm|)))
         (SPROG
-         ((#1=#:G25 NIL) (|i| NIL) (#2=#:G24 NIL) (|le| (|List| (|Integer|))))
+         ((|le| (|List| (|Integer|))) (#1=#:G28 NIL) (|i| NIL) (#2=#:G29 NIL))
          (SEQ (LETT |le| (SPADCALL |x| (QREFELT % 45)))
               (EXIT
                (SPADCALL (ELT % 47)
                          (PROGN
-                          (LETT #2# NIL)
-                          (SEQ (LETT |i| 1) (LETT #1# (QREFELT % 9)) G190
-                               (COND ((|greater_SI| |i| #1#) (GO G191)))
+                          (LETT #1# NIL)
+                          (SEQ (LETT |i| 1) (LETT #2# (QREFELT % 9)) G190
+                               (COND ((|greater_SI| |i| #2#) (GO G191)))
                                (SEQ
                                 (EXIT
                                  (COND
                                   ((EQL (SPADCALL |le| |i| (QREFELT % 48)) 1)
-                                   (LETT #2#
+                                   (LETT #1#
                                          (CONS
                                           (SPADCALL
                                            (SPADCALL (QREFELT % 42) |i|
                                                      (QREFELT % 13))
                                            (QREFELT % 49))
-                                          #2#))))))
+                                          #1#))))))
                                (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                               (EXIT (NREVERSE #2#))))
+                               (EXIT (NREVERSE #1#))))
                          (QREFELT % 52)))))) 
 
 (SDEFUN |DERHAM;makeTerm|
@@ -90,7 +90,7 @@
           (SPADCALL (SPADCALL |r| (QREFELT % 55)) (|DERHAM;displayList| |x| %)
                     (QREFELT % 47))))) 
 
-(PUT '|DERHAM;terms| '|SPADreplace| '(XLAM (|a|) |a|)) 
+(MAKEPROP '|DERHAM;terms| '|SPADreplace| '(XLAM (|a|) |a|)) 
 
 (SDEFUN |DERHAM;terms|
         ((|a| (%))
@@ -102,11 +102,11 @@
 
 (SDEFUN |DERHAM;coerce;%Of;8| ((|a| (%)) (% (|OutputForm|)))
         (SPROG
-         ((#1=#:G38 NIL) (|t| NIL) (#2=#:G37 NIL)
-          (|ta|
+         ((|ta|
            (|List|
             (|Record| (|:| |k| (|ExtAlgBasis|))
-                      (|:| |c| (|Expression| |CoefRing|))))))
+                      (|:| |c| (|Expression| |CoefRing|)))))
+          (#1=#:G41 NIL) (|t| NIL) (#2=#:G42 NIL))
          (SEQ
           (COND
            ((SPADCALL |a| (|spadConstant| % 60) (QREFELT % 28))
@@ -121,29 +121,29 @@
                    (#3#
                     (SPADCALL (ELT % 62)
                               (PROGN
-                               (LETT #2# NIL)
-                               (SEQ (LETT |t| NIL) (LETT #1# |ta|) G190
+                               (LETT #1# NIL)
+                               (SEQ (LETT |t| NIL) (LETT #2# |ta|) G190
                                     (COND
-                                     ((OR (ATOM #1#)
-                                          (PROGN (LETT |t| (CAR #1#)) NIL))
+                                     ((OR (ATOM #2#)
+                                          (PROGN (LETT |t| (CAR #2#)) NIL))
                                       (GO G191)))
                                     (SEQ
                                      (EXIT
-                                      (LETT #2#
+                                      (LETT #1#
                                             (CONS
                                              (|DERHAM;makeTerm| (QCDR |t|)
                                               (QCAR |t|) %)
-                                             #2#))))
-                                    (LETT #1# (CDR #1#)) (GO G190) G191
-                                    (EXIT (NREVERSE #2#))))
+                                             #1#))))
+                                    (LETT #2# (CDR #2#)) (GO G190) G191
+                                    (EXIT (NREVERSE #1#))))
                               (QREFELT % 52))))))))))) 
 
 (DECLAIM (NOTINLINE |DeRhamComplex;|)) 
 
 (DEFUN |DeRhamComplex;| (|#1| |#2|)
   (SPROG
-   ((#1=#:G47 NIL) (|liv| NIL) (#2=#:G46 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL)
-    (DV$2 NIL) (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL) (#1=#:G50 NIL)
+    (|liv| NIL) (#2=#:G51 NIL))
    (SEQ
     (PROGN
      (LETT DV$1 (|devaluate| |#1|))
@@ -162,19 +162,19 @@
      (QSETREFV % 9 (LENGTH |#2|))
      (QSETREFV % 42
                (PROGN
-                (LETT #2# NIL)
-                (SEQ (LETT |liv| NIL) (LETT #1# |#2|) G190
+                (LETT #1# NIL)
+                (SEQ (LETT |liv| NIL) (LETT #2# |#2|) G190
                      (COND
-                      ((OR (ATOM #1#) (PROGN (LETT |liv| (CAR #1#)) NIL))
+                      ((OR (ATOM #2#) (PROGN (LETT |liv| (CAR #2#)) NIL))
                        (GO G191)))
-                     (SEQ (EXIT (LETT #2# (CONS (|DERHAM;d| |liv| %) #2#))))
-                     (LETT #1# (CDR #1#)) (GO G190) G191
-                     (EXIT (NREVERSE #2#)))))
+                     (SEQ (EXIT (LETT #1# (CONS (|DERHAM;d| |liv| %) #1#))))
+                     (LETT #2# (CDR #2#)) (GO G190) G191
+                     (EXIT (NREVERSE #1#)))))
      %)))) 
 
-(DEFUN |DeRhamComplex| (&REST #1=#:G48)
+(DEFUN |DeRhamComplex| (&REST #1=#:G52)
   (SPROG NIL
-         (PROG (#2=#:G49)
+         (PROG (#2=#:G53)
            (RETURN
             (COND
              ((LETT #2#
@@ -198,7 +198,7 @@
               (6 . |differentiate|) (|NonNegativeInteger|) (12 . |generator|)
               (17 . *) (23 . +) (|Mapping| $$ $$ $$) (|List| $$)
               (29 . |reduce|) |DERHAM;totalDifferential;E%;1| (35 . *)
-              (41 . |Zero|) (45 . |Zero|) (|Boolean|) (49 . =)
+              (41 . |0|) (45 . |0|) (|Boolean|) (49 . =)
               (55 . |leadingCoefficient|) (60 . |leadingBasisTerm|)
               (65 . |reductum|) |DERHAM;exteriorDifferential;2%;3|
               (70 . |name|) (|String|) (75 . |string|) (|List| %)
@@ -209,8 +209,8 @@
               (|ExtAlgBasis|) (101 . |exponents|) (|OutputForm|) (106 . *)
               (112 . |elt|) (118 . |coerce|) (|Mapping| 46 46 46) (|List| 46)
               (123 . |reduce|) (129 . |Nul|) (134 . =) (140 . |coerce|)
-              (145 . |One|) (149 . |One|) (153 . |One|) (157 . =)
-              (163 . |Zero|) (167 . |coerce|) (172 . +) |DERHAM;coerce;%Of;8|
+              (145 . |1|) (149 . |1|) (153 . |1|) (157 . =) (163 . |0|)
+              (167 . |coerce|) (172 . +) |DERHAM;coerce;%Of;8|
               (|PositiveInteger|) (|Union| % '"failed") (|Union| 14 '"failed")
               (|Mapping| 14 14))
            '#(~= 178 |zero?| 184 |totalDifferential| 189 |subtractIfCan| 194
@@ -221,19 +221,18 @@
               |homogeneous?| 295 |generator| 300 |exteriorDifferential| 305
               |degree| 310 |commutator| 315 |coerce| 321 |coefficient| 336
               |characteristic| 342 |associator| 346 |antiCommutator| 353
-              |annihilate?| 359 ^ 365 |Zero| 377 |One| 381 = 385 - 391 + 402 *
-              408)
+              |annihilate?| 359 ^ 365 = 377 |1| 383 |0| 387 - 391 + 402 * 408)
            'NIL
            (CONS
             (|makeByteWordVec2| 1
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0))
+                                  0 0 0 0 0))
             (CONS
              '#(|LeftAlgebra&| NIL NIL |Rng&| NIL NIL |NonAssociativeRing&| NIL
                 NIL |NonAssociativeRng&| NIL |AbelianGroup&| NIL NIL NIL
                 |AbelianMonoid&| |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL
-                |AbelianSemiGroup&| |Magma&| |SetCategory&| |RetractableTo&|
-                NIL |BasicType&| NIL NIL)
+                |AbelianSemiGroup&| |SetWithZero&| |Magma&| |SetCategory&|
+                |RetractableTo&| NIL |BasicType&| NIL NIL)
              (CONS
               '#((|LeftAlgebra| (|Expression| 6)) (|Ring|) (|SemiRing|) (|Rng|)
                  (|SemiRng|) (|BiModule| $$ $$) (|NonAssociativeRing|)
@@ -241,9 +240,10 @@
                  (|LeftModule| (|Expression| 6)) (|AbelianGroup|)
                  (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
                  (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
-                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|) (|Magma|)
-                 (|SetCategory|) (|RetractableTo| (|Expression| 6))
-                 (|CoercibleTo| 46) (|BasicType|) (|unitsKnown|)
+                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|)
+                 (|SetWithZero|) (|Magma|) (|SetCategory|)
+                 (|RetractableTo| (|Expression| 6)) (|CoercibleTo| 46)
+                 (|BasicType|) (|unitsKnown|)
                  (|CoercibleFrom| (|Expression| 6)))
               (|makeByteWordVec2| 67
                                   '(2 12 10 0 11 13 2 14 0 0 10 15 1 5 0 16 17
@@ -265,8 +265,8 @@
                                     27 0 1 1 0 0 16 1 1 0 0 0 32 1 0 16 0 1 2 0
                                     0 0 0 1 1 0 46 0 63 1 0 0 11 1 1 0 0 14 1 2
                                     0 14 0 0 1 0 0 16 1 3 0 0 0 0 0 1 2 0 0 0 0
-                                    1 2 0 27 0 0 1 2 0 0 0 64 1 2 0 0 0 16 1 0
-                                    0 0 25 0 0 0 56 2 0 27 0 0 28 1 0 0 0 1 2 0
+                                    1 2 0 27 0 0 1 2 0 0 0 64 1 2 0 0 0 16 1 2
+                                    0 27 0 0 28 0 0 0 56 0 0 0 25 1 0 0 0 1 2 0
                                     0 0 0 1 2 0 0 0 0 19 2 0 0 64 0 1 2 0 0 0 0
                                     24 2 0 0 11 0 1 2 0 0 16 0 1 2 0 0 14 0
                                     18)))))

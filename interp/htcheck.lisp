@@ -73,14 +73,12 @@
 ; buildHtMacroTable() ==
 ;   $htMacroTable := MAKE_HASHTABLE('EQUAL)
 ;   fn := CONCAT($spadroot, '"/share/hypertex/pages/util.ht")
-;   if PROBE_-FILE(fn) then
-;     instream := MAKE_INSTREAM(fn)
-;     while not EOFP instream repeat
-;       line := read_line instream
+;   if instream := open_stream(fn, 'input, false) then
+;     while (line := read_line(instream)) repeat
 ;       getHtMacroItem line is [string,:numOfArgs] =>
 ;         HPUT($htMacroTable,string,numOfArgs)
 ;     for [s,:n] in $primitiveHtCommands repeat HPUT($htMacroTable,s,n)
-;     SHUT instream
+;     CLOSE(instream)
 ;   else
 ;     sayBrightly '"Warning: HyperTeX macro table not found"
 ;   $htMacroTable
@@ -92,21 +90,20 @@
       (SETQ |$htMacroTable| (MAKE_HASHTABLE 'EQUAL))
       (SETQ |fn| (CONCAT |$spadroot| "/share/hypertex/pages/util.ht"))
       (COND
-       ((PROBE-FILE |fn|) (SETQ |instream| (MAKE_INSTREAM |fn|))
+       ((SETQ |instream| (|open_stream| |fn| '|input| NIL))
         ((LAMBDA ()
            (LOOP
-            (COND ((EOFP |instream|) (RETURN NIL))
+            (COND ((NOT (SETQ |line| (|read_line| |instream|))) (RETURN NIL))
                   (#1='T
-                   (PROGN
-                    (SETQ |line| (|read_line| |instream|))
-                    (COND
-                     ((PROGN
-                       (SETQ |ISTMP#1| (|getHtMacroItem| |line|))
-                       (AND (CONSP |ISTMP#1|)
-                            (PROGN
-                             (SETQ |string| (CAR |ISTMP#1|))
-                             (SETQ |numOfArgs| (CDR |ISTMP#1|))
-                             #1#)))
+                   (COND
+                    ((PROGN
+                      (SETQ |ISTMP#1| (|getHtMacroItem| |line|))
+                      (AND (CONSP |ISTMP#1|)
+                           (PROGN
+                            (SETQ |string| (CAR |ISTMP#1|))
+                            (SETQ |numOfArgs| (CDR |ISTMP#1|))
+                            #1#)))
+                     (IDENTITY
                       (HPUT |$htMacroTable| |string| |numOfArgs|)))))))))
         ((LAMBDA (|bfVar#2| |bfVar#1|)
            (LOOP
@@ -123,7 +120,7 @@
                    (HPUT |$htMacroTable| |s| |n|))))
             (SETQ |bfVar#2| (CDR |bfVar#2|))))
          |$primitiveHtCommands| NIL)
-        (SHUT |instream|))
+        (CLOSE |instream|))
        (#1# (|sayBrightly| "Warning: HyperTeX macro table not found")))
       |$htMacroTable|))))
 
@@ -137,9 +134,7 @@
 ;     i = m => 0
 ;     j := charPosition(char '_],line,i + 1)
 ;     digitString := SUBSTRING(line,i + 1,j - i - 1)
-;     and/[DIGITP digitString.i for i in 0..MAXINDEX digitString]
-;       => PARSE_-INTEGER digitString
-;     return nil
+;     string2Integer(digitString)
 ;   [command,:numOfArgs]
 
 (DEFUN |getHtMacroItem| (|line|)
@@ -163,21 +158,7 @@
                               (SETQ |digitString|
                                       (SUBSTRING |line| (+ |i| 1)
                                                  (- (- |j| |i|) 1)))
-                              (COND
-                               (((LAMBDA (|bfVar#4| |bfVar#3| |i|)
-                                   (LOOP
-                                    (COND
-                                     ((> |i| |bfVar#3|) (RETURN |bfVar#4|))
-                                     (#1#
-                                      (PROGN
-                                       (SETQ |bfVar#4|
-                                               (DIGITP
-                                                (ELT |digitString| |i|)))
-                                       (COND ((NOT |bfVar#4|) (RETURN NIL))))))
-                                    (SETQ |i| (+ |i| 1))))
-                                 T (MAXINDEX |digitString|) 0)
-                                (PARSE-INTEGER |digitString|))
-                               (#1# (RETURN NIL))))))))
+                              (|string2Integer| |digitString|))))))
              (CONS |command| |numOfArgs|)))))))
 
 ; spadSysChoose(tree,form) ==     --tree is ((word . tree) ..)

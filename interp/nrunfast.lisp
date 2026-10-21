@@ -67,7 +67,7 @@
            ('T (|replaceGoGetSlot| (CDR |f|)))))))
 
 ; newLookupInTable(op,sig,dollar,[domain,opvec],flag) ==
-;   dollar = nil => systemError()
+;   dollar = nil => systemError nil
 ;   $lookupDefaults = true =>
 ;       -- lookup first in my cats
 ;       newLookupInCategories(op, sig, domain, dollar, true)
@@ -144,7 +144,7 @@
      (PROGN
       (SETQ |domain| (CAR |bfVar#3|))
       (SETQ |opvec| (CADR |bfVar#3|))
-      (COND ((NULL |dollar|) (|systemError|))
+      (COND ((NULL |dollar|) (|systemError| NIL))
             ((EQUAL |$lookupDefaults| T)
              (OR (|newLookupInCategories| |op| |sig| |domain| |dollar| T)
                  (|newLookupInAddChain| |op| |sig| |domain| |dollar|)))
@@ -377,7 +377,7 @@
 ; newLookupInCategories(op, sig, dom, dollar, check_num) ==
 ;   slot4 := dom.4
 ;   catVec := CADR slot4
-;   SIZE catVec = 0 => nil                      --early exit if no categories
+;   #catVec = 0 => nil                      --early exit if no categories
 ;   INTEGERP IFCDR catVec.0 => BREAK()
 ;   $lookupDefaults : local := nil
 ;   if $monitorNewWorld = true then sayBrightly concat('"----->",
@@ -404,7 +404,7 @@
 ;             null code => nil
 ;             byteVector := CDDDR infovec.3
 ;             endPos :=
-;               code+2 > max => SIZE byteVector
+;               code+2 > max => #byteVector
 ;               opvec.(code+2)
 ;             check_num and not(nrunNumArgCheck(#(QCDR sig), byteVector,
 ;                                               opvec.code, endPos)) => nil
@@ -441,7 +441,7 @@
      (PROGN
       (SETQ |slot4| (ELT |dom| 4))
       (SETQ |catVec| (CADR |slot4|))
-      (COND ((EQL (SIZE |catVec|) 0) NIL)
+      (COND ((EQL (LENGTH |catVec|) 0) NIL)
             ((INTEGERP (IFCDR (ELT |catVec| 0))) (BREAK))
             (#1='T
              (PROGN
@@ -503,7 +503,7 @@
                                                                         (+
                                                                          |code|
                                                                          2))
-                                                                     (SIZE
+                                                                     (LENGTH
                                                                       |byteVector|))
                                                                     (#1#
                                                                      (ELT
@@ -1144,7 +1144,9 @@
 ;   get_database(opOf(domform), 'ASHARP?) => fn(domform, catOrAtt) where
 ;     fn(a,b) ==
 ;       categoryForm?(a) => assoc(b, ancestors_of_cat(a, nil))
-;       isPartialMode a => throwKeyedMsg("S2IS0025",NIL)
+;       isPartialMode(a) => throw_msg("S2IS0025", CONCAT(
+;           '"You can only use %b has %d to query the properties of a fully",
+;           '" specified type. You cannot query a category."), [])
 ;       b is ["SIGNATURE",:opSig] =>
 ;         HasSignature(evalDomain a,opSig)
 ;       b is ["ATTRIBUTE",attr] =>
@@ -1324,7 +1326,12 @@
   (PROG (|opSig| |ISTMP#1| |attr|)
     (RETURN
      (COND ((|categoryForm?| |a|) (|assoc| |b| (|ancestors_of_cat| |a| NIL)))
-           ((|isPartialMode| |a|) (|throwKeyedMsg| 'S2IS0025 NIL))
+           ((|isPartialMode| |a|)
+            (|throw_msg| 'S2IS0025
+             (CONCAT
+              "You can only use %b has %d to query the properties of a fully"
+              " specified type. You cannot query a category.")
+             NIL))
            ((AND (CONSP |b|) (EQ (CAR |b|) 'SIGNATURE)
                  (PROGN (SETQ |opSig| (CDR |b|)) #1='T))
             (|HasSignature| (|evalDomain| |a|) |opSig|))

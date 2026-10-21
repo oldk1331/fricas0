@@ -1,5 +1,5 @@
 
-(PUT '|EXPEXPAN;coeff| '|SPADreplace| '(XLAM (|term|) (QVELT |term| 0))) 
+(MAKEPROP '|EXPEXPAN;coeff| '|SPADreplace| '(XLAM (|term|) (QVELT |term| 0))) 
 
 (SDEFUN |EXPEXPAN;coeff|
         ((|term|
@@ -14,7 +14,7 @@
          (% (|UnivariatePuiseuxSeries| FE |var| |cen|)))
         (QVELT |term| 0)) 
 
-(PUT '|EXPEXPAN;exponent| '|SPADreplace| '(XLAM (|term|) (QVELT |term| 1))) 
+(MAKEPROP '|EXPEXPAN;exponent| '|SPADreplace| '(XLAM (|term|) (QVELT |term| 1))) 
 
 (SDEFUN |EXPEXPAN;exponent|
         ((|term|
@@ -46,12 +46,13 @@
         ((|f| (%))
          (% (|Union| (|UnivariatePuiseuxSeries| FE |var| |cen|) "failed")))
         (SPROG
-         ((|fff| (|Union| (|UnivariatePuiseuxSeries| FE |var| |cen|) "failed"))
-          (|ff|
+         ((|ff|
            (|Union|
             (|UnivariatePuiseuxSeriesWithExponentialSingularity| R FE |var|
                                                                  |cen|)
-            "failed")))
+            "failed"))
+          (|fff|
+           (|Union| (|UnivariatePuiseuxSeries| FE |var| |cen|) "failed")))
          (SEQ (LETT |ff| (|EXPEXPAN;upxssingIfCan| |f| %))
               (EXIT
                (COND ((QEQCAR |ff| 1) (CONS 1 "failed"))
@@ -105,9 +106,9 @@
          (|den| (|UnivariatePuiseuxSeries| FE |var| |cen|))
          (% (|Union| (|OrderedCompletion| FE) "failed")))
         (SPROG
-         ((#1=#:G48 NIL) (|sig| (|Union| (|Integer|) "failed")) (|coef| (FE))
-          (|ord| (|Fraction| (|Integer|)))
-          (|series| (|UnivariatePuiseuxSeries| FE |var| |cen|)))
+         ((|series| (|UnivariatePuiseuxSeries| FE |var| |cen|))
+          (|ord| (|Fraction| (|Integer|))) (|coef| (FE))
+          (|sig| (|Union| (|Integer|) "failed")) (#1=#:G57 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |series| (SPADCALL |num| |den| (QREFELT % 37)))
@@ -135,7 +136,7 @@
                                   ((QEQCAR |sig| 1)
                                    (PROGN
                                     (LETT #1# (CONS 1 "failed"))
-                                    (GO #3=#:G47)))
+                                    (GO #3=#:G56)))
                                   ((EQL (QCDR |sig|) 1)
                                    (CONS 0 (SPADCALL (QREFELT % 54))))
                                   (#2#
@@ -149,8 +150,8 @@
          (|den| (|UnivariatePuiseuxSeries| FE |var| |cen|))
          (% (|Union| (|OrderedCompletion| FE) "failed")))
         (SPROG
-         ((#1=#:G61 NIL) (|sig| (|Union| (|Integer|) "failed")) (|cc| (FE))
-          (|denOrd| #2=(|Fraction| (|Integer|))) (|numOrd| #2#))
+         ((|numOrd| #1=(|Fraction| (|Integer|))) (|denOrd| #1#) (|cc| (FE))
+          (|sig| (|Union| (|Integer|) "failed")) (#2=#:G70 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |numOrd| (SPADCALL |num| (QREFELT % 15) (QREFELT % 39)))
@@ -185,41 +186,27 @@
                                  (COND
                                   ((QEQCAR |sig| 1)
                                    (PROGN
-                                    (LETT #1# (CONS 1 "failed"))
-                                    (GO #4=#:G60)))
+                                    (LETT #2# (CONS 1 "failed"))
+                                    (GO #4=#:G69)))
                                   ((EQL (QCDR |sig|) 1)
                                    (CONS 0 (SPADCALL (QREFELT % 54))))
                                   (#3#
                                    (CONS 0
                                          (SPADCALL
                                           (QREFELT % 55))))))))))))))))))))
-          #4# (EXIT #1#)))) 
+          #4# (EXIT #2#)))) 
 
 (SDEFUN |EXPEXPAN;limitPlus;%U;10|
         ((|f| (%)) (% (|Union| (|OrderedCompletion| FE) "failed")))
         (SPROG
-         ((#1=#:G85 NIL) (|sig| (|Union| (|Integer|) "failed"))
-          (|expCoef| (FE))
-          (|exponDiff| (|ExponentialOfUnivariatePuiseuxSeries| FE |var| |cen|))
-          (|denCoef| #2=(|UnivariatePuiseuxSeries| FE |var| |cen|))
-          (|numCoef| #2#)
-          (|denExpon|
-           #3=(|ExponentialOfUnivariatePuiseuxSeries| FE |var| |cen|))
-          (|numExpon| #3#) (|denType| #4=(|String|))
-          (|denTerm|
-           (|Record|
-            (|:| |%term|
-                 (|Record|
-                  (|:| |%coef| (|UnivariatePuiseuxSeries| FE |var| |cen|))
-                  (|:| |%expon|
-                       (|ExponentialOfUnivariatePuiseuxSeries| FE |var| |cen|))
-                  (|:| |%expTerms|
-                       (|List|
-                        (|Record| (|:| |k| (|Fraction| (|Integer|)))
-                                  (|:| |c| FE))))))
-            (|:| |%type| (|String|))))
-          (|denomTerm|
-           #5=(|Union|
+         ((|den|
+           (|UnivariatePuiseuxSeriesWithExponentialSingularity| R FE |var|
+                                                                |cen|))
+          (|num|
+           (|UnivariatePuiseuxSeriesWithExponentialSingularity| R FE |var|
+                                                                |cen|))
+          (|numerTerm|
+           #1=(|Union|
                (|Record|
                 (|:| |%term|
                      (|Record|
@@ -231,9 +218,8 @@
                            (|List|
                             (|Record| (|:| |k| (|Fraction| (|Integer|)))
                                       (|:| |c| FE))))))
-                (|:| |%type| #4#))
+                (|:| |%type| #2=(|String|)))
                "failed"))
-          (|numType| #4#)
           (|numTerm|
            (|Record|
             (|:| |%term|
@@ -246,13 +232,28 @@
                         (|Record| (|:| |k| (|Fraction| (|Integer|)))
                                   (|:| |c| FE))))))
             (|:| |%type| (|String|))))
-          (|numerTerm| #5#)
-          (|num|
-           (|UnivariatePuiseuxSeriesWithExponentialSingularity| R FE |var|
-                                                                |cen|))
-          (|den|
-           (|UnivariatePuiseuxSeriesWithExponentialSingularity| R FE |var|
-                                                                |cen|)))
+          (|numType| #2#) (|denomTerm| #1#)
+          (|denTerm|
+           (|Record|
+            (|:| |%term|
+                 (|Record|
+                  (|:| |%coef| (|UnivariatePuiseuxSeries| FE |var| |cen|))
+                  (|:| |%expon|
+                       (|ExponentialOfUnivariatePuiseuxSeries| FE |var| |cen|))
+                  (|:| |%expTerms|
+                       (|List|
+                        (|Record| (|:| |k| (|Fraction| (|Integer|)))
+                                  (|:| |c| FE))))))
+            (|:| |%type| (|String|))))
+          (|denType| #2#)
+          (|numExpon|
+           #3=(|ExponentialOfUnivariatePuiseuxSeries| FE |var| |cen|))
+          (|denExpon| #3#)
+          (|numCoef| #4=(|UnivariatePuiseuxSeries| FE |var| |cen|))
+          (|denCoef| #4#)
+          (|exponDiff| (|ExponentialOfUnivariatePuiseuxSeries| FE |var| |cen|))
+          (|expCoef| (FE)) (|sig| (|Union| (|Integer|) "failed"))
+          (#5=#:G104 NIL))
          (SEQ
           (EXIT
            (COND
@@ -328,8 +329,8 @@
                                               (COND
                                                ((QEQCAR |sig| 1)
                                                 (PROGN
-                                                 (LETT #1# (CONS 1 "failed"))
-                                                 (GO #7=#:G84)))
+                                                 (LETT #5# (CONS 1 "failed"))
+                                                 (GO #7=#:G103)))
                                                ((EQL (QCDR |sig|) -1)
                                                 (CONS 0
                                                       (SPADCALL
@@ -382,7 +383,7 @@
                                             (COND
                                              ((QEQCAR |sig| 1)
                                               (PROGN
-                                               (LETT #1# (CONS 1 "failed"))
+                                               (LETT #5# (CONS 1 "failed"))
                                                (GO #7#)))
                                              ((EQL (QCDR |sig|) -1)
                                               (CONS 0
@@ -396,14 +397,14 @@
                                       (|EXPEXPAN;seriesQuotientInfinity|
                                        |numCoef| |denCoef|
                                        %))))))))))))))))))))
-          #7# (EXIT #1#)))) 
+          #7# (EXIT #5#)))) 
 
 (DECLAIM (NOTINLINE |ExponentialExpansion;|)) 
 
 (DEFUN |ExponentialExpansion;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G116 NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL)
-    (DV$2 NIL) (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (#1=#:G135 NIL) (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -419,6 +420,10 @@
                                         (|HasCategory|
                                          (|UnivariatePuiseuxSeriesWithExponentialSingularity|
                                           |#1| |#2| |#3| |#4|)
+                                         '(|CharacteristicZero|))
+                                        (|HasCategory|
+                                         (|UnivariatePuiseuxSeriesWithExponentialSingularity|
+                                          |#1| |#2| |#3| |#4|)
                                          '(|PolynomialFactorizationExplicit|))
                                         (|HasCategory|
                                          (|UnivariatePuiseuxSeriesWithExponentialSingularity|
@@ -431,10 +436,6 @@
                                         (|HasCategory|
                                          (|UnivariatePuiseuxSeriesWithExponentialSingularity|
                                           |#1| |#2| |#3| |#4|)
-                                         '(|CharacteristicZero|))
-                                        (|HasCategory|
-                                         (|UnivariatePuiseuxSeriesWithExponentialSingularity|
-                                          |#1| |#2| |#3| |#4|)
                                          '(|ConvertibleTo| (|InputForm|)))
                                         (|HasCategory|
                                          (|UnivariatePuiseuxSeriesWithExponentialSingularity|
@@ -443,20 +444,7 @@
                                         (|HasCategory|
                                          (|UnivariatePuiseuxSeriesWithExponentialSingularity|
                                           |#1| |#2| |#3| |#4|)
-                                         '(|OrderedIntegralDomain|))
-                                        (|HasCategory|
-                                         (|UnivariatePuiseuxSeriesWithExponentialSingularity|
-                                          |#1| |#2| |#3| |#4|)
-                                         '(|OrderedSet|))
-                                        (OR
-                                         (|HasCategory|
-                                          (|UnivariatePuiseuxSeriesWithExponentialSingularity|
-                                           |#1| |#2| |#3| |#4|)
-                                          '(|OrderedIntegralDomain|))
-                                         (|HasCategory|
-                                          (|UnivariatePuiseuxSeriesWithExponentialSingularity|
-                                           |#1| |#2| |#3| |#4|)
-                                          '(|OrderedSet|)))
+                                         '(|OrderedRing|))
                                         (|HasCategory|
                                          (|UnivariatePuiseuxSeriesWithExponentialSingularity|
                                           |#1| |#2| |#3| |#4|)
@@ -544,16 +532,12 @@
                                               (|HasCategory|
                                                (|UnivariatePuiseuxSeriesWithExponentialSingularity|
                                                 |#1| |#2| |#3| |#4|)
-                                               '(|Comparable|)))
+                                               '(|ComparableRepresentation|)))
                                         (OR #1#
                                             (|HasCategory|
                                              (|UnivariatePuiseuxSeriesWithExponentialSingularity|
                                               |#1| |#2| |#3| |#4|)
-                                             '(|OrderedIntegralDomain|))
-                                            (|HasCategory|
-                                             (|UnivariatePuiseuxSeriesWithExponentialSingularity|
-                                              |#1| |#2| |#3| |#4|)
-                                             '(|OrderedSet|)))))))
+                                             '(|OrderedRing|)))))))
     (|haddProp| |$ConstructorCache| '|ExponentialExpansion|
                 (LIST DV$1 DV$2 DV$3 DV$4) (CONS 1 %))
     (|stuffDomainSlots| %)
@@ -561,12 +545,33 @@
     (QSETREFV % 7 |#2|)
     (QSETREFV % 8 |#3|)
     (QSETREFV % 9 |#4|)
+    (AND (|HasCategory| % '(|CharacteristicZero|))
+         (|augmentPredVector| % 8388608))
     (AND (|HasCategory| % '(|CharacteristicNonZero|))
          (|HasCategory|
           (|UnivariatePuiseuxSeriesWithExponentialSingularity| |#1| |#2| |#3|
                                                                |#4|)
           '(|PolynomialFactorizationExplicit|))
+         (|augmentPredVector| % 16777216))
+    (AND (|HasCategory| % '(|SetWithZero|))
+         (|HasCategory|
+          (|UnivariatePuiseuxSeriesWithExponentialSingularity| |#1| |#2| |#3|
+                                                               |#4|)
+          '(|OrderedRing|))
          (|augmentPredVector| % 33554432))
+    (AND (|HasCategory| % '(|AbelianGroup|))
+         (|HasCategory|
+          (|UnivariatePuiseuxSeriesWithExponentialSingularity| |#1| |#2| |#3|
+                                                               |#4|)
+          '(|OrderedRing|))
+         (|augmentPredVector| % 67108864))
+    (AND
+     (OR (|HasCategory| % '(|CharacteristicZero|))
+         (|HasCategory|
+          (|UnivariatePuiseuxSeriesWithExponentialSingularity| |#1| |#2| |#3|
+                                                               |#4|)
+          '(|RetractableTo| (|Integer|))))
+     (|augmentPredVector| % 134217728))
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 10
               (|Fraction|
@@ -576,9 +581,9 @@
     (QSETREFV % 15 (SPADCALL 1000 1 (QREFELT % 14)))
     %))) 
 
-(DEFUN |ExponentialExpansion| (&REST #1=#:G117)
+(DEFUN |ExponentialExpansion| (&REST #1=#:G136)
   (SPROG NIL
-         (PROG (#2=#:G118)
+         (PROG (#2=#:G137)
            (RETURN
             (COND
              ((LETT #2#
@@ -598,7 +603,7 @@
 (MAKEPROP '|ExponentialExpansion| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL (|Fraction| 16) (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (|local| |#4|) '|Rep| (0 . |One|) (|Integer|)
+              (|local| |#3|) (|local| |#4|) '|Rep| (0 . |1|) (|Integer|)
               (|Fraction| 12) (4 . /) 'ZEROCOUNT
               (|UnivariatePuiseuxSeriesWithExponentialSingularity| 6 7
                                                                    (NRTEVAL
@@ -607,15 +612,15 @@
                                                                    (NRTEVAL
                                                                     (QREFELT %
                                                                              9)))
-              (10 . |denom|) (15 . |One|) (|Boolean|) (19 . =) (25 . |numer|)
+              (10 . |denom|) (15 . |1|) (|Boolean|) (19 . =) (25 . |numer|)
               (|Union| 34 '"failed") (30 . |retractIfCan|)
               |EXPEXPAN;retractIfCan;%U;4| (|Union| % '"failed") (35 . |recip|)
               (40 . /) (46 . |coerce|) (51 . *) |EXPEXPAN;/;2Upswes%;5|
               (57 . /) (63 . *) |EXPEXPAN;/;3%;6|
               (|UnivariatePuiseuxSeries| 7 (NRTEVAL (QREFELT % 8))
                                          (NRTEVAL (QREFELT % 9)))
-              (69 . |coerce|) |EXPEXPAN;coerce;Ups%;7| (74 . /) (80 . |One|)
-              (84 . |order|) (90 . |Zero|) (94 . |Zero|) (98 . >)
+              (69 . |coerce|) |EXPEXPAN;coerce;Ups%;7| (74 . /) (80 . |1|)
+              (84 . |order|) (90 . |0|) (94 . |0|) (98 . >)
               (|OrderedCompletion| 7) (104 . |coerce|) (109 . |coefficient|)
               (|List| 48) (115 . |variables|) (|Symbol|) (120 . |member?|)
               (126 . =) (|Union| 12 '"failed") (|ElementaryFunctionSign| 6 7)
@@ -628,7 +633,7 @@
               (|Union| 62 '"failed") (161 . |dominantTerm|)
               (|ExponentialOfUnivariatePuiseuxSeries| 7 (NRTEVAL (QREFELT % 8))
                                                       (NRTEVAL (QREFELT % 9)))
-              (166 . -) (172 . |Zero|) (176 . =) (182 . |order|)
+              (166 . -) (172 . |0|) (176 . =) (182 . |order|)
               (187 . |coefficient|) |EXPEXPAN;limitPlus;%U;10| (|OutputForm|)
               (|String|) (|PositiveInteger|) (|NonNegativeInteger|)
               (|Record| (|:| |unit| %) (|:| |canonical| %) (|:| |associate| %))
@@ -640,14 +645,15 @@
               (|Record| (|:| |coef1| %) (|:| |coef2| %)) (|Union| 83 '"failed")
               (|Record| (|:| |coef1| %) (|:| |coef2| %) (|:| |generator| %))
               (|Factored| %) (|Union| 16 '#1="failed") (|Mapping| 16 16)
-              (|Record| (|:| |mat| 92) (|:| |vec| (|Vector| 16))) (|Matrix| %)
-              (|Vector| %) (|Matrix| 16) (|Union| 91 '#2="failed")
-              (|InputForm|) (|Pattern| 108) (|Pattern| 12) (|List| 16)
-              (|Equation| 16) (|List| 98) (|Matrix| 12)
-              (|Record| (|:| |mat| 100) (|:| |vec| (|Vector| 12))) (|List| 75)
-              (|PatternMatchResult| 108 %) (|PatternMatchResult| 12 %)
-              (|Factored| 79) (|Union| 107 '#2#) (|List| 79) (|Float|)
-              (|DoubleFloat|) (|Union| 13 '#1#) (|Union| 48 '#1#))
+              (|Matrix| 16) (|Matrix| %)
+              (|Record| (|:| |mat| 89) (|:| |vec| (|Vector| 16))) (|Vector| %)
+              (|Union| 92 '#2="failed") (|InputForm|) (|Pattern| 109)
+              (|Pattern| 12) (|List| 16) (|List| 99) (|Equation| 16)
+              (|Record| (|:| |mat| 101) (|:| |vec| (|Vector| 12)))
+              (|Matrix| 12) (|List| 75) (|PatternMatchResult| 109 %)
+              (|PatternMatchResult| 12 %) (|Union| 106 '#2#) (|List| 79)
+              (|Factored| 79) (|DoubleFloat|) (|Float|) (|Union| 13 '#1#)
+              (|Union| 48 '#1#))
            '#(~= 193 |zero?| 199 |wholePart| 204 |unitNormal| 209
               |unitCanonical| 214 |unit?| 219 |subtractIfCan| 224
               |squareFreePolynomial| 230 |squareFreePart| 235 |squareFree| 240
@@ -667,69 +673,67 @@
               |differentiate| 645 |denominator| 695 |denom| 700 |convert| 705
               |conditionP| 730 |commutator| 735 |coerce| 741 |charthRoot| 776
               |characteristic| 781 |ceiling| 785 |associator| 790 |associates?|
-              797 |antiCommutator| 803 |annihilate?| 809 |abs| 815 ^ 820 |Zero|
-              838 |One| 842 D 846 >= 896 > 902 = 908 <= 914 < 920 / 926 - 938 +
-              949 * 955)
+              797 |antiCommutator| 803 |annihilate?| 809 |abs| 815 ^ 820 D 838
+              >= 888 > 894 = 900 <= 906 < 912 |1| 918 |0| 922 / 926 - 938 + 949
+              * 955)
            'NIL
            (CONS
-            (|makeByteWordVec2| 25
-                                '(0 0 1 0 0 0 7 0 0 7 0 0 0 0 16 15 4 3 0 0 0 0
-                                  0 0 0 0 0 0 0 0 0 0 0 17 7 0 0 0 0 0 17 7 0 0
-                                  0 0 0 0 0 7 7 0 7 7 0 0 0 9 0 0 0 0 0 21 20
-                                  11 25 0 0 0 13 10 10 6 2 0 0 0 0 0 19 18 14
-                                  13 12 10 10 8 6 6 5 2 0 0 0 0 0 0 0 0 0 0))
+            (|makeByteWordVec2| 23
+                                '(0 0 2 0 0 0 0 0 0 0 0 0 14 13 7 1 0 0 0 0 1 0
+                                  0 0 0 1 0 0 0 0 15 1 0 0 0 0 15 1 1 0 0 0 0 0
+                                  7 7 0 7 0 0 0 7 7 0 0 0 0 0 19 18 9 23 0 0 0
+                                  0 11 8 8 6 3 0 0 0 0 0 17 16 12 11 10 8 8 7 6
+                                  6 5 1 4 3 0 0 0 0 0 0 0 0 0 0))
             (CONS
              '#(|QuotientFieldCategory&| |Field&|
                 |PolynomialFactorizationExplicit&| |EuclideanDomain&|
-                |UniqueFactorizationDomain&| NIL NIL |GcdDomain&| NIL NIL NIL
-                NIL |DivisionRing&| |DifferentialExtension&|
-                |DifferentialRing&| |PartialDifferentialRing&| NIL NIL
-                |Algebra&| |EntireRing&| |Algebra&| |Algebra&| NIL NIL |Rng&|
-                |NonAssociativeAlgebra&| |NonAssociativeAlgebra&|
-                |NonAssociativeAlgebra&| NIL |Module&| |Module&| |Module&|
-                |FullyLinearlyExplicitOver&| NIL |OrderedAbelianGroup&|
-                |NonAssociativeRing&| NIL NIL NIL NIL NIL NIL NIL
-                |NonAssociativeRng&| NIL NIL NIL NIL NIL NIL NIL
-                |AbelianGroup&| NIL NIL NIL NIL NIL |OrderedSet&|
+                |UniqueFactorizationDomain&| NIL |GcdDomain&| NIL NIL NIL
+                |DivisionRing&| |DifferentialExtension&| |DifferentialRing&|
+                |PartialDifferentialRing&| NIL |Algebra&| |Algebra&|
+                |EntireRing&| |Algebra&| NIL |NonAssociativeAlgebra&| NIL
+                |Rng&| |NonAssociativeAlgebra&| |NonAssociativeAlgebra&|
+                |Module&| NIL |Module&| |Module&| |FullyLinearlyExplicitOver&|
+                NIL NIL |NonAssociativeRing&| NIL NIL NIL NIL NIL NIL NIL
+                |NonAssociativeRng&| NIL NIL NIL NIL |OrderedAbelianSemiGroup&|
+                |AbelianGroup&| |OrderedSet&| NIL NIL NIL NIL NIL
                 |AbelianMonoid&| |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL
-                NIL NIL NIL NIL NIL |AbelianSemiGroup&| |Magma&|
+                NIL NIL NIL NIL NIL |AbelianSemiGroup&| |SetWithZero&| |Magma&|
                 |FullyEvalableOver&| |Evalable&| |RetractableTo&|
                 |RetractableTo&| NIL |RetractableTo&| |SetCategory&| NIL
                 |RetractableTo&| NIL |RetractableTo&| NIL NIL NIL
                 |InnerEvalable&| |InnerEvalable&| NIL NIL |PartialOrder&| NIL
-                NIL NIL NIL NIL |BasicType&| NIL NIL NIL NIL NIL NIL NIL NIL)
+                NIL NIL NIL NIL NIL NIL |BasicType&| NIL NIL NIL NIL NIL NIL
+                NIL NIL)
              (CONS
               '#((|QuotientFieldCategory|
                   (|UnivariatePuiseuxSeriesWithExponentialSingularity| 6 7 8
                                                                        9))
                  (|Field|) (|PolynomialFactorizationExplicit|)
                  (|EuclideanDomain|) (|UniqueFactorizationDomain|)
-                 (|PrincipalIdealDomain|) (|OrderedIntegralDomain|)
-                 (|GcdDomain|) (|IntegralDomain|) (|OrderedRing|)
+                 (|PrincipalIdealDomain|) (|GcdDomain|) (|IntegralDomain|)
                  (|LeftOreRing|) (|CommutativeRing|) (|DivisionRing|)
                  (|DifferentialExtension|
                   (|UnivariatePuiseuxSeriesWithExponentialSingularity| 6 7 8
                                                                        9))
                  (|DifferentialRing|) (|PartialDifferentialRing| 48)
-                 (|CharacteristicZero|) (|CharacteristicNonZero|)
-                 (|Algebra| $$) (|EntireRing|) (|Algebra| 13)
+                 (|OrderedRing|) (|Algebra| 13) (|Algebra| $$) (|EntireRing|)
                  (|Algebra|
                   (|UnivariatePuiseuxSeriesWithExponentialSingularity| 6 7 8
                                                                        9))
-                 (|Ring|) (|SemiRing|) (|Rng|) (|NonAssociativeAlgebra| $$)
-                 (|NonAssociativeAlgebra| 13)
+                 (|Ring|) (|NonAssociativeAlgebra| 13) (|SemiRing|) (|Rng|)
+                 (|NonAssociativeAlgebra| $$)
                  (|NonAssociativeAlgebra|
                   (|UnivariatePuiseuxSeriesWithExponentialSingularity| 6 7 8
                                                                        9))
-                 (|SemiRng|) (|Module| $$) (|Module| 13)
+                 (|Module| 13) (|SemiRng|) (|Module| $$)
                  (|Module|
                   (|UnivariatePuiseuxSeriesWithExponentialSingularity| 6 7 8
                                                                        9))
                  (|FullyLinearlyExplicitOver|
                   (|UnivariatePuiseuxSeriesWithExponentialSingularity| 6 7 8
                                                                        9))
-                 (|LinearlyExplicitOver| 12) (|OrderedAbelianGroup|)
-                 (|NonAssociativeRing|) (|BiModule| $$ $$) (|BiModule| 13 13)
+                 (|LinearlyExplicitOver| 12) (|BiModule| 13 13)
+                 (|NonAssociativeRing|) (|BiModule| $$ $$)
                  (|BiModule|
                   (|UnivariatePuiseuxSeriesWithExponentialSingularity| 6 7 8 9)
                   (|UnivariatePuiseuxSeriesWithExponentialSingularity| 6 7 8
@@ -737,25 +741,25 @@
                  (|LinearlyExplicitOver|
                   (|UnivariatePuiseuxSeriesWithExponentialSingularity| 6 7 8
                                                                        9))
-                 (|RightModule| 12) (|OrderedCancellationAbelianMonoid|)
+                 (|RightModule| 12) (|RightModule| 13) (|LeftModule| 13)
                  (|RightModule| $$) (|NonAssociativeRng|) (|LeftModule| $$)
-                 (|LeftModule| 13) (|RightModule| 13)
                  (|LeftModule|
                   (|UnivariatePuiseuxSeriesWithExponentialSingularity| 6 7 8
                                                                        9))
                  (|RightModule|
                   (|UnivariatePuiseuxSeriesWithExponentialSingularity| 6 7 8
                                                                        9))
-                 (|OrderedMonoid|) (|OrderedAbelianMonoid|) (|AbelianGroup|)
-                 (|OrderedSemiGroup|) (|OrderedAbelianSemiGroup|)
-                 (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
-                 (|Monoid|) (|OrderedSet|) (|AbelianMonoid|)
-                 (|NonAssociativeSemiRng|) (|MagmaWithUnit|) (|SemiGroup|)
+                 (|OrderedMagmaWithZero|) (|OrderedAbelianSemiGroup|)
+                 (|AbelianGroup|) (|OrderedSet|) (|CancellationAbelianMonoid|)
+                 (|NonAssociativeSemiRing|) (|Monoid|) (|MagmaWithZero|)
+                 (|Comparable|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
+                 (|MagmaWithUnit|) (|SemiGroup|)
                  (|FullyPatternMatchable|
                   (|UnivariatePuiseuxSeriesWithExponentialSingularity| 6 7 8
                                                                        9))
-                 (|PatternMatchable| 12) (|PatternMatchable| 108)
-                 (|StepThrough|) (|Comparable|) (|AbelianSemiGroup|) (|Magma|)
+                 (|PatternMatchable| 12) (|PatternMatchable| 109)
+                 (|StepThrough|) (|ComparableRepresentation|)
+                 (|AbelianSemiGroup|) (|SetWithZero|) (|Magma|)
                  (|FullyEvalableOver|
                   (|UnivariatePuiseuxSeriesWithExponentialSingularity| 6 7 8
                                                                        9))
@@ -783,10 +787,11 @@
                                   (|UnivariatePuiseuxSeriesWithExponentialSingularity|
                                    6 7 8 9))
                  (|CoercibleFrom| 12) (|CoercibleFrom| 13) (|PartialOrder|)
-                 (|ConvertibleTo| 108) (|ConvertibleTo| 109)
-                 (|ConvertibleTo| 94) (|CoercibleFrom| 48) (|CoercibleTo| 72)
-                 (|BasicType|) (|unitsKnown|) (|TwoSidedRecip|)
-                 (|noZeroDivisors|) (|canonicalUnitNormal|)
+                 (|ConvertibleTo| 109) (|ConvertibleTo| 108)
+                 (|ConvertibleTo| 94) (|CharacteristicZero|)
+                 (|CharacteristicNonZero|) (|CoercibleFrom| 48)
+                 (|CoercibleTo| 72) (|BasicType|) (|unitsKnown|)
+                 (|TwoSidedRecip|) (|noZeroDivisors|) (|canonicalUnitNormal|)
                  (|canonicalsClosed|)
                  (|CoercibleFrom|
                   (|UnivariatePuiseuxSeriesWithExponentialSingularity| 6 7 8
@@ -804,47 +809,47 @@
                                     0 54 0 43 0 55 2 7 0 0 0 56 1 0 19 0 57 1
                                     16 58 0 59 1 16 63 0 64 2 65 0 0 0 66 0 65
                                     0 67 2 65 19 0 0 68 1 65 13 0 69 2 65 7 0
-                                    13 70 2 0 19 0 0 1 1 0 19 0 57 1 22 16 0 1
+                                    13 70 2 0 19 0 0 1 1 0 19 0 57 1 20 16 0 1
                                     1 0 76 0 1 1 0 0 0 1 1 0 19 0 1 2 0 25 0 0
-                                    1 1 1 105 79 1 1 0 0 0 1 1 0 86 0 1 2 1 106
-                                    107 79 1 2 24 19 0 0 1 2 0 19 0 0 1 1 7 12
+                                    1 1 2 107 79 1 1 0 0 0 1 1 0 86 0 1 2 2 105
+                                    106 79 1 2 22 19 0 0 1 2 0 19 0 0 1 1 26 12
                                     0 1 0 0 0 1 1 0 25 0 1 2 0 0 0 74 1 2 0 0 0
-                                    75 1 1 0 87 0 1 1 0 22 0 24 1 10 110 0 1 1
-                                    10 51 0 1 1 2 111 0 1 1 0 16 0 1 1 0 34 0 1
-                                    1 10 13 0 1 1 10 12 0 1 1 2 48 0 1 2 0 0 0
-                                    0 1 2 0 89 90 91 1 1 0 92 90 1 1 17 100 90
-                                    1 2 17 101 90 91 1 1 0 25 0 1 2 0 0 0 0 1 1
-                                    0 81 78 1 1 0 19 0 1 1 7 19 0 1 2 0 0 0 74
-                                    1 3 20 103 0 95 103 1 3 21 104 0 96 104 1 2
-                                    0 19 0 0 1 1 0 19 0 1 1 0 0 0 1 1 0 16 0 21
-                                    1 11 25 0 1 1 7 19 0 1 2 0 80 78 0 1 2 8 0
-                                    0 0 1 2 8 0 0 0 1 2 0 0 88 0 1 1 0 58 0 71
-                                    1 0 25 0 1 2 0 0 0 74 1 2 0 0 0 75 1 2 0 77
-                                    0 0 1 2 0 0 0 0 1 1 0 0 78 1 1 0 73 0 1 1 0
-                                    0 0 1 0 11 0 1 2 0 79 79 79 1 2 0 0 0 0 1 1
-                                    0 0 78 1 1 22 0 0 1 1 23 16 0 1 1 1 105 79
-                                    1 1 1 105 79 1 1 0 86 0 1 3 0 84 0 0 0 1 2
-                                    0 85 0 0 1 2 0 25 0 0 1 2 0 80 78 0 1 3 13
-                                    0 0 97 97 1 2 13 0 0 98 1 3 13 0 0 16 16 1
-                                    2 13 0 0 99 1 3 12 0 0 48 16 1 3 12 0 0 46
-                                    97 1 1 0 75 0 1 2 14 0 0 16 1 2 0 82 0 0 1
-                                    3 0 0 0 88 75 1 2 0 0 0 88 1 1 16 0 0 1 2
-                                    16 0 0 75 1 2 15 0 0 46 1 2 15 0 0 48 1 3
-                                    15 0 0 48 75 1 3 15 0 0 46 102 1 1 0 0 0 1
-                                    1 0 16 0 17 1 5 94 0 1 1 18 95 0 1 1 19 96
-                                    0 1 1 6 108 0 1 1 6 109 0 1 1 26 93 90 1 2
-                                    0 0 0 0 1 1 0 72 0 1 1 0 0 12 1 1 0 0 0 1 1
-                                    0 0 13 1 1 0 0 16 28 1 0 0 34 36 1 2 0 48 1
-                                    1 26 25 0 1 0 0 75 1 1 23 16 0 1 3 0 0 0 0
-                                    0 1 2 0 19 0 0 1 2 0 0 0 0 1 2 0 19 0 0 1 1
-                                    7 0 0 1 2 0 0 0 74 1 2 0 0 0 75 1 2 0 0 0
-                                    12 1 0 0 0 1 0 0 0 1 3 0 0 0 88 75 1 2 0 0
-                                    0 88 1 1 16 0 0 1 2 16 0 0 75 1 2 15 0 0 48
-                                    1 3 15 0 0 48 75 1 2 15 0 0 46 1 3 15 0 0
-                                    46 102 1 2 8 19 0 0 1 2 8 19 0 0 1 2 0 19 0
-                                    0 1 2 8 19 0 0 1 2 8 19 0 0 1 2 0 0 0 0 33
-                                    2 0 0 16 16 30 2 0 0 0 0 1 1 0 0 0 1 2 0 0
-                                    0 0 1 2 0 0 74 0 1 2 0 0 0 0 1 2 0 0 12 0 1
-                                    2 0 0 75 0 1 2 0 0 0 13 1 2 0 0 13 0 1 2 0
-                                    0 16 0 29 2 0 0 0 16 1 2 17 0 0 12 1)))))
+                                    75 1 1 0 87 0 1 1 0 22 0 24 1 8 110 0 1 1 8
+                                    51 0 1 1 3 111 0 1 1 0 16 0 1 1 0 34 0 1 1
+                                    8 13 0 1 1 8 12 0 1 1 3 48 0 1 2 0 0 0 0 1
+                                    1 0 89 90 1 2 0 91 90 92 1 2 15 100 90 92 1
+                                    1 15 101 90 1 1 0 25 0 1 2 0 0 0 0 1 1 0 81
+                                    78 1 1 0 19 0 1 1 26 19 0 1 2 0 0 0 74 1 3
+                                    18 103 0 95 103 1 3 19 104 0 96 104 1 2 0
+                                    19 0 0 1 1 0 19 0 1 1 0 0 0 1 1 0 16 0 21 1
+                                    9 25 0 1 1 26 19 0 1 2 0 80 78 0 1 2 7 0 0
+                                    0 1 2 7 0 0 0 1 2 0 0 88 0 1 1 0 58 0 71 1
+                                    0 25 0 1 2 0 0 0 74 1 2 0 0 0 75 1 2 0 77 0
+                                    0 1 2 0 0 0 0 1 1 0 0 78 1 1 0 73 0 1 1 0 0
+                                    0 1 0 9 0 1 2 0 79 79 79 1 2 0 0 0 0 1 1 0
+                                    0 78 1 1 20 0 0 1 1 21 16 0 1 1 2 107 79 1
+                                    1 2 107 79 1 1 0 86 0 1 3 0 84 0 0 0 1 2 0
+                                    85 0 0 1 2 0 25 0 0 1 2 0 80 78 0 1 3 11 0
+                                    0 16 16 1 3 11 0 0 97 97 1 2 11 0 0 98 1 2
+                                    11 0 0 99 1 3 10 0 0 46 97 1 3 10 0 0 48 16
+                                    1 1 0 75 0 1 2 12 0 0 16 1 2 0 82 0 0 1 2 0
+                                    0 0 88 1 3 0 0 0 88 75 1 1 14 0 0 1 2 14 0
+                                    0 75 1 2 13 0 0 48 1 3 13 0 0 48 75 1 2 13
+                                    0 0 46 1 3 13 0 0 46 102 1 1 0 0 0 1 1 0 16
+                                    0 17 1 5 94 0 1 1 16 95 0 1 1 17 96 0 1 1 6
+                                    108 0 1 1 6 109 0 1 1 25 93 90 1 2 0 0 0 0
+                                    1 1 0 72 0 1 1 0 0 12 1 1 0 0 0 1 1 0 0 16
+                                    28 1 0 0 34 36 1 28 0 13 1 1 3 0 48 1 1 25
+                                    25 0 1 0 0 75 1 1 21 16 0 1 3 0 0 0 0 0 1 2
+                                    0 19 0 0 1 2 0 0 0 0 1 2 0 19 0 0 1 1 27 0
+                                    0 1 2 0 0 0 74 1 2 0 0 0 75 1 2 0 0 0 12 1
+                                    2 0 0 0 88 1 3 0 0 0 88 75 1 1 14 0 0 1 2
+                                    14 0 0 75 1 2 13 0 0 46 1 2 13 0 0 48 1 3
+                                    13 0 0 46 102 1 3 13 0 0 48 75 1 2 7 19 0 0
+                                    1 2 7 19 0 0 1 2 0 19 0 0 1 2 7 19 0 0 1 2
+                                    7 19 0 0 1 0 0 0 1 0 0 0 1 2 0 0 0 0 33 2 0
+                                    0 16 16 30 2 0 0 0 0 1 1 0 0 0 1 2 0 0 0 0
+                                    1 2 0 0 74 0 1 2 0 0 0 0 1 2 0 0 12 0 1 2 0
+                                    0 75 0 1 2 0 0 0 16 1 2 0 0 16 0 29 2 24 0
+                                    0 13 1 2 24 0 13 0 1 2 15 0 0 12 1)))))
            '|lookupComplete|)) 

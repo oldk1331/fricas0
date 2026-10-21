@@ -2,29 +2,27 @@
 (SDEFUN |UTSSOL;seriesSolve;MLUTSF;1|
         ((|f| (|Mapping| UTSSMPF UTSSMPF)) (|l| (|List| F)) (% (UTSF)))
         (SPROG
-         ((|next| (|Mapping| F))
-          (|st|
-           (|List|
-            #1=(|Stream| (|SparseMultivariatePolynomialExpressions| F))))
-          (|coeffs| #1#)
-          (|l2| (|Stream| (|SparseMultivariatePolynomialExpressions| F)))
-          (|s1| (|Stream| (|Integer|)))
+         ((#1=#:G192 NIL) (|e| NIL) (#2=#:G193 NIL)
           (|l1| (|Stream| (|SparseMultivariatePolynomialExpressions| F)))
-          (#2=#:G190 NIL) (|e| NIL) (#3=#:G189 NIL))
+          (|s1| (|Stream| (|Integer|)))
+          (|l2| (|Stream| (|SparseMultivariatePolynomialExpressions| F)))
+          (|coeffs|
+           #3=(|Stream| (|SparseMultivariatePolynomialExpressions| F)))
+          (|st| (|List| #3#)) (|next| (|Mapping| F)))
          (SEQ
           (LETT |l1|
                 (SPADCALL
                  (PROGN
-                  (LETT #3# NIL)
+                  (LETT #1# NIL)
                   (SEQ (LETT |e| NIL) (LETT #2# |l|) G190
                        (COND
                         ((OR (ATOM #2#) (PROGN (LETT |e| (CAR #2#)) NIL))
                          (GO G191)))
                        (SEQ
                         (EXIT
-                         (LETT #3# (CONS (SPADCALL |e| (QREFELT % 10)) #3#))))
+                         (LETT #1# (CONS (SPADCALL |e| (QREFELT % 10)) #1#))))
                        (LETT #2# (CDR #2#)) (GO G190) G191
-                       (EXIT (NREVERSE #3#))))
+                       (EXIT (NREVERSE #1#))))
                  (QREFELT % 13)))
           (LETT |s1| (SPADCALL (ELT % 15) 0 (QREFELT % 18)))
           (LETT |l2|
@@ -45,7 +43,7 @@
            (PROGN
             (SPROG
              ((|nr| NIL) (|coeff| NIL) (|eq| NIL) (|eqs| NIL) (|vars| NIL)
-              (#1=#:G183 NIL) (|var| NIL) (#2=#:G184 NIL) (|i| NIL)
+              (#1=#:G185 NIL) (|var| NIL) (#2=#:G186 NIL) (|i| NIL)
               (|res| NIL))
              (SEQ
               (LETT |nr| (SPADCALL |st| (|spadConstant| % 59) (QREFELT % 31)))
@@ -228,7 +226,7 @@
               (EXIT |res|))))))) 
 
 (SDEFUN |UTSSOL;seriesSolve;MLUTSF;1!0| ((|i| NIL) (% NIL))
-        (SPROG ((#1=#:G11 NIL))
+        (SPROG ((#1=#:G12 NIL))
                (SPADCALL (|spadConstant| % 19)
                          (SPADCALL (|spadConstant| % 22)
                                    (PROG1 (LETT #1# |i|)
@@ -241,7 +239,7 @@
 (DECLAIM (NOTINLINE |TaylorSolve;|)) 
 
 (DEFUN |TaylorSolve;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -259,9 +257,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |TaylorSolve| (&REST #1=#:G191)
+(DEFUN |TaylorSolve| (&REST #1=#:G194)
   (SPROG NIL
-         (PROG (#2=#:G192)
+         (PROG (#2=#:G195)
            (RETURN
             (COND
              ((LETT #2#
@@ -282,7 +280,7 @@
               (|local| |#3|) (|SparseMultivariatePolynomialExpressions| 6)
               (0 . |coerce|) (|List| 9) (|Stream| 9) (5 . |coerce|) (|Integer|)
               (10 . |inc|) (|Mapping| 14 14) (|Stream| 14) (15 . |stream|)
-              (21 . |One|) (25 . |One|) (|NonNegativeInteger|) (29 . |One|)
+              (21 . |1|) (25 . |1|) (|NonNegativeInteger|) (29 . |1|)
               (|IndexedExponents| 21) (33 . |monomial|) (39 . |monomial|)
               (|Mapping| 9 14) (|StreamFunctions2| 14 9) (45 . |map|)
               (51 . |concat|) (|List| 12) (57 . |elt|) (63 . |first|)
@@ -292,13 +290,12 @@
               (115 . |member?|) (|OutputForm|) (121 . |coerce|) (|Void|)
               (|String|) (|OutputPackage|) (126 . |output|) (132 . |coerce|)
               (137 . |empty?|) (142 . |elt|) (148 . |#|) (153 . |one?|)
-              (158 . |first|) (163 . |degree|) (|PositiveInteger|)
-              (169 . |One|) (173 . >) (179 . |monomial?|) (184 . |elt|)
-              (190 . ~=) (196 . +) (202 . |Zero|) (206 . |Zero|) (210 . |Zero|)
-              (214 . |setelt!|) (221 . |Zero|) (225 . |coefficient|) (231 . /)
-              (237 . -) (|Mapping| 6) (|Stream| 6) (242 . |stream|)
-              (247 . |series|) (|Mapping| 8 8) (|List| 6)
-              |UTSSOL;seriesSolve;MLUTSF;1|)
+              (158 . |first|) (163 . |degree|) (|PositiveInteger|) (169 . |1|)
+              (173 . >) (179 . |monomial?|) (184 . |elt|) (190 . ~=) (196 . +)
+              (202 . |0|) (206 . |0|) (210 . |0|) (214 . |setelt!|) (221 . |0|)
+              (225 . |coefficient|) (231 . /) (237 . -) (|Mapping| 6)
+              (|Stream| 6) (242 . |stream|) (247 . |series|) (|Mapping| 8 8)
+              (|List| 6) |UTSSOL;seriesSolve;MLUTSF;1|)
            '#(|seriesSolve| 252) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

@@ -27,7 +27,7 @@
                                                  (|GradedModule| '|t#1| '|t#2|)
                                                  (|RetractableTo| '|t#1|)
                                                  (|mkCategory|
-                                                  '(((|One| (%) |constant|) T)
+                                                  '(((|1| (%) |constant|) T)
                                                     ((|product| (% % %)) T))
                                                   NIL NIL NIL)))))))
            (SETELT #1# 0 (LIST '|GradedAlgebra| |t#1| |t#2|))))) 

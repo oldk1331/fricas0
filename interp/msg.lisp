@@ -123,22 +123,14 @@
       (|setMsgText| |msg| |text|)))))
 
 ; getMsgInfoFromKey msg ==
-;     text :=
-;         msgKey := getMsgKey? msg =>   --temp  oldmsgs use key tostoretext
-;            getKeyedMsg msgKey
-;         getMsgKey msg                  --temp oldmsgs
-;     text := segmentKeyedMsg(text)
+;     text := segmentKeyedMsg(getMsgKey(msg))
 ;     substituteSegmentedMsg(text, getMsgArgL(msg))
 
 (DEFUN |getMsgInfoFromKey| (|msg|)
-  (PROG (|msgKey| |text|)
+  (PROG (|text|)
     (RETURN
      (PROGN
-      (SETQ |text|
-              (COND
-               ((SETQ |msgKey| (|getMsgKey?| |msg|)) (|getKeyedMsg| |msgKey|))
-               ('T (|getMsgKey| |msg|))))
-      (SETQ |text| (|segmentKeyedMsg| |text|))
+      (SETQ |text| (|segmentKeyedMsg| (|getMsgKey| |msg|)))
       (|substituteSegmentedMsg| |text| (|getMsgArgL| |msg|))))))
 
 ; processChPosesForOneLine msgList ==
@@ -149,7 +141,7 @@
 ;         posLetter := rest ASSOC(poCharPosn getMsgPos msg, chPosList)
 ;         oldPre := getMsgPrefix msg
 ;         setMsgPrefix (msg,STRCONC(oldPre,_
-;                      filler_spaces($preLength - 4 - SIZE(oldPre)), posLetter))
+;                      filler_spaces($preLength - 4 - #oldPre), posLetter))
 ;     leaderMsg := makeLeaderMsg chPosList
 ;     NCONC(msgList,LIST leaderMsg)  --a back cons
 
@@ -172,7 +164,7 @@
              (SETQ |oldPre| (|getMsgPrefix| |msg|))
              (|setMsgPrefix| |msg|
               (STRCONC |oldPre|
-               (|filler_spaces| (- (- |$preLength| 4) (SIZE |oldPre|)))
+               (|filler_spaces| (- (- |$preLength| 4) (LENGTH |oldPre|)))
                |posLetter|)))))
           (SETQ |bfVar#1| (CDR |bfVar#1|))))
        |msgList| NIL)
@@ -788,7 +780,7 @@
 ; getPreStL optPre ==
 ;     null optPre => [filler_spaces(2)]
 ;     spses :=
-;       (extraPlaces := ($preLength - (SIZE optPre) - 3)) > 0 =>
+;       (extraPlaces := ($preLength - #optPre - 3)) > 0 =>
 ;             filler_spaces(extraPlaces)
 ;       '""
 ;     ['%b, optPre,spses,'":", '%d]
@@ -803,7 +795,7 @@
                      (COND
                       ((< 0
                           (SETQ |extraPlaces|
-                                  (- (- |$preLength| (SIZE |optPre|)) 3)))
+                                  (- (- |$preLength| (LENGTH |optPre|)) 3)))
                        (|filler_spaces| |extraPlaces|))
                       (#1# "")))
              (LIST '|%b| |optPre| |spses| ":" '|%d|)))))))
@@ -918,7 +910,7 @@
 ;     localNumOfLine  :=
 ;         i := poLinePosn posOfLine
 ;         stNum := STRINGIMAGE i
-;         STRCONC(filler_spaces($preLength - 7 - SIZE stNum), stNum)
+;         STRCONC(filler_spaces($preLength - 7 - #stNum), stNum)
 ;     ['line,posOfLine,NIL,NIL, STRCONC('"Line", localNumOfLine),_
 ;         textOfLine]
 
@@ -932,7 +924,8 @@
               (PROGN
                (SETQ |i| (|poLinePosn| |posOfLine|))
                (SETQ |stNum| (STRINGIMAGE |i|))
-               (STRCONC (|filler_spaces| (- (- |$preLength| 7) (SIZE |stNum|)))
+               (STRCONC
+                (|filler_spaces| (- (- |$preLength| 7) (LENGTH |stNum|)))
                 |stNum|)))
       (LIST '|line| |posOfLine| NIL NIL (STRCONC "Line" |localNumOfLine|)
             |textOfLine|)))))

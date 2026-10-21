@@ -4,7 +4,7 @@
 
 (SDEFUN |ODETOOLS;wronskianMatrix;LNniM;2|
         ((|l| (|List| F)) (|q| (|NonNegativeInteger|)) (% (|Matrix| F)))
-        (SPROG ((|v| (|Vector| F)) (#1=#:G9 NIL) (|i| NIL) (|m| (|Matrix| F)))
+        (SPROG ((|m| (|Matrix| F)) (|i| NIL) (#1=#:G10 NIL) (|v| (|Vector| F)))
                (SEQ (LETT |v| (SPADCALL |l| (QREFELT % 16)))
                     (LETT |m| (SPADCALL |q| (QVSIZE |v|) (QREFELT % 17)))
                     (SEQ (LETT |i| (PROGN |m| 1))
@@ -30,7 +30,7 @@
 (SDEFUN |ODETOOLS;variationOfParameters;LODOFLU;3|
         ((|op| (LODO)) (|g| (F)) (|b| (|List| F))
          (% (|Union| (|Vector| F) "failed")))
-        (SPROG ((|v| (|Vector| F)) (|n| (|NonNegativeInteger|)))
+        (SPROG ((|n| (|NonNegativeInteger|)) (|v| (|Vector| F)))
                (SEQ
                 (COND ((NULL |b|) (CONS 1 "failed"))
                       ('T
@@ -52,8 +52,8 @@
         ((|op| (LODO)) (|g| (F)) (|b| (|List| F))
          (|integration| (|Mapping| F F)) (% (|Union| F "failed")))
         (SPROG
-         ((|ans| (F)) (#1=#:G31 NIL) (|f| NIL) (|i| NIL) (|s| (|Vector| F))
-          (|sol| (|Union| (|Vector| F) "failed")))
+         ((|sol| (|Union| (|Vector| F) "failed")) (|s| (|Vector| F)) (|i| NIL)
+          (|f| NIL) (#1=#:G35 NIL) (|ans| (F)))
          (SEQ
           (COND ((SPADCALL |g| (QREFELT % 33)) (CONS 0 (|spadConstant| % 25)))
                 (#2='T
@@ -90,7 +90,7 @@
 (DECLAIM (NOTINLINE |ODETools;|)) 
 
 (DEFUN |ODETools;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -107,9 +107,9 @@
           (QSETREFV % 9 (SPADCALL (QREFELT % 8)))
           %))) 
 
-(DEFUN |ODETools| (&REST #1=#:G32)
+(DEFUN |ODETools| (&REST #1=#:G36)
   (SPROG NIL
-         (PROG (#2=#:G33)
+         (PROG (#2=#:G37)
            (RETURN
             (COND
              ((LETT #2#
@@ -131,7 +131,7 @@
               |ODETOOLS;wronskianMatrix;LM;1| (|Vector| 6) (4 . |vector|)
               (9 . |zero|) (|Integer|) (15 . |maxRowIndex|) (20 . |setRow!|)
               (27 . |elt|) (|Mapping| 6 6) (33 . |map!|) (39 . |degree|)
-              (44 . |Zero|) (48 . |leadingCoefficient|) (53 . /)
+              (44 . |0|) (48 . |leadingCoefficient|) (53 . /)
               (|Union| 15 '"failed") (|LinearSystemMatrixPackage| 6 15 15 10)
               (59 . |particularSolution|)
               |ODETOOLS;variationOfParameters;LODOFLU;3| (|Boolean|)

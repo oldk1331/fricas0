@@ -180,7 +180,7 @@
 ; full_database_name(name) ==
 ;     if env_v := getEnv('"DAASE") then
 ;         fname := STRCONC(env_v, '"/algebra/", name)
-;         FORMAT(true, '"   Using local database ~a..", fname)
+;         FORMAT(true, '"   Using local database ~a..~%", fname)
 ;         fname
 ;     else
 ;         STRCONC($spadroot, '"/algebra/", name)
@@ -191,7 +191,7 @@
      (COND
       ((SETQ |env_v| (|getEnv| "DAASE"))
        (SETQ |fname| (STRCONC |env_v| "/algebra/" |name|))
-       (FORMAT T "   Using local database ~a.." |fname|) |fname|)
+       (FORMAT T "   Using local database ~a..~%" |fname|) |fname|)
       ('T (STRCONC |$spadroot| "/algebra/" |name|))))))
 
 ; move_database(name, condition) ==
@@ -400,10 +400,10 @@
 ;     con := first(db_data)
 ;     dbstruct := GET(con, 'DATABASE)
 ;     if not(dbstruct) then
-;         FORMAT(true, "browseOpen:~%")
-;         FORMAT(true, "the browse database contains a data ~a~%", db_data)
-;         FORMAT(true, "for which we cannot get the database structure.~%")
-;         FORMAT(true, "Creating a new one~%")
+;         FORMAT(true, '"browseOpen:~%")
+;         FORMAT(true, '"the browse database contains a data ~a~%", db_data)
+;         FORMAT(true, '"for which we cannot get the database structure.~%")
+;         FORMAT(true, '"Creating a new one~%")
 ;         dbstruct := make_dbstruct()
 ;         MAKEPROP(con, 'DATABASE, dbstruct)
 ;         $all_constructors := ADJOIN(con, $all_constructors)
@@ -420,10 +420,10 @@
       (SETQ |con| (CAR |db_data|))
       (SETQ |dbstruct| (GET |con| 'DATABASE))
       (COND
-       ((NULL |dbstruct|) (FORMAT T '|browseOpen:~%|)
-        (FORMAT T '|the browse database contains a data ~a~%| |db_data|)
-        (FORMAT T '|for which we cannot get the database structure.~%|)
-        (FORMAT T '|Creating a new one~%|) (SETQ |dbstruct| (|make_dbstruct|))
+       ((NULL |dbstruct|) (FORMAT T "browseOpen:~%")
+        (FORMAT T "the browse database contains a data ~a~%" |db_data|)
+        (FORMAT T "for which we cannot get the database structure.~%")
+        (FORMAT T "Creating a new one~%") (SETQ |dbstruct| (|make_dbstruct|))
         (MAKEPROP |con| 'DATABASE |dbstruct|)
         (SETQ |$all_constructors| (ADJOIN |con| |$all_constructors|))))
       (SETQ |db_data| (CDR |db_data|))
@@ -1184,7 +1184,7 @@
 
 ; store_category_data(stream) ==
 ;     genCategoryTable()
-;     $store_category_data_mater := []
+;     master := []
 ;     for key_val in nreverse(H_KEY_VALS($has_category_hash)) repeat
 ;         key := first(key_val)
 ;         val := rest(key_val)
@@ -1195,11 +1195,11 @@
 ;     print_db_item(stream, master)
 
 (DEFUN |store_category_data| (|stream|)
-  (PROG (|key| |val| |posv| |master|)
+  (PROG (|master| |key| |val| |posv|)
     (RETURN
      (PROGN
       (|genCategoryTable|)
-      (SETQ |$store_category_data_mater| NIL)
+      (SETQ |master| NIL)
       ((LAMBDA (|bfVar#8| |key_val|)
          (LOOP
           (COND
@@ -1288,8 +1288,7 @@
 ;             noquiet := false
 ;         FORMAT(true, '"   Ignoring unknown )library option: ~a~%", opt)
 ;
-;     -- FIXME: make this _really_ portable
-;     thisdir := true_name('"./")
+;     thisdir := get_current_directory()
 ;     if make_database? then
 ;         expose := false
 ;
@@ -1366,7 +1365,7 @@
                             |opt|))))))
           (SETQ |bfVar#10| (CDR |bfVar#10|))))
        |options| NIL)
-      (SETQ |thisdir| (|true_name| "./"))
+      (SETQ |thisdir| (|get_current_directory|))
       (COND (|make_database?| (SETQ |expose| NIL)))
       (SETQ |nrlibs| NIL)
       (SETQ |asys| NIL)
@@ -1467,23 +1466,11 @@
 ;     $all_constructors := []
 ;     $all_operations := []
 ;     make_special_constructors()
-;     merge_info_from_objects([], [['dir, true_name('"./")]], true)
+;     merge_info_from_objects([], [['dir, get_current_directory()]], true)
 ;     for dir in dir_lst repeat
 ;         merge_info_from_objects([], [['dir, true_name(
 ;                                       STRCONC('"./~a", dir))]], true)
-;     if br_data then
-;         save_browser_data()
-;         write_browsedb()
-;     write_operationdb()
-;     write_categorydb()
-;     for con in allConstructors() repeat
-;         finish_con_dbstruct(con)
-;     write_interpdb()
-;     createInitializers()
-;     move_database('"interp", true)
-;     move_database('"operation", true)
-;     move_database('"browse", br_data)
-;     move_database('"category", true)
+;     finish_make_databases(br_data, true)
 
 (DEFUN |make_databases| (|dir_lst| |br_data|)
   (PROG ()
@@ -1495,30 +1482,73 @@
       (SETQ |$all_constructors| NIL)
       (SETQ |$all_operations| NIL)
       (|make_special_constructors|)
-      (|merge_info_from_objects| NIL (LIST (LIST '|dir| (|true_name| "./"))) T)
+      (|merge_info_from_objects| NIL
+       (LIST (LIST '|dir| (|get_current_directory|))) T)
       ((LAMBDA (|bfVar#19| |dir|)
          (LOOP
           (COND
            ((OR (ATOM |bfVar#19|) (PROGN (SETQ |dir| (CAR |bfVar#19|)) NIL))
             (RETURN NIL))
-           (#1='T
+           ('T
             (|merge_info_from_objects| NIL
              (LIST (LIST '|dir| (|true_name| (STRCONC "./~a" |dir|)))) T)))
           (SETQ |bfVar#19| (CDR |bfVar#19|))))
        |dir_lst| NIL)
+      (|finish_make_databases| |br_data| T)))))
+
+; make_databases2() ==
+;     $has_category_hash := MAKE_HASHTABLE('EQUAL)
+;     $operation_hash := MAKE_HASHTABLE('EQL)
+;     $all_operations := []
+;     make_special_constructors()
+;     finish_make_databases(false, false)
+
+(DEFUN |make_databases2| ()
+  (PROG ()
+    (RETURN
+     (PROGN
+      (SETQ |$has_category_hash| (MAKE_HASHTABLE 'EQUAL))
+      (SETQ |$operation_hash| (MAKE_HASHTABLE 'EQL))
+      (SETQ |$all_operations| NIL)
+      (|make_special_constructors|)
+      (|finish_make_databases| NIL NIL)))))
+
+; finish_make_databases(br_data, normal) ==
+;     if br_data then
+;         save_browser_data()
+;         write_browsedb()
+;     write_operationdb()
+;     write_categorydb()
+;     if normal then
+;         for con in allConstructors() repeat
+;             finish_con_dbstruct(con)
+;     write_interpdb()
+;     if normal then
+;         createInitializers()
+;     move_database('"interp", true)
+;     move_database('"operation", true)
+;     move_database('"browse", br_data)
+;     move_database('"category", true)
+
+(DEFUN |finish_make_databases| (|br_data| |normal|)
+  (PROG ()
+    (RETURN
+     (PROGN
       (COND (|br_data| (|save_browser_data|) (|write_browsedb|)))
       (|write_operationdb|)
       (|write_categorydb|)
-      ((LAMBDA (|bfVar#20| |con|)
-         (LOOP
-          (COND
-           ((OR (ATOM |bfVar#20|) (PROGN (SETQ |con| (CAR |bfVar#20|)) NIL))
-            (RETURN NIL))
-           (#1# (|finish_con_dbstruct| |con|)))
-          (SETQ |bfVar#20| (CDR |bfVar#20|))))
-       (|allConstructors|) NIL)
+      (COND
+       (|normal|
+        ((LAMBDA (|bfVar#20| |con|)
+           (LOOP
+            (COND
+             ((OR (ATOM |bfVar#20|) (PROGN (SETQ |con| (CAR |bfVar#20|)) NIL))
+              (RETURN NIL))
+             ('T (|finish_con_dbstruct| |con|)))
+            (SETQ |bfVar#20| (CDR |bfVar#20|))))
+         (|allConstructors|) NIL)))
       (|write_interpdb|)
-      (|createInitializers|)
+      (COND (|normal| (|createInitializers|)))
       (|move_database| "interp" T)
       (|move_database| "operation" T)
       (|move_database| "browse" |br_data|)
@@ -1565,6 +1595,17 @@
           (SETQ |bfVar#22| (CDR |bfVar#22|))))
        (|get_database| |con| 'MODEMAPS) NIL)))))
 
+; say_load_msg(cname, object) ==
+;     say_msg("S2IU0001",
+;             '"%1 will be automatically loaded when needed from %2",
+;             [cname, object])
+
+(DEFUN |say_load_msg| (|cname| |object|)
+  (PROG ()
+    (RETURN
+     (|say_msg| 'S2IU0001 "%1 will be automatically loaded when needed from %2"
+      (LIST |cname| |object|)))))
+
 ; merge_info_from_asy(asy, object, only, make_database?, expose,
 ;                     noquiet) ==
 ;     SET_-FILE_-GETTER(object)
@@ -1585,19 +1626,18 @@
 ;             $all_operations := []       -- force this to recompute
 ;             oldmaps := get_database(key, 'MODEMAPS)
 ;             dbstruct := make_dbstruct()
-;             PUT(key, 'DATABASE, dbstruct)
+;             MAKEPROP(key, 'DATABASE, dbstruct)
 ;             $all_constructors := ADJOIN(key, $all_constructors)
 ;             abbrev := fetch_data_from_alist(alist, '"abbreviation") or key
 ;             kind := set_dbstruct(dbstruct, FUNCTION(fetch_data_from_alist),
 ;                       alist, false,
 ;                         fetch_data_from_alist(alist, '"constructorForm"),
 ;                           abbrev, CONS(object, asharp_name))
-;             PUT(abbrev, 'ABBREVIATIONFOR, key)
+;             MAKEPROP(abbrev, 'ABBREVIATIONFOR, key)
 ;             add_operations(key, oldmaps)
 ;             cname := opOf(dbstruct.$constructorform_ind)
 ;             if expose then setExposeAddConstr2([cname], noquiet)
 ;             if not(make_database?) then
-;                 installConstructor(cname)
 ;                 updateDatabase(cname)
 ;                 -- following can break category database build
 ;                 if kind = 'category then
@@ -1616,7 +1656,7 @@
 ;                 set_asharp_autoload_functor(object, cname, asharp_name,
 ;                                             dbstruct.$cosig_ind)
 ;             if noquiet then
-;                 sayKeyedMsg("S2IU0001", [cname, object])
+;                 say_load_msg(cname, object)
 
 (DEFUN |merge_info_from_asy|
        (|asy| |object| |only| |make_database?| |expose| |noquiet|)
@@ -1655,7 +1695,7 @@
                  (SETQ |$all_operations| NIL)
                  (SETQ |oldmaps| (|get_database| |key| 'MODEMAPS))
                  (SETQ |dbstruct| (|make_dbstruct|))
-                 (PUT |key| 'DATABASE |dbstruct|)
+                 (MAKEPROP |key| 'DATABASE |dbstruct|)
                  (SETQ |$all_constructors| (ADJOIN |key| |$all_constructors|))
                  (SETQ |abbrev|
                          (OR (|fetch_data_from_alist| |alist| "abbreviation")
@@ -1665,15 +1705,14 @@
                           |alist| NIL
                           (|fetch_data_from_alist| |alist| "constructorForm")
                           |abbrev| (CONS |object| |asharp_name|)))
-                 (PUT |abbrev| 'ABBREVIATIONFOR |key|)
+                 (MAKEPROP |abbrev| 'ABBREVIATIONFOR |key|)
                  (|add_operations| |key| |oldmaps|)
                  (SETQ |cname|
                          (|opOf| (ELT |dbstruct| |$constructorform_ind|)))
                  (COND
                   (|expose| (|setExposeAddConstr2| (LIST |cname|) |noquiet|)))
                  (COND
-                  ((NULL |make_database?|) (|installConstructor| |cname|)
-                   (|updateDatabase| |cname|)
+                  ((NULL |make_database?|) (|updateDatabase| |cname|)
                    (COND
                     ((EQ |kind| '|category|)
                      (SETF (ELT |dbstruct| |$ancestors_ind|)
@@ -1701,11 +1740,68 @@
                   (#1#
                    (|set_asharp_autoload_functor| |object| |cname|
                     |asharp_name| (ELT |dbstruct| |$cosig_ind|))))
-                 (COND
-                  (|noquiet|
-                   (|sayKeyedMsg| 'S2IU0001 (LIST |cname| |object|)))))))))))
+                 (COND (|noquiet| (|say_load_msg| |cname| |object|))))))))))
           (SETQ |bfVar#23| (CDR |bfVar#23|))))
        |asy| NIL)))))
+
+; merge_constructor_info() ==
+;     form := removeZeroOne($lisplibForm)
+;     key := first(form)
+;     dbstruct := GET(key, 'DATABASE)
+;     null(dbstruct) => BREAK()
+;     $all_constructors := ADJOIN(key, $all_constructors)
+;     -- Aabbreviation should be set earlier
+;     abbr := STRING(dbstruct.$abbreviation_ind)
+;     kind := $lisplibKind
+;     dbstruct.$ancestors_ind := SUBLISLIS($FormalMapVariableList, rest(form),
+;                   removeZeroOne($lisplibAncestors))
+;     ops := getConstructorOps($lisplibForm, kind)
+;     dbstruct.$operationalist_ind := removeZeroOne(ops)
+;     dbstruct.$constructorcategory_ind := removeZeroOne($lisplibCategory)
+;     dbstruct.$constructorkind_ind := kind
+;     dbstruct.$constructormodemap_ind := removeZeroOne($lisplibModemap)
+;     dbstruct.$cosig_ind := compute_cosig(dbstruct.$constructormodemap_ind)
+;     dbstruct.$object_ind := STRCONC(abbr, '".NRLIB/", abbr)
+;     dbstruct.$modemaps_ind := removeZeroOne($lisplibModemapAlist)
+;     dbstruct.$niladic_ind := null(rest(form))
+;     if kind = 'category then
+;         updateDatabase(key)
+;     updateCategoryTable(key, kind)
+
+(DEFUN |merge_constructor_info| ()
+  (PROG (|ops| |kind| |abbr| |dbstruct| |key| |form|)
+    (RETURN
+     (PROGN
+      (SETQ |form| (|removeZeroOne| |$lisplibForm|))
+      (SETQ |key| (CAR |form|))
+      (SETQ |dbstruct| (GET |key| 'DATABASE))
+      (COND ((NULL |dbstruct|) (BREAK))
+            ('T
+             (PROGN
+              (SETQ |$all_constructors| (ADJOIN |key| |$all_constructors|))
+              (SETQ |abbr| (STRING (ELT |dbstruct| |$abbreviation_ind|)))
+              (SETQ |kind| |$lisplibKind|)
+              (SETF (ELT |dbstruct| |$ancestors_ind|)
+                      (SUBLISLIS |$FormalMapVariableList| (CDR |form|)
+                       (|removeZeroOne| |$lisplibAncestors|)))
+              (SETQ |ops| (|getConstructorOps| |$lisplibForm| |kind|))
+              (SETF (ELT |dbstruct| |$operationalist_ind|)
+                      (|removeZeroOne| |ops|))
+              (SETF (ELT |dbstruct| |$constructorcategory_ind|)
+                      (|removeZeroOne| |$lisplibCategory|))
+              (SETF (ELT |dbstruct| |$constructorkind_ind|) |kind|)
+              (SETF (ELT |dbstruct| |$constructormodemap_ind|)
+                      (|removeZeroOne| |$lisplibModemap|))
+              (SETF (ELT |dbstruct| |$cosig_ind|)
+                      (|compute_cosig|
+                       (ELT |dbstruct| |$constructormodemap_ind|)))
+              (SETF (ELT |dbstruct| |$object_ind|)
+                      (STRCONC |abbr| ".NRLIB/" |abbr|))
+              (SETF (ELT |dbstruct| |$modemaps_ind|)
+                      (|removeZeroOne| |$lisplibModemapAlist|))
+              (SETF (ELT |dbstruct| |$niladic_ind|) (NULL (CDR |form|)))
+              (COND ((EQ |kind| '|category|) (|updateDatabase| |key|)))
+              (|updateCategoryTable| |key| |kind|))))))))
 
 ; merge_info_from_nrlib1(in_f, key, object, make_database?, expose,
 ;                        noquiet) ==
@@ -1718,7 +1814,7 @@
 ;     key := first(constructorform)
 ;     oldmaps := get_database(key, 'MODEMAPS)
 ;     dbstruct := make_dbstruct()
-;     PUT(key, 'DATABASE, dbstruct)
+;     MAKEPROP(key, 'DATABASE, dbstruct)
 ;     $all_constructors := ADJOIN(key, $all_constructors)
 ;     abbrev := INTERN(file_basename(file_directory(object)))
 ;     ds := [alist, in_f]
@@ -1726,10 +1822,9 @@
 ;         set_dbstruct(dbstruct, FUNCTION(fetch_data_from_file), ds,
 ;                      make_database?, constructorform, abbrev, object)
 ;     $all_operations := []  -- force this to recompute
-;     PUT(abbrev, 'ABBREVIATIONFOR, key)
+;     MAKEPROP(abbrev, 'ABBREVIATIONFOR, key)
 ;     add_operations(key, oldmaps)
 ;     if not(make_database?) then
-;         installConstructor(key)
 ;         if kind = 'category then
 ;             dbstruct.$ancestors_ind :=
 ;                  SUBLISLIS($FormalMapVariableList, rest(constructorform),
@@ -1741,7 +1836,7 @@
 ;     if expose then setExposeAddConstr2([key], noquiet)
 ;     spad_set_autoload(key)
 ;     if noquiet then
-;         sayKeyedMsg('S2IU0001, [key, object])
+;         say_load_msg(key, object)
 
 (DEFUN |merge_info_from_nrlib1|
        (|in_f| |key| |object| |make_database?| |expose| |noquiet|)
@@ -1757,7 +1852,7 @@
       (SETQ |key| (CAR |constructorform|))
       (SETQ |oldmaps| (|get_database| |key| 'MODEMAPS))
       (SETQ |dbstruct| (|make_dbstruct|))
-      (PUT |key| 'DATABASE |dbstruct|)
+      (MAKEPROP |key| 'DATABASE |dbstruct|)
       (SETQ |$all_constructors| (ADJOIN |key| |$all_constructors|))
       (SETQ |abbrev| (INTERN (|file_basename| (|file_directory| |object|))))
       (SETQ |ds| (LIST |alist| |in_f|))
@@ -1765,10 +1860,10 @@
               (|set_dbstruct| |dbstruct| #'|fetch_data_from_file| |ds|
                |make_database?| |constructorform| |abbrev| |object|))
       (SETQ |$all_operations| NIL)
-      (PUT |abbrev| 'ABBREVIATIONFOR |key|)
+      (MAKEPROP |abbrev| 'ABBREVIATIONFOR |key|)
       (|add_operations| |key| |oldmaps|)
       (COND
-       ((NULL |make_database?|) (|installConstructor| |key|)
+       ((NULL |make_database?|)
         (COND
          ((EQ |kind| '|category|)
           (SETF (ELT |dbstruct| |$ancestors_ind|)
@@ -1780,7 +1875,7 @@
       (REMPROP |key| 'LOADED)
       (COND (|expose| (|setExposeAddConstr2| (LIST |key|) |noquiet|)))
       (|spad_set_autoload| |key|)
-      (COND (|noquiet| (|sayKeyedMsg| 'S2IU0001 (LIST |key| |object|))))))))
+      (COND (|noquiet| (|say_load_msg| |key| |object|)))))))
 
 ; merge_info_from_nrlib(key, nrlib, object, make_database?, expose,
 ;                       noquiet) ==

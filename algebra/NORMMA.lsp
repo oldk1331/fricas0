@@ -37,8 +37,8 @@
 
 (DEFUN |NormInMonogenicAlgebra;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -59,9 +59,9 @@
     (QSETREFV % 16 (|NORMMA;PolR2SUP| (SPADCALL (QREFELT % 15)) %))
     %))) 
 
-(DEFUN |NormInMonogenicAlgebra| (&REST #1=#:G6)
+(DEFUN |NormInMonogenicAlgebra| (&REST #1=#:G7)
   (SPROG NIL
-         (PROG (#2=#:G7)
+         (PROG (#2=#:G8)
            (RETURN
             (COND
              ((LETT #2#
@@ -84,12 +84,12 @@
               (|local| |#3|) (|local| |#4|) (0 . |coerce|)
               (|SparseUnivariatePolynomial| 7) (|Mapping| 7 6)
               (|UnivariatePolynomialCategoryFunctions2| 6 7 7 11) (5 . |map|)
-              (11 . |definingPolynomial|) '|defpol| (15 . |Zero|) (19 . |Zero|)
-              (23 . |Zero|) (27 . |Zero|) (|Boolean|) (31 . ~=) (37 . |One|)
-              (41 . |One|) (|NonNegativeInteger|) (45 . |degree|)
-              (50 . |monomial|) (56 . |leadingCoefficient|) (61 . |lift|)
-              (66 . *) (72 . +) (78 . |reductum|) (83 . |resultant|)
-              (89 . |primitivePart|) |NORMMA;norm;PolEPolR;2|)
+              (11 . |definingPolynomial|) '|defpol| (15 . |0|) (19 . |0|)
+              (23 . |0|) (27 . |0|) (|Boolean|) (31 . ~=) (37 . |1|) (41 . |1|)
+              (|NonNegativeInteger|) (45 . |degree|) (50 . |monomial|)
+              (56 . |leadingCoefficient|) (61 . |lift|) (66 . *) (72 . +)
+              (78 . |reductum|) (83 . |resultant|) (89 . |primitivePart|)
+              |NORMMA;norm;PolEPolR;2|)
            '#(|norm| 94) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

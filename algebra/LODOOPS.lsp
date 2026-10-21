@@ -1,40 +1,40 @@
 
 (SDEFUN |LODOOPS;vec2LODO| ((|v| (|Vector| A)) (% (L)))
         (SPROG
-         ((#1=#:G2 NIL) (#2=#:G1 (L)) (#3=#:G3 (L)) (#4=#:G4 NIL) (#5=#:G6 NIL)
-          (|i| NIL))
+         ((|i| NIL) (#1=#:G7 NIL) (#2=#:G5 NIL) (#3=#:G4 (L)) (#4=#:G2 (L))
+          (#5=#:G3 NIL))
          (SEQ
           (PROGN
-           (LETT #1# NIL)
-           (SEQ (LETT |i| 1) (LETT #5# (QVSIZE |v|)) G190
-                (COND ((|greater_SI| |i| #5#) (GO G191)))
+           (LETT #5# NIL)
+           (SEQ (LETT |i| 1) (LETT #1# (QVSIZE |v|)) G190
+                (COND ((|greater_SI| |i| #1#) (GO G191)))
                 (SEQ
                  (EXIT
                   (PROGN
                    (LETT #3#
                          (SPADCALL (SPADCALL |v| |i| (QREFELT % 14))
-                                   (PROG1 (LETT #4# (- |i| 1))
-                                     (|check_subtype2| (>= #4# 0)
+                                   (PROG1 (LETT #2# (- |i| 1))
+                                     (|check_subtype2| (>= #2# 0)
                                                        '(|NonNegativeInteger|)
-                                                       '(|Integer|) #4#))
+                                                       '(|Integer|) #2#))
                                    (QREFELT % 18)))
-                   (COND (#1# (LETT #2# (SPADCALL #2# #3# (QREFELT % 19))))
-                         ('T (PROGN (LETT #2# #3#) (LETT #1# 'T)))))))
+                   (COND (#5# (LETT #4# (SPADCALL #4# #3# (QREFELT % 19))))
+                         ('T (PROGN (LETT #4# #3#) (LETT #5# 'T)))))))
                 (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
-           (COND (#1# #2#) ('T (|spadConstant| % 20))))))) 
+           (COND (#5# #4#) ('T (|spadConstant| % 20))))))) 
 
 (SDEFUN |LODOOPS;symmetricPower;LNniML;2|
         ((|l| (L)) (|m| (|NonNegativeInteger|)) (|diff| (|Mapping| A A))
          (% (L)))
         (SPROG
-         ((#1=#:G7 NIL)
+         ((|u| (|OrderlyDifferentialVariable| (|Symbol|)))
+          (|n| (|NonNegativeInteger|))
+          (|un| (|OrderlyDifferentialVariable| (|Symbol|)))
           (|a|
            (|DifferentialSparseMultivariatePolynomial| A (|Symbol|)
                                                        (|OrderlyDifferentialVariable|
                                                         (|Symbol|))))
-          (|un| (|OrderlyDifferentialVariable| (|Symbol|)))
-          (|n| (|NonNegativeInteger|))
-          (|u| (|OrderlyDifferentialVariable| (|Symbol|))))
+          (#1=#:G8 NIL))
          (SEQ (LETT |u| (SPADCALL (QREFELT % 10) (QREFELT % 22)))
               (LETT |n| (SPADCALL |l| (QREFELT % 23)))
               (LETT |un| (SPADCALL |u| |n| (QREFELT % 24)))
@@ -71,13 +71,13 @@
                                                         (|Symbol|)))))
          (|diff| (|Mapping| A A)) (% (L)))
         (SPROG
-         ((|lu| (|List| #1#)) (#2=#:G26 NIL) (|l| (|List| (|Vector| A)))
-          (|mat| (|Matrix| A)) (#3=#:G27 NIL) (|q| NIL))
+         ((|q| NIL) (#2=#:G28 NIL) (|mat| (|Matrix| A))
+          (|l| (|List| (|Vector| A))) (#3=#:G27 NIL) (|lu| (|List| #1#)))
          (SEQ
           (EXIT
            (SEQ (LETT |lu| (LIST |u|))
-                (SEQ (LETT |q| 0) (LETT #3# |m|) G190
-                     (COND ((|greater_SI| |q| #3#) (GO G191)))
+                (SEQ (LETT |q| 0) (LETT #2# |m|) G190
+                     (COND ((|greater_SI| |q| #2#) (GO G191)))
                      (SEQ
                       (LETT |mat|
                             (SPADCALL (SPADCALL (LIST |lu|) (QREFELT % 38))
@@ -87,8 +87,8 @@
                        ((NULL (NULL |l|))
                         (EXIT
                          (PROGN
-                          (LETT #2# (|LODOOPS;vec2LODO| (|SPADfirst| |l|) %))
-                          (GO #4=#:G25)))))
+                          (LETT #3# (|LODOOPS;vec2LODO| (|SPADfirst| |l|) %))
+                          (GO #4=#:G26)))))
                       (LETT |u|
                             (SPADCALL (SPADCALL |u| |diff| (QREFELT % 44))
                                       |lvar| |lval| (QREFELT % 47)))
@@ -96,19 +96,20 @@
                        (LETT |lu| (SPADCALL |lu| (LIST |u|) (QREFELT % 49)))))
                      (LETT |q| (|inc_SI| |q|)) (GO G190) G191 (EXIT NIL))
                 (EXIT (|error| "killer: no linear dependence found"))))
-          #4# (EXIT #2#)))) 
+          #4# (EXIT #3#)))) 
 
 (SDEFUN |LODOOPS;symmetricProduct;2LML;4|
         ((|l1| (L)) (|l2| (L)) (|diff| (|Mapping| A A)) (% (L)))
         (SPROG
-         ((|b|
-           #1=(|DifferentialSparseMultivariatePolynomial| A (|Symbol|)
+         ((|u| (|OrderlyDifferentialVariable| (|Symbol|)))
+          (|v| (|OrderlyDifferentialVariable| (|Symbol|)))
+          (|n1| #1=(|NonNegativeInteger|)) (|n2| #1#)
+          (|un| #2=(|OrderlyDifferentialVariable| (|Symbol|))) (|vn| #2#)
+          (|a|
+           #3=(|DifferentialSparseMultivariatePolynomial| A (|Symbol|)
                                                           (|OrderlyDifferentialVariable|
                                                            (|Symbol|))))
-          (|a| #1#) (|vn| #2=(|OrderlyDifferentialVariable| (|Symbol|)))
-          (|un| #2#) (|n2| #3=(|NonNegativeInteger|)) (|n1| #3#)
-          (|v| (|OrderlyDifferentialVariable| (|Symbol|)))
-          (|u| (|OrderlyDifferentialVariable| (|Symbol|))))
+          (|b| #3#))
          (SEQ (LETT |u| (SPADCALL (QREFELT % 10) (QREFELT % 22)))
               (LETT |v| (SPADCALL (QREFELT % 11) (QREFELT % 22)))
               (LETT |n1| (SPADCALL |l1| (QREFELT % 23)))
@@ -140,14 +141,15 @@
 (SDEFUN |LODOOPS;directSum;2LML;5|
         ((|l1| (L)) (|l2| (L)) (|diff| (|Mapping| A A)) (% (L)))
         (SPROG
-         ((|b|
-           #1=(|DifferentialSparseMultivariatePolynomial| A (|Symbol|)
+         ((|u| (|OrderlyDifferentialVariable| (|Symbol|)))
+          (|v| (|OrderlyDifferentialVariable| (|Symbol|)))
+          (|n1| #1=(|NonNegativeInteger|)) (|n2| #1#)
+          (|un| #2=(|OrderlyDifferentialVariable| (|Symbol|))) (|vn| #2#)
+          (|a|
+           #3=(|DifferentialSparseMultivariatePolynomial| A (|Symbol|)
                                                           (|OrderlyDifferentialVariable|
                                                            (|Symbol|))))
-          (|a| #1#) (|vn| #2=(|OrderlyDifferentialVariable| (|Symbol|)))
-          (|un| #2#) (|n2| #3=(|NonNegativeInteger|)) (|n1| #3#)
-          (|v| (|OrderlyDifferentialVariable| (|Symbol|)))
-          (|u| (|OrderlyDifferentialVariable| (|Symbol|))))
+          (|b| #3#))
          (SEQ (LETT |u| (SPADCALL (QREFELT % 10) (QREFELT % 22)))
               (LETT |v| (SPADCALL (QREFELT % 11) (QREFELT % 22)))
               (LETT |n1| (SPADCALL |l1| (QREFELT % 23)))
@@ -210,7 +212,7 @@
 (DECLAIM (NOTINLINE |LinearOrdinaryDifferentialOperatorsOps;|)) 
 
 (DEFUN |LinearOrdinaryDifferentialOperatorsOps;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -230,9 +232,9 @@
           (QSETREFV % 11 (SPADCALL (QREFELT % 9)))
           %))) 
 
-(DEFUN |LinearOrdinaryDifferentialOperatorsOps| (&REST #1=#:G39)
+(DEFUN |LinearOrdinaryDifferentialOperatorsOps| (&REST #1=#:G40)
   (SPROG NIL
-         (PROG (#2=#:G40)
+         (PROG (#2=#:G41)
            (RETURN
             (COND
              ((LETT #2#
@@ -257,11 +259,11 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (|Symbol|)
               (0 . |new|) '|var1| '|var2| (|Integer|) (|Vector| 6) (4 . |elt|)
-              (10 . |One|) (14 . |One|) (|NonNegativeInteger|)
-              (18 . |monomial|) (24 . +) (30 . |Zero|)
-              (|OrderlyDifferentialVariable| 8) (34 . |coerce|) (39 . |degree|)
-              (44 . |differentiate|) (50 . |leadingCoefficient|) (55 . -)
-              (60 . |inv|) (65 . |reductum|) (70 . *)
+              (10 . |1|) (14 . |1|) (|NonNegativeInteger|) (18 . |monomial|)
+              (24 . +) (30 . |0|) (|OrderlyDifferentialVariable| 8)
+              (34 . |coerce|) (39 . |degree|) (44 . |differentiate|)
+              (50 . |leadingCoefficient|) (55 . -) (60 . |inv|)
+              (65 . |reductum|) (70 . *)
               (|DifferentialSparseMultivariatePolynomial| 6 8 21)
               (76 . |coerce|) (81 . ^) (87 . |binomial|) (|Mapping| 6 6)
               |LODOOPS;symmetricPower;LNniML;2| (|List| 48) (|Matrix| 30)
@@ -269,9 +271,8 @@
               (|List| 13) (103 . |nullSpace|) (108 . |differentiate|)
               (|List| 21) (|List| %) (114 . |eval|) (|List| 30)
               (121 . |concat!|) (127 . *) |LODOOPS;symmetricProduct;2LML;4|
-              (133 . +) |LODOOPS;directSum;2LML;5| (139 . |Zero|)
-              (143 . |Zero|) (|Boolean|) (147 . ~=) (153 . |coerce|)
-              (158 . |monomial|))
+              (133 . +) |LODOOPS;directSum;2LML;5| (139 . |0|) (143 . |0|)
+              (|Boolean|) (147 . ~=) (153 . |coerce|) (158 . |monomial|))
            '#(|symmetricProduct| 165 |symmetricPower| 172 |directSum| 179) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

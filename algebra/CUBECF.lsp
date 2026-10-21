@@ -3,20 +3,17 @@
         ((|dim| (|NonNegativeInteger|))
          (% (|FiniteCubicalComplex| (|Integer|))))
         (SPROG
-         ((|r| (ASIMP)) (|vs1| (|List| (|Integer|)))
-          (|v1| (|List| (|List| (|List| (|Integer|))))) (#1=#:G6 NIL) (|n| NIL)
-          (#2=#:G5 NIL)
-          (ASIMP
+         ((ASIMP
            (|Join| (|SetCategory|)
                    (CATEGORY |domain|
                     (SIGNATURE |cubicalComplex|
-                     (% (|List| #3=(|Integer|)) (|List| (|CubicalFacet|))))
+                     (% (|List| #1=(|Integer|)) (|List| (|CubicalFacet|))))
                     (SIGNATURE |cubicalComplex|
-                     (% (|List| #3#)
+                     (% (|List| #1#)
                       (|List| (|List| (|Segment| (|Integer|))))))
                     (SIGNATURE |cubicalComplex|
-                     (% (|List| #3#) (|List| (|List| (|List| (|Integer|))))))
-                    (SIGNATURE |cubicalComplex| (% (|List| #3#)))
+                     (% (|List| #1#) (|List| (|List| (|List| (|Integer|))))))
+                    (SIGNATURE |cubicalComplex| (% (|List| #1#)))
                     (SIGNATURE |maxIndex| ((|NonNegativeInteger|) %))
                     (SIGNATURE |addCube| (% % (|CubicalFacet|)))
                     (SIGNATURE |grade| ((|List| (|List| (|CubicalFacet|))) %))
@@ -29,14 +26,17 @@
                     (SIGNATURE |homology| ((|List| (|Homology|)) %))
                     (SIGNATURE |boundary| (% %))
                     (SIGNATURE |chain| ((|ChainComplex|) %))
-                    (SIGNATURE |coerce| ((|DeltaComplex| #3#) %))))))
+                    (SIGNATURE |coerce| ((|DeltaComplex| #1#) %)))))
+          (#2=#:G5 NIL) (|n| NIL) (#3=#:G6 NIL)
+          (|v1| (|List| (|List| (|List| (|Integer|)))))
+          (|vs1| (|List| (|Integer|))) (|r| (ASIMP)))
          (SEQ (LETT ASIMP (|FiniteCubicalComplex| (|Integer|)))
               (LETT |v1|
                     (LIST
                      (PROGN
                       (LETT #2# NIL)
-                      (SEQ (LETT |n| 1) (LETT #1# |dim|) G190
-                           (COND ((|greater_SI| |n| #1#) (GO G191)))
+                      (SEQ (LETT |n| 1) (LETT #3# |dim|) G190
+                           (COND ((|greater_SI| |n| #3#) (GO G191)))
                            (SEQ (EXIT (LETT #2# (CONS (LIST 1 2) #2#))))
                            (LETT |n| (|inc_SI| |n|)) (GO G190) G191
                            (EXIT (NREVERSE #2#))))))
@@ -61,21 +61,20 @@
         ((|dim| (|NonNegativeInteger|))
          (% (|FiniteCubicalComplex| (|Integer|))))
         (SPROG
-         ((|r| (|FiniteCubicalComplex| (|Integer|)))
-          (|s| (|FiniteCubicalComplex| (|Integer|))))
+         ((|s| (|FiniteCubicalComplex| (|Integer|)))
+          (|r| (|FiniteCubicalComplex| (|Integer|))))
          (SEQ (LETT |s| (SPADCALL |dim| (QREFELT % 8)))
               (LETT |r| (SPADCALL |s| (QREFELT % 9))) (EXIT |r|)))) 
 
 (SDEFUN |CUBECF;torusSurface;Fcc;3| ((% (|FiniteCubicalComplex| (|Integer|))))
-        (SPROG ((|b| #1=(|FiniteCubicalComplex| (|Integer|))) (|a| #1#))
+        (SPROG ((|a| #1=(|FiniteCubicalComplex| (|Integer|))) (|b| #1#))
                (SEQ (LETT |a| (SPADCALL 2 (QREFELT % 10)))
                     (LETT |b| (SPADCALL 2 (QREFELT % 10)))
                     (EXIT (SPADCALL |a| |b| (QREFELT % 11)))))) 
 
 (SDEFUN |CUBECF;band;Fcc;4| ((% (|FiniteCubicalComplex| (|Integer|))))
         (SPROG
-         ((|b| (ASIMP)) (|vs1| (|List| (|Integer|)))
-          (|v1| (|List| (|List| (|List| (|Integer|)))))
+         ((|a| (|FiniteCubicalComplex| (|Integer|)))
           (ASIMP
            (|Join| (|SetCategory|)
                    (CATEGORY |domain|
@@ -100,7 +99,8 @@
                     (SIGNATURE |boundary| (% %))
                     (SIGNATURE |chain| ((|ChainComplex|) %))
                     (SIGNATURE |coerce| ((|DeltaComplex| #1#) %)))))
-          (|a| (|FiniteCubicalComplex| (|Integer|))))
+          (|v1| (|List| (|List| (|List| (|Integer|)))))
+          (|vs1| (|List| (|Integer|))) (|b| (ASIMP)))
          (SEQ (LETT |a| (SPADCALL 2 (QREFELT % 10)))
               (LETT ASIMP (|FiniteCubicalComplex| (|Integer|)))
               (LETT |v1| (LIST (LIST (LIST 1 2)))) (LETT |vs1| NIL)
@@ -124,9 +124,7 @@
         ((|dim| (|NonNegativeInteger|))
          (% (|FiniteCubicalComplex| (|Integer|))))
         (SPROG
-         ((|r| (ASIMP)) (|vs1| (|List| (|Integer|)))
-          (|v1| (|List| (|List| (|List| (|Integer|)))))
-          (ASIMP
+         ((ASIMP
            (|Join| (|SetCategory|)
                    (CATEGORY |domain|
                     (SIGNATURE |cubicalComplex|
@@ -149,7 +147,9 @@
                     (SIGNATURE |homology| ((|List| (|Homology|)) %))
                     (SIGNATURE |boundary| (% %))
                     (SIGNATURE |chain| ((|ChainComplex|) %))
-                    (SIGNATURE |coerce| ((|DeltaComplex| #1#) %))))))
+                    (SIGNATURE |coerce| ((|DeltaComplex| #1#) %)))))
+          (|v1| (|List| (|List| (|List| (|Integer|)))))
+          (|vs1| (|List| (|Integer|))) (|r| (ASIMP)))
          (SEQ (LETT ASIMP (|FiniteCubicalComplex| (|Integer|)))
               (COND
                ((SPADCALL |dim| 2 (QREFELT % 15))

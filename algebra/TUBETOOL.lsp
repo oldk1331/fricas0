@@ -79,9 +79,9 @@
         ((|p0| (|Point| (|DoubleFloat|))) (|p1| (|Point| (|DoubleFloat|)))
          (% (|Point| (|DoubleFloat|))))
         (SPROG
-         ((|l| (|List| (|DoubleFloat|))) (|z1| #1=(|DoubleFloat|))
-          (|y1| #2=(|DoubleFloat|)) (|x1| #3=(|DoubleFloat|)) (|z0| #1#)
-          (|y0| #2#) (|x0| #3#))
+         ((|x0| #1=(|DoubleFloat|)) (|y0| #2=(|DoubleFloat|))
+          (|z0| #3=(|DoubleFloat|)) (|x1| #1#) (|y1| #2#) (|z1| #3#)
+          (|l| (|List| (|DoubleFloat|))))
          (SEQ (LETT |x0| (SPADCALL |p0| (QREFELT % 15)))
               (LETT |y0| (SPADCALL |p0| (QREFELT % 16)))
               (LETT |z0| (SPADCALL |p0| (QREFELT % 17)))
@@ -105,8 +105,8 @@
 (SDEFUN |TUBETOOL;cosSinInfo;IL;10|
         ((|n| (|Integer|)) (% (|List| (|List| (|DoubleFloat|)))))
         (SPROG
-         ((|ans| (|List| (|List| (|DoubleFloat|)))) (|angle| (|DoubleFloat|))
-          (#1=#:G25 NIL) (|i| NIL) (|theta| (|DoubleFloat|)))
+         ((|theta| (|DoubleFloat|)) (|i| NIL) (#1=#:G25 NIL)
+          (|angle| (|DoubleFloat|)) (|ans| (|List| (|List| (|DoubleFloat|)))))
          (SEQ (LETT |ans| NIL)
               (LETT |theta|
                     (|div_DF_I|
@@ -130,9 +130,9 @@
          (|cosSin| (|List| (|List| (|DoubleFloat|))))
          (% (|List| (|Point| (|DoubleFloat|)))))
         (SPROG
-         ((|pt| (|Point| (|DoubleFloat|)))
-          (|ans| (|List| (|Point| (|DoubleFloat|)))) (|sin| (|DoubleFloat|))
-          (|cos| (|DoubleFloat|)) (|cossin| (|List| (|DoubleFloat|))))
+         ((|cossin| (|List| (|DoubleFloat|))) (|cos| (|DoubleFloat|))
+          (|sin| (|DoubleFloat|)) (|ans| (|List| (|Point| (|DoubleFloat|))))
+          (|pt| (|Point| (|DoubleFloat|))))
          (SEQ (LETT |ans| NIL)
               (SEQ G190 (COND ((NULL (NULL (NULL |cosSin|))) (GO G191)))
                    (SEQ (LETT |cossin| (|SPADfirst| |cosSin|))

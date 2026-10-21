@@ -13,7 +13,7 @@
 
 (SDEFUN |GOPT;maxSubst;U%;4|
         ((|d| (|Union| (|PositiveInteger|) "arbitrary")) (% (%)))
-        (SPROG ((#1=#:G25 NIL))
+        (SPROG ((#1=#:G28 NIL))
                (COND
                 ((QEQCAR |d| 0)
                  (SPADCALL
@@ -89,28 +89,28 @@
 
 (SDEFUN |GOPT;option;LSU;23|
         ((|l| (|List| %)) (|s| (|Symbol|)) (% (|Union| (|Any|) "failed")))
-        (SPROG ((#1=#:G88 NIL) (#2=#:G89 NIL) (#3=#:G90 NIL) (|x| NIL))
+        (SPROG ((|x| NIL) (#1=#:G101 NIL) (#2=#:G100 NIL) (#3=#:G99 NIL))
                (SEQ
                 (EXIT
                  (SEQ
                   (SEQ
                    (EXIT
-                    (SEQ (LETT |x| NIL) (LETT #3# |l|) G190
+                    (SEQ (LETT |x| NIL) (LETT #1# |l|) G190
                          (COND
-                          ((OR (ATOM #3#) (PROGN (LETT |x| (CAR #3#)) NIL))
+                          ((OR (ATOM #1#) (PROGN (LETT |x| (CAR #1#)) NIL))
                            (GO G191)))
                          (SEQ
                           (EXIT
                            (COND
                             ((EQUAL (QCAR |x|) |s|)
                              (PROGN
-                              (LETT #1#
+                              (LETT #3#
                                     (PROGN
                                      (LETT #2# (CONS 0 (QCDR |x|)))
-                                     (GO #4=#:G87)))
-                              (GO #5=#:G82))))))
-                         (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))
-                   #5# (EXIT #1#))
+                                     (GO #4=#:G98)))
+                              (GO #5=#:G93))))))
+                         (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL)))
+                   #5# (EXIT #3#))
                   (EXIT (CONS 1 "failed"))))
                 #4# (EXIT #2#)))) 
 
@@ -133,7 +133,7 @@
 
 (DEFUN |GuessOption| ()
   (SPROG NIL
-         (PROG (#1=#:G92)
+         (PROG (#1=#:G103)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|GuessOption|))

@@ -14,11 +14,11 @@
 (SDEFUN |CRAPACK;chineseRemainder;2LR;2|
         ((|lv| (|List| R)) (|lm| (|List| R)) (% (R)))
         (SPROG
-         ((|y| (BB)) (|l| (|List| R)) (#1=#:G25 NIL) (|v| NIL) (#2=#:G26 NIL)
-          (#3=#:G27 NIL) (|m| NIL) (#4=#:G24 NIL) (|linv| (|List| R))
-          (|inv| (R))
+         ((|x| (BB))
           (|u| (|Union| (|Record| (|:| |coef1| R) (|:| |coef2| R)) "failed"))
-          (|x| (BB)))
+          (|inv| (R)) (|linv| (|List| R)) (#1=#:G30 NIL) (|m| NIL)
+          (#2=#:G33 NIL) (#3=#:G32 NIL) (|v| NIL) (#4=#:G31 NIL)
+          (|l| (|List| R)) (|y| (BB)))
          (SEQ
           (COND
            ((SPADCALL (LENGTH |lm|) (LENGTH |lv|) (QREFELT % 22))
@@ -48,33 +48,33 @@
                           (LETT |linv| (SPADCALL |inv| |lm| (QREFELT % 19)))
                           (LETT |l|
                                 (PROGN
-                                 (LETT #4# NIL)
-                                 (SEQ (LETT |m| NIL) (LETT #3# |lm|)
-                                      (LETT #2# |linv|) (LETT |v| NIL)
-                                      (LETT #1# |lv|) G190
+                                 (LETT #1# NIL)
+                                 (SEQ (LETT |m| NIL) (LETT #2# |lm|)
+                                      (LETT #3# |linv|) (LETT |v| NIL)
+                                      (LETT #4# |lv|) G190
                                       (COND
-                                       ((OR (ATOM #1#)
-                                            (PROGN (LETT |v| (CAR #1#)) NIL)
-                                            (ATOM #2#)
-                                            (PROGN (LETT |u| (CAR #2#)) NIL)
+                                       ((OR (ATOM #4#)
+                                            (PROGN (LETT |v| (CAR #4#)) NIL)
                                             (ATOM #3#)
-                                            (PROGN (LETT |m| (CAR #3#)) NIL))
+                                            (PROGN (LETT |u| (CAR #3#)) NIL)
+                                            (ATOM #2#)
+                                            (PROGN (LETT |m| (CAR #2#)) NIL))
                                         (GO G191)))
                                       (SEQ
                                        (EXIT
-                                        (LETT #4#
+                                        (LETT #1#
                                               (CONS
                                                (SPADCALL
                                                 (SPADCALL |u| |v|
                                                           (QREFELT % 13))
                                                 |m| (QREFELT % 16))
-                                               #4#))))
-                                      (LETT #1#
-                                            (PROG1 (CDR #1#)
-                                              (LETT #2#
-                                                    (PROG1 (CDR #2#)
-                                                      (LETT #3# (CDR #3#))))))
-                                      (GO G190) G191 (EXIT (NREVERSE #4#)))))
+                                               #1#))))
+                                      (LETT #4#
+                                            (PROG1 (CDR #4#)
+                                              (LETT #3#
+                                                    (PROG1 (CDR #3#)
+                                                      (LETT #2# (CDR #2#))))))
+                                      (GO G190) G191 (EXIT (NREVERSE #1#)))))
                           (LETT |y| (SPADCALL |y| |l| (QREFELT % 12)))
                           (EXIT
                            (SPADCALL
@@ -100,12 +100,12 @@
 (SDEFUN |CRAPACK;chineseRemainder;L2L;3|
         ((|llv| (|List| (|List| R))) (|lm| (|List| R)) (% (|List| R)))
         (SPROG
-         ((|retVal| (|List| R)) (|y| (BB)) (|l| (|List| R)) (#1=#:G46 NIL)
-          (|v| NIL) (#2=#:G47 NIL) (|u3| NIL) (#3=#:G48 NIL) (|m| NIL)
-          (#4=#:G45 NIL) (#5=#:G44 NIL) (|lv| NIL) (|linv| (|List| R))
-          (|inv| (R))
+         ((|x| (BB))
           (|u| (|Union| (|Record| (|:| |coef1| R) (|:| |coef2| R)) "failed"))
-          (|x| (BB)))
+          (|inv| (R)) (|linv| (|List| R)) (|lv| NIL) (#1=#:G50 NIL)
+          (#2=#:G51 NIL) (|m| NIL) (#3=#:G54 NIL) (|u3| NIL) (#4=#:G53 NIL)
+          (|v| NIL) (#5=#:G52 NIL) (|l| (|List| R)) (|y| (BB))
+          (|retVal| (|List| R)))
          (SEQ
           (LETT |x|
                 (SPADCALL (LENGTH |lm|) (|spadConstant| % 8) (QREFELT % 10)))
@@ -127,23 +127,23 @@
                   (SEQ (LETT |inv| (QCAR (QCDR |u|)))
                        (LETT |linv| (SPADCALL |inv| |lm| (QREFELT % 19)))
                        (LETT |retVal| NIL)
-                       (SEQ (LETT |lv| NIL) (LETT #5# |llv|) G190
+                       (SEQ (LETT |lv| NIL) (LETT #1# |llv|) G190
                             (COND
-                             ((OR (ATOM #5#) (PROGN (LETT |lv| (CAR #5#)) NIL))
+                             ((OR (ATOM #1#) (PROGN (LETT |lv| (CAR #1#)) NIL))
                               (GO G191)))
                             (SEQ
                              (LETT |l|
                                    (PROGN
-                                    (LETT #4# NIL)
+                                    (LETT #2# NIL)
                                     (SEQ (LETT |m| NIL) (LETT #3# |lm|)
-                                         (LETT |u3| NIL) (LETT #2# |linv|)
-                                         (LETT |v| NIL) (LETT #1# |lv|) G190
+                                         (LETT |u3| NIL) (LETT #4# |linv|)
+                                         (LETT |v| NIL) (LETT #5# |lv|) G190
                                          (COND
-                                          ((OR (ATOM #1#)
-                                               (PROGN (LETT |v| (CAR #1#)) NIL)
-                                               (ATOM #2#)
+                                          ((OR (ATOM #5#)
+                                               (PROGN (LETT |v| (CAR #5#)) NIL)
+                                               (ATOM #4#)
                                                (PROGN
-                                                (LETT |u3| (CAR #2#))
+                                                (LETT |u3| (CAR #4#))
                                                 NIL)
                                                (ATOM #3#)
                                                (PROGN
@@ -152,21 +152,21 @@
                                            (GO G191)))
                                          (SEQ
                                           (EXIT
-                                           (LETT #4#
+                                           (LETT #2#
                                                  (CONS
                                                   (SPADCALL
                                                    (SPADCALL |u3| |v|
                                                              (QREFELT % 13))
                                                    |m| (QREFELT % 16))
-                                                  #4#))))
-                                         (LETT #1#
-                                               (PROG1 (CDR #1#)
-                                                 (LETT #2#
-                                                       (PROG1 (CDR #2#)
+                                                  #2#))))
+                                         (LETT #5#
+                                               (PROG1 (CDR #5#)
+                                                 (LETT #4#
+                                                       (PROG1 (CDR #4#)
                                                          (LETT #3#
                                                                (CDR #3#))))))
                                          (GO G190) G191
-                                         (EXIT (NREVERSE #4#)))))
+                                         (EXIT (NREVERSE #2#)))))
                              (LETT |y| (SPADCALL |y| |l| (QREFELT % 12)))
                              (EXIT
                               (LETT |retVal|
@@ -182,7 +182,7 @@
                                       (SPADCALL |x| (QREFELT % 28))
                                       (QREFELT % 16))
                                      |retVal|))))
-                            (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
+                            (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
                        (EXIT (REVERSE |retVal|))))))))) 
 
 (SDEFUN |CRAPACK;chineseRemainder;L2L;3!1|
@@ -227,7 +227,7 @@
 (DECLAIM (NOTINLINE |CRApackage;|)) 
 
 (DEFUN |CRApackage;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|CRApackage| DV$1))
@@ -241,9 +241,9 @@
           (QSETREFV % 7 (|BalancedBinaryTree| |#1|))
           %))) 
 
-(DEFUN |CRApackage| (#1=#:G62)
+(DEFUN |CRApackage| (#1=#:G70)
   (SPROG NIL
-         (PROG (#2=#:G63)
+         (PROG (#2=#:G71)
            (RETURN
             (COND
              ((LETT #2#
@@ -259,12 +259,12 @@
 
 (MAKEPROP '|CRApackage| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) 'BB (0 . |Zero|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) 'BB (0 . |0|)
               (|NonNegativeInteger|) (4 . |balancedBinaryTree|) (|List| 6)
               (10 . |setleaves!|) (16 . *) (|Mapping| 6 6 6) (22 . |mapUp!|)
               (28 . |rem|) (34 . |mapDown!|) (41 . |leaves|)
               |CRAPACK;modTree;R2L;1| (|Boolean|) (|Integer|) (46 . ~=)
-              (52 . |One|) (56 . |copy|) (61 . +) (|Mapping| 6 6 6 6 6)
+              (52 . |1|) (56 . |copy|) (61 . +) (|Mapping| 6 6 6 6 6)
               (67 . |mapUp!|) (74 . |value|)
               (|Record| (|:| |coef1| %) (|:| |coef2| %)) (|Union| 29 '"failed")
               (79 . |extendedEuclidean|) |CRAPACK;chineseRemainder;2LR;2|

@@ -5,9 +5,9 @@
           (|Union| (|Record| (|:| |quotient| UP) (|:| |remainder| UP))
                    "failed")))
         (SPROG
-         ((|q| (UP)) (|ee| (|NonNegativeInteger|)) (#1=#:G7 NIL) (#2=#:G25 NIL)
-          (|c| (|Union| R "failed"))
-          (|e| (|Union| (|NonNegativeInteger|) #3="failed")) (|lc| (R)))
+         ((|lc| (R)) (|e| (|Union| (|NonNegativeInteger|) #1="failed"))
+          (|c| (|Union| R "failed")) (#2=#:G30 NIL) (#3=#:G11 NIL)
+          (|ee| (|NonNegativeInteger|)) (|q| (UP)))
          (SEQ
           (EXIT
            (COND
@@ -41,18 +41,18 @@
                                   ((QEQCAR |c| 1)
                                    (PROGN
                                     (LETT #2# (CONS 1 "failed"))
-                                    (GO #5=#:G24)))
+                                    (GO #5=#:G29)))
                                   ('T
                                    (SEQ
                                     (LETT |ee|
-                                          (PROG2 (LETT #1# |e|)
-                                              (QCDR #1#)
-                                            (|check_union2| (QEQCAR #1# 0)
+                                          (PROG2 (LETT #3# |e|)
+                                              (QCDR #3#)
+                                            (|check_union2| (QEQCAR #3# 0)
                                                             (|NonNegativeInteger|)
                                                             (|Union|
                                                              (|NonNegativeInteger|)
-                                                             #3#)
-                                                            #1#)))
+                                                             #1#)
+                                                            #3#)))
                                     (LETT |q|
                                           (SPADCALL |q|
                                                     (SPADCALL (QCDR |c|) |ee|
@@ -84,7 +84,7 @@
 (DECLAIM (NOTINLINE |UnivariatePolynomialDivisionPackage;|)) 
 
 (DEFUN |UnivariatePolynomialDivisionPackage;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -101,9 +101,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |UnivariatePolynomialDivisionPackage| (&REST #1=#:G26)
+(DEFUN |UnivariatePolynomialDivisionPackage| (&REST #1=#:G31)
   (SPROG NIL
-         (PROG (#2=#:G27)
+         (PROG (#2=#:G32)
            (RETURN
             (COND
              ((LETT #2#
@@ -126,10 +126,9 @@
 (MAKEPROP '|UnivariatePolynomialDivisionPackage| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (|Boolean|)
-              (0 . |zero?|) (5 . |leadingCoefficient|) (10 . |One|)
-              (14 . |One|) (18 . =)
-              (|Record| (|:| |quotient| %) (|:| |remainder| %))
-              (24 . |monicDivide|) (30 . |Zero|) (|NonNegativeInteger|)
+              (0 . |zero?|) (5 . |leadingCoefficient|) (10 . |1|) (14 . |1|)
+              (18 . =) (|Record| (|:| |quotient| %) (|:| |remainder| %))
+              (24 . |monicDivide|) (30 . |0|) (|NonNegativeInteger|)
               (34 . |degree|) (|Union| % '"failed") (39 . |subtractIfCan|)
               (45 . |exquo|) (51 . |monomial|) (57 . +) (63 . +)
               (|Mapping| 17 17) (69 . |mapExponents|) (75 . *) (81 . -)

@@ -8,70 +8,70 @@
                      (|Float|)))
          (% (|Void|)))
         (SPROG
-         ((#3=#:G46 NIL) (|i| NIL) (#4=#:G42 NIL) (|x| #2#) (#5=#:G45 NIL)
-          (#6=#:G44 NIL) (|iter| NIL) (#7=#:G43 NIL)
-          (|outlist| (|List| (|OutputForm|))) (|m| #1#) (|tiny| (|Float|))
+         ((#3=#:G5 NIL) (|y| #4=(|Vector| (|Float|))) (#5=#:G7 NIL)
+          (|yscal| #4#) (#6=#:G9 NIL) (|dydx| #4#) (#7=#:G11 NIL) (|t1| #4#)
+          (#8=#:G13 NIL) (|t2| #4#) (#9=#:G15 NIL) (|t3| #4#) (#10=#:G17 NIL)
+          (|t4| #4#) (#11=#:G19 NIL) (|t5| #4#) (#12=#:G21 NIL) (|t6| #4#)
           (|step|
            (|Record| (|:| |to_try| (|Float|)) (|:| |did| (|Float|))
                      (|:| |next| (|Float|))))
-          (|t6| #8=(|Vector| (|Float|))) (#9=#:G21 NIL) (|t5| #8#)
-          (#10=#:G19 NIL) (|t4| #8#) (#11=#:G17 NIL) (|t3| #8#) (#12=#:G15 NIL)
-          (|t2| #8#) (#13=#:G13 NIL) (|t1| #8#) (#14=#:G11 NIL) (|dydx| #8#)
-          (#15=#:G9 NIL) (|yscal| #8#) (#16=#:G7 NIL) (|y| #8#) (#17=#:G5 NIL))
+          (|tiny| (|Float|)) (|m| #1#) (|outlist| (|List| (|OutputForm|)))
+          (#13=#:G44 NIL) (|iter| NIL) (#14=#:G45 NIL) (#15=#:G46 NIL)
+          (|x| #2#) (#16=#:G43 NIL) (|i| NIL) (#17=#:G47 NIL))
          (SEQ
           (LETT |y|
                 (MAKEARR1
-                 (PROG1 (LETT #17# |nvar|)
-                   (|check_subtype2| (>= #17# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #17#))
+                 (PROG1 (LETT #3# |nvar|)
+                   (|check_subtype2| (>= #3# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #3#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |yscal|
                 (MAKEARR1
-                 (PROG1 (LETT #16# |nvar|)
-                   (|check_subtype2| (>= #16# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #16#))
+                 (PROG1 (LETT #5# |nvar|)
+                   (|check_subtype2| (>= #5# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #5#))
                  (SPADCALL 1 0 10 (QREFELT % 10))))
           (LETT |dydx|
                 (MAKEARR1
-                 (PROG1 (LETT #15# |nvar|)
-                   (|check_subtype2| (>= #15# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #15#))
+                 (PROG1 (LETT #6# |nvar|)
+                   (|check_subtype2| (>= #6# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #6#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |t1|
                 (MAKEARR1
-                 (PROG1 (LETT #14# |nvar|)
-                   (|check_subtype2| (>= #14# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #14#))
+                 (PROG1 (LETT #7# |nvar|)
+                   (|check_subtype2| (>= #7# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #7#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |t2|
                 (MAKEARR1
-                 (PROG1 (LETT #13# |nvar|)
-                   (|check_subtype2| (>= #13# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #13#))
+                 (PROG1 (LETT #8# |nvar|)
+                   (|check_subtype2| (>= #8# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #8#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |t3|
                 (MAKEARR1
-                 (PROG1 (LETT #12# |nvar|)
-                   (|check_subtype2| (>= #12# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #12#))
+                 (PROG1 (LETT #9# |nvar|)
+                   (|check_subtype2| (>= #9# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #9#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |t4|
-                (MAKEARR1
-                 (PROG1 (LETT #11# |nvar|)
-                   (|check_subtype2| (>= #11# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #11#))
-                 (SPADCALL 0 0 10 (QREFELT % 10))))
-          (LETT |t5|
                 (MAKEARR1
                  (PROG1 (LETT #10# |nvar|)
                    (|check_subtype2| (>= #10# 0) '(|NonNegativeInteger|)
                                      '(|Integer|) #10#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
+          (LETT |t5|
+                (MAKEARR1
+                 (PROG1 (LETT #11# |nvar|)
+                   (|check_subtype2| (>= #11# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #11#))
+                 (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |t6|
                 (MAKEARR1
-                 (PROG1 (LETT #9# |nvar|)
-                   (|check_subtype2| (>= #9# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #9#))
+                 (PROG1 (LETT #12# |nvar|)
+                   (|check_subtype2| (>= #12# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #12#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |step|
                 (VECTOR |htry| (SPADCALL 0 0 10 (QREFELT % 10))
@@ -88,8 +88,8 @@
           (LETT |eps|
                 (SPADCALL (SPADCALL 1 0 10 (QREFELT % 10)) |eps|
                           (QREFELT % 16)))
-          (SEQ (LETT |i| 1) (LETT #7# |m|) G190
-               (COND ((|greater_SI| |i| #7#) (GO G191)))
+          (SEQ (LETT |i| 1) (LETT #13# |m|) G190
+               (COND ((|greater_SI| |i| #13#) (GO G191)))
                (SEQ
                 (EXIT
                  (SPADCALL |y| |i| (SPADCALL |ystart| |i| (QREFELT % 18))
@@ -97,8 +97,8 @@
                (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
           (SEQ
            (EXIT
-            (SEQ (LETT |iter| 1) (LETT #6# |nstep|) G190
-                 (COND ((|greater_SI| |iter| #6#) (GO G191)))
+            (SEQ (LETT |iter| 1) (LETT #14# |nstep|) G190
+                 (COND ((|greater_SI| |iter| #14#) (GO G191)))
                  (SEQ (SPADCALL |dydx| |y| |x| |derivs|)
                       (COND
                        ((SPADCALL
@@ -108,8 +108,8 @@
                          (SPADCALL 0 0 10 (QREFELT % 10)) (QREFELT % 23))
                         (QSETVELT |step| 0
                                   (SPADCALL |x2| |x| (QREFELT % 21)))))
-                      (SEQ (LETT |i| 1) (LETT #5# |m|) G190
-                           (COND ((|greater_SI| |i| #5#) (GO G191)))
+                      (SEQ (LETT |i| 1) (LETT #15# |m|) G190
+                           (COND ((|greater_SI| |i| #15#) (GO G191)))
                            (SEQ
                             (EXIT
                              (SPADCALL |yscal| |i|
@@ -135,10 +135,10 @@
                        ((SPADCALL (SPADCALL |x| |x2| (QREFELT % 21))
                                   (SPADCALL 0 0 10 (QREFELT % 10))
                                   (QREFELT % 26))
-                        (PROGN (LETT #4# 1) (GO #18=#:G34))))
+                        (PROGN (LETT #16# 1) (GO #18=#:G34))))
                       (EXIT (QSETVELT |step| 0 (QVELT |step| 2))))
                  (LETT |iter| (|inc_SI| |iter|)) (GO G190) G191 (EXIT NIL)))
-           #18# (EXIT #4#))
+           #18# (EXIT #16#))
           (COND
            ((EQL |iter| (+ |nstep| 1))
             (SEQ (SPADCALL "ode: ERROR " (QREFELT % 30))
@@ -156,8 +156,8 @@
                   (SPADCALL " y= " (SPADCALL |y| (QREFELT % 38))
                             (QREFELT % 39))))))
           (EXIT
-           (SEQ (LETT |i| 1) (LETT #3# |m|) G190
-                (COND ((|greater_SI| |i| #3#) (GO G191)))
+           (SEQ (LETT |i| 1) (LETT #17# |m|) G190
+                (COND ((|greater_SI| |i| #17#) (GO G191)))
                 (SEQ
                  (EXIT
                   (SPADCALL |ystart| |i| (SPADCALL |y| |i| (QREFELT % 18))
@@ -175,28 +175,28 @@
                      (|Float|)))
          (% (|Void|)))
         (SPROG
-         ((|t7| #1=(|Vector| (|Float|))) (#2=#:G61 NIL) (|t6| #1#)
-          (#3=#:G59 NIL) (|t5| #1#) (#4=#:G57 NIL) (|t4| #1#) (#5=#:G55 NIL)
-          (|t3| #1#) (#6=#:G53 NIL) (|t2| #1#) (#7=#:G51 NIL) (|t1| #1#)
-          (#8=#:G49 NIL))
+         ((#1=#:G50 NIL) (|t1| #2=(|Vector| (|Float|))) (#3=#:G52 NIL)
+          (|t2| #2#) (#4=#:G54 NIL) (|t3| #2#) (#5=#:G56 NIL) (|t4| #2#)
+          (#6=#:G58 NIL) (|t5| #2#) (#7=#:G60 NIL) (|t6| #2#) (#8=#:G62 NIL)
+          (|t7| #2#))
          (SEQ
           (LETT |t1|
                 (MAKEARR1
-                 (PROG1 (LETT #8# |n|)
-                   (|check_subtype2| (>= #8# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #8#))
+                 (PROG1 (LETT #1# |n|)
+                   (|check_subtype2| (>= #1# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #1#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |t2|
                 (MAKEARR1
-                 (PROG1 (LETT #7# |n|)
-                   (|check_subtype2| (>= #7# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #7#))
+                 (PROG1 (LETT #3# |n|)
+                   (|check_subtype2| (>= #3# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #3#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |t3|
                 (MAKEARR1
-                 (PROG1 (LETT #6# |n|)
-                   (|check_subtype2| (>= #6# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #6#))
+                 (PROG1 (LETT #4# |n|)
+                   (|check_subtype2| (>= #4# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #4#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |t4|
                 (MAKEARR1
@@ -206,21 +206,21 @@
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |t5|
                 (MAKEARR1
-                 (PROG1 (LETT #4# |n|)
-                   (|check_subtype2| (>= #4# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #4#))
+                 (PROG1 (LETT #6# |n|)
+                   (|check_subtype2| (>= #6# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #6#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |t6|
                 (MAKEARR1
-                 (PROG1 (LETT #3# |n|)
-                   (|check_subtype2| (>= #3# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #3#))
+                 (PROG1 (LETT #7# |n|)
+                   (|check_subtype2| (>= #7# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #7#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |t7|
                 (MAKEARR1
-                 (PROG1 (LETT #2# |n|)
-                   (|check_subtype2| (>= #2# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #2#))
+                 (PROG1 (LETT #8# |n|)
+                   (|check_subtype2| (>= #8# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #8#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (SPADCALL |t7| |y| |x| |derivs|)
           (LETT |eps|
@@ -266,10 +266,10 @@
          (|dysav| (|Vector| (|Float|))) (|ytemp| (|Vector| (|Float|)))
          (% (|Void|)))
         (SPROG
-         ((#4=#:G101 NIL) (|i| NIL) (#5=#:G98 NIL) (|h| #3#)
-          (|errmax| #6=(|Float|)) (#7=#:G100 NIL) (|hh| (|Float|))
-          (#8=#:G99 NIL) (|m| #1#) (|errcon| #6#) (|shrink| #9=(|Float|))
-          (|grow| #9#) (|safety| #6#) (|fcor| (|Float|)) (|xsav| #2#))
+         ((|xsav| #2#) (|fcor| (|Float|)) (|safety| #4=(|Float|))
+          (|grow| #5=(|Float|)) (|shrink| #5#) (|errcon| #4#) (|m| #1#)
+          (#6=#:G100 NIL) (|hh| (|Float|)) (#7=#:G101 NIL) (|errmax| #4#)
+          (|h| #3#) (#8=#:G99 NIL) (|i| NIL) (#9=#:G102 NIL))
          (SEQ (LETT |xsav| |x|) (LETT |h| (QVELT |step| 0))
               (LETT |fcor|
                     (SPADCALL (SPADCALL 1 0 10 (QREFELT % 10))
@@ -283,8 +283,8 @@
                     (SPADCALL (SPADCALL 25 -2 10 (QREFELT % 10))
                               (QREFELT % 45)))
               (LETT |errcon| (SPADCALL 6 -5 10 (QREFELT % 10))) (LETT |m| |n|)
-              (SEQ (LETT |i| 1) (LETT #8# |m|) G190
-                   (COND ((|greater_SI| |i| #8#) (GO G191)))
+              (SEQ (LETT |i| 1) (LETT #6# |m|) G190
+                   (COND ((|greater_SI| |i| #6#) (GO G191)))
                    (SEQ
                     (SPADCALL |dysav| |i| (SPADCALL |dydx| |i| (QREFELT % 18))
                               (QREFELT % 19))
@@ -355,12 +355,12 @@
                                ('T
                                 (QSETVELT |step| 2
                                           (SPADCALL 4 |h| (QREFELT % 48)))))
-                              (EXIT (PROGN (LETT #5# 1) (GO #10=#:G93))))))))
+                              (EXIT (PROGN (LETT #8# 1) (GO #10=#:G94))))))))
                      NIL (GO G190) G191 (EXIT NIL)))
-               #10# (EXIT #5#))
+               #10# (EXIT #8#))
               (EXIT
-               (SEQ (LETT |i| 1) (LETT #4# |m|) G190
-                    (COND ((|greater_SI| |i| #4#) (GO G191)))
+               (SEQ (LETT |i| 1) (LETT #9# |m|) G190
+                    (COND ((|greater_SI| |i| #9#) (GO G191)))
                     (SEQ
                      (EXIT
                       (SPADCALL |y| |i|
@@ -381,22 +381,21 @@
                      (|Float|)))
          (% (|Void|)))
         (SPROG
-         ((|x| #1#) (#2=#:G118 NIL) (|i| NIL) (|h| (|Float|))
-          (|dydx| #3=(|Vector| (|Float|))) (#4=#:G109 NIL) (|dym| #3#)
-          (#5=#:G107 NIL) (|dyt| #3#) (#6=#:G105 NIL) (|yt| #3#)
-          (#7=#:G103 NIL))
+         ((#2=#:G104 NIL) (|yt| #3=(|Vector| (|Float|))) (#4=#:G106 NIL)
+          (|dyt| #3#) (#5=#:G108 NIL) (|dym| #3#) (#6=#:G110 NIL) (|dydx| #3#)
+          (|h| (|Float|)) (|i| NIL) (#7=#:G119 NIL) (|x| #1#))
          (SEQ
           (LETT |yt|
                 (MAKEARR1
-                 (PROG1 (LETT #7# |nvar|)
-                   (|check_subtype2| (>= #7# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #7#))
+                 (PROG1 (LETT #2# |nvar|)
+                   (|check_subtype2| (>= #2# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #2#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |dyt|
                 (MAKEARR1
-                 (PROG1 (LETT #6# |nvar|)
-                   (|check_subtype2| (>= #6# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #6#))
+                 (PROG1 (LETT #4# |nvar|)
+                   (|check_subtype2| (>= #4# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #4#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |dym|
                 (MAKEARR1
@@ -406,17 +405,17 @@
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |dydx|
                 (MAKEARR1
-                 (PROG1 (LETT #4# |nvar|)
-                   (|check_subtype2| (>= #4# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #4#))
+                 (PROG1 (LETT #6# |nvar|)
+                   (|check_subtype2| (>= #6# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #6#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |h|
                 (SPADCALL (SPADCALL |x2| |x1| (QREFELT % 21))
                           (SPADCALL |nstep| (QREFELT % 49)) (QREFELT % 16)))
           (LETT |x| |x1|)
           (EXIT
-           (SEQ (LETT |i| 1) (LETT #2# |nstep|) G190
-                (COND ((|greater_SI| |i| #2#) (GO G191)))
+           (SEQ (LETT |i| 1) (LETT #7# |nstep|) G190
+                (COND ((|greater_SI| |i| #7#) (GO G191)))
                 (SEQ (SPADCALL |dydx| |y| |x| |derivs|)
                      (|NUMODE;rk4local| |y| |dydx| |nvar| |x| |h| |y| |derivs|
                       |yt| |dyt| |dym| %)
@@ -431,33 +430,32 @@
                      (|Float|)))
          (% (|Void|)))
         (SPROG
-         ((|t4| #1=(|Vector| (|Float|))) (#2=#:G126 NIL) (|t3| #1#)
-          (#3=#:G124 NIL) (|t2| #1#) (#4=#:G122 NIL) (|t1| #1#)
-          (#5=#:G120 NIL))
+         ((#1=#:G121 NIL) (|t1| #2=(|Vector| (|Float|))) (#3=#:G123 NIL)
+          (|t2| #2#) (#4=#:G125 NIL) (|t3| #2#) (#5=#:G127 NIL) (|t4| #2#))
          (SEQ
           (LETT |t1|
                 (MAKEARR1
-                 (PROG1 (LETT #5# |n|)
-                   (|check_subtype2| (>= #5# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #5#))
+                 (PROG1 (LETT #1# |n|)
+                   (|check_subtype2| (>= #1# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #1#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |t2|
-                (MAKEARR1
-                 (PROG1 (LETT #4# |n|)
-                   (|check_subtype2| (>= #4# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #4#))
-                 (SPADCALL 0 0 10 (QREFELT % 10))))
-          (LETT |t3|
                 (MAKEARR1
                  (PROG1 (LETT #3# |n|)
                    (|check_subtype2| (>= #3# 0) '(|NonNegativeInteger|)
                                      '(|Integer|) #3#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
+          (LETT |t3|
+                (MAKEARR1
+                 (PROG1 (LETT #4# |n|)
+                   (|check_subtype2| (>= #4# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #4#))
+                 (SPADCALL 0 0 10 (QREFELT % 10))))
           (LETT |t4|
                 (MAKEARR1
-                 (PROG1 (LETT #2# |n|)
-                   (|check_subtype2| (>= #2# 0) '(|NonNegativeInteger|)
-                                     '(|Integer|) #2#))
+                 (PROG1 (LETT #5# |n|)
+                   (|check_subtype2| (>= #5# 0) '(|NonNegativeInteger|)
+                                     '(|Integer|) #5#))
                  (SPADCALL 0 0 10 (QREFELT % 10))))
           (SPADCALL |t1| |y| |x| |derivs|)
           (EXIT
@@ -487,9 +485,9 @@
          (|yt| (|Vector| (|Float|))) (|dyt| (|Vector| (|Float|)))
          (|dym| (|Vector| (|Float|))) (% (|Void|)))
         (SPROG
-         ((#2=#:G151 NIL) (|i| NIL) (#3=#:G150 NIL) (#4=#:G149 NIL)
-          (#5=#:G148 NIL) (|m| #1#) (|xh| (|Float|)) (|h6| (|Float|))
-          (|hh| (|Float|)))
+         ((|hh| (|Float|)) (|h6| (|Float|)) (|xh| (|Float|)) (|m| #1#)
+          (#2=#:G149 NIL) (#3=#:G150 NIL) (#4=#:G151 NIL) (|i| NIL)
+          (#5=#:G152 NIL))
          (SEQ
           (LETT |hh|
                 (SPADCALL |h| (SPADCALL 5 -1 10 (QREFELT % 10))
@@ -497,8 +495,8 @@
           (LETT |h6|
                 (SPADCALL |h| (SPADCALL 6 0 10 (QREFELT % 10)) (QREFELT % 16)))
           (LETT |xh| (SPADCALL |x| |hh| (QREFELT % 20))) (LETT |m| |n|)
-          (SEQ (LETT |i| 1) (LETT #5# |m|) G190
-               (COND ((|greater_SI| |i| #5#) (GO G191)))
+          (SEQ (LETT |i| 1) (LETT #2# |m|) G190
+               (COND ((|greater_SI| |i| #2#) (GO G191)))
                (SEQ
                 (EXIT
                  (SPADCALL |yt| |i|
@@ -511,8 +509,8 @@
                            (QREFELT % 19))))
                (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
           (SPADCALL |dyt| |yt| |xh| |derivs|)
-          (SEQ (LETT |i| 1) (LETT #4# |m|) G190
-               (COND ((|greater_SI| |i| #4#) (GO G191)))
+          (SEQ (LETT |i| 1) (LETT #3# |m|) G190
+               (COND ((|greater_SI| |i| #3#) (GO G191)))
                (SEQ
                 (EXIT
                  (SPADCALL |yt| |i|
@@ -525,8 +523,8 @@
                            (QREFELT % 19))))
                (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
           (SPADCALL |dym| |yt| |xh| |derivs|)
-          (SEQ (LETT |i| 1) (LETT #3# |m|) G190
-               (COND ((|greater_SI| |i| #3#) (GO G191)))
+          (SEQ (LETT |i| 1) (LETT #4# |m|) G190
+               (COND ((|greater_SI| |i| #4#) (GO G191)))
                (SEQ
                 (SPADCALL |yt| |i|
                           (SPADCALL (SPADCALL |y| |i| (QREFELT % 18))
@@ -545,8 +543,8 @@
                (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
           (SPADCALL |dyt| |yt| (SPADCALL |x| |h| (QREFELT % 20)) |derivs|)
           (EXIT
-           (SEQ (LETT |i| 1) (LETT #2# |m|) G190
-                (COND ((|greater_SI| |i| #2#) (GO G191)))
+           (SEQ (LETT |i| 1) (LETT #5# |m|) G190
+                (COND ((|greater_SI| |i| #5#) (GO G191)))
                 (SEQ
                  (EXIT
                   (SPADCALL |yout| |i|
@@ -588,7 +586,7 @@
 
 (DEFUN |NumericalOrdinaryDifferentialEquations| ()
   (SPROG NIL
-         (PROG (#1=#:G153)
+         (PROG (#1=#:G154)
            (RETURN
             (COND
              ((LETT #1#
@@ -613,8 +611,8 @@
 
 (MAKEPROP '|NumericalOrdinaryDifferentialEquations| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|Float|) (0 . |Zero|) (|Integer|)
-              (|PositiveInteger|) (4 . |float|) (11 . |One|) (15 . |digits|)
+           '#(NIL NIL NIL NIL NIL NIL (|Float|) (0 . |0|) (|Integer|)
+              (|PositiveInteger|) (4 . |float|) (11 . |1|) (15 . |digits|)
               (19 . ^) (|OutputForm|) (25 . |coerce|) (30 . /) (|Vector| 6)
               (36 . |elt|) (42 . |setelt!|) (49 . +) (55 . -) (|Boolean|)
               (61 . >) (67 . |abs|) (72 . *) (78 . >=) (|Void|) (|String|)

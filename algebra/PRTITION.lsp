@@ -1,9 +1,9 @@
 
-(PUT '|PRTITION;Zero;%;1| '|SPADreplace| '(XLAM NIL NIL)) 
+(MAKEPROP '|PRTITION;0;%;1| '|SPADreplace| '(XLAM NIL NIL)) 
 
-(SDEFUN |PRTITION;Zero;%;1| ((% (%))) NIL) 
+(SDEFUN |PRTITION;0;%;1| ((% (%))) NIL) 
 
-(PUT '|PRTITION;coerce;%L;2| '|SPADreplace| '(XLAM (|s|) |s|)) 
+(MAKEPROP '|PRTITION;coerce;%L;2| '|SPADreplace| '(XLAM (|s|) |s|)) 
 
 (SDEFUN |PRTITION;coerce;%L;2| ((|s| (%)) (% (|List| (|Integer|)))) |s|) 
 
@@ -22,7 +22,7 @@
                (SPADCALL (CDR |x|) (CDR |y|) (QREFELT % 18)))
               ('T (< (|SPADfirst| |x|) (|SPADfirst| |y|))))) 
 
-(PUT '|PRTITION;=;2%B;6| '|SPADreplace| 'EQUAL) 
+(MAKEPROP '|PRTITION;=;2%B;6| '|SPADreplace| 'EQUAL) 
 
 (SDEFUN |PRTITION;=;2%B;6| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
         (EQUAL |x| |y|)) 
@@ -37,7 +37,7 @@
                      (SPADCALL |x| (CDR |y|) (QREFELT % 20)))))) 
 
 (SDEFUN |PRTITION;*;Nni2%;8| ((|n| (|NonNegativeInteger|)) (|x| (%)) (% (%)))
-        (SPROG ((#1=#:G37 NIL))
+        (SPROG ((#1=#:G41 NIL))
                (COND ((ZEROP |n|) (|spadConstant| % 7))
                      ('T
                       (SPADCALL |x|
@@ -152,27 +152,27 @@
 
 (SDEFUN |PRTITION;pdct;%I;18| ((|x| (%)) (% (|Integer|)))
         (SPROG
-         ((#1=#:G76 NIL) (#2=#:G75 #3=(|Integer|)) (#4=#:G77 #3#)
-          (#5=#:G79 NIL) (|a| NIL))
+         ((|a| NIL) (#1=#:G84 NIL) (#2=#:G82 #3=(|Integer|)) (#4=#:G80 #3#)
+          (#5=#:G81 NIL))
          (SEQ
           (PROGN
-           (LETT #1# NIL)
-           (SEQ (LETT |a| NIL) (LETT #5# (SPADCALL |x| (QREFELT % 28))) G190
+           (LETT #5# NIL)
+           (SEQ (LETT |a| NIL) (LETT #1# (SPADCALL |x| (QREFELT % 28))) G190
                 (COND
-                 ((OR (ATOM #5#) (PROGN (LETT |a| (CAR #5#)) NIL)) (GO G191)))
+                 ((OR (ATOM #1#) (PROGN (LETT |a| (CAR #1#)) NIL)) (GO G191)))
                 (SEQ
                  (EXIT
                   (PROGN
-                   (LETT #4#
+                   (LETT #2#
                          (*
                           (SPADCALL (SPADCALL |a| (QREFELT % 37))
                                     (QREFELT % 45))
                           (EXPT (|SPADfirst| |a|)
                                 (SPADCALL |a| (QREFELT % 37)))))
-                   (COND (#1# (LETT #2# (* #2# #4#)))
-                         ('T (PROGN (LETT #2# #4#) (LETT #1# 'T)))))))
-                (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
-           (COND (#1# #2#) ('T 1)))))) 
+                   (COND (#5# (LETT #4# (* #4# #2#)))
+                         ('T (PROGN (LETT #4# #2#) (LETT #5# 'T)))))))
+                (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+           (COND (#5# #4#) ('T 1)))))) 
 
 (DECLAIM (NOTINLINE |Partition;|)) 
 
@@ -185,13 +185,15 @@
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|Partition| NIL (CONS 1 %))
           (|stuffDomainSlots| %)
+          (AND (|HasCategory| % '(|AbelianGroup|)) (|augmentPredVector| % 1))
+          (AND (|HasCategory| % '(|SetWithZero|)) (|augmentPredVector| % 2))
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 6 (|List| (|Integer|)))
           %))) 
 
 (DEFUN |Partition| ()
   (SPROG NIL
-         (PROG (#1=#:G81)
+         (PROG (#1=#:G86)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Partition|))
@@ -209,8 +211,7 @@
 (MAKEPROP '|Partition| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL '|Rep|
-              (CONS IDENTITY
-                    (FUNCALL (|dispatchFunction| |PRTITION;Zero;%;1|) %))
+              (CONS IDENTITY (FUNCALL (|dispatchFunction| |PRTITION;0;%;1|) %))
               (|List| 13) |PRTITION;coerce;%L;2| (0 . |copy|)
               |PRTITION;convert;%L;3| (|Boolean|) (|Integer|) (5 . <)
               (|Mapping| 12 13 13) (11 . |sort|) |PRTITION;partition;L%;4|
@@ -225,23 +226,24 @@
               (|List| 32) (66 . |reduce|) (72 . |paren|)
               |PRTITION;coerce;%Of;17| (77 . |factorial|) |PRTITION;pdct;%I;18|
               (|PositiveInteger|))
-           '#(~= 82 |zero?| 88 |subtractIfCan| 93 |smaller?| 99 |sample| 105
-              |powers| 109 |pdct| 114 |partition| 119 |opposite?| 124 |min| 130
-              |max| 136 |latex| 142 |convert| 147 |conjugate| 152 |coerce| 157
-              |Zero| 167 >= 171 > 177 = 183 <= 189 < 195 + 201 * 207)
+           '#(~= 82 |zero?| 88 |subtractIfCan| 93 |smaller?| 99 |sign| 105
+              |sample| 110 |powers| 114 |positive?| 119 |pdct| 124 |partition|
+              129 |opposite?| 134 |negative?| 140 |min| 145 |max| 151 |latex|
+              157 |convert| 162 |conjugate| 167 |coerce| 172 |abs| 182 >= 187 >
+              193 = 199 <= 205 < 211 |0| 217 + 221 * 227)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(NIL NIL NIL NIL |AbelianMonoid&| |OrderedSet&|
-                     |AbelianSemiGroup&| NIL |SetCategory&| NIL |PartialOrder&|
-                     |BasicType&| NIL)
+                  '#(|OrderedAbelianSemiGroup&| |OrderedSet&| NIL NIL
+                     |AbelianMonoid&| |SetWithZero&| NIL |AbelianSemiGroup&|
+                     |SetCategory&| NIL |BasicType&| |PartialOrder&| NIL)
                   (CONS
-                   '#((|OrderedCancellationAbelianMonoid|)
-                      (|OrderedAbelianMonoid|) (|CancellationAbelianMonoid|)
-                      (|OrderedAbelianSemiGroup|) (|AbelianMonoid|)
-                      (|OrderedSet|) (|AbelianSemiGroup|) (|Comparable|)
-                      (|SetCategory|) (|CoercibleTo| 32) (|PartialOrder|)
-                      (|BasicType|) (|ConvertibleTo| 8))
+                   '#((|OrderedAbelianSemiGroup|) (|OrderedSet|)
+                      (|CancellationAbelianMonoid|) (|Comparable|)
+                      (|AbelianMonoid|) (|SetWithZero|)
+                      (|ComparableRepresentation|) (|AbelianSemiGroup|)
+                      (|SetCategory|) (|CoercibleTo| 32) (|BasicType|)
+                      (|PartialOrder|) (|ConvertibleTo| 8))
                    (|makeByteWordVec2| 47
                                        '(1 8 0 0 10 2 13 12 0 0 14 2 6 0 15 0
                                          16 2 22 21 0 0 23 2 6 12 13 0 25 1 29
@@ -249,12 +251,13 @@
                                          0 0 0 36 1 6 13 0 37 1 6 32 0 38 2 32
                                          0 0 0 39 2 41 32 40 0 42 1 32 0 0 43 1
                                          13 0 0 45 2 0 12 0 0 1 1 0 12 0 1 2 0
-                                         21 0 0 26 2 0 12 0 0 1 0 0 0 1 1 0 27
-                                         8 28 1 0 13 0 46 1 0 0 8 17 2 0 12 0 0
-                                         1 2 0 0 0 0 1 2 0 0 0 0 1 1 0 34 0 1 1
-                                         0 8 0 11 1 0 0 0 31 1 0 32 0 44 1 0 8
-                                         0 9 0 0 0 7 2 0 12 0 0 1 2 0 12 0 0 1
-                                         2 0 12 0 0 19 2 0 12 0 0 1 2 0 12 0 0
-                                         18 2 0 0 0 0 20 2 0 0 47 0 1 2 0 0 22
-                                         0 24)))))
+                                         21 0 0 26 2 0 12 0 0 1 1 2 13 0 1 0 0
+                                         0 1 1 0 27 8 28 1 2 12 0 1 1 0 13 0 46
+                                         1 0 0 8 17 2 0 12 0 0 1 1 2 12 0 1 2 0
+                                         0 0 0 1 2 0 0 0 0 1 1 0 34 0 1 1 0 8 0
+                                         11 1 0 0 0 31 1 0 32 0 44 1 0 8 0 9 1
+                                         1 0 0 1 2 0 12 0 0 1 2 0 12 0 0 1 2 0
+                                         12 0 0 19 2 0 12 0 0 1 2 0 12 0 0 18 0
+                                         0 0 7 2 0 0 0 0 20 2 0 0 47 0 1 2 0 0
+                                         22 0 24)))))
            '|lookupComplete|)) 

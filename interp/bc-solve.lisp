@@ -16,8 +16,8 @@
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$solutionMethod| NIL))
 
 ; bcSolve() ==
-;   htInitPage('"Solve Basic Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Solve Basic Command", nil)
+;   ht_add_to_page(page, '(
 ;    (text . "What do you want to solve? ")
 ;    (text . "\beginmenu")
 ;    (text . "\item ")
@@ -26,15 +26,15 @@
 ;    (bcLinks ("\menuitemstyle{A System of Polynomial Equations}" "" bcSystemSolve  polynomial))
 ;    (text . "\item ")
 ;    (bcLinks ("\menuitemstyle{A Single Polynomial Equation}" "" bcSolveSingle onePolynomial))
-;    (text . "\endmenu"))
-;   htShowPage()
+;    (text . "\endmenu")))
+;   htShowPage1(page)
 
 (DEFUN |bcSolve| ()
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Solve Basic Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Solve Basic Command" NIL))
+      (|ht_add_to_page| |page|
        '((|text| . "What do you want to solve? ") (|text| . "\\beginmenu")
          (|text| . "\\item ")
          (|bcLinks|
@@ -49,11 +49,11 @@
           ("\\menuitemstyle{A Single Polynomial Equation}" "" |bcSolveSingle|
            |onePolynomial|))
          (|text| . "\\endmenu")))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcLinearSolve(p,nn) ==
-;   htInitPage('"Basic Solve Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Basic Solve Command", nil)
+;   ht_add_to_page(page, '(
 ;     (text . "How do you want to enter the equations?")
 ;     (text . "\beginmenu")
 ;     (text . "\item ")
@@ -65,15 +65,15 @@
 ;     (text . "\indentrel{16}\tab{0}")
 ;     (text . " \spad{AX = B}, where \spad{A} is a matrix of coefficients and \spad{B} is a vector" )
 ;     (text . "\indentrel{-16}\item ")
-;     (text . "\endmenu"))
-;   htShowPage()
+;     (text . "\endmenu")))
+;   htShowPage1(page)
 
 (DEFUN |bcLinearSolve| (|p| |nn|)
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Basic Solve Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Basic Solve Command" NIL))
+      (|ht_add_to_page| |page|
        '((|text| . "How do you want to enter the equations?")
          (|text| . "\\beginmenu") (|text| . "\\item ") (|text| . "\\newline ")
          (|bcLinks|
@@ -87,51 +87,51 @@
          (|text|
           . " \\spad{AX = B}, where \\spad{A} is a matrix of coefficients and \\spad{B} is a vector")
          (|text| . "\\indentrel{-16}\\item ") (|text| . "\\endmenu")))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcLinearSolveEqns(htPage, p) ==
-;   htInitPage('"Basic Solve Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Basic Solve Command", nil)
+;   ht_add_to_page(page, '(
 ;     (domainConditions (isDomain PI (PositiveInteger)))
 ;     (inputStrings
-;       ("Enter the {\em number} of equations:" "" 5 2 numberOfEquations PI)))
-;   htMakeDoneButton('"Continue", 'bcLinearSolveEqns1)
-;   htShowPage()
+;       ("Enter the {\em number} of equations:" "" 5 2 numberOfEquations PI))))
+;   htMakeDoneButton(page, '"Continue", 'bcLinearSolveEqns1)
+;   htShowPage1(page)
 
 (DEFUN |bcLinearSolveEqns| (|htPage| |p|)
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Basic Solve Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Basic Solve Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| PI (|PositiveInteger|)))
          (|inputStrings|
           ("Enter the {\\em number} of equations:" "" 5 2 |numberOfEquations|
            PI))))
-      (|htMakeDoneButton| "Continue" '|bcLinearSolveEqns1|)
-      (|htShowPage|)))))
+      (|htMakeDoneButton| |page| "Continue" '|bcLinearSolveEqns1|)
+      (|htShowPage1| |page|)))))
 
 ; bcSystemSolve(htPage, p) ==
-;   htInitPage('"Basic Solve Command", nil)
-;   htMakePage '(
+;   page := htInitPage('"Basic Solve Command", nil)
+;   ht_add_to_page(page, '(
 ;     (domainConditions (isDomain PI (PositiveInteger)))
 ;     (inputStrings
-;       ("Enter the {\em number} of equations:" "" 5 2 numberOfEquations PI)))
-;   htMakeDoneButton('"Continue", 'bcSystemSolveEqns1)
-;   htShowPage()
+;       ("Enter the {\em number} of equations:" "" 5 2 numberOfEquations PI))))
+;   htMakeDoneButton(page, '"Continue", 'bcSystemSolveEqns1)
+;   htShowPage1(page)
 
 (DEFUN |bcSystemSolve| (|htPage| |p|)
-  (PROG ()
+  (PROG (|page|)
     (RETURN
      (PROGN
-      (|htInitPage| "Basic Solve Command" NIL)
-      (|htMakePage|
+      (SETQ |page| (|htInitPage| "Basic Solve Command" NIL))
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| PI (|PositiveInteger|)))
          (|inputStrings|
           ("Enter the {\\em number} of equations:" "" 5 2 |numberOfEquations|
            PI))))
-      (|htMakeDoneButton| "Continue" '|bcSystemSolveEqns1|)
-      (|htShowPage|)))))
+      (|htMakeDoneButton| |page| "Continue" '|bcSystemSolveEqns1|)
+      (|htShowPage1| |page|)))))
 
 ; bcSolveSingle(htPage,p) ==
 ;   htpSetProperty(htPage,'systemType, 'onePolynomial)
@@ -176,7 +176,7 @@
 ;   page := htInitPage('"Solve Basic Command", htpPropertyList htPage)
 ;   htpSetProperty(page,'numberOfEquations,htpProperty(htPage,'numberOfEquations))
 ;   htpSetProperty(page,'inputArea,htpInputAreaAlist htPage)
-;   htMakePage '(
+;   ht_add_to_page(page, '(
 ;    (domainConditions (isDomain PI (PositiveInteger)))
 ;    (text . "What would you like?")
 ;    (text . "\beginmenu")
@@ -195,8 +195,8 @@
 ;    (text . "\indentrel{18}\tab{0} ")
 ;    (text . "Solutions expressed in terms of {\em radicals} if it is possible")
 ;    (text . "\indentrel{-18}")
-;    (text . "\endmenu"))
-;   htShowPage()
+;    (text . "\endmenu")))
+;   htShowPage1(page)
 
 (DEFUN |bcInputSolveInfo| (|htPage|)
   (PROG (|page|)
@@ -208,7 +208,7 @@
       (|htpSetProperty| |page| '|numberOfEquations|
        (|htpProperty| |htPage| '|numberOfEquations|))
       (|htpSetProperty| |page| '|inputArea| (|htpInputAreaAlist| |htPage|))
-      (|htMakePage|
+      (|ht_add_to_page| |page|
        '((|domainConditions| (|isDomain| PI (|PositiveInteger|)))
          (|text| . "What would you like?") (|text| . "\\beginmenu")
          (|text| . "\\item ")
@@ -232,13 +232,12 @@
          (|text|
           . "Solutions expressed in terms of {\\em radicals} if it is possible")
          (|text| . "\\indentrel{-18}") (|text| . "\\endmenu")))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcInputEquations(htPage,solutionMethod) ==
 ;   numEqs :=
 ;     htpProperty(htPage, 'systemType) = 'onePolynomial => 1
-;     $bcParseOnly => PARSE_-INTEGER htpLabelInputString(htPage,'numberOfEquations)
-;     objValUnwrap htpLabelSpadValue(htPage, 'numberOfEquations)
+;     get_int_value(htPage, 'numberOfEquations)
 ;   linearPred := htpProperty(htPage,'systemType) = 'linear
 ;   labelList :=
 ;     numEqs = 1 => '(
@@ -264,24 +263,24 @@
 ;   page := htInitPage('"Solve Basic Command", htpPropertyList htPage)
 ;   htpSetProperty(page, 'numberOfEquations, numEqs)
 ;   htpSetProperty(page, 'solutionMethod,solutionMethod)
-;   htSay '"\newline\menuitemstyle{}\tab{2}"
-;   htSay
-;     numEqs = 1 => '"Enter the {\em Equation}:"
-;     '"Enter the {\em Equations}:"
-;   htSay '"\newline\tab{2}"
-;   htMakePage equationPart
-;   bcHt '"\blankline "
-;   htSay '"\newline\menuitemstyle{}\tab{2}"
-;   htMakePage
+;   ht_add_string(page, '"\newline\menuitemstyle{}\tab{2}")
+;   ht_add_string(page, (
+;     numEqs = 1 => '"Enter the {\em Equation}:";
+;     '"Enter the {\em Equations}:"))
+;   ht_add_string(page, '"\newline\tab{2}")
+;   ht_add_to_page(page, equationPart)
+;   ht_add_string(page, '"\blankline ")
+;   ht_add_string(page, '"\newline\menuitemstyle{}\tab{2}")
+;   ht_add_to_page(page, (
 ;     numEqs = 1 =>  '(
 ;       (text ."Enter the {\em unknown} (leave blank if implied): ")
 ;       (text . "\tab{48}")
-;       (bcStrings (6 "x" unknowns S . quoteString)))
+;       (bcStrings (6 "x" unknowns S . quoteString)));
 ;     ['(text . "Enter the unknowns (leave blank if implied):"),
 ;      '(text . "\tab{44}"),
-;       ['bcStrings, [10,bcMakeUnknowns(numEqs),'unknowns,'P]]]
-;   htMakeDoneButton('"Continue", 'bcInputEquationsEnd)
-;   htShowPage()
+;       ['bcStrings, [10, bcMakeUnknowns(numEqs), 'unknowns, 'P]]]))
+;   htMakeDoneButton(page, '"Continue", 'bcInputEquationsEnd)
+;   htShowPage1(page)
 
 (DEFUN |bcInputEquations| (|htPage| |solutionMethod|)
   (PROG (|numEqs| |linearPred| |labelList| |equationPart| |page|)
@@ -290,12 +289,7 @@
       (SETQ |numEqs|
               (COND
                ((EQ (|htpProperty| |htPage| '|systemType|) '|onePolynomial|) 1)
-               (|$bcParseOnly|
-                (PARSE-INTEGER
-                 (|htpLabelInputString| |htPage| '|numberOfEquations|)))
-               (#1='T
-                (|objValUnwrap|
-                 (|htpLabelSpadValue| |htPage| '|numberOfEquations|)))))
+               (#1='T (|get_int_value| |htPage| '|numberOfEquations|))))
       (SETQ |linearPred| (EQ (|htpProperty| |htPage| '|systemType|) '|linear|))
       (SETQ |labelList|
               (COND
@@ -323,15 +317,15 @@
                (|htpPropertyList| |htPage|)))
       (|htpSetProperty| |page| '|numberOfEquations| |numEqs|)
       (|htpSetProperty| |page| '|solutionMethod| |solutionMethod|)
-      (|htSay| "\\newline\\menuitemstyle{}\\tab{2}")
-      (|htSay|
+      (|ht_add_string| |page| "\\newline\\menuitemstyle{}\\tab{2}")
+      (|ht_add_string| |page|
        (COND ((EQL |numEqs| 1) "Enter the {\\em Equation}:")
              (#1# "Enter the {\\em Equations}:")))
-      (|htSay| "\\newline\\tab{2}")
-      (|htMakePage| |equationPart|)
-      (|bcHt| "\\blankline ")
-      (|htSay| "\\newline\\menuitemstyle{}\\tab{2}")
-      (|htMakePage|
+      (|ht_add_string| |page| "\\newline\\tab{2}")
+      (|ht_add_to_page| |page| |equationPart|)
+      (|ht_add_string| |page| "\\blankline ")
+      (|ht_add_string| |page| "\\newline\\menuitemstyle{}\\tab{2}")
+      (|ht_add_to_page| |page|
        (COND
         ((EQL |numEqs| 1)
          '((|text| . "Enter the {\\em unknown} (leave blank if implied): ")
@@ -342,8 +336,8 @@
                '(|text| . "\\tab{44}")
                (LIST '|bcStrings|
                      (LIST 10 (|bcMakeUnknowns| |numEqs|) '|unknowns| 'P))))))
-      (|htMakeDoneButton| "Continue" '|bcInputEquationsEnd|)
-      (|htShowPage|)))))
+      (|htMakeDoneButton| |page| "Continue" '|bcInputEquationsEnd|)
+      (|htShowPage1| |page|)))))
 (DEFUN |bcInputEquations,f| (|i| |n| |linearp|)
   (PROG (|spacer| |prefix| |lnam| |rnam| |var|)
     (RETURN
@@ -473,7 +467,7 @@
 
 ; bcSolveEquationsNumerically(htPage,p) ==
 ;   page := htInitPage('"Solve Basic Command", htpPropertyList htPage)
-;   htMakePage '(
+;   ht_add_to_page(page, '(
 ;     (text . "What would you like?")
 ;     (radioButtons choice
 ;       ("Real roots expressed as rational numbers" "" rr)
@@ -483,9 +477,9 @@
 ;       (text . "\vspace{1}\newline")
 ;       (inputStrings
 ;         ("Enter the number of desired {\em digits} of accuracy" ""
-;           5 20 acc PI)))
-;   htMakeDoneButton('"Continue", 'bcSolveNumerically1)
-;   htShowPage()
+;           5 20 acc PI))))
+;   htMakeDoneButton(page, '"Continue", 'bcSolveNumerically1)
+;   htShowPage1(page)
 
 (DEFUN |bcSolveEquationsNumerically| (|htPage| |p|)
   (PROG (|page|)
@@ -494,7 +488,7 @@
       (SETQ |page|
               (|htInitPage| "Solve Basic Command"
                (|htpPropertyList| |htPage|)))
-      (|htMakePage|
+      (|ht_add_to_page| |page|
        '((|text| . "What would you like?")
          (|radioButtons| |choice|
           ("Real roots expressed as rational numbers" "" |rr|)
@@ -505,8 +499,8 @@
          (|inputStrings|
           ("Enter the number of desired {\\em digits} of accuracy" "" 5 20
            |acc| PI))))
-      (|htMakeDoneButton| "Continue" '|bcSolveNumerically1|)
-      (|htShowPage|)))))
+      (|htMakeDoneButton| |page| "Continue" '|bcSolveNumerically1|)
+      (|htShowPage1| |page|)))))
 
 ; bcSolveNumerically1(htPage) ==
 ;  bcSolveEquations(htPage,'numeric)
@@ -580,13 +574,13 @@
 ; bcLinearSolveMatrix1 htPage ==
 ;   page := htInitPage('"Linear Solve Basic Command",htpPropertyList htPage)
 ;   htpSetProperty(page,'matrix,bcLinearExtractMatrix htPage)
-;   htMakePage '(
+;   ht_add_to_page(page, '(
 ;     (text . "The right side vector B is:")
 ;     (lispLinks
 ;       ("Zero:" "the system is homogeneous" bcLinearSolveMatrixHomo homo)
 ;       ("Not zero:" "the system is not homogeneous" bcLinearSolveMatrixInhomo
-;        nothomo)))
-;   htShowPage()
+;        nothomo))))
+;   htShowPage1(page)
 
 (DEFUN |bcLinearSolveMatrix1| (|htPage|)
   (PROG (|page|)
@@ -596,14 +590,14 @@
               (|htInitPage| "Linear Solve Basic Command"
                (|htpPropertyList| |htPage|)))
       (|htpSetProperty| |page| '|matrix| (|bcLinearExtractMatrix| |htPage|))
-      (|htMakePage|
+      (|ht_add_to_page| |page|
        '((|text| . "The right side vector B is:")
          (|lispLinks|
           ("Zero:" "the system is homogeneous" |bcLinearSolveMatrixHomo|
            |homo|)
           ("Not zero:" "the system is not homogeneous"
            |bcLinearSolveMatrixInhomo| |nothomo|))))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 
 ; bcLinearExtractMatrix htPage == REVERSE htpInputAreaAlist htPage
 
@@ -625,7 +619,7 @@
 ;   htpSetProperty(page, 'matrix, htpProperty(htPage, 'matrix))
 ;   htpSetProperty(page, 'nrows, nrows)
 ;   htpSetProperty(page, 'ncols, ncols)
-;   htMakePage [
+;   ht_add_to_page(page, [
 ;    '(domainConditions (isDomain P (Polynomial $EmptyMode))),
 ;     '(text . "Enter the right side vector B:"),
 ;         ['inputStrings, :labelList],
@@ -633,8 +627,8 @@
 ;              '(lispLinks
 ;                  ("All the solutions?" "" bcLinearSolveMatrixInhomoGen all)
 ;                   ("A particular solution?" "" bcLinearSolveMatrixInhomoGen
-;                     particular))]
-;   htShowPage()
+;                     particular))])
+;   htShowPage1(page)
 
 (DEFUN |bcLinearSolveMatrixInhomo| (|htPage| |junk|)
   (PROG (|nrows| |ncols| |labelList| |page|)
@@ -658,7 +652,7 @@
       (|htpSetProperty| |page| '|matrix| (|htpProperty| |htPage| '|matrix|))
       (|htpSetProperty| |page| '|nrows| |nrows|)
       (|htpSetProperty| |page| '|ncols| |ncols|)
-      (|htMakePage|
+      (|ht_add_to_page| |page|
        (LIST '(|domainConditions| (|isDomain| P (|Polynomial| |$EmptyMode|)))
              '(|text| . "Enter the right side vector B:")
              (CONS '|inputStrings| |labelList|)
@@ -667,7 +661,7 @@
                ("All the solutions?" "" |bcLinearSolveMatrixInhomoGen| |all|)
                ("A particular solution?" "" |bcLinearSolveMatrixInhomoGen|
                 |particular|))))
-      (|htShowPage|)))))
+      (|htShowPage1| |page|)))))
 (DEFUN |bcLinearSolveMatrixInhomo,f| (|i|)
   (PROG (|spacer| |prefix| |name|)
     (RETURN

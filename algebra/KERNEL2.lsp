@@ -9,7 +9,7 @@
 (DECLAIM (NOTINLINE |KernelFunctions2;|)) 
 
 (DEFUN |KernelFunctions2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -25,9 +25,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |KernelFunctions2| (&REST #1=#:G5)
+(DEFUN |KernelFunctions2| (&REST #1=#:G8)
   (SPROG NIL
-         (PROG (#2=#:G6)
+         (PROG (#2=#:G9)
            (RETURN
             (COND
              ((LETT #2#

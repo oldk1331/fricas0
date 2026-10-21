@@ -32,7 +32,7 @@
 (DECLAIM (NOTINLINE |OperatorHandlers;|)) 
 
 (DEFUN |OperatorHandlers;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|OperatorHandlers| DV$1))
@@ -46,9 +46,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |OperatorHandlers| (#1=#:G14)
+(DEFUN |OperatorHandlers| (#1=#:G17)
   (SPROG NIL
-         (PROG (#2=#:G15)
+         (PROG (#2=#:G18)
            (RETURN
             (COND
              ((LETT #2#

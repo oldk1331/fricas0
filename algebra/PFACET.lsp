@@ -1,5 +1,5 @@
 
-(PUT '|PFACET;productFacet;IL%;1| '|SPADreplace| 'CONS) 
+(MAKEPROP '|PFACET;productFacet;IL%;1| '|SPADreplace| 'CONS) 
 
 (SDEFUN |PFACET;productFacet;IL%;1|
         ((|mul1| (|Integer|))
@@ -14,7 +14,7 @@
         ((|mul1| (|Integer|)) (|other| (|ProductFacet|)) (% (%)))
         (CONS |mul1| (SPADCALL |other| (QREFELT % 12)))) 
 
-(PUT '|PFACET;getIndexs;%L;3| '|SPADreplace| 'QCDR) 
+(MAKEPROP '|PFACET;getIndexs;%L;3| '|SPADreplace| 'QCDR) 
 
 (SDEFUN |PFACET;getIndexs;%L;3|
         ((|orf| (%))
@@ -26,11 +26,11 @@
 
 (SDEFUN |PFACET;getMaxLeft;%Nni;4| ((|orf| (%)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((|m| (|NonNegativeInteger|)) (#1=#:G25 NIL) (|index| NIL)
-          (|indexes|
+         ((|indexes|
            (|List|
             (|Record| (|:| |left| (|NonNegativeInteger|))
-                      (|:| |right| (|NonNegativeInteger|))))))
+                      (|:| |right| (|NonNegativeInteger|)))))
+          (|index| NIL) (#1=#:G25 NIL) (|m| (|NonNegativeInteger|)))
          (SEQ (LETT |m| 0) (LETT |indexes| (SPADCALL |orf| (QREFELT % 14)))
               (SEQ (LETT |index| NIL) (LETT #1# |indexes|) G190
                    (COND
@@ -45,11 +45,11 @@
 
 (SDEFUN |PFACET;getMaxRight;%Nni;5| ((|orf| (%)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((|m| (|NonNegativeInteger|)) (#1=#:G33 NIL) (|index| NIL)
-          (|indexes|
+         ((|indexes|
            (|List|
             (|Record| (|:| |left| (|NonNegativeInteger|))
-                      (|:| |right| (|NonNegativeInteger|))))))
+                      (|:| |right| (|NonNegativeInteger|)))))
+          (|index| NIL) (#1=#:G33 NIL) (|m| (|NonNegativeInteger|)))
          (SEQ (LETT |m| 0) (LETT |indexes| (SPADCALL |orf| (QREFELT % 14)))
               (SEQ (LETT |index| NIL) (LETT #1# |indexes|) G190
                    (COND
@@ -65,7 +65,7 @@
 (SDEFUN |PFACET;order;%Nni;6| ((|f| (%)) (% (|NonNegativeInteger|)))
         (LENGTH (SPADCALL |f| (QREFELT % 14)))) 
 
-(PUT '|PFACET;getMult;%I;7| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|PFACET;getMult;%I;7| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |PFACET;getMult;%I;7| ((|orf| (%)) (% (|Integer|))) (QCAR |orf|)) 
 
@@ -89,49 +89,48 @@
 
 (SDEFUN |PFACET;=;2%B;10| ((|a| (%)) (|b| (%)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G55 NIL) (#2=#:G56 NIL) (|inda| NIL) (#3=#:G57 NIL)
-          (|indb| NIL)
-          (|indbs|
-           #4=(|List|
+         ((|indas|
+           #1=(|List|
                (|Record| (|:| |left| (|NonNegativeInteger|))
                          (|:| |right| (|NonNegativeInteger|)))))
-          (|indas| #4#))
+          (|indbs| #1#) (|indb| NIL) (#2=#:G57 NIL) (|inda| NIL) (#3=#:G56 NIL)
+          (#4=#:G55 NIL))
          (SEQ
           (EXIT
            (SEQ
             (COND
              ((SPADCALL (QCAR |a|) (QCAR |b|) (QREFELT % 24))
-              (PROGN (LETT #1# NIL) (GO #5=#:G54))))
+              (PROGN (LETT #4# NIL) (GO #5=#:G54))))
             (LETT |indas| (SPADCALL |a| (QREFELT % 14)))
             (LETT |indbs| (SPADCALL |b| (QREFELT % 14)))
             (COND
              ((SPADCALL (LENGTH |indas|) (LENGTH |indbs|) (QREFELT % 24))
-              (PROGN (LETT #1# NIL) (GO #5#))))
-            (SEQ (LETT |indb| NIL) (LETT #3# |indbs|) (LETT |inda| NIL)
-                 (LETT #2# |indas|) G190
+              (PROGN (LETT #4# NIL) (GO #5#))))
+            (SEQ (LETT |indb| NIL) (LETT #2# |indbs|) (LETT |inda| NIL)
+                 (LETT #3# |indas|) G190
                  (COND
-                  ((OR (ATOM #2#) (PROGN (LETT |inda| (CAR #2#)) NIL)
-                       (ATOM #3#) (PROGN (LETT |indb| (CAR #3#)) NIL))
+                  ((OR (ATOM #3#) (PROGN (LETT |inda| (CAR #3#)) NIL)
+                       (ATOM #2#) (PROGN (LETT |indb| (CAR #2#)) NIL))
                    (GO G191)))
                  (SEQ
                   (COND
                    ((SPADCALL (QCAR |inda|) (QCAR |indb|) (QREFELT % 24))
-                    (PROGN (LETT #1# NIL) (GO #5#))))
+                    (PROGN (LETT #4# NIL) (GO #5#))))
                   (EXIT
                    (COND
                     ((SPADCALL (QCDR |inda|) (QCDR |indb|) (QREFELT % 24))
-                     (PROGN (LETT #1# NIL) (GO #5#))))))
-                 (LETT #2# (PROG1 (CDR #2#) (LETT #3# (CDR #3#)))) (GO G190)
+                     (PROGN (LETT #4# NIL) (GO #5#))))))
+                 (LETT #3# (PROG1 (CDR #3#) (LETT #2# (CDR #2#)))) (GO G190)
                  G191 (EXIT NIL))
             (EXIT 'T)))
-          #5# (EXIT #1#)))) 
+          #5# (EXIT #4#)))) 
 
 (SDEFUN |PFACET;coerce;%Of;11| ((|s| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|body| (|OutputForm|)) (|elements| (|List| (|OutputForm|)))
-          (|element| (|OutputForm|)) (|r| (|NonNegativeInteger|))
-          (|l| (|NonNegativeInteger|)) (#1=#:G67 NIL) (|x| NIL)
-          (|prefix| (|OutputForm|)) (|m| (|Integer|)))
+         ((|m| (|Integer|)) (|prefix| (|OutputForm|)) (|x| NIL) (#1=#:G67 NIL)
+          (|l| (|NonNegativeInteger|)) (|r| (|NonNegativeInteger|))
+          (|element| (|OutputForm|)) (|elements| (|List| (|OutputForm|)))
+          (|body| (|OutputForm|)))
          (SEQ (LETT |prefix| (SPADCALL "" (QREFELT % 28)))
               (LETT |m| (QCAR |s|))
               (COND
@@ -172,6 +171,7 @@
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|ProductFacet| NIL (CONS 1 %))
           (|stuffDomainSlots| %)
+          (AND (|HasCategory| % '(|SetWithZero|)) (|augmentPredVector| % 1))
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 6
                     (|Record| (|:| |mul| (|Integer|))
@@ -213,29 +213,31 @@
               (27 . |hconcat|) (33 . |coerce|) (|List| %) (38 . |bracket|)
               (|List| 27) (43 . |concat|) (49 . |paren|)
               |PFACET;coerce;%Of;11|)
-           '#(~= 54 |smaller?| 60 |setMult!| 66 |productFacet| 72 |order| 84
-              |min| 89 |max| 95 |latex| 101 |getMult| 106 |getMaxRight| 111
-              |getMaxLeft| 116 |getIndexs| 121 |empty?| 126 |coerce| 131
-              |addVertex2| 136 >= 142 > 148 = 154 <= 160 < 166)
+           '#(~= 54 |smaller?| 60 |sign| 66 |setMult!| 71 |productFacet| 77
+              |positive?| 89 |order| 94 |negative?| 99 |min| 104 |max| 110
+              |latex| 116 |getMult| 121 |getMaxRight| 126 |getMaxLeft| 131
+              |getIndexs| 136 |empty?| 141 |coerce| 146 |addVertex2| 151 >= 157
+              > 163 = 169 <= 175 < 181)
            'NIL
-           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0))
+           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|FacetCategory&| |OrderedSet&| NIL |SetCategory&| NIL
+                  '#(|FacetCategory&| |OrderedSet&| NIL NIL |SetCategory&| NIL
                      |BasicType&| |PartialOrder&|)
                   (CONS
                    '#((|FacetCategory|) (|OrderedSet|) (|Comparable|)
-                      (|SetCategory|) (|CoercibleTo| 27) (|BasicType|)
-                      (|PartialOrder|))
+                      (|ComparableRepresentation|) (|SetCategory|)
+                      (|CoercibleTo| 27) (|BasicType|) (|PartialOrder|))
                    (|makeByteWordVec2| 37
                                        '(1 11 9 0 12 2 9 0 0 8 21 2 7 23 0 0 24
                                          1 27 0 26 28 1 7 27 0 29 2 27 0 0 0 30
                                          1 15 27 0 31 1 27 0 32 33 2 34 0 0 27
                                          35 1 27 0 32 36 2 0 23 0 0 1 2 0 23 0
-                                         0 1 2 0 0 0 7 20 2 0 0 7 11 13 2 0 0 7
-                                         9 10 1 0 15 0 18 2 0 0 0 0 1 2 0 0 0 0
-                                         1 1 0 26 0 1 1 0 7 0 19 1 0 15 0 17 1
-                                         0 15 0 16 1 0 9 0 14 1 0 23 0 1 1 0 27
-                                         0 37 2 0 0 0 8 22 2 0 23 0 0 1 2 0 23
-                                         0 0 1 2 0 23 0 0 25 2 0 23 0 0 1 2 0
-                                         23 0 0 1)))))
+                                         0 1 1 1 7 0 1 2 0 0 0 7 20 2 0 0 7 9
+                                         10 2 0 0 7 11 13 1 1 23 0 1 1 0 15 0
+                                         18 1 1 23 0 1 2 0 0 0 0 1 2 0 0 0 0 1
+                                         1 0 26 0 1 1 0 7 0 19 1 0 15 0 17 1 0
+                                         15 0 16 1 0 9 0 14 1 0 23 0 1 1 0 27 0
+                                         37 2 0 0 0 8 22 2 0 23 0 0 1 2 0 23 0
+                                         0 1 2 0 23 0 0 25 2 0 23 0 0 1 2 0 23
+                                         0 0 1)))))
            '|lookupComplete|)) 

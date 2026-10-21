@@ -28,15 +28,17 @@
 ;     found:=CATCH("TRAPPOINT",npItem())
 ;     if found="TRAPPED"
 ;     then
-;       ncSoftError(tokPosn $stok,'S2CY0006, [])
+;       ncSoftError(tokPosn($stok), '"syntax error at top level", [])
 ;       pfWrong(pfDocument  '"top level syntax error" ,pfListOf nil)
 ;     else if not null $inputStream
 ;          then
-;           ncSoftError(tokPosn $stok,'S2CY0002,[])
+;           ncSoftError(tokPosn($stok),'"Improper syntax.", [])
 ;           pfWrong(pfDocument ['"input stream not exhausted"],pfListOf [])
 ;          else if null $stack
 ;               then
-;                  ncSoftError(tokPosn $stok,'S2CY0009, [])
+;                  ncSoftError(tokPosn($stok),
+;                              '"System error while parsing, stack is empty.",
+;                              [])
 ;                  pfWrong(pfDocument ['"stack empty"],pfListOf [])
 ;               else
 ;                  first $stack
@@ -53,13 +55,16 @@
       (|npFirstTok|)
       (SETQ |found| (CATCH 'TRAPPOINT (|npItem|)))
       (COND
-       ((EQ |found| 'TRAPPED) (|ncSoftError| (|tokPosn| |$stok|) 'S2CY0006 NIL)
+       ((EQ |found| 'TRAPPED)
+        (|ncSoftError| (|tokPosn| |$stok|) "syntax error at top level" NIL)
         (|pfWrong| (|pfDocument| "top level syntax error") (|pfListOf| NIL)))
        ((NULL (NULL |$inputStream|))
-        (|ncSoftError| (|tokPosn| |$stok|) 'S2CY0002 NIL)
+        (|ncSoftError| (|tokPosn| |$stok|) "Improper syntax." NIL)
         (|pfWrong| (|pfDocument| (LIST "input stream not exhausted"))
          (|pfListOf| NIL)))
-       ((NULL |$stack|) (|ncSoftError| (|tokPosn| |$stok|) 'S2CY0009 NIL)
+       ((NULL |$stack|)
+        (|ncSoftError| (|tokPosn| |$stok|)
+         "System error while parsing, stack is empty." NIL)
         (|pfWrong| (|pfDocument| (LIST "stack empty")) (|pfListOf| NIL)))
        ('T (CAR |$stack|)))))))
 
@@ -722,6 +727,11 @@
 (DEFUN |npEqKey| (|s|)
   (PROG ()
     (RETURN (AND (EQ (CAAR |$stok|) '|key|) (EQ |s| |$ttok|) (|npNext|)))))
+
+; npCompMissing(s) == npEqKey(s) or npMissing(s)
+
+(DEFUN |npCompMissing| (|s|)
+  (PROG () (RETURN (OR (|npEqKey| |s|) (|npMissing| |s|)))))
 
 ; $npTokToNames:= ["~","#","[]","{}", "[||]","{||}"]
 

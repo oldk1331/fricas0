@@ -1,8 +1,8 @@
 
 (SDEFUN |SEXOF;coerce;%Of;1| ((|b| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|l1| (|List| (|OutputForm|))) (#1=#:G27 NIL) (|l| (|List| %))
-          (|b1| NIL) (#2=#:G26 NIL) (|r| (%)))
+         ((|r| (%)) (#1=#:G27 NIL) (|b1| NIL) (|l| (|List| %)) (#2=#:G28 NIL)
+          (|l1| (|List| (|OutputForm|))))
          (SEQ
           (COND ((SPADCALL |b| (QREFELT % 12)) (SPADCALL NIL (QREFELT % 15)))
                 ((SPADCALL |b| (QREFELT % 16)) (SPADCALL |b| (QREFELT % 18)))
@@ -18,23 +18,23 @@
                            NIL (GO G190) G191 (EXIT NIL))
                       (LETT |l1|
                             (PROGN
-                             (LETT #2# NIL)
+                             (LETT #1# NIL)
                              (SEQ (LETT |b1| NIL)
-                                  (LETT #1#
+                                  (LETT #2#
                                         (LETT |l|
                                               (SPADCALL |b| (QREFELT % 21))))
                                   G190
                                   (COND
-                                   ((OR (ATOM #1#)
-                                        (PROGN (LETT |b1| (CAR #1#)) NIL))
+                                   ((OR (ATOM #2#)
+                                        (PROGN (LETT |b1| (CAR #2#)) NIL))
                                     (GO G191)))
                                   (SEQ
                                    (EXIT
-                                    (LETT #2#
+                                    (LETT #1#
                                           (CONS (SPADCALL |b1| (QREFELT % 22))
-                                                #2#))))
-                                  (LETT #1# (CDR #1#)) (GO G190) G191
-                                  (EXIT (NREVERSE #2#)))))
+                                                #1#))))
+                                  (LETT #2# (CDR #2#)) (GO G190) G191
+                                  (EXIT (NREVERSE #1#)))))
                       (COND
                        ((NULL (SPADCALL |r| (QREFELT % 12)))
                         (EXIT
@@ -59,43 +59,43 @@
                        (SPADCALL (SPADCALL |l1| (QREFELT % 25))
                                  (QREFELT % 26))))))))) 
 
-(PUT '|SEXOF;=;2%B;2| '|SPADreplace| 'EQUAL) 
+(MAKEPROP '|SEXOF;=;2%B;2| '|SPADreplace| 'EQUAL) 
 
 (SDEFUN |SEXOF;=;2%B;2| ((|b1| (%)) (|b2| (%)) (% (|Boolean|)))
         (EQUAL |b1| |b2|)) 
 
-(PUT '|SEXOF;eq;2%B;3| '|SPADreplace| 'EQ) 
+(MAKEPROP '|SEXOF;eq;2%B;3| '|SPADreplace| 'EQ) 
 
 (SDEFUN |SEXOF;eq;2%B;3| ((|b1| (%)) (|b2| (%)) (% (|Boolean|))) (EQ |b1| |b2|)) 
 
-(PUT '|SEXOF;null?;%B;4| '|SPADreplace| 'NULL) 
+(MAKEPROP '|SEXOF;null?;%B;4| '|SPADreplace| 'NULL) 
 
 (SDEFUN |SEXOF;null?;%B;4| ((|b| (%)) (% (|Boolean|))) (NULL |b|)) 
 
-(PUT '|SEXOF;atom?;%B;5| '|SPADreplace| 'ATOM) 
+(MAKEPROP '|SEXOF;atom?;%B;5| '|SPADreplace| 'ATOM) 
 
 (SDEFUN |SEXOF;atom?;%B;5| ((|b| (%)) (% (|Boolean|))) (ATOM |b|)) 
 
-(PUT '|SEXOF;pair?;%B;6| '|SPADreplace| 'PAIRP) 
+(MAKEPROP '|SEXOF;pair?;%B;6| '|SPADreplace| 'PAIRP) 
 
 (SDEFUN |SEXOF;pair?;%B;6| ((|b| (%)) (% (|Boolean|))) (PAIRP |b|)) 
 
 (SDEFUN |SEXOF;list?;%B;7| ((|b| (%)) (% (|Boolean|)))
         (COND ((PAIRP |b|) 'T) ('T (NULL |b|)))) 
 
-(PUT '|SEXOF;string?;%B;8| '|SPADreplace| 'STRINGP) 
+(MAKEPROP '|SEXOF;string?;%B;8| '|SPADreplace| 'STRINGP) 
 
 (SDEFUN |SEXOF;string?;%B;8| ((|b| (%)) (% (|Boolean|))) (STRINGP |b|)) 
 
-(PUT '|SEXOF;symbol?;%B;9| '|SPADreplace| 'IDENTP) 
+(MAKEPROP '|SEXOF;symbol?;%B;9| '|SPADreplace| 'IDENTP) 
 
 (SDEFUN |SEXOF;symbol?;%B;9| ((|b| (%)) (% (|Boolean|))) (IDENTP |b|)) 
 
-(PUT '|SEXOF;integer?;%B;10| '|SPADreplace| 'INTEGERP) 
+(MAKEPROP '|SEXOF;integer?;%B;10| '|SPADreplace| 'INTEGERP) 
 
 (SDEFUN |SEXOF;integer?;%B;10| ((|b| (%)) (% (|Boolean|))) (INTEGERP |b|)) 
 
-(PUT '|SEXOF;float?;%B;11| '|SPADreplace| 'FLOATP) 
+(MAKEPROP '|SEXOF;float?;%B;11| '|SPADreplace| 'FLOATP) 
 
 (SDEFUN |SEXOF;float?;%B;11| ((|b| (%)) (% (|Boolean|))) (FLOATP |b|)) 
 
@@ -114,35 +114,35 @@
 (SDEFUN |SEXOF;integer;%Int;16| ((|b| (%)) (% (|Int|)))
         (COND ((INTEGERP |b|) |b|) ('T (|error| "Non-integer")))) 
 
-(PUT '|SEXOF;convert;L%;17| '|SPADreplace| '(XLAM (|l|) |l|)) 
+(MAKEPROP '|SEXOF;convert;L%;17| '|SPADreplace| '(XLAM (|l|) |l|)) 
 
 (SDEFUN |SEXOF;convert;L%;17| ((|l| (|List| %)) (% (%))) |l|) 
 
-(PUT '|SEXOF;convert;Str%;18| '|SPADreplace| '(XLAM (|st|) |st|)) 
+(MAKEPROP '|SEXOF;convert;Str%;18| '|SPADreplace| '(XLAM (|st|) |st|)) 
 
 (SDEFUN |SEXOF;convert;Str%;18| ((|st| (|Str|)) (% (%))) |st|) 
 
-(PUT '|SEXOF;convert;Sym%;19| '|SPADreplace| '(XLAM (|sy|) |sy|)) 
+(MAKEPROP '|SEXOF;convert;Sym%;19| '|SPADreplace| '(XLAM (|sy|) |sy|)) 
 
 (SDEFUN |SEXOF;convert;Sym%;19| ((|sy| (|Sym|)) (% (%))) |sy|) 
 
-(PUT '|SEXOF;convert;Int%;20| '|SPADreplace| '(XLAM (|n|) |n|)) 
+(MAKEPROP '|SEXOF;convert;Int%;20| '|SPADreplace| '(XLAM (|n|) |n|)) 
 
 (SDEFUN |SEXOF;convert;Int%;20| ((|n| (|Int|)) (% (%))) |n|) 
 
-(PUT '|SEXOF;convert;Flt%;21| '|SPADreplace| '(XLAM (|f|) |f|)) 
+(MAKEPROP '|SEXOF;convert;Flt%;21| '|SPADreplace| '(XLAM (|f|) |f|)) 
 
 (SDEFUN |SEXOF;convert;Flt%;21| ((|f| (|Flt|)) (% (%))) |f|) 
 
-(PUT '|SEXOF;car;2%;22| '|SPADreplace| 'CAR) 
+(MAKEPROP '|SEXOF;car;2%;22| '|SPADreplace| 'CAR) 
 
 (SDEFUN |SEXOF;car;2%;22| ((|b| (%)) (% (%))) (CAR |b|)) 
 
-(PUT '|SEXOF;cdr;2%;23| '|SPADreplace| 'CDR) 
+(MAKEPROP '|SEXOF;cdr;2%;23| '|SPADreplace| 'CDR) 
 
 (SDEFUN |SEXOF;cdr;2%;23| ((|b| (%)) (% (%))) (CDR |b|)) 
 
-(PUT '|SEXOF;#;%I;24| '|SPADreplace| 'LENGTH) 
+(MAKEPROP '|SEXOF;#;%I;24| '|SPADreplace| 'LENGTH) 
 
 (SDEFUN |SEXOF;#;%I;24| ((|b| (%)) (% (|Integer|))) (LENGTH |b|)) 
 
@@ -150,7 +150,7 @@
         (SPADCALL (SPADCALL |b| (QREFELT % 21)) |i| (QREFELT % 53))) 
 
 (SDEFUN |SEXOF;elt;%L%;26| ((|b| (%)) (|li| (|List| (|Integer|))) (% (%)))
-        (SPROG ((#1=#:G62 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G63 NIL))
                (SEQ
                 (SEQ (LETT |i| NIL) (LETT #1# |li|) G190
                      (COND
@@ -172,8 +172,8 @@
 
 (DEFUN |SExpressionOf;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -194,9 +194,9 @@
     (QSETREFV % 10 (INTERN "."))
     %))) 
 
-(DEFUN |SExpressionOf| (&REST #1=#:G64)
+(DEFUN |SExpressionOf| (&REST #1=#:G65)
   (SPROG NIL
-         (PROG (#2=#:G65)
+         (PROG (#2=#:G66)
            (RETURN
             (COND
              ((LETT #2#

@@ -12,7 +12,7 @@
              (LETT #1#
                    (|Join| (|Magma|)
                            (|mkCategory|
-                            '(((|One| (%) |constant|) T)
+                            '(((|1| (%) |constant|) T)
                               ((|sample| (%) |constant|) T)
                               ((|one?| ((|Boolean|) %)) T)
                               ((|rightPower| (% % (|NonNegativeInteger|))) T)

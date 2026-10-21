@@ -16,14 +16,15 @@
         ((|m| (|Matrix| S)) (|v| (|Vector| S))
          (% (|Union| (|Vector| S) "failed")))
         (SPROG
-         ((#1=#:G27 NIL) (|cu| (|Union| S "failed")) (|cq| (|Fraction| S))
-          (#2=#:G28 NIL) (|i| NIL) (|u| (|Vector| S))
-          (|n| (|NonNegativeInteger|)) (|rp| (|Vector| (|Fraction| S)))
-          (|rpu| #3=(|Union| (|Vector| (|Fraction| S)) "failed"))
+         ((|v1| (|Vector| (|Fraction| S))) (|m1| (|Matrix| (|Fraction| S)))
           (|res|
-           (|Record| (|:| |particular| #3#)
-                     (|:| |basis| (|List| (|Vector| (|Fraction| S))))))
-          (|m1| (|Matrix| (|Fraction| S))) (|v1| (|Vector| (|Fraction| S))))
+           (|Record|
+            (|:| |particular| #1=(|Union| (|Vector| (|Fraction| S)) "failed"))
+            (|:| |basis| (|List| (|Vector| (|Fraction| S))))))
+          (|rpu| #1#) (|rp| (|Vector| (|Fraction| S)))
+          (|n| (|NonNegativeInteger|)) (|u| (|Vector| S)) (|i| NIL)
+          (#2=#:G40 NIL) (|cq| (|Fraction| S)) (|cu| (|Union| S "failed"))
+          (#3=#:G39 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |v1| (SPADCALL (ELT % 15) |v| (QREFELT % 19)))
@@ -46,20 +47,20 @@
                                     (COND
                                      ((QEQCAR |cu| 1)
                                       (PROGN
-                                       (LETT #1# (CONS 1 "failed"))
-                                       (GO #4=#:G26)))
+                                       (LETT #3# (CONS 1 "failed"))
+                                       (GO #4=#:G38)))
                                      ('T
                                       (SPADCALL |u| |i| (QCDR |cu|)
                                                 (QREFELT % 33))))))
                                   (LETT |i| (|inc_SI| |i|)) (GO G190) G191
                                   (EXIT NIL))
                              (EXIT (CONS 0 |u|))))))))
-          #4# (EXIT #1#)))) 
+          #4# (EXIT #3#)))) 
 
 (DECLAIM (NOTINLINE |LinearSystemMatrixPackage2;|)) 
 
 (DEFUN |LinearSystemMatrixPackage2;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|LinearSystemMatrixPackage2| DV$1))
@@ -84,9 +85,9 @@
                              %)))))
           %))) 
 
-(DEFUN |LinearSystemMatrixPackage2| (#1=#:G29)
+(DEFUN |LinearSystemMatrixPackage2| (#1=#:G41)
   (SPROG NIL
-         (PROG (#2=#:G30)
+         (PROG (#2=#:G42)
            (RETURN
             (COND
              ((LETT #2#
@@ -115,7 +116,7 @@
               (|Union| 16 '#1#)
               (|Record| (|:| |particular| 23) (|:| |basis| (|List| 16)))
               (|LinearSystemMatrixPackage| 14 16 16 20) (29 . |solve|)
-              (35 . |Zero|) (39 . |Zero|) (|Integer|) (43 . |elt|)
+              (35 . |0|) (39 . |0|) (|Integer|) (43 . |elt|)
               (|Union| 6 '"failed") (49 . |retractIfCan|) (54 . |setelt!|))
            '#(|solveUniquely| 61) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))

@@ -6,40 +6,40 @@
           (|List| (|Record| (|:| |k| (|LyndonWord| |VarSet|)) (|:| |c| R))))
          (% (|List| (|Equation| R))))
         (SPROG
-         ((|r| (R)) (|c2| (R)) (|u2| #1#) (|c1| (R)) (|u1| #1#) (#2=#:G20 NIL)
-          (|t| NIL) (#3=#:G19 NIL) (#4=#:G18 NIL) (#5=#:G17 NIL))
+         ((#2=#:G17 NIL) (#3=#:G18 NIL) (#4=#:G19 NIL) (|t| NIL) (#5=#:G20 NIL)
+          (|u1| #1#) (|c1| (R)) (|u2| #1#) (|c2| (R)) (|r| (R)))
          (SEQ
           (COND
            ((NULL |l1|)
             (PROGN
-             (LETT #5# NIL)
-             (SEQ (LETT |t| NIL) (LETT #4# |l2|) G190
+             (LETT #2# NIL)
+             (SEQ (LETT |t| NIL) (LETT #3# |l2|) G190
                   (COND
-                   ((OR (ATOM #4#) (PROGN (LETT |t| (CAR #4#)) NIL))
+                   ((OR (ATOM #3#) (PROGN (LETT |t| (CAR #3#)) NIL))
                     (GO G191)))
                   (SEQ
                    (EXIT
-                    (LETT #5#
+                    (LETT #2#
                           (CONS
                            (SPADCALL (|spadConstant| % 10) (QCDR |t|)
                                      (QREFELT % 12))
-                           #5#))))
-                  (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT (NREVERSE #5#)))))
+                           #2#))))
+                  (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT (NREVERSE #2#)))))
            ((NULL |l2|)
             (PROGN
-             (LETT #3# NIL)
-             (SEQ (LETT |t| NIL) (LETT #2# |l1|) G190
+             (LETT #4# NIL)
+             (SEQ (LETT |t| NIL) (LETT #5# |l1|) G190
                   (COND
-                   ((OR (ATOM #2#) (PROGN (LETT |t| (CAR #2#)) NIL))
+                   ((OR (ATOM #5#) (PROGN (LETT |t| (CAR #5#)) NIL))
                     (GO G191)))
                   (SEQ
                    (EXIT
-                    (LETT #3#
+                    (LETT #4#
                           (CONS
                            (SPADCALL (QCDR |t|) (|spadConstant| % 10)
                                      (QREFELT % 12))
-                           #3#))))
-                  (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT (NREVERSE #3#)))))
+                           #4#))))
+                  (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT (NREVERSE #4#)))))
            (#6='T
             (SEQ (LETT |u1| (QCAR (|SPADfirst| |l1|)))
                  (LETT |c1| (QCDR (|SPADfirst| |l1|)))
@@ -86,10 +86,10 @@
 (SDEFUN |LEXP;identification;2%L;4|
         ((|x| (%)) (|y| (%)) (% (|List| (|Equation| R))))
         (SPROG
-         ((|l2|
+         ((|l1|
            #1=(|List|
                (|Record| (|:| |k| (|LyndonWord| |VarSet|)) (|:| |c| R))))
-          (|l1| #1#))
+          (|l2| #1#))
          (SEQ (LETT |l1| (SPADCALL |x| (QREFELT % 29)))
               (LETT |l2| (SPADCALL |y| (QREFELT % 29)))
               (EXIT (|LEXP;ident| |l1| |l2| %))))) 
@@ -98,48 +98,48 @@
         ((|x| (%))
          (% (|List| (|Record| (|:| |k| (|LyndonWord| |VarSet|)) (|:| |c| R)))))
         (SPROG
-         ((|lt|
-           (|List| (|Record| (|:| |k| (|LyndonWord| |VarSet|)) (|:| |c| R))))
-          (#1=#:G33 NIL) (|l| (|Union| (|LyndonWord| |VarSet|) #2="failed"))
-          (#3=#:G42 NIL) (|t| NIL) (#4=#:G41 NIL))
+         ((#1=#:G49 NIL) (|t| NIL) (#2=#:G50 NIL)
+          (|l| (|Union| (|LyndonWord| |VarSet|) #3="failed")) (#4=#:G40 NIL)
+          (|lt|
+           (|List| (|Record| (|:| |k| (|LyndonWord| |VarSet|)) (|:| |c| R)))))
          (SEQ
           (LETT |lt|
                 (PROGN
-                 (LETT #4# NIL)
-                 (SEQ (LETT |t| NIL) (LETT #3# (SPADCALL |x| (QREFELT % 34)))
+                 (LETT #1# NIL)
+                 (SEQ (LETT |t| NIL) (LETT #2# (SPADCALL |x| (QREFELT % 34)))
                       G190
                       (COND
-                       ((OR (ATOM #3#) (PROGN (LETT |t| (CAR #3#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT |t| (CAR #2#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
                         (COND
                          ((QEQCAR
                            (LETT |l| (SPADCALL (QCAR |t|) (QREFELT % 37))) 0)
-                          (LETT #4#
+                          (LETT #1#
                                 (CONS
                                  (CONS
-                                  (PROG2 (LETT #1# |l|)
-                                      (QCDR #1#)
-                                    (|check_union2| (QEQCAR #1# 0)
+                                  (PROG2 (LETT #4# |l|)
+                                      (QCDR #4#)
+                                    (|check_union2| (QEQCAR #4# 0)
                                                     (|LyndonWord|
                                                      (QREFELT % 6))
                                                     (|Union|
                                                      (|LyndonWord|
                                                       (QREFELT % 6))
-                                                     #2#)
-                                                    #1#))
+                                                     #3#)
+                                                    #4#))
                                   (QCDR |t|))
-                                 #4#))))))
-                      (LETT #3# (CDR #3#)) (GO G190) G191
-                      (EXIT (NREVERSE #4#)))))
+                                 #1#))))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#)))))
           (EXIT
            (LETT |lt|
                  (SPADCALL (CONS (|function| |LEXP;compareTerm1s|) %) |lt|
                            (QREFELT % 39))))))) 
 
 (SDEFUN |LEXP;*;3%;6| ((|x| (%)) (|y| (%)) (% (%)))
-        (SPROG ((#1=#:G44 NIL))
+        (SPROG ((#1=#:G52 NIL))
                (SPADCALL |x| |y|
                          (PROG1 (LETT #1# (QREFELT % 8))
                            (|check_subtype2| (>= #1# 0) '(|NonNegativeInteger|)
@@ -147,7 +147,7 @@
                          (QREFELT % 41)))) 
 
 (SDEFUN |LEXP;exp;Lp%;7| ((|p| (|LiePolynomial| |VarSet| R)) (% (%)))
-        (SPROG ((#1=#:G47 NIL))
+        (SPROG ((#1=#:G55 NIL))
                (SPADCALL (SPADCALL |p| (QREFELT % 44))
                          (PROG1 (LETT #1# (QREFELT % 8))
                            (|check_subtype2| (>= #1# 0) '(|NonNegativeInteger|)
@@ -155,30 +155,30 @@
                          (QREFELT % 45)))) 
 
 (SDEFUN |LEXP;log;%Lp;8| ((|p| (%)) (% (|LiePolynomial| |VarSet| R)))
-        (SPROG ((#1=#:G54 NIL) (#2=#:G52 NIL))
+        (SPROG ((#1=#:G60 NIL) (#2=#:G65 NIL))
                (PROG2
-                   (LETT #1#
+                   (LETT #2#
                          (SPADCALL
                           (SPADCALL |p|
-                                    (PROG1 (LETT #2# (QREFELT % 8))
-                                      (|check_subtype2| (>= #2# 0)
+                                    (PROG1 (LETT #1# (QREFELT % 8))
+                                      (|check_subtype2| (>= #1# 0)
                                                         '(|NonNegativeInteger|)
-                                                        '(|Integer|) #2#))
+                                                        '(|Integer|) #1#))
                                     (QREFELT % 47))
                           (QREFELT % 49)))
-                   (QCDR #1#)
-                 (|check_union2| (QEQCAR #1# 0)
+                   (QCDR #2#)
+                 (|check_union2| (QEQCAR #2# 0)
                                  (|LiePolynomial| (QREFELT % 6) (QREFELT % 7))
                                  (|Union|
                                   (|LiePolynomial| (QREFELT % 6) (QREFELT % 7))
                                   "failed")
-                                 #1#)))) 
+                                 #2#)))) 
 
 (SDEFUN |LEXP;coerce;%Of;9| ((|p| (%)) (% (|OutputForm|)))
         (SPROG
-         ((#1=#:G66 NIL) (|t| NIL) (#2=#:G65 NIL)
-          (|lt|
-           (|List| (|Record| (|:| |k| (|LyndonWord| |VarSet|)) (|:| |c| R)))))
+         ((|lt|
+           (|List| (|Record| (|:| |k| (|LyndonWord| |VarSet|)) (|:| |c| R))))
+          (#1=#:G77 NIL) (|t| NIL) (#2=#:G78 NIL))
          (SEQ
           (COND
            ((SPADCALL |p| (|spadConstant| % 51) (QREFELT % 52))
@@ -188,49 +188,49 @@
                  (EXIT
                   (SPADCALL (ELT % 26)
                             (PROGN
-                             (LETT #2# NIL)
-                             (SEQ (LETT |t| NIL) (LETT #1# |lt|) G190
+                             (LETT #1# NIL)
+                             (SEQ (LETT |t| NIL) (LETT #2# |lt|) G190
                                   (COND
-                                   ((OR (ATOM #1#)
-                                        (PROGN (LETT |t| (CAR #1#)) NIL))
+                                   ((OR (ATOM #2#)
+                                        (PROGN (LETT |t| (CAR #2#)) NIL))
                                     (GO G191)))
                                   (SEQ
                                    (EXIT
-                                    (LETT #2# (CONS (|LEXP;out| |t| %) #2#))))
-                                  (LETT #1# (CDR #1#)) (GO G190) G191
-                                  (EXIT (NREVERSE #2#))))
+                                    (LETT #1# (CONS (|LEXP;out| |t| %) #1#))))
+                                  (LETT #2# (CDR #2#)) (GO G190) G191
+                                  (EXIT (NREVERSE #1#))))
                             (QREFELT % 55))))))))) 
 
 (SDEFUN |LEXP;LyndonBasis;LL;10|
         ((|lv| (|List| |VarSet|)) (% (|List| (|LiePolynomial| |VarSet| R))))
-        (SPROG ((#1=#:G71 NIL) (|l| NIL) (#2=#:G70 NIL))
+        (SPROG ((#1=#:G82 NIL) (|l| NIL) (#2=#:G83 NIL))
                (SEQ
                 (PROGN
-                 (LETT #2# NIL)
+                 (LETT #1# NIL)
                  (SEQ (LETT |l| NIL)
-                      (LETT #1# (SPADCALL |lv| (QREFELT % 8) (QREFELT % 60)))
+                      (LETT #2# (SPADCALL |lv| (QREFELT % 8) (QREFELT % 60)))
                       G190
                       (COND
-                       ((OR (ATOM #1#) (PROGN (LETT |l| (CAR #1#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT |l| (CAR #2#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2# (CONS (SPADCALL |l| (QREFELT % 61)) #2#))))
-                      (LETT #1# (CDR #1#)) (GO G190) G191
-                      (EXIT (NREVERSE #2#))))))) 
+                        (LETT #1# (CONS (SPADCALL |l| (QREFELT % 61)) #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#))))))) 
 
-(PUT '|LEXP;coerce;%Xpbwp;11| '|SPADreplace| '(XLAM (|p|) |p|)) 
+(MAKEPROP '|LEXP;coerce;%Xpbwp;11| '|SPADreplace| '(XLAM (|p|) |p|)) 
 
 (SDEFUN |LEXP;coerce;%Xpbwp;11| ((|p| (%)) (% (|XPBWPolynomial| |VarSet| R)))
         |p|) 
 
 (SDEFUN |LEXP;inv;2%;12| ((|x| (%)) (% (%)))
         (SPROG
-         ((|lt|
+         ((#1=#:G91 NIL) (|t| NIL) (#2=#:G92 NIL)
+          (|lt|
            (|List|
             (|Record| (|:| |k| (|PoincareBirkhoffWittLyndonBasis| |VarSet|))
-                      (|:| |c| R))))
-          (#1=#:G80 NIL) (|t| NIL) (#2=#:G79 NIL))
+                      (|:| |c| R)))))
          (SEQ
           (COND
            ((SPADCALL |x| (|spadConstant| % 51) (QREFELT % 52))
@@ -241,14 +241,14 @@
                    (SPADCALL (SPADCALL |x| (QREFELT % 65)) (QREFELT % 34)))
              (LETT |lt|
                    (PROGN
-                    (LETT #2# NIL)
-                    (SEQ (LETT |t| NIL) (LETT #1# |lt|) G190
+                    (LETT #1# NIL)
+                    (SEQ (LETT |t| NIL) (LETT #2# |lt|) G190
                          (COND
-                          ((OR (ATOM #1#) (PROGN (LETT |t| (CAR #1#)) NIL))
+                          ((OR (ATOM #2#) (PROGN (LETT |t| (CAR #2#)) NIL))
                            (GO G191)))
                          (SEQ
                           (EXIT
-                           (LETT #2#
+                           (LETT #1#
                                  (CONS
                                   (CONS (QCAR |t|)
                                         (COND
@@ -257,15 +257,15 @@
                                                      (QREFELT % 66)))
                                           (SPADCALL (QCDR |t|) (QREFELT % 67)))
                                          ('T (QCDR |t|))))
-                                  #2#))))
-                         (LETT #1# (CDR #1#)) (GO G190) G191
-                         (EXIT (NREVERSE #2#)))))
+                                  #1#))))
+                         (LETT #2# (CDR #2#)) (GO G190) G191
+                         (EXIT (NREVERSE #1#)))))
              (EXIT |lt|))))))) 
 
 (DECLAIM (NOTINLINE |LieExponentials;|)) 
 
 (DEFUN |LieExponentials;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -284,9 +284,9 @@
           (QSETREFV % 9 (|XPBWPolynomial| |#1| |#2|))
           %))) 
 
-(DEFUN |LieExponentials| (&REST #1=#:G84)
+(DEFUN |LieExponentials| (&REST #1=#:G96)
   (SPROG NIL
-         (PROG (#2=#:G85)
+         (PROG (#2=#:G97)
            (RETURN
             (COND
              ((LETT #2#
@@ -306,12 +306,12 @@
 (MAKEPROP '|LieExponentials| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL (|XPBWPolynomial| 6 7) (|local| |#1|)
-              (|local| |#2|) (|local| |#3|) '|Rep| (0 . |Zero|) (|Equation| 7)
+              (|local| |#2|) (|local| |#3|) '|Rep| (0 . |0|) (|Equation| 7)
               (4 . |equation|) (|Boolean|) (|LyndonWord| 6) (10 . =) (16 . -)
-              (22 . =) (28 . |lexico|) (34 . |One|) (|OutputForm|)
-              (|Character|) (38 . |coerce|) (43 . |coerce|) (48 . ^)
-              (54 . |coerce|) (59 . *) (|Record| (|:| |k| 14) (|:| |c| 7))
-              (|List| 27) |LEXP;LyndonCoordinates;%L;5| (|List| 11)
+              (22 . =) (28 . |lexico|) (34 . |1|) (|OutputForm|) (|Character|)
+              (38 . |coerce|) (43 . |coerce|) (48 . ^) (54 . |coerce|) (59 . *)
+              (|Record| (|:| |k| 14) (|:| |c| 7)) (|List| 27)
+              |LEXP;LyndonCoordinates;%L;5| (|List| 11)
               |LEXP;identification;2%L;4| (|Record| (|:| |k| 36) (|:| |c| 7))
               (|List| 32) (65 . |listOfTerms|) (|Union| 14 '"failed")
               (|PoincareBirkhoffWittLyndonBasis| 6) (70 . |retractIfCan|)
@@ -319,7 +319,7 @@
               (81 . |product|) |LEXP;*;3%;6| (|LiePolynomial| 6 7)
               (88 . |coerce|) (93 . |exp|) |LEXP;exp;Lp%;7| (99 . |log|)
               (|Union| 43 '"failed") (105 . |LiePolyIfCan|) |LEXP;log;%Lp;8|
-              (110 . |One|) (114 . =) (|Mapping| 20 20 20) (|List| 20)
+              (110 . |1|) (114 . =) (|Mapping| 20 20 20) (|List| 20)
               (120 . |reduce|) |LEXP;coerce;%Of;9| (|List| %) (|List| 6)
               (|PositiveInteger|) (126 . |LyndonWordsList|) (132 . |LiePoly|)
               (|List| 43) |LEXP;LyndonBasis;LL;10| |LEXP;coerce;%Xpbwp;11|
@@ -330,8 +330,8 @@
               172 |recip| 184 |one?| 189 |mirror| 194 |log| 199 |listOfTerms|
               204 |leftRecip| 209 |leftPower| 214 |latex| 226 |inv| 231
               |identification| 236 |exp| 242 |conjugate| 247 |commutator| 253
-              |coerce| 259 ^ 274 |One| 292 |LyndonCoordinates| 296
-              |LyndonBasis| 301 = 306 / 312 * 318)
+              |coerce| 259 ^ 274 |LyndonCoordinates| 292 |LyndonBasis| 297 =
+              302 |1| 308 / 312 * 318)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0))
                  (CONS
@@ -359,7 +359,7 @@
                                          69 0 1 1 0 0 0 68 2 0 30 0 0 31 1 0 0
                                          43 46 2 0 0 0 0 1 2 0 0 0 0 1 1 0 20 0
                                          56 1 0 72 0 1 1 0 5 0 64 2 0 0 0 59 1
-                                         2 0 0 0 40 1 2 0 0 0 71 1 0 0 0 51 1 0
-                                         28 0 29 1 0 62 58 63 2 0 13 0 0 52 2 0
-                                         0 0 0 1 2 0 0 0 0 42)))))
+                                         2 0 0 0 40 1 2 0 0 0 71 1 1 0 28 0 29
+                                         1 0 62 58 63 2 0 13 0 0 52 0 0 0 51 2
+                                         0 0 0 0 1 2 0 0 0 0 42)))))
            '|lookupComplete|)) 

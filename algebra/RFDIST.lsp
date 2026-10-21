@@ -46,7 +46,7 @@
            (PROGN (SPADCALL |mean| (SPADCALL (QREFELT % 26)) (QREFELT % 17)))))) 
 
 (SDEFUN |RFDIST;normal01;F;5| ((% (|Float|)))
-        (SPROG ((|s| (|Float|)) (|v2| #1=(|Float|)) (|v1| #1#))
+        (SPROG ((|v1| #1=(|Float|)) (|v2| #1#) (|s| (|Float|)))
                (SEQ (LETT |s| (SPADCALL 2 (QREFELT % 11)))
                     (SEQ G190
                          (COND
@@ -101,10 +101,10 @@
 
 (SDEFUN |RFDIST;chiSquare1;NniF;7|
         ((|dgfree| (|NonNegativeInteger|)) (% (|Float|)))
-        (SPROG ((|x| (|Float|)) (#1=#:G23 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G23 NIL) (|x| (|Float|)))
                (SEQ (LETT |x| (|spadConstant| % 21))
-                    (SEQ (LETT |i| 1) (LETT #1# (QUOTIENT2 |dgfree| 2)) G190
-                         (COND ((|greater_SI| |i| #1#) (GO G191)))
+                    (SEQ (LETT |i| 1) (LETT #1# (|quotient_INT| |dgfree| 2))
+                         G190 (COND ((|greater_SI| |i| #1#) (GO G191)))
                          (SEQ
                           (EXIT
                            (LETT |x|
@@ -238,10 +238,10 @@
 (MAKEPROP '|RandomFloatDistributions| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|Integer|) (|RandomNumberSource|)
-              (0 . |size|) (|Float|) (4 . |One|) (8 . |coerce|) '|rnmax|
+              (0 . |size|) (|Float|) (4 . |1|) (8 . |coerce|) '|rnmax|
               (13 . |randnum|) (17 . /) |RFDIST;uniform01;F;1| (23 . -)
-              (29 . *) (35 . +) (|Mapping| 9) |RFDIST;uniform;2FM;2|
-              (41 . |Zero|) (|Boolean|) (45 . =) (51 . |log|) (56 . -)
+              (29 . *) (35 . +) (|Mapping| 9) |RFDIST;uniform;2FM;2| (41 . |0|)
+              (|Boolean|) (45 . =) (51 . |log|) (56 . -)
               |RFDIST;exponential1;F;3| |RFDIST;exponential;FM;4| (61 . >=)
               (|PositiveInteger|) (67 . *) (73 . ^) (79 . |sqrt|)
               |RFDIST;normal01;F;5| |RFDIST;normal;2FM;6| (84 . ^)

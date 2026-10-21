@@ -19,12 +19,12 @@
                    (|:| |f2| (|List| (|OrderedCompletion| (|Expression| R))))
                    (|:| |fail| #1="failed") (|:| |pole| "potentialPole"))))
         (SPROG
-         ((|ans| (|List| (|OrderedCompletion| (|Expression| R))))
-          (#2=#:G26 NIL)
+         ((|k| (|Kernel| (|Expression| R)))
+          (|u| (|Union| (|Expression| R) (|List| (|Expression| R)))) (|g| NIL)
+          (#2=#:G33 NIL)
           (|v| (|Union| (|OrderedCompletion| (|Expression| R)) "failed"))
-          (#3=#:G27 NIL) (|g| NIL)
-          (|u| (|Union| (|Expression| R) (|List| (|Expression| R))))
-          (|k| (|Kernel| (|Expression| R))))
+          (#3=#:G32 NIL)
+          (|ans| (|List| (|OrderedCompletion| (|Expression| R)))))
          (SEQ
           (EXIT
            (SEQ (LETT |k| (SPADCALL |x| (QREFELT % 19)))
@@ -40,9 +40,9 @@
                            (#4='T (CONS 0 (QCDR |v|)))))))
                   (#4#
                    (SEQ (LETT |ans| NIL)
-                        (SEQ (LETT |g| NIL) (LETT #3# (QCDR |u|)) G190
+                        (SEQ (LETT |g| NIL) (LETT #2# (QCDR |u|)) G190
                              (COND
-                              ((OR (ATOM #3#) (PROGN (LETT |g| (CAR #3#)) NIL))
+                              ((OR (ATOM #2#) (PROGN (LETT |g| (CAR #2#)) NIL))
                                (GO G191)))
                              (SEQ
                               (LETT |v|
@@ -51,14 +51,14 @@
                               (EXIT
                                (COND
                                 ((QEQCAR |v| 1)
-                                 (PROGN (LETT #2# (CONS 2 #1#)) (GO #5=#:G25)))
+                                 (PROGN (LETT #3# (CONS 2 #1#)) (GO #5=#:G31)))
                                 ('T
                                  (LETT |ans|
                                        (SPADCALL |ans| (LIST (QCDR |v|))
                                                  (QREFELT % 29)))))))
-                             (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
+                             (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                         (EXIT (CONS 1 |ans|))))))))
-          #5# (EXIT #2#)))) 
+          #5# (EXIT #3#)))) 
 
 (SDEFUN |DEFINTRF;integrate;FSbU;3|
         ((|f| (|Fraction| (|Polynomial| R)))
@@ -140,7 +140,7 @@
 (DECLAIM (NOTINLINE |RationalFunctionDefiniteIntegration;|)) 
 
 (DEFUN |RationalFunctionDefiniteIntegration;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RationalFunctionDefiniteIntegration| DV$1))
@@ -155,9 +155,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |RationalFunctionDefiniteIntegration| (#1=#:G52)
+(DEFUN |RationalFunctionDefiniteIntegration| (#1=#:G62)
   (SPROG NIL
-         (PROG (#2=#:G53)
+         (PROG (#2=#:G63)
            (RETURN
             (COND
              ((LETT #2#
@@ -194,7 +194,7 @@
               (|OrderedCompletionFunctions2| 16 24) (66 . |map|) (72 . |high|)
               |DEFINTRF;integrate;FSbU;3| (|String|) (77 . |ignore?|)
               |DEFINTRF;integrate;FSbSU;4| |DEFINTRF;integrate;FSbSU;5|
-              (82 . =) (88 . |Zero|) (92 . |coerce|) (|Polynomial| 6)
+              (82 . =) (88 . |0|) (92 . |coerce|) (|Polynomial| 6)
               (97 . |denom|) (|Union| 25 '"failed") (102 . |checkForZero|))
            '#(|integrate| 111) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))

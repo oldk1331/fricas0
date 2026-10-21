@@ -1,9 +1,9 @@
 
-(PUT '|MODRING;modulus;%Mod;1| '|SPADreplace| 'QCDR) 
+(MAKEPROP '|MODRING;modulus;%Mod;1| '|SPADreplace| 'QCDR) 
 
 (SDEFUN |MODRING;modulus;%Mod;1| ((|x| (%)) (% (|Mod|))) (QCDR |x|)) 
 
-(PUT '|MODRING;coerce;%R;2| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|MODRING;coerce;%R;2| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |MODRING;coerce;%R;2| ((|x| (%)) (% (R))) (QCAR |x|)) 
 
@@ -22,10 +22,10 @@
 (SDEFUN |MODRING;characteristic;Nni;7| ((% (|NonNegativeInteger|)))
         (SPADCALL (QREFELT % 27))) 
 
-(SDEFUN |MODRING;Zero;%;8| ((% (%)))
+(SDEFUN |MODRING;0;%;8| ((% (%)))
         (CONS (|spadConstant| % 17) (|spadConstant| % 18))) 
 
-(SDEFUN |MODRING;One;%;9| ((% (%)))
+(SDEFUN |MODRING;1;%;9| ((% (%)))
         (CONS (|spadConstant| % 29) (|spadConstant| % 18))) 
 
 (SDEFUN |MODRING;zero?;%B;10| ((|x| (%)) (% (|Boolean|)))
@@ -65,7 +65,7 @@
                   (|MODRING;newmodulo| (QCDR |x|) (QCDR |y|) %) (QREFELT % 25))) 
 
 (SDEFUN |MODRING;exQuo;2%U;18| ((|x| (%)) (|y| (%)) (% (|Union| % "failed")))
-        (SPROG ((|r| (|Union| R "failed")) (|xm| (|Mod|)))
+        (SPROG ((|xm| (|Mod|)) (|r| (|Union| R "failed")))
                (SEQ (LETT |xm| (QCDR |x|))
                     (COND
                      ((SPADCALL |xm| (QCDR |y|) (QREFELT % 45))
@@ -97,8 +97,8 @@
 
 (DEFUN |ModularRing;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -144,15 +144,13 @@
               (|local| |#3|) (|local| |#4|) (|local| |#5|) '|Rep|
               |MODRING;modulus;%Mod;1| |MODRING;coerce;%R;2| (|Integer|)
               (0 . |coerce|)
-              (CONS IDENTITY
-                    (FUNCALL (|dispatchFunction| |MODRING;Zero;%;8|) %))
-              (5 . |Zero|) (9 . |Zero|) |MODRING;coerce;I%;3| |MODRING;*;3%;17|
+              (CONS IDENTITY (FUNCALL (|dispatchFunction| |MODRING;0;%;8|) %))
+              (5 . |0|) (9 . |0|) |MODRING;coerce;I%;3| |MODRING;*;3%;17|
               |MODRING;*;I2%;4| (|OutputForm|) (13 . |coerce|)
               |MODRING;coerce;%Of;5| |MODRING;reduce;RMod%;6|
               (|NonNegativeInteger|) (18 . |characteristic|)
-              |MODRING;characteristic;Nni;7| (22 . |One|)
-              (CONS IDENTITY
-                    (FUNCALL (|dispatchFunction| |MODRING;One;%;9|) %))
+              |MODRING;characteristic;Nni;7| (22 . |1|)
+              (CONS IDENTITY (FUNCALL (|dispatchFunction| |MODRING;1;%;9|) %))
               (|Boolean|) (26 . |zero?|) |MODRING;zero?;%B;10| (31 . =)
               |MODRING;one?;%B;11| (37 . =) |MODRING;-;3%;15|
               |MODRING;=;2%B;13| (43 . +) |MODRING;+;3%;14| (49 . -) (55 . -)
@@ -164,28 +162,27 @@
               127 |modulus| 132 |leftRecip| 137 |leftPower| 142 |latex| 154
               |inv| 159 |exQuo| 164 |commutator| 170 |coerce| 176
               |characteristic| 191 |associator| 195 |antiCommutator| 202
-              |annihilate?| 208 ^ 214 |Zero| 226 |One| 230 = 234 - 240 + 251 *
-              257)
+              |annihilate?| 208 ^ 214 = 226 |1| 232 |0| 236 - 240 + 251 * 257)
            'NIL
            (CONS
             (|makeByteWordVec2| 1
-                                '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                                '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0))
             (CONS
              '#(NIL NIL |Rng&| NIL NIL |NonAssociativeRing&| NIL NIL
                 |NonAssociativeRng&| |AbelianGroup&| NIL NIL NIL
                 |AbelianMonoid&| |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL
-                |AbelianSemiGroup&| |Magma&| |SetCategory&| NIL |BasicType&|
-                NIL)
+                |AbelianSemiGroup&| |SetWithZero&| |Magma&| |SetCategory&| NIL
+                |BasicType&| NIL)
              (CONS
               '#((|Ring|) (|SemiRing|) (|Rng|) (|SemiRng|) (|BiModule| $$ $$)
                  (|NonAssociativeRing|) (|LeftModule| $$) (|RightModule| $$)
                  (|NonAssociativeRng|) (|AbelianGroup|)
                  (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
                  (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
-                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|) (|Magma|)
-                 (|SetCategory|) (|CoercibleTo| 22) (|BasicType|)
-                 (|unitsKnown|))
+                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|)
+                 (|SetWithZero|) (|Magma|) (|SetCategory|) (|CoercibleTo| 22)
+                 (|BasicType|) (|unitsKnown|))
               (|makeByteWordVec2| 51
                                   '(1 6 0 14 15 0 6 0 17 0 7 0 18 1 6 22 0 23 0
                                     6 26 27 0 6 0 29 1 6 31 0 32 2 6 31 0 0 34
@@ -198,8 +195,8 @@
                                     0 50 0 1 1 0 0 0 49 2 0 46 0 0 47 2 0 0 0 0
                                     1 1 0 22 0 24 1 0 0 14 19 1 0 6 0 13 0 0 26
                                     28 3 0 0 0 0 0 1 2 0 0 0 0 1 2 0 31 0 0 1 2
-                                    0 0 0 51 1 2 0 0 0 26 1 0 0 0 16 0 0 0 30 2
-                                    0 31 0 0 38 2 0 0 0 0 37 1 0 0 0 43 2 0 0 0
+                                    0 0 0 51 1 2 0 0 0 26 1 2 0 31 0 0 38 0 0 0
+                                    30 0 0 0 16 2 0 0 0 0 37 1 0 0 0 43 2 0 0 0
                                     0 40 2 0 0 51 0 1 2 0 0 0 0 20 2 0 0 14 0
                                     21 2 0 0 26 0 1)))))
            '|lookupComplete|)) 

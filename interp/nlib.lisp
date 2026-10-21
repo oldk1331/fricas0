@@ -31,36 +31,7 @@
 
 (in-package "BOOT")
 
-;; definition of our stream structure
-(defstruct libstream  mode dirname (indextable nil)  (indexstream nil))
-;indextable is a list of entries (key class <location or filename>)
-;filename is of the form filenumber.lsp or filenumber.o
-
-(defun |make_kaf| (mode dirname indextable indexstream)
-    (make-libstream :mode mode :dirname dirname :indextable indextable
-                    :indexstream indexstream))
-
-(defun |kaf_set_indextable| (kaf indextable)
-    (setf (libstream-indextable kaf) indextable))
-
-(defun |make_compiler_output_stream|(lib basename)
-   (open (concat (libstream-dirname lib) "/" basename ".lsp")
-         :direction :output :if-exists :supersede))
-
-(defvar |$index_filename| "index.KAF")
-
-;get the index stream of the lisplib in dirname
-(defun |get_io_index_stream| (dirname io?)
-    (let ((index_file (concat dirname "/" |$index_filename|)))
-        (if io?
-            (open index_file :direction :io :if-exists :overwrite
-                             :if-does-not-exist :create)
-            (open index_file :direction :input :if-does-not-exist nil)
-        )
-    )
-)
-
-; Assumes that file is postioned after end of actual data, so that
+; Assumes that file is positioned after end of actual data, so that
 ; new indextable should overwrite old indextable (or part of it),
 ; but should not overwrite data.
 (defun |write_indextable| (stream indextable)
@@ -75,13 +46,6 @@
     (write val :stream stream :level nil :length nil
                  :circle t :array t :escape t)
     (terpri stream))
-
-;; compile_lib(libdir) -- libdir must be string naming NRLIB directory
-(defun |compile_lib| (libdir)
-    (let ((base (pathname-name libdir)))
-         (|compile_lib_file|
-             (concatenate 'string libdir "/" base ".lsp")))
-)
 
 #+:GCL
 (defun spad-fixed-arg (fname )
@@ -111,37 +75,10 @@
 
 ;; cms file operations
 
-(defun |make_full_namestring| (filearg)
-    (namestring (merge-pathnames filearg)))
-
-(defun |probe_name| (file)
-  (if (|fricas_probe_file| file) (namestring file) nil))
-
-(defun |make_input_filename1|(filename)
-    (let*
-       ((dirname (pathname-directory filename))
-        (ft (pathname-type filename))
-        (dirs (|get_directory_list| ft))
-        (newfn nil))
-    (if (or (null dirname) (eqcar dirname :relative))
-        (dolist (dir dirs (|probe_name| filename))
-                (when
-                 (|fricas_probe_file|
-                  (setq newfn (concatenate 'string dir "/" filename)))
-                 (return newfn)))
-        (|probe_name| filename))))
-
-(defun |find_file|(filespec filetypelist)
-    (some #'(lambda (ft) (|make_input_filename2| filespec ft))
-          filetypelist))
-
 ;; ($ERASE filearg) -> 0 if succeeds else 1
 (defun |erase_lib|(filearg)
   (if (|fricas_probe_file| filearg)
-      #+:fricas_has_remove_directory
           (|remove_directory| filearg)
-      #-:fricas_has_remove_directory
-          (delete-directory filearg)
       1))
 
 #+(or :abcl :clisp :cmu :ecl :gcl :lispworks :poplog)
@@ -161,59 +98,19 @@
       1))
 
 (defun |replace_lib|(filespec2 filespec1)
-    (|erase_lib| (setq filespec1 (|make_full_namestring| filespec1)))
+    (|erase_lib| filespec1)
     #-(or :clisp :openmcl :ecl)
-    (rename-file (|make_full_namestring| filespec2) filespec1)
+    (rename-file filespec2 filespec1)
     #+(or :clisp :openmcl :ecl)
-    (|run_program| "mv" (list (|make_full_namestring| filespec2) filespec1))
+    (|run_program| "mv" (list filespec2 filespec1))
  )
 
-
-(defun |copy_file|(filespec1 filespec2)
-    (let ((name1 (|make_full_namestring| filespec1))
-          (name2 (|make_full_namestring| filespec2)))
-        (copy-lib-directory name1 name2)
-))
-
-(defun copy-lib-directory (name1 name2)
+(defun |copy_file|(name1 name2)
    (|run_program| "cp" (list "-r" name1 name2)))
 
-;;; moved from fname.lisp
-
-;;
-;; Lisp support for cleaned up FileName domain.
-;;
-;; Created: June 20, 1991 (Stephen Watt)
-;;
-
-
-;; E.g.  "/"  "/u/smwatt"  "../src"
-
-(defun |myWritable?| (s)
-  (if (not (stringp s)) (|error| "``myWritable?'' requires a string arg."))
-  (if (string= s "") (setq s "."))
-  (if (not (|fnameExists?| s)) (setq s (|file_directory| s)))
-  (if (string= s "") (setq s "."))
-  (if (> (|writeablep| s) 0) 't nil) )
-
-(defun |fnameExists?| (f)
-  (if (|fricas_probe_file| (namestring f)) 't nil))
-
-(defun |fnameReadable?| (f)
+(defun |can_open?| (f)
   (let ((s
           (ignore-errors (open f :direction :input :if-does-not-exist nil))
         ))
     (cond (s (close s) 't) ('t nil)) )
   )
-
-(defun |fnameWritable?| (f)
-    (|myWritable?| f))
-
-(defun |fnameNew| (d n e)
-  (if (not (|myWritable?| d))
-    nil
-    (do ((fn))
-        (nil)
-        (setq fn (|make_fname| d (string (gensym n)) e))
-        (if (not (|fricas_probe_file| (namestring fn)))
-           (return-from |fnameNew| fn)) )))

@@ -149,7 +149,7 @@
               ('T (|error| "Not an elementary operator")))) 
 
 (SDEFUN |EF;dropfun| ((|x| (F)) (% (F)))
-        (SPROG ((#1=#:G224 NIL) (|k| (|Union| (|Kernel| F) "failed")))
+        (SPROG ((|k| (|Union| (|Kernel| F) "failed")) (#1=#:G227 NIL))
                (SEQ
                 (EXIT
                  (SEQ
@@ -160,7 +160,7 @@
                               (NULL (SPADCALL (QCDR |k|) (QREFELT % 99))))
                           (PROGN
                            (LETT #1# (|spadConstant| % 89))
-                           (GO #2=#:G222))))))
+                           (GO #2=#:G225))))))
                   (EXIT (|SPADfirst| (SPADCALL (QCDR |k|) (QREFELT % 99))))))
                 #2# (EXIT #1#)))) 
 
@@ -169,9 +169,9 @@
          (|values| (|List| (|Record| (|:| |func| F) (|:| |pole| (|Boolean|)))))
          (% (|Union| F "failed")))
         (SPROG
-         ((|s| (|Integer|)) (|n| (|Union| (|Integer|) "failed"))
-          (|m| (|Integer|)) (|q| (|Fraction| (|Integer|)))
-          (|r| (|Union| (|Fraction| (|Integer|)) "failed")) (|y| (F)))
+         ((|y| (F)) (|r| (|Union| (|Fraction| (|Integer|)) "failed"))
+          (|q| (|Fraction| (|Integer|))) (|m| (|Integer|))
+          (|n| (|Union| (|Integer|) "failed")) (|s| (|Integer|)))
          (SEQ
           (LETT |r|
                 (SPADCALL
@@ -339,8 +339,8 @@
                                           (CONS 1
                                                 "failed"))))))))))))))))))))))))))) 
 
-(PUT '|EF;specialTrigs;FLU;45| '|SPADreplace|
-     '(XLAM (|x| |values|) (CONS 1 "failed"))) 
+(MAKEPROP '|EF;specialTrigs;FLU;45| '|SPADreplace|
+          '(XLAM (|x| |values|) (CONS 1 "failed"))) 
 
 (SDEFUN |EF;specialTrigs;FLU;45|
         ((|x| (F))
@@ -350,7 +350,7 @@
 
 (SDEFUN |EF;isin| ((|x| (F)) (% (F)))
         (SPROG
-         ((|u| (|Union| F "failed")) (|s3| (F)) (|s2| (F)) (|h| (F)) (|y| (F)))
+         ((|y| (F)) (|h| (F)) (|s2| (F)) (|s3| (F)) (|u| (|Union| F "failed")))
          (SEQ
           (COND ((SPADCALL |x| (QREFELT % 114)) (|spadConstant| % 89))
                 (#1='T
@@ -434,7 +434,7 @@
 
 (SDEFUN |EF;icos| ((|x| (F)) (% (F)))
         (SPROG
-         ((|u| (|Union| F "failed")) (|s3| (F)) (|s2| (F)) (|h| (F)) (|y| (F)))
+         ((|y| (F)) (|h| (F)) (|s2| (F)) (|s3| (F)) (|u| (|Union| F "failed")))
          (SEQ
           (COND ((SPADCALL |x| (QREFELT % 114)) (|spadConstant| % 48))
                 (#1='T
@@ -518,7 +518,7 @@
                                             (QREFELT % 121))))))))))))))) 
 
 (SDEFUN |EF;itan| ((|x| (F)) (% (F)))
-        (SPROG ((|u| (|Union| F "failed")) (|s33| (F)) (|s3| (F)) (|y| (F)))
+        (SPROG ((|y| (F)) (|s3| (F)) (|s33| (F)) (|u| (|Union| F "failed")))
                (SEQ
                 (COND ((SPADCALL |x| (QREFELT % 114)) (|spadConstant| % 89))
                       (#1='T
@@ -620,7 +620,7 @@
                                                   (QREFELT % 121))))))))))))))) 
 
 (SDEFUN |EF;icot| ((|x| (F)) (% (F)))
-        (SPROG ((|u| (|Union| F "failed")) (|s33| (F)) (|s3| (F)) (|y| (F)))
+        (SPROG ((|y| (F)) (|s3| (F)) (|s33| (F)) (|u| (|Union| F "failed")))
                (SEQ
                 (COND
                  ((SPADCALL |x| (QREFELT % 114)) (|error| "Invalid argument"))
@@ -707,7 +707,7 @@
 
 (SDEFUN |EF;isec| ((|x| (F)) (% (F)))
         (SPROG
-         ((|u| (|Union| F "failed")) (|h| (F)) (|s3| (F)) (|s2| (F)) (|y| (F)))
+         ((|y| (F)) (|s2| (F)) (|s3| (F)) (|h| (F)) (|u| (|Union| F "failed")))
          (SEQ
           (COND ((SPADCALL |x| (QREFELT % 114)) (|spadConstant| % 48))
                 (#1='T
@@ -797,7 +797,7 @@
 
 (SDEFUN |EF;icsc| ((|x| (F)) (% (F)))
         (SPROG
-         ((|u| (|Union| F "failed")) (|h| (F)) (|s3| (F)) (|s2| (F)) (|y| (F)))
+         ((|y| (F)) (|s2| (F)) (|s3| (F)) (|h| (F)) (|u| (|Union| F "failed")))
          (SEQ
           (COND ((SPADCALL |x| (QREFELT % 114)) (|error| "Invalid argument"))
                 (#1='T
@@ -950,7 +950,7 @@
                                            (QREFELT % 121))))))))))))) 
 
 (SDEFUN |EF;iacot| ((|x| (F)) (% (F)))
-        (SPROG ((|xx| (F)) (|r3| (F)))
+        (SPROG ((|r3| (F)) (|xx| (F)))
                (SEQ
                 (COND
                  ((SPADCALL |x| (QREFELT % 114))
@@ -1330,9 +1330,9 @@
 
 (SDEFUN |EF;iexp| ((|x| (F)) (% (F)))
         (SPROG
-         ((|u| (|Union| F "failed")) (|s3| (F)) (|s2| (F)) (|h| (F)) (|y| (F))
-          (|xi| (F)) (|i| (F)) (#1=#:G435 NIL) (|kx| (|Kernel| F))
-          (|kxu| (|Union| (|Kernel| F) "failed")))
+         ((|kxu| (|Union| (|Kernel| F) "failed")) (|kx| (|Kernel| F))
+          (#1=#:G445 NIL) (|i| (F)) (|xi| (F)) (|y| (F)) (|h| (F)) (|s2| (F))
+          (|s3| (F)) (|u| (|Union| F "failed")))
          (SEQ
           (COND ((SPADCALL |x| (QREFELT % 114)) (|spadConstant| % 48))
                 ((SPADCALL |x| (QREFELT % 14) (QREFELT % 115))
@@ -1354,7 +1354,7 @@
                                       (|SPADfirst|
                                        (SPADCALL |kx| (QREFELT % 99)))
                                       |x| (QREFELT % 100)))
-                               (GO #3=#:G431))))))))
+                               (GO #3=#:G441))))))))
                     (COND
                      ((SPADCALL |x| (|spadConstant| % 89) (QREFELT % 125))
                       (COND
@@ -1510,23 +1510,23 @@
                                  (QREFELT % 131)))
                       ('T NIL)))))) 
 
-(PUT '|EF;localReal?;FB;72| '|SPADreplace| '(XLAM (|x|) 'T)) 
+(MAKEPROP '|EF;localReal?;FB;72| '|SPADreplace| '(XLAM (|x|) 'T)) 
 
 (SDEFUN |EF;localReal?;FB;72| ((|x| (F)) (% (|Boolean|))) 'T) 
 
-(PUT '|EF;localReal?;FB;73| '|SPADreplace| '(XLAM (|x|) 'T)) 
+(MAKEPROP '|EF;localReal?;FB;73| '|SPADreplace| '(XLAM (|x|) 'T)) 
 
 (SDEFUN |EF;localReal?;FB;73| ((|x| (F)) (% (|Boolean|))) 'T) 
 
 (SDEFUN |EF;iiilog| ((|x| (F)) (% (F)))
         (SPROG
-         ((|arg| (F))
-          (|rec|
-           (|Record| (|:| |var| (|Kernel| F)) (|:| |exponent| (|Integer|))))
-          (|u|
+         ((|u|
            (|Union|
             (|Record| (|:| |var| (|Kernel| F)) (|:| |exponent| (|Integer|)))
-            "failed")))
+            "failed"))
+          (|rec|
+           (|Record| (|:| |var| (|Kernel| F)) (|:| |exponent| (|Integer|))))
+          (|arg| (F)))
          (SEQ
           (COND ((SPADCALL |x| (QREFELT % 114)) (|error| "Invalid argument"))
                 ((SPADCALL |x| (|spadConstant| % 48) (QREFELT % 123))
@@ -1553,10 +1553,10 @@
 
 (SDEFUN |EF;ilog| ((|x| (F)) (% (F)))
         (SPROG
-         ((#1=#:G459 NIL)
-          (|den| (|SparseMultivariatePolynomial| R (|Kernel| F)))
+         ((|num| (|SparseMultivariatePolynomial| R (|Kernel| F)))
           (|num1| (|Boolean|))
-          (|num| (|SparseMultivariatePolynomial| R (|Kernel| F))))
+          (|den| (|SparseMultivariatePolynomial| R (|Kernel| F)))
+          (#1=#:G476 NIL))
          (SEQ
           (EXIT
            (SEQ
@@ -1587,7 +1587,7 @@
                                        (QREFELT % 145))
                                       (QREFELT % 121))
                             (QREFELT % 49)))
-                     (GO #2=#:G457))))))))))
+                     (GO #2=#:G474))))))))))
             (EXIT (SPADCALL (QREFELT % 14) |x| (QREFELT % 121)))))
           #2# (EXIT #1#)))) 
 
@@ -1880,7 +1880,7 @@
 (DECLAIM (NOTINLINE |ElementaryFunction;|)) 
 
 (DEFUN |ElementaryFunction;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -2153,9 +2153,9 @@
                     (QREFELT % 203))
           %))) 
 
-(DEFUN |ElementaryFunction| (&REST #1=#:G716)
+(DEFUN |ElementaryFunction| (&REST #1=#:G735)
   (SPROG NIL
-         (PROG (#2=#:G717)
+         (PROG (#2=#:G736)
            (RETURN
             (COND
              ((LETT #2#
@@ -2339,7 +2339,7 @@
               '|opsech| '|opcsch| '|opasinh| '|opacosh| '|opatanh| '|opacoth|
               '|opasech| '|opacsch| (5 . |pi|) (9 . |coerce|) (14 . |pi|)
               '|cachedPi| (|List| %) (18 . |kernel|) (24 . |imaginary|)
-              '|isqrt1| (28 . |One|) (32 . -) (37 . |sqrt|) (|Integer|)
+              '|isqrt1| (28 . |1|) (32 . -) (37 . |sqrt|) (|Integer|)
               (42 . |coerce|) (47 . |sqrt|) (52 . |iisqrt2|) (56 . |iisqrt3|)
               '|isqrt2| '|isqrt3| (60 . |coerce|) (65 . |elt|) |EF;log;2F;12|
               |EF;exp;2F;13| |EF;sin;2F;14| |EF;cos;2F;15| |EF;tan;2F;16|
@@ -2349,13 +2349,13 @@
               |EF;coth;2F;29| |EF;sech;2F;30| |EF;csch;2F;31| |EF;asinh;2F;32|
               |EF;acosh;2F;33| |EF;atanh;2F;34| |EF;acoth;2F;35|
               |EF;asech;2F;36| |EF;acsch;2F;37| (|Kernel| %) (71 . |retract|)
-              (76 . |Zero|) (80 . |Zero|) (|Boolean|) (84 . |has?|)
+              (76 . |0|) (80 . |0|) (|Boolean|) (84 . |has?|)
               |EF;belong?;BoB;41| (90 . |is?|) |EF;operator;2Bo;42|
               (|Union| 86 '#1="failed") (96 . |retractIfCan|) (|List| 7)
               (|Kernel| 7) (101 . |argument|) (106 . /) (|Union| 104 '#1#)
               (112 . |retractIfCan|) (|Union| 51 '"failed") (|Fraction| 51)
               (117 . |retractIfCan|) (|Record| (|:| |func| 7) (|:| |pole| 90))
-              (|List| 106) (122 . |elt|) (128 . |One|) (|PositiveInteger|)
+              (|List| 106) (122 . |elt|) (128 . |1|) (|PositiveInteger|)
               (132 . *) (|Union| 7 '#2="failed") (138 . |specialTrigs|)
               (144 . |zero?|) (149 . |is?|) (155 . ^) (161 . -) (167 . +)
               (173 . |inv|) (178 . *) (184 . |kernel|) (190 . *) (196 . =)
@@ -2365,7 +2365,7 @@
               (|Record| (|:| |var| 86) (|:| |exponent| 51))
               (|Union| 133 '"failed") (240 . |isExpt|) (246 . *)
               (|SparseMultivariatePolynomial| 6 86) (252 . |numer|)
-              (|SparseMultivariatePolynomial| 6 98) (257 . |One|) (261 . =)
+              (|SparseMultivariatePolynomial| 6 98) (257 . |1|) (261 . =)
               (267 . |denom|) (272 . ~=) (278 . -) (283 . |coerce|)
               (288 . |log|) (293 . |iilog|) (298 . |exp|) (303 . |iiexp|)
               (308 . |sin|) (313 . |iisin|) (318 . |cos|) (323 . |iicos|)

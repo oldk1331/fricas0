@@ -65,10 +65,10 @@
 (SDEFUN |ELFUTS;sncndn;SCoefL;2|
         ((|z| (|Stream| |Coef|)) (|m| (|Coef|)) (% (|List| (|Stream| |Coef|))))
         (SPROG
-         ((|dn1| #1=(|Stream| |Coef|)) (|cn1| #1#) (|sn1| #1#)
-          (|invden| (|Stream| |Coef|)) (#2=#:G11 NIL) (|c1| (|Coef|))
-          (|dn0| (|Coef|)) (|cn0| (|Coef|)) (|sn0| (|Coef|))
-          (|scd| (|List| (|Stream| |Coef|))) (|z0| (|Coef|)))
+         ((|z0| (|Coef|)) (|scd| (|List| (|Stream| |Coef|))) (|sn0| (|Coef|))
+          (|cn0| (|Coef|)) (|dn0| (|Coef|)) (|c1| (|Coef|)) (#1=#:G16 NIL)
+          (|invden| (|Stream| |Coef|)) (|sn1| #2=(|Stream| |Coef|)) (|cn1| #2#)
+          (|dn1| #2#))
          (SEQ
           (COND
            ((SPADCALL |z| (QREFELT % 24))
@@ -98,7 +98,7 @@
                                      (QREFELT % 22)))
                      (LETT |invden|
                            (PROG2
-                               (LETT #2#
+                               (LETT #1#
                                      (SPADCALL
                                       (SPADCALL
                                        (SPADCALL (|spadConstant| % 17)
@@ -112,12 +112,12 @@
                                         (QREFELT % 14))
                                        (QREFELT % 39))
                                       (QREFELT % 41)))
-                               (QCDR #2#)
-                             (|check_union2| (QEQCAR #2# 0)
+                               (QCDR #1#)
+                             (|check_union2| (QEQCAR #1# 0)
                                              (|Stream| (QREFELT % 6))
                                              (|Union| (|Stream| (QREFELT % 6))
                                                       "failed")
-                                             #2#)))
+                                             #1#)))
                      (LETT |sn1|
                            (SPADCALL |invden|
                                      (SPADCALL
@@ -215,8 +215,8 @@
 
 (SDEFUN |ELFUTS;ellipticE;UTSCoefUTS;6| ((|z| (UTS)) (|m| (|Coef|)) (% (UTS)))
         (SPROG
-         ((|c0| (|Coef|)) (|z0| (|Coef|)) (|s2| (UTS)) (|s1| (UTS))
-          (|dz| (UTS)) (|cz| (|Stream| |Coef|)))
+         ((|cz| (|Stream| |Coef|)) (|dz| (UTS)) (|s1| (UTS)) (|s2| (UTS))
+          (|z0| (|Coef|)) (|c0| (|Coef|)))
          (SEQ (LETT |cz| (SPADCALL |z| (QREFELT % 44)))
               (EXIT
                (COND ((SPADCALL |cz| (QREFELT % 24)) (|spadConstant| % 28))
@@ -265,8 +265,8 @@
 
 (SDEFUN |ELFUTS;ellipticF;UTSCoefUTS;7| ((|z| (UTS)) (|m| (|Coef|)) (% (UTS)))
         (SPROG
-         ((|c0| (|Coef|)) (|z0| (|Coef|)) (|s2| (UTS)) (|s1| (UTS))
-          (|dz| (UTS)) (|cz| (|Stream| |Coef|)))
+         ((|cz| (|Stream| |Coef|)) (|dz| (UTS)) (|s1| (UTS)) (|s2| (UTS))
+          (|z0| (|Coef|)) (|c0| (|Coef|)))
          (SEQ (LETT |cz| (SPADCALL |z| (QREFELT % 44)))
               (EXIT
                (COND ((SPADCALL |cz| (QREFELT % 24)) (|spadConstant| % 28))
@@ -318,8 +318,8 @@
 (SDEFUN |ELFUTS;ellipticPi;UTS2CoefUTS;8|
         ((|z| (UTS)) (|n| (|Coef|)) (|m| (|Coef|)) (% (UTS)))
         (SPROG
-         ((|c0| (|Coef|)) (|z0| (|Coef|)) (|ss| (UTS)) (|s2| (UTS))
-          (|s1| (UTS)) (|dz| (UTS)) (|cz| (|Stream| |Coef|)))
+         ((|cz| (|Stream| |Coef|)) (|dz| (UTS)) (|s1| (UTS)) (|s2| (UTS))
+          (|ss| (UTS)) (|z0| (|Coef|)) (|c0| (|Coef|)))
          (SEQ (LETT |cz| (SPADCALL |z| (QREFELT % 44)))
               (EXIT
                (COND ((SPADCALL |cz| (QREFELT % 24)) (|spadConstant| % 28))
@@ -383,7 +383,7 @@
 (DECLAIM (NOTINLINE |EllipticFunctionsUnivariateTaylorSeries;|)) 
 
 (DEFUN |EllipticFunctionsUnivariateTaylorSeries;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -424,9 +424,9 @@
                         %)))))
           %))) 
 
-(DEFUN |EllipticFunctionsUnivariateTaylorSeries| (&REST #1=#:G32)
+(DEFUN |EllipticFunctionsUnivariateTaylorSeries| (&REST #1=#:G37)
   (SPROG NIL
-         (PROG (#2=#:G33)
+         (PROG (#2=#:G38)
            (RETURN
             (COND
              ((LETT #2#
@@ -452,10 +452,10 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) 'SPFCN
               (|Stream| 6) (|Integer|) (|List| 9) (0 . |elt|)
               (|StreamTaylorSeriesOperations| 6) (6 . *) (|Mapping| 9)
-              (12 . |lazyIntegrate|) (18 . |One|) (22 . |One|)
-              (|PositiveInteger|) (26 . |One|) (30 . *) (36 . *) (|Boolean|)
-              (42 . |empty?|) (47 . |Zero|) (51 . |coerce|) (56 . |frst|)
-              (61 . |Zero|) (65 . =) (71 . |deriv|) (76 . -) (|Mapping| 11 11)
+              (12 . |lazyIntegrate|) (18 . |1|) (22 . |1|) (|PositiveInteger|)
+              (26 . |1|) (30 . *) (36 . *) (|Boolean|) (42 . |empty?|)
+              (47 . |0|) (51 . |coerce|) (56 . |frst|) (61 . |0|) (65 . =)
+              (71 . |deriv|) (76 . -) (|Mapping| 11 11)
               (|ParadoxicalCombinatorsForStreams| 6) (81 . Y) (87 . |jacobiSn|)
               (93 . |jacobiCn|) (99 . |jacobiDn|) (105 . ^) (111 . -)
               (|Union| 9 '"failed") (117 . |recip|) (122 . +)
@@ -466,7 +466,7 @@
               (172 . -) (177 . ^) (|NonNegativeInteger|) (183 . |coefficient|)
               (189 . *) (195 . |integrate|) (200 . |ellipticE|)
               (206 . |coerce|) (211 . +) (217 . |ellipticE|)
-              (223 . |ellipticF|) (229 . |ellipticF|) (235 . |One|)
+              (223 . |ellipticF|) (229 . |ellipticF|) (235 . |1|)
               (239 . |ellipticPi|) (246 . |ellipticPi|))
            '#(|sncndn| 253 |jacobiSn| 259 |jacobiDn| 265 |jacobiCn| 271
               |ellipticPi| 277 |ellipticF| 284 |ellipticE| 290)

@@ -15,7 +15,7 @@
 (DECLAIM (NOTINLINE |PiCoercions;|)) 
 
 (DEFUN |PiCoercions;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|PiCoercions| DV$1))
@@ -29,9 +29,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |PiCoercions| (#1=#:G3)
+(DEFUN |PiCoercions| (#1=#:G4)
   (SPROG NIL
-         (PROG (#2=#:G4)
+         (PROG (#2=#:G5)
            (RETURN
             (COND
              ((LETT #2#

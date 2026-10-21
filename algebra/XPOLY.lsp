@@ -2,7 +2,7 @@
 (DECLAIM (NOTINLINE |XPolynomial;|)) 
 
 (DEFUN |XPolynomial;| (|#1|)
-  (SPROG ((|pv$| NIL) (#1=#:G15 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (#1=#:G15 NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|XPolynomial| DV$1))
@@ -14,6 +14,11 @@
                                              (LIST
                                               (|HasCategory| |#1|
                                                              '(|CommutativeRing|))
+                                              (AND
+                                               (|HasCategory| |#1|
+                                                              '(|CharacteristicZero|))
+                                               (|HasCategory| |#1|
+                                                              '(|CommutativeRing|)))
                                               (|HasCategory| |#1|
                                                              '(|noZeroDivisors|))
                                               (LETT #1#
@@ -59,17 +64,18 @@
               (|Record| (|:| |k| 17) (|:| |c| %)) (|List| 26) (|Mapping| 6 14))
            '#() 'NIL
            (CONS
-            (|makeByteWordVec2| 4
+            (|makeByteWordVec2| 5
                                 '(0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0 0 0 0 4 0 0 0 0 0 2 0 0 0 0 0))
+                                  0 0 0 5 0 0 0 0 5 0 0 0 0 0 0 3 2 0 0 0 0 0))
             (CONS
              '#(NIL NIL NIL |Algebra&| NIL |NonAssociativeAlgebra&| NIL
                 |FreeModuleCategory&| |Rng&| |Module&| NIL NIL NIL
                 |NonAssociativeRing&| NIL NIL NIL NIL |NonAssociativeRng&| NIL
-                NIL NIL |AbelianGroup&| NIL NIL NIL |AbelianMonoid&|
+                NIL NIL |AbelianGroup&| NIL NIL NIL NIL |AbelianMonoid&|
                 |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL NIL
-                |AbelianSemiGroup&| |Magma&| |SetCategory&| |RetractableTo&|
-                |RetractableTo&| NIL NIL |BasicType&| NIL NIL NIL)
+                |AbelianSemiGroup&| |SetWithZero&| |Magma&| |SetCategory&|
+                |RetractableTo&| |RetractableTo&| NIL NIL NIL |BasicType&| NIL
+                NIL NIL)
              (CONS
               '#((|XPolynomialsCat| 17 6) (|XFreeAlgebra| 17 6) (|XAlgebra| 6)
                  (|Algebra| 6) (|Ring|) (|NonAssociativeAlgebra| 6)
@@ -80,10 +86,11 @@
                  (|RightModule| $$) (|NonAssociativeRng|) (|RightModule| 6)
                  (|LeftModule| 6) (|AbelianProductCategory| 6) (|AbelianGroup|)
                  (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
-                 (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
-                 (|MagmaWithUnit|) (|SemiGroup|) (|Comparable|)
-                 (|AbelianSemiGroup|) (|Magma|) (|SetCategory|)
-                 (|RetractableTo| 6) (|RetractableTo| 14) (|noZeroDivisors|)
+                 (|Monoid|) (|Comparable|) (|AbelianMonoid|)
+                 (|NonAssociativeSemiRng|) (|MagmaWithUnit|) (|SemiGroup|)
+                 (|ComparableRepresentation|) (|AbelianSemiGroup|)
+                 (|SetWithZero|) (|Magma|) (|SetCategory|) (|RetractableTo| 6)
+                 (|RetractableTo| 14) (|noZeroDivisors|) (|CharacteristicZero|)
                  (|CoercibleTo| 8) (|BasicType|) (|unitsKnown|)
                  (|CoercibleFrom| 6) (|CoercibleFrom| 14))
               (|makeByteWordVec2| -999999 'NIL))))

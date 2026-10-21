@@ -6,7 +6,7 @@
 
 (SDEFUN |HEAP;siftUp|
         ((|r| (%)) (|i| (|Integer|)) (|n| (|Integer|)) (% (|Void|)))
-        (SPROG ((#1=#:G14 NIL) (|j| #2=(|Integer|)) (|k| #2#) (|t| (S)))
+        (SPROG ((|t| (S)) (|k| #1=(|Integer|)) (|j| #1#) (#2=#:G14 NIL))
                (SEQ (LETT |t| (SPADCALL |r| |i| (QREFELT % 14)))
                     (EXIT
                      (SEQ
@@ -36,12 +36,12 @@
                                            (QREFELT % 17))
                                  (SPADCALL |r| |j| |t| (QREFELT % 17))
                                  (EXIT (LETT |i| |j|))))
-                               ('T (PROGN (LETT #1# 1) (GO #3=#:G11))))))
+                               ('T (PROGN (LETT #2# 1) (GO #3=#:G11))))))
                             NIL (GO G190) G191 (EXIT NIL)))
-                      #3# (EXIT #1#)))))) 
+                      #3# (EXIT #2#)))))) 
 
 (SDEFUN |HEAP;extract!;%S;4| ((|r| (%)) (% (S)))
-        (SPROG ((|t| (S)) (|n| (|Integer|)))
+        (SPROG ((|n| (|Integer|)) (|t| (S)))
                (SEQ (LETT |n| (SPADCALL |r| (QREFELT % 19)))
                     (EXIT
                      (COND ((EQL |n| 0) (|error| "empty heap"))
@@ -59,13 +59,13 @@
                                               (EXIT |t|)))))))))))) 
 
 (SDEFUN |HEAP;insert!;S2%;5| ((|x| (S)) (|r| (%)) (% (%)))
-        (SPROG ((|j| (|Integer|)) (#1=#:G25 NIL) (|i| (|Integer|)))
+        (SPROG ((|i| (|Integer|)) (#1=#:G25 NIL) (|j| (|Integer|)))
                (SEQ (LETT |j| (SPADCALL |r| (QREFELT % 19)))
                     (LETT |r| (SPADCALL |r| |x| (QREFELT % 22)))
                     (SEQ
                      (EXIT
                       (SEQ G190 (COND ((NULL (> |j| 0)) (GO G191)))
-                           (SEQ (LETT |i| (QUOTIENT2 (- |j| 1) 2))
+                           (SEQ (LETT |i| (|quotient_INT| (- |j| 1) 2))
                                 (COND
                                  ((SPADCALL (SPADCALL |r| |i| (QREFELT % 14))
                                             |x| (QREFELT % 23))
@@ -85,9 +85,9 @@
 (SDEFUN |HEAP;inspect;%S;7| ((|r| (%)) (% (S))) (SPADCALL |r| (QREFELT % 25))) 
 
 (SDEFUN |HEAP;makeHeap| ((|r| (%)) (% (%)))
-        (SPROG ((|k| NIL) (|n| (|NonNegativeInteger|)))
+        (SPROG ((|n| (|NonNegativeInteger|)) (|k| NIL))
                (SEQ (LETT |n| (SPADCALL |r| (QREFELT % 19)))
-                    (SEQ (LETT |k| (- (QUOTIENT2 |n| 2) 1)) G190
+                    (SEQ (LETT |k| (- (|quotient_INT| |n| 2) 1)) G190
                          (COND ((< |k| 0) (GO G191)))
                          (SEQ (EXIT (|HEAP;siftUp| |r| |k| |n| %)))
                          (LETT |k| (+ |k| -1)) (GO G190) G191 (EXIT NIL))
@@ -106,8 +106,8 @@
 
 (DEFUN |Heap;| (|#1|)
   (SPROG
-   ((#1=#:G46 NIL) (|pv$| NIL) (#2=#:G43 NIL) (#3=#:G44 NIL) (#4=#:G45 NIL)
-    (% NIL) (|dv$| NIL) (DV$1 NIL))
+   ((DV$1 NIL) (|dv$| NIL) (% NIL) (#1=#:G45 NIL) (#2=#:G44 NIL) (#3=#:G43 NIL)
+    (|pv$| NIL) (#4=#:G46 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT |dv$| (LIST '|Heap| DV$1))
@@ -117,7 +117,7 @@
               (LETT |pv$|
                     (|buildPredVector| 0 0
                                        (LIST
-                                        (LETT #4#
+                                        (LETT #1#
                                               (|HasCategory| |#1|
                                                              '(|SetCategory|)))
                                         (AND
@@ -125,38 +125,38 @@
                                                         (LIST '|Evalable|
                                                               (|devaluate|
                                                                |#1|)))
-                                         #4#)
+                                         #1#)
                                         (|HasCategory| |#1|
                                                        '(|ConvertibleTo|
                                                          (|InputForm|)))
                                         (|HasCategory| |#1| '(|Hashable|))
                                         (|HasCategory| |#1| '(|OrderedSet|))
-                                        (LETT #3#
+                                        (LETT #2#
                                               (|HasCategory| |#1|
                                                              '(|CoercibleTo|
                                                                (|OutputForm|))))
-                                        (OR #3#
+                                        (OR #2#
                                             (AND
                                              (|HasCategory| |#1|
                                                             (LIST '|Evalable|
                                                                   (|devaluate|
                                                                    |#1|)))
-                                             #4#))
-                                        (LETT #2#
+                                             #1#))
+                                        (LETT #3#
                                               (|HasCategory| |#1|
                                                              '(|BasicType|)))
-                                        (OR #2#
+                                        (OR #3#
                                             (|HasCategory| |#1| '(|Hashable|))
-                                            #4#)))))
+                                            #1#)))))
     (|haddProp| |$ConstructorCache| '|Heap| (LIST DV$1) (CONS 1 %))
     (|stuffDomainSlots| %)
     (QSETREFV % 6 |#1|)
     (AND (|HasCategory| % '(|shallowlyMutable|)) (|augmentPredVector| % 512))
-    (AND (LETT #1# (|HasCategory| % '(|finiteAggregate|)))
+    (AND (LETT #4# (|HasCategory| % '(|finiteAggregate|)))
          (|augmentPredVector| % 1024))
-    (AND (|HasCategory| |#1| '(|OrderedSet|)) #1# (|augmentPredVector| % 2048))
-    (AND #2# #1# (|augmentPredVector| % 4096))
-    (AND (OR (AND #2# #1#) (|HasCategory| |#1| '(|Hashable|)) #4#)
+    (AND (|HasCategory| |#1| '(|OrderedSet|)) #4# (|augmentPredVector| % 2048))
+    (AND #3# #4# (|augmentPredVector| % 4096))
+    (AND (OR (AND #3# #4#) (|HasCategory| |#1| '(|Hashable|)) #1#)
          (|augmentPredVector| % 8192))
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 7 (|IndexedFlexibleArray| |#1| 0))

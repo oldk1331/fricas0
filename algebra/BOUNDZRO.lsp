@@ -2,8 +2,8 @@
 (SDEFUN |BOUNDZRO;integerBound;UPI;1| ((|p| (UP)) (% (|Integer|)))
         (SPADCALL |p| (QREFELT % 10))) 
 
-(PUT '|BOUNDZRO;integerBound;UPI;2| '|SPADreplace|
-     '(XLAM (|p|) (|error| "integerBound: unimplemented"))) 
+(MAKEPROP '|BOUNDZRO;integerBound;UPI;2| '|SPADreplace|
+          '(XLAM (|p|) (|error| "integerBound: unimplemented"))) 
 
 (SDEFUN |BOUNDZRO;integerBound;UPI;2| ((|p| (UP)) (% (|Integer|)))
         (|error| "integerBound: unimplemented")) 
@@ -11,7 +11,7 @@
 (DECLAIM (NOTINLINE |BoundIntegerRoots;|)) 
 
 (DEFUN |BoundIntegerRoots;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

@@ -48,7 +48,7 @@
 (DECLAIM (NOTINLINE |CommuteUnivariatePolynomialCategory;|)) 
 
 (DEFUN |CommuteUnivariatePolynomialCategory;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -93,7 +93,7 @@
 (MAKEPROP '|CommuteUnivariatePolynomialCategory| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (0 . |Zero|) (4 . |Zero|) (8 . |Zero|) (|Boolean|)
+              (|local| |#3|) (0 . |0|) (4 . |0|) (8 . |0|) (|Boolean|)
               (12 . ~=) (18 . |leadingCoefficient|) (|NonNegativeInteger|)
               (23 . |degree|) (28 . +) (34 . |reductum|) |COMMUPC;swap;2UPUP;1|
               (39 . ~=) (45 . |leadingCoefficient|) (50 . |monomial|)

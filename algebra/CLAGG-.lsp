@@ -41,23 +41,23 @@
 
 (SDEFUN |CLAGG-;convert;AIf;9| ((|x| (A)) (% (|InputForm|)))
         (SPROG
-         ((|a_form| (|InputForm|)) (|l_form| (|List| (|InputForm|)))
-          (|p_form| (|List| (|InputForm|))) (#1=#:G40 NIL) (|el| NIL)
-          (#2=#:G39 NIL))
+         ((#1=#:G44 NIL) (|el| NIL) (#2=#:G45 NIL)
+          (|p_form| (|List| (|InputForm|))) (|l_form| (|List| (|InputForm|)))
+          (|a_form| (|InputForm|)))
          (SEQ
           (LETT |p_form|
                 (PROGN
-                 (LETT #2# NIL)
-                 (SEQ (LETT |el| NIL) (LETT #1# (SPADCALL |x| (QREFELT % 9)))
+                 (LETT #1# NIL)
+                 (SEQ (LETT |el| NIL) (LETT #2# (SPADCALL |x| (QREFELT % 9)))
                       G190
                       (COND
-                       ((OR (ATOM #1#) (PROGN (LETT |el| (CAR #1#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT |el| (CAR #2#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2# (CONS (SPADCALL |el| (QREFELT % 33)) #2#))))
-                      (LETT #1# (CDR #1#)) (GO G190) G191
-                      (EXIT (NREVERSE #2#)))))
+                        (LETT #1# (CONS (SPADCALL |el| (QREFELT % 33)) #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#)))))
           (LETT |l_form|
                 (CONS (SPADCALL '|construct| (QREFELT % 35)) |p_form|))
           (LETT |a_form| (SPADCALL |l_form| (QREFELT % 37)))
@@ -66,7 +66,7 @@
 (DECLAIM (NOTINLINE |Collection&;|)) 
 
 (DEFUN |Collection&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

@@ -4,21 +4,21 @@
 
 (SDEFUN |PSETCAT-;variables1| ((|lp| (|List| P)) (% (|List| |VarSet|)))
         (SPROG
-         ((|lvars| (|List| (|List| |VarSet|))) (#1=#:G58 NIL) (|p| NIL)
-          (#2=#:G57 NIL))
+         ((#1=#:G58 NIL) (|p| NIL) (#2=#:G59 NIL)
+          (|lvars| (|List| (|List| |VarSet|))))
          (SEQ
           (LETT |lvars|
                 (PROGN
-                 (LETT #2# NIL)
-                 (SEQ (LETT |p| NIL) (LETT #1# |lp|) G190
+                 (LETT #1# NIL)
+                 (SEQ (LETT |p| NIL) (LETT #2# |lp|) G190
                       (COND
-                       ((OR (ATOM #1#) (PROGN (LETT |p| (CAR #1#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT |p| (CAR #2#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2# (CONS (SPADCALL |p| (QREFELT % 14)) #2#))))
-                      (LETT #1# (CDR #1#)) (GO G190) G191
-                      (EXIT (NREVERSE #2#)))))
+                        (LETT #1# (CONS (SPADCALL |p| (QREFELT % 14)) #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#)))))
           (EXIT
            (SPADCALL (ELT % 16)
                      (SPADCALL (SPADCALL |lvars| (QREFELT % 18))
@@ -27,20 +27,20 @@
 
 (SDEFUN |PSETCAT-;variables2| ((|lp| (|List| P)) (% (|List| |VarSet|)))
         (SPROG
-         ((|lvars| (|List| |VarSet|)) (#1=#:G64 NIL) (|p| NIL) (#2=#:G63 NIL))
+         ((#1=#:G64 NIL) (|p| NIL) (#2=#:G65 NIL) (|lvars| (|List| |VarSet|)))
          (SEQ
           (LETT |lvars|
                 (PROGN
-                 (LETT #2# NIL)
-                 (SEQ (LETT |p| NIL) (LETT #1# |lp|) G190
+                 (LETT #1# NIL)
+                 (SEQ (LETT |p| NIL) (LETT #2# |lp|) G190
                       (COND
-                       ((OR (ATOM #1#) (PROGN (LETT |p| (CAR #1#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT |p| (CAR #2#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2# (CONS (SPADCALL |p| (QREFELT % 22)) #2#))))
-                      (LETT #1# (CDR #1#)) (GO G190) G191
-                      (EXIT (NREVERSE #2#)))))
+                        (LETT #1# (CONS (SPADCALL |p| (QREFELT % 22)) #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#)))))
           (EXIT
            (SPADCALL (ELT % 16) (SPADCALL |lvars| (QREFELT % 19))
                      (QREFELT % 21)))))) 
@@ -75,7 +75,7 @@
 
 (SDEFUN |PSETCAT-;collectUnder;SVarSetS;7|
         ((|ps| (S)) (|v| (|VarSet|)) (% (S)))
-        (SPROG ((|lq| (|List| P)) (|lp| (|List| P)) (|p| (P)))
+        (SPROG ((|p| (P)) (|lp| (|List| P)) (|lq| (|List| P)))
                (SEQ (LETT |lp| (|PSETCAT-;elements| |ps| %)) (LETT |lq| NIL)
                     (SEQ G190 (COND ((NULL (NULL (NULL |lp|))) (GO G191)))
                          (SEQ (LETT |p| (|SPADfirst| |lp|))
@@ -91,7 +91,7 @@
 
 (SDEFUN |PSETCAT-;collectUpper;SVarSetS;8|
         ((|ps| (S)) (|v| (|VarSet|)) (% (S)))
-        (SPROG ((|lq| (|List| P)) (|lp| (|List| P)) (|p| (P)))
+        (SPROG ((|p| (P)) (|lp| (|List| P)) (|lq| (|List| P)))
                (SEQ (LETT |lp| (|PSETCAT-;elements| |ps| %)) (LETT |lq| NIL)
                     (SEQ G190 (COND ((NULL (NULL (NULL |lp|))) (GO G191)))
                          (SEQ (LETT |p| (|SPADfirst| |lp|))
@@ -107,7 +107,7 @@
                     (EXIT (SPADCALL |lq| (QREFELT % 31)))))) 
 
 (SDEFUN |PSETCAT-;collect;SVarSetS;9| ((|ps| (S)) (|v| (|VarSet|)) (% (S)))
-        (SPROG ((|lq| (|List| P)) (|lp| (|List| P)) (|p| (P)))
+        (SPROG ((|p| (P)) (|lp| (|List| P)) (|lq| (|List| P)))
                (SEQ (LETT |lp| (|PSETCAT-;elements| |ps| %)) (LETT |lq| NIL)
                     (SEQ G190 (COND ((NULL (NULL (NULL |lp|))) (GO G191)))
                          (SEQ (LETT |p| (|SPADfirst| |lp|))
@@ -126,8 +126,8 @@
         ((|ps| (S)) (|v| (|VarSet|))
          (% (|Record| (|:| |under| S) (|:| |floor| S) (|:| |upper| S))))
         (SPROG
-         ((|ws| (|List| P)) (|vs| (|List| P)) (|us| (|List| P))
-          (|lp| (|List| P)) (|p| (P)))
+         ((|p| (P)) (|lp| (|List| P)) (|us| (|List| P)) (|vs| (|List| P))
+          (|ws| (|List| P)))
          (SEQ (LETT |lp| (|PSETCAT-;elements| |ps| %)) (LETT |us| NIL)
               (LETT |vs| NIL) (LETT |ws| NIL)
               (SEQ G190 (COND ((NULL (NULL (NULL |lp|))) (GO G191)))
@@ -150,29 +150,29 @@
 
 (SDEFUN |PSETCAT-;=;2SB;11| ((|ps1| (S)) (|ps2| (S)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G114 NIL) (|p| NIL) (#2=#:G113 NIL) (#3=#:G112 NIL)
-          (#4=#:G111 NIL))
+         ((#1=#:G113 NIL) (#2=#:G114 NIL) (#3=#:G115 NIL) (|p| NIL)
+          (#4=#:G116 NIL))
          (SEQ
           (SPADCALL
            (SPADCALL
             (PROGN
-             (LETT #4# NIL)
-             (SEQ (LETT |p| NIL) (LETT #3# (|PSETCAT-;elements| |ps1| %)) G190
+             (LETT #1# NIL)
+             (SEQ (LETT |p| NIL) (LETT #2# (|PSETCAT-;elements| |ps1| %)) G190
                   (COND
-                   ((OR (ATOM #3#) (PROGN (LETT |p| (CAR #3#)) NIL))
+                   ((OR (ATOM #2#) (PROGN (LETT |p| (CAR #2#)) NIL))
                     (GO G191)))
-                  (SEQ (EXIT (LETT #4# (CONS |p| #4#)))) (LETT #3# (CDR #3#))
-                  (GO G190) G191 (EXIT (NREVERSE #4#))))
+                  (SEQ (EXIT (LETT #1# (CONS |p| #1#)))) (LETT #2# (CDR #2#))
+                  (GO G190) G191 (EXIT (NREVERSE #1#))))
             (QREFELT % 38))
            (SPADCALL
             (PROGN
-             (LETT #2# NIL)
-             (SEQ (LETT |p| NIL) (LETT #1# (|PSETCAT-;elements| |ps2| %)) G190
+             (LETT #3# NIL)
+             (SEQ (LETT |p| NIL) (LETT #4# (|PSETCAT-;elements| |ps2| %)) G190
                   (COND
-                   ((OR (ATOM #1#) (PROGN (LETT |p| (CAR #1#)) NIL))
+                   ((OR (ATOM #4#) (PROGN (LETT |p| (CAR #4#)) NIL))
                     (GO G191)))
-                  (SEQ (EXIT (LETT #2# (CONS |p| #2#)))) (LETT #1# (CDR #1#))
-                  (GO G190) G191 (EXIT (NREVERSE #2#))))
+                  (SEQ (EXIT (LETT #3# (CONS |p| #3#)))) (LETT #4# (CDR #4#))
+                  (GO G190) G191 (EXIT (NREVERSE #3#))))
             (QREFELT % 38))
            (QREFELT % 39))))) 
 
@@ -181,7 +181,7 @@
                   (QREFELT % 42))) 
 
 (SDEFUN |PSETCAT-;localTriangular?| ((|lp| (|List| P)) (% (|Boolean|)))
-        (SPROG ((|p| (P)) (|q| (P)))
+        (SPROG ((|q| (P)) (|p| (P)))
                (SEQ (LETT |lp| (SPADCALL (ELT % 43) |lp| (QREFELT % 26)))
                     (EXIT
                      (COND ((NULL |lp|) 'T)
@@ -230,7 +230,7 @@
 
 (SDEFUN |PSETCAT-;relativelyPrimeLeadingMonomials?|
         ((|p| (P)) (|q| (P)) (% (|Boolean|)))
-        (SPROG ((|dq| (E)) (|dp| (E)))
+        (SPROG ((|dp| (E)) (|dq| (E)))
                (SEQ (LETT |dp| (SPADCALL |p| (QREFELT % 41)))
                     (LETT |dq| (SPADCALL |q| (QREFELT % 41)))
                     (EXIT
@@ -240,8 +240,8 @@
 
 (SDEFUN |PSETCAT-;roughBase?;SB;18| ((|ps| (S)) (% (|Boolean|)))
         (SPROG
-         ((|copylp| (|List| P)) (|rB?| (|Boolean|)) (|lp| (|List| P))
-          (|p| (P)))
+         ((|p| (P)) (|lp| (|List| P)) (|rB?| (|Boolean|))
+          (|copylp| (|List| P)))
          (SEQ
           (LETT |lp|
                 (SPADCALL (ELT % 43) (|PSETCAT-;elements| |ps| %)
@@ -292,7 +292,7 @@
         (SPADCALL |r| |s| (QREFELT % 59))) 
 
 (SDEFUN |PSETCAT-;iexactQuo;3R;22| ((|r| (R)) (|s| (R)) (% (R)))
-        (SPROG ((#1=#:G157 NIL))
+        (SPROG ((#1=#:G163 NIL))
                (PROG2 (LETT #1# (SPADCALL |r| |s| (QREFELT % 62)))
                    (QCDR #1#)
                  (|check_union2| (QEQCAR #1# 0) (QREFELT % 7)
@@ -304,9 +304,9 @@
 (SDEFUN |PSETCAT-;headRemainder;PSR;24|
         ((|a| (P)) (|ps| (S)) (% (|Record| (|:| |num| P) (|:| |den| R))))
         (SPROG
-         ((|lp2| (|List| P)) (|r| (R)) (|lcp| (R)) (|lca| (R)) (|#G50| (R))
-          (|#G49| (R)) (|g| (R)) (|e| (|Union| E "failed")) (|p| (P))
-          (|lp1| (|List| P)))
+         ((|lp1| (|List| P)) (|p| (P)) (|e| (|Union| E "failed")) (|g| (R))
+          (|#G49| (R)) (|#G50| (R)) (|lca| (R)) (|lcp| (R)) (|r| (R))
+          (|lp2| (|List| P)))
          (SEQ
           (LETT |lp1|
                 (SPADCALL (ELT % 43) (|PSETCAT-;elements| |ps| %)
@@ -398,8 +398,8 @@
         ((|a| (P)) (|ps| (S))
          (% (|Record| (|:| |rnum| R) (|:| |polnum| P) (|:| |den| R))))
         (SPROG
-         ((|c| (R)) (|b| (P)) (|g| (R)) (|lca| (R)) (|r| (R))
-          (|hRa| (|Record| (|:| |num| P) (|:| |den| R))))
+         ((|hRa| (|Record| (|:| |num| P) (|:| |den| R))) (|r| (R)) (|lca| (R))
+          (|g| (R)) (|b| (P)) (|c| (R)))
          (SEQ
           (LETT |hRa|
                 (|PSETCAT-;makeIrreducible!| (SPADCALL |a| |ps| (QREFELT % 80))
@@ -449,7 +449,7 @@
 
 (SDEFUN |PSETCAT-;rewriteIdealWithHeadRemainder;LSL;27|
         ((|ps| (|List| P)) (|cs| (S)) (% (|List| P)))
-        (SPROG ((|rs| (|List| P)) (|p| (P)))
+        (SPROG ((|p| (P)) (|rs| (|List| P)))
                (SEQ
                 (COND ((SPADCALL |cs| (QREFELT % 84)) |ps|)
                       ((SPADCALL |cs| (QREFELT % 85))
@@ -502,7 +502,7 @@
 
 (SDEFUN |PSETCAT-;rewriteIdealWithRemainder;LSL;28|
         ((|ps| (|List| P)) (|cs| (S)) (% (|List| P)))
-        (SPROG ((|rs| (|List| P)) (|p| (P)))
+        (SPROG ((|p| (P)) (|rs| (|List| P)))
                (SEQ
                 (COND ((SPADCALL |cs| (QREFELT % 84)) |ps|)
                       ((SPADCALL |cs| (QREFELT % 85))
@@ -556,8 +556,8 @@
 
 (DEFUN |PolynomialSetCategory&| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -646,15 +646,15 @@
               (138 . |roughSubIdeal?|) (144 . =) (150 . |roughSubIdeal?|)
               (156 . |roughEqualIdeals?|) (162 . |quo|) (168 . |iexactQuo|)
               (|Union| % '"failed") (174 . |exquo|) (180 . |iexactQuo|)
-              (186 . |One|) (190 . |reductum|) (195 . |subtractIfCan|)
+              (186 . |1|) (190 . |reductum|) (195 . |subtractIfCan|)
               (201 . |leadingCoefficient|) (206 . |gcd|) (212 . *)
               (218 . |monomial|) (224 . *) (230 . -) (236 . *)
               (|Record| (|:| |num| 10) (|:| |den| 7)) (242 . |headRemainder|)
-              (248 . |gcd|) (254 . |One|) (258 . =) (264 . |exactQuotient!|)
+              (248 . |gcd|) (254 . |1|) (258 . =) (264 . |exactQuotient!|)
               (270 . |headRemainder|) (276 . +)
               (|Record| (|:| |rnum| 7) (|:| |polnum| 10) (|:| |den| 7))
               (282 . |remainder|) (288 . |trivialIdeal?|)
-              (293 . |roughUnitIdeal?|) (298 . |Zero|) (302 . |primitivePart!|)
+              (293 . |roughUnitIdeal?|) (298 . |0|) (302 . |primitivePart!|)
               (307 . |removeDuplicates|)
               (312 . |rewriteIdealWithHeadRemainder|) (318 . |remainder|)
               (324 . |unitCanonical|) (329 . |rewriteIdealWithRemainder|))

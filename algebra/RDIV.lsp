@@ -22,17 +22,17 @@
         ((|d| (|FiniteDivisor| F1 UP UPUP R)) (|modulus| (UPUP))
          (|reduce| (|Mapping| F2 F1)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((|curve|
+         ((|redmod|
+           (|SparseUnivariatePolynomial|
+            (|Fraction| (|SparseUnivariatePolynomial| F2))))
+          (|curve|
            (|Join|
             (|FunctionFieldCategory| F2 (|SparseUnivariatePolynomial| F2)
                                      (|SparseUnivariatePolynomial|
                                       (|Fraction|
                                        (|SparseUnivariatePolynomial| F2))))
             (CATEGORY |package|
-             (SIGNATURE |knownInfBasis| ((|Void|) (|NonNegativeInteger|))))))
-          (|redmod|
-           (|SparseUnivariatePolynomial|
-            (|Fraction| (|SparseUnivariatePolynomial| F2)))))
+             (SIGNATURE |knownInfBasis| ((|Void|) (|NonNegativeInteger|)))))))
          (SEQ (LETT |redmod| (SPADCALL |reduce| |modulus| (QREFELT % 26)))
               (LETT |curve|
                     (|AlgebraicFunctionField| (QREFELT % 10)
@@ -113,12 +113,12 @@
          (|n| (|NonNegativeInteger|)) (|reduce| (|Mapping| F2 F1))
          (% (|NonNegativeInteger|)))
         (SPROG
-         ((|curve|
+         ((|redrad| (|SparseUnivariatePolynomial| F2))
+          (|curve|
            (|FunctionFieldCategory| F2 (|SparseUnivariatePolynomial| F2)
                                     (|SparseUnivariatePolynomial|
                                      (|Fraction|
-                                      (|SparseUnivariatePolynomial| F2)))))
-          (|redrad| (|SparseUnivariatePolynomial| F2)))
+                                      (|SparseUnivariatePolynomial| F2))))))
          (SEQ (LETT |redrad| (SPADCALL |reduce| |radicand| (QREFELT % 29)))
               (LETT |curve|
                     (|RadicalFunctionField| (QREFELT % 10)
@@ -199,8 +199,8 @@
 
 (DEFUN |ReducedDivisor;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -222,9 +222,9 @@
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
-(DEFUN |ReducedDivisor| (&REST #1=#:G16)
+(DEFUN |ReducedDivisor| (&REST #1=#:G19)
   (SPROG NIL
-         (PROG (#2=#:G17)
+         (PROG (#2=#:G20)
            (RETURN
             (COND
              ((LETT #2#

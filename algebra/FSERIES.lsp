@@ -1,5 +1,5 @@
 
-(SDEFUN |FSERIES;One;%;1| ((% (%)))
+(SDEFUN |FSERIES;1;%;1| ((% (%)))
         (LIST
          (CONS (SPADCALL (|spadConstant| % 12) (QREFELT % 14))
                (|spadConstant| % 15)))) 
@@ -40,7 +40,7 @@
                 #2# (EXIT #1#)))) 
 
 (SDEFUN |FSERIES;multiply| ((|t1| (|Term|)) (|t2| (|Term|)) (% (%)))
-        (SPROG ((|diff| (E)) (|sum| (E)) (|s2| (E)) (|s1| (E)) (|r| (R)))
+        (SPROG ((|r| (R)) (|s1| (E)) (|s2| (E)) (|sum| (E)) (|diff| (E)))
                (SEQ
                 (LETT |r|
                       (SPADCALL
@@ -74,52 +74,52 @@
 
 (SDEFUN |FSERIES;*;3%;4| ((|x1| (%)) (|x2| (%)) (% (%)))
         (SPROG
-         ((#1=#:G28 NIL) (#2=#:G27 (%)) (#3=#:G29 (%)) (#4=#:G31 NIL)
-          (#5=#:G30 (%)) (#6=#:G32 (%)) (#7=#:G37 NIL) (|t2| NIL)
-          (#8=#:G36 NIL) (|t1| NIL))
+         ((|t1| NIL) (#1=#:G36 NIL) (|t2| NIL) (#2=#:G37 NIL) (#3=#:G32 (%))
+          (#4=#:G30 (%)) (#5=#:G31 NIL) (#6=#:G29 (%)) (#7=#:G27 (%))
+          (#8=#:G28 NIL))
          (SEQ
           (COND ((OR (NULL |x1|) (NULL |x2|)) (|spadConstant| % 10))
                 ('T
                  (PROGN
-                  (LETT #1# NIL)
-                  (SEQ (LETT |t1| NIL) (LETT #8# |x1|) G190
+                  (LETT #8# NIL)
+                  (SEQ (LETT |t1| NIL) (LETT #1# |x1|) G190
                        (COND
-                        ((OR (ATOM #8#) (PROGN (LETT |t1| (CAR #8#)) NIL))
+                        ((OR (ATOM #1#) (PROGN (LETT |t1| (CAR #1#)) NIL))
                          (GO G191)))
                        (SEQ
                         (EXIT
                          (PROGN
-                          (LETT #3#
+                          (LETT #6#
                                 (PROGN
-                                 (LETT #4# NIL)
-                                 (SEQ (LETT |t2| NIL) (LETT #7# |x2|) G190
+                                 (LETT #5# NIL)
+                                 (SEQ (LETT |t2| NIL) (LETT #2# |x2|) G190
                                       (COND
-                                       ((OR (ATOM #7#)
-                                            (PROGN (LETT |t2| (CAR #7#)) NIL))
+                                       ((OR (ATOM #2#)
+                                            (PROGN (LETT |t2| (CAR #2#)) NIL))
                                         (GO G191)))
                                       (SEQ
                                        (EXIT
                                         (PROGN
-                                         (LETT #6#
+                                         (LETT #3#
                                                (|FSERIES;multiply| |t1| |t2|
                                                 %))
                                          (COND
-                                          (#4#
-                                           (LETT #5#
-                                                 (SPADCALL #5# #6#
+                                          (#5#
+                                           (LETT #4#
+                                                 (SPADCALL #4# #3#
                                                            (QREFELT % 35))))
                                           ('T
                                            (PROGN
-                                            (LETT #5# #6#)
-                                            (LETT #4# 'T)))))))
-                                      (LETT #7# (CDR #7#)) (GO G190) G191
+                                            (LETT #4# #3#)
+                                            (LETT #5# 'T)))))))
+                                      (LETT #2# (CDR #2#)) (GO G190) G191
                                       (EXIT NIL))
-                                 (COND (#4# #5#) ('T (|spadConstant| % 10)))))
+                                 (COND (#5# #4#) ('T (|spadConstant| % 10)))))
                           (COND
-                           (#1# (LETT #2# (SPADCALL #2# #3# (QREFELT % 35))))
-                           ('T (PROGN (LETT #2# #3#) (LETT #1# 'T)))))))
-                       (LETT #8# (CDR #8#)) (GO G190) G191 (EXIT NIL))
-                  (COND (#1# #2#) ('T (|spadConstant| % 10))))))))) 
+                           (#8# (LETT #7# (SPADCALL #7# #6# (QREFELT % 35))))
+                           ('T (PROGN (LETT #7# #6#) (LETT #8# 'T)))))))
+                       (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+                  (COND (#8# #7#) ('T (|spadConstant| % 10))))))))) 
 
 (SDEFUN |FSERIES;makeCos;ER%;5| ((|a| (E)) (|r| (R)) (% (%)))
         (COND
@@ -139,7 +139,7 @@
 (DECLAIM (NOTINLINE |FourierSeries;|)) 
 
 (DEFUN |FourierSeries;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -150,6 +150,8 @@
                     (LETT |pv$|
                           (|buildPredVector| 0 0
                                              (LIST
+                                              (|HasCategory| |#1|
+                                                             '(|CharacteristicZero|))
                                               (AND
                                                (|HasCategory| |#1|
                                                               '(|Canonical|))
@@ -188,10 +190,9 @@
 (MAKEPROP '|FourierSeries| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL (|FreeModule| 6 13) (|local| |#1|)
-              (|local| |#2|) '|Term| '|Rep| (0 . |Zero|) (4 . |Zero|)
-              (8 . |Zero|) (|FourierComponent| 7) (12 . |cos|) (17 . |One|)
-              (CONS IDENTITY
-                    (FUNCALL (|dispatchFunction| |FSERIES;One;%;1|) %))
+              (|local| |#2|) '|Term| '|Rep| (0 . |0|) (4 . |0|) (8 . |0|)
+              (|FourierComponent| 7) (12 . |cos|) (17 . |1|)
+              (CONS IDENTITY (FUNCALL (|dispatchFunction| |FSERIES;1;%;1|) %))
               (|Boolean|) (21 . |sin?|) (26 . |argument|) (31 . |zero?|)
               (36 . <) (42 . -) (47 . |sin|) (52 . -) (57 . -)
               |FSERIES;coerce;Fc%;2| (62 . *) (|Integer|) (|Fraction| 28)
@@ -204,20 +205,19 @@
               153 |one?| 159 |makeSin| 164 |makeCos| 170 |leftRecip| 176
               |leftPower| 181 |latex| 193 |commutator| 198 |coerce| 204
               |characteristic| 224 |associator| 228 |antiCommutator| 235
-              |annihilate?| 241 ^ 247 |Zero| 259 |One| 263 = 267 - 273 + 284 *
-              290)
+              |annihilate?| 241 ^ 247 = 259 |1| 265 |0| 269 - 273 + 284 * 290)
            'NIL
            (CONS
-            (|makeByteWordVec2| 1
+            (|makeByteWordVec2| 2
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 1 0 0 0))
+                                  0 0 0 0 2 1 0 0 0))
             (CONS
              '#(|Algebra&| NIL NIL |NonAssociativeAlgebra&| |Rng&| NIL
                 |Module&| NIL |NonAssociativeRing&| NIL NIL NIL
                 |NonAssociativeRng&| NIL NIL |AbelianGroup&| NIL NIL NIL
                 |AbelianMonoid&| |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL
-                |AbelianSemiGroup&| |Magma&| |SetCategory&| NIL NIL
-                |BasicType&| NIL)
+                |AbelianSemiGroup&| |SetWithZero&| |Magma&| |SetCategory&| NIL
+                NIL NIL |BasicType&| NIL)
              (CONS
               '#((|Algebra| 6) (|Ring|) (|SemiRing|)
                  (|NonAssociativeAlgebra| 6) (|Rng|) (|SemiRng|) (|Module| 6)
@@ -226,8 +226,9 @@
                  (|LeftModule| 6) (|RightModule| 6) (|AbelianGroup|)
                  (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
                  (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
-                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|) (|Magma|)
-                 (|SetCategory|) (|Canonical|) (|CoercibleTo| 39) (|BasicType|)
+                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|)
+                 (|SetWithZero|) (|Magma|) (|SetCategory|) (|Canonical|)
+                 (|CharacteristicZero|) (|CoercibleTo| 39) (|BasicType|)
                  (|unitsKnown|))
               (|makeByteWordVec2| 43
                                   '(0 0 0 10 0 6 0 11 0 7 0 12 1 13 0 7 14 0 6
@@ -243,7 +244,7 @@
                                     0 40 0 1 2 0 0 0 0 1 1 0 39 0 1 1 0 0 28 1
                                     1 0 0 6 1 1 0 0 13 26 0 0 43 1 3 0 0 0 0 0
                                     1 2 0 0 0 0 1 2 0 17 0 0 1 2 0 0 0 41 1 2 0
-                                    0 0 43 1 0 0 0 10 0 0 0 16 2 0 17 0 0 1 2 0
+                                    0 0 43 1 2 0 17 0 0 1 0 0 0 16 0 0 0 10 2 0
                                     0 0 0 37 1 0 0 0 25 2 0 0 0 0 35 2 0 0 41 0
                                     1 2 0 0 0 0 38 2 0 0 28 0 1 2 0 0 43 0 1 2
                                     0 0 6 0 1 2 0 0 0 6 1)))))

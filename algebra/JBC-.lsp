@@ -3,27 +3,27 @@
         ((|mi| (|List| (|NonNegativeInteger|)))
          (% (|List| (|PositiveInteger|))))
         (SPROG
-         ((|k| (|PositiveInteger|)) (|ri| (|List| (|PositiveInteger|)))
-          (#1=#:G36 NIL) (|j| NIL) (#2=#:G35 NIL) (|i| NIL))
+         ((|i| NIL) (#1=#:G35 NIL) (|j| NIL) (#2=#:G36 NIL)
+          (|ri| (|List| (|PositiveInteger|))) (|k| (|PositiveInteger|)))
          (SEQ (LETT |ri| NIL) (LETT |k| 1)
-              (SEQ (LETT |i| NIL) (LETT #2# |mi|) G190
+              (SEQ (LETT |i| NIL) (LETT #1# |mi|) G190
                    (COND
-                    ((OR (ATOM #2#) (PROGN (LETT |i| (CAR #2#)) NIL))
+                    ((OR (ATOM #1#) (PROGN (LETT |i| (CAR #1#)) NIL))
                      (GO G191)))
                    (SEQ
-                    (SEQ (LETT |j| 1) (LETT #1# |i|) G190
-                         (COND ((|greater_SI| |j| #1#) (GO G191)))
+                    (SEQ (LETT |j| 1) (LETT #2# |i|) G190
+                         (COND ((|greater_SI| |j| #2#) (GO G191)))
                          (SEQ (EXIT (LETT |ri| (CONS |k| |ri|))))
                          (LETT |j| (|inc_SI| |j|)) (GO G190) G191 (EXIT NIL))
                     (EXIT (LETT |k| (+ |k| 1))))
-                   (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                   (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
               (EXIT |ri|)))) 
 
 (SDEFUN |JBC-;r2m;LL;2|
         ((|ri| (|List| (|PositiveInteger|)))
          (% (|List| (|NonNegativeInteger|))))
         (SPROG
-         ((#1=#:G41 NIL) (|i| NIL) (|mi| (|List| (|NonNegativeInteger|))))
+         ((|mi| (|List| (|NonNegativeInteger|))) (|i| NIL) (#1=#:G41 NIL))
          (SEQ (LETT |mi| (SPADCALL (SPADCALL (QREFELT % 8)) 0 (QREFELT % 17)))
               (SEQ (LETT |i| NIL) (LETT #1# |ri|) G190
                    (COND
@@ -44,16 +44,16 @@
         ((|mu| (|List| (|NonNegativeInteger|)))
          (% (|List| (|List| (|PositiveInteger|)))))
         (SPROG
-         ((|res| (|List| (|List| (|PositiveInteger|))))
-          (|tmp| (|List| (|List| (|PositiveInteger|)))) (#1=#:G43 NIL)
-          (|nu| (|List| (|NonNegativeInteger|))) (#2=#:G67 NIL) (|i| NIL)
-          (#3=#:G68 NIL) (|k| NIL))
+         ((|k| NIL) (#1=#:G69 NIL) (|i| NIL) (#2=#:G68 NIL)
+          (|nu| (|List| (|NonNegativeInteger|))) (#3=#:G43 NIL)
+          (|tmp| (|List| (|List| (|PositiveInteger|))))
+          (|res| (|List| (|List| (|PositiveInteger|)))))
          (SEQ (LETT |res| NIL)
-              (SEQ (LETT |k| NIL) (LETT #3# |mu|) (LETT |i| 1)
+              (SEQ (LETT |k| NIL) (LETT #1# |mu|) (LETT |i| 1)
                    (LETT #2# (QREFELT % 9)) G190
                    (COND
-                    ((OR (|greater_SI| |i| #2#) (ATOM #3#)
-                         (PROGN (LETT |k| (CAR #3#)) NIL))
+                    ((OR (|greater_SI| |i| #2#) (ATOM #1#)
+                         (PROGN (LETT |k| (CAR #1#)) NIL))
                      (GO G191)))
                    (SEQ
                     (EXIT
@@ -61,10 +61,10 @@
                       ((NULL (ZEROP |k|))
                        (SEQ (LETT |nu| (SPADCALL |mu| (QREFELT % 22)))
                             (SPADCALL |nu| |i|
-                                      (PROG1 (LETT #1# (- |k| 1))
-                                        (|check_subtype2| (>= #1# 0)
+                                      (PROG1 (LETT #3# (- |k| 1))
+                                        (|check_subtype2| (>= #3# 0)
                                                           '(|NonNegativeInteger|)
-                                                          '(|Integer|) #1#))
+                                                          '(|Integer|) #3#))
                                       (QREFELT % 20))
                             (LETT |tmp| (SPADCALL |nu| (QREFELT % 24)))
                             (EXIT
@@ -75,7 +75,7 @@
                                                     (VECTOR % |i|))
                                               |tmp| (QREFELT % 27))
                                              (QREFELT % 28)))))))))
-                   (LETT |i| (PROG1 (|inc_SI| |i|) (LETT #3# (CDR #3#))))
+                   (LETT |i| (PROG1 (|inc_SI| |i|) (LETT #1# (CDR #1#))))
                    (GO G190) G191 (EXIT NIL))
               (EXIT (COND ((NULL |res|) (LIST NIL)) ('T |res|)))))) 
 
@@ -97,7 +97,7 @@
 
 (SDEFUN |JBC-;class;LNni;5|
         ((|l| (|List| (|NonNegativeInteger|))) (% (|NonNegativeInteger|)))
-        (SPROG ((|res| (|PositiveInteger|)) (#1=#:G74 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G75 NIL) (|res| (|PositiveInteger|)))
                (SEQ (LETT |res| 1)
                     (SEQ (LETT |i| NIL) (LETT #1# |l|) G190
                          (COND
@@ -114,7 +114,7 @@
          ('T (SPADCALL (SPADCALL |jv| (QREFELT % 30)) (QREFELT % 38))))) 
 
 (SDEFUN |JBC-;order;SNni;7| ((|jv| (S)) (% (|NonNegativeInteger|)))
-        (SPROG ((|sum| (|NonNegativeInteger|)) (#1=#:G82 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G84 NIL) (|sum| (|NonNegativeInteger|)))
                (SEQ
                 (COND
                  ((SPADCALL (SPADCALL |jv| (QREFELT % 35)) '|Deriv|
@@ -133,7 +133,7 @@
 
 (SDEFUN |JBC-;dimJ;2Nni;8|
         ((|q| (|NonNegativeInteger|)) (% (|NonNegativeInteger|)))
-        (SPROG ((#1=#:G84 NIL))
+        (SPROG ((#1=#:G86 NIL))
                (* (QREFELT % 11)
                   (PROG1
                       (LETT #1#
@@ -144,7 +144,7 @@
 
 (SDEFUN |JBC-;dimS;2Nni;9|
         ((|q| (|NonNegativeInteger|)) (% (|NonNegativeInteger|)))
-        (SPROG ((#1=#:G87 NIL))
+        (SPROG ((#1=#:G89 NIL))
                (* (QREFELT % 11)
                   (PROG1
                       (LETT #1#
@@ -171,17 +171,17 @@
         ((|up| (|PositiveInteger|)) (|lo| (|List| (|NonNegativeInteger|)))
          (% (S)))
         (SPROG
-         ((|lop| (|List| (|PositiveInteger|))) (#1=#:G96 NIL) (#2=#:G101 NIL)
-          (|i| NIL))
+         ((|i| NIL) (#1=#:G103 NIL) (#2=#:G98 NIL)
+          (|lop| (|List| (|PositiveInteger|))))
          (SEQ
           (COND
            ((EQUAL (SPADCALL (QREFELT % 53)) '|Multi|)
             (SPADCALL |up| |lo| (QREFELT % 50)))
            ('T
             (SEQ (LETT |lop| NIL)
-                 (SEQ (LETT |i| NIL) (LETT #2# |lo|) G190
+                 (SEQ (LETT |i| NIL) (LETT #1# |lo|) G190
                       (COND
-                       ((OR (ATOM #2#) (PROGN (LETT |i| (CAR #2#)) NIL))
+                       ((OR (ATOM #1#) (PROGN (LETT |i| (CAR #1#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
@@ -189,13 +189,13 @@
                               ('T
                                (LETT |lop|
                                      (CONS
-                                      (PROG1 (LETT #1# |i|)
-                                        (|check_subtype2| (> #1# 0)
+                                      (PROG1 (LETT #2# |i|)
+                                        (|check_subtype2| (> #2# 0)
                                                           '(|PositiveInteger|)
                                                           '(|NonNegativeInteger|)
-                                                          #1#))
+                                                          #2#))
                                       |lop|))))))
-                      (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                      (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
                  (EXIT (SPADCALL |up| (NREVERSE |lop|) (QREFELT % 54))))))))) 
 
 (SDEFUN |JBC-;Pr;PiLS;16|
@@ -209,9 +209,9 @@
 (SDEFUN |JBC-;dimJ;2Nni;18|
         ((|q| (|NonNegativeInteger|)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((|res| (|NonNegativeInteger|)) (#1=#:G111 NIL) (#2=#:G115 NIL)
-          (|qq| NIL) (|oldJV| (|Vector| (|NonNegativeInteger|)))
-          (#3=#:G105 NIL))
+         ((#1=#:G107 NIL) (|oldJV| (|Vector| (|NonNegativeInteger|)))
+          (|qq| NIL) (#2=#:G117 NIL) (#3=#:G113 NIL)
+          (|res| (|NonNegativeInteger|)))
          (SEQ
           (COND
            ((< |q| (SPADCALL (QREFELT % 64) (QREFELT % 68)))
@@ -223,13 +223,13 @@
                           (LETT |res|
                                 (* (QREFELT % 11)
                                    (PROG1
-                                       (LETT #3#
+                                       (LETT #1#
                                              (SPADCALL (+ |q| (QREFELT % 9))
                                                        (QREFELT % 9)
                                                        (QREFELT % 41)))
-                                     (|check_subtype2| (>= #3# 0)
+                                     (|check_subtype2| (>= #1# 0)
                                                        '(|NonNegativeInteger|)
-                                                       '(|Integer|) #3#))))
+                                                       '(|Integer|) #1#))))
                           (QSETAREF1O (QREFELT % 64) (+ (QREFELT % 67) |q|)
                                       |res| 1)
                           (EXIT |res|)))))))
@@ -251,21 +251,21 @@
                  (LETT |res|
                        (* (QREFELT % 11)
                           (PROG1
-                              (LETT #1#
+                              (LETT #3#
                                     (SPADCALL (+ |q| (QREFELT % 9))
                                               (QREFELT % 9) (QREFELT % 41)))
-                            (|check_subtype2| (>= #1# 0)
+                            (|check_subtype2| (>= #3# 0)
                                               '(|NonNegativeInteger|)
-                                              '(|Integer|) #1#))))
+                                              '(|Integer|) #3#))))
                  (QSETAREF1O (QREFELT % 64) (+ (QREFELT % 67) |q|) |res| 1)
                  (EXIT |res|))))))) 
 
 (SDEFUN |JBC-;dimS;2Nni;19|
         ((|q| (|NonNegativeInteger|)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((|res| (|NonNegativeInteger|)) (#1=#:G123 NIL) (#2=#:G127 NIL)
-          (|qq| NIL) (|oldSV| (|Vector| (|NonNegativeInteger|)))
-          (#3=#:G117 NIL))
+         ((#1=#:G119 NIL) (|oldSV| (|Vector| (|NonNegativeInteger|)))
+          (|qq| NIL) (#2=#:G129 NIL) (#3=#:G125 NIL)
+          (|res| (|NonNegativeInteger|)))
          (SEQ
           (COND
            ((< |q| (SPADCALL (QREFELT % 65) (QREFELT % 68)))
@@ -277,14 +277,14 @@
                           (LETT |res|
                                 (* (QREFELT % 11)
                                    (PROG1
-                                       (LETT #3#
+                                       (LETT #1#
                                              (SPADCALL
                                               (- (+ |q| (QREFELT % 9)) 1)
                                               (- (QREFELT % 9) 1)
                                               (QREFELT % 41)))
-                                     (|check_subtype2| (>= #3# 0)
+                                     (|check_subtype2| (>= #1# 0)
                                                        '(|NonNegativeInteger|)
-                                                       '(|Integer|) #3#))))
+                                                       '(|Integer|) #1#))))
                           (QSETAREF1O (QREFELT % 65) (+ (QREFELT % 67) |q|)
                                       |res| 1)
                           (EXIT |res|)))))))
@@ -306,22 +306,22 @@
                  (LETT |res|
                        (* (QREFELT % 11)
                           (PROG1
-                              (LETT #1#
+                              (LETT #3#
                                     (SPADCALL (- (+ |q| (QREFELT % 9)) 1)
                                               (- (QREFELT % 9) 1)
                                               (QREFELT % 41)))
-                            (|check_subtype2| (>= #1# 0)
+                            (|check_subtype2| (>= #3# 0)
                                               '(|NonNegativeInteger|)
-                                              '(|Integer|) #1#))))
+                                              '(|Integer|) #3#))))
                  (QSETAREF1O (QREFELT % 65) (+ (QREFELT % 67) |q|) |res| 1)
                  (EXIT |res|))))))) 
 
 (SDEFUN |JBC-;differentiate;SPiU;20|
         ((|jv| (S)) (|i| (|PositiveInteger|)) (% (|Union| S "0")))
         (SPROG
-         ((|nind| (|List| (|PositiveInteger|)))
+         ((|jt| (|Symbol|)) (|mind| (|List| (|NonNegativeInteger|)))
           (|rind| (|List| (|PositiveInteger|)))
-          (|mind| (|List| (|NonNegativeInteger|))) (|jt| (|Symbol|)))
+          (|nind| (|List| (|PositiveInteger|))))
          (SEQ
           (COND ((> |i| (QREFELT % 9)) (|error| "Improper upper index"))
                 (#1='T
@@ -391,9 +391,9 @@
 (SDEFUN |JBC-;derivativeOf?;2SL;21|
         ((|jv1| (S)) (|jv2| (S)) (% (|List| (|NonNegativeInteger|))))
         (SPROG
-         ((|res| (|List| (|NonNegativeInteger|))) (#1=#:G147 NIL)
-          (#2=#:G153 NIL) (#3=#:G154 NIL) (|i1| NIL) (#4=#:G155 NIL) (|i2| NIL)
-          (|jt| (|Symbol|)))
+         ((|jt| (|Symbol|)) (|i2| NIL) (#1=#:G157 NIL) (|i1| NIL)
+          (#2=#:G156 NIL) (#3=#:G155 NIL) (#4=#:G149 NIL)
+          (|res| (|List| (|NonNegativeInteger|))))
          (SEQ
           (EXIT
            (COND
@@ -412,41 +412,41 @@
                     (#5#
                      (SEQ (LETT |res| NIL)
                           (SEQ (LETT |i2| NIL)
-                               (LETT #4# (SPADCALL |jv2| (QREFELT % 30)))
+                               (LETT #1# (SPADCALL |jv2| (QREFELT % 30)))
                                (LETT |i1| NIL)
-                               (LETT #3# (SPADCALL |jv1| (QREFELT % 30))) G190
+                               (LETT #2# (SPADCALL |jv1| (QREFELT % 30))) G190
                                (COND
-                                ((OR (ATOM #3#)
-                                     (PROGN (LETT |i1| (CAR #3#)) NIL)
-                                     (ATOM #4#)
-                                     (PROGN (LETT |i2| (CAR #4#)) NIL))
+                                ((OR (ATOM #2#)
+                                     (PROGN (LETT |i1| (CAR #2#)) NIL)
+                                     (ATOM #1#)
+                                     (PROGN (LETT |i2| (CAR #1#)) NIL))
                                  (GO G191)))
                                (SEQ
                                 (EXIT
                                  (COND
                                   ((< |i1| |i2|)
-                                   (PROGN (LETT #2# NIL) (GO #6=#:G152)))
+                                   (PROGN (LETT #3# NIL) (GO #6=#:G154)))
                                   ('T
                                    (LETT |res|
                                          (CONS
-                                          (PROG1 (LETT #1# (- |i1| |i2|))
-                                            (|check_subtype2| (>= #1# 0)
+                                          (PROG1 (LETT #4# (- |i1| |i2|))
+                                            (|check_subtype2| (>= #4# 0)
                                                               '(|NonNegativeInteger|)
                                                               '(|Integer|)
-                                                              #1#))
+                                                              #4#))
                                           |res|))))))
-                               (LETT #3#
-                                     (PROG1 (CDR #3#) (LETT #4# (CDR #4#))))
+                               (LETT #2#
+                                     (PROG1 (CDR #2#) (LETT #1# (CDR #1#))))
                                (GO G190) G191 (EXIT NIL))
                           (EXIT (NREVERSE |res|))))))))))
-          #6# (EXIT #2#)))) 
+          #6# (EXIT #3#)))) 
 
 (SDEFUN |JBC-;integrateIfCan;SPiU;22|
         ((|jv| (S)) (|i| (|PositiveInteger|)) (% (|Union| S "failed")))
         (SPROG
-         ((|rind| (|List| (|PositiveInteger|))) (|pos| (|Integer|))
-          (#1=#:G159 NIL) (|mi| (|NonNegativeInteger|))
-          (|mind| (|List| (|NonNegativeInteger|))))
+         ((|mind| (|List| (|NonNegativeInteger|)))
+          (|mi| (|NonNegativeInteger|)) (#1=#:G161 NIL) (|pos| (|Integer|))
+          (|rind| (|List| (|PositiveInteger|))))
          (SEQ
           (COND ((> |i| (QREFELT % 9)) (|error| "Improper upper index"))
                 ((SPADCALL (SPADCALL |jv| (QREFELT % 35)) '|Deriv|
@@ -495,8 +495,8 @@
 
 (SDEFUN |JBC-;weight;SNni;24| ((|jv| (S)) (% (|NonNegativeInteger|)))
         (SPROG
-         ((|res| (|PositiveInteger|)) (|pos| (|PositiveInteger|))
-          (#1=#:G180 NIL) (|i| NIL) (|t| (|Symbol|)))
+         ((|t| (|Symbol|)) (|i| NIL) (#1=#:G182 NIL)
+          (|pos| (|PositiveInteger|)) (|res| (|PositiveInteger|)))
          (SEQ (LETT |t| (SPADCALL |jv| (QREFELT % 35)))
               (EXIT
                (COND ((EQUAL |t| '|Const|) 0)
@@ -546,9 +546,9 @@
 
 (SDEFUN |JBC-;<;2SB;27| ((|jv1| (S)) (|jv2| (S)) (% (|Boolean|)))
         (SPROG
-         ((#1=#:G193 NIL) (#2=#:G194 NIL) (|i1| NIL) (#3=#:G195 NIL) (|i2| NIL)
-          (|o2| #4=(|NonNegativeInteger|)) (|o1| #4#) (|t2| #5=(|Symbol|))
-          (|t1| #5#))
+         ((|t1| #1=(|Symbol|)) (|t2| #1#) (|o1| #2=(|NonNegativeInteger|))
+          (|o2| #2#) (|i2| NIL) (#3=#:G197 NIL) (|i1| NIL) (#4=#:G196 NIL)
+          (#5=#:G195 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |t1| (SPADCALL |jv1| (QREFELT % 35)))
@@ -581,12 +581,12 @@
                                         (LETT #3#
                                               (SPADCALL |jv2| (QREFELT % 30)))
                                         (LETT |i1| NIL)
-                                        (LETT #2#
+                                        (LETT #4#
                                               (SPADCALL |jv1| (QREFELT % 30)))
                                         G190
                                         (COND
-                                         ((OR (ATOM #2#)
-                                              (PROGN (LETT |i1| (CAR #2#)) NIL)
+                                         ((OR (ATOM #4#)
+                                              (PROGN (LETT |i1| (CAR #4#)) NIL)
                                               (ATOM #3#)
                                               (PROGN
                                                (LETT |i2| (CAR #3#))
@@ -597,278 +597,277 @@
                                           (COND
                                            ((SPADCALL |i1| |i2| (QREFELT % 89))
                                             (PROGN
-                                             (LETT #1# (> |i1| |i2|))
-                                             (GO #7=#:G192))))))
-                                        (LETT #2#
-                                              (PROG1 (CDR #2#)
+                                             (LETT #5# (> |i1| |i2|))
+                                             (GO #7=#:G194))))))
+                                        (LETT #4#
+                                              (PROG1 (CDR #4#)
                                                 (LETT #3# (CDR #3#))))
                                         (GO G190) G191 (EXIT NIL))
                                    (EXIT
                                     (< (SPADCALL |jv1| (QREFELT % 70))
                                        (SPADCALL |jv2| (QREFELT % 70))))))
                                  (#6# (< |o1| |o2|))))))))))))
-          #7# (EXIT #1#)))) 
+          #7# (EXIT #5#)))) 
 
 (SDEFUN |JBC-;>;2SB;28| ((|jv1| (S)) (|jv2| (S)) (% (|Boolean|)))
         (SPADCALL |jv2| |jv1| (QREFELT % 91))) 
 
 (SDEFUN |JBC-;variables;NniL;29| ((|q| (|NonNegativeInteger|)) (% (|List| S)))
         (SPROG
-         ((#1=#:G248 NIL) (#2=#:G265 NIL) (|i| NIL) (#3=#:G264 NIL)
-          (#4=#:G244 NIL) (#5=#:G263 NIL) (#6=#:G262 NIL) (JV (|List| S))
-          (#7=#:G219 NIL) (#8=#:G261 NIL) (|k| NIL) (#9=#:G260 NIL) (|ind| NIL)
-          (|IndList| (|List| (|List| (|PositiveInteger|))))
+         ((#1=#:G255 NIL) (#2=#:G201 NIL) (#3=#:G256 NIL) (#4=#:G257 NIL)
+          (#5=#:G204 NIL) (#6=#:G258 NIL) (#7=#:G207 NIL) (|qq| NIL)
+          (#8=#:G259 NIL) (#9=#:G260 NIL) (|j| NIL) (#10=#:G261 NIL)
+          (#11=#:G213 NIL) (|NIndList| (|List| (|List| (|PositiveInteger|))))
           (|OIndList| (|List| (|List| (|PositiveInteger|))))
-          (|NIndList| (|List| (|List| (|PositiveInteger|)))) (#10=#:G211 NIL)
-          (#11=#:G259 NIL) (|j| NIL) (#12=#:G258 NIL) (#13=#:G257 NIL)
-          (|qq| NIL) (#14=#:G205 NIL) (#15=#:G256 NIL) (#16=#:G202 NIL)
-          (#17=#:G255 NIL) (#18=#:G254 NIL) (#19=#:G199 NIL) (#20=#:G253 NIL))
+          (|IndList| (|List| (|List| (|PositiveInteger|)))) (|ind| NIL)
+          (#12=#:G262 NIL) (|k| NIL) (#13=#:G263 NIL) (#14=#:G221 NIL)
+          (JV (|List| S)) (#15=#:G264 NIL) (#16=#:G265 NIL) (#17=#:G246 NIL)
+          (#18=#:G266 NIL) (|i| NIL) (#19=#:G267 NIL) (#20=#:G250 NIL))
          (SEQ
           (COND
            ((ZEROP |q|)
             (PROGN
-             (LETT #20# NIL)
+             (LETT #1# NIL)
              (SEQ (LETT |i| (QREFELT % 9)) G190 (COND ((< |i| 1) (GO G191)))
                   (SEQ
                    (EXIT
-                    (LETT #20#
+                    (LETT #1#
                           (CONS
                            (SPADCALL
-                            (PROG1 (LETT #19# |i|)
-                              (|check_subtype2| (> #19# 0) '(|PositiveInteger|)
-                                                '(|NonNegativeInteger|) #19#))
+                            (PROG1 (LETT #2# |i|)
+                              (|check_subtype2| (> #2# 0) '(|PositiveInteger|)
+                                                '(|NonNegativeInteger|) #2#))
                             (QREFELT % 44))
-                           #20#))))
-                  (LETT |i| (+ |i| -1)) (GO G190) G191
-                  (EXIT (NREVERSE #20#)))))
+                           #1#))))
+                  (LETT |i| (+ |i| -1)) (GO G190) G191 (EXIT (NREVERSE #1#)))))
            ('T
             (SEQ
              (LETT |OIndList|
                    (PROGN
-                    (LETT #18# NIL)
-                    (SEQ (LETT |i| 1) (LETT #17# (QREFELT % 9)) G190
-                         (COND ((|greater_SI| |i| #17#) (GO G191)))
+                    (LETT #3# NIL)
+                    (SEQ (LETT |i| 1) (LETT #4# (QREFELT % 9)) G190
+                         (COND ((|greater_SI| |i| #4#) (GO G191)))
                          (SEQ
                           (EXIT
-                           (LETT #18#
+                           (LETT #3#
                                  (CONS
                                   (LIST
-                                   (PROG1 (LETT #16# |i|)
-                                     (|check_subtype2| (> #16# 0)
+                                   (PROG1 (LETT #5# |i|)
+                                     (|check_subtype2| (> #5# 0)
                                                        '(|PositiveInteger|)
                                                        '(|NonNegativeInteger|)
-                                                       #16#)))
-                                  #18#))))
+                                                       #5#)))
+                                  #3#))))
                          (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                         (EXIT (NREVERSE #18#)))))
+                         (EXIT (NREVERSE #3#)))))
              (LETT |IndList|
                    (PROGN
-                    (LETT #15# NIL)
+                    (LETT #6# NIL)
                     (SEQ (LETT |i| (QREFELT % 9)) G190
                          (COND ((< |i| 1) (GO G191)))
                          (SEQ
                           (EXIT
-                           (LETT #15#
+                           (LETT #6#
                                  (CONS
                                   (LIST
-                                   (PROG1 (LETT #14# |i|)
-                                     (|check_subtype2| (> #14# 0)
+                                   (PROG1 (LETT #7# |i|)
+                                     (|check_subtype2| (> #7# 0)
                                                        '(|PositiveInteger|)
                                                        '(|NonNegativeInteger|)
-                                                       #14#)))
-                                  #15#))))
+                                                       #7#)))
+                                  #6#))))
                          (LETT |i| (+ |i| -1)) (GO G190) G191
-                         (EXIT (NREVERSE #15#)))))
-             (SEQ (LETT |qq| 2) (LETT #13# |q|) G190
-                  (COND ((|greater_SI| |qq| #13#) (GO G191)))
+                         (EXIT (NREVERSE #6#)))))
+             (SEQ (LETT |qq| 2) (LETT #8# |q|) G190
+                  (COND ((|greater_SI| |qq| #8#) (GO G191)))
                   (SEQ (LETT |NIndList| NIL)
-                       (SEQ (LETT |ind| NIL) (LETT #12# |OIndList|) G190
+                       (SEQ (LETT |ind| NIL) (LETT #9# |OIndList|) G190
                             (COND
-                             ((OR (ATOM #12#)
-                                  (PROGN (LETT |ind| (CAR #12#)) NIL))
+                             ((OR (ATOM #9#)
+                                  (PROGN (LETT |ind| (CAR #9#)) NIL))
                               (GO G191)))
                             (SEQ
                              (EXIT
                               (SEQ (LETT |j| (|SPADfirst| |ind|))
-                                   (LETT #11# (QREFELT % 9)) G190
-                                   (COND ((> |j| #11#) (GO G191)))
+                                   (LETT #10# (QREFELT % 9)) G190
+                                   (COND ((> |j| #10#) (GO G191)))
                                    (SEQ
                                     (EXIT
                                      (LETT |NIndList|
                                            (CONS
                                             (CONS
-                                             (PROG1 (LETT #10# |j|)
-                                               (|check_subtype2| (> #10# 0)
+                                             (PROG1 (LETT #11# |j|)
+                                               (|check_subtype2| (> #11# 0)
                                                                  '(|PositiveInteger|)
                                                                  '(|NonNegativeInteger|)
-                                                                 #10#))
+                                                                 #11#))
                                              |ind|)
                                             |NIndList|))))
                                    (LETT |j| (+ |j| 1)) (GO G190) G191
                                    (EXIT NIL))))
-                            (LETT #12# (CDR #12#)) (GO G190) G191 (EXIT NIL))
+                            (LETT #9# (CDR #9#)) (GO G190) G191 (EXIT NIL))
                        (LETT |OIndList| (REVERSE |NIndList|))
                        (EXIT
                         (LETT |IndList|
                               (SPADCALL |NIndList| |IndList| (QREFELT % 28)))))
                   (LETT |qq| (|inc_SI| |qq|)) (GO G190) G191 (EXIT NIL))
              (LETT JV NIL)
-             (SEQ (LETT |ind| NIL) (LETT #9# |IndList|) G190
+             (SEQ (LETT |ind| NIL) (LETT #12# |IndList|) G190
                   (COND
-                   ((OR (ATOM #9#) (PROGN (LETT |ind| (CAR #9#)) NIL))
+                   ((OR (ATOM #12#) (PROGN (LETT |ind| (CAR #12#)) NIL))
                     (GO G191)))
                   (SEQ
                    (EXIT
-                    (SEQ (LETT |k| 1) (LETT #8# (QREFELT % 11)) G190
-                         (COND ((|greater_SI| |k| #8#) (GO G191)))
+                    (SEQ (LETT |k| 1) (LETT #13# (QREFELT % 11)) G190
+                         (COND ((|greater_SI| |k| #13#) (GO G191)))
                          (SEQ
                           (EXIT
                            (LETT JV
                                  (CONS
                                   (SPADCALL
-                                   (PROG1 (LETT #7# |k|)
-                                     (|check_subtype2| (> #7# 0)
+                                   (PROG1 (LETT #14# |k|)
+                                     (|check_subtype2| (> #14# 0)
                                                        '(|PositiveInteger|)
                                                        '(|NonNegativeInteger|)
-                                                       #7#))
+                                                       #14#))
                                    |ind| (QREFELT % 54))
                                   JV))))
                          (LETT |k| (|inc_SI| |k|)) (GO G190) G191 (EXIT NIL))))
-                  (LETT #9# (CDR #9#)) (GO G190) G191 (EXIT NIL))
+                  (LETT #12# (CDR #12#)) (GO G190) G191 (EXIT NIL))
              (EXIT
               (SPADCALL
                (SPADCALL
                 (PROGN
-                 (LETT #6# NIL)
-                 (SEQ (LETT |i| 1) (LETT #5# (QREFELT % 9)) G190
-                      (COND ((|greater_SI| |i| #5#) (GO G191)))
+                 (LETT #15# NIL)
+                 (SEQ (LETT |i| 1) (LETT #16# (QREFELT % 9)) G190
+                      (COND ((|greater_SI| |i| #16#) (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #6#
+                        (LETT #15#
                               (CONS
                                (SPADCALL
-                                (PROG1 (LETT #4# |i|)
-                                  (|check_subtype2| (> #4# 0)
+                                (PROG1 (LETT #17# |i|)
+                                  (|check_subtype2| (> #17# 0)
                                                     '(|PositiveInteger|)
                                                     '(|NonNegativeInteger|)
-                                                    #4#))
+                                                    #17#))
                                 (QREFELT % 44))
-                               #6#))))
+                               #15#))))
                       (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                      (EXIT (NREVERSE #6#))))
+                      (EXIT (NREVERSE #15#))))
                 (PROGN
-                 (LETT #3# NIL)
-                 (SEQ (LETT |i| 1) (LETT #2# (QREFELT % 11)) G190
-                      (COND ((|greater_SI| |i| #2#) (GO G191)))
+                 (LETT #18# NIL)
+                 (SEQ (LETT |i| 1) (LETT #19# (QREFELT % 11)) G190
+                      (COND ((|greater_SI| |i| #19#) (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #3#
+                        (LETT #18#
                               (CONS
                                (SPADCALL
-                                (PROG1 (LETT #1# |i|)
-                                  (|check_subtype2| (> #1# 0)
+                                (PROG1 (LETT #20# |i|)
+                                  (|check_subtype2| (> #20# 0)
                                                     '(|PositiveInteger|)
                                                     '(|NonNegativeInteger|)
-                                                    #1#))
+                                                    #20#))
                                 (QREFELT % 46))
-                               #3#))))
+                               #18#))))
                       (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                      (EXIT (NREVERSE #3#))))
+                      (EXIT (NREVERSE #18#))))
                 (QREFELT % 94))
                JV (QREFELT % 94))))))))) 
 
 (SDEFUN |JBC-;variables;NniPiL;30|
         ((|q| (|NonNegativeInteger|)) (|c| (|PositiveInteger|)) (% (|List| S)))
         (SPROG
-         ((JV (|List| S)) (#1=#:G281 NIL) (#2=#:G293 NIL) (|k| NIL)
-          (#3=#:G292 NIL) (|ind| NIL)
-          (|OIndList| (|List| (|List| (|PositiveInteger|))))
-          (|NIndList| (|List| (|List| (|PositiveInteger|)))) (#4=#:G273 NIL)
-          (#5=#:G291 NIL) (|j| NIL) (#6=#:G290 NIL) (#7=#:G289 NIL) (|qq| NIL)
-          (#8=#:G267 NIL) (#9=#:G288 NIL) (|i| NIL) (#10=#:G287 NIL))
+         ((#1=#:G289 NIL) (|i| NIL) (#2=#:G290 NIL) (#3=#:G269 NIL) (|qq| NIL)
+          (#4=#:G291 NIL) (#5=#:G292 NIL) (|j| NIL) (#6=#:G293 NIL)
+          (#7=#:G275 NIL) (|NIndList| (|List| (|List| (|PositiveInteger|))))
+          (|OIndList| (|List| (|List| (|PositiveInteger|)))) (|ind| NIL)
+          (#8=#:G294 NIL) (|k| NIL) (#9=#:G295 NIL) (#10=#:G283 NIL)
+          (JV (|List| S)))
          (SEQ
           (COND ((ZEROP |q|) NIL)
                 ('T
                  (SEQ
                   (LETT |OIndList|
                         (PROGN
-                         (LETT #10# NIL)
-                         (SEQ (LETT |i| |c|) (LETT #9# (QREFELT % 9)) G190
-                              (COND ((> |i| #9#) (GO G191)))
+                         (LETT #1# NIL)
+                         (SEQ (LETT |i| |c|) (LETT #2# (QREFELT % 9)) G190
+                              (COND ((> |i| #2#) (GO G191)))
                               (SEQ
                                (EXIT
-                                (LETT #10#
+                                (LETT #1#
                                       (CONS
                                        (LIST
-                                        (PROG1 (LETT #8# |i|)
-                                          (|check_subtype2| (> #8# 0)
+                                        (PROG1 (LETT #3# |i|)
+                                          (|check_subtype2| (> #3# 0)
                                                             '(|PositiveInteger|)
                                                             '(|NonNegativeInteger|)
-                                                            #8#)))
-                                       #10#))))
+                                                            #3#)))
+                                       #1#))))
                               (LETT |i| (+ |i| 1)) (GO G190) G191
-                              (EXIT (NREVERSE #10#)))))
-                  (SEQ (LETT |qq| 2) (LETT #7# |q|) G190
-                       (COND ((|greater_SI| |qq| #7#) (GO G191)))
+                              (EXIT (NREVERSE #1#)))))
+                  (SEQ (LETT |qq| 2) (LETT #4# |q|) G190
+                       (COND ((|greater_SI| |qq| #4#) (GO G191)))
                        (SEQ (LETT |NIndList| NIL)
-                            (SEQ (LETT |ind| NIL) (LETT #6# |OIndList|) G190
+                            (SEQ (LETT |ind| NIL) (LETT #5# |OIndList|) G190
                                  (COND
-                                  ((OR (ATOM #6#)
-                                       (PROGN (LETT |ind| (CAR #6#)) NIL))
+                                  ((OR (ATOM #5#)
+                                       (PROGN (LETT |ind| (CAR #5#)) NIL))
                                    (GO G191)))
                                  (SEQ
                                   (EXIT
                                    (SEQ (LETT |j| (|SPADfirst| |ind|))
-                                        (LETT #5# (QREFELT % 9)) G190
-                                        (COND ((> |j| #5#) (GO G191)))
+                                        (LETT #6# (QREFELT % 9)) G190
+                                        (COND ((> |j| #6#) (GO G191)))
                                         (SEQ
                                          (EXIT
                                           (LETT |NIndList|
                                                 (CONS
                                                  (CONS
-                                                  (PROG1 (LETT #4# |j|)
-                                                    (|check_subtype2| (> #4# 0)
+                                                  (PROG1 (LETT #7# |j|)
+                                                    (|check_subtype2| (> #7# 0)
                                                                       '(|PositiveInteger|)
                                                                       '(|NonNegativeInteger|)
-                                                                      #4#))
+                                                                      #7#))
                                                   |ind|)
                                                  |NIndList|))))
                                         (LETT |j| (+ |j| 1)) (GO G190) G191
                                         (EXIT NIL))))
-                                 (LETT #6# (CDR #6#)) (GO G190) G191
+                                 (LETT #5# (CDR #5#)) (GO G190) G191
                                  (EXIT NIL))
                             (EXIT (LETT |OIndList| (NREVERSE |NIndList|))))
                        (LETT |qq| (|inc_SI| |qq|)) (GO G190) G191 (EXIT NIL))
                   (LETT JV NIL)
-                  (SEQ (LETT |ind| NIL) (LETT #3# |OIndList|) G190
+                  (SEQ (LETT |ind| NIL) (LETT #8# |OIndList|) G190
                        (COND
-                        ((OR (ATOM #3#) (PROGN (LETT |ind| (CAR #3#)) NIL))
+                        ((OR (ATOM #8#) (PROGN (LETT |ind| (CAR #8#)) NIL))
                          (GO G191)))
                        (SEQ
                         (EXIT
-                         (SEQ (LETT |k| 1) (LETT #2# (QREFELT % 11)) G190
-                              (COND ((|greater_SI| |k| #2#) (GO G191)))
+                         (SEQ (LETT |k| 1) (LETT #9# (QREFELT % 11)) G190
+                              (COND ((|greater_SI| |k| #9#) (GO G191)))
                               (SEQ
                                (EXIT
                                 (LETT JV
                                       (CONS
                                        (SPADCALL
-                                        (PROG1 (LETT #1# |k|)
-                                          (|check_subtype2| (> #1# 0)
+                                        (PROG1 (LETT #10# |k|)
+                                          (|check_subtype2| (> #10# 0)
                                                             '(|PositiveInteger|)
                                                             '(|NonNegativeInteger|)
-                                                            #1#))
+                                                            #10#))
                                         |ind| (QREFELT % 54))
                                        JV))))
                               (LETT |k| (|inc_SI| |k|)) (GO G190) G191
                               (EXIT NIL))))
-                       (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
+                       (LETT #8# (CDR #8#)) (GO G190) G191 (EXIT NIL))
                   (EXIT JV))))))) 
 
 (DECLAIM (NOTINLINE |JetBundleCategory&;|)) 
 
 (DEFUN |JetBundleCategory&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|JetBundleCategory&| DV$1))
@@ -888,7 +887,7 @@
 (MAKEPROP '|JetBundleCategory&| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|PositiveInteger|)
-              (0 . |numIndVar|) '|nn| (4 . |numDepVar|) '|mm| (8 . |One|)
+              (0 . |numIndVar|) '|nn| (4 . |numDepVar|) '|mm| (8 . |1|)
               (|List| 7) (|List| 16) |JBC-;m2r;LL;1| (|NonNegativeInteger|)
               (12 . |new|) (|Integer|) (18 . |elt|) (24 . |setelt!|)
               |JBC-;r2m;LL;2| (31 . |copy|) (|List| 13) (36 . |allRepeated|)
@@ -941,24 +940,11 @@
                               '((|variables|
                                  ((|List| |#1|) (|NonNegativeInteger|)))
                                 T)
-                              '((P (|#1| (|NonNegativeInteger|))) T)
-                              '((P
-                                 (|#1| (|PositiveInteger|)
-                                  (|NonNegativeInteger|)))
-                                T)
-                              '((P (|#1| (|List| (|NonNegativeInteger|)))) T)
-                              '((U (|#1|)) T) '((X (|#1|)) T)
                               '((|one?| ((|Boolean|) |#1|)) T)
                               '((|Pr|
                                  (|#1| (|PositiveInteger|)
                                   (|List| (|PositiveInteger|))))
                                 T)
-                              '((P
-                                 (|#1| (|PositiveInteger|)
-                                  (|List| (|NonNegativeInteger|))))
-                                T)
-                              '((U (|#1| (|PositiveInteger|))) T)
-                              '((X (|#1| (|PositiveInteger|))) T)
                               '((|integrate| (|#1| |#1| (|PositiveInteger|)))
                                 T)
                               '((|integrateIfCan|
@@ -994,10 +980,23 @@
                                  ((|List| (|PositiveInteger|)) |#1|))
                                 T)
                               '((|coerce| ((|Expression| (|Integer|)) |#1|)) T)
-                              '((> ((|Boolean|) |#1| |#1|)) T)
-                              '((< ((|Boolean|) |#1| |#1|)) T)
+                              '((= ((|Boolean|) |#1| |#1|)) T)
                               '((|coerce| ((|OutputForm|) |#1|)) T)
-                              '((= ((|Boolean|) |#1| |#1|)) T))
+                              '((< ((|Boolean|) |#1| |#1|)) T)
+                              '((> ((|Boolean|) |#1| |#1|)) T)
+                              '((X (|#1| (|PositiveInteger|))) T)
+                              '((U (|#1| (|PositiveInteger|))) T)
+                              '((P
+                                 (|#1| (|PositiveInteger|)
+                                  (|List| (|NonNegativeInteger|))))
+                                T)
+                              '((X (|#1|)) T) '((U (|#1|)) T)
+                              '((P (|#1| (|List| (|NonNegativeInteger|)))) T)
+                              '((P
+                                 (|#1| (|PositiveInteger|)
+                                  (|NonNegativeInteger|)))
+                                T)
+                              '((P (|#1| (|NonNegativeInteger|))) T))
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 97
                                             '(0 6 7 8 0 6 7 10 0 6 0 12 2 14 0
@@ -1025,8 +1024,8 @@
                                               0 7 74 2 0 14 0 0 76 1 0 59 0 61
                                               1 0 16 14 33 1 0 16 0 39 1 0 23
                                               14 29 0 0 0 45 0 0 0 47 2 0 0 7
-                                              13 57 2 0 0 7 14 55 2 0 0 7 16 51
-                                              1 0 0 14 49 1 0 0 16 52 2 0 36 0
+                                              13 57 2 0 0 7 16 51 1 0 0 16 52 1
+                                              0 0 14 49 2 0 0 7 14 55 2 0 36 0
                                               0 92 2 0 36 0 0 87 2 0 36 0 0
                                               90)))))
            '|lookupComplete|)) 

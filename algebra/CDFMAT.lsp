@@ -1,18 +1,18 @@
 
-(PUT '|CDFMAT;minRowIndex;%I;1| '|SPADreplace| '(XLAM (|x|) 0)) 
+(MAKEPROP '|CDFMAT;minRowIndex;%I;1| '|SPADreplace| '(XLAM (|x|) 0)) 
 
 (SDEFUN |CDFMAT;minRowIndex;%I;1| ((|x| (%)) (% (|Integer|))) 0) 
 
-(PUT '|CDFMAT;minColIndex;%I;2| '|SPADreplace| '(XLAM (|x|) 0)) 
+(MAKEPROP '|CDFMAT;minColIndex;%I;2| '|SPADreplace| '(XLAM (|x|) 0)) 
 
 (SDEFUN |CDFMAT;minColIndex;%I;2| ((|x| (%)) (% (|Integer|))) 0) 
 
-(PUT '|CDFMAT;nrows;%Nni;3| '|SPADreplace| 'CDANROWS) 
+(MAKEPROP '|CDFMAT;nrows;%Nni;3| '|SPADreplace| 'CDANROWS) 
 
 (SDEFUN |CDFMAT;nrows;%Nni;3| ((|x| (%)) (% (|NonNegativeInteger|)))
         (CDANROWS |x|)) 
 
-(PUT '|CDFMAT;ncols;%Nni;4| '|SPADreplace| 'CDANCOLS) 
+(MAKEPROP '|CDFMAT;ncols;%Nni;4| '|SPADreplace| 'CDANCOLS) 
 
 (SDEFUN |CDFMAT;ncols;%Nni;4| ((|x| (%)) (% (|NonNegativeInteger|)))
         (CDANCOLS |x|)) 
@@ -23,39 +23,40 @@
 (SDEFUN |CDFMAT;maxColIndex;%I;6| ((|x| (%)) (% (|Integer|)))
         (- (CDANCOLS |x|) 1)) 
 
-(PUT '|CDFMAT;qelt;%2IC;7| '|SPADreplace| 'CDAREF2) 
+(MAKEPROP '|CDFMAT;qelt;%2IC;7| '|SPADreplace| 'CDAREF2) 
 
 (SDEFUN |CDFMAT;qelt;%2IC;7|
         ((|m| (%)) (|i| #1=(|Integer|)) (|j| #1#)
          (% (|Complex| (|DoubleFloat|))))
         (CDAREF2 |m| |i| |j|)) 
 
-(PUT '|CDFMAT;elt;%2IC;8| '|SPADreplace| 'CDAREF2) 
+(MAKEPROP '|CDFMAT;elt;%2IC;8| '|SPADreplace| 'CDAREF2) 
 
 (SDEFUN |CDFMAT;elt;%2IC;8|
         ((|m| (%)) (|i| #1=(|Integer|)) (|j| #1#)
          (% (|Complex| (|DoubleFloat|))))
         (CDAREF2 |m| |i| |j|)) 
 
-(PUT '|CDFMAT;qsetelt!;%2I2C;9| '|SPADreplace| 'CDSETAREF2) 
+(MAKEPROP '|CDFMAT;qsetelt!;%2I2C;9| '|SPADreplace| 'CDSETAREF2) 
 
 (SDEFUN |CDFMAT;qsetelt!;%2I2C;9|
         ((|m| (%)) (|i| #1=(|Integer|)) (|j| #1#)
          (|r| #2=(|Complex| (|DoubleFloat|))) (% #2#))
         (CDSETAREF2 |m| |i| |j| |r|)) 
 
-(PUT '|CDFMAT;setelt!;%2I2C;10| '|SPADreplace| 'CDSETAREF2) 
+(MAKEPROP '|CDFMAT;setelt!;%2I2C;10| '|SPADreplace| 'CDSETAREF2) 
 
 (SDEFUN |CDFMAT;setelt!;%2I2C;10|
         ((|m| (%)) (|i| #1=(|Integer|)) (|j| #1#)
          (|r| #2=(|Complex| (|DoubleFloat|))) (% #2#))
         (CDSETAREF2 |m| |i| |j| |r|)) 
 
-(PUT '|CDFMAT;empty;%;11| '|SPADreplace| '(XLAM NIL (MAKE_CDOUBLE_MATRIX 0 0))) 
+(MAKEPROP '|CDFMAT;empty;%;11| '|SPADreplace|
+          '(XLAM NIL (MAKE_CDOUBLE_MATRIX 0 0))) 
 
 (SDEFUN |CDFMAT;empty;%;11| ((% (%))) (MAKE_CDOUBLE_MATRIX 0 0)) 
 
-(PUT '|CDFMAT;qnew;2Nni%;12| '|SPADreplace| 'MAKE_CDOUBLE_MATRIX) 
+(MAKEPROP '|CDFMAT;qnew;2Nni%;12| '|SPADreplace| 'MAKE_CDOUBLE_MATRIX) 
 
 (SDEFUN |CDFMAT;qnew;2Nni%;12|
         ((|rows| #1=(|NonNegativeInteger|)) (|cols| #1#) (% (%)))
@@ -64,26 +65,25 @@
 (SDEFUN |CDFMAT;new;2NniC%;13|
         ((|rows| #1=(|NonNegativeInteger|)) (|cols| #1#)
          (|a| (|Complex| (|DoubleFloat|))) (% (%)))
-        (SPROG
-         ((#2=#:G2769 NIL) (|j| NIL) (#3=#:G2768 NIL) (|i| NIL) (|res| (%)))
-         (SEQ (LETT |res| (MAKE_CDOUBLE_MATRIX |rows| |cols|))
-              (SEQ (LETT |i| 0) (LETT #3# (- |rows| 1)) G190
-                   (COND ((|greater_SI| |i| #3#) (GO G191)))
-                   (SEQ
-                    (EXIT
-                     (SEQ (LETT |j| 0) (LETT #2# (- |cols| 1)) G190
-                          (COND ((|greater_SI| |j| #2#) (GO G191)))
-                          (SEQ (EXIT (CDSETAREF2 |res| |i| |j| |a|)))
-                          (LETT |j| (|inc_SI| |j|)) (GO G190) G191
-                          (EXIT NIL))))
-                   (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
-              (EXIT |res|)))) 
+        (SPROG ((|res| (%)) (|i| NIL) (#2=#:G18 NIL) (|j| NIL) (#3=#:G19 NIL))
+               (SEQ (LETT |res| (MAKE_CDOUBLE_MATRIX |rows| |cols|))
+                    (SEQ (LETT |i| 0) (LETT #2# (- |rows| 1)) G190
+                         (COND ((|greater_SI| |i| #2#) (GO G191)))
+                         (SEQ
+                          (EXIT
+                           (SEQ (LETT |j| 0) (LETT #3# (- |cols| 1)) G190
+                                (COND ((|greater_SI| |j| #3#) (GO G191)))
+                                (SEQ (EXIT (CDSETAREF2 |res| |i| |j| |a|)))
+                                (LETT |j| (|inc_SI| |j|)) (GO G190) G191
+                                (EXIT NIL))))
+                         (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
+                    (EXIT |res|)))) 
 
 (DECLAIM (NOTINLINE |ComplexDoubleFloatMatrix;|)) 
 
 (DEFUN |ComplexDoubleFloatMatrix;| ()
   (SPROG
-   ((|dv$| NIL) (% NIL) (#1=#:G2782 NIL) (#2=#:G2783 NIL) (#3=#:G2781 NIL)
+   ((|dv$| NIL) (% NIL) (#1=#:G32 NIL) (#2=#:G33 NIL) (#3=#:G31 NIL)
     (|pv$| NIL))
    (PROGN
     (LETT |dv$| '(|ComplexDoubleFloatMatrix|))
@@ -198,7 +198,7 @@
 
 (DEFUN |ComplexDoubleFloatMatrix| ()
   (SPROG NIL
-         (PROG (#1=#:G2785)
+         (PROG (#1=#:G35)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ComplexDoubleFloatMatrix|))
@@ -255,20 +255,21 @@
               |blockConcat| 721 |array2| 726 |any?| 731 |antisymmetric?| 737 ^
               742 |Pfaffian| 754 = 759 / 765 - 771 + 782 * 788 |#| 824)
            'NIL
-           (CONS (|makeByteWordVec2| 11 '(0 0 1 0 2 6 9 0 7 11 9 0 0 0 0))
+           (CONS (|makeByteWordVec2| 11 '(0 0 1 1 0 2 6 9 0 7 11 9 0 0 0 0))
                  (CONS
-                  '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL
+                  '#(|MatrixCategory&| |TwoDimensionalArrayCategory&| NIL NIL
                      |HomogeneousAggregate&| |Hashable&| |SetCategory&|
                      |Evalable&| |Aggregate&| |BasicType&| NIL |InnerEvalable&|
                      NIL NIL NIL NIL)
                   (CONS
                    '#((|MatrixCategory| 14 25 25)
                       (|TwoDimensionalArrayCategory| 14 25 25) (|Comparable|)
-                      (|HomogeneousAggregate| 14) (|Hashable|) (|SetCategory|)
-                      (|Evalable| 14) (|Aggregate|) (|BasicType|)
-                      (|CoercibleTo| 43) (|InnerEvalable| 14 14)
-                      (|shallowlyMutable|) (|finiteAggregate|)
-                      (|MatrixOperationsCategory| 14 25 25) (|Type|))
+                      (|ComparableRepresentation|) (|HomogeneousAggregate| 14)
+                      (|Hashable|) (|SetCategory|) (|Evalable| 14)
+                      (|Aggregate|) (|BasicType|) (|CoercibleTo| 43)
+                      (|InnerEvalable| 14 14) (|shallowlyMutable|)
+                      (|finiteAggregate|) (|MatrixOperationsCategory| 14 25 25)
+                      (|Type|))
                    (|makeByteWordVec2| 48
                                        '(2 23 22 0 0 1 1 12 22 0 1 2 0 0 9 9 1
                                          2 0 30 0 32 1 2 0 30 0 33 1 2 0 0 0 0

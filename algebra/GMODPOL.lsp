@@ -45,8 +45,8 @@
 
 (DEFUN |GeneralModulePolynomial;| (|#1| |#2| |#3| |#4| |#5| |#6|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$6 NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL)
-    (DV$2 NIL) (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (DV$6 NIL)
+    (|dv$| NIL) (% NIL) (|pv$| NIL))
    (PROGN
     (LETT DV$1 |#1|)
     (LETT DV$2 (|devaluate| |#2|))
@@ -118,33 +118,32 @@
               (|ModuleMonomial| 8 9 (NRTEVAL (QREFELT % 10)))
               (0 . |leadingSupport|) |GMODPOL;leadingMonomial;%Mm;1|
               (5 . |exponent|) |GMODPOL;leadingExponent;%E;2| (10 . |index|)
-              |GMODPOL;leadingIndex;%IS;3| (15 . |One|) (19 . |One|)
-              (23 . |Zero|) (27 . |construct|) (33 . |monomial|)
-              |GMODPOL;unitVector;IS%;4| |GMODPOL;build;RISE%;5| (|Boolean|)
-              (39 . |zero?|) (44 . |leadingCoefficient|) (49 . *) (55 . +)
-              (61 . |reductum|) |GMODPOL;multMonom;RE2%;6| (66 . +)
-              (72 . |zero?|) (77 . |Zero|) (81 . |leadingCoefficient|)
-              (86 . |degree|) (91 . |reductum|) |GMODPOL;*;P2%;7| (|String|)
-              (|OutputForm|) (|PositiveInteger|) (|Integer|)
-              (|Union| % '"failed") (|NonNegativeInteger|))
+              |GMODPOL;leadingIndex;%IS;3| (15 . |1|) (19 . |1|) (23 . |0|)
+              (27 . |construct|) (33 . |monomial|) |GMODPOL;unitVector;IS%;4|
+              |GMODPOL;build;RISE%;5| (|Boolean|) (39 . |zero?|)
+              (44 . |leadingCoefficient|) (49 . *) (55 . +) (61 . |reductum|)
+              |GMODPOL;multMonom;RE2%;6| (66 . +) (72 . |zero?|) (77 . |0|)
+              (81 . |leadingCoefficient|) (86 . |degree|) (91 . |reductum|)
+              |GMODPOL;*;P2%;7| (|String|) (|OutputForm|) (|PositiveInteger|)
+              (|Integer|) (|Union| % '"failed") (|NonNegativeInteger|))
            '#(~= 96 |zero?| 102 |unitVector| 107 |subtractIfCan| 112 |sample|
               118 |reductum| 122 |opposite?| 127 |multMonom| 133 |monomial| 140
               |leadingMonomial| 146 |leadingIndex| 151 |leadingExponent| 156
-              |leadingCoefficient| 161 |latex| 166 |coerce| 171 |build| 176
-              |Zero| 183 = 187 - 193 + 204 * 210)
+              |leadingCoefficient| 161 |latex| 166 |coerce| 171 |build| 176 =
+              183 |0| 189 - 193 + 204 * 210)
            'NIL
-           (CONS (|makeByteWordVec2| 2 '(0 0 0 0 0 0 0 0 1 1 2 0 0 0 0))
+           (CONS (|makeByteWordVec2| 3 '(0 0 0 0 0 0 0 0 1 1 2 3 0 0 0 0))
                  (CONS
                   '#(|Module&| |Module&| NIL NIL NIL NIL NIL NIL
-                     |AbelianGroup&| NIL |AbelianMonoid&| |AbelianSemiGroup&|
-                     |SetCategory&| NIL |BasicType&|)
+                     |AbelianGroup&| NIL |AbelianMonoid&| |SetWithZero&|
+                     |AbelianSemiGroup&| |SetCategory&| NIL |BasicType&|)
                   (CONS
                    '#((|Module| 7) (|Module| 11) (|BiModule| 7 7)
                       (|BiModule| 11 11) (|RightModule| 11) (|LeftModule| 7)
                       (|RightModule| 7) (|LeftModule| 11) (|AbelianGroup|)
                       (|CancellationAbelianMonoid|) (|AbelianMonoid|)
-                      (|AbelianSemiGroup|) (|SetCategory|) (|CoercibleTo| 42)
-                      (|BasicType|))
+                      (|SetWithZero|) (|AbelianSemiGroup|) (|SetCategory|)
+                      (|CoercibleTo| 42) (|BasicType|))
                    (|makeByteWordVec2| 46
                                        '(1 12 13 0 14 1 13 9 0 16 1 13 8 0 18 0
                                          7 0 20 0 9 0 21 0 9 0 22 2 13 0 8 9 23
@@ -156,8 +155,8 @@
                                          1 0 3 0 1 1 0 0 0 32 2 3 27 0 0 1 3 0
                                          0 7 9 0 33 2 0 0 7 13 24 1 0 13 0 15 1
                                          0 8 0 19 1 0 9 0 17 1 0 7 0 29 1 0 41
-                                         0 1 1 0 42 0 1 3 0 0 7 8 9 26 0 3 0 36
-                                         2 0 27 0 0 1 2 1 0 0 0 1 1 1 0 0 1 2 0
+                                         0 1 1 0 42 0 1 3 0 0 7 8 9 26 2 0 27 0
+                                         0 1 0 3 0 36 2 1 0 0 0 1 1 1 0 0 1 2 0
                                          0 0 0 34 2 0 0 43 0 1 2 0 0 11 0 40 2
                                          0 0 0 7 1 2 0 0 0 11 1 2 0 0 7 0 1 2 1
                                          0 44 0 1 2 3 0 46 0 1)))))

@@ -603,31 +603,17 @@
 ;       -- FIXP(ELT(first d, 0)) => d
 ;       DNameToSExpr(SPADCALL(rest d, (first d).1))
 ;   not REFVECP d => d
-;   greater_SI(QVSIZE d, 5) and QREFELT(d, 3) is ['Category] => QREFELT(d, 0)
-;   greater_SI(QVSIZE d, 0) =>
-;     d':=QREFELT(d,0)
-;     isFunctor d' => d'
-;     d
+;   greater_SI(QVSIZE d, 0) => QREFELT(d, 0)
 ;   d
 
 (DEFUN |devaluate| (|d|)
-  (PROG (|ISTMP#1| |d'|)
+  (PROG ()
     (RETURN
      (COND
       ((|isDomain| |d|)
        (|DNameToSExpr| (SPADCALL (CDR |d|) (ELT (CAR |d|) 1))))
       ((NULL (REFVECP |d|)) |d|)
-      ((AND (|greater_SI| (QVSIZE |d|) 5)
-            (PROGN
-             (SETQ |ISTMP#1| (QREFELT |d| 3))
-             (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
-                  (EQ (CAR |ISTMP#1|) '|Category|))))
-       (QREFELT |d| 0))
-      ((|greater_SI| (QVSIZE |d|) 0)
-       (PROGN
-        (SETQ |d'| (QREFELT |d| 0))
-        (COND ((|isFunctor| |d'|) |d'|) (#1='T |d|))))
-      (#1# |d|)))))
+      ((|greater_SI| (QVSIZE |d|) 0) (QREFELT |d| 0)) ('T |d|)))))
 
 ; devaluateList l == [devaluate d for d in l]
 
@@ -668,8 +654,8 @@
 ;   (domenv, self, op, sig, box, skipdefaults, env) ==
 ;      domainVec := rest domenv
 ;      if hashCode? op then
-;          EQL(op, $hashOp1) => op := 'One
-;          EQL(op, $hashOp0) => op := 'Zero
+;          EQL(op, $hashOp1) => op := "1"
+;          EQL(op, $hashOp0) => op := "0"
 ;          EQL(op, $hashOpApply) => op := 'elt
 ;          EQL(op, $hashOpSet) => op := "setelt!"
 ;          EQL(op, $hashSeg) => op := 'SEGMENT
@@ -694,8 +680,8 @@
       (SETQ |domainVec| (CDR |domenv|))
       (COND
        ((|hashCode?| |op|)
-        (COND ((EQL |op| |$hashOp1|) (SETQ |op| '|One|))
-              ((EQL |op| |$hashOp0|) (SETQ |op| '|Zero|))
+        (COND ((EQL |op| |$hashOp1|) (SETQ |op| '|1|))
+              ((EQL |op| |$hashOp0|) (SETQ |op| '|0|))
               ((EQL |op| |$hashOpApply|) (SETQ |op| '|elt|))
               ((EQL |op| |$hashOpSet|) (SETQ |op| '|setelt!|))
               ((EQL |op| |$hashSeg|) (SETQ |op| 'SEGMENT)))))
@@ -807,10 +793,10 @@
 ; basicLookup(op,sig,domain,dollar) ==
 ;   -- FIXME: We should use consistent representation, not hacks
 ;   -- like this one
-;   if op = 0 then op := 'Zero
-;   if op = ['Zero] then op := 'Zero
-;   if op = 1 then op := 'One
-;   if op = ['One] then op := 'One
+;   if op = 0 then op := "0"
+;   if op = ["0"] then op := "0"
+;   if op = 1 then op := "1"
+;   if op = ["1"] then op := "1"
 ;   -- Spad case
 ;   VECP domain =>
 ;      isNewWorldDomain domain => -- getting ops from yourself (or for defaults)
@@ -830,8 +816,8 @@
 ;            hashType(['Mapping,:sig], hashPercent)
 ;
 ;        if SYMBOLP op then
-;           op = 'Zero => op := $hashOp0
-;           op = 'One => op := $hashOp1
+;           op = "0" => op := $hashOp0
+;           op = "1" => op := $hashOp1
 ;           op = 'elt => op := $hashOpApply
 ;           op = "setelt!" => op := $hashOpSet
 ;           op := hashString SYMBOL_-NAME op
@@ -847,8 +833,8 @@
 ;   opIsHasCat op =>
 ;       HasCategory(domain, sig)
 ;   if hashCode? op then
-;      EQL(op, $hashOp1) => op := 'One
-;      EQL(op, $hashOp0) => op := 'Zero
+;      EQL(op, $hashOp1) => op := "1"
+;      EQL(op, $hashOp0) => op := "0"
 ;      EQL(op, $hashOpApply) => op := 'elt
 ;      EQL(op, $hashOpSet) => op := "setelt!"
 ;      EQL(op, $hashSeg) => op := 'SEGMENT
@@ -861,10 +847,10 @@
   (PROG (|hashPercent| |box| |dispatch| |lookupFun| |hashSig| |val| |boxval|)
     (RETURN
      (PROGN
-      (COND ((EQL |op| 0) (SETQ |op| '|Zero|)))
-      (COND ((EQUAL |op| (LIST '|Zero|)) (SETQ |op| '|Zero|)))
-      (COND ((EQL |op| 1) (SETQ |op| '|One|)))
-      (COND ((EQUAL |op| (LIST '|One|)) (SETQ |op| '|One|)))
+      (COND ((EQL |op| 0) (SETQ |op| '|0|)))
+      (COND ((EQUAL |op| (LIST '|0|)) (SETQ |op| '|0|)))
+      (COND ((EQL |op| 1) (SETQ |op| '|1|)))
+      (COND ((EQUAL |op| (LIST '|1|)) (SETQ |op| '|1|)))
       (COND
        ((VECP |domain|)
         (COND
@@ -895,8 +881,8 @@
                                |hashPercent|))))
                (COND
                 ((SYMBOLP |op|)
-                 (COND ((EQ |op| '|Zero|) (SETQ |op| |$hashOp0|))
-                       ((EQ |op| '|One|) (SETQ |op| |$hashOp1|))
+                 (COND ((EQ |op| '|0|) (SETQ |op| |$hashOp0|))
+                       ((EQ |op| '|1|) (SETQ |op| |$hashOp1|))
                        ((EQ |op| '|elt|) (SETQ |op| |$hashOpApply|))
                        ((EQ |op| '|setelt!|) (SETQ |op| |$hashOpSet|))
                        (#1# (SETQ |op| (|hashString| (SYMBOL-NAME |op|)))))))
@@ -919,8 +905,8 @@
               (PROGN
                (COND
                 ((|hashCode?| |op|)
-                 (COND ((EQL |op| |$hashOp1|) (SETQ |op| '|One|))
-                       ((EQL |op| |$hashOp0|) (SETQ |op| '|Zero|))
+                 (COND ((EQL |op| |$hashOp1|) (SETQ |op| '|1|))
+                       ((EQL |op| |$hashOp0|) (SETQ |op| '|0|))
                        ((EQL |op| |$hashOpApply|) (SETQ |op| '|elt|))
                        ((EQL |op| |$hashOpSet|) (SETQ |op| '|setelt!|))
                        ((EQL |op| |$hashSeg|) (SETQ |op| 'SEGMENT)))))
@@ -1194,14 +1180,14 @@
 ; hashNewLookupInTable(op,sig,dollar,[domain,opvec],flag) ==
 ;   opIsHasCat op =>
 ;       HasCategory(domain, sig)
-;   if hashCode? op and EQL(op, $hashOp1) then op := 'One
-;   if hashCode? op and EQL(op, $hashOp0) then op := 'Zero
+;   if hashCode?(op) and EQL(op, $hashOp1) then op := "1"
+;   if hashCode?(op) and EQL(op, $hashOp0) then op := "0"
 ;   hashPercent :=
 ;     VECP dollar => hashType(dollar.0,0)
 ;     hashType(dollar,0)
 ;   if hashCode? sig and EQL(sig, hashPercent) then
 ;          sig := hashType('(Mapping %), hashPercent)
-;   dollar = nil => systemError()
+;   dollar = nil => systemError([])
 ;   $lookupDefaults = true =>
 ;       -- lookup first in my cats
 ;       newLookupInCategories(op, sig, domain, dollar, false)
@@ -1286,17 +1272,17 @@
              (PROGN
               (COND
                ((AND (|hashCode?| |op|) (EQL |op| |$hashOp1|))
-                (SETQ |op| '|One|)))
+                (SETQ |op| '|1|)))
               (COND
                ((AND (|hashCode?| |op|) (EQL |op| |$hashOp0|))
-                (SETQ |op| '|Zero|)))
+                (SETQ |op| '|0|)))
               (SETQ |hashPercent|
                       (COND ((VECP |dollar|) (|hashType| (ELT |dollar| 0) 0))
                             (#1# (|hashType| |dollar| 0))))
               (COND
                ((AND (|hashCode?| |sig|) (EQL |sig| |hashPercent|))
                 (SETQ |sig| (|hashType| '(|Mapping| %) |hashPercent|))))
-              (COND ((NULL |dollar|) (|systemError|))
+              (COND ((NULL |dollar|) (|systemError| NIL))
                     ((EQUAL |$lookupDefaults| T)
                      (OR
                       (|newLookupInCategories| |op| |sig| |domain| |dollar|
@@ -1478,6 +1464,15 @@
                         (|newLookupInAddChain| |op| |sig| |domain| |dollar|))
                        (#1# NIL))))))))))))
 
+; report_bad_fun(args) == system_error("S2NR0001",
+;     '"The function %1b with signature %2 is missing from domain %3b", args)
+
+(DEFUN |report_bad_fun| (|args|)
+  (PROG ()
+    (RETURN
+     (|system_error| 'S2NR0001
+      "The function %1b with signature %2 is missing from domain %3b" |args|))))
+
 ; replaceGoGetSlot env ==
 ;   [thisDomain,index,:op] := env
 ;   thisDomainForm := devaluate thisDomain
@@ -1502,7 +1497,7 @@
 ;       ['nowhere,:goGetDomain]  --see newGetDomainOpTable
 ;     sayBrightly concat('"Function: ",formatOpSignature(op,sig),
 ;       '" is missing from domain: ",form2String goGetDomain.0)
-;     keyedSystemError("S2NR0001",[op,sig,goGetDomain.0])
+;     report_bad_fun([op, sig, goGetDomain.0])
 ;   if $monitorNewWorld then
 ;     sayLooking1(['"goget stuffing slot",:bright thisSlot,'"of "],thisDomain)
 ;   SETELT(thisDomain,thisSlot,slot)
@@ -1563,8 +1558,7 @@
             (|concat| "Function: " (|formatOpSignature| |op| |sig|)
              " is missing from domain: "
              (|form2String| (ELT |goGetDomain| 0))))
-           (|keyedSystemError| 'S2NR0001
-            (LIST |op| |sig| (ELT |goGetDomain| 0)))))))
+           (|report_bad_fun| (LIST |op| |sig| (ELT |goGetDomain| 0)))))))
        (#2#
         (PROGN
          (COND
@@ -1582,6 +1576,7 @@
 
 ; newHasCategory(domain,catform) ==
 ;   catform = '(Type) => true
+;   STRINGP(domain) => false
 ;   slot4 := domain.4
 ;   auxvec := first slot4
 ;   catvec := CADR slot4
@@ -1594,7 +1589,7 @@
   (PROG (|$isDefaultingPackage| |catvec| |auxvec| |slot4|)
     (DECLARE (SPECIAL |$isDefaultingPackage|))
     (RETURN
-     (COND ((EQUAL |catform| '(|Type|)) T)
+     (COND ((EQUAL |catform| '(|Type|)) T) ((STRINGP |domain|) NIL)
            (#1='T
             (PROGN
              (SETQ |slot4| (ELT |domain| 4))
@@ -1945,16 +1940,20 @@
 ;   -- complains, if no function or ambiguous
 ;   $reportBottomUpFlag:local:= NIL
 ;   member(first dc, $nonLisplibDomains) =>
-;       throwKeyedMsg("S2IF0002", [first dc])
+;       throw_msg("S2IF0002", '"Functions from %1b are not available yet.",
+;                  [first(dc)])
 ;   not constructor? first dc =>
-;       throwKeyedMsg("S2IF0003", [first dc])
+;       throw_msg("S2IF0003",
+;           '"%1b must denote a domain or package constructor.", [first(dc)])
 ;   p:= findFunctionInDomain(op, dc, target, args, args, NIL, NIL) =>
 ;     domain := evalDomain dc
 ;     for mm in nreverse p until b repeat
 ;       [[.,:osig],nsig,:.] := mm
 ;       b := compiledLookup(op,nsig,domain)
-;     b or  throwKeyedMsg("S2IS0023",[op,dc])
-;   throwKeyedMsg("S2IF0004",[op,dc])
+;     b or  throw_msg("S2IS0023",
+;         '"The function %1b is not implemented in %2bp .", [op, dc])
+;   throw_msg("S2IF0004", '"The function %1b cannot be found in %2bp .",
+;             [op, dc])
 
 (DEFUN |getFunctionFromDomain1| (|op| |dc| |target| |args|)
   (PROG (|$reportBottomUpFlag| |b| |nsig| |osig| |domain| |p|)
@@ -1964,9 +1963,11 @@
       (SETQ |$reportBottomUpFlag| NIL)
       (COND
        ((|member| (CAR |dc|) |$nonLisplibDomains|)
-        (|throwKeyedMsg| 'S2IF0002 (LIST (CAR |dc|))))
+        (|throw_msg| 'S2IF0002 "Functions from %1b are not available yet."
+         (LIST (CAR |dc|))))
        ((NULL (|constructor?| (CAR |dc|)))
-        (|throwKeyedMsg| 'S2IF0003 (LIST (CAR |dc|))))
+        (|throw_msg| 'S2IF0003
+         "%1b must denote a domain or package constructor." (LIST (CAR |dc|))))
        ((SETQ |p|
                 (|findFunctionInDomain| |op| |dc| |target| |args| |args| NIL
                  NIL))
@@ -1986,8 +1987,13 @@
              (SETQ |bfVar#40| (CDR |bfVar#40|))
              (SETQ |bfVar#41| |b|)))
           (NREVERSE |p|) NIL NIL)
-         (OR |b| (|throwKeyedMsg| 'S2IS0023 (LIST |op| |dc|)))))
-       (#1# (|throwKeyedMsg| 'S2IF0004 (LIST |op| |dc|))))))))
+         (OR |b|
+             (|throw_msg| 'S2IS0023
+              "The function %1b is not implemented in %2bp ."
+              (LIST |op| |dc|)))))
+       (#1#
+        (|throw_msg| 'S2IF0004 "The function %1b cannot be found in %2bp ."
+         (LIST |op| |dc|))))))))
 
 ; getFunctionFromDomain(op, dc, args) ==
 ;     getFunctionFromDomain1(op, dc, NIL, args)

@@ -1,5 +1,5 @@
 
-(PUT '|RNS-;characteristic;Nni;1| '|SPADreplace| '(XLAM NIL 0)) 
+(MAKEPROP '|RNS-;characteristic;Nni;1| '|SPADreplace| '(XLAM NIL 0)) 
 
 (SDEFUN |RNS-;characteristic;Nni;1| ((% (|NonNegativeInteger|))) 0) 
 
@@ -87,7 +87,7 @@
 (DECLAIM (NOTINLINE |RealNumberSystem&;|)) 
 
 (DEFUN |RealNumberSystem&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RealNumberSystem&| DV$1))
@@ -104,12 +104,12 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|NonNegativeInteger|)
               |RNS-;characteristic;Nni;1| (0 . |truncate|) (5 . -)
               |RNS-;fractionPart;2S;2| (|Boolean|) (11 . |negative?|) (16 . -)
-              (21 . |floor|) |RNS-;truncate;2S;3| (26 . |One|) (|Integer|)
+              (21 . |floor|) |RNS-;truncate;2S;3| (26 . |1|) (|Integer|)
               (30 . |coerce|) (35 . /) (41 . +) |RNS-;round;2S;4| (47 . |abs|)
               |RNS-;norm;2S;5| (|Fraction| 18) (52 . |numer|) (57 . |denom|)
               |RNS-;coerce;FS;6| (|Float|) (62 . |convert|) (|Pattern| 29)
               (67 . |coerce|) |RNS-;convert;SP;7| (72 . |wholePart|) (77 . =)
-              (83 . |Zero|) (87 . <) |RNS-;floor;2S;8| (93 . >=)
+              (83 . |0|) (87 . <) |RNS-;floor;2S;8| (93 . >=)
               |RNS-;ceiling;2S;9| (99 . |generic?|) (|PatternMatchResult| 29 6)
               (104 . |addMatch|) (111 . |constant?|) (|Union| 29 '"failed")
               (116 . |retractIfCan|) (121 . =) (127 . |failed|)

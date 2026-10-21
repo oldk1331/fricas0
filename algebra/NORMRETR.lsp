@@ -1,22 +1,22 @@
 
 (SDEFUN |NORMRETR;normFactors;ExtPL;1| ((|p| (|ExtP|)) (% (|List| |ExtP|)))
-        (SPROG ((|facs| (|List| |ExtP|)) (#1=#:G6 NIL) (#2=#:G7 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G7 NIL) (#2=#:G6 NIL) (|facs| (|List| |ExtP|)))
                (SEQ
                 (EXIT
                  (SEQ (LETT |facs| (LIST |p|))
-                      (SEQ (LETT |i| 1) (LETT #2# (- (QREFELT % 10) 1)) G190
-                           (COND ((|greater_SI| |i| #2#) (GO G191)))
+                      (SEQ (LETT |i| 1) (LETT #1# (- (QREFELT % 10) 1)) G190
+                           (COND ((|greater_SI| |i| #1#) (GO G191)))
                            (SEQ
                             (EXIT
                              (COND
                               ((SPADCALL
                                 (LETT |p| (SPADCALL |p| (QREFELT % 11))) |facs|
                                 (QREFELT % 14))
-                               (PROGN (LETT #1# |facs|) (GO #3=#:G5)))
+                               (PROGN (LETT #2# |facs|) (GO #3=#:G5)))
                               ('T (LETT |facs| (CONS |p| |facs|))))))
                            (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                       (EXIT |facs|)))
-                #3# (EXIT #1#)))) 
+                #3# (EXIT #2#)))) 
 
 (SDEFUN |NORMRETR;Frobenius;2ExtP;2| ((|ff| (|ExtP|)) (% (|ExtP|)))
         (SPROG ((|fft| (|ExtP|)))
@@ -49,10 +49,10 @@
            (|SparseUnivariatePolynomial| (|SparseUnivariatePolynomial| F))
            "failed")))
         (SPROG
-         ((|fft|
-           (|SparseUnivariatePolynomial| (|SparseUnivariatePolynomial| F)))
-          (|lc| (|SUEx|)) (|plc| (|SparseUnivariatePolynomial| F))
-          (#1=#:G32 NIL) (|retlc| (|Union| F "failed")) (|lclc| (|ExtF|)))
+         ((|lclc| (|ExtF|)) (|retlc| (|Union| F "failed")) (#1=#:G36 NIL)
+          (|plc| (|SparseUnivariatePolynomial| F)) (|lc| (|SUEx|))
+          (|fft|
+           (|SparseUnivariatePolynomial| (|SparseUnivariatePolynomial| F))))
          (SEQ
           (EXIT
            (SEQ (LETT |fft| (|spadConstant| % 28))
@@ -77,7 +77,7 @@
                                   ((QEQCAR |retlc| 1)
                                    (PROGN
                                     (LETT #1# (CONS 1 "failed"))
-                                    (GO #2=#:G31)))
+                                    (GO #2=#:G35)))
                                   ('T
                                    (SEQ
                                     (LETT |plc|
@@ -109,8 +109,8 @@
 
 (DEFUN |NormRetractPackage;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -132,9 +132,9 @@
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
-(DEFUN |NormRetractPackage| (&REST #1=#:G33)
+(DEFUN |NormRetractPackage| (&REST #1=#:G37)
   (SPROG NIL
-         (PROG (#2=#:G34)
+         (PROG (#2=#:G38)
            (RETURN
             (COND
              ((LETT #2#
@@ -156,13 +156,13 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|local| |#4|) (|local| |#5|)
               |NORMRETR;Frobenius;2ExtP;2| (|Boolean|) (|List| 9)
-              (0 . |member?|) |NORMRETR;normFactors;ExtPL;1| (6 . |Zero|)
+              (0 . |member?|) |NORMRETR;normFactors;ExtPL;1| (6 . |0|)
               (10 . ~=) (16 . |Frobenius|) (21 . |leadingCoefficient|)
               (|Mapping| 7 7) (26 . |map|) (|NonNegativeInteger|)
               (32 . |degree|) (37 . |monomial|) (43 . +) (49 . |reductum|)
-              (|SparseUnivariatePolynomial| 29) (54 . |Zero|)
-              (|SparseUnivariatePolynomial| 6) (58 . |Zero|) (62 . |Zero|)
-              (66 . ~=) (72 . |leadingCoefficient|) (|Union| 6 '"failed")
+              (|SparseUnivariatePolynomial| 29) (54 . |0|)
+              (|SparseUnivariatePolynomial| 6) (58 . |0|) (62 . |0|) (66 . ~=)
+              (72 . |leadingCoefficient|) (|Union| 6 '"failed")
               (77 . |retractIfCan|) (82 . |degree|) (87 . |monomial|) (93 . +)
               (99 . |reductum|) (104 . |monomial|) (110 . +)
               (|Union| 27 '"failed") |NORMRETR;retractIfCan;ExtPU;3|)

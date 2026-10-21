@@ -1,22 +1,22 @@
 
 (SDEFUN |NAALG-;plenaryPower;SPiS;1|
         ((|a| (S)) (|n| (|PositiveInteger|)) (% (S)))
-        (SPROG ((|n1| (|PositiveInteger|)) (#1=#:G11 NIL) (#2=#:G10 NIL))
+        (SPROG ((#1=#:G10 NIL) (#2=#:G11 NIL) (|n1| (|PositiveInteger|)))
                (SEQ
                 (COND ((EQL |n| 1) |a|)
                       ('T
                        (SEQ
                         (LETT |n1|
                               (PROG1
-                                  (LETT #1#
-                                        (PROG1 (LETT #2# (- |n| 1))
-                                          (|check_subtype2| (>= #2# 0)
+                                  (LETT #2#
+                                        (PROG1 (LETT #1# (- |n| 1))
+                                          (|check_subtype2| (>= #1# 0)
                                                             '(|NonNegativeInteger|)
-                                                            '(|Integer|) #2#)))
-                                (|check_subtype2| (> #1# 0)
+                                                            '(|Integer|) #1#)))
+                                (|check_subtype2| (> #2# 0)
                                                   '(|PositiveInteger|)
                                                   '(|NonNegativeInteger|)
-                                                  #1#)))
+                                                  #2#)))
                         (EXIT
                          (SPADCALL (SPADCALL |a| |n1| (QREFELT % 10))
                                    (SPADCALL |a| |n1| (QREFELT % 10))
@@ -25,7 +25,7 @@
 (DECLAIM (NOTINLINE |NonAssociativeAlgebra&;|)) 
 
 (DEFUN |NonAssociativeAlgebra&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -41,7 +41,7 @@
 
 (MAKEPROP '|NonAssociativeAlgebra&| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (0 . |One|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (0 . |1|)
               (|PositiveInteger|) (4 . |plenaryPower|) (10 . *)
               |NAALG-;plenaryPower;SPiS;1|)
            '#(|plenaryPower| 16) 'NIL

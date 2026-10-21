@@ -305,7 +305,8 @@
 ;   b:= parseTran b
 ;   b =>
 ;     null INTEGERP a =>
-;       (MOAN('"first arg ",a,'" for exit must be integer"); ['exit,1,a])
+;             bright_warn(['"first arg ", a, '" for exit must be integer"])
+;             ['exit, 1, a]
 ;     ['exit,a,:b]
 ;   ['exit,1,a]
 
@@ -322,7 +323,7 @@
         (COND
          ((NULL (INTEGERP |a|))
           (PROGN
-           (MOAN "first arg " |a| " for exit must be integer")
+           (|bright_warn| (LIST "first arg " |a| " for exit must be integer"))
            (LIST '|exit| 1 |a|)))
          (#1='T (CONS '|exit| (CONS |a| |b|)))))
        (#1# (LIST '|exit| 1 |a|)))))))

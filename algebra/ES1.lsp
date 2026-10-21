@@ -2,20 +2,20 @@
 (SDEFUN |ES1;map;MSKS;1|
         ((F2S (|Mapping| S F)) (|prop| (|Symbol|)) (|k| (|Kernel| F)) (% (S)))
         (SPROG
-         ((|p| (|Union| (|None|) "failed")) (|args| (|List| S)) (#1=#:G10 NIL)
-          (|x| NIL) (#2=#:G9 NIL))
+         ((#1=#:G12 NIL) (|x| NIL) (#2=#:G13 NIL) (|args| (|List| S))
+          (|p| (|Union| (|None|) "failed")))
          (SEQ
           (LETT |args|
                 (PROGN
-                 (LETT #2# NIL)
-                 (SEQ (LETT |x| NIL) (LETT #1# (SPADCALL |k| (QREFELT % 10)))
+                 (LETT #1# NIL)
+                 (SEQ (LETT |x| NIL) (LETT #2# (SPADCALL |k| (QREFELT % 10)))
                       G190
                       (COND
-                       ((OR (ATOM #1#) (PROGN (LETT |x| (CAR #1#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT |x| (CAR #2#)) NIL))
                         (GO G191)))
-                      (SEQ (EXIT (LETT #2# (CONS (SPADCALL |x| F2S) #2#))))
-                      (LETT #1# (CDR #1#)) (GO G190) G191
-                      (EXIT (NREVERSE #2#)))))
+                      (SEQ (EXIT (LETT #1# (CONS (SPADCALL |x| F2S) #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#)))))
           (LETT |p|
                 (SPADCALL (SPADCALL |k| (QREFELT % 12)) |prop| (QREFELT % 15)))
           (EXIT
@@ -25,7 +25,7 @@
 (DECLAIM (NOTINLINE |ExpressionSpaceFunctions1;|)) 
 
 (DEFUN |ExpressionSpaceFunctions1;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -41,9 +41,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |ExpressionSpaceFunctions1| (&REST #1=#:G11)
+(DEFUN |ExpressionSpaceFunctions1| (&REST #1=#:G14)
   (SPROG NIL
-         (PROG (#2=#:G12)
+         (PROG (#2=#:G15)
            (RETURN
             (COND
              ((LETT #2#

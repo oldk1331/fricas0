@@ -21,7 +21,7 @@
 (DECLAIM (NOTINLINE |AbelianGroup&;|)) 
 
 (DEFUN |AbelianGroup&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|AbelianGroup&| DV$1))
@@ -42,7 +42,7 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . -) (5 . +)
               |ABELGRP-;-;3S;1| (11 . -) (|Union| % '"failed")
               |ABELGRP-;subtractIfCan;2SU;2| (|Integer|) (17 . *)
-              (|NonNegativeInteger|) |ABELGRP-;*;Nni2S;3| (23 . |Zero|)
+              (|NonNegativeInteger|) |ABELGRP-;*;Nni2S;3| (23 . |0|)
               (|PositiveInteger|) (|RepeatedDoubling| 6) (27 . |double|)
               (33 . *) (|Boolean|) (39 . =) |ABELGRP-;opposite?;2SB;5|)
            '#(|subtractIfCan| 45 |opposite?| 51 - 57 * 63) 'NIL

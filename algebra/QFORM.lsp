@@ -5,7 +5,7 @@
           (|error| "quadraticForm requires a symmetric matrix"))
          ('T |m|))) 
 
-(PUT '|QFORM;matrix;%Sm;2| '|SPADreplace| '(XLAM (|q|) |q|)) 
+(MAKEPROP '|QFORM;matrix;%Sm;2| '|SPADreplace| '(XLAM (|q|) |q|)) 
 
 (SDEFUN |QFORM;matrix;%Sm;2| ((|q| (%)) (% (|SquareMatrix| |n| K))) |q|) 
 
@@ -15,7 +15,7 @@
                   (QREFELT % 15))) 
 
 (SDEFUN |QFORM;convert;%If;4| ((|q| (%)) (% (|InputForm|)))
-        (SPROG ((|qf| (|InputForm|)) (|mif| (|InputForm|)))
+        (SPROG ((|mif| (|InputForm|)) (|qf| (|InputForm|)))
                (SEQ
                 (LETT |mif|
                       (SPADCALL (SPADCALL |q| (QREFELT % 12)) (QREFELT % 18)))
@@ -27,7 +27,7 @@
 (DECLAIM (NOTINLINE |QuadraticForm;|)) 
 
 (DEFUN |QuadraticForm;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT DV$2 (|devaluate| |#2|))
@@ -86,24 +86,25 @@
               (|NonNegativeInteger|) (|Union| % '"failed") (|Integer|))
            '#(~= 42 |zero?| 48 |subtractIfCan| 53 |sample| 59 |quadraticForm|
               63 |opposite?| 68 |matrix| 74 |latex| 79 |elt| 84 |convert| 90
-              |coerce| 95 |Zero| 100 = 104 - 110 + 121 * 127)
+              |coerce| 95 = 100 |0| 106 - 110 + 121 * 127)
            'NIL
-           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 1 0 0))
+           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 1 0 0))
                  (CONS
-                  '#(|AbelianGroup&| NIL |AbelianMonoid&| |AbelianSemiGroup&|
-                     |SetCategory&| NIL NIL |BasicType&|)
+                  '#(|AbelianGroup&| NIL |AbelianMonoid&| |SetWithZero&|
+                     |AbelianSemiGroup&| |SetCategory&| NIL NIL |BasicType&|)
                   (CONS
                    '#((|AbelianGroup|) (|CancellationAbelianMonoid|)
-                      (|AbelianMonoid|) (|AbelianSemiGroup|) (|SetCategory|)
-                      (|ConvertibleTo| 17) (|CoercibleTo| 26) (|BasicType|))
+                      (|AbelianMonoid|) (|SetWithZero|) (|AbelianSemiGroup|)
+                      (|SetCategory|) (|ConvertibleTo| 17) (|CoercibleTo| 26)
+                      (|BasicType|))
                    (|makeByteWordVec2| 31
                                        '(1 8 9 0 10 2 8 13 0 13 14 2 13 7 0 0
                                          15 1 5 17 0 18 1 20 0 19 21 1 17 0 20
                                          22 1 17 0 23 24 1 0 17 0 25 2 0 9 0 0
                                          1 1 0 9 0 1 2 0 30 0 0 1 0 0 0 1 1 0 0
                                          5 11 2 0 9 0 0 1 1 0 5 0 12 1 0 27 0 1
-                                         2 0 7 0 13 16 1 1 17 0 25 1 0 26 0 1 0
-                                         0 0 1 2 0 9 0 0 1 1 0 0 0 1 2 0 0 0 0
+                                         2 0 7 0 13 16 1 1 17 0 25 1 0 26 0 1 2
+                                         0 9 0 0 1 0 0 0 1 1 0 0 0 1 2 0 0 0 0
                                          1 2 0 0 0 0 1 2 0 0 28 0 1 2 0 0 29 0
                                          1 2 0 0 31 0 1)))))
            '|lookupComplete|)) 

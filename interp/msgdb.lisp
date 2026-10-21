@@ -131,79 +131,6 @@
            (#1# (SETQ |k| (+ |k| 1)))))))
       (LIST (SUBSEQ |l| |k0| |k|) (+ |k| 1))))))
 
-; DEFPARAMETER($msg_hash, nil)
-
-(DEFPARAMETER |$msg_hash| NIL)
-
-; cacheKeyedMsg1(in_file) ==
-;     key := nil
-;     line := '""
-;     msg := '""
-;     repeat
-;         line := READ_-LINE(in_file, nil, nil)
-;         null(line) =>
-;             if key then HPUT($msg_hash, key, msg)
-;             -- THROW('DONE, nil)
-;             return nil
-;         #line = 0 => "iterate"
-;         line.0 = char('"S") =>
-;             if key then HPUT($msg_hash, key, msg)
-;             key := INTERN(line, "BOOT")
-;             msg := '""
-;         msg := CONCAT(msg, line)
-
-(DEFUN |cacheKeyedMsg1| (|in_file|)
-  (PROG (|key| |line| |msg|)
-    (RETURN
-     (PROGN
-      (SETQ |key| NIL)
-      (SETQ |line| "")
-      (SETQ |msg| "")
-      ((LAMBDA ()
-         (LOOP
-          (COND (NIL (RETURN NIL))
-                (#1='T
-                 (PROGN
-                  (SETQ |line| (READ-LINE |in_file| NIL NIL))
-                  (COND
-                   ((NULL |line|)
-                    (PROGN
-                     (COND (|key| (HPUT |$msg_hash| |key| |msg|)))
-                     (RETURN NIL)))
-                   ((EQL (LENGTH |line|) 0) '|iterate|)
-                   ((EQUAL (ELT |line| 0) (|char| "S"))
-                    (PROGN
-                     (COND (|key| (HPUT |$msg_hash| |key| |msg|)))
-                     (SETQ |key| (INTERN |line| 'BOOT))
-                     (SETQ |msg| "")))
-                   (#1# (SETQ |msg| (CONCAT |msg| |line|))))))))))))))
-
-; cacheKeyedMsg(db_name) ==
-;     CATCH('DONE, handle_input_file(db_name, function cacheKeyedMsg1, []))
-
-(DEFUN |cacheKeyedMsg| (|db_name|)
-  (PROG ()
-    (RETURN
-     (CATCH 'DONE (|handle_input_file| |db_name| #'|cacheKeyedMsg1| NIL)))))
-
-; getKeyedMsg(key) ==
-;     STRINGP(key) => key
-;     if not($msg_hash) then
-;         $msg_hash := MAKE_HASHTABLE('EQ)
-;         cacheKeyedMsg($defaultMsgDatabaseName)
-;     HGET($msg_hash, key)
-
-(DEFUN |getKeyedMsg| (|key|)
-  (PROG ()
-    (RETURN
-     (COND ((STRINGP |key|) |key|)
-           ('T
-            (PROGN
-             (COND
-              ((NULL |$msg_hash|) (SETQ |$msg_hash| (MAKE_HASHTABLE 'EQ))
-               (|cacheKeyedMsg| |$defaultMsgDatabaseName|)))
-             (HGET |$msg_hash| |key|)))))))
-
 ; segmentKeyedMsg(msg) == string2Words msg
 
 (DEFUN |segmentKeyedMsg| (|msg|) (PROG () (RETURN (|string2Words| |msg|))))
@@ -322,8 +249,7 @@
 ;     n := STRINGLENGTH x
 ;
 ;     -- x requires parameter substitution
-;     (x.0 = char "%") and (n > 1) and (DIGITP x.1) =>
-;       a := DIG2FIX x.1
+;     (x.0 = char "%") and (n > 1) and (a := char_to_digit(x.1)) =>
 ;       arg :=
 ;         a <= nargs => args.(a-1)
 ;         '"???"
@@ -388,9 +314,8 @@
                (SETQ |n| (STRINGLENGTH |x|))
                (COND
                 ((AND (EQUAL (ELT |x| 0) (|char| '%)) (< 1 |n|)
-                      (DIGITP (ELT |x| 1)))
+                      (SETQ |a| (|char_to_digit| (ELT |x| 1))))
                  (PROGN
-                  (SETQ |a| (DIG2FIX (ELT |x| 1)))
                   (SETQ |arg|
                           (COND ((NOT (< |nargs| |a|)) (ELT |args| (- |a| 1)))
                                 (#1# "???")))
@@ -556,7 +481,7 @@
 ; noBlankBeforeP word==
 ;     INTEGERP word => false
 ;     word in $msgdbNoBlanksBeforeGroup => true
-;     if STRINGP word and SIZE word > 1 then
+;     if STRINGP(word) and #word > 1 then
 ;        word.0 = char '% and word.1 = char 'x => return true
 ;        word.0 = char " " => return true
 ;     (PAIRP word) and (first word in $msgdbListPrims) => true
@@ -570,7 +495,7 @@
            (#1='T
             (PROGN
              (COND
-              ((AND (STRINGP |word|) (< 1 (SIZE |word|)))
+              ((AND (STRINGP |word|) (< 1 (LENGTH |word|)))
                (COND
                 ((AND (EQUAL (ELT |word| 0) (|char| '%))
                       (EQUAL (ELT |word| 1) (|char| '|x|)))
@@ -595,7 +520,7 @@
 ; noBlankAfterP word==
 ;     INTEGERP word => false
 ;     word in $msgdbNoBlanksAfterGroup => true
-;     if STRINGP word and (s := SIZE word) > 1 then
+;     if STRINGP(word) and (s := #word) > 1 then
 ;        word.0 = char '% and word.1 = char 'x => return true
 ;        word.(s-1) = char " " => return true
 ;     (PAIRP word) and (first word in $msgdbListPrims) => true
@@ -609,7 +534,7 @@
            (#1='T
             (PROGN
              (COND
-              ((AND (STRINGP |word|) (< 1 (SETQ |s| (SIZE |word|))))
+              ((AND (STRINGP |word|) (< 1 (SETQ |s| (LENGTH |word|))))
                (COND
                 ((AND (EQUAL (ELT |word| 0) (|char| '%))
                       (EQUAL (ELT |word| 1) (|char| '|x|)))
@@ -673,7 +598,7 @@
 ;   msg := segmentKeyedMsg msg
 ;   msg := substituteSegmentedMsg(msg,args)
 ;   sayMSG flowSegmentedMsg(msg,$LINELENGTH,3)
-;   ioHook("endPatternMsg", msg)
+;   ioHook("endOfPatternMsg", msg)
 
 (DEFUN |sayPatternMsg| (|msg| |args|)
   (PROG ()
@@ -683,7 +608,7 @@
       (SETQ |msg| (|segmentKeyedMsg| |msg|))
       (SETQ |msg| (|substituteSegmentedMsg| |msg| |args|))
       (|sayMSG| (|flowSegmentedMsg| |msg| $LINELENGTH 3))
-      (|ioHook| '|endPatternMsg| |msg|)))))
+      (|ioHook| '|endOfPatternMsg| |msg|)))))
 
 ; throwPatternMsg(key,args) ==
 ;   sayMSG '" "
@@ -713,11 +638,6 @@
       (|say_msg_local| |msg| |args|)
       (|ioHook| '|endOfKeyedMsg| |key|)))))
 
-; sayKeyedMsg(key, args) == say_msg(key, getKeyedMsg(key), args)
-
-(DEFUN |sayKeyedMsg| (|key| |args|)
-  (PROG () (RETURN (|say_msg| |key| (|getKeyedMsg| |key|) |args|))))
-
 ; say_msg_local(msg, args) ==
 ;   msg := segmentKeyedMsg msg
 ;   msg := substituteSegmentedMsg(msg,args)
@@ -740,13 +660,6 @@
 (DEFUN |throw_error_msg| (|kind| |key| |msg| |args|)
   (PROG () (RETURN (|throw_msg| |key| |msg| |args|))))
 
-; throwKeyedErrorMsg(kind, key, args) ==
-;     throw_error_msg(kind, key, getKeyedMsg(key), args)
-
-(DEFUN |throwKeyedErrorMsg| (|kind| |key| |args|)
-  (PROG ()
-    (RETURN (|throw_error_msg| |kind| |key| (|getKeyedMsg| |key|) |args|))))
-
 ; throw_msg_pos(key, msg, args, tree) ==
 ;     if tree and (sp := getSrcPos(tree)) then
 ;         sayMSG '" "
@@ -761,19 +674,6 @@
        ((AND |tree| (SETQ |sp| (|getSrcPos| |tree|))) (|sayMSG| " ")
         (|srcPosDisplay| |sp|)))
       (|throw_msg| |key| |msg| |args|)))))
-
-; throwKeyedMsgSP(key, args, atree) ==
-;     throw_msg_pos(key, getKeyedMsg(key), args, atree)
-
-(DEFUN |throwKeyedMsgSP| (|key| |args| |atree|)
-  (PROG ()
-    (RETURN (|throw_msg_pos| |key| (|getKeyedMsg| |key|) |args| |atree|))))
-
-; throwKeyedMsg(key, args) ==
-;     throw_msg(key, getKeyedMsg(key), args)
-
-(DEFUN |throwKeyedMsg| (|key| |args|)
-  (PROG () (RETURN (|throw_msg| |key| (|getKeyedMsg| |key|) |args|))))
 
 ; throw_msg(key, msg, args) ==
 ;     $noEvalTypeMsg => spadThrow()
@@ -793,27 +693,27 @@
              (|say_msg| |key| |msg| |args|)
              (|spadThrow|)))))))
 
-; throwListOfKeyedMsgs(descKey,descArgs,l) ==
-;   -- idea is that descKey and descArgs are the message describing
-;   -- what the list is about and l is a list of [key,args] messages
+; throw_msg_list(k1, msg1, arg1, l) ==
+;   -- idea is that k1, msg1 and arg1 are the message describing
+;   -- what the list is about and l is a list of [key, msg, args] messages
 ;   -- the messages in the list are numbered and should have a %1 as
 ;   -- the first token in the message text.
 ;   sayMSG '" "
 ;   if $testingSystem then sayMSG $testingErrorPrefix
-;   sayKeyedMsg(descKey,descArgs)
+;   say_msg(k1, msg1, arg1)
 ;   sayMSG '" "
-;   for [key,args] in l for i in 1.. repeat
+;   for [key, msg, args] in l for i in 1.. repeat
 ;     n := STRCONC(object2String i,'".")
-;     sayKeyedMsg(key,[n,:args])
+;     say_msg(key, msg, [n, :args])
 ;   spadThrow()
 
-(DEFUN |throwListOfKeyedMsgs| (|descKey| |descArgs| |l|)
-  (PROG (|key| |ISTMP#1| |args| |n|)
+(DEFUN |throw_msg_list| (|k1| |msg1| |arg1| |l|)
+  (PROG (|key| |ISTMP#1| |msg| |ISTMP#2| |args| |n|)
     (RETURN
      (PROGN
       (|sayMSG| " ")
       (COND (|$testingSystem| (|sayMSG| |$testingErrorPrefix|)))
-      (|sayKeyedMsg| |descKey| |descArgs|)
+      (|say_msg| |k1| |msg1| |arg1|)
       (|sayMSG| " ")
       ((LAMBDA (|bfVar#13| |bfVar#12| |i|)
          (LOOP
@@ -826,11 +726,15 @@
                  (PROGN
                   (SETQ |key| (CAR |bfVar#12|))
                   (SETQ |ISTMP#1| (CDR |bfVar#12|))
-                  (AND (CONSP |ISTMP#1|) (EQ (CDR |ISTMP#1|) NIL)
-                       (PROGN (SETQ |args| (CAR |ISTMP#1|)) #1#)))
+                  (AND (CONSP |ISTMP#1|)
+                       (PROGN
+                        (SETQ |msg| (CAR |ISTMP#1|))
+                        (SETQ |ISTMP#2| (CDR |ISTMP#1|))
+                        (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
+                             (PROGN (SETQ |args| (CAR |ISTMP#2|)) #1#)))))
                  (PROGN
                   (SETQ |n| (STRCONC (|object2String| |i|) "."))
-                  (|sayKeyedMsg| |key| (CONS |n| |args|))))))
+                  (|say_msg| |key| |msg| (CONS |n| |args|))))))
           (SETQ |bfVar#13| (CDR |bfVar#13|))
           (SETQ |i| (+ |i| 1))))
        |l| NIL 1)
@@ -858,11 +762,6 @@
       (|say_msg| 'S2GE0000 "Internal Error" NIL)
       (|break_msg| |key| |msg| |args|)))))
 
-; keyedSystemError(key, args) == system_error(key, getKeyedMsg(key), args)
-
-(DEFUN |keyedSystemError| (|key| |args|)
-  (PROG () (RETURN (|system_error| |key| (|getKeyedMsg| |key|) |args|))))
-
 ; systemErrorHere(fname) ==
 ;     system_error("S2GE0017",
 ;                  '"Unexpected error in call to system function %1b", [fname])
@@ -873,35 +772,37 @@
      (|system_error| 'S2GE0017
       "Unexpected error in call to system function %1b" (LIST |fname|)))))
 
-; queryUserKeyedMsg(key, args) == query_user_msg(key, getKeyedMsg(key), args)
+; unexpected_error(args) ==
+;     system_error("S2GE0016",
+;         '"Unexpected error or improper call to system function %1b: %2", args)
 
-(DEFUN |queryUserKeyedMsg| (|key| |args|)
-  (PROG () (RETURN (|query_user_msg| |key| (|getKeyedMsg| |key|) |args|))))
+(DEFUN |unexpected_error| (|args|)
+  (PROG ()
+    (RETURN
+     (|system_error| 'S2GE0016
+      "Unexpected error or improper call to system function %1b: %2" |args|))))
 
 ; query_user_msg(key, msg, args) ==
 ;   -- display message and return reply
-;   conStream := get_console_input()
+;   conStream := get_lisp_std_in()
 ;   say_msg(key, msg, args)
 ;   ioHook("startQueryUser")
 ;   ans := read_line conStream
 ;   ioHook("endOfQueryUser")
-;   ans
+;   ans := DOWNCASE(STRING_-TRIM('" ", ans))
+;   ans = '"y" or ans = '"yes"
 
 (DEFUN |query_user_msg| (|key| |msg| |args|)
   (PROG (|conStream| |ans|)
     (RETURN
      (PROGN
-      (SETQ |conStream| (|get_console_input|))
+      (SETQ |conStream| (|get_lisp_std_in|))
       (|say_msg| |key| |msg| |args|)
       (|ioHook| '|startQueryUser|)
       (SETQ |ans| (|read_line| |conStream|))
       (|ioHook| '|endOfQueryUser|)
-      |ans|))))
-
-; queryUserKeyedMsg(key, args) == query_user_msg(key, getKeyedMsg(key), args)
-
-(DEFUN |queryUserKeyedMsg| (|key| |args|)
-  (PROG () (RETURN (|query_user_msg| |key| (|getKeyedMsg| |key|) |args|))))
+      (SETQ |ans| (DOWNCASE (STRING-TRIM " " |ans|)))
+      (OR (EQUAL |ans| "y") (EQUAL |ans| "yes"))))))
 
 ; flowSegmentedMsg(msg, len, offset) ==
 ;   -- tries to break a sayBrightly-type input msg into multiple
@@ -1089,20 +990,7 @@
 (DEFUN |msg_comp_failure| (|key| |msg| |args|)
   (PROG () (RETURN (|msg_comp_failure1| |key| |msg| |args| NIL))))
 
-; keyedMsgCompFailure(key, args) ==
-;     msg_comp_failure(key, getKeyedMsg(key), args)
-
-(DEFUN |keyedMsgCompFailure| (|key| |args|)
-  (PROG () (RETURN (|msg_comp_failure| |key| (|getKeyedMsg| |key|) |args|))))
-
-; keyedMsgCompFailureSP(key, args, atree) ==
-;     msg_comp_failure1(key, getKeyedMsg(key), args, atree)
-
-(DEFUN |keyedMsgCompFailureSP| (|key| |args| |atree|)
-  (PROG ()
-    (RETURN (|msg_comp_failure1| |key| (|getKeyedMsg| |key|) |args| |atree|))))
-
-; throwKeyedMsgCannotCoerceWithValue(val,t1,t2) ==
+; throwMsgCannotCoerceWithValue(val,t1,t2) ==
 ;   val' :=
 ;      not($genValue) => nil
 ;      coerceInteractive(mkObj(val,t1),$OutputForm)
@@ -1114,7 +1002,7 @@
 ;             '"Cannot convert from type %1bp to %2bp for value %3m",
 ;             [t1, t2, val'])
 
-(DEFUN |throwKeyedMsgCannotCoerceWithValue| (|val| |t1| |t2|)
+(DEFUN |throwMsgCannotCoerceWithValue| (|val| |t1| |t2|)
   (PROG (|val'|)
     (RETURN
      (PROGN
@@ -1196,7 +1084,7 @@
 ;   say_msg("S2GL0018D",
 ;       '"Issue %b )summary %d for a summary of useful system commands.", nil)
 ;   say_msg("S2GL0003B",
-;       '"Issue %b )quit %d to leave FriCAS and return to %1 .", [$opSysName])
+;       '"Issue %b )quit %d to leave FriCAS and return to shell.", [])
 ;   sayMSG bar
 ;   sayMSG '" "
 
@@ -1218,8 +1106,7 @@
               "Issue %b )summary %d for a summary of useful system commands."
               NIL)
              (|say_msg| 'S2GL0003B
-              "Issue %b )quit %d to leave FriCAS and return to %1 ."
-              (LIST |$opSysName|))
+              "Issue %b )quit %d to leave FriCAS and return to shell." NIL)
              (|sayMSG| |bar|)
              (|sayMSG| " ")))))))
 
@@ -1471,8 +1358,8 @@
 ;     x := object2String x
 ;     wid := STRINGLENGTH x
 ;     if wid < $LINELENGTH then
-;       f := DIVIDE($LINELENGTH - wid,2)
-;       x := LIST(filler_spaces(f.0), x)
+;             f := quotient_INT($LINELENGTH - wid, 2)
+;             x := LIST(filler_spaces(f), x)
 ;     for y in x repeat
 ;         marg := brightPrint0(y, str, marg)
 ;     marg
@@ -1485,8 +1372,8 @@
 ;   y := NREVERSE y
 ;   wid := sayBrightlyLength y
 ;   if wid < $LINELENGTH then
-;     f := DIVIDE($LINELENGTH - wid,2)
-;     y := CONS(filler_spaces(f.0), y)
+;         f := quotient_INT($LINELENGTH - wid, 2)
+;         y := CONS(filler_spaces(f), y)
 ;   for z in y repeat
 ;       marg := brightPrint0(z, str, marg)
 ;   if x then
@@ -1503,8 +1390,9 @@
         (SETQ |x| (|object2String| |x|))
         (SETQ |wid| (STRINGLENGTH |x|))
         (COND
-         ((< |wid| $LINELENGTH) (SETQ |f| (DIVIDE (- $LINELENGTH |wid|) 2))
-          (SETQ |x| (LIST (|filler_spaces| (ELT |f| 0)) |x|))))
+         ((< |wid| $LINELENGTH)
+          (SETQ |f| (|quotient_INT| (- $LINELENGTH |wid|) 2))
+          (SETQ |x| (LIST (|filler_spaces| |f|) |x|))))
         ((LAMBDA (|bfVar#17| |y|)
            (LOOP
             (COND
@@ -1529,8 +1417,9 @@
         (SETQ |y| (NREVERSE |y|))
         (SETQ |wid| (|sayBrightlyLength| |y|))
         (COND
-         ((< |wid| $LINELENGTH) (SETQ |f| (DIVIDE (- $LINELENGTH |wid|) 2))
-          (SETQ |y| (CONS (|filler_spaces| (ELT |f| 0)) |y|))))
+         ((< |wid| $LINELENGTH)
+          (SETQ |f| (|quotient_INT| (- $LINELENGTH |wid|) 2))
+          (SETQ |y| (CONS (|filler_spaces| |f|) |y|))))
         ((LAMBDA (|bfVar#18| |z|)
            (LOOP
             (COND
@@ -1643,7 +1532,7 @@
 ;     1
 ;   member(x,'("%l" %l)) => 0
 ;   STRINGP x and STRINGLENGTH x > 2 and x.0 = char "%" and x.1 = char "x" =>
-;       DIGITP(x.2)
+;         char_to_digit(x.2)
 ;   STRINGP x => STRINGLENGTH x
 ;   IDENTP x => STRINGLENGTH PNAME x
 ;   -- following line helps find certain bugs that slip through
@@ -1661,7 +1550,7 @@
       ((|member| |x| '("%l" |%l|)) 0)
       ((AND (STRINGP |x|) (< 2 (STRINGLENGTH |x|))
             (EQUAL (ELT |x| 0) (|char| '%)) (EQUAL (ELT |x| 1) (|char| '|x|)))
-       (DIGITP (ELT |x| 2)))
+       (|char_to_digit| (ELT |x| 2)))
       ((STRINGP |x|) (STRINGLENGTH |x|))
       ((IDENTP |x|) (STRINGLENGTH (PNAME |x|)))
       ((VECP |x|) (STRINGLENGTH "UNPRINTABLE"))
@@ -1671,20 +1560,20 @@
 ; sayAsManyPerLineAsPossible l ==
 ;   -- it is assumed that l is a list of strings
 ;   l := [atom2String a for a in l]
-;   m := 1 + "MAX"/[SIZE(a) for a in l]
+;   m := 1 + "MAX"/[#a for a in l]
 ;   -- w will be the field width in which we will display the elements
 ;   m > $LINELENGTH =>
 ;     for a in l repeat sayMSG a
 ;     NIL
 ;   w := MIN(m + 3,$LINELENGTH)
 ;   -- p is the number of elements per line
-;   p := QUOTIENT($LINELENGTH,w)
+;   p := quotient_INT($LINELENGTH, w)
 ;   n := # l
 ;   str := '""
 ;   for i in 0..(n-1) repeat
 ;     [c,:l] := l
 ;     str := STRCONC(str,c,filler_spaces(w - #c))
-;     REMAINDER(i+1,p) = 0 => (sayMSG str ; str := '"" )
+;     REM(i + 1, p) = 0 => (sayMSG(str); str := '"" )
 ;   if str ~= '"" then sayMSG str
 ;   NIL
 
@@ -1711,7 +1600,7 @@
                       ((OR (ATOM |bfVar#23|)
                            (PROGN (SETQ |a| (CAR |bfVar#23|)) NIL))
                        (RETURN |bfVar#24|))
-                      (#1# (SETQ |bfVar#24| (MAX |bfVar#24| (SIZE |a|)))))
+                      (#1# (SETQ |bfVar#24| (MAX |bfVar#24| (LENGTH |a|)))))
                      (SETQ |bfVar#23| (CDR |bfVar#23|))))
                   -999999 |l| NIL)))
       (COND
@@ -1729,7 +1618,7 @@
        (#1#
         (PROGN
          (SETQ |w| (MIN (+ |m| 3) $LINELENGTH))
-         (SETQ |p| (QUOTIENT $LINELENGTH |w|))
+         (SETQ |p| (|quotient_INT| $LINELENGTH |w|))
          (SETQ |n| (LENGTH |l|))
          (SETQ |str| "")
          ((LAMBDA (|bfVar#26| |i|)
@@ -1744,17 +1633,17 @@
                              (STRCONC |str| |c|
                               (|filler_spaces| (- |w| (LENGTH |c|)))))
                      (COND
-                      ((EQL (REMAINDER (+ |i| 1) |p|) 0)
+                      ((EQL (REM (+ |i| 1) |p|) 0)
                        (PROGN (|sayMSG| |str|) (SETQ |str| "")))))))
              (SETQ |i| (+ |i| 1))))
           (- |n| 1) 0)
          (COND ((NOT (EQUAL |str| "")) (|sayMSG| |str|)))
          NIL)))))))
 
-; say2PerLine l == say2PerLineWidth(l, QUOTIENT($LINELENGTH, 2))
+; say2PerLine l == say2PerLineWidth(l, quotient_INT($LINELENGTH, 2))
 
 (DEFUN |say2PerLine| (|l|)
-  (PROG () (RETURN (|say2PerLineWidth| |l| (QUOTIENT $LINELENGTH 2)))))
+  (PROG () (RETURN (|say2PerLineWidth| |l| (|quotient_INT| $LINELENGTH 2)))))
 
 ; say2PerLineWidth(l,n) ==
 ;   [short,long] := say2Split(l,nil,nil,n)
@@ -1801,7 +1690,7 @@
 ; sayLongOperation x ==
 ;   sayWidth x > $LINELENGTH and (splitListOn(x,"if") is [front,back]) =>
 ;     sayBrightly front
-;     BLANKS(6 + #(PNAME front.1), get_lisp_std_out())
+;     BLANKS(6 + #PNAME(front.1), get_lisp_std_out())
 ;     sayBrightly back
 ;   sayBrightly x
 
@@ -1852,7 +1741,7 @@
 ;   while l repeat
 ;     sayBrightlyNT first l
 ;     sayBrightlyNT
-;       filler_spaces((QUOTIENT($LINELENGTH, 2) - sayDisplayWidth first l))
+;       filler_spaces((quotient_INT($LINELENGTH, 2) - sayDisplayWidth first l))
 ;     (l:= rest l) =>
 ;       sayBrightlyNT first l
 ;       l:= rest l
@@ -1870,7 +1759,8 @@
                  (|sayBrightlyNT| (CAR |l|))
                  (|sayBrightlyNT|
                   (|filler_spaces|
-                   (- (QUOTIENT $LINELENGTH 2) (|sayDisplayWidth| (CAR |l|)))))
+                   (- (|quotient_INT| $LINELENGTH 2)
+                      (|sayDisplayWidth| (CAR |l|)))))
                  (COND
                   ((SETQ |l| (CDR |l|))
                    (PROGN
@@ -1938,7 +1828,7 @@
 ;     ppPair(abb,name)
 ;     if canFit2ndEntry(name,al) then
 ;       [[abb,:name],:al]:= al
-;       TAB (QUOTIENT($LINELENGTH, 2))
+;       TAB(quotient_INT($LINELENGTH, 2))
 ;       ppPair(abb,name)
 ;     sayNewLine()
 ;   nil
@@ -1961,7 +1851,8 @@
                    ((|canFit2ndEntry| |name| |al|) (SETQ |LETTMP#1| |al|)
                     (SETQ |abb| (CAAR . #2=(|LETTMP#1|)))
                     (SETQ |name| (CDAR . #2#)) (SETQ |al| (CDR |LETTMP#1|))
-                    (TAB (QUOTIENT $LINELENGTH 2)) (|ppPair| |abb| |name|)))
+                    (TAB (|quotient_INT| $LINELENGTH 2))
+                    (|ppPair| |abb| |name|)))
                   (|sayNewLine|)))))))
       NIL))))
 
@@ -1977,7 +1868,7 @@
                     (CONS |name| NIL)))))))
 
 ; canFit2ndEntry(name,al) ==
-;   wid := QUOTIENT($LINELENGTH, 2) - 10
+;   wid := quotient_INT($LINELENGTH, 2) - 10
 ;   null al => nil
 ;   entryWidth name > wid => nil
 ;   entryWidth CDAR al > wid => nil
@@ -1987,7 +1878,7 @@
   (PROG (|wid|)
     (RETURN
      (PROGN
-      (SETQ |wid| (- (QUOTIENT $LINELENGTH 2) 10))
+      (SETQ |wid| (- (|quotient_INT| $LINELENGTH 2) 10))
       (COND ((NULL |al|) NIL) ((< |wid| (|entryWidth| |name|)) NIL)
             ((< |wid| (|entryWidth| (CDAR |al|))) NIL) ('T 'T))))))
 
@@ -2005,16 +1896,16 @@
 ;   fillchar := IFCAR IFCDR argList or '" "
 ;   wid := entryWidth text + 2
 ;   wid >= width - 2 => sayBrightly ['%b,text,'%d]
-;   f := DIVIDE(width - wid - 2,2)
+;   [q, :r] := divide_INT(width - wid - 2, 2)
 ;   fill1 := '""
-;   for i in 1..(f.0) repeat
+;   for i in 1..q repeat
 ;     fill1 := STRCONC(fillchar,fill1)
-;   if f.1 = 0 then fill2 := fill1 else fill2 := STRCONC(fillchar,fill1)
+;   if r = 0 then fill2 := fill1 else fill2 := STRCONC(fillchar, fill1)
 ;   sayBrightly [fill1,'%b,text,'%d,fill2]
 ;   nil
 
 (DEFUN |centerAndHighlight| (|text| &REST |argList|)
-  (PROG (|width| |fillchar| |wid| |f| |fill1| |fill2|)
+  (PROG (|width| |fillchar| |wid| |LETTMP#1| |q| |r| |fill1| |fill2|)
     (RETURN
      (PROGN
       (SETQ |width| (OR (IFCAR |argList|) $LINELENGTH))
@@ -2025,15 +1916,17 @@
         (|sayBrightly| (LIST '|%b| |text| '|%d|)))
        (#1='T
         (PROGN
-         (SETQ |f| (DIVIDE (- (- |width| |wid|) 2) 2))
+         (SETQ |LETTMP#1| (|divide_INT| (- (- |width| |wid|) 2) 2))
+         (SETQ |q| (CAR |LETTMP#1|))
+         (SETQ |r| (CDR |LETTMP#1|))
          (SETQ |fill1| "")
-         ((LAMBDA (|bfVar#32| |i|)
+         ((LAMBDA (|i|)
             (LOOP
-             (COND ((> |i| |bfVar#32|) (RETURN NIL))
+             (COND ((> |i| |q|) (RETURN NIL))
                    (#1# (SETQ |fill1| (STRCONC |fillchar| |fill1|))))
              (SETQ |i| (+ |i| 1))))
-          (ELT |f| 0) 1)
-         (COND ((EQL (ELT |f| 1) 0) (SETQ |fill2| |fill1|))
+          1)
+         (COND ((EQL |r| 0) (SETQ |fill2| |fill1|))
                (#1# (SETQ |fill2| (STRCONC |fillchar| |fill1|))))
          (|sayBrightly| (LIST |fill1| '|%b| |text| '|%d| |fill2|))
          NIL)))))))
@@ -2049,15 +1942,16 @@
 ;   if (u:= splitSayBrightlyArgument text) then [text,:moreLines]:= u
 ;   wid := sayBrightlyLength text
 ;   wid >= width - 2 => sayBrightly text
-;   f := DIVIDE(width - wid - 2,2)
+;   [q, :r] := divide_INT(width - wid - 2, 2)
 ;   fill1 := '""
-;   for i in 1..(f.0) repeat
+;   for i in 1..q repeat
 ;     fill1 := STRCONC(fillchar,fill1)
-;   if f.1 = 0 then fill2 := fill1 else fill2 := STRCONC(fillchar,fill1)
+;   if r = 0 then fill2 := fill1 else fill2 := STRCONC(fillchar, fill1)
 ;   concat(fill1,text,fill2)
 
 (DEFUN |center| (|text| |argList|)
-  (PROG (|width| |fillchar| |u| |moreLines| |wid| |f| |fill1| |fill2|)
+  (PROG (|width| |fillchar| |u| |moreLines| |wid| |LETTMP#1| |q| |r| |fill1|
+         |fill2|)
     (RETURN
      (PROGN
       (SETQ |width| (OR (IFCAR |argList|) $LINELENGTH))
@@ -2069,15 +1963,17 @@
       (COND ((NOT (< |wid| (- |width| 2))) (|sayBrightly| |text|))
             (#1='T
              (PROGN
-              (SETQ |f| (DIVIDE (- (- |width| |wid|) 2) 2))
+              (SETQ |LETTMP#1| (|divide_INT| (- (- |width| |wid|) 2) 2))
+              (SETQ |q| (CAR |LETTMP#1|))
+              (SETQ |r| (CDR |LETTMP#1|))
               (SETQ |fill1| "")
-              ((LAMBDA (|bfVar#33| |i|)
+              ((LAMBDA (|i|)
                  (LOOP
-                  (COND ((> |i| |bfVar#33|) (RETURN NIL))
+                  (COND ((> |i| |q|) (RETURN NIL))
                         (#1# (SETQ |fill1| (STRCONC |fillchar| |fill1|))))
                   (SETQ |i| (+ |i| 1))))
-               (ELT |f| 0) 1)
-              (COND ((EQL (ELT |f| 1) 0) (SETQ |fill2| |fill1|))
+               1)
+              (COND ((EQL |r| 0) (SETQ |fill2| |fill1|))
                     (#1# (SETQ |fill2| (STRCONC |fillchar| |fill1|))))
               (|concat| |fill1| |text| |fill2|))))))))
 
@@ -2260,14 +2156,14 @@
         (T
          (COND ((ATOM |x|) (|sayString| |x| |str|))
                (#1='T
-                ((LAMBDA (|bfVar#34| |y|)
+                ((LAMBDA (|bfVar#32| |y|)
                    (LOOP
                     (COND
-                     ((OR (ATOM |bfVar#34|)
-                          (PROGN (SETQ |y| (CAR |bfVar#34|)) NIL))
+                     ((OR (ATOM |bfVar#32|)
+                          (PROGN (SETQ |y| (CAR |bfVar#32|)) NIL))
                       (RETURN NIL))
                      (#1# (|sayString| |y| |str|)))
-                    (SETQ |bfVar#34| (CDR |bfVar#34|))))
+                    (SETQ |bfVar#32| (CDR |bfVar#32|))))
                  |x| NIL)))))
        (TERPRI |str|))))))
 
@@ -2314,7 +2210,7 @@
 ;     file := make_filename2('"spadmsg", '"listing")
 ;     str := MAKE_OUTSTREAM(file)
 ;     sayBrightly1(msg, str)
-;     SHUT(str)
+;     CLOSE(str)
 
 (DEFUN |sayMSG2File| (|msg|)
   (PROG (|file| |str|)
@@ -2323,7 +2219,7 @@
       (SETQ |file| (|make_filename2| "spadmsg" "listing"))
       (SETQ |str| (MAKE_OUTSTREAM |file|))
       (|sayBrightly1| |msg| |str|)
-      (SHUT |str|)))))
+      (CLOSE |str|)))))
 
 ; $htSpecialChars := ['"_#", '"[", '"]", '"%", '"{", '"}", '"_\",
 ;                     '"$", '"&", '"^", '"__", '"_~"]

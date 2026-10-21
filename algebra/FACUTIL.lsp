@@ -43,30 +43,30 @@
         ((|f| (|SparseUnivariatePolynomial| P)) (|lvar| (|List| OV))
          (% #1=(|List| (|NonNegativeInteger|))))
         (SPROG
-         ((|ldeg| #1#) (#2=#:G11 NIL) (#3=#:G10 #4=(|NonNegativeInteger|))
-          (#5=#:G12 #4#) (#6=#:G18 NIL) (|fc| NIL) (#7=#:G17 NIL) (|xx| NIL)
-          (#8=#:G16 NIL) (|coefs| (|List| P)))
+         ((|coefs| (|List| P)) (#2=#:G16 NIL) (|xx| NIL) (#3=#:G17 NIL)
+          (|fc| NIL) (#4=#:G18 NIL) (#5=#:G12 #6=(|NonNegativeInteger|))
+          (#7=#:G10 #6#) (#8=#:G11 NIL) (|ldeg| #1#))
          (SEQ (LETT |coefs| (SPADCALL |f| (QREFELT % 37)))
               (EXIT
                (LETT |ldeg|
                      (PROGN
-                      (LETT #8# NIL)
-                      (SEQ (LETT |xx| NIL) (LETT #7# |lvar|) G190
+                      (LETT #2# NIL)
+                      (SEQ (LETT |xx| NIL) (LETT #3# |lvar|) G190
                            (COND
-                            ((OR (ATOM #7#) (PROGN (LETT |xx| (CAR #7#)) NIL))
+                            ((OR (ATOM #3#) (PROGN (LETT |xx| (CAR #3#)) NIL))
                              (GO G191)))
                            (SEQ
                             (EXIT
-                             (LETT #8#
+                             (LETT #2#
                                    (CONS
                                     (PROGN
-                                     (LETT #2# NIL)
-                                     (SEQ (LETT |fc| NIL) (LETT #6# |coefs|)
+                                     (LETT #8# NIL)
+                                     (SEQ (LETT |fc| NIL) (LETT #4# |coefs|)
                                           G190
                                           (COND
-                                           ((OR (ATOM #6#)
+                                           ((OR (ATOM #4#)
                                                 (PROGN
-                                                 (LETT |fc| (CAR #6#))
+                                                 (LETT |fc| (CAR #4#))
                                                  NIL))
                                             (GO G191)))
                                           (SEQ
@@ -76,38 +76,38 @@
                                                    (SPADCALL |fc| |xx|
                                                              (QREFELT % 38)))
                                              (COND
-                                              (#2# (LETT #3# (MAX #3# #5#)))
+                                              (#8# (LETT #7# (MAX #7# #5#)))
                                               ('T
                                                (PROGN
-                                                (LETT #3# #5#)
-                                                (LETT #2# 'T)))))))
-                                          (LETT #6# (CDR #6#)) (GO G190) G191
+                                                (LETT #7# #5#)
+                                                (LETT #8# 'T)))))))
+                                          (LETT #4# (CDR #4#)) (GO G190) G191
                                           (EXIT NIL))
-                                     (COND (#2# #3#)
+                                     (COND (#8# #7#)
                                            ('T (|IdentityError| '|max|))))
-                                    #8#))))
-                           (LETT #7# (CDR #7#)) (GO G190) G191
-                           (EXIT (NREVERSE #8#))))))))) 
+                                    #2#))))
+                           (LETT #3# (CDR #3#)) (GO G190) G191
+                           (EXIT (NREVERSE #2#))))))))) 
 
 (SDEFUN |FACUTIL;variables;SupL;5|
         ((|f| (|SparseUnivariatePolynomial| P)) (% (|List| OV)))
         (SPROG
-         ((#1=#:G20 NIL) (#2=#:G19 #3=(|List| OV)) (#4=#:G21 #3#)
-          (#5=#:G23 NIL) (|cf| NIL))
+         ((|cf| NIL) (#1=#:G23 NIL) (#2=#:G21 #3=(|List| OV)) (#4=#:G19 #3#)
+          (#5=#:G20 NIL))
          (SEQ
           (PROGN
-           (LETT #1# NIL)
-           (SEQ (LETT |cf| NIL) (LETT #5# (SPADCALL |f| (QREFELT % 37))) G190
+           (LETT #5# NIL)
+           (SEQ (LETT |cf| NIL) (LETT #1# (SPADCALL |f| (QREFELT % 37))) G190
                 (COND
-                 ((OR (ATOM #5#) (PROGN (LETT |cf| (CAR #5#)) NIL)) (GO G191)))
+                 ((OR (ATOM #1#) (PROGN (LETT |cf| (CAR #1#)) NIL)) (GO G191)))
                 (SEQ
                  (EXIT
                   (PROGN
-                   (LETT #4# (SPADCALL |cf| (QREFELT % 41)))
-                   (COND (#1# (LETT #2# (SPADCALL #2# #4# (QREFELT % 42))))
-                         ('T (PROGN (LETT #2# #4#) (LETT #1# 'T)))))))
-                (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
-           (COND (#1# #2#) ('T (|IdentityError| '|setUnion|))))))) 
+                   (LETT #2# (SPADCALL |cf| (QREFELT % 41)))
+                   (COND (#5# (LETT #4# (SPADCALL #4# #2# (QREFELT % 42))))
+                         ('T (PROGN (LETT #4# #2#) (LETT #5# 'T)))))))
+                (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+           (COND (#5# #4#) ('T (|IdentityError| '|setUnion|))))))) 
 
 (SDEFUN |FACUTIL;ran;IR;6| ((|k| (|Integer|)) (% (R)))
         (SPADCALL (QREFELT % 44))) 
@@ -119,9 +119,9 @@
         ((|f| (|SparseUnivariatePolynomial| P)) (|m| (|Integer|))
          (% (|SparseUnivariatePolynomial| P)))
         (SPROG
-         ((|n| #1=(|Integer|)) (|ris| (|SparseUnivariatePolynomial| P))
-          (#2=#:G30 NIL) (|n1| #1#) (|k| (|Integer|))
-          (|#G1| (|NonNegativeInteger|)))
+         ((|#G1| (|NonNegativeInteger|)) (|k| (|Integer|))
+          (|n1| #1=(|Integer|)) (#2=#:G30 NIL)
+          (|ris| (|SparseUnivariatePolynomial| P)) (|n| #1#))
          (SEQ (LETT |#G1| (SPADCALL |f| (QREFELT % 18))) (LETT |n1| |#G1|)
               (EXIT
                (COND ((< |#G1| |m|) (|spadConstant| % 24))
@@ -136,8 +136,8 @@
                                       (COND ((NULL (> |n1| |n|)) (GO G191)))
                                       (SEQ
                                        (LETT |k|
-                                             (QUOTIENT2 (* |k| (- |n1| |m|))
-                                                        |n1|))
+                                             (|quotient_INT|
+                                              (* |k| (- |n1| |m|)) |n1|))
                                        (EXIT (LETT |n1| (- |n1| 1))))
                                       NIL (GO G190) G191 (EXIT NIL))
                                  (LETT |ris|
@@ -165,8 +165,8 @@
 
 (DEFUN |FactoringUtilities;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -214,11 +214,11 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|local| |#4|) (|Boolean|)
               (|SparseUnivariatePolynomial| 9) (0 . |zero?|)
-              (|SparseUnivariatePolynomial| 8) (5 . |Zero|)
+              (|SparseUnivariatePolynomial| 8) (5 . |0|)
               (9 . |leadingCoefficient|) (14 . |ground|) (|NonNegativeInteger|)
               (19 . |degree|) (24 . |monomial|) (30 . |reductum|)
               |FACUTIL;lowerPolynomial;SupSup;1| (35 . +) (41 . |zero?|)
-              (46 . |Zero|) (50 . |leadingCoefficient|) (55 . |coerce|)
+              (46 . |0|) (50 . |leadingCoefficient|) (55 . |coerce|)
               (60 . |degree|) (65 . |monomial|) (71 . |reductum|)
               |FACUTIL;raisePolynomial;SupSup;2| (76 . +) (|List| 7) (|List| 8)
               (82 . |eval|) |FACUTIL;completeEval;SupLLSup;3| (|List| 9)
@@ -226,7 +226,7 @@
               |FACUTIL;degree;SupLL;4| (100 . |variables|) (105 . |setUnion|)
               |FACUTIL;variables;SupL;5| (111 . |random|) (|Integer|)
               (115 . |ran|) (120 . |coerce|) (125 . |coerce|)
-              (130 . |binomial|) (136 . |One|) (140 . |One|) (144 . *)
+              (130 . |binomial|) (136 . |1|) (140 . |1|) (144 . *)
               |FACUTIL;normalDeriv;SupISup;8|)
            '#(|variables| 150 |ran| 155 |raisePolynomial| 160 |normalDeriv| 165
               |lowerPolynomial| 171 |degree| 176 |completeEval| 182)

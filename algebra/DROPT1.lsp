@@ -12,7 +12,7 @@
 (DECLAIM (NOTINLINE |DrawOptionFunctions1;|)) 
 
 (DEFUN |DrawOptionFunctions1;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|DrawOptionFunctions1| DV$1))
@@ -26,9 +26,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |DrawOptionFunctions1| (#1=#:G11)
+(DEFUN |DrawOptionFunctions1| (#1=#:G14)
   (SPROG NIL
-         (PROG (#2=#:G12)
+         (PROG (#2=#:G15)
            (RETURN
             (COND
              ((LETT #2#

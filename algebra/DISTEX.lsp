@@ -48,8 +48,8 @@
 
 (SDEFUN |DISTEX;arcsineDistribution;RD;6| ((|a| (R)) (% (|Distribution| R)))
         (SPROG
-         ((|mgf| (|Stream| R)) (#1=#:G11 NIL)
-          (|half| (|Fraction| (|Integer|))))
+         ((|half| (|Fraction| (|Integer|))) (#1=#:G14 NIL)
+          (|mgf| (|Stream| R)))
          (SEQ
           (LETT |mgf|
                 (SPADCALL
@@ -77,7 +77,7 @@
 (DECLAIM (NOTINLINE |DistributionPackage;|)) 
 
 (DEFUN |DistributionPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|DistributionPackage| DV$1))
@@ -105,9 +105,9 @@
                         %)))))
           %))) 
 
-(DEFUN |DistributionPackage| (#1=#:G15)
+(DEFUN |DistributionPackage| (#1=#:G18)
   (SPROG NIL
-         (PROG (#2=#:G16)
+         (PROG (#2=#:G19)
            (RETURN
             (COND
              ((LETT #2#
@@ -124,8 +124,8 @@
 
 (MAKEPROP '|DistributionPackage| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |Zero|) (|List| 6)
-              (|Stream| 6) (4 . |construct|) (|Distribution| 6) (9 . |Zero|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |0|) (|List| 6)
+              (|Stream| 6) (4 . |construct|) (|Distribution| 6) (9 . |0|)
               (13 . |repeating|) (18 . |concat|) (|Sequence| 6)
               (24 . |sequence|) (29 . |distributionByClassicalCumulants|)
               |DISTEX;gaussianDistribution;RD;1|
@@ -135,7 +135,7 @@
               |DISTEX;freePoissonDistribution;RD;4|
               (39 . |distributionByMoments|)
               |DISTEX;bernoulliDistribution01;RD;5| (|Integer|) (44 . |coerce|)
-              (49 . *) (55 . -) (60 . |cons|) (66 . |One|) (|Fraction| 25)
+              (49 . *) (55 . -) (60 . |cons|) (66 . |1|) (|Fraction| 25)
               (70 . /) (|StreamTaylorSeriesOperations| 6) (76 . |powern|)
               (|Union| 9 '"failed") (82 . |recip|) (87 . |rest|)
               (92 . |arcsineDistribution|))

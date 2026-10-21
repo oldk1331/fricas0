@@ -2,7 +2,7 @@
 (SDEFUN |STTAYLOR;zro| ((% (|Stream| A))) (SPADCALL (QREFELT % 8))) 
 
 (SDEFUN |STTAYLOR;revSum| ((|ra| (|Stream| A)) (|rvc| (|List| A)) (% (A)))
-        (SPROG ((|cc| (A)) (#1=#:G46 NIL) (|c| NIL))
+        (SPROG ((|c| NIL) (#1=#:G46 NIL) (|cc| (A)))
                (SEQ (LETT |cc| (|spadConstant| % 9))
                     (SEQ (LETT |c| NIL) (LETT #1# |rvc|) G190
                          (COND
@@ -89,7 +89,7 @@
 
 (SDEFUN |STTAYLOR;recip;SU;4|
         ((|x| (|Stream| A)) (% (|Union| (|Stream| A) "failed")))
-        (SPROG ((|c0| (A)) (|ua| (|Union| A "failed")))
+        (SPROG ((|ua| (|Union| A "failed")) (|c0| (A)))
                (SEQ
                 (COND ((SPADCALL |x| (QREFELT % 11)) (CONS 1 "failed"))
                       (#1='T
@@ -142,7 +142,7 @@
           (LETT |revc| (QREFELT $$ 0))
           (RETURN
            (PROGN
-            (SPROG ((|cn| NIL) (|i| NIL) (#1=#:G94 NIL) (|rvc| NIL))
+            (SPROG ((|cn| NIL) (|i| NIL) (#1=#:G98 NIL) (|rvc| NIL))
                    (SEQ
                     (COND
                      ((SPADCALL |b| (QREFELT % 11))
@@ -195,8 +195,8 @@
         ((|x| (|Stream| A)) (|y| (|Stream| A))
          (% (|Union| (|Stream| A) "failed")))
         (SPROG
-         ((|c0| (A)) (|u| (A)) (|ua| (|Union| A "failed")) (#1=#:G113 NIL)
-          (#2=#:G112 NIL) (|n| NIL))
+         ((|n| NIL) (#1=#:G116 NIL) (#2=#:G117 NIL) (|ua| (|Union| A "failed"))
+          (|u| (A)) (|c0| (A)))
          (SEQ
           (EXIT
            (SEQ
@@ -207,25 +207,25 @@
                     (EXIT
                      (COND
                       ((SPADCALL |y| (QREFELT % 11))
-                       (PROGN (LETT #1# (CONS 1 "failed")) (GO #3=#:G111)))
+                       (PROGN (LETT #2# (CONS 1 "failed")) (GO #3=#:G115)))
                       ((SPADCALL |x| (QREFELT % 11))
                        (PROGN
-                        (LETT #1# (CONS 0 (SPADCALL (QREFELT % 8))))
+                        (LETT #2# (CONS 0 (SPADCALL (QREFELT % 8))))
                         (GO #3#)))
                       ((NULL
                         (SPADCALL (SPADCALL |y| (QREFELT % 12))
                                   (QREFELT % 16)))
-                       (PROGN (LETT #2# |$NoValue|) (GO #4=#:G105)))
+                       (PROGN (LETT #1# |$NoValue|) (GO #4=#:G109)))
                       ((NULL
                         (SPADCALL (SPADCALL |x| (QREFELT % 12))
                                   (QREFELT % 16)))
-                       (PROGN (LETT #1# (CONS 1 "failed")) (GO #3#)))
+                       (PROGN (LETT #2# (CONS 1 "failed")) (GO #3#)))
                       ('T
                        (SEQ (LETT |x| (SPADCALL |x| (QREFELT % 15)))
                             (EXIT
                              (LETT |y| (SPADCALL |y| (QREFELT % 15)))))))))
                    (LETT |n| (|inc_SI| |n|)) (GO G190) G191 (EXIT NIL)))
-             #4# (EXIT #2#))
+             #4# (EXIT #1#))
             (LETT |ua| (SPADCALL (SPADCALL |y| (QREFELT % 12)) (QREFELT % 31)))
             (EXIT
              (COND ((QEQCAR |ua| 1) (CONS 1 "failed"))
@@ -244,7 +244,7 @@
                                            (SPADCALL |x| (QREFELT % 15))
                                            (LIST |c0|) %)
                                           (QREFELT % 21))))))))))
-          #3# (EXIT #1#)))) 
+          #3# (EXIT #2#)))) 
 
 (SDEFUN |STTAYLOR;/;3S;7|
         ((|x| (|Stream| A)) (|y| (|Stream| A)) (% (|Stream| A)))
@@ -786,10 +786,10 @@
 (SDEFUN |STTAYLOR;powern;F2S;31|
         ((|rn| (|Fraction| (|Integer|))) (|x| (|Stream| A)) (% (|Stream| A)))
         (SPROG
-         ((|power| (|Stream| A)) (#1=#:G278 NIL) (#2=#:G272 NIL)
-          (|num| (|Integer|)) (|invCo| (|Union| A "failed")) (|co| (A))
-          (|ord| (|Union| (|Integer|) "failed")) (#3=#:G287 NIL)
-          (|order| (|Integer|)) (#4=#:G288 NIL) (|n| NIL))
+         ((|n| NIL) (#1=#:G297 NIL) (|order| (|Integer|)) (#2=#:G296 NIL)
+          (|ord| (|Union| (|Integer|) "failed")) (|co| (A))
+          (|invCo| (|Union| A "failed")) (|num| (|Integer|)) (#3=#:G281 NIL)
+          (#4=#:G287 NIL) (|power| (|Stream| A)))
          (SEQ
           (EXIT
            (SEQ (LETT |order| 0)
@@ -801,16 +801,16 @@
                          (COND
                           ((SPADCALL |x| (QREFELT % 11))
                            (PROGN
-                            (LETT #4# (|STTAYLOR;zro| %))
-                            (GO #5=#:G286)))
+                            (LETT #1# (|STTAYLOR;zro| %))
+                            (GO #5=#:G295)))
                           ((NULL
                             (SPADCALL (SPADCALL |x| (QREFELT % 12))
                                       (QREFELT % 16)))
                            (SEQ (LETT |order| |n|)
                                 (EXIT
                                  (PROGN
-                                  (LETT #3# |$NoValue|)
-                                  (GO #6=#:G260)))))
+                                  (LETT #2# |$NoValue|)
+                                  (GO #6=#:G269)))))
                           ('T
                            (SEQ (LETT |x| (SPADCALL |x| (QREFELT % 15)))
                                 (EXIT
@@ -819,10 +819,9 @@
                                    (|error|
                                     "^: series with many leading zero coefficients")))))))))
                        (LETT |n| (|inc_SI| |n|)) (GO G190) G191 (EXIT NIL)))
-                 #6# (EXIT #3#))
+                 #6# (EXIT #2#))
                 (LETT |ord|
-                      (SPADCALL |order| (SPADCALL |rn| (QREFELT % 96))
-                                (QREFELT % 97)))
+                      (|exquo_INT| |order| (SPADCALL |rn| (QREFELT % 96))))
                 (EXIT
                  (COND
                   ((QEQCAR |ord| 1)
@@ -832,8 +831,8 @@
                         (COND
                          ((> (QCDR |ord|) 0)
                           (COND
-                           ((SPADCALL |rn| (|spadConstant| % 98)
-                                      (QREFELT % 99))
+                           ((SPADCALL |rn| (|spadConstant| % 97)
+                                      (QREFELT % 98))
                             (|error| "^: negative power does not exist")))))
                         (LETT |invCo| (SPADCALL |co| (QREFELT % 31)))
                         (EXIT
@@ -846,7 +845,7 @@
                             (LETT |power|
                                   (COND
                                    ((SPADCALL |co| (|spadConstant| % 17)
-                                              (QREFELT % 100))
+                                              (QREFELT % 99))
                                     (SPADCALL
                                      (CONS #'|STTAYLOR;powern;F2S;31!0|
                                            (VECTOR % |x| |rn|))
@@ -857,42 +856,42 @@
                                        (MINUSP
                                         (LETT |num|
                                               (SPADCALL |rn|
-                                                        (QREFELT % 101)))))
+                                                        (QREFELT % 100)))))
                                       (SPADCALL
                                        (SPADCALL |co|
-                                                 (PROG1 (LETT #2# |num|)
-                                                   (|check_subtype2| (>= #2# 0)
+                                                 (PROG1 (LETT #3# |num|)
+                                                   (|check_subtype2| (>= #3# 0)
                                                                      '(|NonNegativeInteger|)
                                                                      '(|Integer|)
-                                                                     #2#))
-                                                 (QREFELT % 102))
+                                                                     #3#))
+                                                 (QREFELT % 101))
                                        (SPADCALL
                                         (CONS #'|STTAYLOR;powern;F2S;31!1|
                                               (VECTOR % |x| |invCo| |rn|))
                                         (QREFELT % 47))
-                                       (QREFELT % 103)))
+                                       (QREFELT % 102)))
                                      ('T
                                       (SPADCALL
                                        (SPADCALL (QCDR |invCo|)
-                                                 (PROG1 (LETT #1# (- |num|))
-                                                   (|check_subtype2| (>= #1# 0)
+                                                 (PROG1 (LETT #4# (- |num|))
+                                                   (|check_subtype2| (>= #4# 0)
                                                                      '(|NonNegativeInteger|)
                                                                      '(|Integer|)
-                                                                     #1#))
-                                                 (QREFELT % 102))
+                                                                     #4#))
+                                                 (QREFELT % 101))
                                        (SPADCALL
                                         (CONS #'|STTAYLOR;powern;F2S;31!2|
                                               (VECTOR % |x| |invCo| |rn|))
                                         (QREFELT % 47))
-                                       (QREFELT % 103)))))
+                                       (QREFELT % 102)))))
                                    ((QREFELT % 89)
                                     (SPADCALL
-                                     (SPADCALL |co| |rn| (QREFELT % 104))
+                                     (SPADCALL |co| |rn| (QREFELT % 103))
                                      (SPADCALL
                                       (CONS #'|STTAYLOR;powern;F2S;31!3|
                                             (VECTOR % |x| |invCo| |rn|))
                                       (QREFELT % 47))
-                                     (QREFELT % 103)))
+                                     (QREFELT % 102)))
                                    (#7#
                                     (|error|
                                      "^ rational power of coefficient undefined"))))
@@ -900,10 +899,10 @@
                              (SPADCALL
                               (SPADCALL (|spadConstant| % 17)
                                         (* (QCDR |ord|)
-                                           (SPADCALL |rn| (QREFELT % 101)))
-                                        (QREFELT % 105))
+                                           (SPADCALL |rn| (QREFELT % 100)))
+                                        (QREFELT % 104))
                               |power| (QREFELT % 55)))))))))))))
-          #5# (EXIT #4#)))) 
+          #5# (EXIT #1#)))) 
 
 (SDEFUN |STTAYLOR;powern;F2S;31!3| ((|y| NIL) ($$ NIL))
         (PROG (|rn| |invCo| |x| %)
@@ -914,7 +913,7 @@
           (RETURN
            (PROGN
             (|STTAYLOR;powerrn| |rn|
-             (SPADCALL (QCDR |invCo|) |x| (QREFELT % 103)) |y| %))))) 
+             (SPADCALL (QCDR |invCo|) |x| (QREFELT % 102)) |y| %))))) 
 
 (SDEFUN |STTAYLOR;powern;F2S;31!2| ((|y| NIL) ($$ NIL))
         (PROG (|rn| |invCo| |x| %)
@@ -925,7 +924,7 @@
           (RETURN
            (PROGN
             (|STTAYLOR;powerrn| |rn|
-             (SPADCALL (QCDR |invCo|) |x| (QREFELT % 103)) |y| %))))) 
+             (SPADCALL (QCDR |invCo|) |x| (QREFELT % 102)) |y| %))))) 
 
 (SDEFUN |STTAYLOR;powern;F2S;31!1| ((|y| NIL) ($$ NIL))
         (PROG (|rn| |invCo| |x| %)
@@ -936,7 +935,7 @@
           (RETURN
            (PROGN
             (|STTAYLOR;powerrn| |rn|
-             (SPADCALL (QCDR |invCo|) |x| (QREFELT % 103)) |y| %))))) 
+             (SPADCALL (QCDR |invCo|) |x| (QREFELT % 102)) |y| %))))) 
 
 (SDEFUN |STTAYLOR;powern;F2S;31!0| ((|y| NIL) ($$ NIL))
         (PROG (|rn| |x| %)
@@ -965,16 +964,16 @@
              ('T
               (SPADCALL
                (SPADCALL (SPADCALL |x| (QREFELT % 12))
-                         (SPADCALL |y| (QREFELT % 12)) (QREFELT % 107))
+                         (SPADCALL |y| (QREFELT % 12)) (QREFELT % 106))
                (SPADCALL (SPADCALL |x| (QREFELT % 15))
-                         (SPADCALL |y| (QREFELT % 15)) (QREFELT % 108))
+                         (SPADCALL |y| (QREFELT % 15)) (QREFELT % 107))
                (QREFELT % 21)))))))) 
 
 (SDEFUN |STTAYLOR;ginteg|
         ((|f| (|Mapping| A (|Integer|))) (|x| (|Stream| A)) (% (|Stream| A)))
         (SPADCALL |x|
-                  (SPADCALL |f| (SPADCALL 1 (QREFELT % 61)) (QREFELT % 111))
-                  (QREFELT % 108))) 
+                  (SPADCALL |f| (SPADCALL 1 (QREFELT % 61)) (QREFELT % 110))
+                  (QREFELT % 107))) 
 
 (SDEFUN |STTAYLOR;lazyGintegrate;MAMS;34|
         ((|fntoa| (|Mapping| A (|Integer|))) (|s| (A))
@@ -984,8 +983,8 @@
                   (QREFELT % 21))) 
 
 (SDEFUN |STTAYLOR;finteg| ((|x| (|Stream| A)) (% (|Stream| A)))
-        (SPADCALL |x| (SPADCALL (|spadConstant| % 17) (QREFELT % 113))
-                  (QREFELT % 108))) 
+        (SPADCALL |x| (SPADCALL (|spadConstant| % 17) (QREFELT % 112))
+                  (QREFELT % 107))) 
 
 (SDEFUN |STTAYLOR;powerre|
         ((|s| (A)) (|x| (|Stream| A)) (|c| (|Stream| A)) (% (|Stream| A)))
@@ -1014,7 +1013,7 @@
                                           (QREFELT % 14))
                                 (SPADCALL |c| (SPADCALL |x| (QREFELT % 94))
                                           (QREFELT % 55))
-                                (QREFELT % 103))
+                                (QREFELT % 102))
                                %)
                               (SPADCALL (SPADCALL |x| (QREFELT % 15)) |c|
                                         (QREFELT % 55))
@@ -1036,11 +1035,11 @@
 (DECLAIM (NOTINLINE |StreamTaylorSeriesOperations;|)) 
 
 (DEFUN |StreamTaylorSeriesOperations;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|StreamTaylorSeriesOperations| DV$1))
-          (LETT % (GETREFV 115))
+          (LETT % (GETREFV 114))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3
                     (LETT |pv$|
@@ -1055,8 +1054,13 @@
                                                              '(|Algebra|
                                                                (|Fraction|
                                                                 (|Integer|))))
-                                              (|HasCategory| |#1|
-                                                             '(|Field|))))))
+                                              (AND
+                                               (|HasCategory| |#1|
+                                                              '(|Algebra|
+                                                                (|Fraction|
+                                                                 (|Integer|))))
+                                               (|HasCategory| |#1|
+                                                              '(|Field|)))))))
           (|haddProp| |$ConstructorCache| '|StreamTaylorSeriesOperations|
                       (LIST DV$1) (CONS 1 %))
           (|stuffDomainSlots| %)
@@ -1076,29 +1080,32 @@
                                                      (|Integer|))))))
              NIL
              NIL
-             (QSETREFV % 106
+             (QSETREFV % 105
                        (CONS (|dispatchFunction| |STTAYLOR;powern;F2S;31|)
                              %)))))
           (COND
-           ((|testBitVector| |pv$| 3)
-            (PROGN
-             (QSETREFV % 108
-                       (CONS (|dispatchFunction| |STTAYLOR;mapdiv;3S;32|) %))
-             NIL
-             (QSETREFV % 112
-                       (CONS
-                        (|dispatchFunction| |STTAYLOR;lazyGintegrate;MAMS;34|)
-                        %))
-             NIL
-             NIL
-             (QSETREFV % 114
-                       (CONS (|dispatchFunction| |STTAYLOR;power;A2S;37|)
-                             %)))))
+           ((|HasCategory| |#1| '(|Field|))
+            (COND
+             ((|testBitVector| |pv$| 2)
+              (PROGN
+               (QSETREFV % 107
+                         (CONS (|dispatchFunction| |STTAYLOR;mapdiv;3S;32|) %))
+               NIL
+               (QSETREFV % 111
+                         (CONS
+                          (|dispatchFunction|
+                           |STTAYLOR;lazyGintegrate;MAMS;34|)
+                          %))
+               NIL
+               NIL
+               (QSETREFV % 113
+                         (CONS (|dispatchFunction| |STTAYLOR;power;A2S;37|)
+                               %)))))))
           %))) 
 
-(DEFUN |StreamTaylorSeriesOperations| (#1=#:G312)
+(DEFUN |StreamTaylorSeriesOperations| (#1=#:G322)
   (SPROG NIL
-         (PROG (#2=#:G313)
+         (PROG (#2=#:G323)
            (RETURN
             (COND
              ((LETT #2#
@@ -1118,16 +1125,16 @@
 (MAKEPROP '|StreamTaylorSeriesOperations| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL (|StreamTaylorSeriesOperations2| 6 6)
-              (|local| |#1|) (|Stream| 6) (0 . |empty|) (4 . |Zero|)
-              (|Boolean|) (8 . |empty?|) (13 . |frst|) (18 . *) (24 . +)
-              (30 . |rst|) (35 . |zero?|) (40 . |One|) (|Integer|) (44 . |One|)
-              (48 . +) (54 . |concat|) (|SingleInteger|) (60 . |One|) (64 . -)
-              (70 . |Zero|) (|List| 6) (74 . |cons|) (|Mapping| %)
-              (80 . |delay|) (|Union| % '"failed") (85 . |recip|) (90 . -)
+              (|local| |#1|) (|Stream| 6) (0 . |empty|) (4 . |0|) (|Boolean|)
+              (8 . |empty?|) (13 . |frst|) (18 . *) (24 . +) (30 . |rst|)
+              (35 . |zero?|) (40 . |1|) (|Integer|) (44 . |1|) (48 . +)
+              (54 . |concat|) (|SingleInteger|) (60 . |1|) (64 . -) (70 . |0|)
+              (|List| 6) (74 . |cons|) (|Mapping| %) (80 . |delay|)
+              (|Union| % '"failed") (85 . |recip|) (90 . -)
               (|Union| 7 '"failed") |STTAYLOR;recip;SU;4| (95 . -)
-              (|PositiveInteger|) (101 . |One|) (|NonNegativeInteger|)
-              (105 . |Zero|) |STTAYLOR;exquo;2SU;6| |STTAYLOR;/;3S;7|
-              (109 . |Zero|) (113 . <=) (119 . |compose|) (|Mapping| 7 7)
+              (|PositiveInteger|) (101 . |1|) (|NonNegativeInteger|)
+              (105 . |0|) |STTAYLOR;exquo;2SU;6| |STTAYLOR;/;3S;7| (109 . |0|)
+              (113 . <=) (119 . |compose|) (|Mapping| 7 7)
               (|ParadoxicalCombinatorsForStreams| 6) (125 . Y)
               |STTAYLOR;lagrange;2S;11| |STTAYLOR;revert;2S;12| (|Stream| 7)
               (130 . |empty?|) (135 . |frst|) (140 . |rst|) (145 . +) (151 . *)
@@ -1142,24 +1149,24 @@
               (224 . |concat|) (|StreamFunctions2| 7 7) (230 . |map|)
               (236 . |delay|) (|Fraction| 18) (241 . /) (247 . *) (|Mapping| 7)
               (253 . |lazyIntegrate|) (259 . |nlde|) 'RATPOWERS (|Mapping| 6 6)
-              (264 . |map|) (270 . |One|) (274 . +) (280 . |deriv|) (285 . -)
-              (291 . |denom|) (296 . |exquo|) (302 . |Zero|) (306 . <)
-              (312 . =) (318 . |numer|) (323 . ^) (329 . *) (335 . ^)
-              (341 . |monom|) (347 . |powern|) (353 . /) (359 . |mapdiv|)
-              (|Mapping| 6 18) (|StreamFunctions2| 18 6) (365 . |map|)
-              (371 . |lazyGintegrate|) (378 . |int|) (383 . |power|))
-           '#(|revert| 389 |recip| 394 |prodiag| 399 |powern| 404 |power| 410
-              |oddlambert| 416 |oddintegers| 421 |nlde| 426 |monom| 431
-              |mapdiv| 437 |lazyIntegrate| 443 |lazyGintegrate| 449 |lambert|
-              456 |lagrange| 461 |integers| 466 |int| 471
-              |general_Lambert_product| 476 |generalLambert| 483 |exquo| 490
-              |evenlambert| 496 |deriv| 501 |compose| 506 |addiag| 512 / 517 -
-              523 + 529 * 535)
+              (264 . |map|) (270 . |1|) (274 . +) (280 . |deriv|) (285 . -)
+              (291 . |denom|) (296 . |0|) (300 . <) (306 . =) (312 . |numer|)
+              (317 . ^) (323 . *) (329 . ^) (335 . |monom|) (341 . |powern|)
+              (347 . /) (353 . |mapdiv|) (|Mapping| 6 18)
+              (|StreamFunctions2| 18 6) (359 . |map|) (365 . |lazyGintegrate|)
+              (372 . |int|) (377 . |power|))
+           '#(|revert| 383 |recip| 388 |prodiag| 393 |powern| 398 |power| 404
+              |oddlambert| 410 |oddintegers| 415 |nlde| 420 |monom| 425
+              |mapdiv| 431 |lazyIntegrate| 437 |lazyGintegrate| 443 |lambert|
+              450 |lagrange| 455 |integers| 460 |int| 465
+              |general_Lambert_product| 470 |generalLambert| 477 |exquo| 484
+              |evenlambert| 490 |deriv| 495 |compose| 500 |addiag| 506 / 511 -
+              517 + 523 * 529)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
                        (CONS '#((|StreamTaylorSeriesOperationsCategory| 6 6))
-                             (|makeByteWordVec2| 114
+                             (|makeByteWordVec2| 113
                                                  '(0 7 0 8 0 6 0 9 1 7 10 0 11
                                                    1 7 6 0 12 2 6 0 0 0 13 2 6
                                                    0 0 0 14 1 7 0 0 15 1 6 10 0
@@ -1185,27 +1192,26 @@
                                                    1 0 7 50 88 2 7 0 90 0 91 0
                                                    83 0 92 2 83 0 0 0 93 1 0 7
                                                    7 94 2 0 7 7 7 95 1 83 18 0
-                                                   96 2 18 30 0 0 97 0 83 0 98
-                                                   2 83 10 0 0 99 2 6 10 0 0
-                                                   100 1 83 18 0 101 2 6 0 0 38
-                                                   102 2 0 7 6 7 103 2 6 0 0 83
-                                                   104 2 0 7 6 18 105 2 0 7 83
-                                                   7 106 2 6 0 0 0 107 2 0 7 7
-                                                   7 108 2 110 7 109 60 111 3 0
-                                                   7 109 6 86 112 1 0 7 6 113 2
-                                                   0 7 6 7 114 1 0 7 7 49 1 0
-                                                   33 7 34 1 0 7 50 57 2 2 7 83
-                                                   7 106 2 3 7 6 7 114 1 0 7 7
-                                                   68 1 0 60 18 67 1 2 7 50 88
-                                                   2 0 7 6 18 105 2 3 7 7 7 108
-                                                   2 2 7 6 86 87 3 3 7 109 6 86
-                                                   112 1 0 7 7 66 1 0 7 7 48 1
-                                                   0 60 18 61 1 0 7 6 113 3 0 7
-                                                   7 18 18 77 3 0 7 7 18 18 71
-                                                   2 0 33 7 7 40 1 0 7 7 69 1 0
-                                                   7 7 94 2 1 7 7 7 44 1 0 7 50
-                                                   65 2 0 7 7 7 41 2 0 7 7 7 95
-                                                   2 0 7 7 7 54 2 0 7 7 7 55 2
-                                                   0 7 6 7 103 2 1 7 6 7
-                                                   103)))))
+                                                   96 0 83 0 97 2 83 10 0 0 98
+                                                   2 6 10 0 0 99 1 83 18 0 100
+                                                   2 6 0 0 38 101 2 0 7 6 7 102
+                                                   2 6 0 0 83 103 2 0 7 6 18
+                                                   104 2 0 7 83 7 105 2 6 0 0 0
+                                                   106 2 0 7 7 7 107 2 109 7
+                                                   108 60 110 3 0 7 108 6 86
+                                                   111 1 0 7 6 112 2 0 7 6 7
+                                                   113 1 0 7 7 49 1 0 33 7 34 1
+                                                   0 7 50 57 2 2 7 83 7 105 2 3
+                                                   7 6 7 113 1 0 7 7 68 1 0 60
+                                                   18 67 1 2 7 50 88 2 0 7 6 18
+                                                   104 2 3 7 7 7 107 2 2 7 6 86
+                                                   87 3 3 7 108 6 86 111 1 0 7
+                                                   7 66 1 0 7 7 48 1 0 60 18 61
+                                                   1 0 7 6 112 3 0 7 7 18 18 77
+                                                   3 0 7 7 18 18 71 2 0 33 7 7
+                                                   40 1 0 7 7 69 1 0 7 7 94 2 1
+                                                   7 7 7 44 1 0 7 50 65 2 0 7 7
+                                                   7 41 2 0 7 7 7 95 2 0 7 7 7
+                                                   54 2 0 7 7 7 55 2 0 7 6 7
+                                                   102 2 1 7 6 7 102)))))
            '|lookupIncomplete|)) 

@@ -4,44 +4,44 @@
 (IN-PACKAGE "BOOT")
 
 ; ncTag x ==
-;    not PAIRP x => ncBug('S2CB0031,[])
+;    not(PAIRP(x)) => ncBug('"bad object", [])
 ;    x := QCAR x
 ;    IDENTP x => x
-;    not PAIRP x => ncBug('S2CB0031,[])
+;    not(PAIRP(x)) => ncBug('"bad object", [])
 ;    QCAR x
 
 (DEFUN |ncTag| (|x|)
   (PROG ()
     (RETURN
-     (COND ((NULL (CONSP |x|)) (|ncBug| 'S2CB0031 NIL))
+     (COND ((NULL (CONSP |x|)) (|ncBug| "bad object" NIL))
            (#1='T
             (PROGN
              (SETQ |x| (QCAR |x|))
              (COND ((IDENTP |x|) |x|)
-                   ((NULL (CONSP |x|)) (|ncBug| 'S2CB0031 NIL))
+                   ((NULL (CONSP |x|)) (|ncBug| "bad object" NIL))
                    (#1# (QCAR |x|)))))))))
 
 ; ncAlist x ==
-;    not PAIRP x => ncBug('S2CB0031,[])
+;    not(PAIRP(x)) => ncBug('"bad object", [])
 ;    x := QCAR x
 ;    IDENTP x => NIL
-;    not PAIRP x => ncBug('S2CB0031,[])
+;    not(PAIRP(x)) => ncBug('"bad object", [])
 ;    QCDR x
 
 (DEFUN |ncAlist| (|x|)
   (PROG ()
     (RETURN
-     (COND ((NULL (CONSP |x|)) (|ncBug| 'S2CB0031 NIL))
+     (COND ((NULL (CONSP |x|)) (|ncBug| "bad object" NIL))
            (#1='T
             (PROGN
              (SETQ |x| (QCAR |x|))
              (COND ((IDENTP |x|) NIL)
-                   ((NULL (CONSP |x|)) (|ncBug| 'S2CB0031 NIL))
+                   ((NULL (CONSP |x|)) (|ncBug| "bad object" NIL))
                    (#1# (QCDR |x|)))))))))
 
 ; ncEltQ(x,k) ==
 ;    r := ASSQ(k,ncAlist x)
-;    NULL r => ncBug ('S2CB0007,[k])
+;    NULL(r) => ncBug ('"Association list search failed on %1", [k])
 ;    rest r
 
 (DEFUN |ncEltQ| (|x| |k|)
@@ -49,7 +49,9 @@
     (RETURN
      (PROGN
       (SETQ |r| (ASSQ |k| (|ncAlist| |x|)))
-      (COND ((NULL |r|) (|ncBug| 'S2CB0007 (LIST |k|))) ('T (CDR |r|)))))))
+      (COND
+       ((NULL |r|) (|ncBug| "Association list search failed on %1" (LIST |k|)))
+       ('T (CDR |r|)))))))
 
 ; ncPutQ(x,k,v) ==
 ;    LISTP k =>

@@ -1,6 +1,6 @@
 
 (SDEFUN |CADU;squareFreeBasis;2L;1| ((|lpols| (|List| P)) (% (|List| P)))
-        (SPROG ((|sqpol| (P)) (|pol| (P)))
+        (SPROG ((|pol| (P)) (|sqpol| (P)))
                (SEQ
                 (COND ((SPADCALL |lpols| NIL (QREFELT % 10)) NIL)
                       ('T
@@ -15,7 +15,7 @@
                               (QREFELT % 14))))))))) 
 
 (SDEFUN |CADU;gcdBasisAdd| ((|p| (P)) (|lpols| (|List| P)) (% (|List| P)))
-        (SPROG ((|basis| (|List| P)) (|p1| (P)) (#1=#:G8 NIL) (|g| (P)))
+        (SPROG ((|g| (P)) (#1=#:G11 NIL) (|p1| (P)) (|basis| (|List| P)))
                (SEQ
                 (COND ((EQL (SPADCALL |p| (QREFELT % 16)) 0) |lpols|)
                       ((NULL |lpols|) (LIST (SPADCALL |p| (QREFELT % 12))))
@@ -73,7 +73,7 @@
 (DECLAIM (NOTINLINE |CylindricalAlgebraicDecompositionUtilities;|)) 
 
 (DEFUN |CylindricalAlgebraicDecompositionUtilities;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -91,9 +91,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |CylindricalAlgebraicDecompositionUtilities| (&REST #1=#:G19)
+(DEFUN |CylindricalAlgebraicDecompositionUtilities| (&REST #1=#:G22)
   (SPROG NIL
-         (PROG (#2=#:G20)
+         (PROG (#2=#:G23)
            (RETURN
             (COND
              ((LETT #2#

@@ -1,6 +1,6 @@
 
 (SDEFUN |UPMP;noKaratsuba;3U;1| ((|a| (U)) (|b| (U)) (% (U)))
-        (SPROG ((|res| (U)) (#1=#:G23 NIL) (|u| NIL) (|lu| (|List| U)))
+        (SPROG ((|lu| (|List| U)) (|u| NIL) (#1=#:G23 NIL) (|res| (U)))
                (SEQ
                 (COND ((SPADCALL |a| (QREFELT % 9)) |a|)
                       ((SPADCALL |b| (QREFELT % 9)) |b|)
@@ -33,10 +33,10 @@
 
 (SDEFUN |UPMP;karatsubaOnce;3U;2| ((|a| (U)) (|b| (U)) (% (U)))
         (SPROG
-         ((|w| (U)) (|v| (U)) (|u| (U)) (|lb| (U)) (|hb| (U))
-          (|rec| (|Record| (|:| |quotient| U) (|:| |remainder| U))) (|la| (U))
-          (|ha| (U)) (|n| (|NonNegativeInteger|)) (|d| (|NonNegativeInteger|))
-          (|db| #1=(|NonNegativeInteger|)) (|da| #1#))
+         ((|da| #1=(|NonNegativeInteger|)) (|db| #1#)
+          (|d| (|NonNegativeInteger|)) (|n| (|NonNegativeInteger|)) (|ha| (U))
+          (|la| (U)) (|rec| (|Record| (|:| |quotient| U) (|:| |remainder| U)))
+          (|hb| (U)) (|lb| (U)) (|u| (U)) (|v| (U)) (|w| (U)))
          (SEQ (LETT |da| (SPADCALL |a| (QREFELT % 20)))
               (LETT |db| (SPADCALL |b| (QREFELT % 20)))
               (COND
@@ -47,7 +47,7 @@
                 (LETT |b| (SPADCALL |b| |db| (QREFELT % 21)))))
               (LETT |d| (+ |da| |db|))
               (LETT |n|
-                    (QUOTIENT2
+                    (|quotient_INT|
                      (MIN (SPADCALL |a| (QREFELT % 11))
                           (SPADCALL |b| (QREFELT % 11)))
                      2))
@@ -81,11 +81,11 @@
         ((|a| (U)) (|b| (U)) (|l| (|NonNegativeInteger|))
          (|k| (|NonNegativeInteger|)) (% (U)))
         (SPROG
-         ((|w| (U)) (|v| (U)) (|u| (U)) (|lb| (U)) (|hb| (U))
-          (|rec| (|Record| (|:| |quotient| U) (|:| |remainder| U))) (|la| (U))
-          (|ha| (U)) (#1=#:G32 NIL) (|n| (|NonNegativeInteger|))
-          (|d| (|NonNegativeInteger|)) (|db| #2=(|NonNegativeInteger|))
-          (|da| #2#))
+         ((|da| #1=(|NonNegativeInteger|)) (|db| #1#)
+          (|d| (|NonNegativeInteger|)) (|n| (|NonNegativeInteger|))
+          (#2=#:G36 NIL) (|ha| (U)) (|la| (U))
+          (|rec| (|Record| (|:| |quotient| U) (|:| |remainder| U))) (|hb| (U))
+          (|lb| (U)) (|u| (U)) (|v| (U)) (|w| (U)))
          (SEQ
           (COND
            ((OR (ZEROP |k|)
@@ -105,17 +105,17 @@
                    (LETT |b| (SPADCALL |b| |db| (QREFELT % 21)))))
                  (LETT |d| (+ |da| |db|))
                  (LETT |n|
-                       (QUOTIENT2
+                       (|quotient_INT|
                         (MIN (SPADCALL |a| (QREFELT % 11))
                              (SPADCALL |b| (QREFELT % 11)))
                         2))
                  (LETT |k|
-                       (PROG2 (LETT #1# (SPADCALL |k| 1 (QREFELT % 33)))
-                           (QCDR #1#)
-                         (|check_union2| (QEQCAR #1# 0) (|NonNegativeInteger|)
+                       (PROG2 (LETT #2# (SPADCALL |k| 1 (QREFELT % 33)))
+                           (QCDR #2#)
+                         (|check_union2| (QEQCAR #2# 0) (|NonNegativeInteger|)
                                          (|Union| (|NonNegativeInteger|)
                                                   "failed")
-                                         #1#)))
+                                         #2#)))
                  (LETT |rec| (SPADCALL |a| |n| (QREFELT % 23)))
                  (LETT |ha| (QCAR |rec|)) (LETT |la| (QCDR |rec|))
                  (LETT |rec| (SPADCALL |b| |n| (QREFELT % 23)))
@@ -145,7 +145,7 @@
 (DECLAIM (NOTINLINE |UnivariatePolynomialMultiplicationPackage;|)) 
 
 (DEFUN |UnivariatePolynomialMultiplicationPackage;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -163,9 +163,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |UnivariatePolynomialMultiplicationPackage| (&REST #1=#:G42)
+(DEFUN |UnivariatePolynomialMultiplicationPackage| (&REST #1=#:G46)
   (SPROG NIL
-         (PROG (#2=#:G43)
+         (PROG (#2=#:G47)
            (RETURN
             (COND
              ((LETT #2#
@@ -192,13 +192,13 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) (|Boolean|)
               (0 . |zero?|) (|NonNegativeInteger|) (5 . |degree|)
               (10 . |leadingCoefficient|) (15 . *) (21 . *) (|List| %)
-              (27 . |monomials|) (32 . |Zero|) (36 . |pomopo!|)
+              (27 . |monomials|) (32 . |0|) (36 . |pomopo!|)
               |UPMP;noKaratsuba;3U;1| (44 . |minimumDegree|)
               (49 . |shiftRight|)
               (|Record| (|:| |quotient| %) (|:| |remainder| %))
               (55 . |karatsubaDivide|) (61 . -) (67 . *) (73 . +)
               (79 . |shiftLeft|) |UPMP;karatsubaOnce;3U;2|
-              (85 . |numberOfMonomials|) (90 . |One|) (94 . |One|)
+              (85 . |numberOfMonomials|) (90 . |1|) (94 . |1|)
               (|Union| % '"failed") (98 . |subtractIfCan|)
               |UPMP;karatsuba;2U2NniU;3|)
            '#(|noKaratsuba| 104 |karatsubaOnce| 110 |karatsuba| 116) 'NIL

@@ -2,7 +2,7 @@
 (SDEFUN |HACKPI;pi;%;1| ((% (%)))
         (SPADCALL (SPADCALL 1 1 (QREFELT % 13)) (QREFELT % 14))) 
 
-(PUT '|HACKPI;convert;%F;2| '|SPADreplace| '(XLAM (|x|) |x|)) 
+(MAKEPROP '|HACKPI;convert;%F;2| '|SPADreplace| '(XLAM (|x|) |x|)) 
 
 (SDEFUN |HACKPI;convert;%F;2|
         ((|x| (%)) (% (|Fraction| (|SparseUnivariatePolynomial| (|Integer|)))))
@@ -100,6 +100,8 @@
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|PiDomain| NIL (CONS 1 %))
           (|stuffDomainSlots| %)
+          (AND (|HasCategory| % '(|CharacteristicZero|))
+               (|augmentPredVector| % 1))
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 6
                     (|Fraction| (|SparseUnivariatePolynomial| (|Integer|))))
@@ -108,7 +110,7 @@
 
 (DEFUN |PiDomain| ()
   (SPROG NIL
-         (PROG (#1=#:G47)
+         (PROG (#1=#:G53)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|PiDomain|))
@@ -124,26 +126,26 @@
 
 (MAKEPROP '|PiDomain| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL (|Fraction| 12) '|Rep| '|sympi| (0 . |One|)
-              (4 . |One|) (|Integer|) (|NonNegativeInteger|)
+           '#(NIL NIL NIL NIL NIL (|Fraction| 12) '|Rep| '|sympi| (0 . |1|)
+              (4 . |1|) (|Integer|) (|NonNegativeInteger|)
               (|SparseUnivariatePolynomial| 10) (8 . |monomial|)
               (14 . |coerce|) |HACKPI;pi;%;1| |HACKPI;convert;%F;2| (|Float|)
               |HACKPI;coerce;%F;6| |HACKPI;convert;%F;3| (|DoubleFloat|)
               |HACKPI;coerce;%Df;5| |HACKPI;convert;%Df;4| (19 . |numer|)
               (24 . |denom|) (29 . /) (|OutputForm|) (|Symbol|) (35 . |coerce|)
               (40 . |outputForm|) (|InputForm|) (|Polynomial| 10)
-              (46 . |convert|) (51 . |Zero|) (55 . |Zero|) (59 . |Zero|)
-              (63 . |Zero|) (|Boolean|) (67 . ~=) (73 . |leadingCoefficient|)
-              (78 . |coerce|) (83 . |degree|) (88 . |monomial|) (95 . +)
-              (101 . |reductum|) (|Union| 12 '"failed") (106 . |retractIfCan|)
-              (111 . /) |HACKPI;coerce;%Of;10| (117 . /)
-              |HACKPI;convert;%If;11| (123 . |coerce|)
-              (|SparseUnivariatePolynomial| 20) (|Mapping| 20 10)
-              (|SparseUnivariatePolynomialFunctions2| 10 20) (128 . |map|)
-              (134 . |elt|) (140 . |coerce|) (|SparseUnivariatePolynomial| 17)
-              (|Mapping| 17 10) (|SparseUnivariatePolynomialFunctions2| 10 17)
-              (145 . |map|) (151 . |pi|) (155 . |elt|) (|String|)
-              (|PositiveInteger|) (|Union| % '"failed")
+              (46 . |convert|) (51 . |0|) (55 . |0|) (59 . |0|) (63 . |0|)
+              (|Boolean|) (67 . ~=) (73 . |leadingCoefficient|) (78 . |coerce|)
+              (83 . |degree|) (88 . |monomial|) (95 . +) (101 . |reductum|)
+              (|Union| 12 '"failed") (106 . |retractIfCan|) (111 . /)
+              |HACKPI;coerce;%Of;10| (117 . /) |HACKPI;convert;%If;11|
+              (123 . |coerce|) (|SparseUnivariatePolynomial| 20)
+              (|Mapping| 20 10) (|SparseUnivariatePolynomialFunctions2| 10 20)
+              (128 . |map|) (134 . |elt|) (140 . |coerce|)
+              (|SparseUnivariatePolynomial| 17) (|Mapping| 17 10)
+              (|SparseUnivariatePolynomialFunctions2| 10 17) (145 . |map|)
+              (151 . |pi|) (155 . |elt|) (|String|) (|PositiveInteger|)
+              (|Union| % '"failed")
               (|Record| (|:| |unit| %) (|:| |canonical| %) (|:| |associate| %))
               (|Record| (|:| |llcm_res| %) (|:| |coeff1| %) (|:| |coeff2| %))
               (|List| %) (|SparseUnivariatePolynomial| %)
@@ -165,46 +167,47 @@
               370 |exquo| 383 |expressIdealMember| 389 |euclideanSize| 395
               |divide| 400 |convert| 406 |commutator| 426 |coerce| 432
               |characteristic| 462 |associator| 466 |associates?| 473
-              |antiCommutator| 479 |annihilate?| 485 ^ 491 |Zero| 509 |One| 513
-              = 517 / 523 - 529 + 540 * 546)
+              |antiCommutator| 479 |annihilate?| 485 ^ 491 = 509 |1| 515 |0|
+              519 / 523 - 529 + 540 * 546)
            'NIL
            (CONS
             (|makeByteWordVec2| 1
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
                                   0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0 0 0 0 0 0 0 0 0 0))
+                                  0 0 0 0 0 0 0 0 0 0 0 0 0 0))
             (CONS
              '#(|Field&| |EuclideanDomain&| |UniqueFactorizationDomain&| NIL
                 |GcdDomain&| NIL NIL NIL |DivisionRing&| |Algebra&|
-                |EntireRing&| |Algebra&| NIL NIL NIL |Rng&|
+                |EntireRing&| |Algebra&| NIL NIL |Rng&|
                 |NonAssociativeAlgebra&| |NonAssociativeAlgebra&| NIL |Module&|
                 |Module&| |NonAssociativeRing&| NIL NIL NIL
                 |NonAssociativeRng&| NIL NIL NIL |AbelianGroup&| NIL NIL NIL
                 |AbelianMonoid&| |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL
-                |AbelianSemiGroup&| |Magma&| |SetCategory&| NIL
+                |AbelianSemiGroup&| |SetWithZero&| |Magma&| |SetCategory&| NIL
                 |RetractableTo&| |RetractableTo&| NIL NIL |BasicType&| NIL NIL
-                NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL)
+                NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL)
              (CONS
               '#((|Field|) (|EuclideanDomain|) (|UniqueFactorizationDomain|)
                  (|PrincipalIdealDomain|) (|GcdDomain|) (|IntegralDomain|)
                  (|LeftOreRing|) (|CommutativeRing|) (|DivisionRing|)
-                 (|Algebra| $$) (|EntireRing|) (|Algebra| 78)
-                 (|CharacteristicZero|) (|Ring|) (|SemiRing|) (|Rng|)
-                 (|NonAssociativeAlgebra| $$) (|NonAssociativeAlgebra| 78)
-                 (|SemiRng|) (|Module| $$) (|Module| 78) (|NonAssociativeRing|)
-                 (|BiModule| $$ $$) (|BiModule| 78 78) (|RightModule| $$)
-                 (|NonAssociativeRng|) (|LeftModule| $$) (|LeftModule| 78)
-                 (|RightModule| 78) (|AbelianGroup|)
-                 (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
-                 (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
-                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|) (|Magma|)
-                 (|SetCategory|) (|CommutativeStar|) (|RetractableTo| 10)
-                 (|RetractableTo| 78) (|RealConstant|) (|CoercibleTo| 26)
-                 (|BasicType|) (|unitsKnown|) (|TwoSidedRecip|)
-                 (|noZeroDivisors|) (|canonicalUnitNormal|)
-                 (|canonicalsClosed|) (|CoercibleFrom| 10) (|CoercibleFrom| 78)
-                 (|ConvertibleTo| 20) (|ConvertibleTo| 17) (|CoercibleTo| 20)
-                 (|CoercibleTo| 17) (|ConvertibleTo| 5) (|ConvertibleTo| 30))
+                 (|Algebra| $$) (|EntireRing|) (|Algebra| 78) (|Ring|)
+                 (|SemiRing|) (|Rng|) (|NonAssociativeAlgebra| $$)
+                 (|NonAssociativeAlgebra| 78) (|SemiRng|) (|Module| $$)
+                 (|Module| 78) (|NonAssociativeRing|) (|BiModule| $$ $$)
+                 (|BiModule| 78 78) (|RightModule| $$) (|NonAssociativeRng|)
+                 (|LeftModule| $$) (|LeftModule| 78) (|RightModule| 78)
+                 (|AbelianGroup|) (|CancellationAbelianMonoid|)
+                 (|NonAssociativeSemiRing|) (|Monoid|) (|AbelianMonoid|)
+                 (|NonAssociativeSemiRng|) (|MagmaWithUnit|) (|SemiGroup|)
+                 (|AbelianSemiGroup|) (|SetWithZero|) (|Magma|) (|SetCategory|)
+                 (|CommutativeStar|) (|RetractableTo| 10) (|RetractableTo| 78)
+                 (|RealConstant|) (|CoercibleTo| 26) (|BasicType|)
+                 (|unitsKnown|) (|TwoSidedRecip|) (|noZeroDivisors|)
+                 (|canonicalUnitNormal|) (|canonicalsClosed|)
+                 (|CharacteristicZero|) (|CoercibleFrom| 10)
+                 (|CoercibleFrom| 78) (|ConvertibleTo| 20) (|ConvertibleTo| 17)
+                 (|CoercibleTo| 20) (|CoercibleTo| 17) (|ConvertibleTo| 5)
+                 (|ConvertibleTo| 30))
               (|makeByteWordVec2| 80
                                   '(0 0 0 8 0 6 0 9 2 12 0 10 11 13 1 5 0 12 14
                                     1 6 12 0 23 1 6 12 0 24 2 17 0 0 0 25 1 27
@@ -232,9 +235,9 @@
                                     48 1 0 0 10 1 1 0 0 0 1 1 0 0 78 1 1 0 20 0
                                     21 1 0 17 0 18 0 0 11 1 3 0 0 0 0 0 1 2 0
                                     37 0 0 1 2 0 0 0 0 1 2 0 37 0 0 1 2 0 0 0
-                                    65 1 2 0 0 0 11 1 2 0 0 0 10 1 0 0 0 34 0 0
-                                    0 8 2 0 37 0 0 1 2 0 0 0 0 1 2 0 0 0 0 1 1
+                                    65 1 2 0 0 0 11 1 2 0 0 0 10 1 2 0 37 0 0 1
+                                    0 0 0 8 0 0 0 34 2 0 0 0 0 1 2 0 0 0 0 1 1
                                     0 0 0 1 2 0 0 0 0 1 2 0 0 65 0 1 2 0 0 0 0
-                                    1 2 0 0 10 0 1 2 0 0 11 0 1 2 0 0 78 0 1 2
-                                    0 0 0 78 1)))))
+                                    1 2 0 0 10 0 1 2 0 0 11 0 1 2 1 0 78 0 1 2
+                                    1 0 0 78 1)))))
            '|lookupComplete|)) 

@@ -1,6 +1,6 @@
 
 (SDEFUN |SCPKG;matrix2Vector| ((|m| (|Matrix| R)) (% (|Vector| R)))
-        (SPROG ((|li| (|List| R)) (|lili| (|List| (|List| R))))
+        (SPROG ((|lili| (|List| (|List| R))) (|li| (|List| R)))
                (SEQ (LETT |lili| (SPADCALL |m| (QREFELT % 9)))
                     (LETT |li| (SPADCALL (ELT % 11) |lili| (QREFELT % 13)))
                     (EXIT (SPADCALL |li| (QREFELT % 15)))))) 
@@ -8,21 +8,21 @@
 (SDEFUN |SCPKG;coordinates;MLV;2|
         ((|x| (|Matrix| R)) (|b| (|List| (|Matrix| R))) (% (|Vector| R)))
         (SPROG
-         ((|res| (|Union| (|Vector| R) "failed")) (#1=#:G23 NIL) (|i| NIL)
-          (|transitionMatrix| (|Matrix| R)) (|n| (|NonNegativeInteger|))
-          (|m| (|NonNegativeInteger|)) (#2=#:G15 NIL))
+         ((#1=#:G16 NIL) (|m| (|NonNegativeInteger|))
+          (|n| (|NonNegativeInteger|)) (|transitionMatrix| (|Matrix| R))
+          (|i| NIL) (#2=#:G27 NIL) (|res| (|Union| (|Vector| R) "failed")))
          (SEQ
           (LETT |m|
-                (PROG1 (LETT #2# (LENGTH |b|))
-                  (|check_subtype2| (>= #2# 0) '(|NonNegativeInteger|)
-                                    '(|Integer|) #2#)))
+                (PROG1 (LETT #1# (LENGTH |b|))
+                  (|check_subtype2| (>= #1# 0) '(|NonNegativeInteger|)
+                                    '(|Integer|) #1#)))
           (LETT |n|
                 (* (ANROWS (SPADCALL |b| 1 (QREFELT % 19)))
                    (ANCOLS (SPADCALL |b| 1 (QREFELT % 19)))))
           (LETT |transitionMatrix|
                 (MAKE_MATRIX1 |n| |m| (|spadConstant| % 20)))
-          (SEQ (LETT |i| 1) (LETT #1# |m|) G190
-               (COND ((|greater_SI| |i| #1#) (GO G191)))
+          (SEQ (LETT |i| 1) (LETT #2# |m|) G190
+               (COND ((|greater_SI| |i| #2#) (GO G191)))
                (SEQ
                 (EXIT
                  (SPADCALL |transitionMatrix| |i|
@@ -41,34 +41,34 @@
 (SDEFUN |SCPKG;structuralConstants;LV;3|
         ((|b| (|List| (|Matrix| R))) (% (|Vector| (|Matrix| R))))
         (SPROG
-         ((#1=#:G41 NIL) (|k| NIL) (|covec| (|Vector| R)) (#2=#:G40 NIL)
-          (|j| NIL) (#3=#:G39 NIL) (|i| NIL) (|sC| (|Vector| (|Matrix| R)))
-          (#4=#:G36 NIL) (#5=#:G38 NIL) (#6=#:G37 NIL)
-          (|m| (|NonNegativeInteger|)) (#7=#:G24 NIL))
+         ((#1=#:G28 NIL) (|m| (|NonNegativeInteger|)) (#2=#:G41 NIL)
+          (#3=#:G42 NIL) (#4=#:G40 NIL) (|sC| (|Vector| (|Matrix| R)))
+          (|i| NIL) (#5=#:G43 NIL) (|j| NIL) (#6=#:G44 NIL)
+          (|covec| (|Vector| R)) (|k| NIL) (#7=#:G45 NIL))
          (SEQ
           (LETT |m|
-                (PROG1 (LETT #7# (LENGTH |b|))
-                  (|check_subtype2| (>= #7# 0) '(|NonNegativeInteger|)
-                                    '(|Integer|) #7#)))
+                (PROG1 (LETT #1# (LENGTH |b|))
+                  (|check_subtype2| (>= #1# 0) '(|NonNegativeInteger|)
+                                    '(|Integer|) #1#)))
           (LETT |sC|
                 (PROGN
-                 (LETT #6# (GETREFV |m|))
-                 (SEQ (LETT |k| 1) (LETT #5# |m|) (LETT #4# 0) G190
-                      (COND ((|greater_SI| |k| #5#) (GO G191)))
+                 (LETT #2# (GETREFV |m|))
+                 (SEQ (LETT |k| 1) (LETT #3# |m|) (LETT #4# 0) G190
+                      (COND ((|greater_SI| |k| #3#) (GO G191)))
                       (SEQ
                        (EXIT
-                        (SETELT #6# #4#
+                        (SETELT #2# #4#
                                 (MAKE_MATRIX1 |m| |m| (|spadConstant| % 20)))))
                       (LETT #4#
                             (PROG1 (|inc_SI| #4#) (LETT |k| (|inc_SI| |k|))))
                       (GO G190) G191 (EXIT NIL))
-                 #6#))
-          (SEQ (LETT |i| 1) (LETT #3# |m|) G190
-               (COND ((|greater_SI| |i| #3#) (GO G191)))
+                 #2#))
+          (SEQ (LETT |i| 1) (LETT #5# |m|) G190
+               (COND ((|greater_SI| |i| #5#) (GO G191)))
                (SEQ
                 (EXIT
-                 (SEQ (LETT |j| 1) (LETT #2# |m|) G190
-                      (COND ((|greater_SI| |j| #2#) (GO G191)))
+                 (SEQ (LETT |j| 1) (LETT #6# |m|) G190
+                      (COND ((|greater_SI| |j| #6#) (GO G191)))
                       (SEQ
                        (LETT |covec|
                              (SPADCALL
@@ -77,8 +77,8 @@
                                         (QREFELT % 26))
                               |b| (QREFELT % 25)))
                        (EXIT
-                        (SEQ (LETT |k| 1) (LETT #1# |m|) G190
-                             (COND ((|greater_SI| |k| #1#) (GO G191)))
+                        (SEQ (LETT |k| 1) (LETT #7# |m|) G190
+                             (COND ((|greater_SI| |k| #7#) (GO G191)))
                              (SEQ
                               (EXIT
                                (SPADCALL (SPADCALL |sC| |k| (QREFELT % 28)) |i|
@@ -95,11 +95,11 @@
         ((|ls| (|List| (|Symbol|))) (|mt| (|Matrix| (|Polynomial| R)))
          (% (|Vector| (|Matrix| (|Polynomial| R)))))
         (SPROG
-         ((|lscopy| (|List| (|Symbol|)))
-          (|gamma| (|List| (|Matrix| (|Polynomial| R)))) (|c| (|Polynomial| R))
-          (|p| (|Polynomial| R)) (#1=#:G57 NIL) (|j| NIL) (#2=#:G56 NIL)
-          (|i| NIL) (|s| (|Symbol|)) (|mat| (|Matrix| (|Polynomial| R)))
-          (|nn| (|NonNegativeInteger|)))
+         ((|nn| (|NonNegativeInteger|)) (|mat| (|Matrix| (|Polynomial| R)))
+          (|s| (|Symbol|)) (|i| NIL) (#1=#:G60 NIL) (|j| NIL) (#2=#:G61 NIL)
+          (|p| (|Polynomial| R)) (|c| (|Polynomial| R))
+          (|gamma| (|List| (|Matrix| (|Polynomial| R))))
+          (|lscopy| (|List| (|Symbol|))))
          (SEQ (LETT |nn| (LENGTH |ls|))
               (COND
                ((OR (SPADCALL (ANROWS |mt|) |nn| (QREFELT % 34))
@@ -112,12 +112,12 @@
                    (SEQ
                     (LETT |mat| (MAKE_MATRIX1 |nn| |nn| (|spadConstant| % 38)))
                     (LETT |s| (|SPADfirst| |lscopy|))
-                    (SEQ (LETT |i| 1) (LETT #2# |nn|) G190
-                         (COND ((|greater_SI| |i| #2#) (GO G191)))
+                    (SEQ (LETT |i| 1) (LETT #1# |nn|) G190
+                         (COND ((|greater_SI| |i| #1#) (GO G191)))
                          (SEQ
                           (EXIT
-                           (SEQ (LETT |j| 1) (LETT #1# |nn|) G190
-                                (COND ((|greater_SI| |j| #1#) (GO G191)))
+                           (SEQ (LETT |j| 1) (LETT #2# |nn|) G190
+                                (COND ((|greater_SI| |j| #2#) (GO G191)))
                                 (SEQ (LETT |p| (QAREF2O |mt| |i| |j| 1 1))
                                      (EXIT
                                       (COND
@@ -144,13 +144,13 @@
          (|mt| (|Matrix| (|Fraction| (|Polynomial| R))))
          (% (|Vector| (|Matrix| (|Fraction| (|Polynomial| R))))))
         (SPROG
-         ((|lscopy| (|List| (|Symbol|)))
+         ((|nn| (|NonNegativeInteger|))
+          (|mat| (|Matrix| (|Fraction| (|Polynomial| R)))) (|s| (|Symbol|))
+          (|i| NIL) (#1=#:G77 NIL) (|j| NIL) (#2=#:G78 NIL)
+          (|r| (|Fraction| (|Polynomial| R))) (|q| (|Polynomial| R))
+          (|p| (|Polynomial| R)) (|c| (|Polynomial| R))
           (|gamma| (|List| (|Matrix| (|Fraction| (|Polynomial| R)))))
-          (|c| (|Polynomial| R)) (|p| (|Polynomial| R)) (|q| (|Polynomial| R))
-          (|r| (|Fraction| (|Polynomial| R))) (#1=#:G74 NIL) (|j| NIL)
-          (#2=#:G73 NIL) (|i| NIL) (|s| (|Symbol|))
-          (|mat| (|Matrix| (|Fraction| (|Polynomial| R))))
-          (|nn| (|NonNegativeInteger|)))
+          (|lscopy| (|List| (|Symbol|))))
          (SEQ (LETT |nn| (LENGTH |ls|))
               (COND
                ((OR (SPADCALL (ANROWS |mt|) |nn| (QREFELT % 34))
@@ -163,12 +163,12 @@
                    (SEQ
                     (LETT |mat| (MAKE_MATRIX1 |nn| |nn| (|spadConstant| % 49)))
                     (LETT |s| (|SPADfirst| |lscopy|))
-                    (SEQ (LETT |i| 1) (LETT #2# |nn|) G190
-                         (COND ((|greater_SI| |i| #2#) (GO G191)))
+                    (SEQ (LETT |i| 1) (LETT #1# |nn|) G190
+                         (COND ((|greater_SI| |i| #1#) (GO G191)))
                          (SEQ
                           (EXIT
-                           (SEQ (LETT |j| 1) (LETT #1# |nn|) G190
-                                (COND ((|greater_SI| |j| #1#) (GO G191)))
+                           (SEQ (LETT |j| 1) (LETT #2# |nn|) G190
+                                (COND ((|greater_SI| |j| #2#) (GO G191)))
                                 (SEQ (LETT |r| (QAREF2O |mt| |i| |j| 1 1))
                                      (LETT |q| (SPADCALL |r| (QREFELT % 50)))
                                      (EXIT
@@ -211,7 +211,7 @@
 (DECLAIM (NOTINLINE |StructuralConstantsPackage;|)) 
 
 (DEFUN |StructuralConstantsPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|StructuralConstantsPackage| DV$1))
@@ -225,9 +225,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |StructuralConstantsPackage| (#1=#:G75)
+(DEFUN |StructuralConstantsPackage| (#1=#:G79)
   (SPROG NIL
-         (PROG (#2=#:G76)
+         (PROG (#2=#:G80)
            (RETURN
             (COND
              ((LETT #2#
@@ -249,19 +249,19 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|List| 10) (|Matrix| 6)
               (0 . |listOfLists|) (|List| 6) (5 . |concat|)
               (|Mapping| 10 10 10) (11 . |reduce|) (|Vector| 6)
-              (17 . |construct|) (22 . |One|) (|Integer|) (|List| 8)
-              (26 . |elt|) (32 . |Zero|) (36 . |setColumn!|)
-              (|Union| 14 '"failed") (|LinearSystemMatrixPackage2| 6)
-              (43 . |solveUniquely|) |SCPKG;coordinates;MLV;2| (49 . *)
-              (|Vector| 8) (55 . |elt|) (61 . |elt|) (67 . |setelt!|)
-              |SCPKG;structuralConstants;LV;3| (|Boolean|)
-              (|NonNegativeInteger|) (75 . ~=) (|List| 40) (81 . |copy|)
-              (|Polynomial| 6) (86 . |Zero|) (90 . |totalDegree|) (|Symbol|)
-              (96 . |coefficient|) (103 . ~=) (|List| 46) (|Vector| 46)
-              (109 . |vector|) (|Matrix| 37) |SCPKG;structuralConstants;LMV;4|
-              (|Fraction| 37) (114 . |Zero|) (118 . |denom|) (123 . |numer|)
-              (128 . /) (|List| 56) (|Vector| 56) (134 . |vector|)
-              (|Matrix| 48) |SCPKG;structuralConstants;LMV;5|)
+              (17 . |construct|) (22 . |1|) (|Integer|) (|List| 8) (26 . |elt|)
+              (32 . |0|) (36 . |setColumn!|) (|Union| 14 '"failed")
+              (|LinearSystemMatrixPackage2| 6) (43 . |solveUniquely|)
+              |SCPKG;coordinates;MLV;2| (49 . *) (|Vector| 8) (55 . |elt|)
+              (61 . |elt|) (67 . |setelt!|) |SCPKG;structuralConstants;LV;3|
+              (|Boolean|) (|NonNegativeInteger|) (75 . ~=) (|List| 40)
+              (81 . |copy|) (|Polynomial| 6) (86 . |0|) (90 . |totalDegree|)
+              (|Symbol|) (96 . |coefficient|) (103 . ~=) (|List| 46)
+              (|Vector| 46) (109 . |vector|) (|Matrix| 37)
+              |SCPKG;structuralConstants;LMV;4| (|Fraction| 37) (114 . |0|)
+              (118 . |denom|) (123 . |numer|) (128 . /) (|List| 56)
+              (|Vector| 56) (134 . |vector|) (|Matrix| 48)
+              |SCPKG;structuralConstants;LMV;5|)
            '#(|structuralConstants| 139 |coordinates| 156) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)

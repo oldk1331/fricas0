@@ -10,8 +10,8 @@
           (|Record| (|:| |mantissa| #3=(|Integer|))
                     (|:| |exponent| #4=(|Integer|)))))
         (SPROG
-         ((|de| (|Integer|)) (|ye| #4#) (|ym| #3#) (|#G5| #2#) (|xe| #4#)
-          (|xm| #3#) (|#G4| #1#))
+         ((|#G4| #1#) (|xm| #3#) (|xe| #4#) (|#G5| #2#) (|ym| #3#) (|ye| #4#)
+          (|de| (|Integer|)))
          (SEQ
           (PROGN
            (LETT |#G4| |x|)
@@ -43,7 +43,7 @@
          (%
           (|Record| (|:| |mantissa| #2=(|Integer|))
                     (|:| |exponent| #3=(|Integer|)))))
-        (SPROG ((|ye| #3#) (|ym| #2#) (|#G8| #1#))
+        (SPROG ((|#G8| #1#) (|ym| #2#) (|ye| #3#))
                (SEQ
                 (PROGN
                  (LETT |#G8| |y|)
@@ -63,8 +63,8 @@
           (|Record| (|:| |mantissa| #3=(|Integer|))
                     (|:| |exponent| #4=(|Integer|)))))
         (SPROG
-         ((|ye| #4#) (|ym| #3#) (|#G12| #2#) (|xe| #4#) (|xm| #3#)
-          (|#G11| #1#))
+         ((|#G11| #1#) (|xm| #3#) (|xe| #4#) (|#G12| #2#) (|ym| #3#)
+          (|ye| #4#))
          (SEQ
           (PROGN
            (LETT |#G11| |x|)

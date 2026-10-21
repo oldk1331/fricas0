@@ -28,7 +28,7 @@
 (DECLAIM (NOTINLINE |StreamFunctions1;|)) 
 
 (DEFUN |StreamFunctions1;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|StreamFunctions1| DV$1))
@@ -42,9 +42,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |StreamFunctions1| (#1=#:G10)
+(DEFUN |StreamFunctions1| (#1=#:G11)
   (SPROG NIL
-         (PROG (#2=#:G11)
+         (PROG (#2=#:G12)
            (RETURN
             (COND
              ((LETT #2#

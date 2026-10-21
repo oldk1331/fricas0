@@ -1,14 +1,14 @@
 
-(PUT '|CHAR;=;2%B;1| '|SPADreplace| '|eql_SI|) 
+(MAKEPROP '|CHAR;=;2%B;1| '|SPADreplace| '|eql_SI|) 
 
 (SDEFUN |CHAR;=;2%B;1| ((|a| (%)) (|b| (%)) (% (|Boolean|))) (|eql_SI| |a| |b|)) 
 
-(PUT '|CHAR;<;2%B;2| '|SPADreplace| '|less_SI|) 
+(MAKEPROP '|CHAR;<;2%B;2| '|SPADreplace| '|less_SI|) 
 
 (SDEFUN |CHAR;<;2%B;2| ((|a| (%)) (|b| (%)) (% (|Boolean|)))
         (|less_SI| |a| |b|)) 
 
-(PUT '|CHAR;size;Nni;3| '|SPADreplace| '(XLAM NIL 1114112)) 
+(MAKEPROP '|CHAR;size;Nni;3| '|SPADreplace| '(XLAM NIL 1114112)) 
 
 (SDEFUN |CHAR;size;Nni;3| ((% (|NonNegativeInteger|))) 1114112) 
 
@@ -16,7 +16,7 @@
         (SPADCALL (- |n| 1) (QREFELT % 13))) 
 
 (SDEFUN |CHAR;lookup;%Pi;5| ((|c| (%)) (% (|PositiveInteger|)))
-        (SPROG ((#1=#:G266 NIL))
+        (SPROG ((#1=#:G4 NIL))
                (PROG1 (LETT #1# (+ 1 (SPADCALL |c| (QREFELT % 16))))
                  (|check_subtype2| (> #1# 0) '(|PositiveInteger|) '(|Integer|)
                                    #1#)))) 
@@ -24,7 +24,7 @@
 (SDEFUN |CHAR;char;I%;6| ((|n| (|Integer|)) (% (%)))
         (SPADCALL |n| (QREFELT % 18))) 
 
-(PUT '|CHAR;ord;%I;7| '|SPADreplace| '(XLAM (|c|) |c|)) 
+(MAKEPROP '|CHAR;ord;%I;7| '|SPADreplace| '(XLAM (|c|) |c|)) 
 
 (SDEFUN |CHAR;ord;%I;7| ((|c| (%)) (% (|Integer|))) |c|) 
 
@@ -59,7 +59,7 @@
 (SDEFUN |CHAR;alphanumeric?;%B;19| ((|c| (%)) (% (|Boolean|)))
         (SPADCALL |c| (|spadConstant| % 39) (QREFELT % 29))) 
 
-(PUT '|CHAR;char;S%;20| '|SPADreplace| '|STR_to_CHAR|) 
+(MAKEPROP '|CHAR;char;S%;20| '|SPADreplace| '|STR_to_CHAR|) 
 
 (SDEFUN |CHAR;char;S%;20| ((|s| (|String|)) (% (%))) (|STR_to_CHAR| |s|)) 
 
@@ -69,7 +69,7 @@
 (SDEFUN |CHAR;lowerCase;2%;22| ((|c| (%)) (% (%)))
         (CHAR-CODE (CHAR-DOWNCASE (CODE-CHAR (SPADCALL |c| (QREFELT % 16)))))) 
 
-(PUT '|CHAR;hashUpdate!;Hs%Hs;23| '|SPADreplace| 'HASHSTATEUPDATE) 
+(MAKEPROP '|CHAR;hashUpdate!;Hs%Hs;23| '|SPADreplace| 'HASHSTATEUPDATE) 
 
 (SDEFUN |CHAR;hashUpdate!;Hs%Hs;23|
         ((|hs| (|HashState|)) (|c| (%)) (% (|HashState|)))
@@ -86,13 +86,14 @@
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|Character| NIL (CONS 1 %))
           (|stuffDomainSlots| %)
+          (AND (|HasCategory| % '(|SetWithZero|)) (|augmentPredVector| % 1))
           (SETF |pv$| (QREFELT % 3))
           (QSETREFV % 6 (|SingleInteger|))
           %))) 
 
 (DEFUN |Character| ()
   (SPROG NIL
-         (PROG (#1=#:G287)
+         (PROG (#1=#:G25)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Character|))
@@ -126,20 +127,21 @@
               |CHAR;hashUpdate!;Hs%Hs;23| (|List| %) (|SingleInteger|)
               (|InputForm|))
            '#(~= 35 |upperCase?| 41 |upperCase| 46 |underscore| 51 |space| 55
-              |smaller?| 59 |size| 65 |random| 69 |quote| 73 |ord| 77 |newline|
-              82 |min| 86 |max| 92 |lowerCase?| 98 |lowerCase| 103 |lookup| 108
-              |latex| 113 |index| 118 |hexDigit?| 123 |hashUpdate!| 128 |hash|
-              134 |enumerate| 139 |digit?| 143 |convert| 148 |coerce| 153
-              |char| 158 |alphanumeric?| 168 |alphabetic?| 173 >= 178 > 184 =
-              190 <= 196 < 202)
+              |smaller?| 59 |size| 65 |sign| 69 |random| 74 |quote| 78
+              |positive?| 82 |ord| 87 |newline| 92 |negative?| 96 |min| 101
+              |max| 107 |lowerCase?| 113 |lowerCase| 118 |lookup| 123 |latex|
+              128 |index| 133 |hexDigit?| 138 |hashUpdate!| 143 |hash| 149
+              |enumerate| 154 |digit?| 158 |convert| 163 |coerce| 168 |char|
+              173 |alphanumeric?| 183 |alphabetic?| 188 >= 193 > 199 = 205 <=
+              211 < 217)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(NIL |Finite&| |OrderedSet&| NIL |SetCategory&| |Hashable&|
+                  '#(|Finite&| |OrderedSet&| NIL NIL |SetCategory&| |Hashable&|
                      NIL |PartialOrder&| |BasicType&| NIL)
                   (CONS
-                   '#((|OrderedFinite|) (|Finite|) (|OrderedSet|)
-                      (|Comparable|) (|SetCategory|) (|Hashable|)
+                   '#((|Finite|) (|OrderedSet|) (|Comparable|)
+                      (|ComparableRepresentation|) (|SetCategory|) (|Hashable|)
                       (|CoercibleTo| 24) (|PartialOrder|) (|BasicType|)
                       (|ConvertibleTo| 49))
                    (|makeByteWordVec2| 49
@@ -147,13 +149,14 @@
                                          26 0 31 0 26 0 33 0 26 0 35 0 26 0 37
                                          0 26 0 39 2 0 7 0 0 1 1 0 7 0 34 1 0 0
                                          0 43 0 0 0 22 0 0 0 20 2 0 7 0 0 1 0 0
-                                         10 11 0 0 0 19 0 0 0 21 1 0 12 0 16 0
-                                         0 0 23 2 0 0 0 0 1 2 0 0 0 0 1 1 0 7 0
-                                         36 1 0 0 0 44 1 0 14 0 17 1 0 41 0 1 1
-                                         0 0 14 15 1 0 7 0 32 2 0 45 45 0 46 1
-                                         0 48 0 1 0 0 47 1 1 0 7 0 30 1 0 49 0
-                                         1 1 0 24 0 25 1 0 0 41 42 1 0 0 12 13
-                                         1 0 7 0 40 1 0 7 0 38 2 0 7 0 0 1 2 0
-                                         7 0 0 1 2 0 7 0 0 8 2 0 7 0 0 1 2 0 7
-                                         0 0 9)))))
+                                         10 11 1 1 12 0 1 0 0 0 19 0 0 0 21 1 1
+                                         7 0 1 1 0 12 0 16 0 0 0 23 1 1 7 0 1 2
+                                         0 0 0 0 1 2 0 0 0 0 1 1 0 7 0 36 1 0 0
+                                         0 44 1 0 14 0 17 1 0 41 0 1 1 0 0 14
+                                         15 1 0 7 0 32 2 0 45 45 0 46 1 0 48 0
+                                         1 0 0 47 1 1 0 7 0 30 1 0 49 0 1 1 0
+                                         24 0 25 1 0 0 12 13 1 0 0 41 42 1 0 7
+                                         0 40 1 0 7 0 38 2 0 7 0 0 1 2 0 7 0 0
+                                         1 2 0 7 0 0 8 2 0 7 0 0 1 2 0 7 0 0
+                                         9)))))
            '|lookupComplete|)) 

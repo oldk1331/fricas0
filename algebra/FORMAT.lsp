@@ -1,5 +1,5 @@
 
-(PUT '|FORMAT;sayExpr| '|SPADreplace| '|sayFormatted|) 
+(MAKEPROP '|FORMAT;sayExpr| '|SPADreplace| '|sayFormatted|) 
 
 (SDEFUN |FORMAT;sayExpr| ((|s| (|String|)) (% (|Void|))) (|sayFormatted| |s|)) 
 
@@ -11,17 +11,17 @@
         (SPADCALL |e| |n| (QREFELT % 11))) 
 
 (SDEFUN |FORMAT;display;%V;4| ((|f| (%)) (% (|Void|)))
-        (SPROG ((#1=#:G14 NIL) (|s| NIL) (#2=#:G13 NIL) (#3=#:G12 NIL))
+        (SPROG ((#1=#:G12 NIL) (#2=#:G13 NIL) (|s| NIL) (#3=#:G14 NIL))
                (SEQ
                 (SEQ (LETT |s| NIL)
-                     (LETT #3#
+                     (LETT #1#
                            (SPADCALL (SPADCALL |f| (QREFELT % 14))
                                      (QREFELT % 16)))
                      G190
                      (COND
-                      ((OR (ATOM #3#) (PROGN (LETT |s| (CAR #3#)) NIL))
+                      ((OR (ATOM #1#) (PROGN (LETT |s| (CAR #1#)) NIL))
                        (GO G191)))
-                     (SEQ (EXIT (|FORMAT;sayExpr| |s| %))) (LETT #3# (CDR #3#))
+                     (SEQ (EXIT (|FORMAT;sayExpr| |s| %))) (LETT #1# (CDR #1#))
                      (GO G190) G191 (EXIT NIL))
                 (SEQ (LETT |s| NIL)
                      (LETT #2#
@@ -35,15 +35,15 @@
                      (GO G190) G191 (EXIT NIL))
                 (EXIT
                  (SEQ (LETT |s| NIL)
-                      (LETT #1#
+                      (LETT #3#
                             (SPADCALL (SPADCALL |f| (QREFELT % 18))
                                       (QREFELT % 16)))
                       G190
                       (COND
-                       ((OR (ATOM #1#) (PROGN (LETT |s| (CAR #1#)) NIL))
+                       ((OR (ATOM #3#) (PROGN (LETT |s| (CAR #3#)) NIL))
                         (GO G191)))
                       (SEQ (EXIT (|FORMAT;sayExpr| |s| %)))
-                      (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL)))))) 
+                      (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL)))))) 
 
 (SDEFUN |FORMAT;coerce;%Of;5| ((|x| (%)) (% (|OutputForm|)))
         (|coerceRe2E| |x|
@@ -89,27 +89,27 @@
                     (EXIT |current|)))) 
 
 (SDEFUN |FORMAT;newStructure| ((|label| (|String|)) (% (%)))
-        (SPROG ((|epi| (|OutputBox|)) (|pro| (|OutputBox|)))
+        (SPROG ((|pro| (|OutputBox|)) (|epi| (|OutputBox|)))
                (SEQ (LETT |pro| (SPADCALL |label| (QCAR (QREFELT % 25))))
                     (LETT |epi| (SPADCALL |label| (QCDR (QREFELT % 25))))
                     (EXIT (VECTOR |pro| (SPADCALL (QREFELT % 32)) |epi|))))) 
 
 (SDEFUN |FORMAT;new;%;11| ((% (%))) (|FORMAT;newStructure| "" %)) 
 
-(PUT '|FORMAT;prologue;%Ob;12| '|SPADreplace| '(XLAM (|f|) (QVELT |f| 0))) 
+(MAKEPROP '|FORMAT;prologue;%Ob;12| '|SPADreplace| '(XLAM (|f|) (QVELT |f| 0))) 
 
 (SDEFUN |FORMAT;prologue;%Ob;12| ((|f| (%)) (% (|OutputBox|))) (QVELT |f| 0)) 
 
-(PUT '|FORMAT;format;%Ob;13| '|SPADreplace| '(XLAM (|f|) (QVELT |f| 1))) 
+(MAKEPROP '|FORMAT;format;%Ob;13| '|SPADreplace| '(XLAM (|f|) (QVELT |f| 1))) 
 
 (SDEFUN |FORMAT;format;%Ob;13| ((|f| (%)) (% (|OutputBox|))) (QVELT |f| 1)) 
 
-(PUT '|FORMAT;epilogue;%Ob;14| '|SPADreplace| '(XLAM (|f|) (QVELT |f| 2))) 
+(MAKEPROP '|FORMAT;epilogue;%Ob;14| '|SPADreplace| '(XLAM (|f|) (QVELT |f| 2))) 
 
 (SDEFUN |FORMAT;epilogue;%Ob;14| ((|f| (%)) (% (|OutputBox|))) (QVELT |f| 2)) 
 
 (SDEFUN |FORMAT;format;Of%;15| ((|expr| (|OutputForm|)) (% (%)))
-        (SPROG ((|e| (|OutputForm|)) (|f| (%)))
+        (SPROG ((|f| (%)) (|e| (|OutputForm|)))
                (SEQ (LETT |f| (SPADCALL (QREFELT % 33)))
                     (LETT |e| (SPADCALL |expr| (QREFELT % 35)))
                     (SPADCALL |f| (SPADCALL |e| (QREFELT % 36)) (QREFELT % 31))
@@ -117,7 +117,7 @@
 
 (SDEFUN |FORMAT;formatStep;OfI%;16|
         ((|expr| (|OutputForm|)) (|stepNum| (|Integer|)) (% (%)))
-        (SPROG ((|e| (|OutputForm|)) (|f| (%)))
+        (SPROG ((|f| (%)) (|e| (|OutputForm|)))
                (SEQ
                 (LETT |f| (|FORMAT;newStructure| (STRINGIMAGE |stepNum|) %))
                 (LETT |e| (SPADCALL |expr| (QREFELT % 35)))
@@ -133,7 +133,7 @@
 (DECLAIM (NOTINLINE |Formatter;|)) 
 
 (DEFUN |Formatter;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Formatter| DV$1))
@@ -147,9 +147,9 @@
           (QSETREFV % 25 (CONS (ELT % 23) (ELT % 24)))
           %))) 
 
-(DEFUN |Formatter| (#1=#:G44)
+(DEFUN |Formatter| (#1=#:G46)
   (SPROG NIL
-         (PROG (#2=#:G45)
+         (PROG (#2=#:G47)
            (RETURN
             (COND
              ((LETT #2#

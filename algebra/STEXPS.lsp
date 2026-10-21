@@ -191,7 +191,7 @@
 (DECLAIM (NOTINLINE |StreamExponentialSeriesOperations;|)) 
 
 (DEFUN |StreamExponentialSeriesOperations;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|StreamExponentialSeriesOperations| DV$1))
@@ -205,9 +205,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |StreamExponentialSeriesOperations| (#1=#:G68)
+(DEFUN |StreamExponentialSeriesOperations| (#1=#:G70)
   (SPROG NIL
-         (PROG (#2=#:G69)
+         (PROG (#2=#:G71)
            (RETURN
             (COND
              ((LETT #2#
@@ -228,16 +228,16 @@
 (MAKEPROP '|StreamExponentialSeriesOperations| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|Stream| 6) (0 . |empty|)
-              (|Boolean|) (4 . |empty?|) (9 . |Zero|) (|Integer|) (13 . |Zero|)
+              (|Boolean|) (4 . |empty?|) (9 . |0|) (|Integer|) (13 . |0|)
               (17 . <) (23 . |rst|) (28 . |frst|) (|List| 6) (33 . |cons|)
-              (39 . |One|) (43 . |One|) (47 . +) (|SingleInteger|)
-              (53 . |Zero|) (|NonNegativeInteger|) (57 . |Zero|) (61 . =)
-              (67 . |binomial|) (73 . *) (79 . |first|) (84 . *) (90 . +)
-              (96 . |rest|) (101 . |explicitlyEmpty?|) (106 . |concat|)
-              (112 . |One|) (|Mapping| %) (116 . |delay|) (121 . -)
-              |STEXPS;*;3S;3| |STEXPS;deriv;2S;4| |STEXPS;integrate;Coef2S;5|
-              (|Mapping| 7) |STEXPS;lazyIntegrate;CoefMS;6| (126 . |cons|)
-              (|Mapping| 7 7) (|ParadoxicalCombinatorsForStreams| 6) (132 . Y)
+              (39 . |1|) (43 . |1|) (47 . +) (|SingleInteger|) (53 . |0|)
+              (|NonNegativeInteger|) (57 . |0|) (61 . =) (67 . |binomial|)
+              (73 . *) (79 . |first|) (84 . *) (90 . +) (96 . |rest|)
+              (101 . |explicitlyEmpty?|) (106 . |concat|) (112 . |1|)
+              (|Mapping| %) (116 . |delay|) (121 . -) |STEXPS;*;3S;3|
+              |STEXPS;deriv;2S;4| |STEXPS;integrate;Coef2S;5| (|Mapping| 7)
+              |STEXPS;lazyIntegrate;CoefMS;6| (126 . |cons|) (|Mapping| 7 7)
+              (|ParadoxicalCombinatorsForStreams| 6) (132 . Y)
               |STEXPS;exp0;2S;8| (|StreamTaylorSeriesOperations| 6) (137 . -)
               |STEXPS;log1;2S;9|)
            '#(|log1| 142 |lazyIntegrate| 147 |integrate| 153 |exp0| 159 |deriv|

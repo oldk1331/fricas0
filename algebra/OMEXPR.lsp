@@ -2,7 +2,7 @@
 (SDEFUN |OMEXPR;outputOMArith1|
         ((|dev| (|OpenMathDevice|)) (|sym| (|String|))
          (|args| (|List| (|Expression| R))) (% (|Void|)))
-        (SPROG ((#1=#:G23 NIL) (|arg| NIL))
+        (SPROG ((|arg| NIL) (#1=#:G26 NIL))
                (SEQ (SPADCALL |dev| (QREFELT % 16))
                     (SPADCALL |dev| "arith1" |sym| (QREFELT % 18))
                     (SEQ (LETT |arg| NIL) (LETT #1# |args|) G190
@@ -45,7 +45,7 @@
 (SDEFUN |OMEXPR;outputOMBinomial|
         ((|dev| (|OpenMathDevice|)) (|args| (|List| (|Expression| R)))
          (% (|Void|)))
-        (SPROG ((#1=#:G35 NIL) (|arg| NIL))
+        (SPROG ((|arg| NIL) (#1=#:G38 NIL))
                (SEQ
                 (COND
                  ((NULL (EQL (LENGTH |args|) 2))
@@ -152,11 +152,11 @@
         ((|dev| (|OpenMathDevice|)) (|op| (|Symbol|))
          (|args| (|List| (|Expression| R))) (% (|Void|)))
         (SPROG
-         ((#1=#:G67 NIL) (|arg| NIL)
+         ((|nargs| (|NonNegativeInteger|))
           (|omOp|
            (|Union| (|Record| (|:| |cd| (|String|)) (|:| |name| (|String|)))
                     "failed"))
-          (|nargs| (|NonNegativeInteger|)))
+          (|arg| NIL) (#1=#:G74 NIL))
          (SEQ (LETT |nargs| (LENGTH |args|))
               (EXIT
                (COND
@@ -217,20 +217,20 @@
 (SDEFUN |OMEXPR;outputOMExpr|
         ((|dev| (|OpenMathDevice|)) (|ex| (|Expression| R)) (% (|Void|)))
         (SPROG
-         ((|k| (|Kernel| (|Expression| R))) (#1=#:G94 NIL)
-          (|z|
-           (|Union|
-            (|Record| (|:| |val| (|Expression| R))
-                      (|:| |exponent| (|Integer|)))
-            "failed"))
-          (|s| (|Union| (|Symbol|) "failed"))
+         ((|v| (|Union| (|Symbol|) "failed"))
+          (|w| (|Union| (|List| (|Expression| R)) "failed"))
           (|x|
            (|Union|
             (|Record| (|:| |var| (|Kernel| (|Expression| R)))
                       (|:| |exponent| (|Integer|)))
             "failed"))
-          (|w| (|Union| (|List| (|Expression| R)) "failed"))
-          (|v| (|Union| (|Symbol|) "failed")))
+          (|s| (|Union| (|Symbol|) "failed"))
+          (|z|
+           (|Union|
+            (|Record| (|:| |val| (|Expression| R))
+                      (|:| |exponent| (|Integer|)))
+            "failed"))
+          (#1=#:G115 NIL) (|k| (|Kernel| (|Expression| R))))
          (SEQ
           (COND
            ((SPADCALL |ex| (QREFELT % 39))
@@ -245,7 +245,7 @@
                       ((NULL (QEQCAR |v| 1))
                        (PROGN
                         (LETT #1# (SPADCALL |dev| (QCDR |v|) (QREFELT % 44)))
-                        (GO #2=#:G91))))))
+                        (GO #2=#:G112))))))
                (SEQ (LETT |w| (SPADCALL |ex| (QREFELT % 46)))
                     (EXIT
                      (COND
@@ -318,7 +318,7 @@
 
 (SDEFUN |OMEXPR;OMwrite;EBS;13|
         ((|ex| (|Expression| R)) (|wholeObj| (|Boolean|)) (% (|String|)))
-        (SPROG ((|s| (|String|)) (|dev| (|OpenMathDevice|)) (|sp| (|None|)))
+        (SPROG ((|sp| (|None|)) (|dev| (|OpenMathDevice|)) (|s| (|String|)))
                (SEQ (LETT |s| "") (LETT |sp| (OM-STRINGTOSTRINGPTR |s|))
                     (LETT |dev|
                           (SPADCALL |sp| (SPADCALL (QREFELT % 65))
@@ -350,7 +350,7 @@
 (DECLAIM (NOTINLINE |ExpressionToOpenMath;|)) 
 
 (DEFUN |ExpressionToOpenMath;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|ExpressionToOpenMath| DV$1))
@@ -398,9 +398,9 @@
                      (QREFELT % 11)))
           %))) 
 
-(DEFUN |ExpressionToOpenMath| (#1=#:G103)
+(DEFUN |ExpressionToOpenMath| (#1=#:G124)
   (SPROG NIL
-         (PROG (#2=#:G104)
+         (PROG (#2=#:G125)
            (RETURN
             (COND
              ((LETT #2#
@@ -428,7 +428,7 @@
               |OMEXPR;OMwrite;OmdEBV;15| (17 . |OMputEndApp|)
               (22 . |OMputBind|) (27 . |OMputBVar|) (32 . |OMputEndBVar|)
               (37 . |OMputEndBind|) (|NonNegativeInteger|) (42 . ~=)
-              (|Integer|) (|List| 19) (48 . |elt|) (54 . |One|) (58 . |One|)
+              (|Integer|) (|List| 19) (48 . |elt|) (54 . |1|) (58 . |1|)
               (62 . |eval|) (|Union| 7 '"failed") (|Symbol|) (69 . |search|)
               (75 . |string|) (80 . |ground?|) (85 . |ground|) (90 . |OMwrite|)
               (|Union| 36 '"failed") (97 . |retractIfCan|)

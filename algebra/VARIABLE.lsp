@@ -6,14 +6,14 @@
 
 (SDEFUN |VARIABLE;variable;S;3| ((% (|Symbol|))) (QREFELT % 6)) 
 
-(PUT '|VARIABLE;=;2%B;4| '|SPADreplace| '(XLAM (|x| |y|) 'T)) 
+(MAKEPROP '|VARIABLE;=;2%B;4| '|SPADreplace| '(XLAM (|x| |y|) 'T)) 
 
 (SDEFUN |VARIABLE;=;2%B;4| ((|x| (%)) (|y| (%)) (% (|Boolean|))) 'T) 
 
 (DECLAIM (NOTINLINE |Variable;|)) 
 
 (DEFUN |Variable;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT |dv$| (LIST '|Variable| DV$1))
@@ -26,9 +26,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |Variable| (#1=#:G4)
+(DEFUN |Variable| (#1=#:G5)
   (SPROG NIL
-         (PROG (#2=#:G5)
+         (PROG (#2=#:G6)
            (RETURN
             (COND
              ((LETT #2#

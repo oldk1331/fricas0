@@ -14,7 +14,7 @@
 (DECLAIM (NOTINLINE |PartialDifferentialOperatorHelper;|)) 
 
 (DEFUN |PartialDifferentialOperatorHelper;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -55,7 +55,7 @@
 (MAKEPROP '|PartialDifferentialOperatorHelper| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|Automorphism| 6) (0 . |One|) |PDOHLP;id_map;VarA;1|
+              (|Automorphism| 6) (0 . |1|) |PDOHLP;id_map;VarA;1|
               (4 . |differentiate|) (|Mapping| 6 6) |PDOHLP;diff_map;VarM;2|)
            '#(|id_map| 10 |diff_map| 15) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))

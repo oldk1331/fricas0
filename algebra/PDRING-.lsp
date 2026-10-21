@@ -1,6 +1,6 @@
 
 (SDEFUN |PDRING-;differentiate;ALA;1| ((|r| (A)) (|l| (|List| S)) (% (A)))
-        (SPROG ((#1=#:G11 NIL) (|s| NIL))
+        (SPROG ((|s| NIL) (#1=#:G11 NIL))
                (SEQ
                 (SEQ (LETT |s| NIL) (LETT #1# |l|) G190
                      (COND
@@ -12,7 +12,7 @@
 
 (SDEFUN |PDRING-;differentiate;ASNniA;2|
         ((|r| (A)) (|s| (S)) (|n| (|NonNegativeInteger|)) (% (A)))
-        (SPROG ((#1=#:G16 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G16 NIL))
                (SEQ
                 (SEQ (LETT |i| 1) (LETT #1# |n|) G190
                      (COND ((|greater_SI| |i| #1#) (GO G191)))
@@ -23,17 +23,17 @@
 (SDEFUN |PDRING-;differentiate;ALLA;3|
         ((|r| (A)) (|ls| (|List| S)) (|ln| (|List| (|NonNegativeInteger|)))
          (% (A)))
-        (SPROG ((#1=#:G21 NIL) (|s| NIL) (#2=#:G22 NIL) (|n| NIL))
+        (SPROG ((|n| NIL) (#1=#:G22 NIL) (|s| NIL) (#2=#:G21 NIL))
                (SEQ
-                (SEQ (LETT |n| NIL) (LETT #2# |ln|) (LETT |s| NIL)
-                     (LETT #1# |ls|) G190
+                (SEQ (LETT |n| NIL) (LETT #1# |ln|) (LETT |s| NIL)
+                     (LETT #2# |ls|) G190
                      (COND
-                      ((OR (ATOM #1#) (PROGN (LETT |s| (CAR #1#)) NIL)
-                           (ATOM #2#) (PROGN (LETT |n| (CAR #2#)) NIL))
+                      ((OR (ATOM #2#) (PROGN (LETT |s| (CAR #2#)) NIL)
+                           (ATOM #1#) (PROGN (LETT |n| (CAR #1#)) NIL))
                        (GO G191)))
                      (SEQ
                       (EXIT (LETT |r| (SPADCALL |r| |s| |n| (QREFELT % 13)))))
-                     (LETT #1# (PROG1 (CDR #1#) (LETT #2# (CDR #2#))))
+                     (LETT #2# (PROG1 (CDR #2#) (LETT #1# (CDR #1#))))
                      (GO G190) G191 (EXIT NIL))
                 (EXIT |r|)))) 
 
@@ -55,7 +55,7 @@
 (DECLAIM (NOTINLINE |PartialDifferentialRing&;|)) 
 
 (DEFUN |PartialDifferentialRing&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

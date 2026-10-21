@@ -1,5 +1,5 @@
 
-(PUT '|AGG-;eq?;2SB;1| '|SPADreplace| 'EQ) 
+(MAKEPROP '|AGG-;eq?;2SB;1| '|SPADreplace| 'EQ) 
 
 (SDEFUN |AGG-;eq?;2SB;1| ((|a| (S)) (|b| (S)) (% (|Boolean|))) (EQ |a| |b|)) 
 
@@ -23,7 +23,7 @@
 (DECLAIM (NOTINLINE |Aggregate&;|)) 
 
 (DEFUN |Aggregate&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Aggregate&| DV$1))

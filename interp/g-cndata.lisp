@@ -3,44 +3,6 @@
 
 (IN-PACKAGE "BOOT")
 
-; mkLowerCaseConTable() ==
-; --Table is referenced by functions conPageFastPath and grepForAbbrev
-;   $lowerCaseConTb := MAKE_HASHTABLE('EQUAL)
-;   for x in allConstructors() repeat augmentLowerCaseConTable x
-;   $lowerCaseConTb
-
-(DEFUN |mkLowerCaseConTable| ()
-  (PROG ()
-    (RETURN
-     (PROGN
-      (SETQ |$lowerCaseConTb| (MAKE_HASHTABLE 'EQUAL))
-      ((LAMBDA (|bfVar#1| |x|)
-         (LOOP
-          (COND
-           ((OR (ATOM |bfVar#1|) (PROGN (SETQ |x| (CAR |bfVar#1|)) NIL))
-            (RETURN NIL))
-           ('T (|augmentLowerCaseConTable| |x|)))
-          (SETQ |bfVar#1| (CDR |bfVar#1|))))
-       (|allConstructors|) NIL)
-      |$lowerCaseConTb|))))
-
-; augmentLowerCaseConTable x ==
-;   y := get_database(x, 'ABBREVIATION)
-;   item:=[x,y,nil]
-;   HPUT($lowerCaseConTb,x,item)
-;   HPUT($lowerCaseConTb,DOWNCASE x,item)
-;   HPUT($lowerCaseConTb,y,item)
-
-(DEFUN |augmentLowerCaseConTable| (|x|)
-  (PROG (|y| |item|)
-    (RETURN
-     (PROGN
-      (SETQ |y| (|get_database| |x| 'ABBREVIATION))
-      (SETQ |item| (LIST |x| |y| NIL))
-      (HPUT |$lowerCaseConTb| |x| |item|)
-      (HPUT |$lowerCaseConTb| (DOWNCASE |x|) |item|)
-      (HPUT |$lowerCaseConTb| |y| |item|)))))
-
 ; abbreviation? abb ==
 ;   -- if it is an abbreviation, return the corresponding name
 ;   get_database(abb, 'CONSTRUCTOR)
@@ -103,19 +65,17 @@
       ('T |d|)))))
 
 ; getConstructorAbbreviation op ==
-;   constructor?(op) or throwKeyedMsg("S2IL0015",[op])
+;   constructor?(op) or throw_msg_unknown_type(op, false)
 
 (DEFUN |getConstructorAbbreviation| (|op|)
   (PROG ()
-    (RETURN
-     (OR (|constructor?| |op|) (|throwKeyedMsg| 'S2IL0015 (LIST |op|))))))
+    (RETURN (OR (|constructor?| |op|) (|throw_msg_unknown_type| |op| NIL)))))
 
 ; mkUserConstructorAbbreviation(c,a,type) ==
 ;   if not atom c then c := first c  --  Existing constructors will be wrapped
 ;   constructorAbbreviationErrorCheck(c, a, type)
 ;   clearClams()
 ;   clearConstructorCache(c)
-;   installConstructor(c)
 
 (DEFUN |mkUserConstructorAbbreviation| (|c| |a| |type|)
   (PROG ()
@@ -124,12 +84,12 @@
       (COND ((NULL (ATOM |c|)) (SETQ |c| (CAR |c|))))
       (|constructorAbbreviationErrorCheck| |c| |a| |type|)
       (|clearClams|)
-      (|clearConstructorCache| |c|)
-      (|installConstructor| |c|)))))
+      (|clearConstructorCache| |c|)))))
 
 ; abbQuery(x) ==
 ;     abb := get_database(x, 'ABBREVIATION) =>
-;         sayKeyedMsg("S2IZ0001", [abb, get_database(x, 'CONSTRUCTORKIND), x])
+;         say_msg("S2IZ0001", '"%1b abbreviates %b %2 %3 %d",
+;                 [abb, get_database(x, 'CONSTRUCTORKIND), x])
 ;     say_msg("S2IZ0003",
 ;         '"%1b is neither a constructor name nor a constructor abbreviation.",
 ;             [x])
@@ -139,35 +99,23 @@
     (RETURN
      (COND
       ((SETQ |abb| (|get_database| |x| 'ABBREVIATION))
-       (|sayKeyedMsg| 'S2IZ0001
+       (|say_msg| 'S2IZ0001 "%1b abbreviates %b %2 %3 %d"
         (LIST |abb| (|get_database| |x| 'CONSTRUCTORKIND) |x|)))
       ('T
        (|say_msg| 'S2IZ0003
         "%1b is neither a constructor name nor a constructor abbreviation."
         (LIST |x|)))))))
 
-; installConstructor(cname) ==
-;   item := [cname, get_database(cname, 'ABBREVIATION), nil]
-;   if BOUNDP '$lowerCaseConTb and $lowerCaseConTb then
-;     HPUT($lowerCaseConTb,cname,item)
-;     HPUT($lowerCaseConTb,DOWNCASE cname,item)
-
-(DEFUN |installConstructor| (|cname|)
-  (PROG (|item|)
-    (RETURN
-     (PROGN
-      (SETQ |item| (LIST |cname| (|get_database| |cname| 'ABBREVIATION) NIL))
-      (COND
-       ((AND (BOUNDP '|$lowerCaseConTb|) |$lowerCaseConTb|)
-        (HPUT |$lowerCaseConTb| |cname| |item|)
-        (HPUT |$lowerCaseConTb| (DOWNCASE |cname|) |item|)))))))
-
 ; constructorAbbreviationErrorCheck(c,a,typ) ==
-;   siz := SIZE (s := PNAME a)
-;   if typ = 'category and siz > 7
-;     then throwKeyedErrorMsg('precompilation,"S2IL0021",NIL)
-;   if siz > 8 then throwKeyedErrorMsg('precompilation,"S2IL0006",NIL)
-;   if s ~= UPCASE s then throwKeyedMsg("S2IL0006",NIL)
+;   siz := #(s := PNAME a)
+;   if typ = 'category and siz > 7 then
+;       throw_error_msg('precompilation, "S2IL0021", CONCAT(
+;           '"Category abbreviations must have 7 or fewer characters",
+;           '" and should be uppercase."), [])
+;   if siz > 8 or s ~= UPCASE(s) then
+;       throw_error_msg('precompilation, "S2IL0006", _
+;    '"Abbreviations must have 8 or fewer characters and should be uppercase.",
+;           [])
 ;   abb := get_database(c, 'ABBREVIATION)
 ;   name := get_database(a, 'CONSTRUCTOR)
 ;   type := get_database(c, 'CONSTRUCTORKIND)
@@ -179,13 +127,18 @@
   (PROG (|s| |siz| |abb| |name| |type|)
     (RETURN
      (PROGN
-      (SETQ |siz| (SIZE (SETQ |s| (PNAME |a|))))
+      (SETQ |siz| (LENGTH (SETQ |s| (PNAME |a|))))
       (COND
        ((AND (EQ |typ| '|category|) (< 7 |siz|))
-        (|throwKeyedErrorMsg| '|precompilation| 'S2IL0021 NIL)))
+        (|throw_error_msg| '|precompilation| 'S2IL0021
+         (CONCAT "Category abbreviations must have 7 or fewer characters"
+                 " and should be uppercase.")
+         NIL)))
       (COND
-       ((< 8 |siz|) (|throwKeyedErrorMsg| '|precompilation| 'S2IL0006 NIL)))
-      (COND ((NOT (EQUAL |s| (UPCASE |s|))) (|throwKeyedMsg| 'S2IL0006 NIL)))
+       ((OR (< 8 |siz|) (NOT (EQUAL |s| (UPCASE |s|))))
+        (|throw_error_msg| '|precompilation| 'S2IL0006
+         "Abbreviations must have 8 or fewer characters and should be uppercase."
+         NIL)))
       (SETQ |abb| (|get_database| |c| 'ABBREVIATION))
       (SETQ |name| (|get_database| |a| 'CONSTRUCTOR))
       (SETQ |type| (|get_database| |c| 'CONSTRUCTORKIND))
@@ -213,13 +166,13 @@
       ((AND (CONSP |u|) (EQ (CAR |u|) '|Union|)
             (PROGN (SETQ |arglist| (CDR |u|)) #1='T))
        (CONS '|Union|
-             ((LAMBDA (|bfVar#3| |bfVar#2| |a|)
+             ((LAMBDA (|bfVar#2| |bfVar#1| |a|)
                 (LOOP
                  (COND
-                  ((OR (ATOM |bfVar#2|) (PROGN (SETQ |a| (CAR |bfVar#2|)) NIL))
-                   (RETURN (NREVERSE |bfVar#3|)))
-                  (#1# (SETQ |bfVar#3| (CONS (|abbreviate| |a|) |bfVar#3|))))
-                 (SETQ |bfVar#2| (CDR |bfVar#2|))))
+                  ((OR (ATOM |bfVar#1|) (PROGN (SETQ |a| (CAR |bfVar#1|)) NIL))
+                   (RETURN (NREVERSE |bfVar#2|)))
+                  (#1# (SETQ |bfVar#2| (CONS (|abbreviate| |a|) |bfVar#2|))))
+                 (SETQ |bfVar#1| (CDR |bfVar#1|))))
               NIL |arglist| NIL)))
       ((AND (CONSP |u|)
             (PROGN (SETQ |op| (CAR |u|)) (SETQ |arglist| (CDR |u|)) #1#))
@@ -293,18 +246,18 @@
                       (#1='T
                        (PROGN
                         (SETQ |largs|
-                                ((LAMBDA (|bfVar#5| |bfVar#4| |arg|)
+                                ((LAMBDA (|bfVar#4| |bfVar#3| |arg|)
                                    (LOOP
                                     (COND
-                                     ((OR (ATOM |bfVar#4|)
+                                     ((OR (ATOM |bfVar#3|)
                                           (PROGN
-                                           (SETQ |arg| (CAR |bfVar#4|))
+                                           (SETQ |arg| (CAR |bfVar#3|))
                                            NIL))
-                                      (RETURN (NREVERSE |bfVar#5|)))
+                                      (RETURN (NREVERSE |bfVar#4|)))
                                      (#1#
-                                      (SETQ |bfVar#5|
-                                              (CONS '|$EmptyMode| |bfVar#5|))))
-                                    (SETQ |bfVar#4| (CDR |bfVar#4|))))
+                                      (SETQ |bfVar#4|
+                                              (CONS '|$EmptyMode| |bfVar#4|))))
+                                    (SETQ |bfVar#3| (CDR |bfVar#3|))))
                                  NIL (|getPartialConstructorModemapSig| |a|)
                                  NIL))
                         (|unabbrev1| (CONS |u| |largs|) |modeIfTrue|)))))
@@ -320,17 +273,17 @@
         (COND
          ((EQ |op| '|Join|)
           (CONS '|Join|
-                ((LAMBDA (|bfVar#7| |bfVar#6| |x|)
+                ((LAMBDA (|bfVar#6| |bfVar#5| |x|)
                    (LOOP
                     (COND
-                     ((OR (ATOM |bfVar#6|)
-                          (PROGN (SETQ |x| (CAR |bfVar#6|)) NIL))
-                      (RETURN (NREVERSE |bfVar#7|)))
+                     ((OR (ATOM |bfVar#5|)
+                          (PROGN (SETQ |x| (CAR |bfVar#5|)) NIL))
+                      (RETURN (NREVERSE |bfVar#6|)))
                      (#1#
-                      (SETQ |bfVar#7|
+                      (SETQ |bfVar#6|
                               (CONS (|unabbrev1| |x| |modeIfTrue|)
-                                    |bfVar#7|))))
-                    (SETQ |bfVar#6| (CDR |bfVar#6|))))
+                                    |bfVar#6|))))
+                    (SETQ |bfVar#5| (CDR |bfVar#5|))))
                  NIL |arglist| NIL)))
          ((SETQ |d| (|isDomainValuedVariable| |op|))
           (|throw_msg| 'S2IL0013 "Error: %1b has value %2bp ."
@@ -362,43 +315,42 @@
      (COND
       ((EQ |op| '|Mapping|)
        (CONS |op|
-             ((LAMBDA (|bfVar#9| |bfVar#8| |a|)
+             ((LAMBDA (|bfVar#8| |bfVar#7| |a|)
                 (LOOP
                  (COND
-                  ((OR (ATOM |bfVar#8|) (PROGN (SETQ |a| (CAR |bfVar#8|)) NIL))
-                   (RETURN (NREVERSE |bfVar#9|)))
+                  ((OR (ATOM |bfVar#7|) (PROGN (SETQ |a| (CAR |bfVar#7|)) NIL))
+                   (RETURN (NREVERSE |bfVar#8|)))
                   (#1='T
-                   (SETQ |bfVar#9|
-                           (CONS (|unabbrev1| |a| |modeIfTrue|) |bfVar#9|))))
-                 (SETQ |bfVar#8| (CDR |bfVar#8|))))
+                   (SETQ |bfVar#8|
+                           (CONS (|unabbrev1| |a| |modeIfTrue|) |bfVar#8|))))
+                 (SETQ |bfVar#7| (CDR |bfVar#7|))))
               NIL |arglist| NIL)))
       ((EQ |op| '|Union|)
        (CONS |op|
-             ((LAMBDA (|bfVar#11| |bfVar#10| |a|)
+             ((LAMBDA (|bfVar#10| |bfVar#9| |a|)
                 (LOOP
                  (COND
-                  ((OR (ATOM |bfVar#10|)
-                       (PROGN (SETQ |a| (CAR |bfVar#10|)) NIL))
-                   (RETURN (NREVERSE |bfVar#11|)))
+                  ((OR (ATOM |bfVar#9|) (PROGN (SETQ |a| (CAR |bfVar#9|)) NIL))
+                   (RETURN (NREVERSE |bfVar#10|)))
                   (#1#
-                   (SETQ |bfVar#11|
+                   (SETQ |bfVar#10|
                            (CONS (|unabbrevUnionComponent| |a| |modeIfTrue|)
-                                 |bfVar#11|))))
-                 (SETQ |bfVar#10| (CDR |bfVar#10|))))
+                                 |bfVar#10|))))
+                 (SETQ |bfVar#9| (CDR |bfVar#9|))))
               NIL |arglist| NIL)))
       ((EQ |op| '|Record|)
        (CONS |op|
-             ((LAMBDA (|bfVar#13| |bfVar#12| |a|)
+             ((LAMBDA (|bfVar#12| |bfVar#11| |a|)
                 (LOOP
                  (COND
-                  ((OR (ATOM |bfVar#12|)
-                       (PROGN (SETQ |a| (CAR |bfVar#12|)) NIL))
-                   (RETURN (NREVERSE |bfVar#13|)))
+                  ((OR (ATOM |bfVar#11|)
+                       (PROGN (SETQ |a| (CAR |bfVar#11|)) NIL))
+                   (RETURN (NREVERSE |bfVar#12|)))
                   (#1#
-                   (SETQ |bfVar#13|
+                   (SETQ |bfVar#12|
                            (CONS (|unabbrevRecordComponent| |a| |modeIfTrue|)
-                                 |bfVar#13|))))
-                 (SETQ |bfVar#12| (CDR |bfVar#12|))))
+                                 |bfVar#12|))))
+                 (SETQ |bfVar#11| (CDR |bfVar#11|))))
               NIL |arglist| NIL)))
       (#1# NIL)))))
 
@@ -476,19 +428,19 @@
     (RETURN
      (PROGN
       (SETQ |res| NIL)
-      ((LAMBDA (|bfVar#14| |arg| |bfVar#15| |type|)
+      ((LAMBDA (|bfVar#13| |arg| |bfVar#14| |type|)
          (LOOP
           (COND
-           ((OR (ATOM |bfVar#14|) (PROGN (SETQ |arg| (CAR |bfVar#14|)) NIL)
-                (ATOM |bfVar#15|) (PROGN (SETQ |type| (CAR |bfVar#15|)) NIL))
+           ((OR (ATOM |bfVar#13|) (PROGN (SETQ |arg| (CAR |bfVar#13|)) NIL)
+                (ATOM |bfVar#14|) (PROGN (SETQ |type| (CAR |bfVar#14|)) NIL))
             (RETURN NIL))
            ('T
             (PROGN
              (COND
               ((|categoryForm?| |type|) (SETQ |arg| (|abbreviate| |arg|))))
              (SETQ |res| (APPEND |res| (CONS |arg| NIL))))))
-          (SETQ |bfVar#14| (CDR |bfVar#14|))
-          (SETQ |bfVar#15| (CDR |bfVar#15|))))
+          (SETQ |bfVar#13| (CDR |bfVar#13|))
+          (SETQ |bfVar#14| (CDR |bfVar#14|))))
        |arglist| NIL |argtypes| NIL)
       |res|))))
 
@@ -511,20 +463,20 @@
         (LIST |op| (|plural| (LENGTH |argtypes|) "argument")
               (|bright| (LENGTH |arglist|)))))
       (#1='T
-       ((LAMBDA (|bfVar#18| |bfVar#16| |arg| |bfVar#17| |type|)
+       ((LAMBDA (|bfVar#17| |bfVar#15| |arg| |bfVar#16| |type|)
           (LOOP
            (COND
-            ((OR (ATOM |bfVar#16|) (PROGN (SETQ |arg| (CAR |bfVar#16|)) NIL)
-                 (ATOM |bfVar#17|) (PROGN (SETQ |type| (CAR |bfVar#17|)) NIL))
-             (RETURN (NREVERSE |bfVar#18|)))
+            ((OR (ATOM |bfVar#15|) (PROGN (SETQ |arg| (CAR |bfVar#15|)) NIL)
+                 (ATOM |bfVar#16|) (PROGN (SETQ |type| (CAR |bfVar#16|)) NIL))
+             (RETURN (NREVERSE |bfVar#17|)))
             (#1#
-             (SETQ |bfVar#18|
+             (SETQ |bfVar#17|
                      (CONS
                       (COND
                        ((|categoryForm?| |type|)
                         (|unabbrev1| |arg| |modeIfTrue|))
                        (#1# |arg|))
-                      |bfVar#18|))))
-           (SETQ |bfVar#16| (CDR |bfVar#16|))
-           (SETQ |bfVar#17| (CDR |bfVar#17|))))
+                      |bfVar#17|))))
+           (SETQ |bfVar#15| (CDR |bfVar#15|))
+           (SETQ |bfVar#16| (CDR |bfVar#16|))))
         NIL |arglist| NIL |argtypes| NIL))))))

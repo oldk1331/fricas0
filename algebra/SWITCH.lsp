@@ -1,22 +1,22 @@
 
 (SDEFUN |SWITCH;coerce;%Of;1| ((|s| (%)) (% (|OutputForm|)))
         (SPROG
-         ((|ran| (|List| (|OutputForm|))) (#1=#:G19 NIL) (|u| NIL)
-          (#2=#:G18 NIL) (|rat| (|OutputForm|)))
+         ((|rat| (|OutputForm|)) (#1=#:G18 NIL) (|u| NIL) (#2=#:G19 NIL)
+          (|ran| (|List| (|OutputForm|))))
          (SEQ (LETT |rat| (SPADCALL (QCAR |s|) (QREFELT % 12)))
               (LETT |ran|
                     (PROGN
-                     (LETT #2# NIL)
-                     (SEQ (LETT |u| NIL) (LETT #1# (QCDR |s|)) G190
+                     (LETT #1# NIL)
+                     (SEQ (LETT |u| NIL) (LETT #2# (QCDR |s|)) G190
                           (COND
-                           ((OR (ATOM #1#) (PROGN (LETT |u| (CAR #1#)) NIL))
+                           ((OR (ATOM #2#) (PROGN (LETT |u| (CAR #2#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #2#
-                                  (CONS (SPADCALL |u| (QREFELT % 14)) #2#))))
-                          (LETT #1# (CDR #1#)) (GO G190) G191
-                          (EXIT (NREVERSE #2#)))))
+                            (LETT #1#
+                                  (CONS (SPADCALL |u| (QREFELT % 14)) #1#))))
+                          (LETT #2# (CDR #2#)) (GO G190) G191
+                          (EXIT (NREVERSE #1#)))))
               (EXIT
                (COND
                 ((SPADCALL (QCAR |s|) (QREFELT % 10) (QREFELT % 16))
@@ -186,7 +186,7 @@
                        (|:| CF (|Expression| (|Complex| (|Float|))))
                        (|:| |switch| $$))
               (10 . |coerce|) (|Boolean|) (15 . =) (|Expression| (|Integer|))
-              (21 . |One|) (|List| %) (25 . |prefix|) (31 . |infix|)
+              (21 . |1|) (|List| %) (25 . |prefix|) (31 . |infix|)
               |SWITCH;coerce;%Of;1| (37 . |coerce|) |SWITCH;coerce;S%;2|
               (|Union| (|:| I 17) (|:| F (|Expression| (|Float|)))
                        (|:| CF (|Expression| (|Complex| (|Float|))))
@@ -196,9 +196,9 @@
               |SWITCH;AND;2U%;9| |SWITCH;OR;2U%;10| |SWITCH;EQ;2U%;11|)
            '#(|coerce| 42 OR 52 NOT 58 LT 68 LE 74 GT 80 GE 86 EQ 92 AND 98)
            'NIL
-           (CONS (|makeByteWordVec2| 1 '(0))
-                 (CONS '#(NIL)
-                       (CONS '#((|CoercibleTo| 11))
+           (CONS (|makeByteWordVec2| 1 '(0 0))
+                 (CONS '#(NIL NIL)
+                       (CONS '#((|CoercibleFrom| 7) (|CoercibleTo| 11))
                              (|makeByteWordVec2| 34
                                                  '(1 8 0 7 9 1 8 11 0 12 1 13
                                                    11 0 14 2 8 15 0 0 16 0 17 0

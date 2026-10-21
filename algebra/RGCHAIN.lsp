@@ -2,7 +2,7 @@
 (DECLAIM (NOTINLINE |RegularChain;|)) 
 
 (DEFUN |RegularChain;| (|#1| |#2|)
-  (SPROG ((#1=#:G31 NIL) (|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL) (#1=#:G31 NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 |#2|)

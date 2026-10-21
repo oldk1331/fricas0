@@ -3,8 +3,8 @@
         ((|xVals| (|Segment| (|Float|))) (|yVals| (|Segment| (|Float|)))
          (% (|List| (|Segment| (|Float|)))))
         (SPROG
-         ((|pad| (|Float|)) (|yDiff| #1=(|Float|)) (|xDiff| #1#)
-          (|yLo| #2=(|Float|)) (|yHi| #3=(|Float|)) (|xLo| #2#) (|xHi| #3#))
+         ((|xHi| #1=(|Float|)) (|xLo| #2=(|Float|)) (|yHi| #1#) (|yLo| #2#)
+          (|xDiff| #3=(|Float|)) (|yDiff| #3#) (|pad| (|Float|)))
          (SEQ (LETT |xHi| (SPADCALL |xVals| (QREFELT % 10)))
               (LETT |xLo| (SPADCALL |xVals| (QREFELT % 11)))
               (LETT |yHi| (SPADCALL |yVals| (QREFELT % 10)))
@@ -43,8 +43,8 @@
 (SDEFUN |DRAWCURV;polyEquation|
         ((|eq| (|Equation| |Ex|)) (% (|Polynomial| (|Integer|))))
         (SPROG
-         ((|rat| (|Fraction| (|Polynomial| R)))
-          (|r| (|Union| (|Fraction| (|Polynomial| R)) "failed")) (|ff| (|Ex|)))
+         ((|ff| (|Ex|)) (|r| (|Union| (|Fraction| (|Polynomial| R)) "failed"))
+          (|rat| (|Fraction| (|Polynomial| R))))
          (SEQ
           (LETT |ff|
                 (SPADCALL (SPADCALL |eq| (QREFELT % 23))
@@ -70,15 +70,16 @@
         ((|eq| (|Equation| |Ex|)) (|x| (|Symbol|)) (|y| (|Symbol|))
          (|l| (|List| (|DrawOption|))) (% (|GraphImage|)))
         (SPROG
-         ((|crCol| (|Palette|)) (|ptCol| (|Palette|))
-          (|scaledRanges| (|List| (|Segment| (|Float|))))
-          (|acplot| (|PlaneAlgebraicCurvePlot|))
-          (|floatRanges| (|List| (|Segment| (|Float|))))
-          (|yRangeFloat| #1=(|Segment| (|Float|))) (|xRangeFloat| #1#)
-          (|yRange| #2=(|Segment| (|Fraction| (|Integer|)))) (|xRange| #2#)
+         ((|p| (|Polynomial| (|Integer|)))
+          (|floatRange| #1=(|Union| (|Any|) #2="failed")) (|ratRange| #1#)
+          (#3=#:G35 NIL)
           (|ranges| (|List| (|Segment| (|Fraction| (|Integer|)))))
-          (#3=#:G22 NIL) (|ratRange| #4=(|Union| (|Any|) #5="failed"))
-          (|floatRange| #4#) (|p| (|Polynomial| (|Integer|))))
+          (|xRange| #4=(|Segment| (|Fraction| (|Integer|)))) (|yRange| #4#)
+          (|xRangeFloat| #5=(|Segment| (|Float|))) (|yRangeFloat| #5#)
+          (|floatRanges| (|List| (|Segment| (|Float|))))
+          (|acplot| (|PlaneAlgebraicCurvePlot|))
+          (|scaledRanges| (|List| (|Segment| (|Float|)))) (|ptCol| (|Palette|))
+          (|crCol| (|Palette|)))
          (SEQ (LETT |p| (|DRAWCURV;polyEquation| |eq| %))
               (LETT |floatRange| (SPADCALL |l| '|rangeFloat| (QREFELT % 42)))
               (LETT |ratRange| (SPADCALL |l| '|rangeRat| (QREFELT % 42)))
@@ -110,7 +111,7 @@
                         (PROG2 (LETT #3# |floatRange|)
                             (QCDR #3#)
                           (|check_union2| (QEQCAR #3# 0) (|Any|)
-                                          (|Union| (|Any|) #5#) #3#))
+                                          (|Union| (|Any|) #2#) #3#))
                         (QREFELT % 53)))
                  (COND
                   ((NULL (SPADCALL |floatRanges| 2 (QREFELT % 55)))
@@ -167,7 +168,7 @@
 (DECLAIM (NOTINLINE |TopLevelDrawFunctionsForAlgebraicCurves;|)) 
 
 (DEFUN |TopLevelDrawFunctionsForAlgebraicCurves;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -185,9 +186,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |TopLevelDrawFunctionsForAlgebraicCurves| (&REST #1=#:G34)
+(DEFUN |TopLevelDrawFunctionsForAlgebraicCurves| (&REST #1=#:G49)
   (SPROG NIL
-         (PROG (#2=#:G35)
+         (PROG (#2=#:G50)
            (RETURN
             (COND
              ((LETT #2#
@@ -220,8 +221,8 @@
               (76 . |retractIfCan|) (81 . |numer|) (|Polynomial| 14)
               (|Mapping| 14 6) (|PolynomialFunctions2| 6 14) (86 . |map|)
               (|Union| 51 '"failed") (|List| %) (|Symbol|) (|DrawOption|)
-              (92 . |option|) (98 . |Zero|) (102 . |Zero|) (|Fraction| 14)
-              (106 . |Zero|) (|Segment| 45) (110 . |segment|) (116 . |Zero|)
+              (92 . |option|) (98 . |0|) (102 . |0|) (|Fraction| 14)
+              (106 . |0|) (|Segment| 45) (110 . |segment|) (116 . |0|)
               (|List| 9) (|Any|) (|AnyFunctions1| 50) (120 . |retract|)
               (|NonNegativeInteger|) (125 . |size?|) (131 . |second|)
               (136 . |retract|) (|Mapping| 45 8) (|SegmentFunctions2| 8 45)

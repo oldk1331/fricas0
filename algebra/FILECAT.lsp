@@ -24,7 +24,18 @@
                                           (LETT |FileCategory;CAT|
                                                 (|Join| (|SetCategory|)
                                                         (|mkCategory|
-                                                         '(((|open| (% |t#1|))
+                                                         '(((|openIfCan|
+                                                             ((|Union| %
+                                                                       "failed")
+                                                              |t#1|))
+                                                            T)
+                                                           ((|open| (% |t#1|))
+                                                            T)
+                                                           ((|openIfCan|
+                                                             ((|Union| %
+                                                                       "failed")
+                                                              |t#1|
+                                                              (|String|)))
                                                             T)
                                                            ((|open|
                                                              (% |t#1|

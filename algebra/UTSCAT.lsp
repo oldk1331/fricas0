@@ -72,7 +72,12 @@
                                                              (|NonNegativeInteger|)))
                                                            T)
                                                           ((^ (% % |t#1|))
-                                                           (|has| |t#1|
-                                                                  (|Field|))))
+                                                           (AND
+                                                            (|has| |t#1|
+                                                                   (|Algebra|
+                                                                    (|Fraction|
+                                                                     (|Integer|))))
+                                                            (|has| |t#1|
+                                                                   (|Field|)))))
                                                         NIL NIL NIL))))))))
            (SETELT #1# 0 (LIST '|UnivariateTaylorSeriesCategory| |t#1|))))) 

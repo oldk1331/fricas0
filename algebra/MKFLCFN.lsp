@@ -32,7 +32,7 @@
 
 (SDEFUN |MKFLCFN;mkDefun|
         ((|s| (|InputForm|)) (|lv| (|List| (|InputForm|))) (% (|InputForm|)))
-        (SPROG ((|fun| (|InputForm|)) (|name| (|InputForm|)))
+        (SPROG ((|name| (|InputForm|)) (|fun| (|InputForm|)))
                (SEQ
                 (LETT |name|
                       (SPADCALL (SPADCALL (QREFELT % 21)) (QREFELT % 9)))
@@ -53,10 +53,9 @@
         ((|f| (S)) (|x| (|Symbol|)) (|y| (|Symbol|))
          (% (|Mapping| (|DoubleFloat|) (|DoubleFloat|) (|DoubleFloat|))))
         (SPROG
-         ((|spadform| (|InputForm|)) (|spadname| (|Symbol|))
-          (|t| (|List| (|InputForm|))) (|name| (|InputForm|))
-          (|iy| #1=(|InputForm|)) (|ix| #1#)
-          (|u| (|Union| (|InputForm|) "failed")))
+         ((|u| (|Union| (|InputForm|) "failed")) (|ix| #1=(|InputForm|))
+          (|iy| #1#) (|name| (|InputForm|)) (|t| (|List| (|InputForm|)))
+          (|spadname| (|Symbol|)) (|spadform| (|InputForm|)))
          (SEQ (LETT |u| (|MKFLCFN;mkLisp| (SPADCALL |f| (QREFELT % 22)) %))
               (EXIT
                (COND ((QEQCAR |u| 1) (SPADCALL |f| |x| |y| (QREFELT % 25)))
@@ -92,9 +91,9 @@
         ((|f| (S)) (|var| (|Symbol|))
          (% (|Mapping| (|DoubleFloat|) (|DoubleFloat|))))
         (SPROG
-         ((|spadform| (|InputForm|)) (|spadname| (|Symbol|))
-          (|t| (|List| (|InputForm|))) (|name| (|InputForm|))
-          (|ivar| (|InputForm|)) (|u| (|Union| (|InputForm|) "failed")))
+         ((|u| (|Union| (|InputForm|) "failed")) (|ivar| (|InputForm|))
+          (|name| (|InputForm|)) (|t| (|List| (|InputForm|)))
+          (|spadname| (|Symbol|)) (|spadform| (|InputForm|)))
          (SEQ (LETT |u| (|MKFLCFN;mkLisp| (SPADCALL |f| (QREFELT % 22)) %))
               (EXIT
                (COND ((QEQCAR |u| 1) (SPADCALL |f| |var| (QREFELT % 36)))
@@ -129,7 +128,7 @@
         ((|f| (S)) (|v| (|Symbol|)) (|s| (|Symbol|))
          (% (|Mapping| (|DoubleFloat|) (|DoubleFloat|))))
         (SPROG
-         ((|rf| #1=(|InputForm|)) (|rz| #1#) (|z| #1#) (|u| (|InputForm|)))
+         ((|u| (|InputForm|)) (|z| #1=(|InputForm|)) (|rz| #1#) (|rf| #1#))
          (SEQ (LETT |u| (SPADCALL |f| (QREFELT % 22)))
               (LETT |z|
                     (SPADCALL
@@ -158,34 +157,34 @@
         ((|l| (|List| (|InputForm|)))
          (% (|Union| (|List| (|InputForm|)) "failed")))
         (SPROG
-         ((|ans| (|List| (|InputForm|))) (#1=#:G57 NIL)
-          (|u| (|Union| (|InputForm|) "failed")) (#2=#:G58 NIL) (|s| NIL))
+         ((|s| NIL) (#1=#:G61 NIL) (|u| (|Union| (|InputForm|) "failed"))
+          (#2=#:G60 NIL) (|ans| (|List| (|InputForm|))))
          (SEQ
           (EXIT
            (SEQ (LETT |ans| NIL)
-                (SEQ (LETT |s| NIL) (LETT #2# |l|) G190
+                (SEQ (LETT |s| NIL) (LETT #1# |l|) G190
                      (COND
-                      ((OR (ATOM #2#) (PROGN (LETT |s| (CAR #2#)) NIL))
+                      ((OR (ATOM #1#) (PROGN (LETT |s| (CAR #1#)) NIL))
                        (GO G191)))
                      (SEQ (LETT |u| (|MKFLCFN;mkLisp| |s| %))
                           (EXIT
                            (COND
                             ((QEQCAR |u| 1)
                              (PROGN
-                              (LETT #1# (CONS 1 "failed"))
-                              (GO #3=#:G56)))
+                              (LETT #2# (CONS 1 "failed"))
+                              (GO #3=#:G59)))
                             ('T (LETT |ans| (CONS (QCDR |u|) |ans|))))))
-                     (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                     (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
                 (EXIT (CONS 0 (NREVERSE |ans|)))))
-          #3# (EXIT #1#)))) 
+          #3# (EXIT #2#)))) 
 
 (SDEFUN |MKFLCFN;mkLisp|
         ((|s| (|InputForm|)) (% (|Union| (|InputForm|) "failed")))
         (SPROG
-         ((|b| (|DoubleFloat|)) (|e| #1=(|InputForm|)) (|a| #1#) (|ii| #1#)
-          (|ll| (|List| (|InputForm|)))
-          (|u| (|Union| (|List| (|InputForm|)) "failed")) (|op| (|InputForm|))
-          (|l| (|List| (|InputForm|))))
+         ((|l| (|List| (|InputForm|))) (|op| (|InputForm|))
+          (|u| (|Union| (|List| (|InputForm|)) "failed"))
+          (|ll| (|List| (|InputForm|))) (|ii| #1=(|InputForm|)) (|a| #1#)
+          (|e| #1#) (|b| (|DoubleFloat|)))
          (SEQ
           (COND
            ((SPADCALL |s| (QREFELT % 45))
@@ -266,7 +265,7 @@
 (DECLAIM (NOTINLINE |MakeFloatCompiledFunction;|)) 
 
 (DEFUN |MakeFloatCompiledFunction;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|MakeFloatCompiledFunction| DV$1))
@@ -292,9 +291,9 @@
                      (QREFELT % 11)))
           %))) 
 
-(DEFUN |MakeFloatCompiledFunction| (#1=#:G77)
+(DEFUN |MakeFloatCompiledFunction| (#1=#:G80)
   (SPROG NIL
-         (PROG (#2=#:G78)
+         (PROG (#2=#:G81)
            (RETURN
             (COND
              ((LETT #2#
@@ -330,7 +329,7 @@
               |MKFLCFN;make_imaginary_part_function;SSM;12| (98 . |atom?|)
               (103 . |integer?|) (|Integer|) (108 . |integer|) (|DoubleFloat|)
               (113 . |convert|) (118 . |destruct|) (|List| 8) (123 . |elt|)
-              (129 . |One|) (133 . |upperCase|) (138 . |second|)
+              (129 . |1|) (133 . |upperCase|) (138 . |second|)
               (143 . |convert|) (148 . /))
            '#(|make_real_part_function| 154 |make_imaginary_part_function| 160
               |makeFloatFunction| 166)

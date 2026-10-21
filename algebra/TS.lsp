@@ -1,7 +1,7 @@
 
 (SDEFUN |TS;polynomial;%NniP;1|
         ((|s| (%)) (|n| (|NonNegativeInteger|)) (% (|Polynomial| |Coef|)))
-        (SPROG ((|sum| (|Polynomial| |Coef|)) (#1=#:G7 NIL) (|i| NIL))
+        (SPROG ((|i| NIL) (#1=#:G7 NIL) (|sum| (|Polynomial| |Coef|)))
                (SEQ (LETT |sum| (|spadConstant| % 9))
                     (SEQ (LETT |i| 0) (LETT #1# |n|) G190
                          (COND
@@ -20,7 +20,7 @@
 
 (DEFUN |TaylorSeries;| (|#1|)
   (SPROG
-   ((#1=#:G17 NIL) (|pv$| NIL) (#2=#:G16 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+   ((DV$1 NIL) (|dv$| NIL) (% NIL) (#1=#:G16 NIL) (|pv$| NIL) (#2=#:G17 NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT |dv$| (LIST '|TaylorSeries| DV$1))
@@ -34,16 +34,25 @@
                                                        '(|Algebra|
                                                          (|Fraction|
                                                           (|Integer|))))
+                                        (OR
+                                         (AND
+                                          (|HasCategory| |#1|
+                                                         '(|Algebra|
+                                                           (|Fraction|
+                                                            (|Integer|))))
+                                          (|HasCategory|
+                                           (|Fraction| (|Integer|))
+                                           '(|CharacteristicZero|)))
+                                         (|HasCategory| |#1|
+                                                        '(|CharacteristicZero|)))
                                         (|HasCategory| |#1|
                                                        '(|IntegralDomain|))
                                         (|HasCategory| |#1|
                                                        '(|CharacteristicNonZero|))
-                                        (|HasCategory| |#1|
-                                                       '(|CharacteristicZero|))
-                                        (LETT #2#
+                                        (LETT #1#
                                               (|HasCategory| |#1|
                                                              '(|CommutativeRing|)))
-                                        (OR #2#
+                                        (OR #1#
                                             (|HasCategory| |#1|
                                                            '(|IntegralDomain|)))
                                         (|HasCategory| |#1| '(|Field|))
@@ -53,19 +62,19 @@
     (|haddProp| |$ConstructorCache| '|TaylorSeries| (LIST DV$1) (CONS 1 %))
     (|stuffDomainSlots| %)
     (QSETREFV % 6 |#1|)
-    (AND #2# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))
+    (AND #1# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))
          (|augmentPredVector| % 256))
     (AND
-     (LETT #1#
+     (LETT #2#
            (AND (|HasCategory| |#1| '(|IntegralDomain|))
                 (|HasCategory| % '(|VariablesCommuteWithCoefficients|))))
      (|augmentPredVector| % 512))
     (AND
-     (OR (AND #2# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))) #1#)
+     (OR (AND #1# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))) #2#)
      (|augmentPredVector| % 1024))
     (AND
      (OR (|HasCategory| |#1| '(|Algebra| (|Fraction| (|Integer|))))
-         (AND #2# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))) #1#)
+         (AND #1# (|HasCategory| % '(|VariablesCommuteWithCoefficients|))) #2#)
      (|augmentPredVector| % 2048))
     (SETF |pv$| (QREFELT % 3))
     (QSETREFV % 7 (|Stream| (|Polynomial| |#1|)))
@@ -90,7 +99,7 @@
 (MAKEPROP '|TaylorSeries| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL (|SparseMultivariateTaylorSeries| 6 23 8)
-              (|local| |#1|) '|Rep| (|Polynomial| 6) (0 . |Zero|) (|Boolean|)
+              (|local| |#1|) '|Rep| (|Polynomial| 6) (0 . |0|) (|Boolean|)
               (4 . |empty?|) (9 . |frst|) (14 . +) (20 . |rst|)
               (|NonNegativeInteger|) |TS;polynomial;%NniP;1| (|String|)
               (|OutputForm|) (|PositiveInteger|) (|Integer|)
@@ -116,27 +125,27 @@
               479 |atanh| 483 |atan| 488 |associator| 493 |associates?| 500
               |asinh| 506 |asin| 511 |asech| 516 |asec| 521 |antiCommutator|
               526 |annihilate?| 532 |acsch| 538 |acsc| 543 |acoth| 548 |acot|
-              553 |acosh| 558 |acos| 563 ^ 568 |Zero| 592 |One| 596 D 600 = 626
-              / 632 - 638 + 649 * 655)
+              553 |acosh| 558 |acos| 563 ^ 568 D 592 = 618 |1| 624 |0| 628 /
+              632 - 638 + 649 * 655)
            'NIL
            (CONS
             (|makeByteWordVec2| 6
-                                '(0 0 0 2 6 5 4 3 2 6 1 0 0 5 6 1 0 0 5 6 1 0 1
-                                  0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 6
-                                  1 0 0 2 6 1 1 1 1 1 1 0 0 0 0 0 0))
+                                '(0 0 0 3 6 5 3 6 1 0 0 5 6 1 0 0 5 6 1 0 1 0 0
+                                  0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 6 1
+                                  0 0 4 3 6 2 1 1 1 1 1 1 0 0 0 0 0 0))
             (CONS
              '#(|MultivariateTaylorSeriesCategory&| |PowerSeriesCategory&|
-                |AbelianMonoidRing&| NIL NIL |Algebra&| NIL NIL |EntireRing&|
+                |AbelianMonoidRing&| NIL NIL |Algebra&| |EntireRing&|
                 |Algebra&| |Algebra&| |PartialDifferentialRing&| NIL
                 |NonAssociativeAlgebra&| |NonAssociativeAlgebra&|
                 |NonAssociativeAlgebra&| NIL |Rng&| |Module&| |Module&|
                 |Module&| NIL NIL NIL |NonAssociativeRing&| NIL NIL NIL NIL NIL
                 NIL |NonAssociativeRng&| NIL NIL NIL |AbelianGroup&| NIL NIL
                 NIL |AbelianMonoid&| |NonAssociativeSemiRng&| |MagmaWithUnit&|
-                NIL |AbelianSemiGroup&| |Magma&| NIL
+                NIL |AbelianSemiGroup&| |SetWithZero&| |Magma&| NIL
                 |TranscendentalFunctionCategory&| |SetCategory&| |Evalable&|
-                NIL NIL |RadicalCategory&| |ElementaryFunctionCategory&| NIL
-                |HyperbolicFunctionCategory&|
+                NIL NIL NIL NIL |RadicalCategory&|
+                |ElementaryFunctionCategory&| NIL |HyperbolicFunctionCategory&|
                 |ArcTrigonometricFunctionCategory&|
                 |TrigonometricFunctionCategory&| NIL |BasicType&| NIL NIL
                 |InnerEvalable&| |InnerEvalable&|)
@@ -144,7 +153,6 @@
               '#((|MultivariateTaylorSeriesCategory| 6 23)
                  (|PowerSeriesCategory| 6 25 23) (|AbelianMonoidRing| 6 25)
                  (|IntegralDomain|) (|CommutativeRing|) (|Algebra| 6)
-                 (|CharacteristicZero|) (|CharacteristicNonZero|)
                  (|EntireRing|) (|Algebra| $$) (|Algebra| 33)
                  (|PartialDifferentialRing| 23) (|Ring|)
                  (|NonAssociativeAlgebra| 6) (|NonAssociativeAlgebra| $$)
@@ -157,10 +165,11 @@
                  (|AbelianProductCategory| 6) (|AbelianGroup|)
                  (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
                  (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
-                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|) (|Magma|)
-                 (|CommutativeStar|) (|TranscendentalFunctionCategory|)
-                 (|SetCategory|) (|Evalable| $$) (|noZeroDivisors|)
-                 (|TwoSidedRecip|) (|RadicalCategory|)
+                 (|MagmaWithUnit|) (|SemiGroup|) (|AbelianSemiGroup|)
+                 (|SetWithZero|) (|Magma|) (|CommutativeStar|)
+                 (|TranscendentalFunctionCategory|) (|SetCategory|)
+                 (|Evalable| $$) (|CharacteristicNonZero|) (|noZeroDivisors|)
+                 (|TwoSidedRecip|) (|CharacteristicZero|) (|RadicalCategory|)
                  (|ElementaryFunctionCategory|)
                  (|ArcHyperbolicFunctionCategory|)
                  (|HyperbolicFunctionCategory|)
@@ -199,9 +208,9 @@
                                     1 1 0 0 1 2 0 0 0 0 1 2 0 10 0 0 1 1 1 0 0
                                     1 1 1 0 0 1 1 1 0 0 1 1 1 0 0 1 1 1 0 0 1 1
                                     1 0 0 1 2 0 0 0 19 1 2 0 0 0 15 1 2 1 0 0 0
-                                    1 2 1 0 0 33 1 0 0 0 1 0 0 0 1 2 0 0 0 22 1
-                                    2 0 0 0 23 1 3 0 0 0 22 24 1 3 0 0 0 23 15
-                                    1 2 0 10 0 0 1 2 7 0 0 6 1 1 0 0 0 1 2 0 0
+                                    1 2 1 0 0 33 1 2 0 0 0 22 1 2 0 0 0 23 1 3
+                                    0 0 0 22 24 1 3 0 0 0 23 15 1 2 0 10 0 0 1
+                                    0 0 0 1 0 0 0 1 2 7 0 0 6 1 1 0 0 0 1 2 0 0
                                     0 0 1 2 0 0 0 0 1 2 0 0 19 0 1 2 0 0 0 0 1
                                     2 0 0 20 0 1 2 0 0 15 0 1 2 0 0 0 6 1 2 0 0
                                     6 0 1 2 1 0 33 0 1 2 1 0 0 33 1)))))

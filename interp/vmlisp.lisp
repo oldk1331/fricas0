@@ -58,17 +58,7 @@
 
 ; 9.5 Identifiers
 
-(defun gensymp (x) (and (symbolp x) (null (symbol-package x))))
-
-(defun digitp (x)
-  (or (and (symbolp x) (digitp (symbol-name x)))
-      (and (characterp x) (digit-char-p x))
-      (and (stringp x) (= (length x) 1) (digit-char-p (char x 0)))))
-
-(defun dig2fix (x)
-  (if (symbolp x)
-    (digit-char-p (char (symbol-name x) 0))
-    (digit-char-p x)))
+(defun GENSYMP (x) (and (symbolp x) (null (symbol-package x))))
 
 (defun LOG2 (x) (LOG x 2.0))
 
@@ -76,60 +66,16 @@
 
 ; 11.1 Creation
 
-(defun upcase (l)
+(defun UPCASE (l)
   (cond ((stringp l) (string-upcase l))
         ((identp l) (intern (string-upcase (symbol-name l))))
         ((characterp l) (char-upcase l))
         ((atom l) l)
         (t (mapcar #'upcase l))))
 
-(defun downcase (l)
-  (cond ((stringp l) (string-downcase l))
-        ((identp l) (intern (string-downcase (symbol-name l))))
-        ((characterp l) (char-downcase L))
-        ((atom l) l)
-        (t (mapcar #'downcase l))))
-
 ; 11.2 Accessing
 
-;; note it is important that PNAME returns nil not an error for non-symbols
-(defun PNAME (x)
-  (cond ((symbolp x) (symbol-name x))
-        ((characterp x) (string x))
-        (t nil)))
-
-(defun put (sym ind val) (setf (get sym ind) val))
-
-(define-function 'MAKEPROP #'put)
-
-; 12.0 Operations on Numbers
-
-; 12.1 Conversion
-
-; 12.2 Predicates
-
-; 12.3 Computation
-
-
-(defun QUOTIENT (x y)
-  (cond ((or (floatp x) (floatp y)) (BREAK))
-        (t (truncate x y))))
-
-(defun REMAINDER (x y)
-  (if (and (integerp x) (integerp y))
-      (rem x y)
-      (BREAK)))
-
-(defun DIVIDE (x y)
-  (if (and (integerp x) (integerp y))
-      (multiple-value-list (truncate x y))
-      (BREAK)))
-
-; 13.3 Updating
-
-(defun RPLNODE (pair1 ca2 cd2)
- (RPLACA pair1 ca2)
- (RPLACD pair1 cd2) pair1)
+(defun PNAME (x) (symbol-name x))
 
 ; 14.0 Operations on Lists
 
@@ -162,12 +108,6 @@
 (DEFUN |intersection|  (LIST-OF-ITEMS-1 LIST-OF-ITEMS-2)
     (PROG (I H V)
       (SETQ V (SETQ H (CONS NIL NIL)))
-      (COND
-        ( (NOT (LISTP LIST-OF-ITEMS-1))
-          (SETQ LIST-OF-ITEMS-1 (LIST LIST-OF-ITEMS-1)) ) )
-      (COND
-        ( (NOT (LISTP LIST-OF-ITEMS-2))
-          (SETQ LIST-OF-ITEMS-2 (LIST LIST-OF-ITEMS-2)) ) )
   LP  (COND
         ( (NOT (PAIRP LIST-OF-ITEMS-1))
           (RETURN (QCDR H)) )
@@ -182,12 +122,6 @@
 (DEFUN |union| (LIST-OF-ITEMS-1 LIST-OF-ITEMS-2)
     (PROG (I H V)
       (SETQ H (SETQ V (CONS NIL NIL)))
-      (COND
-        ( (NOT (LISTP LIST-OF-ITEMS-1))
-          (SETQ LIST-OF-ITEMS-1 (LIST LIST-OF-ITEMS-1)) ) )
-      (COND
-        ( (NOT (LISTP LIST-OF-ITEMS-2))
-          (SETQ LIST-OF-ITEMS-2 (LIST LIST-OF-ITEMS-2)) ) )
   LP1 (COND
         ( (NOT (PAIRP LIST-OF-ITEMS-1))
           (COND
@@ -207,12 +141,6 @@
 (DEFUN SETDIFFERENCE (LIST-OF-ITEMS-1 LIST-OF-ITEMS-2)
     (PROG (I H V)
       (SETQ H (SETQ V (CONS NIL NIL)))
-      (COND
-        ( (NOT (LISTP LIST-OF-ITEMS-1))
-          (SETQ LIST-OF-ITEMS-1 (LIST LIST-OF-ITEMS-1)) ) )
-      (COND
-        ( (NOT (LISTP LIST-OF-ITEMS-2))
-          (SETQ LIST-OF-ITEMS-2 (LIST LIST-OF-ITEMS-2)) ) )
   LP1 (COND
         ( (NOT (PAIRP LIST-OF-ITEMS-1))
           (RETURN (QCDR H)) )
@@ -277,24 +205,11 @@
 
 (defun LIST2VEC (list) (coerce list 'vector))
 
-; 16.2 Accessing
-
-
-(defun size (l)
-  (cond ((vectorp l) (length l))
-        ((consp l)   (list-length l))
-        (t           0)))
-
 ; 17.0 Operations on Character and Bit Vectors
-
-(defun charp (a) (or (characterp a)
-                     (and (identp a) (= (length (symbol-name a)) 1))))
 
 (defun NUM2CHAR (n) (code-char n))
 
 (defun CHAR2NUM (c) (char-code (character c)))
-
-(define-function '|isLowerCaseLetter| #'LOWER-CASE-P)
 
 #+(or :UNICODE :SB-UNICODE :OPENMCL-UNICODE-STRINGS)
 (defun NUM2USTR (n)
@@ -416,100 +331,27 @@
 
 ; 17.2 Accessing
 
-(defun STRING2ID_N (cvec n)
-  (if (< n 1)
-      nil
-      (let ((start (position-if-not #'(lambda (x) (char= x #\Space)) cvec)))
-        (if start
-            (let ((end (or (position #\Space cvec :start start) (length cvec))))
-              (if (= n 1)
-                  (intern (subseq cvec start end))
-                  (STRING2ID_N (subseq cvec end) (1- n))))
-            0))))
-
-(defun substring (cvec start length)
+(defun SUBSTRING (cvec start length)
   (setq cvec (string cvec))
   (if length (subseq cvec start (+ start length)) (subseq cvec start)))
 
 ; 17.3 Searching
 
-(defun strpos (what in start dontcare)
-   (setq what (string what) in (string in))
-   (if dontcare (progn (setq dontcare (character dontcare))
-                       (search what in :start2 start
-                               :test #'(lambda (x y) (or (eql x dontcare)
+(defun STRPOS (ps s start dontcare)
+    (let ((str (string s))
+          (dc_char (character dontcare)))
+         (search ps str :start2 start
+                               :test #'(lambda (x y) (or (eql x dc_char)
                                                          (eql x y)))))
-                (if (= start 0)
-                   (search what in)
-                   (search what in :start2 start))
-   ))
+)
 
 ; In the following, table should be a string:
 
-(defun STRPOSL (table cvec sint item)
-  (setq cvec (string cvec))
-  (if (not item)
-      (position table cvec :test #'(lambda (x y) (position y x)) :start sint)
-      (position table cvec :test-not #'(lambda (x y) (position y x)) :start sint)))
-
-; 17.4 Updating operators
-
-;;-- (defun rplacstr (cvec1 start1 length1 cvec2
-;;--                        &optional (start2 0) (length2 nil)
-;;--                        &aux end1 end2)
-;;--   (setq cvec2 (string cvec2))
-;;--   (if (null start1) (setq start1 0))
-;;--   (if (null start2) (setq start2 0))
-;;--   (if (null length1) (setq length1 (- (length cvec1) start1)))
-;;--   (if (null length2) (setq length2 (- (length cvec2) start2)))
-;;--   (if (numberp length1) (setq end1 (+ start1 length1)))
-;;--   (if (numberp length2) (setq end2 (+ start2 length2)))
-;;--   (if (/= length1 length2)
-;;--       (concatenate 'string (subseq cvec1 0 start1)
-;;--                            (subseq cvec2 start2 end2)
-;;--                            (subseq cvec1 end1))
-;;--       (replace cvec1 cvec2 :start1 start1 :end1 end1
-;;--              :start2 start2 :end2 end2)))
-
-; The following version has been provided to avoid reliance on the
-; Common Lisp concatenate and replace functions. These built-in Lisp
-; functions would probably end up doing the character-by-character
-; copying shown here, but would also need to cope with generic sorts
-; of sequences and unwarranted keyword generality
-
-(defun RPLACSTR (cvec1 start1 length1 cvec2
-                       &optional start2 length2
-                       &aux end1 end2)
-  (setq cvec2 (string cvec2))
-  (if (null start1) (setq start1 0))
-  (if (null start2) (setq start2 0))
-  (if (null length1) (setq length1 (- (length cvec1) start1)))
-  (if (null length2) (setq length2 (- (length cvec2) start2)))
-  (setq end1 (+ start1 length1))
-  (setq end2 (+ start2 length2))
-  (if (= length1 length2)
-      (do ()
-          ((= start1 end1) cvec1)
-          (setf (aref cvec1 start1) (aref cvec2 start2))
-          (setq start1 (1+ start1))
-          (setq start2 (1+ start2)))
-      (let* ((l1 (length cvec1))
-             (r (make-string (- (+ l1 length2) length1)))
-             (i 0))
-         (do ((j 0 (1+ j)))
-             ((= j start1))
-             (setf (aref r i) (aref cvec1 j))
-             (setq i (1+ i)))
-         (do ((j start2 (1+ j)))
-             ((= j end2))
-             (setf (aref r i) (aref cvec2 j))
-             (setq i (1+ i)))
-         (do ((j end1 (1+ j)))
-             ((= j l1))
-             (setf (aref r i) (aref cvec1 j))
-             (setq i (1+ i)))
-         r)
-  ))
+(defun STRPOSL (table cvec sint)
+    (setq cvec (string cvec))
+    (position table cvec
+              :test-not #'(lambda (x y) (position y x)) :start sint)
+)
 
 ; 19.0 Operations on Arbitrary Objects
 
@@ -517,19 +359,16 @@
 
 (defun |substitute| (new old tree) (subst new old tree :test #'equal))
 
-(defun copy (x) (copy-tree x)) ; not right since should descend vectors
+(defun COPY (x) (copy-tree x)) ; not right since should descend vectors
 
-(defun eqsubstlist (new old list) (sublis (mapcar #'cons old new) list))
+(defun EQSUBSTLIST (new old list) (sublis (mapcar #'cons old new) list))
 
 
 ; 24.0 Printing
 
-(define-function 'prin2cvec #'princ-to-string)
+(define-function 'STRINGIMAGE #'princ-to-string)
 
-(define-function 'stringimage #'princ-to-string)
-
-(define-function 'printexp #'princ)
-(define-function 'prin0  #'prin1)
+(define-function 'PRINTEXP #'princ)
 
 (defun |limited_print1_stdout|(form) (|limited_print1| form *standard-output*))
 
@@ -537,52 +376,17 @@
     (let ((*print-level* 4) (*print-length* 4))
        (prin1 form stream) (terpri stream)))
 
-(defun prettyprint (x &optional (stream *standard-output*))
-  (prettyprin0 x stream) (terpri stream))
+(defun PRETTYPRINT (x &optional (stream *standard-output*))
+  (PRETTYPRIN0 x stream) (terpri stream))
 
-(defun prettyprin0 (x &optional (stream *standard-output*))
+(defun PRETTYPRIN0 (x &optional (stream *standard-output*))
   (let ((*print-pretty* t) (*print-array* t))
     (prin1 x stream)))
 
-(defun tab (sint &optional (stream t))
+(defun TAB (sint &optional (stream t))
   (format stream "~vT" sint))
 
 ; 27.0 Stream I/O
-
-
-; 27.1 Creation
-
-(defun |get_console_input| () *standard-input*)
-
-(defun MAKE_INSTREAM (filespec)
-   (cond
-         ((not (STRINGP filespec)) (error "not handled yet"))
-         (t (open (|make_input_filename1| filespec)
-                  :direction :input :if-does-not-exist nil))))
-
-(defun MAKE_OUTSTREAM (filespec)
-   (cond
-         ((not (STRINGP filespec)) (error "not handled yet"))
-         (t (open filespec :direction :output
-               #+(or :cmucl :openmcl :sbcl) :if-exists
-               #+(or :cmucl :sbcl) :supersede
-               #+:openmcl :ignored))))
-
-(defun |make_out_stream| (filespec) (CONS T (MAKE_OUTSTREAM filespec)))
-
-(defun MAKE_APPENDSTREAM (filespec)
- "fortran support"
- (cond
-  ((not (STRINGP filespec)) (error "MAKE_APPENDSTREAM: not handled yet"))
-  (t (open filespec :direction :output
-          :if-exists :append :if-does-not-exist :create))))
-
-(defun |make_append_stream| (filespec)
-    (CONS T (MAKE_APPENDSTREAM filespec)))
-
-(defun |mkOutputConsoleStream| () (CONS NIL *standard-output*))
-
-(defun SHUT (st) (if (streamp st) (close st) -1))
 
 (defun EOFP (stream) (null (peek-char nil stream nil nil)))
 
@@ -592,19 +396,15 @@
   (multiple-value-bind (sec min hour) (get-decoded-time)
     (format nil "~2,'0D:~2,'0D:~2,'0D" hour min sec)))
 
-; 99.0 Ancient Stuff We Decided To Keep
-
-(defun |read_line| (st) (read-line st nil nil))
-
 ;;; GCMSG when called with argument equal to NIL is supposed to
-;;; supress messages from garbage collector.  Empty body is
+;;; suppress messages from garbage collector.  Empty body is
 ;;; OK if garbage collector prints no messages.
 #+:gcl
 (defun GCMSG (x)
-   (prog1 system:*gbc-message* (setq system:*gbc-message* x)))
+    (setq system:*gbc-message* x))
 #+:cmu
 (defun GCMSG (x)
-   (prog1 ext:*gc-verbose* (setq ext:*gc-verbose* x)))
+    (setq ext:*gc-verbose* x))
 #-(or :gcl :cmu)
 (defun GCMSG (x))
 
@@ -644,15 +444,6 @@
             (system:compiled-function-name func))
            (func)))))
 
-#+(OR IBCL)
-(defun BPINAME (func)
-  (if (functionp func)
-      (cond ((symbolp func) func)
-            ((and (consp func) (eq (car func) 'LAMBDA-BLOCK))
-              (cadr func))
-            ((compiled-function-p func)
-             (system:compiled-function-name func))
-            ('t func))))
 #+:cmu
 (defun BPINAME (func)
  (when (functionp func)
@@ -680,12 +471,6 @@
 
 ;17.2 Accessing
 
-(defun HKEYS (table)
-   (let (keys)
-      (maphash
-        #'(lambda (key val) (declare (ignore val)) (push key keys)) table)
-        keys))
-
 (define-function 'HASHTABLE_CLASS #'hash-table-test)
 
 (define-function 'HCOUNT #'hash-table-count)
@@ -700,31 +485,14 @@
 
 ;; Contributed by Juergen Weiss from a suggestion by Arthur Norman.
 ;; This is a Mantissa and Exponent function.
-(defun manexp (u)
+(defun MANEXP (u)
   (multiple-value-bind (f e s)
     (decode-float u)
     (cons (* s f) e)))
 
-;;; Contributed by Juergen Weiss from Arthur Norman's CCL.
-(defun cot (a)
-  (if (or (> a 1000.0) (< a -1000.0))
-    (/ (cos a) (sin a))
-    (/ 1.0 (tan a))))
-
 ;;; moved from unlisp.lisp
-(defun |AlistAssocQ| (key l)
-  (assoc key l :test #'eq) )
 
-(defun |AlistRemoveQ| (key l)
-   (let ((pr (assoc key l :test #'eq)))
-       (if pr
-           (remove pr l :test #'eq)
-           l) ))
-
-(defun log10 (u) (log u 10.0d0))
-
-(defun |make_spaces| (len)
-    (make-string len :initial-element #\ ))
+(defun LOG10 (u) (log u 10.0d0))
 
 ;;; end of moved fragment
 

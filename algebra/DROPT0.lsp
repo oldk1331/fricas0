@@ -153,7 +153,7 @@
 
 (DEFUN |DrawOptionFunctions0| ()
   (SPROG NIL
-         (PROG (#1=#:G87)
+         (PROG (#1=#:G119)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|DrawOptionFunctions0|))

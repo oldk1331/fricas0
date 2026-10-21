@@ -4,33 +4,33 @@
          (|p| (|SparseUnivariatePolynomial| CR))
          (% (|Union| (|List| (|SparseUnivariatePolynomial| CR)) "failed")))
         (SPROG
-         ((|answer|
-           (|Union| (|List| (|SparseUnivariatePolynomial| CR)) "failed"))
-          (#1=#:G9 NIL)
+         ((|u| NIL) (#1=#:G28 NIL) (#2=#:G7 #3=(|NonNegativeInteger|))
+          (#4=#:G5 #3#) (#5=#:G6 NIL) (|deg| #3#)
           (|ans|
            (|Union| (|Vector| (|List| (|SparseUnivariatePolynomial| CR)))
-                    #2="failed"))
-          (|deg| #3=(|NonNegativeInteger|)) (#4=#:G6 NIL) (#5=#:G5 #3#)
-          (#6=#:G7 #3#) (#7=#:G22 NIL) (|u| NIL))
+                    #6="failed"))
+          (#7=#:G9 NIL)
+          (|answer|
+           (|Union| (|List| (|SparseUnivariatePolynomial| CR)) "failed")))
          (SEQ
           (COND
            ((SPADCALL (QREFELT % 8) |lp| (QREFELT % 15))
             (SEQ
              (LETT |deg|
                    (PROGN
-                    (LETT #4# NIL)
-                    (SEQ (LETT |u| NIL) (LETT #7# |lp|) G190
+                    (LETT #5# NIL)
+                    (SEQ (LETT |u| NIL) (LETT #1# |lp|) G190
                          (COND
-                          ((OR (ATOM #7#) (PROGN (LETT |u| (CAR #7#)) NIL))
+                          ((OR (ATOM #1#) (PROGN (LETT |u| (CAR #1#)) NIL))
                            (GO G191)))
                          (SEQ
                           (EXIT
                            (PROGN
-                            (LETT #6# (SPADCALL |u| (QREFELT % 18)))
-                            (COND (#4# (LETT #5# (+ #5# #6#)))
-                                  ('T (PROGN (LETT #5# #6#) (LETT #4# 'T)))))))
-                         (LETT #7# (CDR #7#)) (GO G190) G191 (EXIT NIL))
-                    (COND (#4# #5#) ('T 0))))
+                            (LETT #2# (SPADCALL |u| (QREFELT % 18)))
+                            (COND (#5# (LETT #4# (+ #4# #2#)))
+                                  ('T (PROGN (LETT #4# #2#) (LETT #5# 'T)))))))
+                         (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+                    (COND (#5# #4#) ('T 0))))
              (LETT |ans| (CONS 1 "failed"))
              (SETELT % 11 (SPADCALL 67108859 (QREFELT % 10)))
              (SEQ G190 (COND ((NULL (QEQCAR |ans| 1)) (GO G191)))
@@ -64,22 +64,22 @@
                                                  (QREFELT % 25)))))
                              NIL (GO G190) G191 (EXIT NIL))))))))
                   NIL (GO G190) G191 (EXIT NIL))
-             (EXIT
-              (SETELT % 12
-                      (PROG2 (LETT #1# |ans|)
-                          (QCDR #1#)
-                        (|check_union2| (QEQCAR #1# 0)
+             (SETELT % 12
+                     (PROG2 (LETT #7# |ans|)
+                         (QCDR #7#)
+                       (|check_union2| (QEQCAR #7# 0)
+                                       (|Vector|
+                                        (|List|
+                                         (|SparseUnivariatePolynomial|
+                                          (QREFELT % 7))))
+                                       (|Union|
                                         (|Vector|
                                          (|List|
                                           (|SparseUnivariatePolynomial|
                                            (QREFELT % 7))))
-                                        (|Union|
-                                         (|Vector|
-                                          (|List|
-                                           (|SparseUnivariatePolynomial|
-                                            (QREFELT % 7))))
-                                         #2#)
-                                        #1#)))))))
+                                        #6#)
+                                       #7#)))
+             (EXIT (SETELT % 8 |lp|)))))
           (LETT |answer|
                 (SPADCALL |p|
                           (SPADCALL (QREFELT % 11) (|spadConstant| % 19)
@@ -90,7 +90,7 @@
 (DECLAIM (NOTINLINE |ComplexIntegerSolveLinearPolynomialEquation;|)) 
 
 (DEFUN |ComplexIntegerSolveLinearPolynomialEquation;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -112,9 +112,9 @@
           (QSETREFV % 12 (MAKE-ARRAY 0))
           %))) 
 
-(DEFUN |ComplexIntegerSolveLinearPolynomialEquation| (&REST #1=#:G23)
+(DEFUN |ComplexIntegerSolveLinearPolynomialEquation| (&REST #1=#:G29)
   (SPROG NIL
-         (PROG (#2=#:G24)
+         (PROG (#2=#:G30)
            (RETURN
             (COND
              ((LETT #2#
@@ -141,8 +141,8 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|) '|oldlp|
               (|Integer|) (0 . |coerce|) '|slpePrime| '|oldtable| (|Boolean|)
               (|List| 17) (5 . ~=) (|NonNegativeInteger|)
-              (|SparseUnivariatePolynomial| 7) (11 . |degree|) (16 . |Zero|)
-              (20 . |Zero|) (24 . |complex|) (|Union| 29 '"failed")
+              (|SparseUnivariatePolynomial| 7) (11 . |degree|) (16 . |0|)
+              (20 . |0|) (24 . |complex|) (|Union| 29 '"failed")
               (|GenExEuclid| 7 17) (30 . |tablePow|) (37 . -)
               (|IntegerPrimesPackage| 6) (43 . |prime?|) (|Union| 14 '"failed")
               (|Vector| 14) (48 . |solveid|)

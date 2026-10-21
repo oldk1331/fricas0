@@ -1,34 +1,34 @@
 
 (SDEFUN |ALAGG-;coerce;SOf;1| ((|u| (S)) (% (|OutputForm|)))
         (SPROG
-         ((|l| (|List| (|OutputForm|))) (#1=#:G16 NIL) (|r| NIL)
-          (#2=#:G15 NIL))
+         ((#1=#:G17 NIL) (|r| NIL) (#2=#:G18 NIL)
+          (|l| (|List| (|OutputForm|))))
          (SEQ
           (LETT |l|
                 (PROGN
-                 (LETT #2# NIL)
-                 (SEQ (LETT |r| NIL) (LETT #1# (SPADCALL |u| (QREFELT % 11)))
+                 (LETT #1# NIL)
+                 (SEQ (LETT |r| NIL) (LETT #2# (SPADCALL |u| (QREFELT % 11)))
                       G190
                       (COND
-                       ((OR (ATOM #1#) (PROGN (LETT |r| (CAR #1#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT |r| (CAR #2#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2#
+                        (LETT #1#
                               (CONS
                                (SPADCALL (SPADCALL (QCAR |r|) (QREFELT % 13))
                                          (SPADCALL (QCDR |r|) (QREFELT % 14))
                                          (QREFELT % 15))
-                               #2#))))
-                      (LETT #1# (CDR #1#)) (GO G190) G191
-                      (EXIT (NREVERSE #2#)))))
+                               #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#)))))
           (EXIT
            (SPADCALL (SPADCALL "table" (QREFELT % 17)) |l| (QREFELT % 19)))))) 
 
 (DECLAIM (NOTINLINE |AssociationListAggregate&;|)) 
 
 (DEFUN |AssociationListAggregate&| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

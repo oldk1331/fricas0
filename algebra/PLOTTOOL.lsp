@@ -4,9 +4,9 @@
          (|yVals| (|Segment| (|DoubleFloat|)))
          (% (|List| (|Segment| (|DoubleFloat|)))))
         (SPROG
-         ((|pad| (|DoubleFloat|)) (|yDiff| #1=(|DoubleFloat|))
-          (|yLo| #2=(|DoubleFloat|)) (|yHi| #3=(|DoubleFloat|)) (|xDiff| #1#)
-          (|xLo| #2#) (|xHi| #3#))
+         ((|xHi| #1=(|DoubleFloat|)) (|xLo| #2=(|DoubleFloat|))
+          (|xDiff| #3=(|DoubleFloat|)) (|yHi| #1#) (|yLo| #2#) (|yDiff| #3#)
+          (|pad| (|DoubleFloat|)))
          (SEQ
           (LETT |xDiff|
                 (|sub_DF| (LETT |xHi| (SPADCALL |xVals| (QREFELT % 8)))
@@ -32,7 +32,7 @@
          (|f| (|Mapping| #1=(|DoubleFloat|) (|Point| (|DoubleFloat|))))
          (|g| (|Mapping| (|DoubleFloat|) (|DoubleFloat|) (|DoubleFloat|)))
          (% (|DoubleFloat|)))
-        (SPROG ((|m| #1#) (#2=#:G6 NIL) (|p| NIL))
+        (SPROG ((|p| NIL) (#2=#:G6 NIL) (|m| #1#))
                (SEQ (LETT |m| (SPADCALL (|SPADfirst| |l|) |f|))
                     (SEQ (LETT |p| NIL) (LETT #2# (CDR |l|)) G190
                          (COND
@@ -64,7 +64,7 @@
           (|Mapping| #1=(|DoubleFloat|) (|List| (|Point| (|DoubleFloat|)))))
          (|g| (|Mapping| (|DoubleFloat|) (|DoubleFloat|) (|DoubleFloat|)))
          (% (|DoubleFloat|)))
-        (SPROG ((|m| #1#) (#2=#:G25 NIL) (|p| NIL))
+        (SPROG ((|p| NIL) (#2=#:G25 NIL) (|m| #1#))
                (SEQ (LETT |m| (SPADCALL (|SPADfirst| |l|) |f|))
                     (SEQ (LETT |p| NIL) (LETT #2# (CDR |l|)) G190
                          (COND

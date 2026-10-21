@@ -14,8 +14,8 @@
 
 (SDEFUN |RFFACT;factor;UPF;2| ((|p| (UP)) (% (|Factored| UP)))
         (SPROG
-         ((|d| (|Polynomial| (|Integer|)))
-          (|q| (|Fraction| (|Polynomial| (|Integer|)))))
+         ((|q| (|Fraction| (|Polynomial| (|Integer|))))
+          (|d| (|Polynomial| (|Integer|))))
          (SEQ
           (LETT |d|
                 (SPADCALL
@@ -42,7 +42,7 @@
 (DECLAIM (NOTINLINE |RationalFunctionFactor;|)) 
 
 (DEFUN |RationalFunctionFactor;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RationalFunctionFactor| DV$1))
@@ -57,9 +57,9 @@
           (QSETREFV % 9 (SPADCALL (QREFELT % 8)))
           %))) 
 
-(DEFUN |RationalFunctionFactor| (#1=#:G5)
+(DEFUN |RationalFunctionFactor| (#1=#:G8)
   (SPROG NIL
-         (PROG (#2=#:G6)
+         (PROG (#2=#:G9)
            (RETURN
             (COND
              ((LETT #2#

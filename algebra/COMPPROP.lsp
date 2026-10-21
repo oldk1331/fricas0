@@ -1,42 +1,39 @@
 
-(PUT '|COMPPROP;closed?;%B;1| '|SPADreplace| 'QCAR) 
+(SDEFUN |COMPPROP;=;2%B;1| ((|p1| (%)) (|p2| (%)) (% (|Boolean|)))
+        (COND
+         ((|BooleanEquality| (QCAR |p1|) (QCAR |p2|))
+          (|BooleanEquality| (QCDR |p1|) (QCDR |p2|)))
+         ('T NIL))) 
 
-(SDEFUN |COMPPROP;closed?;%B;1| ((|p| (%)) (% (|Boolean|))) (QCAR |p|)) 
+(MAKEPROP '|COMPPROP;closed?;%B;2| '|SPADreplace| 'QCAR) 
 
-(PUT '|COMPPROP;solid?;%B;2| '|SPADreplace| 'QCDR) 
+(SDEFUN |COMPPROP;closed?;%B;2| ((|p| (%)) (% (|Boolean|))) (QCAR |p|)) 
 
-(SDEFUN |COMPPROP;solid?;%B;2| ((|p| (%)) (% (|Boolean|))) (QCDR |p|)) 
+(MAKEPROP '|COMPPROP;solid?;%B;3| '|SPADreplace| 'QCDR) 
 
-(SDEFUN |COMPPROP;close;%2B;3| ((|p| (%)) (|b| (|Boolean|)) (% (|Boolean|)))
-        (PROGN (RPLACA |p| |b|) (QCAR |p|))) 
+(SDEFUN |COMPPROP;solid?;%B;3| ((|p| (%)) (% (|Boolean|))) (QCDR |p|)) 
 
-(SDEFUN |COMPPROP;solid;%2B;4| ((|p| (%)) (|b| (|Boolean|)) (% (|Boolean|)))
-        (PROGN (RPLACD |p| |b|) (QCDR |p|))) 
+(MAKEPROP '|COMPPROP;new;2B%;4| '|SPADreplace| 'CONS) 
 
-(PUT '|COMPPROP;new;%;5| '|SPADreplace| '(XLAM NIL (CONS NIL NIL))) 
+(SDEFUN |COMPPROP;new;2B%;4|
+        ((|closed?| (|Boolean|)) (|solid?| (|Boolean|)) (% (%)))
+        (CONS |closed?| |solid?|)) 
 
-(SDEFUN |COMPPROP;new;%;5| ((% (%))) (CONS NIL NIL)) 
+(SDEFUN |COMPPROP;copy;2%;5| ((|p| (%)) (% (%)))
+        (SPADCALL (SPADCALL |p| (QREFELT % 9)) (SPADCALL |p| (QREFELT % 10))
+                  (QREFELT % 11))) 
 
-(SDEFUN |COMPPROP;copy;2%;6| ((|p| (%)) (% (%)))
-        (SPROG ((|annuderOne| (%)))
-               (SEQ (LETT |annuderOne| (SPADCALL (QREFELT % 12)))
-                    (SPADCALL |annuderOne| (SPADCALL |p| (QREFELT % 8))
-                              (QREFELT % 10))
-                    (SPADCALL |annuderOne| (SPADCALL |p| (QREFELT % 9))
-                              (QREFELT % 11))
-                    (EXIT |annuderOne|)))) 
-
-(SDEFUN |COMPPROP;coerce;%Of;7| ((|p| (%)) (% (|OutputForm|)))
+(SDEFUN |COMPPROP;coerce;%Of;6| ((|p| (%)) (% (|OutputForm|)))
         (SPADCALL
-         (LIST (SPADCALL "Component is " (QREFELT % 16))
+         (LIST (SPADCALL "Component is " (QREFELT % 15))
                (SPADCALL
-                (COND ((SPADCALL |p| (QREFELT % 8)) "") (#1='T "not "))
-                (QREFELT % 16))
-               (SPADCALL "closed, " (QREFELT % 16))
-               (SPADCALL (COND ((SPADCALL |p| (QREFELT % 9)) "") (#1# "not "))
-                         (QREFELT % 16))
-               (SPADCALL "solid" (QREFELT % 16)))
-         (QREFELT % 18))) 
+                (COND ((SPADCALL |p| (QREFELT % 9)) "") (#1='T "not "))
+                (QREFELT % 15))
+               (SPADCALL "closed, " (QREFELT % 15))
+               (SPADCALL (COND ((SPADCALL |p| (QREFELT % 10)) "") (#1# "not "))
+                         (QREFELT % 15))
+               (SPADCALL "solid" (QREFELT % 15)))
+         (QREFELT % 17))) 
 
 (DECLAIM (NOTINLINE |SubSpaceComponentProperty;|)) 
 
@@ -44,7 +41,7 @@
   (SPROG ((|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT |dv$| '(|SubSpaceComponentProperty|))
-          (LETT % (GETREFV 20))
+          (LETT % (GETREFV 19))
           (QSETREFV % 0 |dv$|)
           (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
           (|haddProp| |$ConstructorCache| '|SubSpaceComponentProperty| NIL
@@ -58,7 +55,7 @@
 
 (DEFUN |SubSpaceComponentProperty| ()
   (SPROG NIL
-         (PROG (#1=#:G15)
+         (PROG (#1=#:G16)
            (RETURN
             (COND
              ((LETT #1#
@@ -80,22 +77,21 @@
 
 (MAKEPROP '|SubSpaceComponentProperty| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL '|Rep| (|Boolean|)
-              |COMPPROP;closed?;%B;1| |COMPPROP;solid?;%B;2|
-              |COMPPROP;close;%2B;3| |COMPPROP;solid;%2B;4| |COMPPROP;new;%;5|
-              |COMPPROP;copy;2%;6| (|String|) (|OutputForm|) (0 . |message|)
-              (|List| %) (5 . |hconcat|) |COMPPROP;coerce;%Of;7|)
-           '#(~= 10 |solid?| 16 |solid| 21 |new| 27 |latex| 31 |copy| 36
-              |coerce| 41 |closed?| 46 |close| 51 = 57)
+           '#(NIL NIL NIL NIL NIL NIL '|Rep| (|Boolean|) |COMPPROP;=;2%B;1|
+              |COMPPROP;closed?;%B;2| |COMPPROP;solid?;%B;3|
+              |COMPPROP;new;2B%;4| |COMPPROP;copy;2%;5| (|String|)
+              (|OutputForm|) (0 . |message|) (|List| %) (5 . |hconcat|)
+              |COMPPROP;coerce;%Of;6|)
+           '#(~= 10 |solid?| 16 |new| 21 |latex| 27 |copy| 32 |coerce| 37
+              |closed?| 42 = 47)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0))
                  (CONS '#(|SetCategory&| NIL |BasicType&|)
                        (CONS
-                        '#((|SetCategory|) (|CoercibleTo| 15) (|BasicType|))
-                        (|makeByteWordVec2| 19
-                                            '(1 15 0 14 16 1 15 0 17 18 2 0 7 0
-                                              0 1 1 0 7 0 9 2 0 7 0 7 11 0 0 0
-                                              12 1 0 14 0 1 1 0 0 0 13 1 0 15 0
-                                              19 1 0 7 0 8 2 0 7 0 7 10 2 0 7 0
-                                              0 1)))))
+                        '#((|SetCategory|) (|CoercibleTo| 14) (|BasicType|))
+                        (|makeByteWordVec2| 18
+                                            '(1 14 0 13 15 1 14 0 16 17 2 0 7 0
+                                              0 1 1 0 7 0 10 2 0 0 7 7 11 1 0
+                                              13 0 1 1 0 0 0 12 1 0 14 0 18 1 0
+                                              7 0 9 2 0 7 0 0 8)))))
            '|lookupComplete|)) 

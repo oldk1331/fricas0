@@ -1,24 +1,24 @@
 
 (SDEFUN |REAL0Q;convert2PolInt|
         ((|f| (|Pol|)) (% (|SparseUnivariatePolynomial| (|Integer|))))
-        (SPROG ((|pden| (|Integer|)) (#1=#:G6 NIL) (|c| NIL) (#2=#:G5 NIL))
+        (SPROG ((#1=#:G6 NIL) (|c| NIL) (#2=#:G7 NIL) (|pden| (|Integer|)))
                (SEQ
                 (LETT |pden|
                       (SPADCALL
                        (PROGN
-                        (LETT #2# NIL)
+                        (LETT #1# NIL)
                         (SEQ (LETT |c| NIL)
-                             (LETT #1# (SPADCALL |f| (QREFELT % 8))) G190
+                             (LETT #2# (SPADCALL |f| (QREFELT % 8))) G190
                              (COND
-                              ((OR (ATOM #1#) (PROGN (LETT |c| (CAR #1#)) NIL))
+                              ((OR (ATOM #2#) (PROGN (LETT |c| (CAR #2#)) NIL))
                                (GO G191)))
                              (SEQ
                               (EXIT
-                               (LETT #2#
+                               (LETT #1#
                                      (CONS (SPADCALL |c| (QREFELT % 11))
-                                           #2#))))
-                             (LETT #1# (CDR #1#)) (GO G190) G191
-                             (EXIT (NREVERSE #2#))))
+                                           #1#))))
+                             (LETT #2# (CDR #2#)) (GO G190) G191
+                             (EXIT (NREVERSE #1#))))
                        (QREFELT % 13)))
                 (EXIT
                  (SPADCALL (ELT % 14) (SPADCALL |pden| |f| (QREFELT % 15))
@@ -93,7 +93,7 @@
 (DECLAIM (NOTINLINE |RealZeroPackageQ;|)) 
 
 (DEFUN |RealZeroPackageQ;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|RealZeroPackageQ| DV$1))
@@ -107,9 +107,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |RealZeroPackageQ| (#1=#:G22)
+(DEFUN |RealZeroPackageQ| (#1=#:G28)
   (SPROG NIL
-         (PROG (#2=#:G23)
+         (PROG (#2=#:G29)
            (RETURN
             (COND
              ((LETT #2#

@@ -1,27 +1,27 @@
 
-(PUT '|MOEBIUS;moebius;4F%;1| '|SPADreplace| 'VECTOR) 
+(MAKEPROP '|MOEBIUS;moebius;4F%;1| '|SPADreplace| 'VECTOR) 
 
 (SDEFUN |MOEBIUS;moebius;4F%;1|
         ((|aa| (F)) (|bb| (F)) (|cc| (F)) (|dd| (F)) (% (%)))
         (VECTOR |aa| |bb| |cc| |dd|)) 
 
-(PUT '|MOEBIUS;a| '|SPADreplace| '(XLAM (|t|) (QVELT |t| 0))) 
+(MAKEPROP '|MOEBIUS;a| '|SPADreplace| '(XLAM (|t|) (QVELT |t| 0))) 
 
 (SDEFUN |MOEBIUS;a| ((|t| (%)) (% (F))) (QVELT |t| 0)) 
 
-(PUT '|MOEBIUS;b| '|SPADreplace| '(XLAM (|t|) (QVELT |t| 1))) 
+(MAKEPROP '|MOEBIUS;b| '|SPADreplace| '(XLAM (|t|) (QVELT |t| 1))) 
 
 (SDEFUN |MOEBIUS;b| ((|t| (%)) (% (F))) (QVELT |t| 1)) 
 
-(PUT '|MOEBIUS;c| '|SPADreplace| '(XLAM (|t|) (QVELT |t| 2))) 
+(MAKEPROP '|MOEBIUS;c| '|SPADreplace| '(XLAM (|t|) (QVELT |t| 2))) 
 
 (SDEFUN |MOEBIUS;c| ((|t| (%)) (% (F))) (QVELT |t| 2)) 
 
-(PUT '|MOEBIUS;d| '|SPADreplace| '(XLAM (|t|) (QVELT |t| 3))) 
+(MAKEPROP '|MOEBIUS;d| '|SPADreplace| '(XLAM (|t|) (QVELT |t| 3))) 
 
 (SDEFUN |MOEBIUS;d| ((|t| (%)) (% (F))) (QVELT |t| 3)) 
 
-(SDEFUN |MOEBIUS;One;%;6| ((% (%)))
+(SDEFUN |MOEBIUS;1;%;6| ((% (%)))
         (SPADCALL (|spadConstant| % 10) (|spadConstant| % 11)
                   (|spadConstant| % 11) (|spadConstant| % 10) (QREFELT % 8))) 
 
@@ -92,7 +92,7 @@
 
 (SDEFUN |MOEBIUS;eval;%2Opc;16|
         ((|t| (%)) (|f| (|OnePointCompletion| F)) (% (|OnePointCompletion| F)))
-        (SPROG ((|den| (F)) (|fff| (F)) (|ff| (|Union| F "failed")))
+        (SPROG ((|ff| (|Union| F "failed")) (|fff| (F)) (|den| (F)))
                (SEQ (LETT |ff| (SPADCALL |f| (QREFELT % 27)))
                     (EXIT
                      (COND
@@ -120,7 +120,7 @@
                         (QREFELT % 28)))))))) 
 
 (SDEFUN |MOEBIUS;coerce;%Of;17| ((|t| (%)) (% (|OutputForm|)))
-        (SPROG ((|den| #1=(|OutputForm|)) (|num| #1#) (|var| (|OutputForm|)))
+        (SPROG ((|var| (|OutputForm|)) (|num| #1=(|OutputForm|)) (|den| #1#))
                (SEQ (LETT |var| (SPADCALL "%x" (QREFELT % 35)))
                     (LETT |num|
                           (SPADCALL
@@ -142,7 +142,7 @@
 
 (SDEFUN |MOEBIUS;proportional?|
         ((|list1| (|List| F)) (|list2| (|List| F)) (% (|Boolean|)))
-        (SPROG ((|x2| (F)) (|x1| (F)))
+        (SPROG ((|x1| (F)) (|x2| (F)))
                (COND ((NULL |list1|) (NULL |list2|)) ((NULL |list2|) NIL)
                      ((SPADCALL (LETT |x1| (|SPADfirst| |list1|))
                                 (QREFELT % 30))
@@ -177,7 +177,7 @@
           (RETURN (PROGN (SPADCALL |f1| |x1| (QREFELT % 23)))))) 
 
 (SDEFUN |MOEBIUS;=;2%B;19| ((|t| (%)) (|s| (%)) (% (|Boolean|)))
-        (SPROG ((|list2| (|List| F)) (|list1| (|List| F)))
+        (SPROG ((|list1| (|List| F)) (|list2| (|List| F)))
                (SEQ
                 (LETT |list1|
                       (LIST (|MOEBIUS;a| |t| %) (|MOEBIUS;b| |t| %)
@@ -190,7 +190,7 @@
 (DECLAIM (NOTINLINE |MoebiusTransform;|)) 
 
 (DEFUN |MoebiusTransform;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|MoebiusTransform| DV$1))
@@ -207,9 +207,9 @@
                               (|:| |d| |#1|)))
           %))) 
 
-(DEFUN |MoebiusTransform| (#1=#:G53)
+(DEFUN |MoebiusTransform| (#1=#:G57)
   (SPROG NIL
-         (PROG (#2=#:G54)
+         (PROG (#2=#:G58)
            (RETURN
             (COND
              ((LETT #2#
@@ -228,11 +228,10 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) '|Rep|
               |MOEBIUS;moebius;4F%;1|
-              (CONS IDENTITY
-                    (FUNCALL (|dispatchFunction| |MOEBIUS;One;%;6|) %))
-              (0 . |One|) (4 . |Zero|) (8 . *) (14 . +) |MOEBIUS;*;3%;7|
-              (20 . -) |MOEBIUS;inv;2%;8| |MOEBIUS;shift;F%;9|
-              |MOEBIUS;scale;F%;10| |MOEBIUS;recip;%;11| |MOEBIUS;shift;%F%;12|
+              (CONS IDENTITY (FUNCALL (|dispatchFunction| |MOEBIUS;1;%;6|) %))
+              (0 . |1|) (4 . |0|) (8 . *) (14 . +) |MOEBIUS;*;3%;7| (20 . -)
+              |MOEBIUS;inv;2%;8| |MOEBIUS;shift;F%;9| |MOEBIUS;scale;F%;10|
+              |MOEBIUS;recip;%;11| |MOEBIUS;shift;%F%;12|
               |MOEBIUS;scale;%F%;13| |MOEBIUS;recip;2%;14| (25 . /)
               |MOEBIUS;eval;%2F;15| (|Union| 6 '"failed")
               (|OnePointCompletion| 6) (31 . |retractIfCan|) (36 . |coerce|)
@@ -246,7 +245,7 @@
            '#(~= 96 |shift| 102 |scale| 113 |sample| 124 |rightRecip| 128
               |rightPower| 133 |recip| 145 |one?| 159 |moebius| 164 |leftRecip|
               172 |leftPower| 177 |latex| 189 |inv| 194 |eval| 199 |conjugate|
-              211 |commutator| 217 |coerce| 223 ^ 228 |One| 246 = 250 / 256 *
+              211 |commutator| 217 |coerce| 223 ^ 228 = 246 |1| 252 / 256 *
               262)
            'NIL
            (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0 0))
@@ -272,6 +271,6 @@
                                          1 1 0 33 0 1 1 0 0 0 16 2 0 6 0 6 24 2
                                          0 26 0 26 32 2 0 0 0 0 1 2 0 0 0 0 1 1
                                          0 34 0 41 2 0 0 0 47 1 2 0 0 0 49 1 2
-                                         0 0 0 50 1 0 0 0 9 2 0 29 0 0 46 2 0 0
+                                         0 0 0 50 1 2 0 29 0 0 46 0 0 0 9 2 0 0
                                          0 0 1 2 0 0 0 0 14)))))
            '|lookupComplete|)) 

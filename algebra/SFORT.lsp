@@ -1,5 +1,5 @@
 
-(PUT '|SFORT;fortran;SFstFS%;1| '|SPADreplace| 'VECTOR) 
+(MAKEPROP '|SFORT;fortran;SFstFS%;1| '|SPADreplace| 'VECTOR) 
 
 (SDEFUN |SFORT;fortran;SFstFS%;1|
         ((|fname| (|Symbol|)) (|ftype| (|FortranScalarType|)) (|res| (FS))
@@ -14,10 +14,10 @@
 
 (SDEFUN |SFORT;outputAsFortran;%V;4| ((|u| (%)) (% (|Void|)))
         (SPROG
-         ((|o_val| (|OutputForm|)) (|val| (|OutputForm|))
-          (|nargs| (|List| (|OutputForm|))) (#1=#:G12 NIL) (|arg| NIL)
-          (#2=#:G11 NIL) (|args| (|List| (|Symbol|))) (|fname| (|Symbol|))
-          (|ftype_s| (|String|)) (|ftype| (|FortranScalarType|)))
+         ((|ftype| (|FortranScalarType|)) (|ftype_s| (|String|))
+          (|fname| (|Symbol|)) (|args| (|List| (|Symbol|))) (#1=#:G14 NIL)
+          (|arg| NIL) (#2=#:G15 NIL) (|nargs| (|List| (|OutputForm|)))
+          (|val| (|OutputForm|)) (|o_val| (|OutputForm|)))
          (SEQ (LETT |ftype| (QVELT |u| 1))
               (LETT |ftype_s|
                     (SPADCALL (SPADCALL |ftype| (QREFELT % 18))
@@ -26,17 +26,17 @@
               (LETT |args| (|SFORT;argumentsOf| |u| %))
               (LETT |nargs|
                     (PROGN
-                     (LETT #2# NIL)
-                     (SEQ (LETT |arg| NIL) (LETT #1# |args|) G190
+                     (LETT #1# NIL)
+                     (SEQ (LETT |arg| NIL) (LETT #2# |args|) G190
                           (COND
-                           ((OR (ATOM #1#) (PROGN (LETT |arg| (CAR #1#)) NIL))
+                           ((OR (ATOM #2#) (PROGN (LETT |arg| (CAR #2#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #2#
-                                  (CONS (SPADCALL |arg| (QREFELT % 15)) #2#))))
-                          (LETT #1# (CDR #1#)) (GO G190) G191
-                          (EXIT (NREVERSE #2#)))))
+                            (LETT #1#
+                                  (CONS (SPADCALL |arg| (QREFELT % 15)) #1#))))
+                          (LETT #2# (CDR #2#)) (GO G190) G191
+                          (EXIT (NREVERSE #1#)))))
               (LETT |val| (SPADCALL (QVELT |u| 2) (QREFELT % 21)))
               (SPADCALL |fname| (CONS 0 |ftype|) |args| (QREFELT % 24))
               (SPADCALL |ftype_s| |nargs| (QREFELT % 26))
@@ -50,7 +50,7 @@
 (DECLAIM (NOTINLINE |SimpleFortranProgram;|)) 
 
 (DEFUN |SimpleFortranProgram;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -70,9 +70,9 @@
                               (|:| |body| |#2|)))
           %))) 
 
-(DEFUN |SimpleFortranProgram| (&REST #1=#:G13)
+(DEFUN |SimpleFortranProgram| (&REST #1=#:G16)
   (SPROG NIL
-         (PROG (#2=#:G14)
+         (PROG (#2=#:G17)
            (RETURN
             (COND
              ((LETT #2#

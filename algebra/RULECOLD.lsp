@@ -4,14 +4,14 @@
 (SDEFUN |RULECOLD;coerce;%Of;2| ((|r| (%)) (% (|OutputForm|)))
         (SPADCALL (QREFELT % 6) (QREFELT % 10))) 
 
-(PUT '|RULECOLD;=;2%B;3| '|SPADreplace| '(XLAM (|x| |y|) 'T)) 
+(MAKEPROP '|RULECOLD;=;2%B;3| '|SPADreplace| '(XLAM (|x| |y|) 'T)) 
 
 (SDEFUN |RULECOLD;=;2%B;3| ((|x| (%)) (|y| (%)) (% (|Boolean|))) 'T) 
 
 (DECLAIM (NOTINLINE |RuleCalled;|)) 
 
 (DEFUN |RuleCalled;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT |dv$| (LIST '|RuleCalled| DV$1))
@@ -24,9 +24,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |RuleCalled| (#1=#:G3)
+(DEFUN |RuleCalled| (#1=#:G4)
   (SPROG NIL
-         (PROG (#2=#:G4)
+         (PROG (#2=#:G5)
            (RETURN
             (COND
              ((LETT #2#

@@ -35,7 +35,7 @@
                   (QREFELT % 25))) 
 
 (SDEFUN |FS2;map;MAB;3| ((|f| (|Mapping| S R)) (|x| (A)) (% (B)))
-        (SPROG ((#1=#:G34 NIL))
+        (SPROG ((#1=#:G41 NIL))
                (SPADCALL (|FS2;smpmap| |f| (SPADCALL |x| (QREFELT % 23)) %)
                          (PROG2
                              (LETT #1#
@@ -56,8 +56,8 @@
 
 (DEFUN |FunctionSpaceFunctions2;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -84,9 +84,9 @@
      ('T (QSETREFV % 11 (CONS (|dispatchFunction| |FS2;map;MAB;4|) %))))
     %))) 
 
-(DEFUN |FunctionSpaceFunctions2| (&REST #1=#:G144)
+(DEFUN |FunctionSpaceFunctions2| (&REST #1=#:G151)
   (SPROG NIL
-         (PROG (#2=#:G145)
+         (PROG (#2=#:G152)
            (RETURN
             (COND
              ((LETT #2#

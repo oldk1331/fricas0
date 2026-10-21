@@ -1,5 +1,5 @@
 
-(PUT '|OFTOOL;atom?;OfB;1| '|SPADreplace| 'ATOM) 
+(MAKEPROP '|OFTOOL;atom?;OfB;1| '|SPADreplace| 'ATOM) 
 
 (SDEFUN |OFTOOL;atom?;OfB;1| ((|x| (|OutputForm|)) (% (|Boolean|))) (ATOM |x|)) 
 
@@ -23,7 +23,7 @@
                          ((SPADCALL |op| (QREFELT % 9)) (EQUAL |op| 'NOTHING))
                          ('T NIL))))))))) 
 
-(PUT '|OFTOOL;integer?;OfB;4| '|SPADreplace| 'INTEGERP) 
+(MAKEPROP '|OFTOOL;integer?;OfB;4| '|SPADreplace| 'INTEGERP) 
 
 (SDEFUN |OFTOOL;integer?;OfB;4| ((|x| (|OutputForm|)) (% (|Boolean|)))
         (INTEGERP |x|)) 
@@ -32,7 +32,7 @@
         (COND ((SPADCALL |x| (QREFELT % 13)) |x|)
               ('T (|error| "not an integer")))) 
 
-(PUT '|OFTOOL;symbol?;OfB;6| '|SPADreplace| 'SYMBOLP) 
+(MAKEPROP '|OFTOOL;symbol?;OfB;6| '|SPADreplace| 'SYMBOLP) 
 
 (SDEFUN |OFTOOL;symbol?;OfB;6| ((|x| (|OutputForm|)) (% (|Boolean|)))
         (SYMBOLP |x|)) 
@@ -40,7 +40,7 @@
 (SDEFUN |OFTOOL;symbol;OfS;7| ((|x| (|OutputForm|)) (% (|Symbol|)))
         (COND ((SPADCALL |x| (QREFELT % 9)) |x|) ('T (|error| "not a symbol")))) 
 
-(PUT '|OFTOOL;string?;OfB;8| '|SPADreplace| 'STRINGP) 
+(MAKEPROP '|OFTOOL;string?;OfB;8| '|SPADreplace| 'STRINGP) 
 
 (SDEFUN |OFTOOL;string?;OfB;8| ((|x| (|OutputForm|)) (% (|Boolean|)))
         (STRINGP |x|)) 
@@ -76,8 +76,8 @@
         ((|s| (|Symbol|)) (|l| #1=(|List| (|OutputForm|)))
          (% (|List| (|OutputForm|))))
         (SPROG
-         ((|res| (|List| (|OutputForm|))) (|ll| (|List| #1#))
-          (|t1| (|OutputForm|)) (|t| (|OutputForm|)))
+         ((|t| (|OutputForm|)) (|t1| (|OutputForm|)) (|ll| (|List| #1#))
+          (|res| (|List| (|OutputForm|))))
          (SEQ (LETT |ll| (LIST |l|)) (LETT |res| NIL)
               (SEQ G190 (COND ((NULL (NULL (NULL |ll|))) (GO G191)))
                    (SEQ (LETT |l| (|SPADfirst| |ll|)) (LETT |ll| (CDR |ll|))
@@ -108,7 +108,7 @@
                    NIL (GO G190) G191 (EXIT NIL))
               (EXIT (NREVERSE |res|))))) 
 
-(PUT '|OFTOOL;construct;OfLOf;15| '|SPADreplace| 'CONS) 
+(MAKEPROP '|OFTOOL;construct;OfLOf;15| '|SPADreplace| 'CONS) 
 
 (SDEFUN |OFTOOL;construct;OfLOf;15|
         ((|op| (|OutputForm|)) (|args| (|List| (|OutputForm|)))
@@ -117,11 +117,11 @@
 
 (SDEFUN |OFTOOL;precondition;2Of;16| ((|x| (|OutputForm|)) (% (|OutputForm|)))
         (SPROG
-         ((|a11| #1=(|OutputForm|)) (|args1| #2=(|List| (|OutputForm|)))
-          (|op1| #3=(|OutputForm|)) (|op| #3#) (|a2| (|OutputForm|)) (|a1| #1#)
-          (|nargs| (|List| (|OutputForm|))) (|args2| #2#)
-          (|n| (|NonNegativeInteger|)) (|args| #2#) (#4=#:G138 NIL) (|arg| NIL)
-          (#5=#:G137 NIL) (|xi| (|Integer|)))
+         ((|xi| (|Integer|)) (#1=#:G138 NIL) (|arg| NIL) (#2=#:G139 NIL)
+          (|args| #3=(|List| (|OutputForm|))) (|n| (|NonNegativeInteger|))
+          (|args2| #3#) (|nargs| (|List| (|OutputForm|)))
+          (|a1| #4=(|OutputForm|)) (|a2| (|OutputForm|))
+          (|op| #5=(|OutputForm|)) (|op1| #5#) (|args1| #3#) (|a11| #4#))
          (SEQ
           (COND ((SPADCALL |x| (QREFELT % 14)) |x|)
                 ((SPADCALL |x| (QREFELT % 13))
@@ -145,19 +145,19 @@
                         (LETT |args| (|OFTOOL;flaten_op| '* |args| %))))
                       (LETT |args|
                             (PROGN
-                             (LETT #5# NIL)
-                             (SEQ (LETT |arg| NIL) (LETT #4# |args|) G190
+                             (LETT #1# NIL)
+                             (SEQ (LETT |arg| NIL) (LETT #2# |args|) G190
                                   (COND
-                                   ((OR (ATOM #4#)
-                                        (PROGN (LETT |arg| (CAR #4#)) NIL))
+                                   ((OR (ATOM #2#)
+                                        (PROGN (LETT |arg| (CAR #2#)) NIL))
                                     (GO G191)))
                                   (SEQ
                                    (EXIT
-                                    (LETT #5#
+                                    (LETT #1#
                                           (CONS (SPADCALL |arg| (QREFELT % 29))
-                                                #5#))))
-                                  (LETT #4# (CDR #4#)) (GO G190) G191
-                                  (EXIT (NREVERSE #5#)))))
+                                                #1#))))
+                                  (LETT #2# (CDR #2#)) (GO G190) G191
+                                  (EXIT (NREVERSE #1#)))))
                       (EXIT
                        (COND
                         ((SPADCALL |op| '|construct| (QREFELT % 25))
@@ -447,7 +447,7 @@
 
 (DEFUN |OutputFormTools| ()
   (SPROG NIL
-         (PROG (#1=#:G140)
+         (PROG (#1=#:G141)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|OutputFormTools|))

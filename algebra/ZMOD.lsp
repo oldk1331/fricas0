@@ -14,7 +14,7 @@
 (SDEFUN |ZMOD;bloodyCompiler| ((|n| (|Integer|)) (% (%)))
         (SPADCALL |n| (QREFELT % 6) (QREFELT % 21))) 
 
-(PUT '|ZMOD;convert;%I;5| '|SPADreplace| '(XLAM (|x|) |x|)) 
+(MAKEPROP '|ZMOD;convert;%I;5| '|SPADreplace| '(XLAM (|x|) |x|)) 
 
 (SDEFUN |ZMOD;convert;%I;5| ((|x| (%)) (% (|Integer|))) |x|) 
 
@@ -24,15 +24,15 @@
 (SDEFUN |ZMOD;coerce;I%;7| ((|n| (|Integer|)) (% (%)))
         (|ZMOD;bloodyCompiler| |n| %)) 
 
-(PUT '|ZMOD;Zero;%;8| '|SPADreplace| '(XLAM NIL 0)) 
+(MAKEPROP '|ZMOD;0;%;8| '|SPADreplace| '(XLAM NIL 0)) 
 
-(SDEFUN |ZMOD;Zero;%;8| ((% (%))) 0) 
+(SDEFUN |ZMOD;0;%;8| ((% (%))) 0) 
 
-(PUT '|ZMOD;One;%;9| '|SPADreplace| '(XLAM NIL 1)) 
+(MAKEPROP '|ZMOD;1;%;9| '|SPADreplace| '(XLAM NIL 1)) 
 
-(SDEFUN |ZMOD;One;%;9| ((% (%))) 1) 
+(SDEFUN |ZMOD;1;%;9| ((% (%))) 1) 
 
-(PUT '|ZMOD;init;%;10| '|SPADreplace| '(XLAM NIL 0)) 
+(MAKEPROP '|ZMOD;init;%;10| '|SPADreplace| '(XLAM NIL 0)) 
 
 (SDEFUN |ZMOD;init;%;10| ((% (%))) 0) 
 
@@ -46,7 +46,7 @@
                    (CONS 1 "failed"))
                   ('T (CONS 0 |m|))))))) 
 
-(PUT '|ZMOD;=;2%B;12| '|SPADreplace| '|eql_SI|) 
+(MAKEPROP '|ZMOD;=;2%B;12| '|SPADreplace| '|eql_SI|) 
 
 (SDEFUN |ZMOD;=;2%B;12| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
         (|eql_SI| |x| |y|)) 
@@ -85,9 +85,9 @@
 
 (SDEFUN |ZMOD;recip;%U;21| ((|x| (%)) (% (|Union| % "failed")))
         (SPROG
-         ((|g| (%)) (|c2| (%)) (|c1| (%))
-          (|#G24|
-           (|Record| (|:| |coef1| %) (|:| |coef2| %) (|:| |generator| %))))
+         ((|#G24|
+           (|Record| (|:| |coef1| %) (|:| |coef2| %) (|:| |generator| %)))
+          (|c1| (%)) (|c2| (%)) (|g| (%)))
          (SEQ
           (PROGN
            (LETT |#G24| (SPADCALL |x| (QREFELT % 20) (QREFELT % 44)))
@@ -101,17 +101,17 @@
              (CONS 0 (SPADCALL |c1| (QREFELT % 20) (QREFELT % 37))))
             ('T (CONS 1 "failed"))))))) 
 
-(PUT '|ZMOD;hashUpdate!;Hs%Hs;22| '|SPADreplace| 'HASHSTATEUPDATE) 
+(MAKEPROP '|ZMOD;hashUpdate!;Hs%Hs;22| '|SPADreplace| 'HASHSTATEUPDATE) 
 
 (SDEFUN |ZMOD;hashUpdate!;Hs%Hs;22| ((|hs| #1=(|HashState|)) (|s| (%)) (% #1#))
         (HASHSTATEUPDATE |hs| |s|)) 
 
-(PUT '|ZMOD;smaller?;2%B;23| '|SPADreplace| '|less_SI|) 
+(MAKEPROP '|ZMOD;smaller?;2%B;23| '|SPADreplace| '|less_SI|) 
 
 (SDEFUN |ZMOD;smaller?;2%B;23| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
         (|less_SI| |x| |y|)) 
 
-(PUT '|ZMOD;convert;%I;24| '|SPADreplace| '(XLAM (|x|) |x|)) 
+(MAKEPROP '|ZMOD;convert;%I;24| '|SPADreplace| '(XLAM (|x|) |x|)) 
 
 (SDEFUN |ZMOD;convert;%I;24| ((|x| (%)) (% (|Integer|))) |x|) 
 
@@ -121,15 +121,15 @@
 (SDEFUN |ZMOD;coerce;%Of;26| ((|x| (%)) (% (|OutputForm|)))
         (SPADCALL |x| (QREFELT % 23))) 
 
-(PUT '|ZMOD;Zero;%;27| '|SPADreplace| '(XLAM NIL 0)) 
+(MAKEPROP '|ZMOD;0;%;27| '|SPADreplace| '(XLAM NIL 0)) 
 
-(SDEFUN |ZMOD;Zero;%;27| ((% (%))) 0) 
+(SDEFUN |ZMOD;0;%;27| ((% (%))) 0) 
 
-(PUT '|ZMOD;One;%;28| '|SPADreplace| '(XLAM NIL 1)) 
+(MAKEPROP '|ZMOD;1;%;28| '|SPADreplace| '(XLAM NIL 1)) 
 
-(SDEFUN |ZMOD;One;%;28| ((% (%))) 1) 
+(SDEFUN |ZMOD;1;%;28| ((% (%))) 1) 
 
-(PUT '|ZMOD;init;%;29| '|SPADreplace| '(XLAM NIL 0)) 
+(MAKEPROP '|ZMOD;init;%;29| '|SPADreplace| '(XLAM NIL 0)) 
 
 (SDEFUN |ZMOD;init;%;29| ((% (%))) 0) 
 
@@ -143,7 +143,7 @@
                    (CONS 1 "failed"))
                   ('T (CONS 0 |m|))))))) 
 
-(PUT '|ZMOD;=;2%B;31| '|SPADreplace| 'EQL) 
+(MAKEPROP '|ZMOD;=;2%B;31| '|SPADreplace| 'EQL) 
 
 (SDEFUN |ZMOD;=;2%B;31| ((|x| (%)) (|y| (%)) (% (|Boolean|))) (EQL |x| |y|)) 
 
@@ -174,9 +174,9 @@
 
 (SDEFUN |ZMOD;recip;%U;40| ((|x| (%)) (% (|Union| % "failed")))
         (SPROG
-         ((|g| (%)) (|c2| (%)) (|c1| (%))
-          (|#G48|
-           (|Record| (|:| |coef1| %) (|:| |coef2| %) (|:| |generator| %))))
+         ((|#G48|
+           (|Record| (|:| |coef1| %) (|:| |coef2| %) (|:| |generator| %)))
+          (|c1| (%)) (|c2| (%)) (|g| (%)))
          (SEQ
           (PROGN
            (LETT |#G48| (SPADCALL |x| (QREFELT % 6) (QREFELT % 44)))
@@ -193,7 +193,7 @@
 (SDEFUN |ZMOD;hashUpdate!;Hs%Hs;41| ((|hs| #1=(|HashState|)) (|s| (%)) (% #1#))
         (HASHSTATEUPDATE |hs| (SXHASH |s|))) 
 
-(PUT '|ZMOD;smaller?;2%B;42| '|SPADreplace| '<) 
+(MAKEPROP '|ZMOD;smaller?;2%B;42| '|SPADreplace| '<) 
 
 (SDEFUN |ZMOD;smaller?;2%B;42| ((|x| (%)) (|y| (%)) (% (|Boolean|)))
         (< |x| |y|)) 
@@ -201,7 +201,7 @@
 (DECLAIM (NOTINLINE |IntegerMod;|)) 
 
 (DEFUN |IntegerMod;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT |dv$| (LIST '|IntegerMod| DV$1))
@@ -224,10 +224,10 @@
              (QSETREFV % 25 (CONS (|dispatchFunction| |ZMOD;coerce;I%;7|) %))
              (QSETREFV % 26
                        (CONS #'|makeSpadConstant|
-                             (LIST (|dispatchFunction| |ZMOD;Zero;%;8|) % 26)))
+                             (LIST (|dispatchFunction| |ZMOD;0;%;8|) % 26)))
              (QSETREFV % 27
                        (CONS #'|makeSpadConstant|
-                             (LIST (|dispatchFunction| |ZMOD;One;%;9|) % 27)))
+                             (LIST (|dispatchFunction| |ZMOD;1;%;9|) % 27)))
              (QSETREFV % 28
                        (CONS #'|makeSpadConstant|
                              (LIST (|dispatchFunction| |ZMOD;init;%;10|) %
@@ -257,11 +257,10 @@
              (QSETREFV % 24 (CONS (|dispatchFunction| |ZMOD;coerce;%Of;26|) %))
              (QSETREFV % 26
                        (CONS #'|makeSpadConstant|
-                             (LIST (|dispatchFunction| |ZMOD;Zero;%;27|) %
-                                   26)))
+                             (LIST (|dispatchFunction| |ZMOD;0;%;27|) % 26)))
              (QSETREFV % 27
                        (CONS #'|makeSpadConstant|
-                             (LIST (|dispatchFunction| |ZMOD;One;%;28|) % 27)))
+                             (LIST (|dispatchFunction| |ZMOD;1;%;28|) % 27)))
              (QSETREFV % 28
                        (CONS #'|makeSpadConstant|
                              (LIST (|dispatchFunction| |ZMOD;init;%;29|) %
@@ -285,9 +284,9 @@
                        (CONS (|dispatchFunction| |ZMOD;smaller?;2%B;42|) %)))))
           %))) 
 
-(DEFUN |IntegerMod| (#1=#:G71)
+(DEFUN |IntegerMod| (#1=#:G72)
   (SPROG NIL
-         (PROG (#2=#:G72)
+         (PROG (#2=#:G73)
            (RETURN
             (COND
              ((LETT #2#
@@ -308,12 +307,11 @@
               (0 . |zero?|) (|Integer|) (5 . |convert|) (|PositiveInteger|)
               |ZMOD;lookup;%Pi;3| '#:G3 '|Rep| (|SingleInteger|)
               (10 . |coerce|) '|q| (15 . |positiveRemainder|) (|OutputForm|)
-              (21 . |coerce|) (26 . |coerce|) (31 . |coerce|) (36 . |Zero|)
-              (40 . |One|) (44 . |init|) (48 . +) (54 . =)
-              (|Union| % '"failed") (60 . |nextItem|) (65 . *) (71 . *)
-              (77 . -) (83 . |random|) (87 . |positiveRemainder|)
-              (93 . |index|) (98 . -) (103 . |powmod|) (110 . |powmod|)
-              (117 . ^)
+              (21 . |coerce|) (26 . |coerce|) (31 . |coerce|) (36 . |0|)
+              (40 . |1|) (44 . |init|) (48 . +) (54 . =) (|Union| % '"failed")
+              (60 . |nextItem|) (65 . *) (71 . *) (77 . -) (83 . |random|)
+              (87 . |positiveRemainder|) (93 . |index|) (98 . -)
+              (103 . |powmod|) (110 . |powmod|) (117 . ^)
               (|Record| (|:| |coef1| %) (|:| |coef2| %) (|:| |generator| %))
               (123 . |extendedEuclidean|) (129 . |recip|) (|HashState|)
               (134 . |hashUpdate!|) (140 . |smaller?|) (146 . |mulmod|)
@@ -326,32 +324,33 @@
               |latex| 268 |init| 273 |index| 277 |hashUpdate!| 282 |hash| 288
               |enumerate| 293 |convert| 297 |commutator| 307 |coerce| 313
               |characteristic| 328 |associator| 332 |antiCommutator| 339
-              |annihilate?| 345 ^ 351 |Zero| 363 |One| 367 = 371 - 377 + 388 *
-              394)
+              |annihilate?| 345 ^ 351 = 363 |1| 369 |0| 373 - 377 + 388 * 394)
            'NIL
            (CONS
             (|makeByteWordVec2| 1
                                 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                                  0 0 0 0 0 0 0 0 0 0 0 0))
+                                  0 0 0 0 0 0 0 0 0 0 0 0 0 0))
             (CONS
              '#(NIL |Algebra&| NIL NIL |Rng&| |NonAssociativeAlgebra&| NIL
                 |Module&| |NonAssociativeRing&| NIL NIL |NonAssociativeRng&|
-                NIL |AbelianGroup&| NIL NIL NIL |AbelianMonoid&|
-                |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL |Finite&|
-                |AbelianSemiGroup&| |Magma&| NIL NIL |SetCategory&| NIL
-                |Hashable&| NIL |BasicType&| NIL NIL NIL NIL)
+                NIL |AbelianGroup&| NIL NIL NIL |Finite&| |AbelianMonoid&|
+                |NonAssociativeSemiRng&| |MagmaWithUnit&| NIL NIL
+                |AbelianSemiGroup&| |SetWithZero&| |Magma&| NIL NIL
+                |SetCategory&| NIL |Hashable&| NIL |BasicType&| NIL NIL NIL
+                NIL)
              (CONS
               '#((|CommutativeRing|) (|Algebra| $$) (|Ring|) (|SemiRing|)
                  (|Rng|) (|NonAssociativeAlgebra| $$) (|SemiRng|) (|Module| $$)
                  (|NonAssociativeRing|) (|BiModule| $$ $$) (|RightModule| $$)
                  (|NonAssociativeRng|) (|LeftModule| $$) (|AbelianGroup|)
                  (|CancellationAbelianMonoid|) (|NonAssociativeSemiRing|)
-                 (|Monoid|) (|AbelianMonoid|) (|NonAssociativeSemiRng|)
-                 (|MagmaWithUnit|) (|SemiGroup|) (|Finite|)
-                 (|AbelianSemiGroup|) (|Magma|) (|Comparable|) (|StepThrough|)
-                 (|SetCategory|) (|CommutativeStar|) (|Hashable|)
-                 (|CoercibleTo| 22) (|BasicType|) (|unitsKnown|)
-                 (|TwoSidedRecip|) (|ConvertibleTo| 54) (|ConvertibleTo| 12))
+                 (|Monoid|) (|Finite|) (|AbelianMonoid|)
+                 (|NonAssociativeSemiRng|) (|MagmaWithUnit|) (|SemiGroup|)
+                 (|Comparable|) (|AbelianSemiGroup|) (|SetWithZero|) (|Magma|)
+                 (|ComparableRepresentation|) (|StepThrough|) (|SetCategory|)
+                 (|CommutativeStar|) (|Hashable|) (|CoercibleTo| 22)
+                 (|BasicType|) (|unitsKnown|) (|TwoSidedRecip|)
+                 (|ConvertibleTo| 54) (|ConvertibleTo| 12))
               (|makeByteWordVec2| 54
                                   '(1 0 10 0 11 1 0 12 0 13 1 18 0 12 19 2 12 0
                                     0 0 21 1 17 22 0 23 1 0 22 0 24 1 0 0 12 25
@@ -371,8 +370,8 @@
                                     0 47 1 0 18 0 1 0 0 53 1 1 0 54 0 1 1 0 12
                                     0 13 2 0 0 0 0 1 1 0 22 0 24 1 0 0 12 25 1
                                     0 0 0 1 0 0 7 9 3 0 0 0 0 0 1 2 0 0 0 0 1 2
-                                    0 10 0 0 1 2 0 0 0 14 1 2 0 0 0 7 42 0 0 0
-                                    26 0 0 0 27 2 0 10 0 0 30 1 0 0 0 39 2 0 0
-                                    0 0 35 2 0 0 0 0 29 2 0 0 14 0 1 2 0 0 0 0
-                                    33 2 0 0 12 0 34 2 0 0 7 0 1)))))
+                                    0 10 0 0 1 2 0 0 0 14 1 2 0 0 0 7 42 2 0 10
+                                    0 0 30 0 0 0 27 0 0 0 26 1 0 0 0 39 2 0 0 0
+                                    0 35 2 0 0 0 0 29 2 0 0 14 0 1 2 0 0 0 0 33
+                                    2 0 0 12 0 34 2 0 0 7 0 1)))))
            '|lookupComplete|)) 

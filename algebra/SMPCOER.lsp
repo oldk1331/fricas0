@@ -22,11 +22,8 @@
                                             (|SparseMultivariatePolynomial| R
                                                                             |VarSet2|)))))))))
         (SPROG
-         ((|pu2|
-           (|List|
-            (|Record| (|:| |k| (|NonNegativeInteger|))
-                      (|:| |c| (|SparseMultivariatePolynomial| R |VarSet2|)))))
-          (|p2| #2#)
+         ((|v1| (|VarSet1|)) (|v2| (|VarSet2|)) (#3=#:G25 NIL) (|pu1| #1#)
+          (|t0| NIL) (#4=#:G26 NIL)
           (|t1|
            (|Union| R
                     (|Record| (|:| |v| |VarSet1|)
@@ -36,8 +33,12 @@
                                               (|:| |c|
                                                    (|SparseMultivariatePolynomial|
                                                     R |VarSet1|))))))))
-          (#3=#:G26 NIL) (|t0| NIL) (|pu1| #1#) (#4=#:G25 NIL)
-          (|v2| (|VarSet2|)) (|v1| (|VarSet1|)))
+          (|p2| #2#)
+          (|pu2|
+           (|List|
+            (|Record| (|:| |k| (|NonNegativeInteger|))
+                      (|:| |c|
+                           (|SparseMultivariatePolynomial| R |VarSet2|))))))
          (SEQ
           (EXIT
            (COND ((QEQCAR |p1| 0) (CONS 0 (QCDR |p1|)))
@@ -49,17 +50,17 @@
                         (COND
                          ((SPADCALL |v1| (|SPADfirst| |lv1|) (QREFELT % 10))
                           (PROGN
-                           (LETT #4#
+                           (LETT #3#
                                  (|SMPCOER;convert_sorted| |p1| (CDR |lv1|)
                                   |lv2| %))
                            (GO #6=#:G24)))
                          (#5#
                           (SEQ (LETT |lv1| (CDR |lv1|))
                                (LETT |pu1| (QCDR (QCDR |p1|))) (LETT |pu2| NIL)
-                               (SEQ (LETT |t0| NIL) (LETT #3# |pu1|) G190
+                               (SEQ (LETT |t0| NIL) (LETT #4# |pu1|) G190
                                     (COND
-                                     ((OR (ATOM #3#)
-                                          (PROGN (LETT |t0| (CAR #3#)) NIL))
+                                     ((OR (ATOM #4#)
+                                          (PROGN (LETT |t0| (CAR #4#)) NIL))
                                       (GO G191)))
                                     (SEQ (LETT |t1| (QCDR |t0|))
                                          (LETT |p2|
@@ -73,11 +74,11 @@
                                           (LETT |pu2|
                                                 (CONS (CONS (QCAR |t0|) |p2|)
                                                       |pu2|))))
-                                    (LETT #3# (CDR #3#)) (GO G190) G191
+                                    (LETT #4# (CDR #4#)) (GO G190) G191
                                     (EXIT NIL))
                                (EXIT
                                 (CONS 1 (CONS |v2| (NREVERSE |pu2|))))))))))))
-          #6# (EXIT #4#)))) 
+          #6# (EXIT #3#)))) 
 
 (SDEFUN |SMPCOER;find_var|
         ((|x| (|VarSet1|))
@@ -87,39 +88,39 @@
                      (|:| |elt2|
                           (|SparseMultivariatePolynomial| R |VarSet2|)))))
          (% (|SparseMultivariatePolynomial| R |VarSet2|)))
-        (SPROG ((#1=#:G33 NIL) (#2=#:G34 NIL) (|y| NIL))
+        (SPROG ((|y| NIL) (#1=#:G34 NIL) (#2=#:G33 NIL))
                (SEQ
                 (EXIT
                  (SEQ
-                  (SEQ (LETT |y| NIL) (LETT #2# |pl|) G190
+                  (SEQ (LETT |y| NIL) (LETT #1# |pl|) G190
                        (COND
-                        ((OR (ATOM #2#) (PROGN (LETT |y| (CAR #2#)) NIL))
+                        ((OR (ATOM #1#) (PROGN (LETT |y| (CAR #1#)) NIL))
                          (GO G191)))
                        (SEQ
                         (EXIT
                          (COND
                           ((SPADCALL |x| (QCAR |y|) (QREFELT % 11))
-                           (PROGN (LETT #1# (QCDR |y|)) (GO #3=#:G32))))))
-                       (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                           (PROGN (LETT #2# (QCDR |y|)) (GO #3=#:G32))))))
+                       (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
                   (EXIT (|error| "Impossible"))))
-                #3# (EXIT #1#)))) 
+                #3# (EXIT #2#)))) 
 
 (SDEFUN |SMPCOER;remap_variables;SmpLLSmp;3|
         ((|p| (|SparseMultivariatePolynomial| R |VarSet1|))
          (|lv1| (|List| |VarSet1|)) (|lv2| (|List| |VarSet2|))
          (% (|SparseMultivariatePolynomial| R |VarSet2|)))
         (SPROG
-         ((|pl2|
+         ((|n| (|NonNegativeInteger|)) (#1=#:G64 NIL) (#2=#:G66 NIL)
+          (#3=#:G65 NIL)
+          (|pl|
+           (|List| (|Record| (|:| |elt1| |VarSet1|) (|:| |elt2| |VarSet2|))))
+          (#4=#:G67 NIL) (#5=#:G68 NIL) (#6=#:G69 NIL) (|x| NIL) (#7=#:G70 NIL)
+          (#8=#:G71 NIL) (|el2| NIL) (#9=#:G73 NIL) (|el1| NIL) (#10=#:G72 NIL)
+          (|pl2|
            (|List|
             (|Record| (|:| |elt1| |VarSet1|)
                       (|:| |elt2|
-                           (|SparseMultivariatePolynomial| R |VarSet2|)))))
-          (#1=#:G68 NIL) (|el1| NIL) (#2=#:G69 NIL) (|el2| NIL) (#3=#:G67 NIL)
-          (#4=#:G66 NIL) (|x| NIL) (#5=#:G65 NIL) (#6=#:G64 NIL) (#7=#:G63 NIL)
-          (|pl|
-           (|List| (|Record| (|:| |elt1| |VarSet1|) (|:| |elt2| |VarSet2|))))
-          (#8=#:G61 NIL) (#9=#:G62 NIL) (#10=#:G60 NIL)
-          (|n| (|NonNegativeInteger|)))
+                           (|SparseMultivariatePolynomial| R |VarSet2|))))))
          (SEQ (LETT |n| (LENGTH |lv1|))
               (EXIT
                (COND
@@ -132,75 +133,76 @@
                     (SEQ
                      (LETT |pl|
                            (PROGN
-                            (LETT #10# NIL)
-                            (SEQ (LETT |el2| NIL) (LETT #9# |lv2|)
-                                 (LETT |el1| NIL) (LETT #8# |lv1|) G190
+                            (LETT #1# NIL)
+                            (SEQ (LETT |el2| NIL) (LETT #2# |lv2|)
+                                 (LETT |el1| NIL) (LETT #3# |lv1|) G190
                                  (COND
-                                  ((OR (ATOM #8#)
-                                       (PROGN (LETT |el1| (CAR #8#)) NIL)
-                                       (ATOM #9#)
-                                       (PROGN (LETT |el2| (CAR #9#)) NIL))
+                                  ((OR (ATOM #3#)
+                                       (PROGN (LETT |el1| (CAR #3#)) NIL)
+                                       (ATOM #2#)
+                                       (PROGN (LETT |el2| (CAR #2#)) NIL))
                                    (GO G191)))
                                  (SEQ
                                   (EXIT
-                                   (LETT #10# (CONS (CONS |el1| |el2|) #10#))))
-                                 (LETT #8#
-                                       (PROG1 (CDR #8#) (LETT #9# (CDR #9#))))
-                                 (GO G190) G191 (EXIT (NREVERSE #10#)))))
+                                   (LETT #1# (CONS (CONS |el1| |el2|) #1#))))
+                                 (LETT #3#
+                                       (PROG1 (CDR #3#) (LETT #2# (CDR #2#))))
+                                 (GO G190) G191 (EXIT (NREVERSE #1#)))))
                      (LETT |pl|
                            (SPADCALL
                             (CONS #'|SMPCOER;remap_variables;SmpLLSmp;3!0| %)
                             |pl| (QREFELT % 20)))
                      (LETT |lv1|
                            (PROGN
-                            (LETT #7# NIL)
-                            (SEQ (LETT |x| NIL) (LETT #6# |pl|) G190
+                            (LETT #4# NIL)
+                            (SEQ (LETT |x| NIL) (LETT #5# |pl|) G190
                                  (COND
-                                  ((OR (ATOM #6#)
-                                       (PROGN (LETT |x| (CAR #6#)) NIL))
+                                  ((OR (ATOM #5#)
+                                       (PROGN (LETT |x| (CAR #5#)) NIL))
                                    (GO G191)))
-                                 (SEQ (EXIT (LETT #7# (CONS (QCAR |x|) #7#))))
-                                 (LETT #6# (CDR #6#)) (GO G190) G191
-                                 (EXIT (NREVERSE #7#)))))
+                                 (SEQ (EXIT (LETT #4# (CONS (QCAR |x|) #4#))))
+                                 (LETT #5# (CDR #5#)) (GO G190) G191
+                                 (EXIT (NREVERSE #4#)))))
                      (EXIT
                       (LETT |lv2|
                             (PROGN
-                             (LETT #5# NIL)
-                             (SEQ (LETT |x| NIL) (LETT #4# |pl|) G190
+                             (LETT #6# NIL)
+                             (SEQ (LETT |x| NIL) (LETT #7# |pl|) G190
                                   (COND
-                                   ((OR (ATOM #4#)
-                                        (PROGN (LETT |x| (CAR #4#)) NIL))
+                                   ((OR (ATOM #7#)
+                                        (PROGN (LETT |x| (CAR #7#)) NIL))
                                     (GO G191)))
-                                  (SEQ (EXIT (LETT #5# (CONS (QCDR |x|) #5#))))
-                                  (LETT #4# (CDR #4#)) (GO G190) G191
-                                  (EXIT (NREVERSE #5#)))))))))
+                                  (SEQ (EXIT (LETT #6# (CONS (QCDR |x|) #6#))))
+                                  (LETT #7# (CDR #7#)) (GO G190) G191
+                                  (EXIT (NREVERSE #6#)))))))))
                   (COND
                    ((NULL (SPADCALL |lv2| (QREFELT % 22)))
                     (EXIT
                      (SEQ
                       (LETT |pl2|
                             (PROGN
-                             (LETT #3# NIL)
-                             (SEQ (LETT |el2| NIL) (LETT #2# |lv2|)
-                                  (LETT |el1| NIL) (LETT #1# |lv1|) G190
+                             (LETT #8# NIL)
+                             (SEQ (LETT |el2| NIL) (LETT #9# |lv2|)
+                                  (LETT |el1| NIL) (LETT #10# |lv1|) G190
                                   (COND
-                                   ((OR (ATOM #1#)
-                                        (PROGN (LETT |el1| (CAR #1#)) NIL)
-                                        (ATOM #2#)
-                                        (PROGN (LETT |el2| (CAR #2#)) NIL))
+                                   ((OR (ATOM #10#)
+                                        (PROGN (LETT |el1| (CAR #10#)) NIL)
+                                        (ATOM #9#)
+                                        (PROGN (LETT |el2| (CAR #9#)) NIL))
                                     (GO G191)))
                                   (SEQ
                                    (EXIT
-                                    (LETT #3#
+                                    (LETT #8#
                                           (CONS
                                            (CONS |el1|
                                                  (SPADCALL
                                                   (|spadConstant| % 25) |el2| 1
                                                   (QREFELT % 26)))
-                                           #3#))))
-                                  (LETT #1#
-                                        (PROG1 (CDR #1#) (LETT #2# (CDR #2#))))
-                                  (GO G190) G191 (EXIT (NREVERSE #3#)))))
+                                           #8#))))
+                                  (LETT #10#
+                                        (PROG1 (CDR #10#)
+                                          (LETT #9# (CDR #9#))))
+                                  (GO G190) G191 (EXIT (NREVERSE #8#)))))
                       (EXIT
                        (SPADCALL
                         (CONS #'|SMPCOER;remap_variables;SmpLLSmp;3!1|
@@ -221,7 +223,7 @@
 (DECLAIM (NOTINLINE |SparsePolynomialCoercionHelpers;|)) 
 
 (DEFUN |SparsePolynomialCoercionHelpers;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -239,9 +241,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |SparsePolynomialCoercionHelpers| (&REST #1=#:G70)
+(DEFUN |SparsePolynomialCoercionHelpers| (&REST #1=#:G74)
   (SPROG NIL
-         (PROG (#2=#:G71)
+         (PROG (#2=#:G75)
            (RETURN
             (COND
              ((LETT #2#
@@ -268,9 +270,8 @@
               (|NonNegativeInteger|) (12 . ~=) (|List| 7) (18 . |sorted?|)
               (23 . <) (|Record| (|:| |elt1| 7) (|:| |elt2| 8))
               (|Mapping| 9 17 17) (|List| 17) (29 . |sort|) (|List| 8)
-              (35 . |sorted?|) (40 . |One|)
-              (|SparseMultivariatePolynomial| 6 8) (44 . |One|)
-              (48 . |monomial|) (55 . |coerce|) (|Mapping| 24 7)
+              (35 . |sorted?|) (40 . |1|) (|SparseMultivariatePolynomial| 6 8)
+              (44 . |1|) (48 . |monomial|) (55 . |coerce|) (|Mapping| 24 7)
               (|Mapping| 24 6) (|SparseMultivariatePolynomial| 6 7)
               (|PolynomialCategoryLifting| (|IndexedExponents| 7) 7 6 30 24)
               (60 . |map|) |SMPCOER;remap_variables;SmpLLSmp;3|)

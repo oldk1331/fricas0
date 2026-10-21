@@ -38,15 +38,15 @@
 (SDEFUN |FAMR-;binomThmExpt;2SNniS;3|
         ((|x| (S)) (|y| (S)) (|nn| (|NonNegativeInteger|)) (% (S)))
         (SPROG
-         ((|yn| (S)) (|i| (|NonNegativeInteger|)) (|bincoef| (|Integer|))
-          (|ans| (S)) (#1=#:G28 NIL) (|xn| NIL) (|powl| (|List| S))
-          (#2=#:G27 NIL))
+         ((#1=#:G28 NIL) (|powl| (|List| S)) (|xn| NIL) (#2=#:G29 NIL)
+          (|ans| (S)) (|bincoef| (|Integer|)) (|i| (|NonNegativeInteger|))
+          (|yn| (S)))
          (SEQ
           (COND ((EQL |nn| 0) (|spadConstant| % 19))
                 ('T
                  (SEQ (LETT |powl| (LIST |x|))
-                      (SEQ (LETT |i| 2) (LETT #2# |nn|) G190
-                           (COND ((|greater_SI| |i| #2#) (GO G191)))
+                      (SEQ (LETT |i| 2) (LETT #1# |nn|) G190
+                           (COND ((|greater_SI| |i| #1#) (GO G191)))
                            (SEQ
                             (EXIT
                              (LETT |powl|
@@ -57,9 +57,9 @@
                            (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
                       (LETT |yn| |y|) (LETT |ans| (|SPADfirst| |powl|))
                       (LETT |i| 1) (LETT |bincoef| |nn|)
-                      (SEQ (LETT |xn| NIL) (LETT #1# (CDR |powl|)) G190
+                      (SEQ (LETT |xn| NIL) (LETT #2# (CDR |powl|)) G190
                            (COND
-                            ((OR (ATOM #1#) (PROGN (LETT |xn| (CAR #1#)) NIL))
+                            ((OR (ATOM #2#) (PROGN (LETT |xn| (CAR #2#)) NIL))
                              (GO G191)))
                            (SEQ
                             (LETT |ans|
@@ -69,12 +69,12 @@
                                     |yn| (QREFELT % 20))
                                    |ans| (QREFELT % 13)))
                             (LETT |bincoef|
-                                  (QUOTIENT2 (* (- |nn| |i|) |bincoef|)
-                                             (+ |i| 1)))
+                                  (|quotient_INT| (* (- |nn| |i|) |bincoef|)
+                                                  (+ |i| 1)))
                             (LETT |i| (+ |i| 1))
                             (EXIT
                              (LETT |yn| (SPADCALL |y| |yn| (QREFELT % 20)))))
-                           (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+                           (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
                       (EXIT (SPADCALL |ans| |yn| (QREFELT % 13))))))))) 
 
 (SDEFUN |FAMR-;ground?;SB;4| ((|x| (S)) (% (|Boolean|)))
@@ -110,7 +110,7 @@
           (RETURN (PROGN (SPADCALL |x1| |r| (QREFELT % 40)))))) 
 
 (SDEFUN |FAMR-;exquo;SRU;9| ((|x| (S)) (|r| (R)) (% (|Union| S "failed")))
-        (SPROG ((|ans| (S)) (#1=#:G57 NIL) (|t| (|Union| R "failed")))
+        (SPROG ((|t| (|Union| R "failed")) (#1=#:G65 NIL) (|ans| (S)))
                (SEQ
                 (EXIT
                  (COND
@@ -132,7 +132,7 @@
                                 ((QEQCAR |t| 1)
                                  (PROGN
                                   (LETT #1# (CONS 1 "failed"))
-                                  (GO #2=#:G56)))
+                                  (GO #2=#:G64)))
                                 ('T
                                  (SEQ
                                   (LETT |ans|
@@ -176,7 +176,7 @@
                             (EXIT |r|))))))) 
 
 (SDEFUN |FAMR-;primitivePart;2S;11| ((|x| (S)) (% (S)))
-        (SPROG ((#1=#:G66 NIL) (|c| (R)))
+        (SPROG ((|c| (R)) (#1=#:G74 NIL))
                (SEQ
                 (COND ((SPADCALL |x| (QREFELT % 31)) |x|)
                       ('T
@@ -195,7 +195,7 @@
 (DECLAIM (NOTINLINE |FiniteAbelianMonoidRing&;|)) 
 
 (DEFUN |FiniteAbelianMonoidRing&| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -250,8 +250,8 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (0 . +) (|Mapping| 8 8) (6 . |mapExponents|)
               (12 . *) (18 . +) |FAMR-;pomopo!;SRE2S;1| (24 . -) (30 . |fmecg|)
-              (38 . |Zero|) (42 . |Zero|) (46 . |One|) (50 . *) (|Integer|)
-              (56 . *) (|NonNegativeInteger|) (62 . |binomThmExpt|)
+              (38 . |0|) (42 . |0|) (46 . |1|) (50 . *) (|Integer|) (56 . *)
+              (|NonNegativeInteger|) (62 . |binomThmExpt|)
               (|Union| 7 '"failed") (69 . |retractIfCan|) (|Boolean|)
               |FAMR-;ground?;SB;4| (74 . |retract|) |FAMR-;ground;SR;5|
               (79 . |zero?|) (84 . |leadingCoefficient|) (89 . |degree|)
@@ -259,7 +259,7 @@
               (|List| 7) (105 . |coefficients|) |FAMR-;coefficients;SL;7|
               (110 . /) (|Mapping| 7 7) (116 . |map|) (122 . /) (128 . |zero?|)
               (|Union| % '#1="failed") (133 . |exquo|) (139 . |exquo|)
-              (145 . |One|) (149 . =) (155 . |gcd|) (161 . |content|)
+              (145 . |1|) (149 . =) (155 . |gcd|) (161 . |content|)
               (166 . |content|) (171 . |exquo|) (177 . |unitCanonical|)
               (182 . |primitivePart|))
            '#(|primitivePart| 187 |pomopo!| 192 |mapExponents| 200 |ground?|

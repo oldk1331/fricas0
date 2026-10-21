@@ -2,16 +2,16 @@
 (SDEFUN |TYPED;var;S%;1| ((|n| (|String|)) (% (%)))
         (CONS |n| (SPADCALL (QREFELT % 8)))) 
 
-(PUT '|TYPED;var;SIl%;2| '|SPADreplace| 'CONS) 
+(MAKEPROP '|TYPED;var;SIl%;2| '|SPADreplace| 'CONS) 
 
 (SDEFUN |TYPED;var;SIl%;2| ((|n| (|String|)) (|t| (|ILogic|)) (% (%)))
         (CONS |n| |t|)) 
 
-(PUT '|TYPED;getName;%S;3| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|TYPED;getName;%S;3| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |TYPED;getName;%S;3| ((|v| (%)) (% (|String|))) (QCAR |v|)) 
 
-(PUT '|TYPED;getType;%Il;4| '|SPADreplace| 'QCDR) 
+(MAKEPROP '|TYPED;getType;%Il;4| '|SPADreplace| 'QCDR) 
 
 (SDEFUN |TYPED;getType;%Il;4| ((|v| (%)) (% (|ILogic|))) (QCDR |v|)) 
 
@@ -29,11 +29,11 @@
         ((|t1| (|String|)) (|pin| (|NonNegativeInteger|))
          (% (|Record| (|:| |rft| %) (|:| |pout| (|NonNegativeInteger|)))))
         (SPROG
-         ((#1=#:G24 NIL) (|pt| (|NonNegativeInteger|))
+         ((|vnm| (|String|)) (|ch| (|Character|))
           (|r|
            (|Record| (|:| |rft| (|ILogic|))
                      (|:| |pout| (|NonNegativeInteger|))))
-          (|ch| (|Character|)) (|vnm| (|String|)))
+          (|pt| (|NonNegativeInteger|)) (#1=#:G26 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |vnm| "") (LETT |pt| |pin|)
@@ -47,7 +47,7 @@
                             (PROGN
                              (LETT #1#
                                    (CONS (SPADCALL |vnm| (QREFELT % 10)) |pt|))
-                             (GO #2=#:G23))))
+                             (GO #2=#:G25))))
                           (EXIT (LETT |ch| (STR_ELT1 |t1| |pt|))))
                      NIL (GO G190) G191 (EXIT NIL))
                 (COND
@@ -106,7 +106,7 @@
 
 (DEFUN |Typed| ()
   (SPROG NIL
-         (PROG (#1=#:G33)
+         (PROG (#1=#:G35)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Typed|))

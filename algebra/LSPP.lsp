@@ -5,8 +5,8 @@
           (|Record| (|:| |coefvec| (|Vector| (|Fraction| P)))
                     (|:| |reductum| (|Fraction| P)))))
         (SPROG
-         ((|c| (P)) (|u| (|SparseUnivariatePolynomial| P)) (#1=#:G9 NIL)
-          (|v| NIL) (|i| NIL) (|coefs| (|Vector| (|Fraction| P))))
+         ((|coefs| (|Vector| (|Fraction| P))) (|i| NIL) (|v| NIL) (#1=#:G9 NIL)
+          (|u| (|SparseUnivariatePolynomial| P)) (|c| (P)))
          (SEQ (LETT |coefs| (MAKEARR1 (LENGTH |vs|) (|spadConstant| % 11)))
               (SEQ (LETT |i| 1) (LETT |v| NIL) (LETT #1# |vs|) G190
                    (COND
@@ -42,11 +42,11 @@
           (|Record| (|:| |mat| (|Matrix| (|Fraction| P)))
                     (|:| |vec| (|Vector| (|Fraction| P))))))
         (SPROG
-         ((|m| (|Matrix| (|Fraction| P)))
+         ((|v| (|Vector| (|Fraction| P))) (|i| NIL) (|p| NIL) (#1=#:G18 NIL)
           (|r|
            (|Record| (|:| |coefvec| (|Vector| (|Fraction| P)))
                      (|:| |reductum| (|Fraction| P))))
-          (#1=#:G18 NIL) (|p| NIL) (|i| NIL) (|v| (|Vector| (|Fraction| P))))
+          (|m| (|Matrix| (|Fraction| P))))
          (SEQ (LETT |m| (SPADCALL (LENGTH |ps|) (LENGTH |vs|) (QREFELT % 32)))
               (LETT |v| (MAKEARR1 (LENGTH |ps|) (|spadConstant| % 11)))
               (SEQ (LETT |i| 1) (LETT |p| NIL) (LETT #1# |ps|) G190
@@ -87,8 +87,8 @@
 
 (DEFUN |LinearSystemPolynomialPackage;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -108,9 +108,9 @@
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
-(DEFUN |LinearSystemPolynomialPackage| (&REST #1=#:G23)
+(DEFUN |LinearSystemPolynomialPackage| (&REST #1=#:G27)
   (SPROG NIL
-         (PROG (#2=#:G24)
+         (PROG (#2=#:G28)
            (RETURN
             (COND
              ((LETT #2#
@@ -132,15 +132,15 @@
 (MAKEPROP '|LinearSystemPolynomialPackage| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (|local| |#4|) (|Fraction| 9) (0 . |Zero|)
-              (4 . |Zero|) (8 . |Zero|) (12 . |Zero|) (|Boolean|) (16 . ~=)
+              (|local| |#3|) (|local| |#4|) (|Fraction| 9) (0 . |0|) (4 . |0|)
+              (8 . |0|) (12 . |0|) (|Boolean|) (16 . ~=)
               (|SparseUnivariatePolynomial| %) (22 . |univariate|)
               (|NonNegativeInteger|) (|SparseUnivariatePolynomial| 9)
               (28 . |degree|) (33 . |leadingCoefficient|) (38 . |coerce|)
-              (|Integer|) (|Vector| 10) (43 . |setelt!|) (50 . |One|)
-              (54 . |One|) (58 . |monomial|) (65 . -) (|Matrix| 10)
-              (71 . |zero|) (|List| 8) (77 . |totalDegree|) (83 . |setRow!|)
-              (90 . -) (|Record| (|:| |mat| 31) (|:| |vec| 25)) (|List| 9)
+              (|Integer|) (|Vector| 10) (43 . |setelt!|) (50 . |1|) (54 . |1|)
+              (58 . |monomial|) (65 . -) (|Matrix| 10) (71 . |zero|) (|List| 8)
+              (77 . |totalDegree|) (83 . |setRow!|) (90 . -)
+              (|Record| (|:| |mat| 31) (|:| |vec| 25)) (|List| 9)
               |LSPP;intoMatrix;LLR;2| (|Union| 25 '"failed")
               (|Record| (|:| |particular| 40) (|:| |basis| (|List| 25)))
               (|LinearSystemMatrixPackage| 10 25 25 31) (95 . |solve|)

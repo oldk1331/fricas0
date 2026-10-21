@@ -1,15 +1,16 @@
 
-(PUT '|SCELL;samplePoint;%TheField;1| '|SPADreplace|
-     '(XLAM (|c|) (QVELT |c| 0))) 
+(MAKEPROP '|SCELL;samplePoint;%TheField;1| '|SPADreplace|
+          '(XLAM (|c|) (QVELT |c| 0))) 
 
 (SDEFUN |SCELL;samplePoint;%TheField;1| ((|c| (%)) (% (|TheField|)))
         (QVELT |c| 0)) 
 
-(PUT '|SCELL;hasDimension?;%B;2| '|SPADreplace| '(XLAM (|c|) (QVELT |c| 1))) 
+(MAKEPROP '|SCELL;hasDimension?;%B;2| '|SPADreplace|
+          '(XLAM (|c|) (QVELT |c| 1))) 
 
 (SDEFUN |SCELL;hasDimension?;%B;2| ((|c| (%)) (% (|Boolean|))) (QVELT |c| 1)) 
 
-(PUT '|SCELL;variableOf;%S;3| '|SPADreplace| '(XLAM (|c|) (QVELT |c| 2))) 
+(MAKEPROP '|SCELL;variableOf;%S;3| '|SPADreplace| '(XLAM (|c|) (QVELT |c| 2))) 
 
 (SDEFUN |SCELL;variableOf;%S;3| ((|c| (%)) (% (|Symbol|))) (QVELT |c| 2)) 
 
@@ -28,9 +29,9 @@
         ((|liste| (|List| |TheField|)) (|left| (|TheField|))
          (|right| (|TheField|)) (% (|List| |TheField|)))
         (SPROG
-         ((|new_left| (|TheField|)) (|new_right| (|TheField|))
-          (|lr| (|List| |TheField|)) (|sg| (|Integer|)) (|nbe| (|TheField|))
-          (#1=#:G31 NIL) (|ll| (|List| |TheField|)) (|middle| (|TheField|)))
+         ((|middle| (|TheField|)) (|ll| (|List| |TheField|)) (#1=#:G32 NIL)
+          (|nbe| (|TheField|)) (|sg| (|Integer|)) (|lr| (|List| |TheField|))
+          (|new_right| (|TheField|)) (|new_left| (|TheField|)))
          (SEQ
           (EXIT
            (SEQ
@@ -57,7 +58,7 @@
                                        (LETT #1#
                                              (|SCELL;separate| (REVERSE |ll|)
                                               |left| |middle| %))
-                                       (GO #3=#:G30)))
+                                       (GO #3=#:G31)))
                                      ('T
                                       (SEQ (LETT |nbe| (|SPADfirst| |lr|))
                                            (LETT |sg|
@@ -175,7 +176,7 @@
                                        (QREFELT % 32)))))))))))))))))))))
           #3# (EXIT #1#)))) 
 
-(PUT '|SCELL;pointToCell| '|SPADreplace| 'VECTOR) 
+(MAKEPROP '|SCELL;pointToCell| '|SPADreplace| 'VECTOR) 
 
 (SDEFUN |SCELL;pointToCell|
         ((|sp| (|TheField|)) (|hasDim?| (|Boolean|)) (|varName| (|Symbol|))
@@ -189,11 +190,11 @@
 (SDEFUN |SCELL;allSimpleCells;LSL;8|
         ((|lp| (|List| |ThePols|)) (|var| (|Symbol|)) (% (|List| %)))
         (SPROG
-         ((|l1| (|List| |TheField|)) (|res| (|List| %))
-          (|l| #1=(|List| |TheField|)) (#2=#:G40 NIL) (#3=#:G39 #1#)
-          (#4=#:G41 #1#) (#5=#:G51 NIL) (|p| NIL) (|b| (|TheField|))
-          (#6=#:G37 NIL) (#7=#:G36 (|TheField|)) (#8=#:G38 (|TheField|))
-          (#9=#:G50 NIL) (|lp1| (|List| |ThePols|)))
+         ((|lp1| (|List| |ThePols|)) (#1=#:G51 NIL) (#2=#:G39 (|TheField|))
+          (#3=#:G37 (|TheField|)) (#4=#:G38 NIL) (|b| (|TheField|)) (|p| NIL)
+          (#5=#:G52 NIL) (#6=#:G42 #7=(|List| |TheField|)) (#8=#:G40 #7#)
+          (#9=#:G41 NIL) (|l| #7#) (|res| (|List| %))
+          (|l1| (|List| |TheField|)))
          (SEQ (LETT |lp1| (SPADCALL |lp| (QREFELT % 39)))
               (EXIT
                (COND
@@ -203,26 +204,26 @@
                  (SEQ
                   (LETT |b|
                         (PROGN
-                         (LETT #6# NIL)
-                         (SEQ (LETT |p| NIL) (LETT #9# |lp1|) G190
+                         (LETT #4# NIL)
+                         (SEQ (LETT |p| NIL) (LETT #1# |lp1|) G190
                               (COND
-                               ((OR (ATOM #9#)
-                                    (PROGN (LETT |p| (CAR #9#)) NIL))
+                               ((OR (ATOM #1#)
+                                    (PROGN (LETT |p| (CAR #1#)) NIL))
                                 (GO G191)))
                               (SEQ
                                (EXIT
                                 (PROGN
-                                 (LETT #8# (SPADCALL |p| (QREFELT % 41)))
+                                 (LETT #2# (SPADCALL |p| (QREFELT % 41)))
                                  (COND
-                                  (#6#
-                                   (LETT #7#
-                                         (SPADCALL #7# #8# (QREFELT % 42))))
-                                  ('T (PROGN (LETT #7# #8#) (LETT #6# 'T)))))))
-                              (LETT #9# (CDR #9#)) (GO G190) G191 (EXIT NIL))
-                         (COND (#6# #7#) (#10# (|IdentityError| '|max|)))))
+                                  (#4#
+                                   (LETT #3#
+                                         (SPADCALL #3# #2# (QREFELT % 42))))
+                                  ('T (PROGN (LETT #3# #2#) (LETT #4# 'T)))))))
+                              (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+                         (COND (#4# #3#) (#10# (|IdentityError| '|max|)))))
                   (LETT |l|
                         (PROGN
-                         (LETT #2# NIL)
+                         (LETT #9# NIL)
                          (SEQ (LETT |p| NIL) (LETT #5# |lp1|) G190
                               (COND
                                ((OR (ATOM #5#)
@@ -231,18 +232,18 @@
                               (SEQ
                                (EXIT
                                 (PROGN
-                                 (LETT #4#
+                                 (LETT #6#
                                        (SPADCALL
                                         (SPADCALL (SPADCALL |p| (QREFELT % 43))
                                                   (QREFELT % 45))
                                         (QREFELT % 47)))
                                  (COND
-                                  (#2#
-                                   (LETT #3#
-                                         (SPADCALL #3# #4# (QREFELT % 32))))
-                                  ('T (PROGN (LETT #3# #4#) (LETT #2# 'T)))))))
+                                  (#9#
+                                   (LETT #8#
+                                         (SPADCALL #8# #6# (QREFELT % 32))))
+                                  ('T (PROGN (LETT #8# #6#) (LETT #9# 'T)))))))
                               (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
-                         (COND (#2# #3#) (#10# NIL))))
+                         (COND (#9# #8#) (#10# NIL))))
                   (LETT |l| (SPADCALL |l| (QREFELT % 48)))
                   (LETT |l1|
                         (|SCELL;separate| |l| (SPADCALL |b| (QREFELT % 49)) |b|
@@ -277,7 +278,7 @@
 (DECLAIM (NOTINLINE |SimpleCell;|)) 
 
 (DEFUN |SimpleCell;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -297,9 +298,9 @@
                               (|:| |varOf| (|Symbol|))))
           %))) 
 
-(DEFUN |SimpleCell| (&REST #1=#:G52)
+(DEFUN |SimpleCell| (&REST #1=#:G53)
   (SPROG NIL
-         (PROG (#2=#:G53)
+         (PROG (#2=#:G54)
            (RETURN
             (COND
              ((LETT #2#
@@ -322,9 +323,9 @@
               (|OutputForm|) (0 . |coerce|) (5 . |coerce|) (10 . =)
               (16 . |coerce|) (|List| %) (21 . |brace|) |SCELL;coerce;%Of;4|
               (26 . +) (|Integer|) (32 . |coerce|) (37 . /) (|List| 6) (43 . =)
-              (49 . -) (55 . |sign|) (60 . |Zero|) (64 . |Zero|)
-              (68 . |append|) (74 . >=) (80 . <=) (|List| 7)
-              |SCELL;allSimpleCells;LSL;8| |SCELL;allSimpleCells;ThePolsSL;7|
+              (49 . -) (55 . |sign|) (60 . |0|) (64 . |0|) (68 . |append|)
+              (74 . >=) (80 . <=) (|List| 7) |SCELL;allSimpleCells;LSL;8|
+              |SCELL;allSimpleCells;ThePolsSL;7|
               (|CylindricalAlgebraicDecompositionUtilities| 6 7)
               (86 . |gcdBasis|) (|RealPolynomialUtilitiesPackage| 6 7)
               (91 . |boundOfCauchy|) (96 . |max|) (102 . |unitCanonical|)

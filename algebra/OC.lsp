@@ -25,6 +25,7 @@
                                                 (|Join|
                                                  (|FramedNonAssociativeAlgebra|
                                                   '|t#1|)
+                                                 (|NonAssociativeRing|)
                                                  (|FullyRetractableTo| '|t#1|)
                                                  (|FullyEvalableOver| '|t#1|)
                                                  (|mkCategory|

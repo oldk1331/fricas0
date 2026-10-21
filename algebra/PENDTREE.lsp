@@ -1,5 +1,5 @@
 
-(PUT '|PENDTREE;coerce;%T;1| '|SPADreplace| '(XLAM (|t|) |t|)) 
+(MAKEPROP '|PENDTREE;coerce;%T;1| '|SPADreplace| '(XLAM (|t|) |t|)) 
 
 (SDEFUN |PENDTREE;coerce;%T;1| ((|t| (%)) (% (|Tree| S))) |t|) 
 
@@ -49,7 +49,7 @@
 
 (DEFUN |PendantTree;| (|#1|)
   (SPROG
-   ((|pv$| NIL) (#1=#:G20 NIL) (#2=#:G21 NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+   ((DV$1 NIL) (|dv$| NIL) (% NIL) (#1=#:G21 NIL) (#2=#:G20 NIL) (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT |dv$| (LIST '|PendantTree| DV$1))
@@ -59,7 +59,7 @@
               (LETT |pv$|
                     (|buildPredVector| 0 0
                                        (LIST
-                                        (LETT #2#
+                                        (LETT #1#
                                               (|HasCategory| |#1|
                                                              '(|SetCategory|)))
                                         (AND
@@ -67,20 +67,20 @@
                                                         (LIST '|Evalable|
                                                               (|devaluate|
                                                                |#1|)))
-                                         #2#)
+                                         #1#)
                                         (|HasCategory| |#1| '(|OrderedSet|))
                                         (|HasCategory| |#1| '(|BasicType|))
-                                        (LETT #1#
+                                        (LETT #2#
                                               (|HasCategory| |#1|
                                                              '(|CoercibleTo|
                                                                (|OutputForm|))))
-                                        (OR #1#
+                                        (OR #2#
                                             (AND
                                              (|HasCategory| |#1|
                                                             (LIST '|Evalable|
                                                                   (|devaluate|
                                                                    |#1|)))
-                                             #2#))))))
+                                             #1#))))))
     (|haddProp| |$ConstructorCache| '|PendantTree| (LIST DV$1) (CONS 1 %))
     (|stuffDomainSlots| %)
     (QSETREFV % 6 |#1|)
@@ -93,7 +93,7 @@
      (OR
       (AND (|HasCategory| |#1| '(|BasicType|))
            (|HasCategory| % '(|finiteAggregate|)))
-      #2#)
+      #1#)
      (|augmentPredVector| % 512))
     (AND (|HasCategory| % '(|shallowlyMutable|)) (|augmentPredVector| % 1024))
     (SETF |pv$| (QREFELT % 3))

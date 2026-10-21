@@ -17,7 +17,7 @@
                        (EXIT 'T)))))
                    (EXIT NIL))))))) 
 
-(PUT '|UTSCAT-;factorials?| '|SPADreplace| '(XLAM NIL NIL)) 
+(MAKEPROP '|UTSCAT-;factorials?| '|SPADreplace| '(XLAM NIL NIL)) 
 
 (SDEFUN |UTSCAT-;factorials?| ((% (|Boolean|))) NIL) 
 
@@ -48,16 +48,16 @@
                            (SPADCALL (SPADCALL |c| (QREFELT % 19)) |mon|
                                      (QREFELT % 28))))))))))) 
 
-(PUT '|UTSCAT-;showAll?| '|SPADreplace| '(XLAM NIL |$streamsShowAll|)) 
+(MAKEPROP '|UTSCAT-;showAll?| '|SPADreplace| '(XLAM NIL |$streamsShowAll|)) 
 
 (SDEFUN |UTSCAT-;showAll?| ((% (|Boolean|))) |$streamsShowAll|) 
 
 (SDEFUN |UTSCAT-;coerce;SOf;5| ((|p| (S)) (% (|OutputForm|)))
         (SPROG
-         ((|l| (|List| (|OutputForm|))) (|uu| (|Stream| |Coef|))
-          (|uu1| (|Stream| |Coef|)) (|n| NIL) (#1=#:G62 NIL)
-          (|count| (|NonNegativeInteger|)) (|vv| (|OutputForm|))
-          (|cen| (|Coef|)) (|var| (|Symbol|)))
+         ((|var| (|Symbol|)) (|cen| (|Coef|)) (|vv| (|OutputForm|))
+          (|count| (|NonNegativeInteger|)) (#1=#:G64 NIL) (|n| NIL)
+          (|uu1| (|Stream| |Coef|)) (|uu| (|Stream| |Coef|))
+          (|l| (|List| (|OutputForm|))))
          (SEQ
           (COND
            ((SPADCALL (LETT |uu| (SPADCALL |p| (QREFELT % 9))) (QREFELT % 11))
@@ -278,8 +278,8 @@
 
 (SDEFUN |UTSCAT-;^;SFS;36| ((|x| (S)) (|r| (|Fraction| (|Integer|))) (% (S)))
         (SPROG
-         ((|ratPow| (|Stream| |Coef|)) (|onePlusX| (|Stream| |Coef|))
-          (|coefs| (|Stream| |Coef|)))
+         ((|coefs| (|Stream| |Coef|)) (|onePlusX| (|Stream| |Coef|))
+          (|ratPow| (|Stream| |Coef|)))
          (SEQ (LETT |coefs| (SPADCALL |x| (QREFELT % 9)))
               (EXIT
                (COND
@@ -415,7 +415,7 @@
 (DECLAIM (NOTINLINE |UnivariateTaylorSeriesCategory&;|)) 
 
 (DEFUN |UnivariateTaylorSeriesCategory&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -427,17 +427,23 @@
                           (|buildPredVector| 0 0
                                              (LIST
                                               (|HasCategory| |#2|
+                                                             '(|Algebra|
+                                                               (|Fraction|
+                                                                (|Integer|))))
+                                              (|HasCategory| |#2|
                                                              '(|Field|))))))
           (|stuffDomainSlots| %)
           (QSETREFV % 6 |#1|)
           (QSETREFV % 7 |#2|)
           (SETF |pv$| (QREFELT % 3))
           (COND
-           ((|testBitVector| |pv$| 1)
-            (QSETREFV % 51
-                      (CONS (|dispatchFunction| |UTSCAT-;^;SCoefS;6|) %))))
+           ((|testBitVector| |pv$| 2)
+            (COND
+             ((|testBitVector| |pv$| 1)
+              (QSETREFV % 51
+                        (CONS (|dispatchFunction| |UTSCAT-;^;SCoefS;6|) %))))))
           (COND
-           ((|HasCategory| |#2| '(|Algebra| (|Fraction| (|Integer|))))
+           ((|testBitVector| |pv$| 1)
             (COND
              ((|HasCategory| |#2| '(|CommutativeRing|))
               (PROGN
@@ -558,11 +564,11 @@
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|Stream| 7) (0 . |coefficients|) (|Boolean|) (5 . |empty?|)
               (10 . |frst|) (15 . |zero?|) (20 . |rst|) |UTSCAT-;zero?;SB;1|
-              (25 . |Zero|) (29 . |Zero|) (|OutputForm|) (33 . |coerce|)
-              (38 . |One|) (42 . |One|) (|Integer|) (46 . |coerce|) (51 . ^)
-              (57 . =) (63 . -) (68 . -) (73 . *) (|Symbol|) (79 . |variable|)
-              (84 . |center|) (89 . |coerce|) (94 . -) (100 . |paren|)
-              (105 . ~=) (111 . |explicitEntries?|) (116 . |eq?|)
+              (25 . |0|) (29 . |0|) (|OutputForm|) (33 . |coerce|) (38 . |1|)
+              (42 . |1|) (|Integer|) (46 . |coerce|) (51 . ^) (57 . =) (63 . -)
+              (68 . -) (73 . *) (|Symbol|) (79 . |variable|) (84 . |center|)
+              (89 . |coerce|) (94 . -) (100 . |paren|) (105 . ~=)
+              (111 . |explicitEntries?|) (116 . |eq?|)
               (122 . |explicitlyEmpty?|) (|NonNegativeInteger|)
               (127 . |coerce|) (|List| %) (132 . |prefix|) (138 . +)
               (|Mapping| 18 18 18) (|List| 18) (144 . |reduce|)

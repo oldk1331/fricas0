@@ -2,7 +2,7 @@
 (SDEFUN |LLINDEP;csolve_pol;MLL;1|
         ((|csolve| (|Mapping| (|List| (|Vector| Q)) (|Matrix| F)))
          (|lp| (|List| UP)) (% (|List| (|Vector| Q))))
-        (SPROG ((|rs1| (|Matrix| F)) (|m1| (|Matrix| UP)))
+        (SPROG ((|m1| (|Matrix| UP)) (|rs1| (|Matrix| F)))
                (SEQ (LETT |m1| (SPADCALL (LIST |lp|) (QREFELT % 11)))
                     (LETT |rs1| (SPADCALL |m1| (QREFELT % 14)))
                     (EXIT (SPADCALL |rs1| |csolve|))))) 
@@ -11,8 +11,8 @@
         ((|csolve| (|Mapping| (|List| (|Vector| Q)) (|Matrix| F)))
          (|lrf| (|List| (|Fraction| UP))) (% (|List| (|Vector| Q))))
         (SPROG
-         ((|rs2| (|Matrix| F)) (|rs1| (|Matrix| UP))
-          (|m1| (|Matrix| (|Fraction| UP))))
+         ((|m1| (|Matrix| (|Fraction| UP))) (|rs1| (|Matrix| UP))
+          (|rs2| (|Matrix| F)))
          (SEQ (LETT |m1| (SPADCALL (LIST |lrf|) (QREFELT % 21)))
               (LETT |rs1| (SPADCALL |m1| (QREFELT % 23)))
               (LETT |rs2| (SPADCALL |rs1| (QREFELT % 14)))
@@ -21,7 +21,7 @@
 (SDEFUN |LLINDEP;csolve_rmat;MML;3|
         ((|csolve| (|Mapping| (|List| (|Vector| Q)) (|Matrix| F)))
          (|mrf| (|Matrix| (|Fraction| UP))) (% (|List| (|Vector| Q))))
-        (SPROG ((|rs2| (|Matrix| F)) (|rs1| (|Matrix| UP)))
+        (SPROG ((|rs1| (|Matrix| UP)) (|rs2| (|Matrix| F)))
                (SEQ (LETT |rs1| (SPADCALL |mrf| (QREFELT % 23)))
                     (LETT |rs2| (SPADCALL |rs1| (QREFELT % 14)))
                     (EXIT (SPADCALL |rs2| |csolve|))))) 
@@ -29,7 +29,7 @@
 (DECLAIM (NOTINLINE |LiftLinearDependence;|)) 
 
 (DEFUN |LiftLinearDependence;| (|#1| |#2| |#3|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$3 NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

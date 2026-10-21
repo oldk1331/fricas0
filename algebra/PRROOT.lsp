@@ -2,21 +2,21 @@
 (SDEFUN |PRROOT;get_rational_roots;UPL;1|
         ((|p| (UP)) (% (|List| (|Fraction| (|Integer|)))))
         (SPROG
-         ((|res| (|List| (|Fraction| (|Integer|))))
-          (|val1r| (|Fraction| (|Integer|))) (#1=#:G10 NIL)
-          (|fac| #2=(|SparseUnivariatePolynomial| (|Integer|))) (#3=#:G13 NIL)
-          (|facr| NIL)
+         ((|nn| (|NonNegativeInteger|)) (|vv| (|Vector| F)) (|vm| (|Matrix| F))
+          (|vvr| (|Matrix| (|Integer|))) (#1=#:G18 NIL) (|i| NIL)
+          (#2=#:G19 NIL)
+          (|pl2| (|List| (|SparseUnivariatePolynomial| (|Integer|))))
+          (|eq2z| (|SparseUnivariatePolynomial| (|Integer|)))
+          (|ff| (|Factored| (|SparseUnivariatePolynomial| (|Integer|))))
           (|facl|
            (|List|
             (|Record| (|:| |flag| (|Union| "nil" "sqfr" "irred" "prime"))
-                      (|:| |factor| #2#)
+                      (|:| |factor|
+                           #3=(|SparseUnivariatePolynomial| (|Integer|)))
                       (|:| |exponent| (|NonNegativeInteger|)))))
-          (|ff| (|Factored| (|SparseUnivariatePolynomial| (|Integer|))))
-          (|eq2z| (|SparseUnivariatePolynomial| (|Integer|)))
-          (|pl2| (|List| (|SparseUnivariatePolynomial| (|Integer|))))
-          (#4=#:G12 NIL) (|i| NIL) (#5=#:G11 NIL)
-          (|vvr| (|Matrix| (|Integer|))) (|vm| (|Matrix| F))
-          (|vv| (|Vector| F)) (|nn| (|NonNegativeInteger|)))
+          (|facr| NIL) (#4=#:G20 NIL) (|fac| #3#) (#5=#:G17 NIL)
+          (|val1r| (|Fraction| (|Integer|)))
+          (|res| (|List| (|Fraction| (|Integer|)))))
          (SEQ (LETT |nn| (+ (SPADCALL |p| (QREFELT % 9)) 1))
               (LETT |vv| (SPADCALL |p| |nn| (QREFELT % 11)))
               (LETT |vm|
@@ -25,25 +25,25 @@
               (LETT |vvr| (SPADCALL |vm| (QREFELT % 19)))
               (LETT |pl2|
                     (PROGN
-                     (LETT #5# NIL)
-                     (SEQ (LETT |i| 1) (LETT #4# (ANROWS |vvr|)) G190
-                          (COND ((|greater_SI| |i| #4#) (GO G191)))
+                     (LETT #1# NIL)
+                     (SEQ (LETT |i| 1) (LETT #2# (ANROWS |vvr|)) G190
+                          (COND ((|greater_SI| |i| #2#) (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #5#
+                            (LETT #1#
                                   (CONS
                                    (SPADCALL
                                     (SPADCALL |vvr| |i| (QREFELT % 22))
                                     (QREFELT % 24))
-                                   #5#))))
+                                   #1#))))
                           (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                          (EXIT (NREVERSE #5#)))))
+                          (EXIT (NREVERSE #1#)))))
               (LETT |eq2z| (SPADCALL |pl2| (QREFELT % 26)))
               (LETT |ff| (SPADCALL |eq2z| (QREFELT % 29)))
               (LETT |facl| (SPADCALL |ff| (QREFELT % 34))) (LETT |res| NIL)
-              (SEQ (LETT |facr| NIL) (LETT #3# |facl|) G190
+              (SEQ (LETT |facr| NIL) (LETT #4# |facl|) G190
                    (COND
-                    ((OR (ATOM #3#) (PROGN (LETT |facr| (CAR #3#)) NIL))
+                    ((OR (ATOM #4#) (PROGN (LETT |facr| (CAR #4#)) NIL))
                      (GO G191)))
                    (SEQ
                     (EXIT
@@ -52,7 +52,7 @@
                            (COND
                             ((SPADCALL (SPADCALL |fac| (QREFELT % 35)) 1
                                        (QREFELT % 37))
-                             (PROGN (LETT #1# |$NoValue|) (GO #6=#:G4)))
+                             (PROGN (LETT #5# |$NoValue|) (GO #6=#:G11)))
                             ('T
                              (SEQ
                               (LETT |val1r|
@@ -63,19 +63,19 @@
                                       (QREFELT % 42))
                                      (QREFELT % 43)))
                               (EXIT (LETT |res| (CONS |val1r| |res|)))))))))
-                    #6# (EXIT #1#))
-                   (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
+                    #6# (EXIT #5#))
+                   (LETT #4# (CDR #4#)) (GO G190) G191 (EXIT NIL))
               (EXIT |res|)))) 
 
 (SDEFUN |PRROOT;integerBound;UPI;2| ((|p| (UP)) (% (|Integer|)))
         (SPROG
-         ((|res| (|Integer|)) (|q| (|Integer|)) (#1=#:G23 NIL)
-          (|qu| (|Union| (|Integer|) "failed")) (#2=#:G24 NIL) (|r| NIL)
-          (|lr| (|List| (|Fraction| (|Integer|)))))
+         ((|lr| (|List| (|Fraction| (|Integer|)))) (|r| NIL) (#1=#:G34 NIL)
+          (|qu| (|Union| (|Integer|) "failed")) (#2=#:G33 NIL)
+          (|q| (|Integer|)) (|res| (|Integer|)))
          (SEQ (LETT |lr| (SPADCALL |p| (QREFELT % 45))) (LETT |res| 0)
-              (SEQ (LETT |r| NIL) (LETT #2# |lr|) G190
+              (SEQ (LETT |r| NIL) (LETT #1# |lr|) G190
                    (COND
-                    ((OR (ATOM #2#) (PROGN (LETT |r| (CAR #2#)) NIL))
+                    ((OR (ATOM #1#) (PROGN (LETT |r| (CAR #1#)) NIL))
                      (GO G191)))
                    (SEQ
                     (EXIT
@@ -83,20 +83,20 @@
                           (EXIT
                            (COND
                             ((QEQCAR |qu| 1)
-                             (PROGN (LETT #1# |$NoValue|) (GO #3=#:G14)))
+                             (PROGN (LETT #2# |$NoValue|) (GO #3=#:G21)))
                             ('T
                              (SEQ (LETT |q| (QCDR |qu|))
                                   (EXIT
                                    (COND
                                     ((< |q| |res|) (LETT |res| |q|))))))))))
-                    #3# (EXIT #1#))
-                   (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                    #3# (EXIT #2#))
+                   (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
               (EXIT |res|)))) 
 
 (DECLAIM (NOTINLINE |PolynomialRationalRoots;|)) 
 
 (DEFUN |PolynomialRationalRoots;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -112,9 +112,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |PolynomialRationalRoots| (&REST #1=#:G25)
+(DEFUN |PolynomialRationalRoots| (&REST #1=#:G35)
   (SPROG NIL
-         (PROG (#2=#:G26)
+         (PROG (#2=#:G36)
            (RETURN
             (COND
              ((LETT #2#
@@ -144,7 +144,7 @@
               (|Union| '"nil" '"sqfr" '"irred" '"prime")
               (|Record| (|:| |flag| 30) (|:| |factor| 23) (|:| |exponent| 8))
               (|List| 31) (|Factored| 23) (47 . |factorList|) (52 . |degree|)
-              (|Boolean|) (57 . ~=) (63 . |Zero|) (67 . |coefficient|)
+              (|Boolean|) (57 . ~=) (63 . |0|) (67 . |coefficient|)
               (73 . |leadingCoefficient|) (|Fraction| 21) (78 . /) (84 . -)
               (|List| 41) |PRROOT;get_rational_roots;UPL;1|
               (|Union| 21 '"failed") (89 . |retractIfCan|)

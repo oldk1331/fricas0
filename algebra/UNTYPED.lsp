@@ -1,21 +1,21 @@
 
-(PUT '|UNTYPED;var;S%;1| '|SPADreplace| 'LIST) 
+(MAKEPROP '|UNTYPED;var;S%;1| '|SPADreplace| 'LIST) 
 
 (SDEFUN |UNTYPED;var;S%;1| ((|n| (|String|)) (% (%))) (LIST |n|)) 
 
-(PUT '|UNTYPED;var;SIl%;2| '|SPADreplace| '(XLAM (|n| |t|) (LIST |n|))) 
+(MAKEPROP '|UNTYPED;var;SIl%;2| '|SPADreplace| '(XLAM (|n| |t|) (LIST |n|))) 
 
 (SDEFUN |UNTYPED;var;SIl%;2| ((|n| (|String|)) (|t| (|ILogic|)) (% (%)))
         (LIST |n|)) 
 
-(PUT '|UNTYPED;getName;%S;3| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|UNTYPED;getName;%S;3| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |UNTYPED;getName;%S;3| ((|v| (%)) (% (|String|))) (QCAR |v|)) 
 
 (SDEFUN |UNTYPED;getType;%Il;4| ((|v| (%)) (% (|ILogic|)))
         (SPADCALL (QREFELT % 12))) 
 
-(PUT '|UNTYPED;toString;%S;5| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|UNTYPED;toString;%S;5| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |UNTYPED;toString;%S;5| ((|v| (%)) (% (|String|))) (QCAR |v|)) 
 
@@ -23,11 +23,11 @@
         ((|t1| (|String|)) (|pin| (|NonNegativeInteger|))
          (% (|Record| (|:| |rft| %) (|:| |pout| (|NonNegativeInteger|)))))
         (SPROG
-         ((|pt| (|NonNegativeInteger|))
+         ((|vnm| (|String|)) (#1=#:G21 NIL) (|ch| (|Character|))
           (|r|
            (|Record| (|:| |rft| (|ILogic|))
                      (|:| |pout| (|NonNegativeInteger|))))
-          (|ch| (|Character|)) (#1=#:G19 NIL) (|vnm| (|String|)))
+          (|pt| (|NonNegativeInteger|)))
          (SEQ
           (EXIT
            (SEQ (LETT |vnm| "") (LETT |pt| |pin|)
@@ -41,7 +41,7 @@
                             (PROGN
                              (LETT #1#
                                    (CONS (SPADCALL |vnm| (QREFELT % 8)) |pt|))
-                             (GO #2=#:G18))))
+                             (GO #2=#:G20))))
                           (EXIT (LETT |ch| (STR_ELT1 |t1| |pt|))))
                      NIL (GO G190) G191 (EXIT NIL))
                 (COND
@@ -79,7 +79,7 @@
 
 (DEFUN |Untyped| ()
   (SPROG NIL
-         (PROG (#1=#:G27)
+         (PROG (#1=#:G29)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Untyped|))

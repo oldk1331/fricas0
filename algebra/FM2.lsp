@@ -1,6 +1,6 @@
 
 (SDEFUN |FM2;linearExtend;MM1M2;1| ((|f| (|Mapping| M2 S)) (|x| (M1)) (% (M2)))
-        (SPROG ((|res| (M2)) (#1=#:G8 NIL) (|t| NIL))
+        (SPROG ((|t| NIL) (#1=#:G12 NIL) (|res| (M2)))
                (SEQ
                 (COND ((SPADCALL |x| (QREFELT % 11)) (|spadConstant| % 12))
                       ('T
@@ -28,8 +28,8 @@
 
 (DEFUN |FreeModuleFunctions2;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -49,9 +49,9 @@
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
-(DEFUN |FreeModuleFunctions2| (&REST #1=#:G9)
+(DEFUN |FreeModuleFunctions2| (&REST #1=#:G13)
   (SPROG NIL
-         (PROG (#2=#:G10)
+         (PROG (#2=#:G14)
            (RETURN
             (COND
              ((LETT #2#
@@ -71,8 +71,8 @@
 (MAKEPROP '|FreeModuleFunctions2| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
-              (|local| |#3|) (|local| |#4|) (|Boolean|) (0 . |zero?|)
-              (5 . |Zero|) (|Record| (|:| |k| 7) (|:| |c| 6)) (|List| 13)
+              (|local| |#3|) (|local| |#4|) (|Boolean|) (0 . |zero?|) (5 . |0|)
+              (|Record| (|:| |k| 7) (|:| |c| 6)) (|List| 13)
               (9 . |listOfTerms|) (14 . *) (20 . +) (|Mapping| 9 7)
               |FM2;linearExtend;MM1M2;1|)
            '#(|linearExtend| 26) 'NIL

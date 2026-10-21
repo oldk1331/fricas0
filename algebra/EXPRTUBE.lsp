@@ -3,8 +3,8 @@
         ((|x| (|Expression| (|Integer|))) (|y| (|Expression| (|Integer|)))
          (|z| (|Expression| (|Integer|))) (% (|Symbol|)))
         (SPROG
-         ((|t2| #1=(|Symbol|)) (|t1| #1#) (|varList3| #2=(|List| (|Symbol|)))
-          (|varList2| #2#) (|varList1| #2#))
+         ((|varList1| #1=(|List| (|Symbol|))) (|varList2| #1#) (|varList3| #1#)
+          (|t1| #2=(|Symbol|)) (|t2| #2#))
          (SEQ (LETT |varList1| (SPADCALL |x| (QREFELT % 8)))
               (LETT |varList2| (SPADCALL |y| (QREFELT % 8)))
               (LETT |varList3| (SPADCALL |z| (QREFELT % 8)))
@@ -76,24 +76,22 @@
          (|radFcn| (|Mapping| (|DoubleFloat|) (|DoubleFloat|)))
          (|n| (|Integer|)) (|string| (|String|)) (% (|TubePlot| (|Plot3D|))))
         (SPROG
-         ((|loopList| (|List| (|List| (|Point| (|DoubleFloat|)))))
-          (|lps| (|List| (|Point| (|DoubleFloat|))))
-          (|bNorm| #1=(|Point| (|DoubleFloat|)))
-          (|bNormList| (|List| #2=(|DoubleFloat|))) (|pNorm| #1#)
-          (|pNormList| (|List| #2#))
+         ((|flag| (|Boolean|)) (|t| (|Symbol|))
+          (|xFunc| #1=(|Mapping| (|DoubleFloat|) (|DoubleFloat|)))
+          (|yFunc| #1#) (|zFunc| #1#) (|xp| #2=(|Expression| (|Integer|)))
+          (|yp| #2#) (|zp| #2#) (|sp| #3=(|Expression| (|Integer|)))
+          (|Tx| #4=(|Expression| (|Integer|))) (|Ty| #4#) (|Tz| #4#)
+          (|Txp| #2#) (|Typ| #2#) (|Tzp| #2#) (K #3#) (|Nx| #4#) (|Ny| #4#)
+          (|Nz| #4#) (|NxFunc| #1#) (|NyFunc| #1#) (|NzFunc| #1#)
+          (|Bx| #5=(|Expression| (|Integer|))) (|By| #5#) (|Bz| #5#)
+          (|BxFunc| #1#) (|ByFunc| #1#) (|BzFunc| #1#) (|parPlot| (|Plot3D|))
+          (|cosSin| (|List| (|List| (|DoubleFloat|)))) (|tval| (|DoubleFloat|))
+          (|tvals| (|List| (|DoubleFloat|))) (|ctr| (|Point| (|DoubleFloat|)))
           (|curvePts| (|List| (|Point| (|DoubleFloat|))))
-          (|ctr| (|Point| (|DoubleFloat|))) (|tvals| (|List| (|DoubleFloat|)))
-          (|tval| (|DoubleFloat|)) (|cosSin| (|List| (|List| (|DoubleFloat|))))
-          (|parPlot| (|Plot3D|))
-          (|BzFunc| #3=(|Mapping| (|DoubleFloat|) (|DoubleFloat|)))
-          (|ByFunc| #3#) (|BxFunc| #3#) (|Bz| #4=(|Expression| (|Integer|)))
-          (|By| #4#) (|Bx| #4#) (|NzFunc| #3#) (|NyFunc| #3#) (|NxFunc| #3#)
-          (|Nz| #5=(|Expression| (|Integer|))) (|Ny| #5#) (|Nx| #5#)
-          (K #6=(|Expression| (|Integer|)))
-          (|Tzp| #7=(|Expression| (|Integer|))) (|Typ| #7#) (|Txp| #7#)
-          (|Tz| #5#) (|Ty| #5#) (|Tx| #5#) (|sp| #6#) (|zp| #7#) (|yp| #7#)
-          (|xp| #7#) (|zFunc| #3#) (|yFunc| #3#) (|xFunc| #3#) (|t| (|Symbol|))
-          (|flag| (|Boolean|)))
+          (|pNormList| (|List| #6=(|DoubleFloat|)))
+          (|pNorm| #7=(|Point| (|DoubleFloat|))) (|bNormList| (|List| #6#))
+          (|bNorm| #7#) (|lps| (|List| (|Point| (|DoubleFloat|))))
+          (|loopList| (|List| (|List| (|Point| (|DoubleFloat|))))))
          (SEQ
           (COND ((< |n| 3) (|error| "tubePlot: n should be at least 3"))
                 (#8='T
@@ -202,7 +200,7 @@
         (SPADCALL |x| |y| |z| |colorFcn| |tRange| |radFcn| |n| "open"
                   (QREFELT % 42))) 
 
-(PUT '|EXPRTUBE;project| '|SPADreplace| '(XLAM (|x| |y|) |x|)) 
+(MAKEPROP '|EXPRTUBE;project| '|SPADreplace| '(XLAM (|x| |y|) |x|)) 
 
 (SDEFUN |EXPRTUBE;project|
         ((|x| (|DoubleFloat|)) (|y| (|DoubleFloat|)) (% (|DoubleFloat|))) |x|) 
@@ -253,7 +251,7 @@
 
 (DEFUN |ExpressionTubePlot| ()
   (SPROG NIL
-         (PROG (#1=#:G54)
+         (PROG (#1=#:G56)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|ExpressionTubePlot|))
@@ -273,7 +271,7 @@
 (MAKEPROP '|ExpressionTubePlot| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|List| 11) (|Expression| 29)
-              (0 . |variables|) (5 . |One|) (|Mapping| 36 36) (|Symbol|)
+              (0 . |variables|) (5 . |1|) (|Mapping| 36 36) (|Symbol|)
               (|MakeFloatCompiledFunction| 7) (9 . |makeFloatFunction|)
               (15 . |differentiate|) (|PositiveInteger|) (21 . ^) (27 . +)
               (33 . |sqrt|) (38 . /) (44 . *) (50 . -) (|Segment| 36)

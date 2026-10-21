@@ -2,7 +2,7 @@
 (SDEFUN |TESTUNIT;interpretFunction1|
         ((|f| (|Symbol|)) (|info| (|String|)) (|arg| (|String|)) (% (|Any|)))
         (SPROG
-         ((|info_f| (|InputForm|)) (|ff| (|InputForm|)) (|if1| (|InputForm|)))
+         ((|if1| (|InputForm|)) (|ff| (|InputForm|)) (|info_f| (|InputForm|)))
          (SEQ (LETT |if1| (SPADCALL |arg| (QREFELT % 8)))
               (LETT |ff| (SPADCALL |f| (QREFELT % 10))) (LETT |info_f| |info|)
               (EXIT
@@ -13,8 +13,8 @@
         ((|f| (|Symbol|)) (|info| (|String|)) (|arg1| (|String|))
          (|arg2| (|String|)) (% (|Any|)))
         (SPROG
-         ((|info_f| (|InputForm|)) (|ff| (|InputForm|))
-          (|if2| #1=(|InputForm|)) (|if1| #1#))
+         ((|if1| #1=(|InputForm|)) (|if2| #1#) (|ff| (|InputForm|))
+          (|info_f| (|InputForm|)))
          (SEQ (LETT |if1| (SPADCALL |arg1| (QREFELT % 8)))
               (LETT |if2| (SPADCALL |arg2| (QREFELT % 8)))
               (LETT |ff| (SPADCALL |f| (QREFELT % 10))) (LETT |info_f| |info|)
@@ -26,7 +26,7 @@
 (SDEFUN |TESTUNIT;do_interpret1|
         ((|label| (|String|)) (|fun| (|Symbol|)) (|arg| (|String|))
          (|upd| (|Mapping| (|Void|) (|String|))) (% (|Void|)))
-        (SPROG ((|ru| (|Union| (|None|) "failed")) (|inp| (|String|)))
+        (SPROG ((|inp| (|String|)) (|ru| (|Union| (|None|) "failed")))
                (SEQ (SPADCALL (QREFELT % 17))
                     (LETT |inp|
                           (SPADCALL |label|
@@ -45,7 +45,7 @@
         ((|label| (|String|)) (|fun| (|Symbol|)) (|a1| (|String|))
          (|a2| (|String|)) (|upd| (|Mapping| (|Void|) (|String|)))
          (% (|Void|)))
-        (SPROG ((|ru| (|Union| (|None|) "failed")) (|inp| (|String|)))
+        (SPROG ((|inp| (|String|)) (|ru| (|Union| (|None|) "failed")))
                (SEQ (SPADCALL (QREFELT % 17))
                     (LETT |inp|
                           (SPADCALL |label|
@@ -145,7 +145,7 @@
 
 (DEFUN |Unittest| ()
   (SPROG NIL
-         (PROG (#1=#:G35)
+         (PROG (#1=#:G36)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|Unittest|))

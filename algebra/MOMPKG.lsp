@@ -29,8 +29,8 @@
 (SDEFUN |MOMPKG;moment2freeCumulant;2S;4|
         ((|mom| (|Sequence| R)) (% (|Sequence| R)))
         (SPROG
-         ((#1=#:G6 NIL) (|f1| #2=(|Union| (|Stream| R) "failed"))
-          (|f| (|Stream| R)) (|g1| #2#) (|g| (|Stream| R)))
+         ((|g| (|Stream| R)) (|g1| #1=(|Union| (|Stream| R) "failed"))
+          (|f| (|Stream| R)) (|f1| #1#) (#2=#:G6 NIL))
          (SEQ
           (LETT |g|
                 (SPADCALL (|spadConstant| % 17) (SPADCALL |mom| (QREFELT % 9))
@@ -38,29 +38,29 @@
           (LETT |g1| (SPADCALL |g| (QREFELT % 25)))
           (LETT |f|
                 (SPADCALL
-                 (PROG2 (LETT #1# |g1|)
-                     (QCDR #1#)
-                   (|check_union2| (QEQCAR #1# 0) (|Stream| (QREFELT % 6))
+                 (PROG2 (LETT #2# |g1|)
+                     (QCDR #2#)
+                   (|check_union2| (QEQCAR #2# 0) (|Stream| (QREFELT % 6))
                                    (|Union| (|Stream| (QREFELT % 6))
                                             #3="failed")
-                                   #1#))
+                                   #2#))
                  (QREFELT % 20)))
           (LETT |f1| (SPADCALL (SPADCALL |f| (QREFELT % 12)) (QREFELT % 25)))
           (EXIT
            (SPADCALL
             (SPADCALL
-             (PROG2 (LETT #1# |f1|)
-                 (QCDR #1#)
-               (|check_union2| (QEQCAR #1# 0) (|Stream| (QREFELT % 6))
-                               (|Union| (|Stream| (QREFELT % 6)) #3#) #1#))
+             (PROG2 (LETT #2# |f1|)
+                 (QCDR #2#)
+               (|check_union2| (QEQCAR #2# 0) (|Stream| (QREFELT % 6))
+                               (|Union| (|Stream| (QREFELT % 6)) #3#) #2#))
              (QREFELT % 12))
             (QREFELT % 21)))))) 
 
 (SDEFUN |MOMPKG;booleanCumulant2moment;2S;5|
         ((|x| (|Sequence| R)) (% (|Sequence| R)))
         (SPROG
-         ((#1=#:G11 NIL) (|boo| (|Union| (|Stream| R) "failed"))
-          (|rec| (|Stream| R)))
+         ((|rec| (|Stream| R)) (|boo| (|Union| (|Stream| R) "failed"))
+          (#1=#:G14 NIL))
          (SEQ
           (LETT |rec|
                 (SPADCALL (|spadConstant| % 17)
@@ -82,8 +82,8 @@
 (SDEFUN |MOMPKG;moment2booleanCumulant;2S;6|
         ((|x| (|Sequence| R)) (% (|Sequence| R)))
         (SPROG
-         ((#1=#:G16 NIL) (|mom| (|Union| (|Stream| R) "failed"))
-          (|boo| (|Stream| R)))
+         ((|boo| (|Stream| R)) (|mom| (|Union| (|Stream| R) "failed"))
+          (#1=#:G19 NIL))
          (SEQ
           (LETT |boo|
                 (SPADCALL (|spadConstant| % 17) (SPADCALL |x| (QREFELT % 9))
@@ -114,10 +114,10 @@
         ((|mom| (|List| R))
          (% (|Record| (|:| |an| (|List| R)) (|:| |bn| (|List| R)))))
         (SPROG
-         ((N (|Integer|)) (G (|List| R)) (#1=#:G40 NIL) (|h| NIL)
-          (#2=#:G39 NIL) (H (|List| R)) (|Hk| (R)) (#3=#:G38 NIL) (|l| NIL)
-          (#4=#:G37 NIL) (|k| NIL) (|bb| #5=(|List| R)) (|aa| #5#) (|bk| (R))
-          (|ak| (R)))
+         ((|ak| (R)) (|bk| (R)) (|aa| #1=(|List| R)) (|bb| #1#) (|k| NIL)
+          (#2=#:G40 NIL) (|l| NIL) (#3=#:G41 NIL) (|Hk| (R)) (H (|List| R))
+          (#4=#:G42 NIL) (|h| NIL) (#5=#:G43 NIL) (G (|List| R))
+          (N (|Integer|)))
          (SEQ (LETT N (LENGTH |mom|)) (LETT G |mom|) (LETT |aa| NIL)
               (LETT |bb| NIL)
               (SEQ G190 (COND ((NULL (> N 1)) (GO G191)))
@@ -131,8 +131,8 @@
                         (LETT H
                               (LIST (SPADCALL |ak| (QREFELT % 43))
                                     (SPADCALL |bk| (QREFELT % 43))))
-                        (SEQ (LETT |k| 3) (LETT #4# N) G190
-                             (COND ((> |k| #4#) (GO G191)))
+                        (SEQ (LETT |k| 3) (LETT #2# N) G190
+                             (COND ((> |k| #2#) (GO G191)))
                              (SEQ
                               (LETT |Hk|
                                     (SPADCALL (SPADCALL G |k| (QREFELT % 45))
@@ -159,23 +159,23 @@
                           (SEQ
                            (LETT G
                                  (PROGN
-                                  (LETT #2# NIL)
-                                  (SEQ (LETT |h| NIL) (LETT #1# H) G190
+                                  (LETT #4# NIL)
+                                  (SEQ (LETT |h| NIL) (LETT #5# H) G190
                                        (COND
-                                        ((OR (ATOM #1#)
-                                             (PROGN (LETT |h| (CAR #1#)) NIL))
+                                        ((OR (ATOM #5#)
+                                             (PROGN (LETT |h| (CAR #5#)) NIL))
                                          (GO G191)))
                                        (SEQ
                                         (EXIT
-                                         (LETT #2#
+                                         (LETT #4#
                                                (CONS
                                                 (SPADCALL
                                                  (SPADCALL |h| |bk|
                                                            (QREFELT % 46))
                                                  (QREFELT % 43))
-                                                #2#))))
-                                       (LETT #1# (CDR #1#)) (GO G190) G191
-                                       (EXIT (NREVERSE #2#)))))
+                                                #4#))))
+                                       (LETT #5# (CDR #5#)) (GO G190) G191
+                                       (EXIT (NREVERSE #4#)))))
                            (EXIT (LETT G (CDR (CDR G)))))))
                         (EXIT (LETT N (- N 2))))
                    NIL (GO G190) G191 (EXIT NIL))
@@ -199,7 +199,7 @@
           (RETURN
            (PROGN
             (SPROG
-             ((|gseries| NIL) (#1=#:G42 NIL) (|a| NIL) (|gseries1| NIL)
+             ((|gseries| NIL) (#1=#:G45 NIL) (|a| NIL) (|gseries1| NIL)
               (|b| NIL))
              (SEQ
               (LETT |gseries|
@@ -298,12 +298,12 @@
         ((|aa| (|Stream| R)) (|bb| (|Stream| R))
          (% (|Stream| (|SparseUnivariatePolynomial| R))))
         (SPROG
-         ((|res|
+         ((|p0| (|SparseUnivariatePolynomial| R))
+          (|p1| (|SparseUnivariatePolynomial| R))
+          (|res|
            (|Stream|
             (|Record| (|:| |first| (|SparseUnivariatePolynomial| R))
-                      (|:| |second| (|SparseUnivariatePolynomial| R)))))
-          (|p1| (|SparseUnivariatePolynomial| R))
-          (|p0| (|SparseUnivariatePolynomial| R)))
+                      (|:| |second| (|SparseUnivariatePolynomial| R))))))
          (SEQ (LETT |p0| (|spadConstant| % 67))
               (LETT |p1|
                     (SPADCALL (QREFELT % 69)
@@ -326,8 +326,9 @@
                     (|:| |laurent| (|Fraction| (|Integer|)))
                     (|:| |coef| (|Sequence| R)))))
         (SPROG
-         ((S #1=(|Sequence| R)) (|chi| #2=(|Stream| R)) (|mom| (|Stream| R))
-          (S2 #1#) (|chi2s| (|Sequence| R)) (|chi2| #2#) (|mom2| (|Stream| R)))
+         ((|mom2| (|Stream| R)) (|chi2| #1=(|Stream| R))
+          (|chi2s| (|Sequence| R)) (S2 #2=(|Sequence| R)) (|mom| (|Stream| R))
+          (|chi| #1#) (S #2#))
          (SEQ (LETT |mom| (SPADCALL |x| (QREFELT % 9)))
               (EXIT
                (COND
@@ -372,23 +373,23 @@
           (|Record| (|:| |momt| (|List| (|SparseUnivariatePolynomial| R)))
                     (|:| |cum| (|List| R)) (|:| |mom| (|Stream| R)))))
         (SPROG
-         ((#1=#:G81 NIL) (|mtnew| (|List| (|SparseUnivariatePolynomial| R)))
-          (|rrnew| (|List| R)) (|mnt| (|SparseUnivariatePolynomial| R))
-          (|rn| (R)) (|tmp| (|SparseUnivariatePolynomial| R)) (#2=#:G82 NIL)
-          (|k| NIL) (#3=#:G83 NIL) (|r| NIL) (#4=#:G84 NIL) (|m| NIL)
-          (|n| (|Integer|)) (|mm| (|Stream| R)) (|rr| (|List| R))
-          (|mt| (|List| (|SparseUnivariatePolynomial| R))))
+         ((|mt| (|List| (|SparseUnivariatePolynomial| R))) (|rr| (|List| R))
+          (|mm| (|Stream| R)) (|n| (|Integer|)) (|m| NIL) (#1=#:G93 NIL)
+          (|r| NIL) (#2=#:G92 NIL) (|k| NIL) (#3=#:G91 NIL)
+          (|tmp| (|SparseUnivariatePolynomial| R)) (|rn| (R))
+          (|mnt| (|SparseUnivariatePolynomial| R)) (|rrnew| (|List| R))
+          (|mtnew| (|List| (|SparseUnivariatePolynomial| R))) (#4=#:G90 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |mt| (QVELT |srm| 0)) (LETT |rr| (QVELT |srm| 1))
                 (LETT |mm| (QVELT |srm| 2)) (LETT |n| (+ (LENGTH |rr|) 1))
                 (LETT |tmp| (|spadConstant| % 85))
-                (SEQ (LETT |m| NIL) (LETT #4# (REVERSE |mt|)) (LETT |r| NIL)
-                     (LETT #3# |rr|) (LETT |k| 2) (LETT #2# |n|) G190
+                (SEQ (LETT |m| NIL) (LETT #1# (REVERSE |mt|)) (LETT |r| NIL)
+                     (LETT #2# |rr|) (LETT |k| 2) (LETT #3# |n|) G190
                      (COND
-                      ((OR (|greater_SI| |k| #2#) (ATOM #3#)
-                           (PROGN (LETT |r| (CAR #3#)) NIL) (ATOM #4#)
-                           (PROGN (LETT |m| (CAR #4#)) NIL))
+                      ((OR (|greater_SI| |k| #3#) (ATOM #2#)
+                           (PROGN (LETT |r| (CAR #2#)) NIL) (ATOM #1#)
+                           (PROGN (LETT |m| (CAR #1#)) NIL))
                        (GO G191)))
                      (SEQ
                       (EXIT
@@ -400,8 +401,8 @@
                                        (QREFELT % 100)))))
                      (LETT |k|
                            (PROG1 (|inc_SI| |k|)
-                             (LETT #3#
-                                   (PROG1 (CDR #3#) (LETT #4# (CDR #4#))))))
+                             (LETT #2#
+                                   (PROG1 (CDR #2#) (LETT #1# (CDR #1#))))))
                      (GO G190) G191 (EXIT NIL))
                 (LETT |mnt| (SPADCALL |tmp| (QREFELT % 101)))
                 (LETT |rn|
@@ -417,24 +418,24 @@
                 (LETT |mtnew| (CONS |mnt| |mt|))
                 (EXIT
                  (PROGN
-                  (LETT #1#
+                  (LETT #4#
                         (VECTOR |mtnew| |rrnew|
                                 (SPADCALL |mm| (QREFELT % 12))))
-                  (GO #5=#:G80)))))
-          #5# (EXIT #1#)))) 
+                  (GO #5=#:G89)))))
+          #5# (EXIT #4#)))) 
 
 (SDEFUN |MOMPKG;moment2monotoneCumulant;2S;15|
         ((|mm| (|Sequence| R)) (% (|Sequence| R)))
         (SPROG
-         ((|res1| (|Stream| R))
+         ((|m1t| (|SparseUnivariatePolynomial| R)) (|r1| (R))
+          (|mtr1|
+           (|Record| (|:| |momt| (|List| (|SparseUnivariatePolynomial| R)))
+                     (|:| |cum| (|List| R)) (|:| |mom| (|Stream| R))))
           (|res|
            (|Stream|
             (|Record| (|:| |momt| (|List| (|SparseUnivariatePolynomial| R)))
                       (|:| |cum| (|List| R)) (|:| |mom| (|Stream| R)))))
-          (|mtr1|
-           (|Record| (|:| |momt| (|List| (|SparseUnivariatePolynomial| R)))
-                     (|:| |cum| (|List| R)) (|:| |mom| (|Stream| R))))
-          (|r1| (R)) (|m1t| (|SparseUnivariatePolynomial| R)))
+          (|res1| (|Stream| R)))
          (SEQ
           (LETT |m1t|
                 (SPADCALL (SPADCALL |mm| (QREFELT % 103)) 1 (QREFELT % 68)))
@@ -464,21 +465,21 @@
           (|Record| (|:| |cum| (|Stream| R))
                     (|:| |momt| (|List| (|SparseUnivariatePolynomial| R))))))
         (SPROG
-         ((#1=#:G97 NIL) (|mtnew| (|List| (|SparseUnivariatePolynomial| R)))
-          (|mnt| (|SparseUnivariatePolynomial| R)) (|rr| (|Stream| R))
-          (|tmp| (|SparseUnivariatePolynomial| R)) (#2=#:G98 NIL) (|k| NIL)
-          (#3=#:G99 NIL) (|m| NIL) (|n| (|Integer|))
-          (|mt| (|List| (|SparseUnivariatePolynomial| R))))
+         ((|mt| (|List| (|SparseUnivariatePolynomial| R))) (|n| (|Integer|))
+          (|m| NIL) (#1=#:G111 NIL) (|k| NIL) (#2=#:G110 NIL)
+          (|tmp| (|SparseUnivariatePolynomial| R)) (|rr| (|Stream| R))
+          (|mnt| (|SparseUnivariatePolynomial| R))
+          (|mtnew| (|List| (|SparseUnivariatePolynomial| R))) (#3=#:G109 NIL))
          (SEQ
           (EXIT
            (SEQ (LETT |mt| (QCDR |srm|)) (LETT |rr| (QCAR |srm|))
                 (LETT |n| (+ (LENGTH |mt|) 1))
                 (LETT |tmp| (|spadConstant| % 85))
-                (SEQ (LETT |m| NIL) (LETT #3# |mt|) (LETT |k| 1)
+                (SEQ (LETT |m| NIL) (LETT #1# |mt|) (LETT |k| 1)
                      (LETT #2# (- |n| 1)) G190
                      (COND
-                      ((OR (|greater_SI| |k| #2#) (ATOM #3#)
-                           (PROGN (LETT |m| (CAR #3#)) NIL))
+                      ((OR (|greater_SI| |k| #2#) (ATOM #1#)
+                           (PROGN (LETT |m| (CAR #1#)) NIL))
                        (GO G191)))
                      (SEQ
                       (LETT |tmp|
@@ -490,7 +491,7 @@
                                        (QREFELT % 99))
                                       (QREFELT % 100)))
                       (EXIT (LETT |rr| (SPADCALL |rr| (QREFELT % 12)))))
-                     (LETT |k| (PROG1 (|inc_SI| |k|) (LETT #3# (CDR #3#))))
+                     (LETT |k| (PROG1 (|inc_SI| |k|) (LETT #1# (CDR #1#))))
                      (GO G190) G191 (EXIT NIL))
                 (LETT |mnt|
                       (SPADCALL
@@ -500,22 +501,22 @@
                 (LETT |mtnew| (CONS |mnt| |mt|))
                 (EXIT
                  (PROGN
-                  (LETT #1# (CONS (QCAR |srm|) |mtnew|))
-                  (GO #4=#:G96)))))
-          #4# (EXIT #1#)))) 
+                  (LETT #3# (CONS (QCAR |srm|) |mtnew|))
+                  (GO #4=#:G108)))))
+          #4# (EXIT #3#)))) 
 
 (SDEFUN |MOMPKG;monotoneCumulant2moment;2S;17|
         ((|rr| (|Sequence| R)) (% (|Sequence| R)))
         (SPROG
-         ((|res1| (|Stream| R))
+         ((|m1t| (|SparseUnivariatePolynomial| R))
+          (|mtr1|
+           (|Record| (|:| |cum| (|Stream| R))
+                     (|:| |momt| (|List| (|SparseUnivariatePolynomial| R)))))
           (|res|
            (|Stream|
             (|Record| (|:| |cum| (|Stream| R))
                       (|:| |momt| (|List| (|SparseUnivariatePolynomial| R))))))
-          (|mtr1|
-           (|Record| (|:| |cum| (|Stream| R))
-                     (|:| |momt| (|List| (|SparseUnivariatePolynomial| R)))))
-          (|m1t| (|SparseUnivariatePolynomial| R)))
+          (|res1| (|Stream| R)))
          (SEQ
           (LETT |m1t|
                 (SPADCALL (SPADCALL |rr| (QREFELT % 103)) 1 (QREFELT % 68)))
@@ -538,15 +539,15 @@
         ((|rr| (|Sequence| R))
          (% (|Sequence| (|SparseUnivariatePolynomial| R))))
         (SPROG
-         ((|res1| (|Stream| (|SparseUnivariatePolynomial| R)))
+         ((|m1t| (|SparseUnivariatePolynomial| R))
+          (|mtr1|
+           (|Record| (|:| |cum| (|Stream| R))
+                     (|:| |momt| (|List| (|SparseUnivariatePolynomial| R)))))
           (|res|
            (|Stream|
             (|Record| (|:| |cum| (|Stream| R))
                       (|:| |momt| (|List| (|SparseUnivariatePolynomial| R))))))
-          (|mtr1|
-           (|Record| (|:| |cum| (|Stream| R))
-                     (|:| |momt| (|List| (|SparseUnivariatePolynomial| R)))))
-          (|m1t| (|SparseUnivariatePolynomial| R)))
+          (|res1| (|Stream| (|SparseUnivariatePolynomial| R))))
          (SEQ
           (LETT |m1t|
                 (SPADCALL (SPADCALL |rr| (QREFELT % 103)) 1 (QREFELT % 68)))
@@ -568,7 +569,7 @@
 (DECLAIM (NOTINLINE |MomentPackage;|)) 
 
 (DEFUN |MomentPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|MomentPackage| DV$1))
@@ -628,9 +629,9 @@
                         %)))))
           %))) 
 
-(DEFUN |MomentPackage| (#1=#:G111)
+(DEFUN |MomentPackage| (#1=#:G127)
   (SPROG NIL
-         (PROG (#2=#:G112)
+         (PROG (#2=#:G128)
            (RETURN
             (COND
              ((LETT #2#
@@ -650,7 +651,7 @@
               (|Sequence| 6) (0 . |stream|)
               (|StreamExponentialSeriesOperations| 6) (5 . |exp0|)
               (10 . |rest|) (15 . |sequence|) |MOMPKG;cumulant2moment;2S;1|
-              (20 . |log1|) |MOMPKG;moment2cumulant;2S;2| (25 . |One|)
+              (20 . |log1|) |MOMPKG;moment2cumulant;2S;2| (25 . |1|)
               (29 . |concat|) (|StreamTaylorSeriesOperations| 6)
               (35 . |lagrange|) (40 . |coerce|)
               |MOMPKG;freeCumulant2moment;2S;3| (45 . |cons|)
@@ -666,18 +667,18 @@
               (122 . |moment2nthJacobi|) (127 . |first|) (132 . |inv|)
               (137 . |rst|) (142 . *) (|Record| (|:| |an| 6) (|:| |bn| 6))
               (|Stream| 53) (148 . |moment2jacobi2|) (153 . |cons|)
-              (|PositiveInteger|) (159 . |One|) (|Mapping| %) (163 . |delay|)
+              (|PositiveInteger|) (159 . |1|) (|Mapping| %) (163 . |delay|)
               (|Mapping| 6 53) (|StreamFunctions2| 53 6) (168 . |map|)
               (|Record| (|:| |an| 7) (|:| |bn| 7)) (174 . |moment2jacobi|)
-              (|SparseUnivariatePolynomial| 6) (179 . |One|) (183 . |monomial|)
+              (|SparseUnivariatePolynomial| 6) (179 . |1|) (183 . |monomial|)
               '|xsup| (189 . *) (195 . -) (201 . *)
               (|Record| (|:| |first| 66) (|:| |second| 66)) (|Stream| 73)
               (207 . |cons|) (213 . |delay|) (|Stream| 66) (|Mapping| 66 73)
               (|StreamFunctions2| 73 66) (218 . |map|)
               |MOMPKG;jacobi2poly;2SS;12| (|Boolean|) (224 . |zero?|)
-              (229 . |Zero|) (233 . |Zero|) (|Fraction| 44) (237 . /)
+              (229 . |0|) (233 . |0|) (|Fraction| 44) (237 . /)
               (243 . |powern|) (249 . |revert|) (254 . |cons|) (260 . +)
-              (266 . |One|) (270 . -) (275 . |Zero|)
+              (266 . |1|) (270 . -) (275 . |0|)
               (|Record| (|:| |puiseux| 86) (|:| |laurent| 86) (|:| |coef| 8))
               (279 . |moment2Stransform|) '|t| (284 . *) (290 . *) (296 . +)
               (302 . |integrate|) (307 . |elt|) (313 . |first|)

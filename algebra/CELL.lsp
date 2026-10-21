@@ -1,5 +1,5 @@
 
-(PUT '|CELL;simpleCells;%L;1| '|SPADreplace| '(XLAM (|c|) |c|)) 
+(MAKEPROP '|CELL;simpleCells;%L;1| '|SPADreplace| '(XLAM (|c|) |c|)) 
 
 (SDEFUN |CELL;simpleCells;%L;1|
         ((|c| (%))
@@ -10,20 +10,20 @@
         |c|) 
 
 (SDEFUN |CELL;coerce;%Of;2| ((|c| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G13 NIL) (|sc| NIL) (#2=#:G12 NIL))
+        (SPROG ((#1=#:G12 NIL) (|sc| NIL) (#2=#:G13 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
-                  (LETT #2# NIL)
-                  (SEQ (LETT |sc| NIL) (LETT #1# |c|) G190
+                  (LETT #1# NIL)
+                  (SEQ (LETT |sc| NIL) (LETT #2# |c|) G190
                        (COND
-                        ((OR (ATOM #1#) (PROGN (LETT |sc| (CAR #1#)) NIL))
+                        ((OR (ATOM #2#) (PROGN (LETT |sc| (CAR #2#)) NIL))
                          (GO G191)))
                        (SEQ
                         (EXIT
-                         (LETT #2# (CONS (SPADCALL |sc| (QREFELT % 12)) #2#))))
-                       (LETT #1# (CDR #1#)) (GO G190) G191
-                       (EXIT (NREVERSE #2#))))
+                         (LETT #1# (CONS (SPADCALL |sc| (QREFELT % 12)) #1#))))
+                       (LETT #2# (CDR #2#)) (GO G190) G191
+                       (EXIT (NREVERSE #1#))))
                  (QREFELT % 14))))) 
 
 (SDEFUN |CELL;projection;%U;3| ((|cell| (%)) (% (|Union| % "failed")))
@@ -36,7 +36,7 @@
                              (COND ((NULL |r|) (CONS 1 "failed"))
                                    (#1# (CONS 0 |r|)))))))))) 
 
-(PUT '|CELL;makeCell;L%;4| '|SPADreplace| '(XLAM (|l|) |l|)) 
+(MAKEPROP '|CELL;makeCell;L%;4| '|SPADreplace| '(XLAM (|l|) |l|)) 
 
 (SDEFUN |CELL;makeCell;L%;4|
         ((|l|
@@ -46,7 +46,7 @@
          (% (%)))
         |l|) 
 
-(PUT '|CELL;makeCell;Sc2%;5| '|SPADreplace| 'CONS) 
+(MAKEPROP '|CELL;makeCell;Sc2%;5| '|SPADreplace| 'CONS) 
 
 (SDEFUN |CELL;makeCell;Sc2%;5|
         ((|scell|
@@ -73,10 +73,9 @@
 (SDEFUN |CELL;hasDimension?;%SB;9|
         ((|cell| (%)) (|var| (|Symbol|)) (% (|Boolean|)))
         (SPROG
-         ((|v| (|Symbol|))
-          (|sc|
-           (|SimpleCell| |TheField|
-                         (|SparseUnivariatePolynomial| |TheField|))))
+         ((|sc|
+           (|SimpleCell| |TheField| (|SparseUnivariatePolynomial| |TheField|)))
+          (|v| (|Symbol|)))
          (SEQ
           (COND ((NULL |cell|) (|error| "Should not appear"))
                 (#1='T
@@ -97,7 +96,7 @@
 (DECLAIM (NOTINLINE |Cell;|)) 
 
 (DEFUN |Cell;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Cell| DV$1))
@@ -113,9 +112,9 @@
                      (|SimpleCell| |#1| (|SparseUnivariatePolynomial| |#1|))))
           %))) 
 
-(DEFUN |Cell| (#1=#:G37)
+(DEFUN |Cell| (#1=#:G38)
   (SPROG NIL
-         (PROG (#2=#:G38)
+         (PROG (#2=#:G39)
            (RETURN
             (COND
              ((LETT #2#
@@ -137,7 +136,7 @@
               (|Union| % '"failed") |CELL;projection;%U;3| |CELL;makeCell;L%;4|
               |CELL;makeCell;Sc2%;5| (|Symbol|) (10 . |variableOf|)
               |CELL;mainVariableOf;%S;6| (|List| 20) |CELL;variablesOf;%L;7|
-              (|Boolean|) (15 . |hasDimension?|) (20 . |One|)
+              (|Boolean|) (15 . |hasDimension?|) (20 . |1|)
               (|NonNegativeInteger|) |CELL;dimension;%Nni;8| (24 . <) (30 . >)
               |CELL;hasDimension?;%SB;9| (36 . |samplePoint|) (|List| 6)
               |CELL;samplePoint;%L;10|)

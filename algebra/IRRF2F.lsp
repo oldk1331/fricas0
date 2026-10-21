@@ -34,26 +34,26 @@
         ((|f| (|Fraction| (|Polynomial| R))) (|x| (|Symbol|))
          (% (|Union| (|Expression| R) (|List| (|Expression| R)))))
         (SPROG
-         ((|l| (|List| (|Expression| R))) (#1=#:G22 NIL) (|g| NIL)
-          (#2=#:G21 NIL))
+         ((#1=#:G23 NIL) (|g| NIL) (#2=#:G24 NIL)
+          (|l| (|List| (|Expression| R))))
          (SEQ
           (LETT |l|
                 (PROGN
-                 (LETT #2# NIL)
+                 (LETT #1# NIL)
                  (SEQ (LETT |g| NIL)
-                      (LETT #1#
+                      (LETT #2#
                             (SPADCALL (SPADCALL |f| |x| (QREFELT % 29)) |x|
                                       (QREFELT % 19)))
                       G190
                       (COND
-                       ((OR (ATOM #1#) (PROGN (LETT |g| (CAR #1#)) NIL))
+                       ((OR (ATOM #2#) (PROGN (LETT |g| (CAR #2#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #2#
-                              (CONS (SPADCALL |g| |x| (QREFELT % 34)) #2#))))
-                      (LETT #1# (CDR #1#)) (GO G190) G191
-                      (EXIT (NREVERSE #2#)))))
+                        (LETT #1#
+                              (CONS (SPADCALL |g| |x| (QREFELT % 34)) #1#))))
+                      (LETT #2# (CDR #2#)) (GO G190) G191
+                      (EXIT (NREVERSE #1#)))))
           (EXIT
            (COND ((NULL (CDR |l|)) (CONS 0 (|SPADfirst| |l|)))
                  ('T (CONS 1 |l|))))))) 
@@ -61,7 +61,7 @@
 (DECLAIM (NOTINLINE |IntegrationResultRFToFunction;|)) 
 
 (DEFUN |IntegrationResultRFToFunction;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|IntegrationResultRFToFunction| DV$1))
@@ -97,9 +97,9 @@
                                %)))))))
           %))) 
 
-(DEFUN |IntegrationResultRFToFunction| (#1=#:G23)
+(DEFUN |IntegrationResultRFToFunction| (#1=#:G25)
   (SPROG NIL
-         (PROG (#2=#:G24)
+         (PROG (#2=#:G26)
            (RETURN
             (COND
              ((LETT #2#

@@ -19,6 +19,10 @@
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$libFile| NIL))
 
+; $no_lisp_compile := false
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$no_lisp_compile| NIL))
+
 ; $lisplibForm := nil
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$lisplibForm| NIL))
@@ -38,6 +42,10 @@
 ; $lisplibOperationAlist := []
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$lisplibOperationAlist| NIL))
+
+; $lisplibMissingFunctions := []
+
+(EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$lisplibMissingFunctions| NIL))
 
 ; readLib(fn) == kaf_open(fn, false)
 
@@ -62,7 +70,7 @@
 
 ; loadLibIfNotLoaded libName ==
 ;   -- replaces old SpadCondLoad
-;   -- loads is library is not already loaded
+;   -- loads if library is not already loaded
 ;   GET(libName, 'LOADED) => NIL
 ;   loadLib libName
 
@@ -100,7 +108,6 @@
 ;     say_msg("S2IL0002", '"Loading %1 for %2 %3b", [fullLibName, kind, cname])
 ;   load_quietly(fullLibName)
 ;   clearConstructorCache cname
-;   installConstructor(cname)
 ;   MAKEPROP(cname,'LOADED,fullLibName)
 
 (DEFUN |loadLibNoUpdate1| (|cname| |fullLibName|)
@@ -114,7 +121,6 @@
          (LIST |fullLibName| |kind| |cname|))))
       (|load_quietly| |fullLibName|)
       (|clearConstructorCache| |cname|)
-      (|installConstructor| |cname|)
       (MAKEPROP |cname| 'LOADED |fullLibName|)))))
 
 ; loadLibNoUpdate(cname, fullLibName) ==
@@ -129,56 +135,6 @@
       (|startTimingProcess| '|load|)
       (|loadLibNoUpdate1| |cname| |fullLibName|)
       (|stopTimingProcess| '|load|)))))
-
-; loadIfNecessary u == loadLibIfNecessary(u,true)
-
-(DEFUN |loadIfNecessary| (|u|) (PROG () (RETURN (|loadLibIfNecessary| |u| T))))
-
-; loadIfNecessaryAndExists u == loadLibIfNecessary(u,nil)
-
-(DEFUN |loadIfNecessaryAndExists| (|u|)
-  (PROG () (RETURN (|loadLibIfNecessary| |u| NIL))))
-
-; loadLibIfNecessary(u,mustExist) ==
-;   u = '$EmptyMode => u
-;   null atom u => loadLibIfNecessary(first u,mustExist)
-;   value:=
-;     functionp(u) or macrop(u) => u
-;     GET(u, 'LOADED) => u
-;     loadLib u => u
-;   null $InteractiveMode and ((null (y:= getProplist(u,$CategoryFrame)))
-;     or (null LASSOC('isFunctor,y)) and (null LASSOC('isCategory,y))) =>
-;       y:= get_database(u, 'CONSTRUCTORKIND) =>
-;          y = 'category =>
-;             updateCategoryFrameForCategory u
-;          updateCategoryFrameForConstructor u
-;       throw_msg("S2IL0005", '"%1bp is not a known type.", [u])
-;   value
-
-(DEFUN |loadLibIfNecessary| (|u| |mustExist|)
-  (PROG (|value| |y|)
-    (RETURN
-     (COND ((EQ |u| '|$EmptyMode|) |u|)
-           ((NULL (ATOM |u|)) (|loadLibIfNecessary| (CAR |u|) |mustExist|))
-           (#1='T
-            (PROGN
-             (SETQ |value|
-                     (COND ((OR (|functionp| |u|) (|macrop| |u|)) |u|)
-                           ((GET |u| 'LOADED) |u|) ((|loadLib| |u|) |u|)))
-             (COND
-              ((AND (NULL |$InteractiveMode|)
-                    (OR (NULL (SETQ |y| (|getProplist| |u| |$CategoryFrame|)))
-                        (AND (NULL (LASSOC '|isFunctor| |y|))
-                             (NULL (LASSOC '|isCategory| |y|)))))
-               (COND
-                ((SETQ |y| (|get_database| |u| 'CONSTRUCTORKIND))
-                 (COND
-                  ((EQ |y| '|category|) (|updateCategoryFrameForCategory| |u|))
-                  (#1# (|updateCategoryFrameForConstructor| |u|))))
-                (#1#
-                 (|throw_msg| 'S2IL0005 "%1bp is not a known type."
-                  (LIST |u|)))))
-              (#1# |value|))))))))
 
 ; convertOpAlist2compilerInfo(opalist) ==
 ;    "append"/[[formatSig(op,sig) for sig in siglist]
@@ -258,28 +214,6 @@
                (|addModemap| |constructor| |dc| |sig| |pred| |impl|
                 (|put| |constructor| '|mode| (CONS '|Mapping| |sig|)
                  |$CategoryFrame|))))))))
-
-; updateCategoryFrameForCategory(category) ==
-;    di := get_database(category, 'CONSTRUCTORMODEMAP)
-;    if di then
-;        [[dc,:sig],[pred,impl]] := di
-;        $CategoryFrame :=
-;            addModemap(category, dc, sig, pred, impl, $CategoryFrame)
-;    $CategoryFrame := put(category, 'isCategory, 'T, $CategoryFrame)
-
-(DEFUN |updateCategoryFrameForCategory| (|category|)
-  (PROG (|di| |dc| |sig| |pred| |impl|)
-    (RETURN
-     (PROGN
-      (SETQ |di| (|get_database| |category| 'CONSTRUCTORMODEMAP))
-      (COND
-       (|di| (SETQ |dc| (CAAR . #1=(|di|))) (SETQ |sig| (CDAR . #1#))
-        (SETQ |pred| (CAADR . #2=(|di|))) (SETQ |impl| (CADADR . #2#))
-        (SETQ |$CategoryFrame|
-                (|addModemap| |category| |dc| |sig| |pred| |impl|
-                 |$CategoryFrame|))))
-      (SETQ |$CategoryFrame|
-              (|put| |category| '|isCategory| 'T |$CategoryFrame|))))))
 
 ; loadFunctor u ==
 ;   null atom u => loadFunctor first u
@@ -387,14 +321,14 @@
 ;       PROGN(if $compiler_output_stream then CLOSE($compiler_output_stream),
 ;             kaf_close($libFile)))
 ;   lisplibDoRename(name)
-;   compile_lib(make_full_namestring(make_filename2(name, $spadLibFT)))
+;   if not($no_lisp_compile) then
+;       compile_lib(make_filename2(name, $spadLibFT))
 ;   FRESH_-LINE(get_algebra_stream())
 ;   sayMSG(filler_chars(72, '"-"))
-;   merge_info_from_objects([get_database(op, 'ABBREVIATION)], [], false)
-;   $newConlist := [op, :$newConlist]  ---------->  bound in function "compiler"
-;   if $lisplibKind = 'category
-;     then updateCategoryFrameForCategory op
-;      else updateCategoryFrameForConstructor op
+;   if $bootstrap_db then
+;       merge_constructor_info()
+;   else
+;       merge_info_from_objects([get_database(op, 'ABBREVIATION)], [], false)
 ;   res
 
 (DEFUN |compDefineLisplib| (|df| |m| |e| |prefix| |fal| |fn|)
@@ -447,17 +381,15 @@
          (COND (|$compiler_output_stream| (CLOSE |$compiler_output_stream|)))
          (|kaf_close| |$libFile|)))
       (|lisplibDoRename| |name|)
-      (|compile_lib|
-       (|make_full_namestring| (|make_filename2| |name| |$spadLibFT|)))
+      (COND
+       ((NULL |$no_lisp_compile|)
+        (|compile_lib| (|make_filename2| |name| |$spadLibFT|))))
       (FRESH-LINE (|get_algebra_stream|))
       (|sayMSG| (|filler_chars| 72 "-"))
-      (|merge_info_from_objects| (LIST (|get_database| |op| 'ABBREVIATION)) NIL
-       NIL)
-      (SETQ |$newConlist| (CONS |op| |$newConlist|))
-      (COND
-       ((EQ |$lisplibKind| '|category|)
-        (|updateCategoryFrameForCategory| |op|))
-       ('T (|updateCategoryFrameForConstructor| |op|)))
+      (COND (|$bootstrap_db| (|merge_constructor_info|))
+            ('T
+             (|merge_info_from_objects|
+              (LIST (|get_database| |op| 'ABBREVIATION)) NIL NIL)))
       |res|))))
 
 ; initializeLisplib libName ==
@@ -476,14 +408,15 @@
 
 ; finalizeLisplib(libFile) ==
 ;   lisplibWrite('"constructorForm", removeZeroOne($lisplibForm), libFile)
-;   lisplibWrite('"constructorKind", kind:=removeZeroOne $lisplibKind, libFile)
+;   lisplibWrite('"constructorKind", kind := $lisplibKind, libFile)
 ;   lisplibWrite('"constructorModemap", removeZeroOne($lisplibModemap), libFile)
 ;   $lisplibCategory:= $lisplibCategory or $lisplibModemap.mmTarget
 ;   -- set to target of modemap for package/domain constructors;
 ;   -- to the right-hand sides (the definition) for category constructors
-;   lisplibWrite('"constructorCategory", $lisplibCategory, libFile)
+;   lisplibWrite('"constructorCategory", removeZeroOne($lisplibCategory),
+;                libFile)
 ;   lisplibWrite('"sourceFile", $edit_file, libFile)
-;   lisplibWrite('"modemaps",removeZeroOne $lisplibModemapAlist, libFile)
+;   lisplibWrite('"modemaps", removeZeroOne($lisplibModemapAlist), libFile)
 ;   ops := getConstructorOps($lisplibForm, kind)
 ;   lisplibWrite('"operationAlist", removeZeroOne(ops), libFile)
 ;   lisplibWrite('"superDomain", removeZeroOne($lisplibSuperDomain), libFile)
@@ -498,13 +431,13 @@
      (PROGN
       (|lisplibWrite| "constructorForm" (|removeZeroOne| |$lisplibForm|)
        |libFile|)
-      (|lisplibWrite| "constructorKind"
-       (SETQ |kind| (|removeZeroOne| |$lisplibKind|)) |libFile|)
+      (|lisplibWrite| "constructorKind" (SETQ |kind| |$lisplibKind|) |libFile|)
       (|lisplibWrite| "constructorModemap" (|removeZeroOne| |$lisplibModemap|)
        |libFile|)
       (SETQ |$lisplibCategory|
               (OR |$lisplibCategory| (CADAR |$lisplibModemap|)))
-      (|lisplibWrite| "constructorCategory" |$lisplibCategory| |libFile|)
+      (|lisplibWrite| "constructorCategory"
+       (|removeZeroOne| |$lisplibCategory|) |libFile|)
       (|lisplibWrite| "sourceFile" |$edit_file| |libFile|)
       (|lisplibWrite| "modemaps" (|removeZeroOne| |$lisplibModemapAlist|)
        |libFile|)
@@ -562,14 +495,14 @@
                 (LIST |fname| |typ| (LIST |fn| |$spadLibFT|)))))))))))
 
 ; getPartialConstructorModemapSig(c) ==
-;   (s := getConstructorSignature c) => rest s
-;   throwEvalTypeMsg("S2IL0015",[c])
+;     (s := getConstructorSignature(c)) => rest(s)
+;     throw_msg_unknown_type(c, true)
 
 (DEFUN |getPartialConstructorModemapSig| (|c|)
   (PROG (|s|)
     (RETURN
      (COND ((SETQ |s| (|getConstructorSignature| |c|)) (CDR |s|))
-           ('T (|throwEvalTypeMsg| 'S2IL0015 (LIST |c|)))))))
+           ('T (|throw_msg_unknown_type| |c| T))))))
 
 ; getConstructorOps(form, kind) ==
 ;     kind is 'category => getCategoryOps(form)
@@ -599,7 +532,7 @@
 ; transformOperationAlist operationAlist ==
 ;   --  this transforms the operationAlist which is written out onto LISPLIBs.
 ;   --  The original form of this list is a list of items of the form:
-;   --        ((<op> <signature>) (<condition> (ELT $ n)))
+;   --        ((<op> <signature>) <condition> (ELT $ n))
 ;   --  The new form is an op-Alist which has entries (<op> . signature-Alist)
 ;   --      where signature-Alist has entries (<signature> . item)
 ;   --        where item has form (<slotNumber> <condition> <kind>)
@@ -607,15 +540,17 @@
 ;   --             NIL  => function
 ;   --             CONST => constant ... and others
 ;   newAlist:= nil
-;   for [[op,sig,:.],condition,implementation] in operationAlist repeat
+;   for [[op, sig], condition, implementation] in operationAlist repeat
 ;     kind:=
 ;       implementation is [eltEtc,.,n] and eltEtc in '(CONST ELT) => eltEtc
 ;       implementation is [impOp,:.] =>
 ;         impOp = 'XLAM => implementation
 ;         impOp = CONST => impOp
-;         keyedSystemError("S2IL0025",[impOp])
+;         system_error("S2IL0025", '"Unexpected type of entry in domain: %1s",
+;                      [impOp])
 ;       implementation = 'mkRecord => 'mkRecord
-;       keyedSystemError("S2IL0025",[implementation])
+;       system_error("S2IL0025", '"Unexpected type of entry in domain: %1s",
+;                    [implementation])
 ;     signatureItem:=
 ;       if u:= assoc([op,sig],$functionLocations) then n := [n,:rest u]
 ;       kind = 'ELT =>
@@ -646,7 +581,7 @@
                        (PROGN
                         (SETQ |op| (CAR |ISTMP#1|))
                         (SETQ |ISTMP#2| (CDR |ISTMP#1|))
-                        (AND (CONSP |ISTMP#2|)
+                        (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
                              (PROGN (SETQ |sig| (CAR |ISTMP#2|)) #1#)))))
                  (PROGN
                   (SETQ |ISTMP#3| (CDR |bfVar#8|))
@@ -682,11 +617,13 @@
                             (COND ((EQ |impOp| 'XLAM) |implementation|)
                                   ((EQUAL |impOp| CONST) |impOp|)
                                   (#1#
-                                   (|keyedSystemError| 'S2IL0025
+                                   (|system_error| 'S2IL0025
+                                    "Unexpected type of entry in domain: %1s"
                                     (LIST |impOp|)))))
                            ((EQ |implementation| '|mkRecord|) '|mkRecord|)
                            (#1#
-                            (|keyedSystemError| 'S2IL0025
+                            (|system_error| 'S2IL0025
+                             "Unexpected type of entry in domain: %1s"
                              (LIST |implementation|)))))
                   (SETQ |signatureItem|
                           (PROGN
@@ -872,45 +809,35 @@
           (|isCategoryForm|
            (EQSUBSTLIST |argl| |$FormalMapVariableList| |target|))))))
 
-; isFunctor x ==
-;   op:= opOf x
-;   not IDENTP op => false
-;   $InteractiveMode =>
-;     MEMQ(op,'(Union SubDomain Mapping Record)) => true
-;     MEMQ(get_database(op, 'CONSTRUCTORKIND),'(domain package))
-;   u:= get(op,'isFunctor,$CategoryFrame)
-;     or MEMQ(op,'(SubDomain Union Record)) => u
-;   constructor? op =>
-;     prop := get(op,'isFunctor,$CategoryFrame) => prop
-;     if get_database(op, 'CONSTRUCTORKIND) = 'category
-;       then updateCategoryFrameForCategory op
-;       else updateCategoryFrameForConstructor op
-;     get(op,'isFunctor,$CategoryFrame)
-;   nil
+; isFunctor(x) ==
+;     op := opOf(x)
+;     not(IDENTP(op)) => false
+;     -- logically wrong, but the compiler expects this
+;     op = "Mapping" => false
+;     MEMQ(op, '(Record SubDomain Union)) => true
+;     $InteractiveMode =>
+;         MEMQ(get_database(op, 'CONSTRUCTORKIND), '(domain package))
+;     not(MEMQ(get_database(op, 'CONSTRUCTORKIND), '(domain package))) => false
+;     u := get(op,'isFunctor,$CategoryFrame) => u
+;     updateCategoryFrameForConstructor(op)
+;     get(op, 'isFunctor, $CategoryFrame)
 
 (DEFUN |isFunctor| (|x|)
-  (PROG (|op| |u| |prop|)
+  (PROG (|op| |u|)
     (RETURN
      (PROGN
       (SETQ |op| (|opOf| |x|))
-      (COND ((NULL (IDENTP |op|)) NIL)
+      (COND ((NULL (IDENTP |op|)) NIL) ((EQ |op| '|Mapping|) NIL)
+            ((MEMQ |op| '(|Record| |SubDomain| |Union|)) T)
             (|$InteractiveMode|
-             (COND ((MEMQ |op| '(|Union| |SubDomain| |Mapping| |Record|)) T)
-                   (#1='T
-                    (MEMQ (|get_database| |op| 'CONSTRUCTORKIND)
-                          '(|domain| |package|)))))
-            ((SETQ |u|
-                     (OR (|get| |op| '|isFunctor| |$CategoryFrame|)
-                         (MEMQ |op| '(|SubDomain| |Union| |Record|))))
-             |u|)
-            ((|constructor?| |op|)
-             (COND
-              ((SETQ |prop| (|get| |op| '|isFunctor| |$CategoryFrame|)) |prop|)
-              (#1#
-               (PROGN
-                (COND
-                 ((EQ (|get_database| |op| 'CONSTRUCTORKIND) '|category|)
-                  (|updateCategoryFrameForCategory| |op|))
-                 (#1# (|updateCategoryFrameForConstructor| |op|)))
-                (|get| |op| '|isFunctor| |$CategoryFrame|)))))
-            (#1# NIL))))))
+             (MEMQ (|get_database| |op| 'CONSTRUCTORKIND)
+                   '(|domain| |package|)))
+            ((NULL
+              (MEMQ (|get_database| |op| 'CONSTRUCTORKIND)
+                    '(|domain| |package|)))
+             NIL)
+            ((SETQ |u| (|get| |op| '|isFunctor| |$CategoryFrame|)) |u|)
+            ('T
+             (PROGN
+              (|updateCategoryFrameForConstructor| |op|)
+              (|get| |op| '|isFunctor| |$CategoryFrame|))))))))

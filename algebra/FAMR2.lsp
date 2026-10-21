@@ -12,8 +12,8 @@
 
 (DEFUN |FiniteAbelianMonoidRingFunctions2;| (|#1| |#2| |#3| |#4| |#5|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$5 NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (DV$5 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 (|devaluate| |#1|))
     (LETT DV$2 (|devaluate| |#2|))
@@ -36,9 +36,9 @@
     (SETF |pv$| (QREFELT % 3))
     %))) 
 
-(DEFUN |FiniteAbelianMonoidRingFunctions2| (&REST #1=#:G4)
+(DEFUN |FiniteAbelianMonoidRingFunctions2| (&REST #1=#:G5)
   (SPROG NIL
-         (PROG (#2=#:G5)
+         (PROG (#2=#:G6)
            (RETURN
             (COND
              ((LETT #2#
@@ -62,7 +62,7 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|local| |#3|) (|local| |#4|) (|local| |#5|) (|Boolean|)
-              (0 . |zero?|) (5 . |Zero|) (9 . |leadingCoefficient|)
+              (0 . |zero?|) (5 . |0|) (9 . |leadingCoefficient|)
               (14 . |degree|) (19 . |monomial|) (25 . |reductum|)
               (|Mapping| 9 7) |FAMR2;map;MA1A2;1| (30 . +))
            '#(|map| 36) 'NIL

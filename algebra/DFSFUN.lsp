@@ -1,25 +1,25 @@
 
-(PUT '|DFSFUN;besselJ;3C;1| '|SPADreplace| '|c_besselj|) 
+(MAKEPROP '|DFSFUN;besselJ;3C;1| '|SPADreplace| '|c_besselj|) 
 
 (SDEFUN |DFSFUN;besselJ;3C;1|
         ((|v| (|Complex| (|DoubleFloat|))) (|z| (|Complex| (|DoubleFloat|)))
          (% (|Complex| (|DoubleFloat|))))
         (|c_besselj| |v| |z|)) 
 
-(PUT '|DFSFUN;besselJ;3Df;2| '|SPADreplace| '|r_besselj|) 
+(MAKEPROP '|DFSFUN;besselJ;3Df;2| '|SPADreplace| '|r_besselj|) 
 
 (SDEFUN |DFSFUN;besselJ;3Df;2|
         ((|n| (|DoubleFloat|)) (|x| (|DoubleFloat|)) (% (|DoubleFloat|)))
         (|r_besselj| |n| |x|)) 
 
-(PUT '|DFSFUN;besselI;3C;3| '|SPADreplace| '|c_besseli|) 
+(MAKEPROP '|DFSFUN;besselI;3C;3| '|SPADreplace| '|c_besseli|) 
 
 (SDEFUN |DFSFUN;besselI;3C;3|
         ((|v| (|Complex| (|DoubleFloat|))) (|z| (|Complex| (|DoubleFloat|)))
          (% (|Complex| (|DoubleFloat|))))
         (|c_besseli| |v| |z|)) 
 
-(PUT '|DFSFUN;besselI;3Df;4| '|SPADreplace| '|r_besseli|) 
+(MAKEPROP '|DFSFUN;besselI;3Df;4| '|SPADreplace| '|r_besseli|) 
 
 (SDEFUN |DFSFUN;besselI;3Df;4|
         ((|n| (|DoubleFloat|)) (|x| (|DoubleFloat|)) (% (|DoubleFloat|)))
@@ -65,8 +65,8 @@
 (SDEFUN |DFSFUN;besselK;3Df;7|
         ((|n| (|DoubleFloat|)) (|x| (|DoubleFloat|)) (% (|DoubleFloat|)))
         (SPROG
-         ((|ahalf| (|DoubleFloat|)) (|vp| (|DoubleFloat|))
-          (|p| (|DoubleFloat|)))
+         ((|p| (|DoubleFloat|)) (|vp| (|DoubleFloat|))
+          (|ahalf| (|DoubleFloat|)))
          (SEQ
           (COND
            ((SPADCALL |n| (QREFELT % 15))
@@ -85,8 +85,8 @@
         ((|v| (|Complex| (|DoubleFloat|))) (|z| (|Complex| (|DoubleFloat|)))
          (% (|Complex| (|DoubleFloat|))))
         (SPROG
-         ((|ahalf| (|Complex| (|DoubleFloat|)))
-          (|vp| (|Complex| (|DoubleFloat|))) (|p| (|Complex| (|DoubleFloat|))))
+         ((|p| (|Complex| (|DoubleFloat|))) (|vp| (|Complex| (|DoubleFloat|)))
+          (|ahalf| (|Complex| (|DoubleFloat|))))
          (SEQ
           (COND
            ((SPADCALL |v| (QREFELT % 18))
@@ -156,7 +156,7 @@
               (|IntegerRetractions| 8) (0 . |integer?|) |DFSFUN;besselY;3Df;5|
               (|IntegerRetractions| 6) (5 . |integer?|) (10 . |coerce|)
               (15 . +) (21 . |pi|) (25 . *) (31 . |cos|) (36 . -) (41 . -)
-              (47 . |sin|) (52 . /) |DFSFUN;besselY;3C;6| (58 . |One|)
+              (47 . |sin|) (52 . /) |DFSFUN;besselY;3C;6| (58 . |1|)
               |DFSFUN;besselK;3Df;7| (|Integer|) (62 . |coerce|)
               |DFSFUN;besselK;3C;8|)
            '#(|besselY| 67 |besselK| 79 |besselJ| 91 |besselI| 103) 'NIL

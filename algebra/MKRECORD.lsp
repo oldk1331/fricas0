@@ -1,14 +1,14 @@
 
-(PUT '|MKRECORD;makeRecord;ST$R;1| '|SPADreplace| 'CONS) 
+(MAKEPROP '|MKRECORD;makeRecord;STR;1| '|SPADreplace| 'CONS) 
 
-(SDEFUN |MKRECORD;makeRecord;ST$R;1|
-        ((|s| (S)) (|t| (T$)) (% (|Record| (|:| |part1| S) (|:| |part2| T$))))
+(SDEFUN |MKRECORD;makeRecord;STR;1|
+        ((|s| (S)) (|t| (T)) (% (|Record| (|:| |part1| S) (|:| |part2| T))))
         (CONS |s| |t|)) 
 
 (DECLAIM (NOTINLINE |MakeRecord;|)) 
 
 (DEFUN |MakeRecord;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -45,7 +45,7 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|local| |#2|)
               (|Record| (|:| |part1| 6) (|:| |part2| 7))
-              |MKRECORD;makeRecord;ST$R;1|)
+              |MKRECORD;makeRecord;STR;1|)
            '#(|makeRecord| 0) 'NIL
            (CONS (|makeByteWordVec2| 1 '(0))
                  (CONS '#(NIL)
@@ -57,7 +57,7 @@
                                  ((|Record| (|:| |part1| |#1|)
                                             (|:| |part2| |#2|))
                                   |#1| |#2|))
-                                T))
+                                7))
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 9 '(2 0 8 6 7 9)))))
            '|lookupComplete|)) 

@@ -1,9 +1,9 @@
 
-(PUT '|TABLEAU;tableau;L%;1| '|SPADreplace| '(XLAM (|lls|) |lls|)) 
+(MAKEPROP '|TABLEAU;tableau;L%;1| '|SPADreplace| '(XLAM (|lls|) |lls|)) 
 
 (SDEFUN |TABLEAU;tableau;L%;1| ((|lls| (|List| (|List| S))) (% (%))) |lls|) 
 
-(PUT '|TABLEAU;listOfLists;%L;2| '|SPADreplace| '(XLAM (|x|) |x|)) 
+(MAKEPROP '|TABLEAU;listOfLists;%L;2| '|SPADreplace| '(XLAM (|x|) |x|)) 
 
 (SDEFUN |TABLEAU;listOfLists;%L;2| ((|x| (%)) (% (|List| (|List| S)))) |x|) 
 
@@ -11,16 +11,16 @@
         ((|n| (|NonNegativeInteger|)) (|ls| (|List| S))
          (% (|List| (|OutputForm|))))
         (SPROG
-         ((#1=#:G7 NIL) (|i| NIL) (#2=#:G8 NIL) (|s| NIL)
-          (|v| (|List| (|OutputForm|))))
+         ((|v| (|List| (|OutputForm|))) (|s| NIL) (#1=#:G8 NIL) (|i| NIL)
+          (#2=#:G7 NIL))
          (SEQ
           (LETT |v|
                 (SPADCALL |n| (SPADCALL " " (QREFELT % 13)) (QREFELT % 16)))
-          (SEQ (LETT |s| NIL) (LETT #2# |ls|) (LETT |i| 1)
-               (LETT #1# (LENGTH |ls|)) G190
+          (SEQ (LETT |s| NIL) (LETT #1# |ls|) (LETT |i| 1)
+               (LETT #2# (LENGTH |ls|)) G190
                (COND
-                ((OR (|greater_SI| |i| #1#) (ATOM #2#)
-                     (PROGN (LETT |s| (CAR #2#)) NIL))
+                ((OR (|greater_SI| |i| #2#) (ATOM #1#)
+                     (PROGN (LETT |s| (CAR #1#)) NIL))
                  (GO G191)))
                (SEQ
                 (EXIT
@@ -28,14 +28,14 @@
                            (SPADCALL (SPADCALL |s| (QREFELT % 17))
                                      (QREFELT % 18))
                            (QREFELT % 20))))
-               (LETT |i| (PROG1 (|inc_SI| |i|) (LETT #2# (CDR #2#)))) (GO G190)
+               (LETT |i| (PROG1 (|inc_SI| |i|) (LETT #1# (CDR #1#)))) (GO G190)
                G191 (EXIT NIL))
           (EXIT |v|)))) 
 
 (SDEFUN |TABLEAU;maketab| ((|lls| (|List| (|List| S))) (% (|OutputForm|)))
         (SPROG
-         ((|ll| (|List| (|OutputForm|))) (#1=#:G16 NIL) (|i| NIL)
-          (#2=#:G15 NIL) (|sz| (|NonNegativeInteger|)))
+         ((|sz| (|NonNegativeInteger|)) (#1=#:G15 NIL) (|i| NIL) (#2=#:G16 NIL)
+          (|ll| (|List| (|OutputForm|))))
          (SEQ
           (LETT |ll|
                 (COND ((NULL |lls|) (LIST (SPADCALL (QREFELT % 21))))
@@ -43,22 +43,22 @@
                        (SEQ (LETT |sz| (LENGTH (|SPADfirst| |lls|)))
                             (EXIT
                              (PROGN
-                              (LETT #2# NIL)
-                              (SEQ (LETT |i| NIL) (LETT #1# |lls|) G190
+                              (LETT #1# NIL)
+                              (SEQ (LETT |i| NIL) (LETT #2# |lls|) G190
                                    (COND
-                                    ((OR (ATOM #1#)
-                                         (PROGN (LETT |i| (CAR #1#)) NIL))
+                                    ((OR (ATOM #2#)
+                                         (PROGN (LETT |i| (CAR #2#)) NIL))
                                      (GO G191)))
                                    (SEQ
                                     (EXIT
-                                     (LETT #2#
+                                     (LETT #1#
                                            (CONS
                                             (SPADCALL
                                              (|TABLEAU;makeupv| |sz| |i| %)
                                              (QREFELT % 23))
-                                            #2#))))
-                                   (LETT #1# (CDR #1#)) (GO G190) G191
-                                   (EXIT (NREVERSE #2#)))))))))
+                                            #1#))))
+                                   (LETT #2# (CDR #2#)) (GO G190) G191
+                                   (EXIT (NREVERSE #1#)))))))))
           (EXIT (SPADCALL |ll| (QREFELT % 24)))))) 
 
 (SDEFUN |TABLEAU;coerce;%Of;5| ((|x| (%)) (% (|OutputForm|)))
@@ -67,7 +67,7 @@
 (DECLAIM (NOTINLINE |Tableau;|)) 
 
 (DEFUN |Tableau;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Tableau| DV$1))

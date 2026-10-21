@@ -155,6 +155,17 @@
                                                                    (|BasicType|))
                                                             (|has| %
                                                                    (|finiteAggregate|))))
+                                                          ((|merge_unique|
+                                                            (%
+                                                             (|Mapping|
+                                                              (|Boolean|) |t#1|
+                                                              |t#1|)
+                                                             % %))
+                                                           (AND
+                                                            (|has| |t#1|
+                                                                   (|BasicType|))
+                                                            (|has| %
+                                                                   (|finiteAggregate|))))
                                                           ((|merge| (% % %))
                                                            (AND
                                                             (|has| |t#1|

@@ -1,5 +1,6 @@
 
-(PUT '|TIMEOUT;eval_with_timeout;MIU;1| '|SPADreplace| '|eval_with_timeout|) 
+(MAKEPROP '|TIMEOUT;eval_with_timeout;MIU;1| '|SPADreplace|
+          '|eval_with_timeout|) 
 
 (SDEFUN |TIMEOUT;eval_with_timeout;MIU;1|
         ((|f| (|Mapping| S)) (|i| (|Integer|)) (% (|Union| S "failed")))
@@ -8,7 +9,7 @@
 (DECLAIM (NOTINLINE |TimeoutPackage;|)) 
 
 (DEFUN |TimeoutPackage;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|TimeoutPackage| DV$1))

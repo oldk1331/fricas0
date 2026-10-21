@@ -5,26 +5,26 @@
         (SPADCALL (SPADCALL (ELT % 8) |l| (QREFELT % 13)) (QREFELT % 15))) 
 
 (SDEFUN |PGE;li1n| ((|n| (|Integer|)) (% (|List| (|Integer|))))
-        (SPROG ((#1=#:G22 NIL) (|i| NIL) (#2=#:G21 NIL))
+        (SPROG ((#1=#:G22 NIL) (|i| NIL) (#2=#:G23 NIL))
                (SEQ
                 (PROGN
-                 (LETT #2# NIL)
-                 (SEQ (LETT |i| 1) (LETT #1# |n|) G190
-                      (COND ((|greater_SI| |i| #1#) (GO G191)))
-                      (SEQ (EXIT (LETT #2# (CONS |i| #2#))))
+                 (LETT #1# NIL)
+                 (SEQ (LETT |i| 1) (LETT #2# |n|) G190
+                      (COND ((|greater_SI| |i| #2#) (GO G191)))
+                      (SEQ (EXIT (LETT #1# (CONS |i| #1#))))
                       (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                      (EXIT (NREVERSE #2#))))))) 
+                      (EXIT (NREVERSE #1#))))))) 
 
 (SDEFUN |PGE;youngGroup;LPg;3|
         ((|l| (|List| (|Integer|))) (% (|PermutationGroup| (|Integer|))))
         (SPROG
-         ((|element| (|Integer|))
-          (|gens| (|List| (|List| (|List| (|Integer|))))) (#1=#:G33 NIL)
-          (|i| NIL) (#2=#:G32 NIL) (#3=#:G31 NIL) (|n| NIL))
+         ((|n| NIL) (#1=#:G32 NIL) (#2=#:G33 NIL) (|i| NIL) (#3=#:G34 NIL)
+          (|gens| (|List| (|List| (|List| (|Integer|)))))
+          (|element| (|Integer|)))
          (SEQ (LETT |gens| NIL) (LETT |element| 1)
-              (SEQ (LETT |n| NIL) (LETT #3# |l|) G190
+              (SEQ (LETT |n| NIL) (LETT #1# |l|) G190
                    (COND
-                    ((OR (ATOM #3#) (PROGN (LETT |n| (CAR #3#)) NIL))
+                    ((OR (ATOM #1#) (PROGN (LETT |n| (CAR #1#)) NIL))
                      (GO G191)))
                    (SEQ
                     (EXIT
@@ -37,8 +37,8 @@
                                 (PROGN
                                  (LETT #2# NIL)
                                  (SEQ (LETT |i| |element|)
-                                      (LETT #1# (- (+ |element| |n|) 1)) G190
-                                      (COND ((> |i| #1#) (GO G191)))
+                                      (LETT #3# (- (+ |element| |n|) 1)) G190
+                                      (COND ((> |i| #3#) (GO G191)))
                                       (SEQ (EXIT (LETT #2# (CONS |i| #2#))))
                                       (LETT |i| (+ |i| 1)) (GO G190) G191
                                       (EXIT (NREVERSE #2#))))
@@ -50,7 +50,7 @@
                                 (CONS (LIST (LIST |element| (+ |element| 1)))
                                       |gens|))))
                         (EXIT (LETT |element| (+ |element| |n|))))))))
-                   (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
+                   (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
               (EXIT
                (|PGE;llli2gp|
                 (COND ((EQL (LENGTH |gens|) 0) (LIST (LIST (LIST 1))))
@@ -63,12 +63,12 @@
 
 (SDEFUN |PGE;rubiksGroup;Pg;5| ((% (|PermutationGroup| (|Integer|))))
         (SPROG
-         ((|b| (|List| (|List| (|Integer|))))
-          (|l| (|List| (|List| (|Integer|))))
-          (|d| (|List| (|List| (|Integer|))))
-          (|u| (|List| (|List| (|Integer|))))
+         ((|f| (|List| (|List| (|Integer|))))
           (|r| (|List| (|List| (|Integer|))))
-          (|f| (|List| (|List| (|Integer|)))))
+          (|u| (|List| (|List| (|Integer|))))
+          (|d| (|List| (|List| (|Integer|))))
+          (|l| (|List| (|List| (|Integer|))))
+          (|b| (|List| (|List| (|Integer|)))))
          (SEQ
           (LETT |f|
                 (LIST (LIST 11 13 15 17) (LIST 12 14 16 18) (LIST 51 31 21 41)
@@ -174,7 +174,7 @@
 (SDEFUN |PGE;mathieu22;LPg;10|
         ((|l| (|List| (|Integer|))) (% (|PermutationGroup| (|Integer|))))
         (SPROG
-         ((|b| (|List| (|List| #1=(|Integer|)))) (|a| (|List| (|List| #1#))))
+         ((|a| (|List| (|List| #1=(|Integer|)))) (|b| (|List| (|List| #1#))))
          (SEQ (LETT |l| (SPADCALL |l| (QREFELT % 24)))
               (EXIT
                (COND
@@ -236,7 +236,7 @@
 (SDEFUN |PGE;mathieu23;LPg;12|
         ((|l| (|List| (|Integer|))) (% (|PermutationGroup| (|Integer|))))
         (SPROG
-         ((|b| (|List| (|List| #1=(|Integer|)))) (|a| (|List| (|List| #1#))))
+         ((|a| (|List| (|List| #1=(|Integer|)))) (|b| (|List| (|List| #1#))))
          (SEQ (LETT |l| (SPADCALL |l| (QREFELT % 24)))
               (EXIT
                (COND
@@ -299,7 +299,7 @@
 (SDEFUN |PGE;mathieu24;LPg;14|
         ((|l| (|List| (|Integer|))) (% (|PermutationGroup| (|Integer|))))
         (SPROG
-         ((|b| (|List| (|List| #1=(|Integer|)))) (|a| (|List| (|List| #1#))))
+         ((|a| (|List| (|List| #1=(|Integer|)))) (|b| (|List| (|List| #1#))))
          (SEQ (LETT |l| (SPADCALL |l| (QREFELT % 24)))
               (EXIT
                (COND
@@ -363,7 +363,7 @@
 (SDEFUN |PGE;janko2;LPg;16|
         ((|l| (|List| (|Integer|))) (% (|PermutationGroup| (|Integer|))))
         (SPROG
-         ((|b| (|List| (|List| #1=(|Integer|)))) (|a| (|List| (|List| #1#))))
+         ((|a| (|List| (|List| #1=(|Integer|)))) (|b| (|List| (|List| #1#))))
          (SEQ (LETT |l| (SPADCALL |l| (QREFELT % 24)))
               (EXIT
                (COND
@@ -582,13 +582,13 @@
         ((|l| (|List| (|PositiveInteger|)))
          (% (|PermutationGroup| (|Integer|))))
         (SPROG
-         ((|element| (|Integer|))
-          (|gens| (|List| (|List| (|List| (|Integer|))))) (#1=#:G71 NIL)
-          (|i| NIL) (#2=#:G70 NIL) (#3=#:G69 NIL) (|n| NIL))
+         ((|n| NIL) (#1=#:G70 NIL) (#2=#:G71 NIL) (|i| NIL) (#3=#:G72 NIL)
+          (|gens| (|List| (|List| (|List| (|Integer|)))))
+          (|element| (|Integer|)))
          (SEQ (LETT |gens| NIL) (LETT |element| 1)
-              (SEQ (LETT |n| NIL) (LETT #3# |l|) G190
+              (SEQ (LETT |n| NIL) (LETT #1# |l|) G190
                    (COND
-                    ((OR (ATOM #3#) (PROGN (LETT |n| (CAR #3#)) NIL))
+                    ((OR (ATOM #1#) (PROGN (LETT |n| (CAR #1#)) NIL))
                      (GO G191)))
                    (SEQ
                     (EXIT
@@ -601,15 +601,15 @@
                                 (PROGN
                                  (LETT #2# NIL)
                                  (SEQ (LETT |i| |element|)
-                                      (LETT #1# (- (+ |element| |n|) 1)) G190
-                                      (COND ((> |i| #1#) (GO G191)))
+                                      (LETT #3# (- (+ |element| |n|) 1)) G190
+                                      (COND ((> |i| #3#) (GO G191)))
                                       (SEQ (EXIT (LETT #2# (CONS |i| #2#))))
                                       (LETT |i| (+ |i| 1)) (GO G190) G191
                                       (EXIT (NREVERSE #2#))))
                                 (QREFELT % 18))
                                |gens|))
                         (EXIT (LETT |element| (+ |element| |n|))))))))
-                   (LETT #3# (CDR #3#)) (GO G190) G191 (EXIT NIL))
+                   (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
               (EXIT
                (|PGE;llli2gp|
                 (COND ((EQL (LENGTH |gens|) 0) (LIST (LIST (LIST 1))))
@@ -619,8 +619,9 @@
 (SDEFUN |PGE;alternatingGroup;LPg;19|
         ((|l| (|List| (|Integer|))) (% (|PermutationGroup| (|Integer|))))
         (SPROG
-         ((|gens| (|List| (|List| (|List| #1=(|Integer|)))))
-          (|tmp| (|List| #1#)) (#2=#:G81 NIL) (|i| NIL) (#3=#:G80 NIL))
+         ((#1=#:G81 NIL) (|i| NIL) (#2=#:G82 NIL)
+          (|tmp| (|List| #3=(|Integer|)))
+          (|gens| (|List| (|List| (|List| #3#)))))
          (SEQ (LETT |l| (SPADCALL |l| (QREFELT % 24)))
               (EXIT
                (COND
@@ -641,16 +642,16 @@
                  (SEQ
                   (LETT |tmp|
                         (PROGN
-                         (LETT #3# NIL)
+                         (LETT #1# NIL)
                          (SEQ (LETT |i| 3) (LETT #2# (LENGTH |l|)) G190
                               (COND ((> |i| #2#) (GO G191)))
                               (SEQ
                                (EXIT
-                                (LETT #3#
+                                (LETT #1#
                                       (CONS (SPADCALL |l| |i| (QREFELT % 28))
-                                            #3#))))
+                                            #1#))))
                               (LETT |i| (+ |i| 1)) (GO G190) G191
-                              (EXIT (NREVERSE #3#)))))
+                              (EXIT (NREVERSE #1#)))))
                   (LETT |gens|
                         (LIST (LIST |tmp|)
                               (LIST
@@ -709,8 +710,8 @@
 (SDEFUN |PGE;dihedralGroup;LPg;25|
         ((|l| (|List| (|Integer|))) (% (|PermutationGroup| (|Integer|))))
         (SPROG
-         ((|tmp| (|List| (|List| (|Integer|)))) (#1=#:G96 NIL) (|i| NIL)
-          (#2=#:G95 NIL))
+         ((#1=#:G96 NIL) (|i| NIL) (#2=#:G97 NIL)
+          (|tmp| (|List| (|List| (|Integer|)))))
          (SEQ (LETT |l| (SPADCALL |l| (QREFELT % 24)))
               (EXIT
                (COND
@@ -720,22 +721,22 @@
                  (SEQ
                   (LETT |tmp|
                         (PROGN
-                         (LETT #2# NIL)
+                         (LETT #1# NIL)
                          (SEQ (LETT |i| 1)
-                              (LETT #1# (QUOTIENT2 (LENGTH |l|) 2)) G190
-                              (COND ((|greater_SI| |i| #1#) (GO G191)))
+                              (LETT #2# (|quotient_INT| (LENGTH |l|) 2)) G190
+                              (COND ((|greater_SI| |i| #2#) (GO G191)))
                               (SEQ
                                (EXIT
-                                (LETT #2#
+                                (LETT #1#
                                       (CONS
                                        (LIST (SPADCALL |l| |i| (QREFELT % 28))
                                              (SPADCALL |l|
                                                        (+ (- (LENGTH |l|) |i|)
                                                           1)
                                                        (QREFELT % 28)))
-                                       #2#))))
+                                       #1#))))
                               (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                              (EXIT (NREVERSE #2#)))))
+                              (EXIT (NREVERSE #1#)))))
                   (EXIT (|PGE;llli2gp| (LIST (LIST |l|) |tmp|) %))))))))) 
 
 (SDEFUN |PGE;dihedralGroup;PiPg;26|
@@ -762,7 +763,7 @@
 
 (DEFUN |PermutationGroupExamples| ()
   (SPROG NIL
-         (PROG (#1=#:G99)
+         (PROG (#1=#:G100)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|PermutationGroupExamples|))
@@ -786,7 +787,7 @@
            '#(NIL NIL NIL NIL NIL NIL (|List| 17) (|Permutation| 26)
               (0 . |cycles|) (|List| 7) (|Mapping| 7 6) (|List| 6)
               (|ListFunctions2| 6 7) (5 . |map|) (|PermutationGroup| 26)
-              (11 . |coerce|) (16 . |One|) (|List| 26) (20 . |list|)
+              (11 . |coerce|) (16 . |1|) (|List| 26) (20 . |list|)
               |PGE;youngGroup;LPg;3| (|Partition|) (25 . |convert|)
               |PGE;youngGroup;PPg;4| |PGE;rubiksGroup;Pg;5|
               (30 . |removeDuplicates|) (|Boolean|) (|Integer|) (35 . ~=)

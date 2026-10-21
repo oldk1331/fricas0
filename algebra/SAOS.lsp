@@ -1,33 +1,34 @@
 
-(PUT '|SAOS;create;%;1| '|SPADreplace| '(XLAM NIL "?")) 
+(MAKEPROP '|SAOS;create;%;1| '|SPADreplace| '(XLAM NIL '?)) 
 
-(SDEFUN |SAOS;create;%;1| ((% (%))) "?") 
+(SDEFUN |SAOS;create;%;1| ((% (%))) '?) 
 
-(PUT '|SAOS;<;2%B;2| '|SPADreplace| '(XLAM (|a| |b|) NIL)) 
+(MAKEPROP '|SAOS;<;2%B;2| '|SPADreplace| '(XLAM (|a| |b|) NIL)) 
 
 (SDEFUN |SAOS;<;2%B;2| ((|a| (%)) (|b| (%)) (% (|Boolean|))) NIL) 
 
 (SDEFUN |SAOS;coerce;%Of;3| ((|a| (%)) (% (|OutputForm|)))
         (SPADCALL "?" (QREFELT % 11))) 
 
-(PUT '|SAOS;=;2%B;4| '|SPADreplace| '(XLAM (|a| |b|) 'T)) 
+(MAKEPROP '|SAOS;=;2%B;4| '|SPADreplace| '(XLAM (|a| |b|) 'T)) 
 
 (SDEFUN |SAOS;=;2%B;4| ((|a| (%)) (|b| (%)) (% (|Boolean|))) 'T) 
 
-(PUT '|SAOS;min;3%;5| '|SPADreplace| '(XLAM (|a| |b|) |a|)) 
+(MAKEPROP '|SAOS;min;3%;5| '|SPADreplace| '(XLAM (|a| |b|) |a|)) 
 
 (SDEFUN |SAOS;min;3%;5| ((|a| (%)) (|b| (%)) (% (%))) |a|) 
 
-(PUT '|SAOS;max;3%;6| '|SPADreplace| '(XLAM (|a| |b|) |a|)) 
+(MAKEPROP '|SAOS;max;3%;6| '|SPADreplace| '(XLAM (|a| |b|) |a|)) 
 
 (SDEFUN |SAOS;max;3%;6| ((|a| (%)) (|b| (%)) (% (%))) |a|) 
 
-(SDEFUN |SAOS;convert;%S;7| ((|a| (%)) (% (|Symbol|)))
-        (SPADCALL "?" (QREFELT % 17))) 
+(MAKEPROP '|SAOS;convert;%S;7| '|SPADreplace| '(XLAM (|a|) |a|)) 
+
+(SDEFUN |SAOS;convert;%S;7| ((|a| (%)) (% (|Symbol|))) |a|) 
 
 (SDEFUN |SAOS;hashUpdate!;Hs%Hs;8|
         ((|s| (|HashState|)) (|x| (%)) (% (|HashState|)))
-        (SPADCALL |s| 42 (QREFELT % 21))) 
+        (SPADCALL |s| 42 (QREFELT % 20))) 
 
 (DECLAIM (NOTINLINE |SingletonAsOrderedSet;|)) 
 
@@ -41,6 +42,7 @@
           (|haddProp| |$ConstructorCache| '|SingletonAsOrderedSet| NIL
                       (CONS 1 %))
           (|stuffDomainSlots| %)
+          (AND (|HasCategory| % '(|SetWithZero|)) (|augmentPredVector| % 1))
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
@@ -68,26 +70,28 @@
            '#(NIL NIL NIL NIL NIL NIL |SAOS;create;%;1| (|Boolean|)
               |SAOS;<;2%B;2| (|String|) (|OutputForm|) (0 . |outputForm|)
               |SAOS;coerce;%Of;3| |SAOS;=;2%B;4| |SAOS;min;3%;5|
-              |SAOS;max;3%;6| (|Symbol|) (5 . |coerce|) |SAOS;convert;%S;7|
-              (|HashState|) (|SingleInteger|) (10 . |hashUpdate!|)
-              |SAOS;hashUpdate!;Hs%Hs;8|)
-           '#(~= 16 |smaller?| 22 |min| 28 |max| 34 |latex| 40 |hashUpdate!| 45
-              |hash| 51 |create| 56 |convert| 60 |coerce| 65 >= 70 > 76 = 82 <=
-              88 < 94)
+              |SAOS;max;3%;6| (|Symbol|) |SAOS;convert;%S;7| (|HashState|)
+              (|SingleInteger|) (5 . |hashUpdate!|) |SAOS;hashUpdate!;Hs%Hs;8|
+              (|Integer|))
+           '#(~= 11 |smaller?| 17 |sign| 23 |positive?| 28 |negative?| 33 |min|
+              38 |max| 44 |latex| 50 |hashUpdate!| 55 |hash| 61 |create| 66
+              |convert| 70 |coerce| 75 >= 80 > 86 = 92 <= 98 < 104)
            'NIL
-           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0))
+           (CONS (|makeByteWordVec2| 1 '(0 0 0 0 0 0 0 0 0))
                  (CONS
-                  '#(|OrderedSet&| NIL |Hashable&| |SetCategory&| NIL
+                  '#(|OrderedSet&| NIL NIL |Hashable&| |SetCategory&| NIL
                      |PartialOrder&| |BasicType&| NIL)
                   (CONS
-                   '#((|OrderedSet|) (|Comparable|) (|Hashable|)
-                      (|SetCategory|) (|CoercibleTo| 10) (|PartialOrder|)
-                      (|BasicType|) (|Canonical|))
+                   '#((|OrderedSet|) (|Comparable|)
+                      (|ComparableRepresentation|) (|Hashable|) (|SetCategory|)
+                      (|CoercibleTo| 10) (|PartialOrder|) (|BasicType|)
+                      (|Canonical|))
                    (|makeByteWordVec2| 22
-                                       '(1 10 0 9 11 1 16 0 9 17 2 20 19 19 0
-                                         21 2 0 7 0 0 1 2 0 7 0 0 1 2 0 0 0 0
-                                         14 2 0 0 0 0 15 1 0 9 0 1 2 0 19 19 0
-                                         22 1 0 20 0 1 0 0 0 6 1 0 16 0 18 1 0
-                                         10 0 12 2 0 7 0 0 1 2 0 7 0 0 1 2 0 7
-                                         0 0 13 2 0 7 0 0 1 2 0 7 0 0 8)))))
+                                       '(1 10 0 9 11 2 19 18 18 0 20 2 0 7 0 0
+                                         1 2 0 7 0 0 1 1 1 22 0 1 1 1 7 0 1 1 1
+                                         7 0 1 2 0 0 0 0 14 2 0 0 0 0 15 1 0 9
+                                         0 1 2 0 18 18 0 21 1 0 19 0 1 0 0 0 6
+                                         1 0 16 0 17 1 0 10 0 12 2 0 7 0 0 1 2
+                                         0 7 0 0 1 2 0 7 0 0 13 2 0 7 0 0 1 2 0
+                                         7 0 0 8)))))
            '|lookupComplete|)) 

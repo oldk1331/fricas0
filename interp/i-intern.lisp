@@ -153,7 +153,9 @@
 
 ; mkAtree1 x ==
 ;   -- first special handler for making attrib tree
-;   null x => throwKeyedMsg("S2IP0005",['"NIL"])
+;   null x => throw_msg("S2IP0005",
+;         '"%1b is not a valid identifier to use in FriCAS.",
+;         ['"NIL"])
 ;   VECP x => x
 ;   atom x =>
 ;     x in '(noBranch noMapVal) => x
@@ -169,36 +171,41 @@
 ;       putValue(v,getBasicObject x)
 ;       v
 ;     IDENTP x => mkAtreeNode x
-;     keyedSystemError("S2II0002",[x])
+;     system_error("S2II0002", '"Unknown form of attributed tree: %1s", [x])
 ;   x is [op,:argl] => mkAtree2(x,op,argl)
 ;   systemErrorHere '"mkAtree1"
 
 (DEFUN |mkAtree1| (|x|)
   (PROG (|tree| |v| |op| |argl|)
     (RETURN
-     (COND ((NULL |x|) (|throwKeyedMsg| 'S2IP0005 (LIST "NIL")))
-           ((VECP |x|) |x|)
-           ((ATOM |x|)
-            (COND ((|member| |x| '(|noBranch| |noMapVal|)) |x|)
-                  ((|member| |x| '(|nil| |true| |false|))
-                   (|mkAtree2| (LIST |x|) |x| NIL))
-                  ((EQ |x| '|/throwAway|)
-                   (PROGN
-                    (SETQ |tree| (|mkAtree1| '(|void|)))
-                    (|putValue| |tree| (|objNewWrap| (|voidValue|) |$Void|))
-                    (|putModeSet| |tree| (LIST |$Void|))
-                    |tree|))
-                  ((|getBasicMode| |x|)
-                   (PROGN
-                    (SETQ |v| (|mkAtreeNode| |$immediateDataSymbol|))
-                    (|putValue| |v| (|getBasicObject| |x|))
-                    |v|))
-                  ((IDENTP |x|) (|mkAtreeNode| |x|))
-                  (#1='T (|keyedSystemError| 'S2II0002 (LIST |x|)))))
-           ((AND (CONSP |x|)
-                 (PROGN (SETQ |op| (CAR |x|)) (SETQ |argl| (CDR |x|)) #1#))
-            (|mkAtree2| |x| |op| |argl|))
-           (#1# (|systemErrorHere| "mkAtree1"))))))
+     (COND
+      ((NULL |x|)
+       (|throw_msg| 'S2IP0005 "%1b is not a valid identifier to use in FriCAS."
+        (LIST "NIL")))
+      ((VECP |x|) |x|)
+      ((ATOM |x|)
+       (COND ((|member| |x| '(|noBranch| |noMapVal|)) |x|)
+             ((|member| |x| '(|nil| |true| |false|))
+              (|mkAtree2| (LIST |x|) |x| NIL))
+             ((EQ |x| '|/throwAway|)
+              (PROGN
+               (SETQ |tree| (|mkAtree1| '(|void|)))
+               (|putValue| |tree| (|objNewWrap| (|voidValue|) |$Void|))
+               (|putModeSet| |tree| (LIST |$Void|))
+               |tree|))
+             ((|getBasicMode| |x|)
+              (PROGN
+               (SETQ |v| (|mkAtreeNode| |$immediateDataSymbol|))
+               (|putValue| |v| (|getBasicObject| |x|))
+               |v|))
+             ((IDENTP |x|) (|mkAtreeNode| |x|))
+             (#1='T
+              (|system_error| 'S2II0002 "Unknown form of attributed tree: %1s"
+               (LIST |x|)))))
+      ((AND (CONSP |x|)
+            (PROGN (SETQ |op| (CAR |x|)) (SETQ |argl| (CDR |x|)) #1#))
+       (|mkAtree2| |x| |op| |argl|))
+      (#1# (|systemErrorHere| "mkAtree1"))))))
 
 ; mkAtree2(x,op,argl) ==
 ;   nargl := #argl
@@ -256,17 +263,18 @@
 ;   op='_$elt =>
 ;     argl is [D,a] =>
 ;       INTEGERP a =>
-;         a = 0 => mkAtree1 [['_$elt,D,'Zero]]
-;         a = 1 => mkAtree1 [['_$elt,D,'One]]
+;         a = 0 => mkAtree1([['_$elt, D, "0"]])
+;         a = 1 => mkAtree1([['_$elt, D, "1"]])
 ;         t := evaluateType unabbrev [D]
 ;         typeIsASmallInteger(t) and SINTP a =>
 ;             v := mkAtreeNode $immediateDataSymbol
 ;             putValue(v,mkObjWrap(a, t))
 ;             v
-;         mkAtree1 ["*",a,[['_$elt,D,'One]]]
+;         mkAtree1(["*", a, [['_$elt, D, "1"]]])
 ;       [mkAtreeNode 'Dollar,D,mkAtree1 a]
-;     keyedSystemError("S2II0003",['"$",argl,
-;       '"not qualifying an operator"])
+;     system_error("S2II0003",
+;         '"Improper use of %1b with argument %2s: not qualifying an operator",
+;         ['"$",argl])
 ;   mkAtree3(x,op,argl)
 
 (DEFUN |mkAtree2| (|x| |op| |argl|)
@@ -429,8 +437,8 @@
                      (PROGN (SETQ |a| (CAR |ISTMP#1|)) #1#))))
           (COND
            ((INTEGERP |a|)
-            (COND ((EQL |a| 0) (|mkAtree1| (LIST (LIST '|$elt| D '|Zero|))))
-                  ((EQL |a| 1) (|mkAtree1| (LIST (LIST '|$elt| D '|One|))))
+            (COND ((EQL |a| 0) (|mkAtree1| (LIST (LIST '|$elt| D '|0|))))
+                  ((EQL |a| 1) (|mkAtree1| (LIST (LIST '|$elt| D '|1|))))
                   (#1#
                    (PROGN
                     (SETQ |t| (|evaluateType| (|unabbrev| (LIST D))))
@@ -442,11 +450,12 @@
                        |v|))
                      (#1#
                       (|mkAtree1|
-                       (LIST '* |a| (LIST (LIST '|$elt| D '|One|))))))))))
+                       (LIST '* |a| (LIST (LIST '|$elt| D '|1|))))))))))
            (#1# (LIST (|mkAtreeNode| '|Dollar|) D (|mkAtree1| |a|)))))
          (#1#
-          (|keyedSystemError| 'S2II0003
-           (LIST "$" |argl| "not qualifying an operator")))))
+          (|system_error| 'S2II0003
+           "Improper use of %1b with argument %2s: not qualifying an operator"
+           (LIST "$" |argl|)))))
        (#1# (|mkAtree3| |x| |op| |argl|)))))))
 
 ; mkAtree3fn(a, b) ==
@@ -1170,11 +1179,20 @@
 
 (DEFUN |isLeaf| (|x|) (PROG () (RETURN (ATOM |x|))))
 
+; not_vector(x) == system_error("S2II0001",
+;     '"The attributed tree form %1s is not a vector.", [x])
+
+(DEFUN |not_vector| (|x|)
+  (PROG ()
+    (RETURN
+     (|system_error| 'S2II0001 "The attributed tree form %1s is not a vector."
+      (LIST |x|)))))
+
 ; getMode x ==
 ;   x is [op,:.] => getMode op
 ;   VECP x => x.1
 ;   m := getBasicMode x => m
-;   keyedSystemError("S2II0001",[x])
+;   not_vector(x)
 
 (DEFUN |getMode| (|x|)
   (PROG (|op| |m|)
@@ -1182,11 +1200,11 @@
      (COND
       ((AND (CONSP |x|) (PROGN (SETQ |op| (CAR |x|)) #1='T)) (|getMode| |op|))
       ((VECP |x|) (ELT |x| 1)) ((SETQ |m| (|getBasicMode| |x|)) |m|)
-      (#1# (|keyedSystemError| 'S2II0001 (LIST |x|)))))))
+      (#1# (|not_vector| |x|))))))
 
 ; putMode(x,y) ==
 ;   x is [op,:.] => putMode(op,y)
-;   null VECP x => keyedSystemError("S2II0001",[x])
+;   null(VECP(x)) => not_vector(x)
 ;   x.1 := y
 
 (DEFUN |putMode| (|x| |y|)
@@ -1195,14 +1213,13 @@
      (COND
       ((AND (CONSP |x|) (PROGN (SETQ |op| (CAR |x|)) #1='T))
        (|putMode| |op| |y|))
-      ((NULL (VECP |x|)) (|keyedSystemError| 'S2II0001 (LIST |x|)))
-      (#1# (SETF (ELT |x| 1) |y|))))))
+      ((NULL (VECP |x|)) (|not_vector| |x|)) (#1# (SETF (ELT |x| 1) |y|))))))
 
 ; getValue x ==
 ;   VECP x => x.2
 ;   atom x =>
 ;     t := getBasicObject x => t
-;     keyedSystemError("S2II0001",[x])
+;     not_vector(x)
 ;   getValue first x
 
 (DEFUN |getValue| (|x|)
@@ -1211,12 +1228,12 @@
      (COND ((VECP |x|) (ELT |x| 2))
            ((ATOM |x|)
             (COND ((SETQ |t| (|getBasicObject| |x|)) |t|)
-                  (#1='T (|keyedSystemError| 'S2II0001 (LIST |x|)))))
+                  (#1='T (|not_vector| |x|))))
            (#1# (|getValue| (CAR |x|)))))))
 
 ; putValue(x,y) ==
 ;   x is [op,:.] => putValue(op,y)
-;   null VECP x => keyedSystemError("S2II0001",[x])
+;   null(VECP(x)) => not_vector(x)
 ;   x.2 := y
 
 (DEFUN |putValue| (|x| |y|)
@@ -1225,8 +1242,7 @@
      (COND
       ((AND (CONSP |x|) (PROGN (SETQ |op| (CAR |x|)) #1='T))
        (|putValue| |op| |y|))
-      ((NULL (VECP |x|)) (|keyedSystemError| 'S2II0001 (LIST |x|)))
-      (#1# (SETF (ELT |x| 2) |y|))))))
+      ((NULL (VECP |x|)) (|not_vector| |x|)) (#1# (SETF (ELT |x| 2) |y|))))))
 
 ; putValueValue(vec,val) ==
 ;   putValue(vec,val)
@@ -1263,19 +1279,18 @@
 
 ; getUnname1 x ==
 ;   VECP x => x.0
-;   null atom x => keyedSystemError("S2II0001",[x])
+;   null(atom(x)) => not_vector(x)
 ;   x
 
 (DEFUN |getUnname1| (|x|)
   (PROG ()
     (RETURN
-     (COND ((VECP |x|) (ELT |x| 0))
-           ((NULL (ATOM |x|)) (|keyedSystemError| 'S2II0001 (LIST |x|)))
+     (COND ((VECP |x|) (ELT |x| 0)) ((NULL (ATOM |x|)) (|not_vector| |x|))
            ('T |x|)))))
 
 ; computedMode t ==
-;   getModeSet t is [m] => m
-;   keyedSystemError("S2GE0016",['"computedMode",'"non-singleton modeset"])
+;     getModeSet(t) is [m] => m
+;     unexpected_error(['"computedMode", '"non-singleton modeset"])
 
 (DEFUN |computedMode| (|t|)
   (PROG (|ISTMP#1| |m|)
@@ -1287,12 +1302,11 @@
              (PROGN (SETQ |m| (CAR |ISTMP#1|)) #1='T)))
        |m|)
       (#1#
-       (|keyedSystemError| 'S2GE0016
-        (LIST "computedMode" "non-singleton modeset")))))))
+       (|unexpected_error| (LIST "computedMode" "non-singleton modeset")))))))
 
 ; putModeSet(x,y) ==
 ;   x is [op,:.] => putModeSet(op,y)
-;   not VECP x => keyedSystemError("S2II0001",[x])
+;   not(VECP(x)) => not_vector(x)
 ;   x.3 := y
 ;   y
 
@@ -1302,7 +1316,7 @@
      (COND
       ((AND (CONSP |x|) (PROGN (SETQ |op| (CAR |x|)) #1='T))
        (|putModeSet| |op| |y|))
-      ((NULL (VECP |x|)) (|keyedSystemError| 'S2II0001 (LIST |x|)))
+      ((NULL (VECP |x|)) (|not_vector| |x|))
       (#1# (PROGN (SETF (ELT |x| 3) |y|) |y|))))))
 
 ; getModeOrFirstModeSetIfThere x ==
@@ -1344,11 +1358,10 @@
 ;       (y = [$EmptyMode]) and ((m := getMode x) is ['Mapping,:.]) =>
 ;         [m]
 ;       y
-;     keyedSystemError("S2GE0016",['"getModeSet",'"no mode set"])
+;     unexpected_error(['"getModeSet", '"no mode set"])
 ;   m:= getBasicMode x => [m]
 ;   null atom x => getModeSet first x
-;   keyedSystemError("S2GE0016",['"getModeSet",
-;     '"not an attributed tree"])
+;   unexpected_error(['"getModeSet", '"not an attributed tree"])
 
 (DEFUN |getModeSet| (|x|)
   (PROG (|y| |m| |ISTMP#1|)
@@ -1364,13 +1377,11 @@
                       (AND (CONSP |ISTMP#1|) (EQ (CAR |ISTMP#1|) '|Mapping|))))
                 (LIST |m|))
                (#1='T |y|)))
-             (#1#
-              (|keyedSystemError| 'S2GE0016
-               (LIST "getModeSet" "no mode set")))))
+             (#1# (|unexpected_error| (LIST "getModeSet" "no mode set")))))
            ((SETQ |m| (|getBasicMode| |x|)) (LIST |m|))
            ((NULL (ATOM |x|)) (|getModeSet| (CAR |x|)))
            (#1#
-            (|keyedSystemError| 'S2GE0016
+            (|unexpected_error|
              (LIST "getModeSet" "not an attributed tree")))))))
 
 ; getModeSetUseSubdomain x ==
@@ -1393,12 +1404,10 @@
 ;         INTEGERP(f := objValUnwrap val) =>
 ;           [getBasicMode0(f,true)]
 ;       y
-;     keyedSystemError("S2GE0016",
-;       ['"getModeSetUseSubomain",'"no mode set"])
+;     unexpected_error(['"getModeSetUseSubomain", '"no mode set"])
 ;   m := getBasicMode0(x,true) => [m]
 ;   null atom x => getModeSetUseSubdomain first x
-;   keyedSystemError("S2GE0016",
-;     ['"getModeSetUseSubomain",'"not an attributed tree"])
+;   unexpected_error(['"getModeSetUseSubomain", '"not an attributed tree"])
 
 (DEFUN |getModeSetUseSubdomain| (|x|)
   (PROG (|y| |m| |ISTMP#1| |val| |f|)
@@ -1433,19 +1442,21 @@
                         (LIST (|getBasicMode0| |f| T)))
                        (#1# |y|))))))
                   (#1#
-                   (|keyedSystemError| 'S2GE0016
+                   (|unexpected_error|
                     (LIST "getModeSetUseSubomain" "no mode set")))))
            ((SETQ |m| (|getBasicMode0| |x| T)) (LIST |m|))
            ((NULL (ATOM |x|)) (|getModeSetUseSubdomain| (CAR |x|)))
            (#1#
-            (|keyedSystemError| 'S2GE0016
+            (|unexpected_error|
              (LIST "getModeSetUseSubomain" "not an attributed tree")))))))
 
 ; getValueFromEnvironment(x,mode) ==
 ;   $failure ~= (v := getValueFromSpecificEnvironment(x,mode,$env)) => v
 ;   $failure ~= (v := getValueFromSpecificEnvironment(x,mode,$e))   => v
 ;   null(v := coerceInt(objNew(x, ['Variable, x]), mode)) =>
-;      throwKeyedMsg("S2IE0001",[x])
+;      throw_msg("S2IE0001",
+;         '"You cannot use %1b in the manner you have because it has no value.",
+;                [x])
 ;   objValUnwrap v
 
 (DEFUN |getValueFromEnvironment| (|x| |mode|)
@@ -1463,7 +1474,9 @@
        |v|)
       ((NULL
         (SETQ |v| (|coerceInt| (|objNew| |x| (LIST '|Variable| |x|)) |mode|)))
-       (|throwKeyedMsg| 'S2IE0001 (LIST |x|)))
+       (|throw_msg| 'S2IE0001
+        "You cannot use %1b in the manner you have because it has no value."
+        (LIST |x|)))
       ('T (|objValUnwrap| |v|))))))
 
 ; getValueFromSpecificEnvironment(id,mode,e) ==
@@ -1475,7 +1488,9 @@
 ;       mode isnt ['Mapping,:mapSig] => v
 ;       v isnt ['SPADMAP, :.] => v
 ;       v' := coerceInt(u,mode)
-;       null v' => throwKeyedMsg("S2IC0002",[objMode u,mode])
+;       null v' => throw_msg("S2IC0002",
+;           '"Cannot convert the value from type %1bp to %2bp .",
+;           [objMode(u), mode])
 ;       objValUnwrap v'
 ;
 ;     m := get0(id, 'mode, e) =>
@@ -1487,7 +1502,10 @@
 ;         (u := coerceInteractive(objNewWrap(id,['Variable,id]),m')) =>
 ;           objValUnwrap u
 ;
-;       throwKeyedMsg("S2IE0002",[id,m])
+;       throw_msg("S2IE0002", CONCAT(
+;          '"Though %1b has declared type (or partial type) %2bp it does not",
+;          '" have an assigned value. You must give it one before it can be",
+;          '" so used."), [id, m])
 ;     $failure
 ;   $failure
 
@@ -1515,7 +1533,9 @@
                (SETQ |v'| (|coerceInt| |u| |mode|))
                (COND
                 ((NULL |v'|)
-                 (|throwKeyedMsg| 'S2IC0002 (LIST (|objMode| |u|) |mode|)))
+                 (|throw_msg| 'S2IC0002
+                  "Cannot convert the value from type %1bp to %2bp ."
+                  (LIST (|objMode| |u|) |mode|)))
                 (#1# (|objValUnwrap| |v'|))))))))))
         ((SETQ |m| (|get0| |id| '|mode| |e|))
          (PROGN
@@ -1529,7 +1549,13 @@
                          (|coerceInteractive|
                           (|objNewWrap| |id| (LIST '|Variable| |id|)) |m'|)))
             (|objValUnwrap| |u|))
-           (#1# (|throwKeyedMsg| 'S2IE0002 (LIST |id| |m|))))))
+           (#1#
+            (|throw_msg| 'S2IE0002
+             (CONCAT
+              "Though %1b has declared type (or partial type) %2bp it does not"
+              " have an assigned value. You must give it one before it can be"
+              " so used.")
+             (LIST |id| |m|))))))
         (#1# |$failure|)))
       (#1# |$failure|)))))
 
@@ -1583,7 +1609,7 @@
 
 (DEFUN |get| (|x| |prop| |e|) (PROG () (RETURN (|get1| |x| |prop| |e|))))
 
-; get0(x,prop,e) ==
+; get0(x, prop, e) ==
 ;   not(atom(x)) => get0(QCAR(x), prop, e)
 ;   (pl := getProplist(x, e)) => QLASSQ(prop, pl)
 ;   nil
@@ -1595,7 +1621,7 @@
            ((SETQ |pl| (|getProplist| |x| |e|)) (QLASSQ |prop| |pl|))
            ('T NIL)))))
 
-; get1(x,prop,e) ==
+; get1(x, prop, e) ==
 ;     --this is the old get
 ;   negHash := nil
 ;   null atom x => get(QCAR x,prop,e)
@@ -1648,7 +1674,7 @@
                    (SAY (LIST '|get1| |x| |prop| (AND |ress| T)))))
                  |ress|))))))))))
 
-; get2(x,prop,e) ==
+; get2(x, prop, e) ==
 ;   prop="modemap" and constructor? x =>
 ;     (u := getConstructorModemap(x)) => [u]
 ;     nil
@@ -1696,17 +1722,17 @@
                  (|remprop| |id| |prop| |$InteractiveFrame|)))))))))
 
 ; remprop(x,prop,e) ==
-;   u:= assoc(prop,pl:= getProplist(x,e)) =>
-;     e:= addBinding(x,DELASC(first u,pl),e)
+;     u := assoc(prop, pl := getProplist(x, e)) =>
+;         e := addBindingInteractive(x, assoc_del(first(u), pl), e)
 ;     e
-;   e
 
 (DEFUN |remprop| (|x| |prop| |e|)
   (PROG (|pl| |u|)
     (RETURN
      (COND
       ((SETQ |u| (|assoc| |prop| (SETQ |pl| (|getProplist| |x| |e|))))
-       (PROGN (SETQ |e| (|addBinding| |x| (DELASC (CAR |u|) |pl|) |e|)) |e|))
+       (SETQ |e|
+               (|addBindingInteractive| |x| (|assoc_del| (CAR |u|) |pl|) |e|)))
       ('T |e|)))))
 
 ; fastSearchCurrentEnv(x,currentEnv) ==
@@ -1729,12 +1755,11 @@
                     (IDENTITY |u|)))))))))))))
 
 ; put(x,prop,val,e) ==
-;   $InteractiveMode and not EQ(e,$CategoryFrame) => BREAK()
 ;   --e must never be $CapsuleModemapFrame
 ;   null atom x => put(first x,prop,val,e)
 ;   newProplist:= augProplistOf(x,prop,val,e)
 ;   prop="modemap" and $insideCapsuleFunctionIfTrue=true =>
-;     SAY ['"**** modemap PUT on CapsuleModemapFrame: ",val]
+;     SAY ['"**** modemap put on CapsuleModemapFrame: ",val]
 ;     $CapsuleModemapFrame:=
 ;       addBinding(x,augProplistOf(x,"modemap",val,$CapsuleModemapFrame),
 ;         $CapsuleModemapFrame)
@@ -1744,8 +1769,7 @@
 (DEFUN |put| (|x| |prop| |val| |e|)
   (PROG (|newProplist|)
     (RETURN
-     (COND ((AND |$InteractiveMode| (NULL (EQ |e| |$CategoryFrame|))) (BREAK))
-           ((NULL (ATOM |x|)) (|put| (CAR |x|) |prop| |val| |e|))
+     (COND ((NULL (ATOM |x|)) (|put| (CAR |x|) |prop| |val| |e|))
            (#1='T
             (PROGN
              (SETQ |newProplist| (|augProplistOf| |x| |prop| |val| |e|))
@@ -1753,7 +1777,7 @@
               ((AND (EQ |prop| '|modemap|)
                     (EQUAL |$insideCapsuleFunctionIfTrue| T))
                (PROGN
-                (SAY (LIST "**** modemap PUT on CapsuleModemapFrame: " |val|))
+                (SAY (LIST "**** modemap put on CapsuleModemapFrame: " |val|))
                 (SETQ |$CapsuleModemapFrame|
                         (|addBinding| |x|
                          (|augProplistOf| |x| '|modemap| |val|

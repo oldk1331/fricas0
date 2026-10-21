@@ -232,11 +232,11 @@
   (PROG () (RETURN (|incFileName| (|incCommandTail| |s| |info|)))))
 
 ; incBiteOff x ==
-;           n:=STRPOSL('" ",x,0,true)-- first nonspace
+;           n := STRPOSL('" ", x, 0)-- first nonspace
 ;           if null n
 ;           then false -- all spaces
 ;           else
-;              n1:=STRPOSL ('" ",x,n,nil)
+;              n1 := search_str('" ", x, n)
 ;              if null n1 -- all nonspaces
 ;              then [SUBSTRING(x,n,nil),'""]
 ;              else [SUBSTRING(x,n,n1-n),SUBSTRING(x,n1,nil)]
@@ -245,9 +245,9 @@
   (PROG (|n| |n1|)
     (RETURN
      (PROGN
-      (SETQ |n| (STRPOSL " " |x| 0 T))
+      (SETQ |n| (STRPOSL " " |x| 0))
       (COND ((NULL |n|) NIL)
-            (#1='T (SETQ |n1| (STRPOSL " " |x| |n| NIL))
+            (#1='T (SETQ |n1| (|search_str| " " |x| |n|))
              (COND ((NULL |n1|) (LIST (SUBSTRING |x| |n| NIL) ""))
                    (#1#
                     (LIST (SUBSTRING |x| |n| (- |n1| |n|))
@@ -342,33 +342,33 @@
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |Continuation| 41))
 
-; Top?     (st) == QUOTIENT(st,10) = 0
+; Top?     (st) == quotient_INT(st, 10) = 0
 
-(DEFUN |Top?| (|st|) (PROG () (RETURN (EQL (QUOTIENT |st| 10) 0))))
+(DEFUN |Top?| (|st|) (PROG () (RETURN (EQL (|quotient_INT| |st| 10) 0))))
 
-; If?      (st) == QUOTIENT(st,10) = 1
+; If?      (st) == quotient_INT(st, 10) = 1
 
-(DEFUN |If?| (|st|) (PROG () (RETURN (EQL (QUOTIENT |st| 10) 1))))
+(DEFUN |If?| (|st|) (PROG () (RETURN (EQL (|quotient_INT| |st| 10) 1))))
 
-; Elseif?  (st) == QUOTIENT(st,10) = 2
+; Elseif?  (st) == quotient_INT(st, 10) = 2
 
-(DEFUN |Elseif?| (|st|) (PROG () (RETURN (EQL (QUOTIENT |st| 10) 2))))
+(DEFUN |Elseif?| (|st|) (PROG () (RETURN (EQL (|quotient_INT| |st| 10) 2))))
 
-; Else?    (st) == QUOTIENT(st,10) = 3
+; Else?    (st) == quotient_INT(st, 10) = 3
 
-(DEFUN |Else?| (|st|) (PROG () (RETURN (EQL (QUOTIENT |st| 10) 3))))
+(DEFUN |Else?| (|st|) (PROG () (RETURN (EQL (|quotient_INT| |st| 10) 3))))
 
-; SkipEnd? (st) == REMAINDER(st,10) = 0
+; SkipEnd? (st) == REM(st, 10) = 0
 
-(DEFUN |SkipEnd?| (|st|) (PROG () (RETURN (EQL (REMAINDER |st| 10) 0))))
+(DEFUN |SkipEnd?| (|st|) (PROG () (RETURN (EQL (REM |st| 10) 0))))
 
-; KeepPart?(st) == REMAINDER(st,10) = 1
+; KeepPart?(st) == REM(st, 10) = 1
 
-(DEFUN |KeepPart?| (|st|) (PROG () (RETURN (EQL (REMAINDER |st| 10) 1))))
+(DEFUN |KeepPart?| (|st|) (PROG () (RETURN (EQL (REM |st| 10) 1))))
 
-; SkipPart?(st) == REMAINDER(st,10) = 2
+; SkipPart?(st) == REM(st, 10) = 2
 
-(DEFUN |SkipPart?| (|st|) (PROG () (RETURN (EQL (REMAINDER |st| 10) 2))))
+(DEFUN |SkipPart?| (|st|) (PROG () (RETURN (EQL (REM |st| 10) 2))))
 
 ; Skipping?(st) == not KeepPart? st
 
@@ -911,28 +911,46 @@
       (|ncSoftError| |pos| |key| |args|)))))
 
 ; inclmsgSay str  ==
-;     ['S2CI0001, [%id str]]
+;     ['"%1f", [%id(str)]]
 
 (DEFUN |inclmsgSay| (|str|)
-  (PROG () (RETURN (LIST 'S2CI0001 (LIST (|%id| |str|))))))
+  (PROG () (RETURN (LIST "%1f" (LIST (|%id| |str|))))))
 
 ; inclmsgPrematureEOF ufo  ==
-;     ['S2CI0002, [%origin ufo]]
+;     [CONCAT('"File %1f ended where at least one )endif was still needed.",
+;             '"An appropriate number of )endif lines has been assumed."),
+;      [%origin(ufo)]]
 
 (DEFUN |inclmsgPrematureEOF| (|ufo|)
-  (PROG () (RETURN (LIST 'S2CI0002 (LIST (|%origin| |ufo|))))))
+  (PROG ()
+    (RETURN
+     (LIST
+      (CONCAT "File %1f ended where at least one )endif was still needed."
+              "An appropriate number of )endif lines has been assumed.")
+      (LIST (|%origin| |ufo|))))))
 
 ; inclmsgPrematureFin ufo  ==
-;     ['S2CI0003, [%origin ufo]]
+;     [CONCAT('"A )fin command has been given in %1f where at least one",
+;             '" endif was still needed.",
+;             '"An appropriate number of )endif lines have been assumed."),
+;      [%origin(ufo)]]
 
 (DEFUN |inclmsgPrematureFin| (|ufo|)
-  (PROG () (RETURN (LIST 'S2CI0003 (LIST (|%origin| |ufo|))))))
+  (PROG ()
+    (RETURN
+     (LIST
+      (CONCAT "A )fin command has been given in %1f where at least one"
+              " endif was still needed."
+              "An appropriate number of )endif lines have been assumed.")
+      (LIST (|%origin| |ufo|))))))
 
 ; inclmsgFileCycle(ufos,fn) ==
 ;     flist := [porigin n for n in reverse ufos]
 ;     f1    := porigin fn
 ;     cycle := [:[:[n,'"==>"] for n in flist], f1]
-;     ['S2CI0004, [%id cycle, %id f1]]
+;     [CONCAT('"There is a cycle in the )include files: %i %l %1f %u %l.",
+;             '" The inner occurrence of %2f has not been included."),
+;      [%id(cycle), %id(f1)]]
 
 (DEFUN |inclmsgFileCycle| (|ufos| |fn|)
   (PROG (|flist| |f1| |cycle|)
@@ -963,42 +981,62 @@
                    (SETQ |bfVar#10| (CDR |bfVar#10|))))
                 NIL |flist| NIL)
                (CONS |f1| NIL)))
-      (LIST 'S2CI0004 (LIST (|%id| |cycle|) (|%id| |f1|)))))))
+      (LIST
+       (CONCAT "There is a cycle in the )include files: %i %l %1f %u %l."
+               " The inner occurrence of %2f has not been included.")
+       (LIST (|%id| |cycle|) (|%id| |f1|)))))))
 
 ; inclmsgFinSkipped() ==
-;     ['S2CI0008, []]
+;     [CONCAT('"A )fin command was skipped (along with everything else)",
+;             '" in a false branch of an )if...)endif."), []]
 
-(DEFUN |inclmsgFinSkipped| () (PROG () (RETURN (LIST 'S2CI0008 NIL))))
+(DEFUN |inclmsgFinSkipped| ()
+  (PROG ()
+    (RETURN
+     (LIST
+      (CONCAT "A )fin command was skipped (along with everything else)"
+              " in a false branch of an )if...)endif.")
+      NIL))))
 
 ; inclmsgIfSyntax(ufo,found,context) ==
 ;     found := CONCAT('")", found)
-;     ['S2CI0009, [%id found, %id context, %origin ufo]]
+;     [CONCAT('"Incorrect )if...)endif syntax.  A %b %1f %d was found %2f.",
+;              '" The processing of the source from %3f has been abandoned."),
+;      [%id(found), %id(context), %origin(ufo)]]
 
 (DEFUN |inclmsgIfSyntax| (|ufo| |found| |context|)
   (PROG ()
     (RETURN
      (PROGN
       (SETQ |found| (CONCAT ")" |found|))
-      (LIST 'S2CI0009
-            (LIST (|%id| |found|) (|%id| |context|) (|%origin| |ufo|)))))))
+      (LIST
+       (CONCAT "Incorrect )if...)endif syntax.  A %b %1f %d was found %2f."
+               " The processing of the source from %3f has been abandoned.")
+       (LIST (|%id| |found|) (|%id| |context|) (|%origin| |ufo|)))))))
 
 ; inclmsgNoFile() ==
-;     ['S2CI0010, []]
+;     ['"The )include directive contains no file.", []]
 
-(DEFUN |inclmsgNoFile| () (PROG () (RETURN (LIST 'S2CI0010 NIL))))
+(DEFUN |inclmsgNoFile| ()
+  (PROG () (RETURN (LIST "The )include directive contains no file." NIL))))
 
 ; inclmsgCannotRead fn ==
-;     ['S2CI0011, [fn]]
+;     ['"The )include file %b %1f %d does not exist or cannot be read.", [fn]]
 
 (DEFUN |inclmsgCannotRead| (|fn|)
-  (PROG () (RETURN (LIST 'S2CI0011 (LIST |fn|)))))
+  (PROG ()
+    (RETURN
+     (LIST "The )include file %b %1f %d does not exist or cannot be read."
+           (LIST |fn|)))))
 
 ; inclmsgIfBug() ==
-;     ['S2CB0002, []]
+;     ['"Unexpected state in )if...)endif.", []]
 
-(DEFUN |inclmsgIfBug| () (PROG () (RETURN (LIST 'S2CB0002 NIL))))
+(DEFUN |inclmsgIfBug| ()
+  (PROG () (RETURN (LIST "Unexpected state in )if...)endif." NIL))))
 
 ; inclmsgCmdBug() ==
-;     ['S2CB0003, []]
+;     ['"Unexpected command in source inclusion.", []]
 
-(DEFUN |inclmsgCmdBug| () (PROG () (RETURN (LIST 'S2CB0003 NIL))))
+(DEFUN |inclmsgCmdBug| ()
+  (PROG () (RETURN (LIST "Unexpected command in source inclusion." NIL))))

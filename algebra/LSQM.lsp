@@ -4,19 +4,19 @@
 
 (SDEFUN |LSQM;conv| ((|v| (|DirectProduct| |n2| R)) (% (|SquareMatrix| |n| R)))
         (SPROG
-         ((|z| (|Integer|)) (#1=#:G9 NIL) (|j| NIL) (#2=#:G8 NIL) (|i| NIL)
-          (|cond| (|Matrix| R)))
+         ((|cond| (|Matrix| R)) (|i| NIL) (#1=#:G8 NIL) (|j| NIL) (#2=#:G9 NIL)
+          (|z| (|Integer|)))
          (SEQ
           (LETT |cond|
                 (MAKE_MATRIX1 (QREFELT % 6) (QREFELT % 6)
                               (|spadConstant| % 13)))
           (LETT |z| 0)
-          (SEQ (LETT |i| 1) (LETT #2# (QREFELT % 6)) G190
-               (COND ((|greater_SI| |i| #2#) (GO G191)))
+          (SEQ (LETT |i| 1) (LETT #1# (QREFELT % 6)) G190
+               (COND ((|greater_SI| |i| #1#) (GO G191)))
                (SEQ
                 (EXIT
-                 (SEQ (LETT |j| 1) (LETT #1# (QREFELT % 6)) G190
-                      (COND ((|greater_SI| |j| #1#) (GO G191)))
+                 (SEQ (LETT |j| 1) (LETT #2# (QREFELT % 6)) G190
+                      (COND ((|greater_SI| |j| #2#) (GO G191)))
                       (SEQ (LETT |z| (+ |z| 1))
                            (EXIT
                             (SPADCALL |cond| |i| |j|
@@ -28,16 +28,16 @@
 
 (SDEFUN |LSQM;canonical_coordinates| ((|a| (%)) (% (|Vector| R)))
         (SPROG
-         ((|z| (|Integer|)) (#1=#:G18 NIL) (|j| NIL) (#2=#:G17 NIL) (|i| NIL)
-          (|as| (|SquareMatrix| |n| R)) (|res| (|Vector| R)))
+         ((|res| (|Vector| R)) (|as| (|SquareMatrix| |n| R)) (|i| NIL)
+          (#1=#:G17 NIL) (|j| NIL) (#2=#:G18 NIL) (|z| (|Integer|)))
          (SEQ (LETT |res| (MAKEARR1 (QREFELT % 9) (|spadConstant| % 13)))
               (LETT |z| 0) (LETT |as| |a|)
-              (SEQ (LETT |i| 1) (LETT #2# (QREFELT % 6)) G190
-                   (COND ((|greater_SI| |i| #2#) (GO G191)))
+              (SEQ (LETT |i| 1) (LETT #1# (QREFELT % 6)) G190
+                   (COND ((|greater_SI| |i| #1#) (GO G191)))
                    (SEQ
                     (EXIT
-                     (SEQ (LETT |j| 1) (LETT #1# (QREFELT % 6)) G190
-                          (COND ((|greater_SI| |j| #1#) (GO G191)))
+                     (SEQ (LETT |j| 1) (LETT #2# (QREFELT % 6)) G190
+                          (COND ((|greater_SI| |j| #2#) (GO G191)))
                           (SEQ (LETT |z| (+ |z| 1))
                                (EXIT
                                 (SPADCALL |res| |z|
@@ -52,12 +52,12 @@
 (SDEFUN |LSQM;coordinates;%VV;4|
         ((|a| (%)) (|b| (|Vector| %)) (% (|Vector| R)))
         (SPROG
-         ((|canonical| (|Boolean|)) (#1=#:G26 NIL) (#2=#:G28 NIL) (|j| NIL)
-          (|bv| (|Vector| R)) (#3=#:G27 NIL) (|i| NIL))
+         ((|i| NIL) (#1=#:G27 NIL) (|bv| (|Vector| R)) (|j| NIL) (#2=#:G28 NIL)
+          (#3=#:G26 NIL) (|canonical| (|Boolean|)))
          (SEQ (LETT |canonical| 'T)
-              (SEQ (LETT |i| 1) (LETT #3# (QREFELT % 9)) G190
+              (SEQ (LETT |i| 1) (LETT #1# (QREFELT % 9)) G190
                    (COND
-                    ((OR (|greater_SI| |i| #3#) (NULL |canonical|)) (GO G191)))
+                    ((OR (|greater_SI| |i| #1#) (NULL |canonical|)) (GO G191)))
                    (SEQ
                     (LETT |bv|
                           (|LSQM;canonical_coordinates|
@@ -77,7 +77,7 @@
                            (EXIT
                             (COND
                              ((EQL |j| |i|)
-                              (PROGN (LETT #1# |$NoValue|) (GO #4=#:G20)))
+                              (PROGN (LETT #3# |$NoValue|) (GO #4=#:G20)))
                              ('T
                               (LETT |canonical|
                                     (COND
@@ -86,7 +86,7 @@
                                        (SPADCALL |bv| |j| (QREFELT % 25))
                                        (|spadConstant| % 13) (QREFELT % 28)))
                                      ('T NIL))))))
-                           #4# (EXIT #1#))
+                           #4# (EXIT #3#))
                           (LETT |j| (|inc_SI| |j|)) (GO G190) G191
                           (EXIT NIL))))
                    (LETT |i| (|inc_SI| |i|)) (GO G190) G191 (EXIT NIL))
@@ -103,28 +103,28 @@
 
 (SDEFUN |LSQM;basis;V;6| ((% (|Vector| %)))
         (SPROG
-         ((|res| (|Vector| %)) (|ldp| (|List| (|DirectProduct| |n2| R)))
-          (#1=#:G33 NIL) (#2=#:G39 NIL) (|i| NIL) (#3=#:G38 NIL))
+         ((#1=#:G39 NIL) (|i| NIL) (#2=#:G40 NIL) (#3=#:G33 NIL)
+          (|ldp| (|List| (|DirectProduct| |n2| R))) (|res| (|Vector| %)))
          (SEQ (SETELT % 9 (* (QREFELT % 6) (QREFELT % 6)))
               (LETT |ldp|
                     (PROGN
-                     (LETT #3# NIL)
+                     (LETT #1# NIL)
                      (SEQ (LETT |i| 1) (LETT #2# (QREFELT % 9)) G190
                           (COND ((|greater_SI| |i| #2#) (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #3#
+                            (LETT #1#
                                   (CONS
                                    (SPADCALL
-                                    (PROG1 (LETT #1# |i|)
-                                      (|check_subtype2| (> #1# 0)
+                                    (PROG1 (LETT #3# |i|)
+                                      (|check_subtype2| (> #3# 0)
                                                         '(|PositiveInteger|)
                                                         '(|NonNegativeInteger|)
-                                                        #1#))
+                                                        #3#))
                                     (QREFELT % 32))
-                                   #3#))))
+                                   #1#))))
                           (LETT |i| (|inc_SI| |i|)) (GO G190) G191
-                          (EXIT (NREVERSE #3#)))))
+                          (EXIT (NREVERSE #1#)))))
               (EXIT
                (LETT |res|
                      (SPADCALL
@@ -139,7 +139,7 @@
 (DECLAIM (NOTINLINE |LieSquareMatrix;|)) 
 
 (DEFUN |LieSquareMatrix;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 |#1|)
           (LETT DV$2 (|devaluate| |#2|))
@@ -168,9 +168,9 @@
           (QSETREFV % 9 (* |#1| |#1|))
           %))) 
 
-(DEFUN |LieSquareMatrix| (&REST #1=#:G49)
+(DEFUN |LieSquareMatrix| (&REST #1=#:G50)
   (SPROG NIL
-         (PROG (#2=#:G50)
+         (PROG (#2=#:G51)
            (RETURN
             (COND
              ((LETT #2#
@@ -192,11 +192,11 @@
            '#(NIL NIL NIL NIL NIL (|AssociatedLieAlgebra| 7 10) (|local| |#1|)
               (|local| |#2|) '|Rep| '|n2|
               (|SquareMatrix| (NRTEVAL (QREFELT % 6)) 7) (0 . |coerce|)
-              |LSQM;convert;Sm%;1| (5 . |Zero|) (|Integer|)
+              |LSQM;convert;Sm%;1| (5 . |0|) (|Integer|)
               (|DirectProduct| (NRTEVAL (QREFELT % 9)) 7) (9 . |elt|)
               (|Matrix| 7) (15 . |setelt!|) (23 . |squareMatrix|) (28 . |qelt|)
               (|Vector| 7) (35 . |setelt!|) (|Vector| $$) (42 . |elt|)
-              (48 . |elt|) (54 . |One|) (|Boolean|) (58 . =) (|Vector| %)
+              (48 . |elt|) (54 . |1|) (|Boolean|) (58 . =) (|Vector| %)
               |LSQM;coordinates;%VV;4| (|PositiveInteger|) (64 . |unitVector|)
               (|List| $$) (|Mapping| $$ 15) (|List| 15)
               (|ListFunctions2| 15 $$) (69 . |map|) (75 . |vector|)
@@ -231,29 +231,31 @@
               |commutative?| 441 |coerce| 445 |basis| 455
               |associatorDependence| 459 |associator| 463 |associative?| 470
               |apply| 474 |antiCommutator| 480 |antiCommutative?| 486
-              |antiAssociative?| 490 |alternative?| 494 ^ 498 |Zero| 504 = 508
-              - 514 + 525 * 531)
+              |antiAssociative?| 490 |alternative?| 494 ^ 498 = 504 |0| 510 -
+              514 + 525 * 531)
            'NIL
            (CONS
             (|makeByteWordVec2| 3
-                                '(0 0 0 0 0 0 0 0 0 0 0 3 0 0 3 0 0 2 0 3 1 0 0
-                                  0))
+                                '(0 0 0 0 0 0 0 0 0 0 3 0 3 0 0 3 0 0 0 2 0 3 1
+                                  0 0 0))
             (CONS
              '#(|FramedNonAssociativeAlgebra&|
                 |FiniteRankNonAssociativeAlgebra&| |NonAssociativeAlgebra&|
                 |Module&| NIL |FramedModule&| |NonAssociativeRng&| NIL NIL
-                |AbelianGroup&| NIL |Finite&| |NonAssociativeSemiRng&|
-                |AbelianMonoid&| NIL |AbelianSemiGroup&| |Magma&| |Hashable&|
-                |SetCategory&| NIL NIL |BasicType&| NIL NIL)
+                |AbelianGroup&| |Finite&| NIL NIL |NonAssociativeSemiRng&|
+                |AbelianMonoid&| NIL |AbelianSemiGroup&| |Magma&|
+                |SetWithZero&| |Hashable&| |SetCategory&| NIL NIL |BasicType&|
+                NIL NIL)
              (CONS
               '#((|FramedNonAssociativeAlgebra| 7)
                  (|FiniteRankNonAssociativeAlgebra| 7)
                  (|NonAssociativeAlgebra| 7) (|Module| 7) (|BiModule| 7 7)
                  (|FramedModule| 7) (|NonAssociativeRng|) (|LeftModule| 7)
-                 (|RightModule| 7) (|AbelianGroup|)
-                 (|CancellationAbelianMonoid|) (|Finite|)
-                 (|NonAssociativeSemiRng|) (|AbelianMonoid|) (|Comparable|)
-                 (|AbelianSemiGroup|) (|Magma|) (|Hashable|) (|SetCategory|)
+                 (|RightModule| 7) (|AbelianGroup|) (|Finite|)
+                 (|CancellationAbelianMonoid|) (|Comparable|)
+                 (|NonAssociativeSemiRng|) (|AbelianMonoid|)
+                 (|ComparableRepresentation|) (|AbelianSemiGroup|) (|Magma|)
+                 (|SetWithZero|) (|Hashable|) (|SetCategory|)
                  (|ConvertibleTo| 51) (|unitsKnown|) (|BasicType|)
                  (|CoercibleTo| 48) (|CoercibleTo| (|SquareMatrix| 6 7)))
               (|makeByteWordVec2| 56
@@ -283,7 +285,7 @@
                                     0 0 0 0 1 0 0 27 1 1 0 10 0 1 1 0 48 0 1 0
                                     0 29 39 0 1 56 1 3 0 0 0 0 0 1 0 0 27 1 2 0
                                     0 17 0 1 2 0 0 0 0 1 0 0 27 1 0 0 27 1 0 0
-                                    27 1 2 0 0 0 31 1 0 0 0 1 2 0 27 0 0 1 2 0
+                                    27 1 2 0 0 0 31 1 2 0 27 0 0 1 0 0 0 1 2 0
                                     0 0 0 1 1 0 0 0 1 2 0 0 0 0 1 2 0 0 7 0 1 2
                                     0 0 0 7 1 2 0 0 45 0 1 2 0 0 14 0 1 2 0 0 0
                                     0 1 2 0 0 31 0 1)))))

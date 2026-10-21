@@ -17,6 +17,23 @@
 (DEFUN |ioHook| (|x| &REST |args|)
   (PROG () (RETURN (COND (|$ioHook| (FUNCALL |$ioHook| |x| |args|))))))
 
+; call_spad_io_hook(x, :args) ==
+;     SPADCALL(x, args, $io_hook_fun)
+
+(DEFUN |call_spad_io_hook| (|x| &REST |args|)
+  (PROG () (RETURN (SPADCALL |x| |args| |$io_hook_fun|))))
+
+; set_spad_io_hook(fun) ==
+;     $io_hook_fun := fun
+;     $ioHook := FUNCTION call_spad_io_hook
+
+(DEFUN |set_spad_io_hook| (|fun|)
+  (PROG ()
+    (RETURN
+     (PROGN
+      (SETQ |$io_hook_fun| |fun|)
+      (SETQ |$ioHook| #'|call_spad_io_hook|)))))
+
 ; $ncmMacro :=            NIL
 
 (EVAL-WHEN (:EXECUTE :LOAD-TOPLEVEL) (SETQ |$ncmMacro| NIL))
@@ -145,7 +162,7 @@
 ; SpadInterpretStream(step_num, source, interactive?) ==
 ;     pile?                    := not interactive?
 ;
-;     $inclAssertions: local := ["AIX", "CommonLisp"] -- Jan 28/90
+;     $inclAssertions : local := $sys_assertions
 ;
 ;
 ;     $lastPos               : local := $nopos   ------------>!!!
@@ -166,7 +183,7 @@
     (RETURN
      (PROGN
       (SETQ |pile?| (NULL |interactive?|))
-      (SETQ |$inclAssertions| (LIST 'AIX '|CommonLisp|))
+      (SETQ |$inclAssertions| |$sys_assertions|)
       (SETQ |$lastPos| |$nopos|)
       (SETQ |$erMsgToss| NIL)
       (SETQ |$ncMsgList| NIL)
@@ -185,7 +202,7 @@
 ;     $lastPos : local := $nopos
 ;     $EchoLines : local := false
 ;     st := MAKE_-STRING_-INPUT_-STREAM(code)
-;     intloopInclude0(st, 'webspad, 0)
+;     intloopInclude0(st, "interpret_block", 0)
 
 (DEFUN |interpret_block| (|code|)
   (PROG (|$EchoLines| |$lastPos| |$erMsgToss| |$ncMsgList| |$inclAssertions|
@@ -201,7 +218,7 @@
       (SETQ |$lastPos| |$nopos|)
       (SETQ |$EchoLines| NIL)
       (SETQ |st| (MAKE-STRING-INPUT-STREAM |code|))
-      (|intloopInclude0| |st| '|webspad| 0)))))
+      (|intloopInclude0| |st| '|interpret_block| 0)))))
 
 ; ncINTERPFILE(file, echo) ==
 ;   $EchoLines : local := echo
@@ -614,7 +631,7 @@
 ;     ncPutQ(carrier, 'ok?, nerr = 0)
 ;     nerr = 0 => 'OK
 ;     processMsgList(msgs, lines)
-;     intSayKeyedMsg ('S2CTP010,[nerr])
+;     say_msg("S2CTP010", '"%b %1 error(s) parsing %d", [nerr])
 ;     'OK
 
 (DEFUN |phIntReportMsgs| (|carrier| |interactive?|)
@@ -631,14 +648,9 @@
                    (#1#
                     (PROGN
                      (|processMsgList| |msgs| |lines|)
-                     (|intSayKeyedMsg| 'S2CTP010 (LIST |nerr|))
+                     (|say_msg| 'S2CTP010 "%b %1 error(s) parsing %d"
+                      (LIST |nerr|))
                      'OK)))))))))
-
-; intSayKeyedMsg(key, args) ==
-;   sayKeyedMsg(key, args)
-
-(DEFUN |intSayKeyedMsg| (|key| |args|)
-  (PROG () (RETURN (|sayKeyedMsg| |key| |args|))))
 
 ; mkLineList lines ==
 ;   l := [rest line for line in lines | nonBlank rest line]
@@ -717,28 +729,41 @@
       (SETQ |b| (|poGlobalLinePosn| (CAAR |stream|)))
       (|streamChop| (+ (- |a| |b|) 1) |stream|)))))
 
-; streamChop(n,s)==
-;     if StreamNull s
-;     then [nil,nil]
-;     else if EQL(n,0)
-;          then [nil,s]
-;          else
-;             [a,b]:= streamChop(n-1,cdr s)
-;             line:=car s
-;             c := ncloopPrefix?('")command", rest line)
-;             d:= cons(car line,if c then c else cdr line)
-;             [cons(d,a),b]
+; streamChop(n, s) ==
+;     res := []
+;     while n > 0 repeat
+;         StreamNull(s) =>
+;             s := nil
+;             n := 0
+;         line := first(s)
+;         c := ncloopPrefix?('")command", rest(line))
+;         res := cons(cons(first(line), (c => c ; rest(line))), res)
+;         n := n - 1
+;         s := rest(s)
+;     [NREVERSE(res), s]
 
 (DEFUN |streamChop| (|n| |s|)
-  (PROG (|LETTMP#1| |a| |b| |line| |c| |d|)
+  (PROG (|res| |line| |c|)
     (RETURN
-     (COND ((|StreamNull| |s|) (LIST NIL NIL)) ((EQL |n| 0) (LIST NIL |s|))
-           (#1='T (SETQ |LETTMP#1| (|streamChop| (- |n| 1) (CDR |s|)))
-            (SETQ |a| (CAR |LETTMP#1|)) (SETQ |b| (CADR |LETTMP#1|))
-            (SETQ |line| (CAR |s|))
-            (SETQ |c| (|ncloopPrefix?| ")command" (CDR |line|)))
-            (SETQ |d| (CONS (CAR |line|) (COND (|c| |c|) (#1# (CDR |line|)))))
-            (LIST (CONS |d| |a|) |b|))))))
+     (PROGN
+      (SETQ |res| NIL)
+      ((LAMBDA ()
+         (LOOP
+          (COND ((NOT (< 0 |n|)) (RETURN NIL))
+                (#1='T
+                 (COND ((|StreamNull| |s|) (PROGN (SETQ |s| NIL) (SETQ |n| 0)))
+                       (#1#
+                        (PROGN
+                         (SETQ |line| (CAR |s|))
+                         (SETQ |c| (|ncloopPrefix?| ")command" (CDR |line|)))
+                         (SETQ |res|
+                                 (CONS
+                                  (CONS (CAR |line|)
+                                        (COND (|c| |c|) (#1# (CDR |line|))))
+                                  |res|))
+                         (SETQ |n| (- |n| 1))
+                         (SETQ |s| (CDR |s|))))))))))
+      (LIST (NREVERSE |res|) |s|)))))
 
 ; ncloopPrintLines lines ==
 ;         for line in lines repeat WRITE_-LINE rest line
@@ -825,7 +850,7 @@
 ;
 ;     ptree  := macroExpanded ptree
 ;     if $ncmMacro then
-;         intSayKeyedMsg ('S2CTP007,[%pform ptree] )
+;         say_msg("S2CTP007", '"Macro expanded: %U %1fl", [%pform ptree])
 ;
 ;     ncPutQ(carrier, 'ptree, ptree)
 ;     'OK
@@ -839,7 +864,9 @@
       (|ncPutQ| |carrier| '|ptreePremacro| |ptree|)
       (SETQ |ptree| (|macroExpanded| |ptree|))
       (COND
-       (|$ncmMacro| (|intSayKeyedMsg| 'S2CTP007 (LIST (|%pform| |ptree|)))))
+       (|$ncmMacro|
+        (|say_msg| 'S2CTP007 "Macro expanded: %U %1fl"
+         (LIST (|%pform| |ptree|)))))
       (|ncPutQ| |carrier| '|ptree| |ptree|)
       'OK))))
 
@@ -906,11 +933,11 @@
 
 ; phBegin id ==
 ;     $convPhase := id
-;     if $ncmPhase then intSayKeyedMsg('S2CTP021,[id])
+;     if $ncmPhase then say_msg("S2CTP021", '"%1 ...", [id])
 
 (DEFUN |phBegin| (|id|)
   (PROG ()
     (RETURN
      (PROGN
       (SETQ |$convPhase| |id|)
-      (COND (|$ncmPhase| (|intSayKeyedMsg| 'S2CTP021 (LIST |id|))))))))
+      (COND (|$ncmPhase| (|say_msg| 'S2CTP021 "%1 ..." (LIST |id|))))))))

@@ -5,30 +5,30 @@
 (SDEFUN |EVALAB-;eval;S2LS;2|
         ((|f| (S)) (|xs| (|List| R)) (|vs| (|List| R)) (% (S)))
         (SPROG
-         ((#1=#:G13 NIL) (|x| NIL) (#2=#:G14 NIL) (|v| NIL) (#3=#:G12 NIL))
+         ((#1=#:G12 NIL) (|v| NIL) (#2=#:G14 NIL) (|x| NIL) (#3=#:G13 NIL))
          (SEQ
           (SPADCALL |f|
                     (PROGN
-                     (LETT #3# NIL)
+                     (LETT #1# NIL)
                      (SEQ (LETT |v| NIL) (LETT #2# |vs|) (LETT |x| NIL)
-                          (LETT #1# |xs|) G190
+                          (LETT #3# |xs|) G190
                           (COND
-                           ((OR (ATOM #1#) (PROGN (LETT |x| (CAR #1#)) NIL)
+                           ((OR (ATOM #3#) (PROGN (LETT |x| (CAR #3#)) NIL)
                                 (ATOM #2#) (PROGN (LETT |v| (CAR #2#)) NIL))
                             (GO G191)))
                           (SEQ
                            (EXIT
-                            (LETT #3#
+                            (LETT #1#
                                   (CONS (SPADCALL |x| |v| (QREFELT % 12))
-                                        #3#))))
-                          (LETT #1# (PROG1 (CDR #1#) (LETT #2# (CDR #2#))))
-                          (GO G190) G191 (EXIT (NREVERSE #3#))))
+                                        #1#))))
+                          (LETT #3# (PROG1 (CDR #3#) (LETT #2# (CDR #2#))))
+                          (GO G190) G191 (EXIT (NREVERSE #1#))))
                     (QREFELT % 9))))) 
 
 (DECLAIM (NOTINLINE |Evalable&;|)) 
 
 (DEFUN |Evalable&| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

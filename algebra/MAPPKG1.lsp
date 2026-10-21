@@ -7,7 +7,7 @@
 (SDEFUN |MAPPKG1;coerce;AM;2| ((|a| (A)) (% (|Mapping| A)))
         (SPADCALL |a| (QREFELT % 8))) 
 
-(PUT '|MAPPKG1;id;2A;3| '|SPADreplace| '(XLAM (|a|) |a|)) 
+(MAKEPROP '|MAPPKG1;id;2A;3| '|SPADreplace| '(XLAM (|a|) |a|)) 
 
 (SDEFUN |MAPPKG1;id;2A;3| ((|a| (A)) (% (A))) |a|) 
 
@@ -37,7 +37,7 @@
 (DECLAIM (NOTINLINE |MappingPackage1;|)) 
 
 (DEFUN |MappingPackage1;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|MappingPackage1| DV$1))
@@ -51,9 +51,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |MappingPackage1| (#1=#:G12)
+(DEFUN |MappingPackage1| (#1=#:G14)
   (SPROG NIL
-         (PROG (#2=#:G13)
+         (PROG (#2=#:G15)
            (RETURN
             (COND
              ((LETT #2#

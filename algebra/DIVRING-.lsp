@@ -19,13 +19,18 @@
 (DECLAIM (NOTINLINE |DivisionRing&;|)) 
 
 (DEFUN |DivisionRing&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|DivisionRing&| DV$1))
           (LETT % (GETREFV 25))
           (QSETREFV % 0 |dv$|)
-          (QSETREFV % 3 (LETT |pv$| (|buildPredVector| 0 0 NIL)))
+          (QSETREFV % 3
+                    (LETT |pv$|
+                          (|buildPredVector| 0 0
+                                             (LIST
+                                              (|HasCategory| |#1|
+                                                             '(|CharacteristicZero|))))))
           (|stuffDomainSlots| %)
           (QSETREFV % 6 |#1|)
           (SETF |pv$| (QREFELT % 3))
@@ -33,8 +38,8 @@
 
 (MAKEPROP '|DivisionRing&| '|infovec|
           (LIST
-           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |One|) (|Boolean|)
-              (4 . |zero?|) (9 . |Zero|) (13 . |inv|) (|PositiveInteger|)
+           '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (0 . |1|) (|Boolean|)
+              (4 . |zero?|) (9 . |0|) (13 . |inv|) (|PositiveInteger|)
               (|RepeatedSquaring| 6) (18 . |expt|) (|Integer|)
               |DIVRING-;^;SIS;1| (|Fraction| 15) (24 . |numer|) (29 . |denom|)
               (34 . |coerce|) (39 . *) (45 . *) |DIVRING-;*;F2S;2|
@@ -45,17 +50,16 @@
                        (CONS
                         '#((|Join|
                             (|mkCategory|
-                             (LIST '((^ (|#1| |#1| (|Integer|))) T)
-                                   '((* (|#1| (|Fraction| (|Integer|)) |#1|))
-                                     T)
-                                   '((* (|#1| |#1| (|Fraction| (|Integer|))))
-                                     T)
-                                   '((^ (|#1| |#1| (|NonNegativeInteger|))) T)
-                                   '((* (|#1| (|NonNegativeInteger|) |#1|)) T)
-                                   '((* (|#1| (|Integer|) |#1|)) T)
-                                   '((* (|#1| |#1| |#1|)) T)
-                                   '((^ (|#1| |#1| (|PositiveInteger|))) T)
-                                   '((* (|#1| (|PositiveInteger|) |#1|)) T))
+                             (LIST
+                              '((* (|#1| (|Fraction| (|Integer|)) |#1|)) T)
+                              '((* (|#1| |#1| (|Fraction| (|Integer|)))) T)
+                              '((^ (|#1| |#1| (|Integer|))) T)
+                              '((^ (|#1| |#1| (|NonNegativeInteger|))) T)
+                              '((* (|#1| (|NonNegativeInteger|) |#1|)) T)
+                              '((* (|#1| (|Integer|) |#1|)) T)
+                              '((* (|#1| |#1| |#1|)) T)
+                              '((^ (|#1| |#1| (|PositiveInteger|))) T)
+                              '((* (|#1| (|PositiveInteger|) |#1|)) T))
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 23
                                             '(0 6 0 7 1 6 8 0 9 0 6 0 10 1 6 0

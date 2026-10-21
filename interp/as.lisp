@@ -37,7 +37,6 @@
 ;   for con in conlist repeat
 ;     parents := asyParents con
 ;     HPUT($parentsHash,con,asyParents con)
-;   $newConlist := union(conlist, $newConlist)
 ;   [[x,:asMakeAlist x] for x in HKEYS $conHash]
 
 (DEFUN |astran| (|asyFile|)
@@ -117,7 +116,6 @@
              (HPUT |$parentsHash| |con| (|asyParents| |con|)))))
           (SETQ |bfVar#7| (CDR |bfVar#7|))))
        |conlist| NIL)
-      (SETQ |$newConlist| (|union| |conlist| |$newConlist|))
       ((LAMBDA (|bfVar#9| |bfVar#8| |x|)
          (LOOP
           (COND
@@ -793,17 +791,19 @@
       (LIST (|asySignature| |sig| NIL) (|trimComments| |comments|))))))
 
 ; asyExtractDescription str ==
-;   k := STRPOS('"Description:",str,0,nil) => asyExtractDescription SUBSTRING(str,k + 12,nil)
-;   k := STRPOS('"Author:",str,0,nil) => asyExtractDescription SUBSTRING(str,0,k)
-;   str
+;     k := search_str('"Description:", str, 0) =>
+;         asyExtractDescription(SUBSTRING(str, k + 12, nil))
+;     k := search_str('"Author:", str, 0) =>
+;         asyExtractDescription(SUBSTRING(str, 0, k))
+;     str
 
 (DEFUN |asyExtractDescription| (|str|)
   (PROG (|k|)
     (RETURN
      (COND
-      ((SETQ |k| (STRPOS "Description:" |str| 0 NIL))
+      ((SETQ |k| (|search_str| "Description:" |str| 0))
        (|asyExtractDescription| (SUBSTRING |str| (+ |k| 12) NIL)))
-      ((SETQ |k| (STRPOS "Author:" |str| 0 NIL))
+      ((SETQ |k| (|search_str| "Author:" |str| 0))
        (|asyExtractDescription| (SUBSTRING |str| 0 |k|)))
       ('T |str|)))))
 
@@ -1455,7 +1455,7 @@
 
 ; asytranForm(form,levels,local?) ==
 ;   u := asytranForm1(form,levels,local?)
-;   null u => hahah()
+;   null u => BREAK()
 ;   u
 
 (DEFUN |asytranForm| (|form| |levels| |local?|)
@@ -1463,7 +1463,7 @@
     (RETURN
      (PROGN
       (SETQ |u| (|asytranForm1| |form| |levels| |local?|))
-      (COND ((NULL |u|) (|hahah|)) ('T |u|))))))
+      (COND ((NULL |u|) (BREAK)) ('T |u|))))))
 
 ; asytranForm1(form,levels,local?) ==
 ;   form is ['With,left,cat] =>
@@ -1747,7 +1747,7 @@
 ;   catTable := MAKE_HASHTABLE('EQUAL)
 ;   catList  := nil
 ;   for x in items | x repeat
-;     if null x then systemError()
+;     if null x then systemError nil
 ;     dform := asytranCategoryItem(x,levels,predlist,local?)
 ;     null dform => nil
 ;     dform is ['Declare,id,record,r] =>
@@ -1823,7 +1823,7 @@
            (#1#
             (AND |x|
                  (PROGN
-                  (COND ((NULL |x|) (|systemError|)))
+                  (COND ((NULL |x|) (|systemError| NIL)))
                   (SETQ |dform|
                           (|asytranCategoryItem| |x| |levels| |predlist|
                            |local?|))
@@ -2248,20 +2248,20 @@
       (LIST (|asySignature| |sig| NIL) (|trimComments| |comments|))))))
 
 ; asyExtractAbbreviation str ==
-;         not (k:= STRPOS('"Abbrev: ",str,0,nil)) => NIL
+;         not (k := search_str('"Abbrev: ", str, 0)) => NIL
 ;         str := SUBSTRING(str, k+8, nil)
-;         k := STRPOS($stringNewline, str,0,nil)
+;         k := search_str($stringNewline, str, 0)
 ;         k => SUBSTRING(str, 0, k)
 ;         str
 
 (DEFUN |asyExtractAbbreviation| (|str|)
   (PROG (|k|)
     (RETURN
-     (COND ((NULL (SETQ |k| (STRPOS "Abbrev: " |str| 0 NIL))) NIL)
+     (COND ((NULL (SETQ |k| (|search_str| "Abbrev: " |str| 0))) NIL)
            (#1='T
             (PROGN
              (SETQ |str| (SUBSTRING |str| (+ |k| 8) NIL))
-             (SETQ |k| (STRPOS |$stringNewline| |str| 0 NIL))
+             (SETQ |k| (|search_str| |$stringNewline| |str| 0))
              (COND (|k| (SUBSTRING |str| 0 |k|)) (#1# |str|))))))))
 
 ; asyShorten x ==
@@ -2770,7 +2770,7 @@
 
 ; asyTypeJoinItem x ==
 ;   result := asyTypeUnit x
-;   isLowerCaseLetter (PNAME opOf result).0 =>
+;   LOWER_-CASE_-P((PNAME opOf result).0) =>
 ;     $opStack := [[['ATTRIBUTE,result],:$predlist],:$opStack]
 ;   $conStack := [[result,:$predlist],:$conStack]
 
@@ -2780,7 +2780,7 @@
      (PROGN
       (SETQ |result| (|asyTypeUnit| |x|))
       (COND
-       ((|isLowerCaseLetter| (ELT (PNAME (|opOf| |result|)) 0))
+       ((LOWER-CASE-P (ELT (PNAME (|opOf| |result|)) 0))
         (SETQ |$opStack|
                 (CONS (CONS (LIST 'ATTRIBUTE |result|) |$predlist|)
                       |$opStack|)))
@@ -3200,7 +3200,7 @@
 ;     x is ['IF,:.] => "append"/[asyCattranConstructors(x, [pred,:predlist])]
 ;     form := ['ATTRIBUTE, asyJoinPart x]
 ;     [['IF, asySimpPred(pred,predlist), form, 'noBranch]]
-;   systemError()
+;   systemError nil
 
 (DEFUN |asyCattranConstructors| (|item| |predlist|)
   (PROG (|ISTMP#1| |p| |ISTMP#2| |x| |t| |pred| |form|)
@@ -3244,7 +3244,7 @@
            (LIST
             (LIST 'IF (|asySimpPred| |pred| |predlist|) |form|
                   '|noBranch|)))))))
-      (#1# (|systemError|))))))
+      (#1# (|systemError| NIL))))))
 
 ; asySimpPred(p, predlist) ==
 ;   while predlist is [q,:predlist] repeat p := quickAnd(q,p)
@@ -3538,14 +3538,14 @@
 (DEFUN |asyComma?| (|op|) (PROG () (RETURN (MEMQ |op| '(|Comma| |Multi|)))))
 
 ; hput(table,name,value) ==
-;   if null name then systemError()
+;   if null name then systemError nil
 ;   HPUT(table,name,value)
 
 (DEFUN |hput| (|table| |name| |value|)
   (PROG ()
     (RETURN
      (PROGN
-      (COND ((NULL |name|) (|systemError|)))
+      (COND ((NULL |name|) (|systemError| NIL)))
       (HPUT |table| |name| |value|)))))
 
 ; asyTypeJoinPartExport x ==

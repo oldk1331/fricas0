@@ -2,11 +2,11 @@
 (SDEFUN |TUPLE;coerce;Pa%;1| ((|x| (|PrimitiveArray| S)) (% (%)))
         (CONS (QVSIZE |x|) |x|)) 
 
-(PUT '|TUPLE;coerce;%Pa;2| '|SPADreplace| 'QCDR) 
+(MAKEPROP '|TUPLE;coerce;%Pa;2| '|SPADreplace| 'QCDR) 
 
 (SDEFUN |TUPLE;coerce;%Pa;2| ((|x| (%)) (% (|PrimitiveArray| S))) (QCDR |x|)) 
 
-(PUT '|TUPLE;#;%Nni;3| '|SPADreplace| 'QCAR) 
+(MAKEPROP '|TUPLE;#;%Nni;3| '|SPADreplace| 'QCAR) 
 
 (SDEFUN |TUPLE;#;%Nni;3| ((|x| (%)) (% (|NonNegativeInteger|))) (QCAR |x|)) 
 
@@ -21,29 +21,29 @@
          ('T NIL))) 
 
 (SDEFUN |TUPLE;coerce;%Of;6| ((|x| (%)) (% (|OutputForm|)))
-        (SPROG ((#1=#:G17 NIL) (|i| NIL) (#2=#:G16 NIL))
+        (SPROG ((#1=#:G16 NIL) (|i| NIL) (#2=#:G17 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
-                  (LETT #2# NIL)
+                  (LETT #1# NIL)
                   (SEQ (LETT |i| (PROGN (QCDR |x|) 0))
-                       (LETT #1# (SPADCALL (QCDR |x|) (QREFELT % 18))) G190
-                       (COND ((> |i| #1#) (GO G191)))
+                       (LETT #2# (SPADCALL (QCDR |x|) (QREFELT % 18))) G190
+                       (COND ((> |i| #2#) (GO G191)))
                        (SEQ
                         (EXIT
-                         (LETT #2#
+                         (LETT #1#
                                (CONS
                                 (SPADCALL (QAREF1 (QCDR |x|) |i|)
                                           (QREFELT % 20))
-                                #2#))))
+                                #1#))))
                        (LETT |i| (+ |i| 1)) (GO G190) G191
-                       (EXIT (NREVERSE #2#))))
+                       (EXIT (NREVERSE #1#))))
                  (QREFELT % 22))))) 
 
 (DECLAIM (NOTINLINE |Tuple;|)) 
 
 (DEFUN |Tuple;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Tuple| DV$1))

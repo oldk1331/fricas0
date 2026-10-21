@@ -6,7 +6,7 @@
 (DEFPARAMETER |QuotientFieldCategory;AL| 'NIL) 
 
 (DEFUN |QuotientFieldCategory| (|t#1|)
-  (LET (#1=#:G1 (#2=#:G2 (|devaluate| |t#1|)))
+  (LET (#1=#:G3 (#2=#:G4 (|devaluate| |t#1|)))
     (COND ((SETQ #1# (|assoc| #2# |QuotientFieldCategory;AL|)) (CDR #1#))
           (T
            (SETQ |QuotientFieldCategory;AL|
@@ -16,7 +16,7 @@
            #1#)))) 
 
 (DEFUN |QuotientFieldCategory;| (|t#1|)
-  (SPROG ((#1=#:G0 NIL))
+  (SPROG ((#1=#:G2 NIL))
          (PROG1
              (LETT #1#
                    (|subst_in_cat| '(|t#1|) (LIST |t#1|)
@@ -77,15 +77,12 @@
                                                             (|has| |t#1|
                                                                    (|RetractableTo|
                                                                     (|Integer|))))
-                                                           ((|OrderedSet|)
+                                                           ((|ComparableRepresentation|)
                                                             (|has| |t#1|
-                                                                   (|OrderedSet|)))
-                                                           ((|Comparable|)
+                                                                   (|ComparableRepresentation|)))
+                                                           ((|OrderedRing|)
                                                             (|has| |t#1|
-                                                                   (|Comparable|)))
-                                                           ((|OrderedIntegralDomain|)
-                                                            (|has| |t#1|
-                                                                   (|OrderedIntegralDomain|)))
+                                                                   (|OrderedRing|)))
                                                            ((|RealConstant|)
                                                             (|has| |t#1|
                                                                    (|RealConstant|)))

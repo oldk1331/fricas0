@@ -1699,7 +1699,9 @@
 
 ; selectDollarMms(dc,name,types1,types2) ==
 ;   -- finds functions for name in domain dc
-;   isPartialMode dc => throwKeyedMsg("S2IF0001",NIL)
+;   isPartialMode dc => throw_msg("S2IF0001", CONCAT(
+;      '"A $-expression must have a fully specified domain or package on the",
+;      '" right-hand side."), NIL)
 ;   mmS := findFunctionInDomain(name,dc,NIL,types1,types2,'T,'T) =>
 ;     orderMms(name, mmS,types1,types2,NIL)
 ;   if $reportBottomUpFlag then sayMSG
@@ -1709,19 +1711,25 @@
 (DEFUN |selectDollarMms| (|dc| |name| |types1| |types2|)
   (PROG (|mmS|)
     (RETURN
-     (COND ((|isPartialMode| |dc|) (|throwKeyedMsg| 'S2IF0001 NIL))
-           ((SETQ |mmS|
-                    (|findFunctionInDomain| |name| |dc| NIL |types1| |types2|
-                     'T 'T))
-            (|orderMms| |name| |mmS| |types1| |types2| NIL))
-           ('T
-            (PROGN
-             (COND
-              (|$reportBottomUpFlag|
-               (|sayMSG|
-                (LIST '|%b| "          function not found in "
-                      (|prefix2String| |dc|) '|%d| '|%l|))))
-             NIL))))))
+     (COND
+      ((|isPartialMode| |dc|)
+       (|throw_msg| 'S2IF0001
+        (CONCAT
+         "A $-expression must have a fully specified domain or package on the"
+         " right-hand side.")
+        NIL))
+      ((SETQ |mmS|
+               (|findFunctionInDomain| |name| |dc| NIL |types1| |types2| 'T
+                'T))
+       (|orderMms| |name| |mmS| |types1| |types2| NIL))
+      ('T
+       (PROGN
+        (COND
+         (|$reportBottomUpFlag|
+          (|sayMSG|
+           (LIST '|%b| "          function not found in "
+                 (|prefix2String| |dc|) '|%d| '|%l|))))
+        NIL))))))
 
 ; selectLocalMms(op,name,types,tar) ==
 ;   -- partial rewrite, looks now for exact local modemap
@@ -2075,6 +2083,7 @@
 ; isOpInDomain(opName,dom,nargs) ==
 ;   -- returns true only if there is an op in the given domain with
 ;   -- the given number of arguments
+;   STRINGP(dom) => false
 ;   mmList := ASSQ(opName, getOperationAlistFromLisplib first dom)
 ;   mmList := subCopy(mmList,constructSubst dom)
 ;   null mmList => NIL
@@ -2087,28 +2096,33 @@
 (DEFUN |isOpInDomain| (|opName| |dom| |nargs|)
   (PROG (|mmList| |gotOne|)
     (RETURN
-     (PROGN
-      (SETQ |mmList|
-              (ASSQ |opName| (|getOperationAlistFromLisplib| (CAR |dom|))))
-      (SETQ |mmList| (|subCopy| |mmList| (|constructSubst| |dom|)))
-      (COND ((NULL |mmList|) NIL)
-            (#1='T
-             (PROGN
-              (SETQ |gotOne| NIL)
-              (SETQ |nargs| (+ |nargs| 1))
-              ((LAMBDA (|bfVar#42| |mm|)
-                 (LOOP
-                  (COND
-                   ((OR (ATOM |bfVar#42|)
-                        (PROGN (SETQ |mm| (CAR |bfVar#42|)) NIL) |gotOne|)
-                    (RETURN NIL))
+     (COND ((STRINGP |dom|) NIL)
+           (#1='T
+            (PROGN
+             (SETQ |mmList|
+                     (ASSQ |opName|
+                      (|getOperationAlistFromLisplib| (CAR |dom|))))
+             (SETQ |mmList| (|subCopy| |mmList| (|constructSubst| |dom|)))
+             (COND ((NULL |mmList|) NIL)
                    (#1#
-                    (COND
-                     ((EQL |nargs| (LENGTH (CAR |mm|)))
-                      (IDENTITY (SETQ |gotOne| (CONS |mm| |gotOne|)))))))
-                  (SETQ |bfVar#42| (CDR |bfVar#42|))))
-               (CDR |mmList|) NIL)
-              |gotOne|)))))))
+                    (PROGN
+                     (SETQ |gotOne| NIL)
+                     (SETQ |nargs| (+ |nargs| 1))
+                     ((LAMBDA (|bfVar#42| |mm|)
+                        (LOOP
+                         (COND
+                          ((OR (ATOM |bfVar#42|)
+                               (PROGN (SETQ |mm| (CAR |bfVar#42|)) NIL)
+                               |gotOne|)
+                           (RETURN NIL))
+                          (#1#
+                           (COND
+                            ((EQL |nargs| (LENGTH (CAR |mm|)))
+                             (IDENTITY
+                              (SETQ |gotOne| (CONS |mm| |gotOne|)))))))
+                         (SETQ |bfVar#42| (CDR |bfVar#42|))))
+                      (CDR |mmList|) NIL)
+                     |gotOne|)))))))))
 
 ; findCommonSigInDomain(opName,dom,nargs) ==
 ;   -- this looks at all signatures in dom with given opName and nargs
@@ -2181,18 +2195,26 @@
 
 ; findUniqueOpInDomain(op,opName,dom) ==
 ;   -- return function named op in domain dom if unique, choose one if not
-;   mmList := ASSQ(opName, getOperationAlistFromLisplib first dom)
-;   mmList := subCopy(mmList,constructSubst dom)
-;   null mmList =>
-;     throwKeyedMsg("S2IS0021",[opName,dom])
+;   mmList :=
+;         STRINGP(dom) => nil
+;         l1 := ASSQ(opName, getOperationAlistFromLisplib(first(dom)))
+;         subCopy(l1, constructSubst(dom))
+;   null mmList => throw_msg("S2IS0021",
+;         '"There is no operation named %1b in the domain or package %2bp .",
+;         [opName, dom])
 ;   mmList := rest mmList   -- ignore the operator name
 ;   -- use evaluation type context to narrow down the candidate set
 ;   if target := getTarget op then
 ;       mmList := [mm for mm in mmList | mm is [=rest target,:.]]
-;       null mmList => throwKeyedMsg("S2IS0061",[opName,target,dom])
+;       null mmList => throw_msg("S2IS0061", CONCAT(
+;           '"There is no operation named %1b with type %2p in the domain",
+;           '" or package %3p."), [opName, target, dom])
 ;   if #mmList > 1 then
 ;     mm := selectMostGeneralMm mmList
-;     sayKeyedMsg("S2IS0022", [opName, dom, ['Mapping, :first mm]])
+;     say_msg("S2IS0022", CONCAT(
+;         '"There is more than one %1b in the domain or package %2bp .",
+;         '" The one being chosen has type %3bp ."),
+;         [opName, dom, ['Mapping, :first mm]])
 ;   else mm := first mmList
 ;   [sig,slot,:.] := mm
 ;   fun :=
@@ -2200,7 +2222,8 @@
 ;          compiledLookupCheck(opName,sig,evalDomain dom)
 ;       NRTcompileEvalForm(opName, sig, evalDomain dom)
 ;   NULL(fun) or NULL(PAIRP(fun)) => NIL
-;   first fun = function(Undef) => throwKeyedMsg("S2IS0023", [opName, dom])
+;   first fun = function(Undef) => throw_msg("S2IS0023",
+;         '"The function %1b is not implemented in %2bp .", [opName, dom])
 ;   binVal :=
 ;     $genValue => wrap fun
 ;     fun
@@ -2208,61 +2231,75 @@
 ;   putModeSet(op,[m])
 
 (DEFUN |findUniqueOpInDomain| (|op| |opName| |dom|)
-  (PROG (|mmList| |target| |mm| |sig| |slot| |fun| |binVal| |m|)
+  (PROG (|l1| |mmList| |target| |mm| |sig| |slot| |fun| |binVal| |m|)
     (RETURN
      (PROGN
       (SETQ |mmList|
-              (ASSQ |opName| (|getOperationAlistFromLisplib| (CAR |dom|))))
-      (SETQ |mmList| (|subCopy| |mmList| (|constructSubst| |dom|)))
-      (COND ((NULL |mmList|) (|throwKeyedMsg| 'S2IS0021 (LIST |opName| |dom|)))
-            (#1='T
-             (PROGN
-              (SETQ |mmList| (CDR |mmList|))
-              (COND
-               ((SETQ |target| (|getTarget| |op|))
-                (SETQ |mmList|
-                        ((LAMBDA (|bfVar#46| |bfVar#45| |mm|)
-                           (LOOP
-                            (COND
-                             ((OR (ATOM |bfVar#45|)
-                                  (PROGN (SETQ |mm| (CAR |bfVar#45|)) NIL))
-                              (RETURN (NREVERSE |bfVar#46|)))
-                             (#1#
-                              (AND (CONSP |mm|)
-                                   (EQUAL (CAR |mm|) (CDR |target|))
-                                   (SETQ |bfVar#46| (CONS |mm| |bfVar#46|)))))
-                            (SETQ |bfVar#45| (CDR |bfVar#45|))))
-                         NIL |mmList| NIL))
-                (COND
-                 ((NULL |mmList|)
-                  (|throwKeyedMsg| 'S2IS0061
-                   (LIST |opName| |target| |dom|))))))
-              (COND
-               ((< 1 (LENGTH |mmList|))
-                (SETQ |mm| (|selectMostGeneralMm| |mmList|))
-                (|sayKeyedMsg| 'S2IS0022
-                 (LIST |opName| |dom| (CONS '|Mapping| (CAR |mm|)))))
-               (#1# (SETQ |mm| (CAR |mmList|))))
-              (SETQ |sig| (CAR |mm|))
-              (SETQ |slot| (CADR |mm|))
-              (SETQ |fun|
-                      (COND
-                       (|$genValue|
-                        (|compiledLookupCheck| |opName| |sig|
-                         (|evalDomain| |dom|)))
-                       (#1#
-                        (|NRTcompileEvalForm| |opName| |sig|
-                         (|evalDomain| |dom|)))))
-              (COND ((OR (NULL |fun|) (NULL (CONSP |fun|))) NIL)
-                    ((EQUAL (CAR |fun|) #'|Undef|)
-                     (|throwKeyedMsg| 'S2IS0023 (LIST |opName| |dom|)))
-                    (#1#
+              (COND ((STRINGP |dom|) NIL)
+                    (#1='T
                      (PROGN
-                      (SETQ |binVal|
-                              (COND (|$genValue| (|wrap| |fun|)) (#1# |fun|)))
-                      (|putValue| |op|
-                       (|objNew| |binVal| (SETQ |m| (CONS '|Mapping| |sig|))))
-                      (|putModeSet| |op| (LIST |m|))))))))))))
+                      (SETQ |l1|
+                              (ASSQ |opName|
+                               (|getOperationAlistFromLisplib| (CAR |dom|))))
+                      (|subCopy| |l1| (|constructSubst| |dom|))))))
+      (COND
+       ((NULL |mmList|)
+        (|throw_msg| 'S2IS0021
+         "There is no operation named %1b in the domain or package %2bp ."
+         (LIST |opName| |dom|)))
+       (#1#
+        (PROGN
+         (SETQ |mmList| (CDR |mmList|))
+         (COND
+          ((SETQ |target| (|getTarget| |op|))
+           (SETQ |mmList|
+                   ((LAMBDA (|bfVar#46| |bfVar#45| |mm|)
+                      (LOOP
+                       (COND
+                        ((OR (ATOM |bfVar#45|)
+                             (PROGN (SETQ |mm| (CAR |bfVar#45|)) NIL))
+                         (RETURN (NREVERSE |bfVar#46|)))
+                        (#1#
+                         (AND (CONSP |mm|) (EQUAL (CAR |mm|) (CDR |target|))
+                              (SETQ |bfVar#46| (CONS |mm| |bfVar#46|)))))
+                       (SETQ |bfVar#45| (CDR |bfVar#45|))))
+                    NIL |mmList| NIL))
+           (COND
+            ((NULL |mmList|)
+             (|throw_msg| 'S2IS0061
+              (CONCAT
+               "There is no operation named %1b with type %2p in the domain"
+               " or package %3p.")
+              (LIST |opName| |target| |dom|))))))
+         (COND
+          ((< 1 (LENGTH |mmList|)) (SETQ |mm| (|selectMostGeneralMm| |mmList|))
+           (|say_msg| 'S2IS0022
+            (CONCAT
+             "There is more than one %1b in the domain or package %2bp ."
+             " The one being chosen has type %3bp .")
+            (LIST |opName| |dom| (CONS '|Mapping| (CAR |mm|)))))
+          (#1# (SETQ |mm| (CAR |mmList|))))
+         (SETQ |sig| (CAR |mm|))
+         (SETQ |slot| (CADR |mm|))
+         (SETQ |fun|
+                 (COND
+                  (|$genValue|
+                   (|compiledLookupCheck| |opName| |sig| (|evalDomain| |dom|)))
+                  (#1#
+                   (|NRTcompileEvalForm| |opName| |sig|
+                    (|evalDomain| |dom|)))))
+         (COND ((OR (NULL |fun|) (NULL (CONSP |fun|))) NIL)
+               ((EQUAL (CAR |fun|) #'|Undef|)
+                (|throw_msg| 'S2IS0023
+                 "The function %1b is not implemented in %2bp ."
+                 (LIST |opName| |dom|)))
+               (#1#
+                (PROGN
+                 (SETQ |binVal|
+                         (COND (|$genValue| (|wrap| |fun|)) (#1# |fun|)))
+                 (|putValue| |op|
+                  (|objNew| |binVal| (SETQ |m| (CONS '|Mapping| |sig|))))
+                 (|putModeSet| |op| (LIST |m|))))))))))))
 
 ; selectMostGeneralMm mmList ==
 ;   -- selects the modemap in mmList with arguments all the other
@@ -2351,6 +2388,7 @@
 ;   --   in the domain of computation dc
 ;   -- tar may be NIL (= unknown)
 ;   null isLegitimateMode(tar, nil, nil) => nil
+;   STRINGP(dc) => nil
 ;   dcName := first dc
 ;   member(dcName,'(Union Record Mapping Enumeration)) =>
 ;     -- First cut code that ignores args2, $Coerce and $SubDom
@@ -2401,7 +2439,7 @@
   (DECLARE (SPECIAL |$Coerce| |$SubDom|))
   (PROG (|dcName| |fun| |p| SL |q| |r|)
     (RETURN
-     (COND ((NULL (|isLegitimateMode| |tar| NIL NIL)) NIL)
+     (COND ((NULL (|isLegitimateMode| |tar| NIL NIL)) NIL) ((STRINGP |dc|) NIL)
            (#1='T
             (PROGN
              (SETQ |dcName| (CAR |dc|))
@@ -2508,21 +2546,28 @@
 ;   -- otherwise return the original list
 ;   null mms or null rest mms => mms
 ;   x := NIL
+;   o_sl := cons("%", TAKE(#rest(dc), $FormalMapVariableList))
+;   n_sl := cons(dc, rest(dc))
 ;   for mm in mms repeat
 ;     [sig,:.] := mm
-;     [res, :args] := SUBST(dc, "%", sig)
+;     [res, :args] := SUBLISLIS(n_sl, o_sl, sig)
 ;     args ~= args1 => nil
 ;     x := CONS(mm,x)
 ;   if x then x
 ;   else mms
 
 (DEFUN |allOrMatchingMms| (|mms| |args1| |tar| |dc|)
-  (PROG (|x| |sig| |LETTMP#1| |res| |args|)
+  (PROG (|x| |o_sl| |n_sl| |sig| |LETTMP#1| |res| |args|)
     (RETURN
      (COND ((OR (NULL |mms|) (NULL (CDR |mms|))) |mms|)
            (#1='T
             (PROGN
              (SETQ |x| NIL)
+             (SETQ |o_sl|
+                     (CONS '%
+                           (TAKE (LENGTH (CDR |dc|))
+                            |$FormalMapVariableList|)))
+             (SETQ |n_sl| (CONS |dc| (CDR |dc|)))
              ((LAMBDA (|bfVar#55| |mm|)
                 (LOOP
                  (COND
@@ -2532,7 +2577,7 @@
                   (#1#
                    (PROGN
                     (SETQ |sig| (CAR |mm|))
-                    (SETQ |LETTMP#1| (SUBST |dc| '% |sig|))
+                    (SETQ |LETTMP#1| (SUBLISLIS |n_sl| |o_sl| |sig|))
                     (SETQ |res| (CAR |LETTMP#1|))
                     (SETQ |args| (CDR |LETTMP#1|))
                     (COND ((NOT (EQUAL |args| |args1|)) NIL)
@@ -2590,7 +2635,8 @@
 ;     EQ(y, 'CONST) => [[CONS(dc,sig),osig, RTC]]
 ;     EQ(y, 'ASCONST) => [[CONS(dc, sig), osig, RTC]]
 ;     y is ['XLAM, :.] => [[CONS(dc,sig), y, RTC]]
-;     sayKeyedMsg("S2IF0006",[y])
+;     say_msg("S2IF0006", '"Skipping function with unimplemented form %1b .",
+;             [y])
 ;     NIL
 
 (DEFUN |findFunctionInDomain1| (|omm| |tar| |args1| |args2| SL)
@@ -2630,7 +2676,12 @@
                    (LIST (LIST (CONS |dc| |sig|) |osig| RTC)))
                   ((AND (CONSP |y|) (EQ (CAR |y|) 'XLAM))
                    (LIST (LIST (CONS |dc| |sig|) |y| RTC)))
-                  (#2# (PROGN (|sayKeyedMsg| 'S2IF0006 (LIST |y|)) NIL)))))))))
+                  (#2#
+                   (PROGN
+                    (|say_msg| 'S2IF0006
+                     "Skipping function with unimplemented form %1b ."
+                     (LIST |y|))
+                    NIL)))))))))
 
 ; findFunctionInCategory(op,dc,tar,args1,args2,$Coerce,$SubDom) ==
 ;   -- looks for a modemap for op with signature  args1 -> tar
@@ -2641,7 +2692,7 @@
 ;   fun:= NIL
 ;   makeFunc := get_oplist_maker(dcName) or
 ;       systemErrorHere '"findFunctionInCategory"
-;   [funlist, .] := FUNCALL(makeFunc, "%", dc, $CategoryFrame)
+;   funlist := FUNCALL(makeFunc, "%", dc)
 ;   -- get list of implementations and remove sharps
 ;   maxargs := -1
 ;   impls := nil
@@ -2670,8 +2721,8 @@
 (DEFUN |findFunctionInCategory|
        (|op| |dc| |tar| |args1| |args2| |$Coerce| |$SubDom|)
   (DECLARE (SPECIAL |$Coerce| |$SubDom|))
-  (PROG (|dcName| |fun| |makeFunc| |LETTMP#1| |funlist| |maxargs| |impls| |a|
-         |ISTMP#1| |b| |ISTMP#2| |d| |xargs| SL)
+  (PROG (|dcName| |fun| |makeFunc| |funlist| |maxargs| |impls| |a| |ISTMP#1|
+         |b| |ISTMP#2| |d| |xargs| SL)
     (RETURN
      (PROGN
       (SETQ |dcName| (CAR |dc|))
@@ -2682,8 +2733,7 @@
               (SETQ |makeFunc|
                       (OR (|get_oplist_maker| |dcName|)
                           (|systemErrorHere| "findFunctionInCategory")))
-              (SETQ |LETTMP#1| (FUNCALL |makeFunc| '% |dc| |$CategoryFrame|))
-              (SETQ |funlist| (CAR |LETTMP#1|))
+              (SETQ |funlist| (FUNCALL |makeFunc| '% |dc|))
               (SETQ |maxargs| (- 1))
               (SETQ |impls| NIL)
               ((LAMBDA (|bfVar#61| |bfVar#60|)
@@ -2776,8 +2826,7 @@
 ;     cond is ['has,dom,x] =>
 ;       hasCaty(dom,x,NIL) ~= 'failed
 ;     cond is ['not,cond1] => not matchMmCond cond1
-;     keyedSystemError("S2GE0016",
-;       ['"matchMmCond",'"unknown form of condition"])
+;     unexpected_error(['"matchMmCond", '"unknown form of condition"])
 
 (DEFUN |matchMmCond| (|cond|)
   (PROG (|$domPvar| |cond1| |x| |ISTMP#2| |dom| |ISTMP#1| |conds|)
@@ -2838,7 +2887,7 @@
                        (PROGN (SETQ |cond1| (CAR |ISTMP#1|)) #1#))))
             (NULL (|matchMmCond| |cond1|)))
            (#1#
-            (|keyedSystemError| 'S2GE0016
+            (|unexpected_error|
              (LIST "matchMmCond" "unknown form of condition")))))))))
 
 ; matchMmSig(mm, tar, args1, args2, rtcp) ==
@@ -3023,7 +3072,7 @@
 ;     name := object2String type
 ;     found := nil
 ;     for n in names while not found repeat
-;       STRPOS(n,name,0,NIL) => found := true
+;         search_str(n, name, 0) => found := true
 ;     if found
 ;       then good := cons(mm, good)
 ;       else bad := cons(mm,bad)
@@ -3067,7 +3116,7 @@
                                 (RETURN NIL))
                                (#1#
                                 (COND
-                                 ((STRPOS |n| |name| 0 NIL)
+                                 ((|search_str| |n| |name| 0)
                                   (IDENTITY (SETQ |found| T))))))
                               (SETQ |bfVar#73| (CDR |bfVar#73|))))
                            |names| NIL)
@@ -3715,8 +3764,8 @@
 
 ; evalMmStackInner(mmC) ==
 ;   mmC is ['OR,:args] =>
-;     keyedSystemError("S2GE0016",
-;       ['"evalMmStackInner",'"OR condition nested inside an AND"])
+;       unexpected_error(['"evalMmStackInner",
+;                         '"OR condition nested inside an AND"])
 ;   mmC is ['partial,:mmD] => evalMmStackInner mmD
 ;   mmC is ['ofCategory,pvar,cat] and cat is ['Join,:args] =>
 ;     [['ofCategory, pvar, c] for c in args]
@@ -3735,7 +3784,7 @@
      (COND
       ((AND (CONSP |mmC|) (EQ (CAR |mmC|) 'OR)
             (PROGN (SETQ |args| (CDR |mmC|)) #1='T))
-       (|keyedSystemError| 'S2GE0016
+       (|unexpected_error|
         (LIST "evalMmStackInner" "OR condition nested inside an AND")))
       ((AND (CONSP |mmC|) (EQ (CAR |mmC|) '|partial|)
             (PROGN (SETQ |mmD| (CDR |mmC|)) #1#))
@@ -4091,7 +4140,7 @@
 ;   t1 = t2 => arg2
 ;   obj1 := objNewWrap(arg1, t1)
 ;   obj2 := coerceInt(obj1, t2)
-;   null obj2 => throwKeyedMsgCannotCoerceWithValue(wrap arg1,t1,t2)
+;   null obj2 => throwMsgCannotCoerceWithValue(wrap arg1,t1,t2)
 ;   objValUnwrap obj2
 
 (DEFUN |makeConstrArg| (|arg1| |arg2| |t1| |t2| |cs|)
@@ -4119,8 +4168,7 @@
               (SETQ |obj2| (|coerceInt| |obj1| |t2|))
               (COND
                ((NULL |obj2|)
-                (|throwKeyedMsgCannotCoerceWithValue| (|wrap| |arg1|) |t1|
-                 |t2|))
+                (|throwMsgCannotCoerceWithValue| (|wrap| |arg1|) |t1| |t2|))
                (#1# (|objValUnwrap| |obj2|))))))))))
 
 ; evalMmDom(st) ==
@@ -4369,14 +4417,17 @@
 ;     dom := defaultTypeForCategory(c, SL)
 ;     null dom =>
 ;       op ~= 'coerce => 'failed -- evalMmCatLastChance(d,c,SL)
+;       -- FIXME: for 'coerce' this returns nil
 ;     null (p := ASSQ(d,$Subst)) =>
 ;       dom =>
 ;         NSL := [CONS(d,dom)]
-;       op ~= 'coerce => 'failed -- evalMmCatLastChance(d,c,SL)
+;       op ~= 'coerce => BREAK()
+;       BREAK()
 ;     if containsVars dom then dom := resolveTM(rest p, dom)
 ;     $Coerce and canCoerce(rest p, dom) =>
 ;       NSL := [CONS(d,dom)]
 ;     op ~= 'coerce => 'failed -- evalMmCatLastChance(d,c,SL)
+;     -- FIXME: for 'coerce' this returns nil
 ;   NSL
 
 (DEFUN |evalMmCat1| (|mmC| |op| SL)
@@ -4402,8 +4453,8 @@
            (COND ((NOT (EQ |op| '|coerce|)) (IDENTITY '|failed|))))
           ((NULL (SETQ |p| (ASSQ |d| |$Subst|)))
            (COND (|dom| (SETQ NSL (LIST (CONS |d| |dom|))))
-                 ((NOT (EQ |op| '|coerce|)) '|failed|)))
-          (#2='T
+                 ((NOT (EQ |op| '|coerce|)) (BREAK)) (#2='T (BREAK))))
+          (#2#
            (PROGN
             (COND
              ((|containsVars| |dom|)
@@ -4644,7 +4695,7 @@
 ;   -- 2. a list of pairs (argument to cat,condition) otherwise
 ;   -- then the substitution SL is augmented, or the result is 'failed
 ;   cat is ['CATEGORY,.,:y] => hasAttSig(d,subCopy(y,constructSubst d),SL)
-;   cat is ['SIGNATURE,foo,sig] =>
+;   cat is ['SIGNATURE, foo, sig, :.] =>
 ;     hasSig(d,foo,subCopy(sig,constructSubst d),SL)
 ;   cat is ['ATTRIBUTE,a] => BREAK()
 ;   x:= hasCat(opOf d,opOf cat) =>
@@ -4687,7 +4738,7 @@
                   (PROGN
                    (SETQ |foo| (CAR |ISTMP#1|))
                    (SETQ |ISTMP#2| (CDR |ISTMP#1|))
-                   (AND (CONSP |ISTMP#2|) (EQ (CDR |ISTMP#2|) NIL)
+                   (AND (CONSP |ISTMP#2|)
                         (PROGN (SETQ |sig| (CAR |ISTMP#2|)) #1#))))))
        (|hasSig| |d| |foo| (|subCopy| |sig| (|constructSubst| |d|)) SL))
       ((AND (CONSP |cat|) (EQ (CAR |cat|) 'ATTRIBUTE)
@@ -4884,8 +4935,7 @@
 ;       x is ['has,a,b] => hasCate(a,b,copy SL)
 ;       hasCaty1(x, copy SL)
 ;     S
-;   keyedSystemError("S2GE0016",
-;     ['"hasCaty1",'"unexpected condition from category table"])
+;   unexpected_error(['"hasCaty1", '"unexpected condition from category table"])
 
 (DEFUN |hasCaty1| (|cond| SL)
   (PROG (|$domPvar| S |args| |b| |ISTMP#2| |a| |ISTMP#1|)
@@ -4965,7 +5015,7 @@
                |args| NIL NIL)
               S))
             (#1#
-             (|keyedSystemError| 'S2GE0016
+             (|unexpected_error|
               (LIST "hasCaty1"
                     "unexpected condition from category table"))))))))
 
@@ -4974,9 +5024,8 @@
 ;   -- the result is an augmented SL, if d has x, 'failed otherwise
 ;   for y in x until SL='failed repeat SL:=
 ;     y is ['ATTRIBUTE,a] => BREAK()
-;     y is ['SIGNATURE,foo,s] => hasSig(d,foo,s,SL)
-;     keyedSystemError("S2GE0016",
-;       ['"hasAttSig",'"unexpected form of unnamed category"])
+;     y is ['SIGNATURE, foo, s, :.] => hasSig(d, foo, s, SL)
+;     unexpected_error(['"hasAttSig", '"unexpected form of unnamed category"])
 ;   SL
 
 (DEFUN |hasAttSig| (|d| |x| SL)
@@ -5006,13 +5055,12 @@
                                   (SETQ |foo| (CAR |ISTMP#1|))
                                   (SETQ |ISTMP#2| (CDR |ISTMP#1|))
                                   (AND (CONSP |ISTMP#2|)
-                                       (EQ (CDR |ISTMP#2|) NIL)
                                        (PROGN
                                         (SETQ |s| (CAR |ISTMP#2|))
                                         #1#))))))
                       (|hasSig| |d| |foo| |s| SL))
                      (#1#
-                      (|keyedSystemError| 'S2GE0016
+                      (|unexpected_error|
                        (LIST "hasAttSig"
                              "unexpected form of unnamed category")))))))
           (SETQ |bfVar#142| (CDR |bfVar#142|))
@@ -5028,8 +5076,7 @@
 ;       atom cls => copy SL
 ;       cls is ['has,a,b] =>
 ;         hasCate(subCopy(a,S0),subCopy(b,S0),copy SL)
-;       keyedSystemError("S2GE0016",
-;         ['"hasSigAnd",'"unexpected condition for signature"])
+;       unexpected_error(['"hasSigAnd", '"unexpected condition for signature"])
 ;     if SA = 'failed then dead := true
 ;   SA
 
@@ -5064,7 +5111,7 @@
                             (|hasCate| (|subCopy| |a| S0) (|subCopy| |b| S0)
                              (COPY SL)))
                            (#1#
-                            (|keyedSystemError| 'S2GE0016
+                            (|unexpected_error|
                              (LIST "hasSigAnd"
                                    "unexpected condition for signature")))))
              (COND ((EQ SA '|failed|) (SETQ |dead| T))))))
@@ -5082,8 +5129,7 @@
 ;         hasCate(subCopy(a,S0),subCopy(b,S0),copy SL)
 ;       cls is ['AND,:andCls] or cls is ['and,:andCls] =>
 ;         hasSigAnd(andCls, S0, SL)
-;       keyedSystemError("S2GE0016",
-;         ['"hasSigOr",'"unexpected condition for signature"])
+;       unexpected_error(['"hasSigOr", '"unexpected condition for signature"])
 ;     if SA ~= 'failed then found := true
 ;   SA
 
@@ -5124,7 +5170,7 @@
                                   (PROGN (SETQ |andCls| (CDR |cls|)) #1#)))
                             (|hasSigAnd| |andCls| S0 SL))
                            (#1#
-                            (|keyedSystemError| 'S2GE0016
+                            (|unexpected_error|
                              (LIST "hasSigOr"
                                    "unexpected condition for signature")))))
              (COND ((NOT (EQ SA '|failed|)) (SETQ |found| T))))))
@@ -5136,6 +5182,10 @@
 ; hasSig(dom,foo,sig,SL) ==
 ;   -- tests whether domain dom has function foo with signature sig
 ;   -- under substitution SL
+;   foo :=
+;       foo = 0 => "0"
+;       foo = 1 => "1"
+;       foo
 ;   $domPvar: local := nil
 ;   fun := constructor? first dom =>
 ;     S0:= constructSubst dom
@@ -5149,8 +5199,7 @@
 ;             hasSigAnd(andCls, S0, SL)
 ;           cond is ['OR,:orCls] or cond is ['or,:orCls] =>
 ;             hasSigOr(orCls, S0, SL)
-;           keyedSystemError("S2GE0016",
-;              ['"hasSig",'"unexpected condition for signature"])
+;           unexpected_error(['"hasSig", '"unexpected condition for signature"])
 ;         not (S='failed) => S:= unifyStruct(subCopy(x,S0),sig,S)
 ;       S
 ;     'failed
@@ -5162,6 +5211,8 @@
     (DECLARE (SPECIAL |$domPvar|))
     (RETURN
      (PROGN
+      (SETQ |foo|
+              (COND ((EQL |foo| 0) '|0|) ((EQL |foo| 1) '|1|) (#1='T |foo|)))
       (SETQ |$domPvar| NIL)
       (COND
        ((SETQ |fun| (|constructor?| (CAR |dom|)))
@@ -5177,7 +5228,7 @@
                       (PROGN (SETQ |bfVar#147| (CAR |bfVar#148|)) NIL)
                       |bfVar#149|)
                   (RETURN NIL))
-                 (#1='T
+                 (#1#
                   (AND (CONSP |bfVar#147|)
                        (PROGN
                         (SETQ |x| (CAR |bfVar#147|))
@@ -5238,7 +5289,7 @@
                                               #1#)))
                                        (|hasSigOr| |orCls| S0 SL))
                                       (#1#
-                                       (|keyedSystemError| 'S2GE0016
+                                       (|unexpected_error|
                                         (LIST "hasSig"
                                               "unexpected condition for signature")))))
                         (COND
@@ -5259,8 +5310,7 @@
 ;   cond is ['AND,:l] =>
 ;     and/[(SL:= hasCatExpression(x,SL)) ~= 'failed for x in l] => SL
 ;   cond is ['has,a,b] => hasCate(a,b,SL)
-;   keyedSystemError("S2GE0016",
-;     ['"hasSig",'"unexpected condition for attribute"])
+;   unexpected_error(['"hasSig", '"unexpected condition for attribute"])
 
 (DEFUN |hasCatExpression| (|cond| SL)
   (PROG (|l| |y| |ISTMP#1| |a| |ISTMP#2| |b|)
@@ -5312,7 +5362,7 @@
                         (PROGN (SETQ |b| (CAR |ISTMP#2|)) #1#))))))
        (|hasCate| |a| |b| SL))
       (#1#
-       (|keyedSystemError| 'S2GE0016
+       (|unexpected_error|
         (LIST "hasSig" "unexpected condition for attribute")))))))
 
 ; unifyStruct(s1,s2,SL) ==
@@ -5688,6 +5738,8 @@
 ;   cat := subCopy(cat, SL)
 ;   c := first cat
 ;   d := get_database(c, 'DEFAULTDOMAIN)
+;   -- FIXME: this assumes that arguments of default domain are
+;   -- the same as arguments of the category
 ;   d => [d, :rest cat]
 ;   cat is [c] =>
 ;     c = 'Field => $RationalNumber

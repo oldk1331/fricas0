@@ -1,16 +1,16 @@
 
-(PUT '|MAPHACK2;arg1;ACA;1| '|SPADreplace| '(XLAM (|a| |c|) |a|)) 
+(MAKEPROP '|MAPHACK2;arg1;ACA;1| '|SPADreplace| '(XLAM (|a| |c|) |a|)) 
 
 (SDEFUN |MAPHACK2;arg1;ACA;1| ((|a| (A)) (|c| (C)) (% (A))) |a|) 
 
-(PUT '|MAPHACK2;arg2;A2C;2| '|SPADreplace| '(XLAM (|a| |c|) |c|)) 
+(MAKEPROP '|MAPHACK2;arg2;A2C;2| '|SPADreplace| '(XLAM (|a| |c|) |c|)) 
 
 (SDEFUN |MAPHACK2;arg2;A2C;2| ((|a| (A)) (|c| (C)) (% (C))) |c|) 
 
 (DECLAIM (NOTINLINE |MappingPackageInternalHacks2;|)) 
 
 (DEFUN |MappingPackageInternalHacks2;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))

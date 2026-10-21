@@ -2,8 +2,8 @@
 (SDEFUN |NTPOLFN;cyclotomic;Nni2R;1|
         ((|k| (|NonNegativeInteger|)) (|x| (R)) (% (R)))
         (SPROG
-         ((|r| (R)) (|p| (|SparseUnivariatePolynomial| (|Integer|)))
-          (|c| (|Integer|)) (|d| (|NonNegativeInteger|)))
+         ((|d| (|NonNegativeInteger|)) (|c| (|Integer|))
+          (|p| (|SparseUnivariatePolynomial| (|Integer|))) (|r| (R)))
          (SEQ (LETT |p| (SPADCALL |k| (QREFELT % 10)))
               (LETT |r| (|spadConstant| % 11))
               (SEQ G190
@@ -25,9 +25,9 @@
 (SDEFUN |NTPOLFN;eulerE;Nni2R;2|
         ((|k| (|NonNegativeInteger|)) (|x| (R)) (% (R)))
         (SPROG
-         ((|r| (R))
+         ((|d| (|NonNegativeInteger|)) (|c| (|Fraction| (|Integer|)))
           (|p| (|SparseUnivariatePolynomial| (|Fraction| (|Integer|))))
-          (|c| (|Fraction| (|Integer|))) (|d| (|NonNegativeInteger|)))
+          (|r| (R)))
          (SEQ (LETT |p| (SPADCALL |k| (QREFELT % 24)))
               (LETT |r| (|spadConstant| % 11))
               (SEQ G190
@@ -49,9 +49,9 @@
 (SDEFUN |NTPOLFN;bernoulliB;Nni2R;3|
         ((|k| (|NonNegativeInteger|)) (|x| (R)) (% (R)))
         (SPROG
-         ((|r| (R))
+         ((|d| (|NonNegativeInteger|)) (|c| (|Fraction| (|Integer|)))
           (|p| (|SparseUnivariatePolynomial| (|Fraction| (|Integer|))))
-          (|c| (|Fraction| (|Integer|))) (|d| (|NonNegativeInteger|)))
+          (|r| (R)))
          (SEQ (LETT |p| (SPADCALL |k| (QREFELT % 33)))
               (LETT |r| (|spadConstant| % 11))
               (SEQ G190
@@ -73,7 +73,7 @@
 (DECLAIM (NOTINLINE |NumberTheoreticPolynomialFunctions;|)) 
 
 (DEFUN |NumberTheoreticPolynomialFunctions;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|NumberTheoreticPolynomialFunctions| DV$1))
@@ -126,12 +126,11 @@
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|)
               (|SparseUnivariatePolynomial| 8) (|Integer|)
-              (|PolynomialNumberTheoryFunctions|) (0 . |cyclotomic|)
-              (5 . |Zero|) (9 . |Zero|) (|Boolean|) (13 . ~=)
-              (|NonNegativeInteger|) (19 . |degree|)
-              (24 . |leadingCoefficient|) (29 . |reductum|) (34 . ^) (40 . *)
-              (46 . +) |NTPOLFN;cyclotomic;Nni2R;1|
-              (|SparseUnivariatePolynomial| 28) (52 . |euler|) (57 . |Zero|)
+              (|PolynomialNumberTheoryFunctions|) (0 . |cyclotomic|) (5 . |0|)
+              (9 . |0|) (|Boolean|) (13 . ~=) (|NonNegativeInteger|)
+              (19 . |degree|) (24 . |leadingCoefficient|) (29 . |reductum|)
+              (34 . ^) (40 . *) (46 . +) |NTPOLFN;cyclotomic;Nni2R;1|
+              (|SparseUnivariatePolynomial| 28) (52 . |euler|) (57 . |0|)
               (61 . ~=) (67 . |degree|) (|Fraction| 8)
               (72 . |leadingCoefficient|) (77 . |reductum|) (82 . *)
               (88 . |eulerE|) (94 . |bernoulli|) (99 . |bernoulliB|))

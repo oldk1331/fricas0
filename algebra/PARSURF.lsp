@@ -1,5 +1,5 @@
 
-(PUT '|PARSURF;surface;3ComponentFunction%;1| '|SPADreplace| 'VECTOR) 
+(MAKEPROP '|PARSURF;surface;3ComponentFunction%;1| '|SPADreplace| 'VECTOR) 
 
 (SDEFUN |PARSURF;surface;3ComponentFunction%;1|
         ((|x| (|ComponentFunction|)) (|y| (|ComponentFunction|))
@@ -15,7 +15,7 @@
 (DECLAIM (NOTINLINE |ParametricSurface;|)) 
 
 (DEFUN |ParametricSurface;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|ParametricSurface| DV$1))

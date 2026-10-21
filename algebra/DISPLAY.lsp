@@ -18,7 +18,8 @@
                       (#1='T
                        (SEQ
                         (LETT |t|
-                              (SPADCALL (QUOTIENT2 |n| 2) |s| (QREFELT % 17)))
+                              (SPADCALL (|quotient_INT| |n| 2) |s|
+                                        (QREFELT % 17)))
                         (EXIT
                          (COND
                           ((ODDP |n|)
@@ -28,17 +29,18 @@
 (SDEFUN |DISPLAY;center0|
         ((|len| (|Integer|)) (|wid| (|Integer|)) (|fill| (|String|))
          (% (|Record| (|:| |lhs| (|String|)) (|:| |rhs| (|String|)))))
-        (SPROG ((|t| (|String|)) (|m| (|Integer|)))
+        (SPROG ((|m| (|Integer|)) (|t| (|String|)))
                (SEQ
                 (COND ((OR (< |wid| 1) (>= |len| |wid|)) (CONS "" ""))
                       ('T
-                       (SEQ (LETT |m| (QUOTIENT2 (- |wid| |len|) 2))
+                       (SEQ (LETT |m| (|quotient_INT| (- |wid| |len|) 2))
                             (LETT |t|
                                   (SPADCALL
                                    (+ 1
-                                      (QUOTIENT2 |m|
-                                                 (SPADCALL |fill|
-                                                           (QREFELT % 20))))
+                                      (|quotient_INT| |m|
+                                                      (SPADCALL |fill|
+                                                                (QREFELT %
+                                                                         20))))
                                    |fill| (QREFELT % 17)))
                             (EXIT
                              (CONS
@@ -53,8 +55,8 @@
         ((|s| (|String|)) (|wid| (|Integer|)) (|fill| (|String|))
          (% (|String|)))
         (SPROG
-         ((|rec| (|Record| (|:| |lhs| (|String|)) (|:| |rhs| (|String|))))
-          (|len| (|Integer|)))
+         ((|len| (|Integer|))
+          (|rec| (|Record| (|:| |lhs| (|String|)) (|:| |rhs| (|String|)))))
          (SEQ
           (COND ((< |wid| 1) "")
                 (#1='T
@@ -76,8 +78,8 @@
         ((|l| (|List| (|String|))) (|wid| (|Integer|)) (|fill| (|String|))
          (% (|List| (|String|))))
         (SPROG
-         ((|rec| (|Record| (|:| |lhs| (|String|)) (|:| |rhs| (|String|))))
-          (|len| (|Integer|)))
+         ((|len| (|Integer|))
+          (|rec| (|Record| (|:| |lhs| (|String|)) (|:| |rhs| (|String|)))))
          (SEQ
           (COND ((< |wid| 1) (LIST ""))
                 (#1='T
@@ -101,13 +103,13 @@
 (SDEFUN |DISPLAY;say;LV;9| ((|l| (|List| (|String|))) (% (|Void|)))
         (SEQ (|sayBrightly| |l|) (EXIT (SPADCALL (QREFELT % 28))))) 
 
-(PUT '|DISPLAY;sayLength;SI;10| '|SPADreplace| 'QCSIZE) 
+(MAKEPROP '|DISPLAY;sayLength;SI;10| '|SPADreplace| 'QCSIZE) 
 
 (SDEFUN |DISPLAY;sayLength;SI;10| ((|s| (|String|)) (% (|Integer|)))
         (QCSIZE |s|)) 
 
 (SDEFUN |DISPLAY;sayLength;LI;11| ((|l| (|List| (|String|))) (% (|Integer|)))
-        (SPROG ((|sum| (|Integer|)) (#1=#:G24 NIL) (|s| NIL))
+        (SPROG ((|s| NIL) (#1=#:G25 NIL) (|sum| (|Integer|)))
                (SEQ (LETT |sum| 0)
                     (SEQ (LETT |s| NIL) (LETT #1# |l|) G190
                          (COND
@@ -145,7 +147,7 @@
 
 (DEFUN |DisplayPackage| ()
   (SPROG NIL
-         (PROG (#1=#:G26)
+         (PROG (#1=#:G27)
            (RETURN
             (COND
              ((LETT #1# (HGET |$ConstructorCache| '|DisplayPackage|))

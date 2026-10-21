@@ -37,11 +37,11 @@
              (EXIT (|spadConstant| % 10))))))
          (EXIT (|spadConstant| % 9)))) 
 
-(PUT '|FIELD-;euclideanSize;SNni;7| '|SPADreplace| '(XLAM (|x|) 0)) 
+(MAKEPROP '|FIELD-;euclideanSize;SNni;7| '|SPADreplace| '(XLAM (|x|) 0)) 
 
 (SDEFUN |FIELD-;euclideanSize;SNni;7| ((|x| (S)) (% (|NonNegativeInteger|))) 0) 
 
-(PUT '|FIELD-;prime?;SB;8| '|SPADreplace| '(XLAM (|x|) NIL)) 
+(MAKEPROP '|FIELD-;prime?;SB;8| '|SPADreplace| '(XLAM (|x|) NIL)) 
 
 (SDEFUN |FIELD-;prime?;SB;8| ((|x| (S)) (% (|Boolean|))) NIL) 
 
@@ -64,7 +64,7 @@
 (DECLAIM (NOTINLINE |Field&;|)) 
 
 (DEFUN |Field&| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|Field&| DV$1))
@@ -79,7 +79,7 @@
 (MAKEPROP '|Field&| '|infovec|
           (LIST
            '#(NIL NIL NIL NIL NIL NIL (|local| |#1|) (|Boolean|) (0 . |zero?|)
-              (5 . |One|) (9 . |Zero|) (13 . |inv|)
+              (5 . |1|) (9 . |0|) (13 . |inv|)
               (|Record| (|:| |unit| %) (|:| |canonical| %) (|:| |associate| %))
               |FIELD-;unitNormal;SR;1| |FIELD-;unitCanonical;2S;2|
               |FIELD-;associates?;2SB;3| (|Union| % '"failed") (18 . |recip|)

@@ -220,27 +220,27 @@
          (|cl| (|List| |Coef|)) (|yl| (|List| (|Stream| |Coef|)))
          (% (|List| (|Stream| |Coef|))))
         (SPROG
-         ((|yil| (|List| (|Stream| |Coef|))) (#1=#:G90 NIL) (|c| NIL)
-          (#2=#:G91 NIL) (|y| NIL) (#3=#:G89 NIL))
+         ((#1=#:G95 NIL) (|y| NIL) (#2=#:G97 NIL) (|c| NIL) (#3=#:G96 NIL)
+          (|yil| (|List| (|Stream| |Coef|))))
          (SEQ
           (LETT |yil|
                 (PROGN
-                 (LETT #3# NIL)
+                 (LETT #1# NIL)
                  (SEQ (LETT |y| NIL) (LETT #2# (CDR |yl|)) (LETT |c| NIL)
-                      (LETT #1# |cl|) G190
+                      (LETT #3# |cl|) G190
                       (COND
-                       ((OR (ATOM #1#) (PROGN (LETT |c| (CAR #1#)) NIL)
+                       ((OR (ATOM #3#) (PROGN (LETT |c| (CAR #3#)) NIL)
                             (ATOM #2#) (PROGN (LETT |y| (CAR #2#)) NIL))
                         (GO G191)))
                       (SEQ
                        (EXIT
-                        (LETT #3#
+                        (LETT #1#
                               (CONS
                                (SPADCALL |c| (CONS #'|UTSODE;odeNre!0| |y|)
                                          (QREFELT % 45))
-                               #3#))))
-                      (LETT #1# (PROG1 (CDR #1#) (LETT #2# (CDR #2#))))
-                      (GO G190) G191 (EXIT (NREVERSE #3#)))))
+                               #1#))))
+                      (LETT #3# (PROG1 (CDR #3#) (LETT #2# (CDR #2#))))
+                      (GO G190) G191 (EXIT (NREVERSE #1#)))))
           (EXIT (SPADCALL |yil| (LIST (SPADCALL |yil| |f|)) (QREFELT % 49)))))) 
 
 (SDEFUN |UTSODE;odeNre!0| ((|y| NIL)) |y|) 
@@ -271,28 +271,28 @@
           (|List| (|Mapping| (|Stream| |Coef|) (|List| (|Stream| |Coef|)))))
          (|c| (|List| (|Stream| |Coef|))) (% (|List| (|Stream| |Coef|))))
         (SPROG
-         ((#1=#:G112 NIL) (|csti| NIL) (#2=#:G113 NIL) (|lsfi| NIL)
-          (#3=#:G111 NIL))
+         ((#1=#:G118 NIL) (|lsfi| NIL) (#2=#:G120 NIL) (|csti| NIL)
+          (#3=#:G119 NIL))
          (SEQ
           (PROGN
-           (LETT #3# NIL)
+           (LETT #1# NIL)
            (SEQ (LETT |lsfi| NIL) (LETT #2# |lsf|) (LETT |csti| NIL)
-                (LETT #1# |cst|) G190
+                (LETT #3# |cst|) G190
                 (COND
-                 ((OR (ATOM #1#) (PROGN (LETT |csti| (CAR #1#)) NIL) (ATOM #2#)
+                 ((OR (ATOM #3#) (PROGN (LETT |csti| (CAR #3#)) NIL) (ATOM #2#)
                       (PROGN (LETT |lsfi| (CAR #2#)) NIL))
                   (GO G191)))
                 (SEQ
                  (EXIT
-                  (LETT #3#
+                  (LETT #1#
                         (CONS
                          (SPADCALL |csti|
                                    (CONS #'|UTSODE;simulre!0|
                                          (VECTOR |lsfi| |c| %))
                                    (QREFELT % 45))
-                         #3#))))
-                (LETT #1# (PROG1 (CDR #1#) (LETT #2# (CDR #2#)))) (GO G190)
-                G191 (EXIT (NREVERSE #3#))))))) 
+                         #1#))))
+                (LETT #3# (PROG1 (CDR #3#) (LETT #2# (CDR #2#)))) (GO G190)
+                G191 (EXIT (NREVERSE #1#))))))) 
 
 (SDEFUN |UTSODE;simulre!0| (($$ NIL))
         (PROG (% |c| |lsfi|)
@@ -328,30 +328,30 @@
         ((|cs| (|List| |Coef|)) (|lsts| (|List| (|Mapping| UTS (|List| UTS))))
          (% (|List| UTS)))
         (SPROG
-         ((|stSol| (|List| (|Stream| |Coef|))) (#1=#:G125 NIL) (|lst| NIL)
-          (#2=#:G124 NIL))
+         ((#1=#:G131 NIL) (|lst| NIL) (#2=#:G132 NIL)
+          (|stSol| (|List| (|Stream| |Coef|))))
          (SEQ
           (LETT |stSol|
                 (|UTSODE;iMpsode| |cs|
                  (PROGN
-                  (LETT #2# NIL)
-                  (SEQ (LETT |lst| NIL) (LETT #1# |lsts|) G190
+                  (LETT #1# NIL)
+                  (SEQ (LETT |lst| NIL) (LETT #2# |lsts|) G190
                        (COND
-                        ((OR (ATOM #1#) (PROGN (LETT |lst| (CAR #1#)) NIL))
+                        ((OR (ATOM #2#) (PROGN (LETT |lst| (CAR #2#)) NIL))
                          (GO G191)))
                        (SEQ
                         (EXIT
-                         (LETT #2#
-                               (CONS (SPADCALL |lst| (QREFELT % 24)) #2#))))
-                       (LETT #1# (CDR #1#)) (GO G190) G191
-                       (EXIT (NREVERSE #2#))))
+                         (LETT #1#
+                               (CONS (SPADCALL |lst| (QREFELT % 24)) #1#))))
+                       (LETT #2# (CDR #2#)) (GO G190) G191
+                       (EXIT (NREVERSE #1#))))
                  %))
           (EXIT (SPADCALL (ELT % 9) |stSol| (QREFELT % 21)))))) 
 
 (DECLAIM (NOTINLINE |UnivariateTaylorSeriesODESolver;|)) 
 
 (DEFUN |UnivariateTaylorSeriesODESolver;| (|#1| |#2|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$2 NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (DV$2 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT DV$2 (|devaluate| |#2|))
@@ -367,9 +367,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |UnivariateTaylorSeriesODESolver| (&REST #1=#:G126)
+(DEFUN |UnivariateTaylorSeriesODESolver| (&REST #1=#:G133)
   (SPROG NIL
-         (PROG (#2=#:G127)
+         (PROG (#2=#:G134)
            (RETURN
             (COND
              ((LETT #2#
@@ -406,7 +406,7 @@
               (85 . |lazyIntegrate|) |UTSODE;ode1;MCoefUTS;10| (91 . |deriv|)
               |UTSODE;ode2;M2CoefUTS;13| (96 . |concat|) (|Mapping| 19 19)
               (|Integer|) (102 . Y) (|List| 6) |UTSODE;ode;MLUTS;16|
-              (108 . |One|) (112 . |One|) (116 . |One|) (120 . |monom|)
+              (108 . |1|) (112 . |1|) (116 . |1|) (120 . |monom|)
               (126 . |concat|) (|List| 23) |UTSODE;mpsode;LLL;19|)
            '#(|stFuncN| 132 |stFunc2| 137 |stFunc1| 142 |ode2| 147 |ode1| 154
               |ode| 160 |mpsode| 166 |fixedPointExquo| 172)

@@ -1,33 +1,33 @@
 
 (SDEFUN |CARTEN2;reshape;LCtCt;1|
-        ((|l| (|List| T$)) (|s| (|CartesianTensor| |minix| |dim| S))
-         (% (|CartesianTensor| |minix| |dim| T$)))
+        ((|l| (|List| T)) (|s| (|CartesianTensor| |minix| |dim| S))
+         (% (|CartesianTensor| |minix| |dim| T)))
         (SPADCALL |l| (QREFELT % 12))) 
 
 (SDEFUN |CARTEN2;map;MCtCt;2|
-        ((|f| (|Mapping| T$ S)) (|s| (|CartesianTensor| |minix| |dim| S))
-         (% (|CartesianTensor| |minix| |dim| T$)))
-        (SPROG ((#1=#:G6 NIL) (|e| NIL) (#2=#:G5 NIL))
+        ((|f| (|Mapping| T S)) (|s| (|CartesianTensor| |minix| |dim| S))
+         (% (|CartesianTensor| |minix| |dim| T)))
+        (SPROG ((#1=#:G5 NIL) (|e| NIL) (#2=#:G6 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
-                  (LETT #2# NIL)
-                  (SEQ (LETT |e| NIL) (LETT #1# (SPADCALL |s| (QREFELT % 16)))
+                  (LETT #1# NIL)
+                  (SEQ (LETT |e| NIL) (LETT #2# (SPADCALL |s| (QREFELT % 16)))
                        G190
                        (COND
-                        ((OR (ATOM #1#) (PROGN (LETT |e| (CAR #1#)) NIL))
+                        ((OR (ATOM #2#) (PROGN (LETT |e| (CAR #2#)) NIL))
                          (GO G191)))
-                       (SEQ (EXIT (LETT #2# (CONS (SPADCALL |e| |f|) #2#))))
-                       (LETT #1# (CDR #1#)) (GO G190) G191
-                       (EXIT (NREVERSE #2#))))
+                       (SEQ (EXIT (LETT #1# (CONS (SPADCALL |e| |f|) #1#))))
+                       (LETT #2# (CDR #2#)) (GO G190) G191
+                       (EXIT (NREVERSE #1#))))
                  (QREFELT % 12))))) 
 
 (DECLAIM (NOTINLINE |CartesianTensorFunctions2;|)) 
 
 (DEFUN |CartesianTensorFunctions2;| (|#1| |#2| |#3| |#4|)
   (SPROG
-   ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$4 NIL) (DV$3 NIL) (DV$2 NIL)
-    (DV$1 NIL))
+   ((DV$1 NIL) (DV$2 NIL) (DV$3 NIL) (DV$4 NIL) (|dv$| NIL) (% NIL)
+    (|pv$| NIL))
    (PROGN
     (LETT DV$1 |#1|)
     (LETT DV$2 |#2|)
@@ -89,12 +89,12 @@
                                  ((|CartesianTensor| |#1| |#2| |#4|)
                                   (|List| |#4|)
                                   (|CartesianTensor| |#1| |#2| |#3|)))
-                                T)
+                                9)
                               '((|map|
                                  ((|CartesianTensor| |#1| |#2| |#4|)
                                   (|Mapping| |#4| |#3|)
                                   (|CartesianTensor| |#1| |#2| |#3|)))
-                                T))
+                                9))
                              (LIST) NIL NIL)))
                         (|makeByteWordVec2| 18
                                             '(1 11 0 10 12 1 13 15 0 16 2 0 11

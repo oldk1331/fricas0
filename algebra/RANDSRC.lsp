@@ -14,13 +14,13 @@
 
 (SDEFUN |RANDSRC;reseed;IV;3| ((|n| (|Integer|)) (% (|Void|)))
         (SEQ (SETELT % 7 (REM |n| (QREFELT % 6)))
-             (EXIT (SETELT % 8 (QUOTIENT2 |n| (QREFELT % 6)))))) 
+             (EXIT (SETELT % 8 (|quotient_INT| |n| (QREFELT % 6)))))) 
 
 (SDEFUN |RANDSRC;seed;I;4| ((% (|Integer|)))
         (+ (* (QREFELT % 8) (QREFELT % 6)) (QREFELT % 7))) 
 
 (SDEFUN |RANDSRC;randnum;2I;5| ((|n| (|Integer|)) (% (|Integer|)))
-        (QUOTIENT2 (* |n| (SPADCALL (QREFELT % 10))) (QREFELT % 6))) 
+        (|quotient_INT| (* |n| (SPADCALL (QREFELT % 10))) (QREFELT % 6))) 
 
 (DECLAIM (NOTINLINE |RandomNumberSource;|)) 
 

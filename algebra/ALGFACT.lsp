@@ -2,20 +2,20 @@
 (SDEFUN |ALGFACT;ker_lst|
         ((|la| (|List| (|AlgebraicNumber|)))
          (% (|List| (|Kernel| (|Expression| (|Integer|))))))
-        (SPROG ((#1=#:G12 NIL) (|c| NIL) (#2=#:G11 NIL))
+        (SPROG ((#1=#:G9 NIL) (|c| NIL) (#2=#:G10 NIL))
                (SEQ
                 (SPADCALL
                  (PROGN
-                  (LETT #2# NIL)
-                  (SEQ (LETT |c| NIL) (LETT #1# |la|) G190
+                  (LETT #1# NIL)
+                  (SEQ (LETT |c| NIL) (LETT #2# |la|) G190
                        (COND
-                        ((OR (ATOM #1#) (PROGN (LETT |c| (CAR #1#)) NIL))
+                        ((OR (ATOM #2#) (PROGN (LETT |c| (CAR #2#)) NIL))
                          (GO G191)))
                        (SEQ
                         (EXIT
-                         (LETT #2# (CONS (SPADCALL |c| (QREFELT % 9)) #2#))))
-                       (LETT #1# (CDR #1#)) (GO G190) G191
-                       (EXIT (NREVERSE #2#))))
+                         (LETT #1# (CONS (SPADCALL |c| (QREFELT % 9)) #1#))))
+                       (LETT #2# (CDR #2#)) (GO G190) G191
+                       (EXIT (NREVERSE #1#))))
                  (QREFELT % 12))))) 
 
 (SDEFUN |ALGFACT;liftpoly|
@@ -49,38 +49,38 @@
 
 (SDEFUN |ALGFACT;split;UPF;7| ((|p| (UP)) (% (|Factored| UP)))
         (SPROG
-         ((#1=#:G20 NIL) (#2=#:G19 #3=(|Factored| UP)) (#4=#:G21 #3#)
-          (#5=#:G24 NIL) (|fc| NIL) (|fp| (|Factored| UP)))
+         ((|fp| (|Factored| UP)) (|fc| NIL) (#1=#:G31 NIL)
+          (#2=#:G28 #3=(|Factored| UP)) (#4=#:G26 #3#) (#5=#:G27 NIL))
          (SEQ (LETT |fp| (SPADCALL |p| (QREFELT % 26)))
               (EXIT
                (SPADCALL (SPADCALL |fp| (QREFELT % 30))
                          (PROGN
-                          (LETT #1# NIL)
+                          (LETT #5# NIL)
                           (SEQ (LETT |fc| NIL)
-                               (LETT #5# (SPADCALL |fp| (QREFELT % 34))) G190
+                               (LETT #1# (SPADCALL |fp| (QREFELT % 34))) G190
                                (COND
-                                ((OR (ATOM #5#)
-                                     (PROGN (LETT |fc| (CAR #5#)) NIL))
+                                ((OR (ATOM #1#)
+                                     (PROGN (LETT |fc| (CAR #1#)) NIL))
                                  (GO G191)))
                                (SEQ
                                 (EXIT
                                  (PROGN
-                                  (LETT #4#
+                                  (LETT #2#
                                         (|ALGFACT;extend| (QVELT |fc| 1)
                                          (QVELT |fc| 2) %))
                                   (COND
-                                   (#1#
-                                    (LETT #2#
-                                          (SPADCALL #2# #4# (QREFELT % 35))))
+                                   (#5#
+                                    (LETT #4#
+                                          (SPADCALL #4# #2# (QREFELT % 35))))
                                    ('T
-                                    (PROGN (LETT #2# #4#) (LETT #1# 'T)))))))
-                               (LETT #5# (CDR #5#)) (GO G190) G191 (EXIT NIL))
-                          (COND (#1# #2#) ('T (|spadConstant| % 36))))
+                                    (PROGN (LETT #4# #2#) (LETT #5# 'T)))))))
+                               (LETT #1# (CDR #1#)) (GO G190) G191 (EXIT NIL))
+                          (COND (#5# #4#) ('T (|spadConstant| % 36))))
                          (QREFELT % 37)))))) 
 
 (SDEFUN |ALGFACT;extend|
         ((|p| (UP)) (|n| (|NonNegativeInteger|)) (% (|Factored| UP)))
-        (SPROG ((#1=#:G26 NIL) (|q| (UP)))
+        (SPROG ((|q| (UP)) (#1=#:G36 NIL))
                (SEQ
                 (COND
                  ((EQL (SPADCALL |p| (QREFELT % 40)) 1)
@@ -110,7 +110,7 @@
                               (QREFELT % 35))))))))) 
 
 (SDEFUN |ALGFACT;doublyTransitive?;UPB;9| ((|p| (UP)) (% (|Boolean|)))
-        (SPROG ((#1=#:G32 NIL))
+        (SPROG ((#1=#:G42 NIL))
                (COND
                 ((|ALGFACT;irred?| |p| %)
                  (|ALGFACT;irred?|
@@ -162,9 +162,29 @@
         ((|p| (UP)) (|l| (|List| #1=(|Kernel| (|Expression| (|Integer|)))))
          (% (|Factored| UP)))
         (SPROG
-         ((#2=#:G60 NIL) (#3=#:G59 #4=(|Factored| UP)) (#5=#:G61 #4#)
-          (#6=#:G69 NIL) (|fc| NIL) (|newalpha| (|AlgebraicNumber|))
-          (|fr| (|Factored| |ups|))
+         ((|dr|
+           (|Factored|
+            (|SparseUnivariatePolynomial| (|Fraction| (|Integer|)))))
+          (|dc| NIL) (#2=#:G81 NIL) (#3=#:G58 #4=(|Factored| UP))
+          (#5=#:G56 #4#) (#6=#:G57 NIL) (#7=#:G0 NIL) (#8=#:G82 NIL)
+          (#9=#:G62 #1#) (#10=#:G60 #1#) (#11=#:G61 NIL) (|alpha| #1#)
+          (|qe| (|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
+          (|q| (|SparseUnivariatePolynomial| (|AlgebraicNumber|)))
+          (|newl| (|List| (|Kernel| (|Expression| (|Integer|)))))
+          (|sae|
+           (|Join|
+            (|MonogenicAlgebra| #12=(|AlgebraicNumber|)
+                                #13=(|SparseUnivariatePolynomial|
+                                     (|AlgebraicNumber|)))
+            (CATEGORY |package|
+             (IF (|has| #12# (|Field|))
+                 (IF (|has| #12# (|PolynomialFactorizationExplicit|))
+                     (ATTRIBUTE (|PolynomialFactorizationExplicit|))
+                     |noBranch|)
+                 |noBranch|)
+             (IF (|has| #13# (|Hashable|))
+                 (ATTRIBUTE (|Hashable|))
+                 |noBranch|))))
           (|ups|
            (|Join| (|UnivariatePolynomialCategory| |sae|)
                    (CATEGORY |domain|
@@ -172,29 +192,8 @@
                     (IF (|has| |sae| (|Canonical|))
                         (ATTRIBUTE (|Canonical|))
                         |noBranch|))))
-          (|sae|
-           (|Join|
-            (|MonogenicAlgebra| #7=(|AlgebraicNumber|)
-                                #8=(|SparseUnivariatePolynomial|
-                                    (|AlgebraicNumber|)))
-            (CATEGORY |package|
-             (IF (|has| #7# (|Field|))
-                 (IF (|has| #7# (|PolynomialFactorizationExplicit|))
-                     (ATTRIBUTE (|PolynomialFactorizationExplicit|))
-                     |noBranch|)
-                 |noBranch|)
-             (IF (|has| #8# (|Hashable|))
-                 (ATTRIBUTE (|Hashable|))
-                 |noBranch|))))
-          (|newl| (|List| (|Kernel| (|Expression| (|Integer|)))))
-          (|q| (|SparseUnivariatePolynomial| (|AlgebraicNumber|)))
-          (|qe| (|SparseUnivariatePolynomial| (|Expression| (|Integer|))))
-          (|alpha| #1#) (#9=#:G48 NIL) (#10=#:G47 #1#) (#11=#:G49 #1#)
-          (#12=#:G68 NIL) (#13=#:G0 NIL) (#14=#:G44 NIL) (#15=#:G43 #4#)
-          (#16=#:G45 #4#) (#17=#:G67 NIL) (|dc| NIL)
-          (|dr|
-           (|Factored|
-            (|SparseUnivariatePolynomial| (|Fraction| (|Integer|))))))
+          (|fr| (|Factored| |ups|)) (|newalpha| (|AlgebraicNumber|)) (|fc| NIL)
+          (#14=#:G83 NIL) (#15=#:G75 #4#) (#16=#:G73 #4#) (#17=#:G74 NIL))
          (SEQ
           (COND
            ((EQL (SPADCALL |p| (QREFELT % 40)) 1)
@@ -205,28 +204,27 @@
              (EXIT
               (SPADCALL (|ALGFACT;liftpoly| (SPADCALL |dr| (QREFELT % 67)) %)
                         (PROGN
-                         (LETT #14# NIL)
+                         (LETT #6# NIL)
                          (SEQ (LETT |dc| NIL)
-                              (LETT #17# (SPADCALL |dr| (QREFELT % 70))) G190
+                              (LETT #2# (SPADCALL |dr| (QREFELT % 70))) G190
                               (COND
-                               ((OR (ATOM #17#)
-                                    (PROGN (LETT |dc| (CAR #17#)) NIL))
+                               ((OR (ATOM #2#)
+                                    (PROGN (LETT |dc| (CAR #2#)) NIL))
                                 (GO G191)))
                               (SEQ
                                (EXIT
                                 (PROGN
-                                 (LETT #16#
+                                 (LETT #3#
                                        (SPADCALL
                                         (|ALGFACT;liftpoly| (QVELT |dc| 1) %)
                                         (QVELT |dc| 2) (QREFELT % 41)))
                                  (COND
-                                  (#14#
-                                   (LETT #15#
-                                         (SPADCALL #15# #16# (QREFELT % 35))))
-                                  ('T
-                                   (PROGN (LETT #15# #16#) (LETT #14# 'T)))))))
-                              (LETT #17# (CDR #17#)) (GO G190) G191 (EXIT NIL))
-                         (COND (#14# #15#) (#18='T (|spadConstant| % 36))))
+                                  (#6#
+                                   (LETT #5#
+                                         (SPADCALL #5# #3# (QREFELT % 35))))
+                                  ('T (PROGN (LETT #5# #3#) (LETT #6# 'T)))))))
+                              (LETT #2# (CDR #2#)) (GO G190) G191 (EXIT NIL))
+                         (COND (#6# #5#) (#18='T (|spadConstant| % 36))))
                         (QREFELT % 37)))))
            (#18#
             (SEQ
@@ -236,30 +234,28 @@
                           (SPADCALL
                            (LETT |alpha|
                                  (PROGN
-                                  (LETT #9# NIL)
-                                  (SEQ (LETT #13# NIL) (LETT #12# |l|) G190
+                                  (LETT #11# NIL)
+                                  (SEQ (LETT #7# NIL) (LETT #8# |l|) G190
                                        (COND
-                                        ((OR (ATOM #12#)
-                                             (PROGN
-                                              (LETT #13# (CAR #12#))
-                                              NIL))
+                                        ((OR (ATOM #8#)
+                                             (PROGN (LETT #7# (CAR #8#)) NIL))
                                          (GO G191)))
                                        (SEQ
                                         (EXIT
                                          (PROGN
-                                          (LETT #11# #13#)
+                                          (LETT #9# #7#)
                                           (COND
-                                           (#9#
+                                           (#11#
                                             (LETT #10#
-                                                  (SPADCALL #10# #11#
+                                                  (SPADCALL #10# #9#
                                                             (QREFELT % 71))))
                                            ('T
                                             (PROGN
-                                             (LETT #10# #11#)
-                                             (LETT #9# 'T)))))))
-                                       (LETT #12# (CDR #12#)) (GO G190) G191
+                                             (LETT #10# #9#)
+                                             (LETT #11# 'T)))))))
+                                       (LETT #8# (CDR #8#)) (GO G190) G191
                                        (EXIT NIL))
-                                  (COND (#9# #10#)
+                                  (COND (#11# #10#)
                                         (#18# (|IdentityError| '|max|)))))
                            (QREFELT % 73)))
                     %))
@@ -331,9 +327,9 @@
                                                  (|AlgebraicNumber|)
                                                  (ELT % 6))))
                (PROGN
-                (LETT #2# NIL)
+                (LETT #17# NIL)
                 (SEQ (LETT |fc| NIL)
-                     (LETT #6#
+                     (LETT #14#
                            (SPADCALL |fr|
                                      (|compiledLookupCheck| '|factorList|
                                                             (LIST
@@ -361,12 +357,12 @@
                                                              |ups|))))
                      G190
                      (COND
-                      ((OR (ATOM #6#) (PROGN (LETT |fc| (CAR #6#)) NIL))
+                      ((OR (ATOM #14#) (PROGN (LETT |fc| (CAR #14#)) NIL))
                        (GO G191)))
                      (SEQ
                       (EXIT
                        (PROGN
-                        (LETT #5#
+                        (LETT #15#
                               (SPADCALL
                                (SPADCALL
                                 (CONS #'|ALGFACT;fact!4|
@@ -387,10 +383,10 @@
                                                         (ELT % 6))))
                                (QVELT |fc| 2) (QREFELT % 41)))
                         (COND
-                         (#2# (LETT #3# (SPADCALL #3# #5# (QREFELT % 35))))
-                         ('T (PROGN (LETT #3# #5#) (LETT #2# 'T)))))))
-                     (LETT #6# (CDR #6#)) (GO G190) G191 (EXIT NIL))
-                (COND (#2# #3#) (#18# (|spadConstant| % 36))))
+                         (#17# (LETT #16# (SPADCALL #16# #15# (QREFELT % 35))))
+                         ('T (PROGN (LETT #16# #15#) (LETT #17# 'T)))))))
+                     (LETT #14# (CDR #14#)) (GO G190) G191 (EXIT NIL))
+                (COND (#17# #16#) (#18# (|spadConstant| % 36))))
                (QREFELT % 37))))))))) 
 
 (SDEFUN |ALGFACT;fact!4| ((|x| NIL) ($$ NIL))
@@ -460,7 +456,7 @@
 (DECLAIM (NOTINLINE |AlgFactor;|)) 
 
 (DEFUN |AlgFactor;| (|#1|)
-  (SPROG ((|pv$| NIL) (% NIL) (|dv$| NIL) (DV$1 NIL))
+  (SPROG ((DV$1 NIL) (|dv$| NIL) (% NIL) (|pv$| NIL))
          (PROGN
           (LETT DV$1 (|devaluate| |#1|))
           (LETT |dv$| (LIST '|AlgFactor| DV$1))
@@ -473,9 +469,9 @@
           (SETF |pv$| (QREFELT % 3))
           %))) 
 
-(DEFUN |AlgFactor| (#1=#:G70)
+(DEFUN |AlgFactor| (#1=#:G84)
   (SPROG NIL
-         (PROG (#2=#:G71)
+         (PROG (#2=#:G85)
            (RETURN
             (COND
              ((LETT #2#
@@ -503,9 +499,9 @@
               |ALGFACT;factor;UPLF;6| (48 . |unit|)
               (|Union| '"nil" '"sqfr" '"irred" '"prime")
               (|Record| (|:| |flag| 31) (|:| |factor| 6) (|:| |exponent| 39))
-              (|List| 32) (53 . |factorList|) (58 . *) (64 . |One|) (68 . *)
+              (|List| 32) (53 . |factorList|) (58 . *) (64 . |1|) (68 . *)
               |ALGFACT;split;UPF;7| (|NonNegativeInteger|) (74 . |degree|)
-              (79 . |primeFactor|) (85 . |One|) (89 . |One|) (93 . |monomial|)
+              (79 . |primeFactor|) (85 . |1|) (89 . |1|) (93 . |monomial|)
               (|SparseUnivariatePolynomial| %) (99 . |zeroOf|) (104 . |coerce|)
               (109 . -) (|Union| % '"failed") (115 . |exquo|) (121 . ^)
               (|Boolean|) |ALGFACT;doublyTransitive?;UPB;9| (127 . |size?|)

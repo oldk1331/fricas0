@@ -687,7 +687,7 @@
 ; constructorCategory (title is [op,:.]) ==
 ;   constructorFunction := get_oplist_maker(op) or
 ;               systemErrorHere '"constructorCategory"
-;   [funlist, .] := FUNCALL(constructorFunction, "%", title, $CategoryFrame)
+;   funlist := FUNCALL(constructorFunction, "%", title)
 ;   oplist:= [[[a,b],true,c] for [a,b,c] in funlist]
 ;   cat:=
 ;       JoinInner([SetCategory(), mkCategory(oplist, nil, nil, nil)])
@@ -695,17 +695,15 @@
 ;   cat
 
 (DEFUN |constructorCategory| (|title|)
-  (PROG (|op| |constructorFunction| |LETTMP#1| |funlist| |a| |ISTMP#1| |b|
-         |ISTMP#2| |c| |oplist| |cat|)
+  (PROG (|op| |constructorFunction| |funlist| |a| |ISTMP#1| |b| |ISTMP#2| |c|
+         |oplist| |cat|)
     (RETURN
      (PROGN
       (SETQ |op| (CAR |title|))
       (SETQ |constructorFunction|
               (OR (|get_oplist_maker| |op|)
                   (|systemErrorHere| "constructorCategory")))
-      (SETQ |LETTMP#1|
-              (FUNCALL |constructorFunction| '% |title| |$CategoryFrame|))
-      (SETQ |funlist| (CAR |LETTMP#1|))
+      (SETQ |funlist| (FUNCALL |constructorFunction| '% |title|))
       (SETQ |oplist|
               ((LAMBDA (|bfVar#23| |bfVar#22| |bfVar#21|)
                  (LOOP
@@ -735,15 +733,15 @@
       (SETF (ELT |cat| 0) |title|)
       |cat|))))
 
-; mkMappingFunList(nam,mapForm,e) ==
+; mkMappingFunList(nam, mapForm) ==
 ;   dc := GENSYM()
 ;   sigFunAlist:=
 ;     [['_=,[['Boolean],nam ,nam],['ELT,dc,6]],
 ;      ['_~_=, [['Boolean], nam, nam], ['ELT, dc, 9]],
 ;        ['coerce, [$OutputForm, nam], ['ELT, dc, 7]]]
-;   [substitute(nam, dc, substitute("%", 'Rep, sigFunAlist)), e]
+;   substitute(nam, dc, substitute("%", 'Rep, sigFunAlist))
 
-(DEFUN |mkMappingFunList| (|nam| |mapForm| |e|)
+(DEFUN |mkMappingFunList| (|nam| |mapForm|)
   (PROG (|dc| |sigFunAlist|)
     (RETURN
      (PROGN
@@ -755,10 +753,9 @@
                (LIST '~= (LIST (LIST '|Boolean|) |nam| |nam|)
                      (LIST 'ELT |dc| 9))
                (LIST '|coerce| (LIST |$OutputForm| |nam|) (LIST 'ELT |dc| 7))))
-      (LIST (|substitute| |nam| |dc| (|substitute| '% '|Rep| |sigFunAlist|))
-            |e|)))))
+      (|substitute| |nam| |dc| (|substitute| '% '|Rep| |sigFunAlist|))))))
 
-; mkRecordFunList(nam,['Record,:Alist],e) ==
+; mkRecordFunList(nam, ['Record, :Alist]) ==
 ;   len:= #Alist
 ;
 ;   dc := GENSYM()
@@ -777,9 +774,9 @@
 ;               for i in 0.. for [.,a,A] in Alist],:
 ;                 [['copy,[nam,nam],['XLAM,["$1"],['RECORDCOPY,
 ;                   "$1",len]]]]]
-;   [substitute(nam, dc, substitute("%", 'Rep, sigFunAlist)), e]
+;   substitute(nam, dc, substitute("%", 'Rep, sigFunAlist))
 
-(DEFUN |mkRecordFunList| (|nam| |bfVar#33| |e|)
+(DEFUN |mkRecordFunList| (|nam| |bfVar#33|)
   (PROG (|Alist| |len| |dc| |ISTMP#1| |a| |ISTMP#2| A |sigFunAlist|)
     (RETURN
      (PROGN
@@ -889,10 +886,9 @@
                      (LIST '|copy| (LIST |nam| |nam|)
                            (LIST 'XLAM (LIST '$1)
                                  (LIST 'RECORDCOPY '$1 |len|)))))))))))
-      (LIST (|substitute| |nam| |dc| (|substitute| '% '|Rep| |sigFunAlist|))
-            |e|)))))
+      (|substitute| |nam| |dc| (|substitute| '% '|Rep| |sigFunAlist|))))))
 
-; mkNewUnionFunList(name,form is ['Union,:listOfEntries],e) ==
+; mkNewUnionFunList(name, form is ['Union, :listOfEntries]) ==
 ;   dc := name
 ;   if name = 'Rep then name := '%
 ;   --2. create coercions from subtypes to subUnion
@@ -913,9 +909,9 @@
 ;                         ['check_union2, ['QEQCAR, "#1", i], type, form, "#1"]]]
 ;                     ['XLAM,["#1"],['PROG2,['LET,gg,"#1"],['QCDR,gg],
 ;                       ['check_union2, ['QEQCAR, gg, i], type, form, gg]]]
-;   [cList,e]
+;   cList
 
-(DEFUN |mkNewUnionFunList| (|name| |form| |e|)
+(DEFUN |mkNewUnionFunList| (|name| |form|)
   (PROG (|listOfEntries| |dc| |ISTMP#1| |tag| |ISTMP#2| |type| |gg| |cList|)
     (RETURN
      (PROGN
@@ -1002,9 +998,9 @@
                      (SETQ |bfVar#35| (CDR |bfVar#35|))
                      (SETQ |i| (+ |i| 1))))
                   NIL |listOfEntries| NIL 0)))))
-      (LIST |cList| |e|)))))
+      |cList|))))
 
-; mkEnumerationFunList(nam,['Enumeration,:SL],e) ==
+; mkEnumerationFunList(nam, ['Enumeration, :SL]) ==
 ;   len:= #SL
 ;   dc := nam
 ;   cList :=
@@ -1014,9 +1010,9 @@
 ;         ['_^_=,[['Boolean],nam ,nam],['ELT,dc,7]],
 ;           ['coerce,[nam, ['Symbol]], ['ELT, dc, 8]],
 ;             ['coerce,[['OutputForm],nam],['ELT,dc, 9]]]
-;   [substitute(nam, dc, cList),e]
+;   substitute(nam, dc, cList)
 
-(DEFUN |mkEnumerationFunList| (|nam| |bfVar#37| |e|)
+(DEFUN |mkEnumerationFunList| (|nam| |bfVar#37|)
   (PROG (SL |len| |dc| |cList|)
     (RETURN
      (PROGN
@@ -1035,10 +1031,10 @@
                           (LIST 'ELT |dc| 8))
                     (LIST '|coerce| (LIST (LIST '|OutputForm|) |nam|)
                           (LIST 'ELT |dc| 9))))
-      (LIST (|substitute| |nam| |dc| |cList|) |e|)))))
+      (|substitute| |nam| |dc| |cList|)))))
 
-; mkUnionFunList(op,form is ['Union,:listOfEntries],e) ==
-;   first listOfEntries is [":",.,.] => mkNewUnionFunList(op,form,e)
+; mkUnionFunList(op, form is ['Union, :listOfEntries]) ==
+;   first listOfEntries is [":",.,.] => mkNewUnionFunList(op, form)
 ;   --1. create representations of subtypes
 ;   predList:= mkPredList listOfEntries
 ;   g:=GENSYM()
@@ -1077,10 +1073,9 @@
 ;   op:=
 ;     op = 'Rep => '%
 ;     op
-;   cList:= substitute(op,g,cList)
-;   [cList,e]
+;   substitute(op, g, cList)
 
-(DEFUN |mkUnionFunList| (|op| |form| |e|)
+(DEFUN |mkUnionFunList| (|op| |form|)
   (PROG (|listOfEntries| |ISTMP#1| |ISTMP#2| |ISTMP#3| |predList| |g| |x| |n|
          |gg| |ref| |q| |cList|)
     (RETURN
@@ -1096,7 +1091,7 @@
                     (PROGN
                      (SETQ |ISTMP#3| (CDR |ISTMP#2|))
                      (AND (CONSP |ISTMP#3|) (EQ (CDR |ISTMP#3|) NIL)))))))
-        (|mkNewUnionFunList| |op| |form| |e|))
+        (|mkNewUnionFunList| |op| |form|))
        (#1='T
         (PROGN
          (SETQ |predList| (|mkPredList| |listOfEntries|))
@@ -1266,5 +1261,4 @@
                         (SETQ |bfVar#39| (CDR |bfVar#39|))))
                      NIL |predList| NIL |listOfEntries| NIL)))))
          (SETQ |op| (COND ((EQ |op| '|Rep|) '%) (#1# |op|)))
-         (SETQ |cList| (|substitute| |op| |g| |cList|))
-         (LIST |cList| |e|))))))))
+         (|substitute| |op| |g| |cList|))))))))
